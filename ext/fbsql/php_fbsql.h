@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.h,v 1.28 2004/02/26 20:31:14 fmk Exp $ */
+/* $Id: php_fbsql.h,v 1.29 2004/08/24 17:59:01 fmk Exp $ */
 
 #define HAVE_FBSQL 1
 
@@ -57,6 +57,7 @@ PHP_FUNCTION(fbsql_list_fields);
 PHP_FUNCTION(fbsql_error);
 PHP_FUNCTION(fbsql_errno);
 PHP_FUNCTION(fbsql_affected_rows);
+PHP_FUNCTION(fbsql_rows_fetched);
 PHP_FUNCTION(fbsql_insert_id);
 PHP_FUNCTION(fbsql_result);
 PHP_FUNCTION(fbsql_next_result);

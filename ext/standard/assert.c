@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.44 2001/09/25 21:58:22 jeroen Exp $ */
+/* $Id: assert.c,v 1.45 2001/11/06 18:02:04 jon Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -178,7 +178,7 @@ PHP_FUNCTION(assert)
 	}
 
 	if (ASSERTG(callback)) {
-		zval *args[4];
+		zval *args[3];
 		zval *retval;
 		int i;
 		uint lineno = zend_get_executed_lineno(TSRMLS_C);

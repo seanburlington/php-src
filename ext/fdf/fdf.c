@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.36 2000/11/07 21:13:25 dbeu Exp $ */
+/* $Id: fdf.c,v 1.37 2000/11/15 17:07:56 steinm Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -740,7 +740,7 @@ PHP_FUNCTION(fdf_set_javascript_action) {
 	FDFErc err;	
 	FDF_TLS_VARS;
 
-	if (ZEND_NUM_ARGS() != 5 || zend_get_parameters_ex(4, &arg1, &arg2,&arg3, &arg4) == FAILURE) {
+	if (ZEND_NUM_ARGS() != 4 || zend_get_parameters_ex(4, &arg1, &arg2,&arg3, &arg4) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_long_ex(arg1);

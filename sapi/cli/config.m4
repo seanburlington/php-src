@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11.2.1 2002/12/09 17:25:01 msopacua Exp $
+dnl $Id: config.m4,v 1.11.2.2 2002/12/20 10:04:55 edink Exp $
 dnl
 
 AC_MSG_CHECKING(for CLI build)
@@ -30,7 +30,7 @@ if test "$PHP_SAPI_CLI" != "no"; then
     BUILD_CLI="\$(LIBTOOL) --mode=link \$(CC) -export-dynamic \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS) \$(LDFLAGS) \$(PHP_RPATHS) \$(PHP_GLOBAL_OBJS) \$(PHP_CLI_OBJS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CLI_PATH)"
     ;;
   esac
-  INSTALL_CLI="\$(INSTALL) -m 0755 \$(SAPI_CLI_PATH) \$(INSTALL_ROOT)\$(bindir)/php"
+  INSTALL_CLI="\$(mkinstalldirs) \$(INSTALL_ROOT)\$(bindir); \$(INSTALL) -m 0755 \$(SAPI_CLI_PATH) \$(INSTALL_ROOT)\$(bindir)/php"
   PHP_SUBST(BUILD_CLI)
   PHP_SUBST(INSTALL_CLI)
 else

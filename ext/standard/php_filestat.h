@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filestat.h,v 1.9 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: php_filestat.h,v 1.10 2001/05/11 19:55:44 jason Exp $ */
 
 #ifndef PHP_FILESTAT_H
 #define PHP_FILESTAT_H
@@ -49,5 +49,10 @@ PHP_FUNCTION(chgrp);
 PHP_FUNCTION(chmod);
 PHP_FUNCTION(touch);
 PHP_FUNCTION(clearstatcache);
+
+#define MAKE_LONG_ZVAL_INCREF(name, val)\
+	MAKE_STD_ZVAL(name); \
+	ZVAL_LONG(name,val); \
+	name->refcount++; 
 
 #endif /* PHP_FILESTAT_H */

@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.36 2001/02/22 00:24:19 jmoore Exp $ */
+/* $Id: crypt.c,v 1.37 2001/02/22 03:37:32 jon Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -48,6 +48,7 @@ extern char *crypt(char *__key,char *__salt);
 
 #include "php_lcg.h"
 #include "php_crypt.h"
+#include "php_rand.h"
 
 /* 
    The capabilities of the crypt() function is determined by the test programs

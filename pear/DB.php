@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.26 2000/08/21 14:37:47 chagenbu Exp $
+// $Id: DB.php,v 1.27 2000/08/24 01:34:16 sterling Exp $
 //
 // Database independent query interface.
 //
@@ -152,6 +152,14 @@ if (!defined('DB_GETMODE_DEFAULT')) {
  * @since    PHP 4.0
  */
 class DB {
+
+	function DB ($dsn = false, $persistent = false)
+	{
+		if ($dsn) {
+			return DB::connect ($dsn, $persistent);
+		}
+	}
+
     // {{{ factory()
 
 	/**
@@ -162,7 +170,7 @@ class DB {
 	 * @return object a newly created DB object, or a DB error code on
 	 * error
 	 */
-    function &factory($type) {
+	function &factory($type) {
 		@include_once("DB/${type}.php");
 		$classname = 'DB_' . $type;
 		$obj = @new $classname;
@@ -170,7 +178,7 @@ class DB {
 			return new DB_Error(DB_ERROR_NOT_FOUND);
 		}
 		return $obj;
-    }
+	}
 
     // }}}
     // {{{ connect()

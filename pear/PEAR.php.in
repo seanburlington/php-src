@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php.in,v 1.2 2000/07/30 17:41:31 ssb Exp $
+// $Id: PEAR.php.in,v 1.3 2000/08/24 01:34:16 sterling Exp $
 //
 
 define('PEAR_ERROR_RETURN', 0);
@@ -143,6 +143,7 @@ class PEAR_Error
 	
 	var $mode                 = PEAR_ERROR_RETURN;
 	var $level                = E_USER_NOTICE;
+	var $code                 = -1;
 	
 	var $message              = '';
 
@@ -204,6 +205,19 @@ class PEAR_Error
 		        $this->message       . $this->error_append);
 	}
 	
+
+    // }}}
+    // {{{ getCode()
+    
+	/**
+	 * Get error code from an error object
+	 *
+	 * @return int error code
+	 */
+	 function getCode ()
+	 {
+	 	return ($this->code);
+	 }
 
     // }}}
     // {{{ getType()

@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build.mk,v 1.23 2004/01/21 07:47:11 sniper Exp $ 
+# $Id: build.mk,v 1.24 2004/02/03 08:23:40 martin Exp $ 
 #
 #
 # Makefile to generate build tools
@@ -71,3 +71,4 @@ cvsclean:
 	done
 
 .PHONY: $(ALWAYS) snapshot cvsclean
+.PRECIOUS: cvsclean

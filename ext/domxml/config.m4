@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.34 2002/03/07 14:18:30 sas Exp $
+dnl $Id: config.m4,v 1.35 2002/03/08 18:56:00 jtate Exp $
 dnl
 
 AC_DEFUN(PHP_DOM_CHECK_VERSION,[
@@ -132,6 +132,19 @@ if test "$PHP_DOM_XSLT" != "no"; then
     AC_MSG_ERROR(DOMXSLT requires DOMXML. Use --with-dom=<DIR>)
   fi
   
+  if test -f $DOMXML_DIR/lib/libxml2.a -o -f $DOMXML_DIR/lib/libxml2.$SHLIB_SUFFIX_NAME ; then
+    DOM_LIBNAME=xml2
+  else
+    DOM_LIBNAME=xml
+  fi
+
+  PHP_ADD_LIBRARY_WITH_PATH($DOM_LIBNAME, $DOMXML_DIR/lib, DOMXML_SHARED_LIBADD)
+  PHP_ADD_INCLUDE($DOMXML_DIR/include$DOMXML_DIR_ADD)
+
+  if test -f $DOMXML_DIR/lib/libxsltbreakpoint.a -o -f $DOMXML_DIR/lib/libxsltbreakpoint.$SHLIB_SUFFIX_NAME ; then
+    PHP_ADD_LIBRARY_WITH_PATH(xsltbreakpoint, $DOMXML_DIR/lib, DOMXML_SHARED_LIBADD)
+  fi
+
   AC_DEFINE(HAVE_DOMXSLT,1,[ ])
   
   PHP_SUBST(DOMXML_SHARED_LIBADD)

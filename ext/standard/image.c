@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.98.2.6 2005/03/01 10:13:15 helly Exp $ */
+/* $Id: image.c,v 1.98.2.7 2005/03/01 13:53:19 sesser Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -708,6 +708,11 @@ static struct gfxinfo *php_handle_jp2(php_stream *stream TSRMLS_DC)
 			php_stream_seek(stream, 3, SEEK_CUR);
 
 			result = php_handle_jpc(stream TSRMLS_CC);
+			break;
+		}
+
+		/* Stop if this was the last box */
+		if ((int)box_length <= 0) {
 			break;
 		}
 

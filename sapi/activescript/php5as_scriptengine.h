@@ -15,10 +15,12 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php5as_scriptengine.h,v 1.2 2004/05/04 14:54:01 wez Exp $ */
+/* $Id: php5as_scriptengine.h,v 1.3 2004/05/04 15:00:25 wez Exp $ */
 
 #include <activscp.h>
-#include <objsafe.h>
+#if ACTIVEPHP_OBJECT_SAFETY
+# include <objsafe.h>
+#endif
 #include "zend.h"
 #include <setjmp.h>
 

@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.11 2001/07/25 22:03:55 dbeu Exp $ */
+/* $Id: php_sockets.h,v 1.11.2.1 2001/09/11 16:08:28 jason Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -87,7 +87,7 @@ typedef int SOCKET;
 #endif
 
 typedef struct {
-	SOCKET	socket;
+	SOCKET	  bsd_socket;
 	int		type;
 } php_socket;
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.60 2002/06/14 12:20:13 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.61 2002/06/14 12:37:28 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -189,9 +189,11 @@ PHP_FUNCTION(domxml_parser_set_keep_blanks);
 PHP_FUNCTION(domxml_parser_start_element);
 PHP_FUNCTION(domxml_parser_end_element);
 PHP_FUNCTION(domxml_parser_characters);
-PHP_FUNCTION(domxml_parser_reference);
+PHP_FUNCTION(domxml_parser_entity_reference);
 PHP_FUNCTION(domxml_parser_comment);
-PHP_FUNCTION(domxml_parser_cdata_block);
+PHP_FUNCTION(domxml_parser_cdata_section);
+PHP_FUNCTION(domxml_parser_namespace_decl);
+PHP_FUNCTION(domxml_parser_processing_instruction);
 PHP_FUNCTION(domxml_parser_start_document);
 PHP_FUNCTION(domxml_parser_end_document);
 PHP_FUNCTION(domxml_parser_get_document);

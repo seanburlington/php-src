@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.139 2004/06/06 16:21:11 iliaa Exp $ */
+/* $Id: dir.c,v 1.140 2004/06/07 18:30:16 iliaa Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -380,13 +380,12 @@ PHP_FUNCTION(glob)
 			cwd[0] = '\0';
 		}
 #ifdef PHP_WIN32
-		if (!IS_SLASH(cwd[0])) {
+		if (IS_SLASH(*pattern)) {
 			cwd[2] = '\0';
-			cwd_skip = 3;
 		}
-#else
-		cwd_skip = strlen(cwd)+1;
 #endif
+		cwd_skip = strlen(cwd)+1;
+
 		snprintf(work_pattern, MAXPATHLEN, "%s%c%s", cwd, DEFAULT_SLASH, pattern);
 		pattern = work_pattern;
 	} 

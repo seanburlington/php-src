@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.63 2005/01/02 12:22:36 rrichards Exp $ */
+/* $Id: document.c,v 1.64 2005/01/08 13:24:39 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1759,7 +1759,7 @@ PHP_FUNCTION(dom_document_xinclude)
 
 	DOM_GET_OBJ(docp, id, xmlDocPtr, intern);
 
-#if LIBXML_VERSION >= 20600
+#if LIBXML_VERSION >= 20607
 	err = xmlXIncludeProcessFlags(docp, flags);
 #else
 	err = xmlXIncludeProcess (docp);

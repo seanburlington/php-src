@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.230 2001/09/04 06:18:11 sterling Exp $ */
+/* $Id: string.c,v 1.231 2001/09/04 06:20:23 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -223,8 +223,8 @@ PHP_FUNCTION(strcspn)
 	convert_to_string_ex(s2);
 
 	RETURN_LONG(php_strcspn(Z_STRVAL_PP(s1), Z_STRVAL_PP(s2),
-				            Z_STRVAL_PP(s1) + Z_STRLEN_PP(s1),
-							Z_STRVAL_PP(s2) + Z_STRLEN_PP(s2)));
+	                        Z_STRVAL_PP(s1) + Z_STRLEN_PP(s1),
+	                        Z_STRVAL_PP(s2) + Z_STRLEN_PP(s2)));
 }
 /* }}} */
 

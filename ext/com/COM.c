@@ -18,7 +18,7 @@
    |         Wez Furlong  <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: COM.c,v 1.90.2.6 2003/03/27 19:56:09 phanto Exp $ */
+/* $Id: COM.c,v 1.90.2.7 2003/05/16 19:20:18 wez Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -1627,6 +1627,11 @@ static void do_COM_propput(pval *return_value, comval *obj, pval *arg_property, 
 
 		FREE_VARIANT(var_result);
 
+		/* free the string we allocated; invoked object made its own copy */
+		if (V_VT(new_value) == VT_BSTR) {
+			VariantClear(new_value);
+		}
+		
 		efree(new_value);
 		efree(propname);
 
@@ -1659,7 +1664,11 @@ static void do_COM_propput(pval *return_value, comval *obj, pval *arg_property, 
 		FREE_VARIANT(var_result);
 	}
 
-	efree(new_value); // FREE_VARIANT does a VariantClear() which is not desired here !
+	/* free the string we allocated; invoked object made its own copy */
+	if (V_VT(new_value) == VT_BSTR) {
+		VariantClear(new_value);
+	}
+	efree(new_value);
 	efree(propname);
 }
 

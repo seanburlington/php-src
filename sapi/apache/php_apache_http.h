@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_apache_http.h,v 1.10 2003/06/27 16:41:41 sniper Exp $ */
+/* $Id: php_apache_http.h,v 1.11 2003/09/17 05:42:08 iliaa Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -38,6 +38,10 @@
 /* zlib typedefs free_func which causes problems if the SSL includes happen
  * after zlib.h is included */
 # include <openssl/ssl.h>
+#endif
+
+#ifdef regex_t
+#undef regex_t
 #endif
 
 #include "httpd.h"

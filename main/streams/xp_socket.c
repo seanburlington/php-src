@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.19 2003/11/30 19:43:30 iliaa Exp $ */
+/* $Id: xp_socket.c,v 1.20 2003/12/02 16:35:19 wez Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -632,7 +632,7 @@ static inline int php_tcp_sockop_accept(php_stream *stream, php_netstream_data_t
 	if (clisock >= 0) {
 		php_netstream_data_t *clisockdata;
 
-		clisockdata = pemalloc(sizeof(*clisockdata), stream->is_persistent);
+		clisockdata = emalloc(sizeof(*clisockdata));
 
 		if (clisockdata == NULL) {
 			close(clisock);
@@ -643,6 +643,7 @@ static inline int php_tcp_sockop_accept(php_stream *stream, php_netstream_data_t
 
 			xparam->outputs.client = php_stream_alloc_rel(stream->ops, clisockdata, NULL, "r+");
 			if (xparam->outputs.client) {
+				/* TODO: addref ? */
 				xparam->outputs.client->context = stream->context;
 			}
 		}

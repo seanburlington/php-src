@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.c,v 1.23 2004/02/06 03:07:59 iliaa Exp $ */
+/* $Id: spl_functions.c,v 1.24 2004/02/06 03:14:06 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -135,7 +135,7 @@ int spl_add_classes(zend_class_entry ** ppce, zval *list, int sub, int allow, in
 {
 	zend_class_entry *pce = *ppce;
 
-	if (!ppce) {
+	if (!pce) {
 		return 0;
 	}
 	spl_add_class_name(list, pce, allow, ce_flags TSRMLS_CC);

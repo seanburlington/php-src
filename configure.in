@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.332 2002/04/01 23:25:48 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.333 2002/04/04 00:24:33 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -379,6 +379,7 @@ ieeefp.h \
 langinfo.h \
 limits.h \
 locale.h \
+mach-o/dyld.h \
 netinet/in.h \
 pwd.h \
 resolv.h \

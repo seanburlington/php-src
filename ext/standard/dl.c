@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.67 2002/03/23 15:37:27 hholzgra Exp $ */
+/* $Id: dl.c,v 1.68 2002/04/04 00:24:34 sniper Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -30,7 +30,7 @@
 #include "build-defs.h"
 #endif
 
-#ifdef HAVE_LIBDL
+#if defined(HAVE_LIBDL) || HAVE_MACH_O_DYLD_H
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -45,10 +45,10 @@
 #define GET_DL_ERROR()	php_win_err()
 #else
 #include <sys/param.h>
-#define GET_DL_ERROR()	dlerror()
+#define GET_DL_ERROR()	DL_ERROR()
 #endif
 
-#endif
+#endif /* defined(HAVE_LIBDL) || HAVE_MACH_O_DYLD_H */
 
 
 /* {{{ proto int dl(string extension_filename)
@@ -83,7 +83,7 @@ PHP_FUNCTION(dl)
 /* }}} */
 
 
-#ifdef HAVE_LIBDL
+#if defined(HAVE_LIBDL) || HAVE_MACH_O_DYLD_H
 
 #ifdef ZTS
 #define USING_ZTS 1

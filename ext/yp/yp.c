@@ -16,7 +16,7 @@
    |          Fredrik Ohrn                                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.33 2003/01/18 19:20:00 iliaa Exp $ */
+/* $Id: yp.c,v 1.34 2003/01/24 16:34:18 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -241,7 +241,11 @@ static int php_foreach_all (int instatus, char *inkey, int inkeylen, char *inval
 
 	if(call_user_function_ex(CG(function_table), NULL, *((zval **)indata), &retval, 3, args, 0, NULL TSRMLS_CC) != SUCCESS)
 	{
-		zend_error(E_ERROR, "Function call failed");
+		zval_ptr_dtor(&status);
+		zval_ptr_dtor(&key);
+		zval_ptr_dtor(&value);
+
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Function call failed");
 		return 1;
 	}
 

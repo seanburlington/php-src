@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.430 2002/03/07 22:18:09 sniper Exp $ */
+/* $Id: main.c,v 1.431 2002/03/09 00:24:02 sniper Exp $ */
 
 /* {{{ includes
  */
@@ -381,9 +381,13 @@ PHPAPI void php_html_puts(const char *str, uint size TSRMLS_DC)
 			case '&':
 				smart_str_appendl(&s, "&amp;", sizeof("&amp;")-1);
 				break;
+
+/* Commented out since this is not necessary */
+/*
 			case ' ':
-				smart_str_appendl(&s, "&nbsp; ", sizeof("&nbsp; ")-1);
+				smart_str_appendl(&s, "&nbsp;", sizeof("&nbsp;")-1);
 				break;
+*/
 			case '\t':
 				smart_str_appendl(&s, "&nbsp;&nbsp;&nbsp;&nbsp;", sizeof("&nbsp;&nbsp;&nbsp;&nbsp;")-1);
 				break;

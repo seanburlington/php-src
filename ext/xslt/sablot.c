@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.68 2002/11/10 12:18:02 msopacua Exp $ */
+/* $Id: sablot.c,v 1.68.2.1 2002/11/21 23:32:53 msopacua Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -218,6 +218,7 @@ PHP_FUNCTION(xslt_create)
 	handle->handlers         = ecalloc(1, sizeof(struct xslt_handlers));
 	handle->err              = ecalloc(1, sizeof(struct xslt_error));
 	handle->object           = NULL;
+	handle->base_isset       = 0;
 
 	XSLT_LOG(handle).path = NULL;
 
@@ -435,6 +436,7 @@ PHP_FUNCTION(xslt_set_base)
 
 	/* Set the base */
 	SablotSetBase(XSLT_PROCESSOR(handle), Z_STRVAL_PP(base));
+	XSLT_BASE_ISSET(handle) = 1;
 }
 /* }}} */
 
@@ -547,7 +549,6 @@ PHP_FUNCTION(xslt_process)
 		xslt_make_array(args_p, &args);
 		/* Can return NULL */
 		if (args) {
-			char *baseuri;
 			TSRMLS_FETCH();
 			i=0;
 			while (args[i]) {
@@ -559,14 +560,17 @@ PHP_FUNCTION(xslt_process)
 			}
 
 			/* Since we have args passed, we need to set the base uri, so pull in executor
-				globals and set the base, using the current filename, specifally for the
+				globals and set the base, using the current filename, specifcally for the
 				'arg' scheme */
+			if(XSLT_BASE_ISSET(handle) == 0)
+			{
+				char *baseuri;
 				spprintf(&baseuri, 0, "file://%s", zend_get_executed_filename(TSRMLS_C));
+				SablotSetBaseForScheme(XSLT_PROCESSOR(handle), "arg", baseuri);
 
-			SablotSetBaseForScheme(XSLT_PROCESSOR(handle), "arg", baseuri);
-
-			if(baseuri)
-				efree(baseuri);
+				if(baseuri)
+					efree(baseuri);
+			}
 		}
 	}
 	

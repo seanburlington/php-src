@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.34 2002/11/11 01:23:24 dickmann Exp $
+// $Id: Remote.php,v 1.35 2002/11/24 10:13:57 dickmann Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -108,13 +108,15 @@ class PEAR_Remote extends PEAR
         $this->cache = $this->getCache($args);
         $cachettl = $this->config->get('cache_ttl');
         // If cache is newer than $cachettl seconds, we use the cache!
-        if ($this->cache !== null && $this->cache['age'] < $cachettl) {
+        if ($this->cache !== null && $this->cache['age'] < $cachettl && is_array($this->cache['content'])) {
             return $this->cache['content'];
         };
         
         if (extension_loaded("xmlrpc")) {
             $result = call_user_func_array(array(&$this, 'call_epi'), $args);
-            $this->saveCache($_args, $result);
+            if (!PEAR::isError($result)) {
+                $this->saveCache($_args, $result);
+            };
             return $result;
         }
         if (!@include_once("XML/RPC.php")) {

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.102 2001/03/16 19:29:23 andrei Exp $ */
+/* $Id: array.c,v 1.103 2001/03/16 19:48:40 fmk Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -957,6 +957,7 @@ static int php_array_walk(HashTable *target_hash, zval **userdata)
 	ulong  string_key_len;
 	ulong  num_key;
 	HashPosition pos;
+	BLS_FETCH();
 	CLS_FETCH();
 	ELS_FETCH();
 

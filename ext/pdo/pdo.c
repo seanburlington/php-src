@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.29 2005/02/13 06:56:16 wez Exp $ */
+/* $Id: pdo.c,v 1.30 2005/02/13 15:40:15 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -32,6 +32,10 @@
 #include "php_pdo_driver.h"
 #include "php_pdo_int.h"
 #include "zend_exceptions.h"
+
+#ifdef HAVE_SPL
+extern PHPAPI zend_class_entry *spl_ce_RuntimeException;
+#endif
 
 ZEND_DECLARE_MODULE_GLOBALS(pdo)
 
@@ -282,7 +286,11 @@ PHP_MINIT_FUNCTION(pdo)
 #endif
 
 	INIT_CLASS_ENTRY(ce, "PDOException", NULL);
+#ifdef HAVE_SPL
+	pdo_exception_ce = zend_register_internal_class_ex(&ce, spl_ce_RuntimeException, NULL TSRMLS_CC);
+#else
 	pdo_exception_ce = zend_register_internal_class_ex(&ce, zend_exception_get_default(), NULL TSRMLS_CC);
+#endif
 	zend_declare_property_null(pdo_exception_ce, "errorInfo", sizeof("errorInfo")-1, ZEND_ACC_PUBLIC TSRMLS_CC);
 
 	INIT_CLASS_ENTRY(ce, "PDO", pdo_dbh_functions);

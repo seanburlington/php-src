@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.67 2004/12/30 07:08:37 sniper Exp $
+dnl $Id: config.m4,v 1.68 2005/01/13 02:06:39 wez Exp $
 dnl
 
 dnl
@@ -200,6 +200,33 @@ AC_ARG_WITH(ibm-db2,
     ODBC_LIBS=-ldb2
     AC_DEFINE(HAVE_IBMDB2,1,[ ])
 
+    AC_MSG_RESULT(yes)
+  else
+    AC_MSG_RESULT(no)
+  fi
+],[
+  AC_MSG_RESULT(no)
+])
+fi
+
+if test -z "$ODBC_TYPE"; then
+AC_MSG_CHECKING(for ODBCRouter.com support)
+AC_ARG_WITH(ODBCRouter,
+[  --with-ODBCRouter[=DIR]   Include ODBCRouter.com support.  DIR is ODBCRouter base
+                             install directory, defaults to /usr.],
+[
+  PHP_WITH_SHARED
+  if test "$withval" = "yes"; then
+    withval=/usr
+  fi
+  if test "$withval" != "no"; then
+    ODBC_INCDIR=$withval/include
+    ODBC_LIBDIR=$withval/lib
+    ODBC_LFLAGS=-L$ODBC_LIBDIR
+    ODBC_INCLUDE=-I$ODBC_INCDIR
+    ODBC_LIBS=-lodbcsdk
+    ODBC_TYPE=ODBCRouter
+    AC_DEFINE(HAVE_ODBC_ROUTER,1,[ ])
     AC_MSG_RESULT(yes)
   else
     AC_MSG_RESULT(no)

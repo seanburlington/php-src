@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc_includes.h,v 1.9 2004/01/08 17:32:34 sniper Exp $ */
+/* $Id: php_odbc_includes.h,v 1.10 2005/01/13 02:06:39 wez Exp $ */
 
 #ifndef PHP_ODBC_INCLUDES_H
 #define PHP_ODBC_INCLUDES_H
@@ -125,6 +125,20 @@ PHP_FUNCTION(solid_fetch_prev);
 #include <sql.h>
 #include <sqlext.h>
 #define HAVE_SQL_EXTENDED_FETCH 1
+
+#elif defined(HAVE_ODBC_ROUTER) /* ODBCRouter.com */
+
+#ifdef CHAR
+#undef CHAR
+#endif
+
+#ifdef SQLCHAR
+#undef SQLCHAR
+#endif
+
+#define ODBC_TYPE "ODBCRouter"
+#include <odbcsdk.h>
+#undef HAVE_SQL_EXTENDED_FETCH
 
 #elif defined(HAVE_OPENLINK) /* OpenLink ODBC drivers */
 

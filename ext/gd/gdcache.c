@@ -1,5 +1,5 @@
 /* 
- * $Id: gdcache.c,v 1.3 1999/07/23 15:18:37 zeev Exp $
+ * $Id: gdcache.c,v 1.4 1999/08/19 06:32:07 rasmus Exp $
  *
  * Caches of pointers to user structs in which the least-recently-used 
  * element is replaced in the event of a cache miss after the cache has 
@@ -42,7 +42,7 @@
 #else
 #include "php_config.h"
 #endif
-#ifdef ENABLE_GD_TTF
+#if HAVE_LIBTTF|HAVE_LIBFREETYPE
 
 #include "gdcache.h"
 

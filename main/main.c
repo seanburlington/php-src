@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.116 1999/09/11 14:09:29 zeev Exp $ */
+/* $Id: main.c,v 1.117 1999/09/11 15:04:45 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -226,6 +226,7 @@ PHP_INI_BEGIN()
 	PHP_INI_ENTRY("memory_limit",			"8388608",		PHP_INI_ALL,		OnChangeMemoryLimit)
 
 	STD_PHP_INI_BOOLEAN("track_vars",			(PHP_TRACK_VARS?"1":"0"),			PHP_INI_ALL,		OnUpdateBool,				track_vars,		php_core_globals,	core_globals)
+	STD_PHP_INI_BOOLEAN("gpc_globals",			"1",								PHP_INI_ALL,		OnUpdateBool,				gpc_globals,	php_core_globals,	core_globals)
 	STD_PHP_INI_ENTRY("gpc_order",				"GPC",			PHP_INI_ALL,		OnUpdateStringUnempty,	gpc_order,		php_core_globals,	core_globals)
 	STD_PHP_INI_ENTRY("arg_separator",			"&",			PHP_INI_ALL,		OnUpdateStringUnempty,	arg_separator,	php_core_globals,	core_globals)
 	STD_PHP_INI_BOOLEAN("ignore_user_abort",	"1",			PHP_INI_ALL,		OnUpdateInt,			ignore_user_abort,		php_core_globals,	core_globals)

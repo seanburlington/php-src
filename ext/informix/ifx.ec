@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ifx.ec,v 1.69.2.25 2004/05/31 08:33:42 abies Exp $ */
+/* $Id: ifx.ec,v 1.69.2.26 2004/05/31 20:59:56 pajoye Exp $ */
 
 /* -------------------------------------------------------------------
  * if you want a function reference : "grep '^\*\*' ifx.ec" will give
@@ -1419,7 +1419,7 @@ EXEC SQL END DECLARE SECTION;
 				}
 
 				if (ifx_check() < 0)   {
-					char *ifx_err = ifx_error(ifx)
+					char *ifx_err = ifx_error(ifx);
 					IFXG(sv_sqlcode) = SQLCODE;
 					EXEC SQL DEALLOCATE DESCRIPTOR :i_descrpid;
 					EXEC SQL free :statemid;

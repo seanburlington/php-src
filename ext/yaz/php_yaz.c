@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.48 2002/07/29 19:56:58 dickmeiss Exp $ */
+/* $Id: php_yaz.c,v 1.49 2002/07/29 21:51:47 dickmeiss Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -165,6 +165,7 @@ static Yaz_Association yaz_association_mk ()
 	p->zoom_set = 0;
 	p->zoom_scan = 0;
     p->zoom_package = 0;
+	ZOOM_connection_option_set(p->zoom_conn, "implementationName", "PHP");
 #else
 	p->host_port = 0;
 	p->num_databaseNames = 0;

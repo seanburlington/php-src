@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9.2.1 2002/03/20 07:53:26 mfischer Exp $
+dnl $Id: config.m4,v 1.9.2.2 2002/03/20 18:16:06 derick Exp $
 dnl
 
 PHP_ARG_WITH(vpopmail, for vpopmail support,
@@ -90,5 +90,5 @@ Use ./configure --with-vpopmail=<vpopmail-home-dir> if necessary)
 	fi
 	AC_DEFINE_UNQUOTED(HAVE_VPOPMAIL_API,$vpopmail_internal_api,[Interal definition for vpopmail API changes])
 
-	PHP_NEW_EXTENSION(vpopmail, php_vpopmail.c, $ext_shared)
+	PHP_EXTENSION(vpopmail, $ext_shared)
 fi

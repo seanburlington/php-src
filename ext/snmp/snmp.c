@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.66 2002/10/17 02:51:22 sniper Exp $ */
+/* $Id: snmp.c,v 1.67 2002/10/17 06:39:55 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -88,6 +88,11 @@
 #include "parse.h"
 #include "mib.h"
 #include "version.h"
+#endif
+
+/* For really old ucd-snmp versions.. */
+#ifndef HAVE_SNMP_PARSE_OID
+#define snmp_parse_oid read_objid
 #endif
 
 /* ucd-snmp 3.3.1 changed the name of a few #defines... They've been changed back to the original ones in 3.5.3! */

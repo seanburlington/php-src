@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.27 2002/10/15 00:43:34 sniper Exp $
+dnl $Id: config.m4,v 1.28 2002/10/17 06:39:55 sniper Exp $
 dnl
 
 PHP_ARG_WITH(snmp,for SNMP support,
@@ -90,6 +90,8 @@ if test "$PHP_SNMP" != "no"; then
     PHP_ADD_INCLUDE($SNMP_INCDIR)
     PHP_ADD_LIBRARY_WITH_PATH(snmp, $SNMP_LIBDIR, SNMP_SHARED_LIBADD)
   fi
+
+  AC_CHECK_FUNCS(snmp_parse_oid)
 
   PHP_NEW_EXTENSION(snmp, snmp.c, $ext_shared)
   PHP_SUBST(SNMP_SHARED_LIBADD)

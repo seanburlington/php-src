@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.126 2002/08/05 21:14:14 venaas Exp $ */
+/* $Id: ldap.c,v 1.127 2002/08/13 04:44:45 rasmus Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -278,7 +278,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.126 2002/08/05 21:14:14 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.127 2002/08/13 04:44:45 rasmus Exp $" );
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -1928,7 +1928,7 @@ PHP_FUNCTION(ldap_parse_reference)
 /* }}} */
 #endif
 
-/* {{{ proto bool ldap_rename(resource link, string dn, string newrdn, string newparent, boolean deleteoldrdn);
+/* {{{ proto bool ldap_rename(resource link, string dn, string newrdn, string newparent, bool deleteoldrdn);
    Modify the name of an entry */
 PHP_FUNCTION(ldap_rename)
 {

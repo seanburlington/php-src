@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.41 2000/01/17 17:33:21 zeev Exp $ */
+/* $Id: fsock.c,v 1.42 2000/01/28 13:31:12 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -65,7 +65,6 @@
 
 #include "base64.h"
 #include "file.h"
-#include "post.h"
 #include "url.h"
 #include "fsock.h"
 

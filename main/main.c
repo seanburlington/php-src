@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.181 2000/01/24 19:03:50 zeev Exp $ */
+/* $Id: main.c,v 1.182 2000/01/28 13:31:11 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -50,6 +50,7 @@
 #include "fopen-wrappers.h"
 #include "ext/standard/php_standard.h"
 #include "snprintf.h"
+#include "php_gpce.h"
 #if WIN32|WINNT
 #include <io.h>
 #include <fcntl.h>

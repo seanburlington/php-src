@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: post.h,v 1.6 2000/01/28 12:53:05 zeev Exp $ */
+/* $Id: php_gpce.h,v 1.1 2000/01/28 13:31:11 zeev Exp $ */
 
 #ifndef _POST_H
 #define _POST_H

@@ -18,15 +18,15 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.86 2000/01/05 12:26:41 jah Exp $ */
+/* $Id: string.c,v 1.87 2000/01/28 13:31:12 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
 #include <stdio.h>
 #include "php.h"
 #include "reg.h"
-#include "post.h"
 #include "php_string.h"
+#include "php_gpce.h"
 #ifdef HAVE_LOCALE_H
 # include <locale.h>
 #endif

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.61 2001/07/02 18:17:08 zeev Exp $ */
+/* $Id: output.c,v 1.62 2001/07/04 15:30:20 sas Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -254,9 +254,14 @@ PHPAPI void php_end_ob_buffer(zend_bool send_buffer, zend_bool just_flush)
 PHPAPI void php_end_ob_buffers(zend_bool send_buffer)
 {
 	OLS_FETCH();
+	BLS_FETCH();
 
 	while (OG(nesting_level)!=0) {
 		php_end_ob_buffer(send_buffer, 0);
+	}
+
+	if (send_buffer && BG(use_trans_sid)) {
+		session_adapt_flush(OG(php_header_write));
 	}
 }
 /* }}} */

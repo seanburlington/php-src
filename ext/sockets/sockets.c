@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.69 2001/09/25 22:48:43 jeroen Exp $ */
+/* $Id: sockets.c,v 1.70 2001/10/05 07:12:27 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1102,6 +1102,8 @@ PHP_FUNCTION(socket_bind)
 	} else if (Z_TYPE_P(php_sock) == AF_INET) {
 		struct sockaddr_in sa;
 		struct hostent *hp;
+
+		memset(&sa, 0, sizeof(sa));
 
 		if (argc != 3) {
 			WRONG_PARAM_COUNT;

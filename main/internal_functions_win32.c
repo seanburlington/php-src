@@ -16,12 +16,8 @@
 	|          Zeev Suraski <zeev@zend.com>                                |
 	+----------------------------------------------------------------------+
 
-	$Id: internal_functions_win32.c,v 1.70 2003/01/16 22:09:58 phanto Exp $
+	$Id: internal_functions_win32.c,v 1.71 2003/01/17 06:15:24 sebastian Exp $
 */
-
-#ifndef ZEND_ENGINE_2
-#error HEAD does not work with ZendEngine1 anymore
-#endif
 
 /* {{{ includes
  */
@@ -33,6 +29,10 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+#ifndef ZEND_ENGINE_2
+#error HEAD does not work with ZendEngine1 anymore
+#endif
 
 #include "ext/standard/dl.h"
 #include "ext/standard/file.h"

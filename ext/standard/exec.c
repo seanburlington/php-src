@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.78 2002/08/01 15:51:56 rasmus Exp $ */
+/* $Id: exec.c,v 1.79 2002/08/02 14:35:24 jflemer Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -559,7 +559,7 @@ static void proc_open_rsrc_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	GetExitCodeProcess(child, &wstatus);
 	FG(pclose_ret) = wstatus;
 #else
-# if HAVE_SYS_WAIT
+# if HAVE_SYS_WAIT_H
 	int wstatus;
 	pid_t child, wait_pid;
 	

@@ -22,7 +22,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.57 2000/03/20 06:46:58 eschmid Exp $ */
+/* $Id: imap.c,v 1.58 2000/03/26 04:34:05 chagenbu Exp $ */
 
 #define IMAP41
 
@@ -2534,6 +2534,7 @@ PHP_FUNCTION(imap_clearflag_full)
 		RETURN_FALSE;
 	}
 	mail_clearflag_full(imap_le_struct->imap_stream,sequence->value.str.val,flag->value.str.val,myargc == 4 ? flags->value.lval : NIL);
+        RETURN_TRUE;
 }
 /* }}} */
 

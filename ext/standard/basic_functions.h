@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.35 1999/12/13 18:31:29 sas Exp $ */
+/* $Id: basic_functions.h,v 1.36 1999/12/14 22:15:55 andrei Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -97,8 +97,6 @@ PHP_FUNCTION(connection_aborted);
 PHP_FUNCTION(connection_timeout);
 PHP_FUNCTION(connection_status);
 PHP_FUNCTION(ignore_user_abort);
-
-PHP_FUNCTION(function_exists);
 
 PHP_FUNCTION(getservbyname);
 PHP_FUNCTION(getservbyport);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.59.2.8 2004/02/16 17:09:52 iliaa Exp $ */
+/* $Id: formatted_print.c,v 1.59.2.9 2004/05/11 19:51:50 iliaa Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -758,6 +758,7 @@ PHP_FUNCTION(user_printf)
 	}
 	PHPWRITE(result, len);
 	efree(result);
+	RETURN_LONG(len);
 }
 /* }}} */
 
@@ -773,6 +774,7 @@ PHP_FUNCTION(vprintf)
 	}
 	PHPWRITE(result, len);
 	efree(result);
+	RETURN_LONG(len);
 }
 /* }}} */
 

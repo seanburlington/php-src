@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_sqlite_int.h,v 1.1 2004/09/19 10:55:41 wez Exp $ */
+/* $Id: php_pdo_sqlite_int.h,v 1.2 2004/09/26 20:46:35 wez Exp $ */
 
 #ifndef PHP_PDO_SQLITE_INT_H
 #define PHP_PDO_SQLITE_INT_H
@@ -39,6 +39,7 @@ typedef struct {
 	pdo_sqlite_db_handle 	*H;
 	sqlite3_stmt *stmt;
 	unsigned pre_fetched:1;
+	unsigned done:1;
 } pdo_sqlite_stmt;
 
 extern pdo_driver_t pdo_sqlite_driver;

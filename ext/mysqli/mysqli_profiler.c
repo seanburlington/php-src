@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_profiler.c,v 1.3 2003/03/11 01:19:21 georg Exp $ 
+  $Id: mysqli_profiler.c,v 1.4 2003/03/15 22:51:49 hholzgra Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -413,7 +413,7 @@ void php_mysqli_profiler_report(PR_COMMON *current, int depth)
 }
 /* }}} */
 
-/* {{{ proto bool mysqli_profiler (int flags, char *info, int port)
+/* {{{ proto bool mysqli_profiler (int flags, string info, int port)
 */
 PHP_FUNCTION(mysqli_profiler)
 { 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.100 2003/05/14 18:15:17 andrei Exp $ */
+/* $Id: wddx.c,v 1.101 2003/05/17 11:44:57 helly Exp $ */
 
 #include "php.h"
 
@@ -1284,8 +1284,7 @@ PHP_FUNCTION(wddx_deserialize)
 			payload_len = php_stream_copy_to_mem(stream, &payload, PHP_STREAM_COPY_ALL, 0 TSRMLS_CC);
 		}
 	} else {
-		php_error(E_WARNING, "%s() expects parameter 1 to be a string or a stream",
-				  get_active_function_name());
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Expecting parameter 1 to be a string or a stream");
 		return;
 	}
 

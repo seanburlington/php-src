@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.14.4.14 2003/11/01 05:14:11 cellog Exp $
+// $Id: Dependency.php,v 1.14.4.15 2003/11/01 05:16:04 cellog Exp $
 
 require_once "PEAR.php";
 
@@ -314,11 +314,15 @@ class PEAR_Dependency
      */
     function checkPHP(&$errmsg, $req, $relation = 'ge')
     {
+        // this would be a bit stupid, but oh well :)
+        if ($relation == 'has') {
+            return false;
+        }
         if (substr($req, 0, 2) == 'v.') {
             $req = substr($req,2, strlen($req) - 2);
         }
         $php_ver = phpversion();
-        $operator = substr($relation,0,2);
+        $operator = $relation;
         if (!version_compare("$php_ver", "$req", $operator)) {
             $errmsg = "PHP version " . $this->signOperator($operator) .
                 " $req is required";

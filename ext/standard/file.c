@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: file.c,v 1.3 1999/04/21 04:02:11 zeev Exp $ */
+/* $Id: file.c,v 1.4 1999/04/21 17:57:40 sas Exp $ */
 #ifdef THREAD_SAFE
 #include "tls.h"
 #endif
@@ -425,6 +425,9 @@ static void _php3_closesocket(int *sock) {
 		closesocket(socketd);
 #else
 		close(socketd);
+#endif
+#if HAVE_SHUTDOWN
+		shutdown(socketd, 0);
 #endif
 		efree(sock);
 	}

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: internal_functions.c,v 1.7 1999/04/21 17:48:10 sas Exp $ */
+/* $Id: internal_functions.c,v 1.8 1999/04/21 17:57:39 sas Exp $ */
 
 
 #include "php.h"
@@ -47,6 +47,7 @@
 #include "ext/gettext/php3_gettext.h"
 
 #include "functions/php3_ifx.h"
+#include "functions/php3_crypt.h"
 #include "functions/php3_ldap.h"
 #include "functions/php3_mysql.h"
 #include "functions/php3_bcmath.h"

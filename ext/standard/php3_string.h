@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php3_string.h,v 1.1 1999/04/17 00:37:07 ssb Exp $ */
+/* $Id: php3_string.h,v 1.2 1999/04/21 17:57:40 sas Exp $ */
 
 #ifndef _PHPSTRING_H
 #define _PHPSTRING_H
@@ -79,14 +79,6 @@ extern void php3_setlocale(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_stristr(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_chunk_split(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_parsestr(INTERNAL_FUNCTION_PARAMETERS);
-
-#if HAVE_CRYPT
-extern php3_module_entry crypt_module_entry;
-#define crypt_module_ptr &crypt_module_entry
-extern void php3_crypt(INTERNAL_FUNCTION_PARAMETERS);
-#else
-#define crypt_module_ptr NULL
-#endif
 
 extern PHPAPI char *_php3_strtoupper(char *s);
 extern PHPAPI char *_php3_strtolower(char *s);

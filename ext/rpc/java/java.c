@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.67 2002/08/14 16:22:19 kalowsky Exp $ */
+/* $Id: java.c,v 1.68 2002/08/21 01:41:21 kalowsky Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -34,10 +34,8 @@
 #include "php_ini.h"
 #include "php_globals.h"
 
-/* #if defined(__MacOSX__) */
 #if HAVE_JAVAVM_JAVAVM_H
 #include <JavaVM/JavaVM.h>
-#define JAVALIB "libjvm.dylib"
 #define JNI_12
 #else
 #include <jni.h>

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.397 2004/09/30 14:20:02 tony2001 Exp $ */
+/* $Id: session.c,v 1.398 2004/09/30 14:31:30 hyanantha Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -871,7 +871,11 @@ static void last_modified(TSRMLS_D)
 
 #define LAST_MODIFIED "Last-Modified: "
 		memcpy(buf, LAST_MODIFIED, sizeof(LAST_MODIFIED) - 1);
+#ifdef NETWARE
+		strcpy_gmt(buf + sizeof(LAST_MODIFIED) - 1, &(sb.st_mtime.tv_sec));
+#else
 		strcpy_gmt(buf + sizeof(LAST_MODIFIED) - 1, &sb.st_mtime);
+#endif
 		ADD_HEADER(buf);
 	}
 }

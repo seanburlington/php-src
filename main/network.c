@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.83.2.20 2003/10/17 11:09:49 sas Exp $ */
+/* $Id: network.c,v 1.83.2.21 2003/11/28 22:11:34 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -1139,8 +1139,14 @@ int _php_network_is_stream_alive(php_stream *stream)
 	int alive = 1;
 	int fd = sock->socket;
 	fd_set rfds;
-	struct timeval tv = {0, 0};
+	struct timeval tv;
 	char buf;
+	
+	if (sock->timeout.tv_sec == -1) {
+		tv.tv_sec = FG(default_socket_timeout);
+	} else {
+		tv = sock->timeout;
+	}
 
 	/* logic: if the select call indicates that there is data to
 	 * be read, but a read returns 0 bytes of data, then the socket

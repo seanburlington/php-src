@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.83 2003/11/28 00:00:34 iliaa Exp $ */
+/* $Id: streams.c,v 1.125.2.84 2003/11/28 22:11:34 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -659,6 +659,10 @@ PHPAPI int _php_stream_eof(php_stream *stream TSRMLS_DC)
 	if (stream->writepos - stream->readpos > 0)
 		return 0;
 
+	if (!stream->eof && php_stream_is(stream, PHP_STREAM_IS_SOCKET)) {
+		stream->eof = !_php_network_is_stream_alive(stream);
+	}
+	
 	return stream->eof;
 }
 

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.h,v 1.23 2000/07/02 23:46:44 sas Exp $ */
+/* $Id: php_odbc.h,v 1.24 2000/07/06 08:38:12 ssb Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -139,6 +139,8 @@ PHP_FUNCTION(solid_fetch_prev);
 #elif defined(HAVE_DBMAKER) /* DBMaker */
 
 #define ODBC_TYPE "DBMaker"
+#undef ODBCVER
+#define ODBCVER 0x0300
 #define HAVE_SQL_EXTENDED_FETCH 1
 #include <odbc.h>
 
@@ -189,6 +191,10 @@ PHP_FUNCTION(odbc_cursor);
 PHP_FUNCTION(odbc_exec);
 PHP_FUNCTION(odbc_do);
 PHP_FUNCTION(odbc_execute);
+#ifdef HAVE_DBMAKER
+PHP_FUNCTION(odbc_fetch_array);
+PHP_FUNCTION(odbc_fetch_object);
+#endif
 PHP_FUNCTION(odbc_fetch_into);
 PHP_FUNCTION(odbc_fetch_row);
 PHP_FUNCTION(odbc_field_len);

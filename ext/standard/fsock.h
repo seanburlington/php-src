@@ -27,7 +27,7 @@
    |          Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
 */
-/* $Id: fsock.h,v 1.17 1999/12/05 10:29:06 ssb Exp $ */
+/* $Id: fsock.h,v 1.18 1999/12/17 19:16:47 zeev Exp $ */
 
 /* Synced with php3 revision 1.24 1999-06-18 [ssb] */
 
@@ -61,14 +61,14 @@ extern php3_module_entry fsock_module_entry;
 PHP_FUNCTION(fsockopen);
 PHP_FUNCTION(pfsockopen);
 int lookup_hostname(const char *addr, struct in_addr *in);
-char *_php3_sock_fgets(char *buf, size_t maxlen, int socket);
-size_t _php3_sock_fread(char *buf, size_t maxlen, int socket);
-int _php3_sock_feof(int socket);
-int _php3_sock_fgetc(int socket);
+char *php_sock_fgets(char *buf, size_t maxlen, int socket);
+size_t php_sock_fread(char *buf, size_t maxlen, int socket);
+int php_sock_feof(int socket);
+int php_sock_fgetc(int socket);
 int _php3_is_persistent_sock(int);
 int _php3_sock_set_blocking(int socket, int mode);
 int _php3_sock_destroy(int socket);
-int _php3_sock_close(int socket);
+int php_sock_close(int socket);
 size_t _php3_sock_set_def_chunk_size(size_t size);
 int php_msock_destroy(int *data);
 

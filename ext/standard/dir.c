@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.18 1999/12/05 16:25:31 sas Exp $ */
+/* $Id: dir.c,v 1.19 1999/12/17 19:16:47 zeev Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -151,7 +151,7 @@ static void _php_do_opendir(INTERNAL_FUNCTION_PARAMETERS, int createobject)
 	}
 	convert_to_string_ex(arg);
 
-	if (_php3_check_open_basedir((*arg)->value.str.val)) {
+	if (php_check_open_basedir((*arg)->value.str.val)) {
 		RETURN_FALSE;
 	}
 	

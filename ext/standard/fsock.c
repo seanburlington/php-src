@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.30 1999/12/05 16:25:31 sas Exp $ */
+/* $Id: fsock.c,v 1.31 1999/12/17 19:16:47 zeev Exp $ */
 
 /* Synced with php3 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php3 revision 1.133 1999-07-21 [sas] */
@@ -484,7 +484,7 @@ int _php3_sock_destroy(int socket)
 
 #define SOCK_CLOSE(s) shutdown(s, 0); closesocket(s)
 
-int _php3_sock_close(int socket)
+int php_sock_close(int socket)
 {
 	int ret = 0;
 	php3i_sockbuf *sock;
@@ -593,11 +593,11 @@ int _php3_sock_set_blocking(int socket, int mode)
 	SOCK_FIND(sock, socket); \
 	if(sock->is_blocked) _php3_sock_read_total(sock, max); else _php3_sock_read(sock)
 
-/* {{{ _php3_sock_fgets() */
+/* {{{ php_sock_fgets() */
 /*
  * FIXME: fgets depends on '\n' as line delimiter
  */
-char *_php3_sock_fgets(char *buf, size_t maxlen, int socket)
+char *php_sock_fgets(char *buf, size_t maxlen, int socket)
 {
 	char *p = NULL;
 	char *ret = NULL;
@@ -655,7 +655,7 @@ char *_php3_sock_fgets(char *buf, size_t maxlen, int socket)
  * ss@2ns.de 19990528
  */
 
-int _php3_sock_fgetc(int socket)
+int php_sock_fgetc(int socket)
 {
 	int ret = EOF;
 	SOCK_FIND_AND_READ_MAX(1);
@@ -668,7 +668,7 @@ int _php3_sock_fgetc(int socket)
 	return ret;
 }
 
-int _php3_sock_feof(int socket)
+int php_sock_feof(int socket)
 {
 	int ret = 0;
 	SOCK_FIND(sock, socket);
@@ -682,9 +682,9 @@ int _php3_sock_feof(int socket)
 	return ret;
 }
 
-/* {{{ _php3_sock_fread() */
+/* {{{ php_sock_fread() */
 
-size_t _php3_sock_fread(char *ptr, size_t size, int socket)
+size_t php_sock_fread(char *ptr, size_t size, int socket)
 {
 	size_t ret = 0;
 	SOCK_FIND_AND_READ_MAX(size);

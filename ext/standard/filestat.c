@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.15 1999/12/12 16:48:54 sas Exp $ */
+/* $Id: filestat.c,v 1.16 1999/12/17 19:16:47 zeev Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -142,7 +142,7 @@ PHP_FUNCTION(diskfreespace)
 
 	convert_to_string(path);
 
-	if (_php3_check_open_basedir(path->value.str.val)) RETURN_FALSE;
+	if (php_check_open_basedir(path->value.str.val)) RETURN_FALSE;
 
 #ifdef WINDOWS
 	/* GetDiskFreeSpaceEx is only available in NT and Win95 post-OSR2,
@@ -228,12 +228,12 @@ PHP_FUNCTION(chgrp)
 		gid = group->value.lval;
 	}
 
-	if (PG(safe_mode) &&(!_php3_checkuid(filename->value.str.val, 1))) {
+	if (PG(safe_mode) &&(!php_checkuid(filename->value.str.val, 1))) {
 		RETURN_FALSE;
 	}
 
 	/* Check the basedir */
-	if (_php3_check_open_basedir(filename->value.str.val)) RETURN_FALSE;
+	if (php_check_open_basedir(filename->value.str.val)) RETURN_FALSE;
 
 	ret = chown(filename->value.str.val, -1, gid);
 	if (ret == -1) {
@@ -273,12 +273,12 @@ PHP_FUNCTION(chown)
 		uid = user->value.lval;
 	}
 
-	if (PG(safe_mode) &&(!_php3_checkuid(filename->value.str.val, 1))) {
+	if (PG(safe_mode) &&(!php_checkuid(filename->value.str.val, 1))) {
 		RETURN_FALSE;
 	}
 
 	/* Check the basedir */
-	if (_php3_check_open_basedir(filename->value.str.val)) RETURN_FALSE;
+	if (php_check_open_basedir(filename->value.str.val)) RETURN_FALSE;
 
 	ret = chown(filename->value.str.val, uid, -1);
 	if (ret == -1) {
@@ -302,12 +302,12 @@ PHP_FUNCTION(chmod)
 	convert_to_string(filename);
 	convert_to_long(mode);
 
-	if (PG(safe_mode) &&(!_php3_checkuid(filename->value.str.val, 1))) {
+	if (PG(safe_mode) &&(!php_checkuid(filename->value.str.val, 1))) {
 		RETURN_FALSE;
 	}
 
 	/* Check the basedir */
-	if (_php3_check_open_basedir(filename->value.str.val)) RETURN_FALSE;
+	if (php_check_open_basedir(filename->value.str.val)) RETURN_FALSE;
 
 	ret = chmod(filename->value.str.val, mode->value.lval);
 	if (ret == -1) {
@@ -353,13 +353,13 @@ PHP_FUNCTION(touch)
 	}
 	convert_to_string(filename);
 
-	if (PG(safe_mode) &&(!_php3_checkuid(filename->value.str.val, 1))) {
+	if (PG(safe_mode) &&(!php_checkuid(filename->value.str.val, 1))) {
 		if (newtime) efree(newtime);
 		RETURN_FALSE;
 	}
 
 	/* Check the basedir */
-	if (_php3_check_open_basedir(filename->value.str.val)) RETURN_FALSE;
+	if (php_check_open_basedir(filename->value.str.val)) RETURN_FALSE;
 
 	/* create the file if it doesn't exist already */
 	ret = stat(filename->value.str.val, &sb);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.13 1999/12/04 19:15:46 sas Exp $ */
+/* $Id: db.c,v 1.14 1999/12/17 19:16:36 zeev Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 # include "dl/phpdl.h"
@@ -293,11 +293,11 @@ dbm_info *_php3_dbmopen(char *filename, char *mode) {
 		return NULL;
 	}
 
-	if (PG(safe_mode) && (!_php3_checkuid(filename, 2))) {
+	if (PG(safe_mode) && (!php_checkuid(filename, 2))) {
 		return NULL;
 	}
 
-	if (_php3_check_open_basedir(filename)) {
+	if (php_check_open_basedir(filename)) {
 		return NULL;
 	}
 

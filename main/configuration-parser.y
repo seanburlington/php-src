@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.22 1999/12/08 22:22:19 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.23 1999/12/17 19:16:33 zeev Exp $ */
 
 #define DEBUG_CFG_PARSER 1
 #include "php.h"
@@ -145,7 +145,7 @@ static int pvalue_browscap_destructor(pval *pvalue)
 }
 
 
-int php3_init_config(void)
+int php_init_config(void)
 {
 	PLS_FETCH();
 
@@ -201,7 +201,7 @@ int php3_init_config(void)
 		}
 		PG(safe_mode) = 0;
 		PG(open_basedir) = NULL;
-		cfgin = php3_fopen_with_path("php.ini","r",php_ini_path,&opened_path);
+		cfgin = php_fopen_with_path("php.ini","r",php_ini_path,&opened_path);
 		free(php_ini_path);
 		if (free_default_location) {
 			free(default_location);
@@ -269,7 +269,7 @@ PHP_MINIT_FUNCTION(browscap)
 }
 
 
-int php3_shutdown_config(void)
+int php_shutdown_config(void)
 {
 	zend_hash_destroy(&configuration_hash);
 	return SUCCESS;

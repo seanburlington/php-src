@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.2 1999/12/04 19:16:01 sas Exp $ */
+/* $Id: posix.c,v 1.3 1999/12/17 19:16:46 zeev Exp $ */
 
 
 #include "php.h"
@@ -138,7 +138,7 @@ void timeout(int sig);
 
 static PHP_MINFO_FUNCTION(posix)
 {
-    PUTS("$Revision: 1.2 $\n");
+    PUTS("$Revision: 1.3 $\n");
 }
 
 /* {{{ proto int posix_kill(int pid, int sig)
@@ -604,7 +604,7 @@ PHP_FUNCTION(posix_mkfifo)
 	convert_to_string(path);
 	convert_to_long(mode);
 
-	if (php3_ini.safe_mode && (!_php3_checkuid(path->value.str.val, 3))) {
+	if (php3_ini.safe_mode && (!php_checkuid(path->value.str.val, 3))) {
 		RETURN_FALSE;
 	}
 	result = mkfifo(path->value.str.val, mode->value.lval);

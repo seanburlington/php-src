@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: main.h,v 1.13 1999/12/07 20:49:01 rubys Exp $ */
+/* $Id: main.h,v 1.14 1999/12/17 19:16:34 zeev Exp $ */
 
 
 #ifndef _MAIN_H
@@ -46,11 +46,11 @@ extern void php_call_shutdown_functions(void);
 
 
 /* configuration module */
-extern int php3_init_config(void);
-extern int php3_shutdown_config(void);
+extern int php_init_config(void);
+extern int php_shutdown_config(void);
 
 /* environment module */
-extern int php3_init_environ(void);
-extern int php3_shutdown_environ(void);
+extern int php_init_environ(void);
+extern int php_shutdown_environ(void);
 
 #endif

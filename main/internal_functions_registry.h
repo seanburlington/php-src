@@ -18,23 +18,23 @@
  */
 
 
-/* $Id: internal_functions_registry.h,v 1.3 1999/07/16 13:12:41 zeev Exp $ */
+/* $Id: internal_functions_registry.h,v 1.4 1999/12/17 19:16:33 zeev Exp $ */
 
 #ifndef _INTERNAL_FUNCTIONS_REGISTRY_H
 #define _INTERNAL_FUNCTIONS_REGISTRY_H
 
-extern int php3_init_mime(INIT_FUNC_ARGS);
+extern int php_init_mime(INIT_FUNC_ARGS);
 
 #if APACHE
-extern php3_module_entry apache_module_entry;
+extern zend_module_entry apache_module_entry;
 #define phpext_apache_ptr &apache_module_entry
-extern void php3_virtual(INTERNAL_FUNCTION_PARAMETERS);
+extern void php_virtual(INTERNAL_FUNCTION_PARAMETERS);
 #else
 #define phpext_apache_ptr NULL
 #endif
 
 /* environment functions */
-extern int php3_init_environment(void);
+extern int php_init_environment(void);
 
 #endif
 

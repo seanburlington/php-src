@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.8 1999/12/14 04:32:54 thies Exp $ */
+/* $Id: image.c,v 1.9 1999/12/17 19:16:47 zeev Exp $ */
 /* 
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -336,7 +336,7 @@ PHP_FUNCTION(getimagesize)
 	}
 		
 	/* Check open_basedir */
-	if (_php3_check_open_basedir((*arg1)->value.str.val)) return;
+	if (php_check_open_basedir((*arg1)->value.str.val)) return;
 	
 	if ((fp = fopen((*arg1)->value.str.val,"rb")) == 0) {
 		php_error(E_WARNING, "Unable to open %s", (*arg1)->value.str.val);

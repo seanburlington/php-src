@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.18 2004/05/20 20:25:22 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.19 2004/05/20 22:28:53 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -342,6 +342,19 @@ static PHP_METHOD(PDO, setAttribute)
 					RETURN_TRUE;
 				default:
 					zend_throw_exception_ex(php_pdo_get_exception(), PDO_ERR_SYNTAX TSRMLS_CC, "Error mode %d is invalid", Z_LVAL_P(value));
+			}
+			RETURN_FALSE;
+
+		case PDO_ATTR_CASE:
+			convert_to_long(value);
+			switch (Z_LVAL_P(value)) {
+				case PDO_CASE_NATURAL:
+				case PDO_CASE_UPPER:
+				case PDO_CASE_LOWER:
+					dbh->desired_case = Z_LVAL_P(value);
+					RETURN_TRUE;
+				default:
+					zend_throw_exception_ex(php_pdo_get_exception(), PDO_ERR_SYNTAX TSRMLS_CC, "Case folding mode %d is invalid", Z_LVAL_P(value));
 			}
 			RETURN_FALSE;
 			

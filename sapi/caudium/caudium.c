@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: caudium.c,v 1.4 2000/11/06 22:11:10 neotron Exp $ */
+/* $Id: caudium.c,v 1.5 2000/11/18 02:44:02 zeev Exp $ */
 
 #include "php.h"
 #ifdef HAVE_CAUDIUM
@@ -450,7 +450,7 @@ static void php_info_caudium(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.4 2000/11/06 22:11:10 neotron Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.5 2000/11/18 02:44:02 zeev Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -780,7 +780,7 @@ void pike_module_init( void )
 {
   if (!caudium_php_initialized) {
 #ifdef ZTS
-    tsrm_startup(1, 1, 0);
+    tsrm_startup(1, 1, 0, NULL);
     caudium_globals_id = ts_allocate_id(sizeof(php_caudium_request), NULL, NULL);
 #endif
     sapi_startup(&sapi_module);

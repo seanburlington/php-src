@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.275 2000/11/04 01:18:10 jmcastagnetto Exp $ */
+/* $Id: basic_functions.c,v 1.276 2000/11/18 02:44:01 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -652,6 +652,7 @@ static void basic_globals_ctor(BLS_D)
 
 #ifdef TRANS_SID
 	memset(&BG(url_adapt_state), 0, sizeof(BG(url_adapt_state)));
+	memset(&BG(url_adapt_state_ex), 0, sizeof(BG(url_adapt_state_ex)));
 #endif
 
 #ifdef PHP_WIN32

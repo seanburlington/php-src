@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.7 2002/09/04 17:41:51 sniper Exp $
+dnl $Id: config.m4,v 1.8 2002/09/08 20:59:53 jon Exp $
 dnl
 
 PHP_ARG_WITH(cyrus, for cyrus imap support,
-[  --with-cyrus            Include cyrus imap support])
+[  --with-cyrus            Include Cyrus IMAP support])
 
 if test "$PHP_CYRUS" != "no"; then
   found_cyrus=no

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.33 2003/06/10 20:03:43 imajes Exp $
+// $Id: Registry.php,v 1.34 2003/07/06 14:17:58 pajoye Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Registry.php';
@@ -291,6 +291,7 @@ installed package.'
                         } else {
                             $pstr = '';
                         }
+                        $i = 0;
                         foreach ($info[$key] as $p) {
                             if ($debug < 2 && $p['type'] != "class") {
                                 continue;

@@ -16,13 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.85 2001/02/03 04:53:49 andrei Exp $ */
-
-/*
-	TODO:
-	- Allow user to set PCRE_NOTEMPTY, PCRE_ANCHORED at execution time
-	- add option to preg_grep() to return entries that _don't_ match
-*/
+/* $Id: php_pcre.c,v 1.86 2001/02/08 04:55:49 andrei Exp $ */
 
 #include "php.h"
 #include "php_globals.h"

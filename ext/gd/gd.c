@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.227 2002/11/23 22:11:59 moriyoshi Exp $ */
+/* $Id: gd.c,v 1.228 2002/11/24 00:59:41 moriyoshi Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -416,7 +416,7 @@ PHP_MINIT_FUNCTION(gd)
  */
 PHP_RSHUTDOWN_FUNCTION(gd)
 {
-#if HAVE_LIBGD20
+#if HAVE_LIBGD20 && HAVE_GD_STRINGFT
 	gdFreeFontCache();
 #endif
 	return SUCCESS;

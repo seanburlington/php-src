@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.364 2003/05/31 02:33:55 sniper Exp $ */
+/* $Id: session.c,v 1.365 2003/06/10 03:56:23 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1061,8 +1061,10 @@ PHPAPI void php_session_start(TSRMLS_D)
 
 	PS(define_sid) = 1;
 	PS(send_cookie) = 1;
-	if (PS(session_status) != php_session_none) 
+	if (PS(session_status) != php_session_none) {
+		php_error(E_NOTICE, "A session had already been started - ignoring session_start()");
 		return;
+	}
 
 	lensess = strlen(PS(session_name));
 	

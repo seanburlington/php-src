@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlite2.c,v 1.3 2005/03/12 00:50:20 helly Exp $ */
+/* $Id: pdo_sqlite2.c,v 1.4 2005/03/15 15:58:04 wez Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -94,7 +94,6 @@ static int pdo_sqlite2_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 
 	S->einfo.errcode = sqlite_compile(S->H->db, stmt->active_query_string, &tail, &S->vm, &errmsg);
 	if (S->einfo.errcode != SQLITE_OK) {
-		fprintf(stderr, "SQL:%s\n", stmt->active_query_string);
 		pdo_sqlite2_error_stmt(errmsg, stmt);
 		return 0;
 	}

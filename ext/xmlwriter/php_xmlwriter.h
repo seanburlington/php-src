@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.h,v 1.6 2005/02/24 15:35:56 pajoye Exp $ */
+/* $Id: php_xmlwriter.h,v 1.7 2005/03/04 15:41:33 rrichards Exp $ */
 
 #ifndef PHP_XMLWRITER_H
 #define PHP_XMLWRITER_H
@@ -41,6 +41,9 @@ extern zend_module_entry xmlwriter_module_entry;
 typedef struct _xmlwriter_object {
 	xmlTextWriterPtr ptr;
 	xmlBufferPtr output;
+#ifndef ZEND_ENGINE_2
+	xmlOutputBufferPtr uri_output;
+#endif
 } xmlwriter_object;
 
 #if LIBXML_VERSION >= 20605

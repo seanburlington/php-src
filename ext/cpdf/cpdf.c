@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.55 2004/01/08 08:14:34 andi Exp $ */
+/* $Id: cpdf.c,v 1.56 2004/02/19 02:19:11 iliaa Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -428,6 +428,7 @@ PHP_FUNCTION(cpdf_open)
 #endif
 
 		if (php_check_open_basedir(Z_STRVAL_PP(arg2) TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(arg2), "rb+", CHECKUID_CHECK_MODE_PARAM))) {
+			cpdf_close(cpdf);
 			RETURN_FALSE;
 		}
 

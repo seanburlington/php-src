@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.15 1999/07/21 20:31:07 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.16 1999/07/24 14:40:08 zeev Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -425,7 +425,7 @@ CONST_PREFIX char *php_apache_flag_handler_ex(cmd_parms *cmd, HashTable *conf, c
 {
 	char bool_val[2];
 
-	if (!strcmp(arg2, "On")) {
+	if (!strcasecmp(arg2, "On")) {
 		bool_val[0] = '1';
 	} else {
 		bool_val[0] = '0';

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.470 2002/04/16 22:14:19 wez Exp $ */
+/* $Id: basic_functions.c,v 1.471 2002/04/26 23:46:49 yohgaki Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -680,7 +680,9 @@ function_entry basic_functions[] = {
 	PHP_FE(chown,															NULL)
 	PHP_FE(chgrp,															NULL)
 	PHP_FE(chmod,															NULL)
+#if HAVE_UTIME
 	PHP_FE(touch,															NULL)
+#endif	
 	PHP_FE(clearstatcache,													NULL)
 	PHP_FE(disk_total_space,												NULL)
 	PHP_FE(disk_free_space,													NULL)

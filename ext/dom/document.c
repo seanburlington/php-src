@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.13 2003/07/14 21:51:28 rrichards Exp $ */
+/* $Id: document.c,v 1.14 2003/07/18 12:41:35 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -260,7 +260,7 @@ int dom_document_encoding_write(dom_object *obj, zval *newval TSRMLS_DC)
 	xmlDoc *docp;
 	int charset;
 
-	docp = (xmlDoc *) obj->ptr;
+	docp = (xmlDocPtr) dom_object_get_node(obj);
 	if (docp->encoding != NULL) {
 		xmlFree((xmlChar *)docp->encoding);
 	}
@@ -1010,7 +1010,7 @@ PHP_FUNCTION(dom_document_document)
 
 	intern = (dom_object *)zend_object_store_get_object(id TSRMLS_CC);
 	if (intern != NULL) {
-		olddoc = (xmlDocPtr)intern->ptr;
+		olddoc = (xmlDocPtr) dom_object_get_node(intern);
 		if (olddoc != NULL) {
 			decrement_node_ptr(intern TSRMLS_CC);
 			refcount = decrement_document_reference(intern TSRMLS_CC);
@@ -1124,7 +1124,7 @@ static void dom_parse_document(INTERNAL_FUNCTION_PARAMETERS, int mode) {
 	if (id != NULL) {
 		intern = (dom_object *)zend_object_store_get_object(id TSRMLS_CC);
 		if (intern != NULL) {
-			docp = (xmlDocPtr)intern->ptr;
+			docp = (xmlDocPtr) dom_object_get_node(intern);
 			if (docp != NULL) {
 				decrement_node_ptr(intern TSRMLS_CC);
 				refcount = decrement_document_reference(intern TSRMLS_CC);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.6 2003/01/28 23:46:13 phanto Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.7 2003/02/06 14:34:07 andrey Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -545,6 +545,9 @@ function_entry basic_functions[] = {
 	PHP_FE(call_user_method_array,	second_arg_force_ref)
 	PHP_FE(serialize,														NULL)															
 	PHP_FE(unserialize,														NULL)
+#if MEMORY_LIMIT
+	PHP_FE(memory_get_usage,													NULL)
+#endif
 
 	PHP_FE(var_dump,														NULL)
 	PHP_FE(var_export,														NULL)

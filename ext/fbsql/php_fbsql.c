@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.25 2001/05/31 18:43:29 fmk Exp $ */
+/* $Id: php_fbsql.c,v 1.26 2001/05/31 18:57:58 fmk Exp $ */
 
 /* TODO:
  *
@@ -1704,6 +1704,9 @@ PHP_FUNCTION(fbsql_list_dbs)
 	phpResult->array       = fbcehAvailableDatabases(phpLink->execHandler);
 	phpResult->rowCount    = fbaCount(phpResult->array);
 	phpResult->list        = NULL;
+
+	ZEND_REGISTER_RESOURCE(return_value, phpResult, le_result);
+
 }
 /* }}} */
 

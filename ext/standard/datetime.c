@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.84 2002/03/08 17:25:43 sander Exp $ */
+/* $Id: datetime.c,v 1.85 2002/03/09 11:23:48 sander Exp $ */
 
 
 #include "php.h"
@@ -496,7 +496,7 @@ php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 				break;
 			case 'r':
 #if HAVE_TM_GMTOFF				
-				sprintf(tmp_buff, "%3s, %02d %3s %04d %02d:%02d:%02d %c%02d%02d", 
+				sprintf(tmp_buff, "%3s, %2d %3s %04d %02d:%02d:%02d %c%02d%02d", 
 					day_short_names[ta->tm_wday],
 					ta->tm_mday,
 					mon_short_names[ta->tm_mon],
@@ -509,7 +509,7 @@ php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 					abs( ta->tm_gmtoff % 3600)
 				);
 #else
-				sprintf(tmp_buff, "%3s, %02d %3s %04d %02d:%02d:%02d %c%02d%02d", 
+				sprintf(tmp_buff, "%3s, %2d %3s %04d %02d:%02d:%02d %c%02d%02d", 
 					day_short_names[ta->tm_wday],
 					ta->tm_mday,
 					mon_short_names[ta->tm_mon],

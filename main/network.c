@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.39 2002/03/18 18:54:31 wez Exp $ */
+/* $Id: network.c,v 1.40 2002/03/18 19:42:19 wez Exp $ */
 
 #define PHP_SOCK_CHUNK_SIZE	8192
 #define MAX_CHUNKS_PER_READ 10
@@ -633,6 +633,14 @@ static size_t php_sock_stream_read_internal(php_stream *stream, php_netstream_da
 #endif
 	nr_bytes = recv(sock->socket, buf, sock->chunk_size, 0);
 	if(nr_bytes > 0) {
+
+		/* try to avoid ever expanding buffer */
+		if (sock->readpos > 0) {
+			memmove(sock->readbuf, READPTR(sock), sock->readbuflen - sock->readpos);
+			sock->writepos -= sock->readpos;
+			sock->readpos = 0;
+		}
+		
 		if(sock->writepos + nr_bytes > sock->readbuflen) {
 			sock->readbuflen += sock->chunk_size;
 			sock->readbuf = perealloc(sock->readbuf, sock->readbuflen,

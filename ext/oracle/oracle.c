@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.86 2003/01/19 15:01:33 iliaa Exp $ */
+/* $Id: oracle.c,v 1.87 2003/01/19 23:32:20 iliaa Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -1621,6 +1621,7 @@ ora_describe_define(oraCursor * cursor)
 	int i;
 	sb2 type;
 	sb4 dbsize;
+	TSRMLS_FETCH();
 
 	if (cursor == NULL) {
 		return -1;

@@ -1,5 +1,5 @@
 [PHP]
-; $Id: php.ini-dist,v 1.81 2001/06/01 03:19:53 sniper Exp $
+; $Id: php.ini-dist,v 1.82 2001/06/10 09:44:31 hirokawa Exp $
 
 ;;;;;;;;;;;;;;;;;;;
 ; About this file ;
@@ -782,6 +782,13 @@ sockets.use_system_read = On
 
 [Printer]
 ;printer.default_printer = ""
+
+[mbstring]
+;mbstring.internal_encoding = EUC-JP
+;mbstring.http_input = auto
+;mbstring.http_output = SJIS
+;mbstring.detect_order = auto
+;mbstring.substitute_character = none;
 
 ; Local Variables:
 ; tab-width: 4

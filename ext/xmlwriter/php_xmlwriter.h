@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.h,v 1.1 2004/07/13 17:01:30 rrichards Exp $ */
+/* $Id: php_xmlwriter.h,v 1.2 2005/02/21 15:05:54 pajoye Exp $ */
 
 #ifndef PHP_XMLWRITER_H
 #define PHP_XMLWRITER_H
@@ -67,6 +67,9 @@ PHP_FUNCTION(xmlwriter_text);
 PHP_FUNCTION(xmlwriter_start_document);
 PHP_FUNCTION(xmlwriter_end_document);
 PHP_FUNCTION(xmlwriter_write_comment);
+PHP_FUNCTION(xmlwriter_start_comment);
+PHP_FUNCTION(xmlwriter_end_comment);
+
 PHP_FUNCTION(xmlwriter_start_dtd);
 PHP_FUNCTION(xmlwriter_end_dtd);
 PHP_FUNCTION(xmlwriter_write_dtd);

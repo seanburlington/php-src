@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.124 2002/06/30 11:14:27 derick Exp $ */
+/* $Id: ldap.c,v 1.125 2002/07/09 20:54:49 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -226,7 +226,9 @@ PHP_MINIT_FUNCTION(ldap)
 	REGISTER_LONG_CONSTANT("LDAP_OPT_PROTOCOL_VERSION", LDAP_OPT_PROTOCOL_VERSION, CONST_PERSISTENT | CONST_CS);
 	REGISTER_LONG_CONSTANT("LDAP_OPT_ERROR_NUMBER", LDAP_OPT_ERROR_NUMBER, CONST_PERSISTENT | CONST_CS);
 	REGISTER_LONG_CONSTANT("LDAP_OPT_REFERRALS", LDAP_OPT_REFERRALS, CONST_PERSISTENT | CONST_CS);
+#ifdef LDAP_OPT_RESTART
 	REGISTER_LONG_CONSTANT("LDAP_OPT_RESTART", LDAP_OPT_RESTART, CONST_PERSISTENT | CONST_CS);
+#endif
 	REGISTER_LONG_CONSTANT("LDAP_OPT_HOST_NAME", LDAP_OPT_HOST_NAME, CONST_PERSISTENT | CONST_CS);
 	REGISTER_LONG_CONSTANT("LDAP_OPT_ERROR_STRING", LDAP_OPT_ERROR_STRING, CONST_PERSISTENT | CONST_CS);
 #ifdef LDAP_OPT_MATCHED_DN
@@ -276,7 +278,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.124 2002/06/30 11:14:27 derick Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.125 2002/07/09 20:54:49 venaas Exp $" );
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -1641,7 +1643,9 @@ PHP_FUNCTION(ldap_get_option)
 	case LDAP_OPT_PROTOCOL_VERSION:
 	case LDAP_OPT_ERROR_NUMBER:
 	case LDAP_OPT_REFERRALS:
+#ifdef LDAP_OPT_RESTART
 	case LDAP_OPT_RESTART:
+#endif
 		{
 			int val;
 			if (ldap_get_option(ld->link, opt, &val)) {
@@ -1736,7 +1740,9 @@ PHP_FUNCTION(ldap_set_option)
 		} break;
 		/* options with boolean value */
 	case LDAP_OPT_REFERRALS:
+#ifdef LDAP_OPT_RESTART
 	case LDAP_OPT_RESTART:
+#endif
 		{
 			void *val;
 			convert_to_boolean_ex(newval);

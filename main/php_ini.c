@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.126 2004/02/14 12:29:03 derick Exp $ */
+/* $Id: php_ini.c,v 1.127 2004/02/14 12:35:59 derick Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -519,8 +519,8 @@ int php_init_config()
 					strcat(php_ini_scanned_files, *(char **)element->data);		
 					strcat(php_ini_scanned_files, element->next ? ",\n" : "\n");
 				}	
-				zend_llist_destroy(&scanned_ini_list);
 			}
+			zend_llist_destroy(&scanned_ini_list);
 		}
 	}
 	return SUCCESS;

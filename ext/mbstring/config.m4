@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.47 2004/04/03 17:23:53 derick Exp $
+dnl $Id: config.m4,v 1.48 2004/04/04 19:00:53 derick Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -34,7 +34,7 @@ AC_DEFUN([PHP_MBSTRING_EXTENSION], [
     PHP_ADD_BUILD_DIR([$ext_builddir/$dir])
   done
   
-  if test "$ext_shared" = "no" -o -e "$ext_builddir/config.h.in"; then
+  if test "$ext_shared" = "no" -o ! -e "$ext_builddir/config.h.in"; then
     out="php_config.h"
   else
     out="$abs_builddir/config.h"

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.25 1999/11/26 16:51:54 sas Exp $ */
+/* $Id: hw.c,v 1.26 1999/12/04 19:15:49 sas Exp $ */
 #if COMPILE_DL
 #include "dl/phpdl.h"
 #endif
@@ -26,7 +26,7 @@
 
 #include "php.h"
 #include "php_globals.h"
-#include "ext/standard/php3_standard.h"
+#include "ext/standard/php_standard.h"
 #include "ext/standard/head.h"
 #include "ext/standard/info.h"
 #include "SAPI.h"
@@ -40,7 +40,7 @@
 #if HYPERWAVE
 
 #include "php_ini.h"
-#include "php3_hyperwave.h"
+#include "php_hyperwave.h"
 
 //hw_module php3_hw_module;
 

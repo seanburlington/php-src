@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.4 1999/10/30 14:22:10 rasmus Exp $ */
+/* $Id: mod_php4.c,v 1.5 1999/12/04 19:16:11 sas Exp $ */
 
 #include "zend.h"
 #include "php.h"
@@ -47,7 +47,7 @@
 #include "zend_highlight.h"
 #include "zend_indent.h"
 
-#include "ext/standard/php3_standard.h"
+#include "ext/standard/php_standard.h"
 
 #include "util_script.h"
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.44 1999/11/30 20:18:11 andi Exp $ */
+/* $Id: file.c,v 1.45 1999/12/04 19:16:03 sas Exp $ */
 
 /* Synced with php3 revision 1.218 1999-06-16 [ssb] */
 
@@ -45,7 +45,7 @@
 #endif
 #include "ext/standard/head.h"
 #include "safe_mode.h"
-#include "php3_string.h"
+#include "php_string.h"
 #include "file.h"
 #if HAVE_PWD_H
 #if MSVC5

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.13 1999/11/30 12:41:36 lurcher Exp $ */
+/* $Id: php_odbc.c,v 1.14 1999/12/04 19:15:57 sas Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -26,7 +26,7 @@
 
 #include "php.h"
 #include "php_globals.h"
-#include "ext/standard/php3_standard.h"
+#include "ext/standard/php_standard.h"
 #include "php_odbc.h"
 
 #if HAVE_UODBC

@@ -20,12 +20,12 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sybase.c,v 1.15 1999/11/19 13:06:11 zeev Exp $ */
+/* $Id: sybase.c,v 1.16 1999/12/04 19:16:07 sas Exp $ */
 
 
 #include "php.h"
-#include "php3_sybase.h"
-#include "ext/standard/php3_standard.h"
+#include "php_sybase.h"
+#include "ext/standard/php_standard.h"
 #include "php_globals.h"
 
 #if HAVE_SYBASE

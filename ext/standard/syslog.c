@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.8 1999/09/25 12:09:50 sas Exp $ */
+/* $Id: syslog.c,v 1.9 1999/12/04 19:16:07 sas Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -36,7 +36,7 @@
 #include <errno.h>
 
 #include <stdio.h>
-#include "php3_syslog.h"
+#include "php_syslog.h"
 
 static int syslog_started;
 static char *syslog_device;

@@ -16,11 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: domxml.c,v 1.2 1999/11/24 12:10:15 eschmid Exp $ */
+/* $Id: domxml.c,v 1.3 1999/12/04 19:15:47 sas Exp $ */
 
 
 #include "php.h"
-#include "php3_domxml.h"
+#include "php_domxml.h"
 
 #if HAVE_DOMXML
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.26 1999/12/04 14:45:37 ssb Exp $ */
+/* $Id: gd.c,v 1.27 1999/12/04 19:15:48 sas Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -29,7 +29,7 @@
 #include "ext/standard/head.h"
 #include <math.h>
 #include "SAPI.h"
-#include "php3_gd.h"
+#include "php_gd.h"
 
 #if HAVE_SYS_WAIT_H
 # include <sys/wait.h>

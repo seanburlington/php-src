@@ -17,13 +17,13 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.11 1999/11/08 10:33:06 sas Exp $ */
+/* $Id: snmp.c,v 1.12 1999/12/04 19:16:02 sas Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)
 #include "dl/phpdl.h"
 #endif
-#include "php3_snmp.h"
+#include "php_snmp.h"
 #include <sys/types.h>
 #if MSVC5
 #include <winsock.h>

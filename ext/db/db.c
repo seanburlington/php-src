@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.12 1999/11/14 23:03:45 sas Exp $ */
+/* $Id: db.c,v 1.13 1999/12/04 19:15:46 sas Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 # include "dl/phpdl.h"
@@ -148,8 +148,8 @@ datum flatfile_nextkey(FILE *dbf);
 
 #endif
 
-#include "php3_db.h"
-#include "ext/standard/php3_string.h"
+#include "php_db.h"
+#include "ext/standard/php_string.h"
 
 #if THREAD_SAFE
 DWORD DbmTls;

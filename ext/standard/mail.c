@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.10 1999/09/25 12:09:50 sas Exp $ */
+/* $Id: mail.c,v 1.11 1999/12/04 19:16:03 sas Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -25,7 +25,7 @@
 #ifndef MSVC5
 #include "build-defs.h"
 #endif
-#include "php3_mail.h"
+#include "php_mail.h"
 #include "php_ini.h"
 
 #if APACHE

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.13 1999/08/17 12:32:23 thies Exp $ */
+/* $Id: filestat.c,v 1.14 1999/12/04 19:16:03 sas Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -69,7 +69,7 @@
 # endif
 #endif
 
-#include "php3_filestat.h"
+#include "php_filestat.h"
 
 #ifndef THREAD_SAFE
 static char *CurrentStatFile=NULL;

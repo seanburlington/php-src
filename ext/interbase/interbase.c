@@ -16,18 +16,18 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.8 1999/09/04 13:18:54 zeev Exp $ */
+/* $Id: interbase.c,v 1.9 1999/12/04 19:15:51 sas Exp $ */
 
 /* TODO: A lot... */
 
 #include "php.h"
 #include "php_config.h"
-#include "php3_interbase.h"
+#include "php_interbase.h"
 
 #if HAVE_IBASE
 #include <ibase.h>
 #include <time.h>
-#include "php3_string.h"
+#include "php_string.h"
 #include "php_globals.h"
 
 /* {{{ extension definition structures */

@@ -17,14 +17,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.16 1999/10/20 18:09:44 andi Exp $ */
+/* $Id: dir.c,v 1.17 1999/12/04 19:16:03 sas Exp $ */
 
 /* {{{ includes/startup/misc */
 
 #include "php.h"
 #include "fopen-wrappers.h"
 
-#include "php3_dir.h"
+#include "php_dir.h"
 
 #ifdef HAVE_DIRENT_H
 # include <dirent.h>

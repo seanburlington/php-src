@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.23 1999/10/17 00:20:17 andrei Exp $ */
+/* $Id: zlib.c,v 1.24 1999/12/04 19:16:11 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -38,8 +38,8 @@
 #endif
 #include "ext/standard/head.h"
 #include "safe_mode.h"
-#include "ext/standard/php3_standard.h"
-#include "php3_zlib.h"
+#include "ext/standard/php_standard.h"
+#include "php_zlib.h"
 #include "fopen-wrappers.h"
 #if HAVE_PWD_H
 #if WIN32|WINNT

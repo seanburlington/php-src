@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.1 1999/12/03 13:13:48 sas Exp $ */
+/* $Id: posix.c,v 1.2 1999/12/04 19:16:01 sas Exp $ */
 
 
 #include "php.h"
@@ -35,11 +35,11 @@
 #include "internal_functions.h"
 #endif
 #if PHP_31 || PHP_API_VERSION >= 19990421
-# include "ext/standard/php3_string.h"
+# include "ext/standard/php_string.h"
 #else
-# include "php3_string.h"
+# include "php_string.h"
 #endif
-#include "php3_posix.h"
+#include "php_posix.h"
 
 #if HAVE_POSIX
 #ifdef HAVE_SYS_TIME_H
@@ -138,7 +138,7 @@ void timeout(int sig);
 
 static PHP_MINFO_FUNCTION(posix)
 {
-    PUTS("$Revision: 1.1 $\n");
+    PUTS("$Revision: 1.2 $\n");
 }
 
 /* {{{ proto int posix_kill(int pid, int sig)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dav.c,v 1.3 1999/07/16 13:12:44 zeev Exp $ */
+/* $Id: dav.c,v 1.4 1999/12/04 19:15:45 sas Exp $ */
 
 #define IS_EXT_MODULE
 #if COMPILE_DL
@@ -27,7 +27,7 @@
 # endif
 #endif
 #include "php.h"
-#include "php3_dav.h"
+#include "php_dav.h"
 
 #if defined(THREAD_SAFE) && !PHP_31
 # undef THREAD_SAFE

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.149 1999/12/04 18:06:15 sas Exp $ */
+/* $Id: main.c,v 1.150 1999/12/04 19:15:41 sas Exp $ */
 
 
 #include <stdio.h>
@@ -48,7 +48,7 @@
 #include "php_globals.h"
 #include "main.h"
 #include "fopen-wrappers.h"
-#include "ext/standard/php3_standard.h"
+#include "ext/standard/php_standard.h"
 #include "snprintf.h"
 #if WIN32|WINNT
 #include <io.h>

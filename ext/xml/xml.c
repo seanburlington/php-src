@@ -17,13 +17,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.30 1999/12/04 14:45:38 ssb Exp $ */
+/* $Id: xml.c,v 1.31 1999/12/04 19:16:10 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
-#include "php3_xml.h"
+#include "php_xml.h"
 #include "zend_variables.h"
-#include "ext/standard/php3_string.h"
+#include "ext/standard/php_string.h"
 
 
 #if HAVE_LIBEXPAT

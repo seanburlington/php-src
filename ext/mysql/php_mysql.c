@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.11 1999/12/04 14:45:38 ssb Exp $ */
+/* $Id: php_mysql.c,v 1.12 1999/12/04 19:15:56 sas Exp $ */
 
 
 /* TODO:
@@ -26,7 +26,7 @@
 
 #include "php.h"
 #include "php_globals.h"
-#include "ext/standard/php3_standard.h"
+#include "ext/standard/php_standard.h"
 #include "php_mysql.h"
 #include "php_globals.h"
 

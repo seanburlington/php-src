@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.9 1999/09/24 19:13:34 sas Exp $ */
+/* $Id: sysvshm.c,v 1.10 1999/12/04 19:16:09 sas Exp $ */
 
 /* This has been built and tested on Solaris 2.6.
  * It may not compile or execute correctly on other systems.
@@ -28,8 +28,8 @@
 
 #include <errno.h>
 
-#include "php3_sysvshm.h"
-#include "../standard/php3_var.h"
+#include "php_sysvshm.h"
+#include "../standard/php_var.h"
 
 function_entry sysvshm_functions[] = {
 	PHP_FE(shm_attach, NULL)

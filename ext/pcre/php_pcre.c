@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.28 1999/11/19 22:59:12 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.29 1999/12/04 19:15:59 sas Exp $ */
 
 /*
 	TODO:
@@ -29,7 +29,7 @@
 
 #if HAVE_PCRE || HAVE_BUNDLED_PCRE
 
-#include "ext/standard/php3_string.h"
+#include "ext/standard/php_string.h"
 
 #define PREG_PATTERN_ORDER	0
 #define PREG_SET_ORDER		1

@@ -15,11 +15,11 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.13 1999/10/15 15:22:20 thies Exp $ */
+/* $Id: rfc1867.c,v 1.14 1999/12/04 19:15:41 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
-#include "ext/standard/php3_standard.h"
+#include "ext/standard/php_standard.h"
 #include "ext/standard/file.h" /* for php_file_le_uploads() */
 #include "zend_globals.h"
 #include "php_globals.h"

@@ -15,11 +15,11 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.18 1999/08/02 19:16:50 zeev Exp $ */
+/* $Id: head.c,v 1.19 1999/12/04 19:16:03 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
-#include "ext/standard/php3_standard.h"
+#include "ext/standard/php_standard.h"
 #include "SAPI.h"
 #include "main.h"
 #include "head.h"

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.2 1999/11/10 19:58:07 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.3 1999/12/04 19:15:55 sas Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -25,7 +25,7 @@
 
 #include "php.h"
 #include "php_globals.h"
-#include "ext/standard/php3_standard.h"
+#include "ext/standard/php_standard.h"
 #include "php_mssql.h"
 #include "php_ini.h"
 

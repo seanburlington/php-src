@@ -15,7 +15,7 @@
    | Authors: Chris Schneider <cschneid@relog.ch>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.9 1999/08/02 19:16:50 zeev Exp $ */
+/* $Id: pack.c,v 1.10 1999/12/04 19:16:03 sas Exp $ */
 
 #include "php.h"
 
@@ -35,7 +35,7 @@
 #endif
 #include "ext/standard/head.h"
 #include "safe_mode.h"
-#include "php3_string.h"
+#include "php_string.h"
 #include "pack.h"
 #if HAVE_PWD_H
 #if MSVC5

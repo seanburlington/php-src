@@ -17,12 +17,12 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.9 1999/11/19 13:06:12 zeev Exp $ */
+/* $Id: php_sybase_ct.c,v 1.10 1999/12/04 19:16:08 sas Exp $ */
 
 
 #include "php.h"
 #include "php_sybase_ct.h"
-#include "ext/standard/php3_standard.h"
+#include "ext/standard/php_standard.h"
 #include "php_globals.h"
 
 #if HAVE_SYBASE_CT

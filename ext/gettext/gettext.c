@@ -16,11 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.8 1999/09/24 19:15:17 sas Exp $ */
+/* $Id: gettext.c,v 1.9 1999/12/04 19:15:49 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
-#include "php3_gettext.h"
+#include "php_gettext.h"
 
 #if HAVE_LIBINTL
 

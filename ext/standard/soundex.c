@@ -15,13 +15,13 @@
    | Author: Bjørn Borud - Guardian Networks AS <borud@guardian.no>       |
    +----------------------------------------------------------------------+
  */
-/* $Id: soundex.c,v 1.7 1999/09/25 12:09:50 sas Exp $ */
+/* $Id: soundex.c,v 1.8 1999/12/04 19:16:06 sas Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
 #include <errno.h>
 #include <ctype.h>
-#include "php3_string.h"
+#include "php_string.h"
 
 /* Simple soundex algorithm as described by Knuth in TAOCP, vol 3 */
 /* {{{ proto string soundex(string str)

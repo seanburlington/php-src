@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: velocis.c,v 1.8 1999/11/09 14:28:59 ssb Exp $ */
+/* $Id: velocis.c,v 1.9 1999/12/04 19:15:57 sas Exp $ */
 
 /*
  * TODO:
@@ -41,7 +41,7 @@
 #endif
 
 #ifdef HAVE_VELOCIS
-#include "php3_velocis.h"
+#include "php_velocis.h"
 
 function_entry velocis_functions[] = {
 	PHP_FE(velocis_connect,								NULL)

@@ -16,12 +16,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.10 1999/11/23 06:46:39 evan Exp $ */
+/* $Id: formatted_print.c,v 1.11 1999/12/04 19:16:03 sas Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
 #include "ext/standard/head.h"
-#include "php3_string.h"
+#include "php_string.h"
 #include "zend_execute.h"
 #include <stdio.h>
 

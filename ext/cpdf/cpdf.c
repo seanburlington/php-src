@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.2 1999/11/25 07:00:27 steinm Exp $ */
+/* $Id: cpdf.c,v 1.3 1999/12/04 19:15:44 sas Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -54,7 +54,7 @@
 #endif
 
 #if HAVE_CPDFLIB
-#include "php3_cpdf.h"
+#include "php_cpdf.h"
 
 #ifdef THREAD_SAFE
 DWORD CPDFlibTls;

@@ -15,12 +15,12 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.17 1999/11/24 17:56:31 sas Exp $ */
+/* $Id: exec.c,v 1.18 1999/12/04 19:16:03 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
 #include <ctype.h>
-#include "php3_string.h"
+#include "php_string.h"
 #include "safe_mode.h"
 #include "ext/standard/head.h"
 #include "exec.h"

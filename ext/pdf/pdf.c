@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.16 1999/10/15 15:22:21 thies Exp $ */
+/* $Id: pdf.c,v 1.17 1999/12/04 19:16:00 sas Exp $ */
 
 /* pdflib 2.01 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -57,7 +57,7 @@
 
 #if HAVE_PDFLIB
 
-#include "php3_pdf.h"
+#include "php_pdf.h"
 
 #ifdef THREAD_SAFE
 DWORD PDFlibTls;

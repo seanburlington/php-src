@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.34 1999/11/06 08:16:25 thies Exp $ */
+/* $Id: var.c,v 1.35 1999/12/04 19:16:07 sas Exp $ */
 
 
 /* {{{ includes 
@@ -27,8 +27,8 @@
 #include <stdlib.h>
 #include <errno.h>
 #include "php.h"
-#include "php3_string.h"
-#include "php3_var.h"
+#include "php_string.h"
+#include "php_var.h"
 
 /* }}} */
 /* {{{ php_var_dump */

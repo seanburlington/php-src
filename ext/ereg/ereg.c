@@ -17,11 +17,11 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.23 1999/11/13 16:51:31 sas Exp $ */
+/* $Id: ereg.c,v 1.24 1999/12/04 19:16:06 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
-#include "php3_string.h"
+#include "php_string.h"
 #include "reg.h"
 
 unsigned char third_argument_force_ref[] = { 3, BYREF_NONE, BYREF_NONE, BYREF_FORCE };

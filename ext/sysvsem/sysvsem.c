@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.9 1999/09/24 19:13:34 sas Exp $ */
+/* $Id: sysvsem.c,v 1.10 1999/12/04 19:16:08 sas Exp $ */
 
 /* This has been built and tested on Solaris 2.6 and Linux 2.1.122.
  * It may not compile or execute correctly on other systems.
@@ -33,7 +33,7 @@
 #include <sys/sem.h>
 #include <errno.h>
 
-#include "php3_sysvsem.h"
+#include "php_sysvsem.h"
 
 #if !HAVE_SEMUN && defined(__GNU_LIBRARY__) && __GNU_LIBRARY__ == 6
 

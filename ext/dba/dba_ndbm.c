@@ -27,12 +27,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_ndbm.c,v 1.2 1999/09/17 09:56:30 sas Exp $ */
+/* $Id: dba_ndbm.c,v 1.3 1999/12/04 19:15:46 sas Exp $ */
 
 #include "php.h"
 
 #if DBA_NDBM
-#include "php3_ndbm.h"
+#include "php_ndbm.h"
 
 #include <fcntl.h>
 

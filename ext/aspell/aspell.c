@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: aspell.c,v 1.6 1999/11/23 06:46:40 evan Exp $ */
+/* $Id: aspell.c,v 1.7 1999/12/04 19:15:43 sas Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)
@@ -28,7 +28,7 @@
 
 #if HAVE_ASPELL
 
-#include "php3_aspell.h"
+#include "php_aspell.h"
 #if APACHE
 #  ifndef DEBUG
 #  undef palloc

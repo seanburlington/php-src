@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.31 1999/11/30 20:18:06 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.32 1999/12/04 19:15:41 sas Exp $ */
 
 /* Synced with php3 revision 1.66 1999-06-18 [ssb] */
 
@@ -41,9 +41,9 @@
 #endif
 
 #include "safe_mode.h"
-#include "php3_realpath.h"
+#include "php_realpath.h"
 #include "ext/standard/head.h"
-#include "ext/standard/php3_standard.h"
+#include "ext/standard/php_standard.h"
 #include "zend_compile.h"
 
 #if HAVE_PWD_H

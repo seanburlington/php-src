@@ -27,12 +27,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.3 1999/09/17 09:56:30 sas Exp $ */
+/* $Id: dba_db2.c,v 1.4 1999/12/04 19:15:46 sas Exp $ */
 
 #include "php.h"
 
 #if DBA_DB2
-#include "php3_db2.h"
+#include "php_db2.h"
 #include <sys/stat.h>
 
 #include <string.h>

@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.3 1999/12/04 13:25:39 zeev Exp $ */
+/* $Id: sapi_apache.c,v 1.4 1999/12/04 19:16:12 sas Exp $ */
 
 #include "php.h"
 
@@ -47,7 +47,7 @@
 #include "zend_execute.h"
 #include "zend_highlight.h"
 #include "zend_indent.h"
-#include "ext/standard/php3_standard.h"
+#include "ext/standard/php_standard.h"
 #include "util_script.h"
 #include "php_version.h"
 /*#include "mod_php4.h"*/

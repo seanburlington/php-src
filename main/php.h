@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.47 1999/11/27 00:48:50 zeev Exp $ */
+/* $Id: php.h,v 1.48 1999/12/04 19:15:41 sas Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -148,7 +148,7 @@ char *strtok_r(char *s, const char *delim, char **last);
 
 
 #include "zend_hash.h"
-#include "php3_compat.h"
+#include "php_compat.h"
 #include "zend_alloc.h"
 #include "zend_stack.h"
 

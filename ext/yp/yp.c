@@ -15,13 +15,13 @@
    | Authors: Stephanie Wehner <_@r4k.net>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.2 1999/07/16 13:12:58 zeev Exp $ */
+/* $Id: yp.c,v 1.3 1999/12/04 19:16:10 sas Exp $ */
 
 #include "php.h"
 
 #if HAVE_YP
 
-#include "php3_yp.h"
+#include "php_yp.h"
 
 #include <rpcsvc/ypclnt.h>
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.7 1999/08/02 19:16:50 zeev Exp $ */
+/* $Id: iptc.c,v 1.8 1999/12/04 19:16:03 sas Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -33,7 +33,7 @@
  */
  
 #include "php.h"
-#include "php3_iptc.h"
+#include "php_iptc.h"
 #include "ext/standard/head.h"
 
 #include <sys/stat.h>

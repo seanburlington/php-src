@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.10 1999/09/24 19:35:25 sas Exp $ */
+/* $Id: crypt.c,v 1.11 1999/12/04 19:16:03 sas Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -46,7 +46,7 @@
 extern char *crypt(char *__key,char *__salt);
 #endif
 
-#include "php3_crypt.h"
+#include "php_crypt.h"
 
 function_entry crypt_functions[] = {
 	PHP_FE(crypt,									NULL)

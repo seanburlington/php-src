@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.41 2005/03/02 01:14:40 helly Exp $ */
+/* $Id: php_spl.c,v 1.42 2005/03/02 20:59:05 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -242,21 +242,25 @@ PHP_FUNCTION(spl_autoload)
 	}
 } /* }}} */
 
-/* {{{ void spl_autoload_extensions(string file_extensions])
- Register default file extensions for spl_autoload */
+/* {{{ void string spl_autoload_extensions([string file_extensions])
+ Register and return default file extensions for spl_autoload */
 PHP_FUNCTION(spl_autoload_extensions)
 {
 	char *file_exts;
 	int file_exts_len;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &file_exts, &file_exts_len) == FAILURE) {
-		return;
+	if (ZEND_NUM_ARGS() > 0) {
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &file_exts, &file_exts_len) == FAILURE) {
+			return;
+		}
+	
+		if (SPL_G(autoload_extensions)) {
+			efree(SPL_G(autoload_extensions));
+		}
+		SPL_G(autoload_extensions) = estrdup(file_exts);
 	}
 
-	if (SPL_G(autoload_extensions)) {
-		efree(SPL_G(autoload_extensions));
-	}
-	SPL_G(autoload_extensions) = estrdup(file_exts);
+	RETURN_STRING(SPL_G(autoload_extensions), 1);
 } /* }}} */
 
 /* {{{ void spl_autoload_call(string class_name)

@@ -80,7 +80,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.50 2002/11/12 19:24:45 moriyoshi Exp $ */
+/* $Id: mbfilter.c,v 1.51 2002/11/12 19:44:56 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -232,6 +232,7 @@ static const mbfl_language *mbfl_language_ptr_table[] = {
 	&mbfl_language_english,
 	&mbfl_language_german,
 	&mbfl_language_russian,
+	&mbfl_language_neutral,
 	NULL
 };
 

@@ -1,17 +1,17 @@
-# $Id: Makefile.am,v 1.7 1999/11/13 12:40:37 sas Exp $
+# $Id: Makefile.am,v 1.8 1999/11/27 22:04:25 sas Exp $
 
 noinst_LTLIBRARIES=libphpext_informix.la
-noinst_LIBRARIES=libifx.a
-libifx_a_SOURCES=stub.c
-libifx_a_LIBADD=@IFX_OBJS@
+noinst_LIBRARIES=libphp_ifx.a
+libphp_ifx_a_SOURCES=stub.c
+libphp_ifx_a_LIBADD=@IFX_OBJS@
 libphpext_informix_la_SOURCES=ifx.c
 libphpext_informix_la_LIBADD=@IFX_LIBS@
 
 CLEANFILES = ifx.c
 
-ifx.c: ifx.ec
+ifx.c: $(srcdir)/ifx.ec
 	(if test -d @INFORMIXDIR@; then \
-	   esql -e @IFX_ESQL_FLAGS@ ifx.ec; \
+	   esql -e @IFX_ESQL_FLAGS@ $(srcdir)/ifx.ec; \
 	 else \
 	   touch ifx.c; \
 	 fi)

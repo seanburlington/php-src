@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.118 2000/10/25 17:44:00 andrei Exp $ */
+/* $Id: file.c,v 1.119 2000/10/26 18:17:45 dbeu Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1508,7 +1508,7 @@ PHP_FUNCTION(rename)
 	if (PG(safe_mode) &&(!php_checkuid(old_name, NULL, 2))) {
 		RETURN_FALSE;
 	}
-	ret = rename(old_name, new_name);
+	ret = V_RENAME(old_name, new_name);
 
 	if (ret == -1) {
 		php_error(E_WARNING,"Rename failed (%s)", strerror(errno));

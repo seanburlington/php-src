@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.52 2002/09/28 22:14:21 wez Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.53 2002/10/13 01:03:43 wez Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -249,6 +249,7 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 			switch(response_code) {
 				case 200:
 				case 302:
+				case 301:
 					reqok = 1;
 					break;
 				case 403:

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_memory_streams.h,v 1.11 2004/02/20 08:04:30 hholzgra Exp $ */
+/* $Id: php_memory_streams.h,v 1.12 2005/02/06 21:41:36 wez Exp $ */
 
 #ifndef PHP_MEMORY_STREAM_H
 #define PHP_MEMORY_STREAM_H
@@ -27,6 +27,7 @@
 
 #define TEMP_STREAM_DEFAULT  0
 #define TEMP_STREAM_READONLY 1
+#define TEMP_STREAM_TAKE_BUFFER 2
 
 #define php_stream_memory_create(mode) _php_stream_memory_create((mode) STREAMS_CC TSRMLS_CC)
 #define php_stream_memory_create_rel(mode) _php_stream_memory_create((mode) STREAMS_REL_CC TSRMLS_CC)

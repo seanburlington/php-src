@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: memory.c,v 1.6 2004/01/08 08:17:59 andi Exp $ */
+/* $Id: memory.c,v 1.7 2005/02/06 21:41:35 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -237,7 +237,7 @@ PHPAPI php_stream *_php_stream_memory_open(int mode, char *buf, size_t length ST
 	if ((stream = php_stream_memory_create_rel(mode)) != NULL) {
 		ms = stream->abstract;
 		
-		if (mode == TEMP_STREAM_READONLY) {
+		if (mode == TEMP_STREAM_READONLY || mode == TEMP_STREAM_TAKE_BUFFER) {
 			/* use the buffer directly */
 			ms->data = buf;
 			ms->fsize = length;

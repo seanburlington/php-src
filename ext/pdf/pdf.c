@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.67 2001/01/26 18:52:37 eschmid Exp $ */
+/* $Id: pdf.c,v 1.68 2001/01/31 17:00:10 dbeu Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -2368,7 +2368,7 @@ PHP_FUNCTION(pdf_open_ccitt) {
 	convert_to_long_ex(arg6);
 	convert_to_long_ex(arg7);
 
-	pdf_image = PDF_open_ccitt(pdf,
+	pdf_image = PDF_open_CCITT(pdf,
 	    image,
 	    Z_LVAL_PP(arg3),
 	    Z_LVAL_PP(arg4),

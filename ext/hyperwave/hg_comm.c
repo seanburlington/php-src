@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hg_comm.c,v 1.1 1999/04/21 23:11:20 ssb Exp $ */
+/* $Id: hg_comm.c,v 1.2 1999/04/24 00:11:52 zeev Exp $ */
 
 /* #define HW_DEBUG */
 
@@ -461,7 +461,7 @@ char *fnInsAnchorsIntoText(char *text, DLIST *pAnchorList, char **bodytag) {
 #if APACHE
 	{
 	int j;
-	array_header *arr = table_elts(GLOBAL(php3_rqst)->subprocess_env);
+	array_header *arr = table_elts(php3_rqst->subprocess_env);
 	table_entry *elts = (table_entry *)arr->elts;
 
 	for (j=0; j < arr->nelts; j++) {

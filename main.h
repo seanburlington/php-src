@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: main.h,v 1.4 1999/04/23 22:45:00 zeev Exp $ */
+/* $Id: main.h,v 1.5 1999/04/24 00:11:49 zeev Exp $ */
 
 
 #ifndef _MAIN_H
@@ -39,7 +39,7 @@
 #include "php_globals.h"
 
 int php3_request_startup(CLS_D ELS_DC PLS_DC);
-extern void php3_request_shutdown(void *dummy INLINE_TLS);
+extern void php3_request_shutdown(void *dummy);
 extern void php3_request_shutdown_for_exec(void *dummy);
 extern int php3_module_startup();
 extern void php3_module_shutdown();

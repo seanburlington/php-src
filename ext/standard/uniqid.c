@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.2 1999/04/23 20:06:00 zeev Exp $ */
+/* $Id: uniqid.c,v 1.3 1999/04/24 00:11:57 zeev Exp $ */
 
 #include "php.h"
 
@@ -54,11 +54,9 @@ void php3_uniqid(INTERNAL_FUNCTION_PARAMETERS)
 {
 #ifdef HAVE_GETTIMEOFDAY
 	pval *prefix;
-
 	char uniqid[128];
 	int sec, usec;
 	struct timeval tv;
-	TLS_VARS;
 	
 	if (ARG_COUNT(ht) != 1 || getParameters(ht,1,&prefix)==FAILURE) {
 		WRONG_PARAM_COUNT;

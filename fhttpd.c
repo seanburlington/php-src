@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fhttpd.c,v 1.2 1999/04/23 20:05:52 zeev Exp $ */
+/* $Id: fhttpd.c,v 1.3 1999/04/24 00:11:48 zeev Exp $ */
 #include "php.h"
 
 #include <stdlib.h>
@@ -169,7 +169,7 @@ PHPAPI void php3_fhttpd_puts_header(char *s)
 	}
 }
 
-void fhttpd_flush( /*GLOBAL(php3_rqst)->connection */ void)
+void fhttpd_flush( /*php3_rqst->connection */ void)
 {
 }
 

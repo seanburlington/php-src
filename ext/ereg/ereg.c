@@ -28,7 +28,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.3 1999/04/23 20:05:59 zeev Exp $ */
+/* $Id: ereg.c,v 1.4 1999/04/24 00:11:57 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -108,7 +108,6 @@ static void _php3_ereg(INTERNAL_FUNCTION_PARAMETERS, int icase)
 	off_t start, end;
 	char *buf = NULL;
 	char *string = NULL;
-	TLS_VARS;
 	
 	if (icase)
 		copts |= REG_ICASE;
@@ -176,7 +175,7 @@ static void _php3_ereg(INTERNAL_FUNCTION_PARAMETERS, int icase)
 			RETURN_FALSE;
 		}
 
-		pval_destructor(array _INLINE_TLS);	/* start with clean array */
+		pval_destructor(array);	/* start with clean array */
 		array_init(array);
 
 		for (i = 0; i < NS; i++) {
@@ -366,7 +365,6 @@ static void _php3_eregreplace(INTERNAL_FUNCTION_PARAMETERS, int icase)
 	char *string;
 	char *replace;
 	char *ret;
-	TLS_VARS;
 	
 	if (ARG_COUNT(ht) != 3 || getParameters(ht, 3, &arg_pattern, &arg_replace, &arg_string) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -442,7 +440,6 @@ void php3_split(INTERNAL_FUNCTION_PARAMETERS)
 	regmatch_t subs[1];
 	char *strp, *endp;
 	int err, size, count;
-	TLS_VARS;
 	
 	switch (ARG_COUNT(ht)) {
 	case 2:

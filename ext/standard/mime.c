@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mime.c,v 1.2 1999/04/23 20:05:59 zeev Exp $ */
+/* $Id: mime.c,v 1.3 1999/04/24 00:11:56 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -222,7 +222,7 @@ void php3_mime_split(char *buf, int cnt, char *boundary, pval *http_post_vars PL
 					}
 					bytes = fwrite(ptr, 1, loc - ptr - 4, fp);
 					fclose(fp);
-					php3_list_insert(fn,GLOBAL(le_uploads));  /* Tell PHP about the file so the destructor can unlink it later */
+					php3_list_insert(fn,le_uploads);  /* Tell PHP about the file so the destructor can unlink it later */
 					if (bytes < (loc - ptr - 4)) {
 						php3_error(E_WARNING, "Only %d bytes were written, expected to write %ld", bytes, loc - ptr - 4);
 					}

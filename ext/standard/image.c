@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: image.c,v 1.2 1999/04/24 00:11:56 zeev Exp $ */
 /* 
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -331,7 +331,7 @@ void php3_getimagesize(INTERNAL_FUNCTION_PARAMETERS)
             RETURN_FALSE;
         }
 
-		pval_destructor(info _INLINE_TLS);
+		pval_destructor(info);
 		if (array_init(info) == FAILURE) {
 			return;
 		}

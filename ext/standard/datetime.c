@@ -30,7 +30,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.3 1999/04/23 20:05:59 zeev Exp $ */
+/* $Id: datetime.c,v 1.4 1999/04/24 00:11:55 zeev Exp $ */
 
 
 #include "php.h"
@@ -153,7 +153,6 @@ _php3_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 	struct tm *ta;
 	int i, size = 0, length, h;
 	char tmp_buff[16];
-	TLS_VARS;
 
 	switch(ARG_COUNT(ht)) {
 	case 1:
@@ -423,7 +422,6 @@ void php3_checkdate(INTERNAL_FUNCTION_PARAMETERS)
 {
 	pval *month, *day, *year;
 	int m, d, y;
-	TLS_VARS;
 	
 	if (ARG_COUNT(ht) != 3 ||
 		getParameters(ht, 3, &month, &day, &year) == FAILURE) {

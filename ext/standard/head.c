@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.65 2002/09/17 13:54:40 hholzgra Exp $ */
+/* $Id: head.c,v 1.66 2002/11/07 00:23:58 iliaa Exp $ */
 
 #include <stdio.h>
 
@@ -183,7 +183,11 @@ PHP_FUNCTION(headers_sent)
 		ZVAL_LONG(arg2, line);
 	case 1:
 		zval_dtor(arg1);
-		ZVAL_STRING(arg1, file, 1);
+		if (file) { 
+			ZVAL_STRING(arg1, file, 1);
+		} else {
+			ZVAL_STRING(arg1, "", 1);
+		}	
 		break;
 	}
 

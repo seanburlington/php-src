@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.28 2003/05/26 02:00:37 iliaa Exp $ */
+/* $Id: string.c,v 1.333.2.29 2003/05/26 20:56:01 msopacua Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -36,6 +36,9 @@
 #endif
 #ifdef HAVE_MONETARY_H
 # include <monetary.h>
+#endif
+#ifdef HAVE_LIBINTL
+# include <libintl.h> /* for LC_MESSAGES */
 #endif
 #include "scanf.h"
 #include "zend_API.h"

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.87.2.1 2004/07/22 03:26:59 pollita Exp $ 
+  $Id: mysqli_api.c,v 1.87.2.2 2004/08/12 22:11:46 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1243,6 +1243,12 @@ PHP_FUNCTION(mysqli_prepare)
 
 	if ((stmt->stmt = mysql_stmt_init(mysql->mysql))) {
 		if (mysql_stmt_prepare(stmt->stmt, query, query_len)) {
+			if (stmt->stmt->last_errno) {
+				/* if we close the statement handle, we have to copy the errors to connection handle */
+				mysql->mysql->net.last_errno = stmt->stmt->last_errno;
+				strcpy(mysql->mysql->net.last_error, stmt->stmt->last_error);
+				strcpy(mysql->mysql->net.sqlstate, stmt->stmt->sqlstate);
+			}
 			mysql_stmt_close(stmt->stmt);
 			stmt->stmt = NULL;
 		}

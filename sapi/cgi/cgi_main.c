@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.251 2004/03/12 14:05:59 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.252 2004/03/31 17:01:01 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -98,7 +98,7 @@ static void (*php_php_import_environment_variables)(zval *array_ptr TSRMLS_DC);
 /**
  * Number of child processes that will get created to service requests
  */
-static int children = 0;
+static int children = 8;
 
 /**
  * Set to non-zero if we are the parent process

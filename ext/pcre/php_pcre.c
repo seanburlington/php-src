@@ -16,13 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.37 2000/01/01 01:31:46 sas Exp $ */
+/* $Id: php_pcre.c,v 1.38 2000/01/15 21:35:50 andrei Exp $ */
 
 /*
 	TODO:
 	- Allow user to set PCRE_NOTEMPTY, PCRE_ANCHORED at execution time
 	- Make new modifier, similar to /e, that passes matches to
 	  a user-defined function
+	- add option to preg_grep() to return entries that _don't_ match
 */
 
 #include "php.h"

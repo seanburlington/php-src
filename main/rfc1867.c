@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.42 2000/09/04 20:47:52 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.43 2000/09/04 21:23:41 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -35,7 +35,7 @@
 
 static void add_protected_variable(char *varname PLS_DC)
 {
-	int dummy=0;
+	int dummy=1;
 
 	zend_hash_add(&PG(rfc1867_protected_variables), varname, strlen(varname)+1, &dummy, sizeof(int), NULL);
 }
@@ -211,7 +211,6 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr)
 					} else {
 						safe_php_register_variable(lbuf, filenamebuf, NULL ELS_CC PLS_CC);
 					}
-					add_protected_variable(lbuf PLS_CC);
 
 					/* Add $foo[name] */
                     if (is_arr_upload) {
@@ -350,6 +349,7 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr)
 					}
 				}
 				safe_php_register_variable(namebuf, fn, NULL ELS_CC PLS_CC);
+				add_protected_variable(namebuf PLS_CC);
 
 				/* Add $foo[tmp_name] */
 				if(is_arr_upload) {

@@ -16,14 +16,15 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.31 2001/01/13 13:59:22 zeev Exp $ */
+/* $Id: file.h,v 1.32 2001/01/13 23:49:44 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
 #ifndef FILE_H
 #define FILE_H
 
-extern PHP_MINIT_FUNCTION(file);
+PHP_MINIT_FUNCTION(file);
+PHP_MSHUTDOWN_FUNCTION(file);
 
 PHP_FUNCTION(tempnam);
 PHP_NAMED_FUNCTION(php_if_tmpfile);

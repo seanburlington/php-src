@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.59 2001/01/13 22:00:23 derick Exp $ */
+/* $Id: fsock.c,v 1.60 2001/01/13 23:49:44 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -714,19 +714,6 @@ void php_msock_destroy(int *data)
 }
 /* }}} */
 
-
-PHP_MINIT_FUNCTION(fsock)
-{
-	return SUCCESS;
-}
-
-PHP_MSHUTDOWN_FUNCTION(fsock)
-{
-#ifndef ZTS
-	fsock_globals_dtor(FLS_C);
-#endif
-	return SUCCESS;
-}
 
 PHP_RSHUTDOWN_FUNCTION(fsock)
 {

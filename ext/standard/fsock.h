@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.h,v 1.30 2001/01/13 13:59:22 zeev Exp $ */
+/* $Id: fsock.h,v 1.31 2001/01/13 23:49:44 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.24 1999-06-18 [ssb] */
 
@@ -87,8 +87,6 @@ void php_cleanup_sockbuf(int persistent FLS_DC);
 PHPAPI int connect_nonb(int sockfd, struct sockaddr *addr, socklen_t addrlen, struct timeval *timeout);
 PHPAPI struct php_sockbuf *php_get_socket(int socket);
 
-PHP_MINIT_FUNCTION(fsock);
-PHP_MSHUTDOWN_FUNCTION(fsock);
 PHP_RSHUTDOWN_FUNCTION(fsock);
 
 #endif /* FSOCK_H */

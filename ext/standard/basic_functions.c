@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.295 2001/01/09 15:11:23 hirokawa Exp $ */
+/* $Id: basic_functions.c,v 1.296 2001/01/13 23:49:44 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -710,7 +710,6 @@ PHP_MINIT_FUNCTION(basic)
 
 	PHP_MINIT(regex)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(file)(INIT_FUNC_ARGS_PASSTHRU);
-	PHP_MINIT(fsock)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(pack)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(browscap)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(lcg)(INIT_FUNC_ARGS_PASSTHRU);
@@ -763,13 +762,13 @@ PHP_MSHUTDOWN_FUNCTION(basic)
 	UNREGISTER_INI_ENTRIES();
 
 	PHP_MSHUTDOWN(regex)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
-	PHP_MSHUTDOWN(fsock)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_MSHUTDOWN(browscap)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_MSHUTDOWN(array)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_MSHUTDOWN(assert)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #ifdef TRANS_SID
 	PHP_MSHUTDOWN(url_scanner_ex)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #endif
+	PHP_MSHUTDOWN(file)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 
 	return SUCCESS;
 }

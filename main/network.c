@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.83.2.14 2003/05/20 22:14:47 wez Exp $ */
+/* $Id: network.c,v 1.83.2.15 2003/05/24 03:15:53 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -193,7 +193,11 @@ static int php_network_getaddresses(const char *host, struct sockaddr ***sal TSR
 		hints.ai_family = AF_INET;
 #  endif
 		if ((n = getaddrinfo(host, NULL, &hints, &res))) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: getaddrinfo failed: %s", PHP_GAI_STRERROR(n));
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: getaddrinfo failed: %s"
+# ifdef HAVE_IPV6 
+					" (is your IPV6 configuration correct? If this error happens all the time, try reconfiguring PHP using --disable-ipv6 option to configure)"
+#endif
+					, PHP_GAI_STRERROR(n));
 			return 0;
 		} else if (res == NULL) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: getaddrinfo failed (null result pointer)");

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.290 2002/09/05 21:29:39 kalowsky Exp $ */
+/* $Id: string.c,v 1.291 2002/09/11 14:24:27 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -856,7 +856,7 @@ PHP_FUNCTION(implode)
 
 #define STRTOK_TABLE(p) BG(strtok_table)[(unsigned char) *p]	
 
-/* {{{ proto string strtok([string str,] string token)
+/* {{{ proto string strtok(string str [, string token])
    Tokenize a string */
 PHP_FUNCTION(strtok)
 {

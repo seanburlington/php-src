@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.81 2003/01/18 19:49:25 iliaa Exp $ */
+/* $Id: dba.c,v 1.82 2003/01/31 19:12:23 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -682,7 +682,7 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 /* }}} */
 #undef FREENOW
 
-/* {{{ proto int dba_popen(string path [, string mode, string handlername, string ...])
+/* {{{ proto int dba_popen(string path, string mode [, string handlername, string ...])
    Opens path using the specified handler in mode persistently */
 PHP_FUNCTION(dba_popen)
 {

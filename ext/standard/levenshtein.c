@@ -15,7 +15,7 @@
    | Author: Bjørn Borud - Guardian Networks AS <borud@guardian.no>       |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.1 2000/05/23 14:10:37 hholzgra Exp $ */
+/* $Id: levenshtein.c,v 1.2 2000/05/23 14:37:39 hholzgra Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -93,9 +93,9 @@ int calc_levdist(const char *s1, const char *s2) /* faster, but obfuscated */
 }
 
 
-/* {{{ proto int levdist(string str1, string str2)
+/* {{{ proto int levenshtein(string str1, string str2)
    Calculate Levenshtein distance between two strings */
-PHP_FUNCTION(levdist){
+PHP_FUNCTION(levenshtein){
 	zval **str1, **str2;
 	int l;
 
@@ -108,7 +108,7 @@ PHP_FUNCTION(levdist){
 	l = calc_levdist((*str1)->value.str.val, (*str2)->value.str.val);
 
 	if(l<0) {
-		php_error(E_WARNING,"levdist(): argument string(s) to long");
+		php_error(E_WARNING,"levenshtein(): argument string(s) to long");
 	}
 
 	RETURN_LONG(l);

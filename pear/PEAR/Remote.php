@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.27 2002/06/17 10:26:55 ssb Exp $
+// $Id: Remote.php,v 1.28 2002/06/17 10:58:34 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -139,10 +139,12 @@ class PEAR_Remote extends PEAR
             $tmp = base64_encode("$username:$password");
             $req_headers .= "Authorization: Basic $tmp\r\n";
         }
-        print "XMLRPC REQUEST HEADERS:\n";
-        var_dump($req_headers);
-        print "XMLRPC REQUEST BODY:\n";
-        var_dump($request);
+        if ($this->config->get('verbose') > 3) {
+            print "XMLRPC REQUEST HEADERS:\n";
+            var_dump($req_headers);
+            print "XMLRPC REQUEST BODY:\n";
+            var_dump($request);
+        }
         fwrite($fp, ("POST /xmlrpc.php HTTP/1.0\r\n$req_headers\r\n$request"));
         $response = '';
         $line1 = fgets($fp, 2048);

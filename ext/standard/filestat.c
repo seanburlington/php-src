@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.41 2000/06/25 17:02:45 zeev Exp $ */
+/* $Id: filestat.c,v 1.42 2000/07/27 13:28:21 stas Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -402,8 +402,10 @@ PHP_FUNCTION(touch)
 	}
 
 	/* Check the basedir */
-	if (php_check_open_basedir((*filename)->value.str.val))
+	if (php_check_open_basedir((*filename)->value.str.val)) {
+		if (newtime) efree(newtime);
 		RETURN_FALSE;
+	}
 
 	/* create the file if it doesn't exist already */
 	ret = V_STAT((*filename)->value.str.val, &sb);

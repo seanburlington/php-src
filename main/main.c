@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.321 2000/09/30 16:11:15 andi Exp $ */
+/* $Id: main.c,v 1.322 2000/10/03 14:43:04 andi Exp $ */
 
 
 #include <stdio.h>
@@ -44,6 +44,7 @@
 #include <locale.h>
 #endif
 #include "zend.h"
+#include "zend_extensions.h"
 #include "php_ini.h"
 #include "php_globals.h"
 #include "php_main.h"

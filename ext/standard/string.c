@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.159 2000/09/27 15:18:00 sas Exp $ */
+/* $Id: string.c,v 1.160 2000/10/03 14:43:03 andi Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -697,7 +697,8 @@ PHP_FUNCTION(basename)
 }
 /* }}} */
 
-PHPAPI void php_dirname(char *str, int len) {
+PHPAPI void php_dirname(char *str, int len)
+{
 	register char *c;
 
 	c = str + len - 1;

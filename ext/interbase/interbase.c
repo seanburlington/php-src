@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.25 2000/05/04 12:28:00 jah Exp $ */
+/* $Id: interbase.c,v 1.26 2000/05/04 13:43:06 jah Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -508,7 +508,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.25 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.26 $");
 #if defined(COMPILE_DL) || defined(COMPILE_DL_INTERBASE)
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1600,6 +1600,11 @@ static int _php_ibase_var_pval(pval *val, void *data, int type, int len, int sca
 			long timestamp = -1;
 					 
 			isc_decode_date((ISC_QUAD *) data, &t);
+			/*
+			  XXX - Might have to remove this later - seems that isc_decode_date()
+			   always sets tm_isdst to 0, sometimes incorrectly (InterBase 6 bug?)
+			*/
+			t.tm_isdst = -1;
 			timestamp = mktime(&t);
 #if HAVE_TM_ZONE
 			t.tm_zone = tzname[0];

@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.49 2002/04/30 00:16:00 wez Exp $ */
+/* $Id: network.c,v 1.50 2002/04/30 00:20:34 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 #define MAX_CHUNKS_PER_READ 10
@@ -601,7 +601,7 @@ static inline void dump_sock_state(char *msg, php_netstream_data_t *sock TSRMLS_
 
 static void php_sock_stream_wait_for_data(php_stream *stream, php_netstream_data_t *sock TSRMLS_DC)
 {
-	fd_set fdr, tfdr, fdx;
+	fd_set fdr, tfdr;
 	int retval;
 	struct timeval timeout, *ptimeout;
 
@@ -617,12 +617,11 @@ static void php_sock_stream_wait_for_data(php_stream *stream, php_netstream_data
 	
 	while(1) {
 		tfdr = fdr;
-		fdx = fdr;
 		timeout = sock->timeout;
 
 DUMP_SOCK_STATE("wait_for_data", sock);
 
-		retval = select(sock->socket + 1, &tfdr, NULL, &fdx, ptimeout);
+		retval = select(sock->socket + 1, &tfdr, NULL, NULL, ptimeout);
 
 		if (retval == 0)
 			sock->timeout_event = 1;

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.26 2003/01/30 21:11:29 sas Exp $ */
+/* $Id: streams.c,v 1.125.2.27 2003/02/13 01:23:39 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1023,6 +1023,7 @@ PHPAPI size_t _php_stream_passthru(php_stream * stream STREAMS_DC TSRMLS_DC)
 #ifdef HAVE_MMAP
 	if (!php_stream_is(stream, PHP_STREAM_IS_SOCKET)
 			&& stream->filterhead == NULL
+			&& php_stream_tell(stream) == 0
 			&& SUCCESS == php_stream_cast(stream, PHP_STREAM_AS_FD, (void*)&fd, 0))
 	{
 		struct stat sbuf;

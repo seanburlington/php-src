@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.81 2001/12/06 04:44:23 jason Exp $ */
+/* $Id: sockets.c,v 1.82 2001/12/06 19:18:41 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -437,7 +437,7 @@ PHP_FUNCTION(socket_fd_alloc)
 }
 /* }}} */
 
-/* {{{ proto bool socket_fd_dealloc(resource set)
+/* {{{ proto bool socket_fd_free(resource set)
    Deallocates a file descriptor set */
 PHP_FUNCTION(socket_fd_free)
 {

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.13 2005/02/27 05:20:18 wez Exp $ */
+/* $Id: sqlite_statement.c,v 1.14 2005/02/28 01:30:14 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -145,7 +145,6 @@ static int pdo_sqlite_stmt_fetch(pdo_stmt_t *stmt,
 	if (S->done) {
 		return 0;
 	}
-
 	i = sqlite3_step(S->stmt);
 	switch (i) {
 		case SQLITE_ROW:
@@ -182,11 +181,9 @@ static int pdo_sqlite_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC)
 		case SQLITE_FLOAT:
 		case SQLITE3_TEXT:
 		case SQLITE_BLOB:
-			stmt->columns[colno].param_type = PDO_PARAM_STR;
-			break;
 		case SQLITE_NULL:
 		default:
-			stmt->columns[colno].param_type = PDO_PARAM_NULL;
+			stmt->columns[colno].param_type = PDO_PARAM_STR;
 			break;
 	}
 
@@ -204,7 +201,6 @@ static int pdo_sqlite_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr, unsi
 		pdo_sqlite_error_stmt(stmt);
 		return 0;
 	}
-
 	switch (sqlite3_column_type(S->stmt, colno)) {
 		case SQLITE_NULL:
 			*ptr = NULL;

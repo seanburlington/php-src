@@ -15,7 +15,7 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.19 2001/06/06 13:05:53 rasmus Exp $ */
+/* $Id: network.c,v 1.20 2001/08/10 20:18:42 jeroen Exp $ */
 
 #include "php.h"
 
@@ -31,6 +31,10 @@
 #include <sys/types.h>
 #if HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
+#endif
+
+#ifndef _FCNTL_H
+#include <fcntl.h>
 #endif
 
 #ifndef PHP_WIN32

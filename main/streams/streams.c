@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.51 2004/03/07 21:36:55 wez Exp $ */
+/* $Id: streams.c,v 1.52 2004/03/07 22:06:36 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1891,7 +1891,7 @@ PHPAPI int _php_stream_scandir(char *dirname, php_stream_dirent **namelist[], in
 	*namelist = vector;
 
 	if (compare) {
-		qsort(*namelist, nfiles, sizeof(php_stream_dirent *), compare);
+		qsort(*namelist, nfiles, sizeof(php_stream_dirent *), (int(*)(const void *, const void *))compare);
 	}
 	return nfiles;
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx_api.h,v 1.11 2001/02/06 03:54:15 andrei Exp $ */
+/* $Id: php_wddx_api.h,v 1.12 2001/02/06 04:15:50 andrei Exp $ */
 
 #ifndef PHP_WDDX_API_H
 #define PHP_WDDX_API_H
@@ -61,6 +61,6 @@ void 		 php_wddx_packet_end(wddx_packet *packet);
 
 void 		 php_wddx_serialize_var(wddx_packet *packet, zval *var, char *name);
 int 		 php_wddx_deserialize_ex(char *, int, zval *return_value);
-char		*php_wddx_gather(wddx_packet *packet);
+#define php_wddx_gather(packet) estrndup(packet->c, packet->len)
 
 #endif /* PHP_WDDX_API_H */

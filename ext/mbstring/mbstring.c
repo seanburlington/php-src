@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.208 2004/01/17 12:59:30 sniper Exp $ */
+/* $Id: mbstring.c,v 1.209 2004/02/28 20:45:23 moriyoshi Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -610,10 +610,10 @@ static PHP_INI_MH(OnUpdate_mbstring_internal_encoding)
 		MBSTRG(current_internal_encoding) = no_encoding;
 #if HAVE_MBREGEX
  		{
- 			php_mb_reg_char_encoding mbctype;
+ 			OnigEncoding mbctype;
  			mbctype = php_mb_regex_name2mbctype(new_value);
- 			if (mbctype == REGCODE_UNDEF) {
- 				mbctype = REGCODE_EUCJP;
+ 			if (mbctype == ONIG_ENCODING_UNDEF) {
+ 				mbctype = ONIG_ENCODING_EUC_JP;
  			}
  			MBSTRG(current_mbctype) = MBSTRG(default_mbctype) = mbctype;
 		}
@@ -995,7 +995,7 @@ PHP_MINFO_FUNCTION(mbstring)
 	php_info_print_table_end();
 
 	php_info_print_table_start();
-	php_info_print_table_colspan_header(2, "mbstring extension makes use of \"streamable kanji code filter and converter\", which is distributed under the GNU Lesser General Public License version 2.1.");
+	php_info_print_table_header(1, "mbstring extension makes use of \"streamable kanji code filter and converter\", which is distributed under the GNU Lesser General Public License version 2.1.");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

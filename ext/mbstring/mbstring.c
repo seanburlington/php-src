@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.46 2002/02/10 02:27:09 yohgaki Exp $ */
+/* $Id: mbstring.c,v 1.47 2002/02/23 00:04:20 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -479,8 +479,8 @@ php_mbstring_init_globals(zend_mbstring_globals *pglobals)
 	pglobals->current_language = mbfl_no_language_japanese;
 	pglobals->internal_encoding = mbfl_no_encoding_euc_jp;
 	pglobals->current_internal_encoding = mbfl_no_encoding_euc_jp;
-	pglobals->http_output_encoding = mbfl_no_encoding_invalid;
-	pglobals->current_http_output_encoding = mbfl_no_encoding_invalid;
+	pglobals->http_output_encoding = mbfl_no_encoding_pass;
+	pglobals->current_http_output_encoding = mbfl_no_encoding_pass;
 	pglobals->http_input_identify = mbfl_no_encoding_invalid;
 	pglobals->http_input_identify_get = mbfl_no_encoding_invalid;
 	pglobals->http_input_identify_post = mbfl_no_encoding_invalid;

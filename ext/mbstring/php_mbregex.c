@@ -30,7 +30,7 @@
  *    Tsukada Takuya <tsukada@fminn.nagano.nagano.jp>
  */
 
-/* $Id: php_mbregex.c,v 1.1 2002/01/11 13:21:09 hirokawa Exp $ */
+/* $Id: php_mbregex.c,v 1.2 2002/02/23 00:04:20 hirokawa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -231,7 +231,7 @@ php_mbregex_init_option(const char *parg, int narg, int *option, int *eval)
  */
 
 /* {{{ proto string mb_regex_encoding([string encoding])
-   Returns the current encoding as a string. */
+   Returns the current encoding for regex as a string. */
 PHP_FUNCTION(mb_regex_encoding)
 {
 	zval **arg1;

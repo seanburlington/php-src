@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.385 2001/08/13 07:55:37 rasmus Exp $ */
+/* $Id: basic_functions.c,v 1.385.2.1 2001/08/15 23:21:05 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -303,12 +303,6 @@ function_entry basic_functions[] = {
 	PHP_FE(log,										NULL)
 	PHP_FE(log10,									NULL)
 	PHP_FE(sqrt,									NULL)
-	PHP_FE(exp2,									NULL)
-	PHP_FE(exp10,									NULL)
-	PHP_FE(log2,									NULL)
-#ifndef PHP_WIN32
-	PHP_FE(cbrt,									NULL)
-#endif
 	PHP_FE(hypot,									NULL)
 #ifndef PHP_WIN32
 	PHP_FE(expm1,									NULL)

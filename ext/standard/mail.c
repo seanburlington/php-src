@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.64 2002/09/22 16:14:11 imajes Exp $ */
+/* $Id: mail.c,v 1.65 2002/09/22 16:23:44 derick Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -230,7 +230,7 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 /* {{{ PHP_MINFO_FUNCTION
  */
 PHP_MINFO_FUNCTION(mail)
-
+{
 	char *sendmail_path = INI_STR("sendmail_path");
 
 #ifdef PHP_WIN32

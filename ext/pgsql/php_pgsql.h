@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.32 2001/07/28 11:36:09 zeev Exp $ */
+/* $Id: php_pgsql.h,v 1.32.2.1 2001/09/26 21:47:18 zeev Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -123,6 +123,7 @@ typedef struct {
 	int le_lofp,le_string;
 	int ignore_notices;
 	char *last_notice;
+	uint last_notice_len;
 } php_pgsql_globals;
 
 

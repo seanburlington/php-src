@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_fdf.h,v 1.8 2000/07/24 01:39:45 david Exp $ */
+/* $Id: php_fdf.h,v 1.9 2000/08/07 11:37:42 steinm Exp $ */
 
 #ifndef PHP_FDF_H
 #define PHP_FDF_H
@@ -49,6 +49,9 @@ PHP_FUNCTION(fdf_set_status);
 PHP_FUNCTION(fdf_set_file);
 PHP_FUNCTION(fdf_get_file);
 PHP_FUNCTION(fdf_add_template);
+PHP_FUNCTION(fdf_set_flags);
+PHP_FUNCTION(fdf_set_opt);
+PHP_FUNCTION(fdf_set_submit_form_action);
 #else
 #define fdf_module_ptr NULL
 #endif

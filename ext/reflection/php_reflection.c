@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.105 2004/05/31 21:46:00 helly Exp $ */
+/* $Id: php_reflection.c,v 1.106 2004/05/31 21:49:52 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -942,7 +942,6 @@ static void _reflection_export(INTERNAL_FUNCTION_PARAMETERS, zend_class_entry *c
 	}
 
 	INIT_PZVAL(&output);
-	output.refcount = 1;
 
 	/* Create object */
 	INIT_PZVAL(&reflector);

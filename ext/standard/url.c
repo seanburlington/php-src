@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.58.2.17 2004/10/01 18:28:44 magnus Exp $ */
+/* $Id: url.c,v 1.58.2.18 2004/12/20 19:29:38 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -97,7 +97,7 @@ PHPAPI php_url *php_url_parse_ex(char const *str, int length)
 {
 	char port_buf[6];
 	php_url *ret = ecalloc(1, sizeof(php_url));
-	char *s, *e, *p, *pp, *ue;
+	const char *s, *e, *p, *pp, *ue;
 		
 	s = str;
 	ue = s + length;

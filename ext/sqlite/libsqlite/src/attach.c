@@ -11,7 +11,7 @@
 *************************************************************************
 ** This file contains code used to implement the ATTACH and DETACH commands.
 **
-** $Id: attach.c,v 1.2 2003/06/06 22:44:56 wez Exp $
+** $Id: attach.c,v 1.2.6.1 2004/01/14 17:59:07 iliaa Exp $
 */
 #include "sqliteInt.h"
 
@@ -64,7 +64,6 @@ void sqliteAttach(Parse *pParse, Token *pFilename, Token *pDbname){
       sqliteErrorMsg(pParse, "database %z is already in use", zName);
       pParse->rc = SQLITE_ERROR;
       sqliteFree(zFile);
-      sqliteFree(zName);
       return;
     }
   }
@@ -92,8 +91,16 @@ void sqliteAttach(Parse *pParse, Token *pFilename, Token *pDbname){
   sqliteFree(zFile);
   db->flags &= ~SQLITE_Initialized;
   if( pParse->nErr ) return;
-  rc = sqliteInit(pParse->db, &pParse->zErrMsg);
+  if( rc==SQLITE_OK ){
+    rc = sqliteInit(pParse->db, &pParse->zErrMsg);
+  }
   if( rc ){
+    int i = db->nDb - 1;
+    assert( i>=2 );
+    if( db->aDb[i].pBt ){
+      sqliteBtreeClose(db->aDb[i].pBt);
+      db->aDb[i].pBt = 0;
+    }
     sqliteResetInternalSchema(db, 0);
     pParse->nErr++;
     pParse->rc = SQLITE_ERROR;

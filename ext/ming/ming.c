@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.42.2.10 2003/11/06 07:29:00 fmk Exp $ */
+/* $Id: ming.c,v 1.42.2.11 2003/11/06 16:49:52 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -219,8 +219,10 @@ static SWFCharacter getCharacter(zval *id TSRMLS_DC)
 		return (SWFCharacter)getBitmap(id TSRMLS_CC);
 	else if(Z_OBJCE_P(id) == &sound_class_entry)
 		return (SWFCharacter)getSound(id TSRMLS_CC);
-//	else if(Z_OBJCE_P(id) == &soundinstance_class_entry)
-//		return (SWFCharacter)getSoundInstance(id TSRMLS_CC);
+/*
+	else if(Z_OBJCE_P(id) == &soundinstance_class_entry)
+		return (SWFCharacter)getSoundInstance(id TSRMLS_CC);
+*/
 	else
 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Called object is not an SWFCharacter");
 		return NULL;
@@ -1461,7 +1463,7 @@ PHP_FUNCTION(swffont_getUTF8Width)
 }
 
 /* }}} */
-// not sure about 0 bytes !!!!!!!!!
+/* not sure about 0 bytes !!!!!!!!! */
 /* {{{ proto int swffont_getWideWidth(string)
    Calculates the width of the given string in this font at full height */
 /*

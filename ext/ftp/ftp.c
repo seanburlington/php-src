@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.103.2.2 2004/10/05 23:53:14 iliaa Exp $ */
+/* $Id: ftp.c,v 1.103.2.3 2005/01/05 09:40:49 hyanantha Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,13 +42,9 @@
 #ifdef USE_WINSOCK    /* Modified to use Winsock (NOVSOCK2.H), atleast for now */
 #include <novsock2.h>
 #else
-#ifdef NEW_LIBC
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#else
-#include <sys/socket.h>
-#endif
 #endif
 #else
 #ifdef HAVE_SYS_TYPES_H
@@ -77,7 +73,7 @@
 #include "ext/standard/fsock.h"
 
 /* Additional headers for NetWare */
-#if defined(NETWARE) && defined(NEW_LIBC) && !defined(USE_WINSOCK)
+#if defined(NETWARE) && !defined(USE_WINSOCK)
 #include <sys/select.h>
 #endif
 

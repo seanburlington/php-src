@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.38 2000/01/15 19:41:17 andrei Exp $ */
+/* $Id: fsock.c,v 1.39 2000/01/15 19:51:44 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -532,24 +532,27 @@ static void php_sockwait_for_data(php_sockbuf *sock)
 {
 	fd_set fdr, tfdr;
 	int retval;
-	struct timeval timeout;
+	struct timeval timeout, *ptimeout;
 
 	FD_ZERO(&fdr);
 	FD_SET(sock->socket, &fdr);
 	sock->timeout_event = 0;
 
+	if (timeout.tv_sec == -1) 
+		ptimeout = NULL;
+	else
+		ptimeout = &timeout;
+
 	while(1) {
 		tfdr = fdr;
 		timeout = sock->timeout;
-		if (timeout.tv_sec == -1)
-			retval = select(sock->socket + 1, &tfdr, NULL, NULL, NULL);
-		else {
-			retval = select(sock->socket + 1, &tfdr, NULL, NULL, &timeout);
-			if (retval == 0)
-				sock->timeout_event = 1;
-		}
 
-		if(retval == 1 || retval == 0)
+		retval = select(sock->socket + 1, &tfdr, NULL, NULL, ptimeout);
+		
+		if (retval == 0)
+			sock->timeout_event = 1;
+
+		if (retval >= 0)
 			break;
 	}
 }

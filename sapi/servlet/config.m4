@@ -1,4 +1,4 @@
-# $Id: config.m4,v 1.4 1999/12/30 02:59:50 sas Exp $
+# $Id: config.m4,v 1.5 2000/01/30 00:42:25 rubys Exp $
 # config.m4 for servlet sapi
 
 AC_MSG_CHECKING(for Servlet support)
@@ -25,6 +25,9 @@ AC_ARG_WITH(servlet,
     fi
 
     AC_DEFINE(SAPI_SERVLET, 1, [Whether you use Servlet])
+
+    INSTALL_IT="\$(INSTALL) -m 0755 \$(srcdir)/sapi/servlet/phpsrvlt.jar \$(libdir)/$SAPI_CGI"
+    INSTALL_IT="$INSTALL_IT; \$(INSTALL) -m 0755 $SAPI_SHARED \$(libdir)/$SAPI_CGI"
     PHP_EXTENSION(servlet, "shared")
     PHP_SAPI=servlet
     PHP_BUILD_SHARED

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.35 2003/06/19 23:07:14 edink Exp $ */
+/* $Id: php_curl.h,v 1.36 2003/06/19 23:13:28 edink Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -75,7 +75,7 @@ PHP_FUNCTION(curl_multi_exec);
 PHP_FUNCTION(curl_multi_getcontent);
 PHP_FUNCTION(curl_multi_info_read);
 PHP_FUNCTION(curl_multi_close);
-void _php_curl_multi_close(zend_rsrc_list_entry *);
+void _php_curl_multi_close(zend_rsrc_list_entry * TSRMLS_DC);
 
 typedef struct {
 	zval          *func_name;

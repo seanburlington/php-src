@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: multi.c,v 1.11 2003/06/10 20:03:26 imajes Exp $ */
+/* $Id: multi.c,v 1.12 2003/06/19 23:13:28 edink Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -247,7 +247,7 @@ PHP_FUNCTION(curl_multi_close)
 }
 /* }}} */
 
-void _php_curl_multi_close(zend_rsrc_list_entry *rsrc)
+void _php_curl_multi_close(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	php_curlm *mh = (php_curlm *) rsrc->ptr;
 	curl_multi_cleanup(mh->multi);

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.210 2002/03/16 16:06:14 wez Exp $ */
+/* $Id: file.c,v 1.211 2002/03/16 16:14:56 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -372,7 +372,7 @@ PHP_FUNCTION(get_file_contents)
 {
 	char *filename;
 	int filename_len;
-	char *contents, *target_buf;
+	char *contents;
 	zend_bool use_include_path = 0;
 	php_stream *stream;
 	int len, newlen;
@@ -398,7 +398,7 @@ PHP_FUNCTION(get_file_contents)
 			len = newlen;
 		}
 
-		RETVAL_STRINGL(contents, len);
+		RETVAL_STRINGL(contents, len, 0);
 	} else {
 		RETVAL_FALSE;
 	}

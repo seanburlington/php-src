@@ -17,7 +17,7 @@
  *  significantly more enjoyable.)
  */
 #ifndef lint
-static const char rcsid[] = "$Id: os_win32.c,v 1.1 2002/03/10 21:39:28 shane Exp $";
+static const char rcsid[] = "$Id: os_win32.c,v 1.2 2002/03/11 07:58:52 sebastian Exp $";
 #endif /* not lint */
 
 #define WIN32_LEAN_AND_MEAN 
@@ -1891,7 +1891,6 @@ int OS_IsFcgi(int sock)
 void OS_SetFlags(int fd, int flags)
 {
     unsigned long pLong = 1L;
-    int err;
 
     if (fdTable[fd].type == FD_SOCKET_SYNC && flags == O_NONBLOCK) {
         if (ioctlsocket(fdTable[fd].fid.sock, FIONBIO, &pLong) ==

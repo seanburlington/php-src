@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.208 2001/06/08 11:45:53 sas Exp $ */
+/* $Id: session.c,v 1.209 2001/06/10 14:12:28 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -272,7 +272,7 @@ int php_get_session_var(char *name, size_t namelen, zval ***state_var PLS_DC PSL
 	if (!PG(register_globals))
 		ht = PS(http_session_vars) ? Z_ARRVAL_P(PS(http_session_vars)) : NULL;
 
-	if (!ht) return NULL;
+	if (!ht) return HASH_KEY_NON_EXISTANT;
 	
 	return zend_hash_find(ht, name, namelen + 1, (void **)state_var);
 }

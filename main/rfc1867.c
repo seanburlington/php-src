@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.122.2.18 2004/05/02 10:17:36 sesser Exp $ */
+/* $Id: rfc1867.c,v 1.122.2.19 2004/05/21 08:14:24 derick Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -830,7 +830,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 	while (!multipart_buffer_eof(mbuff TSRMLS_CC))
 	{
 		char buff[FILLUNIT];
-		char *cd=NULL,*param=NULL,*filename=NULL;
+		char *cd=NULL,*param=NULL,*filename=NULL, *tmp=NULL;
 		int blen=0, wlen=0;
 
 		zend_llist_clean(&header);
@@ -1031,12 +1031,21 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 					php_mb_gpc_encoding_converter(&filename, &str_len, 1, NULL, NULL TSRMLS_CC);
 				}
 				s = php_mb_strrchr(filename, '\\' TSRMLS_CC);
+				if (tmp = php_mb_strrchr(filename, '/')) {
+					s = tmp;
+				}
 				num_vars--;
 			} else {
 				s = strrchr(filename, '\\');
+				if (tmp = strrchr(filename, '/')) {
+					s = tmp;
+				}
 			}
 #else
 			s = strrchr(filename, '\\');
+			if (tmp = strrchr(filename, '/')) {
+				s = tmp;
+			}
 #endif
 			if (s && s > filename) {
 				safe_php_register_variable(lbuf, s+1, NULL, 0 TSRMLS_CC);

@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.27 2002/09/12 21:52:09 sesser Exp $ */
+/* $Id: php_network.h,v 1.28 2002/09/23 01:47:04 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -103,13 +103,8 @@ int php_sockaddr_size(php_sockaddr_storage *addr);
 
 struct _php_netstream_data_t	{
 	int socket;
-	unsigned char *readbuf;
-	size_t readbuflen;
-	size_t readpos;
-	size_t writepos;
 	char eof;
 	char is_blocked;
-	size_t chunk_size;
 	struct timeval timeout;
 	char timeout_event;
 #if HAVE_OPENSSL_EXT

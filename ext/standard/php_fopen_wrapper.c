@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.23 2002/09/07 20:54:14 wez Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.24 2002/09/23 01:47:01 wez Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -59,10 +59,10 @@ php_stream_ops php_stream_output_ops = {
 	php_stream_output_close,
 	php_stream_output_flush,
 	"Output",
-	NULL,
-	NULL,
-	NULL,
-	NULL
+	NULL, /* seek */
+	NULL, /* cast */
+	NULL, /* stat */
+	NULL  /* set_option */
 };
 
 php_stream * php_stream_url_wrap_php(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC)

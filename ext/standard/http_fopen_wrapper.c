@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.47 2002/09/14 12:09:47 jan Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.48 2002/09/23 01:47:01 wez Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -388,6 +388,9 @@ out:
 		php_stream_notify_progress_init(context, 0, file_size);
 		if (options & STREAM_WILL_CAST)
 			php_stream_sock_set_chunk_size(stream, chunk_size TSRMLS_CC);
+		/* as far as streams are concerned, we are now at the start of
+		 * the stream */
+		stream->position = 0;
 	}
 
 	if (response_header)	{

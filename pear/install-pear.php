@@ -1,6 +1,6 @@
 <?php
 
-/* $Id: install-pear.php,v 1.11 2003/07/03 06:45:49 cox Exp $ */
+/* $Id: install-pear.php,v 1.12 2003/07/03 07:08:21 cox Exp $ */
 
 $pear_dir = dirname(__FILE__);
 ini_set('include_path', $pear_dir);
@@ -117,6 +117,7 @@ foreach ($install_files as $package => $instfile) {
         }
         $ui->outputData('Writing PEAR system config file at: ' . $config->files['system']);
         $ui->outputData('You may want to add: ' . $config->get('php_dir') . ' to your php.ini include_path');
+        $config->set('verbose', 1, 'default');
         foreach ($config->getKeys() as $key) {
             $data[$key] = $config->get($key);
         }

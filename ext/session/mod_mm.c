@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_mm.c,v 1.44 2004/01/08 08:17:23 andi Exp $ */
+/* $Id: mod_mm.c,v 1.45 2004/06/30 01:12:06 iliaa Exp $ */
 
 #include "php.h"
 
@@ -264,7 +264,7 @@ PHP_MINIT_FUNCTION(ps_mm)
 		return FAILURE;
 		
     /* Directory + '/' + File + Module Name + Effective UID + \0 */	
-	ps_mm_path = do_alloca(save_path_len+1+sizeof(PS_MM_FILE)+mod_name_len+strlen(euid)+1);
+	ps_mm_path = emalloc(save_path_len+1+sizeof(PS_MM_FILE)+mod_name_len+strlen(euid)+1);
 	
 	memcpy(ps_mm_path, PS(save_path), save_path_len + 1);
 	if (save_path_len > 0 && ps_mm_path[save_path_len - 1] != DEFAULT_SLASH) {
@@ -277,7 +277,7 @@ PHP_MINIT_FUNCTION(ps_mm)
 	
 	ret = ps_mm_initialize(ps_mm_instance, ps_mm_path);
 		
-	free_alloca(ps_mm_path);
+	efree(ps_mm_path);
    
 	if (ret != SUCCESS) {
 		free(ps_mm_instance);

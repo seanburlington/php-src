@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_win32_globals.h,v 1.1.4.2 2004/07/30 16:49:38 fmk Exp $ */
+/* $Id: php_win32_globals.h,v 1.1.4.3 2004/07/30 17:07:03 fmk Exp $ */
 
 #ifndef PHP_WIN32_GLOBALS_H
 #define PHP_WIN32_GLOBALS_H
@@ -24,6 +24,7 @@
 /* misc globals for thread-safety under win32 */
 
 #include "pwd.h"
+#include "time.h"
 
 typedef struct _php_win32_core_globals php_win32_core_globals;
 

@@ -17,14 +17,14 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.78 2005/03/16 22:00:07 rasmus Exp $ */
+/* $Id: php_sdl.c,v 1.79 2005/03/17 08:15:23 sniper Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
 #include "libxml/uri.h"
 
 #include "ext/standard/md5.h"
-#include "../../TSRM/tsrm_virtual_cwd.h"
+#include "tsrm_virtual_cwd.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mb_gpc.c,v 1.15 2005/03/17 01:14:10 rasmus Exp $ */
+/* $Id: mb_gpc.c,v 1.16 2005/03/17 08:15:23 sniper Exp $ */
 
 /* {{{ includes */
 #ifdef HAVE_CONFIG_H
@@ -39,7 +39,7 @@
 #include "rfc1867.h"
 #include "php_content_types.h"
 #include "SAPI.h"
-#include "TSRM/TSRM.h"
+#include "TSRM.h"
 
 #include "mb_gpc.h"
 /* }}} */

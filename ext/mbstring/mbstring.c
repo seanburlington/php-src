@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.221 2005/03/17 01:14:10 rasmus Exp $ */
+/* $Id: mbstring.c,v 1.222 2005/03/17 08:15:23 sniper Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -68,7 +68,7 @@
 #include "php_content_types.h"
 #include "SAPI.h"
 #include "php_unicode.h"
-#include "TSRM/TSRM.h"
+#include "TSRM.h"
 
 #include "mb_gpc.h"
 

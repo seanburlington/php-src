@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.253 2003/03/12 04:15:26 sniper Exp $ */
+/* $Id: gd.c,v 1.254 2003/03/12 04:29:51 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -389,6 +389,13 @@ PHP_MINIT_FUNCTION(gd)
 	REGISTER_LONG_CONSTANT("IMG_ARC_CHORD", gdChord, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IMG_ARC_NOFILL", gdNoFill, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IMG_ARC_EDGED", gdEdged, CONST_CS | CONST_PERSISTENT);
+#endif
+/* GD2 image format types */
+#ifdef GD2_FMT_RAW
+	REGISTER_LONG_CONSTANT("IMG_GD2_RAW", GD2_FMT_RAW, CONST_CS | CONST_PERSISTENT);
+#endif
+#ifdef GD2_FMT_COMPRESSED
+	REGISTER_LONG_CONSTANT("IMG_GD2_COMPRESSED", GD2_FMT_COMPRESSED, CONST_CS | CONST_PERSISTENT);
 #endif
 #if HAVE_GD_BUNDLED
 	REGISTER_LONG_CONSTANT("IMG_EFFECT_REPLACE", gdEffectReplace, CONST_CS | CONST_PERSISTENT);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.178.2.4 2003/06/27 07:43:05 sas Exp $ */
+/* $Id: php.h,v 1.178.2.5 2003/08/28 05:25:26 sas Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -218,6 +218,12 @@ char *strerror(int);
 
 #ifndef LONG_MIN
 #define LONG_MIN (- LONG_MAX - 1)
+#endif
+
+#ifdef __GNUC__
+# define PHP_ATTRIBUTE_FORMAT(type, idx, first) __attribute__ ((format(type, idx, first)))
+#else
+# define PHP_ATTRIBUTE_FORMAT(type, idx, first)
 #endif
 
 #if !defined(HAVE_SNPRINTF) || !defined(HAVE_VSNPRINTF) || PHP_BROKEN_SPRINTF || PHP_BROKEN_SNPRINTF || PHP_BROKEN_VSNPRINTF

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.566 2003/01/28 01:48:57 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.567 2003/01/29 00:07:01 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -325,7 +325,9 @@ function_entry basic_functions[] = {
 	PHP_FE(strtoupper,														NULL)
 	PHP_FE(strtolower,														NULL)
 	PHP_FE(strpos,															NULL)
+	PHP_FE(stripos,															NULL)
 	PHP_FE(strrpos,															NULL)
+	PHP_FE(strripos,														NULL)
 	PHP_FE(strrev,															NULL)
 	PHP_FE(hebrev,															NULL)
 	PHP_FE(hebrevc,															NULL)

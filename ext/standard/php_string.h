@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.67 2003/01/01 11:04:44 wez Exp $ */
+/* $Id: php_string.h,v 1.68 2003/01/29 00:07:01 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -45,7 +45,9 @@ PHP_FUNCTION(dirname);
 PHP_FUNCTION(pathinfo);
 PHP_FUNCTION(strstr);
 PHP_FUNCTION(strpos);
+PHP_FUNCTION(stripos);
 PHP_FUNCTION(strrpos);
+PHP_FUNCTION(strripos);
 PHP_FUNCTION(strrchr);
 PHP_FUNCTION(substr);
 PHP_FUNCTION(quotemeta);

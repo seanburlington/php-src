@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sha1.c,v 1.1 2002/07/28 19:18:08 sesser Exp $ */
+/* $Id: sha1.c,v 1.2 2002/07/28 19:29:28 derick Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -88,7 +88,7 @@ PHP_FUNCTION(sha1_file)
 	}
 
 	if ((fp = VCWD_FOPEN(Z_STRVAL_PP(arg), "rb")) == NULL) {
-		php_error(E_WARNING, "md5_file(): Unable to open file");
+		php_error(E_WARNING, "%s(): Unable to open file", get_active_function_name (TSRMLS_C));
 		RETURN_FALSE;
 	}
 

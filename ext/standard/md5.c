@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.c,v 1.26 2002/02/28 08:26:46 sebastian Exp $ */
+/* $Id: md5.c,v 1.27 2002/07/28 19:29:28 derick Exp $ */
 
 /* 
  * md5.c - Copyright 1997 Lachlan Roche 
@@ -90,7 +90,7 @@ PHP_NAMED_FUNCTION(php_if_md5_file)
 	}
 
 	if ((fp = VCWD_FOPEN(Z_STRVAL_PP(arg), "rb")) == NULL) {
-		php_error(E_WARNING, "md5_file(): Unable to open file");
+		php_error(E_WARNING, "%s(): Unable to open file", get_active_function_name (TSRMLS_C));
 		RETURN_FALSE;
 	}
 

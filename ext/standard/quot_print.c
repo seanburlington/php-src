@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: quot_print.c,v 1.26 2003/06/10 20:03:38 imajes Exp $ */
+/* $Id: quot_print.c,v 1.27 2003/12/02 07:36:42 moriyoshi Exp $ */
 
 #include <stdlib.h>
 
@@ -50,7 +50,7 @@ static char php_hex2int(int c)
 	}
 }
 
-PHPAPI unsigned char *php_quot_print_decode(const unsigned char *str, size_t length, size_t *ret_length)
+PHPAPI unsigned char *php_quot_print_decode(const unsigned char *str, size_t length, size_t *ret_length, int replace_us_by_ws)
 {
 	register unsigned int i;
 	register unsigned const char *p1;
@@ -78,6 +78,10 @@ PHPAPI unsigned char *php_quot_print_decode(const unsigned char *str, size_t len
 		64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64,
 		64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64
 	};
+
+	if (replace_us_by_ws) {
+		replace_us_by_ws = '_';
+	}
 
 	i = length, p1 = str; buf_size = length;
 
@@ -127,7 +131,7 @@ PHPAPI unsigned char *php_quot_print_decode(const unsigned char *str, size_t len
 				return NULL;
 			}
 		} else {
-			*(p2++) = *p1;
+			*(p2++) = (replace_us_by_ws == *p1 ? '\x20': *p1);
 			i--, p1++, decoded_len++;
 		}
 	}

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.h,v 1.17 2000/02/01 20:02:44 andrei Exp $ */
+/* $Id: file.h,v 1.18 2000/03/04 17:23:03 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -74,6 +74,8 @@ PHP_FUNCTION(fd_set);
 PHP_FUNCTION(fd_isset);
 PHP_FUNCTION(select);
 PHP_FUNCTION(realpath);
+PHP_FUNCTION(ftruncate);
+PHP_FUNCTION(fstat);
 
 PHPAPI int php_set_sock_blocking(int socketd, int block);
 PHPAPI int php_file_le_fopen(void);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.378 2003/12/02 23:14:31 wez Exp $ */
+/* $Id: session.c,v 1.379 2003/12/07 14:29:43 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -817,7 +817,7 @@ static void strcpy_gmt(char *ubuf, time_t *when)
 	
 	php_gmtime_r(when, &tm);
 	
-	n = sprintf(buf, "%s, %d %s %d %02d:%02d:%02d GMT", /* SAFE */
+	n = sprintf(buf, "%s, %02d %s %d %02d:%02d:%02d GMT", /* SAFE */
 				week_days[tm.tm_wday], tm.tm_mday, 
 				month_names[tm.tm_mon], tm.tm_year + 1900, 
 				tm.tm_hour, tm.tm_min, 

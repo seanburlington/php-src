@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.95 2000/06/26 20:52:04 zeev Exp $ */
+/* $Id: file.c,v 1.96 2000/06/27 09:55:52 thies Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1904,6 +1904,7 @@ PHP_FUNCTION(fgetcsv) {
                                                 memset(buf,0,len+1);
 						if (FP_FGETS(buf, len, socketd, (FILE*)what, issock) == NULL) {
                                                         efree(lineEnd); efree(temp); efree(buf);
+														zval_dtor(return_value);
                                                         RETURN_FALSE;
                                                         }
                                                 bptr = buf;

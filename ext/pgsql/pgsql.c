@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.85 2001/01/31 21:53:29 andi Exp $ */
+/* $Id: pgsql.c,v 1.86 2001/02/13 16:54:48 thies Exp $ */
 
 #include <stdlib.h>
 
@@ -114,9 +114,10 @@ static void php_pgsql_set_default_link(int id)
 {   
 	PGLS_FETCH();
 
-    if (PGG(default_link)!=-1) {
+    if ((PGG(default_link) != -1) && (PGG(default_link) != id)) {
         zend_list_delete(PGG(default_link));
     }
+
     if (PGG(default_link) != id) {
         PGG(default_link) = id;
         zend_list_addref(id);

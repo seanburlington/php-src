@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.17 2000/04/28 17:13:50 sas Exp $
+dnl $Id: config.m4,v 1.18 2000/04/30 16:10:29 jah Exp $
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r $i$1/rfc822.h; then IMAP_DIR=$i; IMAP_INC_DIR=$i$1])
 
@@ -23,6 +23,7 @@ AC_ARG_WITH(imap,
       IMAP_INC_CHK()
       el[]IMAP_INC_CHK(/include)
       el[]IMAP_INC_CHK(/include/imap)
+      el[]IMAP_INC_CHK(/include/c-client)
       el[]IMAP_INC_CHK(/imap)
       el[]IMAP_INC_CHK(/c-client)
       fi

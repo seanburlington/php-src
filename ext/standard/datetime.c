@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.79 2001/11/03 12:42:41 jmoore Exp $ */
+/* $Id: datetime.c,v 1.80 2001/11/07 14:22:15 jmoore Exp $ */
 
 
 #include "php.h"
@@ -182,10 +182,9 @@ void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gm)
 #else
 	    /*
 	    ** If correcting for daylight savings time, we set the adjustment to
-		** the value of timezone - 3600 seconds. Otherwise, we need to overcorrect and
-		** set the adjustment to the main timezone + 3600 seconds.
+		** the value of timezone - 3600 seconds.
 	    */
-	    gmadjust = -(is_dst ? timezone - 3600 : timezone + 3600);
+	    gmadjust = -(is_dst ? timezone - 3600 : timezone);
 #endif
 		seconds += gmadjust;
 	}

@@ -1,3 +1,19 @@
+2004-12-19  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      NEWS:
+      Added missing bug fixing entries.
+
+    * (PHP_4_3)
+      NEWS
+      NEWS
+      ext/imap/config.m4
+      ext/imap/config.m4:
+      MFH: Fixed bug #31103 (Better error message when c-client cannot be found).
+
+    * ext/imap/config.m4:
+      Fixed bug #31103 (Better error message when c-client cannot be found).
+
 2004-12-18  Jani Taskinen  <jani.taskinen@kolumbus.fi>
 
     * (PHP_4_3)
@@ -14441,7 +14457,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1838 2004/12/19 01:39:08 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1839 2004/12/20 01:36:49 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.104 2000/11/02 23:08:06 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.105 2000/11/02 23:19:48 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -256,7 +256,7 @@ PHPAPI FILE *php_fopen_wrapper(char *path, char *mode, int options, int *issock,
 	if (options & USE_PATH && PG(include_path) != NULL) {
 		return php_fopen_with_path(path, mode, PG(include_path), opened_path);
 	} else {
-		if (options & ENFORCE_SAFE_MODE && PG(safe_mode) && (!php_checkuid(path, mode, 0))) {
+		if (options & ENFORCE_SAFE_MODE && PG(safe_mode) && (!php_checkuid(path, mode, CHECKUID_DISALLOW_FILE_NOT_EXISTS))) {
 			return NULL;
 		}
 		return php_fopen_and_set_opened_path(path, mode, opened_path);

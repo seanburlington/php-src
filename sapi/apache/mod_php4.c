@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.120.2.4 2002/08/27 20:57:09 gschlossnagle Exp $ */
+/* $Id: mod_php4.c,v 1.120.2.5 2002/08/28 03:55:42 gschlossnagle Exp $ */
 
 #include "php_apache_http.h"
 
@@ -1278,7 +1278,7 @@ handler_rec php_handlers[] =
 	{"application/x-httpd-php", send_parsed_php},
 	{"application/x-httpd-php-source", send_parsed_php_source},
 	{"text/html", php_xbithack_handler},
-//    {"php-script", php_response_handler},
+        {"php-script", php_response_handler},
 	{NULL}
 };
 /* }}} */

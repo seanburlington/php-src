@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.18 2001/06/11 15:31:58 dbeu Exp $ */
+/* $Id: mbstring.c,v 1.19 2001/07/06 13:19:36 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -2525,7 +2525,7 @@ PHP_FUNCTION(mb_decode_numericentity)
 PHP_FUNCTION(mb_send_mail)
 {
 	int argc, n;
-	pval **argv[4];
+	pval **argv[5];
 	char *to=NULL, *message=NULL, *headers=NULL, *subject=NULL, *extra_cmd=NULL;
 	char *message_buf=NULL, *subject_buf=NULL, *p;
 	mbfl_string orig_str, conv_str;

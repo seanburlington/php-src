@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.41 2002/08/24 01:19:28 helly Exp $ */
+/* $Id: iptc.c,v 1.42 2002/12/05 22:28:02 iliaa Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -353,19 +353,13 @@ PHP_FUNCTION(iptcparse)
 			break;
 
 		if (tagsfound == 0) { /* found the 1st tag - initialize the return array */
-			if (array_init(return_value) == FAILURE) {
-				php_error_docref(NULL TSRMLS_CC, E_ERROR, "Unable to initialize array");
-				RETURN_FALSE;
-	  		}
+			array_init(return_value);
 		}
 
 		if (zend_hash_find(Z_ARRVAL_P(return_value), key, strlen(key) + 1, (void **) &element) == FAILURE) {
 			ALLOC_ZVAL(values);
 			INIT_PZVAL(values);
-			if (array_init(values) == FAILURE) {
-				php_error_docref(NULL TSRMLS_CC, E_ERROR, "Unable to initialize array");
-				RETURN_FALSE;
-			}
+			array_init(values);
 			
 			zend_hash_update(Z_ARRVAL_P(return_value), key, strlen(key)+1, (void *) &values, sizeof(pval*), (void **) &element);
 		} 

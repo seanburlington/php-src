@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.67 2002/12/05 20:59:49 helly Exp $ */
+/* $Id: ereg.c,v 1.68 2002/12/05 22:28:02 iliaa Exp $ */
 
 #include <stdio.h>
 #include <ctype.h>
@@ -517,10 +517,7 @@ static void php_split(INTERNAL_FUNCTION_PARAMETERS, int icase)
 		RETURN_FALSE;
 	}
 
-	if (array_init(return_value) == FAILURE) {
-		regfree(&re);
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 
 	/* churn through str, generating array entries as we go */
 	while ((count == -1 || count > 1) && !(err = regexec(&re, strp, 1, subs, 0))) {

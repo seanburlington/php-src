@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.112 2002/10/04 01:05:03 sas Exp $ */
+/* $Id: filestat.c,v 1.113 2002/12/05 22:28:02 iliaa Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -747,9 +747,7 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 #endif
 		/* FALLTHROUGH */
 	case FS_STAT:
-		if (array_init(return_value) == FAILURE) {
-			RETURN_FALSE;
-		}
+		array_init(return_value);
 
 		MAKE_LONG_ZVAL_INCREF(stat_dev, stat_sb->st_dev);
 		MAKE_LONG_ZVAL_INCREF(stat_ino, stat_sb->st_ino);

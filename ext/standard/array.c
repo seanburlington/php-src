@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.207 2002/12/04 16:41:28 moriyoshi Exp $ */
+/* $Id: array.c,v 1.208 2002/12/05 22:28:00 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1374,9 +1374,7 @@ PHP_FUNCTION(array_fill)
 	}
 
 	/* allocate an array for return */
-	if (array_init(return_value) == FAILURE) {
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 
 	switch (Z_TYPE_PP(start_key)) {
 		case IS_STRING:
@@ -1435,9 +1433,7 @@ PHP_FUNCTION(range)
 	}
 
 	/* Initialize the return_value as an array. */
-	if (array_init(return_value) == FAILURE) {
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 
 	/* If the range is given as strings, generate an array of characters. */
 	if (Z_TYPE_P(zlow) == IS_STRING && Z_TYPE_P(zhigh) == IS_STRING) {

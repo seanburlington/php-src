@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.34 2003/02/25 06:36:21 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.35 2003/02/25 07:41:05 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1065,7 +1065,7 @@ dnl
 dnl Libtool creation
 dnl
 
-PHP_CONFIGURE_PART(Configuring Zend)
+PHP_CONFIGURE_PART(Configuring libtool)
 
 LDFLAGS="$LDFLAGS $PHP_AIX_LDFLAGS"
 AC_PROG_LIBTOOL

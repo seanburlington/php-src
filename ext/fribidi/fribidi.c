@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Onn Ben-Zvi <onn@zend.com>                                   |
+   | Author: Onn Ben-Zvi <onn@zend.com>, onnb@mercury.co.il               |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fribidi.c,v 1.13 2002/02/28 08:26:08 sebastian Exp $ */
+/* $Id: fribidi.c,v 1.14 2002/08/15 21:43:41 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

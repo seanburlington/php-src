@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: characterdata.c,v 1.11 2004/02/15 18:57:10 rrichards Exp $ */
+/* $Id: characterdata.c,v 1.12 2004/02/16 13:06:33 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -56,6 +56,11 @@ int dom_characterdata_data_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 	nodep = dom_object_get_node(obj);
 
+	if (nodep == NULL) {
+		php_dom_throw_error(INVALID_STATE_ERR, 0 TSRMLS_CC);
+		return FAILURE;
+	}
+
 	ALLOC_ZVAL(*retval);
 	
 	if ((content = xmlNodeGetContent(nodep)) != NULL) {
@@ -74,6 +79,11 @@ int dom_characterdata_data_write(dom_object *obj, zval *newval TSRMLS_DC)
 	xmlNode *nodep;
 
 	nodep = dom_object_get_node(obj);
+
+	if (nodep == NULL) {
+		php_dom_throw_error(INVALID_STATE_ERR, 0 TSRMLS_CC);
+		return FAILURE;
+	}
 
 	if (newval->type != IS_STRING) {
 		if(newval->refcount > 1) {
@@ -107,6 +117,11 @@ int dom_characterdata_length_read(dom_object *obj, zval **retval TSRMLS_DC)
 	long length = 0;
 
 	nodep = dom_object_get_node(obj);
+
+	if (nodep == NULL) {
+		php_dom_throw_error(INVALID_STATE_ERR, 0 TSRMLS_CC);
+		return FAILURE;
+	}
 
 	ALLOC_ZVAL(*retval);
 	

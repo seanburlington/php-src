@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: text.c,v 1.16 2004/02/15 10:54:37 rrichards Exp $ */
+/* $Id: text.c,v 1.17 2004/02/16 13:06:33 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -84,6 +84,11 @@ int dom_text_whole_text_read(dom_object *obj, zval **retval TSRMLS_DC)
 	xmlChar *wholetext;
 
 	node = dom_object_get_node(obj);
+
+	if (node == NULL) {
+		php_dom_throw_error(INVALID_STATE_ERR, 0 TSRMLS_CC);
+		return FAILURE;
+	}
 
 	ALLOC_ZVAL(*retval);
 	wholetext = xmlNodeListGetString(node->doc, node, 1);

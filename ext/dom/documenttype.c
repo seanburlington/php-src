@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: documenttype.c,v 1.10 2004/02/15 17:07:34 rrichards Exp $ */
+/* $Id: documenttype.c,v 1.11 2004/02/16 13:06:33 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -50,6 +50,12 @@ int dom_documenttype_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 	xmlDtdPtr dtdptr;
 
 	dtdptr = (xmlDtdPtr) dom_object_get_node(obj);
+
+	if (dtdptr == NULL) {
+		php_dom_throw_error(INVALID_STATE_ERR, 0 TSRMLS_CC);
+		return FAILURE;
+	}
+
 	ALLOC_ZVAL(*retval);
 	ZVAL_STRING(*retval, (char *) (dtdptr->name), 1);
 
@@ -72,6 +78,11 @@ int dom_documenttype_entities_read(dom_object *obj, zval **retval TSRMLS_DC)
 	dom_object *intern;
 
 	doctypep = (xmlDtdPtr) dom_object_get_node(obj);
+
+	if (doctypep == NULL) {
+		php_dom_throw_error(INVALID_STATE_ERR, 0 TSRMLS_CC);
+		return FAILURE;
+	}
 
 	MAKE_STD_ZVAL(*retval);
 	php_dom_create_interator(*retval, DOM_NAMEDNODEMAP TSRMLS_CC);
@@ -101,6 +112,11 @@ int dom_documenttype_notations_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 	doctypep = (xmlDtdPtr) dom_object_get_node(obj);
 
+	if (doctypep == NULL) {
+		php_dom_throw_error(INVALID_STATE_ERR, 0 TSRMLS_CC);
+		return FAILURE;
+	}
+
 	MAKE_STD_ZVAL(*retval);
 	php_dom_create_interator(*retval, DOM_NAMEDNODEMAP TSRMLS_CC);
 
@@ -127,6 +143,11 @@ int dom_documenttype_public_id_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 	dtdptr = (xmlDtdPtr) dom_object_get_node(obj);
 
+	if (dtdptr == NULL) {
+		php_dom_throw_error(INVALID_STATE_ERR, 0 TSRMLS_CC);
+		return FAILURE;
+	}
+
 	ALLOC_ZVAL(*retval);
 	if (dtdptr->ExternalID) {
 		ZVAL_STRING(*retval, (char *) (dtdptr->ExternalID), 1);
@@ -151,6 +172,11 @@ int dom_documenttype_system_id_read(dom_object *obj, zval **retval TSRMLS_DC)
 	xmlDtdPtr dtdptr;
 
 	dtdptr = (xmlDtdPtr) dom_object_get_node(obj);
+
+	if (dtdptr == NULL) {
+		php_dom_throw_error(INVALID_STATE_ERR, 0 TSRMLS_CC);
+		return FAILURE;
+	}
 
 	ALLOC_ZVAL(*retval);
 	if (dtdptr->SystemID) {
@@ -179,6 +205,11 @@ int dom_documenttype_internal_subset_read(dom_object *obj, zval **retval TSRMLS_
 	xmlChar *strintsubset;
 
 	dtdptr = (xmlDtdPtr) dom_object_get_node(obj);
+
+	if (dtdptr == NULL) {
+		php_dom_throw_error(INVALID_STATE_ERR, 0 TSRMLS_CC);
+		return FAILURE;
+	}
 
 	ALLOC_ZVAL(*retval);
 

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.199.2.23 2003/08/09 16:47:21 iliaa Exp $ */
+/* $Id: array.c,v 1.199.2.24 2003/08/09 20:50:25 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1476,7 +1476,7 @@ static void array_data_shuffle(zval *array TSRMLS_DC)
 
 	n_elems = zend_hash_num_elements(Z_ARRVAL_P(array));
 	
-	if (n_elems <= 1) {
+	if (n_elems < 1) {
 		return;
 	}
 
@@ -2983,7 +2983,7 @@ PHP_FUNCTION(array_multisort)
 
 	/* If all arrays are empty or have only one entry,
 	   we don't need to do anything. */
-	if (array_size <= 1) {
+	if (array_size < 1) {
 		for (k = 0; k < MULTISORT_LAST; k++)
 			efree(ARRAYG(multisort_flags)[k]);
 		efree(arrays);

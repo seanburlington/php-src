@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: qtdom.c,v 1.9 2001/08/07 23:26:59 sniper Exp $ */
+/* $Id: qtdom.c,v 1.10 2001/08/13 16:40:03 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -176,10 +176,8 @@ static int qdom_find_children( zval **children, struct qdom_node *orig_node TSRM
             struct qdom_attribute *attr = qdom_do_node_attributes( node );
             if ( qdom_find_attributes( &a_children, attr TSRMLS_CC) > 0 )
             {
-                zend_hash_update(child->value.obj.properties,
-                                 "attributes", sizeof("attributes"),
-                                 (void *) &a_children, sizeof(zval *),
-                                 NULL);
+                zend_hash_update(Z_OBJPROP_P(child), "attributes", sizeof("attributes"),
+								(void *) &a_children, sizeof(zval *), NULL);
             }
             qdom_do_attributes_free( attr );
 /*              add_property_long(child, "attributes", num_attrs ); */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.413 2004/03/18 09:48:37 dmitry Exp $ */
+/* $Id: string.c,v 1.414 2004/03/26 19:23:42 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3005,6 +3005,13 @@ PHPAPI char *php_str_to_str_ex(char *haystack, int length,
 			}
 			return new_str;
 		} else {
+			if (!case_sensitivity) {
+				haystack_dup = estrndup(haystack, length);
+				needle_dup = estrndup(needle, needle_len);
+				php_strtolower(haystack_dup, length);
+				php_strtolower(needle_dup, needle_len);
+			}
+
 			if (str_len < needle_len) {
 				new_str = emalloc(length + 1);
 			} else {
@@ -3015,10 +3022,6 @@ PHPAPI char *php_str_to_str_ex(char *haystack, int length,
 					o = haystack;
 					n = needle;
 				} else {
-					haystack_dup = estrndup(haystack, length);
-					needle_dup = estrndup(needle, needle_len);
-					php_strtolower(haystack_dup, length);
-					php_strtolower(needle_dup, needle_len);
 					o = haystack_dup;
 					n = needle_dup;
 				}

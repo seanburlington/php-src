@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.60 2000/02/27 18:02:14 thies Exp $ */
+/* $Id: oci8.c,v 1.61 2000/03/01 08:17:33 thies Exp $ */
 
 /* TODO list:
  *
@@ -1891,6 +1891,7 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 
 
 	if (exclusive) {
+		psession = session;
 		/*
 		zend_hash_next_index_insert(OCI(user),
 									(void *)session,

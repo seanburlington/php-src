@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_openssl.h,v 1.1 2000/11/13 19:47:19 venaas Exp $ */
+/* $Id: php_openssl.h,v 1.2 2000/11/14 09:54:24 venaas Exp $ */
 
 #ifndef PHP_OPENSSL_H
 #define PHP_OPENSSL_H
@@ -28,10 +28,13 @@ extern zend_module_entry openssl_module_entry;
 PHP_MINIT_FUNCTION(openssl);
 PHP_MINFO_FUNCTION(openssl);
 PHP_FUNCTION(openssl_read_privatekey);
-PHP_FUNCTION(openssl_read_publickey);
+PHP_FUNCTION(openssl_get_publickey);
 PHP_FUNCTION(openssl_free_key);
+#if 0
+PHP_FUNCTION(openssl_read_publickey);
 PHP_FUNCTION(openssl_read_x509);
 PHP_FUNCTION(openssl_free_x509);
+#endif
 PHP_FUNCTION(openssl_sign);
 PHP_FUNCTION(openssl_verify);
 PHP_FUNCTION(openssl_seal);

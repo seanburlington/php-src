@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.34 1999/12/21 05:22:43 zeev Exp $ */
+/* $Id: pgsql.c,v 1.35 1999/12/25 23:59:14 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -69,7 +69,7 @@ function_entry pgsql_functions[] = {
 	PHP_FE(pg_loopen,		NULL)
 	PHP_FE(pg_loclose,		NULL)
 	PHP_FE(pg_loread,		NULL)
-	PHP_FE(pg_write,		NULL)
+	PHP_FE(pg_lowrite,		NULL)
 	PHP_FE(pg_loreadall,	NULL)
 	{NULL, NULL, NULL}
 };

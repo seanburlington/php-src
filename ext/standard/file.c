@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.395 2004/12/12 23:21:53 wez Exp $ */
+/* $Id: file.c,v 1.396 2005/02/06 23:05:24 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -586,6 +586,15 @@ PHP_FUNCTION(file_put_contents)
 		RETURN_FALSE;
 	}
 	switch (Z_TYPE_P(data)) {
+		case IS_RESOURCE:
+		{
+			php_stream *srcstream;
+			php_stream_from_zval(srcstream, &data);
+
+			numbytes = php_stream_copy_to_stream(srcstream, stream, PHP_STREAM_COPY_ALL);
+
+			break;
+		}
 		case IS_NULL:
 		case IS_LONG:
 		case IS_DOUBLE:

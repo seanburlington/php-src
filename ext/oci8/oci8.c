@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.98 2000/10/20 18:25:06 andrei Exp $ */
+/* $Id: oci8.c,v 1.99 2000/10/21 21:17:31 dbeu Exp $ */
 
 /* TODO list:
  *
@@ -118,6 +118,7 @@ static void _oci_stmt_list_dtor(zend_rsrc_list_entry *rsrc);
 static void _oci_descriptor_list_dtor(zend_rsrc_list_entry *rsrc);
 static void _oci_server_list_dtor(zend_rsrc_list_entry *rsrc);
 static void _oci_session_list_dtor(zend_rsrc_list_entry *rsrc);
+static void php_oci_free_conn_list(zend_rsrc_list_entry *rsrc);
 
 static void _oci_column_hash_dtor(void *data);
 static void _oci_define_hash_dtor(void *data);
@@ -490,7 +491,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.98 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.99 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );

@@ -1,3 +1,63 @@
+2003-03-19  Jani Taskinen  <sniper@iki.fi>
+
+    * ext/mysqli/config.m4:
+      Better config.m4..
+
+    * ext/tokenizer/tokenizer.c:
+      And this too..
+
+    * ext/tokenizer/tokenizer.c:
+      Andrei forgot this..
+
+2003-03-19  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * sapi/cli/php_cli.c:
+      - reenable $argc/$argv
+      - add a comment where hardcoded defaults would go
+
+2003-03-19  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * (PHP_4_3)
+      main/streams.c:
+      This little fragment didn't get merged from head...
+
+2003-03-19  David Hill  <David.Hill@hp.com>
+
+    * README.TESTING:
+      Correcting example to use proper variable - NO_INTERACTION
+
+2003-03-19  Jani Taskinen  <sniper@iki.fi>
+
+    * php.ini-dist
+      php.ini-recommended:
+      Using of quotes around paths is a very good idea..
+
+    * (PHP_4_3)
+      NEWS:
+      BFN
+
+    * (PHP_4_3)
+      main/main.c:
+      MFH: Fixed bug #22775 (Fatal errors exit with status 0 with CGI/CLI)
+
+    * main/main.c:
+      Fixed bug #22775 (Fatal errors exit with status 0 with CGI/CLI)
+
+2003-03-19  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * (PHP_4_3)
+      main/streams.c:
+      Fix my fix.
+
+    * (PHP_4_3)
+      main/streams.c:
+      Manual merge of persistent stream sanity check from php5.
+
+    * main/streams/streams.c:
+      Sanity check for when a stream is requested to be persistent but the
+      wrapper
+      does not respect the flag.
+
 2003-03-18  Wez Furlong  <wez.php@thebrainroom.net>
 
     * ext/standard/streamsfuncs.c:
@@ -2257,7 +2317,7 @@
 
     * sapi/apache/libpre.c
       sapi/apache/php_apache_http.h:
-      Added missing headers and $Id: ChangeLog,v 1.1299 2003/03/19 01:32:48 changelog Exp $ tags.
+      Added missing headers and $Id: ChangeLog,v 1.1300 2003/03/20 01:33:14 changelog Exp $ tags.
 
     * sapi/cgi/config9.m4:
       MFB: Fixed bug #22356 (Do not add empty -I flags).
@@ -2816,7 +2876,7 @@
       main/streams/plain_wrapper.c
       main/streams/streams.c
       main/streams/userspace.c:
-      ws fixes + missing $Id: ChangeLog,v 1.1299 2003/03/19 01:32:48 changelog Exp $ tags, headers added
+      ws fixes + missing $Id: ChangeLog,v 1.1300 2003/03/20 01:33:14 changelog Exp $ tags, headers added
 
 2003-02-19  Corne' Cornelius  <cornec@reach.co.za>
 
@@ -3734,7 +3794,7 @@
 
     * (PHP_4_3)
       sapi/cgi/cgi_main.c:
-      Added missing $Id: ChangeLog,v 1.1299 2003/03/19 01:32:48 changelog Exp $ tag
+      Added missing $Id: ChangeLog,v 1.1300 2003/03/20 01:33:14 changelog Exp $ tag
 
 2003-02-14  Thies C. Arntzen  <thies@thieso.net>
 

@@ -16,7 +16,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.43 2002/03/04 17:17:41 helly Exp $ */
+/* $Id: image.c,v 1.44 2002/03/04 18:21:43 sebastian Exp $ */
 /*
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -474,7 +474,7 @@ static struct gfxinfo *php_handle_tiff (int socketd, FILE *fp, int issock, pval 
 {
 	struct gfxinfo *result = NULL;
 
-	int i, sn, num_entries;
+	int i, num_entries;
 	unsigned char *dir_entry;
 	size_t ifd_size, dir_size, entry_value, entry_length, width, height;
 	int entry_tag , entry_type;

@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.109 2003/09/06 02:34:11 cellog Exp $
+// $Id: Installer.php,v 1.110 2003/09/06 02:37:15 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -560,10 +560,15 @@ class PEAR_Installer extends PEAR_Common
                     $remote = new PEAR_Remote($config);
                     if (!PEAR::isError($info = $remote->call('package.info',
                           $origpkgfile))) {
-                        return $this->raiseError('No releases of preferred state "'
+                        if (!count($info['releases'])) {
+                            return $this->raiseError('Package ' . $origpkgfile .
+                            ' has no releases');
+                        } else {
+                            return $this->raiseError('No releases of preferred state "'
                             . $state . '" exist for package ' . $origpkgfile .
                             '.  Use ' . $origpkgfile . '-state to install another' .
                             ' state (like ' . $origpkgfile .'-beta)');
+                        }
                     } else {
                         return $pkgfile;
                     }

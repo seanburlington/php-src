@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.55 2003/05/14 18:02:10 pollita Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.56 2003/05/17 06:21:34 sebastian Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -376,7 +376,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 	char tmp_line[512];
 	char ip[sizeof("123.123.123.123")];
 	unsigned short portno;
-	char *scratch, *hoststart = NULL;
+	char *hoststart = NULL;
 	int result, use_ssl, use_ssl_on_data=0;
 	php_stream *reuseid=NULL;
 	size_t file_size = 0;

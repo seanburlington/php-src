@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.10 2003/04/05 02:42:12 pollita Exp $ */
+/* $Id: xp_socket.c,v 1.11 2003/05/17 06:21:34 sebastian Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -380,9 +380,11 @@ static inline int parse_unix_address(php_stream_xport_param *xparam, struct sock
 static inline char *parse_ip_address(php_stream_xport_param *xparam, int *portno TSRMLS_DC)
 {
 	char *colon;
-	char *p, *host = NULL;
+	char *host = NULL;
 
 #ifdef HAVE_IPV6
+	char *p;
+
 	if (*(xparam->inputs.name) == '[') {
 		/* IPV6 notation to specify raw address with port (i.e. [fe80::1]:80) */
 		p = memchr(xparam->inputs.name + 1, ']', xparam->inputs.namelen - 2);

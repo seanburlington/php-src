@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 2005/02/12 08:20:17 wez Exp $
+dnl $Id: config.m4,v 1.7 2005/02/13 02:51:11 wez Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
@@ -91,12 +91,11 @@ if test "$PHP_PDO_SQLITE" != "no"; then
         sort -n +2 $ext_srcdir/sqlite/src/opcodes.h | awk -f $ext_srcdir/sqlite/mkopcodec.awk > $ext_srcdir/sqlite/src/opcodes.c
       fi
 
-      if test "$ext_shared" = "no"; then
+      if test "$ext_shared" = "no" -o "$ext_srcdir" = "$abs_srcdir"; then
         echo '#include "php_config.h"' > $ext_srcdir/sqlite/src/config.h
       else
         echo "#include \"$abs_builddir/config.h\"" > $ext_srcdir/sqlite/src/config.h
       fi
-        
       cat >> $ext_srcdir/sqlite/src/config.h <<EOF
 #if ZTS
 # define THREADSAFE 1

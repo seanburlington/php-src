@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.38 2005/03/09 09:19:27 tony2001 Exp $ */
+/* $Id: spl_directory.c,v 1.39 2005/03/09 10:29:27 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1315,11 +1315,8 @@ SPL_METHOD(File, fpassthru)
 SPL_METHOD(File, fscanf)
 {
 	spl_file_object *intern = (spl_file_object*)zend_object_store_get_object(getThis() TSRMLS_CC);
-	zval *arg2 = NULL;
-	MAKE_STD_ZVAL(arg2);
-	ZVAL_LONG(arg2, intern->max_line_len);
 
-	FileFunctionCall(fscanf, arg2);
+	FileFunctionCall(fscanf, NULL);
 
 	intern->current_line_num++;
 }

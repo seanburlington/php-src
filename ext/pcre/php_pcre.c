@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.39 2000/01/17 17:33:20 zeev Exp $ */
+/* $Id: php_pcre.c,v 1.40 2000/02/05 15:16:11 zeev Exp $ */
 
 /*
 	TODO:
@@ -99,8 +99,6 @@ PHP_MINFO_FUNCTION(pcre)
 /* {{{ PHP_MINIT_FUNCTION(pcre) */
 static PHP_MINIT_FUNCTION(pcre)
 {
-	ELS_FETCH();
-
 #ifdef ZTS
 	pcre_globals_id = ts_allocate_id(
 							sizeof(php_pcre_globals),

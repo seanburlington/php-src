@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_db.h,v 1.3 1999/12/17 21:19:59 zeev Exp $ */
+/* $Id: php_db.h,v 1.4 2000/02/05 15:16:09 zeev Exp $ */
 
 
 #ifndef _PHP_DB_H
@@ -62,7 +62,7 @@ typedef struct dbm_info {
 #define phpext_db_ptr NULL
 #endif
 
-dbm_info *php_find_dbm(pval *id,HashTable *list);
+dbm_info *php_find_dbm(pval *id);
 int php_dbm_close(dbm_info *info);
 dbm_info *php_dbm_open(char *filename, char *mode);
 int php_dbm_insert(dbm_info *info, char *key, char *value);

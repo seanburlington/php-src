@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.190 2000/02/04 14:54:30 zeev Exp $ */
+/* $Id: main.c,v 1.191 2000/02/05 15:16:09 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -720,7 +720,6 @@ void php_request_shutdown(void *dummy)
 	CLS_FETCH();
 	ELS_FETCH();
 	SLS_FETCH();
-	PLS_FETCH();
 
 	sapi_send_headers();
 	php_end_ob_buffering(SG(request_info).headers_only?0:1);

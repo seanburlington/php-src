@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.12 2000/01/01 01:31:48 sas Exp $ */
+/* $Id: assert.c,v 1.13 2000/02/05 15:16:11 zeev Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -103,7 +103,6 @@ PHP_MINIT_FUNCTION(assert)
 {
 
 #ifdef ZTS
-	ELS_FETCH();
 	assert_globals_id = ts_allocate_id(sizeof(php_assert_globals), (ts_allocate_ctor) php_assert_init_globals, NULL);
 #else
 	php_assert_init_globals(ASSERTLS_C);

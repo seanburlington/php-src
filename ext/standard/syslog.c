@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.12 2000/01/01 01:31:53 sas Exp $ */
+/* $Id: syslog.c,v 1.13 2000/02/05 15:16:11 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -44,8 +44,6 @@ static void start_syslog(void);
 
 PHP_MINIT_FUNCTION(syslog)
 {
-	ELS_FETCH();
-	
 	/* error levels */
 	REGISTER_LONG_CONSTANT("LOG_EMERG", LOG_EMERG, CONST_CS | CONST_PERSISTENT); /* system unusable */
 	REGISTER_LONG_CONSTANT("LOG_ALERT", LOG_ALERT, CONST_CS | CONST_PERSISTENT); /* immediate action required */

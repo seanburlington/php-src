@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.15 2000/01/01 01:31:48 sas Exp $ */
+/* $Id: crypt.c,v 1.16 2000/02/05 15:16:11 zeev Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -92,8 +92,6 @@ zend_module_entry crypt_module_entry = {
 
 PHP_MINIT_FUNCTION(crypt)
 {
-	ELS_FETCH();
-
 #if PHP3_STD_DES_CRYPT
     REGISTER_LONG_CONSTANT("CRYPT_SALT_LENGTH", 2, CONST_CS | CONST_PERSISTENT);
 #else

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.12 1999/04/10 21:30:49 zeev Exp $ */
+/* $Id: main.c,v 1.13 1999/04/10 21:34:53 zeev Exp $ */
 
 /* #define CRASH_DETECTION */
 
@@ -500,7 +500,7 @@ PHPAPI void php3_error(int type, const char *format,...)
 #if HAVE_SETITIMER
 static void php3_timeout(int dummy)
 {
-	TLS_VARS;
+	PLS_FETCH();
 
 	php3_error(E_ERROR, "Maximum execution time of %d seconds exceeded", PG(max_execution_time));
 }

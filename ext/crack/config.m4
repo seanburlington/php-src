@@ -1,15 +1,15 @@
-dnl $Id: config.m4,v 1.3.2.1 2001/10/12 00:22:38 sniper Exp $
+dnl $Id: config.m4,v 1.3.2.2 2001/11/13 11:38:56 sniper Exp $
 
 PHP_ARG_WITH(crack, whether to include crack support,
 [  --with-crack[=DIR]      Include crack support.])
 
 if test "$PHP_CRACK" != "no"; then
 
-	for i in /usr/local/lib /usr/lib $PHP_CRACK $PHP_CRACK/cracklib; do
-		test -f $i/lib/libcrack.$SHLIB_SUFFIX_NAME -o -f $i/lib/libcrack.a && CRACK_LIBDIR=$i
+	for i in /usr/local/lib /usr/lib $PHP_CRACK/lib $PHP_CRACK/cracklib; do
+		test -f $i/lib/libcrack.$SHLIB_SUFFIX_NAME -o -f $i/libcrack.a && CRACK_LIBDIR=$i
 	done
 
-	for i in /usr/local/include /usr/include $PHP_CRACK $PHP_CRACK/cracklib; do
+	for i in /usr/local/include /usr/include $PHP_CRACK/include $PHP_CRACK/cracklib; do
 		test -f $i/packer.h && CRACK_INCLUDEDIR=$i
 	done
   

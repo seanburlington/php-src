@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.187 2000/01/29 11:55:43 zeev Exp $ */
+/* $Id: main.c,v 1.188 2000/01/29 12:57:08 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -1134,12 +1134,12 @@ static void php_build_argv(char *s, zval *track_vars_array ELS_DC PLS_DC)
 	}
 
 	if (PG(track_vars)) {
-		if (!PG(register_globals)) {
+		if (PG(register_globals)) {
 			arr->refcount++;
 			argc->refcount++;
 		}
-		zend_hash_update(&EG(symbol_table), "argv", sizeof("argv"), &arr, sizeof(pval *), NULL);
-		zend_hash_add(&EG(symbol_table), "argc", sizeof("argc"), &argc, sizeof(pval *), NULL);
+		zend_hash_update(track_vars_array->value.ht, "argv", sizeof("argv"), &arr, sizeof(pval *), NULL);
+		zend_hash_update(track_vars_array->value.ht, "argc", sizeof("argc"), &argc, sizeof(pval *), NULL);
 	}
 
 }

@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.61.2.3 2003/06/27 16:42:49 sebastian Exp $
+	$Id: config.w32.h,v 1.61.2.4 2003/08/26 02:51:21 sniper Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -64,7 +64,7 @@
 #define HAVE_PCRE 1
 
 /* Enable / Disable SESSION extension (default: enabled) */
-#define HAVE_SESSION 1
+#define HAVE_PHP_SESSION 1
 
 /* Enable / Disable TOKENIZER extension (default: enabled) */
 #define HAVE_TOKENIZER 1

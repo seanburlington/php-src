@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.82 2004/02/24 21:52:40 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.83 2004/02/25 09:36:46 sebastian Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -355,7 +355,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 		size_t tmp_line_len;
 		/* get response header */
 
-		if (_php_stream_get_line(stream, tmp_line, sizeof(tmp_line) - 1, &tmp_line_len) != NULL) {
+		if (_php_stream_get_line(stream, tmp_line, sizeof(tmp_line) - 1, &tmp_line_len TSRMLS_CC) != NULL) {
 			zval *http_response;
 			int response_code;
 

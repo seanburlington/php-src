@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.19 2001/07/02 01:55:42 hirokawa Exp $
+dnl $Id: config.m4,v 1.20 2001/08/10 09:05:37 rasmus Exp $
 dnl config.m4 for extension Sablot
 
 PHP_ARG_WITH(sablot, for Sablotron XSL support,
@@ -8,6 +8,7 @@ PHP_ARG_WITH(expat-dir, libexpat dir for Sablotron 0.50,
 [  --with-expat-dir=DIR    Sablotron: libexpat dir for Sablotron 0.50])
 
 if test "$PHP_SABLOT" != "no"; then
+
 
   PHP_EXTENSION(sablot, $ext_shared)
   PHP_SUBST(SABLOT_SHARED_LIBADD)
@@ -29,9 +30,6 @@ if test "$PHP_SABLOT" != "no"; then
     AC_MSG_ERROR(Please reinstall the Sablotron distribution)
   fi
 
-  PHP_ADD_INCLUDE($SABLOT_DIR/include)
-  PHP_ADD_LIBRARY_WITH_PATH(sablot, $SABLOT_DIR/lib, SABLOT_SHARED_LIBADD)
-
   testval=no
   for i in $PHP_EXPAT_DIR $SABLOT_DIR; do
     if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.s?; then
@@ -47,6 +45,9 @@ if test "$PHP_SABLOT" != "no"; then
     PHP_ADD_LIBRARY(xmlparse)
     PHP_ADD_LIBRARY(xmltok)
   fi
+
+  PHP_ADD_INCLUDE($SABLOT_DIR/include)
+  PHP_ADD_LIBRARY_WITH_PATH(sablot, $SABLOT_DIR/lib, SABLOT_SHARED_LIBADD)
 
   found_iconv=no
   AC_CHECK_LIB(c, iconv_open, found_iconv=yes)

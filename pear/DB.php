@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.19 2000/06/21 02:22:04 chagenbu Exp $
+// $Id: DB.php,v 1.20 2000/06/30 19:20:03 chagenbu Exp $
 //
 // Database independent query interface.
 //
@@ -330,6 +330,9 @@ class DB {
 	 * @return bool FALSE is returned on error
 	 */
 	function parseDSN($dsn) {
+		if (is_array($dsn))
+			return $dsn;
+		
 		$parsed = array(
 			'phptype'  => false,
 			'dbsyntax' => false,

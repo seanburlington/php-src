@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.12 1999/06/20 18:52:38 sas Exp $
+dnl $Id: acinclude.m4,v 1.13 1999/06/20 18:54:08 sas Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -27,7 +27,6 @@ AC_DEFUN(AC_EXPAND_PATH,[
   else
     $2="$1"
   fi
-  eval "echo \"made from $1 \$$2\""
 ])
 
 dnl

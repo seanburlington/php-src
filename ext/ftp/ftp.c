@@ -17,7 +17,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.68.2.11 2003/12/16 19:45:35 pollita Exp $ */
+/* $Id: ftp.c,v 1.68.2.12 2004/01/13 18:59:08 sniper Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

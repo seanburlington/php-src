@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.22 2000/05/02 00:30:30 sas Exp $ */
+/* $Id: sysvshm.c,v 1.23 2000/05/02 00:44:27 sas Exp $ */
 
 /* This has been built and tested on Solaris 2.6.
  * It may not compile or execute correctly on other systems.
@@ -50,7 +50,7 @@ zend_module_entry sysvshm_module_entry = {
 };
 
 
-#if COMPILE_DL
+#if defined(COMPILE_DL) || defined(COMPILE_DL_SYSVSHM)
 ZEND_GET_MODULE(sysvshm)
 #endif
 

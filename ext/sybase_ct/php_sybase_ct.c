@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.20 2000/05/02 00:30:30 sas Exp $ */
+/* $Id: php_sybase_ct.c,v 1.21 2000/05/02 00:44:26 sas Exp $ */
 
 
 #include "php.h"
@@ -73,7 +73,7 @@ zend_module_entry sybase_module_entry = {
 	"sybase_ct", sybase_functions, PHP_MINIT(sybase), PHP_MSHUTDOWN(sybase), PHP_RINIT(sybase), PHP_RSHUTDOWN(sybase), PHP_MINFO(sybase), STANDARD_MODULE_PROPERTIES
 };
 
-#if COMPILE_DL
+#if defined(COMPILE_DL) || defined(COMPILE_DL_SYBASE_CT)
 ZEND_GET_MODULE(sybase)
 #endif
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.22 2000/05/02 00:30:29 sas Exp $ */
+/* $Id: mail.c,v 1.23 2000/05/02 00:44:26 sas Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -34,7 +34,7 @@
 #include "win32/sendmail.h"
 #endif
 
-#if COMPILE_DL
+#if defined(COMPILE_DL) || defined(COMPILE_DL_STANDARD)
 ZEND_GET_MODULE(odbc)
 #endif
 

@@ -17,11 +17,11 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.43 2000/05/02 00:30:29 sas Exp $ */
+/* $Id: pgsql.c,v 1.44 2000/05/02 00:44:25 sas Exp $ */
 
 #include <stdlib.h>
 
-#if COMPILE_DL
+#if defined(COMPILE_DL) || defined(COMPILE_DL_PGSQL)
 #include "dl/phpdl.h"
 #endif
 
@@ -79,7 +79,7 @@ zend_module_entry pgsql_module_entry = {
 	"pgsql", pgsql_functions, PHP_MINIT(pgsql), PHP_MSHUTDOWN(pgsql), PHP_RINIT(pgsql), NULL, NULL, STANDARD_MODULE_PROPERTIES
 };
 
-#if COMPILE_DL
+#if defined(COMPILE_DL) || defined(COMPILE_DL_PGSQL)
 ZEND_GET_MODULE(pgsql)
 #endif
 

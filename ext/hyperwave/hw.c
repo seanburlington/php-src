@@ -16,8 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.50 2000/05/02 00:30:26 sas Exp $ */
-#if COMPILE_DL
+/* $Id: hw.c,v 1.51 2000/05/02 00:44:23 sas Exp $ */
+#if defined(COMPILE_DL) || defined(COMPILE_DL_HYPERWAVE)
 #include "dl/phpdl.h"
 #endif
 
@@ -125,13 +125,13 @@ int hw_globals_id;
 PHP_HW_API php_hw_globals hw_globals;
 #endif
 
-#ifdef COMPILE_DL
+#if defined(COMPILE_DL) || defined(COMPILE_DL_HYPERWAVE)
 ZEND_GET_MODULE(hw)
 #endif
 
 void print_msg(hg_msg *msg, char *str, int txt);
 
-#if COMPILE_DL
+#if defined(COMPILE_DL) || defined(COMPILE_DL_HYPERWAVE)
 ZEND_GET_MODULE(hw)
 #endif
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.21 2000/05/02 00:30:25 sas Exp $ */
+/* $Id: fdf.c,v 1.22 2000/05/02 00:44:22 sas Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -103,7 +103,7 @@ zend_module_entry fdf_module_entry = {
 	PHP_MINFO(fdf), STANDARD_MODULE_PROPERTIES
 };
 
-#if COMPILE_DL
+#if defined(COMPILE_DL) || defined(COMPILE_DL_FDF)
 #include "dl/phpdl.h"
 ZEND_GET_MODULE(fdf)
 #endif

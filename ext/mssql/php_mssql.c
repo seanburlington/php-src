@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.95 2003/01/09 08:00:07 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.96 2003/01/09 08:19:41 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -2112,7 +2112,7 @@ PHP_FUNCTION(mssql_free_statement)
 	ZEND_FETCH_RESOURCE(statement, mssql_statement *, mssql_statement_index, -1, "MS SQL-statement", le_statement);	
 	/* Release remaining results */
 	do {
-		retvalue = dbresults(statement->link);
+		retvalue = dbresults(statement->link->link);
 	} while (retvalue != NO_MORE_RESULTS && retvalue != FAIL);
 
 	zend_list_delete(Z_RESVAL_PP(mssql_statement_index));

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.15 2001/05/24 10:07:26 ssb Exp $ */
+/* $Id: php_sybase_db.c,v 1.16 2001/06/12 05:28:40 sniper Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -707,6 +707,7 @@ PHP_FUNCTION(sybase_query)
 	int blocks_initialized=1;
 	int i,j;
 	int *column_types;
+	PLS_FETCH();
 
 	switch(ZEND_NUM_ARGS()) {
 		case 1:

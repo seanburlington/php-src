@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.170 2002/04/06 05:52:52 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.171 2002/04/07 05:21:43 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -1501,7 +1501,7 @@ PHP_FUNCTION(pg_trace)
 	int id = -1;
 	PGconn *pgsql;
 	char *mode = "w";
-	FILE *fp;
+	FILE *fp = NULL;
 	php_stream *stream;
 	id = PGG(default_link);
 

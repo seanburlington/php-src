@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.13 2001/08/14 21:11:32 ssb Exp $
+// $Id: PEAR.php,v 1.14 2001/08/15 21:26:12 chagenbu Exp $
 //
 
 define('PEAR_ERROR_RETURN', 1);
@@ -366,7 +366,7 @@ class PEAR
             $message     = $message->getMessage();
         }
 
-        if (sizeof($this->_expected_errors) > 0 && in_array($code, end($this->_expected_errors))) {
+        if (isset($this) && isset($this->_expected_errors) && sizeof($this->_expected_errors) > 0 && in_array($code, end($this->_expected_errors))) {
             $mode = PEAR_ERROR_RETURN;
         }
 

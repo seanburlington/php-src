@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.242 2004/01/26 15:25:32 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.243 2004/01/26 15:42:24 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -785,7 +785,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.242 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.243 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -2649,7 +2649,7 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 			)
 		);
 
-		smart_str_append_unsigned(&hashed_details, charsetid);
+		smart_str_append_unsigned_ex(&hashed_details, charsetid, 1);
 
 		charsetid = 0;
 	}

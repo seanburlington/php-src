@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.517 2002/10/03 01:36:43 yohgaki Exp $ */
+/* $Id: basic_functions.c,v 1.518 2002/10/03 07:17:12 yohgaki Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -747,6 +747,7 @@ function_entry basic_functions[] = {
 	/* functions from output.c */
 	PHP_FE(ob_start,														NULL)
 	PHP_FE(ob_flush,														NULL)
+	PHP_FE(ob_flush_all,													NULL)
 	PHP_FE(ob_clean,														NULL)
 	PHP_FE(ob_end_flush,													NULL)
 	PHP_FE(ob_end_clean,													NULL)

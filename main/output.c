@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.132 2002/10/03 04:17:41 yohgaki Exp $ */
+/* $Id: output.c,v 1.133 2002/10/03 07:17:13 yohgaki Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -739,7 +739,7 @@ PHP_FUNCTION(ob_start)
 /* }}} */
 
 /* {{{ proto bool ob_flush(void)
-   Flush (send) contents of the output buffers */
+   Flush (send) contents of the output buffer. The last buffer content is sent to next buffer */
 PHP_FUNCTION(ob_flush)
 {
 	if (ZEND_NUM_ARGS() != 0)
@@ -749,8 +749,31 @@ PHP_FUNCTION(ob_flush)
 		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to flush buffer. No buffer to flush.");
 		RETURN_FALSE;
 	}
-		
+	
 	php_end_ob_buffer(1, 1 TSRMLS_CC);
+	RETURN_TRUE;
+}
+/* }}} */
+
+/* {{{ proto bool ob_flush_all(void)
+   Flush (send) contents of output buffers. All buffered contents will be written/sent */
+PHP_FUNCTION(ob_flush_all)
+{
+	int orig;
+	
+	if (ZEND_NUM_ARGS() != 0)
+			WRONG_PARAM_COUNT;
+
+	if (!OG(ob_nesting_level)) {
+		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to flush buffer. No buffer to flush.");
+		RETURN_FALSE;
+	}
+
+	orig = OG(implicit_flush); /* save current implicit flush state */
+	php_start_implicit_flush(TSRMLS_C);
+	php_end_ob_buffer(1, 1 TSRMLS_CC);
+	OG(implicit_flush) = orig;
+	
 	RETURN_TRUE;
 }
 /* }}} */

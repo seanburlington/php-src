@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: internal_functions.c.in,v 1.5 1999/09/03 17:46:39 sas Exp $ */
+/* $Id: internal_functions.c.in,v 1.6 1999/09/13 15:48:32 thies Exp $ */
 
 
 #include "php.h"
@@ -53,6 +53,7 @@
 #include "ext/standard/php3_mail.h"
 #include "ext/standard/php3_syslog.h"
 #include "ext/standard/php_lcg.h"
+#include "ext/standard/php_metaphone.h"
 @EXT_INCLUDE_CODE@
 
 /* SNMP has to be moved to ext */
@@ -77,6 +78,7 @@ zend_module_entry *php3_builtin_modules[] = {
 	phpext_mail_ptr,
 	phpext_syslog_ptr,
 	phpext_lcg_ptr,
+	phpext_metaphone_ptr,
 @EXT_MODULE_PTRS@
 };
 

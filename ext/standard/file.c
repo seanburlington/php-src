@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.242 2002/08/13 05:08:47 rasmus Exp $ */
+/* $Id: file.c,v 1.243 2002/08/18 06:55:32 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1991,8 +1991,14 @@ PHP_FUNCTION(fgetcsv)
 		while(isspace((int) *bptr) && (*bptr!=delimiter)) bptr++;
 		/* 2. Read field, leaving bptr pointing at start of next field */
 		if (enclosure && *bptr == enclosure) {
+			bptr++;	/* move on to first character in field */
+			
+			/* Check if there is an end to the enclosure */
+			if( !strchr(bptr, enclosure) ) {
+				continue;
+			}
+		
 			/* 2A. handle enclosure delimited field */
-			bptr++;		/* move on to first character in field */
 			while (*bptr) {
 				if (*bptr == enclosure) {
 					/* handle the enclosure */

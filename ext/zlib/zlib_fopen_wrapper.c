@@ -16,7 +16,7 @@
    |         Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.33.2.2 2002/11/19 20:04:15 wez Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.33.2.3 2002/11/19 21:11:03 wez Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 
@@ -59,7 +59,7 @@ static int php_gziop_seek(php_stream *stream, off_t offset, int whence, off_t *n
 	ret = gzseek(self->gz_file, offset, whence);
 	*newoffs = gztell(self->gz_file);
 	
-	return ret;
+	return ret < 0 ? -1 : 0;
 }
 
 static int php_gziop_close(php_stream *stream, int close_handle TSRMLS_DC)

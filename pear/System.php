@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.22 2002/12/13 02:07:22 ssb Exp $
+// $Id: System.php,v 1.23 2002/12/22 01:32:01 ssb Exp $
 //
 
 require_once 'PEAR.php';
@@ -43,7 +43,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.22 $
+* @version  $Revision: 1.23 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -419,17 +419,25 @@ class System
     */
     function which($program, $fallback = false)
     {
+    	// is_executable() is not available on windows
+    	if (OS_WINDOWS) {
+            $pear_is_executable = 'is_file';
+        } else {
+            $pear_is_executable = 'is_executable';
+        }
+
         // full path given
         if (basename($program) != $program) {
-            return (@is_executable($program)) ? $program : $fallback;
+            return (@$pear_is_executable($program)) ? $program : $fallback;
         }
+
         // XXX FIXME honor safe mode
         $path_delim = OS_WINDOWS ? ';' : ':';
         $exe_suffix = OS_WINDOWS ? '.exe' : '';
         $path_elements = explode($path_delim, getenv('PATH'));
         foreach ($path_elements as $dir) {
             $file = $dir . DIRECTORY_SEPARATOR . $program . $exe_suffix;
-            if (@is_file($file) && @is_executable($file)) {
+            if (@is_file($file) && @$pear_is_executable($file)) {
                 return $file;
             }
         }

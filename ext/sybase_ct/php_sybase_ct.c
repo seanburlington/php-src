@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.15 2000/02/05 15:16:11 zeev Exp $ */
+/* $Id: php_sybase_ct.c,v 1.16 2000/02/05 15:44:18 zeev Exp $ */
 
 
 #include "php.h"
@@ -392,7 +392,6 @@ static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 	char *hashed_details;
 	int hashed_details_length;
 	sybase_link *sybase_ptr;
-	ELS_FETCH();
 
 	switch(ARG_COUNT(ht)) {
 		case 0: /* defaults */

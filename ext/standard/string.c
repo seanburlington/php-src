@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.90 2000/02/02 21:53:27 andrei Exp $ */
+/* $Id: string.c,v 1.91 2000/02/05 15:44:18 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2121,7 +2121,6 @@ PHP_FUNCTION(parse_str)
 {
 	zval **arg;
 	char *res = NULL;
-	ELS_FETCH();
 	PLS_FETCH();
 	SLS_FETCH();
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.13 2000/02/05 15:16:11 zeev Exp $ */
+/* $Id: assert.c,v 1.14 2000/02/05 15:44:18 zeev Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -166,7 +166,6 @@ PHP_FUNCTION(assert)
 	char *myeval = NULL;
 	char *cbfunc;
 	CLS_FETCH();
-	ELS_FETCH();
 	ASSERTLS_FETCH();
 	
 	if (! ASSERT(active)) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.24 2000/02/05 15:16:10 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.25 2000/02/05 15:44:17 zeev Exp $ */
 
 
 /* TODO:
@@ -369,7 +369,6 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 	MYSQL *mysql;
 	MySLS_FETCH();
 	PLS_FETCH();
-	ELS_FETCH();
 
 	if (PG(sql_safe_mode)) {
 		if (ARG_COUNT(ht)>0) {

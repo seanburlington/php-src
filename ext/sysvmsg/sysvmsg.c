@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.14 2003/08/31 12:41:49 zeev Exp $ */
+/* $Id: sysvmsg.c,v 1.15 2003/08/31 14:38:25 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -142,7 +142,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.14 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.15 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -243,7 +243,7 @@ PHP_FUNCTION(msg_get_queue)
 		/* doesn't already exist; create it */
 		mq->id = msgget(key, IPC_CREAT | IPC_EXCL | perms);
 		if (mq->id < 0)	{
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "failed for key 0x%x: %s", key, strerror(errno));
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "failed for key 0x%lx: %s", key, strerror(errno));
 			efree(mq);
 			RETURN_FALSE;
 		}

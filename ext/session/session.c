@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.329 2002/10/03 06:45:15 sas Exp $ */
+/* $Id: session.c,v 1.330 2002/10/03 07:23:50 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -654,7 +654,7 @@ static void php_session_save_current_state(TSRMLS_D)
 				if (Z_TYPE_PP(val) == IS_NULL) {
 					do_warn = 1;
 
-					migrate_global(ht, &pos);
+					migrate_global(ht, &pos TSRMLS_CC);
 				}
 				zend_hash_move_forward_ex(ht, &pos);
 			}

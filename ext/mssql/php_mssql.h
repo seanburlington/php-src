@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group                   |
+   | Copyright (c) 1997-2001 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.9 2000/11/29 22:06:47 fmk Exp $ */
+/* $Id: php_mssql.h,v 1.10 2001/02/26 06:07:03 andi Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group                   |
+   | Copyright (c) 1997-2001 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_velocis.h,v 1.6 2000/07/24 01:39:48 david Exp $ */
+/* $Id: php_velocis.h,v 1.7 2001/02/26 06:07:09 andi Exp $ */
 
 #ifndef PHP_VELOCIS_H
 #define PHP_VELOCIS_H

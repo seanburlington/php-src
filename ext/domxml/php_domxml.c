@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.47 2001/08/07 16:24:11 sniper Exp $ */
+/* $Id: php_domxml.c,v 1.48 2001/08/07 17:17:39 sniper Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -71,8 +71,8 @@ zend_class_entry *xpathobject_class_entry;
 #endif
 
 
-static int node_attributes(zval **attributes, xmlNode *nodep);
-static int node_children(zval **children, xmlNode *nodep);
+static int node_attributes(zval **attributes, xmlNode *nodep TSRMLS_DC);
+static int node_children(zval **children, xmlNode *nodep TSRMLS_DC);
 
 static zend_function_entry domxml_functions[] = {
 	PHP_FE(domxml_version,	NULL)

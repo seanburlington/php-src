@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.70 2001/08/05 01:42:44 zeev Exp $ */
+/* $Id: output.c,v 1.71 2001/08/05 14:36:51 sas Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -459,7 +459,7 @@ static int php_ub_body_write_no_header(const char *str, uint str_length)
 		return 0;
 	}
 	if (BG(use_trans_sid)) {
-		session_adapt_uris(str, str_length, &newstr, &new_length);
+		session_adapt_uris(str, str_length, &newstr, &new_length TSRMLS_CC);
 	}
 		
 	if (newstr) {

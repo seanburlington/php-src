@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.46 1999/09/28 17:37:04 andi Exp $ */
+/* $Id: string.c,v 1.47 1999/09/30 20:03:32 andrei Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -1755,7 +1755,7 @@ PHP_FUNCTION(nl2br)
 {
 	pval **str;
 	
-	if (ARG_COUNT(ht)!=1 || getParametersEx(ht, 1, &str)==FAILURE) {
+	if (ARG_COUNT(ht)!=1 || getParametersEx(1, &str)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	

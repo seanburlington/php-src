@@ -15,7 +15,7 @@
    | Authors: Frank M. Kromann <frank@kromann.info>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap_sendmail.c,v 1.4 2002/05/15 13:13:17 mfischer Exp $ */
+/* $Id: imap_sendmail.c,v 1.5 2002/05/15 17:39:41 fmk Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
@@ -117,6 +117,7 @@ int imap_SendText(char *RPath, char *Subject, char *mailTo, char *data, char *he
 	char *p;
 	char *tempMailTo;
 	ADDRESS *addr;
+	char *server_response = NULL;
 
 	/* check for NULL parameters */
 	if (data == NULL)

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.8 1999/09/29 22:18:43 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.9 1999/09/30 12:56:24 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -706,10 +706,7 @@ AC_SUBST(EXTRA_LIBS)
 # reading config stubs
 esyscmd(./scripts/config-stubs ext)
 
-dnl if it's still the default choice, enable this implicitly
-if test "$PHP_SAPI" = "cgi"; then
-  PHP_OUTPUT(sapi/cgi/Makefile)
-fi
+PHP_OUTPUT(sapi/$PHP_SAPI/Makefile)
 
 divert(4)
 

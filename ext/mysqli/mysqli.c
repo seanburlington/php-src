@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.31 2004/02/12 10:43:22 zeev Exp $ 
+  $Id: mysqli.c,v 1.32 2004/02/15 12:58:18 zeev Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -70,7 +70,7 @@ void php_free_stmt_bind_buffer(BIND_BUFFER bbuf, int type)
 			}
 		}
 		if (bbuf.vars[i]) {
-			ZVAL_DELREF(bbuf.vars[i]);
+			zval_ptr_dtor(&bbuf.vars[i]);
 		}	
 	}
 

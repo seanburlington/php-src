@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.14 2004/01/10 13:23:58 helly Exp $ */
+/* $Id: libxml.c,v 1.15 2004/02/15 12:58:17 zeev Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -466,7 +466,7 @@ PHP_FUNCTION(libxml_set_streams_context)
 		return;
 	}
 	if (LIBXML(stream_context)) {
-		ZVAL_DELREF(LIBXML(stream_context));
+		zval_ptr_dtor(&LIBXML(stream_context));
 		LIBXML(stream_context) = NULL;
 	}
 	ZVAL_ADDREF(arg);

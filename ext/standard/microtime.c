@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.8 1999/09/21 08:22:33 sas Exp $ */
+/* $Id: microtime.c,v 1.9 1999/09/21 08:41:31 sas Exp $ */
 
 #include <stdlib.h>
 #ifdef HAVE_UNISTD_H
@@ -55,7 +55,7 @@ PHP_FUNCTION(microtime)
 		msec = (double) (tp.tv_usec / MICRO_IN_SEC);
 		sec = tp.tv_sec;
 	}
-	if (msec > 1.0) msec -= (long) msec;
+	if (msec >= 1.0) msec -= (long) msec;
 	snprintf(ret, 100, "%.8f %ld", msec, sec);
 	RETVAL_STRING(ret,1);
 #endif

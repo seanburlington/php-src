@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.91.2.22 2003/09/03 15:22:24 abies Exp $ */
+/* $Id: interbase.c,v 1.91.2.23 2003/11/12 03:05:23 iliaa Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -624,7 +624,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.22 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.23 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1493,7 +1493,7 @@ PHP_FUNCTION(ibase_trans)
 	zval ***args;
 	char tpb[20], *tpbp = NULL;
 	long trans_argl = 0;
-	int tpb_len = 0, argn, link_id, trans_n = 0, i;
+	int tpb_len = 0, argn, link_id = 0, trans_n = 0, i;
 	ibase_db_link *ib_link;
 	ibase_tr_link *ib_trans;
 	
@@ -1528,7 +1528,7 @@ PHP_FUNCTION(ibase_trans)
 		efree(args);
 	}
 
-	if (argn < 2) {
+	if (!link_id) {
 		ZEND_FETCH_RESOURCE2(ib_link, ibase_db_link *, NULL, link_id, "InterBase link", le_link, le_plink);
 	}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_incomplete_class.h,v 1.6 2001/07/29 08:14:29 andi Exp $ */
+/* $Id: php_incomplete_class.h,v 1.7 2001/08/06 13:36:08 thies Exp $ */
 
 #ifndef PHP_INCOMPLETE_CLASS_H
 #define PHP_INCOMPLETE_CLASS_H
@@ -25,10 +25,6 @@
 
 #define PHP_IC_ENTRY \
 	BG(incomplete_class)
-
-#define PHP_IC_ENTRY_READ \
-	(PHP_IC_ENTRY ? PHP_IC_ENTRY : php_create_incomplete_class(TSRMLS_C))
-
 
 #define PHP_SET_CLASS_ATTRIBUTES(struc) 								\
 	/* OBJECTS_FIXME: Fix for new object model */						\

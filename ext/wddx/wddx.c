@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.76 2001/07/31 05:44:08 zeev Exp $ */
+/* $Id: wddx.c,v 1.77 2001/08/06 13:36:08 thies Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -836,7 +836,7 @@ static void php_wddx_pop_element(void *user_data, const char *name)
 						if (zend_hash_find(EG(class_table), Z_STRVAL_P(ent1->data),
 										   Z_STRLEN_P(ent1->data)+1, (void **) &ce)==FAILURE) {
 							incomplete_class = 1;
-							ce = PHP_IC_ENTRY_READ;
+							ce = PHP_IC_ENTRY;
 						}
 
 						/* Initialize target object */

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.89 1999/07/24 22:16:54 andrey Exp $ */
+/* $Id: main.c,v 1.90 1999/07/30 13:17:29 andrey Exp $ */
 
 
 #include <stdio.h>
@@ -270,7 +270,7 @@ void php3_log_err(char *log_message)
 	/* Try to use the specified logging location. */
 	if (PG(error_log) != NULL) {
 #if HAVE_SYSLOG_H
-		if (strcmp(PG(error_log), "syslog")) {
+		if (!strcmp(PG(error_log), "syslog")) {
 			syslog(LOG_NOTICE, log_message);
 			return;
 		} else {

@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.218.2.2 2002/11/17 19:28:57 wez Exp $
+dnl $Id: acinclude.m4,v 1.218.2.3 2003/01/01 09:55:38 wez Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -1461,6 +1461,45 @@ int main(void) {
     AC_DEFINE(CHARSET_EBCDIC,1, [Define if system uses EBCDIC])
   fi
 ])
+
+AC_DEFUN([PHP_BROKEN_GLIBC_FOPEN_APPEND],[
+  AC_MSG_CHECKING([for broken libc stdio])
+  AC_TRY_RUN([
+#include <stdio.h>
+int main(int argc, char *argv[])
+{
+  FILE *fp;
+  long position;
+  char *filename = "/tmp/phpglibccheck";
+  
+  fp = fopen(filename, "w");
+  if (fp == NULL) {
+	  perror("fopen");
+	  exit(2);
+  }
+  fputs("foobar", fp);
+  fclose(fp);
+
+  fp = fopen(filename, "a+");
+  position = ftell(fp);
+  fclose(fp);
+  unlink(filename);
+  if (position == 0)
+	return 1;
+  return 0;
+}
+],
+[have_broken_glibc_fopen_append=no],
+[have_broken_glibc_fopen_append=yes ])
+
+  if test "$have_broken_glibc_fopen_append" = "yes"; then
+	AC_MSG_RESULT(yes)
+	AC_DEFINE(HAVE_BROKEN_GLIBC_FOPEN_APPEND,1, [Define if your glibc borks on fopen with mode a+])
+  else
+	AC_MSG_RESULT(no)
+  fi
+])
+
 
 AC_DEFUN([PHP_FOPENCOOKIE],[
 	AC_CHECK_FUNC(fopencookie, [ have_glibc_fopencookie=yes ])

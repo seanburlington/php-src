@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.333 2002/10/06 17:17:38 iliaa Exp $ */
+/* $Id: session.c,v 1.334 2002/10/06 21:47:54 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -917,7 +917,6 @@ PHPAPI void php_session_start(TSRMLS_D)
 	int module_number = PS(module_number);
 	int nrand;
 	int lensess;
-	zend_constant *c;
 
 	PS(apply_trans_sid) = PS(use_trans_sid);
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_network.h,v 1.44 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: php_network.h,v 1.45 2003/06/15 23:34:45 edink Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -165,7 +165,7 @@ struct _php_netstream_data_t	{
 	size_t ownsize;
 };
 typedef struct _php_netstream_data_t php_netstream_data_t;
-extern php_stream_ops php_stream_socket_ops;
+PHPAPI extern php_stream_ops php_stream_socket_ops;
 extern php_stream_ops php_stream_generic_socket_ops;
 #define PHP_STREAM_IS_SOCKET	(&php_stream_socket_ops)
 

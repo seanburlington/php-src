@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.12 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: xp_socket.c,v 1.13 2003/06/15 23:34:45 edink Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -32,7 +32,7 @@
 #endif
 
 php_stream_ops php_stream_generic_socket_ops;
-php_stream_ops php_stream_socket_ops;
+PHPAPI php_stream_ops php_stream_socket_ops;
 php_stream_ops php_stream_udp_socket_ops;
 #ifdef AF_UNIX
 php_stream_ops php_stream_unix_socket_ops;

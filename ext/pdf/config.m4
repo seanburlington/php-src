@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.36 2002/11/14 00:21:13 sniper Exp $
+dnl $Id: config.m4,v 1.37 2003/07/11 13:08:44 kalowsky Exp $
 dnl
 
 PHP_ARG_WITH(pdflib,for PDFlib support,
@@ -93,6 +93,12 @@ if test "$PHP_PDFLIB" != "no"; then
 
   case $PHP_PDFLIB in
     yes)
+	  case $host_alias in
+	    *darwin*)
+		  PHP_ADD_FRAMEWORK(CoreServices)
+		  PHP_ADD_FRAMEWORK(ApplicationServices)
+		  ;;
+	  esac
       AC_CHECK_LIB(pdf, PDF_show_boxed, [
         AC_DEFINE(HAVE_PDFLIB,1,[ ])
         PHP_ADD_LIBRARY(pdf,, PDF_SHARED_LIBADD)

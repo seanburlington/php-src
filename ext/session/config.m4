@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.18 2002/05/04 16:48:48 sas Exp $
+dnl $Id: config.m4,v 1.19 2002/06/28 02:27:02 sniper Exp $
 dnl
 
 PHP_ARG_WITH(mm,for mm support,
@@ -7,6 +7,15 @@ PHP_ARG_WITH(mm,for mm support,
 
 PHP_ARG_ENABLE(session, whether to enable PHP sessions,
 [  --disable-session       Disable session support], yes)
+
+if test "$PHP_SESSION" != "no"; then
+  AC_CHECK_FUNCS(pread pwrite)
+  PHP_MISSING_PWRITE_DECL
+  PHP_MISSING_PREAD_DECL
+  PHP_NEW_EXTENSION(session, session.c mod_files.c mod_mm.c mod_user.c, $ext_shared)
+  PHP_SUBST(SESSION_SHARED_LIBADD)
+  AC_DEFINE(HAVE_PHP_SESSION,1,[ ])
+fi
 
 if test "$PHP_MM" != "no"; then
   for i in /usr/local /usr $PHP_MM; do
@@ -22,14 +31,4 @@ if test "$PHP_MM" != "no"; then
   PHP_ADD_LIBRARY_WITH_PATH(mm, $MM_DIR/lib, SESSION_SHARED_LIBADD)
   PHP_ADD_INCLUDE($MM_DIR/include)
   AC_DEFINE(HAVE_LIBMM, 1, [Whether you have libmm])
-  PHP_MODULE_PTR(phpext_ps_mm_ptr)
-fi
-
-if test "$PHP_SESSION" != "no"; then
-  AC_CHECK_FUNCS(pread pwrite)
-  PHP_MISSING_PWRITE_DECL
-  PHP_MISSING_PREAD_DECL
-  PHP_NEW_EXTENSION(session, session.c mod_files.c mod_mm.c mod_user.c, $ext_shared)
-  PHP_SUBST(SESSION_SHARED_LIBADD)
-  AC_DEFINE(HAVE_PHP_SESSION,1,[ ])
 fi

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.170 2002/03/18 21:01:29 mfischer Exp $ */
+/* $Id: oci8.c,v 1.171 2002/04/13 12:10:03 thies Exp $ */
 
 /* TODO list:
  *
@@ -631,7 +631,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.170 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.171 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2578,7 +2578,13 @@ static void oci_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent,int exclu
 		goto CLEANUP;
 	}
 
-	persistent = server->persistent; /* if our server-context is not persistent we can't */
+	if (exclusive) {
+		/* exlusive session can never be persistent!*/
+		persistent = 0;
+	} else {
+		/* if our server-context is not persistent we can't */
+		persistent = server->persistent; 
+	}
 
 	session = _oci_open_session(server,username,password,persistent,exclusive);
 

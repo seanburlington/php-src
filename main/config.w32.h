@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.68 2003/05/24 08:03:38 sebastian Exp $
+	$Id: config.w32.h,v 1.69 2003/06/09 01:00:23 edink Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -170,6 +170,7 @@
 #define SIZEOF_INT 4
 #define HAVE_GLOB
 #define PHP_SHLIB_SUFFIX "dll"
+#define HAVE_SQLDATASOURCES
 
 /* Win32 supports strcoll */
 #define HAVE_STRCOLL 1

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.100 2000/11/08 14:56:09 mathieu Exp $ */
+/* $Id: gd.c,v 1.101 2000/11/08 16:08:42 mathieu Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -601,6 +601,8 @@ PHP_FUNCTION (imagecreatefromstring)
 	}
 
 	ZEND_REGISTER_RESOURCE(return_value, im, GDG (le_gd));
+#else
+	php_error(E_WARNING, "ImageCreateFromString: Only available with GD 1.5+");
 #endif
 }
 /* }}} */

@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.71 2003/01/18 21:31:06 iliaa Exp $ */
+/* $Id: php_mnogo.c,v 1.72 2003/04/13 17:52:24 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -1655,11 +1655,13 @@ DLEXPORT PHP_FUNCTION(udm_make_excerpt)
 		
 		Excerpt = UdmExcerptDoc(Agent, Res, &(Res->Doc[row]), 256);
 		
-		if (Excerpt != NULL) {
+		if ((Excerpt != NULL) && (strlen(Excerpt) > 6)) {
 			char *HlExcerpt = UdmHlConvert(&Res->WWList, Excerpt, Agent->Conf->lcs, Agent->Conf->bcs);
-			UdmVarListReplaceInt(&(Res->Doc[row].Sections),"ST",1);
 			UdmVarListReplaceStr(&(Res->Doc[row].Sections),"Body",HlExcerpt);
 			UDM_FREE(HlExcerpt);
+		}
+		if (Excerpt != NULL && (UdmVarListFindStr(&(Res->Doc[row].Sections), "Z", NULL) == NULL)) {
+			UdmVarListReplaceInt(&(Res->Doc[row].Sections),"ST",1);
 			UDM_FREE(Excerpt);
 		} else {
 		        UdmVarListReplaceInt(&(Res->Doc[row].Sections),"ST",0);
@@ -2034,7 +2036,6 @@ DLEXPORT PHP_FUNCTION(udm_get_res_param)
 			    {	
 				size_t wsize=(1+len*15)*sizeof(char);
 				char *wordinfo = (char*) malloc(wsize);
-				int corder = -1, ccount = 0;
 	  
 				*wordinfo = '\0';
 	  

@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.257.2.3 2004/10/10 15:05:52 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.257.2.4 2004/10/23 09:34:17 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -786,7 +786,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.257.2.3 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.257.2.4 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -1016,7 +1016,7 @@ static void _oci_conn_list_dtor(oci_connection *connection TSRMLS_DC)
 		);
 	}
 
-	if (connection->session) {
+	if (connection->session && connection->session->exclusive) {
 		/* close associated session when destructed */
 		zend_list_delete(connection->session->num);
 	}
@@ -2907,7 +2907,7 @@ static int _session_compare(void *a, void *b)
 	oci_session *sess1 = (oci_session*) a;
 	oci_session *sess2 = (oci_session*) b;
 	
-	return sess1->num = sess2->num;
+	return sess1->num == sess2->num;
 }
 
 static void _oci_close_session(oci_session *session)

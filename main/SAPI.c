@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.185 2004/05/25 22:12:40 sesser Exp $ */
+/* $Id: SAPI.c,v 1.186 2004/06/07 13:51:50 iliaa Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -605,6 +605,11 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 					zval *repl_temp;
 					char *ptr = colon_offset+1;
 					int ptr_len=0, result_len = 0;
+
+					/* skip white space */
+					while (isspace(*ptr)) {
+						ptr++;
+					}
 
 					myuid = php_getuid();
 

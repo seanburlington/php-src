@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.c,v 1.26 2003/06/26 03:24:11 sterling Exp $ */
+/* $Id: var_unserializer.c,v 1.27 2003/06/26 03:53:17 sterling Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -112,7 +112,6 @@ PHPAPI void var_destroy(php_unserialize_data_t *var_hashx)
 
 
 #line 117
-
 
 
 

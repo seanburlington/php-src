@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.97.2.4 2003/01/16 13:21:54 edink Exp $ */
+/* $Id: math.c,v 1.97.2.5 2003/08/08 23:42:10 iliaa Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -31,6 +31,8 @@
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
+
+#define PHP_ROUND_FUZZ 0.50000000001
 
 /* {{{ proto int abs(int number)
    Return the absolute value of the number */
@@ -143,9 +145,9 @@ PHP_FUNCTION(round)
 
 			return_val *= f;
 			if (return_val >= 0.0)
-				return_val = floor(return_val + 0.5);
+				return_val = floor(return_val + PHP_ROUND_FUZZ);
 			else
-				return_val = ceil(return_val - 0.5);
+				return_val = ceil(return_val - PHP_ROUND_FUZZ);
 			return_val /= f;
 
 			RETURN_DOUBLE(return_val);

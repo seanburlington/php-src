@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: namednodemap.c,v 1.5 2003/12/21 18:22:14 iliaa Exp $ */
+/* $Id: namednodemap.c,v 1.6 2003/12/23 17:08:44 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -201,7 +201,7 @@ PHP_FUNCTION(dom_namednodemap_item)
 			}
 		}
 	} else {
-		RETVAL_NULL();
+		RETURN_NULL();
 	}
 
 	if (itemnode) {

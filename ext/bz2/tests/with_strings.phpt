@@ -5,7 +5,7 @@ BZ2 with strings
 --POST--
 --GET--
 --FILE--
-<?php // $Id: with_strings.phpt,v 1.1 2003/05/17 14:27:07 sterling Exp $
+<?php // $Id: with_strings.phpt,v 1.2 2003/08/18 22:57:49 iliaa Exp $
 
 error_reporting(E_ALL);
 
@@ -23,7 +23,7 @@ $tests = <<<TESTS
  \$blaat === \$blaat2
 TESTS;
 
- include('tests/quicktester.inc');
+include(dirname(__FILE__) . '/../../../tests/quicktester.inc');
 
 --EXPECT--
 OK

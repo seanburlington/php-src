@@ -16,16 +16,18 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.57 2003/07/19 19:23:32 andrey Exp $ */
+/* $Id: posix.c,v 1.58 2003/08/18 22:57:49 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+#include <unistd.h>
 #include "ext/standard/info.h"
 #include "ext/standard/php_string.h"
 #include "php_posix.h"
+
 
 #if HAVE_POSIX
 
@@ -33,7 +35,6 @@
 #include <sys/time.h>
 #endif
 
-#include <unistd.h>
 #include <sys/resource.h>
 #include <sys/utsname.h>
 #include <sys/types.h>
@@ -130,7 +131,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.57 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.58 $");
 	php_info_print_table_end();
 }
 /* }}} */

@@ -1,6 +1,6 @@
 <?php
 
-/* $Id: interbase.inc,v 1.3 2003/04/30 10:42:24 sniper Exp $ */
+/* $Id: interbase.inc,v 1.4 2003/06/14 16:45:38 daniela Exp $ */
 /* used in tests */
 
 srand((double)microtime()*1000000);
@@ -57,6 +57,19 @@ function out_result($result, $table_name = "")
 	}
 	echo "---\n";
 }
+
+function out_result_trap_error($result, $table_name = "")
+{  
+   echo "--- $table_name ---\n";
+   while ($r = @ibase_fetch_assoc($result)){
+      while (list($k, $v) = each($r) ){
+         echo "$r[$k]\t";
+      }
+      echo "\n";
+   }
+   echo "errmsg [" . ibase_errmsg() . "]\t\n";
+   echo "---\n";
+} 
 
 /* M/D/Y H:M:S */
 function rand_datetime()

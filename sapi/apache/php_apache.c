@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.45 2001/08/14 17:05:53 dbeu Exp $ */
+/* $Id: php_apache.c,v 1.45.2.1 2001/10/12 08:02:42 thies Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -114,10 +114,19 @@ static PHP_MSHUTDOWN_FUNCTION(apache)
 	return SUCCESS;
 }
 
-
 zend_module_entry apache_module_entry = {
-	"apache", apache_functions, PHP_MINIT(apache), PHP_MSHUTDOWN(apache), NULL, NULL, PHP_MINFO(apache), STANDARD_MODULE_PROPERTIES
+	STANDARD_MODULE_HEADER,
+	"apache",
+	apache_functions,
+	PHP_MINIT(apache),
+	PHP_MSHUTDOWN(apache),
+	NULL,
+	NULL,
+	PHP_MINFO(apache),
+	NO_VERSION_YET,
+	STANDARD_MODULE_PROPERTIES
 };
+
 
 /* {{{ proto string child_terminate()
    Get and set Apache request notes */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.25 2001/12/11 15:30:14 sebastian Exp $ */
+/* $Id: pspell.c,v 1.26 2001/12/29 01:50:10 vlad Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -36,7 +36,7 @@
 #define USE_ORIGINAL_MANAGER_FUNCS
 
 #include "php_pspell.h"
-#include <pspell/pspell.h>
+#include <pspell.h>
 #include "ext/standard/info.h"
 
 #define PSPELL_FAST 1L

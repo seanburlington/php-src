@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.47 2004/04/18 07:58:18 john Exp $ */
+/* $Id: tidy.c,v 1.48 2004/04/20 00:26:48 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -343,7 +343,7 @@ static void _php_tidy_throw_exception(char *message, ...)
     if(TG(inst)) {
         zend_throw_exception(tidy_ce_exception, msg, 0 TSRMLS_CC);
     } else {
-        php_error_docref(NULL TSRMLS_CC, E_WARNING, msg);
+        php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", msg);
     }
 	    
     va_end(ap);
@@ -952,7 +952,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.47 2004/04/18 07:58:18 john Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.48 2004/04/20 00:26:48 iliaa Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -987,7 +987,7 @@ PHP_FUNCTION(ob_tidyhandler)
 
 	if (input_len > 1) {
 		if (tidyParseString(doc, input) < 0 || tidyCleanAndRepair(doc) < 0) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, errbuf.bp);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", errbuf.bp);
 			RETVAL_NULL();
 		} else {
 			TidyBuffer output = {0};

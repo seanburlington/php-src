@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.13 2003/02/18 00:00:51 georg Exp $ 
+  $Id: mysqli_api.c,v 1.14 2003/02/18 03:12:38 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -535,7 +535,8 @@ PHP_FUNCTION(mysqli_enable_rpl_parse)
 	}
 	MYSQLI_FETCH_RESOURCE(mysql, MYSQL *, &mysql_link, "mysqli_link"); 
 
-	return (mysql_enable_rpl_parse(mysql));
+	mysql_enable_rpl_parse(mysql);
+	RETURN_TRUE;
 }
 /* }}} */
 

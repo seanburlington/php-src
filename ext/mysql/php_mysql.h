@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.27 2002/03/24 10:57:40 zak Exp $ */
+/* $Id: php_mysql.h,v 1.28 2002/03/24 17:19:19 georg Exp $ */
 
 #ifndef PHP_MYSQL_H
 #define PHP_MYSQL_H
@@ -81,11 +81,14 @@ PHP_FUNCTION(mysql_field_len);
 PHP_FUNCTION(mysql_field_type);
 PHP_FUNCTION(mysql_field_flags);
 PHP_FUNCTION(mysql_escape_string);
+PHP_FUNCTION(mysql_real_escape_string);
 PHP_FUNCTION(mysql_get_client_info);
 PHP_FUNCTION(mysql_get_host_info);
 PHP_FUNCTION(mysql_get_proto_info);
 PHP_FUNCTION(mysql_get_server_info);
 PHP_FUNCTION(mysql_stat);
+PHP_FUNCTION(mysql_thread_id);
+PHP_FUNCTION(mysql_character_set_name);
 
 ZEND_BEGIN_MODULE_GLOBALS(mysql)
 	long default_link;

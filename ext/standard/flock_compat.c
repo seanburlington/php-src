@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: flock_compat.c,v 1.18 2002/11/11 16:43:19 helly Exp $ */
+/* $Id: flock_compat.c,v 1.19 2002/11/11 20:52:09 helly Exp $ */
 
 #include <php.h>
 #include <errno.h>
@@ -41,7 +41,10 @@
 #endif
 
 #ifndef HAVE_FLOCK
-PHPAPI int flock(int fd, int operation)
+/* defines flock as php_flock */
+#endif /* !defined(HAVE_FLOCK) */
+
+PHPAPI int php_flock(int fd, int operation)
 #if HAVE_STRUCT_FLOCK
 {
 	struct flock flck;
@@ -157,7 +160,6 @@ PHPAPI int flock(int fd, int operation)
 	return 0;
 }
 #endif
-#endif /* !defined(HAVE_FLOCK) */
 
 #if !(HAVE_INET_ATON)
 /* {{{ inet_aton

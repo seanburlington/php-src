@@ -16,17 +16,23 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: flock_compat.h,v 1.14 2002/11/11 16:43:19 helly Exp $ */
+/* $Id: flock_compat.h,v 1.15 2002/11/11 20:52:09 helly Exp $ */
 
 #ifndef FLOCK_COMPAT_H
 #define FLOCK_COMPAT_H
+
+/* php_flock internally uses fcntl whther or not flock is available
+ * This way our php_flock even works on NFS files.
+ * More info: /usr/src/linux/Documentation
+ */
+PHPAPI int php_flock(int fd, int operation);
 
 #ifndef HAVE_FLOCK
 #	define LOCK_SH 1
 #	define LOCK_EX 2
 #	define LOCK_NB 4
 #	define LOCK_UN 8
-PHPAPI int flock(int fd, int operation);
+#   define flock php_flock
 #endif
 
 #ifdef PHP_WIN32

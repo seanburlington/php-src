@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.179 2003/09/11 23:08:48 abies Exp $ */
+/* $Id: interbase.c,v 1.180 2003/09/11 23:11:18 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,7 @@
 
 #include "php.h"
 
-#define FILE_REVISION "$Revision: 1.179 $"
+#define FILE_REVISION "$Revision: 1.180 $"
 
 #if HAVE_IBASE && !defined(VERSION_INFO_ONLY)
 

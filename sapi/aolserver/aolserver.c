@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.45 2000/08/22 05:43:30 sas Exp $ */
+/* $Id: aolserver.c,v 1.46 2000/08/22 07:33:27 sas Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -207,7 +207,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	NSLS_FETCH();
 	
 	php_info_print_table_start();
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.45 2000/08/22 05:43:30 sas Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.46 2000/08/22 07:33:27 sas Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -557,6 +557,14 @@ php_ns_config(php_ns_context *ctx, char global)
 			Ns_RegisterRequest(ctx->ns_server, "GET", value, php_ns_request_handler, NULL, ctx, 0);
 			Ns_RegisterRequest(ctx->ns_server, "POST", value, php_ns_request_handler, NULL, ctx, 0);
 			Ns_RegisterRequest(ctx->ns_server, "HEAD", value, php_ns_request_handler, NULL, ctx, 0);
+
+	/* 
+	 * Deactivated for now. The ini system will cause random crashes when 
+	 * accessed from here (since there are no locks to protect the global 
+	 * known_directives) 
+	 */
+
+#if 0
 		} else if (!global && !strcasecmp(key, "php_value")) {
 			char *val;
 
@@ -575,6 +583,7 @@ php_ns_config(php_ns_context *ctx, char global)
 						strlen(val) + 1, PHP_INI_SYSTEM, PHP_INI_STAGE_RUNTIME);
 				
 				efree(new_key);
+#endif
 			}
 		}
 		

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.409 2002/12/19 17:02:39 edink Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.410 2003/01/01 09:58:16 wez Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -382,6 +382,7 @@ sys/ipc.h \
 ])
 
 PHP_FOPENCOOKIE
+PHP_BROKEN_GLIBC_FOPEN_APPEND
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 dnl -------------------------------------------------------------------------

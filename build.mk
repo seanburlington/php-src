@@ -9,7 +9,7 @@
 #
 # Written by Sascha Schumann
 #
-# $Id: build.mk,v 1.10 1999/11/09 18:18:16 sas Exp $ 
+# $Id: build.mk,v 1.11 1999/11/10 13:12:30 ssb Exp $ 
 
 LT_TARGETS = ltconfig ltmain.sh config.guess config.sub
 
@@ -20,7 +20,7 @@ makefile_in_files = $(makefile_am_files:.am=.in)
 makefile_files    = $(makefile_am_files:e.am=e)
 
 config_h_in = php_config.h.in
-	
+
 config_h_files = \
 	$(shell echo ext/*/config.h.stub sapi/*/config.h.stub)
 
@@ -63,7 +63,12 @@ acconfig.h: $(acconfig_h_SOURCES)
 
 $(makefile_in_files): $(makefile_am_files) aclocal.m4
 	@echo rebuilding Makefile.in\'s
-	@for i in $(LT_TARGETS); do test -f $$i && mv $$i $$i.bak; done
+	@for i in $(LT_TARGETS); do \
+		if test -f "$$i"; then \
+			mv $$i $$i.bak; \
+			cp $$i.bak $$i; \
+		fi; \
+	done
 	@automake -a -i $(AMFLAGS) $(makefile_files) 2>&1 \
 		| grep -v PHP_OUTPUT_FILES || true >&2
 	@for i in $(LT_TARGETS); do mv $$i.bak $$i; done

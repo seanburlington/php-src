@@ -1,5 +1,5 @@
 # $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.12 1999/09/24 15:35:35 ssb Exp $
+# $Id: config.m4,v 1.13 1999/09/28 09:59:59 thies Exp $
 
 AC_MSG_CHECKING(for XML support)
 AC_ARG_WITH(xml,
@@ -24,7 +24,7 @@ AC_ARG_WITH(xml,
 	AC_CHECK_LIB(xmltok, main,
 	  AC_CHECK_LIB(xmlparse, main, XML_LIBS="-lxmlparse -lxmltok", 
 	    AC_MSG_ERROR(No expat library found for the xml module),"-lxmltok"),
-	  AC_MSG_ERROR(No expart library found for the xml module))
+	  AC_MSG_ERROR(No expat library found for the xml module))
       )
     else
       XML_LIBS="-L$withval/lib -lexpat"

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.14 2005/03/09 18:21:09 wez Exp $
+dnl $Id: config.m4,v 1.15 2005/03/09 18:21:41 wez Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
@@ -118,7 +118,7 @@ EOF
       AC_CHECK_HEADERS(time.h)
     
   fi
-  dnl PHP_ADD_EXTENSION_DEP(pdo_sqlite, pdo)
+  PHP_ADD_EXTENSION_DEP(pdo_sqlite, pdo)
 fi
 
 fi

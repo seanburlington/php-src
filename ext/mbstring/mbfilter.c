@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.44 2002/10/07 16:05:28 sesser Exp $ */
+/* $Id: mbfilter.c,v 1.45 2002/10/07 16:11:30 sesser Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -3535,6 +3535,7 @@ mbfl_filt_conv_html_enc(int c, mbfl_convert_filter *filter TSRMLS_DC)
 {
 	int tmp[10];
 	int i = 0, p = 0, e;
+	unsigned int uc;
 
 	if (c<256 && mblen_table_html[c]==1) {
 		CK((*filter->output_function)(c, filter->data TSRMLS_CC));
@@ -3554,15 +3555,17 @@ mbfl_filt_conv_html_enc(int c, mbfl_convert_filter *filter TSRMLS_DC)
 			}
 			i++;
 		}
+		i=0;
 		if (!p) {
 			CK((*filter->output_function)('#', filter->data TSRMLS_CC));
+			uc = (unsigned int)c;
 			do {
-				tmp[i++] = '0'+c%10;
-				c /= 10;
-			} while (c);
+				tmp[i++] = '0'+uc%10;
+				uc /= 10;
+			} while (uc);
 			do {
 				CK((*filter->output_function)(tmp[--i], filter->data TSRMLS_CC));
-			} while(i);
+			} while (i);
 		}
 		CK((*filter->output_function)(';', filter->data TSRMLS_CC));
 	}

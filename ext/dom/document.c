@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.45 2004/01/19 20:54:40 chregu Exp $ */
+/* $Id: document.c,v 1.46 2004/01/20 11:35:32 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1288,6 +1288,11 @@ static void dom_parse_document(INTERNAL_FUNCTION_PARAMETERS, int mode) {
 		return;
 	}
 
+	if (!source_len) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty string supplied as input");
+		RETURN_FALSE;
+	}
+
 	newdoc = dom_document_parser(id, mode, source TSRMLS_CC);
 
 	if (!newdoc)
@@ -1721,6 +1726,7 @@ static void dom_load_html(INTERNAL_FUNCTION_PARAMETERS, int mode)
 	}
 
 	if (!source_len) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty string supplied as input");
 		RETURN_FALSE;
 	}
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.13 2004/01/20 07:27:47 helly Exp $ */
+/* $Id: xpath.c,v 1.14 2004/01/20 11:35:32 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -252,7 +252,7 @@ PHP_FUNCTION(dom_xpath_query)
 			add_next_index_zval(retval, child);
 		}
 	} else {
-		RETURN_FALSE;
+		retval = NULL;
 	}
 
 	php_dom_create_interator(return_value, DOM_NODELIST TSRMLS_CC);

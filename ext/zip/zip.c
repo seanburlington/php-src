@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zip.c,v 1.34 2002/12/31 16:08:13 sebastian Exp $ */
+/* $Id: zip.c,v 1.35 2003/01/18 19:20:02 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -142,8 +142,7 @@ PHP_FUNCTION(zip_open)
 
 	archive_p = zzip_opendir(filename);
 	if (archive_p == NULL) {
-		php_error(E_WARNING, "%s() Cannot open zip archive %s", 
-				  get_active_function_name(TSRMLS_C), filename);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot open zip archive %s", filename);
 		RETURN_FALSE;
 	}
 

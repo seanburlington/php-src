@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.40 2002/08/24 01:19:27 helly Exp $ */
+/* $Id: dns.c,v 1.41 2002/08/29 15:44:00 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -128,7 +128,7 @@ static char *php_gethostbyaddr(char *ip)
 	hp = gethostbyaddr((char *) &addr, sizeof(addr), AF_INET);
 #endif
 
-	if (!hp) {
+	if (!hp || hp->h_name == NULL || hp->h_name == '\0') {
 		return estrdup(ip);
 	}
 

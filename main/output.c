@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.88 2002/03/04 10:58:00 jon Exp $ */
+/* $Id: output.c,v 1.88.2.1 2002/04/24 16:58:59 stas Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -77,6 +77,8 @@ PHPAPI void php_output_activate(TSRMLS_D)
 	OG(ob_nesting_level) = 0;
 	OG(ob_lock) = 0;
 	OG(disable_output) = 0;
+	OG(output_start_filename) = NULL;
+	OG(output_start_lineno) = 0;
 }
 
 

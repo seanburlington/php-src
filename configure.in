@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.189 2000/10/19 12:18:02 venaas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.190 2000/10/26 18:00:30 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -139,6 +139,7 @@ dnl paths to the targets are relative to the build directory
 SAPI_PROGRAM=php
 SAPI_SHARED=libs/libphp4.$SHLIB_SUFFIX_NAME
 SAPI_STATIC=libs/libphp4.a
+SAPI_LIBTOOL=libphp4.la
 
 PHP_CONFIGURE_PART(Configuring SAPI modules)
 

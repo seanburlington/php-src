@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx_api.h,v 1.16 2001/12/11 15:30:50 sebastian Exp $ */
+/* $Id: php_wddx_api.h,v 1.17 2002/09/26 18:13:32 sebastian Exp $ */
 
 #ifndef PHP_WDDX_API_H
 #define PHP_WDDX_API_H
@@ -59,7 +59,7 @@ void		 php_wddx_destructor(wddx_packet *packet);
 void 		 php_wddx_packet_start(wddx_packet *packet, char *comment, int comment_len);
 void 		 php_wddx_packet_end(wddx_packet *packet);
 
-void 		 php_wddx_serialize_var(wddx_packet *packet, zval *var, char *name, int name_len);
+void 		 php_wddx_serialize_var(wddx_packet *packet, zval *var, char *name, int name_len TSRMLS_DC);
 int 		 php_wddx_deserialize_ex(char *, int, zval *return_value);
 #define php_wddx_gather(packet) estrndup(packet->c, packet->len)
 

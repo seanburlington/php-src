@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky <ilia@prohost.org>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.26 2003/06/10 20:03:36 imajes Exp $ */
+/* $Id: shmop.c,v 1.27 2004/01/08 08:17:25 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

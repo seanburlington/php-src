@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.160 2003/12/17 09:07:11 helly Exp $ */
+/* $Id: exif.c,v 1.161 2004/01/08 08:15:20 andi Exp $ */
 
 /*  ToDos
  *
@@ -111,7 +111,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.160 2003/12/17 09:07:11 helly Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.161 2004/01/08 08:15:20 andi Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */

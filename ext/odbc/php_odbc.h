@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.27 2000/09/29 19:03:23 kalowsky Exp $ */
+/* $Id: php_odbc.h,v 1.28 2000/10/17 15:23:18 kara Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -69,6 +69,15 @@ PHP_FUNCTION(solid_fetch_prev);
 #elif defined(HAVE_ADABAS) /* Adabas D */
 
 #define ODBC_TYPE "Adabas D"
+#include <WINDOWS.H>
+#include <sql.h>
+#include <sqlext.h>
+#define HAVE_SQL_EXTENDED_FETCH 1
+#define SQL_SUCCEEDED(rc) (((rc)&(~1))==0)
+
+#elif defined(HAVE_SAPDB) /* SAP DB */
+
+#define ODBC_TYPE "SAP DB"
 #include <WINDOWS.H>
 #include <sql.h>
 #include <sqlext.h>
@@ -219,7 +228,7 @@ typedef struct odbc_connection {
 #if defined( HAVE_IBMDB2 ) || defined( HAVE_UNIXODBC )
 	SQLHANDLE henv;
 	SQLHANDLE hdbc;
-#elif defined( HAVE_SOLID_35 )
+#elif defined( HAVE_SOLID_35 ) || defined( HAVE_SAPDB )
 	SQLHENV	henv;
 	SQLHDBC hdbc;
 #else
@@ -240,7 +249,7 @@ typedef struct odbc_result_value {
 typedef struct odbc_result {
 #if defined( HAVE_IBMDB2 ) || defined( HAVE_UNIXODBC )
 	SQLHANDLE stmt;
-#elif defined( HAVE_SOLID_35 )
+#elif defined( HAVE_SOLID_35 ) || defined( HAVE_SAPDB )
 	SQLHSTMT stmt;
 #else
 	HSTMT stmt;
@@ -285,7 +294,7 @@ int odbc_bindcols(odbc_result *result);
 
 #if defined( HAVE_IBMDB2 ) || defined( HAVE_UNIXODBC )
 #define ODBC_SQL_ERROR_PARAMS SQLHANDLE henv, SQLHANDLE conn, SQLHANDLE stmt, char *func
-#elif defined( HAVE_SOLID_35 )
+#elif defined( HAVE_SOLID_35 ) || defined( HAVE_SAPDB )
 #define ODBC_SQL_ERROR_PARAMS SQLHENV henv, SQLHDBC conn, SQLHSTMT stmt, char *func
 #else
 #define ODBC_SQL_ERROR_PARAMS HENV henv, HDBC conn, HSTMT stmt, char *func

@@ -1,3 +1,23 @@
+2005-03-04  Jani Taskinen  <jani.taskinen@kolumbus.fi>
+
+    * sapi/apache_hooks/config.m4:
+      Merge from sapi/apache/config.m4 and cleanup
+
+    * sapi/apache/config.m4:
+      Do not set apache stuff if not building apache
+
+    * acinclude.m4:
+      This did not work for some reason, better revert it
+
+    * scripts/phpize.m4:
+      Add missing subst
+
+2005-03-04  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_0)
+      ext/mbstring/mb_gpc.c:
+      Removed unused variables.
+
 2005-03-03  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * (PHP_5_0)
@@ -1132,7 +1152,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1912 2005/03/04 01:35:53 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1913 2005/03/05 01:34:31 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -1613,7 +1633,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1912 2005/03/04 01:35:53 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1913 2005/03/05 01:34:31 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -3087,7 +3107,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1912 2005/03/04 01:35:53 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1913 2005/03/05 01:34:31 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

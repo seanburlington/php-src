@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.55 2001/09/18 05:48:49 sterling Exp $ */
+/* $Id: rand.c,v 1.56 2001/10/07 11:52:09 sterling Exp $ */
 
 #include <stdlib.h>
 
@@ -198,7 +198,7 @@ PHPAPI void php_mt_srand(php_uint32 seed TSRMLS_DC)
 
 	register php_uint32 x = (seed | 1U) & 0xFFFFFFFFU, *s = BG(state);
 	register int    j;
-
+	
 	for (BG(left) = 0, *s++ = x, j = N; --j;
 		*s++ = (x *= 69069U) & 0xFFFFFFFFU);
 }
@@ -268,6 +268,7 @@ PHP_FUNCTION(srand)
 		seed = GENERATE_SEED();
 
 	php_srand(seed TSRMLS_CC);
+	BG(rand_is_seeded) = 1;
 }
 /* }}} */
 
@@ -284,6 +285,7 @@ PHP_FUNCTION(mt_srand)
 		seed = GENERATE_SEED();
 
 	php_mt_srand(seed TSRMLS_CC);
+	BG(mt_rand_is_seeded) = 1;
 }
 /* }}} */
 
@@ -328,8 +330,11 @@ PHP_FUNCTION(rand)
 	if (argc != 0 && zend_parse_parameters(argc TSRMLS_CC, "ll", &min, &max) == FAILURE)
 		return;
 
-	number = php_rand(TSRMLS_C);
+	if (!BG(rand_is_seeded)) {
+		php_srand(GENERATE_SEED() TSRMLS_CC);
+	}
 
+	number = php_rand(TSRMLS_C);
 	if (argc == 2) {
 		RAND_RANGE(number, min, max, PHP_RAND_MAX);
 	}
@@ -349,6 +354,10 @@ PHP_FUNCTION(mt_rand)
 
 	if (argc != 0 && zend_parse_parameters(argc TSRMLS_CC, "ll", &min, &max) == FAILURE)
 		return;
+
+	if (!BG(mt_rand_is_seeded)) {
+		php_mt_srand(GENERATE_SEED() TSRMLS_CC);
+	}
 
 	/*
 	 * Melo: hmms.. randomMT() returns 32 random bits...

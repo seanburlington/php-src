@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.77 2003/02/13 19:48:49 pollita Exp $ */
+/* $Id: ftp.c,v 1.78 2003/02/13 22:20:21 pollita Exp $ */
 
 #include "php.h"
 
@@ -1646,9 +1646,11 @@ ftp_genlist(ftpbuf_t *ftp, const char *cmd, const char *path TSRMLS_DC)
 
 	return ret;
 bail:
-	data_close(ftp, data);
+	if (data)
+		data_close(ftp, data);
 	fclose(tmpfp);
-	efree(ret);
+	if (ret)
+		efree(ret);
 	return NULL;
 }
 /* }}} */

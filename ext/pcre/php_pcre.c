@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.66 2000/08/24 13:23:13 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.67 2000/08/25 13:51:07 andrei Exp $ */
 
 /*
 	TODO:
@@ -786,6 +786,7 @@ static char *php_replace_in_subject(zval *regex, zval *replace, zval **subject, 
 		/* Duplicate subject string for repeated replacement */
 		subject_value = estrndup((*subject)->value.str.val, (*subject)->value.str.len);
 		subject_len = (*subject)->value.str.len;
+		*result_len = subject_len;
 		
 		zend_hash_internal_pointer_reset(regex->value.ht);
 

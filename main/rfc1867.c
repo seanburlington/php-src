@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.143 2003/11/03 09:16:24 sesser Exp $ */
+/* $Id: rfc1867.c,v 1.144 2003/11/03 11:46:33 sesser Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -139,7 +139,7 @@ static void normalize_protected_variable(char *varname TSRMLS_DC)
 	
 	/* and remove it */
 	if (s != varname) {
-		memcpy(varname, s, strlen(s)+1);
+		memmove(varname, s, strlen(s)+1);
 	}
 
 	for (p=varname; *p && *p != '['; p++) {
@@ -170,7 +170,7 @@ static void normalize_protected_variable(char *varname TSRMLS_DC)
 		indexend = indexend ? indexend + 1 : index + strlen(index);
 		
 		if (s != index) {
-			memcpy(s, index, strlen(s)+1);
+			memmove(s, index, strlen(index)+1);
 			s += indexend-index;
 		} else {
 			s = indexend;

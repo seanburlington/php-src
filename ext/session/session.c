@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.316 2002/09/25 13:26:03 iliaa Exp $ */
+/* $Id: session.c,v 1.317 2002/09/26 16:46:21 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -139,7 +139,7 @@ PHP_INI_BEGIN()
 	STD_PHP_INI_ENTRY("session.entropy_length",     "0",         PHP_INI_ALL, OnUpdateInt,    entropy_length,     php_ps_globals,    ps_globals)
 	STD_PHP_INI_ENTRY("session.cache_limiter",      "nocache",   PHP_INI_ALL, OnUpdateString, cache_limiter,      php_ps_globals,    ps_globals)
 	STD_PHP_INI_ENTRY("session.cache_expire",       "180",       PHP_INI_ALL, OnUpdateInt,    cache_expire,       php_ps_globals,    ps_globals)
-	STD_PHP_INI_BOOLEAN("session.use_trans_sid",    "0",         PHP_INI_ALL, OnUpdateBool,   use_trans_sid,      php_ps_globals,    ps_globals)
+	STD_PHP_INI_BOOLEAN("session.use_trans_sid",    "0",         PHP_INI_SYSTEM|PHP_INI_PERDIR, OnUpdateBool,   use_trans_sid,      php_ps_globals,    ps_globals)
 
 	/* Commented out until future discussion */
 	/* PHP_INI_ENTRY("session.encode_sources", "globals,track", PHP_INI_ALL, NULL) */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.17 2000/05/18 15:34:25 zeev Exp $ */
+/* $Id: gettext.c,v 1.18 2000/05/23 22:26:51 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -40,6 +40,10 @@ function_entry php_gettext_functions[] = {
 zend_module_entry php_gettext_module_entry = {
 	"gettext", php_gettext_functions, NULL, NULL, NULL, NULL, PHP_MINFO(gettext), STANDARD_MODULE_PROPERTIES
 };
+
+#ifdef COMPILE_DL_GETTEXT
+ZEND_GET_MODULE(php_gettext)
+#endif
 
 PHP_MINFO_FUNCTION(gettext)
 {

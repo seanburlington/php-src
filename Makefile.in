@@ -24,7 +24,7 @@
 # +----------------------------------------------------------------------+
 
 #
-# $Id: Makefile.in,v 1.1 1999/04/07 21:00:33 zeev Exp $
+# $Id: Makefile.in,v 1.2 1999/04/08 08:23:37 kk Exp $
 #
 
 prefix = @prefix@
@@ -97,7 +97,7 @@ LIBS = $(PHPLIBS)  @SYBASE_CT_LFLAGS@ @SYBASE_CT_LIBS@ @FHTTPD_LIB@ @DBASE_LIB@ 
 
 all: $(BINNAME)
 
-php: $(OBJS) $(FUNCTIONS) @REGEX_LIB@ @FHTTPD_LIB@ @DBASE_LIB@$ $(ZEND_DIR)/libzend.a
+php: $(OBJS) $(FUNCTIONS) @REGEX_LIB@ @FHTTPD_LIB@ @DBASE_LIB@ $(ZEND_DIR)/libzend.a
 	$(CC) $(CFLAGS) -o $(BINNAME) $(LDFLAGS) $(OBJS) $(FUNCTIONS) $(LIBS)
 
 libphp3.a: $(OBJS) $(FUNCTIONS) @DBASE_LIB@

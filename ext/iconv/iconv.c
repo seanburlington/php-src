@@ -14,10 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Rui Hirokawa <rui_hirokawa@ybb.ne.jp>                       |
    |          Stig Bakken <ssb@fast.no>                                   |
+   |          Moriyoshi Koizumi <moriyoshi@php.net>                       |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.81 2003/01/10 04:32:25 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.82 2003/01/14 19:26:00 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.142 2002/10/24 13:14:41 sas Exp $ */
+/* $Id: php_odbc.c,v 1.143 2002/10/31 02:57:06 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2107,7 +2107,7 @@ int odbc_sqlconnect(odbc_connection **conn, char *db, char *uid, char *pwd, int 
 	}
 /*  Possible fix for bug #10250
  *  Needs testing on UnixODBC < 2.0.5 though. */
-#if defined(HAVE_EMPRESS) || defined(HAVE_UNIXODBC)
+#if defined(HAVE_EMPRESS) || defined(HAVE_UNIXODBC) || defined(PHP_WIN32)
 /* *  Uncomment the line above, and comment line below to fully test 
  * #ifdef HAVE_EMPRESS */
 	{

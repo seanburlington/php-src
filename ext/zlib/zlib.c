@@ -16,18 +16,19 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.58 2000/10/21 19:18:55 andi Exp $ */
+/* $Id: zlib.c,v 1.59 2000/10/23 13:19:07 stas Exp $ */
 #define IS_EXT_MODULE
 
-#include "php.h"
+#include "php_config.h"
 
 #if HAVE_FOPENCOOKIE 
 #define _GNU_SOURCE
 #define __USE_GNU
-#include "libio.h"
+#include <stdio.h>
 #endif 
 
-#include <stdio.h>
+#include "php.h"
+
 #include <stdlib.h>
 #include <errno.h>
 #include <sys/types.h>
@@ -786,9 +787,10 @@ static int gz_seeker(void *cookie,fpos_t position, int whence) {
 }
 
 static int gz_closer(void *cookie) {
-	gzclose(((struct gz_cookie *)cookie)->gz_file);
+	int ret=gzclose(((struct gz_cookie *)cookie)->gz_file);
 	efree(cookie);
 	cookie=NULL;  
+	return ret;
 }
 
 

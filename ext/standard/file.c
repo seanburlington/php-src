@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.232 2002/05/23 14:28:14 andi Exp $ */
+/* $Id: file.c,v 1.233 2002/06/10 10:28:33 mfischer Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -192,7 +192,7 @@ PHP_MSHUTDOWN_FUNCTION(file)
 
 
 
-/* {{{ proto bool flock(resource fp, int operation [, int wouldblock])
+/* {{{ proto bool flock(resource fp, int operation [, int &wouldblock])
    Portable file locking */
 
 static int flock_values[] = { LOCK_SH, LOCK_EX, LOCK_UN };

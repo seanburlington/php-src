@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.17.4.9 2003/09/29 23:44:17 iliaa Exp $ */
+/* $Id: snprintf.c,v 1.17.4.10 2004/11/15 13:40:31 derick Exp $ */
 
 /* ====================================================================
  * Copyright (c) 1995-1998 The Apache Group.  All rights reserved.
@@ -461,8 +461,6 @@ ap_php_gcvt(double number, int ndigit, char *buf, boolean_e altform)
 	*p2 = '\0';
 	return (buf);
 }
-
-#if !defined(HAVE_SNPRINTF) || !defined(HAVE_VSNPRINTF) || PHP_BROKEN_SNPRINTF || PHP_BROKEN_VSNPRINTF
 
 /*
  * NUM_BUF_SIZE is the size of the buffer used for arithmetic conversions
@@ -987,8 +985,6 @@ int ap_php_vsnprintf(char *buf, size_t len, const char *format, va_list ap)
 	strx_printv(&cc, buf, len, format, ap);
 	return (cc);
 }
-
-#endif							/* HAVE_SNPRINTF */
 
 /*
  * Local variables:

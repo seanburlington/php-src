@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.83.2.25 2004/05/23 10:43:15 wez Exp $ */
+/* $Id: network.c,v 1.83.2.26 2004/07/02 17:23:07 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -704,8 +704,11 @@ PHPAPI php_stream *_php_stream_sock_open_unix(const char *path, int pathlen, con
 	
 	memcpy(unix_addr.sun_path, path, pathlen);
 
-	if (php_connect_nonb(socketd, (struct sockaddr *) &unix_addr, sizeof(unix_addr), timeout) == SOCK_CONN_ERR) 
+	if (php_connect_nonb(socketd, (struct sockaddr *) &unix_addr,
+			sizeof(unix_addr), timeout) == SOCK_CONN_ERR) {
+		closesocket(socketd);
 		return NULL;
+	}
 
 	stream = php_stream_sock_open_from_socket_rel(socketd, persistent_id);
 	if (stream == NULL)

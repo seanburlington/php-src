@@ -23,13 +23,13 @@
    | If you did not, or have any questions about PHP licensing, please    |
    | contact core@php.net.                                                |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.h,v 1.1 1999/05/22 09:24:19 zeev Exp $ */
+/* $Id: mod_php4.h,v 1.2 1999/05/28 03:54:15 rasmus Exp $ */
 
-#ifndef _MOD_PHP3_H
-#define _MOD_PHP3_H
+#ifndef _MOD_PHP4_H
+#define _MOD_PHP4_H
 
 #if !defined(WIN32) && !defined(WINNT)
 #ifndef MODULE_VAR_EXPORT
@@ -50,7 +50,7 @@ extern php_apache_info_struct php_apache_info;
 #define S_IXUSR _S_IEXEC
 #endif
 
-#endif							/* _MOD_PHP3_H */
+#endif							/* _MOD_PHP4_H */
 
 /*
  * Local variables:

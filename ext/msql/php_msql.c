@@ -16,13 +16,9 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_msql.c,v 1.18 2000/06/05 19:47:42 andi Exp $ */
+/* $Id: php_msql.c,v 1.19 2000/06/09 01:41:15 zeev Exp $ */
 
 #include "php.h"
-#ifdef COMPILE_DL_MSQL
-#include "dl/phpdl.h"
-#include "functions/dl.h"
-#endif
 #include "php_msql.h"
 #include "ext/standard/php_standard.h"
 #include "ext/standard/info.h"

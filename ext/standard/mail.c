@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.48.2.1 2002/06/23 17:22:52 sesser Exp $ */
+/* $Id: mail.c,v 1.48.2.2 2002/08/23 23:48:48 zeev Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -72,6 +72,10 @@ PHP_FUNCTION(mail)
 	char *to=NULL, *message=NULL, *headers=NULL, *subject=NULL, *extra_cmd=NULL;
 	int to_len,message_len,headers_len,subject_len,extra_cmd_len,i;
 	
+	if (PG(safe_mode) && (ZEND_NUM_ARGS() == 5)) {
+		php_error(E_WARNING, "%s(): SAFE MODE Restriction in effect.  The fifth parameter is disabled in SAFE MODE.", get_active_function_name(TSRMLS_C));
+		RETURN_FALSE;
+	}
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sss|ss",
 							  &to, &to_len,

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.23 2000/10/29 04:36:32 sniper Exp $
+dnl $Id: config.m4,v 1.24 2000/12/20 17:21:36 sas Exp $
 
 AC_DEFUN(AC_OCI8_VERSION,[
   AC_MSG_CHECKING([Oracle version])
@@ -80,5 +80,5 @@ if test "$PHP_OCI8" != "no"; then
 
   PHP_SUBST(OCI8_SHARED_LIBADD)
   PHP_SUBST(OCI8_DIR)
-  PHP_SUBST(OCI8_VERSION)
+  PHP_SUBST_OLD(OCI8_VERSION)
 fi

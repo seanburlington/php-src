@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.116 2000/12/14 17:29:38 sas Exp $
+dnl $Id: acinclude.m4,v 1.117 2000/12/20 17:21:35 sas Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -321,6 +321,10 @@ fi
 
 AC_DEFUN(PHP_SUBST,[
   PHP_VAR_SUBST="$PHP_VAR_SUBST $1"
+])
+
+AC_DEFUN(PHP_SUBST_OLD,[
+  PHP_SUBST($1)
   AC_SUBST($1)
 ])
 

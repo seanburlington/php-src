@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_array.h,v 1.32 2001/10/27 05:11:15 andrei Exp $ */
+/* $Id: php_array.h,v 1.33 2001/11/11 18:28:43 derick Exp $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H
@@ -79,7 +79,7 @@ PHP_FUNCTION(array_diff);
 PHP_FUNCTION(array_sum);
 PHP_FUNCTION(array_filter);
 PHP_FUNCTION(array_map);
-PHP_FUNCTION(key_exists);
+PHP_FUNCTION(array_key_exists);
 PHP_FUNCTION(array_chunk);
 
 HashTable* php_splice(HashTable *, int, int, zval ***, int, HashTable **);

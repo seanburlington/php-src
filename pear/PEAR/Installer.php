@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.116 2003/09/15 03:29:12 cellog Exp $
+// $Id: Installer.php,v 1.117 2003/09/15 03:36:02 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -559,7 +559,7 @@ class PEAR_Installer extends PEAR_Common
             $this->popErrorHandling();
             if (PEAR::isError($file)) {
                 if ($this->validPackageName($origpkgfile)) {
-                    include_once 'Remote.php';
+                    include_once 'PEAR/Remote.php';
                     $remote = new PEAR_Remote($config);
                     if (!PEAR::isError($info = $remote->call('package.info',
                           $origpkgfile))) {

@@ -1,11 +1,5 @@
-# $Id: Makefile.in,v 1.2 2000/04/16 11:40:19 hholzgra Exp $
-
-DEPTH     = ../..
-topsrcdir = @topsrcdir@
-srcdir    = @srcdir@
-VPATH     = @srcdir@
 
 LTLIBRARY_NAME    = libcalendar.la
 LTLIBRARY_SOURCES = calendar.c dow.c french.c gregor.c jewish.c julian.c easter.c cal_unix.c
 
-include $(topsrcdir)/build/ltlib.mk
+include $(top_srcdir)/build/ltlib.mk

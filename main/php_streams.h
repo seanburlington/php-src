@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.64 2003/01/02 13:31:10 derick Exp $ */
+/* $Id: php_streams.h,v 1.65 2003/01/06 04:06:40 pollita Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -603,9 +603,9 @@ PHPAPI php_stream_context *php_stream_context_set(php_stream *stream, php_stream
 			(xmsg), (xcode), 0, 0, NULL TSRMLS_CC); } } while(0)
 	
 
-/* Give other modules access to the url_stream_wrappers_hash */
+/* Give other modules access to the url_stream_wrappers_hash and stream_filters_hash */
 PHPAPI HashTable *php_stream_get_url_stream_wrappers_hash();
-
+PHPAPI HashTable *php_get_stream_filters_hash();
 #endif
 
 /*

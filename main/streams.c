@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.140 2003/01/01 09:58:17 wez Exp $ */
+/* $Id: streams.c,v 1.141 2003/01/06 04:06:40 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -386,6 +386,11 @@ fprintf(stderr, "stream_free: %s:%p[%s] preserve_handle=%d release_cast=%d remov
 
 /* {{{ filter API */
 static HashTable stream_filters_hash;
+
+PHPAPI HashTable *php_get_stream_filters_hash()
+{
+	return &stream_filters_hash;
+}
 
 PHPAPI int php_stream_filter_register_factory(const char *filterpattern, php_stream_filter_factory *factory TSRMLS_DC)
 {

@@ -1,4 +1,4 @@
-dnl $Id: config0.m4,v 1.4 1999/05/27 13:59:39 andrey Exp $
+dnl $Id: config0.m4,v 1.5 1999/05/27 14:02:29 andrey Exp $
 dnl config.m4 for extension pcre
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -12,7 +12,6 @@ AC_ARG_WITH(pcre-regex,
     	AC_MSG_RESULT(no) ;;
     yes)
         EXTRA_LIBS="-Lext/pcre/pcrelib -lpcre $EXTRA_LIBS"
-  dnl  	INCLUDES="-Iext/pcre/pcrelib $INCLUDES"
         PCRE_SUBDIR="pcrelib"
     	AC_DEFINE(HAVE_PCRE, 1)
         AC_DEFINE(HAVE_BUNDLED_PCRE, 1)
@@ -36,7 +35,6 @@ AC_ARG_WITH(pcre-regex,
   esac
 ],[
   EXTRA_LIBS="-Lext/pcre/pcrelib -lpcre $EXTRA_LIBS"
-dnl  INCLUDES="-Iext/pcre/pcrelib $INCLUDES"
   PCRE_SUBDIR="pcrelib"
   AC_DEFINE(HAVE_PCRE, 1)
   AC_DEFINE(HAVE_BUNDLED_PCRE, 1)

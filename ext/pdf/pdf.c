@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.112 2002/09/25 15:46:44 wez Exp $ */
+/* $Id: pdf.c,v 1.112.2.1 2002/12/02 06:35:50 iliaa Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -276,8 +276,7 @@ static void custom_errorhandler(PDF *p, int type, const char *shortmsg)
 		case PDF_SystemError:
 		case PDF_UnknownError:
 		default:
-			if (p !=NULL) PDF_delete(p); /* clean up PDFlib */
-			php_error(E_ERROR,"PDFlib error: %s", shortmsg);
+			php_error(E_WARNING,"PDFlib error: %s", shortmsg);
 		}
 }
 /* }}} */
@@ -332,7 +331,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.112 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.112.2.1 $" );
 	php_info_print_table_end();
 
 }

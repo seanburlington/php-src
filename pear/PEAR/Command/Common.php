@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.18 2002/10/12 13:43:41 ssb Exp $
+// $Id: Common.php,v 1.19 2002/11/01 14:48:16 mj Exp $
 
 require_once "PEAR.php";
 
@@ -203,6 +203,8 @@ class PEAR_Command_Common extends PEAR
                         $sapp = " $v[arg]";
                         $lapp = "=$v[arg]";
                     }
+                } else {
+                    $sapp = $lapp = "";
                 }
                 if (isset($v['shortopt'])) {
                     $s = $v['shortopt'];

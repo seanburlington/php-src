@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.3 2003/10/26 15:53:20 rrichards Exp $ */
+/* $Id: php_libxml.h,v 1.4 2003/12/09 21:55:02 rrichards Exp $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -37,10 +37,12 @@ extern zend_module_entry libxml_module_entry;
 #define PHP_LIBXML_API
 #endif
 
+#include "ext/standard/php_smart_str.h"
 #include <libxml/tree.h>
 
 typedef struct {
 	zval *stream_context;
+	smart_str *error_buffer;
 } php_libxml_globals;
 
 typedef struct _php_libxml_ref_obj {

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.143.2.3 2003/01/24 22:49:22 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.143.2.4 2003/02/07 02:58:31 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1455,7 +1455,7 @@ static void php_odbc_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 				if (rc == SQL_SUCCESS_WITH_INFO) {
 					Z_STRLEN_P(tmp) = result->longreadlen;
 				} else if (result->values[i].vallen == SQL_NULL_DATA) {
-					Z_STRVAL_P(tmp) = empty_string;
+					ZVAL_NULL(tmp);
 					break;
 				} else {
 					Z_STRLEN_P(tmp) = result->values[i].vallen;
@@ -1465,7 +1465,7 @@ static void php_odbc_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 
 			default:
 				if (result->values[i].vallen == SQL_NULL_DATA) {
-					Z_STRVAL_P(tmp) = empty_string;
+					ZVAL_NULL(tmp);
 					break;
 				}
 				Z_STRLEN_P(tmp) = result->values[i].vallen;

@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.104 2003/08/31 16:41:27 cellog Exp $
+// $Id: Installer.php,v 1.105 2003/09/02 03:10:57 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -483,6 +483,9 @@ class PEAR_Installer extends PEAR_Common
 
     function extractDownloadFileName($pkgfile, &$version)
     {
+        if (@is_file($pkgfile)) {
+            return $pkgfile;
+        }
         // regex defined in Common.php
         if (preg_match(PEAR_COMMON_PACKAGE_DOWNLOAD_PREG, $pkgfile, $m)) {
             $version = (isset($m[3])) ? $m[3] : null;

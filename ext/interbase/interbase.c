@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.91.2.32 2004/05/07 15:17:12 abies Exp $ */
+/* $Id: interbase.c,v 1.91.2.33 2004/06/28 11:24:55 abies Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -643,7 +643,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.32 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.33 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1856,7 +1856,7 @@ static int _php_ibase_var_zval(zval *val, void *data, int type, int len, int sca
 				if (n >= 0) {
 					Z_STRLEN_P(val) = sprintf (string_data, 
 						"%" ISC_INT64_FORMAT "d.%0*" ISC_INT64_FORMAT "d", n / f, -scale, n % f);
-				} else if (n < -f) {
+				} else if (n <= -f) {
 					Z_STRLEN_P(val) = sprintf (string_data,
 						"%" ISC_INT64_FORMAT "d.%0*" ISC_INT64_FORMAT "d", n / f, -scale, -n % f);
 				} else {

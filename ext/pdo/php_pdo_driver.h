@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.46 2005/02/14 15:52:06 wez Exp $ */
+/* $Id: php_pdo_driver.h,v 1.47 2005/02/19 23:11:23 helly Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -80,6 +80,9 @@ enum pdo_fetch_type {
 	PDO_FETCH_INTO,		/* fetch row into an existing object */
 	PDO_FETCH__MAX /* must be last */
 };
+
+#define PDO_FETCH_FLAGS     0xFFFF0000  /* fetchAll() modes or'd to PDO_FETCH_XYZ */
+#define PDO_FETCH_GROUP     0x00010000  /* fetch into groups */
 
 /* fetch orientation for scrollable cursors */
 enum pdo_fetch_orientation {

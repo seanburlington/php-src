@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.10 2001/05/13 12:04:37 wez Exp $ */
+/* $Id: mbfilter.c,v 1.11 2001/06/05 14:25:23 hirokawa Exp $ */
 
 
 #include <stdlib.h>
@@ -6974,6 +6974,9 @@ mbfl_strimwidth(
 				}
 				mbfl_convert_filter_flush(encoder);
 			}
+		} else if (pc.status != 0) {
+			pc.device.pos = pc.endpos;
+			mbfl_convert_filter_copy(pc.decoder_backup, pc.decoder);
 		}
 		mbfl_convert_filter_flush(pc.decoder);
 	}

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.24 2004/07/31 10:49:09 wez Exp $ */
+/* $Id: xp_socket.c,v 1.25 2004/07/31 10:56:55 wez Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -185,14 +185,27 @@ static int php_sockop_close(php_stream *stream, int close_handle TSRMLS_DC)
 
 static int php_sockop_flush(php_stream *stream TSRMLS_DC)
 {
+#if 0
 	php_netstream_data_t *sock = (php_netstream_data_t*)stream->abstract;
 	return fsync(sock->socket);
+#endif
+	return 0;
 }
 
 static int php_sockop_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC)
 {
 	php_netstream_data_t *sock = (php_netstream_data_t*)stream->abstract;
 	return fstat(sock->socket, &ssb->sb);
+}
+
+static inline int sock_sendto(php_netstream_data_t *sock, char *buf, size_t buflen, int flags,
+		struct sockaddr *addr, socklen_t addrlen
+		TSRMLS_DC)
+{
+	if (addr) {
+		return sendto(sock->socket, buf, buflen, flags, addr, addrlen);
+	}
+	return send(sock->socket, buf, buflen, flags);
 }
 
 static inline int sock_recvfrom(php_netstream_data_t *sock, char *buf, size_t buflen, int flags,
@@ -314,7 +327,7 @@ static int php_sockop_set_option(php_stream *stream, int option, int value, void
 					if ((xparam->inputs.flags & STREAM_OOB) == STREAM_OOB) {
 						flags |= MSG_OOB;
 					}
-					xparam->outputs.returncode = sendto(sock->socket,
+					xparam->outputs.returncode = sock_sendto(sock,
 							xparam->inputs.buf, xparam->inputs.buflen,
 							flags,
 							xparam->inputs.addr,

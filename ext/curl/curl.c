@@ -16,10 +16,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.20 2004/04/29 16:25:54 iliaa Exp $ */
+/* $Id: curl.c,v 1.124.2.21 2004/05/13 16:54:45 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
+#endif
+
+#ifdef PHP_WIN32
+#include <winsock2.h>
 #endif
 
 #include "php.h"
@@ -30,7 +34,6 @@
 #include <string.h>
 
 #ifdef PHP_WIN32
-#include <winsock.h>
 #include <sys/types.h>
 #endif
 

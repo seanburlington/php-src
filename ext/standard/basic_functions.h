@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.85 2001/08/03 08:49:19 sas Exp $ */
+/* $Id: basic_functions.h,v 1.86 2001/08/03 09:50:38 sas Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -141,6 +141,7 @@ typedef signed int php_int32;
 typedef struct {
 	HashTable *user_shutdown_function_names;
 	HashTable putenv_ht;
+	zval **strtok_zval;
 	char *strtok_string;
 	char *locale_string;
 	char *strtok_last;

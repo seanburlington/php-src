@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.75 2002/06/19 23:38:45 cox Exp $
+// $Id: Common.php,v 1.76 2002/07/04 20:28:56 mj Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -1432,6 +1432,7 @@ class PEAR_Common extends PEAR
         }
         $proxy_host = $proxy_port = null;
         if ($proxy = $config->get('http_proxy')) {
+            $proxy = str_replace('http://', '', $proxy);
             list($proxy_host, $proxy_port) = explode(':', $proxy);
             if (empty($proxy_port)) {
                 $proxy_port = 8080;

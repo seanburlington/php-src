@@ -16,7 +16,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.67 2002/08/24 01:19:28 helly Exp $ */
+/* $Id: image.c,v 1.68 2002/09/06 06:39:57 hyanantha Exp $ */
 /*
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -39,6 +39,9 @@
 
 #include "php.h"
 #include <stdio.h>
+#if defined(NETWARE) && !defined(NEW_LIBC)
+#include <sys/socket.h>
+#endif
 #if HAVE_FCNTL_H
 #include <fcntl.h>
 #endif

@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.51 2004/01/08 08:17:33 andi Exp $ */
+/* $Id: pack.c,v 1.52 2004/02/24 21:49:28 gschlossnagle Exp $ */
 
 #include "php.h"
 
@@ -640,7 +640,7 @@ PHP_FUNCTION(unpack)
 			/* Space for name + number, safe as namelen is ensured <= 200 */
 			char n[256];
 
-			if (arg != 1) {
+			if (arg != 1 || namelen == 0) {
 				/* Need to add element number to name */
 				sprintf(n, "%.*s%d", namelen, name, i + 1);
 			} else {

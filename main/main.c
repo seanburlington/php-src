@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.501 2002/10/21 16:41:06 hholzgra Exp $ */
+/* $Id: main.c,v 1.502 2002/10/23 09:31:33 derick Exp $ */
 
 /* {{{ includes
  */
@@ -253,7 +253,7 @@ PHP_INI_BEGIN()
 	STD_PHP_INI_ENTRY("xmlrpc_error_number",	"0",		PHP_INI_ALL,		OnUpdateInt,			xmlrpc_error_number,	php_core_globals,	core_globals)
 	STD_PHP_INI_ENTRY("max_input_time",	"0",		PHP_INI_ALL,		OnUpdateInt,			max_input_time,	php_core_globals,	core_globals)
 	STD_PHP_INI_BOOLEAN("ignore_user_abort",	"0",		PHP_INI_ALL,		OnUpdateBool,			ignore_user_abort,		php_core_globals,	core_globals)
-	STD_PHP_INI_BOOLEAN("implicit_flush",		"0",		PHP_INI_PERDIR|PHP_INI_SYSTEM,OnUpdateBool,	implicit_flush,			php_core_globals,	core_globals)
+	STD_PHP_INI_BOOLEAN("implicit_flush",		"0",		PHP_INI_ALL,		OnUpdateBool,			implicit_flush,			php_core_globals,	core_globals)
 	STD_PHP_INI_BOOLEAN("log_errors",			"0",		PHP_INI_ALL,		OnUpdateBool,			log_errors,				php_core_globals,	core_globals)
 	STD_PHP_INI_ENTRY("log_errors_max_len",	 "1024",		PHP_INI_ALL,		OnUpdateInt,			log_errors_max_len,		php_core_globals,	core_globals)
 	STD_PHP_INI_BOOLEAN("ignore_repeated_errors",	"0",	PHP_INI_ALL,		OnUpdateBool,			ignore_repeated_errors,	php_core_globals,	core_globals)

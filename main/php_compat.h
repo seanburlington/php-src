@@ -16,15 +16,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_compat.h,v 1.22 2005/01/09 21:05:06 sniper Exp $ */
+/* $Id: php_compat.h,v 1.23 2005/02/23 10:31:44 hyanantha Exp $ */
 
 #ifndef PHP_COMPAT_H
 #define PHP_COMPAT_H
 
 #ifdef PHP_WIN32
 #include "config.w32.h"
-#elif defined(NETWARE)
-#include "config.nw.h"
 #else
 #include <php_config.h>
 #endif

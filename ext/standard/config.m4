@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.16 1999/12/30 04:52:12 sas Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.17 2000/02/23 14:13:34 sas Exp $ -*- sh -*-
 
 divert(2)dnl
 
@@ -150,6 +150,8 @@ AC_ARG_WITH(system-regex,
 ])
 
 AC_CRYPT_CAP
+
+AC_CHECK_HEADERS(sys/resource.h)
 
 PHP_EXTENSION(standard)
 

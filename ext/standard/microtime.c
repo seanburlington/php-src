@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.15 2000/02/19 23:41:21 zeev Exp $ */
+/* $Id: microtime.c,v 1.16 2000/02/23 14:13:34 sas Exp $ */
 
 #include <stdlib.h>
 #ifdef HAVE_UNISTD_H
@@ -24,6 +24,9 @@
 #endif
 #include <string.h>
 #include <errno.h>
+#ifdef HAVE_SYS_RESOURCE_H
+#include <sys/resource.h>
+#endif
 
 #include "php.h"
 #include "microtime.h"

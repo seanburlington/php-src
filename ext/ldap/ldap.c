@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.147 2003/09/13 17:31:07 pollita Exp $ */
+/* $Id: ldap.c,v 1.148 2003/10/06 23:33:00 sniper Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -302,7 +302,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.147 2003/09/13 17:31:07 pollita Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.148 2003/10/06 23:33:00 sniper Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -1663,13 +1663,20 @@ PHP_FUNCTION(ldap_get_option)
 	case LDAP_OPT_MATCHED_DN:
 #endif
 		{
-			char *val;
+			char *val = NULL;
+
 			if (ldap_get_option(ld->link, opt, &val)) {
 				RETURN_FALSE;
 			}
-			zval_dtor(*retval);
-			ZVAL_STRING(*retval, val, 1);
-			ldap_memfree(val);
+			if (val != NULL) {
+				if (*val != '\0') {
+					zval_dtor(*retval);
+					ZVAL_STRING(*retval, val, 1);
+				}
+				ldap_memfree(val);
+			} else {
+				RETURN_FALSE;
+			}
 		} break;
 /* options not implemented
 	case LDAP_OPT_SERVER_CONTROLS:

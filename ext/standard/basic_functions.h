@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.20 1999/10/04 21:10:26 andrei Exp $ */
+/* $Id: basic_functions.h,v 1.21 1999/10/15 18:15:02 thies Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -86,6 +86,8 @@ PHP_FUNCTION(get_magic_quotes_runtime);
 PHP_FUNCTION(get_magic_quotes_gpc);
 
 void php3_is_type(INTERNAL_FUNCTION_PARAMETERS, int type);
+PHP_FUNCTION(is_resource);
+PHP_FUNCTION(is_bool);
 PHP_FUNCTION(is_long);
 PHP_FUNCTION(is_double);
 PHP_FUNCTION(is_string);

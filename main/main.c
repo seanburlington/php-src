@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.498 2002/10/16 16:52:08 iliaa Exp $ */
+/* $Id: main.c,v 1.499 2002/10/20 02:57:40 fujimoto Exp $ */
 
 /* {{{ includes
  */
@@ -518,7 +518,7 @@ PHPAPI void php_error_docref2(const char *docref TSRMLS_DC, const char *param1, 
 /* {{{ php_html_puts */
 PHPAPI void php_html_puts(const char *str, uint size TSRMLS_DC)
 {
-	zend_html_puts(str, size);
+	zend_html_puts(str, size TSRMLS_CC);
 }
 /* }}} */
 

@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.45 2002/10/07 16:11:30 sesser Exp $ */
+/* $Id: mbfilter.c,v 1.46 2002/10/20 02:57:39 fujimoto Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -7650,7 +7650,7 @@ mbfl_oddlen(mbfl_string *string)
 	int len, n, m, k;
 	unsigned char *p;
 	const unsigned char *mbtab;
-	mbfl_encoding *encoding;
+	const mbfl_encoding *encoding;
 
 	encoding = mbfl_no2encoding(string->no_encoding);
 	if (encoding == NULL || string == NULL) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.11 2003/02/19 16:17:34 phanto Exp $ */
+/* $Id: main.c,v 1.512.2.12 2003/02/26 22:17:35 rasmus Exp $ */
 
 /* {{{ includes
  */
@@ -1581,7 +1581,9 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 #if defined(ZEND_MULTIBYTE) && defined(HAVE_MBSTRING)
 		php_mb_set_zend_encoding(TSRMLS_C);
 #endif /* ZEND_MULTIBYTE && HAVE_MBSTRING */
+#ifdef PHP_WIN32
 		zend_unset_timeout(TSRMLS_C);
+#endif
 		zend_set_timeout(INI_INT("max_execution_time"));
 		retval = (zend_execute_scripts(ZEND_REQUIRE TSRMLS_CC, NULL, 3, prepend_file_p, primary_file, append_file_p) == SUCCESS);
 		

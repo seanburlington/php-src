@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.85 2005/02/17 04:44:11 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.86 2005/03/28 18:09:28 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -668,7 +668,7 @@ int php_hash_environment(TSRMLS_D)
 	}
 
 	for (i=0; i<num_track_vars; i++) {
-		if (jit_initialization && auto_global_records[i].jit_initialization) {
+		if ((jit_initialization && auto_global_records[i].jit_initialization) || _gpc_flags[i]) {
 			continue;
 		}
 		if (!PG(http_globals)[i]) {

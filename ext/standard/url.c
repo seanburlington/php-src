@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.80 2004/05/28 11:33:23 sesser Exp $ */
+/* $Id: url.c,v 1.81 2004/06/18 00:44:37 pollita Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -591,7 +591,8 @@ PHPAPI int php_raw_url_decode(char *str, int len)
    fetches all the headers sent by the server in response to a HTTP request */
 PHP_FUNCTION(get_headers)
 {
-	char *url, *url_len;
+	char *url;
+	int url_len;
 	php_stream_context *context = NULL;
 	php_stream *stream;
 	zval **prev_val, **hdr = NULL;

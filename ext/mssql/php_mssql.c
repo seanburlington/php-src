@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.97 2003/01/10 19:23:36 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.98 2003/01/10 19:33:31 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -2040,7 +2040,7 @@ PHP_FUNCTION(mssql_execute)
         WRONG_PARAM_COUNT;
     }
 	if (ac == 2) {
-		retval_results = Z_BVAL_PP(skip);
+		skip_results = Z_BVAL_PP(skip);
 	}
 
 	ZEND_FETCH_RESOURCE(statement, mssql_statement *, stmt, -1, "MS SQL-Statement", le_statement);
@@ -2082,9 +2082,9 @@ PHP_FUNCTION(mssql_execute)
 			result->num_rows = _mssql_fetch_batch(mssql_ptr, result, retvalue TSRMLS_CC);
 			result->statement = statement;
 		}
-		if (retval_results) {
+		if (skip_results) {
 			do {
-				retval_results = dbresults(statement->link->link);
+				retval_results = dbresults(mssql_ptr->link);
 			} while (retval_results == SUCCEED);
 
 			_mssql_get_sp_result(mssql_ptr, statement TSRMLS_CC);

@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: snmp.c,v 1.1 1999/04/22 02:48:25 ssb Exp $ */
+/* $Id: snmp.c,v 1.2 1999/05/09 08:48:01 zeev Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)
@@ -104,7 +104,7 @@ int php3i_snmp_init(INIT_FUNC_ARGS) {
 	return SUCCESS;
 }
 
-void php3_info_snmp(void) {
+void php3_info_snmp(ZEND_MODULE_INFO_FUNC_ARGS) {
 	php3_printf("ucd-snmp");
 }
 

@@ -33,7 +33,7 @@
 
 #define OCI8_USE_EMALLOC 0		/* set this to 1 if you want to use the php memory manager! */
 
-/* $Id: oci8.c,v 1.2 1999/04/24 18:54:01 thies Exp $ */
+/* $Id: oci8.c,v 1.3 1999/05/09 08:47:59 zeev Exp $ */
 
 /* TODO list:
  *
@@ -162,7 +162,7 @@ int php3_minit_oci8(INIT_FUNC_ARGS);
 int php3_rinit_oci8(INIT_FUNC_ARGS);
 int php3_mshutdown_oci8(SHUTDOWN_FUNC_ARGS);
 int php3_rshutdown_oci8(SHUTDOWN_FUNC_ARGS);
-void php3_info_oci8(void);
+void php3_info_oci8(ZEND_MODULE_INFO_FUNC_ARGS);
 
 static ub4 oci8_error(OCIError *err_p, char *what, sword status);
 /* static int oci8_ping(oci8_connection *conn); XXX NYI */
@@ -536,7 +536,7 @@ int php3_rshutdown_oci8(SHUTDOWN_FUNC_ARGS)
 }
 
 
-void php3_info_oci8()
+void php3_info_oci8(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 #if !(WIN32|WINNT)
 	php3_printf("Oracle version: %s<br>\n"

@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php3_sybase.h,v 1.1 1999/04/22 02:48:26 ssb Exp $ */
+/* $Id: php3_sybase.h,v 1.2 1999/05/09 08:48:02 zeev Exp $ */
 
 #ifndef _PHP3_SYBASE_H
 #define _PHP3_SYBASE_H
@@ -47,7 +47,7 @@ extern int php3_minit_sybase(INIT_FUNC_ARGS);
 extern int php3_rinit_sybase(INIT_FUNC_ARGS);
 extern int php3_mshutdown_sybase(SHUTDOWN_FUNC_ARGS);
 extern int php3_rshutdown_sybase(SHUTDOWN_FUNC_ARGS);
-extern void php3_info_sybase(void);
+extern void php3_info_sybase(ZEND_MODULE_INFO_FUNC_ARGS);
 extern void php3_sybase_connect(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_sybase_pconnect(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_sybase_close(INTERNAL_FUNCTION_PARAMETERS);

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.3 1999/04/24 00:11:56 zeev Exp $ */
+/* $Id: mail.c,v 1.4 1999/05/09 08:48:01 zeev Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -160,7 +160,7 @@ int _php3_mail(char *to, char *subject, char *message, char *headers)
 	return 1;
 }
 
-void php3_info_mail(void)
+void php3_info_mail(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 #if MSVC5
 	PUTS("Internal Sendmail support for Windows 4");
@@ -172,7 +172,7 @@ void php3_info_mail(void)
 #else
 
 void php3_mail(INTERNAL_FUNCTION_PARAMETERS) {}
-void php3_info_mail() {}
+void php3_info_mail(ZEND_MODULE_INFO_FUNC_ARGS) {}
 
 #endif
 

@@ -23,7 +23,7 @@
  */
 
 
-/* $Id: hw.h,v 1.1 1999/04/21 23:11:20 ssb Exp $ */
+/* $Id: hw.h,v 1.2 1999/05/09 08:47:52 zeev Exp $ */
 
 #ifndef _HW_H
 #define _HW_H
@@ -109,7 +109,7 @@ extern void php3_hw_document_content(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_hw_objrec2array(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_hw_array2objrec(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_hw_connection_info(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_info_hw(void);
+extern void php3_info_hw(ZEND_MODULE_INFO_FUNC_ARGS);
 extern void php3_hw_getsrcbydestobj(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_hw_getrellink(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_hw_dummy(INTERNAL_FUNCTION_PARAMETERS);

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.1 1999/04/21 17:26:16 sas Exp $ */
+/* $Id: gettext.c,v 1.2 1999/05/09 08:47:52 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -52,7 +52,7 @@ php3_module_entry php3_gettext_module_entry = {
 	"gettext", php3_gettext_functions, NULL, NULL, NULL, NULL, php3_info_gettext, STANDARD_MODULE_PROPERTIES
 };
 
-void php3_info_gettext(void)
+void php3_info_gettext(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 	php3_printf("GNU gettext support active.");
 }

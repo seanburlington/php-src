@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache.c,v 1.6 1999/04/28 20:26:29 zeev Exp $ */
+/* $Id: apache.c,v 1.7 1999/05/09 08:47:49 zeev Exp $ */
 #include "php.h"
 #include "ext/standard/head.h"
 #include "php_globals.h"
@@ -54,7 +54,7 @@ extern module *top_module;
 void php3_virtual(INTERNAL_FUNCTION_PARAMETERS);
 void php3_getallheaders(INTERNAL_FUNCTION_PARAMETERS);
 void php3_apachelog(INTERNAL_FUNCTION_PARAMETERS);
-void php3_info_apache(void);
+void php3_info_apache(ZEND_MODULE_INFO_FUNC_ARGS);
 void php3_apache_note(INTERNAL_FUNCTION_PARAMETERS);
 void php3_apache_lookup_uri(INTERNAL_FUNCTION_PARAMETERS);
 
@@ -154,7 +154,7 @@ void php3_apache_note(INTERNAL_FUNCTION_PARAMETERS)
 }
 /* }}} */
 
-void php3_info_apache(void) {
+void php3_info_apache(ZEND_MODULE_INFO_FUNC_ARGS) {
 	module *modp = NULL;
 #if !defined(WIN32) && !defined(WINNT)
 	char name[64];

@@ -22,7 +22,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.3 1999/04/23 20:06:00 zeev Exp $ */
+/* $Id: zlib.c,v 1.4 1999/05/09 08:48:05 zeev Exp $ */
 #if !PHP_31 && defined(THREAD_SAFE)
 #undef THREAD_SAFE
 #endif
@@ -179,7 +179,7 @@ int php3_mshutdown_zlib(SHUTDOWN_FUNC_ARGS){
 	return SUCCESS;
 }
 
-void php3_info_zlib(void)
+void php3_info_zlib(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 		PUTS("Zlib support active (compiled with ");
 		PUTS(ZLIB_VERSION);

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: mysql.c,v 1.5 1999/04/28 21:37:54 zeev Exp $ */
+/* $Id: mysql.c,v 1.6 1999/05/09 08:47:58 zeev Exp $ */
 
 
 /* TODO:
@@ -309,7 +309,7 @@ int php3_rinit_mysql(INIT_FUNC_ARGS)
 }
 
 
-void php3_info_mysql(void)
+void php3_info_mysql(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 	char maxp[16],maxl[16];
 	MySLS_FETCH();

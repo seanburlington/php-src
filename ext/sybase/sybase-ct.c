@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sybase-ct.c,v 1.1 1999/04/22 02:48:26 ssb Exp $ */
+/* $Id: sybase-ct.c,v 1.2 1999/05/09 08:48:02 zeev Exp $ */
 
 
 #ifndef MSVC5
@@ -1596,7 +1596,7 @@ void php3_sybct_affected_rows(INTERNAL_FUNCTION_PARAMETERS)
 }
 
 
-void php3_info_sybct(void)
+void php3_info_sybct(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 	char maxp[16],maxl[16];
 	

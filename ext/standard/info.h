@@ -27,14 +27,16 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: info.h,v 1.2 1999/04/26 14:00:49 zeev Exp $ */
+/* $Id: info.h,v 1.3 1999/05/09 08:48:01 zeev Exp $ */
 
 #ifndef _INFO_H
 #define _INFO_H
 
-extern void php3_version(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_info(INTERNAL_FUNCTION_PARAMETERS);
-
+void php3_version(INTERNAL_FUNCTION_PARAMETERS);
+void php3_info(INTERNAL_FUNCTION_PARAMETERS);
 PHPAPI void _php3_info(void);
+
+PHPAPI void php_info_print_table_header(int num_cols, ...);
+PHPAPI void php_info_print_table_row(int num_cols, ...);
 
 #endif /* _INFO_H */

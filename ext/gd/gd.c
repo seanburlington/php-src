@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.6 1999/04/26 17:26:34 zeev Exp $ */
+/* $Id: gd.c,v 1.7 1999/05/09 08:47:51 zeev Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -178,7 +178,7 @@ int php3_minit_gd(INIT_FUNC_ARGS)
 	return SUCCESS;
 }
 
-void php3_info_gd(void) {
+void php3_info_gd(ZEND_MODULE_INFO_FUNC_ARGS) {
 	/* need to use a PHPAPI function here because it is external module in windows */
 #if HAVE_LIBGD13
 	php3_printf("Version 1.3");

@@ -30,7 +30,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.4 1999/04/23 20:05:58 zeev Exp $ */
+/* $Id: ldap.c,v 1.5 1999/05/09 08:47:57 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -260,7 +260,7 @@ int php3_mshutdown_ldap(SHUTDOWN_FUNC_ARGS) {
 	return SUCCESS;
 }
 
-void php3_info_ldap(void)
+void php3_info_ldap(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 	char maxl[16];
 #if HAVE_NSLDAP
@@ -280,7 +280,7 @@ void php3_info_ldap(void)
 
 	php3_printf("<table>"
 				"<tr><td>Total links:</td><td>%d/%s</td></tr>\n"
-		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.4 1999/04/23 20:05:58 zeev Exp $</td></tr>\n"
+		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.5 1999/05/09 08:47:57 zeev Exp $</td></tr>\n"
 #if HAVE_NSLDAP
 				"<tr><td>SDK Version:</td><td>%f</td></tr>"
 				"<tr><td>Highest LDAP Protocol Supported:</td><td>%f</td></tr>"

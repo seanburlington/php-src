@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dav.c,v 1.1 1999/04/21 22:49:15 ssb Exp $ */
+/* $Id: dav.c,v 1.2 1999/05/09 08:47:50 zeev Exp $ */
 
 #define IS_EXT_MODULE
 #if COMPILE_DL
@@ -91,7 +91,7 @@ int php3_minit_phpdav(INIT_FUNC_ARGS);
 int php3_rinit_phpdav(INIT_FUNC_ARGS);
 int php3_mshutdown_phpdav(SHUTDOWN_FUNC_ARGS);
 int php3_rshutdown_phpdav(SHUTDOWN_FUNC_ARGS);
-void php3_info_phpdav(void);
+void php3_info_phpdav(ZEND_MODULE_INFO_FUNC_ARGS);
 
 /* }}} */
 /* {{{ extension definition structures */
@@ -186,7 +186,7 @@ int php3_rshutdown_phpdav(SHUTDOWN_FUNC_ARGS)
 /* }}} */
     /* {{{ php3_info_phpdav() */
 
-void php3_info_phpdav()
+void php3_info_phpdav(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 }
 

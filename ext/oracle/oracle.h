@@ -1,4 +1,4 @@
-/* $Id: oracle.h,v 1.2 1999/04/30 18:59:14 thies Exp $ */
+/* $Id: oracle.h,v 1.3 1999/05/09 08:48:00 zeev Exp $ */
 
 #ifndef _PHP3_ORACLE_H
 #define _PHP3_ORACLE_H
@@ -136,7 +136,7 @@ extern void php3_Ora_Rollback(INTERNAL_FUNCTION_PARAMETERS);
 extern int php3_minit_oracle(INIT_FUNC_ARGS);
 extern int php3_mshutdown_oracle(SHUTDOWN_FUNC_ARGS);
 extern int php3_rshutdown_oracle(SHUTDOWN_FUNC_ARGS);
-extern void php3_info_oracle(void);
+extern void php3_info_oracle(ZEND_MODULE_INFO_FUNC_ARGS);
 extern int php3_rinit_oracle(INIT_FUNC_ARGS);
 
 #else

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.1 1999/04/22 02:48:24 ssb Exp $ */
+/* $Id: pdf.c,v 1.2 1999/05/09 08:48:00 zeev Exp $ */
 
 /* pdflib 0.6 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -161,7 +161,7 @@ int php3_minit_pdf(INIT_FUNC_ARGS)
 	return SUCCESS;
 }
 
-void php3_info_pdf(void) {
+void php3_info_pdf(ZEND_MODULE_INFO_FUNC_ARGS) {
 	/* need to use a PHPAPI function here because it is external module in windows */
 	php3_printf("%s. AFM files in %s", PDFLIB_VERSION, PDF_DEFAULT_FONT_PATH);
 }

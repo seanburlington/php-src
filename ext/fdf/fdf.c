@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.1 1999/04/22 00:25:53 ssb Exp $ */
+/* $Id: fdf.c,v 1.2 1999/05/09 08:47:51 zeev Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -109,7 +109,7 @@ int php3_minit_fdf(INIT_FUNC_ARGS)
 	return SUCCESS;
 }
 
-void php3_info_fdf(void) {
+void php3_info_fdf(ZEND_MODULE_INFO_FUNC_ARGS) {
 	/* need to use a PHPAPI function here because it is external module in windows */
 	php3_printf("FdfTk Version %s", FDFGetVersion());
 }

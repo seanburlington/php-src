@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.2 1999/05/03 11:11:20 ssb Exp $ */
+/* $Id: db.c,v 1.3 1999/05/09 08:47:50 zeev Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 #ifdef PHP_31
@@ -251,7 +251,7 @@ static char *php3_get_info_db(void)
 }
 
 
-void php3_info_db(void)
+void php3_info_db(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 	php3_printf(php3_get_info_db());
 }

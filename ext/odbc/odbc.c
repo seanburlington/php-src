@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: odbc.c,v 1.6 1999/04/28 20:26:32 zeev Exp $ */
+/* $Id: odbc.c,v 1.7 1999/05/09 08:47:59 zeev Exp $ */
 
 /* This file is based on the Adabas D extension.
  * Adabas D will no longer be supported as separate module.
@@ -287,7 +287,7 @@ int php3_mshutdown_odbc(SHUTDOWN_FUNC_ARGS)
 }
 
 
-void php3_info_odbc(void)
+void php3_info_odbc(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 	ODBC_TLS_VARS;
 

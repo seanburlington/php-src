@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php3_msql.h,v 1.1 1999/04/21 22:49:15 ssb Exp $ */
+/* $Id: php3_msql.h,v 1.2 1999/05/09 08:47:58 zeev Exp $ */
 
 #ifndef _PHP3_MSQL_H
 #define _PHP3_MSQL_H
@@ -48,7 +48,7 @@ extern php3_module_entry msql_module_entry;
 extern DLEXPORT int php3_minit_msql(INIT_FUNC_ARGS);
 extern DLEXPORT int php3_rinit_msql(INIT_FUNC_ARGS);
 extern DLEXPORT int php3_mshutdown_msql(SHUTDOWN_FUNC_ARGS);
-extern DLEXPORT void php3_info_msql(void);
+extern DLEXPORT void php3_info_msql(ZEND_MODULE_INFO_FUNC_ARGS);
 extern DLEXPORT void php3_msql_connect(INTERNAL_FUNCTION_PARAMETERS);
 extern DLEXPORT void php3_msql_pconnect(INTERNAL_FUNCTION_PARAMETERS);
 extern DLEXPORT void php3_msql_close(INTERNAL_FUNCTION_PARAMETERS);

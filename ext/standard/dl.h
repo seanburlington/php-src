@@ -30,7 +30,7 @@
  */
 
 
-/* $Id: dl.h,v 1.1 1999/04/22 00:25:56 ssb Exp $ */
+/* $Id: dl.h,v 1.2 1999/05/09 08:48:01 zeev Exp $ */
 
 #ifndef _DL_H
 #define _DL_H
@@ -48,7 +48,7 @@ extern void dl(INTERNAL_FUNCTION_PARAMETERS);
 extern int php3_minit_dl(INIT_FUNC_ARGS);
 extern int php3_mshutdown_dl(SHUTDOWN_FUNC_ARGS);
 extern int php3_rshutdown_dl(SHUTDOWN_FUNC_ARGS);
-extern void php3_info_dl(void);
+extern void php3_info_dl(ZEND_MODULE_INFO_FUNC_ARGS);
 
 #else
 

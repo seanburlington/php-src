@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_gettext.h,v 1.1 1999/04/21 18:10:39 sas Exp $ */
+/* $Id: php3_gettext.h,v 1.2 1999/05/09 08:47:52 zeev Exp $ */
 
 #ifndef _GETTEXT_H
 #define _GETTEXT_H
@@ -40,7 +40,7 @@
 extern php3_module_entry php3_gettext_module_entry;
 #define php3_gettext_module_ptr &php3_gettext_module_entry
 
-extern void php3_info_gettext(void);
+extern void php3_info_gettext(ZEND_MODULE_INFO_FUNC_ARGS);
 extern void php3_textdomain(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_gettext(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_dgettext(INTERNAL_FUNCTION_PARAMETERS);

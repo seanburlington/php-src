@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.1 1999/04/22 02:48:24 ssb Exp $ */
+/* $Id: interbase.c,v 1.2 1999/05/09 08:47:53 zeev Exp $ */
 
 /* TODO: A lot... */
 
@@ -214,7 +214,7 @@ int php3_rfinish_ibase(void)
 }
 */
 
-void php3_info_ibase(void)
+void php3_info_ibase(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 	/* TODO */
 }

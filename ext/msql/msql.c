@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: msql.c,v 1.2 1999/04/23 20:05:58 zeev Exp $ */
+/* $Id: msql.c,v 1.3 1999/05/09 08:47:57 zeev Exp $ */
 
 #include "php.h"
 #if COMPILE_DL
@@ -275,7 +275,7 @@ DLEXPORT int php3_rinit_msql(INIT_FUNC_ARGS)
 	return SUCCESS;
 }
 
-DLEXPORT void php3_info_msql(void)
+DLEXPORT void php3_info_msql(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 	char maxp[16],maxl[16];
 	MSQL_TLS_VARS;

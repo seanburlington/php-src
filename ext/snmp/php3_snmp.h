@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php3_snmp.h,v 1.1 1999/04/22 02:48:25 ssb Exp $ */
+/* $Id: php3_snmp.h,v 1.2 1999/05/09 08:48:00 zeev Exp $ */
 #ifndef _PHP3_SNMP_H
 #define _PHP3_SNMP_H
 
@@ -46,7 +46,7 @@ extern int php3i_snmp_init(INIT_FUNC_ARGS);
 extern PHP_FUNCTION(snmpget);
 extern PHP_FUNCTION(snmpwalk);
 extern PHP_FUNCTION(snmprealwalk);
-extern void php3_info_snmp(void);
+extern void php3_info_snmp(ZEND_MODULE_INFO_FUNC_ARGS);
 #else
 
 #define snmp_module_ptr NULL

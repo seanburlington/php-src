@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.47.2.1 2003/02/13 13:37:05 wez Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.47.2.2 2003/02/14 01:27:42 sniper Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -58,6 +58,13 @@ dnl Check for crypt() capabilities
 dnl
 AC_DEFUN(AC_CRYPT_CAP,[
 
+  if test "$ac_cv_func_crypt" = "no"; then
+  AC_CHECK_LIB(crypt, crypt, [
+    LIBS="-lcrypt $LIBS -lcrypt"
+    AC_DEFINE(HAVE_CRYPT, 1, [ ])
+  ])
+  fi
+  
   AC_CACHE_CHECK(for standard DES crypt, ac_cv_crypt_des,[
   AC_TRY_RUN([
 #if HAVE_CRYPT_H
@@ -184,10 +191,6 @@ main() {
   fi
   AC_DEFINE_UNQUOTED(PHP_BLOWFISH_CRYPT, $ac_result, [Whether the system supports BlowFish salt])
 ])
-
-dnl AC_CHECK_LIB(pam, pam_start, [
-dnl   EXTRA_LIBS="$EXTRA_LIBS -lpam"
-dnl   AC_DEFINE(HAVE_LIBPAM,1,[ ]) ], []) 
 
 AC_CHECK_FUNCS(getcwd getwd asinh acosh atanh log1p hypot)
 

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: main.h,v 1.2 1999/04/21 04:02:11 zeev Exp $ */
+/* $Id: main.h,v 1.3 1999/04/23 20:20:30 zeev Exp $ */
 
 
 #ifndef _MAIN_H
@@ -55,7 +55,6 @@ extern void php3_module_shutdown();
 extern void php3_module_shutdown_for_exec(void);
 
 #ifndef THREAD_SAFE
-extern unsigned char header_is_being_sent;
 extern int initialized;
 #endif
 

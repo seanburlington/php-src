@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gettext.h,v 1.12 2001/08/27 18:43:07 chagenbu Exp $ */
+/* $Id: php_gettext.h,v 1.13 2001/08/29 13:13:24 wez Exp $ */
 
 #ifndef PHP_GETTEXT_H
 #define PHP_GETTEXT_H
@@ -36,9 +36,15 @@ PHP_FUNCTION(gettext);
 PHP_FUNCTION(dgettext);
 PHP_FUNCTION(dcgettext);
 PHP_FUNCTION(bindtextdomain);
+#if HAVE_NGETTEXT
 PHP_FUNCTION(ngettext);
+#endif
+#if HAVE_DNGETTEXT
 PHP_FUNCTION(dngettext);
+#endif
+#if HAVE_DCNGETTEXT
 PHP_FUNCTION(dcngettext);
+#endif
 
 #else
 #define gettext_module_ptr NULL

@@ -13,10 +13,10 @@
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
   | Authors: Wez Furlong <wez@thebrainroom.com>                          |
-  |          Tal Peer <tal@php.net                                       |
+  |          Tal Peer <tal@php.net>                                      |
   +----------------------------------------------------------------------+
 
-  $Id: php_sqlite.h,v 1.9 2003/04/20 13:17:17 tal Exp $ 
+  $Id: php_sqlite.h,v 1.10 2003/04/20 13:31:36 wez Exp $ 
 */
 
 #ifndef PHP_SQLITE_H
@@ -67,6 +67,7 @@ PHP_FUNCTION(sqlite_last_error);
 PHP_FUNCTION(sqlite_error_string);
 
 PHP_FUNCTION(sqlite_create_aggregate);
+PHP_FUNCTION(sqlite_create_function);
 
 #ifdef ZTS
 #define SQLITE_G(v) TSRMG(sqlite_globals_id, zend_sqlite_globals *, v)

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.199.2.12 2003/01/03 05:12:06 moriyoshi Exp $ */
+/* $Id: array.c,v 1.199.2.13 2003/02/03 16:58:08 sniper Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1733,6 +1733,8 @@ static void _phpi_pop(INTERNAL_FUNCTION_PARAMETERS, int off_the_end)
 	} else if (!key_len) {
 		Z_ARRVAL_PP(stack)->nNextFreeElement = Z_ARRVAL_PP(stack)->nNextFreeElement - 1;
 	}
+
+	zend_hash_internal_pointer_reset(Z_ARRVAL_PP(stack));
 }
 /* }}} */
 

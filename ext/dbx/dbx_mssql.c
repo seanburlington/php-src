@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx_mssql.c,v 1.10 2002/10/29 14:08:39 mboeren Exp $ */
+/* $Id: dbx_mssql.c,v 1.11 2002/10/30 12:02:49 mboeren Exp $ */
 
 #include "dbx.h"
 #include "dbx_mssql.h"
@@ -258,6 +258,10 @@ int dbx_mssql_esc(zval **rv, zval **dbx_handle, zval **string, INTERNAL_FUNCTION
 	char * tmpstr;
 	int tmplen;
 
+	if (Z_STRLEN_PP(string) == 0) {
+		ZVAL_EMPTY_STRING(*rv);
+		return 1;
+		}
 	tmpstr = estrdup(Z_STRVAL_PP(string));
 	tmplen = Z_STRLEN_PP(string);
 	/* php_str_to_str uses a smart_str that allocates memory */

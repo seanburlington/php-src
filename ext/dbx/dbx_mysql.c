@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx_mysql.c,v 1.15 2002/10/29 14:08:39 mboeren Exp $ */
+/* $Id: dbx_mysql.c,v 1.16 2002/10/30 12:02:50 mboeren Exp $ */
 
 #include "dbx.h"
 #include "dbx_mysql.h"
@@ -266,6 +266,10 @@ int dbx_mysql_esc(zval **rv, zval **dbx_handle, zval **string, INTERNAL_FUNCTION
 	char * tmpstr;
 	int tmplen;
 
+	if (Z_STRLEN_PP(string) == 0) {
+		ZVAL_EMPTY_STRING(*rv);
+		return 1;
+		}
 	arguments[0]=string;
 	arguments[1]=dbx_handle;
 	dbx_call_any_function(INTERNAL_FUNCTION_PARAM_PASSTHRU, "mysql_real_escape_string", &returned_zval, number_of_arguments, arguments);

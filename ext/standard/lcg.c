@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lcg.c,v 1.15 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: lcg.c,v 1.16 2001/05/06 16:54:27 sniper Exp $ */
 
 #include "php.h"
 #include "php_lcg.h"
@@ -30,6 +30,8 @@ int lcg_globals_id;
 #else
 static php_lcg_globals lcg_globals;
 #endif
+
+static int php_lcg_initialized = 0;
 
 #ifdef PHP_WIN32
 #include <process.h>
@@ -71,13 +73,16 @@ static void lcg_init_globals(LCGLS_D)
 #endif
 }
 
-PHP_MINIT_FUNCTION(lcg)
+PHP_RINIT_FUNCTION(lcg)
 {
+	if (!php_lcg_initialized) {
 #ifdef ZTS
-	lcg_globals_id = ts_allocate_id(sizeof(php_lcg_globals), (ts_allocate_ctor) lcg_init_globals, NULL);
+		lcg_globals_id = ts_allocate_id(sizeof(php_lcg_globals), (ts_allocate_ctor) lcg_init_globals, NULL);
 #else
-	lcg_init_globals();
+		lcg_init_globals();
 #endif
+		php_lcg_initialized = 1;
+	}
 	return SUCCESS;
 }
 

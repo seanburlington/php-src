@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.327 2001/04/30 12:43:39 andi Exp $ */
+/* $Id: basic_functions.c,v 1.328 2001/05/06 16:54:27 sniper Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -747,7 +747,6 @@ PHP_MINIT_FUNCTION(basic)
 	PHP_MINIT(file)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(pack)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(browscap)(INIT_FUNC_ARGS_PASSTHRU);
-	PHP_MINIT(lcg)(INIT_FUNC_ARGS_PASSTHRU);
 #if defined(HAVE_LOCALECONV) && defined(ZTS)
 	PHP_MINIT(localeconv)(INIT_FUNC_ARGS_PASSTHRU);
 #endif
@@ -834,6 +833,11 @@ PHP_RINIT_FUNCTION(basic)
 #endif
 	BG(user_shutdown_function_names)=NULL;
 
+#ifdef HAVE_CRYPT
+	PHP_RINIT(crypt)(INIT_FUNC_ARGS_PASSTHRU);
+#endif
+
+	PHP_RINIT(lcg)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(head)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(filestat)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(syslog)(INIT_FUNC_ARGS_PASSTHRU);

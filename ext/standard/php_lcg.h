@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_lcg.h,v 1.9 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: php_lcg.h,v 1.10 2001/05/06 16:54:27 sniper Exp $ */
 
 #ifndef PHP_LCG_H
 #define PHP_LCG_H
@@ -28,7 +28,7 @@ typedef struct {
 
 double php_combined_lcg(void);
 PHP_FUNCTION(lcg_value);
-PHP_MINIT_FUNCTION(lcg);
+PHP_RINIT_FUNCTION(lcg);
 
 #ifdef ZTS
 #define LCGLS_D php_lcg_globals *lcg_globals

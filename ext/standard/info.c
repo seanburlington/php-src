@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.198 2002/08/31 21:43:54 jan Exp $ */
+/* $Id: info.c,v 1.199 2002/09/06 07:27:26 hyanantha Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -28,7 +28,7 @@
 #include "SAPI.h"
 #include <time.h>
 #include "php_main.h"
-#if !defined(PHP_WIN32)
+#if !defined(PHP_WIN32) && !defined(NETWARE)
 #include "build-defs.h"
 #endif
 #include "zend_globals.h"		/* needs ELS */

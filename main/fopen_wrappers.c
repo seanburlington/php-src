@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.77 2000/08/18 23:03:49 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.78 2000/08/20 05:27:59 sas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -39,7 +39,6 @@
 #endif
 
 #include "safe_mode.h"
-#include "php_realpath.h"
 #include "ext/standard/head.h"
 #include "ext/standard/php_standard.h"
 #include "zend_compile.h"

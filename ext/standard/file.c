@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.105 2000/08/19 21:15:43 fmk Exp $ */
+/* $Id: file.c,v 1.106 2000/08/20 05:27:59 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -82,7 +82,6 @@ extern int fclose(FILE *);
 #define MAP_FAILED ((void *) -1)
 #endif
 
-#include "php_realpath.h"
 #include "scanf.h"
 #include "zend_API.h"
 

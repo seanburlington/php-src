@@ -12,11 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: David Croft <david@infotrek.co.uk>                           |
+   | Authors: David Croft <david@infotrek.co.uk>                          |
+   |          John Donagher <john@webmeta.com>                            |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pfpro.h,v 1.7 2001/03/21 20:07:18 andi Exp $ */
+/* $Id: php_pfpro.h,v 1.8 2001/05/01 05:04:42 jdonagher Exp $ */
 
 #ifndef PHP_PFPRO_H
 #define PHP_PFPRO_H
@@ -30,6 +31,12 @@ extern zend_module_entry pfpro_module_entry;
 #define PHP_PFPRO_API __declspec(dllexport)
 #else
 #define PHP_PFPRO_API
+#endif
+
+#if PFPRO_VERSION < 3
+#define pfproVersion() PNVersion()
+#define pfproInit() PNInit()
+#define pfproCleanup() PNCleanup()
 #endif
 
 PHP_MINIT_FUNCTION(pfpro);

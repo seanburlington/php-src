@@ -30,7 +30,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.1 1999/04/07 21:01:51 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.2 1999/04/08 21:32:57 zeev Exp $ */
 
 #define DEBUG_CFG_PARSER 1
 #include "php.h"
@@ -278,7 +278,7 @@ int php3_shutdown_config(void)
 }
 
 
-int php3_mshutdown_browscap(void)
+int php3_mshutdown_browscap(SHUTDOWN_FUNC_ARGS)
 {
 	TLS_VARS;
 

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.47 2003/10/29 20:48:47 georg Exp $ 
+  $Id: mysqli_api.c,v 1.48 2003/10/30 12:35:16 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -641,7 +641,7 @@ PHP_FUNCTION(mysqli_error)
 }
 /* }}} */
 
-/* {{{ proto int mysqli_execute(object stmt)
+/* {{{ proto bool mysqli_execute(object stmt)
    Execute a prepared statement */
 PHP_FUNCTION(mysqli_execute)
 {
@@ -679,7 +679,10 @@ PHP_FUNCTION(mysqli_execute)
 		}
 	}
 
-	RETURN_LONG(mysql_execute(stmt->stmt));
+	if (mysql_execute(stmt->stmt)) {
+		RETURN_FALSE;
+	}
+	RETURN_TRUE;
 }
 /* }}} */
 

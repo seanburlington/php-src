@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.11 1999/05/09 08:48:01 zeev Exp $ */
+/* $Id: head.c,v 1.12 1999/05/11 20:38:16 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -66,13 +66,6 @@ int php3_init_head(INIT_FUNC_ARGS)
 	cont_type = NULL;
 
 	return SUCCESS;
-}
-
-
-PHPAPI void php3_noheader(void)
-{
-	php3_PrintHeader = 0;
-	header_called = 1;
 }
 
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.244 2004/04/23 13:28:25 derick Exp $ */
+/* $Id: info.c,v 1.245 2004/05/02 13:23:30 helly Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -373,7 +373,7 @@ static int module_name_cmp(const void *a, const void *b TSRMLS_DC)
 	Bucket *f = *((Bucket **) a);
 	Bucket *s = *((Bucket **) b);
 
-	return strcmp(((zend_module_entry *)f->pData)->name,
+	return strcasecmp(((zend_module_entry *)f->pData)->name,
 				  ((zend_module_entry *)s->pData)->name);
 }
 /* }}} */

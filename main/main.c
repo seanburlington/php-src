@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.196 2000/02/10 16:52:07 zeev Exp $ */
+/* $Id: main.c,v 1.197 2000/02/10 17:14:05 andi Exp $ */
 
 
 #include <stdio.h>
@@ -51,7 +51,7 @@
 #include "ext/standard/php_standard.h"
 #include "snprintf.h"
 #include "php_variables.h"
-#if WIN32|WINNT
+#if PHP_WIN32
 #include <io.h>
 #include <fcntl.h>
 #include "win32/syslog.h"

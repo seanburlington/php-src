@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.30 2000/01/30 20:31:40 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.31 2000/02/10 17:14:05 andi Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -161,7 +161,7 @@ int php_init_config(void)
 		if (!env_location) {
 			env_location="";
 		}
-#if WIN32|WINNT
+#if PHP_WIN32
 		{
 			if (php_ini_path) {
 				default_location = php_ini_path;
@@ -186,7 +186,7 @@ int php_init_config(void)
 		php_ini_search_path = (char *) malloc(sizeof(".")+strlen(env_location)+strlen(default_location)+2+1);
 
 		if (!php_ini_path) {
-#if WIN32|WINNT
+#if PHP_WIN32
 			sprintf(php_ini_search_path,".;%s;%s",env_location,default_location);
 #else
 			sprintf(php_ini_search_path,".:%s:%s",env_location,default_location);
@@ -206,7 +206,7 @@ int php_init_config(void)
 		PG(open_basedir) = open_basedir;
 
 		if (!cfgin) {
-# if WIN32|WINNT
+# if PHP_WIN32
 			return FAILURE;
 # else
 			return SUCCESS;  /* having no configuration file is ok */

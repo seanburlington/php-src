@@ -17,12 +17,15 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.8 1999/08/04 21:12:57 slawrance Exp $ */
+/* $Id: snmp.c,v 1.9 1999/09/03 16:04:28 gorgo Exp $ */
+
+#ifdef PIC
+# define COMPILE_DL 1
+#endif
 
 #include "php.h"
 #if defined(COMPILE_DL)
-#include "phpdl.h"
-#include "functions/dl.h"
+#include "dl/phpdl.h"
 #endif
 #include "php3_snmp.h"
 #include <sys/types.h>

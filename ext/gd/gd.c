@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.188 2002/06/15 17:46:44 mfischer Exp $ */
+/* $Id: gd.c,v 1.189 2002/06/15 18:14:19 mfischer Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1714,7 +1714,8 @@ PHP_FUNCTION(imagecolordeallocate)
 		gdImageColorDeallocate(im, col);
 		RETURN_TRUE;
 	} else {
-		php_error(E_WARNING, "Color index out of range");
+		php_error(E_WARNING, "%s() color index %d out of range",
+				  get_active_function_name(TSRMLS_C), col);
 		RETURN_FALSE;
 	}
 }
@@ -1830,7 +1831,8 @@ PHP_FUNCTION(imagecolorsforindex)
 	}
 #endif
 	else {
-		php_error(E_WARNING, "Color index out of range");
+		php_error(E_WARNING, "%s() color index %d out of range",
+				  get_active_function_name(TSRMLS_C), col);
 		RETURN_FALSE;
 	}
 }

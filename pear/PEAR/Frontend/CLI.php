@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@php.net>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.39 2004/01/08 17:33:13 sniper Exp $
+  $Id: CLI.php,v 1.40 2004/02/15 17:43:00 ssb Exp $
 */
 
 require_once "PEAR.php";
@@ -219,7 +219,7 @@ class PEAR_Frontend_CLI extends PEAR
         for ($i = 0; $i < sizeof($columns); $i++) {
             $col = &$columns[$i];
             if (isset($colparams[$i]) && !empty($colparams[$i]['wrap'])) {
-                $col = wordwrap($col, $colparams[$i]['wrap'], "\n", 1);
+                $col = wordwrap($col, $colparams[$i]['wrap'], "\n", 0);
             }
             if (strpos($col, "\n") !== false) {
                 $multiline = explode("\n", $col);
@@ -348,6 +348,9 @@ class PEAR_Frontend_CLI extends PEAR
                     }
 
                     $rowtext .= $cellstart . $cell . $cellend;
+                }
+                if (!$border) {
+                    $rowtext = rtrim($rowtext);
                 }
                 $rowtext .= $rowend;
                 $this->_displayLine($rowtext);

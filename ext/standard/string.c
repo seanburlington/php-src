@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.431 2005/03/10 23:52:43 helly Exp $ */
+/* $Id: string.c,v 1.432 2005/03/12 13:08:19 andrey Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4678,10 +4678,9 @@ PHP_FUNCTION(str_word_count)
 
 	convert_to_string_ex(str);
 	
-	p = s = Z_STRVAL_PP(str);
-	e = Z_STRVAL_PP(str) + Z_STRLEN_PP(str);
+	e = Z_STRLEN_PP(str) + (p = s = Z_STRVAL_PP(str));
 		
-	if (type == 1 || type == 2) {
+	if (type) {
 		array_init(return_value);
 	}
 	

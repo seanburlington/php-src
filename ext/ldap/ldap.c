@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.104 2001/11/14 22:05:33 venaas Exp $ */
+/* $Id: ldap.c,v 1.105 2001/11/21 20:14:17 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -99,6 +99,7 @@ function_entry ldap_functions[] = {
 	PHP_FE(ldap_err2str,								NULL)
 	PHP_FE(ldap_error,									NULL)
 	PHP_FE(ldap_compare,								NULL)
+	PHP_FE(ldap_sort,									NULL)
 
 #if ( LDAP_API_VERSION > 2000 ) || HAVE_NSLDAP
 	PHP_FE(ldap_get_option,			third_argument_force_ref)
@@ -256,7 +257,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.104 2001/11/14 22:05:33 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.105 2001/11/21 20:14:17 venaas Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #ifdef LDAP_API_VERSION
@@ -1529,6 +1530,36 @@ PHP_FUNCTION(ldap_compare)
 	php_error(E_WARNING, "LDAP: Compare operation could not be completed: %s", ldap_err2string(errno));
 	RETURN_LONG(-1);
 
+}
+/* }}} */
+
+/* {{{ proto int ldap_sort(int link, int result, string sortfilter)
+   Sort LDAP result entries */
+PHP_FUNCTION(ldap_sort)
+{
+	zval *link, *result;
+	LDAP *ldap;
+	char *sortfilter;
+	int sflen;
+	zend_rsrc_list_entry *le;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rrs", &link, &result, &sortfilter, &sflen) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	ZEND_FETCH_RESOURCE(ldap, LDAP *, &link, -1, "ldap link", le_link);
+
+	if (zend_hash_index_find(&EG(regular_list), Z_LVAL_P(result), (void **) &le) == FAILURE || le->type != le_result) {
+		php_error(E_WARNING, "Supplied resource is not a valid ldap result resource");
+		RETURN_FALSE;
+	}
+
+	if (ldap_sort_entries(ldap, (LDAPMessage **) &le->ptr, sflen ? sortfilter : NULL, strcmp) != LDAP_SUCCESS) {
+		php_error(E_WARNING, "LDAP sort failed: %s", ldap_err2string(errno));
+		RETURN_FALSE;
+	}
+
+	RETURN_TRUE;
 }
 /* }}} */
 

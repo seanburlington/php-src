@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.118.2.5 2002/03/13 07:38:14 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.118.2.6 2002/03/13 08:15:54 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -1437,6 +1437,10 @@ PHP_FUNCTION(domxml_node_name)
 
 		case XML_TEXT_NODE:
 			str = "#text";
+			break;
+
+		case XML_ATTRIBUTE_NODE:
+			str = n->name;
 			break;
 
 		case XML_CDATA_SECTION_NODE:

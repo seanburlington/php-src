@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.49 2004/06/21 19:15:27 helly Exp $ */
+/* $Id: spl_array.c,v 1.49.2.1 2004/08/31 20:56:08 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -716,7 +716,7 @@ SPL_METHOD(Array, seek)
 
 	zend_hash_internal_pointer_reset_ex(aht, &intern->pos);
 	
-	while (position-- > 0 && spl_array_next(intern TSRMLS_CC));
+	while (position-- > 0 && spl_array_next(intern TSRMLS_CC) == SUCCESS);
 } /* }}} */
 
 int spl_array_object_count_elements(zval *object, long *count TSRMLS_DC) /* {{{ */
@@ -737,9 +737,8 @@ int spl_array_object_count_elements(zval *object, long *count TSRMLS_DC) /* {{{ 
 		pos = intern->pos;
 		*count = 0;
 		zend_hash_internal_pointer_reset_ex(aht, &intern->pos);
-		while(intern->pos) {
+		while(intern->pos && spl_array_next(intern TSRMLS_CC) == SUCCESS) {
 			(*count)++;
-			spl_array_next(intern TSRMLS_CC);
 		}
 		intern->pos = pos;
 		return SUCCESS;

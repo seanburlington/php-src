@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: HTTP.php,v 1.12 2002/01/31 13:41:04 mj Exp $
+// $Id: HTTP.php,v 1.13 2002/02/07 11:15:54 mj Exp $
 //
 // HTTP utility functions.
 //
@@ -107,7 +107,8 @@ class HTTP {
         /* Check for a valid language code in the top-level domain of
          * the client's host address.
          */
-        if (ereg("\.[^\.]+$", $HTTP_SERVER_VARS['REMOTE_HOST'], $arr)) {
+        if (isset($HTTP_SERVER_VARS['REMOTE_HOST']) &&
+            ereg("\.[^\.]+$", $HTTP_SERVER_VARS['REMOTE_HOST'], $arr)) {
             $lang = strtolower($arr[1]);
             if (!empty($supported[$lang])) {
                 return $lang;

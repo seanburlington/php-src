@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.13 2003/05/20 07:34:08 moriyoshi Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.14 2003/05/21 09:34:14 zeev Exp $ */
 
 #include <fcntl.h>
 
@@ -514,7 +514,7 @@ static int php_handler(request_rec *r)
 		php_get_highlight_struct(&syntax_highlighter_ini);
 		highlight_file((char *)r->filename, &syntax_highlighter_ini TSRMLS_CC);
 	} else {
-		zend_file_handle zfd = {0};
+		zend_file_handle zfd;
 
 		zfd.type = ZEND_HANDLE_FILENAME;
 		zfd.filename = (char *) r->filename;

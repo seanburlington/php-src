@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.28 2003/05/19 06:46:50 shane Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.29 2003/05/21 09:34:15 zeev Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -894,7 +894,7 @@ int main(int argc, char *argv[])
 {
 	int exit_status = SUCCESS;
 	int cgi = 0, c, i, len;
-	zend_file_handle file_handle = {0};
+	zend_file_handle file_handle;
 	int retval = FAILURE;
 	char *s;
 /* temporary locals */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.60.2.9 2003/05/17 07:55:18 sas Exp $ */
+/* $Id: browscap.c,v 1.60.2.10 2003/05/21 09:34:12 zeev Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -150,7 +150,7 @@ PHP_MINIT_FUNCTION(browscap)
 	char *browscap = INI_STR("browscap");
 
 	if (browscap) {
-		zend_file_handle fh = {0};
+		zend_file_handle fh;
 
 		if (zend_hash_init(&browser_hash, 0, NULL, (dtor_func_t) browscap_entry_dtor, 1)==FAILURE) {
 			return FAILURE;

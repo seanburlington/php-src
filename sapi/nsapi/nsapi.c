@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nsapi.c,v 1.28.2.6 2003/05/17 08:06:53 sas Exp $ */
+/* $Id: nsapi.c,v 1.28.2.7 2003/05/21 09:34:15 zeev Exp $ */
 
 /*
  * PHP includes
@@ -493,7 +493,7 @@ static void nsapi_request_dtor(NSLS_D TSRMLS_DC)
 
 int nsapi_module_main(NSLS_D TSRMLS_DC)
 {
-	zend_file_handle file_handle = {0};
+	zend_file_handle file_handle;
 
 	if (php_request_startup(TSRMLS_C) == FAILURE) {
 		return FAILURE;

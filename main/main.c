@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.236 2000/04/19 15:10:14 zeev Exp $ */
+/* $Id: main.c,v 1.237 2000/04/19 23:17:56 cmv Exp $ */
 
 
 #include <stdio.h>
@@ -1117,7 +1117,13 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 			char *header_line = estrndup(CONTEXT_TYPE_IMAGE_GIF, sizeof(CONTEXT_TYPE_IMAGE_GIF));
 
 			php4i_add_header_information(header_line, sizeof(CONTEXT_TYPE_IMAGE_GIF)-1);
-			PHPWRITE(php4_logo, sizeof(php4_logo));
+			PHPWRITE(php_logo, sizeof(php_logo));
+			return;
+		} else if (!strcmp(SG(request_info).query_string+1, PHP_EGG_LOGO_GUID)) {
+			char *header_line = estrndup(CONTEXT_TYPE_IMAGE_GIF, sizeof(CONTEXT_TYPE_IMAGE_GIF));
+
+			php4i_add_header_information(header_line, sizeof(CONTEXT_TYPE_IMAGE_GIF)-1);
+			PHPWRITE(php_egg_logo, sizeof(php_egg_logo));
 			return;
 		} else if (!strcmp(SG(request_info).query_string+1, ZEND_LOGO_GUID)) {
 			char *header_line = estrndup(CONTEXT_TYPE_IMAGE_GIF, sizeof(CONTEXT_TYPE_IMAGE_GIF));

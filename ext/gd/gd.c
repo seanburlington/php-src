@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.108 2001/01/24 09:42:17 eschmid Exp $ */
+/* $Id: gd.c,v 1.109 2001/01/25 14:35:36 stas Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -860,10 +860,10 @@ static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char
 					if(q<0||q>255) {
 						php_error(E_WARNING, "%s: invalid threshold value '%d'. It must be between 0 and 255",get_active_function_name(), q);
 					}
-					(*func_p)(im, q, fp);
+					(*func_p)(im, q, tmp);
 					break;
 				default:
-					(*func_p)(im, fp);
+					(*func_p)(im, tmp);
 					break;
 			}
 

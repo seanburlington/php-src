@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php3_mysql.h,v 1.1 1999/04/21 21:22:53 ssb Exp $ */
+/* $Id: php3_mysql.h,v 1.2 1999/04/23 11:12:41 zeev Exp $ */
 
 #ifndef _PHP3_MYSQL_H
 #define _PHP3_MYSQL_H
@@ -87,7 +87,6 @@ typedef struct {
 	long num_links,num_persistent;
 	long max_links,max_persistent;
 	long allow_persistent;
-	int le_result,le_link,le_plink;
 	long default_port;
 	char *default_host, *default_user, *default_password;
 } php_mysql_globals;

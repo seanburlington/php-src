@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 1999/11/09 19:48:55 thies Exp $
+dnl $Id: config.m4,v 1.7 1999/12/22 22:16:47 sas Exp $
 
 AC_DEFUN(AC_ORACLE_VERSION,[
   AC_MSG_CHECKING([Oracle version])
@@ -35,7 +35,7 @@ AC_ARG_WITH(oci8,
       AC_MSG_RESULT(no)
       ;;
     *)
-      ORACLEINST_TOP=$withval
+      AC_EXPAND_PATH($withval, ORACLEINST_TOP)
       AC_MSG_RESULT(yes)
       PHP_EXTENSION(oci8)
       ;;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.h,v 1.1 2004/02/01 17:52:36 abies Exp $ */
+/* $Id: interbase.h,v 1.2 2004/02/01 17:54:56 abies Exp $ */
 
 #ifndef INTERBASE_H
 #define INTERBASE_H

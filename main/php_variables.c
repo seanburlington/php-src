@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.33 2001/09/25 21:58:33 jeroen Exp $ */
+/* $Id: php_variables.c,v 1.34 2001/11/24 16:05:22 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -33,6 +33,7 @@ PHPAPI void php_register_variable(char *var, char *strval, zval *track_vars_arra
 {
 	php_register_variable_safe(var, strval, strlen(strval), track_vars_array TSRMLS_CC);
 }
+
 
 /* binary-safe version */
 PHPAPI void php_register_variable_safe(char *var, char *strval, int str_len, zval *track_vars_array TSRMLS_DC)

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.92 2004/08/25 13:57:35 georg Exp $ 
+  $Id: mysqli_api.c,v 1.93 2004/09/04 14:16:52 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -258,7 +258,6 @@ PHP_FUNCTION(mysqli_stmt_bind_result)
 	for (i=start; i < var_cnt + start ; i++) {
 		ofs = i - start;
 		stmt->result.is_null[ofs] = 0;
-		//bind[ofs].truncated = NULL;
 		col_type = (stmt->stmt->fields) ? stmt->stmt->fields[ofs].type : MYSQL_TYPE_STRING;
 
 		switch (col_type) {

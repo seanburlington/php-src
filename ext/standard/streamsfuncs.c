@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.36 2004/07/22 12:12:28 wez Exp $ */
+/* $Id: streamsfuncs.c,v 1.37 2004/07/28 23:21:54 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -316,6 +316,11 @@ PHP_FUNCTION(stream_socket_recvfrom)
 		zval_dtor(zremote);
 		ZVAL_NULL(zremote);
 		Z_STRLEN_P(zremote) = 0;
+	}
+
+	if (to_read <= 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length parameter must be greater than 0.");
+		RETURN_FALSE;
 	}
 	
 	read_buf = emalloc(to_read + 1);

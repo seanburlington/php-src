@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.81 2001/01/02 22:49:27 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.82 2001/01/03 11:39:09 sniper Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -249,12 +249,12 @@ static void sapi_apache_register_server_variables(zval *track_vars_array ELS_DC 
 
 static int php_apache_startup(sapi_module_struct *sapi_module)
 {
-    if(php_module_startup(sapi_module, NULL) == FAILURE
-            || zend_startup_module(&apache_module_entry) == FAILURE) {
-        return FAILURE;
-    } else {
-        return SUCCESS;
-    }
+	if(php_module_startup(sapi_module) == FAILURE
+	|| zend_startup_module(&apache_module_entry) == FAILURE) {
+		return FAILURE;
+	} else {
+		return SUCCESS;
+	}
 }
 
 

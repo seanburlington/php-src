@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules_pear.mk,v 1.11 2000/08/25 07:22:05 sas Exp $ 
+# $Id: rules_pear.mk,v 1.12 2000/08/25 08:15:10 sas Exp $ 
 #
 
 include $(top_srcdir)/build/rules_common.mk
@@ -43,7 +43,7 @@ install-p: $(targets) $(install_targets)
 distclean-p depend-p clean-p:
 
 depend: depend-recursive
-	@echo $(top_srcdir) $(top_builddir) $(srcdir) $(CPP) $(INCLUDES) $(EXTRA_INCLUDES) $(DEFS) $(CPPFLAGS) $(srcdir)/*.c *.c | awk -f $(top_srcdir)/build/mkdep.awk > $(builddir)/.deps || true
+	@echo $(top_srcdir) $(top_builddir) $(srcdir) $(CPP) $(INCLUDES) $(EXTRA_INCLUDES) $(DEFS) $(CPPFLAGS) $(srcdir)/*.c *.c | $(AWK) -f $(top_srcdir)/build/mkdep.awk > $(builddir)/.deps || true
 
 clean: clean-recursive clean-x
 

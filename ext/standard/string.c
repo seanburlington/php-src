@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.271 2002/05/04 17:38:45 sas Exp $ */
+/* $Id: string.c,v 1.272 2002/05/16 14:41:15 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -420,6 +420,7 @@ PHP_FUNCTION(nl_langinfo)
 	}
 }
 #endif
+/* }}} */
 
 #ifdef HAVE_STRCOLL
 /* {{{ proto int strcoll(string str1, string str2)
@@ -2130,7 +2131,7 @@ PHPAPI void php_stripslashes(char *str, int *len TSRMLS_DC)
 	t = str;
 
 	if (PG(magic_quotes_sybase)) {
-		while (l >= 0) {
+		while (l > 0) {
 			if(*t=='\'') {
 				if((l>0) && (t[1]=='\'')) {
 					t++;
@@ -2141,6 +2142,7 @@ PHPAPI void php_stripslashes(char *str, int *len TSRMLS_DC)
 			} 
 			*s++ = *t++;
 			l--;
+			php_printf("%d\n",l);
 		}
 		*s = '\0';
 		

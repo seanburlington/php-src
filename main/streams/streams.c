@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.64 2004/09/10 20:45:35 pollita Exp $ */
+/* $Id: streams.c,v 1.65 2004/09/10 21:50:29 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1501,9 +1501,32 @@ PHPAPI php_stream_wrapper *php_stream_locate_url_wrapper(const char *path, char 
 #endif
 				(*path_for_open)--;
 		}
+
+		if (options & STREAM_LOCATE_WRAPPERS_ONLY) {
+			return NULL;
+		}
 		
-		/* fall back on regular file access */
-		return (options & STREAM_LOCATE_WRAPPERS_ONLY) ? NULL : &php_plain_files_wrapper;
+		if (FG(stream_wrappers)) {
+			/* The file:// wrapper may have been disabled/overridden */
+
+			if (wrapper) {
+				/* It was found so go ahead and provide it */
+				return wrapper;
+			}
+			
+			/* Check again, the original check might have not known the protocol name */
+			if (zend_hash_find(wrapper_hash, "file", sizeof("file")-1, (void**)&wrapper) == SUCCESS) {
+				return wrapper;
+			}
+
+			if (options & REPORT_ERRORS) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Plainfiles wrapper disabled");
+			}
+			return NULL;
+		}
+
+		/* fall back on regular file access */		
+		return &php_plain_files_wrapper;
 	}
 
 	if (wrapper && wrapper->is_url && !PG(allow_url_fopen)) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: thttpd.c,v 1.77.2.3 2003/01/17 19:11:38 sas Exp $ */
+/* $Id: thttpd.c,v 1.77.2.4 2003/02/09 21:28:49 sas Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -349,7 +349,7 @@ static int php_thttpd_startup(sapi_module_struct *sapi_module)
 static int sapi_thttpd_get_fd(int *nfd TSRMLS_DC)
 {
 	if (nfd) *nfd = TG(hc)->conn_fd;
-	return 0;
+	return SUCCESS;
 }
 
 static sapi_module_struct thttpd_sapi_module = {

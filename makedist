@@ -24,7 +24,7 @@
 #
 # Written by Stig Bakken <ssb@guardian.no> 1997-05-28.
 #
-# $Id: makedist,v 1.21 2000/08/24 19:23:11 sas Exp $
+# $Id: makedist,v 1.22 2000/12/18 16:53:46 andi Exp $
 #
 
 if test "$#" != "2"; then
@@ -129,9 +129,6 @@ set -x
 rm -f buildmk.stamp
 
 ./genfiles
-
-echo "/* Dummy File */" > ext/bcmath/number.c
-echo "/* Dummy File */" > ext/bcmath/number.h
 
 # now restore our versions of libtool-generated files
 for i in $LT_TARGETS; do

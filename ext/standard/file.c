@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.31 1999/09/20 15:50:55 rasmus Exp $ */
+/* $Id: file.c,v 1.32 1999/09/20 20:05:26 eschmid Exp $ */
 
 /* Synced with php3 revision 1.218 1999-06-16 [ssb] */
 
@@ -919,7 +919,7 @@ PHP_FUNCTION(fgetc) {
 
 
 /* Strip any HTML tags while reading */
-/* {{{ proto string fgetss(int fp, int length [, allowable_tags])
+/* {{{ proto string fgetss(int fp, int length [, string allowable_tags])
 Get a line from file pointer and strip HTML tags */
 PHP_FUNCTION(fgetss)
 {

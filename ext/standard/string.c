@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.39 1999/09/20 16:56:02 andi Exp $ */
+/* $Id: string.c,v 1.40 1999/09/20 20:05:26 eschmid Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -1764,7 +1764,7 @@ PHP_FUNCTION(nl2br)
 }
 /* }}} */
 
-/* {{{ proto string strip_tags(string str [, allowable_tags])
+/* {{{ proto string strip_tags(string str [, string allowable_tags])
    Strips HTML and PHP tags from a string */
 PHP_FUNCTION(strip_tags)
 {

@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.36 2002/10/04 21:58:39 sesser Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.37 2002/11/05 11:17:45 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -162,8 +162,10 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 		resource->port = 21;
 	
 	stream = php_stream_sock_open_host(resource->host, resource->port, SOCK_STREAM, NULL, 0);
-	if (stream == NULL)
+	if (stream == NULL) {
+		result = 0; /* silence */
 		goto errexit;
+	}
 
 	php_stream_context_set(stream, context);
 	php_stream_notify_info(context, PHP_STREAM_NOTIFY_CONNECT, NULL, 0);

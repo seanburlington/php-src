@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.20 2004/05/20 17:22:13 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.21 2004/05/20 17:56:09 gschlossnagle Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -278,13 +278,15 @@ static PHP_METHOD(PDOStatement, execute)
 	}
 
 	if (stmt->dbh->emulate_prepare) {
+		int error_pos;
 		/* handle the emulated parameter binding,
          * stmt->active_query_string holds the query with binds expanded and 
 		 * quoted.
          */
-		if(pdo_parse_params(stmt, stmt->query_string, stmt->query_stringlen, 
-				&stmt->active_query_string, &stmt->active_query_stringlen) == 0) {
+		if((error_pos = pdo_parse_params(stmt, stmt->query_string, stmt->query_stringlen, 
+				&stmt->active_query_string, &stmt->active_query_stringlen)) != 0) {
 			// parse error in handling the query
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error emulating placeholder binding in query at %.*s....", error_pos, stmt->query_string);
 			RETURN_FALSE;
 		}
 	} else if (!dispatch_param_event(stmt, PDO_PARAM_EVT_EXEC_PRE TSRMLS_CC)) {

@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.26 1999/09/12 12:20:59 sas Exp $
+dnl $Id: acinclude.m4,v 1.27 1999/09/13 17:17:50 ssb Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -189,4 +189,25 @@ AC_DEFUN(PHP_SOLARIS_PIC_WEIRDNESS,[
   else
     AC_MSG_RESULT(no)
   fi
+])
+
+dnl
+dnl Checks whether $withval is "shared" or starts with "shared,XXX"
+dnl and sets $shared to "yes" or "no", and removes "shared,?" stuff
+dnl from $withval.
+dnl
+AC_DEFUN(PHP_WITH_SHARED,[
+    case $withval in
+	shared)
+	    shared=yes
+	    withval=yes
+	    ;;
+	shared,*)
+	    shared=yes
+	    withval=`echo $withval | sed -e 's/^shared,//'`      
+	    ;;
+	*)
+	    shared=no
+	    ;;
+    esac
 ])

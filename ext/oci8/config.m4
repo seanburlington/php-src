@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 1999/09/13 14:15:22 andrey Exp $
+dnl $Id: config.m4,v 1.5 1999/09/13 17:17:51 ssb Exp $
 
 AC_DEFUN(AC_ORACLE_VERSION,[
   AC_MSG_CHECKING([Oracle version])
@@ -21,7 +21,7 @@ AC_DEFUN(AC_ORACLE_VERSION,[
 
 AC_MSG_CHECKING(for Oracle-OCI8 support)
 AC_ARG_WITH(oci8,
-[  --with-oci8[=DIR]     Include Oracle database support.  DIR is Oracle's
+[  --with-oci8[=DIR]       Include Oracle database support.  DIR is Oracle's
                           home directory, defaults to \$ORACLE_HOME.],
 [
  case "$withval" in

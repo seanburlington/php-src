@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.1 1999/09/01 20:30:26 musone Exp $
+dnl $Id: config.m4,v 1.2 1999/09/13 17:17:50 ssb Exp $
 
 AC_MSG_CHECKING(for MCAL support)
 AC_ARG_WITH(mcal,
-[  --with-mcal[=DIR]     Include MCAL support.],
+[  --with-mcal[=DIR]       Include MCAL support.],
 [
   if test "$withval" != "no"; then
     if test "$withval" = "yes"; then

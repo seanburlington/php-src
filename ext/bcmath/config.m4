@@ -1,10 +1,10 @@
-dnl $Id: config.m4,v 1.2 1999/07/17 10:14:04 zeev Exp $
+dnl $Id: config.m4,v 1.3 1999/09/13 17:17:50 ssb Exp $
 
 AC_MSG_CHECKING(whether to enable bc style precision math functions)
 AC_ARG_ENABLE(bcmath,
-[  --enable-bcmath        Compile with bc style precision math functions.
-                         Read README-BCMATH for instructions on how to
-                         get this module installed. ],
+[  --enable-bcmath         Compile with bc style precision math functions.
+                          Read README-BCMATH for instructions on how to
+                          get this module installed. ],
 [
   if test "$enableval" = "yes"; then
     AC_DEFINE(WITH_BCMATH, 1)

@@ -1,11 +1,11 @@
-dnl $Id: config.m4,v 1.1 1999/04/21 17:26:16 sas Exp $
+dnl $Id: config.m4,v 1.2 1999/09/13 17:17:50 ssb Exp $
 dnl config.m4 for extension gettext
 dnl don't forget to call PHP_EXTENSION(gettext)
 
 AC_MSG_CHECKING(whether to include GNU gettext support)
 AC_ARG_WITH(gettext,
 [  --with-gettext[=DIR]    Include GNU gettext support.  DIR is the gettext
-                           install directory, defaults to /usr/local],
+                          install directory, defaults to /usr/local],
 [
   if test "$withval" != "no"; then
     if test "$withval" = "yes"; then

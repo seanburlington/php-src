@@ -1,10 +1,10 @@
-dnl $Id: config.m4,v 1.3 1999/06/20 18:52:41 sas Exp $
+dnl $Id: config.m4,v 1.4 1999/09/13 17:17:51 ssb Exp $
 dnl config.m4 for extension mhash
 dnl don't forget to call PHP_EXTENSION(mhash)
 
 AC_MSG_CHECKING(for mhash support)
 AC_ARG_WITH(mhash,
-[  --with-mhash[=DIR]     Include mhash support.  DIR is the mhash
+[  --with-mhash[=DIR]      Include mhash support.  DIR is the mhash
                           install directory.],
 [
   if test "$withval" != "no"; then

@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.3 1999/08/17 14:31:39 musone Exp $
+dnl $Id: config.m4,v 1.4 1999/09/13 17:17:50 ssb Exp $
 
 AC_MSG_CHECKING(for ICAP support)
 AC_ARG_WITH(icap,
-[  --with-icap[=DIR]     Include ICAP support.],
+[  --with-icap[=DIR]       Include ICAP support.],
 [
   if test "$withval" != "no"; then
     if test "$withval" = "yes"; then

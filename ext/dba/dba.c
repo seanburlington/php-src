@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.98 2003/07/29 18:26:34 iliaa Exp $ */
+/* $Id: dba.c,v 1.99 2003/08/17 17:14:11 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -663,9 +663,9 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			file_mode = "w+b";
 			break;
 		default:
-			modenr = 0;
-			lock_mode = 0;
-			file_mode = "";
+			php_error_docref2(NULL TSRMLS_CC, Z_STRVAL_PP(args[0]), Z_STRVAL_PP(args[1]), E_WARNING, "Illegal DBA mode");
+			FREENOW;
+			RETURN_FALSE;
 	}
 	if (!lock_file_mode) {
 		lock_file_mode = file_mode;
@@ -694,7 +694,7 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			lock_mode |= LOCK_NB; /* test =: non blocking */
 		}
 	}
-	if (*pmode || !modenr) {
+	if (*pmode) {
 		php_error_docref2(NULL TSRMLS_CC, Z_STRVAL_PP(args[0]), Z_STRVAL_PP(args[1]), E_WARNING, "Illegal DBA mode");
 		FREENOW;
 		RETURN_FALSE;

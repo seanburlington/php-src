@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2001/01/27 00:26:22 opaquedave Exp $
+dnl $Id: config.m4,v 1.2 2001/01/27 10:05:29 sas Exp $
 dnl config.m4 for extension libming
 dnl don't forget to call PHP_EXTENSION(ming)
 dnl This file is a modified version of config.m4
@@ -7,8 +7,8 @@ dnl in php4/ext/mcrypt
 PHP_ARG_WITH(ming, for ming support,
 [  --with-ming[=DIR]        Include ming support])
 
-if test "$withval" != "no"; then
-  for i in /usr/lib /usr/local /usr $withval; do
+if test "$PHP_MING" != "no"; then
+  for i in /usr/lib /usr/local /usr $PHP_MING; do
     if test -r $i/libming.so; then
       MING_DIR=$i
     fi

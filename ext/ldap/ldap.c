@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.128 2002/09/05 11:22:20 hyanantha Exp $ */
+/* $Id: ldap.c,v 1.129 2002/10/30 18:12:34 iliaa Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -284,7 +284,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.128 2002/09/05 11:22:20 hyanantha Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.129 2002/10/30 18:12:34 iliaa Exp $" );
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -387,6 +387,7 @@ PHP_FUNCTION(ldap_connect)
 		
 		rc = ldap_initialize(&ldap, host);
 		if (rc != LDAP_SUCCESS) {
+			efree(ld);
 			php_error(E_WARNING, "%s(): Could not create session handle: %s", get_active_function_name(TSRMLS_C), ldap_err2string(rc));
 			RETURN_FALSE;
 		}
@@ -398,11 +399,13 @@ PHP_FUNCTION(ldap_connect)
 #endif
 	
 	if ( ldap == NULL ) {
+		efree(ld);
 		RETURN_FALSE;
 	} else {
 #ifdef HAVE_ORALDAP
 		if (ssl) {
 			if (ldap_init_SSL(&ldap->ld_sb, wallet, walletpasswd, authmode)) {
+				efree(ld);
 				php_error(E_WARNING, "%s(): SSL init failed", get_active_function_name(TSRMLS_C));
 				RETURN_FALSE;
 			}

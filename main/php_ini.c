@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.111 2003/01/26 01:39:18 shane Exp $ */
+/* $Id: php_ini.c,v 1.112 2003/01/27 20:39:30 iliaa Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -31,12 +31,10 @@
 #include "SAPI.h"
 #include "php_main.h"
 
-#ifdef PHP_WIN32
-#include "readdir.h"
-/* this makes no sence, vc6 errors if this declaration is not here */
-extern int alphasort(const struct dirent **a, const struct dirent **b);
+#if !HAVE_SCANDIR || !HAVE_ALPHASORT
+ #include "php_scandir.h"
 #else
-#include "dirent.h"
+ #include <dirent.h>
 #endif
 
 #ifndef S_ISREG

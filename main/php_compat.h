@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_compat.h,v 1.16 2003/07/10 16:08:56 sniper Exp $ */
+/* $Id: php_compat.h,v 1.17 2003/07/25 11:41:33 edink Exp $ */
 
 #ifndef PHP_COMPAT_H
 #define PHP_COMPAT_H
@@ -125,6 +125,10 @@
 
 /* Define to make XML Namespaces functionality available. */
 #define XML_NS 1
+#endif
+
+#ifdef PHP_EXPORTS
+#define PCRE_STATIC
 #endif
 
 #endif

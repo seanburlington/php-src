@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_content_types.c,v 1.30 2005/02/21 15:14:02 moriyoshi Exp $ */
+/* $Id: php_content_types.c,v 1.31 2005/03/05 16:41:13 moriyoshi Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -74,10 +74,19 @@ SAPI_API SAPI_POST_READER_FUNC(php_default_post_reader)
  */
 int php_startup_sapi_content_types(TSRMLS_D)
 {
-	sapi_register_post_entries(php_post_entries TSRMLS_CC);
 	sapi_register_default_post_reader(php_default_post_reader);
 	sapi_register_treat_data(php_default_treat_data);
 	sapi_register_input_filter(php_default_input_filter);
+	return SUCCESS;
+}
+/* }}} */
+
+/* {{{ php_setup_sapi_content_types
+ */
+int php_setup_sapi_content_types(TSRMLS_D)
+{
+	sapi_register_post_entries(php_post_entries TSRMLS_CC);
+
 	return SUCCESS;
 }
 /* }}} */

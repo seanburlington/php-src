@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.425 2004/11/03 23:36:50 derick Exp $ */
+/* $Id: string.c,v 1.426 2004/11/21 13:33:20 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4764,7 +4764,7 @@ PHP_FUNCTION(str_split)
 	}
 
 	if (split_length <= 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The the length of each segment must be greater then zero.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The length of each segment must be greater then zero.");
 		RETURN_FALSE;
 	}
 

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.29 2000/10/31 00:30:37 sniper Exp $ */
+/* $Id: ftp.c,v 1.30 2000/11/03 21:53:24 sniper Exp $ */
 
 #include "php.h"
 
@@ -378,8 +378,11 @@ ftp_mkdir(ftpbuf_t *ftp, const char *dir)
 		return NULL;
 
 	/* copy out the dir from response */
-	if ((mkd = strchr(ftp->inbuf, '"')) == NULL)
-		return NULL;
+	if ((mkd = strchr(ftp->inbuf, '"')) == NULL) {
+		mkd = strdup(dir);
+		return mkd;
+	}
+
 	end = strrchr(++mkd, '"');
 	*end = 0;
 	mkd = strdup(mkd);

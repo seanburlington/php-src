@@ -1,4 +1,4 @@
-<?php /* $Id: interbase.inc,v 1.5 2004/04/01 16:25:51 abies Exp $ */
+<?php /* $Id: interbase.inc,v 1.6 2004/04/01 18:23:45 abies Exp $ */
 
 srand((double)microtime()*1000000);
 
@@ -52,7 +52,7 @@ function out_result($result, $table_name = "")
 function out_result_trap_error($result, $table_name = "")
 {
    echo "--- $table_name ---\n";
-   while ($r = ibase_fetch_row($result)) {
+   while ($r = @ibase_fetch_row($result)) {
 		echo join("\t",$r)."\t\n";
    }
    echo "errmsg [" . ibase_errmsg() . "]\t\n";

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.91 2002/01/03 13:20:04 mfischer Exp $ */
+/* $Id: php_domxml.c,v 1.92 2002/01/04 14:10:05 hholzgra Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -2850,7 +2850,7 @@ PHP_FUNCTION(xpath_eval)
 /* }}} */
 
 /* {{{ proto int xpath_eval_expression([int xpathctx_handle,] string str)
-   Evaluates the XPath Location Path in the given string */
+   Evaluates the XPath expression in the given string */
 PHP_FUNCTION(xpath_eval_expression)
 {
 	php_xpathptr_eval(INTERNAL_FUNCTION_PARAM_PASSTHRU, PHP_XPATH, 1);
@@ -2869,7 +2869,7 @@ PHP_FUNCTION(xptr_eval)
 #endif	/* LIBXML_XPTR_ENABLED */
 
 /* {{{ proto string domxml_version(void)
-   Dumps document into string */
+   Get XML library version */
 PHP_FUNCTION(domxml_version)
 {
 	RETURN_STRING(LIBXML_DOTTED_VERSION, 1);

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_string.h,v 1.1 1999/12/04 19:16:04 sas Exp $ */
+/* $Id: php_string.h,v 1.2 1999/12/09 23:45:30 andrei Exp $ */
 
 /* Synced with php3 revision 1.43 1999-06-16 [ssb] */
 
@@ -84,8 +84,8 @@ PHP_FUNCTION(strip_tags);
 PHP_FUNCTION(str_repeat);
 PHP_FUNCTION(substr_replace);
 
-extern PHPAPI char *php_strtoupper(char *s);
-extern PHPAPI char *php_strtolower(char *s);
+extern PHPAPI char *php_strtoupper(char *s, size_t len);
+extern PHPAPI char *php_strtolower(char *s, size_t len);
 extern PHPAPI char *php_strtr(char *string, int len, char *str_from, char *str_to, int trlen);
 extern PHPAPI char *php_addslashes(char *string, int length, int *new_length, int freeit);
 extern PHPAPI char *php_addcslashes(char *string, int length, int *new_length, int freeit, char *what, int wlength);

@@ -20,7 +20,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.16 1999/12/04 19:15:53 sas Exp $ */
+/* $Id: ldap.c,v 1.17 1999/12/09 23:45:29 andrei Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -277,7 +277,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_printf("<table>"
 				"<tr><td>Total links:</td><td>%d/%s</td></tr>\n"
-		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.16 1999/12/04 19:15:53 sas Exp $</td></tr>\n"
+		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.17 1999/12/09 23:45:29 andrei Exp $</td></tr>\n"
 #if HAVE_NSLDAP
 				"<tr><td>SDK Version:</td><td>%f</td></tr>"
 				"<tr><td>Highest LDAP Protocol Supported:</td><td>%f</td></tr>"
@@ -774,6 +774,7 @@ PHP_FUNCTION(ldap_get_entries)
 	int attr_count, entry_count;
 	BerElement *ber;
 	char *attribute;
+	size_t attr_len;
 	char **ldap_value;
 	char *dn;
 
@@ -826,7 +827,8 @@ PHP_FUNCTION(ldap_get_entries)
 			}	
 			ldap_value_free(ldap_value);
 
-			zend_hash_update(tmp1->value.ht, php_strtolower(attribute), strlen(attribute)+1, (void *) &tmp2, sizeof(pval *), NULL);
+			attr_len = strlen(attribute);
+			zend_hash_update(tmp1->value.ht, php_strtolower(attribute, attr_len), attr_len+1, (void *) &tmp2, sizeof(pval *), NULL);
 			add_index_string(tmp1, attr_count, attribute, 1);
 
 			attr_count++;

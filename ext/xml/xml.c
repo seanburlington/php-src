@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.33 1999/12/05 16:59:15 eschmid Exp $ */
+/* $Id: xml.c,v 1.34 1999/12/09 23:45:30 andrei Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -628,7 +628,7 @@ void _xml_startElementHandler(void *userData, const char *name,
 		parser->level++;
 
 		if (parser->case_folding) {
-			name = php_strtoupper(estrdup(name));
+			name = php_strtoupper(estrdup(name), strlen(name));
 		}
 
 		if (parser->startElementHandler) {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.81 2003/06/10 20:03:28 imajes Exp $ */
+/* $Id: fdf.c,v 1.82 2003/06/15 15:23:53 andrey Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -309,7 +309,7 @@ PHP_FUNCTION(fdf_create)
 }
 /* }}} */
 
-/* {{{ proto bool fdf_close(resource fdfdoc)
+/* {{{ proto void fdf_close(resource fdfdoc)
    Closes the FDF document */
 PHP_FUNCTION(fdf_close) 
 {
@@ -777,7 +777,7 @@ PHP_FUNCTION(fdf_get_file)
 }
 /* }}} */
 
-/* {{{ proto mixed fdf_save(resource fdfdoc [, string filename])
+/* {{{ proto bool fdf_save(resource fdfdoc [, string filename])
    Writes out the FDF file */
 PHP_FUNCTION(fdf_save) 
 {
@@ -834,7 +834,7 @@ PHP_FUNCTION(fdf_save)
 } 
 /* }}} */
 
-/* {{{ proto mixed fdf_save_string(resource fdfdoc)
+/* {{{ proto string fdf_save_string(resource fdfdoc)
    Returns the FDF file as a string */
 PHP_FUNCTION(fdf_save_string) 
 {

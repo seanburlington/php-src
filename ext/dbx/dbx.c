@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx.c,v 1.49 2003/06/10 20:03:27 imajes Exp $ */
+/* $Id: dbx.c,v 1.50 2003/06/15 15:29:46 andrey Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -310,7 +310,7 @@ ZEND_FUNCTION(dbx_connect)
 }
 /* }}} */
 
-/* {{{ proto bool dbx_close(dbx_link_object dbx_link)
+/* {{{ proto int dbx_close(dbx_link_object dbx_link)
    Returns success or failure 
 */
 ZEND_FUNCTION(dbx_close)
@@ -515,7 +515,7 @@ ZEND_FUNCTION(dbx_query)
 }
 /* }}} */
 
-/* {{{ proto void dbx_error(dbx_link_object dbx_link)
+/* {{{ proto string dbx_error(dbx_link_object dbx_link)
    Returns success or failure 
 */
 ZEND_FUNCTION(dbx_error)

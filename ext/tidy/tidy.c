@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.33 2004/01/14 02:43:32 john Exp $ */
+/* $Id: tidy.c,v 1.34 2004/01/14 08:15:57 john Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -155,6 +155,22 @@ void php_tidy_free(void *buf)
 void php_tidy_panic(ctmbstr msg)
 {
 	zend_error(E_ERROR, "Could not allocate memory for tidy! (Reason: %s)", (char *)msg);
+}
+
+/* Workaround for compilers that are not C99 complaint */
+static void _php_tidy_throw_exception(char *message, ...)
+{
+	char *msg;
+	va_list ap;
+	
+	TSRMLS_FETCH();
+	
+	va_start(ap, message);
+	vspprintf(&msg, 0, message, ap);
+	zend_throw_exception(tidy_ce_exception, msg, 0 TSRMLS_CC);
+	va_end(ap);
+	efree(msg);
+	
 }
 
 static int _php_tidy_set_tidy_opt(TidyDoc doc, char *optname, zval *value TSRMLS_DC)
@@ -700,6 +716,10 @@ static void tidy_globals_ctor(void *global TSRMLS_DC)
 {
 }
 
+static void tidy_globals_dtor(void *global TSRMLS_DC)
+{
+}
+
 PHP_MINIT_FUNCTION(tidy)
 {
 	ZEND_INIT_MODULE_GLOBALS(tidy, tidy_globals_ctor, tidy_globals_dtor);
@@ -748,7 +768,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.33 2004/01/14 02:43:32 john Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.34 2004/01/14 08:15:57 john Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

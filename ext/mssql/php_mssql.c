@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.86.2.26 2003/11/17 20:53:28 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.86.2.27 2003/12/02 18:37:50 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -162,6 +162,7 @@ static int php_mssql_message_handler(DBPROCESS *dbproc, DBINT msgno,int msgstate
 	}
 	if (MS_SQL_G(server_message)) {
 		STR_FREE(MS_SQL_G(server_message));
+		MS_SQL_G(server_message) = NULL;
 	}
 	MS_SQL_G(server_message) = estrdup(msgtext);
 	return 0;
@@ -345,6 +346,7 @@ PHP_RSHUTDOWN_FUNCTION(mssql)
 	STR_FREE(MS_SQL_G(appname));
 	if (MS_SQL_G(server_message)) {
 		STR_FREE(MS_SQL_G(server_message));
+		MS_SQL_G(server_message) = NULL;
 	}
 	return SUCCESS;
 }

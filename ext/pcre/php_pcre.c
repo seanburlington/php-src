@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.14 1999/08/19 20:31:57 eschmid Exp $ */
+/* $Id: php_pcre.c,v 1.15 1999/08/26 14:13:14 rasmus Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -497,7 +497,7 @@ static void _pcre_match(INTERNAL_FUNCTION_PARAMETERS, int global)
 /* }}} */
 
 
-/* {{{ proto preg_match(string pattern, string subject [, array subpatterns ])
+/* {{{ proto int preg_match(string pattern, string subject [, array subpatterns ])
    Perform a Perl-style regular expression match */
 PHP_FUNCTION(preg_match)
 {
@@ -506,7 +506,7 @@ PHP_FUNCTION(preg_match)
 /* }}} */
 
 
-/* {{{ proto preg_match_all(string pattern, string subject, array subpatterns [, int order ])
+/* {{{ proto int preg_match_all(string pattern, string subject, array subpatterns [, int order ])
    Perform a Perl-style global regular expression match */
 PHP_FUNCTION(preg_match_all)
 {
@@ -827,7 +827,7 @@ static char *_php_replace_in_subject(zval *regex, zval *replace, zval *subject)
 }
 
 
-/* {{{ proto preg_replace(string|array regex, string|array replace, string|array subject)
+/* {{{ proto string preg_replace(string|array regex, string|array replace, string|array subject)
     Perform Perl-style regular expression replacement */
 PHP_FUNCTION(preg_replace)
 {

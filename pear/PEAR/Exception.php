@@ -15,9 +15,10 @@
 // +----------------------------------------------------------------------+
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // |          Hans Lellelid <hans@velum.net>                              |
+// |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Exception.php,v 1.2 2004/06/21 03:53:39 cox Exp $
+// $Id: Exception.php,v 1.3 2004/06/21 04:06:18 cox Exp $
 
 define('PEAR_OBSERVER_PRINT',      -2);
 define('PEAR_OBSERVER_TRIGGER',    -4);
@@ -84,7 +85,7 @@ define('PEAR_OBSERVER_DIE',        -8);
  *
  * @since PHP 5
  * @package PEAR
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * @author Tomas V.V.Cox <cox@idecnet.com>
  * @author Hans Lellelid <hans@velum.net>
  *
@@ -95,7 +96,7 @@ class PEAR_Exception extends Exception
     protected $error_class;
     protected $error_method;
 
-    private $method;
+    private $_method;
     private static $_observers = array();
 
     /**
@@ -121,16 +122,16 @@ class PEAR_Exception extends Exception
         $trace       = parent::getTrace();
         $this->error_class  = $trace[0]['class'];
         $this->error_method = $trace[0]['function'];
-        $this->method = $this->error_class.'::'.$this->error_method.'()';
+        $this->_method = $this->error_class . '::' . $this->error_method . '()';
         parent::__construct($message, $code);
 
         $this->_signal();
     }
 
     /**
-     * @param mixed $callback  - A valid php callback, see php_func is_callable()
+     * @param mixed $callback  - A valid php callback, see php func is_callable()
      *                         - A PEAR_OBSERVER_* constant
-     *                         - An array(const PEAR_OBSERVER_*,mixed $options)
+     *                         - An array(const PEAR_OBSERVER_*, mixed $options)
      *
      * @param string $label    - The name of the observer. Use this if you want
      *                           to remove it later with delObserver()
@@ -175,9 +176,9 @@ class PEAR_Exception extends Exception
 
     private function _getCauseMessage()
     {
-        $msg = '     ' . $this->method . " at {$this->file} ({$this->line})\n";
+        $msg = '     ' . $this->_method . " at {$this->file} ({$this->line})\n";
         if ($this->cause instanceof Exception) {
-            return $msg.$this->cause->_getCauseMessage();
+            return $msg . $this->cause->_getCauseMessage();
         }
         return $msg;
     }
@@ -203,12 +204,12 @@ class PEAR_Exception extends Exception
     public function __toString()
     {
         $str = get_class($this) . " occurred: \n" .
-               '  Error message: ' . $this->message . "\n" .
-               '  Error code   : ' . $this->code . "\n" .
-               '  File (Line)  : ' . "{$this->file} ({$this->line})\n" .
-               '  Method       : ' . $this->method . "\n";
+               "  Error message: {$this->message}\n" .
+               "  Error code   : {$this->code}\n" .
+               "  File (Line)  : {$this->file} ({$this->line})\n" .
+               "  Method       : {$this->_method}\n";
         if ($this->cause instanceof Exception) {
-            $str .= "  Nested Error : \n".$this->_getCauseMessage();
+            $str .= "  Nested Error :\n" . $this->_getCauseMessage();
         }
         if (isset($_SERVER['REQUEST_URI'])) {
             return nl2br('<pre>'.htmlentities($str).'</pre>');

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.10 2002/09/20 02:46:37 sniper Exp $
+dnl $Id: config.m4,v 1.11 2002/09/20 15:42:20 sniper Exp $
 dnl
 
 PHP_ARG_WITH(yaz,for YAZ support,
@@ -29,7 +29,7 @@ if test "$PHP_YAZ" != "no"; then
     if test "$yaz_version" -ge 1009000; then
       AC_MSG_RESULT([$YAZVERSION])
     else
-      AC_MSG_ERROR(YAZ version 1.9 or later required.])
+      AC_MSG_ERROR([YAZ version 1.9 or later required.])
     fi
 
     dir=""

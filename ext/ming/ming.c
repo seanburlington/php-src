@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.60 2003/11/15 00:53:38 fmk Exp $ */
+/* $Id: ming.c,v 1.61 2003/12/12 08:45:49 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3888,6 +3888,7 @@ PHP_MINIT_FUNCTION(ming)
 	action_class_entry_ptr = zend_register_internal_class(&action_class_entry TSRMLS_CC);
 	morph_class_entry_ptr = zend_register_internal_class(&morph_class_entry TSRMLS_CC);
 	sprite_class_entry_ptr = zend_register_internal_class(&sprite_class_entry TSRMLS_CC);
+	sound_class_entry_ptr = zend_register_internal_class(&sound_class_entry TSRMLS_CC);
 #ifdef HAVE_NEW_MING
 	fontchar_class_entry_ptr = zend_register_internal_class(&fontchar_class_entry TSRMLS_CC);
 	soundinstance_class_entry_ptr = zend_register_internal_class(&soundinstance_class_entry TSRMLS_CC);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.32 2001/07/30 01:56:24 zeev Exp $ */
+/* $Id: php_gd.h,v 1.33 2001/08/07 16:15:45 sniper Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -56,6 +56,7 @@
 PHPAPI extern const char php_sig_gif[3];
 PHPAPI extern const char php_sig_jpg[3];
 PHPAPI extern const char php_sig_png[3];
+PHPAPI const char php_sig_gd2[3] = {'g', 'd', '2'};
 
 extern zend_module_entry gd_module_entry;
 #define phpext_gd_ptr &gd_module_entry

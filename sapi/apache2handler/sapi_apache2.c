@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.28 2004/02/11 16:53:03 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.29 2004/03/08 03:16:12 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -260,6 +260,8 @@ php_apache_sapi_flush(void *server_context)
 
 	r = ctx->r;
 	brigade = ctx->brigade;
+
+	sapi_send_headers(TSRMLS_C);
 
 	r->status = SG(sapi_headers).http_response_code;
 	SG(headers_sent) = 1;

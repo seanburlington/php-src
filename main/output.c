@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.151 2003/04/01 19:14:47 sas Exp $ */
+/* $Id: output.c,v 1.152 2003/04/03 00:50:17 moriyoshi Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -483,10 +483,10 @@ static int php_ob_init(uint initial_size, uint block_size, zval *output_handler,
 		/* do we have array(object,method) */
 		if (zend_is_callable(output_handler, 1, &handler_name)) {
 			SEPARATE_ZVAL(&output_handler);
-			output_handler->refcount++;
 			result = php_ob_init_named(initial_size, block_size, handler_name, output_handler, chunk_size, erase TSRMLS_CC);
 			efree(handler_name);
 		} else {
+			efree(handler_name);
 			/* init all array elements recursively */
 			zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(output_handler), &pos);
 			while (zend_hash_get_current_data_ex(Z_ARRVAL_P(output_handler), (void **)&tmp, &pos) == SUCCESS) {
@@ -500,7 +500,6 @@ static int php_ob_init(uint initial_size, uint block_size, zval *output_handler,
 	} else {
 		if (output_handler) {
 			SEPARATE_ZVAL(&output_handler);
-			output_handler->refcount++;
 		}
 		result = php_ob_init_named(initial_size, block_size, OB_DEFAULT_HANDLER_NAME, output_handler, chunk_size, erase TSRMLS_CC);
 	}

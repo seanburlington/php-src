@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.40 1999/12/18 22:35:33 zeev Exp $ */
+/* $Id: xml.c,v 1.41 1999/12/23 12:52:12 thies Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -164,7 +164,7 @@ PHP_MINIT_FUNCTION(xml)
 	le_xml_parser =	register_list_destructors(xml_parser_dtor, NULL);
 
 #ifdef ZTS
-	xml_globals_id = ts_allocate_id(sizeof(php_xml_globals), php_xml_init_globals, NULL);
+	xml_globals_id = ts_allocate_id(sizeof(php_xml_globals), (ts_allocate_ctor) php_xml_init_globals, NULL);
 #else
 	XML(default_encoding) = "ISO-8859-1";
 #endif

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.240 2000/08/24 18:49:48 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.241 2000/08/25 03:10:42 ssb Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -479,6 +479,7 @@ function_entry basic_functions[] = {
 	PHP_FE(ob_start,					NULL)
 	PHP_FE(ob_end_flush,				NULL)
 	PHP_FE(ob_end_clean,				NULL)
+	PHP_FE(ob_get_length,				NULL)
 	PHP_FE(ob_get_contents,				NULL)
 	PHP_FE(ob_implicit_flush,			NULL)
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.18 2004/07/20 00:33:21 iliaa Exp $ */
+/* $Id: pgsql_driver.c,v 1.19 2004/07/28 00:15:19 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -338,6 +338,7 @@ static int pdo_pgsql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 	ret = 1;
 	
 cleanup:
+	dbh->methods = &pgsql_methods;
 	if (!ret) {
 		pgsql_handle_closer(dbh TSRMLS_CC);
 	}

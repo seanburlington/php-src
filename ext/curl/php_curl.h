@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.8 2000/08/18 13:24:00 sterling Exp $ */
+/* $Id: php_curl.h,v 1.9 2000/08/20 08:28:00 sterling Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -86,21 +86,23 @@ PHP_FUNCTION(curl_close);
 #define CE_BAD_FUNCTION_ARGUMENT 43
 #define CE_BAD_CALLING_ORDER 44
 #define C_LAST 45
+#define CURLOPT_RETURNTRANSFER 500
 
 struct curl_file_id_table {
 	int id;
+	int return_transfer;
+	int output_to_file;
 	struct curl_file_id_table *next;
 };
 
 typedef struct {
-	int use_file;
 	int le_curl;
-	struct curl_file_id_table *output_node, output_start;
+	struct curl_file_id_table *output_node, *output_previous, output_start;
 } php_curl_globals;
 
 #ifdef ZTS
 #define CURLG(v) (curl_globals->v)
-#define CURLLS_FETCH() php_curl_globals *curl_globals = ts_resource(gd_curl_id)
+#define CURLLS_FETCH() php_curl_globals *curl_globals = ts_resource(curl_globals_id)
 #else
 #define CURLG(v) (curl_globals.v)
 #define CURLLS_FETCH()

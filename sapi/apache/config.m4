@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.62.4.8 2003/05/28 14:12:04 sniper Exp $
+dnl $Id: config.m4,v 1.62.4.9 2004/08/18 07:16:46 tony2001 Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 1.x module support via DSO through APXS)
@@ -187,7 +187,7 @@ AC_ARG_WITH(apache,
       fi
     # For StrongHold 2.2
     elif test -f $withval/apache/httpd.h; then
-      APACHE_INCLUDE=-"I$withval/apache -I$withval/ssl/include"
+      APACHE_INCLUDE="-I$withval/apache -I$withval/ssl/include"
       APACHE_TARGET=$withval/apache
       PHP_SELECT_SAPI(apache, static, sapi_apache.c mod_php4.c php_apache.c, $APACHE_INCLUDE)
       PHP_LIBS="-Lmodules/php4 -L../modules/php4 -L../../modules/php4 -lmodphp4"

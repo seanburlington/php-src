@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.139 2002/08/10 10:40:59 helly Exp $ */
+/* $Id: zlib.c,v 1.140 2002/08/10 12:58:46 helly Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -1013,7 +1013,8 @@ int php_enable_output_compression(int buffer_size TSRMLS_DC)
 		return FAILURE;
 	}
 
-	php_start_ob_buffer(NULL, buffer_size, 0 TSRMLS_CC);
+	if (OG(ob_nesting_level)==0)
+		php_start_ob_buffer(NULL, buffer_size, 0 TSRMLS_CC);
 	php_ob_set_internal_handler(php_gzip_output_handler, (uint)(buffer_size*1.5f), "zlib output compression", 0 TSRMLS_CC);
 	if (ZLIBG(output_handler) && strlen(ZLIBG(output_handler))) {
 		php_start_ob_buffer_named(ZLIBG(output_handler), 0, 1 TSRMLS_CC);

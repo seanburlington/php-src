@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.18 2004/09/23 20:07:02 wez Exp $ */
+/* $Id: pdo.c,v 1.19 2004/09/26 22:23:14 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -99,7 +99,7 @@ static void php_pdo_init_globals(zend_pdo_globals *pdo_globals)
 PDO_API int php_pdo_register_driver(pdo_driver_t *driver)
 {
 	if (driver->api_version != PDO_DRIVER_API) {
-		zend_error(E_ERROR, "PDO: driver %s requires PDO API version %d; this is PDO version %d",
+		zend_error(E_ERROR, "PDO: driver %s requires PDO API version %ld; this is PDO version %d",
 			driver->driver_name, driver->api_version, PDO_DRIVER_API);
 		return FAILURE;
 	}

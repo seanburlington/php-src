@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.29 2000/07/10 20:00:02 eschmid Exp $ */
+/* $Id: sysvshm.c,v 1.30 2000/08/12 20:45:48 eschmid Exp $ */
 
 /* This has been built and tested on Solaris 2.6.
  * It may not compile or execute correctly on other systems.
@@ -201,7 +201,7 @@ PHP_FUNCTION(shm_remove)
 
 
 
-/* {{{ proto int shm_put_var(int shm_identifier, int variable_key, mixed_variable)
+/* {{{ proto int shm_put_var(int shm_identifier, int variable_key, mixed variable)
    Inserts or updates a variable in shared memory */
 PHP_FUNCTION(shm_put_var)
 {
@@ -293,7 +293,7 @@ PHP_FUNCTION(shm_get_var)
 }
 /* }}} */
 
-/* {{{ proto int shm_remove_var(int id, variable_key)
+/* {{{ proto int shm_remove_var(int id, int variable_key)
    Removes variable from shared memory */
 PHP_FUNCTION(shm_remove_var)
 {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.425 2002/02/26 19:38:40 andi Exp $ */
+/* $Id: main.c,v 1.426 2002/03/01 03:05:50 yohgaki Exp $ */
 
 /* {{{ includes
  */
@@ -669,14 +669,17 @@ int php_request_startup(TSRMLS_D)
 			Z_STRLEN_P(output_handler) = strlen(PG(output_handler));	/* this can be optimized */
 			Z_STRVAL_P(output_handler) = estrndup(PG(output_handler), Z_STRLEN_P(output_handler));
 			Z_TYPE_P(output_handler) = IS_STRING;
-			php_start_ob_buffer(output_handler, 0 TSRMLS_CC);
-		} else if (PG(output_buffering)) {
+			php_start_ob_buffer(output_handler, 0, 1 TSRMLS_CC);
+		}
+		else if (PG(output_buffering)) {
 			if (PG(output_buffering)>1) {
-				php_start_ob_buffer(NULL, PG(output_buffering) TSRMLS_CC);
-			} else {
-				php_start_ob_buffer(NULL, 0 TSRMLS_CC);
+				php_start_ob_buffer(NULL, PG(output_buffering), 1 TSRMLS_CC);
 			}
-		} else if (PG(implicit_flush)) {
+			else {
+				php_start_ob_buffer(NULL, 0, 1 TSRMLS_CC);
+			}
+		}
+		else if (PG(implicit_flush)) {
 			php_start_implicit_flush(TSRMLS_C);
 		}
 

@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.34 2002/12/01 02:44:50 moriyoshi Exp $ */
+/* $Id: base64.c,v 1.35 2002/12/05 20:59:48 helly Exp $ */
 
 #include <string.h>
 
@@ -119,7 +119,7 @@ void php_base64_init()
 		ch += 16;
 	}
 	sprintf(sp, "};");
-	php_error(E_NOTICE,"reverse_table:\n%s", s);
+	php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Reverse_table:\n%s", s);
 	efree(s);
 }
 */

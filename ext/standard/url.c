@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.59 2002/11/14 13:40:14 iliaa Exp $ */
+/* $Id: url.c,v 1.60 2002/12/05 20:59:49 helly Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -285,7 +285,7 @@ PHP_FUNCTION(parse_url)
 
 	resource = php_url_parse(str);
 	if (resource == NULL) {
-		php_error(E_WARNING, "unable to parse url (%s)", str);
+		php_error_docref1(NULL TSRMLS_CC, str, E_WARNING, "Unable to parse url");
 		RETURN_FALSE;
 	}
 

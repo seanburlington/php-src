@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.53 2002/10/13 01:03:43 wez Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.54 2002/12/05 20:59:49 helly Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -221,7 +221,7 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 				ua[ua_len] = 0;
 				php_stream_write(stream, ua, ua_len);
 			} else {
-				php_error(E_WARNING, "Cannot construct User-agent header");
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot construct User-agent header");
 			}
 
 			if (ua) {

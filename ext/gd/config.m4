@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.71.2.3 2002/02/23 02:01:14 hirokawa Exp $
+dnl $Id: config.m4,v 1.71.2.4 2002/02/26 17:52:36 rasmus Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -111,10 +111,6 @@ AC_DEFUN(PHP_GD_FREETYPE1,[
 AC_DEFUN(PHP_GD_FREETYPE2,[
   PHP_ARG_WITH(freetype-dir, for freetype(2),
   [  --with-freetype-dir=DIR   GD: Set the path to freetype2 install prefix.])
-
-  if test "$PHP_TTF" != "no"; then
-    PHP_FREETYPE_DIR="no"
-  fi
 
   if test "$PHP_FREETYPE_DIR" != "no"; then
     for i in /usr /usr/local $PHP_FREETYPE_DIR; do

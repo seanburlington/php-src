@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.10 2001/07/31 07:57:12 ssb Exp $
+// $Id: PEAR.php,v 1.11 2001/08/04 10:47:10 cox Exp $
 //
 
 define('PEAR_ERROR_RETURN', 1);
@@ -497,7 +497,7 @@ class PEAR_Error
                       is_object($this->callback[0]) &&
                       is_string($this->callback[1]) &&
                       strlen($this->callback[1])) {
-                call_user_method($this->callback[1], $this->callback[0],
+                      @call_user_method($this->callback[1], $this->callback[0],
                                  $this);
             }
         }

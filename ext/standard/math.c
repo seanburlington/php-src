@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.48 2001/08/04 20:52:35 rasmus Exp $ */
+/* $Id: math.c,v 1.49 2001/08/04 20:58:47 jeroen Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -470,7 +470,8 @@ PHP_FUNCTION(pow)
 			if (lexp == 1) {
 				RETURN_LONG(LONG_MIN);
 			} else {
-				RETURN_DOUBLE(exp(log(-(double)LONG_MIN) * (double)lexp));
+				dval = exp(log(-(double)LONG_MIN) * (double)lexp);
+				RETURN_DOUBLE(lexp&1 ? -dval : dval);
 			}
 		default:
 			/* abs(lbase) > 1 */

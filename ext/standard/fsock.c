@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.92 2002/03/18 18:54:28 wez Exp $ */
+/* $Id: fsock.c,v 1.93 2002/03/18 20:44:15 wez Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -201,7 +201,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		}
 		
 #if HAVE_OPENSSL_EXT
-		if (stream)	{
+		if (stream && ssl_flags != php_ssl_none)	{
 			int ssl_ret = FAILURE;
 			switch(ssl_flags)	{
 				case php_ssl_v23:

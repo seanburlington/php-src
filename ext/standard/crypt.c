@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.45 2001/08/11 17:03:36 zeev Exp $ */
+/* $Id: crypt.c,v 1.45.2.1 2001/10/21 03:06:18 sniper Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -106,7 +106,7 @@ PHP_MINIT_FUNCTION(crypt)
 PHP_RINIT_FUNCTION(crypt)
 {
 	if(!php_crypt_rand_seeded) {
-		php_srand(time(0) * getpid() * (php_combined_lcg(TSRMLS_C) * 10000.0));
+		php_srand(time(0) * getpid() * (unsigned long) (php_combined_lcg(TSRMLS_C) * 10000.0));
 		php_crypt_rand_seeded=1;
 	} 
 	return SUCCESS;

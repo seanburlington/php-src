@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.33 2000/10/13 12:13:34 hholzgra Exp $ */
+/* $Id: fdf.c,v 1.34 2000/10/20 18:24:59 andrei Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -100,7 +100,9 @@ zend_module_entry fdf_module_entry = {
 ZEND_GET_MODULE(fdf)
 #endif
 
-static void phpi_FDFClose(FDFDoc fdf) {
+static void phpi_FDFClose(zend_rsrc_list_entry *rsrc)
+{
+	FDFDoc fdf = (FDFDoc)rsrc->ptr;
 	(void)FDFClose(fdf);
 }
 
@@ -116,7 +118,7 @@ static sapi_post_entry supported_post_entries[] = {
 PHP_MINIT_FUNCTION(fdf)
 {
 	FDFErc err;
-	FDF_GLOBAL(le_fdf) = register_list_destructors(phpi_FDFClose, NULL);
+	FDF_GLOBAL(le_fdf) = register_list_destructors(phpi_FDFClose, NULL, "fdf");
 
 	/* add handler for Acrobat FDF form post requests */
 	sapi_add_post_entry("application/vnd.fdf",	php_default_post_reader, fdf_post_handler);

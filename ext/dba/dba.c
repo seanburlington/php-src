@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.21 2000/07/13 18:44:57 eschmid Exp $ */
+/* $Id: dba.c,v 1.22 2000/10/20 18:24:58 andrei Exp $ */
 
 #include "php.h"
 
@@ -178,8 +178,9 @@ static HashTable ht_keys;
 /* {{{ helper routines */
 	/* {{{ dba_close */
 
-static void dba_close(dba_info *info)
+static void dba_close(zend_rsrc_list_entry *rsrc)
 {
+	dba_info *info = (dba_info *)rsrc->ptr;
 	if(info->hnd) info->hnd->close(info);
 	if(info->path) free(info->path);
 	free(info);
@@ -189,8 +190,8 @@ static void dba_close(dba_info *info)
 static PHP_MINIT_FUNCTION(dba)
 {
 	zend_hash_init(&ht_keys, 0, NULL, NULL, 1);
-	GLOBAL(le_db) = register_list_destructors(dba_close, NULL);
-	GLOBAL(le_pdb) = register_list_destructors(NULL, dba_close);
+	GLOBAL(le_db) = register_list_destructors(dba_close, NULLi,"dba");
+	GLOBAL(le_pdb) = register_list_destructors(NULL, dba_close,"dba persistent");
 	return SUCCESS;
 }
 
@@ -206,7 +207,7 @@ static PHP_MINFO_FUNCTION(dba)
 	dba_handler *hptr;
 	
 	php_info_print_box_start(0);
-	PUTS("V1 ($Id: dba.c,v 1.21 2000/07/13 18:44:57 eschmid Exp $)");
+	PUTS("V1 ($Id: dba.c,v 1.22 2000/10/20 18:24:58 andrei Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);

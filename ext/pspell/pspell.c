@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.10 2000/08/10 20:57:40 vlad Exp $ */
+/* $Id: pspell.c,v 1.11 2000/10/20 18:25:10 andrei Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -68,11 +68,15 @@ zend_module_entry pspell_module_entry = {
 ZEND_GET_MODULE(pspell)
 #endif
 
-static void php_pspell_close(PspellManager *manager){
+static void php_pspell_close(zend_rsrc_list_entry *rsrc)
+{
+	PspellManager *manager = (PspellManager *)rsrc->ptr;
 	delete_pspell_manager(manager);
 }
 
-static void php_pspell_close_config(PspellConfig *config){
+static void php_pspell_close_config(zend_rsrc_list_entry *rsrc)
+{
+	PspellConfig *config = (PspellConfig *)rsrc->ptr;
 	delete_pspell_config(config);
 }
 
@@ -81,8 +85,8 @@ PHP_MINIT_FUNCTION(pspell){
 	REGISTER_MAIN_LONG_CONSTANT("PSPELL_NORMAL", PSPELL_NORMAL, CONST_PERSISTENT | CONST_CS);
 	REGISTER_MAIN_LONG_CONSTANT("PSPELL_BAD_SPELLERS", PSPELL_BAD_SPELLERS, CONST_PERSISTENT | CONST_CS);
 	REGISTER_MAIN_LONG_CONSTANT("PSPELL_RUN_TOGETHER", PSPELL_RUN_TOGETHER, CONST_PERSISTENT | CONST_CS);
-	le_pspell = register_list_destructors(php_pspell_close,NULL);
-	le_pspell_config = register_list_destructors(php_pspell_close_config,NULL);
+	le_pspell = register_list_destructors(php_pspell_close,NULL,"pspell");
+	le_pspell_config = register_list_destructors(php_pspell_close_config,NULL,"pspell config");
 	return SUCCESS;
 }
 

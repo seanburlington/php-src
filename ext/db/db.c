@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.43 2000/06/25 17:02:44 zeev Exp $ */
+/* $Id: db.c,v 1.44 2000/10/20 18:24:58 andrei Exp $ */
 #define IS_EXT_MODULE
 
 #if 1
@@ -423,8 +423,9 @@ PHP_FUNCTION(dbmclose) {
 }
 /* }}} */
 
-int php_dbm_close(dbm_info *info) {
+int php_dbm_close(zend_rsrc_list_entry *rsrc) {
 	int ret = 0;
+	dbm_info *info = (dbm_info *)rsrc->ptr;
 	DBM_TYPE dbf;
 	int lockfd;
 
@@ -1121,7 +1122,7 @@ PHP_MINIT_FUNCTION(db)
 	}
 #endif
 
-	le_db = register_list_destructors(php_dbm_close,NULL);
+	le_db = register_list_destructors(php_dbm_close,NULL,"dbm");
 	return SUCCESS;
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: aspell.c,v 1.22 2000/06/05 19:47:39 andi Exp $ */
+/* $Id: aspell.c,v 1.23 2000/10/20 18:24:55 andrei Exp $ */
 
 #include "php.h"
 
@@ -52,15 +52,16 @@ zend_module_entry aspell_module_entry = {
 ZEND_GET_MODULE(aspell)
 #endif
 
-static void php_aspell_close(aspell *sc)
+static void php_aspell_close(zend_rsrc_list_entry *rsrc)
 {
+	aspell *sc = (aspell *)rsrc->ptr;
 	aspell_free(sc);
 }
 
 
 PHP_MINIT_FUNCTION(aspell)
 {
-    le_aspell = register_list_destructors(php_aspell_close,NULL);
+    le_aspell = register_list_destructors(php_aspell_close,NULL,"aspell");
 	return SUCCESS;
 
 }

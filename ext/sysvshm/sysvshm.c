@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.30 2000/08/12 20:45:48 eschmid Exp $ */
+/* $Id: sysvshm.c,v 1.31 2000/10/20 18:25:13 andrei Exp $ */
 
 /* This has been built and tested on Solaris 2.6.
  * It may not compile or execute correctly on other systems.
@@ -58,15 +58,16 @@ ZEND_GET_MODULE(sysvshm)
 
 THREAD_LS sysvshm_module php_sysvshm;
 
-static void php_release_sysvshm(sysvshm_shm *shm_ptr) 
+static void php_release_sysvshm(zend_rsrc_list_entry *rsrc) 
 {
+	sysvshm_shm *shm_ptr = (sysvshm_shm *)rsrc->ptr;
 	shmdt((void*)shm_ptr->ptr);
 	efree(shm_ptr);
 }
 
 PHP_MINIT_FUNCTION(sysvshm)
 {    
-	php_sysvshm.le_shm = register_list_destructors(php_release_sysvshm, NULL);
+	php_sysvshm.le_shm = register_list_destructors(php_release_sysvshm, NULL, "sysvshm");
 	if (cfg_get_long("sysvshm.init_mem",
                       &php_sysvshm.init_mem)==FAILURE) {
 		php_sysvshm.init_mem=10000;

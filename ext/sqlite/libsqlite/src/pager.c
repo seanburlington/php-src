@@ -18,7 +18,7 @@
 ** file simultaneously, or one process from reading the database while
 ** another is writing.
 **
-** @(#) $Id: pager.c,v 1.4 2004/01/08 14:25:01 iliaa Exp $
+** @(#) $Id: pager.c,v 1.5 2004/01/14 17:08:27 iliaa Exp $
 */
 #include "os.h"         /* Must be first to enable large file support */
 #include "sqliteInt.h"
@@ -594,7 +594,7 @@ static int pager_playback(Pager *pPager, int useJournalSize){
     goto end_playback;
   }
   if( format>=JOURNAL_FORMAT_3 ){
-    rc = read32bits(format, &pPager->jfd, &nRec);
+    rc = read32bits(format, &pPager->jfd, (u32*)&nRec);
     if( rc ) goto end_playback;
     rc = read32bits(format, &pPager->jfd, &pPager->cksumInit);
     if( rc ) goto end_playback;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.12 1999/08/02 19:16:49 zeev Exp $ */
+/* $Id: pgsql.c,v 1.13 1999/08/09 20:06:15 eschmid Exp $ */
 
 #include <stdlib.h>
 
@@ -366,7 +366,7 @@ PHP_FUNCTION(pgsql_connect)
 }
 /* }}} */
 
-/* {{{ proto int pg_connect([string connection_string] | [string host, string port, [string options, [string tty,]] string database)
+/* {{{ proto int pg_pconnect([string connection_string] | [string host, string port, [string options, [string tty,]] string database)
    Open a persistent PostgreSQL connection */
 PHP_FUNCTION(pgsql_pconnect)
 {

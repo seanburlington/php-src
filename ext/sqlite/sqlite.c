@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.62.2.23 2004/05/16 16:34:27 stas Exp $ 
+   $Id: sqlite.c,v 1.62.2.24 2004/05/16 19:49:18 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -678,7 +678,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.23 2004/05/16 16:34:27 stas Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.24 2004/05/16 19:49:18 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1011,6 +1011,7 @@ terminate:
 		if (return_value) {
 			RETURN_FALSE;
 		} else {
+			efree(rres);
 			return;
 		}
 	}
@@ -1021,7 +1022,6 @@ terminate:
 	memcpy(rres, &res, sizeof(*rres));
 	rres->db = db;
 	zend_list_addref(db->rsrc_id);
-	
 
 	/* now the result set is ready for stepping: get first row */
 	if (php_sqlite_fetch(rres TSRMLS_CC) != SQLITE_OK) {
@@ -1357,10 +1357,7 @@ PHP_FUNCTION(sqlite_array_query)
 	rres = (struct php_sqlite_result *)emalloc(sizeof(*rres));
 	sqlite_query(db, sql, sql_len, mode, 0, NULL, rres TSRMLS_CC);
 	if (db->last_err_code != SQLITE_OK) {
-		if(!rres->vm) {
-			/* no query happened - it's out responsibility to free it */
-			efree(rres);
-		}
+		/* no need to free rres, as it will be freed by sqlite_query() for us */
 		RETURN_FALSE;
 	}
 
@@ -1465,7 +1462,7 @@ PHP_FUNCTION(sqlite_single_query)
 	rres = (struct php_sqlite_result *)emalloc(sizeof(*rres));
 	sqlite_query(db, sql, sql_len, PHPSQLITE_NUM, 0, NULL, rres TSRMLS_CC);
 	if (db->last_err_code != SQLITE_OK) {
-		efree(rres);
+		/* no need to free rres, as it will be freed by sqlite_query() for us */
 		RETURN_FALSE;
 	}
 

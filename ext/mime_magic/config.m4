@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.6.2.1 2003/01/28 01:00:42 sniper Exp $
+dnl $Id: config.m4,v 1.6.2.2 2003/01/28 06:52:33 sniper Exp $
 dnl
 
 PHP_ARG_WITH(mime-magic, whether to include mime_magic support,
@@ -15,7 +15,7 @@ if test "$PHP_MIME_MAGIC" != "no"; then
   dnl
   dnl Try to see if we can find the path of the magic file in its default locations.
   dnl
-  if test "$PHP_MIME_MAGIC" = "yes"; then
+  if test "$PHP_MIME_MAGIC" != "yes"; then
     if test -f $PHP_MIME_MAGIC; then
       PHP_MIME_MAGIC_FILE_PATH=$PHP_MIME_MAGIC
     else

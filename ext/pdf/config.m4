@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.11 2000/03/09 14:41:14 steinm Exp $
+dnl $Id: config.m4,v 1.12 2000/03/13 05:58:50 rasmus Exp $
 
 AC_MSG_CHECKING(whether to include Pdflib 3.x support)
 AC_ARG_WITH(pdflib,
@@ -17,7 +17,7 @@ echo $withval
 		  old_LIBS=$LIBS
 		  LIBS="$LIBS -ltiff -ljpeg -lpng -lz"
       AC_CHECK_LIB(pdf, PDF_show_boxed, [AC_DEFINE(HAVE_PDFLIB,1,[ ])],
-        [AC_MSG_ERROR(pdflib extension requires at least pdflib 3.x. You may as well need libtiff and libjpeg. In such a case use the options --with-tiff-dir=<DIR> and --with-jpeg-dir=<DIR>)])
+        [AC_MSG_ERROR(pdflib extension requires at least pdflib 3.x. You may also need libtiff and libjpeg. If so, use the options --with-tiff-dir=<DIR> and --with-jpeg-dir=<DIR>)])
       LIBS=$old_LIBS
       LDFLAGS=$old_LDFLAGS
       AC_ADD_LIBRARY(pdf)

@@ -1,4 +1,4 @@
-# $Id: config.m4,v 1.4 1999/12/03 15:28:50 sas Exp $
+# $Id: config.m4,v 1.5 1999/12/16 17:15:01 rubys Exp $
 # config.m4 for extension java
 
 AC_MSG_CHECKING(for Java support)
@@ -51,6 +51,7 @@ AC_ARG_WITH(java,
 
     AC_DEFINE(HAVE_JAVA)
     PHP_EXTENSION(java, "shared")
+    PHP_BUILD_SHARED
     AC_MSG_RESULT(yes)
   else
     AC_MSG_RESULT(no)

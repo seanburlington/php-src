@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.673.2.1 2004/07/30 14:24:59 wez Exp $ */
+/* $Id: basic_functions.c,v 1.673.2.2 2004/08/11 04:10:44 pollita Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -479,7 +479,7 @@ function_entry basic_functions[] = {
 	PHP_FALIAS(show_source, 		highlight_file,							NULL)
 	PHP_FE(highlight_string,												NULL)
 	PHP_FE(php_strip_whitespace,												NULL)
-	PHP_FE(php_check_syntax,												NULL)
+	PHP_FE(php_check_syntax,												second_arg_force_ref)
 
 	PHP_FE(ini_get,															NULL)
 	PHP_FE(ini_get_all,														NULL)
@@ -2336,10 +2336,10 @@ PHP_FUNCTION(php_check_syntax)
 	PG(log_errors) = PG(display_errors) = 0;
 
 	if (php_lint_script(&file_handle TSRMLS_CC) != SUCCESS) {
-		if (errm && PZVAL_IS_REF(errm)) {
+		if (errm) {
 			char *error_str;
 
-			convert_to_string_ex(&errm);
+			zval_dtor(errm);
 			spprintf(&error_str, 0, "%s in %s on line %d", PG(last_error_message), PG(last_error_file), PG(last_error_lineno));
 			ZVAL_STRING(errm, error_str, 0);
 		}

@@ -1,3 +1,13 @@
+2004-04-18  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/posix/posix.c:
+      Simplify code via the use of macros.
+
+2004-04-18  Derick Rethans  <php@derickrethans.nl>
+
+    * ext/mcrypt/mcrypt.c:
+      - Whitespace
+
 2004-04-17  Derick Rethans  <php@derickrethans.nl>
 
     * ext/standard/html.c:
@@ -2135,7 +2145,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1602 2004/04/18 00:34:13 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1603 2004/04/19 00:34:18 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

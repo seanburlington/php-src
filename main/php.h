@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.60 2000/02/10 19:41:18 zeev Exp $ */
+/* $Id: php.h,v 1.61 2000/02/10 20:13:08 zeev Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -113,8 +113,6 @@ char *strtok_r(char *s, const char *delim, char **last);
 #ifndef HAVE_SOCKLEN_T
 typedef unsigned int socklen_t;
 #endif
-
-#include "request_info.h"
 
 #define CREATE_MUTEX(a,b)
 #define SET_MUTEX(a)

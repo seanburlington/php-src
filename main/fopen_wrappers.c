@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.53 2000/04/10 22:50:32 zeev Exp $ */
+/* $Id: fopen_wrappers.c,v 1.54 2000/04/11 17:00:20 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -981,7 +981,7 @@ PHPAPI char *php_strip_url_passwd(char *url)
 }
 
 
-#if 1
+#ifdef VIRTUAL_DIR
 
 PHPAPI char *expand_filepath(char *filepath)
 {

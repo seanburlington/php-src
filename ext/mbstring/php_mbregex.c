@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.48 2004/02/28 20:45:23 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.48.2.1 2005/02/20 23:02:48 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -123,6 +123,22 @@ php_mb_regex_enc_name_map_t enc_name_map[] ={
 	{
 		"UTF-8\0UTF8\0",
 		ONIG_ENCODING_UTF8
+	},
+	{
+		"UTF-16\0UTF-16BE\0",
+		ONIG_ENCODING_UTF16_BE
+	},
+	{
+		"UTF-16LE\0",
+		ONIG_ENCODING_UTF16_LE
+	},
+	{
+		"UCS-4\0UTF-32\0UTF-32BE\0",
+		ONIG_ENCODING_UTF32_BE
+	},
+	{
+		"UCS-4LE\0UTF-32LE\0",
+		ONIG_ENCODING_UTF32_LE
 	},
 	{
 		"SJIS\0CP932\0MS932\0SHIFT_JIS\0SJIS-WIN\0WINDOWS-31J\0",

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.63.2.5 2002/12/31 16:35:29 sebastian Exp $ */
+/* $Id: html.c,v 1.63.2.6 2003/01/02 19:50:37 iliaa Exp $ */
 
 #include "php.h"
 #if PHP_WIN32
@@ -674,6 +674,9 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 	
 	ret = estrdup(old);
 	retlen = oldlen;
+	if (!retlen) {
+		goto empty_source;
+	}
 	
 	if (all) {
 		/* look for a match in the maps for this charset */
@@ -722,7 +725,7 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 		efree(ret);
 		ret = replaced;
 	}
-	
+empty_source:	
 	*newlen = retlen;
 	return ret;
 }

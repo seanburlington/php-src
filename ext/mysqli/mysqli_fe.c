@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.7 2003/02/18 08:49:00 georg Exp $ 
+  $Id: mysqli_fe.c,v 1.8 2003/03/03 22:36:47 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -102,6 +102,7 @@ function_entry mysqli_functions[] = {
 	PHP_FE(mysqli_send_long_data,						NULL)
 	PHP_FE(mysqli_send_query,							NULL)
 	PHP_FALIAS(mysqli_set_opt, 		mysqli_options, 	NULL)
+	PHP_FE(mysqli_set_profiler_opt,						NULL)
 	PHP_FE(mysqli_slave_query,							NULL)
 	PHP_FE(mysqli_ssl_set,								NULL)
 	PHP_FE(mysqli_stat,									NULL)

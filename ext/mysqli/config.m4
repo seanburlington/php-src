@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 2003/02/15 20:09:49 iliaa Exp $
+dnl $Id: config.m4,v 1.3 2003/03/03 22:36:47 georg Exp $
 dnl config.m4 for extension mysqli
 
 dnl Comments in this file start with the string 'dnl'.
@@ -54,5 +54,5 @@ if test "$PHP_MYSQLI" != "no"; then
   ])
   PHP_SUBST(MYSQLI_SHARED_LIBADD)
 
-  PHP_NEW_EXTENSION(mysqli, mysqli.c mysqli_api.c mysqli_nonapi.c mysqli_fe.c, $ext_shared)
+  PHP_NEW_EXTENSION(mysqli, mysqli.c mysqli_api.c mysqli_nonapi.c mysqli_fe.c mysqli_profiler.c, $ext_shared)
 fi

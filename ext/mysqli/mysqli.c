@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.7 2003/02/22 07:31:01 georg Exp $ 
+  $Id: mysqli.c,v 1.8 2003/03/03 22:36:47 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -176,6 +176,7 @@ static void php_mysqli_init_globals(zend_mysqli_globals *mysqli_globals)
 	mysqli_globals->default_user = NULL;
 	mysqli_globals->default_pw = NULL;
 	mysqli_globals->default_socket = NULL;
+	memset(&mysqli_globals->profiler, '\0', sizeof(PROFILER));
 }
 /* }}} */
 

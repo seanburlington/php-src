@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.15 2004/01/26 00:18:25 sniper Exp $ */
+/* $Id: curl.c,v 1.124.2.16 2004/02/23 19:50:47 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1020,7 +1020,8 @@ PHP_FUNCTION(curl_exec)
 	
 	error = curl_easy_perform(ch->cp);
 	SAVE_CURL_ERROR(ch, error);
-	if (error != CURLE_OK) {
+	/* CURLE_PARTIAL_FILE is returned by HEAD requests */
+	if (error != CURLE_OK && error != CURLE_PARTIAL_FILE) {
 		if (ch->handlers->write->buf.len > 0) {
 			smart_str_free(&ch->handlers->write->buf);
 		}

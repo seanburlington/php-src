@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.33 2004/10/31 20:59:37 helly Exp $ */
+/* $Id: php_spl.c,v 1.34 2004/11/01 00:26:57 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -161,6 +161,7 @@ PHP_FUNCTION(class_implements)
 	spl_add_classes(&spl_ce_ ## class_name, z_list, sub, allow, ce_flags TSRMLS_CC)
 
 #define SPL_LIST_CLASSES(z_list, sub, allow, ce_flags) \
+	SPL_ADD_CLASS(AppendIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(ArrayObject, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(ArrayIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(CachingIterator, z_list, sub, allow, ce_flags); \

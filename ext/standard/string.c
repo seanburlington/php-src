@@ -30,7 +30,7 @@
  */
 
 
-/* $Id: string.c,v 1.10 1999/05/12 12:43:03 rasmus Exp $ */
+/* $Id: string.c,v 1.11 1999/05/12 12:53:45 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -826,9 +826,10 @@ void php3_substr(INTERNAL_FUNCTION_PARAMETERS)
 		RETURN_FALSE;
 	}
 
-	if ((f + l) < (int)string->value.str.len) {
-		string->value.str.val[f + l] = '\0';
+	if((f+l) > (int)string->value.str.len) {
+		l = (int)string->value.str.len - f;
 	}
+
 	RETVAL_STRINGL(string->value.str.val + f, l, 1);
 }
 /* }}} */

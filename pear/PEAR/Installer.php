@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.71 2002/07/07 21:10:29 ssb Exp $
+// $Id: Installer.php,v 1.72 2002/07/26 11:48:55 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -304,6 +304,7 @@ class PEAR_Installer extends PEAR_Common
     function install($pkgfile, $options = array())
     {
         // recognized options:
+        // - force         : force installation
         // - register-only : update registry but don't install files
         // - upgrade       : upgrade existing install
         // - soft          : fail silently
@@ -315,7 +316,9 @@ class PEAR_Installer extends PEAR_Common
             $need_download = true;
         } elseif (!@is_file($pkgfile)) {
             if ($this->validPackageName($pkgfile)) {
-                if ($this->registry->packageExists($pkgfile) && empty($options['upgrade'])) {
+                if ($this->registry->packageExists($pkgfile) &&
+                    empty($options['upgrade']) && empty($options['force']))
+                {
                     return $this->raiseError("$pkgfile already installed");
                 }
                 $pkgfile = $this->getPackageDownloadUrl($pkgfile);

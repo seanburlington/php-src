@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.1 1999/07/21 15:12:31 sas Exp $ */
+/* $Id: dba_db2.c,v 1.2 1999/08/17 14:18:27 sas Exp $ */
 
 #include "php.h"
 
@@ -96,7 +96,7 @@ DBA_CLOSE_FUNC(db2)
 	DB2_DATA;
 	
 	if(dba->cursor) dba->cursor->c_close(dba->cursor);
-	dba->dbp->close(dba->dbp, DB_NOSYNC);
+	dba->dbp->close(dba->dbp, 0);
 	free(dba);
 }
 

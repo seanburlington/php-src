@@ -18,18 +18,9 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.148 2004/02/29 15:58:17 avsm Exp $
+// $Id: Installer.php,v 1.149 2004/04/30 16:37:39 cellog Exp $
 
-require_once 'PEAR/Common.php';
-require_once 'PEAR/Registry.php';
-require_once 'PEAR/Dependency.php';
 require_once 'PEAR/Downloader.php';
-require_once 'System.php';
-
-define('PEAR_INSTALLER_OK',       1);
-define('PEAR_INSTALLER_FAILED',   0);
-define('PEAR_INSTALLER_SKIPPED', -1);
-define('PEAR_INSTALLER_ERROR_NO_PREF_STATE', 2);
 
 /**
  * Administration class used to install PEAR packages and maintain the

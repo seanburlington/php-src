@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 2005/02/09 04:57:32 wez Exp $
+dnl $Id: config.m4,v 1.6 2005/02/12 08:20:17 wez Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
@@ -68,7 +68,7 @@ if test "$PHP_PDO_SQLITE" != "no"; then
       sqlite/src/func.c sqlite/src/hash.c sqlite/src/insert.c sqlite/src/legacy.c \
       sqlite/src/main.c sqlite/src/os_mac.c sqlite/src/os_unix.c sqlite/src/os_win.c \
       sqlite/src/pager.c sqlite/src/pragma.c \
-      sqlite/src/printf.c sqlite/src/random.c sqlite/src/select.c sqlite/src/shell.c \
+      sqlite/src/printf.c sqlite/src/random.c sqlite/src/select.c \
       sqlite/src/table.c sqlite/src/tokenize.c \
       sqlite/src/trigger.c sqlite/src/update.c sqlite/src/utf.c sqlite/src/util.c \
       sqlite/src/vacuum.c sqlite/src/vdbeapi.c sqlite/src/vdbeaux.c sqlite/src/vdbe.c \

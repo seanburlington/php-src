@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.114 2003/09/11 14:57:10 cox Exp $
+// $Id: Installer.php,v 1.115 2003/09/14 20:17:24 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -292,6 +292,8 @@ class PEAR_Installer extends PEAR_Common
                 $this->log(2, "md5sum ok: $final_dest_file");
             } else {
                 if (empty($options['force'])) {
+                    // delete the file
+                    @unlink($dest_file);
                     return $this->raiseError("bad md5sum for file $final_dest_file",
                                              PEAR_INSTALLER_FAILED);
                 } else {

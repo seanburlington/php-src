@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.48 2003/12/23 11:02:26 moriyoshi Exp $ */
+/* $Id: file.c,v 1.279.2.49 2003/12/23 11:06:42 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2261,7 +2261,7 @@ PHP_FUNCTION(fgetcsv)
 		s++;
 	}
 	/* strip trailing spaces */
-	while (e >= s && isspace((int)*(unsigned char *)(--e)) && *e != delimiter);
+	while (--e >= s && isspace((int)*(unsigned char *)(e)) && *e != delimiter);
 	e++;
 
 	array_init(return_value);

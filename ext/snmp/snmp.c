@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.92.2.3 2005/02/12 18:27:56 sniper Exp $ */
+/* $Id: snmp.c,v 1.92.2.4 2005/02/12 18:30:26 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -209,7 +209,7 @@ PHP_MINIT_FUNCTION(snmp)
  */
 PHP_MSHUTDOWN_FUNCTION(snmp)
 {
-	snmp_shutdown("php");
+	snmp_shutdown("snmpapp");
 
 	return SUCCESS;
 }

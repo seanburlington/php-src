@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.46 2002/04/15 20:11:12 wez Exp $ */
+/* $Id: network.c,v 1.47 2002/04/15 20:12:29 wez Exp $ */
 
 #define MAX_CHUNKS_PER_READ 10
 
@@ -637,7 +637,6 @@ static size_t php_sock_stream_read_internal(php_stream *stream, php_netstream_da
 	char buf[PHP_SOCK_CHUNK_SIZE];
 	int nr_bytes;
 	size_t nr_read = 0;
-	php_sockaddr_storage sa;
 	
 	/* For blocking sockets, we wait until there is some
 	   data to read (real data or EOF)

@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.10 1999/08/31 18:05:21 ssb Exp $ */
+/* $Id: internal_functions_win32.c,v 1.11 1999/09/01 19:28:07 andi Exp $ */
 
 
 #include "php.h"
@@ -49,6 +49,7 @@
 #include "ext/standard/reg.h"
 #include "ext/pcre/php_pcre.h"
 #include "ext/odbc/php3_odbc.h"
+#include "ext/session/php_session.h"
 
 /* SNMP has to be moved to ext */
 /* #include "dl/snmp/php3_snmp.h" */
@@ -78,7 +79,8 @@ zend_module_entry *php3_builtin_modules[] = {
 	phpext_regex_ptr,
 	phpext_pcre_ptr,
 	phpext_odbc_ptr,
-	phpext_lcg_ptr
+	phpext_lcg_ptr,
+	phpext_session_ptr
 };
 
 	

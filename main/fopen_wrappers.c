@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.73 2000/08/03 15:09:27 stas Exp $ */
+/* $Id: fopen_wrappers.c,v 1.74 2000/08/06 16:22:07 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -187,7 +187,7 @@ PHPAPI int php_check_specific_open_basedir(char *basedir, char *path PLS_DC)
 	}
 
 	/* Resolve the real path into resolved_name */
-	if ((php_realpath(path, resolved_name) != NULL) && (php_realpath(local_open_basedir, resolved_basedir) != NULL)) {
+	if ((V_REALPATH(path, resolved_name) != NULL) && (V_REALPATH(local_open_basedir, resolved_basedir) != NULL)) {
 		/* Check the path */
 #ifdef PHP_WIN32
 		if (strncasecmp(resolved_basedir, resolved_name, strlen(resolved_basedir)) == 0) {

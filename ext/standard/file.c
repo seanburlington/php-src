@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.102 2000/08/03 16:37:35 stas Exp $ */
+/* $Id: file.c,v 1.103 2000/08/06 16:22:07 andi Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1979,15 +1979,16 @@ PHP_FUNCTION(fgetcsv) {
 PHP_FUNCTION(realpath)
 {
 	zval **path;
-	char resolved_path[MAXPATHLEN];
+	char resolved_path_buff[MAXPATHLEN];
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(ZEND_NUM_ARGS(), &path) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 
 	convert_to_string_ex(path);
-	if (php_realpath((*path)->value.str.val, resolved_path)) {
-		RETURN_STRING(resolved_path, 1);
+	
+	if (V_REALPATH((*path)->value.str.val, resolved_path_buff)) {
+		RETURN_STRING(resolved_path_buff, 1);
 	} else {
 		RETURN_FALSE;
 	}

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.24 2000/06/10 07:38:58 sas Exp $
+dnl $Id: config.m4,v 1.25 2000/06/10 07:48:55 sas Exp $
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
 sinclude(ext/mysql/libmysql/mysql.m4)
@@ -7,8 +7,8 @@ sinclude(libmysql/mysql.m4)
 
 AC_DEFUN(MYSQL_LIB_CHK,[
   str="$MYSQL_DIR/$1/libmysqlclient.*"
-  for i in `echo $str`; do
-    if test -r $i; then
+  for j in `echo $str`; do
+    if test -r $j; then
       MYSQL_LIB_DIR="$MYSQL_DIR/$1"
       break 2
     fi

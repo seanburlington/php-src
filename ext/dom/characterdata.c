@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: characterdata.c,v 1.4 2003/06/11 11:25:08 rrichards Exp $ */
+/* $Id: characterdata.c,v 1.5 2003/06/12 17:04:28 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -140,7 +140,7 @@ PHP_FUNCTION(dom_characterdata_substring_data)
 		return;
 	}
 
-	cur = xmlNodeListGetString(node->doc, node, 1);
+	cur = xmlNodeGetContent(node);
 	if (cur == NULL) {
 		RETURN_FALSE;
 	}
@@ -264,7 +264,7 @@ PHP_FUNCTION(dom_characterdata_delete_data)
 		return;
 	}
 
-	cur = xmlNodeListGetString(node->doc, node, 1);
+	cur = xmlNodeGetContent(node);
 	if (cur == NULL) {
 		RETURN_FALSE;
 	}
@@ -321,7 +321,7 @@ PHP_FUNCTION(dom_characterdata_replace_data)
 		return;
 	}
 
-	cur = xmlNodeListGetString(node->doc, node, 1);
+	cur = xmlNodeGetContent(node);
 	if (cur == NULL) {
 		RETURN_FALSE;
 	}

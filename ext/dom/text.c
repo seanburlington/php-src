@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: text.c,v 1.8 2003/06/11 20:06:03 rrichards Exp $ */
+/* $Id: text.c,v 1.9 2003/06/12 17:04:28 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -150,6 +150,8 @@ PHP_FUNCTION(dom_text_split_text)
 		nnode->type = XML_ELEMENT_NODE;
 		xmlAddNextSibling(node, nnode);
 		nnode->type = XML_TEXT_NODE;
+	} else {
+		dom_add_to_list(nnode, intern TSRMLS_CC);
 	}
 	
 	return_value = php_dom_create_object(nnode, &ret, NULL, return_value, intern TSRMLS_CC);

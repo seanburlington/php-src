@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.28 1999/08/09 20:52:58 eschmid Exp $ */
+/* $Id: string.c,v 1.29 1999/08/12 10:53:29 verdy_p Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -38,7 +38,7 @@ static char hexconvtab[] = "0123456789abcdef";
 static char *php_bin2hex(const unsigned char *old, const size_t oldlen, size_t *newlen)
 {
 	unsigned char *new = NULL;
-	int i, j;
+	size_t i, j;
 
 	new = (char *) emalloc(oldlen * 2 * sizeof(char));
 	if(!new) {

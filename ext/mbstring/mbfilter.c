@@ -80,7 +80,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.48 2002/11/09 17:05:47 moriyoshi Exp $ */
+/* $Id: mbfilter.c,v 1.49 2002/11/10 21:31:26 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -174,7 +174,7 @@ static const mbfl_language mbfl_language_english = {
 static const char *mbfl_language_german_aliases[] = {"Deutsch", NULL};
 
 static const mbfl_language mbfl_language_german = {
-	mbfl_no_language_english,
+	mbfl_no_language_german,
 	"German",
 	"de",
 	(const char *(*)[])&mbfl_language_german_aliases,

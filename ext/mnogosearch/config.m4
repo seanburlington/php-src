@@ -1,9 +1,11 @@
 dnl $Source: /repository/php-src/ext/mnogosearch/Attic/config.m4,v $
-dnl $Id: config.m4,v 1.7 2001/03/27 20:34:33 sniper Exp $
+dnl $Id: config.m4,v 1.8 2001/05/12 09:13:39 sas Exp $
 
 PHP_ARG_WITH(mnogosearch,for mnoGoSearch support,
-[  --with-mnogosearch[=DIR]       Include mnoGoSearch support.  DIR is the mnoGoSearch base
-                          install directory, defaults to /usr/local/mnogosearch.])
+[  --with-mnogosearch[=DIR]
+                          Include mnoGoSearch support.  DIR is the mnoGoSearch 
+                          base install directory, defaults to 
+                          /usr/local/mnogosearch.])
 
   if test "$PHP_MNOGOSEARCH" != "no"; then
   

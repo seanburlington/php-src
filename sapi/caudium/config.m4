@@ -1,11 +1,11 @@
-dnl ## $Id: config.m4,v 1.7 2001/03/27 20:34:45 sniper Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.8 2001/05/12 09:13:42 sas Exp $ -*- sh -*-
 
 RESULT=no
 AC_MSG_CHECKING(for Caudium support)
 AC_ARG_WITH(caudium, 
 [  --with-caudium=DIR      Build PHP as a Pike module for use with Caudium
                           DIR is the Caudium server dir, with the default value
-						  /usr/local/caudium/server.],
+                          /usr/local/caudium/server.],
 [
     if test "$prefix" = "NONE"; then CPREF=/usr/local/; fi
 	if test ! -d $withval ; then

@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.1 2001/05/01 01:48:50 hirokawa Exp $
+dnl $Id: config.m4,v 1.2 2001/05/12 09:13:39 sas Exp $
 dnl config.m4 for extension mbstring
 
 PHP_ARG_ENABLE(mbstring, whether to enable multibyte string support,
-[  --enable-mbstring        Enable multibyte string support])
+[  --enable-mbstring       Enable multibyte string support])
 
 if test "$PHP_MBSTRING" != "no"; then
   AC_DEFINE(HAVE_MBSTRING,1,[ ])

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.43.2.12 2005/03/06 21:41:38 helly Exp $ 
+  $Id: mysqli.c,v 1.43.2.13 2005/04/06 06:48:13 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -582,7 +582,7 @@ void php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAMETERS, int override_flags
 {
 	MYSQL_RES		*result;
 	zval			*mysql_result;
-	int				fetchtype;
+	long			fetchtype;
 	unsigned int	i;
 	MYSQL_FIELD		*fields;
 	MYSQL_ROW		row;

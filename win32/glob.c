@@ -34,7 +34,7 @@
  * SUCH DAMAGE.
  */
 
-/* $Id: glob.c,v 1.5 2003/02/17 03:07:32 sniper Exp $ */
+/* $Id: glob.c,v 1.6 2003/09/20 03:22:36 sniper Exp $ */
 
 /*
  * glob(3) -- a superset of the one defined in POSIX 1003.2.
@@ -510,7 +510,7 @@ glob0(pattern, pglob)
 	}
 	if (!(pglob->gl_flags & GLOB_NOSORT))
 		qsort(pglob->gl_pathv + pglob->gl_offs + oldpathc,
-			pglob->gl_pathc - oldpathc, sizeof(char *), compare);
+			pglob->gl_pathc - oldpathc, sizeof(char *), (const void *) compare);
 	return(0);
 }
 

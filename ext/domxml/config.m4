@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.15 2000/10/19 14:34:03 sas Exp $
+dnl $Id: config.m4,v 1.16 2000/11/23 09:56:18 steinm Exp $
 dnl config.m4 for extension domxml
 
 PHP_ARG_WITH(dom, for DOM support,
@@ -48,7 +48,7 @@ if test "$PHP_DOM" != "no"; then
     ])
     withval=$old_withval
   else
-    echo "checking for libz needed by pdflib 3.0... already zlib support"
+    echo "checking for libz needed by libxml ... already zlib support"
     LIBS="$LIBS -L$withval/lib -lz"
   fi
 

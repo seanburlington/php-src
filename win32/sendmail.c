@@ -17,17 +17,17 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.59.2.2 2005/01/19 18:54:48 iliaa Exp $ */
+/* $Id: sendmail.c,v 1.59.2.3 2005/03/11 10:48:06 hyanantha Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
 #include <stdlib.h>
 #ifndef NETWARE
 #include <winsock2.h>
-#else	/* NETWARE */
-#include <netware\sendmail_nw.h>
-#endif	/* NETWARE */
 #include "time.h"
+#else	/* NETWARE */
+#include <netware/sendmail_nw.h>
+#endif	/* NETWARE */
 #include <string.h>
 #include <math.h>
 #ifndef NETWARE

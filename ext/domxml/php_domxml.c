@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.67 2001/08/14 08:23:22 joey Exp $ */
+/* $Id: php_domxml.c,v 1.68 2001/08/21 21:49:32 joey Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -191,6 +191,7 @@ static zend_function_entry php_domxmlnode_class_functions[] = {
 
 static zend_function_entry php_domxmlelement_class_functions[] = {
 	PHP_FALIAS(domelement,				domxml_element,					NULL)
+	PHP_FALIAS(name,					domxml_elem_tagname,			NULL)
 	PHP_FALIAS(tagname,					domxml_elem_tagname,			NULL)
 	PHP_FALIAS(get_attribute,			domxml_elem_get_attribute,		NULL)
 	PHP_FALIAS(set_attribute,			domxml_elem_set_attribute,		NULL)
@@ -669,8 +670,10 @@ static zval *php_domobject_new(xmlNodePtr obj, int *found TSRMLS_DC)
 			object_init_ex(wrapper, domxmltext_class_entry);
 			rsrc_type = le_domxmltextp;
 			content = xmlNodeGetContent(nodep);
-			if (content)
+			if (content) {
+				add_property_long(wrapper, "type", nodep->type);
 				add_property_stringl(wrapper, "content", (char *) content, strlen(content), 1);
+			}
 			break;
 		}
 

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.55 2000/07/05 18:02:42 rasmus Exp $ */
+/* $Id: mod_php4.c,v 1.56 2000/07/06 17:40:18 stas Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -255,7 +255,7 @@ static void sapi_apache_register_server_variables(zval *track_vars_array ELS_DC 
 		} else {
 			val = empty_string;
 		}
-		php_register_variable(elts[i].key, val, NULL ELS_CC PLS_CC);
+		php_register_variable(elts[i].key, val, track_vars_array  ELS_CC PLS_CC);
 	}
 
 	/* insert special variables */

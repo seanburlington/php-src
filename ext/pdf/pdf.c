@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.88 2001/06/06 14:32:23 rasmus Exp $ */
+/* $Id: pdf.c,v 1.89 2001/06/15 10:44:49 sniper Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -349,7 +349,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.88 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.89 $" );
 	php_info_print_table_end();
 
 }
@@ -1191,7 +1191,7 @@ PHP_FUNCTION(pdf_setlinewidth)
 }
 /* }}} */
 
-/* {{{ proto void pdf_setdash(int pdfdoc, double white, double black)
+/* {{{ proto void pdf_setdash(int pdfdoc, double black, double white)
    Sets dash pattern */
 PHP_FUNCTION(pdf_setdash)
 {

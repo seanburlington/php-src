@@ -1,4 +1,4 @@
-# $Id: config.m4,v 1.26 2001/09/10 16:59:30 sas Exp $
+# $Id: config.m4,v 1.27 2001/09/10 23:34:41 sniper Exp $
 # config.m4 for extension java
 
 AC_MSG_CHECKING(for Java support)
@@ -29,12 +29,12 @@ AC_ARG_WITH(java,
 
     if test -d $withval/lib/kaffe; then
       PHP_ADD_LIBPATH($withval/lib)
-      PHP_ADD_LIBPATH($withval/lib/kaffe)
 
       JAVA_CFLAGS=-DKAFFE
       JAVA_INCLUDE=-I$withval/include/kaffe
       JAVA_CLASSPATH=$withval/share/kaffe/Klasses.jar
       JAVA_LIB=kaffevm
+      JAVA_LIBPATH=$withval/lib/kaffe
       java_libext=kaffevm
 
       test -f $withval/lib/$JAVA_LIB && JAVA_LIBPATH=$withval/lib

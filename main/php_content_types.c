@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_content_types.c,v 1.21 2002/08/02 06:53:48 hirokawa Exp $ */
+/* $Id: php_content_types.c,v 1.22 2002/10/21 16:41:06 hholzgra Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -39,9 +39,11 @@ SAPI_API SAPI_POST_READER_FUNC(php_default_post_reader)
 {
 	char *data;
 
-	if(!SG(request_info).post_data) sapi_read_standard_form_data(TSRMLS_C);
-	data = estrndup(SG(request_info).post_data, SG(request_info).post_data_length);
-	SET_VAR_STRINGL("HTTP_RAW_POST_DATA", data, SG(request_info).post_data_length);
+	if(PG(always_populate_raw_post_data)) {
+		if(!SG(request_info).post_data) sapi_read_standard_form_data(TSRMLS_C);
+		data = estrndup(SG(request_info).post_data, SG(request_info).post_data_length);
+		SET_VAR_STRINGL("HTTP_RAW_POST_DATA", data, SG(request_info).post_data_length);
+	}
 }
 /* }}} */
 

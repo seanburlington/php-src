@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.129 2004/02/18 20:22:40 sniper Exp $ */
+/* $Id: php_mssql.c,v 1.130 2004/03/15 19:41:48 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -987,6 +987,7 @@ static int _mssql_fetch_batch(mssql_link *mssql_ptr, mssql_result *result, int r
 
 	column_types = (int *) safe_emalloc(sizeof(int), result->num_fields, 0);
 	for (i=0; i<result->num_fields; i++) {
+		char *source = NULL;
 		char *fname = (char *)dbcolname(mssql_ptr->link,i+1);
 
 		if (*fname) {
@@ -1001,8 +1002,11 @@ static int _mssql_fetch_batch(mssql_link *mssql_ptr, mssql_result *result, int r
 			j++;
 		}
 		result->fields[i].max_length = dbcollen(mssql_ptr->link,i+1);
-		result->fields[i].column_source = estrdup(dbcolsource(mssql_ptr->link,i+1));
-		if (!result->fields[i].column_source) {
+		source = (char *)dbcolsource(mssql_ptr->link,i+1);
+		if (source) {
+			result->fields[i].column_source = estrdup(source);
+		}
+		else {
 			result->fields[i].column_source = empty_string;
 		}
 

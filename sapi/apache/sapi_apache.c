@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.33.4.2 2002/08/26 20:06:31 gschlossnagle Exp $ */
+/* $Id: sapi_apache.c,v 1.33.4.3 2002/08/28 04:37:37 gschlossnagle Exp $ */
 
 #include "php_apache_http.h"
 
@@ -51,10 +51,8 @@ int apache_php_module_main(request_rec *r, int display_source_mode TSRMLS_DC)
 		file_handle.filename = SG(request_info).path_translated;
 		file_handle.opened_path = NULL;
 		file_handle.free_filename = 0;
-
 		(void) php_execute_script(&file_handle TSRMLS_CC);
 	}
-
 	AP(in_request) = 0;
 	
 	return (OK);

@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.33 2003/10/20 14:36:51 iliaa Exp $ 
+  $Id: mime_magic.c,v 1.34 2003/11/04 05:15:19 sniper Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -156,6 +156,7 @@
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "php_mime_magic.h"
+#include "phpmimemagic.h"
 
 #include <fcntl.h>
 #include <sys/types.h>

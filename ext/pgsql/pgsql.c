@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.211 2002/07/21 07:25:10 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.212 2002/07/22 06:38:36 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -3347,7 +3347,7 @@ PHPAPI int php_pgsql_convert(PGconn *pg_link, const char *table_name, const zval
 				switch (Z_TYPE_PP(val)) {
 					case IS_STRING:
 						if (Z_STRLEN_PP(val) == 0) {
-							ZVAL_STRING(new_val, empty_string, 0);
+							ZVAL_STRING(new_val, empty_string, 1);
 						}
 						else {
 							Z_TYPE_P(new_val) = IS_STRING;

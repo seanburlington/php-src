@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.175 2003/06/10 20:03:41 imajes Exp $ */
+/* $Id: SAPI.c,v 1.176 2003/08/11 19:36:26 helly Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -585,8 +585,9 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 				efree(mimetype);
 				SG(sapi_headers).send_default_content_type = 0;
 			} else if (!STRCASECMP(header_line, "Location")) {
-				if (SG(sapi_headers).http_response_code < 300 ||
-					SG(sapi_headers).http_response_code > 307) {
+				if ((SG(sapi_headers).http_response_code < 300 ||
+					SG(sapi_headers).http_response_code > 307) &&
+					SG(sapi_headers).http_response_code != 201) {
 					/* Return a Found Redirect if one is not already specified */
 					sapi_update_response_code(302 TSRMLS_CC);
 				}

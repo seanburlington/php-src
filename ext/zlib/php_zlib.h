@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_zlib.h,v 1.7 2000/07/02 23:46:50 sas Exp $ */
+/* $Id: php_zlib.h,v 1.8 2000/07/11 04:11:15 andi Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -37,8 +37,8 @@ typedef struct {
 extern zend_module_entry php_zlib_module_entry;
 #define zlib_module_ptr &php_zlib_module_entry
 
-extern PHP_MINIT_FUNCTION(zlib);
-extern PHP_MSHUTDOWN_FUNCTION(zlib);
+PHP_MINIT_FUNCTION(zlib);
+PHP_MSHUTDOWN_FUNCTION(zlib);
 PHP_MINFO_FUNCTION(zlib);
 PHP_FUNCTION(gzopen);
 PHP_FUNCTION(gzclose);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: caudium.c,v 1.18 2001/08/05 05:35:05 sebastian Exp $ */
+/* $Id: caudium.c,v 1.19 2001/08/05 12:36:13 sebastian Exp $ */
 
 #include "php.h"
 #ifdef HAVE_CAUDIUM
@@ -442,7 +442,7 @@ static void php_info_caudium(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.18 2001/08/05 05:35:05 sebastian Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.19 2001/08/05 12:36:13 sebastian Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -520,9 +520,9 @@ INLINE static void low_sapi_caudium_register_variables(zval *track_vars_array TS
   
 }
 
-static void sapi_caudium_register_variables(zval *track_vars_array TSRMLS_DC TSRMLS_DC TSRMLS_DC)
+static void sapi_caudium_register_variables(zval *track_vars_array TSRMLS_DC)
 {
-  THREAD_SAFE_RUN(low_sapi_caudium_register_variables(track_vars_array TSRMLS_CC TSRMLS_CC TSRMLS_CC), "register_variables");
+  THREAD_SAFE_RUN(low_sapi_caudium_register_variables(track_vars_array TSRMLS_CC), "register_variables");
 }
 
 /* this structure is static (as in "it does not change") */

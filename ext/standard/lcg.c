@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lcg.c,v 1.28 2001/09/21 13:38:44 sas Exp $ */
+/* $Id: lcg.c,v 1.29 2001/09/21 17:21:50 sas Exp $ */
 
 #include "php.h"
 #include "php_lcg.h"
@@ -25,7 +25,9 @@
 #include <unistd.h>
 #endif
 
-#if HAVE_SYS_TIME_H
+#ifdef PHP_WIN32
+#include "win32/time.h"
+#else
 #include <sys/time.h>
 #endif
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.26 2003/12/19 14:24:59 iliaa Exp $ */
+/* $Id: tidy.c,v 1.27 2003/12/23 20:12:55 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -690,6 +690,8 @@ static void php_tidy_parse_file(INTERNAL_FUNCTION_PARAMETERS)
 
 PHP_MINIT_FUNCTION(tidy)
 {
+	ZEND_INIT_MODULE_GLOBALS(tidy, tidy_globals_ctor, tidy_globals_dtor);
+
 	REGISTER_INI_ENTRIES();
 	REGISTER_TIDY_CLASS(doc,	NULL);
 	REGISTER_TIDY_CLASS(node,	NULL);
@@ -702,8 +704,6 @@ PHP_MINIT_FUNCTION(tidy)
 
 	tidy_object_handlers_doc.cast_object = tidy_doc_cast_handler;
 	tidy_object_handlers_node.cast_object = tidy_node_cast_handler;
-
-	ZEND_INIT_MODULE_GLOBALS(tidy, tidy_globals_ctor, tidy_globals_dtor);
 
 	_php_tidy_register_tags(INIT_FUNC_ARGS_PASSTHRU);
 	_php_tidy_register_attributes(INIT_FUNC_ARGS_PASSTHRU);
@@ -739,7 +739,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Library Version", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.26 2003/12/19 14:24:59 iliaa Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.27 2003/12/23 20:12:55 wez Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

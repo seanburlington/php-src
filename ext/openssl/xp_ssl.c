@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.16.2.2 2004/09/28 09:13:36 wez Exp $ */
+/* $Id: xp_ssl.c,v 1.16.2.3 2005/01/04 03:45:40 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -497,7 +497,6 @@ static int php_openssl_sockop_set_option(php_stream *stream, int option, int val
 	switch (option) {
 		case PHP_STREAM_OPTION_CHECK_LIVENESS:
 			{
-				fd_set rfds;
 				struct timeval tv;
 				char buf;
 				int alive = 1;

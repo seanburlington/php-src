@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.18 2003/01/14 16:42:18 moriyoshi Exp $ */
+/* $Id: filters.c,v 1.19 2003/01/15 15:05:17 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -838,7 +838,7 @@ static php_conv_err_t php_conv_qprint_encode_convert(php_conv_qprint_encode *ins
 
 static php_conv_err_t php_conv_qprint_encode_ctor(php_conv_qprint_encode *inst, unsigned int line_len, const char *lbchars, size_t lbchars_len, int lbchars_dup, int opts, int persistent)
 {
-	if (line_len < 4) {
+	if (line_len < 4 && lbchars != NULL) {
 		return PHP_CONV_ERR_TOO_BIG;
 	}
 	inst->_super.convert_op = (php_conv_convert_func) php_conv_qprint_encode_convert;

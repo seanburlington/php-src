@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.30 2000/09/22 00:33:55 venaas Exp $ */
+/* $Id: url.c,v 1.31 2000/10/02 17:51:30 andi Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -117,7 +117,7 @@ php_url *url_parse(char *str)
 		regfree(&re);			/* free the old regex */
 		
 		if ((cerr=regcomp(&re, "^(([^@:]+)(:([^@:]+))?@)?((\\[([^]]+)\\])|([^:@]+))(:([^:@]+))?", REG_EXTENDED))
-			|| (err=regexec(&re, result, 11, subs, 0))) {
+			|| (err=regexec(&re, result, 10, subs, 0))) {
 			STR_FREE(ret->scheme);
 			STR_FREE(ret->path);
 			STR_FREE(ret->query);

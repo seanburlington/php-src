@@ -18,7 +18,7 @@
    |          Jeroen van Wolffelaar <jeroen@php.net>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.35 2001/09/03 11:57:15 jeroen Exp $ */
+/* $Id: rand.c,v 1.36 2001/09/03 17:38:10 derick Exp $ */
 
 #include <stdlib.h>
 
@@ -230,7 +230,7 @@ PHPAPI double php_drand(void)
 /* }}} */
 
 /* {{{ PHPAPI long php_rand_range(long min, long max) */
-PHPAPI long php_rand_range(long min, long max TSRMLS_D)
+PHPAPI long php_rand_range(long min, long max TSRMLS_DC)
 {
 	register long result;
 

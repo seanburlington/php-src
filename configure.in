@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.218 2001/02/15 05:21:27 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.219 2001/02/26 18:14:27 andi Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -699,7 +699,7 @@ else
   PART2=non-zts
 fi
 
-ZEND_MODULE_API_NO=`egrep '#define ZEND_MODULE_API_NO ' $srcdir/Zend/modules.h|sed 's/#define ZEND_MODULE_API_NO //'`
+ZEND_MODULE_API_NO=`egrep '#define ZEND_MODULE_API_NO ' $srcdir/Zend/zend_modules.h|sed 's/#define ZEND_MODULE_API_NO //'`
 
 EXTENSION_DIR="$prefix/lib/php/extensions/$PART1-$PART2-$ZEND_MODULE_API_NO"
 

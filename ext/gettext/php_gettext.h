@@ -16,14 +16,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gettext.h,v 1.10 2001/02/26 06:06:56 andi Exp $ */
+/* $Id: php_gettext.h,v 1.11 2001/02/26 18:14:28 andi Exp $ */
 
 #ifndef PHP_GETTEXT_H
 #define PHP_GETTEXT_H
 
 #if HAVE_LIBINTL
 #ifndef INIT_FUNC_ARGS
-#include "modules.h"
+#include "zend_modules.h"
 #endif
 
 extern zend_module_entry php_gettext_module_entry;

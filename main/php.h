@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.133 2001/02/26 16:32:57 dbeu Exp $ */
+/* $Id: php.h,v 1.134 2001/02/26 18:14:30 andi Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -54,11 +54,6 @@
 #define THREAD_LS
 #define PHP_DIR_SEPARATOR '/'
 #endif
-
-PHPAPI extern unsigned char first_arg_force_ref[];
-PHPAPI extern unsigned char first_arg_allow_ref[];
-PHPAPI extern unsigned char second_arg_force_ref[];
-PHPAPI extern unsigned char second_arg_allow_ref[];
 
 #include "php_regex.h"
 

@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config0.m4,v 1.10 2002/10/07 20:59:59 rasmus Exp $
+dnl $Id: config0.m4,v 1.11 2002/10/07 21:13:46 rasmus Exp $
 dnl
 
 PHP_ARG_WITH(zlib,for ZLIB support,
-[  --with-zlib[=DIR]       Include ZLIB support.])
+[  --with-zlib[=DIR]       Include ZLIB support (requires zlib >= 1.0.9).])
 
 PHP_ARG_WITH(zlib-dir,if the location of ZLIB install directory is defined,
 [  --with-zlib-dir=<DIR>   Define the location of zlib install directory], no, no)
@@ -36,7 +36,11 @@ if test "$PHP_ZLIB" != "no" -o "$PHP_ZLIB_DIR" != "no"; then
     AC_MSG_ERROR(Cannot find libz)
   fi
 
-  AC_DEFINE(HAVE_ZLIB,1,[ ])
+  AC_CHECK_LIB(z, gzgets, [
+    AC_DEFINE(HAVE_ZLIB,1,[ ]) 
+  ],[
+    AC_MSG_ERROR(ZLIB extension requires zlib >= 1.0.9)
+  ])
 
   PHP_ADD_LIBPATH($ZLIB_DIR/lib, ZLIB_SHARED_LIBADD)
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.12 2001/09/09 13:29:15 derick Exp $ */
+/* $Id: credits.c,v 1.13 2001/09/09 23:37:55 zeev Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -89,7 +89,7 @@ PHPAPI void php_print_credits(int flag)
 	if (flag & PHP_CREDITS_DOCS) {
 		php_info_print_table_start();
 		php_info_print_table_header(1, "PHP Documentation Team");
-		php_info_print_table_row(1, "Jouni Ahto, Alexander Aulbach, Stig Bakken, Rasmus Lerdorf, Egon Schmid, Zeev Suraski, Lars Torben Wilson, Jim Winstead");
+		php_info_print_table_row(1, "Jouni Ahto, Alexander Aulbach, Stig Bakken, Rasmus Lerdorf, Egon Schmid, Lars Torben Wilson, Jim Winstead");
 		php_info_print_table_row(1, "Edited by:  Stig Bakken and Egon Schmid");
 		php_info_print_table_end();
 	}

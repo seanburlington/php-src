@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.25 2004/05/25 17:43:24 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.26 2004/05/25 18:32:48 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -377,12 +377,17 @@ fail:
 	if (attr == PDO_ATTR_AUTOCOMMIT) {
 		zend_throw_exception_ex(php_pdo_get_exception(), PDO_ERR_NONE TSRMLS_CC, "The auto-commit mode cannot be changed for this driver");
 	} else if (!dbh->methods->set_attribute) {
+		/* XXX: do something better here */
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "This driver doesn't support setting attributes");
+	} else {
+		PDO_HANDLE_DBH_ERR();
 	}
 	RETURN_FALSE;
 }
 /* }}} */
 
+/* {{{ proto mixed PDO::getAttribute(long attribute)
+   Get an attribute */
 static PHP_METHOD(PDO, getAttribute)
 {
 	pdo_dbh_t *dbh = zend_object_store_get_object(getThis() TSRMLS_CC);
@@ -402,15 +407,14 @@ static PHP_METHOD(PDO, getAttribute)
 		case -1:
 			PDO_HANDLE_DBH_ERR();
 			RETURN_FALSE;
-			break;
 
 		case 0:
+			/* XXX: should do something better here */
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "This driver doesn't support fetching %ld attribute", attr);
 			break;
 
 		default:
 			return;
-			break;
 	}
 }
 /* }}} */

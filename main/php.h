@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.160 2002/03/14 02:17:23 yohgaki Exp $ */
+/* $Id: php.h,v 1.161 2002/03/15 06:36:56 yohgaki Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -63,6 +63,7 @@
 
 #include "php_regex.h"
 
+#ifndef PHP_WIN32
 #if HAVE_ASSERT_H
 #if PHP_DEBUG
 #undef NDEBUG
@@ -73,6 +74,7 @@
 #else /* HAVE_ASSERT_H */
 #define assert(expr) ((void) (0))
 #endif /* HAVE_ASSERT_H */
+#endif /* PHP_WIN32 */
 
 #define APACHE 0
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.16 2003/07/20 19:57:02 helly Exp $ */
+/* $Id: php_reflection.c,v 1.17 2003/07/20 20:16:07 gschlossnagle Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -117,6 +117,7 @@ string *string_write(string *str, char *buf, int len)
 	}
 	memcpy(str->string + str->len - 1, buf, len);
 	str->len += len;
+	str->string[str->len] = '\0';
 	return str;
 }
 

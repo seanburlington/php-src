@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.7 2000/08/17 02:14:41 sterling Exp $ */
+/* $Id: php_curl.h,v 1.8 2000/08/18 13:24:00 sterling Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -87,16 +87,15 @@ PHP_FUNCTION(curl_close);
 #define CE_BAD_CALLING_ORDER 44
 #define C_LAST 45
 
-struct curl_fileid_table
-{
+struct curl_file_id_table {
 	int id;
-	struct curl_fileid_table *next;
+	struct curl_file_id_table *next;
 };
 
 typedef struct {
 	int use_file;
 	int le_curl;
-	struct curl_fileid_table *output_node, output_start;
+	struct curl_file_id_table *output_node, output_start;
 } php_curl_globals;
 
 #ifdef ZTS

@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.261 2004/10/10 10:54:26 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.262 2004/10/10 15:04:21 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -786,7 +786,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.261 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.262 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -3144,7 +3144,7 @@ static int _oci_session_cleanup(void *data TSRMLS_DC)
 
 	if (le->type == le_session) {
 		oci_server *server = ((oci_session*) le->ptr)->server;
-		if (server->is_open == 2) 
+		if (server && server->is_open == 2) 
 			return 1;
 	}
 	return 0;

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.45 2002/07/13 00:52:18 sniper Exp $ */
+/* $Id: safe_mode.c,v 1.46 2002/07/17 05:15:17 yohgaki Exp $ */
 
 #include "php.h"
 
@@ -35,12 +35,14 @@
 /*
  * php_checkuid
  *
- * This function has four modes:
+ * This function has six modes:
  * 
  * 0 - return invalid (0) if file does not exist
  * 1 - return valid (1)  if file does not exist
  * 2 - if file does not exist, check directory
  * 3 - only check directory (needed for mkdir)
+ * 4 - check mode and param
+ * 5 - only check file
  */
 
 PHPAPI int php_checkuid(const char *filename, char *fopen_mode, int mode)

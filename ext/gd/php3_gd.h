@@ -29,11 +29,12 @@
  */
 
 
-/* $Id: php3_gd.h,v 1.9 1999/08/19 05:23:02 rasmus Exp $ */
+/* $Id: php3_gd.h,v 1.10 1999/10/17 14:57:49 sas Exp $ */
 
 #ifndef _PHP3_GD_H
 #define _PHP3_GD_H
 
+#define HAVE_GDIMAGECREATEFROMPNG 1
 
 #if HAVE_LIBTTF|HAVE_LIBFREETYPE
 #define ENABLE_GD_TTF
@@ -92,6 +93,8 @@ PHP_FUNCTION(imagestring);
 PHP_FUNCTION(imagestringup);
 PHP_FUNCTION(imagesx);
 PHP_FUNCTION(imagesy);
+PHP_FUNCTION(imagecreatefrompng);
+PHP_FUNCTION(imagepng);
 void php3_free_gd_font(gdFontPtr);
 void _php3_gdimagecharup(gdImagePtr, gdFontPtr, int, int, int, int);
 PHP_FUNCTION(imagedashedline);

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.33 2004/01/08 08:17:54 andi Exp $ */
+/* $Id: snprintf.c,v 1.34 2004/04/15 23:08:22 helly Exp $ */
 
 /* ====================================================================
  * Copyright (c) 1995-1998 The Apache Group.  All rights reserved.
@@ -1031,7 +1031,7 @@ static int format_converter(register buffy * odp, const char *fmt,
 						ui_num = (u_wide_int)((size_t) va_arg(ap, char *));
 						s = ap_php_conv_p2(ui_num, 4, 'x', 
 								&num_buf[NUM_BUF_SIZE], &s_len);
-						if (i_num != 0) {
+						if (ui_num != 0) {
 							*--s = 'x';
 							*--s = '0';
 							s_len += 2;

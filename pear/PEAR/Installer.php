@@ -17,11 +17,15 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.58 2002/05/21 02:11:42 cox Exp $
+// $Id: Installer.php,v 1.59 2002/05/21 07:16:35 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
 require_once 'PEAR/Dependency.php';
+
+// TODO:
+// * files that are not installed should be removed from the
+//   registered file list.
 
 /**
  * Administration class used to install PEAR packages and maintain the

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.86 2001/07/30 01:56:25 zeev Exp $ */
+/* $Id: hw.c,v 1.87 2001/07/30 06:17:53 zeev Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -196,8 +196,6 @@ static void php_hw_init_globals(zend_hw_globals *hw_globals)
 
 static PHP_INI_MH(OnHyperwavePort)
 {
-	TSRMLS_FETCH();
-
 	if (new_value==NULL) {
 		HwSG(default_port) = HG_SERVER_PORT;
 	} else {

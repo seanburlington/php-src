@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.117 2001/07/29 01:46:37 jon Exp $ */
+/* $Id: pgsql.c,v 1.118 2001/07/30 06:18:01 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -293,7 +293,6 @@ PHP_RINIT_FUNCTION(pgsql)
  */
 PHP_RSHUTDOWN_FUNCTION(pgsql)
 {
-	TSRMLS_FETCH();
 	zend_hash_apply(&EG(persistent_list), (apply_func_t) _rollback_transactions);
 	return SUCCESS;
 }
@@ -304,7 +303,6 @@ PHP_RSHUTDOWN_FUNCTION(pgsql)
 PHP_MINFO_FUNCTION(pgsql)
 {
 	char buf[32];
-	TSRMLS_FETCH();
 
 	php_info_print_table_start();
 	php_info_print_table_header(2, "PostgreSQL Support", "enabled");

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.209 2001/07/30 01:56:37 zeev Exp $ */
+/* $Id: string.c,v 1.210 2001/07/30 06:18:06 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -160,9 +160,7 @@ PHP_MINIT_FUNCTION(localeconv)
 PHP_MSHUTDOWN_FUNCTION(localeconv)
 {
 	tsrm_mutex_free( locale_mutex );
-
 	locale_mutex = NULL;
-
 	return SUCCESS;
 }
 /* }}} */

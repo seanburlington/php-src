@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.98 2001/07/30 04:58:00 zeev Exp $ */
+/* $Id: php_odbc.c,v 1.99 2001/07/30 06:18:00 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -467,8 +467,6 @@ PHP_RSHUTDOWN_FUNCTION(odbc)
 
 PHP_MSHUTDOWN_FUNCTION(odbc)
 {
-	TSRMLS_FETCH();
-
 	UNREGISTER_INI_ENTRIES();
 	return SUCCESS;
 }
@@ -476,7 +474,6 @@ PHP_MSHUTDOWN_FUNCTION(odbc)
 PHP_MINFO_FUNCTION(odbc)
 {
 	char buf[32];
-	TSRMLS_FETCH();
 
 	php_info_print_table_start();
 	php_info_print_table_header(2, "ODBC Support", "enabled");

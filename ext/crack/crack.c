@@ -15,7 +15,7 @@
    | Authors:                                                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: crack.c,v 1.6 2001/07/28 11:35:44 zeev Exp $ */
+/* $Id: crack.c,v 1.7 2001/07/30 06:17:50 zeev Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -104,7 +104,6 @@ ZEND_MINIT_FUNCTION(crack)
 ZEND_MSHUTDOWN_FUNCTION(crack)
 {
 	UNREGISTER_INI_ENTRIES();
-
 	return SUCCESS;
 }
 
@@ -118,12 +117,9 @@ ZEND_RINIT_FUNCTION(crack)
 
 ZEND_RSHUTDOWN_FUNCTION(crack)
 {
-	TSRMLS_FETCH();
-
 	if (NULL != CRACKG(last_message)) {
 		efree(CRACKG(last_message));
 	}
-
 	return SUCCESS;
 }
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.72 2001/07/28 11:36:16 zeev Exp $ */
+/* $Id: fsock.c,v 1.73 2001/07/30 06:18:06 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -752,8 +752,6 @@ PHPAPI void php_msock_destroy(int *data)
 
 PHP_RSHUTDOWN_FUNCTION(fsock)
 {
-	TSRMLS_FETCH();
-
 	php_cleanup_sockbuf(0 TSRMLS_CC);
 	return SUCCESS;
 }

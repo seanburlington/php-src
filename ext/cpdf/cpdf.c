@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.28 2001/07/28 11:35:43 zeev Exp $ */
+/* $Id: cpdf.c,v 1.29 2001/07/30 06:17:49 zeev Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -205,7 +205,8 @@ PHP_MINFO_FUNCTION(cpdf) {
 	php_info_print_table_end();
 }
 
-PHP_MSHUTDOWN_FUNCTION(cpdf){
+PHP_MSHUTDOWN_FUNCTION(cpdf)
+{
 	return SUCCESS;
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.30 2001/07/28 11:36:19 zeev Exp $ */
+/* $Id: syslog.c,v 1.31 2001/07/30 06:18:06 zeev Exp $ */
 
 #include "php.h"
 
@@ -116,8 +116,6 @@ PHP_RINIT_FUNCTION(syslog)
 
 PHP_RSHUTDOWN_FUNCTION(syslog)
 {
-	TSRMLS_FETCH();
-	
 	if (BG(syslog_device)) {
 		efree(BG(syslog_device));
 	}

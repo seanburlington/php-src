@@ -16,7 +16,7 @@
    |          Fredrik Ohrn                                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.24 2001/07/28 11:36:25 zeev Exp $ */
+/* $Id: yp.c,v 1.25 2001/07/30 06:18:09 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -394,7 +394,8 @@ PHP_RINIT_FUNCTION(yp)
 	YP(error) = 0;
 }
 
-PHP_MINFO_FUNCTION(yp) {
+PHP_MINFO_FUNCTION(yp)
+{
 	php_info_print_table_start();
 	php_info_print_table_row(2, "YP Support", "enabled");
 	php_info_print_table_end();

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.23 2001/07/30 01:56:38 zeev Exp $ */
+/* $Id: php_sybase_db.c,v 1.24 2001/07/30 06:18:06 zeev Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1306,7 +1306,7 @@ PHP_FUNCTION(sybase_affected_rows)
 
 PHP_MINFO_FUNCTION(sybase)
 {
-	char maxp[32],maxl[32];
+	char maxp[32], maxl[32];
 	
 	if (php_sybase_module.max_persistent==-1) {
 		snprintf(maxp, 31, "%ld/unlimited", php_sybase_module.num_persistent );

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filepro.c,v 1.35 2001/07/28 11:35:50 zeev Exp $ */
+/* $Id: filepro.c,v 1.36 2001/07/30 06:17:51 zeev Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com
@@ -120,10 +120,11 @@ PHP_MSHUTDOWN_FUNCTION(filepro)
 	SET_MUTEX(fp_mutex);
 	numthreads--;
 	if (!numthreads){
-	if (!TlsFree(FPTls)){
-		FREE_MUTEX(fp_mutex);
-		return 0;
-	}}
+		if (!TlsFree(FPTls)){
+			FREE_MUTEX(fp_mutex);
+			return 0;
+		}
+	}
 	FREE_MUTEX(fp_mutex);
 #endif
 #endif

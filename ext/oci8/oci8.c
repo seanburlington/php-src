@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.140 2001/07/30 04:57:59 zeev Exp $ */
+/* $Id: oci8.c,v 1.141 2001/07/30 06:17:59 zeev Exp $ */
 
 /* TODO list:
  *
@@ -535,8 +535,6 @@ static int _server_pcleanup(oci_server *server)
 
 PHP_MSHUTDOWN_FUNCTION(oci)
 {
-	TSRMLS_FETCH();
-
 	OCI(shutdown) = 1;
 
     oci_debug("START php_mshutdown_oci");
@@ -579,7 +577,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.140 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.141 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.c,v 1.16 2001/07/28 11:36:23 zeev Exp $ */
+/* $Id: php_vpopmail.c,v 1.17 2001/07/30 06:18:08 zeev Exp $ */
 
 /* TODO: move to config.m4 when support for old versions is ready or just
  * don't support rather old vpopmail. current version must bail out if
@@ -137,12 +137,9 @@ void vclose();
 
 PHP_RSHUTDOWN_FUNCTION(vpopmail)
 {
-	TSRMLS_FETCH();
-
 	if (VPOPMAILG(vpopmail_open) != 0) {
 		vclose();
 	}
-
 	return SUCCESS;
 }
 

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.171 2001/07/30 04:58:05 zeev Exp $ */
+/* $Id: file.c,v 1.172 2001/07/30 06:18:06 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -219,8 +219,6 @@ PHP_MINIT_FUNCTION(file)
 PHP_MSHUTDOWN_FUNCTION(file)
 {
 #ifndef ZTS
-	TSRMLS_FETCH();
-
 	file_globals_dtor(&file_globals TSRMLS_CC);
 #endif
 	return SUCCESS;

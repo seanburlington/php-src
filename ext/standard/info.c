@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.144 2001/07/28 11:36:17 zeev Exp $ */
+/* $Id: info.c,v 1.145 2001/07/30 06:18:06 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -42,10 +42,11 @@ PHPAPI extern char *php_ini_opened_path;
 static int _display_module_info(zend_module_entry *module, void *arg)
 {
 	int show_info_func = *((int *) arg);
+	TSRMLS_FETCH();
 
 	if (show_info_func && module->info_func) {
 		php_printf("<h2 align=\"center\"><a name=\"module_%s\">%s</a></h2>\n", module->name, module->name);
-		module->info_func(module);
+		module->info_func(module TSRMLS_CC);
 	} else if (!show_info_func && !module->info_func) {
 		php_printf("<tr valign=\"baseline\" bgcolor=\"" PHP_CONTENTS_COLOR "\">");
 		php_printf("<td>");

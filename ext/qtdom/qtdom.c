@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: qtdom.c,v 1.7 2001/07/30 01:56:35 zeev Exp $ */
+/* $Id: qtdom.c,v 1.8 2001/07/30 06:18:02 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -91,7 +91,6 @@ PHP_MINIT_FUNCTION(qtdom)
 PHP_MSHUTDOWN_FUNCTION(qtdom)
 {
     qdom_shutdown();
-
 	return SUCCESS;
 }
 /* }}} */

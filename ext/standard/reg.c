@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.46 2001/07/30 05:36:15 zeev Exp $ */
+/* $Id: reg.c,v 1.47 2001/07/30 06:18:06 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -102,8 +102,6 @@ PHP_MINIT_FUNCTION(regex)
 
 PHP_MSHUTDOWN_FUNCTION(regex)
 {
-	TSRMLS_FETCH();
-
 	zend_hash_destroy(&REG(ht_rc));
 	return SUCCESS;
 }

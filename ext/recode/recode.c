@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.16 2001/07/30 04:58:04 zeev Exp $ */
+/* $Id: recode.c,v 1.17 2001/07/30 06:18:02 zeev Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -84,22 +84,18 @@ PHP_MINIT_FUNCTION(recode)
 
 PHP_MSHUTDOWN_FUNCTION(recode)
 {
-	TSRMLS_FETCH();
-
-	if (ReSG(outer))
+	if (ReSG(outer)) {
 		recode_delete_outer(ReSG(outer));
-
+	}
 	return SUCCESS;
 }
 
 
 PHP_MINFO_FUNCTION(recode)
 {
-	TSRMLS_FETCH();
-
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.16 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.17 $");
 	php_info_print_table_end();
 
 }

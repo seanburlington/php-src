@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.366 2001/07/30 05:36:14 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.367 2001/07/30 06:18:05 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -618,7 +618,6 @@ static PHP_INI_MH(OnUpdateSafeModeProtectedEnvVars)
 	char *protected_vars, *protected_var;
 	char *token_buf;
 	int dummy=1;
-	TSRMLS_FETCH();
 
 	protected_vars = estrndup(new_value, new_value_length);
 	zend_hash_clean(&BG(sm_protected_env_vars));
@@ -635,8 +634,6 @@ static PHP_INI_MH(OnUpdateSafeModeProtectedEnvVars)
 
 static PHP_INI_MH(OnUpdateSafeModeAllowedEnvVars)
 {
-	TSRMLS_FETCH();
-
 	if (BG(sm_allowed_env_vars)) {
 		free(BG(sm_allowed_env_vars));
 	}
@@ -799,9 +796,6 @@ PHP_MINIT_FUNCTION(basic)
 
 PHP_MSHUTDOWN_FUNCTION(basic)
 {
-	TSRMLS_FETCH();
-
-
 #ifdef ZTS
 	ts_free_id(basic_globals_id);
 #else
@@ -878,8 +872,6 @@ PHP_RINIT_FUNCTION(basic)
 
 PHP_RSHUTDOWN_FUNCTION(basic)
 {
-	TSRMLS_FETCH();
-
 	STR_FREE(BG(strtok_string));
 	BG(strtok_string) = NULL;
 #ifdef HAVE_PUTENV

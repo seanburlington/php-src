@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.87 2001/07/30 04:58:06 zeev Exp $ */
+/* $Id: xml.c,v 1.88 2001/07/30 06:18:08 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -229,12 +229,11 @@ PHP_RSHUTDOWN_FUNCTION(xml)
 
 PHP_MINFO_FUNCTION(xml)
 {
-
-        php_info_print_table_start();
-		php_info_print_table_row(2, "XML Support", "active");
-		php_info_print_table_row(2, "XML Namespace Support", "active");
-		php_info_print_table_row(2, "EXPAT Version",XML_ExpatVersion());
-        php_info_print_table_end();
+	php_info_print_table_start();
+	php_info_print_table_row(2, "XML Support", "active");
+	php_info_print_table_row(2, "XML Namespace Support", "active");
+	php_info_print_table_row(2, "EXPAT Version",XML_ExpatVersion());
+	php_info_print_table_end();
 }
 /* }}} */
 

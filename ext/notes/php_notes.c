@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_notes.c,v 1.3 2001/05/24 10:07:14 ssb Exp $ */
+/* $Id: php_notes.c,v 1.4 2001/07/30 06:17:59 zeev Exp $ */
 
 #ifdef COMPILE_DL_NOTES
 #define HAVE_NOTES 1
@@ -140,7 +140,6 @@ PHP_MINFO_FUNCTION(notes)
 {
 
 	php_info_print_table_start();
-
 	php_info_print_table_row(2, "Lotus Notes Database Support", "enabled");
 	php_info_print_table_end();
 }

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.56 2001/07/28 11:36:15 zeev Exp $ */
+/* $Id: dl.c,v 1.57 2001/07/30 06:18:05 zeev Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -203,7 +203,7 @@ void php_dl(pval *file, int type, pval *return_value)
 
 PHP_MINFO_FUNCTION(dl)
 {
-        php_info_print_table_row(2, "Dynamic Library Support", "enabled");
+	php_info_print_table_row(2, "Dynamic Library Support", "enabled");
 }
 
 #else

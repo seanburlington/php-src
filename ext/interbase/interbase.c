@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.61 2001/07/30 04:57:57 zeev Exp $ */
+/* $Id: interbase.c,v 1.62 2001/07/30 06:17:55 zeev Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -554,8 +554,6 @@ PHP_MSHUTDOWN_FUNCTION(ibase)
 
 PHP_RSHUTDOWN_FUNCTION(ibase)
 {
-    TSRMLS_FETCH();
-
 	if (IBG(timestampformat))
 	    DL_FREE(IBG(timestampformat));
 	IBG(timestampformat) = NULL;
@@ -583,7 +581,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.61 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.62 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

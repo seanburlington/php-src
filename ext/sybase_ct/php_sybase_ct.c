@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.55 2001/07/30 01:56:39 zeev Exp $ */
+/* $Id: php_sybase_ct.c,v 1.56 2001/07/30 06:18:07 zeev Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -367,8 +367,6 @@ PHP_MSHUTDOWN_FUNCTION(sybase)
 
 PHP_RSHUTDOWN_FUNCTION(sybase)
 {
-	TSRMLS_FETCH();
-
 	efree(SybCtG(appname));
 	STR_FREE(SybCtG(server_message));
 	return SUCCESS;
@@ -1652,7 +1650,6 @@ PHP_FUNCTION(sybase_affected_rows)
 PHP_MINFO_FUNCTION(sybase)
 {
 	char buf[32];
-	TSRMLS_FETCH();
 	
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Sybase_CT Support", "enabled" );

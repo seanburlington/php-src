@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.86 2001/07/30 01:56:41 zeev Exp $ */
+/* $Id: zlib.c,v 1.87 2001/07/30 06:18:10 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -204,8 +204,6 @@ PHP_RINIT_FUNCTION(zlib)
 PHP_MSHUTDOWN_FUNCTION(zlib)
 {
 #if HAVE_FOPENCOOKIE
-	TSRMLS_FETCH();
-
 	if(PG(allow_url_fopen)) {
 	    php_unregister_url_wrapper("zlib"); 
     }

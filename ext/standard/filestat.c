@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.72 2001/07/28 11:36:16 zeev Exp $ */
+/* $Id: filestat.c,v 1.73 2001/07/30 06:18:06 zeev Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -96,8 +96,6 @@ PHP_RINIT_FUNCTION(filestat)
 
 PHP_RSHUTDOWN_FUNCTION(filestat)
 {
-	TSRMLS_FETCH();
-
 	if (BG(CurrentStatFile)) {
 		efree (BG(CurrentStatFile));
 	}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.50 2001/07/30 01:56:28 zeev Exp $ */
+/* $Id: java.c,v 1.51 2001/07/30 06:17:56 zeev Exp $ */
 
 /*
  * This module implements Zend OO syntax overloading support for Java
@@ -106,10 +106,11 @@ php_java_globals java_globals;
 
 static zend_class_entry java_class_entry;
 
-static PHP_INI_MH(OnIniUpdate) {
-  if (new_value) *(char**)mh_arg1 = new_value;
-  iniUpdated=1;
-  return SUCCESS;
+static PHP_INI_MH(OnIniUpdate)
+{
+	if (new_value) *(char**)mh_arg1 = new_value;
+	iniUpdated=1;
+	return SUCCESS;
 }
 
 PHP_INI_BEGIN()

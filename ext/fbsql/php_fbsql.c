@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.38 2001/07/28 11:35:48 zeev Exp $ */
+/* $Id: php_fbsql.c,v 1.39 2001/07/30 06:17:51 zeev Exp $ */
 
 /* TODO:
  *
@@ -405,7 +405,6 @@ PHP_RSHUTDOWN_FUNCTION(fbsql)
 PHP_MINFO_FUNCTION(fbsql)
 {
 	char buf[32];
-	TSRMLS_FETCH();
 
 	php_info_print_table_start();
 	php_info_print_table_header(2, "FrontBase support", "enabled");

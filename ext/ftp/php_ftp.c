@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.36 2001/07/30 04:57:56 zeev Exp $ */
+/* $Id: php_ftp.c,v 1.37 2001/07/30 06:17:52 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -98,9 +98,9 @@ PHP_MINIT_FUNCTION(ftp)
 
 PHP_MINFO_FUNCTION(ftp)
 {
-  php_info_print_table_start();
-  php_info_print_table_row(2, "FTP support", "enabled");
-  php_info_print_table_end();
+	php_info_print_table_start();
+	php_info_print_table_row(2, "FTP support", "enabled");
+	php_info_print_table_end();
 }
 
 

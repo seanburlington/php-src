@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pfpro.c,v 1.16 2001/07/28 11:36:07 zeev Exp $ */
+/* $Id: pfpro.c,v 1.17 2001/07/30 06:18:01 zeev Exp $ */
 
 /* {{{ includes */
 
@@ -107,8 +107,6 @@ PHP_RINIT_FUNCTION(pfpro)
 
 PHP_RSHUTDOWN_FUNCTION(pfpro)
 {
-	TSRMLS_FETCH();
-
 	if (PFPROG(initialized) == 1) {
 		pfproCleanup();
 	}

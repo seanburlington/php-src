@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.199.2.8 2002/12/05 22:46:40 iliaa Exp $ */
+/* $Id: array.c,v 1.199.2.9 2002/12/06 17:36:25 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3472,6 +3472,11 @@ PHP_FUNCTION(array_key_exists)
 
 		case IS_LONG:
 			if (zend_hash_index_exists(HASH_OF(*array), Z_LVAL_PP(key))) {
+				RETURN_TRUE;
+			}
+			RETURN_FALSE;
+		case IS_NULL:
+			if (zend_hash_exists(HASH_OF(*array), "", 1)) {
 				RETURN_TRUE;
 			}
 			RETURN_FALSE;

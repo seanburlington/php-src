@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.23 2002/11/25 17:20:19 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.24 2002/12/02 18:19:17 fmk Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -25,9 +25,9 @@
 
 #include "php.h"
 #include "php_ini.h"
-#include "php_mbregex.h"
-#include "mbregex.h"
 #include "mbstring.h"
+#include "mbregex.h"
+#include "php_mbregex.h"
 
 #if HAVE_MBREGEX
 

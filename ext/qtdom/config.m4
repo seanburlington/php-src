@@ -1,6 +1,6 @@
-dnl $Id: config.m4,v 1.5 2001/05/12 11:08:55 sas Exp $
-dnl config.m4 for extension qtdom
-dnl don't forget to call PHP_EXTENSION(qtdom)
+dnl
+dnl $Id: config.m4,v 1.6 2001/11/30 18:59:54 sniper Exp $
+dnl
 
 AC_MSG_CHECKING(whether to include QDOM support)
 AC_ARG_WITH(qtdom,

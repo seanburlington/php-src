@@ -1,18 +1,6 @@
-dnl $Id: config.m4,v 1.2 2000/12/06 17:34:55 sas Exp $
-dnl config.m4 for extension ctype
-dnl don't forget to call PHP_EXTENSION(ctype)
-
-dnl Comments in this file start with the string 'dnl'.
-dnl Remove where necessary. This file will not work
-dnl without editing.
-
-dnl If your extension references something external, use with:
-
-dnl PHP_ARG_WITH(ctype, for ctype support,
-dnl Make sure that the comment is aligned:
-dnl [  --with-ctype             Include ctype support])
-
-dnl Otherwise use enable:
+dnl
+dnl $Id: config.m4,v 1.3 2001/11/30 18:59:28 sniper Exp $
+dnl
 
 PHP_ARG_ENABLE(ctype, whether to enable ctype support,
 [  --enable-ctype          Enable ctype support])

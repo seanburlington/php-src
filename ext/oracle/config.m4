@@ -1,4 +1,6 @@
-dnl $Id: config.m4,v 1.26 2001/09/07 00:24:05 sniper Exp $
+dnl
+dnl $Id: config.m4,v 1.27 2001/11/30 18:59:49 sniper Exp $
+dnl
 
 AC_DEFUN(AC_ORACLE_VERSION,[
   AC_MSG_CHECKING([Oracle version])

@@ -1,6 +1,6 @@
-dnl $Id: config.m4,v 1.15 2001/06/28 15:16:28 sniper Exp $
-dnl config.m4 for extension dba
-dnl don't forget to call PHP_EXTENSION(dba)
+dnl
+dnl $Id: config.m4,v 1.16 2001/11/30 18:59:31 sniper Exp $
+dnl
 
 AC_DEFUN(PHP_TEMP_LDFLAGS,[
   old_LDFLAGS=$LDFLAGS

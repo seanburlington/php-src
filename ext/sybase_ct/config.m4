@@ -1,4 +1,6 @@
-dnl $Id: config.m4,v 1.8 2001/10/23 10:31:56 sniper Exp $
+dnl
+dnl $Id: config.m4,v 1.9 2001/11/30 18:59:59 sniper Exp $
+dnl
 
 PHP_ARG_WITH(sybase-ct, for Sybase-CT support,
 [  --with-sybase-ct[=DIR]  Include Sybase-CT support.  DIR is the Sybase home

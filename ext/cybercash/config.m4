@@ -1,5 +1,6 @@
-dnl config.m4 for extension CyberCash
-dnl don't forget to call PHP_EXTENSION(cybercash)
+dnl
+dnl $Id: config.m4,v 1.9 2001/11/30 18:59:29 sniper Exp $
+dnl
 
 AC_MSG_CHECKING(for CyberCash support)
 AC_ARG_WITH(cybercash,

@@ -1,6 +1,8 @@
-dnl $Id: config.m4,v 1.5 2001/11/13 11:38:22 sniper Exp $
+dnl
+dnl $Id: config.m4,v 1.6 2001/11/30 18:59:28 sniper Exp $
+dnl
 
-PHP_ARG_WITH(crack, whether to include crack support,
+PHP_ARG_WITH(crack, for CRACKlib support,
 [  --with-crack[=DIR]      Include crack support.])
 
 if test "$PHP_CRACK" != "no"; then

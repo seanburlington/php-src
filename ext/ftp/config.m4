@@ -1,6 +1,6 @@
-dnl $Id: config.m4,v 1.5 2000/05/02 02:02:18 sas Exp $
-dnl config.m4 for extension ftp
-dnl don't forget to call PHP_EXTENSION(ftp)
+dnl
+dnl $Id: config.m4,v 1.6 2001/11/30 18:59:34 sniper Exp $
+dnl
 
 PHP_ARG_ENABLE(ftp,whether to enable FTP support,
 [  --enable-ftp            Enable FTP support])

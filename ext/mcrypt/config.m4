@@ -1,10 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.21 2001/09/22 17:55:16 sniper Exp $
+dnl $Id: config.m4,v 1.22 2001/11/30 18:59:43 sniper Exp $
 dnl 
 
 PHP_ARG_WITH(mcrypt, for mcrypt support,
-[  --with-mcrypt[=DIR]     Include mcrypt support. DIR is the mcrypt install 
-                          directory.])
+[  --with-mcrypt[=DIR]     Include mcrypt support.])
 
 if test "$PHP_MCRYPT" != "no"; then
   for i in /usr/local /usr $PHP_MCRYPT; do

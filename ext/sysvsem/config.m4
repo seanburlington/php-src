@@ -1,4 +1,6 @@
-dnl $Id: config.m4,v 1.3 2000/05/02 02:00:36 sas Exp $
+dnl
+dnl $Id: config.m4,v 1.4 2001/11/30 19:00:00 sniper Exp $
+dnl
 
 PHP_ARG_ENABLE(sysvsem,whether to enable System V semaphore support,
 [  --enable-sysvsem        Enable System V semaphore support.])

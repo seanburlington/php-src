@@ -1,5 +1,6 @@
-dnl $Id: config.m4,v 1.29 2001/09/26 19:02:33 derick Exp $
-dnl config.m4 for extension domxml
+dnl
+dnl $Id: config.m4,v 1.30 2001/11/30 18:59:32 sniper Exp $
+dnl
 
 AC_DEFUN(PHP_DOM_CHECK_VERSION,[
   old_CPPFLAGS=$CPPFLAGS
@@ -20,8 +21,7 @@ AC_DEFUN(PHP_DOM_CHECK_VERSION,[
 
 PHP_ARG_WITH(dom, for DOM support,
 [  --with-dom[=DIR]        Include DOM support (requires libxml >= 2.4.2).
-                          DIR is the libxml install directory,
-                          defaults to /usr.])
+                          DIR is the libxml install directory.])
 
 if test "$PHP_DOM" != "no"; then
 

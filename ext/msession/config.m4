@@ -1,3 +1,6 @@
+dnl
+dnl $Id: config.m4,v 1.7 2001/11/30 18:59:44 sniper Exp $
+dnl
 
 PHP_ARG_WITH(msession, for msession support,
 [  --with-msession[=DIR]   Include msession support])

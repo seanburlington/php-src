@@ -1,4 +1,6 @@
-dnl $Id: config.m4,v 1.8 2001/05/02 18:38:14 andi Exp $
+dnl
+dnl $Id: config.m4,v 1.9 2001/11/30 18:59:59 sniper Exp $
+dnl
 
 PHP_ARG_WITH(sybase,for Sybase support,
 [  --with-sybase[=DIR]     Include Sybase-DB support.  DIR is the Sybase home

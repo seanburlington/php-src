@@ -1,8 +1,9 @@
-dnl $Id: config.m4,v 1.7 2001/11/18 23:08:47 sniper Exp $
-dnl config.m4 for extension ncurses
+dnl
+dnl $Id: config.m4,v 1.8 2001/11/30 18:59:46 sniper Exp $
+dnl
 
 PHP_ARG_WITH(ncurses, for ncurses support,
-[  --with-ncurses[=DIR]       Include ncurses support])
+[  --with-ncurses[=DIR]    Include ncurses support.])
 
 if test "$PHP_NCURSES" != "no"; then
    # --with-ncurses -> check with-path

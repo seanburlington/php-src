@@ -1,8 +1,10 @@
-dnl $Id: config.m4,v 1.3 2001/09/19 09:17:54 sas Exp $
-dnl config.m4 for extension pcntl
+dnl
+dnl $Id: config.m4,v 1.4 2001/11/30 18:59:50 sniper Exp $
+dnl
 
 dnl Process Control (pcntl) extentsion --EXPERIMENTAL--
 dnl TODO - Add platform checks 
+
 PHP_ARG_ENABLE(pcntl, whether to enable pcntl support,
 [  --enable-pcntl          Enable experimental pcntl support (CGI ONLY!)])
 

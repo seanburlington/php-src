@@ -1,10 +1,9 @@
-dnl $Id: config.m4,v 1.6 2001/08/19 06:37:05 sniper Exp $
-dnl config.m4 for extension fribidi
+dnl
+dnl $Id: config.m4,v 1.7 2001/11/30 18:59:34 sniper Exp $
+dnl
 
-PHP_ARG_WITH(fribidi, whether to add fribidi support,
-[  --with-fribidi[=DIR]    Include fribidi support (requires FriBidi >=0.1.12).
-                          DIR is the fribidi installation directory - 
-                          default /usr/local/])
+PHP_ARG_WITH(fribidi, for FriBidi support,
+[  --with-fribidi[=DIR]    Include fribidi support (requires FriBidi >=0.1.12).])
 
 if test "$PHP_FRIBIDI" != "no"; then
 

@@ -1,4 +1,6 @@
-dnl $Id: config.m4,v 1.6 2001/03/27 20:34:29 sniper Exp $
+dnl
+dnl $Id: config.m4,v 1.7 2001/11/30 18:59:41 sniper Exp $
+dnl
 
 PHP_ARG_WITH(interbase,for InterBase support,
 [  --with-interbase[=DIR]  Include InterBase support.  DIR is the InterBase base

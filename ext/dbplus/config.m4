@@ -1,6 +1,6 @@
-dnl $Id: config.m4,v 1.5 2001/09/21 13:12:58 sas Exp $
-dnl config.m4 for extension dbplus
-
+dnl
+dnl $Id: config.m4,v 1.6 2001/11/30 18:59:32 sniper Exp $
+dnl
 
 PHP_ARG_WITH(dbplus, for dbplus support,
 [  --with-dbplus           Include dbplus support])

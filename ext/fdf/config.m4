@@ -1,7 +1,9 @@
-dnl $Id: config.m4,v 1.15 2001/09/05 13:18:05 sniper Exp $
+dnl
+dnl $Id: config.m4,v 1.16 2001/11/30 18:59:33 sniper Exp $
+dnl
 
-PHP_ARG_WITH(fdftk, for fdftk support,
-[  --with-fdftk[=DIR]      Include fdftk support])
+PHP_ARG_WITH(fdftk, for FDF support,
+[  --with-fdftk[=DIR]      Include FDF support.])
 
 if test "$PHP_FDFTK" != "no"; then
 
@@ -12,7 +14,7 @@ if test "$PHP_FDFTK" != "no"; then
   done
 
   if test -z "$FDFTK_DIR"; then
-    AC_MSG_ERROR(FdfTk.h or fdftk.h not found. Please reinstall the fdftk distribution)
+    AC_MSG_ERROR(FdfTk.h or fdftk.h not found. Please reinstall the fdftk distribution.)
   fi
 
   PHP_ADD_INCLUDE($FDFTK_DIR/include)

@@ -1,5 +1,6 @@
-# $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.32 2001/09/07 00:24:06 sniper Exp $
+dnl
+dnl $Id: config.m4,v 1.33 2001/11/30 19:00:06 sniper Exp $
+dnl
 
 dnl Fallback for --with-xml[=DIR]
 AC_ARG_WITH(xml,[],enable_xml=$withval)
@@ -12,7 +13,7 @@ else
   order=12
 fi
 
-PHP_ARG_ENABLE(xml,for XML support,
+PHP_ARG_ENABLE(xml,whether to enable XML support,
 [  --disable-xml           Disable XML support using bundled expat lib], yes)
 
 PHP_ARG_WITH(expat-dir, external libexpat install dir,

@@ -1,4 +1,6 @@
-dnl $Id: config.m4,v 1.5 2001/04/02 09:06:33 sniper Exp $
+dnl
+dnl $Id: config.m4,v 1.6 2001/11/30 18:59:25 sniper Exp $
+dnl
 
 AC_MSG_CHECKING(for ASPELL support)
 AC_ARG_WITH(aspell,

@@ -1,6 +1,8 @@
-dnl $Id: config.m4,v 1.5 2001/05/17 00:32:45 vlad Exp $
+dnl
+dnl $Id: config.m4,v 1.6 2001/11/30 18:59:53 sniper Exp $
+dnl
 
-PHP_ARG_WITH(pspell,whether to include pspell support,
+PHP_ARG_WITH(pspell,for PSPELL support,
 [  --with-pspell[=DIR]     Include PSPELL support.])
 
 if test "$PHP_PSPELL" != "no"; then

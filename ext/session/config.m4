@@ -1,10 +1,12 @@
-dnl $Id: config.m4,v 1.15 2001/10/27 06:26:01 sniper Exp $
+dnl
+dnl $Id: config.m4,v 1.16 2001/11/30 18:59:56 sniper Exp $
+dnl
+
+PHP_ARG_ENABLE(session, whether to enable PHP sessions,
+[  --disable-session       Disable session support], yes)
 
 PHP_ARG_WITH(mm,for mm support,
 [  --with-mm[=DIR]         Include mm support for session storage])
-
-PHP_ARG_ENABLE(session, whether to enable session support,
-[  --disable-session       Disable session support], yes)
 
 if test "$PHP_MM" != "no"; then
   for i in /usr/local /usr $PHP_MM; do

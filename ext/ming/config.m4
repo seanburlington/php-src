@@ -1,8 +1,9 @@
-dnl $Id: config.m4,v 1.8 2001/09/29 08:15:37 hirokawa Exp $
-dnl config.m4 for extension libming
+dnl
+dnl $Id: config.m4,v 1.9 2001/11/30 18:59:44 sniper Exp $
+dnl
 
-PHP_ARG_WITH(ming, whether to include ming support,
-[  --with-ming[=DIR]       Include ming support])
+PHP_ARG_WITH(ming, for MING support,
+[  --with-ming[=DIR]       Include MING support])
 
 if test "$PHP_MING" != "no"; then
   for i in $PHP_MING /usr/local /usr; do

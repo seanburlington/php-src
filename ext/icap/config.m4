@@ -1,4 +1,6 @@
-dnl $Id: config.m4,v 1.9 2001/03/27 20:34:27 sniper Exp $
+dnl
+dnl $Id: config.m4,v 1.10 2001/11/30 18:59:38 sniper Exp $
+dnl
 
 PHP_ARG_WITH(icap,for ICAP support,
 [  --with-icap[=DIR]       Include ICAP support.])

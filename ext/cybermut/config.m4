@@ -1,10 +1,9 @@
-dnl $Id: config.m4,v 1.2 2001/03/27 20:34:24 sniper Exp $
-dnl config.m4 for extension cybermut
-
+dnl
+dnl $Id: config.m4,v 1.3 2001/11/30 18:59:29 sniper Exp $
+dnl
 
 PHP_ARG_WITH(cybermut, for cybermut support,
 [  --with-cybermut[=DIR]   Include CyberMut (french Credit Mutuel telepaiement)])
-
 
 if test "$PHP_CYBERMUT" != "no"; then
   for i in /usr/local /usr $PHP_CYBERMUT; do

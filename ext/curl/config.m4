@@ -1,5 +1,6 @@
-dnl $Id: config.m4,v 1.11 2001/09/25 07:07:22 sterling Exp $
-dnl config.m4 for extension CURL
+dnl
+dnl $Id: config.m4,v 1.12 2001/11/30 18:59:29 sniper Exp $
+dnl
 
 PHP_ARG_WITH(curl, for CURL support,
 [  --with-curl[=DIR]       Include CURL support])

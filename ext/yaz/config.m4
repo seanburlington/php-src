@@ -1,8 +1,10 @@
-dnl $Id: config.m4,v 1.5 2001/11/08 21:37:48 dickmeiss Exp $
+dnl
+dnl $Id: config.m4,v 1.6 2001/11/30 19:00:10 sniper Exp $
+dnl
 
 PHP_ARG_WITH(yaz,for YAZ support,
-[  --with-yaz[=DIR]        Include YAZ support (ANSI/NISO Z39.50). DIR is
-                          the YAZ bin install directory])
+[  --with-yaz[=DIR]        Include YAZ support (ANSI/NISO Z39.50). 
+                          DIR is the YAZ bin install directory.])
 
 
 if test "$PHP_YAZ" != "no"; then

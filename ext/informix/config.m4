@@ -1,4 +1,6 @@
-dnl $Id: config.m4,v 1.23 2001/08/03 05:17:18 sniper Exp $
+dnl
+dnl $Id: config.m4,v 1.24 2001/11/30 18:59:40 sniper Exp $
+dnl
 
 PHP_ARG_WITH(informix,for Informix support,
 [  --with-informix[=DIR]   Include Informix support.  DIR is the Informix base

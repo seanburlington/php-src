@@ -1,5 +1,6 @@
-dnl $Id: config.m4,v 1.10 2001/03/27 20:34:43 sniper Exp $
-dnl config.m4 for extension libswf
+dnl
+dnl $Id: config.m4,v 1.11 2001/11/30 18:59:58 sniper Exp $
+dnl
 
 PHP_ARG_WITH(swf, for libswf support,
 [  --with-swf[=DIR]        Include swf support])

@@ -1,5 +1,6 @@
-dnl $Id: config.m4,v 1.4 2001/09/10 07:56:22 ssb Exp $
-dnl config.m4 for extension Xmlrpc
+dnl
+dnl $Id: config.m4,v 1.5 2001/11/30 19:00:09 sniper Exp $
+dnl
 
 sinclude(ext/xmlrpc/libxmlrpc/acinclude.m4)
 sinclude(ext/xmlrpc/libxmlrpc/xmlrpc.m4)
@@ -7,10 +8,10 @@ sinclude(libxmlrpc/acinclude.m4)
 sinclude(libxmlrpc/xmlrpc.m4)
 
 PHP_ARG_WITH(xmlrpc, for XMLRPC-EPI support,
-[  --with-xmlrpc[=DIR]     Include XMLRPC-EPI support])
+[  --with-xmlrpc[=DIR]     Include XMLRPC-EPI support.])
 
 PHP_ARG_WITH(expat-dir, libexpat dir for XMLRPC-EPI,
-[  --with-expat-dir=DIR    XMLRPC-EPI: libexpat dir for XMLRPC-EPI])
+[  --with-expat-dir=DIR    XMLRPC-EPI: libexpat dir for XMLRPC-EPI.])
 
 if test "$PHP_XMLRPC" != "no"; then
 

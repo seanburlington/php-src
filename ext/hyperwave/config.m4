@@ -1,4 +1,6 @@
-dnl $Id: config.m4,v 1.2 1999/12/30 04:07:28 sas Exp $
+dnl
+dnl $Id: config.m4,v 1.3 2001/11/30 18:59:37 sniper Exp $
+dnl
 
 AC_MSG_CHECKING(for Hyperwave support)
 AC_ARG_WITH(hyperwave,

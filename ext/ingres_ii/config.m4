@@ -1,5 +1,6 @@
-dnl $Id: config.m4,v 1.6 2001/05/27 23:55:43 sniper Exp $
-dnl config.m4 for extension ingres_ii
+dnl
+dnl $Id: config.m4,v 1.7 2001/11/30 18:59:41 sniper Exp $
+dnl
 
 PHP_ARG_WITH(ingres, for Ingres II support,
 [  --with-ingres[=DIR]     Include Ingres II support. DIR is the Ingres

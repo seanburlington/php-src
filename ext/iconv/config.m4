@@ -1,5 +1,6 @@
-dnl $Id: config.m4,v 1.6 2001/09/07 00:24:04 sniper Exp $
-dnl config.m4 for extension iconv
+dnl
+dnl $Id: config.m4,v 1.7 2001/11/30 18:59:38 sniper Exp $
+dnl
 
 PHP_ARG_WITH(iconv, for iconv support,
 [  --with-iconv[=DIR]      Include iconv support])

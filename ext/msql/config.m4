@@ -1,4 +1,6 @@
-dnl $Id: config.m4,v 1.10 2001/05/12 11:08:51 sas Exp $
+dnl
+dnl $Id: config.m4,v 1.11 2001/11/30 18:59:44 sniper Exp $
+dnl
 
 dnl
 dnl Test mSQL version by checking if msql.h has "IDX_TYPE" defined.

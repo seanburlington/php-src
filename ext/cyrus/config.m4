@@ -1,4 +1,6 @@
-dnl config.m4 for extension cyrus
+dnl
+dnl $Id: config.m4,v 1.3 2001/11/30 18:59:29 sniper Exp $
+dnl
 
 PHP_ARG_WITH(cyrus, for cyrus imap support,
 [  --with-cyrus            Include cyrus imap support])

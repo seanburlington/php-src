@@ -1,10 +1,9 @@
-dnl $Id: config.m4,v 1.10 2001/03/27 20:34:31 sniper Exp $
-dnl config.m4 for extension mhash
-dnl don't forget to call PHP_EXTENSION(mhash)
+dnl
+dnl $Id: config.m4,v 1.11 2001/11/30 18:59:43 sniper Exp $
+dnl
 
 PHP_ARG_WITH(mhash, for mhash support,
-[  --with-mhash[=DIR]      Include mhash support.  DIR is the mhash
-                          install directory.])
+[  --with-mhash[=DIR]      Include mhash support.])
 
 if test "$PHP_MHASH" != "no"; then
   for i in /usr/local /usr /opt/mhash $PHP_MHASH; do

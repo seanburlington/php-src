@@ -1,5 +1,6 @@
-dnl $Id: config.m4,v 1.8 2001/09/05 13:18:08 sniper Exp $
-dnl config.m4 for extension vpopmail
+dnl
+dnl $Id: config.m4,v 1.9 2001/11/30 19:00:01 sniper Exp $
+dnl
 
 PHP_ARG_WITH(vpopmail, for vpopmail support,
 [  --with-vpopmail[=DIR]   Include vpopmail support.])

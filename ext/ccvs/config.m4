@@ -1,5 +1,6 @@
-dnl $Id: config.m4,v 1.9 2001/05/22 21:33:17 sniper Exp $
-dnl config.m4 for PHP4 CCVS Extension
+dnl
+dnl $Id: config.m4,v 1.10 2001/11/30 18:59:27 sniper Exp $
+dnl
 
 PHP_ARG_WITH(ccvs, for CCVS support,
 [  --with-ccvs[=DIR]       Include CCVS support])

@@ -1,10 +1,9 @@
-dnl $Id: config.m4,v 1.9 2001/11/09 16:27:09 jon Exp $
-dnl config.m4 for extension gettext
-dnl don't forget to call PHP_EXTENSION(gettext)
+dnl
+dnl $Id: config.m4,v 1.10 2001/11/30 18:59:36 sniper Exp $
+dnl
 
-PHP_ARG_WITH(gettext,whether to include GNU gettext support,
-[  --with-gettext[=DIR]    Include GNU gettext support.  DIR is the gettext
-                          install directory, defaults to /usr/local])
+PHP_ARG_WITH(gettext,for GNU gettext support,
+[  --with-gettext[=DIR]    Include GNU gettext support.])
 
 if test "$PHP_GETTEXT" != "no"; then
   for i in /usr /usr/local $PHP_GETTEXT; do

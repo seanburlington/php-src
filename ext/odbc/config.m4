@@ -1,4 +1,6 @@
-dnl $Id: config.m4,v 1.46 2001/07/06 14:30:34 kalowsky Exp $
+dnl
+dnl $Id: config.m4,v 1.47 2001/11/30 18:59:47 sniper Exp $
+dnl
 
 dnl
 dnl Figure out which library file to link with for the Solid support.

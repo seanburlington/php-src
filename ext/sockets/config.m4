@@ -1,5 +1,6 @@
-dnl $Id: config.m4,v 1.6 2001/06/12 04:42:01 sniper Exp $
-dnl config.m4 for extension sockets
+dnl
+dnl $Id: config.m4,v 1.7 2001/11/30 18:59:58 sniper Exp $
+dnl
 
 PHP_ARG_ENABLE(sockets, whether to enable sockets support,
 [  --enable-sockets        Enable sockets support])

@@ -1,13 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.22 2001/09/07 00:24:05 sniper Exp $
+dnl $Id: config.m4,v 1.23 2001/11/30 18:59:57 sniper Exp $
 dnl
 
 PHP_ARG_WITH(snmp,for SNMP support,
-[  --with-snmp[=DIR]       Include SNMP support.  DIR is the SNMP base
-                          install directory, defaults to searching through
-                          a number of common locations for the snmp install.
-                          Set DIR to "shared" to build as a dl, or "shared,DIR"
-                          to build as a dl and still specify DIR.])
+[  --with-snmp[=DIR]       Include SNMP support.])
 
   if test "$PHP_SNMP" != "no"; then
 

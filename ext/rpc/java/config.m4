@@ -1,11 +1,11 @@
-# $Id: config.m4,v 1.27 2001/09/10 23:34:41 sniper Exp $
-# config.m4 for extension java
+dnl
+dnl $Id: config.m4,v 1.28 2001/11/30 18:59:41 sniper Exp $
+dnl
 
 AC_MSG_CHECKING(for Java support)
 AC_ARG_WITH(java,
-[  --with-java[=DIR]       Include Java support. DIR is the base install
-                          directory for the JDK.  This extension can only
-                          be built as a shared dl.],
+[  --with-java[=DIR]       Include Java support. DIR is the JDK base install directory. 
+                          This extension is always built as shared.],
 [
   if test "$withval" != "no"; then
     JAVA_SHARED=libphp_java.la

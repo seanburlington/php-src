@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ftok.c,v 1.2 2001/12/11 15:30:31 sebastian Exp $ */
+/* $Id: ftok.c,v 1.3 2001/12/16 10:18:45 hholzgra Exp $ */
 
 #include "php.h"
 
@@ -25,8 +25,8 @@
 #include <sys/types.h>                                                                                                        
 #include <sys/ipc.h>
 
-/* {{{ proto int ftok(string pathname, char proj)
-   convert a pathname and a project identifier to a System V IPC key */
+/* {{{ proto int ftok(string pathname, string proj)
+   Convert a pathname and a project identifier to a System V IPC key */
 PHP_FUNCTION(ftok)
 {
     pval **pathname, **proj;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.7 2004/05/20 15:51:25 iliaa Exp $ */
+/* $Id: mysql_statement.c,v 1.8 2004/05/20 16:13:13 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -63,11 +63,11 @@ static int pdo_mysql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 		}
 	}
 	if (mysql_real_query(H->server, stmt->active_query_string, stmt->active_query_stringlen) != 0) {
-		pdo_mysql_error(dbh);
+		pdo_mysql_error_stmt(stmt);
 		return 0;
 	}
 	if ((S->result = mysql_use_result(H->server)) == NULL) {
-		pdo_mysql_error(dbh);
+		pdo_mysql_error_stmt(stmt);
 		return 0;
 	}
 	if (!stmt->executed) { 
@@ -91,7 +91,7 @@ static int pdo_mysql_stmt_fetch(pdo_stmt_t *stmt TSRMLS_DC)
 	}
 	if((S->current_data = mysql_fetch_row(S->result)) == NULL) {
 		/* there seems to be no way of distinguishing 'no data' from 'error' */
-		pdo_mysql_error(stmt->dbh);
+		pdo_mysql_error_stmt(stmt);
 		return 0;
 	} 
 	S->current_lengths = mysql_fetch_lengths(S->result);
@@ -138,7 +138,7 @@ static int pdo_mysql_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr, unsig
 	}
 	if(colno >= mysql_num_fields(S->result)) {
 		/* error invalid column */
-		pdo_mysql_error(stmt->dbh);
+		pdo_mysql_error_stmt(stmt);
 		return 0;
 	}
 	*ptr = S->current_data[colno];

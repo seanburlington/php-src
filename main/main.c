@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.604.2.7 2005/01/09 16:30:15 sniper Exp $ */
+/* $Id: main.c,v 1.604.2.8 2005/03/08 21:45:38 sniper Exp $ */
 
 /* {{{ includes
  */
@@ -549,9 +549,9 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 }
 /* }}} */
 
-/* {{{ php_error_docref */
+/* {{{ php_error_docref0 */
 /* See: CODING_STANDARDS for details. */
-PHPAPI void php_error_docref(const char *docref TSRMLS_DC, int type, const char *format, ...)
+PHPAPI void php_error_docref0(const char *docref TSRMLS_DC, int type, const char *format, ...)
 {
 	va_list args;
 	

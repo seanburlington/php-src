@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.96.2.9 2003/09/15 00:08:05 iliaa Exp $ */
+/* $Id: datetime.c,v 1.96.2.10 2004/02/12 01:29:13 sniper Exp $ */
 
 
 #include "php.h"
@@ -323,6 +323,10 @@ php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 			tname[0] = tzname[0];
 		} else {
 			tname[0] = "???";
+		}
+
+		if (tzname[1] != NULL) {
+			tname[1] = tzname[1];
 		}
 #endif
 	}

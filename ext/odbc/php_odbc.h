@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.h,v 1.16 2000/02/23 19:16:34 sas Exp $ */
+/* $Id: php_odbc.h,v 1.17 2000/03/09 22:19:57 codelion Exp $ */
 
 #ifndef _PHP_ODBC_H
 #define _PHP_ODBC_H
@@ -218,6 +218,7 @@ typedef struct odbc_connection {
 /*	int open;*/
 	int id;
 	int persistent;
+	struct odbc_result *one_result; // to enable _close_odbc_conn to call _free_odbc_result
 } odbc_connection;
 
 typedef struct odbc_result_value {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.h,v 1.112 2005/03/14 19:25:37 rasmus Exp $ */
+/* $Id: SAPI.h,v 1.113 2005/04/04 15:06:28 hirokawa Exp $ */
 
 #ifndef SAPI_H
 #define SAPI_H
@@ -98,6 +98,7 @@ typedef struct {
 	/* for HTTP authentication */
 	char *auth_user;
 	char *auth_password;
+	char *auth_digest;
 
 	/* this is necessary for the CGI SAPI module */
 	char *argv0;

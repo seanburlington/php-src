@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.13 2005/03/14 19:25:38 rasmus Exp $ */
+/* $Id: mod_php5.c,v 1.14 2005/04/04 15:06:36 hirokawa Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -489,24 +489,27 @@ static void init_request_info(TSRMLS_D)
 	if (r->headers_in) {
 		authorization = table_get(r->headers_in, "Authorization");
 	}
+
+	SG(request_info).auth_user = NULL;
+	SG(request_info).auth_password = NULL;
+
 	if (authorization
-		&& (!PG(safe_mode) || (PG(safe_mode) && !auth_type(r)))
-		&& !strcasecmp(getword(r->pool, &authorization, ' '), "Basic")) {
-		tmp = uudecode(r->pool, authorization);
-		SG(request_info).auth_user = NULL;
-		tmp_user = getword_nulls_nc(r->pool, &tmp, ':');
-		if (tmp_user) {
-			r->connection->user = pstrdup(r->connection->pool, tmp_user);
-			r->connection->ap_auth_type = "Basic";
-			SG(request_info).auth_user = estrdup(tmp_user);
+		&& (!PG(safe_mode) || (PG(safe_mode) && !auth_type(r)))) {
+		if (!strcasecmp(getword(r->pool, &authorization, ' '), "Basic")) {
+			tmp = uudecode(r->pool, authorization);
+			tmp_user = getword_nulls_nc(r->pool, &tmp, ':');
+			if (tmp_user) {
+				r->connection->user = pstrdup(r->connection->pool, tmp_user);
+				r->connection->ap_auth_type = "Basic";
+				SG(request_info).auth_user = estrdup(tmp_user);
+			}
+			if (tmp) {
+				SG(request_info).auth_password = estrdup(tmp);
+			}
+		} else if  (!strcasecmp(getword(r->pool, &authorization, ' '), "Digest")) {
+            r->connection->ap_auth_type = "Digest";
+            SG(request_info).auth_digest = estrdup(authorization);
 		}
-		SG(request_info).auth_password = NULL;
-		if (tmp) {
-			SG(request_info).auth_password = estrdup(tmp);
-		}
-	} else {
-		SG(request_info).auth_user = NULL;
-		SG(request_info).auth_password = NULL;
 	}
 }
 /* }}} */

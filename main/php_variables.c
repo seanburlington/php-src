@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.87 2005/03/28 18:46:57 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.88 2005/04/04 15:06:33 hirokawa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -514,6 +514,9 @@ static inline void php_register_server_variables(TSRMLS_D)
 	}
 	if (SG(request_info).auth_password) {
 		php_register_variable("PHP_AUTH_PW", SG(request_info).auth_password, array_ptr TSRMLS_CC);
+	}
+	if (SG(request_info).auth_digest) {
+		php_register_variable("PHP_AUTH_DIGEST", SG(request_info).auth_digest, array_ptr TSRMLS_CC);
 	}
 	/* store request init time */
 	{

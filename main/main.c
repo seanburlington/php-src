@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.506 2002/10/24 16:56:59 derick Exp $ */
+/* $Id: main.c,v 1.507 2002/10/28 02:46:09 sterling Exp $ */
 
 /* {{{ includes
  */
@@ -1360,7 +1360,6 @@ static int php_hash_environment(TSRMLS_D)
 				case 'p':
 				case 'P':
 					zend_hash_merge(Z_ARRVAL_P(form_variables), Z_ARRVAL_P(PG(http_globals)[TRACK_VARS_POST]), (void (*)(void *pData)) zval_add_ref, NULL, sizeof(zval *), 1);
-					zend_hash_merge(Z_ARRVAL_P(form_variables), Z_ARRVAL_P(PG(http_globals)[TRACK_VARS_FILES]), (void (*)(void *pData)) zval_add_ref, NULL, sizeof(zval *), 1);
 					break;
 				case 'c':
 				case 'C':

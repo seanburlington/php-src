@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_bcmath.h,v 1.12 2002/11/22 09:25:28 sander Exp $ */
+/* $Id: php_bcmath.h,v 1.13 2002/12/10 19:04:27 pollita Exp $ */
 
 #ifndef PHP_BCMATH_H
 #define PHP_BCMATH_H
@@ -60,6 +60,7 @@ PHP_FUNCTION(bcpow);
 PHP_FUNCTION(bcsqrt);
 PHP_FUNCTION(bccomp);
 PHP_FUNCTION(bcscale);
+PHP_FUNCTION(bc_powmod);
 
 #else
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.49 2001/07/29 08:40:41 andi Exp $ */
+/* $Id: browscap.c,v 1.50 2001/08/03 07:15:11 zeev Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -236,7 +236,7 @@ PHP_FUNCTION(get_browser)
 	if (zend_hash_find(&browser_hash, (*agent_name)->value.str.val,(*agent_name)->value.str.len+1, (void **) &agent)==FAILURE) {
 		lookup_browser_name = (*agent_name)->value.str.val;
 		found_browser_entry = NULL;
-		zend_hash_apply_with_arguments(&browser_hash,(int (*)(void *, int, va_list, zend_hash_key *)) browser_reg_compare,2,lookup_browser_name,&found_browser_entry);
+		zend_hash_apply_with_arguments(&browser_hash, (apply_func_args_t) browser_reg_compare, 2, lookup_browser_name, &found_browser_entry);
 		
 		if (found_browser_entry) {
 			agent = &found_browser_entry;

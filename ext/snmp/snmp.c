@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.10 1999/10/10 12:41:55 sas Exp $ */
+/* $Id: snmp.c,v 1.11 1999/11/08 10:33:06 sas Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)
@@ -72,9 +72,6 @@ void _php3_snmp(INTERNAL_FUNCTION_PARAMETERS, int st);
 
 /* constant - can be shared among threads */
 static oid objid_mib[] = {1, 3, 6, 1, 2, 1};
-
-/* Add missing prototype */
-void sprint_variable(char *, oid *, int, struct variable_list *);
 
 function_entry snmp_functions[] = {
 	PHP_FE(snmpget, NULL)

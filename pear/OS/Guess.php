@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Guess.php,v 1.5 2002/12/31 16:18:25 sebastian Exp $
+// $Id: Guess.php,v 1.6 2003/01/10 01:12:23 ssb Exp $
 
 // {{{ uname examples
 
@@ -70,6 +70,10 @@
 //
 
 // }}}
+
+/* TODO:
+ * - define endianness, to allow matchSignature("bigend") etc.
+ */
 
 class OS_Guess
 {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.20 2000/09/12 17:22:37 rasmus Exp $ */
+/* $Id: html.c,v 1.21 2000/09/12 17:24:46 rasmus Exp $ */
 
 #include "php.h"
 #include "reg.h"
@@ -128,7 +128,7 @@ void register_html_constants(INIT_FUNC_ARGS)
 	REGISTER_LONG_CONSTANT("ENT_NOQUOTES", ENT_NOQUOTES, CONST_PERSISTENT|CONST_CS);
 }
 
-/* {{{ proto string htmlspecialchars(string string)
+/* {{{ proto string htmlspecialchars(string string [, int quote_style])
    Convert special characters to HTML entities */
 PHP_FUNCTION(htmlspecialchars)
 {
@@ -136,7 +136,7 @@ PHP_FUNCTION(htmlspecialchars)
 }
 /* }}} */
 
-/* {{{ proto string htmlentities(string string)
+/* {{{ proto string htmlentities(string string [, int quote_style])
    Convert all applicable characters to HTML entities */
 PHP_FUNCTION(htmlentities)
 {

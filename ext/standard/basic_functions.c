@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.449 2002/03/16 01:28:38 wez Exp $ */
+/* $Id: basic_functions.c,v 1.450 2002/03/16 12:45:42 mfischer Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1515,8 +1515,7 @@ PHPAPI int _php_error_log(int opt_err, char *message, char *opt, char *headers T
 		case 1:		/*send an email */
 			{
 #if HAVE_SENDMAIL
-				if (!php_mail
-					(opt, "PHP error_log message", message, headers, NULL)) {
+				if (!php_mail(opt, "PHP error_log message", message, headers, NULL TSRMLS_CC)) {
 					return FAILURE;
 				}
 #else

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_mail.h,v 1.12 2002/02/28 08:26:47 sebastian Exp $ */
+/* $Id: php_mail.h,v 1.13 2002/03/16 12:45:43 mfischer Exp $ */
 
 #ifndef PHP_MAIL_H
 #define PHP_MAIL_H
@@ -26,7 +26,7 @@
 PHP_FUNCTION(mail);
 PHP_FUNCTION(ezmlm_hash);
 PHP_MINFO_FUNCTION(mail);
-PHPAPI extern int php_mail(char *to, char *subject, char *message, char *headers, char *extra_cmd);
+PHPAPI extern int php_mail(char *to, char *subject, char *message, char *headers, char *extra_cmd TSRMLS_DC);
 
 #endif
 

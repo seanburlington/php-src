@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.48 2002/02/28 08:26:20 sebastian Exp $ */
+/* $Id: mbstring.c,v 1.49 2002/03/16 12:45:41 mfischer Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -2796,7 +2796,7 @@ PHP_FUNCTION(mb_send_mail)
 		extra_cmd = Z_STRVAL_PP(argv[4]);
 	}
 
-	if (!err && php_mail(to, subject, message, headers, extra_cmd)){
+	if (!err && php_mail(to, subject, message, headers, extra_cmd TSRMLS_CC)) {
 		RETVAL_TRUE;
 	} else {
 		RETVAL_FALSE;

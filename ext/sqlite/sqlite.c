@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.62.2.9 2003/07/14 19:36:19 wez Exp $ 
+   $Id: sqlite.c,v 1.62.2.10 2003/08/12 21:25:56 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -669,7 +669,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.9 2003/07/14 19:36:19 wez Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.10 2003/08/12 21:25:56 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -816,7 +816,7 @@ PHP_FUNCTION(sqlite_popen)
 PHP_FUNCTION(sqlite_open)
 {
 	int mode = 0666;
-	char *filename;
+	char *filename, *fullpath = NULL;
 	long filename_len;
 	zval *errmsg = NULL;
 
@@ -829,16 +829,25 @@ PHP_FUNCTION(sqlite_open)
 	}
 
 	if (strncmp(filename, ":memory:", sizeof(":memory:") - 1)) {
-		if (PG(safe_mode) && (!php_checkuid(filename, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+		/* resolve the fully-qualified path name to use as the hash key */
+		fullpath = expand_filepath(filename, NULL TSRMLS_CC);
+	
+		if (PG(safe_mode) && (!php_checkuid(fullpath, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+			efree(fullpath);
 			RETURN_FALSE;
 		}
 
-		if (php_check_open_basedir(filename TSRMLS_CC)) {
+		if (php_check_open_basedir(fullpath TSRMLS_CC)) {
+			efree(fullpath);
 			RETURN_FALSE;
 		}
 	}
 	
-	php_sqlite_open(filename, mode, NULL, return_value, errmsg TSRMLS_CC);
+	php_sqlite_open(fullpath?fullpath:filename, mode, NULL, return_value, errmsg TSRMLS_CC);
+
+	if (fullpath) {
+		efree(fullpath);
+	}
 }
 /* }}} */
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.17 2005/02/13 01:02:18 edink Exp $ */
+/* $Id: pgsql_statement.c,v 1.18 2005/02/15 12:41:24 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -192,6 +192,8 @@ static int pgsql_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC)
 		case INT8OID:
 			if (sizeof(long)>=8) {
 				cols[colno].param_type = PDO_PARAM_INT;
+			} else {
+				cols[colno].param_type = PDO_PARAM_STR;
 			}
 			break;
 

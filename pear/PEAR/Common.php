@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.17 2001/10/09 02:56:33 cox Exp $
+// $Id: Common.php,v 1.18 2001/10/10 18:42:23 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -199,8 +199,6 @@ class PEAR_Common extends PEAR
         switch ($name) {
             case 'DIR':
                 array_pop($this->dir_names);
-                unset($this->dir_install);
-                unset($this->dir_role);
                 break;
             case 'FILE':
                 $path = '';

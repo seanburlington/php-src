@@ -29,9 +29,8 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.24 1999/04/23 03:36:15 zeev Exp $ */
+/* $Id: main.c,v 1.25 1999/04/23 10:26:49 zeev Exp $ */
 
-/* #define CRASH_DETECTION */
 
 #define SHUTDOWN_DEBUG(resource) fprintf(stderr, "*** Shutting down " resource "\n" )
 #undef SHUTDOWN_DEBUG
@@ -632,15 +631,6 @@ int php3_request_startup(CLS_D ELS_DC PLS_DC)
 {
 	zend_output_startup();
 
-#if APACHE && defined(CRASH_DETECTION)
-	{
-		char log_message[256];
-		
-		snprintf(log_message,256,"php3_request_startup(): script='%s', pid=%d",php3_rqst->filename,getpid());
-		log_error(log_message, php3_rqst->server);
-	}
-#endif
-
 	php3_set_timeout(PG(max_execution_time) _INLINE_TLS);
 
 	GLOBAL(initialized) = 0;
@@ -701,14 +691,6 @@ void php3_request_shutdown(void *dummy INLINE_TLS)
 #if FHTTPD
 	char tmpline[128];
 	int i, serverdefined;
-#endif
-#if APACHE && defined(CRASH_DETECTION)
-	{
-		char log_message[256];
-		
-		snprintf(log_message,256,"php3_request_shutdown(): script='%s', pid=%d",php3_rqst->filename,getpid());
-		log_error(log_message, php3_rqst->server);
-	}
 #endif
 	CLS_FETCH();
 	ELS_FETCH();

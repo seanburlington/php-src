@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.480 2003/12/02 16:50:02 jon Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.481 2003/12/03 05:06:04 jon Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1311,17 +1311,6 @@ cat <<X
 | If you are unable to fix this, send the file debug.log to the      |
 | php-install@lists.php.net mailing list and include appropiate      |
 | information about your setup.                                      |
-X
-  fi
-
-  if test "$PHP_DB" != "no"; then
-cat <<X
-+--------------------------------------------------------------------+
-|                        *** WARNING ***                             |
-|                                                                    |
-| You chose to compile PHP with the DB extension. This extension is  |
-| deprecated and does not support database locking correctly. Please |
-| use the DBA extension, which is a fully operational superset.      |
 X
   fi
 

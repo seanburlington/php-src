@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Command.php,v 1.22 2004/01/08 17:33:12 sniper Exp $
+// $Id: Command.php,v 1.23 2004/02/27 02:24:06 cellog Exp $
 
 
 require_once "PEAR.php";
@@ -160,7 +160,7 @@ class PEAR_Command
     function &setFrontendClass($uiclass)
     {
         if (is_object($GLOBALS['_PEAR_Command_uiobject']) &&
-            strtolower($uiclass) == get_class($GLOBALS['_PEAR_Command_uiobject'])) {
+              is_a($GLOBALS['_PEAR_Command_uiobject'], $uiclass)) {
             return $GLOBALS['_PEAR_Command_uiobject'];
         }
         if (!class_exists($uiclass)) {

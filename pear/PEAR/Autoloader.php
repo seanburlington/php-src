@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Autoloader.php,v 1.10 2004/01/08 17:33:12 sniper Exp $
+// $Id: Autoloader.php,v 1.11 2004/02/27 02:21:29 cellog Exp $
 
 if (!extension_loaded("overload")) {
     // die hard without ext/overload
@@ -162,7 +162,7 @@ class PEAR_Autoloader extends PEAR
         $classname = strtolower($classname);
         reset($this->_method_map);
         while (list($method, $obj) = each($this->_method_map)) {
-            if (get_class($obj) == $classname) {
+            if (is_a($obj, $classname)) {
                 unset($this->_method_map[$method]);
                 $ok = true;
             }

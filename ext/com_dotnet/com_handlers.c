@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.14 2004/02/04 11:14:30 zeev Exp $ */
+/* $Id: com_handlers.c,v 1.15 2004/02/08 17:25:53 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -104,7 +104,7 @@ static HRESULT com_get_default_binding(php_com_dotnet_object *obj TSRMLS_DC)
 	return obj->have_default_bind ? SUCCESS : FAILURE;
 }
 
-static zval *com_read_dimension(zval *object, zval *offset TSRMLS_DC)
+static zval *com_read_dimension(zval *object, zval *offset, int type TSRMLS_DC)
 {
 	zval *return_value;
 	php_com_dotnet_object *obj;

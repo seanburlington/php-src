@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.107 2003/09/11 14:47:01 cox Exp $
+// $Id: Common.php,v 1.108 2003/09/15 13:11:57 cellog Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -26,7 +26,7 @@ require_once 'PEAR/Config.php';
 
 // {{{ constants and globals
 
-define('PEAR_COMMON_PACKAGE_NAME_PREG', '/^([A-Z][a-zA-Z0-9_]+|[a-z][a-z0-9_]+)$/');
+define('PEAR_COMMON_PACKAGE_NAME_PREG', '/^([A-Za-z][a-zA-Z0-9_]+|[a-z][a-z0-9_]+)$/');
 
 // XXX far from perfect :-)
 define('PEAR_COMMON_PACKAGE_DOWNLOAD_PREG', '/^([A-Z][a-zA-Z0-9_]+|[a-z][a-z0-9_]+)(-([.0-9a-zA-Z]+))?$/');

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.97 2000/11/03 20:44:04 derick Exp $ */
+/* $Id: gd.c,v 1.98 2000/11/04 20:43:53 mathieu Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -553,6 +553,7 @@ PHP_FUNCTION (imagecreatefromstring)
 			im = _php_image_create_from_string (data, "JPEG", gdImageCreateFromJpegCtx);
 #else
 			php_error(E_WARNING, "No JPEG support in this PHP build");
+			RETURN_FALSE;
 #endif
 			break;
 
@@ -561,6 +562,7 @@ PHP_FUNCTION (imagecreatefromstring)
 			im = _php_image_create_from_string (data, "PNG", gdImageCreateFromPngCtx);
 #else
 			php_error(E_WARNING, "No PNG support in this PHP build");
+			RETURN_FALSE;
 #endif
 			break;
 			
@@ -569,6 +571,7 @@ PHP_FUNCTION (imagecreatefromstring)
 			im = _php_image_create_from_string (data, "GIF", gdImageCreateFromGifCtx);
 #else
 			php_error(E_WARNING, "No GIF support in this PHP build");
+			RETURN_FALSE;
 #endif
 			break;
 
@@ -577,6 +580,7 @@ PHP_FUNCTION (imagecreatefromstring)
 			im = _php_image_create_from_string (data, "WBMP",gdImageCreateFromWBMPCtx );
 #else
 			php_error(E_WARNING, "No WBMP support in this PHP build");
+			RETURN_FALSE;
 #endif
 			 break;
 

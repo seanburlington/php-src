@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: inifile.c,v 1.11 2003/12/17 08:50:50 helly Exp $ */
+/* $Id: inifile.c,v 1.12 2003/12/18 20:14:15 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -43,7 +43,7 @@
 /* {{{ inifile_version */
 char *inifile_version() 
 {
-	return "1.0, $Revision: 1.11 $";
+	return "1.0, $Revision: 1.12 $";
 }
 /* }}} */ 
 
@@ -83,18 +83,14 @@ void inifile_line_free(line_type *ln)
 inifile * inifile_alloc(php_stream *fp, int readonly, int persistent TSRMLS_DC)
 {
 	inifile *dba;
-	int fd;
 
 	if (!readonly) {
 		if (!php_stream_truncate_supported(fp)) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Can't truncate this stream");
 			return NULL;
 		}
-		if (SUCCESS != php_stream_cast(fp, PHP_STREAM_AS_FD, (void*)&fd, 1)) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not cast stream");
-			return NULL;
-		}
 	}
+ 
 	dba = pemalloc(sizeof(inifile), persistent);
 	memset(dba, 0, sizeof(inifile));
 	dba->fp = fp;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.175 2002/01/02 01:25:48 jimw Exp $ */
+/* $Id: gd.c,v 1.176 2002/02/01 08:53:47 derick Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -928,7 +928,7 @@ PHP_FUNCTION(imagecreate)
 PHP_FUNCTION(imagetypes)
 {
 	int ret=0;	
-#ifdef HAVE_GD_GIF
+#ifdef HAVE_GD_GIF_CREATE
 	ret = 1;
 #endif
 #ifdef HAVE_GD_JPG
@@ -1204,7 +1204,7 @@ PHP_FUNCTION(imagecreatefromgif)
 #else /* HAVE_GD_GIF_READ */
 	php_error(E_WARNING, "ImageCreateFromGif: No GIF read support in this PHP build");
 	RETURN_FALSE;
-#endif /* HAVE_GD_GIF */
+#endif /* HAVE_GD_GIF_READ */
 }
 /* }}} */
 
@@ -1431,10 +1431,10 @@ PHP_FUNCTION(imagegif)
 #else
 	_php_image_output(INTERNAL_FUNCTION_PARAM_PASSTHRU, PHP_GDIMG_TYPE_GIF, "GIF", gdImageGif);
 #endif
-#else /* HAVE_GD_GIF */
+#else /* HAVE_GD_GIF_CREATE */
 	php_error(E_WARNING, "ImageGif: No GIF create support in this PHP build");
 	RETURN_FALSE;
-#endif /* HAVE_GD_GIF */
+#endif /* HAVE_GD_GIF_CREATE */
 }
 /* }}} */
 

@@ -15,7 +15,7 @@
    | Author: Edin Kadribasic <edink@php.net>                              |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_embed.c,v 1.1 2002/09/29 16:22:48 sas Exp $ */
+/* $Id: php_embed.c,v 1.2 2002/11/26 05:57:04 sniper Exp $ */
 
 #include "php_embed.h"
 
@@ -126,9 +126,6 @@ static sapi_module_struct php_embed_module = {
 	php_embed_register_variables,   /* register server variables */
 	php_embed_log_message,          /* Log message */
   
-	NULL,                          /* Block interruptions */
-	NULL,                          /* Unblock interruptions */
-
 	STANDARD_SAPI_MODULE_PROPERTIES
 };
 /* }}} */

@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php4activescript.c,v 1.2 2002/09/18 21:57:29 zeev Exp $ */
+/* $Id: php4activescript.c,v 1.3 2002/11/26 05:57:01 sniper Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -117,9 +117,6 @@ sapi_module_struct activescript_sapi_module = {
 
 	sapi_activescript_register_server_variables,	/* register server variables */
 	NULL,									/* Log message */
-
-	NULL,									/* Block interruptions */
-	NULL,									/* Unblock interruptions */
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };

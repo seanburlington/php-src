@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.72 2002/09/26 17:54:53 cmv Exp $ */
+/* $Id: aolserver.c,v 1.73 2002/11/26 05:57:01 sniper Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -205,7 +205,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	int i;
 	
 	php_info_print_table_start();
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.72 2002/09/26 17:54:53 cmv Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.73 2002/11/26 05:57:01 sniper Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -387,11 +387,6 @@ static sapi_module_struct aolserver_sapi_module = {
 
 	php_ns_sapi_register_variables,
 	NULL,									/* Log message */
-
-	NULL,									/* php.ini path override */
-
-	NULL,									/* Block interruptions */
-	NULL,									/* Unblock interruptions */
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };

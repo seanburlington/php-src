@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>					  |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.3 2002/11/18 19:07:37 gschlossnagle Exp $ */
+/* $Id: mod_php4.c,v 1.4 2002/11/26 05:57:02 sniper Exp $ */
 
 #include "php_apache_http.h"
 
@@ -540,7 +540,12 @@ static sapi_module_struct apache_sapi_module = {
 	unblock_alarms,					/* Unblock interruptions */
 #endif
 
-	STANDARD_SAPI_MODULE_PROPERTIES
+	NULL,                           /* default post reader */
+	NULL,                           /* treat data */
+	NULL,                           /* exe location */
+	0,                              /* ini ignore */
+	NULL
+	
 };
 /* }}} */
 

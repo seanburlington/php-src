@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.46 2002/09/18 21:57:34 zeev Exp $ */
+/* $Id: pi3web_sapi.c,v 1.47 2002/11/26 05:57:05 sniper Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -77,7 +77,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.46 2002/09/18 21:57:34 zeev Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.47 2002/11/26 05:57:05 sniper Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -378,8 +378,6 @@ static sapi_module_struct pi3web_sapi_module = {
 	sapi_pi3web_read_cookies,		/* read Cookies */
 	sapi_pi3web_register_variables,	/* register server variables */
 	NULL,					/* Log message */
-	NULL,					/* Block interruptions */
-	NULL,					/* Unblock interruptions */	
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };

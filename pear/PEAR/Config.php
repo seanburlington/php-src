@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.18 2002/05/02 23:56:44 ssb Exp $
+// $Id: Config.php,v 1.19 2002/05/14 17:59:41 cox Exp $
 
 require_once 'PEAR.php';
 
@@ -341,7 +341,10 @@ when installing packages without a version or state specified',
         }
         $data = $this->configuration[$layer];
         $this->_encodeOutput($data);
-        if (@file_exists($file) && !@is_writeable($file)) {
+        if (!@System::mkDir("-p " . dirname($file))) {
+            return $this->raiseError("could not create directory: " . dirname($file));
+        }
+        if (@is_file($file) && !@is_writeable($file)) {
             return $this->raiseError("no write access to $file!");
         }
         $fp = @fopen($file, "w");

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_fe.h,v 1.3 2003/07/24 13:18:40 rrichards Exp $ */
+/* $Id: dom_fe.h,v 1.4 2003/09/03 10:11:53 rrichards Exp $ */
 #ifndef DOM_FE_H
 #define DOM_FE_H
 
@@ -125,6 +125,14 @@ PHP_FUNCTION(dom_document_load);
 PHP_FUNCTION(dom_document_save);
 PHP_FUNCTION(dom_document_loadxml);
 PHP_FUNCTION(dom_document_savexml);
+PHP_FUNCTION(dom_document_validate);
+
+#if defined(LIBXML_HTML_ENABLED)
+PHP_FUNCTION(dom_document_load_html);
+PHP_FUNCTION(dom_document_load_html_file);
+PHP_FUNCTION(dom_document_save_html);
+PHP_FUNCTION(dom_document_save_html_file);
+#endif  /* defined(LIBXML_HTML_ENABLED) */
 
 /* domnode methods */
 PHP_FUNCTION(dom_node_insert_before);

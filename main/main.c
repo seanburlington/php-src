@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.35 1999/04/26 17:26:32 zeev Exp $ */
+/* $Id: main.c,v 1.36 1999/04/26 20:20:11 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -772,6 +772,8 @@ int php_module_startup(sapi_functions_struct *sf)
 	if (module_initialized) {
 		return SUCCESS;
 	}
+
+	sapi_functions = *sf;
 
 	zend_output_startup();
 

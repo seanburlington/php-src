@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.34 2003/09/10 00:58:12 iliaa Exp $ */
+/* $Id: streams.c,v 1.35 2003/09/11 05:07:26 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -867,7 +867,8 @@ static size_t _php_stream_write_buffer(php_stream *stream, const char *buf, size
 
 		justwrote = stream->ops->write(stream, buf, towrite TSRMLS_CC);
 
-		if (justwrote > 0) {
+		/* convert justwrote to an integer, since normally it is unsigned */
+		if ((int)justwrote > 0) {
 			buf += justwrote;
 			count -= justwrote;
 			didwrite += justwrote;

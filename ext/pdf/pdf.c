@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.99 2001/09/21 21:59:22 hholzgra Exp $ */
+/* $Id: pdf.c,v 1.100 2001/09/25 21:58:14 jeroen Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -345,7 +345,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.99 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.100 $" );
 	php_info_print_table_end();
 
 }
@@ -2453,10 +2453,10 @@ PHP_FUNCTION(pdf_setpolydash)
 
 	    zend_hash_get_current_data(array, (void **) &keydataptr);
 	    keydata = *keydataptr;
-	    if (keydata->type == IS_DOUBLE) {
-		darray[i] = (float) keydata->value.dval;
-	    } else if (keydata->type == IS_LONG) {
-		darray[i] = (float) keydata->value.lval;
+	    if (Z_TYPE_P(keydata) == IS_DOUBLE) {
+		darray[i] = (float) Z_DVAL_P(keydata);
+	    } else if (Z_TYPE_P(keydata) == IS_LONG) {
+		darray[i] = (float) Z_LVAL_P(keydata);
 	    } else {
 		php_error(E_WARNING,"PDFlib set_polydash: illegal darray value");
 	    }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: crc32.c,v 1.7 2001/09/09 13:29:15 derick Exp $ */
+/* $Id: crc32.c,v 1.8 2001/09/25 21:58:22 jeroen Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -117,8 +117,8 @@ PHP_NAMED_FUNCTION(php_if_crc32)
 	convert_to_string_ex(arg);
 
 	len = 0 ;
-	nr=(*arg)->value.str.len;
-	p = (*arg)->value.str.val;
+	nr=Z_STRLEN_PP(arg);
+	p = Z_STRVAL_PP(arg);
 	for (len += nr; nr--; ++p) {
 	    CRC32(crc, *p);
 	}

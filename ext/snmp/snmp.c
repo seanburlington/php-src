@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.49 2001/09/09 13:29:11 derick Exp $ */
+/* $Id: snmp.c,v 1.50 2001/09/25 21:58:19 jeroen Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -324,8 +324,8 @@ retry:
 						add_assoc_string(return_value,buf2,buf,1);
 					}
 					if (st >= 2 && st != 11) {
-						if (vars->type != SNMP_ENDOFMIBVIEW && 
-							vars->type != SNMP_NOSUCHOBJECT && vars->type != SNMP_NOSUCHINSTANCE) {
+						if (Z_TYPE_P(vars) != SNMP_ENDOFMIBVIEW && 
+							Z_TYPE_P(vars) != SNMP_NOSUCHOBJECT && Z_TYPE_P(vars) != SNMP_NOSUCHINSTANCE) {
 							memmove((char *)name, (char *)vars->name,vars->name_length * sizeof(oid));
 							name_length = vars->name_length;
 							keepwalking = 1;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pfpro.c,v 1.19 2001/09/09 13:29:04 derick Exp $ */
+/* $Id: pfpro.c,v 1.20 2001/09/25 21:58:15 jeroen Exp $ */
 
 /* {{{ includes */
 
@@ -432,11 +432,11 @@ PHP_FUNCTION(pfpro_process)
 			}
 
 
-			switch ((*entry)->type) {
+			switch (Z_TYPE_PP(entry)) {
 				case IS_STRING:
-					if (strchr((*entry)->value.str.val, '&')
-						|| strchr((*entry)->value.str.val, '=')) {
-						sprintf(tmpbuf, "[%d]=", (*entry)->value.str.len);
+					if (strchr(Z_STRVAL_PP(entry), '&')
+						|| strchr(Z_STRVAL_PP(entry), '=')) {
+						sprintf(tmpbuf, "[%d]=", Z_STRLEN_PP(entry));
 						if (pass == 1)
 							strcpy(parmlist + parmlength, tmpbuf);
 						parmlength += strlen(tmpbuf);
@@ -448,13 +448,13 @@ PHP_FUNCTION(pfpro_process)
 					}
 
 					if (pass == 1)
-						strcpy(parmlist + parmlength, (*entry)->value.str.val);
-					parmlength += (*entry)->value.str.len;
+						strcpy(parmlist + parmlength, Z_STRVAL_PP(entry));
+					parmlength += Z_STRLEN_PP(entry);
 
 					break;
 
 				case IS_LONG:
-					sprintf(tmpbuf, "=%d", (*entry)->value.lval);
+					sprintf(tmpbuf, "=%d", Z_LVAL_PP(entry));
 					if (pass == 1)
 						strcpy(parmlist + parmlength, tmpbuf);
 					parmlength += strlen(tmpbuf);
@@ -462,7 +462,7 @@ PHP_FUNCTION(pfpro_process)
 					break;
 
 				case IS_DOUBLE:
-					sprintf(tmpbuf, "=%.2f", (*entry)->value.dval);
+					sprintf(tmpbuf, "=%.2f", Z_DVAL_PP(entry));
 					if (pass == 1)
 						strcpy(parmlist + parmlength, tmpbuf);
 					parmlength += strlen(tmpbuf);

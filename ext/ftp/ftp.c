@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.37 2001/09/09 13:28:49 derick Exp $ */
+/* $Id: ftp.c,v 1.38 2001/09/25 21:57:56 jeroen Exp $ */
 
 #include "php.h"
 
@@ -449,7 +449,7 @@ ftp_type(ftpbuf_t *ftp, ftptype_t type)
 	if (ftp == NULL)
 		return 0;
 
-	if (type == ftp->type)
+	if (type == Z_TYPE_P(ftp))
 		return 1;
 
 	if (type == FTPTYPE_ASCII)
@@ -464,7 +464,7 @@ ftp_type(ftpbuf_t *ftp, ftptype_t type)
 	if (!ftp_getresp(ftp) || ftp->resp != 200)
 		return 0;
 
-	ftp->type = type;
+	Z_TYPE_P(ftp) = type;
 
 	return 1;
 }
@@ -1060,7 +1060,7 @@ ftp_getdata(ftpbuf_t *ftp)
 	}
 	data->listener = -1;
 	data->fd = -1;
-	data->type = ftp->type;
+	Z_TYPE_P(data) = Z_TYPE_P(ftp);
 
 	/* bind/listen */
 	if ((fd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {

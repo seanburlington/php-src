@@ -15,7 +15,7 @@
    | Authors:                                                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: crack.c,v 1.11 2001/09/09 13:28:40 derick Exp $ */
+/* $Id: crack.c,v 1.12 2001/09/25 21:57:50 jeroen Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -168,7 +168,7 @@ ZEND_FUNCTION(crack_closedict)
 			if (zend_get_parameters_ex(1, &dictionary) == FAILURE) {
 				WRONG_PARAM_COUNT;
 			}
-			id = (*dictionary)->value.lval;
+			id = Z_LVAL_PP(dictionary);
 			break;
 		default:
 			WRONG_PARAM_COUNT;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.c,v 1.20 2001/09/09 13:29:18 derick Exp $ */
+/* $Id: md5.c,v 1.21 2001/09/25 21:58:23 jeroen Exp $ */
 
 /* 
  * md5.c - Copyright 1997 Lachlan Roche 
@@ -45,7 +45,7 @@ PHP_NAMED_FUNCTION(php_if_md5)
 
 	md5str[0] = '\0';
 	PHP_MD5Init(&context);
-	PHP_MD5Update(&context, (*arg)->value.str.val, (*arg)->value.str.len);
+	PHP_MD5Update(&context, Z_STRVAL_PP(arg), Z_STRLEN_PP(arg));
 	PHP_MD5Final(digest, &context);
 	for (i = 0, r = md5str; i < 16; i++, r += 2) {
 		sprintf(r, "%02x", digest[i]);

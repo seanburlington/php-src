@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.34 2001/09/21 21:59:21 hholzgra Exp $ */
+/* $Id: cpdf.c,v 1.35 2001/09/25 21:57:50 jeroen Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -1065,9 +1065,9 @@ PHP_FUNCTION(cpdf_set_text_matrix)
 	zend_hash_internal_pointer_reset(matrix);
 	for(i=0; i<zend_hash_num_elements(matrix); i++) {
 		zend_hash_get_current_data(matrix, (void *) &data);
-		switch(data->type) {
+		switch(Z_TYPE_P(data)) {
 			case IS_DOUBLE:
-				*pdfmatrixptr++ = (float) data->value.dval;
+				*pdfmatrixptr++ = (float) Z_DVAL_P(data);
 				break;
 			default:
 				*pdfmatrixptr++ = 0.0;

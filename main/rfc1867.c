@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.75 2001/09/23 19:17:44 andi Exp $ */
+/* $Id: rfc1867.c,v 1.76 2001/09/25 21:58:33 jeroen Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -446,8 +446,8 @@ static void php_mime_split(char *buf, int cnt, char *boundary, int len, zval *ar
 				{
 					zval file_size;
 
-					file_size.value.lval = bytes;
-					file_size.type = IS_LONG;
+					Z_LVAL(file_size) = bytes;
+					Z_TYPE(file_size) = IS_LONG;
 
 					/* Add $foo_size */
 					if(is_arr_upload) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: metaphone.c,v 1.16 2001/09/09 13:29:18 derick Exp $ */
+/* $Id: metaphone.c,v 1.17 2001/09/25 21:58:23 jeroen Exp $ */
 
 /*
 	Based on CPANs "Text-Metaphone-1.96" by Michael G Schwern <schwern@pobox.com> 
@@ -39,14 +39,14 @@ PHP_FUNCTION(metaphone)
 
 	if (zend_get_parameters_ex(2, &pstr, &pphones) == SUCCESS) {
 		convert_to_long_ex(pphones);
-		phones = (*pphones)->value.lval;
+		phones = Z_LVAL_PP(pphones);
 	} else if (zend_get_parameters_ex(1, &pstr) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 
 	convert_to_string_ex(pstr);
 
-	if (metaphone((*pstr)->value.str.val, phones, &result, 1) == 0) {
+	if (metaphone(Z_STRVAL_PP(pstr), phones, &result, 1) == 0) {
 		RETVAL_STRING(result, 0);
 	} else {
 		if (result) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyr_convert.c,v 1.16 2001/09/09 13:29:15 derick Exp $ */
+/* $Id: cyr_convert.c,v 1.17 2001/09/25 21:58:22 jeroen Exp $ */
 
 #include <stdlib.h>
 
@@ -282,9 +282,9 @@ PHP_FUNCTION(convert_cyr_string)
     convert_to_string_ex(fr_cs);
     convert_to_string_ex(to_cs);
 
-	str = (unsigned char*) estrndup((*str_arg)->value.str.val, (*str_arg)->value.str.len);
+	str = (unsigned char*) estrndup(Z_STRVAL_PP(str_arg), Z_STRLEN_PP(str_arg));
 	
-	php_convert_cyr_string(str, (*str_arg)->value.str.len, (*fr_cs)->value.str.val[0], (*to_cs)->value.str.val[0]);
+	php_convert_cyr_string(str, Z_STRLEN_PP(str_arg), Z_STRVAL_PP(fr_cs)[0], Z_STRVAL_PP(to_cs)[0]);
 	RETVAL_STRING((char *)str, 0)
 }
 /* }}} */

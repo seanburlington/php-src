@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.29 2001/08/15 18:11:40 dbeu Exp $ */
+/* $Id: mbstring.c,v 1.30 2001/09/25 21:58:03 jeroen Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -237,7 +237,7 @@ php_mbstring_parse_encoding_array(zval *array, int **return_list, int *return_si
 
 	list = NULL;
 	if (Z_TYPE_P(array) == IS_ARRAY) {
-		target_hash = array->value.ht;
+		target_hash = Z_ARRVAL_P(array);
 		zend_hash_internal_pointer_reset(target_hash);
 		i = zend_hash_num_elements(target_hash);
 		size = i + php_mbstr_default_identify_list_size;

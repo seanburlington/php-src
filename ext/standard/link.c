@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.34 2001/09/09 13:29:18 derick Exp $ */
+/* $Id: link.c,v 1.35 2001/09/25 21:58:23 jeroen Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -146,7 +146,7 @@ PHP_FUNCTION(link)
 		RETURN_FALSE;
 	}
 
-	if (!strncasecmp((*topath)->value.str.val, "http://", 7) || !strncasecmp(Z_STRVAL_PP(topath), "ftp://", 6)) {
+	if (!strncasecmp(Z_STRVAL_PP(topath), "http://", 7) || !strncasecmp(Z_STRVAL_PP(topath), "ftp://", 6)) {
 		php_error(E_WARNING, "Unable to link to a URL");
 		RETURN_FALSE;
 	}

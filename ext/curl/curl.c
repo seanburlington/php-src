@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.88 2001/09/24 18:45:08 sterling Exp $ */
+/* $Id: curl.c,v 1.89 2001/09/25 21:57:51 jeroen Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -577,7 +577,7 @@ PHP_FUNCTION(curl_init)
 	}
 
 	ch->handlers->write->method = PHP_CURL_STDOUT;
-	ch->handlers->write->type   = PHP_CURL_ASCII;
+	ch->handlers->Z_TYPE_P(write)   = PHP_CURL_ASCII;
 	ch->handlers->read->method  = PHP_CURL_DIRECT;
 	ch->handlers->write_header->method = PHP_CURL_IGNORE;
 
@@ -726,7 +726,7 @@ PHP_FUNCTION(curl_setopt)
 		break;
 	case CURLOPT_BINARYTRANSFER:
 		convert_to_long_ex(zvalue);	
-		ch->handlers->write->type = PHP_CURL_BINARY;
+		ch->handlers->Z_TYPE_P(write) = PHP_CURL_BINARY;
 		break;
 	case CURLOPT_WRITEFUNCTION:
 		zval_add_ref(zvalue);
@@ -874,7 +874,7 @@ PHP_FUNCTION(curl_exec)
 	}
 
 	if (ch->handlers->write->method == PHP_CURL_RETURN) {
-		if (ch->handlers->write->type != PHP_CURL_BINARY) 
+		if (ch->handlers->Z_TYPE_P(write) != PHP_CURL_BINARY) 
 			smart_str_0(&ch->handlers->write->buf);
 		RETURN_STRINGL(ch->handlers->write->buf.c, ch->handlers->write->buf.len, 0);
 	}

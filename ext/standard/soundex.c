@@ -15,7 +15,7 @@
    | Author: Bjørn Borud - Guardian Networks AS <borud@guardian.no>       |
    +----------------------------------------------------------------------+
  */
-/* $Id: soundex.c,v 1.17 2001/09/09 13:29:19 derick Exp $ */
+/* $Id: soundex.c,v 1.18 2001/09/25 21:58:24 jeroen Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -66,11 +66,11 @@ PHP_FUNCTION(soundex)
 	}
 	convert_to_string_ex(parg);
 	arg = *parg;
-	if (arg->value.str.len==0) {
+	if (Z_STRLEN_P(arg)==0) {
 		RETURN_FALSE;
 	}
-	somestring = arg->value.str.val;
-	len = arg->value.str.len;
+	somestring = Z_STRVAL_P(arg);
+	len = Z_STRLEN_P(arg);
 
 	/* build soundex string */
 	last = -1;
@@ -106,9 +106,9 @@ PHP_FUNCTION(soundex)
 	}
 	soundex[_small] = '\0';
 
-	return_value->value.str.val = estrndup(soundex, _small);
-	return_value->value.str.len = _small;
-	return_value->type = IS_STRING;
+	Z_STRVAL_P(return_value) = estrndup(soundex, _small);
+	Z_STRLEN_P(return_value) = _small;
+	Z_TYPE_P(return_value) = IS_STRING;
 }
 /* }}} */
 

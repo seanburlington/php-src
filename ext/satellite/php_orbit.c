@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: php_orbit.c,v 1.8 2001/08/09 21:55:09 eriksson Exp $
+ * $Id: php_orbit.c,v 1.9 2001/09/25 21:58:18 jeroen Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -147,12 +147,12 @@ PHP_FUNCTION(satellite_load_idl)
 
 	getParameters(ht, 1, &p_parameter);
 
-	if (p_parameter->type != IS_STRING)
+	if (Z_TYPE_P(p_parameter) != IS_STRING)
 	{
 		RETURN_NULL();
 	}
 
-	RETURN_BOOL(TypeManager_LoadFile(p_parameter->value.str.val));
+	RETURN_BOOL(TypeManager_LoadFile(Z_STRVAL_P(p_parameter)));
 }
 
 /* 

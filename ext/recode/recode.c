@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.17 2001/07/30 06:18:02 zeev Exp $ */
+/* $Id: recode.c,v 1.18 2001/09/25 21:58:17 jeroen Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -95,7 +95,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.17 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.18 $");
 	php_info_print_table_end();
 
 }
@@ -125,9 +125,9 @@ PHP_FUNCTION(recode_string)
 		RETURN_FALSE;
 	}
 	
-	success = recode_scan_request(request, (*req)->value.str.val);
+	success = recode_scan_request(request, Z_STRVAL_PP(req));
 	if (!success) {
-		php_error(E_WARNING, "Illegal recode request '%s'", (*req)->value.str.val);
+		php_error(E_WARNING, "Illegal recode request '%s'", Z_STRVAL_PP(req));
 		goto error_exit;
 	}
 	
@@ -190,9 +190,9 @@ PHP_FUNCTION(recode_file)
 		RETURN_FALSE;
 	}
 
-	success = recode_scan_request(request, (*req)->value.str.val);
+	success = recode_scan_request(request, Z_STRVAL_PP(req));
 	if (!success) {
-		php_error(E_WARNING, "Illegal recode request '%s'", (*req)->value.str.val);
+		php_error(E_WARNING, "Illegal recode request '%s'", Z_STRVAL_PP(req));
 		goto error_exit;
 	}
 	

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.41 2001/09/21 21:59:24 hholzgra Exp $ */
+/* $Id: swf.c,v 1.42 2001/09/25 21:58:26 jeroen Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -591,7 +591,7 @@ PHP_FUNCTION(swf_definepoly)
 	convert_to_long_ex(NumPoints);
 	convert_to_double_ex(width);
 	
-	if ((*coordinates)->type != IS_ARRAY) {
+	if (Z_TYPE_PP(coordinates) != IS_ARRAY) {
 		return;
 		php_error(E_WARNING, "Wrong datatype of second argument to swf_definepoly");
 	}

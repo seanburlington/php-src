@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.7 2000/03/15 08:09:14 steinm Exp $
+dnl $Id: config.m4,v 1.8 2000/03/15 15:08:08 steinm Exp $
 
 AC_MSG_CHECKING(whether to include DOM support)
 AC_ARG_WITH(dom,
@@ -22,8 +22,7 @@ AC_ARG_WITH(dom,
       AC_ADD_INCLUDE(/usr/local/include)
       ;;
     *)
-      test -f $withval/include/gnome-xml/tree.h && DOMXML_INCLUDE="$withval/include/gnome-xml"
-      test -f $withval/include/tree.h && DOMXML_INCLUDE="$withval/include"
+      test -f $withval/include/gnome-xml/tree.h && DOMXML_INCLUDE="$withval/include"
       if test -n "$DOMXML_INCLUDE" ; then
         AC_MSG_RESULT(yes)
         PHP_EXTENSION(domxml)

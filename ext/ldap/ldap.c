@@ -20,7 +20,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.11 1999/08/02 19:16:43 zeev Exp $ */
+/* $Id: ldap.c,v 1.12 1999/08/07 16:32:50 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -277,7 +277,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_printf("<table>"
 				"<tr><td>Total links:</td><td>%d/%s</td></tr>\n"
-		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.11 1999/08/02 19:16:43 zeev Exp $</td></tr>\n"
+		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.12 1999/08/07 16:32:50 zeev Exp $</td></tr>\n"
 #if HAVE_NSLDAP
 				"<tr><td>SDK Version:</td><td>%f</td></tr>"
 				"<tr><td>Highest LDAP Protocol Supported:</td><td>%f</td></tr>"
@@ -537,7 +537,7 @@ PHP_FUNCTION(ldap_unbind)
 
 static void php3_ldap_do_search(INTERNAL_FUNCTION_PARAMETERS, int scope)
 {
-	pval *link, *base_dn, *filter, *attrs, *attr;
+	pval *link, *base_dn, *filter, *attrs, **attr;
 	char *ldap_base_dn, *ldap_filter;
 	LDAP *ldap;
 	char **ldap_attrs = NULL; 
@@ -589,8 +589,9 @@ static void php3_ldap_do_search(INTERNAL_FUNCTION_PARAMETERS, int scope)
 					RETURN_FALSE;
 					return;
 				}
-				convert_to_string(attr);
-				ldap_attrs[i] = attr->value.str.val;
+				SEPARATE_ZVAL(attr);
+				convert_to_string(*attr);
+				ldap_attrs[i] = (*attr)->value.str.val;
 			}
 			ldap_attrs[num_attribs] = NULL;
 

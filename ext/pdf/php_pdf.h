@@ -16,12 +16,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdf.h,v 1.20 2001/08/21 13:33:15 uw Exp $ */
+/* $Id: php_pdf.h,v 1.21 2001/11/08 23:37:33 derick Exp $ */
 
 #ifndef PHP_PDF_H
 #define PHP_PDF_H
 
-#if HAVE_PDFLIB
+#if HAVE_PDFLIB || HAVE_PDFLIB3
 
 /* with version 2.20 of pdflib PDF_open_mem isn't available unless
    the following define isn't there.

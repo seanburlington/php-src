@@ -29,13 +29,13 @@
  */
 
 
-/* $Id: php3_gd.h,v 1.8 1999/08/17 18:06:39 sas Exp $ */
+/* $Id: php3_gd.h,v 1.9 1999/08/19 05:23:02 rasmus Exp $ */
 
 #ifndef _PHP3_GD_H
 #define _PHP3_GD_H
 
 
-#if defined(HAVE_LIBTTF)
+#if HAVE_LIBTTF|HAVE_LIBFREETYPE
 #define ENABLE_GD_TTF
 #endif
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.233 2000/08/01 07:45:14 hholzgra Exp $ */
+/* $Id: basic_functions.c,v 1.234 2000/08/09 17:52:30 thies Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -759,7 +759,7 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 	PHP_RSHUTDOWN(assert)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 
 #ifdef TRANS_SID
-	PHP_RSHUTDOWN(url_scanner)(INIT_FUNC_ARGS_PASSTHRU);
+	PHP_RSHUTDOWN(url_scanner)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #endif
 
 	return SUCCESS;

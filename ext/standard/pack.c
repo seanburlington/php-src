@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.52.2.2 2005/03/10 12:23:12 hyanantha Exp $ */
+/* $Id: pack.c,v 1.52.2.3 2005/03/21 08:55:43 hyanantha Exp $ */
 
 #include "php.h"
 
@@ -30,16 +30,11 @@
 #include "win32/param.h"
 #elif defined(NETWARE)
 #ifdef USE_WINSOCK
-/*#include <ws2nlm.h>*/
 #include <novsock2.h>
 #else
 #include <sys/socket.h>
 #endif
-#ifdef NEW_LIBC
 #include <sys/param.h>
-#else
-#include "netware/param.h"
-#endif
 #else
 #include <sys/param.h>
 #endif

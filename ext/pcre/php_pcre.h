@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.h,v 1.12 1999/09/03 19:01:19 andrey Exp $ */
+/* $Id: php_pcre.h,v 1.13 1999/09/03 21:12:10 andrey Exp $ */
 
 #ifndef _PHP_PCRE_H
 #define _PHP_PCRE_H
@@ -38,11 +38,6 @@
 #if HAVE_LOCALE_H
 #include <locale.h>
 #endif
-
-PHP_MINFO_FUNCTION(pcre);
-PHP_MINIT_FUNCTION(pcre);
-PHP_MSHUTDOWN_FUNCTION(pcre);
-PHP_RINIT_FUNCTION(pcre);
 
 PHP_FUNCTION(preg_match);
 PHP_FUNCTION(preg_match_all);

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.342 2000/11/23 18:43:18 zeev Exp $ */
+/* $Id: main.c,v 1.343 2000/11/29 01:02:27 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -625,7 +625,7 @@ int php_request_startup(CLS_D ELS_DC PLS_DC SLS_DC)
 		sapi_add_header(SAPI_PHP_VERSION_HEADER, sizeof(SAPI_PHP_VERSION_HEADER)-1, 1);
 	}
 
-	if (PG(output_handler)) {
+	if (PG(output_handler) && PG(output_handler)[0]) {
 		zval *output_handler;
 
 		ALLOC_INIT_ZVAL(output_handler);

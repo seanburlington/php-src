@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.233 2000/04/15 13:53:19 zeev Exp $ */
+/* $Id: main.c,v 1.234 2000/04/15 14:19:58 andi Exp $ */
 
 
 #include <stdio.h>
@@ -252,7 +252,7 @@ void php_log_err(char *log_message)
 			return;
 		}
 #endif
-		log_file = PHP_FOPEN(PG(error_log), "a");
+		log_file = V_FOPEN(PG(error_log), "a");
 		if (log_file != NULL) {
 			time(&error_time);
 			strftime(error_time_str, 128, "%d-%b-%Y %H:%M:%S", localtime_r(&error_time, &tmbuf)); 

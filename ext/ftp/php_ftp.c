@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.16 2000/03/30 22:56:32 andi Exp $ */
+/* $Id: php_ftp.c,v 1.17 2000/04/15 14:19:59 andi Exp $ */
 
 #include "php.h"
 
@@ -550,7 +550,7 @@ PHP_FUNCTION(ftp_get)
 		RETURN_FALSE;
 	}
 
-	if ((outfp = PHP_FOPEN(arg2->value.str.val, "w")) == NULL) {
+	if ((outfp = V_FOPEN(arg2->value.str.val, "w")) == NULL) {
 		fclose(tmpfp);
 		php_error(E_WARNING, "error opening %s", arg2->value.str.val);
 		RETURN_FALSE;
@@ -634,7 +634,7 @@ PHP_FUNCTION(ftp_put)
 	convert_to_string(arg3);
 	XTYPE(xtype, arg4);
 
-	if ((infp = PHP_FOPEN(arg3->value.str.val, "r")) == NULL) {
+	if ((infp = V_FOPEN(arg3->value.str.val, "r")) == NULL) {
 		php_error(E_WARNING, "error opening %s", arg3->value.str.val);
 		RETURN_FALSE;
 	}

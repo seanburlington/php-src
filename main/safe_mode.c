@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.17 2000/03/30 22:38:49 andi Exp $ */
+/* $Id: safe_mode.c,v 1.18 2000/04/15 14:19:58 andi Exp $ */
 
 #include "php.h"
 
@@ -88,7 +88,7 @@ PHPAPI int php_checkuid(const char *fn, int mode) {
 		duid = sb.st_uid;
 	} else {
 		s = emalloc(MAXPATHLEN+1);
-		if (!PHP_GETCWD(s,MAXPATHLEN)) {
+		if (!V_GETCWD(s,MAXPATHLEN)) {
 			php_error(E_WARNING, "Unable to access current working directory");
 			return(0);
 		}

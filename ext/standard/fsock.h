@@ -27,7 +27,7 @@
    |          Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
 */
-/* $Id: fsock.h,v 1.15 1999/12/03 14:57:29 sas Exp $ */
+/* $Id: fsock.h,v 1.16 1999/12/03 20:08:24 rubys Exp $ */
 
 /* Synced with php3 revision 1.24 1999-06-18 [ssb] */
 
@@ -40,6 +40,7 @@
 # endif
 # undef FD_SETSIZE
 # include "arpa/inet.h"
+# define socklen_t unsigned int
 #endif
 
 #ifdef HAVE_NETINET_IN_H

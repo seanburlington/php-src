@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.122.2.9 2003/03/05 17:00:24 iliaa Exp $ */
+/* $Id: rfc1867.c,v 1.122.2.10 2003/05/23 21:37:16 pollita Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -774,12 +774,12 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 				if (strchr(pair, '=')) {
 					key = php_ap_getword(&pair, '=');
 					
-					if (!strcmp(key, "name")) {
+					if (!strcasecmp(key, "name")) {
 						if (param) {
 							efree(param);
 						}
 						param = php_ap_getword_conf(&pair TSRMLS_CC);
-					} else if (!strcmp(key, "filename")) {
+					} else if (!strcasecmp(key, "filename")) {
 						if (filename) {
 							efree(filename);
 						}
@@ -802,7 +802,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 				}
 
 				safe_php_register_variable(param, value, array_ptr, 0 TSRMLS_CC);
-				if (!strcmp(param, "MAX_FILE_SIZE")) {
+				if (!strcasecmp(param, "MAX_FILE_SIZE")) {
 					max_file_size = atol(value);
 				}
 

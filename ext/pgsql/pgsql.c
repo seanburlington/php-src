@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.244.2.35 2004/04/22 00:32:07 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.244.2.36 2004/05/12 16:49:56 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -222,7 +222,7 @@ static char * _php_pgsql_trim_message(const char *message, int *len)
 	if (i>1 && (message[i-1] == '\r' || message[i-1] == '\n') && message[i] == '.') {
 		--i;
 	}
-	while (i && (message[i] == '\r' || message[i] == '\n')) {
+	while (i>0 && (message[i] == '\r' || message[i] == '\n')) {
 		--i;
 	}
 	++i;

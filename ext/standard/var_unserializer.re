@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.39 2005/01/26 16:55:17 iliaa Exp $ */
+/* $Id: var_unserializer.re,v 1.40 2005/01/30 16:38:53 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -399,9 +399,7 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 "d:" ("NAN" | "-"? "INF") ";"	{
 	*p = YYCURSOR;
 	INIT_PZVAL(*rval);
-#if defined(HAVE_ATOF_ACCEPTS_NAN) && defined(HAVE_ATOF_ACCEPTS_INF)
-	ZVAL_DOUBLE(*rval, zend_strtod(start + 2, NULL));
-#else
+
 	if (!strncmp(start + 2, "NAN", 3)) {
 		ZVAL_DOUBLE(*rval, php_get_nan());
 	} else if (!strncmp(start + 2, "INF", 3)) {
@@ -409,7 +407,7 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 	} else if (!strncmp(start + 2, "-INF", 4)) {
 		ZVAL_DOUBLE(*rval, -php_get_inf());
 	}
-#endif
+
 	return 1;
 }
 

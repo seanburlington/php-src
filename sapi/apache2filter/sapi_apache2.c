@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.126 2004/07/19 07:19:49 andi Exp $ */
+/* $Id: sapi_apache2.c,v 1.127 2004/08/10 17:40:00 rasmus Exp $ */
 
 #include <fcntl.h>
 
@@ -299,6 +299,15 @@ php_apache_disable_caching(ap_filter_t *f)
 	return OK;
 }
 
+static time_t
+php_apache_sapi_get_request_time(void)
+{
+	php_struct *ctx = SG(server_context);
+	TSRMLS_FETCH();
+
+	return ctx->r->request_time;
+}
+
 extern zend_module_entry php_apache_module;
 
 static int php_apache2_startup(sapi_module_struct *sapi_module)
@@ -335,6 +344,7 @@ static sapi_module_struct apache2_sapi_module = {
 
 	php_apache_sapi_register_variables,
 	php_apache_sapi_log_message,			/* Log message */
+	php_apache_sapi_get_request_time,		/* Get Request Time */
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };

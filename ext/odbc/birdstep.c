@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: birdstep.c,v 1.1 2002/03/04 09:10:31 imajes Exp $ */
+/* $Id: birdstep.c,v 1.2 2002/03/05 06:15:01 kalowsky Exp $ */
 
 /*
  * TODO:
@@ -61,6 +61,12 @@ function_entry birdstep_functions[] = {
 	PHP_FE(birdstep_rollback,							NULL)
 	PHP_FE(birdstep_fieldnum,							NULL)
 	PHP_FE(birdstep_fieldname,							NULL)
+/*
+ * Temporary Function aliases until the next major upgrade to PHP.  
+ * These should allow users to continue to use their current scripts, 
+ * but should in reality warn the user that this functionality is 
+ * deprecated.
+ */
 	PHP_FALIAS(velocis_connect,	 birdstep_connect,	NULL)
 	PHP_FALIAS(velocis_close,	birdstep_close,	NULL)
 	PHP_FALIAS(velocis_exec,	birdstep_exec,	NULL)
@@ -73,6 +79,7 @@ function_entry birdstep_functions[] = {
 	PHP_FALIAS(velocis_rollback,	birdstep_rollback,	NULL)
 	PHP_FALIAS(velocis_fieldnum,	birdstep_fieldnum,	NULL)
 	PHP_FALIAS(velocis_fieldname,	birdstep_fieldname,	NULL)
+/* End temporary aliases */
 	{NULL, NULL, NULL}
 };
 

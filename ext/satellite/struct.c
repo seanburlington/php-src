@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: struct.c,v 1.5 2001/02/26 06:07:15 andi Exp $
+ * $Id: struct.c,v 1.6 2001/08/09 21:57:56 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -248,7 +248,7 @@ zend_bool  OrbitStruct_Constructor(OrbitStruct  ** ppStruct,
 	/* check parameter count */
 	if (parameterCount != 1)
 	{
-		wrong_param_count();
+		zend_wrong_param_count(TSRMLS_C);
 		goto error;
 	}
 

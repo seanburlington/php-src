@@ -1,4 +1,4 @@
-dnl $Id: configure.in.in,v 1.44 1999/07/02 13:59:51 sas Exp $ -*- sh -*-
+dnl $Id: configure.in.in,v 1.45 1999/07/03 01:28:31 sas Exp $ -*- sh -*-
 dnl Process this file with autoconf to produce a configure script.
 
 
@@ -95,6 +95,12 @@ if test "$ac_cv_c_const" = "yes" ; then
   LEX_CFLAGS="-DYY_USE_CONST"
 fi
 AC_SUBST(LEX_CFLAGS)
+
+dnl Hack to work around a Mac OS X cpp problem
+dnl Known versions needing this workaround are 5.3 and 5.4
+if test "$ac_cv_prog_gcc" = "yes" -a "`uname -s`" = "Rhapsody"; then
+  CPPFLAGS="$CPPFLAGS -traditional-cpp"
+fi
 
 if test "`uname -sv`" = "AIX 4" -a "$GCC" != "yes"; then
 	APXS_EXP="-bE:mod_php4.exp"

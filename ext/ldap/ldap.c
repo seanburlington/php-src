@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.131 2002/12/31 16:06:51 sebastian Exp $ */
+/* $Id: ldap.c,v 1.132 2003/01/18 20:10:23 iliaa Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -286,7 +286,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.131 2002/12/31 16:06:51 sebastian Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.132 2003/01/18 20:10:23 iliaa Exp $" );
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -685,11 +685,7 @@ static void php_ldap_do_search(INTERNAL_FUNCTION_PARAMETERS, int scope)
 			efree(ldap_attrs);
 		}
 		
-		if (array_init(return_value) == FAILURE) {
-			efree(lds);
-			efree(rcs);
-			RETURN_FALSE;
-		}
+		array_init(return_value);
 
 		/* Collect results from the searches */
 		for (i=0; i<nlinks; i++) {
@@ -1107,9 +1103,7 @@ PHP_FUNCTION(ldap_get_values)
 
 	num_values = ldap_count_values(ldap_value);
 
-	if (array_init(return_value) == FAILURE) {
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 
 	for(i=0; i<num_values; i++) {
 		add_next_index_string(return_value, ldap_value[i], 1);
@@ -1148,10 +1142,7 @@ PHP_FUNCTION(ldap_get_values_len)
 	}
 	
 	num_values = ldap_count_values_len(ldap_value_len);
-	if (array_init(return_value) == FAILURE) {
-		php_error(E_ERROR, "%s(): Cannot initialize return value", get_active_function_name(TSRMLS_C));
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 	
 	for (i=0; i<num_values; i++) {
 		add_next_index_stringl(return_value, ldap_value_len[i]->bv_val, ldap_value_len[i]->bv_len, 1);
@@ -1214,9 +1205,7 @@ PHP_FUNCTION(ldap_explode_dn)
 	while(ldap_value[i] != NULL) i++;
 	count = i;
 
-	if (array_init(return_value) == FAILURE) {
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 
 	add_assoc_long(return_value, "count", count);
 	for(i=0; i<count; i++) {
@@ -1807,13 +1796,7 @@ PHP_FUNCTION(ldap_parse_result)
 	switch(myargcount) {
 		case 6 :
 			zval_dtor(*referrals);
-			if (array_init(*referrals) == FAILURE) {
-				php_error(E_ERROR, "%s(): Cannot initialize return value", get_active_function_name(TSRMLS_C));
-				ldap_value_free(lreferrals);
-				ldap_memfree(lerrmsg);
-				ldap_memfree(lmatcheddn);
-				RETURN_FALSE;
-			}
+			array_init(*referrals);
 			if (lreferrals != NULL) {
 				refp = lreferrals;
 				while (*refp) {
@@ -1921,11 +1904,7 @@ PHP_FUNCTION(ldap_parse_reference)
 	}
 
 	zval_dtor(*referrals);
-	if (array_init(*referrals) == FAILURE) {
-		php_error(E_ERROR, "%s(): Cannot initialize return value", get_active_function_name(TSRMLS_C));
-		ldap_value_free(lreferrals);
-		RETURN_FALSE;
-	}
+	array_init(*referrals);
 	if (lreferrals != NULL) {
 		refp = lreferrals;
 		while (*refp) {

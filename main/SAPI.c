@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.171 2003/02/11 21:44:02 sesser Exp $ */
+/* $Id: SAPI.c,v 1.172 2003/02/19 19:41:07 rasmus Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -823,6 +823,11 @@ SAPI_API int sapi_register_treat_data(void (*treat_data)(int arg, char *str, zva
 	return SUCCESS;
 }
 
+SAPI_API int sapi_register_input_filter(unsigned int (*input_filter)(int arg, char *var, char *val, unsigned int val_len TSRMLS_DC))
+{
+	sapi_module.input_filter = input_filter;
+	return SUCCESS;
+}
 
 SAPI_API int sapi_flush(TSRMLS_D)
 {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.163 2003/02/18 20:31:04 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.164 2003/02/19 19:41:07 rasmus Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -1281,7 +1281,7 @@ PHP_FUNCTION(mb_parse_str)
 
 	encstr = estrndup(encstr, encstr_len);
 
-	RETVAL_BOOL(_php_mb_encoding_handler_ex(track_vars_array, encstr, separator, (track_vars_array == NULL), 1 TSRMLS_CC));
+	RETVAL_BOOL(_php_mb_encoding_handler_ex(PARSE_STRING, track_vars_array, encstr, separator, (track_vars_array == NULL), 1 TSRMLS_CC));
 
 	if (encstr != NULL) efree(encstr);
 	if (separator != NULL) efree(separator);

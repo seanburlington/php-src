@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.132 2003/02/19 08:40:19 sniper Exp $ */
+/* $Id: rfc1867.c,v 1.133 2003/02/19 19:41:09 rasmus Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -805,6 +805,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 					value = estrdup("");
 				}
 
+				sapi_module.input_filter(PARSE_POST, param, value, strlen(value) TSRMLS_CC);
 				safe_php_register_variable(param, value, array_ptr, 0 TSRMLS_CC);
 				if (!strcmp(param, "MAX_FILE_SIZE")) {
 					max_file_size = atol(value);

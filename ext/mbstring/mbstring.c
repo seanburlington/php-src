@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.86 2002/08/02 10:22:31 helly Exp $ */
+/* $Id: mbstring.c,v 1.87 2002/08/03 09:48:34 andi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -3340,7 +3340,8 @@ PHP_FUNCTION(mb_get_info)
 }
 /* }}} */
 
-PHPAPI int mbstr_encoding_translation(TSRMLS_D) {
+PHPAPI int mbstr_encoding_translation(TSRMLS_D)
+{
 	return MBSTRG(encoding_translation);
 }
 

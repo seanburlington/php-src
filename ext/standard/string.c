@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.301 2002/10/02 17:56:04 andrey Exp $ */
+/* $Id: string.c,v 1.302 2002/10/02 18:13:56 andrey Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -450,10 +450,9 @@ PHP_FUNCTION(nl_langinfo)
 	convert_to_long_ex(item);
 
 	value = nl_langinfo(Z_LVAL_PP(item));
-	if (value == NULL)	{
+	if (value == NULL) {
 		RETURN_FALSE;
-	}
-	else	{
+	} else {
 		RETURN_STRING(value, 1);
 	}
 }

@@ -3,11 +3,11 @@
  * that will be used to create the PEAR folder
  * in the windows snapshot.
  * See win32/build/mkdist.php for more details
- * $Id: go-pear-list.php,v 1.9.2.2 2004/10/28 19:31:07 cellog Exp $
+ * $Id: go-pear-list.php,v 1.9.2.3 2005/02/21 00:55:08 cellog Exp $
  */
 $packages  = array(
 // required packages for the installer
-"PEAR"                  =>    "1.3.3",
+"PEAR"                  =>    "1.3.5",
 "XML_RPC"               =>    "1.1.0",
 "Console_Getopt"        =>    "1.2",
 "Archive_Tar"           =>    "1.2",

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.h,v 1.37 2002/10/23 19:51:49 moriyoshi Exp $ */
+/* $Id: mbstring.h,v 1.38 2002/10/23 23:08:20 helly Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -184,6 +184,8 @@ SAPI_API SAPI_TREAT_DATA_FUNC(mbstr_treat_data);
 #endif	/* HAVE_MBSTRING */
 
 #define phpext_mbstring_ptr mbstring_module_ptr
+
+PHPAPI int php_mb_is_mb_leadbyte(const char *s TSRMLS_DC);
 
 #endif		/* _MBSTRING_H */
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.112 2002/09/07 19:09:09 sniper Exp $
+dnl $Id: config.m4,v 1.113 2002/09/11 15:34:44 sniper Exp $
 dnl
 
 dnl
@@ -365,6 +365,10 @@ if test "$PHP_GD" != "no"; then
     GDLIB_CFLAGS="-I$GD_INCLUDE $GDLIB_FCLAGS"
     PHP_ADD_INCLUDE($GD_INCLUDE)
   fi
+
+  PHP_CHECK_LIBRARY(gd, gdImageCreate, [], [
+    AC_MSG_ERROR([GD build test failed. Please check the config.log for details.])
+  ], [ -L$GD_LIB $GD_SHARED_LIBADD ])
 
   PHP_SUBST(GDLIB_CFLAGS)
   PHP_SUBST(GD_SHARED_LIBADD)

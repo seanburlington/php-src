@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.92 2004/03/23 23:12:50 iliaa Exp $ */
+/* $Id: snmp.c,v 1.93 2004/09/27 14:19:07 hyanantha Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -40,18 +40,12 @@
 #include "win32/time.h"
 #elif defined(NETWARE)
 #ifdef USE_WINSOCK
-/*#include <ws2nlm.h>*/
 #include <novsock2.h>
 #else
 #include <sys/socket.h>
 #endif
 #include <errno.h>
-/*#include <process.h>*/
-#ifdef NEW_LIBC
 #include <sys/timeval.h>
-#else
-#include "netware/time_nw.h"
-#endif
 #else
 #include <sys/socket.h>
 #include <netinet/in.h>

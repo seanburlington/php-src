@@ -15,9 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php4activescript.c,v 1.5 2003/02/25 06:49:59 sniper Exp $ */
-
-#define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
+/* $Id: php4activescript.c,v 1.6 2003/03/02 13:14:49 wez Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -41,7 +39,7 @@ static int php_activescript_startup(sapi_module_struct *sapi_module)
 
 static int sapi_activescript_ub_write(const char *str, uint str_length TSRMLS_DC)
 {
-	/* In theory, this is a blackhole.  In practice, I wan't to see the output
+	/* In theory, this is a blackhole.  In practice, I want to see the output
 	 * in the debugger! */
 
 	char buf[1024];

@@ -15,13 +15,13 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: classfactory.cpp,v 1.3 2003/03/02 13:09:47 wez Exp $ */
+/* $Id: classfactory.cpp,v 1.4 2003/03/02 13:14:49 wez Exp $ */
 
 /* IClassFactory Implementation, and DllXXX function implementation */
 
 #define INITGUID
 #define DEBUG_CLASS_FACTORY 0
-
+#define WIN32_LEAN_AND_MEAN
 #include <winsock2.h>
 #include <windows.h>
 #include <initguid.h>

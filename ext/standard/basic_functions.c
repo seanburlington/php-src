@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.629 2003/09/30 09:52:10 stas Exp $ */
+/* $Id: basic_functions.c,v 1.630 2003/10/08 10:07:25 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -715,6 +715,7 @@ function_entry basic_functions[] = {
 	PHP_FE(stream_socket_accept,				 		   third_arg_force_ref)
 	PHP_FE(stream_socket_get_name,											NULL)
 	PHP_FE(stream_copy_to_stream,											NULL)
+	PHP_FE(stream_get_contents,												NULL)
 	PHP_FE(fgetcsv,															NULL)
 	PHP_FE(flock,															NULL)
 	PHP_FE(get_meta_tags,													NULL)

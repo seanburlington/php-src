@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.25 2003/07/22 07:20:55 jason Exp $ */
+/* $Id: streamsfuncs.c,v 1.26 2003/10/08 10:07:25 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -262,6 +262,38 @@ PHP_FUNCTION(stream_socket_get_name)
 				NULL, NULL
 				TSRMLS_CC)) {
 		RETURN_FALSE;
+	}
+}
+/* }}} */
+
+/* {{{ proto long stream_get_contents(resource source [, long maxlen ])
+   Reads all remaining bytes (or up to maxlen bytes) from a stream and returns them as a string. */
+PHP_FUNCTION(stream_get_contents)
+{
+	php_stream *stream;
+	zval *zsrc;
+	long maxlen = PHP_STREAM_COPY_ALL;
+	int len, newlen;
+	char *contents = NULL;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|l", &zsrc, &maxlen) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	php_stream_from_zval(stream, &zsrc);
+
+	if ((len = php_stream_copy_to_mem(stream, &contents, maxlen, 0)) > 0) {
+		
+		if (PG(magic_quotes_runtime)) {
+			contents = php_addslashes(contents, len, &newlen, 1 TSRMLS_CC); /* 1 = free source string */
+			len = newlen;
+		}
+
+		RETVAL_STRINGL(contents, len, 0);
+	} else if (len == 0) {
+		RETVAL_EMPTY_STRING();
+	} else {
+		RETVAL_FALSE;
 	}
 }
 /* }}} */

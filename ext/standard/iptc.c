@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.41.4.4 2004/06/21 22:53:59 iliaa Exp $ */
+/* $Id: iptc.c,v 1.41.4.5 2004/06/22 20:27:50 iliaa Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -351,7 +351,7 @@ PHP_FUNCTION(iptcparse)
 			inx += 2;
 		}
 
-		sprintf(key, "%d#%03d", (unsigned int) dataset, (unsigned int) recnum);
+		snprintf(key, sizeof(key), "%d#%03d", (unsigned int) dataset, (unsigned int) recnum);
 
 		if ((len > length) || (inx + len) > length)
 			break;

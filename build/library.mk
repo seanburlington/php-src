@@ -21,10 +21,10 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: library.mk,v 1.6 2000/05/01 02:57:24 sas Exp $ 
+# $Id: library.mk,v 1.7 2000/07/09 20:39:18 sas Exp $ 
 #
 
-LTLIBRARY_OBJECTS = $(LTLIBRARY_SOURCES:.c=.lo)
+LTLIBRARY_OBJECTS = $(LTLIBRARY_SOURCES:.c=.lo) $(LTLIBRARY_OBJECTS_X)
 
 $(LTLIBRARY_NAME): $(LTLIBRARY_OBJECTS) $(LTLIBRARY_DEPENDENCIES)
 	$(LINK) $(LTLIBRARY_LDFLAGS) $(LTLIBRARY_OBJECTS) $(LTLIBRARY_LIBADD)

@@ -1,5 +1,5 @@
 [PHP]
-; $Id: php.ini-dist,v 1.84 2001/06/19 20:50:03 jon Exp $
+; $Id: php.ini-dist,v 1.85 2001/06/24 22:40:41 phanto Exp $
 
 ;;;;;;;;;;;;;;;;;;;
 ; About this file ;
@@ -784,6 +784,12 @@ sockets.use_system_read = On
 ;com.typelib_file = 
 ; allow Distributed-COM calls
 ;com.allow_dcom = true
+; autoregister constants of a components typlib on com_load()
+;com.autoregister_typelib = true
+; register constants casesensitive
+;com.autoregister_casesensitive = false
+; show warnings on duplicate constat registrations
+;com.autoregister_verbose = true
 
 [Printer]
 ;printer.default_printer = ""

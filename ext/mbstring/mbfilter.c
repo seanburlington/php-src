@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.14 2001/08/28 18:26:46 wez Exp $ */
+/* $Id: mbfilter.c,v 1.15 2001/08/28 21:50:29 wez Exp $ */
 
 
 #include <stdlib.h>
@@ -2638,7 +2638,7 @@ mbfl_filt_conv_uudec(int c, mbfl_convert_filter * filter)
 			break;
 		case uudec_state_skip_newline:
 			/* skip newline */
-			filter->status = 0;
+			filter->status = uudec_state_size;
 	}
 	return c;
 }

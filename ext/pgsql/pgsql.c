@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.251 2002/12/15 06:44:30 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.252 2002/12/16 07:46:36 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -427,7 +427,8 @@ PHP_MINIT_FUNCTION(pgsql)
 PHP_MSHUTDOWN_FUNCTION(pgsql)
 {
 	UNREGISTER_INI_ENTRIES();
-	
+	zend_hash_destroy(&PGG(notices));
+
 	return SUCCESS;
 }
 /* }}} */
@@ -447,7 +448,7 @@ PHP_RINIT_FUNCTION(pgsql)
 PHP_RSHUTDOWN_FUNCTION(pgsql)
 {
 	/* clean up notice messages */
-	zend_hash_destroy(&PGG(notices));
+	zend_hash_clean(&PGG(notices));
 	/* clean up persistent connection */
 	zend_hash_apply(&EG(persistent_list), (apply_func_t) _rollback_transactions TSRMLS_CC);
 	return SUCCESS;

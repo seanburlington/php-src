@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.24 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: streams.c,v 1.25 2003/06/13 21:33:59 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1630,6 +1630,7 @@ PHPAPI php_stream_context *php_stream_context_alloc(void)
 	MAKE_STD_ZVAL(context->options);
 	array_init(context->options);
 
+	context->rsrc_id = ZEND_REGISTER_RESOURCE(NULL, context, php_le_stream_context());
 	return context;
 }
 

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.15 2003/06/10 20:03:38 imajes Exp $ */
+/* $Id: streamsfuncs.c,v 1.16 2003/06/13 21:33:59 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -802,7 +802,7 @@ PHP_FUNCTION(stream_context_create)
 		parse_context_options(context, params);
 	}
 	
-	ZEND_REGISTER_RESOURCE(return_value, context, php_le_stream_context());
+	php_stream_context_to_zval(context, return_value);
 }
 /* }}} */
 

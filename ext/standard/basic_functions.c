@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.614 2003/06/10 20:03:37 imajes Exp $ */
+/* $Id: basic_functions.c,v 1.615 2003/06/13 21:33:59 pollita Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1247,11 +1247,6 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 		BG(user_filter_map) = NULL;
 	}
 
-	/* cleanup any default context that was created */
-	if (FG(default_context)) {
-		php_stream_context_free(FG(default_context));
-	}
-	
 	return SUCCESS;
 }
 

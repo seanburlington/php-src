@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.79 2001/09/25 21:58:33 jeroen Exp $ */
+/* $Id: output.c,v 1.80 2001/11/30 10:48:38 derick Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -530,6 +530,22 @@ PHP_FUNCTION(ob_start)
 		RETURN_FALSE;
 	}
 	RETURN_TRUE;
+}
+/* }}} */
+
+/* {{{ proto void ob_flush(void)
+   Flush (send) the output buffer */
+PHP_FUNCTION(ob_flush)
+{
+	php_end_ob_buffer(1, 1 TSRMLS_CC);
+}
+/* }}} */
+
+/* {{{ proto void ob_clean(void)
+   Clean (erase) the output buffer */
+PHP_FUNCTION(ob_clean)
+{
+	php_end_ob_buffer(0, 1 TSRMLS_CC);
 }
 /* }}} */
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.30 2001/08/05 15:55:43 sas Exp $ */
+/* $Id: php_output.h,v 1.31 2001/11/30 10:48:38 derick Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -43,6 +43,8 @@ PHPAPI int php_get_output_start_lineno(TSRMLS_D);
 PHPAPI void php_ob_set_internal_handler(php_output_handler_func_t internal_output_handler, uint buffer_size TSRMLS_DC);
 
 PHP_FUNCTION(ob_start);
+PHP_FUNCTION(ob_flush);
+PHP_FUNCTION(ob_clean);
 PHP_FUNCTION(ob_end_flush);
 PHP_FUNCTION(ob_end_clean);
 PHP_FUNCTION(ob_get_contents);

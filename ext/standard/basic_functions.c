@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.422 2001/11/18 18:48:17 derick Exp $ */
+/* $Id: basic_functions.c,v 1.423 2001/11/30 10:48:38 derick Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -720,6 +720,8 @@ function_entry basic_functions[] = {
 
 	/* functions from output.c */
 	PHP_FE(ob_start,														NULL)
+	PHP_FE(ob_flush,														NULL)
+	PHP_FE(ob_clean,														NULL)
 	PHP_FE(ob_end_flush,													NULL)
 	PHP_FE(ob_end_clean,													NULL)
 	PHP_FE(ob_get_length,													NULL)

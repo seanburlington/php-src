@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.48 2004/01/13 14:13:21 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.49 2004/01/22 21:16:05 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,7 +28,6 @@
 #if HAVE_LIBXML && HAVE_DOM
 #include "ext/standard/php_rand.h"
 #include "php_dom.h"
-#include "dom_ce.h"
 #include "dom_properties.h"
 
 #include "ext/standard/info.h"

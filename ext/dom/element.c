@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.22 2004/01/08 08:15:16 andi Exp $ */
+/* $Id: element.c,v 1.23 2004/01/22 21:16:05 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -68,9 +68,7 @@ PHP_FUNCTION(dom_element_element)
 	char *name, *value = NULL;
 	int name_len, value_len = 0;
 
-	id = getThis();
-	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|s", &name, &name_len, &value, &value_len) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os|s", &id, dom_element_class_entry, &name, &name_len, &value, &value_len) == FAILURE) {
 		return;
 	}
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: entityreference.c,v 1.6 2004/01/08 08:15:16 andi Exp $ */
+/* $Id: entityreference.c,v 1.7 2004/01/22 21:16:05 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -50,9 +50,7 @@ PHP_FUNCTION(dom_entityreference_entityreference)
 	char *name;
 	int name_len;
 
-	id = getThis();
-	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &name, &name_len) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os", &id, dom_entityreference_class_entry, &name, &name_len) == FAILURE) {
 		return;
 	}
 

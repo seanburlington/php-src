@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nodelist.c,v 1.9 2004/01/10 11:50:25 rrichards Exp $ */
+/* $Id: nodelist.c,v 1.10 2004/01/22 21:16:05 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -110,9 +110,7 @@ PHP_FUNCTION(dom_nodelist_item)
 	HashTable *nodeht;
 	pval **entry;
 
-	id = getThis();
-	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &index) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Ol", &id, dom_nodelist_class_entry, &index) == FAILURE) {
 		return;
 	}
 

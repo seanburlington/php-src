@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.46 2004/01/20 11:35:32 rrichards Exp $ */
+/* $Id: document.c,v 1.47 2004/01/22 21:16:05 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1092,10 +1092,8 @@ PHP_FUNCTION(dom_document_document)
 	dom_object *intern;
 	char *encoding, *version = NULL;
 	int encoding_len = 0, version_len = 0, refcount;
-
-	id = getThis();
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|ss", &version, &version_len, &encoding, &encoding_len) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "O|ss", &id, dom_document_class_entry, &version, &version_len, &encoding, &encoding_len) == FAILURE) {
 		return;
 	}
 

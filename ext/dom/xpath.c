@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.14 2004/01/20 11:35:32 rrichards Exp $ */
+/* $Id: xpath.c,v 1.15 2004/01/22 21:16:05 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -49,9 +49,7 @@ PHP_FUNCTION(dom_xpath_xpath)
 	dom_object *docobj, *intern;
 	xmlXPathContextPtr ctx, oldctx;
 
-	id = getThis();
-	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "o", &doc) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Oo", &id, dom_xpath_class_entry, &doc) == FAILURE) {
 		return;
 	}
 

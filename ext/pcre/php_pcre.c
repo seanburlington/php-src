@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.3 1999/07/08 21:42:29 andrey Exp $ */
+/* $Id: php_pcre.c,v 1.4 1999/07/09 17:36:12 zeev Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -84,10 +84,11 @@ static void php_pcre_free(void *ptr)
 }
 
 
-static void _php_free_pcre_cache(void *data)
+static int _php_free_pcre_cache(void *data)
 {
 	pcre_cache_entry *pce = (pcre_cache_entry *) data;
 	pefree(pce->re, 1);
+	return 1;
 }
 
 

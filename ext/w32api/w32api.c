@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: w32api.c,v 1.14 2004/02/25 20:16:27 abies Exp $ */
+/* $Id: w32api.c,v 1.15 2004/04/29 12:59:22 iliaa Exp $ */
 
 /*
  * Win32 API Extension for PHP
@@ -819,7 +819,7 @@ static int php_w32api_load_library (char *library_name, w32api_lib_handle **lh T
 					   FORMAT_MESSAGE_IGNORE_INSERTS,
 					   NULL,
 					   GetLastError(),
-					   MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
+					   MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), /* Default language */
 					   (LPTSTR)&message_buffer,
 					   0,
 					   NULL);
@@ -1162,8 +1162,8 @@ w32api_result php_w32api_do_dynamic_dll_call(w32api_func_handle *fh, int argc, w
 	int size = 0, i = 0;
 	FARPROC fp = fh->handle;
 
-	_asm mov stack_pointer, esp		// Store stack pointer (esp) in stack_pointer
-	_asm sub esp, 0x100				// Give ourselves 256 bytes on the stack
+	_asm mov stack_pointer, esp		/* Store stack pointer (esp) in stack_pointer */
+	_asm sub esp, 0x100				/* Give ourselves 256 bytes on the stack */
 
 
 	for(i = (argc - 1); i >= 0; i--)

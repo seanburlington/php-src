@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: documentfragment.c,v 1.8 2004/03/31 17:18:59 rrichards Exp $ */
+/* $Id: documentfragment.c,v 1.9 2004/04/29 12:59:22 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -63,7 +63,7 @@ PHP_METHOD(domdocumentfragment, __construct)
 		if (oldnode != NULL) {
 			php_libxml_node_free_resource(oldnode  TSRMLS_CC);
 		}
-		//php_dom_set_object(intern, nodep TSRMLS_CC);
+		/* php_dom_set_object(intern, nodep TSRMLS_CC); */
 		php_libxml_increment_node_ptr((php_libxml_node_object *)intern, nodep, (void *)intern TSRMLS_CC);
 	}
 }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.34 2004/01/08 17:32:33 sniper Exp $ */
+/* $Id: php_oci8.h,v 1.35 2004/04/29 12:59:22 iliaa Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -100,8 +100,8 @@ typedef struct {
 	dvoid *ocidescr;
 	ub4 type;
 	int lob_current_position; 
-	int lob_size;  // -1 = Lob wasn't initialized yet
-	int buffering; // 0 - off, 1 - on, 2 - on and buffer was used
+	int lob_size;  /* -1 = Lob wasn't initialized yet */
+	int buffering; /* 0 - off, 1 - on, 2 - on and buffer was used */
 } oci_descriptor;
 
 typedef struct {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.76 2003/01/31 04:54:57 pollita Exp $ */
+/* $Id: ftp.c,v 1.77 2003/02/13 19:48:49 pollita Exp $ */
 
 #include "php.h"
 
@@ -473,7 +473,8 @@ ftp_chdir(ftpbuf_t *ftp, const char *dir)
 		return 0;
 	}
 
-	efree(ftp->pwd);
+	if (ftp->pwd)
+		efree(ftp->pwd);
 
 	if (!ftp_putcmd(ftp, "CWD", dir)) {
 		return 0;
@@ -494,7 +495,8 @@ ftp_cdup(ftpbuf_t *ftp)
 		return 0;
 	}
 
-	efree(ftp->pwd);
+	if (ftp->pwd)
+		efree(ftp->pwd);
 
 	if (!ftp_putcmd(ftp, "CDUP", NULL)) {
 		return 0;

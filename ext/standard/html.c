@@ -18,10 +18,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.63.2.1 2002/11/15 16:29:03 moriyoshi Exp $ */
+/* $Id: html.c,v 1.63.2.2 2002/11/16 08:32:11 sebastian Exp $ */
 
 #include "php.h"
+#if PHP_WIN32
+#include "config.w32.h"
+#else
 #include "php_config.h"
+#endif
 #include "reg.h"
 #include "html.h"
 #include "php_string.h"

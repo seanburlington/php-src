@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sprintf.c,v 1.14 2003/01/03 12:48:14 hyanantha Exp $ */
+/* $Id: php_sprintf.c,v 1.15 2003/02/25 09:44:12 sniper Exp $ */
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -43,7 +43,7 @@ php_sprintf (char*s, const char* format, ...)
   return strlen (s);
 }
 
-#endif /* BROKEN_SPRINTF */
+#endif /* PHP_BROKEN_SPRINTF */
 
 /*
  * Local variables:

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.2 2003/01/01 11:04:44 wez Exp $ */
+/* $Id: user_filters.c,v 1.3 2003/01/01 12:36:06 sebastian Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -324,7 +324,6 @@ static php_stream_filter *user_filter_factory_create(const char *filtername,
 	zval *obj, *zfilter;
 	zval func_name;
 	zval *retval = NULL;
-	zval **tmp; 
 	
 	/* some sanity checks */
 	if (persistent) {

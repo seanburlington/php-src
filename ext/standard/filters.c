@@ -17,12 +17,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.2 2003/01/01 11:21:40 wez Exp $ */
+/* $Id: filters.c,v 1.3 2003/01/01 12:36:06 sebastian Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
 #include "ext/standard/basic_functions.h"
 #include "ext/standard/file.h"
+#include "ext/standard/php_string.h"
 
 /* {{{ rot13 stream filter implementation */
 static char rot13_from[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

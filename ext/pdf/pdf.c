@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.8 1999/08/09 08:39:26 steinm Exp $ */
+/* $Id: pdf.c,v 1.9 1999/08/12 17:45:00 steinm Exp $ */
 
 /* pdflib 2.01 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -2022,7 +2022,7 @@ PHP_FUNCTION(pdf_open_memory_image) {
 #if PDFLIB_MINORVERSION == 0
 		pdf_image = PDF_open_memory_image(pdf, buffer, im->sx, im->sy, 3, 8);
 #else
-		pdf_image = PDF_open_memory_image(pdf, "raw", "memory", buffer, im->sx*im->sy*3, im->sx, im->sy, 3, 8, NULL);
+		pdf_image = PDF_open_image(pdf, "raw", "memory", buffer, im->sx*im->sy*3, im->sx, im->sy, 3, 8, NULL);
 #endif
 
 	if(-1 == pdf_image) {

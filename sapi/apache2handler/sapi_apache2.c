@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.40 2004/06/25 13:00:48 edink Exp $ */
+/* $Id: sapi_apache2.c,v 1.40.2.1 2004/07/17 21:31:43 moriyoshi Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -547,6 +547,8 @@ zend_first_try {
 #endif
 	}
 
+} zend_end_try();
+
 	if (!parent_req) {
 		php_apache_request_dtor(r TSRMLS_CC);
 		ctx->request_processed = 1;
@@ -561,8 +563,6 @@ zend_first_try {
 	} else {
 		ctx->r = parent_req;
 	}
-
-} zend_end_try();
 
 	return OK;
 }

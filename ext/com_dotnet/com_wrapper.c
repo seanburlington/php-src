@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_wrapper.c,v 1.3 2004/03/18 02:16:34 iliaa Exp $ */
+/* $Id: com_wrapper.c,v 1.4 2004/05/03 15:51:41 wez Exp $ */
 
 /* This module exports a PHP object as a COM object by wrapping it
  * using IDispatchEx */
@@ -314,14 +314,8 @@ static HRESULT STDMETHODCALLTYPE disp_invokeex(
 		/* return value */
 		if (retval) {
 			if (pvarRes) {
-				if (Z_TYPE_P(retval) == IS_OBJECT) {
-					/* export the object using a dispatch like ourselves */
-					VariantInit(pvarRes);
-					V_VT(pvarRes) = VT_DISPATCH;
-					V_DISPATCH(pvarRes) = php_com_wrapper_export(retval TSRMLS_CC);
-				} else {
-					php_com_variant_from_zval(pvarRes, retval, COMG(code_page) TSRMLS_CC);
-				}
+				VariantInit(pvarRes);
+				php_com_variant_from_zval(pvarRes, retval, COMG(code_page) TSRMLS_CC);
 			}
 			zval_ptr_dtor(&retval);
 		} else if (pvarRes) {
@@ -344,6 +338,8 @@ static HRESULT STDMETHODCALLTYPE disp_deletememberbyname(
 
 	FETCH_DISP("DeleteMemberByName");
 
+	/* TODO: unset */
+
 	return S_FALSE;
 }
 
@@ -354,6 +350,8 @@ static HRESULT STDMETHODCALLTYPE disp_deletememberbydispid(
 	TSRMLS_FETCH();
 
 	FETCH_DISP("DeleteMemberByDispID");
+	
+	/* TODO: unset */
 	
 	return S_FALSE;
 }

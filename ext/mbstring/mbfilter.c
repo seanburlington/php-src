@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.43 2002/10/06 09:36:26 sebastian Exp $ */
+/* $Id: mbfilter.c,v 1.44 2002/10/07 16:05:28 sesser Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -3587,7 +3587,7 @@ static void
 mbfl_filt_conv_html_dec_ctor(mbfl_convert_filter *filter TSRMLS_DC)
 {
 	filter->status = 0;
-	filter->cache = (int)mbfl_malloc(html_enc_buffer_size);
+	filter->cache = (int)mbfl_malloc(html_enc_buffer_size+1);
 }
 	
 static void 

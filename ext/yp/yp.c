@@ -15,7 +15,7 @@
    | Authors: Stephanie Wehner <_@r4k.net>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.4 1999/12/15 03:45:59 evan Exp $ */
+/* $Id: yp.c,v 1.5 1999/12/15 03:51:24 evan Exp $ */
 
 #include "php.h"
 
@@ -120,7 +120,7 @@ PHP_FUNCTION(yp_match) {
 	convert_to_string_ex(map);
 	convert_to_string_ex(key);
 
-	if(yp_match((*domain)->value.str.val,(*map)->value.str.val,(*key)->value.str.val,key->value.str.len,&outval,&outvallen)) {
+	if(yp_match((*domain)->value.str.val,(*map)->value.str.val,(*key)->value.str.val,(*key)->value.str.len,&outval,&outvallen)) {
 		RETURN_FALSE;
 	}
 

@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.64 2003/07/08 10:52:23 cox Exp $
+// $Id: PEAR.php,v 1.65 2003/07/10 11:35:37 cox Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -769,7 +769,7 @@ class PEAR_Error
                       is_object($this->callback[0]) &&
                       is_string($this->callback[1]) &&
                       strlen($this->callback[1])) {
-                      @call_user_func($this->callback, $this);
+                      call_user_func($this->callback, $this);
             }
         }
         if (PEAR_ZE2 && $this->mode & PEAR_ERROR_EXCEPTION) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.263.2.4 2002/04/25 14:52:58 hirokawa Exp $ */
+/* $Id: string.c,v 1.263.2.5 2002/05/16 14:53:12 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2129,7 +2129,7 @@ PHPAPI void php_stripslashes(char *str, int *len TSRMLS_DC)
 	t = str;
  
 	if (PG(magic_quotes_sybase)) {
-		while (l >= 0) {
+		while (l > 0) {
 			if(*t=='\'') {
 				if((l>0) && (t[1]=='\'')) {
 					t++;

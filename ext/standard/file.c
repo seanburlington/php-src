@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.278 2002/10/29 13:26:44 helly Exp $ */
+/* $Id: file.c,v 1.279 2002/11/06 18:07:23 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -113,10 +113,6 @@ php_file_globals file_globals;
 
 #ifdef HAVE_FNMATCH
 #include <fnmatch.h>
-#endif
-
-#ifdef __BEOS__
-#define realpath(x,y) strcpy(y,x)
 #endif
 
 /* }}} */

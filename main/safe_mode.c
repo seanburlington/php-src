@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.50 2002/10/02 23:48:58 dreid Exp $ */
+/* $Id: safe_mode.c,v 1.51 2002/11/06 18:07:23 iliaa Exp $ */
 
 #include "php.h"
 
@@ -30,10 +30,6 @@
 #include "safe_mode.h"
 #include "SAPI.h"
 #include "php_globals.h"
-
-#ifdef __BEOS__
-#define realpath(x,y) strcpy(y,x)
-#endif
 
 /*
  * php_checkuid

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.146 2004/01/16 19:11:33 sniper Exp $ */
+/* $Id: xml.c,v 1.147 2004/01/17 17:44:26 andrey Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -1133,11 +1133,9 @@ PHP_FUNCTION(xml_set_object)
 	ZEND_FETCH_RESOURCE(parser,xml_parser *,pind, -1, "XML Parser", le_xml_parser);
 
 	/* please leave this commented - or ask thies@thieso.net before doing it (again) */
-#ifdef ZEND_ENGINE_2
 	if (parser->object) {
 		zval_ptr_dtor(&parser->object);
 	}
-#endif
 	
 	parser->object = *mythis;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.126 2000/12/22 12:57:08 zeev Exp $ */
+/* $Id: info.c,v 1.127 2000/12/27 15:43:05 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -239,7 +239,7 @@ PHPAPI void php_print_info(int flag)
 		PUTS("</a></h1>\n");
 	}
 
-	zend_ini_sort_entries();
+	zend_ini_sort_entries(ELS_C);
 
 	if (flag & PHP_INFO_CONFIGURATION) {
 		php_info_print_hr();

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.131 2000/12/22 19:26:02 sas Exp $ */
+/* $Id: file.c,v 1.132 2000/12/27 15:43:05 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1924,6 +1924,8 @@ PHP_FUNCTION(fgetcsv) {
 
 /* }}} */
 
+
+#if !defined(PHP_WIN32) || defined(ZTS)
 /* {{{ proto string realpath(string path)
    Return the resolved path */
 PHP_FUNCTION(realpath)
@@ -1944,6 +1946,8 @@ PHP_FUNCTION(realpath)
 	}
 }
 /* }}} */
+#endif
+
 
 #if 0
 

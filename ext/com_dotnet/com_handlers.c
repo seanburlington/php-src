@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.12 2004/01/13 16:02:56 wez Exp $ */
+/* $Id: com_handlers.c,v 1.13 2004/01/13 16:05:38 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -386,8 +386,10 @@ static union _zend_function *com_constructor_get(zval *object TSRMLS_DC)
 	return (union _zend_function*)&f;
 	
 	switch (obj->ce->name[0]) {
+#if HAVE_MSCOREE_H
 		case 'd':
 			POPULATE_CTOR(d, com_dotnet_create_instance);
+#endif
 		
 		case 'c':
 			POPULATE_CTOR(d, com_create_instance);

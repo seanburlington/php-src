@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.10 2004/05/21 22:19:33 gschlossnagle Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.11 2004/05/21 22:20:25 gschlossnagle Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -122,7 +122,6 @@ int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len, char **ou
 			/* stupid keys need to be null-terminated, even though we know their length */
 			crutch  = s.tok[s.cur-s.tok];
 			s.tok[s.cur-s.tok] = '\0';
-			fprintf(stderr, "%d %s\n", s.cur-s.tok + 1, s.tok);
 			if((SUCCESS == zend_hash_find(params, s.tok, s.cur-s.tok + 1,(void **)&param))  
 			    ||
 			   (SUCCESS == zend_hash_index_find(params, bindno, (void **)&param))) 

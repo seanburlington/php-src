@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.167 2000/08/07 13:24:06 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.168 2000/08/22 00:27:17 rasmus Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -95,7 +95,7 @@ case "$host_alias" in
     CPPFLAGS="$CPPFLAGS -D_POSIX_PTHREAD_SEMANTICS";;
 *dgux*)
     CPPFLAGS="$CPPFLAGS -D_BSD_TIMEOFDAY_FLAVOR";;
-*rhapsody*)
+*darwin*|*rhapsody*)
     CPPFLAGS="$CPPFLAGS -traditional-cpp";;
 esac
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.140 2001/02/15 14:48:58 thies Exp $ */
+/* $Id: file.c,v 1.141 2001/02/16 13:13:52 eschmid Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1729,7 +1729,7 @@ cleanup:
 
 
 
-/* {{{ proto int fread(int fp, int length)
+/* {{{ proto string fread(int fp, int length)
    Binary-safe file read */
 
 PHP_FUNCTION(fread)

@@ -27,13 +27,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcre.c,v 1.7 1999/05/26 18:59:04 andrey Exp $ */
-
-/* Get PCRE library from ftp://ftp.cus.cam.ac.uk/pub/software/programs/pcre/ */
+/* $Id: pcre.c,v 1.8 1999/05/27 13:59:39 andrey Exp $ */
 
 #include "php.h"
 
-#if HAVE_LIBPCRE
+#if HAVE_PCRE
 
 #include "php_pcre.h"
 

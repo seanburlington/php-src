@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 1999/05/27 01:34:17 sas Exp $
+dnl $Id: config.m4,v 1.4 1999/05/27 13:59:39 andrey Exp $
 dnl config.m4 for extension pcre
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -12,17 +12,21 @@ AC_ARG_WITH(pcre-regex,
     	AC_MSG_RESULT(no) ;;
     yes)
         EXTRA_LIBS="-Lext/pcre/pcrelib -lpcre $EXTRA_LIBS"
-    	INCLUDES="-Ipcrelib $INCLUDES"
+  dnl  	INCLUDES="-Iext/pcre/pcrelib $INCLUDES"
         PCRE_SUBDIR="pcrelib"
-    	AC_DEFINE(HAVE_LIBPCRE, 1)
+    	AC_DEFINE(HAVE_PCRE, 1)
+        AC_DEFINE(HAVE_BUNDLED_PCRE, 1)
     	AC_MSG_RESULT(yes)
-    	PHP_EXTENSION(pcre) ;;
+        PHP_EXTENSION(pcre) ;;
     *)
-        test -f $withval/pcre.h && INCLUDES="-I$withval $INCLUDES"
-        test -f $withval/libpcre.a && EXTRA_LIBS="-L$withval -lpcre $EXTRA_LIBS"
+        test -f $withval/pcre.h && PCRE_INCLUDE="-I$withval"
+        test -f $withval/libpcre.a && PCRE_LIB="-L$withval -lpcre"
 	
         if test -n "$PCRE_INCLUDE" && test -n "$PCRE_LIB" ; then
-          AC_DEFINE(HAVE_LIBPCRE, 1)
+          INCLUDES="$PCRE_INCLUDE $INCLUDES"
+          EXTRA_LIBS="$PCRE_LIB $EXTRA_LIBS"
+          AC_DEFINE(HAVE_PCRE, 1)
+          AC_DEFINE(HAVE_BUNDLED_PCRE, 0)
           PCRE_SUBDIR=
           AC_MSG_RESULT(yes)
           PHP_EXTENSION(pcre)
@@ -32,9 +36,10 @@ AC_ARG_WITH(pcre-regex,
   esac
 ],[
   EXTRA_LIBS="-Lext/pcre/pcrelib -lpcre $EXTRA_LIBS"
-  INCLUDES="-Ipcrelib $INCLUDES"
+dnl  INCLUDES="-Iext/pcre/pcrelib $INCLUDES"
   PCRE_SUBDIR="pcrelib"
-  AC_DEFINE(HAVE_LIBPCRE, 1)
+  AC_DEFINE(HAVE_PCRE, 1)
+  AC_DEFINE(HAVE_BUNDLED_PCRE, 1)
   AC_MSG_RESULT(yes)
   PHP_EXTENSION(pcre)
 ]) 

@@ -27,14 +27,18 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.h,v 1.5 1999/05/27 01:19:00 zeev Exp $ */
+/* $Id: php_pcre.h,v 1.6 1999/05/27 13:59:39 andrey Exp $ */
 
 #ifndef _PHP_PCRE_H
 #define _PHP_PCRE_H
 
-#if HAVE_LIBPCRE
+#if HAVE_PCRE
 
+#if HAVE_BUNDLED_PCRE
 #include "pcrelib/pcre.h"
+#else
+#include "pcre.h"
+#endif
 
 extern void php_info_pcre(ZEND_MODULE_INFO_FUNC_ARGS);
 extern int php_minit_pcre(INIT_FUNC_ARGS);
@@ -50,8 +54,8 @@ extern zend_module_entry pcre_module_entry;
 #define pcre_module_ptr &pcre_module_entry
 
 typedef struct {
-	pcre *re;
-	pcre_extra *extra;
+        pcre *re;
+        pcre_extra *extra;
 } pcre_cache_entry;
 
 typedef struct {
@@ -79,7 +83,7 @@ extern ZEND_API php_pcre_globals pcre_globals;
 
 #define pcre_module_ptr NULL
 
-#endif /* HAVE_LIBPCRE */
+#endif /* HAVE_PCRE */
 
 #define phpext_pcre_ptr pcre_module_ptr
 

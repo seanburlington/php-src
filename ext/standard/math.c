@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.67 2001/12/16 10:59:20 derick Exp $ */
+/* $Id: math.c,v 1.68 2001/12/21 16:38:49 derick Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -82,7 +82,6 @@ PHP_FUNCTION(ceil)
 /* }}} */
 /* {{{ proto float floor(float number)
    Returns the next lowest integer value from the number */
-
 PHP_FUNCTION(floor)
 {
 	zval **value;
@@ -96,7 +95,8 @@ PHP_FUNCTION(floor)
 	if (Z_TYPE_PP(value) == IS_DOUBLE) {
 		RETURN_DOUBLE(floor(Z_DVAL_PP(value)));
 	} else if (Z_TYPE_PP(value) == IS_LONG) {
-		RETURN_LONG(Z_LVAL_PP(value));
+		convert_to_double_ex(value);
+		RETURN_DOUBLE(Z_DVAL_PP(value));
 	}
 
 	RETURN_FALSE;

@@ -15,7 +15,7 @@
    | Authors: Hartmut Holzgraefe <hartmut@six.de>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.6 2001/07/31 23:32:24 zeev Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.7 2001/08/22 08:34:04 sniper Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 
@@ -75,7 +75,7 @@ FILE *zlib_fopen_wrapper(const char *path, char *mode, int options, int *issock,
 		
 		path++;
 
-		fp = php_fopen_wrapper(path, mode, options|IGNORE_URL, &fissock, &fsocketd, NULL TSRMLS_CC);
+		fp = php_fopen_wrapper((char *) path, mode, options|IGNORE_URL, &fissock, &fsocketd, NULL TSRMLS_CC);
 		
 		if (!fp) {
 			free(gc);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.154 2001/08/13 07:55:32 rasmus Exp $ */
+/* $Id: gd.c,v 1.155 2001/08/22 08:32:22 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -2257,7 +2257,7 @@ PHP_FUNCTION(imagefontheight)
 
 /* {{{ php_gdimagecharup
  * workaround for a bug in gd 1.2 */
-void php_gdimagecharup(gdImagePtr im, gdFontPtr f, int x, int y, int c, int color)
+static void php_gdimagecharup(gdImagePtr im, gdFontPtr f, int x, int y, int c, int color)
 {
 	int cx, cy, px, py, fline;
 	cx = 0;

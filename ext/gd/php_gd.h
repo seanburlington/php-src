@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.35 2001/08/07 16:35:35 sniper Exp $ */
+/* $Id: php_gd.h,v 1.36 2001/08/22 08:32:22 sniper Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -146,7 +146,6 @@ PHP_FUNCTION(imagestring);
 PHP_FUNCTION(imagestringup);
 PHP_FUNCTION(imagesx);
 PHP_FUNCTION(imagesy);
-static void php_gdimagecharup(gdImagePtr, gdFontPtr, int, int, int, int);
 PHP_FUNCTION(imagedashedline);
 PHP_FUNCTION(imagettfbbox);
 PHP_FUNCTION(imagettftext);

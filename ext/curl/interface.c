@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.5 2003/01/18 21:31:04 iliaa Exp $ */
+/* $Id: interface.c,v 1.6 2003/02/02 20:56:51 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -202,6 +202,7 @@ PHP_MINIT_FUNCTION(curl)
 	REGISTER_CURL_CONSTANT(CURLOPT_SSLENGINE);
 	REGISTER_CURL_CONSTANT(CURLOPT_SSLENGINE_DEFAULT);
 	REGISTER_CURL_CONSTANT(CURLOPT_CRLF);
+	REGISTER_CURL_CONSTANT(CURLOPT_ENCODING);
 	
 	/* Constants effecting the way CURLOPT_CLOSEPOLICY works */
 	REGISTER_CURL_CONSTANT(CURLCLOSEPOLICY_LEAST_RECENTLY_USED);
@@ -805,7 +806,8 @@ PHP_FUNCTION(curl_setopt)
 		case CURLOPT_SSLKEYTYPE: 
 		case CURLOPT_SSLKEYPASSWD: 
 		case CURLOPT_SSLENGINE: 
-		case CURLOPT_SSLENGINE_DEFAULT: {
+		case CURLOPT_SSLENGINE_DEFAULT:
+		case CURLOPT_ENCODING: {
 			char *copystr = NULL;
 	
 			convert_to_string_ex(zvalue);

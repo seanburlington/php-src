@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.395 2003/08/11 23:16:53 iliaa Exp $ */
+/* $Id: string.c,v 1.396 2003/08/27 00:43:54 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1849,7 +1849,7 @@ PHP_FUNCTION(substr_replace)
 	zval **repl;
 	char *result;
 	int result_len;
-	int l;
+	int l = 0;
 	int f;
 	int argc = ZEND_NUM_ARGS();
 

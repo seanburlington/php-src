@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.7 2003/10/28 21:52:59 pollita Exp $ */
+/* $Id: filter.c,v 1.8 2003/10/28 23:29:16 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -238,7 +238,7 @@ PHPAPI php_stream_filter *php_stream_filter_create(const char *filtername, zval 
 
 		wildname = estrdup(filtername);
 		period = wildname + (period - filtername);
-		while (period) {
+		while (period && !filter) {
 			*period = '\0';
 			strcat(wildname, ".*");
 			if (SUCCESS == zend_hash_find(&stream_filters_hash, wildname, strlen(wildname), (void**)&factory)) {

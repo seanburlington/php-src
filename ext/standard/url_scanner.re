@@ -15,7 +15,7 @@
    | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.re,v 1.4 1999/09/17 12:32:18 thies Exp $ */
+/* $Id: url_scanner.re,v 1.5 1999/09/18 12:16:16 sas Exp $ */
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -49,26 +49,27 @@ typedef struct {
 
 #define FINISH { catchup(state); goto finish; }
 
-#define BEGIN(x) \
-		switch(state->state) { \
-			case INITIAL: \
-				catchup(state); \
-				break; \
-			case REF: \
-				screw_url(state); \
-				break; \
-		} \
-		state->state = x; \
-		state->start = state->crs; \
+#define BEGIN(x) 						\
+		switch(state->state) { 			\
+			case INITIAL: 				\
+				catchup(state); 		\
+				break; 					\
+			case REF: 					\
+				screw_url(state); 		\
+				break; 					\
+		} 								\
+		state->state = x; 				\
+		state->start = state->crs; 		\
 		goto nextiter
 
-#define ATTACH(s, n) { \
-	size_t _newlen = state->targetsize + n; \
-	state->target = realloc(state->target, _newlen + 1); \
-	memcpy(state->target + state->targetsize, s, n); \
-	state->targetsize = _newlen; \
-	state->target[_newlen] = '\0'; \
-	}
+#define ATTACH(s, n) 										\
+{ 															\
+	size_t _newlen = state->targetsize + n; 				\
+	state->target = realloc(state->target, _newlen + 1); 	\
+	memcpy(state->target + state->targetsize, s, n); 		\
+	state->targetsize = _newlen; 							\
+	state->target[_newlen] = '\0'; 							\
+}
 	
 #define URLLEN 512
 	

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.10 1999/08/02 19:16:50 zeev Exp $ */
+/* $Id: dir.c,v 1.11 1999/08/19 16:52:53 andi Exp $ */
 
 #include "php.h"
 #include "fopen-wrappers.h"
@@ -59,6 +59,7 @@ static zend_function_entry php_dir_class_functions[] = {
 	PHP_FALIAS(close,	closedir,	NULL)
 	PHP_FALIAS(rewind,	rewinddir,	NULL)
 	PHP_FALIAS(read,	readdir,	NULL)
+	{NULL, NULL, NULL}
 };
 
 

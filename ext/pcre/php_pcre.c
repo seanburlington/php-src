@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.12 1999/08/02 19:16:49 zeev Exp $ */
+/* $Id: php_pcre.c,v 1.13 1999/08/19 16:52:52 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -136,6 +136,8 @@ int php_mshutdown_pcre(SHUTDOWN_FUNC_ARGS)
 {
 #ifndef ZTS
 	zend_hash_destroy(&PCRE_G(pcre_cache));
+#else
+	ts_free_id(pcre_globals_id);
 #endif
 	return SUCCESS;
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.26 2003/08/28 16:49:57 sas Exp $ */
+/* $Id: scanf.c,v 1.27 2003/09/03 11:54:35 sniper Exp $ */
 
 /*
    scanf.c --
@@ -794,6 +794,7 @@ PHPAPI int php_sscanf_internal(	char *string, char *format,
 				fn = (long (*)())strtol;
 				break;
 			case 'x':
+			case 'X':
 				op = 'i';
 				base = 16;
 				fn = (long (*)())strtol;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.75 2000/04/24 14:18:11 andrei Exp $ */
+/* $Id: file.c,v 1.76 2000/04/24 14:19:21 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1703,7 +1703,7 @@ PHP_FUNCTION(fgetcsv) {
 	lineEnd = emalloc(sizeof(char) * (len + 1));
         bptr = buf;
         tptr = buf + strlen(buf) -1;
-        while ( isspace(*tptr) && (tptr > bptr) ) tptr--;
+        while ( isspace((int)*tptr) && (tptr > bptr) ) tptr--;
         tptr++;
         strcpy(lineEnd, tptr);
 
@@ -1763,7 +1763,7 @@ PHP_FUNCTION(fgetcsv) {
                                                         }
                                                 bptr = buf;
                                                 tptr = buf + strlen(buf) -1;
-                                                while ( isspace(*tptr) && (tptr > bptr) ) tptr--;
+                                                while ( isspace((int)*tptr) && (tptr > bptr) ) tptr--;
                                                 tptr++; strcpy(lineEnd, tptr);
                                                 *tptr++ = ' ';  *tptr = 0;
 

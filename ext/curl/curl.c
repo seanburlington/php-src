@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.5 2003/02/28 07:35:11 sniper Exp $ */
+/* $Id: curl.c,v 1.124.2.6 2003/03/13 18:15:39 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -391,7 +391,9 @@ static size_t curl_read(char *data, size_t size, size_t nmemb, void *ctx)
 
 	switch (t->method) {
 	case PHP_CURL_DIRECT:
-		length = fread(data, size, nmemb, t->fp);
+		if (t->fp) {
+			length = fread(data, size, nmemb, t->fp);
+		}
 		break;
 	case PHP_CURL_USER: {
 		zval *argv[3];

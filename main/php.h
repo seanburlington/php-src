@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.153 2001/08/18 02:08:29 sterling Exp $ */
+/* $Id: php.h,v 1.154 2001/08/22 10:26:02 sniper Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -64,7 +64,6 @@
 
 
 #define APACHE 0
-#define CGI_BINARY 0
 
 #if HAVE_UNIX_H
 #include <unix.h>

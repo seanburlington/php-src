@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.52 2001/09/09 12:55:48 derick Exp $ */
+/* $Id: php_string.h,v 1.53 2001/09/23 18:32:46 jeroen Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -27,7 +27,7 @@
 PHP_FUNCTION(strspn);
 PHP_FUNCTION(strcspn);
 PHP_FUNCTION(str_replace);
-PHP_FUNCTION(chop);
+PHP_FUNCTION(rtrim);
 PHP_FUNCTION(trim);
 PHP_FUNCTION(ltrim);
 PHP_FUNCTION(soundex);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.242 2001/09/21 21:59:23 hholzgra Exp $ */
+/* $Id: string.c,v 1.243 2001/09/23 18:32:46 jeroen Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -540,13 +540,13 @@ PHPAPI void php_trim2(zval **str, zval **what, zval *return_value, int mode TSRM
 }
 /* }}} */
 
-/* {{{ proto string rtrim(string str [, string character_mask])
-   An alias for chop */
+/* {{{ proto string chop(string str [, string character_mask])
+   An alias for rtrim */
 /* }}} */
 
-/* {{{ proto string chop(string str [, string character_mask])
+/* {{{ proto string rtrim(string str [, string character_mask])
    Removes trailing whitespace */
-PHP_FUNCTION(chop)
+PHP_FUNCTION(rtrim)
 {
 	zval **str;
 	zval **what = NULL;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.7 2005/02/22 08:05:05 pajoye Exp $ */
+/* $Id: php_xmlwriter.c,v 1.8 2005/02/23 11:25:32 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,14 +37,14 @@ static zend_function_entry xmlwriter_functions[] = {
 	PHP_FE(xmlwriter_set_indent,		NULL)
 	PHP_FE(xmlwriter_set_indent_string, NULL)
 #endif
-#if LIBXML_VERSION >= 20616
+#if LIBXML_VERSION >= 20607
 	PHP_FE(xmlwriter_start_comment,		NULL)
 	PHP_FE(xmlwriter_end_comment,		NULL)
 #endif
 	PHP_FE(xmlwriter_start_attribute,	NULL)
 	PHP_FE(xmlwriter_end_attribute,		NULL)
 	PHP_FE(xmlwriter_write_attribute,	NULL)
-#if LIBXML_VERSION >= 20617
+#if LIBXML_VERSION > 20617
 	PHP_FE(xmlwriter_start_attribute_ns,NULL)
 #endif
 	PHP_FE(xmlwriter_start_element,		NULL)

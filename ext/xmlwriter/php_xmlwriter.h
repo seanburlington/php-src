@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.h,v 1.3 2005/02/22 08:05:05 pajoye Exp $ */
+/* $Id: php_xmlwriter.h,v 1.4 2005/02/23 11:25:32 rrichards Exp $ */
 
 #ifndef PHP_XMLWRITER_H
 #define PHP_XMLWRITER_H
@@ -51,7 +51,7 @@ PHP_FUNCTION(xmlwriter_start_attribute);
 PHP_FUNCTION(xmlwriter_end_attribute);
 PHP_FUNCTION(xmlwriter_start_attribute_ns);
 PHP_FUNCTION(xmlwriter_write_attribute);
-#if LIBXML_VERSION >= 20617
+#if LIBXML_VERSION > 20617
 PHP_FUNCTION(xmlwriter_write_attribute_ns);
 #endif
 PHP_FUNCTION(xmlwriter_start_element);
@@ -68,12 +68,11 @@ PHP_FUNCTION(xmlwriter_write_cdata);
 PHP_FUNCTION(xmlwriter_text);
 PHP_FUNCTION(xmlwriter_start_document);
 PHP_FUNCTION(xmlwriter_end_document);
-#if LIBXML_VERSION >= 20616
-PHP_FUNCTION(xmlwriter_write_comment);
+#if LIBXML_VERSION >= 20607
 PHP_FUNCTION(xmlwriter_start_comment);
-#endif
 PHP_FUNCTION(xmlwriter_end_comment);
-
+#endif
+PHP_FUNCTION(xmlwriter_write_comment);
 PHP_FUNCTION(xmlwriter_start_dtd);
 PHP_FUNCTION(xmlwriter_end_dtd);
 PHP_FUNCTION(xmlwriter_write_dtd);

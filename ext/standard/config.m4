@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.34 2002/03/26 11:05:18 sas Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.35 2002/04/08 06:45:52 sniper Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -203,7 +203,11 @@ AC_ARG_WITH(regex,
 [
   case $withval in 
     system)
-      REGEX_TYPE=system
+      if test "$PHP_SAPI" = "apache" || test "$PHP_SAPI" = "apache2filter"; then
+        REGEX_TYPE=php
+      else
+        REGEX_TYPE=system
+      fi
       ;;
     apache)
       REGEX_TYPE=apache
@@ -220,15 +224,6 @@ AC_ARG_WITH(regex,
   REGEX_TYPE=php
 ])
 	
-AC_ARG_WITH(system-regex,
-[  --with-system-regex     (deprecated) Use system regex library],[
-  if test "$withval" = "yes"; then
-    REGEX_TYPE=system
-  else
-    REGEX_TYPE=php
-  fi
-])
-
 AC_CHECK_FUNCS(fnmatch glob)
 
 if test "$PHP_SAPI" = "cgi"; then

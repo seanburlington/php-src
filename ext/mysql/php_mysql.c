@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.72 2001/02/26 06:07:04 andi Exp $ */
+/* $Id: php_mysql.c,v 1.73 2001/03/12 15:14:38 elixer Exp $ */
 
 
 /* TODO:
@@ -705,7 +705,7 @@ PHP_FUNCTION(mysql_select_db)
 
 #ifdef HAVE_GETINFO_FUNCS
 
-/* {{{ proto string mysql_get_client_info([int link_identifier])
+/* {{{ proto string mysql_get_client_info(void)
    Returns a string that represents the client library version */
 PHP_FUNCTION(mysql_get_client_info)
 {

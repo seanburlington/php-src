@@ -16,7 +16,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: client_round2_interop.php,v 1.7 2004/01/28 16:47:48 dmitry Exp $
+// $Id: client_round2_interop.php,v 1.8 2004/01/29 09:03:28 dmitry Exp $
 //
 require_once 'DB.php'; // PEAR/DB
 require_once 'client_round2_params.php';
@@ -90,7 +90,7 @@ class Interop_Client
         $this->_getEndpoints($test, 1);
 
         // retreive endpoints from the endpoint server
-        $endpointArray = $soapclient->__call("GetEndpointInfo",array("groupName"=>$test),"http://soapinterop.org/info/","http://soapinterop.org/info/");
+        $endpointArray = $soapclient->__call("GetEndpointInfo",array("groupName"=>$test),"http://soapinterop.org/","http://soapinterop.org/");
         if ($soapclient->__isfault() || PEAR::isError($endpointArray)) {
             print "<pre>".$soapclient->wire."\n";
             print_r($endpointArray);

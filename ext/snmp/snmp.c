@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.37 2000/08/30 15:52:07 cmv Exp $ */
+/* $Id: snmp.c,v 1.38 2000/09/14 20:22:02 andrei Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -349,14 +349,14 @@ PHP_FUNCTION(snmpget) {
 /* {{{ proto array snmpwalk(string host, string community, string object_id [, int timeout [, int retries]]) 
    Return all objects under the specified object id */
 PHP_FUNCTION(snmpwalk) {
-	return php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,2);
+	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,2);
 }
 /* }}} */
 
 /* {{{ proto array snmprealwalk(string host, string community, string object_id [, int timeout [, int retries]])
    Return all objects including their respective object id withing the specified one */
 PHP_FUNCTION(snmprealwalk) {
-	return php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,3);
+	php_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,3);
 }
 /* }}} */
 

@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.61 2003/01/05 15:58:28 sebastian Exp $
+	$Id: config.w32.h,v 1.62 2003/01/10 23:35:52 phanto Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -32,8 +32,8 @@
 /* Enable / Disable CALENDAR extension (default: enabled) */
 #define HAVE_CALENDAR 1
 
-/* Enable / Disable COM extension (default: enabled) */
-#define HAVE_COM 1
+/* Enable / Disable RPC extension (default: enabled) */
+#define HAVE_RPC 1
 
 /* Enable / Disable CTYPE extension (default: enabled) */
 #define HAVE_CTYPE 1
@@ -55,9 +55,6 @@
 
 /* Enable / Disable ODBC extension (default: enabled) */
 #define HAVE_UODBC 1
-
-/* Enable / Disable OVERLOAD extension (default: enabled) */
-#define HAVE_OVERLOAD 1
 
 /* Enable / Disable PCRE extension (default: enabled) */
 #define HAVE_BUNDLED_PCRE	1

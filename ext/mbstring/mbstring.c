@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.174 2003/05/04 13:11:30 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.175 2003/05/12 13:26:16 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -635,15 +635,7 @@ static PHP_INI_MH(OnUpdate_mbstring_encoding_translation)
 	   return FAILURE;
 	}
 
-	if (!strncasecmp(new_value, "off", sizeof("off"))) {
-		new_value = "0";
-		new_value_length = sizeof("0");
-	} else if (!strncasecmp(new_value, "on", sizeof("on"))) {
-		new_value = "1";
-		new_value_length = sizeof("1");
-	}
-
-	OnUpdateLong(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);
+	OnUpdateBool(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);
 
 	if (MBSTRG(encoding_translation)){
 		_php_mb_enable_encoding_translation(1);

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.10 2001/01/09 22:15:56 hirokawa Exp $
+dnl $Id: config.m4,v 1.11 2001/01/10 14:41:01 hirokawa Exp $
 dnl config.m4 for extension Sablot
 
 PHP_ARG_WITH(expat-dir, for Sablotron XSL support,
@@ -37,6 +37,7 @@ if test "$PHP_SABLOT" != "no"; then
   testval=no
   for i in $PHP_EXPAT_DIR $SABLOT_DIR; do
     if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.so; then
+      AC_DEFINE(HAVE_LIBEXPAT2,1,[ ])
       AC_ADD_LIBRARY_WITH_PATH(expat, $i/lib)
       AC_CHECK_LIB(sablot, SablotSetEncoding, AC_DEFINE(HAVE_SABLOT_SET_ENCODING,1,[ ]))
       testval=yes

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.85 2003/01/19 08:32:22 iliaa Exp $ */
+/* $Id: oracle.c,v 1.86 2003/01/19 15:01:33 iliaa Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -837,7 +837,7 @@ PHP_FUNCTION(ora_bind)
 			RETURN_FALSE;
 		}
 	}
-	newparam = (oraParam *)emalloc(sizeof(oraParam);
+	newparam = (oraParam *)emalloc(sizeof(oraParam));
 
 	if ((paramname = estrndup(Z_STRVAL_PP(pvar), Z_STRLEN_PP(pvar))) == NULL) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Out of memory for parametername");
@@ -988,7 +988,7 @@ PHP_FUNCTION(ora_do)
 
 	convert_to_string_ex(sql);
 
-	cursor = (oraCursor *)emalloc(sizeof(oraCursor);
+	cursor = (oraCursor *)emalloc(sizeof(oraCursor));
 
 	memset(cursor, 0, sizeof(oraCursor));
 

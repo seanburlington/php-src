@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.152 2001/08/13 07:55:38 rasmus Exp $ */
+/* $Id: info.c,v 1.153 2001/08/13 19:31:16 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -458,8 +458,9 @@ PHP_FUNCTION(phpinfo)
 	int argc = ZEND_NUM_ARGS();
 	long flag;
 
-	if (zend_parse_parameters(argc, "|l", &flag) == FAILURE)
+	if (zend_parse_parameters(argc TSRMLS_CC, "|l", &flag) == FAILURE) {
 		return;
+	}
 
 	if(!argc) {
 		flag = 0xFFFFFFFF;
@@ -491,8 +492,9 @@ PHP_FUNCTION(phpcredits)
 	int argc = ZEND_NUM_ARGS();
 	long flag;
 
-	if (zend_parse_parameters(argc, "|l", &flag) == FAILURE)
+	if (zend_parse_parameters(argc TSRMLS_CC, "|l", &flag) == FAILURE) {
 		return;
+	}
 
 	if(!argc) {
 		flag = 0xFFFFFFFF;

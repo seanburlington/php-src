@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.47 2001/08/13 07:55:37 rasmus Exp $ */
+/* $Id: snmp.c,v 1.48 2001/08/13 19:31:15 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -417,8 +417,9 @@ PHP_FUNCTION(snmp_set_quick_print)
 	int argc = ZEND_NUM_ARGS();
 	long a1;
 
-	if (zend_parse_parameters(argc, "l", &a1) == FAILURE)
+	if (zend_parse_parameters(argc TSRMLS_CC, "l", &a1) == FAILURE) {
 		return;
+	}
 
 	snmp_set_quick_print((int)a1);
 }

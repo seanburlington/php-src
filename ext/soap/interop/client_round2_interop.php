@@ -16,7 +16,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: client_round2_interop.php,v 1.9 2004/02/03 16:44:56 dmitry Exp $
+// $Id: client_round2_interop.php,v 1.10 2004/02/04 14:46:12 dmitry Exp $
 //
 require_once 'DB.php'; // PEAR/DB
 require_once 'client_round2_params.php';
@@ -409,7 +409,7 @@ class Interop_Client
         // XXX no way to set encoding
         // this lets us set UTF-8, US-ASCII or other
         //$soap->setEncoding($soap_test->encoding);
-        if ($this->useWSDL) {
+        if ($this->useWSDL && !$soap_test->headers && !$soap_test->headers_expect) {
             $args = '';
             foreach ($soap_test->method_params as $pname => $param) {
                 $arg = '$soap_test->method_params["'.$pname.'"]';

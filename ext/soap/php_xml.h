@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_xml.h,v 1.12 2004/01/30 15:07:19 dmitry Exp $ */
+/* $Id: php_xml.h,v 1.13 2004/02/04 14:46:11 dmitry Exp $ */
 
 #ifndef PHP_SOAP_XML_H
 #define PHP_SOAP_XML_H
@@ -48,26 +48,28 @@ void *php_stream_xmlIO_open_wrapper(const char *filename);
 int php_stream_xmlIO_read(void *context, char *buffer, int len);
 int php_stream_xmlIO_close(void *context);
 
-#define FOREACHATTRNODE(n,c,i) \
+#define FOREACHATTRNODE(n,c,i)      FOREACHATTRNODEEX(n,c,NULL,i)
+#define FOREACHATTRNODEEX(n,c,ns,i) \
 	do { \
 		if (n == NULL) { \
 			break; \
 		} \
 		if (c) { \
-			i = get_attribute(n,c); \
+			i = get_attribute_ex(n,c,ns); \
 		} else { \
 			i = n; \
 		} \
 		if (i != NULL) { \
 			n = i;
 
-#define FOREACHNODE(n,c,i) \
+#define FOREACHNODE(n,c,i)      FOREACHNODEEX(n,c,NULL,i)
+#define FOREACHNODEEX(n,c,ns,i) \
 	do { \
 		if (n == NULL) { \
 			break; \
 		} \
 		if (c) { \
-			i = get_node(n,c); \
+			i = get_node_ex(n,c,NULL); \
 		} else { \
 			i = n; \
 		} \

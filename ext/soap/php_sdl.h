@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.h,v 1.22 2004/01/29 11:51:11 dmitry Exp $ */
+/* $Id: php_sdl.h,v 1.23 2004/02/04 14:46:11 dmitry Exp $ */
 
 #ifndef PHP_SDL_H
 #define PHP_SDL_H
@@ -63,11 +63,21 @@ struct _sdlSoapBinding {
 	int   style;
 };
 
+typedef struct _sdlSoapBindingFunctionHeader {
+	char       *name;
+	char       *ns;
+	int         use;
+	sdlTypePtr  element;
+	encodePtr   encode;
+	char       *encodingStyle; /* not implemented yet */
+} sdlSoapBindingFunctionHeader, *sdlSoapBindingFunctionHeaderPtr;
+
 struct _sdlSoapBindingFunctionBody {
-	char *ns;
-	int   use;
-	char *parts;         /* not implemented yet */
-	char *encodingStyle; /* not implemented yet */
+	char      *ns;
+	int        use;
+	char      *parts;          /* not implemented yet */
+	char      *encodingStyle;  /* not implemented yet */
+	HashTable *headers;        /* array of sdlSoapBindingFunctionHeaderPtr */
 };
 
 struct _sdlSoapBindingFunction {

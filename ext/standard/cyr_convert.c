@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyr_convert.c,v 1.23 2002/12/31 16:07:34 sebastian Exp $ */
+/* $Id: cyr_convert.c,v 1.24 2003/04/16 21:40:48 moriyoshi Exp $ */
 
 #include <stdlib.h>
 
@@ -210,7 +210,7 @@ static char * php_convert_cyr_string(unsigned char *str, int length, char from, 
 	from_table = NULL;
 	to_table   = NULL;
 	
-	switch (toupper(from))
+	switch (toupper((int)(unsigned char)from))
 	{
 		case 'W':
 			from_table = _cyr_win1251;
@@ -232,7 +232,7 @@ static char * php_convert_cyr_string(unsigned char *str, int length, char from, 
 			break;
 	}
 
-	switch (toupper(to))
+	switch (toupper((int)(unsigned char)to))
 	{
 		case 'W':
 			to_table = _cyr_win1251;

@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.98 2003/02/26 22:11:12 iliaa Exp $ */
+/* $Id: exec.c,v 1.99 2003/04/16 21:40:48 moriyoshi Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -134,7 +134,7 @@ int php_exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 			} else if (type == 2) {
 				/* strip trailing whitespaces */	
 				l = bufl;
-				while (l-- && isspace(buf[l]));
+				while (l-- && isspace(((unsigned char *)buf)[l]));
 				if (l != (bufl - 1)) {
 					bufl = l + 1;
 					buf[bufl] = '\0';
@@ -147,7 +147,7 @@ int php_exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 			/* strip trailing whitespaces if we have not done so already */	
 			if (type != 2) {
 				l = bufl;
-				while (l-- && isspace(buf[l]));
+				while (l-- && isspace(((unsigned char *)buf)[l]));
 				if (l != (bufl - 1)) {
 					bufl = l + 1;
 					buf[bufl] = '\0';

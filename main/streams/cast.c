@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cast.c,v 1.3 2003/02/19 08:40:19 sniper Exp $ */
+/* $Id: cast.c,v 1.4 2003/02/24 21:40:23 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -208,7 +208,12 @@ PHPAPI int _php_stream_cast(php_stream *stream, int castas, void **ret, int show
 		return FAILURE;
 #endif
 
-		if (flags & PHP_STREAM_CAST_TRY_HARD) {
+		if (!php_stream_is_filtered(stream) && stream->ops->cast && stream->ops->cast(stream, castas, NULL TSRMLS_CC) == SUCCESS) {
+			if (FAILURE == stream->ops->cast(stream, castas, ret TSRMLS_CC)) {
+				return FAILURE;
+			}
+			goto exit_success;
+		} else if (flags & PHP_STREAM_CAST_TRY_HARD) {
 			php_stream *newstream;
 
 			newstream = php_stream_fopen_tmpfile();

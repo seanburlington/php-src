@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.71 2003/02/18 01:22:21 wez Exp $ */
+/* $Id: php_streams.h,v 1.72 2003/02/24 21:40:23 wez Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -405,6 +405,9 @@ PHPAPI int _php_stream_cast(php_stream *stream, int castas, void **ret, int show
 
 /* this flag is used when only the headers from HTTP request are to be fetched */
 #define STREAM_ONLY_GET_HEADERS		512
+
+/* don't apply open_basedir checks */
+#define STREAM_DISABLE_OPEN_BASEDIR	1024
 
 /* Antique - no longer has meaning */
 #define IGNORE_URL_WIN 0

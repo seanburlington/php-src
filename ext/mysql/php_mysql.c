@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.155 2002/08/24 10:53:40 georg Exp $ */
+/* $Id: php_mysql.c,v 1.156 2002/08/24 13:15:35 zeev Exp $ */
 
 /* TODO:
  *
@@ -1303,7 +1303,9 @@ PHP_FUNCTION(mysql_db_query)
 			break;
 	}
 	
-	php_error_docref(NULL TSRMLS_CC, E_NOTICE, "This function is deprecated; use mysql_select_db() and mysql_query() instead");
+	if (!strcasecmp(get_active_function_name(TSRMLS_C), "mysql")) {
+		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "This function is deprecated; use mysql_db_query()");
+	}
 	
 	php_mysql_do_query_general(query, mysql_link, id, db, MYSQL_STORE_RESULT, return_value TSRMLS_CC);
 }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.26 1999/09/16 08:05:17 thies Exp $ */
+/* $Id: var.c,v 1.27 1999/09/20 09:34:39 thies Exp $ */
 
 
 /* {{{ includes 
@@ -130,12 +130,12 @@ void php3api_var_dump(pval **struc, int level)
 
 PHP_FUNCTION(var_dump)
 {
-	pval *struc;
+	pval **struc;
 
-	if (ARG_COUNT(ht) != 1 || getParameters(ht, 1, &struc) == FAILURE) {
+	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &struc) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
-	php3api_var_dump(&struc, 1);
+	php3api_var_dump(struc, 1);
 }
 
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.18 2000/05/31 22:27:09 jah Exp $ */
+/* $Id: formatted_print.c,v 1.19 2000/05/31 22:44:29 jah Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -159,10 +159,6 @@ php_sprintf_appendstring(char **buffer, int *pos, int *size, char *add,
 		npad=0;
 	}
 	
-	if (sign) {
-		len--;
-	}
-	
 	PRINTF_DEBUG(("sprintf: appendstring(%x, %d, %d, \"%s\", %d, '%c', %d)\n",
 				  *buffer, *pos, *size, add, min_width, padding, alignment));
 	if (max_width == 0) {
@@ -176,7 +172,7 @@ php_sprintf_appendstring(char **buffer, int *pos, int *size, char *add,
 		*buffer = erealloc(*buffer, *size);
 	}
 	if (alignment == ALIGN_RIGHT) {
-		if (sign && padding=='0') { (*buffer)[(*pos)++] = '-'; add++; }
+		if (sign && padding=='0') { (*buffer)[(*pos)++] = '-'; add++; len--; }
 		while (npad-- > 0) {
 			(*buffer)[(*pos)++] = padding;
 		}

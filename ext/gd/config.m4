@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.105 2002/07/23 01:11:16 sniper Exp $
+dnl $Id: config.m4,v 1.106 2002/08/12 13:59:01 helly Exp $
 dnl
 
 dnl
@@ -239,6 +239,9 @@ if test "$PHP_GD" = "php"; then
 
   PHP_NEW_EXTENSION(gd, gd.c gdttf.c $sources, $ext_shared,, \\$(GDLIB_CFLAGS))
   PHP_ADD_BUILD_DIR($ext_builddir/libgd)
+
+dnl check for fabsf and floorf which are available since C99
+  AC_CHECK_FUNCS(fabsf floorf)
 
 dnl PNG is required by GD library
   test "$PHP_PNG_DIR" = "no" && PHP_PNG_DIR=yes

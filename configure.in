@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.28 2003/01/28 15:02:02 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.29 2003/02/10 17:12:16 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -29,9 +29,6 @@ dnl -------------------------------------------------------------------------
 
 AC_PREREQ(2.13)
 AC_INIT(README.CVS-RULES)
-
-dnl check for working sed
-PHP_PROG_SED
 
 PHP_CONFIG_NICE(config.nice)
 for arg in $0 "$@"; do

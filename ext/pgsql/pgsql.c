@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.164 2002/03/29 11:24:54 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.165 2002/03/31 01:18:32 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -399,6 +399,9 @@ PHP_MINFO_FUNCTION(pgsql)
 
 	php_info_print_table_start();
 	php_info_print_table_header(2, "PostgreSQL Support", "enabled");
+#ifdef HAVE_PG_CONFIG_H
+	php_info_print_table_row(2, "PostgreSQL(libpq) Version", PG_VERSION);
+#endif	
 	sprintf(buf, "%ld", PGG(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Links", buf);
 	sprintf(buf, "%ld", PGG(num_links));

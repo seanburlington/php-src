@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.39 2002/02/06 07:25:51 yohgaki Exp $ */
+/* $Id: php_pgsql.h,v 1.40 2002/03/31 01:18:32 yohgaki Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -36,6 +36,10 @@ extern zend_module_entry pgsql_module_entry;
 #define INV_READ             0x00040000
 #else
 #include <libpq/libpq-fs.h>
+#endif
+
+#ifdef HAVE_PG_CONFIG_H
+#include <pg_config.h>
 #endif
 
 #ifdef HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.29 2002/03/29 11:24:54 yohgaki Exp $
+dnl $Id: config.m4,v 1.30 2002/03/31 01:18:32 yohgaki Exp $
 dnl
 
 AC_DEFUN(PHP_PGSQL_CHECK_FUNCTIONS,[
@@ -23,6 +23,9 @@ if test "$PHP_PGSQL" != "no"; then
       if test -r "$i/$j/libpq-fe.h"; then
         PGSQL_INC_BASE=$i
         PGSQL_INCLUDE=$i/$j
+        if test -r "$i/$j/pg_config.h"; then
+          AC_DEFINE(HAVE_PG_CONFIG_H,1,[Whether to have pg_config.h])
+        fi
       fi
     done
 

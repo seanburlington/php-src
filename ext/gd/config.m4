@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.70 2001/06/30 00:38:06 sniper Exp $
+dnl $Id: config.m4,v 1.71 2001/07/03 21:09:16 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -143,7 +143,7 @@ AC_DEFUN(PHP_GD_T1LIB,[
     done
 
     if test -n "$T1_DIR"; then
-      AC_CHECK_LIB(t1, T1_GetExtend, 
+      AC_CHECK_LIB(t1, T1_LoadFont, 
       [
         AC_DEFINE(HAVE_LIBT1,1,[ ])
         PHP_ADD_INCLUDE("$T1_DIR/include")

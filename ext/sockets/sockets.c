@@ -14,12 +14,12 @@
    +----------------------------------------------------------------------+
    | Authors: Chris Vandomelen <chrisv@b0rked.dhs.org>                    |
    |          Sterling Hughes  <sterling@php.net>                         |
-   |                                                                      |
+   |          Jason Greene     <jason@php.net>                            |
    | WinSock: Daniel Beulshausen <daniel@php4win.de>                      |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.83 2001/12/11 15:30:26 sebastian Exp $ */
+/* $Id: sockets.c,v 1.84 2001/12/14 05:58:28 jason Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

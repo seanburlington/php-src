@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php.in,v 1.25 2001/04/17 01:51:26 ssb Exp $
+// $Id: PEAR.php.in,v 1.26 2001/04/19 02:33:24 ssb Exp $
 //
 
 define('PEAR_ERROR_RETURN', 1);
@@ -212,9 +212,9 @@ class PEAR
 
             case PEAR_ERROR_CALLBACK:
                 $setmode = $mode;
-                if (is_string($options) ||
-                    (is_array($options) && sizeof($options) == 2 &&
-                     is_object($options[0]) && is_string($options[1]))) {
+                if ((is_string($options) && function_exists($options)) ||
+                    (is_array($options) && method_exists(@$options[0], @$options[1])))
+                {
                     $setcallback = $options;
                 } else {
                     trigger_error("invalid error callback", E_USER_WARNING);

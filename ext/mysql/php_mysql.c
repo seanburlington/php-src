@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.64 2001/01/31 00:55:28 elixer Exp $ */
+/* $Id: php_mysql.c,v 1.65 2001/01/31 01:14:54 elixer Exp $ */
 
 
 /* TODO:
@@ -77,7 +77,7 @@ static int le_result, le_link, le_plink;
 #define MYSQL_HAS_TINY
 #endif
 
-#if MYSQL_VERSION_ID > 32200
+#if MYSQL_VERSION_ID >= 32200
 #define MYSQL_HAS_YEAR
 #endif
 

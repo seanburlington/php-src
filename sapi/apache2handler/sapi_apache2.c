@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.3 2003/03/10 03:17:04 sniper Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.4 2003/03/18 01:24:57 sniper Exp $ */
 
 #include <fcntl.h>
 
@@ -429,6 +429,7 @@ static void php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 	if (!PG(safe_mode)) {
 		auth = apr_table_get(r->headers_in, "Authorization");
 		php_handle_auth_data(auth TSRMLS_CC);
+		ctx->r->user = apr_pstrdup(ctx->r->pool, SG(request_info).auth_user);
 	} else {
 		SG(request_info).auth_user = NULL;
 		SG(request_info).auth_password = NULL;

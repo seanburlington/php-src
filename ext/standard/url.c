@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.69 2003/10/13 04:27:23 iliaa Exp $ */
+/* $Id: url.c,v 1.70 2003/10/19 20:00:51 shane Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -126,6 +126,12 @@ PHPAPI php_url *php_url_parse(char *str)
 				s = e + 3;
 				if (!strncasecmp("file", ret->scheme, sizeof("file"))) {
 					if (*(e + 3) == '/') {
+						/* support windows drive letters as in:
+						   file:///c:/somedir/file.txt
+						*/
+						if (*(e + 5) == ':') {
+							s = e + 4;
+						}
 						goto nohost;
 					}
 				}

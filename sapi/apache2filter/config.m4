@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.24 2002/07/11 14:41:03 sas Exp $
+dnl $Id: config.m4,v 1.25 2002/09/23 17:40:04 dreid Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 2.0 module support via DSO through APXS)
@@ -84,6 +84,14 @@ $APXS -S LIBEXECDIR='$APXS_LIBEXECDIR' -i ${optarg}-n php4"
     PHP_SELECT_SAPI(apache2filter, bundle, sapi_apache2.c apache_config.c php_functions.c)
     SAPI_SHARED=libs/libphp4.so
     INSTALL_IT="$INSTALL_IT $SAPI_SHARED"
+    ;;
+  *beos*)
+    APXS_BINDIR=`$APXS -q BINDIR`
+    if test -f _APP_; then `rm _APP_`; fi
+    `ln -s $APXS_BINDIR/httpd _APP_`
+    EXTRA_LIBS="$EXTRA_LIBS _APP_"
+    PHP_SELECT_SAPI(apache2filter, shared, sapi_apache2.c apache_config.c php_functions.c)
+    INSTALL_IT="$INSTALL_IT $SAPI_LIBTOOL" 
     ;;
   *)
     PHP_SELECT_SAPI(apache2filter, shared, sapi_apache2.c apache_config.c php_functions.c) 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.27 2000/06/05 19:47:44 andi Exp $ */
+/* $Id: microtime.c,v 1.28 2001/02/04 16:18:36 jmoore Exp $ */
 
 #include "php.h"
 
@@ -57,11 +57,13 @@ PHP_FUNCTION(microtime)
 	if (gettimeofday((struct timeval *) &tp, (NUL)) == 0) {
 		msec = (double) (tp.tv_usec / MICRO_IN_SEC);
 		sec = tp.tv_sec;
-	}
-	if (msec >= 1.0) msec -= (long) msec;
-	snprintf(ret, 100, "%.8f %ld", msec, sec);
-	RETVAL_STRING(ret,1);
+	
+		if (msec >= 1.0) msec -= (long) msec;
+		snprintf(ret, 100, "%.8f %ld", msec, sec);
+		RETVAL_STRING(ret,1);
+	} else
 #endif
+		RETURN_FALSE;
 }
 /* }}} */
 

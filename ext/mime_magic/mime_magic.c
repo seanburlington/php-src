@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.22 2002/12/31 16:06:57 sebastian Exp $ 
+  $Id: mime_magic.c,v 1.23 2003/01/10 04:37:26 moriyoshi Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -1425,7 +1425,7 @@ static int mget(union VALUETYPE *p, unsigned char *s,
 {
     long offset = m->offset;
 
-    if (offset + sizeof(union VALUETYPE) > nbytes)
+    if (offset + (long)sizeof(union VALUETYPE) > nbytes)
 		return 0;
 
     memcpy(p, s + offset, sizeof(union VALUETYPE));
@@ -1447,7 +1447,7 @@ static int mget(union VALUETYPE *p, unsigned char *s,
 			break;
 		}
 
-		if (offset + sizeof(union VALUETYPE) > nbytes)
+		if (offset + (long)sizeof(union VALUETYPE) > nbytes)
 			return 0;
 
 		memcpy(p, s + offset, sizeof(union VALUETYPE));

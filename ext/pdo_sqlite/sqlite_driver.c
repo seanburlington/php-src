@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.2 2004/09/19 12:42:39 wez Exp $ */
+/* $Id: sqlite_driver.c,v 1.3 2004/09/19 15:47:13 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -265,21 +265,25 @@ static int authorizer(void *autharg, int access_type, const char *arg3, const ch
 {
 	char *filename;
 	switch (access_type) {
-		case SQLITE_COPY:
-			filename = make_filename_safe(arg4);
+		case SQLITE_COPY: {
+			TSRMLS_FETCH();
+			filename = make_filename_safe(arg4 TSRMLS_CC);
 			if (!filename) {
 				return SQLITE_DENY;
 			}
 			efree(filename);
 			return SQLITE_OK;
+		}
 
-		case SQLITE_ATTACH:
-			filename = make_filename_safe(arg3);
+		case SQLITE_ATTACH: {
+			TSRMLS_FETCH();
+			filename = make_filename_safe(arg3 TSRMLS_CC);
 			if (!filename) {
 				return SQLITE_DENY;
 			}
 			efree(filename);
 			return SQLITE_OK;
+		}
 
 		default:
 			/* access allowed */
@@ -300,7 +304,7 @@ static int pdo_sqlite_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS
 	H->einfo.errmsg = NULL;
 	dbh->driver_data = H;
 
-	filename = make_filename_safe(dbh->data_source);
+	filename = make_filename_safe(dbh->data_source TSRMLS_CC);
 
 	if (!filename) {
 		zend_throw_exception_ex(php_pdo_get_exception(), PDO_ERR_CANT_MAP TSRMLS_CC,

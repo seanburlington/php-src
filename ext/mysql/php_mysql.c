@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.113 2001/12/15 17:09:37 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.114 2001/12/23 14:37:24 alexwaugh Exp $ */
 
 
 /* TODO:
@@ -48,6 +48,11 @@
 #endif
 #include <netdb.h>
 #include <netinet/in.h>
+#endif
+
+#ifndef HAVE_USHORT
+#undef ushort
+typedef unsigned short ushort;
 #endif
 
 /* True globals, no need for thread safety */

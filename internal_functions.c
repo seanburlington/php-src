@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: internal_functions.c,v 1.1 1999/04/07 21:02:09 zeev Exp $ */
+/* $Id: internal_functions.c,v 1.2 1999/04/10 16:25:23 zeev Exp $ */
 
 
 #include "php.h"
@@ -89,10 +89,6 @@
 #include "functions/php3_sysvsem.h"
 #include "functions/php3_sysvshm.h"
 #include "functions/php3_dav.h"
-
-
-extern php3_ini_structure php3_ini;
-extern php3_ini_structure php3_ini_master;
 
 unsigned char first_arg_force_ref[] = { 1, BYREF_FORCE };
 unsigned char first_arg_allow_ref[] = { 1, BYREF_ALLOW };

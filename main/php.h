@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.2 1999/04/09 19:09:29 zeev Exp $ */
+/* $Id: php.h,v 1.3 1999/04/10 16:25:23 zeev Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -199,8 +199,6 @@ extern char *strerror(int);
 #endif
 
 #include "fopen-wrappers.h"
-
-#include "mod_php3.h"  /* the php3_ini structure comes from here */
 
 #if APACHE /* apache httpd */
 # if HAVE_AP_CONFIG_H
@@ -377,8 +375,6 @@ extern PHPAPI int _php3_error_log(int opt_err,char *message,char *opt,char *head
 PHPAPI int cfg_get_long(char *varname, long *result);
 PHPAPI int cfg_get_double(char *varname, double *result);
 PHPAPI int cfg_get_string(char *varname, char **result);
-
-extern PHPAPI php3_ini_structure php3_ini;
 
 
 /* Output support */

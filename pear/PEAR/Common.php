@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.27 2001/12/22 04:42:12 ssb Exp $
+// $Id: Common.php,v 1.28 2001/12/23 21:32:09 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -316,7 +316,8 @@ class PEAR_Common extends PEAR
                     $this->pkginfo['release_state'] = $data;
                 }
                 break;
-            case 'dir':
+            case 'license':
+                $this->pkginfo['release_license'] = trim($data);
                 break;
             case 'file':
                 $this->current_file = trim($data);

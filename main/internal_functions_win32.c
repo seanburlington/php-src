@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997, 1998, 1999 The PHP Group                         |
+   | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group                   |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.21 1999/12/30 02:58:27 sas Exp $ */
+/* $Id: internal_functions_win32.c,v 1.22 2000/01/01 01:31:27 sas Exp $ */
 
 
 #include "php.h"

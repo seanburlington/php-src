@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997, 1998, 1999 The PHP Group                         |
+   | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group                   |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -22,7 +22,7 @@
 
 #define OCI_USE_EMALLOC 0		/* set this to 1 if you want to use the php memory manager! */
 
-/* $Id: oci8.c,v 1.49 1999/12/23 08:18:35 thies Exp $ */
+/* $Id: oci8.c,v 1.50 2000/01/01 01:31:43 sas Exp $ */
 
 /* TODO list:
  *

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997, 1998, 1999 The PHP Group                         |
+   | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group                   |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.12 1999/12/18 22:35:27 zeev Exp $ */
+/* $Id: base64.c,v 1.13 2000/01/01 01:31:48 sas Exp $ */
 
 #include <string.h>
 

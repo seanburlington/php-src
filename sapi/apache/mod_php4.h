@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997, 1998, 1999 The PHP Group                         |
+   | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group                   |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.h,v 1.1 1999/09/27 16:34:27 ssb Exp $ */
+/* $Id: mod_php4.h,v 1.2 2000/01/01 01:32:00 sas Exp $ */
 
 #ifndef _MOD_PHP4_H
 #define _MOD_PHP4_H

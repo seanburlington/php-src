@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997, 1998, 1999 The PHP Group                         |
+   | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group                   |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.21 1999/12/18 22:35:06 zeev Exp $ */
+/* $Id: ldap.c,v 1.22 2000/01/01 01:31:39 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -277,7 +277,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_printf("<table>"
 				"<tr><td>Total links:</td><td>%d/%s</td></tr>\n"
-		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.21 1999/12/18 22:35:06 zeev Exp $</td></tr>\n"
+		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.22 2000/01/01 01:31:39 sas Exp $</td></tr>\n"
 #if HAVE_NSLDAP
 				"<tr><td>SDK Version:</td><td>%f</td></tr>"
 				"<tr><td>Highest LDAP Protocol Supported:</td><td>%f</td></tr>"

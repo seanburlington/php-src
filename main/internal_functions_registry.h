@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997, 1998, 1999 The PHP Group                         |
+   | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group                   |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_registry.h,v 1.4 1999/12/17 19:16:33 zeev Exp $ */
+/* $Id: internal_functions_registry.h,v 1.5 2000/01/01 01:31:27 sas Exp $ */
 
 #ifndef _INTERNAL_FUNCTIONS_REGISTRY_H
 #define _INTERNAL_FUNCTIONS_REGISTRY_H

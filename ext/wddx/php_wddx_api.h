@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997, 1998, 1999 The PHP Group                         |
+   | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group                   |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx_api.h,v 1.2 1999/10/01 14:54:55 andrei Exp $ */
+/* $Id: php_wddx_api.h,v 1.3 2000/01/01 01:31:55 sas Exp $ */
 
 #ifndef PHP_WDDX_API_H
 #define PHP_WDDX_API_H

@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.95 2003/08/05 14:31:15 cox Exp $
+// $Id: Installer.php,v 1.96 2003/08/13 21:16:31 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -774,11 +774,18 @@ class PEAR_Installer extends PEAR_Common
             $this->installroot = '';
         }
         $this->registry = &new PEAR_Registry($php_dir);
+        $filelist = $this->registry->packageInfo($package, 'filelist');
+        if ($filelist == null) {
+            return $this->raiseError("$package not installed");
+        }
         if (empty($options['nodeps'])) {
             $depchecker = &new PEAR_Dependency($this->registry);
-            $error = $depchecker->checkPackageUninstall($errors, $package);
+            $error = $depchecker->checkPackageUninstall($errors, $warning, $package);
             if ($error) {
                 return $this->raiseError($errors . 'uninstall failed');
+            }
+            if ($warning) {
+                $this->log(0, $warning);
             }
         }
         // Delete the files

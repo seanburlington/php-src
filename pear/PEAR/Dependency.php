@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.23 2003/08/03 13:44:36 cox Exp $
+// $Id: Dependency.php,v 1.24 2003/08/13 21:14:48 cellog Exp $
 
 require_once "PEAR.php";
 
@@ -151,11 +151,12 @@ class PEAR_Dependency
      * Check package dependencies on uninstall
      *
      * @param string $error     The resultant error string
+     * @param string $warning   The resultant warning string
      * @param string $name      Name of the package to test
      *
      * @return bool true if there were errors
      */
-    function checkPackageUninstall(&$error, $package)
+    function checkPackageUninstall(&$error, &$warning, $package)
     {
         $error = null;
         $packages = $this->registry->listPackages();
@@ -169,7 +170,11 @@ class PEAR_Dependency
             }
             foreach ($deps as $dep) {
                 if ($dep['type'] == 'pkg' && strcasecmp($dep['name'], $package) == 0) {
-                    $error .= "Package '$pkg' depends on '$package'\n";
+                    if (isset($dep['optional']) && $dep['optional'] == 'yes') {
+                        $warning .= "\nWarning: Package '$pkg' optionally depends on '$package'";
+                    } else {
+                        $error .= "Package '$pkg' depends on '$package'\n";
+                    }
                 }
             }
         }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.5 2003/09/29 11:43:26 rrichards Exp $ */
+/* $Id: xpath.c,v 1.6 2003/10/05 13:14:21 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -197,6 +197,9 @@ PHP_FUNCTION(dom_xpath_query)
 		ctxp->nsNr = 0;
 	}
 
+	if (! xpathobjp) {
+		RETURN_FALSE;
+	}
 	if (xpathobjp->type ==  XPATH_NODESET) {
 		int i;
 		xmlNodeSetPtr nodesetp;

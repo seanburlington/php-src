@@ -17,10 +17,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.19 2002/01/02 14:58:17 mfischer Exp $ */
+/* $Id: ftp.h,v 1.20 2002/01/06 23:10:54 venaas Exp $ */
 
 #ifndef	FTP_H
 #define	FTP_H
+
+#include "php_network.h"
 
 #include <stdio.h>
 #ifdef HAVE_NETINET_IN_H
@@ -40,7 +42,7 @@ typedef enum ftptype {
 typedef struct ftpbuf
 {
 	int		fd;			/* control connection */
-	struct in_addr	localaddr;		/* local inet address */
+	php_sockaddr_storage	localaddr;	/* local address */
 	int		resp;			/* last response code */
 	char		inbuf[FTP_BUFSIZE];	/* last response text */
 	char		*extra;			/* extra characters */
@@ -50,7 +52,7 @@ typedef struct ftpbuf
 	char		*syst;			/* cached system type */
 	ftptype_t	type;			/* current transfer type */
 	int		pasv;			/* 0=off; 1=pasv; 2=ready */
-	struct sockaddr_in	pasvaddr;	/* passive mode address */
+	php_sockaddr_storage	pasvaddr;	/* passive mode address */
 	long	timeout_sec;	/* User configureable timeout (seconds) */
 } ftpbuf_t;
 

@@ -1,3 +1,8 @@
+2000-12-25  James L. Pine  <jlp@valinux.com>
+
+    * pear/DB/oci8.php:
+    added quoteString function to override the one in common.  replaces single quotes with double single quotes.
+
 2000-12-24  Sascha Schumann  <sascha@schumann.cx>
 
     * ext/gmp/tests/002.phpt
@@ -1402,7 +1407,7 @@
     a class/module use "@see $variable" and "@see function()". Note the $ and the "()".
     If the referenced element is unknow, the reference will be dropped and a warning is generated.
 
-    - added @version $Id: ChangeLog,v 1.572 2000/12/25 02:09:10 changelog Exp $ to some class doc comments
+    - added @version $Id: ChangeLog,v 1.573 2000/12/26 02:09:09 changelog Exp $ to some class doc comments
 
     This is an eays way to add a version tag to inline docs if you use a CVS.
 

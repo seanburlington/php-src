@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.100 2004/02/25 20:16:21 abies Exp $ */
+/* $Id: php_ftp.c,v 1.101 2004/09/27 14:25:13 hyanantha Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -25,14 +25,8 @@
 
 #include "php.h"
 
-#ifdef NETWARE
-#ifdef USE_WINSOCK
+#if defined(NETWARE) && defined(USE_WINSOCK)
 #include <novsock2.h>
-#else
-#ifndef NEW_LIBC
-#include <sys/socket.h>
-#endif
-#endif
 #endif
 
 #if HAVE_OPENSSL_EXT

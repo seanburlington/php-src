@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.314 2003/02/25 20:12:18 moriyoshi Exp $ */
+/* $Id: file.c,v 1.315 2003/02/26 19:34:16 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2082,7 +2082,7 @@ PHP_FUNCTION(rmdir)
 }
 /* }}} */
 
-/* {{{ proto int readfile(string filename [, int use_include_path])
+/* {{{ proto int readfile(string filename [, bool use_include_path])
    Output a file or a URL */
 PHP_FUNCTION(readfile)
 {

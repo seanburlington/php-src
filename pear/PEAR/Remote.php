@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.32 2002/10/09 22:34:00 ssb Exp $
+// $Id: Remote.php,v 1.33 2002/11/10 02:44:49 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -47,6 +47,9 @@ class PEAR_Remote extends PEAR
     }
 
     // }}}
+
+    // {{{ getCache()
+
     
     function getCache($args)
     {
@@ -66,7 +69,11 @@ class PEAR_Remote extends PEAR
             );
         return $result;
     }
+
+    // }}}
     
+    // {{{ saveCache()
+
     function saveCache($args, $data)
     {
         $id       = md5(serialize($args));
@@ -82,6 +89,8 @@ class PEAR_Remote extends PEAR
             fclose($fp);
         };
     }
+
+    // }}}
     
     // {{{ call(method, [args...])
 

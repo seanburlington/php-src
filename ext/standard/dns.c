@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.16 2000/03/11 20:48:49 andi Exp $ */
+/* $Id: dns.c,v 1.17 2000/05/17 16:08:42 sas Exp $ */
 
 #include "php.h"
 #if HAVE_SYS_SOCKET_H
@@ -71,10 +71,11 @@ PHP_FUNCTION(gethostbyaddr)
 
 char *php_gethostbyaddr(char *ip)
 {
-	unsigned long addr;
+	struct in_addr addr;
 	struct hostent *hp;
 
-	if ((int) (addr = inet_addr(ip)) == -1) {
+	addr.s_addr = inet_addr(ip);
+	if (addr.s_addr == -1) {
 #if PHP_DEBUG
 		php_error(E_WARNING, "address not in a.b.c.d form");
 #endif

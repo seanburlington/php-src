@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.21 2002/03/26 16:29:53 cox Exp $
+// $Id: Registry.php,v 1.22 2002/04/01 16:10:39 cox Exp $
 
 require_once "System.php";
 require_once "PEAR.php";
@@ -215,7 +215,9 @@ class PEAR_Registry extends PEAR
         if (PEAR::isError($err = $this->_assertStateDir())) {
             return $err;
         }
-        $this->lock_fp = @fopen($this->lockfile, 'w');
+        // XXX People reported problems with LOCK_SH and 'w'
+        $open_mode = ($mode === LOCK_SH) ? 'r' : 'w';
+        $this->lock_fp = @fopen($this->lockfile, $open_mode);
         if (!is_resource($this->lock_fp)) {
             return $this->raiseError("could not create lock file: $php_errormsg");
         }

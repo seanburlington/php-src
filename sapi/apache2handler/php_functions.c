@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.8 2003/03/25 15:35:08 iliaa Exp $ */
+/* $Id: php_functions.c,v 1.9 2003/05/26 09:45:46 derick Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -388,7 +388,7 @@ PHP_MINFO_FUNCTION(apache)
 	php_info_print_table_row(2, "Apache API Version", tmp);
 	
 	if (serv->server_admin && *(serv->server_admin)) {
-		php_info_print_table_row(2, "Servert Administrator", serv->server_admin);
+		php_info_print_table_row(2, "Server Administrator", serv->server_admin);
 	}
 	
 	sprintf(tmp, "%s:%u", serv->server_hostname, serv->port);

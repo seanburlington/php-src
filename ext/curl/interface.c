@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.13 2003/04/27 22:15:19 sterling Exp $ */
+/* $Id: interface.c,v 1.14 2003/04/28 10:40:28 derick Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -661,7 +661,7 @@ PHP_FUNCTION(curl_init)
 	}
 
 	alloc_curl_handle(&ch);
-	ch->thread_ctx = TSRMLS_C;
+	TSRMLS_SET_CTX(ch->thread_ctx);
 	
 	ch->cp = curl_easy_init();
 	if (!ch->cp) {

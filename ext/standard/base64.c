@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.24 2001/08/05 01:42:41 zeev Exp $ */
+/* $Id: base64.c,v 1.25 2001/08/11 17:03:36 zeev Exp $ */
 
 #include <string.h>
 
@@ -157,7 +157,7 @@ PHP_FUNCTION(base64_encode)
 	unsigned char *result;
 	int ret_length;
 
-	if (ZEND_NUM_ARGS()!=1 || zend_get_parameters_ex(1,&str) == FAILURE) {
+	if (ZEND_NUM_ARGS()!=1 || zend_get_parameters_ex(1, &str) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(str);
@@ -179,7 +179,7 @@ PHP_FUNCTION(base64_decode)
 	unsigned char *result;
 	int ret_length;
 
-	if (ZEND_NUM_ARGS()!=1 || zend_get_parameters_ex(1,&str) == FAILURE) {
+	if (ZEND_NUM_ARGS()!=1 || zend_get_parameters_ex(1, &str) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(str);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.31 2001/07/30 06:18:06 zeev Exp $ */
+/* $Id: syslog.c,v 1.32 2001/08/11 17:03:37 zeev Exp $ */
 
 #include "php.h"
 
@@ -217,7 +217,7 @@ PHP_FUNCTION(openlog)
 	if (BG(syslog_device)) {
 		efree(BG(syslog_device));
 	}
-	BG(syslog_device) = estrndup((*ident)->value.str.val,(*ident)->value.str.len);
+	BG(syslog_device) = estrndup((*ident)->value.str.val, (*ident)->value.str.len);
 	openlog(BG(syslog_device), (*option)->value.lval, (*facility)->value.lval);
 	RETURN_TRUE;
 }
@@ -253,7 +253,7 @@ PHP_FUNCTION(syslog)
 	 * this will cause problems.
 	 */
 
-	php_syslog((*priority)->value.lval, "%.500s",(*message)->value.str.val);
+	php_syslog((*priority)->value.lval, "%.500s", (*message)->value.str.val);
 	RETURN_TRUE;
 }
 /* }}} */

@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.44 2001/08/06 03:50:50 sas Exp $ */
+/* $Id: crypt.c,v 1.45 2001/08/11 17:03:36 zeev Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -43,7 +43,7 @@
 
 #ifdef PHP_WIN32
 #include <process.h>
-extern char *crypt(char *__key,char *__salt);
+extern char *crypt(char *__key, char *__salt);
 #endif
 
 #include "php_lcg.h"

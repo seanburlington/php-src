@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.24 2001/08/06 03:50:51 sas Exp $ */
+/* $Id: uniqid.c,v 1.25 2001/08/11 17:03:37 zeev Exp $ */
 
 #include "php.h"
 
@@ -82,7 +82,7 @@ PHP_FUNCTION(uniqid)
 		sprintf(uniqid, "%s%08x%05x", (*prefix)->value.str.val, sec, usec);
 	}
 
-	RETURN_STRING(uniqid,1);
+	RETURN_STRING(uniqid, 1);
 #endif
 }
 /* }}} */

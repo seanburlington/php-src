@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.c,v 1.18 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: md5.c,v 1.19 2001/08/11 17:03:37 zeev Exp $ */
 
 /* 
  * md5.c - Copyright 1997 Lachlan Roche 
@@ -51,7 +51,7 @@ PHP_NAMED_FUNCTION(php_if_md5)
 		sprintf(r, "%02x", digest[i]);
 	}
 	*r = '\0';
-	RETVAL_STRING(md5str,1);
+	RETVAL_STRING(md5str, 1);
 }
 /* }}} */
 

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.47 2001/07/31 06:28:03 zeev Exp $ */
+/* $Id: head.c,v 1.48 2001/08/11 17:03:37 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -70,7 +70,7 @@ PHPAPI int php_header()
 
 
 
-/* php_set_cookie(name,value,expires,path,domain,secure) */
+/* php_set_cookie(name, value, expires, path, domain, secure) */
 /* {{{ proto void setcookie(string name [, string value [, int expires [, string path [, string domain [, string secure]]]]])
    Send a cookie */
 PHP_FUNCTION(setcookie)

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.34 2003/07/06 14:17:58 pajoye Exp $
+// $Id: Registry.php,v 1.35 2003/08/05 14:38:29 cox Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Registry.php';
@@ -340,6 +340,7 @@ installed package.'
             $key = ucwords(trim(str_replace('_', ' ', $key)));
             $data['data'][] = array($key, $value);
         }
+        $data['raw'] = $info;
 
         $this->ui->outputData($data, 'package-info');
     }

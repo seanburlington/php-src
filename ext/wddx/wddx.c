@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.82 2001/09/25 21:58:29 jeroen Exp $ */
+/* $Id: wddx.c,v 1.83 2001/09/27 19:43:06 jeroen Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -681,7 +681,7 @@ static void php_wddx_push_element(void *user_data, const char *name, const char 
 			}
 		}
 	} else if (!strcmp(name, EL_STRING)) {
-		Z_TYPE(ent) = ST_STRING;
+		ent.type = ST_STRING;
 		SET_STACK_VARNAME;
 		
 		ALLOC_ZVAL(ent.data);
@@ -691,7 +691,7 @@ static void php_wddx_push_element(void *user_data, const char *name, const char 
 		Z_STRLEN_P(ent.data) = 0;
 		wddx_stack_push((wddx_stack *)stack, &ent, sizeof(st_entry));
 	} else if (!strcmp(name, EL_BINARY)) {
-		Z_TYPE(ent) = ST_BINARY;
+		ent.type = ST_BINARY;
 		SET_STACK_VARNAME;
 		
 		ALLOC_ZVAL(ent.data);
@@ -711,7 +711,7 @@ static void php_wddx_push_element(void *user_data, const char *name, const char 
 			}
 		}
 	} else if (!strcmp(name, EL_NUMBER)) {
-		Z_TYPE(ent) = ST_NUMBER;
+		ent.type = ST_NUMBER;
 		SET_STACK_VARNAME;
 		
 		ALLOC_ZVAL(ent.data);
@@ -723,7 +723,7 @@ static void php_wddx_push_element(void *user_data, const char *name, const char 
 
 		for (i=0; atts[i]; i++) {
 			if (!strcmp(atts[i], EL_VALUE) && atts[i+1]) {
-				Z_TYPE(ent) = ST_BOOLEAN;
+				ent.type = ST_BOOLEAN;
 				SET_STACK_VARNAME;
 
 				ALLOC_ZVAL(ent.data);
@@ -734,7 +734,7 @@ static void php_wddx_push_element(void *user_data, const char *name, const char 
 			}
 		}
 	} else if (!strcmp(name, EL_NULL)) {
-		Z_TYPE(ent) = ST_NULL;
+		ent.type = ST_NULL;
 		SET_STACK_VARNAME;
 
 		ALLOC_ZVAL(ent.data);
@@ -743,7 +743,7 @@ static void php_wddx_push_element(void *user_data, const char *name, const char 
 		
 		wddx_stack_push((wddx_stack *)stack, &ent, sizeof(st_entry));
 	} else if (!strcmp(name, EL_ARRAY)) {
-		Z_TYPE(ent) = ST_ARRAY;
+		ent.type = ST_ARRAY;
 		SET_STACK_VARNAME;
 		
 		ALLOC_ZVAL(ent.data);
@@ -751,7 +751,7 @@ static void php_wddx_push_element(void *user_data, const char *name, const char 
 		INIT_PZVAL(ent.data);
 		wddx_stack_push((wddx_stack *)stack, &ent, sizeof(st_entry));
 	} else if (!strcmp(name, EL_STRUCT)) {
-		Z_TYPE(ent) = ST_STRUCT;
+		ent.type = ST_STRUCT;
 		SET_STACK_VARNAME;
 		
 		ALLOC_ZVAL(ent.data);

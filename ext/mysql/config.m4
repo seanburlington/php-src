@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.7 1999/06/20 18:52:45 sas Exp $
+dnl $Id: config.m4,v 1.8 1999/07/14 19:21:43 rasmus Exp $
 
 AC_MSG_CHECKING(for MySQL support)
 AC_ARG_WITH(mysql,
@@ -40,12 +40,6 @@ AC_ARG_WITH(mysql,
 			fi
 		fi
 		MYSQL_INCLUDE=-I$MYSQL_INCDIR
-		if test -n "$APXS"; then
-			MYSQL_LFLAGS="${apxs_runpath_switch}$MYSQL_LIBDIR' -L$MYSQL_LIBDIR"
-		else
-			MYSQL_LFLAGS="${ld_runpath_switch}$MYSQL_LIBDIR -L$MYSQL_LIBDIR"
-		fi
-		MYSQL_LIBS=-lmysqlclient
 
 		AC_DEFINE(HAVE_MYSQL)
 		AC_MSG_RESULT(yes)

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.113 2004/07/14 22:30:29 edink Exp $ */
+/* $Id: php_cli.c,v 1.114 2004/11/15 14:00:48 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -870,7 +870,7 @@ int main(int argc, char *argv[])
 		if (param_error) {
 			PUTS(param_error);
 			exit_status=1;
-			goto out_err;
+			goto err;
 		}
 
 		CG(interactive) = interactive;

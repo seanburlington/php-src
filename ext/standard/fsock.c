@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.106.2.5 2003/05/12 23:44:48 wez Exp $ */
+/* $Id: fsock.c,v 1.106.2.6 2003/05/19 23:27:49 wez Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -279,7 +279,10 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		}
 		RETURN_FALSE;
 	}
-		
+	
+	if (zcontext) {
+		ZVAL_ADDREF(zcontext);
+	}
 	php_stream_to_zval(stream, return_value);
 }
 

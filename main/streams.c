@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.59 2003/05/19 22:55:56 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.60 2003/05/19 23:27:49 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -124,6 +124,10 @@ fprintf(stderr, "forget_persistent: %s:%p\n", stream->ops->label, stream);
 #endif
 	
 	stream->rsrc_id = FAILURE;
+
+	if (stream->context) {
+		stream->context = NULL;
+	}
 
 	return 0;
 }

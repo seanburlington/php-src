@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: Gtk.php,v 1.2 2002/05/26 12:53:26 ssb Exp $
+  $Id: Gtk.php,v 1.3 2002/06/09 18:18:01 cox Exp $
 */
 
 require_once "PEAR.php";
@@ -48,7 +48,9 @@ class PEAR_Frontend_Gtk extends PEAR
     {
         parent::PEAR();
         if (!extension_loaded('php_gtk')) {
-            dl('php_gtk.' . (OS_WINDOWS ? 'dll' : 'so'));
+            if (!@dl('php_gtk.' . (OS_WINDOWS ? 'dll' : 'so'))) {
+                die("Unable to load the php_gtk extension\n");
+            }
         }
         $this->window = &new GtkWindow();
         $this->window->set_title('PEAR Installer');

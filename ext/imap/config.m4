@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.41 2001/08/21 11:02:42 sas Exp $
+dnl $Id: config.m4,v 1.41.2.1 2002/08/20 23:09:01 kalowsky Exp $
 dnl
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
@@ -42,7 +42,7 @@ AC_DEFUN(PHP_IMAP_KRB_CHK, [
     PHP_ADD_LIBRARY(com_err,  1, IMAP_SHARED_LIBADD)
   else
     AC_EGREP_HEADER(auth_gss, $IMAP_INC_DIR/linkage.h, [
-      AC_MSG_ERROR(This c-client library is build with Kerberos support. 
+      AC_MSG_ERROR(This c-client library is built with Kerberos support. 
 
       Add --with-kerberos<=DIR> to your configure line. Check config.log for details.)
     ])
@@ -96,7 +96,7 @@ AC_DEFUN(PHP_IMAP_SSL_CHK, [
         return 0;
       }
     ],,[
-      AC_MSG_ERROR(This c-client library is build with SSL support. 
+      AC_MSG_ERROR(This c-client library is built with SSL support. 
       
       Add --with-imap-ssl<=DIR> to your configure line. Check config.log for details.)
     ])

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.63 2000/08/04 16:48:42 rasmus Exp $ */
+/* $Id: mod_php4.c,v 1.64 2000/08/20 14:20:21 sas Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -315,7 +315,7 @@ static struct stat *php_apache_get_stat(SLS_D)
 }
 
 
-static char *php_apache_getenv(char *name, int name_len SLS_DC)
+static char *php_apache_getenv(char *name, size_t name_len SLS_DC)
 {
 	return (char *) table_get(((request_rec *) SG(server_context))->subprocess_env, name);
 }

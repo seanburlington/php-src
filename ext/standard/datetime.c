@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.57 2000/11/11 17:28:20 chagenbu Exp $ */
+/* $Id: datetime.c,v 1.57.2.1 2000/12/08 11:38:02 sas Exp $ */
 
 
 #include "php.h"
@@ -779,9 +779,9 @@ PHP_FUNCTION(strtotime)
 	if (argc == 2) {
 		convert_to_long_ex(z_now);
 		now = Z_LVAL_PP(z_now);
-		RETURN_LONG(parse_date(Z_STRVAL_PP(z_time), &now));
+		RETURN_LONG(php_parse_date(Z_STRVAL_PP(z_time), &now));
 	} else {
-		RETURN_LONG(parse_date(Z_STRVAL_PP(z_time), NULL));
+		RETURN_LONG(php_parse_date(Z_STRVAL_PP(z_time), NULL));
 	}
 }
 /* }}} */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.2 2003/05/18 20:53:21 sterling Exp $ */
+/* $Id: simplexml.c,v 1.3 2003/05/18 21:13:29 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -50,7 +50,7 @@ _node_as_zval(php_sxe_object *sxe, xmlNodePtr node, zval *value)
 	char *contents;
 
 	contents = xmlNodeListGetString(sxe->document, node->xmlChildrenNode, 1);
-	if (contents) {
+	if (!xmlIsBlankNode(node->xmlChildrenNode) && contents) {
 		ZVAL_STRING(value, contents, 1);
 		xmlFree(contents);
 	} else {

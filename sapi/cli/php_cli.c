@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.83 2003/04/19 13:54:01 helly Exp $ */
+/* $Id: php_cli.c,v 1.84 2003/04/19 14:41:31 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -502,7 +502,7 @@ static int cli_seek_file_begin(zend_file_handle *file_handle, char *script_file,
 	}
 	return SUCCESS;
 }
-/* }} */
+/* }}} */
 
 /* {{{ main
  */

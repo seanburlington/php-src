@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.91.2.25 2003/11/26 14:04:56 abies Exp $ */
+/* $Id: interbase.c,v 1.91.2.26 2003/12/08 09:46:07 abies Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -624,7 +624,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.25 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.26 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -934,13 +934,14 @@ PHP_FUNCTION(ibase_pconnect)
    Close an InterBase connection */
 PHP_FUNCTION(ibase_close)
 {
-	zval **link_arg = NULL;
 	ibase_db_link *ib_link;
-	int link_id = -1;
+	int link_id;
 	
 	RESET_ERRMSG;
 	
 	switch (ZEND_NUM_ARGS()) {
+		zval **link_arg;
+
 		case 0:
 			link_id = IBG(default_link);
 			break;
@@ -949,13 +950,14 @@ PHP_FUNCTION(ibase_close)
 				RETURN_FALSE;
 			}
 			convert_to_long_ex(link_arg);
+			link_id = Z_LVAL_PP(link_arg);
 			break;
 		default:
 			WRONG_PARAM_COUNT;
 			break;
 	}
 
-	ZEND_FETCH_RESOURCE2(ib_link, ibase_db_link *, link_arg, link_id, "InterBase link", le_link, le_plink);
+	ZEND_FETCH_RESOURCE2(ib_link, ibase_db_link *, NULL, link_id, "InterBase link", le_link, le_plink);
 	zend_list_delete(link_id);
 	RETURN_TRUE;
 }

@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.6 2003/12/04 01:37:52 wez Exp $
+# $Id: Makefile,v 1.7 2003/12/04 17:28:08 wez Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -61,9 +61,13 @@ $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
 	for %D in ($(BUILD_DIRS_SUB)) do mkdir %D
 
-clean:
+clean-sapi:
+	for %D in ($(EXT_TARGETS) $(SAPI_TARGETS)) do del /F /Q $(BUILD_DIR)\%D
+	del /F /Q $(BUILD_DIR)\$(PHPDLL)
+
+clean: clean-sapi
 	for %D in ($(BUILD_DIRS_SUB)) do del /F /Q %D\*.*
-	del /F /Q $(BUILD_DIR)\*.*
+	del /F /Q $(BUILD_DIR)\*.res $(BUILD_DIR)\*.lib $(BUILD_DIR)\*.ilk $(BUILD_DIR)\*.pdb $(BUILD_DIR)\*.exp
 
 test:
 	<<test_suite_uses_lame_env_vars.bat

@@ -1,4 +1,4 @@
-/* $Id: php3_icap.h,v 1.1 1999/08/09 21:22:11 musone Exp $ */
+/* $Id: php3_icap.h,v 1.2 1999/08/17 16:44:17 musone Exp $ */
 
 #ifndef _INCLUDED_ICAP_H
 #define _INCLUDED_ICAP_H
@@ -24,6 +24,7 @@ int id;
 /* Functions accessable to PHP */
 extern php3_module_entry php3_icap_module_entry;
 #define php3_icap_module_ptr &php3_icap_module_entry
+define phpext_imap_ptr php3_icap_module_ptr
 
 extern int icap_init(INIT_FUNC_ARGS);
 extern int icap_init_request(INIT_FUNC_ARGS);

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.89 2003/03/26 22:43:42 mj Exp $
+// $Id: Common.php,v 1.90 2003/04/03 23:04:52 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -751,7 +751,7 @@ class PEAR_Common extends PEAR
         xml_parser_set_option($xp, XML_OPTION_CASE_FOLDING, false);
 
         $this->element_stack = array();
-        $this->pkginfo = array();
+        $this->pkginfo = array('provides' => array());
         $this->current_element = false;
         unset($this->dir_install);
         $this->pkginfo['filelist'] = array();

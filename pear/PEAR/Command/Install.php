@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.17 2002/04/07 16:51:17 ssb Exp $
+// $Id: Install.php,v 1.18 2002/04/09 08:10:12 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -93,9 +93,7 @@ class PEAR_Command_Install extends PEAR_Command_Common
 
     function run($command, $options, $params)
     {
-        $installer = &new PEAR_Installer($this->config->get('php_dir'),
-                                         $this->config->get('ext_dir'),
-                                         $this->config->get('doc_dir'));
+        $installer = &new PEAR_Installer($this->config);
         $installer->setFrontend($this->ui);
         $installer->debug = $this->config->get('verbose');
 

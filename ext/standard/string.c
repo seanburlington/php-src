@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.396 2003/08/27 00:43:54 pollita Exp $ */
+/* $Id: string.c,v 1.397 2003/09/20 16:10:49 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2256,6 +2256,9 @@ static void php_strtr_array(zval *return_value, char *str, int slen, HashTable *
 		switch (zend_hash_get_current_key_ex(hash, &string_key, &string_key_len, &num_key, 0, &hpos)) {
 			case HASH_KEY_IS_STRING:
 				len = string_key_len-1;
+				if (len < 1) {
+					RETURN_FALSE;
+				}
 				if (len > maxlen) {
 					maxlen = len;
 				}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.27 2004/05/06 14:29:32 pollita Exp $ */
+/* $Id: user_filters.c,v 1.28 2004/06/21 21:08:05 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -528,7 +528,7 @@ PHP_FUNCTION(stream_filter_register)
 
 	if (zend_hash_add(BG(user_filter_map), filtername, filtername_len, (void*)fdat,
 				sizeof(*fdat) + classname_len, NULL) == SUCCESS &&
-			php_stream_filter_register_factory(filtername, &user_filter_factory TSRMLS_CC) == SUCCESS) {
+			php_stream_filter_register_factory_volatile(filtername, &user_filter_factory TSRMLS_CC) == SUCCESS) {
 		RETVAL_TRUE;
 	}
 

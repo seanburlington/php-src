@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_filter_api.h,v 1.9 2004/05/26 21:19:21 wez Exp $ */
+/* $Id: php_stream_filter_api.h,v 1.10 2004/06/21 21:08:05 pollita Exp $ */
 
 /* The filter API works on the principle of "Bucket-Brigades".  This is
  * partially inspired by the Apache 2 method of doing things, although
@@ -141,6 +141,7 @@ typedef struct _php_stream_filter_factory {
 BEGIN_EXTERN_C()
 PHPAPI int php_stream_filter_register_factory(const char *filterpattern, php_stream_filter_factory *factory TSRMLS_DC);
 PHPAPI int php_stream_filter_unregister_factory(const char *filterpattern TSRMLS_DC);
+PHPAPI int php_stream_filter_register_factory_volatile(const char *filterpattern, php_stream_filter_factory *factory TSRMLS_DC);
 PHPAPI php_stream_filter *php_stream_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC);
 END_EXTERN_C()
 

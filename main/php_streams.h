@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.94 2004/06/21 18:58:55 pollita Exp $ */
+/* $Id: php_streams.h,v 1.95 2004/06/21 21:08:05 pollita Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -541,7 +541,9 @@ PHPAPI int _php_stream_make_seekable(php_stream *origstream, php_stream **newstr
 /* Give other modules access to the url_stream_wrappers_hash and stream_filters_hash */
 PHPAPI HashTable *_php_stream_get_url_stream_wrappers_hash(TSRMLS_D);
 #define php_stream_get_url_stream_wrappers_hash()	_php_stream_get_url_stream_wrappers_hash(TSRMLS_C)
-PHPAPI HashTable *php_get_stream_filters_hash();
+PHPAPI HashTable *_php_get_stream_filters_hash(TSRMLS_D);
+#define php_get_stream_filters_hash()	_php_get_stream_filters_hash(TSRMLS_C)
+PHPAPI HashTable *php_get_stream_filters_hash_global();
 END_EXTERN_C()
 #endif
 

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.56 2004/06/21 18:58:55 pollita Exp $ */
+/* $Id: streams.c,v 1.57 2004/06/21 21:08:05 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1351,7 +1351,7 @@ int php_init_stream_wrappers(int module_number TSRMLS_DC)
 	return (
 			zend_hash_init(&url_stream_wrappers_hash, 0, NULL, NULL, 1) == SUCCESS
 			&& 
-			zend_hash_init(php_get_stream_filters_hash(), 0, NULL, NULL, 1) == SUCCESS
+			zend_hash_init(php_get_stream_filters_hash_global(), 0, NULL, NULL, 1) == SUCCESS
 			&&
 			zend_hash_init(php_stream_xport_get_hash(), 0, NULL, NULL, 1) == SUCCESS
 			&&

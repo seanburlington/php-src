@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.35 2004/08/25 13:57:35 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.36 2004/10/19 05:14:09 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -49,6 +49,10 @@ PHP_FUNCTION(mysqli_connect)
 		return;
 	}
 
+	if (!socket_len) {
+		socket = NULL;
+	}
+    
 	/* TODO: safe mode handling */
 	if (PG(sql_safe_mode)){
 	} else {

@@ -17,25 +17,21 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xml.h,v 1.22 2003/03/18 12:06:04 ssb Exp $ */
+/* $Id: php_xml.h,v 1.23 2003/05/06 19:38:49 sterling Exp $ */
 
 #ifndef PHP_XML_H
 #define PHP_XML_H
 
-#ifdef HAVE_LIBEXPAT
-
+#ifdef HAVE_XML
 extern zend_module_entry xml_module_entry;
 #define xml_module_ptr &xml_module_entry
-
 #else
-
 #define xml_module_ptr NULL
-
 #endif
 
-#if defined(PHP_XML_INTERNAL)
+#ifdef HAVE_XML 
 
-#include <expat.h>
+#include "ext/xml/expat_compat.h"
 
 #ifdef PHP_WIN32
 #define PHP_XML_API __declspec(dllexport)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.555 2003/05/21 22:56:59 iliaa Exp $ */
+/* $Id: main.c,v 1.556 2003/05/30 20:03:10 sniper Exp $ */
 
 /* {{{ includes
  */
@@ -333,7 +333,7 @@ PHP_INI_BEGIN()
 	PHP_INI_ENTRY("precision",					"14",		PHP_INI_ALL,		OnSetPrecision)
 	PHP_INI_ENTRY("sendmail_from",				NULL,		PHP_INI_ALL,		NULL)
 	PHP_INI_ENTRY("sendmail_path",	DEFAULT_SENDMAIL_PATH,	PHP_INI_SYSTEM,		NULL)
-	PHP_INI_ENTRY("mail_force_extra_parameters",NULL,		PHP_INI_SYSTEM,		NULL)
+	PHP_INI_ENTRY("mail.force_extra_parameters",NULL,		PHP_INI_SYSTEM,		NULL)
 	PHP_INI_ENTRY("disable_functions",			"",			PHP_INI_SYSTEM,		NULL)
 	PHP_INI_ENTRY("disable_classes",			"",			PHP_INI_SYSTEM,		NULL)
 

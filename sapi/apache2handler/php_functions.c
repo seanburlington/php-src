@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.1.2.5 2003/03/13 22:01:43 edink Exp $ */
+/* $Id: php_functions.c,v 1.1.2.6 2003/03/25 01:38:50 sniper Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_smart_str.h"
@@ -490,7 +490,7 @@ static PHP_MSHUTDOWN_FUNCTION(apache)
 
 zend_module_entry php_apache_module = {
 	STANDARD_MODULE_HEADER,
-	"Apache 2.0",
+	"apache2handler",
 	apache_functions,
 	PHP_MINIT(apache),
 	PHP_MSHUTDOWN(apache),

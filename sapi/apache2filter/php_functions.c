@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.31.2.1 2002/12/31 16:27:02 sebastian Exp $ */
+/* $Id: php_functions.c,v 1.31.2.2 2003/03/25 01:38:49 sniper Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -304,7 +304,7 @@ static function_entry apache_functions[] = {
 
 zend_module_entry php_apache_module = {
 	STANDARD_MODULE_HEADER,
-	"Apache 2.0",
+	"apache2filter",
 	apache_functions,
 	NULL,
 	NULL,

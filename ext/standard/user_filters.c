@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.24 2004/01/17 17:33:11 andrey Exp $ */
+/* $Id: user_filters.c,v 1.25 2004/04/10 13:56:27 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -57,8 +57,8 @@ PHP_FUNCTION(user_filter_nop)
 
 static zend_function_entry user_filter_class_funcs[] = {
 	PHP_NAMED_FE(filter,	PHP_FN(user_filter_nop),		NULL)
-	PHP_NAMED_FE(oncreate,	PHP_FN(user_filter_nop),		NULL)
-	PHP_NAMED_FE(onclose,	PHP_FN(user_filter_nop),		NULL)
+	PHP_NAMED_FE(onCreate,	PHP_FN(user_filter_nop),		NULL)
+	PHP_NAMED_FE(onClose,	PHP_FN(user_filter_nop),		NULL)
 	{ NULL, NULL, NULL }
 };
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.203 2004/01/12 00:19:40 helly Exp $ */
+/* $Id: php.h,v 1.203.2.1 2004/11/02 17:25:13 andrey Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -271,6 +271,7 @@ extern char **environ;
 #else	/* NETWARE */
 extern char **environ;
 #define php_sleep sleep
+#define PHP_SLEEP_NON_VOID
 #endif	/*  NETWARE */
 #endif	/* !defined(PHP_WIN32) */
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.66.2.9 2003/05/28 09:42:48 hholzgra Exp $ */
+/* $Id: fdf.c,v 1.66.2.10 2003/07/14 23:20:01 edink Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -38,6 +38,10 @@
 #include "php_open_temporary_file.h"
 #include "php_variables.h"
 #include "php_fdf.h"
+
+#ifndef S_ISDIR
+#define S_ISDIR(m) (((m) & _S_IFDIR) == _S_IFDIR)
+#endif
 
 static int le_fdf;
 

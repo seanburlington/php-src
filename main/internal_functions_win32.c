@@ -16,7 +16,7 @@
 	|          Zeev Suraski <zeev@zend.com>                                |
 	+----------------------------------------------------------------------+
 
-	$Id: internal_functions_win32.c,v 1.61 2002/04/18 16:34:13 sebastian Exp $
+	$Id: internal_functions_win32.c,v 1.62 2002/04/18 16:39:30 sebastian Exp $
 */
 
 /* {{{ includes
@@ -74,7 +74,9 @@
 #if HAVE_MYSQL
 #include "ext/mysql/php_mysql.h"
 #endif
+#if defined(MBSTR_ENC_TRANS)
 #include "ext/mbstring/mbstring.h"
+#endif
 #if HAVE_OVERLOAD
 #include "ext/overload/php_overload.h"
 #endif

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_array.h,v 1.1 1999/11/13 20:31:54 andrei Exp $ */
+/* $Id: php_array.h,v 1.2 1999/11/21 12:37:53 thies Exp $ */
 
 #ifndef _PHP_ARRAY_H
 #define _PHP_ARRAY_H
@@ -75,6 +75,7 @@ PHP_FUNCTION(array_values);
 PHP_FUNCTION(array_count_values);
 PHP_FUNCTION(array_reverse);
 PHP_FUNCTION(array_pad);
+PHP_FUNCTION(array_flip);
 
 
 #define phpext_array_ptr array_module_ptr

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.70.2.1 2004/08/09 05:50:05 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.70.2.2 2004/08/10 16:30:30 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"

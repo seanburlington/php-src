@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.47.2.3 2002/04/26 03:12:59 sniper Exp $
+dnl $Id: config.m4,v 1.47.2.4 2002/07/29 02:15:19 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 1.x module support via DSO through APXS)
@@ -36,7 +36,7 @@ AC_ARG_WITH(apxs,
   APXS_HTTPD=`$APXS -q SBINDIR`/`$APXS -q TARGET`
 
   # Test that we're trying to configure with apache 1.x
-  APACHE_VERSION=`$APXS_HTTPD -v | head -1 | cut -f3 -d' ' | cut -f2 -d'/' | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+  PHP_AP_EXTRACT_VERSION($APXS_HTTPD)
   if test "$APACHE_VERSION" -ge 2000000; then
     AC_MSG_ERROR([Use --with-apxs2 with Apache 2.x!]) 
   fi

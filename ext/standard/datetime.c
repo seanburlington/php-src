@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.15 1999/07/24 02:43:22 rasmus Exp $ */
+/* $Id: datetime.c,v 1.16 1999/07/26 16:54:41 andi Exp $ */
 
 
 #include "php.h"
@@ -65,7 +65,9 @@ static int phpday_tab[2][12] =
 
 #define isleap(year) (((year%4) == 0 && (year%100)!=0) || (year%400)==0)
 
+#if !(WIN32|WINNT)
 extern PHPAPI time_t parsedate(char *p, struct timeval *now);
+#endif
 
 PHP_FUNCTION(time)
 {
@@ -556,6 +558,7 @@ PHP_FUNCTION(strftime)
 }
 #endif
 
+#if !(WIN32|WINNT)
 /* {{{ proto int strtotime(string time, int now) */
 PHP_FUNCTION(strtotime)
 {
@@ -579,6 +582,7 @@ PHP_FUNCTION(strtotime)
 		RETURN_LONG(parsedate(timep->value.str.val, NULL));
 	}
 }
+#endif
 /* }}} */
 
 /*

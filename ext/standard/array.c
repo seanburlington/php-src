@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.199.2.24 2003/08/09 20:50:25 iliaa Exp $ */
+/* $Id: array.c,v 1.199.2.25 2003/08/13 01:24:48 sniper Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -39,6 +39,7 @@
 #include "win32/unistd.h"
 #endif
 #include "zend_globals.h"
+#include "zend_variables.h"
 #include "php_globals.h"
 #include "php_array.h"
 #include "basic_functions.h"

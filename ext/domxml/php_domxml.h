@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.67 2002/08/14 14:23:44 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.68 2002/08/15 12:43:44 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -142,6 +142,7 @@ PHP_FUNCTION(domxml_node_parent);
 PHP_FUNCTION(domxml_node_prefix);
 PHP_FUNCTION(domxml_node_namespace_uri);
 PHP_FUNCTION(domxml_node_add_namespace);
+PHP_FUNCTION(domxml_node_set_namespace);
 PHP_FUNCTION(domxml_node);
 PHP_FUNCTION(domxml_clone_node);
 PHP_FUNCTION(domxml_node_unlink_node);

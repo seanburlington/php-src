@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.117 2003/02/27 23:53:55 iliaa Exp $ */
+/* $Id: dir.c,v 1.118 2003/05/05 12:17:02 thies Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -221,11 +221,11 @@ PHP_FUNCTION(closedir)
 
 	FETCH_DIRP();
 
-	zend_list_delete(dirp->rsrc_id);
-
 	if (dirp->rsrc_id == DIRG(default_dir)) {
 		php_set_default_dir(-1 TSRMLS_CC);
 	}
+
+	zend_list_delete(dirp->rsrc_id);
 }
 
 /* }}} */

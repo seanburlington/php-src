@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: thttpd.c,v 1.77.2.1 2002/12/31 16:27:21 sebastian Exp $ */
+/* $Id: thttpd.c,v 1.77.2.2 2003/01/15 11:32:31 sas Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -382,6 +382,12 @@ static int php_thttpd_startup(sapi_module_struct *sapi_module)
 	return SUCCESS;
 }
 
+static int sapi_thttpd_get_fd(int *nfd TSRMLS_DC)
+{
+	if (nfd) *nfd = TG(hc)->conn_fd;
+	return 0;
+}
+
 static sapi_module_struct thttpd_sapi_module = {
 	"thttpd",
 	"thttpd",
@@ -408,10 +414,15 @@ static sapi_module_struct thttpd_sapi_module = {
 	sapi_thttpd_register_variables,
 	NULL,									/* Log message */
 
+	NULL,									/* php.ini path override */
 	NULL,									/* Block interruptions */
 	NULL,									/* Unblock interruptions */
 
-	STANDARD_SAPI_MODULE_PROPERTIES
+	NULL,
+	NULL,
+	NULL,
+	0,
+	sapi_thttpd_get_fd
 };
 
 static void thttpd_module_main(int show_source TSRMLS_DC)

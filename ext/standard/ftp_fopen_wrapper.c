@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.50 2003/04/24 21:21:41 pollita Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.51 2003/04/24 22:25:33 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -408,7 +408,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 
 	stream = php_ftp_fopen_connect(wrapper, path, mode, options, opened_path, context, &reuseid, &resource, &use_ssl, &use_ssl_on_data STREAMS_CC TSRMLS_CC);
 	if (!stream) {
-		goto errext;
+		goto errexit;
 	}
 
 	/* set the connection to be binary */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.87 2000/01/28 13:31:12 zeev Exp $ */
+/* $Id: string.c,v 1.88 2000/01/28 17:24:50 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -26,7 +26,7 @@
 #include "php.h"
 #include "reg.h"
 #include "php_string.h"
-#include "php_gpce.h"
+#include "php_variables.h"
 #ifdef HAVE_LOCALE_H
 # include <locale.h>
 #endif

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.22 2000/01/28 14:57:19 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.23 2000/01/28 17:24:49 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -23,7 +23,7 @@
 #include "ext/standard/file.h" /* for php_file_le_uploads() */
 #include "zend_globals.h"
 #include "php_globals.h"
-#include "php_gpce.h"
+#include "php_variables.h"
 #include "rfc1867.h"
 
 

@@ -24,13 +24,15 @@
    | contact core@php.net.                                                |
    +----------------------------------------------------------------------+
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_gpce.h,v 1.2 2000/01/28 14:57:19 zeev Exp $ */
+/* $Id: php_variables.h,v 1.1 2000/01/28 17:24:49 zeev Exp $ */
 
-#ifndef _POST_H
-#define _POST_H
+#ifndef _PHP_VARIABLES_H
+#define _PHP_VARIABLES_H
 
+#include "php.h"
 #include "SAPI.h"
 
 #define PARSE_POST 0
@@ -39,6 +41,7 @@
 #define PARSE_STRING 3
 
 void php_treat_data(int arg, char *str ELS_DC PLS_DC SLS_DC);
-void php_register_variable(char *val, char *var, pval *track_vars_array ELS_DC PLS_DC);
+void php_import_environment_variables(ELS_D PLS_DC);
+PHPAPI void php_register_variable(char *val, char *var, pval *track_vars_array ELS_DC PLS_DC);
 
-#endif
+#endif /* _PHP_VARIABLES_H */

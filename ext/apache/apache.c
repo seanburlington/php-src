@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache.c,v 1.26 2000/01/01 01:31:28 sas Exp $ */
+/* $Id: apache.c,v 1.27 2000/01/28 17:24:50 zeev Exp $ */
 #include "php.h"
 #include "ext/standard/head.h"
 #include "php_globals.h"
@@ -415,6 +415,7 @@ PHP_FUNCTION(apache_lookup_uri)
 	destroy_sub_req(rr);
 }
 /* }}} */
+
 
 #if 0
 This function is most likely a bad idea.  Just playing with it for now.

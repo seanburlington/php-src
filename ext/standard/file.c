@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.87 2000/06/05 19:35:15 rasmus Exp $ */
+/* $Id: file.c,v 1.88 2000/06/06 12:16:44 thies Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1114,6 +1114,43 @@ PHP_FUNCTION(fwrite)
 		ret = fwrite((*arg2)->value.str.val,1,num_bytes,(FILE*)what);
 	}
 	RETURN_LONG(ret);
+}
+
+/* }}} */	
+/* {{{ proto int fflush(int fp)
+   flushes output */
+
+PHP_FUNCTION(fflush)
+{
+	pval **arg1;
+	int ret,type;
+	int issock=0;
+	int socketd=0;
+	void *what;
+
+	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &arg1) == FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+
+	what = zend_fetch_resource(arg1,-1,"File-Handle",&type,3,le_fopen,le_popen,le_socket);
+	ZEND_VERIFY_RESOURCE(what);
+
+	if (type == le_socket) {
+		issock=1;
+		socketd=*(int*)what;
+	}
+
+	if (issock){
+		ret = fsync(socketd);
+	} else {
+		ret = fflush((FILE*)what);
+	}
+
+	if (ret) {
+		RETURN_FALSE;
+	} else {
+		RETURN_TRUE;
+	}
 }
 
 /* }}} */	

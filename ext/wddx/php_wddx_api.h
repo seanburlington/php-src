@@ -16,13 +16,15 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx_api.h,v 1.9 2000/06/09 03:00:02 andrei Exp $ */
+/* $Id: php_wddx_api.h,v 1.10 2000/08/07 17:25:57 sas Exp $ */
 
 #ifndef PHP_WDDX_API_H
 #define PHP_WDDX_API_H
 
 #define WDDX_ARRAY_S			"<array length='%d'>"
 #define WDDX_ARRAY_E			"</array>"
+#define WDDX_BINARY_S			"<binary>"
+#define WDDX_BINARY_E			"</binary>"
 #define WDDX_BOOLEAN			"<boolean value='%s'/>"
 #define WDDX_CHAR				"<char code='%02X'/>"
 #define WDDX_COMMENT_S			"<comment>"

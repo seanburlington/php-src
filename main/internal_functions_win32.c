@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.52 2002/04/17 05:16:42 sebastian Exp $ */
+/* $Id: internal_functions_win32.c,v 1.53 2002/04/17 05:21:04 sebastian Exp $ */
 
 /* {{{ includes
  */
@@ -84,7 +84,7 @@ zend_module_entry *php_builtin_extensions[] = {
 #if HAVE_OVERLOAD
   phpext_overload_ptr,
 #endif
-  phpext_tokenizer_ptr,
+	phpext_tokenizer_ptr,
 	phpext_pcre_ptr,
 	phpext_session_ptr,
 	phpext_xml_ptr,

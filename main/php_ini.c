@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.108 2002/12/31 15:58:53 sebastian Exp $ */
+/* $Id: php_ini.c,v 1.109 2003/01/19 12:17:38 phanto Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -195,6 +195,34 @@ static void php_config_ini_parser_cb(zval *arg1, zval *arg2, int callback_type, 
 				}
 			}
 			break;
+
+		case ZEND_INI_PARSER_POP_ENTRY: {
+				zval *hash;
+				zval **find_hash;
+				zval *element;
+
+				if (!arg2) {
+					/* bare string - nothing to do */
+					break;
+				}
+
+				if (zend_hash_find(&configuration_hash, Z_STRVAL_P(arg1), Z_STRLEN_P(arg1)+1, (void **) &find_hash) == FAILURE) {
+					ALLOC_ZVAL(hash);
+					array_init(hash);
+
+					zend_hash_update(&configuration_hash, Z_STRVAL_P(arg1), Z_STRLEN_P(arg1)+1, &hash, sizeof(zval *), NULL);
+				} else {
+					hash = *find_hash;
+				}
+
+				ALLOC_ZVAL(element);
+				*element = *arg2;
+				zval_copy_ctor(element);
+				INIT_PZVAL(element);
+				add_next_index_zval(hash, element);			
+			}
+			break;
+
 		case ZEND_INI_PARSER_SECTION:
 			break;
 	}

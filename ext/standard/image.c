@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.20 2000/06/05 19:47:44 andi Exp $ */
+/* $Id: image.c,v 1.21 2000/06/18 20:09:17 andi Exp $ */
 /* 
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -110,7 +110,7 @@ static unsigned long int php_swf_get_bits (unsigned char* buffer, int pos, int c
 static struct gfxinfo *php_handle_swf (FILE* fp)
 {
 	struct gfxinfo *result = NULL;
-	unsigned char bits;
+	long bits;
 	unsigned char a[32];
 	
 	result = (struct gfxinfo *) ecalloc (1, sizeof (struct gfxinfo));

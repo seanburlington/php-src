@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.20 2005/02/26 15:44:38 wez Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.21 2005/02/26 16:03:22 wez Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -204,7 +204,7 @@ PDO_API int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len,
 						case IS_DOUBLE:
 							convert_to_string(param->parameter);
 							plc->qlen = Z_STRLEN_P(param->parameter);
-							plc->quoted = Z_STRLEN_P(param->parameter);
+							plc->quoted = Z_STRVAL_P(param->parameter);
 							plc->freeq = 0;
 							break;
 

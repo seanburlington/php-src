@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.79 2000/05/23 14:36:27 andi Exp $ */
+/* $Id: file.c,v 1.80 2000/05/23 17:02:21 andi Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1232,7 +1232,7 @@ PHP_FUNCTION(mkdir)
 	if (PG(safe_mode) &&(!php_checkuid((*arg1)->value.str.val,3))) {
 		RETURN_FALSE;
 	}
-	ret = mkdir((*arg1)->value.str.val,mode);
+	ret = V_MKDIR((*arg1)->value.str.val,mode);
 	if (ret < 0) {
 		php_error(E_WARNING,"MkDir failed (%s)", strerror(errno));
 		RETURN_FALSE;

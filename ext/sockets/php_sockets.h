@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.12 2001/09/04 22:27:30 jason Exp $ */
+/* $Id: php_sockets.h,v 1.13 2001/09/26 15:12:20 sas Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -97,7 +97,8 @@ typedef struct {
 } php_fd_set;
 
 typedef struct {
-	unsigned char	info[256];
+	long family;
+	char info[256];
 } php_sockaddr_storage;
 
 typedef struct {

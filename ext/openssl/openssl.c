@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.58 2002/12/12 14:12:41 helly Exp $ */
+/* $Id: openssl.c,v 1.59 2002/12/13 09:17:03 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1685,7 +1685,7 @@ static EVP_PKEY * php_openssl_evp_from_zval(zval ** val, int public_key, char * 
 		}
 		else if (type == le_key) {
 			/* check whether it is actually a private key if requested */
-			if (!public_key && !php_openssl_is_private_key((EVP_PKEY*)what))
+			if (!public_key && !php_openssl_is_private_key((EVP_PKEY*)what TSRMLS_CC))
 			{
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "supplied key param is a public key");
 				return NULL;

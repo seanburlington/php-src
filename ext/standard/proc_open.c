@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.29 2004/09/29 06:04:36 hyanantha Exp $ */
+/* $Id: proc_open.c,v 1.30 2004/11/10 19:47:15 wez Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -219,6 +219,7 @@ static void proc_open_rsrc_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	WaitForSingleObject(proc->child, INFINITE);
 	GetExitCodeProcess(proc->child, &wstatus);
 	FG(pclose_ret) = wstatus;
+	CloseHandle(proc->child);
 	
 #elif HAVE_SYS_WAIT_H
 	

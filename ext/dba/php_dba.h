@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dba.h,v 1.6 2000/07/10 10:09:14 sas Exp $ */
+/* $Id: php_dba.h,v 1.7 2000/11/22 21:47:15 sas Exp $ */
 
 #ifndef PHP_DBA_H
 #define PHP_DBA_H
@@ -91,7 +91,7 @@ extern zend_module_entry dba_module_entry;
 	DBA_OPTIMIZE_FUNC(x); \
 	DBA_SYNC_FUNC(x)
 
-#define VALLEN(p) (*p)->value.str.val, (*p)->value.str.len
+#define VALLEN(p) Z_STRVAL_PP(p), Z_STRLEN_PP(p)
 	
 PHP_FUNCTION(dba_open);
 PHP_FUNCTION(dba_popen);

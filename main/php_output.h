@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.46 2002/10/03 07:17:14 yohgaki Exp $ */
+/* $Id: php_output.h,v 1.47 2002/10/06 09:06:24 zeev Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -47,7 +47,6 @@ PHPAPI int php_ob_get_length(zval *p TSRMLS_DC);
 
 PHP_FUNCTION(ob_start);
 PHP_FUNCTION(ob_flush);
-PHP_FUNCTION(ob_flush_all);
 PHP_FUNCTION(ob_clean);
 PHP_FUNCTION(ob_end_flush);
 PHP_FUNCTION(ob_end_clean);

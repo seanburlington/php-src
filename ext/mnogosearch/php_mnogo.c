@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.62 2002/08/03 11:23:50 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.63 2002/08/04 18:58:16 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -807,7 +807,7 @@ DLEXPORT PHP_FUNCTION(udm_set_agent_param)
 			UdmVarListReplaceStr(&Agent->Conf->Vars,"BrowserCharset",val);
 			{
 			    const char * charset=UdmVarListFindStr(&Agent->Conf->Vars,"BrowserCharset","iso-8859-1");
-			    Agent->Conf->lcs=UdmGetCharSet(charset);
+			    Agent->Conf->bcs=UdmGetCharSet(charset);
 			}
 #else
 			Agent->Conf->browser_charset=strdup(val);

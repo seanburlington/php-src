@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.199.2.2 2002/11/26 21:35:52 moriyoshi Exp $ */
+/* $Id: array.c,v 1.199.2.3 2002/11/26 21:54:33 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1010,6 +1010,7 @@ static int php_array_walk(HashTable *target_hash, zval **userdata TSRMLS_DC)
 				} else {
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid function name");
 				}
+				break;
 			}
 		}
 

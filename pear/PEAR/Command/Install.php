@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.36 2002/09/09 21:45:40 ssb Exp $
+// $Id: Install.php,v 1.37 2002/10/10 01:02:42 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -60,6 +60,11 @@ class PEAR_Command_Install extends PEAR_Command_Common
                 'nocompress' => array(
                     'shortopt' => 'Z',
                     'doc' => 'request uncompressed files when downloading',
+                    ),
+                'installroot' => array(
+                    'shortopt' => 'R',
+                    'arg' => 'DIR',
+                    'doc' => 'root directory used when installing files (ala PHP\'s INSTALL_ROOT)',
                     ),
                 ),
             'doc' => '<package> ...
@@ -107,6 +112,11 @@ four ways of specifying packages.
                     'shortopt' => 'Z',
                     'doc' => 'request uncompressed files when downloading',
                     ),
+                'installroot' => array(
+                    'shortopt' => 'R',
+                    'arg' => 'DIR',
+                    'doc' => 'root directory used when installing files (ala PHP\'s INSTALL_ROOT)',
+                    ),
                 ),
             'doc' => '<package> ...
 Upgrades one or more PEAR packages.  See documentation for the
@@ -139,6 +149,11 @@ More than one package may be specified at once.
                     'shortopt' => 'Z',
                     'doc' => 'request uncompressed files when downloading',
                     ),
+                'installroot' => array(
+                    'shortopt' => 'R',
+                    'arg' => 'DIR',
+                    'doc' => 'root directory used when installing files (ala PHP\'s INSTALL_ROOT)',
+                    ),
                 ),
             'doc' => '
 Upgrades all packages that have a newer release available.  Upgrades are
@@ -158,6 +173,11 @@ more stable.
                 'register-only' => array(
                     'shortopt' => 'r',
                     'doc' => 'do not remove files, only register the packages as not installed',
+                    ),
+                'installroot' => array(
+                    'shortopt' => 'R',
+                    'arg' => 'DIR',
+                    'doc' => 'root directory used when installing files (ala PHP\'s INSTALL_ROOT)',
                     ),
                 ),
             'doc' => '<package> ...

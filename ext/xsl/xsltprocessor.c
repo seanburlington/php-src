@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.18 2003/12/22 16:32:29 iliaa Exp $ */
+/* $Id: xsltprocessor.c,v 1.19 2003/12/22 16:49:54 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -297,17 +297,8 @@ PHP_FUNCTION(xsl_xsltprocessor_transform_to_uri)
 
 	ret = -1;
 	if (newdocp) {
-		int fd;
-		php_stream *stream = php_stream_open_wrapper_ex(uri, "wb", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL, NULL);
-
-		if (php_stream_cast(stream, PHP_STREAM_AS_FD, (void*)&fd, 1) == FAILURE) {
-			goto done;
-		}
-
-		ret = xsltSaveResultToFd(fd, newdocp, sheetp);
-done:
+		ret = xsltSaveResultToFilename(uri, newdocp, sheetp, 0);
 		xmlFreeDoc(newdocp);
-		php_stream_close(stream);
 	}
 
 	RETVAL_LONG(ret);

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 1999/12/30 04:07:17 sas Exp $
+dnl $Id: config.m4,v 1.5 2000/01/12 19:03:34 sas Exp $
 
 AC_MSG_CHECKING(whether to enable bc style precision math functions)
 AC_ARG_ENABLE(bcmath,
@@ -11,10 +11,10 @@ AC_ARG_ENABLE(bcmath,
     AC_MSG_RESULT(yes)
     PHP_EXTENSION(bcmath)
   else
-    AC_DEFINE(WITH_BCMATH, 0)
+    AC_DEFINE(WITH_BCMATH, 0,[ ])
     AC_MSG_RESULT(no)
   fi
 ],[
-  AC_DEFINE(WITH_BCMATH, 0)
+  AC_DEFINE(WITH_BCMATH, 0,[ ])
   AC_MSG_RESULT(no)
 ]) 

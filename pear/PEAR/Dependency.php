@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.36 2004/01/08 17:33:12 sniper Exp $
+// $Id: Dependency.php,v 1.36.4.1 2005/03/28 16:46:06 cellog Exp $
 
 require_once "PEAR.php";
 
@@ -204,7 +204,7 @@ class PEAR_Dependency
             }
             foreach ($deps as $dep) {
                 if ($dep['type'] == 'pkg' && strcasecmp($dep['name'], $package) == 0) {
-                    if ($dep['rel'] == 'ne') {
+                    if ($dep['rel'] == 'ne' || $dep['rel'] == 'not') {
                         continue;
                     }
                     if (isset($dep['optional']) && $dep['optional'] == 'yes') {
@@ -244,7 +244,7 @@ class PEAR_Dependency
         }
 
         if (!extension_loaded($name)) {
-            if ($relation == 'ne') {
+            if ($relation == 'not') {
                 return false;
             }
             if ($opt) {
@@ -322,7 +322,8 @@ class PEAR_Dependency
             return false;
         }
         if ($relation == 'not') {
-            $errmsg = "Invalid dependency - 'not' is allowed when specifying PHP, you must run PHP in PHP";
+            $errmsg = 'Invalid dependency - "not" is not allowed for php dependencies, ' .
+                'php cannot conflict with itself';
             return PEAR_DEPENDENCY_BAD_DEPENDENCY;
         }
         if (substr($req, 0, 2) == 'v.') {

@@ -19,7 +19,7 @@
 // |          Greg Beaver <cellog@php.net>                                |
 // +----------------------------------------------------------------------+
 //
-// $Id: Exception.php,v 1.4.2.1 2004/10/25 17:14:33 cellog Exp $
+// $Id: Exception.php,v 1.4.2.2 2005/03/28 16:46:06 cellog Exp $
 
 
 /**
@@ -90,7 +90,7 @@
  *
  * @since PHP 5
  * @package PEAR
- * @version $Revision: 1.4.2.1 $
+ * @version $Revision: 1.4.2.2 $
  * @author Tomas V.V.Cox <cox@idecnet.com>
  * @author Hans Lellelid <hans@velum.net>
  * @author Bertrand Mansion <bmansion@mamasam.com>
@@ -224,10 +224,16 @@ class PEAR_Exception extends Exception
     public function getCauseMessage(&$causes)
     {
         $trace = $this->getTraceSafe();
-        $causes[] = array('class'   => get_class($this),
-                          'message' => $this->message,
-                          'file'    => $trace[0]['file'],
-                          'line'    => $trace[0]['line']);
+        $cause = array('class'   => get_class($this),
+                       'message' => $this->message,
+                       'file' => 'unknown',
+                       'line' => 'unknown');
+        if (isset($trace[0])) {
+            if (isset($trace[0]['file'])) {
+                $cause['file'] = $trace[0]['file'];
+                $cause['line'] = $trace[0]['line'];
+            }
+        }
         if ($this->cause instanceof PEAR_Exception) {
             $this->cause->getCauseMessage($causes);
         }

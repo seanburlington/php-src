@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.50.4.1 2004/10/25 17:14:33 cellog Exp $
+// $Id: Registry.php,v 1.50.4.2 2005/03/28 16:46:06 cellog Exp $
 
 /*
 TODO:
@@ -314,7 +314,9 @@ class PEAR_Registry extends PEAR
     function _unlock()
     {
         $ret = $this->_lock(LOCK_UN);
-        fclose($this->lock_fp);
+        if (is_resource($this->lock_fp)) {
+            fclose($this->lock_fp);
+        }
         $this->lock_fp = null;
         return $ret;
     }

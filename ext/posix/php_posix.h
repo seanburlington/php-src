@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_posix.h,v 1.14 2004/01/08 17:32:41 sniper Exp $ */
+/* $Id: php_posix.h,v 1.15 2005/01/07 16:05:06 magnus Exp $ */
 
 #ifndef PHP_POSIX_H
 #define PHP_POSIX_H
@@ -89,6 +89,9 @@ PHP_FUNCTION(posix_getcwd);
 #ifdef HAVE_MKFIFO
 PHP_FUNCTION(posix_mkfifo);
 #endif
+
+/* POSIX.1, 5.6 */
+PHP_FUNCTION(posix_access);
 
 /* POSIX.1, 9.2 */
 PHP_FUNCTION(posix_getgrnam);

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.64 2003/02/11 02:34:52 sas Exp $
+dnl $Id: config.m4,v 1.65 2003/02/12 17:09:31 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 1.x module support via DSO through APXS)
@@ -34,6 +34,7 @@ AC_ARG_WITH(apxs,
   APXS_INCLUDEDIR=`$APXS -q INCLUDEDIR`
   APXS_CFLAGS=`$APXS -q CFLAGS`
   APXS_HTTPD=`$APXS -q SBINDIR`/`$APXS -q TARGET`
+  APACHE_INCLUDE=-I$APXS_INCLUDEDIR
 
   # Test that we're trying to configure with apache 1.x
   PHP_AP_EXTRACT_VERSION($APXS_HTTPD)

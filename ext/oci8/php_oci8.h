@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.22 2002/02/08 18:50:12 thies Exp $ */
+/* $Id: php_oci8.h,v 1.23 2002/02/10 12:41:52 thies Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -79,6 +79,7 @@ typedef struct {
     OCISvcCtx *pServiceContext;
 	sword error;
     OCIError *pError;
+	int needs_commit;
 } oci_connection;
 
 typedef struct {

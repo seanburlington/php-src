@@ -22,7 +22,7 @@
 */
 
 
-/* $Id: array.c,v 1.199.2.34 2004/07/11 21:24:47 andrey Exp $ */
+/* $Id: array.c,v 1.199.2.35 2004/07/11 21:30:19 andrey Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1260,7 +1260,7 @@ PHP_FUNCTION(extract)
 				/* break omitted intentionally */
 
 			case EXTR_PREFIX_ALL:
-				if (final_name.len == 0) {
+				if (final_name.len == 0 && var_name_len != 0) {
 					smart_str_appendl(&final_name, Z_STRVAL_PP(prefix), Z_STRLEN_PP(prefix));
 					smart_str_appendc(&final_name, '_');
 					smart_str_appendl(&final_name, var_name, var_name_len);

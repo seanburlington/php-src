@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky (ilia@prohost.org)                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.21 2002/01/09 08:02:21 yohgaki Exp $ */
+/* $Id: shmop.c,v 1.22 2002/01/17 19:58:53 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -242,8 +242,9 @@ PHP_FUNCTION(shmop_read)
 	startaddr = shmop->addr + (*start)->value.lval;
 	bytes = (*count)->value.lval ? (*count)->value.lval : shmop->size-(*start)->value.lval;
 
-	return_string = emalloc(bytes);
+	return_string = emalloc(bytes+1);
 	memcpy(return_string, startaddr, bytes);
+	return_string[bytes] = 0;
 
 	RETURN_STRINGL(return_string, bytes, 0);
 }

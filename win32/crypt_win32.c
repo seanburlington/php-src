@@ -16,8 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: crypt_win32.c,v 1.1 2002/03/07 19:46:14 fmk Exp $ */
+/* $Id: crypt_win32.c,v 1.2 2002/03/18 21:38:17 fmk Exp $ */
 
+/* This code is dristributed under the PHP license with permission from
+   the author Jochen Obalek <jochen.obalek@bigfoot.de> */
+   
 /* encrypt.c - providing 56 bit DES encryption
    Copyright (C) 1991 Jochen Obalek
 

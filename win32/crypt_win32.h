@@ -16,7 +16,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: crypt_win32.h,v 1.1 2002/03/07 19:46:14 fmk Exp $ */
+/* $Id: crypt_win32.h,v 1.2 2002/03/18 21:38:17 fmk Exp $ */
+
+/* This code is dristributed under the PHP license with permission from
+   the author Jochen Obalek <jochen.obalek@bigfoot.de> */
 
 /* encrypt.h - API to 56 bit DES encryption via  calls
                encrypt(3), setkey(3) and crypt(3)

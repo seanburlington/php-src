@@ -1,3 +1,37 @@
+2003-03-16  Sascha Schumann  <sascha@schumann.cx>
+
+    * (PHP_4)
+      ext/standard/php_smart_str.h:
+      Preserve explicit casting semantics from functions, so that you can
+      also pass void pointers to the macros.
+
+    * ext/standard/php_smart_str.h:
+      Merge macro changes
+
+2003-03-16  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * php.ini-dist
+      php.ini-recommended
+      main/main.c:
+      - disable html_errors per default as suggested by php.ini-<xxx>
+      - new error format that does not point to any documentation (if either
+        not html_errors or no docref_root given e.g.: production boxes and
+      default)
+      - documentation update in php.ini-<xxx>
+
+2003-03-16  Jani Taskinen  <sniper@iki.fi>
+
+    * ext/interbase/interbase.c:
+      WS & CS fixes + some TSRM_FETCH() removals + pval -> zval
+
+    * (PHP_4_3)
+      NEWS
+      ext/interbase/interbase.c:
+      MFH: - Fixed bug #22709 (crash within interbase when database unavailable)
+
+    * ext/interbase/interbase.c:
+      - Fixed bug #22709 (crash within interbase when database unavailable)
+
 2003-03-15  Moriyoshi Koizumi  <moriyoshi@at.wakwak.com>
 
     * tests/lang/bug22592.phpt:
@@ -1941,7 +1975,7 @@
 
     * sapi/apache/libpre.c
       sapi/apache/php_apache_http.h:
-      Added missing headers and $Id: ChangeLog,v 1.1296 2003/03/16 01:32:48 changelog Exp $ tags.
+      Added missing headers and $Id: ChangeLog,v 1.1297 2003/03/17 01:32:05 changelog Exp $ tags.
 
     * sapi/cgi/config9.m4:
       MFB: Fixed bug #22356 (Do not add empty -I flags).
@@ -2500,7 +2534,7 @@
       main/streams/plain_wrapper.c
       main/streams/streams.c
       main/streams/userspace.c:
-      ws fixes + missing $Id: ChangeLog,v 1.1296 2003/03/16 01:32:48 changelog Exp $ tags, headers added
+      ws fixes + missing $Id: ChangeLog,v 1.1297 2003/03/17 01:32:05 changelog Exp $ tags, headers added
 
 2003-02-19  Corne' Cornelius  <cornec@reach.co.za>
 
@@ -3418,7 +3452,7 @@
 
     * (PHP_4_3)
       sapi/cgi/cgi_main.c:
-      Added missing $Id: ChangeLog,v 1.1296 2003/03/16 01:32:48 changelog Exp $ tag
+      Added missing $Id: ChangeLog,v 1.1297 2003/03/17 01:32:05 changelog Exp $ tag
 
 2003-02-14  Thies C. Arntzen  <thies@thieso.net>
 

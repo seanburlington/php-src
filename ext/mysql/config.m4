@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.18 2000/03/26 19:46:11 sas Exp $
+dnl $Id: config.m4,v 1.19 2000/03/26 19:51:10 sas Exp $
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
 sinclude(ext/mysql/libmysql/mysql.m4)
@@ -38,6 +38,7 @@ if test "$PHP_MYSQL" = "yes"; then
   PHP_SUBST(MYSQL_LIBADD)
   PHP_SUBST(MYSQL_SUBDIRS)
 
+  PHP_EXTENSION(mysql)
   AC_ADD_INCLUDE(${ext_src_base}libmysql)
 elif test "$PHP_MYSQL" != "no"; then
   for i in $PHP_MYSQL; do
@@ -57,9 +58,9 @@ elif test "$PHP_MYSQL" != "no"; then
   AC_ADD_LIBPATH($MYSQL_DIR/lib/mysql) 
   AC_ADD_LIBRARY(mysqlclient)
   AC_ADD_INCLUDE($MYSQL_INC_DIR)
+  PHP_EXTENSION(mysql)
 fi
 
 if test "$PHP_MYSQL" != "no"; then
-  PHP_EXTENSION(mysql)
   AC_DEFINE(HAVE_MYSQL, 1, [Whether you have MySQL])
 fi

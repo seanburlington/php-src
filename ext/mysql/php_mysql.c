@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.194 2003/06/10 20:03:33 imajes Exp $ */
+/* $Id: php_mysql.c,v 1.195 2003/06/18 15:19:16 iliaa Exp $ */
 
 /* TODO:
  *
@@ -303,7 +303,7 @@ PHP_INI_BEGIN()
 	STD_PHP_INI_ENTRY("mysql.default_password",		NULL,	PHP_INI_ALL,		OnUpdateString,		default_password,	zend_mysql_globals,		mysql_globals)
 	PHP_INI_ENTRY("mysql.default_port",				NULL,	PHP_INI_ALL,		OnMySQLPort)
 	STD_PHP_INI_ENTRY("mysql.default_socket",		NULL,	PHP_INI_ALL,		OnUpdateStringUnempty,	default_socket,	zend_mysql_globals,		mysql_globals)
-	STD_PHP_INI_ENTRY("mysql.connect_timeout",		"-1",	PHP_INI_ALL,		OnUpdateLong,		connect_timeout, 	zend_mysql_globals,		mysql_globals)
+	STD_PHP_INI_ENTRY("mysql.connect_timeout",		"60",	PHP_INI_ALL,		OnUpdateLong,		connect_timeout, 	zend_mysql_globals,		mysql_globals)
 	STD_PHP_INI_BOOLEAN("mysql.trace_mode",			"0",	PHP_INI_ALL,		OnUpdateLong,		trace_mode, 		zend_mysql_globals,		mysql_globals)
 PHP_INI_END()
 /* }}} */

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.1 1999/04/17 00:37:07 ssb Exp $ */
+/* $Id: syslog.c,v 1.2 1999/04/21 17:28:54 zeev Exp $ */
 #ifdef THREAD_SAFE
 #include "tls.h"
 #endif
@@ -57,7 +57,7 @@ static void start_syslog(void);
 
 int php3_minit_syslog(INIT_FUNC_ARGS)
 {
-	TLS_VARS;
+	ELS_FETCH();
 	
 	/* error levels */
 	REGISTER_LONG_CONSTANT("LOG_EMERG", LOG_EMERG, CONST_CS | CONST_PERSISTENT); /* system unusable */

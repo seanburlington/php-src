@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.20 1999/04/21 04:02:11 zeev Exp $ */
+/* $Id: main.c,v 1.21 1999/04/21 17:28:54 zeev Exp $ */
 
 /* #define CRASH_DETECTION */
 
@@ -1199,7 +1199,7 @@ static void php3_parse(zend_file_handle *primary_file CLS_DC ELS_DC PLS_DC)
 	if (setjmp(EG(bailout))!=0) {
 		return;
 	}
-	_php3_hash_environment();
+	_php3_hash_environment(PLS_C);
 
 #if WIN32||WINNT
 	UpdateIniFromRegistry(primary_file->filename);

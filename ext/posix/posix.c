@@ -27,10 +27,11 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.9 2000/03/30 22:56:32 andi Exp $ */
+/* $Id: posix.c,v 1.10 2000/04/05 21:43:02 cmv Exp $ */
 
 
 #include "php.h"
+#include "ext/standard/info.h"
 #if !defined(PHP_API_VERSION) || PHP_API_VERSION < 19990421
 #include "internal_functions.h"
 #endif
@@ -134,7 +135,9 @@ DLEXPORT zend_module_entry *get_module(void) { return &posix__module_entry; }
 
 static PHP_MINFO_FUNCTION(posix)
 {
-    PUTS("$Revision: 1.9 $\n");
+	php_info_print_table_start();
+	php_info_print_table_row(2, "Revision", "$Revision: 1.10 $");
+	php_info_print_table_end();
 }
 
 /* {{{ proto int posix_kill(int pid, int sig)

@@ -15,9 +15,10 @@
    | Authors: Stephanie Wehner <_@r4k.net>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.10 2000/03/06 18:41:18 ssb Exp $ */
+/* $Id: yp.c,v 1.11 2000/04/05 21:43:03 cmv Exp $ */
 
 #include "php.h"
+#include "ext/standard/info.h"
 
 #if HAVE_YP
 
@@ -176,6 +177,8 @@ PHP_FUNCTION(yp_next) {
 /* }}} */
 
 PHP_MINFO_FUNCTION(yp) {
-	PUTS("Compiled with YP Support.");
+        php_info_print_table_start();
+        php_info_print_table_row(2, "YP Support", "enabled");
+        php_info_print_table_end();
 }
 #endif /* HAVE_YP */

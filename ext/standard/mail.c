@@ -16,12 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.20 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: mail.c,v 1.21 2000/04/05 21:43:02 cmv Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
 #include "php.h"
+#include "ext/standard/info.h"
 #if !defined(PHP_WIN32)
 #include "build-defs.h"
 #endif
@@ -135,9 +136,9 @@ int php_mail(char *to, char *subject, char *message, char *headers)
 PHP_MINFO_FUNCTION(mail)
 {
 #ifdef PHP_WIN32
-	PUTS("Internal Sendmail support for Windows 4");
+        php_info_print_table_row(2, "Internal Sendmail Support for Windows 4", "enabled");
 #else
-	php_printf("Path to sendmail: <tt>%s</tt>", INI_STR("sendmail_path"));
+        php_info_print_table_row(2, "Path to sendmail", INI_STR("sendmail_path") );
 #endif
 }
 

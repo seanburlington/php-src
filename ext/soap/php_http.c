@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.55.2.10 2005/01/25 11:02:45 dmitry Exp $ */
+/* $Id: php_http.c,v 1.55.2.11 2005/02/02 09:11:03 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -655,6 +655,7 @@ try_again:
 	}
 
 	if (!get_http_headers(stream, &http_headers, &http_header_size TSRMLS_CC)) {
+		efree(http_headers);
 		if (request != buf) {efree(request);}
 		php_stream_close(stream);
 		zend_hash_del(Z_OBJPROP_P(this_ptr), "httpsocket", sizeof("httpsocket"));
@@ -690,6 +691,7 @@ try_again:
 		if (http_status == 100) {
 			efree(http_headers);
 			if (!get_http_headers(stream, &http_headers, &http_header_size TSRMLS_CC)) {
+				efree(http_headers);
 				if (request != buf) {efree(request);}
 				php_stream_close(stream);
 				zend_hash_del(Z_OBJPROP_P(this_ptr), "httpsocket", sizeof("httpsocket"));

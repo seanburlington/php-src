@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.3 1999/08/18 16:43:57 andrey Exp $ */
+/* $Id: wddx.c,v 1.4 1999/08/26 13:25:53 andrey Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -618,10 +618,12 @@ static void _php_wddx_deserialize(zval *packet, zval *return_value)
 	
 	XML_ParserFree(parser);
 
-	wddx_stack_top(&stack, (void**)&ent);
-	*return_value = *(ent->data);
-	zval_copy_ctor(return_value);
-	
+	if (!wddx_stack_is_empty(&stack)) {
+		wddx_stack_top(&stack, (void**)&ent);
+		*return_value = *(ent->data);
+		zval_copy_ctor(return_value);
+	}
+		
 	wddx_stack_destroy(&stack);
 }
 /* }}} */

@@ -34,7 +34,7 @@
  * SUCH DAMAGE.
  */
 
-/* $Id: glob.c,v 1.2 2002/06/04 21:15:35 edink Exp $ */
+/* $Id: glob.c,v 1.3 2002/06/04 21:26:06 edink Exp $ */
 
 /*
  * glob(3) -- a superset of the one defined in POSIX 1003.2.
@@ -825,7 +825,7 @@ g_opendir(str, pglob)
 	char buf[MAXPATHLEN];
 
 	if (!*str)
-		strcpy(buf, ".");
+		strlcpy(buf, ".", sizeof buf);
 	else {
 		if (g_Ctoc(str, buf, sizeof(buf)))
 			return(NULL);

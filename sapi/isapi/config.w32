@@ -1,9 +1,13 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.2 2003/12/04 13:38:46 wez Exp $
+// $Id: config.w32,v 1.3 2003/12/05 02:40:58 wez Exp $
 
 ARG_ENABLE('isapi', 'Build ISAPI version of PHP', 'no');
 
 if (PHP_ISAPI == "yes") {
+	if (PHP_ZTS == "no") {
+		ERROR("ISAPI module requires an --enable-zts build of PHP");
+	}
+
 	SAPI('isapi', 'php4isapi.c', 'php' + PHP_VERSION + 'isapi.dll', '/D PHP4ISAPI_EXPORTS');
 	ADD_FLAG('LDFLAGS_ISAPI', '/DEF:sapi\\isapi\\php4isapi.def');
 }

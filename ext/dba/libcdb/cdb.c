@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cdb.c,v 1.2 2002/11/13 12:12:44 edink Exp $ */
+/* $Id: cdb.c,v 1.3 2002/11/13 16:30:50 helly Exp $ */
 
 /* incorporated from D.J.Bernstein's cdb-0.75 (http://cr.yp.to/cdb.html)*/
 
@@ -46,7 +46,7 @@
 static int cdb_match(struct cdb *c, char *key, unsigned int len, uint32 pos TSRMLS_DC)
 {
 	char buf[32];
-	int n;
+	unsigned int n;
 
 	while (len > 0) {
 		n = sizeof(buf);

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: internal_functions.c,v 1.11 1999/04/21 23:27:59 ssb Exp $ */
+/* $Id: internal_functions.c,v 1.12 1999/04/21 23:37:46 ssb Exp $ */
 
 
 #include "php.h"
@@ -63,7 +63,7 @@
 #include "functions/post.h"
 #include "ext/hyperwave/hw.h"
 #include "ext/filepro/filepro.h"
-#include "functions/db.h"
+#include "ext/db/db.h"
 #include "dl/snmp/php3_snmp.h"
 #include "functions/php3_zlib.h"
 #include "ext/com/php3_COM.h"

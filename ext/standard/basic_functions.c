@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.33 2004/03/27 01:17:06 helly Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.34 2004/03/28 21:50:01 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1006,9 +1006,10 @@ PHPAPI double php_get_nan()
 	((php_uint32*)&val)[1] = PHP_DOUBLE_QUIET_NAN_HIGH;
 	((php_uint32*)&val)[0] = 0;
 	return val;
-#else
-	/* hope the target platform is ISO-C compliant */
+#elif defined(HAVE_ATOF_ACCEPTS_NAN)
 	return atof("NAN");
+#else
+	return 0.0/0.0;
 #endif
 }
 
@@ -1019,9 +1020,10 @@ PHPAPI double php_get_inf()
 	((php_uint32*)&val)[1] = PHP_DOUBLE_INFINITY_HIGH;
 	((php_uint32*)&val)[0] = 0;
 	return val;
-#else
-	/* hope the target platform is ISO-C compliant */
+#elif defined(HAVE_ATOF_ACCEPTS_INF)
 	return atof("INF");
+#else
+	return 1.0/0.0;
 #endif
 }
 

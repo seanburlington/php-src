@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 2004/05/17 18:17:39 wez Exp $
+dnl $Id: config.m4,v 1.3 2004/05/19 13:28:04 edink Exp $
 
 AC_DEFUN(AC_PDO_OCI_VERSION,[
   AC_MSG_CHECKING([Oracle version])
@@ -26,7 +26,7 @@ AC_DEFUN(AC_PDO_OCI_VERSION,[
 ])                                                                                                                                                                
 
 PHP_ARG_WITH(pdo-oci, Oracle OCI support for PDO,
-[  --with-pdo-oci[=DIR]       Include Oracle-oci support. Default DIR is ORACLE_HOME.])
+[  --with-pdo-oci[=DIR]         Include Oracle-oci support. Default DIR is ORACLE_HOME.])
 
 if test "$PDO_OCI" != "no"; then
   AC_MSG_CHECKING([Oracle Install-Dir])

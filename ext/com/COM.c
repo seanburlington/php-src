@@ -18,7 +18,7 @@
    |         Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: COM.c,v 1.81 2002/06/21 10:02:26 phanto Exp $ */
+/* $Id: COM.c,v 1.82 2002/06/21 10:35:33 phanto Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -2194,7 +2194,7 @@ PHPAPI int php_COM_load_typelib(ITypeLib *TypeLib, int mode TSRMLS_DC)
 			while (SUCCEEDED(TypeInfo->lpVtbl->GetVarDesc(TypeInfo, j, &pVarDesc))) {
 				BSTR bstr_ids;
 				zend_constant c;
-				zval exists, results;
+				zval exists, results, value;
 				char *const_name;
 
 				TypeInfo->lpVtbl->GetNames(TypeInfo, pVarDesc->memid, &bstr_ids, 1, &NameCount);
@@ -2220,10 +2220,17 @@ PHPAPI int php_COM_load_typelib(ITypeLib *TypeLib, int mode TSRMLS_DC)
 					continue;
 				}
 
-				php_variant_to_pval(pVarDesc->lpvarValue, &c.value, codepage TSRMLS_CC);
-				c.flags = mode;
+				php_variant_to_pval(pVarDesc->lpvarValue, &value, codepage TSRMLS_CC);
+				 /* we only import enumerations (=int) */
+				if (value.type == IS_LONG) {
+					c.flags = mode;
+					c.value.type = IS_LONG;
+					c.value.value.lval = value.value.lval;
+					c.module_number = 0; /* the module number is not available here */
 
-				zend_register_constant(&c TSRMLS_CC);
+					zend_register_constant(&c TSRMLS_CC);
+				}
+				efree(value);
 
 				j++;
 			}

@@ -16,7 +16,16 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_odbc_int.h,v 1.6 2005/01/12 02:19:30 wez Exp $ */
+/* $Id: php_pdo_odbc_int.h,v 1.7 2005/02/07 00:02:51 wez Exp $ */
+
+#ifdef PHP_WIN32
+# define PDO_ODBC_TYPE	"Win32"
+#endif
+
+#ifndef PDO_ODBC_TYPE
+# warning Please fix configure to give your ODBC libraries a name
+# define PDO_ODBC_TYPE	"Unknown"
+#endif
 
 /* {{{ Roll a dice, pick a header at random... */
 #if HAVE_SQLCLI1_H

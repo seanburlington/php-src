@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_odbc.c,v 1.9 2005/01/11 14:28:37 wez Exp $ */
+/* $Id: pdo_odbc.c,v 1.10 2005/02/07 00:02:51 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,15 +29,6 @@
 #include "pdo/php_pdo_driver.h"
 #include "php_pdo_odbc.h"
 #include "php_pdo_odbc_int.h"
-
-#ifdef PHP_WIN32
-# define PDO_ODBC_TYPE	"Win32"
-#endif
-
-#ifndef PDO_ODBC_TYPE
-# warning Please fix configure to give your ODBC libraries a name
-# define PDO_ODBC_TYPE	"Unknown"
-#endif
 
 /* {{{ pdo_odbc_functions[] */
 function_entry pdo_odbc_functions[] = {

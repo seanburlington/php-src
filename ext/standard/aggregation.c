@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: aggregation.c,v 1.18 2003/02/09 19:09:50 sniper Exp $ */
+/* $Id: aggregation.c,v 1.19 2003/03/17 13:06:51 hholzgra Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -544,7 +544,7 @@ PHP_FUNCTION(aggregate_properties_by_regexp)
 #endif
 
 
-/* {{{ proto array aggregation_info(object obj)
+/* {{{ proto array aggregate_info(object obj)
  */
 PHP_FUNCTION(aggregate_info)
 {

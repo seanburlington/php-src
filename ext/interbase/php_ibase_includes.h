@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ibase_includes.h,v 1.13 2004/05/31 13:40:24 abies Exp $ */
+/* $Id: php_ibase_includes.h,v 1.14 2004/06/01 08:38:33 abies Exp $ */
 
 #ifndef PHP_IBASE_INCLUDES_H
 #define PHP_IBASE_INCLUDES_H
@@ -114,6 +114,7 @@ typedef struct event {
 
 enum php_interbase_option {
 	PHP_IBASE_DEFAULT 			= 0,
+	PHP_IBASE_CREATE            = 0,
 	/* fetch flags */
 	PHP_IBASE_FETCH_BLOBS		= 1,
 	PHP_IBASE_FETCH_ARRAYS      = 2,

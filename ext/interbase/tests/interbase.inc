@@ -1,4 +1,4 @@
-<?php /* $Id: interbase.inc,v 1.9 2004/05/31 13:40:25 abies Exp $ */
+<?php /* $Id: interbase.inc,v 1.10 2004/06/01 08:38:33 abies Exp $ */
 
 srand((double)microtime()*1000000);
 
@@ -14,8 +14,9 @@ function init_db()
 {
 	global $test_base, $user, $password;
 
-	$test_db = ibase_query(0, sprintf("  create    Schema '%s' USER '%s' PASSWORD '%s' DEFAULT CHARACTER SET %s",
-		$test_base, $user, $password, ($charset = ini_get('ibase.default_charset')) ? $charset : 'NONE'));
+	$test_db = ibase_query(IBASE_CREATE, 
+		sprintf("CREATE SCHEMA '%s' USER '%s' PASSWORD '%s' DEFAULT CHARACTER SET %s",$test_base,
+		$user, $password, ($charset = ini_get('ibase.default_charset')) ? $charset : 'NONE'));
 	$tr = ibase_trans($test_db);
 	ibase_query($tr,"create table test1 (i integer, c varchar(100))");
 	ibase_commit_ret($tr);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.220 2004/05/30 20:24:46 abies Exp $ */
+/* $Id: interbase.c,v 1.221 2004/06/01 08:38:33 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -465,6 +465,7 @@ PHP_MINIT_FUNCTION(ibase)
 	le_trans = zend_register_list_destructors_ex(_php_ibase_free_trans, NULL, "interbase transaction", module_number);
 
 	REGISTER_LONG_CONSTANT("IBASE_DEFAULT", PHP_IBASE_DEFAULT, CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("IBASE_CREATE", PHP_IBASE_CREATE, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IBASE_TEXT", PHP_IBASE_FETCH_BLOBS, CONST_PERSISTENT); /* deprecated, for BC only */
 	REGISTER_LONG_CONSTANT("IBASE_FETCH_BLOBS", PHP_IBASE_FETCH_BLOBS, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IBASE_FETCH_ARRAYS", PHP_IBASE_FETCH_ARRAYS, CONST_PERSISTENT);

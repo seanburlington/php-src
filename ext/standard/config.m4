@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.47 2002/10/30 15:11:11 hholzgra Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.48 2002/11/19 02:34:13 helly Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -236,6 +236,15 @@ AC_CHECK_FUNCS(glob strfmon)
 if test "$PHP_SAPI" = "cgi"; then
   AC_DEFINE(ENABLE_CHROOT_FUNC, 1, [Whether to enable chroot() function])
 fi
+
+dnl
+dnl Detect library functions needed by php dns_xxx functions
+dnl ext/standard/dns.h will collect these in a single define: HAVE_DNS_FUNCS
+dnl
+PHP_CHECK_FUNC(res_nmkquery, resolv, bind, socket)
+PHP_CHECK_FUNC(res_nsend, resolv, bind, socket)
+PHP_CHECK_FUNC(dn_expand, resolv, bind, socket)
+dnl already done PHP_CHECK_FUNC(dn_skipname, resolv, bind, socket)
 
 PHP_NEW_EXTENSION(standard, array.c base64.c basic_functions.c browscap.c crc32.c crypt.c \
                             cyr_convert.c datetime.c dir.c dl.c dns.c exec.c file.c filestat.c \

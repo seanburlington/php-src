@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.120 2003/06/10 20:03:37 imajes Exp $ */
+/* $Id: basic_functions.h,v 1.121 2003/06/28 05:38:52 sebastian Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -197,7 +197,6 @@ typedef struct {
 	size_t mmap_len;
 #endif
 
-	HashTable *aggregation_table;
 	HashTable *user_filter_map;
 } php_basic_globals;
 

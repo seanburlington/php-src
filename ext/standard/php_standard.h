@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_standard.h,v 1.21 2003/06/10 20:03:38 imajes Exp $ */
+/* $Id: php_standard.h,v 1.22 2003/06/28 05:38:52 sebastian Exp $ */
 
 #include "basic_functions.h"
 #include "php_math.h"
@@ -59,7 +59,6 @@
 #include "php_versioning.h"
 #include "php_ftok.h"
 #include "php_type.h"
-#include "aggregation.h"
 #include "php_sunfuncs.h"
 
 #define phpext_standard_ptr basic_functions_module_ptr

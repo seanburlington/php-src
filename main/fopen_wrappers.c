@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.45 2000/03/10 18:19:08 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.46 2000/03/15 19:12:41 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -253,7 +253,7 @@ PHPAPI FILE *php_fopen_primary_script(void)
 		}
 	} else
 #endif
-#if WIN32
+#ifdef PHP_WIN32
 	if (PG(doc_root) && path_info && ('/' == *PG(doc_root) ||
 		'\\' == *PG(doc_root) || strstr(PG(doc_root),":\\") ||
 		strstr(PG(doc_root),":/"))) {

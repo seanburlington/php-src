@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.219 2002/03/21 01:11:52 wez Exp $ */
+/* $Id: file.c,v 1.220 2002/03/21 19:18:11 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -98,6 +98,10 @@ extern int fclose(FILE *);
 int file_globals_id;
 #else
 php_file_globals file_globals;
+#endif
+
+#ifdef HAVE_FNMATCH
+#include <fnmatch.h>
 #endif
 
 /* }}} */
@@ -1998,6 +2002,30 @@ php_meta_tags_token php_next_meta_token(php_meta_tags_data *md TSRMLS_DC)
 }
 
 /* }}} */
+
+#ifdef HAVE_FNMATCH
+/* {{{ proto bool fnmatch(string pattern, string filename [, int flags])
+   Match filename against pattern */
+PHP_FUNCTION(fnmatch)
+{
+	char *pattern = NULL;
+	char *filename = NULL;
+	int argc = ZEND_NUM_ARGS();
+	int pattern_len;
+	int filename_len;
+	long flags=0;
+
+	if (zend_parse_parameters(argc TSRMLS_CC, "ss|l", 
+							  &pattern, &pattern_len, 
+							  &filename, &filename_len, 
+							  &flags) 
+		== FAILURE) 
+		return;
+	
+	RETURN_BOOL( ! fnmatch( pattern, filename, flags ));
+}
+/* }}} */
+#endif
 
 /*
  * Local variables:

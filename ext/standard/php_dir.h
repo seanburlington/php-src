@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dir.h,v 1.18 2002/02/28 08:26:46 sebastian Exp $ */
+/* $Id: php_dir.h,v 1.19 2002/03/21 19:18:13 hholzgra Exp $ */
 
 #ifndef PHP_DIR_H
 #define PHP_DIR_H
@@ -34,5 +34,6 @@ PHP_FUNCTION(getcwd);
 PHP_FUNCTION(rewinddir);
 PHP_NAMED_FUNCTION(php_if_readdir);
 PHP_FUNCTION(getdir);
+PHP_FUNCTION(glob);
 
 #endif /* PHP_DIR_H */

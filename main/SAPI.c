@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.155.2.13 2003/08/28 16:04:18 sas Exp $ */
+/* $Id: SAPI.c,v 1.155.2.14 2003/09/10 08:49:46 sr Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -721,7 +721,7 @@ SAPI_API int sapi_send_headers(TSRMLS_D)
 			if (len <= 0 || sapi_add_header(buf, len, 1) == FAILURE) {
 				return FAILURE;
 			}
-			if (sapi_add_header("Vary: Accept-Encoding", sizeof("Vary: Accept-Encoding") - 1, 1) == FAILURE) {
+			if (sapi_add_header_ex("Vary: Accept-Encoding", sizeof("Vary: Accept-Encoding") - 1, 1, 0 TSRMLS_CC) == FAILURE) {
 				return FAILURE;			
 			}
 		}

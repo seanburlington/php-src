@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.218.2.7 2003/04/09 15:22:45 derick Exp $ */
+/* $Id: info.c,v 1.218.2.8 2003/04/09 17:45:38 rasmus Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -607,7 +607,7 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		if (zend_hash_find(&EG(symbol_table), "PHP_AUTH_PW", sizeof("PHP_AUTH_PW"), (void **) &data) != FAILURE) {
 			php_info_print_table_row(2, "PHP_AUTH_PW", Z_STRVAL_PP(data));
 		}
-		php_print_gpcse_array("_FORM", sizeof("_FORM")-1 TSRMLS_CC);
+		php_print_gpcse_array("_REQUEST", sizeof("_REQUEST")-1 TSRMLS_CC);
 		php_print_gpcse_array("_GET", sizeof("_GET")-1 TSRMLS_CC);
 		php_print_gpcse_array("_POST", sizeof("_POST")-1 TSRMLS_CC);
 		php_print_gpcse_array("_FILES", sizeof("_FILES")-1 TSRMLS_CC);

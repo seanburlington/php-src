@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.364 2003/10/27 22:45:58 moriyoshi Exp $ */
+/* $Id: file.c,v 1.365 2003/10/29 22:25:57 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1978,7 +1978,6 @@ PHP_FUNCTION(fgetcsv)
 									state = 1;
 								} else if (*bptr == enclosure) {
 									state = 2;
-								} else {
 								}
 								bptr++;
 								break;
@@ -1998,7 +1997,6 @@ PHP_FUNCTION(fgetcsv)
 								tptr += (bptr - hunk_begin);
 								hunk_begin = bptr;
 								break;
-								/* break is missing intentionally */
 							default:
 								bptr += inc_len;
 								break;

@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.13 2002/05/31 18:12:56 cox Exp $
+// $Id: System.php,v 1.14 2002/05/31 18:49:47 cox Exp $
 //
 
 require_once 'PEAR.php';
@@ -43,7 +43,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.13 $
+* @version  $Revision: 1.14 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -292,8 +292,7 @@ class System
                 System::raiseError("Could not open $file");
                 continue;
             }
-            while(!feof($fd)) {
-                $cont = fread($fd, 2048);
+            while ($cont = fread($fd, 2048)) {
                 if (isset($outputfd)) {
                     fwrite($outputfd, $cont);
                 } else {

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Command.php,v 1.14.2.1 2002/05/28 13:03:25 ssb Exp $
+// $Id: Command.php,v 1.14.2.2 2002/05/29 03:38:58 ssb Exp $
 
 
 require_once "PEAR.php";
@@ -156,7 +156,7 @@ class PEAR_Command
             $obj = &new $uiclass;
             // quick test to see if this class implements a few of the most
             // important frontend methods
-            if (method_exists($obj, 'displayLine') && method_exists($obj, 'userConfirm')) {
+            if (method_exists($obj, 'userConfirm')) {
                 $GLOBALS['_PEAR_Command_uiobject'] = &$obj;
                 $GLOBALS['_PEAR_Command_uiclass'] = $uiclass;
                 return $obj;

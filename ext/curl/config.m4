@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.17 2002/11/06 10:24:48 wez Exp $
+dnl $Id: config.m4,v 1.18 2002/11/07 18:07:03 wez Exp $
 dnl
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -68,9 +68,9 @@ if test "$PHP_CURL" != "no"; then
     $CURL_LIBS -L$CURL_DIR/lib
   ])
 
-  if test "$PHP_CURLWRAPPERS" != "no" ; then
-	AC_DEFINE(PHP_CURL_URL_WRAPPERS,1,[ ])
-  fi
+dnl  if test "$PHP_CURLWRAPPERS" != "no" ; then
+dnl    AC_DEFINE(PHP_CURL_URL_WRAPPERS,1,[ ])
+dnl  fi
 
   PHP_NEW_EXTENSION(curl, curl.c curlstreams.c, $ext_shared)
   PHP_SUBST(CURL_SHARED_LIBADD)

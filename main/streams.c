@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.61 2003/05/20 00:21:57 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.62 2003/05/20 20:47:39 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -640,6 +640,10 @@ PHPAPI size_t _php_stream_read(php_stream *stream, char *buf, size_t size TSRMLS
 			size -= toread;
 		} else {
 			/* EOF, or temporary end of data (for non-blocking mode). */
+			break;
+		}
+
+		if (stream->flags & PHP_STREAM_FLAG_AVOID_BLOCKING) {
 			break;
 		}
 	}

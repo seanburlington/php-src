@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.347 2001/05/23 03:37:53 sterling Exp $ */
+/* $Id: basic_functions.c,v 1.348 2001/05/23 16:52:45 andi Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -751,7 +751,6 @@ PHP_MINIT_FUNCTION(basic)
 	register_html_constants(INIT_FUNC_ARGS_PASSTHRU);
 	register_string_constants(INIT_FUNC_ARGS_PASSTHRU);
 
-	PHP_MINIT(output)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(regex)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(file)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(pack)(INIT_FUNC_ARGS_PASSTHRU);

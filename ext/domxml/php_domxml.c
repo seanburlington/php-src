@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.152 2002/05/18 09:35:28 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.153 2002/05/18 10:05:21 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -505,13 +505,13 @@ static inline void node_wrapper_dtor(xmlNodePtr node)
 		return;
 
 	wrapper = dom_object_get_data(node);
-	
+
 	if (wrapper != NULL) {
 		refcount = wrapper->refcount;
 		zval_ptr_dtor(&wrapper);
-        /*only set it to null, if refcount was 1 before, otherwise it has still needed references */
+		/*only set it to null, if refcount was 1 before, otherwise it has still needed references */
 		if (refcount == 1) {
-			dom_object_set_data(node, NULL);	
+			dom_object_set_data(node, NULL);
 		}
 	}
 

@@ -1,6 +1,6 @@
 /*
 	Build Configuration Template for Win32.
-	$Id: config.w32.h.in,v 1.3 2004/03/27 01:00:52 helly Exp $
+	$Id: config.w32.h.in,v 1.4 2004/03/29 18:58:28 helly Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -142,3 +142,4 @@
 
 #undef HAVE_ATOF_ACCEPTS_NAN
 #undef HAVE_ATOF_ACCEPTS_INF
+#define HAVE_HUGE_VAL_NAN 1

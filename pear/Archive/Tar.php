@@ -16,7 +16,7 @@
 // | Author: Vincent Blavet <vincent@blavet.net>                          |
 // +----------------------------------------------------------------------+
 //
-// $Id: Tar.php,v 1.6 2002/04/11 10:51:27 alexmerz Exp $
+// $Id: Tar.php,v 1.7 2002/04/13 05:33:35 mfischer Exp $
 
 require_once 'PEAR.php';
 
@@ -24,7 +24,7 @@ require_once 'PEAR.php';
 * Creates a (compressed) Tar archive
 *
 * @author   Vincent Blavet <vincent@blavet.net>
-* @version  $Revision: 1.6 $
+* @version  $Revision: 1.7 $
 * @package  Archive
 */
 class Archive_Tar extends PEAR
@@ -72,9 +72,9 @@ class Archive_Tar extends PEAR
                 @dl($extname . $dlext);
             }
             if (!extension_loaded($extname)) {
-                die("The extension '$extname' couldn't be loaded. ".
-                    'Probably you don\'t have support in your PHP '.
-                    'to this extension');
+                die("The extension '$extname' couldn't be found.\n".
+                    "Please make sure your version of PHP was built".
+                    "with '$extname' support.\n");
                 return false;
             }
         }

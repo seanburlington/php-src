@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.517 2004/09/17 12:44:55 wez Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.518 2004/09/26 01:10:05 wez Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -578,11 +578,11 @@ int main(void) {
   memset(&hints, 0, sizeof(hints));
   hints.ai_flags = AI_NUMERICHOST;
 
-  if (getaddrinfo("127.0.0.1", NULL, &hints, &ai) < 0) {
+  if (getaddrinfo("127.0.0.1", 0, &hints, &ai) < 0) {
     exit(1);
   }
 
-  if (ai == NULL) {
+  if (ai == 0) {
     exit(1);
   }
 

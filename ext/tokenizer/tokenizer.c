@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.21 2003/07/19 18:52:49 andrey Exp $ */
+/* $Id: tokenizer.c,v 1.22 2003/11/29 18:22:44 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -368,6 +368,9 @@ static void tokenize(zval *return_value TSRMLS_DC)
 		}
 		if (destroy && Z_TYPE(token) != IS_NULL) {
 			zval_dtor(&token);
+		}
+		if (token_type == T_END_HEREDOC) {
+			efree(Z_STRVAL(token));
 		}
 		ZVAL_NULL(&token);
 	}

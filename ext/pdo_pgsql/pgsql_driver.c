@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.12 2004/05/21 14:15:03 wez Exp $ */
+/* $Id: pgsql_driver.c,v 1.13 2004/05/25 14:07:26 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -83,14 +83,17 @@ static int pdo_pgsql_fetch_error_func(pdo_dbh_t *dbh, pdo_stmt_t *stmt, zval *in
 static int pgsql_handle_closer(pdo_dbh_t *dbh TSRMLS_DC) /* {{{ */
 {
 	pdo_pgsql_db_handle *H = (pdo_pgsql_db_handle *)dbh->driver_data;
-
-	if (H->server) {
-		PQfinish(H->server);
-		H->server = NULL;
-	}
-	if (H->einfo.errmsg) {
-		efree(H->einfo.errmsg);
-		H->einfo.errmsg = NULL;
+	if (H) {
+		if (H->server) {
+			PQfinish(H->server);
+			H->server = NULL;
+		}
+		if (H->einfo.errmsg) {
+			efree(H->einfo.errmsg);
+			H->einfo.errmsg = NULL;
+		}
+		pefree(H, dbh->is_persistent);
+		H = NULL;
 	}
 	return 0;
 }

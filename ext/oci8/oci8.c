@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.124 2001/05/24 10:07:15 ssb Exp $ */
+/* $Id: oci8.c,v 1.125 2001/05/30 17:43:32 sterling Exp $ */
 
 /* TODO list:
  *
@@ -581,7 +581,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.124 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.125 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -4299,7 +4299,8 @@ PHP_FUNCTION(ocifreecoll)
     int inx;
     oci_collection *coll;
     oci_connection *connection;
-
+	OCILS_FETCH();
+	
     if ((id = getThis()) != 0) {
         inx = _oci_get_ocicoll(id,&coll);
         if (inx) {

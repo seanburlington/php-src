@@ -36,8 +36,10 @@
 #  define UNUSED
 #endif
 
+#if 0
 static char const *version UNUSED =
-    "$Id: strnatcmp.c,v 1.7 2001/09/09 13:29:19 derick Exp $";
+    "$Id: strnatcmp.c,v 1.8 2002/05/04 17:36:58 sas Exp $";
+#endif
 /* {{{ compare_right
  */
 static int

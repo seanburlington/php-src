@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.16 2002/02/28 08:26:47 sebastian Exp $ */
+/* $Id: php_math.h,v 1.17 2002/10/24 18:49:57 derick Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H
@@ -74,9 +74,16 @@ PHP_FUNCTION(log1p);
 PHP_FUNCTION(sinh);
 PHP_FUNCTION(cosh);
 PHP_FUNCTION(tanh);
+
+#ifdef HAVE_ASINH
 PHP_FUNCTION(asinh);
+#endif
+#ifdef HAVE_ACOSH
 PHP_FUNCTION(acosh);
+#endif
+#ifdef HAVE_ATANH
 PHP_FUNCTION(atanh);
+#endif
 
 #include <math.h>
 

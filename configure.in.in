@@ -1,4 +1,4 @@
-dnl $Id: configure.in.in,v 1.20 1999/04/25 14:10:22 rasmus Exp $ -*- sh -*-
+dnl $Id: configure.in.in,v 1.21 1999/04/25 22:16:44 rasmus Exp $ -*- sh -*-
 dnl Process this file with autoconf to produce a configure script.
 
 
@@ -182,6 +182,7 @@ dnl make sure to check for dn_skipname in libresolv, or if res_search
 dnl is in neither of these libs, still check for dn_skipname in libresolv
 AC_CHECK_LIB(socket, res_search, [
  AC_CHECK_LIB(resolv, dn_skipname)
+ AC_CHECK_LIB(resolv, __dn_skipname)
  LIBS="$LIBS -lsocket"
  AC_DEFINE(HAVE_LIBSOCKET) ], [
  AC_CHECK_LIB(resolv, res_search, [
@@ -189,6 +190,7 @@ AC_CHECK_LIB(socket, res_search, [
   AC_DEFINE(HAVE_LIBRESOLV) 
  ], [
   AC_CHECK_LIB(resolv, dn_skipname)
+  AC_CHECK_LIB(resolv, __dn_skipname)
  ]) 
 ])
 

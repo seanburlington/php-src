@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.64 2001/12/11 15:30:29 sebastian Exp $ */
+/* $Id: dl.c,v 1.65 2002/01/31 10:21:24 derick Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -208,7 +208,7 @@ PHP_MINFO_FUNCTION(dl)
 
 #else
 
-void php_dl(pval *file, int type, pval *return_value)
+void php_dl(pval *file, int type, pval *return_value TSRMLS_DC)
 {
 	php_error(E_WARNING, "Cannot dynamically load %s - dynamic modules are not supported", Z_STRVAL_P(file));
 	RETURN_FALSE;

@@ -17,7 +17,7 @@
 	+----------------------------------------------------------------------+
 */
 
-/* $Id: internal_functions_win32.c,v 1.77 2003/06/26 15:15:02 sebastian Exp $ */
+/* $Id: internal_functions_win32.c,v 1.78 2003/06/27 14:32:59 edink Exp $ */
 
 /* {{{ includes
  */
@@ -94,7 +94,9 @@
 #if HAVE_XML && HAVE_WDDX
 #include "ext/wddx/php_wddx.h"
 #endif
-
+#ifdef HAVE_SQLITE
+#include "ext/sqlite/php_sqlite.h"
+#endif
 /* }}} */
 
 /* {{{ php_builtin_extensions[]
@@ -144,6 +146,9 @@ zend_module_entry *php_builtin_extensions[] = {
 #endif
 #if HAVE_XML && HAVE_WDDX
 	,phpext_wddx_ptr
+#endif
+#if HAVE_SQLITE
+	,phpext_sqlite_ptr
 #endif
 };
 /* }}} */

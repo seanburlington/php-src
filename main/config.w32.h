@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.73 2003/06/26 15:15:02 sebastian Exp $
+	$Id: config.w32.h,v 1.74 2003/06/27 14:32:59 edink Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -71,6 +71,9 @@
 
 /* Enable / Disable ZLIB extension (default: enabled) */
 #define HAVE_ZLIB 1
+
+/* Enable / Disable SQLite extension (default: enabled) */
+#define HAVE_SQLITE 1
 
 /* PHP Runtime Configuration */
 #define FORCE_CGI_REDIRECT 1

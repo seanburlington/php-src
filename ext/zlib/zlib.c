@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.148 2002/08/23 08:37:34 zeev Exp $ */
+/* $Id: zlib.c,v 1.149 2002/09/03 22:54:02 sniper Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -135,7 +135,7 @@ static PHP_INI_MH(OnUpdate_zlib_output_compression)
 {
 	char *ini_value;
 
-	ini_value = php_ini_string("output_handler", sizeof("output_handler"), 0); 
+	ini_value = zend_ini_string("output_handler", sizeof("output_handler"), 0); 
 	if (ini_value != NULL && strlen(ini_value) != 0 && 
 		new_value != NULL && strlen(new_value) != 0 ) {
 		php_error_docref("ref.outcontrol" TSRMLS_CC, E_CORE_ERROR, "Cannot use both zlib.output_compression and output_handler together!!");

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.197 2002/08/19 14:01:04 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.198 2002/08/22 00:43:18 sniper Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2500,7 +2500,7 @@ PHP_FUNCTION(domxml_node_replace_child)
 {
 	zval *id, *newnode, *oldnode;
 	xmlNodePtr children, newchild, oldchild, nodep;
-	int foundoldchild = 0, foundnewchild = 0;
+	int foundoldchild = 0;
 	int ret;
 
 	DOMXML_GET_THIS_OBJ(nodep, id, le_domxmlnodep);

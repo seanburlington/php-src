@@ -28,13 +28,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.11 2000/05/23 10:11:09 thies Exp $ */
+/* $Id: ftp.h,v 1.12 2000/05/23 10:12:42 thies Exp $ */
 
 #ifndef	_FTP_H
 #define	_FTP_H
 
 #include <stdio.h>
-#if !PHP_WIN32
+#ifdef HAVE_NETINET_IN_H
 #include <netinet/in.h>
 #endif
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.152.2.1 2001/09/01 14:57:32 zeev Exp $ */
+/* $Id: php.h,v 1.152.2.2 2002/03/04 20:12:14 derick Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -41,6 +41,10 @@
 #define sprintf php_sprintf
 #endif
 
+/* PHP's DEBUG value must match Zend's ZEND_DEBUG value */
+#undef PHP_DEBUG
+#define PHP_DEBUG ZEND_DEBUG
+
 #ifdef PHP_WIN32
 #include "tsrm_win32.h"
 #include "win95nt.h"
@@ -57,10 +61,6 @@
 #endif
 
 #include "php_regex.h"
-
-/* PHP's DEBUG value must match Zend's ZEND_DEBUG value */
-#undef PHP_DEBUG
-#define PHP_DEBUG ZEND_DEBUG
 
 
 #define APACHE 0

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.375 2004/01/14 14:25:01 wez Exp $ */
+/* $Id: file.c,v 1.376 2004/01/14 14:37:38 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -247,7 +247,7 @@ static int flock_values[] = { LOCK_SH, LOCK_EX, LOCK_UN };
 PHP_FUNCTION(flock)
 {
 	zval *arg1, *arg3 = NULL;
-	int fd, act;
+	int act;
 	php_stream *stream;
 	long operation = 0;
 
@@ -256,10 +256,6 @@ PHP_FUNCTION(flock)
 	}
 
 	php_stream_from_zval(stream, &arg1);
-
-	if (php_stream_cast(stream, PHP_STREAM_AS_FD, (void*)&fd, 1) == FAILURE) {
-		RETURN_FALSE;
-	}
 
 	act = operation & 3;
 	if (act < 1 || act > 3) {

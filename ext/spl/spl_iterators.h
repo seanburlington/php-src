@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.7 2004/01/20 20:59:45 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.8 2004/02/23 01:53:39 abies Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -71,8 +71,8 @@ typedef struct _spl_dual_it_object {
 	dual_it_type             dit_type;
 	union {
 		struct {
-			int              offset;
-			int              count;
+			long             offset;
+			long             count;
 		} limit;
 		struct {
 			int              flags; /* CIT_HAS_MORE, CIT_CALL_TOSTRING, CIT_CATCH_GET_CHILD */

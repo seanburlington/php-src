@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.214 2003/08/12 00:55:57 iliaa Exp $ */
+/* $Id: oci8.c,v 1.215 2003/08/12 11:37:40 andrey Exp $ */
 
 /* TODO list:
  *
@@ -644,7 +644,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.214 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.215 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -3985,7 +3985,7 @@ PHP_FUNCTION(ociexecute)
 /* }}} */
 
 /* {{{ proto bool ocicancel(resource stmt)
-   Prepare a new row of data for reading */
+   Cancel reading from a cursor */
 
 PHP_FUNCTION(ocicancel)
 {
@@ -4096,9 +4096,8 @@ PHP_FUNCTION(ocifetchinto)
 
 /* }}} */
 
-/* {{{ proto int ocifetchstatement(resource stmt, array &output[, int skip][, int maxrows][, int flags])
+/* {{{ proto int ocifetchstatement(resource stmt, array &output[, int skip[, int maxrows[, int flags]]])
    Fetch all rows of result data into an array */
-
 PHP_FUNCTION(ocifetchstatement)
 {
 	zval **stmt, **array, *element, **zskip, **zmaxrows, **zflags, *tmp;
@@ -4537,9 +4536,8 @@ PHP_FUNCTION(ocipasswordchange)
 
 /* }}} */
 
-/* {{{ proto int ocinewcursor(resource conn)
+/* {{{ proto resource ocinewcursor(resource conn)
    Return a new cursor (Statement-Handle) - use this to bind ref-cursors! */
-
 PHP_FUNCTION(ocinewcursor)
 {
 	zval **conn;

@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.44 2003/02/17 13:29:57 zeev Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.45 2003/02/25 04:20:22 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -414,7 +414,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 	}
 
 	result = GET_FTP_RESULT(stream);
-	if (result != 150) {
+	if (result != 150 && result != 125) {
 		/* Could not retrieve or send the file 
 		 * this data will only be sent to us after connection on the data port was initiated.
 		 */

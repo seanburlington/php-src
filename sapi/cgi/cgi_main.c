@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.237 2003/08/01 16:52:49 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.238 2003/08/04 19:05:20 sas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -829,7 +829,8 @@ static void init_request_info(TSRMLS_D)
 				SG(request_info).request_uri = env_script_name;
 			}
 #if !DISCARD_PATH
-			script_path_translated = env_path_translated;
+			if (env_path_translated)
+				script_path_translated = env_path_translated;
 #endif
 #if ENABLE_PATHINFO_CHECK
 		}

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.80 2004/03/16 21:43:25 georg Exp $ 
+  $Id: mysqli_api.c,v 1.81 2004/03/18 13:04:55 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1675,7 +1675,10 @@ PHP_FUNCTION(mysqli_stmt_init)
 	}
 	MYSQLI_FETCH_RESOURCE(mysql, MYSQL *, &mysql_link, "mysqli_link");
 
+	stmt = (STMT *)ecalloc(1,sizeof(STMT));
+
 	if (!(stmt->stmt = mysql_stmt_init(mysql))) {
+		efree(stmt);
 		RETURN_FALSE;
 	}
 

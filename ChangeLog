@@ -1,3 +1,14 @@
+2004-06-27  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/standard/basic_functions.c:
+      Removed unneeded if().
+
+2004-06-27  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * tests/lang/038.phpt
+      tests/lang/039.phpt:
+      Add more tests
+
 2004-06-26  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * NEWS:
@@ -5426,7 +5437,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1669 2004/06/27 00:32:20 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1670 2004/06/28 00:33:21 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

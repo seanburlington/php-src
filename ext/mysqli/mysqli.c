@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.42 2004/07/05 19:36:10 helly Exp $ 
+  $Id: mysqli.c,v 1.43 2004/07/07 08:02:27 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -273,7 +273,7 @@ static union _zend_function *php_mysqli_constructor_get(zval *object TSRMLS_DC)
 {
 	mysqli_object *obj = (mysqli_object *)zend_objects_get_address(object TSRMLS_CC);
 
-	if (obj->zo.ce != mysqli_link_class_entry) {
+	if (obj->zo.ce != mysqli_link_class_entry && obj->zo.ce->constructor) {
 		return obj->zo.ce->constructor;
 	} else {
 		static zend_internal_function f;
@@ -441,6 +441,8 @@ PHP_MINIT_FUNCTION(mysqli)
 	REGISTER_LONG_CONSTANT("MYSQLI_NUM", MYSQLI_NUM, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MYSQLI_BOTH", MYSQLI_BOTH, CONST_CS | CONST_PERSISTENT);
 	
+	/* for mysqli_stmt_set_attr */
+	REGISTER_LONG_CONSTANT("MYSQLI_STMT_ATTR_UPDATE_MAX_LENGTH", STMT_ATTR_UPDATE_MAX_LENGTH, CONST_CS | CONST_PERSISTENT);
 	
 	/* column information */
 	REGISTER_LONG_CONSTANT("MYSQLI_NOT_NULL_FLAG", NOT_NULL_FLAG, CONST_CS | CONST_PERSISTENT);

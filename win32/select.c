@@ -21,7 +21,7 @@
 
 #ifdef PHP_WIN32
 
-/* $Id: select.c,v 1.6 2003/11/27 18:01:12 wez Exp $ */
+/* $Id: select.c,v 1.7 2003/12/15 03:15:50 iliaa Exp $ */
 
 /* Win32 select() will only work with sockets, so we roll our own implementation here.
  * - If you supply only sockets, this simply passes through to winsock select().
@@ -36,7 +36,7 @@
  * */
 PHPAPI int php_select(php_socket_t max_fd, fd_set *rfds, fd_set *wfds, fd_set *efds, struct timeval *tv)
 {
-	DWORD ms_total, limit, slice;
+	DWORD ms_total, limit;
 	HANDLE handles[MAXIMUM_WAIT_OBJECTS];
 	int handle_slot_to_fd[MAXIMUM_WAIT_OBJECTS];
 	int n_handles = 0, i;

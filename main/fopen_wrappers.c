@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.153.2.4 2003/06/24 13:44:56 iliaa Exp $ */
+/* $Id: fopen_wrappers.c,v 1.153.2.5 2003/06/24 14:36:18 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -165,7 +165,7 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 
 PHPAPI int php_check_open_basedir(const char *path TSRMLS_DC)
 {
-	return php_check_open_basedir_ex(path, 1 TSRMLS_DC);
+	return php_check_open_basedir_ex(path, 1 TSRMLS_CC);
 }
 
 /* {{{ php_check_open_basedir

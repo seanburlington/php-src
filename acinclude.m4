@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.82 2000/05/08 08:55:45 thies Exp $
+dnl $Id: acinclude.m4,v 1.83 2000/05/16 23:24:39 sas Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -145,9 +145,9 @@ exit(1);
 ],[
   ac_cv_time_r_type=hpux
 ],[
-  ac_cv_time_r_type=normal
+  ac_cv_time_r_type=SUSV2
 ],[
-  ac_cv_time_r_type=normal
+  ac_cv_time_r_type=SUSV2
 ])
 ])
 if test "$ac_cv_time_r_type" = "hpux"; then

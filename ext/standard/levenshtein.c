@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.9 2000/06/16 18:23:57 hholzgra Exp $ */
+/* $Id: levenshtein.c,v 1.10 2000/06/16 18:46:57 hholzgra Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -235,7 +235,7 @@ PHP_FUNCTION(levenshtein)
 
 		distance = custom_levdist((*str1)->value.str.val
 																, (*str2)->value.str.val
-																, (*callback_name)->value.str.lval
+																, (*callback_name)->value.str.val
 																);
 		break;
 

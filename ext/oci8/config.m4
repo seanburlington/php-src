@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.36 2002/08/20 12:01:24 sniper Exp $
+dnl $Id: config.m4,v 1.37 2002/09/09 19:03:51 kalowsky Exp $
 dnl
 
 AC_DEFUN(AC_OCI8_VERSION,[
@@ -68,6 +68,9 @@ if test "$PHP_OCI8" != "no"; then
 
     8.1|9.0)
       PHP_ADD_LIBRARY(clntsh, 1, OCI8_SHARED_LIBADD)
+      if test -f $OCI8_DIR/lib/libocijdbc8.so ; then
+        PHP_ADD_LIBRARY(ocijdbc8, 1, OCI8_SHARED_LIBADD)
+      fi
       PHP_ADD_LIBPATH($OCI8_DIR/lib, OCI8_SHARED_LIBADD)
       AC_DEFINE(HAVE_OCI8_TEMP_LOB,1,[ ])
       AC_DEFINE(HAVE_OCI8_ATTR_STATEMENT,1,[ ])

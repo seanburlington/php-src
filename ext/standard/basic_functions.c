@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.300 2001/01/21 17:26:43 rasmus Exp $ */
+/* $Id: basic_functions.c,v 1.301 2001/02/05 17:37:47 andrei Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1656,8 +1656,8 @@ PHP_FUNCTION(call_user_method)
 		efree(params);
 		RETURN_FALSE;
 	}
-	if (Z_TYPE_PP(params[1]) != IS_OBJECT) {
-		php_error(E_WARNING,"2nd argument is not an object\n");
+	if (Z_TYPE_PP(params[1]) != IS_OBJECT && Z_TYPE_PP(params[1]) != IS_STRING) {
+		php_error(E_WARNING,"2nd argument is not an object or class name\n");
 		efree(params);
 		RETURN_FALSE;
 	}
@@ -1693,7 +1693,8 @@ PHP_FUNCTION(call_user_method_array)
         WRONG_PARAM_COUNT;
     }
 	convert_to_string_ex(method_name);
-	convert_to_object_ex(obj);
+	if (Z_TYPE_PP(obj) != IS_OBJECT && Z_TYPE_PP(obj) != IS_STRING)
+		convert_to_object_ex(obj);
 	convert_to_array_ex(params);
 
     params_ar = HASH_OF(*params);

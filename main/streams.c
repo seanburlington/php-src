@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.118 2002/10/27 23:01:45 shane Exp $ */
+/* $Id: streams.c,v 1.119 2002/10/27 23:34:48 shane Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -469,7 +469,7 @@ static void php_stream_fill_read_buffer(php_stream *stream, size_t size TSRMLS_D
 		/* no; so lets fetch more data */
 		
 		/* reduce buffer memory consumption if possible, to avoid a realloc */
-		if (stream->readbuflen - stream->writepos < stream->chunk_size) {
+		if (stream->readbuf && stream->readbuflen - stream->writepos < stream->chunk_size) {
 			memmove(stream->readbuf, stream->readbuf + stream->readpos, stream->readbuflen - stream->readpos);
 			stream->writepos -= stream->readpos;
 			stream->readpos = 0;

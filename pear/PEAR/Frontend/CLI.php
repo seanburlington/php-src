@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.25.2.1 2002/11/25 23:49:46 ssb Exp $
+  $Id: CLI.php,v 1.25.2.2 2002/12/06 00:10:40 ssb Exp $
 */
 
 require_once "PEAR.php";
@@ -357,6 +357,7 @@ class PEAR_Frontend_CLI extends PEAR
         {
             case 'install':
             case 'upgrade':
+            case 'upgrade-all':
                 if (isset($data['release_warnings'])) {
                     $this->_displayLine('');
                     $this->_startTable(array(

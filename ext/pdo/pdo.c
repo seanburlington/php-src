@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.19 2004/09/26 22:23:14 helly Exp $ */
+/* $Id: pdo.c,v 1.20 2004/10/27 10:26:27 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -225,6 +225,9 @@ PHP_MINIT_FUNCTION(pdo)
 	REGISTER_LONG_CONSTANT("PDO_FETCH_BOTH", (long)PDO_FETCH_BOTH,	CONST_CS|CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PDO_FETCH_OBJ",  (long)PDO_FETCH_OBJ,	CONST_CS|CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PDO_FETCH_BOUND",(long)PDO_FETCH_BOUND,	CONST_CS|CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("PDO_FETCH_COLUMN",(long)PDO_FETCH_COLUMN,	CONST_CS|CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("PDO_FETCH_CLASS",(long)PDO_FETCH_CLASS,	CONST_CS|CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("PDO_FETCH_INTO", (long)PDO_FETCH_INTO,	CONST_CS|CONST_PERSISTENT);
 
 	REGISTER_LONG_CONSTANT("PDO_ATTR_AUTOCOMMIT",	(long)PDO_ATTR_AUTOCOMMIT,	CONST_CS|CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PDO_ATTR_SCROLL", 		(long)PDO_ATTR_SCROLL,		CONST_CS|CONST_PERSISTENT);
@@ -272,6 +275,7 @@ PHP_MINIT_FUNCTION(pdo)
 	INIT_CLASS_ENTRY(ce, "PDOStatement", pdo_dbstmt_functions);
 	ce.create_object = pdo_dbstmt_new;
 	pdo_dbstmt_ce = zend_register_internal_class(&ce TSRMLS_CC);
+	pdo_dbstmt_ce->get_iterator = pdo_stmt_iter_get;
 
 	INIT_CLASS_ENTRY(ce, "PDORow", pdo_row_functions);
 	ce.create_object = pdo_row_new;

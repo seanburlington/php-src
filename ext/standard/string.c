@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.423 2004/10/07 23:10:35 iliaa Exp $ */
+/* $Id: string.c,v 1.424 2004/10/20 22:44:43 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4781,6 +4781,11 @@ PHP_FUNCTION(str_split)
 	}
 
 	array_init(return_value);
+
+	if (split_length >= str_len) {
+		add_next_index_stringl(return_value, str, str_len, 1);
+		return;
+	}
 
 	n_reg_segments = floor(str_len / split_length);
 	p = str;

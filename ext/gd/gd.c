@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.206 2002/08/22 19:14:27 helly Exp $ */
+/* $Id: gd.c,v 1.207 2002/08/23 17:45:46 wez Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -514,13 +514,13 @@ PHP_FUNCTION(imageloadfont)
 	while (b < hdr_size && (n = php_stream_read(stream, (char*)&font[b], hdr_size - b)))
 		b += n;
 	if (!n) {
-		php_stream_close(stream);
 		efree(font);
 		if (php_stream_eof(stream)) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "End of file while reading header");
 		} else {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error while reading header");
 		}
+		php_stream_close(stream);
 		RETURN_FALSE;
 	}
 	i = php_stream_tell(stream);

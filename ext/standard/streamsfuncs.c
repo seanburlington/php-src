@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.8 2003/04/04 20:43:36 pollita Exp $ */
+/* $Id: streamsfuncs.c,v 1.9 2003/04/04 21:09:25 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -343,13 +343,13 @@ PHP_FUNCTION(stream_get_transports)
 {
 	HashTable *stream_xport_hash;
 	char *stream_xport;
-	int key_flags, stream_xport_len;
+	int stream_xport_len;
 
 	if (ZEND_NUM_ARGS() != 0) {
 		WRONG_PARAM_COUNT;
 	}
 
-	if (stream_xport_hash = php_stream_xport_get_hash()) {
+	if ((stream_xport_hash = php_stream_xport_get_hash())) {
 		array_init(return_value);
 		zend_hash_internal_pointer_reset(stream_xport_hash);
 		while (zend_hash_get_current_key_ex(stream_xport_hash,

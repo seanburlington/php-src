@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.20 2004/02/12 10:43:25 zeev Exp $ */
+/* $Id: spl_iterators.c,v 1.21 2004/02/25 14:58:47 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1164,7 +1164,7 @@ SPL_METHOD(CachingRecursiveIterator, getChildren)
 }
 
 static
-ZEND_BEGIN_ARG_INFO(arginfo_caching_rec_it___construct, 0) 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_caching_rec_it___construct, 0, ZEND_RETURN_REFERENCE_AGNOSTIC, 2) 
 	ZEND_ARG_INFO(0, iterator)
 	ZEND_ARG_INFO(0, getStrVal)
 	ZEND_ARG_INFO(0, catch_getChildren)

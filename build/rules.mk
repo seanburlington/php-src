@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules.mk,v 1.29 2000/12/24 14:24:04 sas Exp $ 
+# $Id: rules.mk,v 1.30 2000/12/24 16:03:16 sas Exp $ 
 #
 
 include $(top_srcdir)/build/rules_common.mk
@@ -55,9 +55,9 @@ distclean: distclean-recursive clean-x
 
 test: $(top_builddir)/php
 	@if test "$(TESTS)" = ""; then \
-		TOP_BUILDDIR=$(top_builddir) TOP_SRCDIR=$(top_srcdir) $(top_builddir)/php -d include_path=".:$(top_srcdir)/pear:$(PEAR_INSTALLDIR)" -q $(top_srcdir)/run-tests.php $(top_srcdir); \
+		TOP_BUILDDIR=$(top_builddir) TOP_SRCDIR=$(top_srcdir) $(top_builddir)/php -d "include_path=.:$(top_srcdir)/pear:$(top_builddir)/pear:$(PEAR_INSTALLDIR)" -q $(top_srcdir)/run-tests.php $(srcdir); \
 	else \
-		TOP_BUILDDIR=$(top_builddir) TOP_SRCDIR=$(top_srcdir) $(top_builddir)/php -d include_path=".:$(top_srcdir)/pear:$(PEAR_INSTALLDIR)" -q $(top_srcdir)/run-tests.php $(TESTS); \
+		TOP_BUILDDIR=$(top_builddir) TOP_SRCDIR=$(top_srcdir) $(top_builddir)/php -d include_path=".:$(top_srcdir)/pear:$(top_builddir)/pear:$(PEAR_INSTALLDIR)" -q $(top_srcdir)/run-tests.php $(TESTS); \
 	fi
 
 include $(builddir)/.deps

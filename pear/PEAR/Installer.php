@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.131 2003/10/04 03:58:00 cellog Exp $
+// $Id: Installer.php,v 1.132 2003/10/04 16:17:31 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -738,6 +738,11 @@ class PEAR_Installer extends PEAR_Common
                                         $possible = array($ver => $inf['state']);
                                     }
                                 }
+                            } else {
+                                return $this->raiseError('No release with state equal to: \'' . implode(', ', $states) .
+                                                         "' found. The latest is $pkgfile-$ver ({$inf['state']}). Use " .
+                                                         "'pear install $pkgfile-$ver' or set the 'preferred_state' ".
+                                                         "to '{$inf['state']}' for installing this package.");
                             }
                         }
                         if ($possible) {

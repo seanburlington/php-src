@@ -27,7 +27,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.h,v 1.3 2000/02/17 20:23:57 zeev Exp $ */
+/* $Id: php_variables.h,v 1.4 2000/02/19 20:12:26 zeev Exp $ */
 
 #ifndef _PHP_VARIABLES_H
 #define _PHP_VARIABLES_H
@@ -43,6 +43,7 @@
 void php_treat_data(int arg, char *str ELS_DC PLS_DC SLS_DC);
 void php_import_environment_variables(ELS_D PLS_DC);
 PHPAPI void php_register_variable(char *var, char *val, pval *track_vars_array ELS_DC PLS_DC);
+PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_array ELS_DC PLS_DC);
 
 
 #endif /* _PHP_VARIABLES_H */

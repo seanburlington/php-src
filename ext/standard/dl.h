@@ -30,12 +30,12 @@
  */
 
 
-/* $Id: dl.h,v 1.5 1999/07/26 20:09:08 andrey Exp $ */
+/* $Id: dl.h,v 1.6 1999/10/13 19:55:25 thies Exp $ */
 
 #ifndef _DL_H
 #define _DL_H
 
-void php3_dl(pval *file,int type,pval *return_value);
+void php_dl(pval *file,int type,pval *return_value);
 
 
 #if HAVE_LIBDL

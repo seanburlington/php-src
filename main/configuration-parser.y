@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.18 1999/08/02 19:16:34 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.19 1999/10/13 19:55:25 thies Exp $ */
 
 #define DEBUG_CFG_PARSER 1
 #include "php.h"
@@ -370,7 +370,7 @@ statement:
 			printf("Loading '%s'\n",$3.value.str.val);
 #endif
 			
-			php3_dl(&$3,MODULE_PERSISTENT,&dummy);
+			php_dl(&$3,MODULE_PERSISTENT,&dummy);
 		}
 	|	T_ZEND_EXTENSION '=' string {
 #if !defined(ZTS) && !ZEND_DEBUG

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.145 1999/12/03 12:21:56 sas Exp $ */
+/* $Id: main.c,v 1.146 1999/12/03 15:16:32 sas Exp $ */
 
 
 #include <stdio.h>
@@ -149,7 +149,7 @@ static PHP_INI_MH(OnChangeMemoryLimit)
 	if (new_value) {
 		new_limit = atoi(new_value);
 	} else {
-		new_limit = 2<<30;		/* effectively, no limit */
+		new_limit = 1<<30;		/* effectively, no limit */
 	}
 	return zend_set_memory_limit(new_limit);
 }

@@ -1,6 +1,10 @@
-dnl $Id: config.m4,v 1.3 2001/09/07 00:25:10 sniper Exp $
+dnl $Id: config.m4,v 1.4 2001/09/10 07:56:22 ssb Exp $
 dnl config.m4 for extension Xmlrpc
 
+sinclude(ext/xmlrpc/libxmlrpc/acinclude.m4)
+sinclude(ext/xmlrpc/libxmlrpc/xmlrpc.m4)
+sinclude(libxmlrpc/acinclude.m4)
+sinclude(libxmlrpc/xmlrpc.m4)
 
 PHP_ARG_WITH(xmlrpc, for XMLRPC-EPI support,
 [  --with-xmlrpc[=DIR]     Include XMLRPC-EPI support])

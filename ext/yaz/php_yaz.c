@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.62 2003/01/18 19:53:33 iliaa Exp $ */
+/* $Id: php_yaz.c,v 1.63 2003/02/25 08:31:52 dickmeiss Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -454,6 +454,18 @@ PHP_FUNCTION(yaz_search)
 	{
 		ZOOM_query q = ZOOM_query_create ();
 		ZOOM_query_prefix (q, query_str);
+		if (p->sort_criteria)
+			ZOOM_query_sortby (q, p->sort_criteria);
+        xfree (p->sort_criteria);
+        p->sort_criteria = 0;
+		p->zoom_set = ZOOM_connection_search (p->zoom_conn, q);
+		ZOOM_query_destroy (q);
+		RETVAL_TRUE;
+	}
+	if (!strcmp (type_str, "cql"))
+	{
+		ZOOM_query q = ZOOM_query_create ();
+		ZOOM_query_cql (q, query_str);
 		if (p->sort_criteria)
 			ZOOM_query_sortby (q, p->sort_criteria);
         xfree (p->sort_criteria);

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.31 2001/05/08 11:08:08 sniper Exp $
+dnl $Id: config.m4,v 1.31.2.1 2001/05/28 00:11:49 sniper Exp $
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
 sinclude(ext/mysql/libmysql/mysql.m4)
@@ -80,7 +80,7 @@ elif test "$PHP_MYSQL" != "no"; then
 
   dnl Check if mysql_config is found. If yes, use the LIBS provided by it..
   if test -x "$MYSQL_DIR/bin/mysql_config"; then
-    MYSQL_LIBS=`$MYSQL_DIR/bin/mysql_config --libs   | sed -e "s/'//g"`
+    MYSQL_LIBS=`$MYSQL_DIR/bin/mysql_config --libs | sed -e "s/-lnsl//g;s/'//g"`
     MYSQL_INCLUDE=`$MYSQL_DIR/bin/mysql_config --cflags | sed -e "s/'//g"`
     AC_DEFINE_UNQUOTED(MYSQL_UNIX_ADDR, "`$MYSQL_DIR/bin/mysql_config --socket`", [Default mysql unix socket])
   else

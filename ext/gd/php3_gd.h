@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php3_gd.h,v 1.10 1999/10/17 14:57:49 sas Exp $ */
+/* $Id: php3_gd.h,v 1.11 1999/12/01 22:59:44 ssb Exp $ */
 
 #ifndef _PHP3_GD_H
 #define _PHP3_GD_H
@@ -57,7 +57,9 @@ PHP_MINFO_FUNCTION(gd);
 extern PHP_MINIT_FUNCTION(gd);
 extern PHP_MSHUTDOWN_FUNCTION(gd);
 
+#ifndef HAVE_GDIMAGECOLORRESOLVE
 extern int gdImageColorResolve(gdImagePtr, int, int, int);
+#endif
 PHP_FUNCTION(imagearc);
 PHP_FUNCTION(imagechar);
 PHP_FUNCTION(imagecharup);
@@ -102,6 +104,7 @@ PHP_FUNCTION(imagedashedline);
 PHP_FUNCTION(imagettfbbox);
 PHP_FUNCTION(imagettftext);
 #endif
+PHPAPI int phpi_get_le_gd(void);
 #else
 
 #define phpext_gd_ptr NULL

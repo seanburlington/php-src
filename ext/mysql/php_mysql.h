@@ -17,14 +17,14 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.2 1999/10/04 15:18:14 sas Exp $ */
+/* $Id: php_mysql.h,v 1.3 1999/12/01 22:59:44 ssb Exp $ */
 
 #ifndef _PHP_MYSQL_H
 #define _PHP_MYSQL_H
 
-#if COMPILE_DL
-#undef HAVE_MYSQL
-#define HAVE_MYSQL 1
+#ifdef COMPILE_DL
+# undef HAVE_MYSQL
+# define HAVE_MYSQL 1
 #endif
 
 #if WIN32||WINNT

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.48 1999/11/30 21:22:02 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.49 1999/12/01 22:59:42 ssb Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -662,10 +662,8 @@ PHP_REGEX
 dnl If we are using gcc and the user has not specified CFLAGS, add -O2.
 test -n "$auto_cflags" && test -n "$GCC" && CFLAGS="$CFLAGS -O2"
 
-
-
-
 CPPFLAGS="$CPPFLAGS -D_POSIX_PTHREAD_SEMANTICS"
+
 export CPPFLAGS
 
 if test "$PHP_THREAD_SAFETY" = "yes" || test "$PHP_EXPERIMENTAL_ZTS" = "yes"; then

@@ -18,12 +18,16 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.23 1999/11/30 20:18:09 andi Exp $ */
+/* $Id: gd.c,v 1.24 1999/12/01 22:59:44 ssb Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
 
 /* Note that there is no code from the gd package in this file */
+
+#ifdef PIC
+# define COMPILE_DL 1
+#endif
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -136,11 +140,7 @@ php3_module_entry gd_module_entry = {
 };
 
 #if COMPILE_DL
-# if PHP_31
-#  include "../phpdl.h"
-# else
-#  include "dl/phpdl.h"
-# endif
+# include "dl/phpdl.h"
 DLEXPORT php3_module_entry *get_module(void) { return &gd_module_entry; }
 #endif
 

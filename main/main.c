@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.245 2000/05/18 15:34:21 zeev Exp $ */
+/* $Id: main.c,v 1.246 2000/05/18 19:45:34 thies Exp $ */
 
 
 #include <stdio.h>
@@ -637,8 +637,22 @@ static void php_message_handler_for_zend(long message, void *data)
 }
 
 
+#if PHP_SIGCHILD
+static int sigchld_handler(int apar)
+{
+    int status;             
+    wait(&status);
+    signal(SIGCHLD,sigchld_handler);   
+}
+#endif
+
+
 int php_request_startup(CLS_D ELS_DC PLS_DC SLS_DC)
 {
+#if PHP_SIGCHILD
+	signal(SIGCHLD,sigchld_handler);
+#endif
+
 	global_lock();
 	
 	php_output_startup();

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.131 2000/05/18 17:43:19 zeev Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.132 2000/05/18 19:45:32 thies Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -468,6 +468,15 @@ AC_ARG_WITH(exec-dir,
 	AC_DEFINE(PHP_SAFE_MODE_EXEC_DIR,"/usr/local/php/bin")
    	AC_MSG_RESULT(/usr/local/php/bin)
 ])
+
+PHP_ARG_ENABLE(sigchild,whether to enable PHP's own SIGCHLD handler,
+[  --enable-sigchild       Enable PHP's own SIGCHLD handler.],no)
+
+if test "$PHP_SIGCHILD" = "yes"; then
+  AC_DEFINE(PHP_SIGCHILD, 1)
+else
+  AC_DEFINE(PHP_SIGCHILD, 0)
+fi
 
 PHP_ARG_ENABLE(track-vars,whether to enable track_vars variables by default,
 [  --enable-track-vars     Enable GET/POST/Cookie track variables by default.],yes)

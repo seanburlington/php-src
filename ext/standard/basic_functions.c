@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.686 2004/09/10 20:45:33 pollita Exp $ */
+/* $Id: basic_functions.c,v 1.687 2004/09/14 03:48:16 pollita Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -600,6 +600,7 @@ function_entry basic_functions[] = {
 	PHP_FE(stream_context_get_default,										NULL)
 	PHP_FE(stream_filter_prepend,											NULL)
 	PHP_FE(stream_filter_append,											NULL)
+	PHP_FE(stream_filter_remove,											NULL)
 	PHP_FE(stream_socket_client,				 second_and_third_args_force_ref)
 	PHP_FE(stream_socket_server,				 second_and_third_args_force_ref)
 	PHP_FE(stream_socket_accept,				 		   third_arg_force_ref)

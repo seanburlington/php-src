@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.96 2004/09/10 20:45:35 pollita Exp $ */
+/* $Id: php_streams.h,v 1.97 2004/09/14 03:48:16 pollita Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -30,6 +30,7 @@
 BEGIN_EXTERN_C()
 PHPAPI int php_file_le_stream(void);
 PHPAPI int php_file_le_pstream(void);
+PHPAPI int php_file_le_stream_filter(void);
 END_EXTERN_C()
 
 /* {{{ Streams memory debugging stuff */

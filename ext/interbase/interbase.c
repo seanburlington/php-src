@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.223 2004/07/06 13:46:18 abies Exp $ */
+/* $Id: interbase.c,v 1.223.2.1 2005/02/25 13:44:26 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -591,7 +591,7 @@ int _php_ibase_attach_db(char **args, int *len, long *largs, isc_db_handle *db T
 	dpb = dpb_buffer + 1;
 
 	for (i = 0; i < sizeof(dpb_args); ++i) {
-		if (dpb_args[i] && args[i]) {
+		if (dpb_args[i] && args[i] && len[i]) {
 			dpb += sprintf(dpb, "%c%c%s", dpb_args[i],(unsigned char)len[i],args[i]);
 		}
 	}

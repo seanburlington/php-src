@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.98 2003/03/08 16:53:54 helly Exp $ */
+/* $Id: network.c,v 1.99 2003/05/13 01:57:54 iliaa Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -203,7 +203,7 @@ static int php_network_getaddresses(const char *host, struct sockaddr ***sal, ch
 		;
 	}
 		
-	*sal = emalloc((n + 1) * sizeof(*sal));
+	*sal = safe_emalloc((n + 1), sizeof(*sal), 0);
 	sai = res;
 	sap = *sal;
 	do {

@@ -1,6 +1,6 @@
 <?php
 
-/* $Id: install-pear.php,v 1.6 2002/11/13 00:49:37 sniper Exp $ */
+/* $Id: install-pear.php,v 1.6.2.1 2002/11/13 20:38:24 ssb Exp $ */
 
 $pear_dir = dirname(__FILE__);
 ini_set('include_path', $pear_dir);
@@ -75,7 +75,6 @@ foreach ($install_files as $package => $instfile) {
         $old_ver = $reg->packageInfo($package, 'version');
         if (version_compare($new_ver, $old_ver, 'gt')) {
             $options['upgrade'] = true;
-            print_r($options);
             $err = $installer->install($instfile, $options);
             if (PEAR::isError($err)) {
                 $ui->outputData(sprintf("[PEAR] %s: %s", $package, $err->getMessage()));

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.66 2002/10/03 12:16:44 sesser Exp $ */
+/* $Id: ftp.c,v 1.67 2002/10/04 22:20:08 sesser Exp $ */
 
 #include "php.h"
 
@@ -602,7 +602,7 @@ ftp_pasv(ftpbuf_t *ftp, int pasv)
 					n++;
 			}
 
-			sin6->sin6_port = htons((unsigned short) strtol(ptr, &endptr, 10));
+			sin6->sin6_port = htons((unsigned short) strtoul(ptr, &endptr, 10));
 			if (ptr == endptr || *endptr != delimiter)
 				return 0;
 

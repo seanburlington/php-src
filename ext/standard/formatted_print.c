@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.55 2002/10/11 04:44:14 sebastian Exp $ */
+/* $Id: formatted_print.c,v 1.56 2002/10/14 16:03:16 iliaa Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -605,6 +605,7 @@ php_formatted_print(int ht, int *len, int use_array TSRMLS_DC)
 				case 'e':
 				case 'f':
 					/* XXX not done */
+					convert_to_double_ex(args[argnum]);
 					php_sprintf_appenddouble(&result, &outpos, &size,
 											 Z_DVAL_PP(args[argnum]),
 											 width, padding, alignment,

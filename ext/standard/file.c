@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.114 2000/09/11 18:56:46 andi Exp $ */
+/* $Id: file.c,v 1.115 2000/09/12 04:13:21 andi Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1314,7 +1314,7 @@ PHP_FUNCTION(rmdir)
 	if (PG(safe_mode) &&(!php_checkuid((*arg1)->value.str.val, NULL, 1))) {
 		RETURN_FALSE;
 	}
-	ret = rmdir((*arg1)->value.str.val);
+	ret = V_RMDIR((*arg1)->value.str.val);
 	if (ret < 0) {
 		php_error(E_WARNING,"RmDir failed (%s)", strerror(errno));
 		RETURN_FALSE;

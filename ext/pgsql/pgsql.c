@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.121 2001/07/31 05:44:03 zeev Exp $ */
+/* $Id: pgsql.c,v 1.122 2001/07/31 07:09:42 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -1436,7 +1436,7 @@ PHP_FUNCTION(pg_trace)
     ZEND_FETCH_RESOURCE2(pgsql, PGconn *, z_pgsql_link, id, "PostgreSQL link", le_link, le_plink);
 	convert_to_string_ex(z_filename);
 
-	fp = php_fopen_wrapper(Z_STRVAL_PP(z_filename), mode, ENFORCE_SAFE_MODE, &issock, &socketd, NULL);
+	fp = php_fopen_wrapper(Z_STRVAL_PP(z_filename), mode, ENFORCE_SAFE_MODE, &issock, &socketd, NULL TSRMLS_CC);
 
 	if (!fp) {
 		php_error(E_WARNING, "Unable to open %s for logging", Z_STRVAL_PP(z_filename));

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.57 2001/07/31 05:43:51 zeev Exp $ */
+/* $Id: db.c,v 1.58 2001/07/31 07:09:38 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #if 1
@@ -307,7 +307,7 @@ dbm_info *php_dbm_open(char *filename, char *mode TSRMLS_DC)
 		return NULL;
 	}
 
-	if (php_check_open_basedir(filename)) {
+	if (php_check_open_basedir(filename TSRMLS_CC)) {
 		return NULL;
 	}
 

@@ -18,13 +18,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_fopen_wrappers.h,v 1.2 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: php_fopen_wrappers.h,v 1.3 2001/07/31 07:09:45 zeev Exp $ */
 
 #ifndef PHP_FOPEN_WRAPPERS_H
 #define PHP_FOPEN_WRAPPERS_H
 
-extern FILE *php_fopen_url_wrap_http(char *, char *, int, int *, int *, char **);
-extern FILE *php_fopen_url_wrap_ftp(char *, char *, int, int *, int *, char **);
-extern FILE *php_fopen_url_wrap_php(char *, char *, int, int *, int *, char **);
+FILE *php_fopen_url_wrap_http(char *, char *, int, int *, int *, char ** TSRMLS_DC);
+FILE *php_fopen_url_wrap_ftp(char *, char *, int, int *, int *, char ** TSRMLS_DC);
+FILE *php_fopen_url_wrap_php(char *, char *, int, int *, int *, char ** TSRMLS_DC);
 
 #endif

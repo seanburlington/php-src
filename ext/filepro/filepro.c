@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filepro.c,v 1.36 2001/07/30 06:17:51 zeev Exp $ */
+/* $Id: filepro.c,v 1.37 2001/07/31 07:09:39 zeev Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com
@@ -218,7 +218,7 @@ PHP_FUNCTION(filepro)
 		RETURN_FALSE;
 	}
 	
-	if (php_check_open_basedir(workbuf)) {
+	if (php_check_open_basedir(workbuf TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 
@@ -316,7 +316,7 @@ PHP_FUNCTION(filepro_rowcount)
 		RETURN_FALSE;
 	}
 	
-	if (php_check_open_basedir(workbuf)) {
+	if (php_check_open_basedir(workbuf TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 
@@ -540,7 +540,7 @@ PHP_FUNCTION(filepro_retrieve)
 		RETURN_FALSE;
 	}
 	
-	if (php_check_open_basedir(workbuf)) {
+	if (php_check_open_basedir(workbuf TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.392 2001/07/31 06:28:04 zeev Exp $ */
+/* $Id: main.c,v 1.393 2001/07/31 07:09:48 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -496,9 +496,10 @@ static FILE *php_fopen_wrapper_for_zend(const char *filename, char **opened_path
 	int issock=0, socketd=0;
 	int old_chunk_size;
 	FILE *retval;
+	TSRMLS_FETCH();
 	
 	old_chunk_size = php_sock_set_def_chunk_size(1);
-	retval=php_fopen_wrapper((char *) filename, "rb", USE_PATH|IGNORE_URL_WIN, &issock, &socketd, opened_path);
+	retval=php_fopen_wrapper((char *) filename, "rb", USE_PATH|IGNORE_URL_WIN, &issock, &socketd, opened_path TSRMLS_CC);
 	php_sock_set_def_chunk_size(old_chunk_size);
 	
 	if (issock) {

@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.7 2001/06/11 15:14:04 dbeu Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.8 2001/07/31 07:09:45 zeev Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -79,7 +79,7 @@ static int php_get_ftp_result(int socketd)
 
 /* {{{ php_fopen_url_wrap_ftp
  */
-FILE *php_fopen_url_wrap_ftp(char *path, char *mode, int options, int *issock, int *socketd, char **opened_path)
+FILE *php_fopen_url_wrap_ftp(char *path, char *mode, int options, int *issock, int *socketd, char **opened_path TSRMLS_DC)
 {
 	FILE *fp=NULL;
 	php_url *resource=NULL;

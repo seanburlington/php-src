@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.143 2001/07/31 05:44:01 zeev Exp $ */
+/* $Id: oci8.c,v 1.144 2001/07/31 07:09:40 zeev Exp $ */
 
 /* TODO list:
  *
@@ -577,7 +577,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.143 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.144 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2930,7 +2930,7 @@ PHP_FUNCTION(ocisavelobfile)
 
 		convert_to_string_ex(arg);
 
-		if (php_check_open_basedir((*arg)->value.str.val)) {
+		if (php_check_open_basedir((*arg)->value.str.val TSRMLS_CC)) {
 			RETURN_FALSE;
 		}
 
@@ -3050,7 +3050,7 @@ PHP_FUNCTION(ociwritelobtofile)
 		}
 
 		if (filename && *filename) {
-			if (php_check_open_basedir(filename)) {
+			if (php_check_open_basedir(filename TSRMLS_CC)) {
 				goto bail;
 			}
 

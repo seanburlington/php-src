@@ -1,8 +1,8 @@
 dnl
-dnl $Id: config.m4,v 1.1 2004/07/13 17:01:30 rrichards Exp $
+dnl $Id: config.m4,v 1.2 2005/02/13 07:30:56 hholzgra Exp $
 dnl
 
-AC_DEFUN(PHP_XMLWRITER_CHECK_VERSION,[
+AC_DEFUN([PHP_XMLWRITER_CHECK_VERSION],[
   old_CPPFLAGS=$CPPFLAGS
   CPPFLAGS=-I$XMLWRITER_DIR/include$XMLWRITER_DIR_ADD
   AC_MSG_CHECKING(for libxml version)

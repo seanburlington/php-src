@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.12 2005/02/13 06:26:48 wez Exp $
+dnl $Id: config.m4,v 1.13 2005/02/13 07:30:55 hholzgra Exp $
 dnl config.m4 for extension pdo_odbc
 dnl vim:et:sw=2:ts=2:
 
-AC_DEFUN(PDO_ODBC_HELP_TEXT, [[
+AC_DEFUN([PDO_ODBC_HELP_TEXT], [[
  --with-pdo-odbc=flavour,dir  Add support for "flavour" ODBC drivers,
                               looking for include and lib dirs under "dir"
          

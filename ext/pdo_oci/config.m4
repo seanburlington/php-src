@@ -1,6 +1,6 @@
-dnl $Id: config.m4,v 1.7 2005/01/13 04:55:56 wez Exp $
+dnl $Id: config.m4,v 1.8 2005/02/13 07:30:55 hholzgra Exp $
 
-AC_DEFUN(AC_PDO_OCI_VERSION,[
+AC_DEFUN([AC_PDO_OCI_VERSION],[
   AC_MSG_CHECKING([Oracle version])
   if test -s "$PDO_OCI_DIR/orainst/unix.rgs"; then
     PDO_OCI_VERSION=`grep '"ocommon"' $PDO_OCI_DIR/orainst/unix.rgs | sed 's/[ ][ ]*/:/g' | cut -d: -f 6 | cut -c 2-4`

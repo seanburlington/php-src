@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.152 2002/10/21 18:44:50 hholzgra Exp $ */
+/* $Id: SAPI.c,v 1.153 2002/10/21 19:18:39 hholzgra Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -280,8 +280,6 @@ SAPI_API size_t sapi_apply_default_charset(char **mimetype, size_t len TSRMLS_DC
  */
 SAPI_API void sapi_activate(TSRMLS_D)
 {
-	void (*post_reader_func)(TSRMLS_D);
-
 	zend_llist_init(&SG(sapi_headers).headers, sizeof(sapi_header_struct), (void (*)(void *)) sapi_free_header, 0);
 	SG(sapi_headers).send_default_content_type = 1;
 

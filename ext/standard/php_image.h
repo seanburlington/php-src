@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_image.h,v 1.9 2002/03/04 07:21:30 rasmus Exp $ */
+/* $Id: php_image.h,v 1.9.2.1 2002/03/11 19:04:29 helly Exp $ */
 
 #ifndef PHP_IMAGE_H
 #define PHP_IMAGE_H
@@ -35,7 +35,8 @@ typedef enum
   IMAGE_FILETYPE_SWF,
   IMAGE_FILETYPE_PSD,
   IMAGE_FILETYPE_BMP,
-  IMAGE_FILETYPE_TIFF
+  IMAGE_FILETYPE_TIFF_II, /* intel */
+  IMAGE_FILETYPE_TIFF_MM, /* motorola */
 } image_filetype;
 /* }}} */
 

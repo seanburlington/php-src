@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.79.2.3 2001/11/13 11:46:33 zeev Exp $ */
+/* $Id: curl.c,v 1.79.2.4 2001/11/13 11:48:28 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -248,7 +248,7 @@ PHP_MINIT_FUNCTION(curl)
 	REGISTER_CURL_CONSTANT("CURLE_ALREADY_COMPLETE",            CURLE_ALREADY_COMPLETE);
 
 #if HAVE_OPENSSL_EXT	/* OpenSSL already takes care of initialization */
-	startup_options = CURL_GLOBAL_NONE;
+	startup_options = CURL_GLOBAL_NOTHING;
 #else
 	startup_options = CURL_GLOBAL_ALL;
 #endif

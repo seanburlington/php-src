@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.159.2.5 2004/11/11 00:38:44 iliaa Exp $ */
+/* $Id: rfc1867.c,v 1.159.2.6 2004/11/20 20:16:27 sesser Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -1095,6 +1095,13 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 			}
 #endif
 			if (!is_anonymous) {
+				if (PG(magic_quotes_gpc)) {
+					s = s ? s : filename;
+					tmp = strrchr(s, '\'');
+					s = tmp > s ? tmp : s;
+					tmp = strrchr(s, '"');
+					s = tmp > s ? tmp : s;
+				}
 				if (s && s > filename) {
 					safe_php_register_variable(lbuf, s+1, NULL, 0 TSRMLS_CC);
 				} else {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.63 2000/06/05 19:47:41 andi Exp $ */
+/* $Id: gd.c,v 1.64 2000/06/06 17:12:05 hholzgra Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -236,6 +236,10 @@ PHP_MINFO_FUNCTION(gd)
 	php_info_print_table_row(2, "FreeType Linkage", "with unknown library");
 #endif
 #endif
+
+#ifdef HAVE_LIBT1
+	php_info_print_table_row(2, "T1Lib Support", "enabled");
+#endif         
 
 /* this next part is stupid ... if I knew better, I'd put them all on one row (cmv) */
 

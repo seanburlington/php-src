@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.334 2002/04/06 13:42:39 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.335 2002/04/07 16:16:47 sterling Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1169,6 +1169,15 @@ dnl      mv main/internal_functions.c.old main/internal_functions.c
 dnl  else
 dnl      rm -f main/internal_functions.c.old
 dnl  fi
+
+  if test $UNAME = "FreeBSD" && test $PHP_SAPI = "apache2filter" && test $TSRM_PTH != "pth-config" ; then
+    echo "+--------------------------------------------------------------------+"
+    echo "|                        *** WARNING ***                             |"
+    echo "|                                                                    |"
+    echo "| In order to build PHP as a Apache2 module on FreeBSD, you have to  |"
+    echo "| add  --with-tsrm-pth to your ./configure line. Therefore you need  |"
+    echo "| to install gnu-pth from /usr/ports/devel/pth.                      |"
+  fi
 
   if test -n "$PHP_APXS_BROKEN"; then
     echo "+--------------------------------------------------------------------+"

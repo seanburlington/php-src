@@ -17,16 +17,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.70 2001/01/05 17:07:02 dbeu Exp $ */
+/* $Id: xml.c,v 1.71 2001/01/05 18:09:43 dbeu Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
-
-#if WIN32
-#include "config.w32.h"
-#else
-#include "php_config.h"
-#endif
 
 #define PHP_XML_INTERNAL
 #include "php_xml.h"

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.113 2001/03/02 09:12:55 thies Exp $ */
+/* $Id: oci8.c,v 1.114 2001/04/11 15:46:03 thies Exp $ */
 
 /* TODO list:
  *
@@ -342,11 +342,16 @@ PHP_MINIT_FUNCTION(oci)
 {
 	zend_class_entry oci_lob_class_entry;
 
+/* XXX Joe Brown says OCI_THREADED breaks windows, assuming the same is true for unix - tc
 #ifdef ZTS 
 #define PHP_OCI_INIT_MODE OCI_THREADED
 #else
+*/
 #define PHP_OCI_INIT_MODE OCI_DEFAULT
+
+/*
 #endif
+*/
 
 #if OCI_USE_EMALLOC
     OCIInitialize(PHP_OCI_INIT_MODE, NULL, ocimalloc, ocirealloc, ocifree);
@@ -489,7 +494,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.113 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.114 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );

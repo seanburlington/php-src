@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.82 2003/08/12 21:29:28 helly Exp $ 
+   $Id: sqlite.c,v 1.83 2003/08/17 15:43:41 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -65,6 +65,9 @@ extern ps_module ps_mod_sqlite;
 
 extern int sqlite_encode_binary(const unsigned char *in, int n, unsigned char *out);
 extern int sqlite_decode_binary(const unsigned char *in, unsigned char *out);
+
+#define php_sqlite_encode_binary(in, n, out) sqlite_encode_binary((const unsigned char *)in, n, (unsigned char *)out)
+#define php_sqlite_decode_binary(in, out)    sqlite_decode_binary((const unsigned char *)in, (unsigned char *)out)
 
 static int le_sqlite_db, le_sqlite_result, le_sqlite_pdb;
 
@@ -947,7 +950,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.82 2003/08/12 21:29:28 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.83 2003/08/17 15:43:41 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1498,7 +1501,7 @@ static void php_sqlite_fetch_array(struct php_sqlite_result *res, int mode, zend
 			ZVAL_NULL(decoded);
 		} else if (decode_binary && rowdata[j][0] == '\x01') {
 			Z_STRVAL_P(decoded) = emalloc(strlen(rowdata[j]));
-			Z_STRLEN_P(decoded) = sqlite_decode_binary(rowdata[j]+1, Z_STRVAL_P(decoded));
+			Z_STRLEN_P(decoded) = php_sqlite_decode_binary(rowdata[j]+1, Z_STRVAL_P(decoded));
 			Z_STRVAL_P(decoded)[Z_STRLEN_P(decoded)] = '\0';
 			Z_TYPE_P(decoded) = IS_STRING;
 			if (!buffered) {
@@ -1575,7 +1578,7 @@ static void php_sqlite_fetch_column(struct php_sqlite_result *res, zval *which, 
 	} else if (decode_binary && rowdata[j] != NULL && rowdata[j][0] == '\x01') {
 		int l = strlen(rowdata[j]);
 		char *decoded = emalloc(l);
-		l = sqlite_decode_binary(rowdata[j]+1, decoded);
+		l = php_sqlite_decode_binary(rowdata[j]+1, decoded);
 		decoded[l] = '\0';
 		RETVAL_STRINGL(decoded, l, 0);
 		if (!res->buffered) {
@@ -1747,7 +1750,7 @@ static void php_sqlite_fetch_single(struct php_sqlite_result *res, zend_bool dec
 
 	if (decode_binary && rowdata[0] != NULL && rowdata[0][0] == '\x01') {
 		decoded = emalloc(strlen(rowdata[0]));
-		decoded_len = sqlite_decode_binary(rowdata[0]+1, decoded);
+		decoded_len = php_sqlite_decode_binary(rowdata[0]+1, decoded);
 		if (!res->buffered) {
 			efree((char*)rowdata[0]);
 			rowdata[0] = NULL;
@@ -2305,7 +2308,7 @@ PHP_FUNCTION(sqlite_escape_string)
 		
 		ret = emalloc( 1 + ((256 * stringlen + 1262) / 253) );
 		ret[0] = '\x01';
-		enclen = sqlite_encode_binary((const unsigned char*)string, stringlen, ret+1);
+		enclen = php_sqlite_encode_binary(string, stringlen, ret+1);
 		RETVAL_STRINGL(ret, enclen+1, 0);
 		
 	} else  {
@@ -2535,7 +2538,7 @@ PHP_FUNCTION(sqlite_udf_encode_binary)
 		
 		ret = emalloc( 1 + ((256 * datalen + 1262) / 253) );
 		ret[0] = '\x01';
-		enclen = sqlite_encode_binary((const unsigned char*)data, datalen, ret+1);
+		enclen = php_sqlite_encode_binary(data, datalen, ret+1);
 		RETVAL_STRINGL(ret, enclen+1, 0);
 	} else {
 		RETVAL_STRINGL(data, datalen, 1);
@@ -2563,7 +2566,7 @@ PHP_FUNCTION(sqlite_udf_decode_binary)
 		char *ret;
 		
 		ret = emalloc(datalen);
-		enclen = sqlite_decode_binary((const unsigned char*)data+1, ret);
+		enclen = php_sqlite_decode_binary(data+1, ret);
 		ret[enclen] = '\0';
 		RETVAL_STRINGL(ret, enclen, 0);
 	} else {

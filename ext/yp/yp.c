@@ -16,7 +16,7 @@
    |          Fredrik Ohrn                                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.41 2003/09/26 10:02:03 hholzgra Exp $ */
+/* $Id: yp.c,v 1.42 2003/11/14 00:32:21 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -182,7 +182,7 @@ PHP_FUNCTION(yp_first)
 		RETURN_FALSE;
 	}
 	array_init(return_value);
-	add_assoc_stringl_ex(return_value,outkey,outkeylen,outval,outvallen,1);
+	add_assoc_stringl_ex(return_value,outkey,outkeylen+1,outval,outvallen,1);
 
 	/* Deprecated */
 	add_assoc_stringl(return_value,"key",outkey,outkeylen,1);
@@ -212,7 +212,7 @@ PHP_FUNCTION(yp_next)
 	}
 	
 	array_init(return_value);
-	add_assoc_stringl_ex(return_value,outkey,outkeylen,outval,outvallen,1);
+	add_assoc_stringl_ex(return_value,outkey,outkeylen+1,outval,outvallen,1);
 }
 /* }}} */
 

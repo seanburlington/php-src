@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.698 2004/11/15 21:13:25 fmk Exp $ */
+/* $Id: basic_functions.c,v 1.699 2004/12/12 16:10:34 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -602,6 +602,9 @@ function_entry basic_functions[] = {
 	PHP_FE(stream_socket_recvfrom,							fourth_arg_force_ref)
 	PHP_FE(stream_socket_sendto,											NULL)
 	PHP_FE(stream_socket_enable_crypto,										NULL)
+#if HAVE_SOCKETPAIR
+	PHP_FE(stream_socket_pair,												NULL)
+#endif
 	PHP_FE(stream_copy_to_stream,											NULL)
 	PHP_FE(stream_get_contents,												NULL)
 	PHP_FE(fgetcsv,															NULL)

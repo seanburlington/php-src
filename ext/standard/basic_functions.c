@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.244 2000/09/01 16:10:16 andrei Exp $ */
+/* $Id: basic_functions.c,v 1.245 2000/09/02 15:54:18 rubys Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -636,6 +636,7 @@ static void basic_globals_ctor(BLS_D)
 {
 	BG(next) = NULL;
 	BG(left) = -1;
+	BG(user_tick_functions) = NULL;
 	zend_hash_init(&BG(sm_protected_env_vars), 5, NULL, NULL, 1);
 	BG(sm_allowed_env_vars) = NULL;
 #ifdef PHP_WIN32

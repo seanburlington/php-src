@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.16 1999/10/07 10:03:24 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.17 1999/10/07 16:47:53 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -785,8 +785,6 @@ if true; then
   echo "+--------------------------------------------------------------------+"
 
 fi
-
-PHP_SHOW_LD_LIBRARY_PATH
 
 ])
 

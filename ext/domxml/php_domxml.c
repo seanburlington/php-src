@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.249 2003/04/09 07:29:39 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.250 2003/04/09 19:14:44 helly Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -606,6 +606,7 @@ static inline void node_wrapper_free(xmlNodePtr node)
 {
 	zval *wrapper, **handle;
 	int type, refcount = 0;
+	TSRMLS_FETCH();
 
 	if (!node) {
 		return;
@@ -1828,7 +1829,7 @@ PHP_FUNCTION(domxml_attr_value)
 	DOMXML_NO_ARGS();
 
 	/* RETURN_STRING((char *) xmlNodeGetContent((xmlNodePtr) attrp), 1); */
-	if (content = xmlNodeGetContent((xmlNodePtr) attrp)) {
+	if ((content = xmlNodeGetContent((xmlNodePtr) attrp)) != NULL) {
 		RETVAL_STRING(content,1);
 	} else {
 		RETURN_EMPTY_STRING();
@@ -1909,7 +1910,7 @@ PHP_FUNCTION(domxml_pi_data)
 	DOMXML_NO_ARGS();
 
 	/* RETURN_STRING(xmlNodeGetContent(nodep), 1); */
-	if (content = xmlNodeGetContent(nodep)) {
+	if ((content = xmlNodeGetContent(nodep)) != NULL) {
 		RETVAL_STRING(content,1);
 	} else {
 		RETURN_EMPTY_STRING();

@@ -16,7 +16,7 @@
   |          Tal Peer <tal@php.net>                                      |
   +----------------------------------------------------------------------+
 
-  $Id: php_sqlite.h,v 1.10 2003/04/20 13:31:36 wez Exp $ 
+  $Id: php_sqlite.h,v 1.11 2003/04/22 00:08:48 edink Exp $ 
 */
 
 #ifndef PHP_SQLITE_H
@@ -68,6 +68,10 @@ PHP_FUNCTION(sqlite_error_string);
 
 PHP_FUNCTION(sqlite_create_aggregate);
 PHP_FUNCTION(sqlite_create_function);
+
+ZEND_BEGIN_MODULE_GLOBALS(sqlite)
+	 int assoc_case;
+ZEND_END_MODULE_GLOBALS(sqlite)
 
 #ifdef ZTS
 #define SQLITE_G(v) TSRMG(sqlite_globals_id, zend_sqlite_globals *, v)

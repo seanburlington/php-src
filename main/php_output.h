@@ -16,14 +16,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.21 2001/03/06 15:54:49 zeev Exp $ */
+/* $Id: php_output.h,v 1.22 2001/03/06 16:25:14 zeev Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
 
 #include "php.h"
 
-typedef void (*php_output_handler_func_t)(char *output, uint output_len, char **handled_output, int status);
+typedef void (*php_output_handler_func_t)(char *output, uint output_len, char **handled_output, int mode);
 
 PHPAPI void php_output_startup(void);
 void php_output_register_constants(void);

@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.73 2004/01/28 22:50:12 pollita Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.74 2004/05/17 20:31:59 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -457,6 +457,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 					goto errexit;
 				}
 			} else {
+				php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Remote file already exists and overwrite context option not specified.");
 				errno = EEXIST;
 				goto errexit;
 			}

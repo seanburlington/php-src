@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.49 2003/08/03 19:32:07 cox Exp $
+// $Id: Config.php,v 1.50 2003/08/14 20:14:34 derick Exp $
 
 require_once 'PEAR.php';
 require_once 'System.php';
@@ -66,9 +66,9 @@ if (getenv('PHP_PEAR_HTTP_PROXY')) {
 if (getenv('PHP_PEAR_INSTALL_DIR')) {
     define('PEAR_CONFIG_DEFAULT_PHP_DIR', getenv('PHP_PEAR_INSTALL_DIR'));
 } else {
-    if (@is_dir($PEAR_INSTALL_DIR.DIRECTORY_SEPARATOR.'lib')) {
+    if (@is_dir($PEAR_INSTALL_DIR)) {
         define('PEAR_CONFIG_DEFAULT_PHP_DIR',
-               $PEAR_INSTALL_DIR.DIRECTORY_SEPARATOR.'lib');
+               $PEAR_INSTALL_DIR);
     } else {
         define('PEAR_CONFIG_DEFAULT_PHP_DIR', $PEAR_INSTALL_DIR);
     }

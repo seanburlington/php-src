@@ -1,6 +1,6 @@
 <?php
 
-/* $Id: install-pear.php,v 1.14 2003/07/17 06:30:21 cox Exp $ */
+/* $Id: install-pear.php,v 1.15 2003/08/14 20:14:33 derick Exp $ */
 
 $pear_dir = dirname(__FILE__);
 ini_set('include_path', $pear_dir);
@@ -46,7 +46,7 @@ if (!empty($bin_dir)) {
 // User supplied a dir prefix
 if (!empty($with_dir)) {
     $ds = DIRECTORY_SEPARATOR;
-    $config->set('php_dir', $with_dir . $ds . 'lib', 'default');
+    $config->set('php_dir', $with_dir, 'default');
     $config->set('doc_dir', $with_dir . $ds . 'doc', 'default');
     $config->set('data_dir', $with_dir . $ds . 'data', 'default');
     $config->set('test_dir', $with_dir . $ds . 'test', 'default');

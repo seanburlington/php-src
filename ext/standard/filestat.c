@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.133 2004/10/19 08:21:24 hyanantha Exp $ */
+/* $Id: filestat.c,v 1.134 2005/02/17 13:57:21 hyanantha Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -58,8 +58,6 @@
 #if HAVE_PWD_H
 # ifdef PHP_WIN32
 #  include "win32/pwd.h"
-# elif defined(NETWARE)
-#  include "netware/pwd.h"
 # else
 #  include <pwd.h>
 # endif

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.1 2004/05/17 15:41:51 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.2 2004/05/17 17:00:35 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -392,7 +392,7 @@ static zend_object_handlers pdo_dbh_object_handlers = {
 	NULL
 };
 
-static void pdo_dbh_free_storage(void *object TSRMLS_DC)
+static void pdo_dbh_free_storage(zend_object *object TSRMLS_DC)
 {
 	pdo_dbh_t *dbh = (pdo_dbh_t*)object;
 

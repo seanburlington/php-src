@@ -16,11 +16,19 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.1 2004/05/17 15:41:51 wez Exp $ */
+/* $Id: php_pdo_driver.h,v 1.2 2004/05/17 17:00:35 wez Exp $ */
 
 /* forward declarations */
 typedef struct _pdo_dbh_t 	pdo_dbh_t;
 typedef struct _pdo_stmt_t	pdo_stmt_t;
+struct pdo_bound_param_data;
+
+#ifndef TRUE
+# define TRUE 1
+#endif
+#ifndef FALSE
+# define FALSE 0
+#endif
 
 #define PDO_DRIVER_API	20040513
 

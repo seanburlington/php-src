@@ -16,14 +16,18 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: aolserver.c,v 1.1 1999/09/27 16:34:28 ssb Exp $ */
+/* $Id: aolserver.c,v 1.2 1999/10/04 14:29:18 sas Exp $ */
 
-/* conflict between PHP and aolserver */
+/* conflict between PHP and AOLserver */
 #define Debug php_Debug
 #include "php.h"
 #undef Debug
 
 #ifdef HAVE_AOLSERVER
+
+#ifndef ZTS
+#error AOLserver module only useable in thread-safe mode
+#endif
 
 #include "php_ini.h"
 #include "php_globals.h"

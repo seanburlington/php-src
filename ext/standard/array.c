@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.281 2004/11/01 21:06:42 helly Exp $ */
+/* $Id: array.c,v 1.282 2004/11/01 22:28:59 helly Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -48,12 +48,6 @@
 #include "php_smart_str.h"
 #if HAVE_SPL
 #include "ext/spl/spl_array.h"
-#endif
-
-#ifdef ZTS
-int array_globals_id;
-#else
-php_array_globals array_globals;
 #endif
 
 #define EXTR_OVERWRITE			0

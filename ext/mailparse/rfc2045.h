@@ -4,7 +4,7 @@
 */
 
 /*
-** $Id: rfc2045.h,v 1.2 2001/05/28 10:57:22 wez Exp $
+** $Id: rfc2045.h,v 1.3 2001/06/12 21:34:46 thies Exp $
 */
 #ifndef	rfc2045_h
 #define	rfc2045_h
@@ -160,11 +160,11 @@ struct  rfc2045ac {
 	int curlinepos;
 	struct rfc2045 *currwp;
 	enum {
-		raw,
-		quotedprint,
-		qpseeneq,
-		qpseeneqh,
-		base64
+		rfc2045ac_raw,
+		rfc2045ac_quotedprint,
+		rfc2045ac_qpseeneq,
+		rfc2045ac_qpseeneqh,
+		rfc2045ac_base64
 	} curstate;
 	int statechar;
 

@@ -15,7 +15,7 @@
    | Author: Uwe Steinmann <Uwe.Steinmann@fernuni-hagen.de>               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_cpdf.h,v 1.13 2002/12/31 16:06:19 sebastian Exp $ */
+/* $Id: php_cpdf.h,v 1.14 2003/01/15 00:52:06 iliaa Exp $ */
 
 #ifndef PHP_CPDF_H
 #define PHP_CPDF_H
@@ -28,8 +28,6 @@
 #ifdef T
 #undef T
 #endif
-
-#include <cpdflib.h>
 
 extern zend_module_entry cpdf_module_entry;
 #define cpdf_module_ptr &cpdf_module_entry

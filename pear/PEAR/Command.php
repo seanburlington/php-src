@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Command.php,v 1.8 2002/04/01 14:32:39 cox Exp $
+// $Id: Command.php,v 1.9 2002/04/07 16:42:33 ssb Exp $
 
 
 require_once "PEAR.php";
@@ -32,6 +32,12 @@ $GLOBALS['_PEAR_Command_commandlist'] = array();
  * @var string class name
  */
 $GLOBALS['_PEAR_Command_uiclass'] = 'PEAR_Frontend_CLI';
+
+/**
+ * Instance of $_PEAR_Command_uiclass.
+ * @var object
+ */
+$GLOBALS['_PEAR_Command_uiobject'] = null;
 
 /**
 * The options accepted by the commands

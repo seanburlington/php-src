@@ -1,10 +1,8 @@
 <?php
 /* This file is part of PHP test framework for ext/sybase_ct
  *
- * $Id: test.inc,v 1.3 2004/02/09 00:14:24 thekid Exp $ 
+ * $Id: test.inc,v 1.4 2004/02/10 20:39:08 thekid Exp $ 
  */
-
-  error_reporting(E_ALL);
 
   // Change if needed
   define('HOST',     '****');

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.18 2003/11/29 21:46:50 wez Exp $ */
+/* $Id: xp_socket.c,v 1.19 2003/11/30 19:43:30 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -141,9 +141,11 @@ static size_t php_sockop_read(php_stream *stream, char *buf, size_t count TSRMLS
 static int php_sockop_close(php_stream *stream, int close_handle TSRMLS_DC)
 {
 	php_netstream_data_t *sock = (php_netstream_data_t*)stream->abstract;
+#ifdef PHP_WIN32
 	fd_set wrfds, efds;
 	int n;
 	struct timeval timeout;
+#endif
 
 	if (close_handle) {
 

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.239 2002/07/13 04:45:21 sniper Exp $ */
+/* $Id: file.c,v 1.240 2002/08/08 22:59:41 yohgaki Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1845,14 +1845,6 @@ PHP_FUNCTION(copy)
 	}
 
 	if (php_check_open_basedir(Z_STRVAL_PP(source) TSRMLS_CC)) {
-		RETURN_FALSE;
-	}
-
-	if (PG(safe_mode) &&(!php_checkuid(Z_STRVAL_PP(target), NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
-		RETURN_FALSE;
-	}
-
-	if (php_check_open_basedir(Z_STRVAL_PP(target) TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 

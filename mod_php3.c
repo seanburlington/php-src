@@ -28,7 +28,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php3.c,v 1.18 1999/05/11 12:52:17 zeev Exp $ */
+/* $Id: mod_php3.c,v 1.19 1999/05/11 18:36:35 zeev Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -152,8 +152,6 @@ int sapi_apache_header_handler(sapi_header_struct *sapi_header, sapi_headers_str
 
 	if (!strcasecmp(header_name, "Content-Type")) {
 		r->content_type = pstrdup(r->pool, header_content);
-	} else if (!strcasecmp(header_name, "Location")) {
-		r->status = REDIRECT;
 	} else {
 		table_set(r->headers_out, header_name, header_content);
 	}
@@ -168,6 +166,7 @@ int sapi_apache_header_handler(sapi_header_struct *sapi_header, sapi_headers_str
 
 int sapi_apache_send_headers(sapi_headers_struct *sapi_headers SLS_DC)
 {
+	((request_rec *) SG(server_context))->status = SG(sapi_headers).http_response_code;
 	send_http_header((request_rec *) SG(server_context));
 	return SAPI_HEADER_SENT_SUCCESSFULLY;
 }

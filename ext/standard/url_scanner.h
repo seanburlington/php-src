@@ -15,10 +15,13 @@
    | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.h,v 1.7 2000/08/04 15:23:19 hholzgra Exp $ */
+/* $Id: url_scanner.h,v 1.8 2000/09/19 17:21:26 sas Exp $ */
 
 #ifndef URI_SCANNER_H
 #define URI_SCANNER_H
+
+PHP_RINIT_FUNCTION(url_scanner);
+PHP_RSHUTDOWN_FUNCTION(url_scanner);
 
 char *url_adapt(const char *src, size_t srclen, const char *data, size_t *newlen);
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.111 2002/08/20 19:49:37 helly Exp $ */
+/* $Id: output.c,v 1.112 2002/08/20 23:23:25 helly Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -141,8 +141,15 @@ PHPAPI int php_start_ob_buffer(zval *output_handler, uint chunk_size, zend_bool 
 		block_size = initial_chunk_size;
 		php_ob_init(initial_size, block_size, NULL, initial_chunk_size, erase TSRMLS_CC);
 	}
-	if (chunk_size<2) {
-		chunk_size = php_ob_default_buffer_size(TSRMLS_C);
+	if (chunk_size==0) {
+		initial_size = 40*1024;
+		block_size = 10*1024;
+	} else {
+		if (chunk_size==1) {
+			chunk_size = php_ob_default_buffer_size(TSRMLS_C);
+		}
+		initial_size = chunk_size;
+		block_size = chunk_size;
 	}
 	initial_size = chunk_size;
 	block_size = chunk_size;

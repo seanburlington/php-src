@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.78 2003/09/14 09:12:54 helly Exp $
+	$Id: config.w32.h,v 1.79 2003/10/04 02:51:19 moriyoshi Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -192,3 +192,5 @@
 
 /* Win32 support proc_open */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
+
+#define HAVE_MBLEN

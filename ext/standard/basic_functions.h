@@ -17,12 +17,16 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.123 2003/08/07 19:53:31 moriyoshi Exp $ */
+/* $Id: basic_functions.h,v 1.124 2003/10/04 02:51:19 moriyoshi Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
 
 #include <sys/stat.h>
+
+#ifdef HAVE_WCHAR_H
+#include <wchar.h>
+#endif
 
 #include "zend_highlight.h"
 
@@ -199,6 +203,11 @@ typedef struct _php_basic_globals {
 #endif
 
 	HashTable *user_filter_map;
+
+	/* file.c */
+#if defined(_REENTRANT) && defined(HAVE_MBRLEN) && defined(HAVE_MBSTATE_T)
+	mbstate_t mblen_state;
+#endif
 } php_basic_globals;
 
 #ifdef ZTS

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.64 2003/09/06 00:35:21 pollita Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.65 2003/10/04 02:51:19 moriyoshi Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -296,6 +296,19 @@ PHP_CHECK_FUNC(res_nmkquery, resolv, bind, socket)
 PHP_CHECK_FUNC(res_nsend, resolv, bind, socket)
 PHP_CHECK_FUNC(dn_expand, resolv, bind, socket)
 dnl already done PHP_CHECK_FUNC(dn_skipname, resolv, bind, socket)
+
+AC_CHECK_HEADERS([wchar.h])
+AC_CHECK_FUNCS([mblen])
+AC_CHECK_FUNCS([mbrlen mbsinit],,,[
+#ifdef HAVE_WCHAR_H
+# include <wchar.h>
+#endif
+])
+AC_CHECK_TYPES([mbstate_t],,,[
+#ifdef HAVE_WCHAR_H
+# include <wchar.h>
+#endif
+])
 
 PHP_NEW_EXTENSION(standard, array.c base64.c basic_functions.c browscap.c crc32.c crypt.c \
                             cyr_convert.c datetime.c dir.c dl.c dns.c exec.c file.c filestat.c \

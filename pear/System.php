@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.6 2001/12/26 01:23:04 ssb Exp $
+// $Id: System.php,v 1.7 2001/12/26 01:50:08 ssb Exp $
 //
 
 // TODO:
@@ -41,7 +41,7 @@ require_once 'Console/Getopt.php';
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.6 $
+* @version  $Revision: 1.7 $
 * @access   public
 */
 class System extends PEAR
@@ -338,6 +338,9 @@ class System extends PEAR
             }
             if (isset($_ENV['TMP'])) {
                 return $_ENV['TMP'];
+            }
+            if (isset($_ENV['windir'])) {
+                return $_ENV['windir'] . '\temp';
             }
             return $_ENV['SystemRoot'] . '\temp';
         }

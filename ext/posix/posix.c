@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.60 2004/04/18 21:49:10 iliaa Exp $ */
+/* $Id: posix.c,v 1.60.2.1 2005/01/28 00:26:07 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -131,7 +131,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.60 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.60.2.1 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -371,7 +371,16 @@ PHP_FUNCTION(posix_setpgid)
 #ifdef HAVE_GETPGID
 PHP_FUNCTION(posix_getpgid)
 {
-	PHP_POSIX_SINGLE_ARG_FUNC(getpgid);
+	long val;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &val) == FAILURE) {
+		return;
+	}
+	
+	if ((val = getpgid(val)) < 0) {
+		POSIX_G(last_error) = errno;
+		RETURN_FALSE;
+	}
+	RETURN_LONG(val);
 }
 #endif
 /* }}} */
@@ -381,7 +390,16 @@ PHP_FUNCTION(posix_getpgid)
 #ifdef HAVE_GETSID
 PHP_FUNCTION(posix_getsid)
 {
-	PHP_POSIX_SINGLE_ARG_FUNC(getsid);
+	long val;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &val) == FAILURE) {
+		return;
+	}
+	
+	if ((val = getsid(val)) < 0) {
+		POSIX_G(last_error) = errno;
+		RETURN_FALSE;
+	}
+	RETURN_LONG(val);
 }
 #endif
 /* }}} */

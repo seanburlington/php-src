@@ -18,7 +18,7 @@
    |         Wez Furlong  <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: COM.c,v 1.90.2.3 2003/01/29 00:59:54 phanto Exp $ */
+/* $Id: COM.c,v 1.90.2.4 2003/02/10 00:45:15 phanto Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -1846,10 +1846,7 @@ PHPAPI pval php_COM_get_property_handler(zend_property_reference *property_refer
 				return retval;
 		}
 
-		if (obj == obj_prop) {
-			// not head
-			pval_destructor(&overloaded_property->element);
-		}
+		pval_destructor(&overloaded_property->element);
 
 		if (V_VT(var_result) == VT_DISPATCH) {
 			if (V_DISPATCH(var_result) == NULL) {

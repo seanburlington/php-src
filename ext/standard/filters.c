@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.38.2.1 2004/07/16 23:42:00 pollita Exp $ */
+/* $Id: filters.c,v 1.38.2.2 2004/07/20 18:04:36 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -176,7 +176,9 @@ typedef struct _php_strip_tags_filter {
 static int php_strip_tags_filter_ctor(php_strip_tags_filter *inst, const char *allowed_tags, int allowed_tags_len, int persistent)
 {
 	if (allowed_tags != NULL) {
-		inst->allowed_tags = pemalloc(allowed_tags_len, persistent);
+		if (NULL != (inst->allowed_tags = pemalloc(allowed_tags_len, persistent))) {
+			return FAILURE;
+		}
 		memcpy((char *)inst->allowed_tags, allowed_tags, allowed_tags_len);
 		inst->allowed_tags_len = allowed_tags_len; 
 	} else {

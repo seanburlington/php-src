@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.21 2002/07/26 16:26:01 kalowsky Exp $ */
+/* $Id: php_imap.h,v 1.22 2002/07/31 01:03:31 kalowsky Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H
@@ -211,7 +211,6 @@ ZEND_BEGIN_MODULE_GLOBALS(imap)
 	unsigned long status_uidvalidity;
 #if defined(HAVE_IMAP2000) || defined(HAVE_IMAP2001)
 	zval *quota_return;
-	zval *quotaroot_return;
 #endif
 ZEND_END_MODULE_GLOBALS(imap)
 

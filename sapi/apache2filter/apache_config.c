@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache_config.c,v 1.26 2002/11/02 16:04:26 imajes Exp $ */
+/* $Id: apache_config.c,v 1.27 2002/11/02 23:08:20 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -76,7 +76,7 @@ static const char *real_value_hnd(cmd_parms *cmd, void *dummy,
 static const char *php_apache_value_handler(cmd_parms *cmd, void *dummy, 
 		const char *name, const char *value)
 {
-	return real_value_hnd(cmd, dummy, name, value, PHP_INI_USER);
+	return real_value_hnd(cmd, dummy, name, value, PHP_INI_PERDIR);
 }
 
 static const char *php_apache_admin_value_handler(cmd_parms *cmd, void *dummy, 
@@ -103,7 +103,7 @@ static const char *real_flag_hnd(cmd_parms *cmd, void *dummy, const char *arg1,
 static const char *php_apache_flag_handler(cmd_parms *cmd, void *dummy, 
 		const char *name, const char *value)
 {
-	return real_flag_hnd(cmd, dummy, name, value, PHP_INI_USER);
+	return real_flag_hnd(cmd, dummy, name, value, PHP_INI_PERDIR);
 }
 
 static const char *php_apache_admin_flag_handler(cmd_parms *cmd, void *dummy, 

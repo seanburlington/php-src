@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.17 2002/10/10 00:51:21 ssb Exp $
+// $Id: Common.php,v 1.18 2002/10/12 13:43:41 ssb Exp $
 
 require_once "PEAR.php";
 
@@ -210,7 +210,9 @@ class PEAR_Command_Common extends PEAR
                 } else {
                     $help .= "  --$k$lapp\n";
                 }
-                $help .= "        $v[doc]\n";
+                $p = "        ";
+                $doc = rtrim(str_replace("\n", "\n$p", $v['doc']));
+                $help .= "        $doc\n";
             }
             return $help;
         }

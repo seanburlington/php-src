@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.124 2002/04/10 22:42:26 wez Exp $ */
+/* $Id: zlib.c,v 1.125 2002/04/12 16:25:31 fmk Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -154,7 +154,7 @@ static PHP_INI_MH(OnUpdate_zlib_output_compression)
 /* {{{ OnUpdate_zlib_output_compression_level */
 static PHP_INI_MH(OnUpdate_zlib_output_compression_level)
 {
-	char *ini_value;
+//	char *ini_value;
 
 	OnUpdateInt(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);
 
@@ -386,7 +386,7 @@ PHP_FUNCTION(readgzfile)
 	if (!stream) {
 		RETURN_FALSE;
 	}
-	php_stream_passthru(stream);
+	size = php_stream_passthru(stream);
    	php_stream_close(stream);
 	RETURN_LONG(size);
 }

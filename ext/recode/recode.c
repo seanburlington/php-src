@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to		  |
    | license@php.net so we can mail you a copy immediately.				  |
    +----------------------------------------------------------------------+
-   | Authors: Kristian Koehntopp (kris@koehntopp.de)					  |
+   | Authors: Kristian Koehntopp <kris@koehntopp.de>					  |
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.10 2000/06/06 14:13:35 thies Exp $ */
+/* $Id: recode.c,v 1.11 2000/07/15 16:09:18 eschmid Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -34,7 +34,6 @@
 extern char *program_name;
 char *program_name = "php";
 #endif
-
 /* }}} */
 
 #define SAFE_STRING(s) ((s)?(s):"")
@@ -97,7 +96,7 @@ PHP_MINFO_FUNCTION(recode)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.10 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.11 $");
 	php_info_print_table_end();
 
 }

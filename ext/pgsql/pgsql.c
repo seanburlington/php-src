@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.150 2002/03/02 19:53:11 derick Exp $ */
+/* $Id: pgsql.c,v 1.150.2.1 2002/03/21 21:49:11 derick Exp $ */
 
 #include <stdlib.h>
 
@@ -916,7 +916,7 @@ static void php_pgsql_get_result_info(INTERNAL_FUNCTION_PARAMETERS, int entry_ty
 			Z_LVAL_P(return_value) = atoi(PQcmdTuples(pgsql_result));
 #else
 			php_error(E_WARNING,"This compilation does not support %s()",
-					  get_active_function_name(TSRMLS_C);
+					  get_active_function_name(TSRMLS_C));
 			Z_LVAL_P(return_value) = 0;
 #endif
 			break;

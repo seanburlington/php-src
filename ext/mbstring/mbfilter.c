@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.33 2002/06/01 05:45:25 fmk Exp $ */
+/* $Id: mbfilter.c,v 1.34 2002/06/22 08:01:57 dets Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -967,7 +967,7 @@ static mbfl_encoding mbfl_encoding_8859_15 = {
 	MBFL_ENCTYPE_SBCS
 };
 
-#if defined(HAVE_MBSTR_KR)
+#if defined(HAVE_MBSTR_RU)
 static const char *mbfl_encoding_cp1251_aliases[] = {"CP1251", "CP-1251", "WINDOWS-1251", NULL};
 
 static mbfl_encoding mbfl_encoding_cp1251 = {

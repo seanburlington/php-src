@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.99 2002/09/26 00:53:47 wez Exp $ */
+/* $Id: mbstring.c,v 1.100 2002/10/07 17:59:48 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -219,6 +219,7 @@ function_entry mbstring_functions[] = {
 	PHP_FALIAS(i18n_ja_jp_hantozen,		mb_convert_kana,		NULL)
 #if HAVE_MBREGEX
 	PHP_FE(mb_regex_encoding,	NULL)
+	PHP_FE(mb_regex_set_options,	NULL)
 	PHP_FE(mb_ereg,			(unsigned char *)third_argument_force_ref)
 	PHP_FE(mb_eregi,			(unsigned char *)third_argument_force_ref)
 	PHP_FE(mb_ereg_replace,			NULL)
@@ -807,7 +808,9 @@ PHP_RINIT_FUNCTION(mbstring)
 			p++;
 		}
 	}
-
+#if HAVE_MBREGEX
+	MBSTRG(regex_default_options) = 0;
+#endif
 	return SUCCESS;
 }
 

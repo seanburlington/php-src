@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.29 2003/08/24 11:28:53 helly Exp $ */
+/* $Id: php_reflection.c,v 1.30 2003/08/24 11:34:01 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -490,16 +490,8 @@ ZEND_METHOD(reflection, export)
 	int result;
 	zend_bool return_output = 0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "o|b", &object, &return_output) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O|b", &object, reflector_ptr, &return_output) == FAILURE) {
 		return;
-	}
-
-	/* Verify we are being passed a correct object. This is effectively 
-	 * the C counterpart of type hinting. We cannot use "O" to zend_parse_parameters
-	 * as "O" only checks for inheritance, not for interfaces. */
-	if (!instanceof_function(Z_OBJCE_P(object), reflector_ptr TSRMLS_CC)) {
-		_DO_THROW("Argument must implement interface reflector");
-		/* Returns from this function */
 	}
 
 	/* Invoke the toString() method */
@@ -1710,13 +1702,8 @@ ZEND_METHOD(reflection_class, issubclassof)
 	METHOD_NOTSTATIC;
 	GET_REFLECTION_OBJECT_PTR(ce);
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "o", &object) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O", reflection_class_ptr, &object) == FAILURE) {
 		return;
-	}
-
-	if (!instanceof_function(Z_OBJCE_P(object), reflection_class_ptr TSRMLS_CC)) {
-		_DO_THROW("Argument must be an instance of Reflection_Class");
-		/* Returns from this function */
 	}
 
 	argument = (reflection_object *) zend_object_store_get_object(object TSRMLS_CC);

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xml_common.h,v 1.11 2003/07/22 13:50:00 zeev Exp $ */
+/* $Id: xml_common.h,v 1.12 2003/07/24 13:18:40 rrichards Exp $ */
 
 #ifndef PHP_XML_COMMON_H
 #define PHP_XML_COMMON_H
@@ -41,7 +41,7 @@ typedef struct _node_object {
 
 typedef struct _dom_object {
 	zend_object  std;
-	node_ptr *ptr;
+	void *ptr;
 	dom_ref_obj *document;
 	HashTable *prop_handler;
 	zend_object_handle handle;

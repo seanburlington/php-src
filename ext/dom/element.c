@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.8 2003/07/12 17:29:20 rrichards Exp $ */
+/* $Id: element.c,v 1.9 2003/07/24 13:18:40 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -311,7 +311,7 @@ PHP_FUNCTION(dom_element_set_attribute_node)
 		if ((oldobj = dom_object_get_data((xmlNodePtr) existattrp)) == NULL) {
 			xmlUnlinkNode((xmlNodePtr) existattrp);
 		} else {
-			if (oldobj->ptr->node == (xmlNodePtr) attrp) {
+			if (((node_ptr *)oldobj->ptr)->node == (xmlNodePtr) attrp) {
 				RETURN_NULL();
 			}
 			xmlUnlinkNode((xmlNodePtr) existattrp);
@@ -674,7 +674,7 @@ PHP_FUNCTION(dom_element_set_attribute_node_ns)
 		if ((oldobj = dom_object_get_data((xmlNodePtr) existattrp)) == NULL) {
 			xmlUnlinkNode((xmlNodePtr) existattrp);
 		} else {
-			if (oldobj->ptr->node == (xmlNodePtr) attrp) {
+			if (((node_ptr *)oldobj->ptr)->node == (xmlNodePtr) attrp) {
 				RETURN_NULL();
 			}
 			xmlUnlinkNode((xmlNodePtr) existattrp);

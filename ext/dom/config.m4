@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.10 2003/06/30 17:23:52 sniper Exp $
+dnl $Id: config.m4,v 1.11 2003/07/24 13:18:40 rrichards Exp $
 dnl
 
 PHP_ARG_ENABLE(dom, whether to enable DOM support,
@@ -21,7 +21,8 @@ if test "$PHP_DOM" != "no"; then
                             element.c node.c string_extend.c characterdata.c \
                             documenttype.c domimplementationlist.c entity.c \
                             nodelist.c text.c comment.c domconfiguration.c \
-                            domimplementationsource.c entityreference.c notation.c \
+                            domimplementationsource.c entityreference.c \
+			    notation.c xpath.c \
                             typeinfo.c domerror.c domlocator.c namednodemap.c userdatahandler.c], 
                             $ext_shared)
     PHP_SUBST(DOM_SHARED_LIBADD)

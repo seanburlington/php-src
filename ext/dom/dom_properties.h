@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_properties.h,v 1.2 2003/06/10 20:03:27 imajes Exp $ */
+/* $Id: dom_properties.h,v 1.3 2003/07/24 13:18:40 rrichards Exp $ */
 #ifndef DOM_PROPERTIES_H
 #define DOM_PROPERTIES_H
 
@@ -141,5 +141,10 @@ int dom_text_whole_text_read(dom_object *obj, zval **retval TSRMLS_DC);
 /* typeinfo properties */
 int dom_typeinfo_type_name_read(dom_object *obj, zval **retval TSRMLS_DC);
 int dom_typeinfo_type_namespace_read(dom_object *obj, zval **retval TSRMLS_DC);
+
+#if defined(LIBXML_XPATH_ENABLED)
+/* xpath properties */
+int dom_xpath_document_read(dom_object *obj, zval **retval TSRMLS_DC);
+#endif
 
 #endif /* DOM_PROPERTIERS_H */

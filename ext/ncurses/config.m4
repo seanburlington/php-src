@@ -1,11 +1,13 @@
 dnl
-dnl $Id: config.m4,v 1.8 2001/11/30 18:59:46 sniper Exp $
+dnl $Id: config.m4,v 1.9 2002/01/04 14:15:51 hholzgra Exp $
 dnl
 
 PHP_ARG_WITH(ncurses, for ncurses support,
 [  --with-ncurses[=DIR]    Include ncurses support.])
 
 if test "$PHP_NCURSES" != "no"; then
+   PHP_CHECK_INTERACTIVE(ncurses)
+
    # --with-ncurses -> check with-path
    SEARCH_PATH="/usr/local /usr"     
    SEARCH_FOR="/include/curses.h"

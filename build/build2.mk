@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build2.mk,v 1.27 2002/07/21 12:54:06 sas Exp $ 
+# $Id: build2.mk,v 1.27.4.1 2003/06/27 00:19:26 sas Exp $ 
 #
 
 include generated_lists
@@ -52,8 +52,13 @@ $(TOUCH_FILES):
 	touch $(TOUCH_FILES)
 
 aclocal.m4: configure.in acinclude.m4
-	aclocal 2>&1 | $(SUPPRESS_WARNINGS)
-	
+	@echo rebuilding $@
+	@libtoolize=`./build/shtool path glibtoolize libtoolize`; \
+	$$libtoolize --copy --automake; \
+	ltpath=`dirname $$libtoolize`; \
+	ltfile=`cd $$ltpath/../share/aclocal; pwd`/libtool.m4; \
+	cat acinclude.m4 $$ltfile > $@
+
 configure: aclocal.m4 configure.in $(config_m4_files)
 	@echo rebuilding $@
 	@autoconf 2>&1 | $(SUPPRESS_WARNINGS)

@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.25 2002/08/25 22:17:56 sebastian Exp $ */
+/* $Id: php_network.h,v 1.26 2002/09/08 22:26:11 sesser Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -148,7 +148,8 @@ PHPAPI void php_stream_sock_set_timeout(php_stream *stream, struct timeval *time
 PHPAPI size_t php_stream_sock_set_chunk_size(php_stream *stream, size_t size TSRMLS_DC);
 
 #if HAVE_OPENSSL_EXT
-PHPAPI int php_stream_sock_ssl_activate_with_method(php_stream *stream, int activate, SSL_METHOD *method TSRMLS_DC);
+PHPAPI int php_stream_sock_ssl_activate_with_method_ex(php_stream *stream, int activate, SSL_METHOD *method, php_stream *control TSRMLS_DC);
+#define php_stream_sock_ssl_activate_with_method(stream, activate, method) php_stream_sock_ssl_activate_with_method_ex((stream), (activate), SSLv23_client_method(), NULL TSRMLS_CC)
 #define php_stream_sock_ssl_activate(stream, activate)	php_stream_sock_ssl_activate_with_method((stream), (activate), SSLv23_client_method() TSRMLS_CC)
 
 #endif

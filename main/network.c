@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.41 2002/03/18 20:13:50 wez Exp $ */
+/* $Id: network.c,v 1.42 2002/03/19 03:49:03 wez Exp $ */
 
 #define PHP_SOCK_CHUNK_SIZE	8192
 #define MAX_CHUNKS_PER_READ 10
@@ -44,6 +44,9 @@
 
 #ifdef HAVE_SYS_SELECT_H
 #include <sys/select.h>
+#endif
+#if HAVE_SYS_POLL_H
+#include <sys/poll.h>
 #endif
 
 #ifndef PHP_WIN32
@@ -677,13 +680,48 @@ static size_t php_sockop_read(php_stream *stream, char *buf, size_t count TSRMLS
 	php_netstream_data_t *sock = (php_netstream_data_t*)stream->abstract;
 	size_t ret = 0;
 
-	if (sock->is_blocked)	{
+	if (buf == NULL && count == 0) {
+		/* check for EOF condition */
+		
+		if (sock->eof)
+			return EOF;
+		
+		if (TOREAD(sock))
+			return 0;
+
+		/* no data in the buffer - lets examine the socket */
+#if HAVE_SYS_POLL_H
+		{
+			struct pollfd topoll;
+			
+			topoll.fd = sock->socket;
+			topoll.events = POLLIN;
+			topoll.revents = 0;
+			
+			if (poll(&topoll, 1, 0) == 1) {
+				return topoll.revents & POLLHUP ? EOF : 0;
+			}
+		}
+#endif
+
+		/* in the absence of other methods of checking if the
+		 * socket is still active, try to read a chunk of data */
+		sock->timeout_event = 0;
+		php_sock_stream_read_internal(stream, sock TSRMLS_CC);
+		
+		if (sock->timeout_event || sock->eof)
+			return EOF;
+		
+		return 0;
+	}
+	
+	if (sock->is_blocked) {
 		sock->timeout_event = 0;
 		while(!sock->eof && TOREAD(sock) < count && !sock->timeout_event)
 			php_sock_stream_read_internal(stream, sock TSRMLS_CC);
-	}
-	else	
+	} else {
 		php_sock_stream_read(stream, sock TSRMLS_CC);
+	}
 
 	if(count < 0)
 		return ret;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.77 2001/08/11 17:03:37 zeev Exp $ */
+/* $Id: filestat.c,v 1.78 2001/08/12 21:23:15 zeev Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -32,6 +32,10 @@
 
 #if HAVE_UNISTD_H
 # include <unistd.h>
+#endif
+
+#if HAVE_SYS_VFS_H
+# include <sys/vfs.h>
 #endif
 
 #ifdef OS2

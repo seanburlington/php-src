@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.h,v $ */
-/* $Id: php_mnogo.h,v 1.3 2001/02/05 08:42:53 gluke Exp $ */
+/* $Id: php_mnogo.h,v 1.4 2001/02/05 13:12:15 gluke Exp $ */
 
 /* 
    +----------------------------------------------------------------------+
@@ -48,6 +48,7 @@ DLEXPORT PHP_MINFO_FUNCTION(mnogosearch);
 
 DLEXPORT PHP_FUNCTION(udm_alloc_agent);
 DLEXPORT PHP_FUNCTION(udm_set_agent_param);
+DLEXPORT PHP_FUNCTION(udm_add_search_limit);
 DLEXPORT PHP_FUNCTION(udm_free_agent);
 
 DLEXPORT PHP_FUNCTION(udm_error);

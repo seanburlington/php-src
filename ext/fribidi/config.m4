@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 2000/12/06 17:34:55 sas Exp $
+dnl $Id: config.m4,v 1.3 2001/02/23 16:49:58 sas Exp $
 dnl config.m4 for extension fribidi
 dnl don't forget to call PHP_EXTENSION(fribidi)
 
@@ -16,7 +16,7 @@ if test "$PHP_FRIBIDI" != "no"; then
 dnl if module was requested with default path of fribidi installation then 
 dnl $PHP_FRIBIDI will be "yes"
 
-  if test "$PHP_FRIBIDI" == "yes"; then
+  if test "$PHP_FRIBIDI" = "yes"; then
     PHP_FRIBIDI="/usr/local"
   fi
   

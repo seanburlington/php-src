@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.250 2001/05/12 12:22:33 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.251 2001/05/19 22:21:40 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -370,6 +370,8 @@ getlogin \
 gethostbyaddr \
 getprotobyname \
 getprotobynumber \
+getservbyname \
+getservbyport \
 getrusage \
 gettimeofday \
 gmtime_r \

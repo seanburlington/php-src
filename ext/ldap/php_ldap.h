@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_ldap.h,v 1.5 2000/04/06 12:36:47 sterling Exp $ */
+/* $Id: php_ldap.h,v 1.6 2000/04/07 23:20:22 sterling Exp $ */
 
 #ifndef _PHP_LDAP_H
 #define _PHP_LDAP_H
@@ -69,6 +69,7 @@ PHP_FUNCTION(ldap_next_attribute);
 PHP_FUNCTION(ldap_get_attributes);
 
 PHP_FUNCTION(ldap_get_values);
+PHP_FUNCTION(ldap_get_values_len);
 
 PHP_FUNCTION(ber_free);
 PHP_FUNCTION(ldap_get_dn);

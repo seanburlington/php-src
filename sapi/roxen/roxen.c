@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.31 2000/06/05 19:51:22 neotron Exp $ */
+/* $Id: roxen.c,v 1.32 2000/06/06 00:02:03 neotron Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -25,8 +25,7 @@
 #include "php_ini.h"
 #include "php_globals.h"
 #include "SAPI.h"
-/* Was using Pike's main.h */
-#include "../../main.h" 
+#include "php_main.h" 
 #include "ext/standard/info.h"
 
 #include "php_version.h"
@@ -448,7 +447,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.31 2000/06/05 19:51:22 neotron Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.32 2000/06/06 00:02:03 neotron Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());

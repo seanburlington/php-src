@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DependencyDB.php,v 1.2 2003/10/05 16:42:18 mj Exp $
+// $Id: DependencyDB.php,v 1.3 2003/12/06 23:07:52 cellog Exp $
 
 /**
 Experimental dependencies database handling functions (not yet in production)
@@ -152,11 +152,12 @@ class PEAR_DependencyDB extends PEAR
     function &_getDepDB()
     {
         if (!$fp = fopen($this->depdb_file, 'r')) {
-            return $this->raiseError("Could not open dependencies file `".$this->depdb_file."'");
+            $err = $this->raiseError("Could not open dependencies file `".$this->depdb_file."'");
+            return $err;
         }
-        $data = fread($fp, filesize($this->depdb_file));
+        $data = unserialize(fread($fp, filesize($this->depdb_file)));
         fclose($fp);
-        return unserialize($data);
+        return $data;
     }
 
     // }}}

@@ -1,10 +1,12 @@
-dnl $Id: config.m4,v 1.16 2001/05/08 22:17:59 sniper Exp $
+dnl $Id: config.m4,v 1.17 2001/05/09 15:38:27 sniper Exp $
 dnl config.m4 for extension Sablot
 
 PHP_ARG_WITH(sablot, for Sablotron XSL support,
 [  --with-sablot[=DIR]     Include Sablotron support])
 
 if test "$PHP_SABLOT" != "no"; then
+
+  PHP_EXTENSION(sablot, $ext_shared)
 
   PHP_ARG_WITH(expat-dir, libexpat dir for Sablotron 0.50,
   [  --with-expat-dir=DIR    Sablotron: libexpat dir for Sablotron 0.50])
@@ -71,5 +73,4 @@ if test "$PHP_SABLOT" != "no"; then
   
   AC_DEFINE(HAVE_SABLOT,1,[ ])
 
-  PHP_EXTENSION(sablot, $ext_shared)
 fi

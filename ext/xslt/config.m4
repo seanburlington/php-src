@@ -3,12 +3,14 @@ dnl +---------------------------------------------------------------------------
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
 dnl |  backend the user chooses, this script performs the magic                    |
 dnl +------------------------------------------------------------------------------+
-dnl   $Id: config.m4,v 1.3 2001/05/08 22:17:59 sniper Exp $
+dnl   $Id: config.m4,v 1.4 2001/05/09 15:38:27 sniper Exp $
 
 PHP_ARG_ENABLE(xslt, whether to enable xslt support,
 [  --enable-xslt           Enable xslt support])
 
 if test "$PHP_XSLT" != "no"; then
+
+	PHP_EXTENSION(xslt, $ext_shared)
 
 	PHP_ARG_WITH(xslt-sablot, whether to enable the sablotron backend,
 	[  --with-xslt-sablot      Enable the sablotron backend])
@@ -95,5 +97,4 @@ if test "$PHP_XSLT" != "no"; then
 	fi
 
 	AC_DEFINE(HAVE_XSLT, 1, [ ])
-	PHP_EXTENSION(xslt, $ext_shared)
 fi

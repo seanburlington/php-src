@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 2005/01/17 01:31:14 wez Exp $
+dnl $Id: config.m4,v 1.7 2005/01/19 03:45:21 wez Exp $
 dnl config.m4 for extension pdo_odbc
 dnl vim:et:sw=2:ts=2:
 
@@ -130,7 +130,7 @@ functions required for PDO support.
   PHP_EVAL_LIBLINE($PDO_ODBC_LIBS $PDO_ODBC_LFLAGS, [PDO_ODBC_SHARED_LIBADD])
   PHP_SUBST(PDO_ODBC_SHARED_LIBADD)
 
-  PHP_NEW_EXTENSION(pdo_odbc, pdo_odbc.c odbc_driver.c odbc_stmt.c, yes,,-I\$prefix/include/php/ext $PDO_ODBC_INCLUDE)
+  PHP_NEW_EXTENSION(pdo_odbc, pdo_odbc.c odbc_driver.c odbc_stmt.c, $ext_shared,,-I\$prefix/include/php/ext $PDO_ODBC_INCLUDE)
 else
   AC_MSG_ERROR(
 Unknown ODBC flavour $PHP_PDO_ODBC

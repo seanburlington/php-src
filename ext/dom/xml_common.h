@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xml_common.h,v 1.6 2003/06/14 15:27:15 rrichards Exp $ */
+/* $Id: xml_common.h,v 1.7 2003/06/14 18:14:59 rrichards Exp $ */
 
 #ifndef PHP_XML_COMMON_H
 #define PHP_XML_COMMON_H 
@@ -61,9 +61,6 @@ typedef struct _dom_object {
 #else
 #define PHPAPI __declspec(dllimport)
 #endif /* DOM_EXPORTS */
-#define DOM_IMPORT __declspec(dllimport)
-#else
-#define DOM_IMPORT extern
 #endif /* PHP_WIN32 */
 
 #ifdef ZTS

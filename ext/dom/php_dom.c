@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.11 2003/06/14 15:27:15 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.12 2003/06/14 18:14:59 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,8 +36,6 @@
 #include "ext/standard/info.h"
 #define PHP_XPATH 1
 #define PHP_XPTR 2
-
-DOM_IMPORT int xml_parser_inited;
 
 zend_object_handlers dom_object_handlers;
 
@@ -580,10 +578,7 @@ PHP_MINIT_FUNCTION(dom)
 	REGISTER_LONG_CONSTANT("XML_ATTRIBUTE_ENUMERATION",	XML_ATTRIBUTE_ENUMERATION,	CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("XML_ATTRIBUTE_NOTATION",	XML_ATTRIBUTE_NOTATION,		CONST_CS | CONST_PERSISTENT);
 
-	if (!xml_parser_inited) {
-		xmlInitThreads();
-		xml_parser_inited = 1;
-	}
+	xmlInitParser();
 
 	return SUCCESS;
 }
@@ -611,10 +606,7 @@ PHP_MINFO_FUNCTION(dom)
 
 PHP_MSHUTDOWN_FUNCTION(dom)
 {
-   	if (xml_parser_inited) {
-		xmlCleanupParser();
-		xml_parser_inited = 0;
-	}
+	xmlCleanupParser();
 
 	zend_hash_destroy(&dom_domstringlist_prop_handlers);
 	zend_hash_destroy(&dom_namelist_prop_handlers);

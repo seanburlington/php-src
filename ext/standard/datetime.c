@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.113 2004/01/08 08:17:30 andi Exp $ */
+/* $Id: datetime.c,v 1.114 2004/02/12 01:28:12 sniper Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -318,6 +318,10 @@ static void php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 			tname[0] = tzname[0];
 		} else {
 			tname[0] = "???";
+		}
+
+		if (tzname[1] != NULL) {
+			tname[1] = tzname[1];
 		}
 #endif
 	}

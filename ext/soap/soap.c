@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.118 2004/09/09 09:53:53 helly Exp $ */
+/* $Id: soap.c,v 1.119 2004/09/10 09:02:05 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -288,13 +288,26 @@ ZEND_BEGIN_ARG_INFO(__call_args, 0)
 	ZEND_ARG_PASS_INFO(0)
 	ZEND_ARG_PASS_INFO(0)
 ZEND_END_ARG_INFO()
+ZEND_BEGIN_ARG_INFO(__soap_call_args, 0)
+	ZEND_ARG_PASS_INFO(0)
+	ZEND_ARG_PASS_INFO(0)
+	ZEND_ARG_PASS_INFO(0)
+	ZEND_ARG_PASS_INFO(0)
+	ZEND_ARG_PASS_INFO(1)
+ZEND_END_ARG_INFO()
 #else
-unsigned char __call_args[] = { 5, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_FORCE };
+unsigned char __call_args[] = { 2, BYREF_NONE, BYREF_NONE };
+unsigned char __soap_call_args[] = { 5, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_FORCE };
 #endif
 
 static zend_function_entry soap_client_functions[] = {
 	PHP_ME(SoapClient, SoapClient, NULL, 0)
 	PHP_ME(SoapClient, __call, __call_args, 0)
+#ifdef ZEND_ENGINE_2
+	ZEND_FENTRY(__soap_call, ZEND_FN(SoapClient___call), __soap_call_args, 0)
+#else
+	ZEND_NAMED_FE(__soap_call, ZEND_FN(SoapClient___call), __soap_call_args)
+#endif
 	PHP_ME(SoapClient, __getLastRequest, NULL, 0)
 	PHP_ME(SoapClient, __getLastResponse, NULL, 0)
 	PHP_ME(SoapClient, __getLastRequestHeaders, NULL, 0)

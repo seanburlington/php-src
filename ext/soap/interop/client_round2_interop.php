@@ -16,7 +16,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: client_round2_interop.php,v 1.15 2004/04/01 14:37:03 dmitry Exp $
+// $Id: client_round2_interop.php,v 1.16 2004/09/10 09:02:06 dmitry Exp $
 //
 require_once 'DB.php'; // PEAR/DB
 require_once 'client_round2_params.php';
@@ -94,7 +94,7 @@ class Interop_Client
         $this->_getEndpoints($test, 1);
 
         // retreive endpoints from the endpoint server
-        $endpointArray = $soapclient->__call("GetEndpointInfo",array("groupName"=>$test),array('soapaction'=>"http://soapinterop.org/",'uri'=>"http://soapinterop.org/"));
+        $endpointArray = $soapclient->__soap_call("GetEndpointInfo",array("groupName"=>$test),array('soapaction'=>"http://soapinterop.org/",'uri'=>"http://soapinterop.org/"));
         if (is_soap_fault($endpointArray) || PEAR::isError($endpointArray)) {
             if ($this->html) print "<pre>";
             print $soapclient->wire."\n";
@@ -428,9 +428,9 @@ try {
             $return = eval('return $soap->'.$soap_test->method_name.'('.$args.');');
         } else {
           if ($soap_test->headers || $soap_test->headers_expect) {
-            $return = $soap->__call($soap_test->method_name,$soap_test->method_params,array('soapaction'=>$soapaction,'uri'=>$namespace), $soap_test->headers, $result_headers);
+            $return = $soap->__soap_call($soap_test->method_name,$soap_test->method_params,array('soapaction'=>$soapaction,'uri'=>$namespace), $soap_test->headers, $result_headers);
           } else {
-            $return = $soap->__call($soap_test->method_name,$soap_test->method_params,array('soapaction'=>$soapaction,'uri'=>$namespace));
+            $return = $soap->__soap_call($soap_test->method_name,$soap_test->method_params,array('soapaction'=>$soapaction,'uri'=>$namespace));
           }
         }
 } catch (SoapFault $ex) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.214 2002/09/20 01:25:55 iliaa Exp $ */
+/* $Id: gd.c,v 1.215 2002/10/11 09:49:38 derick Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -346,6 +346,9 @@ PHP_MINIT_FUNCTION(gd)
 	REGISTER_LONG_CONSTANT("IMG_EFFECT_ALPHABLEND", gdEffectAlphaBlend, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IMG_EFFECT_NORMAL", gdEffectNormal, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IMG_EFFECT_OVERLAY", gdEffectOverlay, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("HAVE_BUNDLED_GD", 1, CONST_CS | CONST_PERSISTENT);
+#else
+	REGISTER_LONG_CONSTANT("HAVE_BUNDLED_GD", 0, CONST_CS | CONST_PERSISTENT);
 #endif
 	return SUCCESS;
 }

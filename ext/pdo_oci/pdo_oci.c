@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_oci.c,v 1.1 2004/05/17 15:42:33 wez Exp $ */
+/* $Id: pdo_oci.c,v 1.2 2004/05/21 17:33:58 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -39,7 +39,7 @@ function_entry pdo_oci_functions[] = {
 /* {{{ pdo_oci_module_entry */
 zend_module_entry pdo_oci_module_entry = {
 	STANDARD_MODULE_HEADER,
-	"pdo_oci",
+	"PDO_OCI",
 	pdo_oci_functions,
 	PHP_MINIT(pdo_oci),
 	PHP_MSHUTDOWN(pdo_oci),

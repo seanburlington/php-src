@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.103 2003/02/09 07:18:02 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.104 2003/02/09 08:33:40 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -275,6 +275,9 @@ static void php_mssql_init_globals(zend_mssql_globals *mssql_globals)
 		} else {
 			mssql_globals->get_column_content = php_mssql_get_column_content_with_type;
 		}
+	}
+	else {
+		mssql_globals->get_column_content = php_mssql_get_column_content_with_type;
 	}
 }
 

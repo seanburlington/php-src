@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.22 2004/01/19 17:27:21 chregu Exp $ */
+/* $Id: xsltprocessor.c,v 1.23 2004/01/29 00:33:20 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -297,7 +297,7 @@ PHP_FUNCTION(xsl_xsltprocessor_import_stylesheet)
 	xsltStylesheetPtr sheetp, oldsheetp;
 	xsl_object *intern;
 	php_libxml_node_object *docobj;
-	int prevSubstValue, prevExtDtdValue, clone_docu;
+	int prevSubstValue, prevExtDtdValue, clone_docu = 0;
 	xmlNode *nodep;
 	zend_object_handlers *std_hnd;
 	zval *cloneDocu, *member;
@@ -333,9 +333,11 @@ PHP_FUNCTION(xsl_xsltprocessor_import_stylesheet)
 	MAKE_STD_ZVAL(member);
 	ZVAL_STRING(member, "cloneDocument", 0);
 	cloneDocu = std_hnd->read_property(id, member, 1 TSRMLS_CC);
-	convert_to_long(cloneDocu);
+	if (Z_TYPE_P(cloneDocu) != IS_NULL) {
+		convert_to_long(cloneDocu);
+		clone_docu = Z_LVAL_P(cloneDocu);
+	}
 	efree(member);
-	clone_docu = Z_LVAL_P(cloneDocu);
 	if (clone_docu == 0) {
 		/* check if the stylesheet is using xsl:key, if yes, we have to clone the document _always_ before a transformation */
 		nodep = xmlDocGetRootElement(sheetp->doc)->children;

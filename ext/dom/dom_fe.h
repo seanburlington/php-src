@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_fe.h,v 1.11 2004/05/16 10:30:16 rrichards Exp $ */
+/* $Id: dom_fe.h,v 1.12 2004/07/18 13:47:44 rrichards Exp $ */
 #ifndef DOM_FE_H
 #define DOM_FE_H
 
@@ -102,6 +102,7 @@ PHP_METHOD(domimplementation, getFeature);
 
 /* domdocumentfragment methods */
 PHP_METHOD(domdocumentfragment, __construct);
+PHP_METHOD(domdocumentfragment, appendXML);
 
 /* domdocument methods */
 PHP_FUNCTION(dom_document_create_element);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.46 2001/12/11 15:30:33 sebastian Exp $ */
+/* $Id: mail.c,v 1.47 2002/01/27 07:15:07 jon Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -173,7 +173,8 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 		php_error(E_WARNING, "Could not execute mail delivery program");
 		return 0;
 	}
-	return 1;
+
+	return 1;	/* never reached */
 }
 /* }}} */
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.44 2003/08/13 02:01:59 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.45 2003/09/02 11:15:14 sas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1152,7 +1152,6 @@ consult the installation file that came with this distribution, or visit \n\
 
 	if( children ) {
 		int running = 0;
-		int i;
 		pid_t pid;
 
 		/* Create a process group for ourself & children */

@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.17 1999/07/27 17:30:45 andi Exp $ */
+/* $Id: datetime.c,v 1.18 1999/08/02 14:31:41 andrey Exp $ */
 
 
 #include "php.h"
@@ -557,7 +557,8 @@ PHP_FUNCTION(strftime)
 }
 #endif
 
-/* {{{ proto int strtotime(string time, int now) */
+/* {{{ proto int strtotime(string time, int now)
+   Convert string representation of date and time to a timestamp */
 PHP_FUNCTION(strtotime)
 {
 	pval	*timep, *nowp;

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.70 2003/07/05 20:02:40 helly Exp $ 
+   $Id: sqlite.c,v 1.71 2003/07/08 18:57:28 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -948,7 +948,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.70 2003/07/05 20:02:40 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.71 2003/07/08 18:57:28 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -2127,7 +2127,7 @@ PHP_FUNCTION(sqlite_seek)
 		RETURN_FALSE;
 	}
 	
-	if (row < 1 || row >= res->nrows) {
+	if (row < 0 || row >= res->nrows) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "row %d out of range", row);
 		RETURN_FALSE;
 	}

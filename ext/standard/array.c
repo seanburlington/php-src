@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.250 2003/09/30 12:43:58 andrey Exp $ */
+/* $Id: array.c,v 1.251 2003/09/30 15:00:36 andrey Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3014,7 +3014,7 @@ static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior, int data_
 	for (i = 0; i < arr_argc; i++) {
 		if (Z_TYPE_PP(args[i]) != IS_ARRAY) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Argument #%d is not an array", i + 1);
-			argc = i; /* only free up to i-1 */
+			arr_argc = i; /* only free up to i-1 */
 			goto out;
 		}
 		hash = HASH_OF(*args[i]);

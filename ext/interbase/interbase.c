@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.177 2003/09/07 19:59:55 abies Exp $ */
+/* $Id: interbase.c,v 1.178 2003/09/11 08:50:30 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,7 @@
 
 #include "php.h"
 
-#define FILE_REVISION "$Revision: 1.177 $"
+#define FILE_REVISION "$Revision: 1.178 $"
 
 #if HAVE_IBASE && !defined(VERSION_INFO_ONLY)
 
@@ -325,7 +325,7 @@ static inline int _php_ibase_string_to_quad(char const *id, ISC_QUAD *qd)
 		unsigned ISC_INT64 res;
 		if (sscanf(id, BLOB_ID_MASK, &res)) {
 			qd->gds_quad_high = (ISC_LONG) (res >> 0x20);
-			qd->gds_quad_low = (unsigned ISC_LONG) (res & 0xFFFFFFFF);
+			qd->gds_quad_low = (ISC_LONG) (res & 0xFFFFFFFF);
 			return 1;
 		}
 		return 0;

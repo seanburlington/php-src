@@ -1,6 +1,6 @@
 dnl
 dnl $Source: /repository/php-src/ext/mnogosearch/Attic/config.m4,v $
-dnl $Id: config.m4,v 1.10.4.1 2003/10/03 05:25:38 sniper Exp $
+dnl $Id: config.m4,v 1.10.4.2 2004/08/29 14:18:11 gluke Exp $
 dnl
 
 PHP_ARG_WITH(mnogosearch,for mnoGoSearch support,
@@ -47,7 +47,7 @@ PHP_ARG_WITH(mnogosearch,for mnoGoSearch support,
     
     AC_DEFINE(HAVE_MNOGOSEARCH,1,[ ])
     
-    PHP_SUBST(MNOGOSEARCH_SHARED_LIBADD)
     PHP_NEW_EXTENSION(mnogosearch, php_mnogo.c, $ext_shared)
+    PHP_SUBST(MNOGOSEARCH_SHARED_LIBADD)
     
   fi

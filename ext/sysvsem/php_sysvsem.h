@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php_sysvsem.h,v 1.3 1999/12/18 04:01:16 zeev Exp $ */
+/* $Id: php_sysvsem.h,v 1.4 1999/12/18 15:10:04 thies Exp $ */
 
 #ifndef _PHP_SYSVSEM_H
 #define _PHP_SYSVSEM_H
@@ -44,9 +44,9 @@ extern zend_module_entry sysvsem_module_entry;
 #define sysvsem_module_ptr &sysvsem_module_entry
 
 PHP_MINIT_FUNCTION(sysvsem);
-PHP_FUNCTION(sysvsem_get);
-PHP_FUNCTION(sysvsem_acquire);
-PHP_FUNCTION(sysvsem_release);
+PHP_FUNCTION(sem_get);
+PHP_FUNCTION(sem_acquire);
+PHP_FUNCTION(sem_release);
 
 typedef struct {
 	int le_sem;

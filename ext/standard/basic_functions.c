@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.460 2002/03/19 13:33:04 wez Exp $ */
+/* $Id: basic_functions.c,v 1.461 2002/03/19 14:35:54 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1004,6 +1004,8 @@ PHP_MINIT_FUNCTION(basic)
 
 
 	if (PG(allow_url_fopen)) {
+		PHP_MINIT(user_streams) (INIT_FUNC_ARGS_PASSTHRU);
+
 		if (FAILURE == php_register_url_stream_wrapper("http", &php_stream_http_wrapper TSRMLS_CC))
 			return FAILURE;
 		if (FAILURE == php_register_url_stream_wrapper("php", &php_stream_php_wrapper TSRMLS_CC))

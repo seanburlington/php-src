@@ -1,3 +1,16 @@
+2005-01-30  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      ext/standard/var_unserializer.c
+      ext/standard/var_unserializer.c
+      ext/standard/var_unserializer.re
+      ext/standard/var_unserializer.re:
+      MFH: Fix handling of INF/NAN in unserialize().
+
+    * ext/standard/var_unserializer.c
+      ext/standard/var_unserializer.re:
+      Fix handling of INF/NAN in unserialize().
+
 2005-01-28  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * ZendEngine2/zend_execute_API.c:
@@ -1282,7 +1295,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1879 2005/01/29 01:38:18 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1880 2005/01/31 01:34:53 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lcg.c,v 1.18 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: lcg.c,v 1.19 2001/07/18 22:55:52 sas Exp $ */
 
 #include "php.h"
 #include "php_lcg.h"
@@ -48,8 +48,8 @@ static int php_lcg_initialized = 0;
 
 double php_combined_lcg(void)
 {
-	long q;
-	long z;
+	php_int32 q;
+	php_int32 z;
 	LCGLS_FETCH();
 
 	MODMULT(53668,40014,12211,2147483563L, LCG(s1));

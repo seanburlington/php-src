@@ -16,14 +16,16 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_lcg.h,v 1.11 2001/05/06 17:55:10 sniper Exp $ */
+/* $Id: php_lcg.h,v 1.12 2001/07/18 22:55:52 sas Exp $ */
 
 #ifndef PHP_LCG_H
 #define PHP_LCG_H
 
+#include "ext/standard/basic_functions.h"
+
 typedef struct {
-	long s1;
-	long s2;
+	php_int32 s1;
+	php_int32 s2;
 } php_lcg_globals;
 
 double php_combined_lcg(void);

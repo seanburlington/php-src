@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.44 2002/09/07 15:55:04 sterling Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.45 2002/09/07 20:58:30 wez Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -91,7 +91,7 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 	char *scratch = NULL;
 	char *tmp = NULL;
 	char *ua_str = NULL;
-	zval **ua_zval;
+	zval **ua_zval = NULL;
 	int scratch_len = 0;
 	int body = 0;
 	char location[HTTP_HEADER_BLOCK_SIZE];
@@ -201,8 +201,7 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 		php_stream_write(stream, scratch, strlen(scratch));
 
 	if (context && 
-	    php_stream_context_get_option(context, "http", "user_agent", (zval **) &ua_zval) == FAILURE &&
-	    php_stream_context_get_option(context, "https", "user_agent", (zval **) &ua_zval) == FAILURE) {
+	    php_stream_context_get_option(context, "http", "user_agent", &ua_zval) == SUCCESS) {
 		ua_str = Z_STRVAL_PP(ua_zval);
 	} else if (BG(user_agent)) {
 		ua_str = BG(user_agent);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.14 2000/11/22 15:46:13 stas Exp $ */
+/* $Id: php_curl.h,v 1.15 2001/01/12 10:26:29 dbeu Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -59,9 +59,7 @@ typedef struct {
 	zend_llist to_free;
 } php_curl;
 
-typedef struct {
 
-} php_curl_globals;
 
 #ifdef ZTS
 #define CURLG(v) (curl_globals->v)

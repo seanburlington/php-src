@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 2001/06/07 13:40:30 dickmeiss Exp $
+dnl $Id: config.m4,v 1.5 2001/11/08 21:37:48 dickmeiss Exp $
 
 PHP_ARG_WITH(yaz,for YAZ support,
 [  --with-yaz[=DIR]        Include YAZ support (ANSI/NISO Z39.50). DIR is
@@ -20,8 +20,18 @@ if test "$PHP_YAZ" != "no"; then
   if test -f $yazconfig; then
     AC_DEFINE(HAVE_YAZ,1,[Whether you have YAZ])
     . $yazconfig
-    YAZLIB=`echo $YAZLIB|sed 's%/.libs%%'`
-    PHP_EVAL_LIBLINE($YAZLIB, YAZ_SHARED_LIBADD)
+    dir=""
+    for c in $YAZLIB; do
+      case $c in
+       -L*)
+         dir=`echo $c|cut -c 3-|sed 's%/\.libs%%g'`
+        ;;
+      esac
+    done
+    if test -n "$dir"; then
+      PHP_ADD_LIBPATH($dir,YAZ_SHARED_LIBADD)
+    fi
+    PHP_ADD_LIBRARY_DEFER(yaz,1,YAZ_SHARED_LIBADD)
     PHP_EVAL_INCLINE($YAZINC)
     PHP_SUBST(YAZ_SHARED_LIBADD)
     PHP_EXTENSION(yaz, $ext_shared)

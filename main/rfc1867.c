@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.82 2001/11/15 15:37:02 sniper Exp $ */
+/* $Id: rfc1867.c,v 1.83 2001/11/16 01:06:48 sniper Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -714,10 +714,9 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 				}
 				temp_filename="";
 
+			} else {
+				zend_hash_add(SG(rfc1867_uploaded_files), temp_filename, strlen(temp_filename) + 1, &temp_filename, sizeof(char *), NULL);
 			}
-
-			zend_hash_add(SG(rfc1867_uploaded_files), temp_filename, strlen(temp_filename) + 1, &temp_filename, sizeof(char *), NULL);
-
 
 		/* Initialize variables */
 			add_protected_variable(param TSRMLS_CC);

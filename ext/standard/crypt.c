@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.32 2000/11/27 13:31:21 sas Exp $ */
+/* $Id: crypt.c,v 1.33 2001/01/07 17:22:17 derick Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -71,7 +71,7 @@ extern char *crypt(char *__key,char *__salt);
 
 #if PHP_BLOWFISH_CRYPT
 #undef PHP_MAX_SALT_LEN
-#define PHP_MAX_SALT_LEN 17
+#define PHP_MAX_SALT_LEN 60
 #endif
 
  /*

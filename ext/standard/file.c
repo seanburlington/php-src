@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.104 2000/08/19 18:01:04 zeev Exp $ */
+/* $Id: file.c,v 1.105 2000/08/19 21:15:43 fmk Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -44,6 +44,9 @@
 #else
 #include <sys/param.h>
 #include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <arpa/inet.h>
 #endif
 #include "ext/standard/head.h"
 #include "safe_mode.h"
@@ -58,13 +61,6 @@
 #endif
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>
-#endif
-#ifdef PHP_WIN32
-#include <winsock.h>
-#else
-#include <netinet/in.h>
-#include <netdb.h>
-#include <arpa/inet.h>
 #endif
 #include "fsock.h"
 #include "fopen-wrappers.h"

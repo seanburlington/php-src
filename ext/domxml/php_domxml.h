@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.64 2002/07/07 17:19:29 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.65 2002/08/12 13:11:50 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -105,6 +105,7 @@ PHP_FUNCTION(domxml_dump_mem);
 PHP_FUNCTION(domxml_dump_mem_file);
 PHP_FUNCTION(domxml_dump_node);
 PHP_FUNCTION(domxml_doc_validate);
+PHP_FUNCTION(domxml_doc_xinclude);
 #if defined(LIBXML_HTML_ENABLED)
 PHP_FUNCTION(domxml_html_dump_mem);
 #endif

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.34 2001/04/10 03:16:05 jason Exp $ */
+/* $Id: sockets.c,v 1.35 2001/05/09 04:54:46 sterling Exp $ */
 
 #include "php.h"
 
@@ -1092,6 +1092,10 @@ PHP_FUNCTION(strerror)
 		buf = hstrerror(-(Z_LVAL_PP(error)));
 	} else {
 		buf = strerror(-(Z_LVAL_PP(error)));
+	}
+
+	if (!buf) {
+		RETURN_FALSE;
 	}
 	
 	RETURN_STRING((char *)buf, 1);

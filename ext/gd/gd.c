@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.39 2004/04/07 22:28:29 edink Exp $ */
+/* $Id: gd.c,v 1.221.2.40 2004/04/07 22:31:29 edink Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -3639,7 +3639,7 @@ static void _php_image_bw_convert( gdImagePtr im_org, gdIOCtx *out, int threshol
 		return;
 	}
 
-#ifdef HAVE_LIBGD20
+#if HAVE_LIBGD20
 	if (im_org->trueColor) {
 		gdImageTrueColorToPalette(im_org, 1, 256);
 	}

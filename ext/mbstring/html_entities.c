@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 2001 The PHP Group                                     |
+   | Copyright (c) 1997-2002 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: html_entities.c,v 1.2 2002/08/24 13:28:53 helly Exp $ */
+/* $Id: html_entities.c,v 1.3 2002/11/23 20:17:46 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

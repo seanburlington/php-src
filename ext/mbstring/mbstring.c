@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.77 2002/07/03 18:45:34 fmk Exp $ */
+/* $Id: mbstring.c,v 1.78 2002/07/05 15:06:39 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -1340,6 +1340,15 @@ char *mbstr_strrchr(const char *s, char c TSRMLS_DC){
 		}
 	}
 	return last;
+}
+
+int mbstr_is_mb_leadbyte(const char *s TSRMLS_DC){
+	unsigned char *p = (unsigned char *)s;
+	if (MBSTRG(current_language) == mbfl_no_language_japanese 
+		&& IS_SJIS1(*p) && IS_SJIS2(*(p+1))){
+		return 1;
+	}
+	return 0;
 }
 
 /* http input processing */

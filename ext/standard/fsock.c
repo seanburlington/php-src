@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.58 2001/01/13 13:59:22 zeev Exp $ */
+/* $Id: fsock.c,v 1.59 2001/01/13 22:00:23 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -71,7 +71,6 @@
 #ifdef ZTS
 static int fsock_globals_id;
 #else
-static php_fsock_globals fsock_globals;
 extern int le_fp;
 #endif
 

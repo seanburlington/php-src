@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.49 2004/04/20 18:28:09 john Exp $ */
+/* $Id: tidy.c,v 1.50 2004/05/09 14:00:14 john Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -887,9 +887,10 @@ PHP_MINIT_FUNCTION(tidy)
 
 	REGISTER_INI_ENTRIES();
 	REGISTER_TIDY_CLASS(tidy, doc,	NULL);
-	REGISTER_TIDY_CLASS(tidy_node, node,	NULL);
-	REGISTER_TIDY_CLASS(tidy_exception, exception,	zend_exception_get_default());
-
+	REGISTER_TIDY_CLASS(tidyNode, node,	NULL);
+	/* no exceptions for now..
+	REGISTER_TIDY_CLASS(tidyException, exception,	zend_exception_get_default());
+	*/
 	tidy_object_handlers_doc.get_class_entry = tidy_get_ce_doc;
 	tidy_object_handlers_node.get_class_entry = tidy_get_ce_node;
 	
@@ -929,7 +930,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.49 2004/04/20 18:28:09 john Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.50 2004/05/09 14:00:14 john Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

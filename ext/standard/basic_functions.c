@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.489 2002/08/02 10:08:53 hholzgra Exp $ */
+/* $Id: basic_functions.c,v 1.490 2002/08/05 03:09:42 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -731,6 +731,7 @@ function_entry basic_functions[] = {
 	PHP_FE(ob_get_status,													NULL)
 	PHP_FE(ob_get_contents,													NULL)
 	PHP_FE(ob_implicit_flush,												NULL)
+	PHP_FE(ob_list_handlers,												NULL)
 
 	/* functions from array.c */
 	PHP_FE(ksort,					first_arg_force_ref)

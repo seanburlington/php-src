@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.344 2003/05/31 00:32:45 iliaa Exp $ */
+/* $Id: file.c,v 1.345 2003/06/06 08:10:02 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1920,10 +1920,10 @@ php_meta_tags_token php_next_meta_token(php_meta_tags_data *md TSRMLS_DC)
 				return TOK_EQUAL;
 				break;
 			case '/':
-        	    		return TOK_SLASH;
+				return TOK_SLASH;
 				break;
 
-		        case '\'':
+			case '\'':
 			case '"':
 				compliment = ch;
 				md->token_len = 0;

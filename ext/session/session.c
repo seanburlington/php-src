@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.237.2.3 2001/12/02 12:21:50 thies Exp $ */
+/* $Id: session.c,v 1.237.2.4 2001/12/30 01:44:17 yohgaki Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1006,7 +1006,7 @@ PHP_FUNCTION(session_module_name)
 	int ac = ZEND_NUM_ARGS();
 	char *old;
 
-	old = estrdup(PS(mod)->name);
+	old = safe_estrdup(PS(mod)->name);
 
 	if (ac < 0 || ac > 1 || zend_get_parameters_ex(ac, &p_name) == FAILURE)
 		WRONG_PARAM_COUNT;

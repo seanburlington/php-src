@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.80 2003/07/18 09:14:23 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.81 2003/08/29 13:35:25 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -462,7 +462,11 @@ DLEXPORT PHP_FUNCTION(udm_alloc_agent)
 #if UDM_VERSION_ID >= 30204
 				Env=UdmEnvInit(NULL);
 				UdmVarListReplaceStr(&Env->Vars,"SyslogFacility","local7");
+#if UDM_VERSION_ID >= 30215
+				UdmSetLogLevel(NULL,0);
+#else
 				UdmSetLogLevel(Env,0);
+#endif
 				UdmOpenLog("mnoGoSearch-php",Env,0);
 #if UDM_VERSION_ID <= 30210
 				if(!memcmp(dbaddr,"searchd:",8)){
@@ -519,7 +523,11 @@ DLEXPORT PHP_FUNCTION(udm_alloc_agent)
 #if UDM_VERSION_ID >= 30204
 				Env=UdmEnvInit(NULL);
 				UdmVarListReplaceStr(&Env->Vars,"SyslogFacility","local7");
+#if UDM_VERSION_ID >= 30215
+				UdmSetLogLevel(NULL,0);
+#else
 				UdmSetLogLevel(Env,0);
+#endif
 				UdmOpenLog("mnoGoSearch-php",Env,0);
 #if UDM_VERSION_ID <= 30210
 				if(!memcmp(dbaddr,"searchd:",8)){
@@ -1823,7 +1831,11 @@ DLEXPORT PHP_FUNCTION(udm_alloc_agent_array)
 				
 				Env=UdmEnvInit(NULL);
 				UdmVarListReplaceStr(&Env->Vars,"SyslogFacility","local7");
+#if UDM_VERSION_ID >= 30215
+				UdmSetLogLevel(NULL,0);
+#else
 				UdmSetLogLevel(Env,0);
+#endif
 				UdmOpenLog("mnoGoSearch-php",Env,0);
 				
 				zend_hash_internal_pointer_reset_ex(HASH_OF(*yydbaddr), &pos);

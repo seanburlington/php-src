@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 1999/04/22 04:40:26 rasmus Exp $
+dnl $Id: config.m4,v 1.4 1999/07/14 15:22:02 rasmus Exp $
 
 AC_MSG_CHECKING(for IMAP support)
 AC_ARG_WITH(imap,
@@ -13,7 +13,7 @@ AC_ARG_WITH(imap,
 			withval=/usr
 		fi
 	fi
-	if test "$withval" != "no"; then
+	if test "$withval" != "no" && test "$withval" != "yes"; then
 		IMAP_DIR=$withval
 		if test -f $IMAP_DIR/include/imap/mail.h; then
 			IMAP_INC_DIR=$IMAP_DIR/include/imap

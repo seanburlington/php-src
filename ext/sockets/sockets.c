@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.159 2004/02/25 22:10:09 iliaa Exp $ */
+/* $Id: sockets.c,v 1.160 2004/03/14 11:42:17 msopacua Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -385,7 +385,7 @@ static int php_set_inet6_addr(struct sockaddr_in6 *sin6, char *string, php_socke
 #else
 		/* No IPv6 specific hostname resolution is available on this system? */
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Host lookup failed: getaddrinfo() not available on system.");
-		reurn 0;
+		return 0;
 #endif
 
 	}

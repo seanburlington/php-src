@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.28 2005/03/02 18:27:25 rrichards Exp $ */
+/* $Id: php_xsl.c,v 1.29 2005/04/06 12:26:29 chregu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -78,6 +78,9 @@ void xsl_objects_free_storage(void *object TSRMLS_DC)
 	zend_hash_destroy(intern->parameter);
 	FREE_HASHTABLE(intern->parameter);
 	
+	zend_hash_destroy(intern->registered_phpfunctions);
+	FREE_HASHTABLE(intern->registered_phpfunctions);
+	
 	if (intern->node_list) {
 		zend_hash_destroy(intern->node_list);
 		FREE_HASHTABLE(intern->node_list);
@@ -116,6 +119,7 @@ zend_object_value xsl_objects_new(zend_class_entry *class_type TSRMLS_DC)
 	intern->parameter = NULL;
 	intern->hasKeys = 0;
 	intern->registerPhpFunctions = 0;
+	intern->registered_phpfunctions = NULL;
 	intern->node_list = NULL;
 	intern->doc = NULL;
 
@@ -124,6 +128,8 @@ zend_object_value xsl_objects_new(zend_class_entry *class_type TSRMLS_DC)
 	zend_hash_copy(intern->std.properties, &class_type->default_properties, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
 	ALLOC_HASHTABLE(intern->parameter);
 	zend_hash_init(intern->parameter, 0, NULL, ZVAL_PTR_DTOR, 0);
+	ALLOC_HASHTABLE(intern->registered_phpfunctions);
+	zend_hash_init(intern->registered_phpfunctions, 0, NULL, ZVAL_PTR_DTOR, 0);
 	retval.handle = zend_objects_store_put(intern, NULL, (zend_objects_free_object_storage_t) xsl_objects_free_storage, NULL TSRMLS_CC);
 	intern->handle = retval.handle;
 	retval.handlers = &xsl_object_handlers;

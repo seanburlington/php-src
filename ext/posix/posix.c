@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.22 2000/08/04 18:14:38 thies Exp $ */
+/* $Id: posix.c,v 1.23 2000/10/05 18:06:55 sasha Exp $ */
 
 
 #include "php.h"
@@ -138,7 +138,7 @@ ZEND_GET_MODULE(posix)
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.22 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.23 $");
 	php_info_print_table_end();
 }
 
@@ -849,12 +849,12 @@ static int posix_addlimit(int limit, char *name, pval *return_value) {
 	}
 
 	if (rl.rlim_cur == RLIM_INFINITY)
-		add_assoc_stringl(return_value,soft,"unlimited", 9, 0);
+		add_assoc_string(return_value,soft,"unlimited", 1);
 	else
 		add_assoc_long(return_value,soft,rl.rlim_cur);
 
 	if (rl.rlim_max == RLIM_INFINITY)
-		add_assoc_stringl(return_value,hard,"unlimited", 9, 0);
+		add_assoc_string(return_value,hard,"unlimited", 1);
 	else
 		add_assoc_long(return_value,hard,rl.rlim_max);
 

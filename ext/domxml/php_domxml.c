@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.186 2002/08/14 07:29:46 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.187 2002/08/14 08:27:36 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -648,6 +648,17 @@ static void php_free_xml_node(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 		node_wrapper_dtor(node);
 	}
 
+}
+
+static void php_free_xml_attr(zend_rsrc_list_entry *rsrc TSRMLS_DC)
+{
+	xmlNodePtr node = (xmlNodePtr) rsrc->ptr;
+	if (node->parent == NULL) {
+		node_wrapper_dtor(node);
+		xmlFreeProp((xmlAttrPtr) node);
+	} else {
+		node_wrapper_dtor(node);
+	}
 }
 
 
@@ -1525,7 +1536,7 @@ PHP_MINIT_FUNCTION(domxml)
 	 */
 	le_domxmlnodep = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domnode", module_number);
 	le_domxmlcommentp = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domcomment", module_number);
-	le_domxmlattrp = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domattribute", module_number);
+	le_domxmlattrp = zend_register_list_destructors_ex(php_free_xml_attr, NULL, "domattribute", module_number);
 	le_domxmltextp = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domtext", module_number);
 	le_domxmlelementp =	zend_register_list_destructors_ex(php_free_xml_node, NULL, "domelement", module_number);
 	le_domxmldtdp = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domdtd", module_number);

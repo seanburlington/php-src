@@ -18,7 +18,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mailparse.c,v 1.1 2001/05/20 11:11:23 wez Exp $ */
+/* $Id: mailparse.c,v 1.2 2001/05/20 11:43:54 wez Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -314,9 +314,6 @@ PHP_FUNCTION(mailparse_stream_encode)
 				);
 		RETURN_FALSE;
 	}
-	
-	convert_to_long_ex(encod);
-	enc = Z_LVAL_PP(encod);
 
 	buf = emalloc(bufsize);
 	RETVAL_TRUE;

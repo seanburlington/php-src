@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.93 1999/08/05 07:42:46 thies Exp $ */
+/* $Id: main.c,v 1.94 1999/08/07 18:21:35 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -193,6 +193,7 @@ PHP_INI_BEGIN()
 	STD_PHP_INI_BOOLEAN("sql.safe_mode",	"0",		PHP_INI_SYSTEM,			OnUpdateInt,		sql_safe_mode,			php_core_globals,	core_globals)
 	STD_PHP_INI_ENTRY("safe_mode_exec_dir",	"1",	PHP_INI_SYSTEM,			OnUpdateString,	safe_mode_exec_dir,		php_core_globals,	core_globals)
 	STD_PHP_INI_BOOLEAN("enable_dl",		"1",		PHP_INI_SYSTEM,			OnUpdateInt,		enable_dl,				php_core_globals,	core_globals)
+	PHP_INI_ENTRY_EX("allow_builtin_links",	"0",	PHP_INI_ALL,			NULL, php_ini_boolean_displayer_cb)
 
 	PHP_INI_ENTRY("SMTP",			"localhost",			PHP_INI_ALL,		NULL)
 	PHP_INI_ENTRY("sendmail_path",	DEFAULT_SENDMAIL_PATH,	PHP_INI_SYSTEM,		NULL)
@@ -1088,7 +1089,8 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 	zend_file_handle prepend_file, append_file;
 	SLS_FETCH();
 
-	if (SG(request_info).query_string && SG(request_info).query_string[0]=='=') {
+	if (SG(request_info).query_string && SG(request_info).query_string[0]=='=' 
+		&& INI_INT("allow_builtin_links")) {
 		if (!strcmp(SG(request_info).query_string+1, "PHPE9568F34-D428-11d2-A769-00AA001ACF42")) {
 			char *header_line = estrndup(CONTEXT_TYPE_IMAGE_GIF, sizeof(CONTEXT_TYPE_IMAGE_GIF));
 

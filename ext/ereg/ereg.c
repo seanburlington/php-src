@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.62 2002/05/04 11:20:12 hirokawa Exp $ */
+/* $Id: ereg.c,v 1.63 2002/06/17 15:10:22 andrei Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -342,6 +342,7 @@ PHPAPI char *php_reg_replace(const char *pattern, const char *replace, const cha
 			while (*walk)
 				if ('\\' == *walk
 					&& '0' <= walk[1] && '9' >= walk[1]
+					&& walk[1] - '0' <= re.re_nsub
 					&& subs[walk[1] - '0'].rm_so > -1
 					&& subs[walk[1] - '0'].rm_eo > -1) {
 					new_l += subs[walk[1] - '0'].rm_eo
@@ -369,6 +370,7 @@ PHPAPI char *php_reg_replace(const char *pattern, const char *replace, const cha
 			while (*walk)
 				if ('\\' == *walk
 					&& '0' <= walk[1] && '9' >= walk[1]
+					&& walk[1] - '0' <= re.re_nsub
 					&& subs[walk[1] - '0'].rm_so > -1
 					&& subs[walk[1] - '0'].rm_eo > -1
 					/* this next case shouldn't happen. it does. */

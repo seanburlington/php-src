@@ -18,7 +18,7 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.27 2002/05/14 15:32:15 mfischer Exp $ */
+/* $Id: sendmail.c,v 1.28 2002/05/14 16:03:40 mfischer Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
@@ -288,6 +288,7 @@ int SendText(char *RPath, char *Subject, char *mailTo, char *data, char *headers
 	/* Send mail to all Cc rcpt's */
 	efree(tempMailTo);
 	if (headers && (pos1 = strstr(headers, "Cc:"))) {
+		pos1 += 3; /* Jump over Cc: */
 		if (NULL == (pos2 = strstr(pos1, "\r\n"))) {
 
 			tempMailTo = estrndup(pos1, strlen(pos1));

@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.113.2.1 2001/05/23 00:34:00 sniper Exp $ */
+/* $Id: fopen_wrappers.c,v 1.113.2.2 2001/05/23 03:41:22 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -147,7 +147,7 @@ PHPAPI int php_check_specific_open_basedir(char *basedir, char *path PLS_DC)
 	SLS_FETCH();
 	
 	/* Special case basedir==".": Use script-directory */
-	if ((strcmp(open_basedir, ".") == 0) && 
+	if ((strcmp(basedir, ".") == 0) && 
 		SG(request_info).path_translated &&
 		*SG(request_info).path_translated
 		) {

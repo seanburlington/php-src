@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.146 2001/03/06 04:34:05 elixer Exp $ */
+/* $Id: file.c,v 1.147 2001/03/06 04:42:04 elixer Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2125,7 +2125,7 @@ size_t php_fread_all(char **buf, int socket, FILE *fp, int issock) {
 }
 
 /* See http://www.w3.org/TR/html4/intro/sgmltut.html#h-3.2.2 */
-#define PHP_META_HTML402_CHARS "-_.:"
+#define PHP_META_HTML401_CHARS "-_.:"
 
 /* Tokenizes an HTML file for get_meta_tags */
 php_meta_tags_token php_next_meta_token(FILE *fp, int socketd, int issock, int *use_last_char, int *last_char, char **data, int *datalen) {
@@ -2186,7 +2186,7 @@ php_meta_tags_token php_next_meta_token(FILE *fp, int socketd, int issock, int *
                 buff[(*datalen)++] = ch;
 				while (!FP_FEOF(socketd,fp,issock) &&
 					   (ch = FP_FGETC(socketd,fp,issock)) &&
-					   (isalnum(ch) || strchr(PHP_META_HTML402_CHARS,ch))) {
+					   (isalnum(ch) || strchr(PHP_META_HTML401_CHARS,ch))) {
 
 					buff[(*datalen)++] = ch;
 

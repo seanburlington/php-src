@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.9 2003/07/07 19:37:32 rrichards Exp $ */
+/* $Id: php_dom.h,v 1.10 2003/07/10 11:17:25 rrichards Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -82,6 +82,7 @@ void dom_get_elements_by_tag_name_ns_raw(xmlNodePtr nodep, char *ns, char *local
 void php_dom_create_implementation(zval **retval  TSRMLS_DC);
 int dom_hierarchy(xmlNodePtr parent, xmlNodePtr child);
 int dom_has_feature(char *feature, char *version);
+void add_domdocument_properties(zval *id TSRMLS_DC);
 
 #define REGISTER_DOM_CLASS(ce, name, parent_ce, funcs, entry) \
 INIT_CLASS_ENTRY(ce, name, funcs); \

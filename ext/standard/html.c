@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.74 2003/03/08 14:37:01 sesser Exp $ */
+/* $Id: html.c,v 1.75 2003/03/08 14:51:16 sesser Exp $ */
 
 #include "php.h"
 #if PHP_WIN32
@@ -840,7 +840,6 @@ static void php_html_entities(INTERNAL_FUNCTION_PARAMETERS, int all)
 	}
 
 	replaced = php_escape_html_entities(str, str_len, &len, all, quote_style, hint_charset TSRMLS_CC);
-	efree(str);
 	RETVAL_STRINGL(replaced, len, 0);
 }
 /* }}} */

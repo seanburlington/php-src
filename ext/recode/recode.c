@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.1 2000/03/11 22:05:41 kk Exp $ */
+/* $Id: recode.c,v 1.2 2000/03/12 19:08:52 kk Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -91,7 +91,7 @@ PHP_MINFO_FUNCTION(recode)
 
 	php_printf("<table border=5 width=\"600\">");
 	php_info_print_table_header(1, "Module Revision");
-	php_info_print_table_row(1, "$Revision: 1.1 $");
+	php_info_print_table_row(1, "$Revision: 1.2 $");
 	php_printf("</table>\n");
 }
 
@@ -100,36 +100,19 @@ PHP_MINFO_FUNCTION(recode)
 
 PHP_FUNCTION(recode_string)
 {
-/*	All of this cores in zend_get_parameters_ex()...
-
-	RECODE_REQUEST request = NULL;
-	pval **str;
-	pval **req;
-	char  *r;
-	bool   success;
-	
-	ReSLS_FETCH();
-	if (ARG_COUNT(ht) != 2
-	 || zend_get_parameters_ex(ht, 2, &req, &str) == FAILURE) {
-	 	WRONG_PARAM_COUNT;
-	}
-	convert_to_string_ex(str);
-	convert_to_string_ex(req);
-*/
-
 	RECODE_REQUEST request = NULL;
 	char *r = NULL;
-	pval *str;
-	pval *req;
+	pval **str;
+	pval **req;
 	bool  success;
 	
 	ReSLS_FETCH();
 	if (ARG_COUNT(ht) != 2
-	 || zend_get_parameters(ht, 2, &req, &str) == FAILURE) {
+	 || zend_get_parameters_ex(2, &req, &str) == FAILURE) {
 	 	WRONG_PARAM_COUNT;
 	}
-	convert_to_string(str);
-	convert_to_string(req);
+	convert_to_string_ex(str);
+	convert_to_string_ex(req);
 
 	request = recode_new_request(ReSG(outer));
 	if (request == NULL) {
@@ -137,13 +120,13 @@ PHP_FUNCTION(recode_string)
 		RETURN_FALSE;
 	}
 	
-	success = recode_scan_request(request, req->value.str.val);
+	success = recode_scan_request(request, (*req)->value.str.val);
 	if (!success) {
-		php_error(E_WARNING, "Illegal recode request '%s'", req->value.str.val);
+		php_error(E_WARNING, "Illegal recode request '%s'", (*req)->value.str.val);
 		goto error_exit;
 	}
 	
-	r = recode_string(request, str->value.str.val);
+	r = recode_string(request, (*str)->value.str.val);
 	if (!r) {
 		php_error(E_WARNING, "Recoding failed.");
 		goto error_exit;

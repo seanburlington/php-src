@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.86.2.17 2003/04/30 21:52:06 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.86.2.18 2003/05/21 00:06:41 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -2017,6 +2017,7 @@ PHP_FUNCTION(mssql_bind)
 
 	memset((void*)&bind,0,sizeof(mssql_bind));
 	zend_hash_add(statement->binds,Z_STRVAL_PP(param_name),Z_STRLEN_PP(param_name),&bind,sizeof(mssql_bind),(void **)&bindp);
+	if( NULL == bindp ) RETURN_FALSE;
 	bindp->zval=*var;
 	zval_add_ref(var);
 

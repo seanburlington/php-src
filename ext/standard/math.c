@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.114 2004/05/24 17:02:11 iliaa Exp $ */
+/* $Id: math.c,v 1.115 2004/06/10 19:38:24 iliaa Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -616,11 +616,6 @@ PHP_FUNCTION(sqrt)
 
 /* {{{ proto float hypot(float num1, float num2)
    Returns sqrt(num1*num1 + num2*num2) */ 
-
-/*
-   WARNING: this function is expermental: it could change its name or 
-   disappear in the next version of PHP!
-*/
 
 #ifdef HAVE_HYPOT
 PHP_FUNCTION(hypot)

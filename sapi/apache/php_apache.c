@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.45.2.2 2001/10/21 00:20:44 rasmus Exp $ */
+/* $Id: php_apache.c,v 1.45.2.3 2001/11/13 08:19:43 derick Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -218,10 +218,10 @@ PHP_MINFO_FUNCTION(apache)
 #if !defined(WIN32) && !defined(WINNT)
 	sprintf(output_buf, "%s(%d)/%d", user_name, (int)user_id, (int)group_id);
 	php_info_print_table_row(2, "User/Group", output_buf);
-	sprintf(output_buf, "Per Child: %d<br>Keep Alive: %s<br>Max Per Connection: %d", max_requests_per_child, serv->keep_alive ? "on":"off", serv->keep_alive_max);
+	sprintf(output_buf, "Per Child: %d - Keep Alive: %s - Max Per Connection: %d", max_requests_per_child, serv->keep_alive ? "on":"off", serv->keep_alive_max);
 	php_info_print_table_row(2, "Max Requests", output_buf);
 #endif
-	sprintf(output_buf, "Connection: %d<br>Keep-Alive: %d", serv->timeout, serv->keep_alive_timeout);
+	sprintf(output_buf, "Connection: %d - Keep-Alive: %d", serv->timeout, serv->keep_alive_timeout);
 	php_info_print_table_row(2, "Timeouts", output_buf);
 #if !defined(WIN32) && !defined(WINNT)
 	php_info_print_table_row(2, "Server Root", server_root);

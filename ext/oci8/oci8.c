@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.56 2000/02/19 23:41:17 zeev Exp $ */
+/* $Id: oci8.c,v 1.57 2000/02/22 13:56:48 thies Exp $ */
 
 /* TODO list:
  *
@@ -1731,7 +1731,7 @@ oci_bind_out_callback(dvoid *octxp,      /* context pointer */
 		return retval;
 	}
 
-	if (val->type == IS_OBJECT) {
+	if ((val->type == IS_OBJECT) || (val->type == IS_RESOURCE)) {
 		retval = OCI_CONTINUE;
 	} else {
 		convert_to_string(val);

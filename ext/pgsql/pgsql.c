@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.105 2001/05/27 01:21:30 eschmid Exp $ */
+/* $Id: pgsql.c,v 1.106 2001/05/27 22:54:54 sniper Exp $ */
 
 #include <stdlib.h>
 
@@ -122,13 +122,13 @@ static void php_pgsql_set_default_link(int id)
 {   
 	PGLS_FETCH();
 
-        zend_list_addref(id);
+	zend_list_addref(id);
 
-    if (PGG(default_link) != -1) {
-        zend_list_delete(PGG(default_link));
-    }
+	if (PGG(default_link) != -1) {
+		zend_list_delete(PGG(default_link));
+	}
 
-        PGG(default_link) = id;
+	PGG(default_link) = id;
 }
 
 
@@ -162,7 +162,7 @@ _notice_handler(void *arg, const char *message)
 	PGLS_FETCH();
 
 	if (! PGG(ignore_notices)) {
-		php_log_err(message);
+		php_log_err((char *) message);
 		if (PGG(last_notice) != NULL) {
 			efree(PGG(last_notice));
 		}

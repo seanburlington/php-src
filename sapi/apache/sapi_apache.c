@@ -19,9 +19,9 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.9 2000/02/16 17:46:14 zeev Exp $ */
+/* $Id: sapi_apache.c,v 1.10 2000/02/17 20:25:08 zeev Exp $ */
 
-#define _PHP_REGEX_H 1
+#define _PHP_REGEX_H
 
 #include "php.h"
 

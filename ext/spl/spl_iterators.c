@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.38.2.5 2004/11/25 20:28:37 zeev Exp $ */
+/* $Id: spl_iterators.c,v 1.38.2.6 2004/12/29 13:52:34 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1229,7 +1229,7 @@ SPL_METHOD(CachingIterator, next)
 } /* }}} */
 
 /* {{{ proto boolean CachingIterator::hasNext()
-   Cehck whether the inner iterator has a valid next element */
+   Check whether the inner iterator has a valid next element */
 SPL_METHOD(CachingIterator, hasNext)
 {
 	spl_dual_it_object   *intern;
@@ -1284,7 +1284,7 @@ SPL_METHOD(CachingRecursiveIterator, __construct)
 } /* }}} */
 
 /* {{{ proto bolean CachingRecursiveIterator::hasChildren()
-   Cehck whether the current element of the inner iterator has children */
+   Check whether the current element of the inner iterator has children */
 SPL_METHOD(CachingRecursiveIterator, hasChildren)
 {
 	spl_dual_it_object   *intern;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.15 2005/02/06 22:48:35 edink Exp $ */
+/* $Id: pgsql_statement.c,v 1.16 2005/02/07 00:04:20 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -243,7 +243,7 @@ static int pgsql_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr, unsigned 
 				tmp_ptr = PQunescapeBytea(*ptr, &tmp_len);
 				*ptr = estrndup(tmp_ptr, tmp_len);
 				*len = tmp_len;
-				caller_frees = 1;
+				*caller_frees = 1;
 				free(tmp_ptr);
 				break;
 		}

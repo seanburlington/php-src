@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.10 2004/11/03 14:32:51 jorton Exp $
+dnl $Id: config.m4,v 1.11 2005/02/17 03:51:19 sniper Exp $
 dnl
 
 PHP_ARG_WITH(pspell,for PSPELL support,
@@ -29,8 +29,17 @@ if test "$PHP_PSPELL" != "no"; then
 
 	PSPELL_LIBDIR=$PSPELL_DIR/$PHP_LIBDIR
 
-	AC_DEFINE(HAVE_PSPELL,1,[ ])
-	PHP_SUBST(PSPELL_SHARED_LIBADD)
 	PHP_ADD_LIBRARY_WITH_PATH(pspell, $PSPELL_LIBDIR, PSPELL_SHARED_LIBADD)
+
+	dnl Add -laspell to LIBS if it exists
+	PHP_CHECK_LIBRARY(aspell,new_aspell_config,
+	[
+		PHP_ADD_LIBRARY_WITH_PATH(aspell, $PSPELL_LIBDIR, PSPELL_SHARED_LIBADD)
+	], [], [
+		-L$PSPELL_LIBDIR
+	])
+
 	PHP_ADD_INCLUDE($PSPELL_INCDIR)
+	PHP_SUBST(PSPELL_SHARED_LIBADD)
+	AC_DEFINE(HAVE_PSPELL,1,[ ])
 fi

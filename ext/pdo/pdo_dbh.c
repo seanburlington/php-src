@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.35 2004/09/19 18:11:27 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.36 2004/09/19 19:28:02 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -166,9 +166,24 @@ static PHP_FUNCTION(dbh_constructor)
 	colon = strchr(data_source, ':');
 
 	if (!colon) {
-		zend_throw_exception_ex(php_pdo_get_exception(), PDO_ERR_SYNTAX TSRMLS_CC, "invalid data source name");
-		ZVAL_NULL(object);
-		return;
+		/* let's see if this string has a matching dsn in the php.ini */
+		char *ini_dsn = NULL;
+
+		snprintf(alt_dsn, sizeof(alt_dsn), "pdo.dsn.%s", data_source);
+		if (FAILURE == cfg_get_string(alt_dsn, &ini_dsn)) {
+			zend_throw_exception_ex(php_pdo_get_exception(), PDO_ERR_SYNTAX TSRMLS_CC, "invalid data source name");
+			ZVAL_NULL(object);
+			return;
+		}
+
+		data_source = ini_dsn;
+		colon = strchr(data_source, ':');
+		
+		if (!colon) {
+			zend_throw_exception_ex(php_pdo_get_exception(), PDO_ERR_SYNTAX TSRMLS_CC, "invalid data source name (via INI: %s)", alt_dsn);
+			ZVAL_NULL(object);
+			return;
+		}
 	}
 
 	if (!strncmp(data_source, "uri:", sizeof("uri:")-1)) {

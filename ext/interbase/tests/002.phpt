@@ -5,7 +5,7 @@ InterBase: connect, close and pconnect
 --POST--
 --GET--
 --FILE--
-<?php /* $Id: 002.phpt,v 1.4 2003/08/12 09:57:57 abies Exp $ */
+<?php /* $Id: 002.phpt,v 1.5 2004/04/01 16:25:51 abies Exp $ */
 
 	require("interbase.inc");
     
@@ -17,16 +17,19 @@ InterBase: connect, close and pconnect
 	$pcon1 = ibase_pconnect($test_base);
 	$pcon2 = ibase_pconnect($test_base);
 	ibase_close($con);
+	unset($con);
 	ibase_close($pcon1);
+	unset($pcon1);
 
 	out_table("test1");
 
 	ibase_close($pcon2);
+	unset($pcon2);
 ?>
 --EXPECT--
 --- test1 ---
-1	test table created with isql	
+1	test table not created with isql	
 ---
 --- test1 ---
-1	test table created with isql	
+1	test table not created with isql	
 ---

@@ -5,7 +5,7 @@ InterBase: transactions
 --POST--
 --GET--
 --FILE--
-<?php /* $Id: 005.phpt,v 1.6 2003/09/05 17:02:02 abies Exp $ */
+<?php /* $Id: 005.phpt,v 1.7 2004/04/01 16:25:51 abies Exp $ */
 
     require("interbase.inc");
     
@@ -113,8 +113,8 @@ three transaction on default link
 
     ibase_free_result($res);
 
-	$tr_1 = ibase_trans();  /* this default transaction also */
-	$tr_2 = ibase_trans(IBASE_READ);
+	$tr_1 = ibase_query("SET TRANSACTION");
+	$tr_2 = ibase_query("SET TRANSACTION READ ONLY");
 	$tr_3 = ibase_trans(IBASE_READ+IBASE_COMMITTED+IBASE_REC_VERSION+IBASE_WAIT);    
 	$tr_4 = ibase_trans(IBASE_READ+IBASE_COMMITTED+IBASE_REC_NO_VERSION+IBASE_NOWAIT);	
     

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.69 2002/12/10 22:49:33 helly Exp $ */
+/* $Id: dba.c,v 1.70 2002/12/10 22:51:09 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -421,6 +421,7 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	 *
 	 * d: force lock on database file
 	 * l: force lock on lck file
+	 * -: ignore locking
 	 *
 	 * t: test open database, warning if locked
 	 */

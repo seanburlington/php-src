@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.565 2003/01/21 14:53:16 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.566 2003/01/28 01:48:57 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -724,6 +724,7 @@ function_entry basic_functions[] = {
 	PHP_FE(rewinddir,														NULL)
 	PHP_STATIC_FE("readdir",		php_if_readdir,							NULL)
 	PHP_FALIAS(dir,					getdir,									NULL)
+	PHP_FE(scandir,															NULL)
 #ifdef HAVE_GLOB
 	PHP_FE(glob,															NULL)
 #endif

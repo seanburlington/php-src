@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.31 2000/02/19 23:43:27 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.32 2000/02/20 05:32:51 evan Exp $ */
 
 
 /* TODO:
@@ -43,7 +43,9 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #endif
-
+#if HAVE_SIGNAL_H
+#include <signal.h>
+#endif
 
 /* True globals, no need for thread safety */
 static int le_result,le_link,le_plink;

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php3_string.h,v 1.12 1999/09/05 00:55:48 riffraff Exp $ */
+/* $Id: php3_string.h,v 1.13 1999/09/05 20:55:13 riffraff Exp $ */
 
 /* Synced with php3 revision 1.43 1999-06-16 [ssb] */
 
@@ -72,7 +72,9 @@ PHP_FUNCTION(hebrev);
 PHP_FUNCTION(hebrevc);
 PHP_FUNCTION(user_sprintf);
 PHP_FUNCTION(user_printf);
+PHP_FUNCTION(addcslashes);
 PHP_FUNCTION(addslashes);
+PHP_FUNCTION(stripcslashes);
 PHP_FUNCTION(stripslashes);
 PHP_FUNCTION(chr);
 PHP_FUNCTION(ord);
@@ -89,8 +91,9 @@ extern PHPAPI char *_php3_strtoupper(char *s);
 extern PHPAPI char *_php3_strtolower(char *s);
 extern PHPAPI char *_php3_strtr(char *string, int len, char *str_from, char *str_to, int trlen);
 extern PHPAPI char *php_addslashes(char *string, int length, int *new_length, int freeit);
-extern PHPAPI char *php_addslashes_ex(char *string, int length, int *new_length, int freeit, char *what, int wlength);
+extern PHPAPI char *php_addcslashes(char *string, int length, int *new_length, int freeit, char *what, int wlength);
 extern PHPAPI void php_stripslashes(char *string, int *len);
+extern PHPAPI void php_stripcslashes(char *string, int *len);
 extern PHPAPI void _php3_dirname(char *str, int len);
 extern PHPAPI char *php3i_stristr(unsigned char *s, unsigned char *t);
 extern PHPAPI char *_php3_str_to_str(char *haystack, int length, char *needle,

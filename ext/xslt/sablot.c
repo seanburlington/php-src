@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.52 2002/08/22 09:54:04 chregu Exp $ */
+/* $Id: sablot.c,v 1.53 2002/10/04 09:22:02 msopacua Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1483,7 +1483,7 @@ static MH_ERROR error_print(void *user_data, SablotHandle proc, MH_ERROR code, M
 				strlcpy(val, *fields + pos + 1, len - pos);
 
 				/* Add it */				
-				add_assoc_stringl_ex(argv[3], key, pos, val, len - pos - 1, 1);
+				add_assoc_stringl_ex(argv[3], key, pos + 1, val, len - pos - 1, 1);
 
 				/* Cleanup */
 				efree(key);

@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.30 2002/04/11 08:07:22 helly Exp $ */
+/* $Id: base64.c,v 1.31 2002/05/01 20:11:09 derick Exp $ */
 
 #include <string.h>
 
@@ -188,7 +188,7 @@ unsigned char *php_base64_decode(const unsigned char *str, int length, int *ret_
 	if(ret_length) {
 		*ret_length = j;
 	}
-	result[k] = '\0';
+	result[j] = '\0';
 	return result;
 }
 /* }}} */

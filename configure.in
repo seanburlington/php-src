@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.514.2.36 2005/02/10 22:19:54 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.514.2.37 2005/03/11 10:57:08 hyanantha Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -198,6 +198,10 @@ case $host_alias in
     if test "$GCC" = "yes"; then
       CPPFLAGS="$CPPFLAGS -D_XOPEN_SOURCE_EXTENDED"
     fi
+    ;;
+*netware*)
+    PHP_BUILD_PROGRAM
+    PHP_ADD_SOURCES(win32, sendmail.c, -I$CFLAGS,php)
     ;;
 esac
 

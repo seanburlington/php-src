@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.43.4.4 2003/06/12 12:51:53 andrey Exp $ */
+/* $Id: cpdf.c,v 1.43.4.5 2004/02/19 02:20:14 iliaa Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -476,6 +476,7 @@ PHP_FUNCTION(cpdf_open)
 			php_error(E_WARNING, "%s(): Writing to stdout as described in the ClibPDF manual is not possible if php is used as an Apache module. Write to a memory stream and use cpdf_output_buffer() instead.", get_active_function_name(TSRMLS_C));
 #endif
 		if (php_check_open_basedir(Z_STRVAL_P(arg2) TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(Z_STRVAL_P(arg2), "rb+", CHECKUID_CHECK_MODE_PARAM))) {
+			cpdf_close(cpdf);
 			RETURN_FALSE;
 		}
 

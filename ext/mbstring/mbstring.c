@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.62 2002/04/14 08:18:55 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.63 2002/04/21 22:06:55 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -1060,8 +1060,8 @@ php_mbstr_encoding_handler(zval *arg, char *res, char *separator TSRMLS_DC)
 	int n, num, val_len, *len_list, *elist, elistsz;
 	enum mbfl_no_encoding from_encoding, to_encoding;
 	mbfl_string string, resvar, resval;
-	mbfl_encoding_detector *identd;
-	mbfl_buffer_converter *convd;
+	mbfl_encoding_detector *identd = NULL; 
+	mbfl_buffer_converter *convd = NULL;
 
 	mbfl_string_init_set(&string, MBSTRG(current_language), MBSTRG(current_internal_encoding));
 	mbfl_string_init_set(&resvar, MBSTRG(current_language), MBSTRG(current_internal_encoding));
@@ -1174,8 +1174,10 @@ php_mbstr_encoding_handler(zval *arg, char *res, char *separator TSRMLS_DC)
 		n++;
 		/* add variable to symbol table */
 		php_register_variable_safe(var, val, val_len, array_ptr TSRMLS_CC);
-		mbfl_string_clear(&resvar);
-		mbfl_string_clear(&resval);
+		if (convd != NULL){
+			mbfl_string_clear(&resvar);
+			mbfl_string_clear(&resval);
+		}
 	}
 	MBSTRG(http_input_identify) = from_encoding;
 

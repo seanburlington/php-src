@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.63 2001/09/21 21:59:23 hholzgra Exp $ */
+/* $Id: math.c,v 1.64 2001/09/26 09:21:58 jeroen Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -621,7 +621,7 @@ PHP_FUNCTION(hypot)
 	}
 	convert_to_double_ex(num1);
 	convert_to_double_ex(num2);
-	Z_DVAL_P(return_value) = hypot((*num1)->value.dval, (*num2)->value.dval);
+	Z_DVAL_P(return_value) = hypot(Z_DVAL_PP(num1), Z_DVAL_PP(num2));
 	Z_TYPE_P(return_value) = IS_DOUBLE;
 }
 

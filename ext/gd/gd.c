@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.306 2005/01/17 17:07:28 sniper Exp $ */
+/* $Id: gd.c,v 1.307 2005/03/27 23:43:51 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1208,23 +1208,19 @@ PHP_FUNCTION(imagecopyresampled)
    Rotate an image using a custom angle */
 PHP_FUNCTION(imagerotate)
 {
-	zval **SIM, **ANGLE, **BGDCOLOR;
+	zval *SIM;
 	gdImagePtr im_dst, im_src;
 	double degrees;
 	long color;
+	long ignoretransparent = 0;
 
-	if (ZEND_NUM_ARGS() != 3 || zend_get_parameters_ex(3, &SIM, &ANGLE, &BGDCOLOR) == FAILURE) {
-		ZEND_WRONG_PARAM_COUNT();
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rdl|l", &SIM, &degrees, &color, &ignoretransparent) == FAILURE) {
+		RETURN_FALSE;
 	}
 
-	ZEND_FETCH_RESOURCE(im_src, gdImagePtr, SIM, -1, "Image", le_gd);
+	ZEND_FETCH_RESOURCE(im_src, gdImagePtr, &SIM, -1, "Image", le_gd);
 
-	convert_to_long_ex(BGDCOLOR);
-	color = Z_LVAL_PP(BGDCOLOR);
-
-	convert_to_double_ex(ANGLE);
-	degrees = Z_DVAL_PP(ANGLE);
-	im_dst = gdImageRotate(im_src, degrees, color);
+	im_dst = gdImageRotate(im_src, degrees, color, ignoretransparent);
 
 	if (im_dst != NULL) {
 		ZEND_REGISTER_RESOURCE(return_value, im_dst, le_gd);

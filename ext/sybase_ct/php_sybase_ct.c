@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.7 1999/11/08 20:57:59 riffraff Exp $ */
+/* $Id: php_sybase_ct.c,v 1.8 1999/11/19 13:00:57 zeev Exp $ */
 
 
 #include "php.h"
@@ -1265,6 +1265,7 @@ static void php_sybase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS)
 			tmp->value.str.val = php_addslashes(tmp->value.str.val,tmp->value.str.len,&tmp->value.str.len,1);
 		}
 		zend_hash_index_update(return_value->value.ht, i, (void *) &tmp, sizeof(pval *), NULL);
+		tmp->refcount++;
 		zend_hash_update(return_value->value.ht, result->fields[i].name, strlen(result->fields[i].name)+1, (void *) &tmp, sizeof(pval *), NULL);
 	}
 	result->cur_row++;

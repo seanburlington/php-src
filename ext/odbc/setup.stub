@@ -1,4 +1,4 @@
-# $Id: setup.stub,v 1.2 1999/08/30 10:48:23 kara Exp $ -*- sh -*-
+# $Id: setup.stub,v 1.3 1999/09/23 14:46:35 lurcher Exp $ -*- sh -*-
 
 # Solid
 define_option with-solid 'Solid support?' yesnodir \
@@ -39,6 +39,16 @@ define_option with-unixODBC 'unixODBC support?' yesnodir \
     the ODBC 3.5 specification.\n
     More info about unixODBC can be found on the unixODBC home page at \n
     http://www.unixodbc.org'
+fi
+
+# ESOOB
+if test "$option_value_with_solid" = "no" -a \
+        "$option_value_with_empress" = "no"; then
+define_option with-esoob 'Easysoft ODBC-ODBC Bridge support?' yesnodir \
+    'no /usr/local/easysoft/oob/client ESOOB install' \
+'    Whether to build PHP with Easysoft ODBC-ODBC Bridge support.\n
+    More info about the Easysoft ODBC-ODBC Bridge can be found on the\n
+    Easysoft home page at http://www.easysoft.com'
 fi
 
 # OpenLink

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.2 1999/09/22 21:14:02 lurcher Exp $ */
+/* $Id: php_odbc.c,v 1.3 1999/09/23 14:46:35 lurcher Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -2082,7 +2082,7 @@ PHP_FUNCTION(odbc_setoption)
 	RETCODE rc;
 	pval *arg1, *arg2, *arg3, *arg4;
 
- 	if ( getParameters(ht, 3, &arg1, &arg2, &arg3, &arg4) == FAILURE) {
+ 	if ( getParameters(ht, 4, &arg1, &arg2, &arg3, &arg4) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}                            
  

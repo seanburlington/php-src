@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.h,v 1.2 1999/09/22 21:14:03 lurcher Exp $ */
+/* $Id: php_odbc.h,v 1.3 1999/09/23 14:46:35 lurcher Exp $ */
 
 #ifndef _PHP_ODBC_H
 #define _PHP_ODBC_H
@@ -80,6 +80,13 @@ PHP_FUNCTION(solid_fetch_prev);
 #elif HAVE_UNIXODBC /* unixODBC library */
 
 #define ODBC_TYPE "unixODBC"
+#include <sql.h>
+#include <sqlext.h>
+#define HAVE_SQL_EXTENDED_FETCH 1
+
+#elif HAVE_ESOOB /* Easysoft ODBC-ODBC Bridge library */
+
+#define ODBC_TYPE "ESOOB"
 #include <sql.h>
 #include <sqlext.h>
 #define HAVE_SQL_EXTENDED_FETCH 1

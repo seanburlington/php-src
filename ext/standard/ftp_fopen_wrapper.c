@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.74.2.2 2005/02/27 17:08:26 iliaa Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.74.2.3 2005/03/10 13:37:54 hyanantha Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -780,9 +780,15 @@ static int php_stream_ftp_url_stat(php_stream_wrapper *wrapper, char *url, int f
 	ssb->sb.st_dev = 0;
 	ssb->sb.st_uid = 0;
 	ssb->sb.st_gid = 0;
+#ifdef NETWARE
+	ssb->sb.st_atime.tv_sec = -1;
+	ssb->sb.st_mtime.tv_sec = -1;
+	ssb->sb.st_ctime.tv_sec = -1;
+#else
 	ssb->sb.st_atime = -1;
 	ssb->sb.st_mtime = -1;
 	ssb->sb.st_ctime = -1;
+#endif
 	ssb->sb.st_nlink = 1;
 	ssb->sb.st_rdev = -1;
 #ifdef HAVE_ST_BLKSIZE

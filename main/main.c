@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.230 2000/03/30 22:41:13 andi Exp $ */
+/* $Id: main.c,v 1.231 2000/04/10 17:39:11 andi Exp $ */
 
 
 #include <stdio.h>
@@ -619,7 +619,11 @@ int php_request_startup(CLS_D ELS_DC PLS_DC SLS_DC)
 	PG(connection_status) = PHP_CONNECTION_NORMAL;
 	
 	zend_activate(CLS_C ELS_CC);
-	sapi_activate(SLS_C);	
+	sapi_activate(SLS_C);
+
+#ifdef VIRTUAL_DIR
+	virtual_cwd_activate(SG(request_info).path_translated);
+#endif
 
 	php_set_timeout(PG(max_execution_time));
 	

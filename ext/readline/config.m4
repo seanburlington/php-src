@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 1999/12/30 04:07:40 sas Exp $
+dnl $Id: config.m4,v 1.6 2000/01/07 13:30:53 thies Exp $
 dnl config.m4 for extension readline
 dnl don't forget to call PHP_EXTENSION(readline)
 
@@ -18,7 +18,17 @@ AC_ARG_WITH(readline,
       AC_MSG_ERROR(Please reinstall readline - I cannot find readline.h)
     fi
     AC_ADD_INCLUDE($READLINE_DIR/include)
-    AC_ADD_LIBRARY(ncurses)
+
+	AC_CHECK_LIB(ncurses, tgetent, [
+ 	 AC_ADD_LIBRARY(ncurses) ], [
+  	 AC_CHECK_LIB(termcap, tgetent, [
+   	  AC_ADD_LIBRARY(termcap)
+     ])
+    ])
+
+
+	AC_CHECK_LIB(tgetent, termcap)
+	AC_CHECK_LIB(tgetent, ncurses)
     AC_ADD_LIBRARY_WITH_PATH(history, $READLINE_DIR/lib)
     AC_ADD_LIBRARY_WITH_PATH(readline, $READLINE_DIR/lib)
 

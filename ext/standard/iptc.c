@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.41.4.3 2004/03/06 17:41:31 pajoye Exp $ */
+/* $Id: iptc.c,v 1.41.4.4 2004/06/21 22:53:59 iliaa Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -207,6 +207,10 @@ PHP_FUNCTION(iptcembed)
         WRONG_PARAM_COUNT;
         break;
     }
+
+    if (PG(safe_mode) && (!php_checkuid(Z_STRVAL_PP(jpeg_file), NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+		RETURN_FALSE;
+	}
 
     if (php_check_open_basedir(Z_STRVAL_PP(jpeg_file) TSRMLS_CC)) {
 		RETURN_FALSE;

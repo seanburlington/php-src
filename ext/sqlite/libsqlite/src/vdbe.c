@@ -36,7 +36,7 @@
 ** in this file for details.  If in doubt, do not deviate from existing
 ** commenting and indentation practices when changing or adding code.
 **
-** $Id: vdbe.c,v 1.3 2003/06/06 22:44:57 wez Exp $
+** $Id: vdbe.c,v 1.4 2003/08/17 14:01:17 sas Exp $
 */
 #include "sqliteInt.h"
 #include <ctype.h>
@@ -1276,7 +1276,7 @@ int sqliteVdbeList(
     sprintf(p->zStack[2],"%d", p->aOp[i].p1);
     sprintf(p->zStack[3],"%d", p->aOp[i].p2);
     if( p->aOp[i].p3type==P3_POINTER ){
-      sprintf(p->aStack[4].z, "ptr(%#x)", (int)p->aOp[i].p3);
+      sprintf(p->aStack[4].z, "ptr(%p)", p->aOp[i].p3);
       p->zStack[4] = p->aStack[4].z;
     }else{
       p->zStack[4] = p->aOp[i].p3;

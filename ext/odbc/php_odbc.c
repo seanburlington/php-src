@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.124 2002/04/24 22:07:29 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.125 2002/04/26 14:56:34 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2152,8 +2152,13 @@ try_and_get_another_connection:
 
 				if(ret != SQL_SUCCESS || len == 0) {
 					zend_hash_del(&EG(persistent_list), hashed_details, hashed_len + 1);
-					safe_odbc_disconnect(db_conn->hdbc);
-					SQLFreeConnect(db_conn->hdbc);
+					/* Commented out to fix a possible double closure error 
+					 * when working with persistent connections as submitted by
+					 * bug #15758
+					 *
+					 * safe_odbc_disconnect(db_conn->hdbc);
+					 * SQLFreeConnect(db_conn->hdbc);
+					 */
 					goto try_and_get_another_connection;
 				}
 			}

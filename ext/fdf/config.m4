@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.14 2001/08/30 16:29:36 sniper Exp $
+dnl $Id: config.m4,v 1.15 2001/09/05 13:18:05 sniper Exp $
 
 PHP_ARG_WITH(fdftk, for fdftk support,
 [  --with-fdftk[=DIR]      Include fdftk support])
@@ -19,7 +19,7 @@ if test "$PHP_FDFTK" != "no"; then
   
   FDFLIBRARY=""
   for i in fdftk FdfTk; do
-    AC_CHECK_LIB($i, FDFOpen, [FDFLIBRARY=$i], [], [-L$FDFTK_DIR/lib -lm])
+    PHP_CHECK_LIBRARY($i, FDFOpen, [FDFLIBRARY=$i], [], [-L$FDFTK_DIR/lib -lm])
   done
   
   if test -z "$FDFLIBRARY"; then

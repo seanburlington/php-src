@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.8 2001/08/06 15:40:47 sniper Exp $
+dnl $Id: config.m4,v 1.9 2001/09/05 13:18:05 sniper Exp $
 dnl config.m4 for extension CURL
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -43,7 +43,7 @@ if test "$PHP_CURL" != "no"; then
   PHP_EVAL_LIBLINE($CURL_LIBS, CURL_SHARED_LIBADD)
   PHP_ADD_LIBRARY_WITH_PATH(curl, $CURL_DIR/lib, CURL_SHARED_LIBADD)
 
-  AC_CHECK_LIB(curl,curl_easy_perform, 
+  PHP_CHECK_LIBRARY(curl,curl_easy_perform, 
   [ 
     AC_DEFINE(HAVE_CURL,1,[ ])
   ],[

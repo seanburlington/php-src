@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 2001/06/22 15:52:25 sniper Exp $
+dnl $Id: config.m4,v 1.7 2001/09/05 13:18:07 sniper Exp $
 
 PHP_ARG_WITH(sybase-ct, for Sybase-CT support,
 [  --with-sybase-ct[=DIR]  Include Sybase-CT support.  DIR is the Sybase home
@@ -34,6 +34,6 @@ if test "$PHP_SYBASE_CT" != "no"; then
     $SYBASE_CT_LIBS 
   ])
 
-  AC_CHECK_LIB(insck, insck__getVdate, [PHP_ADD_LIBRARY(insck,, SYBASE_CT_SHARED_LIBADD)],[],[-L$SYBASE_CT_LIBDIR])
-  AC_CHECK_LIB(insck, bsd_tcp,         [PHP_ADD_LIBRARY(insck,, SYBASE_CT_SHARED_LIBADD)],[],[-L$SYBASE_CT_LIBDIR])
+  PHP_CHECK_LIBRARY(insck, insck__getVdate, [PHP_ADD_LIBRARY(insck,, SYBASE_CT_SHARED_LIBADD)],[],[-L$SYBASE_CT_LIBDIR])
+  PHP_CHECK_LIBRARY(insck, bsd_tcp,         [PHP_ADD_LIBRARY(insck,, SYBASE_CT_SHARED_LIBADD)],[],[-L$SYBASE_CT_LIBDIR])
 fi

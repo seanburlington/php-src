@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.18 2001/05/12 09:13:39 sas Exp $
+dnl $Id: config.m4,v 1.19 2001/09/05 13:18:06 sniper Exp $
 dnl 
 
 PHP_ARG_WITH(mcrypt, for mcrypt support,
@@ -17,12 +17,12 @@ if test "$PHP_MCRYPT" != "no"; then
     AC_MSG_ERROR(mcrypt.h not found. Please reinstall libmcrypt.)
   fi
 
-  AC_CHECK_LIB(mcrypt, mcrypt_module_open, 
+  PHP_CHECK_LIBRARY(mcrypt, mcrypt_module_open, 
   [
     PHP_ADD_LIBRARY(ltdl,, MCRYPT_SHARED_LIBADD)
     AC_DEFINE(HAVE_LIBMCRYPT24,1,[ ])
   ],[
-    AC_CHECK_LIB(mcrypt, init_mcrypt, 
+    PHP_CHECK_LIBRARY(mcrypt, init_mcrypt, 
     [
       AC_DEFINE(HAVE_LIBMCRYPT22,1,[ ])
     ],[

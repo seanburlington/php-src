@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 2001/08/09 21:53:49 eriksson Exp $
+dnl $Id: config.m4,v 1.5 2001/09/05 13:18:06 sniper Exp $
 dnl vim: syntax=config
 
 dnl My first config.m4 - now much improved... :-)
@@ -68,9 +68,9 @@ if test "$PHP_SATELLITE" != "no"; then
 	SATELLITE_CONFIG(libIDL, $ORBIT_PATH/bin, , [Please (re)install libIDL])
 	
 	dnl check for symbol giop_skip_atexit in libIIOP
-	AC_CHECK_LIB(IIOP, giop_skip_atexit, [true], [
+	PHP_CHECK_LIBRARY(IIOP, giop_skip_atexit, [], [
 		AC_MSG_ERROR([You need a CVS version of ORBit, please read ext/satellite/README])
-		], "$ORBIT_LIBS" )
+	], "$ORBIT_LIBS" )
 
   AC_DEFINE(HAVE_SATELLITE,1,[ ])
 fi

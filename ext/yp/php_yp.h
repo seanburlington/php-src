@@ -26,7 +26,7 @@
    | Authors: Stephanie Wehner <_@r4k.net>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_yp.h,v 1.1 1999/12/04 19:16:10 sas Exp $ */ 
+/* $Id: php_yp.h,v 1.2 1999/12/15 03:45:59 evan Exp $ */ 
 
 #ifndef _PHP_YP_H
 #define _PHP_YP_H
@@ -49,7 +49,7 @@ PHP_FUNCTION(yp_master);
 PHP_FUNCTION(yp_match);
 PHP_FUNCTION(yp_first);
 PHP_FUNCTION(yp_next);
-void php3_info_yp(ZEND_MODULE_INFO_FUNC_ARGS);
+PHP_MINFO_FUNCTION(yp);
 
 #else
 

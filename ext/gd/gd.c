@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.6 2002/12/10 17:57:54 iliaa Exp $ */
+/* $Id: gd.c,v 1.221.2.7 2002/12/11 23:30:23 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -188,7 +188,7 @@ function_entry gd_functions[] = {
 #ifdef HAVE_GD_XBM
 	PHP_FE(imagecreatefromxbm,						NULL)
 #endif
-#ifdef HAVE_GD_XPM
+#if defined(HAVE_GD_XPM) && defined(HAVE_GD_BUNDLED)
 	PHP_FE(imagecreatefromxpm,						NULL)
 #endif
 	PHP_FE(imagecreatefromgd,						NULL)
@@ -1358,7 +1358,7 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 			case PHP_GDIMG_TYPE_GD2PART:
 				im = (*func_p)(fp, Z_LVAL_PP(srcx), Z_LVAL_PP(srcy), Z_LVAL_PP(width), Z_LVAL_PP(height));
 				break;
-#ifdef HAVE_GD_XPM
+#if defined(HAVE_GD_XPM) && defined(HAVE_GD_BUNDLED)
 			case PHP_GDIMG_TYPE_XPM:
 				im = gdImageCreateFromXpm(fn);
 				break;
@@ -1425,7 +1425,7 @@ PHP_FUNCTION(imagecreatefromxbm)
 /* }}} */
 #endif /* HAVE_GD_XBM */
 
-#ifdef HAVE_GD_XPM
+#if defined(HAVE_GD_XPM) && defined(HAVE_GD_BUNDLED)
 /* {{{ proto int imagecreatefromxpm(string filename)
    Create a new image from XPM file or URL */
 PHP_FUNCTION(imagecreatefromxpm)

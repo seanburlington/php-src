@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.43 2002/04/24 18:00:39 sniper Exp $
+dnl $Id: config.m4,v 1.44 2002/04/25 21:07:36 edink Exp $
 dnl
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
@@ -23,6 +23,7 @@ AC_DEFUN(PHP_MYSQL_SOCK,[
   for i in  \
       /var/run/mysqld/mysqld.sock \
       /var/tmp/mysql.sock \
+      /var/run/mysql/mysql.sock \
       /var/lib/mysql/mysql.sock \
       /var/mysql/mysql.sock \
       /Private/tmp/mysql.sock \

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.44 2004/04/16 15:46:41 john Exp $ */
+/* $Id: tidy.c,v 1.45 2004/04/16 18:55:19 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -955,7 +955,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.44 2004/04/16 15:46:41 john Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.45 2004/04/16 18:55:19 derick Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1344,8 +1344,8 @@ PHP_FUNCTION(tidy_getopt)
 
 TIDY_DOC_METHOD(__construct)
 {
-	char *inputfile, *enc = NULL;
-	int input_len, enc_len = 0;
+	char *inputfile = NULL, *enc = NULL;
+	int input_len = 0, enc_len = 0;
 	zend_bool use_include_path = 0;
 	char *contents;
 	zval *options = NULL;

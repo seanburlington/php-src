@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.298 2001/01/17 01:10:50 elixer Exp $ */
+/* $Id: basic_functions.c,v 1.299 2001/01/17 20:37:48 elixer Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -719,7 +719,7 @@ PHP_MINIT_FUNCTION(basic)
 	PHP_MINIT(pack)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(browscap)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(lcg)(INIT_FUNC_ARGS_PASSTHRU);
-#ifdef ZTS
+#if defined(HAVE_LOCALECONV) && defined(ZTS)
 	PHP_MINIT(localeconv)(INIT_FUNC_ARGS_PASSTHRU);
 #endif
 
@@ -778,7 +778,7 @@ PHP_MSHUTDOWN_FUNCTION(basic)
 	PHP_MSHUTDOWN(url_scanner_ex)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #endif
 	PHP_MSHUTDOWN(file)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
-#ifdef ZTS
+#if defined(HAVE_LOCALECONV) && defined(ZTS)
 	PHP_MSHUTDOWN(localeconv)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #endif
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.34 2001/01/17 01:10:50 elixer Exp $ */
+/* $Id: php_string.h,v 1.35 2001/01/17 20:37:49 elixer Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -84,7 +84,7 @@ PHP_FUNCTION(strcoll);
 #endif
 
 
-#ifdef ZTS
+#if defined(HAVE_LOCALECONV) && defined(ZTS)
 PHP_MINIT_FUNCTION(localeconv);
 PHP_MSHUTDOWN_FUNCTION(localeconv);
 #endif

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.69 1999/05/31 17:40:15 zeev Exp $ */
+/* $Id: main.c,v 1.70 1999/05/31 19:58:20 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -606,8 +606,11 @@ static void php_message_handler_for_zend(long message, void *data)
 				}
 			}
 			break;
-		case ZMSG_LOG_SCRIPT_NAME:
-			fprintf(stderr, "Script:  '%s'\n", SG(request_info).path_translated);
+		case ZMSG_LOG_SCRIPT_NAME: {
+				SLS_FETCH();
+
+				fprintf(stderr, "Script:  '%s'\n", SG(request_info).path_translated);
+			}
 			break;
 	}
 }

@@ -23,7 +23,7 @@
  */
 
 
-/* $Id: hg_comm.h,v 1.3 1999/08/05 16:25:10 steinm Exp $ */
+/* $Id: hg_comm.h,v 1.4 1999/08/06 10:41:58 steinm Exp $ */
 
 #ifndef _HG_COMM_H
 #define _HG_COMM_H
@@ -36,7 +36,7 @@
 #define F_DISTRIBUTED 0x80000000
 #define F_COMPRESSED  0x40000000
 #define F_VERSION     0x00003fff
-#define HW_VERSION       717L     /* 7.17 */
+#define HW_VERSION    717L     /* 7.17 */
 
 #define HEADER_LENGTH 12
 

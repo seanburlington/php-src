@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.102 2000/06/04 08:29:11 stas Exp $ */
+/* $Id: php.h,v 1.103 2000/06/08 06:16:22 sas Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -35,15 +35,15 @@
 #include "php_compat.h"
 
 /* automake defines PACKAGE and VERSION for Zend too */
-#ifdef PACKAGE
-# undef PACKAGE
-#endif
-#ifdef VERSION
-# undef VERSION
-#endif
+#undef PACKAGE
+#undef VERSION
 
 #include "zend_API.h"
 
+#if PHP_BROKEN_SPRINTF
+#undef sprintf
+#define sprintf php_sprintf
+#endif
 
 extern unsigned char first_arg_force_ref[];   
 extern unsigned char first_arg_allow_ref[];

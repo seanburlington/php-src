@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.21 2000/10/27 19:10:21 sterling Exp $ */
+/* $Id: curl.c,v 1.22 2000/11/05 16:25:26 stas Exp $ */
 
 
 #include "php.h"
@@ -534,6 +534,10 @@ PHP_FUNCTION(curl_setopt)
 					SEPARATE_ZVAL(current);
 					convert_to_string_ex(current);
 					
+					if (Z_STRLEN_PP(current) < 1) {
+						continue;
+					}
+
 					indiv_command = estrndup(Z_STRVAL_PP(current), Z_STRLEN_PP(current));
 					commands = curl_slist_append(commands, indiv_command);
 					if (!commands) {

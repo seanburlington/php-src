@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.35.2.1 2002/12/13 02:14:23 ssb Exp $
+// $Id: Config.php,v 1.35.2.2 2002/12/22 01:43:20 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'System.php';
@@ -149,7 +149,7 @@ if (isset($_ENV['PHP_PEAR_UMASK'])) {
 if (isset($_ENV['PHP_PEAR_CACHE_TTL'])) {
     define('PEAR_CONFIG_DEFAULT_CACHE_TTL', $_ENV['PHP_PEAR_CACHE_TTL']);
 } else {
-    define('PEAR_CONFIG_DEFAULT_CACHE_TTL', 0);
+    define('PEAR_CONFIG_DEFAULT_CACHE_TTL', 3600);
 }
 
 // Default for sig_type

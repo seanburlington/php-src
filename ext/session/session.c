@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.226 2001/08/03 08:51:53 sas Exp $ */
+/* $Id: session.c,v 1.227 2001/08/03 10:39:48 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -296,6 +296,8 @@ PS_SERIALIZER_ENCODE_FUNC(php_binary)
 			smart_str_appendc(&buf, (unsigned char) (key_length & PS_BIN_UNDEF));
 			smart_str_appendl(&buf, key, key_length);
 	);
+	
+	smart_str_0(&buf);
 
 	if (newlen) *newlen = buf.len;
 	*newstr = buf.c;
@@ -363,6 +365,8 @@ PS_SERIALIZER_ENCODE_FUNC(php)
 			smart_str_appendl(&buf, key, key_length);
 			smart_str_appendc(&buf, PS_DELIMITER);
 	);
+	
+	smart_str_0(&buf);
 
 	if (newlen) *newlen = buf.len;
 	*newstr = buf.c;

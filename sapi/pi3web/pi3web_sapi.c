@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.21 2001/07/21 12:23:23 holger Exp $ */
+/* $Id: pi3web_sapi.c,v 1.22 2001/07/21 14:27:56 zeev Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -78,7 +78,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.21 2001/07/21 12:23:23 holger Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.22 2001/07/21 14:27:56 zeev Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -382,63 +382,65 @@ DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 	ELS_FETCH();
 	PLS_FETCH();
 
-	if (setjmp( EG(bailout)) != 0 ) return PIAPI_ERROR;
+	zend_try {
+		file_handle.filename = lpCB->lpszFileName;
+		file_handle.free_filename = 0;
+		file_handle.type = ZEND_HANDLE_FILENAME;
+		file_handle.opened_path = NULL;
 
-	file_handle.filename = lpCB->lpszFileName;
-	file_handle.free_filename = 0;
-	file_handle.type = ZEND_HANDLE_FILENAME;
-	file_handle.opened_path = NULL;
+		CG(extended_info) = 0;
+		init_request_info(sapi_globals, lpCB);
+		php_request_startup(CLS_C ELS_CC PLS_CC SLS_CC);
 
-	CG(extended_info) = 0;
-	init_request_info(sapi_globals, lpCB);
-	php_request_startup(CLS_C ELS_CC PLS_CC SLS_CC);
+		hash_pi3web_variables(ELS_C SLS_CC);
 
-	hash_pi3web_variables(ELS_C SLS_CC);
-
-	switch ( lpCB->dwBehavior ) {
-		case PHP_MODE_STANDARD:
-			iRet = ( php_execute_script( &file_handle CLS_CC ELS_CC PLS_CC ) == SUCCESS ) ?
-				PIAPI_COMPLETED : PIAPI_ERROR;
-			break;
-		case PHP_MODE_HIGHLIGHT: {
-			zend_syntax_highlighter_ini syntax_highlighter_ini;
-			if ( open_file_for_scanning( &file_handle CLS_CC ) == SUCCESS )
-				{
-				php_get_highlight_struct( &syntax_highlighter_ini );
-				zend_highlight( &syntax_highlighter_ini );
-				}
-			else
-				{
-				iRet = PIAPI_ERROR;
+		switch ( lpCB->dwBehavior ) {
+			case PHP_MODE_STANDARD:
+				iRet = ( php_execute_script( &file_handle CLS_CC ELS_CC PLS_CC ) == SUCCESS ) ?
+					PIAPI_COMPLETED : PIAPI_ERROR;
+				break;
+			case PHP_MODE_HIGHLIGHT: {
+				zend_syntax_highlighter_ini syntax_highlighter_ini;
+				if ( open_file_for_scanning( &file_handle CLS_CC ) == SUCCESS )
+					{
+					php_get_highlight_struct( &syntax_highlighter_ini );
+					zend_highlight( &syntax_highlighter_ini );
+					}
+				else
+					{
+					iRet = PIAPI_ERROR;
+					};
 				};
-			};
-			break;
-		case PHP_MODE_INDENT:
-			header_line = (char *)estrdup("Content-Type: text/plain");
-			sapi_add_header_ex(header_line, strlen(header_line), 1, 1);
-			if ( open_file_for_scanning( &file_handle CLS_CC ) == SUCCESS )
-				{
-				zend_indent();
-				}
-			else
-				{
-				iRet = PIAPI_ERROR;
-				};
-			efree(header_line);
-			break;
-		case PHP_MODE_LINT:
-			iRet = (php_lint_script(&file_handle CLS_CC ELS_CC PLS_CC) == SUCCESS) ?
-				PIAPI_COMPLETED : PIAPI_ERROR;
-			break;
-		default:
-			iRet = PIAPI_ERROR;;
-		}
+				break;
+			case PHP_MODE_INDENT:
+				header_line = (char *)estrdup("Content-Type: text/plain");
+				sapi_add_header_ex(header_line, strlen(header_line), 1, 1);
+				if ( open_file_for_scanning( &file_handle CLS_CC ) == SUCCESS )
+					{
+					zend_indent();
+					}
+				else
+					{
+					iRet = PIAPI_ERROR;
+					};
+				efree(header_line);
+				break;
+			case PHP_MODE_LINT:
+				iRet = (php_lint_script(&file_handle CLS_CC ELS_CC PLS_CC) == SUCCESS) ?
+					PIAPI_COMPLETED : PIAPI_ERROR;
+				break;
+			default:
+				iRet = PIAPI_ERROR;;
+			}
 
-	if (SG(request_info).cookie_data) {
-		efree(SG(request_info).cookie_data);
-	};
+		if (SG(request_info).cookie_data) {
+			efree(SG(request_info).cookie_data);
+		};
 
-	php_request_shutdown(NULL);
+		php_request_shutdown(NULL);
+	} zend_catch {
+		iRet = PIAPI_ERROR;
+	} zend_end_try();
 	return iRet;
 }
 

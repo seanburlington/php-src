@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.358 2001/07/09 17:36:03 rasmus Exp $ */
+/* $Id: basic_functions.c,v 1.359 2001/07/21 14:27:54 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1889,21 +1889,12 @@ void php_call_shutdown_functions(void)
 	BLS_FETCH();
 	ELS_FETCH();
 
-	if (BG(user_shutdown_function_names)) {
-		jmp_buf orig_bailout;
-
-		memcpy(&orig_bailout, &EG(bailout), sizeof(jmp_buf));
-		if (setjmp(EG(bailout))!=0) {
-			/* one of the shutdown functions bailed out */
-			memcpy(&EG(bailout), &orig_bailout, sizeof(jmp_buf));
-			return;
-		}
-		zend_hash_apply(BG(user_shutdown_function_names),
-						(apply_func_t)user_shutdown_function_call);
+	if (BG(user_shutdown_function_names)) zend_try {
+		zend_hash_apply(BG(user_shutdown_function_names), (apply_func_t)user_shutdown_function_call);
 		memcpy(&EG(bailout), &orig_bailout, sizeof(jmp_buf));
 		zend_hash_destroy(BG(user_shutdown_function_names));
 		efree(BG(user_shutdown_function_names));
-	}
+	} zend_end_try();
 }
 
 /* {{{ proto void register_shutdown_function(string function_name)

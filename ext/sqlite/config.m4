@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2003/04/17 01:29:45 wez Exp $
+dnl $Id: config.m4,v 1.1.1.1 2003/04/17 01:29:45 wez Exp $
 dnl config.m4 for extension sqlite
 
 PHP_ARG_WITH(sqlite, for sqlite support,

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.3 2000/06/10 03:35:56 sas Exp $ */
+/* $Id: php_yaz.c,v 1.4 2000/06/16 18:23:57 hholzgra Exp $ */
 
 #include "php.h"
 
@@ -1296,7 +1296,7 @@ static void retval_grs1 (zval *return_value, Z_GenericRecord *p)
 				eno[level]++;
 			continue;
 		}
-		// eno[level]++;
+		/* eno[level]++; */
 
 		*tag = '\0';
 		for (i = 0; i<=level; i++)

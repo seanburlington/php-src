@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dav.c,v 1.20 2000/06/05 19:47:40 andi Exp $ */
+/* $Id: dav.c,v 1.21 2000/06/16 18:23:56 hholzgra Exp $ */
 
 #define IS_EXT_MODULE
 #ifdef COMPILE_DL_DAV
@@ -34,6 +34,8 @@
 #endif
 
 #if HAVE_MOD_DAV
+
+#error The DAV support in PHP needs to be completely rewritten.  Everything has changed
 
 # include "mod_dav.h"
 #include "ext/standard/info.h"

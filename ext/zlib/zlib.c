@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.45 2000/06/05 19:47:46 andi Exp $ */
+/* $Id: zlib.c,v 1.46 2000/06/16 18:23:57 hholzgra Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -822,12 +822,14 @@ PHP_FUNCTION(gzuncompress)
 		WRONG_PARAM_COUNT;                                         
 	}
 	convert_to_string_ex(data);
-	
-	// zlib::uncompress() wants to know the output data length
-	// if none was given as a parameter
-	// we try from input length * 2 up to input length * 2^8
-	// doubling it whenever it wasn't big enough
-	// that should be eneugh for all real life cases	
+
+	/*
+	 zlib::uncompress() wants to know the output data length
+	 if none was given as a parameter
+	 we try from input length * 2 up to input length * 2^8
+	 doubling it whenever it wasn't big enough
+	 that should be eneugh for all real life cases	
+	*/
 	do {
 		length=plength?plength:(*data)->value.str.len*(1<<factor++);
 		s2 = (char *) erealloc(s1,length);

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.17 2000/06/15 23:45:03 andi Exp $ */
+/* $Id: cpdf.c,v 1.18 2000/06/16 18:23:56 hholzgra Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -360,7 +360,7 @@ PHP_FUNCTION(cpdf_set_viewer_preferences) {
 		RETURN_FALSE;
 	}
 
-//	cpdf_setViewerPreferences(pdf, pagemode, 0, 0, 0, 0, 0, 0, pagemode);
+/*	cpdf_setViewerPreferences(pdf, pagemode, 0, 0, 0, 0, 0, 0, pagemode); */
 
 	RETURN_TRUE;
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.37 2003/11/25 16:05:18 iliaa Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.38 2003/11/28 17:39:25 rrichards Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -4015,6 +4015,7 @@ static xmlDocPtr domxml_document_parser(int mode, int loadtype, char *source, vo
 	ctxt->replaceEntities = substitute_ent;
 
 	if (data != NULL) {
+		ctxt->_private = data;
  		errorCtxt.valid = &ctxt->vctxt;
 		errorCtxt.errors = data;
 		errorCtxt.parser = ctxt;   

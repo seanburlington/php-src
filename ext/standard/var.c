@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.178 2003/12/28 21:56:15 derick Exp $ */
+/* $Id: var.c,v 1.179 2004/01/03 13:51:02 derick Exp $ */
 
 
 /* {{{ includes 
@@ -310,12 +310,24 @@ static int php_array_element_export(zval **zv, int num_args, va_list args, zend_
 static int php_object_element_export(zval **zv, int num_args, va_list args, zend_hash_key *hash_key)
 {
 	int level;
+	char *prop_name, *class_name;
 	TSRMLS_FETCH();
 
 	level = va_arg(args, int);
 
 	if (hash_key->nKeyLength != 0) {
-		php_printf("%*cvar $%s = ", level + 1, ' ', hash_key->arKey);
+		php_printf("%*c", level + 1, ' ');
+		zend_unmangle_property_name(hash_key->arKey, &class_name, &prop_name);
+		if (class_name) {
+			if (class_name[0] == '*') {
+				php_printf("protected");
+			} else {
+				php_printf("private");
+			}
+		} else {
+			php_printf("public");
+		}
+		php_printf(" $%s = ", prop_name);
 		php_var_export(zv, level + 2 TSRMLS_CC);
 		PUTS (";\n");
 	}

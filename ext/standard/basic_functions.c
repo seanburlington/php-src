@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.650 2003/12/27 21:10:28 helly Exp $ */
+/* $Id: basic_functions.c,v 1.651 2004/01/03 13:51:02 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2564,7 +2564,7 @@ PHP_FUNCTION(print_r)
 		php_start_ob_buffer (NULL, 0, 1 TSRMLS_CC);
 	}
 
-	zend_print_pval_r(var, 0 TSRMLS_CC);
+	zend_print_zval_r(var, 0 TSRMLS_CC);
 
 	if (i) {
 		php_ob_get_buffer (return_value TSRMLS_CC);

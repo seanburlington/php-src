@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.77.2.1 2002/03/21 16:53:06 daniela Exp $ */
+/* $Id: interbase.c,v 1.77.2.2 2002/04/04 20:13:41 daniela Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -382,12 +382,17 @@ static void _php_ibase_close_plink(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 /* {{{ _php_ibase_free_result() */
 static void _php_ibase_free_result(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
+	char tr_items[] = {isc_info_tra_id };
+	char tmp[32]; /* should be enough as on the Api doc */
+
 	ibase_result *ib_result = (ibase_result *)rsrc->ptr;
 
 	IBDEBUG("Freeing result...");
 	if (ib_result){
 		_php_ibase_free_xsqlda(ib_result->out_sqlda);
-		if (ib_result->drop_stmt && ib_result->stmt) {
+		isc_transaction_info(IB_STATUS, &ib_result->trans,sizeof(tr_items), tr_items, sizeof(tmp), tmp );
+		/* we have a transaction still open and we really want to drop the statement ? */
+		if ( !(IB_STATUS[0] && IB_STATUS[1])  && ib_result->drop_stmt && ib_result->stmt ) {
 			IBDEBUG("Dropping statement handle (free_result)...");
 			if (isc_dsql_free_statement(IB_STATUS, &ib_result->stmt, DSQL_drop)) {
 				_php_ibase_error();
@@ -415,6 +420,8 @@ static void _php_ibase_free_result(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 /* {{{ _php_ibase_free_query() */
 static void _php_ibase_free_query(ibase_query *ib_query)
 {
+	char tr_items[] = {isc_info_tra_id };
+	char tmp[32] ; /* ...should be enough as on the Api doc */
 	TSRMLS_FETCH();
 
 	IBDEBUG("Freeing query...");
@@ -425,7 +432,9 @@ static void _php_ibase_free_query(ibase_query *ib_query)
 		if (ib_query->out_sqlda) {
 			efree(ib_query->out_sqlda);
 		}
-		if (ib_query->stmt) {
+		isc_transaction_info(IB_STATUS, &ib_query->trans,sizeof(tr_items), tr_items, sizeof(tmp), tmp );
+		/* we have the trans still open and a statement to drop? */
+		if ( !(IB_STATUS[0] && IB_STATUS[0])  &&  ib_query->stmt) {
 			IBDEBUG("Dropping statement handle (free_query)...");
 			if (isc_dsql_free_statement(IB_STATUS, &ib_query->stmt, DSQL_drop)){
 				_php_ibase_error();
@@ -594,7 +603,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.77.2.1 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.77.2.2 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

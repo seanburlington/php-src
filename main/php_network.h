@@ -15,7 +15,7 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.6 2001/05/05 18:36:20 wez Exp $ */
+/* $Id: php_network.h,v 1.7 2001/05/05 22:36:26 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -35,6 +35,10 @@
 
 #ifdef HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
+#endif
+
+#ifdef HAVE_SYS_TIME_H
+#include <sys/time.h>
 #endif
 
 

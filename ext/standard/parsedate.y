@@ -8,7 +8,7 @@
 **  This code is in the public domain and has no copyright.
 */
 
-/* $Id: parsedate.y,v 1.52 2004/03/01 10:42:27 moriyoshi Exp $ */
+/* $Id: parsedate.y,v 1.53 2004/03/02 13:12:44 derick Exp $ */
 
 #include "php.h"
 
@@ -391,6 +391,7 @@ iso8601datetime: iso8601date tTZONE iso8601time
 			((struct date_yy *)parm)->yyMonth = 1;
 		}
 	}
+	;
 
 iso8601date: tUNUMBER tSNUMBER tSNUMBER {
 	    /* ISO 8601 format.  yyyy-mm-dd.  */

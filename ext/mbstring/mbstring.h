@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.h,v 1.14.2.1 2002/03/31 00:19:17 hirokawa Exp $ */
+/* $Id: mbstring.h,v 1.14.2.2 2002/07/02 15:27:07 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -116,6 +116,8 @@ PHP_FUNCTION(mb_ereg_search_setpos);
 #define PHP_MBREGEX_MAXCACHE 50
 int php_mbregex_name2mbctype(const char *pname);
 #endif
+
+char *mbstr_strrchr(const char *s, char c);
 
 ZEND_BEGIN_MODULE_GLOBALS(mbstring)
 	int language;

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.240 2001/05/06 23:16:33 ssb Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.241 2001/05/08 20:11:46 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -589,9 +589,9 @@ PHP_ARG_ENABLE(short-tags,whether to enable short tags by default,
 [  --disable-short-tags    Disable the short-form <? start tag by default.],yes)
 
 if test "$PHP_SHORT_TAGS" = "yes"; then
-  AC_DEFINE(DEFAULT_SHORT_OPEN_TAG,1,[ ])
+  AC_DEFINE(DEFAULT_SHORT_OPEN_TAG,"1",[ ])
 else
-  AC_DEFINE(DEFAULT_SHORT_OPEN_TAG,0,[ ])
+  AC_DEFINE(DEFAULT_SHORT_OPEN_TAG,"0",[ ])
 fi
 
 

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.28 1999/11/13 12:48:57 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.29 1999/11/13 12:51:25 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -641,7 +641,7 @@ AC_ARG_ENABLE(thread-safety,
     TSRM_LIB='TSRM/libtsrm.la'
     TSRM_DIR=TSRM
     AC_DEFINE(ZTS)
-    INCLUDES="$INCLUDES -I$\(top_builddir)/TSRM"
+    INCLUDES="$INCLUDES -I\$(top_builddir)/TSRM"
     CPPFLAGS="$CPPFLAGS -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS"
     AC_MSG_RESULT(yes)
   else

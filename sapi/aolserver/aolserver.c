@@ -21,7 +21,7 @@
  * - write documentation
  */
 
-/* $Id: aolserver.c,v 1.6 1999/10/07 21:23:55 sas Exp $ */
+/* $Id: aolserver.c,v 1.7 1999/10/07 21:47:39 sas Exp $ */
 
 /* conflict between PHP and AOLserver */
 #define Debug php_Debug
@@ -264,7 +264,6 @@ php_ns_module_main(NSLS_D SLS_DC)
 	php_request_startup(CLS_C ELS_CC PLS_CC SLS_CC);
 	php_ns_hash_environment(NSLS_C CLS_CC ELS_CC PLS_CC SLS_CC);
 	php_execute_script(&file_handle CLS_CC ELS_CC PLS_CC);
-	php_request_shutdown(NULL);
 
 	return NS_OK;
 }
@@ -336,8 +335,6 @@ php_ns_request_handler(void *context, Ns_Conn *conn)
 	
 	php_ns_request_dtor(NSLS_C SLS_CC);
 
-	ts_free_thread();
-	
 	return status;
 }
 

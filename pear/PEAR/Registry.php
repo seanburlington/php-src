@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.35.2.6.2.1 2003/06/24 01:59:18 sas Exp $
+// $Id: Registry.php,v 1.35.2.6.2.2 2003/06/25 15:06:51 mj Exp $
 
 /*
 TODO:
@@ -155,23 +155,7 @@ class PEAR_Registry extends PEAR
      */
     function _packageFileName($package)
     {
-        if (is_file("{$this->statedir}/{$package}.reg")) {
-            return "{$this->statedir}/{$package}.reg";
-        }
-        /**
-         * Iterate through the directory to find the matching
-         * registry file, even if it has been provided in
-         * another case (foobar vs. FooBar)
-         */
-        $package = strtolower($package);
-        if ($handle = opendir($this->statedir)) {
-            while (false !== ($file = readdir($handle))) {
-               if (strtolower($file) == $package . ".reg") {
-                   return "{$this->statedir}/{$file}";
-               }
-            }
-            closedir($handle);
-        }
+        return "{$this->statedir}/{$package}.reg";
     }
 
     // }}}

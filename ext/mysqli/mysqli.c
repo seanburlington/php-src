@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.43.2.7 2004/12/03 07:57:39 georg Exp $ 
+  $Id: mysqli.c,v 1.43.2.8 2004/12/04 09:01:33 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -179,11 +179,6 @@ zval *mysqli_read_property(zval *object, zval *member, int type TSRMLS_DC)
 	ret = FAILURE;
 	obj = (mysqli_object *)zend_objects_get_address(object TSRMLS_CC);
 
-	if (!obj->valid) {
-		retval = EG(uninitialized_zval_ptr);
-		return(retval);
-	}
-
  	if (member->type != IS_STRING) {
 		tmp_member = *member;
 		zval_copy_ctor(&tmp_member);
@@ -223,6 +218,7 @@ zval *mysqli_read_property(zval *object, zval *member, int type TSRMLS_DC)
 	} else {
 		std_hnd = zend_get_std_object_handlers();
 		retval = std_hnd->read_property(object, member, type TSRMLS_CC);
+		retval->refcount = 1;
 	}
 
 	if (member == &tmp_member) {

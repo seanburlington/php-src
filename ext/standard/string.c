@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.137 2000/07/18 20:40:23 zeev Exp $ */
+/* $Id: string.c,v 1.138 2000/07/20 23:08:26 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -552,6 +552,8 @@ PHPAPI void php_dirname(char *str, int len) {
 #endif
 		)
 		*c='\0';
+	else
+		*str='\0';
 }
 
 /* {{{ proto string dirname(string path)
@@ -567,7 +569,11 @@ PHP_FUNCTION(dirname)
 	convert_to_string_ex(str);
 	ret = estrdup((*str)->value.str.val);
 	php_dirname(ret,(*str)->value.str.len);
-	RETVAL_STRING(ret,1);
+	if(*ret) {
+		RETVAL_STRING(ret,1);
+	} else { 
+		RETVAL_FALSE;
+	}
 	efree(ret);
 }
 /* }}} */

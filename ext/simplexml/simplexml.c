@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.93 2003/12/16 20:34:18 helly Exp $ */
+/* $Id: simplexml.c,v 1.94 2003/12/16 20:40:24 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -283,9 +283,9 @@ static void sxe_prop_dim_write(zval *object, zval *member, zval *value, zend_boo
 	zval            tmp_zv, trim_zv;
 
 	if (!member) {
-		/* this happens when the user did: $sxe[] = $value
-		 * and could also be E_PARSE, but use this only during parsing
-		 * but this is during runtime.
+		/* This happens when the user did: $sxe[] = $value
+		 * and could also be E_PARSE, but we use this only during parsing
+		 * and this is during runtime.
 		 */
 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Cannot create unnamed attribute");
 		return;
@@ -1587,7 +1587,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.93 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.94 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

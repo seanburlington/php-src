@@ -17,20 +17,10 @@
 // | Authors: Dietrich Ayala <dietrich@ganx4.com> Original Author         |
 // +----------------------------------------------------------------------+
 //
-// $Id: server_round2_groupB.php,v 1.4 2004/01/09 14:56:24 dmitry Exp $
+// $Id: server_round2_groupB.php,v 1.5 2004/01/28 13:36:31 dmitry Exp $
 //
 
 class SOAP_Interop_GroupB {
-    var $method_namespace = 'http://soapinterop.org/';
-    var $dispatch_map = array();
-
-    function SOAP_Interop_GroupB() {
-      $this->dispatch_map['echoStructAsSimpleTypes'] =
-        array('in' => array('inputStruct' => 'SOAPStruct'),
-              'out' => array('outputString' => 'string', 'outputInteger' => 'int', 'outputFloat' => 'float')
-             );
-
-    }
 
     function echoStructAsSimpleTypes ($struct)
     {
@@ -53,7 +43,6 @@ class SOAP_Interop_GroupB {
 
     function echo2DStringArray($ary)
     {
-//      $ret->options['flatten'] = TRUE;
       return $ary;
     }
 

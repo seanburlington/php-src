@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.15 2005/01/21 00:39:03 wez Exp $ */
+/* $Id: firebird_driver.c,v 1.16 2005/02/06 22:31:56 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -259,7 +259,7 @@ static long firebird_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len T
 
 /* called by the PDO SQL parser to add quotes to values that are copied into SQL */
 static int firebird_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, /* {{{ */
-	char **quoted, int *quotedlen TSRMLS_DC)
+	char **quoted, int *quotedlen, enum pdo_param_type paramtype TSRMLS_DC)
 {
 	int qcount = 0;
 	char const *c;

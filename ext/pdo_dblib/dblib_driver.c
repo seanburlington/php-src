@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_driver.c,v 1.6 2005/01/21 00:39:03 wez Exp $ */
+/* $Id: dblib_driver.c,v 1.7 2005/02/06 22:28:50 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -133,7 +133,7 @@ static long dblib_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRM
 	return DBCOUNT(H->link);
 }
 
-static int dblib_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen  TSRMLS_DC)
+static int dblib_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen, enum pdo_param_type paramtype TSRMLS_DC)
 {
 	pdo_dblib_db_handle *H = (pdo_dblib_db_handle *)dbh->driver_data;
 	char *q;

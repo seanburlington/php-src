@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_stmt.c,v 1.3 2005/01/18 07:17:01 fmk Exp $ */
+/* $Id: dblib_stmt.c,v 1.4 2005/02/06 22:28:50 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -223,7 +223,7 @@ static int pdo_dblib_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC)
 }
 
 static int pdo_dblib_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr,
-	 unsigned long *len TSRMLS_DC)
+	 unsigned long *len, int *caller_frees TSRMLS_DC)
 {
 	pdo_dblib_stmt *S = (pdo_dblib_stmt*)stmt->driver_data;
 	pdo_dblib_colval *val = &S->rows[S->current] + colno;

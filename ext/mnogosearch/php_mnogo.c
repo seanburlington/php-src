@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.7 2001/02/05 13:12:15 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.8 2001/02/05 15:15:08 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -72,17 +72,20 @@ static int le_link,le_res;
 function_entry mnogosearch_functions[] = {
 	PHP_FE(udm_alloc_agent,		NULL)
 	PHP_FE(udm_set_agent_param,	NULL)
+	
 	PHP_FE(udm_add_search_limit,	NULL)
-	PHP_FE(udm_free_agent,		NULL)
-
+	PHP_FE(udm_clear_search_limits,	NULL)
+	
 	PHP_FE(udm_errno,		NULL)
 	PHP_FE(udm_error,		NULL)
 
 	PHP_FE(udm_find,		NULL)
-	PHP_FE(udm_free_res,		NULL)
-	PHP_FE(udm_get_res_field,	NULL)
 	PHP_FE(udm_get_res_param,	NULL)
-
+	PHP_FE(udm_get_res_field,	NULL)
+	
+	PHP_FE(udm_free_res,		NULL)
+	PHP_FE(udm_free_agent,		NULL)
+	
 	{NULL, NULL, NULL}
 };
 
@@ -430,6 +433,32 @@ DLEXPORT PHP_FUNCTION(udm_add_search_limit)
 			RETURN_FALSE;
 			break;
 	}
+	RETURN_TRUE;
+}
+/* }}} */
+
+
+/* {{{ proto int udm_clear_search_limits(int agent)
+   Clear all mnoGoSearch search restrictions */
+DLEXPORT PHP_FUNCTION(udm_clear_search_limits)
+{
+	pval ** yyagent;
+	UDM_AGENT * Agent;
+	switch(ZEND_NUM_ARGS()){
+		case 1: {
+				if (zend_get_parameters_ex(1, &yyagent)==FAILURE) {
+					RETURN_FALSE;
+				}
+			}
+			break;
+		default:
+			WRONG_PARAM_COUNT;
+			break;
+	}
+	ZEND_FETCH_RESOURCE(Agent, UDM_AGENT *, yyagent, -1, "mnoGoSearch-Agent", le_link);
+	
+	UdmClearLimits(Agent->Conf);
+	
 	RETURN_TRUE;
 }
 /* }}} */

@@ -1,6 +1,6 @@
 <!-- 
     $Source: /repository/php-src/ext/mnogosearch/Attic/test.php,v $
-    $Id: test.php,v 1.5 2001/02/05 13:12:15 gluke Exp $ 
+    $Id: test.php,v 1.6 2001/02/05 15:15:08 gluke Exp $ 
 -->
 
 <html>
@@ -43,6 +43,8 @@
 //	Udm_Add_Search_Limit($udm,UDM_LIMIT_TAG,"01");
 //	Udm_Add_Search_Limit($udm,UDM_LIMIT_CAT,"01");
 //	Udm_Add_Search_Limit($udm,UDM_LIMIT_LANG,"en");
+
+//      Udm_Clear_Search_Limits($udm);
 	
 // Stage 4: perform search 
 

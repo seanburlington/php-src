@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.154.2.6 2001/10/11 23:51:25 ssb Exp $ */
+/* $Id: gd.c,v 1.154.2.7 2001/10/24 10:43:26 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -2760,11 +2760,10 @@ static void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode, int 
 	}
 	else
 # endif
+
 # if HAVE_GD_STRINGFT
 	error = gdImageStringFT(im, brect, col, fontname, ptsize, angle, x, y, str);
-# endif
-
-# if HAVE_GD_STRINGTTF
+# elif HAVE_GD_STRINGTTF
 	error = gdImageStringTTF(im, brect, col, fontname, ptsize, angle, x, y, str);
 # endif
 

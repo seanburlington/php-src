@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.3 1999/09/28 12:55:49 ssb Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.4 1999/10/07 21:04:26 sas Exp $ -*- sh -*-
 
 dnl AC_MSG_CHECKING(for Zeus ISAPI support)
 dnl AC_ARG_WITH(zeus,
@@ -18,7 +18,7 @@ dnl 		fi
 dnl 		AC_DEFINE(WITH_ZEUS)
 dnl 		AC_ADD_INCLUDE($zeuspath/web/include)
 dnl 		PHP_SAPI=isapi
-dnl 		SAPI_TARGET=php4isapi.so
+dnl 		PHP_BUILD_SHARED
 dnl 	else
 dnl 		AC_MSG_RESULT(no)
 dnl 	fi

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.261 2003/02/10 15:46:47 jon Exp $ */
+/* $Id: pgsql.c,v 1.262 2003/02/20 07:10:07 sniper Exp $ */
 
 #include <stdlib.h>
 
@@ -2204,7 +2204,7 @@ PHP_FUNCTION(pg_lo_seek)
 
 	ZEND_FETCH_RESOURCE(pgsql, pgLofp *, &pgsql_id, -1, "PostgreSQL large object", le_lofp);
 
-	if (lo_lseek((PGconn *)pgsql->conn, pgsql->lofd, offset, whence )) {
+	if (lo_lseek((PGconn *)pgsql->conn, pgsql->lofd, offset, whence ) > -1) {
 		RETURN_TRUE;
 	} else {
 		RETURN_FALSE;

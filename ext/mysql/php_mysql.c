@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.82 2001/05/05 01:42:15 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.83 2001/05/05 11:11:32 sas Exp $ */
 
 
 /* TODO:
@@ -331,6 +331,7 @@ PHP_RINIT_FUNCTION(mysql)
 
 PHP_RSHUTDOWN_FUNCTION(mysql)
 {
+	MySLS_FETCH();
 	if (MySG(connect_error)!=NULL) {
 		efree(MySG(connect_error));
 	}

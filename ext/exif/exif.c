@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.118.2.24 2003/09/07 23:50:25 helly Exp $ */
+/* $Id: exif.c,v 1.118.2.25 2003/09/22 23:28:07 iliaa Exp $ */
 
 /*  ToDos
  *
@@ -99,7 +99,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.24 2003/09/07 23:50:25 helly Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.25 2003/09/22 23:28:07 iliaa Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -243,10 +243,10 @@ static const char * EXIF_ERROR_CORRUPT   = "File structure corrupted";
 static const char * EXIF_ERROR_THUMBEOF  = "Thumbnail goes IFD boundary or end of file reached";
 static const char * EXIF_ERROR_FSREALLOC = "Illegal reallocating of undefined file section";
 
-#define EXIF_ERRLOG_FILEEOF    php_error_docref(NULL TSRMLS_CC, E_WARNING, EXIF_ERROR_FILEEOF);
-#define EXIF_ERRLOG_CORRUPT    php_error_docref(NULL TSRMLS_CC, E_WARNING, EXIF_ERROR_CORRUPT);
-#define EXIF_ERRLOG_THUMBEOF   php_error_docref(NULL TSRMLS_CC, E_WARNING, EXIF_ERROR_THUMBEOF);
-#define EXIF_ERRLOG_FSREALLOC  php_error_docref(NULL TSRMLS_CC, E_WARNING, EXIF_ERROR_FSREALLOC);
+#define EXIF_ERRLOG_FILEEOF    php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", EXIF_ERROR_FILEEOF);
+#define EXIF_ERRLOG_CORRUPT    php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", EXIF_ERROR_CORRUPT);
+#define EXIF_ERRLOG_THUMBEOF   php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", EXIF_ERROR_THUMBEOF);
+#define EXIF_ERRLOG_FSREALLOC  php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", EXIF_ERROR_FSREALLOC);
 /* }}} */
 
 /* {{{ format description defines

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.57 1999/05/13 15:54:47 zeev Exp $ */
+/* $Id: main.c,v 1.58 1999/05/20 19:06:28 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -576,17 +576,13 @@ static void php_message_handler_for_zend(long message, void *data)
 				if (EG(error_reporting)&E_WARNING) {
 #if ZEND_DEBUG
 					mem_header *t = (mem_header *) data;
-#	if APACHE  /* log into the errorlog, since at this time we can't send messages to the browser */
 					char memory_leak_buf[512];
 
-					snprintf(memory_leak_buf,512,"Possible PHP4 memory leak detected (harmless):  0x%0.8lX, %d bytes from %s:%d", (long) t, t->size, t->filename, t->lineno);
-#		if MODULE_MAGIC_NUMBER >= 19970831
-					aplog_error(NULL, 0, APLOG_ERR | APLOG_NOERRNO, ((request_rec *) SG(server_context))->server, memory_leak_buf);
-#		else
-					log_error(memory_leak_buf, ((request_rec *) SG(server_context))->server);
-#		endif
+					snprintf(memory_leak_buf, 512, "Freeing 0x%0.8X (%d bytes), allocated in %s on line %d<br>\n",(void *)((char *)t+sizeof(mem_header)+PLATFORM_PADDING),t->size,t->filename,t->lineno);
+#	if WIN32||WINNT
+					OutputDebugString(memory_leak_buf);
 #	else
-					php3_printf("Freeing 0x%0.8X (%d bytes), allocated in %s on line %d<br>\n",(void *)((char *)t+sizeof(mem_header)+PLATFORM_PADDING),t->size,t->filename,t->lineno);
+					fprintf(stderr, memory_leak_buf);
 #	endif
 #endif
 				}

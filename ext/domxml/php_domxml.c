@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.193 2002/08/15 12:43:43 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.194 2002/08/15 13:26:32 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -3329,7 +3329,7 @@ PHP_FUNCTION(domxml_doc_create_element_ns)
 }
 /* }}} */
 
-/* {{{ proto object domxml_node_add_namespace(string uri, string prefix)
+/* {{{ proto bool domxml_node_add_namespace(string uri, string prefix)
    Adds a namespace declaration to a node */
 PHP_FUNCTION(domxml_node_add_namespace)
 {
@@ -3350,7 +3350,7 @@ PHP_FUNCTION(domxml_node_add_namespace)
 }
 /* }}} */
 
-/* {{{ proto object domxml_node_set_namespace(string uri [, string prefix])
+/* {{{ proto void domxml_node_set_namespace(string uri [, string prefix])
    Sets the namespace of a node */
 PHP_FUNCTION(domxml_node_set_namespace)
 {

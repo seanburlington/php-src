@@ -1,3 +1,21 @@
+2004-12-02  Antony Dovgal  <tony2001@phpclub.net>
+
+    * ext/standard/array.c:
+      revert my previous patch as it breaks more than fixes
+
+    * ext/dom/tests/bug28721.phpt
+      ext/dom/tests/dom004.phpt
+      ext/dom/tests/dom_xinclude.phpt:
+      fix tests
+
+2004-12-02  Stefan Esser  <sesser@suspekt.org>
+
+    * TSRM/tsrm_virtual_cwd.c:
+      Fixed: virtual_popen in ZTS mode
+
+    * TSRM/tsrm_virtual_cwd.c:
+      Partly reverted because of problems with some realpath() implementations
+
 2004-12-01  Stefan Esser  <sesser@suspekt.org>
 
     * (PHP_4_3)
@@ -13322,7 +13340,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1821 2004/12/02 01:33:30 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1822 2004/12/03 01:32:51 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

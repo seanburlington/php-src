@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.35 2002/01/11 21:15:46 jarkol Exp $ */
+/* $Id: php_domxml.h,v 1.36 2002/01/13 01:17:34 zenderx Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -31,6 +31,7 @@
 #endif
 #if defined(LIBXML_XPATH_ENABLED)
 #include <libxml/xpath.h>
+#include <libxml/xpathInternals.h>
 #endif
 #if defined(LIBXML_XPTR_ENABLED)
 #include <libxml/xpointer.h>
@@ -155,6 +156,7 @@ PHP_FUNCTION(xpath_init);
 PHP_FUNCTION(xpath_new_context);
 PHP_FUNCTION(xpath_eval);
 PHP_FUNCTION(xpath_eval_expression);
+PHP_FUNCTION(xpath_register_ns);
 #endif
 #if defined(LIBXML_XPTR_ENABLED)
 PHP_FUNCTION(xptr_new_context);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.18 2001/02/26 06:06:52 andi Exp $ */
+/* $Id: php_curl.h,v 1.19 2001/04/28 21:44:44 sterling Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -55,6 +55,7 @@ typedef struct {
 	int php_stdout;
 	int cerrno;
 	char error[CURL_ERROR_SIZE+1];
+	FILE *tmp_fp;
 	CURL *cp;
 	zend_llist to_free;
 } php_curl;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pspell.h,v 1.13 2004/01/08 17:32:42 sniper Exp $ */
+/* $Id: php_pspell.h,v 1.14 2004/02/11 18:50:16 bfrance Exp $ */
 
 #ifndef _PSPELL_H
 #define _PSPELL_H
@@ -41,6 +41,8 @@ PHP_FUNCTION(pspell_config_runtogether);
 PHP_FUNCTION(pspell_config_mode);
 PHP_FUNCTION(pspell_config_ignore);
 PHP_FUNCTION(pspell_config_personal);
+PHP_FUNCTION(pspell_config_dict_dir);
+PHP_FUNCTION(pspell_config_data_dir);
 PHP_FUNCTION(pspell_config_repl);
 PHP_FUNCTION(pspell_config_save_repl);
 #else

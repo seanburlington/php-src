@@ -1,5 +1,5 @@
 dnl $Source: /repository/php-src/ext/mnogosearch/Attic/config.m4,v $
-dnl $Id: config.m4,v 1.5 2001/02/14 14:39:39 gluke Exp $
+dnl $Id: config.m4,v 1.6 2001/02/14 20:10:14 jon Exp $
 
 PHP_ARG_WITH(mnogosearch,for mnoGoSearch support,
 [  --with-mnogosearch[=DIR]       Include mnoGoSearch support.  DIR is the mnoGoSearch base
@@ -21,7 +21,7 @@ PHP_ARG_WITH(mnogosearch,for mnoGoSearch support,
     
     if test -x "$MNOGOSEARCH_BINDIR/udm-config"; then
     	MNOGOSEARCH_VERSION=`$MNOGOSEARCH_BINDIR/udm-config --version`
-    	MNOGOSEARCH_VERSION_ID=`$MNOGOSEARCH_BINDIR/udm-config -version-id`
+    	MNOGOSEARCH_VERSION_ID=`$MNOGOSEARCH_BINDIR/udm-config --version-id`
 
 	if test $? -ne 0; then
 		AC_MSG_RESULT(<= 3.1.9)    

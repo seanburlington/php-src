@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.252 2000/05/23 10:36:18 thies Exp $ */
+/* $Id: main.c,v 1.253 2000/05/28 12:30:06 thies Exp $ */
 
 
 #include <stdio.h>
@@ -1156,17 +1156,21 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 		if (!strcmp(SG(request_info).query_string+1, PHP_LOGO_GUID)) {
 			sapi_add_header(CONTEXT_TYPE_IMAGE_GIF, sizeof(CONTEXT_TYPE_IMAGE_GIF)-1, 1);
 			PHPWRITE(php_logo, sizeof(php_logo));
+			zend_deactivate_modules();
 			return;
 		} else if (!strcmp(SG(request_info).query_string+1, PHP_EGG_LOGO_GUID)) {
 			sapi_add_header(CONTEXT_TYPE_IMAGE_GIF, sizeof(CONTEXT_TYPE_IMAGE_GIF)-1, 1);
 			PHPWRITE(php_egg_logo, sizeof(php_egg_logo));
+			zend_deactivate_modules();
 			return;
 		} else if (!strcmp(SG(request_info).query_string+1, ZEND_LOGO_GUID)) {
 			sapi_add_header(CONTEXT_TYPE_IMAGE_GIF, sizeof(CONTEXT_TYPE_IMAGE_GIF)-1, 1);
 			PHPWRITE(zend_logo, sizeof(zend_logo));
+			zend_deactivate_modules();
 			return;
 		} else if (!strcmp(SG(request_info).query_string+1, "PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000")) {
 			php_print_credits(PHP_CREDITS_ALL);
+			zend_deactivate_modules();
 			return;
 		}
 	}

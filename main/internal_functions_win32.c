@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.29 2000/05/18 15:34:21 zeev Exp $ */
+/* $Id: internal_functions_win32.c,v 1.30 2000/05/29 17:22:35 zeev Exp $ */
 
 
 #include "php.h"
@@ -43,7 +43,7 @@
 #include "ext/standard/php_dir.h"
 #include "ext/standard/php_filestat.h"
 #include "ext/standard/php_mail.h"
-#include "ext/standard/php_syslog.h"
+#include "ext/standard/php_ext_syslog.h"
 #include "ext/standard/php_standard.h"
 #include "ext/standard/php_lcg.h"
 #include "ext/standard/php_output.h"

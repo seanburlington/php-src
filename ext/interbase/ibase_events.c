@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_events.c,v 1.3 2004/02/02 13:47:56 abies Exp $ */
+/* $Id: ibase_events.c,v 1.4 2004/02/11 11:59:08 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,8 +36,8 @@ void _php_ibase_event_free(char *event_buf, char *result_buf) /* {{{ */
 }
 /* }}} */
 
-static void _php_ibase_event_block(ibase_db_link *ib_link, unsigned short count, char **events, 
-	unsigned short *l, char **event_buf, char **result_buf) /* {{{ */
+static void _php_ibase_event_block(ibase_db_link *ib_link, unsigned short count, /* {{{ */
+	char **events, unsigned short *l, char **event_buf, char **result_buf)
 {
 	ISC_STATUS dummy_result[20];
 	unsigned long dummy_count[15];
@@ -142,8 +142,8 @@ PHP_FUNCTION(ibase_wait_event)
 }
 /* }}} */
 
-static isc_callback _php_ibase_callback(ibase_event *event, 
-	unsigned short buffer_size, char *result_buf) /* {{{ */
+static isc_callback _php_ibase_callback(ibase_event *event, /* {{{ */
+	unsigned short buffer_size, char *result_buf)
 {
 	/* this function is called asynchronously by the Interbase client library. */
 	TSRMLS_FETCH_FROM_CTX(event->thread_ctx);
@@ -305,6 +305,7 @@ PHP_FUNCTION(ibase_set_event_handler)
 	ZEND_REGISTER_RESOURCE(return_value, event, le_event);
 	zend_list_addref(Z_LVAL_P(return_value));
 }
+/* }}} */
 
 /* {{{ proto bool ibase_free_event_handler(resource event)
    Frees the event handler set by ibase_set_event_handler() */

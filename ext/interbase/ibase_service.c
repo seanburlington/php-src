@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_service.c,v 1.5 2004/02/02 14:57:20 abies Exp $ */
+/* $Id: ibase_service.c,v 1.6 2004/02/11 11:59:08 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -255,8 +255,8 @@ PHP_FUNCTION(ibase_service_detach)
 }
 /* }}} */
 
-static void _php_ibase_service_query(INTERNAL_FUNCTION_PARAMETERS, 
-	ibase_service *svm, char info_action) /* {{{ */
+static void _php_ibase_service_query(INTERNAL_FUNCTION_PARAMETERS, /* {{{ */
+	ibase_service *svm, char info_action)
 {
 	static char spb[] = { isc_info_svc_timeout, 10, 0, 0, 0 };
 		
@@ -459,6 +459,7 @@ PHP_FUNCTION(ibase_backup)
 {
 	_php_ibase_backup_restore(INTERNAL_FUNCTION_PARAM_PASSTHRU, isc_action_svc_backup);
 }
+/* }}} */
 
 /* {{{ proto mixed ibase_restore(resource service_handle, string source_file, string dest_db [, int options [, bool verbose]])
    Initiates a restore task in the service manager and returns immediately */
@@ -595,6 +596,7 @@ PHP_FUNCTION(ibase_server_info)
 	_php_ibase_service_query(INTERNAL_FUNCTION_PARAM_PASSTHRU, svm, (char)action);
 }
 /* }}} */
+
 #endif /* HAVE_IBASE6_API */
         
 /*      

@@ -20,6 +20,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: streams.c,v 1.55 2002/06/11 18:55:48 mfischer Exp $ */
+
 #define _GNU_SOURCE
 #include "php.h"
 #include "php_globals.h"

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.54 2002/11/26 05:57:05 sniper Exp $ */
+/* $Id: roxen.c,v 1.55 2002/12/28 06:59:24 iliaa Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -438,7 +438,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.54 2002/11/26 05:57:05 sniper Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.55 2002/12/28 06:59:24 iliaa Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -473,7 +473,7 @@ static zend_module_entry php_roxen_module = {
 
 static int php_roxen_startup(sapi_module_struct *sapi_module)
 {
-  if(php_module_startup(sapi_module, &php_roxen_module) == FAILURE) {
+  if(php_module_startup(sapi_module, &php_roxen_module, 1) == FAILURE) {
     return FAILURE;
   } else {
     return SUCCESS;

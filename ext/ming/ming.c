@@ -15,7 +15,7 @@
    | Author: dave@opaque.net                                              |
    +----------------------------------------------------------------------+
    
-  $Id: ming.c,v 1.48 2003/07/02 02:03:59 iliaa Exp $ 
+  $Id: ming.c,v 1.49 2003/07/02 21:37:45 helly Exp $ 
 
 */
 
@@ -2386,7 +2386,7 @@ PHP_FUNCTION(swftext_addString)
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &s) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
-	if (!getFont(getText(getThis() TSRMLS_CC))) {
+	if (!getFont(getText(getThis() TSRMLS_CC) TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "You must specify a font before writing text.");
 		RETURN_FALSE;
 	}

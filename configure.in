@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.287 2002/01/09 03:40:51 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.288 2002/01/09 03:41:48 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -951,7 +951,8 @@ PHP_GEN_CONFIG_VARS
 $php_shtool mkdir -p pear/scripts
 ALL_OUTPUT_FILES="php4.spec Zend/Makefile main/build-defs.h \
 pear/scripts/pear pear/scripts/phpize pear/scripts/php-config \
-pear/scripts/pearize pear/scripts/phptar TSRM/Makefile $PHP_OUTPUT_FILES"
+pear/scripts/pearize pear/scripts/phptar pear/scripts/pear-get \
+TSRM/Makefile $PHP_OUTPUT_FILES"
 
 AC_OUTPUT($ALL_OUTPUT_FILES, [], [
 

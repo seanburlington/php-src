@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.1 2004/05/17 15:42:33 wez Exp $ */
+/* $Id: oci_driver.c,v 1.2 2004/05/18 05:01:16 gschlossnagle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -171,7 +171,7 @@ static int oci_handle_doer(pdo_dbh_t *dbh, const char *sql TSRMLS_DC)
 	return 0;
 }
 
-static int oci_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, char **quoted, int *quotedlen  TSRMLS_DC)
+static int oci_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen  TSRMLS_DC)
 {
 	pdo_oci_db_handle *H = (pdo_oci_db_handle *)dbh->driver_data;
 

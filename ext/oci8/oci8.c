@@ -22,7 +22,7 @@
 
 #define OCI_USE_EMALLOC 0		/* set this to 1 if you want to use the php memory manager! */
 
-/* $Id: oci8.c,v 1.27 1999/09/17 08:25:03 thies Exp $ */
+/* $Id: oci8.c,v 1.28 1999/09/28 11:12:32 thies Exp $ */
 
 /* TODO list:
  *
@@ -376,10 +376,16 @@ PHP_MINIT_FUNCTION(oci)
 	REGISTER_LONG_CONSTANT("OCI_D_LOB",OCI_DTYPE_LOB, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("OCI_D_ROWID",OCI_DTYPE_ROWID, CONST_CS | CONST_PERSISTENT);
 
-#if OCI_USE_EMALLOC
-    OCIInitialize(OCI_DEFAULT, NULL, ocimalloc, ocirealloc, ocifree);
+#ifdef ZTS 
+	#define PHP_OCI_INIT_MODE OCI_THREADED
 #else
-    OCIInitialize(OCI_DEFAULT, NULL, NULL, NULL, NULL);
+	#define PHP_OCI_INIT_MODE OCI_DEFAULT
+#endif
+
+#if OCI_USE_EMALLOC
+    OCIInitialize(PHP_OCI_INIT_MODE, NULL, ocimalloc, ocirealloc, ocifree);
+#else
+    OCIInitialize(PHP_OCI_INIT_MODE, NULL, NULL, NULL, NULL);
 #endif
 
 	return SUCCESS;

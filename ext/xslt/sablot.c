@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.30 2001/12/09 01:18:19 sterling Exp $ */
+/* $Id: sablot.c,v 1.31 2001/12/09 02:02:43 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -243,21 +243,21 @@ PHP_FUNCTION(xslt_set_sax_handlers)
 
 		/* Document handlers (document start, document end) */
 		if (strcasecmp(string_key, "document") == 0) {
-			SEPERATE_ZVAL(handler);
+			SEPARATE_ZVAL(handler);
 			register_sax_handler_pair(&XSLT_SAX(handle).doc_start, 
 			                          &XSLT_SAX(handle).doc_end, 
 			                          handler);
 		}
 		/* Element handlers, start of an element, and end of an element */
 		else if (strcasecmp(string_key, "element") == 0) {
-			SEPERATE_ZVAL(handler);
+			SEPARATE_ZVAL(handler);
 			register_sax_handler_pair(&XSLT_SAX(handle).element_start, 
 			                          &XSLT_SAX(handle).element_end, 
 			                          handler);
 		}
 		/* Namespace handlers, start of a namespace, end of a namespace */
 		else if (strcasecmp(string_key, "namespace") == 0) {
-			SEPERATE_ZVAL(handler);
+			SEPARATE_ZVAL(handler);
 			register_sax_handler_pair(&XSLT_SAX(handle).namespace_start, 
 			                          &XSLT_SAX(handle).namespace_end, 
 			                          handler);

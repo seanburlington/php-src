@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.35 2000/10/25 17:43:50 andrei Exp $ */
+/* $Id: fdf.c,v 1.36 2000/11/07 21:13:25 dbeu Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -32,6 +32,8 @@
 #include "SAPI.h"
 #include "ext/standard/head.h"
 #include "php_open_temporary_file.h"
+#include "php_variables.h"
+
 #include <math.h>
 #include "php_fdf.h"
 

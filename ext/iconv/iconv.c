@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.16 2001/06/06 13:05:45 rasmus Exp $ */
+/* $Id: iconv.c,v 1.17 2001/07/20 19:42:26 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -32,7 +32,7 @@
 #include "php_globals.h"
 #include "php_iconv.h"
 #include "ext/standard/info.h"
-#include "ext/standard/php_output.h"
+#include "main/php_output.h"
 #include "SAPI.h"
 #include "php_ini.h"
 

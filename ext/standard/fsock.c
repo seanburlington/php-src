@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.98 2002/07/13 09:26:36 sander Exp $ */
+/* $Id: fsock.c,v 1.99 2002/07/22 18:46:26 jason Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -194,7 +194,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		}
 		else
 #endif
-		stream = php_stream_sock_open_host(host, (unsigned short)port, socktype, (int)timeout, persistent);
+		stream = php_stream_sock_open_host(host, (unsigned short)port, socktype, &tv, persistent);
 
 #ifdef PHP_WIN32
 		/* Preserve error */

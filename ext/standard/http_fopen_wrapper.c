@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.36 2002/07/11 02:35:45 sniper Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.37 2002/07/22 18:46:26 jason Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -98,7 +98,7 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 	else if (resource->port == 0)
 		resource->port = 80;
 
-	stream = php_stream_sock_open_host(resource->host, resource->port, SOCK_STREAM, 0, 0);
+	stream = php_stream_sock_open_host(resource->host, resource->port, SOCK_STREAM, NULL, 0);
 	if (stream == NULL)	
 		goto out;
 

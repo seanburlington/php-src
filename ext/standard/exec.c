@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.77 2002/07/08 12:52:22 derick Exp $ */
+/* $Id: exec.c,v 1.78 2002/08/01 15:51:56 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -567,7 +567,7 @@ static void proc_open_rsrc_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 
 	do {
 		wait_pid = waitpid(child, &wstatus, 0);
-	} while (wait_pid == -1 && errno = EINTR);
+	} while (wait_pid == -1 && errno == EINTR);
 	
 	if (wait_pid == -1)
 		FG(pclose_ret) = -1;

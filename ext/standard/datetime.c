@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.82 2002/01/20 20:16:54 mfischer Exp $ */
+/* $Id: datetime.c,v 1.83 2002/03/04 11:11:25 stas Exp $ */
 
 
 #include "php.h"
@@ -184,7 +184,11 @@ void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gm)
 	    ** If correcting for daylight savings time, we set the adjustment to
 		** the value of timezone - 3600 seconds.
 	    */
+#ifdef __CYGWIN__
+	    gmadjust = -(is_dst ? _timezone - 3600 : _timezone);
+#else
 	    gmadjust = -(is_dst ? timezone - 3600 : timezone);
+#endif
 #endif
 		seconds += gmadjust;
 	}
@@ -251,7 +255,11 @@ php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 	} else {
 		ta = php_localtime_r(&the_time, &tmbuf);
 #if !HAVE_TM_GMTOFF
+#ifdef __CYGWIN__
+		tzone = _timezone;
+#else
 		tzone = timezone;
+#endif
 		tname[0] = tzname[0];
 #endif
 	}

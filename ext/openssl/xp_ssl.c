@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.5 2003/03/18 15:15:09 wez Exp $ */
+/* $Id: xp_ssl.c,v 1.6 2003/04/05 17:31:33 pollita Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -542,8 +542,6 @@ PHPAPI php_stream *php_openssl_ssl_socket_factory(const char *proto, long protol
 		sslsock->method = STREAM_CRYPTO_METHOD_TLS_CLIENT;
 	}
 
-printf("enable_on_connect = %d  --> proto %s\n", sslsock->enable_on_connect, proto);
-	
 	return stream;
 }
 

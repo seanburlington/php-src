@@ -21,7 +21,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.37 2000/02/15 20:06:53 chagenbu Exp $ */
+/* $Id: imap.c,v 1.38 2000/02/18 01:52:10 zeev Exp $ */
 
 #define IMAP41
 
@@ -838,7 +838,7 @@ void imap_do_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
    Open an IMAP stream to a mailbox */
 PHP_FUNCTION(imap_open)
 {
-	return imap_do_open(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+	imap_do_open(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 }
 /* }}} */
 
@@ -2583,6 +2583,7 @@ PHP_FUNCTION(imap_utf7_decode)
 			case ST_DECODE0:
 				state++;
 			case ST_NORMAL:
+				;
 			}
 		}
 	}
@@ -2639,6 +2640,7 @@ PHP_FUNCTION(imap_utf7_decode)
 				*outp++ |= UNB64(*inp);
 				state = ST_DECODE0;
 			case ST_NORMAL:
+				;
 			}
 		}
 	}
@@ -2765,6 +2767,7 @@ PHP_FUNCTION(imap_utf7_encode)
 				*outp++ = B64(*inp++);
 				state = ST_ENCODE0;
 			case ST_NORMAL:
+				;
 			}
 		}
 	}

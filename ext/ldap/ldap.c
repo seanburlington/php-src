@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.98 2001/09/25 22:48:37 jeroen Exp $ */
+/* $Id: ldap.c,v 1.99 2001/10/09 21:14:14 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -109,7 +109,11 @@ function_entry ldap_functions[] = {
 	PHP_FE(ldap_parse_reference,	third_argument_force_ref)
 	PHP_FE(ldap_rename,									NULL)
 #endif
-	
+
+#if LDAP_API_VERSION > 2000
+	PHP_FE(ldap_start_tls,								NULL)
+#endif
+
 #ifdef STR_TRANSLATION
 	PHP_FE(ldap_t61_to_8859,							NULL)
 	PHP_FE(ldap_8859_to_t61,							NULL)
@@ -251,7 +255,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.98 2001/09/25 22:48:37 jeroen Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.99 2001/10/09 21:14:14 venaas Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #ifdef LDAP_API_VERSION
@@ -1941,7 +1945,32 @@ PHP_FUNCTION(ldap_rename)
 /* }}} */
 #endif
 
-	  
+#if LDAP_API_VERSION > 2000
+/* {{{ proto int ldap_start_tls(int link)
+   Start TLS */
+PHP_FUNCTION(ldap_start_tls)
+{
+	pval **link;
+	LDAP *ldap;
+
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &link) == FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+
+	ZEND_FETCH_RESOURCE(ldap, LDAP *, link, -1, "ldap link", le_link);
+
+	if (ldap_start_tls_s(ldap, NULL, NULL) != LDAP_SUCCESS) {
+		php_error(E_WARNING,"LDAP:  Unable to start TLS: %s",
+				  ldap_err2string(_get_lderrno(ldap)));
+		RETURN_FALSE;
+	} else {
+		RETURN_TRUE;
+	}
+}
+/* }}} */
+#endif
+
+
 #ifdef STR_TRANSLATION
 /* {{{ php_ldap_do_translate
  */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ldap.h,v 1.18 2001/07/28 11:35:57 zeev Exp $ */
+/* $Id: php_ldap.h,v 1.19 2001/10/09 21:14:14 venaas Exp $ */
 
 #ifndef PHP_LDAP_H
 #define PHP_LDAP_H
@@ -86,6 +86,10 @@ PHP_FUNCTION(ldap_first_reference);
 PHP_FUNCTION(ldap_next_reference);
 PHP_FUNCTION(ldap_parse_reference);
 PHP_FUNCTION(ldap_rename);
+#endif
+
+#if LDAP_API_VERSION > 2000
+PHP_FUNCTION(ldap_start_tls);
 #endif
 
 #ifdef STR_TRANSLATION

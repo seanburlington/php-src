@@ -1,12 +1,12 @@
-dnl $Id: config.m4,v 1.1 2000/03/11 22:05:40 kk Exp $
+dnl $Id: config.m4,v 1.2 2000/03/26 19:47:25 sas Exp $
 dnl config.m4 for extension recode
 dnl don't forget to call PHP_EXTENSION(recode)
 
 
 AC_MSG_CHECKING(for recode support)
 AC_ARG_WITH(recode,
-[	 --with-recode[=DIR]	Include recode support.	 DIR is the recode
-													install directory.],
+[  --with-recode[=DIR]     Include recode support. DIR is the recode install
+                          directory.],
 [
 	if test "$withval" != "no"; then
 		RECODE_LIST="$withval /usr /usr/local /opt"

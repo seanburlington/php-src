@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.12 2000/03/13 05:58:50 rasmus Exp $
+dnl $Id: config.m4,v 1.13 2000/03/26 19:47:25 sas Exp $
 
 AC_MSG_CHECKING(whether to include Pdflib 3.x support)
 AC_ARG_WITH(pdflib,
@@ -74,7 +74,7 @@ echo $withval
         ]) 
 
         AC_ARG_WITH(png-dir,
-        [  --with-png-dir[=DIR]   png dir for pdflib 3.x],[
+        [  --with-png-dir[=DIR]    png dir for pdflib 3.x],[
           if test -z $withval; then
             withval="/usr/local"
           fi

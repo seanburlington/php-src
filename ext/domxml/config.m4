@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.8 2000/03/15 15:08:08 steinm Exp $
+dnl $Id: config.m4,v 1.9 2000/03/26 19:47:24 sas Exp $
 
 AC_MSG_CHECKING(whether to include DOM support)
 AC_ARG_WITH(dom,
-[  --with-dom[=DIR]       Include DOM support (requires libxml >= 1.0).
+[  --with-dom[=DIR]        Include DOM support (requires libxml >= 1.0).
                           DIR is the libxml install directory,
                           defaults to /usr.],
 [

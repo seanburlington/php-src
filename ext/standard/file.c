@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.361 2003/10/04 21:06:29 moriyoshi Exp $ */
+/* $Id: file.c,v 1.362 2003/10/05 13:59:15 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1714,7 +1714,7 @@ PHPAPI PHP_FUNCTION(fread)
 # define _php_mblen(ptr, len) 1
 #else
 # if defined(_REENTRANT) && defined(HAVE_MBRLEN) && defined(HAVE_MBSTATE_T)
-#  define _php_mblen(ptr, len) (ptr == NULL ? mbsinit(&BG(mblen_state)): (int)mbrlen(ptr, len, &BG(mblen_state)))
+#  define _php_mblen(ptr, len) ((ptr) == NULL ? mbsinit(&BG(mblen_state)): (int)mbrlen(ptr, len, &BG(mblen_state)))
 # else
 #  define _php_mblen(ptr, len) mblen(ptr, len)
 # endif

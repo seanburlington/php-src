@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.41 2002/03/23 05:29:09 imajes Exp $
+// $Id: Installer.php,v 1.42 2002/04/02 09:21:48 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -171,6 +171,7 @@ class PEAR_Installer extends PEAR_Common
         // recognized options:
         // - register_only : update registry but don't install files
         // - upgrade       : upgrade existing install
+        // - soft          : fail silently
         //
         if (empty($this->registry)) {
             $this->registry = new PEAR_Registry($this->phpdir);
@@ -182,6 +183,9 @@ class PEAR_Installer extends PEAR_Common
         } elseif (!@is_file($pkgfile)) {
             if (preg_match('/^[A-Z][A-Za-z0-9_]+$/', $pkgfile)) {
                 // valid package name
+                if ($this->registry->packageExists($pkgfile)) {
+                    return $this->raiseError("$pkgfile already installed");
+                }
                 if ($config === null) {
                     $pkgfile = "http://pear.php.net/get/$pkgfile";
                 } else {
@@ -291,7 +295,9 @@ class PEAR_Installer extends PEAR_Common
         if (isset($pkginfo['release_deps']) && !isset($options['nodeps'])) {
             $error = $this->checkDeps($pkginfo);
             if ($error) {
-                $this->log(0, $error);
+                if (empty($options['soft'])) {
+                    $this->log(0, $error);
+                }
                 return $this->raiseError('Dependencies failed');
             }
         }

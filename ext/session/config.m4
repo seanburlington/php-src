@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.9 2000/05/02 04:01:15 sas Exp $
+dnl $Id: config.m4,v 1.10 2001/03/27 20:34:42 sniper Exp $
 
 PHP_ARG_WITH(mm,for mm support,
 [  --with-mm[=DIR]         Include mm support for session storage])
@@ -20,8 +20,8 @@ if test "$PHP_MM" != "no"; then
     AC_MSG_ERROR(cannot find mm library)
   fi
   
-  AC_ADD_LIBRARY_WITH_PATH(mm, $MM_DIR/lib, SESSION_SHARED_LIBADD)
-  AC_ADD_INCLUDE($MM_DIR/include)
+  PHP_ADD_LIBRARY_WITH_PATH(mm, $MM_DIR/lib, SESSION_SHARED_LIBADD)
+  PHP_ADD_INCLUDE($MM_DIR/include)
   AC_DEFINE(HAVE_LIBMM, 1, [Whether you have libmm])
   PHP_MODULE_PTR(phpext_ps_mm_ptr)
 fi

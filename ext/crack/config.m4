@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2000/12/02 11:59:20 sasha Exp $
+dnl $Id: config.m4,v 1.2 2001/03/27 20:34:23 sniper Exp $
 
 PHP_ARG_WITH(crack, whether to include crack support,
 [  --with-crack[=DIR]      Include crack support.])
@@ -22,8 +22,8 @@ if test "$PHP_CRACK" != "no"; then
 		AC_MSG_ERROR(Cannot find a cracklib header file)
 	fi
 
-    AC_ADD_INCLUDE($CRACK_INCLUDEDIR)
-	AC_ADD_LIBRARY_WITH_PATH(crack, $CRACK_LIBDIR)
+    PHP_ADD_INCLUDE($CRACK_INCLUDEDIR)
+	PHP_ADD_LIBRARY_WITH_PATH(crack, $CRACK_LIBDIR)
 
 	PHP_EXTENSION(crack, $ext_shared)
 

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 2001/02/23 16:49:58 sas Exp $
+dnl $Id: config.m4,v 1.4 2001/03/27 20:34:26 sniper Exp $
 dnl config.m4 for extension fribidi
 dnl don't forget to call PHP_EXTENSION(fribidi)
 
@@ -61,9 +61,9 @@ dnl $PHP_FRIBIDI will be "yes"
     AC_MSG_RESULT([yes])
    
 
-    AC_ADD_INCLUDE("$FRIBIDI_INCDIR")
-    AC_ADD_INCLUDE("$GLIB_INCDIR")
-    AC_ADD_LIBRARY_WITH_PATH(fribidi,"$FRIBIDI_LIBDIR", FRIBIDI_SHARED_LIBADD)
+    PHP_ADD_INCLUDE("$FRIBIDI_INCDIR")
+    PHP_ADD_INCLUDE("$GLIB_INCDIR")
+    PHP_ADD_LIBRARY_WITH_PATH(fribidi,"$FRIBIDI_LIBDIR", FRIBIDI_SHARED_LIBADD)
     PHP_SUBST(FRIBIDI_SHARED_LIBADD)
 
     AC_DEFINE(HAVE_FRIBIDI, 1, [ ])

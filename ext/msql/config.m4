@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.7 2000/05/23 23:24:04 sas Exp $
+dnl $Id: config.m4,v 1.8 2001/03/27 20:34:33 sniper Exp $
 
 dnl
 dnl Test mSQL version by checking if msql.h has "IDX_TYPE" defined.
@@ -31,8 +31,8 @@ PHP_ARG_WITH(msql,for mSQL support,
       MSQL_INCDIR=$PHP_MSQL/include
       MSQL_LIBDIR=$PHP_MSQL/lib
     fi
-    AC_ADD_LIBRARY_WITH_PATH(msql, $MSQL_LIBDIR, MSQL_SHARED_LIBADD)
-    AC_ADD_INCLUDE($MSQL_INCDIR)
+    PHP_ADD_LIBRARY_WITH_PATH(msql, $MSQL_LIBDIR, MSQL_SHARED_LIBADD)
+    PHP_ADD_INCLUDE($MSQL_INCDIR)
     AC_DEFINE(HAVE_MSQL,1,[ ])
     PHP_SUBST(MSQL_SHARED_LIBADD)
     PHP_EXTENSION(msql,$ext_shared)

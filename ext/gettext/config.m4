@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 2000/05/23 22:26:51 sas Exp $
+dnl $Id: config.m4,v 1.6 2001/03/27 20:34:27 sniper Exp $
 dnl config.m4 for extension gettext
 dnl don't forget to call PHP_EXTENSION(gettext)
 
@@ -34,8 +34,8 @@ if test "$PHP_GETTEXT" != "no"; then
   PHP_SUBST(GETTEXT_SHARED_LIBADD)
 
   if test -n "$GETTEXT_LIBS"; then
-    AC_ADD_LIBRARY_WITH_PATH($GETTEXT_LIBS, $GETTEXT_LIBDIR, GETTEXT_SHARED_LIBADD)
+    PHP_ADD_LIBRARY_WITH_PATH($GETTEXT_LIBS, $GETTEXT_LIBDIR, GETTEXT_SHARED_LIBADD)
   fi
 
-  AC_ADD_INCLUDE($GETTEXT_INCDIR)
+  PHP_ADD_INCLUDE($GETTEXT_INCDIR)
 fi

@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.7 2000/06/18 15:30:55 sas Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.8 2001/03/27 20:34:46 sniper Exp $ -*- sh -*-
 
 AC_MSG_CHECKING(for NSAPI support)
 AC_ARG_WITH(nsapi,
@@ -23,7 +23,7 @@ if test "$PHP_NSAPI" != "no"; then
   else
     AC_MSG_ERROR(Please check you have nsapi.h in either DIR/include or DIR/plugins/include)
   fi
-  AC_ADD_INCLUDE($NSAPI_INCLUDE)
+  PHP_ADD_INCLUDE($NSAPI_INCLUDE)
   PHP_BUILD_THREAD_SAFE
   AC_DEFINE(HAVE_NSAPI,1,[Whether you have a Netscape Server])
   PHP_SAPI=nsapi

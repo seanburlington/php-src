@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2001/03/02 14:36:29 zeev Exp $
+dnl $Id: config.m4,v 1.2 2001/03/27 20:34:24 sniper Exp $
 dnl config.m4 for extension cybermut
 
 
@@ -37,10 +37,10 @@ if test "$PHP_CYBERMUT" != "no"; then
   AC_MSG_RESULT(linking libcm-mac.a with libcybermut.a)
   ln -sf $CYBERMUT_LIB_DIR/libcm-mac.a $CYBERMUT_LIB_DIR/libcybermut.a
 
-  AC_ADD_INCLUDE($CYBERMUT_INC_DIR)
+  PHP_ADD_INCLUDE($CYBERMUT_INC_DIR)
  
   PHP_SUBST(CYBERMUT_SHARED_LIBADD)
-  AC_ADD_LIBRARY_WITH_PATH(cybermut, $CYBERMUT_LIB_DIR, CYBERMUT_SHARED_LIBADD)
+  PHP_ADD_LIBRARY_WITH_PATH(cybermut, $CYBERMUT_LIB_DIR, CYBERMUT_SHARED_LIBADD)
 
   AC_DEFINE(HAVE_CYBERMUT, 1, [ ])                                                 
 

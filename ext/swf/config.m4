@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.9 2000/10/09 19:10:39 andrei Exp $
+dnl $Id: config.m4,v 1.10 2001/03/27 20:34:43 sniper Exp $
 dnl config.m4 for extension libswf
 
 PHP_ARG_WITH(swf, for libswf support,
@@ -24,10 +24,10 @@ if test "$PHP_SWF" != "no"; then
    libswf.a should be in <swf-dir>/lib)
   fi
 
-  AC_ADD_INCLUDE($SWF_DIR/include)
+  PHP_ADD_INCLUDE($SWF_DIR/include)
 
   PHP_SUBST(SWF_SHARED_LIBADD)
-  AC_ADD_LIBRARY_WITH_PATH(swf, $SWF_DIR/lib, SWF_SHARED_LIBADD)
+  PHP_ADD_LIBRARY_WITH_PATH(swf, $SWF_DIR/lib, SWF_SHARED_LIBADD)
   AC_DEFINE(HAVE_SWF,1,[ ])
 
   PHP_EXTENSION(swf, $ext_shared)

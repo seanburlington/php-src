@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 2001/01/23 21:46:03 bbonev Exp $
+dnl $Id: config.m4,v 1.5 2001/03/27 20:34:44 sniper Exp $
 dnl config.m4 for extension vpopmail
 
 PHP_ARG_WITH(vpopmail, for vpopmail support,
@@ -38,10 +38,10 @@ if test "$PHP_VPOPMAIL" != "no"; then
 
 	AC_MSG_RESULT($VPOPMAIL_DIR)
 
-	AC_ADD_INCLUDE($VPOPMAIL_INC_DIR)
+	PHP_ADD_INCLUDE($VPOPMAIL_INC_DIR)
 
 	PHP_SUBST(VPOPMAIL_SHARED_LIBADD)
-	AC_ADD_LIBRARY_WITH_PATH(vpopmail, $VPOPMAIL_LIB_DIR, VPOPMAIL_SHARED_LIBADD)
+	PHP_ADD_LIBRARY_WITH_PATH(vpopmail, $VPOPMAIL_LIB_DIR, VPOPMAIL_SHARED_LIBADD)
 
 	AC_DEFINE(HAVE_VPOPMAIL,1,[Whether you have vpopmail])
 	AC_DEFINE_UNQUOTED(VPOPMAIL_BIN_DIR,"$VPOPMAIL_BIN_DIR",[vpopmail bin path])

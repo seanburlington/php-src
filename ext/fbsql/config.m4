@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 2001/03/13 22:50:02 sniper Exp $
+dnl $Id: config.m4,v 1.5 2001/03/27 20:34:25 sniper Exp $
 
 PHP_ARG_WITH(fbsql, for FrontBase SQL92 (fbsql) support,
 [  --with-fbsql[=DIR]      Include FrontBase support. DIR is the FrontBase base
@@ -36,6 +36,6 @@ if test "$PHP_FBSQL" != "no"; then
      AC_MSG_ERROR(Could not find $FBSQL_INSTALLATION_DIR/lib/libFBCAccess.a)
   fi
 
-  AC_ADD_LIBRARY_WITH_PATH(FBCAccess, $FBSQL_INSTALLATION_DIR/lib, $FBSQL_INSTALLATION_DIR/lib)
-  AC_ADD_INCLUDE($FBSQL_INSTALLATION_DIR/include)
+  PHP_ADD_LIBRARY_WITH_PATH(FBCAccess, $FBSQL_INSTALLATION_DIR/lib, $FBSQL_INSTALLATION_DIR/lib)
+  PHP_ADD_INCLUDE($FBSQL_INSTALLATION_DIR/include)
 fi

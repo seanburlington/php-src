@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.20 2001/02/19 16:31:17 sas Exp $
+dnl $Id: config.m4,v 1.21 2001/03/27 20:34:40 sniper Exp $
 
 AC_DEFUN(PGSQL_INC_CHK,[if test -r $i$1/libpq-fe.h; then PGSQL_DIR=$i; PGSQL_INCDIR=$i$1])
 
@@ -9,7 +9,7 @@ PHP_ARG_WITH(pgsql,for PostgreSQL support,
                           to build as a dl and still specify DIR.])
 
 if test "$PHP_PGSQL" != "no"; then
-  AC_EXPAND_PATH($PHP_PGSQL, PHP_PGSQL)
+  PHP_EXPAND_PATH($PHP_PGSQL, PHP_PGSQL)
   for i in /usr /usr/local /usr/local/pgsql $PHP_PGSQL; do
     PGSQL_INC_CHK(/include)
     el[]PGSQL_INC_CHK(/include/pgsql)
@@ -37,7 +37,7 @@ if test "$PHP_PGSQL" != "no"; then
   
   AC_DEFINE(HAVE_PGSQL,1,[ ])
 
-  AC_ADD_LIBRARY_WITH_PATH(pq, $PGSQL_LIBDIR, PGSQL_SHARED_LIBADD)
+  PHP_ADD_LIBRARY_WITH_PATH(pq, $PGSQL_LIBDIR, PGSQL_SHARED_LIBADD)
   
   PHP_EXTENSION(pgsql,$ext_shared)
 fi

@@ -1,5 +1,5 @@
 dnl $Source: /repository/php-src/ext/mnogosearch/Attic/config.m4,v $
-dnl $Id: config.m4,v 1.6 2001/02/14 20:10:14 jon Exp $
+dnl $Id: config.m4,v 1.7 2001/03/27 20:34:33 sniper Exp $
 
 PHP_ARG_WITH(mnogosearch,for mnoGoSearch support,
 [  --with-mnogosearch[=DIR]       Include mnoGoSearch support.  DIR is the mnoGoSearch base
@@ -40,7 +40,7 @@ PHP_ARG_WITH(mnogosearch,for mnoGoSearch support,
 	AC_MSG_ERROR(udm-config script not found in $MNOGOSEARCH_BINDIR)
     fi
     
-    AC_ADD_INCLUDE($MNOGOSEARCH_INCDIR)
+    PHP_ADD_INCLUDE($MNOGOSEARCH_INCDIR)
     
     AC_DEFINE(HAVE_MNOGOSEARCH,1,[ ])
     

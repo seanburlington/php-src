@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 2000/08/31 15:10:15 henot Exp $
+dnl $Id: config.m4,v 1.5 2001/03/27 20:34:29 sniper Exp $
 dnl config.m4 for extension ingres_ii
 
 PHP_ARG_WITH(ingres, for Ingres II support,
@@ -28,9 +28,9 @@ if test "$PHP_INGRES" != "no"; then
     AC_MSG_ERROR(Cannot find libiiapi.a under $II_DIR/lib)
   fi
 
-  AC_ADD_LIBRARY_WITH_PATH(iiapi, $II_LIB_DIR, II_SHARED_LIBADD)
-  AC_ADD_LIBRARY_WITH_PATH(ingres, $II_LIB_DIR, II_SHARED_LIBADD)
+  PHP_ADD_LIBRARY_WITH_PATH(iiapi, $II_LIB_DIR, II_SHARED_LIBADD)
+  PHP_ADD_LIBRARY_WITH_PATH(ingres, $II_LIB_DIR, II_SHARED_LIBADD)
 
-  AC_ADD_INCLUDE($II_INC_DIR)
+  PHP_ADD_INCLUDE($II_INC_DIR)
 fi
 PHP_SUBST(II_SHARED_LIBADD)

@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.9 2001/03/19 11:23:57 joosters Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.10 2001/03/27 20:34:46 sniper Exp $ -*- sh -*-
 
 RESULT=no
 AC_MSG_CHECKING(for Zeus ISAPI support)
@@ -13,7 +13,7 @@ AC_ARG_WITH(isapi,
 	test -f "$ZEUSPATH/web/include/httpext.h" || AC_MSG_ERROR(Unable to find httpext.h in $ZEUSPATH/web/include)
 	PHP_BUILD_THREAD_SAFE
 	AC_DEFINE(WITH_ZEUS,1,[ ])
-	AC_ADD_INCLUDE($ZEUSPATH/web/include)
+	PHP_ADD_INCLUDE($ZEUSPATH/web/include)
 	PHP_SAPI=isapi
 	PHP_BUILD_SHARED
 	INSTALL_IT="\$(SHELL) \$(srcdir)/install-sh -m 0755 $SAPI_SHARED $ZEUSPATH/web/bin/"

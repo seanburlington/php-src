@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 2000/10/02 17:35:57 rasmus Exp $
+dnl $Id: config.m4,v 1.4 2001/03/27 20:34:39 sniper Exp $
 dnl config.m4 for extension pfpro
 
 PHP_ARG_WITH(pfpro, whether to include Verisign Payflow Pro support,
@@ -34,10 +34,10 @@ if test "$PHP_PFPRO" != "no"; then
 
   AC_MSG_RESULT(found in $PFPRO_LIB_DIR)
 
-  AC_ADD_INCLUDE($PFPRO_INC_DIR)
+  PHP_ADD_INCLUDE($PFPRO_INC_DIR)
 
   PHP_SUBST(PFPRO_SHARED_LIBADD)
-  AC_ADD_LIBRARY_WITH_PATH(pfpro, $PFPRO_LIB_DIR, PFPRO_SHARED_LIBADD)
+  PHP_ADD_LIBRARY_WITH_PATH(pfpro, $PFPRO_LIB_DIR, PFPRO_SHARED_LIBADD)
 
   AC_DEFINE(HAVE_PFPRO, 1, [ ])
 

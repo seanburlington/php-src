@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 2001/03/11 00:49:16 sniper Exp $
+dnl $Id: config.m4,v 1.5 2001/03/27 20:34:23 sniper Exp $
 dnl config.m4 for extension CURL
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -23,10 +23,10 @@ if test "$PHP_CURL" != "no"; then
     easy.h should be in <curl-dir>/include/curl/)
   fi
 
-  AC_ADD_INCLUDE($CURL_DIR/include)
+  PHP_ADD_INCLUDE($CURL_DIR/include)
 
   PHP_SUBST(CURL_SHARED_LIBADD)
-  AC_ADD_LIBRARY_WITH_PATH(curl, $CURL_DIR/lib, CURL_SHARED_LIBADD)
+  PHP_ADD_LIBRARY_WITH_PATH(curl, $CURL_DIR/lib, CURL_SHARED_LIBADD)
 
   AC_CHECK_LIB(curl,curl_easy_perform, 
   [ 

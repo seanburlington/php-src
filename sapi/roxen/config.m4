@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.11 2000/11/19 09:06:17 neotron Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.12 2001/03/27 20:34:50 sniper Exp $ -*- sh -*-
 
 RESULT=no
 AC_MSG_CHECKING(for Roxen/Pike support)
@@ -26,7 +26,7 @@ AC_ARG_WITH(roxen,
 		AC_MSG_ERROR(Roxen/PHP requires Pike 0.7.79 or newer)
 	fi
    
-	AC_ADD_INCLUDE($PIKE_INCLUDE_DIR)
+	PHP_ADD_INCLUDE($PIKE_INCLUDE_DIR)
 	AC_DEFINE(HAVE_ROXEN,1,[Whether you use Roxen])
 	PHP_SAPI=roxen
 	PHP_BUILD_SHARED

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.28 2003/11/27 17:37:35 wez Exp $ */
+/* $Id: streamsfuncs.c,v 1.29 2003/11/28 18:33:14 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -336,6 +336,7 @@ PHP_FUNCTION(stream_get_meta_data)
 		MAKE_STD_ZVAL(newval);
 		*newval = *(stream->wrapperdata);
 		zval_copy_ctor(newval);
+		INIT_PZVAL(newval);
 
 		add_assoc_zval(return_value, "wrapper_data", newval);
 	}
@@ -784,7 +785,7 @@ PHP_FUNCTION(stream_context_get_options)
 
 	*return_value = *context->options;
 	zval_copy_ctor(return_value);
-		
+	INIT_PZVAL(return_value);
 }
 /* }}} */
 

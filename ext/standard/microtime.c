@@ -16,31 +16,31 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.17 2000/02/23 15:44:02 sas Exp $ */
+/* $Id: microtime.c,v 1.18 2000/02/23 17:39:58 sas Exp $ */
 
 #include "php.h"
 
-#include <stdlib.h>
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>
 #endif
-#include <string.h>
-#include <errno.h>
-#ifdef HAVE_SYS_RESOURCE_H
-#include <sys/resource.h>
-#endif
-
-#include "microtime.h"
-#include "snprintf.h"
-
-#include <stdio.h>
-#ifdef HAVE_GETTIMEOFDAY
 #ifdef PHP_WIN32
 #include "win32/time.h"
 #else
 #include <sys/time.h>
 #endif
+#ifdef HAVE_SYS_RESOURCE_H
+#include <sys/resource.h>
 #endif
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <errno.h>
+
+#include "microtime.h"
+#include "snprintf.h"
 
 #define NUL  '\0'
 #define MICRO_IN_SEC 1000000.00

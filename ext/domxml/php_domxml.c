@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.118.2.10 2002/05/18 14:43:14 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.118.2.11 2002/05/19 00:02:13 sniper Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2082,7 +2082,7 @@ PHP_FUNCTION(domxml_node_append_sibling)
 		RETURN_FALSE;
 	}
 
-	// FIXME reverted xmlAddChildList; crashes
+	/* FIXME reverted xmlAddChildList; crashes */
 	child = xmlAddSibling(nodep, new_child);
 
 	if (NULL == child) {

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.39 2002/12/31 16:18:26 sebastian Exp $
+// $Id: Config.php,v 1.40 2003/01/02 23:48:32 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'System.php';
@@ -37,7 +37,7 @@ if (isset($_ENV['PHP_PEAR_SYSCONF_DIR'])) {
     define('PEAR_CONFIG_SYSCONFDIR', $_ENV['PHP_PEAR_SYSCONF_DIR']);
 } elseif (isset($_ENV['SystemRoot'])) {
     define('PEAR_CONFIG_SYSCONFDIR', $_ENV['SystemRoot']);
-} elseif (@is_dir(PHP_SYSCONFDIR)) {
+} else {
     define('PEAR_CONFIG_SYSCONFDIR', PHP_SYSCONFDIR);
 }
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.60 2000/08/24 18:49:48 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.61 2000/09/01 16:10:17 andrei Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -106,6 +106,8 @@ PHP_FUNCTION(get_loaded_extensions);
 PHP_FUNCTION(extension_loaded);
 PHP_FUNCTION(get_extension_funcs);
 
+PHP_FUNCTION(register_tick_function);
+PHP_FUNCTION(unregister_tick_function);
 
 /* From the INI parser */
 PHP_FUNCTION(parse_ini_file);
@@ -140,6 +142,7 @@ typedef struct {
 	char str_ebuf[40];
 	zval **array_walk_func_name;
 	zval **user_compare_func_name;
+	zend_llist *user_tick_functions;
 	
 	HashTable sm_protected_env_vars;
 	char *sm_allowed_env_vars;

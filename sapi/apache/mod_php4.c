@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.99 2001/05/16 15:01:13 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.100 2001/05/16 18:10:06 sterling Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -296,6 +296,7 @@ static void php_apache_request_shutdown(void *dummy)
 static int php_apache_sapi_activate(SLS_D)
 {
 	request_rec *r = ((request_rec *) SG(server_context));
+	SLS_FETCH();
 	APLS_FETCH();
 
 	/*

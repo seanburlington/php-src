@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.55 2004/02/10 00:30:03 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.56 2004/02/10 17:44:44 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -48,6 +48,12 @@
 #if HAVE_SETLOCALE
 #include <locale.h>
 #endif
+#if HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
+#if HAVE_SYS_WAIT_H
+#include <sys/wait.h>
+#endif
 #include "zend.h"
 #include "zend_extensions.h"
 #include "php_ini.h"
@@ -59,10 +65,6 @@
 #include <io.h>
 #include <fcntl.h>
 #include "win32/php_registry.h"
-#endif
-
-#if HAVE_SIGNAL_H
-#include <signal.h>
 #endif
 
 #ifdef __riscos__
@@ -275,7 +277,11 @@ static void sapi_cgibin_flush(void *server_context)
 #if PHP_FASTCGI
 	if (!FCGX_IsCGI()) {
 		FCGX_Request *request = (FCGX_Request *)server_context;
-		if (!parent && (!request || FCGX_FFlush(request->out) == -1)) {
+		if (
+#ifdef PHP_WIN32
+		!parent && 
+#endif
+		(!request || FCGX_FFlush(request->out) == -1)) {
 			php_handle_aborted_connection();
 		}
 		return;

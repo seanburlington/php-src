@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.21 2003/04/03 23:10:17 sniper Exp $ */
+/* $Id: gd.c,v 1.221.2.22 2003/04/04 00:16:54 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -2861,6 +2861,11 @@ PHP_FUNCTION(imagecopyresized)
 	dstY = Z_LVAL_PP(DY);
 	dstH = Z_LVAL_PP(DH);
 	dstW = Z_LVAL_PP(DW);
+	
+	if (dstW < 0 || dstH < 0 || srcW < 0 || srcH < 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid image dimensions");
+		RETURN_FALSE;
+	}
 
 	gdImageCopyResized(im_dst, im_src, dstX, dstY, srcX, srcY, dstW, dstH, srcW, srcH);
 	RETURN_TRUE;

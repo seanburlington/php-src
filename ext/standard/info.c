@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.172 2002/05/02 12:33:03 derick Exp $ */
+/* $Id: info.c,v 1.173 2002/05/02 17:36:00 fmk Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -212,7 +212,7 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 	the_time = time(NULL);
 	ta = php_localtime_r(&the_time, &tmbuf);
 
-	snprintf (&api_no, 9, "%d", ZEND_EXTENSION_API_NO);
+	snprintf (api_no, 9, "%d", ZEND_EXTENSION_API_NO);
 
 	PUTS("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n<html>\n");
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.105 2002/09/27 13:15:56 sniper Exp $ */
+/* $Id: dir.c,v 1.106 2002/09/28 09:14:45 yohgaki Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -138,7 +138,7 @@ PHP_MINIT_FUNCTION(dir)
 	REGISTER_LONG_CONSTANT("GLOB_NOSORT", GLOB_NOSORT, CONST_CS | CONST_PERSISTENT);
 #endif
 #ifdef GLOB_NOCHECK
-	REGISTER_LONG_CONSTANT("GLOB_NOMATCH", GLOB_NOCHECK, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("GLOB_NOCHECK", GLOB_NOCHECK, CONST_CS | CONST_PERSISTENT);
 #endif
 #ifdef GLOB_NOESCAPE
 	REGISTER_LONG_CONSTANT("GLOB_NOESCAPE", GLOB_NOESCAPE, CONST_CS | CONST_PERSISTENT);

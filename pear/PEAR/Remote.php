@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.45 2003/08/04 10:38:18 cox Exp $
+// $Id: Remote.php,v 1.46 2003/08/04 11:18:26 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -201,19 +201,18 @@ class PEAR_Remote extends PEAR
             return $this->raiseError("PEAR_Remote::call: no master_server configured");
         }
         $server_port = 80;
-        $proxy_host = $proxy_port = $proxy_user = $proxy_pass = '';
-        if ($proxy = parse_url($this->config->get('http_proxy'))) {
+        if ($http_proxy = $this->config->get('http_proxy')) {
+            $proxy = parse_url($http_proxy);
+            $proxy_host = $proxy_port = $proxy_user = $proxy_pass = '';
             $proxy_host = @$proxy['host'];
             $proxy_port = @$proxy['port'];
             $proxy_user = @$proxy['user'];
             $proxy_pass = @$proxy['pass'];
-        }
-        if ($proxy != '') {
             $fp = @fsockopen($proxy_host, $proxy_port);
         } else {
             $fp = @fsockopen($server_host, $server_port);
         }
-        if (!$fp && $proxy_host != '') {
+        if (!$fp && $http_proxy) {
             return $this->raiseError("PEAR_Remote::call: fsockopen(`$proxy_host', $proxy_port) failed");
         } elseif (!$fp) {
             return $this->raiseError("PEAR_Remote::call: fsockopen(`$server_host', $server_port) failed");

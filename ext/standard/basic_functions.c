@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.269 2000/10/25 17:40:10 andrei Exp $ */
+/* $Id: basic_functions.c,v 1.270 2000/10/28 01:31:56 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -724,14 +724,14 @@ PHP_MINIT_FUNCTION(basic)
 #endif
 
 	if(PG(allow_url_fopen)) {
-		if(FAILURE==php_register_url_wrapper("http",php_fopen_url_wrap_http)) {
+		if (FAILURE==php_register_url_wrapper("http", php_fopen_url_wrap_http)) {
 			return FAILURE;
 		} 
-		if(FAILURE==php_register_url_wrapper("ftp",php_fopen_url_wrap_ftp)) {
-			return  FAILURE;
+		if (FAILURE==php_register_url_wrapper("ftp", php_fopen_url_wrap_ftp)) {
+			return FAILURE;
 		}  
-		if(FAILURE==php_register_url_wrapper("php",php_fopen_url_wrap_php)) {
-			return  FAILURE;
+		if (FAILURE==php_register_url_wrapper("php", php_fopen_url_wrap_php)) {
+			return FAILURE;
 		}  
 	}
 	

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.54 2000/10/18 13:41:42 venaas Exp $ */
+/* $Id: fsock.c,v 1.55 2000/10/28 01:31:56 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -649,8 +649,9 @@ char *php_sock_fgets(char *buf, size_t maxlen, int socket)
 	
 	/* signal error only, if we don't return data from this call and 
 	   if there is no data to read and if the eof flag is set */
-	if(amount || TOREAD(sock) || !sock->eof)
+	if(amount || TOREAD(sock) || !sock->eof) {
 		ret = buf;
+	}
 
 	return ret;
 }

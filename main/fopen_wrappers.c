@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.101 2000/10/27 16:16:55 fmk Exp $ */
+/* $Id: fopen_wrappers.c,v 1.102 2000/10/28 01:31:56 zeev Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -431,24 +431,26 @@ static FILE *php_fopen_url_wrapper(const char *path, char *mode, int options, in
 	int n=0;
 
 
-	for(p=path;isalnum((int)*p);p++) 
+	for (p=path; isalnum((int)*p); p++) {
 		n++;
-	if((*p==':')&&(n>1)) {
+	}
+	if ((*p==':')&&(n>1)) {
 		protocol=path;
 	} 
 		
-	if(protocol) {
+	if (protocol) {
 		php_fopen_url_wrapper_t *wrapper=NULL;
 
-		if(FAILURE==zend_hash_find(&fopen_url_wrappers_hash, (char *)protocol, n, (void **)&wrapper)) {
+		if (FAILURE==zend_hash_find(&fopen_url_wrappers_hash, (char *) protocol, n, (void **)&wrapper)) {
 			wrapper=NULL;
 			protocol=NULL;
 		}
-		if(wrapper)
+		if (wrapper) {
 			return (*wrapper)(path, mode, options, issock, socketd, opened_path);	
+		}
 	} 
 
-	if( !protocol || !strncasecmp(protocol, "file",n)){
+	if (!protocol || !strncasecmp(protocol, "file",n)){
 		PLS_FETCH();
 		
 		*issock = 0;

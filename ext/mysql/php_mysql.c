@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.174.2.24 2004/01/05 14:42:26 georg Exp $ */
+/* $Id: php_mysql.c,v 1.174.2.25 2004/04/23 17:04:36 iliaa Exp $ */
 
 /* TODO:
  *
@@ -425,7 +425,6 @@ PHP_RINIT_FUNCTION(mysql)
 	/* Reset connect error/errno on every request */
 	MySG(connect_error) = NULL;
 	MySG(connect_errno) =0;
-	MySG(trace_mode) = 0;
 	MySG(result_allocated) = 0;
 	return SUCCESS;
 }

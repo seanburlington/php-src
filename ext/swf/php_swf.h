@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_swf.h,v 1.5 2000/05/18 15:34:36 zeev Exp $ */
+/* $Id: php_swf.h,v 1.6 2000/05/23 04:09:20 sterling Exp $ */
 
 #ifndef _PHP_SWF_H
 #define _PHP_SWF_H
@@ -92,6 +92,7 @@ PHP_FUNCTION(swf_addbuttonrecord);
 PHP_FUNCTION(swf_oncondition);
 PHP_FUNCTION(swf_endbutton);
 PHP_FUNCTION(swf_viewport);
+PHP_FUNCTION(swf_ortho);
 PHP_FUNCTION(swf_ortho2);
 PHP_FUNCTION(swf_perspective);
 PHP_FUNCTION(swf_polarview);

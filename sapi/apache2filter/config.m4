@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.25 2002/09/23 17:40:04 dreid Exp $
+dnl $Id: config.m4,v 1.25.2.1 2003/01/21 06:03:16 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 2.0 module support via DSO through APXS)
@@ -52,13 +52,12 @@ AC_ARG_WITH(apxs2,
 
   APXS_LIBEXECDIR='$(INSTALL_ROOT)'`$APXS -q LIBEXECDIR`
   if test -z `$APXS -q SYSCONFDIR`; then
-    optarg=-a
-  else
     optarg=
+  else
+    optarg=-a
   fi
 
-  INSTALL_IT='$(mkinstalldirs) '"$APXS_LIBEXECDIR && \
-$APXS -S LIBEXECDIR='$APXS_LIBEXECDIR' -i ${optarg}-n php4"
+  INSTALL_IT='$(mkinstalldirs) '"$APXS_LIBEXECDIR && $APXS -S LIBEXECDIR='$APXS_LIBEXECDIR' -i ${optarg} -n php4"
 
   case $host_alias in
   *aix*)

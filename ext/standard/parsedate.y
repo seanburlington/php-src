@@ -8,7 +8,7 @@
 **  This code is in the public domain and has no copyright.
 */
 
-/* $Id: parsedate.y,v 1.38 2003/08/17 11:48:29 derick Exp $ */
+/* $Id: parsedate.y,v 1.39 2003/08/17 11:49:18 derick Exp $ */
 
 #include "php.h"
 
@@ -150,7 +150,7 @@ typedef union _date_ll {
 
 %}
 
-/* This grammar has 14 shift/reduce conflicts. */
+/* This grammar has 17 shift/reduce conflicts. */
 %expect 17
 %pure_parser
 

@@ -1,14 +1,14 @@
 dnl
-dnl $Id: config.m4,v 1.2 2002/12/01 03:37:49 phanto Exp $
+dnl $Id: config.m4,v 1.3 2002/12/01 05:14:56 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for Milter support)
 AC_ARG_WITH(milter,
 [  --with-milter=DIR       Build PHP as Milter application],[
   if test "$withval" = "yes"; then
-        MILTERPATH=/usr
+    MILTERPATH=/usr
   else
-        MILTERPATH=$withval
+    MILTERPATH=$withval
   fi
   
   SAPI_MILTER_PATH=sapi/milter/php-milter
@@ -23,10 +23,9 @@ AC_ARG_WITH(milter,
 
   INSTALL_IT="\$(INSTALL) -m 0755 \$(SAPI_MILTER_PATH) \$(bindir)/php-milter"
   RESULT=yes
+
   PHP_SUBST(BUILD_MILTER)
-  PHP_SUBST(FASTCGI_LIBADD)
-  PHP_SUBST(EXT_PROGRAM_LDADD)
 ],[
   RESULT=no
 ])
-AC_MSG_RESULT($RES
+AC_MSG_RESULT($RESULT)

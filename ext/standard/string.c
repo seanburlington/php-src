@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.226 2001/08/22 02:03:14 swm Exp $ */
+/* $Id: string.c,v 1.227 2001/08/22 05:47:11 swm Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3289,16 +3289,23 @@ PHPAPI void php_strip_tags(char *rbuf, int len, int state, char *allow, int allo
 				break;
 
 			case '?':
-				if (state==1 && *(p-1)=='<' && *(p+1) != 'x' 
-				  && *(p+2) != 'm' && *(p+3) != 'l') {
 
+				if (state==1 && *(p-1)=='<') { 
 					br=0;
 					state=2;
 					break;
 				}
-					/* else, it is xml, since state == 1, lets just fall through
-					 * to '>'
-					 */
+
+			case 'l':
+
+				/* swm: If we encounter '<?xml' then we shouldn't be in
+				 * state == 2 (PHP). Switch back to HTML.
+				 */
+
+				if(state == 2 && *(p-1) == 'm' && *(p-2) == 'x') {
+					state = 1;
+					break;
+				}
 
 				/* fall-through */
 			default:

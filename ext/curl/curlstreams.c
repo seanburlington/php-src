@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curlstreams.c,v 1.2 2002/09/23 01:47:00 wez Exp $ */
+/* $Id: curlstreams.c,v 1.2.2.1 2002/12/09 18:25:37 wez Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to
@@ -30,7 +30,7 @@
 #include "php.h"
 #include "php_memory_streams.h"
 
-#if HAVE_CURL
+#if HAVE_CURL && defined(PHP_CURL_URL_WRAPPERS)
 
 #include <stdio.h>
 #include <string.h>

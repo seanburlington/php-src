@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.28 2001/06/06 13:05:46 rasmus Exp $ */
+/* $Id: php_mnogo.c,v 1.29 2001/06/22 08:43:23 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -64,6 +64,7 @@
 #define UDM_PARAM_MAX_WORD_LEN		13
 #define UDM_PARAM_ISPELL_PREFIXES	14
 #define UDM_PARAM_CROSS_WORDS		15
+#define UDM_PARAM_VARDIR		16
 
 /* udm_add_search_limit constants */
 #define UDM_LIMIT_URL		1
@@ -225,6 +226,9 @@ DLEXPORT PHP_MINIT_FUNCTION(mnogosearch)
 	
 	REGISTER_LONG_CONSTANT("UDM_PARAM_CROSS_WORDS",	UDM_PARAM_CROSS_WORDS,CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("UDM_PARAM_CROSSWORDS",	UDM_PARAM_CROSS_WORDS,CONST_CS | CONST_PERSISTENT);	
+	
+	REGISTER_LONG_CONSTANT("UDM_PARAM_VARDIR",	UDM_PARAM_VARDIR,CONST_CS | CONST_PERSISTENT);	
+	REGISTER_LONG_CONSTANT("UDM_PARAM_DATADIR",	UDM_PARAM_VARDIR,CONST_CS | CONST_PERSISTENT);	
 	
 	/* udm_add_search_limit constants */
 	REGISTER_LONG_CONSTANT("UDM_LIMIT_CAT",		UDM_LIMIT_CAT,CONST_CS | CONST_PERSISTENT);
@@ -596,6 +600,15 @@ DLEXPORT PHP_FUNCTION(udm_set_agent_param)
 					break;
 			}
 			
+			break;
+			
+#endif
+
+#if UDM_VERSION_ID > 30112
+
+		case UDM_PARAM_VARDIR:
+			sprintf(Agent->Conf->vardir,"%s%s",val,UDMSLASHSTR);
+
 			break;
 			
 #endif

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.55.2.2 2003/06/25 17:02:56 iliaa Exp $ 
+   $Id: sqlite.c,v 1.55.2.3 2003/06/25 18:06:56 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -667,7 +667,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.55.2.2 2003/06/25 17:02:56 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.55.2.3 2003/06/25 18:06:56 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1323,8 +1323,10 @@ static void php_sqlite_fetch_string(struct php_sqlite_result *res, zend_bool dec
 	if (decode_binary && rowdata[0] != NULL && rowdata[0][0] == '\x01') {
 		decoded = emalloc(strlen(rowdata[0]));
 		decoded_len = sqlite_decode_binary(rowdata[0]+1, decoded);
-		efree((char*)rowdata[0]);
-		rowdata[0] = NULL;
+		if (!res->buffered) {
+			efree((char*)rowdata[0]);
+			rowdata[0] = NULL;
+		}
 	} else if (rowdata[0]) {
 		decoded_len = strlen((char*)rowdata[0]);
 		if (res->buffered) {

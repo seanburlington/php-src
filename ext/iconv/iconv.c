@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.114 2003/12/27 23:05:23 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.115 2003/12/27 23:07:47 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2102,7 +2102,7 @@ PHP_FUNCTION(iconv_mime_decode_headers)
 			break;
 		}
 
-		if (decoded_header.c != NULL) {
+		if (decoded_header.c == NULL) {
 			break;
 		}
 

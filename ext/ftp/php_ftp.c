@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.55 2002/03/16 02:32:59 wez Exp $ */
+/* $Id: php_ftp.c,v 1.56 2002/03/16 02:48:35 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -489,7 +489,7 @@ PHP_FUNCTION(ftp_get)
 	}
 
 	php_stream_rewind(tmpstream);
-	if (php_stream_copy_to_stream(tmpstream, outstream, 0) == 0)	{	
+	if (php_stream_copy_to_stream(tmpstream, outstream, PHP_STREAM_COPY_ALL) == 0)	{	
 		php_error(E_WARNING, "%s(): error writing %s", get_active_function_name(TSRMLS_C), local);
 		RETVAL_FALSE;
 	}

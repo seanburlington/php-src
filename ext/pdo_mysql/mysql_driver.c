@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.19 2004/07/28 00:10:28 wez Exp $ */
+/* $Id: mysql_driver.c,v 1.20 2004/07/28 00:40:01 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -153,7 +153,7 @@ static int mysql_handle_closer(pdo_dbh_t *dbh TSRMLS_DC) /* {{{ */
 			H->einfo.errmsg = NULL;
 		}
 		efree(H);
-		H = NULL;
+		dbh->driver_data = NULL;
 	}
 	return 0;
 }

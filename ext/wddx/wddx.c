@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.31 2000/04/04 15:47:11 thies Exp $ */
+/* $Id: wddx.c,v 1.32 2000/04/04 16:41:13 andrei Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -400,7 +400,7 @@ static void php_wddx_serialize_hash(wddx_packet *packet, zval *var)
 	}
 
 	while(zend_hash_get_current_data(target_hash, (void**)&ent) == SUCCESS) {
-		if (hash_type == HASH_KEY_IS_STRING) {
+		if (var->type == IS_OBJECT || hash_type == HASH_KEY_IS_STRING) {
 			ent_type = zend_hash_get_current_key(target_hash, &key, &idx);
 
 			if (ent_type == HASH_KEY_IS_STRING) {

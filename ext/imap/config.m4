@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.22 2000/10/02 22:16:53 rasmus Exp $
+dnl $Id: config.m4,v 1.23 2001/02/25 04:41:18 kalowsky Exp $
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r $i$1/rfc822.h; then IMAP_DIR=$i; IMAP_INC_DIR=$i$1])
 
@@ -41,9 +41,9 @@ PHP_ARG_WITH(imap,for IMAP support,
   if test "$PHP_IMAP" != "no"; then  
     for i in /usr/local /usr $PHP_IMAP; do
       IMAP_INC_CHK()
-      el[]IMAP_INC_CHK(/include)
-      el[]IMAP_INC_CHK(/include/imap)
       el[]IMAP_INC_CHK(/include/c-client)
+      el[]IMAP_INC_CHK(/include/imap)
+      el[]IMAP_INC_CHK(/include)
       el[]IMAP_INC_CHK(/imap)
       el[]IMAP_INC_CHK(/c-client)
       fi

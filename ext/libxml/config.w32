@@ -1,16 +1,17 @@
-// $Id: config.w32,v 1.3 2003/12/03 14:29:42 wez Exp $
+// $Id: config.w32,v 1.4 2003/12/04 13:38:45 wez Exp $
 // vim:ft=javascript
 
 ARG_WITH("libxml", "LibXML support", "yes");
 
 if (PHP_LIBXML == "yes") {
-	EXTENSION("libxml", "libxml.c", false /* never shared */);
-	AC_DEFINE("HAVE_LIBXML", 1, "LibXML support");
 
-	CHECK_LIB("iconv.lib", "libxml");
-	CHECK_LIB("libxml2.lib", "libxml");
-	CHECK_HEADER_ADD_INCLUDE("libxml/parser.h", "CFLAGS");
-	ADD_FLAG("CFLAGS", "/D LIBXML_THREAD_ENABLED");
+	if ((CHECK_LIB("libxml2_a.lib", "libxml") || CHECK_LIB("libxml2.lib", "libxml")) &&
+			CHECK_LIB("iconv.lib", "libxml") &&
+			CHECK_HEADER_ADD_INCLUDE("libxml/parser.h", "CFLAGS")) {
+		EXTENSION("libxml", "libxml.c", false /* never shared */);
+		AC_DEFINE("HAVE_LIBXML", 1, "LibXML support");
+		ADD_FLAG("CFLAGS", "/D LIBXML_THREAD_ENABLED");
+	}
 }
 
 

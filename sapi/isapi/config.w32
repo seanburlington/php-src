@@ -1,7 +1,7 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.1 2003/12/02 23:17:04 wez Exp $
+// $Id: config.w32,v 1.2 2003/12/04 13:38:46 wez Exp $
 
-ARG_ENABLE('isapi', 'Build ISAPI version of PHP', 'yes');
+ARG_ENABLE('isapi', 'Build ISAPI version of PHP', 'no');
 
 if (PHP_ISAPI == "yes") {
 	SAPI('isapi', 'php4isapi.c', 'php' + PHP_VERSION + 'isapi.dll', '/D PHP4ISAPI_EXPORTS');

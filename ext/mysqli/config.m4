@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2003/02/12 16:24:41 derick Exp $
+dnl $Id: config.m4,v 1.2 2003/02/15 20:09:49 iliaa Exp $
 dnl config.m4 for extension mysqli
 
 dnl Comments in this file start with the string 'dnl'.
@@ -50,7 +50,7 @@ if test "$PHP_MYSQLI" != "no"; then
   ],[
     AC_MSG_ERROR([wrong mysql library version or lib not found])
   ],[
-    -L$MYSQLI_DIR -lm -ldl
+    `$PHP_MYSQLI/bin/mysql_config --libs | sed -e "s/'//g"`
   ])
   PHP_SUBST(MYSQLI_SHARED_LIBADD)
 

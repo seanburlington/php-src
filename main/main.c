@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.111 1999/09/04 21:10:39 rasmus Exp $ */
+/* $Id: main.c,v 1.112 1999/09/05 05:15:42 andi Exp $ */
 
 
 #include <stdio.h>
@@ -472,9 +472,9 @@ static void php3_timeout(int dummy)
 {
 	PLS_FETCH();
 
+	PG(connection_status) |= PHP_CONNECTION_TIMEOUT;
 	php_error(E_ERROR, "Maximum execution time of %d second%s exceeded",
 			  php_timeout_seconds, php_timeout_seconds == 1 ? "" : "s");
-	PG(connection_status) |= PHP_CONNECTION_TIMEOUT;
 }
 #endif
 

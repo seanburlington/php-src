@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.60 2004/03/07 23:45:31 helly Exp $
+dnl $Id: config.m4,v 1.60.2.1 2004/09/25 15:30:17 helly Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -11,8 +11,11 @@ AC_DEFUN(PHP_DBA_STD_BEGIN,[
 AC_DEFUN(PHP_TEMP_LDFLAGS,[
   old_LDFLAGS=$LDFLAGS
   LDFLAGS="$1 $LDFLAGS"
-  $2
+  old_LIBS=$LIBS
+  LIBS="$2 $LIBS"
+  $3
   LDFLAGS=$old_LDFLAGS
+  LIBS=$old_LIBS
 ])
 
 dnl Assign INCLUDE/LFLAGS from PREFIX
@@ -169,7 +172,7 @@ dnl parameters(version, library list, function)
 AC_DEFUN(PHP_DBA_DB_CHECK,[
   for LIB in $2; do
     if test -f $THIS_PREFIX/lib/lib$LIB.a -o -f $THIS_PREFIX/lib/lib$LIB.$SHLIB_SUFFIX_NAME; then
-      PHP_TEMP_LDFLAGS(-L$THIS_PREFIX/lib -l$LIB,[
+      PHP_TEMP_LDFLAGS(-L$THIS_PREFIX/lib, -l$LIB,[
         AC_TRY_LINK([
 #include "$THIS_INCLUDE"
         ],[

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.143.2.15 2003/08/14 14:37:33 iliaa Exp $ */
+/* $Id: php_odbc.c,v 1.143.2.16 2003/10/17 02:21:35 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2224,12 +2224,12 @@ try_and_get_another_connection:
 			list_entry new_le;
 			
 			if (ODBCG(max_links) != -1 && ODBCG(num_links) >= ODBCG(max_links)) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Too many open links (%d)", ODBCG(num_links));
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Too many open links (%ld)", ODBCG(num_links));
 				efree(hashed_details);
 				RETURN_FALSE;
 			}
 			if (ODBCG(max_persistent) != -1 && ODBCG(num_persistent) >= ODBCG(max_persistent)) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING,"Too many open persistent links (%d)", ODBCG(num_persistent));
+				php_error_docref(NULL TSRMLS_CC, E_WARNING,"Too many open persistent links (%ld)", ODBCG(num_persistent));
 				efree(hashed_details);
 				RETURN_FALSE;
 			}
@@ -2308,7 +2308,7 @@ try_and_get_another_connection:
 			}
 		}
 		if (ODBCG(max_links) != -1 && ODBCG(num_links) >= ODBCG(max_links)) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING,"Too many open connections (%d)",ODBCG(num_links));
+			php_error_docref(NULL TSRMLS_CC, E_WARNING,"Too many open connections (%ld)",ODBCG(num_links));
 			efree(hashed_details);
 			RETURN_FALSE;
 		}

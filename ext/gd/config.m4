@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.60.2.4 2001/06/03 21:33:20 sniper Exp $
+dnl $Id: config.m4,v 1.60.2.5 2001/06/03 21:36:10 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -156,7 +156,7 @@ AC_DEFUN(PHP_GD_T1LIB,[
         -L$T1_DIR/lib
       ])
     else
-      AC_MSG_ERROR(Your t1lib distribution is not installed correctly. Please reinstall it.) 
+      AC_MSG_ERROR(Your T1lib distribution is not installed correctly. Please reinstall it.) 
     fi
   fi
 ])

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.40 2003/01/30 21:36:05 helly Exp $
+dnl $Id: config.m4,v 1.41 2003/01/31 20:06:44 helly Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -165,6 +165,19 @@ AC_DEFUN(PHP_DBA_DB_CHECK,[
       AC_MSG_RESULT(ok)
     ],[
       AC_MSG_ERROR(Version 4.1 requires patch level 25)
+    ])
+  fi
+  if test "$ext_shared" = "yes"; then
+    AC_MSG_CHECKING(if db can be used as shared extension)
+    AC_EGREP_CPP(yes,[
+#include "$THIS_INCLUDE"
+#if DB_VERSION_MAJOR > 3 || (DB_VERSION_MAJOR == 3 && DB_VERSION_MINOR > 2)
+      yes
+#endif
+    ],[
+      AC_MSG_RESULT(yes)
+    ],[
+      AC_MSG_ERROR(At least version 3.3 is required)
     ])
   fi
   if test -n "$THIS_LIBS"; then

@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules.mk,v 1.22 2000/08/20 05:36:07 sas Exp $ 
+# $Id: rules.mk,v 1.23 2000/08/24 11:02:03 sas Exp $ 
 #
 
 include $(top_srcdir)/build/rules_common.mk
@@ -41,7 +41,7 @@ install-p: $(targets) $(install_targets)
 distclean-p depend-p clean-p:
 
 depend: depend-recursive
-	test "`echo *.c`" = '*.c' || perl $(top_srcdir)/build/mkdep.perl $(CPP)  $(INCLUDES) $(EXTRA_INCLUDES) *.c > $(builddir)/.deps
+	@echo $(top_srcdir) $(top_builddir) $(srcdir) $(CPP) $(INCLUDES) $(EXTRA_INCLUDES) $(DEFS) $(CPPFLAGS) $(srcdir)/*.c *.c | awk -f $(top_srcdir)/build/mkdep.awk > $(builddir)/.deps || true
 
 clean: clean-recursive clean-x
 

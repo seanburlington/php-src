@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.44 2002/10/21 23:41:38 sniper Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.45 2002/10/24 12:21:06 sas Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -189,7 +189,7 @@ dnl AC_CHECK_LIB(pam, pam_start, [
 dnl   EXTRA_LIBS="$EXTRA_LIBS -lpam"
 dnl   AC_DEFINE(HAVE_LIBPAM,1,[ ]) ], []) 
 
-AC_CHECK_FUNCS(getcwd getwd)
+AC_CHECK_FUNCS(getcwd getwd asinh acosh atanh log1p hypot)
 
 AC_CRYPT_CAP
 AC_FLUSH_IO

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.386 2002/10/23 00:21:43 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.387 2002/10/24 12:21:06 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -279,7 +279,7 @@ PHP_CHECK_FUNC(gethostname, nsl)
 PHP_CHECK_FUNC(gethostbyaddr, nsl)
 PHP_CHECK_FUNC(yp_get_default_domain, nsl)
 
-AC_CHECK_LIB(dl, dlopen, [PHP_ADD_LIBRARY(dl)])
+PHP_CHECK_FUNC(dlopen, dl)
 AC_CHECK_LIB(m, sin)
 
 dnl Check for resolver routines.
@@ -802,6 +802,7 @@ dnl -------------------------------------------------------------------------
 
 PHP_CONFIGURE_PART(Configuring Zend)
 LIBZEND_BASIC_CHECKS
+LIBZEND_DLSYM_CHECK
 LIBZEND_OTHER_CHECKS
 
 TSRM_LIB='TSRM/libtsrm.la'

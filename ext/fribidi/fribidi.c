@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fribidi.c,v 1.20 2002/09/17 19:30:06 tal Exp $ */
+/* $Id: fribidi.c,v 1.21 2002/09/21 10:58:46 tal Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -45,7 +45,7 @@ zend_module_entry fribidi_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(fribidi),
-	NO_VERSION_YET,
+	"0.1",
 	STANDARD_MODULE_PROPERTIES
 };
 

@@ -42,18 +42,6 @@
 #include "ext/standard/php_standard.h"
 
 /*
- * If neither XP_UNIX not XP_WIN32 is defined, try to guess which one.
- * Ideally, this should be done by the configure script.
- */
-#if !defined(XP_UNIX) && !defined(XP_WIN32)
-#if defined(WIN32)
-#define XP_WIN32
-#else
-#define XP_UNIX
-#endif
-#endif
-
-/*
  * CAPI includes
  */
 #include <continuity.h>
@@ -105,7 +93,7 @@ zend_module_entry continuity_module_entry = {
         NULL,
         NULL,
         PHP_MINFO(continuity),
-        "$Revision: 1.2 $",
+        "$Revision: 1.3 $",
         STANDARD_MODULE_PROPERTIES
 };
 
@@ -463,14 +451,6 @@ int capi_module_main(NSLS_D TSRMLS_DC)
    php_request_shutdown(NULL);
 
    return SUCCESS;
-}
-
-void php4_close(void *vparam)
-{
-   if (capi_sapi_module.shutdown) {
-      capi_sapi_module.shutdown(&capi_sapi_module);
-   }
-   tsrm_shutdown();
 }
 
 int phpFinit(lstTset * opt)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.57 2002/08/08 18:55:19 sebastian Exp $ */
+/* $Id: ftp.c,v 1.58 2002/08/21 03:59:27 iliaa Exp $ */
 
 #include "php.h"
 
@@ -1443,7 +1443,7 @@ ftp_async_continue_read(ftpbuf_t *ftp)
 	type = ftp->type;
 
 	lastch = ftp->lastch;
-	if (rcvd = my_recv(ftp, data->fd, data->buf, FTP_BUFSIZE)) {
+	if ((rcvd = my_recv(ftp, data->fd, data->buf, FTP_BUFSIZE))) {
 		if (rcvd == -1) {
 			goto bail;
 		}

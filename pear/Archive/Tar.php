@@ -16,7 +16,7 @@
 // | Author: Vincent Blavet <vincent@blavet.net>                          |
 // +----------------------------------------------------------------------+
 //
-// $Id: Tar.php,v 1.8 2002/05/09 13:00:12 vblavet Exp $
+// $Id: Tar.php,v 1.9 2002/05/20 09:05:45 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -24,7 +24,7 @@ require_once 'PEAR.php';
 * Creates a (compressed) Tar archive
 *
 * @author   Vincent Blavet <vincent@blavet.net>
-* @version  $Revision: 1.8 $
+* @version  $Revision: 1.9 $
 * @package  Archive
 */
 class Archive_Tar extends PEAR
@@ -1073,6 +1073,15 @@ class Archive_Tar extends PEAR
     // }}}
 
     // {{{ _dirCheck()
+
+    /**
+     * Check if a directory exists and create it (including parent
+     * dirs) if not.
+     *
+     * @param string $p_dir directory to check
+     *
+     * @return bool TRUE if the directory exists or was created
+     */
     function _dirCheck($p_dir)
     {
         if ((@is_dir($p_dir)) || ($p_dir == ''))
@@ -1092,9 +1101,22 @@ class Archive_Tar extends PEAR
 
         return true;
     }
+
     // }}}
 
     // {{{ _pathReduction()
+
+    /**
+     * Compress path by changing for example "/dir/foo/../bar" to "/dir/bar", and
+     * remove double slashes.
+     *
+     * @param string $p_dir path to reduce
+     *
+     * @return string reduced path
+     *
+     * @access private
+     *
+     */
     function _pathReduction($p_dir)
     {
         $v_result = '';
@@ -1126,6 +1148,7 @@ class Archive_Tar extends PEAR
         $v_result = strtr($v_result, '\\', '/');
         return $v_result;
     }
+
     // }}}
 
     // {{{ _translateWinPath()

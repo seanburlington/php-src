@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.52.2.21 2005/03/14 21:01:02 sniper Exp $ */
+/* $Id: openssl.c,v 1.52.2.22 2005/03/15 00:30:02 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -254,7 +254,9 @@ static void add_assoc_name_entry(zval * val, char * key, X509_NAME * name, int s
 		} else {
 			zval_dtor(subentries);
 			FREE_ZVAL(subentries);
-			add_assoc_stringl(subitem, sname, str->data, str->length, 1);
+			if (obj_cnt) {
+				add_assoc_stringl(subitem, sname, str->data, str->length, 1);
+			}
 		}
 	}
 	zend_hash_update(HASH_OF(val), key, strlen(key) + 1, (void *)&subitem, sizeof(subitem), NULL);

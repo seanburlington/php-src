@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.68 2001/12/21 16:38:49 derick Exp $ */
+/* $Id: math.c,v 1.69 2001/12/22 11:53:29 derick Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -73,7 +73,8 @@ PHP_FUNCTION(ceil)
 	if (Z_TYPE_PP(value) == IS_DOUBLE) {
 		RETURN_DOUBLE(ceil(Z_DVAL_PP(value)));
 	} else if (Z_TYPE_PP(value) == IS_LONG) {
-		RETURN_LONG(Z_LVAL_PP(value));
+		convert_to_double_ex(value);
+		RETURN_DOUBLE(Z_DVAL_PP(value));
 	}
 
 	RETURN_FALSE;

@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.28.2.1 2003/10/02 10:59:38 moriyoshi Exp $
+dnl $Id: config.m4,v 1.28.2.2 2003/10/02 14:09:12 sniper Exp $
 dnl
 
 PHP_ARG_ENABLE(mbstring, whether to enable multibyte string support,
-[  --enable-mbstring[[=LANG]]
+[  --enable-mbstring[=LANG]
                           Enable multibyte string support.
                           LANG can be any one of ja, cn, tw, kr, ru, or "all".])
 

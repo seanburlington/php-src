@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.39 2004/08/25 13:57:35 georg Exp $ 
+  $Id: php_mysqli.h,v 1.40 2004/09/02 04:53:01 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -181,7 +181,7 @@ PHP_MYSQLI_EXPORT(zend_object_value) mysqli_objects_new(zend_class_entry * TSRML
 	} \
 	__ptr = (__type)my_res->ptr; \
 	if (!strcmp((char *)__name, "mysqli_stmt")) {\
-		if (!((MYSQL_STMT *)__ptr)->mysql) {\
+		if (!((MY_STMT *)__ptr)->stmt->mysql) {\
   			php_error(E_WARNING, "Statement isn't valid anymore");\
 			RETURN_NULL();\
 		}\

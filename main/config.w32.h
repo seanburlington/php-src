@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.57 2002/04/18 16:34:13 sebastian Exp $
+	$Id: config.w32.h,v 1.58 2002/04/28 17:50:09 sebastian Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -33,8 +33,15 @@
 /* Enable / Disable COM extension (default: enabled) */
 #define HAVE_COM 1
 
+/* Enable / Disable CTYPE extension (default: enabled) */
+#define HAVE_CTYPE 1
+
 /* Enable / Disable FTP extension (default: enabled) */
 #define HAVE_FTP 1
+
+/* Enable / Disable MBSTRING extension (default: enabled) */
+#define HAVE_MBSTRING 1
+#define HAVE_MBREGEX 1
 
 /* Enable / Disable MySQL extension (default: enabled) */
 #define HAVE_MYSQL 1

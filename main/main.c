@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.313 2000/09/05 20:50:41 zeev Exp $ */
+/* $Id: main.c,v 1.314 2000/09/08 12:07:21 stas Exp $ */
 
 
 #include <stdio.h>
@@ -275,7 +275,7 @@ void php_log_err(char *log_message)
 	if (PG(error_log) != NULL) {
 #ifdef HAVE_SYSLOG_H
 		if (!strcmp(PG(error_log), "syslog")) {
-			php_syslog(LOG_NOTICE, log_message);
+			php_syslog(LOG_NOTICE, "%.500s", log_message);
 			return;
 		}
 #endif

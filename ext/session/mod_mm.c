@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_mm.c,v 1.35 2002/03/06 08:54:55 yohgaki Exp $ */
+/* $Id: mod_mm.c,v 1.36 2002/03/06 09:01:13 yohgaki Exp $ */
 
 #include "php.h"
 
@@ -260,7 +260,7 @@ PHP_MINIT_FUNCTION(ps_mm)
 	}
 
 	if (!sprintf(euid,"%d", geteuid())) {
-		php_error(E_WARNING,"mm session save handler cannot get effecitve UID");
+		php_error(E_WARNING,"mm session save handler cannot get effective UID");
 		return FAILURE;
 	}
 		

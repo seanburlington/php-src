@@ -1,7 +1,7 @@
-dnl $Id: config.m4,v 1.2 2002/06/09 00:53:24 sniper Exp $
+dnl $Id: config.m4,v 1.3 2002/09/19 20:14:33 derick Exp $
 
 PHP_ARG_WITH(hwapi, for hwapi support,
-[  --with-hwapi[=DIR]    Include official Hyperwave API support])
+[  --with-hwapi[=DIR]      Include official Hyperwave API support])
 
 if test "$PHP_HWAPI" != "no"; then
   if test -r $PHP_HWAPI/include/sdk/api/object.h; then

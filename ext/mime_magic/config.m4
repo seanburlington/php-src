@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.4 2002/08/22 19:19:37 iliaa Exp $
+dnl $Id: config.m4,v 1.5 2002/09/19 20:14:24 derick Exp $
 dnl config.m4 for extension mime_magic
 
 PHP_ARG_ENABLE(mime_magic, whether to enable mime_magic support,
-[  --enable-mime_magic           Enable mime_magic support])
+[  --enable-mime_magic     Enable mime_magic support])
 
 if test "$PHP_MIME_MAGIC" = "yes"; then
   dnl PHP_SUBST(MIME_MAGIC_SHARED_LIBADD)

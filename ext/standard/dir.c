@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.101 2002/09/26 07:55:59 yohgaki Exp $ */
+/* $Id: dir.c,v 1.102 2002/09/26 11:19:26 jan Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -133,8 +133,10 @@ PHP_MINIT_FUNCTION(dir)
 #ifdef HAVE_GLOB
 	REGISTER_LONG_CONSTANT("GLOB_MARK", GLOB_MARK, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("GLOB_NOSORT", GLOB_NOSORT, CONST_CS | CONST_PERSISTENT);
+#ifdef PHP_WIN32
 	REGISTER_LONG_CONSTANT("GLOB_NOMATCH", GLOB_NOMATCH, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("GLOB_NOESCAPE", GLOB_NOESCAPE, CONST_CS | CONST_PERSISTENT);
+#endif
 #endif
 
 	return SUCCESS;

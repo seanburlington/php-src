@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.350 2003/01/24 12:19:59 andrey Exp $ */
+/* $Id: string.c,v 1.351 2003/01/24 13:18:08 andrey Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -199,7 +199,7 @@ PHP_FUNCTION(bin2hex)
 static void php_spn_common_handler(INTERNAL_FUNCTION_PARAMETERS, int behavior)
 {
 	char *s11, *s22;
-	long len1, len2, start, len;
+	int len1, len2, start, len;
 	
 	start = 0;
 	len = 0;

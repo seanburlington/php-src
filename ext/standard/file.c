@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.267 2002/10/02 23:52:08 dreid Exp $ */
+/* $Id: file.c,v 1.268 2002/10/05 10:59:35 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -633,7 +633,7 @@ PHP_FUNCTION(stream_get_meta_data)
 
 		add_assoc_bool(return_value, "timed_out", sock->timeout_event);
 		add_assoc_bool(return_value, "blocked", sock->is_blocked);
-		add_assoc_bool(return_value, "eof", sock->eof);
+		add_assoc_bool(return_value, "eof", stream->eof);
 	} else {
 		add_assoc_bool(return_value, "timed_out", 0);
 		add_assoc_bool(return_value, "blocked", 1);

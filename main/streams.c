@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.96 2002/10/05 10:35:13 wez Exp $ */
+/* $Id: streams.c,v 1.97 2002/10/05 10:59:34 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1246,6 +1246,7 @@ static size_t php_stdiop_read(php_stream *stream, char *buf, size_t count TSRMLS
 		if (ret == 0 && feof(data->file))
 			stream->eof = 1;
 	}
+	return ret;
 }
 
 static int php_stdiop_close(php_stream *stream, int close_handle TSRMLS_DC)

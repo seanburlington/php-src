@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.91 2003/05/29 14:45:03 helly Exp $ */
+/* $Id: php_cli.c,v 1.92 2003/05/30 00:11:37 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -76,6 +76,10 @@
 
 
 #include "php_getopt.h"
+
+#ifndef O_BINARY
+#define O_BINARY 0
+#endif
 
 #define PHP_MODE_STANDARD      1
 #define PHP_MODE_HIGHLIGHT     2

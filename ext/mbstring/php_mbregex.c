@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.18.2.9 2003/09/23 02:54:28 hirokawa Exp $ */
+/* $Id: php_mbregex.c,v 1.18.2.10 2003/09/26 17:47:10 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -507,7 +507,7 @@ _php_mb_regex_ereg_replace_exec(INTERNAL_FUNCTION_PARAMETERS, int option)
 		}
 		if (err >= 0) {
 #if moriyoshi_0
-			if ( regs.beg[0] == regs.end[0] ) {
+			if (regs.beg[0] == regs.end[0]) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty regular expression");
 				break;
 			}
@@ -552,16 +552,15 @@ _php_mb_regex_ereg_replace_exec(INTERNAL_FUNCTION_PARAMETERS, int option)
 			if (pos < n) {
 				pos = n;
 			} else {
-				_php_mb_regex_strbuf_ncat(&outdev, (const unsigned char *)&string[pos], 1 ); 
+				if (pos < string_len) {
+					_php_mb_regex_strbuf_ncat(&outdev, (const unsigned char *)&string[pos], 1);
+				}
 				pos++;
 			}
 		} else { /* nomatch */
 			/* stick that last bit of string on our output */
-			int l = string_len - pos;
-			if (l > 0) {
-				_php_mb_regex_strbuf_ncat(&outdev, (const unsigned char *)&string[pos], l);
-			} else {
-				outdev.pos += l;
+			if (pos < string_len) {
+				_php_mb_regex_strbuf_ncat(&outdev, (const unsigned char *)&string[pos], string_len - pos);
 			}
 		}
 	}

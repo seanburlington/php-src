@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.90 2004/09/10 11:43:45 wez Exp $ */
+/* $Id: openssl.c,v 1.91 2004/09/13 18:30:29 magnus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -667,6 +667,8 @@ PHP_MSHUTDOWN_FUNCTION(openssl)
 	php_unregister_url_stream_wrapper("ftps" TSRMLS_CC);
 
 	php_stream_xport_unregister("ssl" TSRMLS_CC);
+	php_stream_xport_unregister("sslv2" TSRMLS_CC);
+	php_stream_xport_unregister("sslv3" TSRMLS_CC);
 	php_stream_xport_unregister("tls" TSRMLS_CC);
 
 	/* reinstate the default tcp handler */

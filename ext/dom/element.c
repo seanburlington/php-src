@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.28 2004/05/16 10:30:16 rrichards Exp $ */
+/* $Id: element.c,v 1.29 2004/05/27 11:15:44 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -58,7 +58,7 @@ zend_function_entry php_dom_element_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto void DomElement::__construct(string name, [string value]); */
+/* {{{ proto void DomElement::__construct(string name, [string value], [string uri]); */
 PHP_METHOD(domelement, __construct)
 {
 
@@ -106,6 +106,14 @@ PHP_METHOD(domelement, __construct)
 			RETURN_FALSE;
 		}
 	} else {
+	    /* If you don't pass a namespace uri, then you can't set a prefix */
+	    localname = xmlSplitQName2(name, (xmlChar **) &prefix);
+	    if (prefix != NULL) {
+			xmlFree(localname);
+			xmlFree(prefix);
+	        php_dom_throw_error(NAMESPACE_ERR, 1 TSRMLS_CC);
+	        RETURN_FALSE;
+	    }
 		nodep = xmlNewNode(NULL, (xmlChar *) name);
 	}
 

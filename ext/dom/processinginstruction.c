@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: processinginstruction.c,v 1.13 2004/05/16 10:30:16 rrichards Exp $ */
+/* $Id: processinginstruction.c,v 1.14 2004/05/27 11:15:45 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -48,7 +48,7 @@ PHP_METHOD(domprocessinginstruction, __construct)
 	xmlNodePtr nodep = NULL, oldnode = NULL;
 	dom_object *intern;
 	char *name, *value = NULL;
-	int name_len, value_len;
+	int name_len, value_len, name_valid;
 
 	php_set_error_handling(EH_THROW, dom_domexception_class_entry TSRMLS_CC);
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os|s", &id, dom_processinginstruction_class_entry, &name, &name_len, &value, &value_len) == FAILURE) {
@@ -57,7 +57,9 @@ PHP_METHOD(domprocessinginstruction, __construct)
 	}
 
 	php_std_error_handling();
-	if (name_len == 0) {
+
+	name_valid = xmlValidateName((xmlChar *) name, 0);
+	if (name_valid != 0) {
 		php_dom_throw_error(INVALID_CHARACTER_ERR, 1 TSRMLS_CC);
 		RETURN_FALSE;
 	}

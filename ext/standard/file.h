@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.70 2002/09/28 22:14:21 wez Exp $ */
+/* $Id: file.h,v 1.71 2002/11/30 18:36:17 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -112,8 +112,8 @@ php_meta_tags_token php_next_meta_token(php_meta_tags_data * TSRMLS_DC);
 typedef struct {
   	int pclose_ret;
 	size_t def_chunk_size;
-	int auto_detect_line_endings;
-	int default_socket_timeout;
+	long auto_detect_line_endings;
+	long default_socket_timeout;
 	char *user_agent;
 	char *user_stream_current_filename; /* for simple recursion protection */
 } php_file_globals;

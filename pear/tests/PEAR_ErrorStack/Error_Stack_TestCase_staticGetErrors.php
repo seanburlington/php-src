@@ -3,7 +3,7 @@
 /**
  * API Unit tests for PEAR_ErrorStack package.
  * 
- * @version    $Id: Error_Stack_TestCase_staticGetErrors.php,v 1.1 2004/03/19 00:48:39 cellog Exp $
+ * @version    $Id: Error_Stack_TestCase_staticGetErrors.php,v 1.2 2004/03/21 23:06:20 cellog Exp $
  * @author     Laurent Laville <pear@laurent-laville.org> portions from HTML_CSS
  * @author     Greg Beaver
  * @package    PEAR_ErrorStack
@@ -13,10 +13,10 @@
  * @package PEAR_ErrorStack
  */
 
-class PEAR_ErrorStack_TestCase_staticGetErrors extends PHPUnit_TestCase
+class Error_Stack_TestCase_staticGetErrors extends PHPUnit_TestCase
 {
 
-    function PEAR_ErrorStack_TestCase_staticGetErrors($name)
+    function Error_Stack_TestCase_staticGetErrors($name)
     {
         $this->PHPUnit_TestCase($name);
     }

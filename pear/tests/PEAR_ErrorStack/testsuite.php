@@ -4,7 +4,7 @@
  * HTML output for PHPUnit suite tests.
  *
  * Copied for PEAR_PackageFileManager from HTML_CSS
- * @version    $Id: testsuite.php,v 1.1 2004/03/19 00:48:39 cellog Exp $
+ * @version    $Id: testsuite.php,v 1.2 2004/03/21 23:06:20 cellog Exp $
  * @author     Laurent Laville <pear@laurent-laville.org>
  * @package    HTML_CSS
  */
@@ -46,14 +46,14 @@ $title = 'PhpUnit test run, PEAR_ErrorStack package';
 <h2>Tests</h2>
 	<?php
 	$testcases = array(
-    	    'PEAR_ErrorStack_TestCase_singleton',
-    	    'PEAR_ErrorStack_TestCase_pushpop',
-    	    'PEAR_ErrorStack_TestCase_pushpopstatic',
-    	    'PEAR_ErrorStack_TestCase_pushpopcallback',
-    	    'PEAR_ErrorStack_TestCase_getErrorMessage',
-    	    'PEAR_ErrorStack_TestCase_getErrorMessageTemplate',
-    	    'PEAR_ErrorStack_TestCase_getErrors',
-    	    'PEAR_ErrorStack_TestCase_staticGetErrors',
+    	    'Error_Stack_TestCase_singleton',
+    	    'Error_Stack_TestCase_pushpop',
+    	    'Error_Stack_TestCase_pushpopstatic',
+    	    'Error_Stack_TestCase_pushpopcallback',
+    	    'Error_Stack_TestCase_getErrorMessage',
+    	    'Error_Stack_TestCase_getErrorMessageTemplate',
+    	    'Error_Stack_TestCase_getErrors',
+    	    'Error_Stack_TestCase_staticGetErrors',
 	);
 define('PEAR_LOG_EMERG',    0);     /** System is unusable */
 define('PEAR_LOG_ALERT',    1);     /** Immediate action required */

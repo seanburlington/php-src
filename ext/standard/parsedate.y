@@ -1,5 +1,5 @@
 %{
-/* $Revision: 1.5 $
+/* $Revision: 1.6 $
 **
 **  Originally written by Steven M. Bellovin <smb@research.att.com> while
 **  at the University of North Carolina at Chapel Hill.  Later tweaked by
@@ -50,7 +50,9 @@
 #endif
 
 #if WIN32||WINNT
-#include <time.h>
+#	include <time.h>
+#	define _PHP_H
+#	include "php_reentrancy.h"
 #else
 #	if !defined(HAVE_TM_ZONE) && !defined(_TIMEZONE)
 extern time_t timezone;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.128 2000/12/02 13:27:10 sas Exp $ */
+/* $Id: php.h,v 1.129 2000/12/07 12:09:38 sas Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -215,6 +215,7 @@ char *strerror(int);
 #define PHP_NAMED_FE(php_name, name, arg_types) { #php_name, name, arg_types },
 #define PHP_FE(name, arg_types) PHP_NAMED_FE(name, PHP_FN(name), arg_types)
 #define PHP_FALIAS(name, alias, arg_types) PHP_NAMED_FE(name, PHP_FN(alias), arg_types)
+#define PHP_STATIC_FE(php_name, func_name, arg_types) { php_name, func_name, arg_types },
 
 #define PHP_MINIT(module)	php_minit_##module
 #define PHP_MSHUTDOWN(module)	php_mshutdown_##module

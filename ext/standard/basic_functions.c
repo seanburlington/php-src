@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.29 2003/12/19 13:50:01 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.30 2003/12/22 16:00:54 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -81,6 +81,10 @@
 
 #ifdef PHP_WIN32
 # include "win32/unistd.h"
+#endif
+
+#ifndef INADDR_NONE
+#define INADDR_NONE ((unsigned long int) -1)
 #endif
 
 #include "zend_globals.h"

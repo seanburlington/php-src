@@ -22,7 +22,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.54 2000/03/14 20:20:42 hholzgra Exp $ */
+/* $Id: imap.c,v 1.55 2000/03/14 20:41:31 hholzgra Exp $ */
 
 #define IMAP41
 
@@ -2841,7 +2841,7 @@ PHP_FUNCTION(imap_bodystruct)
    Read an overview of the information in the headers of the given message */ 
 PHP_FUNCTION(imap_fetch_overview)
 {
- 	pval *streamind, *sequence, *flags;
+ 	pval *streamind, *sequence, *pflags;
  	int ind, ind_type;
 	pils *imap_le_struct;
 	pval *myoverview;

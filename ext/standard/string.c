@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.127 2000/06/09 13:58:10 andrei Exp $ */
+/* $Id: string.c,v 1.128 2000/06/12 16:06:27 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2610,7 +2610,7 @@ PHP_FUNCTION(str_pad)
 		pad_str_len = Z_STRLEN_PP(pad_string);
 	}
 
-	result = (char *)emalloc(pad_length_abs);
+	result = (char *)emalloc(pad_length_abs+1);
 
 	/* If positive, we pad on the right and copy the input now. */
 	if (Z_LVAL_PP(pad_length) > 0) {
@@ -2628,6 +2628,7 @@ PHP_FUNCTION(str_pad)
 		memcpy(result + result_len, Z_STRVAL_PP(input), Z_STRLEN_PP(input));
 		result_len += Z_STRLEN_PP(input);
 	}
+	result[result_len] = '\0';
 
 	RETURN_STRINGL(result, result_len, 0);
 }
@@ -2668,7 +2669,7 @@ PHP_FUNCTION(sscanf)
 	efree(args);
 
 	if (SCAN_ERROR_WRONG_PARAM_COUNT == result) {
-		WRONG_PARAM_COUNT
+		WRONG_PARAM_COUNT;
 	}
 
 }

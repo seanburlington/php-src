@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.95 2005/01/08 12:02:22 sniper Exp $ */
+/* $Id: snmp.c,v 1.96 2005/02/12 18:27:22 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -174,7 +174,7 @@ static void php_snmp_init_globals(zend_snmp_globals *snmp_globals)
  */
 PHP_MINIT_FUNCTION(snmp)
 {
-	init_snmp("php");
+	init_snmp("snmpapp");
 
 	ZEND_INIT_MODULE_GLOBALS(snmp, php_snmp_init_globals, NULL);
 

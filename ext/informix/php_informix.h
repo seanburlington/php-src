@@ -15,11 +15,12 @@
    | Authors: Danny Heijl <Danny.Heijl@cevi.be>, initial cut (ODS 7)      |
    |          Christian Cartus <chc@idgruppe.de>, blobs, and IUS 9        |
    |          Jouni Ahto <jouni.ahto@exdec.fi>, configuration stuff       |
+   |          Corne' Cornelius <cornec@reach.co.za>, input descriptors    |
    | based on mysql code by: Zeev Suraski <zeev@php.net>                  |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_informix.h,v 1.18.4.1 2002/12/31 16:34:44 sebastian Exp $ */
+/* $Id: php_informix.h,v 1.18.4.2 2003/02/25 07:09:10 nobbie Exp $ */
 
 #ifndef PHP_INFORMIX_H
 #define PHP_INFORMIX_H

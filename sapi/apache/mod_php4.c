@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.50 2000/05/26 18:43:09 rasmus Exp $ */
+/* $Id: mod_php4.c,v 1.51 2000/06/05 23:21:57 sas Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -48,7 +48,7 @@
 #include "php_ini.h"
 #include "php_globals.h"
 #include "SAPI.h"
-#include "main.h"
+#include "php_main.h"
 
 #include "zend_compile.h"
 #include "zend_execute.h"

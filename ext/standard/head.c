@@ -15,13 +15,13 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.34 2000/06/05 19:47:44 andi Exp $ */
+/* $Id: head.c,v 1.35 2000/06/05 23:21:57 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
 #include "ext/standard/php_standard.h"
 #include "SAPI.h"
-#include "main.h"
+#include "php_main.h"
 #include "head.h"
 #include "SAPI.h"
 #ifdef TM_IN_SYS_TIME

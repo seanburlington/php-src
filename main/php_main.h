@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: main.h,v 1.17 2000/05/18 15:34:21 zeev Exp $ */
+/* $Id: php_main.h,v 1.1 2000/06/05 23:21:57 sas Exp $ */
 
 
 #ifndef _MAIN_H

@@ -18,10 +18,10 @@
  */
 
 
-/* $Id: internal_functions.c.in,v 1.15 2000/05/18 15:34:21 zeev Exp $ */
+/* $Id: internal_functions.c.in,v 1.16 2000/06/05 23:24:42 sas Exp $ */
 
 #include "php.h"
-#include "main.h"
+#include "php_main.h"
 #include "modules.h"
 #include "internal_functions_registry.h"
 #include "zend_compile.h"

@@ -18,11 +18,11 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.30 2000/05/29 17:22:35 zeev Exp $ */
+/* $Id: internal_functions_win32.c,v 1.31 2000/06/05 23:21:57 sas Exp $ */
 
 
 #include "php.h"
-#include "main.h"
+#include "php_main.h"
 #include "modules.h"
 #include "internal_functions_registry.h"
 #include "zend_compile.h"

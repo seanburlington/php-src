@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.108 2002/03/21 22:34:54 mfischer Exp $ */
+/* $Id: curl.c,v 1.109 2002/03/23 01:43:38 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -560,7 +560,7 @@ static void alloc_curl_handle(php_curl **ch)
 }
 /* }}} */
 
-/* {{{ proto int curl_init([string url])
+/* {{{ proto resource curl_init([string url])
    Initialize a CURL session */
 PHP_FUNCTION(curl_init)
 {

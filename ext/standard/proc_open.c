@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.21 2004/04/19 15:07:30 wez Exp $ */
+/* $Id: proc_open.c,v 1.22 2004/05/02 11:13:08 wez Exp $ */
 
 #define _XOPEN_SOURCE
 #define _BSD_SOURCE
@@ -54,9 +54,11 @@
 
 
 #if HAVE_PTSNAME && HAVE_GRANTPT && HAVE_UNLOCKPT && HAVE_SYS_IOCTL_H && HAVE_TERMIOS_H
-# define PHP_CAN_DO_PTS	1
 # include <sys/ioctl.h>
 # include <termios.h>
+# ifdef TIOCNOTTY
+#  define PHP_CAN_DO_PTS	1
+# endif
 #endif
 
 #include "proc_open.h"

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.100.2.1 2005/01/05 10:20:47 hyanantha Exp $ */
+/* $Id: php_ftp.c,v 1.100.2.2 2005/03/10 23:38:01 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -679,6 +679,10 @@ PHP_FUNCTION(ftp_get)
 		resumepos = 0;
 	}
 
+#ifdef PHP_WIN32
+	mode = FTPTYPE_IMAGE;
+#endif
+
 	if (ftp->autoseek && resumepos) {
 		outstream = php_stream_open_wrapper(local, mode == FTPTYPE_ASCII ? "rt+" : "rb+", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
 		if (outstream == NULL) {
@@ -737,7 +741,9 @@ PHP_FUNCTION(ftp_nb_get)
 	if (!ftp->autoseek && resumepos == PHP_FTP_AUTORESUME) {
 		resumepos = 0;
 	}
-
+#ifdef PHP_WIN32
+	mode = FTPTYPE_IMAGE;
+#endif
 	if (ftp->autoseek && resumepos) {
 		outstream = php_stream_open_wrapper(local, mode == FTPTYPE_ASCII ? "rt+" : "rb+", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
 		if (outstream == NULL) {

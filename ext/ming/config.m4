@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11.2.1 2002/03/09 18:17:35 sniper Exp $
+dnl $Id: config.m4,v 1.11.2.2 2002/03/30 03:07:34 sniper Exp $
 dnl
 
 PHP_ARG_WITH(ming, for MING support,
@@ -21,7 +21,7 @@ if test "$PHP_MING" != "no"; then
   ],[
     AC_MSG_ERROR([Ming library 0.2a or greater required.])
   ],[
-    -L$MING_DIR/lib -lm -ldl
+    -L$MING_DIR/lib
   ])
 
   PHP_ADD_INCLUDE($MING_DIR/include)

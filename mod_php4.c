@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.21 1999/09/04 21:16:41 rasmus Exp $ */
+/* $Id: mod_php4.c,v 1.22 1999/09/08 11:53:16 riffraff Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -481,7 +481,7 @@ static void apache_php_module_shutdown_wrapper(void)
 
 void php_init_handler(server_rec *s, pool *p)
 {
-	register_cleanup(p, NULL, apache_php_module_shutdown_wrapper, php_module_shutdown_for_exec);
+	register_cleanup(p, NULL, (void (*)(void *))apache_php_module_shutdown_wrapper, php_module_shutdown_for_exec);
 	if (!apache_php_initialized) {
 		sapi_startup(&sapi_module);
 		php_module_startup(&sapi_module);

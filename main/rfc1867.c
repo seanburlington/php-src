@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.125 2002/12/07 00:48:13 iliaa Exp $ */
+/* $Id: rfc1867.c,v 1.126 2002/12/10 15:36:26 iliaa Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -840,9 +840,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 				}
 			}
 			if (skip_upload) {
-				if (param) {
-					efree(param);
-				}	
+				efree(param);
 				if (filename) {
 					efree(filename);
 				}

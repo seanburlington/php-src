@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.182 2002/08/15 19:09:05 kalowsky Exp $ */
+/* $Id: array.c,v 1.183 2002/08/21 11:23:44 helly Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -351,7 +351,7 @@ static int array_natural_general_compare(const void *a, const void *b, int fold_
 		convert_to_string(&first);
 	}
 	if (Z_TYPE_P(sval) != IS_STRING) {
-		zval_copy_ctor(&first);
+		zval_copy_ctor(&second);
 		convert_to_string(&second);
 	}
 

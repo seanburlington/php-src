@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.128 2002/03/25 01:14:30 sterling Exp $ */
+/* $Id: php_mysql.c,v 1.129 2002/03/25 01:19:59 sterling Exp $ */
 
 
 /* TODO:
@@ -917,21 +917,14 @@ PHP_FUNCTION(mysql_thread_id)
 	int  id = -1;
 	php_mysql_conn *mysql;
 
-	switch(ZEND_NUM_ARGS()) {
-		case 0:
-			id = php_mysql_get_default_link(INTERNAL_FUNCTION_PARAM_PASSTHRU);
-			CHECK_LINK(id);
-			break;
-		case 1:
-			if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &mysql_link)==FAILURE) {
-				RETURN_FALSE;
-			}
-			break;
-		default:
-			WRONG_PARAM_COUNT;
-			break;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|r", &mysql_link) == FAILURE) {
+		return;
 	}
 
+	if (ZEND_NUM_ARGS() == 0) {
+		id = php_mysql_get_default_link(INTERNAL_FUNCTION_PARAM_PASSTHRU);
+		CHECK_LINK(id);		
+	}
 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &mysql_link, id, "MySQL-Link", le_link, le_plink);
 
 	RETURN_LONG(mysql_thread_id(&mysql->conn));
@@ -946,21 +939,14 @@ PHP_FUNCTION(mysql_stat)
 	int id = -1;
 	php_mysql_conn *mysql;
 
-	switch(ZEND_NUM_ARGS()) {
-		case 0:
-			id = php_mysql_get_default_link(INTERNAL_FUNCTION_PARAM_PASSTHRU);
-			CHECK_LINK(id);
-			break;
-		case 1:
-			if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &mysql_link)==FAILURE) {
-				RETURN_FALSE;
-			}
-			break;
-		default:
-			WRONG_PARAM_COUNT;
-			break;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|r", &mysql_link) == FAILURE) {
+		return;
 	}
 
+	if (ZEND_NUM_ARGS() == 0) {
+		id = php_mysql_get_default_link(INTERNAL_FUNCTION_PARAM_PASSTHRU);
+		CHECK_LINK(id);		
+	}
 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &mysql_link, id, "MySQL-Link", le_link, le_plink);
 
 	RETURN_STRING(mysql_stat(&mysql->conn), 1);

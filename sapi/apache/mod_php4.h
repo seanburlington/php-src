@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.h,v 1.7 2000/07/02 23:46:50 sas Exp $ */
+/* $Id: mod_php4.h,v 1.8 2000/12/07 13:07:18 sas Exp $ */
 
 #ifndef MOD_PHP4_H
 #define MOD_PHP4_H
@@ -29,7 +29,6 @@
 typedef struct {
     long engine;
     long last_modified;
-	char *dav_script;
 	long xbithack;
 } php_apache_info_struct;
 

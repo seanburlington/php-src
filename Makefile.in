@@ -24,7 +24,7 @@
 # +----------------------------------------------------------------------+
 
 #
-# $Id: Makefile.in,v 1.49 1999/07/21 21:56:24 ssb Exp $
+# $Id: Makefile.in,v 1.50 1999/07/22 15:55:13 ssb Exp $
 #
 
 prefix = @prefix@
@@ -208,7 +208,7 @@ install: install-recursive $(BINNAME)
 
 install-recursive:
 	if test "$(EXT_SHARED)" != ""; then \
-		for dir in $(EXT_SHARED); do \
+		for dir in X $(EXT_SHARED); do \
 			test -d ext/$$dir && (cd ext/$$dir; $(MAKE) install); \
 		done; \
 	fi

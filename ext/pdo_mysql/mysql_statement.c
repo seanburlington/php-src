@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.14 2005/02/13 00:48:00 hholzgra Exp $ */
+/* $Id: mysql_statement.c,v 1.15 2005/02/20 23:08:34 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -228,7 +228,7 @@ static int pdo_mysql_stmt_col_meta(pdo_stmt_t *stmt, long colno, zval *return_va
 	if (IS_BLOB(F->flags)) {
 		add_next_index_string(flags, "blob", 1);
 	}
-	str = type_to_name_native(F->flags);
+	str = type_to_name_native(F->type);
 	if (str) {
 		add_assoc_string(return_value, "native_type", str, 1);
 	}

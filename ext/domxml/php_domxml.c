@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.140 2002/04/15 14:45:34 steinm Exp $ */
+/* $Id: php_domxml.c,v 1.141 2002/04/15 15:39:10 steinm Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2014,7 +2014,7 @@ PHP_FUNCTION(domxml_node_replace_node)
 
 	repnode = xmlReplaceNode(nodep, new_repnode);
 
-	DOMXML_RET_OBJ(rv, repnode, &ret);
+	DOMXML_RET_OBJ(rv, nodep, &ret);
 }
 /* }}} */
 

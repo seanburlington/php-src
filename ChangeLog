@@ -1,3 +1,14 @@
+2004-04-16  Uwe Schindler  <uwe@thetaphi.de>
+
+    * (PHP_4_3)
+      ext/sybase/php_sybase_db.c
+      ext/sybase_ct/php_sybase_ct.c:
+      MFH: set Sybase default APPNAME to ("PHP " PHP_VERSION)
+
+    * ext/sybase/php_sybase_db.c
+      ext/sybase_ct/php_sybase_ct.c:
+      set Sybase default APPNAME to ("PHP " PHP_VERSION)
+
 2004-04-15  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * main/snprintf.c:
@@ -2107,7 +2118,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1600 2004/04/16 00:36:25 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1601 2004/04/17 00:34:11 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

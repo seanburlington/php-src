@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.123.2.3 2001/08/28 21:52:38 rasmus Exp $ */
+/* $Id: array.c,v 1.123.2.4 2001/11/15 07:28:35 derick Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3133,9 +3133,9 @@ PHP_FUNCTION(array_map)
 /* }}} */
 
 
-/* {{{ proto bool key_exists(mixed key, array search)
+/* {{{ proto bool array_key_exists(mixed key, array search)
    Checks if the given key or index exists in the array */
-PHP_FUNCTION(key_exists)
+PHP_FUNCTION(array_key_exists)
 {
 	zval **key,					/* key to check for */
 		 **array;				/* array to check in */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.385.2.6 2001/11/11 12:44:00 stas Exp $ */
+/* $Id: basic_functions.c,v 1.385.2.7 2001/11/15 07:28:35 derick Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -616,7 +616,7 @@ function_entry basic_functions[] = {
 	PHP_FE(array_sum,							    NULL)
 	PHP_FE(array_filter,						    NULL)
 	PHP_FE(array_map,							    NULL)
-	PHP_FE(key_exists,								NULL)
+	PHP_FE(array_key_exists,						NULL)
 
 	/* aliases from array.c */
 	PHP_FALIAS(pos,				current,			first_arg_force_ref)

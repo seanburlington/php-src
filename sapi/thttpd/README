@@ -1,5 +1,5 @@
 README FOR THTTPD MODULE (by Sascha Schumann)        
-($Date: 2001/10/02 14:54:46 $)
+($Date: 2002/03/11 12:28:16 $)
 
 	This is a SAPI module for PHP 4.0 supporting thttpd, the tiny,
 	turbo, throttling HTTP server by Jef Poskanzer.
@@ -18,10 +18,10 @@ README FOR THTTPD MODULE (by Sascha Schumann)
 
 REQUIRED DOWNLOADS
 
-	1. thttpd 2.xx
+	1. thttpd 2.21b (2.20 or 2.22beta will _not_ work)
 	   
 	   Full Distribution:
-	   http://www.acme.com/software/thttpd/
+	   http://www.acme.com/software/thttpd/thttpd-2.21b.tar.gz
 	   
 	2. PHP 4.0.x
 	   

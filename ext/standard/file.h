@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.76 2003/02/22 20:33:11 iliaa Exp $ */
+/* $Id: file.h,v 1.77 2003/02/22 20:35:22 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -54,7 +54,6 @@ PHP_FUNCTION(unlink);
 PHP_FUNCTION(copy);
 PHP_FUNCTION(file);
 PHP_FUNCTION(file_get_contents);
-PHP_FUNCTION(file_write_content);
 PHP_FUNCTION(set_socket_blocking); /* deprecated */
 PHP_FUNCTION(stream_set_blocking);
 PHP_FUNCTION(stream_select);

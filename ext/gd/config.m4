@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.129 2003/02/01 23:25:14 helly Exp $
+dnl $Id: config.m4,v 1.130 2003/02/02 01:34:54 helly Exp $
 dnl
 
 dnl
@@ -257,7 +257,8 @@ if test "$PHP_GD" = "yes"; then
                  libgd/gd_io_file.c libgd/gd_ss.c libgd/gd_io_ss.c libgd/gd_png.c libgd/gd_jpeg.c \
                  libgd/gdxpm.c libgd/gdfontt.c libgd/gdfonts.c libgd/gdfontmb.c libgd/gdfontl.c \
                  libgd/gdfontg.c libgd/gdtables.c libgd/gdft.c libgd/gdcache.c libgd/gdkanji.c \
-                 libgd/wbmp.c libgd/gd_wbmp.c libgd/gdhelpers.c libgd/gd_topal.c libgd/gd_gif_in.c"
+                 libgd/wbmp.c libgd/gd_wbmp.c libgd/gdhelpers.c libgd/gd_topal.c libgd/gd_gif_in.c \
+                 libgd/xbm.c"
 
 dnl check for fabsf and floorf which are available since C99
   AC_CHECK_FUNCS(fabsf floorf)

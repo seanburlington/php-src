@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.110 2002/05/01 16:38:22 mfischer Exp $ */
+/* $Id: sockets.c,v 1.111 2002/05/02 16:45:22 jason Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -720,8 +720,7 @@ PHP_FUNCTION(socket_write)
 #endif
 
 	if (retval < 0) {
-		SOCKETS_G(last_error) = php_sock->error = errno;
-		php_error(E_WARNING, "%s() unable to write to socket %d [%d]: %s", get_active_function_name(TSRMLS_C), php_sock->bsd_socket, errno, php_strerror(errno));
+		PHP_SOCKET_ERROR(php_sock, "unable to write to socket", errno);
 		RETURN_FALSE;
 	}
 

@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.23.2.1 2002/03/21 21:53:26 rasmus Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.23.2.2 2002/07/11 02:41:52 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -135,6 +135,9 @@ FILE *php_fopen_url_wrap_http(const char *path, char *mode, int options, int *is
 	
 	/* send authorization header if we have user/pass */
 	if (resource->user != NULL && resource->pass != NULL) {
+		php_url_decode(resource->user, strlen(resource->user));
+		php_url_decode(resource->pass, strlen(resource->pass));
+
 		scratch = (char *) emalloc(strlen(resource->user) + strlen(resource->pass) + 2);
 		if (!scratch) {
 			php_url_free(resource);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.177 2002/10/24 13:14:45 sas Exp $ */
+/* $Id: php.h,v 1.178 2002/11/07 11:52:45 sas Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -26,7 +26,7 @@
 #include <dmalloc.h>
 #endif
 
-#define PHP_API_VERSION 20020307
+#define PHP_API_VERSION 20020918
 #define PHP_HAVE_STREAMS
 #define YYDEBUG 0
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.43 2005/02/07 01:12:49 wez Exp $ */
+/* $Id: php_pdo_driver.h,v 1.44 2005/02/09 00:38:11 wez Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -378,7 +378,7 @@ enum pdo_placeholder_support {
 
 /* represents a connection to a database */
 struct _pdo_dbh_t {
-	/* these items mst appear in this order at the beginning of the
+	/* these items must appear in this order at the beginning of the
        struct so that this can be cast as a zend_object.  we need this
        to allow the extending class to escape all the custom handlers
 	   that PDO declares.

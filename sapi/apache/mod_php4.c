@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.18 2000/02/02 06:09:00 andrei Exp $ */
+/* $Id: mod_php4.c,v 1.19 2000/02/02 16:49:39 andrei Exp $ */
 
 #include "zend.h"
 #include "php.h"
@@ -491,7 +491,7 @@ CONST_PREFIX char *php_apache_value_handler_ex(cmd_parms *cmd, HashTable *conf, 
 
 	if (!apache_php_initialized) {
 		sapi_startup(&sapi_module);
-		php_module_startup(&sapi_module);
+		php_apache_startup(&sapi_module);
 		apache_php_initialized = 1;
 	}
 	per_dir_entry.type = mode;

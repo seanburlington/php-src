@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.35.2.6.2.2 2003/06/25 15:06:51 mj Exp $
+// $Id: Registry.php,v 1.35.2.6.2.3 2003/06/25 16:27:01 pajoye Exp $
 
 /*
 TODO:
@@ -98,6 +98,18 @@ class PEAR_Registry extends PEAR
         $this->statedir = $pear_install_dir.$ds.'.registry';
         $this->filemap  = $pear_install_dir.$ds.'.filemap';
         $this->lockfile = $pear_install_dir.$ds.'.lock';
+
+        // XXX Compatibility code should be removed in the future
+        // rename all registry files if any to lowercase
+        if (!OS_WINDOWS && $handle = opendir($this->statedir)) {
+            $dest = $this->statedir . DIRECTORY_SEPARATOR;
+            while (false !== ($file = readdir($handle))) {
+                if (preg_match('/^.*[A-Z].*\.reg$/', $file)) {
+                    rename($dest . $file, $dest . strtolower($file));
+                }
+            }
+            closedir($handle);
+        }
         if (!file_exists($this->filemap)) {
             $this->rebuildFileMap();
         }

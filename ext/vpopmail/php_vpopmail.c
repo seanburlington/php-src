@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.c,v 1.17 2001/07/30 06:18:08 zeev Exp $ */
+/* $Id: php_vpopmail.c,v 1.18 2001/07/31 03:00:04 zeev Exp $ */
 
 /* TODO: move to config.m4 when support for old versions is ready or just
  * don't support rather old vpopmail. current version must bail out if
@@ -405,7 +405,7 @@ PHP_FUNCTION(vpopmail_add_domain_ex)
 	strcat(cmd,escdomain);
 	strcat(cmd," ");
 	strcat(cmd,escpasswd);
-	retval=php_Exec(0,cmd,NULL,return_value);
+	retval=php_Exec(0,cmd,NULL,return_value TSRMLS_CC);
 	efree(cmd);
 	efree(escdomain);
 	efree(escpasswd);
@@ -452,7 +452,7 @@ PHP_FUNCTION(vpopmail_del_domain_ex) {
 		RETURN_FALSE;
 	}
 	sprintf(cmd,VPOPMAIL_BIN_DIR VPOPMAIL_DELD"%s",escdomain);
-	retval=php_Exec(0,cmd,NULL,return_value);
+	retval=php_Exec(0,cmd,NULL,return_value TSRMLS_CC);
 	efree(escdomain);
 	efree(cmd);
 
@@ -503,7 +503,7 @@ PHP_FUNCTION(vpopmail_add_alias_domain_ex) {
 		RETURN_FALSE;
 	}
 	sprintf(cmd,"%s%s %s",VPOPMAIL_BIN_DIR VPOPMAIL_ADAD,escolddomain,escnewdomain);
-	retval=php_Exec(0,cmd,NULL,return_value);
+	retval=php_Exec(0,cmd,NULL,return_value TSRMLS_CC);
 	efree(cmd);
 	efree(escnewdomain);
 	efree(escolddomain);

@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.145 2003/12/04 02:11:39 cellog Exp $
+// $Id: Installer.php,v 1.146 2003/12/06 06:08:56 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -880,6 +880,8 @@ class PEAR_Installer extends PEAR_Downloader
      * @param array Command-line options.  Possibilities include:
      *
      *              - installroot: base installation dir, if not the default
+     *              - nodeps: do not process dependencies of other packages to ensure
+     *                        uninstallation does not break things
      */
     function uninstall($package, $options = array())
     {

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.27 2002/05/21 01:27:53 ssb Exp $
+// $Id: Package.php,v 1.28 2002/05/21 01:38:50 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';
@@ -27,6 +27,7 @@ class PEAR_Command_Package extends PEAR_Command_Common
         'package' => array(
             'summary' => 'Build Package',
             'function' => 'doPackage',
+            'shortcut' => 'p',
             'options' => array(
                 'nocompress' => array(
                     'shortopt' => 'Z',

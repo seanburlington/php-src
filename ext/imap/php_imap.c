@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.142.2.6 2003/01/18 07:01:11 sniper Exp $ */
+/* $Id: php_imap.c,v 1.142.2.7 2003/01/23 16:30:07 sniper Exp $ */
 
 #define IMAP41
 
@@ -420,7 +420,7 @@ PHP_MINIT_FUNCTION(imap)
 #ifndef PHP_WIN32
 	auth_link(&auth_log);		/* link in the log authenticator */
 	auth_link(&auth_md5);       /* link in the cram-md5 authenticator */ 
-#ifdef HAVE_IMAP_AUTH_GSS
+#ifdef HAVE_IMAP_KRB && defined(HAVE_IMAP_AUTH_GSS)
 	auth_link(&auth_gss);		/* link in the gss authenticator */
 #endif
 

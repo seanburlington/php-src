@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.7 2001/12/26 01:50:08 ssb Exp $
+// $Id: System.php,v 1.8 2002/01/23 18:53:08 cox Exp $
 //
 
 // TODO:
@@ -41,7 +41,7 @@ require_once 'Console/Getopt.php';
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.7 $
+* @version  $Revision: 1.8 $
 * @access   public
 */
 class System extends PEAR
@@ -197,6 +197,7 @@ class System extends PEAR
                 $mode = $opt[1];
             }
         }
+        $ret = true;
         if (isset($create_parents)) {
             foreach($opts[1] as $dir) {
                 $dirstack = array();
@@ -206,18 +207,18 @@ class System extends PEAR
                 }
                 while ($newdir = array_shift($dirstack)) {
                     if (!mkdir($newdir, $mode)) {
-                        break; // XXX error
+                        $ret = false;
                     }
                 }
             }
         } else {
             foreach($opts[1] as $dir) {
-                if (!mkdir($dir, $mode)) {
-                    continue; // XXX error
+                if (!@is_dir($dir) && !mkdir($dir, $mode)) {
+                    $ret = false;
                 }
             }
         }
-        return true;
+        return $ret;
     }
 
     /**

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.347 2002/05/09 12:06:44 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.348 2002/05/10 18:38:21 edink Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -967,6 +967,7 @@ AC_DEFINE_UNQUOTED(PHP_OS,"$PHP_OS",[uname output])
 
 if test "$disable_cli" != "1"; then
   PHP_CLI_TARGET=sapi/cli/php
+  PHP_INSTALL_CLI_TARGET="install-cli"
   PHP_ADD_SOURCES(sapi/cli, php_cli.c getopt.c,, cli)
 fi
 
@@ -1079,7 +1080,7 @@ INLINE_CFLAGS="$INLINE_CFLAGS $standard_libtool_flag"
 CXXFLAGS="$CXXFLAGS $standard_libtool_flag"
 
 all_targets='$(OVERALL_TARGET) $(PHP_MODULES) $(PHP_CLI_TARGET)'
-install_targets="install-sapi install-modules install-cli $install_pear"
+install_targets="install-sapi install-modules $PHP_INSTALL_CLI_TARGET $install_pear"
 PHP_SUBST(all_targets)
 PHP_SUBST(install_targets)
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.8 2003/05/19 14:52:15 sterling Exp $ */
+/* $Id: simplexml.c,v 1.9 2003/05/19 16:27:46 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -164,7 +164,7 @@ change_node_zval(xmlNodePtr node, zval *value)
 		case IS_NULL:
 			convert_to_string(value);
 		case IS_STRING:
-			node->xmlChildrenNode->content = xmlStrndup(Z_STRVAL_P(value), Z_STRLEN_P(value));
+			xmlNodeSetContentLen(node->xmlChildrenNode, Z_STRVAL_P(value), Z_STRLEN_P(value));
 			break;
 		default:
 			php_error(E_WARNING, "It is not yet possible to assign complex types to attributes");

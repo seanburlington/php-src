@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.195 2000/02/10 16:44:58 zeev Exp $ */
+/* $Id: main.c,v 1.196 2000/02/10 16:52:07 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -898,22 +898,16 @@ void php_module_shutdown()
 	if (!module_initialized) {
 		return;
 	}
-#if !USE_SAPI
+
 	/* close down the ini config */
 	php_config_ini_shutdown();
-#endif
 
-#if (WIN32|WINNT) && !(USE_SAPI)
+#if (WIN32|WINNT)
 	/*close winsock */
 	WSACleanup();
 #endif
 
-#if CGI_BINARY
-	fflush(stdout);
-#endif
-#if 0							/* SAPI */
-	sapi_rqst->flush(sapi_rqst->scid);
-#endif
+	sapi_flush();
 
 	global_lock_destroy();
 	zend_shutdown();

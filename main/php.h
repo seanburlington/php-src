@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.90 2000/04/29 19:01:58 andi Exp $ */
+/* $Id: php.h,v 1.91 2000/04/30 16:32:36 andi Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -298,8 +298,8 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #ifdef VIRTUAL_DIR
 #define V_GETCWD(buff, size) virtual_getcwd(buff,size)
 #define V_FOPEN(path, mode) virtual_fopen(path, mode)
-#define V_OPEN(path, flags) virtual_open(path, flags)
-#define V_OPEN_CREAT(path, flags, mode) virtual_open(path, flags, mode)
+/* The V_OPEN macro will need to be used as V_OPEN((path, flags, ...)) */
+#define V_OPEN(open_args) virtual_open open_args
 #define V_CREAT(path, mode) virtual_creat(path, mode)
 #define V_CHDIR(path) virtual_chdir(path)
 #define V_CHDIR_FILE(path) virtual_chdir_file(path)
@@ -313,8 +313,7 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #else
 #define V_GETCWD(buff, size) getcwd(buff,size)
 #define V_FOPEN(path, mode)  fopen(path, mode)
-#define V_OPEN(path, flags) open(path, flags)
-#define V_OPEN_CREAT(path, flags, mode) open(path, flags, mode)
+#define V_OPEN(open_args) open open_args
 #define V_CREAT(path, mode) creat(path, mode)
 #define V_CHDIR(path) chdir(path)
 #define V_CHDIR_FILE(path) chdir_file(path)

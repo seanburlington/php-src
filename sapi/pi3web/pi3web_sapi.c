@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.17 2001/04/08 10:49:07 holger Exp $ */
+/* $Id: pi3web_sapi.c,v 1.18 2001/07/20 21:00:14 holger Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -31,6 +31,7 @@
 #include "ext/standard/info.h"
 #include "zend_highlight.h"
 #include "zend_indent.h"
+#include "zend_alloc.h"
 #include "ext/standard/basic_functions.h"
 #include "TSRM/TSRM.h"
 #include "PiAPI.h"
@@ -77,7 +78,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.17 2001/04/08 10:49:07 holger Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.18 2001/07/20 21:00:14 holger Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -276,7 +277,6 @@ static char *sapi_pi3web_read_cookies(SLS_D)
 	return NULL;
 }
 
-
 static sapi_module_struct pi3web_sapi_module = {
 	"pi3web",				/* name */
 	"PI3WEB",				/* pretty name */
@@ -302,7 +302,6 @@ static sapi_module_struct pi3web_sapi_module = {
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };
-
 
 static void init_request_info(sapi_globals_struct *sapi_globals, LPCONTROL_BLOCK lpCB)
 {
@@ -376,6 +375,8 @@ static void hash_pi3web_variables(ELS_D SLS_DC)
 DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 {
 	zend_file_handle file_handle;
+	char *header_line;
+	int iRet = PIAPI_COMPLETED;
 	SLS_FETCH();
 	CLS_FETCH();
 	ELS_FETCH();
@@ -396,31 +397,49 @@ DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 
 	switch ( lpCB->dwBehavior ) {
 		case PHP_MODE_STANDARD:
-			php_execute_script( &file_handle CLS_CC ELS_CC PLS_CC );
+			iRet = ( php_execute_script( &file_handle CLS_CC ELS_CC PLS_CC ) == SUCCESS ) ?
+				PIAPI_COMPLETED : PIAPI_ERROR;
 			break;
 		case PHP_MODE_HIGHLIGHT: {
-				zend_syntax_highlighter_ini syntax_highlighter_ini;
-				if ( open_file_for_scanning( &file_handle CLS_CC ) == SUCCESS ) {
-					php_get_highlight_struct( &syntax_highlighter_ini );
-					zend_highlight( &syntax_highlighter_ini );
-					/* fclose( file_handle.handle.fp ); */
+			zend_syntax_highlighter_ini syntax_highlighter_ini;
+			if ( open_file_for_scanning( &file_handle CLS_CC ) == SUCCESS )
+				{
+				php_get_highlight_struct( &syntax_highlighter_ini );
+				zend_highlight( &syntax_highlighter_ini );
+				}
+			else
+				{
+				iRet = PIAPI_ERROR;
 				};
 			};
 			break;
 		case PHP_MODE_INDENT:
-			if ( open_file_for_scanning( &file_handle CLS_CC ) == SUCCESS ) {
+			header_line = (char *)estrdup("Content-Type: text/plain");
+			sapi_add_header_ex(header_line, strlen(header_line), TRUE, TRUE);
+			if ( open_file_for_scanning( &file_handle CLS_CC ) == SUCCESS )
+				{
 				zend_indent();
-			};
-			/* fclose( file_handle.handle.fp ); */
+				}
+			else
+				{
+				iRet = PIAPI_ERROR;
+				};
 			break;
-	}
+		case PHP_MODE_LINT:
+			iRet = (php_lint_script(&file_handle CLS_CC ELS_CC PLS_CC) == SUCCESS) ?
+				PIAPI_COMPLETED : PIAPI_ERROR;
+			break;
+		default:
+			iRet = PIAPI_ERROR;;
+		}
 
 	if (SG(request_info).cookie_data) {
 		efree(SG(request_info).cookie_data);
 	};
 
+	efree(header_line);
 	php_request_shutdown(NULL);
-	return PIAPI_COMPLETED;
+	return iRet;
 }
 
 BOOL PHP4_startup() {

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_string.h,v 1.22 2000/07/03 00:41:17 sas Exp $ */
+/* $Id: php_string.h,v 1.23 2000/07/08 20:38:23 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -122,5 +122,7 @@ PHPAPI size_t php_strcspn(char *s1, char *s2, char *s1_end, char *s2_end);
 PHPAPI char *php_strerror(int errnum);
 #define strerror php_strerror
 #endif
+
+void register_string_constants(INIT_FUNC_ARGS);
 
 #endif /* PHP_STRING_H */

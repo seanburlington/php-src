@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.26.2.1 2004/07/30 14:24:59 wez Exp $
+// $Id: config.w32,v 1.26.2.2 2004/08/01 00:35:11 wez Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -217,6 +217,8 @@ AC_DEFINE('HAVE_IPV6', main_network_has_ipv6);
 ARG_ENABLE("memory-limit", "Enable memory limit checking code", "no");
 
 AC_DEFINE('MEMORY_LIMIT', PHP_MEMORY_LIMIT == "yes" ? 1 : 0);
+
+AC_DEFINE('HAVE_USLEEP', 1);
 
 /* For snapshot builders, where can we find the additional
  * files that make up the snapshot template? */

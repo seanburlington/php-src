@@ -24,7 +24,7 @@
 #
 # Written by Stig Bakken <ssb@guardian.no> 1997-05-28.
 #
-# $Id: makedist,v 1.6 1999/08/04 22:33:18 zeev Exp $
+# $Id: makedist,v 1.7 1999/10/05 14:12:43 sas Exp $
 #
 
 CVSROOT=:pserver:cvsread@cvs.php.net:/repository
@@ -108,12 +108,9 @@ done
 # to install
 set -x
 ./buildconf --copy
-cd libzend
-bison -p zend -d zend-parser.y -o zend-parser.c
-flex -Pzend -ozend-scanner.c -i zend-scanner.l
-cd ..
-bison -p cfg -d configuration-parser.y -o configuration-parser.c
-flex -Pcfg -oconfiguration-scanner.c -i configuration-scanner.l
+
+./genfiles
+
 echo "/* Dummy File */" > ext/bcmath/number.c
 echo "/* Dummy File */" > ext/bcmath/number.h
 

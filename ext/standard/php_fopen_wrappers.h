@@ -18,15 +18,15 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_fopen_wrappers.h,v 1.16 2003/02/27 18:16:34 wez Exp $ */
+/* $Id: php_fopen_wrappers.h,v 1.17 2003/03/23 21:58:03 alexwaugh Exp $ */
 
 #ifndef PHP_FOPEN_WRAPPERS_H
 #define PHP_FOPEN_WRAPPERS_H
 
 php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);
 php_stream *php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);
-PHPAPI php_stream_wrapper php_stream_http_wrapper;
-PHPAPI php_stream_wrapper php_stream_ftp_wrapper;
+extern PHPAPI php_stream_wrapper php_stream_http_wrapper;
+extern PHPAPI php_stream_wrapper php_stream_ftp_wrapper;
 extern php_stream_wrapper php_stream_php_wrapper;
 
 #endif

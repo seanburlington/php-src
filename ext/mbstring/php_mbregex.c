@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.8 2002/10/06 15:31:52 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.9 2002/10/06 16:37:33 rasmus Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -225,7 +225,7 @@ PHP_FUNCTION(mb_regex_encoding)
 	if (ZEND_NUM_ARGS() == 0) {
 		const char *retval = php_mbregex_mbctype2name(MBSTRG(current_mbctype));
 		if ( retval != NULL ) {
-			RETVAL_STRING((char *)retval);
+			RETVAL_STRING((char *)retval, 1);
 		} else {
 			RETVAL_FALSE;
 		}

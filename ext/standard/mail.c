@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.48.2.2 2002/08/23 23:48:48 zeev Exp $ */
+/* $Id: mail.c,v 1.48.2.3 2002/08/24 11:38:13 sesser Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -88,21 +88,27 @@ PHP_FUNCTION(mail)
 	}
 
 	if (to_len > 0) {
-		for(to_len--;to_len;to_len--) {
-			if(!isspace((unsigned char)to[to_len]))break;
-			to[to_len]='\0';
+		for(;to_len;to_len--) {
+			if(!isspace((unsigned char)to[to_len-1]))break;
+			to[to_len-1]='\0';
 		}
-		for(i=0;!iscntrl((unsigned char)to[i]);i++) {}
-		to[i]='\0';
+		for(i=0;to[i];i++) {
+			if (iscntrl((unsigned char)to[i])) {
+				to[i]=' ';
+			}
+		}
 	}
 
 	if (subject_len > 0) {
-		for(subject_len--;subject_len;subject_len--) {
-			if(!isspace((unsigned char)subject[subject_len]))break;
-			subject[subject_len]='\0';
+		for(;subject_len;subject_len--) {
+			if(!isspace((unsigned char)subject[subject_len-1]))break;
+			subject[subject_len-1]='\0';
 		}
-		for(i=0;!iscntrl((unsigned char)subject[i]);i++) {}
-		subject[i]='\0';
+		for(i=0;subject[i];i++) {
+			if (iscntrl((unsigned char)subject[i])) {
+				subject[i]=' ';
+			}
+		}
 	}
 
 	if(extra_cmd)

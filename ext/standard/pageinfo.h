@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pageinfo.h,v 1.7 2001/07/09 17:36:04 rasmus Exp $ */
+/* $Id: pageinfo.h,v 1.8 2001/12/03 05:11:29 fmk Exp $ */
 
 #ifndef PAGEINFO_H
 #define PAGEINFO_H
@@ -27,6 +27,8 @@ PHP_FUNCTION(getmypid);
 PHP_FUNCTION(getmyinode);
 PHP_FUNCTION(getlastmod);
 
+PHPAPI void php_statpage(TSRMLS_D);
+PHPAPI long php_getlastmod(TSRMLS_D);
 extern long php_getuid(void);
 extern long php_getgid(void);
 

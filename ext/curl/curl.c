@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.41 2001/03/20 21:30:42 sterling Exp $ */
+/* $Id: curl.c,v 1.42 2001/04/24 22:10:41 sterling Exp $ */
 
 
 #include "php.h"
@@ -483,9 +483,6 @@ PHP_FUNCTION(curl_setopt)
 					RETURN_FALSE;
 				}
 				
-				header = emalloc(sizeof(struct curl_slist));
-				memset(header, 0, sizeof(struct curl_slist));
-				
 				for (zend_hash_internal_pointer_reset(headers);
 				     zend_hash_get_current_data(headers, (void **)&current) == SUCCESS;
 					 zend_hash_move_forward(headers)) {
@@ -520,9 +517,6 @@ PHP_FUNCTION(curl_setopt)
 					RETURN_FALSE;
 				}
 
-				commands = (struct curl_slist *) emalloc(sizeof(struct curl_slist));
-				memset(commands, 0, sizeof(struct curl_slist));
-				
 				for (zend_hash_internal_pointer_reset(php_commands);
 				     zend_hash_get_current_data(php_commands, (void **)&current) == SUCCESS;
 					 zend_hash_move_forward(php_commands)) {
@@ -646,7 +640,7 @@ PHP_FUNCTION(curl_exec)
 		if (is_temp_file)
 			fclose(fp);
 
-		RETURN_STRINGL(ret_data, stat_sb.st_size, 0);
+		RETURN_STRINGL(ret_data, stat_sb.st_size + 1, 0);
 
 	}
 

@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.74 2004/01/14 22:43:12 cellog Exp $
+// $Id: PEAR.php,v 1.75 2004/01/19 13:57:38 mj Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -416,7 +416,7 @@ class PEAR
             // $error_code is a non-empty array here;
             // we walk through it trying to unset all
             // values
-            foreach($error_code AS $key => $error) {
+            foreach($error_code as $key => $error) {
                 if ($this->_checkDelExpect($error)) {
                     $deleted =  true;
                 } else {

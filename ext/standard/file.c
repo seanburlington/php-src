@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.326 2003/03/18 12:06:02 ssb Exp $ */
+/* $Id: file.c,v 1.327 2003/03/18 14:35:15 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -486,6 +486,7 @@ PHP_FUNCTION(file_set_contents)
 	
 	RETURN_TRUE;
 }
+/* }}} */
 
 /* {{{ proto array file(string filename [, int flags])
    Read entire file into an array */
@@ -546,7 +547,7 @@ PHP_FUNCTION(file)
 		if (include_new_line) {	
 	 		do {
  				p++;
- 				parse_eol:
+parse_eol:
  				if (PG(magic_quotes_runtime)) {
  					/* s is in target_buf which is freed at the end of the function */
  					slashed = php_addslashes(s, (p-s), &len, 0 TSRMLS_CC);

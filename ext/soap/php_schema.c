@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.c,v 1.50 2004/08/26 18:40:10 dmitry Exp $ */
+/* $Id: php_schema.c,v 1.51 2004/09/26 21:45:17 helly Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -1363,7 +1363,6 @@ static int schema_complexType(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr compType, s
 {
 	xmlNodePtr trav;
 	xmlAttrPtr attrs, name, ns;
-	TSRMLS_FETCH();
 
 	attrs = compType->properties;
 	ns = get_attribute(attrs, "targetNamespace");

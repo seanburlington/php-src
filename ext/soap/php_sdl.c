@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.74 2004/09/22 05:58:40 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.75 2004/09/26 21:45:17 helly Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -75,7 +75,6 @@ encodePtr get_encoder_from_prefix(sdlPtr sdl, xmlNodePtr node, const char *type)
 static sdlTypePtr get_element(sdlPtr sdl, xmlNodePtr node, const char *type)
 {
 	sdlTypePtr ret = NULL;
-	TSRMLS_FETCH();
 
 	if (sdl->elements) {
 		xmlNsPtr nsptr;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.44 2004/01/08 08:15:44 andi Exp $ */
+/* $Id: gettext.c,v 1.45 2004/07/29 22:23:23 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -27,7 +27,6 @@
 #if HAVE_LIBINTL
 
 #include <stdio.h>
-#include <libintl.h>
 #include "ext/standard/info.h"
 #include "php_gettext.h"
 
@@ -56,6 +55,8 @@ function_entry php_gettext_functions[] = {
     {NULL, NULL, NULL}
 };
 /* }}} */
+
+#include <libintl.h>
 
 zend_module_entry php_gettext_module_entry = {
 	STANDARD_MODULE_HEADER,

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.4 2004/04/21 23:06:26 iliaa Exp $ */
+/* $Id: fileinfo.c,v 1.5 2004/04/21 23:16:34 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -369,7 +369,7 @@ static void _php_finfo_get_type(INTERNAL_FUNCTION_PARAMETERS, int mode)
 			if (!stream) {
 				RETURN_FALSE;
 			}
-			buffer_len = php_stream_copy_to_mem(stream, &tmp, HOWMANY, 0); // 
+			buffer_len = php_stream_copy_to_mem(stream, &tmp, HOWMANY, 0);
 			php_stream_close(stream);
 
 			if (buffer_len == 0) {

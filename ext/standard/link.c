@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.8 1999/08/02 19:16:50 zeev Exp $ */
+/* $Id: link.c,v 1.9 1999/08/15 18:52:10 thies Exp $ */
 
 #include "php.h"
 #include "php3_filestat.h"
@@ -105,6 +105,7 @@ PHP_FUNCTION(symlink)
 #if HAVE_SYMLINK
 	pval *topath, *frompath;
 	int ret;
+	PLS_FETCH();
 
 	if (ARG_COUNT(ht) != 2 || getParameters(ht, 2, &topath, &frompath) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -133,6 +134,7 @@ PHP_FUNCTION(link)
 #if HAVE_LINK
 	pval *topath, *frompath;
 	int ret;
+	PLS_FETCH();
 
 	if (ARG_COUNT(ht) != 2 || getParameters(ht, 2, &topath, &frompath) == FAILURE) {
 		WRONG_PARAM_COUNT;

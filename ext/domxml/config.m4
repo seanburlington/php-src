@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.26 2001/07/27 14:02:44 sniper Exp $
+dnl $Id: config.m4,v 1.27 2001/08/18 21:08:52 sniper Exp $
 dnl config.m4 for extension domxml
 
 AC_DEFUN(PHP_DOM_CHECK_VERSION,[
@@ -7,19 +7,19 @@ AC_DEFUN(PHP_DOM_CHECK_VERSION,[
   AC_MSG_CHECKING(for libxml version)
   AC_EGREP_CPP(yes,[
   #include <libxml/xmlversion.h>
-  #if LIBXML_VERSION >= 20207
+  #if LIBXML_VERSION >= 20402
   yes
   #endif
   ],[
-    AC_MSG_RESULT(>= 2.2.7)
+    AC_MSG_RESULT(>= 2.4.2)
   ],[
-    AC_MSG_ERROR(libxml version 2.2.7 or greater required.)
+    AC_MSG_ERROR(libxml version 2.4.2 or greater required.)
   ])
   CPPFLAGS=$old_CPPFLAGS
 ])
 
 PHP_ARG_WITH(dom, for DOM support,
-[  --with-dom[=DIR]        Include DOM support (requires libxml >= 2.2.7).
+[  --with-dom[=DIR]        Include DOM support (requires libxml >= 2.4.2).
                           DIR is the libxml install directory,
                           defaults to /usr.])
 
@@ -35,7 +35,7 @@ if test "$PHP_DOM" != "no"; then
 
   if test -z "$DOMXML_DIR"; then
     AC_MSG_RESULT(not found)
-    AC_MSG_ERROR(Please reinstall the libxml >= 2.2.7 distribution)
+    AC_MSG_ERROR(Please reinstall the libxml >= 2.4.2 distribution)
   fi
 
   PHP_DOM_CHECK_VERSION

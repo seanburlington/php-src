@@ -17,14 +17,14 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.54 2003/06/21 12:29:32 wez Exp $ 
+   $Id: sqlite.c,v 1.55 2003/06/21 13:29:26 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
-#define PHP_SQLITE_MODULE_VERSION	"0.9-c"
+#define PHP_SQLITE_MODULE_VERSION	"1.0"
 
 #include "php.h"
 #include "php_ini.h"
@@ -666,7 +666,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.54 2003/06/21 12:29:32 wez Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.55 2003/06/21 13:29:26 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

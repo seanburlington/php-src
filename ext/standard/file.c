@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.107 2000/08/20 13:24:14 stas Exp $ */
+/* $Id: file.c,v 1.108 2000/08/21 19:24:44 torben Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -969,6 +969,10 @@ PHP_FUNCTION(fgets)
 
 	convert_to_long_ex(arg2);
 	len = (*arg2)->value.lval;
+    if (len < 0) {
+		php_error(E_WARNING, "length parameter to fgets() may not be negative");
+		RETURN_FALSE;
+    }
 
 	if (type == le_socket) {
 		issock=1;
@@ -1078,6 +1082,10 @@ PHP_FUNCTION(fgetss)
 
 	convert_to_long_ex(bytes);
 	len = (*bytes)->value.lval;
+    if (len < 0) {
+		php_error(E_WARNING, "length parameter to fgetss() may not be negative");
+		RETURN_FALSE;
+    }
 
 	buf = emalloc(sizeof(char) * (len + 1));
 	/*needed because recv doesnt set null char at end*/
@@ -1798,6 +1806,10 @@ PHP_FUNCTION(fread)
 
 	convert_to_long_ex(arg2);
 	len = (*arg2)->value.lval;
+    if (len < 0) {
+		php_error(E_WARNING, "length parameter to fread() may not be negative");
+		RETURN_FALSE;
+    }
 
 	return_value->value.str.val = emalloc(sizeof(char) * (len + 1));
 	/* needed because recv doesnt put a null at the end*/
@@ -1867,6 +1879,10 @@ PHP_FUNCTION(fgetcsv) {
 
 	convert_to_long_ex(bytes);
 	len = (*bytes)->value.lval;
+    if (len < 0) {
+		php_error(E_WARNING, "length parameter to fgetcsv() may not be negative");
+		RETURN_FALSE;
+    }
 
 	buf = emalloc(sizeof(char) * (len + 1));
 	/*needed because recv doesnt set null char at end*/

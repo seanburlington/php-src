@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.2 2001/10/26 11:45:21 ssb Exp $
+// $Id: Remote.php,v 1.3 2001/10/30 12:28:39 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -53,11 +53,13 @@ class PEAR_Remote extends PEAR
         $params = array_slice(func_get_args(), 1);
         $request = xmlrpc_encode_request($method, $params);
         $server_host = $this->config_object->get("master_server");
+        if (empty($server_host)) {
+            return $this->raiseError("PEAR_Remote::call: no master_server configured");
+        }
         $server_port = 80;
-        flush();
         $fp = @fsockopen($server_host, $server_port);
         if (!$fp) {
-            return $this->raiseError("PEAR_Remote::call: connect failed");
+            return $this->raiseError("PEAR_Remote::call: fsockopen(`$server_host', $server_port) failed");
         }
         $len = strlen($request);
         fwrite($fp, ("POST /xmlrpc.php HTTP/1.0\r\n".

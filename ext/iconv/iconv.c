@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.65.2.11 2003/08/28 20:05:24 iliaa Exp $ */
+/* $Id: iconv.c,v 1.65.2.12 2003/11/22 13:38:46 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -44,6 +44,10 @@
 
 #ifdef HAVE_GLIBC_ICONV
 #include <gnu/libc-version.h>
+#endif
+
+#ifdef HAVE_LIBICONV
+#undef iconv
 #endif
 
 /* {{{ iconv_functions[]
@@ -90,6 +94,10 @@ typedef enum _php_iconv_err_t {
 	PHP_ICONV_ERR_UNKNOWN           = 6
 } php_iconv_err_t;
 /* }}} */
+
+#ifdef HAVE_LIBICONV
+#define iconv libiconv
+#endif
 
 /* {{{ prototypes */ 
 static php_iconv_err_t php_iconv_string(const char * in_p, size_t in_len, char **out, size_t *out_len, const char *in_charset, const char *out_charset);

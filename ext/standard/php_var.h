@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_var.h,v 1.20 2002/02/28 08:26:48 sebastian Exp $ */
+/* $Id: php_var.h,v 1.21 2002/08/04 23:45:37 shane Exp $ */
 
 #ifndef PHP_VAR_H
 #define PHP_VAR_H
@@ -55,8 +55,8 @@ PHPAPI int php_var_unserialize(zval **rval, const char **p, const char *max, php
 #define PHP_VAR_UNSERIALIZE_DESTROY(var_hash) \
 	var_destroy(&(var_hash))
 
-void var_replace(php_unserialize_data_t *var_hash, zval *ozval, zval **nzval);
-void var_destroy(php_unserialize_data_t *var_hash);
+PHPAPI void var_replace(php_unserialize_data_t *var_hash, zval *ozval, zval **nzval);
+PHPAPI void var_destroy(php_unserialize_data_t *var_hash);
 
 #define PHP_VAR_UNSERIALIZE_ZVAL_CHANGED(var_hash, ozval, nzval) \
 	var_replace((var_hash), (ozval), &(nzval))

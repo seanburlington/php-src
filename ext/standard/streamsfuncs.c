@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.53 2005/03/11 01:52:24 helly Exp $ */
+/* $Id: streamsfuncs.c,v 1.54 2005/03/13 17:03:55 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -48,7 +48,6 @@ PHP_FUNCTION(stream_socket_pair)
 {
 	long domain, type, protocol;
 	php_stream *s1, *s2;
-	zval *zs1, *sz2;
 	int pair[2];
 
 	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lll",

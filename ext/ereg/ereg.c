@@ -28,11 +28,12 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.4 1999/04/24 00:11:57 zeev Exp $ */
+/* $Id: ereg.c,v 1.5 1999/05/11 00:01:45 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
 #include "php3_string.h"
+#include "php_regex.h"
 #include "reg.h"
 
 unsigned char third_argument_force_ref[] = { 3, BYREF_NONE, BYREF_NONE, BYREF_FORCE };

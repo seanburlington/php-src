@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.1 1999/04/22 02:48:26 ssb Exp $ */
+/* $Id: sysvsem.c,v 1.2 1999/05/11 00:01:46 zeev Exp $ */
 
 /* This has been built and tested on Solaris 2.6 and Linux 2.1.122.
  * It may not compile or execute correctly on other systems.
@@ -36,7 +36,7 @@
  */
 
 #ifndef MSVC5
-#include "config.h"
+#include "php_config.h"
 #endif
 
 #if HAVE_SYSVSEM

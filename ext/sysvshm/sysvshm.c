@@ -27,14 +27,14 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.1 1999/04/22 02:48:27 ssb Exp $ */
+/* $Id: sysvshm.c,v 1.2 1999/05/11 00:01:47 zeev Exp $ */
 
 /* This has been built and tested on Solaris 2.6.
  * It may not compile or execute correctly on other systems.
  */
 
 #ifndef MSVC5
-#include "config.h"
+#include "php_config.h"
 #endif
 
 

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.7 1999/05/09 08:47:52 zeev Exp $ */
+/* $Id: hw.c,v 1.8 1999/05/11 00:01:43 zeev Exp $ */
 #if COMPILE_DL
 #include "dl/phpdl.h"
 #endif
@@ -31,7 +31,7 @@
 #include <stdlib.h>
 
 #if !(WIN32|WINNT)
-#include "config.h"
+#include "php_config.h"
 #endif
 #include "php.h"
 #include "ext/standard/head.h"

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: odbc.c,v 1.7 1999/05/09 08:47:59 zeev Exp $ */
+/* $Id: odbc.c,v 1.8 1999/05/11 00:01:43 zeev Exp $ */
 
 /* This file is based on the Adabas D extension.
  * Adabas D will no longer be supported as separate module.
@@ -41,7 +41,7 @@
 #if HAVE_UODBC
 
 # if !(WIN32|WINNT)
-#  include "config.h"
+#  include "php_config.h"
 #  include "build-defs.h"
 # endif
   

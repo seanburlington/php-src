@@ -28,11 +28,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.2 1999/05/09 08:47:53 zeev Exp $ */
+/* $Id: interbase.c,v 1.3 1999/05/11 00:01:43 zeev Exp $ */
 
 /* TODO: A lot... */
 
-#include "config.h"
+#include "php_config.h"
 #include "php.h"
 #include "php3_interbase.h"
 

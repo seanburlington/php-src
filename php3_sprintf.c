@@ -28,9 +28,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_sprintf.c,v 1.1 1999/04/07 21:02:40 zeev Exp $ */
+/* $Id: php3_sprintf.c,v 1.2 1999/05/11 00:01:41 zeev Exp $ */
 
-#include "config.h"
+#include "php_config.h"
 #include <stdio.h>
 #include <stdarg.h>
 

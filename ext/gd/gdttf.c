@@ -2,12 +2,12 @@
 /*                                          */
 /* John Ellson   ellson@lucent.com          */
 
-/* $Id: gdttf.c,v 1.1 1999/04/16 12:15:38 ssb Exp $ */
+/* $Id: gdttf.c,v 1.2 1999/05/11 00:01:42 zeev Exp $ */
 
 #if WIN32|WINNT
 #include "config.w32.h"
 #else
-#include "config.h"
+#include "php_config.h"
 #endif
 #if HAVE_LIBTTF
 #include <stdio.h>

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hg_comm.c,v 1.3 1999/04/26 17:26:34 zeev Exp $ */
+/* $Id: hg_comm.c,v 1.4 1999/05/11 00:01:42 zeev Exp $ */
 
 /* #define HW_DEBUG */
 
@@ -32,7 +32,7 @@
 #if WIN32|WINNT
 #include "win95nt.h"
 #else
-#include "config.h"
+#include "php_config.h"
 #endif
 
 #if HYPERWAVE

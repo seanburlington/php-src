@@ -28,12 +28,12 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.1 1999/04/22 02:48:24 ssb Exp $ */
+/* $Id: pgsql.c,v 1.2 1999/05/11 00:01:44 zeev Exp $ */
 
 #include <stdlib.h>
 
 #ifndef MSVC5
-#include "config.h"
+#include "php_config.h"
 #endif
 #include "php.h"
 #include "php3_pgsql.h"

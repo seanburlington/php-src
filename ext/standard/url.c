@@ -26,15 +26,15 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.3 1999/04/24 00:11:57 zeev Exp $ */
+/* $Id: url.c,v 1.4 1999/05/11 00:01:45 zeev Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <sys/types.h>
 
-/* php.h includes the correct regex.h */
 #include "php.h"
+#include "php_regex.h"
 
 #include "url.h"
 #ifdef _OSD_POSIX

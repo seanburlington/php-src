@@ -28,11 +28,11 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sybase-ct.c,v 1.2 1999/05/09 08:48:02 zeev Exp $ */
+/* $Id: sybase-ct.c,v 1.3 1999/05/11 00:01:45 zeev Exp $ */
 
 
 #ifndef MSVC5
-#include "config.h"
+#include "php_config.h"
 #endif
 #include "php.h"
 #include "php3_sybase-ct.h"

@@ -1,5 +1,5 @@
 /* 
- * $Id: gdcache.c,v 1.1 1999/04/16 12:15:38 ssb Exp $
+ * $Id: gdcache.c,v 1.2 1999/05/11 00:01:42 zeev Exp $
  *
  * Caches of pointers to user structs in which the least-recently-used 
  * element is replaced in the event of a cache miss after the cache has 
@@ -40,7 +40,7 @@
 #if (WIN32|WINNT)
 #define HAVE_LIBTTF 1
 #else
-#include "config.h"
+#include "php_config.h"
 #endif
 #if HAVE_LIBTTF
 

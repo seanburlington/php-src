@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.567 2003/01/29 00:07:01 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.568 2003/01/29 00:49:09 phanto Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1133,10 +1133,6 @@ PHP_MSHUTDOWN_FUNCTION(basic)
 
 PHP_RINIT_FUNCTION(basic)
 {
-#ifdef PHP_WIN32
-	CoInitialize(NULL);
-#endif
-
 	memset(BG(strtok_table), 0, 256);
 	BG(strtok_string) = NULL;
 	BG(strtok_zval) = NULL;
@@ -1227,10 +1223,6 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 	if (BG(mmap_file)) {
 		munmap(BG(mmap_file), BG(mmap_len));
 	}
-#endif
-
-#ifdef PHP_WIN32
-	CoUninitialize();
 #endif
 
 	return SUCCESS;

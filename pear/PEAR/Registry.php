@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.2 2001/10/28 23:35:10 ssb Exp $
+// $Id: Registry.php,v 1.3 2001/10/29 07:21:08 ssb Exp $
 
 require_once "Experimental/System.php";
 
@@ -149,7 +149,7 @@ class PEAR_Registry
             if ($ent{0} == "." || substr($ent, -4) != ".inf") {
                 continue;
             }
-            $pkglist[] = substr($entry, 0, -4);
+            $pkglist[] = substr($ent, 0, -4);
         }
         return $pkglist;
     }

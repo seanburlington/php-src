@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.105 2002/03/16 01:23:12 wez Exp $ */
+/* $Id: hw.c,v 1.106 2002/03/16 13:48:57 wez Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -2892,7 +2892,7 @@ PHP_FUNCTION(hw_new_document_from_file)
 	if(NULL == doc)
 		RETURN_FALSE;
 
-	doc->size = php_stream_read_all(stream, &doc->data, 1);
+	doc->size = php_stream_copy_to_mem(stream, &doc->data, PHP_STREAM_COPY_ALL, 1);
 
 	php_stream_close(stream);
 	

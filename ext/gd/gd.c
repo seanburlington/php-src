@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.181 2002/03/16 01:22:33 wez Exp $ */
+/* $Id: gd.c,v 1.182 2002/03/16 13:48:57 wez Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1171,7 +1171,7 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 		char *buff;
 
 		/* needs to be malloc (persistent) - GD will free() it later */
-		buff_size = php_stream_read_all(stream, &buff, 1);
+		buff_size = php_stream_copy_to_mem(stream, &buff, PHP_STREAM_COPY_ALL, 1);
 
 		if(!buff_size) {
 			php_error(E_WARNING,"%s: Cannot read image data", get_active_function_name(TSRMLS_C));

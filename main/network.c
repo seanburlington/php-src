@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.55 2002/08/09 21:02:35 wez Exp $ */
+/* $Id: network.c,v 1.56 2002/08/10 03:03:03 sebastian Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 #define MAX_CHUNKS_PER_READ 10
@@ -627,7 +627,7 @@ PHPAPI void php_stream_sock_set_timeout(php_stream *stream, struct timeval *time
 	sock->timeout_event = 0;
 }
 
-PHPAPI int php_set_sock_blocking(int socketd, int block)
+PHPAPI int php_set_sock_blocking(int socketd, int block TSRMLS_DC)
 {
       int ret = SUCCESS;
       int flags;
@@ -671,7 +671,7 @@ PHPAPI int php_stream_sock_set_blocking(php_stream *stream, int mode TSRMLS_DC)
 	if (mode == oldmode)
 		return oldmode;
 	
-	if (SUCCESS == php_set_sock_blocking(sock->socket, mode)) {
+	if (SUCCESS == php_set_sock_blocking(sock->socket, mode TSRMLS_CC)) {
 		sock->is_blocked = mode;
 		return oldmode;
 	}

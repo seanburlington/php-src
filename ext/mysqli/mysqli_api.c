@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.74 2004/02/23 06:35:18 georg Exp $ 
+  $Id: mysqli_api.c,v 1.75 2004/02/26 08:27:24 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1656,13 +1656,11 @@ PHP_FUNCTION(mysqli_store_result)
 
 	if (!(result = mysql_store_result(mysql))) {
 		MYSQLI_REPORT_MYSQL_ERROR(mysql);
-		MYSQLI_DISABLE_MQ;
 		RETURN_FALSE;
 	}
 	if (MyG(report_mode) & MYSQLI_REPORT_INDEX) {
 		php_mysqli_report_index("from previous query", mysql->server_status TSRMLS_CC);
 	}
-	MYSQLI_DISABLE_MQ;
 	mysqli_resource = (MYSQLI_RESOURCE *)ecalloc (1, sizeof(MYSQLI_RESOURCE));
 	mysqli_resource->ptr = (void *)result;
 	MYSQLI_RETURN_RESOURCE(mysqli_resource, mysqli_result_class_entry);	
@@ -1710,7 +1708,6 @@ PHP_FUNCTION(mysqli_use_result)
 
 	if (!(result = mysql_use_result(mysql))) {
 		MYSQLI_REPORT_MYSQL_ERROR(mysql);
-		MYSQLI_DISABLE_MQ;
 		RETURN_FALSE;
 	}
 

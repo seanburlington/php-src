@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.29 2004/02/21 07:37:41 georg Exp $ 
+  $Id: mysqli_fe.c,v 1.30 2004/02/26 08:27:24 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -98,6 +98,7 @@ function_entry mysqli_functions[] = {
 	PHP_FE(mysqli_kill,									NULL)
 	PHP_FE(mysqli_master_query,							NULL)
 	PHP_FE(mysqli_more_results,							NULL)
+	PHP_FE(mysqli_multi_query, 							NULL)
 	PHP_FE(mysqli_next_result,							NULL)
 	PHP_FE(mysqli_num_fields,							NULL)
 	PHP_FE(mysqli_num_rows,								NULL)

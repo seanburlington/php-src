@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.176 2000/12/22 12:57:08 zeev Exp $ */
+/* $Id: string.c,v 1.177 2000/12/28 01:02:44 jon Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2323,7 +2323,7 @@ PHP_FUNCTION(nl2br)
 	
 	convert_to_string_ex(str);
 	
-	php_char_to_str((*str)->value.str.val,(*str)->value.str.len,'\n',"<br>\n",5,return_value);
+	php_char_to_str((*str)->value.str.val,(*str)->value.str.len,'\n',"<br />\n",7,return_value);
 }
 /* }}} */
 

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dblib.c,v 1.3 2005/01/18 07:17:01 fmk Exp $ */
+/* $Id: pdo_dblib.c,v 1.4 2005/02/13 23:13:14 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -55,7 +55,7 @@ zend_module_entry pdo_dblib_module_entry = {
 	STANDARD_MODULE_PROPERTIES
 };
 
-#ifdef COMPILE_DL_PDO_DBLIB
+#if defined(COMPILE_DL_PDO_DBLIB) || defined(COMPILE_DL_PDO_MSSQL)
 ZEND_GET_MODULE(pdo_dblib)
 #endif
 

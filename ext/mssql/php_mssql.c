@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.32 2000/11/21 03:09:16 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.33 2000/11/29 17:08:22 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -899,12 +899,12 @@ PHP_FUNCTION(mssql_query)
 		RETURN_FALSE;
 	}
 
-	result = (mssql_result *) emalloc(sizeof(mssql_result));
 	num_fields = dbnumcols(mssql_ptr->link);
 	if (num_fields <= 0) {
-		RETURN_TRUE;
+		RETURN_FALSE;
 	}
 
+	result = (mssql_result *) emalloc(sizeof(mssql_result));
 	column_types = (int *) emalloc(sizeof(int) * num_fields);
 	for (i=0; i<num_fields; i++) {
 		column_types[i] = coltype(i+1);
@@ -961,7 +961,6 @@ PHP_FUNCTION(mssql_query)
 	}
 	efree(column_types);
 	ZEND_REGISTER_RESOURCE(return_value, result, le_result);
-	RETURN_TRUE;
 }
 /* }}} */
 

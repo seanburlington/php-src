@@ -1,3 +1,52 @@
+2004-10-30  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ZendEngine2/zend.h:
+      Bump version (as discussed with Andi)
+
+    * (PHP_5_0)
+      ZendEngine2/zend_execute.c:
+      - Fix (readd function name which got lost during earlier comit)
+
+    * (PHP_5_0)
+      NEWS:
+      BFN
+
+    * ZendEngine2/zend_reflection_api.c:
+      - Be consistent and use names as keys (found by johannes)
+
+    * ZendEngine2/zend_extensions.h
+      ZendEngine2/zend_modules.h:
+      - Bump API version
+
+    * (PHP_5_0)
+      ZendEngine2/zend_extensions.h
+      ZendEngine2/zend_modules.h:
+      Bump api after latest changes
+
+    * (PHP_5_0)
+      ZendEngine2/zend_execute.c
+      ZendEngine2/zend_object_handlers.c
+      ZendEngine2/zend_object_handlers.h:
+      MFH change zend_object_handlers->get_method()
+
+    * ext/standard/incomplete_class.c:
+      - Update to new API
+
+    * ZendEngine2/zend_execute_API.c
+      ZendEngine2/zend_object_handlers.c
+      ZendEngine2/zend_object_handlers.h
+      ZendEngine2/zend_vm_def.h
+      ZendEngine2/zend_vm_execute.h:
+      - Change zend_object_handlers->get_method() to allow aggregation for
+      internal classes
+
+    * ZendEngine2/Makefile.frag:
+      - New architecture needs one more dependency
+
+    * ZendEngine2/zend_exceptions.c
+      ZendEngine2/zend_reflection_api.c:
+      - Fix protos
+
 2004-10-29  Andi Gutmans  <andi@zend.com>
 
     * ZendEngine2/zend_operators.c:
@@ -11999,7 +12048,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1790 2004/10/30 00:45:25 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1791 2004/10/31 00:51:40 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

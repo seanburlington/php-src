@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.54 2004/02/13 08:29:11 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.55 2004/02/13 11:03:58 dmitry Exp $ */
 
 #include <time.h>
 
@@ -2606,21 +2606,6 @@ static void delete_mapping(void *data)
 }
 
 void delete_encoder(void *encode)
-{
-	encodePtr t = *((encodePtr*)encode);
-	if (t->details.ns) {
-		sdl_free(t->details.ns);
-	}
-	if (t->details.type_str) {
-		sdl_free(t->details.type_str);
-	}
-	if (t->details.map) {
-		delete_mapping(t->details.map);
-	}
-	sdl_free(t);
-}
-
-void delete_tmp_encoder(void *encode)
 {
 	encodePtr t = *((encodePtr*)encode);
 	if (t->details.ns) {

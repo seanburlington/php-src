@@ -17,22 +17,10 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.h,v 1.27 2004/02/12 16:42:34 dmitry Exp $ */
+/* $Id: php_sdl.h,v 1.28 2004/02/13 11:03:58 dmitry Exp $ */
 
 #ifndef PHP_SDL_H
 #define PHP_SDL_H
-
-#ifdef SDL_CACHE
-# define SDL_PERSISTENT  1
-# define sdl_malloc      malloc
-# define sdl_strdup      strdup
-# define sdl_free        free
-#else
-# define SDL_PERSISTENT  0
-# define sdl_malloc      emalloc
-# define sdl_strdup      estrdup
-# define sdl_free        efree
-#endif
 
 #define XSD_WHITESPACE_COLLAPSE 1
 #define XSD_WHITESPACE_PRESERVE 1

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.h,v 1.32 2004/02/06 14:22:33 dmitry Exp $ */
+/* $Id: php_encoding.h,v 1.33 2004/02/13 11:03:58 dmitry Exp $ */
 
 #ifndef PHP_ENCODING_H
 #define PHP_ENCODING_H
@@ -215,7 +215,6 @@ encodePtr get_conversion_from_type_ex(HashTable *encoding, xmlNodePtr node, cons
 encodePtr get_conversion_from_href_type_ex(HashTable *encoding, const char *type, int len);
 
 void delete_encoder(void *handle);
-void delete_tmp_encoder(void *encode);
 
 extern encode defaultEncoding[];
 

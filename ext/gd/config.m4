@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.85 2002/03/12 16:18:51 sas Exp $
+dnl $Id: config.m4,v 1.86 2002/03/20 02:07:32 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -214,7 +214,6 @@ if test "$PHP_GD" != "no"; then
   PHP_SUBST(GD_SHARED_LIBADD)
 
 dnl Various checks for GD features
-  PHP_SHLIB_SUFFIX_NAME
   PHP_GD_TTSTR
   PHP_GD_JPEG
   PHP_GD_PNG

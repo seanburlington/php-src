@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.249 2001/09/27 06:55:23 derick Exp $ */
+/* $Id: string.c,v 1.250 2001/10/04 15:25:39 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2950,7 +2950,7 @@ static void php_hebrev(INTERNAL_FUNCTION_PARAMETERS, int convert_newlines)
 	efree(heb_str);
 
 	if (convert_newlines) {
-		php_char_to_str(broken_str, Z_STRLEN_PP(str),'\n', "<br>\n", 5, return_value);
+		php_char_to_str(broken_str, Z_STRLEN_PP(str),'\n', "<br />\n", 7, return_value);
 		efree(broken_str);
 	} else {
 		Z_STRVAL_P(return_value) = broken_str;

@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.120 2003/09/16 03:17:08 cellog Exp $
+// $Id: Installer.php,v 1.121 2003/09/16 03:27:55 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -657,20 +657,20 @@ class PEAR_Installer extends PEAR_Common
 
         // download files in this list if necessary
         foreach($packages as $pkgfile) {
-            $origpkgfile = $pkgfile;
-            $pkgfile = $this->extractDownloadFileName($pkgfile, $version);
-            if ($version === null) {
-                // use preferred state if no version number was specified
-                $version = $state;
-            }
-            if ($this->validPackageName($pkgfile) && !isset($options['upgrade'])) {
-                if ($this->registry->packageExists($pkgfile)) {
-                    $this->log(0, "Package '$pkgfile' already installed, skipping");
-                    // ignore dependencies that are installed unless we are upgrading
-                    continue;
+            if (!is_file($pkgfile)) {
+                $origpkgfile = $pkgfile;
+                $pkgfile = $this->extractDownloadFileName($pkgfile, $version);
+                if ($version === null) {
+                    // use preferred state if no version number was specified
+                    $version = $state;
                 }
-            }
-            if (!@is_file($pkgfile)) {
+                if ($this->validPackageName($pkgfile) && !isset($options['upgrade'])) {
+                    if ($this->registry->packageExists($pkgfile)) {
+                        $this->log(0, "Package '$pkgfile' already installed, skipping");
+                        // ignore dependencies that are installed unless we are upgrading
+                        continue;
+                    }
+                }
                 $pkgfile = $this->_downloadFile($pkgfile, $config, $options, $errors,
                                                 $version, $origpkgfile, $state);
                 if (PEAR::isError($pkgfile)) {

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2002/11/18 17:06:04 sas Exp $
+dnl $Id: config.m4,v 1.2 2002/12/10 20:09:35 helly Exp $
 dnl config.m4 for extension fam
 
 dnl Comments in this file start with the string 'dnl'.
@@ -8,8 +8,7 @@ dnl without editing.
 dnl If your extension references something external, use with:
 
 PHP_ARG_WITH(fam, for fam support,
-Make sure that the comment is aligned:
-[  --with-fam             Include fam support])
+[  --with-fam              Include fam support])
 
 if test "$PHP_FAM" != "no"; then
   dnl Write more examples of tests here...

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.88 2002/12/31 16:07:38 sebastian Exp $ */
+/* $Id: exec.c,v 1.89 2003/01/03 14:37:40 hyanantha Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -895,6 +895,18 @@ PHP_FUNCTION(proc_open)
 
 	child = pi.hProcess;
 	CloseHandle(pi.hThread);
+
+#elif defined(NETWARE)
+
+	/* clean up all the descriptors */
+	for (i = 0; i < ndesc; i++) {
+		close(descriptors[i].childend);
+		close(descriptors[i].parentend);
+	}
+
+	php_error_docref(NULL TSRMLS_CC, E_WARNING, "fork not supported on NetWare");
+
+	goto exit_fail;
 
 #else
 	/* the unix way */

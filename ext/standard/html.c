@@ -18,11 +18,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.69 2003/01/02 19:49:30 iliaa Exp $ */
+/* $Id: html.c,v 1.70 2003/01/03 14:37:42 hyanantha Exp $ */
 
 #include "php.h"
 #if PHP_WIN32
 #include "config.w32.h"
+#elif defined NETWARE
+#include "config.nw.h"
 #else
 #include "php_config.h"
 #endif

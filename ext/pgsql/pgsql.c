@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.259 2003/02/09 07:24:18 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.260 2003/02/09 07:50:16 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -2975,7 +2975,7 @@ PHP_FUNCTION(pg_get_result)
 	pg_result = (pgsql_result_handle *) emalloc(sizeof(pgsql_result_handle));
 	pg_result->conn = pgsql;
 	pg_result->result = pgsql_result;
-	pg_result->row = -1;
+	pg_result->row = 0;
 	ZEND_REGISTER_RESOURCE(return_value, pg_result, le_result);
 }
 /* }}} */

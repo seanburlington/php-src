@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.56 2001/02/26 06:07:31 andi Exp $ */
+/* $Id: aolserver.c,v 1.57 2001/07/27 10:16:37 zeev Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -218,7 +218,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	NSLS_FETCH();
 	
 	php_info_print_table_start();
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.56 2001/02/26 06:07:31 andi Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.57 2001/07/27 10:16:37 zeev Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -305,13 +305,13 @@ php_ns_startup(sapi_module_struct *sapi_module)
  */
 
 #define ADD_STRINGX(name,buf)										\
-	php_register_variable(name, buf, track_vars_array ELS_CC PLS_CC)
+	php_register_variable(name, buf, track_vars_array TSRMLS_CC PLS_CC)
 
 #define ADD_STRING(name)										\
 	ADD_STRINGX(name, buf)
 
 static void
-php_ns_sapi_register_variables(zval *track_vars_array ELS_DC SLS_DC PLS_DC)
+php_ns_sapi_register_variables(zval *track_vars_array TSRMLS_DC SLS_DC PLS_DC)
 {
 	int i;
 	char buf[NS_BUF_SIZE + 1];
@@ -418,7 +418,7 @@ php_ns_module_main(NSLS_D SLS_DC)
 {
 	zend_file_handle file_handle;
 	CLS_FETCH();
-	ELS_FETCH();
+	TSRMLS_FETCH();
 	PLS_FETCH();
 
 	file_handle.type = ZEND_HANDLE_FILENAME;
@@ -427,11 +427,11 @@ php_ns_module_main(NSLS_D SLS_DC)
 	file_handle.opened_path = NULL;
 	
 	php_ns_config(global_context, 0);
-	if (php_request_startup(CLS_C ELS_CC PLS_CC SLS_CC) == FAILURE) {
+	if (php_request_startup(CLS_C TSRMLS_CC PLS_CC SLS_CC) == FAILURE) {
 		return NS_ERROR;
 	}
 	
-	php_execute_script(&file_handle CLS_CC ELS_CC PLS_CC);
+	php_execute_script(&file_handle CLS_CC TSRMLS_CC PLS_CC);
 	php_request_shutdown(NULL);
 
 	return NS_OK;
@@ -617,7 +617,7 @@ int Ns_ModuleInit(char *server, char *module)
 	sapi_module.startup(&aolserver_sapi_module);
 	
 	/* TSRM is used to allocate a per-thread structure */
-	ns_globals_id = ts_allocate_id(sizeof(ns_globals_struct), NULL, NULL);
+	ts_allocate_id(&ns_globals_id, sizeof(ns_globals_struct), NULL, NULL);
 	
 	/* the context contains data valid for all threads */
 	ctx = malloc(sizeof *ctx);

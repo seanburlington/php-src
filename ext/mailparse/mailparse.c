@@ -18,7 +18,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mailparse.c,v 1.5 2001/07/20 19:36:35 thies Exp $ */
+/* $Id: mailparse.c,v 1.6 2001/07/27 10:16:22 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -498,7 +498,7 @@ static int extract_callback_user_func(const char *p, size_t n, zval *userfunc)
 {
 	zval * retval;
 	zval * arg;
-	ELS_FETCH();
+	TSRMLS_FETCH();
 
 	MAKE_STD_ZVAL(retval);
 	retval->type = IS_BOOL;

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.94 2001/06/19 17:58:09 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.95 2001/07/27 10:16:25 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -348,7 +348,7 @@ PHP_INI_BEGIN()
 PHP_INI_END()
 
 #ifdef ZTS
-static void php_odbc_init_globals(php_odbc_globals *odbc_globals)
+static void php_odbc_init_globals(php_odbc_globals *odbc_globals TSRMLS_DC)
 {
 	ODBCG(num_persistent) = 0;
 }
@@ -363,7 +363,7 @@ PHP_MINIT_FUNCTION(odbc)
 #endif
 
 #ifdef ZTS
-	odbc_globals_id = ts_allocate_id(sizeof(php_odbc_globals), php_odbc_init_globals, NULL);
+	ts_allocate_id(&odbc_globals_id, sizeof(php_odbc_globals), php_odbc_init_globals, NULL);
 	odbc_globals = ts_resource(odbc_globals_id);
 #else
 	ODBCG(num_persistent) = 0;

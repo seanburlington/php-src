@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hg_comm.c,v 1.42 2001/06/06 14:47:59 steinm Exp $ */
+/* $Id: hg_comm.c,v 1.43 2001/07/27 10:16:20 zeev Exp $ */
 
 /* #define HW_DEBUG */
 
@@ -632,7 +632,7 @@ char *fnInsAnchorsIntoText(char *text, DLIST *pAnchorList, char **bodytag, char 
 	int laststart=0;
 	char emptystring[BUFFERLEN];
 	int i;
-	ELS_FETCH();
+	TSRMLS_FETCH();
 	
 	emptystring[0] = '\0';
 

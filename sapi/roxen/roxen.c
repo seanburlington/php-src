@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.41 2001/02/26 06:07:37 andi Exp $ */
+/* $Id: roxen.c,v 1.42 2001/07/27 10:16:40 zeev Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -446,7 +446,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.41 2001/02/26 06:07:37 andi Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.42 2001/07/27 10:16:40 zeev Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -528,7 +528,7 @@ static sapi_module_struct roxen_sapi_module = {
 			&pval, sizeof(zval *), NULL)
 
 static void
-php_roxen_hash_environment(CLS_D ELS_DC PLS_DC SLS_DC)
+php_roxen_hash_environment(CLS_D TSRMLS_DC PLS_DC SLS_DC)
 {
   int i;
   char buf[512];
@@ -586,7 +586,7 @@ static int php_roxen_module_main(SLS_D)
 #ifdef ZTS
   CLS_FETCH();
   PLS_FETCH();
-  ELS_FETCH();
+  TSRMLS_FETCH();
 #ifdef ROXEN_USE_ZTS
   GET_THIS();
 #endif
@@ -598,14 +598,14 @@ static int php_roxen_module_main(SLS_D)
   file_handle.opened_path = NULL;
 
   THREADS_ALLOW();
-  res = php_request_startup(CLS_C ELS_CC PLS_CC SLS_CC);
+  res = php_request_startup(CLS_C TSRMLS_CC PLS_CC SLS_CC);
   THREADS_DISALLOW();
   if(res == FAILURE) {
     return 0;
   }
-  php_roxen_hash_environment(CLS_C ELS_CC PLS_CC SLS_CC);
+  php_roxen_hash_environment(CLS_C TSRMLS_CC PLS_CC SLS_CC);
   THREADS_ALLOW();
-  php_execute_script(&file_handle CLS_CC ELS_CC PLS_CC);
+  php_execute_script(&file_handle CLS_CC TSRMLS_CC PLS_CC);
   php_request_shutdown(NULL);
   THREADS_DISALLOW();
   return 1;
@@ -705,7 +705,7 @@ void pike_module_init( void )
 #ifdef ZTS
     tsrm_startup(1, 1, 0, NULL);
 #ifdef ROXEN_USE_ZTS
-    roxen_globals_id = ts_allocate_id(sizeof(php_roxen_request), NULL, NULL);
+    ts_allocate_id(&roxen_globals_id, sizeof(php_roxen_request), NULL, NULL);
 #endif	 
 #endif
     sapi_startup(&roxen_sapi_module);

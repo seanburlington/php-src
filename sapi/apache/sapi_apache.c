@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.28 2001/07/23 01:03:22 sas Exp $ */
+/* $Id: sapi_apache.c,v 1.29 2001/07/27 10:16:38 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -60,12 +60,12 @@
 
 /* {{{ apache_php_module_main
  */
-int apache_php_module_main(request_rec *r, int display_source_mode CLS_DC ELS_DC PLS_DC SLS_DC)
+int apache_php_module_main(request_rec *r, int display_source_mode CLS_DC TSRMLS_DC PLS_DC SLS_DC)
 {
 	zend_file_handle file_handle;
 	APLS_FETCH();
 
-	if (php_request_startup(CLS_C ELS_CC PLS_CC SLS_CC) == FAILURE) {
+	if (php_request_startup(CLS_C TSRMLS_CC PLS_CC SLS_CC) == FAILURE) {
 		return FAILURE;
 	}
 	/* sending a file handle to another dll is not working
@@ -88,7 +88,7 @@ int apache_php_module_main(request_rec *r, int display_source_mode CLS_DC ELS_DC
 		file_handle.opened_path = NULL;
 		file_handle.free_filename = 0;
 
-		(void) php_execute_script(&file_handle CLS_CC ELS_CC PLS_CC);
+		(void) php_execute_script(&file_handle CLS_CC TSRMLS_CC PLS_CC);
 	}
 
 	AP(in_request) = 0;

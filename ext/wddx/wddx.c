@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.70 2001/07/11 03:58:51 andrei Exp $ */
+/* $Id: wddx.c,v 1.71 2001/07/27 10:16:33 zeev Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -641,7 +641,7 @@ static void php_wddx_add_var(wddx_packet *packet, zval *name_var)
 {
 	zval **val;
 	HashTable *target_hash;
-	ELS_FETCH();
+	TSRMLS_FETCH();
 	
 	if (Z_TYPE_P(name_var) == IS_STRING)
 	{
@@ -783,7 +783,7 @@ static void php_wddx_pop_element(void *user_data, const char *name)
 	zend_class_entry 	*ce;
 	zval				*obj;
 	zval				*tmp;
-	ELS_FETCH();
+	TSRMLS_FETCH();
 
 	if (stack->top == 0)
 		return;

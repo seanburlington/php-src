@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.50 2001/07/13 16:58:09 rasmus Exp $ */
+/* $Id: fdf.c,v 1.51 2001/07/27 10:16:19 zeev Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -731,7 +731,7 @@ SAPI_POST_HANDLER_FUNC(fdf_post_handler)
 	FDFErc err;
 	ASInt32 nBytes;
 	zval *array_ptr = (zval *) arg;
-	ELS_FETCH();
+	TSRMLS_FETCH();
 	PLS_FETCH();
 	
 	fp=php_open_temporary_file(NULL,"fdfdata.",&filename);
@@ -774,7 +774,7 @@ SAPI_POST_HANDLER_FUNC(fdf_post_handler)
 					for(p=value;*p;p++) if(*p=='\r') *p='\n';
 					if(lastfieldname) efree(lastfieldname);
 					lastfieldname = estrdup(name);		
-					php_register_variable(name, value, array_ptr ELS_CC PLS_CC);
+					php_register_variable(name, value, array_ptr TSRMLS_CC PLS_CC);
 				} 
 			}
 		}   

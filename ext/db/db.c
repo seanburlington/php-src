@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.53 2001/06/06 13:05:43 rasmus Exp $ */
+/* $Id: db.c,v 1.54 2001/07/27 10:16:19 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #if 1
@@ -174,7 +174,7 @@ dbm_info *php_find_dbm(pval *id)
 	dbm_info *info;
 	int numitems, i;
 	int info_type;
-	ELS_FETCH();
+	TSRMLS_FETCH();
 
 	if (Z_TYPE_P(id) == IS_STRING) {
 		numitems = zend_hash_num_elements(&EG(regular_list));

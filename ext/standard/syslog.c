@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.28 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: syslog.c,v 1.29 2001/07/27 10:16:31 zeev Exp $ */
 
 #include "php.h"
 
@@ -130,7 +130,7 @@ PHP_RSHUTDOWN_FUNCTION(syslog)
  */
 static void start_syslog(BLS_D)
 {
-	ELS_FETCH();
+	TSRMLS_FETCH();
 	
 	/* error levels */
 	SET_VAR_LONG("LOG_EMERG", LOG_EMERG); /* system unusable */

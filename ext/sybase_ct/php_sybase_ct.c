@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.52 2001/07/23 16:10:10 pwmoosman Exp $ */
+/* $Id: php_sybase_ct.c,v 1.53 2001/07/27 10:16:32 zeev Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -145,7 +145,7 @@ static void _close_sybase_link(zend_rsrc_list_entry *rsrc)
 {
 	sybase_link *sybase_ptr = (sybase_link *)rsrc->ptr;
 	CS_INT con_status;
-	ELS_FETCH();
+	TSRMLS_FETCH();
 	SybCtLS_FETCH();
 
 	sybase_ptr->valid = 0;

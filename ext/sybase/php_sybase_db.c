@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.20 2001/07/17 08:16:56 joey Exp $ */
+/* $Id: php_sybase_db.c,v 1.21 2001/07/27 10:16:31 zeev Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -167,7 +167,7 @@ static void _free_sybase_result(zend_rsrc_list_entry *rsrc)
 static void _close_sybase_link(zend_rsrc_list_entry *rsrc)
 {
 	sybase_link *sybase_ptr = (sybase_link *)rsrc->ptr;
-	ELS_FETCH();
+	TSRMLS_FETCH();
 
 	sybase_ptr->valid = 0;
 

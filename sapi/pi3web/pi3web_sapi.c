@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.22 2001/07/21 14:27:56 zeev Exp $ */
+/* $Id: pi3web_sapi.c,v 1.23 2001/07/27 10:16:40 zeev Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -78,7 +78,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.22 2001/07/21 14:27:56 zeev Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.23 2001/07/27 10:16:40 zeev Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -320,7 +320,7 @@ static void init_request_info(sapi_globals_struct *sapi_globals, LPCONTROL_BLOCK
 	SG(sapi_headers).http_response_code = 200;
 }
 
-static void hash_pi3web_variables(ELS_D SLS_DC)
+static void hash_pi3web_variables(TSRMLS_D SLS_DC)
 {
 	char static_variable_buf[PI3WEB_SERVER_VAR_BUF_SIZE];
 	char *variable_buf;
@@ -379,7 +379,7 @@ DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 	int iRet = PIAPI_COMPLETED;
 	SLS_FETCH();
 	CLS_FETCH();
-	ELS_FETCH();
+	TSRMLS_FETCH();
 	PLS_FETCH();
 
 	zend_try {
@@ -390,13 +390,13 @@ DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 
 		CG(extended_info) = 0;
 		init_request_info(sapi_globals, lpCB);
-		php_request_startup(CLS_C ELS_CC PLS_CC SLS_CC);
+		php_request_startup(CLS_C TSRMLS_CC PLS_CC SLS_CC);
 
-		hash_pi3web_variables(ELS_C SLS_CC);
+		hash_pi3web_variables(TSRMLS_C SLS_CC);
 
 		switch ( lpCB->dwBehavior ) {
 			case PHP_MODE_STANDARD:
-				iRet = ( php_execute_script( &file_handle CLS_CC ELS_CC PLS_CC ) == SUCCESS ) ?
+				iRet = ( php_execute_script( &file_handle CLS_CC TSRMLS_CC PLS_CC ) == SUCCESS ) ?
 					PIAPI_COMPLETED : PIAPI_ERROR;
 				break;
 			case PHP_MODE_HIGHLIGHT: {
@@ -426,7 +426,7 @@ DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 				efree(header_line);
 				break;
 			case PHP_MODE_LINT:
-				iRet = (php_lint_script(&file_handle CLS_CC ELS_CC PLS_CC) == SUCCESS) ?
+				iRet = (php_lint_script(&file_handle CLS_CC TSRMLS_CC PLS_CC) == SUCCESS) ?
 					PIAPI_COMPLETED : PIAPI_ERROR;
 				break;
 			default:

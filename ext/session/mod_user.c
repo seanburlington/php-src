@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_user.c,v 1.15 2001/06/06 14:32:23 rasmus Exp $ */
+/* $Id: mod_user.c,v 1.16 2001/07/27 10:16:28 zeev Exp $ */
 
 #include "php.h"
 #include "php_session.h"
@@ -55,7 +55,7 @@ static zval *ps_call_handler(zval *func, int argc, zval **argv)
 {
 	int i;
 	zval *retval = NULL;
-	ELS_FETCH();
+	TSRMLS_FETCH();
 	
 	MAKE_STD_ZVAL(retval);
 	if (call_user_function(EG(function_table), NULL, func, retval, 

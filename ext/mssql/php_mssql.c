@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.55 2001/07/11 12:42:22 thies Exp $ */
+/* $Id: php_mssql.c,v 1.56 2001/07/27 10:16:23 zeev Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -227,7 +227,7 @@ static void _close_mssql_link(zend_rsrc_list_entry *rsrc)
 {
 	mssql_link *mssql_ptr = (mssql_link *)rsrc->ptr;
 	MSSQLLS_FETCH();
-	ELS_FETCH();
+	TSRMLS_FETCH();
 
 	mssql_ptr->valid = 0;
 	zend_hash_apply(&EG(regular_list),(int (*)(void *))_clean_invalid_results);

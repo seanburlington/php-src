@@ -16,7 +16,7 @@
    |          Fredrik Ohrn                                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.22 2001/06/06 14:32:23 rasmus Exp $ */
+/* $Id: yp.c,v 1.23 2001/07/27 10:16:34 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -366,7 +366,7 @@ PHP_FUNCTION(yp_err_string) {
 PHP_MINIT_FUNCTION(yp)
 {
 #ifdef ZTS
-	yp_globals_id = ts_allocate_id(sizeof(php_yp_globals), NULL, NULL);
+	ts_allocate_id(&yp_globals_id, sizeof(php_yp_globals), NULL, NULL);
 #endif
 
 	REGISTER_LONG_CONSTANT("YPERR_BADARGS", YPERR_BADARGS, CONST_CS | CONST_PERSISTENT);

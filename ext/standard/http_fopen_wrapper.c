@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.12 2001/07/14 16:41:58 andi Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.13 2001/07/27 10:16:30 zeev Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -274,7 +274,7 @@ FILE *php_fopen_url_wrap_http(char *path, char *mode, int options, int *issock, 
 		php_url_free(resource);
 		if (location[0] != '\0') {
 			zval **response_header_new, *entry, **entryp;
-			ELS_FETCH();
+			TSRMLS_FETCH();
 
 			fp = php_fopen_url_wrap_http(location, mode, options, issock, socketd, opened_path);
 			if (zend_hash_find(EG(active_symbol_table), "http_response_header", sizeof("http_response_header"), (void **) &response_header_new) == SUCCESS) {
@@ -299,7 +299,7 @@ FILE *php_fopen_url_wrap_http(char *path, char *mode, int options, int *issock, 
 	*issock = 1;
  out:
 	{
-		ELS_FETCH();
+		TSRMLS_FETCH();
 		ZEND_SET_SYMBOL(EG(active_symbol_table), "http_response_header", response_header);
 	}	
 	return (fp);

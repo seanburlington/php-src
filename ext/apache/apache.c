@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache.c,v 1.18 1999/08/07 16:02:48 zeev Exp $ */
+/* $Id: apache.c,v 1.19 1999/08/31 13:10:55 thies Exp $ */
 #include "php.h"
 #include "ext/standard/head.h"
 #include "php_globals.h"
@@ -323,6 +323,7 @@ PHP_FUNCTION(getallheaders)
     table_entry *tenv;
     int i;
     SLS_FETCH();
+    PLS_FETCH();
 	
     if (array_init(return_value) == FAILURE) {
 		RETURN_FALSE;

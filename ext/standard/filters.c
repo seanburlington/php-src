@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.25 2003/02/18 23:22:49 moriyoshi Exp $ */
+/* $Id: filters.c,v 1.26 2003/02/18 23:30:36 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1342,11 +1342,11 @@ static php_stream_filter_status_t strfilter_convert_filter(
 	int flags
 	TSRMLS_DC)
 {
-	php_stream_bucket *bucket, *new_bucket;
+	php_stream_bucket *bucket = NULL, *new_bucket;
 	size_t consumed = 0;
 	php_conv_err_t err;
 	php_convert_filter *inst = (php_convert_filter *)thisfilter->abstract;
-	char *out_buf;
+	char *out_buf = NULL;
 	size_t out_buf_size;
 	char *pd;
 	size_t ocnt;
@@ -1368,15 +1368,15 @@ static php_stream_filter_status_t strfilter_convert_filter(
 			switch (err) {
 				case PHP_CONV_ERR_UNKNOWN:
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "stream filter (%s): unknown error", inst->filtername, err);
-					return PSFS_ERR_FATAL; 
+					goto out_failure;
 
 				case PHP_CONV_ERR_INVALID_SEQ:
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "stream filter (%s): invalid base64 sequence", inst->filtername, err);
-					return PSFS_ERR_FATAL;
+					goto out_failure;
 
 				case PHP_CONV_ERR_UNEXPECTED_EOS:
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "stream filter (%s): unexpected end of stream", inst->filtername, err);
-					return PSFS_ERR_FATAL;
+					goto out_failure;
 
 				default:
 					break;
@@ -1439,15 +1439,15 @@ static php_stream_filter_status_t strfilter_convert_filter(
 				switch (err) {
 					case PHP_CONV_ERR_UNKNOWN:
 						php_error_docref(NULL TSRMLS_CC, E_WARNING, "stream filter (%s): unknown error", inst->filtername, err);
-						return PSFS_ERR_FATAL; 
+						goto out_failure;
 
 					case PHP_CONV_ERR_INVALID_SEQ:
 						php_error_docref(NULL TSRMLS_CC, E_WARNING, "stream filter (%s): invalid base64 sequence", inst->filtername, err);
-						return PSFS_ERR_FATAL;
+						goto out_failure;
 
 					case PHP_CONV_ERR_UNEXPECTED_EOS:
 						php_error_docref(NULL TSRMLS_CC, E_WARNING, "stream filter (%s): unexpected end of stream", inst->filtername, err);
-						return PSFS_ERR_FATAL;
+						goto out_failure;
 
 					default:
 						break;
@@ -1497,6 +1497,15 @@ static php_stream_filter_status_t strfilter_convert_filter(
 	}
 	
 	return PSFS_PASS_ON;
+
+out_failure:
+	if (out_buf != NULL) {
+		pefree(out_buf, inst->persistent);
+	}
+	if (bucket != NULL) {
+		php_stream_bucket_delref(bucket TSRMLS_CC);
+	}
+	return PSFS_ERR_FATAL;
 }
 
 static void strfilter_convert_dtor(php_stream_filter *thisfilter TSRMLS_DC)

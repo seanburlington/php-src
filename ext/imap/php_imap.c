@@ -25,7 +25,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.99 2001/08/11 16:38:51 zeev Exp $ */
+/* $Id: php_imap.c,v 1.100 2001/08/13 16:13:16 andi Exp $ */
 
 #define IMAP41
 
@@ -244,7 +244,7 @@ static int add_assoc_object(zval *arg, char *key, zval *tmp)
 	HashTable *symtable;
 	
 	if (arg->type == IS_OBJECT) {
-		symtable = arg->value.obj.properties;
+		symtable = Z_OBJPROP_P(arg);
 	} else {
 		symtable = arg->value.ht;
 	}
@@ -259,7 +259,7 @@ static inline int add_next_index_object(zval *arg, zval *tmp)
 	HashTable *symtable;
 	
 	if (arg->type == IS_OBJECT) {
-		symtable = arg->value.obj.properties;
+		symtable = Z_OBJPROP_P(arg);
 	} else {
 		symtable = arg->value.ht;
 	}

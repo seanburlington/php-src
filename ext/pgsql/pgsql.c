@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.125 2001/08/06 03:50:50 sas Exp $ */
+/* $Id: pgsql.c,v 1.126 2001/08/13 16:13:19 andi Exp $ */
 
 #include <stdlib.h>
 
@@ -1252,9 +1252,7 @@ PHP_FUNCTION(pg_fetch_object)
 {
 	php_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 	if (return_value->type==IS_ARRAY) {
-		return_value->type=IS_OBJECT;
-		return_value->value.obj.properties = return_value->value.ht;
-		return_value->value.obj.ce = &zend_standard_class_def;
+		object_and_properties_init(return_value, &zend_standard_class_def, return_value->value.ht);
 	}
 }
 /* }}} */

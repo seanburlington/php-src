@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.106 2001/08/13 07:55:34 rasmus Exp $ */
+/* $Id: php_odbc.c,v 1.107 2001/08/13 16:13:18 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1337,7 +1337,6 @@ static void php_odbc_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
    Fetch a result row as an object */
 PHP_FUNCTION(odbc_fetch_object)
 {
-	/* OBJECTS_FIXME */
 	php_odbc_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, ODBC_OBJECT);
 	if (Z_TYPE_P(return_value) == IS_ARRAY) {
 		object_and_properties_init(return_value, &zend_standard_class_def, return_value->value.ht);

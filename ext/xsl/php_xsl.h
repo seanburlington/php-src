@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.h,v 1.6 2003/11/28 22:08:13 chregu Exp $ */
+/* $Id: php_xsl.h,v 1.7 2003/11/29 16:37:37 chregu Exp $ */
 
 #ifndef PHP_XSL_H
 #define PHP_XSL_H
@@ -54,7 +54,8 @@ typedef struct _xsl_object {
 	void *ptr;
 	HashTable *prop_handler;
 	zend_object_handle handle;
-    HashTable *parameter;
+	HashTable *parameter;
+	int hasKeys;
 } xsl_object;
 
 void php_xsl_set_object(zval *wrapper, void *obj TSRMLS_DC);
@@ -72,8 +73,8 @@ entry = zend_register_internal_class_ex(&ce, parent_ce, NULL TSRMLS_CC);
 		RETURN_FALSE; \
 	}
 
-    
-    
+
+
 PHP_MINIT_FUNCTION(xsl);
 PHP_MSHUTDOWN_FUNCTION(xsl);
 PHP_RINIT_FUNCTION(xsl);

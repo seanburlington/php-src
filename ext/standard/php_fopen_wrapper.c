@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.36 2003/03/18 16:40:28 wez Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.37 2003/03/18 23:37:53 wez Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -218,7 +218,7 @@ php_stream * php_stream_url_wrap_php(php_stream_wrapper *wrapper, char *path, ch
 		return NULL;
 	}
 	
-	stream = php_stream_fopen_from_fd(fd, mode);
+	stream = php_stream_fopen_from_fd(fd, mode, NULL);
 	if (stream == NULL) {
 		close(fd);
 	}

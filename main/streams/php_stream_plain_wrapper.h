@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_plain_wrapper.h,v 1.2 2003/02/19 08:40:19 sniper Exp $ */
+/* $Id: php_stream_plain_wrapper.h,v 1.3 2003/03/18 23:37:54 wez Exp $ */
 
 /* definitions for the plain files wrapper */
 
@@ -33,8 +33,8 @@ PHPAPI php_stream *_php_stream_fopen_with_path(char *filename, char *mode, char 
 PHPAPI php_stream *_php_stream_fopen_from_file(FILE *file, const char *mode STREAMS_DC TSRMLS_DC);
 #define php_stream_fopen_from_file(file, mode)	_php_stream_fopen_from_file((file), (mode) STREAMS_CC TSRMLS_CC)
 
-PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode STREAMS_DC TSRMLS_DC);
-#define php_stream_fopen_from_fd(fd, mode)	_php_stream_fopen_from_fd((fd), (mode) STREAMS_CC TSRMLS_CC)
+PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode, const char *persistent_id STREAMS_DC TSRMLS_DC);
+#define php_stream_fopen_from_fd(fd, mode, persistent_id)	_php_stream_fopen_from_fd((fd), (mode), (persistent_id) STREAMS_CC TSRMLS_CC)
 
 PHPAPI php_stream *_php_stream_fopen_from_pipe(FILE *file, const char *mode STREAMS_DC TSRMLS_DC);
 #define php_stream_fopen_from_pipe(file, mode)	_php_stream_fopen_from_pipe((file), (mode) STREAMS_CC TSRMLS_CC)

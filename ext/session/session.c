@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.15 2003/05/21 02:33:13 sas Exp $ */
+/* $Id: session.c,v 1.336.2.16 2003/05/29 16:19:56 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -925,7 +925,7 @@ static void php_session_reset_id(TSRMLS_D)
 {
 	int module_number = PS(module_number);
 	
-	if (PS(send_cookie)) {
+	if (PS(use_cookies)) {
 		php_session_send_cookie(TSRMLS_C);
 	}
 

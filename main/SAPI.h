@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP version 4.0                                                      |
+   | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2001 The PHP Group                                |
+   | Copyright (c) 1997-2002 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -12,7 +12,7 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:  Zeev Suraski <zeev@zend.com>                               |
+   | Author:  Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
 */
 
@@ -51,6 +51,7 @@ typedef struct {
 	zend_llist headers;
 	int http_response_code;
 	unsigned char send_default_content_type;
+	char *mimetype;
 	char *http_status_line;
 } sapi_headers_struct;
 
@@ -97,6 +98,10 @@ typedef struct {
 	/* this is necessary for Safe Mode */
 	char *current_user;
 	int current_user_length;
+
+    /* this is necessary for CLI module */
+    int argc;
+    char **argv;
 } sapi_request_info;
 
 
@@ -112,6 +117,7 @@ typedef struct _sapi_globals_struct {
 	HashTable *rfc1867_uploaded_files;
 	long post_max_size;
     int options;
+    zend_bool sapi_started;
 } sapi_globals_struct;
 
 
@@ -123,16 +129,43 @@ SAPI_API extern int sapi_globals_id;
 extern SAPI_API sapi_globals_struct sapi_globals;
 #endif
 
-
 SAPI_API void sapi_startup(sapi_module_struct *sf);
 SAPI_API void sapi_shutdown(void);
 SAPI_API void sapi_activate(TSRMLS_D);
 SAPI_API void sapi_deactivate(TSRMLS_D);
 SAPI_API void sapi_initialize_empty_request(TSRMLS_D);
 
+/*
+ * This is the preferred and maintained API for 
+ * operating on HTTP headers.
+ */
+
+/*
+ * Always specify a sapi_header_line this way:
+ *
+ *     sapi_header_line ctr = {0};
+ */
+ 
+typedef struct {
+	char *line; /* If you allocated this, you need to free it yourself */
+	uint line_len;
+	long response_code; /* long due to zend_parse_parameters compatibility */
+} sapi_header_line;
+
+typedef enum {					/* Parameter: 			*/
+	SAPI_HEADER_REPLACE,		/* sapi_header_line* 	*/
+	SAPI_HEADER_ADD,			/* sapi_header_line* 	*/
+	SAPI_HEADER_SET_STATUS		/* int 					*/
+} sapi_header_op_enum;
+
+SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC);
+
+
+/* Deprecated functions. Use sapi_header_op instead. */
 SAPI_API int sapi_add_header_ex(char *header_line, uint header_line_len, zend_bool duplicate, zend_bool replace TSRMLS_DC);
-#define sapi_add_header(header_line, header_line_len, duplicate) \
-	sapi_add_header_ex((header_line), (header_line_len), (duplicate), 1 TSRMLS_CC)
+#define sapi_add_header(a, b, c) sapi_add_header_ex((a),(b),(c),1 TSRMLS_CC)
+
+
 SAPI_API int sapi_send_headers(TSRMLS_D);
 SAPI_API void sapi_free_header(sapi_header_struct *sapi_header);
 SAPI_API void sapi_handle_post(void *arg TSRMLS_DC);
@@ -141,6 +174,7 @@ SAPI_API int sapi_register_post_entries(sapi_post_entry *post_entry);
 SAPI_API int sapi_register_post_entry(sapi_post_entry *post_entry);
 SAPI_API void sapi_unregister_post_entry(sapi_post_entry *post_entry);
 SAPI_API int sapi_register_default_post_reader(void (*default_post_reader)(TSRMLS_D));
+SAPI_API int sapi_register_treat_data(void (*treat_data)(int arg, char *str, zval *destArray TSRMLS_DC));
 
 SAPI_API int sapi_flush(TSRMLS_D);
 SAPI_API struct stat *sapi_get_stat(TSRMLS_D);
@@ -183,6 +217,8 @@ struct _sapi_module_struct {
 	void (*unblock_interruptions)(void);
 
 	void (*default_post_reader)(TSRMLS_D);
+	void (*treat_data)(int arg, char *str, zval *destArray TSRMLS_DC);
+	char *executable_location;
 };
 
 
@@ -210,10 +246,13 @@ struct _sapi_post_entry {
 #define SAPI_POST_READER_FUNC(post_reader) void post_reader(TSRMLS_D)
 #define SAPI_POST_HANDLER_FUNC(post_handler) void post_handler(char *content_type_dup, void *arg TSRMLS_DC)
 
+#define SAPI_TREAT_DATA_FUNC(treat_data) void treat_data(int arg, char *str, zval* destArray TSRMLS_DC)
+
 SAPI_API SAPI_POST_READER_FUNC(sapi_read_standard_form_data);
 SAPI_API SAPI_POST_READER_FUNC(php_default_post_reader);
+SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data);
 
-#define STANDARD_SAPI_MODULE_PROPERTIES NULL
+#define STANDARD_SAPI_MODULE_PROPERTIES NULL, NULL
 
 #endif /* SAPI_H */
 

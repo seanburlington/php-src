@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.50 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: basic_functions.h,v 1.51 2000/03/16 16:02:23 andrei Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -77,6 +77,7 @@ PHP_FUNCTION(is_resource);
 PHP_FUNCTION(is_bool);
 PHP_FUNCTION(is_long);
 PHP_FUNCTION(is_double);
+PHP_FUNCTION(is_numeric);
 PHP_FUNCTION(is_string);
 PHP_FUNCTION(is_array);
 PHP_FUNCTION(is_object);

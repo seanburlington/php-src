@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.134 2003/02/20 22:21:49 rasmus Exp $ */
+/* $Id: rfc1867.c,v 1.135 2003/03/05 17:00:09 iliaa Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -861,7 +861,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 
 			while (!cancel_upload && (blen = multipart_buffer_read(mbuff, buff, sizeof(buff) TSRMLS_CC)))
 			{
-				if (total_bytes > PG(upload_max_filesize)) {
+				if (PG(upload_max_filesize) > 0 && total_bytes > PG(upload_max_filesize)) {
 					sapi_module.sapi_error(E_WARNING, "upload_max_filesize of %ld bytes exceeded - file [%s=%s] not saved", PG(upload_max_filesize), param, filename);
 					cancel_upload = UPLOAD_ERROR_A;
 				} else if (max_file_size && (total_bytes > max_file_size)) {

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.194 2002/12/06 13:44:35 abonamous Exp $ */
+/* $Id: oci8.c,v 1.195 2002/12/11 14:18:40 abonamous Exp $ */
 
 /* TODO list:
  *
@@ -628,7 +628,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.194 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.195 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2179,7 +2179,7 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 
 	#ifdef HAVE_OCI9
 	//following chunk is Oracle 9i+ ONLY
-	if (charset[0] != "\0") {
+	if (*charset) {
 		//get ub2 charset id based on charset
 		//this is pretty secure, since if we don't have a valid character set name,
 		//0 comes back and we can still use the 0 in all further statements -> OCI uses NLS_LANG

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.1.2.4 2003/02/09 07:48:40 fmk Exp $
+dnl $Id: config.m4,v 1.1.2.5 2004/11/22 19:42:31 fmk Exp $
 dnl
 
 PHP_ARG_WITH(mssql,for MSSQL support via FreeTDS,
@@ -32,8 +32,8 @@ if test "$PHP_MSSQL" != "no"; then
     fi
   fi  
 
-  if test ! -r "$FREETDS_INSTALLATION_DIR/lib/libtds.a"; then
-     AC_MSG_ERROR(Could not find $FREETDS_INSTALLATION_DIR/lib/libtds.a)
+  if test ! -r "$FREETDS_INSTALLATION_DIR/lib/libtds.a" || test ! -r "$FREETDS_INSTALLATION_DIR/lib/libtds.so"; then
+     AC_MSG_ERROR(Could not find $FREETDS_INSTALLATION_DIR/lib/libtds.[a|so])
   fi
 
   MSSQL_INCDIR=$FREETDS_INSTALLATION_DIR/include

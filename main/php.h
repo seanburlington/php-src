@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.163 2002/03/15 17:10:38 jimw Exp $ */
+/* $Id: php.h,v 1.164 2002/03/16 17:54:11 wez Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -27,7 +27,7 @@
 #endif
 
 #define PHP_API_VERSION 20010901
-
+#define HAVE_PHP_STREAM 1
 #define YYDEBUG 0
 
 #include "php_version.h"

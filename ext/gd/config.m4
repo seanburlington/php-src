@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.103 2002/07/13 05:01:55 sniper Exp $
+dnl $Id: config.m4,v 1.104 2002/07/17 17:28:57 sniper Exp $
 dnl
 
 dnl
@@ -187,7 +187,7 @@ AC_DEFUN(PHP_GD_T1LIB,[
     [
       AC_DEFINE(HAVE_LIBT1,1,[ ])
       PHP_ADD_INCLUDE($GD_T1_DIR/include)
-      PHP_ADD_LIBRARY_WITH_PATH(t1, "$GD_T1_DIR/lib", GD_SHARED_LIBADD)
+      PHP_ADD_LIBRARY_WITH_PATH(t1, $GD_T1_DIR/lib, GD_SHARED_LIBADD)
     ],[
       AC_MSG_ERROR([Problem with libt1.(a|so). Please check config.log for more information.]) 
     ],[

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.41 2004/10/29 20:12:54 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.42 2004/10/30 10:04:37 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -317,7 +317,7 @@ zend_object_iterator_funcs spl_recursive_it_iterator_funcs = {
 	spl_recursive_it_rewind
 };
 
-/* {{{ proto RecursiveIteratorIterator::__construct(RecursiveIterator $it)
+/* {{{ proto RecursiveIteratorIterator::__construct(RecursiveIterator it, int flags)
    Creates a RecursiveIteratorIterator from a RecursiveIterator. */
 SPL_METHOD(RecursiveIteratorIterator, __construct)
 {

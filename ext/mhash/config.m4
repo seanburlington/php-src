@@ -1,31 +1,25 @@
-dnl $Id: config.m4,v 1.6 1999/12/30 04:52:08 sas Exp $
+dnl $Id: config.m4,v 1.7 2000/03/27 23:43:00 sas Exp $
 dnl config.m4 for extension mhash
 dnl don't forget to call PHP_EXTENSION(mhash)
 
-AC_MSG_CHECKING(for mhash support)
-AC_ARG_WITH(mhash,
+PHP_ARG_WITH(mhash, for mhash support,
 [  --with-mhash[=DIR]      Include mhash support.  DIR is the mhash
-                          install directory.],
-[
-  if test "$withval" != "no"; then
-    for i in /usr/local /usr /opt/mhash $withval; do
-      if test -f $i/include/mhash.h; then
-        MHASH_DIR=$i
-      fi
-    done
-    if test "$MHASH_DIR" = ""; then
-      AC_MSG_ERROR(Please reinstall libmhash - I cannot find mhash.h)
+                          install directory.])
+
+if test "$PHP_MHASH" != "no"; then
+  for i in /usr/local /usr /opt/mhash $PHP_MHASH; do
+    if test -f $i/include/mhash.h; then
+      MHASH_DIR=$i
     fi
-    AC_ADD_INCLUDE($MHASH_DIR/include)
-    AC_ADD_LIBRARY_WITH_PATH(mhash, $MHASH_DIR/lib)
+  done
 
-    AC_DEFINE(HAVE_LIBMHASH,1,[ ])
-
-    AC_MSG_RESULT(yes)
-    PHP_EXTENSION(mhash)
-  else
-    AC_MSG_RESULT(no)
+  if test -z "$MHASH_DIR"; then
+    AC_MSG_ERROR(Please reinstall libmhash - I cannot find mhash.h)
   fi
-],[
-  AC_MSG_RESULT(no)
-])
+  AC_ADD_INCLUDE($MHASH_DIR/include)
+  AC_ADD_LIBRARY_WITH_PATH(mhash, $MHASH_DIR/lib)
+
+  AC_DEFINE(HAVE_LIBMHASH,1,[ ])
+
+  PHP_EXTENSION(mhash)
+fi

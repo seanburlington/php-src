@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.69 2000/08/18 12:28:28 hholzgra Exp $ */
+/* $Id: array.c,v 1.70 2000/08/18 12:45:01 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2323,7 +2323,7 @@ PHP_FUNCTION(array_diff)
     set_compare_func(SORT_REGULAR);
 	for (i=0; i<argc; i++) {
 		if ((*args[i])->type != IS_ARRAY) {
-			php_error(E_WARNING, "Argument #%d to array_intersect() is not an array", i+1);
+			php_error(E_WARNING, "Argument #%d to array_diff() is not an array", i+1);
 			argc = i; /* only free up to i-1 */
 			goto out;
 		}

@@ -1,4 +1,4 @@
-/* $Id: php_mcal.h,v 1.3 1999/12/18 11:46:12 zeev Exp $ */
+/* $Id: php_mcal.h,v 1.4 2000/02/26 03:09:10 chagenbu Exp $ */
 
 #ifndef _INCLUDED_MCAL_H
 #define _INCLUDED_MCAL_H
@@ -46,6 +46,7 @@ PHP_FUNCTION(mcal_list_events);
 PHP_FUNCTION(mcal_create_calendar);
 PHP_FUNCTION(mcal_rename_calendar);
 PHP_FUNCTION(mcal_delete_calendar);
+PHP_FUNCTION(mcal_append_event);
 PHP_FUNCTION(mcal_store_event);
 PHP_FUNCTION(mcal_delete_event);
 PHP_FUNCTION(mcal_snooze);
@@ -66,6 +67,7 @@ PHP_FUNCTION(mcal_day_of_year);
 PHP_FUNCTION(mcal_date_compare);
 PHP_FUNCTION(mcal_event_init);
 PHP_FUNCTION(mcal_next_recurrence);
+PHP_FUNCTION(mcal_event_set_recur_none);
 PHP_FUNCTION(mcal_event_set_recur_daily);
 PHP_FUNCTION(mcal_event_set_recur_weekly);
 PHP_FUNCTION(mcal_event_set_recur_monthly_mday);

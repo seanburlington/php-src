@@ -30,7 +30,7 @@
  */
 
 
-/* $Id: string.c,v 1.8 1999/04/24 00:11:57 zeev Exp $ */
+/* $Id: string.c,v 1.9 1999/05/11 16:52:58 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -1160,7 +1160,9 @@ PHPAPI char *_php3_addslashes(char *str, int length, int *new_length, int should
 		}
 	}
 	*target = 0;
-	if(new_length) *new_length = target - new_str;
+	if (new_length) {
+		*new_length = target - new_str;
+	}
 	if (should_free) {
 		STR_FREE(str);
 	}

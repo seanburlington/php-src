@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.7 2000/08/06 18:56:14 eschmid Exp $ */
+/* $Id: pspell.c,v 1.8 2000/08/06 19:53:56 eschmid Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -72,7 +72,7 @@ PHP_MINIT_FUNCTION(pspell){
 	return SUCCESS;
 }
 
-/* {{{ proto int pspell_new(string language [, string spelling [, string jargon [, string encoding [, mode]]]])
+/* {{{ proto int pspell_new(string language [, string spelling [, string jargon [, string encoding [, int mode]]]])
    Load a dictionary */
 PHP_FUNCTION(pspell_new){
 	zval **language,**spelling,**jargon,**encoding,**pmode;

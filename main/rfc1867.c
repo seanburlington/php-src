@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.87 2001/11/24 18:23:35 sniper Exp $ */
+/* $Id: rfc1867.c,v 1.88 2001/12/05 00:44:17 sniper Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -179,6 +179,7 @@ static int fill_buffer(multipart_buffer *self TSRMLS_DC)
 		/* update the buffer length */
 		if (actual_read > 0) {
 			self->bytes_in_buffer += actual_read;
+			SG(read_post_bytes) += actual_read;
 		}
 	}
 

@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build.mk,v 1.13 2002/06/20 08:36:48 imajes Exp $ 
+# $Id: build.mk,v 1.14 2002/06/20 08:42:08 imajes Exp $ 
 #
 #
 # Makefile to generate build tools
@@ -30,7 +30,6 @@ ALWAYS = generated_lists
 
 
 all: $(STAMP) $(ALWAYS)
-	echo $(SUBDIRS)
 	@$(MAKE) AMFLAGS=$(AMFLAGS) -s -f build/build2.mk
 
 generated_lists:

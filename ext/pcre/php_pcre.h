@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.h,v 1.2 1999/05/21 19:27:44 andrey Exp $ */
+/* $Id: php_pcre.h,v 1.3 1999/05/26 15:22:02 andrey Exp $ */
 
 #ifndef _PHP_PCRE_H
 #define _PHP_PCRE_H
@@ -41,8 +41,9 @@ extern int php_minit_pcre(INIT_FUNC_ARGS);
 extern int php_mshutdown_pcre(SHUTDOWN_FUNC_ARGS);
 extern int php_rinit_pcre(INIT_FUNC_ARGS);
 
-PHP_FUNCTION(pcre_match);
-PHP_FUNCTION(pcre_replace);
+PHP_FUNCTION(preg_match);
+PHP_FUNCTION(preg_match_all);
+PHP_FUNCTION(preg_replace);
 
 extern zend_module_entry pcre_module_entry;
 #define pcre_module_ptr &pcre_module_entry

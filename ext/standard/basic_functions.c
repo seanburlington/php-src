@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.354 2001/07/02 11:11:58 derick Exp $ */
+/* $Id: basic_functions.c,v 1.355 2001/07/04 10:10:29 wez Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -193,6 +193,11 @@ function_entry basic_functions[] = {
 	PHP_FE(implode,									NULL)
 	PHP_FE(setlocale,								NULL)
 	PHP_FE(localeconv,								NULL)
+#if HAVE_NL_LANGINFO
+	PHP_FE(nl_langinfo,								NULL)
+#else
+	PHP_FALIAS(nl_langinfo, warn_not_available,		NULL)
+#endif
 	PHP_FE(soundex,									NULL)
 	PHP_FE(levenshtein,								NULL)
 	PHP_FE(chr,										NULL)
@@ -759,7 +764,9 @@ PHP_MINIT_FUNCTION(basic)
 #if defined(HAVE_LOCALECONV) && defined(ZTS)
 	PHP_MINIT(localeconv)(INIT_FUNC_ARGS_PASSTHRU);
 #endif
-
+#if defined(HAVE_NL_LANGINFO)
+	PHP_MINIT(nl_langinfo)(INIT_FUNC_ARGS_PASSTHRU);
+#endif
 #if HAVE_CRYPT
 	PHP_MINIT(crypt)(INIT_FUNC_ARGS_PASSTHRU);
 #endif

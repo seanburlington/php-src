@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.257 2001/06/26 14:36:45 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.258 2001/07/04 10:10:29 wez Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -290,6 +290,7 @@ crypt.h \
 fcntl.h \
 grp.h \
 ieeefp.h \
+langinfo.h \
 limits.h \
 locale.h \
 netinet/in.h \
@@ -388,6 +389,7 @@ memcpy \
 memmove \
 mkstemp \
 mmap \
+nl_langinfo \
 putenv \
 random \
 rand_r \

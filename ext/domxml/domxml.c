@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: domxml.c,v 1.32 2000/03/15 15:08:08 steinm Exp $ */
+/* $Id: domxml.c,v 1.33 2000/04/04 16:03:39 steinm Exp $ */
 
 
 #include "php.h"
@@ -707,7 +707,7 @@ PHP_FUNCTION(domxml_attributes)
 	if(0 > node_attributes(&return_value, nodep))
 		RETURN_FALSE;
 
-#ifdef 0
+#ifdef nichtdefiniert
 	attr = nodep->properties;
 	if (!attr) {
 		RETURN_FALSE;

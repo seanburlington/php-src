@@ -1,9 +1,9 @@
-dnl $Id: config.m4,v 1.1 1999/04/22 00:25:53 ssb Exp $
+dnl $Id: config.m4,v 1.2 1999/09/22 05:27:55 steinm Exp $
 
 AC_MSG_CHECKING(whether to include fdftk support)
 AC_ARG_WITH(fdftk,
 [  --with-fdftk[=DIR]      Include fdftk support.
-                          DIR is the fdftk lib install directory,
+                          DIR is the fdftk install directory,
                           defaults to /usr/local.],
 [
   case "$withval" in

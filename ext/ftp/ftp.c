@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.103.2.1 2004/09/28 09:13:35 wez Exp $ */
+/* $Id: ftp.c,v 1.103.2.2 2004/10/05 23:53:14 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -864,12 +864,12 @@ ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, 
 				ptr = s;
 			}
 #else
-			while ((s = memchr(ptr, '\r', (e - ptr)))) {
+			while (e > ptr && (s = memchr(ptr, '\r', (e - ptr)))) {
 				php_stream_write(outstream, ptr, (s - ptr));
 				if (*(s + 1) == '\n') {
 					s++;
+					php_stream_putc(outstream, '\n');
 				}
-				php_stream_putc(outstream, '\n');
 				ptr = s + 1;
 			}
 #endif

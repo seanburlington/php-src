@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.27 1999/09/03 18:32:34 sas Exp $ */
+/* $Id: php.h,v 1.28 1999/09/04 20:12:47 rasmus Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -324,6 +324,10 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #include "zend_variables.h"
 #include "zend_constants.h"
 
+/* connection status states */
+#define PHP_CONNECTION_NORMAL  0
+#define PHP_CONNECTION_ABORTED 1
+#define PHP_CONNECTION_TIMEOUT 2
 
 
 /* Finding offsets of elements within structures.

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.12 2000/04/05 22:30:16 cmv Exp $ */
+/* $Id: cpdf.c,v 1.13 2000/05/02 00:30:25 sas Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -160,7 +160,7 @@ zend_module_entry cpdf_module_entry = {
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
-DLEXPORT zend_module_entry *get_module(void) { return &cpdf_module_entry; }
+ZEND_GET_MODULE(cpdf)
 #endif
 
 static void _free_outline(CPDFoutlineEntry *outline)

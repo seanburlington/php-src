@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.54 2000/05/01 22:14:54 rasmus Exp $ */
+/* $Id: gd.c,v 1.55 2000/05/02 00:30:26 sas Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -172,7 +172,7 @@ static php_gd_globals gd_globals;
 
 #ifdef COMPILE_DL_GD
 # include "dl/phpdl.h"
-DLEXPORT zend_module_entry *get_module(void) { return &gd_module_entry; }
+ZEND_GET_MODULE(gd)
 #endif
 
 

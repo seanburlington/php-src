@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.48 2000/05/01 02:41:44 sas Exp $ */
+/* $Id: php_pcre.c,v 1.49 2000/05/02 00:30:28 sas Exp $ */
 
 /*
 	TODO:
@@ -1211,7 +1211,7 @@ zend_module_entry pcre_module_entry = {
 };
 
 #ifdef COMPILE_DL_PCRE
-ZEND_DLEXPORT zend_module_entry *get_module(void) { return &pcre_module_entry; }
+ZEND_GET_MODULE(pcre)
 #endif
 
 /* }}} */

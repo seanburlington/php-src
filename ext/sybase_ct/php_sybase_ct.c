@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.19 2000/04/06 21:07:44 cmv Exp $ */
+/* $Id: php_sybase_ct.c,v 1.20 2000/05/02 00:30:30 sas Exp $ */
 
 
 #include "php.h"
@@ -74,7 +74,7 @@ zend_module_entry sybase_module_entry = {
 };
 
 #if COMPILE_DL
-zend_module_entry *get_module() { return &sybase_module_entry; }
+ZEND_GET_MODULE(sybase)
 #endif
 
 php_sybase_globals sybase_globals;

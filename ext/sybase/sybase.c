@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sybase.c,v 1.26 2000/04/06 21:07:44 cmv Exp $ */
+/* $Id: sybase.c,v 1.27 2000/05/02 00:30:30 sas Exp $ */
 
 
 #include "php.h"
@@ -84,7 +84,7 @@ zend_module_entry sybase_module_entry = {
 };
 
 #if COMPILE_DL
-zend_module_entry *get_module() { return &sybase_module_entry; }
+ZEND_GET_MODULE(sybase)
 #endif
 
 THREAD_LS sybase_module php_sybase_module;

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.34 2000/04/07 18:50:07 cmv Exp $ */
+/* $Id: pdf.c,v 1.35 2000/05/02 00:30:29 sas Exp $ */
 
 /* pdflib 2.01 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -170,7 +170,7 @@ zend_module_entry pdf_module_entry = {
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
-DLEXPORT zend_module_entry *get_module(void) { return &pdf_module_entry; }
+ZEND_GET_MODULE(pdf)
 #endif
 
 static void _free_pdf_image(int image)

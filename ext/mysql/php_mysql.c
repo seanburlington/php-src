@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.40 2000/04/06 21:07:39 cmv Exp $ */
+/* $Id: php_mysql.c,v 1.41 2000/05/02 00:30:28 sas Exp $ */
 
 
 /* TODO:
@@ -152,7 +152,7 @@ zend_module_entry mysql_module_entry = {
 ZEND_DECLARE_MODULE_GLOBALS(mysql)
 
 #ifdef COMPILE_DL_MYSQL
-ZEND_DLEXPORT zend_module_entry *get_module(void) { return &mysql_module_entry; }
+ZEND_GET_MODULE(mysql)
 #endif
 
 void timeout(int sig);

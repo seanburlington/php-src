@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.21 2000/04/05 21:43:02 cmv Exp $ */
+/* $Id: mail.c,v 1.22 2000/05/02 00:30:29 sas Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -35,7 +35,7 @@
 #endif
 
 #if COMPILE_DL
-DLEXPORT zend_module_entry *get_module(void) { return &odbc_module_entry; }
+ZEND_GET_MODULE(odbc)
 #endif
 
 /* {{{ proto int mail(string to, string subject, string message [, string additional_headers])

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.31 2000/04/30 19:01:15 andi Exp $ */
+/* $Id: db.c,v 1.32 2000/05/02 00:30:25 sas Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 # include "dl/phpdl.h"
@@ -1141,7 +1141,7 @@ zend_module_entry dbm_module_entry = {
 };
 
 #if COMPILE_DL
-DLEXPORT zend_module_entry *get_module(void) { return &dbm_module_entry; }
+ZEND_GET_MODULE(dbm)
 #endif
 
 #endif

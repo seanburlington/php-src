@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: aspell.c,v 1.17 2000/04/05 22:30:16 cmv Exp $ */
+/* $Id: aspell.c,v 1.18 2000/05/02 00:30:24 sas Exp $ */
 
 #include "php.h"
 
@@ -49,7 +49,7 @@ zend_module_entry aspell_module_entry = {
 
 
 #if COMPILE_DL
-DLEXPORT zend_module_entry *get_module(void) { return &aspell_module_entry; }
+ZEND_GET_MODULE(aspell)
 #endif
 
 static void php_aspell_close(aspell *sc)

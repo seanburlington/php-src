@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.28 2000/04/06 21:07:43 cmv Exp $ */
+/* $Id: snmp.c,v 1.29 2000/05/02 00:30:29 sas Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -93,7 +93,7 @@ zend_module_entry snmp_module_entry = {
 };
 
 #if COMPILE_DL
-DLEXPORT zend_module_entry *get_module() { return &snmp_module_entry; };
+ZEND_GET_MODULE(snmp)
 #endif
 
 /* THREAD_LS snmp_module php_snmp_module; - may need one of these at some point */

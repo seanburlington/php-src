@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.39 2000/04/20 17:24:01 zeev Exp $ */
+/* $Id: zlib.c,v 1.40 2000/05/02 00:30:31 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -110,7 +110,7 @@ zend_module_entry php_zlib_module_entry = {
 };
 
 #if defined(COMPILE_DL)
-DLEXPORT zend_module_entry *get_module(void) { return &php_zlib_module_entry; }
+ZEND_GET_MODULE(php_zlib)
 #endif
 
 static void phpi_destructor_gzclose(gzFile *zp) {

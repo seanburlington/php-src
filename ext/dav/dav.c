@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dav.c,v 1.15 2000/04/05 22:30:16 cmv Exp $ */
+/* $Id: dav.c,v 1.16 2000/05/02 00:30:25 sas Exp $ */
 
 #define IS_EXT_MODULE
 #if COMPILE_DL
@@ -69,7 +69,7 @@ phpdav_module php_dav_module;
 /* {{{ dynamically loadable module stuff */
 
 # if COMPILE_DL
-DLEXPORT zend_module_entry *get_module() { return &phpdav_module_entry; };
+ZEND_GET_MODULE(phpdav)
 # endif /* COMPILE_DL */
 
 /* }}} */

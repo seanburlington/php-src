@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.4 2000/05/02 00:24:18 sterling Exp $ */
+/* $Id: swf.c,v 1.5 2000/05/02 00:30:30 sas Exp $ */
 
 
 #include "php.h"
@@ -107,7 +107,7 @@ zend_module_entry swf_module_entry = {
 };
 
 #ifdef COMPILE_DL_SWF
-ZEND_DLEXPORT zend_module_entry *get_module(void) { return &swf_module_entry; }
+ZEND_GET_MODULE(swf)
 #endif
 
 PHP_MINFO_FUNCTION(swf)

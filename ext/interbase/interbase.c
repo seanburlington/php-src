@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.22 2000/04/30 05:46:04 jah Exp $ */
+/* $Id: interbase.c,v 1.23 2000/05/02 00:30:26 sas Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -102,7 +102,7 @@ zend_module_entry ibase_module_entry =
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
-DLEXPORT php_module_entry *get_module() { return &ibase_module_entry; }
+ZEND_GET_MODULE(ibase)
 
 #define DL_MALLOC(size) malloc(size)
 #define DL_STRDUP(str) strdup(str)
@@ -508,7 +508,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.22 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.23 $");
 #ifdef COMPILE_DL
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: velocis.c,v 1.16 2000/04/06 21:07:40 cmv Exp $ */
+/* $Id: velocis.c,v 1.17 2000/05/02 00:30:28 sas Exp $ */
 
 /*
  * TODO:
@@ -67,7 +67,7 @@ zend_module_entry velocis_module_entry = {
 
 
 #if COMPILE_DL
-zend_module_entry *get_module() { return &velocis_module_entry; }
+ZEND_GET_MODULE(velocis)
 #endif
 
 THREAD_LS velocis_module php_velocis_module;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.49 2000/04/06 16:57:32 cmv Exp $ */
+/* $Id: hw.c,v 1.50 2000/05/02 00:30:26 sas Exp $ */
 #if COMPILE_DL
 #include "dl/phpdl.h"
 #endif
@@ -126,13 +126,13 @@ PHP_HW_API php_hw_globals hw_globals;
 #endif
 
 #ifdef COMPILE_DL
-DLEXPORT zend_module_entry *get_module(void) { return &hw_module_entry; }
+ZEND_GET_MODULE(hw)
 #endif
 
 void print_msg(hg_msg *msg, char *str, int txt);
 
 #if COMPILE_DL
-DLEXPORT zend_module_entry *get_module(void) { return &hw_module_entry; }
+ZEND_GET_MODULE(hw)
 #endif
 
 void _close_hw_link(hw_connection *conn)

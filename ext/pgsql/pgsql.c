@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.42 2000/03/06 18:41:15 ssb Exp $ */
+/* $Id: pgsql.c,v 1.43 2000/05/02 00:30:29 sas Exp $ */
 
 #include <stdlib.h>
 
@@ -80,7 +80,7 @@ zend_module_entry pgsql_module_entry = {
 };
 
 #if COMPILE_DL
-PHP_PGSQL_API zend_module_entry *get_module() { return &pgsql_module_entry; }
+ZEND_GET_MODULE(pgsql)
 #endif
 
 static int le_link,le_plink,le_result,le_lofp,le_string;

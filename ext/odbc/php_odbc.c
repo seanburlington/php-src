@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.41 2000/04/16 16:16:59 lurcher Exp $ */
+/* $Id: php_odbc.c,v 1.42 2000/05/02 00:30:28 sas Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -132,7 +132,7 @@ ZEND_API php_odbc_globals odbc_globals;
 #endif
 
 #if COMPILE_DL
-DLEXPORT zend_module_entry *get_module(void) { return &odbc_module_entry; };
+ZEND_GET_MODULE(odbc)
 #endif
 
 static void _free_odbc_result(odbc_result *res)

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.49 2002/03/04 09:10:31 imajes Exp $
+dnl $Id: config.m4,v 1.50 2002/03/12 09:54:46 kara Exp $
 dnl
 
 dnl
@@ -133,9 +133,8 @@ AC_ARG_WITH(sapdb,
   fi
   if test "$withval" != "no"; then
     PHP_ADD_INCLUDE($withval/incl)
-	PHP_ADD_LIBPATH($withval/lib)
-	PHP_ADD_LIBRARY(sqlod)
-	PHP_ADD_LIBRARY(sqlrte)
+    PHP_ADD_LIBPATH($withval/lib)
+    PHP_ADD_LIBRARY(sqlod)
     ODBC_TYPE=sapdb
     AC_DEFINE(HAVE_SAPDB,1,[ ])
     AC_MSG_RESULT(yes)

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.1 2003/06/05 17:06:52 rrichards Exp $
+dnl $Id: config.m4,v 1.2 2003/06/14 11:27:49 helly Exp $
 dnl
 
 AC_DEFUN(PHP_DOM_CHECK_VERSION,[
@@ -22,6 +22,10 @@ AC_DEFUN(PHP_DOM_CHECK_VERSION,[
 PHP_ARG_WITH(dom5, for DOM support,
 [  --with-dom5[=DIR]       Include new DOM support (requires libxml >= 2.4.14).
                           DIR is the libxml install directory.])
+
+if test "$PHP_DOM" != "no" -a "$PHP_DOM5" != "no"; then
+    AC_MSG_ERROR([Either use deprecated dom or new dom5 extension.])
+fi
 
 if test -z "$PHP_ZLIB_DIR"; then
   PHP_ARG_WITH(zlib-dir, for the location of libz,

@@ -17,12 +17,12 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.13 2000/06/06 07:26:04 fmk Exp $ */
+/* $Id: php_pgsql.h,v 1.14 2000/06/09 22:39:56 andi Exp $ */
 
 #ifndef _PHP_PGSQL_H
 #define _PHP_PGSQL_H
 
-#if COMPILE_DL || COMPILE_DL_PGSQL
+#ifdef COMPILE_DL_PGSQL
 #undef HAVE_PGSQL
 #define HAVE_PGSQL 1
 #endif
@@ -37,7 +37,7 @@ extern zend_module_entry pgsql_module_entry;
 #include <postgres.h>
 #include <libpq-fe.h>
 
-#if (WIN32||WINNT)
+#ifdef PHP_WIN32
 #define INV_WRITE            0x00020000
 #define INV_READ             0x00040000
 #else

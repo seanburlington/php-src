@@ -17,13 +17,9 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.54 2000/06/04 23:06:11 jah Exp $ */
+/* $Id: pgsql.c,v 1.55 2000/06/09 22:39:56 andi Exp $ */
 
 #include <stdlib.h>
-
-#ifdef COMPILE_DL_PGSQL
-#include "dl/phpdl.h"
-#endif
 
 #define PHP_PGSQL_PRIVATE 1
 

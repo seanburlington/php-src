@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.78 2001/08/12 21:23:15 zeev Exp $ */
+/* $Id: filestat.c,v 1.79 2001/08/21 23:58:19 joey Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -862,7 +862,7 @@ FileFunction(php_if_lstat, FS_LSTAT)
 
 /* {{{ proto array stat(string filename)
    Give information about a file */
-FileFunction(php_if_stat, FS_SIZE)
+FileFunction(php_if_stat, FS_STAT)
 /* }}} */
 
 /*

@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.36 2001/07/28 12:02:42 zeev Exp $ */
+/* $Id: php_apache.c,v 1.37 2001/07/28 12:05:15 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -90,7 +90,7 @@ PHP_INI_END()
 
 
 
-static void php_apache_globals_ctor(php_apache_info_struct *apache_globals_p TSRMLS_DC)
+static void php_apache_globals_ctor(php_apache_info_struct *apache_globals TSRMLS_DC)
 {
 	apache_globals->in_request = 0;
 }

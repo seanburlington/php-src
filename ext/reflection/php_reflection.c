@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.48 2003/09/01 19:28:38 helly Exp $ */
+/* $Id: php_reflection.c,v 1.49 2003/09/01 19:47:34 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -488,6 +488,8 @@ static void _extension_string(string *str, zend_module_entry *module, char *inde
 		}
 		string_printf(str, "%s  }\n", indent);
 	}
+
+	string_printf(str, "%s}\n", indent);
 }
 
 static void _function_check_flag(INTERNAL_FUNCTION_PARAMETERS, int mask)

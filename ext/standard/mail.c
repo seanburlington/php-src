@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.31 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: mail.c,v 1.32 2001/03/21 15:15:31 joosters Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -174,7 +174,11 @@ int php_mail(char *to, char *subject, char *message, char *headers, char *extra_
 		}
 		fprintf(sendmail, "\n%s\n", message);
 		ret = pclose(sendmail);
+#if defined(EX_TEMPFAIL)
 		if ((ret != EX_OK)&&(ret != EX_TEMPFAIL)) {
+#else
+		if (ret != EX_OK) {
+#endif
 			return 0;
 		} else {
 			return 1;

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.24 2000/07/24 08:24:14 ssb Exp $
+// $Id: DB.php,v 1.25 2000/07/26 09:57:06 ssb Exp $
 //
 // Database independent query interface.
 //
@@ -163,11 +163,12 @@ class DB {
 	 * error
 	 */
     function &factory($type) {
-		if (!@include_once("DB/${type}.php")) {
-			return DB_ERROR_NOT_FOUND;
-		}
+		@include_once("DB/${type}.php");
 		$classname = 'DB_' . $type;
-		$obj = new $classname;
+		$obj = @new $classname;
+		if (!$obj) {
+			return new DB_Error(DB_ERROR_NOT_FOUND);
+		}
 		return $obj;
     }
 
@@ -192,11 +193,12 @@ class DB {
 
 		$dsninfo = DB::parseDSN($dsn);
 		$type = $dsninfo['phptype'];
-		if (!@include_once("DB/${type}.php")) {
-			return DB_ERROR_NOT_FOUND;
-		}
+		@include_once("DB/${type}.php");
 		$classname = 'DB_' . $type;
-		$obj = new $classname;
+		$obj = @new $classname;
+		if (!$obj) {
+			return new DB_Error(DB_ERROR_NOT_FOUND);
+		}
 		$err = $obj->connect(&$dsninfo, $persistent);
 		if (DB::isError($err)) {
 			return $err;

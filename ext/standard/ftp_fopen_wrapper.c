@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.74.2.3 2005/03/10 13:37:54 hyanantha Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.74.2.4 2005/03/21 08:42:34 hyanantha Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -35,14 +35,6 @@
 #include <winsock2.h>
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
-#elif defined(NETWARE)
-/*#include <ws2nlm.h>*/
-/*#include <sys/socket.h>*/
-#ifdef NEW_LIBC
-#include <sys/param.h>
-#else
-#include "netware/param.h"
-#endif
 #else
 #include <sys/param.h>
 #endif

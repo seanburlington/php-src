@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.9 2003/01/06 22:16:29 iliaa Exp $ */
+/* $Id: string.c,v 1.333.2.10 2003/01/19 12:56:25 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3515,8 +3515,16 @@ PHPAPI void php_strip_tags(char *rbuf, int len, int *stateptr, char *allow, int 
 					state = 3;
 					lc = c;
 				} else {
-					*(rp++) = c;
-				}	
+					if (state == 0) {
+						*(rp++) = c;
+					} else if (allow && state == 1) {
+						*(tp++) = c;
+						if ( (tp-tbuf) >= PHP_TAG_BUF_SIZE ) {
+							/* prevent buffer overflows */
+							tp = tbuf;
+						}
+					}
+				}
 				break;
 
 			case '?':

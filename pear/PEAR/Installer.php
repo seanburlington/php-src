@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.110 2003/09/06 02:37:15 cellog Exp $
+// $Id: Installer.php,v 1.111 2003/09/10 01:40:48 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -125,7 +125,7 @@ class PEAR_Installer extends PEAR_Common
     // {{{ _deletePackageFiles()
 
     /**
-     * Delete a package's installed files, remove empty directories.
+     * Delete a package's installed files, does not remove empty directories.
      *
      * @param string $package package name
      *

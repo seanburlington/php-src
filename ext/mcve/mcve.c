@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: mcve.c,v 1.14.2.4 2003/07/09 13:48:28 bradmssw Exp $ */
+/* $Id: mcve.c,v 1.14.2.5 2003/08/20 19:43:06 bradmssw Exp $ */
 
 /* standard php include(s) */
 #include "php.h"
@@ -509,10 +509,17 @@ PHP_FUNCTION(mcve_destroyconn)
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg) == FAILURE)
 		WRONG_PARAM_COUNT;
 
+/* If MCVE_DestroyConn() is called within a PHP script, the Resource handle is
+   never cleared, as there does not appear to be an UNREGISTER or DESTROY resource
+   call in the Zend API.  What happens is this uninitialized memory location is
+   passed again to the MCVE_DestroyConn() function at script exit (cleanup), and
+   causes weird stuff. So we just go ahead and let the PHP garbage collector call
+   our _free_mcve_conn()  we registered (le_conn) to clean up */
+#if 0
 	ZEND_FETCH_RESOURCE(conn, MCVE_CONN *, arg, -1, "mcve connection", le_conn);
 
 	MCVE_DestroyConn(conn);
-
+#endif
 	RETURN_TRUE;
 }
 /* }}} */

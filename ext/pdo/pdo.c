@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.10 2004/05/21 13:26:58 wez Exp $ */
+/* $Id: pdo.c,v 1.11 2004/05/21 16:53:32 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -62,7 +62,7 @@ function_entry pdo_functions[] = {
 /* {{{ pdo_module_entry */
 zend_module_entry pdo_module_entry = {
 	STANDARD_MODULE_HEADER,
-	"pdo",
+	"PDO",
 	pdo_functions,
 	PHP_MINIT(pdo),
 	PHP_MSHUTDOWN(pdo),

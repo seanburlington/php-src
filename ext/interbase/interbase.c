@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.105 2003/05/14 08:22:54 daniela Exp $ */
+/* $Id: interbase.c,v 1.106 2003/06/02 12:37:16 daniela Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -622,7 +622,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.105 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.106 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1781,24 +1781,35 @@ static int _php_ibase_var_zval(zval *val, void *data, int type, int len, int sca
 			Z_STRLEN_P(val) = len;
 			break;
 		case SQL_LONG:
+		case SQL_SHORT:
 			if (scale) {
-				int j, f = 1;
-				float n = (float) *(long *) (data);
-				
+				short j;
+				long n, f = 1;
+				if ( (type & ~1) == SQL_SHORT) {
+					n = (long) *(short *) (data);
+				}else {	
+					n = (long) *(long *) (data);
+				}
 				for (j = 0; j < -scale; j++) {
 					f *= 10;
 				}
+				if (n  >= 0){
+					Z_STRLEN_P(val) = sprintf (string_data, "%ld.%0*ld", n / f, -scale,  n % f );
+				}else if ((n/f) != 0 ){
+					Z_STRLEN_P(val) = sprintf (string_data, "%ld.%0*ld", n / f, -scale,  -(n % f) );
+				}else{
+					Z_STRLEN_P(val) = sprintf (string_data, "%s.%0*ld","-0", -scale, -(n % f) );
+				}
 				Z_TYPE_P(val) = IS_STRING;
-				Z_STRLEN_P(val) = sprintf(string_data, "%.*f", -scale, n / f);
 				Z_STRVAL_P(val) = estrdup(string_data);
 			} else {
 				Z_TYPE_P(val) = IS_LONG;
-				Z_LVAL_P(val) = *(long *) (data);
+				if ( (type & ~1) == SQL_SHORT) {
+					Z_LVAL_P(val) = *(short *) (data);
+				}else{
+					Z_LVAL_P(val) = *(long *) (data);
+				}
 			}
-			break;
-		case SQL_SHORT:
-			Z_TYPE_P(val) = IS_LONG;
-			Z_LVAL_P(val) = *(short *) (data);
 			break;
 		case SQL_FLOAT:
 			Z_TYPE_P(val) = IS_DOUBLE;
@@ -1817,16 +1828,23 @@ static int _php_ibase_var_zval(zval *val, void *data, int type, int len, int sca
 #ifdef SQL_INT64
 		case SQL_INT64:
 			Z_TYPE_P(val) = IS_STRING;
-
-			if (scale) {
-				int j, f = 1;
-				double number = (double) ((ISC_INT64) (*((ISC_INT64 *) data)));
-				char dt[20];
+			if (scale < 0 ){
+				short j = 0;
+				ISC_INT64 n, f = 1;
+				n = (ISC_INT64) *(ISC_INT64 *) data;
 				for (j = 0; j < -scale; j++) {
 					f *= 10;
 				}
-				sprintf(dt, "%%0.%df", -scale);
-				Z_STRLEN_P(val) = sprintf (string_data, dt, number / f);
+				if ( n >= 0){
+				Z_STRLEN_P(val) = sprintf (string_data, "%" ISC_INT64_FORMAT "d.%0*" ISC_INT64_FORMAT "d",
+											(ISC_INT64) n / f, -scale, (ISC_INT64) n % f );
+				}else if ((n/f) != 0 ){
+				Z_STRLEN_P(val) = sprintf (string_data, "%" ISC_INT64_FORMAT "d.%0*" ISC_INT64_FORMAT "d",
+											(ISC_INT64) n / f, -scale, (ISC_INT64) -(n % f) );
+				}else{
+				Z_STRLEN_P(val) = sprintf (string_data, "%s.%0*" ISC_INT64_FORMAT "d",
+											"-0", -scale, (ISC_INT64) -(n % f) );
+				}
 			} else {
 				Z_STRLEN_P(val) =sprintf (string_data, "%.0" ISC_INT64_FORMAT "d",
 							                                    (ISC_INT64) *(ISC_INT64 *) data);

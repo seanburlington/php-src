@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.10 1999/09/27 15:17:28 andrey Exp $ */
+/* $Id: url.c,v 1.11 1999/09/29 14:25:40 andrey Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -140,7 +140,7 @@ url *url_parse(char *string)
 		}
 		efree(result);
 	}
-	else {
+	else if (!strcmp(ret->scheme, "http")) {
 		STR_FREE(ret->scheme);
 		STR_FREE(ret->path);
 		STR_FREE(ret->query);

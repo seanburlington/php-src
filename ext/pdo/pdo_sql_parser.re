@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.14 2005/02/05 21:29:42 wez Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.15 2005/02/06 00:46:13 edink Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -137,6 +137,13 @@ PDO_API int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len,
 	}
 
 	params = stmt->bound_params;
+	
+	/* Do we have placeholders but no bound params */
+	if (bindno && !params) {
+		strcpy(stmt->error_code, "HY093"); /* invalid parameter number */
+		ret = -1;
+		goto clean_up;
+	}
 	
 	/* what are we going to do ? */
 	

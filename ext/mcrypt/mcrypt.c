@@ -16,7 +16,7 @@
    |          Derick Rethans <d.rethans@jdimedia.nl>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.79 2003/01/03 19:49:44 derick Exp $ */
+/* $Id: mcrypt.c,v 1.80 2003/01/06 01:26:14 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -168,8 +168,11 @@ ZEND_GET_MODULE(mcrypt)
 	if (argc < (a) || argc > (b)) {								\
 		WRONG_PARAM_COUNT;										\
 	}
-#warning Invalidate resource if the param count is wrong, or other problems
-#warning occurred during functions.
+/*
+ * #warning is not ANSI C
+ * #warning Invalidate resource if the param count is wrong, or other problems
+ * #warning occurred during functions.
+ */
 
 #define MCRYPT_GET_CRYPT_ARGS									\
 	switch (argc) {												\

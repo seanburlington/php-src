@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.66.2.10 2003/07/14 23:20:01 edink Exp $ */
+/* $Id: fdf.c,v 1.66.2.11 2003/09/11 01:45:02 hholzgra Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -382,13 +382,12 @@ PHP_FUNCTION(fdf_get_value)
 			} 
 			which++;
 		} while (err == FDFErcOK);
-		if(err == FDFErcNoValue) err = FDFErcOK;
 		efree(buffer); 
 		buffer = NULL;
 #endif
 	}
 
-	if(err != FDFErcOK) {
+	if ((err != FDFErcOK) && (err != FDFErcNoValue)) {
 		if(buffer) efree(buffer);
 		FDF_FAILURE(err);
 	}

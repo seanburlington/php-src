@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.19 1999/12/18 22:35:17 zeev Exp $ */
+/* $Id: php_odbc.c,v 1.20 1999/12/21 20:35:42 zeev Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -465,7 +465,7 @@ void ODBC_SQL_ERROR(HENV henv, HDBC conn, HSTMT stmt, char *func)
 	ODBCLS_FETCH();
 
     do {
-	    SQLError(henv, conn, stmt, state,
+	    ret = SQLError(henv, conn, stmt, state,
 			    &error, errormsg, sizeof(errormsg)-1, &errormsgsize);
 	    if (func) {
 		    php_error(E_WARNING, "SQL error: %s, SQL state %s in %s",

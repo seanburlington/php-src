@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.165 1999/12/21 19:43:38 andrei Exp $ */
+/* $Id: main.c,v 1.166 1999/12/21 20:35:41 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -1224,13 +1224,13 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 
 	if (SG(request_info).query_string && SG(request_info).query_string[0]=='=' 
 		&& PG(expose_php)) {
-		if (!strcmp(SG(request_info).query_string+1, "PHPE9568F34-D428-11d2-A769-00AA001ACF42")) {
+		if (!strcmp(SG(request_info).query_string+1, PHP_LOGO_GUID)) {
 			char *header_line = estrndup(CONTEXT_TYPE_IMAGE_GIF, sizeof(CONTEXT_TYPE_IMAGE_GIF));
 
 			php4i_add_header_information(header_line, sizeof(CONTEXT_TYPE_IMAGE_GIF)-1);
 			PHPWRITE(php4_logo, sizeof(php4_logo));
 			return;
-		} else if (!strcmp(SG(request_info).query_string+1, "PHPE9568F35-D428-11d2-A769-00AA001ACF42")) {
+		} else if (!strcmp(SG(request_info).query_string+1, ZEND_LOGO_GUID)) {
 			char *header_line = estrndup(CONTEXT_TYPE_IMAGE_GIF, sizeof(CONTEXT_TYPE_IMAGE_GIF));
 
 			php4i_add_header_information(header_line, sizeof(CONTEXT_TYPE_IMAGE_GIF)-1);

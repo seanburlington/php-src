@@ -1,9 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.13 2003/11/29 20:40:17 rrichards Exp $
+dnl $Id: config.m4,v 1.14 2003/12/07 00:21:47 helly Exp $
 dnl
 
 PHP_ARG_ENABLE(dom, whether to enable DOM support,
 [  --disable-dom           Disable new DOM support.], yes)
+dom_shared=$ext_shared
 
 if test -z "$PHP_LIBXML_DIR"; then
   PHP_ARG_WITH(libxml-dir, libxml2 install dir,
@@ -24,7 +25,7 @@ if test "$PHP_DOM" != "no" && test "$PHP_LIBXML" != "no"; then
                             domimplementationsource.c entityreference.c \
                             notation.c xpath.c dom_iterators.c \
                             typeinfo.c domerror.c domlocator.c namednodemap.c userdatahandler.c], 
-                            $ext_shared)
+                            $dom_shared)
     PHP_SUBST(DOM_SHARED_LIBADD)
   ], [
     AC_MSG_ERROR([xml2-config not found. Please check your libxml2 installation.])

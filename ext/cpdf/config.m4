@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.17 2003/10/01 02:53:02 sniper Exp $
+dnl $Id: config.m4,v 1.18 2003/12/07 00:21:45 helly Exp $
 
 AC_DEFUN(CPDF_JPEG_TEST,[
   AC_ARG_WITH(jpeg-dir,
@@ -47,41 +47,36 @@ AC_DEFUN(CPDF_TIFF_TEST,[
 ])
 
 AC_MSG_CHECKING(for cpdflib support)
-AC_ARG_WITH(cpdflib,
-[  --with-cpdflib[=DIR]    Include cpdflib support (requires cpdflib >= 2).],
-[
-  PHP_WITH_SHARED
-  if test "$withval" != "no"; then
-    cpdf_withval=$withval
-    PHP_NEW_EXTENSION(cpdf, cpdf.c, $ext_shared,, \\$(GDLIB_CFLAGS))
-    PHP_SUBST(CPDF_SHARED_LIBADD)
-    CPDF_JPEG_TEST
-    CPDF_TIFF_TEST
+PHP_ARG_WITH(cpdflib,
+[  --with-cpdflib[=DIR]    Include cpdflib support (requires cpdflib >= 2).])
 
-    for i in $cpdf_withval /usr/local /usr; do
-      if test -f "$i/include/cpdflib.h"; then
-        CPDFLIB_INCLUDE=$i/include
-        AC_MSG_CHECKING(for cpdflib.h)
-        AC_MSG_RESULT([in $i/include])
+if test "$PHP_CPDFLIB" != "no"; then
+  PHP_NEW_EXTENSION(cpdf, cpdf.c, $ext_shared,, \\$(GDLIB_CFLAGS))
+  PHP_SUBST(CPDF_SHARED_LIBADD)
+  CPDF_JPEG_TEST
+  CPDF_TIFF_TEST
 
-        PHP_CHECK_LIBRARY(cpdf, cpdf_open, [
-          PHP_ADD_INCLUDE($CPDFLIB_INCLUDE)
-          PHP_ADD_LIBRARY_WITH_PATH(cpdf, $i/lib, CPDF_SHARED_LIBADD)
-          AC_DEFINE(HAVE_CPDFLIB,1,[Whether you have cpdflib])
-        ], [
-          AC_MSG_ERROR([Cpdflib module requires cpdflib >= 2.])
-        ], [
-          -L$i/lib $CPDF_SHARED_LIBADD
-        ])
-        break
-      fi
-    done  
-
-    if test -z "$CPDFLIB_INCLUDE"; then
+  for i in $PHP_CPDFLIB /usr/local /usr; do
+    if test -f "$i/include/cpdflib.h"; then
+      CPDFLIB_INCLUDE=$i/include
       AC_MSG_CHECKING(for cpdflib.h)
-      AC_MSG_ERROR([not found])
+      AC_MSG_RESULT([in $i/include])
+
+      PHP_CHECK_LIBRARY(cpdf, cpdf_open, [
+        PHP_ADD_INCLUDE($CPDFLIB_INCLUDE)
+        PHP_ADD_LIBRARY_WITH_PATH(cpdf, $i/lib, CPDF_SHARED_LIBADD)
+        AC_DEFINE(HAVE_CPDFLIB,1,[Whether you have cpdflib])
+      ], [
+        AC_MSG_ERROR([Cpdflib module requires cpdflib >= 2.])
+      ], [
+        -L$i/lib $CPDF_SHARED_LIBADD
+      ])
+      break
     fi
+  done  
+
+  if test -z "$CPDFLIB_INCLUDE"; then
+    AC_MSG_CHECKING(for cpdflib.h)
+    AC_MSG_ERROR([not found])
   fi
-],[
-  AC_MSG_RESULT(no)
-])
+fi

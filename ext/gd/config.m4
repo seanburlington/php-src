@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.141 2003/10/01 02:53:06 sniper Exp $
+dnl $Id: config.m4,v 1.142 2003/12/07 00:21:47 helly Exp $
 dnl
 
 dnl
@@ -9,6 +9,7 @@ dnl
 PHP_ARG_WITH(gd, for GD support,
 [  --with-gd[=DIR]         Include GD support where DIR is GD install prefix.
                           If DIR is not set, the bundled GD library will be used.])
+gd_shared=$ext_shared
 
 if test -z "$PHP_JPEG_DIR"; then
   PHP_ARG_WITH(jpeg-dir, for the location of libjpeg,
@@ -399,7 +400,7 @@ dnl
 dnl Common for both builtin and external GD
 dnl
 if test "$PHP_GD" != "no"; then
-  PHP_NEW_EXTENSION(gd, gd.c gdttf.c $extra_sources, $ext_shared,, \\$(GDLIB_CFLAGS))
+  PHP_NEW_EXTENSION(gd, gd.c gdttf.c $extra_sources, $gd_shared,, \\$(GDLIB_CFLAGS))
 
   if test "$GD_MODULE_TYPE" = "builtin"; then
     GDLIB_CFLAGS="-I$ext_srcdir/libgd $GDLIB_CFLAGS"

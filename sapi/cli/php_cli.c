@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.87 2003/04/27 19:19:29 helly Exp $ */
+/* $Id: php_cli.c,v 1.88 2003/04/27 19:41:36 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -683,6 +683,8 @@ int main(int argc, char *argv[])
 		INI_HARDCODED("implicit_flush", "1");
 		INI_HARDCODED("max_execution_time", "0");
 
+		optind = orig_optind;
+		optarg = orig_optarg;
 		while ((c = php_getopt(argc, argv, OPTIONS, &optarg, &optind, 0)) != -1) {
 			switch (c) {
 

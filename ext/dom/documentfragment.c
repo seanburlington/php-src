@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: documentfragment.c,v 1.7 2004/01/22 21:16:05 rrichards Exp $ */
+/* $Id: documentfragment.c,v 1.8 2004/03/31 17:18:59 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,12 +36,12 @@
 */
 
 zend_function_entry php_dom_documentfragment_class_functions[] = {
-	PHP_FALIAS(domdocumentfragment, dom_documentfragment_documentfragment, NULL)
+	PHP_ME(domdocumentfragment, __construct, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto dom_documentfragment_documentfragment(); */
-PHP_FUNCTION(dom_documentfragment_documentfragment)
+/* {{{ proto void DomDocumentFragment::__construct(); */
+PHP_METHOD(domdocumentfragment, __construct)
 {
 
 	zval *id;
@@ -67,5 +67,5 @@ PHP_FUNCTION(dom_documentfragment_documentfragment)
 		php_libxml_increment_node_ptr((php_libxml_node_object *)intern, nodep, (void *)intern TSRMLS_CC);
 	}
 }
-/* }}} end dom_documentfragment_documentfragment */
+/* }}} end DomDocumentFragment::__construct */
 #endif

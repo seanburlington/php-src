@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: comment.c,v 1.7 2004/01/22 21:16:05 rrichards Exp $ */
+/* $Id: comment.c,v 1.8 2004/03/31 17:18:59 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,12 +36,12 @@
 */
 
 zend_function_entry php_dom_comment_class_functions[] = {
-	PHP_FALIAS(domcomment, dom_comment_comment, NULL)
+	PHP_ME(domcomment, __construct, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto dom_comment_comment([string value]); */
-PHP_FUNCTION(dom_comment_comment)
+/* {{{ proto void DomComment::__construct([string value]); */
+PHP_METHOD(domcomment, __construct)
 {
 
 	zval *id;
@@ -68,5 +68,5 @@ PHP_FUNCTION(dom_comment_comment)
 		php_libxml_increment_node_ptr((php_libxml_node_object *)intern, (xmlNodePtr)nodep, (void *)intern TSRMLS_CC);
 	}
 }
-/* }}} end dom_comment_comment */
+/* }}} end DomComment::__construct */
 #endif

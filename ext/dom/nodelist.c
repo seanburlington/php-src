@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nodelist.c,v 1.12 2004/03/29 19:57:48 iliaa Exp $ */
+/* $Id: nodelist.c,v 1.13 2004/03/31 17:18:59 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -160,6 +160,7 @@ PHP_FUNCTION(dom_nodelist_item)
 
 		if (itemnode) {
 			DOM_RET_OBJ(rv, itemnode, &ret, objmap->baseobj);
+			return;
 		}
 	}
 

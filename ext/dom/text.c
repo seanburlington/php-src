@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: text.c,v 1.17 2004/02/16 13:06:33 rrichards Exp $ */
+/* $Id: text.c,v 1.18 2004/03/31 17:18:59 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -39,12 +39,12 @@ zend_function_entry php_dom_text_class_functions[] = {
 	PHP_FALIAS(splitText, dom_text_split_text, NULL)
 	PHP_FALIAS(isWhitespaceInElementContent, dom_text_is_whitespace_in_element_content, NULL)
 	PHP_FALIAS(replaceWholeText, dom_text_replace_whole_text, NULL)
-	PHP_FALIAS(domtext, dom_text_text, NULL)
+	PHP_ME(domtext, __construct, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto domtext_text([string value]); */
-PHP_FUNCTION(dom_text_text)
+/* {{{ proto void DomText::__construct([string value]); */
+PHP_METHOD(domtext, __construct)
 {
 
 	zval *id;
@@ -71,7 +71,7 @@ PHP_FUNCTION(dom_text_text)
 		php_libxml_increment_node_ptr((php_libxml_node_object *)intern, nodep, (void *)intern TSRMLS_CC);
 	}
 }
-/* }}} end dom_text_text */
+/* }}} end DomText::__construct */
 
 /* {{{ proto wholeText	string	
 readonly=yes 

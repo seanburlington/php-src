@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.50 2004/03/03 20:59:02 rrichards Exp $ */
+/* $Id: document.c,v 1.51 2004/03/31 17:18:59 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -70,7 +70,7 @@ zend_function_entry php_dom_document_class_functions[] = {
 	PHP_FALIAS(save, dom_document_save, NULL)
 	PHP_ME(domdocument, loadXML, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_ALLOW_STATIC)
 	PHP_FALIAS(saveXML, dom_document_savexml, NULL)
-	PHP_FALIAS(domdocument, dom_document_document, NULL)
+	PHP_ME(domdocument, __construct, NULL, ZEND_ACC_PUBLIC)
 	PHP_FALIAS(validate, dom_document_validate, NULL)
 	PHP_FALIAS(xinclude, dom_document_xinclude, NULL)
 #if defined(LIBXML_HTML_ENABLED)
@@ -1286,8 +1286,8 @@ PHP_FUNCTION(dom_document_rename_node)
 }
 /* }}} end dom_document_rename_node */
 
-/* {{{ proto domnode dom_document_document([string version], [string encoding]); */
-PHP_FUNCTION(dom_document_document)
+/* {{{ proto void DomDocument::__construct([string version], [string encoding]); */
+PHP_METHOD(domdocument, __construct)
 {
 
 	zval *id;

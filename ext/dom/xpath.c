@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.18 2004/02/18 22:42:30 rrichards Exp $ */
+/* $Id: xpath.c,v 1.19 2004/03/31 17:18:59 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -35,14 +35,14 @@
 #if defined(LIBXML_XPATH_ENABLED)
 
 zend_function_entry php_dom_xpath_class_functions[] = {
-	PHP_FALIAS(domxpath, dom_xpath_xpath, NULL)
+	PHP_ME(domxpath, __construct, NULL, ZEND_ACC_PUBLIC)
 	PHP_FALIAS(register_namespace, dom_xpath_register_ns, NULL)
 	PHP_FALIAS(query, dom_xpath_query, NULL)
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto domxpath dom_xpath_xpath(domDocument doc); */
-PHP_FUNCTION(dom_xpath_xpath)
+/* {{{ proto void DomXPath::__construct(domDocument doc); */
+PHP_METHOD(domxpath, __construct)
 {
 	zval *id, *doc;
 	xmlDocPtr docp = NULL;
@@ -72,7 +72,7 @@ PHP_FUNCTION(dom_xpath_xpath)
 		php_libxml_increment_doc_ref((php_libxml_node_object *)intern, docp TSRMLS_CC);
 	}
 }
-/* }}} end dom_xpath_xpath */
+/* }}} end DomXPath::__construct */
 
 /* {{{ proto domdocument document	document */
 int dom_xpath_document_read(dom_object *obj, zval **retval TSRMLS_DC)

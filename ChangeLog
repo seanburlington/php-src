@@ -1,3 +1,20 @@
+2005-03-29  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_0)
+      NEWS:
+      patch reverted.
+
+    * (PHP_4_3)
+      NEWS:
+      patch was reverted.
+
+2005-03-29  Sara Golemon  <php@alphaweb.net>
+
+    * ext/standard/streamsfuncs.c
+      main/streams/filter.c
+      main/streams/php_stream_filter_api.h:
+      BugFix #31137 stream_filter_remove() segfaults when stream already closed
+
 2005-03-28  Ilia Alshanetsky  <ilia@prohost.org>
 
     * main/php_variables.c:
@@ -2763,7 +2780,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1937 2005/03/29 01:32:11 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1938 2005/03/30 01:32:45 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -3244,7 +3261,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1937 2005/03/29 01:32:11 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1938 2005/03/30 01:32:45 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -4718,7 +4735,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1937 2005/03/29 01:32:11 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1938 2005/03/30 01:32:45 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.510 2002/11/10 02:48:22 sniper Exp $ */
+/* $Id: main.c,v 1.511 2002/11/10 19:28:51 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -1055,6 +1055,8 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	SG(request_info).argv=(char **)NULL;
 	PG(connection_status) = PHP_CONNECTION_NORMAL;
 	PG(during_request_startup) = 0;
+
+	CG(zend_lineno) = 0;
 
 #if HAVE_SETLOCALE
 	setlocale(LC_CTYPE, "");

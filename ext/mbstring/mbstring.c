@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.58 2002/04/11 22:27:00 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.59 2002/04/11 22:52:43 helly Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -2070,7 +2070,7 @@ PHPAPI char * php_mb_convert_encoding(char *input, size_t length, char *_to_enco
 		return NULL;
 	}
 	/* new encoding */
-	if (_to_encoding) {
+	if (_to_encoding && strlen(_to_encoding)) {
 		to_encoding = mbfl_name2no_encoding(_to_encoding);
 		if (to_encoding == mbfl_no_encoding_invalid) {
 			php_error(E_WARNING, "%s() unknown encoding \"%s\"",

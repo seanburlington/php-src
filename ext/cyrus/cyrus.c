@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyrus.c,v 1.5 2001/12/05 22:38:49 hholzgra Exp $ */
+/* $Id: cyrus.c,v 1.6 2001/12/06 11:44:38 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -388,8 +388,8 @@ PHP_FUNCTION(cyrus_bind)
 	char                  *string_key;
 	ulong                  num_key;
 
-	if (ZEND_NUM_ARGS() != 3 ||
-	    zend_get_parameters_ex(3, &z_conn, &z_callback) == FAILURE) {
+	if (ZEND_NUM_ARGS() != 2 ||
+	    zend_get_parameters_ex(2, &z_conn, &z_callback) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 

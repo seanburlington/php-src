@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.61 2001/10/11 23:32:46 ssb Exp $ */
+/* $Id: fdf.c,v 1.62 2001/12/05 22:43:21 hholzgra Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -693,7 +693,7 @@ PHP_FUNCTION(fdf_set_javascript_action)
 }
 /* }}} */
 
-/* {{{ fdf_set_encoding(int fdf_document, string encoding)
+/* {{{ proto bool fdf_set_encoding(int fdf_document, string encoding)
    Sets FDF encoding (either "Shift-JIS" or "Unicode") */  
 PHP_FUNCTION(fdf_set_encoding) 
 {

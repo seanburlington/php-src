@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.85 2001/12/02 17:40:38 mfischer Exp $ */
+/* $Id: php_domxml.c,v 1.86 2001/12/05 22:41:30 hholzgra Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1739,7 +1739,7 @@ PHP_FUNCTION(domxml_node_attributes)
 }
 /* }}} */
 
-/* {{{ proto object domxml_new_child(string name, string content)
+/* {{{ proto object domxml_node_new_child(string name, string content)
    Adds child node to parent node */
 PHP_FUNCTION(domxml_node_new_child)
 {

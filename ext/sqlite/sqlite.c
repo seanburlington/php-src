@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.64 2003/06/26 19:26:26 helly Exp $ 
+   $Id: sqlite.c,v 1.65 2003/06/26 21:07:07 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -187,7 +187,7 @@ function_entry sqlite_functions[] = {
 	PHP_FE(sqlite_unbuffered_query, NULL)
 	PHP_FE(sqlite_create_aggregate, NULL)
 	PHP_FE(sqlite_create_function, NULL)
-	PHP_FE(sqlite_factory, NULL)
+	PHP_FE(sqlite_factory, arg3_force_ref)
 	PHP_FE(sqlite_udf_encode_binary, NULL)
 	PHP_FE(sqlite_udf_decode_binary, NULL)
 	{NULL, NULL, NULL}
@@ -936,7 +936,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.64 2003/06/26 19:26:26 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.65 2003/06/26 21:07:07 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

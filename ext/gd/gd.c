@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.279 2003/09/15 07:27:18 moriyoshi Exp $ */
+/* $Id: gd.c,v 1.280 2003/11/19 15:49:55 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -3086,13 +3086,11 @@ static void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode, int 
 	argc = ZEND_NUM_ARGS();
 
 	if (mode == TTFTEXT_BBOX) {
-		if ((extended && argc != 5) || (!extended && argc != 4) ||
-			  	zend_get_parameters_ex(argc, &PTSIZE, &ANGLE, &FONTNAME, &C, &EXT) == FAILURE) {
+		if (argc < 4 || argc > 5 || zend_get_parameters_ex(argc, &PTSIZE, &ANGLE, &FONTNAME, &C, &EXT) == FAILURE) {
 			ZEND_WRONG_PARAM_COUNT();
 		}
 	} else {
-		if ((extended && argc != 9) || (!extended && argc != 8) ||
-			  	zend_get_parameters_ex(argc, &IM, &PTSIZE, &ANGLE, &X, &Y, &COL, &FONTNAME, &C, &EXT) == FAILURE) {
+		if (argc < 8 || argc > 9 || zend_get_parameters_ex(argc, &IM, &PTSIZE, &ANGLE, &X, &Y, &COL, &FONTNAME, &C, &EXT) == FAILURE) {
 			ZEND_WRONG_PARAM_COUNT();
 		}
 		ZEND_FETCH_RESOURCE(im, gdImagePtr, IM, -1, "Image", le_gd);

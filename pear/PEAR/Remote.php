@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.33 2002/11/10 02:44:49 ssb Exp $
+// $Id: Remote.php,v 1.34 2002/11/11 01:23:24 dickmann Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -62,10 +62,17 @@ class PEAR_Remote extends PEAR
         if (!file_exists($filename)) {
             return null;
         };
+		
+        $fp = fopen($filename, "rb");
+        if ($fp === null) {
+            return null;
+        }
+        $content  = fread($fp, filesize($filename));
+        fclose($fp);
         $result   = array(
             'age'        => time() - filemtime($filename),
             'lastChange' => filemtime($filename),
-            'content'    => unserialize(implode('', file($filename))),
+            'content'    => unserialize($content),
             );
         return $result;
     }
@@ -83,7 +90,7 @@ class PEAR_Remote extends PEAR
         }
         $filename = $cachedir.'/xmlrpc_cache_'.$id;
         
-        $fp = @fopen($filename, "w");
+        $fp = @fopen($filename, "wb");
         if ($fp !== null) {
             fwrite($fp, serialize($data));
             fclose($fp);

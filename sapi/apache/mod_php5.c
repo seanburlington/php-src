@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.2 2003/05/08 09:27:18 edink Exp $ */
+/* $Id: mod_php5.c,v 1.3 2003/05/08 14:42:31 edink Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -534,7 +534,7 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 	HashTable *per_dir_conf;
 	TSRMLS_FETCH();
 
-	per_dir_conf = (HashTable *) get_module_config(r->per_dir_config, &php4_module);
+	per_dir_conf = (HashTable *) get_module_config(r->per_dir_config, &php5_module);
 	if (per_dir_conf) {
 		zend_hash_apply((HashTable *) per_dir_conf, (apply_func_t) php_apache_alter_ini_entries TSRMLS_CC);
 	}

@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php3.h,v 1.3 1999/04/10 11:22:18 zeev Exp $ */
+/* $Id: mod_php3.h,v 1.4 1999/04/10 12:17:20 zeev Exp $ */
 
 #ifndef _MOD_PHP3_H
 #define _MOD_PHP3_H
@@ -48,9 +48,7 @@ typedef struct {
     long warn_plus_overloading;
     char *doc_root;
     char *user_dir;
-    long safe_mode;
     long track_vars;
-    char *safe_mode_exec_dir;
     char *cgi_ext;
     char *isapi_ext;
     char *nsapi_ext;

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.18 2002/04/09 17:15:17 ssb Exp $
+// $Id: Package.php,v 1.19 2002/04/10 12:23:31 cox Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Packager.php';
@@ -89,9 +89,11 @@ class PEAR_Command_Package extends PEAR_Command_Common
     {
         switch ($command) {
             case 'package':
-                return array('[<package.xml>]',
+                return array('[-n] [<package.xml>]',
                              'Creates a PEAR package from its description file (usually '.
-                             'named as package.xml)');
+                             "named as package.xml)\n".
+                             "   -n    Return only the created package file name. Useful for\n".
+                             "         shell script operations.");
             case 'package-list':
                 return array('<pear package>',
                              'List the contents of a PEAR package');
@@ -146,6 +148,14 @@ class PEAR_Command_Package extends PEAR_Command_Common
                 $result = $packager->Package($pkginfofile, $compress);
                 $output = ob_get_contents();
                 ob_end_clean();
+                if (PEAR::isError($result)) {
+                    $failmsg = $result;
+                }
+                // Don't want output, only the package file name just created
+                if (isset($options['n'])) {
+                    $this->ui->displayLine($result);
+                    return;
+                }
                 $lines = explode("\n", $output);
                 foreach ($lines as $line) {
                     $this->ui->displayLine($line);

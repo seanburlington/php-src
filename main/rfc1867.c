@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.128 2002/12/14 10:45:25 sesser Exp $ */
+/* $Id: rfc1867.c,v 1.129 2002/12/29 21:02:17 iliaa Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -104,7 +104,7 @@ static void normalize_protected_variable(char *varname TSRMLS_DC)
 
 	/* done? */
 	while (index) {
-		
+
 		while (*index == ' ' || *index == '\r' || *index == '\n' || *index=='\t') {
 			index++;
 		}
@@ -891,8 +891,11 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 			 * ends in [.*]
 			 * start_arr is set to point to 1st [
 			 */
-			is_arr_upload =	(start_arr = strchr(param,'[')) &&
-							(param[strlen(param)-1] == ']');
+			is_arr_upload =	(start_arr = strchr(param,'[')) && (param[strlen(param)-1] == ']');
+			/* handle unterminated [ */
+			if (!is_arr_upload && start_arr) {
+				*start_arr = '_';
+			}
 
 			if (is_arr_upload) {
 				array_len = strlen(start_arr);

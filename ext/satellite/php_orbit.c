@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: php_orbit.c,v 1.2 2000/09/01 22:29:00 eriksson Exp $
+ * $Id: php_orbit.c,v 1.3 2001/01/26 20:46:22 eschmid Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -56,8 +56,7 @@ PHP_INI_END()
 /*
  * functions in module
  */
-static function_entry satellite_functions[] = 
-{
+static function_entry satellite_functions[] = {
 	PHP_FE(satellite_load_idl,					NULL)
 	PHP_FE(satellite_get_repository_id, NULL)
 	PHP_FE(satellite_caught_exception, 	NULL)

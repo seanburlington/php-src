@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.84 2000/05/25 07:44:45 thies Exp $ */
+/* $Id: oci8.c,v 1.85 2000/05/30 09:25:02 thies Exp $ */
 
 /* TODO list:
  *
@@ -1098,7 +1098,9 @@ static oci_statement *oci_parse(oci_connection *connection, char *query, int len
 									  OCI_NTV_SYNTAX,
 									  OCI_DEFAULT));
 		if (connection->error) {
-			/* XXX loose memory */
+			OCIHandleFree(statement->pStmt, OCI_HTYPE_STMT);
+		   	OCIHandleFree(statement->pError, OCI_HTYPE_ERROR);
+			efree(statement);
 			return 0;
 		}
 	}
@@ -3680,7 +3682,11 @@ PHP_FUNCTION(ociparse)
 
 	statement = oci_parse(connection,(*query)->value.str.val,(*query)->value.str.len);
 
-	RETURN_RESOURCE(statement->id);
+	if (statement) {
+		RETURN_RESOURCE(statement->id);
+	} else {
+		RETURN_FALSE;
+	}
 }
 
 /* }}} */

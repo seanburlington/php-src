@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 2002/04/02 12:54:21 derick Exp $
+dnl $Id: config.m4,v 1.4 2002/04/04 18:15:52 sander Exp $
 dnl config.m4 for extension tokenizer
 
 dnl Otherwise use enable:
@@ -45,4 +45,5 @@ if test "$PHP_TOKENIZER" != "no"; then
   dnl PHP_ADD_LIBRARY_WITH_PATH($LIBNAME, $TOKENIZER_DIR/lib, TOKENIZER_SHARED_LIBADD)
 
   PHP_NEW_EXTENSION(tokenizer, tokenizer.c, $ext_shared)
+  PHP_ADD_MAKEFILE_FRAGMENT
 fi

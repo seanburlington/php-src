@@ -15,7 +15,7 @@
    | Author: Bjørn Borud - Guardian Networks AS <borud@guardian.no>       |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.3 2000/05/23 14:42:22 andi Exp $ */
+/* $Id: levenshtein.c,v 1.4 2000/05/23 19:27:02 sas Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -23,7 +23,7 @@
 #include <ctype.h>
 #include "php_string.h"
 
-int calc_levdist(const char *s1, const char *s2) /* faster, but obfuscated */
+static int calc_levdist(const char *s1, const char *s2) /* faster, but obfuscated */
 {
 	register char *p1,*p2;
 	register int i,j,n;
@@ -60,8 +60,16 @@ int calc_levdist(const char *s1, const char *s2) /* faster, but obfuscated */
 
 	/* swap if l2 longer than l1 */
 	if(l1<l2) {
-		(long)s1 ^= (long)s2; (long)s2 ^= (long)s1; (long)s1 ^= (long)s2;
-		l1 ^= l2; l2 ^= l1; l1 ^= l2;
+		const char *s3;
+		int l3;
+		
+		s3 = s1;
+		s1 = s2;
+		s2 = s3;
+
+		l3 = l1;
+		l1 = l2;
+		l2 = l3;
 	}
 
 	

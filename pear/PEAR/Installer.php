@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.81.2.19 2003/11/17 05:57:39 cellog Exp $
+// $Id: Installer.php,v 1.81.2.20 2003/11/17 06:07:44 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -803,7 +803,7 @@ class PEAR_Installer extends PEAR_Common
                     if ($version == 0 && !isset($options['force'])) {
                         return $this->raiseError('No release with state equal to: \'' . implode(', ', $states) .
                                                  "' found for '$pkgfile'");
-                    } else {
+                    } elseif ($version == 0) {
                         $this->log(0, "Warning: $pkgfile is state '$inf[state]' which is less stable " .
                                       "than state '$state'");
                     }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.214.2.2 2005/01/28 01:58:26 tony2001 Exp $ */
+/* $Id: mbstring.c,v 1.214.2.3 2005/02/21 08:01:01 moriyoshi Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -134,7 +134,7 @@ static const enum mbfl_no_encoding php_mb_default_identify_list_neut[] = {
 };
 
 
-php_mb_nls_ident_list php_mb_default_identify_list[] = {
+static const php_mb_nls_ident_list php_mb_default_identify_list[] = {
 	{ mbfl_no_language_japanese, php_mb_default_identify_list_ja, sizeof(php_mb_default_identify_list_ja) / sizeof(php_mb_default_identify_list_ja[0]) },
 	{ mbfl_no_language_korean, php_mb_default_identify_list_kr, sizeof(php_mb_default_identify_list_kr) / sizeof(php_mb_default_identify_list_kr[0]) },
 	{ mbfl_no_language_traditional_chinese, php_mb_default_identify_list_tw_hk, sizeof(php_mb_default_identify_list_tw_hk) / sizeof(php_mb_default_identify_list_tw_hk[0]) },
@@ -1339,7 +1339,7 @@ PHP_FUNCTION(mb_preferred_mime_name)
 PHP_FUNCTION(mb_parse_str)
 {
 	zval *track_vars_array;
-	char *encstr = NULL, *separator = NULL;
+	char *encstr = NULL;
 	int encstr_len;
 	php_mb_encoding_handler_info_t info;
 	enum mbfl_no_encoding detected;

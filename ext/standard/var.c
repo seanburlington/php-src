@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.174 2003/10/08 01:51:32 moriyoshi Exp $ */
+/* $Id: var.c,v 1.175 2003/11/04 16:08:10 moriyoshi Exp $ */
 
 
 /* {{{ includes 
@@ -513,7 +513,7 @@ static void php_var_serialize_intern(smart_str *buf, zval **struc, HashTable *va
 
 	if(var_hash 
 			&& php_add_var_hash(var_hash, *struc, (void *) &var_already) == FAILURE 
-			&& (*struc)->is_ref) {
+			&& ((*struc)->is_ref || Z_TYPE_PP(struc) == IS_OBJECT)) {
 		smart_str_appendl(buf, "R:", 2);
 		smart_str_append_long(buf, *var_already);
 		smart_str_appendc(buf, ';');

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.16 2000/01/01 01:31:55 sas Exp $ */
+/* $Id: sysvshm.c,v 1.17 2000/01/12 18:21:39 sas Exp $ */
 
 /* This has been built and tested on Solaris 2.6.
  * It may not compile or execute correctly on other systems.
@@ -54,6 +54,7 @@ zend_module_entry sysvshm_module_entry = {
 zend_module_entry *get_module() { return &sysvshm_module_entry; }
 #endif
 
+#undef shm_ptr					/* undefine AIX-specific macro */
 
 THREAD_LS sysvshm_module php_sysvshm;
 

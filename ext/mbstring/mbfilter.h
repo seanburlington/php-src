@@ -86,7 +86,7 @@
  *
  */
 
-/* $Id: mbfilter.h,v 1.12 2002/08/02 10:22:31 helly Exp $ */
+/* $Id: mbfilter.h,v 1.13 2002/08/04 14:20:11 helly Exp $ */
 
 
 #ifndef MBFL_MBFILTER_H
@@ -128,6 +128,7 @@ enum mbfl_no_encoding {
 	mbfl_no_encoding_byte4le,
 	mbfl_no_encoding_base64,
 	mbfl_no_encoding_uuencode,
+	mbfl_no_encoding_html_ent,
 	mbfl_no_encoding_qprint,
 	mbfl_no_encoding_7bit,
 	mbfl_no_encoding_8bit,
@@ -222,6 +223,7 @@ typedef struct _mbfl_encoding {
 #define MBFL_ENCTYPE_MWC4BE		0x00000400
 #define MBFL_ENCTYPE_MWC4LE		0x00000800
 #define MBFL_ENCTYPE_SHFTCODE	0x00001000 
+#define MBFL_ENCTYPE_HTML_ENT       0x00002000
 
 /* wchar plane, special charactor */
 #define MBFL_WCSPLANE_MASK			0xffff
@@ -573,5 +575,15 @@ mbfl_html_numeric_entity(mbfl_string *string, mbfl_string *result, int *convmap,
  */
 mbfl_string *
 mbfl_ja_jp_hantozen(mbfl_string *string, mbfl_string *result, int mode TSRMLS_DC);
+
+/*
+ * HTML Entity table
+ */
+typedef struct _mbfl_html_entity {
+	char *  name;
+	int     code;
+} mbfl_html_entity;
+
+extern const mbfl_html_entity mbfl_html_entity_list[];
 
 #endif	/* MBFL_MBFILTER_H */

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.21 2002/07/17 06:01:37 sniper Exp $
+dnl $Id: config.m4,v 1.22 2002/08/04 14:20:11 helly Exp $
 dnl
 
 PHP_ARG_ENABLE(mbstring, whether to enable multibyte string support,
@@ -30,7 +30,7 @@ if test "$PHP_MBSTRING" != "no"; then
     AC_DEFINE(HAVE_MBSTR_KR,1,[whether to have korean support])
     AC_DEFINE(HAVE_MBSTR_RU,1,[whether to have russian support])
   fi
-  PHP_NEW_EXTENSION(mbstring, mbfilter_ja.c mbfilter_cn.c mbfilter_tw.c mbfilter_kr.c mbfilter_ru.c mbfilter.c mbstring.c mbregex.c php_mbregex.c, $ext_shared)
+  PHP_NEW_EXTENSION(mbstring, mbfilter_ja.c mbfilter_cn.c mbfilter_tw.c mbfilter_kr.c mbfilter_ru.c mbfilter.c mbstring.c mbregex.c php_mbregex.c html_entities.c, $ext_shared)
 else
   PHP_MBSTR_ENC_TRANS=no
 fi

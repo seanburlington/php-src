@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_array.h,v 1.35 2002/05/13 17:28:38 andrei Exp $ */
+/* $Id: php_array.h,v 1.36 2002/09/10 18:34:16 andrei Exp $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H
@@ -83,7 +83,7 @@ PHP_FUNCTION(array_key_exists);
 PHP_FUNCTION(array_chunk);
 
 HashTable* php_splice(HashTable *, int, int, zval ***, int, HashTable **);
-PHPAPI void php_array_merge(HashTable *dest, HashTable *src, int recursive);
+PHPAPI int php_array_merge(HashTable *dest, HashTable *src, int recursive);
 int multisort_compare(const void *a, const void *b TSRMLS_DC);
 
 typedef struct {

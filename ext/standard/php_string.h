@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_string.h,v 1.4 1999/12/13 23:40:36 andrei Exp $ */
+/* $Id: php_string.h,v 1.5 1999/12/14 03:52:12 thies Exp $ */
 
 /* Synced with php3 revision 1.43 1999-06-16 [ssb] */
 
@@ -46,6 +46,7 @@ PHP_FUNCTION(trim);
 PHP_FUNCTION(ltrim);
 PHP_FUNCTION(soundex);
 
+PHP_FUNCTION(count_chars);
 PHP_FUNCTION(explode);
 PHP_FUNCTION(implode);
 PHP_FUNCTION(strtok);

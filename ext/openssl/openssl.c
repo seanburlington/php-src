@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.41.2.5 2002/05/01 08:22:56 wez Exp $ */
+/* $Id: openssl.c,v 1.41.2.6 2002/07/12 21:47:33 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -39,7 +39,6 @@
 #include <openssl/pem.h>
 #include <openssl/err.h>
 #include <openssl/conf.h>
-#include <openssl/e_os.h>
 #include <openssl/rand.h>
 
 #define DEFAULT_KEY_LENGTH	512
@@ -577,7 +576,7 @@ PHP_MINIT_FUNCTION(openssl)
 	if (config_filename == NULL)	{
 		snprintf(default_ssl_conf_filename, sizeof(default_ssl_conf_filename), "%s/%s",
 				X509_get_default_cert_area(),
-				OPENSSL_CONF);
+				"openssl.cnf");
 	}
 	else
 		strncpy(default_ssl_conf_filename, config_filename, sizeof(default_ssl_conf_filename));

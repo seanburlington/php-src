@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.119 2002/10/23 19:51:50 moriyoshi Exp $ */
+/* $Id: rfc1867.c,v 1.120 2002/10/23 23:25:27 moriyoshi Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -512,9 +512,11 @@ static char *substring_conf(char *start, int len, char quote TSRMLS_DC)
 		} else {
 			*resp++ = start[i];
 #if HAVE_MBSTRING && !defined(COMPILE_DL_MBSTRING)
-			if (php_mb_encoding_translation(TSRMLS_C) && 
-				php_mb_is_mb_leadbyte(start+i TSRMLS_CC)) {
-				*resp++ = start[++i];
+			if (php_mb_encoding_translation(TSRMLS_C)) {
+				size_t j = php_mb_mbchar_bytes(start+i TSRMLS_CC);
+				while (j-- > 0) {
+					*resp++ = start[++i];
+				}
 			}
 #endif
 		}

@@ -18,10 +18,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.525 2003/02/15 20:22:19 sniper Exp $ */
+/* $Id: main.c,v 1.526 2003/02/17 13:29:56 zeev Exp $ */
 
 /* {{{ includes
  */
+
+#define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
+
 #include <stdio.h>
 #include "php.h"
 #ifdef PHP_WIN32

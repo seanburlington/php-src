@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: flock_compat.c,v 1.24 2003/02/17 03:07:32 sniper Exp $ */
+/* $Id: flock_compat.c,v 1.25 2003/02/17 13:29:57 zeev Exp $ */
 
 #include "php.h"
 #include <errno.h>
@@ -29,7 +29,6 @@
 #endif
 
 #ifdef PHP_WIN32
-#include <windows.h>
 #include <io.h>
 #endif
 

@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.162 2003/02/16 03:48:47 wez Exp $ */
+/* $Id: zlib.c,v 1.163 2003/02/17 13:29:58 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -35,8 +35,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #ifdef PHP_WIN32
-#include <windows.h>
-#include <winsock2.h>
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
 #else

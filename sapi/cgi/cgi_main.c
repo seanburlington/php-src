@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.213 2003/02/17 03:39:58 shane Exp $ */
+/* $Id: cgi_main.c,v 1.214 2003/02/17 13:29:59 zeev Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1572,7 +1572,7 @@ consult the installation file that came with this distribution, or visit \n\
 	sapi_shutdown();
 
 #ifdef ZTS
-	tsrm_shutdown();
+	/*tsrm_shutdown();*/
 #endif
 
 #if PHP_WIN32 && ZEND_DEBUG && 0

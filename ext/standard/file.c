@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.303 2003/02/16 22:33:29 wez Exp $ */
+/* $Id: file.c,v 1.304 2003/02/17 13:29:57 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -43,8 +43,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #ifdef PHP_WIN32
-#include <windows.h>
-#include <winsock2.h>
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
 #include "win32/winutil.h"

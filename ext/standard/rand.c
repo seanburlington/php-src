@@ -20,16 +20,9 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.61 2002/12/31 16:07:54 sebastian Exp $ */
+/* $Id: rand.c,v 1.62 2003/02/17 13:29:58 zeev Exp $ */
 
 #include <stdlib.h>
-
-#ifdef PHP_WIN32
-# ifndef WIN32_LEAN_AND_MEAN
-#  define WIN32_LEAN_AND_MEAN
-# endif
-# include <windows.h>
-#endif
 
 #if defined(NETWARE) && !defined(NEW_LIBC)  /* For getpid() used below */
 #include "netware/pwd.h"

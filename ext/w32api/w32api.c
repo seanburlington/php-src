@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: w32api.c,v 1.8 2003/01/19 08:32:23 iliaa Exp $ */
+/* $Id: w32api.c,v 1.9 2003/02/17 13:29:58 zeev Exp $ */
 
 /*
  * Win32 API Extension for PHP 4
@@ -208,9 +208,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-#define WINDOWS_LEAN_AND_MEAN
-#include <windows.h>
 
 #include "php.h"
 #include "php_ini.h"

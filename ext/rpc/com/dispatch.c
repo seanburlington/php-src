@@ -16,12 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dispatch.c,v 1.5 2002/12/31 16:07:23 sebastian Exp $ */
+/* $Id: dispatch.c,v 1.6 2003/02/17 13:29:57 zeev Exp $ */
 
 /* 
  * This module is used to export PHP objects to COM and DOTNET by exposing
  * them as objects implementing IDispatch.
  * */
+
+#define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
 #include "../rpc.h"
 

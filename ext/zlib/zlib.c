@@ -14,9 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    |          Stefan Röhrich <sr@linux.de>                                |
+   |          Zeev Suraski <zeev@zend.com>                                |
+   |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.94 2001/08/06 03:50:52 sas Exp $ */
+/* $Id: zlib.c,v 1.95 2001/08/16 23:34:25 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -1200,13 +1202,11 @@ PHP_FUNCTION(ob_gzhandler)
 
 		if (return_original) {
 			zval_dtor(return_value);
-#if 0
-		} else {
+		} else if (do_start && do_end) {
 			char lenbuf[64];
 			
 			sprintf(lenbuf,"Content-Length: %d",Z_STRLEN_P(return_value));
 			sapi_add_header(lenbuf,strlen(lenbuf), 1);
-#endif
 		}
 	} else {
 		return_original = 1;

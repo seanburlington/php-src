@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_zlib.h,v 1.5 1999/08/02 21:12:15 sr Exp $ */
+/* $Id: php3_zlib.h,v 1.6 1999/09/06 19:09:47 sr Exp $ */
 
 #ifndef _PHP3_ZLIB_H
 #define _PHP3_ZLIB_H
@@ -34,6 +34,10 @@
 #endif
 
 #if HAVE_ZLIB
+
+typedef struct {
+	int gzgetss_state;
+} php_zlib_globals;
 
 extern php3_module_entry php3_zlib_module_entry;
 #define zlib_module_ptr &php3_zlib_module_entry
@@ -55,6 +59,16 @@ PHP_FUNCTION(gzseek);
 PHP_FUNCTION(gzpassthru);
 PHP_FUNCTION(readgzfile);
 PHP_FUNCTION(gzfile);
+
+#ifdef ZTS
+#define ZLIBLS_D php_zlib_globals *zlib_globals
+#define ZLIBG(v) (zlib_globals->v)
+#define ZLIBLS_FETCH() php_zlib_globals *zlib_globals = ts_resource(zlib_globals_id)
+#else
+#define ZLIBLS_D
+#define ZLIBG(v) (zlib_globals.v)
+#define ZLIBLS_FETCH()
+#endif
 
 #else
 #define zlib_module_ptr NULL

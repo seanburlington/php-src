@@ -21,7 +21,7 @@
  * - write documentation
  */
 
-/* $Id: aolserver.c,v 1.4 1999/10/07 20:15:26 sas Exp $ */
+/* $Id: aolserver.c,v 1.5 1999/10/07 20:21:55 sas Exp $ */
 
 /* conflict between PHP and AOLserver */
 #define Debug php_Debug
@@ -68,7 +68,6 @@ typedef struct {
 
 typedef struct {
 	Ns_Conn *conn;
-	Ns_DString content_type;
 } ns_globals_struct;
 
 static void php_ns_config(php_ns_context *ctx);
@@ -306,7 +305,7 @@ php_ns_request_ctor(NSLS_D SLS_DC)
 static void
 php_ns_request_dtor(NSLS_D SLS_DC)
 {
-	Ns_DStringFree(&NSG(content_type));
+	free(SG(request_info).path_translated);
 }
 
 /*

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dba.h,v 1.19 2002/11/10 17:58:46 helly Exp $ */
+/* $Id: php_dba.h,v 1.20 2002/11/14 14:32:39 helly Exp $ */
 
 #ifndef PHP_DBA_H
 #define PHP_DBA_H
@@ -35,6 +35,7 @@ typedef struct dba_lock {
 	php_stream *fp;
 	int fd;
 	char *name;
+	int mode; /* LOCK_EX,LOCK_SH */
 } dba_lock;
 
 typedef struct dba_info {
@@ -47,6 +48,7 @@ typedef struct dba_info {
 	int argc;
 	zval ***argv;
 	/* private */
+	int flags; /* whether and how dba did locking and other flags*/
 	struct dba_handler *hnd;	
 	dba_lock lock;
 } dba_info;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_events.c,v 1.6 2004/04/05 13:22:33 abies Exp $ */
+/* $Id: ibase_events.c,v 1.7 2004/04/19 14:13:41 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -38,7 +38,7 @@ static void _php_ibase_event_free(char *event_buf, char *result_buf) /* {{{ */
 }
 /* }}} */
 
-PHPAPI void _php_ibase_free_event(ibase_event *event TSRMLS_DC) /* {{{ */
+void _php_ibase_free_event(ibase_event *event TSRMLS_DC) /* {{{ */
 {
 	unsigned short i;
 

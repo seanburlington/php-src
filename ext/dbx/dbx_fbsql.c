@@ -17,11 +17,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Author : Marc Boeren         <marc@guidance.nl>                      |
-   |          Frank M. Kromann    <frank@frontbase.com>                   |
+   |          Frank M. Kromann    <frank@kromann.info>                    |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx_fbsql.c,v 1.9.2.1 2002/12/31 16:34:22 sebastian Exp $ */
+/* $Id: dbx_fbsql.c,v 1.9.2.2 2003/06/14 03:35:54 fmk Exp $ */
 
 #include "dbx.h"
 #include "dbx_fbsql.h"

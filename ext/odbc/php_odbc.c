@@ -14,13 +14,13 @@
    +----------------------------------------------------------------------+
    | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
    |          Andreas Karajannis <Andreas.Karajannis@gmd.de>              |
-   |          Frank M. Kromann <frank@frontbase.com> Support for DB/2 CLI |
+   |          Frank M. Kromann <frank@kromann.info>  Support for DB/2 CLI |
    |          Kevin N. Shallow <kshallow@tampabay.rr.com> Birdstep Support|
    |          Daniel R. Kalowsky <kalowsky@php.net>                       |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.143.2.11 2003/05/30 14:45:20 iliaa Exp $ */
+/* $Id: php_odbc.c,v 1.143.2.12 2003/06/14 03:37:30 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

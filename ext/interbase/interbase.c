@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.109 2003/06/14 16:38:10 daniela Exp $ */
+/* $Id: interbase.c,v 1.110 2003/06/15 12:10:28 edink Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -628,7 +628,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.109 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.110 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -2814,7 +2814,7 @@ PHP_FUNCTION(ibase_blob_info)
 			RETURN_FALSE;
 		}
 
-		if (_php_ibase_blob_info(ib_blob_id->bl_handle, &bl_info)) {
+		if (_php_ibase_blob_info(ib_blob_id->bl_handle, &bl_info TSRMLS_CC)) {
 			RETURN_FALSE;
 		}
 		if (isc_close_blob(IB_STATUS, &ib_blob_id->bl_handle)) {

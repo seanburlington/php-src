@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.62 2003/10/06 01:02:28 moriyoshi Exp $ */
+/* $Id: simplexml.c,v 1.63 2003/10/06 01:04:49 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -585,6 +585,7 @@ simplexml_ce_schema_validate(INTERNAL_FUNCTION_PARAMETERS, int type)
 
 	if (vptr == NULL) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to create XML Schema validation context");
+		xmlSchemaFree(sptr);
 		xmlSchemaFreeParserCtxt(parser);
 		RETURN_FALSE;
 	}
@@ -1069,7 +1070,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.62 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.63 $");
 	php_info_print_table_end();
 }
 /* }}} */

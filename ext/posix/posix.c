@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.11 2000/04/15 14:28:47 andi Exp $ */
+/* $Id: posix.c,v 1.12 2000/05/01 21:36:52 sas Exp $ */
 
 
 #include "php.h"
@@ -130,13 +130,13 @@ zend_module_entry posix_module_entry = {
 };
 
 #ifdef COMPILE_DL
-DLEXPORT zend_module_entry *get_module(void) { return &posix__module_entry; }
+DLEXPORT zend_module_entry *get_module(void) { return &posix_module_entry; }
 #endif
 
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.11 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.12 $");
 	php_info_print_table_end();
 }
 

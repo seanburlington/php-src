@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.23 2004/01/08 08:17:35 andi Exp $ */
+/* $Id: user_filters.c,v 1.24 2004/01/17 17:33:11 andrey Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -287,9 +287,7 @@ static php_stream_filter *user_filter_factory_create(const char *filtername,
 					filtername, fdat->classname);
 			return NULL;
 		}
-#ifdef ZEND_ENGINE_2
 		fdat->ce = *(zend_class_entry**)fdat->ce;
-#endif
 
 	}
 

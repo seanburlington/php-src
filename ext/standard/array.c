@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.255 2004/01/08 08:17:30 andi Exp $ */
+/* $Id: array.c,v 1.256 2004/01/17 17:33:10 andrey Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1135,13 +1135,6 @@ static void php_search_array(INTERNAL_FUNCTION_PARAMETERS, int behavior)
 		WRONG_PARAM_COUNT;
 	}
 
-#ifndef ZEND_ENGINE_2	
-	if (Z_TYPE_PP(value) == IS_OBJECT) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Wrong datatype for first argument");
-		RETURN_FALSE;
-	}
-#endif
-	
 	if (Z_TYPE_PP(array) != IS_ARRAY) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Wrong datatype for second argument");
 		RETURN_FALSE;
@@ -1480,14 +1473,6 @@ PHP_FUNCTION(array_fill)
 	}
 	newval = *val;
 	while (i--) {
-#ifndef ZEND_ENGINE_2
-		if (newval->refcount >= 62000) {
-			MAKE_STD_ZVAL(newval);
-			*newval = **val;
-			zval_copy_ctor(newval);
-			newval->refcount = 0;
-		}
-#endif		
 		zval_add_ref(&newval);
 		zend_hash_next_index_insert(Z_ARRVAL_P(return_value), &newval, sizeof(zval *), NULL);
 	}

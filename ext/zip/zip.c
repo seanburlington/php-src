@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zip.c,v 1.18 2001/09/09 13:29:25 derick Exp $ */
+/* $Id: zip.c,v 1.19 2001/09/26 09:09:40 jeroen Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -260,10 +260,7 @@ PHP_FUNCTION(zip_entry_open)
 
     entry->fp = zzip_file_open(archive_p, entry->dirent.d_name, O_RDONLY | O_BINARY);
 
-    if (entry->fp)
-    RETURN_TRUE;
-    else
-    RETURN_FALSE;
+	RETURN_BOOL(entry->fp);
 }
 /* }}} */
 

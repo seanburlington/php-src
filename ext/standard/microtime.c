@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.51 2005/03/01 21:32:25 iliaa Exp $ */
+/* $Id: microtime.c,v 1.52 2005/03/22 14:44:23 iliaa Exp $ */
 
 #include "php.h"
 
@@ -107,13 +107,15 @@ PHP_FUNCTION(gettimeofday)
    Returns an array of usage statistics */
 PHP_FUNCTION(getrusage)
 {
-	struct rusage usg = {0};
+	struct rusage usg;
 	long pwho = 0;
 	int who = RUSAGE_SELF;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &pwho) != FAILURE && pwho == 1) {
 		who = RUSAGE_CHILDREN;
 	}
+
+	memset(&usg, 0, sizeof(struct rusage));
 
 	if (getrusage(who, &usg) == -1) {
 		RETURN_FALSE;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_dotnet.c,v 1.6 2004/02/12 10:43:19 zeev Exp $ */
+/* $Id: com_dotnet.c,v 1.7 2004/06/16 23:57:25 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -98,7 +98,7 @@ PHP_FUNCTION(com_dotnet_create_instance)
 	zval *object = getThis();
 	php_com_dotnet_object *obj;
 	char *assembly_name, *datatype_name;
-	long assembly_name_len, datatype_name_len;
+	int assembly_name_len, datatype_name_len;
 	struct dotnet_runtime_stuff *stuff;
 	IObjectHandle *handle;
 	DISPPARAMS params;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_com_dotnet_internal.h,v 1.11 2004/05/09 15:21:29 wez Exp $ */
+/* $Id: php_com_dotnet_internal.h,v 1.12 2004/06/16 23:57:25 abies Exp $ */
 
 #ifndef PHP_COM_DOTNET_INTERNAL_H
 #define PHP_COM_DOTNET_INTERNAL_H
@@ -36,7 +36,7 @@ typedef struct _php_com_dotnet_object {
 	VARIANT v;
 
 	ITypeInfo *typeinfo;
-	int code_page;
+	long code_page;
 	unsigned int have_default_bind:1;
 
 	zend_class_entry *ce;

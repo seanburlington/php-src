@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.25 2004/03/08 18:05:41 helly Exp $ */
+/* $Id: spl_directory.c,v 1.26 2004/06/16 23:57:25 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -177,7 +177,7 @@ SPL_METHOD(DirectoryIterator, __construct)
 	zval *object = getThis();
 	spl_ce_dir_object *intern;
 	char *path;
-	long len;
+	int len;
 
 	php_set_error_handling(EH_THROW, zend_exception_get_default() TSRMLS_CC);
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.140 2004/06/07 18:30:16 iliaa Exp $ */
+/* $Id: dir.c,v 1.141 2004/06/16 23:57:25 abies Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -176,7 +176,7 @@ PHP_MINIT_FUNCTION(dir)
 static void _php_do_opendir(INTERNAL_FUNCTION_PARAMETERS, int createobject)
 {
 	char *dirname;
-	long dir_len;
+	int dir_len;
 	zval *zcontext = NULL;
 	php_stream_context *context = NULL;
 	php_stream *dirp;

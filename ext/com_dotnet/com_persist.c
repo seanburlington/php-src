@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_persist.c,v 1.1 2004/05/09 15:21:29 wez Exp $ */
+/* $Id: com_persist.c,v 1.2 2004/06/16 23:57:25 abies Exp $ */
 
 /* Infrastructure for working with persistent COM objects.
  * Implements: IStream* wrapper for PHP streams.
@@ -375,7 +375,7 @@ CPH_METHOD(SaveToFile)
 {
 	HRESULT res;
 	char *filename, *fullpath = NULL;
-	long filename_len;
+	int filename_len;
 	zend_bool remember = TRUE;
 	OLECHAR *olefilename = NULL;
 	CPH_FETCH();
@@ -438,7 +438,7 @@ CPH_METHOD(LoadFromFile)
 {
 	HRESULT res;
 	char *filename, *fullpath;
-	long filename_len;
+	int filename_len;
 	long flags = 0;
 	OLECHAR *olefilename;
 	CPH_FETCH();

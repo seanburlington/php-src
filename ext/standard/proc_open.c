@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.3 2003/01/24 16:45:34 iliaa Exp $ */
+/* $Id: proc_open.c,v 1.4 2003/02/15 17:18:57 wez Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -173,6 +173,32 @@ PHP_MINIT_FUNCTION(proc_open)
 	le_proc_open = zend_register_list_destructors_ex(proc_open_rsrc_dtor, NULL, "process", module_number);
 	return SUCCESS;
 }
+
+
+/* {{{ proto int proc_terminate(resource process)
+   kill a process opened by proc_open */
+PHP_FUNCTION(proc_terminate)
+{
+	zval *zproc;
+	struct php_process_handle *proc;
+	
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &zproc) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	ZEND_FETCH_RESOURCE(proc, struct php_process_handle *, &zproc, -1, "process", le_proc_open);
+	
+#ifdef PHP_WIN32
+	TerminateProcess(proc->child, 255);
+#else
+	kill(proc->child, SIGTERM);
+#endif
+	
+	zend_list_delete(Z_LVAL_P(zproc));
+	RETURN_LONG(FG(pclose_ret));
+}
+/* }}} */
+
 
 /* {{{ proto int proc_close(resource process)
    close a process opened by proc_open */

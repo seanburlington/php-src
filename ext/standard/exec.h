@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: exec.h,v 1.17 2003/01/15 18:54:03 wez Exp $ */
+/* $Id: exec.h,v 1.18 2003/02/15 17:18:57 wez Exp $ */
 
 #ifndef EXEC_H
 #define EXEC_H
@@ -30,6 +30,7 @@ PHP_FUNCTION(shell_exec);
 PHP_FUNCTION(proc_open);
 PHP_FUNCTION(proc_get_status);
 PHP_FUNCTION(proc_close);
+PHP_FUNCTION(proc_terminate);
 PHP_MINIT_FUNCTION(proc_open);
 
 char *php_escape_shell_cmd(char *);

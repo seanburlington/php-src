@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.577 2003/02/11 22:47:26 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.578 2003/02/15 17:18:57 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -419,6 +419,7 @@ function_entry basic_functions[] = {
 #ifdef PHP_CAN_SUPPORT_PROC_OPEN
 	PHP_FE(proc_open,				third_arg_force_ref)
 	PHP_FE(proc_close,														NULL)
+	PHP_FE(proc_terminate,													NULL)
 	PHP_FE(proc_get_status,													NULL)
 #endif
 

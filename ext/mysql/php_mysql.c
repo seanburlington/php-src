@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.97 2001/08/11 18:27:48 andi Exp $ */
+/* $Id: php_mysql.c,v 1.98 2001/08/20 20:50:54 jeroen Exp $ */
 
 
 /* TODO:
@@ -1317,7 +1317,7 @@ PHP_FUNCTION(mysql_affected_rows)
 /* }}} */
 
 
-/* {{{ proto char mysql_escape_string([char string])
+/* {{{ proto string mysql_escape_string(string to_be_escaped)
    Escape string for mysql query */
 PHP_FUNCTION(mysql_escape_string)
 {

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.144 2004/08/05 23:57:51 iliaa Exp $ */
+/* $Id: simplexml.c,v 1.145 2004/08/06 16:36:00 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -271,8 +271,7 @@ static zval * sxe_dimension_read(zval *object, zval *offset, int type TSRMLS_DC)
 
 /* {{{ change_node_zval()
  */
-static void
-change_node_zval(xmlNodePtr node, zval *value)
+static void change_node_zval(xmlNodePtr node, zval *value TSRMLS_DC)
 {
 	zval value_copy;
 
@@ -418,7 +417,7 @@ next_iter:
 				xmlUnlinkNode(tempnode);
 				php_libxml_node_free_resource((xmlNodePtr) tempnode TSRMLS_CC);
 			}
-			change_node_zval(newnode, value);
+			change_node_zval(newnode, value TSRMLS_CC);
 		} else if (counter > 1) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot assign to an array of nodes (duplicate subnodes or attr detected)\n");
 		} else {
@@ -1679,7 +1678,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.144 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.145 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

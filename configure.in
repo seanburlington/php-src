@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.77 1999/12/22 21:02:31 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.78 1999/12/22 22:24:20 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -725,9 +725,12 @@ dnl test -n "$GCC" && CFLAGS="$CFLAGS -fpic"
 dnl add -fPIC option on Solaris if we are building dynamic extensions
 dnl PHP_SOLARIS_PIC_WEIRDNESS
 
+LDFLAGS=""
 if test "$PHP_THREAD_SAFETY" = "yes"; then
   TSRM_BASIC_CHECKS
   TSRM_OTHER_CHECKS
+  EXTRA_LDFLAGS="$EXTRA_LDFLAGS $LDFLAGS"
+  LDFLAGS=""
 fi
 
 
@@ -737,7 +740,6 @@ AC_SUBST(phplibdir)
 AC_SUBST(phptempdir)
 EXTRA_LIBS="$EXTRA_LIBS $LIBS"
 LIBS=""
-LDFLAGS=""
 
 AC_BUILD_RPATH
 

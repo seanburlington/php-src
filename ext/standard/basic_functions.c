@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.232 2000/07/26 11:43:01 eschmid Exp $ */
+/* $Id: basic_functions.c,v 1.233 2000/08/01 07:45:14 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -729,6 +729,10 @@ PHP_RINIT_FUNCTION(basic)
 	PHP_RINIT(assert)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(dir)(INIT_FUNC_ARGS_PASSTHRU);
 
+#ifdef TRANS_SID
+	PHP_RINIT(url_scanner)(INIT_FUNC_ARGS_PASSTHRU);
+#endif
+	
 	return SUCCESS;
 }
 
@@ -753,6 +757,10 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 	PHP_RSHUTDOWN(filestat)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_RSHUTDOWN(syslog)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_RSHUTDOWN(assert)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+
+#ifdef TRANS_SID
+	PHP_RSHUTDOWN(url_scanner)(INIT_FUNC_ARGS_PASSTHRU);
+#endif
 
 	return SUCCESS;
 }

@@ -1,14 +1,9 @@
-dnl $Id: config.m4,v 1.2 2000/04/19 15:53:09 andrei Exp $
+dnl $Id: config.m4,v 1.3 2000/04/20 15:13:29 sas Exp $
 
-AC_MSG_CHECKING(whether to enable calendar conversion support)
-AC_ARG_ENABLE(calendar,
-[  --enable-calendar       Enable support for calendar conversion],
-  if test "$withval" = "yes"; then
-    AC_MSG_RESULT(yes)
-    AC_DEFINE(HAVE_CALENDAR,1,[ ])
-    PHP_EXTENSION(calendar)
-  fi
-[
-],[
-  AC_MSG_RESULT(no)
-])
+PHP_ARG_ENABLE(calendar,whether to enable calendar conversion support,
+[  --enable-calendar       Enable support for calendar conversion])
+
+if test "$PHP_CALENDAR" = "yes"; then
+  AC_DEFINE(HAVE_CALENDAR,1,[ ])
+  PHP_EXTENSION(calendar)
+fi

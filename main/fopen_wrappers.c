@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.28 1999/09/14 20:12:46 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.29 1999/10/16 16:35:18 andrei Exp $ */
 
 /* Synced with php3 revision 1.66 1999-06-18 [ssb] */
 
@@ -295,7 +295,7 @@ PHPAPI FILE *php3_fopen_for_parser(void)
 	}
 	
 	temp = estrdup(fn);
-	_php3_dirname(temp, strlen(temp));
+	php_dirname(temp, strlen(temp));
 	if (*temp) {
 		chdir(temp);
 	}

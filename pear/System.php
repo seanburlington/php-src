@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.34 2004/01/08 17:33:08 sniper Exp $
+// $Id: System.php,v 1.35 2004/01/19 03:32:12 cellog Exp $
 //
 
 require_once 'PEAR.php';
@@ -48,7 +48,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.34 $
+* @version  $Revision: 1.35 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -226,6 +226,14 @@ class System
             if ($opt[0] == 'p') {
                 $create_parents = true;
             } elseif($opt[0] == 'm') {
+                // if the mode is clearly an octal number (starts with 0)
+                // convert it to decimal
+                if (strlen($opt[1]) && $opt[1]{0} == '0') {
+                    $opt[1] = octdec($opt[1]);
+                } else {
+                    // convert to int
+                    $opt[1] += 0;
+                }
                 $mode = $opt[1];
             }
         }

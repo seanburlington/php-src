@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_wrapper.c,v 1.4 2004/05/03 15:51:41 wez Exp $ */
+/* $Id: com_wrapper.c,v 1.5 2004/07/27 03:44:40 wez Exp $ */
 
 /* This module exports a PHP object as a COM object by wrapping it
  * using IDispatchEx */
@@ -296,12 +296,16 @@ static HRESULT STDMETHODCALLTYPE disp_invokeex(
 		} else if (wFlags & DISPATCH_PROPERTYPUT) {
 			zend_update_property(Z_OBJCE_P(disp->object), disp->object, Z_STRVAL_PP(name), Z_STRLEN_PP(name)+1, *params[0] TSRMLS_CC);
 		} else if (wFlags & DISPATCH_METHOD) {
-			if (SUCCESS == call_user_function_ex(EG(function_table), &disp->object, *name,
-					&retval, pdp->cArgs, params, 1, NULL TSRMLS_CC)) {
-				ret = S_OK;
-			} else {
+			zend_try {
+				if (SUCCESS == call_user_function_ex(EG(function_table), &disp->object, *name,
+							&retval, pdp->cArgs, params, 1, NULL TSRMLS_CC)) {
+					ret = S_OK;
+				} else {
+					ret = DISP_E_EXCEPTION;
+				}
+			} zend_catch {
 				ret = DISP_E_EXCEPTION;
-			}
+			} zend_end_try();
 		} else {
 			trace("Don't know how to handle this invocation %08x\n", wFlags);
 		}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.19 2002/02/28 08:26:34 sebastian Exp $ */
+/* $Id: pcntl.c,v 1.20 2002/03/16 22:19:09 mfischer Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -387,7 +387,7 @@ PHP_FUNCTION(pcntl_exec)
 	int path_len;
 	long key_num;
 		 
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s|aa", &path, &path_len, &args, &envs) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|aa", &path, &path_len, &args, &envs) == FAILURE) {
 		return;
 	}
 	

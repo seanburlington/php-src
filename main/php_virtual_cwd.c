@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_virtual_cwd.c,v 1.65 2000/08/06 16:34:37 stas Exp $ */
+/* $Id: php_virtual_cwd.c,v 1.66 2000/08/08 16:30:42 stas Exp $ */
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -390,7 +390,7 @@ CWD_API int virtual_file_ex(cwd_state *state, const char *path, verify_path_func
 		ret = 1;
 	} else {
 		CWD_STATE_FREE(old_state);
-		ret = (verify_path)? 0:1;
+		ret = 0;
 	}
 	
 	free(old_state);

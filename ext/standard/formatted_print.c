@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.59.2.4 2003/04/23 02:37:29 iliaa Exp $ */
+/* $Id: formatted_print.c,v 1.59.2.5 2003/05/30 13:50:09 moriyoshi Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -185,6 +185,7 @@ php_sprintf_appendstring(char **buffer, int *pos, int *size, char *add,
 			(*buffer)[(*pos)++] = '-';
 			add++;
 			len--;
+			copy_len--;
 		}
 		while (npad-- > 0) {
 			(*buffer)[(*pos)++] = padding;

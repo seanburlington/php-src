@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.158 2003/02/03 16:45:56 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.159 2003/02/03 16:46:45 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -997,7 +997,7 @@ PHP_FUNCTION(mb_internal_encoding)
 }
 /* }}} */
 
-/* {{{ proto false|string mb_http_input([string type])
+/* {{{ proto mixed mb_http_input([string type])
    Returns the input encoding */
 PHP_FUNCTION(mb_http_input)
 {

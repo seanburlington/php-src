@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.35 2005/02/13 01:02:18 edink Exp $ */
+/* $Id: pgsql_driver.c,v 1.36 2005/02/20 19:26:27 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -84,6 +84,12 @@ int _pdo_pgsql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, int errcode, const char *
 	}
 	
 	return errcode;
+}
+/* }}} */
+
+static void _pdo_pgsql_notice(pdo_dbh_t *dbh, const char *message) /* {{{ */
+{
+/*	pdo_pgsql_db_handle *H = (pdo_pgsql_db_handle *)dbh->driver_data; */
 }
 /* }}} */
 
@@ -377,6 +383,8 @@ static int pdo_pgsql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 		pdo_pgsql_error(dbh, PGRES_FATAL_ERROR);
 		goto cleanup;
 	}
+
+	PQsetNoticeProcessor(H->server, (void(*)(void*,const char*))_pdo_pgsql_notice, (void *)&dbh);
 
 	H->attached = 1;
 	H->pgoid = -1;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dns.h,v 1.8 2001/03/11 03:49:21 sniper Exp $ */
+/* $Id: dns.h,v 1.8.2.1 2001/03/20 01:49:56 sniper Exp $ */
 
 #ifndef DNS_H
 #define DNS_H
@@ -25,7 +25,8 @@
 PHP_FUNCTION(gethostbyaddr);
 PHP_FUNCTION(gethostbyname);
 PHP_FUNCTION(gethostbynamel);
-#if !defined(PHP_WIN32)||(HAVE_LIBBIND)
+
+#if HAVE_RES_SEARCH && !(defined(__BEOS__)||defined(PHP_WIN32))
 PHP_FUNCTION(checkdnsrr);
 PHP_FUNCTION(getmxrr);
 #endif

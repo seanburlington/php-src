@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.56 2003/02/10 14:27:21 ssb Exp $
+// $Id: PEAR.php,v 1.57 2003/03/13 21:07:40 mj Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -533,7 +533,7 @@ class PEAR
                          $code = null,
                          $userinfo = null)
     {
-        if (isset($this)) {
+        if (isset($this) && is_subclass_of($this, 'PEAR_Error')) {
             return $this->raiseError($message, $code, null, null, $userinfo);
         } else {
             return PEAR::raiseError($message, $code, null, null, $userinfo);

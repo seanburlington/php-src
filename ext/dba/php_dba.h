@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dba.h,v 1.20 2002/11/14 14:32:39 helly Exp $ */
+/* $Id: php_dba.h,v 1.21 2002/12/20 17:47:58 helly Exp $ */
 
 #ifndef PHP_DBA_H
 #define PHP_DBA_H
@@ -63,6 +63,7 @@ typedef struct dba_info {
 #define DBA_LOCK_WCT     (DBA_LOCK_WRITER|DBA_LOCK_CREAT|DBA_LOCK_TRUNC)
 
 #define DBA_STREAM_OPEN  (0x0010)
+#define DBA_PERSISTENT   (0x0020)
 
 extern zend_module_entry dba_module_entry;
 #define dba_module_ptr &dba_module_entry

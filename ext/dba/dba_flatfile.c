@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_flatfile.c,v 1.8 2002/11/13 12:12:44 edink Exp $ */
+/* $Id: dba_flatfile.c,v 1.9 2002/12/20 17:47:58 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -41,7 +41,7 @@
 
 DBA_OPEN_FUNC(flatfile)
 {
-	info->dbf = emalloc(sizeof(flatfile));
+	info->dbf = pemalloc(sizeof(flatfile), info->flags&DBA_PERSISTENT);
 	memset(info->dbf, 0, sizeof(flatfile));
 
 	((flatfile*)info->dbf)->fp = info->fp;
@@ -55,7 +55,7 @@ DBA_CLOSE_FUNC(flatfile)
 
 	if (dba->nextkey.dptr)
 		efree(dba->nextkey.dptr);
-	efree(dba);
+	pefree(dba, info->flags&DBA_PERSISTENT);
 }
 
 DBA_FETCH_FUNC(flatfile)

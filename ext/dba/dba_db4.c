@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db4.c,v 1.1 2002/11/26 12:05:59 helly Exp $ */
+/* $Id: dba_db4.c,v 1.2 2002/12/20 17:47:58 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -81,7 +81,7 @@ DBA_OPEN_FUNC(db4)
 #endif
 		dba_db4_data *data;
 
-		data = emalloc(sizeof(*data));
+		data = pemalloc(sizeof(*data), info->flags&DBA_PERSISTENT);
 		data->dbp = dbp;
 		data->cursor = NULL;
 		info->dbf = data;
@@ -100,7 +100,7 @@ DBA_CLOSE_FUNC(db4)
 	
 	if (dba->cursor) dba->cursor->c_close(dba->cursor);
 	dba->dbp->close(dba->dbp, 0);
-	efree(dba);
+	pefree(dba, info->flags&DBA_PERSISTENT);
 }
 
 DBA_FETCH_FUNC(db4)

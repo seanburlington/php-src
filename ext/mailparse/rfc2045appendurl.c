@@ -16,7 +16,7 @@
    | Wez Furlong (wez@thebrainroom.com)                                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc2045appendurl.c,v 1.2 2001/06/06 13:05:46 rasmus Exp $ */
+/* $Id: rfc2045appendurl.c,v 1.3 2001/09/09 13:28:55 derick Exp $ */
 
 /*
 ** Copyright 2000 Double Precision, Inc.  See COPYING for
@@ -132,6 +132,6 @@ char *rfc2045_content_base(struct rfc2045 *p)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

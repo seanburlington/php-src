@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.407 2001/08/31 14:34:40 zeev Exp $ */
+/* $Id: main.c,v 1.408 2001/09/09 13:29:28 derick Exp $ */
 
 /* {{{ includes
  */
@@ -1403,6 +1403,6 @@ PHPAPI void dummy_indent()
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

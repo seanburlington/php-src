@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyr_convert.c,v 1.15 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: cyr_convert.c,v 1.16 2001/09/09 13:29:15 derick Exp $ */
 
 #include <stdlib.h>
 
@@ -294,6 +294,6 @@ PHP_FUNCTION(convert_cyr_string)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

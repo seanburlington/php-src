@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_mm.c,v 1.22 2001/07/19 04:16:54 sas Exp $ */
+/* $Id: mod_mm.c,v 1.23 2001/09/09 13:29:09 derick Exp $ */
 
 #include "php.h"
 
@@ -409,6 +409,6 @@ zend_module_entry php_session_mm_module = {
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

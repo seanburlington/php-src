@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_user.c,v 1.17 2001/07/30 08:24:34 zeev Exp $ */
+/* $Id: mod_user.c,v 1.18 2001/09/09 13:29:10 derick Exp $ */
 
 #include "php.h"
 #include "php_session.h"
@@ -180,6 +180,6 @@ PS_GC_FUNC(user)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

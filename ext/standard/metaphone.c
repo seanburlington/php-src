@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: metaphone.c,v 1.15 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: metaphone.c,v 1.16 2001/09/09 13:29:18 derick Exp $ */
 
 /*
 	Based on CPANs "Text-Metaphone-1.96" by Michael G Schwern <schwern@pobox.com> 
@@ -468,6 +468,6 @@ static int metaphone(char *word, int max_phonemes, char **phoned_word, int tradi
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

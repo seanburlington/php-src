@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.59 2001/08/11 17:03:36 zeev Exp $ */
+/* $Id: dl.c,v 1.60 2001/09/09 13:29:16 derick Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -225,6 +225,6 @@ PHP_MINFO_FUNCTION(dl)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

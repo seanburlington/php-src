@@ -15,7 +15,7 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.20 2001/08/10 20:18:42 jeroen Exp $ */
+/* $Id: network.c,v 1.21 2001/09/09 13:29:28 derick Exp $ */
 
 #include "php.h"
 
@@ -346,6 +346,6 @@ int php_hostconnect(char *host, unsigned short port, int socktype, int timeout)
  * tab-width: 8
  * c-basic-offset: 8
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

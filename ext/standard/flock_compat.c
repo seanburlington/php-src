@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: flock_compat.c,v 1.13 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: flock_compat.c,v 1.14 2001/09/09 13:29:18 derick Exp $ */
 
 #include <php.h>
 #include <errno.h>
@@ -220,6 +220,6 @@ int inet_aton(const char *cp, struct in_addr *ap)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

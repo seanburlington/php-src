@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.249 2001/08/31 20:03:09 zeev Exp $ */
+/* $Id: session.c,v 1.250 2001/09/09 13:29:10 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1458,6 +1458,6 @@ PHP_MINFO_FUNCTION(session)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.80 2001/08/21 12:57:53 zeev Exp $ */
+/* $Id: wddx.c,v 1.81 2001/09/09 13:29:22 derick Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -1195,6 +1195,6 @@ PHP_FUNCTION(wddx_deserialize)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: crc32.c,v 1.6 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: crc32.c,v 1.7 2001/09/09 13:29:15 derick Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -131,6 +131,6 @@ PHP_NAMED_FUNCTION(php_if_crc32)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.81 2001/09/08 00:42:25 sterling Exp $ */
+/* $Id: curl.c,v 1.82 2001/09/09 13:28:41 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1030,6 +1030,6 @@ static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: noet sw=4 ts=4 tw=78 fdm=marker
- * vim<600: noet sw=4 ts=4 tw=78
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
  */

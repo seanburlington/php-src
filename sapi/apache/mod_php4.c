@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.121 2001/09/06 22:51:47 sterling Exp $ */
+/* $Id: mod_php4.c,v 1.122 2001/09/09 13:29:28 derick Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -907,6 +907,6 @@ module MODULE_VAR_EXPORT php4_module =
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.184 2001/08/17 09:08:03 sterling Exp $ */
+/* $Id: file.c,v 1.185 2001/09/09 13:29:17 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2352,6 +2352,6 @@ php_meta_tags_token php_next_meta_token(php_meta_tags_data *md)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: tw=78 sw=4 ts=4 fdm=marker
- * vim<600: tw=78 sw=4 ts=4
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

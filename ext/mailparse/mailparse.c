@@ -18,7 +18,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mailparse.c,v 1.9 2001/08/28 21:52:10 wez Exp $ */
+/* $Id: mailparse.c,v 1.10 2001/09/09 13:28:55 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -918,6 +918,6 @@ PHP_FUNCTION(mailparse_msg_get_part)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

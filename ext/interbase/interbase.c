@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.69 2001/09/04 21:47:05 rasmus Exp $ */
+/* $Id: interbase.c,v 1.70 2001/09/09 13:28:53 derick Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -587,7 +587,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.69 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.70 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -2933,6 +2933,6 @@ PHP_FUNCTION(ibase_blob_import)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.11 2001/08/11 17:03:37 zeev Exp $ */
+/* $Id: scanf.c,v 1.12 2001/09/09 13:29:19 derick Exp $ */
 
 /*
    scanf.c --
@@ -1248,6 +1248,6 @@ static inline void scan_set_error_return(int numVars, pval **return_value)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 /*
-*	cvvs.c $Revision: 1.17 $ - PHP4 Interface to the RedHat CCVS API
+*	cvvs.c $Revision: 1.18 $ - PHP4 Interface to the RedHat CCVS API
 *	 -------
 *	 Interfaces RedHat's CCVS [Credit Card Verification System] <http://www.redhat.com/products/ccvs/>
 *	 This code is ported from an original php3 interface written by RedHat's Doug DeJulio <ddj@redhat.com>
@@ -27,10 +27,10 @@
 
 /*
 *	Code started on 2000.07.24@09.04.EST by Brendan W. McAdams <bmcadams@php.net>
-*	$Revision: 1.17 $
+*	$Revision: 1.18 $
 */
 
-static char const cvsid[] = "$Id: ccvs.c,v 1.17 2001/08/11 16:38:18 zeev Exp $";
+static char const cvsid[] = "$Id: ccvs.c,v 1.18 2001/09/09 13:28:39 derick Exp $";
 
 #include <php.h>
 #include <stdlib.h>
@@ -600,6 +600,6 @@ PHP_MINFO_FUNCTION(ccvs)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.49 2001/09/05 19:47:55 sniper Exp $ */
+/* $Id: crypt.c,v 1.50 2001/09/09 13:29:15 derick Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -176,6 +176,6 @@ PHP_FUNCTION(crypt)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

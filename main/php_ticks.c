@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ticks.c,v 1.11 2001/08/05 01:42:44 zeev Exp $ */
+/* $Id: php_ticks.c,v 1.12 2001/09/09 13:29:28 derick Exp $ */
 
 #include "php.h"
 #include "php_ticks.h"
@@ -76,6 +76,6 @@ void php_run_ticks(int count)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.94 2001/08/18 23:43:04 sniper Exp $ */
+/* $Id: xml.c,v 1.95 2001/09/09 13:29:23 derick Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -1605,6 +1605,6 @@ PHP_FUNCTION(utf8_decode)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

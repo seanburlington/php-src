@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.63 2001/08/05 01:42:40 zeev Exp $ */
+/* $Id: mod_files.c,v 1.64 2001/09/09 13:29:08 derick Exp $ */
 
 #include "php.h"
 
@@ -347,6 +347,6 @@ PS_GC_FUNC(files)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.49 2001/08/13 07:55:38 rasmus Exp $ */
+/* $Id: head.c,v 1.50 2001/09/09 13:29:18 derick Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -196,6 +196,6 @@ PHP_FUNCTION(headers_sent)
  * Local variables:
  * tab-width: 4
  * c-basic-offset: 4
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78 * End:
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4 * End:
  */

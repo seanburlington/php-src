@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.134 2001/09/09 11:03:31 sterling Exp $ */
+/* $Id: array.c,v 1.135 2001/09/09 13:29:13 derick Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3176,6 +3176,6 @@ PHP_FUNCTION(key_exists)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.56 2001/09/03 16:26:31 stas Exp $ */
+/* $Id: math.c,v 1.57 2001/09/09 13:29:18 derick Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -1120,6 +1120,6 @@ PHP_FUNCTION(number_format)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_dbm.c,v 1.10 2001/08/05 01:42:34 zeev Exp $ */
+/* $Id: dba_dbm.c,v 1.11 2001/09/09 13:28:45 derick Exp $ */
 
 #include "php.h"
 
@@ -179,6 +179,6 @@ DBA_SYNC_FUNC(dbm)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -15,7 +15,7 @@
    | Authors:                                                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: crack.c,v 1.10 2001/08/11 16:38:20 zeev Exp $ */
+/* $Id: crack.c,v 1.11 2001/09/09 13:28:40 derick Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -263,6 +263,6 @@ ZEND_FUNCTION(crack_getlastmessage)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

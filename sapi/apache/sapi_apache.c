@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.35 2001/09/06 23:35:39 rasmus Exp $ */
+/* $Id: sapi_apache.c,v 1.36 2001/09/09 13:29:29 derick Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -105,6 +105,6 @@ int apache_php_module_main(request_rec *r, int display_source_mode TSRMLS_DC)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

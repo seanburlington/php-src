@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.20 2001/08/05 01:42:39 zeev Exp $ */
+/* $Id: pspell.c,v 1.21 2001/09/09 13:29:08 derick Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -814,6 +814,6 @@ PHP_MINFO_FUNCTION(pspell)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

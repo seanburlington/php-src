@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.33 2001/08/08 02:02:02 sniper Exp $ */
+/* $Id: posix.c,v 1.34 2001/09/09 13:29:05 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -130,7 +130,7 @@ ZEND_GET_MODULE(posix)
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.33 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.34 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -948,6 +948,6 @@ PHP_FUNCTION(posix_getrlimit)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

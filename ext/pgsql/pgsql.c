@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.126 2001/08/13 16:13:19 andi Exp $ */
+/* $Id: pgsql.c,v 1.127 2001/09/09 13:29:05 derick Exp $ */
 
 #include <stdlib.h>
 
@@ -1968,6 +1968,6 @@ PHP_FUNCTION(pg_client_encoding)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

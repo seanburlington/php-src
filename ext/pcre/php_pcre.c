@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.108 2001/08/06 03:50:48 sas Exp $ */
+/* $Id: php_pcre.c,v 1.109 2001/09/09 13:29:03 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1386,6 +1386,6 @@ ZEND_GET_MODULE(pcre)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

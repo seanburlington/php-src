@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.14 2001/08/14 05:44:33 sniper Exp $ */
+/* $Id: dba_db2.c,v 1.15 2001/09/09 13:28:45 derick Exp $ */
 
 #include "php.h"
 
@@ -194,6 +194,6 @@ DBA_SYNC_FUNC(db2)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

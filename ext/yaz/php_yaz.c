@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.27 2001/09/07 13:35:31 dbeu Exp $ */
+/* $Id: php_yaz.c,v 1.28 2001/09/09 13:29:24 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2699,6 +2699,6 @@ ZEND_GET_MODULE(yaz)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

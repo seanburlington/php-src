@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.50 2001/09/03 08:47:45 sterling Exp $ */
+/* $Id: ereg.c,v 1.51 2001/09/09 13:29:19 derick Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -631,6 +631,6 @@ PHPAPI PHP_FUNCTION(sql_regcase)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: noet sw=4 ts=4 tw=78 fdm=marker
- * vim<600: noet sw=4 ts=4 tw=78
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
  */

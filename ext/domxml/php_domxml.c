@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.73 2001/09/09 09:58:49 sterling Exp $ */
+/* $Id: php_domxml.c,v 1.74 2001/09/09 13:28:46 derick Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -2791,6 +2791,6 @@ PHP_FUNCTION(domxml_version)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: noet sw=4 ts=4 tw=78 fdm=marker
- * vim<600: noet sw=4 ts=4 tw=78
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
  */

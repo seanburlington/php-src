@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.33 2001/08/29 13:13:24 wez Exp $ */
+/* $Id: gettext.c,v 1.34 2001/09/09 13:28:50 derick Exp $ */
 
 #include <stdio.h>
 #ifdef HAVE_CONFIG_H
@@ -274,7 +274,7 @@ PHP_FUNCTION(dcngettext)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */
 

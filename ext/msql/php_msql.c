@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_msql.c,v 1.41 2001/08/18 16:56:33 zeev Exp $ */
+/* $Id: php_msql.c,v 1.42 2001/09/09 13:28:57 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1315,6 +1315,6 @@ PHP_FUNCTION(msql_affected_rows)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

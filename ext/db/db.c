@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.64 2001/08/14 17:46:17 dbeu Exp $ */
+/* $Id: db.c,v 1.65 2001/09/09 13:28:43 derick Exp $ */
 #define IS_EXT_MODULE
 
 #if 1
@@ -1248,6 +1248,6 @@ ZEND_GET_MODULE(dbm)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

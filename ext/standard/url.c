@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.46 2001/09/04 06:21:48 sterling Exp $ */
+/* $Id: url.c,v 1.47 2001/09/09 13:29:19 derick Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -445,6 +445,6 @@ PHPAPI int php_raw_url_decode(char *str, int len)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.108 2001/09/05 16:19:48 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.109 2001/09/09 13:28:59 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3524,6 +3524,6 @@ PHP_FUNCTION(odbc_tableprivileges)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

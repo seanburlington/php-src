@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.37 2001/08/14 05:44:33 sniper Exp $ */
+/* $Id: dba.c,v 1.38 2001/09/09 13:28:44 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -514,6 +514,6 @@ PHP_FUNCTION(dba_sync)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

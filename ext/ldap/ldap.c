@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.94 2001/08/11 16:39:02 zeev Exp $ */
+/* $Id: ldap.c,v 1.95 2001/09/09 13:28:54 derick Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -251,7 +251,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.94 2001/08/11 16:39:02 zeev Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.95 2001/09/09 13:28:54 derick Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #ifdef LDAP_API_VERSION
@@ -2004,6 +2004,6 @@ PHP_FUNCTION(ldap_8859_to_t61)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

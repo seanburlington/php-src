@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.26 2001/08/17 09:10:49 sterling Exp $ */
+/* $Id: uniqid.c,v 1.27 2001/09/09 13:29:19 derick Exp $ */
 
 #include "php.h"
 
@@ -98,6 +98,6 @@ function_entry uniqid_functions[] = {
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

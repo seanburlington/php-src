@@ -19,7 +19,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.49 2001/09/09 10:44:11 sterling Exp $ */
+/* $Id: rand.c,v 1.50 2001/09/09 13:29:18 derick Exp $ */
 
 #include <stdlib.h>
 
@@ -328,6 +328,6 @@ PHP_FUNCTION(mt_getrandmax)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: noet sw=4 ts=4 tw=78 fdm=marker
- * vim<600: noet sw=4 ts=4 tw=78
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
  */

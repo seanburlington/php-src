@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.32 2001/08/11 17:03:37 zeev Exp $ */
+/* $Id: syslog.c,v 1.33 2001/09/09 13:29:19 derick Exp $ */
 
 #include "php.h"
 
@@ -265,6 +265,6 @@ PHP_FUNCTION(syslog)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

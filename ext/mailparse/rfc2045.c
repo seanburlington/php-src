@@ -1,4 +1,4 @@
-/* $Id: rfc2045.c,v 1.3 2001/07/28 11:35:58 zeev Exp $ */
+/* $Id: rfc2045.c,v 1.4 2001/09/09 13:28:55 derick Exp $ */
 /*
  ** Copyright 1998 - 1999 Double Precision, Inc.  See COPYING for
  ** distribution information.
@@ -1169,6 +1169,6 @@ unsigned rfc2045_mimepartcount(const struct rfc2045 *p)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.33 2001/09/05 06:55:37 sterling Exp $ */
+/* $Id: link.c,v 1.34 2001/09/09 13:29:18 derick Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -168,6 +168,6 @@ PHP_FUNCTION(link)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: noet sw=4 ts=4 tw=78 fdm=marker
- * vim<600: noet sw=4 ts=4 tw=78
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
  */

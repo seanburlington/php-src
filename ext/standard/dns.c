@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.33 2001/08/11 17:03:36 zeev Exp $ */
+/* $Id: dns.c,v 1.34 2001/09/09 13:29:17 derick Exp $ */
 
 /* {{{ includes
  */
@@ -327,6 +327,6 @@ PHP_FUNCTION(getmxrr)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

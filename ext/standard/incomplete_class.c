@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: incomplete_class.c,v 1.11 2001/08/06 13:36:08 thies Exp $ */
+/* $Id: incomplete_class.c,v 1.12 2001/09/09 13:29:18 derick Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -146,6 +146,6 @@ void php_store_class_name(zval *object, const char *name, size_t len)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

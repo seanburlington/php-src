@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.45 2001/07/30 01:56:42 zeev Exp $ */
+/* $Id: internal_functions_win32.c,v 1.46 2001/09/09 13:29:28 derick Exp $ */
 
 /* {{{ includes
  */
@@ -100,6 +100,6 @@ int php_startup_internal_extensions(void)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.77 2001/08/11 17:03:36 zeev Exp $ */
+/* $Id: dir.c,v 1.78 2001/09/09 13:29:16 derick Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -352,6 +352,6 @@ PHP_NAMED_FUNCTION(php_if_readdir)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

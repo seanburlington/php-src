@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.73 2001/09/03 02:31:56 sniper Exp $ */
+/* $Id: rfc1867.c,v 1.74 2001/09/09 13:29:28 derick Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -528,6 +528,6 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_icap.c,v 1.28 2001/08/13 18:47:51 andi Exp $ */
+/* $Id: php_icap.c,v 1.29 2001/09/09 13:28:51 derick Exp $ */
 
 #define ICAP1
 
@@ -932,6 +932,6 @@ void cc_vdlog(const char *fmt, va_list ap)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ovrimos.c,v 1.11 2001/07/30 05:36:13 zeev Exp $ */
+/* $Id: ovrimos.c,v 1.12 2001/09/09 13:29:02 derick Exp $ */
 
 #include <php.h>
 #include <php_globals.h>
@@ -1319,6 +1319,6 @@ DLEXPORT zend_module_entry *get_module()
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.394 2001/09/05 19:47:54 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.395 2001/09/09 13:29:14 derick Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -2849,7 +2849,7 @@ PHP_FUNCTION(import_request_variables)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */
 

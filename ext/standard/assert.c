@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.42 2001/08/11 17:03:36 zeev Exp $ */
+/* $Id: assert.c,v 1.43 2001/09/09 13:29:14 derick Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -296,6 +296,6 @@ PHP_FUNCTION(assert_options)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.158 2001/09/06 23:10:37 sniper Exp $ */
+/* $Id: gd.c,v 1.159 2001/09/09 13:28:49 derick Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -3587,6 +3587,6 @@ static void _php_image_convert(INTERNAL_FUNCTION_PARAMETERS, int image_type )
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

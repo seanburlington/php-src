@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.25 2001/09/07 17:09:55 wez Exp $ */
+/* $Id: openssl.c,v 1.26 2001/09/09 13:28:59 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1749,6 +1749,6 @@ static void _php_x509_free(zend_rsrc_list_entry *rsrc TSRMLS_DC)
  * tab-width: 8
  * c-basic-offset: 8
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.77 2001/08/31 15:56:48 zeev Exp $ */
+/* $Id: output.c,v 1.78 2001/09/09 13:29:28 derick Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -615,6 +615,6 @@ PHPAPI int php_get_output_start_lineno(TSRMLS_D)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

@@ -18,7 +18,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_mailparse.h,v 1.3 2001/08/28 21:52:10 wez Exp $ */
+/* $Id: php_mailparse.h,v 1.4 2001/09/09 13:28:55 derick Exp $ */
 
 #ifndef PHP_MAILPARSE_H
 #define PHP_MAILPARSE_H
@@ -85,5 +85,5 @@ extern ZEND_DECLARE_MODULE_GLOBALS(mailparse);
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78
+ * vim: sw=4 ts=4
  */

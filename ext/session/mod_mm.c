@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_mm.c,v 1.32 2002/02/28 08:26:40 sebastian Exp $ */
+/* $Id: mod_mm.c,v 1.33 2002/03/05 23:45:50 yohgaki Exp $ */
 
 #include "php.h"
 
@@ -331,7 +331,10 @@ PS_READ_FUNC(mm)
 		(*val)[sd->datalen] = '\0';
 		ret = SUCCESS;
 	}
-
+	else {
+		*val = estrdup("");
+	}
+	
 	mm_unlock(data->mm);
 	
 	return ret;

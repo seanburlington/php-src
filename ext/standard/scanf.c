@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.8 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: scanf.c,v 1.9 2001/07/15 14:08:23 zeev Exp $ */
 
 /*
    scanf.c --
@@ -125,6 +125,7 @@ typedef struct CharSet {
 static char *BuildCharSet(CharSet *cset, char *format);
 static int	CharInSet(CharSet *cset, int ch);
 static void	ReleaseCharSet(CharSet *cset);
+static inline void scan_set_error_return(int numVars, pval **return_value);
 
 
 /* {{{ BuildCharSet
@@ -1228,7 +1229,8 @@ PHPAPI int php_sscanf_internal(	char *string,char *format,
 /* }}} */
 
 /* the compiler choked when i tried to make this a macro    */
-inline void scan_set_error_return(int numVars,pval **return_value) {
+static inline void scan_set_error_return(int numVars,pval **return_value)
+{
 	if (numVars) {
 		(*return_value)->type = IS_LONG;
 		(*return_value)->value.lval = SCAN_ERROR_EOF;  /* EOF marker */

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.62 1999/05/22 10:56:36 zeev Exp $ */
+/* $Id: main.c,v 1.63 1999/05/22 12:19:56 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -1233,7 +1233,6 @@ PHPAPI int apache_php3_module_main(request_rec *r, int fd, int display_source_mo
 	
 	php3_header();			/* Make sure headers have been sent */
 	zend_end_ob_buffering(1);
-	fprintf(stderr, "%d all done\n", getpid());
 	return (OK);
 }
 #endif							/* APACHE */

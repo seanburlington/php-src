@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.61 2001/01/21 17:26:43 rasmus Exp $ */
+/* $Id: fsock.c,v 1.62 2001/02/18 18:54:41 thies Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -285,9 +285,11 @@ static void php_fsockopen(INTERNAL_FUNCTION_PARAMETERS, int persistent) {
 			CLOSE_SOCK(1);
 
 			if (arg_count>2) {
+				zval_dtor(*args[2]);
 				ZVAL_LONG(*args[2],errno);
 			}
 			if (arg_count>3) {
+				zval_dtor(*args[3]);
 				ZVAL_STRING(*args[3],strerror(errno),1);
 			}
 			RETURN_FALSE;
@@ -308,10 +310,12 @@ static void php_fsockopen(INTERNAL_FUNCTION_PARAMETERS, int persistent) {
 
 		if (connect_nonb(socketd, (struct sockaddr *) &unix_addr, sizeof(unix_addr), &timeout) == SOCK_CONN_ERR) {
 			CLOSE_SOCK(1);
-			if(arg_count>2) {
+			if (arg_count>2) {
+				zval_dtor(*args[2]);
 				ZVAL_LONG(*args[2],errno);
 			}
-			if(arg_count>3) {
+			if (arg_count>3) {
+				zval_dtor(*args[3]);
 				ZVAL_STRING(*args[3],strerror(errno),1);
 			}
 			RETURN_FALSE;

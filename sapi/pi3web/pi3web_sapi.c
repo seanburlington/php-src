@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.28 2001/08/05 05:35:06 sebastian Exp $ */
+/* $Id: pi3web_sapi.c,v 1.29 2001/08/05 14:17:55 sas Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -78,7 +78,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.28 2001/08/05 05:35:06 sebastian Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.29 2001/08/05 14:17:55 sas Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -180,7 +180,6 @@ static int sapi_pi3web_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 	char *combined_headers, *combined_headers_ptr;
 	LPCONTROL_BLOCK lpCB = (LPCONTROL_BLOCK) SG(server_context);
 	sapi_header_struct default_content_type;
-	TSRMLS_FETCH();
 	
 	if ( !IWasLoaded ) return SAPI_HEADER_SENT_SUCCESSFULLY;
 
@@ -320,7 +319,7 @@ static void init_request_info(sapi_globals_struct *sapi_globals, LPCONTROL_BLOCK
 	SG(sapi_headers).http_response_code = 200;
 }
 
-static void hash_pi3web_variables(TSRMLS_D TSRMLS_DC)
+static void hash_pi3web_variables(TSRMLS_D)
 {
 	char static_variable_buf[PI3WEB_SERVER_VAR_BUF_SIZE];
 	char *variable_buf;

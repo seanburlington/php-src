@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.26 2001/02/20 18:00:44 dbeu Exp $ */
+/* $Id: image.c,v 1.27 2001/02/23 22:07:14 sas Exp $ */
 /* 
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -41,7 +41,7 @@
 #if HAVE_FCNTL_H
 #include <fcntl.h>
 #endif
-#include "fopen-wrappers.h"
+#include "fopen_wrappers.h"
 #include "ext/standard/fsock.h"
 #if HAVE_UNISTD_H
 #include <unistd.h>

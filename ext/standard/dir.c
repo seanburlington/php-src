@@ -17,12 +17,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.56 2001/02/15 05:21:27 sas Exp $ */
+/* $Id: dir.c,v 1.57 2001/02/23 22:07:14 sas Exp $ */
 
 /* {{{ includes/startup/misc */
 
 #include "php.h"
-#include "fopen-wrappers.h"
+#include "fopen_wrappers.h"
 
 #include "php_dir.h"
 

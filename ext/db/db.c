@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.47 2000/11/22 22:00:39 sas Exp $ */
+/* $Id: db.c,v 1.48 2001/02/23 22:07:12 sas Exp $ */
 #define IS_EXT_MODULE
 
 #if 1
@@ -25,7 +25,7 @@
 #include "php.h"
 #include "php_globals.h"
 #include "safe_mode.h"
-#include "fopen-wrappers.h"
+#include "fopen_wrappers.h"
 #include "ext/standard/flock_compat.h" 
 #include "ext/standard/info.h"
 

@@ -16,11 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.54 2001/02/21 07:18:28 sas Exp $ */
+/* $Id: filestat.c,v 1.55 2001/02/23 22:07:14 sas Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
-#include "fopen-wrappers.h"
+#include "fopen_wrappers.h"
 #include "php_globals.h"
 
 #include <stdlib.h>

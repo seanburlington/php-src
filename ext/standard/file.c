@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.142 2001/02/21 07:18:28 sas Exp $ */
+/* $Id: file.c,v 1.143 2001/02/23 22:07:14 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -69,7 +69,7 @@
 #include <sys/time.h>
 #endif
 #include "fsock.h"
-#include "fopen-wrappers.h"
+#include "fopen_wrappers.h"
 #include "php_globals.h"
 
 #ifdef HAVE_SYS_FILE_H

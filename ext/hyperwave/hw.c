@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.77 2001/02/22 09:38:58 steinm Exp $ */
+/* $Id: hw.c,v 1.78 2001/02/23 22:07:13 sas Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -26,7 +26,7 @@
 #include "ext/standard/php_standard.h"
 #include "ext/standard/head.h"
 #include "ext/standard/info.h"
-#include "fopen-wrappers.h"
+#include "fopen_wrappers.h"
 #include "SAPI.h"
 
 #ifdef PHP_WIN32

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.130 2001/01/19 16:04:27 sas Exp $ */
+/* $Id: php.h,v 1.131 2001/02/23 22:07:15 sas Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -161,7 +161,7 @@ typedef unsigned int socklen_t;
 char *strerror(int);
 #endif
 
-#include "fopen-wrappers.h"
+#include "fopen_wrappers.h"
 
 #if (REGEX == 1 || REGEX == 0) && !defined(NO_REGEX_EXTRA_H)
 #include "regex/regex_extra.h"

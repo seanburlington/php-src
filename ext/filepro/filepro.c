@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filepro.c,v 1.28 2000/11/02 23:08:05 andi Exp $ */
+/* $Id: filepro.c,v 1.29 2001/02/23 22:07:13 sas Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com
@@ -28,7 +28,7 @@
 
 #include "php.h"
 #include "safe_mode.h"
-#include "fopen-wrappers.h"
+#include "fopen_wrappers.h"
 #include <string.h>
 #ifdef PHP_WIN32
 #include <windows.h>

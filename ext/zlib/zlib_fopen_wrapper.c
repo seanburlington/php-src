@@ -15,13 +15,13 @@
    | Authors: Hartmut Holzgraefe <hartmut@six.de>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.2 2000/11/21 00:43:25 hholzgra Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.3 2001/02/23 22:07:14 sas Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 
 #include "php.h"
 #include "php_zlib.h"
-#include "fopen-wrappers.h"
+#include "fopen_wrappers.h"
 
 #if HAVE_FOPENCOOKIE 
 

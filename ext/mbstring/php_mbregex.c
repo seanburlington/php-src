@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.18.2.8 2003/05/01 21:08:47 iliaa Exp $ */
+/* $Id: php_mbregex.c,v 1.18.2.9 2003/09/23 02:54:28 hirokawa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -557,7 +557,12 @@ _php_mb_regex_ereg_replace_exec(INTERNAL_FUNCTION_PARAMETERS, int option)
 			}
 		} else { /* nomatch */
 			/* stick that last bit of string on our output */
-			_php_mb_regex_strbuf_ncat(&outdev, (const unsigned char *)&string[pos], string_len - pos);
+			int l = string_len - pos;
+			if (l > 0) {
+				_php_mb_regex_strbuf_ncat(&outdev, (const unsigned char *)&string[pos], l);
+			} else {
+				outdev.pos += l;
+			}
 		}
 	}
 
@@ -1083,3 +1088,12 @@ PHP_FUNCTION(mb_regex_set_options)
 /* }}} */
 
 #endif	/* HAVE_MBREGEX */
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: fdm=marker
+ * vim: noet sw=4 ts=4
+ */

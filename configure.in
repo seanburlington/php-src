@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.177 2000/09/07 17:56:11 venaas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.178 2000/09/09 11:54:04 zeev Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -361,6 +361,7 @@ lockf \
 lrand48 \
 memcpy \
 memmove \
+mkstemp \
 mmap \
 putenv \
 random \

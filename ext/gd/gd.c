@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.209 2002/08/27 19:40:55 helly Exp $ */
+/* $Id: gd.c,v 1.210 2002/08/27 20:10:46 helly Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -2699,10 +2699,7 @@ static void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode, int 
 #endif
 
 #if !HAVE_GD_STRINGFTEX
-	if (extended)	{
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "gdImageStringFTEx not supported in this PHP build");
-		RETURN_FALSE;
-	}
+	assert(!extended);
 #endif
 	
 	argc = ZEND_NUM_ARGS();

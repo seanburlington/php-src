@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.47 2002/05/20 23:26:13 mfischer Exp $ */
+/* $Id: posix.c,v 1.48 2002/06/03 15:49:38 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -25,6 +25,7 @@
 #include "php.h"
 #include "ext/standard/info.h"
 #include "ext/standard/php_string.h"
+#include "ext/standard/file.h"
 #include "php_posix.h"
 
 #if HAVE_POSIX
@@ -130,7 +131,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.47 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.48 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -580,19 +581,44 @@ PHP_FUNCTION(posix_ctermid)
 #endif
 /* }}} */
 
+#define STREAM_GET_FD() \
+			stream = zend_list_find(Z_LVAL_P(z_fd), &rsrc_type); \
+			if (!stream || rsrc_type != php_file_le_stream()) { \
+				php_error(E_WARNING, "%s() expects argument 1 to be a valid stream resource", \
+						  get_active_function_name(TSRMLS_C)); \
+				return; \
+			} \
+			if (php_stream_can_cast(stream, PHP_STREAM_AS_FD) == SUCCESS) { \
+				php_stream_cast(stream, PHP_STREAM_AS_FD, (void*)&fd, 0); \
+			} else { \
+				php_error(E_WARNING, "%s() could not use stream of type '%s'", \
+						  get_active_function_name(TSRMLS_C), stream->ops->label); \
+				return; \
+			}
+
+
 /* {{{ proto string posix_ttyname(int fd)
    Determine terminal device name (POSIX.1, 4.7.2) */
 PHP_FUNCTION(posix_ttyname)
 {
 	zval *z_fd;
 	char *p;
+	php_stream *stream;
+	int rsrc_type, fd;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &z_fd) == FAILURE)
 		return;
 
-	convert_to_long(z_fd);
+	switch (Z_TYPE_P(z_fd)) {
+		case IS_RESOURCE:
+			STREAM_GET_FD();
+			break;
+		default:
+			convert_to_long(z_fd);
+			fd = Z_LVAL_P(z_fd);
+	}
 
-	if (NULL == (p = ttyname(Z_LVAL_P(z_fd)))) {
+	if (NULL == (p = ttyname(fd))) {
 		POSIX_G(last_error) = errno;
 		RETURN_FALSE;
 	}
@@ -606,18 +632,26 @@ PHP_FUNCTION(posix_ttyname)
 PHP_FUNCTION(posix_isatty)
 {
 	zval *z_fd;
-	int   result;
+	php_stream *stream;
+	int rsrc_type, fd;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &z_fd) == FAILURE)
 		return;
 
-	convert_to_long(z_fd);
+	switch (Z_TYPE_P(z_fd)) {
+		case IS_RESOURCE:
+			STREAM_GET_FD();
+			break;
+		default:
+			convert_to_long(z_fd);
+			fd = Z_LVAL_P(z_fd);
+	}
 
-	result = isatty(Z_LVAL_P(z_fd));
-	if (!result)
+	if (isatty(fd)) {
+		RETURN_TRUE;
+	} else {
 		RETURN_FALSE;
-
-	RETURN_TRUE;
+	}
 }
 /* }}} */
 

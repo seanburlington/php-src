@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.218.2.13 2003/03/31 23:21:56 sniper Exp $
+dnl $Id: acinclude.m4,v 1.218.2.14 2003/04/01 08:05:39 sas Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -28,7 +28,7 @@ AC_DEFUN([PHP_DEFINE],[
 dnl PHP_INIT_BUILD_SYSTEM
 dnl
 AC_DEFUN([PHP_INIT_BUILD_SYSTEM],[
-test -d include || $php_shtool mkdir include
+test -d include || mkdir include
 > Makefile.objects
 > Makefile.fragments
 dnl We need to play tricks here to avoid matching the egrep line itself

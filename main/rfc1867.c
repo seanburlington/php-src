@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.96 2002/03/30 02:58:19 sniper Exp $ */
+/* $Id: rfc1867.c,v 1.97 2002/04/01 23:02:16 sniper Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -704,8 +704,15 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 			/* If file_uploads=off, skip the file part */
 			if (!PG(file_uploads)) {
 				efree(filename);
-				efree(param);
+				if (param) efree(param);
 				continue;
+			}
+
+			/* Return with an error if the posted data is garbled */
+			if (!param) {
+				sapi_module.sapi_error(E_WARNING, "File Upload Mime headers garbled");
+				efree(filename);
+				SAFE_RETURN;
 			}
 
 			/* Handle file */

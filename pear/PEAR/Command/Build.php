@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Build.php,v 1.3.4.8 2003/07/08 20:39:46 pajoye Exp $
+// $Id: Build.php,v 1.3.4.9 2003/08/06 01:58:30 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Builder.php";

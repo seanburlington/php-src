@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.35.2.9 2003/07/08 20:39:46 pajoye Exp $
+// $Id: Config.php,v 1.35.2.10 2003/08/06 01:58:30 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'System.php';
@@ -577,7 +577,8 @@ class PEAR_Config extends PEAR
         }
         $data = ($data === null) ? $this->configuration[$layer] : $data;
         $this->_encodeOutput($data);
-        if (!@System::mkDir("-p " . dirname($file))) {
+        $opt = array('-p', dirname($file));
+        if (!@System::mkDir($opt)) {
             return $this->raiseError("could not create directory: " . dirname($file));
         }
         if (@is_file($file) && !@is_writeable($file)) {

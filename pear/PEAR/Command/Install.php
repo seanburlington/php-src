@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.38.2.9 2003/07/08 20:39:46 pajoye Exp $
+// $Id: Install.php,v 1.38.2.10 2003/08/06 01:58:30 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -259,6 +259,7 @@ package if needed.
             $installed = array_flip($reg->listPackages());
             $params = array();
             foreach ($latest as $package => $info) {
+                $package = strtolower($package);
                 if (!isset($installed[$package])) {
                     // skip packages we don't have installed
                     continue;
@@ -269,7 +270,7 @@ package if needed.
                     continue;
                 }
                 $params[] = $package;
-                $this->ui->outputData("will upgrade $package", $command);
+                $this->ui->outputData(array('data' => "Will upgrade $package"), $command);
             }
         }
         foreach ($params as $pkg) {
@@ -334,7 +335,7 @@ package if needed.
             return $this->raiseError("Please supply the package you want to bundle");
         }
         $pkgfile = $params[0];
-
+        $need_download = false;
         if (preg_match('#^(http|ftp)://#', $pkgfile)) {
             $need_download = true;
         } elseif (!@is_file($pkgfile)) {

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.304 2002/03/07 14:17:45 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.305 2002/03/07 15:40:39 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -91,7 +91,7 @@ case $host_alias in
 *dgux*)
     CPPFLAGS="$CPPFLAGS -D_BSD_TIMEOFDAY_FLAVOR";;
 *darwin*|*rhapsody*)
-    CPPFLAGS="$CPPFLAGS -traditional-cpp";;
+    CPPFLAGS="$CPPFLAGS -no-cpp-precomp";;
 *bsdi*)
     BSD_MAKEFILE=yes;;
 *beos*)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.28.2.7 2003/08/13 13:27:36 abies Exp $ */
+/* $Id: php_interbase.h,v 1.28.2.8 2003/09/02 15:35:11 abies Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -149,6 +149,7 @@ typedef struct {
 	int drop_stmt;
 	XSQLDA *out_sqlda;
 	ibase_array *out_array;
+	unsigned char has_more_rows;
 } ibase_result;
 
 typedef struct _php_ibase_varchar {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.23 2003/08/09 06:12:41 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.142.2.24 2003/08/12 15:04:52 iliaa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -3692,7 +3692,6 @@ MBSTRING_API int php_mb_gpc_encoding_converter(char **str, int *len, const char 
 MBSTRING_API int php_mb_gpc_encoding_detector(const char *arg_string, int arg_length, char *arg_list TSRMLS_DC)
 {
 	mbfl_string string;
-	const char *ret;
 	enum mbfl_no_encoding *elist;
 	enum mbfl_no_encoding encoding;
 

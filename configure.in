@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.372 2002/09/06 17:18:16 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.373 2002/09/29 02:45:24 edink Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1077,6 +1077,12 @@ else
 fi
 
 PHP_ADD_SOURCES_X(Zend, zend_execute.c,,PHP_GLOBAL_OBJS,,$flag)
+
+
+PHP_ADD_SOURCES_X(main, php_embed.c,, PHP_LIB_OBJS)
+PHP_LIB_OBJS="$PHP_GLOBAL_OBJS $PHP_LIB_OBJS main/internal_functions_cli.lo"
+PHP_SUBST(PHP_LIB_OBJS)
+
 
 PHP_ADD_BUILD_DIR(main)
 PHP_ADD_BUILD_DIR(regex)

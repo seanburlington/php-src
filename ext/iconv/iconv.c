@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.117.2.2 2004/07/20 18:48:23 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.117.2.3 2004/08/13 14:54:50 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2457,7 +2457,7 @@ static int php_iconv_stream_filter_append_bucket(
 
 	while (icnt > 0) {
 		if ((ps == NULL ? iconv(self->cd, NULL, NULL, &pd, &ocnt):
-					iconv(self->cd, &ps, &icnt, &pd, &ocnt)) == (size_t)-1) {
+					iconv(self->cd, (char **)&ps, &icnt, &pd, &ocnt)) == (size_t)-1) {
 #if ICONV_SUPPORTS_ERRNO
 			switch (errno) {
 				case EILSEQ:

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.242 2004/02/18 05:07:13 pollita Exp $ */
+/* $Id: info.c,v 1.243 2004/03/15 07:45:25 jon Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1080,7 +1080,7 @@ PHP_FUNCTION(php_uname)
    Return comma-separated string of .ini files parsed from the additional ini dir */
 PHP_FUNCTION(php_ini_scanned_files)
 {
-	if (strlen(PHP_CONFIG_FILE_SCAN_DIR)) {
+	if (strlen(PHP_CONFIG_FILE_SCAN_DIR) && php_ini_scanned_files) {
 		RETURN_STRING(php_ini_scanned_files, 1);
 	} else {
 		RETURN_FALSE;

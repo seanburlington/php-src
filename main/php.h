@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.111 2000/08/10 19:38:28 andi Exp $ */
+/* $Id: php.h,v 1.112 2000/08/20 12:49:56 sas Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -324,7 +324,7 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #define V_OPEN(open_args) open open_args
 #define V_CREAT(path, mode) creat(path, mode)
 #define V_CHDIR(path) chdir(path)
-#define V_CHDIR_FILE(path) chdir_file(path)
+#define V_CHDIR_FILE(path) virtual_real_chdir_file(path)
 #define V_GETWD(buf) getwd(buf)
 #define V_STAT(path, buff) stat(path, buff)
 #define V_LSTAT(path, buff) lstat(path, buff)

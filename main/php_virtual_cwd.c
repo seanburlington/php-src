@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_virtual_cwd.c,v 1.66 2000/08/08 16:30:42 stas Exp $ */
+/* $Id: php_virtual_cwd.c,v 1.67 2000/08/20 12:49:56 sas Exp $ */
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -744,6 +744,26 @@ CWD_API FILE *virtual_popen(const char *command, const char *type)
 }
 
 #endif
+
+/* taken from Apache 1.3 */
+
+CWD_API void virtual_real_chdir_file(const char *file)
+{
+    const char *x;
+    char buf[4096];
+
+    x = strrchr(file, '/');
+    if (x == NULL) {
+	chdir(file);
+    }
+    else if (x - file < sizeof(buf) - 1) {
+	memcpy(buf, file, x - file);
+	buf[x - file] = '\0';
+	chdir(buf);
+    }
+    /* XXX: well, this is a silly function, no method of reporting an
+     * error... ah well. */
+}
 
 #if 0
 

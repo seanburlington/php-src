@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.30 2004/04/08 22:46:43 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.31 2004/04/14 23:26:56 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -602,7 +602,7 @@ SPL_METHOD(dual_it, getInnerIterator)
 	intern = (spl_dual_it_object*)zend_object_store_get_object(getThis() TSRMLS_CC);
 
 	if (intern->inner.zobject) {
-		RETVAL_ZVAL(intern->inner.zobject, 0, 0);
+		RETVAL_ZVAL(intern->inner.zobject, 1, 0);
 	} else {
 		RETURN_NULL();
 	}

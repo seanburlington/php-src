@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.209 2000/02/17 20:23:57 zeev Exp $ */
+/* $Id: main.c,v 1.210 2000/02/17 20:32:51 ssb Exp $ */
 
 
 #include <stdio.h>
@@ -1116,7 +1116,7 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 		prepend_file_p = NULL;
 	}
 	if (PG(auto_append_file) && PG(auto_append_file)[0] &&
-		strncmp(PG(auto_prepend_file), "none", 4) != 0) {
+		strncmp(PG(auto_append_file), "none", 4) != 0) {
 		append_file.filename = PG(auto_append_file);
 		append_file.free_filename = 0;
 		append_file.type = ZEND_HANDLE_FILENAME;

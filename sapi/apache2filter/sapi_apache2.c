@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.128 2004/09/23 15:08:31 hyanantha Exp $ */
+/* $Id: sapi_apache2.c,v 1.129 2004/09/24 15:44:57 hyanantha Exp $ */
 
 #include <fcntl.h>
 
@@ -173,7 +173,7 @@ php_apache_sapi_get_stat(TSRMLS_D)
 	ctx->finfo.st_gid = ctx->r->finfo.group;
 	ctx->finfo.st_dev = ctx->r->finfo.device;
 	ctx->finfo.st_ino = ctx->r->finfo.inode;
-#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
+#ifdef NETWARE
 	ctx->finfo.st_atime.tv_sec = ctx->r->finfo.atime/1000000;
 	ctx->finfo.st_mtime.tv_sec = ctx->r->finfo.mtime/1000000;
 	ctx->finfo.st_ctime.tv_sec = ctx->r->finfo.ctime/1000000;

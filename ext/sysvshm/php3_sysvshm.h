@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php3_sysvshm.h,v 1.1 1999/04/22 02:48:27 ssb Exp $ */
+/* $Id: php3_sysvshm.h,v 1.2 1999/05/21 08:20:12 sas Exp $ */
 
 #ifndef _PHP3_SYSVSHM_H
 #define _PHP3_SYSVSHM_H
@@ -97,5 +97,7 @@ extern sysvshm_module php3_sysvshm_module;
 #define sysvshm_module_ptr NULL
 
 #endif
+
+#define phpext_sysvshm_ptr sysvshm_module_ptr
 
 #endif /* _PHP3_SYSVSHM_H */

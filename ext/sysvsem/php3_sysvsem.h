@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php3_sysvsem.h,v 1.1 1999/04/22 02:48:26 ssb Exp $ */
+/* $Id: php3_sysvsem.h,v 1.2 1999/05/21 08:20:12 sas Exp $ */
 
 #ifndef _PHP3_SYSVSEM_H
 #define _PHP3_SYSVSEM_H
@@ -70,5 +70,7 @@ extern sysvsem_module php3_sysvsem_module;
 #define sysvsem_module_ptr NULL
 
 #endif
+
+#define phpext_sysvsem_ptr sysvsem_module_ptr
 
 #endif /* _PHP3_SYSVSEM_H */

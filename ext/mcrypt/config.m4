@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/05/01 11:14:22 sas Exp $
+dnl $Id: config.m4,v 1.3 1999/05/21 08:20:11 sas Exp $
 dnl config.m4 for extension mcrypt
 dnl don't forget to call PHP_EXTENSION(mcrypt)
 
@@ -14,8 +14,7 @@ AC_ARG_WITH(mcrypt,
       fi
     done
     if test "$MCRYPT_DIR" = ""; then
-      AC_MSG_ERROR(Please install mcrypt.h and libmcrypt.a accordingly to the do
-cumentation - I cannot find mcrypt.h)
+      AC_MSG_ERROR(Please reinstall libmcrypt - I cannot find mcrypt.h)
     fi
     INCLUDES="$INCLUDES -I$MCRYPT_DIR/include"
     EXTRA_LIBS="$EXTRA_LIBS -L$MCRYPT_DIR/lib -lmcrypt"

@@ -27,11 +27,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.2 1999/05/09 08:47:52 zeev Exp $ */
+/* $Id: gettext.c,v 1.3 1999/05/21 08:20:11 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
-#include "internal_functions.h"
 #include "php3_gettext.h"
 
 #if HAVE_LIBINTL

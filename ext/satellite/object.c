@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: object.c,v 1.11 2001/09/26 11:09:09 eriksson Exp $
+ * $Id: object.c,v 1.12 2001/12/06 17:43:34 hholzgra Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -853,6 +853,8 @@ OrbitObject_GetProperty_exit:
 	return success;
 }
 
+/* {{{ proto string satellite_object_to_string(object obj)
+	 Convert an object to its string representation */
 PHP_FUNCTION(satellite_object_to_string)
 {
 	zval **arg = NULL;
@@ -892,4 +894,4 @@ PHP_FUNCTION(satellite_object_to_string)
 error:
 	RETURN_NULL();
 }
-
+/* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.73 2001/12/02 21:10:15 phanto Exp $ */
+/* $Id: php_mssql.c,v 1.74 2001/12/06 17:47:27 hholzgra Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -1286,7 +1286,7 @@ PHP_FUNCTION(mssql_fetch_array)
 
 /* }}} */
 
-/* {{{ proto array mssql_fetch_array(int result_id [, int result_type])
+/* {{{ proto array mssql_fetch_assoc(int result_id [, int result_type])
    Returns an associative array of the current row in the result set specified by result_id */
 PHP_FUNCTION(mssql_fetch_assoc)
 {

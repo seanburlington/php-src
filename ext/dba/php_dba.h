@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dba.h,v 1.13 2002/10/24 20:43:03 helly Exp $ */
+/* $Id: php_dba.h,v 1.14 2002/10/25 10:06:35 helly Exp $ */
 
 #ifndef PHP_DBA_H
 #define PHP_DBA_H
@@ -95,6 +95,7 @@ PHP_FUNCTION(dba_fetch);
 PHP_FUNCTION(dba_optimize);
 PHP_FUNCTION(dba_sync);
 PHP_FUNCTION(dba_handlers);
+PHP_FUNCTION(dba_list);
 
 #else
 #define dba_module_ptr NULL

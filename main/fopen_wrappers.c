@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.150 2002/09/28 16:27:10 rasmus Exp $ */
+/* $Id: fopen_wrappers.c,v 1.151 2002/10/04 22:16:16 bfrance Exp $ */
 
 /* {{{ includes
  */
@@ -108,6 +108,7 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 	char local_open_basedir[MAXPATHLEN];
 	int local_open_basedir_pos;
 	int resolved_basedir_len;
+	int resolved_name_len;
 	
 	/* Special case basedir==".": Use script-directory */
 	if ((strcmp(basedir, ".") == 0) && 
@@ -138,6 +139,12 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 			resolved_basedir_len = strlen(resolved_basedir);	
 		}
 		
+		if (path[strlen(path)-1] == PHP_DIR_SEPARATOR) {
+			resolved_name_len = strlen(resolved_name);
+			resolved_name[resolved_name_len] = '/';
+			resolved_name[++resolved_name_len] = '\0';
+		}
+
 		/* Check the path */
 #ifdef PHP_WIN32
 		if (strncasecmp(resolved_basedir, resolved_name, resolved_basedir_len) == 0) {

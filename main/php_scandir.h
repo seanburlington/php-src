@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_scandir.h,v 1.9 2004/09/30 14:46:03 hyanantha Exp $ */
+/* $Id: php_scandir.h,v 1.10 2005/01/09 21:05:06 sniper Exp $ */
 
 #ifndef PHP_SCANDIR_H
 #define PHP_SCANDIR_H
@@ -34,7 +34,7 @@
 #elif NETWARE
 #include "config.nw.h"
 #else
-#include "php_config.h"
+#include <php_config.h>
 #endif
 
 #ifdef HAVE_DIRENT_H

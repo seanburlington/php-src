@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.534 2005/01/07 06:12:41 sniper Exp $ -*- autoconf -*-
+dnl ## $Id: configure.in,v 1.535 2005/01/09 21:05:04 sniper Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1338,12 +1338,12 @@ fi
 #
 
 test -d TSRM || $php_shtool mkdir TSRM
-echo '#include "../main/php_config.h"' > TSRM/tsrm_config.h
+echo '#include <../main/php_config.h>' > TSRM/tsrm_config.h
 
 test -d Zend || $php_shtool mkdir Zend
 
 cat >Zend/zend_config.h <<FEO
-#include "../main/php_config.h"
+#include <../main/php_config.h>
 #if defined(APACHE) && defined(PHP_API_VERSION)
 #undef HAVE_DLFCN_H
 #endif

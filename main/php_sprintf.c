@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sprintf.c,v 1.20 2004/12/17 13:08:44 derick Exp $ */
+/* $Id: php_sprintf.c,v 1.21 2005/01/09 21:05:06 sniper Exp $ */
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -26,7 +26,7 @@
 #elif defined NETWARE
 #include "config.nw.h"
 #else
-#include "php_config.h"
+#include <php_config.h>
 #endif
 
 PHPAPI int

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_compat.h,v 1.21 2004/08/31 16:41:29 jorton Exp $ */
+/* $Id: php_compat.h,v 1.22 2005/01/09 21:05:06 sniper Exp $ */
 
 #ifndef PHP_COMPAT_H
 #define PHP_COMPAT_H
@@ -26,7 +26,7 @@
 #elif defined(NETWARE)
 #include "config.nw.h"
 #else
-#include "php_config.h"
+#include <php_config.h>
 #endif
 
 #if defined(HAVE_BUNDLED_PCRE) || !defined(PHP_VERSION)

@@ -21,7 +21,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.47 2000/07/21 19:00:21 sniper Exp $ */
+/* $Id: ldap.c,v 1.48 2000/07/22 00:34:22 sniper Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -139,6 +139,12 @@ PHP_MINIT_FUNCTION(ldap)
 
 	REGISTER_INI_ENTRIES();
 
+	/* Consts to be used with deref-parameter in php_ldap_do_search() */
+	REGISTER_MAIN_LONG_CONSTANT("LDAP_DEREF_NEVER", LDAP_DEREF_NEVER, CONST_PERSISTENT | CONST_CS);
+	REGISTER_MAIN_LONG_CONSTANT("LDAP_DEREF_SEARCHING", LDAP_DEREF_SEARCHING, CONST_PERSISTENT | CONST_CS);
+	REGISTER_MAIN_LONG_CONSTANT("LDAP_DEREF_FINDING", LDAP_DEREF_FINDING, CONST_PERSISTENT | CONST_CS);
+	REGISTER_MAIN_LONG_CONSTANT("LDAP_DEREF_ALWAYS", LDAP_DEREF_ALWAYS, CONST_PERSISTENT | CONST_CS);
+
 	le_result = register_list_destructors(_free_ldap_result, NULL);
 	le_link = register_list_destructors(_close_ldap_link, NULL);
 
@@ -179,7 +185,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.47 2000/07/21 19:00:21 sniper Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.48 2000/07/22 00:34:22 sniper Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #if HAVE_NSLDAP

@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.94.2.11 2002/07/15 16:40:57 sesser Exp $ */
+/* $Id: rfc1867.c,v 1.94.2.4.2.1 2002/07/20 19:17:52 derick Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -32,9 +32,6 @@
 #include "php_variables.h"
 #include "rfc1867.h"
 
-#if HAVE_MBSTRING && MBSTR_ENC_TRANS && !defined(COMPILE_DL_MBSTRING)
-#include "ext/mbstring/mbstring.h"
-#endif
 
 #undef DEBUG_FILE_UPLOAD
 
@@ -60,8 +57,6 @@
 #define UPLOAD_ERROR_C  3  /* Only partiallly uploaded */
 #define UPLOAD_ERROR_D  4  /* No file uploaded */
 #define UPLOAD_ERROR_E  5  /* Uploaded file size 0 bytes */
-
-
 
 static void add_protected_variable(char *varname TSRMLS_DC)
 {
@@ -440,7 +435,8 @@ static char *php_ap_getword(char **line, char stop)
 	return res;
 }
 
-static char *substring_conf(char *start, int len, char quote  TSRMLS_DC)
+
+static char *substring_conf(char *start, int len, char quote)
 {
 	char *result = emalloc(len + 2);
 	char *resp = result;
@@ -451,11 +447,6 @@ static char *substring_conf(char *start, int len, char quote  TSRMLS_DC)
 			*resp++ = start[++i];
 		} else {
 			*resp++ = start[i];
-#if HAVE_MBSTRING && MBSTR_ENC_TRANS && !defined(COMPILE_DL_MBSTRING)
-			if (mbstr_is_mb_leadbyte(start+i TSRMLS_CC)) {
-				*resp++ = start[++i];
-			}
-#endif
 		}
 	}
 
@@ -464,7 +455,7 @@ static char *substring_conf(char *start, int len, char quote  TSRMLS_DC)
 }
 
 
-static char *php_ap_getword_conf(char **line TSRMLS_DC)
+static char *php_ap_getword_conf(char **line)
 {
 	char *str = *line, *strend, *res, quote;
 
@@ -486,7 +477,7 @@ static char *php_ap_getword_conf(char **line TSRMLS_DC)
 				++strend;
 			}
 		}
-		res = substring_conf(str + 1, strend - str - 1, quote TSRMLS_CC);
+		res = substring_conf(str + 1, strend - str - 1, quote);
 
 		if (*strend == quote) {
 			++strend;
@@ -498,7 +489,7 @@ static char *php_ap_getword_conf(char **line TSRMLS_DC)
 		while (*strend && !isspace(*strend)) {
 			++strend;
 		}
-		res = substring_conf(str, strend - str, 0  TSRMLS_CC);
+		res = substring_conf(str, strend - str, 0);
 	}
 
 	while (*strend && isspace(*strend)) {
@@ -695,12 +686,12 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 						if (param) {
 							efree(param);
 						}
-						param = php_ap_getword_conf(&pair TSRMLS_CC);
+						param = php_ap_getword_conf(&pair);
 					} else if (!strcmp(key, "filename")) {
 						if (filename) {
 							efree(filename);
 						}
-						filename = php_ap_getword_conf(&pair TSRMLS_CC);
+						filename = php_ap_getword_conf(&pair);
 					}
 				}
 				if (key) {
@@ -832,11 +823,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 				sprintf(lbuf, "%s_name", param);
 			}
 
-#if HAVE_MBSTRING && MBSTR_ENC_TRANS && !defined(COMPILE_DL_MBSTRING)
-			s = mbstr_strrchr(filename, '\\' TSRMLS_CC);
-#else
 			s = strrchr(filename, '\\');
-#endif
 			if (s && s > filename) {
 				safe_php_register_variable(lbuf, s+1, NULL, 0 TSRMLS_CC);
 			} else {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.26 1999/10/16 16:35:20 andrei Exp $ */
+/* $Id: xml.c,v 1.27 1999/10/20 14:02:32 thies Exp $ */
 #define IS_EXT_MODULE
 
 #if COMPILE_DL
@@ -292,6 +292,9 @@ xml_destroy_parser(xml_parser *parser)
 		XML_ParserFree(parser->parser);
 	}
 	if (parser->ltags) {
+		int inx;
+		for (inx = 0; inx < parser->level; inx++)
+			efree(parser->ltags[ inx ]);
 		efree(parser->ltags);
 	}
 	if (parser->startElementHandler) {

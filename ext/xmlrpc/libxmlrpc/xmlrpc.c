@@ -31,7 +31,7 @@
 */
 
 
-static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.7 2005/03/26 03:13:58 sniper Exp $";
+static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.8 2005/03/28 00:07:24 edink Exp $";
 
 
 /****h* ABOUT/xmlrpc
@@ -43,6 +43,9 @@ static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.7 2005/03/26 03:13:58 sniper
  *   9/1999 - 10/2000
  * HISTORY
  *   $Log: xmlrpc.c,v $
+ *   Revision 1.8  2005/03/28 00:07:24  edink
+ *   Reshufle includes to make it compile on windows
+ *
  *   Revision 1.7  2005/03/26 03:13:58  sniper
  *   - Made it possible to build ext/xmlrpc with libxml2
  *
@@ -122,7 +125,7 @@ static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.7 2005/03/26 03:13:58 sniper
  *     - comprehensive API for manipulation of values
  *******/
 
-
+#include "ext/xml/expat_compat.h"
 #ifdef _WIN32
 #include "xmlrpc_win32.h"
 #endif
@@ -135,7 +138,6 @@ static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.7 2005/03/26 03:13:58 sniper
 
 #include "queue.h"
 #include "xmlrpc.h"
-#include "ext/xml/expat_compat.h"
 #include "base64.h"
 
 #include "xml_to_xmlrpc.h"

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.35 2002/08/14 14:36:07 kalowsky Exp $
+dnl $Id: config.m4,v 1.36 2002/08/14 14:37:03 kalowsky Exp $
 dnl
 AC_DEFUN(JAVA_FIND_JAR, [
  AC_MSG_CHECKING([Java Jar location])
@@ -27,7 +27,7 @@ AC_DEFUN(JAVA_FIND_JAR, [
     fi
   fi
   PHP_SUBST(JAVA_JAR)
-  AC_MSG_RESULT(`echo $JAVA_JAR`)
+  AC_MSG_RESULT([$JAVA_JAR])
 ])
 
 AC_DEFUN(JAVA_FIND_C, [

@@ -16,7 +16,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: server_round2_groupC.php,v 1.5 2004/02/04 14:46:12 dmitry Exp $
+// $Id: server_round2_groupC.php,v 1.6 2004/02/05 20:26:03 dmitry Exp $
 //
 
 class SOAP_Interop_GroupC {
@@ -41,8 +41,7 @@ class SOAP_Interop_GroupC {
     }
 }
 
-$server = new SoapServer("http://soapinterop.org/");
-$server->bind((isset($_SERVER['HTTPS'])?"https://":"http://").$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/echoheadersvc.wsdl.php");
+$server = new SoapServer((isset($_SERVER['HTTPS'])?"https://":"http://").$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/echoheadersvc.wsdl.php");
 $server->setClass("SOAP_Interop_GroupC");
 $server->handle();
 ?>

@@ -2,7 +2,7 @@
 /*                                          */
 /* John Ellson   ellson@lucent.com          */
 
-/* $Id: gdttf.c,v 1.8 2000/06/12 19:13:21 andrei Exp $ */
+/* $Id: gdttf.c,v 1.9 2000/06/12 19:41:33 andrei Exp $ */
 
 #if WIN32|WINNT
 #include "config.w32.h"
@@ -333,6 +333,7 @@ fontFetch ( char **error, void *key )
 
 	a = (font_t *)malloc(sizeof(font_t));
 #ifdef VIRTUAL_DIR
+	/* a->fontname will be freed in fontRelease() later on */
 	if (virtual_filepath(b->fontname, &a->fontname)) {
 		*error = "Could not find/open font";
 		return NULL;

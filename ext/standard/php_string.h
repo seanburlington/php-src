@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.59 2002/08/02 10:08:53 hholzgra Exp $ */
+/* $Id: php_string.h,v 1.60 2002/08/20 20:47:47 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -88,6 +88,9 @@ PHP_FUNCTION(strcoll);
 #if HAVE_STRFMON
 PHP_FUNCTION(money_format);
 #endif
+
+PHP_MINIT_FUNCTION(string_filters);
+PHP_MSHUTDOWN_FUNCTION(string_filters);
 
 #if defined(HAVE_LOCALECONV) && defined(ZTS)
 PHP_MINIT_FUNCTION(localeconv);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.61 2002/07/08 18:44:05 andi Exp $ */
+/* $Id: file.h,v 1.62 2002/08/20 20:47:47 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -77,6 +77,8 @@ PHP_FUNCTION(stream_context_create);
 PHP_FUNCTION(stream_context_set_params);
 PHP_FUNCTION(stream_context_set_option);
 PHP_FUNCTION(stream_context_get_options);
+PHP_FUNCTION(stream_filter_prepend);
+PHP_FUNCTION(stream_filter_append);
 PHP_MINIT_FUNCTION(user_streams);
 
 PHPAPI int php_set_sock_blocking(int socketd, int block TSRMLS_DC);

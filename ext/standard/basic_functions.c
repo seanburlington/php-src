@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.494 2002/08/16 10:08:32 sterling Exp $ */
+/* $Id: basic_functions.c,v 1.495 2002/08/20 20:47:47 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -607,6 +607,8 @@ function_entry basic_functions[] = {
 	PHP_FE(stream_context_set_params,										NULL)
 	PHP_FE(stream_context_set_option,										NULL)
 	PHP_FE(stream_context_get_options,										NULL)
+	PHP_FE(stream_filter_prepend,											NULL)
+	PHP_FE(stream_filter_append,											NULL)
 	PHP_FE(fgetcsv,															NULL)
 	PHP_FE(flock,															NULL)
 	PHP_FE(get_meta_tags,													NULL)
@@ -980,6 +982,7 @@ PHP_MINIT_FUNCTION(basic)
 	PHP_MINIT(file) (INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(pack) (INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(browscap) (INIT_FUNC_ARGS_PASSTHRU);
+	PHP_MINIT(string_filters) (INIT_FUNC_ARGS_PASSTHRU);
 
 #if defined(HAVE_LOCALECONV) && defined(ZTS)
 	PHP_MINIT(localeconv) (INIT_FUNC_ARGS_PASSTHRU);
@@ -1043,6 +1046,7 @@ PHP_MSHUTDOWN_FUNCTION(basic)
 	PHP_MSHUTDOWN(assert) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_MSHUTDOWN(url_scanner_ex) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_MSHUTDOWN(file) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
+	PHP_MSHUTDOWN(string_filters) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #if defined(HAVE_LOCALECONV) && defined(ZTS)
 	PHP_MSHUTDOWN(localeconv) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #endif

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.21 2003/07/14 13:31:44 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.142.2.22 2003/08/06 21:59:42 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -539,6 +539,9 @@ static PHP_INI_MH(OnUpdate_mbstring_language)
 			break;
 		case mbfl_no_language_russian:
 			default_enc = "KOI8-R";
+			break;
+		case mbfl_no_language_german:
+			default_enc = "ISO-8859-15";
 			break;
 		case mbfl_no_language_english:
 		default:

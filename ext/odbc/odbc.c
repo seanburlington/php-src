@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: odbc.c,v 1.14 1999/08/09 16:35:47 kara Exp $ */
+/* $Id: odbc.c,v 1.15 1999/08/27 08:46:23 kara Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -964,7 +964,7 @@ PHP_FUNCTION(odbc_fetch_into)
 		RETURN_FALSE;
 	}
 #else
-	pval     *arg1, *arr, tmp;
+	pval     *arg1, *arr, *tmp;
 
 	numArgs = ARG_COUNT(ht);
 

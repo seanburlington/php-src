@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.49 2003/12/23 11:06:42 moriyoshi Exp $ */
+/* $Id: file.c,v 1.279.2.50 2003/12/28 19:31:48 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2340,7 +2340,7 @@ enclosure:
 				goto enclosure;
 			}
 		} else {
-			while (e < re && *(e - 1) == enclosure) {
+			while (e < re && e > s && *(e - 1) == enclosure) {
 				e--;
 			}
 

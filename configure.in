@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.192 2000/10/28 18:23:47 venaas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.193 2000/11/13 19:13:41 venaas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -514,9 +514,6 @@ AC_DEFUN(PHP_SETUP_OPENSSL,[
 
   for i in $PHP_OPENSSL; do
     if test -r $i/include/openssl/evp.h; then
-      OPENSSL_DIR=$i
-      OPENSSL_INC=$i/include/openssl
-    elif test -r $i/include/evp.h; then
       OPENSSL_DIR=$i
       OPENSSL_INC=$i/include
     fi

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.109 2002/09/05 00:24:33 sniper Exp $
+dnl $Id: config.m4,v 1.110 2002/09/05 20:13:20 sniper Exp $
 dnl
 
 dnl
@@ -14,6 +14,9 @@ PHP_ARG_WITH(jpeg-dir, for the location of libjpeg,
 
 PHP_ARG_WITH(png-dir, for the location of libpng,
 [  --with-png-dir=DIR        GD: Set the path to libpng install prefix.], no, no)
+
+PHP_ARG_WITH(zlib-dir,if the location of ZLIB install directory is defined,
+[  --with-zlib-dir=<DIR>     GD: Set the path to zlib install prefix.], no, no)
 
 PHP_ARG_WITH(xpm-dir, for the location of libXpm,
 [  --with-xpm-dir=DIR        GD: Set the path to libXpm install prefix.], no, no)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.41 2003/12/10 17:44:12 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.142.2.42 2003/12/18 09:52:49 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -3283,9 +3283,13 @@ detect_end:
 								string.len = Z_STRLEN_PP(hash_entry);
 								ret = mbfl_buffer_converter_feed_result(convd, &string, &result);
 								if (ret != NULL) {
-									STR_FREE(Z_STRVAL_PP(hash_entry));
-									Z_STRVAL_PP(hash_entry) = (char *)ret->val;
-									Z_STRLEN_PP(hash_entry) = ret->len;
+									if ((*hash_entry)->refcount > 1) {
+										ZVAL_DELREF(*hash_entry);
+										MAKE_STD_ZVAL(*hash_entry);
+									} else {
+										zval_dtor(*hash_entry);
+									}
+									ZVAL_STRINGL(*hash_entry, ret->val, ret->len, 0);
 								}
 							}
 						}
@@ -3295,9 +3299,8 @@ detect_end:
 					string.len = Z_STRLEN_PP(var);
 					ret = mbfl_buffer_converter_feed_result(convd, &string, &result);
 					if (ret != NULL) {
-						STR_FREE(Z_STRVAL_PP(var));
-						Z_STRVAL_PP(var) = (char *)ret->val;
-						Z_STRLEN_PP(var) = ret->len;
+						zval_dtor(*var);
+						ZVAL_STRINGL(*var, ret->val, ret->len, 0);
 					}
 				}
 			}

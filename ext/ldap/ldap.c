@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.120 2002/06/22 11:41:36 venaas Exp $ */
+/* $Id: ldap.c,v 1.121 2002/06/22 15:41:39 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -119,12 +119,13 @@ function_entry ldap_functions[] = {
 	PHP_FE(ldap_parse_result,			arg3to6of6_force_ref)
 	PHP_FE(ldap_first_reference,						NULL)
 	PHP_FE(ldap_next_reference,							NULL)
+#ifdef HAVE_LDAP_PARSE_REFERENCE
 	PHP_FE(ldap_parse_reference,	third_argument_force_ref)
-	PHP_FE(ldap_rename,									NULL)
 #endif
-
-#if LDAP_API_VERSION > 2000
+	PHP_FE(ldap_rename,									NULL)
+#ifdef HAVE_LDAP_START_TLS_S
 	PHP_FE(ldap_start_tls,								NULL)
+#endif
 #endif
 
 #if defined(LDAP_API_FEATURE_X_OPENLDAP) && defined(HAVE_3ARG_SETREBINDPROC)
@@ -275,7 +276,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.120 2002/06/22 11:41:36 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.121 2002/06/22 15:41:39 venaas Exp $" );
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -1942,11 +1943,11 @@ PHP_FUNCTION(ldap_next_reference)
 }
 /* }}} */
 
+#ifdef HAVE_LDAP_PARSE_REFERENCE
 /* {{{ proto bool ldap_parse_reference(resource link, resource reference_entry, array referrals)
    Extract information from reference entry */
 PHP_FUNCTION(ldap_parse_reference)
 {
-#ifdef HAVE_LDAP_PARSE_REFERENCE
 	pval **link, **result_entry, **referrals;
 	ldap_linkdata *ld;
 	ldap_resultentry *resultentry;
@@ -1978,12 +1979,9 @@ PHP_FUNCTION(ldap_parse_reference)
 		ldap_value_free(lreferrals);
 	}
 	RETURN_TRUE;
-#else
-	php_error(E_ERROR, "ldap_parse_reference not available in this LDAP lib");
-	RETURN_FALSE;
-#endif
 }
 /* }}} */
+#endif
 
 /* {{{ proto bool ldap_rename(resource link, string dn, string newrdn, string newparent, boolean deleteoldrdn);
    Modify the name of an entry */
@@ -2021,14 +2019,12 @@ PHP_FUNCTION(ldap_rename)
 	RETURN_FALSE;
 }
 /* }}} */
-#endif
 
-#if LDAP_API_VERSION > 2000
+#ifdef HAVE_LDAP_START_TLS_S
 /* {{{ proto bool ldap_start_tls(resource link)
    Start TLS */
 PHP_FUNCTION(ldap_start_tls)
 {
-#ifdef HAVE_LDAP_START_TLS_S
 	pval **link;
 	ldap_linkdata *ld;
 
@@ -2045,13 +2041,10 @@ PHP_FUNCTION(ldap_start_tls)
 	} else {
 		RETURN_TRUE;
 	}
-#else
-	php_error(E_ERROR, "ldap_start_tls not available in this LDAP library");
-	RETURN_FALSE;
-#endif
 }
 /* }}} */
 #endif
+#endif /* ( LDAP_API_VERSION > 2000 ) || HAVE_NSLDAP */
 
 
 #if defined(LDAP_API_FEATURE_X_OPENLDAP) && defined(HAVE_3ARG_SETREBINDPROC)

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.14.2.6 2002/05/02 10:21:51 sniper Exp $
+dnl $Id: config.m4,v 1.14.2.7 2002/05/02 10:24:03 sniper Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -66,8 +66,7 @@ if test "$PHP_XSLT" != "no"; then
     done
 
     if test "$found_expat" = "no"; then
-      PHP_ADD_LIBRARY(xmlparse)
-      PHP_ADD_LIBRARY(xmltok)
+      AC_MSG_ERROR([expat not found. To build sablotron you need the expat library.])
     fi
 
     if test "$PHP_ICONV" = "no"; then

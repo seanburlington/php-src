@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.55 2005/01/25 22:50:39 iliaa Exp $ */
+/* $Id: pack.c,v 1.56 2005/02/21 09:17:30 hyanantha Exp $ */
 
 #include "php.h"
 
@@ -34,11 +34,7 @@
 #else
 #include <sys/socket.h>
 #endif
-#ifdef NEW_LIBC
 #include <sys/param.h>
-#else
-#include "netware/param.h"
-#endif
 #else
 #include <sys/param.h>
 #endif
@@ -49,8 +45,6 @@
 #if HAVE_PWD_H
 #ifdef PHP_WIN32
 #include "win32/pwd.h"
-#elif defined(NETWARE)
-#include "netware/pwd.h"
 #else
 #include <pwd.h>
 #endif

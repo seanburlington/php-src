@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.31 2002/02/28 08:27:05 sebastian Exp $
+// $Id: PEAR.php,v 1.32 2002/03/05 14:43:02 ssb Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -403,10 +403,8 @@ class PEAR
             }
         } else {
             if ($options === null) {
-                if (isset($this)) {
-                    if (isset($this->_default_error_options)) {
-                        $options = $this->_default_error_options;
-                    }
+                if (isset($this) && isset($this->_default_error_options)) {
+                    $options = $this->_default_error_options;
                 } else {
                     $options = $GLOBALS['_PEAR_default_error_options'];
                 }

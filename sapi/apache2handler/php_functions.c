@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.7 2003/03/25 11:50:18 edink Exp $ */
+/* $Id: php_functions.c,v 1.8 2003/03/25 15:35:08 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -480,6 +480,9 @@ PHP_INI_END()
 
 static PHP_MINIT_FUNCTION(apache)
 {
+#ifdef ZTS
+	ts_allocate_id(&php_apache2_info_id, sizeof(php_apache2_info_struct), (ts_allocate_ctor) NULL, NULL);
+#endif
 	REGISTER_INI_ENTRIES();
 	return SUCCESS;
 }

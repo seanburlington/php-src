@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.220 2003/12/16 10:29:11 phanto Exp $ */
+/* $Id: oci8.c,v 1.221 2003/12/16 11:15:55 phanto Exp $ */
 
 /* TODO list:
  *
@@ -106,13 +106,13 @@ static zend_class_entry *oci_coll_class_entry_ptr;
 #ifdef ZTS
 MUTEX_T mx_lock;
 
-#define mutex_alloc() tsrm_mutex_alloc()
+#define mutex_alloc(mutex) mutex = tsrm_mutex_alloc()
 #define mutex_free(mutex) tsrm_mutex_free(mutex)
 #define mutex_lock(mutex) tsrm_mutex_lock(mutex)
 #define mutex_unlock(mutex) tsrm_mutex_unlock(mutex)
 #define thread_id()	tsrm_thread_id()
 #else
-#define mutex_alloc()
+#define mutex_alloc(mutex)
 #define mutex_free(mutex)
 #define mutex_lock(mutex)
 #define mutex_unlock(mutex)
@@ -556,7 +556,7 @@ PHP_MINIT_FUNCTION(oci)
 
 #endif
 
-	mx_lock = mutex_alloc();
+	mutex_alloc(mx_lock);
 
 	persistent_servers = malloc(sizeof(TsHashTable));
 	persistent_sessions = malloc(sizeof(TsHashTable));
@@ -712,7 +712,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.220 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.221 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -2481,11 +2481,11 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 	smart_str_0(&hashed_details);
 
 	if (! exclusive) {
-		if (zend_ts_hash_find(persistent_sessions, hashed_details.c, hashed_details.len+1, &session_list) != SUCCESS) {
+		if (zend_ts_hash_find(persistent_sessions, hashed_details.c, hashed_details.len+1, (void **) &session_list) != SUCCESS) {
 			zend_llist tmp;
 			/* first session, set up a session list */
 			zend_llist_init(&tmp, sizeof(oci_session), (llist_dtor_func_t) _session_pcleanup, 1);
-			zend_ts_hash_update(persistent_sessions, hashed_details.c, hashed_details.len+1, &tmp, sizeof(zend_llist), &session_list);
+			zend_ts_hash_update(persistent_sessions, hashed_details.c, hashed_details.len+1, &tmp, sizeof(zend_llist), (void **) &session_list);
 		} else {
 			mutex_lock(mx_lock);
 
@@ -2683,8 +2683,11 @@ CLEANUP:
 /* {{{ _oci_close_session()
  */
 
-static int _session_compare(oci_session *sess1, oci_session *sess2)
+static int _session_compare(void *a, void *b)
 {
+	oci_session *sess1 = (oci_session*) a;
+	oci_session *sess2 = (oci_session*) b;
+	
 	return sess1->num = sess2->num;
 }
 

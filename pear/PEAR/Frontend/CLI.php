@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.3 2002/03/22 11:58:22 ssb Exp $ 
+  $Id: CLI.php,v 1.4 2002/03/22 12:47:13 ssb Exp $ 
 */
 
 require_once "PEAR.php";
@@ -187,7 +187,7 @@ class PEAR_Frontend_CLI extends PEAR
             }
         }
         if (empty($border)) {
-            $cellstart = ' ';
+            $cellstart = '';
             $cellend = ' ';
             $rowend = '';
             $padrowend = false;

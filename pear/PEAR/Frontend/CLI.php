@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.2 2002/03/22 11:57:45 ssb Exp $ 
+  $Id: CLI.php,v 1.3 2002/03/22 11:58:22 ssb Exp $ 
 */
 
 require_once "PEAR.php";
@@ -41,6 +41,7 @@ class PEAR_Frontend_CLI extends PEAR
         parent::PEAR();
 
         if (isset($_ENV['TERM'])) {
+            // XXX can use ncurses extension here, if available
             if (preg_match('/^(xterm|vt220)/', $_ENV['TERM'])) {
                 $this->term['bold'] = sprintf("%c%c%c%c", 27, 91, 49, 109);
                 $this->term['normal']=sprintf("%c%c%c", 27, 91, 109);

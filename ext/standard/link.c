@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.42.2.4 2002/12/31 16:35:31 sebastian Exp $ */
+/* $Id: link.c,v 1.42.2.5 2004/11/02 00:38:07 iliaa Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -64,6 +64,14 @@ PHP_FUNCTION(readlink)
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(filename);
+
+	if (PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(filename), NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
+		RETURN_FALSE;
+	}
+
+	if (php_check_open_basedir(Z_STRVAL_PP(filename) TSRMLS_CC)) {
+		RETURN_FALSE;
+	}
 
 	ret = readlink(Z_STRVAL_PP(filename), buff, MAXPATHLEN-1);
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.46 2003/06/30 03:11:03 sterling Exp $ */
+/* $Id: simplexml.c,v 1.47 2003/07/01 00:49:25 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -88,7 +88,7 @@ match_ns(php_sxe_object *sxe, xmlNodePtr node, xmlChar *name)
 	
 	prefix = xmlHashLookup(sxe->nsmap, node->ns->href);
 	if (prefix == NULL) {
-		prefix = node->ns->prefix;
+		prefix = (xmlChar*)node->ns->prefix;
 	}
 
 	if (prefix == NULL) {
@@ -801,7 +801,7 @@ sxe_object_get(zval *property TSRMLS_DC)
 }
 
 
-static zend_object_handlers sxe_object_handlers[] = {
+static zend_object_handlers sxe_object_handlers = {
 	ZEND_OBJECTS_STORE_HANDLERS,
 	sxe_property_read,
 	sxe_property_write,
@@ -1059,7 +1059,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.46 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.47 $");
 	php_info_print_table_end();
 
 }

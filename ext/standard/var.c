@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.105 2001/08/04 03:30:38 sas Exp $ */
+/* $Id: var.c,v 1.106 2001/08/04 05:22:55 sbergmann Exp $ */
 
 
 /* {{{ includes 
@@ -185,6 +185,7 @@ static inline void php_var_serialize_string(smart_str *buf, char *str, int len)
 static inline void php_var_serialize_class_name(smart_str *buf, zval **struc)
 {
 	PHP_CLASS_ATTRIBUTES;
+	TSRMLS_FETCH();
 
 	PHP_SET_CLASS_ATTRIBUTES(*struc);
 	smart_str_appendl(buf, "O:", 2);

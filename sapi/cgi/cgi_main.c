@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.250 2004/02/27 23:31:28 rasmus Exp $ */
+/* $Id: cgi_main.c,v 1.251 2004/03/12 14:05:59 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1079,6 +1079,7 @@ int main(int argc, char *argv[])
 			    in case some server does something different than above */
 			&& (!redirect_status_env || !getenv(redirect_status_env))
 			) {
+			SG(sapi_headers).http_response_code = 400;
 			PUTS("<b>Security Alert!</b> The PHP CGI cannot be accessed directly.\n\n\
 <p>This PHP CGI binary was compiled with force-cgi-redirect enabled.  This\n\
 means that a page will only be served up if the REDIRECT_STATUS CGI variable is\n\

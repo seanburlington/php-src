@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.139 2001/07/05 21:23:28 wez Exp $ */
+/* $Id: gd.c,v 1.140 2001/07/14 12:59:46 wez Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -2758,7 +2758,7 @@ void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode, int extende
 
 	
 #ifdef USE_GD_IMGSTRTTF
-# if HAVE_LIBGD20 & HAVE_LIBFREETYPE
+# if HAVE_LIBFREETYPE
 
 #if HAVE_GD_STRINGFTEX
 	if (extended)	{

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.80 2003/02/16 03:48:44 wez Exp $ */
+/* $Id: ftp.c,v 1.81 2003/02/28 07:25:14 sniper Exp $ */
 
 #include "php.h"
 
@@ -63,6 +63,10 @@
 
 #ifdef HAVE_SYS_SELECT_H
 #include <sys/select.h>
+#endif
+
+#if HAVE_OPENSSL_EXT
+#include <openssl/ssl.h>
 #endif
 
 #include "ftp.h"

@@ -16,13 +16,14 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.2 2003/02/27 23:50:54 iliaa Exp $ */
+/* $Id: xp_ssl.c,v 1.3 2003/02/28 07:25:14 sniper Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
 #include "streams/php_streams_int.h"
 #include "php_network.h"
 #include "php_openssl.h"
+#include <openssl/ssl.h>
 #include <openssl/err.h>
 
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_network.h,v 1.40 2003/02/27 17:43:37 wez Exp $ */
+/* $Id: php_network.h,v 1.41 2003/02/28 07:25:14 sniper Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -74,10 +74,6 @@ PHPAPI char *php_socket_strerror(long err, char *buf, size_t bufsize);
 
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>
-#endif
-
-#if HAVE_OPENSSL_EXT
-#include <openssl/ssl.h>
 #endif
 
 #ifdef HAVE_STDDEF_H

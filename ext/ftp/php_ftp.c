@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.83 2003/02/14 20:15:11 iliaa Exp $ */
+/* $Id: php_ftp.c,v 1.84 2003/02/28 07:25:14 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -33,6 +33,10 @@
 #include <sys/socket.h>
 #endif
 #endif
+#endif
+
+#if HAVE_OPENSSL_EXT
+#include <openssl/ssl.h>
 #endif
 
 #if HAVE_FTP

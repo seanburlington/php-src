@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.91 2004/02/03 03:10:28 iliaa Exp $ */
+/* $Id: snmp.c,v 1.92 2004/03/23 23:12:50 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -436,6 +436,7 @@ retry:
 					} else if (st == 2) {
 						*return_value = *snmpval;
 						zval_copy_ctor(return_value);
+						snmp_close(ss);
 						return;
 					} else if (st == 3) {
 						add_next_index_zval(return_value,snmpval); /* Add to returned array */

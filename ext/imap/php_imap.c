@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.62.2.1 2001/03/16 13:24:06 kalowsky Exp $ */
+/* $Id: php_imap.c,v 1.62.2.2 2001/04/24 14:17:41 chagenbu Exp $ */
 
 #define IMAP41
 
@@ -2748,12 +2748,18 @@ PHP_FUNCTION(imap_sort)
 	mypgm->next = NIL;
 	
 	slst = mail_sort(imap_le_struct->imap_stream, NIL, spg, mypgm, myargc >= 4 ? Z_LVAL_PP(flags) : NIL);
+	if (spg) {
+		mail_free_searchpgm(&spg);
+	}
+
 	
 	array_init(return_value);
-	for (sl = slst; *sl; sl++) { 
-		add_next_index_long(return_value, *sl);
+	if (slst != NIL && slst != 0) {
+		for (sl = slst; *sl; sl++) { 
+			add_next_index_long(return_value, *sl);
+		}
+		fs_give ((void **) &slst);
 	}
-	fs_give ((void **) &slst); 
 }
 /* }}} */
 

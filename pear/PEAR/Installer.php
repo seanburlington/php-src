@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.93 2003/08/04 13:31:35 cox Exp $
+// $Id: Installer.php,v 1.94 2003/08/05 12:28:57 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -552,7 +552,7 @@ class PEAR_Installer extends PEAR_Common
             $this->log(2, '+ tmp dir created at ' . $tmpdir);
 
             $tar = new Archive_Tar($pkgfile);
-            if (!@$tar->extract(array($tmpdir))) {
+            if (!@$tar->extract($tmpdir)) {
                 return $this->raiseError("unable to unpack $pkgfile");
             }
 

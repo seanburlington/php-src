@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.93 2003/06/13 14:59:01 andrey Exp $ */
+/* $Id: dba.c,v 1.94 2003/06/16 09:11:31 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,6 +37,7 @@
 #include "php_dba.h"
 #include "ext/standard/info.h"
 #include "ext/standard/php_string.h"
+#include "ext/standard/flock_compat.h"
 
 #include "php_gdbm.h"
 #include "php_ndbm.h"

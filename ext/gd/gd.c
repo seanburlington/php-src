@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.98 2000/11/04 20:43:53 mathieu Exp $ */
+/* $Id: gd.c,v 1.99 2000/11/06 22:00:07 neotron Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -538,6 +538,7 @@ PHP_FUNCTION (imagecreatefromstring)
 	gdImagePtr im;
 	int imtype;
 	char sig[8];
+	GDLS_FETCH();
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &data) == FAILURE)
 		WRONG_PARAM_COUNT;

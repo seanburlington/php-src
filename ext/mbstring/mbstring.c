@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.35 2003/11/05 04:24:54 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.142.2.36 2003/11/05 04:28:00 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"

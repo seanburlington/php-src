@@ -16,7 +16,7 @@
 // | Author: Andrei Zmievski <andrei@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Getopt.php,v 1.24 2003/06/30 10:09:44 cox Exp $
+// $Id: Getopt.php,v 1.25 2003/12/05 22:02:48 andrei Exp $
 
 require_once 'PEAR.php';
 
@@ -80,9 +80,7 @@ class Console_Getopt {
         if ($long_options) {
             sort($long_options);
         }
-        if (isset($args[0]{0}) && $args[0]{0} != '-') {
-            array_shift($args);
-        }
+
         reset($args);
         while (list($i, $arg) = each($args)) {
 

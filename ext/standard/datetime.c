@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.81 2001/12/11 15:30:28 sebastian Exp $ */
+/* $Id: datetime.c,v 1.82 2002/01/20 20:16:54 mfischer Exp $ */
 
 
 #include "php.h"
@@ -586,7 +586,11 @@ PHP_FUNCTION(localtime)
 			assoc_array = Z_LVAL_PP(assoc_array_arg);
 			break;
 	}
-	ta = php_localtime_r(&timestamp, &tmbuf);
+	if (NULL == (ta = php_localtime_r(&timestamp, &tmbuf))) {
+		php_error(E_WARNING, "%s(): invalid local time",
+				  get_active_function_name(TSRMLS_C));
+		RETURN_FALSE;
+	}
 	if (array_init(return_value) == FAILURE) {
 		php_error(E_ERROR, "Cannot prepare return array from localtime");
 		RETURN_FALSE;

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.374 2004/01/08 08:17:31 andi Exp $ */
+/* $Id: file.c,v 1.375 2004/01/14 14:25:01 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -907,7 +907,11 @@ PHPAPI PHP_FUNCTION(fgets)
 		WRONG_PARAM_COUNT;
 	}
 
-	php_stream_from_zval(stream, arg1);
+	php_stream_from_zval_no_verify(stream, arg1);
+	if (stream == NULL) {
+		/* we want false return value, rather than NULL */
+		goto exit_failed;
+	}
 
 	if (argc == 1) {
 		/* ask streams to give us a buffer of an appropriate size */

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.239 2003/08/13 02:01:46 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.240 2003/08/17 18:36:27 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -922,7 +922,6 @@ int main(int argc, char *argv[])
 	char *orig_optarg=optarg;
 	char *script_file=NULL;
 	zend_llist global_vars;
-	int interactive=0;
 #if FORCE_CGI_REDIRECT
 	int force_redirect = 1;
 	char *redirect_status_env = NULL;
@@ -1312,7 +1311,7 @@ consult the installation file that came with this distribution, or visit \n\
 
   				case 'a':	/* interactive mode */
 						printf("Interactive mode enabled\n\n");
-						interactive=1;
+						CG(interactive) = 1;
 						break;
 
 				case 'C': /* don't chdir to the script directory */

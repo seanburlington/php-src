@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.23 2002/03/16 01:28:08 wez Exp $ */
+/* $Id: recode.c,v 1.24 2002/03/18 11:46:00 wez Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -43,7 +43,7 @@ char *program_name = "php";
 
 #define SAFE_STRING(s) ((s)?(s):"")
 
-php_recode_globals recode_globals;
+ZEND_DECLARE_MODULE_GLOBALS(recode);
 extern int le_fp,le_pp;
 
 /* {{{ module stuff */
@@ -98,7 +98,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.23 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.24 $");
 	php_info_print_table_end();
 
 }

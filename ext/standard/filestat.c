@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.45 2000/09/16 05:02:06 zak Exp $ */
+/* $Id: filestat.c,v 1.46 2000/09/16 05:10:03 zak Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -224,8 +224,8 @@ PHP_FUNCTION(diskfreespace)
 }
 /* }}} */
 
-/* {{{ proto bool chown(string filename, mixed user)
-   Change file owner */
+/* {{{ proto bool chgrp(string filename, mixed group)
+   Change file group */
 PHP_FUNCTION(chgrp)
 {
 #ifndef WINDOWS

@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.26 2000/03/26 14:43:24 sterling Exp $ */
+/* $Id: snmp.c,v 1.27 2000/03/30 00:19:24 sterling Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)
@@ -363,8 +363,7 @@ PHP_FUNCTION(snmp_set_quick_print) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_long_ex(a1);
-	int set_val = (*a1)->value.lval;
-	snmp_set_quick_print(set_val);
+	snmp_set_quick_print((int)(*a1)->value.lval);
 }
 /* }}} */
 

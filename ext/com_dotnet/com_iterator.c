@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_iterator.c,v 1.1 2003/10/17 20:52:17 wez Exp $ */
+/* $Id: com_iterator.c,v 1.2 2003/10/17 21:03:01 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -64,9 +64,10 @@ static void com_iter_get_data(zend_object_iterator *iter, zval ***data TSRMLS_DC
 	zval **ptr_ptr;
 	zval *ptr;
 
+	/* sanity */
 	if (I->key == (ulong)-1) {
 		*data = NULL;
-		return FAILURE;
+		return;
 	}
 
 	MAKE_STD_ZVAL(ptr);
@@ -75,7 +76,7 @@ static void com_iter_get_data(zend_object_iterator *iter, zval ***data TSRMLS_DC
 	*ptr_ptr = ptr;
 	*data = ptr_ptr;
 
-	return SUCCESS;
+	return;
 }
 
 static int com_iter_get_key(zend_object_iterator *iter, char **str_key, uint *str_key_len,

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.529 2004/12/14 08:43:01 derick Exp $ -*- autoconf -*-
+dnl ## $Id: configure.in,v 1.530 2004/12/16 11:49:48 sniper Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -227,6 +227,11 @@ case $host_alias in
     LIBS="$LIBS -lbe -lroot";;
 *mips*)
     CPPFLAGS="$CPPFLAGS -D_XPG_IV";;
+*hpux*)
+    if test "$GCC" = "yes"; then
+      CPPFLAGS="$CPPFLAGS -D_XOPEN_SOURCE_EXTENDED"  
+    fi  
+    ;;
 esac
 
 

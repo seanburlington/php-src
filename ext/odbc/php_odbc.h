@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.h,v 1.7 1999/11/09 14:28:59 ssb Exp $ */
+/* $Id: php_odbc.h,v 1.8 1999/11/29 00:45:28 ssb Exp $ */
 
 #ifndef _PHP_ODBC_H
 #define _PHP_ODBC_H
@@ -115,6 +115,13 @@ PHP_FUNCTION(solid_fetch_prev);
 #define HAVE_SQL_EXTENDED_FETCH 1
 #include <sql.h>
 #include <sqlext.h>
+
+#elif defined(HAVE_DBMAKER) /* DBMaker */
+
+#define ODBC_TYPE "DBMaker"
+#define HAVE_SQL_EXTENDED_FETCH 1
+#include <odbc.h>
+
 
 #elif defined(HAVE_CODBC) /* Custom ODBC */
 

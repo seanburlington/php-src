@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.37 2001/12/11 15:32:06 sebastian Exp $ */
+/* $Id: pi3web_sapi.c,v 1.38 2002/02/02 19:53:42 sebastian Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -77,7 +77,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.37 2001/12/11 15:32:06 sebastian Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.38 2002/02/02 19:53:42 sebastian Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -384,7 +384,6 @@ DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 		file_handle.type = ZEND_HANDLE_FILENAME;
 		file_handle.opened_path = NULL;
 
-		CG(extended_info) = 0;
 		init_request_info(lpCB TSRMLS_CC);
 		php_request_startup(TSRMLS_C);
 

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.53.2.4 2001/11/13 11:27:42 jmoore Exp $ */
+/* $Id: math.c,v 1.53.2.5 2001/12/16 11:05:28 derick Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -414,7 +414,7 @@ PHP_FUNCTION(pow)
 		/* pow(?, float), this is the ^^ case */
 		convert_to_double_ex(zbase);
 
-		if ( Z_DVAL_PP(zbase) <= 0.0 ) {
+		if (Z_DVAL_PP(zbase) < 0.0) {
 			/* Note that with the old behaviour, php pow() returned bogus
 			   results. Try pow(-1, 2.5) in PHP <= 4.0.6 ... */
 			php_error(E_WARNING, "Trying to raise a nonpositive value to a broken power");

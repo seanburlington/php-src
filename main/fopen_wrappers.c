@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.168 2004/01/08 08:17:53 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.169 2004/02/10 16:08:54 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -131,15 +131,15 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 	if ((expand_filepath(path, resolved_name TSRMLS_CC) != NULL) && (expand_filepath(local_open_basedir, resolved_basedir TSRMLS_CC) != NULL)) {
 		/* Handler for basedirs that end with a / */
 		resolved_basedir_len = strlen(resolved_basedir);
-		if (basedir[strlen(basedir)-1] == PHP_DIR_SEPARATOR && resolved_basedir[resolved_basedir_len -1] != PHP_DIR_SEPARATOR) {
-			resolved_basedir[resolved_basedir_len] = '/';
+		if (resolved_basedir[resolved_basedir_len -1] != PHP_DIR_SEPARATOR) {
+			resolved_basedir[resolved_basedir_len] = PHP_DIR_SEPARATOR;
 			resolved_basedir[++resolved_basedir_len] = '\0';
 		}
 		
 		if (path[strlen(path)-1] == PHP_DIR_SEPARATOR) {
 			resolved_name_len = strlen(resolved_name);
 			if (resolved_name[resolved_name_len - 1] != PHP_DIR_SEPARATOR) {
-				resolved_name[resolved_name_len] = '/';
+				resolved_name[resolved_name_len] = PHP_DIR_SEPARATOR;
 				resolved_name[++resolved_name_len] = '\0';
 			}
 		}

@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.55 2001/12/22 03:04:32 zeev Exp $ */
+/* $Id: ereg.c,v 1.56 2001/12/23 15:56:41 mfischer Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -236,10 +236,10 @@ static void php_ereg(INTERNAL_FUNCTION_PARAMETERS, int icase)
 				add_index_bool(*array, i, 0);
 			}
 		}
-		efree(subs);
 		efree(buf);
 	}
 
+	efree(subs);
 	efree(string);
 	if (err == REG_NOMATCH) {
 		RETVAL_FALSE;

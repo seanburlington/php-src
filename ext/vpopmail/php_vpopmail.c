@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.c,v 1.22 2001/12/11 15:30:44 sebastian Exp $ */
+/* $Id: php_vpopmail.c,v 1.23 2002/01/31 17:02:47 bbonev Exp $ */
 
 /* TODO: move to config.m4 when support for old versions is ready or just
  * don't support rather old vpopmail. current version must bail out if
@@ -865,7 +865,7 @@ PHP_FUNCTION(vpopmail_alias_get)
 /* }}} */
 
 /* {{{ proto array vpopmail_alias_get_all(string domain)
-   get all lines of an alias for a domain */
+   get all alias lines for all users in a domain */
 PHP_FUNCTION(vpopmail_alias_get_all)
 {
 	zval **domain;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.7 2004/05/19 19:31:33 gschlossnagle Exp $ */
+/* $Id: mysql_driver.c,v 1.8 2004/05/19 20:34:57 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -143,6 +143,17 @@ static int pdo_mysql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 	/* handle for the server */
 	H->server = mysql_init(NULL);
 	dbh->driver_data = H;
+
+	/* handle MySQL options */
+	if (driver_options) {
+		long connect_timeout = pdo_attr_lval(driver_options, PDO_ATTR_TIMEOUT, 30 TSRMLS_CC);
+
+		if (mysql_options(H->server, MYSQL_OPT_CONNECT_TIMEOUT, (const char *)&connect_timeout)) {
+			pdo_mysql_error(H);
+			goto cleanup;
+		}
+	}
+
 	if(vars[2].optval && strcmp("localhost", vars[2].optval)) {
 		host = vars[2].optval;
 		port = atoi(vars[3].optval); 

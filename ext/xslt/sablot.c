@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.9 2001/06/06 13:05:52 rasmus Exp $ */
+/* $Id: sablot.c,v 1.10 2001/06/10 09:41:42 hirokawa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -609,23 +609,23 @@ static void free_processor(zend_rsrc_list_entry *rsrc)
 	}
 
 	/* Free Scheme handlers */
-	zval_ptr_dtor(&XSLT_SCHEME(handle).get_all);
-	zval_ptr_dtor(&XSLT_SCHEME(handle).open);
-	zval_ptr_dtor(&XSLT_SCHEME(handle).get);
-	zval_ptr_dtor(&XSLT_SCHEME(handle).put);
-	zval_ptr_dtor(&XSLT_SCHEME(handle).close);
+	XSLT_FUNCH_FREE(XSLT_SCHEME(handle).get_all);
+	XSLT_FUNCH_FREE(XSLT_SCHEME(handle).open);
+	XSLT_FUNCH_FREE(XSLT_SCHEME(handle).get);
+	XSLT_FUNCH_FREE(XSLT_SCHEME(handle).put);
+	XSLT_FUNCH_FREE(XSLT_SCHEME(handle).close);
 	/* Free SAX handlers */
-	zval_ptr_dtor(&XSLT_SAX(handle).doc_start);
-	zval_ptr_dtor(&XSLT_SAX(handle).element_start);
-	zval_ptr_dtor(&XSLT_SAX(handle).element_end);
-	zval_ptr_dtor(&XSLT_SAX(handle).namespace_start);
-	zval_ptr_dtor(&XSLT_SAX(handle).namespace_end);
-	zval_ptr_dtor(&XSLT_SAX(handle).comment);
-	zval_ptr_dtor(&XSLT_SAX(handle).pi);
-	zval_ptr_dtor(&XSLT_SAX(handle).characters);
-	zval_ptr_dtor(&XSLT_SAX(handle).doc_end);
+	XSLT_FUNCH_FREE(XSLT_SAX(handle).doc_start);
+	XSLT_FUNCH_FREE(XSLT_SAX(handle).element_start);
+	XSLT_FUNCH_FREE(XSLT_SAX(handle).element_end);
+	XSLT_FUNCH_FREE(XSLT_SAX(handle).namespace_start);
+	XSLT_FUNCH_FREE(XSLT_SAX(handle).namespace_end);
+	XSLT_FUNCH_FREE(XSLT_SAX(handle).comment);
+	XSLT_FUNCH_FREE(XSLT_SAX(handle).pi);
+	XSLT_FUNCH_FREE(XSLT_SAX(handle).characters);
+	XSLT_FUNCH_FREE(XSLT_SAX(handle).doc_end);
 	/* Free error handler */
-	zval_ptr_dtor(&XSLT_ERROR(handle));
+	XSLT_FUNCH_FREE(XSLT_ERROR(handle));
 
 	/* Free error message, if any */
 	if (XSLT_ERRSTR(handle)) {

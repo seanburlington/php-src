@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.17 2003/04/26 21:34:47 wez Exp $ */
+/* $Id: file.c,v 1.279.2.18 2003/04/28 15:11:14 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2121,49 +2121,50 @@ PHP_FUNCTION(fgetcsv)
 	php_stream *stream;
 
 	switch(ZEND_NUM_ARGS()) {
-	case 2:
-		if (zend_get_parameters_ex(2, &fd, &bytes) == FAILURE) {
-			WRONG_PARAM_COUNT;
-		}
-		break;
+		case 2:
+			if (zend_get_parameters_ex(2, &fd, &bytes) == FAILURE) {
+				WRONG_PARAM_COUNT;
+			}
+			break;
 
-	case 3:
-		if (zend_get_parameters_ex(3, &fd, &bytes, &p_delim) == FAILURE) {
+		case 3:
+			if (zend_get_parameters_ex(3, &fd, &bytes, &p_delim) == FAILURE) {
+				WRONG_PARAM_COUNT;
+			}
+			break;
+
+		case 4:
+			if (zend_get_parameters_ex(4, &fd, &bytes, &p_delim, &p_enclosure) == FAILURE) {
+				WRONG_PARAM_COUNT;
+			}
+			break;
+
+		default:
 			WRONG_PARAM_COUNT;
-		}
+			/* NOTREACHED */
+			break;
+	}
+
+	if (ZEND_NUM_ARGS() >= 3) {
 		convert_to_string_ex(p_delim);
 		/* Make sure that there is at least one character in string */
 		if (Z_STRLEN_PP(p_delim) < 1) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Third parameter must be a character");
-			return;
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "delimiter must be a character");
+			RETURN_FALSE;
 		}
 		/* use first character from string */
 		delimiter = Z_STRVAL_PP(p_delim)[0];
-		break;
+	}
 
-	case 4:
-		if (zend_get_parameters_ex(4, &fd, &bytes, &p_delim, &p_enclosure) == FAILURE) {
-			WRONG_PARAM_COUNT;
-		}
-		convert_to_string_ex(p_delim);
-		/* Make sure that there is at least one character in string */
-		if (Z_STRLEN_PP(p_delim) < 1) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Third parameter must be a character");
-			return;
-		}
-		/* use first character from string */
-		delimiter = Z_STRVAL_PP(p_delim)[0];
-
+	if (ZEND_NUM_ARGS() >= 4) {
 		convert_to_string_ex(p_enclosure);
+		/* Make sure that there is at least one character in string */
+		if (Z_STRLEN_PP(p_enclosure) < 1) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "enclosure must be a character");
+			RETURN_FALSE;
+		}
 		/* use first character from string */
 		enclosure = Z_STRVAL_PP(p_enclosure)[0];
-		
-		break;
-
-	default:
-		WRONG_PARAM_COUNT;
-		/* NOTREACHED */
-		break;
 	}
 
 	php_stream_from_zval(stream, fd);

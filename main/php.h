@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.51 1999/12/17 19:16:34 zeev Exp $ */
+/* $Id: php.h,v 1.52 1999/12/21 19:40:26 andrei Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -246,7 +246,7 @@ extern int ap_vsnprintf(char *, size_t, const char *, va_list);
 #define DONT_FREE 0
 #define DO_FREE 1
 
-#define PHP3_MIME_TYPE "application/x-httpd-php3"
+#define PHP_MIME_TYPE "application/x-httpd-php"
 
 /* macros */
 #undef MIN

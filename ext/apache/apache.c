@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache.c,v 1.24 1999/12/18 22:34:54 zeev Exp $ */
+/* $Id: apache.c,v 1.25 1999/12/21 19:40:27 andrei Exp $ */
 #include "php.h"
 #include "ext/standard/head.h"
 #include "php_globals.h"
@@ -297,7 +297,7 @@ PHP_FUNCTION(virtual)
 
 	/* Cannot include another PHP file because of global conflicts */
 	if (rr->content_type &&
-		!strcmp(rr->content_type, PHP3_MIME_TYPE)) {
+		!strcmp(rr->content_type, PHP_MIME_TYPE)) {
 		php_error(E_WARNING, "Cannot include a PHP file "
 			  "(use <code>&lt;?include \"%s\"&gt;</code> instead)", (*filename)->value.str.val);
 		if (rr) destroy_sub_req (rr);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.186 2001/01/22 21:39:55 andrei Exp $ */
+/* $Id: string.c,v 1.187 2001/02/02 13:47:02 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2800,6 +2800,8 @@ PHPAPI void php_strip_tags(char *rbuf, int len, int state, char *allow, int allo
 						state = 0;
 						tp = tbuf;
 					}
+				} else {
+					*(rp++) = c;
 				}
 				break;
 

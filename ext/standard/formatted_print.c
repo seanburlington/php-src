@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.59.2.2 2003/02/13 17:26:02 iliaa Exp $ */
+/* $Id: formatted_print.c,v 1.59.2.3 2003/02/15 15:59:13 moriyoshi Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -158,12 +158,11 @@ php_sprintf_appendstring(char **buffer, int *pos, int *size, char *add,
 						   int alignment, int len, int sign, int expprec)
 {
 	register int npad;
+	int req_size;
+	int copy_len;
 
-	if (max_width && min_width) {
-		expprec = max_width = 0;	
-	}
-
-	npad = min_width - MIN(len, (expprec ? max_width : len));
+	copy_len = (expprec ? MIN(max_width, len) : len);
+	npad = min_width - copy_len;
 
 	if (npad < 0) {
 		npad = 0;
@@ -171,11 +170,11 @@ php_sprintf_appendstring(char **buffer, int *pos, int *size, char *add,
 	
 	PRINTF_DEBUG(("sprintf: appendstring(%x, %d, %d, \"%s\", %d, '%c', %d)\n",
 				  *buffer, *pos, *size, add, min_width, padding, alignment));
-	if ((max_width == 0) && (! expprec)) {
-		max_width = MAX(min_width, len);
-	}
-	if ((*pos + max_width) >= *size) {
-		while ((*pos + max_width) >= *size) {
+
+	req_size = *pos + MAX(min_width, copy_len) + 1;
+
+	if (req_size > *size) {
+		while (req_size > *size) {
 			*size <<= 1;
 		}
 		PRINTF_DEBUG(("sprintf ereallocing buffer to %d bytes\n", *size));
@@ -192,8 +191,8 @@ php_sprintf_appendstring(char **buffer, int *pos, int *size, char *add,
 		}
 	}
 	PRINTF_DEBUG(("sprintf: appending \"%s\"\n", add));
-	memcpy(&(*buffer)[*pos], add, MIN(max_width, len)+1);
-	*pos += MIN(max_width, len);
+	memcpy(&(*buffer)[*pos], add, copy_len + 1);
+	*pos += copy_len;
 	if (alignment == ALIGN_LEFT) {
 		while (npad--) {
 			(*buffer)[(*pos)++] = padding;

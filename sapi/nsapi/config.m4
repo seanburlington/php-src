@@ -1,8 +1,8 @@
-dnl ## $Id: config.m4,v 1.6 2000/05/31 13:15:58 sas Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.7 2000/06/18 15:30:55 sas Exp $ -*- sh -*-
 
 AC_MSG_CHECKING(for NSAPI support)
 AC_ARG_WITH(nsapi,
-[  --with-nsapi=DIR             Specify path to the installed Netscape],[
+[  --with-nsapi=DIR        Specify path to the installed Netscape],[
   PHP_NSAPI=$withval
 ],[
   PHP_NSAPI=no

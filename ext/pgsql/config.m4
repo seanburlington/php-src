@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.34.4.1 2004/12/30 07:02:18 sniper Exp $
+dnl $Id: config.m4,v 1.34.4.2 2005/04/03 13:06:58 tony2001 Exp $
 dnl
 
 PHP_ARG_WITH(pgsql,for PostgreSQL support,
@@ -54,7 +54,7 @@ if test "$PHP_PGSQL" != "no"; then
   AC_CHECK_LIB(pq, PQcmdTuples,AC_DEFINE(HAVE_PQCMDTUPLES,1,[Broken libpq under windows]))
   AC_CHECK_LIB(pq, PQoidValue,AC_DEFINE(HAVE_PQOIDVALUE,1,[Older PostgreSQL]))
   AC_CHECK_LIB(pq, PQclientEncoding,AC_DEFINE(HAVE_PQCLIENTENCODING,1,[PostgreSQL 7.0.x or later]))
-  AC_CHECK_LIB(pq, pg_encoding_to_char,AC_DEFINE(HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT,1,[Whether libpq is compiled with --enable-multibye]))
+  AC_CHECK_LIB(pq, pg_encoding_to_char,AC_DEFINE(HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT,1,[Whether libpq is compiled with --enable-multibyte]))
   LIBS=$old_LIBS
   LDFLAGS=$old_LDFLAGS
 

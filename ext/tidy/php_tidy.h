@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_tidy.h,v 1.23 2005/02/07 23:03:49 rasmus Exp $ */
+/* $Id: php_tidy.h,v 1.24 2005/02/08 05:25:48 rasmus Exp $ */
 
 #ifndef PHP_TIDY_H
 #define PHP_TIDY_H
@@ -40,7 +40,6 @@ extern zend_module_entry tidy_module_entry;
 #define TIDY_ATTR_ME(name, param) TIDY_METHOD_MAP(name, tam_ ##name, param)
 
 PHP_MINIT_FUNCTION(tidy);
-PHP_MSHUTDOWN_FUNCTION(tidy);
 PHP_RINIT_FUNCTION(tidy);
 PHP_MINFO_FUNCTION(tidy);
 

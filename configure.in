@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.143 2000/06/10 10:10:23 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.144 2000/06/11 10:38:37 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -790,7 +790,7 @@ changequote([,])
 
 PHP_CONFIGURE_PART(Generating files)
 
-PHP_FAST_GENERATE
+PHP_GEN_CONFIG_VARS
 touch .deps
 
 #libphp4.module 
@@ -799,6 +799,8 @@ AC_OUTPUT([php4.spec Zend/Makefile
 		   $PHP_OUTPUT_FILES
 		   ], [], [
 
+PHP_GEN_MAKEFILES
+		   
 if test ! -f $srcdir/ext/bcmath/number.c; then
 	echo "creating number.c"
 	echo "/* Dummy File */" > $srcdir/ext/bcmath/number.c

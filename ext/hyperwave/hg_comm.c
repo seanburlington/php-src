@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hg_comm.c,v 1.5 1999/07/16 13:12:48 zeev Exp $ */
+/* $Id: hg_comm.c,v 1.6 1999/07/19 18:58:44 andrey Exp $ */
 
 /* #define HW_DEBUG */
 
@@ -50,7 +50,7 @@
 #include <errno.h>
 #include <alloc.h>
 #include "hg_comm.h"
-#include "DList.h"
+#include "dlist.h"
 #include "php.h"
 #include "head.h"
 

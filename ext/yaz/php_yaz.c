@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.65 2003/02/28 06:33:03 sniper Exp $ */
+/* $Id: php_yaz.c,v 1.66 2003/02/28 07:17:46 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -33,9 +33,9 @@
 #include <yaz/yaz-version.h>
 
 #ifndef YAZ_VERSIONL
-#error YAZ version 1.9 or later must be used.
-#elif YAZ_VERSIONL < 0x010900
-#error YAZ version 1.9 or later must be used.
+#error YAZ version 2.0 or later must be used.
+#elif YAZ_VERSIONL < 0x020000
+#error YAZ version 2.0 or later must be used.
 #endif
 
 #ifdef PHP_WIN32

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.110.2.4 2004/08/26 18:55:54 dmitry Exp $ */
+/* $Id: soap.c,v 1.110.2.5 2004/09/09 09:54:06 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -287,9 +287,6 @@ static zend_function_entry soap_server_functions[] = {
 ZEND_BEGIN_ARG_INFO(__call_args, 0)
 	ZEND_ARG_PASS_INFO(0)
 	ZEND_ARG_PASS_INFO(0)
-	ZEND_ARG_PASS_INFO(0)
-	ZEND_ARG_PASS_INFO(0)
-	ZEND_ARG_PASS_INFO(1)
 ZEND_END_ARG_INFO()
 #else
 unsigned char __call_args[] = { 5, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_FORCE };

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.69 2001/02/01 09:36:52 ssb Exp $ */
+/* $Id: php_mysql.c,v 1.70 2001/02/18 16:59:18 eschmid Exp $ */
 
 
 /* TODO:
@@ -1927,7 +1927,7 @@ PHP_FUNCTION(mysql_field_table)
 /* }}} */
 
 
-/* {{{ proto int mysql_field_len(int result, int field_offet)
+/* {{{ proto int mysql_field_len(int result, int field_offset)
    Returns the length of the specified field */
 PHP_FUNCTION(mysql_field_len)
 {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.404 2003/12/03 01:31:56 pollita Exp $ */
+/* $Id: string.c,v 1.405 2003/12/10 06:04:15 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1100,7 +1100,7 @@ PHPAPI void php_basename(char *s, size_t len, char *suffix, size_t sufflen, char
 	while(c>=s) {
 		if(*c == '/'
 #ifdef PHP_WIN32
-		   || ( *c == '\\' && !IsDBCSLeadByte(*c-1))
+		   || ( *c == '\\' && !IsDBCSLeadByte(*(c-1)))
 #endif			
 		   ) {
 			c++;

@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.271.2.12 2005/01/19 17:36:15 sniper Exp $ -*- autoconf -*-
+dnl $Id: acinclude.m4,v 1.271.2.13 2005/01/22 01:36:55 sniper Exp $ -*- autoconf -*-
 dnl
 dnl This file contains local autoconf functions.
 
@@ -1575,7 +1575,7 @@ AC_DEFUN([PHP_CHECK_LIBRARY], [
   ],[
     LDFLAGS=$save_old_LDFLAGS
     ext_shared=$save_ext_shared
-    unset ac_cv_func_$1
+    unset ac_cv_lib_$1[]_$2
     $4
   ])dnl
 ])

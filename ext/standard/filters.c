@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.29 2003/03/02 08:39:01 moriyoshi Exp $ */
+/* $Id: filters.c,v 1.30 2003/03/05 17:51:33 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1507,6 +1507,8 @@ static php_stream_filter_status_t strfilter_convert_filter(
 		if (out_buf_size - ocnt > 0) {
 			new_bucket = php_stream_bucket_new(stream, out_buf, (out_buf_size - ocnt), 1, inst->persistent TSRMLS_CC);
 			php_stream_bucket_append(buckets_out, new_bucket TSRMLS_CC);
+		} else {
+			pefree(out_buf, inst->persistent);
 		}
 	} else {
 		while (buckets_in->head != NULL) {

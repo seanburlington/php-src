@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.90 2004/01/08 08:17:26 andi Exp $ */
+/* $Id: snmp.c,v 1.91 2004/02/03 03:10:28 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -582,7 +582,7 @@ static void php_snmp(INTERNAL_FUNCTION_PARAMETERS, int st)
 	}
 
 	snmp_sess_init(&session);
-	strcpy (hostname, Z_STRVAL_PP(a1));
+	strlcpy(hostname, Z_STRVAL_PP(a1), sizeof(hostname));
 	if ((pptr = strchr (hostname, ':'))) {
 		remote_port = strtol (pptr + 1, NULL, 0);
 	}
@@ -907,7 +907,7 @@ static void php_snmpv3(INTERNAL_FUNCTION_PARAMETERS, int st)
 
 	/* Reading the hostname and its optional non-default port number */
 	convert_to_string_ex(a1);
-	strcpy(hostname, Z_STRVAL_PP(a1));
+	strlcpy(hostname, Z_STRVAL_PP(a1), sizeof(hostname));
 	if ((pptr = strchr (hostname, ':'))) {
 		remote_port = strtol (pptr + 1, NULL, 0);
 	}

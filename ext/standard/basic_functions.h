@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.48 2000/03/04 02:59:14 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.49 2000/03/04 17:28:16 andrei Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -55,6 +55,8 @@ PHP_FUNCTION(usleep);
 PHP_FUNCTION(flush);
 PHP_FUNCTION(gettype);
 PHP_FUNCTION(settype);
+PHP_FUNCTION(ip2long);
+PHP_FUNCTION(long2ip);
 
 /* system functions */
 PHP_FUNCTION(getenv);

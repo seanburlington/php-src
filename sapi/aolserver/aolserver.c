@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.59 2001/08/05 01:42:44 zeev Exp $ */
+/* $Id: aolserver.c,v 1.60 2001/08/05 14:27:38 sas Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -213,7 +213,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	TSRMLS_FETCH();
 	
 	php_info_print_table_start();
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.59 2001/08/05 01:42:44 zeev Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.60 2001/08/05 14:27:38 sas Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -311,7 +311,6 @@ php_ns_sapi_register_variables(zval *track_vars_array TSRMLS_DC)
 	int i;
 	char buf[NS_BUF_SIZE + 1];
 	char *tmp;
-	TSRMLS_FETCH();
 
 	for(i = 0; i < Ns_SetSize(NSG(conn->headers)); i++) {
 		char *key = Ns_SetKey(NSG(conn->headers), i);
@@ -412,8 +411,6 @@ static int
 php_ns_module_main(TSRMLS_D)
 {
 	zend_file_handle file_handle;
-	TSRMLS_FETCH();
-	TSRMLS_FETCH();
 
 	file_handle.type = ZEND_HANDLE_FILENAME;
 	file_handle.filename = SG(request_info).path_translated;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: caudium.c,v 1.20 2001/08/05 13:26:54 sebastian Exp $ */
+/* $Id: caudium.c,v 1.21 2001/08/05 14:27:38 sas Exp $ */
 
 #include "php.h"
 #ifdef HAVE_CAUDIUM
@@ -356,7 +356,6 @@ php_caudium_sapi_header_handler(sapi_header_struct *sapi_header,
 INLINE static int
 php_caudium_low_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 {
-  TSRMLS_FETCH();
   struct pike_string *ind;
   struct svalue *s_headermap;
   GET_THIS();
@@ -442,7 +441,7 @@ static void php_info_caudium(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.20 2001/08/05 13:26:54 sebastian Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.21 2001/08/05 14:27:38 sas Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());

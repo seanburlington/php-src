@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.45 2004/10/17 18:41:30 iliaa Exp $ */
+/* $Id: string.c,v 1.333.2.46 2004/11/03 23:36:02 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -133,7 +133,7 @@ static char *php_bin2hex(const unsigned char *old, const size_t oldlen, size_t *
 #ifdef HAVE_LOCALECONV
 /* {{{ localeconv_r
  * glibc's localeconv is not reentrant, so lets make it so ... sorta */
-struct lconv *localeconv_r(struct lconv *out)
+PHPAPI struct lconv *localeconv_r(struct lconv *out)
 {
 	struct lconv *res;
 
@@ -3138,18 +3138,6 @@ PHP_FUNCTION(setlocale)
 			
 			efree(args);
 			RETVAL_STRING(retval, 1);
-			
-			if (cat == LC_NUMERIC || cat == LC_ALL) {
-				struct lconv lc;
-				localeconv_r(&lc);
-			
-				EG(float_separator)[0] = (lc.decimal_point)[0];
-
-				if ((lc.decimal_point)[0] != '.') {
-					/* set locale back to C */
-					setlocale(LC_NUMERIC, "C");	
-				}
-			}
 			
 			return;
 		}

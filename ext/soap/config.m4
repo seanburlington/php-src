@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2002/07/07 23:03:43 shane Exp $
+dnl $Id: config.m4,v 1.2 2002/08/07 03:03:09 rodif_bl Exp $
 dnl config.m4 for extension soap
 
 dnl Comments in this file start with the string 'dnl'.

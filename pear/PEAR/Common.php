@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.33 2002/02/28 08:27:15 sebastian Exp $
+// $Id: Common.php,v 1.34 2002/03/21 19:12:49 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -142,11 +142,8 @@ class PEAR_Common extends PEAR
         $this->cdata = '';
         switch ($name) {
             case 'dir':
-                if (isset($this->dir_names)) {
+                if ($attribs['name'] != '/') {
                     $this->dir_names[] = $attribs['name'];
-                } else {
-                    // Don't add the root dir
-                    $this->dir_names = array();
                 }
                 if (isset($attribs['baseinstalldir'])) {
                     $this->dir_install = $attribs['baseinstalldir'];
@@ -278,7 +275,7 @@ class PEAR_Common extends PEAR
             case 'file':
                 $this->current_file = $data;
                 $path = '';
-                if (!empty($this->dir_names)) {
+                if (count($this->dir_names)) {
                     foreach ($this->dir_names as $dir) {
                         $path .= $dir . DIRECTORY_SEPARATOR;
                     }
@@ -370,6 +367,7 @@ class PEAR_Common extends PEAR
         $this->destdir = '';
         $this->pkginfo['filelist'] = array();
         $this->filelist =& $this->pkginfo['filelist'];
+        $this->dir_names = array();
         $this->in_changelog = false;
 
         // read the whole thing so we only get one cdata callback

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: flock_compat.c,v 1.21 2002/11/12 09:09:55 helly Exp $ */
+/* $Id: flock_compat.c,v 1.22 2002/11/23 19:03:21 derick Exp $ */
 
 #include <php.h>
 #include <errno.h>
@@ -25,6 +25,7 @@
 #if HAVE_STRUCT_FLOCK
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/file.h>
 #endif
 
 #ifdef PHP_WIN32

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.53 2002/06/26 21:44:58 sniper Exp $
+dnl $Id: config.m4,v 1.54 2002/10/21 00:35:17 sniper Exp $
 dnl
 
 dnl
@@ -291,7 +291,7 @@ fi
 if test -z "$ODBC_TYPE"; then
 AC_MSG_CHECKING(for Birdstep support)
 AC_ARG_WITH(birdstep,
-[  --with-birdstep[=DIR]    Include Birdstep support.  DIR is the Birdstep base
+[  --with-birdstep[=DIR]   Include Birdstep support.  DIR is the Birdstep base
                           install directory, defaults to /usr/local/birdstep.],
 [
   PHP_WITH_SHARED

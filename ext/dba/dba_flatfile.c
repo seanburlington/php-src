@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_flatfile.c,v 1.8.2.5 2003/12/16 21:41:57 helly Exp $ */
+/* $Id: dba_flatfile.c,v 1.8.2.6 2003/12/17 09:02:06 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -41,7 +41,10 @@
 
 DBA_OPEN_FUNC(flatfile)
 {
-	int fd, flags;
+	int fd;
+#ifdef F_SETFL
+	int flags;
+#endif
 
 	if (info->mode != DBA_READER) {
 		if (SUCCESS != php_stream_cast(info->fp, PHP_STREAM_AS_FD, (void*)&fd, 1)) {

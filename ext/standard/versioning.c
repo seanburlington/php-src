@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: versioning.c,v 1.10 2002/07/05 00:55:02 ssb Exp $ */
+/* $Id: versioning.c,v 1.11 2002/07/05 01:00:05 ssb Exp $ */
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -99,17 +99,17 @@ compare_special_version_forms(char *form1, char *form2)
 		{"RC", 3},
 		{"#", 4},
 		{"pl", 5},
-		NULL,
+		{NULL, 0},
 	};
 	special_forms_t *pp;
 
-	for (pp = special_forms; pp; pp++) {
+	for (pp = special_forms; pp && pp->name; pp++) {
 		if (strncmp(form1, pp->name, strlen(pp->name)) == 0) {
 			found1 = pp->order;
 			break;
 		}
 	}
-	for (pp = special_forms; pp; pp++) {
+	for (pp = special_forms; pp && pp->name; pp++) {
 		if (strncmp(form2, pp->name, strlen(pp->name)) == 0) {
 			found2 = pp->order;
 			break;

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.55.2.12 2005/02/02 10:34:21 dmitry Exp $ */
+/* $Id: php_http.c,v 1.55.2.13 2005/03/16 20:31:01 iliaa Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -1104,13 +1104,13 @@ static int get_http_body(php_stream *stream, int close, char *headers,  char **r
 	if (!close) {
 		header = get_http_header_value(headers, "Connection: ");
 		if (header) {
-			if(!strncmp(header, "close", sizeof("close")-1)) header_close = 1;
+			if(!strncasecmp(header, "close", sizeof("close")-1)) header_close = 1;
 			efree(header);
 		}
 	}
 	header = get_http_header_value(headers, "Transfer-Encoding: ");
 	if (header) {
-		if(!strncmp(header, "chunked", sizeof("chunked")-1)) header_chunked = 1;
+		if(!strncasecmp(header, "chunked", sizeof("chunked")-1)) header_chunked = 1;
 		efree(header);
 	}
 	header = get_http_header_value(headers, "Content-Length: ");

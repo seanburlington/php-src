@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.22 2003/07/08 10:32:23 cox Exp $
+// $Id: Dependency.php,v 1.23 2003/08/03 13:44:36 cox Exp $
 
 require_once "PEAR.php";
 
@@ -139,6 +139,7 @@ class PEAR_Dependency
                     $errmsg = "requires package `$name' " .
                         $this->signOperator($relation) . " $req";
                     $code = $this->codeFromRelation($relation, $version, $req);
+                    return PEAR_DEPENDENCY_MISSING;
                 }
                 return false;
         }

@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Build.php,v 1.2 2002/05/28 01:01:43 ssb Exp $
+// $Id: Build.php,v 1.2.2.1 2002/05/29 03:38:19 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Builder.php";
@@ -56,6 +56,7 @@ Builds one or more extensions contained in a package.'
             $params[0] = 'package.xml';
         }
         $builder = &new PEAR_Builder($this->ui);
+        $this->verbose = $this->config->get('verbose');
         $err = $builder->build($params[0], array(&$this, 'buildCallback'));
         if (PEAR::isError($err)) {
             return $err;
@@ -65,10 +66,9 @@ Builds one or more extensions contained in a package.'
 
     function buildCallback($what, $data)
     {
-        switch ($what) {
-            case 'output':
-                $this->ui->displayLine(rtrim($data));
-                break;
+        if (($what == 'cmdoutput' && $this->verbose > 1) ||
+            ($what == 'output' && $this->verbose > 0)) {
+            $this->ui->outputData(rtrim($data), 'build');
         }
     }
 }

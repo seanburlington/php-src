@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.5 2002/02/28 08:27:16 sebastian Exp $
+// $Id: Dependency.php,v 1.6 2002/04/09 14:12:12 cox Exp $
 
 /**
 * Methods for dependencies check. Based on Stig's dependencies RFC
@@ -29,7 +29,10 @@ require_once "PEAR.php";
 
 class PEAR_Dependency
 {
-
+    function PEAR_Dependency(&$registry)
+    {
+        $this->registry = &$registry;
+    }
     /**
     * This method maps the xml dependency definition to the
     * PEAR_dependecy one
@@ -87,9 +90,6 @@ class PEAR_Dependency
      */
     function checkPackage($name, $req = null, $relation = 'has')
     {
-        if (empty($this->registry)) {
-            $this->registry = new PEAR_Registry;
-        }
         if (!$this->registry->packageExists($name)) {
             return "'$name' PEAR package is not installed";
         }

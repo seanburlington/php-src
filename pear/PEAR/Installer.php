@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.45 2002/04/09 08:10:11 ssb Exp $
+// $Id: Installer.php,v 1.46 2002/04/09 14:12:12 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -238,7 +238,7 @@ class PEAR_Installer extends PEAR_Common
         // - soft          : fail silently
         //
         if (empty($this->registry)) {
-            $this->registry = new PEAR_Registry($this->config->get('php_dir'));
+            $this->registry = &new PEAR_Registry($this->config->get('php_dir'));
         }
         $oldcwd = getcwd();
         $need_download = false;
@@ -453,7 +453,7 @@ class PEAR_Installer extends PEAR_Common
 
     function checkDeps(&$pkginfo)
     {
-        $deps = new PEAR_Dependency;
+        $deps = &new PEAR_Dependency($this->registry);
         $errors = null;
         if (is_array($pkginfo['release_deps'])) {
             foreach($pkginfo['release_deps'] as $dep) {

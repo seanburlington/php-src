@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.115 2002/10/21 22:54:37 wez Exp $ */
+/* $Id: streams.c,v 1.116 2002/10/22 15:34:50 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -644,8 +644,8 @@ PHPAPI char *php_stream_locate_eol(php_stream *stream, char *buf, size_t buf_len
 	if (stream->flags & PHP_STREAM_FLAG_DETECT_EOL) {
 		cr = memchr(readptr, '\r', avail);
 		lf = memchr(readptr, '\n', avail);
-
-		if (cr && lf != cr + 1) {
+	
+		if (cr && lf != cr + 1 && !(lf && lf < cr)) {
 			/* mac */
 			stream->flags ^= PHP_STREAM_FLAG_DETECT_EOL;
 			stream->flags |= PHP_STREAM_FLAG_EOL_MAC;

@@ -16,11 +16,27 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_image.h,v 1.8 2002/02/28 08:26:47 sebastian Exp $ */
+/* $Id: php_image.h,v 1.9 2002/03/04 07:21:30 rasmus Exp $ */
 
 #ifndef PHP_IMAGE_H
 #define PHP_IMAGE_H
 
 PHP_FUNCTION(getimagesize);
+
+/* {{{ enum image_filetype
+   This enum is used to have ext/standard/image.c and ext/exif/exif.c use
+   the same constants for file types.
+*/
+typedef enum
+{ IMAGE_FILETYPE_UNKNOWN=0,
+  IMAGE_FILETYPE_GIF=1,
+  IMAGE_FILETYPE_JPEG,
+  IMAGE_FILETYPE_PNG,
+  IMAGE_FILETYPE_SWF,
+  IMAGE_FILETYPE_PSD,
+  IMAGE_FILETYPE_BMP,
+  IMAGE_FILETYPE_TIFF
+} image_filetype;
+/* }}} */
 
 #endif /* PHP_IMAGE_H */

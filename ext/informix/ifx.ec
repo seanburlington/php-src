@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ifx.ec,v 1.69.2.22 2003/11/02 23:14:06 edink Exp $ */
+/* $Id: ifx.ec,v 1.69.2.23 2004/05/30 17:57:36 iliaa Exp $ */
 
 /* -------------------------------------------------------------------
  * if you want a function reference : "grep '^\*\*' ifx.ec" will give
@@ -36,6 +36,10 @@
 
 /* prevent mod_ssl.h's header file from being included. */
 #define AP_HOOK_H
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_globals.h"

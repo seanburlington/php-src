@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.191 2002/08/08 20:19:33 hholzgra Exp $ */
+/* $Id: info.c,v 1.192 2002/08/14 23:48:52 helly Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -38,9 +38,6 @@
 #include <sys/utsname.h>
 #endif
 
-#ifdef PHP_ATOM_INC
-#include "php_have_iconv.h"
-#endif
 #if HAVE_ICONV
 #include "ext/iconv/php_iconv.h"
 ZEND_EXTERN_MODULE_GLOBALS(iconv)

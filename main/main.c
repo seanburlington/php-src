@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.264 2000/06/08 09:43:12 hholzgra Exp $ */
+/* $Id: main.c,v 1.265 2000/06/09 02:18:50 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -374,13 +374,20 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 				char *prepend_string = INI_STR("error_prepend_string");
 				char *append_string = INI_STR("error_append_string");
 
-				if (prepend_string) {
-					PUTS(prepend_string);
-				}		
-				php_printf("<br>\n<b>%s</b>:  %s in <b>%s</b> on line <b>%d</b><br>\n", error_type_str, buffer, error_filename, error_lineno);
-				if (append_string) {
-					PUTS(append_string);
-				}		
+#ifdef PHP_WIN32
+				if (type==E_CORE_ERROR || type==E_CORE_WARNING)
+					MessageBox(NULL, buffer, error_type_str, MB_OK);
+				else
+#endif
+				{
+					if (prepend_string) {
+						PUTS(prepend_string);
+					}
+					php_printf("<br>\n<b>%s</b>:  %s in <b>%s</b> on line <b>%d</b><br>\n", error_type_str, buffer, error_filename, error_lineno);
+					if (append_string) {
+						PUTS(append_string);
+					}
+				}
 			}
 #if ZEND_DEBUG
 			{

@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.47 2000/06/07 05:47:24 hholzgra Exp $ */
+/* $Id: configuration-parser.y,v 1.48 2000/06/09 02:18:50 zeev Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -119,7 +119,19 @@ PHPAPI int cfg_get_string(char *varname, char **result)
 
 static void yyerror(char *str)
 {
-	fprintf(stderr,"PHP:  Error parsing %s on line %d\n",currently_parsed_filename,cfglineno);
+	char *error_buf;
+	int error_buf_len;
+
+	error_buf_len = 128+strlen(currently_parsed_filename); /* should be more than enough */
+	error_buf = (char *) emalloc(error_buf_len);
+	
+	sprintf(error_buf, "Error parsing %s on line %d\n", currently_parsed_filename, cfglineno);
+#ifdef PHP_WIN32
+	MessageBox(NULL, error_buf, "PHP Error", MB_OK);
+#else
+	fprintf(stderr, "PHP:  %s", error_buf);
+#endif
+	efree(error_buf);
 }
 
 

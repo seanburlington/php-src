@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.14 2003/08/24 10:24:22 rrichards Exp $ */
+/* $Id: php_dom.h,v 1.15 2003/09/03 10:48:02 rrichards Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -47,7 +47,6 @@ extern zend_module_entry dom_module_entry;
 #if defined(LIBXML_XPTR_ENABLED)
 #include <libxml/xpointer.h>
 #endif
-
 #ifdef PHP_WIN32
 #ifndef DOM_EXPORTS
 #define DOM_EXPORTS
@@ -55,12 +54,12 @@ extern zend_module_entry dom_module_entry;
 #endif
 
 #include "xml_common.h"
-
+#include "zend_default_classes.h"
 /* DOM API_VERSION, please bump it up, if you change anything in the API
     therefore it's easier for the script-programmers to check, what's working how
    Can be checked with phpversion("dom");
 */
-#define DOM_API_VERSION "20030413"
+#define DOM_API_VERSION "20030901"
 
 #include "dom_fe.h"
 

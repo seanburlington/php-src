@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.27 2000/08/24 01:34:16 sterling Exp $
+// $Id: DB.php,v 1.28 2000/08/24 18:18:49 sterling Exp $
 //
 // Database independent query interface.
 //
@@ -152,13 +152,6 @@ if (!defined('DB_GETMODE_DEFAULT')) {
  * @since    PHP 4.0
  */
 class DB {
-
-	function DB ($dsn = false, $persistent = false)
-	{
-		if ($dsn) {
-			return DB::connect ($dsn, $persistent);
-		}
-	}
 
     // {{{ factory()
 

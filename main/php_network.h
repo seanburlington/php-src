@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.23 2002/07/22 18:46:26 jason Exp $ */
+/* $Id: php_network.h,v 1.24 2002/08/19 22:59:10 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -144,7 +144,6 @@ PHPAPI php_stream *_php_stream_sock_open_unix(const char *path, int pathlen, int
 /* }}} */
 
 PHPAPI void php_stream_sock_set_timeout(php_stream *stream, struct timeval *timeout TSRMLS_DC);
-PHPAPI int php_stream_sock_set_blocking(php_stream *stream, int mode TSRMLS_DC);
 /* set the chunk size for the stream; return the old chunk size */
 PHPAPI size_t php_stream_sock_set_chunk_size(php_stream *stream, size_t size TSRMLS_DC);
 

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.20 2001/07/20 22:11:13 holger Exp $ */
+/* $Id: pi3web_sapi.c,v 1.21 2001/07/21 12:23:23 holger Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -78,7 +78,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.20 2001/07/20 22:11:13 holger Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.21 2001/07/21 12:23:23 holger Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -315,8 +315,8 @@ static void init_request_info(sapi_globals_struct *sapi_globals, LPCONTROL_BLOCK
 	SG(request_info).request_uri     = lpCB->lpszUri;
 	SG(request_info).content_type    = lpCB->lpszContentType;
 	SG(request_info).content_length  = lpCB->cbTotalBytes;
-	SG(request_info).auth_user       = lpCB->lpszUser;
-	SG(request_info).auth_password   = lpCB->lpszPassword;
+	SG(request_info).auth_user       = (lpCB->lpszUser) ? (char *)estrdup((const char *)(lpCB->lpszUser)) : 0;
+	SG(request_info).auth_password   = (lpCB->lpszPassword) ? (char *)estrdup((const char *)(lpCB->lpszPassword)) : 0;
 	SG(sapi_headers).http_response_code = 200;
 }
 

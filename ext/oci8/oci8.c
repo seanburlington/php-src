@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.172 2002/04/13 18:58:18 thies Exp $ */
+/* $Id: oci8.c,v 1.173 2002/04/14 18:27:27 thies Exp $ */
 
 /* TODO list:
  *
@@ -631,7 +631,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.172 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.173 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -697,7 +697,9 @@ _oci_bind_post_exec(void *data TSRMLS_DC)
 
 	if (bind->indicator == -1) { /* NULL */
 		zval *val = bind->zval;
-		*Z_STRVAL_P(val) = '\0'; /* XXX avoid warning in debug mode */
+		if (Z_TYPE_P(val) == IS_STRING && (Z_STRVAL_P(val) != empty_string)) {
+			*Z_STRVAL_P(val) = '\0'; /* XXX avoid warning in debug mode */
+		}
 		zval_dtor(val);
 		ZVAL_NULL(val);
 	} else if (Z_TYPE_P(bind->zval) == IS_STRING && (Z_STRVAL_P(bind->zval) != empty_string)) {

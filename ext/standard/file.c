@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.327 2003/03/18 14:35:15 wez Exp $ */
+/* $Id: file.c,v 1.328 2003/03/21 22:22:15 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -476,6 +476,10 @@ PHP_FUNCTION(file_set_contents)
 
 	stream = php_stream_open_wrapper(filename, "wb", 
 			(use_include_path ? USE_PATH : 0) | ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
+	if (stream == NULL) {
+		RETURN_FALSE;
+	}
+
 	if (data_len) {
 		numbytes = php_stream_write(stream, data, data_len);
 		if (numbytes < 0) {

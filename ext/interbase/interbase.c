@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.88 2002/07/19 09:21:29 derick Exp $ */
+/* $Id: interbase.c,v 1.89 2002/09/12 11:18:47 derick Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -85,7 +85,9 @@ function_entry ibase_functions[] = {
 	PHP_FE(ibase_prepare, NULL)
 	PHP_FE(ibase_execute, NULL)
 	PHP_FE(ibase_free_query, NULL)
+#if HAVE_STRFTIME
 	PHP_FE(ibase_timefmt, NULL)
+#endif
 
 	PHP_FE(ibase_num_fields, NULL)
 	PHP_FE(ibase_field_info, NULL)
@@ -607,7 +609,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.88 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.89 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

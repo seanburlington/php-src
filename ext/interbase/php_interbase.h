@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.27 2002/06/06 19:51:04 daniela Exp $ */
+/* $Id: php_interbase.h,v 1.28 2002/09/12 11:18:47 derick Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -51,7 +51,9 @@ PHP_FUNCTION(ibase_free_result);
 PHP_FUNCTION(ibase_prepare);
 PHP_FUNCTION(ibase_execute);
 PHP_FUNCTION(ibase_free_query);
+#if HAVE_STRFTIME
 PHP_FUNCTION(ibase_timefmt);
+#endif
 
 PHP_FUNCTION(ibase_num_fields);
 PHP_FUNCTION(ibase_field_info);

@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.11 2003/04/20 16:09:16 wez Exp $
+dnl $Id: config.m4,v 1.12 2003/05/01 22:12:06 edink Exp $
 dnl config.m4 for extension sqlite
 
 PHP_ARG_WITH(sqlite, for sqlite support,
-[  --with-sqlite             Include sqlite support])
+[  --with-sqlite           Include sqlite support])
 
 if test "$PHP_SQLITE" != "no"; then
 

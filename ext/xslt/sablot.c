@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.23 2001/09/15 16:00:46 sterling Exp $ */
+/* $Id: sablot.c,v 1.24 2001/09/15 16:05:36 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1301,18 +1301,18 @@ static MH_ERROR error_log(void *user_data, SablotHandle proc, MH_ERROR code, MH_
 			key = emalloc(pos + 1);
 			val = emalloc((len - pos) + 1);
 
-			strlcpy(key, *fields, pos);
-			strlcpy(val, *fields + pos + 1, len - pos - 1);
+			strlcpy(key, *fields, pos + 1);
+			strlcpy(val, *fields + pos + 1, len - pos);
 
 			/* Check to see whether or not we want to save the data */
 			if (!strcmp(key, "msg")) {
-				errmsg = estrndup(val, len - pos -1);
+				errmsg = estrndup(val, len - pos);
 			}
 			else if (!strcmp(key, "type")) {
-				errtype = estrndup(val, len - pos - 1);
+				errtype = estrndup(val, len - pos);
 			}
 			else if (!strcmp(key, "line")) {
-				errline = estrndup(val, len - pos - 1);
+				errline = estrndup(val, len - pos);
 			}
 			
 			/* Cleanup */
@@ -1449,8 +1449,8 @@ static MH_ERROR error_print(void *user_data, SablotHandle proc, MH_ERROR code, M
 				key = emalloc(pos + 1);
 				val = emalloc((len - pos) + 1);
 
-				strlcpy(key, *fields, pos);
-				strlcpy(val, *fields + pos + 1, len - pos - 1);
+				strlcpy(key, *fields, pos + 1);
+				strlcpy(val, *fields + pos + 1, len - pos);
 
 				/* Add it */				
 				add_assoc_stringl_ex(argv[3], key, pos, val, len - pos - 1, 1);
@@ -1512,10 +1512,10 @@ static MH_ERROR error_print(void *user_data, SablotHandle proc, MH_ERROR code, M
 			
 				/* Check to see whether or not we want to save the data */
 				if (!strcmp(key, "msg")) {
-					errmsg = estrdup(val);
+					errmsg = estrndup(val, len - pos);
 				}
 				else if (!strcmp(key, "line")) {
-					errline = estrdup(val);
+					errline = estrndup(val, len - pos);
 				}
 
 				/* Cleanup */

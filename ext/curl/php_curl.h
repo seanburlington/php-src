@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.21.2.1 2001/05/27 19:17:38 sterling Exp $ */
+/* $Id: php_curl.h,v 1.21.2.2 2001/05/29 07:50:48 sniper Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -41,6 +41,7 @@ extern zend_module_entry curl_module_entry;
 #define CURLOPT_BINARYTRANSFER 19914
 
 PHP_MINIT_FUNCTION(curl);
+PHP_MSHUTDOWN_FUNCTION(curl);
 PHP_MINFO_FUNCTION(curl);
 PHP_FUNCTION(curl_version);
 PHP_FUNCTION(curl_init);

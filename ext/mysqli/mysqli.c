@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.50 2004/08/13 16:25:29 georg Exp $ 
+  $Id: mysqli.c,v 1.51 2004/08/15 05:48:16 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -621,7 +621,7 @@ void php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAMETERS, int override_flags
 			}
 			fetchtype = override_flags;
 		} else {
-			fetchtype = MYSQLI_ASSOC;
+			fetchtype = MYSQLI_BOTH;
 			if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "O|l", &mysql_result, mysqli_result_class_entry, &fetchtype) == FAILURE) {
 				return;
 			}

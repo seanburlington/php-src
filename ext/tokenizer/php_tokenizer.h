@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: php_tokenizer.h,v 1.7 2003/07/19 18:52:49 andrey Exp $ */
+
 #ifndef PHP_TOKENIZER_H
 #define PHP_TOKENIZER_H
 

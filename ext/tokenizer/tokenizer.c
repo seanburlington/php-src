@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
 */
 
+/* $Id: tokenizer.c,v 1.21 2003/07/19 18:52:49 andrey Exp $ */
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

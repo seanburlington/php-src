@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.155.2.15 2003/11/26 00:33:48 sniper Exp $ */
+/* $Id: SAPI.c,v 1.155.2.16 2004/01/06 00:56:10 iliaa Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -508,7 +508,7 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 
 	switch (op) {
 	case SAPI_HEADER_SET_STATUS:
-		sapi_update_response_code((int) arg TSRMLS_CC);
+		sapi_update_response_code((long) arg TSRMLS_CC);
 		return SUCCESS;
 
 	case SAPI_HEADER_REPLACE:

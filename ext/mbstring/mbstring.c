@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.83 2002/07/28 09:42:15 yohgaki Exp $ */
+/* $Id: mbstring.c,v 1.84 2002/07/31 14:41:06 zeev Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -1277,7 +1277,7 @@ php_mbstr_encoding_handler(zval *arg, char *res, char *separator TSRMLS_DC)
 			val_list[n] = val;
 			len_list[n] = php_url_decode(val, strlen(val));
 		} else {
-			val_list[n] = NULL;
+			val_list[n] = "";
 			len_list[n] = 0;
 		}
 		n++;

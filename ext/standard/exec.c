@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.84.2.13 2003/11/19 15:34:36 iliaa Exp $ */
+/* $Id: exec.c,v 1.84.2.14 2004/05/18 13:43:33 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -410,6 +410,7 @@ char *php_escape_shell_cmd(char *str) {
 		switch (str[x]) {
 			case '"':
 			case '\'':
+#ifndef PHP_WIN32
 				if (!p && (p = memchr(str + x + 1, str[x], l - x - 1))) {
 					/* noop */
 				} else if (p && *p == str[x]) {
@@ -419,6 +420,7 @@ char *php_escape_shell_cmd(char *str) {
 				}
 				cmd[y++] = str[x];
 				break;
+#endif
 			case '#': /* This is character-set independent */
 			case '&':
 			case ';':
@@ -440,6 +442,12 @@ char *php_escape_shell_cmd(char *str) {
 			case '\\':
 			case '\x0A': /* excluding these two */
 			case '\xFF':
+#ifdef PHP_WIN32
+			/* since Windows does not allow us to escape these chars, just remove them */
+			case '%':
+				cmd[y++] = ' ';
+				break;
+#endif
 				cmd[y++] = '\\';
 				/* fall-through */
 			default:
@@ -472,7 +480,9 @@ char *php_escape_shell_arg(char *str) {
 		switch (str[x]) {
 #ifdef PHP_WIN32
 		case '"':
-			cmd[y++] = '\\';
+		case '%':
+			cmd[y++] = ' ';
+			break;
 #else
 		case '\'':
 			cmd[y++] = '\'';

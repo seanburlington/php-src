@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.34 2002/08/06 16:35:19 cox Exp $
+// $Id: Registry.php,v 1.35 2002/10/04 20:00:51 mj Exp $
 
 /*
 TODO:
@@ -276,7 +276,8 @@ class PEAR_Registry extends PEAR
             @ini_restore('track_errors');
 
             if (!is_resource($this->lock_fp)) {
-                return $this->raiseError("could not create lock file: $php_errormsg");
+                return $this->raiseError("could not create lock file" .
+                                         (isset($php_errormsg) ? ": " . $php_errormsg : ""));
             }
             if (!(int)flock($this->lock_fp, $mode)) {
                 switch ($mode) {

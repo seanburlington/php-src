@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.605 2004/07/15 22:22:06 helly Exp $ */
+/* $Id: main.c,v 1.606 2004/07/25 07:14:49 helly Exp $ */
 
 /* {{{ includes
  */
@@ -1188,6 +1188,10 @@ void php_request_shutdown(void *dummy)
 
 	zend_try {
 		sapi_send_headers(TSRMLS_C);
+	} zend_end_try();
+
+	zend_try {
+		zend_call_destructors(TSRMLS_C);
 	} zend_end_try();
 
 	if (PG(modules_activated)) zend_try {

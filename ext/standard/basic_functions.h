@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.54 2000/06/21 22:51:29 rasmus Exp $ */
+/* $Id: basic_functions.h,v 1.55 2000/06/23 16:21:31 sas Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -170,6 +170,9 @@ typedef struct {
 	/* syslog.c */
 	int syslog_started;
 	char *syslog_device;
+
+	/* var.c */
+	zend_class_entry *incomplete_class;
 } php_basic_globals;
 
 #ifdef ZTS

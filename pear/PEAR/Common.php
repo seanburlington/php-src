@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.114 2003/12/09 23:43:58 cellog Exp $
+// $Id: Common.php,v 1.115 2003/12/11 23:30:52 cellog Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -69,7 +69,7 @@ $GLOBALS['_PEAR_Common_dependency_types'] = array('pkg','ext','php','prog','ldli
  * Valid dependency relations
  * @var array
  */
-$GLOBALS['_PEAR_Common_dependency_relations'] = array('has','eq','lt','le','gt','ge');
+$GLOBALS['_PEAR_Common_dependency_relations'] = array('has','eq','lt','le','gt','ge','not');
 
 /**
  * Valid file roles

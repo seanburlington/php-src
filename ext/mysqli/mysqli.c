@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.43.2.1 2004/07/26 07:22:01 georg Exp $ 
+  $Id: mysqli.c,v 1.43.2.2 2004/08/04 13:02:40 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -200,6 +200,13 @@ zval *mysqli_read_property(zval *object, zval *member, int type TSRMLS_DC)
 		ret = zend_hash_find(obj->prop_handler, Z_STRVAL_P(member), Z_STRLEN_P(member)+1, (void **) &hnd);
 	}
 	if (ret == SUCCESS) {
+		/* check if connection is still valid */
+ 		if (!obj->ptr ||
+		    !((MYSQL *)((MY_MYSQL *)((MYSQLI_RESOURCE *)(obj->ptr))->ptr)->mysql)->thread_id) {
+			retval = EG(uninitialized_zval_ptr);
+			return(retval);
+		}
+
 		ret = hnd->read_func(obj, &retval TSRMLS_CC);
 		if (ret == SUCCESS) {
 			/* ensure we're creating a temporary variable */

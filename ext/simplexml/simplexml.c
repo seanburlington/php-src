@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.72 2003/10/26 13:11:56 helly Exp $ */
+/* $Id: simplexml.c,v 1.73 2003/10/26 13:27:03 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -135,7 +135,7 @@ sxe_property_read(zval *object, zval *member, zend_bool silent TSRMLS_DC)
 			
 			MAKE_STD_ZVAL(value);
 			contents = xmlNodeListGetString((xmlDocPtr) sxe->document->ptr, attr->children, 1);
-			ZVAL_STRING(value, contents, 0);
+			ZVAL_STRING(value, contents, 1);
 			APPEND_CUR_ELEMENT(counter, value);
 		}
 		attr = attr->next;
@@ -1207,7 +1207,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.72 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.73 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

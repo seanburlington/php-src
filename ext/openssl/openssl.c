@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.89 2004/04/21 23:02:04 wez Exp $ */
+/* $Id: openssl.c,v 1.90 2004/09/10 11:43:45 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -632,6 +632,8 @@ PHP_MINIT_FUNCTION(openssl)
 	}
 
 	php_stream_xport_register("ssl", php_openssl_ssl_socket_factory TSRMLS_CC);
+	php_stream_xport_register("sslv3", php_openssl_ssl_socket_factory TSRMLS_CC);
+	php_stream_xport_register("sslv2", php_openssl_ssl_socket_factory TSRMLS_CC);
 	php_stream_xport_register("tls", php_openssl_ssl_socket_factory TSRMLS_CC);
 
 	/* override the default tcp socket provider */

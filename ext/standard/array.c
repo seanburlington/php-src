@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.200 2002/11/14 05:46:10 jon Exp $ */
+/* $Id: array.c,v 1.201 2002/11/15 02:16:41 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2008,6 +2008,7 @@ PHPAPI int php_array_merge(HashTable *dest, HashTable *src, int recursive TSRMLS
 								   get_active_function_name(TSRMLS_C));
 						return 0;
 					}
+					SEPARATE_ZVAL(dest_entry);
 					convert_to_array_ex(dest_entry);
 					convert_to_array_ex(src_entry);
 					if (!php_array_merge(Z_ARRVAL_PP(dest_entry),

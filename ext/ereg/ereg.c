@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.59 2002/03/11 07:11:54 yohgaki Exp $ */
+/* $Id: ereg.c,v 1.60 2002/04/08 07:47:17 sniper Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -98,11 +98,7 @@ PHP_MSHUTDOWN_FUNCTION(regex)
 
 PHP_MINFO_FUNCTION(regex)
 {
-#if HSREGEX
 	php_info_print_table_row(2, "Regex Library", "Bundled library enabled");
-#else
-	php_info_print_table_row(2, "Regex Library", "System library enabled");
-#endif
 }
 
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.71 2003/06/27 16:16:46 pollita Exp $ */
+/* $Id: streams.c,v 1.125.2.72 2003/07/28 18:57:49 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -280,7 +280,7 @@ fprintf(stderr, "stream_alloc: %s:%p persistent=%s\n", ops->label, ret, persiste
 
 static int _php_stream_free_persistent(list_entry *le, void *pStream TSRMLS_DC)
 {
-	return le->ptr == pStream;
+	return (le->ptr == pStream && !((php_stream *)pStream)->in_free);
 }
 
 PHPAPI int _php_stream_free(php_stream *stream, int close_options TSRMLS_DC) /* {{{ */

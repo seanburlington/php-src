@@ -26,7 +26,7 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fdf.h,v 1.4 2000/07/06 05:30:06 steinm Exp $ */
+/* $Id: php_fdf.h,v 1.5 2000/07/06 05:36:54 steinm Exp $ */
 
 #ifndef PHP_FDF_H
 #define PHP_FDF_H
@@ -40,7 +40,7 @@
 #include <FdfTk.h>
 
 extern zend_module_entry fdf_module_entry;
-#define phpext_fdf_ptr &fdf_module_entry
+#define fdf_module_ptr &fdf_module_entry
 
 extern PHP_MINIT_FUNCTION(fdf);
 extern PHP_MSHUTDOWN_FUNCTION(fdf);

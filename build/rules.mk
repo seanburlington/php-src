@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules.mk,v 1.35 2002/03/02 09:29:45 yohgaki Exp $ 
+# $Id: rules.mk,v 1.35.2.1 2002/03/09 23:37:49 sniper Exp $ 
 #
 
 include $(top_srcdir)/build/rules_common.mk
@@ -43,7 +43,9 @@ distclean-p depend-p clean-p:
 depend: depend-recursive
 	@echo $(top_srcdir) $(top_builddir) $(srcdir) $(CPP) $(INCLUDES) $(EXTRA_INCLUDES) $(DEFS) $(CPPFLAGS) $(srcdir)/*.c *.c | $(AWK) -f $(top_srcdir)/build/mkdep.awk > $(builddir)/.deps || true
 
-clean: clean-recursive clean-x
+clean: clean-modules clean-recursive clean-x
+
+clean-modules: 
 
 clean-x:
 	rm -f $(targets) *.lo *.slo *.la *.o $(CLEANFILES)

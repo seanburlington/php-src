@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.15 2001/11/01 17:25:56 dbeu Exp $ */
+/* $Id: php_sockets.h,v 1.16 2001/11/01 20:10:17 dbeu Exp $ */
 
 #if HAVE_SOCKETS
 

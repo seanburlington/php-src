@@ -15,7 +15,7 @@
   | Author: Pierre-Alain Joye <paj@pearfr.org>                           |
   +----------------------------------------------------------------------+
 
-  $Id: php_enchant.h,v 1.1 2004/03/08 20:12:12 pajoye Exp $
+  $Id: php_enchant.h,v 1.2 2004/03/09 00:31:17 iliaa Exp $
 */
 
 #ifndef PHP_ENCHANT_H
@@ -59,6 +59,7 @@ PHP_FUNCTION(enchant_dict_is_in_session);
 PHP_FUNCTION(enchant_dict_store_replacement);
 PHP_FUNCTION(enchant_dict_get_error);
 PHP_FUNCTION(enchant_dict_describe);
+PHP_FUNCTION(enchant_dict_quick_check);
 
 #ifdef ZTS
 #define ENCHANT_G(v) TSRMG(enchant_globals_id, zend_enchant_globals *, v)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.68 2001/06/19 21:25:53 sbergmann Exp $ */
+/* $Id: wddx.c,v 1.69 2001/06/21 18:46:25 thies Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -271,7 +271,7 @@ PS_SERIALIZER_DECODE_FUNC(wddx)
 					key = tmp;
 					/* fallthru */
 				case HASH_KEY_IS_STRING:
-					php_set_session_var(key, key_length-1, *ent PSLS_CC);
+					php_set_session_var(key, key_length-1, *ent, NULL PSLS_CC);
 					PS_ADD_VAR(key);
 			}
 		}

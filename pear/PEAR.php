@@ -19,7 +19,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.21 2001/10/04 19:05:09 cox Exp $
+// $Id: PEAR.php,v 1.22 2001/10/05 00:28:36 cox Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -502,9 +502,10 @@ class PEAR
     */
     function _explodePHPVersion($version)
     {
-        @list($v, ) = explode('-', $version); // 4.0.7-dev
-        list($mayor, $minor, $sub) = explode('.', $v);
-        @list($sub, $patch) = explode('pl', $sub); // 4.0.14pl1
+        @list($version, ) = explode('-', $version);  // 4.0.7-dev
+        @list($version, ) = explode('RC', $version); // 4.0.7RC1
+        list($mayor, $minor, $sub) = explode('.', $version);
+        @list($sub, $patch) = explode('pl', $sub);   // 4.0.14pl1
         if ($patch === null) {
             $patch = 0;
         }

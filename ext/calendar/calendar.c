@@ -13,12 +13,12 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Shane Caraveo             <shane@caraveo.com>               | 
-   |          Colin Viebrock            <cmv@easydns.com>                 |
+   |          Colin Viebrock            <colin@easydns.com>               |
    |          Hartmut Holzgraefe        <hartmut@six.de>                  |
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: calendar.c,v 1.25 2002/05/12 15:06:04 markonen Exp $ */
+/* $Id: calendar.c,v 1.26 2002/09/19 21:51:34 cmv Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

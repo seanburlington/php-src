@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.103 2002/05/01 04:46:59 jason Exp $ */
+/* $Id: sockets.c,v 1.104 2002/05/01 07:35:01 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -118,21 +118,21 @@ function_entry sockets_functions[] = {
 	PHP_FE(socket_iovec_fetch,		NULL)
 	PHP_FE(socket_iovec_add,		NULL)
 	PHP_FE(socket_iovec_delete,		NULL)
-	PHP_FE(socket_select, 			first_through_third_args_force_ref)
-	PHP_FE(socket_create, 			NULL)
-	PHP_FE(socket_create_listen, 	NULL)
+	PHP_FE(socket_select,			first_through_third_args_force_ref)
+	PHP_FE(socket_create,			NULL)
+	PHP_FE(socket_create_listen,	NULL)
 	PHP_FE(socket_create_pair,		NULL)
-	PHP_FE(socket_accept, 			NULL)
+	PHP_FE(socket_accept,			NULL)
 	PHP_FE(socket_set_nonblock,		NULL)
 	PHP_FE(socket_set_block,		NULL)
-	PHP_FE(socket_listen, 			NULL)
+	PHP_FE(socket_listen,			NULL)
 	PHP_FE(socket_close,			NULL)
-	PHP_FE(socket_write, 			NULL)
-	PHP_FE(socket_read, 			NULL)
+	PHP_FE(socket_write,			NULL)
+	PHP_FE(socket_read,				NULL)
 	PHP_FE(socket_getsockname, 		second_and_third_args_force_ref)
 	PHP_FE(socket_getpeername, 		second_and_third_args_force_ref)
-	PHP_FE(socket_connect, 			NULL)
-	PHP_FE(socket_strerror, 		NULL)
+	PHP_FE(socket_connect,			NULL)
+	PHP_FE(socket_strerror,			NULL)
 	PHP_FE(socket_bind,				NULL)
 	PHP_FE(socket_recv,				second_arg_of_four_force_ref)
 	PHP_FE(socket_send,				NULL)

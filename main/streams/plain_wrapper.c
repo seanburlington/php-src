@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.18 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: plain_wrapper.c,v 1.19 2003/06/28 11:24:47 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -520,6 +520,16 @@ static int php_stdiop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)
 				
 				*(FILE**)ret = data->file;
 				data->fd = -1;
+			}
+			return SUCCESS;
+
+		case PHP_STREAM_AS_FD_FOR_SELECT:
+			PHP_STDIOP_GET_FD(fd, data);
+			if (fd < 0) {
+				return FAILURE;
+			}
+			if (ret) {
+				*(int*)ret = fd;
 			}
 			return SUCCESS;
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.13 2003/06/15 23:34:45 edink Exp $ */
+/* $Id: xp_socket.c,v 1.14 2003/06/28 11:24:47 wez Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -282,6 +282,7 @@ static int php_sockop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)
 				return FAILURE;
 			}
 			return SUCCESS;
+		case PHP_STREAM_AS_FD_FOR_SELECT:
 		case PHP_STREAM_AS_FD:
 		case PHP_STREAM_AS_SOCKETD:
 			if (ret)

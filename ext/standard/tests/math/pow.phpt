@@ -3,7 +3,7 @@ Various pow() tests
 --POST--
 --GET--
 --FILE--
-<?php // $Id: pow.phpt,v 1.7 2001/12/16 13:04:02 derick Exp $
+<?php // $Id: pow.phpt,v 1.8 2002/01/05 02:16:16 jimw Exp $
 
 define('LONG_MAX', is_int(5000000000)? 9223372036854775807 : 0x7FFFFFFF);
 define('LONG_MIN', -LONG_MAX - 1);
@@ -48,9 +48,9 @@ FALSE ===@pow(-1, 1.0)
 FALSE ===@pow(-1, 2.0)
 FALSE ===@pow( 0,-2.0)
 FALSE ===@pow( 0,-1.0)
-FALSE ===@pow( 0, 0.0)
-FALSE ===@pow( 0, 1.0)
-FALSE ===@pow( 0, 2.0)
+ 1.0  === pow( 0, 0.0)
+ 0.0  === pow( 0, 1.0)
+ 0.0  === pow( 0, 2.0)
  1.0  === pow( 1,-2.0)
  1.0  === pow( 1,-1.0)
  1.0  === pow( 1, 0.0)
@@ -80,9 +80,9 @@ FALSE ===@pow(-1.0, 1.0)
 FALSE ===@pow(-1.0, 2.0)
 FALSE ===@pow( 0.0,-2.0)
 FALSE ===@pow( 0.0,-1.0)
-FALSE ===@pow( 0.0, 0.0)
-FALSE ===@pow( 0.0, 1.0)
-FALSE ===@pow( 0.0, 2.0)
+ 1.0  === pow( 0.0, 0.0)
+ 0.0  === pow( 0.0, 1.0)
+ 0.0  === pow( 0.0, 2.0)
  1.0  === pow( 1.0,-2.0)
  1.0  === pow( 1.0,-1.0)
  1.0  === pow( 1.0, 0.0)

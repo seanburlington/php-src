@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.80.2.3 2002/06/24 08:00:51 derick Exp $ */
+/* $Id: math.c,v 1.80.2.4 2002/06/24 08:18:54 derick Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -934,10 +934,10 @@ PHP_FUNCTION(base_convert)
 		RETURN_FALSE;
 	}
 
-	if(_php_math_basetozval(*number, Z_LVAL_PP(frombase), &temp TSRMLS_CC) != SUCCESS) {
+	if(_php_math_basetozval(*number, Z_LVAL_PP(frombase), &temp) != SUCCESS) {
 		RETURN_FALSE;
 	}
-	result = _php_math_zvaltobase(&temp, Z_LVAL_PP(tobase));
+	result = _php_math_zvaltobase(&temp, Z_LVAL_PP(tobase) TSRMLS_CC);
 	RETVAL_STRING(result, 0);
 } 
 

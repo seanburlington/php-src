@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.224 2003/04/01 21:47:21 rasmus Exp $ */
+/* $Id: array.c,v 1.225 2003/04/03 18:33:05 pollita Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -80,6 +80,8 @@ php_array_globals array_globals;
 
 #define INTERSECT_NORMAL		0
 #define INTERSECT_ASSOC			1
+
+#define DOUBLE_DRIFT_FIX	0.000000000000001
 
 PHP_MINIT_FUNCTION(array)
 {
@@ -1543,7 +1545,7 @@ double_str:
 				err = 1;
 				goto err;
 			}
-			for (; low >= high; low -= step) {
+			for (; low >= (high - DOUBLE_DRIFT_FIX); low -= step) {
 				add_next_index_double(return_value, low);
 			}	
 		} else if (high > low) { 	/* Positive steps */
@@ -1551,7 +1553,7 @@ double_str:
 				err = 1;
 				goto err;
 			}
-			for (; low <= high; low += step) {
+			for (; low <= (high + DOUBLE_DRIFT_FIX); low += step) {
 				add_next_index_double(return_value, low);
 			}	
 		} else {

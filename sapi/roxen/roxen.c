@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.9 1999/12/22 01:09:08 neotron Exp $ */
+/* $Id: roxen.c,v 1.10 1999/12/22 20:11:48 neotron Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -470,7 +470,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
   /*  char buf[512]; */
 	
   PUTS("<table border=5 width=600>\n");
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.9 1999/12/22 01:09:08 neotron Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.10 1999/12/22 20:11:48 neotron Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -693,13 +693,12 @@ void f_php_roxen_request_handler(INT32 args)
   
   status = php_roxen_module_main(SLS_C);
   current_thread = -1;
-  PHP_UNLOCK(THIS);
   
   apply_svalue(done_callback, 0);
   pop_stack();
   pop_n_elems(args);
   push_int(status);
-
+  PHP_UNLOCK(THIS);
 }
 
 

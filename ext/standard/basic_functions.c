@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.554 2003/01/05 03:24:38 pollita Exp $ */
+/* $Id: basic_functions.c,v 1.555 2003/01/06 05:59:17 hyanantha Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1051,7 +1051,9 @@ PHP_MINIT_FUNCTION(basic)
 	PHP_MINIT(lcg) (INIT_FUNC_ARGS_PASSTHRU);
 
 	PHP_MINIT(dir) (INIT_FUNC_ARGS_PASSTHRU);
+#ifdef HAVE_SYSLOG_H
 	PHP_MINIT(syslog) (INIT_FUNC_ARGS_PASSTHRU);
+#endif
 	PHP_MINIT(array) (INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(assert) (INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(url_scanner_ex) (INIT_FUNC_ARGS_PASSTHRU);
@@ -1148,7 +1150,9 @@ PHP_RINIT_FUNCTION(basic)
 	PHP_RINIT(lcg) (INIT_FUNC_ARGS_PASSTHRU);
 
 	PHP_RINIT(filestat) (INIT_FUNC_ARGS_PASSTHRU);
+#ifdef HAVE_SYSLOG_H
 	PHP_RINIT(syslog) (INIT_FUNC_ARGS_PASSTHRU);
+#endif
 	PHP_RINIT(dir) (INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(url_scanner_ex) (INIT_FUNC_ARGS_PASSTHRU);
 
@@ -1180,7 +1184,9 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 
 	PHP_RSHUTDOWN(fsock) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_RSHUTDOWN(filestat) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#ifdef HAVE_SYSLOG_H
 	PHP_RSHUTDOWN(syslog) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#endif
 	PHP_RSHUTDOWN(assert) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_RSHUTDOWN(url_scanner_ex) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_RSHUTDOWN(streams) (SHUTDOWN_FUNC_ARGS_PASSTHRU);

@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.45 2001/08/24 02:21:16 jdonagher Exp $ */
+/* $Id: url.c,v 1.46 2001/09/04 06:21:48 sterling Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -58,7 +58,7 @@ PHPAPI void php_url_free(php_url *theurl)
 }
 /* }}} */
 
-/* {{{ url_parse
+/* {{{ php_url_parse
  */
 PHPAPI php_url *php_url_parse(char *str)
 {

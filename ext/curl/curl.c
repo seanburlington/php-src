@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.76 2001/08/02 19:25:46 sterling Exp $ */
+/* $Id: curl.c,v 1.77 2001/08/02 19:28:33 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,6 +37,9 @@
 #include <curl/curl.h>
 #include <curl/easy.h>
 
+#define SMART_STR_PREALLOC 4096
+
+#include "ext/standard/php_smart_str.h"
 #include "ext/standard/info.h"
 #include "ext/standard/file.h"
 #include "php_curl.h"

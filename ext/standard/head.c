@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.72 2003/11/19 21:10:29 pollita Exp $ */
+/* $Id: head.c,v 1.73 2003/11/20 09:14:51 andi Exp $ */
 
 #include <stdio.h>
 
@@ -246,7 +246,7 @@ PHP_FUNCTION(headers_list)
 		RETURN_FALSE;
 	}
 	array_init(return_value);
-	zend_llist_apply_with_argument(&SG(sapi_headers).headers, php_head_apply_header_list_to_hash, return_value);
+	zend_llist_apply_with_argument(&SG(sapi_headers).headers, php_head_apply_header_list_to_hash, return_value TSRMLS_CC);
 }
 /* }}} */
 

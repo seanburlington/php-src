@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.193 2000/02/10 15:55:09 zeev Exp $ */
+/* $Id: main.c,v 1.194 2000/02/10 16:27:27 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -68,11 +68,6 @@
 #include "php_content_types.h"
 
 #include "SAPI.h"
-
-#if MSVC5 || !defined(HAVE_GETOPT)
-#include "php_getopt.h"
-#endif
-
 
 #ifndef ZTS
 php_core_globals core_globals;

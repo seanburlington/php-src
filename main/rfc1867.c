@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.108 2002/07/12 01:49:58 sniper Exp $ */
+/* $Id: rfc1867.c,v 1.109 2002/07/14 00:27:52 sniper Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -32,7 +32,7 @@
 #include "php_variables.h"
 #include "rfc1867.h"
 
-#if HAVE_MBSTRING
+#if HAVE_MBSTRING && MBSTR_ENC_TRANS && !defined(COMPILE_DL_MBSTRING)
 #include "ext/mbstring/mbstring.h"
 #endif
 
@@ -459,7 +459,7 @@ static char *substring_conf(char *start, int len, char quote TSRMLS_DC)
 			*resp++ = start[++i];
 		} else {
 			*resp++ = start[i];
-#if HAVE_MBSTRING
+#if HAVE_MBSTRING && MBSTR_ENC_TRANS && !defined(COMPILE_DL_MBSTRING)
 			if (mbstr_is_mb_leadbyte(start+i TSRMLS_CC)) {
 				*resp++ = start[++i];
 			}
@@ -840,7 +840,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 				sprintf(lbuf, "%s_name", param);
 			}
 
-#if HAVE_MBSTRING
+#if HAVE_MBSTRING && MBSTR_ENC_TRANS && !defined(COMPILE_DL_MBSTRING)
 			s = mbstr_strrchr(filename, '\\' TSRMLS_CC);
 #else
 			s = strrchr(filename, '\\');

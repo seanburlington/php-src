@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.30 2003/09/14 09:50:35 helly Exp $ */
+/* $Id: snprintf.c,v 1.31 2003/09/29 23:44:07 iliaa Exp $ */
 
 /* ====================================================================
  * Copyright (c) 1995-1998 The Apache Group.  All rights reserved.
@@ -954,6 +954,22 @@ static int format_converter(register buffy * odp, const char *fmt,
 						default:
 							goto fmt_error;
 					}
+
+					if (zend_isnan(fp_num)) {
+ 						s = "NAN";
+ 						s_len = 3;
+ 						break;
+ 					} else if (zend_isinf(fp_num)) {
+ 						if (fp_num > 0) {
+ 							s = "INF";
+ 							s_len = 3;
+ 						} else {
+ 							s = "-INF";
+ 							s_len = 4;
+ 						}
+ 						break;
+ 					}
+
 					if (adjust_precision == NO)
 						precision = FLOAT_DIGITS;
 					else if (precision == 0)

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.111.2.18 2005/02/23 12:33:33 derick Exp $ */
+/* $Id: php_reflection.c,v 1.111.2.19 2005/03/13 13:24:07 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -3051,6 +3051,7 @@ ZEND_METHOD(reflection_property, getValue)
 	}
 
 	if ((ref->prop->flags & ZEND_ACC_STATIC)) {
+		zend_update_class_constants(intern->ce TSRMLS_CC);
 		if (zend_hash_quick_find(intern->ce->static_members, ref->prop->name, ref->prop->name_length + 1, ref->prop->h, (void **) &member) == FAILURE) {
 			zend_error(E_ERROR, "Internal error: Could not find the property %s", ref->prop->name);
 			/* Bails out */

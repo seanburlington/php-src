@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.43 2000/09/04 21:23:41 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.44 2000/09/04 22:05:00 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -358,6 +358,7 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr)
 					sprintf(lbuf, "%s[tmp_name]", namebuf);
 				}
 				register_http_post_files_variable(lbuf, fn, http_post_files ELS_CC PLS_CC);
+				add_protected_variable(lbuf PLS_CC);
 				{
 					zval file_size;
 

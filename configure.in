@@ -1,9 +1,15 @@
-dnl ## $Id: configure.in,v 1.57 1999/12/04 18:20:55 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.58 1999/12/04 19:56:08 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
 
 AC_INIT(main.c)
+
+dnl Because ``make install'' is often performed by the superuser,
+dnl we create the libs subdirectory as the user who configures PHP.
+dnl Otherwise, the current user will not be able to delete libs
+dnl or the contents of libs.
+test -d libs || mkdir libs
 
 if test "$with_shared_apache" != "no" && test -n "$with_shared_apache" ; then
   AC_MSG_ERROR(--with-shared-apache is not supported. Please refer to the documentation for using APXS)
@@ -298,6 +304,8 @@ fi
 
 AC_CHECK_SIZEOF(long, 8)
 AC_CHECK_SIZEOF(int, 4)
+
+test -d /usr/ucblib && AC_ADD_LIBPATH(/usr/ucblib)
 
 dnl Check for members of the stat structure
 AC_STRUCT_ST_BLKSIZE

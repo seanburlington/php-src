@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: text.c,v 1.20 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: text.c,v 1.20.2.1 2004/11/18 19:55:00 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -78,7 +78,7 @@ PHP_METHOD(domtext, __construct)
 }
 /* }}} end DOMText::__construct */
 
-/* {{{ proto wholeText	string	
+/* {{{ wholeText	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-Text3-wholeText
 Since: DOM Level 3

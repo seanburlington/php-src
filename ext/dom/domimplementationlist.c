@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domimplementationlist.c,v 1.4 2004/01/08 08:15:16 andi Exp $ */
+/* $Id: domimplementationlist.c,v 1.4.2.1 2004/11/18 19:55:00 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,7 +42,7 @@ zend_function_entry php_dom_domimplementationlist_class_functions[] = {
 
 /* {{{ attribute protos, not implemented yet */
 
-/* {{{ proto length	unsigned long	
+/* {{{ length	unsigned long	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#DOMImplementationList-length
 Since: 
@@ -59,7 +59,7 @@ int dom_domimplementationlist_length_read(dom_object *obj, zval **retval TSRMLS_
 
 
 
-/* {{{ proto domdomimplementation dom_domimplementationlist_item(unsigned long index);
+/* {{{ proto domdomimplementation dom_domimplementationlist_item(int index);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#DOMImplementationList-item
 Since: 
 */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domerror.c,v 1.4 2004/01/08 08:15:16 andi Exp $ */
+/* $Id: domerror.c,v 1.4.2.1 2004/11/18 19:55:00 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -41,7 +41,7 @@ zend_function_entry php_dom_domerror_class_functions[] = {
 
 /* {{{ attribute protos, not implemented yet */
 
-/* {{{ proto severity	unsigned short	
+/* {{{ severity	unsigned short	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ERROR-DOMError-severity
 Since: 
@@ -57,7 +57,7 @@ int dom_domerror_severity_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto message	string	
+/* {{{ message	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ERROR-DOMError-message
 Since: 
@@ -73,7 +73,7 @@ int dom_domerror_message_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto type	string	
+/* {{{ type	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ERROR-DOMError-type
 Since: 
@@ -89,7 +89,7 @@ int dom_domerror_type_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto relatedException	object	
+/* {{{ relatedException	object	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ERROR-DOMError-relatedException
 Since: 
@@ -105,7 +105,7 @@ int dom_domerror_related_exception_read(dom_object *obj, zval **retval TSRMLS_DC
 
 
 
-/* {{{ proto relatedData	domobject	
+/* {{{ relatedData	domobject	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ERROR-DOMError-relatedData
 Since: 
@@ -121,7 +121,7 @@ int dom_domerror_related_data_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto location	domlocator	
+/* {{{ location	domlocator	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ERROR-DOMError-location
 Since: 

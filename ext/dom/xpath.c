@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.22 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: xpath.c,v 1.22.2.1 2004/11/18 19:55:00 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -78,7 +78,7 @@ PHP_METHOD(domxpath, __construct)
 }
 /* }}} end DOMXPath::__construct */
 
-/* {{{ proto document DOMDocument*/
+/* {{{ document DOMDocument*/
 int dom_xpath_document_read(dom_object *obj, zval **retval TSRMLS_DC)
 {
 	xmlDoc *docp = NULL;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: characterdata.c,v 1.13 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: characterdata.c,v 1.13.2.1 2004/11/18 19:55:00 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -44,7 +44,7 @@ zend_function_entry php_dom_characterdata_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto data	string	
+/* {{{ data	string	
 readonly=no 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-72AB8359
 Since: 
@@ -105,7 +105,7 @@ int dom_characterdata_data_write(dom_object *obj, zval *newval TSRMLS_DC)
 
 /* }}} */
 
-/* {{{ proto length	long	
+/* {{{ length	long	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-7D61178C
 Since: 
@@ -140,7 +140,7 @@ int dom_characterdata_length_read(dom_object *obj, zval **retval TSRMLS_DC)
 /* }}} */
 
 
-/* {{{ proto string dom_characterdata_substring_data(long offset, long count);
+/* {{{ proto string dom_characterdata_substring_data(int offset, int count);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-6531BCCF
 Since: 
 */
@@ -215,7 +215,7 @@ PHP_FUNCTION(dom_characterdata_append_data)
 /* }}} end dom_characterdata_append_data */
 
 
-/* {{{ proto void dom_characterdata_insert_data(long offset, string arg);
+/* {{{ proto void dom_characterdata_insert_data(int offset, string arg);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-3EDB695F
 Since: 
 */
@@ -264,7 +264,7 @@ PHP_FUNCTION(dom_characterdata_insert_data)
 /* }}} end dom_characterdata_insert_data */
 
 
-/* {{{ proto void dom_characterdata_delete_data(long offset, long count);
+/* {{{ proto void dom_characterdata_delete_data(int offset, int count);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-7C603781
 Since: 
 */
@@ -320,7 +320,7 @@ PHP_FUNCTION(dom_characterdata_delete_data)
 /* }}} end dom_characterdata_delete_data */
 
 
-/* {{{ proto void dom_characterdata_replace_data(long offset, long count, string arg);
+/* {{{ proto void dom_characterdata_replace_data(int offset, int count, string arg);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-E5CBA7FB
 Since: 
 */

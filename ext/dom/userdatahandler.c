@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userdatahandler.c,v 1.4 2004/01/08 08:15:17 andi Exp $ */
+/* $Id: userdatahandler.c,v 1.4.2.1 2004/11/18 19:55:00 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -43,7 +43,7 @@ zend_function_entry php_dom_userdatahandler_class_functions[] = {
 /* {{{ attribute protos, not implemented yet */
 
 
-/* {{{ proto dom_void dom_userdatahandler_handle(unsigned short operation, string key, domobject data, node src, node dst);
+/* {{{ proto dom_void dom_userdatahandler_handle(short operation, string key, domobject data, node src, node dst);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-handleUserDataEvent
 Since: 
 */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: notation.c,v 1.7 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: notation.c,v 1.7.2.1 2004/11/18 19:55:00 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -41,7 +41,7 @@ zend_function_entry php_dom_notation_class_functions[] = {
 
 /* {{{ attribute protos, not implemented yet */
 
-/* {{{ proto publicId	string	
+/* {{{ publicId	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-54F2B4D0
 Since: 
@@ -71,7 +71,7 @@ int dom_notation_public_id_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto systemId	string	
+/* {{{ systemId	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-E8AAB1D0
 Since: 

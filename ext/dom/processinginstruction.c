@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: processinginstruction.c,v 1.15 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: processinginstruction.c,v 1.15.2.1 2004/11/18 19:55:00 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -82,7 +82,7 @@ PHP_METHOD(domprocessinginstruction, __construct)
 }
 /* }}} end DOMProcessingInstruction::__construct */
 
-/* {{{ proto target	string	
+/* {{{ target	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-1478689192
 Since: 
@@ -108,7 +108,7 @@ int dom_processinginstruction_target_read(dom_object *obj, zval **retval TSRMLS_
 
 
 
-/* {{{ proto data	string	
+/* {{{ data	string	
 readonly=no 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-837822393
 Since: 

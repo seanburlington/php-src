@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.30.2.1 2004/08/30 15:09:07 rrichards Exp $ */
+/* $Id: element.c,v 1.30.2.2 2004/11/18 19:55:00 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -137,7 +137,7 @@ PHP_METHOD(domelement, __construct)
 }
 /* }}} end DOMElement::__construct */
 
-/* {{{ proto tagName	string	
+/* {{{ tagName	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-104682815
 Since: 
@@ -174,7 +174,7 @@ int dom_element_tag_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto schemaTypeInfo	typeinfo	
+/* {{{ schemaTypeInfo	typeinfo	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#Element-schemaTypeInfo
 Since: DOM Level 3

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: css.c,v 1.3 2002/10/08 19:42:23 cmv Exp $ */
+/* $Id: css.c,v 1.4 2002/10/09 22:32:01 imajes Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -38,9 +38,9 @@ PHPAPI void php_info_print_css(void)
 	PUTS("h1 {font-size: 150%;}\n");
 	PUTS("h2 {font-size: 125%;}\n");
 	PUTS(".p {text-align: left;}\n");
-	PUTS(".e {background-color: #ccccff; font-weight: bold;}\n");
-	PUTS(".h {background-color: #9999cc; font-weight: bold;}\n");
-	PUTS(".v {background-color: #cccccc;}\n");
+	PUTS(".e {text-align: left; background-color: #ccccff; font-weight: bold;}\n");
+	PUTS(".h {text-align: left; background-color: #9999cc; font-weight: bold;}\n");
+	PUTS(".v {text-align: left; background-color: #cccccc;}\n");
 	PUTS("i {color: #666666;}\n");
 	PUTS("img {float: right; border: 0px;}\n");
 	PUTS("hr {width: 600px; align: center; background-color: #cccccc; border: 0px; height: 1px;}\n");

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.148 2000/06/13 07:49:17 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.149 2000/06/14 11:51:43 eschmid Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -856,7 +856,7 @@ if true; then
         echo "| redirection checking.  By putting this cgi binary somewhere in     |"
         echo "| your web space, users may be able to circumvent existing .htaccess |"
         echo "| security by loading files directly through the parser.  See        |"
-        echo "| http://www.php.net/manual/config-security.php3 for more details.   |"
+        echo "| http://www.php.net/manual/security.php for more details.           |"
       fi
     fi
   fi

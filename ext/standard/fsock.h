@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.h,v 1.32 2001/02/20 20:34:14 dbeu Exp $ */
+/* $Id: fsock.h,v 1.33 2001/02/20 20:52:53 dbeu Exp $ */
 
 /* Synced with php 3.0 revision 1.24 1999-06-18 [ssb] */
 
@@ -70,7 +70,7 @@ typedef struct php_sockbuf php_sockbuf;
 PHP_FUNCTION(fsockopen);
 PHP_FUNCTION(pfsockopen);
 
-PHPAPI int lookup_hostname(const char *addr, struct in_addr *in);
+PHPAPI int php_lookup_hostname(const char *addr, struct in_addr *in);
 PHPAPI char *php_sock_fgets(char *buf, size_t maxlen, int socket);
 PHPAPI size_t php_sock_fread(char *buf, size_t maxlen, int socket);
 PHPAPI int php_sock_feof(int socket);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.194 2002/08/28 22:31:51 jan Exp $ */
+/* $Id: info.c,v 1.195 2002/08/28 23:19:59 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -81,6 +81,7 @@ static int _display_module_info(zend_module_entry *module, void *arg TSRMLS_DC)
 			php_printf("</td></tr>\n");
 		} else {
 			php_printf(module->name);
+			php_printf("\n");
 		}	
 	}
 	return 0;
@@ -92,7 +93,7 @@ static int _display_module_info(zend_module_entry *module, void *arg TSRMLS_DC)
 static void php_print_gpcse_array(char *name, uint name_length TSRMLS_DC)
 {
 	zval **data, **tmp, tmp2;
-	char *string_key, *entry;
+	char *string_key;
 	uint string_len;
 	ulong num_key;
 

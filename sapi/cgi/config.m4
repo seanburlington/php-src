@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11 2001/11/30 19:01:30 sniper Exp $
+dnl $Id: config.m4,v 1.12 2002/02/28 11:48:39 edink Exp $
 dnl
 
 AC_DEFUN(PHP_TEST_WRITE_STDOUT,[
@@ -64,7 +64,7 @@ if test "$PHP_SAPI" = "cgi"; then
 fi
 
 if test "$PHP_SAPI" = "cgi" ; then
-  INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_PROGRAM \$(INSTALL_ROOT)\$(bindir)/$SAPI_CGI"
+  INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_PROGRAM \$(INSTALL_ROOT)\$(bindir)/php-cgi"
 fi
 
 AC_MSG_CHECKING(for fhttpd module support)

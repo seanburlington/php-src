@@ -1,9 +1,9 @@
-# $Id: Makefile.am,v 1.1 1999/11/29 15:36:25 rubys Exp $
+# $Id: Makefile.am,v 1.2 1999/12/19 21:02:54 zeev Exp $
 
 SRC=servlet.c java.c
 
 CFLAGS=@CFLAGS@ @JAVA_CFLAGS@
-INCLUDES=@INCLUDES@ @JAVA_INCLUDE@ -I@top_srcdir@ -I@top_srcdir@/libzend
+INCLUDES=@INCLUDES@ @JAVA_INCLUDE@ -I@top_srcdir@ -I@top_srcdir@/Zend
 noinst_LTLIBRARIES=libphpsapi_servlet.la
 libphpsapi_servlet_la_SOURCES=$(SRC)
 

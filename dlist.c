@@ -4,7 +4,7 @@
 *							All rights reserved.
 *
 * Filename:		$RCSfile: dlist.c,v $
-* Version:		$Revision: 1.2 $
+* Version:		$Revision: 1.3 $
 *
 * Language:		ANSI C
 * Environment:	any
@@ -12,12 +12,15 @@
 * Description:	Module to implement doubly linked lists. Includes a routine
 *				to peform a mergesort on the doubly linked list.
 *
-* $Id: dlist.c,v 1.2 1999/08/23 19:43:01 sas Exp $
+* $Id: dlist.c,v 1.3 1999/12/19 21:02:39 zeev Exp $
 *
 * Revision History:
 * -----------------
 *
 * $Log: dlist.c,v $
+* Revision 1.3  1999/12/19 21:02:39  zeev
+* libzend -> Zend
+*
 * Revision 1.2  1999/08/23 19:43:01  sas
 * malloc.h is deprecated, use stdlib.h instead
 *
@@ -26,7 +29,7 @@
 *
 * Revision 1.2  1999/05/11 00:01:42  zeev
 * * Get Apache to work.  POST doesn't work yet.
-* * There are now -I directives for the absolute path of php4, php4/libzend and the builddir for
+* * There are now -I directives for the absolute path of php4, php4/Zend and the builddir for
 *   the Apache module, so we can #include any php/Zend header.
 * * Rename config.h to php_config.h
 *

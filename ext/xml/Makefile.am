@@ -1,7 +1,7 @@
-# $Id: Makefile.am,v 1.6 1999/10/04 15:18:22 sas Exp $
+# $Id: Makefile.am,v 1.7 1999/12/19 21:02:52 zeev Exp $
 
 SRC=xml.c
-INCLUDES=@INCLUDES@ @XML_INCLUDE@ -I@top_srcdir@ -I@top_srcdir@/libzend
+INCLUDES=@INCLUDES@ @XML_INCLUDE@ -I@top_srcdir@ -I@top_srcdir@/Zend
 noinst_LTLIBRARIES=@XML_STATIC@
 EXTRA_LTLIBRARIES=libphpext_xml.la xml.la
 libphpext_xml_la_SOURCES=$(SRC)

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.162 1999/12/18 17:44:55 andi Exp $ */
+/* $Id: main.c,v 1.163 1999/12/19 21:02:39 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -81,7 +81,7 @@ PHPAPI int core_globals_id;
 
 #define NO_GLOBAL_LOCK
 
-/* temporary workaround for thread-safety issues in libzend */
+/* temporary workaround for thread-safety issues in Zend */
 #if defined(ZTS) && !defined(NO_GLOBAL_LOCK)
 static MUTEX_T global_lock;
 #define global_lock() tsrm_mutex_lock(global_lock)

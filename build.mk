@@ -9,10 +9,10 @@
 #
 # Written by Sascha Schumann
 #
-# $Id: build.mk,v 1.18 1999/12/18 22:20:05 sas Exp $ 
+# $Id: build.mk,v 1.19 1999/12/19 21:02:39 zeev Exp $ 
 
 
-SUBDIRS = libzend TSRM
+SUBDIRS = Zend TSRM
 
 STAMP = buildmk.stamp
 
@@ -24,12 +24,12 @@ all: $(STAMP) $(ALWAYS)
 	@$(MAKE) -s -f build2.mk
 
 generated_lists:
-	@echo makefile_am_files = Makefile.am libzend/Makefile.am \
+	@echo makefile_am_files = Makefile.am Zend/Makefile.am \
 		TSRM/Makefile.am `find ext sapi regex pear -name Makefile.am` > $@
-	@echo config_h_files = libzend/acconfig.h TSRM/acconfig.h \
+	@echo config_h_files = Zend/acconfig.h TSRM/acconfig.h \
 		ext/*/config.h.stub sapi/*/config.h.stub >> $@
-	@echo config_m4_files = libzend/libzend.m4 TSRM/tsrm.m4 \
-		libzend/acinclude.m4 ext/*/config.m4 sapi/*/config.m4 >> $@
+	@echo config_m4_files = Zend/Zend.m4 TSRM/tsrm.m4 \
+		Zend/acinclude.m4 ext/*/config.m4 sapi/*/config.m4 >> $@
 
 $(STAMP): buildcheck.sh
 	@./buildcheck.sh && touch $(STAMP)

@@ -1,7 +1,7 @@
-# $Id: Makefile.am,v 1.3 1999/10/04 15:18:18 sas Exp $
+# $Id: Makefile.am,v 1.4 1999/12/19 21:02:50 zeev Exp $
 
 SRC=snmp.c
-INCLUDES=@INCLUDES@ @SNMP_INCLUDE@ -I@top_srcdir@ -I@top_srcdir@/libzend
+INCLUDES=@INCLUDES@ @SNMP_INCLUDE@ -I@top_srcdir@ -I@top_srcdir@/Zend
 noinst_LTLIBRARIES=@SNMP_STATIC@
 EXTRA_LTLIBRARIES=libphpext_snmp.la snmp.la
 libphpext_snmp_la_SOURCES=$(SRC)

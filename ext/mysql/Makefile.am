@@ -1,7 +1,7 @@
-# $Id: Makefile.am,v 1.4 1999/10/04 15:18:13 sas Exp $
+# $Id: Makefile.am,v 1.5 1999/12/19 21:02:45 zeev Exp $
 
 SRC=php_mysql.c
-INCLUDES=@INCLUDES@ @MYSQL_INCLUDE@ -I@top_srcdir@ -I@top_srcdir@/libzend
+INCLUDES=@INCLUDES@ @MYSQL_INCLUDE@ -I@top_srcdir@ -I@top_srcdir@/Zend
 noinst_LTLIBRARIES=@MYSQL_STATIC@
 EXTRA_LTLIBRARIES=libphpext_mysql.la mysql.la
 libphpext_mysql_la_SOURCES=$(SRC)

@@ -24,13 +24,13 @@
 #
 # Written by Stig Bakken <ssb@guardian.no> 1997-05-28.
 #
-# $Id: makedist,v 1.12 1999/11/10 15:26:39 ssb Exp $
+# $Id: makedist,v 1.13 1999/12/19 21:02:39 zeev Exp $
 #
 
 PHPROOT=:pserver:cvsread@cvs.php.net:/repository
 ZENDROOT=:pserver:cvsread@cvs.zend.com:/repository
 PHPMOD=php4
-ZENDMOD=libzend
+ZENDMOD=Zend
 TSRMMOD=TSRM
 LT_TARGETS='ltconfig ltmain.sh config.guess config.sub'
 

@@ -1,7 +1,7 @@
-# $Id: Makefile.am,v 1.3 1999/10/04 15:18:17 sas Exp $
+# $Id: Makefile.am,v 1.4 1999/12/19 21:02:46 zeev Exp $
 
 SRC=pgsql.c
-INCLUDES=@INCLUDES@ @PGSQL_INCLUDE@ -I@top_srcdir@ -I@top_srcdir@/libzend
+INCLUDES=@INCLUDES@ @PGSQL_INCLUDE@ -I@top_srcdir@ -I@top_srcdir@/Zend
 noinst_LTLIBRARIES=@PGSQL_STATIC@
 EXTRA_LTLIBRARIES=libphpext_pgsql.la pgsql.la
 libphpext_pgsql_la_SOURCES=$(SRC)

@@ -1,6 +1,6 @@
 # Workhorse for build.mk
 #
-# $Id: build2.mk,v 1.1 1999/12/18 22:20:05 sas Exp $
+# $Id: build2.mk,v 1.2 1999/12/19 21:02:39 zeev Exp $
 
 include generated_lists
 
@@ -16,10 +16,10 @@ acconfig_h_SOURCES = acconfig.h.in $(config_h_files)
 targets = $(makefile_in_files) configure $(config_h_in)
 
 
-all: libzend/Makefile.am TSRM/Makefile.am $(targets)
+all: Zend/Makefile.am TSRM/Makefile.am $(targets)
 
-libzend/Makefile.am:
-	test -d libzend || (test -d ../libzend && ln -s ../libzend libzend)
+Zend/Makefile.am:
+	test -d Zend || (test -d ../Zend && ln -s ../Zend Zend)
 
 TSRM/Makefile.am:
 	test -d TSRM || (test -d ../TSRM && ln -s ../TSRM TSRM)

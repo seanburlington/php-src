@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.21 2004/07/06 13:46:18 abies Exp $ */
+/* $Id: ibase_query.c,v 1.21.2.1 2004/11/11 12:29:34 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -910,6 +910,9 @@ static int _php_ibase_exec(INTERNAL_FUNCTION_PARAMETERS, ibase_result **ib_resul
 				   so we have to release it */
 				zend_list_delete(ib_query->trans_res_id);
 			}
+
+			RETVAL_TRUE;
+
 			return SUCCESS;
 
 		default:
@@ -1856,8 +1859,6 @@ PHP_FUNCTION(ibase_execute)
 			}
 			ib_query->result_res_id = zend_list_insert(result, le_result);
 			RETVAL_RESOURCE(ib_query->result_res_id);
-		} else {
-			RETVAL_TRUE;
 		}
 	} while (0);
 

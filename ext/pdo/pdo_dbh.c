@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.29 2004/07/05 21:16:29 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.30 2004/07/19 09:35:36 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -353,6 +353,11 @@ static PHP_METHOD(PDO, setAttribute)
 					zend_throw_exception_ex(php_pdo_get_exception(), PDO_ERR_SYNTAX TSRMLS_CC, "Case folding mode %d is invalid", Z_LVAL_P(value));
 			}
 			RETURN_FALSE;
+
+		case PDO_ATTR_ORACLE_NULLS:
+			convert_to_long(value);
+			dbh->oracle_nulls = Z_LVAL_P(value) ? 1 : 0;
+			RETURN_TRUE;
 			
 		default:
 			;

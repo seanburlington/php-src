@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.63 2001/06/06 13:05:47 rasmus Exp $ */
+/* $Id: oracle.c,v 1.64 2001/06/19 16:03:33 andi Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -840,7 +840,7 @@ PHP_FUNCTION(ora_bind)
 	convert_to_long_ex(plen);
 
 	if (cursor->params == NULL) {
-		cursor->params = (HashTable *)emalloc(sizeof(HashTable));
+		ALLOC_HASHTABLE(cursor->params);
 		if (!cursor->params ||
 			zend_hash_init(cursor->params, 19, NULL,
 						   HASH_DTOR pval_ora_param_destructor, 0) == FAILURE) {

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.112 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: array.c,v 1.113 2001/06/19 16:03:34 andi Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1419,7 +1419,7 @@ HashTable* php_splice(HashTable *in_hash, int offset, int length,
 		length = num_in-offset;
 
 	/* Create and initialize output hash */
-	out_hash = (HashTable *)emalloc(sizeof(HashTable));
+	ALLOC_HASHTABLE(out_hash);
 	zend_hash_init(out_hash, 0, NULL, ZVAL_PTR_DTOR, 0);
 	
 	/* Start at the beginning of the input hash and copy

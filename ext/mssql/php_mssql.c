@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.49 2001/06/13 17:00:32 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.50 2001/06/19 16:03:33 andi Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -1917,7 +1917,7 @@ PHP_FUNCTION(mssql_bind)
 	
 	/* hashtable of binds */
 	if (! statement->binds) {
-		statement->binds = emalloc(sizeof(HashTable));
+		ALLOC_HASHTABLE(statement->binds);
 		zend_hash_init(statement->binds, 13, NULL, _mssql_bind_hash_dtor, 0);
 	}
 

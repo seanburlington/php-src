@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.42 2001/02/26 06:07:00 andi Exp $ */
+/* $Id: java.c,v 1.43 2001/06/19 16:03:33 andi Exp $ */
 
 /*
  * This module implements Zend OO syntax overloading support for Java
@@ -713,7 +713,7 @@ JNIEXPORT void JNICALL Java_net_php_reflect_setResultFromObject
   if (presult->type != IS_OBJECT) {
     presult->type=IS_OBJECT;
     presult->value.obj.ce=&java_class_entry;
-    presult->value.obj.properties = (HashTable *) emalloc(sizeof(HashTable));
+    ALLOC_HASHTABLE(presult->value.obj.properties);
     presult->is_ref=1;
     presult->refcount=1;
     zend_hash_init(presult->value.obj.properties, 0, NULL, ZVAL_PTR_DTOR, 0);

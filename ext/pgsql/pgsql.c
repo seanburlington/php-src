@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.207 2002/07/20 06:45:35 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.208 2002/07/20 07:08:17 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -3339,9 +3339,8 @@ PHPAPI int php_pgsql_convert(PGconn *pg_link, const char *table_name, const zval
 #else					
 							Z_STRVAL_P(new_val) = php_addslashes(Z_STRVAL_PP(val), Z_STRLEN_PP(val), &Z_STRLEN_P(new_val), 0 TSRMLS_CC);
 #endif
-							php_pgsql_add_quotes(new_val, 1 TSRMLS_CC);
-								
 						}
+						php_pgsql_add_quotes(new_val, 1 TSRMLS_CC);
 						break;
 						
 					case IS_LONG:

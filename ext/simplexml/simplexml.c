@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.105 2004/01/14 19:00:16 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.106 2004/01/14 22:07:28 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1421,37 +1421,6 @@ static void php_sxe_iterator_rewind(zend_object_iterator *iter TSRMLS_DC)
 }
 
 
-/* {{{ getChildren()
- */ 
-SXE_METHOD(getChildren)
-{
-	php_sxe_object *sxe;
-	xmlNodePtr      node;
-	xmlNodePtr      child;
-	zval           *value = NULL;
-
-	if (ZEND_NUM_ARGS() != 0) {
-		RETURN_FALSE;
-	}
-
-	sxe = php_sxe_fetch_object(getThis() TSRMLS_CC);
-	GET_NODE(sxe, node);
-
-	array_init(return_value);
-	if (node) {
-		child = node->children;
-		while (child) {
-			if (node->type == XML_ELEMENT_NODE) {
-				MAKE_STD_ZVAL(value);
-				_node_as_zval(sxe, child, value TSRMLS_CC);
-				add_next_index_zval(return_value, value);
-			}
-			child = child->next;
-		}
-	}
-}
-/* }}} */
-
 /* {{{ proto simplemxml_element simplexml_import_dom(domNode node)
    Get a simplexml_element object from dom to allow for processing */
 PHP_FUNCTION(simplexml_import_dom)
@@ -1541,7 +1510,6 @@ static zend_function_entry sxe_functions[] = {
 	SXE_ME(validate_schema_file,   NULL, ZEND_ACC_PUBLIC)
 #endif
 	SXE_ME(xsearch,                NULL, ZEND_ACC_PUBLIC)
-	SXE_ME(getChildren,            NULL, ZEND_ACC_PUBLIC)
 	SXE_ME(attributes,             NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
@@ -1582,7 +1550,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.105 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.106 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

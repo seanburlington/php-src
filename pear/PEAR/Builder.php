@@ -16,7 +16,7 @@
 // | Authors: Stig Sæther Bakken <ssb@php.net>                            |
 // +----------------------------------------------------------------------+
 //
-// $Id: Builder.php,v 1.14 2004/01/08 17:33:12 sniper Exp $
+// $Id: Builder.php,v 1.15 2004/03/04 13:37:37 chregu Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -218,7 +218,7 @@ class PEAR_Builder extends PEAR_Common
                     ($r == 'yes' || $r == 'autodetect')) {
                     $configure_command .= " --$o[name]";
                 } else {
-                    $configure_command .= " --$o[name]=$r";
+                    $configure_command .= " --$o[name]=".trim($r);
                 }
             }
         }

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.10 2000/11/06 01:07:52 rasmus Exp $ */
+/* $Id: php_sybase_db.c,v 1.11 2000/11/28 09:38:51 sniper Exp $ */
 
 
 #include "php.h"
@@ -69,7 +69,7 @@ function_entry sybase_functions[] = {
 	PHP_FALIAS(mssql_num_fields,	sybase_num_fields,		NULL)
 	PHP_FALIAS(mssql_fetch_row,		sybase_fetch_row,		NULL)
 	PHP_FALIAS(mssql_fetch_array,	sybase_fetch_array,		NULL)
-	PHP_FALIAS(mssql_Fetch_object,	sybase_fetch_object,	NULL)
+	PHP_FALIAS(mssql_fetch_object,	sybase_fetch_object,	NULL)
 	PHP_FALIAS(mssql_data_seek,		sybase_data_seek,		NULL)
 	PHP_FALIAS(mssql_fetch_field,	sybase_fetch_field,		NULL)
 	PHP_FALIAS(mssql_field_seek,	sybase_field_seek,		NULL)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.36 2003/08/28 16:49:57 sas Exp $ */
+/* $Id: filters.c,v 1.37 2003/12/08 00:22:22 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1615,7 +1615,7 @@ static php_stream_filter_status_t strfilter_convert_filter(
 			}
 
 			/* update consumed by the number of bytes just used */
-			consumed = bucket->buflen - icnt;
+			consumed += bucket->buflen - icnt;
 
 			/* give output bucket to next in chain */
 			if (out_buf_size - ocnt > 0) {

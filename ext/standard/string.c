@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.3 2002/12/12 13:45:33 iliaa Exp $ */
+/* $Id: string.c,v 1.333.2.4 2002/12/27 03:22:42 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1352,6 +1352,9 @@ PHP_FUNCTION(stristr)
 	if (Z_TYPE_PP(needle) == IS_STRING) {
 		if (!Z_STRLEN_PP(needle)) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty delimiter.");
+			efree(haystack_orig);
+			zval_ptr_dtor(haystack);
+			zval_ptr_dtor(needle);
 			RETURN_FALSE;
 		}
 
@@ -1372,6 +1375,8 @@ PHP_FUNCTION(stristr)
 		RETVAL_FALSE;
 	}
 
+	zval_ptr_dtor(haystack);
+	zval_ptr_dtor(needle);
 	efree(haystack_orig);
 }
 /* }}} */

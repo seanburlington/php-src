@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Auth.php,v 1.3 2002/03/31 01:51:08 ssb Exp $
+// $Id: Auth.php,v 1.4 2002/04/01 15:23:46 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Remote.php";
@@ -55,6 +55,16 @@ class PEAR_Command_Auth extends PEAR_Command_Common
     }
 
     // }}}
+
+    function getHelp($command)
+    {
+        switch ($command) {
+            case 'login':
+                return array(null, 'Connects to the remote server');
+            case 'logout':
+                return array(null, 'Disconnects from the remote server');
+        }
+    }
     // {{{ run()
 
     /**

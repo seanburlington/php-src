@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.5 2002/03/26 16:31:13 cox Exp $
+// $Id: Config.php,v 1.6 2002/04/01 15:23:46 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";
@@ -57,6 +57,20 @@ class PEAR_Command_Config extends PEAR_Command_Common
     }
 
     // }}}
+
+    function getHelp($command)
+    {
+        switch ($command) {
+            case 'config-show':
+                return array(null, 'Displays the configuration');
+            case 'config-get':
+                return array('<parameter>',
+                             'Displays the value of the given parameter');
+            case 'config-set':
+                return array('<parameter>=<value>',
+                             'Sets the value of a parameter in the config');
+        }
+    }
     // {{{ run()
 
     function run($command, $options, $params)

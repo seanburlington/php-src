@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.32 2000/10/25 17:44:01 andrei Exp $ */
+/* $Id: sysvshm.c,v 1.33 2000/10/30 17:10:06 stas Exp $ */
 
 /* This has been built and tested on Solaris 2.6.
  * It may not compile or execute correctly on other systems.
@@ -233,7 +233,7 @@ PHP_FUNCTION(shm_put_var)
 	shm_var.type=IS_STRING;
 	shm_var.value.str.len=0;
 	shm_var.value.str.val=0;
-	php_var_serialize(&shm_var,arg_var);
+	php_var_serialize(&shm_var,arg_var,NULL);
 	/* insert serialized variable into shared memory */
 	ret=php_put_shm_data(shm_list_ptr->ptr,key,shm_var.value.str.val,shm_var.value.str.len);
 

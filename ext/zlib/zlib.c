@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.153.2.2 2002/12/30 19:41:00 iliaa Exp $ */
+/* $Id: zlib.c,v 1.153.2.3 2002/12/31 00:05:19 iliaa Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -892,7 +892,7 @@ PHP_FUNCTION(gzencode)
 
 /* {{{ php_ob_gzhandler_check
  */
-int php_ob_gzhandler_check(TSRMLS_DC)
+int php_ob_gzhandler_check(TSRMLS_D)
 {
 	/* check for wrong usages */
 	if (OG(ob_nesting_level>0)) {

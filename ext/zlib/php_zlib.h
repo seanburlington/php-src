@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.32.4.1 2002/12/30 19:41:00 iliaa Exp $ */
+/* $Id: php_zlib.h,v 1.32.4.2 2002/12/31 00:05:19 iliaa Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -54,7 +54,7 @@ PHP_FUNCTION(gzencode);
 PHP_FUNCTION(ob_gzhandler);
 
 int php_enable_output_compression(int buffer_size TSRMLS_DC);
-int php_ob_gzhandler_check(TSRMLS_DC);
+int php_ob_gzhandler_check(TSRMLS_D);
 
 php_stream *php_stream_gzopen(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC);
 extern php_stream_ops php_stream_gzio_ops;

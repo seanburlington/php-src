@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.18 2005/01/24 14:12:01 tony2001 Exp $ */
+/* $Id: sysvmsg.c,v 1.19 2005/02/07 22:31:19 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -142,7 +142,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.18 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.19 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -391,10 +391,33 @@ PHP_FUNCTION(msg_send)
 		message_len = msg_var.len;
 		smart_str_free(&msg_var);
 	} else {
-		convert_to_string_ex(&message);
-		messagebuffer = emalloc(sizeof(struct php_msgbuf) + Z_STRLEN_P(message));
-		memcpy(messagebuffer->mtext, Z_STRVAL_P(message), Z_STRLEN_P(message) + 1);
-		message_len = Z_STRLEN_P(message);
+		char *p;
+		switch (Z_TYPE_P(message)) {
+			case IS_STRING:
+				p = Z_STRVAL_P(message);
+				message_len = Z_STRLEN_P(message);
+				break;
+
+			case IS_LONG:
+			case IS_BOOL:
+				message_len = spprintf(&p, 0, "%ld", Z_LVAL_P(message));
+				break;
+
+			case IS_DOUBLE:
+				message_len = spprintf(&p, 0, "%f", Z_DVAL_P(message));
+				break;
+
+			default:
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Message parameter must be either a string or a number.");
+				RETURN_FALSE;
+		}
+
+		messagebuffer = emalloc(sizeof(struct php_msgbuf) + message_len);
+		memcpy(messagebuffer->mtext, p, message_len + 1);
+
+		if (Z_TYPE_P(message) != IS_STRING) {
+			efree(p);
+		}
 	}
 	
 	/* set the message type */

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.160 2001/09/26 08:35:42 jeroen Exp $ */
+/* $Id: oci8.c,v 1.161 2001/10/06 20:13:36 derick Exp $ */
 
 /* TODO list:
  *
@@ -620,7 +620,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.160 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.161 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -1018,7 +1018,7 @@ static void oci_debug(const char *format, ...)
 		vsnprintf(buffer, sizeof(buffer)-1, format, args);
 		va_end(args);
 		buffer[sizeof(buffer)-1] = '\0';
-		php_printf("OCIDebug: %s<br>\n", buffer);
+		php_printf("OCIDebug: %s<br />\n", buffer);
 	}
 }
 

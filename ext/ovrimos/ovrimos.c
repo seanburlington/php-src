@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ovrimos.c,v 1.14 2001/09/25 22:48:41 jeroen Exp $ */
+/* $Id: ovrimos.c,v 1.15 2001/10/06 20:13:37 derick Exp $ */
 
 #include <php.h>
 #include <php_globals.h>
@@ -36,7 +36,7 @@
 
 PHP_MINFO_FUNCTION(ovrimos)
 {
-	php_printf("&quot;Ovrimos&quot; module<br>\n");
+	php_printf("&quot;Ovrimos&quot; module<br />\n");
 }
 
 /* Main User Functions 

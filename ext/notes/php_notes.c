@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_notes.c,v 1.7 2001/09/25 21:58:07 jeroen Exp $ */
+/* $Id: php_notes.c,v 1.8 2001/10/06 20:13:36 derick Exp $ */
 
 #ifdef COMPILE_DL_NOTES
 #define HAVE_NOTES 1
@@ -2317,7 +2317,7 @@ STATUS LNPUBLIC ReadSummaryData
 
     /* Print the note ID. */
 
-    php_printf ("\nNote ID is: %lX.\n<br>", SearchMatch.ID.NoteID);
+    php_printf ("\nNote ID is: %lX.\n<br />", SearchMatch.ID.NoteID);
 
     /* Print the summary data. */
 

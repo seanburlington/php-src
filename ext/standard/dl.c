@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.61 2001/09/25 21:58:22 jeroen Exp $ */
+/* $Id: dl.c,v 1.62 2001/10/06 20:13:37 derick Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -215,7 +215,7 @@ void php_dl(pval *file, int type, pval *return_value)
 
 PHP_MINFO_FUNCTION(dl)
 {
-	PUTS("Dynamic Library support not available<br>.\n");
+	PUTS("Dynamic Library support not available<br />.\n");
 }
 
 #endif

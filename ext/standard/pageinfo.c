@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pageinfo.c,v 1.19 2000/07/24 01:39:49 david Exp $ */
+/* $Id: pageinfo.c,v 1.20 2000/08/08 15:50:28 stas Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"
@@ -48,9 +48,11 @@ static void php_statpage(BLS_D)
 	pstat = sapi_get_stat();
 
 	if (BG(page_uid)==-1) {
-		BG(page_uid)   = pstat->st_uid;
-		BG(page_inode) = pstat->st_ino;
-		BG(page_mtime) = pstat->st_mtime;
+		if(pstat) {
+			BG(page_uid)   = pstat->st_uid;
+			BG(page_inode) = pstat->st_ino;
+			BG(page_mtime) = pstat->st_mtime;
+		} 
 	}
 }
 

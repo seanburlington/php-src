@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.45 2002/07/12 12:13:45 sniper Exp $
+dnl $Id: config.m4,v 1.46 2002/07/12 22:11:54 sniper Exp $
 dnl
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
@@ -68,6 +68,12 @@ AC_DEFUN(PHP_IMAP_KRB_CHK, [
   fi
 
   if test "$PHP_KERBEROS" != "no"; then
+    if test ! -f $PHP_KERBEROS/lib/libkrb5.a && test ! -f $PHP_KERBEROS/lib/libkrb5.$SHLIB_SUFFIX_NAME; then
+      AC_MSG_ERROR([Kerberos libraries not found in $PHP_KERBEROS/lib. 
+      
+      Check the path given to --with-kerberos (if no path is given, defaults to /usr/kerberos )
+      ])
+    fi
     AC_DEFINE(HAVE_IMAP_KRB,1,[ ])
     PHP_ADD_LIBPATH($PHP_KERBEROS/lib, IMAP_SHARED_LIBADD)
     PHP_ADD_LIBRARY(gssapi_krb5, 1, IMAP_SHARED_LIBADD)

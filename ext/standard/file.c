@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.237 2002/07/08 18:29:54 andi Exp $ */
+/* $Id: file.c,v 1.238 2002/07/10 15:23:47 jason Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1035,9 +1035,9 @@ PHP_FUNCTION(set_socket_blocking)
 
 /* {{{ proto bool socket_set_timeout(int socket_descriptor, int seconds, int microseconds)
    Set timeout on socket read to seconds + microseonds */
+#if HAVE_SYS_TIME_H || defined(PHP_WIN32)
 PHP_FUNCTION(socket_set_timeout)
 {
-#if HAVE_SYS_TIME_H
 	zval **socket, **seconds, **microseconds;
 	int type;
 	void *what;
@@ -1068,9 +1068,8 @@ PHP_FUNCTION(socket_set_timeout)
 	}
 
 	RETURN_FALSE;
-#endif /* HAVE_SYS_TIME_H */
 }
-
+#endif /* HAVE_SYS_TIME_H || defined(PHP_WIN32) */
 /* }}} */
 
 

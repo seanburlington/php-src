@@ -19,7 +19,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.15 2000/04/22 15:44:35 andi Exp $ */
+/* $Id: rand.c,v 1.16 2000/04/24 17:35:27 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -92,7 +92,7 @@
 #define loBits(u)     ((u) & 0x7FFFFFFFU)  /* mask     the highest   bit of u */
 #define mixBits(u, v) (hiBit(u)|loBits(v)) /* move hi bit of u to hi bit of v */
 
-#define MT_RAND_MAX ((unsigned long)((1<<31)-1))
+#define MT_RAND_MAX ((long)(0x7FFFFFFF)) /* (1<<31) - 1 */
 
 static void seedMT(php_uint32 seed BLS_DC)
 {

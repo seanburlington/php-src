@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.267 2003/04/05 20:43:53 helly Exp $ */
+/* $Id: gd.c,v 1.268 2003/04/19 07:44:16 moriyoshi Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -500,6 +500,9 @@ PHP_MINFO_FUNCTION(gd)
 #ifdef HAVE_GD_XBM
 	php_info_print_table_row(2, "XBM Support", "enabled");
 #endif
+#if defined(USE_GD_JISX0208) && defined(HAVE_GD_BUNDLED)
+	php_info_print_table_row(2, "JIS-mapped Japanese Font Support", "enabled");
+#endif
 	php_info_print_table_end();
 }
 /* }}} */
@@ -569,6 +572,11 @@ PHP_FUNCTION(gd_info)
 	add_assoc_bool(return_value, "XBM Support", 1);
 #else
 	add_assoc_bool(return_value, "XBM Support", 0);
+#endif
+#if defined(USE_GD_JISX0208) && defined(HAVE_GD_BUNDLED)
+	add_assoc_bool(return_value, "JIS-mapped Japanese Font Support", 1);
+#else
+	add_assoc_bool(return_value, "JIS-mapped Japanese Font Support", 0);
 #endif
 }
 /* }}} */

@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.20 2001/11/06 00:22:18 cox Exp $
+// $Id: Packager.php,v 1.21 2001/12/01 17:55:47 cox Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -105,6 +105,12 @@ class PEAR_Packager extends PEAR_Common
         $pkginfo = $this->infoFromDescriptionFile($pkgfile);
         if (PEAR::isError($pkginfo)) {
             return $pkginfo;
+        }
+        // XXX This needs to be checked in infoFromDescriptionFile
+        //     or at least a helper method to do the proper checks
+        if (empty($pkginfo['version'])) {
+            return $this->raiseError("No version information found in $pkgfile",
+                                     null, PEAR_ERROR_TRIGGER, E_USER_ERROR);
         }
         // TMP DIR -------------------------------------------------
         // We allow calls like "pear package /home/user/mypack/package.xml"

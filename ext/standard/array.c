@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.232 2003/06/10 20:03:37 imajes Exp $ */
+/* $Id: array.c,v 1.233 2003/06/12 15:11:11 andrey Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3775,8 +3775,8 @@ PHP_FUNCTION(array_combine)
 			zval_add_ref(entry_values);
 			add_index_zval(return_value, Z_LVAL_PP(entry_keys), *entry_values);
 		}
-		zend_hash_move_forward_ex(Z_ARRVAL_PP(entry_keys), &pos_keys);
-		zend_hash_move_forward_ex(Z_ARRVAL_PP(entry_values), &pos_values);
+		zend_hash_move_forward_ex(Z_ARRVAL_P(keys), &pos_keys);
+		zend_hash_move_forward_ex(Z_ARRVAL_P(values), &pos_values);
 	}
 }
 /* }}} */

@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: snmp.c,v 1.2 1999/05/09 08:48:01 zeev Exp $ */
+/* $Id: snmp.c,v 1.3 1999/05/21 10:06:18 sas Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)
@@ -268,14 +268,14 @@ retry:
 
 /* {{{ proto string snmpget(string host, string community, string object_id [, int timeout [, int retries]]) 
    Fetch an SNMP object */
-void php3_snmpget(INTERNAL_FUNCTION_PARAMETERS) {
+PHP_FUNCTION(snmpget) {
 	_php3_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,1);
 }
 /* }}} */
 
 /* {{{ proto string snmpwalk(string host, string community, string object_id [, int timeout [, int retries]]) 
    Return all objects under the specified object id */
-void php3_snmpwalk(INTERNAL_FUNCTION_PARAMETERS) {
+PHP_FUNCTION(snmpwalk) {
 	return _php3_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,2);
 }
 /* }}} */

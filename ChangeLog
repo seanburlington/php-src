@@ -1,3 +1,15 @@
+2005-01-23  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      ext/sysvshm/sysvshm.c:
+      Fixed compiler warning.
+
+2005-01-23  Sergey Kartashoff  <gluke@mail.ru>
+
+    * ext/mnogosearch/php_mnogo.c
+      ext/mnogosearch/php_mnogo.c:
+      - A bug in mnogosearch module in ispell loading code was fixed
+
 2005-01-22  Jani Taskinen  <jani.taskinen@kolumbus.fi>
 
     * (PHP_4_3)
@@ -908,7 +920,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1873 2005/01/23 01:36:08 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1874 2005/01/24 01:35:53 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

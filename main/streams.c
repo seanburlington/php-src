@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.56 2002/06/11 21:22:12 mfischer Exp $ */
+/* $Id: streams.c,v 1.57 2002/06/19 00:31:30 edink Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1047,9 +1047,6 @@ int php_shutdown_stream_wrappers(TSRMLS_D)
 
 PHPAPI int php_register_url_stream_wrapper(char *protocol, php_stream_wrapper *wrapper TSRMLS_DC)
 {
-	if (!PG(allow_url_fopen) && wrapper->is_url)
-		return FAILURE;
-
 	return zend_hash_add(&url_stream_wrappers_hash, protocol, strlen(protocol), wrapper, sizeof(*wrapper), NULL);
 }
 

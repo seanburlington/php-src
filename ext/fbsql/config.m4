@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.10 2002/09/04 12:50:41 martin Exp $
+dnl $Id: config.m4,v 1.11 2002/10/07 10:09:07 jan Exp $
 dnl
 
 PHP_ARG_WITH(fbsql, for FrontBase SQL92 (fbsql) support,
@@ -21,7 +21,7 @@ if test "$PHP_FBSQL" != "no"; then
     done
 
     if test -z "$FBSQL_INSTALLATION_DIR"; then
-      AC_MSG_ERROR(Cannot find FrontBase in well know installation directories)
+      AC_MSG_ERROR(Cannot find FrontBase in known installation directories)
     fi
 
   elif test "$PHP_FBSQL" != "no"; then

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.130 2000/12/22 16:39:01 sas Exp $ */
+/* $Id: file.c,v 1.131 2000/12/22 19:26:02 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1688,8 +1688,8 @@ PHPAPI int php_copy_file(char *src, char *dest)
 		}
 		srcfile = mmap(NULL, sbuf.st_size, PROT_READ, MAP_SHARED, fd_s, 0);
 		if (srcfile != (void *) MAP_FAILED) {
-			write(fd_t, srcfile, sbuf.st_size);
-			ret = SUCCESS;
+			if (write(fd_t, srcfile, sbuf.st_size) == sbuf.st_size)
+				ret = SUCCESS;
 			munmap(srcfile, sbuf.st_size);
 			goto cleanup;
 		}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: datetime.h,v 1.16 2004/01/08 17:32:51 sniper Exp $ */
+/* $Id: datetime.h,v 1.17 2004/09/29 04:57:19 sterling Exp $ */
 
 #ifndef DATETIME_H
 #define DATETIME_H
@@ -31,6 +31,9 @@ PHP_FUNCTION(gmdate);
 PHP_FUNCTION(localtime);
 PHP_FUNCTION(getdate);
 PHP_FUNCTION(checkdate);
+#if HAVE_STRPTIME
+PHP_FUNCTION(strptime);
+#endif 
 #if HAVE_STRFTIME
 PHP_FUNCTION(strftime);
 PHP_FUNCTION(gmstrftime);

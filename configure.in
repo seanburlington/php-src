@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.518 2004/09/26 01:10:05 wez Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.519 2004/09/29 04:57:18 sterling Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -548,6 +548,7 @@ strcoll \
 strdup \
 strerror \
 strftime \
+strptime \
 strstr \
 strtok_r \
 symlink \

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.125.2.6 2003/03/24 19:28:58 rasmus Exp $ */
+/* $Id: sockets.c,v 1.125.2.7 2003/03/25 15:54:26 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1095,7 +1095,12 @@ PHP_FUNCTION(socket_iovec_alloc)
 	zval			***args = (zval ***)NULL;
 	php_iovec_t		*vector;
 	struct iovec	*vector_array;
-	int				i, j, num_vectors, argc = ZEND_NUM_ARGS();
+	long 			num_vectors;
+	int				i, j, argc = ZEND_NUM_ARGS();
+
+	if(argc>65536) {
+		WRONG_PARAM_COUNT;
+	}
 	
 	args = emalloc(argc*sizeof(zval**));
 

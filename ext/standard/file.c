@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.21 1999/07/19 15:07:17 andrey Exp $ */
+/* $Id: file.c,v 1.22 1999/07/24 22:16:54 andrey Exp $ */
 
 /* Synced with php3 revision 1.218 1999-06-16 [ssb] */
 
@@ -196,7 +196,7 @@ function_entry php3_file_functions[] = {
 	PHP_FE(fseek,				NULL)
 	PHP_FE(ftell,				NULL)
 	PHP_FE(fwrite,				NULL)
-	{"fputs",	php3_fwrite,	NULL},
+	PHP_FALIAS(fputs,	fwrite,	NULL)
 	PHP_FE(mkdir,				NULL)
 	PHP_FE(rename,				NULL)
 	PHP_FE(copy,				NULL)
@@ -1027,7 +1027,7 @@ PHP_FUNCTION(fwrite)
 /*
    wrapper for setvbuf()
 */
-void php3_set_file_buffer(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(set_file_buffer)
 {
 	pval *arg1, *arg2;
 	FILE *fp;

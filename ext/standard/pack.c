@@ -15,7 +15,7 @@
    | Authors: Chris Schneider <cschneid@relog.ch>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.6 1999/07/16 13:12:57 zeev Exp $ */
+/* $Id: pack.c,v 1.7 1999/07/24 22:16:54 andrey Exp $ */
 
 #include "php.h"
 
@@ -51,8 +51,8 @@
 #endif
 
 function_entry pack_functions[] = {
-	{"pack",		php3_pack,	NULL},
-	{"unpack",		php3_unpack,		NULL},
+	PHP_FE(pack,									NULL)
+	PHP_FE(unpack,									NULL)
 	{NULL, NULL, NULL}
 };
 

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.15 1999/07/20 18:03:27 andrey Exp $ */
+/* $Id: head.c,v 1.16 1999/07/24 22:16:54 andrey Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -418,8 +418,8 @@ CookieList *php3_PopCookieList(void)
 	return (ret);
 }
 
-/* php3_SetCookie(name,value,expires,path,domain,secure) */
-PHP_FUNCTION(SetCookie)
+/* php3_setcookie(name,value,expires,path,domain,secure) */
+PHP_FUNCTION(setcookie)
 {
 	char *cookie;
 	int len=sizeof("Set-Cookie: ");

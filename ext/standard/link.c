@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.5 1999/07/16 13:12:56 zeev Exp $ */
+/* $Id: link.c,v 1.6 1999/07/24 22:16:54 andrey Exp $ */
 
 #include "php.h"
 #include "php3_filestat.h"
@@ -183,11 +183,11 @@ PHP_FUNCTION(unlink)
 /* }}} */
 
 function_entry link_functions[] = {
-	{"readlink",		php3_readlink,		NULL},
-	{"linkinfo",		php3_linkinfo,		NULL},
-	{"symlink",			php3_symlink,		NULL},
-	{"link",			php3_link,			NULL},
-	{"unlink",			php3_unlink,		NULL},
+	PHP_FE(readlink,								NULL)
+	PHP_FE(linkinfo,								NULL)
+	PHP_FE(symlink,									NULL)
+	PHP_FE(link,									NULL)
+	PHP_FE(unlink,									NULL)
 	{NULL, NULL, NULL}
 };
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.7 1999/07/16 13:12:55 zeev Exp $ */
+/* $Id: dir.c,v 1.8 1999/07/24 22:16:54 andrey Exp $ */
 
 #include "php.h"
 #include "fopen-wrappers.h"
@@ -45,11 +45,11 @@ static int le_dirp;
 static zend_class_entry *dir_class_entry_ptr;
 
 static zend_function_entry php_dir_functions[] = {
-	PHP_FE(opendir,		NULL)
-	PHP_FE(closedir,	NULL)
-	PHP_FE(chdir,		NULL)
-	PHP_FE(rewinddir,	NULL)
-	PHP_FE(readdir,		NULL)
+	PHP_FE(opendir,				NULL)
+	PHP_FE(closedir,			NULL)
+	PHP_FE(chdir,				NULL)
+	PHP_FE(rewinddir,			NULL)
+	PHP_FE(readdir,				NULL)
 	PHP_FALIAS(dir,		getdir,	NULL)
 	{NULL, NULL, NULL}
 };

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php3_string.h,v 1.9 1999/07/23 22:35:14 andrey Exp $ */
+/* $Id: php3_string.h,v 1.10 1999/07/24 22:16:54 andrey Exp $ */
 
 /* Synced with php3 revision 1.43 1999-06-16 [ssb] */
 
@@ -49,7 +49,7 @@ PHP_FUNCTION(str_replace);
 PHP_FUNCTION(chop);
 PHP_FUNCTION(trim);
 PHP_FUNCTION(ltrim);
-void soundex(INTERNAL_FUNCTION_PARAMETERS);
+PHP_FUNCTION(soundex);
 
 PHP_FUNCTION(explode);
 PHP_FUNCTION(implode);
@@ -80,7 +80,7 @@ PHP_FUNCTION(nl2br);
 PHP_FUNCTION(setlocale);
 PHP_FUNCTION(stristr);
 PHP_FUNCTION(chunk_split);
-PHP_FUNCTION(parsestr);
+PHP_FUNCTION(parse_str);
 PHP_FUNCTION(bin2hex);
 PHP_FUNCTION(similar_text);
 PHP_FUNCTION(strip_tags);

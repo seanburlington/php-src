@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: reg.h,v 1.3 1999/05/13 15:54:49 zeev Exp $ */
+/* $Id: reg.h,v 1.4 1999/07/24 22:16:54 andrey Exp $ */
 
 #ifndef _REG_H
 #define _REG_H
@@ -40,8 +40,8 @@ char *_php3_regreplace(const char *pattern, const char *replace, const char *str
 
 PHP_FUNCTION(ereg);
 PHP_FUNCTION(eregi);
-PHP_FUNCTION(eregireplace);
-PHP_FUNCTION(eregreplace);
+PHP_FUNCTION(eregi_replace);
+PHP_FUNCTION(ereg_replace);
 PHP_FUNCTION(split);
 PHPAPI PHP_FUNCTION(sql_regcase);
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.17 1999/07/24 16:52:00 zeev Exp $ */
+/* $Id: fsock.c,v 1.18 1999/07/24 22:16:54 andrey Exp $ */
 
 /* Synced with php3 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php3 revision 1.133 1999-07-21 [sas] */
@@ -83,8 +83,8 @@ extern int le_fp;
 static unsigned char third_and_fourth_args_force_ref[] = { 4, BYREF_NONE, BYREF_NONE, BYREF_FORCE, BYREF_FORCE };
 
 function_entry fsock_functions[] = {
-      PHP_FE(fsockopen, third_and_fourth_args_force_ref)
-      PHP_FE(pfsockopen, third_and_fourth_args_force_ref)
+      PHP_FE(fsockopen, 							third_and_fourth_args_force_ref)
+      PHP_FE(pfsockopen, 							third_and_fourth_args_force_ref)
       {NULL, NULL, NULL}
 };
 

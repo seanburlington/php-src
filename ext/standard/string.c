@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.24 1999/07/21 09:31:48 sas Exp $ */
+/* $Id: string.c,v 1.25 1999/07/24 22:16:54 andrey Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -1712,9 +1712,9 @@ PHP_FUNCTION(setlocale)
 }
 /* }}} */
 
-/* {{{ proto void parsestr(string encoded_string)
+/* {{{ proto void parse_str(string encoded_string)
    Parses GET/POST/COOKIE data and sets global variables. */
-PHP_FUNCTION(parsestr)
+PHP_FUNCTION(parse_str)
 {
 	pval *arg;
 	char *res = NULL;

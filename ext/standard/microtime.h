@@ -27,11 +27,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.h,v 1.2 1999/05/16 11:19:26 sas Exp $ */
+/* $Id: microtime.h,v 1.3 1999/07/24 22:16:54 andrey Exp $ */
 
 #ifndef _MICROTIME_H
 #define _MICROTIME_H
 
 PHP_FUNCTION(microtime);
+PHP_FUNCTION(getrusage);
 
 #endif /* _MICROTIME_H */

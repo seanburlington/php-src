@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.6 1999/07/16 13:12:56 zeev Exp $ */
+/* $Id: mail.c,v 1.7 1999/07/24 22:16:54 andrey Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -40,7 +40,7 @@
 #endif
 
 function_entry mail_functions[] = {
-	{"mail",		php3_mail,		NULL},
+	PHP_FE(mail,									NULL)
 	{NULL, NULL, NULL}
 };
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.10 1999/08/02 19:16:50 zeev Exp $ */
+/* $Id: filestat.c,v 1.11 1999/08/13 20:28:27 andrey Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -464,6 +464,7 @@ function_entry php3_filestat_functions[] = {
 	PHP_FE(filetype,								NULL)
 	PHP_FE(file_exists,								NULL)
 	PHP_FE(is_writable,								NULL)
+	PHP_FALIAS(is_writeable,	is_writable,		NULL)
 	PHP_FE(is_readable,								NULL)
 	PHP_FE(is_executable,							NULL)
 	PHP_FE(is_file,									NULL)

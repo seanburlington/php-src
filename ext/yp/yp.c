@@ -15,7 +15,7 @@
    | Authors: Stephanie Wehner <_@r4k.net>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.11 2000/04/05 21:43:03 cmv Exp $ */
+/* $Id: yp.c,v 1.12 2000/05/02 01:21:26 sas Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -46,6 +46,10 @@ zend_module_entry yp_module_entry = {
 	PHP_MINFO(yp),
 	STANDARD_MODULE_PROPERTIES
 };
+
+#ifdef COMPILE_DL_YP
+ZEND_GET_MODULE(yp)
+#endif
 
 /* {{{ proto string yp_get_default_domain(void)
    Returns the domain or false */

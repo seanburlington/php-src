@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.254 2001/12/01 15:45:55 derick Exp $ */
+/* $Id: string.c,v 1.255 2001/12/06 19:02:27 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -398,6 +398,8 @@ PHP_MINIT_FUNCTION(nl_langinfo)
 }
 /* }}} */
 
+/* {{{ proto string nl_langinfo(int item)
+   Query language and locale information */
 PHP_FUNCTION(nl_langinfo)
 {
 	zval **item;
@@ -3860,6 +3862,30 @@ PHP_FUNCTION(sscanf)
 	}
 }
 /* }}} */
+
+/* {{{ proto string rot13(string str)
+   Perform the rot13 transform on a string */
+PHP_FUNCTION(rot13)
+{
+	char *str;
+	int str_len;
+    static char xfrom[] = "abcdefghijklmnopqrstuvwxyz"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    static char xto[] = "nopqrstuvwxyzabcdefghijklm"
+        "NOPQRSTUVWXYZABCDEFGHIJKLM";
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s",
+							  &str, &str_len) == FAILURE) {
+		return;
+	}
+
+    php_strtr(str, str_len, xfrom, xto, 52);
+	RETURN_STRINGL(str, str_len, 1);
+}
+/* }}} */
+
+
+
 
 /*
  * Local variables:

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.96 2001/10/07 11:52:09 sterling Exp $ */
+/* $Id: basic_functions.h,v 1.97 2001/12/06 19:02:26 hholzgra Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -115,6 +115,8 @@ PHP_FUNCTION(move_uploaded_file);
 
 /* From the INI parser */
 PHP_FUNCTION(parse_ini_file);
+
+PHP_FUNCTION(rot13);
 
 #ifdef PHP_WIN32
 typedef unsigned int php_stat_len;

@@ -21,7 +21,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.8 1999/07/31 20:21:07 zeev Exp $ */
+/* $Id: imap.c,v 1.9 1999/08/01 00:25:58 zeev Exp $ */
 
 #define IMAP41
 
@@ -1279,10 +1279,10 @@ PHP_FUNCTION(imap_headerinfo)
 		do {
 			MAKE_STD_ZVAL(ccvals);
 			object_init(ccvals);
-			if(addresstmp->personal) add_property_string( &ccvals, "personal", addresstmp->personal, 1);
-			if(addresstmp->adl) add_property_string( &ccvals, "adl", addresstmp->adl, 1);
-			if(addresstmp->mailbox) add_property_string( &ccvals, "mailbox", addresstmp->mailbox, 1);
-			if(addresstmp->host) add_property_string( &ccvals, "host", addresstmp->host, 1);
+			if(addresstmp->personal) add_property_string(ccvals, "personal", addresstmp->personal, 1);
+			if(addresstmp->adl) add_property_string(ccvals, "adl", addresstmp->adl, 1);
+			if(addresstmp->mailbox) add_property_string(ccvals, "mailbox", addresstmp->mailbox, 1);
+			if(addresstmp->host) add_property_string(ccvals, "host", addresstmp->host, 1);
 			add_next_index_object(cc, ccvals);
 		} while ( (addresstmp = addresstmp->next) );
 		add_assoc_object(return_value, "cc", cc);

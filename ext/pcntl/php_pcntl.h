@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcntl.h,v 1.15 2003/06/10 20:03:34 imajes Exp $ */
+/* $Id: php_pcntl.h,v 1.16 2003/10/28 17:08:18 gschlossnagle Exp $ */
 
 #ifndef PHP_PCNTL_H
 #define PHP_PCNTL_H
@@ -42,6 +42,7 @@ PHP_MINFO_FUNCTION(pcntl);
 PHP_FUNCTION(pcntl_alarm);
 PHP_FUNCTION(pcntl_fork);
 PHP_FUNCTION(pcntl_waitpid);
+PHP_FUNCTION(pcntl_wait);
 PHP_FUNCTION(pcntl_wifexited);
 PHP_FUNCTION(pcntl_wifstopped);
 PHP_FUNCTION(pcntl_wifsignaled);

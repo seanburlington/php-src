@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.315 2001/03/12 03:06:53 andrei Exp $ */
+/* $Id: basic_functions.c,v 1.316 2001/03/16 18:18:01 sniper Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -247,7 +247,7 @@ function_entry basic_functions[] = {
 	PHP_FE(gethostbyaddr,							NULL)
 	PHP_FE(gethostbyname,							NULL)
 	PHP_FE(gethostbynamel,							NULL)
-#if HAVE_LIBBIND && !(defined(__BEOS__)||defined(PHP_WIN32))
+#if HAVE_RES_SEARCH && !(defined(__BEOS__)||defined(PHP_WIN32))
 	PHP_FE(checkdnsrr,								NULL)
 	PHP_FE(getmxrr,									second_and_third_args_force_ref)
 #else

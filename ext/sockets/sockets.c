@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.26 2000/12/12 17:02:12 stas Exp $ */
+/* $Id: sockets.c,v 1.27 2001/01/03 18:06:10 jon Exp $ */
 
 #include "php.h"
 
@@ -26,9 +26,14 @@
 
 /* This hopefully will fix some compile errors on other platforms --
  * the usage of msg_control/msg_controllen are X/Open Extended attributes,
- * or so it seems, by reading HP/UX 10.20 manual pages. */
+ * or so it seems, by reading HP/UX 10.20 manual pages.
+ *
+ * The second two defines are for Solaris 8 with the Sun WorkShop compiler.
+ */
 
 #define _XOPEN_SOURCE_EXTENDED
+#define _XPG4_2
+#define __EXTENSIONS__
 
 #include "ext/standard/info.h"
 #include "php_sockets.h"
@@ -64,6 +69,12 @@ php_sockets_globals sockets_globals;
 #else
 #define MSG_WAITALL 0x00000000
 #endif
+#endif
+
+/* Solaris 8 doesn't appear to define SUN_LEN in <sys/un.h> */
+#ifndef SUN_LEN
+#define SUN_LEN(su) \
+	(sizeof(*(su)) - sizeof((su)->sun_path) + strlen((su)->sun_path))
 #endif
 
 /* Use the read() wrapper, stopping at '\n', '\r', or '\0'. */

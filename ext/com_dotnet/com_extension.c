@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_extension.c,v 1.7 2004/01/08 08:14:20 andi Exp $ */
+/* $Id: com_extension.c,v 1.8 2004/01/13 13:38:11 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,6 +31,7 @@
 
 ZEND_DECLARE_MODULE_GLOBALS(com_dotnet)
 TsHashTable php_com_typelibraries;
+
 zend_class_entry
 	*php_com_variant_class_entry,
    	*php_com_exception_class_entry,

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_com_dotnet_internal.h,v 1.7 2004/01/13 00:40:14 wez Exp $ */
+/* $Id: php_com_dotnet_internal.h,v 1.8 2004/01/13 13:38:11 wez Exp $ */
 
 #ifndef PHP_COM_DOTNET_INTERNAL_H
 #define PHP_COM_DOTNET_INTERNAL_H
@@ -46,6 +46,11 @@ typedef struct _php_com_dotnet_object {
 	IDispatch *sink_dispatch;
 	GUID sink_id;
 	DWORD sink_cookie;
+
+	/* cache for method signatures */
+	HashTable *method_cache;
+	/* cache for name -> DISPID */
+	HashTable *id_of_name_cache;
 } php_com_dotnet_object;
 
 static inline int php_com_is_valid_object(zval *zv TSRMLS_DC)

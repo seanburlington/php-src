@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.108 2002/09/06 10:20:39 hyanantha Exp $ */
+/* $Id: xml.c,v 1.109 2002/09/06 10:34:30 imajes Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -35,7 +35,6 @@
 
 #if HAVE_LIBEXPAT
 
-/*#ifndef PHP_WIN32*/
 #if !defined(PHP_WIN32) && !defined(NETWARE)
 #  include "build-defs.h"
 # endif

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.588 2003/02/24 21:56:18 pollita Exp $ */
+/* $Id: basic_functions.c,v 1.589 2003/02/26 19:25:24 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -950,10 +950,10 @@ static PHP_INI_MH(OnUpdateSafeModeAllowedEnvVars)
 PHP_INI_BEGIN()
 	PHP_INI_ENTRY_EX("safe_mode_protected_env_vars", SAFE_MODE_PROTECTED_ENV_VARS, PHP_INI_SYSTEM, OnUpdateSafeModeProtectedEnvVars, NULL)
 	PHP_INI_ENTRY_EX("safe_mode_allowed_env_vars",   SAFE_MODE_ALLOWED_ENV_VARS,   PHP_INI_SYSTEM, OnUpdateSafeModeAllowedEnvVars,   NULL)
-	PHP_INI_ENTRY("date.default_latitude",  DATE_DEFAULT_LATITUDE, PHP_INI_ALL, NULL)
-	PHP_INI_ENTRY("date.default_longitude",  DATE_DEFAULT_LONGITUDE, PHP_INI_ALL, NULL)
-	PHP_INI_ENTRY("date.sunset_zenith",DATE_SUNSET_ZENITH, PHP_INI_ALL, NULL)
-	PHP_INI_ENTRY("date.sunrise_zenith",DATE_SUNRISE_ZENITH, PHP_INI_ALL, NULL)
+	PHP_INI_ENTRY("date.default_latitude",           DATE_DEFAULT_LATITUDE,        PHP_INI_ALL, NULL)
+	PHP_INI_ENTRY("date.default_longitude",          DATE_DEFAULT_LONGITUDE,       PHP_INI_ALL, NULL)
+	PHP_INI_ENTRY("date.sunset_zenith",              DATE_SUNSET_ZENITH,           PHP_INI_ALL, NULL)
+	PHP_INI_ENTRY("date.sunrise_zenith",             DATE_SUNRISE_ZENITH,          PHP_INI_ALL, NULL)
 PHP_INI_END()
 
 

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.82 2002/11/14 23:23:21 ssb Exp $
+// $Id: Common.php,v 1.83 2002/11/26 01:38:48 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -696,26 +696,28 @@ class PEAR_Common extends PEAR
     function infoFromTgzFile($file)
     {
         if (!@is_file($file)) {
-            return $this->raiseError("tgz :: could not open file \"$file\"");
+            return $this->raiseError("could not open file \"$file\"");
         }
         $tar = new Archive_Tar($file);
         $content = $tar->listContent();
         if (!is_array($content)) {
-            return $this->raiseError("tgz :: could not get contents of package \"$file\"");
+            return $this->raiseError("could not get contents of package \"$file\"");
         }
         $xml = null;
         foreach ($content as $file) {
             $name = $file['filename'];
             if ($name == 'package.xml') {
                 $xml = $name;
-            } elseif (ereg('^.*/package.xml$', $name, $match)) {
+                break;
+            } elseif (ereg('package.xml$', $name, $match)) {
                 $xml = $match[0];
+                break;
             }
         }
         $tmpdir = System::mkTemp('-d pear');
         $this->addTempFile($tmpdir);
         if (!$xml || !$tar->extractList($xml, $tmpdir)) {
-            return $this->raiseError('tgz :: could not extract the package.xml file');
+            return $this->raiseError('could not extract the package.xml file');
         }
         return $this->infoFromDescriptionFile("$tmpdir/$xml");
     }

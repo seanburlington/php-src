@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.19 2000/12/09 03:19:46 sniper Exp $ */
+/* $Id: php_domxml.h,v 1.20 2001/01/26 08:15:57 steinm Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -49,10 +49,10 @@ PHP_FUNCTION(domxml_dumpmem);
 
 /* Class Node methods */
 PHP_FUNCTION(domxml_attributes);
-PHP_FUNCTION(domxml_getattr);
-PHP_FUNCTION(domxml_setattr);
+PHP_FUNCTION(domxml_get_attribute);
+PHP_FUNCTION(domxml_set_attribute);
 PHP_FUNCTION(domxml_children);
-PHP_FUNCTION(domxml_lastchild);
+PHP_FUNCTION(domxml_last_child);
 PHP_FUNCTION(domxml_parent);
 PHP_FUNCTION(domxml_node);
 PHP_FUNCTION(domxml_new_child);

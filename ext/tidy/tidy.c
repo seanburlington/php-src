@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.53 2004/05/28 20:32:52 john Exp $ */
+/* $Id: tidy.c,v 1.54 2004/06/08 14:55:14 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -330,39 +330,52 @@ void php_tidy_panic(ctmbstr msg)
 
 static int _php_tidy_set_tidy_opt(TidyDoc doc, char *optname, zval *value TSRMLS_DC)
 {
-	TidyOption opt;
-	
-	opt = tidyGetOptionByName(doc, optname);
+	TidyOption opt = tidyGetOptionByName(doc, optname);
+	zval conv = *value;
 
 	if (!opt) {
-        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Unknown Tidy Configuration Option '%s'", optname);
+        	php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Unknown Tidy Configuration Option '%s'", optname);
 		return FAILURE;
 	}
 	
 	if (tidyOptIsReadOnly(opt)) {
-        
-        php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Attempting to set read-only option '%s'", optname);
+		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Attempting to set read-only option '%s'", optname);
 		return FAILURE;
 	}
 
 	switch(tidyOptGetType(opt)) {
 		case TidyString:
-			convert_to_string_ex(&value);
-			if (tidyOptSetValue(doc, tidyOptGetId(opt), Z_STRVAL_P(value))) {
+			if (Z_TYPE(conv) != IS_STRING) {
+				zval_copy_ctor(&conv);
+				convert_to_string(&conv);
+			}
+			if (tidyOptSetValue(doc, tidyOptGetId(opt), Z_STRVAL(conv))) {
+				if (Z_TYPE(conv) != Z_TYPE_P(value)) {
+					zval_dtor(&conv);
+				}
 				return SUCCESS;
+			}
+			if (Z_TYPE(conv) != Z_TYPE_P(value)) {
+				zval_dtor(&conv);
 			}
 			break;
 
 		case TidyInteger:
-			convert_to_long_ex(&value);
-			if (tidyOptSetInt(doc, tidyOptGetId(opt), Z_LVAL_P(value))) {
+			if (Z_TYPE(conv) != IS_LONG) {
+				zval_copy_ctor(&conv);
+				convert_to_long(&conv);
+			}
+			if (tidyOptSetInt(doc, tidyOptGetId(opt), Z_LVAL(conv))) {
 				return SUCCESS;
 			}
 			break;
 
 		case TidyBoolean:
-			convert_to_long_ex(&value);
-			if (tidyOptSetBool(doc,  tidyOptGetId(opt), Z_LVAL_P(value))) {
+			if (Z_TYPE(conv) != IS_LONG) {
+				zval_copy_ctor(&conv);
+				convert_to_long(&conv);
+			}
+			if (tidyOptSetBool(doc,  tidyOptGetId(opt), Z_LVAL(conv))) {
 				return SUCCESS;
 			}
 			break;
@@ -371,7 +384,7 @@ static int _php_tidy_set_tidy_opt(TidyDoc doc, char *optname, zval *value TSRMLS
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to determine type of configuration option");
 			break;
 	}	
-	
+
 	return FAILURE;
 }
 
@@ -939,7 +952,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.53 2004/05/28 20:32:52 john Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.54 2004/06/08 14:55:14 iliaa Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

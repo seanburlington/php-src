@@ -15,7 +15,7 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.26 2002/01/06 22:45:43 venaas Exp $ */
+/* $Id: network.c,v 1.27 2002/01/21 07:54:56 derick Exp $ */
 
 #include "php.h"
 
@@ -149,6 +149,9 @@ static int php_network_getaddresses(const char *host, struct sockaddr ***sal)
 		hints.ai_family = AF_UNSPEC;
 		if ((n = getaddrinfo(host, NULL, &hints, &res))) {
 			php_error(E_WARNING, "php_network_getaddresses: getaddrinfo failed: %s", PHP_GAI_STRERROR(n));
+			return 0;
+		} else if (res == NULL) {
+			php_error(E_WARNING, "php_network_getaddresses: getaddrinfo failed (null result pointer)");
 			return 0;
 		}
 

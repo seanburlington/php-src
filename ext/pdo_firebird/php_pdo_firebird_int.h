@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_firebird_int.h,v 1.4 2004/06/12 16:58:20 abies Exp $ */
+/* $Id: php_pdo_firebird_int.h,v 1.5 2004/06/12 18:56:07 abies Exp $ */
 
 #ifndef PHP_PDO_FIREBIRD_INT_H
 #define PHP_PDO_FIREBIRD_INT_H
@@ -48,6 +48,12 @@
 
 /* Firebird API has a couple of missing const decls in its API */
 #define const_cast(s) ((char*)(s))
+
+#ifdef PHP_WIN32
+typedef void (__stdcall *info_func_t)(char*);
+#else
+typedef void (*info_func_t)(char*);
+#endif
 
 typedef struct {
 

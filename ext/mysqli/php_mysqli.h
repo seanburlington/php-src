@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.40 2004/09/02 04:53:01 georg Exp $ 
+  $Id: php_mysqli.h,v 1.41 2004/12/26 13:16:38 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -371,6 +371,9 @@ PHP_FUNCTION(mysqli_thread_id);
 PHP_FUNCTION(mysqli_thread_safe);
 PHP_FUNCTION(mysqli_use_result);
 PHP_FUNCTION(mysqli_warning_count);
+
+ZEND_FUNCTION(mysqli_stmt_construct);
+ZEND_FUNCTION(mysqli_result_construct);
 
 ZEND_BEGIN_MODULE_GLOBALS(mysqli)
 	long			default_link;

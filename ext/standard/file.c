@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.164 2001/06/30 20:07:11 elixer Exp $ */
+/* $Id: file.c,v 1.165 2001/07/01 14:07:44 elixer Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -294,7 +294,6 @@ PHP_FUNCTION(get_meta_tags)
 	int in_tag=0, in_meta_tag=0, done=0;
 	int looking_for_val=0, have_name=0, have_content=0;
 	int saw_name=0, saw_content=0;
-	int num_parts=0;
 	char *name=NULL, *value=NULL, *temp=NULL;
 	php_meta_tags_token tok, tok_last;
 	php_meta_tags_data md;
@@ -441,7 +440,7 @@ PHP_FUNCTION(get_meta_tags)
 			name = value = NULL;
 				
 			/* Reset all of our flags */
-			in_tag = in_meta_tag = looking_for_val = num_parts = 0;
+			in_tag = in_meta_tag = looking_for_val = 0;
 			have_name = saw_name = 0;
 			have_content = saw_content = 0;
 		}

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.36 2004/06/05 18:31:56 georg Exp $ 
+  $Id: php_mysqli.h,v 1.37 2004/06/06 08:52:19 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -310,10 +310,8 @@ PHP_FUNCTION(mysqli_info);
 PHP_FUNCTION(mysqli_insert_id);
 PHP_FUNCTION(mysqli_init);
 PHP_FUNCTION(mysqli_kill);
-#ifndef PHP_WIN32
 PHP_FUNCTION(mysqli_set_local_infile_default);
 PHP_FUNCTION(mysqli_set_local_infile_handler);
-#endif
 PHP_FUNCTION(mysqli_master_query);
 PHP_FUNCTION(mysqli_more_results);
 PHP_FUNCTION(mysqli_multi_query);

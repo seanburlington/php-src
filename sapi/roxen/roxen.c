@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.44 2001/08/05 01:42:47 zeev Exp $ */
+/* $Id: roxen.c,v 1.45 2001/08/05 05:35:06 sebastian Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -446,7 +446,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.44 2001/08/05 01:42:47 zeev Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.45 2001/08/05 05:35:06 sebastian Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -584,7 +584,6 @@ static int php_roxen_module_main(TSRMLS_D)
   char *dir;
   zend_file_handle file_handle;
 #ifdef ZTS
-  TSRMLS_FETCH();
   TSRMLS_FETCH();
 #ifdef ROXEN_USE_ZTS
   GET_THIS();

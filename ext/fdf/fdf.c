@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.66.2.3 2003/03/07 13:42:13 ddhill Exp $ */
+/* $Id: fdf.c,v 1.66.2.4 2003/03/10 02:10:18 sniper Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -1495,12 +1495,12 @@ PHP_FUNCTION(fdf_get_attachment) {
 	  ZVAL_STRING(z_name, name, 1);
 	  args[0] = &z_name;
 
-	  if(*value) { // simple value 
+	  if(*value) { /* simple value */
 		  MAKE_STD_ZVAL(z_value);
 		  ZVAL_STRING(z_value, value, 1);
 		  args[1] = &z_value;
-	  } else { // empty value *might* be an array
-		  // todo do it like fdf_get_value (or re-implement yourself?)
+	  } else { /* empty value *might* be an array */
+		  /* todo do it like fdf_get_value (or re-implement yourself?) */
 	  }
 	  
 	  if(userdata) {

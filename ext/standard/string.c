@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.193 2001/02/26 15:49:38 andi Exp $ */
+/* $Id: string.c,v 1.194 2001/04/13 18:22:13 thies Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -902,7 +902,7 @@ PHP_FUNCTION(pathinfo)
 		int idx;
 
 		p = strrchr(Z_STRVAL_PP(path), '.');
-		if (*p) {
+		if (p) {
 			idx = p - Z_STRVAL_PP(path);
 			add_assoc_stringl(tmp, "extension", Z_STRVAL_PP(path) + idx + 1, len - idx - 1, 1);
 		}

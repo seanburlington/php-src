@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.199.2.13 2003/02/03 16:58:08 sniper Exp $ */
+/* $Id: array.c,v 1.199.2.14 2003/02/06 15:28:28 sniper Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1724,11 +1724,12 @@ static void _phpi_pop(INTERNAL_FUNCTION_PARAMETERS, int off_the_end)
 		int k = 0;
 		Bucket *p = Z_ARRVAL_PP(stack)->pListHead;
 		while (p != NULL) {
-			if (p->nKeyLength == 0)
+			if (p->nKeyLength == 0) {
 				p->h = k++;
+			}
 			p = p->pListNext;
 		}
-		Z_ARRVAL_PP(stack)->nNextFreeElement = k+1;
+		Z_ARRVAL_PP(stack)->nNextFreeElement = k;
 		zend_hash_rehash(Z_ARRVAL_PP(stack));
 	} else if (!key_len) {
 		Z_ARRVAL_PP(stack)->nNextFreeElement = Z_ARRVAL_PP(stack)->nNextFreeElement - 1;

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.9 2002/11/17 00:11:19 iliaa Exp $ */
+/* $Id: streams.c,v 1.125.2.10 2002/11/17 01:06:31 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1336,10 +1336,12 @@ static int php_stdiop_close(php_stream *stream, int close_handle TSRMLS_DC)
 	assert(data != NULL);
 
 	if (close_handle) {
-		if (data->is_process_pipe) {
-			ret = pclose(data->file);
-		} else {
-			ret = fclose(data->file);
+		if (data->file) {
+			if (data->is_process_pipe) {
+				ret = pclose(data->file);
+			} else {
+				ret = fclose(data->file);
+			}
 		}
 		if (data->temp_file_name) {
 			unlink(data->temp_file_name);
@@ -1347,6 +1349,7 @@ static int php_stdiop_close(php_stream *stream, int close_handle TSRMLS_DC)
 		}
 	} else {
 		ret = 0;
+		data->file = NULL;
 	}
 
 	/* STDIO streams are never persistent! */

@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: scriptengine.cpp,v 1.6 2003/03/02 13:09:47 wez Exp $ */
+/* $Id: scriptengine.cpp,v 1.7 2003/03/02 15:11:42 wez Exp $ */
 
 /* Implementation Notes:
  *
@@ -1298,7 +1298,7 @@ trace("Add %s to global namespace\n", name);
 			if (FAILED(typ->GetFuncDesc(i, &func)))
 				continue;
 
-			/* Look at it's type */
+			/* Look at its type */
 			if (func->invkind == INVOKE_PROPERTYGET
 					&& VT_PTR == func->elemdescFunc.tdesc.vt
 					&& VT_USERDEFINED == func->elemdescFunc.tdesc.lptdesc->vt

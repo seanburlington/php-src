@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.276 2003/06/10 20:03:34 imajes Exp $ */
+/* $Id: pgsql.c,v 1.277 2003/06/22 16:46:24 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -865,6 +865,7 @@ PHP_FUNCTION(pg_ping)
 	zval *pgsql_link = NULL;
 	int id = -1;
 	PGconn *pgsql;
+	PGresult *res;
 
 	if (zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET, ZEND_NUM_ARGS() TSRMLS_CC, "r",
 								 &pgsql_link) == FAILURE) {
@@ -874,7 +875,8 @@ PHP_FUNCTION(pg_ping)
 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &pgsql_link, id, "PostgreSQL link", le_link, le_plink);
 
 	/* ping connection */
-	PQexec(pgsql, "SELECT 1;");
+	res = PQexec(pgsql, "SELECT 1;");
+	PQclear(res);
 
 	/* check status. */
 	if (PQstatus(pgsql) == CONNECTION_OK)

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.249 2002/08/25 18:21:40 helly Exp $ */
+/* $Id: file.c,v 1.250 2002/08/26 23:18:59 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1320,6 +1320,7 @@ PHPAPI PHP_FUNCTION(fwrite)
 	int ret, type;
 	int num_bytes;
 	void *what;
+	char *buffer = NULL;
 
 	switch (ZEND_NUM_ARGS()) {
 	case 2:
@@ -1347,11 +1348,14 @@ PHPAPI PHP_FUNCTION(fwrite)
 	ZEND_VERIFY_RESOURCE(what);
 
 	if (!arg3 && PG(magic_quotes_runtime)) {
-		zval_copy_ctor(*arg2);
-		php_stripslashes(Z_STRVAL_PP(arg2), &num_bytes TSRMLS_CC);
+		buffer = estrndup(Z_STRVAL_PP(arg2), Z_STRLEN_PP(arg2));
+		php_stripslashes(buffer, &num_bytes TSRMLS_CC);
 	}
 
-	ret = php_stream_write((php_stream *) what, Z_STRVAL_PP(arg2), num_bytes);
+	ret = php_stream_write((php_stream *) what, buffer ? buffer : Z_STRVAL_PP(arg2), num_bytes);
+	if (buffer) {
+		efree(buffer);
+	}
 
 	RETURN_LONG(ret);
 }

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.71 2003/01/24 16:29:40 iliaa Exp $ */
+/* $Id: html.c,v 1.72 2003/02/22 20:33:11 iliaa Exp $ */
 
 #include "php.h"
 #if PHP_WIN32
@@ -831,11 +831,11 @@ static void php_html_entities(INTERNAL_FUNCTION_PARAMETERS, int all)
 {
 	char *str, *hint_charset = NULL;
 	int str_len, hint_charset_len = 0;
-	int len, quote_style = ENT_COMPAT;
+	int len;
+	long quote_style = ENT_COMPAT;
 	char *replaced;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|ls", &str, &str_len,
-							  &quote_style, &hint_charset, &hint_charset_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|ls", &str, &str_len, &quote_style, &hint_charset, &hint_charset_len) == FAILURE) {
 		return;
 	}
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.21.2.3 2002/12/31 16:35:25 sebastian Exp $ */
+/* $Id: credits.c,v 1.21.2.4 2003/07/28 10:44:59 sniper Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -109,7 +109,7 @@ PHPAPI void php_print_credits(int flag)
 	}
 
 	if (flag & PHP_CREDITS_FULLPAGE) {
-		PUTS("</center></body></html>\n");
+		PUTS("</div></body></html>\n");
 	}
 }
 /* }}} */

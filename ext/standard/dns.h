@@ -18,12 +18,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dns.h,v 1.16 2003/06/10 20:03:37 imajes Exp $ */
+/* $Id: dns.h,v 1.17 2003/07/08 14:46:32 sniper Exp $ */
 
 #ifndef DNS_H
 #define DNS_H
 
-#if HAVE_RES_NMKQUERY & HAVE_RES_NSEND & HAVE_DN_EXPAND & HAVE_DN_SKIPNAME
+#if HAVE_RES_NMKQUERY && HAVE_RES_NSEND && HAVE_DN_EXPAND && HAVE_DN_SKIPNAME
 #define HAVE_DNS_FUNCS 1
 #endif
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: velocis.c,v 1.7 1999/09/05 13:01:42 kara Exp $ */
+/* $Id: velocis.c,v 1.8 1999/11/09 14:28:59 ssb Exp $ */
 
 /*
  * TODO:
@@ -40,7 +40,7 @@
 # define THREAD_LS
 #endif
 
-#if HAVE_VELOCIS
+#ifdef HAVE_VELOCIS
 #include "php3_velocis.h"
 
 function_entry velocis_functions[] = {

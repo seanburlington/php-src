@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_velocis.h,v 1.4 1999/08/02 16:06:13 andrey Exp $ */
+/* $Id: php3_velocis.h,v 1.5 1999/11/09 14:28:59 ssb Exp $ */
 
 #ifndef _PHP3_VELOCIS_H
 #define _PHP3_VELOCIS_H
@@ -38,7 +38,7 @@
 #define HAVE_VELOCIS 1
 #endif
 
-#if HAVE_VELOCIS && !HAVE_UODBC
+#if defined(HAVE_VELOCIS) && !HAVE_UODBC
 #define UNIX
 #include <sql.h>
 #include <sqlext.h>

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.14 2003/05/20 21:01:42 sas Exp $ */
+/* $Id: session.c,v 1.336.2.15 2003/05/21 02:33:13 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1590,6 +1590,7 @@ static void php_session_flush(TSRMLS_D)
 	if(PS(session_status)==php_session_active) {
 		php_session_save_current_state(TSRMLS_C);
 	}
+	PS(session_status)=php_session_none;
 }
 
 /* {{{ proto void session_write_close(void)

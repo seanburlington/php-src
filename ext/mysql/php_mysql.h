@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.32 2002/08/24 21:41:25 yohgaki Exp $ */
+/* $Id: php_mysql.h,v 1.33 2002/11/11 12:54:06 georg Exp $ */
 
 #ifndef PHP_MYSQL_H
 #define PHP_MYSQL_H
@@ -103,6 +103,8 @@ ZEND_BEGIN_MODULE_GLOBALS(mysql)
 	char *connect_error;
 	long connect_errno;
 	long connect_timeout;
+	long result_allocated;
+	long trace_mode;
 ZEND_END_MODULE_GLOBALS(mysql)
 
 #ifdef ZTS

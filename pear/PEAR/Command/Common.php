@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.15 2002/06/06 06:40:05 cox Exp $
+// $Id: Common.php,v 1.16 2002/06/07 08:43:45 cox Exp $
 
 require_once "PEAR.php";
 
@@ -37,6 +37,28 @@ class PEAR_Command_Common extends PEAR
      * @var object
      */
     var $ui;
+
+    var $_deps_rel_trans = array(
+                                 'lt' => '<',
+                                 'le' => '<=',
+                                 'eq' => '=',
+                                 'ne' => '!=',
+                                 'gt' => '>',
+                                 'ge' => '>=',
+                                 'has' => '=='
+                                 );
+
+    var $_deps_type_trans = array(
+                                  'pkg' => 'package',
+                                  'extension' => 'extension',
+                                  'php' => 'PHP',
+                                  'prog' => 'external program',
+                                  'ldlib' => 'external library for linking',
+                                  'rtlib' => 'external runtime library',
+                                  'os' => 'operating system',
+                                  'websrv' => 'web server',
+                                  'sapi' => 'SAPI backend'
+                                  );
 
     // }}}
     // {{{ constructor

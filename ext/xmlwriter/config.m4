@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.2 2005/02/13 07:30:56 hholzgra Exp $
+dnl $Id: config.m4,v 1.3 2005/02/23 23:02:01 helly Exp $
 dnl
 
 AC_DEFUN([PHP_XMLWRITER_CHECK_VERSION],[
@@ -58,4 +58,6 @@ if test "$PHP_XMLWRITER" != "no"; then
   AC_DEFINE(HAVE_XMLWRITER,1,[ ])
   PHP_NEW_EXTENSION(xmlwriter, php_xmlwriter.c, $ext_shared)
   PHP_SUBST(XMLWRITER_SHARED_LIBADD)
-fi
+
+  AC_CHECK_FUNCS([xmlTextWriterStartComment xmlTextWriterEndComment])
+ fi

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sess_sqlite.c,v 1.12 2004/01/12 22:48:58 iliaa Exp $ */
+/* $Id: sess_sqlite.c,v 1.13 2004/01/13 05:23:07 john Exp $ */
 
 #include "php.h"
 
@@ -179,7 +179,7 @@ PS_GC_FUNC(sqlite)
 	 * we need to occassionaly do so manually to prevent the sessions database 
 	 * from endlessly growing.
 	 */
-	if ((int) ((float) PS(gc_divisor) * PS(gc_divisor) * php_combined_lcg(TSRMLS_C)) < PS(gc_probability) {
+	if ((int) ((float) PS(gc_divisor) * PS(gc_divisor) * php_combined_lcg(TSRMLS_C)) < PS(gc_probability)) {
 		rv = sqlite_exec_printf(db, "VACUUM", NULL, NULL, NULL);
 	}
 	return SQLITE_RETVAL(rv);

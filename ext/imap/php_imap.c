@@ -22,10 +22,11 @@
    |          Andrew Skalski      <askalski@chekinc.com>                  |
    |          Hartmut Holzgraefe  <hartmut@six.de>                        |
    |          Jani Taskinen       <sniper@iki.fi>                         |
+   |          Daniel R Kalowsky   <dank@deadmime.org>                     |
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.62 2001/03/01 07:06:54 chagenbu Exp $ */
+/* $Id: php_imap.c,v 1.62.2.1 2001/03/16 13:24:06 kalowsky Exp $ */
 
 #define IMAP41
 
@@ -366,6 +367,8 @@ MESSAGELIST *mail_newmessagelist(void)
  */
 void mail_getquota(MAILSTREAM *stream, char *qroot,QUOTALIST *qlist)
 {
+	IMAPLS_FETCH();
+
 	/* this should only be run through once */
 	for (; qlist; qlist = qlist->next)
 	{
@@ -1021,6 +1024,8 @@ PHP_FUNCTION(imap_get_quota)
 
 	int ind, ind_type;
 	pils *imap_le_struct;
+
+	IMAPLS_FETCH();
 
 	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters_ex(2, &streamind, &qroot) == FAILURE) {
 		ZEND_WRONG_PARAM_COUNT();

@@ -18,12 +18,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.51 2003/08/16 01:58:29 abies Exp $ */
+/* $Id: php_interbase.h,v 1.52 2003/08/16 15:31:06 abies Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
-
-#if HAVE_IBASE
 
 #include <ibase.h>
 
@@ -194,11 +192,13 @@ typedef struct _php_ibase_varchar {
 
 enum php_interbase_option {
 	PHP_IBASE_DEFAULT 			= 0,
-	PHP_IBASE_TEXT 				= 1,
 	PHP_IBASE_UNIXTIME 			= 2,
 	PHP_IBASE_TIMESTAMP 		= 4,
 	PHP_IBASE_DATE 				= 8,
 	PHP_IBASE_TIME 				= 16,
+	/* fetch args */
+	PHP_IBASE_FETCH_BLOBS		= 1,
+	PHP_IBASE_FETCH_ARRAYS      = 2,
 	/* transactions */	
 	PHP_IBASE_WRITE 			= 2,
 	PHP_IBASE_READ 				= 4,
@@ -220,8 +220,6 @@ enum php_interbase_option {
 #else
 
 #define phpext_interbase_ptr NULL
-
-#endif /* HAVE_IBASE */
 
 #endif /* PHP_INTERBASE_H */
 

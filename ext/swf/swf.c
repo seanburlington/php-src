@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.22 2000/09/09 11:41:14 zeev Exp $ */
+/* $Id: swf.c,v 1.23 2000/09/11 04:31:04 andi Exp $ */
 
 
 #include "php.h"
@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <swf.h>
 #include "ext/standard/info.h"
+#include "ext/standard/file.h"
 #include "php_swf.h"
 
 #ifdef ZTS

@@ -1,6 +1,6 @@
 <!-- 
     $Source: /repository/php-src/ext/mnogosearch/Attic/index.php,v $
-    $Id: index.php,v 1.4 2001/11/03 22:37:49 gluke Exp $ 
+    $Id: index.php,v 1.5 2001/11/04 08:46:54 gluke Exp $ 
 -->
 
 <?
@@ -194,10 +194,16 @@ function ParseDocText($text){
     global $hlbeg, $hlend;
        
     $str=$text;
-    for ($i=0; $i<count($all_words); $i++) {
-	$word=$all_words[$i];
-	$str = preg_replace("/([\s\t\r\n\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\\\|\{\}\[\]\;\:\'\"\<\>\?\/\,\.]+)($word)/i","\\1$hlbeg\\2$hlend",$str);
-	$str = preg_replace("/^($word)/i","$hlbeg\\1$hlend",$str);
+    
+    if (Udm_Api_Version() < 30200) {
+    	for ($i=0; $i<count($all_words); $i++) {
+		$word=$all_words[$i];
+		$str = preg_replace("/([\s\t\r\n\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\\\|\{\}\[\]\;\:\'\"\<\>\?\/\,\.]+)($word)/i","\\1$hlbeg\\2$hlend",$str);
+		$str = preg_replace("/^($word)/i","$hlbeg\\1$hlend",$str);
+    	}
+    } else {
+    	$str = str_replace("\2",$hlbeg,$str);
+    	$str = str_replace("\3",$hlend,$str);
     }
 
     return $str;

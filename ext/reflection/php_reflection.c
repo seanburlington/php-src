@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.114 2004/07/19 19:17:32 sebastian Exp $ */
+/* $Id: php_reflection.c,v 1.115 2004/07/20 18:22:31 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -2387,7 +2387,7 @@ ZEND_METHOD(reflection_class, isFinal)
    Returns whether this class is abstract */
 ZEND_METHOD(reflection_class, isAbstract)
 {
-	_class_check_flag(INTERNAL_FUNCTION_PARAM_PASSTHRU, ZEND_ACC_IMPLICIT_ABSTRACT_CLASS);
+	_class_check_flag(INTERNAL_FUNCTION_PARAM_PASSTHRU, ZEND_ACC_IMPLICIT_ABSTRACT_CLASS|ZEND_ACC_EXPLICIT_ABSTRACT_CLASS);
 }
 /* }}} */
 

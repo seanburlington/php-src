@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.61 2004/08/17 14:10:03 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.62 2004/09/24 13:07:18 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -909,7 +909,7 @@ static int parse_context_options(php_stream_context *context, zval *options)
 	HashPosition pos, opos;
 	zval **wval, **oval;
 	char *wkey, *okey;
-	int wkey_len, okey_len;
+	uint wkey_len, okey_len;
 	int ret = SUCCESS;
 	ulong num_key;
 

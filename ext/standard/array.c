@@ -22,7 +22,7 @@
 */
 
 
-/* $Id: array.c,v 1.199.2.36 2004/08/10 06:04:12 moriyoshi Exp $ */
+/* $Id: array.c,v 1.199.2.37 2004/09/24 13:07:18 derick Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1712,7 +1712,7 @@ static void _phpi_pop(INTERNAL_FUNCTION_PARAMETERS, int off_the_end)
 	zval	   **stack,			/* Input stack */
 			   **val;			/* Value to be popped */
 	char *key = NULL;
-	int key_len = 0;
+	uint key_len = 0;
 	ulong index;
 	
 	/* Get the arguments and do error-checking */

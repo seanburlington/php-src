@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.87 2001/02/13 18:28:24 thies Exp $ */
+/* $Id: pgsql.c,v 1.88 2001/02/13 20:13:14 thies Exp $ */
 
 #include <stdlib.h>
 
@@ -145,25 +145,23 @@ static void _close_pgsql_plink(zend_rsrc_list_entry *rsrc)
 	PGG(num_links)--;
 }
 
+static void _be_quiet(void * arg, const char * message)
+{
+}
+
 static int _rollback_transactions(zend_rsrc_list_entry *rsrc)
 {
 	PGconn *link = (PGconn *)rsrc->ptr;
-	/*
-	PGresult *pg_result;
-	ExecStatusType status;
-	*/
+	PQnoticeProcessor old_notice_hook;
 
+	/* we set the  PQsetNoticeProcessor to avoid the stupid 
+	 * "NOTICE:  BEGIN: already a transaction in progress"
+	 * message
+	 */ 
+
+ 	old_notice_hook = PQsetNoticeProcessor(link, _be_quiet, NULL);
 	PQexec(link,"BEGIN;ROLLBACK;");
-
-	/* maybe do error handling later....
-	pg_result = PQexec(link,"BEGIN;ROLLBACK;");
-	
-	if (pg_result) {
-		status = PQresultStatus(pg_result);
-	} else {
-		status = (ExecStatusType) PQstatus(link);
-	}
-	*/
+	PQsetNoticeProcessor(link, old_notice_hook, NULL);
 
 	return 0;
 }

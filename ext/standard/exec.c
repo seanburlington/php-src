@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.71 2002/04/03 13:39:35 wez Exp $ */
+/* $Id: exec.c,v 1.72 2002/04/03 13:47:21 wez Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -46,7 +46,7 @@
 #endif
 
 /* {{{ php_make_safe_mode_command */
-static int php_make_safe_mode_command(char *cmd, char **safecmd)
+static int php_make_safe_mode_command(char *cmd, char **safecmd TSRMLS_DC)
 {
 	int lcmd, larg0, ldir, len, overflow_limit;
 	char *space, *sep, *arg0;
@@ -678,7 +678,7 @@ PHP_FUNCTION(proc_open)
 		RETURN_FALSE;
 	}
 
-	if (FAILURE == php_make_safe_mode_command(command, &command)) {
+	if (FAILURE == php_make_safe_mode_command(command, &command TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 

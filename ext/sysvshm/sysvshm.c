@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.10 1999/12/04 19:16:09 sas Exp $ */
+/* $Id: sysvshm.c,v 1.11 1999/12/12 10:55:27 sas Exp $ */
 
 /* This has been built and tested on Solaris 2.6.
  * It may not compile or execute correctly on other systems.
@@ -83,7 +83,7 @@ PHP_FUNCTION(shm_attach)
 	sysvshm_shm *shm_list_ptr;
 	char *shm_ptr;
 	sysvshm_chunk_head *chunk_ptr;
-	key_t shm_key;
+	key_t shm_key = (key_t) 0;
 	long shm_id,list_id;
 	int ac = ARG_COUNT(ht);
 

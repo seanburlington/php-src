@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.269 2001/12/30 01:37:23 yohgaki Exp $ */
+/* $Id: session.c,v 1.270 2002/01/16 23:24:37 yohgaki Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -178,7 +178,7 @@ static ps_module *ps_modules[MAX_MODULES + 1] = {
 	ps_user_ptr
 };
 
-int php_session_register_serializer(const char *name, 
+PHPAPI int php_session_register_serializer(const char *name, 
 		int (*encode)(PS_SERIALIZER_ENCODE_ARGS),
 		int (*decode)(PS_SERIALIZER_DECODE_ARGS))
 {
@@ -199,7 +199,7 @@ int php_session_register_serializer(const char *name,
 	return ret;
 }
 
-int php_session_register_module(ps_module *ptr)
+PHPAPI int php_session_register_module(ps_module *ptr)
 {
 	int ret = -1;
 	int i;

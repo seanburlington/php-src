@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.140 2003/10/31 22:22:17 cellog Exp $
+// $Id: Installer.php,v 1.141 2003/10/31 22:52:33 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -506,7 +506,9 @@ class PEAR_Installer extends PEAR_Common
                 case 'delete':
                     break;
                 case 'installed_as':
-                    unset($this->pkginfo['filelist'][$data[0]]['installed_as']);
+                    if (isset($this->pkginfo['filelist'])) {
+                        unset($this->pkginfo['filelist'][$data[0]]['installed_as']);
+                    }
                     if (isset($this->pkginfo['filelist']['dirtree'][dirname($data[1])])) {
                         unset($this->pkginfo['filelist']['dirtree'][dirname($data[1])]);
                         while(!empty($data[3]) && $data[3] != '/' && $data[3] != '\\'

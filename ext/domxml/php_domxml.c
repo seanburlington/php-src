@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.118.2.3 2002/03/07 18:53:55 jtate Exp $ */
+/* $Id: php_domxml.c,v 1.118.2.4 2002/03/08 23:39:26 jtate Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -1802,8 +1802,12 @@ PHP_FUNCTION(domxml_node_unlink_node)
 	DOMXML_PARAM_NONE(nodep, id, le_domxmlnodep);
 
 	xmlUnlinkNode(nodep);
-	xmlFreeNode(nodep);
-	zval_dtor(id);				/* This is not enough because the children won't be deleted */
+	/*	This causes a Segmentation Fault for some reason.  Removing 
+		it allows the user to re-add the node at some other time, in
+		addition to fixing the segfault.  Node will be freed at
+		shutdown. */
+	/*xmlFreeNode(nodep);
+	zval_dtor(id);*/			/* This is not enough because the children won't be deleted */
 }
 /* }}} */
 

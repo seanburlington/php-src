@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: expat_compat.h,v 1.1 2003/05/06 19:38:49 sterling Exp $ */
+/* $Id: expat_compat.h,v 1.2 2003/05/07 15:21:31 moriyoshi Exp $ */
 
 #ifndef PHP_EXPAT_COMPAT_H
 #define PHP_EXPAT_COMPAT_H
@@ -43,6 +43,12 @@ typedef int  (*XML_ExternalEntityRefHandler)(void *, const XML_Char *, const XML
 typedef void (*XML_StartNamespaceDeclHandler)(void *, const XML_Char *, const XML_Char *);
 typedef void (*XML_EndNamespaceDeclHandler)(void *, const XML_Char *);
 
+typedef struct _XML_Memory_Handling_Suite {
+  void *(*malloc_fcn)(size_t size);
+  void *(*realloc_fcn)(void *ptr, size_t size);
+  void (*free_fcn)(void *ptr);
+} XML_Memory_Handling_Suite;
+
 typedef struct _XML_Parser {
 	int namespace;
 
@@ -62,10 +68,12 @@ typedef struct _XML_Parser {
 	XML_ExternalEntityRefHandler     h_external_entity_ref;
 	XML_StartNamespaceDeclHandler    h_start_ns;
 	XML_EndNamespaceDeclHandler      h_end_ns;
+	XML_Memory_Handling_Suite        mem_hdlrs;
 } *XML_Parser;
 
 XML_Parser XML_ParserCreate(const XML_Char *);
 XML_Parser XML_ParserCreateNS(const XML_Char *, const XML_Char);
+XML_ParserCreate_MM(const XML_Char *, const XML_Memory_Handling_Suite *, const XML_Char *);
 void XML_SetUserData(XML_Parser, void *);
 void *XML_GetUserData(XML_Parser);
 void XML_SetElementHandler(XML_Parser, XML_StartElementHandler, XML_EndElementHandler);

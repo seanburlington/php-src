@@ -16,21 +16,49 @@
 // |          Sebastian Bergmann <sb@sebastian-bergmann.de>               |
 // +----------------------------------------------------------------------+
 //
-// $Id: Cache.php,v 1.8 2001/03/17 16:06:31 chregu Exp $
+// $Id: Cache.php,v 1.9 2001/03/28 18:32:20 uw Exp $
 
 require_once "Cache/Error.php";
 
 /**
 * Cache is a base class for cache implementations.
 *
-* TODO: Simple usage example goes here.
+* The pear cache module is a generic data cache which can be used to 
+* cache script runs. The idea behind the cache is quite simple. If you have
+* the same input parameters for whatever tasks/algorithm you use you'll
+* usually get the same output. So why not caching templates, functions calls,
+* graphic generation etc. Caching certain actions e.g. XSLT tranformations
+* saves you lots of time. 
+*
+* The design of the cache reminds of PHPLibs session implementation. A 
+* (PHPLib: session) controller uses storage container (PHPLib: ct_*.inc) to save 
+* certain data (PHPLib: session data). In contrast to the session stuff it's up to 
+* you to generate an ID for the data to cache. If you're using the output cache
+* you might use the script name as a seed for cache::generateID(), if your using the
+* function cache you'd use an array with all function parameters.
+*
+* Usage example of the generic data cache:
+*
+* require_once("Cache.php");
+*
+* $cache = new Cache("file", array("cache_dir" => "cache/") );
+* $id = $cache->generateID("testentry");
+*
+* if ($data = $cache->get($id)) {
+*    print "Cache hit.<br>Data: $data";
+*
+* } else {
+*   $data = "data of any kind";
+*   $cache->save($id, $data);
+*   print "Cache miss.<br>";
+* }
 *
 * WARNING: No File/DB-Table-Row locking is implemented yet,
 *          it's possible, that you get corrupted data-entries under
 *          bad circumstances  (especially with the file container)
 *
 * @author   Ulf Wendel <ulf.wendel@phpdoc.de>
-* @version  $Id: Cache.php,v 1.8 2001/03/17 16:06:31 chregu Exp $
+* @version  $Id: Cache.php,v 1.9 2001/03/28 18:32:20 uw Exp $
 * @package  Cache
 * @access   public
 */

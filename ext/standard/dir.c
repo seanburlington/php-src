@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.106 2002/09/28 09:14:45 yohgaki Exp $ */
+/* $Id: dir.c,v 1.107 2002/10/04 18:03:29 rasmus Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -347,8 +347,10 @@ PHP_FUNCTION(glob)
 {
 	char cwd[MAXPATHLEN];
 	int cwd_skip = 0;
+#ifdef ZTS
 	char work_pattern[MAXPATHLEN];
 	char *result;
+#endif
 	char *pattern = NULL;
 	int pattern_len;
 	long flags = 0;

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.62 2005/02/05 21:29:42 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.63 2005/02/05 22:46:26 edink Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -394,6 +394,7 @@ static inline void fetch_value(pdo_stmt_t *stmt, zval *dest, int colno TSRMLS_DC
 			ZVAL_NULL(dest);
 			break;
 
+		case PDO_PARAM_LOB:
 		case PDO_PARAM_STR:
 			if (value && !(value_len == 0 && stmt->dbh->oracle_nulls)) {
 				ZVAL_STRINGL(dest, value, value_len, 1);

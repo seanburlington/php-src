@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.113 2003/06/10 20:03:37 imajes Exp $ */
+/* $Id: fsock.c,v 1.114 2003/08/28 15:16:20 sas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -52,7 +52,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	}
 
 	if (persistent) {
-		spprintf(&hashkey, 0, "pfsockopen__%s:%d", host, port);
+		spprintf(&hashkey, 0, "pfsockopen__%s:%ld", host, port);
 	}
 
 	if (port > 0) {

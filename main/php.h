@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.38 1999/10/15 19:23:03 andrei Exp $ */
+/* $Id: php.h,v 1.39 1999/10/15 21:23:37 andrei Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -307,7 +307,7 @@ int module_startup_modules(void);
 int module_global_startup_modules(void);
 int module_global_shutdown_modules(void);
 
-int mergesort(void *base, size_t nmemb, size_t size, int (*cmp) (const void *, const void *));
+int mergesort(void *base, size_t nmemb, register size_t size, int (*cmp) (const void *, const void *));
 
 /*from basic functions*/
 extern PHPAPI int _php_error_log(int opt_err,char *message,char *opt,char *headers);

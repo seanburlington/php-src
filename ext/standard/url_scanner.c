@@ -16,7 +16,7 @@
    |         Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.21 2000/08/03 11:42:39 hholzgra Exp $ */
+/* $Id: url_scanner.c,v 1.22 2000/08/04 09:03:20 hholzgra Exp $ */
 
 #include "php.h"
 
@@ -57,8 +57,8 @@ static char *url_attr_addon(const char *tag,const char *attr,const char *val,con
 	} else if(!strcasecmp(tag,"img"  ) && !strcasecmp(attr,"action" )) {
 		flag = 1;
 	}
-	if(flag) {
-		if(!strstr(val,buf))
+	if(flag) {		
+		if(!strstr(val,buf)&&!strchr(val,':'))
 			{
 				char *result = (char *)emalloc(strlen(buf)+strlen(PG(arg_separator))+1);
 				int n;

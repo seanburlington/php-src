@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.143 2002/04/23 13:24:25 steinm Exp $ */
+/* $Id: php_domxml.c,v 1.144 2002/04/24 05:49:57 sniper Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -3283,12 +3283,15 @@ PHP_FUNCTION(domxml_dump_node)
 }
 /* }}} */
 
-static void idsHashScanner2(void *payload, void *data, xmlChar *name) {
+static void idsHashScanner2(void *payload, void *data, xmlChar *name)
+{
 	zval *return_value = (zval *) data;
 	zval *child;
 	int ret;
 	xmlNode *nodep;
 
+	TSRMLS_FETCH();
+    
 	nodep = ((xmlNode *)((xmlID *)payload)->attr)->parent;
 	child = php_domobject_new(nodep, &ret TSRMLS_CC);
 	add_next_index_zval(return_value, child);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.106.2.12 2003/12/20 20:24:36 wez Exp $ */
+/* $Id: fsock.c,v 1.106.2.13 2004/01/22 03:25:37 sniper Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -94,10 +94,6 @@
 #include "fsock.h"
 
 #include "php_network.h"
-
-#ifdef ZTS
-static int fsock_globals_id;
-#endif
 
 #ifdef PHP_WIN32
 #define EWOULDBLOCK WSAEWOULDBLOCK

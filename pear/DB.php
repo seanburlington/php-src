@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.43 2001/01/10 01:01:52 ssb Exp $
+// $Id: DB.php,v 1.44 2001/01/26 20:07:22 chagenbu Exp $
 //
 // Database independent query interface.
 //
@@ -242,9 +242,10 @@ class DB
      */
     function isError($value)
     {
-	return is_object($value) &&
-	    (get_class($value) == "db_error" ||
-	     is_subclass_of($value, "db_error"));
+	return (is_object($value) &&
+		(get_class($value) == "db_error" ||
+		 is_subclass_of($value, "db_error")) ||
+		!isset($value));
     }
 
     /**

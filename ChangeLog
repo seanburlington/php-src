@@ -1,3 +1,15 @@
+2004-10-13  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * NEWS
+      ext/standard/file.c:
+      Added optional offset parameter to file_get_contents().
+
+2004-10-13  Andi Gutmans  <andi@zend.com>
+
+    * ZendEngine2/zend_compile.c:
+      - Don't allow access modifiers in interfaces. Explicitly stating public
+      - should also be disallowed but we don't have a way to detect it today.
+
 2004-10-12  Ilia Alshanetsky  <ilia@prohost.org>
 
     * NEWS
@@ -11536,7 +11548,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1774 2004/10/13 00:36:49 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1775 2004/10/14 00:48:06 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

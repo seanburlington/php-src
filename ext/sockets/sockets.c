@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.109 2002/05/01 16:08:50 mfischer Exp $ */
+/* $Id: sockets.c,v 1.110 2002/05/01 16:38:22 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -696,7 +696,7 @@ PHP_FUNCTION(socket_close)
 /* }}} */
 
 /* {{{ proto int socket_write(resource socket, string buf[, int length])
-   Writes the buffer to the file descriptor fd, length is optional */
+   Writes the buffer to the socket resource, length is optional */
 PHP_FUNCTION(socket_write)
 {
 	zval		*arg1;
@@ -720,7 +720,7 @@ PHP_FUNCTION(socket_write)
 #endif
 
 	if (retval < 0) {
-		php_sock->error = errno;
+		SOCKETS_G(last_error) = php_sock->error = errno;
 		php_error(E_WARNING, "%s() unable to write to socket %d [%d]: %s", get_active_function_name(TSRMLS_C), php_sock->bsd_socket, errno, php_strerror(errno));
 		RETURN_FALSE;
 	}
@@ -732,7 +732,7 @@ PHP_FUNCTION(socket_write)
 typedef int (*read_func)(int, void *, int);
 
 /* {{{ proto string socket_read(resource socket, int length [, int type])
-   Reads length bytes from socket */
+   Reads a maximum of length bytes from socket */
 PHP_FUNCTION(socket_read)
 {
 	zval		*arg1;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: caudium.c,v 1.6 2000/12/04 23:12:40 neotron Exp $ */
+/* $Id: caudium.c,v 1.7 2000/12/07 19:01:13 neotron Exp $ */
 
 #include "php.h"
 #ifdef HAVE_CAUDIUM
@@ -46,7 +46,6 @@
 #include <pike_types.h>
 #include <interpret.h>
 #include <module_support.h>
-#include <error.h>
 #include <array.h>
 #include <backend.h>
 #include <stralloc.h>
@@ -56,6 +55,15 @@
 #include <builtin_functions.h>
 #include <operators.h>
 #include <version.h>
+
+#if (PIKE_MAJOR_VERSION == 7 && PIKE_MINOR_VERSION == 1 && PIKE_BUILD_VERSION >= 12) || PIKE_MAJOR_VERSION > 7 || (PIKE_MAJOR_VERSION == 7 && PIKE_MINOR_VERSION > 1)
+# include "pike_error.h"
+#else
+# include "error.h"
+# ifndef Pike_error
+#  define Pike_error error
+# endif
+#endif
 
 #ifndef ZTS
 /* Need thread safety */
@@ -450,7 +458,7 @@ static void php_info_caudium(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.6 2000/12/04 23:12:40 neotron Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.7 2000/12/07 19:01:13 neotron Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -713,15 +721,15 @@ void f_php_caudium_request_handler(INT32 args)
   php_caudium_request *_request;
   THIS = malloc(sizeof(php_caudium_request));
   if(THIS == NULL)
-    error("Out of memory.");
+    Pike_error("Out of memory.");
 
   //  if(current_thread == th_self())
-  //    error("PHP4.Interpreter->run: Tried to run a PHP-script from a PHP "
+  //    Pike_error("PHP4.Interpreter->run: Tried to run a PHP-script from a PHP "
   //	  "callback!");
   get_all_args("PHP4.Interpreter->run", args, "%S%m%O%*", &script,
 	       &request_data, &my_fd_obj, &done_callback);
   if(done_callback->type != PIKE_T_FUNCTION) 
-    error("PHP4.Interpreter->run: Bad argument 4, expected function.\n");
+    Pike_error("PHP4.Interpreter->run: Bad argument 4, expected function.\n");
   add_ref(request_data);
   add_ref(my_fd_obj);
   add_ref(script);

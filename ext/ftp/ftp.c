@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.33 2001/06/19 21:25:53 sbergmann Exp $ */
+/* $Id: ftp.c,v 1.34 2001/07/17 05:53:03 jason Exp $ */
 
 #include "php.h"
 
@@ -582,7 +582,7 @@ bail:
 /* {{{ ftp_put
  */
 int
-ftp_put(ftpbuf_t *ftp, const char *path, FILE *infp, ftptype_t type)
+ftp_put(ftpbuf_t *ftp, const char *path, FILE *infp, int insocket, int issock, ftptype_t type)
 {
 	databuf_t		*data = NULL;
 	int			size;
@@ -608,7 +608,7 @@ ftp_put(ftpbuf_t *ftp, const char *path, FILE *infp, ftptype_t type)
 
 	size = 0;
 	ptr = data->buf;
-	while ((ch = getc(infp)) != EOF) {
+	while ((ch = FP_FGETC(insocket, infp, issock))!=EOF && !FP_FEOF(insocket, infp, issock)) {
 		/* flush if necessary */
 		if (FTP_BUFSIZE - size < 2) {
 			if (my_send(data->fd, data->buf, size) != size)
@@ -629,7 +629,7 @@ ftp_put(ftpbuf_t *ftp, const char *path, FILE *infp, ftptype_t type)
 	if (size && my_send(data->fd, data->buf, size) != size)
 		goto bail;
 
-	if (ferror(infp))
+	if (!issock && ferror(infp))
 		goto bail;
 
 	data = data_close(data);

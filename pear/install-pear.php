@@ -1,9 +1,6 @@
 <?php
 
-// XXX TODO write the config file at the end as for example
-// in 'system' layer
-
-/* $Id: install-pear.php,v 1.6.2.7 2003/07/04 11:04:07 pajoye Exp $ */
+/* $Id: install-pear.php,v 1.6.2.8 2003/07/08 20:39:45 pajoye Exp $ */
 
 $pear_dir = dirname(__FILE__);
 ini_set('include_path', $pear_dir);
@@ -112,6 +109,19 @@ foreach ($install_files as $package => $instfile) {
         $new_ver = $reg->packageInfo($package, 'version');
         $ui->outputData(sprintf("[PEAR] %-15s- installed: %s", $package, $new_ver));
     }
+    if ($package == 'PEAR') {
+        if (is_file($ufile = $config->getConfFile('user'))) {
+            $ui->outputData('Warning! a PEAR user config file already exists from ' .
+                            'a previous PEAR installation at ' .
+                            "'$ufile'. You may probably want to remove it.");
+        }
+        $ui->outputData('Writing PEAR system config file at: ' . $config->files['system']);
+        $ui->outputData('You may want to add: ' . $config->get('php_dir') . ' to your php.ini include_path');
+        $config->set('verbose', 1, 'default');
+        foreach ($config->getKeys() as $key) {
+            $data[$key] = $config->get($key);
+        }
+        $config->store('system', $data);
+    }
 }
-
 ?>

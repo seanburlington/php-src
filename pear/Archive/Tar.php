@@ -16,7 +16,7 @@
 // | Author: Vincent Blavet <vincent@blavet.net>                          |
 // +----------------------------------------------------------------------+
 //
-// $Id: Tar.php,v 1.13.4.5 2003/07/02 10:38:08 pajoye Exp $
+// $Id: Tar.php,v 1.13.4.6 2003/07/08 20:39:45 pajoye Exp $
 
 require_once 'PEAR.php';
 
@@ -24,7 +24,7 @@ require_once 'PEAR.php';
 * Creates a (compressed) Tar archive
 *
 * @author   Vincent Blavet <vincent@blavet.net>
-* @version  $Revision: 1.13.4.5 $
+* @version  $Revision: 1.13.4.6 $
 * @package  Archive
 */
 class Archive_Tar extends PEAR

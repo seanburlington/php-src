@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.22.2.9 2003/07/02 10:38:09 pajoye Exp $
+// $Id: Remote.php,v 1.22.2.10 2003/07/08 20:39:46 pajoye Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';

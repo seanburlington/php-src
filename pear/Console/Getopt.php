@@ -16,7 +16,7 @@
 // | Author: Andrei Zmievski <andrei@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Getopt.php,v 1.21.4.4 2003/07/02 10:38:08 pajoye Exp $
+// $Id: Getopt.php,v 1.21.4.5 2003/07/08 20:39:45 pajoye Exp $
 
 require_once 'PEAR.php';
 

@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.14.4.8 2003/07/02 10:38:08 pajoye Exp $
+// $Id: Dependency.php,v 1.14.4.9 2003/07/08 20:39:46 pajoye Exp $
 
 require_once "PEAR.php";
 
@@ -144,6 +144,35 @@ class PEAR_Dependency
         }
         $errmsg = "relation '$relation' with requirement '$req' is not supported (name=$name)";
         return PEAR_DEPENDENCY_BAD_DEPENDENCY;
+    }
+
+    /**
+     * Check package dependencies on uninstall
+     *
+     * @param string $error     The resultant error string
+     * @param string $name      Name of the package to test
+     *
+     * @return bool true if there were errors
+     */
+    function checkPackageUninstall(&$error, $package)
+    {
+        $error = null;
+        $packages = $this->registry->listPackages();
+        foreach ($packages as $pkg) {
+            if ($pkg == $package) {
+                continue;
+            }
+            $deps = $this->registry->packageInfo($pkg, 'release_deps');
+            if (empty($deps)) {
+                continue;
+            }
+            foreach ($deps as $dep) {
+                if ($dep['type'] == 'pkg' && strcasecmp($dep['name'], $package) == 0) {
+                    $error .= "Package '$pkg' depends on '$package'\n";
+                }
+            }
+        }
+        return ($error) ? true : false;
     }
 
     /**

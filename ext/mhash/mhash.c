@@ -16,6 +16,7 @@
    |          Nikos Mavroyanopoulos <nmav@hellug.gr> (HMAC, KEYGEN)       |
    +----------------------------------------------------------------------+
  */
+/* $Id: mhash.c,v 1.46 2003/06/16 14:27:59 andrey Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.24 2002/05/26 12:52:16 ssb Exp $
+// $Id: Remote.php,v 1.24.2.1 2002/06/14 14:51:35 alan_k Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -63,7 +63,9 @@ class PEAR_Remote extends PEAR
         $server_host = $this->config->get('master_server');
         $username = $this->config->get('username');
         $password = $this->config->get('password');
-        $f = new XML_RPC_Message($method, $this->_encode($args));
+        $eargs = array();
+        foreach($args as $arg) $eargs[] = $this->_encode($arg);
+        $f = new XML_RPC_Message($method, $eargs);
         $c = new XML_RPC_Client('/xmlrpc.php', $server_host, 80);
         if ($username && $password) {
             $c->setCredentials($username, $password);
@@ -203,7 +205,7 @@ class PEAR_Remote extends PEAR
 
         $type = gettype($php_val);
         $xmlrpcval = new XML_RPC_Value;
-
+ 
         switch($type) {
             case "array":
                 reset($php_val);

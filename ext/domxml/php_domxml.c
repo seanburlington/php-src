@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.212 2002/10/11 14:00:12 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.213 2002/10/12 16:16:36 sander Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2580,7 +2580,7 @@ PHP_FUNCTION(domxml_node_attributes)
 	DOMXML_PARAM_NONE(nodep, id, le_domxmlnodep);
 	ret = node_attributes(&attrs, nodep TSRMLS_CC);
 	if ( ret == -1) {
-		return NULL;
+		RETURN_NULL();
 	}
 
 	if ( ret > -1) {

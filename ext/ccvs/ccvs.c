@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 /*
-*	cvvs.c $Revision: 1.10 $ - PHP4 Interface to the RedHat CCVS API
+*	cvvs.c $Revision: 1.11 $ - PHP4 Interface to the RedHat CCVS API
 *	 -------
 *	 Interfaces RedHat's CCVS [Credit Card Verification System] <http://www.redhat.com/products/ccvs/>
 *	 This code is ported from an original php3 interface written by RedHat's Doug DeJulio <ddj@redhat.com>
@@ -27,10 +27,10 @@
 
 /*
 *	Code started on 2000.07.24@09.04.EST by Brendan W. McAdams <bmcadams@php.net>
-*	$Revision: 1.10 $
+*	$Revision: 1.11 $
 */
 
-static char const cvsid[] = "$Id: ccvs.c,v 1.10 2000/10/11 13:34:42 hholzgra Exp $";
+static char const cvsid[] = "$Id: ccvs.c,v 1.11 2000/11/20 17:32:46 sniper Exp $";
 
 #include <php.h>
 #include <stdlib.h>
@@ -363,7 +363,7 @@ PHP_FUNCTION(ccvs_sale) /* cv_sale() */
   char *invoice;
   register int r;
 
-  if ((ZEND_NUM_ARGS() != 2) || (zend_get_parameters_ex(ht, 2, &psess, &pinvoice) != SUCCESS))  /* accept only SUCCESS in case something weird gets returned instead of 'FAILURE' on fail */
+  if ((ZEND_NUM_ARGS() != 2) || (zend_get_parameters_ex(2, &psess, &pinvoice) != SUCCESS))  /* accept only SUCCESS in case something weird gets returned instead of 'FAILURE' on fail */
   {
     WRONG_PARAM_COUNT;
   }

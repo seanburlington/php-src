@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.66 2002/10/24 13:14:43 sas Exp $ */
+/* $Id: mail.c,v 1.66.2.1 2002/11/29 11:15:43 martin Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -208,8 +208,10 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 #else
 #if defined(EX_TEMPFAIL)
 		if ((ret != EX_OK)&&(ret != EX_TEMPFAIL))
-#else
+#elif defined(EX_OK)
 		if (ret != EX_OK)
+#else
+		if (ret != 0)
 #endif
 #endif
 		{

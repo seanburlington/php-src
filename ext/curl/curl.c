@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.86 2001/09/22 00:38:59 sterling Exp $ */
+/* $Id: curl.c,v 1.87 2001/09/22 16:56:21 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -773,7 +773,7 @@ PHP_FUNCTION(curl_setopt)
 				SEPARATE_ZVAL(current);
 				convert_to_string_ex(current);
 
-				zend_hash_get_current_key_ex(postfields, &string_key, &string_key_len, &num_key, 0);
+				zend_hash_get_current_key_ex(postfields, &string_key, &string_key_len, &num_key, 0, NULL);
 
 				postval = emalloc((string_key_len - 1) + Z_STRLEN_PP(current) + 1);
 				snprintf(postval, (sizeof("%s=%s") - 1) + (string_key_len - 1) + Z_STRLEN_PP(current), 
@@ -810,7 +810,7 @@ PHP_FUNCTION(curl_setopt)
 		struct curl_slist  *slist = NULL;
 
 		ph = HASH_OF(*zvalue);
-		if (! hash) {
+		if (! ph) {
 			php_error(E_WARNING, 
 			          "You must pass either an object or an array with the CURLOPT_HTTPHEADER,"
 					  "CURLOPT_QUOTE and CURLOPT_POSTQUOTE arguments");

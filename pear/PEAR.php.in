@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php.in,v 1.17 2001/03/29 19:54:27 chagenbu Exp $
+// $Id: PEAR.php.in,v 1.18 2001/04/03 03:12:49 jon Exp $
 //
 
 define('PEAR_ERROR_RETURN', 1);
@@ -236,8 +236,7 @@ class PEAR
         if ($mode === null) {
             if (isset($this->_default_error_mode)) {
                 $mode = $this->_default_error_mode;
-            }
-            if ($mode === null) {
+            } else {
                 $mode = $GLOBALS['_PEAR_default_error_mode'];
             }
         }
@@ -245,8 +244,7 @@ class PEAR
         if ($mode == PEAR_ERROR_TRIGGER && $options === null) {
             if (isset($this->_default_error_options)) {
                 $options = $this->_default_error_options;
-            }
-            if ($options === null) {
+            } else {
                 $options = $GLOBALS['_PEAR_default_error_options'];
             }
         }
@@ -257,8 +255,7 @@ class PEAR
                   is_object($options[0]) && is_string($options[1]))) {
                 if (isset($this->_default_error_callback)) {
                     $options = $this->_default_error_callback;
-                }
-                if ($options === null) {
+                } else {
                     $options = $GLOBALS['_PEAR_default_error_callback'];
                 }
             }

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.14 1999/09/04 13:18:55 zeev Exp $ */
+/* $Id: exec.c,v 1.15 1999/09/04 22:15:51 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -188,7 +188,7 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 
 		while ((b = fread(buf, 1, sizeof(buf), fp)) > 0) {
 			for (i = 0; i < b; i++)
-				if (output) PUTC(buf[i]);
+				if (output) (void)PUTC(buf[i]);
 		}
 	}
 

@@ -21,7 +21,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.46.2.5 2003/05/31 01:37:45 sniper Exp $ */
+/* $Id: pi3web_sapi.c,v 1.46.2.6 2003/06/02 17:14:10 holger Exp $ */
+
+#define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -38,9 +40,7 @@
 #include "PiAPI.h"
 #include "Pi3API.h"
 
-#define MAX_STATUS_LENGTH sizeof("xxxx LONGEST STATUS DESCRIPTION")
 #define PI3WEB_SERVER_VAR_BUF_SIZE 1024
-#define PI3WEB_POST_DATA_BUF 1024
 
 int IWasLoaded=0;
 
@@ -78,7 +78,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.46.2.5 2003/05/31 01:37:45 sniper Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.46.2.6 2003/06/02 17:14:10 holger Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -231,7 +231,7 @@ static int sapi_pi3web_read_post(char *buffer, uint count_bytes TSRMLS_DC)
 	DWORD read_from_input=0;
 	DWORD total_read=0;
 
-	if (SG(read_post_bytes) < lpCB->cbAvailable) {
+	if ((DWORD)SG(read_post_bytes) < lpCB->cbAvailable) {
 		read_from_buf = MIN(lpCB->cbAvailable-SG(read_post_bytes), count_bytes);
 		memcpy(buffer, lpCB->lpbData+SG(read_post_bytes), read_from_buf);
 		total_read += read_from_buf;
@@ -250,7 +250,9 @@ static int sapi_pi3web_read_post(char *buffer, uint count_bytes TSRMLS_DC)
 		}
 		total_read += cbRead;
 	}
-	SG(read_post_bytes) += total_read;
+	
+	/* removed after re-testing POST with Pi3Web 2.0.2 */
+	/* SG(read_post_bytes) += total_read; */
 	return total_read;
 }
 
@@ -379,13 +381,11 @@ static sapi_module_struct pi3web_sapi_module = {
 	sapi_pi3web_read_cookies,		/* read Cookies */
 	sapi_pi3web_register_variables,	/* register server variables */
 	NULL,					/* Log message */
-	NULL,					/* Block interruptions */
-	NULL,					/* Unblock interruptions */	
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };
 
-DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
+MODULE_API DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 {
 	zend_file_handle file_handle = {0};
 	int iRet = PIAPI_COMPLETED;
@@ -454,7 +454,7 @@ DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 	return iRet;
 }
 
-BOOL PHP4_startup() {
+MODULE_API BOOL PHP4_startup() {
 	tsrm_startup(1, 1, 0, NULL);
 	sapi_startup(&pi3web_sapi_module);
 	if (pi3web_sapi_module.startup) {
@@ -464,7 +464,7 @@ BOOL PHP4_startup() {
 	return IWasLoaded;
 };
 
-BOOL PHP4_shutdown() {
+MODULE_API BOOL PHP4_shutdown() {
 	if (pi3web_sapi_module.shutdown) {
 		pi3web_sapi_module.shutdown(&pi3web_sapi_module);
 	};

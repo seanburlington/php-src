@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.39 2001/05/21 17:48:19 sterling Exp $ */
+/* $Id: sockets.c,v 1.40 2001/05/21 18:07:17 sterling Exp $ */
 
 #include "php.h"
 
@@ -650,7 +650,7 @@ PHP_FUNCTION(socket_read)
 	zval **arg1, **arg2, **arg3;
 	char *tmpbuf;
 	php_socket *php_sock;
-	read_function php_read;
+	read_function = php_read;
 	int retval, argc = ZEND_NUM_ARGS();
 
 	if (argc < 2 || argc > 3 || zend_get_parameters_ex(argc, &arg1, &arg2, &arg3) == FAILURE) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.157 2003/02/01 03:52:31 wez Exp $ */
+/* $Id: var.c,v 1.158 2003/03/10 15:13:32 andrei Exp $ */
 
 
 /* {{{ includes 
@@ -101,7 +101,7 @@ void php_var_dump(zval **struc, int level TSRMLS_DC)
 
 		Z_OBJ_HANDLER(**struc, get_class_name)(*struc, &class_name, &class_name_len, 0 TSRMLS_CC);
 		
-		php_printf("%sobject(%s)(%d) {\n", COMMON, class_name, myht ? zend_hash_num_elements(myht) : 0);
+		php_printf("%sobject(%s)#%d (%d) {\n", COMMON, class_name,  Z_OBJ_HANDLE_PP(struc), myht ? zend_hash_num_elements(myht) : 0);
 head_done:
 		if (myht) {
 			zend_hash_apply_with_arguments(myht, (apply_func_args_t) php_array_element_dump, 1, level);

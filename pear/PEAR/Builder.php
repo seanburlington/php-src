@@ -16,7 +16,7 @@
 // | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
 // +----------------------------------------------------------------------+
 //
-// $Id: Builder.php,v 1.3 2002/06/06 10:35:16 ssb Exp $
+// $Id: Builder.php,v 1.4 2002/06/06 10:37:13 ssb Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -98,7 +98,6 @@ class PEAR_Builder extends PEAR_Common
         }
         $dir = getcwd();
         $this->log(2, "building in $dir");
-        $this->_runCommand("find $dir -print", $callback);
         $this->current_callback = $callback;
         $err = $this->_runCommand("phpize", array(&$this, 'phpizeCallback'));
         if (PEAR::isError($err)) {

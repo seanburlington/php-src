@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.74.2.9 2003/06/27 16:42:50 sniper Exp $ */
+/* $Id: php_ftp.c,v 1.74.2.10 2003/08/07 16:02:04 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -139,7 +139,7 @@ PHP_MINFO_FUNCTION(ftp)
 							}
 
 
-/* {{{ proto resource ftp_connect(string host [, int port [, int timeout)]])
+/* {{{ proto resource ftp_connect(string host [, int port [, int timeout]])
    Opens a FTP stream */
 PHP_FUNCTION(ftp_connect)
 {

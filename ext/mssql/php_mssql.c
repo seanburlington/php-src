@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.35 2000/11/30 22:24:00 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.36 2001/01/04 17:29:50 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -905,7 +905,7 @@ PHP_FUNCTION(mssql_query)
 
 	num_fields = dbnumcols(mssql_ptr->link);
 	if (num_fields <= 0) {
-		RETURN_FALSE;
+		RETURN_TRUE;
 	}
 
 	result = (mssql_result *) emalloc(sizeof(mssql_result));

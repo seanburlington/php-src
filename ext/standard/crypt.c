@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.25 2000/05/26 17:04:02 hholzgra Exp $ */
+/* $Id: crypt.c,v 1.26 2000/05/27 18:55:11 andi Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -179,7 +179,7 @@ PHP_FUNCTION(crypt)
 	return_value->type = IS_STRING;
 	pval_copy_constructor(return_value);
 #else
-    PHP_NOT_IN_THIS_BUILD;
+    PHP_NOT_IN_THIS_BUILD();
 #endif /* HAVE_CRYPT */
 }
 /* }}} */

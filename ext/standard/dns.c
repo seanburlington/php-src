@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.19 2000/05/26 17:04:02 hholzgra Exp $ */
+/* $Id: dns.c,v 1.20 2000/05/27 18:55:11 andi Exp $ */
 
 #include "php.h"
 #if HAVE_SYS_SOCKET_H
@@ -207,7 +207,7 @@ PHP_FUNCTION(checkdnsrr)
 	}
 	RETURN_TRUE;
 #else
-    PHP_NOT_IN_THIS_BUILD;
+    PHP_NOT_IN_THIS_BUILD();
 #endif
 }
 /* }}} */
@@ -315,7 +315,7 @@ PHP_FUNCTION(getmxrr)
 	}
 	RETURN_TRUE;
 #else
-    PHP_NOT_IN_THIS_BUILD;
+    PHP_NOT_IN_THIS_BUILD();
 #endif
 }
 /* }}} */

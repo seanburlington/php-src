@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.39 2000/05/26 17:04:02 hholzgra Exp $ */
+/* $Id: datetime.c,v 1.40 2000/05/27 18:55:11 andi Exp $ */
 
 
 #include "php.h"
@@ -686,7 +686,7 @@ PHP_FUNCTION(strftime)
 #if HAVE_STRFTIME
 	_php_strftime(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 #else
-    PHP_NOT_IN_THIS_BUILD;
+    PHP_NOT_IN_THIS_BUILD();
 #endif
 }
 /* }}} */
@@ -698,7 +698,7 @@ PHP_FUNCTION(gmstrftime)
 #if HAVE_STRFTIME
 	_php_strftime(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
 #else
-    PHP_NOT_IN_THIS_BUILD;
+    PHP_NOT_IN_THIS_BUILD();
 #endif
 }
 /* }}} */

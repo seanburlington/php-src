@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.96 2000/05/26 17:04:01 hholzgra Exp $ */
+/* $Id: php.h,v 1.97 2000/05/27 18:55:10 andi Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -367,7 +367,7 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #endif
 
 
-#define PHP_NOT_IN_THIS_BUILD { \
+#define PHP_NOT_IN_THIS_BUILD() { \
   php_error(E_WARNING, "%s: not supported in this PHP build",get_active_function_name()); \
   RETURN_FALSE; \
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.24 2000/05/26 17:04:02 hholzgra Exp $ */
+/* $Id: microtime.c,v 1.25 2000/05/27 18:55:11 andi Exp $ */
 
 #include "php.h"
 
@@ -134,7 +134,7 @@ PHP_FUNCTION(getrusage)
 	PHP_RUSAGE_PARA(ru_stime.tv_sec);
 #undef PHP_RUSAGE_PARA
 #else
-    PHP_NOT_IN_THIS_BUILD;
+    PHP_NOT_IN_THIS_BUILD();
 #endif /* HAVE_GETRUSAGE */
 }
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.253 2000/09/09 11:41:14 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.254 2000/09/10 05:59:16 sterling Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -152,6 +152,7 @@ function_entry basic_functions[] = {
 	PHP_FE(nl2br,									NULL)
 	PHP_FE(basename,								NULL)
 	PHP_FE(dirname,									NULL)
+	PHP_FE(pathinfo,								NULL)
 	PHP_FE(stripslashes,							NULL)
 	PHP_FE(stripcslashes,							NULL)
 	PHP_FE(strstr,									NULL)

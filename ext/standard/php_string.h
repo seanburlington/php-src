@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.25 2000/07/24 01:39:49 david Exp $ */
+/* $Id: php_string.h,v 1.26 2000/09/10 05:59:16 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -42,6 +42,7 @@ PHP_FUNCTION(strtoupper);
 PHP_FUNCTION(strtolower);
 PHP_FUNCTION(basename);
 PHP_FUNCTION(dirname);
+PHP_FUNCTION(pathinfo);
 PHP_FUNCTION(strstr);
 PHP_FUNCTION(strpos);
 PHP_FUNCTION(strrpos);

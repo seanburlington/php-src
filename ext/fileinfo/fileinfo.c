@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.7 2005/01/24 23:53:00 iliaa Exp $ */
+/* $Id: fileinfo.c,v 1.8 2005/01/31 15:01:47 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -269,8 +269,8 @@ PHP_FUNCTION(finfo_open)
 
 	if (magic_load(finfo->magic, file) == -1) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed to load magic database at '%s'.", file);
-		efree(finfo);
 		magic_close(finfo->magic);
+		efree(finfo);
 		RETURN_FALSE;
 	}	
 

@@ -14,7 +14,7 @@
 ** other files are for internal use by SQLite and should not be
 ** accessed by users of the library.
 **
-** $Id: main.c,v 1.5 2004/01/08 14:25:01 iliaa Exp $
+** $Id: main.c,v 1.6 2004/03/08 23:11:45 abies Exp $
 */
 #include "sqliteInt.h"
 #include "os.h"
@@ -856,7 +856,7 @@ void sqlite_progress_handler(
 ** This routine installs a default busy handler that waits for the
 ** specified number of milliseconds before returning 0.
 */
-void sqlite_busy_timeout(sqlite *db, int ms){
+void sqlite_busy_timeout(sqlite *db, long ms){
   if( ms>0 ){
     sqlite_busy_handler(db, sqliteDefaultBusyCallback, (void*)ms);
   }else{

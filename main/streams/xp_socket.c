@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.22 2004/02/04 22:46:44 wez Exp $ */
+/* $Id: xp_socket.c,v 1.23 2004/03/08 23:11:45 abies Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -57,8 +57,8 @@ static size_t php_sockop_write(php_stream *stream, const char *buf, size_t count
 	if (didwrite <= 0) {
 		char *estr = php_socket_strerror(php_socket_errno(), NULL, 0);
 
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "send of %d bytes failed with errno=%d %s",
-				count, php_socket_errno(), estr);
+		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "send of %ld bytes failed with errno=%d %s",
+				(long)count, php_socket_errno(), estr);
 		efree(estr);
 	}
 

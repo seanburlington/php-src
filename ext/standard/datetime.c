@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.115 2004/02/12 01:31:57 sniper Exp $ */
+/* $Id: datetime.c,v 1.116 2004/03/08 23:11:43 abies Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -83,7 +83,8 @@ void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gm)
 	struct tm *ta, tmbuf;
 	time_t t, seconds;
 	int i, gmadjust, arg_count = ZEND_NUM_ARGS();
-	int is_dst = -1, val, chgsecs = 0;
+	int is_dst = -1, chgsecs = 0;
+	long val;
 
 	if (arg_count > 7 || zend_get_parameters_array_ex(arg_count, arguments) == FAILURE) {
 		WRONG_PARAM_COUNT;

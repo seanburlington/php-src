@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.22 2004/01/08 08:17:54 andi Exp $ */
+/* $Id: spprintf.c,v 1.23 2004/03/08 23:11:44 abies Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -149,7 +149,7 @@
 	while (isdigit((int)*str)) {        	\
 		num *= 10;                      	\
 		num += NUM(*str++);             	\
-		if (num >= LONG_MAX / 10) {			\
+		if (num >= INT_MAX / 10) {			\
 			while (isdigit((int)*str++));	\
 			break;							\
 		}									\

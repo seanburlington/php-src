@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.37 2004/05/30 17:32:32 zeev Exp $ */
+/* $Id: spl_iterators.c,v 1.38 2004/05/31 08:58:32 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1265,7 +1265,7 @@ static zend_function_entry spl_funcs_CachingIterator[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto CachingRecursiveIterator::__constrcut(RecursiveIterator $it)
+/* {{{ proto CachingRecursiveIterator::__construct(RecursiveIterator $it)
    Create an iterator from a RecursiveIterator */
 SPL_METHOD(CachingRecursiveIterator, __construct)
 {

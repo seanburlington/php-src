@@ -3,7 +3,7 @@ top_builddir = /usr/local/src/php-4.2.0
 srcdir       = /usr/local/src/php-4.2.0/ext/soap
 builddir     = /usr/local/src/php-4.2.0/ext/soap
 VPATH        = /usr/local/src/php-4.2.0/ext/soap
-# $Id: Makefile,v 1.2 2002/08/07 03:03:09 rodif_bl Exp $
+# $Id: Makefile,v 1.3 2002/08/14 05:26:25 rodif_bl Exp $
 
 LTLIBRARY_NAME        = libsoap.la
 LTLIBRARY_SOURCES     = soap.c php_sdl.c php_schema.c php_xml.c php_encoding.c php_http.c php_packet_soap.c

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zip.c,v 1.25 2001/10/13 15:06:14 sniper Exp $ */
+/* $Id: zip.c,v 1.26 2001/12/04 22:46:06 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -263,7 +263,7 @@ PHP_FUNCTION(zip_entry_open)
 }
 /* }}} */
 
-/* {{{ proto string zip_read(resource zip_ent)
+/* {{{ proto string zip_entry_read(resource zip_ent)
    Read X bytes from an opened zip entry */
 PHP_FUNCTION(zip_entry_read)
 {
@@ -288,7 +288,7 @@ PHP_FUNCTION(zip_entry_read)
 }
 /* }}} */
 
-/* {{{ proto void zip_close(resource zip_ent)
+/* {{{ proto void zip_entry_close(resource zip_ent)
    Close a zip entry */
 PHP_FUNCTION(zip_entry_close)
 {

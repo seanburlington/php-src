@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.183 2003/01/18 19:41:44 iliaa Exp $ */
+/* $Id: php_mysql.c,v 1.184 2003/01/30 02:33:14 iliaa Exp $ */
 
 /* TODO:
  *
@@ -2111,9 +2111,7 @@ PHP_FUNCTION(mysql_fetch_field)
 	if ((mysql_field=mysql_fetch_field(mysql_result))==NULL) {
 		RETURN_FALSE;
 	}
-	if (object_init(return_value)==FAILURE) {
-		RETURN_FALSE;
-	}
+	object_init(return_value);
 
 	add_property_string(return_value, "name",(mysql_field->name?mysql_field->name:empty_string), 1);
 	add_property_string(return_value, "table",(mysql_field->table?mysql_field->table:empty_string), 1);

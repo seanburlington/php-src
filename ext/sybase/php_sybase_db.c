@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.45 2003/01/15 13:55:32 iliaa Exp $ */
+/* $Id: php_sybase_db.c,v 1.46 2003/01/30 02:33:13 iliaa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1219,9 +1219,8 @@ PHP_FUNCTION(sybase_fetch_field)
 		RETURN_FALSE;
 	}
 
-	if (object_init(return_value)==FAILURE) {
-		RETURN_FALSE;
-	}
+	object_init(return_value);
+
 	add_property_string(return_value, "name",result->fields[field_offset].name, 1);
 	add_property_long(return_value, "max_length",result->fields[field_offset].max_length);
 	add_property_string(return_value, "column_source",result->fields[field_offset].column_source, 1);

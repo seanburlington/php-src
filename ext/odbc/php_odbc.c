@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.139 2002/08/13 23:48:05 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.140 2002/08/14 16:23:16 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2249,12 +2249,12 @@ try_and_get_another_connection:
 			list_entry new_le;
 			
 			if (ODBCG(max_links) != -1 && ODBCG(num_links) >= ODBCG(max_links)) {
-				php_error_docref1("odbc-exec" TSRMLS_CC, E_WARNING, "Too many open links (%d)", ODBCG(num_links));
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Too many open links (%d)", ODBCG(num_links));
 				efree(hashed_details);
 				RETURN_FALSE;
 			}
 			if (ODBCG(max_persistent) != -1 && ODBCG(num_persistent) >= ODBCG(max_persistent)) {
-				php_error_docref1(NULL TSRMLS_CC, E_WARNING,"Too many open persistent links (%d)", ODBCG(num_persistent));
+				php_error_docref(NULL TSRMLS_CC, E_WARNING,"Too many open persistent links (%d)", ODBCG(num_persistent));
 				efree(hashed_details);
 				RETURN_FALSE;
 			}

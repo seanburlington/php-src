@@ -1,3 +1,36 @@
+2005-02-08  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/shmop/php_shmop.h
+      ext/shmop/shmop.c:
+      Removed pointless operations/declarations.
+
+    * NEWS
+      ext/standard/file.c:
+      Added optional maxlen parameter to file_get_contents().
+
+2005-02-08  Antony Dovgal  <tony2001@phpclub.net>
+
+    * NEWS
+      ext/cpdf/.cvsignore
+      ext/cpdf/CREDITS
+      ext/cpdf/config.m4
+      ext/cpdf/config.w32
+      ext/cpdf/cpdf.c
+      ext/cpdf/cpdf.dsp
+      ext/cpdf/package.xml
+      ext/cpdf/php_cpdf.h:
+      move ext/cpdf to PECL
+
+2005-02-08  Rasmus Lerdorf  <rasmus@lerdorf.com>
+
+    * (PHP_5_0)
+      ext/fam/fam.c
+      ext/fam/php_fam.h
+      ext/hwapi/hwapi.cpp
+      ext/hwapi/php_hwapi.h
+      ext/xml/xml.c:
+      MFH eliminating a few more useless R* calls
+
 2005-02-07  Rasmus Lerdorf  <rasmus@lerdorf.com>
 
     * ext/fam/fam.c
@@ -248,7 +281,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1888 2005/02/08 01:35:28 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1889 2005/02/09 01:33:26 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -1722,7 +1755,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1888 2005/02/08 01:35:28 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1889 2005/02/09 01:33:26 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

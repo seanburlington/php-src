@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.47 2001/06/01 18:54:14 sterling Exp $ */
+/* $Id: sockets.c,v 1.48 2001/06/03 21:38:23 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -187,7 +187,8 @@ static void destroy_iovec(zend_rsrc_list_entry *rsrc)
 	}
 }
 
-static void destroy_socket(zend_rsrc_list_entry *rsrc) {
+static void destroy_socket(zend_rsrc_list_entry *rsrc) 
+{
 	php_socket *php_sock = (php_socket*)rsrc->ptr;
 
 	close(php_sock->socket);
@@ -367,9 +368,13 @@ PHP_MINFO_FUNCTION(sockets)
    Allocates a new file descriptor set */
 PHP_FUNCTION(socket_fd_alloc)
 {
-	fd_set set;
-	FD_ZERO(&set);
-	ZEND_REGISTER_RESOURCE(return_value, &set, le_destroy);
+	fd_set *set;
+
+	set = emalloc(sizeof *set);
+	
+	FD_ZERO(set);
+	
+	ZEND_REGISTER_RESOURCE(return_value, set, le_destroy);
 }
 /* }}} */
 

@@ -14,12 +14,12 @@
    +----------------------------------------------------------------------+
    | Authors: Sterling Hughes <sterling@php.net>                          |
    |          David Viner <dviner@php.net>                                |
-   |          Lehnar Lohmus <flex@php.net>                                |
+   |          Lenar Lohmus <flex@php.net>                                 |
    |          Melvyn Sopacua <msopacua@php.net>                           |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.64 2002/11/02 01:32:08 msopacua Exp $ */
+/* $Id: sablot.c,v 1.65 2002/11/02 01:44:34 msopacua Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

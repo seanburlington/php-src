@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.9 2002/03/05 17:39:29 ssb Exp $
+// $Id: Config.php,v 1.10 2002/03/16 23:48:23 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -446,7 +446,7 @@ class PEAR_Config extends PEAR
     }
 
     // }}}
-    // {{{ get(key)
+    // {{{ get(key, [layer])
 
     /**
      * Returns a configuration value, prioritizing layers as per the
@@ -458,12 +458,16 @@ class PEAR_Config extends PEAR
      *
      * @access public
      */
-    function get($key)
+    function get($key, $layer = null)
     {
-        foreach ($this->layers as $layer) {
-            if (isset($this->configuration[$layer][$key])) {
-                return $this->configuration[$layer][$key];
+        if ($layer === null) {
+            foreach ($this->layers as $layer) {
+                if (isset($this->configuration[$layer][$key])) {
+                    return $this->configuration[$layer][$key];
+                }
             }
+        } elseif (isset($this->configuration[$layer][$key])) {
+            return $this->configuration[$layer][$key];
         }
         return null;
     }
@@ -714,6 +718,23 @@ class PEAR_Config extends PEAR
             }
         }
         return false;
+    }
+
+    // }}}
+    // {{{ isDefinedLayer(key)
+
+    /**
+     * Tells whether a given config layer exists.
+     *
+     * @param string config layer
+     *
+     * @return bool whether <config layer> exists in this object
+     *
+     * @access public
+     */
+    function isDefinedLayer($layer)
+    {
+        return isset($this->configuration[$layer]);
     }
 
     // }}}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.136 2001/06/11 14:39:13 sniper Exp $ */
+/* $Id: gd.c,v 1.137 2001/06/11 15:21:47 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -499,6 +499,7 @@ PHP_FUNCTION(imagesetstyle)
 	}
 
 	ZEND_FETCH_RESOURCE(im, gdImagePtr, IM, -1, "Image", le_gd);
+	convert_to_array_ex(styles);
 
 	/* copy the style values in the stylearr */
 	stylearr = emalloc(sizeof(int) * zend_hash_num_elements(HASH_OF(*styles)));

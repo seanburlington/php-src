@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: transports.c,v 1.1 2003/02/27 17:43:38 wez Exp $ */
+/* $Id: transports.c,v 1.2 2003/02/27 18:06:30 wez Exp $ */
 
 #include "php.h"
 #include "php_streams_int.h"
@@ -78,6 +78,7 @@ PHPAPI php_stream *_php_stream_xport_create(const char *name, long namelen, int 
 			case PHP_STREAM_PERSISTENT_FAILURE:
 			default:
 				/* failed; get a new one */
+				;
 		}
 	}
 

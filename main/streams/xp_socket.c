@@ -16,12 +16,16 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.1 2003/02/27 17:43:38 wez Exp $ */
+/* $Id: xp_socket.c,v 1.2 2003/02/27 18:06:30 wez Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
 #include "streams/php_streams_int.h"
 #include "php_network.h"
+
+#if defined(PHP_WIN32) || defined(__riscos__) || defined(NETWARE)
+# undef AF_UNIX
+#endif
 
 #if defined(AF_UNIX)
 #include <sys/un.h>
@@ -429,6 +433,7 @@ static int php_tcp_sockop_set_option(php_stream *stream, int option, int value, 
 					return PHP_STREAM_OPTION_RETURN_OK;
 				default:
 					/* fall through */
+					;
 			}
 			
 			/* fall through */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.20 1999/08/02 19:16:50 zeev Exp $ */
+/* $Id: fsock.c,v 1.21 1999/08/02 19:59:04 zeev Exp $ */
 
 /* Synced with php3 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php3 revision 1.133 1999-07-21 [sas] */
@@ -54,6 +54,9 @@
 #endif
 #if defined(AF_UNIX)
 #include <sys/un.h>
+#endif
+#ifdef HAVE_SYS_SELECT_H
+#include <sys/select.h>
 #endif
 
 #include <string.h>

@@ -16,26 +16,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.72.2.1 2002/11/16 17:03:49 helly Exp $ */
-/*
- * Based on Daniel Schmitt's imageinfo.c which carried the following
- * Copyright notice.
- */
-
-/*
- * imageinfo.c
- *
- * Simple routines to extract image width/height data from GIF/JPEG files.
- *
- * Copyright (c) 1997 Daniel Schmitt, opal online publishing, Bonn, Germany.
- *
- * Includes code snippets from rdjpgcom.c,
- * Copyright (c) 1994-1995 Thomas G. Lane
- * from release 6a of the Independent JPEG Group's software.
- *
- * Legal status: see GNU General Public License version 2 or later.
- *
- */
+/* $Id: image.c,v 1.72.2.2 2002/11/18 15:46:01 derick Exp $ */
 
 #include "php.h"
 #include <stdio.h>

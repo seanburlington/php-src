@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql.h,v 1.1 2004/05/18 18:01:52 gschlossnagle Exp $ */
+/* $Id: php_pdo_mysql.h,v 1.2 2004/05/19 14:23:59 edink Exp $ */
 
 #ifndef PHP_PDO_MYSQL_H
 #define PHP_PDO_MYSQL_H
@@ -40,7 +40,7 @@ PHP_RINIT_FUNCTION(pdo_mysql);
 PHP_RSHUTDOWN_FUNCTION(pdo_mysql);
 PHP_MINFO_FUNCTION(pdo_mysql);
 
-#endif	/* PHP_PDO_OCI_H */
+#endif	/* PHP_PDO_MYSQL_H */
 
 
 /*

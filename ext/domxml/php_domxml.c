@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.115 2002/02/04 11:39:15 yohgaki Exp $ */
+/* $Id: php_domxml.c,v 1.116 2002/02/04 21:07:39 jarkol Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -3469,10 +3469,10 @@ static char *php_domxslt_string_to_xpathexpr(const char *str)
 {
 	const xmlChar *string = (const xmlChar *)str;
 
-	TSRMLS_FETCH();
-	
 	xmlChar *value;
 
+	TSRMLS_FETCH();
+	
         if (xmlStrchr(string, '"')) {
     		if (xmlStrchr(string, '\'')) {
 			php_error(E_WARNING, "Cannot create XPath expression (string contains both quote and double-quotes) in %s",

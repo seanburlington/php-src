@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.44 2002/04/25 21:07:36 edink Exp $
+dnl $Id: config.m4,v 1.45 2002/04/27 01:02:52 sniper Exp $
 dnl
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
@@ -65,6 +65,8 @@ if test "$PHP_MYSQL" = "yes"; then
   PHP_ADD_BUILD_DIR($ext_builddir/libmysql)
 
 elif test "$PHP_MYSQL" != "no"; then
+
+  MYSQL_TYPE_CHECKS
 
   PHP_NEW_EXTENSION(mysql, php_mysql.c, $ext_shared)
 

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Auth.php,v 1.10.4.6 2003/06/17 17:13:18 pajoye Exp $
+// $Id: Auth.php,v 1.10.4.6.2.1 2003/06/24 01:59:18 sas Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Remote.php";

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Autoloader.php,v 1.4.6.4 2003/06/17 17:13:18 pajoye Exp $
+// $Id: Autoloader.php,v 1.4.6.4.2.1 2003/06/24 01:59:18 sas Exp $
 
 if (!extension_loaded("overload")) {
     // die hard without ext/overload

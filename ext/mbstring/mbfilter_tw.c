@@ -20,7 +20,7 @@
  * "streamable traditional chinese code filter and converter"
  */
 
-/* $Id: mbfilter_tw.c,v 1.2 2002/04/30 15:21:04 sebastian Exp $ */
+/* $Id: mbfilter_tw.c,v 1.3 2002/05/02 17:54:54 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -128,10 +128,10 @@ mbfl_filt_conv_euctw_wchar(int c, mbfl_convert_filter *filter TSRMLS_DC)
 			s = (c1 & 0xff)*94 + c - 0xa1;
 			w = 0;
 			if (s >= 0) {
-				if (plane == 1 & s < cns11643_2_ucs_table_size) {
+				if (plane == 1 && s < cns11643_2_ucs_table_size) {
 					w = cns11643_2_ucs_table[s];
 				}
-				if (plane == 13 & s < cns11643_14_ucs_table_size) {
+				if (plane == 13 && s < cns11643_14_ucs_table_size) {
 					w = cns11643_14_ucs_table[s];
 				}
 			}

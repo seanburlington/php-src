@@ -1,9 +1,12 @@
 # $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.4 1999/07/21 21:56:25 ssb Exp $
+# $Id: config.m4,v 1.5 1999/07/23 15:20:48 ssb Exp $
 
 AC_MSG_CHECKING(for XML support)
 AC_ARG_WITH(xml,
-[  --with-xml              Include XML support],[
+[  --with-xml[=DIR]        Include XML support.  Will look for expat
+                          in DIR if specified.  Set DIR to "shared" to
+                          build as a dl, or "shared,DIR" to build as a dl
+                          and still specify DIR.],[
   case $withval in
     shared)
       shared=yes

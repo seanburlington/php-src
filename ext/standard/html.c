@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.63.2.2 2002/11/16 08:32:11 sebastian Exp $ */
+/* $Id: html.c,v 1.63.2.3 2002/12/12 13:27:17 moriyoshi Exp $ */
 
 #include "php.h"
 #if PHP_WIN32
@@ -801,7 +801,7 @@ PHPAPI char *php_escape_html_entities(unsigned char *old, int oldlen, int *newle
 
 			}
 			if (!is_basic) {
-				if (this_char > 0xff) {
+				if (mbseqlen > 1) {
 					/* a wide char without a named entity; pass through the original sequence */
 					memcpy(replaced + len, mbsequence, mbseqlen);
 					len += mbseqlen;

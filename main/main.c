@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.532 2003/03/03 01:27:22 phanto Exp $ */
+/* $Id: main.c,v 1.533 2003/03/03 19:46:16 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -112,9 +112,6 @@ typedef struct {
 } last_error_type;
 
 static last_error_type last_error;
-
-static void php_build_argv(char *s, zval *track_vars_array TSRMLS_DC);
-
 
 #define SAFE_FILENAME(f) ((f)?(f):"-")
 

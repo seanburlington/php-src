@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.13 2002/08/14 16:39:26 kalowsky Exp $
+dnl $Id: config.m4,v 1.14 2002/08/20 23:04:53 kalowsky Exp $
 dnl
 
 AC_MSG_CHECKING(for NSAPI support)
@@ -22,7 +22,7 @@ if test "$PHP_NSAPI" != "no"; then
     AC_CHECK_HEADERS([$NSAPI_INCLUDE/nsapi.h])
   fi
   if test -d $PHP_NSAPI/plugins/include ; then
-    NSAPI_INCLUDE="$NSAPI_INCLUDE $PHP_NSAPI/plugins/include"
+    NSAPI_INCLUDE="$NSAPI_INCLUDE -I$PHP_NSAPI/plugins/include"
     AC_MSG_RESULT(iPlanet/4.x style)
     AC_CHECK_HEADERS([$NSAPI_INCLUDE/nsapi.h])
   fi

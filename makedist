@@ -24,7 +24,7 @@
 #
 # Written by Stig Bakken <ssb@guardian.no> 1997-05-28.
 #
-# $Id: makedist,v 1.28 2002/10/10 19:01:34 derick Exp $
+# $Id: makedist,v 1.28.2.1 2003/05/22 00:26:02 wez Exp $
 #
 
 if test "$#" != "2"; then
@@ -112,7 +112,7 @@ done
 # generate some files so people don't need bison, flex and autoconf
 # to install
 set -x
-./buildconf --copy
+./buildconf --copy --force
 
 # remove buildmk.stamp. Otherwise, buildcheck.sh might not be run,
 # when a user runs buildconf in the distribution.

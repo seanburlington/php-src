@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.79 1999/12/20 20:43:47 andrei Exp $ */
+/* $Id: string.c,v 1.80 1999/12/23 14:55:50 thies Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1295,16 +1295,16 @@ PHP_FUNCTION(strrev)
 	
 	convert_to_string_ex(str);
 	
-	len = (*str)->value.str.len;
-	
-	for (i=0; i<len-1-i; i++) {
-		c=(*str)->value.str.val[i];
-		(*str)->value.str.val[i] = (*str)->value.str.val[len-1-i];
-		(*str)->value.str.val[len-1-i]=c;
-	}
-
 	*return_value = **str;
 	pval_copy_constructor(return_value);
+
+	len = return_value->value.str.len;
+	
+	for (i=0; i<len-1-i; i++) {
+		c=return_value->value.str.val[i];
+		return_value->value.str.val[i] = return_value->value.str.val[len-1-i];
+		return_value->value.str.val[len-1-i]=c;
+	}
 }
 /* }}} */
 

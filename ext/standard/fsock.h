@@ -27,7 +27,7 @@
    |          Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
 */
-/* $Id: fsock.h,v 1.10 1999/06/18 15:54:14 andrey Exp $ */
+/* $Id: fsock.h,v 1.11 1999/06/26 18:01:21 zeev Exp $ */
 
 /* Synced with php3 revision 1.24 1999-06-18 [ssb] */
 
@@ -48,6 +48,10 @@
 
 #ifdef HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
+#endif
+
+#ifdef HAVE_SYS_TIME_H
+#include <sys/time.h>
 #endif
 
 extern php3_module_entry fsock_module_entry;

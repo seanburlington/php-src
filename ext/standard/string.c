@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.188 2001/02/15 14:01:18 thies Exp $ */
+/* $Id: string.c,v 1.189 2001/02/18 18:31:31 thies Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -412,7 +412,7 @@ PHP_FUNCTION(wordwrap)
 	}
 	else {
 		/* Multiple character line break */
-		newtext = emalloc((*ptext)->value.str.len * (breakcharlen+1));
+		newtext = emalloc((*ptext)->value.str.len * (breakcharlen+1)+1);
 		newtext[0] = '\0';
 
 		i = 0;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_firebird_int.h,v 1.6 2004/06/12 22:17:16 abies Exp $ */
+/* $Id: php_pdo_firebird_int.h,v 1.7 2004/06/15 14:16:22 abies Exp $ */
 
 #ifndef PHP_PDO_FIREBIRD_INT_H
 #define PHP_PDO_FIREBIRD_INT_H
@@ -84,12 +84,15 @@ typedef struct {
 	char name[32];
 	
 	/* the type of statement that was issued */
-	char statement_type;
+	char statement_type:8;
 	
 	/* whether EOF was reached for this statement */
 	unsigned exhausted:1;
 
 	unsigned _reserved:23;
+
+	/* the named params that were converted to ?'s by the driver */
+	HashTable *named_params;
 	
 	/* allocated space to convert fields values to other types */
 	char **fetch_buf;

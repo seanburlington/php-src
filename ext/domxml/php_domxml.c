@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.236 2003/02/13 21:41:00 helly Exp $ */
+/* $Id: php_domxml.c,v 1.237 2003/03/04 13:38:38 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2329,8 +2329,8 @@ PHP_FUNCTION(domxml_node_append_child)
 		RETURN_FALSE;
 	}
 	
-	/* first unlink node, if child is already a child of parent */
-	if (child->parent == parent){
+	/* first unlink node, if child is already in the tree */
+	if (child->doc == parent->doc && child->parent != NULL){
 		xmlUnlinkNode(child);
 	}
 	

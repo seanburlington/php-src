@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.68 2004/03/27 00:50:39 helly Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.69 2004/03/27 01:41:32 helly Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -354,10 +354,10 @@ int main(int argc, char** argv)
   ],[
       ac_cv_atof_accept_nan=no
   ])
-  if test "$ac_cv_atof_accept_nan" = "yes"; then
-    AC_DEFINE([HAVE_ATOF_ACCEPTS_NAN], 1, [whether atof() accepts NAN])
-  fi
 ])
+if test "$ac_cv_atof_accept_nan" = "yes"; then
+  AC_DEFINE([HAVE_ATOF_ACCEPTS_NAN], 1, [whether atof() accepts NAN])
+fi
 
 AC_CACHE_CHECK(whether atof() accepts INF, ac_cv_atof_accept_inf,[
   AC_TRY_RUN([
@@ -386,10 +386,10 @@ int main(int argc, char** argv)
   ],[
       ac_cv_atof_accept_inf=no
   ])
-  if test "$ac_cv_atof_accept_inf" = "yes"; then
-    AC_DEFINE([HAVE_ATOF_ACCEPTS_INF], 1, [whether atof() accepts INF])
-  fi
 ])
+if test "$ac_cv_atof_accept_inf" = "yes"; then
+  AC_DEFINE([HAVE_ATOF_ACCEPTS_INF], 1, [whether atof() accepts INF])
+fi
 
 PHP_CHECK_I18N_FUNCS
 

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.35 2003/09/10 00:22:19 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.36 2003/09/10 01:03:41 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2379,8 +2379,8 @@ PHP_FUNCTION(realpath)
 	convert_to_string_ex(path);
 
 	if (VCWD_REALPATH(Z_STRVAL_PP(path), resolved_path_buff)) {
-#if ZTS
-# if PHP_WIN32
+#ifdef ZTS
+# ifdef PHP_WIN32
 		if (_access(resolved_path_buff, 0))
 			RETURN_FALSE;
 # else

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.29.2.15 2003/04/13 20:16:14 helly Exp $
+dnl $Id: config.m4,v 1.29.2.16 2003/05/13 20:39:08 helly Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -140,6 +140,7 @@ AC_DEFUN(PHP_DBA_DB_CHECK,[
         AC_CHECK_LIB($LIB, $3, [
           AC_EGREP_CPP(yes,[
 #include "$THIS_INCLUDE"
+#if DB_VERSION_MAJOR == $1
             yes
 #endif
           ],[
@@ -150,6 +151,10 @@ AC_DEFUN(PHP_DBA_DB_CHECK,[
       ])
     fi
   done
+  if test -z "$THIS_LIBS"; then
+	AC_MSG_CHECKING(for db$1 major version)
+    AC_MSG_ERROR(Header contains different version)
+  fi
   if test "$1" = "4"; then
     AC_MSG_CHECKING(for db4 minor version and patch level)
     AC_EGREP_CPP(yes,[

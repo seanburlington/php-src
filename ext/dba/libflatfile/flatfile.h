@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: flatfile.h,v 1.2 2002/11/06 09:17:51 helly Exp $ */
+/* $Id: flatfile.h,v 1.3 2002/11/07 23:03:16 helly Exp $ */
 
 #ifndef PHP_LIBDBM_H
 #define PHP_LIBDBM_H
@@ -34,14 +34,14 @@ typedef struct {
 	datum nextkey;
 } flatfile;
 
-#define DBM_INSERT 0
-#define DBM_REPLACE 1
+#define FLATFILE_INSERT 1
+#define FLATFILE_REPLACE 0
 
-PHPAPI int dbm_file_store(flatfile *dba, datum key_datum, datum value_datum, int mode TSRMLS_DC);
-PHPAPI datum dbm_file_fetch(flatfile *dba, datum key_datum TSRMLS_DC);
-PHPAPI int dbm_file_delete(flatfile *dba, datum key_datum TSRMLS_DC);
-PHPAPI int dbm_file_findkey(flatfile *dba, datum key_datum TSRMLS_DC);
-PHPAPI datum dbm_file_firstkey(flatfile *dba TSRMLS_DC);
-PHPAPI datum dbm_file_nextkey(flatfile *dba TSRMLS_DC);
+PHPAPI int flatfile_store(flatfile *dba, datum key_datum, datum value_datum, int mode TSRMLS_DC);
+PHPAPI datum flatfile_fetch(flatfile *dba, datum key_datum TSRMLS_DC);
+PHPAPI int flatfile_delete(flatfile *dba, datum key_datum TSRMLS_DC);
+PHPAPI int flatfile_findkey(flatfile *dba, datum key_datum TSRMLS_DC);
+PHPAPI datum flatfile_firstkey(flatfile *dba TSRMLS_DC);
+PHPAPI datum flatfile_nextkey(flatfile *dba TSRMLS_DC);
 
 #endif

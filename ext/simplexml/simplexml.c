@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.88 2003/11/29 17:48:44 helly Exp $ */
+/* $Id: simplexml.c,v 1.89 2003/11/29 18:16:03 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1341,7 +1341,7 @@ SXE_METHOD(current)
 {
 	php_sxe_object *sxe = php_sxe_fetch_object(getThis() TSRMLS_CC);
 
-	REPLACE_ZVAL_VALUE(&return_value, sxe->iter.data, 1);
+	RETURN_ZVAL(sxe->iter.data, 1, 0);
 }
 /* }}} */
 
@@ -1560,7 +1560,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.88 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.89 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

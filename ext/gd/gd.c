@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.43 2004/07/23 02:28:51 edink Exp $ */
+/* $Id: gd.c,v 1.221.2.44 2004/07/27 00:27:10 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -105,6 +105,10 @@ extern int gdImageColorResolve(gdImagePtr, int, int, int);
 
 #if HAVE_COLORCLOSESTHWB
 int gdImageColorClosestHWB(gdImagePtr im, int r, int g, int b);
+#endif
+
+#ifndef HAVE_GD_DYNAMIC_CTX_EX
+#define gdNewDynamicCtxEx(len, data, val) gdNewDynamicCtx(len, data)
 #endif
 
 static gdImagePtr _php_image_create_from_string (zval **Data, char *tn, gdImagePtr (*ioctx_func_p)() TSRMLS_DC);
@@ -1242,7 +1246,7 @@ static int _php_image_type (char data[8])
 #ifdef HAVE_GD_WBMP
 	else {
 		gdIOCtx *io_ctx;
-		io_ctx = gdNewDynamicCtx (8, data);
+		io_ctx = gdNewDynamicCtxEx (8, data, 0);
 		if (io_ctx) {
 			if (getmbi((int(*)(void*))gdGetC, io_ctx) == 0 && skipheader((int(*)(void*))gdGetC, io_ctx) == 0 ) {
 #if HAVE_LIBGD204
@@ -1274,7 +1278,7 @@ gdImagePtr _php_image_create_from_string(zval **data, char *tn, gdImagePtr (*ioc
 	gdImagePtr im;
 	gdIOCtx *io_ctx;
 
-	io_ctx = gdNewDynamicCtx (Z_STRLEN_PP(data), Z_STRVAL_PP(data));
+	io_ctx = gdNewDynamicCtxEx(Z_STRLEN_PP(data), Z_STRVAL_PP(data), 0);
 
 	if (!io_ctx) {
 		return NULL;
@@ -1428,7 +1432,7 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 			goto out_err;
 		}
 
-		io_ctx = gdNewDynamicCtx(buff_size, buff);
+		io_ctx = gdNewDynamicCtxEx(buff_size, buff, 0);
 		if(!io_ctx) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING,"Cannot allocate GD IO context");
 			goto out_err;

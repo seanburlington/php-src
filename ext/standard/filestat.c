@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.58 2001/04/25 04:22:29 andi Exp $ */
+/* $Id: filestat.c,v 1.59 2001/04/25 05:43:30 andi Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -447,7 +447,7 @@ PHP_FUNCTION(clearstatcache)
 /* }}} */
 
 
-static void php_stat(const char *filename, int filename_length, int type, pval *return_value)
+static void php_stat(const char *filename, php_stat_len filename_length, int type, pval *return_value)
 {
 	struct stat *stat_sb;
 	int rmask=S_IROTH,wmask=S_IWOTH,xmask=S_IXOTH; /* access rights defaults to other */
@@ -637,7 +637,7 @@ void name(INTERNAL_FUNCTION_PARAMETERS) { \
 		WRONG_PARAM_COUNT; \
 	} \
 	convert_to_string_ex(filename); \
-	php_stat(Z_STRVAL_PP(filename), Z_STRLEN_PP(filename), funcnum, return_value); \
+	php_stat(Z_STRVAL_PP(filename), (php_stat_len) Z_STRLEN_PP(filename), funcnum, return_value); \
 }
 
 /* {{{ proto int fileperms(string filename)

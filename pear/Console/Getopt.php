@@ -17,7 +17,7 @@
 // | Authors: Andrei Zmievski <andrei@ispi.net>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: Getopt.php,v 1.2 2001/03/12 03:05:04 andrei Exp $
+// $Id: Getopt.php,v 1.3 2001/05/29 16:18:35 andrei Exp $
 
 require_once 'PEAR.php';
 
@@ -180,7 +180,7 @@ class Console_Getopt {
                 return new Getopt_Error("option --$opt doesn't allow an argument\n");
             }
 
-            $opts[] = array('--' . substr($long_opt, 0, strpos($long_opt, '=')), $opt_arg);
+            $opts[] = array('--' . $opt, $opt_arg);
             return;
         }
 

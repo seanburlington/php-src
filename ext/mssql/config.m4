@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.2 2002/12/30 08:55:21 derick Exp $
+dnl $Id: config.m4,v 1.3 2003/01/07 05:19:48 fmk Exp $
 dnl
 
 PHP_ARG_WITH(mssql,for MSSQL support via FreeTDS,
@@ -24,4 +24,5 @@ if test "$PHP_MSSQL" != "no"; then
      ])
   AC_DEFINE(HAVE_MSSQL,1,[ ])
   AC_DEFINE(HAVE_FREETDS,1,[ ])
+  PHP_SUBST(MSSQL_SHARED_LIBADD)
 fi

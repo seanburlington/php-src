@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.8 2004/05/20 20:04:11 iliaa Exp $ */
+/* $Id: pgsql_driver.c,v 1.9 2004/05/20 20:22:07 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -221,11 +221,11 @@ static int pdo_pgsql_get_attribute(pdo_dbh_t *dbh, long attr, zval *return_value
 #ifdef HAVE_PQPROTOCOLVERSION
 			spprintf(&tmp, 0, 
 				"PID: %d; Client Encoding: %s; Is Superuser: %s; Session Authorization: %s; Date Style: %s", 
+				spid,
 				(char*)PQparameterStatus(H->server, "client_encoding"),
 				(char*)PQparameterStatus(H->server, "is_superuser"),
 				(char*)PQparameterStatus(H->server, "session_authorization"),
-				(char*)PQparameterStatus(H->server, "DateStyle"),
-				spid);
+				(char*)PQparameterStatus(H->server, "DateStyle"));
 #else 
 			spprintf(&tmp, 0, "PID: %d", spid);
 #endif

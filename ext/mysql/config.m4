@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.27 2000/11/21 11:07:50 sniper Exp $
+dnl $Id: config.m4,v 1.28 2001/03/10 17:33:33 sniper Exp $
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
 sinclude(ext/mysql/libmysql/mysql.m4)
@@ -78,6 +78,11 @@ elif test "$PHP_MYSQL" != "no"; then
   fi
 
   AC_ADD_LIBRARY_WITH_PATH(mysqlclient, $MYSQL_LIB_DIR, MYSQL_SHARED_LIBADD)
+
+  dnl Check if mysql_config is found. If yes, use the LIBS provided by it..
+  if test -x "$MYSQL_DIR/bin/mysql_config"; then
+    PHP_EVAL_LIBLINE($MYSQL_DIR/bin/mysql_config --libs)   
+  fi
 
   AC_ADD_INCLUDE($MYSQL_INC_DIR)
 else

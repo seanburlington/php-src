@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.46.2.2 2004/08/20 00:56:05 iliaa Exp $ */
+/* $Id: interface.c,v 1.46.2.3 2004/08/20 13:52:47 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -925,9 +925,6 @@ PHP_FUNCTION(curl_setopt)
 #endif
 		case CURLOPT_UNRESTRICTED_AUTH:
 		case CURLOPT_PORT:
-		case CURL_TIMECOND_IFMODSINCE:
-		case CURL_TIMECOND_IFUNMODSINCE:
-		case CURL_TIMECOND_LASTMOD:
 			convert_to_long_ex(zvalue);
 			error = curl_easy_setopt(ch->cp, option, Z_LVAL_PP(zvalue));
 			break;

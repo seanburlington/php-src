@@ -15,7 +15,7 @@
   | Author: Wez Furlong <wez@thebrainroom.com>                           |
   +----------------------------------------------------------------------+
 
-  $Id: sqlite.c,v 1.16 2003/04/18 16:30:16 wez Exp $ 
+  $Id: sqlite.c,v 1.17 2003/04/18 19:43:38 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -198,6 +198,7 @@ static void php_sqlite_function_callback(sqlite_func *func, int argc, const char
 	zval funcname;
 	int i, res;
 	char *callable = NULL, *errbuf=NULL;
+	TSRMLS_FETCH();
 
 	/* sanity check the args */
 	if (argc == 0) {
@@ -340,7 +341,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.16 2003/04/18 16:30:16 wez Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.17 2003/04/18 19:43:38 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -355,6 +356,8 @@ static struct php_sqlite_db *php_sqlite_open(char *filename, int mode, char *per
 	sdb = sqlite_open(filename, mode, &errtext);
 
 	if (sdb == NULL) {
+		TSRMLS_FETCH();
+
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", errtext);
 
 		if (errmsg) {
@@ -386,6 +389,7 @@ static struct php_sqlite_db *php_sqlite_open(char *filename, int mode, char *per
 
 	if (persistent_id) {
 		list_entry le;
+		TSRMLS_FETCH();
 
 		Z_TYPE(le) = le_sqlite_pdb;
 		le.ptr = db;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.39 2000/06/09 10:34:53 stas Exp $ */
+/* $Id: filestat.c,v 1.40 2000/06/12 14:44:16 eschmid Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -359,7 +359,7 @@ PHP_FUNCTION(chmod)
 /* }}} */
 
 
-/* {{{ proto bool touch(string filename[, int time])
+/* {{{ proto bool touch(string filename [, int time])
    Set modification time of file */
 PHP_FUNCTION(touch) 
 {

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.28.2.2 2003/08/27 17:57:31 sniper Exp $
+dnl $Id: config.m4,v 1.28.2.3 2003/09/23 08:16:47 sniper Exp $
 dnl
 
 PHP_ARG_WITH(snmp,for SNMP support,
@@ -101,8 +101,15 @@ if test "$PHP_SNMP" != "no"; then
     SNMP_LIBNAME=snmp
   fi
 
-  AC_CHECK_FUNCS(snmp_parse_oid)
+  dnl Check whether snmp_parse_oid() exists.
+  PHP_CHECK_LIBRARY($SNMP_LIBNAME, snmp_parse_oid,
+  [
+    AC_DEFINE(HAVE_SNMP_PARSE_OID, 1, [ ])
+  ], [], [
+    $SNMP_SHARED_LIBADD
+  ])
 
+  dnl Test build.
   PHP_CHECK_LIBRARY($SNMP_LIBNAME, init_snmp,
   [
     AC_DEFINE(HAVE_SNMP,1,[ ])

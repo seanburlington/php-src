@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.33 2003/01/07 13:02:43 iliaa Exp $ */
+/* $Id: ftp.h,v 1.34 2003/01/27 02:54:12 pollita Exp $ */
 
 #ifndef	FTP_H
 #define	FTP_H
@@ -134,6 +134,9 @@ char*		ftp_mkdir(ftpbuf_t *ftp, const char *dir);
 
 /* removes a directory, return true on success, false on error */
 int		ftp_rmdir(ftpbuf_t *ftp, const char *dir);
+
+/* Set permissions on a file */
+int		ftp_chmod(ftpbuf_t *ftp, const int mode, const char *filename);
 
 /* returns a NULL-terminated array of filenames in the given path
  * or NULL on error.  the return array must be freed (but don't

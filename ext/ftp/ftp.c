@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.73 2003/01/07 13:02:43 iliaa Exp $ */
+/* $Id: ftp.c,v 1.74 2003/01/27 02:54:12 pollita Exp $ */
 
 #include "php.h"
 
@@ -534,6 +534,31 @@ ftp_rmdir(ftpbuf_t *ftp, const char *dir)
 	return 1;
 }
 /* }}} */
+
+/* {{{ ftp_chmod
+ */
+int
+ftp_chmod(ftpbuf_t *ftp, const int mode, const char *filename)
+{
+	char buffer[1024];
+
+	if (ftp == NULL) {
+		return 0;
+	}
+
+	sprintf(buffer, "CHMOD %o %s", mode, filename);
+
+	if (!ftp_putcmd(ftp, "SITE", buffer)) {
+		return 0;
+	}
+
+	if (!ftp_getresp(ftp) || ftp->resp != 200) {
+		return 0;
+	}
+	return 1;
+}
+/* }}} */
+
 
 /* {{{ ftp_nlist
  */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.h,v 1.22 2002/12/31 16:06:38 sebastian Exp $ */
+/* $Id: php_ftp.h,v 1.23 2003/01/27 02:54:12 pollita Exp $ */
 
 #ifndef	_INCLUDED_FTP_H
 #define	_INCLUDED_FTP_H
@@ -45,6 +45,7 @@ PHP_FUNCTION(ftp_chdir);
 PHP_FUNCTION(ftp_exec);
 PHP_FUNCTION(ftp_mkdir);
 PHP_FUNCTION(ftp_rmdir);
+PHP_FUNCTION(ftp_chmod);
 PHP_FUNCTION(ftp_nlist);
 PHP_FUNCTION(ftp_rawlist);
 PHP_FUNCTION(ftp_systype);

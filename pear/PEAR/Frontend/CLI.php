@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.13 2002/06/02 13:07:19 ssb Exp $
+  $Id: CLI.php,v 1.14 2002/06/02 20:13:50 dickmann Exp $
 */
 
 require_once "PEAR.php";
@@ -355,6 +355,18 @@ class PEAR_Frontend_CLI extends PEAR
     {
         switch ($command)
         {
+            case 'search':
+                $this->_startTable($data);
+                if (isset($data['headline']) && is_array($data['headline']))
+                    $this->_tableRow($data['headline'], array('bold' => true), array(1 => array('wrap' => 55)));
+                
+                foreach($data['data'] as $category) {
+                    foreach($category as $pkg) {
+                        $this->_tableRow($pkg, null, array(1 => array('wrap' => 55)));
+                    }
+                };
+                $this->_endTable();
+                break;
             case 'list-all':
                 $this->_startTable($data);
                 if (isset($data['headline']) && is_array($data['headline']))

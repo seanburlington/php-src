@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.13 2002/06/02 13:07:18 ssb Exp $
+// $Id: Remote.php,v 1.14 2002/06/02 20:13:50 dickmann Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -135,7 +135,7 @@ version of DB is 1.2, the downloaded file will be DB-1.2.tgz.',
     
         $this->ui->outputData($info, $command);
         
-        return false; // coming soon
+        return true; // coming soon
     }
 
     // }}}

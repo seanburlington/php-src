@@ -25,7 +25,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.100.2.2 2001/10/11 23:51:30 ssb Exp $ */
+/* $Id: php_imap.c,v 1.100.2.3 2001/12/07 16:47:59 thies Exp $ */
 
 #define IMAP41
 
@@ -2100,6 +2100,7 @@ PHP_FUNCTION(imap_rfc822_parse_adrlist)
 		ZEND_WRONG_PARAM_COUNT();
 	}
 
+	SEPARATE_ZVAL(str);
 	convert_to_string_ex(str);
 	convert_to_string_ex(defaulthost);
 

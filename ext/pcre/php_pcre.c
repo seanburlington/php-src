@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.100 2001/06/06 13:05:48 rasmus Exp $ */
+/* $Id: php_pcre.c,v 1.101 2001/07/13 03:37:18 hirokawa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -259,6 +259,7 @@ static pcre* pcre_get_compiled_regex(char *regex, pcre_extra *extra, int *preg_o
 			case 'S':	do_study  = 1;					break;
 			case 'U':	coptions |= PCRE_UNGREEDY;		break;
 			case 'X':	coptions |= PCRE_EXTRA;			break;
+			case 'u':	coptions |= PCRE_UTF8;			break;
 
 			/* Custom preg options */
 			case 'e':	poptions |= PREG_REPLACE_EVAL;	break;

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.28 2001/05/12 09:13:40 sas Exp $
+dnl $Id: config.m4,v 1.29 2001/05/12 11:08:52 sas Exp $
 
 AC_DEFUN(AC_OCI8_VERSION,[
   AC_MSG_CHECKING([Oracle version])
@@ -28,9 +28,9 @@ PHP_ARG_WITH(oci8, for Oracle-OCI8 support,
 if test "$PHP_OCI8" != "no"; then
   AC_MSG_CHECKING([Oracle Install-Dir])
   if test "$PHP_OCI8" = "yes"; then
-  	OCI8_DIR="$ORACLE_HOME"
+  	OCI8_DIR=$ORACLE_HOME
   else
-  	OCI8_DIR="$PHP_OCI8"
+  	OCI8_DIR=$PHP_OCI8
   fi
   AC_MSG_RESULT($OCI8_DIR)
 

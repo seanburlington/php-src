@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.247 2001/05/12 10:33:52 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.248 2001/05/12 11:08:46 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -93,7 +93,7 @@ AC_AIX
 
 BSD_MAKEFILE=no
 
-case "$host_alias" in
+case $host_alias in
 *solaris*)
     CPPFLAGS="$CPPFLAGS -D_POSIX_PTHREAD_SEMANTICS"
     if test "${enable_libgcc+set}" != "set" && test "$GCC" = "yes"; then
@@ -653,7 +653,7 @@ divert(6)
 enable_shared=yes
 enable_static=yes
 
-case "$php_build_target" in
+case $php_build_target in
 program)
     enable_shared=no
 ;;

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.27 2001/03/11 10:08:27 sasha Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.28 2001/05/12 11:09:00 sas Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -42,11 +42,11 @@ int main(int argc, char **argv)
 	exit(result);
 }
 ],[
-  ac_cv_flush_io="no"
+  ac_cv_flush_io=no
 ],[
-  ac_cv_flush_io="yes"
+  ac_cv_flush_io=yes
 ],[
-  ac_cv_flush_io="no"
+  ac_cv_flush_io=no
 ])])
   if test "$ac_cv_flush_io" = "yes"; then
     AC_DEFINE(HAVE_FLUSHIO, 1, [Define if flush should be called explicitly after a buffered io.])

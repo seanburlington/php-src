@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config0.m4,v 1.2 2001/05/12 09:13:41 sas Exp $
+dnl $Id: config0.m4,v 1.3 2001/05/12 11:09:02 sas Exp $
 dnl
 
 PHP_ARG_WITH(zlib-dir,if the location of ZLIB install directory is defined,
@@ -44,7 +44,7 @@ if test "$PHP_ZLIB" != "no" -o "$PHP_ZLIB_DIR" != "no"; then
     if test "$PHP_ZLIB" != "yes"; then
       PHP_ZLIB_DIR=$PHP_ZLIB
     else 
-      PHP_ZLIB_DIR="/usr/local"
+      PHP_ZLIB_DIR=/usr/local
     fi
   fi
 

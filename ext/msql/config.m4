@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.9 2001/04/03 23:30:44 wsanchez Exp $
+dnl $Id: config.m4,v 1.10 2001/05/12 11:08:51 sas Exp $
 
 dnl
 dnl Test mSQL version by checking if msql.h has "IDX_TYPE" defined.
@@ -13,7 +13,7 @@ AC_DEFUN(PHP_MSQL_VERSION,[
     MSQL_VERSION="2.0 or newer"
   ],[
     AC_DEFINE(MSQL1,1,[ ])
-    MSQL_VERSION="1.0"
+    MSQL_VERSION=1.0
   ])
   CPPFLAGS=$ac_php_oldcppflags
   AC_MSG_RESULT($MSQL_VERSION)

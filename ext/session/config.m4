@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.11 2001/05/11 17:43:40 sas Exp $
+dnl $Id: config.m4,v 1.12 2001/05/12 11:08:56 sas Exp $
 
 PHP_ARG_WITH(mm,for mm support,
 [  --with-mm[=DIR]         Include mm support for session storage])
@@ -12,7 +12,7 @@ PHP_ARG_ENABLE(session, whether to enable session support,
 if test "$PHP_MM" != "no"; then
   for i in /usr/local /usr $PHP_MM; do
     if test -f "$i/include/mm.h"; then
-      MM_DIR="$i"
+      MM_DIR=$i
     fi
   done
 

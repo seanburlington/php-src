@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.18 2001/05/10 00:54:44 sniper Exp $
+dnl $Id: config.m4,v 1.19 2001/05/12 11:08:54 sas Exp $
 dnl
 
 PHP_ARG_WITH(pdflib,whether to include PDFlib support,
@@ -13,7 +13,7 @@ if test "$PHP_PDFLIB" != "no"; then
   PHP_SUBST(PDFLIB_SHARED_LIBADD)
   PHP_EXTENSION(pdf, $ext_shared)
 
-  case "$PHP_PDFLIB" in
+  case $PHP_PDFLIB in
     yes)
       AC_CHECK_LIB(pdf, PDF_show_boxed, [
         AC_DEFINE(HAVE_PDFLIB,1,[ ])
@@ -30,7 +30,7 @@ if test "$PHP_PDFLIB" != "no"; then
       PHP_ADD_LIBRARY(z,, PDFLIB_SHARED_LIBADD)
     ;;
     *)
-      test -f $PHP_PDFLIB/include/pdflib.h && PDFLIB_INCLUDE="$PHP_PDFLIB/include"
+      test -f $PHP_PDFLIB/include/pdflib.h && PDFLIB_INCLUDE=$PHP_PDFLIB/include
       if test -n "$PDFLIB_INCLUDE" ; then
 
         if test "$PHP_ZLIB" = "no"; then

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.9 2000/09/28 20:09:23 sniper Exp $
+dnl $Id: config.m4,v 1.10 2001/05/12 11:08:48 sas Exp $
 dnl config.m4 for extension db
 dnl don't forget to call PHP_EXTENSION(db)
 
@@ -33,9 +33,9 @@ if test "$PHP_DB" != "no"; then
   if test "$DBM_LIB" = "-lgdbm"; then
     AC_CHECK_HEADER(gdbm.h, [ GDBM_INCLUDE="" ], [ 
       AC_MSG_RESULT("Try /usr/local/include/gdbm.h"); 
-      AC_CHECK_HEADER(/usr/local/include/gdbm.h, [ GDBM_INCLUDE="-I/usr/local/include" ],[
+      AC_CHECK_HEADER(/usr/local/include/gdbm.h, [ GDBM_INCLUDE=-I/usr/local/include ],[
         AC_MSG_RESULT("Try /opt/local/include/gdbm.h");
-        AC_CHECK_HEADER(/opt/local/include/gdbm.h, [ GDBM_INCLUDE="-I/opt/local/include" ],[
+        AC_CHECK_HEADER(/opt/local/include/gdbm.h, [ GDBM_INCLUDE=-I/opt/local/include ],[
           dnl if in /usr/pkg/include, do not add anything.  See above.
           AC_MSG_RESULT("Try /usr/pkg/include/gdbm.h");
           AC_CHECK_HEADER(/usr/pkg/include/gdbm.h, [ GDBM_INCLUDE="" ],[

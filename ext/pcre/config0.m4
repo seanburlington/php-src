@@ -1,4 +1,4 @@
-dnl $Id: config0.m4,v 1.23 2001/03/27 20:34:38 sniper Exp $
+dnl $Id: config0.m4,v 1.24 2001/05/12 11:08:54 sas Exp $
 dnl config.m4 for extension pcre
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -43,8 +43,8 @@ if test "$PHP_PCRE_REGEX" != "no"; then
       AC_MSG_ERROR(The PCRE extension requires PCRE library version >= 2.08)
     fi
 
-    test -f $PHP_PCRE_REGEX/libpcre.a && PCRE_LIBDIR="$PHP_PCRE_REGEX"
-    test -f $PHP_PCRE_REGEX/lib/libpcre.a && PCRE_LIBDIR="$PHP_PCRE_REGEX/lib"
+    test -f $PHP_PCRE_REGEX/libpcre.a && PCRE_LIBDIR=$PHP_PCRE_REGEX
+    test -f $PHP_PCRE_REGEX/lib/libpcre.a && PCRE_LIBDIR=$PHP_PCRE_REGEX/lib
 
     if test -z "$PCRE_LIBDIR" ; then
       AC_MSG_ERROR(Could not find libpcre.a in $PHP_PCRE_REGEX)

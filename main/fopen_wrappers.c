@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.153.2.2 2002/12/31 16:25:01 sebastian Exp $ */
+/* $Id: fopen_wrappers.c,v 1.153.2.3 2003/02/23 22:03:54 rasmus Exp $ */
 
 /* {{{ includes
  */
@@ -192,7 +192,7 @@ PHPAPI int php_check_open_basedir(const char *path TSRMLS_DC)
 			ptr = end;
 		}
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, 
-			"open_basedir restriction in effect. File(%s) is not within the allowed path(s): (%s)", path, pathbuf);
+			"open_basedir restriction in effect. File(%s) is not within the allowed path(s): (%s)", path, PG(open_basedir));
 		efree(pathbuf);
 		errno = EPERM; /* we deny permission to open it */
 		return -1;

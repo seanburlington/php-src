@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.142.2.41 2005/01/20 18:46:14 tony2001 Exp $ */
+/* $Id: php_imap.c,v 1.142.2.42 2005/01/25 14:23:37 tony2001 Exp $ */
 
 #define IMAP41
 
@@ -2623,6 +2623,10 @@ PHP_FUNCTION(imap_bodystruct)
 	}
 	
 	body=mail_body(imap_le_struct->imap_stream, Z_LVAL_PP(msg), Z_STRVAL_PP(section));
+	if (body == NULL) {
+		zval_dtor(return_value);
+		RETURN_FALSE;
+	}
 	if (body->type <= TYPEMAX) {
 		add_property_long(return_value, "type", body->type);
 	}

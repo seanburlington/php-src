@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 2001/08/26 14:15:39 hholzgra Exp $
+dnl $Id: config.m4,v 1.4 2001/09/12 19:54:46 hholzgra Exp $
 dnl config.m4 for extension dbplus
 
 
@@ -7,7 +7,7 @@ PHP_ARG_WITH(dbplus, for dbplus support,
 
 if test "$PHP_DBPLUS" != "no"; then
   # --with-dbplus -> check with-path
-  SEARCH_PATH="/usr/dbplus"    
+  SEARCH_PATH="/usr/dbplus /usr/local/dbplus /opt/dbplus"    
   SEARCH_FOR="/include/dbconfig.h"  
   if test -r $PHP_DBPLUS/; then # path given as parameter
     DBPLUS_DIR=$PHP_DBPLUS

@@ -1,4 +1,4 @@
-/* $Id: php_oracle.h,v 1.3 1999/12/17 20:55:16 zeev Exp $ */
+/* $Id: php_oracle.h,v 1.4 2000/02/11 15:34:10 andrei Exp $ */
 
 /* synced with oracle.h,v 1.40 1999/06/01 08:11:04 thies Exp $ */
 
@@ -130,7 +130,7 @@ typedef struct {
 
 #else
 
-#define oracle_module_ptr NULL
+#define phpext_oracle_ptr NULL
 
 #endif /* HAVE_ORACLE */
 

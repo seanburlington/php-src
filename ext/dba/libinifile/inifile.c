@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: inifile.c,v 1.6.2.1 2003/05/29 14:16:25 helly Exp $ */
+/* $Id: inifile.c,v 1.6.2.2 2003/07/16 20:56:06 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -44,7 +44,7 @@
 /* {{{ inifile_version */
 char *inifile_version() 
 {
-	return "1.0, $Revision: 1.6.2.1 $";
+	return "1.0, $Revision: 1.6.2.2 $";
 }
 /* }}} */ 
 
@@ -154,7 +154,7 @@ static char *etrim(const char *str)
 		return NULL;
 	}
 	val = (char*)str;
-	while (strchr(" \t\r\n", *val)) {
+	while (*val && strchr(" \t\r\n", *val)) {
 		val++;
 	}
 	l = strlen(val);

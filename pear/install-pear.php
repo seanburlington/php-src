@@ -1,6 +1,6 @@
 <?php
 
-/* $Id: install-pear.php,v 1.6.2.1 2002/11/13 20:38:24 ssb Exp $ */
+/* $Id: install-pear.php,v 1.6.2.2 2002/11/14 23:26:26 ssb Exp $ */
 
 $pear_dir = dirname(__FILE__);
 ini_set('include_path', $pear_dir);

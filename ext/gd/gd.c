@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.41 2004/05/09 17:34:01 iliaa Exp $ */
+/* $Id: gd.c,v 1.221.2.42 2004/05/20 23:38:05 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -648,6 +648,7 @@ PHP_FUNCTION(imageloadfont)
 	if (body_size != body_size_check) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error reading font");
 		efree(font);
+		php_stream_close(stream);
 		RETURN_FALSE;
 	}
 

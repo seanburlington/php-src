@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.422 2004/07/19 07:19:45 andi Exp $ */
+/* $Id: string.c,v 1.423 2004/10/07 23:10:35 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2990,7 +2990,7 @@ PHPAPI int php_char_to_str_ex(char *str, uint len, char from, char *to, int to_l
 		}
 	}
 
-	if (char_count == 0) {
+	if (char_count == 0 && case_sensitivity) {
 		ZVAL_STRINGL(result, str, len, 1);
 		return 0;
 	}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.44 2002/11/12 11:49:11 helly Exp $ */
+/* $Id: php_gd.h,v 1.45 2002/11/13 20:02:58 iliaa Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -164,6 +164,7 @@ PHP_FUNCTION(image2wbmp);
 #if HAVE_GD_BUNDLED
 PHP_FUNCTION(imagelayereffect);
 PHP_FUNCTION(imagecolormatch);
+PHP_FUNCTION(imagefilter);
 #endif
 
 PHP_GD_API int phpi_get_le_gd(void);

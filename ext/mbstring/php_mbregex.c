@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.50 2005/02/20 22:18:07 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.51 2005/02/21 10:19:11 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -501,7 +501,7 @@ PHP_FUNCTION(mb_regex_encoding)
 	           zend_get_parameters_ex(1, &arg1) != FAILURE) {
 		convert_to_string_ex(arg1);
 		mbctype = php_mb_regex_name2mbctype(Z_STRVAL_PP(arg1));
-		if (mbctype < 0) {
+		if (mbctype == ONIG_ENCODING_UNDEF) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown encoding \"%s\"", Z_STRVAL_PP(arg1));
 			RETVAL_FALSE;
 		} else {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.39 2003/06/27 16:41:41 sniper Exp $ */
+/* $Id: ftp.h,v 1.40 2003/09/18 17:36:08 pollita Exp $ */
 
 #ifndef	FTP_H
 #define	FTP_H
@@ -140,6 +140,13 @@ int		ftp_rmdir(ftpbuf_t *ftp, const char *dir);
 
 /* Set permissions on a file */
 int		ftp_chmod(ftpbuf_t *ftp, const int mode, const char *filename, const int filename_len);
+
+/* Allocate space on remote server with ALLO command
+ * Many servers will respond with 202 Allocation not necessary,
+ * however some servers will not accept STOR or APPE until ALLO is confirmed. 
+ * If response is passed, it is estrdup()ed from ftp->inbuf and must be freed
+ * or assigned to a zval returned to the user */
+int		ftp_alloc(ftpbuf_t *ftp, const int size, char **response);
 
 /* returns a NULL-terminated array of filenames in the given path
  * or NULL on error.  the return array must be freed (but don't

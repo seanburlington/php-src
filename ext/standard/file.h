@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.h,v 1.13 1999/11/24 03:05:10 evan Exp $ */
+/* $Id: file.h,v 1.14 1999/11/24 03:47:58 evan Exp $ */
 
 /* Synced with php3 revision 1.30 1999-06-16 [ssb] */
 
@@ -69,6 +69,7 @@ PHP_FUNCTION(set_file_buffer);
 PHP_FUNCTION(get_meta_tags);
 PHP_FUNCTION(flock);
 PHP_FUNCTION(fd_set);
+PHP_FUNCTION(fd_isset);
 PHP_FUNCTION(select);
 
 PHPAPI int _php3_set_sock_blocking(int socketd, int block);

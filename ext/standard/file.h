@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.38 2001/07/28 11:36:16 zeev Exp $ */
+/* $Id: file.h,v 1.39 2001/08/04 12:36:51 elixer Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -100,6 +100,7 @@ typedef struct _php_meta_tags_data {
   char *input_buffer;
   char *token_data;
   int token_len;
+  int in_meta;
 } php_meta_tags_data;
 
 php_meta_tags_token php_next_meta_token(php_meta_tags_data *);

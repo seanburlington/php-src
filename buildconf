@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: buildconf,v 1.57.4.3 2005/01/19 23:04:21 sniper Exp $
+# $Id: buildconf,v 1.57.4.4 2005/02/03 17:43:04 sniper Exp $
 
 eval `grep '^EXTRA_VERSION=' configure.in`
 case "$EXTRA_VERSION" in
@@ -66,4 +66,8 @@ fi
  
 rm -f generated_lists
 
-${MAKE:-make} -s -f build/build.mk AMFLAGS="$automake_flags" ZENDDIR="$ZENDDIR" SHOW_WARNINGS="$debug"
+if test "$debug" = "yes"; then
+  ${MAKE:-make} -s -f build/build.mk AMFLAGS="$automake_flags" ZENDDIR="$ZENDDIR" SUPPRESS_WARNINGS=""
+else
+  ${MAKE:-make} -s -f build/build.mk AMFLAGS="$automake_flags" ZENDDIR="$ZENDDIR"
+fi

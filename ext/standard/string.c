@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.296 2002/09/21 17:34:06 iliaa Exp $ */
+/* $Id: string.c,v 1.297 2002/09/23 14:20:02 sebastian Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3113,7 +3113,6 @@ PHP_FUNCTION(setlocale)
 {
 	pval ***args = (pval ***) emalloc(sizeof(pval **)*ZEND_NUM_ARGS());
 	zval **pcategory, **plocale;
-	zval *locale;
 	int i, cat, n_args=ZEND_NUM_ARGS();
 	char *loc, *retval;
 

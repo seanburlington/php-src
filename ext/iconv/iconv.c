@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.111 2003/12/23 17:05:43 iliaa Exp $ */
+/* $Id: iconv.c,v 1.112 2003/12/23 17:10:54 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1245,7 +1245,7 @@ static php_iconv_err_t _php_iconv_mime_decode(smart_str *pretval, const char *st
 	const char *encoded_word = NULL;
 	const char *spaces = NULL;
 
-	php_iconv_enc_scheme_t enc_scheme = {0};
+	php_iconv_enc_scheme_t enc_scheme = 0;
 
 	if (next_pos != NULL) {
 		*next_pos = NULL;
@@ -2061,7 +2061,7 @@ PHP_FUNCTION(iconv_mime_decode_headers)
 	int charset_len;
 	long mode = 0;
 	
-	php_iconv_err_t err = {0};
+	php_iconv_err_t err = 0;
 
 	charset = ICONVG(internal_encoding);
 

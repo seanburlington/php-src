@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.33 2001/01/07 17:22:17 derick Exp $ */
+/* $Id: crypt.c,v 1.34 2001/01/08 21:13:24 derick Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -106,7 +106,7 @@ PHP_MINIT_FUNCTION(crypt)
 	REGISTER_LONG_CONSTANT("CRYPT_BLOWFISH", PHP_BLOWFISH_CRYPT, CONST_CS | CONST_PERSISTENT);
 
 #if HAVE_SRAND48
-	srand48((unsigned int) time(0) * getpid() * (php_combined_lcg() * 10000.0));
+	srand48((long) time(0) * (long) getpid() * (long) (php_combined_lcg() * 10000.0));
 #elif HAVE_SRANDOM
 	srandom((unsigned int) time(0) * getpid() * (php_combined_lcg() * 10000.0));
 #else

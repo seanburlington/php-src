@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2000/09/03 13:00:08 sterling Exp $
+dnl $Id: config.m4,v 1.2 2000/09/03 13:31:45 sterling Exp $
 dnl config.m4 for extension Sablot
 
 PHP_ARG_WITH(sablot, for Sablotron XSL support,
@@ -32,7 +32,7 @@ if test "$PHP_SABLOT" != "no"; then
   PHP_EXTENSION(sablot, $ext_shared)
 fi
 
-AC_MSG_CHECKING(whether to enable UCD SNMP hack)
+AC_MSG_CHECKING(whether to enable descriptive error messages)
 AC_ARG_ENABLE(sablot-errors-descriptive,
 [  --enable-sablot-errors-descriptive  Enable Descriptive errors],[
   if test "$enableval" = "yes" ; then

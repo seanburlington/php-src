@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.72 2001/09/09 09:51:02 sterling Exp $ */
+/* $Id: php_domxml.c,v 1.73 2001/09/09 09:58:49 sterling Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -787,7 +787,7 @@ static zval *php_domobject_new(xmlNodePtr obj, int *found TSRMLS_DC)
 		}
 
 		default: 
-			fprintf(stderr, "Unsupported Node type: %d\n", obj->type);
+			php_error(E_WARNING, "Unsupported Node type: %d\n", obj->type);
 			return NULL;
 	}
 

@@ -4,10 +4,10 @@
   +----------------------------------------------------------------------+
   | Copyright (c) 1997-2003 The PHP Group                                |
   +----------------------------------------------------------------------+
-  | This source file is subject to version 2.02 of the PHP license,      |
+  | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
-  | available at through the world-wide-web at                           |
-  | http://www.php.net/license/2_02.txt.                                 |
+  | available through the world-wide-web at the following url:           |
+  | http://www.php.net/license/3_0.txt.                                  |
   | If you did not receive a copy of the PHP license and are unable to   |
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
@@ -19,7 +19,7 @@
 #include "php.h"
 #include "php_network.h"
 
-/* $Id: select.c,v 1.3 2003/02/28 21:03:36 wez Exp $ */
+/* $Id: select.c,v 1.4 2003/06/10 20:03:46 imajes Exp $ */
 
 /* Win32 select() will only work with sockets, so we roll our own implementation that will
  * get the OS file handle from regular fd's and sockets and then use WaitForMultipleObjects().

@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: incomplete_class.c,v 1.2 2000/06/23 16:58:30 sas Exp $ */
+/* $Id: incomplete_class.c,v 1.3 2000/06/24 13:27:34 zeev Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -70,6 +70,7 @@ static zval incomplete_class_get_property(zend_property_reference *property_refe
 	incomplete_class_message(property_reference);
 
 	/* does not reach this point */
+	memset(&foo, 0, sizeof(zval)); /* shut warnings up */
 	return (foo);
 }
 

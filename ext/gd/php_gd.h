@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.30 2001/05/29 07:46:07 sniper Exp $ */
+/* $Id: php_gd.h,v 1.31 2001/07/05 21:23:28 wez Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -88,6 +88,8 @@ PHP_FUNCTION(imagecopymerge);
 PHP_FUNCTION(imagecopyresized);
 PHP_FUNCTION(imagetypes);
 PHP_FUNCTION(imagecreate);
+PHP_FUNCTION(imageftbbox);
+PHP_FUNCTION(imagefttext);
 
 PHP_FUNCTION(imagecreatetruecolor);
 PHP_FUNCTION(imagetruecolortopalette);

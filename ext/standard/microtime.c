@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.21 2000/02/26 03:20:54 zeev Exp $ */
+/* $Id: microtime.c,v 1.22 2000/03/12 15:47:32 sas Exp $ */
 
 #include "php.h"
 
@@ -40,7 +40,6 @@
 #include <errno.h>
 
 #include "microtime.h"
-#include "snprintf.h"
 
 #define NUL  '\0'
 #define MICRO_IN_SEC 1000000.00

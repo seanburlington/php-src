@@ -19,13 +19,12 @@
  */
 
 
-/* $Id: datetime.c,v 1.31 2000/02/25 16:45:52 zeev Exp $ */
+/* $Id: datetime.c,v 1.32 2000/03/12 15:47:32 sas Exp $ */
 
 
 #include "php.h"
 #include "zend_operators.h"
 #include "datetime.h"
-#include "snprintf.h"
 #include "php_globals.h"
 
 #include <time.h>

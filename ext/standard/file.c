@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.69 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: file.c,v 1.70 2000/03/12 15:47:32 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -65,7 +65,6 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #endif
-#include "snprintf.h"
 #include "fsock.h"
 #include "fopen-wrappers.h"
 #include "php_globals.h"

@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.35 2000/02/24 14:43:53 eschmid Exp $ */
+/* $Id: zlib.c,v 1.36 2000/03/12 15:47:33 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -48,7 +48,6 @@
 #include <pwd.h>
 #endif
 #endif
-#include "snprintf.h"
 #if HAVE_ZLIB
 #if defined(HAVE_UNISTD_H) && defined(PHP_WIN32)
 #undef HAVE_UNISTD_H

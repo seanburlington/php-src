@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.65 2000/03/09 02:42:38 thies Exp $ */
+/* $Id: oci8.c,v 1.66 2000/03/12 15:47:30 sas Exp $ */
 
 /* TODO list:
  *
@@ -83,7 +83,6 @@ static zend_class_entry *oci_lob_class_entry_ptr;
 
 #include <fcntl.h>
 
-#include "snprintf.h"
 
 /* }}} */
 /* {{{ thread safety stuff */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.35 2000/03/12 01:03:23 codelion Exp $ */
+/* $Id: php_odbc.c,v 1.36 2000/03/12 15:47:30 sas Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -40,7 +40,6 @@
 
 #include <fcntl.h>
 #include "ext/standard/head.h"
-#include "snprintf.h"
 #include "php_ini.h"
 
 #if WIN32|WINNT

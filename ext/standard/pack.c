@@ -15,7 +15,7 @@
    | Authors: Chris Schneider <cschneid@relog.ch>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.19 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: pack.c,v 1.20 2000/03/12 15:47:32 sas Exp $ */
 
 #include "php.h"
 
@@ -44,7 +44,6 @@
 #include <pwd.h>
 #endif
 #endif
-#include "snprintf.h"
 #include "fsock.h"
 #if HAVE_NETINET_IN_H
 #include <netinet/in.h>

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.48 2000/03/06 18:41:18 ssb Exp $ */
+/* $Id: xml.c,v 1.49 2000/03/12 15:47:32 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -32,7 +32,6 @@
 # if !(WIN32|WINNT)
 #  include "build-defs.h"
 # endif
-# include "snprintf.h"
 # include "ext/standard/head.h"
 
 /* Short-term TODO list:

@@ -17,10 +17,9 @@
    | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.14 2000/02/19 23:41:21 zeev Exp $ */
+/* $Id: url_scanner.c,v 1.15 2000/03/12 15:47:32 sas Exp $ */
 
 #include "php.h"
-#include "snprintf.h"
 
 #ifdef TRANS_SID
 

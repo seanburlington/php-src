@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.151 2000/09/11 14:50:26 stas Exp $ */
+/* $Id: string.c,v 1.152 2000/09/11 14:54:12 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -774,11 +774,6 @@ PHP_FUNCTION(pathinfo)
 			add_assoc_stringl(tmp, "extension", Z_STRVAL_PP(path) + idx + 1, len - idx - 1, 1);
 		}
 	}
-	
-	if (opt == PHP_PATHINFO_DIRNAME || argc < 2) {
-		ret = php_basename(Z_STRVAL_PP(str), len);
-		add_assoc_string(tmp, "dirname", ret, 1);
-	}			
 	
 	if (argc == 2) {
 		zval **element;
@@ -2430,11 +2425,6 @@ PHP_FUNCTION(parse_str)
 		php_treat_data(PARSE_STRING, res, NULL ELS_CC PLS_CC SLS_CC);
 	else
 	{
-		if(!ParameterPassedByReference(ht, 2)){
-			php_error(E_WARNING, "Array not passed by reference in call to parse_str()");
-			return;
-		}
-		
 		/* Clear out the array that was passed in. */
 		zval_dtor(*arrayArg);
 		array_init(*arrayArg);

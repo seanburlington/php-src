@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.16 2003/12/13 23:13:51 pollita Exp $ */
+/* $Id: userspace.c,v 1.17 2003/12/14 18:23:14 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -952,7 +952,7 @@ static int user_wrapper_mkdir(php_stream_wrapper *wrapper, char *url, int mode, 
 static int user_wrapper_rmdir(php_stream_wrapper *wrapper, char *url, int options, php_stream_context *context TSRMLS_DC)
 {
 	struct php_user_stream_wrapper *uwrap = (struct php_user_stream_wrapper*)wrapper->abstract;
-	zval *zfilename, *zmode, *zoptions, *zfuncname, *zretval, *zcontext;
+	zval *zfilename, *zoptions, *zfuncname, *zretval, *zcontext;
 	zval **args[3];
 	int call_result;
 	zval *object;

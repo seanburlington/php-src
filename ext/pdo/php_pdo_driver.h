@@ -16,7 +16,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.2 2004/05/17 17:00:35 wez Exp $ */
+/* $Id: php_pdo_driver.h,v 1.3 2004/05/17 21:12:30 gschlossnagle Exp $ */
+
+#ifndef PHP_PDO_DRIVER_H
+#define PHP_PDO_DRIVER_H
+
+#include "php_pdo.h"
 
 /* forward declarations */
 typedef struct _pdo_dbh_t 	pdo_dbh_t;
@@ -292,7 +297,7 @@ struct pdo_data_src_parser {
 PDO_API int php_pdo_parse_data_source(const char *data_source,
 		unsigned long data_source_len, struct pdo_data_src_parser *parsed,
 		int nparams);
-
+#endif /* PHP_PDO_DRIVER_H */
 /*
  * Local variables:
  * tab-width: 4

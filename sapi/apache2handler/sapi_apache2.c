@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.13 2003/03/29 04:52:46 sterling Exp $ */
+/* $Id: sapi_apache2.c,v 1.14 2003/04/10 11:33:45 stas Exp $ */
 
 #include <fcntl.h>
 
@@ -412,6 +412,7 @@ static void php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 	SG(request_info).query_string = apr_pstrdup(r->pool, r->args);
 	SG(request_info).request_method = r->method;
 	SG(request_info).request_uri = apr_pstrdup(r->pool, r->uri);
+	SG(request_info).path_translated = apr_pstrdup(r->pool, r->filename);
 	r->no_local_copy = 1;
 
 	content_type = sapi_get_default_content_type(TSRMLS_C);

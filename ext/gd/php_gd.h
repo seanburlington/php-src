@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.43 2002/10/29 01:15:43 iliaa Exp $ */
+/* $Id: php_gd.h,v 1.44 2002/11/12 11:49:11 helly Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -59,6 +59,7 @@ PHP_MINFO_FUNCTION(gd);
 PHP_MINIT_FUNCTION(gd);
 PHP_MSHUTDOWN_FUNCTION(gd);
 
+PHP_FUNCTION(gd_info);
 PHP_FUNCTION(imagearc);
 PHP_FUNCTION(imagechar);
 PHP_FUNCTION(imagecharup);

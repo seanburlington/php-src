@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.52 2004/01/29 00:09:26 pollita Exp $ */
+/* $Id: main.c,v 1.512.2.53 2004/02/09 04:05:56 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -1136,6 +1136,10 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 
 #if HAVE_SETLOCALE
 	setlocale(LC_CTYPE, "");
+#endif
+
+#if HAVE_TZSET
+	tzset();
 #endif
 
 #if defined(PHP_WIN32) || (defined(NETWARE) && defined(USE_WINSOCK))

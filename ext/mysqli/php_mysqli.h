@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.19 2003/07/15 14:00:18 georg Exp $ 
+  $Id: php_mysqli.h,v 1.20 2003/07/18 06:17:39 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -203,6 +203,8 @@ PHP_FUNCTION(mysqli_character_set_name);
 PHP_FUNCTION(mysqli_close);
 PHP_FUNCTION(mysqli_commit);
 PHP_FUNCTION(mysqli_connect);
+PHP_FUNCTION(mysqli_connect_errno);
+PHP_FUNCTION(mysqli_connect_error);
 PHP_FUNCTION(mysqli_data_seek);
 PHP_FUNCTION(mysqli_debug);
 PHP_FUNCTION(mysqli_disable_reads_from_master);

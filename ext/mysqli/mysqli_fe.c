@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.15 2003/07/15 14:00:19 georg Exp $ 
+  $Id: mysqli_fe.c,v 1.16 2003/07/18 06:17:39 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -50,6 +50,8 @@ function_entry mysqli_functions[] = {
 	PHP_FE(mysqli_close,								NULL)
 	PHP_FE(mysqli_commit,								NULL)
 	PHP_FE(mysqli_connect, 								NULL)
+	PHP_FE(mysqli_connect_errno,						NULL)
+	PHP_FE(mysqli_connect_error,						NULL)
 	PHP_FE(mysqli_data_seek,							NULL)
 	PHP_FE(mysqli_debug,								NULL)
 	PHP_FE(mysqli_disable_reads_from_master,			NULL)

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_string.h,v 1.8 2000/02/08 21:29:18 zeev Exp $ */
+/* $Id: php_string.h,v 1.9 2000/02/08 22:21:43 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -85,11 +85,11 @@ PHP_FUNCTION(substr_replace);
 
 extern PHPAPI char *php_strtoupper(char *s, size_t len);
 extern PHPAPI char *php_strtolower(char *s, size_t len);
-extern PHPAPI char *php_strtr(char *string, int len, char *str_from, char *str_to, int trlen);
-extern PHPAPI char *php_addslashes(char *string, int length, int *new_length, int freeit);
-extern PHPAPI char *php_addcslashes(char *string, int length, int *new_length, int freeit, char *what, int wlength);
-extern PHPAPI void php_stripslashes(char *string, int *len);
-extern PHPAPI void php_stripcslashes(char *string, int *len);
+extern PHPAPI char *php_strtr(char *str, int len, char *str_from, char *str_to, int trlen);
+extern PHPAPI char *php_addslashes(char *str, int length, int *new_length, int freeit);
+extern PHPAPI char *php_addcslashes(char *str, int length, int *new_length, int freeit, char *what, int wlength);
+extern PHPAPI void php_stripslashes(char *str, int *len);
+extern PHPAPI void php_stripcslashes(char *str, int *len);
 extern PHPAPI void php_dirname(char *str, int len);
 extern PHPAPI char *php_stristr(unsigned char *s, unsigned char *t, size_t s_len, size_t t_len);
 extern PHPAPI char *php_str_to_str(char *haystack, int length, char *needle,

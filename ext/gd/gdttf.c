@@ -2,7 +2,7 @@
 /*                                          */
 /* John Ellson   ellson@lucent.com          */
 
-/* $Id: gdttf.c,v 1.6 1999/12/01 22:59:44 ssb Exp $ */
+/* $Id: gdttf.c,v 1.7 2000/02/08 22:21:43 zeev Exp $ */
 
 #if WIN32|WINNT
 #include "config.w32.h"
@@ -719,7 +719,7 @@ gdttfchar(gdImage *im, int fg, font_t *font,
 
 char *
 gdttf(gdImage *im, int *brect, int fg, char *fontname,
-	double ptsize, double angle, int x, int y, char *string)
+	double ptsize, double angle, int x, int y, char *str)
 {
 	TT_F26Dot6 ur_x=0, ur_y=0, ll_x=0, ll_y=0;
 	TT_F26Dot6 advance_x, advance_y, advance, x1, y1;
@@ -756,7 +756,7 @@ gdttf(gdImage *im, int *brect, int fg, char *fontname,
 	cos_a = font->cos_a;
 	advance_x = advance_y = 0;
 
-	next=string;
+	next=str;
 	while (*next) {	  
 		ch = *next;
 

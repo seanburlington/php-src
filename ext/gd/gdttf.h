@@ -1,4 +1,4 @@
-/* $Id: gdttf.h,v 1.1 1999/04/16 12:15:38 ssb Exp $ */
+/* $Id: gdttf.h,v 1.2 2000/02/08 22:21:43 zeev Exp $ */
 
 #ifdef _OSD_POSIX
 #ifndef APACHE
@@ -12,5 +12,5 @@
 #endif /*_OSD_POSIX*/
 
 char * gdttf(gdImage *im, int *brect, int fg, char *fontname,
-    double ptsize, double angle, int x, int y, char *string);
+    double ptsize, double angle, int x, int y, char *str);
 

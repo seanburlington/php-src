@@ -14,10 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Stig Sæther Bakken <ssb@guardian.no>                        |
    |          Andreas Karajannis <Andreas.Karajannis@gmd.de>              |
+   |	      Kevin N. Shallow <kshallow@tampabay.rr.com> Velocis Support |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.34 2001/03/09 23:44:55 fmk Exp $ */
+/* $Id: php_odbc.h,v 1.35 2001/04/10 16:26:28 kevin Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -134,9 +135,18 @@ PHP_FUNCTION(solid_fetch_prev);
 
 #define ODBC_TYPE "Velocis"
 #define UNIX
-#define HAVE_SQL_EXTENDED_FETCH 1
+/*
+ * Extended Fetch in the Velocis ODBC API is incapable of returning long varchar (memo) fields.
+ * So the following line has been commented-out to accomadate. - KNS
+ *
+ * #define HAVE_SQL_EXTENDED_FETCH 1
+ */
 #include <sql.h>
 #include <sqlext.h>
+#define SQLINTEGER SDWORD
+#define SQLSMALLINT SWORD
+#define SQLUSMALLINT UWORD
+
 
 #elif defined(HAVE_DBMAKER) /* DBMaker */
 

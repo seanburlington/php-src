@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 2000/10/09 18:32:37 chagenbu Exp $
+dnl $Id: config.m4,v 1.7 2000/11/03 01:10:11 sterling Exp $
 dnl config.m4 for extension Sablot
 
 PHP_ARG_WITH(sablot, for Sablotron XSL support,
@@ -26,6 +26,8 @@ if test "$PHP_SABLOT" != "no"; then
 
   PHP_SUBST(SABLOT_SHARED_LIBADD)
   AC_ADD_LIBRARY_WITH_PATH(sablot, $SABLOT_DIR/lib, SABLOT_SHARED_LIBADD)
+  AC_ADD_LIBRARY(xmlparse);
+  AC_ADD_LIBRARY(xmltok);
   
   AC_DEFINE(HAVE_SABLOT,1,[ ])
 

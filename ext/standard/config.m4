@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.42 2002/10/01 01:47:09 sniper Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.43 2002/10/21 16:07:21 hholzgra Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -227,6 +227,8 @@ AC_FUNC_FNMATCH
 AC_CHECK_FUNCS(glob)
 
 AC_CHECK_FUNCS(strfmon)
+
+AC_CHECK_FUNCS(getopt_long getopt_long_only)
 
 if test "$PHP_SAPI" = "cgi"; then
   AC_DEFINE(ENABLE_CHROOT_FUNC, 1, [Whether to enable chroot() function])

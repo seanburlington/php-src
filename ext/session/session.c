@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.385 2004/02/24 08:47:35 sniper Exp $ */
+/* $Id: session.c,v 1.386 2004/02/29 00:26:36 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -498,7 +498,7 @@ PS_SERIALIZER_DECODE_FUNC(php)
 		q++;
 		
 		if (has_value) {
-			MAKE_STD_ZVAL(current);
+			ALLOC_INIT_ZVAL(current);
 			if (php_var_unserialize(&current, &q, endptr, &var_hash TSRMLS_CC)) {
 				php_set_session_var(name, namelen, current, &var_hash TSRMLS_CC);
 			}

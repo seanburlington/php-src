@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.279 2001/10/15 18:58:48 ssb Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.280 2001/10/23 11:14:51 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -395,6 +395,7 @@ mkstemp \
 mmap \
 nl_langinfo \
 putenv \
+realpath \
 random \
 rand_r \
 regcomp \

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.108 2002/10/21 01:44:59 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.109 2002/10/21 02:24:06 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -885,7 +885,7 @@ PHP_RINIT_FUNCTION(mbstring)
 		}
 	}
 #if HAVE_MBREGEX
-	MBSTRG(regex_default_options) = 0;
+	MBSTRG(regex_default_options) = MBRE_OPTION_POSIXLINE;
 #endif
 
 	return SUCCESS;

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.368 2002/08/17 13:56:39 venaas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.369 2002/08/17 15:53:02 venaas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -690,7 +690,7 @@ if test "$PHP_DMALLOC" = "yes"; then
 fi
 
 PHP_ARG_ENABLE(ipv6,whether to enable IPv6 support,
-[  --enable-ipv6           Enable IPv6 support],yes)
+[  --disable-ipv6          Disable IPv6 support],yes)
 
 if test "$PHP_IPV6" != "no" && test "$ac_cv_ipv6_support" = yes; then
   AC_DEFINE(HAVE_IPV6,1,[Whether to enable IPv6 support])

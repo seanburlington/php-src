@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.64 2001/07/02 12:08:21 sterling Exp $ */
+/* $Id: curl.c,v 1.65 2001/07/10 20:09:56 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -825,6 +825,8 @@ PHP_FUNCTION(curl_exec)
 
 	error = curl_easy_perform(ch->cp);
 	if (error != CURLE_OK) {
+		if (ch->handlers->write->buf)
+			smart_str_free(&ch->handlers->write->buf);
 		SAVE_CURL_ERROR(ch, error);
 		RETURN_FALSE;
 	}

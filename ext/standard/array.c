@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.90 2001/01/22 17:27:02 andrei Exp $ */
+/* $Id: array.c,v 1.91 2001/02/06 16:27:08 jimjag Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1328,11 +1328,11 @@ PHP_FUNCTION(range)
 static int array_data_shuffle(const void *a, const void*b) {
 	return (
 	/* This is just a little messy. */
-#ifdef HAVE_LRAND48
-        lrand48()
-#else
 #ifdef HAVE_RANDOM
         random()
+#else
+#ifdef HAVE_LRAND48
+        lrand48()
 #else
         rand()
 #endif
@@ -2703,11 +2703,11 @@ PHP_FUNCTION(array_rand)
 	zend_hash_internal_pointer_reset(Z_ARRVAL_PP(input));
 	while (num_req_val && (key_type = zend_hash_get_current_key(Z_ARRVAL_PP(input), &string_key, &num_key, 0)) != HASH_KEY_NON_EXISTANT) {
 
-#ifdef HAVE_LRAND48
-		randval = lrand48();
-#else
 #ifdef HAVE_RANDOM
 		randval = random();
+#else
+#ifdef HAVE_LRAND48
+		randval = lrand48();
 #else
 		randval = rand();
 #endif

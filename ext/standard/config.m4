@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.9 1999/11/12 20:56:29 sas Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.10 1999/11/13 13:27:49 sas Exp $ -*- sh -*-
 
 divert(1)
 
@@ -127,12 +127,12 @@ AC_ARG_WITH(system-regex,
 [  --with-system-regex     Do not use the bundled regex library],
 [
     if test "$withval" = "no"; then
-      HSREGEX=yes
+      WANT_HSREGEX=yes
     else
-	  HSREGEX=no
-	fi
+      WANT_HSREGEX=no
+    fi
 ],[
-    HSREGEX=yes
+    WANT_HSREGEX=yes
 ])
 	
 AC_CRYPT_CAP

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.81 2002/11/13 10:17:19 helly Exp $ */
+/* $Id: db.c,v 1.82 2002/12/05 19:49:12 helly Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -424,7 +424,7 @@ dbm_info *php_dbm_open(char *filename, char *mode TSRMLS_DC)
 		else ret = -1;
 #else
 #if PHP_DEBUG
-		php_error1(NULL TSRMLS_CC, filename, E_WARNING, "errno = %d [%s]\n", errno, strerror(errno));
+		php_error_docref1(NULL TSRMLS_CC, filename, E_WARNING, "errno = %d [%s]\n", errno, strerror(errno));
 #endif
 		if (errno) ret=errno;
 		else ret = -1;

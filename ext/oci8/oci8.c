@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.183.2.15 2004/10/10 15:06:20 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.183.2.16 2004/11/03 13:35:56 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -641,7 +641,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.15 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.16 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2476,7 +2476,7 @@ _oci_close_session(oci_session *session)
 	
 	hashed_details = session->hashed_details;
 
-	if (! OCI(shutdown)) {
+	if (! OCI(shutdown) && !session->exclusive) {
 		zend_hash_del(OCI(user), hashed_details, strlen(hashed_details)+1);
 	}
 

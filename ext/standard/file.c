@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.382 2004/06/16 23:57:25 abies Exp $ */
+/* $Id: file.c,v 1.382.2.1 2004/09/09 19:41:40 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -695,7 +695,7 @@ PHP_FUNCTION(tempnam)
 	char *d;
 	char *opened_path;
 	char p[64];
-	FILE *fp;
+	int fd;
 
 	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters_ex(2, &arg1, &arg2) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -710,8 +710,8 @@ PHP_FUNCTION(tempnam)
 	d = estrndup(Z_STRVAL_PP(arg1), Z_STRLEN_PP(arg1));
 	strlcpy(p, Z_STRVAL_PP(arg2), sizeof(p));
 
-	if ((fp = php_open_temporary_file(d, p, &opened_path TSRMLS_CC))) {
-		fclose(fp);
+	if ((fd = php_open_temporary_fd(d, p, &opened_path TSRMLS_CC)) >= 0) {
+		close(fd);
 		RETVAL_STRING(opened_path, 0);
 	} else {
 		RETVAL_FALSE;

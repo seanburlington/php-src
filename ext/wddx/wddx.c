@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.96.2.2 2003/01/04 19:42:37 helly Exp $ */
+/* $Id: wddx.c,v 1.96.2.3 2003/01/04 19:51:46 helly Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -956,7 +956,7 @@ static void php_wddx_pop_element(void *user_data, const char *name)
 										(void *) &tmp, sizeof(zval *), 0);
 
 						if (incomplete_class) {
-							php_store_class_name(obj, Z_STRVAL_P(ent1->data), Z_STRLEN_P(ent1->data), TSRMLS_CC);
+							php_store_class_name(obj, Z_STRVAL_P(ent1->data), Z_STRLEN_P(ent1->data) TSRMLS_CC);
 						}
 
 						/* Clean up old array entry */

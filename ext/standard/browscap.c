@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.60.2.4 2003/01/04 19:42:24 helly Exp $ */
+/* $Id: browscap.c,v 1.60.2.5 2003/01/04 19:51:13 helly Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -189,12 +189,12 @@ PHP_MSHUTDOWN_FUNCTION(browscap)
  */
 static int browser_reg_compare(zval **browser, int num_args, va_list args, zend_hash_key *key)
 {
-	TSRMLS_FETCH();
-
 	zval **browser_name;
 	regex_t r;
 	char *lookup_browser_name = va_arg(args, char *);
 	zval **found_browser_entry = va_arg(args, zval **);
+
+	TSRMLS_FETCH();
 
 	if (*found_browser_entry) { /* already found */
 		return 0;

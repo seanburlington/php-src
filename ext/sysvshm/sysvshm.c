@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.42 2001/08/03 07:25:27 sas Exp $ */
+/* $Id: sysvshm.c,v 1.43 2001/08/03 19:05:40 jon Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -36,6 +36,7 @@
 
 #include "php_sysvshm.h"
 #include "../standard/php_var.h"
+#include "../standard/php_smart_str.h"
 
 /* {{{ sysvshm_functions[]
  */

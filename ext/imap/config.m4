@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.32 2001/05/11 10:04:06 sniper Exp $
+dnl $Id: config.m4,v 1.32.2.1 2001/05/22 00:38:46 sniper Exp $
 dnl
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
@@ -49,8 +49,8 @@ AC_DEFUN(PHP_IMAP_SSL_CHK, [
 
   if test "$PHP_IMAP_SSL" != "no"; then
     PHP_ADD_LIBPATH($PHP_IMAP_SSL/lib, IMAP_SHARED_LIBADD)
-    PHP_ADD_LIBRARY(ssl,, IMAP_SHARED_LIBADD)
-    PHP_ADD_LIBRARY(crypto,, IMAP_SHARED_LIBADD)
+    PHP_ADD_LIBRARY_DEFER(crypto)
+    PHP_ADD_LIBRARY_DEFER(ssl)
 
     old_LIBS=$LIBS
     LIBS="$LIBS -lc-client"

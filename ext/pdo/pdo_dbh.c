@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.45 2005/01/17 23:59:16 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.46 2005/01/19 03:44:49 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -77,6 +77,9 @@ void pdo_handle_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt TSRMLS_DC)
 				supp = estrndup(Z_STRVAL_PP(item), Z_STRLEN_PP(item));
 			}
 		}
+
+		zval_ptr_dtor(&info);
+		info = NULL;
 	}
 
 	if (supp) {

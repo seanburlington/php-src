@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.127 2000/11/17 16:02:08 sas Exp $ */
+/* $Id: php.h,v 1.128 2000/12/02 13:27:10 sas Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -33,10 +33,6 @@
 #include "php_version.h"
 #include "zend.h"
 #include "php_compat.h"
-
-/* automake defines PACKAGE and VERSION for Zend too */
-#undef PACKAGE
-#undef VERSION
 
 #include "zend_API.h"
 

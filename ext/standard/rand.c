@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.54 2001/09/16 20:49:57 sterling Exp $ */
+/* $Id: rand.c,v 1.55 2001/09/18 05:48:49 sterling Exp $ */
 
 #include <stdlib.h>
 
@@ -250,9 +250,9 @@ PHPAPI php_uint32 php_mt_rand(TSRMLS_D)
 /* }}} */
 
 #ifdef PHP_WIN32
-#define GENERATE_SEED() (time(0) * GetCurrentProcessId() * 1000000 * php_combined_lcg(TSRMLS_C))
+#define GENERATE_SEED() ((long) (time(0) * GetCurrentProcessId() * 1000000 * php_combined_lcg(TSRMLS_C)))
 #else
-#define GENERATE_SEED() (time(0) * getpid() * 1000000 * php_combined_lcg(TSRMLS_C))
+#define GENERATE_SEED() ((long) (time(0) * getpid() * 1000000 * php_combined_lcg(TSRMLS_C)))
 #endif
 
 /* {{{ proto void srand([int seed])

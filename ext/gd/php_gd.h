@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.18 2000/11/03 19:53:42 mathieu Exp $ */
+/* $Id: php_gd.h,v 1.19 2000/11/28 08:06:30 sniper Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -130,13 +130,14 @@ PHP_FUNCTION(imagepsextendfont);
 PHP_FUNCTION(imagepsslantfont);
 PHP_FUNCTION(imagepstext);
 PHP_FUNCTION(imagepsbbox);
-PHPAPI int phpi_get_le_gd(void);
 
 gdImagePtr _php_image_create_from_string ( zval **Data, char *tn, gdImagePtr (*ioctx_func_p)() );
 static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type, char *tn, gdImagePtr (*func_p)(), gdImagePtr (*ioctx_func_p)());
 static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char *tn, void (*func_p)());
 static void _php_image_output_wbmp(gdImagePtr im, FILE *fp);
 static int _php_image_type ( char data[8] );
+
+PHPAPI int phpi_get_le_gd(void);
 
 #ifdef ZTS
 #define GDLS_D php_gd_globals *gd_globals

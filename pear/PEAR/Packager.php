@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.31 2002/04/01 19:17:07 cox Exp $
+// $Id: Packager.php,v 1.32 2002/04/07 10:38:03 ssb Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -51,7 +51,6 @@ class PEAR_Packager extends PEAR_Common
 
     function _PEAR_Packager()
     {
-        chdir($this->orig_pwd);
         $this->_PEAR_Common();
     }
 

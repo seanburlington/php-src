@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.14 2002/04/02 09:21:48 ssb Exp $
+// $Id: Install.php,v 1.15 2002/04/07 10:38:04 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -78,7 +78,8 @@ class PEAR_Command_Install extends PEAR_Command_Common
                   "   -f    forces the installation of the package\n".
                   "         when it is already installed\n".
                   "   -n    do not take care of package dependencies\n".
-                  "   -s    soft update: install or upgrade only if needed";
+                  "   -s    soft update: install or upgrade only if needed".
+                  "   -Z    no compression: download plain .tar files";
         return $ret;
     }
 
@@ -87,7 +88,7 @@ class PEAR_Command_Install extends PEAR_Command_Common
 
     function getOptions()
     {
-        return array('f', 'n', 's');
+        return array('f', 'n', 's', 'Z');
     }
 
     // }}}
@@ -111,6 +112,9 @@ class PEAR_Command_Install extends PEAR_Command_Common
         }
         if (isset($options['s'])) {
             $opts['soft'] = true;
+        }
+        if (isset($options['Z'])) {
+            $opts['nocompress'] = true;
         }
         switch ($command) {
             case 'upgrade':

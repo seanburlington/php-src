@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.7 1999/08/06 10:41:59 steinm Exp $ */
+/* $Id: pdf.c,v 1.8 1999/08/09 08:39:26 steinm Exp $ */
 
 /* pdflib 2.01 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -341,7 +341,7 @@ PHP_FUNCTION(pdf_set_info_keywords) {
 }
 /* }}} */
 
-/* {{{ proto int pdf_open(int filedesc, int info)
+/* {{{ proto int pdf_open(int filedesc)
    Opens a new pdf document */
 PHP_FUNCTION(pdf_open) {
 	pval *file;

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.146.2.1 2004/07/27 16:40:46 iliaa Exp $ 
+   $Id: sqlite.c,v 1.146.2.2 2004/08/02 22:43:42 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1071,7 +1071,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.146.2.1 2004/07/27 16:40:46 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.146.2.2 2004/08/02 22:43:42 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1597,7 +1597,7 @@ PHP_FUNCTION(sqlite_fetch_column_types)
 		DB_FROM_ZVAL(db, &zdb);
 	}
 
-	if (!(sql = sqlite_mprintf("SELECT * FROM %q LIMIT 1", tbl))) {
+	if (!(sql = sqlite_mprintf("SELECT * FROM '%q' LIMIT 1", tbl))) {
 		RETURN_FALSE;
 	}
 

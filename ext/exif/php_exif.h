@@ -17,11 +17,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_exif.h,v 1.7 2002/02/28 06:26:50 sebastian Exp $ */
+/* $Id: php_exif.h,v 1.8 2002/03/01 04:01:26 helly Exp $ */
 
 #if HAVE_EXIF
 extern zend_module_entry exif_module_entry;
 #define phpext_exif_ptr &exif_module_entry
 
 PHP_FUNCTION(read_exif_data);
+PHP_FUNCTION(exif_headername);
 #endif

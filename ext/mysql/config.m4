@@ -1,8 +1,8 @@
 dnl
-dnl $Id: config.m4,v 1.62 2004/11/03 14:32:50 jorton Exp $
+dnl $Id: config.m4,v 1.63 2004/12/30 07:08:36 sniper Exp $
 dnl
 
-AC_DEFUN(MYSQL_LIB_CHK, [
+AC_DEFUN([MYSQL_LIB_CHK], [
   str="$MYSQL_DIR/$1/libmysqlclient.*"
   for j in `echo $str`; do
     if test -r $j; then
@@ -12,7 +12,7 @@ AC_DEFUN(MYSQL_LIB_CHK, [
   done
 ])
 
-AC_DEFUN(PHP_MYSQL_SOCKET_SEARCH, [
+AC_DEFUN([PHP_MYSQL_SOCKET_SEARCH], [
   for i in  \
     /var/run/mysqld/mysqld.sock \
     /var/tmp/mysql.sock \

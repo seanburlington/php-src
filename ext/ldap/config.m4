@@ -1,8 +1,8 @@
 dnl
-dnl $Id: config.m4,v 1.35 2004/11/03 14:32:50 jorton Exp $
+dnl $Id: config.m4,v 1.36 2004/12/30 07:08:36 sniper Exp $
 dnl
 
-AC_DEFUN(PHP_LDAP_CHECKS, [
+AC_DEFUN([PHP_LDAP_CHECKS], [
   if test -f $1/include/ldap.h; then
     LDAP_DIR=$1
     LDAP_INCDIR=$1/include
@@ -18,7 +18,7 @@ AC_DEFUN(PHP_LDAP_CHECKS, [
   fi
 ])
 
-AC_DEFUN(PHP_LDAP_SASL_CHECKS, [
+AC_DEFUN([PHP_LDAP_SASL_CHECKS], [
   if test "$1" = "yes"; then
     SEARCH_DIRS="/usr/local /usr"
   else

@@ -1,3 +1,48 @@
+2005-03-16  Rasmus Lerdorf  <rasmus@lerdorf.com>
+
+    * TSRM/TSRM.h
+      TSRM/tsrm_config_common.h
+      main/php.h:
+      Fix Jani breakage
+
+2005-03-16  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_0)
+      NEWS:
+      MFH: Fixed bug #32326 (Check values of Connection/Transfer-Encoding
+      case-incentively)
+
+2005-03-16  Harrie Hazewinkel  <harrie@lisanza.net>
+
+    * ext/snmp/php_snmp.h
+      ext/snmp/php_snmp.h
+      ext/snmp/snmp.c
+      ext/snmp/snmp.c:
+      Adding SNMPv2 community based (i.e. protocol version) functions.
+
+2005-03-16  Jani Taskinen  <jani.taskinen@kolumbus.fi>
+
+    * (PHP_4_3)
+      configure.in
+      configure.in
+      scripts/php-config.in
+      scripts/php-config.in:
+      MFH: - Remove these relics from era when TSRM was optional.
+
+    * configure.in
+      scripts/php-config.in:
+      - Remove these relics from era when TSRM was optional.
+
+2005-03-16  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * (PHP_5_0)
+      ZendEngine2/zend_API.c:
+      MFH: don't call rshutdown twice for dl()'d modules.
+
+    * ZendEngine2/zend_API.c:
+      don't call rshutdown twice for dl()'d modules.
+      Spotted by Andrei.
+
 2005-03-15  Wez Furlong  <wez.php@thebrainroom.net>
 
     * ZendEngine2/zend.c
@@ -1990,7 +2035,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1924 2005/03/16 01:37:53 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1925 2005/03/17 01:43:00 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -2471,7 +2516,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1924 2005/03/16 01:37:53 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1925 2005/03/17 01:43:00 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -3945,7 +3990,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1924 2005/03/16 01:37:53 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1925 2005/03/17 01:43:00 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

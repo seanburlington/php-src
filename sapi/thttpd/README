@@ -1,5 +1,5 @@
 README FOR THTTPD MODULE (by Sascha Schumann)        
-($Date: 2002/11/01 11:41:08 $)
+($Date: 2002/11/07 11:38:03 $)
 
 	This is a SAPI module for PHP 4.x supporting thttpd, the tiny,
 	turbo, throttling HTTP server by Jef Poskanzer.
@@ -17,6 +17,8 @@ README FOR THTTPD MODULE (by Sascha Schumann)
 	- Fast Accept Loop
 	- Periodic Connection Expiring
 	- Fixes the Host: header vulnerability
+	- Asynchronous request body handling
+	- Fixup for non-blocking send of thttpd-generated responses
 
 	You can configure the filename extensions by creating a config file for
 	thttpd and setting these entries:

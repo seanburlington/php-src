@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.34 2003/08/25 04:08:27 sniper Exp $
+dnl $Id: config.m4,v 1.35 2003/08/30 21:32:10 sniper Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -221,10 +221,10 @@ if test "$PHP_MBSTRING" != "no"; then
   if test "$PHP_MBSTRING" = "all" -o "$PHP_MBSTRING" = "cn"; then
     AC_DEFINE([HAVE_MBSTR_CN],1,[whether to have simplified chinese support])
   fi
-  if test "$PHP_MBSTRING" = "all" -o  "$PHP_MBSTRING" = "tw"; then
+  if test "$PHP_MBSTRING" = "all" -o "$PHP_MBSTRING" = "tw"; then
     AC_DEFINE([HAVE_MBSTR_TW],1,[whether to have traditional chinese support])
   fi
-  if test "$PHP_MBSTRING" = "all" -o  "$PHP_MBSTIRNG" = "kr"; then
+  if test "$PHP_MBSTRING" = "all" -o "$PHP_MBSTIRNG" = "kr"; then
     AC_DEFINE([HAVE_MBSTR_KR],1,[whether to have korean support])
   fi
   if test "$PHP_MBSTRING" = "all" -o "$PHP_MBSTRING" = "ru"; then

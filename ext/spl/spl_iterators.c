@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.38.2.9 2005/03/07 01:15:03 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.38.2.10 2005/03/12 23:12:36 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -233,7 +233,7 @@ next_step:
 				ce = object->iterators[object->level].ce;
 				zobject = object->iterators[object->level].zobject;
 				zend_call_method_with_0_params(&zobject, ce, NULL, "getchildren", &child);
-				ce = child ? Z_OBJCE_P(child) : NULL;
+				ce = child && Z_TYPE_P(child) == IS_OBJECT ? Z_OBJCE_P(child) : NULL;
 				if (!ce || !instanceof_function(ce, spl_ce_RecursiveIterator TSRMLS_CC)) {
 					if (child) {
 						zval_ptr_dtor(&child);

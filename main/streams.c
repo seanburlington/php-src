@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.86 2003/11/29 12:02:40 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.87 2004/03/16 23:23:25 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2395,7 +2395,7 @@ static php_stream *php_plain_files_dir_opener(php_stream_wrapper *wrapper, char 
 		return NULL;
 	}
 	
-	if (PG(safe_mode) &&(!php_checkuid(path, NULL, CHECKUID_ALLOW_ONLY_FILE))) {
+	if (PG(safe_mode) &&(!php_checkuid(path, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 		return NULL;
 	}
 	

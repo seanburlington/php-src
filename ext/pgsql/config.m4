@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.22 2001/05/12 11:08:54 sas Exp $
+dnl $Id: config.m4,v 1.23 2001/08/14 08:53:48 sniper Exp $
 
 AC_DEFUN(PGSQL_INC_CHK,[if test -r $i$1/libpq-fe.h; then PGSQL_DIR=$i; PGSQL_INCDIR=$i$1])
 
@@ -18,7 +18,7 @@ if test "$PHP_PGSQL" != "no"; then
   done
   
   if test -z "$PGSQL_DIR"; then
-    AC_MSG_RESULT(Cannot find libpq-fe.h. Please specify the installation path of PostgreSQL)
+    AC_MSG_ERROR(Cannot find libpq-fe.h. Please specify the installation path of PostgreSQL)
   fi
 
   PGSQL_INCLUDE=-I$PGSQL_INCDIR

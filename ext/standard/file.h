@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.74 2003/02/09 20:43:05 iliaa Exp $ */
+/* $Id: file.h,v 1.75 2003/02/10 22:26:53 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -86,6 +86,10 @@ PHPAPI int php_set_sock_blocking(int socketd, int block TSRMLS_DC);
 PHPAPI int php_copy_file(char *src, char *dest TSRMLS_DC);
 
 #define META_DEF_BUFSIZE 8192
+
+#define PHP_FILE_USE_INCLUDE_PATH 1
+#define PHP_FILE_IGNORE_NEW_LINES 2
+#define PHP_FILE_SKIP_EMPTY_LINES 4
 
 typedef enum _php_meta_tags_token {
 	TOK_EOF = 0,

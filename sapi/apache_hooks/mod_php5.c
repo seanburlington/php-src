@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>					  |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.3 2004/07/10 07:46:09 andi Exp $ */
+/* $Id: mod_php5.c,v 1.4 2004/07/14 09:55:24 sesser Exp $ */
 
 #include "php_apache_http.h"
 
@@ -583,7 +583,7 @@ static void init_request_info(TSRMLS_D)
 		tmp = uudecode(r->pool, authorization);
 		SG(request_info).auth_user = NULL;
 		tmp_user = getword_nulls_nc(r->pool, &tmp, ':');
-		if (SG(request_info).auth_user) {
+		if (tmp_user) {
 			r->connection->user = pstrdup(r->connection->pool, tmp_user);
 			r->connection->ap_auth_type = "Basic";
 			SG(request_info).auth_user = estrdup(tmp_user);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.12 2001/06/26 18:20:27 sterling Exp $ */
+/* $Id: sablot.c,v 1.13 2001/06/26 22:48:43 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -436,8 +436,15 @@ PHP_FUNCTION(xslt_set_log)
 		WRONG_PARAM_COUNT;
 	}
 	ZEND_FETCH_RESOURCE(handle, php_xslt *, processor_p, -1, le_xslt_name, le_xslt);
-	convert_to_string_ex(logfile);
 	
+	if (Z_TYPE_PP(logfile) == IS_LONG) {
+		XSLT_LOG(handle).do_log = Z_LVAL_PP(logfile);
+		RETURN_NULL();
+	}
+	else {
+		convert_to_string_ex(logfile);
+	}
+
 	/* If the log file already exists, free it */
 	if (XSLT_LOG(handle).path) {
 		efree(XSLT_LOG(handle).path);
@@ -1255,6 +1262,9 @@ static MH_ERROR error_log(void *user_data, SablotHandle proc, MH_ERROR code, MH_
 	char      msgformat[] = "Sablotron Message on line %s, level %s: %s\n"; /* Message format */
 	int       error = 0;                                                    /* Error container */
 
+	if (!XSLT_LOG(handle).do_log)
+		return 0;
+	
 	/* Parse the error array */
 	/* Loop through the error array */
 	if (fields) {

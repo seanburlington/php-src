@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.90 2000/09/09 21:29:37 venaas Exp $ */
+/* $Id: fopen_wrappers.c,v 1.91 2000/09/14 20:47:35 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -390,6 +390,7 @@ PHPAPI FILE *php_fopen_with_path(char *filename, char *mode, char *path, char **
 	char trypath[MAXPATHLEN + 1];
 	struct stat sb;
 	FILE *fp;
+	int filename_length;
 	PLS_FETCH();
 
 	if (opened_path) {
@@ -403,12 +404,10 @@ PHPAPI FILE *php_fopen_with_path(char *filename, char *mode, char *path, char **
 		}
 		return php_fopen_and_set_opened_path(filename, mode, opened_path);
 	}
+
+	filename_length = strlen(filename);
 	/* Absolute path open - prepend document_root in safe mode */
-#ifdef PHP_WIN32
-	if (IS_SLASH(*filename) || (filename[1] == ':')) {
-#else
-	if (IS_SLASH(*filename)) {
-#endif
+	if (IS_ABSOLUTE_PATH(filename, filename_length)) {
 		if (PG(safe_mode) && PG(doc_root)) {
 			snprintf(trypath, MAXPATHLEN, "%s%s", PG(doc_root), filename);
 			if (!php_checkuid(trypath, mode, 0)) {

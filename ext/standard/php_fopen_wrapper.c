@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.27 2002/10/21 16:41:06 hholzgra Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.28 2002/10/21 19:08:18 hholzgra Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -73,7 +73,7 @@ static size_t php_stream_input_write(php_stream *stream, const char *buf, size_t
 
 static size_t php_stream_input_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)
 {
-	int read_bytes;
+	size_t read_bytes = 0;
 	if(!stream->eof) {
 		if(SG(request_info).post_data) { /* data has already been read by a post handler */
 			read_bytes = SG(request_info).post_data_length - stream->position;
@@ -85,16 +85,16 @@ static size_t php_stream_input_read(php_stream *stream, char *buf, size_t count 
 			if(read_bytes) {
 				memcpy(buf, SG(request_info).post_data + stream->position, read_bytes);
 			}
-			return read_bytes;
 		} else {
 			read_bytes = sapi_module.read_post(buf, count TSRMLS_CC);
 			if(read_bytes <= 0){
 				stream->eof = 1;
 				read_bytes = 0;
 			}
-			return read_bytes;
 		}
 	}
+
+    return read_bytes;
 }
 
 static int php_stream_input_close(php_stream *stream, int close_handle TSRMLS_DC)

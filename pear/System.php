@@ -1,7 +1,7 @@
 <?php
 //
 // +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
+// | PHP Version 5                                                        |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 1997-2004 The PHP Group                                |
 // +----------------------------------------------------------------------+
@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.21.2.13 2004/01/25 23:19:57 pajoye Exp $
+// $Id: System.php,v 1.21.2.14 2004/01/25 23:42:43 pajoye Exp $
 //
 
 require_once 'PEAR.php';
@@ -48,7 +48,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.21.2.13 $
+* @version  $Revision: 1.21.2.14 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -68,7 +68,7 @@ class System
         if (!is_array($argv) && $argv !== null) {
             $argv = preg_split('/\s+/', $argv);
         }
-        return Console_Getopt::getopt($argv, $short_options);
+        return Console_Getopt::getopt2($argv, $short_options);
     }
 
     /**
@@ -226,6 +226,14 @@ class System
             if ($opt[0] == 'p') {
                 $create_parents = true;
             } elseif($opt[0] == 'm') {
+                // if the mode is clearly an octal number (starts with 0)
+                // convert it to decimal
+                if (strlen($opt[1]) && $opt[1]{0} == '0') {
+                    $opt[1] = octdec($opt[1]);
+                } else {
+                    // convert to int
+                    $opt[1] += 0;
+                }
                 $mode = $opt[1];
             }
         }

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.607 2004/08/13 07:02:50 derick Exp $ */
+/* $Id: main.c,v 1.608 2004/08/16 12:24:52 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -1566,6 +1566,7 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 
 	EG(exit_status) = 0;
 	if (php_handle_special_queries(TSRMLS_C)) {
+		zend_file_handle_dtor(primary_file);
 		return 0;
 	}
 #ifndef HAVE_BROKEN_GETCWD

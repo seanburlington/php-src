@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.355 2001/07/04 10:10:29 wez Exp $ */
+/* $Id: basic_functions.c,v 1.356 2001/07/08 23:28:48 sas Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -885,6 +885,7 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 	BLS_FETCH();
 
 	STR_FREE(BG(strtok_string));
+	BG(strtok_string) = NULL;
 #ifdef HAVE_PUTENV
 	zend_hash_destroy(&BG(putenv_ht));
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.99 2001/10/11 23:32:51 ssb Exp $ */
+/* $Id: hw.c,v 1.100 2001/10/24 08:33:08 steinm Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -2911,9 +2911,9 @@ PHP_FUNCTION(hw_new_document_from_file)
 		fstat(fd, &sbuf);
 
 		if (sbuf.st_size > BUFSIZE) {
-/*			off = ftell(fp); */
-			len = sbuf.st_size;/* - off; */
-			p = mmap(0, len, PROT_READ, MAP_PRIVATE, fd, off);
+			off = ftell(fp);
+			len = sbuf.st_size - off;
+			p = mmap(0, len, PROT_READ, MAP_SHARED, fd, off);
 			if (p != (void *) MAP_FAILED) {
 				doc->data = malloc(len);
 				if(NULL == doc->data) {
@@ -2921,7 +2921,7 @@ PHP_FUNCTION(hw_new_document_from_file)
 					free(doc);
 					RETURN_FALSE;
 				}
-				memcpy(p, doc->data, len);
+				memcpy(doc->data, p, len);
 				munmap(p, len);
 				bcount = len;
 				doc->size = len;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.315 2005/03/19 08:46:55 chriskl Exp $ */
+/* $Id: pgsql.c,v 1.316 2005/03/19 09:07:20 chriskl Exp $ */
 
 #include <stdlib.h>
 
@@ -1144,7 +1144,7 @@ PHP_FUNCTION(pg_query)
 }
 /* }}} */
 
-#if HAVE_PQEXECPARAMS || HAVE_PQEXECPREPARED
+#if HAVE_PQEXECPARAMS || HAVE_PQEXECPREPARED || HAVE_PQSENDQUERYPARAMS || HAVE_PQSENDQUERYPREPARED
 /* {{{ _php_pgsql_free_params */
 static void _php_pgsql_free_params(char **params, int num_params)
 {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.105 2005/02/24 00:12:15 helly Exp $ */
+/* $Id: image.c,v 1.106 2005/02/24 20:22:18 helly Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -687,7 +687,7 @@ static struct gfxinfo *php_handle_jp2(php_stream *stream TSRMLS_DC)
 			break;
 		}
 
-		if (box_length <= 1) {
+		if (box_length == 1) {
 			/* We won't handle XLBoxes */
 			return NULL;
 		}

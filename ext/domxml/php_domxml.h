@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.45 2002/04/12 11:32:23 steinm Exp $ */
+/* $Id: php_domxml.h,v 1.46 2002/04/12 11:47:48 steinm Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -61,7 +61,7 @@ PHP_FUNCTION(xmldocfile);
 PHP_FUNCTION(html_doc);
 PHP_FUNCTION(html_doc_file);
 #endif
-PHP_FUNCTION(xmltree);
+PHP_FUNCTION(domxml_xmltree);
 PHP_FUNCTION(domxml_new_xmldoc);
 PHP_FUNCTION(domxml_substitute_entities_default);
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.39 2004/01/08 08:17:13 andi Exp $ */
+/* $Id: pspell.c,v 1.40 2004/02/03 05:40:25 vlad Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -627,7 +627,33 @@ PHP_FUNCTION(pspell_config_create)
 		WRONG_PARAM_COUNT;
 	}
 
+#ifdef PHP_WIN32
+        TCHAR aspell_dir[200];
+        TCHAR data_dir[220];
+        TCHAR dict_dir[220];
+        HKEY hkey;
+        DWORD dwType,dwLen;
+#endif
+
 	config = new_pspell_config();
+
+#ifdef PHP_WIN32
+    /* If aspell was installed using installer, we should have a key
+     * pointing to the location of the dictionaries
+     */
+    if(0 == RegOpenKey(HKEY_LOCAL_MACHINE, "Software\\Aspell", &hkey)) {
+	RegQueryValueEx(hkey, "", NULL, &dwType, (LPBYTE)&aspell_dir, &dwLen);
+	RegCloseKey(hkey);
+	strcpy(data_dir, aspell_dir);
+	strcat(data_dir, "\\data");
+	strcpy(dict_dir, aspell_dir);
+	strcat(dict_dir, "\\dict");
+
+	pspell_config_replace(config, "data-dir", data_dir);
+	pspell_config_replace(config, "dict-dir", dict_dir);
+      }
+#endif
+
 	convert_to_string_ex(language);
 	pspell_config_replace(config, "language-tag", Z_STRVAL_PP(language));
 

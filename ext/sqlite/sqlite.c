@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.60 2003/06/25 17:22:31 sterling Exp $ 
+   $Id: sqlite.c,v 1.61 2003/06/25 23:14:19 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -935,7 +935,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.60 2003/06/25 17:22:31 sterling Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.61 2003/06/25 23:14:19 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1793,7 +1793,7 @@ PHP_FUNCTION(sqlite_single_query)
 
 	while (rres->curr_row < rres->nrows) {
 		MAKE_STD_ZVAL(ent);
-		php_sqlite_fetch_string(rres, decode_binary, ent TSRMLS_DC);
+		php_sqlite_fetch_string(rres, decode_binary, ent TSRMLS_CC);
 
 		/* if set and we only have 1 row in the result set, return the result as a string. */
 		if (srow) {
@@ -1837,7 +1837,7 @@ PHP_FUNCTION(sqlite_fetch_string)
 		ZEND_FETCH_RESOURCE(res, struct php_sqlite_result *, &zres, -1, "sqlite result", le_sqlite_result);
 	}
 
-	php_sqlite_fetch_string(res, decode_binary, return_value TSRMLS_DC);
+	php_sqlite_fetch_string(res, decode_binary, return_value TSRMLS_CC);
 }
 /* }}} */
 

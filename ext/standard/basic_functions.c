@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.256 2000/09/12 15:54:10 danbeck Exp $ */
+/* $Id: basic_functions.c,v 1.257 2000/09/12 19:00:21 danbeck Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -185,7 +185,6 @@ function_entry basic_functions[] = {
 	PHP_FE(parse_str,								second_arg_force_ref)
 	PHP_FE(str_pad,									NULL)
 	PHP_FALIAS(rtrim,			chop,				NULL)
-    PHP_FALIAS(chomp,           chop,               NULL)
 	PHP_FALIAS(strchr,			strstr,				NULL)
 	PHP_NAMED_FE(sprintf,		PHP_FN(user_sprintf),	NULL)
 	PHP_NAMED_FE(printf,		PHP_FN(user_printf),	NULL)

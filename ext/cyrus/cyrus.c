@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyrus.c,v 1.2 2001/08/21 09:04:18 sterling Exp $ */
+/* $Id: cyrus.c,v 1.3 2001/08/21 17:58:37 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -85,7 +85,7 @@ PHP_MINIT_FUNCTION(cyrus)
 
 	REGISTER_LONG_CONSTANT("CYRUS_CONN_NONSYNCLITERAL", 
 	                       IMCLIENT_CONN_NONSYNCLITERAL,
-	                       CONST_CS_ | CONST_PERSISTENT);
+	                       CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("CYRUS_CONN_INITIALRESPONSE", 
 	                       IMCLIENT_CONN_INITIALRESPONSE,
 	                       CONST_CS | CONST_PERSISTENT);

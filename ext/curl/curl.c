@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.27 2004/11/01 04:56:10 iliaa Exp $ */
+/* $Id: curl.c,v 1.124.2.28 2005/01/06 10:34:03 jorton Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -955,16 +955,16 @@ PHP_FUNCTION(curl_setopt)
 					if (*postval == '@') {
 						error = curl_formadd(&first, &last, 
 											 CURLFORM_COPYNAME, string_key,
-											 CURLFORM_NAMELENGTH, string_key_len - 1,
+											 CURLFORM_NAMELENGTH, (long)string_key_len - 1,
 											 CURLFORM_FILE, ++postval, 
 											 CURLFORM_END);
 					}
 					else {
 						error = curl_formadd(&first, &last, 
 											 CURLFORM_COPYNAME, string_key,
-											 CURLFORM_NAMELENGTH, string_key_len - 1,
+											 CURLFORM_NAMELENGTH, (long)string_key_len - 1,
 											 CURLFORM_COPYCONTENTS, postval, 
-											 CURLFORM_CONTENTSLENGTH, Z_STRLEN_PP(current),
+											 CURLFORM_CONTENTSLENGTH, (long)Z_STRLEN_PP(current),
 											 CURLFORM_END);
 					}
 				}

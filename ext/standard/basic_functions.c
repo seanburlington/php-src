@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.362 2001/07/28 11:36:13 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.363 2001/07/29 08:20:30 andi Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1845,7 +1845,7 @@ static void user_tick_function_call(user_tick_function_entry *tick_fe)
 				   Z_TYPE_PP(obj) == IS_OBJECT &&
 				   Z_TYPE_PP(method) == IS_STRING) {
 			php_error(E_WARNING, "Unable to call %s::%s() - function does not exist",
-					  (*obj)->value.obj.ce->name, Z_STRVAL_PP(method));
+					  Z_OBJCE_PP(obj)->name, Z_STRVAL_PP(method));
 		} else
 			php_error(E_WARNING, "Unable to call tick function");
 	}

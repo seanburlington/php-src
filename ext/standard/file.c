@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.402 2005/03/07 21:52:34 helly Exp $ */
+/* $Id: file.c,v 1.403 2005/03/07 21:54:08 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1229,7 +1229,7 @@ PHPAPI PHP_FUNCTION(fwrite)
 			}
 			convert_to_string_ex(arg2);
 			convert_to_long_ex(arg3);
-			num_bytes = MIN(Z_LVAL_PP(arg3), Z_STRLEN_PP(arg2));
+			num_bytes = MAX(0, MIN(Z_LVAL_PP(arg3), Z_STRLEN_PP(arg2)));
 			break;
 
 		default:

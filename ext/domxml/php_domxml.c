@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.69 2001/08/26 11:36:27 joey Exp $ */
+/* $Id: php_domxml.c,v 1.70 2001/08/29 22:26:04 joey Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -802,6 +802,7 @@ PHP_MINIT_FUNCTION(domxml)
 	   Therefore nodes, attributes etc. may not be freed seperately.
 	 */
 	le_domxmlnodep = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domnode", module_number);
+	le_domxmlcommentp = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domnode", module_number);
 	le_domxmlattrp = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domattribute", module_number);
 	le_domxmltextp = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domtext", module_number);
 	le_domxmlelementp =	zend_register_list_destructors_ex(php_free_xml_node, NULL, "domelement", module_number);

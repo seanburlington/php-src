@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.108 2004/01/08 08:17:31 andi Exp $ */
+/* $Id: exec.c,v 1.109 2004/01/21 16:57:13 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -125,7 +125,7 @@ int php_exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 				}
 				continue;
 			} else if (b != buf) {
-				bufl += buflen - EXEC_INPUT_BUF;
+				bufl += b - buf;
 			}
 
 			if (type == 1) {

@@ -1,6 +1,6 @@
 <!-- 
     $Source: /repository/php-src/ext/mnogosearch/Attic/test.php,v $
-    $Id: test.php,v 1.3 2001/02/01 13:06:25 gluke Exp $ 
+    $Id: test.php,v 1.4 2001/02/02 12:54:14 gluke Exp $ 
 -->
 
 <html>
@@ -35,6 +35,8 @@
 	Udm_Set_Agent_Param($udm,UDM_PARAM_CACHE_MODE,UDM_CACHE_DISABLED);
 	Udm_Set_Agent_Param($udm,UDM_PARAM_TRACK_MODE,UDM_TRACK_DISABLED);
 	Udm_Set_Agent_Param($udm,UDM_PARAM_CHARSET,"koi8-r");
+	Udm_Set_Agent_Param($udm,UDM_PARAM_STOPTABLE,"stopwords");
+//	Udm_Set_Agent_Param($udm,UDM_PARAM_STOPFILE,"stop.txt");
 	
 // Stage 3: perform search 
 

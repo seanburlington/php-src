@@ -1,11 +1,14 @@
 --TEST--
 InterBase: event handling
 --SKIPIF--
-<?php include("skipif.inc"); ?>
+<?php 
+if (PHP_OS == "WINNT") echo "skip";
+include("skipif.inc"); 
+?>
 --POST--
 --GET--
 --FILE--
-<?php /* $Id: 008.phpt,v 1.1 2004/02/17 12:24:42 abies Exp $ */
+<?php /* $Id: 008.phpt,v 1.2 2004/04/03 15:29:10 abies Exp $ */
 
 require("interbase.inc");
 

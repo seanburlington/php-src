@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.83 2003/06/10 20:03:37 imajes Exp $ */
+/* $Id: dl.c,v 1.84 2003/08/17 09:57:21 david Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -77,7 +77,7 @@ PHP_FUNCTION(dl)
 	convert_to_string_ex(file);
 
 	if (!PG(enable_dl)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Dynamically loaded extentions aren't enabled");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Dynamically loaded extensions aren't enabled");
 	} else if (PG(safe_mode)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Dynamically loaded extensions aren't allowed when running in Safe Mode");
 	} else {

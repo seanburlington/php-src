@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.86 2005/02/27 22:58:08 helly Exp $ */
+/* $Id: pdo_stmt.c,v 1.87 2005/02/28 01:08:07 helly Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -866,7 +866,7 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 						}
 						PHP_VAR_UNSERIALIZE_DESTROY(var_hash);
 #endif
-#if PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION < 1
+#if PHP_MAJOR_VERSION > 5 || PHP_MINOR_VERSION >= 1
 						if (!ce->unserialize) {
 							zend_throw_exception_ex(pdo_exception_ce, 0 TSRMLS_CC, "Class %s cannot be unserialized", ce->name);
 							return 0;

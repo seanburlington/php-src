@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.30 2001/12/28 19:27:08 cox Exp $
+// $Id: Common.php,v 1.31 2002/01/30 12:18:10 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -280,8 +280,10 @@ class PEAR_Common extends PEAR
             case 'file':
                 $this->current_file = $data;
                 $path = '';
-                foreach ($this->dir_names as $dir) {
-                    $path .= $dir . DIRECTORY_SEPARATOR;
+                if (!empty($this->dir_names)) {
+                    foreach ($this->dir_names as $dir) {
+                        $path .= $dir . DIRECTORY_SEPARATOR;
+                    }
                 }
                 $path .= $this->current_file;
                 $this->filelist[$path] = $this->current_attributes;
@@ -299,8 +301,10 @@ class PEAR_Common extends PEAR
             case 'libfile':
                 $this->lib_name = $data;
                 $path = '';
-                foreach ($this->dir_names as $dir) {
-                    $path .= $dir . DIRECTORY_SEPARATOR;
+                if (!empty($this->dir_names)) {
+                    foreach ($this->dir_names as $dir) {
+                        $path .= $dir . DIRECTORY_SEPARATOR;
+                    }
                 }
                 $path .= $this->lib_name;
                 $this->filelist[$path] = $this->lib_atts;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.419 2002/01/19 03:15:03 yohgaki Exp $ */
+/* $Id: main.c,v 1.420 2002/01/31 00:05:07 edink Exp $ */
 
 /* {{{ includes
  */
@@ -1251,7 +1251,7 @@ static void php_build_argv(char *s, zval *track_vars_array TSRMLS_DC)
 	Z_TYPE_P(argc) = IS_LONG;
 	INIT_PZVAL(argc);
 
-	if (PG(register_globals)) {
+	if (PG(register_globals) || SG(request_info).argc) {
 		arr->refcount++;
 		argc->refcount++;
 		zend_hash_update(&EG(symbol_table), "argv", sizeof("argv"), &arr, sizeof(zval *), NULL);

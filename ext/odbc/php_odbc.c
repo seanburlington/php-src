@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.143.2.16 2003/10/17 02:21:35 iliaa Exp $ */
+/* $Id: php_odbc.c,v 1.143.2.17 2004/06/18 00:44:40 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1008,11 +1008,15 @@ PHP_FUNCTION(odbc_execute)
 
 				/* Check for safe mode. */
 				if (PG(safe_mode) && (!php_checkuid(filename, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
-						RETURN_FALSE;
-					}
+					efree(filename);
+					efree(params);
+					RETURN_FALSE;
+				}
 
 				/* Check the basedir */
 				if (php_check_open_basedir(filename TSRMLS_CC)) {
+					efree(filename);
+					efree(params);
 					RETURN_FALSE;
 				}
 

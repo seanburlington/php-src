@@ -15,9 +15,10 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.22 2004/05/02 11:13:08 wez Exp $ */
+/* $Id: proc_open.c,v 1.23 2004/05/09 11:08:04 stas Exp $ */
 
 #define _XOPEN_SOURCE
+#define __EXTENSIONS__ 1
 #define _BSD_SOURCE
 
 #include "php.h"

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.164 2000/11/06 19:41:30 andrei Exp $ */
+/* $Id: string.c,v 1.165 2000/11/22 04:15:27 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -788,7 +788,7 @@ PHP_FUNCTION(pathinfo)
 	MAKE_STD_ZVAL(tmp);
 	array_init(tmp);
 	
-	if (opt == PHP_PATHINFO_DIRNAME || argc < 2) {
+	if (argc < 2 || opt == PHP_PATHINFO_DIRNAME) {
 		ret = estrndup(Z_STRVAL_PP(path), len);
 		php_dirname(ret, len);
 		if (*ret)
@@ -796,12 +796,12 @@ PHP_FUNCTION(pathinfo)
 		efree(ret);
 	}
 	
-	if (opt == PHP_PATHINFO_BASENAME || argc < 2) {
+	if (argc < 2 || opt == PHP_PATHINFO_BASENAME) 
 		ret = php_basename(Z_STRVAL_PP(path), len);
 		add_assoc_string(tmp, "basename", ret, 0);
 	}			
 	
-	if (opt == PHP_PATHINFO_EXTENSION || argc < 2) {
+	if (argc < 2 || opt == PHP_PATHINFO_EXTENSION) {
 		char *p;
 		int idx;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.1 2002/11/13 23:01:16 edink Exp $ */
+/* $Id: mbstring.c,v 1.142.2.2 2002/11/14 21:35:18 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -3535,17 +3535,26 @@ MBSTRING_API char *php_mb_safe_strrchr_ex(const char *s, unsigned int c, size_t 
 	char *last=NULL;
 
 	if (nbytes == (size_t)-1) {
+		size_t nb = 0;
+
 		while (*p != '\0') {
-			if ((unsigned int)*p == c) {
-				last = (char *)p;
+			if (nb == 0) {
+				if ((unsigned char)*p == (unsigned char)c) {
+					last = (char *)p;
+				}
+				nb = php_mb_mbchar_bytes_ex(p, enc);
+				if (nb == 0) {
+					return NULL; /* something is going wrong! */
+				}
 			}
-			p += php_mb_mbchar_bytes_ex(p, enc);
+			--nb;
+			++p;
 		}
 	} else {
 		register size_t bcnt = nbytes;
 		register size_t nbytes_char;
 		while (bcnt > 0) {
-			if ((unsigned int)*p == c) {
+			if ((unsigned char)*p == (unsigned char)c) {
 				last = (char *)p;
 			}
 			nbytes_char = php_mb_mbchar_bytes_ex(p, enc);

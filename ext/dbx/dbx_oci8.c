@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx_oci8.c,v 1.6 2002/10/23 10:50:22 mboeren Exp $ */
+/* $Id: dbx_oci8.c,v 1.7 2002/10/24 12:52:13 derick Exp $ */
 
 #include "dbx.h"
 #include "dbx_oci8.h"
@@ -108,7 +108,7 @@ int dbx_oci8_query(zval **rv, zval **dbx_handle, zval **db_name, zval **sql_stat
 	arguments[0]=&returned_zval;
 	dbx_call_any_function(INTERNAL_FUNCTION_PARAM_PASSTHRU, "OCIExecute", &execute_zval, number_of_arguments, arguments);
 	/* OCIExecute returns a bool for success or failure */
-	if (!execute_zval || Z_TYPE_P(execute_zval)!=IS_BOOL || Z_BVAL_P(execute_zval)==FALSE) {
+	if (!execute_zval || Z_TYPE_P(execute_zval)!=IS_BOOL || Z_BVAL_P(execute_zval)==0) {
 		if (execute_zval) zval_ptr_dtor(&execute_zval);
 		zval_ptr_dtor(&returned_zval);
 		return 0;
@@ -131,7 +131,7 @@ int dbx_oci8_query(zval **rv, zval **dbx_handle, zval **db_name, zval **sql_stat
 		/* it is not a select, so just return success */
 		zval_ptr_dtor(&returned_zval);
 		MAKE_STD_ZVAL(returned_zval);
-		ZVAL_BOOL(returned_zval, TRUE);
+		ZVAL_BOOL(returned_zval, 1);
 		MOVE_RETURNED_TO_RV(rv, returned_zval);
 	}
 	if (statementtype_zval) zval_ptr_dtor(&statementtype_zval);

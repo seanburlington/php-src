@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.92 2003/12/10 18:17:23 derick Exp $ */
+/* $Id: html.c,v 1.93 2003/12/10 21:02:33 derick Exp $ */
 
 /*
  * HTML entity resources:
@@ -56,7 +56,7 @@ ZEND_EXTERN_MODULE_GLOBALS(mbstring)
 enum entity_charset { cs_terminator, cs_8859_1, cs_cp1252,
 					  cs_8859_15, cs_utf_8, cs_big5, cs_gb2312, 
 					  cs_big5hkscs, cs_sjis, cs_eucjp, cs_koi8r,
-					  cs_cp1251, cs_8859_5, cs_cp866
+					  cs_cp1251, cs_8859_5, cs_cp866, cs_macroman
 					};
 typedef const char *entity_table_t;
 

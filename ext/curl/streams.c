@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: streams.c,v 1.10 2003/12/12 23:05:19 pollita Exp $ */
+/* $Id: streams.c,v 1.11 2003/12/13 04:07:17 pollita Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to
@@ -363,7 +363,9 @@ static php_stream_wrapper_ops php_curl_wrapper_ops = {
 	NULL, /* opendir */
 	NULL, /* label */
 	NULL, /* unlink */
-	NULL  /* rename */
+	NULL, /* rename */
+	NULL, /* mkdir */
+	NULL  /* rmdir */
 };
 
 php_stream_wrapper php_curl_wrapper = {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib_fopen_wrapper.c,v 1.42 2003/12/12 23:05:18 pollita Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.43 2003/12/13 04:07:15 pollita Exp $ */
 
 #define _GNU_SOURCE
 
@@ -161,7 +161,9 @@ static php_stream_wrapper_ops gzip_stream_wops = {
 	NULL, /* opendir */
 	"ZLIB",
 	NULL, /* unlink */
-	NULL  /* rename */
+	NULL, /* rename */
+	NULL, /* mkdir */
+	NULL  /* rmdir */
 };
 
 php_stream_wrapper php_stream_gzip_wrapper =	{

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.4 2003/12/12 23:05:18 pollita Exp $ */
+/* $Id: bz2.c,v 1.5 2003/12/13 04:07:16 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -227,7 +227,9 @@ static php_stream_wrapper_ops bzip2_stream_wops = {
 	NULL, /* opendir */
 	"BZip2",
 	NULL, /* unlink */
-	NULL  /* rename */
+	NULL, /* rename */
+	NULL, /* mkdir */
+	NULL  /* rmdir */
 };
 
 php_stream_wrapper php_stream_bzip2_wrapper = {

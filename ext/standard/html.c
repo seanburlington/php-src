@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.30 2001/07/04 10:10:29 wez Exp $ */
+/* $Id: html.c,v 1.31 2001/08/08 20:00:09 wez Exp $ */
 
 #include "php.h"
 #include "reg.h"
@@ -228,7 +228,7 @@ static enum entity_charset determine_charset(char * charset_hint)
 
 	if (strlen(charset_hint) == 0)	{
 		/* try to detect the charset for the locale */
-#if HAVE_NL_LANGINFO
+#if HAVE_NL_LANGINFO && HAVE_LOCALE_H && defined(CODESET)
 		charset_hint = nl_langinfo(CODESET);
 #endif
 #if HAVE_LOCALE_H

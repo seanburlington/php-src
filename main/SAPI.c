@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.147 2002/08/22 07:56:39 chregu Exp $ */
+/* $Id: SAPI.c,v 1.148 2002/09/04 20:27:35 sesser Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -530,8 +530,6 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 					strlcat(newheader, mimetype, newlen);
 					sapi_header.header = newheader;
 					sapi_header.header_len = newlen - 1;
-					colon_offset = strchr(newheader, ':');
-					*colon_offset = '\0';
 					efree(header_line);
 				}
 				efree(mimetype);

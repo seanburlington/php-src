@@ -1,3 +1,20 @@
+2004-12-18  Jani Taskinen  <jani.taskinen@kolumbus.fi>
+
+    * (PHP_4_3)
+      NEWS:
+      BFN
+
+    * (PHP_4_3)
+      sapi/isapi/php4isapi.c:
+      MFH: - Fixed bug #7782 (Cannot use PATH_INFO fully with php isapi)
+
+    * (PHP_4_3)
+      sapi/isapi/php4isapi.c:
+      Missing CVS id tag
+
+    * sapi/isapi/php5isapi.c:
+      Missing cvs id tag
+
 2004-12-17  Andi Gutmans  <andi@zend.com>
 
     * ZendEngine2/zend_object_handlers.c:
@@ -14424,7 +14441,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1837 2004/12/18 01:35:17 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1838 2004/12/19 01:39:08 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

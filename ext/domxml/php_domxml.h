@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.76 2003/04/03 10:21:19 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.77 2003/04/05 19:56:41 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -53,7 +53,7 @@
     therefore it's easier for the script-programmers to check, what's working how
    Can be checked with phpversion("domxml");
 */
-#define DOMXML_API_VERSION "20020814"
+#define DOMXML_API_VERSION "20030405"
 
 extern zend_module_entry domxml_module_entry;
 #define domxml_module_ptr &domxml_module_entry
@@ -94,6 +94,7 @@ PHP_FUNCTION(domxml_doc_create_element_ns);
 PHP_FUNCTION(domxml_doc_create_text_node);
 PHP_FUNCTION(domxml_doc_create_comment);
 PHP_FUNCTION(domxml_doc_create_processing_instruction);
+PHP_FUNCTION(domxml_doc_create_document_fragment);
 PHP_FUNCTION(domxml_doc_create_attribute);
 PHP_FUNCTION(domxml_doc_create_cdata_section);
 PHP_FUNCTION(domxml_doc_create_entity_reference);
@@ -185,9 +186,12 @@ PHP_FUNCTION(domxml_entity_public_id);
 PHP_FUNCTION(domxml_entity_system_id);
 PHP_FUNCTION(domxml_entity_notation_name);
 
-/* Class ProcessingInstructions */
+/* Class ProcessingInstructions methods*/
 PHP_FUNCTION(domxml_pi_target);
 PHP_FUNCTION(domxml_pi_data);
+
+/* Class DocumentFragment methods */
+PHP_FUNCTION(domxml_document_fragment_open_mem);
 
 /* Class Parser methods */
 PHP_FUNCTION(domxml_parser);

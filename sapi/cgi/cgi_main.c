@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.29 2003/05/21 09:34:15 zeev Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.30 2003/05/25 18:35:18 shane Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1062,7 +1062,7 @@ consult the installation file that came with this distribution, or visit \n\
 
 #if ENABLE_PATHINFO_CHECK
 	if (cfg_get_long("cgi.fix_pathinfo", &fix_pathinfo) == FAILURE) {
-		fix_pathinfo = 1;
+		fix_pathinfo = 0;
 	}
 #endif
 

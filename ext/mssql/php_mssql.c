@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.134 2004/04/20 23:30:51 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.135 2004/06/04 01:03:38 pollita Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -340,7 +340,7 @@ PHP_RINIT_FUNCTION(mssql)
 	dbsetlogintime(MS_SQL_G(connect_timeout));
 	if (MS_SQL_G(timeout) < 0) MS_SQL_G(timeout) = 60;
 	dbsettime(MS_SQL_G(timeout));
-	dbsetmaxprocs((SHORT)MS_SQL_G(max_procs));
+	dbsetmaxprocs((TDS_SHORT)MS_SQL_G(max_procs));
 
 	return SUCCESS;
 }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.57 2002/07/03 18:23:24 fmk Exp $ */
+/* $Id: php_string.h,v 1.58 2002/07/13 04:13:43 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -117,12 +117,9 @@ PHPAPI void php_dirname(char *str, int len);
 PHPAPI char *php_stristr(unsigned char *s, unsigned char *t, size_t s_len, size_t t_len);
 PHPAPI char *php_str_to_str(char *haystack, int length, char *needle,
 		int needle_len, char *str, int str_len, int *_new_length);
-PHPAPI void php_trim(zval **str, zval *return_value, int mode TSRMLS_DC);
-PHPAPI void php_trim2(zval **str, zval **what, zval *return_value, int mode TSRMLS_DC);
+PHPAPI char *php_trim(char *c, int len, char *what, int what_len, zval *return_value, int mode TSRMLS_DC);
 PHPAPI void php_strip_tags(char *rbuf, int len, int *state, char *allow, int allow_len);
-
 PHPAPI int php_char_to_str(char *str, uint len, char from, char *to, int to_len, pval *result);
-
 PHPAPI void php_implode(zval *delim, zval *arr, zval *return_value);
 PHPAPI void php_explode(zval *delim, zval *str, zval *return_value, int limit);
 
@@ -155,6 +152,5 @@ PHPAPI char *php_strerror(int errnum);
 #endif
 
 void register_string_constants(INIT_FUNC_ARGS);
-int php_charmask(unsigned char *input, int len, char *mask TSRMLS_DC);
 
 #endif /* PHP_STRING_H */

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.83 2002/10/24 08:46:21 jan Exp $ */
+/* $Id: exec.c,v 1.84 2002/11/04 17:38:30 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -946,7 +946,7 @@ PHP_FUNCTION(proc_open)
 	 * ends, where appropriate */
 	for (i = 0; i < ndesc; i++) {
 		FILE *fp;
-		char *mode_string;
+		char *mode_string=NULL;
 		php_stream *stream;
 
 		close_descriptor(descriptors[i].childend);

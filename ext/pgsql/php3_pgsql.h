@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php3_pgsql.h,v 1.1 1999/04/22 02:48:24 ssb Exp $ */
+/* $Id: php3_pgsql.h,v 1.2 1999/05/21 08:04:38 sas Exp $ */
 
 #ifndef _PHP3_PGSQL_H
 #define _PHP3_PGSQL_H
@@ -116,5 +116,7 @@ extern pgsql_module php3_pgsql_module;
 #define pgsql_module_ptr NULL
 
 #endif
+
+#define phpext_pgsql_ptr pgsql_module_ptr
 
 #endif /* _PHP3_PGSQL_H */

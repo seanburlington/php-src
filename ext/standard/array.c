@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.199.2.17 2003/04/23 02:37:29 iliaa Exp $ */
+/* $Id: array.c,v 1.199.2.18 2003/05/02 01:05:16 pollita Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1436,10 +1436,16 @@ PHP_FUNCTION(range)
 		if (low>high) {
 			for (; low >= high; (low)--) {
 				add_next_index_stringl(return_value, (char *)&low, 1, 1);
+				if ((int)low == 0) {
+					break;
+				}
 			}	
 		} else {
 			for (; low <= high; (low)++) {
 				add_next_index_stringl(return_value, (char *)&low, 1, 1);
+				if ((int)low == 255) {
+					break;
+				}
 			}	
 		}
 	} else {

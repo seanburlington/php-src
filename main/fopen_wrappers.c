@@ -16,9 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.35 1999/12/17 19:50:56 zeev Exp $ */
-
-/* Synced with php3 revision 1.66 1999-06-18 [ssb] */
+/* $Id: fopen_wrappers.c,v 1.36 1999/12/21 19:43:38 andrei Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -278,7 +276,7 @@ PHPAPI FILE *php_fopen_primary_script(void)
 	}							/* if doc_root && path_info */
 	if (!fn) {
 		/* we have to free SG(request_info).path_translated here because
-		   php3_destroy_request_info assumes that it will get
+		   php_destroy_request_info assumes that it will get
 		   freed when the include_names hash is emptied, but
 		   we're not adding it in this case */
 		STR_FREE(SG(request_info).path_translated);

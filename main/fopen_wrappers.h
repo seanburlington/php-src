@@ -15,9 +15,7 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.h,v 1.11 1999/12/17 19:16:33 zeev Exp $ */
-
-/* Synced with php3 revision 1.25 1999-06-16 [ssb] */
+/* $Id: fopen_wrappers.h,v 1.12 1999/12/21 19:43:38 andrei Exp $ */
 
 #ifndef _FOPEN_WRAPPERS_H
 #define _FOPEN_WRAPPERS_H

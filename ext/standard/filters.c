@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.12 2003/01/12 13:46:11 moriyoshi Exp $ */
+/* $Id: filters.c,v 1.13 2003/01/12 21:05:22 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -526,9 +526,6 @@ static php_conv_err_t php_conv_base64_decode_convert(php_conv_base64_decode *ins
 		}
 		if ((pack_bcnt | ustat) == 0) {
 			if (ocnt < 1) {
-				urem |= (pack << urem_nbits);
-				urem_nbits += 8;
-
 				err = PHP_CONV_ERR_TOO_BIG;
 				break;
 			}
@@ -537,6 +534,14 @@ static php_conv_err_t php_conv_base64_decode_convert(php_conv_base64_decode *ins
 			pack = 0;
 			pack_bcnt = nbitsof_pack;
 		}
+	}
+
+	if (urem_nbits >= pack_bcnt) {
+		urem |= (pack << (urem_nbits - pack_bcnt));
+		urem_nbits += (nbitsof_pack - pack_bcnt);
+	} else {
+		urem |= (pack >> (pack_bcnt - urem_nbits));
+		urem_nbits += (nbitsof_pack - pack_bcnt);
 	}
 
 	inst->urem = urem;

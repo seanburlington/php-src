@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.142 2001/06/06 13:05:53 rasmus Exp $ */
+/* $Id: php.h,v 1.143 2001/07/20 14:40:30 zeev Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -279,7 +279,7 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 
 
 /* Output support */
-#include "ext/standard/php_output.h"
+#include "main/php_output.h"
 #define PHPWRITE(str, str_len)		php_body_write((str), (str_len))
 #define PUTS(str)					php_body_write((str), strlen((str)))
 #define PUTC(c)						(php_body_write(&(c), 1), (c))

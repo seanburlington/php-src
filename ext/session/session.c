@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.219 2001/07/18 22:56:56 sas Exp $ */
+/* $Id: session.c,v 1.220 2001/07/20 14:40:30 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,7 +42,6 @@
 #include "ext/standard/datetime.h"
 #include "ext/standard/php_lcg.h"
 #include "ext/standard/url_scanner_ex.h"
-#include "ext/standard/php_output.h"
 #include "ext/standard/php_rand.h"                   /* for RAND_MAX */
 #include "ext/standard/info.h"
 

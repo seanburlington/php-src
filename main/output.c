@@ -17,12 +17,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.64 2001/07/20 13:59:00 zeev Exp $ */
+/* $Id: output.c,v 1.65 2001/07/20 14:40:30 zeev Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
 #include "ext/session/php_session.h"
-#include "basic_functions.h"
+#include "ext/standard/basic_functions.h"
 #include "SAPI.h"
 
 /* output functions */

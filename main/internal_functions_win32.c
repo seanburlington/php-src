@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.41 2001/06/06 13:05:53 rasmus Exp $ */
+/* $Id: internal_functions_win32.c,v 1.42 2001/07/20 14:40:30 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -47,7 +47,6 @@
 #include "ext/standard/php_ext_syslog.h"
 #include "ext/standard/php_standard.h"
 #include "ext/standard/php_lcg.h"
-#include "ext/standard/php_output.h"
 #include "ext/standard/php_array.h"
 #include "ext/standard/php_assert.h"
 #include "ext/calendar/php_calendar.h"

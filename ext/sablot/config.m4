@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.3 2000/09/30 04:50:39 sterling Exp $
+dnl $Id: config.m4,v 1.4 2000/10/02 17:35:58 rasmus Exp $
 dnl config.m4 for extension Sablot
 
 PHP_ARG_WITH(sablot, for Sablotron XSL support,
-[  --with-sablot[=DIR]        Include Sablotron support])
+[  --with-sablot[=DIR]     Include Sablotron support])
 
 if test "$PHP_SABLOT" != "no"; then
   if test -r $PHP_SABLOT/include/sablot.h; then

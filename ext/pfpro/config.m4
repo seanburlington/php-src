@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.2 2000/07/15 05:08:21 david Exp $
+dnl $Id: config.m4,v 1.3 2000/10/02 17:35:57 rasmus Exp $
 dnl config.m4 for extension pfpro
 
 PHP_ARG_WITH(pfpro, whether to include Verisign Payflow Pro support,
-[  --with-pfpro[=DIR]       Include Verisign Payflow Pro support])
+[  --with-pfpro[=DIR]      Include Verisign Payflow Pro support])
 
 if test "$PHP_PFPRO" != "no"; then
 

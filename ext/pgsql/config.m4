@@ -1,11 +1,11 @@
-dnl $Id: config.m4,v 1.16 2000/07/29 04:24:11 jah Exp $
+dnl $Id: config.m4,v 1.17 2000/10/02 17:35:57 rasmus Exp $
 
 AC_DEFUN(PGSQL_INC_CHK,[if test -r $i$1/libpq-fe.h; then PGSQL_DIR=$i; PGSQL_INCDIR=$i$1])
 
 PHP_ARG_WITH(pgsql,for PostgreSQL support,
 [  --with-pgsql[=DIR]      Include PostgreSQL support.  DIR is the PostgreSQL
                           base install directory, defaults to /usr/local/pgsql.
-			  Set DIR to "shared" to build as a dl, or "shared,DIR" 
+                          Set DIR to "shared" to build as a dl, or "shared,DIR" 
                           to build as a dl and still specify DIR.])
 
 if test "$PHP_PGSQL" != "no"; then

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 2000/07/03 05:25:00 rasmus Exp $
+dnl $Id: config.m4,v 1.3 2000/10/02 17:35:58 rasmus Exp $
 dnl config.m4 for extension sockets
 dnl don't forget to call PHP_EXTENSION(sockets)
 
@@ -10,13 +10,13 @@ dnl If your extension references something external, use with:
 
 dnl PHP_ARG_WITH(sockets, for sockets support,
 dnl Make sure that the comment is aligned:
-dnl [  --with-sockets             Include sockets support])
+dnl [  --with-sockets          Include sockets support])
 
 dnl Otherwise use enable:
 
 PHP_ARG_ENABLE(sockets, whether to enable sockets support,
 dnl Make sure that the comment is aligned:
-[  --enable-sockets           Enable sockets support])
+[  --enable-sockets        Enable sockets support])
 
 if test "$PHP_SOCKETS" != "no"; then
   dnl If you will not be testing anything external, like existence of

@@ -28,7 +28,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.3 1999/05/28 22:41:48 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.4 1999/05/28 22:42:17 zeev Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -208,9 +208,7 @@ static void init_request_info(SLS_D)
 	SG(request_info).path_translated = r->filename;
 	SG(request_info).request_uri = r->uri;
 	SG(request_info).request_method = (char *)r->method;
-	printf("Obtaining content type...\n");
 	SG(request_info).content_type = (char *) table_get(r->subprocess_env, "CONTENT_TYPE");
-	printf("Obtained content type:  %s\n", SG(request_info).content_type);
 	SG(request_info).content_length = (content_length ? atoi(content_length) : 0);
 
 	if (r->headers_in) {

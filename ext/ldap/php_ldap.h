@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ldap.h,v 1.23 2001/12/11 15:29:48 sebastian Exp $ */
+/* $Id: php_ldap.h,v 1.24 2001/12/23 16:32:06 venaas Exp $ */
 
 #ifndef PHP_LDAP_H
 #define PHP_LDAP_H
@@ -94,7 +94,7 @@ PHP_FUNCTION(ldap_rename);
 PHP_FUNCTION(ldap_start_tls);
 #endif
 
-#ifdef HAVE_3ARG_SETREBINDPROC
+#if defined(LDAP_API_FEATURE_X_OPENLDAP) && defined(HAVE_3ARG_SETREBINDPROC)
 PHP_FUNCTION(ldap_set_rebind_proc);
 #endif
 

@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.110 2001/12/11 15:29:47 sebastian Exp $ */
+/* $Id: ldap.c,v 1.111 2001/12/23 16:32:06 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -53,7 +53,7 @@
 
 typedef struct {
 	LDAP *link;
-#ifdef HAVE_3ARG_SETREBINDPROC
+#if defined(LDAP_API_FEATURE_X_OPENLDAP) && defined(HAVE_3ARG_SETREBINDPROC)
 	zval *rebindproc;
 #endif
 } ldap_linkdata;
@@ -122,7 +122,7 @@ function_entry ldap_functions[] = {
 	PHP_FE(ldap_start_tls,								NULL)
 #endif
 
-#ifdef HAVE_3ARG_SETREBINDPROC
+#if defined(LDAP_API_FEATURE_X_OPENLDAP) && defined(HAVE_3ARG_SETREBINDPROC)
 	PHP_FE(ldap_set_rebind_proc,						NULL)
 #endif
 
@@ -159,7 +159,7 @@ static void _close_ldap_link(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	ldap_linkdata *ld = (ldap_linkdata *)rsrc->ptr;
 
 	ldap_unbind_s(ld->link);
-#ifdef HAVE_3ARG_SETREBINDPROC
+#if defined(LDAP_API_FEATURE_X_OPENLDAP) && defined(HAVE_3ARG_SETREBINDPROC)
 	if (ld->rebindproc != NULL) {
 		zval_dtor(ld->rebindproc);
 		FREE_ZVAL(ld->rebindproc);
@@ -222,6 +222,9 @@ PHP_MINIT_FUNCTION(ldap)
 	REGISTER_LONG_CONSTANT("LDAP_OPT_SERVER_CONTROLS", LDAP_OPT_SERVER_CONTROLS, CONST_PERSISTENT | CONST_CS);
 	REGISTER_LONG_CONSTANT("LDAP_OPT_CLIENT_CONTROLS", LDAP_OPT_CLIENT_CONTROLS, CONST_PERSISTENT | CONST_CS);
 #endif
+#ifdef LDAP_OPT_DEBUG_LEVEL
+	REGISTER_LONG_CONSTANT("LDAP_OPT_DEBUG_LEVEL", LDAP_OPT_DEBUG_LEVEL, CONST_PERSISTENT | CONST_CS);
+#endif
 
 #ifdef ORALDAP
 	REGISTER_LONG_CONSTANT("GSLC_SSL_NO_AUTH", GSLC_SSL_NO_AUTH, CONST_PERSISTENT | CONST_CS);
@@ -276,7 +279,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.110 2001/12/11 15:29:47 sebastian Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.111 2001/12/23 16:32:06 venaas Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #ifdef LDAP_API_VERSION
@@ -1662,6 +1665,7 @@ PHP_FUNCTION(ldap_set_option)
 {
 	pval **link, **option, **newval;
 	ldap_linkdata *ld;
+	LDAP *ldap;
 	int opt;
 	
 	if (ZEND_NUM_ARGS() != 3 ||
@@ -1669,7 +1673,12 @@ PHP_FUNCTION(ldap_set_option)
 		WRONG_PARAM_COUNT;
 	}
 
-	ZEND_FETCH_RESOURCE(ld, ldap_linkdata *, link, -1, "ldap link", le_link);
+	if (Z_TYPE_PP(link) == IS_NULL) {
+		ldap = NULL;
+	} else {
+		ZEND_FETCH_RESOURCE(ld, ldap_linkdata *, link, -1, "ldap link", le_link);
+		ldap = ld->link;
+	}
 
 	convert_to_long_ex(option);
 	opt = Z_LVAL_PP(option);
@@ -1681,11 +1690,14 @@ PHP_FUNCTION(ldap_set_option)
 	case LDAP_OPT_TIMELIMIT:
 	case LDAP_OPT_PROTOCOL_VERSION:
 	case LDAP_OPT_ERROR_NUMBER:
+#ifdef LDAP_OPT_DEBUG_LEVEL
+	case LDAP_OPT_DEBUG_LEVEL:
+#endif
 		{
 			int val;
 			convert_to_long_ex(newval);
 			val = Z_LVAL_PP(newval);
-			if (ldap_set_option(ld->link, opt, &val)) {
+			if (ldap_set_option(ldap, opt, &val)) {
 				RETURN_FALSE;
 			}
 		} break;
@@ -1699,7 +1711,7 @@ PHP_FUNCTION(ldap_set_option)
 			char *val;
 			convert_to_string_ex(newval);
 			val = Z_STRVAL_PP(newval);
-			if (ldap_set_option(ld->link, opt, val)) {
+			if (ldap_set_option(ldap, opt, val)) {
 				RETURN_FALSE;
 			}
 		} break;
@@ -1711,7 +1723,7 @@ PHP_FUNCTION(ldap_set_option)
 			convert_to_boolean_ex(newval);
 			val = Z_LVAL_PP(newval)
 				? LDAP_OPT_ON : LDAP_OPT_OFF;
-			if (ldap_set_option(ld->link, opt, val)) {
+			if (ldap_set_option(ldap, opt, val)) {
 				RETURN_FALSE;
 			}
 		} break;
@@ -1766,7 +1778,7 @@ PHP_FUNCTION(ldap_set_option)
 				zend_hash_move_forward(Z_ARRVAL_PP(newval));
 			}
 			if (!error) {
-				error = ldap_set_option(ld->link, opt, ctrls);
+				error = ldap_set_option(ldap, opt, ctrls);
 			}
 			ctrlp = ctrls;
 			while ( *ctrlp ) {
@@ -2006,8 +2018,8 @@ PHP_FUNCTION(ldap_start_tls)
 #endif
 
 
-#ifdef HAVE_3ARG_SETREBINDPROC
-int _ldap_rebind_proc(LDAP *ldap, LDAP_CONST char *url, ber_tag_t req, ber_int_t msgid, void *params) {
+#if defined(LDAP_API_FEATURE_X_OPENLDAP) && defined(HAVE_3ARG_SETREBINDPROC)
+int _ldap_rebind_proc(LDAP *ldap, const char *url, ber_tag_t req, ber_int_t msgid, void *params) {
 	ldap_linkdata *ld;
 	int retval;
 	zval *cb_url;

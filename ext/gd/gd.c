@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.294.2.6 2004/12/29 21:40:42 iliaa Exp $ */
+/* $Id: gd.c,v 1.294.2.7 2005/01/04 06:51:58 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -337,7 +337,7 @@ zend_module_entry gd_module_entry = {
 	PHP_MINIT(gd),
 	PHP_MSHUTDOWN(gd),
 	NULL,
-#if HAVE_LIBGD20 && HAVE_GD_STRINGFT
+#if HAVE_LIBGD20 && HAVE_GD_STRINGFT && (HAVE_GD_FONTCACHESHUTDOWN || HAVE_GD_FREEFONTCACHE)
 	PHP_RSHUTDOWN(gd),
 #else
 	NULL,
@@ -456,10 +456,10 @@ PHP_MINIT_FUNCTION(gd)
 
 /* {{{ PHP_RSHUTDOWN_FUNCTION
  */
-#if HAVE_LIBGD20 && HAVE_GD_STRINGFT
+#if HAVE_LIBGD20 && HAVE_GD_STRINGFT && (HAVE_GD_FONTCACHESHUTDOWN || HAVE_GD_FREEFONTCACHE)
 PHP_RSHUTDOWN_FUNCTION(gd)
 {
-#if defined(HAVE_GD_THREAD_SAFE) || defined(HAVE_GD_BUNDLED)
+#if HAVE_GD_FONTCACHESHUTDOWN
 	gdFontCacheShutdown();
 #else
 	gdFreeFontCache();

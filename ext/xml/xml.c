@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.102 2001/12/29 18:10:01 andi Exp $ */
+/* $Id: xml.c,v 1.103 2002/01/27 07:19:30 jon Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -1562,7 +1562,8 @@ PHP_FUNCTION(xml_parser_get_option)
 			RETURN_FALSE;
 			break;
 	}
-	RETVAL_FALSE;
+
+	RETVAL_FALSE;	/* never reached */
 }
 /* }}} */
 

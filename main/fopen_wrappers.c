@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.119 2001/07/10 20:38:39 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.120 2001/07/10 20:40:56 andi Exp $ */
 
 /* {{{ includes
  */
@@ -462,8 +462,6 @@ PHPAPI FILE *php_fopen_with_path(char *filename, char *mode, char *path, char **
 		}
 		pathbuf[exec_fname_len] = DEFAULT_SLASH;
 		memcpy(&pathbuf[exec_fname_len+1], filename, filename_length+1);
-
-		fprintf(stderr,"Trying to open %s\n", pathbuf);
 
 		if (PG(safe_mode)) {
 			if (VCWD_STAT(pathbuf, &sb) == 0 && (!php_checkuid(pathbuf, mode, CHECKUID_CHECK_MODE_PARAM))) {

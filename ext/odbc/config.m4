@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.55.2.7 2003/10/03 05:25:40 sniper Exp $
+dnl $Id: config.m4,v 1.55.2.8 2003/11/25 08:08:30 sniper Exp $
 dnl
 
 dnl
@@ -454,11 +454,9 @@ AC_ARG_WITH(dbmaker,
     # check DBMaker version (from 5.0 to 2.0)
     DBMAKER_VERSION=5.0
 
-    while test test ! -d $DBMAKER_HOME/$DBMAKER_VERSION -a \
-                 "$DBMAKER_VERSION" != "2.9"; do
+    while test ! -d $DBMAKER_HOME/$DBMAKER_VERSION -a "$DBMAKER_VERSION" != "2.9"; do
         DM_VER=`echo $DBMAKER_VERSION | sed -e 's/\.//' | awk '{ print $1-1;}'`
-        MAJOR_V=`echo $DM_VER | awk '{ print $1/10; }' \
-                 | awk  -F. '{ print $1; }'`
+        MAJOR_V=`echo $DM_VER | awk '{ print $1/10; }'  | awk  -F. '{ print $1; }'`
         MINOR_V=`echo $DM_VER | awk '{ print $1%10; }'`
         DBMAKER_VERSION=$MAJOR_V.$MINOR_V
     done

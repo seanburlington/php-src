@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.39 2000/06/05 19:47:40 andi Exp $ */
+/* $Id: db.c,v 1.40 2000/06/13 14:37:34 jimjag Exp $ */
 #define IS_EXT_MODULE
 #ifdef COMPILE_DL_DB
 # include "dl/phpdl.h"
@@ -90,7 +90,7 @@
 #define DBM_TYPE DBM *
 #define DBM_MODE_TYPE int
 #define DBM_WRITE_MODE O_RDWR
-#define DBM_CREATE_MODE O_RDWR | O_APPEND | O_CREAT
+#define DBM_CREATE_MODE O_RDWR | O_CREAT
 #define DBM_NEW_MODE O_RDWR | O_CREAT | O_TRUNC
 #define DBM_DEFAULT_MODE O_RDONLY
 #define DBM_OPEN(filename, mode) dbm_open(filename, mode, 0666)

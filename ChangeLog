@@ -1,3 +1,62 @@
+2003-03-15  Moriyoshi Koizumi  <moriyoshi@at.wakwak.com>
+
+    * tests/lang/bug22592.phpt:
+      
+      Added test for bug22592
+
+2003-03-15  Hartmut Holzgraefe  <hartmut@six.de>
+
+    * ext/mysqli/mysqli_api.c
+      ext/mysqli/mysqli_nonapi.c
+      ext/mysqli/mysqli_profiler.c:
+      lots of proto stuff
+
+    * scripts/ext_skel_ng/extension_parser.php:
+      docbook fixes
+
+    * scripts/ext_skel_ng/php_constant.php:
+      thinko fix to kill warnings
+
+    * scripts/ext_skel_ng/php_resource.php:
+      docbook typo fix
+
+    * scripts/ext_skel_ng/php_function.php:
+      make sure the function name in the proto matches the function
+
+2003-03-15  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * main/main.c:
+      fix Bug #21751 - the parameter was wrong when this code was introduced
+
+2003-03-15  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * main/streams/cast.c
+      main/streams/plain_wrapper.c
+      main/streams/xp_socket.c:
+      64bit fixes
+
+    * ext/openssl/openssl.c:
+      fix proto
+
+    * (PHP_4_3)
+      main/network.c
+      main/streams.c:
+      64 bit fixes
+
+2003-03-15  Jani Taskinen  <sniper@iki.fi>
+
+    * NEWS:
+      And this never existed in any release either..
+
+    * (PHP_4_3)
+      php.ini-dist
+      php.ini-recommended:
+      MFH: "allow_webdav_methods" does not exist / is not needed anymore
+
+    * php.ini-dist
+      php.ini-recommended:
+      "allow_webdav_methods" does not exist / is not needed anymore
+
 2003-03-14  Jay Smith  <jsmith@tutorbuddy.com>
 
     * ext/standard/browscap.c:
@@ -1882,7 +1941,7 @@
 
     * sapi/apache/libpre.c
       sapi/apache/php_apache_http.h:
-      Added missing headers and $Id: ChangeLog,v 1.1295 2003/03/15 01:32:07 changelog Exp $ tags.
+      Added missing headers and $Id: ChangeLog,v 1.1296 2003/03/16 01:32:48 changelog Exp $ tags.
 
     * sapi/cgi/config9.m4:
       MFB: Fixed bug #22356 (Do not add empty -I flags).
@@ -2441,7 +2500,7 @@
       main/streams/plain_wrapper.c
       main/streams/streams.c
       main/streams/userspace.c:
-      ws fixes + missing $Id: ChangeLog,v 1.1295 2003/03/15 01:32:07 changelog Exp $ tags, headers added
+      ws fixes + missing $Id: ChangeLog,v 1.1296 2003/03/16 01:32:48 changelog Exp $ tags, headers added
 
 2003-02-19  Corne' Cornelius  <cornec@reach.co.za>
 
@@ -3359,7 +3418,7 @@
 
     * (PHP_4_3)
       sapi/cgi/cgi_main.c:
-      Added missing $Id: ChangeLog,v 1.1295 2003/03/15 01:32:07 changelog Exp $ tag
+      Added missing $Id: ChangeLog,v 1.1296 2003/03/16 01:32:48 changelog Exp $ tag
 
 2003-02-14  Thies C. Arntzen  <thies@thieso.net>
 

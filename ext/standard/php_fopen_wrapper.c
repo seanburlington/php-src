@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.25 2002/09/26 10:14:41 wez Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.26 2002/10/05 10:35:12 wez Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,6 +39,7 @@ static size_t php_stream_output_write(php_stream *stream, const char *buf, size_
 
 static size_t php_stream_output_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)
 {
+	stream->eof = 1;
 	return 0;
 }
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.118.2.23 2003/06/25 13:21:54 edink Exp $ */
+/* $Id: exif.c,v 1.118.2.24 2003/09/07 23:50:25 helly Exp $ */
 
 /*  ToDos
  *
@@ -99,7 +99,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.23 2003/06/25 13:21:54 edink Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.24 2003/09/07 23:50:25 helly Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -3791,14 +3791,16 @@ PHP_FUNCTION(exif_read_data)
 		exif_error_docref(NULL TSRMLS_CC, &ImageInfo, E_NOTICE, "sections found: %s", sections_str[0] ? sections_str : "None");
 #endif
 
-	ImageInfo.sections_found |= FOUND_COMPUTED;/* do not inform about in debug*/
+	ImageInfo.sections_found |= FOUND_COMPUTED|FOUND_FILE;/* do not inform about in debug*/
 
-	if (ret==FALSE || (sections_needed && !(sections_needed&ImageInfo.sections_found)) || array_init(return_value) == FAILURE) {
+	if (ret==FALSE || (sections_needed && !(sections_needed&ImageInfo.sections_found))) {
 		/* array_init must be checked at last! otherwise the array must be freed if a later test fails. */
 		exif_discard_imageinfo(&ImageInfo);
 	   	EFREE_IF(sections_str);
 		RETURN_FALSE;
 	}
+
+	array_init(return_value);
 
 #ifdef EXIF_DEBUG
 	exif_error_docref(NULL TSRMLS_CC, &ImageInfo, E_NOTICE, "generate section FILE");

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.54 2003/02/16 03:48:47 wez Exp $ */
+/* $Id: dns.c,v 1.55 2003/02/20 05:34:58 sniper Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -195,7 +195,7 @@ static char *php_gethostbyname(char *name)
 
 	hp = gethostbyname(name);
 
-	if (!hp || !hp->h_addr_list) {
+	if (!hp || !*(hp->h_addr_list)) {
 		return estrdup(name);
 	}
 

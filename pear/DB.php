@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.76 2001/10/29 23:37:27 fmk Exp $
+// $Id: DB.php,v 1.77 2001/11/01 15:14:17 cox Exp $
 //
 // Database independent query interface.
 //
@@ -600,6 +600,7 @@ class DB_result
 {
     var $dbh;
     var $result;
+    var $row_counter = null;
 
     /**
      * DB_result constructor.
@@ -628,6 +629,27 @@ class DB_result
         if ($fetchmode === DB_FETCHMODE_OBJECT) {
             $fetchmode = DB_FETCHMODE_ASSOC;
             $return_object = true;
+        }
+        if ($this->dbh->limit_from !== null) {
+            if ($this->row_counter === null) {
+                $this->row_counter = $this->dbh->limit_from;
+                // For Interbase
+                if ($this->dbh->options['limit'] == false) {
+                    $i = 0;
+                    while ($i++ <= $this->dbh->limit_from) {
+                        $this->dbh->fetchInto($this->result, $arr, $fetchmode);
+                    }
+                }
+            }
+            if ($this->row_counter >= (
+                    $this->dbh->limit_from + $this->dbh->limit_count))
+            {
+                return null;
+            }
+            if ($this->dbh->options['limit'] == 'emulate') {
+                $rownum = $this->row_counter;
+            }
+            $this->row_counter++;
         }
         $res = $this->dbh->fetchInto($this->result, $arr, $fetchmode, $rownum);
         if ($res !== DB_OK) {
@@ -659,6 +681,27 @@ class DB_result
         if ($fetchmode === DB_FETCHMODE_OBJECT) {
             $fetchmode = DB_FETCHMODE_ASSOC;
             $return_object = true;
+        }
+        if ($this->dbh->limit_from !== null) {
+            if ($this->row_counter === null) {
+                $this->row_counter = $this->dbh->limit_from;
+                // For Interbase
+                if ($this->dbh->options['limit'] == false) {
+                    $i = 0;
+                    while ($i++ <= $this->dbh->limit_from) {
+                        $this->dbh->fetchInto($this->result, $arr, $fetchmode);
+                    }
+                }
+            }
+            if ($this->row_counter >= (
+                    $this->dbh->limit_from + $this->dbh->limit_count))
+            {
+                return null;
+            }
+            if ($this->dbh->options['limit'] == 'emulate') {
+                $rownum = $this->row_counter;
+            }
+            $this->row_counter++;
         }
         $res = $this->dbh->fetchInto($this->result, $arr, $fetchmode, $rownum);
         if (($res === DB_OK) && isset($return_object)) {
@@ -715,6 +758,11 @@ class DB_result
     function tableInfo($mode = null)
     {
         return $this->dbh->tableInfo($this->result, $mode);
+    }
+
+    function getRowCounter()
+    {
+        return $this->row_counter;
     }
 }
 

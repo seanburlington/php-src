@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml_exports.h,v 1.1 2004/01/18 23:35:12 helly Exp $ */
+/* $Id: php_simplexml_exports.h,v 1.1.2.1 2004/08/05 23:57:53 iliaa Exp $ */
 
 #ifndef PHP_SIMPLEXML_EXPORTS_H
 #define PHP_SIMPLEXML_EXPORTS_H
@@ -35,7 +35,7 @@
 		__n = (__s)->node->node; \
 	} else { \
 		__n = NULL; \
-		php_error(E_WARNING, "Node no longer exists"); \
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Node no longer exists"); \
 	} \
 }
 

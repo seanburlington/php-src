@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.52 2004/05/27 07:58:22 dmitry Exp $ */
+/* $Id: php_http.c,v 1.53 2004/06/10 09:07:09 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -309,6 +309,10 @@ int send_http_soap_request(zval *this_ptr, char *buf, int buf_size, char *locati
 			smart_str_append_unsigned(&soap_headers, phpurl->port);
 		}
 		smart_str_appends(&soap_headers, phpurl->path);
+		if (phpurl->query) {
+			smart_str_appendc(&soap_headers, '?');
+			smart_str_appends(&soap_headers, phpurl->query);
+		}
 		smart_str_append_const(&soap_headers, " HTTP/1.1\r\n"
 			"Host: ");
 		smart_str_appends(&soap_headers, phpurl->host);

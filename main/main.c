@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.380 2001/07/17 16:46:06 rasmus Exp $ */
+/* $Id: main.c,v 1.381 2001/07/20 13:59:00 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -689,6 +689,8 @@ void php_request_shutdown(void *dummy)
 	ELS_FETCH();
 	SLS_FETCH();
 	PLS_FETCH();
+
+	php_output_set_status(0);
 
 	if (setjmp(EG(bailout))==0) {
 		php_end_ob_buffers((zend_bool)(SG(request_info).headers_only?0:1));

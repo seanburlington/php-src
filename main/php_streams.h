@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.83 2003/07/29 18:26:34 iliaa Exp $ */
+/* $Id: php_streams.h,v 1.84 2003/11/03 14:12:45 derick Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -194,8 +194,8 @@ struct _php_stream  {
 	FILE *stdiocast;    /* cache this, otherwise we might leak! */
 #if ZEND_DEBUG
 	int __exposed;	/* non-zero if exposed as a zval somewhere */
-	char *__orig_path; /* it really helps when debugging "unclosed" streams */
 #endif
+	char *orig_path;
 
 	php_stream_context *context;
 	int flags;	/* PHP_STREAM_FLAG_XXX */

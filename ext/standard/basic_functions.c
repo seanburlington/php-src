@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.477 2002/05/11 18:35:59 rasmus Exp $ */
+/* $Id: basic_functions.c,v 1.478 2002/05/11 19:19:49 rasmus Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2471,6 +2471,15 @@ PHP_FUNCTION(parse_ini_file)
 	}
 
 	convert_to_string_ex(filename);
+
+	if (PG(safe_mode) && (!php_checkuid(Z_STRVAL_PP(filename), NULL, CHECKUID_ALLOW_ONLY_FILE))) {
+		RETURN_FALSE;
+	}
+
+	if (php_check_open_basedir(Z_STRVAL_PP(filename) TSRMLS_CC)) {
+		RETURN_FALSE;
+	}
+
 	fh.handle.fp = VCWD_FOPEN(Z_STRVAL_PP(filename), "r");
 	if (!fh.handle.fp) {
 		php_error(E_WARNING, "Cannot open '%s' for reading", Z_STRVAL_PP(filename));

@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.244 2004/01/28 07:15:55 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.245 2004/02/02 08:09:53 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -785,7 +785,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.244 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.245 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -6011,6 +6011,10 @@ PHP_FUNCTION(oci_password_change)
 		WRONG_PARAM_COUNT;
 	}
 
+	convert_to_string_ex(user_param);
+	convert_to_string_ex(pass_old_param);
+	convert_to_string_ex(pass_new_param);
+	
 	user      = Z_STRVAL_PP(user_param);
 	pass_old  = Z_STRVAL_PP(pass_old_param);
 	pass_new  = Z_STRVAL_PP(pass_new_param);

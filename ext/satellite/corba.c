@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: corba.c,v 1.3 2001/02/26 06:07:15 andi Exp $
+ * $Id: corba.c,v 1.4 2001/05/12 12:22:34 sas Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -30,9 +30,7 @@
  */
 #include "corba.h"
 
-#ifdef HAVE_CONFIG_H
 #include "php_config.h"	/* for COMPILE_DL_ORBIT */
-#endif
 
 /* ZTS = thread-safe Zend */
 #ifdef ZTS

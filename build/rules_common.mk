@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules_common.mk,v 1.5 2000/11/28 01:20:21 sas Exp $ 
+# $Id: rules_common.mk,v 1.6 2001/05/12 12:22:33 sas Exp $ 
 #
 
 include $(top_builddir)/config_vars.mk
@@ -23,8 +23,8 @@ COMMON_FLAGS = $(DEFS) $(INCLUDES) $(EXTRA_INCLUDES) $(CPPFLAGS)
 COMPILE      = $(CC)  $(COMMON_FLAGS) $(CFLAGS) $(EXTRA_CFLAGS)
 CXX_COMPILE  = $(CXX) $(COMMON_FLAGS) $(CXXFLAGS) $(EXTRA_CXXFLAGS)
 
-SHARED_COMPILE = $(SHARED_LIBTOOL) --mode=compile $(COMPILE) -c $< && touch $@
-CXX_SHARED_COMPILE = $(SHARED_LIBTOOL) --mode=compile $(CXX_COMPILE) -c $< && touch $@
+SHARED_COMPILE = $(SHARED_LIBTOOL) --mode=compile $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) -prefer-pic $(EXTRA_CFLAGS) -c $< && touch $@
+CXX_SHARED_COMPILE = $(SHARED_LIBTOOL) --mode=compile $(CXX) $(COMMON_FLAGS) $(CXXFLAGS_CLEAN) -prefer-pic $(EXTRA_CXXFLAGS) -c $< && touch $@
 
 LINK = $(LIBTOOL) --mode=link $(COMPILE) $(LDFLAGS) -o $@
 

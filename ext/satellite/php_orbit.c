@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: php_orbit.c,v 1.4 2001/02/26 06:07:15 andi Exp $
+ * $Id: php_orbit.c,v 1.5 2001/05/12 12:22:34 sas Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -38,9 +38,7 @@
 #include "struct.h"
 
 
-#ifdef HAVE_CONFIG_H
 #include "php_config.h"	/* for COMPILE_DL_ORBIT */
-#endif
 
 /* see php4/README.SELF-CONTAINED-EXTENSIONS */
 #if COMPILE_DL_SATELLITE

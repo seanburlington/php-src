@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.79 2002/10/10 00:57:15 ssb Exp $
+// $Id: Common.php,v 1.80 2002/10/12 00:39:49 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -926,6 +926,9 @@ class PEAR_Common extends PEAR
                     }
                     if (isset($fa['md5sum'])) {
                         $ret .= " md5sum=\"$fa[md5sum]\"";
+                    }
+                    if (isset($fa['platform'])) {
+                        $ret .= " platform=\"$fa[platform]\"";
                     }
                     if (!empty($fa['install-as'])) {
                         $ret .= ' install-as="' .

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.68 2003/10/25 21:28:01 helly Exp $ */
+/* $Id: simplexml.c,v 1.69 2003/10/25 23:06:19 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -410,7 +410,12 @@ sxe_properties_get(zval *object TSRMLS_DC)
 		_get_base_node_value(sxe, node, &value TSRMLS_CC);
 		
 		name = (char *) node->name;
-		namelen = xmlStrlen(node->name) + 1;
+		if (!name) {
+			name = "CDATA";
+			namelen = sizeof("CDATA");
+		} else {
+			namelen = xmlStrlen(node->name) + 1;
+		}
 
 		h = zend_hash_func(name, namelen);
 		if (zend_hash_quick_find(rv, name, namelen, h, (void **) &data_ptr) == SUCCESS) {
@@ -1086,7 +1091,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.68 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.69 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

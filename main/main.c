@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.551 2003/05/08 01:23:20 iliaa Exp $ */
+/* $Id: main.c,v 1.552 2003/05/13 02:26:42 sas Exp $ */
 
 /* {{{ includes
  */
@@ -1565,7 +1565,7 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 	zend_file_handle *prepend_file_p, *append_file_p;
 	zend_file_handle prepend_file, append_file;
 #if HAVE_BROKEN_GETCWD 
-	int old_cwd_fd;
+	int old_cwd_fd = -1;
 #else
 	char *old_cwd;
 #endif
@@ -1649,8 +1649,10 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 	} zend_end_try();
 
 #if HAVE_BROKEN_GETCWD
-	fchdir(old_cwd_fd);
-	close(old_cwd_fd);
+	if (old_cwd_fd != -1) {
+		fchdir(old_cwd_fd);
+		close(old_cwd_fd);
+	}
 #else
 	if (old_cwd[0] != '\0') {
 		VCWD_CHDIR(old_cwd);

@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.37.2.1 2002/12/31 16:26:18 sebastian Exp $ */
+/* $Id: php_network.h,v 1.37.2.2 2003/05/12 23:44:48 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -154,6 +154,9 @@ PHPAPI php_stream *_php_stream_sock_open_unix(const char *path, int pathlen, con
 #define php_stream_sock_open_unix_rel(path, pathlen, persistent, timeval)	_php_stream_sock_open_unix((path), (pathlen), (persistent), (timeval) STREAMS_REL_CC TSRMLS_CC)
 
 /* }}} */
+
+/* private API; don't use in extensions */
+int _php_network_is_stream_alive(php_stream *stream);
 
 #if HAVE_OPENSSL_EXT
 PHPAPI int php_stream_sock_ssl_activate_with_method(php_stream *stream, int activate, SSL_METHOD *method, php_stream *session_stream TSRMLS_DC);

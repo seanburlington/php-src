@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_fe.h,v 1.6 2003/10/05 20:45:26 shane Exp $ */
+/* $Id: dom_fe.h,v 1.7 2003/10/27 15:32:22 chregu Exp $ */
 #ifndef DOM_FE_H
 #define DOM_FE_H
 
@@ -126,6 +126,7 @@ PHP_FUNCTION(dom_document_save);
 PHP_FUNCTION(dom_document_loadxml);
 PHP_FUNCTION(dom_document_savexml);
 PHP_FUNCTION(dom_document_validate);
+PHP_FUNCTION(dom_document_xinclude);
 
 #if defined(LIBXML_HTML_ENABLED)
 PHP_FUNCTION(dom_document_load_html);

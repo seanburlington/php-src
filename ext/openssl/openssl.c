@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.48 2002/05/17 12:42:39 wez Exp $ */
+/* $Id: openssl.c,v 1.49 2002/06/13 19:41:21 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1416,7 +1416,7 @@ PHP_FUNCTION(openssl_csr_sign)
 		zend_error(E_WARNING, "cannot get private key from parameter 3");
 		goto cleanup;
 	}
-	if (cert && !X509_check_private_key(cert, key))	{
+	if (cert && !X509_check_private_key(cert, priv_key))	{
 		zend_error(E_WARNING, "private key does not correspond to signing cert");
 		goto cleanup;
 	}

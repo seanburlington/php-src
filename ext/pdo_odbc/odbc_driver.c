@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_driver.c,v 1.20 2005/01/21 04:43:06 wez Exp $ */
+/* $Id: odbc_driver.c,v 1.21 2005/02/06 17:49:48 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -209,7 +209,7 @@ out:
 	return row_count;
 }
 
-static int odbc_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen  TSRMLS_DC)
+static int odbc_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen, enum pdo_param_type param_type  TSRMLS_DC)
 {
 	pdo_odbc_db_handle *H = (pdo_odbc_db_handle *)dbh->driver_data;
 
@@ -256,7 +256,23 @@ static int odbc_handle_rollback(pdo_dbh_t *dbh TSRMLS_DC)
 	return 1;
 }
 
+static int odbc_handle_get_attr(pdo_dbh_t *dbh, long attr, zval *val TSRMLS_DC)
+{
+	switch (attr) {
+		case PDO_ATTR_CLIENT_VERSION:
+			ZVAL_STRING(val, "ODBC-" PDO_ODBC_TYPE, 1);
+			return 1;
 
+		case PDO_ATTR_SERVER_VERSION:
+		case PDO_ATTR_PREFETCH:
+		case PDO_ATTR_TIMEOUT:
+		case PDO_ATTR_SERVER_INFO:
+		case PDO_ATTR_CONNECTION_STATUS:
+			break;
+
+	}
+	return 0;
+}
 
 static struct pdo_dbh_methods odbc_methods = {
 	odbc_handle_closer,
@@ -269,7 +285,7 @@ static struct pdo_dbh_methods odbc_methods = {
 	NULL, 	/* set attr */
 	NULL,	/* last id */
 	pdo_odbc_fetch_error_func,
-	NULL,	/* get attr */
+	odbc_handle_get_attr,	/* get attr */
 	NULL,	/* check_liveness */
 };
 

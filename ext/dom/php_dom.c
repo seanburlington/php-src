@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.60 2004/06/15 11:50:56 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.60.2.1 2004/08/03 17:07:23 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -384,7 +384,6 @@ PHP_MINIT_FUNCTION(dom)
 	INIT_CLASS_ENTRY(ce, "DOMException", php_dom_domexception_class_functions);
 	dom_domexception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(), NULL TSRMLS_CC);
 	dom_domexception_class_entry->ce_flags |= ZEND_ACC_FINAL;
-	dom_domexception_class_entry->constructor->common.fn_flags |= ZEND_ACC_PROTECTED;
 	zend_declare_property_long(dom_domexception_class_entry, "code", sizeof("code")-1, 0, ZEND_ACC_PUBLIC TSRMLS_CC);
 
 	REGISTER_DOM_CLASS(ce, "DOMStringList", NULL, php_dom_domstringlist_class_functions, dom_domstringlist_class_entry);

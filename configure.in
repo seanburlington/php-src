@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.317 2002/03/14 14:00:03 sterling Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.318 2002/03/14 14:15:24 zeev Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -37,7 +37,7 @@ done
 AC_CANONICAL_HOST
 AC_CONFIG_HEADER(main/php_config.h)
 
-VERSION="4.STFU"
+VERSION="4.2.1-dev"
 
 dnl Define where extension directories are located in the configure context
 AC_DEFUN(PHP_EXT_BUILDDIR,[ext/$1])dnl

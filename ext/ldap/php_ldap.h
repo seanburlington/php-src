@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ldap.h,v 1.24 2001/12/23 16:32:06 venaas Exp $ */
+/* $Id: php_ldap.h,v 1.25 2002/01/04 20:56:03 venaas Exp $ */
 
 #ifndef PHP_LDAP_H
 #define PHP_LDAP_H
@@ -66,7 +66,6 @@ PHP_FUNCTION(ldap_dn2ufn);
 
 PHP_FUNCTION(ldap_add);
 PHP_FUNCTION(ldap_delete);
-PHP_FUNCTION(ldap_modify);
 
 PHP_FUNCTION(ldap_mod_add);
 PHP_FUNCTION(ldap_mod_replace);

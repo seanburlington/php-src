@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.113 2001/12/26 18:40:57 venaas Exp $ */
+/* $Id: ldap.c,v 1.114 2002/01/04 20:56:03 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -94,7 +94,7 @@ function_entry ldap_functions[] = {
 	PHP_FE(ldap_dn2ufn,									NULL)
 	PHP_FE(ldap_add,									NULL)
 	PHP_FE(ldap_delete,									NULL)
-	PHP_FE(ldap_modify,									NULL)
+	PHP_FALIAS(ldap_modify,		ldap_mod_replace,		NULL)
 
 /* additional functions for attribute based modifications, Gerrit Thomson */
 	PHP_FE(ldap_mod_add,								NULL)
@@ -263,7 +263,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.113 2001/12/26 18:40:57 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.114 2002/01/04 20:56:03 venaas Exp $" );
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -1413,15 +1413,6 @@ PHP_FUNCTION(ldap_add)
 	php_ldap_do_modify(INTERNAL_FUNCTION_PARAM_PASSTHRU, PHP_LD_FULL_ADD);
 }
 /* }}} */
-
-/* {{{ proto int ldap_modify(int link, string dn, array entry)
-   Modify an LDAP entry */
-PHP_FUNCTION(ldap_modify)
-{
-	php_ldap_do_modify(INTERNAL_FUNCTION_PARAM_PASSTHRU, LDAP_MOD_REPLACE); 
-}
-/* }}} */
-
 
 /* three functions for attribute base modifications, gerrit Thomson */
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.151 2001/09/09 13:28:58 derick Exp $ */
+/* $Id: oci8.c,v 1.152 2001/09/11 21:03:58 asautins Exp $ */
 
 /* TODO list:
  *
@@ -620,7 +620,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.152 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -4458,6 +4458,7 @@ PHP_FUNCTION(ocicollappend)
     OCINumber num;
 	OCIString *ocistr = (OCIString *)0;
 	OCIInd new_ind = OCI_IND_NOTNULL;
+	OCIInd null_ind = OCI_IND_NULL;
 	OCIDate dt;
     int inx;
 	double ndx;
@@ -4471,6 +4472,26 @@ PHP_FUNCTION(ocicollappend)
         if (zend_get_parameters_ex(1, &arg) == FAILURE) {
             WRONG_PARAM_COUNT;
         }
+
+		/* 
+		 * Handle NULLS.  For consistency with the rest of the OCI8 library, when
+		 * a value passed in is a 0 length string, consider it a null
+		 */
+		convert_to_string_ex(arg);
+		if((*arg)->value.str.len == 0) {
+			CALL_OCI_RETURN(connection->error, OCICollAppend(
+				  OCI(pEnv), 
+				  connection->pError, 
+				  (dword *)0, 
+				  &null_ind, 
+				  coll->coll));
+			if (connection->error) {
+				oci_error(connection->pError, "OCICollAppend - NULL", connection->error);
+				RETURN_FALSE;
+			}
+
+			RETURN_TRUE;
+		}
 
 		switch(coll->element_typecode) {
 		   case OCI_TYPECODE_DATE:
@@ -4719,6 +4740,7 @@ PHP_FUNCTION(ocicollassignelem)
 	oci_collection *coll;
 	OCINumber num;
 	OCIInd new_ind = OCI_IND_NOTNULL;
+	OCIInd null_ind = OCI_IND_NULL;
 	ub4  ndx;
 	int inx;
 	OCIString *ocistr = (OCIString *)0;
@@ -4743,6 +4765,29 @@ PHP_FUNCTION(ocicollassignelem)
 			oci_error(connection->pError, "OCICollAssignElem", connection->error);
 			RETURN_FALSE;
 		}
+
+		/* 
+		 * Handle NULLS.  For consistency with the rest of the OCI8 library, when
+		 * a value passed in is a 0 length string, consider it a null
+		 */
+		convert_to_string_ex(val);
+
+		if((*val)->value.str.len == 0) {
+			CALL_OCI_RETURN(connection->error, OCICollAssignElem(
+				  OCI(pEnv), 
+				  connection->pError, 
+				  ndx, 
+				  (dword *)0, 
+				  &null_ind, 
+				  coll->coll));
+			if (connection->error) {
+				oci_error(connection->pError, "OCICollAssignElem - NULL", connection->error);
+				RETURN_FALSE;
+			}
+
+			RETURN_TRUE;
+		}
+
 		switch(coll->element_typecode) {
 		   case OCI_TYPECODE_DATE:
 			   convert_to_string_ex(val);

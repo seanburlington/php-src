@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.14 2003/03/07 13:42:19 ddhill Exp $ */
+/* $Id: file.c,v 1.279.2.15 2003/04/01 07:53:05 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -218,7 +218,7 @@ PHP_FUNCTION(flock)
     int fd, act, ret, arg_count = ZEND_NUM_ARGS();
 	php_stream *stream;
 
-    if (arg_count > 3 || zend_get_parameters_ex(arg_count, &arg1, &arg2, &arg3) == FAILURE) {
+    if (arg_count < 2 || arg_count > 3 || zend_get_parameters_ex(arg_count, &arg1, &arg2, &arg3) == FAILURE) {
         WRONG_PARAM_COUNT;
     }
 

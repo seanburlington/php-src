@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.114 2004/02/12 01:28:12 sniper Exp $ */
+/* $Id: datetime.c,v 1.115 2004/02/12 01:31:57 sniper Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"

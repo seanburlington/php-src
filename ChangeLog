@@ -1,3 +1,19 @@
+2000-12-21  Jani Taskinen  <sniper@iki.fi>
+
+    * ext/standard/string.c:
+    - Changed setlocale() to use LC_* constants. 
+
+2000-12-21  Sascha Schumann  <sascha@schumann.cx>
+
+    * ext/session/mod_mm.c: No need for GCC extensions in non-debugging mode.
+
+    PR: #8345
+
+    * configure.in:
+    Some AC_SUBST substitutions were removed which are still needed.
+
+    Submitted by: Andrei Zmievski
+
 2000-12-20  Chuck Hagenbuch  <chuck@horde.org>
 
     * pear/Makefile.in: install the Math/* files.
@@ -1252,7 +1268,7 @@
     a class/module use "@see $variable" and "@see function()". Note the $ and the "()".
     If the referenced element is unknow, the reference will be dropped and a warning is generated.
 
-    - added @version $Id: ChangeLog,v 1.568 2000/12/21 02:09:07 changelog Exp $ to some class doc comments
+    - added @version $Id: ChangeLog,v 1.569 2000/12/22 02:09:11 changelog Exp $ to some class doc comments
 
     This is an eays way to add a version tag to inline docs if you use a CVS.
 

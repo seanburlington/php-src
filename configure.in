@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.242 2001/05/09 13:57:56 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.243 2001/05/09 13:58:31 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -797,6 +797,7 @@ AC_SUBST(EXPANDED_PHP_CONFIG_FILE_PATH)
 PHP_BUILD_RPATH
 
 PHP_REMOVE_USR_LIB(PHP_LDFLAGS)
+PHP_REMOVE_USR_LIB(LDFLAGS)
 
 EXTRA_LDFLAGS="$EXTRA_LDFLAGS $PHP_LDFLAGS"
 

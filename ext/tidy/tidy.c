@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.61 2004/12/30 11:56:18 tony2001 Exp $ */
+/* $Id: tidy.c,v 1.62 2005/02/07 23:03:49 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -297,7 +297,7 @@ zend_module_entry tidy_module_entry = {
 	PHP_MINIT(tidy),
 	PHP_MSHUTDOWN(tidy),
 	PHP_RINIT(tidy),
-	PHP_RSHUTDOWN(tidy),
+	NULL,
 	PHP_MINFO(tidy),
 	PHP_TIDY_MODULE_VERSION,
 	STANDARD_MODULE_PROPERTIES
@@ -946,17 +946,12 @@ PHP_RINIT_FUNCTION(tidy)
 	return SUCCESS;
 }
 
-PHP_RSHUTDOWN_FUNCTION(tidy)
-{
-	return SUCCESS;
-}
-
 PHP_MINFO_FUNCTION(tidy)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.61 2004/12/30 11:56:18 tony2001 Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.62 2005/02/07 23:03:49 rasmus Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

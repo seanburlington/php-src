@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.217 2003/11/06 14:29:09 sas Exp $ */
+/* $Id: oci8.c,v 1.218 2003/11/06 14:31:33 sas Exp $ */
 
 /* TODO list:
  *
@@ -647,7 +647,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.217 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.218 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2188,12 +2188,12 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 		CALL_OCI(OCINlsEnvironmentVariableGet(&charsetid, 
 				2, 
 				OCI_NLS_CHARSET_ID, 
-                0,
+				0,
 				&rsize));
 
 		smart_str_append_long_ex(&hashed_details, charsetid, 1);
 
-        charsetid = 0;
+		charsetid = 0;
 	}
 #else
 	{

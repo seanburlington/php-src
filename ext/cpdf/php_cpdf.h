@@ -26,7 +26,7 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_cpdf.h,v 1.3 2000/01/10 11:01:56 steinm Exp $ */
+/* $Id: php_cpdf.h,v 1.4 2000/01/10 12:42:05 steinm Exp $ */
 
 #ifndef _PHP_CPDF_H
 #define _PHP_CPDF_H
@@ -42,7 +42,7 @@ extern PHP_MINFO_FUNCTION(cpdf);
 extern PHP_MINIT_FUNCTION(cpdf);
 extern PHP_RINIT_FUNCTION(cpdf);
 extern PHP_MSHUTDOWN_FUNCTION(cpdf);
-PHP_FUNCTION(cpdf_global_set_documents_settings);
+PHP_FUNCTION(cpdf_global_set_document_limits);
 PHP_FUNCTION(cpdf_set_creator);
 PHP_FUNCTION(cpdf_set_title);
 PHP_FUNCTION(cpdf_set_subject);

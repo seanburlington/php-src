@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.8 2000/01/10 11:01:56 steinm Exp $ */
+/* $Id: cpdf.c,v 1.9 2000/01/10 12:42:05 steinm Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -76,7 +76,7 @@ static int le_outline;
 #endif
 
 function_entry cpdf_functions[] = {
-  PHP_FE(cpdf_global_set_documents_settings, NULL)
+  PHP_FE(cpdf_global_set_document_limits, NULL)
 	PHP_FE(cpdf_set_creator, NULL)
 	PHP_FE(cpdf_set_title, NULL)
 	PHP_FE(cpdf_set_subject, NULL)
@@ -191,9 +191,9 @@ PHP_MSHUTDOWN_FUNCTION(cpdf){
 	return SUCCESS;
 }
 
-/* {{{ proto void cpdf_global_set_document_settings(int maxPages, int maxFonts, int maxImages, int maxAnnots, int maxObjects)
+/* {{{ proto void cpdf_global_set_document_limits(int maxPages, int maxFonts, int maxImages, int maxAnnots, int maxObjects)
    Sets document settings for all documents */
-PHP_FUNCTION(cpdf_global_set_documents_settings) {
+PHP_FUNCTION(cpdf_global_set_document_limits) {
 	pval *argv[5];
 	int argc;
 	CPDF_TLS_VARS;

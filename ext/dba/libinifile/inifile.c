@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: inifile.c,v 1.10 2003/12/14 22:07:29 helly Exp $ */
+/* $Id: inifile.c,v 1.11 2003/12/17 08:50:50 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -43,7 +43,7 @@
 /* {{{ inifile_version */
 char *inifile_version() 
 {
-	return "1.0, $Revision: 1.10 $";
+	return "1.0, $Revision: 1.11 $";
 }
 /* }}} */ 
 
@@ -500,7 +500,7 @@ static int inifile_delete_replace_append(inifile *dba, const key_type *key, cons
 			ret = FAILURE;
 		} else {
 			php_stream_seek(dba->fp, 0, SEEK_END);
-			if (pos_grp_next != php_stream_tell(dba->fp)) {
+			if (pos_grp_next != (size_t)php_stream_tell(dba->fp)) {
 				php_stream_seek(dba->fp, pos_grp_next, SEEK_SET);
 				if (!php_stream_copy_to_stream(dba->fp, fp_tmp, PHP_STREAM_COPY_ALL)) {
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not copy remainder to temporary stream");

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.76 2002/07/03 18:23:55 fmk Exp $ */
+/* $Id: mbstring.c,v 1.77 2002/07/03 18:45:34 fmk Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -1310,7 +1310,6 @@ php_mbstr_encoding_handler(zval *arg, char *res, char *separator TSRMLS_DC)
 
 }
 
-#if defined(MBSTR_ENC_TRANS)
 SAPI_POST_HANDLER_FUNC(php_mbstr_post_handler)
 {
 	MBSTRG(http_input_identify_post) = mbfl_no_encoding_invalid;
@@ -1321,7 +1320,6 @@ SAPI_POST_HANDLER_FUNC(php_mbstr_post_handler)
 		MBSTRG(http_input_identify_post) = MBSTRG(http_input_identify);
 	}
 }
-#endif
 
 
 #define IS_SJIS1(c) ((((c)>=0x81 && (c)<=0x9f) || ((c)>=0xe0 && (c)<=0xf5)) ? 1 : 0)

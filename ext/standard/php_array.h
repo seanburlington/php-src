@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_array.h,v 1.23 2001/03/16 20:46:33 andrei Exp $ */
+/* $Id: php_array.h,v 1.24 2001/03/19 21:20:02 andrei Exp $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H
@@ -76,6 +76,7 @@ PHP_FUNCTION(array_intersect);
 PHP_FUNCTION(array_diff);
 PHP_FUNCTION(array_sum);
 PHP_FUNCTION(array_filter);
+PHP_FUNCTION(array_map);
 
 HashTable* php_splice(HashTable *, int, int, zval ***, int, HashTable **);
 PHPAPI void php_array_merge(HashTable *dest, HashTable *src, int recursive);

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.12 1999/07/26 20:09:08 andrey Exp $ */
+/* $Id: basic_functions.h,v 1.13 1999/07/28 17:58:38 andi Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -92,6 +92,10 @@ PHP_FUNCTION(is_double);
 PHP_FUNCTION(is_string);
 PHP_FUNCTION(is_array);
 PHP_FUNCTION(is_object);
+
+PHP_FUNCTION(get_class);
+PHP_FUNCTION(get_parent_class);
+PHP_FUNCTION(method_exists);
 
 PHP_FUNCTION(leak);
 

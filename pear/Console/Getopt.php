@@ -16,7 +16,7 @@
 // | Author: Andrei Zmievski <andrei@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Getopt.php,v 1.23 2003/06/10 20:03:43 imajes Exp $
+// $Id: Getopt.php,v 1.24 2003/06/30 10:09:44 cox Exp $
 
 require_once 'PEAR.php';
 
@@ -183,7 +183,7 @@ class Console_Getopt {
                 if (substr($long_opt, -2) != '==') {
                     /* Long option requires an argument.
                        Take the next argument if one wasn't specified. */;
-                    if (!$opt_arg && !(list(, $opt_arg) = each($args))) {
+                    if (!strlen($opt_arg) && !(list(, $opt_arg) = each($args))) {
                         return PEAR::raiseError("Console_Getopt: option --$opt requires an argument");
                     }
                 }

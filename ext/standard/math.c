@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.73 2002/01/05 08:29:53 jimw Exp $ */
+/* $Id: math.c,v 1.74 2002/01/09 23:59:04 jimw Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -383,9 +383,9 @@ PHP_FUNCTION(pi)
 /* }}} */
 
 
-/* {{{ proto bool finite(double val)
+/* {{{ proto bool is_finite(double val)
    Returns whether double is finite */
-PHP_FUNCTION(finite)
+PHP_FUNCTION(is_finite)
 {
 	double dval;
 
@@ -397,9 +397,9 @@ PHP_FUNCTION(finite)
 }
 /* }}} */
 
-/* {{{ proto bool isinf(double val)
+/* {{{ proto bool is_infinite(double val)
    Returns whether double is infinite */
-PHP_FUNCTION(isinf)
+PHP_FUNCTION(is_infinite)
 {
 	double dval;
 
@@ -410,9 +410,9 @@ PHP_FUNCTION(isinf)
 }
 /* }}} */
 
-/* {{{ proto bool isnan(double val)
+/* {{{ proto bool is_nan(double val)
    Returns whether double is not a number */
-PHP_FUNCTION(isnan)
+PHP_FUNCTION(is_nan)
 {
 	double dval;
 

@@ -3,7 +3,7 @@ Various pow() tests
 --POST--
 --GET--
 --FILE--
-<?php // $Id: pow.phpt,v 1.9 2002/01/05 03:45:11 jimw Exp $
+<?php // $Id: pow.phpt,v 1.10 2002/01/09 23:59:05 jimw Exp $
 
 define('LONG_MAX', is_int(5000000000)? 9223372036854775807 : 0x7FFFFFFF);
 define('LONG_MIN', -LONG_MAX - 1);
@@ -21,8 +21,8 @@ $tests = <<<TESTS
  1    === pow(-1, 0)
 -1    === pow(-1, 1)
  1    === pow(-1, 2)
- TRUE === isinf(pow(0,-2))
- TRUE === isinf(pow(0,-1))
+ TRUE === is_infinite(pow(0,-2))
+ TRUE === is_infinite(pow(0,-1))
  1    === pow( 0, 0)
  0    === pow( 0, 1)
  0    === pow( 0, 2)
@@ -46,8 +46,8 @@ $tests = <<<TESTS
  1.0  === pow(-1, 0.0)
 -1.0  === pow(-1, 1.0)
  1.0  === pow(-1, 2.0)
- TRUE === isinf(pow(0,-2.0))
- TRUE === isinf(pow(0,-1.0))
+ TRUE === is_infinite(pow(0,-2.0))
+ TRUE === is_infinite(pow(0,-1.0))
  1.0  === pow( 0, 0.0)
  0.0  === pow( 0, 1.0)
  0.0  === pow( 0, 2.0)
@@ -78,8 +78,8 @@ sqrt(2) ~== pow(2,1/2)
  1.0  === pow(-1.0, 0.0)
 -1.0  === pow(-1.0, 1.0)
  1.0  === pow(-1.0, 2.0)
- TRUE === isinf(pow(0.0,-2.0))
- TRUE === isinf(pow(0.0,-1.0))
+ TRUE === is_infinite(pow(0.0,-2.0))
+ TRUE === is_infinite(pow(0.0,-1.0))
  1.0  === pow( 0.0, 0.0)
  0.0  === pow( 0.0, 1.0)
  0.0  === pow( 0.0, 2.0)
@@ -103,8 +103,8 @@ sqrt(2) ~== pow(2,1/2)
  1.0  === pow(-1.0, 0)
 -1.0  === pow(-1.0, 1)
  1.0  === pow(-1.0, 2)
- TRUE === isinf(pow( 0.0,-2))
- TRUE === isinf(pow( 0.0,-1))
+ TRUE === is_infinite(pow( 0.0,-2))
+ TRUE === is_infinite(pow( 0.0,-1))
  1.0  === pow( 0.0, 0)
  0.0  === pow( 0.0, 1)
  0.0  === pow( 0.0, 2)

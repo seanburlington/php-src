@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.218.2.5 2003/02/02 15:51:37 zeev Exp $ */
+/* $Id: info.c,v 1.218.2.6 2003/02/13 16:48:44 phanto Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -33,6 +33,7 @@
 #include "php_main.h"
 #include "zend_globals.h"		/* needs ELS */
 #include "zend_extensions.h"
+#include "zend_highlight.h"
 #ifdef HAVE_SYS_UTSNAME_H
 #include <sys/utsname.h>
 #endif

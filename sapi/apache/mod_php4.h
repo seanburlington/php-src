@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.h,v 1.14 2001/08/31 22:03:24 sniper Exp $ */
+/* $Id: mod_php4.h,v 1.15 2001/09/17 12:22:35 dbeu Exp $ */
 
 #ifndef MOD_PHP4_H
 #define MOD_PHP4_H
@@ -38,15 +38,10 @@ extern zend_module_entry apache_module_entry;
 
 #ifdef ZTS
 extern int php_apache_info_id;
-#define AP(v) TSRMG(alloc_globals_id, php_apache_info_struct *, v)
+#define AP(v) TSRMG(php_apache_info_id, php_apache_info_struct *, v)
 #else
 extern php_apache_info_struct php_apache_info;
 #define AP(v) (php_apache_info.v)
-#endif
-
-
-#ifdef WIN32
-#define S_IXUSR _S_IEXEC
 #endif
 
 #endif							/* MOD_PHP4_H */

@@ -19,7 +19,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: client_round2_results.php,v 1.2 2003/01/04 11:56:06 mj Exp $
+// $Id: client_round2_results.php,v 1.3 2004/01/05 16:44:00 dmitry Exp $
 //
 require_once 'client_round2_interop.php';
 ?>
@@ -60,7 +60,7 @@ if ($_GET['wire']) {
 } else {
     $iop->getEndpoints();
     $iop->getResults();
-    
+
     if ($_GET['test']) {
         $iop->currentTest = $_GET['test'];
         $iop->useWSDL = $_GET['wsdl']?$_GET['wsdl']:0;

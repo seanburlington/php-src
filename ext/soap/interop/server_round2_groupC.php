@@ -16,14 +16,12 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: server_round2_groupC.php,v 1.2 2003/01/04 11:56:07 mj Exp $
+// $Id: server_round2_groupC.php,v 1.3 2004/01/05 16:44:00 dmitry Exp $
 //
-require_once 'SOAP/Server.php';
-require_once 'SOAP/Value.php';
 
 class SOAP_Interop_GroupC {
     var $method_namespace = 'http://soapinterop.org/echoheader/';
-    
+
     function echoMeStringRequest($string)
     {
 	return new SOAP_Value('{'.$this->method_namespace.'}echoMeStringResponse','string',$string);
@@ -35,7 +33,7 @@ class SOAP_Interop_GroupC {
     }
 }
 
-$groupc = new SOAP_Interop_GroupC();
-$server->addObjectMap($groupc);
-
+$server = new SoapServer("http://test-uri");
+$server->setClass("SOAP_Interop_GroupC");
+$server->handle();
 ?>

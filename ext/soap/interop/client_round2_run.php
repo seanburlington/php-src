@@ -17,7 +17,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: client_round2_run.php,v 1.2 2003/01/04 11:56:06 mj Exp $
+// $Id: client_round2_run.php,v 1.3 2004/01/05 16:44:00 dmitry Exp $
 //
 set_time_limit(0);
 require_once 'client_round2_interop.php';
@@ -29,17 +29,17 @@ $iop = new Interop_Client();
 // set some options
 $iop->currentTest = 'base';      // see $tests above
 $iop->paramType = 'php';     // 'php' or 'soapval'
-$iop->useWSDL = 1;           // 1= do wsdl tests
+$iop->useWSDL = 0;           // 1= do wsdl tests
 $iop->numServers = 0;        // 0 = all
-$iop->specificEndpoint = '4s4c'; // test only this endpoint
-$iop->testMethod = 'echoString';       // test only this method
+//$iop->specificEndpoint = '4s4c'; // test only this endpoint
+//$iop->testMethod = 'echoString';       // test only this method
 
 #XXX MS SOAP ToolKit 2.0/3.0 crashes php-soap in __getfault!
 
 // endpoints to skip
-$iop->skipEndpointList = array('Apache Axis','IONA XMLBus','IONA XMLBus (CORBA)','MS SOAP ToolKit 2.0','MS SOAP ToolKit 3.0','Spheon JSOAP','SQLData SOAP Server','WASP Advanced 3.0'); 
+$iop->skipEndpointList = array('Apache Axis','IONA XMLBus','IONA XMLBus (CORBA)','MS SOAP ToolKit 2.0','MS SOAP ToolKit 3.0','Spheon JSOAP','SQLData SOAP Server','WASP Advanced 3.0');
 $iop->startAt='';
-$this->nosave = 0; // 1= disable saving results to database
+$iop->nosave = 0; // 1= disable saving results to database
 // debug output
 $iop->show = 1;
 $iop->debug = 0;

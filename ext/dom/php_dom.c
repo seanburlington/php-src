@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.60.2.5 2005/01/20 11:47:28 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.60.2.6 2005/02/09 11:47:12 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -930,7 +930,7 @@ void dom_objects_clone(void *object, void **object_clone TSRMLS_DC)
 					clone->document = intern->document;
 				}
 				php_libxml_increment_doc_ref((php_libxml_node_object *)clone, cloned_node->doc TSRMLS_CC);
-				php_libxml_increment_node_ptr((php_libxml_node_object *)clone, cloned_node, NULL TSRMLS_CC);
+				php_libxml_increment_node_ptr((php_libxml_node_object *)clone, cloned_node, (void *)clone TSRMLS_CC);
 			}
 
 		}

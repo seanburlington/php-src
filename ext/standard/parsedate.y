@@ -1,5 +1,5 @@
 %{
-/* $Revision: 1.13 $
+/* $Revision: 1.14 $
 **
 **  Originally written by Steven M. Bellovin <smb@research.att.com> while
 **  at the University of North Carolina at Chapel Hill.  Later tweaked by
@@ -19,11 +19,7 @@
 /* SUPPRESS 595 on yypvt *//* Automatic variable may be used before set */
 
 
-#ifdef WIN32
-# include "config.w32.h"
-#else
-# include "php_config.h"
-#endif
+#include "php.h"
 
 #if WIN32||WINNT
 #include <malloc.h>
@@ -52,7 +48,6 @@
 
 #if WIN32||WINNT
 #	include <time.h>
-#	include "php_reentrancy.h"
 #else
 #	if !defined(HAVE_TM_ZONE) && !defined(_TIMEZONE)
 extern time_t timezone;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.38 2002/02/06 07:16:10 yohgaki Exp $ */
+/* $Id: php_pgsql.h,v 1.39 2002/02/06 07:25:51 yohgaki Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -36,12 +36,6 @@ extern zend_module_entry pgsql_module_entry;
 #define INV_READ             0x00040000
 #else
 #include <libpq/libpq-fs.h>
-#endif
-
-#ifdef PHP_WIN32
-#define PHP_PGSQL_API __declspec(dllexport)
-#else
-#define PHP_PGSQL_API
 #endif
 
 #ifdef HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT
@@ -158,9 +152,10 @@ typedef struct {
 
 #ifdef ZTS
 # define PGG(v) TSRMG(pgsql_globals_id, php_pgsql_globals *, v)
+extern int pgsql_globals_id;
 #else
 # define PGG(v) (pgsql_globals.v)
-extern PHP_PGSQL_API php_pgsql_globals pgsql_globals;
+extern php_pgsql_globals pgsql_globals;
 #endif
 
 #endif

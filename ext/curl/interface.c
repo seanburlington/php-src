@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.42 2004/03/12 18:41:19 sterling Exp $ */
+/* $Id: interface.c,v 1.43 2004/03/12 20:04:31 sterling Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -788,10 +788,10 @@ PHP_FUNCTION(curl_init)
    Copy a cURL handle along with all of it's preferences */
 PHP_FUNCTION(curl_copy_handle)
 {
-	zval     *zid;
-	CURL     *cp;
-	php_curl *ch;
-	php_curl *dupch;
+	zval     **zid;
+	CURL      *cp;
+	php_curl  *ch;
+	php_curl  *dupch;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &zid) == FAILURE) {
 		WRONG_PARAM_COUNT;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.62 2001/08/13 06:43:42 rasmus Exp $ */
+/* $Id: db.c,v 1.63 2001/08/13 07:55:32 rasmus Exp $ */
 #define IS_EXT_MODULE
 
 #if 1
@@ -252,8 +252,9 @@ PHP_MINFO_FUNCTION(db)
    Describes the dbm-compatible library being used */ 
 PHP_FUNCTION(dblist)
 {
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "") == FAILURE)
-		return;
+	if (ZEND_NUM_ARGS() != 0) {
+		WRONG_PARAM_COUNT;
+	}
 
 	char *str = php_get_info_db();
 	RETURN_STRING(str, 1);

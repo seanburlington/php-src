@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.105 2001/08/13 06:43:44 rasmus Exp $ */
+/* $Id: php_odbc.c,v 1.106 2001/08/13 07:55:34 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -711,8 +711,9 @@ PHP_FUNCTION(odbc_close_all)
 	int i;
 	int nument;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "") == FAILURE)
-		return;	
+	if (ZEND_NUM_ARGS() != 0) {
+		WRONG_PARAM_COUNT;
+	}
 
 	nument = zend_hash_next_free_element(&EG(regular_list));
 	

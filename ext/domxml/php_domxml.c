@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.56 2001/08/13 06:43:42 rasmus Exp $ */
+/* $Id: php_domxml.c,v 1.57 2001/08/13 07:55:32 rasmus Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -2432,8 +2432,9 @@ PHP_FUNCTION(xmltree)
    Initializing XPath environment */
 PHP_FUNCTION(xpath_init)
 {
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "") == FAILURE)
-		return;
+	if (ZEND_NUM_ARGS() != 0) {
+		WRONG_PARAM_COUNT;
+	}
 
 	xmlXPathInit();
 	RETURN_TRUE;

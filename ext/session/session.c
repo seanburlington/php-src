@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.236 2001/08/13 06:43:45 rasmus Exp $ */
+/* $Id: session.c,v 1.237 2001/08/13 07:55:36 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1229,8 +1229,9 @@ PHP_FUNCTION(session_encode)
 	int len;
 	char *enc;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "") == FAILURE)
-		return;
+	if (ZEND_NUM_ARGS() != 0) {
+		WRONG_PARAM_COUNT;
+	}
 
 	enc = php_session_encode(&len TSRMLS_CC);
 	RETVAL_STRINGL(enc, len, 0);
@@ -1266,8 +1267,9 @@ PHP_FUNCTION(session_start)
    Destroy the current session and all data associated with it */
 PHP_FUNCTION(session_destroy)
 {
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "") == FAILURE)
-		return;
+	if (ZEND_NUM_ARGS() != 0) {
+		WRONG_PARAM_COUNT;
+	}
 
 	if (php_session_destroy(TSRMLS_C) == SUCCESS) {
 		RETURN_TRUE;

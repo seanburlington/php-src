@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.67 2001/08/13 06:43:43 rasmus Exp $ */
+/* $Id: interbase.c,v 1.68 2001/08/13 07:55:33 rasmus Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -236,8 +236,9 @@ typedef struct {
    Return error message */
 PHP_FUNCTION(ibase_errmsg)
 {
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "") == FAILURE)
-		return;
+	if (ZEND_NUM_ARGS() != 0) {
+		WRONG_PARAM_COUNT;
+	}
 
 	if (IBG(errmsg[0])) {
 		RETURN_STRING(IBG(errmsg), 1);
@@ -580,7 +581,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.67 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.68 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.252 2003/03/05 16:08:01 iliaa Exp $ */
+/* $Id: gd.c,v 1.253 2003/03/12 04:15:26 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1639,7 +1639,7 @@ static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char
 		}
 	}
 
-	if ((argc == 2) || (argc == 3 && Z_STRLEN_PP(file))) {
+	if ((argc == 2) || (argc > 2 && Z_STRLEN_PP(file))) {
 		if (!fn || fn == empty_string || php_check_open_basedir(fn TSRMLS_CC)) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid filename '%s'", fn);
 			RETURN_FALSE;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.50 2002/03/16 16:52:24 wez Exp $ */
+/* $Id: file.h,v 1.51 2002/03/18 18:54:27 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -100,7 +100,7 @@ typedef struct _php_meta_tags_data {
   int in_meta;
 } php_meta_tags_data;
 
-php_meta_tags_token php_next_meta_token(php_meta_tags_data *);
+php_meta_tags_token php_next_meta_token(php_meta_tags_data * TSRMLS_DC);
 
 typedef struct {
   int fgetss_state;

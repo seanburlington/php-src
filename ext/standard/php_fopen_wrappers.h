@@ -18,13 +18,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_fopen_wrappers.h,v 1.9 2002/03/17 22:50:57 wez Exp $ */
+/* $Id: php_fopen_wrappers.h,v 1.10 2002/03/18 18:54:28 wez Exp $ */
 
 #ifndef PHP_FOPEN_WRAPPERS_H
 #define PHP_FOPEN_WRAPPERS_H
 
-php_stream *php_stream_url_wrap_http(char *path, char *mode, int options, char **opened_path STREAMS_DC);
-php_stream *php_stream_url_wrap_ftp(char *path, char *mode, int options, char **opened_path STREAMS_DC);
+php_stream *php_stream_url_wrap_http(char *path, char *mode, int options, char **opened_path STREAMS_DC TSRMLS_DC);
+php_stream *php_stream_url_wrap_ftp(char *path, char *mode, int options, char **opened_path STREAMS_DC TSRMLS_DC);
 php_stream_wrapper php_stream_http_wrapper;
 php_stream_wrapper php_stream_ftp_wrapper;
 php_stream_wrapper php_stream_php_wrapper;

@@ -17,7 +17,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mailparse.c,v 1.22 2002/03/17 22:50:55 wez Exp $ */
+/* $Id: mailparse.c,v 1.23 2002/03/18 18:54:25 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -153,6 +153,7 @@ static void mailparse_rfc822t_errfunc(const char * msg, int num)
 static void mailparse_do_uudecode(php_stream * instream, php_stream * outstream)
 {
 	int A, B, C, D, n;
+	TSRMLS_FETCH();
 
 	while(!php_stream_eof(instream))	{
 		UU_NEXT(n);
@@ -375,10 +376,13 @@ PHP_FUNCTION(mailparse_determine_best_xfer_encoding)
 static int mailparse_stream_output(int c, void *stream)
 {
 	char buf = c;
+	TSRMLS_FETCH();
+
 	return php_stream_write((php_stream*)stream, &buf, 1);
 }
 static int mailparse_stream_flush(void *stream)
 {
+	TSRMLS_FETCH();
 	return php_stream_flush((php_stream*)stream);
 }
 

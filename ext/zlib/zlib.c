@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.113 2002/03/18 08:05:28 zeev Exp $ */
+/* $Id: zlib.c,v 1.114 2002/03/18 18:54:29 wez Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -302,7 +302,7 @@ PHP_FUNCTION(gzfile)
 	convert_to_string_ex(filename);
 
 	/* using a stream here is a bit more efficient (resource wise) than php_gzopen_wrapper */
-	stream = php_stream_gzopen(Z_STRVAL_PP(filename), "rb", use_include_path|ENFORCE_SAFE_MODE|REPORT_ERRORS, NULL STREAMS_CC);
+	stream = php_stream_gzopen(Z_STRVAL_PP(filename), "rb", use_include_path|ENFORCE_SAFE_MODE|REPORT_ERRORS, NULL STREAMS_CC TSRMLS_CC);
 	if (stream == NULL) {
 		php_error(E_WARNING,"gzFile(\"%s\") - %s",Z_STRVAL_PP(filename),strerror(errno));
 		RETURN_FALSE;

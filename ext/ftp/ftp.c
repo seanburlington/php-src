@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.47 2002/03/16 01:20:57 wez Exp $ */
+/* $Id: ftp.c,v 1.48 2002/03/18 18:54:24 wez Exp $ */
 
 #include "php.h"
 
@@ -547,6 +547,7 @@ ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type)
 	char			*ptr;
 	int			lastch;
 	int			rcvd;
+	TSRMLS_FETCH();
 
 	if (ftp == NULL)
 		return 0;
@@ -619,6 +620,7 @@ ftp_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type)
 	int			size;
 	char			*ptr;
 	int			ch;
+	TSRMLS_FETCH();
 
 	if (ftp == NULL)
 		return 0;

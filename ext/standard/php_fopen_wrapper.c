@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.29.2.3 2003/05/13 23:44:35 sas Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.29.2.4 2003/05/13 23:51:57 sas Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -124,6 +124,7 @@ php_stream_ops php_stream_input_ops = {
 php_stream * php_stream_url_wrap_php(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC)
 {
 	int fd = -1;
+	php_stream *stream = NULL;
 
 	if (!strncasecmp(path, "php://", 6))
 		path += 6;
@@ -145,9 +146,13 @@ php_stream * php_stream_url_wrap_php(php_stream_wrapper *wrapper, char *path, ch
 	}
 
 	if (fd != -1) {
-		return php_stream_fopen_from_fd(fd, mode, NULL);
+		int nfd = dup(fd);
+
+		stream = php_stream_fopen_from_fd(nfd, mode, NULL);
+
+		if (!stream) close(nfd);
 	}
-	return NULL;
+	return stream;
 }
 
 static php_stream_wrapper_ops php_stdio_wops = {

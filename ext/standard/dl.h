@@ -30,7 +30,7 @@
  */
 
 
-/* $Id: dl.h,v 1.10 2000/05/26 17:04:02 hholzgra Exp $ */
+/* $Id: dl.h,v 1.11 2000/05/27 19:27:20 hholzgra Exp $ */
 
 #ifndef _DL_H
 #define _DL_H
@@ -41,10 +41,6 @@ void php_dl(pval *file,int type,pval *return_value);
 /* dynamic loading functions */
 PHP_FUNCTION(dl);
 
-#ifdef HAVE_LIBDL
 PHP_MINFO_FUNCTION(dl);
-#else
-
-#endif
 
 #endif /* _DL_H */

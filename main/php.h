@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.97 2000/05/27 18:55:10 andi Exp $ */
+/* $Id: php.h,v 1.98 2000/05/27 19:27:19 hholzgra Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -366,11 +366,8 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #define XtOffsetOf(s_type,field) XtOffset(s_type*,field)
 #endif
 
-
-#define PHP_NOT_IN_THIS_BUILD() { \
-  php_error(E_WARNING, "%s: not supported in this PHP build",get_active_function_name()); \
-  RETURN_FALSE; \
-}
+/* warn about unavailable functions */
+#include "ext/standard/php_noavail.h"
 
 #endif
 

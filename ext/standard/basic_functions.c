@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.665 2004/05/10 07:23:38 helly Exp $ */
+/* $Id: basic_functions.c,v 1.666 2004/05/12 10:17:11 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -950,6 +950,10 @@ static void basic_globals_dtor(php_basic_globals *basic_globals_p TSRMLS_DC)
 	zend_hash_destroy(&BG(sm_protected_env_vars));
 	if (BG(sm_allowed_env_vars)) {
 		free(BG(sm_allowed_env_vars));
+	}
+	if (BG(url_adapt_state_ex).tags) {
+		zend_hash_destroy(BG(url_adapt_state_ex).tags);
+		free(BG(url_adapt_state_ex).tags);
 	}
 }
 

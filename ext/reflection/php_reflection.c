@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.90 2004/02/29 18:31:29 andi Exp $ */
+/* $Id: php_reflection.c,v 1.91 2004/03/01 15:19:38 andi Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -1612,15 +1612,19 @@ ZEND_METHOD(reflection_method, invoke)
 		object_pp = NULL;
 		obj_ce = NULL;
 	} else {
-		obj_ce = Z_OBJCE_PP(params[0]);
-		if ((Z_TYPE_PP(params[0]) != IS_OBJECT)
-			|| (!instanceof_function(obj_ce, mptr->common.scope TSRMLS_CC))) {
+		if ((Z_TYPE_PP(params[0]) != IS_OBJECT)) {
 			efree(params);
 
+			_DO_THROW("Non-object passed to Invoke()");
+			/* Returns from this function */
+		}
+		obj_ce = Z_OBJCE_PP(params[0]);
+
+		if (!instanceof_function(obj_ce, mptr->common.scope TSRMLS_CC)) {
 			_DO_THROW("Given object is not an instance of the class this method was declared in");
 			/* Returns from this function */
 		}
-		
+	
 		object_pp = params[0];
 	}
 	

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: ErrorStack.php,v 1.4 2004/05/21 03:33:19 cellog Exp $
+// $Id: ErrorStack.php,v 1.5 2004/05/21 03:43:58 cellog Exp $
 
 /**
  * Error Stack Implementation
@@ -693,7 +693,7 @@ class PEAR_ErrorStack {
                 $this->_errorsByLevel[$level][$i] = false;
             }
             // array_filter removes all entries === false
-            array_filter($this->_errors);
+            $this->_errors = array_filter($this->_errors);
             unset($this->_errorsByLevel[$level]);
             return $ret;
         }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.13 2000/09/11 03:33:14 sterling Exp $ */
+/* $Id: curl.c,v 1.14 2000/09/26 12:05:37 dbeu Exp $ */
 
 
 #include "php.h"
@@ -46,9 +46,6 @@ php_curl_globals curl_globals;
 #endif
 
 #ifdef PHP_WIN32
-static void win32_cleanup();
-static void win32_init();
-
 static void win32_cleanup()
 {
 	WSACleanup();

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.26 2001/04/06 18:01:52 sniper Exp $ */
+/* $Id: php_gd.h,v 1.27 2001/04/13 12:00:12 wez Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -95,6 +95,25 @@ PHP_FUNCTION(imagecopymerge);
 PHP_FUNCTION(imagecopyresized);
 PHP_FUNCTION(imagetypes);
 PHP_FUNCTION(imagecreate);
+
+PHP_FUNCTION(imagecreatetruecolor);
+PHP_FUNCTION(imagetruecolortopalette);
+PHP_FUNCTION(imagesetthickness);
+PHP_FUNCTION(imageellipse);
+PHP_FUNCTION(imagefilledellipse);
+PHP_FUNCTION(imagefilledarc);
+PHP_FUNCTION(imagealphablending);
+PHP_FUNCTION(imagecolorresolvealpha);
+PHP_FUNCTION(imagecolorclosestalpha);
+PHP_FUNCTION(imagecolorexactalpha);
+PHP_FUNCTION(imagecopyresampled);
+PHP_FUNCTION(imagesetthickness);
+PHP_FUNCTION(imagesettile);
+PHP_FUNCTION(imagecopymergegray);
+PHP_FUNCTION(imagesetbrush);
+PHP_FUNCTION(imagesettile);
+PHP_FUNCTION(imagesetstyle);
+
 PHP_FUNCTION(imagecreatefromstring);
 PHP_FUNCTION(imagecreatefromgif);
 PHP_FUNCTION(imagecreatefromjpeg);

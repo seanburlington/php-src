@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.66.2.9 2003/11/08 14:39:14 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.66.2.10 2003/11/12 07:52:56 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -2247,7 +2247,6 @@ DLEXPORT PHP_FUNCTION(udm_get_res_param)
 				    } else if (Res->WWList.Word[i].origin == UDM_WORD_ORIGIN_QUERY) {
 					sprintf(UDM_STREND(wordinfo),"%s%s : %d / %d", (*wordinfo) ? ", " : "", Res->WWList.Word[i].word, Res->WWList.Word[i].count, ccount);
 				    } else continue;
-				    sprintf(UDM_STREND(wordinfo)," / %d", ccount);
 				}
 				RETURN_STRING(wordinfo,1);
 			    }

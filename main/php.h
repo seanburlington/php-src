@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.214 2005/03/08 21:42:10 sniper Exp $ */
+/* $Id: php.h,v 1.215 2005/03/16 22:00:03 rasmus Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -397,7 +397,7 @@ END_EXTERN_C()
 
 
 /* Virtual current working directory support */
-#include "tsrm_virtual_cwd.h"
+#include "../TSRM/tsrm_virtual_cwd.h"
 
 #include "zend_constants.h"
 

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.21 2000/06/18 20:09:17 andi Exp $ */
+/* $Id: image.c,v 1.22 2000/07/01 12:23:09 andi Exp $ */
 /* 
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -405,7 +405,7 @@ PHP_FUNCTION(getimagesize)
 	if (result) {
 		if (array_init(return_value) == FAILURE) {
 			php_error(E_ERROR, "Unable to initialize array");
-			if (result) efree(result);
+			efree(result);
 			return;
 		}
 		add_index_long(return_value, 0, result->width);
@@ -420,7 +420,6 @@ PHP_FUNCTION(getimagesize)
 		if (result->channels != 0) {
 			add_assoc_long(return_value,"channels",result->channels);
 		} 
-		
 		efree(result);
 	}
 }

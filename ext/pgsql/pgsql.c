@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.242 2002/10/24 19:05:29 helly Exp $ */
+/* $Id: pgsql.c,v 1.243 2002/11/05 14:28:32 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -1564,8 +1564,10 @@ PHP_FUNCTION(pg_last_oid)
 	zval **result;
 	PGresult *pgsql_result;
 	pgsql_result_handle *pg_result;
+#ifdef HAVE_PQOIDVALUE
 	Oid oid;
-	
+#endif
+
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &result)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}

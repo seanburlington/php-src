@@ -1,11 +1,16 @@
-dnl $Id: config.m4,v 1.3 2001/03/27 20:34:40 sniper Exp $
+dnl $Id: config.m4,v 1.4 2001/05/17 00:26:12 vlad Exp $
 
 PHP_ARG_WITH(pspell,whether to include pspell support,
 [  --with-pspell[=DIR]     Include PSPELL support.])
 
 if test "$PHP_PSPELL" != "no"; then
 	PHP_EXTENSION(pspell, $ext_shared)
-	for i in /usr/local /usr $PHP_PSPELL; do
+	if test "$PHP_PSPELL" != "yes"; then
+	    PSPELL_SEARCH_DIRS=$PHP_PSPELL
+	else
+	    PSPELL_SEARCH_DIRS="/usr/local /usr"
+	fi
+	for i in $PSPELL_SEARCH_DIRS; do
 		if test -f $i/include/pspell/pspell.h; then
 			PSPELL_DIR=$i
 			PSPELL_INCDIR=$i/include/pspell

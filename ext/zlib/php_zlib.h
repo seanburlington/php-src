@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.40 2004/01/08 17:33:03 sniper Exp $ */
+/* $Id: php_zlib.h,v 1.41 2004/07/17 00:05:30 pollita Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -35,6 +35,7 @@ ZEND_BEGIN_MODULE_GLOBALS(zlib)
 	char *output_handler;
 ZEND_END_MODULE_GLOBALS(zlib)
 
+extern php_stream_filter_factory php_zlib_filter_factory;
 extern zend_module_entry php_zlib_module_entry;
 #define zlib_module_ptr &php_zlib_module_entry
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.77 2000/10/30 17:10:05 stas Exp $ */
+/* $Id: var.c,v 1.78 2000/11/06 18:09:51 stas Exp $ */
 
 
 /* {{{ includes 
@@ -178,7 +178,7 @@ void php_var_serialize(pval *buf, pval **struc, HashTable *var_hash)
 	HashTable *myht;
 	BLS_FETCH();
 
-	if(var_hash != NULL && php_add_var_hash(var_hash,*struc,(void *)&var_already) == FAILURE) {
+	if(var_hash != NULL && (*struc)->is_ref && php_add_var_hash(var_hash,*struc,(void *)&var_already) == FAILURE) {
 		slen = sprintf(s,"R:%ld;",*var_already);
 		STR_CAT(buf, s, slen);
 		return;

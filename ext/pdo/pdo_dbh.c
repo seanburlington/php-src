@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.64 2005/02/26 17:27:51 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.65 2005/02/28 13:30:50 jorton Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -889,7 +889,7 @@ static PHP_METHOD(PDO, quote)
 	int str_len;
 	long paramtype = PDO_PARAM_STR;
 	char *qstr;
-	size_t qlen;
+	int qlen;
 
 	if (FAILURE == zend_parse_parameters(1 TSRMLS_CC, "s|l", &str, &str_len,
 			&paramtype)) {

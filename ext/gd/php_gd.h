@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.40 2002/06/28 12:25:57 sniper Exp $ */
+/* $Id: php_gd.h,v 1.41 2002/06/28 12:35:30 sniper Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -59,9 +59,6 @@ PHP_MINFO_FUNCTION(gd);
 PHP_MINIT_FUNCTION(gd);
 PHP_MSHUTDOWN_FUNCTION(gd);
 
-#ifndef HAVE_GDIMAGECOLORRESOLVE
-extern int gdImageColorResolve(gdImagePtr, int, int, int);
-#endif
 PHP_FUNCTION(imagearc);
 PHP_FUNCTION(imagechar);
 PHP_FUNCTION(imagecharup);
@@ -159,11 +156,6 @@ PHP_FUNCTION(png2wbmp);
 PHP_FUNCTION(image2wbmp);
 
 PHP_GD_API int phpi_get_le_gd(void);
-
-/* This is missing from gd.h */
-#if HAVE_COLORCLOSESTHWB
-int gdImageColorClosestHWB(gdImagePtr im, int r, int g, int b);
-#endif
 
 #else
 

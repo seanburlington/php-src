@@ -1,5 +1,5 @@
 <?php
-/* $Id: setini.php,v 1.1 2003/02/05 07:32:22 wez Exp $
+/* $Id: setini.php,v 1.2 2003/02/10 00:20:53 wez Exp $
  * Wez Furlong <wez@thebrainroom.com>
  *
  * Set options in a php.ini file.
@@ -8,6 +8,8 @@
  * $argv[1] is the path to the ini file
  * $argv[2] is the path to the option file
  */
+
+echo "Running post-installation script to configure php.ini\n";
 
 $ini_name = $argv[1];
 $option_file = $argv[2];
@@ -20,9 +22,9 @@ foreach ($options as $line) {
 	list($name, $value) = explode("=", $line);
 
 	if ($name == "extension") {
-		$pat = "/^;?extension\s*=\s*" . $value . "/i";
+		$pat = "/^;?extension\s*=\s*" . preg_quote($value, '/') . "/i";
 	} else {
-		$pat = "/^;?$name\s*=\s*/i";
+		$pat = "/^;?" . preg_quote($name, '/') . "\s*=\s*/i";
 	}
 
 	$opts[] = array('pat' => $pat, 'name' => $name, 'value' => $value);
@@ -32,6 +34,9 @@ $new_name = $ini_name . "~";
 $dest = fopen($new_name, "w");
 
 if (!$dest) {
+	echo "Could not create temporary file! $new_name\n";
+	flush();
+	sleep(10);
  	die("Cannot create temporary file!");
 }
 
@@ -43,10 +48,7 @@ foreach ($lines as $line) {
 		extract($optdata);
 		
 		if (preg_match($pat, $line)) {
-			echo "Found: $line\n";
 			$line = "$name=$value\r\n";
-			echo" New value: $line\n";
-
 			// No need to match again
 			unset($opts[$k]);
 			break;
@@ -60,5 +62,7 @@ fclose($dest);
 
 unlink($ini_name);
 rename($new_name, $ini_name);
+
+echo "All done!\n";
 
 ?>

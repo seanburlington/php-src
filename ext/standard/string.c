@@ -18,13 +18,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.299 2002/09/25 19:06:29 andrey Exp $ */
+/* $Id: string.c,v 1.300 2002/09/26 19:18:35 sebastian Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
 #include <stdio.h>
 #include "php.h"
 #include "reg.h"
+#include "php_rand.h"
 #include "php_string.h"
 #include "php_variables.h"
 #ifdef HAVE_LOCALE_H

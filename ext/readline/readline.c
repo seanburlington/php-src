@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.10 2000/03/06 18:41:15 ssb Exp $ */
+/* $Id: readline.c,v 1.11 2000/05/02 04:26:48 sas Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -68,6 +68,10 @@ zend_module_entry readline_module_entry = {
 	NULL, 
 	STANDARD_MODULE_PROPERTIES
 };
+
+#ifdef COMPILE_DL_READLINE
+ZEND_GET_MODULE(readline)
+#endif
 
 PHP_MINIT_FUNCTION(readline)
 {

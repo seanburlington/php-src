@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_firebird_int.h,v 1.2 2004/06/12 03:09:47 abies Exp $ */
+/* $Id: php_pdo_firebird_int.h,v 1.3 2004/06/12 16:07:52 abies Exp $ */
 
 #ifndef PHP_PDO_FIREBIRD_INT_H
 #define PHP_PDO_FIREBIRD_INT_H
@@ -32,6 +32,19 @@
 #define PDO_FB_DIALECT 3
 
 #define SHORT_MAX (1 << 8*sizeof(short)-1)
+
+#if SIZEOF_LONG == 8
+# define LL_MASK l
+# define LL_LIT(lit) lit ## L
+#else
+# ifdef PHP_WIN32
+#  define LL_MASK "I64"
+#  define LL_LIT(lit) lit ## I64
+# else
+#  define LL_MASK "ll"
+#  define LL_LIT(lit) lit ## LL
+# endif
+#endif
 
 /* Firebird API has a couple of missing const decls in its API */
 #define const_cast(s) ((char*)(s))
@@ -61,10 +74,16 @@ typedef struct {
 	/* the name of the cursor (if it has one) */
 	char name[32];
 	
+	/* the type of statement that was issued */
+	char statement_type;
+	
 	/* whether EOF was reached for this statement */
 	unsigned exhausted:1;
 
-	unsigned _reserved:31;
+	unsigned _reserved:23;
+	
+	/* allocated space to convert fields values to other types */
+	char **fetch_buf;
 	
 	/* the input SQLDA */
 	XSQLDA *in_sqlda;

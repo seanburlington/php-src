@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_extension.c,v 1.14 2004/05/09 15:21:29 wez Exp $ */
+/* $Id: com_extension.c,v 1.15 2004/07/27 22:17:40 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -194,7 +194,7 @@ PHP_MINIT_FUNCTION(com_dotnet)
 	INIT_CLASS_ENTRY(ce, "com_exception", NULL);
 	php_com_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(), NULL TSRMLS_CC);
 	php_com_exception_class_entry->ce_flags |= ZEND_ACC_FINAL;
-	php_com_exception_class_entry->constructor->common.fn_flags |= ZEND_ACC_PROTECTED;
+//	php_com_exception_class_entry->constructor->common.fn_flags |= ZEND_ACC_PROTECTED;
 
 	INIT_CLASS_ENTRY(ce, "com_safearray_proxy", NULL);
 	php_com_saproxy_class_entry = zend_register_internal_class(&ce TSRMLS_CC);

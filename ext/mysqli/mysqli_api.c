@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.23 2003/04/11 04:29:28 hholzgra Exp $ 
+  $Id: mysqli_api.c,v 1.24 2003/04/11 04:30:29 hholzgra Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1395,7 +1395,7 @@ PHP_FUNCTION(mysqli_read_query_result)
 }
 /* }}} */
 
-/* {{{ proto bool mysqli_real_connect(resource link [,string hostname [,string username [,string passwd [,string dbname [,int port [,string socket]]]]]])
+/* {{{ proto bool mysqli_real_connect(resource link [,string hostname [,string username [,string passwd [,string dbname [,int port [,string socket [,int flags]]]]]]])
    open a connection to a mysql server */ 
 PHP_FUNCTION(mysqli_real_connect)
 {

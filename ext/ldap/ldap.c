@@ -23,7 +23,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.61 2000/08/26 16:20:37 venaas Exp $ */
+/* $Id: ldap.c,v 1.62 2000/08/31 16:14:35 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -201,7 +201,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.61 2000/08/26 16:20:37 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.62 2000/08/31 16:14:35 venaas Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 #ifdef LDAP_API_VERSION
 	snprintf(ldapapiversion, 31, "%ld", LDAP_API_VERSION);
@@ -499,9 +499,7 @@ PHP_FUNCTION(ldap_bind)
 	if (ldap == NULL) RETURN_FALSE;
 
 	if (ldap_bind_s(ldap, ldap_bind_rdn, ldap_bind_pw, LDAP_AUTH_SIMPLE) != LDAP_SUCCESS) {
-#if !HAVE_NSLDAP
 		php_error(E_WARNING,"LDAP:  Unable to bind to server: %s",ldap_err2string(_get_lderrno(ldap)));
-#endif
 		RETURN_FALSE;
 	} else {
 		RETURN_TRUE;
@@ -649,9 +647,7 @@ static void php_ldap_do_search(INTERNAL_FUNCTION_PARAMETERS, int scope)
 	}
 
 	if (errno != LDAP_SUCCESS && errno != LDAP_SIZELIMIT_EXCEEDED) {
-#if !HAVE_NSLDAP
 		php_error(E_WARNING,"LDAP: Unable to perform the search: %s",ldap_err2string(_get_lderrno(ldap)));
-#endif
 		RETVAL_FALSE; 
 	} else {
 		if (errno == LDAP_SIZELIMIT_EXCEEDED)  {
@@ -1023,9 +1019,7 @@ PHP_FUNCTION(ldap_get_values)
 	attribute = (*attr)->value.str.val;
 
 	if ((ldap_value = ldap_get_values(ldap, ldap_result_entry, attribute)) == NULL) {
-#if !HAVE_NSLDAP
 		php_error(E_WARNING, "LDAP: Cannot get the value(s) of attribute %s", ldap_err2string(_get_lderrno(ldap)));
-#endif
 		RETURN_FALSE;
 	}
 

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.34 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: image.c,v 1.35 2001/07/30 05:36:14 zeev Exp $ */
 /*
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -422,11 +422,6 @@ PHP_FUNCTION(getimagesize)
 		if (zend_get_parameters_ex(2, &arg1, &info) == FAILURE) {
 			WRONG_PARAM_COUNT;
 		}
-		if (!ParameterPassedByReference(ht, 2)) {
-			php_error(E_WARNING, "Array to be filled with values must be passed by reference.");
-			RETURN_FALSE;
-		}
-
 		zval_dtor(*info);
 
 		if (array_init(*info) == FAILURE) {

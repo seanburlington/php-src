@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.30 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: dns.c,v 1.31 2001/07/30 05:36:14 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -256,18 +256,10 @@ PHP_FUNCTION(getmxrr)
 		if (zend_get_parameters(ht, 2, &host, &mx_list) == FAILURE) {
 			WRONG_PARAM_COUNT;
 		}
-		if (!ParameterPassedByReference(ht, 2)) {
-			php_error(E_WARNING, "Array to be filled with values must be passed by reference.");
-			RETURN_FALSE;
-		}
         break;
     case 3:
 		if (zend_get_parameters(ht, 3, &host, &mx_list, &weight_list) == FAILURE) {
 			WRONG_PARAM_COUNT;
-		}
-		if (!ParameterPassedByReference(ht, 2) || !ParameterPassedByReference(ht, 3)) {
-			php_error(E_WARNING, "Array to be filled with values must be passed by reference.");
-			RETURN_FALSE;
 		}
         need_weight = 1;
 		pval_destructor(weight_list); /* start with clean array */

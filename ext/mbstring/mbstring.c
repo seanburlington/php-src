@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.24 2001/07/29 22:15:40 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.25 2001/07/30 05:36:13 zeev Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -2321,11 +2321,6 @@ detect_end:
 			n = 2;
 			while (n < argc || stack_level > 0) {
 				if (stack_level <= 0) {
-					if (!ParameterPassedByReference(ht, n + 1)) {
-						n++;
-						php_error(E_WARNING, "argument %d not passed by reference", n);
-						continue;
-					}
 					var = args[n++];
 					if (Z_TYPE_PP(var) == IS_ARRAY || Z_TYPE_PP(var) == IS_OBJECT) {
 						target_hash = HASH_OF(*var);

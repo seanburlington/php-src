@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.45 2001/07/28 11:36:18 zeev Exp $ */
+/* $Id: ereg.c,v 1.46 2001/07/30 05:36:15 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -193,10 +193,6 @@ static void php_ereg(INTERNAL_FUNCTION_PARAMETERS, int icase)
 	case 3:
 		if (zend_get_parameters_ex(3, &regex, &findin, &array) == FAILURE) {
 			WRONG_PARAM_COUNT;
-		}
-		if (!ParameterPassedByReference(ht, 3)) {
-			php_error(E_WARNING, "Array to be filled with values must be passed by reference.");
-			RETURN_FALSE;
 		}
 		break;
 	default:

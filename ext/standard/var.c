@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.39 1999/12/18 22:35:28 zeev Exp $ */
+/* $Id: var.c,v 1.40 1999/12/21 17:14:31 andrei Exp $ */
 
 
 /* {{{ includes 
@@ -421,7 +421,7 @@ int php_var_unserialize(pval **rval, const char **p, const char *max)
 			i = atoi(*p);
 
 			if (cur == 'a') { /* object_init_ex will init the HashTable for objects! */
-				zend_hash_init(myht, i + 1, NULL, PVAL_PTR_DTOR, 0);
+				zend_hash_init(myht, i + 1, NULL, ZVAL_PTR_DTOR, 0);
 			}
 
 			while (**p && **p != ':') {

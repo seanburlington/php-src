@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.20 2003/08/03 11:23:25 thetaphi Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.21 2003/08/06 22:34:20 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -473,6 +473,15 @@ static int php_handler(request_rec *r)
 		return DECLINED;
 	}
 
+	if (r->finfo.filetype == 0) {
+		php_apache_sapi_log_message("script not found or unable to stat");
+		return HTTP_NOT_FOUND;
+	}
+	if (r->finfo.filetype == APR_DIR) {
+		php_apache_sapi_log_message("attempt to invoke directory as script");
+		return HTTP_FORBIDDEN;
+	}
+
 	/* Setup the CGI variables if this is the main request */
 	if (r->main == NULL || 
 		/* .. or if the sub-request envinronment differs from the main-request. */ 
@@ -501,15 +510,6 @@ static int php_handler(request_rec *r)
 		parent_req = ctx->r;
 		ctx->r = r;
 		brigade = ctx->brigade;
-	}
-
-	if (r->finfo.filetype == 0) {
-		php_apache_sapi_log_message("script not found or unable to stat");
-		return HTTP_NOT_FOUND;
-	}
-	if (r->finfo.filetype == APR_DIR) {
-		php_apache_sapi_log_message("attempt to invoke directory as script");
-		return HTTP_FORBIDDEN;
 	}
 
 	if (AP2(last_modified)) {

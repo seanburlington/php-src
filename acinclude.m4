@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.271.2.6 2004/12/21 15:42:04 edink Exp $ -*- autoconf -*-
+dnl $Id: acinclude.m4,v 1.271.2.7 2004/12/30 07:04:09 sniper Exp $ -*- autoconf -*-
 dnl
 dnl This file contains local autoconf functions.
 
@@ -16,7 +16,7 @@ AC_DEFUN([PHP_ADD_MAKEFILE_FRAGMENT],[
   sed -e "s#\$(srcdir)#$ac_srcdir#g" -e "s#\$(builddir)#$ac_builddir#g" $src  >> Makefile.fragments
 ])
 
-AC_DEFUN(PHP_PROG_RE2C,[
+AC_DEFUN([PHP_PROG_RE2C],[
   AC_CHECK_PROG(RE2C, re2c, re2c, [exit 0;])
 ])
 
@@ -1912,7 +1912,7 @@ dnl
 dnl PHP_TEST_BUILD(function, action-if-ok, action-if-not-ok [, extra-libs [, extra-source]])
 dnl This macro checks whether build works and given function exists.
 dnl
-AC_DEFUN(PHP_TEST_BUILD, [
+AC_DEFUN([PHP_TEST_BUILD], [
   old_LIBS=$LIBS
   LIBS="$4 $LIBS"
   AC_TRY_RUN([

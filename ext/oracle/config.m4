@@ -1,8 +1,8 @@
 dnl
-dnl $Id: config.m4,v 1.30 2003/10/03 05:24:26 sniper Exp $
+dnl $Id: config.m4,v 1.30.2.1 2004/12/30 07:04:11 sniper Exp $
 dnl
 
-AC_DEFUN(AC_ORACLE_VERSION,[
+AC_DEFUN([AC_ORACLE_VERSION],[
   AC_MSG_CHECKING([Oracle version])
   if test -s "$ORACLE_DIR/orainst/unix.rgs"; then
   	ORACLE_VERSION=`grep '"ocommon"' $ORACLE_DIR/orainst/unix.rgs | sed 's/[ ][ ]*/:/g' | cut -d: -f 6 | cut -c 2-4`

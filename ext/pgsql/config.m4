@@ -1,8 +1,8 @@
 dnl
-dnl $Id: config.m4,v 1.37 2004/01/09 18:44:33 helly Exp $
+dnl $Id: config.m4,v 1.37.2.1 2004/12/30 07:04:11 sniper Exp $
 dnl
 
-AC_DEFUN(PHP_PGSQL_CHECK_FUNCTIONS,[
+AC_DEFUN([PHP_PGSQL_CHECK_FUNCTIONS],[
 ])
 
 PHP_ARG_WITH(pgsql,for PostgreSQL support,

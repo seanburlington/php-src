@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.108 2004/01/17 15:56:29 helly Exp $ */
+/* $Id: simplexml.c,v 1.109 2004/01/17 16:36:04 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1216,7 +1216,7 @@ sxe_object_new(zend_class_entry *ce TSRMLS_DC)
 }
 /* }}} */
 
-/* {{{ proto simplemxml_element simplexml_load_file(string filename)
+/* {{{ proto simplemxml_element simplexml_load_file(string filename [, string class_name])
    Load a filename and return a simplexml_element object to allow for processing */
 PHP_FUNCTION(simplexml_load_file)
 {
@@ -1257,7 +1257,7 @@ PHP_FUNCTION(simplexml_load_file)
 }
 /* }}} */
 
-/* {{{ proto simplemxml_element simplexml_load_string(string data)
+/* {{{ proto simplemxml_element simplexml_load_string(string data [, string class_name])
    Load a string and return a simplexml_element object to allow for processing */
 PHP_FUNCTION(simplexml_load_string)
 {
@@ -1269,7 +1269,7 @@ PHP_FUNCTION(simplexml_load_string)
 	int             classname_len = 0;
 	zend_class_entry *ce= sxe_class_entry;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &data, &data_len, &classname, &classname_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|s", &data, &data_len, &classname, &classname_len) == FAILURE) {
 		return;
 	}
 
@@ -1439,7 +1439,7 @@ static void php_sxe_iterator_rewind(zend_object_iterator *iter TSRMLS_DC)
 }
 
 
-/* {{{ proto simplemxml_element simplexml_import_dom(domNode node)
+/* {{{ proto simplemxml_element simplexml_import_dom(domNode node [, string class_name])
    Get a simplexml_element object from dom to allow for processing */
 PHP_FUNCTION(simplexml_import_dom)
 {
@@ -1565,7 +1565,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.108 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.109 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

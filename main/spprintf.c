@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.19 2003/09/14 09:50:36 helly Exp $ */
+/* $Id: spprintf.c,v 1.20 2003/09/29 01:07:55 iliaa Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -569,6 +569,22 @@ static void xbuf_format_converter(smart_str *xbuf, const char *fmt, va_list ap)
 						default:
 							goto fmt_error;
 					}
+
+					if (zend_isnan(fp_num)) {
+ 						s = "NAN";
+ 						s_len = 3;
+ 						break;
+ 					} else if (zend_isinf(fp_num)) {
+ 						if (fp_num > 0) {
+ 							s = "INF";
+ 							s_len = 3;
+ 						} else {
+ 							s = "-INF";
+ 							s_len = 4;
+ 						}
+ 						break;
+ 					}
+
 					if (adjust_precision == NO)
 						precision = FLOAT_DIGITS;
 					else if (precision == 0)

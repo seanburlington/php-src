@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_string.h,v 1.3 1999/12/11 19:51:04 andrei Exp $ */
+/* $Id: php_string.h,v 1.4 1999/12/13 23:40:36 andrei Exp $ */
 
 /* Synced with php3 revision 1.43 1999-06-16 [ssb] */
 
@@ -102,6 +102,8 @@ extern PHPAPI void php_char_to_str(char *str, uint len, char from, char *to, int
 
 extern PHPAPI void php_implode(pval *delim, pval *arr, pval *return_value);
 extern PHPAPI void php_explode(pval *delim, pval *str, pval *return_value);
-PHPAPI inline char *php_memnstr(char *haystack, char *needle, int needle_len, char *end);
+extern PHPAPI inline char *php_memnstr(char *haystack, char *needle, int needle_len, char *end);
+extern PHPAPI size_t php_strspn(char *s1, char *s2, char *s1_end, char *s2_end); 
+extern PHPAPI size_t php_strcspn(char *s1, char *s2, char *s1_end, char *s2_end); 
 
 #endif /* _PHPSTRING_H */

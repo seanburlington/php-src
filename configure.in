@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.31 1999/11/13 13:27:48 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.32 1999/11/13 16:51:30 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -629,7 +629,7 @@ if test "$enable_debug" != "yes"; then
   AM_SET_LIBTOOL_VARIABLE([--silent])
 fi
 
-PHP_HSREGEX
+PHP_REGEX
 
 dnl If we are using gcc and the user has not specified CFLAGS, add -O2.
 test -n "$auto_cflags" && test -n "$GCC" && CFLAGS="$CFLAGS -O2"

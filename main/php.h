@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.42 1999/11/08 09:18:57 ssb Exp $ */
+/* $Id: php.h,v 1.43 1999/11/13 16:51:30 sas Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -201,6 +201,10 @@ extern char *strerror(int);
 #include "http_log.h"
 #define BLOCK_INTERRUPTIONS block_alarms
 #define UNBLOCK_INTERRUPTIONS unblock_alarms
+#endif
+
+#if REGEX == 1 || REGEX == 0
+#include "regex/regex_extra.h"
 #endif
 
 #if HAVE_PWD_H

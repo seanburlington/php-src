@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.22 1999/10/30 14:22:09 rasmus Exp $ */
+/* $Id: reg.c,v 1.23 1999/11/13 16:51:31 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -92,7 +92,9 @@ static int _free_reg_cache(reg_cache *rc)
 	return 1;
 }
 
+#undef regfree
 #define regfree(a);
+#undef regcomp
 #define regcomp(a,b,c) _php_regcomp(a,b,c)
 	
 static void php_reg_init_globals(php_reg_globals *reg_globals) 

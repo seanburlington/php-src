@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dns.h,v 1.7 2001/02/26 06:07:17 andi Exp $ */
+/* $Id: dns.h,v 1.8 2001/03/11 03:49:21 sniper Exp $ */
 
 #ifndef DNS_H
 #define DNS_H
@@ -25,7 +25,7 @@
 PHP_FUNCTION(gethostbyaddr);
 PHP_FUNCTION(gethostbyname);
 PHP_FUNCTION(gethostbynamel);
-#if !defined(PHP_WIN32)||(HAVE_BINDLIB)
+#if !defined(PHP_WIN32)||(HAVE_LIBBIND)
 PHP_FUNCTION(checkdnsrr);
 PHP_FUNCTION(getmxrr);
 #endif

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.24 2000/01/01 01:31:49 sas Exp $ */
+/* $Id: dir.c,v 1.25 2000/02/10 21:53:55 andi Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -36,7 +36,7 @@
 
 #include <errno.h>
 
-#if WIN32||WINNT
+#if PHP_WIN32
 #define NEEDRDH 1
 #include "win32/readdir.h"
 #endif

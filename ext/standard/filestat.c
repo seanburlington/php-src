@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.21 2000/01/01 01:31:52 sas Exp $ */
+/* $Id: filestat.c,v 1.22 2000/02/10 21:53:56 andi Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -46,7 +46,7 @@
 #endif
 
 #if HAVE_PWD_H
-# if MSVC5
+# if PHP_WIN32
 #  include "win32/pwd.h"
 # else
 #  include <pwd.h>
@@ -54,7 +54,7 @@
 #endif
 
 #if HAVE_GRP_H
-# if MSVC5
+# if PHP_WIN32
 #  include "win32/grp.h"
 # else
 #  include <grp.h>
@@ -62,7 +62,7 @@
 #endif
 
 #if HAVE_UTIME
-# if MSVC5
+# if PHP_WIN32
 #  include <sys/utime.h>
 # else
 #  include <utime.h>

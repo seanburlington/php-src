@@ -15,7 +15,7 @@
    | Authors: Chris Schneider <cschneid@relog.ch>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.14 2000/01/01 01:31:52 sas Exp $ */
+/* $Id: pack.c,v 1.15 2000/02/10 21:53:56 andi Exp $ */
 
 #include "php.h"
 
@@ -25,7 +25,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#if MSVC5
+#if PHP_WIN32
 #include <windows.h>
 #include <winsock.h>
 #define O_RDONLY _O_RDONLY
@@ -38,7 +38,7 @@
 #include "php_string.h"
 #include "pack.h"
 #if HAVE_PWD_H
-#if MSVC5
+#if PHP_WIN32
 #include "win32/pwd.h"
 #else
 #include <pwd.h>

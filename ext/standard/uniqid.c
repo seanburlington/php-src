@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.15 2000/01/01 01:31:53 sas Exp $ */
+/* $Id: uniqid.c,v 1.16 2000/02/10 21:53:56 andi Exp $ */
 
 #include "php.h"
 
@@ -29,7 +29,7 @@
 #include <errno.h>
 
 #include <stdio.h>
-#if MSVC5
+#if PHP_WIN32
 #include "win32/time.h"
 #else
 #include <sys/time.h>
@@ -64,7 +64,7 @@ PHP_FUNCTION(uniqid)
 		php_error(E_WARNING, "The prefix to uniqid should not be more than 114 characters.");
 		return;
 	}
-#if HAVE_USLEEP && !(WIN32|WINNT)
+#if HAVE_USLEEP && !(PHP_WIN32)
 	if (!MORE_ENTROPY) {
 		usleep(1);
 	}

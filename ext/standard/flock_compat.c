@@ -15,7 +15,7 @@
    | Authors: Sascha Schumann <sas@schell.de>                             |
    +----------------------------------------------------------------------+
 
-   $Id: flock_compat.c,v 1.4 2000/01/01 01:31:52 sas Exp $
+   $Id: flock_compat.c,v 1.5 2000/02/10 21:53:56 andi Exp $
  */
 
 
@@ -28,7 +28,7 @@
 #include <fcntl.h>
 #endif
 
-#if WIN32|WINNT
+#if PHP_WIN32
 #include <windows.h>
 #include <io.h>
 #endif
@@ -64,7 +64,7 @@ int flock(int fd, int operation)
 
 	return ret;
 }
-#elif WIN32|WINNT
+#elif PHP_WIN32
 /*
  * Program:   Unix compatibility routines
  *
@@ -138,7 +138,7 @@ int flock(int fd, int operation)
 	/* Under Win32 MT library, errno is not a variable but a function call,
 	 * which cannot be assigned to.
 	 */
-#if !(WIN32|WINNT)
+#if !(PHP_WIN32)
     errno = EINVAL;             /* bad call */
 #endif
     return -1;

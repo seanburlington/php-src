@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.13 2000/02/05 15:16:11 zeev Exp $ */
+/* $Id: syslog.c,v 1.14 2000/02/10 21:53:56 andi Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -26,7 +26,7 @@
 #if HAVE_UNISTD_H
 #include <unistd.h>
 #endif
-#if MSVC5
+#if PHP_WIN32
 #include "win32/syslog.h"
 #else
 #include <syslog.h>
@@ -77,7 +77,7 @@ PHP_MINIT_FUNCTION(syslog)
 	/* AIX doesn't have LOG_AUTHPRIV */
 	REGISTER_LONG_CONSTANT("LOG_AUTHPRIV", LOG_AUTHPRIV, CONST_CS | CONST_PERSISTENT);
 #endif
-#ifndef MSVC5
+#if !PHP_WIN32
 	REGISTER_LONG_CONSTANT("LOG_LOCAL0", LOG_LOCAL0, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("LOG_LOCAL1", LOG_LOCAL1, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("LOG_LOCAL2", LOG_LOCAL2, CONST_CS | CONST_PERSISTENT);
@@ -160,7 +160,7 @@ static void start_syslog(void)
 	/* AIX doesn't have LOG_AUTHPRIV */
 	SET_VAR_LONG("LOG_AUTHPRIV", LOG_AUTHPRIV);
 #endif
-#ifndef MSVC5
+#if !PHP_WIN32
 	SET_VAR_LONG("LOG_LOCAL0", LOG_LOCAL0);
 	SET_VAR_LONG("LOG_LOCAL1", LOG_LOCAL1);
 	SET_VAR_LONG("LOG_LOCAL2", LOG_LOCAL2);

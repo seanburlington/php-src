@@ -15,7 +15,7 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: pageinfo.c,v 1.14 2000/02/10 18:19:03 zeev Exp $ */
+/* $Id: pageinfo.c,v 1.15 2000/02/10 21:53:56 andi Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"
@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #if HAVE_PWD_H
-#if MSVC5
+#if PHP_WIN32
 #include "win32/pwd.h"
 #else
 #include <pwd.h>
@@ -34,7 +34,7 @@
 #include <unistd.h>
 #endif
 #include <sys/stat.h>
-#if MSVC5
+#if PHP_WIN32
 #include <process.h>
 #endif
 

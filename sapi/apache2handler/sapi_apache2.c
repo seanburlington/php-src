@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.33 2004/07/20 20:48:01 moriyoshi Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.34 2004/10/21 19:43:37 jorton Exp $ */
 
 #include <fcntl.h>
 
@@ -562,7 +562,9 @@ zend_first_try {
 
 		rv = ap_pass_brigade(r->output_filters, brigade);
 		if (rv != APR_SUCCESS || r->connection->aborted) {
+zend_first_try {
 			php_handle_aborted_connection();
+} zend_end_try();
 		}
 		apr_brigade_cleanup(brigade);
 	} else {

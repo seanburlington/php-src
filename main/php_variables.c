@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.58 2003/03/27 21:13:47 moriyoshi Exp $ */
+/* $Id: php_variables.c,v 1.59 2003/03/28 17:09:04 moriyoshi Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -347,7 +347,7 @@ void _php_import_environment_variables(zval *array_ptr TSRMLS_DC)
 	char buf[128];
 	char **env, *p, *t = buf;
 	size_t alloc_size = sizeof(buf);
-	unsigned int nlen; /* ptrdiff_t is not portable */
+	unsigned long nlen; /* ptrdiff_t is not portable */
 
 	/* turn off magic_quotes while importing environment variables */
 	int magic_quotes_gpc = PG(magic_quotes_gpc);

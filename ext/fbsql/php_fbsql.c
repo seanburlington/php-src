@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.21 2001/05/22 17:32:17 fmk Exp $ */
+/* $Id: php_fbsql.c,v 1.22 2001/05/22 18:26:22 fmk Exp $ */
 
 /* TODO:
  *
@@ -2007,7 +2007,7 @@ PHP_FUNCTION(fbsql_errno)
 /* }}} */
 
 
-/* {{{ proto bool fbsql_generate_warnings([int flag]);
+/* {{{ proto bool fbsql_warnings([int flag]);
 	*/
 PHP_FUNCTION(fbsql_warnings)
 {
@@ -2975,7 +2975,7 @@ PHP_FUNCTION(fbsql_field_table)
 /* }}} */
 
 
-/* {{{ proto string fbsql_field_lene(int result, int field_index)
+/* {{{ proto string fbsql_field_len(int result, int field_index)
 	*/
 PHP_FUNCTION(fbsql_field_len)
 {
@@ -3090,7 +3090,7 @@ PHP_FUNCTION(fbsql_field_type)
 /* }}} */
 
 
-/* {{{ proto string string fbsql_field_flags(int result[, int field_index])
+/* {{{ proto string fbsql_field_flags(int result[, int field_index])
 	*/
 PHP_FUNCTION(fbsql_field_flags)
 {

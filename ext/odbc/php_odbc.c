@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.84 2001/05/08 19:47:20 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.85 2001/05/22 18:26:36 fmk Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -2225,7 +2225,7 @@ PHP_FUNCTION(odbc_num_rows)
 }
 /* }}} */
 
-/* {{{ proto bool next_result(int result_id)
+/* {{{ proto bool odbc_next_result(int result_id)
    Checks if multiple results are avaiable */
 PHP_FUNCTION(odbc_next_result)
 {

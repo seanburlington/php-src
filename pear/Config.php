@@ -16,7 +16,7 @@
 // |          Christian Stocker <chregu@phant.ch>                         |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.3 2001/07/04 11:24:49 chregu Exp $
+// $Id: Config.php,v 1.4 2001/07/06 10:24:12 chregu Exp $
 
 require_once( "PEAR.php") ;
 
@@ -36,7 +36,7 @@ require_once( "PEAR.php") ;
 *
 * @author      Alexander Merz <alexander.merz@t-online.de>
 * @access      public
-* @version     $Id: Config.php,v 1.3 2001/07/04 11:24:49 chregu Exp $
+* @version     $Id: Config.php,v 1.4 2001/07/06 10:24:12 chregu Exp $
 * @package     Config
 */
 
@@ -244,7 +244,9 @@ class Config  {
             $totaldata = array();
             foreach ($files as $datasrc)
             {
-                $this->container->parseInput($datasrc,$feature);
+                if (Pear::isError($error = $this->container->parseInput($datasrc,$feature)))
+                   return $error;
+         
                 $totaldata = $this->array_merge_clobber($totaldata,$this->container->data);
                 unset ($this->data);
                 $this->datasrc = $datasrc;
@@ -253,7 +255,9 @@ class Config  {
         }
         else
         {
-            $this->container->parseInput($files,$feature);
+            if (Pear::isError($error = $this->container->parseInput($files,$feature)))
+                 return $error;
+
             $this->data = $this->container->data;
             $this->datasrc = $files;
         }

@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.h,v $ */
-/* $Id: php_mnogo.h,v 1.15 2002/02/28 08:26:23 sebastian Exp $ */
+/* $Id: php_mnogo.h,v 1.16 2002/06/05 10:11:03 gluke Exp $ */
 
 /* 
    +----------------------------------------------------------------------+
@@ -64,6 +64,10 @@ DLEXPORT PHP_FUNCTION(udm_crc32);
 DLEXPORT PHP_FUNCTION(udm_open_stored);
 DLEXPORT PHP_FUNCTION(udm_check_stored);
 DLEXPORT PHP_FUNCTION(udm_close_stored);
+#endif
+
+#if UDM_VERSION_ID >= 30204
+DLEXPORT PHP_FUNCTION(udm_parse_query_string);
 #endif
 
 DLEXPORT PHP_FUNCTION(udm_alloc_agent);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.167 2003/06/10 20:03:39 imajes Exp $ */
+/* $Id: var.c,v 1.168 2003/08/05 09:19:38 stas Exp $ */
 
 
 /* {{{ includes 
@@ -550,26 +550,29 @@ static void php_var_serialize_intern(smart_str *buf, zval **struc, HashTable *va
 				zval fname;
 				int res;
 
-				INIT_PZVAL(&fname);
-				ZVAL_STRINGL(&fname, "__sleep", sizeof("__sleep") - 1, 0);
-				res = call_user_function_ex(CG(function_table), struc, &fname, 
-						&retval_ptr, 0, 0, 1, NULL TSRMLS_CC);
+				if(Z_OBJCE_PP(struc) != PHP_IC_ENTRY) {
+					INIT_PZVAL(&fname);
+					ZVAL_STRINGL(&fname, "__sleep", sizeof("__sleep") - 1, 0);
+					res = call_user_function_ex(CG(function_table), struc, &fname, 
+												&retval_ptr, 0, 0, 1, NULL TSRMLS_CC);
 
-				if (res == SUCCESS) {
-					if (retval_ptr) {
-					   	if (HASH_OF(retval_ptr)) {
-							php_var_serialize_class(buf, struc, retval_ptr, 
-									var_hash TSRMLS_CC);
-						} else {
-							php_error_docref(NULL TSRMLS_CC, E_NOTICE, "__sleep should return an array only "
-												"containing the names of instance-variables to "
-												"serialize.");
+					if (res == SUCCESS) {
+						if (retval_ptr) {
+							if (HASH_OF(retval_ptr)) {
+								php_var_serialize_class(buf, struc, retval_ptr, 
+														var_hash TSRMLS_CC);
+							} else {
+								php_error_docref(NULL TSRMLS_CC, E_NOTICE, "__sleep should return an array only "
+												 "containing the names of instance-variables to "
+												 "serialize.");
+							}
+							
+							zval_ptr_dtor(&retval_ptr);
 						}
-
-						zval_ptr_dtor(&retval_ptr);
+						return;	
 					}
-					return;	
 				}
+				
 				if (retval_ptr)
 					zval_ptr_dtor(&retval_ptr);
 				/* fall-through */

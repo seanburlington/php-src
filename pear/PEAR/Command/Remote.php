@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.35 2003/10/04 12:57:34 cox Exp $
+// $Id: Remote.php,v 1.36 2003/11/17 09:15:28 mj Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -352,7 +352,7 @@ parameter.
             'border' => 1,
             'headline' => array('Package', 'Local', 'Remote', 'Size'),
             );
-        foreach ($latest as $pkg => $info) {
+        foreach ((array)$latest as $pkg => $info) {
             $package = strtolower($pkg);
             if (!isset($inst[$package])) {
                 // skip packages we don't have installed

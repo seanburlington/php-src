@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.80 2001/05/22 19:19:04 andi Exp $ */
+/* $Id: basic_functions.h,v 1.81 2001/07/09 17:36:04 rasmus Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -155,6 +155,7 @@ typedef struct {
  
 	/* pageinfo.c */
 	long page_uid;
+	long page_gid;
 	long page_inode;
 	long page_mtime;
 

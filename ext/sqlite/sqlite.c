@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.78 2003/07/20 18:00:54 helly Exp $ 
+   $Id: sqlite.c,v 1.79 2003/07/20 18:05:03 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -760,11 +760,6 @@ typedef struct _sqlite_object {
 	} u;
 } sqlite_object;
 
-static void sqlite_object_clone(void *object, void **object_clone TSRMLS_DC)
-{
-	/* TODO */
-}
-
 static int sqlite_free_persistent(list_entry *le, void *ptr TSRMLS_DC)
 {
 	return le->ptr == ptr;
@@ -954,7 +949,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.78 2003/07/20 18:00:54 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.79 2003/07/20 18:05:03 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

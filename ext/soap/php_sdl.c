@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.67 2004/04/01 10:47:43 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.68 2004/04/02 06:23:51 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -885,7 +885,7 @@ static sdlPtr load_wsdl(char *struri)
 
 							f->name = estrdup(name->children->content);
 							f->details = wsdl_message(&ctx, message->children->content);
-							if (f->details == NULL || zend_hash_num_elements(f->details) != 1) {
+							if (f->details == NULL || zend_hash_num_elements(f->details) > 1) {
 								php_error(E_ERROR, "SOAP-ERROR: Parsing WSDL: The fault message '%s' must have a single part", message->children->content);
 							}
 

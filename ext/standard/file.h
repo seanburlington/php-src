@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.40 2001/08/05 01:42:42 zeev Exp $ */
+/* $Id: file.h,v 1.41 2001/10/07 18:34:44 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -48,6 +48,9 @@ PHP_FUNCTION(mkdir);
 PHP_FUNCTION(rmdir);
 PHP_FUNCTION(fpassthru);
 PHP_FUNCTION(readfile);
+#if HAVE_MMAP
+PHP_FUNCTION(mmapfile);
+#endif
 PHP_FUNCTION(umask);
 PHP_FUNCTION(rename);
 PHP_FUNCTION(unlink);

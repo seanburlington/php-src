@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_com_dotnet_internal.h,v 1.3 2003/10/17 20:52:17 wez Exp $ */
+/* $Id: php_com_dotnet_internal.h,v 1.4 2003/12/18 11:23:21 wez Exp $ */
 
 #ifndef PHP_COM_DOTNET_INTERNAL_H
 #define PHP_COM_DOTNET_INTERNAL_H
@@ -124,6 +124,7 @@ PHPAPI int php_com_zval_from_variant(zval *z, VARIANT *v, int codepage TSRMLS_DC
 /* com_dotnet.c */
 PHP_FUNCTION(com_dotnet_create_instance);
 void php_com_dotnet_rshutdown(TSRMLS_D);
+void php_com_dotnet_mshutdown(TSRMLS_D);
 
 /* com_misc.c */
 zval *php_com_throw_exception(char *message TSRMLS_DC);

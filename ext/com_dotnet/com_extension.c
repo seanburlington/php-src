@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_extension.c,v 1.4 2003/12/06 17:31:40 wez Exp $ */
+/* $Id: com_extension.c,v 1.5 2003/12/18 11:23:21 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -189,6 +189,12 @@ PHP_MINIT_FUNCTION(com_dotnet)
 PHP_MSHUTDOWN_FUNCTION(com_dotnet)
 {
 	UNREGISTER_INI_ENTRIES();
+#if HAVE_MSCOREE_H
+	if (COMG(dotnet_runtime_stuff)) {
+		php_com_dotnet_mshutdown(TSRMLS_C);
+	}
+#endif
+
 	zend_ts_hash_destroy(&php_com_typelibraries);
 	return SUCCESS;
 }

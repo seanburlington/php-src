@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.h,v 1.16 2000/02/01 06:06:03 andrei Exp $ */
+/* $Id: file.h,v 1.17 2000/02/01 20:02:44 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -63,8 +63,10 @@ PHP_FUNCTION(umask);
 PHP_FUNCTION(rename);
 PHP_FUNCTION(copy);
 PHP_FUNCTION(file);
-PHP_FUNCTION(set_socket_blocking);
-PHP_FUNCTION(set_socket_timeout);
+PHP_FUNCTION(set_socket_blocking); /* deprecated */
+PHP_FUNCTION(socket_set_blocking);
+PHP_FUNCTION(socket_set_timeout);
+PHP_FUNCTION(socket_get_status);
 PHP_FUNCTION(set_file_buffer);
 PHP_FUNCTION(get_meta_tags);
 PHP_FUNCTION(flock);

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sybase.c,v 1.10 1999/07/31 19:23:21 zeev Exp $ */
+/* $Id: sybase.c,v 1.11 1999/08/01 00:33:02 zeev Exp $ */
 
 
 #include "php.h"
@@ -941,6 +941,8 @@ PHP_FUNCTION(sybase_fetch_object)
 	php3_sybase_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU);
 	if (return_value->type==IS_ARRAY) {
 		return_value->type=IS_OBJECT;
+		return_value->value.obj.properties = return_value->value.ht;
+		return_value->value.obj.ce = &zend_standard_class_def;
 	}
 }
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.12 2005/02/06 22:34:53 wez Exp $ */
+/* $Id: sqlite_driver.c,v 1.13 2005/02/09 07:00:00 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -232,6 +232,18 @@ static int pdo_sqlite_get_attribute(pdo_dbh_t *dbh, long attr, zval *return_valu
 	return 1;
 }
 
+static int pdo_sqlite_set_attr(pdo_dbh_t *dbh, long attr, zval *val TSRMLS_DC)
+{
+	pdo_sqlite_db_handle *H = (pdo_sqlite_db_handle *)dbh->driver_data;
+
+	switch (attr) {
+		case PDO_ATTR_TIMEOUT:
+			convert_to_long(val);
+			sqlite3_busy_timeout(H->db, Z_LVAL_P(val) * 1000);
+			return 1;
+	}
+}
+
 static PHP_FUNCTION(sqlite_create_function)
 {
 	/* TODO: implement this stuff */
@@ -261,7 +273,7 @@ static struct pdo_dbh_methods sqlite_methods = {
 	sqlite_handle_begin,
 	sqlite_handle_commit,
 	sqlite_handle_rollback,
-	NULL, /* set_attribute */
+	pdo_sqlite_set_attr,
 	pdo_sqlite_last_insert_id,
 	pdo_sqlite_fetch_error_func,
 	pdo_sqlite_get_attribute,

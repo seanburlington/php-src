@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.99 2003/10/17 17:21:55 helly Exp $ 
+   $Id: sqlite.c,v 1.100 2003/10/18 18:43:31 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -948,9 +948,25 @@ void sqlite_iterator_move_forward(zend_object_iterator *iter TSRMLS_DC)
 	}
 }
 
-zend_class_iterator_funcs sqlite_ub_query_iterator_funcs;
+zend_object_iterator_funcs sqlite_ub_query_iterator_funcs = {
+	sqlite_iterator_dtor,
+	sqlite_iterator_has_more,
+	sqlite_iterator_get_current_data,
+	sqlite_iterator_get_current_key,
+	sqlite_iterator_move_forward,
+	NULL
+};
 
-zend_object_iterator *sqlite_ub_query_get_iterator(zend_class_entry *ce, zval *object TSRMLS_DC)
+zend_object_iterator_funcs sqlite_query_iterator_funcs = {
+	sqlite_iterator_dtor,
+	sqlite_iterator_has_more,
+	sqlite_iterator_get_current_data,
+	sqlite_iterator_get_current_key,
+	sqlite_iterator_move_forward,
+	sqlite_iterator_rewind
+};
+
+zend_object_iterator *sqlite_get_iterator(zend_class_entry *ce, zval *object TSRMLS_DC)
 {
 	sqlite_object_iterator *iterator = emalloc(sizeof(sqlite_object_iterator));
 
@@ -958,23 +974,7 @@ zend_object_iterator *sqlite_ub_query_get_iterator(zend_class_entry *ce, zval *o
 
 	object->refcount++;
 	iterator->it.data = (void*)object;
-	iterator->it.funcs = &sqlite_ub_query_iterator_funcs.funcs;
-	iterator->res = obj->u.res;
-	iterator->value = NULL;
-	return (zend_object_iterator*)iterator;
-}
-
-zend_class_iterator_funcs sqlite_query_iterator_funcs;
-
-zend_object_iterator *sqlite_query_get_iterator(zend_class_entry *ce, zval *object TSRMLS_DC)
-{
-	sqlite_object_iterator *iterator = emalloc(sizeof(sqlite_object_iterator));
-
-	sqlite_object *obj = (sqlite_object*) zend_object_store_get_object(object TSRMLS_CC);
-
-	object->refcount++;
-	iterator->it.data = (void*)object;
-	iterator->it.funcs = &sqlite_query_iterator_funcs.funcs;
+	iterator->it.funcs = ce->iterator_funcs.funcs;
 	iterator->res = obj->u.res;
 	iterator->value = NULL;
 	return (zend_object_iterator*)iterator;
@@ -996,20 +996,11 @@ PHP_MINIT_FUNCTION(sqlite)
 	sqlite_object_handlers_query.get_class_entry = sqlite_get_ce_query;
 	sqlite_object_handlers_ub_query.get_class_entry = sqlite_get_ce_ub_query;
 	
-	sqlite_ce_ub_query->get_iterator = sqlite_ub_query_get_iterator;
-	sqlite_ce_ub_query->iterator_funcs = &sqlite_ub_query_iterator_funcs;
-	memset(&sqlite_ub_query_iterator_funcs, 0, sizeof(zend_class_iterator_funcs));
-	sqlite_ub_query_iterator_funcs.funcs.dtor = sqlite_iterator_dtor;
-	sqlite_ub_query_iterator_funcs.funcs.rewind = NULL;
-	sqlite_ub_query_iterator_funcs.funcs.has_more = sqlite_iterator_has_more;
-	sqlite_ub_query_iterator_funcs.funcs.get_current_data = sqlite_iterator_get_current_data;
-	sqlite_ub_query_iterator_funcs.funcs.get_current_key = sqlite_iterator_get_current_key;
-	sqlite_ub_query_iterator_funcs.funcs.move_forward = sqlite_iterator_move_forward;
+	sqlite_ce_ub_query->get_iterator = sqlite_get_iterator;
+	sqlite_ce_ub_query->iterator_funcs.funcs = &sqlite_ub_query_iterator_funcs;
 
-	sqlite_ce_query->get_iterator = sqlite_query_get_iterator;
-	sqlite_ce_query->iterator_funcs = &sqlite_query_iterator_funcs;
-	memcpy(&sqlite_query_iterator_funcs, &sqlite_ub_query_iterator_funcs, sizeof(zend_class_iterator_funcs));
-	sqlite_query_iterator_funcs.funcs.rewind = sqlite_iterator_rewind;
+	sqlite_ce_query->get_iterator = sqlite_get_iterator;
+	sqlite_ce_query->iterator_funcs.funcs = &sqlite_query_iterator_funcs;
 
 	ZEND_INIT_MODULE_GLOBALS(sqlite, init_sqlite_globals, NULL);
 
@@ -1079,7 +1070,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.99 2003/10/17 17:21:55 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.100 2003/10/18 18:43:31 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

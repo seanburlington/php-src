@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_packet_soap.c,v 1.31 2004/02/04 14:46:11 dmitry Exp $ */
+/* $Id: php_packet_soap.c,v 1.32 2004/02/05 09:28:09 dmitry Exp $ */
 
 #include "php_soap.h"
 
@@ -29,20 +29,13 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 	xmlNodePtr trav, env, head, body, resp, cur, fault;
 	xmlAttrPtr attr;
 	int param_count = 0;
-	int old_error_reporting;
-	int soap_version;
+	int soap_version = SOAP_1_1;
 	HashTable *hdrs = NULL;
 
 	ZVAL_NULL(return_value);
 
-	old_error_reporting = EG(error_reporting);
-	EG(error_reporting) &= ~(E_WARNING|E_NOTICE|E_USER_WARNING|E_USER_NOTICE);
-
 	/* Parse XML packet */
-	response = xmlParseMemory(buffer, buffer_size);
-	xmlCleanupParser();
-
-	EG(error_reporting) = old_error_reporting;
+	response = soap_xmlParseMemory(buffer, buffer_size);
 
 	if (!response) {
 		add_soap_fault(this_ptr, "Client", "looks like we got no XML document", NULL, NULL TSRMLS_CC);

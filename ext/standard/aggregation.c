@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: aggregation.c,v 1.11.4.5 2003/06/04 18:57:53 andrei Exp $ */
+/* $Id: aggregation.c,v 1.11.4.6 2003/07/09 23:16:21 sniper Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -155,6 +155,7 @@ static void aggregate_methods(zend_class_entry *ce, zend_class_entry *from_ce, i
 
 			if (zend_hash_add(&ce->function_table, func_name, func_name_len,
 							  (void*)function, sizeof(zend_function), NULL) == SUCCESS) {
+				function_add_ref(function);
 				add_next_index_stringl(aggr_methods, func_name, func_name_len-1, 1);
 			}
 

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.115 2004/12/20 19:33:38 rasmus Exp $ */
+/* $Id: php_cli.c,v 1.116 2005/01/20 02:02:09 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -455,21 +455,21 @@ static void cli_register_file_handles(TSRMLS_D)
 	
 	ic.value = *zin;
 	ic.flags = CONST_CS;
-	ic.name = zend_strndup(ZEND_STRS("STDIN"));
+	ic.name = zend_strndup(ZEND_STRL("STDIN"));
 	ic.name_len = sizeof("STDIN");
 	ic.module_number = 0;
 	zend_register_constant(&ic TSRMLS_CC);
 
 	oc.value = *zout;
 	oc.flags = CONST_CS;
-	oc.name = zend_strndup(ZEND_STRS("STDOUT"));
+	oc.name = zend_strndup(ZEND_STRL("STDOUT"));
 	oc.name_len = sizeof("STDOUT");
 	oc.module_number = 0;
 	zend_register_constant(&oc TSRMLS_CC);
 
 	ec.value = *zerr;
 	ec.flags = CONST_CS;
-	ec.name = zend_strndup(ZEND_STRS("STDERR"));
+	ec.name = zend_strndup(ZEND_STRL("STDERR"));
 	ec.name_len = sizeof("STDERR");
 	ec.module_number = 0;
 	zend_register_constant(&ec TSRMLS_CC);

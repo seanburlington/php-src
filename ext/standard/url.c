@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.58 2002/11/07 15:41:32 iliaa Exp $ */
+/* $Id: url.c,v 1.59 2002/11/14 13:40:14 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -153,9 +153,8 @@ PHPAPI php_url *php_url_parse(char *str)
 		}
 	} else {
 		just_path:
-		ret->path = estrndup(s, length);
-		php_replace_controlchars(ret->path);
-		return ret;
+		ue = s + length;
+		goto nohost;
 	}
 	
 	if (!(e = strchr(s, '/'))) {

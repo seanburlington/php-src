@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.52 2005/01/15 04:50:26 sniper Exp $ */
+/* $Id: streamsfuncs.c,v 1.53 2005/03/11 01:52:24 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -933,9 +933,7 @@ PHP_FUNCTION(stream_context_get_options)
 		RETURN_FALSE;
 	}
 
-	*return_value = *context->options;
-	zval_copy_ctor(return_value);
-	INIT_PZVAL(return_value);
+	RETURN_ZVAL(context->options, 1, 0);
 }
 /* }}} */
 

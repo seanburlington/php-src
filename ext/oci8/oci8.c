@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.229 2004/01/02 02:21:44 sniper Exp $ */
+/* $Id: oci8.c,v 1.230 2004/01/02 14:09:49 sniper Exp $ */
 
 /* TODO list:
  *
@@ -775,7 +775,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.229 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.230 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -829,6 +829,8 @@ _oci_define_hash_dtor(void *data)
 static void 
 _oci_desc_flush_hash_dtor(void *data)
 {
+	TSRMLS_FETCH();
+	
 	oci_descriptor *descr = *((oci_descriptor **)data);
 	if (descr->buffering == 2 && (descr->type == OCI_DTYPE_LOB || descr->type == OCI_DTYPE_FILE)) {
         oci_lob_flush(descr,OCI_LOB_BUFFER_FREE TSRMLS_CC);

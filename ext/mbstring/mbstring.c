@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.193 2003/08/24 22:13:28 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.194 2003/08/25 21:54:26 helly Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -60,7 +60,7 @@
 #include "main/php_output.h"
 #include "ext/standard/info.h"
 
-#include "mbfl/mbfl_allocators.h"
+#include "libmbfl/mbfl/mbfl_allocators.h"
 
 #include "php_variables.h"
 #include "php_globals.h"

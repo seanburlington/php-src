@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.434 2002/01/02 21:21:48 zak Exp $ */
+/* $Id: basic_functions.c,v 1.435 2002/01/05 03:45:10 jimw Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -462,6 +462,9 @@ function_entry basic_functions[] = {
 #endif
 
 	PHP_FE(pi,																NULL)
+	PHP_FE(finite,															NULL)
+	PHP_FE(isnan,															NULL)
+	PHP_FE(isinf,															NULL)
 	PHP_FE(pow,																NULL)
 	PHP_FE(exp,																NULL)
 	PHP_FE(log,																NULL)

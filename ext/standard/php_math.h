@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.12 2001/12/11 15:30:35 sebastian Exp $ */
+/* $Id: php_math.h,v 1.13 2002/01/05 03:45:10 jimw Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H
@@ -35,6 +35,9 @@ PHP_FUNCTION(pi);
 PHP_FUNCTION(exp);
 PHP_FUNCTION(log);
 PHP_FUNCTION(log10);
+PHP_FUNCTION(finite);
+PHP_FUNCTION(isinf);
+PHP_FUNCTION(isnan);
 PHP_FUNCTION(pow);
 PHP_FUNCTION(sqrt);
 PHP_FUNCTION(srand);

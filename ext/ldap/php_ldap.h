@@ -14,10 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Amitay Isaacs <amitay@w-o-i.com>                            |
    |          Eric Warnke   <ericw@albany.edu>                            |
+   |          Jani Taskinen <sniper@iki.fi>                               |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ldap.h,v 1.8 2000/07/24 01:39:47 david Exp $ */
+/* $Id: php_ldap.h,v 1.9 2000/07/26 11:01:44 sniper Exp $ */
 
 #ifndef PHP_LDAP_H
 #define PHP_LDAP_H
@@ -75,6 +76,8 @@ PHP_FUNCTION(ldap_mod_del);
 PHP_FUNCTION(ldap_errno);
 PHP_FUNCTION(ldap_err2str);
 PHP_FUNCTION(ldap_error);
+
+PHP_FUNCTION(ldap_compare);
 
 ZEND_BEGIN_MODULE_GLOBALS(ldap)
 	long default_link;

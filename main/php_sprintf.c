@@ -16,13 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sprintf.c,v 1.12.8.3 2004/11/15 13:40:31 derick Exp $ */
+/* $Id: php_sprintf.c,v 1.12.8.4 2004/11/15 23:27:26 fmk Exp $ */
 
 #include <stdio.h>
 #include <stdarg.h>
-#include "php_config.h"
+#include "php.h"
 
-int
+PHPAPI int
 php_sprintf (char*s, const char* format, ...)
 {
   va_list args;

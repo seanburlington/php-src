@@ -1,4 +1,4 @@
-$Id: TODO,v 1.2 2004/05/19 18:04:47 fmk Exp $
+$Id: TODO,v 1.3 2004/09/19 16:58:13 wez Exp $
 
 In no particular order:
 
@@ -14,7 +14,6 @@ Low-level:
 - LOB support via Streams API
 - persistent handles
 - iterator support
-- "lazy" fetch support
 
 Not-so-low-level:
 - hash key case folding for portabilitiy, ala sqlite.assoc_case, but not using an ini option.

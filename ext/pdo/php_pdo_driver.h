@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.28 2004/07/26 07:42:46 gschlossnagle Exp $ */
+/* $Id: php_pdo_driver.h,v 1.29 2004/09/19 16:58:13 wez Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -95,6 +95,7 @@ enum pdo_error_type {
 	PDO_ERR_MISMATCH,
 	PDO_ERR_TRUNCATED,
 	PDO_ERR_DISCONNECTED,
+	PDO_ERR_NO_PERM,
 };
 
 enum pdo_error_mode {

@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.151 2002/10/02 15:02:16 helly Exp $ */
+/* $Id: zlib.c,v 1.152 2002/10/03 03:58:12 yohgaki Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -903,6 +903,24 @@ PHP_FUNCTION(ob_gzhandler)
 
 	if (ZEND_NUM_ARGS()!=2 || zend_get_parameters_ex(2, &zv_string, &zv_mode)==FAILURE) {
 		ZEND_WRONG_PARAM_COUNT();
+	}
+
+	/* check for wrong usages */
+	if (OG(ob_nesting_level>1)) {
+		if (php_ob_handler_used("ob_gzhandler" TSRMLS_CC)) {
+			php_error_docref("ref.outcontrol" TSRMLS_CC, E_WARNING, "output handler 'ob_gzhandler' cannot be used twice");
+			RETURN_FALSE;
+		}
+		if (php_ob_handler_used("mb_output_handler" TSRMLS_CC)) {
+			php_error_docref("ref.outcontrol" TSRMLS_CC, E_WARNING, "output handler 'ob_gzhandler' cannot be used after 'mb_output_handler'");
+			RETURN_FALSE;
+		}
+		if (php_ob_handler_used("URL-Rewriter" TSRMLS_CC)) {
+			php_error_docref("ref.outcontrol" TSRMLS_CC, E_WARNING, "output handler 'ob_gzhandler' cannot be used after 'URL-Rewriter'");
+			RETURN_FALSE;
+		}
+		if (php_ob_init_conflict("ob_gzhandler", "zlib output compression" TSRMLS_CC))
+			RETURN_FALSE;
 	}
 
 	if (ZLIBG(ob_gzhandler_status)==-1

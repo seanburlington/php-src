@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.144 2002/07/16 13:53:54 georg Exp $ */
+/* $Id: php_mysql.c,v 1.145 2002/07/16 19:26:23 sniper Exp $ */
 
 /* TODO:
  *
@@ -778,7 +778,7 @@ static int php_mysql_get_default_link(INTERNAL_FUNCTION_PARAMETERS)
 }
 /* }}} */
 
-/* {{{ proto resource mysql_connect([string hostname[:port][:/path/to/socket]] [, string username] [, string password] [, bool new])
+/* {{{ proto resource mysql_connect([string hostname[:port][:/path/to/socket] [, string username [, string password [, bool new [, int flags]]]]])
    Opens a connection to a MySQL Server */
 PHP_FUNCTION(mysql_connect)
 {
@@ -786,7 +786,7 @@ PHP_FUNCTION(mysql_connect)
 }
 /* }}} */
 
-/* {{{ proto resource mysql_pconnect([string hostname[:port][:/path/to/socket]] [, string username] [, string password])
+/* {{{ proto resource mysql_pconnect([string hostname[:port][:/path/to/socket] [, string username [, string password [, int flags]]]])
    Opens a persistent connection to a MySQL Server */
 PHP_FUNCTION(mysql_pconnect)
 {

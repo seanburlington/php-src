@@ -11,7 +11,7 @@
  *
  */
 #ifndef lint
-static const char rcsid[] = "$Id: fcgiapp.c,v 1.1 2002/03/10 21:39:28 shane Exp $";
+static const char rcsid[] = "$Id: fcgiapp.c,v 1.2 2002/11/26 05:51:15 shane Exp $";
 #endif /* not lint */
 
 #include <assert.h>
@@ -70,7 +70,7 @@ static int libInitialized = 0;
 static int isFastCGI = -1;
 static char *webServerAddressList = NULL;
 static FCGX_Request the_request;
-void _FCGX_FreeStream(FCGX_Stream **streamPtr, BOOL freeData);
+void _FCGX_FreeStream(FCGX_Stream **streamPtr, int freeData);
 
 void FCGX_ShutdownPending(void)
 {
@@ -1814,7 +1814,7 @@ void FCGX_FreeStream(FCGX_Stream **streamPtr)
 	_FCGX_FreeStream(streamPtr, TRUE);
 }
 
-void _FCGX_FreeStream(FCGX_Stream **streamPtr, BOOL freeData)
+void _FCGX_FreeStream(FCGX_Stream **streamPtr, int freeData)
 {
     FCGX_Stream *stream = *streamPtr;
     FCGX_Stream_Data *data;

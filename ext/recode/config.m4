@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 2000/05/23 23:30:38 sas Exp $
+dnl $Id: config.m4,v 1.4 2000/06/06 14:13:35 thies Exp $
 dnl config.m4 for extension recode
 dnl don't forget to call PHP_EXTENSION(recode)
 
@@ -58,5 +58,8 @@ recode_format_table();
 		fi
 
 		AC_DEFINE(HAVE_LIBRECODE, 1, [Whether we have librecode 3.5 or higher])
+
+		AC_CHECK_HEADERS(stdbool.h)
+
 		PHP_EXTENSION(recode,$ext_shared)
 	fi

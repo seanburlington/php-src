@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.9 2000/06/06 13:49:41 thies Exp $ */
+/* $Id: recode.c,v 1.10 2000/06/06 14:13:35 thies Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -28,6 +28,7 @@
 #include "ext/standard/file.h"
 #include "ext/standard/php_string.h"
 #include "zend_list.h"
+
 
 #ifdef HAVE_BROKEN_RECODE
 extern char *program_name;
@@ -96,7 +97,7 @@ PHP_MINFO_FUNCTION(recode)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.9 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.10 $");
 	php_info_print_table_end();
 
 }
@@ -110,7 +111,7 @@ PHP_FUNCTION(recode_string)
 	char *r = NULL;
 	pval **str;
 	pval **req;
-	int success;
+	bool success;
 	
 	ReSLS_FETCH();
 	if (ZEND_NUM_ARGS() != 2

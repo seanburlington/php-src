@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_recode.h,v 1.2 2000/05/18 15:34:33 zeev Exp $ */
+/* $Id: php_recode.h,v 1.3 2000/06/06 14:13:35 thies Exp $ */
 
 #ifndef _PHP_RECODE_H
 #define _PHP_RECODE_H
@@ -45,7 +45,12 @@
  */
 #define HAVE_BROKEN_RECODE
 
-#include <stdbool.h>
+#ifdef HAVE_STDBOOL_H
+# include <stdbool.h>
+#else
+  typedef enum {false = 0, true = 1} bool;
+#endif
+
 #include <sys/types.h>
 #include <stdio.h>
 #include <recode.h>

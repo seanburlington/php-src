@@ -1,6 +1,6 @@
 <?php
 
-/* $Id: install-pear.php,v 1.13 2003/07/10 01:34:46 cox Exp $ */
+/* $Id: install-pear.php,v 1.14 2003/07/17 06:30:21 cox Exp $ */
 
 $pear_dir = dirname(__FILE__);
 ini_set('include_path', $pear_dir);
@@ -23,6 +23,9 @@ for ($i = 0; $i < sizeof($argv); $i++) {
     } elseif ($arg == '-d') {
         $with_dir = $argv[$i+1];
         $i++;
+    } elseif ($arg == '-b') {
+        $bin_dir = $argv[$i+1];
+        $i++;
     }
 }
 
@@ -36,11 +39,14 @@ foreach ($config_layers as $layer) {
 }
 $keys = $config->getKeys();
 $config->set('verbose', 0, 'default');
+// PEAR executables
+if (!empty($bin_dir)) {
+    $config->set('bin_dir', $bin_dir, 'default');
+}
 // User supplied a dir prefix
 if (!empty($with_dir)) {
     $ds = DIRECTORY_SEPARATOR;
     $config->set('php_dir', $with_dir . $ds . 'lib', 'default');
-    $config->set('bin_dir', $with_dir . $ds . 'bin', 'default');
     $config->set('doc_dir', $with_dir . $ds . 'doc', 'default');
     $config->set('data_dir', $with_dir . $ds . 'data', 'default');
     $config->set('test_dir', $with_dir . $ds . 'test', 'default');

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: characterdata.c,v 1.1 2003/06/05 17:06:52 rrichards Exp $ */
+/* $Id: characterdata.c,v 1.2 2003/06/09 20:20:55 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -140,11 +140,12 @@ PHP_FUNCTION(dom_characterdata_append_data)
 {
 	zval *id;
 	xmlNode *nodep;
+	dom_object *intern;
 	char *arg;
 	int arg_len;
 
 
-	DOM_GET_THIS_OBJ(nodep, id, xmlNodePtr);
+	DOM_GET_THIS_OBJ(nodep, id, xmlNodePtr, intern);
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
 		return;

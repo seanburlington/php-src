@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: entityreference.c,v 1.1 2003/06/05 17:06:52 rrichards Exp $ */
+/* $Id: entityreference.c,v 1.2 2003/06/09 20:20:55 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -71,7 +71,7 @@ PHP_FUNCTION(dom_entityreference_entityreference)
 		if (oldnode != NULL) {
 			node_free_resource(oldnode  TSRMLS_CC);
 		}
-		php_dom_set_object(id, node TSRMLS_CC);
+		php_dom_set_object(intern, node TSRMLS_CC);
 	}
 }
 

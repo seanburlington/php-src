@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.43.2.8 2003/08/06 01:58:30 cox Exp $
+// $Id: Packager.php,v 1.43.2.9 2003/09/29 14:06:42 pajoye Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'System.php';

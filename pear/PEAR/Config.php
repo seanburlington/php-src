@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.35.2.11 2003/08/14 20:12:51 derick Exp $
+// $Id: Config.php,v 1.35.2.12 2003/09/29 14:06:41 pajoye Exp $
 
 require_once 'PEAR.php';
 require_once 'System.php';

@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.50.2.8 2003/08/06 01:58:29 cox Exp $
+// $Id: PEAR.php,v 1.50.2.9 2003/09/29 14:06:38 pajoye Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -289,7 +289,8 @@ class PEAR
 
     function setErrorHandling($mode = null, $options = null)
     {
-        if (isset($this)) {
+        if (isset($this) &&
+            (get_class($this) == 'pear' || is_subclass_of($this, 'pear'))) {
             $setmode     = &$this->_default_error_mode;
             $setoptions  = &$this->_default_error_options;
         } else {
@@ -310,9 +311,8 @@ class PEAR
 
             case PEAR_ERROR_CALLBACK:
                 $setmode = $mode;
-                if ((is_string($options) && function_exists($options)) ||
-                    (is_array($options) && method_exists(@$options[0], @$options[1])))
-                {
+                // class/object method callback
+                if (is_callable($options)) {
                     $setoptions = $options;
                 } else {
                     trigger_error("invalid error callback", E_USER_WARNING);
@@ -566,7 +566,8 @@ class PEAR
     function pushErrorHandling($mode, $options = null)
     {
         $stack = &$GLOBALS['_PEAR_error_handler_stack'];
-        if (isset($this)) {
+        if (isset($this) &&
+            (get_class($this) == 'pear' || is_subclass_of($this, 'pear'))) {
             $def_mode    = &$this->_default_error_mode;
             $def_options = &$this->_default_error_options;
         } else {
@@ -575,7 +576,8 @@ class PEAR
         }
         $stack[] = array($def_mode, $def_options);
 
-        if (isset($this)) {
+        if (isset($this) &&
+            (get_class($this) == 'pear' || is_subclass_of($this, 'pear'))) {
             $this->setErrorHandling($mode, $options);
         } else {
             PEAR::setErrorHandling($mode, $options);
@@ -600,7 +602,8 @@ class PEAR
         array_pop($stack);
         list($mode, $options) = $stack[sizeof($stack) - 1];
         array_pop($stack);
-        if (isset($this)) {
+        if (isset($this) &&
+            (get_class($this) == 'pear' || is_subclass_of($this, 'pear'))) {
             $this->setErrorHandling($mode, $options);
         } else {
             PEAR::setErrorHandling($mode, $options);

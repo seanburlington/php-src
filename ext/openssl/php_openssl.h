@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_openssl.h,v 1.10.8.4 2003/05/01 10:44:17 wez Exp $ */
+/* $Id: php_openssl.h,v 1.10.8.5 2003/06/27 16:42:50 sniper Exp $ */
 
 #ifndef PHP_OPENSSL_H
 #define PHP_OPENSSL_H
@@ -38,7 +38,7 @@
 
 
 /* HAVE_OPENSSL would include SSL MySQL stuff */
-#if HAVE_OPENSSL_EXT
+#ifdef HAVE_OPENSSL_EXT
 extern zend_module_entry openssl_module_entry;
 #define phpext_openssl_ptr &openssl_module_entry
 

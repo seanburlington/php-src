@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.37.2.2 2003/05/12 23:44:48 wez Exp $ */
+/* $Id: php_network.h,v 1.37.2.3 2003/06/27 16:42:51 sniper Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -74,7 +74,7 @@ PHPAPI char *php_socket_strerror(long err, char *buf, size_t bufsize);
 #include <sys/time.h>
 #endif
 
-#if HAVE_OPENSSL_EXT
+#ifdef HAVE_OPENSSL_EXT
 #include <openssl/ssl.h>
 #endif
 
@@ -124,7 +124,7 @@ struct _php_netstream_data_t	{
 	char is_blocked;
 	struct timeval timeout;
 	char timeout_event;
-#if HAVE_OPENSSL_EXT
+#ifdef HAVE_OPENSSL_EXT
 	/* openssl specific bits here */
 	SSL *ssl_handle;
 	int ssl_active;
@@ -158,7 +158,7 @@ PHPAPI php_stream *_php_stream_sock_open_unix(const char *path, int pathlen, con
 /* private API; don't use in extensions */
 int _php_network_is_stream_alive(php_stream *stream);
 
-#if HAVE_OPENSSL_EXT
+#ifdef HAVE_OPENSSL_EXT
 PHPAPI int php_stream_sock_ssl_activate_with_method(php_stream *stream, int activate, SSL_METHOD *method, php_stream *session_stream TSRMLS_DC);
 #define php_stream_sock_ssl_activate(stream, activate)	php_stream_sock_ssl_activate_with_method((stream), (activate), SSLv23_client_method(), NULL TSRMLS_CC)
 

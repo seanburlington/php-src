@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.106.2.7 2003/05/20 00:21:57 wez Exp $ */
+/* $Id: fsock.c,v 1.106.2.8 2003/06/27 16:42:51 sniper Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -217,7 +217,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 				break;
 			}
 		}
-#if !HAVE_OPENSSL_EXT
+#ifndef HAVE_OPENSSL_EXT
 		if (ssl_flags != php_ssl_none) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "no SSL support in this build");
 		}
@@ -234,7 +234,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			php_stream_context_set(stream, context);
 		}
 		
-#if HAVE_OPENSSL_EXT
+#ifdef HAVE_OPENSSL_EXT
 		if (stream && ssl_flags != php_ssl_none) {
 			int ssl_ret = FAILURE;
 			switch(ssl_flags)	{

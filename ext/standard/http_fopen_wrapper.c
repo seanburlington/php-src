@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.53.2.12 2003/05/06 11:04:42 sas Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.53.2.13 2003/06/27 16:42:51 sniper Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -145,7 +145,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 
 	php_stream_notify_info(context, PHP_STREAM_NOTIFY_CONNECT, NULL, 0);
 	
-#if HAVE_OPENSSL_EXT
+#ifdef HAVE_OPENSSL_EXT
 	if (use_ssl)	{
 
 		if (context) {

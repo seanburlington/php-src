@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.38.2.4 2003/02/25 04:20:44 iliaa Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.38.2.5 2003/06/27 16:42:51 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -143,7 +143,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 	char *scratch;
 	int result;
 	int i, use_ssl;
-#if HAVE_OPENSSL_EXT	
+#ifdef HAVE_OPENSSL_EXT	
 	int use_ssl_on_data=0;
 	php_stream *reuseid=NULL;
 #endif	
@@ -183,7 +183,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 		goto errexit;
 	}
 
-#if HAVE_OPENSSL_EXT
+#ifdef HAVE_OPENSSL_EXT
 	if (use_ssl)	{
 	
 		/* send the AUTH TLS request name */
@@ -434,7 +434,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 	php_stream_context_set(datastream, context);
 	php_stream_notify_progress_init(context, 0, file_size);
 
-#if HAVE_OPENSSL_EXT
+#ifdef HAVE_OPENSSL_EXT
 	if (use_ssl_on_data && php_stream_sock_ssl_activate_with_method(datastream, 1, SSLv23_method(), reuseid TSRMLS_CC) == FAILURE)	{
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Unable to activate SSL mode");
 		php_stream_close(datastream);

@@ -21,10 +21,10 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: rules_pear.mk,v 1.4 2000/02/25 21:27:03 ssb Exp $ 
+# $Id: rules_pear.mk,v 1.5 2000/04/30 03:10:34 sas Exp $ 
 #
 
-include $(DEPTH)/config_vars.mk
+include $(top_builddir)/config_vars.mk
 
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(EXTRA_INCLUDES) $(CPPFLAGS) $(CFLAGS) $(EXTRA_CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(INCLUDES) $(EXTRA_INCLUDES) $(CPPFLAGS) $(CFLAGS) $(EXTRA_CFLAGS)
@@ -34,11 +34,9 @@ mkinstalldirs = $(top_srcdir)/build/shtool mkdir -f -p
 INSTALL = $(top_srcdir)/build/shtool install -c
 INSTALL_DATA = $(INSTALL) -m 644
 
-DEFS = -DHAVE_CONFIG_H -I. -I$(srcdir) -I$(DEPTH)
+DEFS = -DHAVE_CONFIG_H -I. -I$(srcdir) -I$(top_builddir)
 
 moduledir    = $(libdir)/php/modules
-top_srcdir   = $(topsrcdir)
-top_builddir = $(DEPTH)
 
 .SUFFIXES:
 .SUFFIXES: .S .c .lo .o .s .y .l

@@ -21,11 +21,11 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: ltlib.mk,v 1.3 2000/02/24 03:05:28 sas Exp $ 
+# $Id: ltlib.mk,v 1.4 2000/04/30 03:10:34 sas Exp $ 
 #
 
 targets = $(LTLIBRARY_NAME)
 
-include $(topsrcdir)/build/rules.mk
-include $(topsrcdir)/build/library.mk
+include $(top_srcdir)/build/rules.mk
+include $(top_srcdir)/build/library.mk
 

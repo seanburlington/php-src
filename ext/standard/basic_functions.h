@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.99 2001/12/11 15:30:28 sebastian Exp $ */
+/* $Id: basic_functions.h,v 1.100 2001/12/29 20:59:59 derick Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -72,6 +72,7 @@ PHP_FUNCTION(is_float);
 PHP_FUNCTION(is_numeric);
 PHP_FUNCTION(is_string);
 PHP_FUNCTION(is_array);
+PHP_FUNCTION(is_array_multidimensional);
 PHP_FUNCTION(is_object);
 PHP_FUNCTION(is_scalar);
 PHP_FUNCTION(is_callable);

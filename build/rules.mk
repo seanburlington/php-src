@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: rules.mk,v 1.10 2000/05/01 02:41:33 sas Exp $ 
+# $Id: rules.mk,v 1.11 2000/05/02 14:46:20 sas Exp $ 
 #
 
 include $(top_builddir)/config_vars.mk
@@ -36,7 +36,7 @@ INSTALL_DATA = $(INSTALL) -m 644
 SHARED_COMPILE = $(SHARED_LIBTOOL) --mode=compile $(CC) $(DEFS) $(INCLUDES) $(EXTRA_INCLUDES) $(CPPFLAGS) $(CFLAGS) $(EXTRA_CFLAGS) -c $< && touch $@
 DEFS = -DHAVE_CONFIG_H -I. -I$(srcdir) -I$(top_builddir)
 
-moduledir    = $(libdir)/php/modules
+moduledir    = $(EXTENSION_DIR)
 
 .SUFFIXES:
 .SUFFIXES: .slo .c .lo .o .s .y .l

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.70 2003/02/26 20:04:15 derick Exp $ */
+/* $Id: mail.c,v 1.71 2003/04/01 06:21:54 pollita Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -215,10 +215,10 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 			return 0;
 		}
 #endif
-		fprintf(sendmail, "To: %s\n", to);
-		fprintf(sendmail, "Subject: %s\n", subject);
+		fprintf(sendmail, "To: %s\r\n", to);
+		fprintf(sendmail, "Subject: %s\r\n", subject);
 		if (headers != NULL) {
-			fprintf(sendmail, "%s\n", headers);
+			fprintf(sendmail, "%s\r\n", headers);
 		}
 		fprintf(sendmail, "\n%s\n", message);
 		ret = pclose(sendmail);

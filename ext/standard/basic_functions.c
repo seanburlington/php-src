@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.620 2003/08/05 10:29:03 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.621 2003/08/07 19:53:31 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1248,12 +1248,8 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 		BG(user_tick_functions) = NULL;
 	}
 
-	if (BG(user_filter_map)) {
-		zend_hash_destroy(BG(user_filter_map));
-		efree(BG(user_filter_map));
-		BG(user_filter_map) = NULL;
-	}
-
+	PHP_RSHUTDOWN(user_filters)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+	
 	return SUCCESS;
 }
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.19 2003/06/19 16:10:54 iliaa Exp $ */
+/* $Id: user_filters.c,v 1.20 2003/08/07 19:53:31 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -97,6 +97,17 @@ PHP_MINIT_FUNCTION(user_filters)
 	REGISTER_LONG_CONSTANT("PSFS_FLAG_FLUSH_INC",	PSFS_FLAG_FLUSH_INC,	CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PSFS_FLAG_FLUSH_CLOSE",	PSFS_FLAG_FLUSH_CLOSE,	CONST_CS | CONST_PERSISTENT);
 	
+	return SUCCESS;
+}
+
+PHP_RSHUTDOWN_FUNCTION(user_filters)
+{
+	if (BG(user_filter_map)) {
+		zend_hash_destroy(BG(user_filter_map));
+		efree(BG(user_filter_map));
+		BG(user_filter_map) = NULL;
+	}
+
 	return SUCCESS;
 }
 

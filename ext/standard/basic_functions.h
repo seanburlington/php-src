@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.122 2003/08/05 10:29:03 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.123 2003/08/07 19:53:31 moriyoshi Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -114,6 +114,7 @@ PHP_FUNCTION(stream_bucket_prepend);
 PHP_FUNCTION(stream_bucket_append);
 PHP_FUNCTION(stream_bucket_new);
 PHP_MINIT_FUNCTION(user_filters);
+PHP_RSHUTDOWN_FUNCTION(user_filters);
 
 #ifdef PHP_WIN32
 typedef unsigned int php_stat_len;

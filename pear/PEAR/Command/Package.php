@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.14 2002/04/07 12:40:51 ssb Exp $
+// $Id: Package.php,v 1.15 2002/04/07 13:22:21 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Packager.php';
@@ -108,7 +108,7 @@ class PEAR_Command_Package extends PEAR_Command_Common
                                                $this->config->get('doc_dir'));
                 $packager->debug = $this->config->get('verbose');
                 $err = $warn = array();
-                $packager->validateInfo($pkginfofile, $err, $warn);
+                $packager->validatePackageInfo($pkginfofile, $err, $warn);
                 foreach ($err as $e) {
                     $this->ui->displayLine("Error: $e");
                 }

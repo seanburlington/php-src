@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: mysql.c,v 1.13 1999/07/16 17:19:11 zeev Exp $ */
+/* $Id: mysql.c,v 1.14 1999/07/19 20:09:05 eschmid Exp $ */
 
 
 /* TODO:
@@ -1472,7 +1472,7 @@ PHP_FUNCTION(mysql_fetch_row)
 /* }}} */
 
 
-/* {{{ proto object mysql_fetch_object(int result)
+/* {{{ proto object mysql_fetch_object(int result [, int result_type])
    Fetch a result row as an object */
 PHP_FUNCTION(mysql_fetch_object)
 {
@@ -1486,7 +1486,7 @@ PHP_FUNCTION(mysql_fetch_object)
 /* }}} */
 
 
-/* {{{ proto array mysql_fetch_array(int result)
+/* {{{ proto array mysql_fetch_array(int result [, int result_type])
    Fetch a result row as an associative array */
 PHP_FUNCTION(mysql_fetch_array)
 {

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2000/07/03 04:35:57 chrisv Exp $
+dnl $Id: config.m4,v 1.2 2000/07/03 05:25:00 rasmus Exp $
 dnl config.m4 for extension sockets
 dnl don't forget to call PHP_EXTENSION(sockets)
 
@@ -28,7 +28,7 @@ if test "$PHP_SOCKETS" != "no"; then
   dnl ---------------------------------
 
   AC_HEADER_STDC
-  AC_UNISTD_H
+  AC_CHECK_HEADERS(unistd.h)
   AC_CHECK_HEADERS(sys/types.h sys/socket.h netdb.h netinet/in.h netinet/tcp.h sys/un.h arpa/inet.h)
   AC_CHECK_HEADERS(sys/time.h errno.h fcntl.h)
 

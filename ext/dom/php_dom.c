@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.24 2003/08/18 23:13:25 zeev Exp $ */
+/* $Id: php_dom.c,v 1.25 2003/08/19 01:30:25 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -32,7 +32,6 @@
 
 #if HAVE_DOM
 
-#include "zend_execute_locks.h"
 #include "ext/standard/info.h"
 #define PHP_XPATH 1
 #define PHP_XPTR 2

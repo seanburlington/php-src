@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.6 2003/07/05 23:43:10 rrichards Exp $ */
+/* $Id: php_xsl.c,v 1.7 2003/08/19 01:30:27 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -24,7 +24,6 @@
 
 #include "php.h"
 #include "php_ini.h"
-#include "zend_execute_locks.h"
 #include "ext/standard/info.h"
 #include "php_xsl.h"
 

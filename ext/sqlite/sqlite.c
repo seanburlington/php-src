@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.71 2003/07/08 18:57:28 helly Exp $ 
+   $Id: sqlite.c,v 1.72 2003/07/08 23:10:01 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -44,7 +44,7 @@
 #include "zend_default_classes.h"
 
 #ifdef HAVE_SPL
-#include "ext/spl/spl.h"
+#include "ext/spl/php_spl.h"
 #include "ext/spl/spl_functions.h"
 #endif
 
@@ -948,7 +948,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.71 2003/07/08 18:57:28 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.72 2003/07/08 23:10:01 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

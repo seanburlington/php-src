@@ -18,7 +18,7 @@
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: calendar.c,v 1.14 2001/07/04 10:12:44 wez Exp $ */
+/* $Id: calendar.c,v 1.15 2001/07/05 09:55:13 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -68,7 +68,7 @@ ZEND_GET_MODULE(calendar)
 #endif
 
 /* this order must match the conversion table below */
-enum {
+enum cal_name_type_t {
 	CAL_GREGORIAN = 0,
 	CAL_JULIAN,
 	CAL_JEWISH,

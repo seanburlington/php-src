@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_rand.h,v 1.19.4.1 2002/12/31 16:35:33 sebastian Exp $ */
+/* $Id: php_rand.h,v 1.19.4.2 2003/08/08 13:34:52 iliaa Exp $ */
 
 #ifndef PHP_RAND_H
 #define	PHP_RAND_H
@@ -33,7 +33,7 @@
 #define RAND_MAX (1<<15)
 #endif
 
-#if HAVE_LRAND48
+#if HAVE_LRAND48 && !defined(__sun)
 #define PHP_RAND_MAX 2147483647
 #else
 #define PHP_RAND_MAX RAND_MAX

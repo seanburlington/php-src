@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.243 2004/01/26 15:42:24 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.244 2004/01/28 07:15:55 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -785,7 +785,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.243 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.244 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -2284,8 +2284,6 @@ static int oci_loadlob(oci_connection *connection, oci_descriptor *mydescr, char
 		return -1;
 	}
 
-	mydescr->lob_size = *loblen;
-	
 	if (Z_TYPE_P(mydescr) == OCI_DTYPE_FILE) {
 		CALL_OCI_RETURN(connection->error,
 			OCILobFileClose(
@@ -4474,6 +4472,10 @@ PHP_FUNCTION(oci_lob_erase)
 
 		if (erase_length < 1) {
 			RETURN_LONG(0);
+		}
+
+		if (erase_offset > descr->lob_size) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "oci_lob_erase(): offset is greater than LOB's length");
 		}
 		
 		CALL_OCI_RETURN(connection->error,

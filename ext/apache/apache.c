@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache.c,v 1.7 1999/05/09 08:47:49 zeev Exp $ */
+/* $Id: apache.c,v 1.8 1999/05/09 13:57:09 zeev Exp $ */
 #include "php.h"
 #include "ext/standard/head.h"
 #include "php_globals.h"
@@ -154,7 +154,8 @@ void php3_apache_note(INTERNAL_FUNCTION_PARAMETERS)
 }
 /* }}} */
 
-void php3_info_apache(ZEND_MODULE_INFO_FUNC_ARGS) {
+void php3_info_apache(ZEND_MODULE_INFO_FUNC_ARGS)
+{
 	module *modp = NULL;
 #if !defined(WIN32) && !defined(WINNT)
 	char name[64];

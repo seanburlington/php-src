@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php3_mysql.h,v 1.6 1999/06/04 10:45:54 zeev Exp $ */
+/* $Id: php3_mysql.h,v 1.7 1999/06/04 12:51:41 zeev Exp $ */
 
 #ifndef _PHP3_MYSQL_H
 #define _PHP3_MYSQL_H
@@ -36,9 +36,12 @@
 #if COMPILE_DL
 #undef HAVE_MYSQL
 #define HAVE_MYSQL 1
-#	if WIN32||WINNT
-#	define PHP_MYSQL_API __declspec(dllexport)
-#	endif
+#endif
+
+#if WIN32||WINNT
+#define PHP_MYSQL_API __declspec(dllexport)
+#else
+#define PHP_MYSQL_API
 #endif
 
 #if HAVE_MYSQL

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.133 2004/03/08 18:05:40 helly Exp $ */
+/* $Id: simplexml.c,v 1.134 2004/03/16 21:39:43 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1279,7 +1279,7 @@ SXE_METHOD(__construct)
 	php_std_error_handling();
 	docp = xmlParseMemory(data, data_len);
 	if (!docp) {
-		(php_libxml_node_object *)sxe->document = NULL;
+		((php_libxml_node_object *)sxe)->document = NULL;
 		zend_throw_exception(zend_exception_get_default(), "String could not be parsed as XML", 0 TSRMLS_CC);
 		return;
 	}
@@ -1634,7 +1634,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.133 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.134 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

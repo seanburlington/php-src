@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.46 2000/04/06 21:07:41 cmv Exp $ */
+/* $Id: php_pcre.c,v 1.47 2000/04/26 00:29:58 andrei Exp $ */
 
 /*
 	TODO:
@@ -24,6 +24,7 @@
 	- Make new modifier, similar to /e, that passes matches to
 	  a user-defined function
 	- add option to preg_grep() to return entries that _don't_ match
+	- add option to preg_grep() to return the matching keys
 */
 
 #include "php.h"

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_string.h,v 1.11 2000/04/12 19:39:02 andrei Exp $ */
+/* $Id: php_string.h,v 1.12 2000/04/26 00:29:59 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -84,6 +84,7 @@ PHP_FUNCTION(str_repeat);
 PHP_FUNCTION(substr_replace);
 PHP_FUNCTION(strnatcmp);
 PHP_FUNCTION(strnatcasecmp);
+PHP_FUNCTION(substr_count);
 
 #define strnatcmp(a, b) \
 	strnatcmp_ex(a, strlen(a), b, strlen(b), 0)

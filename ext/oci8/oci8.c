@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.238 2004/01/22 08:39:50 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.239 2004/01/26 13:59:42 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -785,7 +785,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.238 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.239 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -5449,7 +5449,7 @@ PHP_FUNCTION(oci_field_type)
 }
 /* }}} */
 
-/* {{{ proto mixed oci_field_type_raw(resource stmt, int col)
+/* {{{ proto int oci_field_type_raw(resource stmt, int col)
    Tell the raw oracle data type of a column */
 PHP_FUNCTION(oci_field_type_raw)
 {
@@ -6505,7 +6505,7 @@ PHP_FUNCTION(oci_collection_element_get)
 
 		/* Return null if the value is null */
 		if (*elemind == OCI_IND_NULL) {
-			RETURN_FALSE;
+			RETURN_NULL;
 		} 
 
 		switch (coll->element_typecode) {

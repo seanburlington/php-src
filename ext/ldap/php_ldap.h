@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ldap.h,v 1.11 2000/08/19 14:05:34 venaas Exp $ */
+/* $Id: php_ldap.h,v 1.12 2000/10/17 16:06:04 venaas Exp $ */
 
 #ifndef PHP_LDAP_H
 #define PHP_LDAP_H
@@ -80,6 +80,11 @@ PHP_FUNCTION(ldap_err2str);
 PHP_FUNCTION(ldap_error);
 
 PHP_FUNCTION(ldap_compare);
+
+#if LDAP_API_VERSION > 2000
+PHP_FUNCTION(ldap_get_option);
+PHP_FUNCTION(ldap_set_option);
+#endif
 
 #ifdef STR_TRANSLATION
 PHP_FUNCTION(ldap_t61_to_8859);

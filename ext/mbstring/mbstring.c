@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.89 2002/08/04 18:59:17 helly Exp $ */
+/* $Id: mbstring.c,v 1.90 2002/08/13 04:37:28 rasmus Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -1120,7 +1120,7 @@ PHP_FUNCTION(mb_http_output)
 /* }}} */
 
 
-/* {{{ proto boolean|array mb_detect_order([mixed encoding-list])
+/* {{{ proto bool|array mb_detect_order([mixed encoding-list])
    Sets the current detect_order or Return the current detect_order as a array */
 PHP_FUNCTION(mb_detect_order)
 {

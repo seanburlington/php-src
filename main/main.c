@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.494 2002/09/29 22:16:29 iliaa Exp $ */
+/* $Id: main.c,v 1.495 2002/10/03 11:18:39 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -843,16 +843,13 @@ int php_request_startup(TSRMLS_D)
 
 		if (PG(output_handler) && PG(output_handler)[0]) {
 			php_start_ob_buffer_named(PG(output_handler), 0, 1 TSRMLS_CC);
-		}
-		else if (PG(output_buffering)) {
+		} else if (PG(output_buffering)) {
 			if (PG(output_buffering)>1) {
 				php_start_ob_buffer(NULL, PG(output_buffering), 0 TSRMLS_CC);
-			}
-			else {
+			} else {
 				php_start_ob_buffer(NULL, 0, 1 TSRMLS_CC);
 			}
-		}
-		else if (PG(implicit_flush)) {
+		} else if (PG(implicit_flush)) {
 			php_start_implicit_flush(TSRMLS_C);
 		}
 

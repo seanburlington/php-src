@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 1999/12/30 04:07:18 sas Exp $
+dnl $Id: config.m4,v 1.4 2000/05/16 08:21:10 sas Exp $
 
 AC_MSG_CHECKING(whether to include cpdflib support)
 AC_ARG_WITH(cpdflib,
@@ -11,7 +11,7 @@ AC_ARG_WITH(cpdflib,
       AC_MSG_RESULT(no) ;;
     yes)
       AC_MSG_RESULT(yes)
-      PHP_EXTENSION(cpdflib)
+      PHP_EXTENSION(cpdf)
       AC_CHECK_LIB(cpdf, cpdf_open, [AC_DEFINE(HAVE_CPDFLIB,1,[Whether you have cpdflib])],
         [AC_MSG_ERROR(Cpdf module requires cpdflib >= 2.)])
       AC_ADD_LIBRARY(cpdf)

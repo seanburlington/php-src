@@ -16,13 +16,15 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: expat_compat.h,v 1.10 2003/06/15 20:40:45 moriyoshi Exp $ */
+/* $Id: expat_compat.h,v 1.11 2003/07/09 03:14:41 sterling Exp $ */
 
 #ifndef PHP_EXPAT_COMPAT_H
 #define PHP_EXPAT_COMPAT_H
 
 #if !defined(HAVE_LIBEXPAT) && defined(HAVE_LIBXML)
 #define LIBXML_EXPAT_COMPAT 1
+
+#include "php_compat.h"
 
 #include <libxml/hash.h>
 #include <libxml/parser.h>

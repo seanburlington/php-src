@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xbm.c,v 1.1 2003/02/02 01:34:54 helly Exp $ */
+/* $Id: xbm.c,v 1.2 2003/03/12 00:51:03 iliaa Exp $ */
 
 #include <stdio.h>
 #include <math.h>
@@ -103,14 +103,11 @@ gdImageCreateFromXbm (FILE * fd)
 	h[4] = '\0';
 	for (i = 0; i < bytes; i++) {
 		while (1) {
-			ch = getc(fd);
-			if (ch == EOF)
-			{
+			if ((ch=getc(fd)) == EOF) {
 				fail = 1;
 				break;
 			}
-			if (ch == 'x')
-			{
+			if (ch == 'x') {
 				break;
 			}
 		}
@@ -118,25 +115,31 @@ gdImageCreateFromXbm (FILE * fd)
 			break;
 		}
 		/* Get hex value */
-		if ((ch=getc(fd)) == EOF) break;
+		if ((ch=getc(fd)) == EOF) {
+			break;
+		}
 		h[0] = ch;
-		if ((ch=getc(fd)) == EOF) break;
+		if ((ch=getc(fd)) == EOF) {
+			break;
+		}
 		h[1] = ch;
 		if (max_bit == 32768) {
-			if ((ch=getc(fd)) == EOF) break;
+			if ((ch=getc(fd)) == EOF) {
+				break;
+			}
 			h[2] = ch;
-			if ((ch=getc(fd)) == EOF) break;
+			if ((ch=getc(fd)) == EOF) {
+				break;
+			}
 			h[3] = ch;
 		}
 		sscanf(h, "%x", &b);
 		for (bit = 1; bit <= max_bit; bit = bit << 1) {
-			gdImageSetPixel (im, x++, y, (b & bit) ? 1 : 0);
-			if (x == im->sx)
-			{
+			gdImageSetPixel(im, x++, y, (b & bit) ? 1 : 0);
+			if (x == im->sx) {
 				x = 0;
 				y++;
-				if (y == im->sy)
-				{
+				if (y == im->sy) {
 					return im;
 				}
 				break;

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.43 2003/05/19 21:45:49 sniper Exp $
+dnl $Id: config.m4,v 1.44 2003/05/19 21:50:23 sniper Exp $
 dnl
 
 PHP_ARG_WITH(xml,whether to enable XML support,
@@ -20,7 +20,9 @@ if test "$PHP_XML" != "no"; then
   PHP_SETUP_LIBXML(XML_SHARED_LIBADD, [
     xml_sources="xml.c compat.c"
   ], [
-    AC_MSG_ERROR(xml2-config not found. Use --with-libxml-dir=<DIR>)
+    if test "$PHP_EXPAT_DIR" = "no"; then
+      AC_MSG_ERROR(xml2-config not found. Use --with-libxml-dir=<DIR>)
+    fi
   ])
 
   if test "$PHP_EXPAT_DIR" != "no"; then

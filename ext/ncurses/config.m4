@@ -1,12 +1,11 @@
 dnl
-dnl $Id: config.m4,v 1.9 2002/01/04 14:15:51 hholzgra Exp $
+dnl $Id: config.m4,v 1.10 2002/01/20 02:30:17 edink Exp $
 dnl
 
 PHP_ARG_WITH(ncurses, for ncurses support,
-[  --with-ncurses[=DIR]    Include ncurses support.])
+[  --with-ncurses[=DIR]    Include ncurses support (CLI/CGI only).])
 
 if test "$PHP_NCURSES" != "no"; then
-   PHP_CHECK_INTERACTIVE(ncurses)
 
    # --with-ncurses -> check with-path
    SEARCH_PATH="/usr/local /usr"     
@@ -50,7 +49,7 @@ if test "$PHP_NCURSES" != "no"; then
    AC_CHECK_LIB(ncurses, asume_default_colors,   [AC_DEFINE(HAVE_NCURSES_ASSUME_DEFAULT_COLORS,  1, [ ])])
    AC_CHECK_LIB(ncurses, use_extended_names,   [AC_DEFINE(HAVE_NCURSES_USE_EXTENDED_NAMES,  1, [ ])])
 
-   PHP_EXTENSION(ncurses, $ext_shared)
+   PHP_EXTENSION(ncurses, $ext_shared, cli)
    PHP_SUBST(NCURSES_SHARED_LIBADD)
 
 fi

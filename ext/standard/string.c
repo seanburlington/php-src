@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.66 1999/12/06 19:01:21 thies Exp $ */
+/* $Id: string.c,v 1.67 1999/12/07 08:14:00 thies Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -221,13 +221,15 @@ PHPAPI void php_explode(pval *delim, pval *str, pval *return_value)
 
 	if (p2 == NULL) {
 		add_index_stringl(return_value, i++, p1, str->value.str.len, 1);
-	} else do {
-		add_index_stringl(return_value, i++, p1, p2-p1, 1);
-		p1 = p2 + delim->value.str.len;
-	} while ((p2 = php_memnstr(p1, delim->value.str.val, delim->value.str.len, endp)) != NULL);
+	} else {
+		do {
+			add_index_stringl(return_value, i++, p1, p2-p1, 1);
+			p1 = p2 + delim->value.str.len;
+		} while ((p2 = php_memnstr(p1, delim->value.str.val, delim->value.str.len, endp)) != NULL);
 
-	if (p1 <= endp) {
-		add_index_stringl(return_value, i++, p1, endp-p1, 1);
+		if (p1 <= endp) {
+			add_index_stringl(return_value, i++, p1, endp-p1, 1);
+		}
 	}
 }
 

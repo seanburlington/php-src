@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.30 2002/11/10 12:18:02 msopacua Exp $
+dnl $Id: config.m4,v 1.31 2002/11/15 15:17:38 helly Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -48,9 +48,9 @@ if test "$PHP_XSLT" != "no"; then
       condition="$i$XSLT_TEST_FILE"
       if test -r $condition; then
         XSLT_DIR=$i
-        AC_MSG_RESULT(found $XSLT_BACKEND_NAME in $i)
       fi
     done
+    AC_MSG_RESULT(found in $XSLT_DIR)
   fi
 
   if test -z "$XSLT_DIR"; then

@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.17 2002/08/10 16:33:08 cox Exp $
+// $Id: System.php,v 1.18 2002/08/25 18:11:24 pajoye Exp $
 //
 
 require_once 'PEAR.php';
@@ -43,7 +43,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.17 $
+* @version  $Revision: 1.18 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -391,27 +391,29 @@ class System
     function tmpdir()
     {
         if (OS_WINDOWS) {
-            if (System::_myenv('TEMP')) {
-                return System::_myenv('TEMP');
+            if (getenv('TEMP')) {
+                return getenv('TEMP');
             }
-            if (System::_myenv('TMP')) {
-                return System::_myenv('TMP');
+            if (getenv('TMP')) {
+                return getenv('TMP');
             }
-            if (System::_myenv('windir')) {
-                return System::_myenv('windir') . '\temp';
+            if (getenv('windir')) {
+                return getenv('windir') . '\temp';
             }
-            return System::_myenv('SystemRoot') . '\temp';
+            return getenv('SystemRoot') . '\temp';
         }
-        if (System::_myenv('TMPDIR')) {
-            return System::_myenv('TMPDIR');
+        if (getenv('TMPDIR')) {
+            return getenv('TMPDIR');
         }
         return '/tmp';
     }
 
     /**
+    * (pajoye) Removed, problem with php.ini-recommanded, E removed
+    *
     * (cox) I always get $_ENV empty in both Windows and Linux
     * with all PHP version <= 4.2.1
-    */
+
     function _myenv($var)
     {
         if (!empty($_ENV)) {
@@ -419,6 +421,7 @@ class System
         }
         return getenv($var);
     }
+    */
 
     /**
     * The "type" command (show the full path of a command)

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.42 2002/03/03 21:12:49 jflemer Exp $ */
+/* $Id: safe_mode.c,v 1.43 2002/03/14 16:48:18 sesser Exp $ */
 
 #include "php.h"
 
@@ -82,8 +82,8 @@ PHPAPI int php_checkuid(const char *filename, char *fopen_mode, int mode)
 			if (mode == CHECKUID_DISALLOW_FILE_NOT_EXISTS) {
 				php_error(E_WARNING, "Unable to access %s", filename);
 				return 0;
-			} else if (mode == CHECKUID_ALLOW_FILE_NOT_EXISTS)
-				php_error(E_WARNING, "Unable to access %s", filename);{
+			} else if (mode == CHECKUID_ALLOW_FILE_NOT_EXISTS) {
+				php_error(E_WARNING, "Unable to access %s", filename);
 				return 1;
 			}
 		} else {

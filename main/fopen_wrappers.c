@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.159 2003/02/23 22:30:02 sniper Exp $ */
+/* $Id: fopen_wrappers.c,v 1.160 2003/03/26 23:01:39 sterling Exp $ */
 
 /* {{{ includes
  */
@@ -490,7 +490,13 @@ PHPAPI FILE *php_fopen_with_path(char *filename, char *mode, char *path, char **
  */
 PHPAPI char *php_strip_url_passwd(char *url)
 {
-	register char *p = url, *url_start;
+	register char *p, *url_start;
+	
+	if (url == NULL) {
+		return NULL;
+	}
+	
+	p = url;
 	
 	while (*p) {
 		if (*p==':' && *(p+1)=='/' && *(p+2)=='/') {

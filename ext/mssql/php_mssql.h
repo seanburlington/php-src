@@ -17,26 +17,28 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.4 2000/02/19 23:41:16 zeev Exp $ */
+/* $Id: php_mssql.h,v 1.5 2000/04/23 10:51:35 fmk Exp $ */
 
 #ifndef _PHP_MSSQL_H
 #define _PHP_MSSQL_H
 
 
 #if HAVE_MSSQL
-#include "sqlfront.h"
-#include "sqldb.h"
-
 #ifdef PHP_WIN32
 #define PHP_MSSQL_API __declspec(dllexport)
 #else
 #define PHP_MSSQL_API
 #endif
 
+
 #if MSSQL65
 #define MSSQL_VERSION "6.5"
+#include "../../../php_build/mssql-65/include/sqlfront.h"
+#include "../../../php_build/mssql-65/include/sqldb.h"
 #elif MSSQL70
 #define MSSQL_VERSION "7.0"
+#include "../../../php_build/mssql-70/include/sqlfront.h"
+#include "../../../php_build/mssql-70/include/sqldb.h"
 #else
 #define MSSQL_VERSION "Unknown"
 #endif

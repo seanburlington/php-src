@@ -27,15 +27,15 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_xml.h,v 1.4 1999/07/02 15:31:02 thies Exp $ */
+/* $Id: php3_xml.h,v 1.5 1999/07/21 14:43:12 ssb Exp $ */
 
-#if HAVE_LIBEXPAT
-# ifndef _PHP_XML_H
-#  define _PHP_XML_H
-# endif
+#ifndef _PHP_XML_H
+# define _PHP_XML_H
 
-#include <xml/xmltok.h>
-#include <xml/xmlparse.h>
+# if HAVE_LIBEXPAT
+
+#include <xmltok.h>
+#include <xmlparse.h>
 
 #ifdef XML_UNICODE
 # error "UTF-16 Unicode support not implemented!"
@@ -128,6 +128,8 @@ PHP_FUNCTION(xml_parse_into_struct);
 #endif /* HAVE_LIBEXPAT */
 
 #define phpext_xml_ptr xml_module_ptr
+
+# endif /* _PHP_XML_H */
 
 /*
  * Local variables:

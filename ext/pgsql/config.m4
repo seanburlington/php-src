@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/06/20 18:52:45 sas Exp $
+dnl $Id: config.m4,v 1.3 1999/07/21 14:43:12 ssb Exp $
 
 AC_MSG_CHECKING(for PostgresSQL support)
 AC_ARG_WITH(pgsql,
@@ -12,6 +12,7 @@ AC_ARG_WITH(pgsql,
     else
       PGSQL_INCDIR=$withval/include
       test -d $withval/include/pgsql && PGSQL_INCDIR=$withval/include/pgsql
+      test -d $withval/include/postgresql && PGSQL_INCDIR=$withval/include/postgresql
       PGSQL_LIBDIR=$withval/lib
       test -d $withval/lib/pgsql && PGSQL_LIBDIR=$withval/lib/pgsql
     fi

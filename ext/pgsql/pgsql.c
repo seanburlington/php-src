@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.244.2.30 2003/12/16 01:00:45 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.244.2.31 2003/12/22 15:56:52 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -3631,9 +3631,8 @@ PHPAPI int php_pgsql_convert(PGconn *pg_link, const char *table_name, const zval
 						if (Z_STRLEN_PP(val) == 0) {
 							if (opt & PGSQL_CONV_FORCE_NULL) {
 								ZVAL_STRING(new_val, "NULL", 1);
-							}
-							else {
-								ZVAL_STRING(new_val, empty_string, 1);
+							} else {
+								ZVAL_STRING(new_val, "''", 1);
 							}
 						}
 						else {

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.25 2004/06/15 10:06:41 abies Exp $ */
+/* $Id: php_pdo_driver.h,v 1.26 2004/06/23 18:06:00 gschlossnagle Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -297,6 +297,9 @@ struct _pdo_dbh_t {
 	enum pdo_error_mode error_mode;
 
 	enum pdo_case_conversion native_case, desired_case;
+
+	/* needed for inheritance to work */
+	zend_class_entry *ce; 
 #if 0
 	/* persistent hash key associated with this handle */
 	const char *persistent_id;

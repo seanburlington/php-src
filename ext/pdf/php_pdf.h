@@ -26,7 +26,7 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_pdf.h,v 1.5 2000/02/21 16:23:07 steinm Exp $ */
+/* $Id: php_pdf.h,v 1.6 2000/02/26 11:58:48 steinm Exp $ */
 
 #ifndef _PHP_PDF_H
 #define _PHP_PDF_H
@@ -58,6 +58,10 @@ PHP_FUNCTION(pdf_begin_page);
 PHP_FUNCTION(pdf_end_page);
 PHP_FUNCTION(pdf_show);
 PHP_FUNCTION(pdf_show_xy);
+#if PDFLIB_MAJORVERSION >= 3 | (PDFLIB_MAJORVERSION >= 2 & PDFLIB_MINORVERSION >= 20)
+PHP_FUNCTION(pdf_show_boxed);
+PHP_FUNCTION(pdf_skew);
+#endif
 PHP_FUNCTION(pdf_set_font);
 PHP_FUNCTION(pdf_get_font);
 PHP_FUNCTION(pdf_get_fontname);
@@ -99,6 +103,7 @@ PHP_FUNCTION(pdf_fill_stroke);
 PHP_FUNCTION(pdf_closepath_fill_stroke);
 PHP_FUNCTION(pdf_endpath);
 PHP_FUNCTION(pdf_clip);
+PHP_FUNCTION(pdf_set_parameter);
 PHP_FUNCTION(pdf_setgray_fill);
 PHP_FUNCTION(pdf_setgray_stroke);
 PHP_FUNCTION(pdf_setgray);

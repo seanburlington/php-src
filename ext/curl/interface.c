@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.36 2004/03/12 16:12:47 john Exp $ */
+/* $Id: interface.c,v 1.37 2004/03/12 16:28:28 john Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -501,7 +501,7 @@ static size_t curl_read(char *data, size_t size, size_t nmemb, void *ctx)
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot call the CURLOPT_READFUNCTION"); 
 				length = -1;
 			} else {
-				if(Z_STRVAL_P(retval_ptr)) {
+				if(Z_TYPE_P(retval_ptr) == IS_STRING) {
 					memcpy(data, Z_STRVAL_P(retval_ptr), size * nmemb);
 					length = Z_STRLEN_P(retval_ptr);
 				} else {

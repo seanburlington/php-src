@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.100 2001/05/16 18:10:06 sterling Exp $ */
+/* $Id: mod_php4.c,v 1.101 2001/05/16 18:15:49 sterling Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -295,9 +295,11 @@ static void php_apache_request_shutdown(void *dummy)
 
 static int php_apache_sapi_activate(SLS_D)
 {
-	request_rec *r = ((request_rec *) SG(server_context));
+	request_rec *r; 
 	SLS_FETCH();
 	APLS_FETCH();
+
+	r = (request_rec *) SG(server_context);
 
 	/*
 	 * For the Apache module version, this bit of code registers a cleanup
@@ -308,7 +310,7 @@ static int php_apache_sapi_activate(SLS_D)
 	 * memory.  
 	 */
 	block_alarms();
-	register_cleanup(((request_rec *) SG(server_context))->pool, NULL, php_apache_request_shutdown, php_request_shutdown_for_exec);
+	register_cleanup(r->pool, NULL, php_apache_request_shutdown, php_request_shutdown_for_exec);
 	AP(in_request)=1;
 	unblock_alarms();
 

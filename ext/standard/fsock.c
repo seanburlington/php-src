@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.25 1999/10/15 15:22:23 thies Exp $ */
+/* $Id: fsock.c,v 1.26 1999/10/24 18:16:16 thies Exp $ */
 
 /* Synced with php3 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php3 revision 1.133 1999-07-21 [sas] */
@@ -237,7 +237,7 @@ static void _php3_fsockopen(INTERNAL_FUNCTION_PARAMETERS, int persistent) {
 	pval *args[5];
 	int *sock=emalloc(sizeof(int));
 	int *sockp;
-	int id, arg_count=ARG_COUNT(ht);
+	int arg_count=ARG_COUNT(ht);
 	int socketd = -1;
 	struct timeval timeout = { 60, 0 };
 	unsigned short portno;

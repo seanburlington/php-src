@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.33.4.5 2003/11/09 20:30:15 derick Exp $ */
+/* $Id: base64.c,v 1.33.4.6 2004/03/06 19:06:12 iliaa Exp $ */
 
 #include <string.h>
 
@@ -188,7 +188,6 @@ PHPAPI unsigned char *php_base64_decode(const unsigned char *str, int length, in
 	/* mop things up if we ended on a boundary */
 	if (ch == base64_pad) {
 		switch(i % 4) {
-		case 0:
 		case 1:
 			efree(result);
 			return NULL;

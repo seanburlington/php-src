@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.215 2002/03/19 13:33:07 wez Exp $ */
+/* $Id: file.c,v 1.216 2002/03/19 17:48:57 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -126,6 +126,7 @@ static void file_globals_ctor(php_file_globals *file_globals_p TSRMLS_DC)
 	zend_hash_init(&FG(ht_persistent_socks), 0, NULL, NULL, 1);
 	FG(fgetss_state) = 0;
 	FG(pclose_ret) = 0;
+	FG(def_chunk_size) = PHP_SOCK_CHUNK_SIZE;
 }
 
 

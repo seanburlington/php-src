@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.54 2002/03/19 14:35:54 wez Exp $ */
+/* $Id: file.h,v 1.55 2002/03/19 17:48:57 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -108,6 +108,7 @@ typedef struct {
   int fgetss_state;
   int pclose_ret;
   HashTable ht_persistent_socks;
+  size_t def_chunk_size;
 } php_file_globals;
 
 #ifdef ZTS

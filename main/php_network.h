@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.19 2002/03/18 18:54:32 wez Exp $ */
+/* $Id: php_network.h,v 1.20 2002/03/19 17:49:00 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -72,6 +72,8 @@
 # define SOCK_CONN_ERR -1
 # define SOCK_RECV_ERR -1
 #endif
+
+#define PHP_SOCK_CHUNK_SIZE	8192
 
 #ifdef HAVE_SOCKADDR_STORAGE
 typedef struct sockaddr_storage php_sockaddr_storage;

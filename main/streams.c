@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.66 2003/05/23 15:27:09 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.67 2003/05/28 10:15:00 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1912,14 +1912,11 @@ PHPAPI int php_stream_parse_fopen_modes(const char *mode, int *open_flags)
 		flags |= O_RDONLY;
 	}
 
-#ifdef O_BINARY
-	if (strchr(mode, 'b')) {
-		flags |= O_BINARY;
-	}
-#endif
-#ifdef _O_TEXT
+#if defined(_O_TEXT) && defined(O_BINARY)
 	if (strchr(mode, 't')) {
 		flags |= _O_TEXT;
+	} else {
+		flags |= O_BINARY;
 	}
 #endif
 

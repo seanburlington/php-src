@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.21 2004/02/12 17:58:52 wez Exp $
+# $Id: Makefile,v 1.22 2004/05/18 21:07:01 wez Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -72,7 +72,7 @@ clean-sapi:
 
 clean: clean-sapi
 	@echo Cleaning build dirs
-	@for %D in (_x $(BUILD_DIRS_SUB)) do @if exist @del /F /Q %D\*.* > NUL
+	@for %D in (_x $(BUILD_DIRS_SUB)) do @if exist %D @del /F /Q %D\*.* > NUL
 	-@del /F /Q $(BUILD_DIR)\*.res $(BUILD_DIR)\*.lib $(BUILD_DIR)\*.ilk $(BUILD_DIR)\*.pdb $(BUILD_DIR)\*.exp $(PHPDEF) $(BUILD_DIR)\php-$(PHP_VERSION_STRING).zip > NUL
 	-rmdir /s /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING) 
 

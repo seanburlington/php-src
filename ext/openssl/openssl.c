@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.57 2002/12/12 13:42:22 wez Exp $ */
+/* $Id: openssl.c,v 1.58 2002/12/12 14:12:41 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -255,7 +255,7 @@ static time_t asn1_time_to_time_t(ASN1_UTCTIME * timestr TSRMLS_DC)
 	long gmadjust = 0;
 
 	if (timestr->length < 13) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%extension author too lazy to parse %s correctly", timestr->data);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "extension author too lazy to parse %s correctly", timestr->data);
 		return (time_t)-1;
 	}
 

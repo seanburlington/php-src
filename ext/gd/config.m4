@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.123 2002/11/18 00:41:27 sniper Exp $
+dnl $Id: config.m4,v 1.124 2002/11/25 01:51:52 iliaa Exp $
 dnl
 
 dnl
@@ -112,7 +112,7 @@ AC_DEFUN(PHP_GD_XPM,[
     fi
 
     for i in include include/X11; do
-      test -f $GD_XPM_DIR/$i/xpm.h && GD_XPM_INC=$GD_XPM_DIR/$i
+      test -f $GD_XPM_DIR/$i/xpm.h && GD_XPM_INC=$GD_XPM_DIR/include
     done
 
     if test -z "$GD_XPM_INC"; then

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.90 2002/10/04 18:21:40 sas Exp $ */
+/* $Id: streams.c,v 1.91 2002/10/04 18:44:47 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -711,6 +711,8 @@ PHPAPI char *_php_stream_gets(php_stream *stream, char *buf, size_t maxlen TSRML
 			size_t toread = maxlen - 1;
 			if (toread > stream->chunk_size)
 				toread = stream->chunk_size;
+			else if (toread < stream->chunk_size)
+				stream->chunk_size = toread;
 
 			/* XXX: Should not the loop end, if the stream op fails? */
 			php_stream_fill_read_buffer(stream, toread TSRMLS_CC);

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.32 2003/07/29 18:26:34 iliaa Exp $ */
+/* $Id: streams.c,v 1.33 2003/08/28 17:07:40 sas Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1505,8 +1505,8 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 	php_stream *stream = NULL;
 	php_stream_wrapper *wrapper = NULL;
 	char *path_to_open;
-	int persistent = options & STREAM_OPEN_PERSISTENT;
 #if ZEND_DEBUG
+	int persistent = options & STREAM_OPEN_PERSISTENT;
 	char *copy_of_path = NULL;
 #endif
 
@@ -1574,7 +1574,7 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 					char *tmp = estrdup(path);
 					php_strip_url_passwd(tmp);
 					php_error_docref1(NULL TSRMLS_CC, tmp, E_WARNING, "could not make seekable - %s",
-							tmp, strerror(errno));
+							tmp);
 					efree(tmp);
 
 					options ^= REPORT_ERRORS;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.11 1999/12/15 05:21:28 evan Exp $ */
+/* $Id: fdf.c,v 1.12 1999/12/15 15:27:51 steinm Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -214,7 +214,7 @@ PHP_FUNCTION(fdf_get_value) {
 		RETURN_FALSE;
 	}
 
-	err = FDFGetValue(fdf, arg2->value.str.val, NULL, 0, &nr);
+	err = FDFGetValue(fdf, (*arg2)->value.str.val, NULL, 0, &nr);
 	if(err != FDFErcOK)
 		printf("Aiii, error\n");
   /* In the inofficial version of FdfTK 4.0 (as FDFGetVersion says. The
@@ -225,7 +225,7 @@ PHP_FUNCTION(fdf_get_value) {
 	if(strcmp(FDFGetVersion(), "2.0"))
 		nr++;
 	buffer = emalloc(nr);
-	err = FDFGetValue(fdf, arg2->value.str.val, buffer, nr, &nr);
+	err = FDFGetValue(fdf, (*arg2)->value.str.val, buffer, nr, &nr);
 	if(err != FDFErcOK)
 		printf("Aiii, error\n");
 
@@ -553,7 +553,7 @@ PHP_FUNCTION(fdf_add_template) {
 	}
 
 	filespec.FS = NULL;
-	filespec.F = arg3->value.str.val;
+	filespec.F = (*arg3)->value.str.val;
 	filespec.Mac = NULL;
 	filespec.DOS = NULL;
 	filespec.Unix = NULL;

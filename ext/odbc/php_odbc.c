@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.129 2002/08/11 23:39:03 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.130 2002/08/12 00:00:54 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -407,10 +407,6 @@ PHP_MINIT_FUNCTION(odbc)
 	/* these are for the Data Source type */
 	REGISTER_LONG_CONSTANT("SQL_FETCH_FIRST", SQL_FETCH_FIRST, CONST_PERSISTENT | CONST_CS);
 	REGISTER_LONG_CONSTANT("SQL_FETCH_NEXT", SQL_FETCH_NEXT, CONST_PERSISTENT | CONST_CS);
-/* These are valid, why aren't they supported by Windows?
-	REGISTER_LONG_CONSTANT("SQL_FETCH_FIRST_USER", SQL_FETCH_FIRST_USER, CONST_PERSISTENT | CONST_CS);
-	REGISTER_LONG_CONSTANT("SQL_FETCH_FIRST_SYSTEM", SQL_FETCH_FIRST_SYSTEM, CONST_PERSISTENT | CONST_CS);
-*/
 
 	/*
 	 * register the standard data types

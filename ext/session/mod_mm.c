@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_mm.c,v 1.39.4.1 2002/12/05 20:14:09 helly Exp $ */
+/* $Id: mod_mm.c,v 1.39.4.2 2002/12/05 20:42:05 helly Exp $ */
 
 #include "php.h"
 
@@ -124,7 +124,7 @@ static ps_sd *ps_sd_new(ps_mm *data, const char *key)
 	
 	sd = mm_malloc(data->mm, sizeof(ps_sd) + keylen);
 	if (!sd) {
-		TSRMlS_FETCH();
+		TSRMLS_FETCH();
 
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "mm_malloc failed, avail %d, err %s", mm_available(data->mm), mm_error());
 		return NULL;

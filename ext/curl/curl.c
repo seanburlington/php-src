@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.47 2001/04/30 14:46:04 sterling Exp $ */
+/* $Id: curl.c,v 1.48 2001/04/30 16:30:46 sterling Exp $ */
 
 
 #include "php.h"
@@ -703,7 +703,7 @@ PHP_FUNCTION(curl_setopt)
 			}
 
 			zend_llist_add_element(&ch->to_free.post, &first);
-			error = curl_easy_setopt(ch->cp, CURLOPT_HTTPPOST, &first);
+			error = curl_easy_setopt(ch->cp, CURLOPT_HTTPPOST, first);
 		}
 		else {
 			char *post = NULL;

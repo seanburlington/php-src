@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.43 2001/03/13 23:20:23 zeev Exp $ */
+/* $Id: browscap.c,v 1.44 2001/03/14 13:38:03 sas Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -196,6 +196,7 @@ PHP_FUNCTION(get_browser)
 	zval **agent_name,**agent;
 	zval *found_browser_entry,*tmp_copy;
 	char *lookup_browser_name;
+	PLS_FETCH();
 
 	if (!INI_STR("browscap")) {
 		RETURN_FALSE;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: streams.c,v 1.8 2003/06/19 23:07:14 edink Exp $ */
+/* $Id: streams.c,v 1.9 2003/11/17 04:54:27 iliaa Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to
@@ -213,7 +213,9 @@ static int php_curl_stream_close(php_stream *stream, int close_handle TSRMLS_DC)
 
 static int php_curl_stream_flush(php_stream *stream TSRMLS_DC)
 {
+#ifdef ilia_0
 	php_curl_stream *curlstream = (php_curl_stream *) stream->abstract;
+#endif
 	return 0;
 }
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.557 2003/06/10 20:03:41 imajes Exp $ */
+/* $Id: main.c,v 1.558 2003/06/12 08:38:58 derick Exp $ */
 
 /* {{{ includes
  */
@@ -1497,7 +1497,7 @@ static zend_bool php_auto_globals_create_post(TSRMLS_D)
 	if (PG(activated_auto_globals)[TRACK_VARS_POST]) {
 		return 0;
 	}
-	if (!SG(headers_sent) && SG(request_info).request_method && !strcasecmp(SG(request_info).request_method, "POST")) {
+	if (!SG(headers_sent) && SG(request_info).request_method && !strcmp(SG(request_info).request_method, "POST")) {
 		sapi_module.treat_data(PARSE_POST, NULL, NULL TSRMLS_CC);	/* POST Data */
 		_gpc_flags[0]=1;
 	}

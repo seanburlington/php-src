@@ -26,7 +26,7 @@
    | Authors: Stephanie Wehner <_@r4k.net>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_yp.h,v 1.3 1999/12/17 20:55:30 zeev Exp $ */ 
+/* $Id: php_yp.h,v 1.4 1999/12/18 03:20:53 zeev Exp $ */ 
 
 #ifndef _PHP_YP_H
 #define _PHP_YP_H
@@ -42,7 +42,6 @@ extern zend_module_entry yp_module_entry;
 #define yp_module_ptr &yp_module_entry
 
 /* yp.c functions */
-int php3_minit_yp(INIT_FUNC_ARGS);
 PHP_FUNCTION(yp_get_default_domain);
 PHP_FUNCTION(yp_order);
 PHP_FUNCTION(yp_master);

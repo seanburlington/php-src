@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php_sybase.h,v 1.2 1999/12/17 20:55:25 zeev Exp $ */
+/* $Id: php_sybase.h,v 1.3 1999/12/18 03:20:50 zeev Exp $ */
 
 #ifndef _PHP_SYBASE_H
 #define _PHP_SYBASE_H
@@ -43,11 +43,11 @@
 extern zend_module_entry sybase_module_entry;
 #define sybase_module_ptr &sybase_module_entry
 
-extern int php3_minit_sybase(INIT_FUNC_ARGS);
-extern int php3_rinit_sybase(INIT_FUNC_ARGS);
-extern int php3_mshutdown_sybase(SHUTDOWN_FUNC_ARGS);
-extern int php3_rshutdown_sybase(SHUTDOWN_FUNC_ARGS);
-void php3_info_sybase(ZEND_MODULE_INFO_FUNC_ARGS);
+PHP_MINIT_FUNCTION(sybase);
+PHP_RINIT_FUNCTION(sybase);
+PHP_MSHUTDOWN_FUNCTION(sybase);
+PHP_RSHUTDOWN_FUNCTION(sybase);
+PHP_MINFO_FUNCTION(sybase);
 PHP_FUNCTION(sybase_connect);
 PHP_FUNCTION(sybase_pconnect);
 PHP_FUNCTION(sybase_close);
@@ -130,7 +130,7 @@ typedef struct {
 } sybase_result;
 
 
-extern sybase_module php3_sybase_module;
+extern sybase_module php_sybase_module;
 
 #else
 

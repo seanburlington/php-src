@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xml.h,v 1.4 1999/12/17 20:55:29 zeev Exp $ */
+/* $Id: php_xml.h,v 1.5 1999/12/18 03:20:52 zeev Exp $ */
 
 #ifndef _PHP_XML_H
 # define _PHP_XML_H
@@ -83,11 +83,11 @@ typedef struct {
 extern zend_module_entry xml_module_entry;
 # define xml_module_ptr &xml_module_entry
 
-enum php3_xml_option {
-    PHP3_XML_OPTION_CASE_FOLDING = 1,
-    PHP3_XML_OPTION_TARGET_ENCODING,
-    PHP3_XML_OPTION_SKIP_TAGSTART,
-    PHP3_XML_OPTION_SKIP_WHITE
+enum php_xml_option {
+    PHP_XML_OPTION_CASE_FOLDING = 1,
+    PHP_XML_OPTION_TARGET_ENCODING,
+    PHP_XML_OPTION_SKIP_TAGSTART,
+    PHP_XML_OPTION_SKIP_WHITE
 };
 
 # define RETURN_OUT_OF_MEMORY \

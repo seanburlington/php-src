@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.21 2002/05/09 20:37:45 fmk Exp $ */
+/* $Id: php_mssql.h,v 1.22 2002/05/14 23:57:43 fmk Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -41,7 +41,8 @@
 #define tinyintcol(i) ((int) *(DBTINYINT *) dbdata(mssql_ptr->link,i))
 #define anyintcol(j) (coltype(j)==SQLINT4?intcol(j):(coltype(j)==SQLINT2?smallintcol(j):tinyintcol(j)))
 #define charcol(i) ((DBCHAR *) dbdata(mssql_ptr->link,i))
-#define floatcol(i) ((float) *(DBFLT8 *) dbdata(mssql_ptr->link,i))
+#define floatcol4(i) ((float) *(DBFLT4 *) dbdata(mssql_ptr->link,i))
+#define floatcol8(i) ((float) *(DBFLT8 *) dbdata(mssql_ptr->link,i))
 
 #ifdef ZTS
 #include "TSRM.h"

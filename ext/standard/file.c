@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.363 2003/10/27 22:36:44 moriyoshi Exp $ */
+/* $Id: file.c,v 1.364 2003/10/27 22:45:58 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1731,6 +1731,7 @@ static const char *php_fgetcsv_lookup_trailing_spaces(const char *ptr, size_t le
 			case -2:
 			case -1:
 				inc_len = 1;
+				_php_mblen(NULL, 0);
 				break;
 			case 0:
 				goto quit_loop;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.81 2001/12/01 19:42:34 mfischer Exp $ */
+/* $Id: php_domxml.c,v 1.82 2001/12/02 10:00:15 eschmid Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1243,7 +1243,7 @@ PHP_FUNCTION(domxml_is_blank_node)
 /* }}} */
 
 /* {{{ proto int domxml_node_type(void)
-   unknown ??? */
+   Returns the type of the node */
 PHP_FUNCTION(domxml_node_type)
 {
 	zval *id;

@@ -17,7 +17,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.50 2003/03/18 12:06:07 ssb Exp $
+// $Id: Package.php,v 1.51 2003/06/07 16:45:53 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';
@@ -442,11 +442,14 @@ Wrote: /usr/src/redhat/RPMS/i386/PEAR::Net_Socket-1.0-1.i386.rpm
         putenv("TEST_PHP_EXECUTABLE=$php");
         $ip = ini_get("include_path");
         $ps = OS_WINDOWS ? ';' : ':';
-        $run_tests = $this->config->get('php_dir') . DIRECTORY_SEPARATOR . 'run-tests.php';
+        $run_tests = $rtsts = $this->config->get('php_dir') . DIRECTORY_SEPARATOR . 'run-tests.php';
         if (!file_exists($run_tests)) {
             $run_tests = PEAR_INSTALL_DIR . DIRECTORY_SEPARATOR . 'run-tests.php';
             if (!file_exists($run_tests)) {
-                return $this->raiseError("No `run-tests.php' file found");
+                return $this->raiseError("No `run-tests.php' file found at $rtsts. You need ".
+                                                "to copy there the run-tests.php file located ".
+                                                "inside the sources of your php distribution package, ".
+                                                "in order to make this command available.");
             }
         }
         $plist = implode(" ", $params);
@@ -650,7 +653,7 @@ Wrote: /usr/src/redhat/RPMS/i386/PEAR::Net_Socket-1.0-1.i386.rpm
         fwrite($wp, $spec_contents);
         fclose($wp);
         $this->ui->outputData("Wrote RPM spec file $spec_file", $command);
-        
+
         return true;
     }
 

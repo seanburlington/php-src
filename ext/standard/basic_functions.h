@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.24 1999/10/16 10:14:46 andi Exp $ */
+/* $Id: basic_functions.h,v 1.25 1999/10/26 19:57:10 andrei Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -60,7 +60,6 @@ PHP_FUNCTION(usort);
 PHP_FUNCTION(uasort);
 PHP_FUNCTION(uksort);
 PHP_FUNCTION(array_walk);
-PHP_FUNCTION(array_map);
 PHP_FUNCTION(count);
 PHP_FUNCTION(flush);
 PHP_FUNCTION(end);

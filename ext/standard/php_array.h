@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_array.h,v 1.4 1999/12/11 22:42:01 andrei Exp $ */
+/* $Id: php_array.h,v 1.5 1999/12/13 19:42:26 andrei Exp $ */
 
 #ifndef _PHP_ARRAY_H
 #define _PHP_ARRAY_H
@@ -62,7 +62,7 @@ PHP_FUNCTION(extract);
 PHP_FUNCTION(compact);
 PHP_FUNCTION(range);
 PHP_FUNCTION(shuffle);
-PHP_FUNCTION(multisort);
+PHP_FUNCTION(array_multisort);
 PHP_FUNCTION(array_push);
 PHP_FUNCTION(array_pop);
 PHP_FUNCTION(array_shift);

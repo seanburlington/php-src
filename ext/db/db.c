@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.9 1999/10/07 10:56:04 thies Exp $ */
+/* $Id: db.c,v 1.10 1999/10/07 12:49:25 thies Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 # include "dl/phpdl.h"
@@ -273,6 +273,7 @@ dbm_info *_php3_dbmopen(char *filename, char *mode) {
 	int ret, lock=0;
 	char *lockfn = NULL;
 	int lockfd = 0;
+	PLS_FETCH();
 
 #if NFS_HACK
 	int last_try = 0;

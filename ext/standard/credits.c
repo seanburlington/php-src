@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.34 2005/02/17 04:49:52 wez Exp $ */
+/* $Id: credits.c,v 1.35 2005/02/17 04:50:49 wez Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -60,7 +60,7 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 		CREDIT_LINE("Win32 Port", "Shane Caraveo, Zeev Suraski, Wez Furlong");
 		CREDIT_LINE("Server API (SAPI) Abstraction Layer", "Andi Gutmans, Shane Caraveo, Zeev Suraski");
 		CREDIT_LINE("Streams Abstraction Layer", "Wez Furlong, Sara Golemon");
-		CREDIT_LINE("PHP Data Objects Layer", "Wez Furlong, Marcus Boerger, Sterling Hughes");
+		CREDIT_LINE("PHP Data Objects Layer", "Wez Furlong, Marcus Boerger, Sterling Hughes, George Schlossnagle");
 		php_info_print_table_end();
 	}
 

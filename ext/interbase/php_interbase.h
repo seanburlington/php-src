@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.17 2000/07/17 20:51:47 zeev Exp $ */
+/* $Id: php_interbase.h,v 1.18 2000/10/05 12:47:39 jah Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -82,7 +82,6 @@ ZEND_BEGIN_MODULE_GLOBALS(ibase)
 	long num_links, num_persistent;
 	long max_links, max_persistent;
 	long allow_persistent;
-	int le_blob, le_link, le_plink, le_result, le_query, le_trans;
 	char *default_user, *default_password;
 	char *timestampformat;
 	char *cfg_timestampformat;

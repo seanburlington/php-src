@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.11 2000/01/01 01:32:00 sas Exp $ */
+/* $Id: mod_php4.c,v 1.12 2000/01/13 17:37:21 zeev Exp $ */
 
 #include "zend.h"
 #include "php.h"
@@ -124,7 +124,7 @@ void php_save_umask(void)
 }
 
 
-static int zend_apache_ub_write(const char *str, uint str_length)
+static int sapi_apache_ub_write(const char *str, uint str_length)
 {
 	int ret;
 	SLS_FETCH();
@@ -140,6 +140,17 @@ static int zend_apache_ub_write(const char *str, uint str_length)
 		if(!PG(ignore_user_abort)) zend_bailout();
 	}
 	return ret;
+}
+
+
+
+static void sapi_apache_flush(void *server_context)
+{
+#if MODULE_MAGIC_NUMBER > 19970110
+	rflush((request_rec *) server_context);
+#else
+	bflush((request_rec *) server_context->connection->client);
+#endif
 }
 
 
@@ -217,7 +228,9 @@ static sapi_module_struct sapi_module = {
 	php_module_startup,				/* startup */
 	php_module_shutdown_wrapper,	/* shutdown */
 
-	zend_apache_ub_write,			/* unbuffered write */
+	sapi_apache_ub_write,			/* unbuffered write */
+	sapi_apache_flush,				/* flush */
+
 
 	php_error,						/* error handler */
 

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.112 2004/03/04 22:53:09 moriyoshi Exp $ */
+/* $Id: php_cli.c,v 1.113 2004/07/14 22:30:29 edink Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -132,7 +132,7 @@ static int module_name_cmp(const void *a, const void *b TSRMLS_DC)
 	Bucket *f = *((Bucket **) a);
 	Bucket *s = *((Bucket **) b);
 
-	return strcmp(((zend_module_entry *)f->pData)->name,
+	return strcasecmp(((zend_module_entry *)f->pData)->name,
 				  ((zend_module_entry *)s->pData)->name);
 }
 

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.440 2003/04/04 13:02:42 moriyoshi Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.441 2003/04/04 15:42:54 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -425,15 +425,6 @@ AC_CACHE_CHECK([for struct sockaddr_storage], ac_cv_sockaddr_storage,
   ac_cv_sockaddr_storage=yes, ac_cv_sockaddr_storage=no)])
 if test "$ac_cv_sockaddr_storage" = yes; then
   AC_DEFINE(HAVE_SOCKADDR_STORAGE,1,[Whether you have struct sockaddr_storage])
-fi
-
-dnl Check for struct sockaddr_storage
-AC_CACHE_CHECK([for struct cmsghdr], ac_cv_cmsghdr,
-[AC_TRY_COMPILE([ #include <sys/types.h>
-#include <sys/socket.h>], [struct cmsghdr s; s],
-  ac_cv_cmsghdr=yes, ac_cv_cmsghdr=no)])
-if test "$ac_cv_cmsghdr" = yes; then
-  AC_DEFINE(HAVE_CMSGHDR,1,[Whether you have struct cmsghdr])
 fi
 
 dnl Check if sockaddr data structure includes an "sa_len" member

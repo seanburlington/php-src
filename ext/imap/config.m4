@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.43 2002/04/02 00:04:53 sniper Exp $
+dnl $Id: config.m4,v 1.44 2002/06/01 20:14:57 sr Exp $
 dnl
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
@@ -127,10 +127,10 @@ if test "$PHP_IMAP" != "no"; then
     old_CPPFLAGS=$CPPFLAGS
     CPPFLAGS=-I$IMAP_INC_DIR
     AC_EGREP_CPP(this_is_true, [
-      #include "imap4r1.h"
-      #if defined(IMAPSSLPORT)
+#include "imap4r1.h"
+#if defined(IMAPSSLPORT)
       this_is_true
-      #endif
+#endif
     ],[
       AC_DEFINE(HAVE_IMAP2001, 1, [ ])
     ],[])

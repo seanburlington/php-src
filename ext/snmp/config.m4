@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.25 2002/03/12 16:35:28 sas Exp $
+dnl $Id: config.m4,v 1.26 2002/06/01 20:14:58 sr Exp $
 dnl
 
 PHP_ARG_WITH(snmp,for SNMP support,
@@ -35,10 +35,10 @@ PHP_ARG_WITH(snmp,for SNMP support,
     if test "$ac_cv_header_default_store_h" = "yes"; then
       AC_MSG_CHECKING(for OpenSSL support in SNMP libraries)
       AC_EGREP_CPP(yes,[
-        #include <ucd-snmp-config.h>
-        #if USE_OPENSSL
+#include <ucd-snmp-config.h>
+#if USE_OPENSSL
         yes
-        #endif
+#endif
       ],[
         SNMP_SSL=yes
       ],[

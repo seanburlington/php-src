@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.44 2002/08/14 17:49:40 kalowsky Exp $
+dnl $Id: config.m4,v 1.45 2002/08/19 21:49:36 sniper Exp $
 dnl
 AC_DEFUN(JAVA_FIND_JAR, [
  AC_MSG_CHECKING([Java Jar location])
@@ -9,6 +9,7 @@ AC_DEFUN(JAVA_FIND_JAR, [
     else
       JAVA_JAR=
     fi
+    PHP_JAVA=`cd \`dirname \\\`which javac\\\`\`/..;pwd`
 
     dnl
     dnl substitue zip for systems which don't have jar
@@ -126,8 +127,9 @@ AC_DEFUN(JAVA_CHECK_LIB, [
    fi
 
    JAVA_CFLAGS="$JAVA_CFLAGS -D_REENTRANT"
-   AC_MSG_RESULT([$JAVA_LIBPATH])
  fi
+
+ AC_MSG_RESULT([$JAVA_LIBPATH])
 ])
 
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.370 2001/06/21 13:47:26 zeev Exp $ */
+/* $Id: main.c,v 1.371 2001/07/02 18:17:09 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -613,7 +613,7 @@ int php_request_startup(CLS_D ELS_DC PLS_DC SLS_DC)
 
 	PG(during_request_startup) = 1;
 	
-	php_output_startup();
+	php_output_activate();
 
 	/* initialize global variables */
 	PG(modules_activated) = 0;
@@ -829,6 +829,7 @@ int php_module_startup(sapi_module_struct *sf)
 	sapi_module = *sf;
 
 	php_output_startup();
+	php_output_activate();
 
 	zuf.error_function = php_error_cb;
 	zuf.printf_function = php_printf;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.60 2001/06/26 18:30:31 zeev Exp $ */
+/* $Id: output.c,v 1.61 2001/07/02 18:17:08 zeev Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -61,22 +61,24 @@ static void php_output_init_globals(OLS_D)
 
 
 /* Start output layer */
-PHPAPI void php_output_startup()
+PHPAPI void php_output_startup(void)
 {
 #ifdef ZTS
 	output_globals_id = ts_allocate_id(sizeof(php_output_globals), (ts_allocate_ctor) php_output_init_globals, NULL);
 #else 
 	php_output_init_globals(OLS_C);
 #endif
+}
 
-	{
-		OLS_FETCH();
 
-		OG(php_body_write) = php_ub_body_write;
-		OG(php_header_write) = sapi_module.ub_write;
-		OG(nesting_level) = 0;
-		OG(lock) = 0;
-	}
+PHPAPI void php_output_activate(void)
+{
+	OLS_FETCH();
+
+	OG(php_body_write) = php_ub_body_write;
+	OG(php_header_write) = sapi_module.ub_write;
+	OG(nesting_level) = 0;
+	OG(lock) = 0;
 }
 
 

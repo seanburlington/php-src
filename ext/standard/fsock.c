@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.74 2001/07/30 08:24:36 zeev Exp $ */
+/* $Id: fsock.c,v 1.75 2001/08/03 09:36:14 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -89,9 +89,16 @@ extern int le_fp;
 		efree(key);				\
 	}
 
-#define SEARCHCR() do {											\
-	for (p = READPTR(sock), pe = p + MIN(TOREAD(sock), maxlen); \
-			*p != '\n'; ) if (++p >= pe) { p = NULL; break; }	\
+#define SEARCHCR() do {												\
+	if (TOREAD(sock)) {												\
+		for (p = READPTR(sock), pe = p + MIN(TOREAD(sock), maxlen);	\
+				*p != '\n'; ) 										\
+			if (++p >= pe) { 										\
+				p = NULL; 											\
+				break; 												\
+			}														\
+	} else															\
+		p = NULL;													\
 } while (0)
 
 #ifdef PHP_WIN32

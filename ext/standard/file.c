@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.191 2001/11/10 18:06:28 derick Exp $ */
+/* $Id: file.c,v 1.192 2001/11/11 19:42:31 jeroen Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1356,7 +1356,7 @@ PHP_FUNCTION(fflush)
 }
 /* }}} */
 
-/* {{{ proto int set_file_buffer(int fp, int buffer)
+/* {{{ proto int set_file_buffer(resource fp, int buffer)
    Set file write buffer */
 PHP_FUNCTION(set_file_buffer)
 {
@@ -1391,6 +1391,9 @@ PHP_FUNCTION(set_file_buffer)
 		ret = setvbuf((FILE *) what, NULL, _IOFBF, buff);
 	}
 
+	if (ret) {
+		php_error(E_WARNING, "Illegal value for set_file_buffer()");
+	}
 	RETURN_LONG(ret);
 }
 /* }}} */

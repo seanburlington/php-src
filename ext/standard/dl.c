@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.94 2004/05/25 13:25:22 wez Exp $ */
+/* $Id: dl.c,v 1.95 2004/05/25 13:51:00 iliaa Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -104,7 +104,7 @@ void php_dl(pval *file, int type, pval *return_value TSRMLS_DC)
 {
 	void *handle;
 	char *libpath;
-	zend_module_entry *module_entry, *tmp;
+	zend_module_entry *module_entry;
 	zend_module_entry *(*get_module)(void);
 	int error_type;
 	char *extension_dir;

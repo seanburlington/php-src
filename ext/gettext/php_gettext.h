@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gettext.h,v 1.8 2000/12/08 09:20:42 zak Exp $ */
+/* $Id: php_gettext.h,v 1.9 2000/12/10 15:53:37 sniper Exp $ */
 
 #ifndef PHP_GETTEXT_H
 #define PHP_GETTEXT_H
@@ -30,7 +30,6 @@ extern zend_module_entry php_gettext_module_entry;
 #define gettext_module_ptr &php_gettext_module_entry
 
 PHP_MINFO_FUNCTION(gettext);
-PHP_MINIT_FUNCTION(gettext);
 
 PHP_FUNCTION(textdomain);
 PHP_FUNCTION(gettext);

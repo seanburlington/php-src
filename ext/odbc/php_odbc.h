@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.41 2001/07/30 08:24:31 zeev Exp $ */
+/* $Id: php_odbc.h,v 1.42 2001/08/03 05:07:22 sniper Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -107,6 +107,14 @@ PHP_FUNCTION(solid_fetch_prev);
 #endif
 
 #elif defined(HAVE_UNIXODBC) /* unixODBC library */
+
+#ifdef CHAR
+#undef CHAR
+#endif
+
+#ifdef SQLCHAR
+#undef SQLCHAR
+#endif
 
 #define ODBC_TYPE "unixODBC"
 #include <sql.h>

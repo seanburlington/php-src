@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.89 2005/03/28 16:28:04 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.90 2005/03/28 18:06:28 dmitry Exp $ */
 
 #include <time.h>
 
@@ -1479,8 +1479,11 @@ static xmlNodePtr to_xml_object(encodeTypePtr type, zval *data, int style, xmlNo
 								if ((*attr)->fixed && strcmp((*attr)->fixed,dummy->children->content) != 0) {
 									soap_error3(E_ERROR, "Encoding: Attribute '%s' has fixed value '%s' (value '%s' is not allowed)", (*attr)->name, (*attr)->fixed, dummy->children->content);
 								}
+								if ((*attr)->namens) {
+/*
 								if ((*attr)->namens &&
-								    (type->ns == NULL || strcmp((*attr)->namens, type->ns) == 0)) {
+								    (type->ns == NULL || strcmp((*attr)->namens, type->ns))) {
+*/
 									xmlNsPtr nsp = encode_add_ns(xmlParam, (*attr)->namens);
 
 									xmlSetNsProp(xmlParam, nsp, (*attr)->name, dummy->children->content);

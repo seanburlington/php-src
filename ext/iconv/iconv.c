@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.34 2002/03/20 13:24:59 sas Exp $ */
+/* $Id: iconv.c,v 1.35 2002/03/21 20:22:05 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -32,7 +32,12 @@
 
 #if HAVE_ICONV
 
+#ifdef HAVE_GICONV_H
+#include <giconv.h>
+#else
 #include <iconv.h>
+#endif
+
 #include <errno.h>
 
 #include "php_globals.h"

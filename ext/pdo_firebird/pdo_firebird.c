@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_firebird.c,v 1.2 2004/06/12 17:09:33 abies Exp $ */
+/* $Id: pdo_firebird.c,v 1.3 2005/02/09 05:00:58 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -44,7 +44,7 @@ zend_module_entry pdo_firebird_module_entry = { /* {{{ */
 	NULL,
 	NULL,
 	PHP_MINFO(pdo_firebird),
-	"0.1",
+	"0.2",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

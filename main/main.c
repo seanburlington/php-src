@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.579 2003/10/09 02:58:34 iliaa Exp $ */
+/* $Id: main.c,v 1.580 2003/11/19 06:11:47 andi Exp $ */
 
 /* {{{ includes
  */
@@ -722,6 +722,9 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 			case E_NOTICE:
 			case E_USER_NOTICE:
 				error_type_str = "Notice";
+				break;
+			case E_STRICT:
+				error_type_str = "Strict Standards";
 				break;
 			default:
 				error_type_str = "Unknown error";

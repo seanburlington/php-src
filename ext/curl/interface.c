@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.15 2003/05/09 01:10:18 iliaa Exp $ */
+/* $Id: interface.c,v 1.16 2003/05/17 14:12:36 sterling Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -374,7 +374,7 @@ static size_t curl_write(char *data, size_t size, size_t nmemb, void *ctx)
 	
 	switch (t->method) {
 		case PHP_CURL_STDOUT:
-			PHPWRITE(data, size);
+			PHPWRITE(data, length);
 			break;
 		case PHP_CURL_FILE:
 			return fwrite(data, size, nmemb, t->fp);
@@ -483,7 +483,7 @@ static size_t curl_write_header(char *data, size_t size, size_t nmemb, void *ctx
 			if (ch->handlers->write->method == PHP_CURL_RETURN) {
 				smart_str_appendl(&ch->handlers->write->buf, data, (int) length);
 			} else {
-				PHPWRITE(data, size);
+				PHPWRITE(data, length);
 			}
 			break;
 		case PHP_CURL_FILE:

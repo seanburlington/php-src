@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.79 2001/06/06 13:05:52 rasmus Exp $ */
+/* $Id: xml.c,v 1.80 2001/07/09 06:49:34 thies Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -492,7 +492,7 @@ xml_utf8_encode(const char *s, int len, int *newlen, const XML_Char *encoding)
 	}
 	/* This is the theoretical max (will never get beyond len * 2 as long
 	 * as we are converting from single-byte characters, though) */
-	newbuf = emalloc(len * 4);
+	newbuf = emalloc(len * 4 + 1);
 	while (pos > 0) {
 		c = encoder ? encoder((unsigned char)(*s)) : (unsigned short)(*s);
 		if (c < 0x80) {
@@ -513,9 +513,8 @@ xml_utf8_encode(const char *s, int len, int *newlen, const XML_Char *encoding)
 		pos--;
 		s++;
     }
-	if (*newlen < len * 4) {
-		newbuf = erealloc(newbuf, *newlen);
-	}
+	newbuf[*newlen] = 0;
+	newbuf = erealloc(newbuf, (*newlen)+1);
 	return newbuf;
 }
 /* }}} */

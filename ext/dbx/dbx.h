@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx.h,v 1.6 2001/08/07 19:09:58 fmk Exp $ */
+/* $Id: dbx.h,v 1.7 2001/08/17 13:00:46 andi Exp $ */
 
 #ifndef ZEND_DBX_H
 #define ZEND_DBX_H
@@ -45,7 +45,7 @@
 
 #define MOVE_RETURNED_TO_RV(rv, returned_zval) { **rv = *returned_zval; zval_copy_ctor(*rv); zval_ptr_dtor(&returned_zval); }
 
-void dbx_call_any_function(INTERNAL_FUNCTION_PARAMETERS, char * function_name, zval ** returnvalue, int number_of_arguments, zval *** params);
+void dbx_call_any_function(INTERNAL_FUNCTION_PARAMETERS, char * function_name, zval **returnvalue, int number_of_arguments, zval *** params);
 
 #endif	/* ZEND_DBX_H */
 

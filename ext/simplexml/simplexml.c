@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.132 2004/03/01 12:09:23 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.133 2004/03/08 18:05:40 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1294,7 +1294,7 @@ typedef struct {
 } php_sxe_iterator;
 
 static void php_sxe_iterator_dtor(zend_object_iterator *iter TSRMLS_DC);
-static int php_sxe_iterator_has_more(zend_object_iterator *iter TSRMLS_DC);
+static int php_sxe_iterator_valid(zend_object_iterator *iter TSRMLS_DC);
 static void php_sxe_iterator_current_data(zend_object_iterator *iter, zval ***data TSRMLS_DC);
 static int php_sxe_iterator_current_key(zend_object_iterator *iter, char **str_key, uint *str_key_len, ulong *int_key TSRMLS_DC);
 static void php_sxe_iterator_move_forward(zend_object_iterator *iter TSRMLS_DC);
@@ -1302,7 +1302,7 @@ static void php_sxe_iterator_rewind(zend_object_iterator *iter TSRMLS_DC);
 
 zend_object_iterator_funcs php_sxe_iterator_funcs = {
 	php_sxe_iterator_dtor,
-	php_sxe_iterator_has_more,
+	php_sxe_iterator_valid,
 	php_sxe_iterator_current_data,
 	php_sxe_iterator_current_key,
 	php_sxe_iterator_move_forward,
@@ -1388,7 +1388,7 @@ static void php_sxe_iterator_dtor(zend_object_iterator *iter TSRMLS_DC)
 	efree(iterator);
 }
 
-static int php_sxe_iterator_has_more(zend_object_iterator *iter TSRMLS_DC)
+static int php_sxe_iterator_valid(zend_object_iterator *iter TSRMLS_DC)
 {
 	php_sxe_iterator *iterator = (php_sxe_iterator *)iter;
 
@@ -1634,7 +1634,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.132 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.133 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

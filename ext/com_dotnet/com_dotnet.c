@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_dotnet.c,v 1.7 2004/06/16 23:57:25 abies Exp $ */
+/* $Id: com_dotnet.c,v 1.8 2004/08/02 18:02:48 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -152,7 +152,8 @@ PHP_FUNCTION(com_dotnet_create_instance)
 				SUCCEEDED(IUnknown_QueryInterface(V_UNKNOWN(&retval), &IID_IObjectHandle, &handle))) {
 			VARIANT unwrapped;
 
-			if (SUCCEEDED(IObjectHandle_Unwrap(handle, &unwrapped))) {
+			hr = IObjectHandle_Unwrap(handle, &unwrapped);
+			if (SUCCEEDED(hr)) {
 				/* unwrapped is now the dispatch pointer we want */
 				V_DISPATCH(&obj->v) = V_DISPATCH(&unwrapped);
 				V_VT(&obj->v) = VT_DISPATCH;

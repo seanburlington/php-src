@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.501 2002/09/05 12:03:43 hyanantha Exp $ */
+/* $Id: basic_functions.c,v 1.502 2002/09/08 16:45:28 sesser Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1027,6 +1027,7 @@ PHP_MINIT_FUNCTION(basic)
 	php_register_url_stream_wrapper("ftp", &php_stream_ftp_wrapper TSRMLS_CC);
 # if HAVE_OPENSSL_EXT
 	php_register_url_stream_wrapper("https", &php_stream_http_wrapper TSRMLS_CC);
+	php_register_url_stream_wrapper("ftps", &php_stream_ftp_wrapper TSRMLS_CC);
 # endif
 #endif
 

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 1999/04/25 14:10:23 rasmus Exp $
+dnl $Id: config.m4,v 1.6 1999/05/21 07:52:12 sas Exp $
 
 AC_MSG_CHECKING(for MySQL support)
 AC_ARG_WITH(mysql,
@@ -17,9 +17,12 @@ AC_ARG_WITH(mysql,
 			elif test -f /usr/local/include/mysql/mysql.h; then
 				MYSQL_INCDIR=/usr/local/include/mysql
 				MYSQL_LIBDIR=/usr/local/lib/mysql
-			elif test -f /usr/local/include/mysql.h; then
+		    elif test -f /usr/local/include/mysql.h; then
 				MYSQL_INCDIR=/usr/local/include
-				MYSQL_LIBDIR=/usr/local/lib  
+				MYSQL_LIBDIR=/usr/local/lib 
+            elif test -f /usr/local/mysql/include/mysql/mysql.h; then
+				MYSQL_INCDIR=/usr/local/mysql/include/mysql
+				MYSQL_LIBDIR=/usr/local/mysql/lib/mysql
 			else
 				AC_MSG_RESULT(no)
 				AC_MSG_ERROR(Invalid MySQL directory - unable to find mysql.h)

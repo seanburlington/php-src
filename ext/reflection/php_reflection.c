@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.47 2003/09/01 16:13:24 helly Exp $ */
+/* $Id: php_reflection.c,v 1.48 2003/09/01 19:28:38 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"

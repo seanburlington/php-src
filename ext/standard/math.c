@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.105 2003/08/08 23:40:44 iliaa Exp $ */
+/* $Id: math.c,v 1.106 2003/08/09 01:12:41 helly Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -32,7 +32,13 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-#define PHP_ROUND_FUZZ 0.50000000001
+#ifndef PHP_ROUND_FUZZ
+# ifndef PHP_WIN32
+#  define PHP_ROUND_FUZZ 0.50000000001
+# else
+#  define PHP_ROUND_FUZZ 0.5
+# endif
+#endif
 
 /* {{{ proto int abs(int number)
    Return the absolute value of the number */

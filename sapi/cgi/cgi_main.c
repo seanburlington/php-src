@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.236 2003/08/01 12:26:28 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.237 2003/08/01 16:52:49 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1614,7 +1614,9 @@ fastcgi_request_done:
 			}
 
 			php_request_shutdown((void *) 0);
-			exit_status = EG(exit_status);
+			if (exit_status == 0) {
+				exit_status = EG(exit_status);
+			}
 
 			if (SG(request_info).path_translated) {
 				free(SG(request_info).path_translated);

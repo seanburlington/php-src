@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.59 2003/08/08 06:18:25 pollita Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.60 2003/08/20 21:59:29 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -472,6 +472,20 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 
 	/* Send RETR/STOR command */
 	if (read_write == 1) {
+		/* set resume position if applicable */
+		if (context &&
+			php_stream_context_get_option(context, "ftp", "resume_pos", &tmpzval) == SUCCESS &&
+			Z_TYPE_PP(tmpzval) == IS_LONG &&
+			Z_LVAL_PP(tmpzval) > 0) {
+			snprintf(tmp_line, 511, "REST %u\r\n", Z_LVAL_PP(tmpzval));
+			php_stream_write_string(stream, tmp_line);
+			result = GET_FTP_RESULT(stream);
+			if (result < 300 || result > 399) {			
+				php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Unable to resume from offset %d", Z_LVAL_PP(tmpzval));
+				goto errexit;
+			}
+		}
+
 		/* retrieve file */
 		php_stream_write_string(stream, "RETR ");
 	} else if (read_write == 2) {

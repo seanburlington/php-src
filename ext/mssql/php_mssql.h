@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.30 2003/02/09 07:18:02 fmk Exp $ */
+/* $Id: php_mssql.h,v 1.31 2003/02/09 07:50:56 fmk Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -65,7 +65,8 @@
 #define NO_MORE_RPC_RESULTS 3
 #define dbfreelogin dbloginfree
 #define dbrpcexec dbrpcsend
-typedef unsigned char *LPBYTE;
+typedef unsigned char	*LPBYTE;
+typedef float           DBFLT4;
 #else
 #define DBERRHANDLE(a, b) dbprocerrhandle(a, b)
 #define DBMSGHANDLE(a, b) dbprocmsghandle(a, b)

@@ -16,11 +16,11 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: css.h,v 1.2 2002/12/31 16:07:34 sebastian Exp $ */
+/* $Id: css.h,v 1.3 2003/03/25 08:07:12 sebastian Exp $ */
 
 #ifndef CSS_H
 #define CSS_H
 
-PHPAPI void php_info_print_css(void);
+PHPAPI void php_info_print_css(TSRMLS_D);
 
 #endif

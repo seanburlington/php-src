@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.596 2003/03/12 06:47:34 sterling Exp $ */
+/* $Id: basic_functions.c,v 1.597 2003/03/25 08:07:12 sebastian Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2919,8 +2919,6 @@ PHP_FUNCTION(parse_ini_file)
 			convert_to_boolean_ex(process_sections);
 		
 			if (Z_BVAL_PP(process_sections)) {
-				TSRMLS_FETCH();
-
 				BG(active_ini_file_section) = NULL;
 				ini_parser_cb = (zend_ini_parser_cb_t) php_ini_parser_cb_with_sections;
 			} else {

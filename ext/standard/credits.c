@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.26 2003/01/20 12:34:07 derick Exp $ */
+/* $Id: credits.c,v 1.27 2003/03/25 08:07:12 sebastian Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -26,10 +26,8 @@
 
 /* {{{ php_print_credits
  */
-PHPAPI void php_print_credits(int flag)
+PHPAPI void php_print_credits(int flag TSRMLS_DC)
 {
-	TSRMLS_FETCH();
-
 	if (flag & PHP_CREDITS_FULLPAGE) {
 		php_print_info_htmlhead(TSRMLS_C);
 	}

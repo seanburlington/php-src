@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.h,v 1.7 2002/12/31 16:07:34 sebastian Exp $ */
+/* $Id: credits.h,v 1.8 2003/03/25 08:07:12 sebastian Exp $ */
 
 #ifndef CREDITS_H
 #define CREDITS_H
@@ -37,6 +37,6 @@
 
 #endif /* HAVE_CREDITS_DEFS */
 
-PHPAPI void php_print_credits(int flag);
+PHPAPI void php_print_credits(int flag TSRMLS_DC);
 
 #endif

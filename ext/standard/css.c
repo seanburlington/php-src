@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: css.c,v 1.7 2002/12/31 16:07:34 sebastian Exp $ */
+/* $Id: css.c,v 1.8 2003/03/25 08:07:12 sebastian Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -24,10 +24,8 @@
 
 /* {{{ php_info_print_css
  */
-PHPAPI void php_info_print_css(void)
+PHPAPI void php_info_print_css(TSRMLS_D)
 {
-	TSRMLS_FETCH();
-
 	PUTS("body {background-color: #ffffff; color: #000000;}\n");
 	PUTS("body, td, th, h1, h2 {font-family: sans-serif;}\n");
 	PUTS("pre {margin: 0px; font-family: monospace;}\n");

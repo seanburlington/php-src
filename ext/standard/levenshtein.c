@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hholzgra@php.net>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.28 2002/12/31 16:07:45 sebastian Exp $ */
+/* $Id: levenshtein.c,v 1.29 2003/03/25 08:07:12 sebastian Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -75,10 +75,8 @@ static int reference_levdist(const char *s1, int l1,
 
 /* {{{ custom_levdist
  */
-static int custom_levdist(char *str1, char *str2, char *callback_name) 
+static int custom_levdist(char *str1, char *str2, char *callback_name TSRMLS_DC) 
 {
-	TSRMLS_FETCH();
-
 	php_error_docref(NULL TSRMLS_CC, E_WARNING, "The general Levenshtein support is not there yet");
 	/* not there yet */
 
@@ -132,7 +130,7 @@ PHP_FUNCTION(levenshtein)
 		convert_to_string_ex(callback_name);
 
 		distance = custom_levdist(Z_STRVAL_PP(str1), Z_STRVAL_PP(str2),
-								  Z_STRVAL_PP(callback_name));
+								  Z_STRVAL_PP(callback_name) TSRMLS_CC);
 		break;
 
 	default: 

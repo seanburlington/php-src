@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.357 2003/03/07 05:15:22 sniper Exp $ */
+/* $Id: session.c,v 1.358 2003/03/25 08:07:12 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -959,7 +959,7 @@ static void php_session_send_cookie(TSRMLS_D)
 		struct timeval tv;
 		
 		gettimeofday(&tv, NULL);
-		date_fmt = php_std_date(tv.tv_sec + PS(cookie_lifetime));
+		date_fmt = php_std_date(tv.tv_sec + PS(cookie_lifetime) TSRMLS_CC);
 		
 		smart_str_appends(&ncookie, COOKIE_EXPIRES);
 		smart_str_appends(&ncookie, date_fmt);

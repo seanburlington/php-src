@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.29 2004/10/30 14:34:43 helly Exp $ */
+/* $Id: spl_directory.c,v 1.30 2004/11/01 20:57:23 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -46,8 +46,8 @@ static zend_object_handlers spl_ce_dir_handlers;
 
 
 /* decalre the class entry */
-zend_class_entry *spl_ce_DirectoryIterator;
-zend_class_entry *spl_ce_RecursiveDirectoryIterator;
+PHPAPI zend_class_entry *spl_ce_DirectoryIterator;
+PHPAPI zend_class_entry *spl_ce_RecursiveDirectoryIterator;
 
 
 /* {{{ spl_ce_dir_object_free_storage */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_exceptions.c,v 1.3 2004/11/01 17:39:59 helly Exp $ */
+/* $Id: spl_exceptions.c,v 1.4 2004/11/01 20:57:23 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -33,18 +33,18 @@
 #include "spl_engine.h"
 #include "spl_exceptions.h"
 
-zend_class_entry *spl_ce_LogicException;
-zend_class_entry *spl_ce_BadFunctionCallException;
-zend_class_entry *spl_ce_BadMethodCallException;
-zend_class_entry *spl_ce_DomainException;
-zend_class_entry *spl_ce_InvalidArgumentException;
-zend_class_entry *spl_ce_LengthException;
-zend_class_entry *spl_ce_OutOfRangeException;
-zend_class_entry *spl_ce_RuntimeException;
-zend_class_entry *spl_ce_OutOfBoundsException;
-zend_class_entry *spl_ce_OverflowException;
-zend_class_entry *spl_ce_RangeException;
-zend_class_entry *spl_ce_UnderflowException;
+PHPAPI zend_class_entry *spl_ce_LogicException;
+PHPAPI zend_class_entry *spl_ce_BadFunctionCallException;
+PHPAPI zend_class_entry *spl_ce_BadMethodCallException;
+PHPAPI zend_class_entry *spl_ce_DomainException;
+PHPAPI zend_class_entry *spl_ce_InvalidArgumentException;
+PHPAPI zend_class_entry *spl_ce_LengthException;
+PHPAPI zend_class_entry *spl_ce_OutOfRangeException;
+PHPAPI zend_class_entry *spl_ce_RuntimeException;
+PHPAPI zend_class_entry *spl_ce_OutOfBoundsException;
+PHPAPI zend_class_entry *spl_ce_OverflowException;
+PHPAPI zend_class_entry *spl_ce_RangeException;
+PHPAPI zend_class_entry *spl_ce_UnderflowException;
 
 #define spl_ce_Exception zend_exception_get_default()
 

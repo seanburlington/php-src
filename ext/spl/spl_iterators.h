@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.15 2004/11/01 00:26:58 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.16 2004/11/01 20:57:23 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -24,20 +24,20 @@
 #include "php.h"
 #include "php_spl.h"
 
-extern zend_class_entry *spl_ce_RecursiveIterator;
-extern zend_class_entry *spl_ce_RecursiveIteratorIterator;
-extern zend_class_entry *spl_ce_FilterIterator;
-extern zend_class_entry *spl_ce_ParentIterator;
-extern zend_class_entry *spl_ce_SeekableIterator;
-extern zend_class_entry *spl_ce_LimitIterator;
-extern zend_class_entry *spl_ce_CachingIterator;
-extern zend_class_entry *spl_ce_CachingRecursiveIterator;
-extern zend_class_entry *spl_ce_OuterIterator;
-extern zend_class_entry *spl_ce_IteratorIterator;
-extern zend_class_entry *spl_ce_NoRewindIterator;
-extern zend_class_entry *spl_ce_InfiniteIterator;
-extern zend_class_entry *spl_ce_EmptyIterator;
-extern zend_class_entry *spl_ce_AppendIterator;
+extern PHPAPI zend_class_entry *spl_ce_RecursiveIterator;
+extern PHPAPI zend_class_entry *spl_ce_RecursiveIteratorIterator;
+extern PHPAPI zend_class_entry *spl_ce_FilterIterator;
+extern PHPAPI zend_class_entry *spl_ce_ParentIterator;
+extern PHPAPI zend_class_entry *spl_ce_SeekableIterator;
+extern PHPAPI zend_class_entry *spl_ce_LimitIterator;
+extern PHPAPI zend_class_entry *spl_ce_CachingIterator;
+extern PHPAPI zend_class_entry *spl_ce_CachingRecursiveIterator;
+extern PHPAPI zend_class_entry *spl_ce_OuterIterator;
+extern PHPAPI zend_class_entry *spl_ce_IteratorIterator;
+extern PHPAPI zend_class_entry *spl_ce_NoRewindIterator;
+extern PHPAPI zend_class_entry *spl_ce_InfiniteIterator;
+extern PHPAPI zend_class_entry *spl_ce_EmptyIterator;
+extern PHPAPI zend_class_entry *spl_ce_AppendIterator;
 
 PHP_MINIT_FUNCTION(spl_iterators);
 

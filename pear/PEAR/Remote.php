@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.16 2002/03/31 01:45:36 ssb Exp $
+// $Id: Remote.php,v 1.17 2002/04/13 00:13:37 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -70,6 +70,7 @@ class PEAR_Remote extends PEAR
         $username = $this->config->get('username');
         $password = $this->config->get('password');
         if ($username && $password) {
+            $req_headers .= "Cookie: PEAR_USER=$username; PEAR_PW=$password\r\n";
             $tmp = base64_encode("$username:$password");
             $req_headers .= "Authorization: Basic $tmp\r\n";
         }

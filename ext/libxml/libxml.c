@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.18 2004/05/31 11:20:46 rrichards Exp $ */
+/* $Id: libxml.c,v 1.18.2.1 2004/07/18 11:44:25 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -568,7 +568,7 @@ int php_libxml_decrement_node_ptr(php_libxml_node_object *object TSRMLS_DC) {
 		obj_node = (php_libxml_node_ptr *) object->node;
 		ret_refcount = --obj_node->refcount;
 		if (ret_refcount == 0) {
-			if (obj_node->node != NULL && obj_node->node->type != XML_DOCUMENT_NODE) {
+			if (obj_node->node != NULL) {
 				obj_node->node->_private = NULL;
 			}
 			efree(obj_node);

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.30 2004/01/28 22:51:54 georg Exp $ 
+  $Id: php_mysqli.h,v 1.31 2004/02/26 11:40:35 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -362,8 +362,9 @@ ZEND_BEGIN_MODULE_GLOBALS(mysqli)
 	unsigned int	default_port;
 	char			*default_host;
 	char			*default_user;
-	char			*default_pw;
 	char			*default_socket;
+    char            *default_pw;
+	int				reconnect;
 	long			error_no;
 	char			*error_msg;
 	int				report_mode;

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.75 2004/02/26 08:27:24 georg Exp $ 
+  $Id: mysqli_api.c,v 1.76 2004/02/26 11:40:35 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1272,7 +1272,7 @@ PHP_FUNCTION(mysqli_real_connect)
 	}
 	php_mysqli_set_error(mysql_errno(mysql), (char *)mysql_error(mysql) TSRMLS_CC);
 
-	mysql->reconnect = 0;
+	mysql->reconnect = MyG(reconnect);
 	
 	if (object) {
 		((mysqli_object *) zend_object_store_get_object(object TSRMLS_CC))->valid = 1;

@@ -1,3 +1,42 @@
+2005-02-15  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      ext/exif/exif.c
+      ext/exif/exif.c:
+      MFH: Fixed bug #31986 (Max nesting limit set too low).
+
+    * ext/exif/exif.c:
+      Fixed bug #31986 (Max nesting limit set too low).
+
+2005-02-15  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ext/sqlite/config.m4
+      ext/sqlite/config.w32
+      ext/sqlite/sqlite.c
+      ext/sqlite/tests/sqlite_oo_032.phpt:
+      - SQLite depends on SPL if it is present
+      - Add SQLiteResult::count()
+      - SQLiteResult implements Countable if present
+
+2005-02-15  Jani Taskinen  <jani.taskinen@kolumbus.fi>
+
+    * config.guess
+      config.sub
+      ltmain.sh
+      build/libtool.m4:
+      - Applied some patches to fix issues with e.g. ia_64 and s390
+
+    * ext/dom/config.m4:
+      No tabs here
+
+    * ext/xmlrpc/libxmlrpc/.cvsignore:
+      Missing .libs entry
+
+2005-02-15  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * main/rfc1867.c:
+      Prune uploaded file names to \ on all OSes, read comments for explanation.
+
 2005-02-14  Jani Taskinen  <jani.taskinen@kolumbus.fi>
 
     * ext/sockets/sockets.c:
@@ -74,7 +113,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1895 2005/02/15 01:34:46 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1896 2005/02/16 01:35:10 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -555,7 +594,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1895 2005/02/15 01:34:46 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1896 2005/02/16 01:35:10 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -2029,7 +2068,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1895 2005/02/15 01:34:46 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1896 2005/02/16 01:35:10 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

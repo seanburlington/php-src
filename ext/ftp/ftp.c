@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.103.2.6 2005/03/10 23:38:02 iliaa Exp $ */
+/* $Id: ftp.c,v 1.103.2.7 2005/03/17 17:16:49 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -838,7 +838,9 @@ ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, 
 		}
 
 		if (type == FTPTYPE_ASCII) {
+#ifndef PHP_WIN32
 			char *s;
+#endif
 			char *ptr = data->buf;
 			char *e = ptr + rcvd;
 			/* logic depends on the OS EOL

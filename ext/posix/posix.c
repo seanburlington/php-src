@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.21 2000/07/26 21:38:21 kk Exp $ */
+/* $Id: posix.c,v 1.22 2000/08/04 18:14:38 thies Exp $ */
 
 
 #include "php.h"
@@ -138,7 +138,7 @@ ZEND_GET_MODULE(posix)
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.21 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.22 $");
 	php_info_print_table_end();
 }
 
@@ -657,6 +657,7 @@ PHP_FUNCTION(posix_mkfifo)
 	pval   *path;
 	pval   *mode;
 	int     result;
+	PLS_FETCH();
 	
 	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters(ht, 2, &path, &mode) == FAILURE) {
 		WRONG_PARAM_COUNT;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.145 2000/08/18 13:22:09 sterling Exp $ */
+/* $Id: string.c,v 1.146 2000/08/18 13:43:22 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -484,7 +484,7 @@ PHP_FUNCTION(implode)
 		WRONG_PARAM_COUNT;
 	}
 
-	if ((*arg1)->type == IS_ARRAY && (*arg2)->type == IS_STRING) {
+	if ((*arg1)->type == IS_ARRAY) {
 		SEPARATE_ZVAL(arg1);
 		arr = *arg1;
 		convert_to_string_ex(arg2);

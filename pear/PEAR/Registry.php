@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.8 2001/11/07 10:43:04 ssb Exp $
+// $Id: Registry.php,v 1.9 2001/11/13 01:06:48 ssb Exp $
 
 require_once "System.php";
 
@@ -55,7 +55,7 @@ class PEAR_Registry
 
     function _packageFileName($package)
     {
-        return "{$this->statedir}/{$package}.inf";
+        return "{$this->statedir}/{$package}.reg";
     }
 
     // }}}
@@ -162,7 +162,7 @@ class PEAR_Registry
             return $pkglist;
         }
         while ($ent = readdir($dp)) {
-            if ($ent{0} == "." || substr($ent, -4) != ".inf") {
+            if ($ent{0} == "." || substr($ent, -4) != ".reg") {
                 continue;
             }
             $pkglist[] = substr($ent, 0, -4);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.62 2000/02/11 15:59:26 zeev Exp $ */
+/* $Id: php.h,v 1.63 2000/02/18 10:13:15 sas Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -163,7 +163,7 @@ extern char *strerror(int);
 
 #include "fopen-wrappers.h"
 
-#if REGEX == 1 || REGEX == 0
+#if (REGEX == 1 || REGEX == 0) && !defined(NO_REGEX_EXTRA_H)
 #include "regex/regex_extra.h"
 #endif
 

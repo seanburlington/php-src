@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.59 2002/06/27 06:49:02 derick Exp $ */
+/* $Id: php_ftp.c,v 1.60 2002/07/04 13:48:48 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -342,7 +342,7 @@ PHP_FUNCTION(ftp_nlist)
 }
 /* }}} */
 
-/* {{{ proto array ftp_rawlist(resource stream, string directory)
+/* {{{ proto array ftp_rawlist(resource stream, string directory [, bool recursive])
    Returns a detailed listing of a directory as an array of output lines */
 PHP_FUNCTION(ftp_rawlist)
 {
@@ -350,15 +350,16 @@ PHP_FUNCTION(ftp_rawlist)
 	ftpbuf_t	*ftp;
 	char		**llist, **ptr, *dir;
 	int			dir_len;
+	zend_bool	recursive;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs", &z_ftp, &dir, &dir_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs|b", &z_ftp, &dir, &dir_len, &recursive) == FAILURE) {
 		return;
 	}
 
 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &z_ftp, -1, le_ftpbuf_name, le_ftpbuf);
 
 	/* get raw directory listing */
-	if (NULL == (llist = ftp_list(ftp, dir))) {
+	if (NULL == (llist = ftp_list(ftp, dir, recursive))) {
 		RETURN_FALSE;
 	}
 

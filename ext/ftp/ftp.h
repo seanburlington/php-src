@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.23 2002/03/16 01:20:57 wez Exp $ */
+/* $Id: ftp.h,v 1.24 2002/07/04 13:48:48 sniper Exp $ */
 
 #ifndef	FTP_H
 #define	FTP_H
@@ -120,7 +120,7 @@ char**		ftp_nlist(ftpbuf_t *ftp, const char *path);
  * array must be freed (but don't
  * free the array elements)
  */
-char**		ftp_list(ftpbuf_t *ftp, const char *path);
+char**		ftp_list(ftpbuf_t *ftp, const char *path, int recursive);
 
 /* switches passive mode on or off
  * returns true on success, false on error

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ii.c,v 1.8 2000/08/26 14:21:25 andi Exp $ */
+/* $Id: ii.c,v 1.9 2000/08/26 14:24:32 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -217,9 +217,9 @@ PHP_MINIT_FUNCTION(ii)
   IIG(num_persistent) = 0;
 
   /* Constants registration */
-  REGISTER_LONG_CONSTANT("II_ASSOC", II_ASSOC, CONST_CS | CONST_PERSISTENT);
-  REGISTER_LONG_CONSTANT("II_NUM", II_NUM, CONST_CS | CONST_PERSISTENT);
-  REGISTER_LONG_CONSTANT("II_BOTH", II_BOTH, CONST_CS | CONST_PERSISTENT);
+  REGISTER_LONG_CONSTANT("INGRES_ASSOC", II_ASSOC, CONST_CS | CONST_PERSISTENT);
+  REGISTER_LONG_CONSTANT("INGRES_NUM", II_NUM, CONST_CS | CONST_PERSISTENT);
+  REGISTER_LONG_CONSTANT("INGRES_BOTH", II_BOTH, CONST_CS | CONST_PERSISTENT);
 
 
   /* Ingres api initialization */

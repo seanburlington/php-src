@@ -1,6 +1,6 @@
 #!/usr/bin/awk -f
 #
-# $Id: mk_sb_tbl.awk,v 1.1.4.1 2005/02/21 07:10:13 moriyoshi Exp $
+# $Id: mk_sb_tbl.awk,v 1.1.4.2 2005/02/21 08:03:48 moriyoshi Exp $
 #
 # Description: a script that generates a single byte code set to Unicode
 # mapping table.
@@ -46,7 +46,7 @@ END {
 		print "#ifndef " IFNDEF_NAME
 	}
 
-	print "static const unsigned int " TABLE_NAME "[] = {"
+	print "static const int " TABLE_NAME "[] = {"
 	i = 160;
 	for (;;) {
 		printf("\t0x%04x, 0x%04x, 0x%04x, 0x%04x, 0x%04x, 0x%04x, 0x%04x, 0x%04x", tbl[i++], tbl[i++], tbl[i++], tbl[i++], tbl[i++], tbl[i++], tbl[i++], tbl[i++]);

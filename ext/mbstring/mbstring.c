@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.46 2005/01/16 15:56:05 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.142.2.47 2005/02/21 08:03:47 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -147,7 +147,7 @@ static const enum mbfl_no_encoding php_mb_default_identify_list_neut[] = {
 };
 
 
-php_mb_nls_ident_list php_mb_default_identify_list[] = {
+static const php_mb_nls_ident_list php_mb_default_identify_list[] = {
 	{ mbfl_no_language_japanese, php_mb_default_identify_list_ja, sizeof(php_mb_default_identify_list_ja) / sizeof(php_mb_default_identify_list_ja[0]) },
 	{ mbfl_no_language_korean, php_mb_default_identify_list_kr, sizeof(php_mb_default_identify_list_kr) / sizeof(php_mb_default_identify_list_kr[0]) },
 	{ mbfl_no_language_traditional_chinese, php_mb_default_identify_list_tw_hk, sizeof(php_mb_default_identify_list_tw_hk) / sizeof(php_mb_default_identify_list_tw_hk[0]) },

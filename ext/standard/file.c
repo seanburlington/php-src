@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.7 2003/01/24 08:50:59 derick Exp $ */
+/* $Id: file.c,v 1.279.2.8 2003/01/24 10:00:18 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1446,7 +1446,8 @@ PHP_FUNCTION(fscanf)
 {
 	int  result;
 	zval **file_handle, **format_string;
-	int len, type;
+	size_t len;
+	int type;
 	char *buf;
 	void *what;
 

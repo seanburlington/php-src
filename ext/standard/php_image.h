@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_image.h,v 1.21 2003/01/08 20:36:03 iliaa Exp $ */
+/* $Id: php_image.h,v 1.22 2003/01/16 19:45:26 helly Exp $ */
 
 #ifndef PHP_IMAGE_H
 #define PHP_IMAGE_H
@@ -47,6 +47,7 @@ typedef enum
   IMAGE_FILETYPE_SWC,
   IMAGE_FILETYPE_IFF,
   IMAGE_FILETYPE_WBMP,
+  /* IMAGE_FILETYPE_JPEG2000 is a userland alias for IMAGE_FILETYPE_JPC */
 /* WHEN EXTENDING: PLEASE ALSO REGISTER IN image.c:PHP_MINIT_FUNCTION(imagetypes) */
 } image_filetype;
 /* }}} */

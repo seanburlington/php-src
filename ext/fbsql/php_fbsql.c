@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.86.2.8 2004/02/09 17:58:24 fmk Exp $ */
+/* $Id: php_fbsql.c,v 1.86.2.9 2004/08/24 18:00:05 fmk Exp $ */
 
 /* TODO:
  *
@@ -1213,7 +1213,12 @@ PHP_FUNCTION(fbsql_database)
 		if (phpLink->databaseName) free(phpLink->databaseName);
 		phpLink->databaseName = strdup(Z_STRVAL_PP(dbname));
 	}
-	RETURN_STRING(phpLink->databaseName, 1);
+	if (phpLink->databaseName) {
+		RETURN_STRING(phpLink->databaseName, 1);
+	}
+	else {
+		RETURN_FALSE;
+	}
 }
 /* }}} */
 

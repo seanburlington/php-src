@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.72 2003/05/18 20:40:04 dickmeiss Exp $ */
+/* $Id: php_yaz.c,v 1.73 2003/05/27 09:47:26 dickmeiss Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1534,9 +1534,7 @@ PHP_MSHUTDOWN_FUNCTION(yaz)
 	tsrm_mutex_free (yaz_mutex);
 #endif
 
-	if (yaz_log_file()) {
-		fclose(yaz_log_file());
-	}
+	yaz_log_init_file(0);
 	return SUCCESS;
 }
 

@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.130.2.2 2003/03/07 13:42:14 ddhill Exp $ */
+/* $Id: ldap.c,v 1.130.2.3 2003/03/07 14:08:06 iliaa Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -286,7 +286,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.130.2.2 2003/03/07 13:42:14 ddhill Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.130.2.3 2003/03/07 14:08:06 iliaa Exp $" );
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -1303,7 +1303,7 @@ static void php_ldap_do_modify(INTERNAL_FUNCTION_PARAMETERS, int oper)
 		if (zend_hash_get_current_key(Z_ARRVAL_PP(entry), &attribute, &index, 0) == HASH_KEY_IS_STRING) {
 			ldap_mods[i]->mod_type = estrdup(attribute);
 		} else {
-			php_error(E_ERROR, "%s(): Unknown attribute in the data", get_active_function_name(TSRMLS_C));
+			php_error(E_WARNING, "%s(): Unknown attribute in the data", get_active_function_name(TSRMLS_C));
 			/* Free allocated memory */
 			while (i >= 0) {
 				efree(ldap_mods[i--]);
@@ -2119,7 +2119,7 @@ static void php_ldap_do_translate(INTERNAL_FUNCTION_PARAMETERS, int way)
 		RETVAL_STRINGL(ldap_buf, ldap_len, 1);
 		free(ldap_buf);
 	} else {
-		php_error(E_ERROR, "%s(): Conversion from iso-8859-1 to t61 failed: %s", get_active_function_name(TSRMLS_C), ldap_err2string(result));
+		php_error(E_WARNING, "%s(): Conversion from iso-8859-1 to t61 failed: %s", get_active_function_name(TSRMLS_C), ldap_err2string(result));
 		RETVAL_FALSE;
 	}
 

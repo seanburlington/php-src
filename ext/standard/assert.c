@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.6 1999/12/07 16:45:46 thies Exp $ */
+/* $Id: assert.c,v 1.7 1999/12/07 21:07:42 rubys Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -88,6 +88,12 @@ PHP_INI_END()
 
 static void php_assert_init_globals(php_assert_globals *assert_globals)
 {
+	assert_globals->active = 0;
+	assert_globals->bail = 0;
+	assert_globals->warning = 1;
+	assert_globals->quiet_eval = 0;
+	assert_globals->default_callback = 0;
+	assert_globals->callback = 0;
 }
 
 PHP_MINIT_FUNCTION(assert)

@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.24 1999/07/16 13:12:41 zeev Exp $ */
+/* $Id: fopen_wrappers.c,v 1.25 1999/07/18 15:53:50 sas Exp $ */
 
 /* Synced with php3 revision 1.66 1999-06-18 [ssb] */
 
@@ -603,6 +603,16 @@ static FILE *php3_fopen_url_wrapper(const char *path, char *mode, int options, i
 		free_url(resource);
 		*issock = 1;
 		return (fp);
+	} else if (!strncasecmp(path, "php://", 6)) {
+		const char *res = path + 6;
+
+		if (!strcasecmp(res, "stdin")) {
+			return fdopen(STDIN_FILENO, mode);
+		} else if (!strcasecmp(res, "stdout")) {
+			return fdopen(STDOUT_FILENO, mode);
+		} else if (!strcasecmp(res, "stderr")) {
+			return fdopen(STDERR_FILENO, mode);
+		}
 	} else if (!strncasecmp(path, "ftp://", 6)) {
 		resource = url_parse((char *) path);
 		if (resource == NULL) {

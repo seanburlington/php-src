@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.14 2004/01/17 21:22:26 sterling Exp $ */
+/* $Id: php_simplexml.h,v 1.15 2004/01/18 13:19:41 helly Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H
@@ -79,6 +79,8 @@ typedef struct {
 #else
 #define SIMPLEXML_G(v) (simplexml_globals.v)
 #endif
+
+PHP_API zend_class_entry *sxe_get_element_class_entry();
 
 #endif
 

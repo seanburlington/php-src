@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.111 2004/01/17 21:22:26 sterling Exp $ */
+/* $Id: simplexml.c,v 1.112 2004/01/18 13:19:41 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -34,7 +34,12 @@
 #include "zend_default_classes.h"
 #include "zend_interfaces.h"
 
-zend_class_entry *sxe_class_entry;
+zend_class_entry *sxe_class_entry = NULL;
+
+PHP_API zend_class_entry *sxe_get_element_class_entry()
+{
+	return sxe_class_entry;
+}
 
 #define SXE_ME(func, arg_info, flags) PHP_ME(simplexml_element, func, arg_info, flags)
 
@@ -1490,7 +1495,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.111 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.112 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

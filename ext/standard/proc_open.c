@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.9 2003/02/17 06:35:13 derick Exp $ */
+/* $Id: proc_open.c,v 1.10 2003/02/17 06:45:37 shane Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -485,9 +485,7 @@ PHP_FUNCTION(proc_open)
 		RETURN_FALSE;
 	}
 
-	if (cwd_len==0) {
-		cwd = NULL;
-	}
+	command_len = strlen(command);
 
 	if (environment) {
 		env = _php_array_to_envp(environment, is_persistent TSRMLS_CC);

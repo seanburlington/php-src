@@ -1,5 +1,5 @@
 %{
-/* $Revision: 1.2 $
+/* $Revision: 1.3 $
 **
 **  Originally written by Steven M. Bellovin <smb@research.att.com> while
 **  at the University of North Carolina at Chapel Hill.  Later tweaked by
@@ -26,6 +26,10 @@
 
 #if WIN32||WINNT
 #include <malloc.h>
+#endif
+
+#ifdef HAVE_STDLIB_H
+# include <stdlib.h>
 #endif
 
 #include <stdio.h>

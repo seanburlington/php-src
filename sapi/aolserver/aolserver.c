@@ -19,9 +19,11 @@
 /*
  * TODO:
  * - write documentation
+ * - CGI/1.1 conformance
+ * - HTTP basic auth
  */
 
-/* $Id: aolserver.c,v 1.10 1999/10/20 15:53:23 sas Exp $ */
+/* $Id: aolserver.c,v 1.11 1999/10/20 19:30:37 sas Exp $ */
 
 /* conflict between PHP and AOLserver */
 #define Debug php_Debug
@@ -191,7 +193,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	int uptime = Ns_InfoUptime();
 	
 	PUTS("<table border=5 width=600>\n");
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.10 1999/10/20 15:53:23 sas Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.11 1999/10/20 19:30:37 sas Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -259,6 +261,13 @@ static sapi_module_struct sapi_module = {
  * with a number of variables. HTTP_* variables are created for
  * the HTTP header data, so that a script can access these.
  */
+#define ADD_STRING(name)										\
+	MAKE_STD_ZVAL(pval);										\
+	pval->type = IS_STRING;										\
+	pval->value.str.len = strlen(buf);							\
+	pval->value.str.val = estrndup(buf, pval->value.str.len);	\
+	zend_hash_update(&EG(symbol_table), name, sizeof(name), 	\
+			&pval, sizeof(zval *), NULL)
 
 static void
 php_ns_hash_environment(NSLS_D CLS_DC ELS_DC PLS_DC SLS_DC)
@@ -292,30 +301,30 @@ php_ns_hash_environment(NSLS_D CLS_DC ELS_DC PLS_DC SLS_DC)
 	}
 	
 	snprintf(buf, 511, "%s/%s", Ns_InfoServerName(), Ns_InfoServerVersion());
+	ADD_STRING("SERVER_SOFTWARE");
+	snprintf(buf, 511, "HTTP/%1.1f", NSG(conn)->request->version);
+	ADD_STRING("SERVER_PROTOCOL");
+
+	strncpy(buf, NSG(conn)->request->method, 511);
+	ADD_STRING("REQUEST_METHOD");
+
+	if(NSG(conn)->request->query) {
+		strncpy(buf, NSG(conn)->request->query, 511);
+	} else {
+		buf[0] = '\0';
+	}
+	ADD_STRING("QUERY_STRING");
 	
-	MAKE_STD_ZVAL(pval);
-	pval->type = IS_STRING;
-	pval->value.str.len = strlen(buf);
-	pval->value.str.val = estrndup(buf, pval->value.str.len);
-	zend_hash_update(&EG(symbol_table), "SERVER_SOFTWARE", sizeof("SERVER_SOFTWARE"), &pval, sizeof(zval *), NULL);
+	strncpy(buf, Ns_InfoBuildDate(), 511);
+	ADD_STRING("SERVER_BUILDDATE");
+
+	strncpy(buf, Ns_ConnPeer(NSG(conn)), 511);
+	ADD_STRING("REMOTE_ADDR");
 
 	MAKE_STD_ZVAL(pval);
 	pval->type = IS_LONG;
 	pval->value.lval = Ns_InfoBootTime();
 	zend_hash_update(&EG(symbol_table), "SERVER_BOOTTIME", sizeof("SERVER_BOOTTIME"), &pval, sizeof(zval *), NULL);
-
-	MAKE_STD_ZVAL(pval);
-	pval->type = IS_STRING;
-	pval->value.str.val = estrdup(Ns_InfoBuildDate());
-	pval->value.str.len = strlen(pval->value.str.val);
-	zend_hash_update(&EG(symbol_table), "SERVER_BUILDDATE", sizeof("SERVER_BUILDDATE"), &pval, sizeof(zval *), NULL);
-
-	snprintf(buf, 511, "HTTP/%1.1f", NSG(conn)->request->version);
-	MAKE_STD_ZVAL(pval);
-	pval->type = IS_STRING;
-	pval->value.str.len = strlen(buf);
-	pval->value.str.val = estrndup(buf, pval->value.str.len);
-	zend_hash_update(&EG(symbol_table), "SERVER_PROTOCOL", sizeof("SERVER_PROTOCOL"), &pval, sizeof(zval *), NULL);
 }
 
 /*

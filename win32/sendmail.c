@@ -17,7 +17,7 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.32 2002/05/17 16:16:27 mfischer Exp $ */
+/* $Id: sendmail.c,v 1.33 2002/06/02 15:29:07 mfischer Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
@@ -154,7 +154,7 @@ int TSendMail(char *host, int *error, char **error_message,
 		if (strstr(headers_lc, "\r\nfrom:")) {
 			pos = strstr(headers_lc, "\r\nfrom:") + 7; /* Jump over the string "\r\nfrom:", hence the 7 */
 		} else if (!strncmp(headers_lc, "from:", 5)) {
-			pos = headers + 5; /* Jump over the string "from:", hence the 5 */
+			pos = headers_lc + 5; /* Jump over the string "from:", hence the 5 */
 		}
 		if (pos) {
 			char *pos_end;

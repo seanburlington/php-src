@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.108 2003/12/28 16:26:04 helly Exp $ 
+   $Id: sqlite.c,v 1.109 2003/12/31 19:45:45 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1076,7 +1076,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.108 2003/12/28 16:26:04 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.109 2003/12/31 19:45:45 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1942,7 +1942,7 @@ PHP_FUNCTION(sqlite_fetch_object)
 				Bucket *p;
 
 				fci.param_count = 0;
-				fci.params = emalloc(sizeof(zval*) * ht->nNumOfElements);
+				fci.params = safe_emalloc(sizeof(zval*), ht->nNumOfElements, 0);
 				p = ht->pListHead;
 				while (p != NULL) {
 					fci.params[fci.param_count++] = (zval**)p->pData;

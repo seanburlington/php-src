@@ -1,13 +1,15 @@
-// $Id: config.w32,v 1.3 2003/12/03 06:50:19 fmk Exp $
+// $Id: config.w32,v 1.4 2003/12/03 14:29:43 wez Exp $
 // vim:ft=javascript
 
 ARG_WITH("mssql", "mssql support", "no");
 
 if (PHP_MSSQL == "yes") {
-	EXTENSION("mssql", "php_mssql.c");
-	CHECK_LIB("ntwdblib.lib", "mssql", "\\MSSQL7\\DevTools\\Lib");
-	CHECK_HEADER_ADD_INCLUDE("sqlfront.h", "CFLAGS");
-	AC_DEFINE('DBNTWIN32', 1, '');
-	AC_DEFINE('MSSQL70', 1, '');
-	AC_DEFINE('HAVE_MSSQL', 1, 'Have MSSQL support');
+	if (CHECK_LIB("ntwdblib.lib", "mssql", "\\MSSQL7\\DevTools\\Lib") &&
+			CHECK_HEADER_ADD_INCLUDE("sqlfront.h", "CFLAGS_MSSQL")) {
+		EXTENSION("mssql", "php_mssql.c");
+		ADD_FLAG("CFLAGS_MSSQL", "/D DBNTWIN32=1 /D MSSQL70=1");
+		AC_DEFINE('HAVE_MSSQL', 1, 'Have MSSQL support');
+	} else {
+		WARNING("mssql not enabled; libraries and headers not found");
+	}
 }

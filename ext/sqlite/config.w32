@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.1 2003/12/02 23:16:57 wez Exp $
+// $Id: config.w32,v 1.2 2003/12/03 14:29:44 wez Exp $
 // vim:ft=javascript
 
 ARG_WITH("sqlite", "SQLite support", "yes");
@@ -20,7 +20,9 @@ if (PHP_SQLITE == "yes") {
 		copy.c where.c trigger.c", "sqlite");
 
 	AC_DEFINE("HAVE_SQLITE", 1, "SQLite support");
-	ADD_DEF_FILE("ext\\sqlite\\php_sqlite.def");
+	if (!PHP_SQLITE_SHARED) {
+		ADD_DEF_FILE("ext\\sqlite\\php_sqlite.def");
+	}
 }
 
 

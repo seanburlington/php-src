@@ -16,17 +16,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdf.h,v 1.21 2001/11/08 23:37:33 derick Exp $ */
+/* $Id: php_pdf.h,v 1.22 2001/11/30 04:46:35 sniper Exp $ */
 
 #ifndef PHP_PDF_H
 #define PHP_PDF_H
 
-#if HAVE_PDFLIB || HAVE_PDFLIB3
+#if HAVE_PDFLIB
 
-/* with version 2.20 of pdflib PDF_open_mem isn't available unless
-   the following define isn't there.
-*/
-#define PDF_OPEN_MEM_SUPPORTED
 #include <pdflib.h>
 
 extern zend_module_entry pdf_module_entry;

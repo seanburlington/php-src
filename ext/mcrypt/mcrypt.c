@@ -13,10 +13,10 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Sascha Schumann <sascha@schumann.cx>                        |
-   |          Derick Rethans <d.rethans@jdimedia.nl>                      |
+   |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.77.4.5 2003/06/12 11:55:01 andrey Exp $ */
+/* $Id: mcrypt.c,v 1.77.4.6 2003/10/13 09:30:53 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.38 2003/02/24 15:10:36 zeev Exp $ */
+/* $Id: php_functions.c,v 1.39 2003/03/25 01:38:14 sniper Exp $ */
 
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
@@ -372,7 +372,7 @@ static function_entry apache_functions[] = {
 
 zend_module_entry php_apache_module = {
 	STANDARD_MODULE_HEADER,
-	"Apache 2.0",
+	"apache2filter",
 	apache_functions,
 	NULL,
 	NULL,

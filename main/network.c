@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.83.2.19 2003/10/08 11:22:47 wez Exp $ */
+/* $Id: network.c,v 1.83.2.20 2003/10/17 11:09:49 sas Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -1070,7 +1070,7 @@ static int php_sockop_close(php_stream *stream, int close_handle TSRMLS_DC)
 
 		/* try to make sure that the OS sends all data before we close the connection.
 		 * Essentially, we are waiting for the socket to become writeable, which means
-		 * that all pending data has been sent.
+		 * that some (not all) pending data has been sent.
 		 * We use a small timeout which should encourage the OS to send the data,
 		 * but at the same time avoid hanging indefintely.
 		 * */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_compat.h,v 1.15 2003/07/04 18:19:02 sterling Exp $ */
+/* $Id: php_compat.h,v 1.16 2003/07/10 16:08:56 sniper Exp $ */
 
 #ifndef PHP_COMPAT_H
 #define PHP_COMPAT_H
@@ -39,6 +39,7 @@
 #define pcre_maketables			php_pcre_maketables
 #define pcre_study				php_pcre_study
 #define pcre_version			php_pcre_version
+#define pcre_fullinfo			php_pcre_fullinfo
 #endif
 
 #define lookup				php_lookup

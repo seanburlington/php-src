@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.225 2003/01/28 05:02:12 fmk Exp $ */
+/* $Id: info.c,v 1.226 2003/02/02 15:53:04 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -511,7 +511,7 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		}
 		PUTS("This program makes use of the Zend Scripting Language Engine:");
 		PUTS(PG(html_errors)?"<br />":"\n");
-		PUTS(zend_version);
+		zend_html_puts(zend_version, strlen(zend_version) TSRMLS_CC);
 		php_info_print_box_end();
 		efree(php_uname);
 	}

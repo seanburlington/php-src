@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.117 2005/03/12 14:07:35 wez Exp $ */
+/* $Id: php_cli.c,v 1.118 2005/03/15 22:41:12 andrei Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -407,7 +407,14 @@ static void define_command_line_ini_entry(char *arg)
 	} else {
 		value = "1";
 	}
-	zend_alter_ini_entry(name, strlen(name)+1, value, strlen(value), PHP_INI_SYSTEM, PHP_INI_STAGE_ACTIVATE);
+
+	if (!strcasecmp(name, "extension")) { /* load function module */
+		zval extension, zval;
+		ZVAL_STRING(&extension, value, 0);
+		php_dl(&extension, MODULE_PERSISTENT, &zval TSRMLS_CC);
+	} else {
+		zend_alter_ini_entry(name, strlen(name)+1, value, strlen(value), PHP_INI_SYSTEM, PHP_INI_STAGE_ACTIVATE);
+	}
 }
 
 

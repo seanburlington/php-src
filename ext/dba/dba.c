@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.95 2003/06/21 18:17:20 helly Exp $ */
+/* $Id: dba.c,v 1.96 2003/06/21 18:43:25 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -719,7 +719,7 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 
 	if (!error && lock_mode) {
 		if (lock_dbf) {
-			lock_name = estrdup(info->path);
+			lock_name = Z_STRVAL_PP(args[0]);
 		} else {
 			spprintf(&lock_name, 0, "%s.lck", info->path);
 			if (!strcmp(file_mode, "r")) {
@@ -757,7 +757,9 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 				}
 			}
 		}
-		efree(lock_name);
+		if (!lock_dbf) {
+			efree(lock_name);
+		}
 		if (!info->lock.fp) {
 			dba_close(info TSRMLS_CC);
 			/* stream operation already wrote an error message */

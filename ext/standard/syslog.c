@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.17 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: syslog.c,v 1.18 2000/05/07 00:10:32 sas Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -25,11 +25,6 @@
 #include <stdlib.h>
 #if HAVE_UNISTD_H
 #include <unistd.h>
-#endif
-#ifdef PHP_WIN32
-#include "win32/syslog.h"
-#else
-#include <syslog.h>
 #endif
 
 #include <string.h>

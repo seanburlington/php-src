@@ -3,7 +3,7 @@
 // +----------------------------------------------------------------------+
 // | PHP Version 4                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2002 The PHP Group                                |
+// | Copyright (c) 1997-2003 The PHP Group                                |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2.02 of the PHP license,      |
 // | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: server_round2_groupC.php,v 1.1 2002/07/14 22:14:38 shane Exp $
+// $Id: server_round2_groupC.php,v 1.2 2003/01/04 11:56:07 mj Exp $
 //
 require_once 'SOAP/Server.php';
 require_once 'SOAP/Value.php';

@@ -4,7 +4,7 @@
 // +----------------------------------------------------------------------+
 // | PHP Version 4                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2002 The PHP Group                                |
+// | Copyright (c) 1997-2003 The PHP Group                                |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2.02 of the PHP license,      |
 // | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: client_round2_run.php,v 1.1 2002/07/14 22:14:38 shane Exp $
+// $Id: client_round2_run.php,v 1.2 2003/01/04 11:56:06 mj Exp $
 //
 set_time_limit(0);
 require_once 'client_round2_interop.php';

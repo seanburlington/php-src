@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.1 2003/02/12 00:45:53 georg Exp $ 
+  $Id: mysqli.c,v 1.2 2003/02/14 16:31:22 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -42,7 +42,7 @@ void php_clear_stmt_bind(STMT *stmt) {
 	int i;
 
 
-	if (stmt->stmt)
+	if (stmt->stmt && stmt->stmt->mysql->host)
 		mysql_stmt_close(stmt->stmt);
 
 	if (stmt->var_cnt) {

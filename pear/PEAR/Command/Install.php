@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.8 2002/03/22 09:22:26 ssb Exp $
+// $Id: Install.php,v 1.9 2002/03/23 10:20:41 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -62,7 +62,7 @@ class PEAR_Command_Install extends PEAR_Command_Common
 
     function run($command, $options, $params)
     {
-        $installer =& new PEAR_Installer($this->config->get('php_dir'),
+        $installer = &new PEAR_Installer($this->config->get('php_dir'),
                                          $this->config->get('ext_dir'),
                                          $this->config->get('doc_dir'));
         $installer->debug = $this->config->get('verbose');
@@ -70,11 +70,10 @@ class PEAR_Command_Install extends PEAR_Command_Common
         $failmsg = '';
         $opts = array();
         switch ($command) {
-            case 'install':
             case 'upgrade': {
-                if ($command == 'upgrade') {
-                    $opts['upgrade'] = true;
-                }
+                $opts['upgrade'] = true;
+                // fall through
+            case 'install':
                 if (isset($options['f'])) {
                     $opts['force'] = true;
                 }

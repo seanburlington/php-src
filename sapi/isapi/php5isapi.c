@@ -16,6 +16,7 @@
    |          Ben Mansell <ben@zeus.com> (Zeus Support)                   |
    +----------------------------------------------------------------------+
  */
+/* $Id: php5isapi.c,v 1.3.2.2 2004/12/18 03:14:52 sniper Exp $ */
 
 #include "php.h"
 #include <httpext.h>

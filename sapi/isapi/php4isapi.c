@@ -16,6 +16,7 @@
    |          Ben Mansell <ben@zeus.com> (Zeus Support)                   |
    +----------------------------------------------------------------------+
  */
+/* $Id: php4isapi.c,v 1.92.2.11 2004/12/18 03:15:10 sniper Exp $ */
 
 #ifdef PHP_WIN32
 # include <windows.h>

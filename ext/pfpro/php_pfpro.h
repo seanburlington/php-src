@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pfpro.h,v 1.3 2000/07/19 18:51:54 david Exp $ */
+/* $Id: php_pfpro.h,v 1.4 2000/07/24 17:57:03 jdonagher Exp $ */
 
 #ifndef PHP_PFPRO_H
 #define PHP_PFPRO_H
@@ -47,6 +47,13 @@ PHP_FUNCTION(pfpro_process);            /* Transaction processing     */
 typedef struct {
 	int le_pfpro;
 	int initialised;
+	char *defaulthost;
+	char *defaultport;
+	char *defaulttimeout;
+	char *proxyaddress;
+	char *proxyport;
+	char *proxylogon;
+	char *proxypassword;
 } php_pfpro_globals;
 
 #ifdef ZTS

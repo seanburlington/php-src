@@ -1,13 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.3 2002/03/03 14:25:59 alexwaugh Exp $
+dnl $Id: config.m4,v 1.3.2.1 2002/03/24 22:58:08 alexwaugh Exp $
 dnl
 
 AC_ARG_WITH(webjames,
 [  --with-webjames=SRCDIR  Build PHP as a WebJames module (RISC OS only)],[
   PHP_EXPAND_PATH($withval, WEBJAMES)
   INSTALL_IT="\
-    echo '\\#Created by PHP configure' > $WEBJAMES/build/php; \
-    echo 'PHP_LIBS = -l$abs_srcdir/$SAPI_STATIC \$(PHP_LIBS) \$(EXTRA_LIBS)' >> $WEBJAMES/build/php; \
+    echo 'PHP_LIBS = -l$abs_srcdir/$SAPI_STATIC \$(PHP_LIBS) \$(EXTRA_LIBS)' > $WEBJAMES/build/php; \
     echo 'PHP_LDFLAGS = \$(NATIVE_RPATHS) \$(PHP_LDFLAGS)' >> $WEBJAMES/build/php; \
     echo 'PHP_CFLAGS = -DPHP \$(COMMON_FLAGS) \$(EXTRA_CFLAGS) -I$abs_srcdir/sapi/webjames' >> $WEBJAMES/build/php;"
   PHP_WEBJAMES="yes, using $WEBJAMES"

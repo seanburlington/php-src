@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.46 2002/07/12 11:45:04 sniper Exp $ */
+/* $Id: php_yaz.c,v 1.47 2002/07/13 05:42:46 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2674,7 +2674,6 @@ PHP_FUNCTION(yaz_es_result)
 #else
 	if (p && p->es_response)
 	{
-		int i;
 		Z_ExtendedServicesResponse *res = p->es_response;
 
 		if (res->taskPackage && 

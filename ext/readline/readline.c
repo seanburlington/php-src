@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.31.2.1 2002/12/31 16:35:15 sebastian Exp $ */
+/* $Id: readline.c,v 1.31.2.2 2005/02/03 22:46:55 iliaa Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -354,7 +354,7 @@ static char *_readline_command_generator(char *text,int state)
 		}
 	}
 
-	return NULL;
+	return strdup("");
 }
 
 static zval *_readline_string_zval(const char *str)

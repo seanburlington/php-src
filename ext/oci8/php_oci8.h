@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.13 2001/02/26 06:07:09 andi Exp $ */
+/* $Id: php_oci8.h,v 1.14 2001/04/13 14:43:39 thies Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -80,6 +80,22 @@ typedef struct {
 	dvoid *ocidescr;
 	ub4 type;
 } oci_descriptor;
+
+typedef struct {
+    int id;
+    int open;
+    oci_connection *conn;
+    oci_session *session;
+    OCISvcCtx   *pServiceContext;
+    OCIType     *tdo;
+    OCITypeCode coll_typecode;
+    OCIRef      *elem_ref;
+    OCIType     *element_type;
+    OCITypeCode element_typecode;
+    OCIColl     *coll;
+    sword       error;
+    OCIError    *pError;
+} oci_collection;
 
 typedef struct {
     zval *zval;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.237 2001/08/13 07:55:36 rasmus Exp $ */
+/* $Id: session.c,v 1.238 2001/08/21 12:57:51 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -529,7 +529,7 @@ static void php_session_save_current_state(TSRMLS_D)
 	int vallen;
 	int ret = FAILURE;
 	char *variable;
-	ulong variable_len;
+	uint variable_len;
 	ulong num_key;
 	HashPosition pos;
 	

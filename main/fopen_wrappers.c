@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.43 2000/02/26 03:20:47 zeev Exp $ */
+/* $Id: fopen_wrappers.c,v 1.44 2000/02/27 05:22:48 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -975,12 +975,20 @@ PHPAPI char *expand_filepath(char *filepath)
 
 			if (filepath[1] == '.') {	/* parent directory - .. */
 				/* erase the last directory name from the path */
+#if PHP_WIN32
+				while (*cwd_end != '/' || *cwd_end != '\\') {
+#else
 				while (*cwd_end != '/') {
+#endif
 					*cwd_end-- = 0;
 				}
 				filepath++;		/* make filepath appear as a current directory path */
 			}
+#if PHP_WIN32
+			if (cwd_end > cwd && (*cwd_end == '/' || *cwd_end == '\\')) { /* remove trailing slashes */
+#else
 			if (cwd_end > cwd && *cwd_end == '/') {		/* remove trailing slashes */
+#endif
 				*cwd_end-- = 0;
 			}
 			retval = (char *) malloc(strlen(cwd) + strlen(filepath) - 1 + 1);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.443 2002/04/10 01:27:44 helly Exp $ */
+/* $Id: main.c,v 1.444 2002/04/10 22:42:28 wez Exp $ */
 
 /* {{{ includes
  */
@@ -594,16 +594,9 @@ PHP_FUNCTION(set_time_limit)
  */
 static FILE *php_fopen_wrapper_for_zend(const char *filename, char **opened_path)
 {
-	FILE *retval = NULL;
-	size_t old_chunk_size;
 	TSRMLS_FETCH();
 
-	old_chunk_size = FG(def_chunk_size);
-	FG(def_chunk_size) = 1;
-	retval = php_stream_open_wrapper_as_file((char *)filename, "rb", USE_PATH|IGNORE_URL_WIN|REPORT_ERRORS, opened_path);
-	FG(def_chunk_size) = old_chunk_size;
-	
-	return retval;
+	return php_stream_open_wrapper_as_file((char *)filename, "rb", USE_PATH|IGNORE_URL_WIN|REPORT_ERRORS, opened_path);
 }
 /* }}} */
 

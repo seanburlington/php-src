@@ -16,7 +16,7 @@
    |         Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.23 2002/04/06 17:29:39 wez Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.24 2002/04/10 22:42:27 wez Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 
@@ -93,7 +93,8 @@ php_stream_ops php_stream_gzio_ops = {
 	NULL, NULL
 };
 
-php_stream *php_stream_gzopen(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path STREAMS_DC TSRMLS_DC)
+php_stream *php_stream_gzopen(php_stream_wrapper *wrapper, char *path, char *mode,
+		int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC)
 {
 	struct php_gz_stream_data_t *self;
 	php_stream *stream = NULL;

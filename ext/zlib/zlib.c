@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.123 2002/04/05 13:07:43 ssb Exp $ */
+/* $Id: zlib.c,v 1.124 2002/04/10 22:42:26 wez Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -285,7 +285,7 @@ PHP_FUNCTION(gzfile)
 	convert_to_string_ex(filename);
 
 	/* using a stream here is a bit more efficient (resource wise) than php_gzopen_wrapper */
-	stream = php_stream_gzopen(NULL, Z_STRVAL_PP(filename), "rb", use_include_path|ENFORCE_SAFE_MODE|REPORT_ERRORS, NULL STREAMS_CC TSRMLS_CC);
+	stream = php_stream_gzopen(NULL, Z_STRVAL_PP(filename), "rb", use_include_path|ENFORCE_SAFE_MODE|REPORT_ERRORS, NULL, NULL STREAMS_CC TSRMLS_CC);
 	if (stream == NULL) {
 		php_error(E_WARNING,"gzFile(\"%s\") - %s",Z_STRVAL_PP(filename),strerror(errno));
 		RETURN_FALSE;
@@ -341,7 +341,7 @@ PHP_FUNCTION(gzopen)
 	convert_to_string_ex(arg2);
 	p = estrndup(Z_STRVAL_PP(arg2),Z_STRLEN_PP(arg2));
 	
-	stream = php_stream_gzopen(NULL, Z_STRVAL_PP(arg1), p, use_include_path|ENFORCE_SAFE_MODE, NULL STREAMS_CC TSRMLS_CC);
+	stream = php_stream_gzopen(NULL, Z_STRVAL_PP(arg1), p, use_include_path|ENFORCE_SAFE_MODE, NULL, NULL STREAMS_CC TSRMLS_CC);
 	if (!stream) {
 		RETURN_FALSE;
 	}
@@ -382,7 +382,7 @@ PHP_FUNCTION(readgzfile)
 	}
 	convert_to_string_ex(arg1);
 
-	stream = php_stream_gzopen(NULL, Z_STRVAL_PP(arg1), "rb", use_include_path|ENFORCE_SAFE_MODE, NULL STREAMS_CC TSRMLS_CC);
+	stream = php_stream_gzopen(NULL, Z_STRVAL_PP(arg1), "rb", use_include_path|ENFORCE_SAFE_MODE, NULL, NULL STREAMS_CC TSRMLS_CC);
 	if (!stream) {
 		RETURN_FALSE;
 	}

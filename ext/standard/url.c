@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.81.2.1 2004/09/20 05:14:35 iliaa Exp $ */
+/* $Id: url.c,v 1.81.2.2 2005/01/27 16:38:05 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -181,6 +181,8 @@ PHPAPI php_url *php_url_parse_ex(char const *str, int length)
 	
 	if (!(p = memchr(s, '/', (ue - s)))) {
 		if ((p = memchr(s, '?', (ue - s)))) {
+			e = p;
+		} else if ((p = memchr(s, '#', (ue - s)))) {
 			e = p;
 		}
 	} else {

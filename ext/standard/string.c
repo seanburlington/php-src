@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.272 2002/05/16 14:41:15 rasmus Exp $ */
+/* $Id: string.c,v 1.273 2002/05/16 14:42:22 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2142,7 +2142,6 @@ PHPAPI void php_stripslashes(char *str, int *len TSRMLS_DC)
 			} 
 			*s++ = *t++;
 			l--;
-			php_printf("%d\n",l);
 		}
 		*s = '\0';
 		

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.96 2002/06/11 03:55:28 jason Exp $ */
+/* $Id: fsock.c,v 1.97 2002/07/13 07:10:59 sniper Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -121,7 +121,6 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	char *host;
 	int host_len;
 	int port = -1;
-	int err;
 	zval *zerrno = NULL, *zerrstr = NULL;
 	double timeout = 60;
 	unsigned long conv;
@@ -193,9 +192,14 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		else
 #endif
 		stream = php_stream_sock_open_host(host, (unsigned short)port, socktype, (int)timeout, persistent);
+
 #ifdef PHP_WIN32
-		/* Preserve error */
-		err = WSAGetLastError();
+		{
+			int err;
+	
+			/* Preserve error */
+			err = WSAGetLastError();
+		}
 #endif
 
 		if (stream == NULL) {

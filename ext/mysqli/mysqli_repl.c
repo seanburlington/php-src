@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id:  
+  $Id: mysqli_repl.c,v 1.2 2004/02/26 12:33:23 sniper Exp $
 */
 
 #ifdef HAVE_CONFIG_H

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.162.2.4 2005/02/01 23:28:31 iliaa Exp $ */
+/* $Id: exif.c,v 1.162.2.5 2005/02/15 21:56:27 iliaa Exp $ */
 
 /*  ToDos
  *
@@ -93,7 +93,7 @@ typedef unsigned char uchar;
 
 #define EFREE_IF(ptr)	if (ptr) efree(ptr)
 
-#define MAX_IFD_NESTING_LEVEL 25
+#define MAX_IFD_NESTING_LEVEL 100
 
 static
 ZEND_BEGIN_ARG_INFO(exif_thumbnail_force_ref, 1)
@@ -112,7 +112,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.162.2.4 2005/02/01 23:28:31 iliaa Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.162.2.5 2005/02/15 21:56:27 iliaa Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */

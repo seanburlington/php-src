@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.40 2003/08/08 11:04:12 abies Exp $ */
+/* $Id: php_interbase.h,v 1.41 2003/08/10 16:21:26 abies Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -61,6 +61,8 @@ PHP_FUNCTION(ibase_timefmt);
 #endif
 
 PHP_FUNCTION(ibase_num_fields);
+PHP_FUNCTION(ibase_num_rows);
+PHP_FUNCTION(ibase_affected_rows);
 PHP_FUNCTION(ibase_field_info);
 
 PHP_FUNCTION(ibase_trans);
@@ -115,7 +117,8 @@ typedef struct {
 
 typedef struct {
 	isc_tr_handle handle;
-	int link_cnt;
+	unsigned short link_cnt;
+	unsigned long affected_rows;
 	ibase_db_link *db_link[1];
 } ibase_trans;
 
@@ -157,6 +160,7 @@ typedef struct {
 	int drop_stmt;
 	XSQLDA *out_sqlda;
 	ibase_array *out_array;
+	unsigned char has_more_rows;
 } ibase_result;
 
 typedef struct _php_ibase_varchar {

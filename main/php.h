@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.71 2000/03/12 17:18:21 sas Exp $ */
+/* $Id: php.h,v 1.72 2000/03/25 19:17:41 zeev Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -285,8 +285,6 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #define PUTC_H(c)					(php_header_write(&(c), 1), (c))
 
 
-#include "zend_operators.h"
-#include "zend_variables.h"
 #include "zend_constants.h"
 
 /* connection status states */

@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: php_parsedate.h,v 1.10 2005/01/10 15:20:53 sniper Exp $ */
+
 #ifndef PHP_PARSEDATE_H
 #define PHP_PARSEDATE_H
 

@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: php_smart_str_public.h,v 1.9 2005/01/10 15:20:53 sniper Exp $ */
+
 #ifndef PHP_SMART_STR_PUBLIC_H
 #define PHP_SMART_STR_PUBLIC_H
 

@@ -16,6 +16,8 @@
   +----------------------------------------------------------------------+
 */
 
+/* $Id: url_scanner_ex.h,v 1.25 2005/01/10 15:20:53 sniper Exp $ */
+
 #ifndef URL_SCANNER_EX_H
 #define URL_SCANNER_EX_H
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.9 2003/09/21 18:02:07 wez Exp $ */
+/* $Id: xp_ssl.c,v 1.10 2003/10/08 11:23:46 wez Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -165,9 +165,8 @@ static size_t php_openssl_sockop_read(php_stream *stream, char *buf, size_t coun
 
 			if (nr_bytes <= 0) {
 				retry = handle_ssl_error(stream, nr_bytes TSRMLS_CC);
-				if (retry == 0 && !SSL_pending(sslsock->ssl_handle)) {
-					stream->eof = 1;
-				}
+				stream->eof = (retry == 0 && !SSL_pending(sslsock->ssl_handle));
+				
 			} else {
 				/* we got the data */
 				break;

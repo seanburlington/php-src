@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.22 2000/06/05 19:47:44 andi Exp $ */
+/* $Id: assert.c,v 1.23 2000/08/16 12:47:09 hholzgra Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -242,7 +242,7 @@ PHP_FUNCTION(assert)
 }
 
 /* }}} */
-/* {{{ proto mixed assert_options(int what, mixed value)
+/* {{{ proto mixed assert_options(int what [, mixed value])
    Set/get the various assert flags */
 
 PHP_FUNCTION(assert_options)

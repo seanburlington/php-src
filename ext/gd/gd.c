@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.84 2000/08/21 14:11:19 stas Exp $ */
+/* $Id: gd.c,v 1.85 2000/08/22 04:11:57 andi Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1391,7 +1391,7 @@ PHP_FUNCTION(imagecolorstotal)
    Define a color as transparent */
 PHP_FUNCTION(imagecolortransparent)
 {
-	zval **IM, **COL = NULL;
+	zval **IM, **COL;
 	gdImagePtr im;
 	int col;
 	GDLS_FETCH();
@@ -1414,9 +1414,8 @@ PHP_FUNCTION(imagecolortransparent)
 
 	ZEND_FETCH_RESOURCE(im, gdImagePtr, IM, -1, "Image", GDG(le_gd));
 
-	if (COL != NULL && (*COL) != NULL) {
-		col = (*COL)->value.lval;
-		gdImageColorTransparent(im,col);
+	if (ZEND_NUM_ARGS() > 1) {
+		gdImageColorTransparent(im, Z_LVAL_PP(COL));
 	}
 	col = gdImageGetTransparent(im);
 	RETURN_LONG(col);

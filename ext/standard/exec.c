@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.94 2003/02/18 01:23:51 iliaa Exp $ */
+/* $Id: exec.c,v 1.95 2003/02/20 00:32:51 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -211,11 +211,12 @@ int php_Exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 			RETVAL_STRINGL(buf, l, 1);
 		}
 	} else {
-		int b, i;
+		size_t b;
 
-		while ((b = fread(buf, 1, buflen, fp)) > 0) {
-			for (i = 0; i < b; i++)
-				if (output) (void)PUTC(buf[i]);
+		while ((b = fread(buf, buflen, 1, fp)) > 0) {
+			if (output) {
+				PHPWRITE(buf, b);
+			}
 		}
 	}
 

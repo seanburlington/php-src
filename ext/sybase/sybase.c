@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sybase.c,v 1.28 2000/05/02 00:44:26 sas Exp $ */
+/* $Id: sybase.c,v 1.29 2000/05/02 21:00:07 sterling Exp $ */
 
 
 #include "php.h"
@@ -1189,7 +1189,7 @@ PHP_MINFO_FUNCTION(sybase)
 	char maxp[32],maxl[32];
 	
 	if (php_sybase_module.max_persistent==-1) {
-		snprintf(maxp, 31, "%d/unlimited", php_sybase_module.num_persistent )
+		snprintf(maxp, 31, "%d/unlimited", php_sybase_module.num_persistent );
 	} else {
 		snprintf(maxp, 31, "%d/%ld", php_sybase_module.num_persistent, php_sybase_module.max_persistent);
 	}

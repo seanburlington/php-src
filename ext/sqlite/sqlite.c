@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.97 2003/10/17 08:01:49 helly Exp $ 
+   $Id: sqlite.c,v 1.98 2003/10/17 08:17:09 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -730,6 +730,7 @@ static int php_sqlite_authorizer(void *autharg, int access_type, const char *arg
 		sqlite_ce_ ## name = zend_register_internal_class_ex(&ce, parent, NULL TSRMLS_CC); \
 		memcpy(&sqlite_object_handlers_ ## name, zend_get_std_object_handlers(), sizeof(zend_object_handlers)); \
 		sqlite_object_handlers_ ## name.clone_obj = NULL; \
+		sqlite_ce_ ## name->ce_flags |= ZEND_ACC_FINAL_CLASS; \
 	}
 
 zend_class_entry *sqlite_ce_db, *sqlite_ce_exception;
@@ -944,7 +945,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.97 2003/10/17 08:01:49 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.98 2003/10/17 08:17:09 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

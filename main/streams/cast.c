@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cast.c,v 1.10 2004/01/08 08:17:58 andi Exp $ */
+/* $Id: cast.c,v 1.11 2005/03/17 16:26:24 rasmus Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -267,7 +267,7 @@ exit_success:
 		
 		php_error_docref(NULL TSRMLS_CC, E_WARNING,
 				"%ld bytes of buffered data lost during stream conversion!",
-				stream->writepos - stream->readpos);
+				(long)(stream->writepos - stream->readpos));
 	}
 	
 	if (castas == PHP_STREAM_AS_STDIO && ret)

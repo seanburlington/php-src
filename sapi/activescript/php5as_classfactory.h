@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php5as_classfactory.h,v 1.2 2004/05/04 14:54:01 wez Exp $ */
+/* $Id: php5as_classfactory.h,v 1.3 2004/07/27 03:57:31 wez Exp $ */
 
 /* IClassFactory Implementation */
 
@@ -24,6 +24,10 @@
 // {CF108A38-59A9-468a-AF45-1368D7855DAE}
 DEFINE_GUID(CLSID_PHPActiveScriptEngine,
 0xcf108a38, 0x59a9, 0x468a, 0xaf, 0x45, 0x13, 0x68, 0xd7, 0x85, 0x5d, 0xae);
+
+// {AD504760-D6B9-4537-AEAC-512FFB359009}
+DEFINE_GUID(CLSID_PHPActiveScriptEngineMarshal,
+0xad504760, 0xd6b9, 0x4537, 0xae, 0xac, 0x51, 0x2f, 0xfb, 0x35, 0x90, 0x9);
 
 #if 0
 /* this was for PHP 4 */

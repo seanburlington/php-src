@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php5activescript.c,v 1.2 2004/05/04 14:54:01 wez Exp $ */
+/* $Id: php5activescript.c,v 1.3 2004/07/27 03:57:31 wez Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -145,6 +145,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 				activescript_sapi_module.shutdown(&sapi_module);
 			}
 			//OutputDebugString("PROCESS_DETACH\n");
+			sapi_shutdown();
 			tsrm_shutdown();
 			break;
 	}

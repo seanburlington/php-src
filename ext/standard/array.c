@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.194 2002/09/21 16:10:33 andrey Exp $ */
+/* $Id: array.c,v 1.195 2002/10/09 17:15:56 sterling Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -246,12 +246,9 @@ static int php_count_recursive(zval *array, long mode TSRMLS_DC)
 {
 	long cnt = 0;
 	zval **element;
-	HashTable *target_hash;
-
-	target_hash = HASH_OF(array);
 
 	if (Z_TYPE_P(array) == IS_ARRAY) {
-		cnt += zend_hash_num_elements(target_hash);
+		cnt = zend_hash_num_elements(Z_ARRVAL_P(array));
 		if (mode == COUNT_RECURSIVE) {
 			HashPosition pos;
 

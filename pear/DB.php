@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.58 2001/04/17 01:51:26 ssb Exp $
+// $Id: DB.php,v 1.59 2001/04/18 23:03:18 ssb Exp $
 //
 // Database independent query interface.
 //
@@ -425,7 +425,7 @@ class DB
 
         // Get phptype and dbsyntax
         // $str => phptype(dbsyntax)
-        if (preg_match('|^([^(]+)\(([^(]*)\)$|', $str, $arr)) {
+        if (preg_match('|^(.+?)\((.*?)\)$|', $str, $arr)) {
             $parsed['phptype'] = $arr[1];
             $parsed['dbsyntax'] = (empty($arr[2])) ? $arr[1] : $arr[2];
         } else {

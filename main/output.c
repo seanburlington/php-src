@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.53 2001/04/02 16:45:27 avsm Exp $ */
+/* $Id: output.c,v 1.54 2001/05/07 22:00:13 zeev Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -43,10 +43,16 @@ int output_globals_id;
 php_output_globals output_globals;
 #endif
 
+static php_default_output_func(const char *str, uint str_len)
+{
+	fwrite(str, 1, str_len, stderr);
+}
+
+
 static void php_output_init_globals(OLS_D)
 {
- 	OG(php_body_write) = NULL;
-	OG(php_header_write) = NULL;
+ 	OG(php_body_write) = php_default_output_func;
+	OG(php_header_write) = php_default_output_func;
 	OG(implicit_flush) = 0;
 	OG(output_start_filename) = NULL;
 	OG(output_start_lineno) = 0;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.27 2001/04/30 12:43:39 andi Exp $ */
+/* $Id: iptc.c,v 1.28 2001/06/05 13:12:04 rasmus Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -282,6 +282,7 @@ PHP_FUNCTION(iptcembed)
 		RETURN_TRUE;
 	}
 }
+/* }}} */
 
 /* {{{ proto array iptcparse(string iptcdata)
    Parse binary IPTC-data into associative array */
@@ -374,4 +375,5 @@ PHP_FUNCTION(iptcparse)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

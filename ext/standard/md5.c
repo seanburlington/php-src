@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.c,v 1.16 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: md5.c,v 1.17 2001/06/05 13:12:04 rasmus Exp $ */
 
 /* 
  * md5.c - Copyright 1997 Lachlan Roche 
@@ -360,4 +360,5 @@ unsigned int len;
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.32 2001/05/20 00:23:49 derick Exp $ */
+/* $Id: formatted_print.c,v 1.33 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -665,4 +665,5 @@ PHP_FUNCTION(user_printf)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

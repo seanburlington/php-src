@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.161 2001/05/19 22:50:44 rasmus Exp $ */
+/* $Id: file.c,v 1.162 2001/06/05 13:12:04 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2447,7 +2447,5 @@ php_meta_tags_token php_next_meta_token(FILE *fp, int socketd, int issock, int *
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: tw=78 sw=4 ts=4
+ * vim: tw=78 sw=4 ts=4 fdm=marker
  */
-
-

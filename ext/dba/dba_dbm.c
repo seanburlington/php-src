@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_dbm.c,v 1.7 2001/04/30 12:43:32 andi Exp $ */
+/* $Id: dba_dbm.c,v 1.8 2001/06/05 13:11:59 rasmus Exp $ */
 
 #include "php.h"
 
@@ -184,3 +184,11 @@ DBA_SYNC_FUNC(dbm)
 }
 
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
+ */

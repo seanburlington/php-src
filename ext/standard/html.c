@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.27 2001/05/29 10:14:46 wez Exp $ */
+/* $Id: html.c,v 1.28 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include "php.h"
 #include "reg.h"
@@ -471,4 +471,5 @@ PHP_FUNCTION(get_html_translation_table)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

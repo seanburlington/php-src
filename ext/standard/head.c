@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.37 2001/02/26 06:07:17 andi Exp $ */
+/* $Id: head.c,v 1.38 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -279,4 +279,5 @@ PHP_FUNCTION(headers_sent)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.68 2001/05/05 18:36:22 wez Exp $ */
+/* $Id: fsock.c,v 1.69 2001/06/05 13:12:04 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -761,5 +761,5 @@ PHP_RSHUTDOWN_FUNCTION(fsock)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

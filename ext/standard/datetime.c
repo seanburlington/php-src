@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.69 2001/04/29 15:48:07 derick Exp $ */
+/* $Id: datetime.c,v 1.70 2001/06/05 13:12:04 rasmus Exp $ */
 
 
 #include "php.h"
@@ -804,4 +804,5 @@ PHP_FUNCTION(strtotime)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.41 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: ereg.c,v 1.42 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -609,7 +609,6 @@ PHP_FUNCTION(spliti)
 
 /* }}} */
 
-
 /* {{{ proto string sql_regcase(string string)
    Make regular expression for case insensitive match */
 PHPAPI PHP_FUNCTION(sql_regcase)
@@ -646,11 +645,10 @@ PHPAPI PHP_FUNCTION(sql_regcase)
 }
 /* }}} */
 
-
-
 /*
  * Local variables:
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

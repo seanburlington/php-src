@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.68 2001/05/22 02:45:04 jon Exp $ */
+/* $Id: filestat.c,v 1.69 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -868,4 +868,5 @@ FileFunction(php_if_stat,17)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

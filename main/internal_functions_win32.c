@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.39 2001/05/13 16:51:59 phanto Exp $ */
+/* $Id: internal_functions_win32.c,v 1.40 2001/06/05 13:12:07 rasmus Exp $ */
 
 
 #include "php.h"
@@ -102,4 +102,5 @@ int php_global_shutdown_internal_extensions(void)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

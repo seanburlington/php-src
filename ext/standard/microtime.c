@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.30 2001/03/23 04:36:29 svanegmond Exp $ */
+/* $Id: microtime.c,v 1.31 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include "php.h"
 
@@ -146,4 +146,5 @@ PHP_FUNCTION(getrusage)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.57 2001/05/29 20:32:57 andrei Exp $ */
+/* $Id: output.c,v 1.58 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -613,11 +613,10 @@ PHPAPI int php_get_output_start_lineno()
 	return OG(output_start_lineno);
 }
 
-
-
 /*
  * Local variables:
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

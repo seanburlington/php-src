@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.366 2001/06/01 15:01:29 andrei Exp $ */
+/* $Id: main.c,v 1.367 2001/06/05 13:12:07 rasmus Exp $ */
 
 
 #include <stdio.h>
@@ -1293,4 +1293,5 @@ PHPAPI void dummy_indent()
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

@@ -37,7 +37,7 @@
 #endif
 
 static char const *version UNUSED =
-    "$Id: strnatcmp.c,v 1.4 2000/04/29 18:57:06 andrei Exp $";
+    "$Id: strnatcmp.c,v 1.5 2001/06/05 13:12:05 rasmus Exp $";
 
 static int
 compare_right(char const **a, char const *aend, char const **b, char const *bend)
@@ -156,3 +156,11 @@ PHPAPI int strnatcmp_ex(char const *a, size_t a_len, char const *b, size_t b_len
 			return 1;
 	}
 }
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
+ */

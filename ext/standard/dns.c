@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.28 2001/03/16 07:13:06 sniper Exp $ */
+/* $Id: dns.c,v 1.29 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include "php.h"
 #if HAVE_SYS_SOCKET_H
@@ -324,4 +324,5 @@ PHP_FUNCTION(getmxrr)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

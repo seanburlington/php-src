@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pfpro.c,v 1.13 2001/05/24 10:07:21 ssb Exp $ */
+/* $Id: pfpro.c,v 1.14 2001/06/05 13:12:03 rasmus Exp $ */
 
 /* {{{ includes */
 
@@ -599,4 +599,5 @@ PHP_FUNCTION(pfpro_process)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.349 2001/05/27 01:18:12 sterling Exp $ */
+/* $Id: basic_functions.c,v 1.350 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -2623,4 +2623,5 @@ PHP_FUNCTION(is_callable)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

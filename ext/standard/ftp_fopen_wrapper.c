@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.4 2001/02/26 06:07:17 andi Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.5 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -311,3 +311,11 @@ FILE *php_fopen_url_wrap_ftp(char *path, char *mode, int options, int *issock, i
 	*socketd = 0;
 	return NULL;
 }
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
+ */

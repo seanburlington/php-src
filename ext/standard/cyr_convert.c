@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyr_convert.c,v 1.13 2001/02/26 06:07:17 andi Exp $ */
+/* $Id: cyr_convert.c,v 1.14 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include <stdlib.h>
 
@@ -288,3 +288,11 @@ PHP_FUNCTION(convert_cyr_string)
 	RETVAL_STRING((char *)str, 0)
 }
 /* }}} */
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
+ */

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.87 2001/06/01 05:01:50 sniper Exp $ */
+/* $Id: php_odbc.c,v 1.88 2001/06/05 13:12:02 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -71,6 +71,8 @@ static int le_result, le_conn, le_pconn;
 
 static unsigned char a3_arg3_and_3_force_ref[] = { 3, BYREF_NONE, BYREF_FORCE, BYREF_FORCE };
 
+/* {{{ odbc_functions[]
+ */
 function_entry odbc_functions[] = {
     PHP_FE(odbc_error, NULL)
     PHP_FE(odbc_errormsg, NULL)
@@ -126,7 +128,10 @@ function_entry odbc_functions[] = {
 	PHP_FALIAS(odbc_field_precision, odbc_field_len, NULL)
 	{ NULL, NULL, NULL }
 };
+/* }}} */
 
+/* {{{ odbc_module_entry
+ */
 zend_module_entry odbc_module_entry = {
     "odbc", 
 	odbc_functions, 
@@ -137,6 +142,7 @@ zend_module_entry odbc_module_entry = {
 	PHP_MINFO(odbc), 
 	STANDARD_MODULE_PROPERTIES
 };
+/* }}} */
 
 #ifdef ZTS
 int odbc_globals_id;
@@ -148,6 +154,8 @@ ZEND_API php_odbc_globals odbc_globals;
 ZEND_GET_MODULE(odbc)
 #endif
 
+/* {{{ _free_odbc_result
+ */
 static void _free_odbc_result(zend_rsrc_list_entry *rsrc)
 {
 	odbc_result *res = (odbc_result *)rsrc->ptr;
@@ -176,11 +184,11 @@ static void _free_odbc_result(zend_rsrc_list_entry *rsrc)
 		efree(res);
 	}
 }
+/* }}} */
 
-/*
+/* {{{ safe_odbc_disconnect
  * disconnect, and if it fails, then issue a rollback for any pending transaction (lurcher)
  */
-
 static void safe_odbc_disconnect( void *handle )
 {
 	int ret;
@@ -192,7 +200,10 @@ static void safe_odbc_disconnect( void *handle )
 		SQLDisconnect( handle );
 	}
 }
+/* }}} */
 
+/* {{{ _close_odbc_conn
+ */
 static void _close_odbc_conn(zend_rsrc_list_entry *rsrc)
 {
 	odbc_connection *conn = (odbc_connection *)rsrc->ptr;
@@ -205,6 +216,7 @@ static void _close_odbc_conn(zend_rsrc_list_entry *rsrc)
 	efree(conn);
 	ODBCG(num_links)--;
 }
+/* }}} */
 
 static void _close_odbc_pconn(zend_rsrc_list_entry *rsrc)
 {
@@ -3507,4 +3519,5 @@ PHP_FUNCTION(odbc_tableprivileges)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

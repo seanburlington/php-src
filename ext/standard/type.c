@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.9 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: type.c,v 1.10 2001/06/05 13:12:05 rasmus Exp $ */
 
 #include "php.h"
 #include "type.h"
@@ -96,3 +96,11 @@ char *php_get_ident_index(char *str)
 	}
 	return (temp);
 }
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
+ */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.139 2001/05/30 05:00:39 sterling Exp $ */
+/* $Id: php.h,v 1.140 2001/06/05 13:12:07 rasmus Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -343,4 +343,5 @@ PHPAPI PHP_FUNCTION(warn_not_available);
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

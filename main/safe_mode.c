@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.28 2001/04/30 12:43:40 andi Exp $ */
+/* $Id: safe_mode.c,v 1.29 2001/06/05 13:12:07 rasmus Exp $ */
 
 #include "php.h"
 
@@ -163,3 +163,11 @@ PHPAPI char *php_get_current_user()
 	
 	return SG(request_info).current_user;		
 }	
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
+ */

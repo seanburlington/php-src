@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.54 2001/04/30 12:43:39 andi Exp $ */
+/* $Id: exec.c,v 1.55 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -480,4 +480,5 @@ PHP_FUNCTION(shell_exec)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: quot_print.c,v 1.12 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: quot_print.c,v 1.13 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include <stdlib.h>
 
@@ -127,3 +127,11 @@ PHP_FUNCTION(quoted_printable_decode)
     RETVAL_STRINGL(str_out, j, 0);
 }
 /* }}} */
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
+ */

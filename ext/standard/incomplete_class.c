@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: incomplete_class.c,v 1.5 2001/02/26 06:07:17 andi Exp $ */
+/* $Id: incomplete_class.c,v 1.6 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -119,3 +119,11 @@ void php_store_class_name(zval *object, const char *name, size_t len)
 
 	zend_hash_update(object->value.obj.properties, MAGIC_MEMBER, sizeof(MAGIC_MEMBER), &val, sizeof(val), NULL);
 }
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
+ */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_content_types.c,v 1.9 2001/02/26 06:07:31 andi Exp $ */
+/* $Id: php_content_types.c,v 1.10 2001/06/05 13:12:07 rasmus Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -54,4 +54,5 @@ int php_startup_sapi_content_types(void)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

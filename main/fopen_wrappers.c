@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.115 2001/05/23 03:40:52 sniper Exp $ */
+/* $Id: fopen_wrappers.c,v 1.116 2001/06/05 13:12:07 rasmus Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -545,10 +545,10 @@ PHPAPI char *expand_filepath(const char *filepath, char *real_path)
 	return real_path;
 }
 
-
 /*
  * Local variables:
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

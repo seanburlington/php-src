@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.138 2001/05/20 01:31:53 sniper Exp $ */
+/* $Id: info.c,v 1.139 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -558,4 +558,5 @@ PHP_FUNCTION(php_uname)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
  */

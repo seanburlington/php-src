@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pageinfo.c,v 1.21 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: pageinfo.c,v 1.22 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"
@@ -123,3 +123,11 @@ PHP_FUNCTION(getlastmod)
 	}
 }
 /* }}} */
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
+ */

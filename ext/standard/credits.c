@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.7 2001/05/10 14:25:48 zeev Exp $ */
+/* $Id: credits.c,v 1.8 2001/06/05 13:12:04 rasmus Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -109,3 +109,10 @@ PHPAPI void php_print_credits(int flag)
 		PUTS("</body></html>\n");
 	}
 }
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
+ */

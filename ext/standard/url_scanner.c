@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.30 2001/04/04 20:46:26 sniper Exp $ */
+/* $Id: url_scanner.c,v 1.31 2001/06/05 13:12:05 rasmus Exp $ */
 
 #include "php.h"
 
@@ -367,3 +367,11 @@ char *url_adapt(const char *src, size_t srclen, const char *data, size_t *newlen
 }
 
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim: sw=4 ts=4 tw=78 fdm=marker
+ */

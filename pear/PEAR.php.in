@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php.in,v 1.26 2001/04/19 02:33:24 ssb Exp $
+// $Id: PEAR.php.in,v 1.27 2001/04/19 12:31:20 ssb Exp $
 //
 
 define('PEAR_ERROR_RETURN', 1);
@@ -303,7 +303,7 @@ class PEAR
         }
         if ($error_class !== null) {
             $ec = $error_class;
-        } elseif (isset($this)) {
+        } elseif (isset($this) && isset($this->_error_class)) {
             $ec = $this->_error_class;
         } else {
             $ec = 'PEAR_Error';

@@ -34,7 +34,7 @@
 # merged into the output archive.  The prefix used is the same as the
 # directory name with "/" replaced by "_" and a "_" at the end.
 #
-# $Id: armerge,v 1.4 1999/05/03 11:11:23 ssb Exp $
+# $Id: armerge,v 1.5 1999/06/01 17:53:15 sas Exp $
 #
 
 die() {
@@ -78,6 +78,6 @@ for archive in $in_archives; do
     ar r out.a $ext_files
 done )
 
-mv $tmpdir/out.a $out_archive || die "can not create $out_archive"
+cmp $tmpdir/out.a $out_archive >/dev/null 2>&1 || mv $tmpdir/out.a $out_archive || die "can not create $out_archive"
 rm -rf $tmpdir
 

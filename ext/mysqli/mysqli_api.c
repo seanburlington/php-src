@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.54 2003/12/13 16:08:13 georg Exp $ 
+  $Id: mysqli_api.c,v 1.55 2003/12/16 08:18:31 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -620,6 +620,10 @@ PHP_FUNCTION(mysqli_execute)
 		MYSQLI_REPORT_STMT_ERROR(stmt->stmt);
 		RETURN_FALSE;
 	}
+	if (MyG(report_mode) & MYSQLI_REPORT_INDEX) {
+		php_mysqli_report_index(stmt->stmt->query, stmt->stmt->mysql->server_status TSRMLS_CC);
+	}
+	
 	RETURN_TRUE;
 }
 /* }}} */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.183 2003/02/25 09:44:12 sniper Exp $ */
+/* $Id: php.h,v 1.184 2003/04/04 15:38:20 andrei Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -305,11 +305,13 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #define PHP_FN					ZEND_FN
 #define PHP_NAMED_FUNCTION		ZEND_NAMED_FUNCTION
 #define PHP_FUNCTION			ZEND_FUNCTION
+#define PHP_METHOD  			ZEND_METHOD
 
 #define PHP_NAMED_FE	ZEND_NAMED_FE
 #define PHP_FE			ZEND_FE
 #define PHP_FALIAS		ZEND_FALIAS
 #define PHP_STATIC_FE	ZEND_STATIC_FE
+#define PHP_ME          ZEND_ME
 
 #define PHP_MODULE_STARTUP_N	ZEND_MODULE_STARTUP_N
 #define PHP_MODULE_SHUTDOWN_N	ZEND_MODULE_SHUTDOWN_N

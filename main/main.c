@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.268 2000/06/12 20:22:17 zeev Exp $ */
+/* $Id: main.c,v 1.269 2000/06/13 20:59:23 andrei Exp $ */
 
 
 #include <stdio.h>
@@ -1075,6 +1075,9 @@ static void php_build_argv(char *s, zval *track_vars_array ELS_DC PLS_DC)
 	int count = 0;
 	char *ss, *space;
 
+	if (!PG(register_globals) && !PG(track_vars))
+		return;
+	
 	ALLOC_ZVAL(arr);
 	array_init(arr);
 	INIT_PZVAL(arr);

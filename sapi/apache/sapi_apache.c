@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.13 2000/04/30 04:15:26 shane Exp $ */
+/* $Id: sapi_apache.c,v 1.14 2000/04/30 04:56:48 shane Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -67,9 +67,13 @@ PHPAPI int apache_php_module_main(request_rec *r, int fd, int display_source_mod
 	zend_compiler_globals cg;
 	zend_executor_globals eg;
 	php_core_globals pcg;
+
 	zend_compiler_globals *compiler_globals=&cg;
 	zend_executor_globals *executor_globals=&eg;
 	php_core_globals *core_globals=&pcg;
+	memset(&cg,0,sizeof(zend_compiler_globals));
+	memset(&eg,0,sizeof(zend_executor_globals));
+	memset(&pcg,0,sizeof(php_core_globals));
 #endif
 
 	if (php_request_startup(CLS_C ELS_CC PLS_CC SLS_CC) == FAILURE) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.31 2004/01/26 04:59:59 sniper Exp $ */
+/* $Id: interface.c,v 1.32 2004/02/23 19:50:07 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1132,7 +1132,8 @@ PHP_FUNCTION(curl_exec)
 	
 	error = curl_easy_perform(ch->cp);
 	SAVE_CURL_ERROR(ch, error);
-	if (error != CURLE_OK) {
+	/* CURLE_PARTIAL_FILE is returned by HEAD requests */
+	if (error != CURLE_OK && error != CURLE_PARTIAL_FILE) {
 		if (ch->handlers->write->buf.len > 0) {
 			smart_str_free(&ch->handlers->write->buf);
 		}

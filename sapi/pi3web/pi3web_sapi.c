@@ -21,7 +21,7 @@
  */
 
 /*
-** $Id: pi3web_sapi.c,v 1.1 2000/06/18 10:21:20 sas Exp $
+** $Id: pi3web_sapi.c,v 1.2 2000/06/18 19:01:54 holger Exp $
 */
 
 #if WIN32|WINNT
@@ -85,7 +85,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=5 width=600>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.1 2000/06/18 10:21:20 sas Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.2 2000/06/18 19:01:54 holger Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -348,7 +348,7 @@ static void hash_pi3web_variables(ELS_D SLS_DC)
 			return;
 		}
 	}
-	variable = strtok_r(variable_buf, "\r\n", &strtok_buf);
+	variable = php_strtok_r(variable_buf, "\r\n", &strtok_buf);
 	while (variable) {
 		char *colon = strchr(variable, ':');
 
@@ -368,7 +368,7 @@ static void hash_pi3web_variables(ELS_D SLS_DC)
 			zend_hash_add(&EG(symbol_table), variable, strlen(variable)+1, &entry, sizeof(zval *), NULL);
 			*colon = ':';
 		}
-		variable = strtok_r(NULL, "\r\n", &strtok_buf);
+		variable = php_strtok_r(NULL, "\r\n", &strtok_buf);
 	}
 	if (variable_buf!=static_variable_buf) {
 		efree(variable_buf);

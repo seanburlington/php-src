@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Downloader.php,v 1.5 2003/12/04 01:35:45 cellog Exp $
+// $Id: Downloader.php,v 1.6 2003/12/04 02:00:39 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -150,6 +150,25 @@ class PEAR_Downloader extends PEAR_Common
             $this->_installed = array_flip($this->_installed);
         }
         parent::PEAR_Common($ui);
+    }
+    
+    // }}}
+    // {{{ configSet()
+    function configSet($key, $value, $layer = 'user')
+    {
+        $this->_config->set($key, $value, $layer);
+        $this->_preferredState = $this->_config->get('preferred_state');
+        if (!$this->_preferredState) {
+            // don't inadvertantly use a non-set preferred_state
+            $this->_preferredState = null;
+        }
+    }
+    
+    // }}}
+    // {{{ setOptions()
+    function setOptions($options)
+    {
+        $this->_options = $options;
     }
     
     // }}}

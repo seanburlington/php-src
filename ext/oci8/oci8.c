@@ -22,7 +22,7 @@
 
 #define OCI_USE_EMALLOC 0		/* set this to 1 if you want to use the php memory manager! */
 
-/* $Id: oci8.c,v 1.48 1999/12/18 22:35:16 zeev Exp $ */
+/* $Id: oci8.c,v 1.49 1999/12/23 08:18:35 thies Exp $ */
 
 /* TODO list:
  *
@@ -63,10 +63,10 @@ static int le_stmt; /* active statements */
 static zend_class_entry *oci_lob_class_entry_ptr;
 
 #ifndef SQLT_BFILEE
-  #define SQLT_BFILEE 114
+#define SQLT_BFILEE 114
 #endif
 #ifndef SQLT_CFILEE
-  #define SQLT_CFILEE 115
+#define SQLT_CFILEE 115
 #endif
 
 #define SAFE_STRING(s) ((s)?(s):"")
@@ -327,9 +327,9 @@ PHP_MINIT_FUNCTION(oci)
 	ELS_FETCH();
 
 #ifdef ZTS 
-	#define PHP_OCI_INIT_MODE OCI_THREADED
+#define PHP_OCI_INIT_MODE OCI_THREADED
 #else
-	#define PHP_OCI_INIT_MODE OCI_DEFAULT
+#define PHP_OCI_INIT_MODE OCI_DEFAULT
 #endif
 
 #if OCI_USE_EMALLOC

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.23 1999/04/22 02:48:22 ssb Exp $ */
+/* $Id: main.c,v 1.24 1999/04/23 03:36:15 zeev Exp $ */
 
 /* #define CRASH_DETECTION */
 
@@ -735,7 +735,6 @@ void php3_request_shutdown(void *dummy INLINE_TLS)
 	}
 	if (GLOBAL(initialized) & INIT_SCANNER) {
 		SHUTDOWN_DEBUG("Scanner");
-		reset_scanner(CLS_C);
 		GLOBAL(initialized) &= ~INIT_SCANNER;
 	}
 	SHUTDOWN_DEBUG("Memory manager");

@@ -21,7 +21,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.12 1999/08/18 17:19:20 chagenbu Exp $ */
+/* $Id: imap.c,v 1.13 1999/08/27 04:22:39 musone Exp $ */
 
 #define IMAP41
 
@@ -180,7 +180,7 @@ MAILSTREAM *mail_close_it (pils *imap_le_struct)
 	return ret;
 }
 
-inline int add_assoc_object(pval *arg, char *key, pval *tmp)
+static int add_assoc_object(pval *arg, char *key, pval *tmp)
 {
 	HashTable *symtable;
 	

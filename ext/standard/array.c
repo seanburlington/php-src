@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.70 2000/08/18 12:45:01 hholzgra Exp $ */
+/* $Id: array.c,v 1.71 2000/08/22 18:39:29 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1015,11 +1015,18 @@ PHP_FUNCTION(array_walk) {
 	}
 	target_hash = HASH_OF(*array);
 	if (!target_hash) {
-		php_error(E_WARNING, "Wrong datatype in array_walk() call");
+		php_error(E_WARNING, "Wrong datatype in %s() call",
+				  get_active_function_name());
 		BG(array_walk_func_name) = old_walk_func_name;
 		RETURN_FALSE;
 	}
-	convert_to_string_ex(BG(array_walk_func_name));
+	if (Z_TYPE_PP(BG(array_walk_func_name)) != IS_ARRAY && 
+		Z_TYPE_PP(BG(array_walk_func_name)) != IS_STRING) {
+		php_error(E_WARNING, "Wrong syntax for function name in %s() call",
+				  get_active_function_name());
+		BG(array_walk_func_name) = old_walk_func_name;
+		RETURN_FALSE;
+	}
 	php_array_walk(target_hash, userdata);
 	BG(array_walk_func_name) = old_walk_func_name;
 	RETURN_TRUE;

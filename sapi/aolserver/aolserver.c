@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.37 2000/03/18 17:50:43 sas Exp $ */
+/* $Id: aolserver.c,v 1.38 2000/04/07 16:46:59 cmv Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -205,8 +205,8 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	int i;
 	NSLS_FETCH();
 	
-	PUTS("<table border=5 width=600>\n");
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.37 2000/03/18 17:50:43 sas Exp $");
+	php_info_print_table_start();
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.38 2000/04/07 16:46:59 cmv Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -222,24 +222,21 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 			(uptime / 60) % 60,
 			uptime % 60);
 	php_info_print_table_row(2, "Server uptime", buf);
-	PUTS("</table>");
+	php_info_print_table_end();
 
-	PUTS("<hr><h2>HTTP Headers Information</h2>");
-	PUTS("<table border=5 width=\"600\">\n");
-	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">HTTP Request Headers</th></tr>\n");
+	SECTION("HTTP Headers Information");
+	php_info_print_table_start();
+	php_info_print_table_colspan_header(2, "HTTP Request Headers");
 	php_info_print_table_row(2, "HTTP Request", NSG(conn)->request->line);
-	
 	for (i = 0; i < Ns_SetSize(NSG(conn)->headers); i++) {
 		php_info_print_table_row(2, Ns_SetKey(NSG(conn)->headers, i), Ns_SetValue(NSG(conn)->headers, i));
 	}
-	
-	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">HTTP Response Headers</th></tr>\n");
-	
+
+	php_info_print_table_colspan_header(2, "HTTP Response Headers");
 	for (i = 0; i < Ns_SetSize(NSG(conn)->outputheaders); i++) {
 		php_info_print_table_row(2, Ns_SetKey(NSG(conn)->outputheaders, i), Ns_SetValue(NSG(conn)->outputheaders, i));
 	}
-
-	PUTS("</table>");
+	php_info_print_table_end();
 }
 
 PHP_FUNCTION(getallheaders);

@@ -24,7 +24,7 @@
 #
 # Written by Stig Bakken <ssb@guardian.no> 1997-05-28.
 #
-# $Id: makedist,v 1.3 1999/07/17 11:59:37 zeev Exp $
+# $Id: makedist,v 1.4 1999/07/17 12:28:17 sas Exp $
 #
 
 CVSROOT=:pserver:cvsread@cvs.php.net:/repository
@@ -107,7 +107,7 @@ done
 # generate some files so people don't need bison, flex and autoconf
 # to install
 set -x
-./buildconf
+./buildconf --copy
 cd libzend
 bison -p zend -d zend-parser.y -o zend-parser.c
 flex -Pzend -ozend-scanner.c -i zend-scanner.l

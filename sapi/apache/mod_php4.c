@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.35 2000/02/24 22:00:47 ssb Exp $ */
+/* $Id: mod_php4.c,v 1.36 2000/02/25 21:27:03 ssb Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -399,6 +399,22 @@ static int php_apache_alter_ini_entries(php_per_dir_entry *per_dir_entry)
 	return 0;
 }
 
+static char *php_apache_get_default_mimetype(request_rec *r SLS_DC)
+{
+	
+	char *mimetype;
+	if (SG(default_mimetype) || SG(default_charset)) {
+		/* Assume output will be of the default MIME type.  Individual
+		   scripts may change this later. */
+		char *tmpmimetype;
+		tmpmimetype = sapi_get_default_content_type(SLS_C);
+		mimetype = pstrdup(r->pool, tmpmimetype);
+		efree(tmpmimetype);
+	} else {
+		mimetype = SAPI_DEFAULT_CONTENT_TYPE;
+	}
+	return mimetype;
+}
 
 int send_php(request_rec *r, int display_source_mode, char *filename)
 {
@@ -428,7 +444,7 @@ int send_php(request_rec *r, int display_source_mode, char *filename)
 	 * directive, then decline to handle this request
 	 */
 	if (!php_apache_info.engine) {
-		r->content_type = SAPI_DEFAULT_CONTENT_TYPE; /* XXX FIXME use default_{mimetype|charset} directives */
+		r->content_type = php_apache_get_default_mimetype(r SLS_CC);
 		r->allowed |= (1 << METHODS) - 1;
 		return DECLINED;
 	}
@@ -458,9 +474,9 @@ int send_php(request_rec *r, int display_source_mode, char *filename)
 		set_etag(r);
 #endif
 	}
-	/* Assume output will be HTML.  Individual scripts may change this 
-	   further down the line */
-	r->content_type = SAPI_DEFAULT_CONTENT_TYPE; /* XXX FIXME use default_{mimetype|charset} directives */
+	/* Assume output will be of the default MIME type.  Individual
+	   scripts may change this later in the request. */
+	r->content_type = php_apache_get_default_mimetype(r SLS_CC);
 
 	/* Init timeout */
 	hard_timeout("send", r);

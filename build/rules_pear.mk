@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: rules_pear.mk,v 1.3 2000/01/01 20:48:42 sas Exp $ 
+# $Id: rules_pear.mk,v 1.4 2000/02/25 21:27:03 ssb Exp $ 
 #
 
 include $(DEPTH)/config_vars.mk
@@ -120,7 +120,7 @@ install-modules:
 	echo "installing shared modules into $(moduledir)" && \
 	rm -f modules/*.la && \
 	cp modules/* $(moduledir) || true
-	
+
 include $(srcdir)/.deps
 
 .PHONY: all-recursive clean-recursive install-recursive \

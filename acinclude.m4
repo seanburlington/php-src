@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.218.2.18 2003/05/19 01:33:29 sas Exp $
+dnl $Id: acinclude.m4,v 1.218.2.19 2003/06/28 12:29:07 sas Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -1186,7 +1186,9 @@ main() {
 	int res = 0;
 	res = res || (snprintf(buf, 2, "marcus") != 6); 
 	res = res || (buf[1] != '\0');
-	res = res || (snprintf(buf, 0, "boerger") != 7);
+	/* Implementations may consider this as an encoding error */
+	snprintf(buf, 0, "boerger");
+	/* However, they MUST ignore the pointer */
 	res = res || (buf[0] != 'm');
 	res = res || (snprintf(NULL, 0, "boerger") != 7);
 	res = res || (snprintf(buf, sizeof(buf), "%f", 0.12345678) != 8);

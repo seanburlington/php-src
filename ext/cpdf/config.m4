@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 1999/11/22 15:28:26 steinm Exp $
+dnl $Id: config.m4,v 1.2 1999/12/09 07:15:34 steinm Exp $
 
 AC_MSG_CHECKING(whether to include cpdflib support)
 AC_ARG_WITH(cpdflib,
@@ -15,6 +15,8 @@ AC_ARG_WITH(cpdflib,
       AC_CHECK_LIB(cpdf, cpdf_open, [AC_DEFINE(HAVE_CPDFLIB)],
         [AC_MSG_ERROR(Cpdf module requires cpdflib >= 2.)])
       AC_ADD_LIBRARY(cpdf)
+      AC_ADD_LIBRARY(tiff)
+      AC_ADD_LIBRARY(jpeg)
       ;;
     *)
       test -f $withval/include/cpdflib.h && CPDFLIB_INCLUDE="$withval/include"
@@ -31,10 +33,9 @@ AC_ARG_WITH(cpdflib,
           if test -z $withval; then
             withval="/usr/local"
           fi
-          LIBS="$LIBS -L$withval/lib -ljpeg"
+          LIBS="$LIBS -L$withval/lib"
           AC_CHECK_LIB(jpeg,jpeg_read_header, ,[AC_MSG_RESULT(no)],)
           AC_ADD_LIBRARY_WITH_PATH(jpeg, $withval/lib)
-          LIBS="$LIBS -L$withval/lib -ljpeg"
         ],[
           AC_MSG_RESULT(no)
           AC_MSG_WARN(If configure fails try --with-jpeg-dir=<DIR>)
@@ -47,7 +48,7 @@ AC_ARG_WITH(cpdflib,
           if test -z $withval; then
             withval="/usr/local"
           fi
-          LIBS="$LIBS -L$withval/lib -ljpeg"
+          LIBS="$LIBS -L$withval/lib"
           AC_CHECK_LIB(tiff,TIFFOpen, ,[AC_MSG_RESULT(no)],)
           AC_ADD_LIBRARY_WITH_PATH(tiff, $withval/lib)
         ],[
@@ -56,7 +57,7 @@ AC_ARG_WITH(cpdflib,
         ]) 
         withval=$old_withval
 
-        LIBS="$LIBS -L$withval/lib -ltiff"
+          LIBS="$LIBS -L$withval/lib"
         AC_CHECK_LIB(cpdf, cpdf_open, [AC_DEFINE(HAVE_CPDFLIB)],
           [AC_MSG_ERROR(Cpdflib module requires cpdflib >= 2.)])
         LIBS=$old_LIBS

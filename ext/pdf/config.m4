@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 1999/12/07 10:49:19 steinm Exp $
+dnl $Id: config.m4,v 1.7 1999/12/09 07:15:36 steinm Exp $
 
 AC_MSG_CHECKING(whether to include Pdflib 2.x support)
 AC_ARG_WITH(pdflib,
@@ -30,7 +30,6 @@ echo $withval
       if test -n "$PDFLIB_INCLUDE" ; then
         AC_MSG_RESULT(yes)
         PHP_EXTENSION(pdf)
-        old_LIBS=$LIBS
         old_withval=$withval
 
         if test $HAVE_ZLIB; then
@@ -41,9 +40,11 @@ echo $withval
             if test -z $withval; then
               withval="/usr/local"
             fi
+            old_LIBS=$LIBS
+            LIBS="$LIBS -L$withval/lib"
             AC_CHECK_LIB(z,deflate, [PDFLIB_LIBS="-L$withval/lib -lz"],[AC_MSG_RESULT(no)],)
-            LIBS="$LIBS -L$withval/lib -lz"
-            AC_ADD_LIBRARY_WITH_PATH(z, $/withvallib)
+            LIBS=$old_LIBS
+            AC_ADD_LIBRARY_WITH_PATH(z, $withval/lib)
           ],[
             AC_MSG_RESULT(no)
             AC_MSG_WARN(If configure fails try --with-zlib=<DIR>)
@@ -61,8 +62,10 @@ echo $withval
           if test -z $withval; then
             withval="/usr/local"
           fi
-          LIBS="$LIBS -L$withval/lib -ljpeg"
+          old_LIBS=$LIBS
+          LIBS="$LIBS -L$withval/lib"
           AC_CHECK_LIB(jpeg,jpeg_read_header, [PDFLIB_LIBS="$PDFLIB_LIBS -L$withval/lib -ljpeg"],[AC_MSG_RESULT(no)],)
+          LIBS=$old_LIBS
           AC_ADD_LIBRARY_WITH_PATH(jpeg, $withval/lib)
           LIBS="$LIBS -L$withval/lib -ljpeg"
         ],[
@@ -77,21 +80,25 @@ echo $withval
           if test -z $withval; then
             withval="/usr/local"
           fi
-          LIBS="$LIBS -L$withval/lib -ltiff -ljpeg"
+          old_LIBS=$LIBS
+          LIBS="$LIBS -L$withval/lib"
           AC_CHECK_LIB(tiff,TIFFOpen, [PDFLIB_LIBS="$PDFLIB_LIBS -L$withval/lib -ltiff"],[AC_MSG_RESULT(no)],)
+          LIBS=$old_LIBS
           AC_ADD_LIBRARY_WITH_PATH(tiff, $withval/lib)
+          LIBS="$LIBS -L$withval/lib -ltiff"
         ],[
           AC_MSG_RESULT(no)
           AC_MSG_WARN(If configure fails try --with-tiff-dir=<DIR>)
         ]) 
         withval=$old_withval
 
+        old_LIBS=$LIBS
         LIBS="$LIBS -L$withval/lib"
         AC_CHECK_LIB(pdf, PDF_close, [AC_DEFINE(HAVE_PDFLIB) PDFLIB_LIBS="$PDFLIB_LIBS -L$withval/lib -lpdf"],
           [AC_MSG_ERROR(pdflib extension requires pdflib 2.x.)])
+        LIBS=$old_LIBS
         AC_ADD_LIBRARY_WITH_PATH(pdf, $withval/lib)
         AC_ADD_INCLUDE($PDFLIB_INCLUDE)
-        LIBS=$old_LIBS
       else
         AC_MSG_RESULT(no)
       fi ;;

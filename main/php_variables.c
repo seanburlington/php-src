@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.45.2.4 2003/06/14 15:08:37 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.45.2.5 2003/06/16 19:25:06 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -71,6 +71,8 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 	
 	if (track_vars_array) {
 		symtable1 = Z_ARRVAL_P(track_vars_array);
+	} else if (PG(register_globals)) {
+		symtable1 = EG(active_symbol_table);
 	}
 	if (!symtable1) {
 		/* Nothing to do */

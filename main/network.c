@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.83.2.7 2003/05/06 14:39:31 sas Exp $ */
+/* $Id: network.c,v 1.83.2.8 2003/05/12 04:05:54 iliaa Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -1015,9 +1015,11 @@ static size_t php_sockop_read(php_stream *stream, char *buf, size_t count TSRMLS
 static int php_sockop_close(php_stream *stream, int close_handle TSRMLS_DC)
 {
 	php_netstream_data_t *sock = (php_netstream_data_t*)stream->abstract;
+#ifdef PHP_WIN32
 	fd_set wrfds, efds;
 	int n;
 	struct timeval timeout;
+#endif
 
 	if (close_handle) {
 #if HAVE_OPENSSL_EXT

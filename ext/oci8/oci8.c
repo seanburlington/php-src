@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.246 2004/02/02 08:26:15 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.247 2004/02/03 14:21:09 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -786,7 +786,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.246 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.247 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -6319,7 +6319,7 @@ PHP_FUNCTION(oci_collection_append)
 				OCICollAppend(
 					connection->session->pEnv, 
 					connection->pError, 
-					(dword *)0, 
+					(dvoid *)0, 
 					&null_ind, 
 					coll->coll
 				)
@@ -6667,7 +6667,7 @@ PHP_FUNCTION(oci_collection_element_assign)
 					connection->session->pEnv, 
 					connection->pError, 
 					ndx, 
-					(dword *)0, 
+					(dvoid *)0, 
 					&null_ind, 
 					coll->coll
 				)
@@ -6706,7 +6706,7 @@ PHP_FUNCTION(oci_collection_element_assign)
 						connection->session->pEnv, 
 						connection->pError, 
 						ndx, 
-						(dword *)&dt, 
+						(dvoid *)&dt, 
 						&new_ind, 
 						coll->coll
 					)
@@ -6740,7 +6740,7 @@ PHP_FUNCTION(oci_collection_element_assign)
 						connection->session->pEnv, 
 						connection->pError, 
 						ndx, 
-						(dword *)ocistr, 
+						(dvoid *)ocistr, 
 						&new_ind, 
 						coll->coll
 					)
@@ -6785,7 +6785,7 @@ PHP_FUNCTION(oci_collection_element_assign)
 						connection->session->pEnv, 
 						connection->pError, 
 						ndx, 
-						(dword *)&num, 
+						(dvoid *)&num, 
 						&new_ind, 
 						coll->coll
 					)

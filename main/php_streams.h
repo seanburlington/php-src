@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.61.2.11 2003/05/13 00:18:27 wez Exp $ */
+/* $Id: php_streams.h,v 1.61.2.12 2003/05/13 23:09:27 sas Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -552,6 +552,10 @@ PHPAPI int _php_stream_make_seekable(php_stream *origstream, php_stream **newstr
  * will most likely fail on systems with fopencookie. */
 PHPAPI FILE * _php_stream_open_wrapper_as_file(char * path, char * mode, int options, char **opened_path STREAMS_DC TSRMLS_DC);
 #define php_stream_open_wrapper_as_file(path, mode, options, opened_path) _php_stream_open_wrapper_as_file((path), (mode), (options), (opened_path) STREAMS_CC TSRMLS_CC)
+
+
+PHPAPI zend_bool _php_stream_open_wrapper_as_file_handle(char * path, char * mode, int options, zend_file_handle * STREAMS_DC TSRMLS_DC);
+#define php_stream_open_wrapper_as_file_handle(path, mode, options, fh) _php_stream_open_wrapper_as_file_handle((path), (mode), (options), (fh) STREAMS_CC TSRMLS_CC)
 
 /* for user-space streams */
 PHPAPI extern php_stream_ops php_stream_userspace_ops;

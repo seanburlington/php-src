@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.54 2003/05/13 00:18:27 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.55 2003/05/13 23:09:27 sas Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2701,6 +2701,42 @@ PHPAPI FILE * _php_stream_open_wrapper_as_file(char *path, char *mode, int optio
 		return NULL;
 	}
 	return fp;
+}
+/* }}} */
+
+
+
+/* {{{ php_stream_open_wrapper_as_file_handle */
+PHPAPI zend_bool _php_stream_open_wrapper_as_file_handle(char *path, char *mode, int options, zend_file_handle *fh STREAMS_DC TSRMLS_DC)
+{
+	php_stream *stream = NULL;
+
+	stream = php_stream_open_wrapper_rel(path, mode, options|STREAM_WILL_CAST, &fh->opened_path);
+
+	if (stream == NULL)
+		return FAILURE;
+
+	if (php_stream_cast(stream, PHP_STREAM_AS_FD | PHP_STREAM_CAST_TRY_HARD 
+				| PHP_STREAM_CAST_RELEASE, (void **) &fh->handle.fd, 
+				REPORT_ERRORS) == SUCCESS) {
+		if ((options & STREAM_OPEN_FOR_INCLUDE) 
+				&& php_stream_is(stream, PHP_STREAM_IS_SOCKET)) {
+			fh->type = ZEND_HANDLE_SOCKET_FD;
+		} else {
+			fh->type = ZEND_HANDLE_FD;
+		}
+	} else if (php_stream_cast(stream, PHP_STREAM_AS_STDIO
+				|PHP_STREAM_CAST_TRY_HARD | PHP_STREAM_CAST_RELEASE,
+				(void**) &fh->handle.fp, REPORT_ERRORS) == SUCCESS) {
+		fh->type = ZEND_HANDLE_FP;
+	} else {
+		php_stream_close(stream);
+		if (fh->opened_path)
+			efree(fh->opened_path);
+		fh->opened_path = NULL;
+		return FAILURE;
+	}
+	return SUCCESS;
 }
 /* }}} */
 

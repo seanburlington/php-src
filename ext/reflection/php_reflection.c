@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.68 2003/09/20 14:22:48 helly Exp $ */
+/* $Id: php_reflection.c,v 1.69 2003/10/17 08:15:48 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -260,10 +260,10 @@ static void _class_string(string *str, zend_class_entry *ce, zval *obj, char *in
 		string_printf(str, "%s%s [ ", indent, (ce->ce_flags & ZEND_ACC_INTERFACE) ? "Interface" : "Class");
 	}
 	string_printf(str, (ce->type == ZEND_USER_CLASS) ? "<user>  " : "<internal> ");
-	if (ce->ce_flags & ZEND_ACC_ABSTRACT) {
+	if (ce->ce_flags & ZEND_ACC_ABSTRACT_CLASS) {
 		string_printf(str, "abstract ");
 	}
-	if (ce->ce_flags & ZEND_ACC_FINAL) {
+	if (ce->ce_flags & ZEND_ACC_FINAL_CLASS) {
 		string_printf(str, "final ");
 	} 
 	string_printf(str, (ce->ce_flags & ZEND_ACC_INTERFACE) ? "interface " : "class ");

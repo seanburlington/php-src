@@ -22,7 +22,7 @@
 */
 
 
-/* $Id: array.c,v 1.199.2.30 2003/10/08 11:16:22 sniper Exp $ */
+/* $Id: array.c,v 1.199.2.31 2004/03/30 19:09:10 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -718,6 +718,10 @@ PHP_FUNCTION(prev)
 		RETURN_FALSE;
 	}
 	zend_hash_move_backwards(target_hash);
+	if (!target_hash->pInternalPointer) {
+		zend_hash_internal_pointer_reset(target_hash);
+		RETURN_FALSE;
+	}
 
 	if (return_value_used) {	
 		if (zend_hash_get_current_data(target_hash, (void **) &entry) == FAILURE) {
@@ -746,6 +750,10 @@ PHP_FUNCTION(next)
 		RETURN_FALSE;
 	}
 	zend_hash_move_forward(target_hash);
+	if (!target_hash->pInternalPointer) {
+		zend_hash_internal_pointer_end(target_hash);
+		RETURN_FALSE;
+	}
 
 	if (return_value_used) {
 		if (zend_hash_get_current_data(target_hash, (void **) &entry) == FAILURE) {

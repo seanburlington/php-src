@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.19 2002/06/21 13:11:04 ssb Exp $
+// $Id: Remote.php,v 1.20 2002/06/24 16:03:45 mj Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -56,7 +56,7 @@ Lists the packages available on the configured server along with the
 latest stable release of each package.',
             ),
         'search' => array(
-            'summary' => 'Search Packagesdatabase',
+            'summary' => 'Search remote package database',
             'function' => 'doSearch',
             'shortcut' => 'sp',
             'options' => array(),

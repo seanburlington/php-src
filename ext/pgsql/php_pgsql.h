@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.10 2000/05/24 06:48:04 jah Exp $ */
+/* $Id: php_pgsql.h,v 1.11 2000/05/31 20:40:28 zeev Exp $ */
 
 #ifndef _PHP_PGSQL_H
 #define _PHP_PGSQL_H
@@ -69,6 +69,8 @@ PHP_FUNCTION(pg_pconnect);
 PHP_FUNCTION(pg_close);
 PHP_FUNCTION(pg_dbname);
 PHP_FUNCTION(pg_errormessage);
+PHP_FUNCTION(pg_trace);
+PHP_FUNCTION(pg_untrace);
 PHP_FUNCTION(pg_options);
 PHP_FUNCTION(pg_port);
 PHP_FUNCTION(pg_tty);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.19 2003/03/31 08:49:30 sniper Exp $ */
+/* $Id: gd.c,v 1.221.2.20 2003/04/03 19:19:25 sas Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -729,6 +729,12 @@ PHP_FUNCTION(imagecreatetruecolor)
 	convert_to_long_ex(x_size);
 	convert_to_long_ex(y_size);
 
+	if (Z_LVAL_PP(x_size) <= 0
+			|| Z_LVAL_PP(y_size) <= 0) {
+		php_error(E_WARNING, "invalid image dimensions");
+		RETURN_FALSE;
+	}
+	
 	im = gdImageCreateTrueColor(Z_LVAL_PP(x_size), Z_LVAL_PP(y_size));
 
 	ZEND_REGISTER_RESOURCE(return_value, im, le_gd);
@@ -1167,6 +1173,12 @@ PHP_FUNCTION(imagecreate)
 
 	convert_to_long_ex(x_size);
 	convert_to_long_ex(y_size);
+
+	if (Z_LVAL_PP(x_size) <= 0
+			|| Z_LVAL_PP(y_size) <= 0) {
+		php_error(E_WARNING, "invalid image dimensions");
+		RETURN_FALSE;
+	}
 
 	im = gdImageCreate(Z_LVAL_PP(x_size), Z_LVAL_PP(y_size));
 

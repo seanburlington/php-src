@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.148 2003/01/07 23:00:11 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.149 2003/01/08 00:38:36 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -141,7 +141,7 @@ zend_module_entry odbc_module_entry = {
 	PHP_RINIT(odbc), 
 	PHP_RSHUTDOWN(odbc), 
 	PHP_MINFO(odbc), 
-	1.0,
+	"1.0",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

@@ -1,4 +1,4 @@
-TODO file for PEAR.  Last modified $Date: 2000/07/24 13:32:50 $ by $Author: ssb $
+TODO file for PEAR.  Last modified $Date: 2000/09/12 00:27:50 $ by $Author: ssb $
 
 Legend:
 
@@ -15,5 +15,6 @@ W ssb     build tools for installing packages from the net
 
 Bundled PEAR packages:
 
--         make regression tests for DB
+W ssb     make regression tests for DB
+-         make DB_Error store queries
 W uw      implement Javadoc -> phpdoc/DocBook conversion

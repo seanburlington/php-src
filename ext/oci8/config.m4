@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.37.2.5 2003/04/09 12:00:54 edink Exp $
+dnl $Id: config.m4,v 1.37.2.6 2003/04/30 10:20:14 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_OCI_IF_DEFINED,[
@@ -101,7 +101,20 @@ if test "$PHP_OCI8" != "no"; then
       PHP_ADD_LIBPATH($OCI8_DIR/lib, OCI8_SHARED_LIBADD)
       AC_DEFINE(HAVE_OCI8_ATTR_STATEMENT,1,[ ])
       AC_DEFINE(HAVE_OCI8_SHARED_MODE,1,[ ])
-      AC_DEFINE(HAVE_OCI9,1,[ ])
+
+      dnl These functions are only available in version >= 9.2
+      PHP_CHECK_LIBRARY(clntsh, OCIEnvNlsCreate,
+      [
+        PHP_CHECK_LIBRARY(clntsh, OCINlsCharSetNameToId,
+        [
+          AC_DEFINE(HAVE_OCI_9_2,1,[ ])
+          OCI8_VERSION=9.2
+        ], [], [
+          -L$OCI8_DIR/lib $OCI8_SHARED_LIBADD
+        ])
+      ], [], [
+        -L$OCI8_DIR/lib $OCI8_SHARED_LIBADD
+      ])
       ;;
 
     *)
@@ -116,16 +129,15 @@ if test "$PHP_OCI8" != "no"; then
   [
     AC_DEFINE(HAVE_OCI8_TEMP_LOB,1,[ ])
   ], [
-    unset ac_cv_func_ocilobistemporary
     PHP_CHECK_LIBRARY(ocijdbc8, OCILobIsTemporary,
     [
       PHP_ADD_LIBRARY(ocijdbc8, 1, OCI8_SHARED_LIBADD)
       AC_DEFINE(HAVE_OCI8_TEMP_LOB,1,[ ])
     ], [], [
-      $OCI8_SHARED_LIBADD
+      -L$OCI8_DIR/lib $OCI8_SHARED_LIBADD
     ])
   ], [
-    $OCI8_SHARED_LIBADD
+    -L$OCI8_DIR/lib $OCI8_SHARED_LIBADD
   ])
 
   PHP_NEW_EXTENSION(oci8, oci8.c, $ext_shared)

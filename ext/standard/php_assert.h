@@ -14,9 +14,9 @@
    +----------------------------------------------------------------------+
    | Author: Thies C. Arntzen (thies@digicol.de)                          |
    +----------------------------------------------------------------------+
- */
+*/
 
-/* $Id: php_assert.h,v 1.6 2000/07/02 23:46:47 sas Exp $ */
+/* $Id: php_assert.h,v 1.7 2000/07/24 01:39:49 david Exp $ */
 
 #ifndef PHP_ASSERT_H
 #define PHP_ASSERT_H

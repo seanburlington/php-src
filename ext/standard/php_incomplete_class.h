@@ -14,8 +14,9 @@
    +----------------------------------------------------------------------+
    | Author:  Sascha Schumann <sascha@schumann.cx>                        |
    +----------------------------------------------------------------------+
- */
+*/
 
+/* $Id: php_incomplete_class.h,v 1.3 2000/07/24 01:39:49 david Exp $ */
 
 #ifndef PHP_INCOMPLETE_CLASS_H
 #define PHP_INCOMPLETE_CLASS_H

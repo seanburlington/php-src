@@ -16,7 +16,9 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
- */
+*/
+
+/* $Id: php_crypt.h,v 1.6 2000/07/24 01:39:49 david Exp $ */
 
 #ifndef PHP_CRYPT_H
 #define PHP_CRYPT_H

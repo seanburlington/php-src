@@ -17,9 +17,9 @@
    |          Rasmus Lerdorf <rasmus@php.net>                             |
    |          Andrei Zmievski <andrei@ispi.net>                           |
    +----------------------------------------------------------------------+
- */
+*/
 
-/* $Id: php_array.h,v 1.15 2000/07/11 16:48:03 andrei Exp $ */
+/* $Id: php_array.h,v 1.16 2000/07/24 01:39:49 david Exp $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H

@@ -15,7 +15,9 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    |          Jaakko Hyvätti <jaakko.hyvatti@iki.fi>                      |
    +----------------------------------------------------------------------+
- */
+*/
+
+/* $Id: html.c,v 1.17 2000/07/24 01:39:49 david Exp $ */
 
 #include "php.h"
 #include "reg.h"

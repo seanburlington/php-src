@@ -17,7 +17,9 @@
    |          Rasmus Lerdorf <rasmus@php.net>                             |
    |          Andrei Zmievski <andrei@ispi.net>                           |
    +----------------------------------------------------------------------+
- */
+*/
+
+/* $Id: array.c,v 1.66 2000/07/24 01:39:49 david Exp $ */
 
 #include "php.h"
 #include "php_ini.h"

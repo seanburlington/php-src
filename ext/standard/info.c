@@ -15,7 +15,9 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
- */
+*/
+
+/* $Id: info.c,v 1.106 2000/07/24 01:39:49 david Exp $ */
 
 #include "php.h"
 #include "php_ini.h"

@@ -14,10 +14,9 @@
    +----------------------------------------------------------------------+
    | Authors: Sascha Schumann <sascha@schumann.cx>                        |
    +----------------------------------------------------------------------+
+*/
 
-   $Id: flock_compat.c,v 1.9 2000/07/10 10:09:14 sas Exp $
- */
-
+/* $Id: flock_compat.c,v 1.10 2000/07/24 01:39:49 david Exp $ */
 
 #include <php.h>
 #include <errno.h>

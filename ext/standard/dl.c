@@ -16,7 +16,9 @@
    |          Shane Caraveo <shane@caraveo.com>                           |
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
- */
+*/
+
+/* $Id: dl.c,v 1.47 2000/07/24 01:39:49 david Exp $ */
 
 #include "php.h"
 #include "dl.h"

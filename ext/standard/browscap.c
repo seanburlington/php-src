@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: browscap.c,v 1.32 2000/07/24 01:39:49 david Exp $ */
+
 #include "php.h"
 #include "php_regex.h"
 #include "php_browscap.h"

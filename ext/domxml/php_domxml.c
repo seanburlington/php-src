@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.255 2003/06/02 18:57:59 rrichards Exp $ */
+/* $Id: php_domxml.c,v 1.256 2003/06/05 18:59:55 moriyoshi Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -1090,8 +1090,10 @@ static char **php_xmlparser_make_params(zval *idvars TSRMLS_DC)
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid argument or parameter array");
 			return NULL;
 		} else {
-			SEPARATE_ZVAL(value);
-			convert_to_string_ex(value);
+			if (Z_TYPE_PP(value) != IS_STRING) {
+				SEPARATE_ZVAL(value);
+				convert_to_string(*value);
+			}
 			expr = Z_STRVAL_PP(value);
 	
 			if (expr) {
@@ -5481,8 +5483,10 @@ static char **php_domxslt_make_params(zval *idvars, int xpath_params TSRMLS_DC)
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid argument or parameter array");
 			return NULL;
 		} else {
-			SEPARATE_ZVAL(value);
-			convert_to_string_ex(value);
+			if (Z_TYPE_PP(value) != IS_STRING) {
+				SEPARATE_ZVAL(value);
+				convert_to_string(*value);
+			}
 
 			if (!xpath_params) {
 				xpath_expr = php_domxslt_string_to_xpathexpr(Z_STRVAL_PP(value) TSRMLS_CC);

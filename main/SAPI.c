@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.155.2.22 2004/08/19 20:35:36 bfrance Exp $ */
+/* $Id: SAPI.c,v 1.155.2.23 2005/02/21 12:29:02 stas Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -388,6 +388,16 @@ SAPI_API void sapi_deactivate(TSRMLS_D)
 	zend_llist_destroy(&SG(sapi_headers).headers);
 	if (SG(request_info).post_data) {
 		efree(SG(request_info).post_data);
+	} else if (SG(server_context)) {
+		if(sapi_module.read_post) { 
+			/* make sure we've consumed all request input data */
+			char dummy[SAPI_POST_BLOCK_SIZE];
+			int read_bytes;
+
+			while((read_bytes = sapi_module.read_post(dummy, sizeof(dummy)-1 TSRMLS_CC)) > 0) {
+				SG(read_post_bytes) += read_bytes;
+			}
+		}
 	}
 	if (SG(request_info).raw_post_data) {
 		efree(SG(request_info).raw_post_data);

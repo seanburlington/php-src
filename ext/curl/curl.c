@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.29.2.1 2000/12/07 11:07:40 sniper Exp $ */
+/* $Id: curl.c,v 1.29.2.2 2000/12/13 10:23:11 stas Exp $ */
 
 
 #include "php.h"
@@ -301,7 +301,7 @@ PHP_FUNCTION(curl_init)
 	}
 	memset(curl_handle, 0, sizeof(php_curl));
 
-	zend_llist_init(&curl_handle->to_free, sizeof(char *), curl_free_string, 0);
+	zend_llist_init(&curl_handle->to_free, sizeof(char *), (void(*)(void *))curl_free_string, 0);
 
 	curl_handle->cp = curl_easy_init();
 	if (!curl_handle->cp) {

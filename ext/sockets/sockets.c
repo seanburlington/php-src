@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.146 2003/07/08 05:00:13 pollita Exp $ */
+/* $Id: sockets.c,v 1.147 2003/07/22 07:20:55 jason Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -641,8 +641,16 @@ PHP_FUNCTION(socket_select)
 			convert_to_long(&tmp);
 			sec = &tmp;
 		}
-		tv.tv_sec = Z_LVAL_P(sec);
-		tv.tv_usec = usec;
+
+		/* Solaris + BSD do not like microsecond values which are >= 1 sec */ 
+		if (usec > 999999) {
+			tv.tv_sec = Z_LVAL_P(sec) + (usec / 1000000);
+			tv.tv_usec = usec % 1000000;
+		} else {
+			tv.tv_sec = Z_LVAL_P(sec);
+			tv.tv_usec = usec;
+		}		
+
 		tv_p = &tv;
 
 		if (sec == &tmp) {

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.24 2003/06/28 11:24:46 wez Exp $ */
+/* $Id: streamsfuncs.c,v 1.25 2003/07/22 07:20:55 jason Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -563,8 +563,16 @@ PHP_FUNCTION(stream_select)
 	/* If seconds is not set to null, build the timeval, else we wait indefinitely */
 	if (sec != NULL) {
 		convert_to_long_ex(&sec);
-		tv.tv_sec = Z_LVAL_P(sec);
-		tv.tv_usec = usec;
+
+		/* Solaris + BSD do not like microsecond values which are >= 1 sec */
+		if (usec > 999999) {
+			tv.tv_sec = Z_LVAL_P(sec) + (usec / 1000000);
+			tv.tv_usec = usec % 1000000;			
+		} else {
+			tv.tv_sec = Z_LVAL_P(sec);
+			tv.tv_usec = usec;
+		}
+
 		tv_p = &tv;
 	}
 

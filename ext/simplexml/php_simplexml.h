@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.3 2003/05/27 22:15:17 sterling Exp $ */
+/* $Id: php_simplexml.h,v 1.4 2003/06/03 19:36:20 sterling Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H
@@ -52,11 +52,18 @@ PHP_RSHUTDOWN_FUNCTION(simplexml);
 PHP_MINFO_FUNCTION(simplexml);
 
 typedef struct {
+	void *ptr;
+	int   refcount;
+} simplexml_ref_obj;
+
+typedef struct {
 	zend_object zo;
-	xmlDocPtr document;
+	xmlHashTablePtr nsmap;
+	simplexml_ref_obj *document;
 	xmlXPathContextPtr xpath;
 	xmlNodePtr node;
 } php_sxe_object;
+
 
 
 #ifdef ZTS

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.h,v 1.5 2001/02/26 06:07:25 andi Exp $ */
+/* $Id: php_vpopmail.h,v 1.6 2001/05/24 03:19:06 bbonev Exp $ */
 
 #ifndef PHP_VPOPMAIL_H
 #define PHP_VPOPMAIL_H
@@ -53,6 +53,10 @@ PHP_FUNCTION(vpopmail_del_user);
 PHP_FUNCTION(vpopmail_passwd);
 PHP_FUNCTION(vpopmail_set_user_quota);
 PHP_FUNCTION(vpopmail_auth_user);
+/* alias management */
+PHP_FUNCTION(vpopmail_alias_add);
+PHP_FUNCTION(vpopmail_alias_del);
+PHP_FUNCTION(vpopmail_alias_del_domain);
 /* error handling */
 PHP_FUNCTION(vpopmail_error);
 

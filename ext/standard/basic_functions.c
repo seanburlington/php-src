@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.625 2003/09/02 13:34:22 abies Exp $ */
+/* $Id: basic_functions.c,v 1.626 2003/09/06 00:35:21 pollita Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -27,6 +27,7 @@
 #include "internal_functions_registry.h"
 #include "php_standard.h"
 #include "php_math.h"
+#include "http.h"
 #include "php_incomplete_class.h"
 #include "ext/standard/info.h"
 #include "ext/session/php_session.h"
@@ -429,6 +430,7 @@ function_entry basic_functions[] = {
 	PHP_FE(urldecode,														NULL)
 	PHP_FE(rawurlencode,													NULL)
 	PHP_FE(rawurldecode,													NULL)
+	PHP_FE(http_build_query,												NULL)
 
 #ifdef HAVE_SYMLINK
 	PHP_FE(readlink,														NULL)

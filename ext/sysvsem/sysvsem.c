@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.28 2001/05/15 07:29:31 swm Exp $ */
+/* $Id: sysvsem.c,v 1.29 2001/05/24 10:07:27 ssb Exp $ */
 
 /* Latest update build anc tested on Linux 2.2.14
  *
@@ -26,6 +26,10 @@
  *
  * sas: Works for me on Linux 2.0.36 and FreeBSD 3.0-current
  */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

@@ -16,8 +16,12 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.77 2001/03/30 17:44:08 avsm Exp $ */
+/* $Id: zlib.c,v 1.78 2001/05/24 10:07:28 ssb Exp $ */
 #define IS_EXT_MODULE
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "SAPI.h"

@@ -16,8 +16,11 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.54 2001/05/17 17:13:47 dbeu Exp $ */
+/* $Id: curl.c,v 1.55 2001/05/24 10:06:56 ssb Exp $ */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

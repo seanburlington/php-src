@@ -18,12 +18,16 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.129 2001/05/21 19:28:22 sniper Exp $ */
+/* $Id: gd.c,v 1.130 2001/05/24 10:07:05 ssb Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
 
 /* Note that there is no code from the gd package in this file */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "ext/standard/head.h"

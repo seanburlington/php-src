@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.24 2001/05/21 21:06:07 jmoore Exp $ */
+/* $Id: cpdf.c,v 1.25 2001/05/24 10:06:55 ssb Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -36,6 +36,10 @@
 
 #if !PHP_31 && defined(THREAD_SAFE)
 #undef THREAD_SAFE
+#endif
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
 #endif
 
 #include "php.h"

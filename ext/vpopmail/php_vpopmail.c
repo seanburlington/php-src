@@ -17,12 +17,16 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.c,v 1.9 2001/05/24 03:31:08 bbonev Exp $ */
+/* $Id: php_vpopmail.c,v 1.10 2001/05/24 10:07:27 ssb Exp $ */
 
 /* TODO: move to config.m4 when support for old versions is ready or just
  * don't support rather old vpopmail. current version must bail out if
  * incompat option is specified and work for minimal params
  */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #undef VPOPMAIL_IS_REALLY_OLD
 

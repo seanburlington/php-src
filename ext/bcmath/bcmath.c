@@ -16,7 +16,11 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.27 2001/02/26 06:06:47 andi Exp $ */
+/* $Id: bcmath.c,v 1.28 2001/05/24 10:06:55 ssb Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

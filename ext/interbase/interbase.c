@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.54 2001/05/02 22:41:09 andi Exp $ */
+/* $Id: interbase.c,v 1.55 2001/05/24 10:07:09 ssb Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -34,6 +34,10 @@ A lot... */
 			  rfinish could be called repeatedly
 			  emalloc & co. replaced with malloc & co.
 */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_ini.h"
@@ -596,7 +600,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.54 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.55 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

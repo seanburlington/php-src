@@ -16,7 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: aspell.c,v 1.25 2001/02/26 06:06:47 andi Exp $ */
+/* $Id: aspell.c,v 1.26 2001/05/24 10:06:54 ssb Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

@@ -16,7 +16,11 @@
    |          Fredrik Ohrn                                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.20 2001/04/07 18:22:26 jon Exp $ */
+/* $Id: yp.c,v 1.21 2001/05/24 10:07:28 ssb Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "ext/standard/info.h"

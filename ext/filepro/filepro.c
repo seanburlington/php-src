@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filepro.c,v 1.31 2001/04/30 12:43:35 andi Exp $ */
+/* $Id: filepro.c,v 1.32 2001/05/24 10:07:01 ssb Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com
@@ -25,6 +25,10 @@
   no code or information that is not freely available from the filePro
   web site at http://www.fileproplus.com/
 */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "safe_mode.h"

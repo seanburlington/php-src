@@ -16,10 +16,14 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_notes.c,v 1.2 2001/02/26 06:07:04 andi Exp $ */
+/* $Id: php_notes.c,v 1.3 2001/05/24 10:07:14 ssb Exp $ */
 
 #ifdef COMPILE_DL_NOTES
 #define HAVE_NOTES 1
+#endif
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
 #endif
 
 #include "php.h"

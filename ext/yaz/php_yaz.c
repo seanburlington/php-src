@@ -16,7 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.16 2001/04/30 14:11:12 dickmeiss Exp $ */
+/* $Id: php_yaz.c,v 1.17 2001/05/24 10:07:28 ssb Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

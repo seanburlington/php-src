@@ -16,13 +16,17 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.37 2001/05/15 07:32:34 swm Exp $ */
+/* $Id: sysvshm.c,v 1.38 2001/05/24 10:07:27 ssb Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
  * This has been built and tested on Solaris 2.6.
  * It may not compile or execute correctly on other systems.
  */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

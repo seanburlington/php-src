@@ -19,7 +19,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.41 2001/05/21 18:35:47 sterling Exp $ */
+/* $Id: sockets.c,v 1.42 2001/05/24 10:07:25 ssb Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

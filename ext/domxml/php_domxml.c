@@ -16,8 +16,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.38 2001/05/11 21:29:47 andrei Exp $ */
+/* $Id: php_domxml.c,v 1.39 2001/05/24 10:06:59 ssb Exp $ */
 
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_domxml.h"

@@ -17,8 +17,12 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.44 2001/05/23 04:17:54 andi Exp $ */
+/* $Id: php_sybase_ct.c,v 1.45 2001/05/24 10:07:26 ssb Exp $ */
 
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_sybase_ct.h"

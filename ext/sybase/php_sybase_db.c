@@ -20,8 +20,12 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.14 2001/05/02 18:38:14 andi Exp $ */
+/* $Id: php_sybase_db.c,v 1.15 2001/05/24 10:07:26 ssb Exp $ */
 
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_sybase_db.h"

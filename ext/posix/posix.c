@@ -27,8 +27,12 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.28 2001/04/30 12:43:38 andi Exp $ */
+/* $Id: posix.c,v 1.29 2001/05/24 10:07:21 ssb Exp $ */
 
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -138,7 +142,7 @@ ZEND_GET_MODULE(posix)
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.28 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.29 $");
 	php_info_print_table_end();
 }
 

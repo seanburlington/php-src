@@ -16,7 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.97 2001/05/20 01:21:44 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.98 2001/05/24 10:07:16 ssb Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_globals.h"

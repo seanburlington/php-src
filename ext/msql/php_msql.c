@@ -16,7 +16,11 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_msql.c,v 1.30 2001/02/26 06:07:03 andi Exp $ */
+/* $Id: php_msql.c,v 1.31 2001/05/24 10:07:13 ssb Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_msql.h"

@@ -17,12 +17,16 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.82 2001/05/21 22:37:46 derick Exp $ */
+/* $Id: pdf.c,v 1.83 2001/05/24 10:07:17 ssb Exp $ */
 /* Id: pdf.c,v 1.73 2001/02/26 06:07:11 andi Exp  */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
 /* Note that there is no code from the pdflib package in this file */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_ini.h"
@@ -316,7 +320,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.82 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.83 $" );
 	php_info_print_table_end();
 
 }

@@ -18,7 +18,11 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mailparse.c,v 1.2 2001/05/20 11:43:54 wez Exp $ */
+/* $Id: mailparse.c,v 1.3 2001/05/24 10:07:10 ssb Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_ini.h"

@@ -16,13 +16,17 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: velocis.c,v 1.24 2001/02/26 06:07:09 andi Exp $ */
+/* $Id: velocis.c,v 1.25 2001/05/24 10:07:15 ssb Exp $ */
 
 /*
  * TODO:
  * velocis_fetch_into(),
  * Check all on real life apps.
  */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

@@ -16,10 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.82 2001/05/18 08:07:08 steinm Exp $ */
+/* $Id: hw.c,v 1.83 2001/05/24 10:07:06 ssb Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_globals.h"

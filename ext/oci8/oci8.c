@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.123 2001/05/22 23:16:03 asautins Exp $ */
+/* $Id: oci8.c,v 1.124 2001/05/24 10:07:15 ssb Exp $ */
 
 /* TODO list:
  *
@@ -52,6 +52,10 @@
  */
 
 /* {{{ includes & stuff */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -577,7 +581,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.123 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.124 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );

@@ -17,8 +17,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.76 2001/05/14 11:35:25 thies Exp $ */
+/* $Id: xml.c,v 1.77 2001/05/24 10:07:27 ssb Exp $ */
 #define IS_EXT_MODULE
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

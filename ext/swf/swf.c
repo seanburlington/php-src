@@ -16,8 +16,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.32 2001/04/30 12:43:39 andi Exp $ */
+/* $Id: swf.c,v 1.33 2001/05/24 10:07:26 ssb Exp $ */
 
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

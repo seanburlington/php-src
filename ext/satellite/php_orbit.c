@@ -17,13 +17,17 @@
  */
 
 /*
- * $Id: php_orbit.c,v 1.5 2001/05/12 12:22:34 sas Exp $
+ * $Id: php_orbit.c,v 1.6 2001/05/24 10:07:23 ssb Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
 /*
  * Interface to PHP
  */
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <php.h>
 #include <php_ini.h>	 /* for DISPLAY_INI_ENTRIES() */
 #include <ext/standard/info.h>	/* for php_info_print_table_*() */

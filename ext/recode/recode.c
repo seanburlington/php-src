@@ -16,9 +16,13 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.12 2001/03/08 17:11:57 stas Exp $ */
+/* $Id: recode.c,v 1.13 2001/05/24 10:07:22 ssb Exp $ */
 
 /* {{{ includes & prototypes */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_recode.h"
@@ -96,7 +100,7 @@ PHP_MINFO_FUNCTION(recode)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.12 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.13 $");
 	php_info_print_table_end();
 
 }

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.10 2002/05/12 17:28:12 sas Exp $
+dnl $Id: config.m4,v 1.11 2002/09/04 14:30:36 sniper Exp $
 dnl
 
 PHP_ARG_ENABLE(sockets, whether to enable sockets support,
@@ -12,7 +12,7 @@ if test "$PHP_SOCKETS" != "no"; then
   AC_TRY_COMPILE([
 #include <sys/types.h>
 #include <sys/socket.h>
-  ], [static struct msghdr tp; int n = (int) tp.msg_flags; return n],
+  ], [static struct msghdr tp; int n = (int) tp.msg_flags; return n],[],
     [AC_DEFINE(MISSING_MSGHDR_MSGFLAGS, 1, [ ])]
   )
   AC_DEFINE([HAVE_SOCKETS], 1, [ ])

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.628 2003/09/23 17:37:29 andrey Exp $ */
+/* $Id: basic_functions.c,v 1.629 2003/09/30 09:52:10 stas Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -740,7 +740,7 @@ function_entry basic_functions[] = {
 
 	PHP_FALIAS(socket_get_status, stream_get_meta_data,						NULL)
 
-#if (!defined(PHP_WIN32) && !defined(__BEOS__) && !defined(NETWARE) && HAVE_REALPATH) || defined(ZTS)
+#if (!defined(__BEOS__) && !defined(NETWARE) && HAVE_REALPATH) || defined(ZTS)
 	PHP_FE(realpath,														NULL)
 #endif
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.21 2002/02/28 08:26:39 sebastian Exp $ */
+/* $Id: recode.c,v 1.22 2002/03/15 21:03:02 wez Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -26,6 +26,7 @@
 
 #include "php.h"
 #include "php_recode.h"
+#include "php_streams.h"
 
 #if HAVE_LIBRECODE
 #include "ext/standard/info.h"
@@ -97,7 +98,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.21 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.22 $");
 	php_info_print_table_end();
 
 }
@@ -162,28 +163,38 @@ PHP_FUNCTION(recode_file)
 	int success;
 	pval **req;
 	pval **input, **output;
+	php_stream * instream, *outstream;
 	FILE  *in_fp,  *out_fp;
 	int    in_type, out_type;
+
 
 	if (ZEND_NUM_ARGS() != 3
 	 || zend_get_parameters_ex(3, &req, &input, &output) == FAILURE) {
 	 	WRONG_PARAM_COUNT;
 	}
 
-	in_fp = zend_fetch_resource(input TSRMLS_CC,-1, "File-Handle", &in_type, 
-		2, php_file_le_fopen(), php_file_le_popen());
-	if (!in_fp) {
+	instream = zend_fetch_resource(input TSRMLS_CC,-1, "File-Handle", &in_type, 
+		1, php_file_le_stream());
+
+	if (!instream) {
 		php_error(E_WARNING,"Unable to find input file identifier");
 		RETURN_FALSE;
 	}
 
-	out_fp = zend_fetch_resource(output TSRMLS_CC,-1, "File-Handle", &out_type,
-		2, php_file_le_fopen(), php_file_le_popen());
-	if (!out_fp) {
+	if (!php_stream_cast(instream, PHP_STREAM_AS_STDIO, (void**)&in_fp, REPORT_ERRORS))	{
+		RETURN_FALSE;
+	}
+	
+	outstream = zend_fetch_resource(output TSRMLS_CC,-1, "File-Handle", &out_type,
+		1, php_file_le_stream());
+	if (!outstream) {
 		php_error(E_WARNING,"Unable to find output file identifier");
 		RETURN_FALSE;
 	}
-
+	if (!php_stream_cast(outstream, PHP_STREAM_AS_STDIO, (void**)&out_fp, REPORT_ERRORS))	{
+		RETURN_FALSE;
+	}
+	
 	convert_to_string_ex(req);
 
 	request = recode_new_request(ReSG(outer));

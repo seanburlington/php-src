@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.21 2002/02/28 08:26:10 sebastian Exp $ */
+/* $Id: ftp.h,v 1.22 2002/03/15 21:02:58 wez Exp $ */
 
 #ifndef	FTP_H
 #define	FTP_H
@@ -130,14 +130,13 @@ int		ftp_pasv(ftpbuf_t *ftp, int pasv);
 /* retrieves a file and saves its contents to outfp
  * returns true on success, false on error
  */
-int		ftp_get(ftpbuf_t *ftp, FILE *outfp, const char *path,
+int		ftp_get(ftpbuf_t *ftp, php_stream * outstream, const char *path,
 			ftptype_t type);
 
 /* stores the data from a file, socket, or process as a file on the remote server
  * returns true on success, false on error
  */
-int		ftp_put(ftpbuf_t *ftp, const char *path, FILE *infp,
-			int insocket, int issock, ftptype_t type);
+int		ftp_put(ftpbuf_t *ftp, const char *path, php_stream * instream, ftptype_t type);
 
 /* returns the size of the given file, or -1 on error */
 int		ftp_size(ftpbuf_t *ftp, const char *path);

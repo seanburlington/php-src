@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.169 2002/03/14 18:39:53 zeev Exp $ */
+/* $Id: info.c,v 1.170 2002/03/15 21:03:05 wez Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -211,9 +211,7 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		php_info_print_table_row(2, "Thread Safety", "disabled" );
 #endif
 
-#if HAVE_PHP_STREAM
-		php_info_print_table_row(2, "Experimental PHP Streams", "enabled");
-#endif
+		php_info_print_table_row(2, "PHP Streams", "enabled");
 		
 		php_info_print_table_end();
 

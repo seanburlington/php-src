@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.78 2002/03/15 15:25:51 daniela Exp $ */
+/* $Id: interbase.c,v 1.79 2002/03/15 21:02:59 wez Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -595,7 +595,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.78 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.79 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -2867,13 +2867,12 @@ PHP_FUNCTION(ibase_blob_import)
 	zval **link_arg, **file_arg;
 	int trans_n = 0, link_id = 0, trans_id = 0, size;
 	unsigned short b;
-	int issock=0, socketd=0;
 	ibase_blob_handle ib_blob;
 	ibase_db_link *ib_link;
 	char bl_data[IBASE_BLOB_SEG]; /* FIXME? blob_seg_size parameter?	 */
-	FILE *fp;
 	void * what;
 	int type;
+	php_stream * stream;
 
 	RESET_ERRMSG;
 
@@ -2901,11 +2900,8 @@ PHP_FUNCTION(ibase_blob_import)
 		RETURN_FALSE;
 	}
 
-	what = zend_fetch_resource(file_arg TSRMLS_CC, -1, "File-Handle", &type, 2, php_file_le_fopen(), php_file_le_stream());
-	ZEND_VERIFY_RESOURCE(what);
-
-	if (type == php_file_le_fopen())
-		fp = (FILE*)what;
+	stream = (php_stream*)zend_fetch_resource(file_arg TSRMLS_CC, -1, "File-Handle", &type, 1, php_file_le_stream());
+	ZEND_VERIFY_RESOURCE(stream);
 	
 	ib_blob.link = ib_link->link;
 	ib_blob.trans_handle = ib_link->trans[trans_n];
@@ -2920,31 +2916,14 @@ PHP_FUNCTION(ibase_blob_import)
 
 	size = 0;
 
-#if HAVE_PHP_STREAM
-	if (type == php_file_le_stream())	{
-		while(b = php_stream_read((php_stream*)what, bl_data, 1, sizeof(bl_data)) > 0)	{
-			if (isc_put_segment(IB_STATUS, &ib_blob.bl_handle, b, bl_data)) {
-				_php_ibase_error();
-				RETURN_FALSE;
-			}
-			size += b;
-
-		}
-	}
-	else	{
-#endif
-	/* Can't see much use for the issock stuff here, it should be nuked --Wez */
-	while (issock?(b=SOCK_FREAD(bl_data, sizeof(bl_data), socketd)):(b = fread(bl_data, 1, sizeof(bl_data), fp)) > 0) {
+	while(b = php_stream_read((php_stream*)what, bl_data, 1, sizeof(bl_data)) > 0)	{
 		if (isc_put_segment(IB_STATUS, &ib_blob.bl_handle, b, bl_data)) {
 			_php_ibase_error();
 			RETURN_FALSE;
 		}
 		size += b;
+
 	}
-	
-#if HAVE_PHP_STREAM
-	}
-#endif
 	
 	if (isc_close_blob(IB_STATUS, &ib_blob.bl_handle)) {
 		_php_ibase_error();

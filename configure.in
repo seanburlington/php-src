@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.318 2002/03/14 14:15:24 zeev Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.319 2002/03/15 21:02:54 wez Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -728,15 +728,6 @@ if test "$PHP_DMALLOC" = "yes"; then
   ], [
     AC_MSG_ERROR([Problem with enabling dmalloc. Please check config.log for details.])
   ])
-fi
-
-# temporary until streams are better integrated
-PHP_ARG_ENABLE(php-streams,whether to enable php streams,
-[  --enable-php-streams    Include experimental php streams.
-                          Do not use unless you are testing the code!])
-
-if test "$PHP_PHP_STREAMS" = "yes"; then
-  AC_DEFINE(HAVE_PHP_STREAM, 1, [Whether to use php streams])
 fi
 
 AC_CHECK_LIB(crypt, crypt, [

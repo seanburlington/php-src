@@ -12,11 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Sascha Schumann <sascha@schumann.cx>                         |
+   | Authors: Sascha Schumann <sascha@schumann.cx>                        |
+   |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_dbm.c,v 1.18 2002/11/06 01:47:06 helly Exp $ */
+/* $Id: dba_dbm.c,v 1.19 2002/11/06 01:53:50 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

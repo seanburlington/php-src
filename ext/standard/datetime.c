@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.96.2.7 2003/04/06 22:37:58 sniper Exp $ */
+/* $Id: datetime.c,v 1.96.2.8 2003/05/04 11:22:00 moriyoshi Exp $ */
 
 
 #include "php.h"
@@ -319,7 +319,11 @@ php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 #else
 		tzone = timezone;
 #endif
-		tname[0] = tzname[0];
+		if (tzname[0] != NULL) {
+			tname[0] = tzname[0];
+		} else {
+			tname[0] = "???";
+		}
 #endif
 	}
 

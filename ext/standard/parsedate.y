@@ -8,6 +8,8 @@
 **  This code is in the public domain and has no copyright.
 */
 
+/* $Id: parsedate.y,v 1.33 2002/09/09 19:09:23 wez Exp $ */
+
 #include "php.h"
 
 #ifdef PHP_WIN32
@@ -205,26 +207,18 @@ spec	: /* NULL */
 
 item	: time {
 	    yyHaveTime++;
-		printf ("TIME");
 	}
 	| zone {
 	    yyHaveZone++;
-		printf ("ZONE");
 	}
 	| date {
 	    yyHaveDate++;
-		printf ("DATE");
 	}
 	| day {
 	    yyHaveDay++;
-		printf ("DAY");
 	}
 	| rel {
 	    yyHaveRel++;
-		printf ("REL");
-	}
-	| number {
-		printf ("NUMBER");
 	}
 	;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.32 2004/02/19 01:54:44 sniper Exp $ */
+/* $Id: session.c,v 1.336.2.33 2004/02/19 02:13:39 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1369,7 +1369,7 @@ PHP_FUNCTION(session_register)
 	if (argc <= 0)
 		RETURN_FALSE
 	else
-		args = (zval ***)emalloc(argc * sizeof(zval **));
+		args = (zval ***)safe_emalloc(argc, sizeof(zval **), 0);
 	
 	if (zend_get_parameters_array_ex(argc, args) == FAILURE) {
 		efree(args);

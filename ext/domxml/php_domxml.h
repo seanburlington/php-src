@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.58 2002/06/13 10:47:19 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.59 2002/06/14 12:12:04 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -186,6 +186,14 @@ PHP_FUNCTION(domxml_parser);
 PHP_FUNCTION(domxml_parser_add_chunk);
 PHP_FUNCTION(domxml_parser_end);
 PHP_FUNCTION(domxml_parser_set_keep_blanks);
+PHP_FUNCTION(domxml_parser_start_element);
+PHP_FUNCTION(domxml_parser_end_element);
+PHP_FUNCTION(domxml_parser_characters);
+PHP_FUNCTION(domxml_parser_comment);
+PHP_FUNCTION(domxml_parser_cdata_block);
+PHP_FUNCTION(domxml_parser_start_document);
+PHP_FUNCTION(domxml_parser_end_document);
+PHP_FUNCTION(domxml_parser_get_document);
 
 /* Class XPathContext methods */
 #if defined(LIBXML_XPATH_ENABLED)

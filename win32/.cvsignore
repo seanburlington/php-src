@@ -13,3 +13,5 @@ Release_TSDbg
 Release_TS_inline
 Debug_TS
 phpts.def
+*.gcda
+*.gcno

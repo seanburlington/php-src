@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.11 2000/06/10 08:47:57 andi Exp $ */
+/* $Id: php_mysql.h,v 1.12 2000/06/16 01:53:35 zeev Exp $ */
 
 #ifndef _PHP_MYSQL_H
 #define _PHP_MYSQL_H
@@ -82,6 +82,7 @@ ZEND_BEGIN_MODULE_GLOBALS(mysql)
 	long allow_persistent;
 	long default_port;
 	char *default_host, *default_user, *default_password;
+	char *default_socket;
 ZEND_END_MODULE_GLOBALS(mysql);
 
 #ifdef ZTS

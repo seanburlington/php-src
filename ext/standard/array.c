@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.85 2000/12/22 12:57:08 zeev Exp $ */
+/* $Id: array.c,v 1.86 2000/12/22 16:31:42 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2774,6 +2774,12 @@ PHP_FUNCTION(array_sum)
 	
 	if (argc != 1 || zend_get_parameters_ex(argc, &input) == FAILURE) {
 		WRONG_PARAM_COUNT;
+	}
+
+	if (Z_TYPE_PP(input) != IS_ARRAY) {
+		php_error(E_WARNING, "The argument to %s() should be an array",
+				  get_active_function_name());
+		return;
 	}
 
 	ZVAL_LONG(return_value, 0);

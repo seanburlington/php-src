@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.139 2003/04/17 23:18:58 sniper Exp $ */
+/* $Id: sockets.c,v 1.140 2003/04/25 08:10:11 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,7 +29,10 @@
 
 #if HAVE_SOCKETS
 
+#ifndef _XOPEN_SOURCE_EXTENDED
 #define _XOPEN_SOURCE_EXTENDED
+#endif
+
 #define _XPG4_2
 #define __EXTENSIONS__
 

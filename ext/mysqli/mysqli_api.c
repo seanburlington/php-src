@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.12 2003/02/16 17:59:30 iliaa Exp $ 
+  $Id: mysqli_api.c,v 1.13 2003/02/18 00:00:51 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -384,6 +384,15 @@ PHP_FUNCTION(mysqli_close)
 	}
 
 	MYSQLI_FETCH_RESOURCE(mysql, MYSQL *, &mysql_link, "mysqli_link"); 
+
+	/*
+	 * Don't free initial struct if there exist 
+	 * non closed statements
+	 */
+	if (mysql->stmts) {
+		mysql->free_me = 0;
+	}
+
 	mysql_close(mysql);
 	MYSQLI_CLEAR_RESOURCE(&mysql_link);	
 	RETURN_TRUE;
@@ -1519,7 +1528,7 @@ PHP_FUNCTION(mysqli_stmt_close)
 		return;
 	}
 	MYSQLI_FETCH_RESOURCE(stmt, STMT *, &mysql_stmt, "mysqli_stmt"); 
-
+	mysql_stmt_close(stmt->stmt);
 	php_clear_stmt_bind(stmt); 
 	MYSQLI_CLEAR_RESOURCE(&mysql_stmt);
 	RETURN_TRUE;

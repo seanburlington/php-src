@@ -18,12 +18,15 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_int.h,v 1.16 2005/03/19 10:51:42 helly Exp $ */
+/* $Id: php_pdo_int.h,v 1.17 2005/03/21 00:29:06 helly Exp $ */
 
 /* Stuff private to the PDO extension and not for consumption by PDO drivers
  * */
 extern zend_class_entry *pdo_exception_ce;
 int php_pdo_list_entry(void);
+
+void pdo_dbh_init(TSRMLS_D);
+void pdo_stmt_init(TSRMLS_D);
 
 extern zend_object_value pdo_dbh_new(zend_class_entry *ce TSRMLS_DC);
 extern function_entry pdo_dbh_functions[];

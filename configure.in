@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.53 2003/05/21 23:31:19 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.54 2003/05/24 12:00:59 helly Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1275,7 +1275,7 @@ cat <<X
 |                        *** WARNING ***                             |
 |                                                                    |
 | You chose to compile PHP with DB extension. This extension is      |
-| deprecated and does not support databse locking correctly. Please  |
+| deprecated and does not support database locking correctly. Please |
 | use DBA extension which is a fully operational superset.           |
 X
   fi

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.318 2002/10/09 13:37:02 iliaa Exp $ */
+/* $Id: string.c,v 1.319 2002/10/09 13:50:06 andrey Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2442,7 +2442,7 @@ PHPAPI char *php_addslashes(char *str, int length, int *new_length, int should_f
 	target = new_str;
 	
 	if (PG(magic_quotes_sybase)) {
-		while (source<end) {
+		while (source < end) {
 			switch (*source) {
 				case '\0':
 					*target++ = '\\';
@@ -2458,11 +2458,9 @@ PHPAPI char *php_addslashes(char *str, int length, int *new_length, int should_f
 			}
 			source++;
 		}
-	}
-	else {
-		while (source<end) {
-			switch (*source)
-			{
+	} else {
+		while (source < end) {
+			switch (*source) {
 				case '\0':
 					*target++ = '\\';
 					*target++ = '0';
@@ -3054,7 +3052,7 @@ PHP_FUNCTION(nl2br)
 	
 	/* it is really faster to scan twice and allocate mem once insted scanning once
 	   and constantly reallocing */
-	while (str<end) {
+	while (str < end) {
 		if (*str == '\r') {
 			if (*(str+1) == '\n') {
 				str++;
@@ -3079,9 +3077,8 @@ PHP_FUNCTION(nl2br)
 
 	str = Z_STRVAL_PP(zstr);
 
-	while (str<end) {
-		switch (*str)
-		{
+	while (str < end) {
+		switch (*str) {
 			case '\r':
 			case '\n':
 				*target++ = '<';

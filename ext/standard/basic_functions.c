@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.696 2004/11/02 17:03:20 andrey Exp $ */
+/* $Id: basic_functions.c,v 1.697 2004/11/03 06:22:08 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1734,13 +1734,11 @@ PHP_FUNCTION(sleep)
 
 	convert_to_long_ex(num);
 #ifdef PHP_SLEEP_NON_VOID
-	RETURN_LONG(
+	RETURN_LONG(php_sleep(Z_LVAL_PP(num)));
+#else
+	php_sleep(Z_LVAL_PP(num));
 #endif
-	php_sleep(Z_LVAL_PP(num))
-#ifdef PHP_SLEEP_NON_VOID
-	)
-#endif
-	;
+
 }
 /* }}} */
 

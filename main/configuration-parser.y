@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.54 2000/08/31 22:23:53 andi Exp $ */
+/* $Id: configuration-parser.y,v 1.55 2000/10/29 11:38:24 zeev Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -453,7 +453,7 @@ statement:
 				case PARSING_MODE_CFG:
 					zend_hash_update(active_hash_table, $1.value.str.val, $1.value.str.len+1, &$3, sizeof(zval), NULL);
 					if (active_hash_table == &configuration_hash) {
-						php_alter_ini_entry($1.value.str.val, $1.value.str.len+1, $3.value.str.val, $3.value.str.len+1, PHP_INI_SYSTEM, PHP_INI_STAGE_STARTUP);
+						zend_alter_ini_entry($1.value.str.val, $1.value.str.len+1, $3.value.str.val, $3.value.str.len+1, PHP_INI_SYSTEM, PHP_INI_STAGE_STARTUP);
 					}
 					break;
 				case PARSING_MODE_BROWSCAP:

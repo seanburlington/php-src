@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.330 2000/10/27 10:28:57 sas Exp $ */
+/* $Id: main.c,v 1.331 2000/10/29 11:38:24 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -672,7 +672,7 @@ void php_request_shutdown(void *dummy)
 	}
 	
 	if (setjmp(EG(bailout))==0) {
-		php_ini_rshutdown();
+		zend_ini_rshutdown();
 	}
 	
 	zend_deactivate(CLS_C ELS_CC);
@@ -862,7 +862,7 @@ int php_module_startup(sapi_module_struct *sf)
 	le_index_ptr = zend_register_list_destructors_ex(NULL, NULL, "index pointer", 0);
 	FREE_MUTEX(gLock);
 
-	php_ini_mstartup();
+	zend_ini_mstartup();
 
 	if (php_config_ini_startup() == FAILURE) {
 		return FAILURE;
@@ -937,7 +937,7 @@ void php_module_shutdown()
 	zend_shutdown();
 	php_shutdown_fopen_wrappers();
 	UNREGISTER_INI_ENTRIES();
-	php_ini_mshutdown();
+	zend_ini_mshutdown();
 	shutdown_memory_manager(0, 1);
 	module_initialized = 0;
 }

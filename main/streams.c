@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.146 2003/02/13 01:17:45 wez Exp $ */
+/* $Id: streams.c,v 1.147 2003/02/13 11:12:56 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1663,7 +1663,7 @@ PHPAPI php_stream *_php_stream_fopen_with_path(char *filename, char *mode, char 
 	 * safe mode GID/UID checks
 	 */
 
-	not_relative_path:
+not_relative_path:
 
 	/* Absolute path open */
 	if (IS_ABSOLUTE_PATH(filename, filename_length)) {
@@ -1775,7 +1775,7 @@ PHPAPI php_stream *_php_stream_fopen_with_path(char *filename, char *mode, char 
 		}
 		stream = php_stream_fopen_rel(trypath, mode, opened_path, options);
 		if (stream) {
-			stream_done:
+stream_done:
 			efree(pathbuf);
 			return stream;
 		}

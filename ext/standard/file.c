@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.6 2003/01/09 23:09:41 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.7 2003/01/24 08:50:59 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1482,6 +1482,7 @@ PHP_FUNCTION(fscanf)
 
 	buf = php_stream_get_line((php_stream *) what, NULL, 0, &len);
 	if (buf == NULL) {
+		efree(args);
 		RETURN_FALSE;
 	}
 

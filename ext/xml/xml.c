@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.18 1999/09/24 14:14:47 zeev Exp $ */
+/* $Id: xml.c,v 1.19 1999/09/24 14:18:33 thies Exp $ */
 #define IS_EXT_MODULE
 
 /* boldly assume that if PIC is defined, we are being compiled dynamically */
@@ -986,7 +986,7 @@ php3i_xml_externalEntityRefHandler(XML_Parser parserPtr,
 PHP_FUNCTION(xml_parser_create)
 {
 	xml_parser *parser;
-	int id, argc;
+	int argc;
 	pval *encodingArg = NULL;
 	XML_Char *encoding;
 	char thisfunc[] = "xml_parser_create";
@@ -1024,7 +1024,6 @@ PHP_FUNCTION(xml_parser_create)
 	parser = ecalloc(sizeof(xml_parser), 1);
 	parser->parser = XML_ParserCreate(encoding);
 	parser->target_encoding = encoding;
-	parser->index = id;
 	parser->case_folding = 1;
 	XML_SetUserData(parser->parser, parser);
 

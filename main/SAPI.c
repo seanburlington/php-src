@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.195 2005/02/21 21:00:04 sniper Exp $ */
+/* $Id: SAPI.c,v 1.196 2005/02/22 05:07:37 moriyoshi Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -94,7 +94,7 @@ SAPI_API void sapi_startup(sapi_module_struct *sf)
 SAPI_API void sapi_shutdown(void)
 {
 #ifdef ZTS
-	ts_free_id(&sapi_globals_id);
+	ts_free_id(sapi_globals_id);
 #else
 	sapi_globals_dtor(&sapi_globals);
 #endif

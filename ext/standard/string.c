@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.84 2000/01/01 01:31:52 sas Exp $ */
+/* $Id: string.c,v 1.85 2000/01/04 09:45:28 thies Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2352,7 +2352,7 @@ PHP_FUNCTION(str_repeat)
 	}
 	result[result_len] = '\0';
 	
-	RETURN_STRINGL(result, result_len + 1, 0);
+	RETURN_STRINGL(result, result_len, 0);
 }
 /* }}} */
 

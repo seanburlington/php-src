@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.95 2001/02/21 17:22:26 andrei Exp $ */
+/* $Id: array.c,v 1.96 2001/02/22 00:24:19 jmoore Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1364,18 +1364,7 @@ PHP_FUNCTION(range)
 
 
 static int array_data_shuffle(const void *a, const void*b) {
-	return (
-	/* This is just a little messy. */
-#ifdef HAVE_RANDOM
-        random()
-#else
-#ifdef HAVE_LRAND48
-        lrand48()
-#else
-        rand()
-#endif
-#endif
-	% 2) ? 1 : -1;
+	return (php_rand() % 2) ? 1 : -1;
 }
 
 

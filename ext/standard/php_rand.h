@@ -19,7 +19,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_rand.h,v 1.6 2000/07/02 23:46:47 sas Exp $ */
+/* $Id: php_rand.h,v 1.7 2001/02/22 00:24:19 jmoore Exp $ */
 
 #ifndef PHP_RAND_H
 #define	PHP_RAND_H
@@ -34,6 +34,28 @@
 #define PHP_RAND_MAX 2147483647
 #else
 #define PHP_RAND_MAX RAND_MAX
+#endif
+
+/* Define rand Function wrapper */
+#ifdef HAVE_RANDOM
+#define php_rand() random()
+#else
+#ifdef HAVE_LRAND48
+#define php_rand() lrand48()
+#else
+#define php_rand() rand()
+#endif
+#endif
+
+/* Define srand Function wrapper */
+#ifdef HAVE_SRANDOM
+#define php_srand(seed) srandom((unsigned int)seed)
+#else
+#ifdef HAVE_SRAND48
+#define php_srand(seed) srand48((long)seed)
+#else
+#define php_srand(seed) srand((unsigned int)seed)
+#endif
 #endif
 
 #endif	/* PHP_RAND_H */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.21 2003/08/27 01:10:10 iliaa Exp $ */
+/* $Id: plain_wrapper.c,v 1.22 2003/09/13 19:43:39 abies Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -629,7 +629,7 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 				return -1;
 			}
 
-			if ((int) ptrparam == PHP_STREAM_LOCK_SUPPORTED) {
+			if ((long) ptrparam == PHP_STREAM_LOCK_SUPPORTED) {
 				return 0;
 			}
 

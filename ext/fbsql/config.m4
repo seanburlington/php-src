@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9 2002/04/14 02:28:09 fmk Exp $
+dnl $Id: config.m4,v 1.10 2002/09/04 12:50:41 martin Exp $
 dnl
 
 PHP_ARG_WITH(fbsql, for FrontBase SQL92 (fbsql) support,
@@ -33,7 +33,7 @@ if test "$PHP_FBSQL" != "no"; then
     fi
   fi  
 
-  if test -z "$FBSQL_INSTALLATION_DIR/lib/libFBCAccess.a"; then
+  if test ! -r "$FBSQL_INSTALLATION_DIR/lib/libFBCAccess.a"; then
      AC_MSG_ERROR(Could not find $FBSQL_INSTALLATION_DIR/lib/libFBCAccess.a)
   fi
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.128 2002/03/13 07:31:16 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.129 2002/03/13 08:08:22 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -1316,7 +1316,10 @@ PHP_MINFO_FUNCTION(domxml)
 /* {{{ Methods of Class DomAttribute */
 
 /* {{{ proto array domxml_attr_name(void)
-   Returns list of attribute names */
+   Returns list of attribute names 
+   Notice: domxml_node_name() does exactly the same for attribute-nodes, 
+           is this function here still needed, or would an alias be enough?
+   */
 PHP_FUNCTION(domxml_attr_name)
 {
 	zval *id;
@@ -1463,6 +1466,10 @@ PHP_FUNCTION(domxml_node_name)
 
 		case XML_TEXT_NODE:
 			str = "#text";
+			break;
+
+		case XML_ATTRIBUTE_NODE:
+			str = n->name;
 			break;
 
 		case XML_CDATA_SECTION_NODE:

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.11 1999/06/19 13:04:55 zeev Exp $ */
+/* $Id: fsock.c,v 1.12 1999/06/19 13:13:28 zeev Exp $ */
 
 /* Synced with php3 revision 1.121 1999-06-18 [ssb] */
 
@@ -124,11 +124,6 @@ php3_module_entry fsock_module_entry = {
 	STANDARD_MODULE_PROPERTIES
 };
  
-#ifndef ZTS
-static HashTable PG(ht_fsock_keys);
-static HashTable PG(ht_fsock_socks);
-#endif
-
 
 /* {{{ lookup_hostname */
 

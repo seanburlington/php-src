@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.120 2000/08/27 18:06:12 zeev Exp $ */
+/* $Id: php.h,v 1.121 2000/08/27 18:18:34 andi Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -337,7 +337,8 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #ifndef PHP_WIN32
 #define V_CHOWN(path,owner,group) virtual_chown(path,owner,group)
 #endif
-#else
+
+#else /* !defined(VIRTUAL_DIR) */
 
 #define V_GETCWD(buff, size) getcwd(buff,size)
 #define V_FOPEN(path, mode)  fopen(path, mode)
@@ -361,7 +362,8 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #ifndef PHP_WIN32
 #define V_CHOWN(path,owner,group) chown(path,owner,group)
 #endif
-#endif
+
+#endif /* VIRTUAL_DIR */
 
 #include "zend_constants.h"
 

@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.14 2002/06/02 20:13:50 dickmann Exp $
+  $Id: CLI.php,v 1.15 2002/06/02 20:24:50 dickmann Exp $
 */
 
 require_once "PEAR.php";
@@ -395,6 +395,20 @@ class PEAR_Frontend_CLI extends PEAR
                 };
                 $this->_endTable();
                 break;
+            case 'remote-info':
+                $data = array(
+                    'caption' => 'Package details:',
+                    'border' => false,
+                    'data' => array(
+                        array("Latest", $data['stable']),
+                        array("Installed", $data['installed']),
+                        array("Package", $data['name']),
+                        array("License", $data['license']),
+                        array("Category", $data['category']),
+                        array("Summary", $data['summary']),
+                        array("Description", $data['description']),
+                        ),
+                    );
             default:
                 if (is_array($data))
                 {

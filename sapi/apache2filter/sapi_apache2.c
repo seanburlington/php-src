@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.91.2.19 2003/08/02 18:30:22 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.91.2.20 2003/08/03 19:31:13 thetaphi Exp $ */
 
 #include <fcntl.h>
 
@@ -229,6 +229,7 @@ php_apache_sapi_flush(void *server_context)
 	apr_bucket_alloc_t *ba;
 	apr_bucket *b;
 	ap_filter_t *f; /* output filters */
+	TSRMLS_FETCH();
 
 	ctx = server_context;
 

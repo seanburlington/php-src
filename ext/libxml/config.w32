@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.5 2003/12/05 20:17:46 wez Exp $
+// $Id: config.w32,v 1.6 2003/12/05 21:16:45 wez Exp $
 // vim:ft=javascript
 
 ARG_WITH("libxml", "LibXML support", "yes");
@@ -10,7 +10,8 @@ if (PHP_LIBXML == "yes") {
 
 		EXTENSION("libxml", "libxml.c", false /* never shared */);
 		AC_DEFINE("HAVE_LIBXML", 1, "LibXML support");
-		ADD_FLAG("CFLAGS", "/D LIBXML_THREAD_ENABLED /D LIBXML_STATIC ");
+		ADD_FLAG("CFLAGS", "/D LIBXML_THREAD_ENABLED");
+		ADD_FLAG("CFLAGS_LIBXML", "/D LIBXML_STATIC ");
 		if (!PHP_LIBXML_SHARED) {
 			ADD_DEF_FILE("ext\\libxml\\php_libxml2.def");
 		}

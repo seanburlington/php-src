@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.21 2000/03/06 18:41:16 ssb Exp $ */
+/* $Id: snmp.c,v 1.22 2000/03/19 12:38:53 sas Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)
@@ -54,6 +54,9 @@
 #endif
 #endif
 
+#ifdef HAVE_DEFAULT_STORE_H
+#include "default_store.h"
+#endif
 #include "asn1.h"
 #include "snmp_api.h"
 #include "snmp_client.h"

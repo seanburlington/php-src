@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.94 1999/08/07 18:21:35 zeev Exp $ */
+/* $Id: main.c,v 1.95 1999/08/12 11:05:43 verdy_p Exp $ */
 
 
 #include <stdio.h>
@@ -756,7 +756,7 @@ static void php3_config_ini_shutdown()
 
 
 #ifdef ZTS
-static core_globals_ctor(php_core_globals *core_globals)
+static void core_globals_ctor(php_core_globals *core_globals)
 {
 	if (main_core_globals) {
 		*core_globals = *main_core_globals;

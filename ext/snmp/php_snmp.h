@@ -20,7 +20,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_snmp.h,v 1.22 2004/01/08 17:32:47 sniper Exp $ */
+/* $Id: php_snmp.h,v 1.23 2005/01/08 12:02:22 sniper Exp $ */
 
 #ifndef PHP_SNMP_H
 #define PHP_SNMP_H
@@ -39,6 +39,7 @@ extern zend_module_entry snmp_module_entry;
 #endif
 
 PHP_MINIT_FUNCTION(snmp);
+PHP_MSHUTDOWN_FUNCTION(snmp);
 PHP_MINFO_FUNCTION(snmp);
 
 PHP_FUNCTION(snmpget);

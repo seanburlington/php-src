@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.73 2001/08/03 14:13:52 cox Exp $
+// $Id: DB.php,v 1.74 2001/10/04 00:29:37 jon Exp $
 //
 // Database independent query interface.
 //
@@ -459,7 +459,7 @@ class DB
 
         // Get (if found): username and password
         // $dsn => username:password@protocol+hostspec/database
-        if (($at = strpos($dsn,'@')) !== false) {
+        if (($at = strrpos($dsn,'@')) !== false) {
             $str = substr($dsn, 0, $at);
             $dsn = substr($dsn, $at + 1);
             if (($pos = strpos($str, ':')) !== false) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.62 2001/01/12 08:03:24 rasmus Exp $ */
+/* $Id: php_mysql.c,v 1.63 2001/01/14 09:30:17 zeev Exp $ */
 
 
 /* TODO:
@@ -1442,7 +1442,7 @@ PHP_FUNCTION(mysql_fetch_row)
    Fetch a result row as an object */
 PHP_FUNCTION(mysql_fetch_object)
 {
-	php_mysql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+	php_mysql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, MYSQL_ASSOC);
 	if (return_value->type==IS_ARRAY) {
 		return_value->type=IS_OBJECT;
 		return_value->value.obj.properties = return_value->value.ht;

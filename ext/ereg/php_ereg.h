@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php_ereg.h,v 1.7 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: php_ereg.h,v 1.8 2000/06/23 11:48:02 thies Exp $ */
 
 #ifndef _REG_H
 #define _REG_H
@@ -40,6 +40,7 @@ PHP_FUNCTION(eregi);
 PHP_FUNCTION(eregi_replace);
 PHP_FUNCTION(ereg_replace);
 PHP_FUNCTION(split);
+PHP_FUNCTION(spliti);
 PHPAPI PHP_FUNCTION(sql_regcase);
 
 typedef struct {

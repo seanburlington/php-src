@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.525 2004/11/03 23:36:49 derick Exp $ -*- autoconf -*-
+dnl ## $Id: configure.in,v 1.526 2004/11/15 13:42:21 derick Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -619,8 +619,8 @@ fi
 AC_REPLACE_FUNCS(strlcat strlcpy getopt)
 AC_FUNC_UTIME_NULL
 AC_FUNC_ALLOCA
-PHP_AC_BROKEN_SPRINTF
-PHP_AC_BROKEN_SNPRINTF
+dnl PHP_AC_BROKEN_SPRINTF
+dnl PHP_AC_BROKEN_SNPRINTF
 PHP_DECLARED_TIMEZONE
 PHP_TIME_R_TYPE
 PHP_READDIR_R_TYPE

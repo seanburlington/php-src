@@ -15,7 +15,7 @@
   | Author: Wez Furlong <wez@thebrainroom.com>                           |
   +----------------------------------------------------------------------+
 
-  $Id: php_sqlite.h,v 1.6 2003/04/18 16:30:16 wez Exp $ 
+  $Id: php_sqlite.h,v 1.7 2003/04/20 13:08:22 wez Exp $ 
 */
 
 #ifndef PHP_SQLITE_H
@@ -64,6 +64,8 @@ PHP_FUNCTION(sqlite_busy_timeout);
 
 PHP_FUNCTION(sqlite_last_error);
 PHP_FUNCTION(sqlite_error_string);
+
+PHP_FUNCTION(sqlite_create_aggregate);
 
 #ifdef ZTS
 #define SQLITE_G(v) TSRMG(sqlite_globals_id, zend_sqlite_globals *, v)

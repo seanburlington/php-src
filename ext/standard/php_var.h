@@ -16,10 +16,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_var.h,v 1.9 2001/07/09 09:03:05 thies Exp $ */
+/* $Id: php_var.h,v 1.10 2001/08/03 07:25:27 sas Exp $ */
 
 #ifndef PHP_VAR_H
 #define PHP_VAR_H
+
+#include "ext/standard/php_smart_str_public.h"
 
 PHP_FUNCTION(var_dump);
 PHP_FUNCTION(serialize);
@@ -30,7 +32,7 @@ void php_var_dump(zval **struc, int level);
 /* typdef HashTable php_serialize_data_t; */
 #define php_serialize_data_t HashTable
 
-PHPAPI void php_var_serialize(zval *buf, zval **struc, php_serialize_data_t *var_hash);
+PHPAPI void php_var_serialize(smart_str *buf, zval **struc, php_serialize_data_t *var_hash);
 PHPAPI int php_var_unserialize(zval **rval, const char **p, const char *max, php_serialize_data_t *var_hash);
 
 #define PHP_VAR_SERIALIZE_INIT(var_hash) \

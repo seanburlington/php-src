@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.134 2005/02/17 13:57:21 hyanantha Exp $ */
+/* $Id: filestat.c,v 1.135 2005/02/21 09:08:54 hyanantha Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -311,7 +311,11 @@ PHP_FUNCTION(disk_free_space)
 	}
 #elif (defined(HAVE_SYS_STATFS_H) || defined(HAVE_SYS_MOUNT_H)) && defined(HAVE_STATFS)
 	if (statfs(Z_STRVAL_PP(path), &buf)) RETURN_FALSE;
+#ifdef NETWARE
+	bytesfree = (((double)buf.f_bsize) * ((double)buf.f_bfree));
+#else
 	bytesfree = (((double)buf.f_bsize) * ((double)buf.f_bavail));
+#endif
 #endif
 #endif /* WINDOWS */
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_firebird.c,v 1.1 2004/06/11 01:37:05 abies Exp $ */
+/* $Id: pdo_firebird.c,v 1.2 2004/06/12 17:09:33 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -30,14 +30,12 @@
 #include "php_pdo_firebird.h"
 #include "php_pdo_firebird_int.h"
 
-/* {{{ pdo_firebird_functions[] */
-function_entry pdo_firebird_functions[] = {
+function_entry pdo_firebird_functions[] = { /* {{{ */
 	{NULL, NULL, NULL}
 };
 /* }}} */
 
-/* {{{ pdo_firebird_module_entry */
-zend_module_entry pdo_firebird_module_entry = {
+zend_module_entry pdo_firebird_module_entry = { /* {{{ */
 	STANDARD_MODULE_HEADER,
 	"PDO_Firebird",
 	pdo_firebird_functions,
@@ -55,9 +53,7 @@ zend_module_entry pdo_firebird_module_entry = {
 ZEND_GET_MODULE(pdo_firebird)
 #endif
 
-/* {{{ PHP_MINIT_FUNCTION
- */
-PHP_MINIT_FUNCTION(pdo_firebird)
+PHP_MINIT_FUNCTION(pdo_firebird) /* {{{ */
 {
 	php_pdo_register_driver(&pdo_firebird_driver);
 
@@ -65,9 +61,7 @@ PHP_MINIT_FUNCTION(pdo_firebird)
 }
 /* }}} */
 
-/* {{{ PHP_MSHUTDOWN_FUNCTION
- */
-PHP_MSHUTDOWN_FUNCTION(pdo_firebird)
+PHP_MSHUTDOWN_FUNCTION(pdo_firebird) /* {{{ */
 {
 	php_pdo_unregister_driver(&pdo_firebird_driver);
 
@@ -75,9 +69,7 @@ PHP_MSHUTDOWN_FUNCTION(pdo_firebird)
 }
 /* }}} */
 
-/* {{{ PHP_MINFO_FUNCTION
- */
-PHP_MINFO_FUNCTION(pdo_firebird)
+PHP_MINFO_FUNCTION(pdo_firebird) /* {{{ */
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "PDO Driver for Firebird/InterBase", "enabled");

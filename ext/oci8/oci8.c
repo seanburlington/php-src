@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.256 2004/07/12 07:40:05 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.257 2004/07/15 11:00:14 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -786,7 +786,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.256 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.257 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -2673,13 +2673,13 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 	smart_str_0(&hashed_details);
 
 	if (!exclusive) {
+		mutex_lock(mx_lock);
 		if (zend_ts_hash_find(persistent_sessions, hashed_details.c, hashed_details.len+1, (void **) &session_list) != SUCCESS) {
 			zend_llist tmp;
 			/* first session, set up a session list */
 			zend_llist_init(&tmp, sizeof(oci_session), (llist_dtor_func_t) _session_pcleanup, 1);
 			zend_ts_hash_update(persistent_sessions, hashed_details.c, hashed_details.len+1, &tmp, sizeof(zend_llist), (void **) &session_list);
 		} else {
-			mutex_lock(mx_lock);
 
 			/* session list found, search for an idle session or an already opened session by the current thread */
 			session = zend_llist_get_first(session_list);
@@ -2692,7 +2692,6 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 				session->thread = thread_id();
 			}
 
-			mutex_unlock(mx_lock);
 		}
 
 		if (session) {
@@ -2707,6 +2706,7 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 				/* breakthru to open */
 			}
 		}
+		mutex_unlock(mx_lock);
 	}
 
 	session = ecalloc(1,sizeof(oci_session));

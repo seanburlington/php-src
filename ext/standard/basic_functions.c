@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.479 2002/06/12 17:25:48 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.480 2002/06/22 18:14:39 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -281,6 +281,7 @@ function_entry basic_functions[] = {
 	PHP_FE(iptcparse,														NULL)															
 	PHP_FE(iptcembed,														NULL)
 	PHP_FE(getimagesize,			second_args_force_ref)
+	PHP_FE(imagetype2mimetype,												NULL)
 
 	PHP_FE(phpinfo,															NULL)
 	PHP_FE(phpversion,														NULL)

@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.h,v $ */
-/* $Id: php_mnogo.h,v 1.26 2004/11/15 19:03:19 gluke Exp $ */
+/* $Id: php_mnogo.h,v 1.27 2004/11/15 19:08:18 gluke Exp $ */
 
 /* 
    +----------------------------------------------------------------------+

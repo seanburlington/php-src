@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcre.c,v 1.1 1999/05/21 13:17:23 andrey Exp $ */
+/* $Id: pcre.c,v 1.2 1999/05/21 13:29:05 andrey Exp $ */
 
 /* Get PCRE library from ftp://ftp.cus.cam.ac.uk/pub/software/programs/pcre/ */
 
@@ -261,10 +261,6 @@ PHP_FUNCTION(pcre_match)
 	if (count >= 0) {
 		matched = 1;
 
-		for(i=0; i<count; i++)
-		{
-			php3_printf("so = %d, eo = %d\n", offsets[i<<1], offsets[(i<<1)+1]);
-		}		
 		/* If subpatters array has been passed, fill it in with values. */
 		if (subpats != NULL) {
 			/* Try to get the list of substrings and display a warning if failed. */
@@ -326,7 +322,6 @@ static int _pcre_get_backref(const char *walk, int *backref)
 	if (walk[1] >= '0' && walk[1] <= '9')
 		*backref = *backref * 10 + walk[1] - '0';
 
-	php3_printf("backref = %d\n", *backref);
 	return 1;	
 }
 /* }}} */

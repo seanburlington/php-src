@@ -1,5 +1,5 @@
 dnl
-dnl $Id: acinclude.m4,v 1.295 2005/02/28 00:07:16 helly Exp $
+dnl $Id: acinclude.m4,v 1.296 2005/03/04 15:13:03 sniper Exp $
 dnl
 dnl This file contains local autoconf functions.
 dnl
@@ -763,8 +763,8 @@ dnl PHP_REQUIRE_CXX
 dnl
 AC_DEFUN([PHP_REQUIRE_CXX],[
   if test -z "$php_cxx_done"; then
-    AC_REQUIRE([AC_PROG_CXX])
-    AC_REQUIRE([AC_PROG_CXXCPP])
+    AC_PROG_CXX
+    AC_PROG_CXXCPP
     php_cxx_done=yes
   fi
 ])

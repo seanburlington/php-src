@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.18 1999/11/29 07:28:12 sas Exp $ */
+/* $Id: aolserver.c,v 1.19 1999/12/03 11:46:04 sas Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -106,22 +106,22 @@ php_ns_sapi_header_handler(sapi_header_struct *sapi_header, sapi_headers_struct 
 	header_name = sapi_header->header;
 	header_content = p = strchr(header_name, ':');
 
-	if(!p) return 0;
+	if (p) {
+		*p = '\0';
+		do {
+			header_content++;
+		} while (*header_content == ' ');
 
-	*p = '\0';
-	do {
-		header_content++;
-	} while(*header_content == ' ');
+		if (!strcasecmp(header_name, "Content-type")) {
+			Ns_ConnSetTypeHeader(NSG(conn), header_content);
+		} else {
+			Ns_ConnSetHeaders(NSG(conn), header_name, header_content);
+		}
 
-	if(!strcasecmp(header_name, "Content-type")) {
-		Ns_ConnSetTypeHeader(NSG(conn), header_content);
-	} else {
-		Ns_ConnSetHeaders(NSG(conn), header_name, header_content);
+		*p = ':';
 	}
-	
-	*p = ':';
-	
-	efree(sapi_header->header);
+
+	sapi_free_header(sapi_header);
 	
 	return 0;
 }
@@ -196,7 +196,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	int uptime = Ns_InfoUptime();
 	
 	PUTS("<table border=5 width=600>\n");
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.18 1999/11/29 07:28:12 sas Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.19 1999/12/03 11:46:04 sas Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());

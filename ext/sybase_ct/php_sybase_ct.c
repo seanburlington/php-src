@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.17 2000/02/19 23:41:22 zeev Exp $ */
+/* $Id: php_sybase_ct.c,v 1.18 2000/03/06 18:41:17 ssb Exp $ */
 
 
 #include "php.h"
@@ -69,7 +69,7 @@ function_entry sybase_functions[] = {
 };
 
 zend_module_entry sybase_module_entry = {
-	"Sybase SQL - CT", sybase_functions, PHP_MINIT(sybase), PHP_MSHUTDOWN(sybase), PHP_RINIT(sybase), PHP_RSHUTDOWN(sybase), PHP_MINFO(sybase), STANDARD_MODULE_PROPERTIES
+	"sybase_ct", sybase_functions, PHP_MINIT(sybase), PHP_MSHUTDOWN(sybase), PHP_RINIT(sybase), PHP_RSHUTDOWN(sybase), PHP_MINFO(sybase), STANDARD_MODULE_PROPERTIES
 };
 
 #if COMPILE_DL

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.43 2000/02/24 14:37:05 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.44 2000/03/06 18:41:14 ssb Exp $ */
 
 /*
 	TODO:
@@ -1200,7 +1200,7 @@ function_entry pcre_functions[] = {
 };
 
 zend_module_entry pcre_module_entry = {
-   "PCRE", pcre_functions,
+   "pcre", pcre_functions,
 		   PHP_MINIT(pcre),
 		   PHP_MSHUTDOWN(pcre),
 		   PHP_RINIT(pcre),

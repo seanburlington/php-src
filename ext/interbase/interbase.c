@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.15 2000/02/23 14:59:47 eschmid Exp $ */
+/* $Id: interbase.c,v 1.16 2000/03/06 18:41:09 ssb Exp $ */
 
 /* TODO: A lot... */
 
@@ -48,7 +48,7 @@ function_entry ibase_functions[] = {
 
 zend_module_entry ibase_module_entry =
 {
-	"InterBase",
+	"interbase",
 	ibase_functions,
 	PHP_MINIT(ibase),
 	NULL,

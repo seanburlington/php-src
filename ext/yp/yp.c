@@ -15,7 +15,7 @@
    | Authors: Stephanie Wehner <_@r4k.net>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.9 2000/02/24 14:41:00 eschmid Exp $ */
+/* $Id: yp.c,v 1.10 2000/03/06 18:41:18 ssb Exp $ */
 
 #include "php.h"
 
@@ -36,7 +36,7 @@ function_entry yp_functions[] = {
 };
 
 zend_module_entry yp_module_entry = {
-	"YP",
+	"yp",
 	yp_functions,
 	NULL,
 	NULL,

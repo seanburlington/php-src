@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.28 2000/02/28 17:16:12 andrei Exp $ */
+/* $Id: wddx.c,v 1.29 2000/03/06 18:41:18 ssb Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -109,7 +109,7 @@ function_entry wddx_functions[] = {
 };
 
 zend_module_entry wddx_module_entry = {
-	"WDDX", wddx_functions, php_minit_wddx, NULL, NULL, NULL, NULL, STANDARD_MODULE_PROPERTIES
+	"wddx", wddx_functions, php_minit_wddx, NULL, NULL, NULL, NULL, STANDARD_MODULE_PROPERTIES
 };
 
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.20 2000/02/26 03:20:55 zeev Exp $ */
+/* $Id: sysvshm.c,v 1.21 2000/03/06 18:41:18 ssb Exp $ */
 
 /* This has been built and tested on Solaris 2.6.
  * It may not compile or execute correctly on other systems.
@@ -42,7 +42,7 @@ function_entry sysvshm_functions[] = {
 };
 
 zend_module_entry sysvshm_module_entry = {
-	"System V Shared-Memory", sysvshm_functions, 
+	"sysvshm", sysvshm_functions, 
 	PHP_MINIT(sysvshm), NULL,
 	NULL, NULL,
 	NULL,

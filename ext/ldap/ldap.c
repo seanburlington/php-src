@@ -20,7 +20,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.27 2000/02/26 03:20:51 zeev Exp $ */
+/* $Id: ldap.c,v 1.28 2000/03/06 18:41:09 ssb Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -98,7 +98,7 @@ function_entry ldap_functions[] = {
 
 
 zend_module_entry ldap_module_entry = {
-	"LDAP", ldap_functions, PHP_MINIT(ldap), PHP_MSHUTDOWN(ldap), NULL, NULL,
+	"ldap", ldap_functions, PHP_MINIT(ldap), PHP_MSHUTDOWN(ldap), NULL, NULL,
 			PHP_MINFO(ldap), STANDARD_MODULE_PROPERTIES
 };
 
@@ -277,7 +277,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_printf("<table>"
 				"<tr><td>Total links:</td><td>%d/%s</td></tr>\n"
-		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.27 2000/02/26 03:20:51 zeev Exp $</td></tr>\n"
+		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.28 2000/03/06 18:41:09 ssb Exp $</td></tr>\n"
 #if HAVE_NSLDAP
 				"<tr><td>SDK Version:</td><td>%f</td></tr>"
 				"<tr><td>Highest LDAP Protocol Supported:</td><td>%f</td></tr>"

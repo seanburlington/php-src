@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.47 2000/02/24 14:36:17 eschmid Exp $ */
+/* $Id: xml.c,v 1.48 2000/03/06 18:41:18 ssb Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -123,7 +123,7 @@ function_entry xml_functions[] = {
 };
 
 zend_module_entry xml_module_entry = {
-    "XML",                /* extension name */
+    "xml",                /* extension name */
     xml_functions,        /* extension function list */
     PHP_MINIT(xml),       /* extension-wide startup function */
     PHP_MSHUTDOWN(xml),   /* extension-wide shutdown function */

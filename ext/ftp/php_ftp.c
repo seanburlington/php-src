@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.14 2000/02/22 20:50:00 askalski Exp $ */
+/* $Id: php_ftp.c,v 1.15 2000/03/06 18:41:07 ssb Exp $ */
 
 #include "php.h"
 
@@ -68,7 +68,7 @@ function_entry php_ftp_functions[] = {
 };
 
 zend_module_entry php_ftp_module_entry = {
-	"FTP Functions",
+	"ftp",
 	php_ftp_functions,
 	PHP_MINIT(ftp),
 	NULL,

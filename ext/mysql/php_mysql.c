@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.34 2000/02/26 03:20:52 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.35 2000/03/06 18:41:13 ssb Exp $ */
 
 
 /* TODO:
@@ -146,7 +146,7 @@ function_entry mysql_functions[] = {
 };
 
 zend_module_entry mysql_module_entry = {
-	"MySQL", mysql_functions, PHP_MINIT(mysql), PHP_MSHUTDOWN(mysql), PHP_RINIT(mysql), NULL, 
+	"mysql", mysql_functions, PHP_MINIT(mysql), PHP_MSHUTDOWN(mysql), PHP_RINIT(mysql), NULL, 
 			 PHP_MINFO(mysql), STANDARD_MODULE_PROPERTIES
 };
 

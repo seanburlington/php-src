@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: domxml.c,v 1.28 2000/03/06 13:11:21 steinm Exp $ */
+/* $Id: domxml.c,v 1.29 2000/03/06 18:41:06 ssb Exp $ */
 
 
 #include "php.h"
@@ -98,7 +98,7 @@ void domxmltestnode_class_startup();
 #endif
 
 zend_module_entry php_domxml_module_entry = {
-	"DOM", php_domxml_functions, PHP_MINIT(domxml), NULL, NULL, NULL, PHP_MINFO(domxml), STANDARD_MODULE_PROPERTIES
+	"domxml", php_domxml_functions, PHP_MINIT(domxml), NULL, NULL, NULL, PHP_MINFO(domxml), STANDARD_MODULE_PROPERTIES
 };
 
 void _free_node(xmlNode *tmp) {

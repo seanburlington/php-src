@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.63 2000/03/06 08:02:15 thies Exp $ */
+/* $Id: oci8.c,v 1.64 2000/03/06 18:41:13 ssb Exp $ */
 
 /* TODO list:
  *
@@ -277,7 +277,7 @@ static zend_function_entry php_oci_lob_class_functions[] = {
 };
 
 zend_module_entry oci8_module_entry = {
-    "Oracle-OCI8",        /* extension name */
+    "oci8",        /* extension name */
     php_oci_functions,    /* extension function list */
     PHP_MINIT(oci),       /* extension-wide startup function */
     PHP_MSHUTDOWN(oci),   /* extension-wide shutdown function */

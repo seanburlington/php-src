@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.9 2000/02/24 17:23:04 eschmid Exp $ */
+/* $Id: readline.c,v 1.10 2000/03/06 18:41:15 ssb Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -59,7 +59,7 @@ static zend_function_entry php_readline_functions[] = {
 };
 
 zend_module_entry readline_module_entry = { 
-	"PHP-Readline", 
+	"readline", 
 	php_readline_functions, 
 	PHP_MINIT(readline), 
 	NULL,

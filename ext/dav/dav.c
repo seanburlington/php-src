@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dav.c,v 1.13 2000/02/26 03:20:48 zeev Exp $ */
+/* $Id: dav.c,v 1.14 2000/03/06 18:41:04 ssb Exp $ */
 
 #define IS_EXT_MODULE
 #if COMPILE_DL
@@ -88,7 +88,7 @@ function_entry phpdav_functions[] = {
 };
 
 zend_module_entry phpdav_module_entry = {
-    "DAV",                   /* extension name */
+    "dav",                   /* extension name */
     phpdav_functions,        /* extension function list */
     PHP_MINIT(phpdav),       /* extension-wide startup function */
     PHP_MSHUTDOWN(phpdav),   /* extension-wide shutdown function */

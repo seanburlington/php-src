@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: aspell.c,v 1.15 2000/02/24 15:50:46 eschmid Exp $ */
+/* $Id: aspell.c,v 1.16 2000/03/06 18:41:04 ssb Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)
@@ -42,7 +42,7 @@ function_entry aspell_functions[] = {
 static int le_aspell;
 
 zend_module_entry aspell_module_entry = {
-	"Aspell", aspell_functions, PHP_MINIT(aspell), NULL, NULL, NULL, PHP_MINFO(aspell), STANDARD_MODULE_PROPERTIES
+	"aspell", aspell_functions, PHP_MINIT(aspell), NULL, NULL, NULL, PHP_MINFO(aspell), STANDARD_MODULE_PROPERTIES
 };
 
 

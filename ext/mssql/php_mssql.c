@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.10 2000/02/19 23:41:16 zeev Exp $ */
+/* $Id: php_mssql.c,v 1.11 2000/03/06 18:41:12 ssb Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -63,7 +63,7 @@ function_entry mssql_functions[] = {
 };
 
 zend_module_entry mssql_module_entry = {
-	"Microsoft SQL Server", 
+	"mssql", 
 	mssql_functions, 
 	PHP_MINIT(mssql), 
 	PHP_MSHUTDOWN(mssql), 

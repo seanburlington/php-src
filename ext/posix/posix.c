@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.7 2000/02/26 03:20:53 zeev Exp $ */
+/* $Id: posix.c,v 1.8 2000/03/06 18:41:15 ssb Exp $ */
 
 
 #include "php.h"
@@ -118,7 +118,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix);
 
 zend_module_entry posix_module_entry = {
-	"Posix", 
+	"posix", 
 	posix_functions, 
 	NULL,
 	NULL,
@@ -134,7 +134,7 @@ DLEXPORT zend_module_entry *get_module(void) { return &posix__module_entry; }
 
 static PHP_MINFO_FUNCTION(posix)
 {
-    PUTS("$Revision: 1.7 $\n");
+    PUTS("$Revision: 1.8 $\n");
 }
 
 /* {{{ proto int posix_kill(int pid, int sig)

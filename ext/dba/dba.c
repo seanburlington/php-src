@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.12 2000/02/24 16:30:42 eschmid Exp $ */
+/* $Id: dba.c,v 1.13 2000/03/06 18:41:05 ssb Exp $ */
 
 #include "php.h"
 
@@ -63,12 +63,12 @@ static PHP_MSHUTDOWN_FUNCTION(dba);
 static PHP_MINFO_FUNCTION(dba);
 
 zend_module_entry dba_module_entry = {
-	    "DataBase API", dba_functions, 
-		PHP_MINIT(dba), 
-		PHP_MSHUTDOWN(dba), 
-		NULL, NULL,
-		PHP_MINFO(dba),
-		STANDARD_MODULE_PROPERTIES
+	"dba", dba_functions, 
+	PHP_MINIT(dba), 
+	PHP_MSHUTDOWN(dba), 
+	NULL, NULL,
+	PHP_MINFO(dba),
+	STANDARD_MODULE_PROPERTIES
 };
 
 typedef struct dba_handler {
@@ -199,7 +199,7 @@ static PHP_MINFO_FUNCTION(dba)
 {
 	dba_handler *hptr;
 	
-	PUTS("V1 ($Id: dba.c,v 1.12 2000/02/24 16:30:42 eschmid Exp $)");
+	PUTS("V1 ($Id: dba.c,v 1.13 2000/03/06 18:41:05 ssb Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.24 2000/02/26 03:20:49 zeev Exp $ */
+/* $Id: db.c,v 1.25 2000/03/06 18:41:05 ssb Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 # include "dl/phpdl.h"
@@ -1133,7 +1133,7 @@ function_entry dbm_functions[] = {
 };
 
 zend_module_entry dbm_module_entry = {
-	"DBM", dbm_functions, PHP_MINIT(db), PHP_MSHUTDOWN(db), PHP_RINIT(db), NULL, PHP_MINFO(db), STANDARD_MODULE_PROPERTIES
+	"db", dbm_functions, PHP_MINIT(db), PHP_MSHUTDOWN(db), PHP_RINIT(db), NULL, PHP_MINFO(db), STANDARD_MODULE_PROPERTIES
 };
 
 #if COMPILE_DL

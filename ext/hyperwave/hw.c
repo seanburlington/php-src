@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.44 2000/03/05 07:00:15 eschmid Exp $ */
+/* $Id: hw.c,v 1.45 2000/03/06 18:41:07 ssb Exp $ */
 #if COMPILE_DL
 #include "dl/phpdl.h"
 #endif
@@ -116,7 +116,7 @@ function_entry hw_functions[] = {
 };
 
 zend_module_entry hw_module_entry = {
-	"HyperWave", hw_functions, PHP_MINIT(hw), PHP_MSHUTDOWN(hw), NULL, NULL, PHP_MINFO(hw), 0, 0, 0, NULL
+	"hyperwave", hw_functions, PHP_MINIT(hw), PHP_MSHUTDOWN(hw), NULL, NULL, PHP_MINFO(hw), 0, 0, 0, NULL
 };
 
 #ifdef ZTS

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.41 2000/02/24 07:27:39 eschmid Exp $ */
+/* $Id: pgsql.c,v 1.42 2000/03/06 18:41:15 ssb Exp $ */
 
 #include <stdlib.h>
 
@@ -76,7 +76,7 @@ function_entry pgsql_functions[] = {
 };
 
 zend_module_entry pgsql_module_entry = {
-	"PostgreSQL", pgsql_functions, PHP_MINIT(pgsql), PHP_MSHUTDOWN(pgsql), PHP_RINIT(pgsql), NULL, NULL, STANDARD_MODULE_PROPERTIES
+	"pgsql", pgsql_functions, PHP_MINIT(pgsql), PHP_MSHUTDOWN(pgsql), PHP_RINIT(pgsql), NULL, NULL, STANDARD_MODULE_PROPERTIES
 };
 
 #if COMPILE_DL

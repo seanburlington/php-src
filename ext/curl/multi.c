@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: multi.c,v 1.13 2004/01/08 08:14:37 andi Exp $ */
+/* $Id: multi.c,v 1.14 2004/03/09 15:04:16 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -250,7 +250,11 @@ PHP_FUNCTION(curl_multi_close)
 void _php_curl_multi_close(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	php_curlm *mh = (php_curlm *) rsrc->ptr;
-	curl_multi_cleanup(mh->multi);
+	if (mh) {
+		curl_multi_cleanup(mh->multi);
+		efree(mh);
+		rsrc->ptr = NULL;
+	}
 	/* XXX: keep track of all curl handles and zval_ptr_dtor them here */
 }
 

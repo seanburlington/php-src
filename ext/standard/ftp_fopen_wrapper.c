@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.72 2004/01/25 00:30:50 abies Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.73 2004/01/28 22:50:12 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -586,10 +586,18 @@ static size_t php_ftp_dirstream_read(php_stream *stream, char *buf, size_t count
 		return 0;
 	}
 
-	tmp_len = MIN(sizeof(ent->d_name), basename_len) - 1;
+	tmp_len = MIN(sizeof(ent->d_name), basename_len - 1);
 	memcpy(ent->d_name, basename, tmp_len);
 	ent->d_name[tmp_len] = '\0';
 	efree(basename);
+
+	/* Trim off trailing whitespace characters */
+	tmp_len--;
+	while (tmp_len >= 0 &&
+			(ent->d_name[tmp_len] == '\n' || ent->d_name[tmp_len] == '\r' ||
+			 ent->d_name[tmp_len] == '\t' || ent->d_name[tmp_len] == ' ')) {
+		ent->d_name[tmp_len--] = '\0';
+	}
 
 	return sizeof(php_stream_dirent);
 }

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.125 2004/02/25 20:16:25 abies Exp $ 
+   $Id: sqlite.c,v 1.126 2004/02/27 00:29:09 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1054,7 +1054,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.125 2004/02/25 20:16:25 abies Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.126 2004/02/27 00:29:09 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -2604,7 +2604,7 @@ PHP_FUNCTION(sqlite_escape_string)
 		/* binary string */
 		int enclen;
 		
-		ret = emalloc( 1 + ((256 * stringlen + 1262) / 253) );
+		ret = emalloc( 1 + 5 + stringlen * (256 / 253) );
 		ret[0] = '\x01';
 		enclen = php_sqlite_encode_binary(string, stringlen, ret+1);
 		RETVAL_STRINGL(ret, enclen+1, 0);
@@ -2834,7 +2834,7 @@ PHP_FUNCTION(sqlite_udf_encode_binary)
 		int enclen;
 		char *ret;
 		
-		ret = emalloc( 1 + ((256 * datalen + 1262) / 253) );
+		ret = emalloc( 1 + 5 + datalen * (256 / 253) );
 		ret[0] = '\x01';
 		enclen = php_sqlite_encode_binary(data, datalen, ret+1);
 		RETVAL_STRINGL(ret, enclen+1, 0);

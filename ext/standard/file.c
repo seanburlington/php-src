@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.40 2003/11/24 01:43:59 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.41 2003/11/28 18:33:18 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -614,6 +614,7 @@ PHP_FUNCTION(stream_get_meta_data)
 		MAKE_STD_ZVAL(newval);
 		*newval = *(stream->wrapperdata);
 		zval_copy_ctor(newval);
+		INIT_PZVAL(newval);
 
 		add_assoc_zval(return_value, "wrapper_data", newval);
 	}
@@ -994,10 +995,9 @@ PHP_FUNCTION(stream_context_get_options)
 	context = decode_context_param(zcontext TSRMLS_CC);
 	ZEND_VERIFY_RESOURCE(context);
 
-	array_init(return_value);
 	*return_value = *context->options;
 	zval_copy_ctor(return_value);
-		
+	INIT_PZVAL(return_value);
 }
 /* }}} */
 

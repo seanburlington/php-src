@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.2 2003/05/26 03:57:41 sterling Exp $ */
+/* $Id: php_simplexml.h,v 1.3 2003/05/27 22:15:17 sterling Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H
@@ -43,6 +43,7 @@ extern zend_module_entry simplexml_module_entry;
 #include <libxml/xpath.h>
 #include <libxml/xpathInternals.h>
 #include <libxml/xpointer.h>
+#include <libxml/xmlschemas.h>
 
 PHP_MINIT_FUNCTION(simplexml);
 PHP_MSHUTDOWN_FUNCTION(simplexml);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.26 2003/08/23 15:47:23 helly Exp $ */
+/* $Id: php_reflection.c,v 1.27 2003/08/23 19:48:52 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -47,7 +47,7 @@
 
 /* Exception throwing macro */
 #define _DO_THROW(msg)                                                                                      \
-	zend_throw_exception(msg, 1 TSRMLS_CC);                                                                 \
+	zend_throw_exception(msg, 0 TSRMLS_CC);                                                                 \
 	return;                                                                                                 \
 
 /* Smart string macros */

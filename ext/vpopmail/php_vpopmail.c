@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.c,v 1.28 2002/03/20 19:45:19 bbonev Exp $ */
+/* $Id: php_vpopmail.c,v 1.29 2002/08/15 00:35:35 zeev Exp $ */
 
 /* TODO: move to config.m4 when support for old versions is ready or just
  * don't support rather old vpopmail. current version must bail out if
@@ -252,6 +252,7 @@ PHP_FUNCTION(vpopmail_add_alias_domain)
 	char TmpBuf1[300];
 	char TmpBuf2[300];
 	int uid, gid;
+	TSRMLS_FETCH();
 
 	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters_ex(2, &domain, &aliasdomain) == FAILURE)
 		WRONG_PARAM_COUNT;
@@ -262,7 +263,6 @@ PHP_FUNCTION(vpopmail_add_alias_domain)
 	php_strtolower(Z_STRVAL_PP(domain), Z_STRLEN_PP(domain));
 	php_strtolower(Z_STRVAL_PP(aliasdomain), Z_STRLEN_PP(aliasdomain));
 
-	TSRMLS_FETCH();
 	VPOPMAILG(vpopmail_open) = 1;
 
 	tmpstr = vget_assign(Z_STRVAL_PP(domain), Dir, 156, &uid, &gid);

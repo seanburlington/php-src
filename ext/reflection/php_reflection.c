@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.50 2003/09/01 21:11:38 helly Exp $ */
+/* $Id: php_reflection.c,v 1.51 2003/09/01 21:14:09 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -71,7 +71,7 @@ typedef struct _string {
 
 void string_init(string *str)
 {
-	str->string = (char *) emalloc(1042);
+	str->string = (char *) emalloc(1024);
 	str->len = 1;
 	str->alloced = 1024;
 	*str->string = '\0';

@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.17 2002/06/06 10:16:01 ssb Exp $
+  $Id: CLI.php,v 1.18 2002/06/07 14:48:01 cox Exp $
 */
 
 require_once "PEAR.php";
@@ -409,13 +409,21 @@ class PEAR_Frontend_CLI extends PEAR
                         array("Description", $data['description']),
                         ),
                     );
-            default:
+            default: {
                 if (is_array($data))
                 {
                     $this->_startTable($data);
-                    $opts = array(0 => array('wrap' => 25),
-                                  1 => array('wrap' => 55)
-                    );
+                    $count = count($data['data'][0]);
+                    if ($count == 2) {
+                        $opts = array(0 => array('wrap' => 25),
+                                      1 => array('wrap' => 55)
+                        );
+                    } else {
+                        $opts = array(0 => array('wrap' => 20),
+                                      1 => array('wrap' => 20),
+                                      2 => array('wrap' => 40)
+                        );
+                    }
                     if (isset($data['headline']) && is_array($data['headline'])) {
                         $this->_tableRow($data['headline'],
                                          array('bold' => true),
@@ -428,6 +436,7 @@ class PEAR_Frontend_CLI extends PEAR
                 } else {
                     $this->_displayLine($data);
                 }
+            }
         }
     }
 

@@ -1,10 +1,13 @@
 <!-- 
     $Source: /repository/php-src/ext/mnogosearch/Attic/test.php,v $
-    $Id: test.php,v 1.15 2001/03/01 13:26:25 gluke Exp $ 
+    $Id: test.php,v 1.16 2001/03/01 13:38:38 gluke Exp $ 
 -->
 
 <html>
 <body>
+
+mnoGoSearch API version: <? echo Udm_Api_Version(); ?>
+<br>
 
 <form method=post>
 <input type=text size=30 name=q value="<? echo htmlspecialchars(stripslashes($q)); ?>">

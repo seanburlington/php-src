@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.13 2002/11/17 23:08:40 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.14 2002/11/18 12:43:00 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1236,7 +1236,7 @@ PHPAPI php_stream *_php_stream_fopen_temporary_file(const char *dir, const char 
 	FILE *fp = php_open_temporary_file(dir, pfx, opened_path TSRMLS_CC);
 
 	if (fp)	{
-		php_stream *stream = php_stream_fopen_from_file_rel(fp, "wb");
+		php_stream *stream = php_stream_fopen_from_file_rel(fp, "r+b");
 		if (stream) {
 			return stream;
 		}

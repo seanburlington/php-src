@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.162 2000/07/26 10:43:40 joey Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.163 2000/07/26 11:04:07 joey Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -796,12 +796,9 @@ PHP_GEN_CONFIG_VARS
 touch .deps
 
 #libphp4.module 
-AC_OUTPUT([php4.spec Zend/Makefile 
-           build-defs.h
-		   $PHP_OUTPUT_FILES
-		   ], [], [
+AC_OUTPUT([], [], [
 
-if test "$CONFIG_FILES" = ""; then
+if test "\$CONFIG_FILES" = ""; then
     PHP_GEN_MAKEFILES
 else
     for file in $PHP_FAST_OUTPUT_FILES; do

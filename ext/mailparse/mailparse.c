@@ -17,7 +17,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mailparse.c,v 1.15 2001/12/11 15:29:49 sebastian Exp $ */
+/* $Id: mailparse.c,v 1.16 2001/12/21 12:57:16 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -188,7 +188,7 @@ PHP_FUNCTION(mailparse_uudecode_all)
 
 	outfp = php_open_temporary_file(NULL, "mailparse", &outpath TSRMLS_CC);
 	if (outfp == NULL)	{
-		zend_error(E_WARNING, "%s(): unable to open temp file", get_active_function_name(TSRMLS_CC));
+		zend_error(E_WARNING, "%s(): unable to open temp file", get_active_function_name(TSRMLS_C));
 		RETURN_FALSE;
 	}
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.103.2.4 2005/02/17 15:38:07 iliaa Exp $ */
+/* $Id: ftp.c,v 1.103.2.5 2005/03/09 20:52:54 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -851,17 +851,17 @@ ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, 
 				php_stream_write(outstream, "\r\n", sizeof("\r\n")-1);
 
 				if (*s == '\r') {
-					*s++;
+					s++;
 				}
 				/* for some reason some servers prefix a \r before a \n, 
 				 * resulting in a \r\r\n in the buffer when
 				 * the remote file already has windoze style line endings.
 				 */
 				if (*s == '\r') {
-					*s++;
+					s++;
 				}
 				if (*s == '\n') {
-					*s++;
+					s++;
 				}
 				ptr = s;
 			}

@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearcmd.php,v 1.4 2003/12/06 21:35:02 cellog Exp $
+// $Id: pearcmd.php,v 1.5 2003/12/11 05:54:35 cellog Exp $
 
 ob_end_clean();
 /**
@@ -49,7 +49,7 @@ $all_commands = PEAR_Command::getCommands();
 $argv = Console_Getopt::readPHPArgv();
 $progname = basename($argv[0]);
 array_shift($argv);
-$options = Console_Getopt::getopt($argv, "c:C:d:D:Gh?sSqu:vV");
+$options = Console_Getopt::getopt2($argv, "c:C:d:D:Gh?sSqu:vV");
 if (PEAR::isError($options)) {
     usage($options);
 }
@@ -157,7 +157,7 @@ if ($fetype == 'Gtk') {
     $short_args = $long_args = null;
     PEAR_Command::getGetoptArgs($command, $short_args, $long_args);
     array_shift($options[1]);
-    if (PEAR::isError($tmp = Console_Getopt::getopt($options[1], $short_args, $long_args))) {
+    if (PEAR::isError($tmp = Console_Getopt::getopt2($options[1], $short_args, $long_args))) {
         break;
     }
     list($tmpopt, $params) = $tmp;

@@ -16,7 +16,7 @@
 // | Author: Andrei Zmievski <andrei@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Getopt.php,v 1.25 2003/12/05 22:02:48 andrei Exp $
+// $Id: Getopt.php,v 1.26 2003/12/11 05:54:33 cellog Exp $
 
 require_once 'PEAR.php';
 
@@ -52,8 +52,12 @@ class Console_Getopt {
      * Long and short options can be mixed.
      *
      * Most of the semantics of this function are based on GNU getopt_long().
+     * 
+     * <b>WARNING</b>: this function does not maintain full compatibility with GNU getopt_long().
+     * To have full compatibility, use {@link getopt2()}
      *
-     * @param array  $args           an array of command-line arguments
+     * @param array  $args           an array of command-line arguments.  The first argument
+     *                               should be the filename (like $argv[0]), unless it begins with -
      * @param string $short_options  specifies the list of allowed short options
      * @param array  $long_options   specifies the list of allowed long options
      *
@@ -72,15 +76,47 @@ class Console_Getopt {
         if (empty($args)) {
             return array(array(), array());
         }
-        $opts     = array();
-        $non_opts = array();
 
         settype($args, 'array');
 
         if ($long_options) {
             sort($long_options);
         }
+        if (isset($args[0]{0}) && $args[0]{0} != '-') {
+            array_shift($args);
+        }
+        return Console_Getopt::doGetopt($args, $short_options, $long_options);
+    }
 
+    /**
+     * This function expects $args to contain only options and values
+     * @see getopt()
+     */    
+    function getopt2($args, $short_options, $long_options = null)
+    {
+        // in case you pass directly readPHPArgv() as the first arg
+        if (PEAR::isError($args)) {
+            return $args;
+        }
+        if (empty($args)) {
+            return array(array(), array());
+        }
+
+        settype($args, 'array');
+
+        if ($long_options) {
+            sort($long_options);
+        }
+        return Console_Getopt::doGetopt($args, $short_options, $long_options);
+    }
+    
+    /**
+     * The meat of {@link getopt()} and {@link getopt2()}
+     */
+    function doGetopt($args, $short_options, $long_options = null)
+    {
+        $opts     = array();
+        $non_opts = array();
         reset($args);
         while (list($i, $arg) = each($args)) {
 

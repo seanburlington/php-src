@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.107 2001/02/14 13:06:03 thies Exp $ */
+/* $Id: oci8.c,v 1.108 2001/02/15 14:48:57 thies Exp $ */
 
 /* TODO list:
  *
@@ -489,7 +489,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.107 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.108 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -834,9 +834,7 @@ static void oci_debug(const char *format, ...)
 		vsnprintf(buffer, sizeof(buffer)-1, format, args);
 		va_end(args);
 		buffer[sizeof(buffer)-1] = '\0';
-		if (php_header()) {
-			php_printf("OCIDebug: %s<br>\n", buffer);
-		}
+		php_printf("OCIDebug: %s<br>\n", buffer);
 	}
 }
 
@@ -2959,9 +2957,7 @@ PHP_FUNCTION(ociwritelobtofile)
 					goto bail;
 				}
 			} else {
-				if (php_header()) {
-					PHPWRITE(buffer,toread);
-				}
+				PHPWRITE(buffer,toread);
 			}
 
 			length -= toread;

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.139 2001/02/11 02:38:40 elixer Exp $ */
+/* $Id: file.c,v 1.140 2001/02/15 14:48:58 thies Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1437,9 +1437,7 @@ PHP_FUNCTION(readfile)
 		rsrc_id = ZEND_REGISTER_RESOURCE(NULL,fp,php_file_le_fopen());
 	}
 
-	if (php_header()) {
-		size = php_passthru_fd(socketd, fp, issock);
-	}
+	size = php_passthru_fd(socketd, fp, issock);
 
 	zend_list_delete(rsrc_id);
 
@@ -1497,12 +1495,10 @@ PHP_FUNCTION(fpassthru)
 		socketd=*(int*)what;
 	}
 
-	size = 0;
-	if (php_header()) { /* force headers if not already sent */
-		size = php_passthru_fd(socketd, (FILE*) what, issock);
-	}
+	size = php_passthru_fd(socketd, (FILE*) what, issock);
 
 	zend_list_delete((*arg1)->value.lval);
+
 	RETURN_LONG(size);
 }
 /* }}} */

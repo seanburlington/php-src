@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.70 2001/02/12 17:50:38 rjs Exp $ */
+/* $Id: pdf.c,v 1.71 2001/02/15 14:48:57 thies Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -250,7 +250,7 @@ static void pdf_efree(PDF *p, void *mem)
 
 static size_t pdf_flushwrite(PDF *p, void *data, size_t size)
 {
-	if(php_header()) return(php_write(data, size));
+	return(php_write(data, size));
 	return 0;
 }
 
@@ -264,7 +264,7 @@ PHP_MINFO_FUNCTION(pdf)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "PDF Support", "enabled" );
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
-	php_info_print_table_row(2, "Revision", "$Revision: 1.70 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.71 $" );
 	php_info_print_table_end();
 
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.74 2001/01/26 21:22:32 eschmid Exp $ */
+/* $Id: hw.c,v 1.75 2001/02/15 14:48:56 thies Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -2766,8 +2766,7 @@ PHP_FUNCTION(hw_output_document) {
 		RETURN_FALSE;
 	}
 
-	if(php_header())
-		php_write(ptr->data, ptr->size);
+	php_write(ptr->data, ptr->size);
 
 	RETURN_TRUE;
 }

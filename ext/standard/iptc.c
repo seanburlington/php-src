@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.24 2000/10/29 09:14:53 thies Exp $ */
+/* $Id: iptc.c,v 1.25 2001/02/15 14:48:58 thies Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -202,16 +202,6 @@ PHP_FUNCTION(iptcembed)
         php_error(E_WARNING, "Unable to open %s", (*jpeg_file)->value.str.val);
         RETURN_FALSE;
     }
-
-	if (spool > 0) 
-		if (!php_header()){  /* we got a HEAD request. */
-			if (spool == 2){ 
-				RETURN_TRUE;	/* we only wanted to spool - report success. */
-			} else 
-			if (spool == 1) {
-				spool = 0; 		/* we wanted the file to be spooled/returned, just return it */
-			}
-		}
 
 	len = (*iptcdata)->value.str.len;
 

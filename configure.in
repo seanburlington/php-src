@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.383 2002/10/10 19:07:11 andrei Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.384 2002/10/20 13:45:59 wez Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -424,6 +424,7 @@ ctime_r \
 cuserid \
 crypt \
 flock \
+ftok \
 gai_strerror \
 gcvt \
 getlogin \

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_flatfile.c,v 1.9 2002/12/20 17:47:58 helly Exp $ */
+/* $Id: dba_flatfile.c,v 1.10 2002/12/30 13:07:29 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -161,6 +161,11 @@ DBA_SYNC_FUNC(flatfile)
 {
 	/* dummy */
 	return SUCCESS;
+}
+
+DBA_INFO_FUNC(flatfile)
+{
+	return estrdup(flatfile_version());
 }
 
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_dbm.c,v 1.23 2002/12/20 17:47:58 helly Exp $ */
+/* $Id: dba_dbm.c,v 1.24 2002/12/30 13:07:29 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -175,6 +175,11 @@ DBA_OPTIMIZE_FUNC(dbm)
 DBA_SYNC_FUNC(dbm)
 {
 	return SUCCESS;
+}
+
+DBA_INFO_FUNC(dbm)
+{
+	return estrdup("DBM");
 }
 
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cdb_make.h,v 1.2 2002/11/19 01:06:41 edink Exp $ */
+/* $Id: cdb_make.h,v 1.3 2002/12/30 13:07:29 helly Exp $ */
 
 /* incorporated from D.J.Bernstein's cdb-0.75 (http://cr.yp.to/cdb.html)*/
 
@@ -59,5 +59,6 @@ int cdb_make_addbegin(struct cdb_make *, unsigned int, unsigned int TSRMLS_DC);
 int cdb_make_addend(struct cdb_make *, unsigned int, unsigned int, uint32 TSRMLS_DC);
 int cdb_make_add(struct cdb_make *, char *, unsigned int, char *, unsigned int TSRMLS_DC);
 int cdb_make_finish(struct cdb_make * TSRMLS_DC);
+char *cdb_make_version();
 
 #endif

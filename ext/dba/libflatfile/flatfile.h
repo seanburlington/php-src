@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: flatfile.h,v 1.5 2002/11/19 01:06:42 edink Exp $ */
+/* $Id: flatfile.h,v 1.6 2002/12/30 13:07:30 helly Exp $ */
 
 #ifndef PHP_LIBDBM_H
 #define PHP_LIBDBM_H
@@ -43,5 +43,6 @@ int flatfile_delete(flatfile *dba, datum key_datum TSRMLS_DC);
 int flatfile_findkey(flatfile *dba, datum key_datum TSRMLS_DC);
 datum flatfile_firstkey(flatfile *dba TSRMLS_DC);
 datum flatfile_nextkey(flatfile *dba TSRMLS_DC);
+char *flatfile_version();
 
 #endif

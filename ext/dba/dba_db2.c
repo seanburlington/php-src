@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.31 2002/12/20 17:47:58 helly Exp $ */
+/* $Id: dba_db2.c,v 1.32 2002/12/30 13:07:29 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -186,6 +186,11 @@ DBA_SYNC_FUNC(db2)
 	DB2_DATA;
 
 	return dba->dbp->sync(dba->dbp, 0) ? FAILURE : SUCCESS;
+}
+
+DBA_INFO_FUNC(db2)
+{
+	return estrdup(DB_VERSION_STRING);
 }
 
 #endif

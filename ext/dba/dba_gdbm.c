@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_gdbm.c,v 1.17 2002/12/20 17:47:58 helly Exp $ */
+/* $Id: dba_gdbm.c,v 1.18 2002/12/30 13:07:29 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -180,6 +180,12 @@ DBA_SYNC_FUNC(gdbm)
 	gdbm_sync(dba->dbf);
 	return SUCCESS;
 }
+
+DBA_INFO_FUNC(gdbm)
+{
+	return estrdup(gdbm_version);
+}
+
 #endif
 
 /*

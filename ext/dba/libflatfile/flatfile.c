@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: flatfile.c,v 1.6 2002/11/19 01:06:42 edink Exp $ */
+/* $Id: flatfile.c,v 1.7 2002/12/30 13:07:30 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -294,6 +294,13 @@ datum flatfile_nextkey(flatfile *dba TSRMLS_DC) {
 	return(buf);
 }	
 /* }}} */
+
+/* {{{ flatfile_version */
+char *flatfile_version() 
+{
+	return "1.0, $Revision: 1.7 $";
+}
+/* }}} */ 
 
 /*
  * Local variables:

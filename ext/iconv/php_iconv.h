@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Revision: 1.12.2.4 $ */
+/* $Revision: 1.12.2.5 $ */
 
 #ifndef PHP_ICONV_H
 #define PHP_ICONV_H
@@ -35,6 +35,7 @@
 #include "php_have_bsd_iconv.h"
 #include "php_iconv_supports_errno.h"
 #include "php_php_iconv_impl.h"
+#include "php_php_iconv_h_path.h"
 #endif
 
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sysvsem.h,v 1.8 2001/02/26 06:07:24 andi Exp $ */
+/* $Id: php_sysvsem.h,v 1.9 2001/05/15 07:29:55 swm Exp $ */
 
 #ifndef PHP_SYSVSEM_H
 #define PHP_SYSVSEM_H
@@ -30,6 +30,7 @@ PHP_MINIT_FUNCTION(sysvsem);
 PHP_FUNCTION(sem_get);
 PHP_FUNCTION(sem_acquire);
 PHP_FUNCTION(sem_release);
+PHP_FUNCTION(sem_remove);
 
 typedef struct {
 	int le_sem;

@@ -17,7 +17,7 @@
    | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.17 2000/06/23 05:42:41 hholzgra Exp $ */
+/* $Id: url_scanner.c,v 1.18 2000/06/23 05:49:32 hholzgra Exp $ */
 
 #include "php.h"
 
@@ -114,7 +114,6 @@ static void screw_url(lexdata *state)
 	
 	/* copy old URI */
 	len = MIN(q - p, sizeof(buf) - 1);
-		php_error(E_WARNING,"%p - %p - %p - %p - %d - %d",state->start,state->crs,p,q,q-p,len);
 
 	memcpy(url, p, len);
 	url[len] = '\0';

@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.66 2000/06/16 01:14:08 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.67 2000/06/16 01:23:03 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -325,26 +325,31 @@ PHPAPI FILE *php_fopen_primary_script(void)
 		}
 	} else
 #endif
-#ifdef PHP_WIN32
-	if (PG(doc_root) && path_info && (IS_SLASH(*PG(doc_root))
-		/* Check for absolute path. This should also use virtual cwd macros */
-		|| (PG(doc_root)[1] == ':' && IS_SLASH(PG(doc_root)[2]))) {
-#else
-	if (PG(doc_root) && path_info && IS_SLASH(*PG(doc_root))) {
-#endif
+	if (PG(doc_root) && path_info) {
 		length = strlen(PG(doc_root));
-		filename = emalloc(length + strlen(path_info) + 2);
-		if (filename) {
-			memcpy(filename, PG(doc_root), length);
-			if (!IS_SLASH(filename[length - 1]))	/* length is never 0 */
-				filename[length++] = DEFAULT_SLASH;
-			if (IS_SLASH(path_info[0]))
-				length--;
-			strcpy(filename + length, path_info);
-			STR_FREE(SG(request_info).path_translated);
-			SG(request_info).path_translated = filename;
+#ifdef PHP_WIN32
+		/* Check for absolute path. This should really use virtual cwd macros */
+		if (IS_SLASH(*PG(doc_root) || (length >= 3 && PG(doc_root)[1] == ':' && IS_SLASH(PG(doc_root)[2]))) {
+#else
+		if (IS_SLASH(*PG(doc_root))) {
+#endif
+			length = strlen(PG(doc_root));
+			filename = emalloc(length + strlen(path_info) + 2);
+			if (filename) {
+				memcpy(filename, PG(doc_root), length);
+				if (!IS_SLASH(filename[length - 1])) {	/* length is never 0 */
+					filename[length++] = DEFAULT_SLASH;
+				}
+				if (IS_SLASH(path_info[0])) {
+					length--;
+				}
+				strcpy(filename + length, path_info);
+				STR_FREE(SG(request_info).path_translated);
+				SG(request_info).path_translated = filename;
+			}
 		}
-	}							/* if doc_root && path_info */
+	} /* if doc_root && path_info */
+
 	if (!filename) {
 		/* we have to free SG(request_info).path_translated here because
 		   php_destroy_request_info assumes that it will get

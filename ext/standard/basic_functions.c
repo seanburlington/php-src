@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.396 2001/09/12 02:07:46 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.397 2001/09/21 13:38:44 sas Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -951,9 +951,7 @@ PHP_MINIT_FUNCTION(basic)
 	PHP_MINIT(crypt) (INIT_FUNC_ARGS_PASSTHRU);
 #endif
 
-#ifdef ZTS
 	PHP_MINIT(lcg) (INIT_FUNC_ARGS_PASSTHRU);
-#endif
 
 	PHP_MINIT(dir) (INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(syslog) (INIT_FUNC_ARGS_PASSTHRU);
@@ -1034,9 +1032,7 @@ PHP_RINIT_FUNCTION(basic)
 	PHP_RINIT(crypt) (INIT_FUNC_ARGS_PASSTHRU);
 #endif
 
-#ifndef ZTS
 	PHP_RINIT(lcg) (INIT_FUNC_ARGS_PASSTHRU);
-#endif
 
 	PHP_RINIT(filestat) (INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(syslog) (INIT_FUNC_ARGS_PASSTHRU);

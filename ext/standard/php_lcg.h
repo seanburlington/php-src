@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_lcg.h,v 1.14 2001/08/06 03:50:51 sas Exp $ */
+/* $Id: php_lcg.h,v 1.15 2001/09/21 13:38:44 sas Exp $ */
 
 #ifndef PHP_LCG_H
 #define PHP_LCG_H
@@ -26,16 +26,18 @@
 typedef struct {
 	php_int32 s1;
 	php_int32 s2;
+	int seeded;
 } php_lcg_globals;
 
-double php_combined_lcg(TSRMLS_D);
+PHPAPI double php_combined_lcg(TSRMLS_D);
 PHP_FUNCTION(lcg_value);
 
-#ifdef ZTS
 PHP_MINIT_FUNCTION(lcg);
+PHP_RINIT_FUNCTION(lcg);
+
+#ifdef ZTS
 #define LCG(v) TSRMG(lcg_globals_id, php_lcg_globals *, v)
 #else
-PHP_RINIT_FUNCTION(lcg);
 #define LCG(v) (lcg_globals.v)
 #endif
 

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php3_gd.h,v 1.2 1999/04/26 17:26:34 zeev Exp $ */
+/* $Id: php3_gd.h,v 1.3 1999/05/03 11:11:22 ssb Exp $ */
 
 #ifndef _PHP3_GD_H
 #define _PHP3_GD_H
@@ -44,7 +44,7 @@
 #include <gd.h>
 
 extern php3_module_entry gd_module_entry;
-#define gd_module_ptr &gd_module_entry
+#define phpext_gd_ptr &gd_module_entry
 
 /* gd.c functions */
 extern void php3_info_gd(void);
@@ -95,7 +95,7 @@ extern void php3_imagettftext(INTERNAL_FUNCTION_PARAMETERS);
 #endif
 #else
 
-#define gd_module_ptr NULL
+#define phpext_gd_ptr NULL
 
 #endif
 

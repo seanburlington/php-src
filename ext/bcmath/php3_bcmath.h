@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php3_bcmath.h,v 1.1 1999/04/21 23:28:00 ssb Exp $ */
+/* $Id: php3_bcmath.h,v 1.2 1999/05/03 11:11:20 ssb Exp $ */
 
 #ifndef _PHP3_BCMATH_H
 #define _PHP3_BCMATH_H
@@ -41,7 +41,7 @@
 #if WITH_BCMATH
 
 extern php3_module_entry bcmath_module_entry;
-#define bcmath_module_ptr &bcmath_module_entry
+#define phpext_bcmath_ptr &bcmath_module_entry
 
 extern int php3_rinit_bcmath(INIT_FUNC_ARGS);
 extern int php3_rend_bcmath(SHUTDOWN_FUNC_ARGS);
@@ -57,7 +57,7 @@ extern void php3_bcmath_set_scale(INTERNAL_FUNCTION_PARAMETERS);
 
 #else
 
-#define bcmath_module_ptr NULL
+#define phpext_bcmath_ptr NULL
 
 #endif
 

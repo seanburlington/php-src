@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_standard.h,v 1.3 1999/04/22 02:48:25 ssb Exp $ */
+/* $Id: php3_standard.h,v 1.4 1999/05/03 11:11:22 ssb Exp $ */
 
 #include "basic_functions.h"
 #include "phpmath.h"
@@ -66,7 +66,7 @@
 #include "post.h"
 #include "mime.h"
 
-#define standard_module_ptr basic_functions_module_ptr
+#define phpext_standard_ptr basic_functions_module_ptr
 
 /*
  * Local variables:

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.73 2001/11/01 16:51:59 dbeu Exp $ */
+/* $Id: sockets.c,v 1.74 2001/11/01 17:25:56 dbeu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -205,6 +205,8 @@ static void destroy_socket(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	efree(php_sock);
 }
 
+static char *php_strerror(int error);
+
 int open_listen_sock(php_socket **php_sock, int port, int backlog TSRMLS_DC)
 {
 	struct sockaddr_in  la;
@@ -333,7 +335,7 @@ int php_read(int bsd_socket, void *buf, int maxlen)
 }
 /* }}} */
 
-char *php_strerror(int error) {
+static char *php_strerror(int error) {
 	const char *buf;
 
 #ifndef PHP_WIN32

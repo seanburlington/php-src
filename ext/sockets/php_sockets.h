@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.14 2001/11/01 16:51:59 dbeu Exp $ */
+/* $Id: php_sockets.h,v 1.15 2001/11/01 17:25:56 dbeu Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -106,10 +106,6 @@ typedef struct {
 typedef struct {
 	zend_bool	use_system_read;
 } php_sockets_globals;
-
-int php_read(int bsd_socket, void *buf, int maxlen);
-char *php_strerror(int error);
-
 
 #ifdef ZTS
 #define SOCKETSG(v) (sockets_globals->v)

@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.1 2003/12/19 15:04:22 wez Exp $
+// $Id: config.w32,v 1.2 2004/01/18 19:21:23 derick Exp $
 // vim:ft=javascript
 
 ARG_WITH("mcrypt", "mcrypt support", "no");
@@ -10,7 +10,6 @@ if (PHP_MCRYPT != "no") {
 		EXTENSION('mcrypt', 'mcrypt.c');
 		AC_DEFINE('HAVE_LIBMCRYPT', 1);
 		AC_DEFINE('HAVE_LIBMCRYPT24', 1);
-		AC_DEFINE('HAVE_MCRYPT_GENERIC_DEINIT', 1);
 	} else {
 		WARNING("mcrypt not enabled; libraries and headers not found");
 	}

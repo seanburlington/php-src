@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.41 2000/01/30 20:49:16 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.42 2000/01/30 22:10:30 zeev Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -184,6 +184,6 @@ typedef struct {
 
 /* Values are coma-delimited
  */
-#define SAFE_MODE_PROTECTED_ENV_VARS "LD_"
+#define SAFE_MODE_PROTECTED_ENV_VARS "LD_LIBRARY_PATH"
 
 #endif /* _BASIC_FUNCTIONS_H */

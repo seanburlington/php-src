@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.38 1999/12/17 20:55:24 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.39 1999/12/26 00:18:44 zeev Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -115,10 +115,10 @@ typedef int php_stat_len;
 
 #if SIZEOF_INT == 4
 /* Most 32-bit and 64-bit systems have 32-bit ints */
-typedef unsigned int uint32;
+typedef unsigned int php_uint32;
 #elif SIZEOF_LONG == 4
 /* 16-bit systems? */
-typedef unsigned long uint32;
+typedef unsigned long php_uint32;
 #else
 #error Need type which holds 32 bits
 #endif
@@ -148,8 +148,8 @@ typedef struct {
 	struct stat lsb;
 
 	/* rand.c */
-	uint32   state[MT_N+1];  /* state vector + 1 extra to not violate ANSI C */
-	uint32   *next;       /* next random value is computed from here */
+	php_uint32   state[MT_N+1];  /* state vector + 1 extra to not violate ANSI C */
+	php_uint32   *next;       /* next random value is computed from here */
 	int      left;        /* can *next++ this many times before reloading */
 } php_basic_globals;
 

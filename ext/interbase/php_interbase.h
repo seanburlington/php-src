@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.66 2004/02/01 17:52:36 abies Exp $ */
+/* $Id: php_interbase.h,v 1.67 2004/02/02 13:49:48 abies Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -83,6 +83,9 @@ PHP_FUNCTION(ibase_service_attach);
 PHP_FUNCTION(ibase_service_detach);
 PHP_FUNCTION(ibase_backup);
 PHP_FUNCTION(ibase_restore);
+PHP_FUNCTION(ibase_maintain_db);
+PHP_FUNCTION(ibase_db_info);
+PHP_FUNCTION(ibase_server_info);
 #endif
 PHP_FUNCTION(ibase_errmsg);
 PHP_FUNCTION(ibase_errcode);

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.36 2000/12/04 07:05:16 sbergmann Exp $
+// $Id: DB.php,v 1.37 2000/12/04 17:13:29 sbergmann Exp $
 //
 // Database independent query interface.
 //

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.153 2003/02/04 20:54:17 iliaa Exp $ */
+/* $Id: mod_php4.c,v 1.154 2003/02/05 00:41:40 iliaa Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -717,7 +717,7 @@ static void *php_create_dir(pool *p, char *dummy)
 static void *php_merge_dir(pool *p, void *basev, void *addv)
 {
 	/* This function *must* return addv, and not modify basev */
-	zend_hash_merge_ex((HashTable *) addv, (HashTable *) basev, (copy_ctor_func_t) copy_per_dir_entry, sizeof(php_per_dir_entry), (zend_bool (*)(void *, void *)) should_overwrite_per_dir_entry);
+	zend_hash_merge_ex((HashTable *) addv, (HashTable *) basev, (copy_ctor_func_t) copy_per_dir_entry, sizeof(php_per_dir_entry), (merge_checker_func_t) should_overwrite_per_dir_entry, NULL);
 	return addv;
 }
 /* }}} */

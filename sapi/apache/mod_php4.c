@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.118 2001/08/08 14:01:18 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.119 2001/08/14 08:33:21 thies Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -611,7 +611,7 @@ static int send_parsed_php_source(request_rec * r)
 }
 /* }}} */
 
-/* {{{ estroy_per_dir_entry
+/* {{{ destroy_per_dir_entry
  */
 static void destroy_per_dir_entry(php_per_dir_entry *per_dir_entry)
 {

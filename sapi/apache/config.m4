@@ -1,12 +1,13 @@
 dnl
-dnl $Id: config.m4,v 1.60 2002/07/11 08:44:42 sas Exp $
+dnl $Id: config.m4,v 1.61 2002/07/11 13:33:22 sas Exp $
 dnl
 
 AC_DEFUN(PHP_AP_EXTRACT_VERSION,[
+  ac_output=`$1 -v 2>&1`
   ac_IFS=$IFS
 IFS="- /.
 "
-  set `$1 -v 2>&1`
+  set $ac_output
   IFS=$ac_IFS
 
   APACHE_VERSION=`expr [$]4 \* 1000000 + [$]5 \* 1000 + [$]6`

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.5 2003/10/13 01:29:39 wez Exp $ */
+/* $Id: com_handlers.c,v 1.6 2003/11/27 17:58:58 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -232,6 +232,12 @@ static int com_property_exists(zval *object, zval *member, int check_empty TSRML
 		/* TODO: check for safearray */
 	}
 
+	return 0;
+}
+
+static int com_dimension_exists(zval *object, zval *member, int check_empty TSRMLS_DC)
+{
+	php_error_docref(NULL TSRMLS_CC, E_WARNING, "Operation not yet supported on a COM object");
 	return 0;
 }
 
@@ -511,6 +517,7 @@ zend_object_handlers php_com_object_handlers = {
 	com_object_set,
 	com_property_exists,
 	com_property_delete,
+	com_dimension_exists,
 	com_dimension_delete,
 	com_properties_get,
 	com_method_get,

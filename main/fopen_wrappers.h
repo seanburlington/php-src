@@ -15,25 +15,12 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.h,v 1.35 2002/03/17 13:29:44 wez Exp $ */
+/* $Id: fopen_wrappers.h,v 1.36 2002/03/17 14:21:00 wez Exp $ */
 
 #ifndef FOPEN_WRAPPERS_H
 #define FOPEN_WRAPPERS_H
 
 #include "php_globals.h"
-
-#define IGNORE_PATH		0
-#define USE_PATH		1
-#define IGNORE_URL		2
-/* There's no USE_URL. */
-#define ENFORCE_SAFE_MODE 4
-#define REPORT_ERRORS	8
-
-#ifdef PHP_WIN32
-# define IGNORE_URL_WIN IGNORE_URL
-#else
-# define IGNORE_URL_WIN 0
-#endif
 
 PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC);
 PHPAPI char *expand_filepath(const char *filepath, char *real_path TSRMLS_DC);

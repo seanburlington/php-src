@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.245 2001/08/27 02:06:32 zeev Exp $ */
+/* $Id: session.c,v 1.246 2001/08/31 15:22:10 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -914,7 +914,7 @@ static void php_session_start(TSRMLS_D)
 	PS(define_sid) = define_sid;
 
 	PS(session_status) = php_session_active;
-	if (!send_cookie && PS(use_trans_sid)) {
+	if (!PS(use_cookies) && PS(use_trans_sid)) {
 		php_session_start_output_handler(4096 TSRMLS_CC);
 	}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.25 1999/10/15 20:36:10 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.26 1999/10/28 16:41:17 andrei Exp $ */
 
 /*
 	TODO:
@@ -199,7 +199,8 @@ static pcre* _pcre_get_compiled_regex(char *regex, pcre_extra *extra, int *preg_
 	   found, display a warning. */
 	pp = p;
 	while (*pp != 0) {
-		if (*pp == delimiter && pp[-1] != '\\')
+		if (*pp == '\\' && pp[1] != 0) pp++;
+		else if (*pp == delimiter)
 			break;
 		pp++;
 	}

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.28 2002/12/31 16:18:28 sebastian Exp $
+// $Id: Registry.php,v 1.29 2003/02/01 09:36:17 mj Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Registry.php';
@@ -227,7 +227,7 @@ installed package.'
             return $info;
         }
         if (empty($info)) {
-            $this->ui->displayLine("Nothing found for `$params[0]'");
+            $this->ui->displayError("Nothing found for `$params[0]'");
             return;
         }
         unset($info['filelist']);

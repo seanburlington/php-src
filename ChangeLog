@@ -1,3 +1,23 @@
+2004-05-02  Andi Gutmans  <andi@zend.com>
+
+    * ZendEngine2/zend_operators.c:
+      - Fix comparison of two objects in non-compatibility mode.
+
+2004-05-02  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ext/standard/info.c:
+      Use caseinsensitive sort
+
+2004-05-02  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * ext/standard/proc_open.c:
+      Fix Bug #28251
+
+2004-05-02  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * sapi/cli/php.1.in:
+      Add a notice on STDIN
+
 2004-05-01  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * ZendEngine2/zend_API.c
@@ -2738,7 +2758,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1616 2004/05/02 00:35:15 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1617 2004/05/03 00:36:04 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

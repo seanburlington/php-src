@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: internal_functions.c,v 1.3 1999/04/17 00:37:05 ssb Exp $ */
+/* $Id: internal_functions.c,v 1.4 1999/04/19 13:58:31 ssb Exp $ */
 
 
 #include "php.h"
@@ -42,6 +42,7 @@
 
 #include "ext/standard/php3_standard.h"
 #include "ext/gd/php3_gd.h"
+#include "ext/dbase/dbase.h"
 
 #include "functions/php3_ifx.h"
 #include "functions/php3_ldap.h"
@@ -60,7 +61,6 @@
 #include "functions/post.h"
 #include "functions/php3_solid.h"
 #include "functions/adabasd.h"
-#include "functions/dbase.h"
 #include "functions/hw.h"
 #include "functions/filepro.h"
 #include "functions/db.h"

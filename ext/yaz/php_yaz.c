@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.71 2003/05/14 22:18:11 dickmeiss Exp $ */
+/* $Id: php_yaz.c,v 1.72 2003/05/18 20:40:04 dickmeiss Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1542,10 +1542,13 @@ PHP_MSHUTDOWN_FUNCTION(yaz)
 
 PHP_MINFO_FUNCTION(yaz)
 {
+	char version_str[20];
+
+	yaz_version(version_str, 0);
 	php_info_print_table_start();
 	php_info_print_table_row(2, "YAZ Support", "enabled");
-	php_info_print_table_row(2, "YAZ Version", YAZ_VERSION);
-	php_info_print_table_row(2, "ZOOM", "enabled");
+	php_info_print_table_row(2, "YAZ Version", version_str);
+	php_info_print_table_row(2, "Compiled with YAZ version", YAZ_VERSION);
 	php_info_print_table_end();
 }
 

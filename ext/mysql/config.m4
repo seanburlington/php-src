@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.38 2001/11/30 18:59:45 sniper Exp $
+dnl $Id: config.m4,v 1.38.2.1 2002/03/07 20:39:55 jason Exp $
 dnl
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
@@ -41,6 +41,9 @@ PHP_ARG_WITH(mysql, for MySQL support,
 
 if test "$PHP_MYSQL" != "no"; then
   AC_DEFINE(HAVE_MYSQL, 1, [Whether you have MySQL])
+  if test "$PHP_SAFE_MODE" = "yes"; then
+     AC_DEFINE(DISALLOW_MYSQL_LOAD_LOCAL, 1, [Whether to disable load local])
+  fi
   PHP_EXTENSION(mysql,$ext_shared)
 fi
 

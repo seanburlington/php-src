@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124 2002/11/10 21:26:14 derick Exp $ */
+/* $Id: curl.c,v 1.124.2.1 2002/11/27 18:35:43 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1005,7 +1005,7 @@ PHP_FUNCTION(curl_exec)
 	if (ch->handlers->write->method == PHP_CURL_RETURN && ch->handlers->write->buf.len > 0) {
 		if (ch->handlers->write->type != PHP_CURL_BINARY) 
 			smart_str_0(&ch->handlers->write->buf);
-		RETURN_STRINGL(ch->handlers->write->buf.c, ch->handlers->write->buf.len, 1);
+		RETURN_STRINGL(ch->handlers->write->buf.c, ch->handlers->write->buf.len, 0);
 	}
 
 	RETURN_TRUE;

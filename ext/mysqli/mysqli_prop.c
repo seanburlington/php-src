@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_prop.c,v 1.18 2004/12/29 11:46:13 georg Exp $ 
+  $Id: mysqli_prop.c,v 1.19 2005/01/07 14:59:59 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -225,6 +225,7 @@ MYSQLI_MAP_PROPERTY_FUNC_LONG(stmt_errno_read, mysql_stmt_errno, MYSQLI_GET_STMT
 MYSQLI_MAP_PROPERTY_FUNC_STRING(stmt_error_read, mysql_stmt_error, MYSQLI_GET_STMT());
 MYSQLI_MAP_PROPERTY_FUNC_STRING(stmt_sqlstate_read, mysql_stmt_sqlstate, MYSQLI_GET_STMT());
 
+/* }}} */
 mysqli_property_entry mysqli_link_property_entries[] = {
 	{"affected_rows", link_affected_rows_read, NULL},
 	{"client_info", link_client_info_read, NULL},

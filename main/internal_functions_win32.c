@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.26 2000/03/07 01:50:02 rubys Exp $ */
+/* $Id: internal_functions_win32.c,v 1.27 2000/03/12 18:13:01 zeev Exp $ */
 
 
 #include "php.h"
@@ -59,11 +59,6 @@
 
 /* SNMP has to be moved to ext */
 /* #include "dl/snmp/php_snmp.h" */
-
-unsigned char first_arg_force_ref[] = { 1, BYREF_FORCE };
-unsigned char first_arg_allow_ref[] = { 1, BYREF_ALLOW };
-unsigned char second_arg_force_ref[] = { 2, BYREF_NONE, BYREF_FORCE };
-unsigned char second_arg_allow_ref[] = { 2, BYREF_NONE, BYREF_ALLOW };
 
 zend_module_entry *php_builtin_extensions[] = {
 #if WITH_BCMATH

@@ -1,9 +1,9 @@
-dnl $Id: config.m4,v 1.4 2001/09/12 19:54:46 hholzgra Exp $
+dnl $Id: config.m4,v 1.5 2001/09/21 13:12:58 sas Exp $
 dnl config.m4 for extension dbplus
 
 
 PHP_ARG_WITH(dbplus, for dbplus support,
-[  --with-dbplus             Include dbplus support])
+[  --with-dbplus           Include dbplus support])
 
 if test "$PHP_DBPLUS" != "no"; then
   # --with-dbplus -> check with-path

@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.1 2001/05/27 02:49:46 sterling Exp $
+dnl $Id: config.m4,v 1.2 2001/09/21 13:12:39 sas Exp $
 dnl config.m4 for extension zziplib
 
 PHP_ARG_WITH(zip,whether to include zziplib support, 
-[  --with-zip[=DIR]    Include zip support (requires zziplib >= 0.10.6).
+[  --with-zip[=DIR]        Include zip support (requires zziplib >= 0.10.6).
                           DIR is the zziplib install directory,
                           default is /usr/local.])
 

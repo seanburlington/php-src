@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.38 2000/02/26 16:07:05 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.39 2000/03/02 14:32:24 ssb Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -567,6 +567,10 @@ CONST_PREFIX char *php_apache_value_handler_ex(cmd_parms *cmd, HashTable *conf, 
 		apache_php_initialized = 1;
 	}
 	per_dir_entry.type = mode;
+
+	if (strcasecmp(arg2, "none") == 0) {
+		arg2 = "";
+	}
 
 	per_dir_entry.key_length = strlen(arg1);
 	per_dir_entry.value_length = strlen(arg2);

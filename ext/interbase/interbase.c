@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.83 2002/05/09 21:41:20 daniela Exp $ */
+/* $Id: interbase.c,v 1.84 2002/05/09 21:57:49 daniela Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -169,7 +169,7 @@ static void get_link_trans(INTERNAL_FUNCTION_PARAMETERS, zval **link_id, ibase_d
 			*trans_id = (Z_LVAL_PP(link_id));
 			ZEND_FETCH_RESOURCE(ib_trans, ibase_tr_link *, link_id, -1, "InterBase transaction", le_trans);
 			*trans_n = ib_trans->trans_num;
-			ZEND_FETCH_RESOURCE2(resource, ibase_db_link *, link_id, ib_trans->link_rsrc, "InterBase link", le_link, le_plink);
+			ZEND_FETCH_RESOURCE2(resource, ibase_db_link *, NULL, ib_trans->link_rsrc, "InterBase link", le_link, le_plink);
 		} else {
 			IBDEBUG("Type is le_[p]link");
 			/* Database link resource, use default transaction (=0). */
@@ -608,7 +608,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.83 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.84 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

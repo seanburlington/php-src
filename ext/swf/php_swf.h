@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_swf.h,v 1.3 2000/05/01 02:42:26 sas Exp $ */
+/* $Id: php_swf.h,v 1.4 2000/05/14 18:39:11 sterling Exp $ */
 
 #ifndef _PHP_SWF_H
 #define _PHP_SWF_H
@@ -62,6 +62,7 @@ PHP_FUNCTION(swf_actionsettarget);
 PHP_FUNCTION(swf_actiongotolabel);
 PHP_FUNCTION(swf_defineline);
 PHP_FUNCTION(swf_definerect);
+PHP_FUNCTION(swf_definepoly);
 PHP_FUNCTION(swf_startshape);
 PHP_FUNCTION(swf_shapelinesolid);
 PHP_FUNCTION(swf_shapefilloff);

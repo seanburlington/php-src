@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.57.2.4 2003/05/27 09:50:45 dickmeiss Exp $ */
+/* $Id: php_yaz.c,v 1.57.2.5 2003/05/30 09:45:57 dickmeiss Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1473,6 +1473,7 @@ PHP_INI_BEGIN()
 PHP_MINIT_FUNCTION(yaz)
 {
 	int i;
+	const char *fname;
 	nmem_init();
 #ifdef ZTS
 	yaz_mutex = tsrm_mutex_alloc();
@@ -1481,9 +1482,10 @@ PHP_MINIT_FUNCTION(yaz)
 
 	REGISTER_INI_ENTRIES();
 
-	if (YAZSG(log_file))
+	fname = YAZSG(log_file);
+	if (fname && *fname)
 	{
-		yaz_log_init_file(YAZSG(log_file));
+		yaz_log_init_file(fname);
 		yaz_log_init_level(LOG_ALL);
 	}
 	else

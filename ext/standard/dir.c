@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.94 2002/08/13 04:24:15 rasmus Exp $ */
+/* $Id: dir.c,v 1.95 2002/08/13 05:05:19 rasmus Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -326,7 +326,7 @@ PHP_NAMED_FUNCTION(php_if_readdir)
 
 #ifdef HAVE_GLOB
 /* {{{ proto array glob(string pattern [, int flags])
-    */
+    Find pathnames matching a pattern */
 PHP_FUNCTION(glob)
 {
 	char *pattern = NULL;

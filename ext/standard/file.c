@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.241 2002/08/09 21:02:34 wez Exp $ */
+/* $Id: file.c,v 1.242 2002/08/13 05:08:47 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -565,7 +565,7 @@ PHP_NAMED_FUNCTION(php_if_tmpfile)
 /* }}} */
 
 /* {{{ proto resource file_get_wrapper_data(resource fp)
- */
+    Retrieves header/meta data from "wrapped" file pointers */
 PHP_FUNCTION(file_get_wrapper_data)
 {
 	zval **arg1;

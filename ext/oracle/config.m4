@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.20 2001/03/27 20:34:38 sniper Exp $
+dnl $Id: config.m4,v 1.21 2001/04/09 15:46:23 sniper Exp $
 
 AC_DEFUN(AC_ORACLE_VERSION,[
   AC_MSG_CHECKING([Oracle version])
@@ -158,7 +158,7 @@ if test "$PHP_ORACLE" != "no"; then
   PHP_EXTENSION(oracle, $ext_shared)
   AC_DEFINE(HAVE_ORACLE,1,[ ])
 
-  PHP_SUBST(ORACLE_SHARED_LIBADD)
-  PHP_SUBST(ORACLE_DIR)
+  PHP_SUBST_OLD(ORACLE_SHARED_LIBADD)
+  PHP_SUBST_OLD(ORACLE_DIR)
   PHP_SUBST_OLD(ORACLE_VERSION)
 fi

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.33 2001/09/25 21:58:38 jeroen Exp $ */
+/* $Id: pi3web_sapi.c,v 1.34 2001/09/27 20:01:21 jeroen Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -77,7 +77,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.33 2001/09/25 21:58:38 jeroen Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.34 2001/09/27 20:01:21 jeroen Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -355,9 +355,9 @@ static void hash_pi3web_variables(TSRMLS_D)
 			}
 			*colon = 0;
 			INIT_PZVAL(entry);
-			Z_STRLEN_P(entry) = strlen(value);
-			Z_STRVAL_P(entry) = estrndup(value, Z_STRLEN_P(entry));
-			Z_TYPE_P(entry) = IS_STRING;
+			entry->value.str.len = strlen(value);
+			entry->value.str.val = estrndup(value, entry->value.str.len);
+			entry->type = IS_STRING;
 			zend_hash_add(&EG(symbol_table), variable, strlen(variable)+1, &entry, sizeof(zval *), NULL);
 			*colon = ':';
 		}
@@ -379,7 +379,7 @@ DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 	zend_first_try {
 		file_handle.filename = lpCB->lpszFileName;
 		file_handle.free_filename = 0;
-		Z_TYPE(file_handle) = ZEND_HANDLE_FILENAME;
+		file_handle.type = ZEND_HANDLE_FILENAME;
 		file_handle.opened_path = NULL;
 
 		CG(extended_info) = 0;

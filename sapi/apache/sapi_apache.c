@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.37 2001/09/25 21:58:35 jeroen Exp $ */
+/* $Id: sapi_apache.c,v 1.38 2001/09/27 20:01:17 jeroen Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -81,7 +81,7 @@ int apache_php_module_main(request_rec *r, int display_source_mode TSRMLS_DC)
 			return NOT_FOUND;
 		}
 	} else {
-		Z_TYPE(file_handle) = ZEND_HANDLE_FILENAME;
+		file_handle.type = ZEND_HANDLE_FILENAME;
 		file_handle.handle.fd = 0;
 		file_handle.filename = SG(request_info).path_translated;
 		file_handle.opened_path = NULL;

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 2001/05/12 09:13:39 sas Exp $
+dnl $Id: config.m4,v 1.7 2001/08/20 03:24:13 opaquedave Exp $
 dnl config.m4 for extension libming
 
 PHP_ARG_WITH(ming, whether to include ming support,
@@ -20,10 +20,10 @@ if test "$PHP_MING" != "no"; then
   PHP_SUBST(MING_SHARED_LIBADD)
   PHP_ADD_LIBRARY_WITH_PATH(ming, $MING_DIR/lib, MING_SHARED_LIBADD)
 
-  AC_CHECK_LIB(ming, Ming_setScale, [
+  AC_CHECK_LIB(ming, Ming_useSWFVersion, [
     AC_DEFINE(HAVE_MING,1,[ ])
   ],[
-    AC_MSG_ERROR(Ming library 0.1.0 or greater required.)
+    AC_MSG_ERROR(Ming library 0.2a or greater required.)
   ])
 
   PHP_EXTENSION(ming, $ext_shared)

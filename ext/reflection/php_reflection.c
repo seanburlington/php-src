@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.61 2003/09/06 12:52:40 helly Exp $ */
+/* $Id: php_reflection.c,v 1.62 2003/09/06 13:02:16 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -1752,11 +1752,11 @@ void reflection_class_object_ctor(INTERNAL_FUNCTION_PARAMETERS, int is_object)
 	zend_class_entry **ce;
 
 	if (is_object) {
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &argument) == FAILURE) {
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "o", &argument) == FAILURE) {
 			return;
 		}
 	} else {
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "o", &argument) == FAILURE) {
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &argument) == FAILURE) {
 			return;
 		}
 	}

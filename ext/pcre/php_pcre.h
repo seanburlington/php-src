@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Andrei Zmievski <andrei@ispi.net>                            |
+   | Author: Andrei Zmievski <andrei@php.net>                             |
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.32 2002/02/28 08:26:35 sebastian Exp $ */
+/* $Id: php_pcre.h,v 1.33 2002/05/13 17:28:36 andrei Exp $ */
 
 #ifndef PHP_PCRE_H
 #define PHP_PCRE_H

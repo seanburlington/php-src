@@ -15,13 +15,13 @@
    | Authors: Andi Gutmans <andi@zend.com>                                |
    |          Zeev Suraski <zeev@zend.com>                                |
    |          Rasmus Lerdorf <rasmus@php.net>                             |
-   |          Andrei Zmievski <andrei@ispi.net>                           |
+   |          Andrei Zmievski <andrei@php.net>                            |
    |          Stig Venaas <venaas@php.net>                                |
    |          Jason Greene <jason@php.net>                                |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.161 2002/04/24 15:23:43 andrei Exp $ */
+/* $Id: array.c,v 1.162 2002/05/13 17:28:38 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"

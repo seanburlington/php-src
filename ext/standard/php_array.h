@@ -15,11 +15,11 @@
    | Authors: Andi Gutmans <andi@zend.com>                                |
    |          Zeev Suraski <zeev@zend.com>                                |
    |          Rasmus Lerdorf <rasmus@php.net>                             |
-   |          Andrei Zmievski <andrei@ispi.net>                           |
+   |          Andrei Zmievski <andrei@php.net>                            |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_array.h,v 1.34 2001/12/11 15:30:34 sebastian Exp $ */
+/* $Id: php_array.h,v 1.35 2002/05/13 17:28:38 andrei Exp $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H

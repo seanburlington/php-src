@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Sascha Schumann <sascha@schumann.cx>                        |
-   |          Andrei Zmievski <andrei@ispi.net>                           |
+   |          Andrei Zmievski <andrei@php.net>                            |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.307 2002/05/12 12:51:42 sas Exp $ */
+/* $Id: session.c,v 1.308 2002/05/13 17:28:37 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

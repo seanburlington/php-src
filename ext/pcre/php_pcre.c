@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Andrei Zmievski <andrei@ispi.net>                            |
+   | Author: Andrei Zmievski <andrei@php.net>                             |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.121 2002/04/19 17:23:22 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.122 2002/05/13 17:28:36 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

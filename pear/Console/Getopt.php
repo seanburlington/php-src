@@ -13,17 +13,17 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Author: Andrei Zmievski <andrei@ispi.net>                            |
+// | Author: Andrei Zmievski <andrei@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Getopt.php,v 1.13 2002/05/12 07:13:48 ssb Exp $
+// $Id: Getopt.php,v 1.14 2002/05/13 17:28:37 andrei Exp $
 
 require_once 'PEAR.php';
 
 /**
  * Command-line options parsing class.
  *
- * @author Andrei Zmievski <andrei@ispi.net>
+ * @author Andrei Zmievski <andrei@php.net>
  *
  */
 class Console_Getopt {

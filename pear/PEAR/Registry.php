@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.7 2001/10/31 05:52:41 ssb Exp $
+// $Id: Registry.php,v 1.8 2001/11/07 10:43:04 ssb Exp $
 
 require_once "System.php";
 
@@ -36,7 +36,7 @@ class PEAR_Registry
 
     function PEAR_Registry()
     {
-        $this->statedir = PHP_LOCALSTATEDIR . "/pear/registry";
+        $this->statedir = PEAR_INSTALL_DIR . "/.registry";
     }
 
     // }}}

@@ -1,9 +1,13 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.1 2003/12/02 23:17:03 wez Exp $
+// $Id: config.w32,v 1.2 2003/12/22 13:08:04 wez Exp $
 
 ARG_ENABLE('cli', 'Build CLI version of PHP', 'yes');
+ARG_ENABLE('crt-debug', 'Extra CRT debugging', 'no');
 
 if (PHP_CLI == "yes") {
 	SAPI('cli', 'getopt.c php_cli.c', 'php.exe');
+	if (PHP_CRT_DEBUG == "yes") {
+		ADD_FLAG("CFLAGS_CLI", "/D PHP_WIN32_DEBUG_HEAP");
+	}
 }
 

@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.1 2001/03/13 20:58:47 fmk Exp $
+dnl $Id: config.m4,v 1.2 2001/03/13 22:33:53 sniper Exp $
 
 PHP_ARG_WITH(fbsql, for FrontBase SQL92 (fbsql) support,
 [  --with-fbsql[=DIR]      Include FrontBase support. DIR is the FrontBase base
-                          directory. .], yes)
+                          directory. .])
 
 if test "$PHP_FBSQL" != "no"; then
   AC_DEFINE(HAVE_FBSQL, 1, [Whether you have FrontBase])

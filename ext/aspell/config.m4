@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 2001/03/27 20:34:22 sniper Exp $
+dnl $Id: config.m4,v 1.5 2001/04/02 09:06:33 sniper Exp $
 
 AC_MSG_CHECKING(for ASPELL support)
 AC_ARG_WITH(aspell,
@@ -19,9 +19,9 @@ AC_ARG_WITH(aspell,
     fi
     AC_DEFINE(HAVE_ASPELL,1,[Whether you have aspell])
     AC_MSG_RESULT(yes)
-	PHP_EXTENSION(aspell)
+    PHP_EXTENSION(aspell)
   else
-    AC_MSG_ERROR(no)
+    AC_MSG_RESULT(no)
   fi
 ],[
   AC_MSG_RESULT(no)

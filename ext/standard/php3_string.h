@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php3_string.h,v 1.15 1999/09/20 16:56:02 andi Exp $ */
+/* $Id: php3_string.h,v 1.16 1999/10/08 02:10:57 jah Exp $ */
 
 /* Synced with php3 revision 1.43 1999-06-16 [ssb] */
 
@@ -38,6 +38,7 @@
 
 #ifndef THREAD_SAFE
 extern char *strtok_string;
+extern char *locale_string;
 #endif
 
 PHP_FUNCTION(strspn);

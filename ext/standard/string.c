@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.47 1999/09/30 20:03:32 andrei Exp $ */
+/* $Id: string.c,v 1.48 1999/10/08 02:10:57 jah Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -1795,6 +1795,10 @@ PHP_FUNCTION(strip_tags)
 }
 /* }}} */
 
+#ifndef THREAD_SAFE
+char *locale_string;
+#endif
+
 /* {{{ proto string setlocale(string category, string locale)
    Set locale information */
 PHP_FUNCTION(setlocale)
@@ -1833,6 +1837,12 @@ PHP_FUNCTION(setlocale)
 		loc = locale->value.str.val;
 	retval = setlocale (cat, loc);
 	if (retval) {
+		/* Remember if locale was changed */
+		if (loc) {
+			STR_FREE(locale_string);
+			strtok_string = estrdup(retval);
+		}
+
 		RETVAL_STRING(retval,1);
 		return;
 	}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.191.2.4 2004/10/08 19:03:53 helly Exp $ */
+/* $Id: var.c,v 1.191.2.5 2004/12/17 14:39:35 derick Exp $ */
 
 
 /* {{{ includes 
@@ -319,20 +319,13 @@ static int php_array_element_export(zval **zv, int num_args, va_list args, zend_
 	if (hash_key->nKeyLength==0) { /* numeric key */
 		php_printf("%*c%ld => ", level + 1, ' ', hash_key->h);
 	} else { /* string key */
-		/* XXX: perphaps when we are inside the class we should permit access to 
-		 * private & protected values
-		 */
-		if (va_arg(args, int) && hash_key->arKey[0] == '\0') {
-			return 0;
-		} else {
-			char *key;
-			int key_len;
-			key = php_addcslashes(hash_key->arKey, hash_key->nKeyLength - 1, &key_len, 0, "'\\", 2 TSRMLS_CC);
-			php_printf("%*c'", level + 1, ' ');
-			PHPWRITE(key, key_len);
-			php_printf("' => ");
-			efree(key);
-		}
+		char *key;
+		int key_len;
+		key = php_addcslashes(hash_key->arKey, hash_key->nKeyLength - 1, &key_len, 0, "'\\", 2 TSRMLS_CC);
+		php_printf("%*c'", level + 1, ' ');
+		PHPWRITE(key, key_len);
+		php_printf("' => ");
+		efree(key);
 	}
 	php_var_export(zv, level + 2 TSRMLS_CC);
 	PUTS (",\n");

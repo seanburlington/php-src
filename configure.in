@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.144 2004/12/21 01:08:09 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.145 2004/12/30 07:02:16 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -45,10 +45,10 @@ EXTRA_VERSION="-dev"
 VERSION="$MAJOR_VERSION.$MINOR_VERSION.$RELEASE_VERSION$EXTRA_VERSION"
 
 dnl Define where extension directories are located in the configure context
-AC_DEFUN(PHP_EXT_BUILDDIR,[ext/$1])dnl
-AC_DEFUN(PHP_EXT_DIR,[ext/$1])dnl
-AC_DEFUN(PHP_EXT_SRCDIR,[$abs_srcdir/ext/$1])dnl
-AC_DEFUN(PHP_ALWAYS_SHARED,[])dnl
+AC_DEFUN([PHP_EXT_BUILDDIR],[ext/$1])dnl
+AC_DEFUN([PHP_EXT_DIR],[ext/$1])dnl
+AC_DEFUN([PHP_EXT_SRCDIR],[$abs_srcdir/ext/$1])dnl
+AC_DEFUN([PHP_ALWAYS_SHARED],[])dnl
 
 dnl Setting up the PHP version based on the information above.
 dnl -------------------------------------------------------------------------

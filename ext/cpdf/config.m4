@@ -1,6 +1,6 @@
-dnl $Id: config.m4,v 1.10.4.7 2004/12/21 04:23:35 sniper Exp $
+dnl $Id: config.m4,v 1.10.4.8 2004/12/30 07:02:16 sniper Exp $
 
-AC_DEFUN(CPDF_JPEG_TEST,[
+AC_DEFUN([CPDF_JPEG_TEST],[
   AC_ARG_WITH(jpeg-dir,
   [  --with-jpeg-dir[=DIR]     CPDF: Set the path to libjpeg install prefix.],[
     for i in $withval /usr/local /usr; do
@@ -22,7 +22,7 @@ AC_DEFUN(CPDF_JPEG_TEST,[
   ],)
 ])
 
-AC_DEFUN(CPDF_TIFF_TEST,[
+AC_DEFUN([CPDF_TIFF_TEST],[
   AC_ARG_WITH(tiff-dir,
   [  --with-tiff-dir[=DIR]     CPDF: Set the path to libtiff install prefix.],[
     for i in $withval /usr/local /usr; do

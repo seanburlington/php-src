@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.17 2001/11/01 22:40:43 mfischer Exp $ */
+/* $Id: php_sockets.h,v 1.18 2001/11/06 14:35:26 jon Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -34,7 +34,9 @@ extern zend_module_entry sockets_module_entry;
 #include <winsock.h>
 #else
 #define PHP_SOCKETS_API
-#include <netinet/in.h>
+#if HAVE_SYS_SOCKET_H
+#include <sys/socket.h>
+#endif
 #endif
 
 PHP_MINIT_FUNCTION(sockets);

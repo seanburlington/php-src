@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdf.h,v 1.14 2001/02/26 06:07:12 andi Exp $ */
+/* $Id: php_pdf.h,v 1.15 2001/03/01 19:51:54 rjs Exp $ */
 
 #ifndef PHP_PDF_H
 #define PHP_PDF_H
@@ -145,6 +145,26 @@ PHP_FUNCTION(pdf_add_annotation);
 #if HAVE_LIBGD13
 PHP_FUNCTION(pdf_open_memory_image);
 #endif
+
+#if (PDFLIB_MAJORVERSION >= 4)
+/* support for new functions in PDFlib V4.0 */
+PHP_FUNCTION(pdf_open_pdi);
+PHP_FUNCTION(pdf_close_pdi);
+PHP_FUNCTION(pdf_open_pdi_page);
+PHP_FUNCTION(pdf_close_pdi_page);
+PHP_FUNCTION(pdf_get_pdi_parameter);
+PHP_FUNCTION(pdf_get_pdi_value);
+PHP_FUNCTION(pdf_begin_pattern);
+PHP_FUNCTION(pdf_end_pattern);
+PHP_FUNCTION(pdf_setcolor);
+PHP_FUNCTION(pdf_makespotcolor);
+PHP_FUNCTION(pdf_begin_template);
+PHP_FUNCTION(pdf_end_template);
+PHP_FUNCTION(pdf_arcn);
+PHP_FUNCTION(pdf_add_thumbnail);
+PHP_FUNCTION(pdf_initgraphics);
+PHP_FUNCTION(pdf_setmatrix);
+#endif /* PDFlib >= V4 */
 
 #ifdef ZTS
 #define PDFG(v) (pdf_globals->v)

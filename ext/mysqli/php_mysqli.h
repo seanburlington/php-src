@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.28 2004/01/08 17:32:31 sniper Exp $ 
+  $Id: php_mysqli.h,v 1.29 2004/01/23 03:28:56 sniper Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -386,7 +386,7 @@ MYSQLI_PROPERTY(my_prop_link_host);
 #define my_estrdup(x) (x) ? estrdup(x) : NULL
 #define my_efree(x) if (x) efree(x)
 
-ZEND_EXTERN_MODULE_GLOBALS(mysqli);
+ZEND_EXTERN_MODULE_GLOBALS(mysqli)
 
 #endif	/* PHP_MYSQLI.H */
 

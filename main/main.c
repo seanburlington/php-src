@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.276 2000/06/30 13:23:07 zeev Exp $ */
+/* $Id: main.c,v 1.277 2000/07/02 16:23:43 stas Exp $ */
 
 
 #include <stdio.h>
@@ -425,6 +425,9 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 			if (module_initialized) {
 				zend_bailout();
 				return;
+			} else {
+				/* bad error in module startup - no way we can live with this */
+				exit(-2);
 			}
 			break;
 	}

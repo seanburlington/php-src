@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11 2003/12/07 15:33:19 sniper Exp $
+dnl $Id: config.m4,v 1.12 2003/12/08 18:57:09 sniper Exp $
 dnl config.m4 for extension mysqli
 
 PHP_ARG_WITH(mysqli, for MySQLi support,
@@ -22,7 +22,7 @@ if test "$PHP_MYSQLI" != "no"; then
   fi
 
   if test "$PHP_EMBEDDED_MYSQLI" = "yes"; then
-	AC_DEFINE(HAVE_EMBEDDED_MYSQLI, 1, [embedded MySQL support enabled])
+    AC_DEFINE(HAVE_EMBEDDED_MYSQLI, 1, [embedded MySQL support enabled])
     MYSQL_LIB_CFG='--libmysqld-libs'
   else
     MYSQL_LIB_CFG='--libs'

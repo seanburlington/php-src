@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer-minus-download.php,v 1.3 2003/12/01 01:00:57 cellog Exp $
+// $Id: Installer-minus-download.php,v 1.4 2003/12/01 01:02:40 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -575,6 +575,7 @@ class PEAR_Installer extends PEAR_Downloader
      * @param false private recursion variable
      * @param false private recursion variable
      * @param false private recursion variable
+     * @deprecated in favor of PEAR_Downloader
      */
     function download($packages, $options, &$config, &$installpackages,
                       &$errors, $installed = false, $willinstall = false, $state = false)
@@ -583,6 +584,8 @@ class PEAR_Installer extends PEAR_Downloader
         parent::PEAR_Downloader($this->ui, $options, $config);
         $errors = $this->getErrorMsgs();
         $installpackages = $this->getDownloadedPackages();
+        trigger_error("PEAR Warning: PEAR_Installer::download() is deprecated " .
+                      "in favor of PEAR_Downloader class", E_USER_WARNING);
         return parent::download($packages);
     }
 

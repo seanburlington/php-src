@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build.mk,v 1.16 2002/07/12 04:41:26 sniper Exp $ 
+# $Id: build.mk,v 1.17 2002/07/21 13:09:07 sas Exp $ 
 #
 #
 # Makefile to generate build tools
@@ -40,7 +40,7 @@ generated_lists:
 		$(ZENDDIR)/acinclude.m4 ext/*/config*.m4 sapi/*/config.m4 >> $@
 
 $(STAMP): build/buildcheck.sh
-	@build/buildcheck.sh && touch $(STAMP)
+	@build/buildcheck.sh $(STAMP)
 
 snapshot:
 	distname='$(DISTNAME)'; \

@@ -16,7 +16,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.63 2002/06/25 21:22:14 helly Exp $ */
+/* $Id: image.c,v 1.64 2002/07/01 18:52:30 derick Exp $ */
 /*
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -724,7 +724,7 @@ static struct gfxinfo *php_handle_iff(php_stream * stream TSRMLS_DC)
 
 	result = (struct gfxinfo *) ecalloc(1, sizeof(struct gfxinfo));
 
-	// loop chunks to find BMHD chunk
+	/* loop chunks to find BMHD chunk */
 	do {
 		if (php_stream_read(stream, a, 8) != 8) {
 			efree(result);
@@ -735,7 +735,7 @@ static struct gfxinfo *php_handle_iff(php_stream * stream TSRMLS_DC)
 		if ((size & 1) == 1) {
 			size++;
 		}
-		if (chunkId == 0x424d4844) { // BMHD chunk
+		if (chunkId == 0x424d4844) { /* BMHD chunk */
 			if (php_stream_read(stream, a, 9) != 9) {
 				efree(result);
 				return NULL;

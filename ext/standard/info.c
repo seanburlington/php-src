@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.183 2002/06/19 13:24:01 sander Exp $ */
+/* $Id: info.c,v 1.184 2002/07/01 18:52:30 derick Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -145,16 +145,16 @@ PHPAPI char *php_get_uname(char mode)
                  dwWindowsMajorVersion, dwWindowsMinorVersion);
         php_uname = tmp_uname;
     } else if (mode == 'n') {
-        // XXX HOW TO GET THIS ON WINDOWS?
+        /* XXX HOW TO GET THIS ON WINDOWS? */
         php_uname = "localhost";
     } else if (mode == 'v') {
         dwBuild = (DWORD)(HIWORD(dwVersion));
         snprintf(tmp_uname, sizeof(tmp_uname), "build %d", dwBuild);
         php_uname = tmp_uname;
     } else if (mode == 'm') {
-        // XXX HOW TO GET THIS ON WINDOWS?
+        /* XXX HOW TO GET THIS ON WINDOWS? */
         php_uname = "i386";
-    } else { // assume mode == 'a'
+    } else { /* assume mode == 'a' */
         /* Get build numbers for Windows NT or Win95 */
         if (dwVersion < 0x80000000){
             dwBuild = (DWORD)(HIWORD(dwVersion));
@@ -184,7 +184,7 @@ PHPAPI char *php_get_uname(char mode)
             php_uname = buf.version;
         } else if (mode == 'm') {
             php_uname = buf.machine;
-        } else { // assume mode == 'a'
+        } else { /* assume mode == 'a' */
             snprintf(tmp_uname, sizeof(tmp_uname), "%s %s %s %s %s",
                      buf.sysname, buf.nodename, buf.release, buf.version,
                      buf.machine);
@@ -295,12 +295,12 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 					php_info_print_table_row(2, "Registered PHP Streams", stream_protocols_buf);
 					efree(stream_protocols_buf);
 				} else {
-					// Any chances we will ever hit this?
+					/* Any chances we will ever hit this? */
 					php_info_print_table_row(2, "Registered PHP Streams", "no streams registered");
 				}
 			} else {
-				// Any chances we will ever hit this?
-				php_info_print_table_row(2, "PHP Streams", "disabled"); // ??
+				/* Any chances we will ever hit this? */
+				php_info_print_table_row(2, "PHP Streams", "disabled"); /* ?? */
 			}
 		}
 		

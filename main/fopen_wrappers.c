@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.93 2000/10/01 18:13:41 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.94 2000/10/03 15:05:50 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -281,7 +281,7 @@ PHPAPI FILE *php_fopen_primary_script(void)
 {
 	FILE *fp;
 	struct stat st;
-	char *temp, *path_info, *filename;
+	char *path_info, *filename;
 	int length;
 	PLS_FETCH();
 	SLS_FETCH();
@@ -358,13 +358,7 @@ PHPAPI FILE *php_fopen_primary_script(void)
 		STR_FREE(SG(request_info).path_translated);	/* for same reason as above */
 		return NULL;
 	}
-	
-	temp = estrdup(filename);
-	php_dirname(temp, strlen(temp));
-	if (*temp) {
-		V_CHDIR(temp);
-	}
-	efree(temp);
+	V_CHDIR_FILE(filename);
 	SG(request_info).path_translated = filename;
 
 	return fp;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_sxe.c,v 1.5 2004/01/20 20:59:45 helly Exp $ */
+/* $Id: spl_sxe.c,v 1.6 2004/02/11 23:36:25 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -144,13 +144,11 @@ static zend_function_entry spl_funcs_SimpleXMLIterator[] = {
 };
 /* }}} */
 
-#define SimpleXML_Element sxe_get_element_class_entry()
-
 SPL_API PHP_MINIT_FUNCTION(spl_sxe) /* {{{ */
 {
 	zend_class_entry *spl_ce_SimpleXML_Element = sxe_get_element_class_entry();
 
-	if (!sxe_get_element_class_entry()) {
+	if (!spl_ce_SimpleXML_Element) {
 		return SUCCESS; /* SimpleXML must be initialized before */
 	}
 

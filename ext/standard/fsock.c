@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.87 2002/03/16 02:33:00 wez Exp $ */
+/* $Id: fsock.c,v 1.88 2002/03/16 18:42:39 wez Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -159,7 +159,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		ZVAL_STRING(zerrno, "", 1);
 	}
 
-	if (port != -1)	{ /* connect to a host */
+	if (port > 0)	{ /* connect to a host */
 		enum php_sslflags_t { php_ssl_none, php_ssl_v23, php_ssl_tls };
 		enum php_sslflags_t ssl_flags;
 		struct {
@@ -195,6 +195,11 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 #endif
 		stream = php_stream_sock_open_host(host, port, socktype, (int)timeout, persistent);
 
+		if (stream == NULL) {
+			zend_error(E_WARNING, "%s(): unable to connect to %s:%d", 
+					get_active_function_name(TSRMLS_C), host, port);
+		}
+		
 #if HAVE_OPENSSL_EXT
 		if (stream)	{
 			int ssl_ret = FAILURE;

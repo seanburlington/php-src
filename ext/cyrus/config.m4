@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.8.2.1 2002/12/09 19:16:12 sniper Exp $
+dnl $Id: config.m4,v 1.8.2.2 2002/12/10 16:34:48 sniper Exp $
 dnl
 
 PHP_ARG_WITH(cyrus, for cyrus imap support,
@@ -18,10 +18,20 @@ if test "$PHP_CYRUS" != "no"; then
       PHP_ADD_INCLUDE($i/include)
       PHP_ADD_LIBRARY_WITH_PATH(cyrus, $i/lib, CYRUS_SHARED_LIBADD)
       found_cyrus=yes
+      CYRUS_INCPATH=$i/include
       break 2
     fi
   done
 
+  dnl Check that imclient_connect() accepts 4 args
+  old_CPPFLAGS=$CPPFLAGS
+  CPPFLAGS=-I$CYRUS_INCPATH
+  AC_TRY_COMPILE([#include <stdio.h>
+#include <cyrus/imclient.h>], [imclient_connect(0,0,0,0)], [], [
+    AC_MSG_ERROR(cyrus-imap version 2.0.8 or greater required)
+  ])
+  CPPFLAGS=$old_CPPFLAGS
+  
   if test "$found_cyrus" = "no"; then
     AC_MSG_RESULT(not found)
     AC_MSG_ERROR(Please Re-install the cyrus distribution)

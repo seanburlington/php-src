@@ -16,7 +16,7 @@
    |          Fredrik Ohrn                                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.44 2004/04/26 20:14:09 iliaa Exp $ */
+/* $Id: yp.c,v 1.45 2004/05/31 21:01:18 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -77,6 +77,10 @@ ZEND_GET_MODULE(yp)
 PHP_FUNCTION(yp_get_default_domain)
 {
 	char *outdomain;
+
+	if (ZEND_NUM_ARGS()) {
+		WRONG_PARAM_COUNT;
+	}
 
 	if((YP(error) = yp_get_default_domain(&outdomain))) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", yperr_string (YP(error)));

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sess_sqlite.c,v 1.14 2004/03/06 18:11:59 iliaa Exp $ */
+/* $Id: sess_sqlite.c,v 1.15 2004/03/07 21:57:50 iliaa Exp $ */
 
 #include "php.h"
 
@@ -142,7 +142,7 @@ PS_WRITE_FUNC(sqlite)
 	
 	t = time(NULL);
 
-	binary = emalloc(1 + 5 + vallen * (256 / 253));
+	binary = emalloc(1 + 5 + vallen * ((float) 256 / (float) 253));
 	binlen = sqlite_encode_binary((const unsigned char*)val, vallen, binary);
 	
 	rv = sqlite_exec_printf(db, "REPLACE INTO session_data VALUES('%q', '%q', %d)", NULL, NULL, &error, key, binary, t);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.7 2003/01/07 22:52:24 moriyoshi Exp $ */
+/* $Id: filters.c,v 1.8 2003/01/07 22:53:42 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -265,8 +265,7 @@ static int php_base64_filter_ctor(php_base64_filter *inst)
 
 static void php_base64_filter_dtor(php_base64_filter *inst)
 {
-	assert(inst != NULL);
-	efree(inst);
+	/* do nothing */
 }
 
 static size_t strfilter_base64_write(php_stream *stream, php_stream_filter *thisfilter,
@@ -448,6 +447,9 @@ static int strfilter_base64_eof(php_stream *stream, php_stream_filter *thisfilte
 static void strfilter_base64_dtor(php_stream_filter *thisfilter TSRMLS_DC)
 {
 	php_base64_filter_dtor((php_base64_filter *)thisfilter->abstract);
+
+	assert(thisfilter->abstract != NULL);
+	efree(thisfilter->abstract);
 }
 
 static php_stream_filter_ops strfilter_base64_ops = {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.8 2003/04/04 16:18:15 sniper Exp $ */
+/* $Id: curl.c,v 1.124.2.9 2003/05/09 01:10:24 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -631,6 +631,8 @@ PHP_FUNCTION(curl_init)
 	ch->handlers->write->type   = PHP_CURL_ASCII;
 	ch->handlers->read->method  = PHP_CURL_DIRECT;
 	ch->handlers->write_header->method = PHP_CURL_IGNORE;
+
+	ch->uses = 0;
 
 	curl_easy_setopt(ch->cp, CURLOPT_NOPROGRESS,        1);
 	curl_easy_setopt(ch->cp, CURLOPT_VERBOSE,           0);

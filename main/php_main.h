@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: php_main.h,v 1.23 2002/09/18 21:57:29 zeev Exp $ */
+/* $Id: php_main.h,v 1.24 2002/11/18 00:59:23 gschlossnagle Exp $ */
 
 
 #ifndef PHP_MAIN_H
@@ -39,6 +39,7 @@ PHPAPI int php_module_shutdown_wrapper(sapi_module_struct *sapi_globals);
 PHPAPI int php_startup_extensions(zend_module_entry **ptr, int count);
 
 PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC);
+PHPAPI int php_execute_simple_script(zend_file_handle *primary_file, zval **ret TSRMLS_DC);
 PHPAPI int php_handle_special_queries(TSRMLS_D);
 PHPAPI int php_lint_script(zend_file_handle *file TSRMLS_DC);
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.42 2002/01/11 13:21:09 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.43 2002/02/04 11:55:12 yohgaki Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -552,7 +552,6 @@ PHP_RINIT_FUNCTION(mbstring)
 	int n, *list, *entry;
 	zend_function *func, *orig;
 	struct mb_overload_def *p;
-	TSRMLS_FETCH();
 
 	MBSTRG(current_language) = MBSTRG(language);
 	MBSTRG(current_internal_encoding) = MBSTRG(internal_encoding);
@@ -610,7 +609,6 @@ PHP_RSHUTDOWN_FUNCTION(mbstring)
 {
 	struct mb_overload_def *p;
 	zend_function *orig;
-	TSRMLS_FETCH();
 
 	if (MBSTRG(current_detect_order_list) != NULL) {
 		efree(MBSTRG(current_detect_order_list));

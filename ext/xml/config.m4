@@ -1,5 +1,5 @@
 # $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.25 2001/03/27 20:34:44 sniper Exp $
+# $Id: config.m4,v 1.26 2001/05/11 17:57:35 thies Exp $
 
 dnl Fallback for --with-xml[=DIR]
 AC_ARG_WITH(xml,[],enable_xml=$withval)
@@ -16,10 +16,9 @@ PHP_ARG_ENABLE(xml,for XML support,
 [  --disable-xml           Disable XML support using bundled expat lib], yes)
 
 if test "$PHP_XML" != "no"; then
-
-  AC_DEFINE(HAVE_LIBEXPAT, 1, [ ])
-
   if test "$PHP_XML" = "yes"; then
+    AC_DEFINE(HAVE_LIBEXPAT, 1, [ ])
+    AC_DEFINE(HAVE_LIBEXPAT_BUNDLED, 1, [ ])
     CPPFLAGS="$CPPFLAGS -DXML_BYTE_ORDER=$order"
     EXPAT_INTERNAL_LIBADD="expat/libexpat.la"	    
     PHP_SUBST(EXPAT_INTERNAL_LIBADD)
@@ -28,17 +27,12 @@ if test "$PHP_XML" != "no"; then
     PHP_SUBST(EXPAT_SHARED_LIBADD)
     PHP_EXTENSION(xml, $ext_shared)
     LIB_BUILD($ext_builddir/expat,$ext_shared,yes)
-    LIB_BUILD($ext_builddir/expat/xmlparse,$ext_shared,yes)
-    LIB_BUILD($ext_builddir/expat/xmltok,$ext_shared,yes)
-    PHP_ADD_INCLUDE($ext_srcdir/expat/xmltok)
-    PHP_ADD_INCLUDE($ext_srcdir/expat/xmlparse)
-    PHP_FAST_OUTPUT($ext_builddir/expat/Makefile $ext_builddir/expat/xmlparse/Makefile $ext_builddir/expat/xmltok/Makefile)
-
+    PHP_ADD_INCLUDE($ext_srcdir/expat)
+    PHP_FAST_OUTPUT($ext_builddir/expat/Makefile)
   else
-
     EXPAT_DIR="$withval"
     if test -f $EXPAT_DIR/lib/libexpat.a -o -f $EXPAT_DIR/lib/libexpat.so ; then
-        AC_DEFINE(HAVE_LIBEXPAT2, 1, [ ])
+        AC_DEFINE(HAVE_LIBEXPAT, 1, [ ])
         PHP_ADD_INCLUDE($EXPAT_DIR/include)
     else
         AC_MSG_RESULT(not found)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.235 2001/09/04 10:44:28 eschmid Exp $ */
+/* $Id: string.c,v 1.236 2001/09/06 08:54:54 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1327,6 +1327,10 @@ PHP_FUNCTION(stristr)
 	    zend_get_parameters_ex(2, &haystack, &needle) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
+
+	SEPERATE_ZVAL(haystack);
+	SEPERATE_ZVAL(needle);
+	
 	convert_to_string_ex(haystack);
 
 	if (!Z_STRLEN_PP(needle)) {

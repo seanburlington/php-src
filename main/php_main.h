@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: php_main.h,v 1.3 2000/07/29 10:48:57 zeev Exp $ */
+/* $Id: php_main.h,v 1.4 2000/10/26 21:16:12 sas Exp $ */
 
 
 #ifndef PHP_MAIN_H
@@ -41,6 +41,7 @@ PHPAPI int php_global_startup_extensions(zend_module_entry **ptr, int count);
 PHPAPI int php_global_shutdown_extensions(zend_module_entry **ptr, int count);
 
 PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_DC);
+PHPAPI int php_handle_special_queries(SLS_D PLS_DC);
 PHPAPI int php_lint_script(zend_file_handle *file CLS_DC ELS_DC PLS_DC);
 
 

@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.20 1999/12/04 13:25:38 zeev Exp $ */
+/* $Id: aolserver.c,v 1.21 1999/12/10 13:00:09 sas Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -34,6 +34,8 @@
 #ifndef ZTS
 #error AOLserver module is only useable in thread-safe mode
 #endif
+
+#include "ext/standard/info.h"
 
 #define NS_BUF_SIZE 511
 
@@ -194,9 +196,11 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 	char buf[512];
 	int uptime = Ns_InfoUptime();
+	int i;
+	NSLS_FETCH();
 	
 	PUTS("<table border=5 width=600>\n");
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.20 1999/12/04 13:25:38 zeev Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.21 1999/12/10 13:00:09 sas Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -212,6 +216,23 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 			(uptime / 60) % 60,
 			uptime % 60);
 	php_info_print_table_row(2, "Server uptime", buf);
+	PUTS("</table>");
+
+	PUTS("<hr><h2>HTTP Headers Information</h2>");
+	PUTS("<table border=5 width=\"600\">\n");
+	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">HTTP Request Headers</th></tr>\n");
+	php_info_print_table_row(2, "HTTP Request", NSG(conn)->request->line);
+	
+	for (i = 0; i < Ns_SetSize(NSG(conn)->headers); i++) {
+		php_info_print_table_row(2, Ns_SetKey(NSG(conn)->headers, i), Ns_SetValue(NSG(conn)->headers, i));
+	}
+	
+	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">HTTP Response Headers</th></tr>\n");
+	
+	for (i = 0; i < Ns_SetSize(NSG(conn)->outputheaders); i++) {
+		php_info_print_table_row(2, Ns_SetKey(NSG(conn)->outputheaders, i), Ns_SetValue(NSG(conn)->outputheaders, i));
+	}
+
 	PUTS("</table>");
 }
 

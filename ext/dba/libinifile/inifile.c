@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: inifile.c,v 1.9 2003/12/07 16:56:51 sniper Exp $ */
+/* $Id: inifile.c,v 1.10 2003/12/14 22:07:29 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -43,7 +43,7 @@
 /* {{{ inifile_version */
 char *inifile_version() 
 {
-	return "1.0, $Revision: 1.9 $";
+	return "1.0, $Revision: 1.10 $";
 }
 /* }}} */ 
 
@@ -83,7 +83,7 @@ void inifile_line_free(line_type *ln)
 inifile * inifile_alloc(php_stream *fp, int readonly, int persistent TSRMLS_DC)
 {
 	inifile *dba;
-	int fd = 0;
+	int fd;
 
 	if (!readonly) {
 		if (!php_stream_truncate_supported(fp)) {
@@ -98,7 +98,6 @@ inifile * inifile_alloc(php_stream *fp, int readonly, int persistent TSRMLS_DC)
 	dba = pemalloc(sizeof(inifile), persistent);
 	memset(dba, 0, sizeof(inifile));
 	dba->fp = fp;
-	dba->fd = fd;
 	dba->readonly = readonly;
 	return dba;
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: inifile.h,v 1.2 2003/06/10 20:03:27 imajes Exp $ */
+/* $Id: inifile.h,v 1.3 2003/12/14 22:07:29 helly Exp $ */
 
 #ifndef PHP_LIB_INIFILE_H
 #define PHP_LIB_INIFILE_H
@@ -40,7 +40,6 @@ typedef struct {
 	char *lockfn;
 	int lockfd;
 	php_stream *fp;
-	int fd;
 	int readonly;
 	line_type curr;
 	line_type next;

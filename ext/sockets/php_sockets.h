@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.24 2002/05/01 11:08:08 mfischer Exp $ */
+/* $Id: php_sockets.h,v 1.25 2002/09/30 02:09:42 jason Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -41,6 +41,8 @@ extern zend_module_entry sockets_module_entry;
 
 PHP_MINIT_FUNCTION(sockets);
 PHP_MINFO_FUNCTION(sockets);
+PHP_RINIT_FUNCTION(sockets);
+PHP_RSHUTDOWN_FUNCTION(sockets);
 
 PHP_FUNCTION(socket_iovec_alloc);
 PHP_FUNCTION(socket_iovec_free);
@@ -103,7 +105,8 @@ int accept_connect(php_socket *in_sock, php_socket **new_sock, struct sockaddr *
 int php_read(int bsd_socket, void *buf, int maxlen);
 
 ZEND_BEGIN_MODULE_GLOBALS(sockets)
-    int last_error;
+	int last_error;
+	char *strerror_buf;
 ZEND_END_MODULE_GLOBALS(sockets)
 
 #ifdef ZTS

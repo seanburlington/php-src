@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.110 2002/03/24 10:40:21 derick Exp $ */
+/* $Id: curl.c,v 1.111 2002/04/03 23:59:36 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -797,8 +797,8 @@ PHP_FUNCTION(curl_setopt)
 				}
 			}
 
+			SAVE_CURL_ERROR(ch, error);
 			if (error != CURLE_OK) {
-				SAVE_CURL_ERROR(ch, error);
 				RETURN_FALSE;
 			}
 
@@ -856,9 +856,9 @@ PHP_FUNCTION(curl_setopt)
 		break;
 	}
 	}
-	
+
+	SAVE_CURL_ERROR(ch, error);
 	if (error != CURLE_OK) {
-		SAVE_CURL_ERROR(ch, error);
 		RETURN_FALSE;
 	} else {
 		RETURN_TRUE;
@@ -881,10 +881,10 @@ PHP_FUNCTION(curl_exec)
 	ZEND_FETCH_RESOURCE(ch, php_curl *, zid, -1, le_curl_name, le_curl);
 
 	error = curl_easy_perform(ch->cp);
+	SAVE_CURL_ERROR(ch, error);
 	if (error != CURLE_OK) {
 		if (ch->handlers->write->buf.len > 0)
 			smart_str_free(&ch->handlers->write->buf);
-		SAVE_CURL_ERROR(ch, error);
 		RETURN_FALSE;
 	}
 

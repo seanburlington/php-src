@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.292 2001/01/08 01:40:33 hirokawa Exp $ */
+/* $Id: basic_functions.c,v 1.293 2001/01/08 02:39:52 hirokawa Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -197,6 +197,7 @@ function_entry basic_functions[] = {
 #ifdef HAVE_ICONV
     PHP_FE(iconv,									NULL)
     PHP_FE(ob_iconv_handler,						NULL)
+    PHP_FE(iconv_set_encoding,						NULL)
 #endif
 	PHP_FE(parse_url,								NULL)
 	PHP_FE(urlencode,								NULL)

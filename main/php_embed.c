@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Edin Kadrinasic <edink@php.net>                              |
+   | Author: Edin Kadribasic <edink@php.net>                              |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_embed.c,v 1.1 2002/09/29 02:45:25 edink Exp $ */
+/* $Id: php_embed.c,v 1.2 2002/09/29 10:00:07 derick Exp $ */
 
 #include "php_embed.h"
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.39.4.6 2003/02/06 22:23:36 pollita Exp $ */
+/* $Id: bcmath.c,v 1.39.4.7 2003/04/02 23:50:41 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -96,7 +96,7 @@ PHP_RINIT_FUNCTION(bcmath)
 	if (cfg_get_long("bcmath.scale", &bc_precision)==FAILURE) {
 		bc_precision=0;
 	}
-	
+	if(bc_precision<0) bc_precision=0;
 	bc_init_numbers(TSRMLS_C);
 	
 	return SUCCESS;
@@ -144,7 +144,7 @@ PHP_FUNCTION(bcadd)
 		        	WRONG_PARAM_COUNT;
     			}
 				convert_to_long_ex(scale_param);
-				scale = (int) Z_LVAL_PP(scale_param);
+				scale = (int) (Z_LVAL_PP(scale_param)<0) ? 0:Z_LVAL_PP(scale_param);
 				break;
 		default:
 				WRONG_PARAM_COUNT;
@@ -189,7 +189,7 @@ PHP_FUNCTION(bcsub)
 		        	WRONG_PARAM_COUNT;
     			}
 				convert_to_long_ex(scale_param);
-				scale = (int) Z_LVAL_PP(scale_param);
+				scale = (int) (Z_LVAL_PP(scale_param)<0) ? 0:Z_LVAL_PP(scale_param);
 				break;
 		default:
 				WRONG_PARAM_COUNT;
@@ -234,7 +234,7 @@ PHP_FUNCTION(bcmul)
 		        	WRONG_PARAM_COUNT;
     			}
 				convert_to_long_ex(scale_param);
-				scale = (int) Z_LVAL_PP(scale_param);
+				scale = (int) (Z_LVAL_PP(scale_param)<0) ? 0:Z_LVAL_PP(scale_param);
 				break;
 		default:
 				WRONG_PARAM_COUNT;
@@ -279,7 +279,7 @@ PHP_FUNCTION(bcdiv)
 		        	WRONG_PARAM_COUNT;
     			}
 				convert_to_long_ex(scale_param);
-				scale = (int) Z_LVAL_PP(scale_param);
+				scale = (int) (Z_LVAL_PP(scale_param)<0) ? 0:Z_LVAL_PP(scale_param);
 				break;
 		default:
 				WRONG_PARAM_COUNT;
@@ -371,7 +371,7 @@ PHP_FUNCTION(bcpow)
 		        	WRONG_PARAM_COUNT;
     			}
 				convert_to_long_ex(scale_param);
-				scale = (int) Z_LVAL_PP(scale_param);
+				scale = (int) (Z_LVAL_PP(scale_param)<0) ? 0:Z_LVAL_PP(scale_param);
 				break;
 		default:
 				WRONG_PARAM_COUNT;
@@ -416,7 +416,7 @@ PHP_FUNCTION(bcsqrt)
 		        	WRONG_PARAM_COUNT;
     			}
 				convert_to_long_ex(scale_param);
-				scale = (int) Z_LVAL_PP(scale_param);
+				scale = (int) (Z_LVAL_PP(scale_param)<0) ? 0:Z_LVAL_PP(scale_param);
 				break;
 		default:
 				WRONG_PARAM_COUNT;
@@ -458,7 +458,7 @@ PHP_FUNCTION(bccomp)
 		        	WRONG_PARAM_COUNT;
     			}
 				convert_to_long_ex(scale_param);
-				scale = (int) Z_LVAL_PP(scale_param);
+				scale = (int) (Z_LVAL_PP(scale_param)<0) ? 0:Z_LVAL_PP(scale_param);
 				break;
 		default:
 				WRONG_PARAM_COUNT;
@@ -492,7 +492,8 @@ PHP_FUNCTION(bcscale)
 	}
 	
 	convert_to_long_ex(new_scale);
-	bc_precision = Z_LVAL_PP(new_scale);
+	bc_precision = (Z_LVAL_PP(new_scale)<0) ? 0 : Z_LVAL_PP(new_scale);
+
 	RETURN_TRUE;
 }
 /* }}} */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.40 2000/01/15 20:39:06 andrei Exp $ */
+/* $Id: fsock.c,v 1.41 2000/01/17 17:33:21 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -752,17 +752,16 @@ size_t php_sock_fread(char *ptr, size_t size, int socket)
 /* {{{ module start/shutdown functions */
 
 	/* {{{ php_msock_destroy */
-int php_msock_destroy(int *data)
+void php_msock_destroy(int *data)
 {
 	close(*data);
-	return 1;
 }
 /* }}} */
 
 static void fsock_globals_ctor(FLS_D)
 {
 	zend_hash_init(&FG(ht_fsock_keys), 0, NULL, NULL, 1);
-	zend_hash_init(&FG(ht_fsock_socks), 0, NULL, (int (*)(void *))php_msock_destroy, 1);
+	zend_hash_init(&FG(ht_fsock_socks), 0, NULL, (void (*)(void *))php_msock_destroy, 1);
 	FG(def_chunk_size) = CHUNK_SIZE;
 	FG(phpsockbuf) = NULL;
 }

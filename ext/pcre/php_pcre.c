@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.38 2000/01/15 21:35:50 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.39 2000/01/17 17:33:20 zeev Exp $ */
 
 /*
 	TODO:
@@ -60,14 +60,13 @@ static void php_pcre_free(void *ptr)
 }
 
 
-static int _php_free_pcre_cache(void *data)
+static void _php_free_pcre_cache(void *data)
 {
 	pcre_cache_entry *pce = (pcre_cache_entry *) data;
 	pefree(pce->re, 1);
 #if HAVE_SETLOCALE
 	pefree((void*)pce->tables, 1);
 #endif
-	return 1;
 }
 
 

@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.28 2000/01/01 01:31:27 sas Exp $ */
+/* $Id: configuration-parser.y,v 1.29 2000/01/17 17:33:20 zeev Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -124,22 +124,20 @@ static void yyerror(char *str)
 }
 
 
-static int pvalue_config_destructor(pval *pvalue)
+static void pvalue_config_destructor(pval *pvalue)
 {
 	if (pvalue->type == IS_STRING && pvalue->value.str.val != empty_string) {
 		free(pvalue->value.str.val);
 	}
-	return 1;
 }
 
 
-static int pvalue_browscap_destructor(pval *pvalue)
+static void pvalue_browscap_destructor(pval *pvalue)
 {
 	if (pvalue->type == IS_OBJECT || pvalue->type == IS_ARRAY) {
 		zend_hash_destroy(pvalue->value.ht);
 		free(pvalue->value.ht);
 	}
-	return 1;
 }
 
 
@@ -147,7 +145,7 @@ int php_init_config(void)
 {
 	PLS_FETCH();
 
-	if (zend_hash_init(&configuration_hash, 0, NULL, (int (*)(void *))pvalue_config_destructor, 1)==FAILURE) {
+	if (zend_hash_init(&configuration_hash, 0, NULL, (void (*)(void *))pvalue_config_destructor, 1)==FAILURE) {
 		return FAILURE;
 	}
 
@@ -246,7 +244,7 @@ PHP_MINIT_FUNCTION(browscap)
 	char *browscap = INI_STR("browscap");
 
 	if (browscap) {
-		if (zend_hash_init(&browser_hash, 0, NULL, (int (*)(void *))pvalue_browscap_destructor, 1)==FAILURE) {
+		if (zend_hash_init(&browser_hash, 0, NULL, (void (*)(void *))pvalue_browscap_destructor, 1)==FAILURE) {
 			return FAILURE;
 		}
 
@@ -461,7 +459,7 @@ statement:
 
 				/*printf("'%s' (%d)\n",$1.value.str.val,$1.value.str.len+1);*/
 				tmp.value.ht = (HashTable *) malloc(sizeof(HashTable));
-				zend_hash_init(tmp.value.ht, 0, NULL, (int (*)(void *))pvalue_config_destructor, 1);
+				zend_hash_init(tmp.value.ht, 0, NULL, (void (*)(void *))pvalue_config_destructor, 1);
 				tmp.type = IS_OBJECT;
 				zend_hash_update(activezend_hash_table, $1.value.str.val, $1.value.str.len+1, (void *) &tmp, sizeof(pval), (void **) &current_section);
 				tmp.value.str.val = zend_strndup($1.value.str.val,$1.value.str.len);

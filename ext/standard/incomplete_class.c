@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: incomplete_class.c,v 1.3 2000/06/24 13:27:34 zeev Exp $ */
+/* $Id: incomplete_class.c,v 1.4 2000/09/30 16:13:48 andi Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -47,7 +47,7 @@ static void incomplete_class_message(zend_property_reference *ref)
 	
 	efree(class_name);
 
-	php_error(E_ERROR, buf);
+	php_error(E_ERROR, "%s", buf);
 }
 
 static void incomplete_class_call_func(INTERNAL_FUNCTION_PARAMETERS, zend_property_reference *property_reference)

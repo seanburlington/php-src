@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.69 2000/09/29 19:08:17 sas Exp $ */
+/* $Id: mod_php4.c,v 1.70 2000/09/30 16:11:15 andi Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -278,7 +278,7 @@ static void php_apache_log_message(char *message)
 		log_error(message, ((request_rec *) SG(server_context))->server);
 #endif
 	} else {
-		fprintf(stderr, message);
+		fprintf(stderr, "%s", message);
 		fprintf(stderr, "\n");
 	}
 }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.113 2000/08/27 22:46:40 rasmus Exp $ */
+/* $Id: info.c,v 1.114 2000/09/30 16:12:54 andi Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -51,7 +51,7 @@ static int _display_module_info(zend_module_entry *module, void *arg)
 	} else if (!show_info_func && !module->info_func) {
 		php_printf("<TR VALIGN=\"baseline\" BGCOLOR=\"" PHP_CONTENTS_COLOR "\">");
 		php_printf("<TD>");
-		php_printf(module->name);
+		php_printf("%s", module->name);
 		php_printf("</TD></TR>\n");
 	}
 	return 0;

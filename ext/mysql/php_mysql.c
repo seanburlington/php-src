@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.174.2.13 2003/05/28 16:18:14 rasmus Exp $ */
+/* $Id: php_mysql.c,v 1.174.2.14 2003/05/30 13:00:17 georg Exp $ */
 
 /* TODO:
  *
@@ -557,6 +557,11 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 				WRONG_PARAM_COUNT;
 				break;
 		}
+		/* disable local infile option for open_basedir */
+		if (strlen(PG(open_basedir))) {
+			client_flags ^= CLIENT_LOCAL_FILES;
+		}
+
 		if (z_host) {
 			SEPARATE_ZVAL(z_host); /* We may modify z_host if it contains a port, separate */
 			convert_to_string_ex(z_host);

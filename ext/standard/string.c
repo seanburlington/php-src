@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.362 2003/03/06 23:07:27 ddhill Exp $ */
+/* $Id: string.c,v 1.363 2003/03/09 00:05:48 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -623,7 +623,7 @@ PHP_FUNCTION(ltrim)
 }
 /* }}} */
 
-/* {{{ proto string wordwrap(string str [, int width [, string break [, int cut]]])
+/* {{{ proto string wordwrap(string str [, int width [, string break [, boolean cut]]])
    Wraps buffer to selected number of characters using string break char */
 PHP_FUNCTION(wordwrap)
 {

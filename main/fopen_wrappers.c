@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.111 2001/02/26 06:07:31 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.112 2001/04/16 23:20:47 ssb Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -348,7 +348,9 @@ PHPAPI FILE *php_fopen_primary_script(void)
 		STR_FREE(SG(request_info).path_translated);	/* for same reason as above */
 		return NULL;
 	}
-	V_CHDIR_FILE(filename);
+    if (!(SG(options) & SAPI_OPTION_NO_CHDIR)) {
+		V_CHDIR_FILE(filename);
+    }
 	SG(request_info).path_translated = filename;
 
 	return fp;

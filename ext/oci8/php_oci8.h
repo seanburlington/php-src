@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.15 2001/04/25 17:44:07 asautins Exp $ */
+/* $Id: php_oci8.h,v 1.16 2001/05/04 14:53:45 thies Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -47,7 +47,7 @@
 typedef struct {
 	int num;
 	int persistent;
-	int open;
+	int is_open;
 	char *dbname;
     OCIServer *pServer;
 #if 0
@@ -58,7 +58,7 @@ typedef struct {
 typedef struct {
 	int num;
 	int persistent;
-	int open;
+	int is_open;
 	int exclusive;
 	char *hashed_details;
 	oci_server *server;
@@ -67,7 +67,7 @@ typedef struct {
 
 typedef struct {
 	int id;
-	int open;
+	int is_open;
 	oci_session *session;
     OCISvcCtx *pServiceContext;
 	sword error;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.27 2003/05/16 23:24:55 pollita Exp $ */
+/* $Id: string.c,v 1.333.2.28 2003/05/26 02:00:37 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2728,6 +2728,7 @@ PHP_FUNCTION(str_replace)
 		while (zend_hash_get_current_data(Z_ARRVAL_PP(subject), (void **)&subject_entry) == SUCCESS) {
 			if (Z_TYPE_PP(subject_entry) != IS_ARRAY && Z_TYPE_PP(subject_entry) != IS_OBJECT) {
 				MAKE_STD_ZVAL(result);
+				SEPARATE_ZVAL(subject_entry);
 				php_str_replace_in_subject(*search, *replace, subject_entry, result);
 			} else {
 				result = *subject_entry;

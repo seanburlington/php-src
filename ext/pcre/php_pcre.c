@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.132.2.6 2003/05/20 18:12:07 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.132.2.7 2003/05/26 02:00:37 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1085,6 +1085,7 @@ static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_callabl
 		/* For each subject entry, convert it to string, then perform replacement
 		   and add the result to the return_value array. */
 		while (zend_hash_get_current_data(Z_ARRVAL_PP(subject), (void **)&subject_entry) == SUCCESS) {
+			SEPARATE_ZVAL(subject_entry);
 			if ((result = php_replace_in_subject(*regex, *replace, subject_entry, &result_len, limit_val, is_callable_replace TSRMLS_CC)) != NULL) {
 				/* Add to return array */
 				switch(zend_hash_get_current_key(Z_ARRVAL_PP(subject), &string_key, &num_key, 0))

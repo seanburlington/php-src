@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.153 2002/05/18 10:05:21 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.154 2002/05/18 14:21:46 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -1262,7 +1262,7 @@ PHP_MINIT_FUNCTION(domxml)
 	   Therefore nodes, attributes etc. may not be freed seperately.
 	 */
 	le_domxmlnodep = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domnode", module_number);
-	le_domxmlcommentp = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domnode", module_number);
+	le_domxmlcommentp = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domcomment", module_number);
 	le_domxmlattrp = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domattribute", module_number);
 	le_domxmltextp = zend_register_list_destructors_ex(php_free_xml_node, NULL, "domtext", module_number);
 	le_domxmlelementp =	zend_register_list_destructors_ex(php_free_xml_node, NULL, "domelement", module_number);

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.74 2003/10/26 16:00:58 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.75 2003/10/27 01:12:53 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1191,6 +1191,10 @@ PHP_FUNCTION(simplexml_import_dom)
 
 	if (object->node && object->node->node) {
 		nodep = object->node->node;
+		if (nodep->doc == NULL) {
+			php_error(E_WARNING, "Imported Node must have associated Document");
+			RETURN_NULL();
+		}
 		if (nodep->type == XML_DOCUMENT_NODE || nodep->type == XML_HTML_DOCUMENT_NODE) {
 			nodep = xmlDocGetRootElement((xmlDocPtr) nodep);
 		}
@@ -1291,7 +1295,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.74 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.75 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.h,v 1.4 2005/02/23 11:25:32 rrichards Exp $ */
+/* $Id: php_xmlwriter.h,v 1.5 2005/02/24 15:08:37 pajoye Exp $ */
 
 #ifndef PHP_XMLWRITER_H
 #define PHP_XMLWRITER_H
@@ -81,6 +81,7 @@ PHP_FUNCTION(xmlwriter_end_dtd_element);
 PHP_FUNCTION(xmlwriter_open_uri);
 PHP_FUNCTION(xmlwriter_open_memory);
 PHP_FUNCTION(xmlwriter_output_memory);
+PHP_FUNCTION(xmlwriter_flush);
 
 #ifdef ZTS
 #define XMLWRITER_G(v) TSRMG(xmlwriter_globals_id, zend_xmlwriter_globals *, v)

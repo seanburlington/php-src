@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.4 2000/09/03 17:43:09 derick Exp $ */
+/* $Id: php_sybase_db.c,v 1.5 2000/10/19 16:09:29 joey Exp $ */
 
 
 #include "php.h"
@@ -274,7 +274,7 @@ static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 				}
 				convert_to_string(yyhost);
 				host = yyhost->value.str.val;
-				user=passwd=NULL;
+				user=passwd=charset=NULL;
 				hashed_details_length = yyhost->value.str.len+6+3;
 				hashed_details = (char *) emalloc(hashed_details_length+1);
 				sprintf(hashed_details,"sybase_%s__",yyhost->value.str.val);
@@ -290,7 +290,7 @@ static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 				convert_to_string(yyuser);
 				host = yyhost->value.str.val;
 				user = yyuser->value.str.val;
-				passwd=NULL;
+				passwd=charset=NULL;
 				hashed_details_length = yyhost->value.str.len+yyuser->value.str.len+6+3;
 				hashed_details = (char *) emalloc(hashed_details_length+1);
 				sprintf(hashed_details,"sybase_%s_%s_",yyhost->value.str.val,yyuser->value.str.val);
@@ -308,6 +308,7 @@ static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 				host = yyhost->value.str.val;
 				user = yyuser->value.str.val;
 				passwd = yypasswd->value.str.val;
+				charset = NULL;
 				hashed_details_length = yyhost->value.str.len+yyuser->value.str.len+yypasswd->value.str.len+6+3;
 				hashed_details = (char *) emalloc(hashed_details_length+1);
 				sprintf(hashed_details,"sybase_%s_%s_%s",yyhost->value.str.val,yyuser->value.str.val,yypasswd->value.str.val); /* SAFE */

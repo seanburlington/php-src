@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.41 2001/07/11 11:39:08 zeev Exp $ */
+/* $Id: url.c,v 1.42 2001/07/11 12:42:22 thies Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -295,7 +295,7 @@ PHP_FUNCTION(urlencode)
 	convert_to_string_ex(arg);
 
 	if (!(*arg)->value.str.len) {
-		ZVAL_BOOL(return_value, 0);
+		ZVAL_FALSE(return_value);
 		return;
 	}
 	str = php_url_encode((*arg)->value.str.val, (*arg)->value.str.len, &str_len);
@@ -316,7 +316,7 @@ PHP_FUNCTION(urldecode)
 	convert_to_string_ex(arg);
 
 	if (!(*arg)->value.str.len) {
-		ZVAL_BOOL(return_value, 0);
+		ZVAL_FALSE(return_value);
 		return;
 	}
 

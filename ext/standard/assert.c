@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.32 2001/07/09 10:20:39 thies Exp $ */
+/* $Id: assert.c,v 1.33 2001/07/11 12:42:22 thies Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -201,7 +201,7 @@ PHP_FUNCTION(assert)
 		ZVAL_STRING(args[2],SAFE_STRING(myeval),1);
 		
 		MAKE_STD_ZVAL(retval);
-		ZVAL_BOOL(retval,0);
+		ZVAL_FALSE(retval);
 
 		/* XXX do we want to check for error here? */
 		call_user_function(CG(function_table), NULL, ASSERT(callback), retval, 3, args);

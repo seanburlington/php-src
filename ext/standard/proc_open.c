@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.17 2003/12/05 13:45:00 wez Exp $ */
+/* $Id: proc_open.c,v 1.18 2003/12/05 13:48:40 wez Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -467,11 +467,11 @@ PHP_FUNCTION(proc_open)
 	SECURITY_ATTRIBUTES security;
 	char *command_with_cmd;
 	UINT old_error_mode;
-	int suppress_errors = 0;
 #endif
 	php_process_id_t child;
 	struct php_process_handle *proc;
 	int is_persistent = 0; /* TODO: ensure that persistent procs will work */
+	int suppress_errors = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "saz|s!a!a!", &command,
 				&command_len, &descriptorspec, &pipes, &cwd, &cwd_len, &environment,

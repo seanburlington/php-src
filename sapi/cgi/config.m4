@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.18 2002/09/04 18:47:26 sniper Exp $
+dnl $Id: config.m4,v 1.19 2002/09/29 16:22:48 sas Exp $
 dnl
 
 AC_DEFUN(PHP_TEST_WRITE_STDOUT,[
@@ -32,6 +32,9 @@ main()
 ])
 
 if test "$PHP_SAPI" = "default"; then
+  PHP_ADD_MAKEFILE_FRAGMENT($abs_srcdir/sapi/cgi/Makefile.frag)
+  SAPI_CGI_PATH=sapi/cgi/php-cgi
+  PHP_SUBST(SAPI_CGI_PATH)
 
   PHP_TEST_WRITE_STDOUT
 
@@ -61,7 +64,7 @@ if test "$PHP_SAPI" = "default"; then
   fi
   AC_DEFINE_UNQUOTED(DISCARD_PATH, $DISCARD_PATH, [ ])
 
-  INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_PROGRAM \$(INSTALL_ROOT)\$(bindir)/php-cgi"
+  INSTALL_IT="\$(INSTALL) -m 0755 \$(SAPI_CGI_PATH) \$(INSTALL_ROOT)\$(bindir)/php-cgi"
 fi
 
 AC_MSG_CHECKING(for fhttpd module support)
@@ -100,10 +103,10 @@ PHP_SUBST(FHTTPD_TARGET)
 
 case $host_alias in
   *darwin*)
-    BUILD_CGI="\$(CC) \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS) \$(LDFLAGS) \$(NATIVE_RPATHS) \$(PHP_GLOBAL_OBJS:.lo=.o) \$(PHP_SAPI_OBJS:.lo=.o) \$(PHP_FRAMEWORKS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o php"
+    BUILD_CGI="\$(CC) \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS) \$(LDFLAGS) \$(NATIVE_RPATHS) \$(PHP_GLOBAL_OBJS:.lo=.o) \$(PHP_SAPI_OBJS:.lo=.o) \$(PHP_FRAMEWORKS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CGI_PATH)"
     ;;
   *)
-    BUILD_CGI="\$(LIBTOOL) --mode=link \$(CC) -export-dynamic \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS) \$(LDFLAGS) \$(PHP_RPATHS) \$(PHP_GLOBAL_OBJS) \$(PHP_SAPI_OBJS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o php"
+    BUILD_CGI="\$(LIBTOOL) --mode=link \$(CC) -export-dynamic \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS) \$(LDFLAGS) \$(PHP_RPATHS) \$(PHP_GLOBAL_OBJS) \$(PHP_SAPI_OBJS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CGI_PATH)"
     ;;
 esac
 PHP_SUBST(BUILD_CGI)

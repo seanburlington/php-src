@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.198 2003/01/07 15:55:59 ldixon Exp $ */
+/* $Id: oci8.c,v 1.199 2003/01/18 19:41:41 iliaa Exp $ */
 
 /* TODO list:
  *
@@ -640,7 +640,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.198 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.199 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -4034,10 +4034,7 @@ PHP_FUNCTION(ocifetchinto)
 	}
 	
 	zval_dtor(*array);
-	if (array_init(*array) == FAILURE) {
-		php_error(E_WARNING, "OCIFetchInto: unable to convert arg 2 to array");
-		RETURN_FALSE;
-	}
+	array_init(*array);
 
 	for (i = 0; i < statement->ncolumns; i++) {
 		column = oci_get_col(statement, i + 1, 0);

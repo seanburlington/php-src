@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.99 2003/01/12 06:28:41 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.100 2003/01/18 19:41:45 iliaa Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -1280,9 +1280,7 @@ static void php_mssql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 		RETURN_FALSE;
 	}
 	
-	if (array_init(return_value)==FAILURE) {
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 	
 	for (i=0; i<result->num_fields; i++) {
 		if (Z_TYPE(result->data[result->cur_row][i]) != IS_NULL) {
@@ -1838,15 +1836,8 @@ PHP_FUNCTION(mssql_init)
 
 	statement=NULL;
 	statement = ecalloc(1,sizeof(mssql_statement));
-	
-	if (statement!=NULL) {
-		statement->link = mssql_ptr;
-		statement->executed=FALSE;
-	}
-	else {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "unable to allocate statement");
-		RETURN_FALSE;
-	}
+	statement->link = mssql_ptr;
+	statement->executed=FALSE;
 
 	statement->id = zend_list_insert(statement,le_statement);
 	

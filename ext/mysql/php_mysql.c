@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.182 2003/01/08 11:00:06 georg Exp $ */
+/* $Id: php_mysql.c,v 1.183 2003/01/18 19:41:44 iliaa Exp $ */
 
 /* TODO:
  *
@@ -1888,9 +1888,7 @@ static void php_mysql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type, 
 		RETURN_FALSE;
 	}
 
-	if (array_init(return_value)==FAILURE) {
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 	
 	mysql_field_seek(mysql_result, 0);
 	for (mysql_field=mysql_fetch_field(mysql_result), i=0; mysql_field; mysql_field=mysql_fetch_field(mysql_result), i++) {
@@ -2012,9 +2010,7 @@ PHP_FUNCTION(mysql_fetch_lengths)
 	if ((lengths=mysql_fetch_lengths(mysql_result))==NULL) {
 		RETURN_FALSE;
 	}
-	if (array_init(return_value)==FAILURE) {
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 	num_fields = mysql_num_fields(mysql_result);
 	
 	for (i=0; i<num_fields; i++) {

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ii.c,v 1.32 2002/12/31 16:06:47 sebastian Exp $ */
+/* $Id: ii.c,v 1.33 2003/01/18 19:41:55 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1067,9 +1067,7 @@ static void php_ii_fetch(INTERNAL_FUNCTION_PARAMETERS, II_LINK *ii_link, int res
 	int len, should_copy, correct_length;
 
 	/* array initialization */
-	if (array_init(return_value) == FAILURE) {
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 
 	/* going through all fields */
 	for (i = 1; i <= ii_link->fieldCount;) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.596 2004/03/14 23:56:07 helly Exp $ */
+/* $Id: main.c,v 1.597 2004/03/16 10:14:57 helly Exp $ */
 
 /* {{{ includes
  */
@@ -424,34 +424,6 @@ static int php_during_module_shutdown()
 }
 /* }}} */
 
-/* {{{ get_active_class_name */
-static char *get_active_class_name(char **space TSRMLS_DC)
-{
-	if (!zend_is_executing(TSRMLS_C)) {
-		if (space) {
-			*space = "";
-		}
-		return "";
-	}
-	switch (EG(function_state_ptr)->function->type) {
-		case ZEND_USER_FUNCTION:
-		case ZEND_INTERNAL_FUNCTION:
-		{
-			zend_class_entry *ce = EG(function_state_ptr)->function->common.scope;
-
-			if (space) {
-				*space = ce ? "::" : "";
-			}
-			return ce ? ce->name : "";
-		}
-		default:
-			if (space) {
-				*space = "";
-			}
-			return "";
-	}
-}
-/* }}} */
 /* }}} */
 
 /* {{{ php_verror */

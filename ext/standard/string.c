@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.45 1999/09/27 18:00:30 sas Exp $ */
+/* $Id: string.c,v 1.46 1999/09/28 17:37:04 andi Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -403,7 +403,6 @@ PHPAPI char *_php3_strtoupper(char *s)
 PHP_FUNCTION(strtoupper)
 {
 	pval **arg;
-	char *ret;
 	
 	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &arg)) {
 		WRONG_PARAM_COUNT;

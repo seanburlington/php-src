@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.133 2004/10/30 10:13:27 helly Exp $ */
+/* $Id: php_reflection.c,v 1.134 2004/10/30 19:53:25 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -3257,7 +3257,7 @@ ZEND_METHOD(reflection_extension, getFunctions)
 			
 			ALLOC_ZVAL(function);
 			reflection_function_factory(fptr, function TSRMLS_CC);
-			add_next_index_zval(return_value, function);
+			add_assoc_zval_ex(return_value, func->fname, strlen(func->fname)+1, function);
 			func++;
 		}
 	}

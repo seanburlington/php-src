@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.155.2.20 2004/06/07 13:51:59 iliaa Exp $ */
+/* $Id: SAPI.c,v 1.155.2.21 2004/06/08 13:23:46 iliaa Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -640,7 +640,7 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 							efree(lower_temp);
 						}
 					}
-					newlen = sizeof("WWW-Authenticate: ") + result_len;
+					newlen = sizeof("WWW-Authenticate: ") - 1  + result_len;
 					newheader = emalloc(newlen+1);
 					sprintf(newheader,"WWW-Authenticate: %s", result);
 					efree(header_line);

@@ -20,7 +20,7 @@
  * "streamable simplified chinese code filter and converter"
  */
 
-/* $Id: mbfilter_cn.c,v 1.4 2002/05/12 13:06:13 hirokawa Exp $ */
+/* $Id: mbfilter_cn.c,v 1.5 2002/05/15 12:13:56 hirokawa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -353,7 +353,7 @@ mbfl_filt_conv_wchar_hz(int c, mbfl_convert_filter *filter TSRMLS_DC)
 	} else if (c >= ucs_hff_cp936_table_min && c < ucs_hff_cp936_table_max) {
 		s = ucs_hff_cp936_table[c - ucs_hff_cp936_table_min];
 	}
-	if (s >= 0x0080) {
+	if (s & 0x8000) {
 		s -= 0x8080;
 	}
 

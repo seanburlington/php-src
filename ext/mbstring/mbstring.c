@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.67 2002/05/08 12:30:47 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.68 2002/05/15 12:13:56 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -65,7 +65,7 @@
 #include "php_content_types.h"
 #include "SAPI.h"
 
-#ifdef ZEND_MULTIBYTE
+#if ZEND_MULTIBYTE
 #include "zend_multibyte.h"
 #endif /* ZEND_MULTIBYTE */
 

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.18 1999/06/26 00:34:36 sas Exp $ */
+/* $Id: php.h,v 1.19 1999/07/03 03:34:47 sas Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -174,7 +174,15 @@ extern char *strerror(int);
 
 #if APACHE /* apache httpd */
 # if HAVE_AP_CONFIG_H
+#include "ap_config_auto.h"
+#ifdef RHAPSODY
+#undef HAVE_SNPRINTF
+#endif
 #include "ap_config.h"
+#ifdef RHAPSODY
+#undef HAVE_SNPRINTF
+#define HAVE_SNPRINTF 1
+#endif
 # endif
 # if HAVE_OLD_COMPAT_H
 #include "compat.h"

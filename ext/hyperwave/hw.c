@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.27 1999/12/07 10:49:18 steinm Exp $ */
+/* $Id: hw.c,v 1.28 1999/12/14 12:50:20 steinm Exp $ */
 #if COMPILE_DL
 #include "dl/phpdl.h"
 #endif
@@ -2513,8 +2513,8 @@ PHP_FUNCTION(hw_output_document) {
 		RETURN_FALSE;
 	}
 
-	php3_header();
-	php3_write(ptr->data, ptr->size);
+	if(php3_header())
+		php3_write(ptr->data, ptr->size);
 
 	RETURN_TRUE;
 }

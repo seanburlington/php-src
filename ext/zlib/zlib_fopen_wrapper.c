@@ -16,7 +16,7 @@
    |         Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.21 2002/03/24 18:05:33 wez Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.22 2002/03/28 00:48:59 wez Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 
@@ -88,8 +88,9 @@ static int php_gziop_flush(php_stream *stream TSRMLS_DC)
 php_stream_ops php_stream_gzio_ops = {
 	php_gziop_write, php_gziop_read,
 	php_gziop_close, php_gziop_flush,
+	"ZLIB",
 	php_gziop_seek, php_gziop_gets,
-	NULL, "ZLIB"
+	NULL, NULL
 };
 
 php_stream *php_stream_gzopen(php_stream_wrapper *wrapper, char *path, char *mode, int options, char **opened_path STREAMS_DC TSRMLS_DC)

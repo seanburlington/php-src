@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.17 2002/03/24 18:04:52 wez Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.18 2002/03/28 00:48:59 wez Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -57,6 +57,8 @@ php_stream * php_stream_url_wrap_php(php_stream_wrapper *wrapper, char *path, ch
 
 static php_stream_wrapper_ops php_stdio_wops = {
 	php_stream_url_wrap_php,
+	NULL,
+	NULL,
 	NULL
 };
 

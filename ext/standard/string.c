@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.44 2004/07/11 21:24:47 andrey Exp $ */
+/* $Id: string.c,v 1.333.2.45 2004/10/17 18:41:30 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2443,7 +2443,13 @@ PHPAPI char *php_addslashes(char *str, int length, int *new_length, int should_f
 	p = str;
 	if (!type) {
 		while (p < e) {
-			if (php_esc_list[(int)(unsigned char)*p]) {
+			int c = php_esc_list[(int)(unsigned char)*p];
+			if (c == 2) {
+				*ps++ = '\\';
+				*ps++ = '0';
+				p++;
+				continue;
+			} else if (c) {
 				*ps++ = '\\';
 			}
 			*ps++ = *p++;

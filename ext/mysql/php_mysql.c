@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.17 1999/12/28 07:54:21 sas Exp $ */
+/* $Id: php_mysql.c,v 1.18 1999/12/28 18:45:10 sas Exp $ */
 
 
 /* TODO:
@@ -28,7 +28,8 @@
 #include "php_globals.h"
 #include "php_mysql.h"
 #include "php_globals.h"
-
+#include "ext/standard/info.h"
+#include "ext/standard/php_string.h"
 
 #if WIN32|WINNT
 #include <winsock.h>

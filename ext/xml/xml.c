@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.110.2.2 2002/12/31 16:35:43 sebastian Exp $ */
+/* $Id: xml.c,v 1.110.2.3 2003/04/03 01:01:09 moriyoshi Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -1032,7 +1032,7 @@ PHP_FUNCTION(xml_parser_create)
 						Z_STRLEN_PP(encodingArg)) == 0) {
 			encoding = "US-ASCII";
 		} else { /* UTF-16 not supported */
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s: unsupported source encoding \"%s\"", Z_STRVAL_PP(encodingArg));
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "unsupported source encoding \"%s\"", Z_STRVAL_PP(encodingArg));
 			RETURN_FALSE;
 		}
 	} else {
@@ -1081,7 +1081,7 @@ PHP_FUNCTION(xml_parser_create_ns)
 						Z_STRLEN_PP(encodingArg)) == 0) {
 			encoding = "US-ASCII";
 		} else { /* UTF-16 not supported */
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s: unsupported source encoding \"%s\"", Z_STRVAL_PP(encodingArg));
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "unsupported source encoding \"%s\"", Z_STRVAL_PP(encodingArg));
 			RETURN_FALSE;
 		}
 	} else {
@@ -1136,9 +1136,9 @@ PHP_FUNCTION(xml_set_object)
 	parser->object = *mythis;
 
 	/* please leave this commented - or ask thies@thieso.net before doing it (again) */
-#ifdef ZEND_ENGINE_2
+/* #ifdef ZEND_ENGINE_2
 	zval_add_ref(&parser->object); 
-#endif
+#endif */
 
 	RETVAL_TRUE;
 }

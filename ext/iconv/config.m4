@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.30 2005/01/10 21:37:17 tony2001 Exp $
+dnl $Id: config.m4,v 1.31 2005/02/24 19:27:10 sniper Exp $
 dnl
 
 PHP_ARG_WITH(iconv, for iconv support,
@@ -113,6 +113,10 @@ int main() {
       AC_DEFINE([ICONV_SUPPORTS_ERRNO],1,[Whether iconv supports error no or not])
     ],[
       AC_MSG_RESULT(no)
+      PHP_DEFINE([ICONV_SUPPORTS_ERRNO],0,[ext/iconv])
+      AC_DEFINE([ICONV_SUPPORTS_ERRNO],0,[Whether iconv supports error no or not])
+    ],[
+      AC_MSG_RESULT(no, cross-compiling)
       PHP_DEFINE([ICONV_SUPPORTS_ERRNO],0,[ext/iconv])
       AC_DEFINE([ICONV_SUPPORTS_ERRNO],0,[Whether iconv supports error no or not])
     ])

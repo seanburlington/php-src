@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.24.4.3 2002/11/26 23:18:08 ssb Exp $
+// $Id: Registry.php,v 1.24.4.4 2002/12/13 02:14:25 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Registry.php';

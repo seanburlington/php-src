@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.81.2.2 2002/11/27 01:01:25 ssb Exp $
+// $Id: Common.php,v 1.81.2.3 2002/12/13 02:14:22 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.22.2.2 2002/11/26 21:53:43 ssb Exp $
+// $Id: Remote.php,v 1.22.2.3 2002/12/13 02:14:25 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -200,10 +200,10 @@ version of DB is 1.2, the downloaded file will be DB-1.2.tgz.',
 
             $data['data'][$info['category']][] = array(
                 $name,
-                $info['stable'],
-                $installed['version'],
-                $desc,
-                $info['deps'],
+                @$info['stable'],
+                @$installed['version'],
+                @$desc,
+                @$info['deps'],
                 );
         }
         $this->ui->outputData($data, $command);

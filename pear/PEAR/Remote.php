@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.34.2.1 2002/11/25 23:49:46 ssb Exp $
+// $Id: Remote.php,v 1.34.2.2 2002/12/13 02:14:23 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';

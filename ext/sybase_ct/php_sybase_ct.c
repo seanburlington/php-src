@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.73.2.15 2004/05/21 20:30:44 thekid Exp $ */
+/* $Id: php_sybase_ct.c,v 1.73.2.16 2004/05/21 21:00:19 edink Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1089,6 +1089,7 @@ static int php_sybase_fetch_result_row (sybase_result *result, int numrows)
 {
 	int i, j;
 	CS_INT retcode;
+	TSRMLS_FETCH();
 	
 	/* We've already fetched everything */
 	if (result->last_retcode == CS_END_DATA || result->last_retcode == CS_END_RESULTS) {

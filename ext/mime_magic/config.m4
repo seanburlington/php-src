@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 2002/09/24 06:37:17 sas Exp $
+dnl $Id: config.m4,v 1.7 2003/01/25 10:51:04 hholzgra Exp $
 dnl config.m4 for extension mime_magic
 
 PHP_ARG_ENABLE(mime-magic, whether to enable mime_magic support,
@@ -18,7 +18,7 @@ if test "$PHP_MIME_MAGIC" = "yes"; then
   elif test -f /usr/share/misc/magic.mime ; then
  	PHP_MIME_MAGIC_FILE_PATH=/usr/share/misc/magic.mime
   elif test -f /etc/magic ; then
-  	PHP_MIME_MAGIC_FILE_PATH=/etc/magic
+  	PHP_MIME_MAGIC_FILE_PATH=/etc/magic.mime
   else
   	PHP_MIME_MAGIC_FILE_PATH=""	
   fi

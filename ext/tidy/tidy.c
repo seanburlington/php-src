@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.5 2003/08/06 00:19:31 john Exp $ */
+/* $Id: tidy.c,v 1.6 2003/08/06 21:32:46 john Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1332,7 +1332,7 @@ PHP_FUNCTION(tidy_get_body) {
 
 	f = emalloc(sizeof(zend_internal_function));
 	f->type = ZEND_OVERLOADED_FUNCTION;
-	f->arg_types = NULL;
+	//f->arg_types = NULL;
 	f->scope = php_tidy_ce;
 	f->fn_flags = 0;
 	f->function_name = estrndup(method, method_len);

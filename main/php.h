@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.173 2002/08/08 19:12:27 helly Exp $ */
+/* $Id: php.h,v 1.174 2002/08/12 20:12:31 helly Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -254,6 +254,8 @@ int Debug(char *format, ...);
 int cfgparse(void);
 
 #define php_error zend_error
+
+PHPAPI void php_verror(const char *docref, const char *params, int type, const char *format, va_list args TSRMLS_DC) ;
 
 /* PHPAPI void php_error(int type, const char *format, ...); */
 PHPAPI void php_error_docref0(const char *docref TSRMLS_DC, int type, const char *format, ...);

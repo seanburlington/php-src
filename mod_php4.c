@@ -28,7 +28,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.6 1999/05/29 19:06:22 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.7 1999/06/05 17:47:16 zeev Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -379,8 +379,8 @@ static void *php_merge_dir(pool *p, void *basev, void *addv)
 {
 	php_per_dir_entry tmp;
 
-	zend_hash_merge((HashTable *) basev, (HashTable *) addv, (void (*)(void *)) copy_per_dir_entry, &tmp, sizeof(php_per_dir_entry), 1);
-	return basev;
+	zend_hash_merge((HashTable *) addv, (HashTable *) basev, (void (*)(void *)) copy_per_dir_entry, &tmp, sizeof(php_per_dir_entry), 0);
+	return addv;
 }
 
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.h,v 1.8 2004/01/08 17:32:52 sniper Exp $ */
+/* $Id: streamsfuncs.h,v 1.9 2004/07/22 12:12:28 wez Exp $ */
 
 /* Flags for stream_socket_client */
 #define PHP_STREAM_CLIENT_PERSISTENT	1
@@ -47,8 +47,10 @@ PHP_FUNCTION(stream_context_create);
 PHP_FUNCTION(stream_context_set_params);
 PHP_FUNCTION(stream_context_set_option);
 PHP_FUNCTION(stream_context_get_options);
+PHP_FUNCTION(stream_context_get_default);
 PHP_FUNCTION(stream_filter_prepend);
 PHP_FUNCTION(stream_filter_append);
+PHP_FUNCTION(stream_socket_enable_crypto);
 
 /*
  * Local variables:

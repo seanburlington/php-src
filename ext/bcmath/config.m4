@@ -1,8 +1,10 @@
-dnl $Id: config.m4,v 1.1 1999/04/21 23:28:00 ssb Exp $
+dnl $Id: config.m4,v 1.2 1999/07/17 10:14:04 zeev Exp $
 
 AC_MSG_CHECKING(whether to enable bc style precision math functions)
 AC_ARG_ENABLE(bcmath,
-[  --disable-bcmath        Compile without bc style precision math functions. ],
+[  --enable-bcmath        Compile with bc style precision math functions.
+                         Read README-BCMATH for instructions on how to
+                         get this module installed. ],
 [
   if test "$enableval" = "yes"; then
     AC_DEFINE(WITH_BCMATH, 1)
@@ -13,7 +15,6 @@ AC_ARG_ENABLE(bcmath,
     AC_MSG_RESULT(no)
   fi
 ],[
-  AC_DEFINE(WITH_BCMATH, 1)
-  AC_MSG_RESULT(yes)
-  PHP_EXTENSION(bcmath)
+  AC_DEFINE(WITH_BCMATH, 0)
+  AC_MSG_RESULT(no)
 ]) 

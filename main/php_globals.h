@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.95 2004/01/08 17:33:04 sniper Exp $ */
+/* $Id: php_globals.h,v 1.96 2004/01/26 04:15:08 sniper Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -103,7 +103,6 @@ struct _php_core_globals {
 
 	arg_separators arg_separator;
 
-	char *gpc_order;
 	char *variables_order;
 
 	HashTable rfc1867_protected_variables;

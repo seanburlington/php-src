@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ifx.ec,v 1.46 2000/08/11 16:37:46 danny Exp $ */
+/* $Id: ifx.ec,v 1.47 2000/08/12 12:03:39 danny Exp $ */
 
 /* -------------------------------------------------------------------
  * if you want a function reference : "grep '^\*\*' ifx.ec" will give
@@ -284,8 +284,10 @@ static void _close_ifx_link(link)
     IFXLS_FETCH();
 
     EXEC SQL SET CONNECTION :link;
-    EXEC SQL close database;
-    EXEC SQL DISCONNECT CURRENT;
+    if (ifx_check() >= 0) {
+      EXEC SQL close database;
+      EXEC SQL DISCONNECT CURRENT;
+    }
     efree(link);
     IFXG(num_links)--;
 }
@@ -299,9 +301,10 @@ EXEC SQL END DECLARE SECTION;
     IFXLS_FETCH();
 
     EXEC SQL SET CONNECTION :link;
-    EXEC SQL close database;
-    EXEC SQL DISCONNECT CURRENT;
-
+    if (ifx_check() >= 0) {
+      EXEC SQL close database;
+      EXEC SQL DISCONNECT CURRENT;
+    }
     free(link);
     IFXG(num_persistent)--;
     IFXG(num_links)--;

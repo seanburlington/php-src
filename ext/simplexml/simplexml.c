@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.140 2004/07/25 11:02:43 chregu Exp $ */
+/* $Id: simplexml.c,v 1.141 2004/07/25 14:59:21 chregu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -844,7 +844,7 @@ SXE_METHOD(xpath)
 	xmlXPathFreeObject(retval);
 }
 
-SXE_METHOD(registerNamespace)
+SXE_METHOD(registerXPathNamespace)
 {
 	php_sxe_object    *sxe;
 	zval *id;
@@ -1627,7 +1627,7 @@ static zend_function_entry sxe_functions[] = {
 	SXE_ME(__construct,            NULL, ZEND_ACC_PUBLIC|ZEND_ACC_FINAL) /* must be called */
 	SXE_ME(asXML,                  NULL, ZEND_ACC_PUBLIC)
 	SXE_ME(xpath,                  NULL, ZEND_ACC_PUBLIC)
-	SXE_ME(registerNamespace,      NULL, ZEND_ACC_PUBLIC)
+	SXE_ME(registerXPathNamespace,      NULL, ZEND_ACC_PUBLIC)
 	SXE_ME(attributes,             NULL, ZEND_ACC_PUBLIC)
 	SXE_ME(children,			   NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
@@ -1675,7 +1675,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.140 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.141 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

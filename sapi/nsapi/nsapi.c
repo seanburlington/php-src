@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nsapi.c,v 1.28.2.21 2003/08/04 12:46:38 thetaphi Exp $ */
+/* $Id: nsapi.c,v 1.28.2.22 2003/10/31 12:17:43 thetaphi Exp $ */
 
 /*
  * PHP includes
@@ -208,7 +208,7 @@ zend_module_entry nsapi_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(nsapi),
-	"$Revision: 1.28.2.21 $",
+	"$Revision: 1.28.2.22 $",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
@@ -511,8 +511,11 @@ static int sapi_nsapi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 	 * don't know what the implication of doing it there is.
 	 */
 	if (SG(sapi_headers).send_default_content_type) {
+		char *hd;
 		param_free(pblock_remove("content-type", rc->rq->srvhdrs));
-		pblock_nvinsert("content-type", "text/html", rc->rq->srvhdrs);
+		hd = sapi_get_default_content_type(TSRMLS_C);
+		pblock_nvinsert("content-type", hd, rc->rq->srvhdrs);
+		efree(hd);
 	}
 
 	protocol_status(rc->sn, rc->rq, SG(sapi_headers).http_response_code, NULL);

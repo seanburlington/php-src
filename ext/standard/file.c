@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.167 2001/07/15 19:03:03 zeev Exp $ */
+/* $Id: file.c,v 1.168 2001/07/16 15:44:36 stas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2041,10 +2041,10 @@ PHP_FUNCTION(fread)
 		}
 #endif
 		return_value->value.str.len = fread(return_value->value.str.val, 1, len, (FILE*)what);
-		return_value->value.str.val[return_value->value.str.len] = 0;
 	} else {
 		return_value->value.str.len = SOCK_FREAD(return_value->value.str.val, len, socketd);
 	}
+	return_value->value.str.val[return_value->value.str.len] = 0;
 	if (PG(magic_quotes_runtime)) {
 		return_value->value.str.val = php_addslashes(return_value->value.str.val,return_value->value.str.len,&return_value->value.str.len,1);
 	}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.156 2001/09/09 13:29:28 derick Exp $ */
+/* $Id: php.h,v 1.157 2001/09/17 21:02:53 sterling Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -32,6 +32,7 @@
 
 #include "php_version.h"
 #include "zend.h"
+#include "zend_qsort.h"
 #include "php_compat.h"
 
 #include "zend_API.h"
@@ -240,7 +241,7 @@ int cfgparse(void);
 /* functions */
 int php_startup_internal_extensions(void);
 
-int php_mergesort(void *base, size_t nmemb, register size_t size, int (*cmp) (const void *, const void *));
+int php_mergesort(void *base, size_t nmemb, register size_t size, int (*cmp)(const void *, const void * TSRMLS_DC) TSRMLS_DC);
 
 PHPAPI void php_register_pre_request_shutdown(void (*func)(void *), void *userdata);
 

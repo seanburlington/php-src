@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.h,v 1.19 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: file.h,v 1.20 2000/03/12 19:42:29 kk Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -76,6 +76,7 @@ PHP_FUNCTION(fstat);
 
 PHPAPI int php_set_sock_blocking(int socketd, int block);
 PHPAPI int php_file_le_fopen(void);
+PHPAPI int php_file_le_popen(void);
 PHPAPI int php_file_le_socket(void);
 PHPAPI int php_file_le_uploads(void);
 

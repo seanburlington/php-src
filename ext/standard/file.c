@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.70 2000/03/12 15:47:32 sas Exp $ */
+/* $Id: file.c,v 1.71 2000/03/12 19:42:29 kk Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -244,6 +244,11 @@ static void _file_fopen_dtor(FILE *fp)
 PHPAPI int php_file_le_fopen(void) /* XXX doe we really want this???? */
 {
 	return le_fopen;
+}
+
+PHPAPI int php_file_le_popen(void) /* XXX you may not like this, but I need it. -- KK */
+{
+	return le_popen;
 }
 
 

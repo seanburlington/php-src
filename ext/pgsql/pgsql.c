@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.142 2002/01/21 00:36:22 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.143 2002/01/24 06:20:33 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -829,6 +829,9 @@ PHP_FUNCTION(pg_query)
 	
 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, pgsql_link, id, "PostgreSQL link", le_link, le_plink);
 
+	if (PQstatus(pgsql) != CONNECTION_OK) {
+		PQreset(pgsql);
+	}
 	convert_to_string_ex(query);
 	PQsetnonblocking(pgsql, 0);
 	while ((pgsql_result = PQgetResult(pgsql))) {
@@ -2510,6 +2513,9 @@ PHP_FUNCTION(pg_send_query)
 
 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &pgsql_link, id, "PostgreSQL link", le_link, le_plink);
 
+	if (PQstatus(pgsql) != CONNECTION_OK) {
+		PQreset(pgsql);
+	}
 	if (PQsetnonblocking(pgsql, 1)) {
 		php_error(E_NOTICE,"%s() cannot set connection to nonblocking mode",
 				  get_active_function_name(TSRMLS_C));

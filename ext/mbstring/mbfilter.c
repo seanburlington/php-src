@@ -79,8 +79,9 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.17 2001/12/03 15:32:12 sas Exp $ */
+/* $Id: mbfilter.c,v 1.18 2002/02/23 00:00:15 hirokawa Exp $ */
 
+#include "php.h"
 
 #include <stdlib.h>
 #include "mbfilter.h"

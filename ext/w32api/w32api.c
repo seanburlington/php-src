@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: w32api.c,v 1.3 2002/02/28 08:26:55 sebastian Exp $ */
+/* $Id: w32api.c,v 1.3.2.1 2002/04/16 14:20:47 sander Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -41,6 +41,7 @@ function_entry w32api_functions[] = {
 	PHP_FE(w32api_deftype,							NULL)
 	PHP_FE(w32api_init_dtype,						NULL)
 	PHP_FE(w32api_set_call_method,					NULL)
+	PHP_FE(w32api_invoke_function,					NULL)
     {NULL, NULL, NULL}
 };
 /* }}} */

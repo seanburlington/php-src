@@ -26,18 +26,19 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: post.h,v 1.3 1999/09/11 13:44:23 zeev Exp $ */
+/* $Id: post.h,v 1.4 1999/09/11 14:09:29 zeev Exp $ */
 
 #ifndef _POST_H
 #define _POST_H
+
+#include "SAPI.h"
 
 #define PARSE_POST 0
 #define PARSE_GET 1
 #define PARSE_COOKIE 2
 #define PARSE_STRING 3
 
-void php3_treat_data(int arg, char *str);
-void php_parse_gpc_data(char *, char *, pval *track_vars_array);
-PHPAPI void php3_TreatHeaders(void);
+void php_treat_data(int arg, char *str ELS_DC PLS_DC SLS_DC);
+void php_parse_gpc_data(char *val, char *var, pval *track_vars_array ELS_DC PLS_DC);
 
 #endif

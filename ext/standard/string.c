@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.35 1999/09/07 20:29:31 andi Exp $ */
+/* $Id: string.c,v 1.36 1999/09/11 14:09:29 zeev Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -1873,6 +1873,9 @@ PHP_FUNCTION(parse_str)
 {
 	pval *arg;
 	char *res = NULL;
+	ELS_FETCH();
+	PLS_FETCH();
+	SLS_FETCH();
 
 	if (getParameters(ht, 1, &arg) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -1881,7 +1884,7 @@ PHP_FUNCTION(parse_str)
 	if (arg->value.str.val && *arg->value.str.val) {
 		res = estrndup(arg->value.str.val,arg->value.str.len);
 	}
-	php3_treat_data(PARSE_STRING, res);
+	php_treat_data(PARSE_STRING, res ELS_CC PLS_CC SLS_CC);
 }
 /* }}} */
 

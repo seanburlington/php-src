@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.47 2002/04/13 05:52:54 mfischer Exp $
+// $Id: Installer.php,v 1.48 2002/04/13 06:00:36 mfischer Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -100,6 +100,9 @@ class PEAR_Installer extends PEAR_Common
 
     function _deletePackageFiles($package)
     {
+        if (!strlen($package)) {
+            return $this->raiseError("No package to uninstall given");
+        }
         $filelist = $this->registry->packageInfo($package, 'filelist');
         if ($filelist == null) {
             return $this->raiseError("$package not installed");

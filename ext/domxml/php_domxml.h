@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.72.4.4 2003/08/29 20:50:52 rrichards Exp $ */
+/* $Id: php_domxml.h,v 1.72.4.5 2003/09/26 16:33:58 moriyoshi Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -246,4 +246,4 @@ typedef struct {
 #endif /* HAVE_DOMXML */
 #define phpext_domxml_ptr domxml_module_ptr
 
-#endif /* _PHP_DIR_H */
+#endif /* _PHP_DOMXML_H */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.86.2.36 2004/09/28 14:09:01 iliaa Exp $ */
+/* $Id: php_mssql.c,v 1.86.2.37 2004/09/29 12:40:09 iliaa Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -1812,7 +1812,7 @@ PHP_FUNCTION(mssql_result)
 	}
 
 	*return_value = result->data[Z_LVAL_PP(row)][field_offset];
-	ZVAL_COPY_CTOR(return_value);
+	zval_copy_ctor(return_value);
 }
 /* }}} */
 

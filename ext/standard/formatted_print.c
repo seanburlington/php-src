@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.24 2000/08/14 10:02:14 stas Exp $ */
+/* $Id: formatted_print.c,v 1.25 2000/08/14 11:07:28 stas Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -184,7 +184,7 @@ php_sprintf_appendstring(char **buffer, int *pos, int *size, char *add,
 		}
 	}
 	PRINTF_DEBUG(("sprintf: appending \"%s\"\n", add));
-	strncpy(&(*buffer)[*pos], add, max_width);
+	strncpy(&(*buffer)[*pos], add, max_width-*pos+1);
 	*pos += MIN(max_width, len);
 	if (alignment == ALIGN_LEFT) {
 		while (npad--) {

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.121 2002/10/28 03:45:21 iliaa Exp $ */
+/* $Id: streams.c,v 1.122 2002/10/28 12:37:31 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1638,6 +1638,10 @@ PHPAPI php_stream *_php_stream_fopen_with_path(char *filename, char *mode, char 
 
 }
 /* }}} */
+
+#ifndef S_ISREG
+#define S_ISREG(mode)	(((mode)&S_IFMT) == S_IFREG)
+#endif
 
 /* {{{ php_stream_fopen */
 PHPAPI php_stream *_php_stream_fopen(const char *filename, const char *mode, char **opened_path, int options STREAMS_DC TSRMLS_DC)

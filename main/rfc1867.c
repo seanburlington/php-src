@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.146 2003/11/12 22:34:58 sesser Exp $ */
+/* $Id: rfc1867.c,v 1.147 2003/11/26 09:53:22 derick Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -881,22 +881,25 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 			if (!filename && param) {
 
 				char *value = multipart_buffer_read_body(mbuff TSRMLS_CC);
+				int   val_len;
 
 				if (!value) {
 					value = estrdup("");
 				}
 
-				sapi_module.input_filter(PARSE_POST, param, &value, strlen(value) TSRMLS_CC);
+				val_len = sapi_module.input_filter(PARSE_POST, param, &value, strlen(value) TSRMLS_CC);
+				if (val_len) {
 #if HAVE_MBSTRING && !defined(COMPILE_DL_MBSTRING)
-				if (php_mb_encoding_translation(TSRMLS_C)) {
-					php_mb_gpc_stack_variable(param, value, &val_list, &len_list, 
-											  &num_vars, &num_vars_max TSRMLS_CC);
-				} else {
-					safe_php_register_variable(param, value, array_ptr, 0 TSRMLS_CC);
-				}
+					if (php_mb_encoding_translation(TSRMLS_C)) {
+						php_mb_gpc_stack_variable(param, value, &val_list, &len_list, 
+												  &num_vars, &num_vars_max TSRMLS_CC);
+					} else {
+						safe_php_register_variable(param, value, array_ptr, 0 TSRMLS_CC);
+					}
 #else
-				safe_php_register_variable(param, value, array_ptr, 0 TSRMLS_CC);
+					safe_php_register_variable(param, value, array_ptr, 0 TSRMLS_CC);
 #endif
+				}
 				if (!strcasecmp(param, "MAX_FILE_SIZE")) {
 					max_file_size = atol(value);
 				}

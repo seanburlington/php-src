@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.94 2003/12/16 20:40:24 helly Exp $ */
+/* $Id: simplexml.c,v 1.95 2003/12/17 10:28:29 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -480,7 +480,7 @@ static void sxe_prop_dim_delete(zval *object, zval *member, zend_bool elements, 
 				anext = attr->next;
 				if (!xmlStrcmp(attr->name, Z_STRVAL_P(member))) {
 					xmlUnlinkNode((xmlNodePtr) attr);
-					xmlFreeProp(attr);
+					php_libxml_node_free_resource((xmlNodePtr) attr TSRMLS_CC);
 				}
 				attr = anext;
 			}
@@ -495,7 +495,7 @@ static void sxe_prop_dim_delete(zval *object, zval *member, zend_bool elements, 
 				
 				if (!xmlStrcmp(node->name, Z_STRVAL_P(member))) {
 					xmlUnlinkNode(node);
-					xmlFreeNode(node);
+					php_libxml_node_free_resource(node TSRMLS_CC);
 				}
 
 next_iter:
@@ -1587,7 +1587,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.94 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.95 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

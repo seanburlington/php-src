@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.20 1999/12/07 20:49:01 rubys Exp $ */
+/* $Id: internal_functions_win32.c,v 1.21 1999/12/30 02:58:27 sas Exp $ */
 
 
 #include "php.h"
@@ -49,7 +49,7 @@
 #include "ext/standard/php_output.h"
 #include "ext/standard/php_array.h"
 #include "ext/standard/php_assert.h"
-#include "ext/COM/php_COM.h"
+#include "ext/com/php_COM.h"
 #include "ext/standard/reg.h"
 #include "ext/pcre/php_pcre.h"
 #include "ext/odbc/php_odbc.h"

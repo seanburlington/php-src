@@ -1,5 +1,5 @@
 # $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.14 1999/10/04 15:18:22 sas Exp $
+# $Id: config.m4,v 1.15 1999/12/30 02:59:29 sas Exp $
 
 AC_MSG_CHECKING(for XML support)
 AC_ARG_WITH(xml,
@@ -52,7 +52,5 @@ AC_ARG_WITH(xml,
 ],[
   AC_MSG_RESULT(no)
 ]) 
-AC_SUBST(XML_LIBS)
-AC_SUBST(XML_INCLUDE)
-AC_SUBST(XML_STATIC)
-AC_SUBST(XML_SHARED)
+PHP_SUBST(XML_LIBS)
+PHP_SUBST(XML_INCLUDE)

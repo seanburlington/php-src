@@ -1,4 +1,4 @@
-# $Id: config.m4,v 1.3 1999/12/29 21:24:43 sas Exp $
+# $Id: config.m4,v 1.4 1999/12/30 02:59:50 sas Exp $
 # config.m4 for servlet sapi
 
 AC_MSG_CHECKING(for Servlet support)
@@ -37,4 +37,4 @@ AC_ARG_WITH(servlet,
   AC_MSG_RESULT(no)
 ])
 
-AC_SUBST(SERVLET_CLASSPATH)
+PHP_SUBST(SERVLET_CLASSPATH)

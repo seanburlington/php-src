@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 1999/09/11 23:47:16 sas Exp $
+dnl $Id: config.m4,v 1.5 1999/12/30 02:59:20 sas Exp $
 dnl config.m4 for extension session
 dnl don't forget to call PHP_EXTENSION(session)
 
@@ -20,7 +20,7 @@ AC_ARG_WITH(mm,
 
 		AC_ADD_LIBRARY_WITH_PATH(mm, $MM_DIR/lib)
 		AC_ADD_INCLUDE($MM_DIR/include)
-		AC_DEFINE(HAVE_LIBMM, 1)
+		AC_DEFINE(HAVE_LIBMM, 1, [Whether you have libmm])
 		RESULT=yes
 		PHP_EXTENSION(ps_mm)
 	fi
@@ -33,7 +33,7 @@ AC_ARG_ENABLE(trans-sid,
 [  --enable-trans-sid      Enable transparent session id propagation],
 [
   if test "$enableval" = "yes" ; then
-    AC_DEFINE(TRANS_SID, 1)
+    AC_DEFINE(TRANS_SID, 1, [Whether you want transparent session id propagation])
 	RESULT=yes
   fi
 ])

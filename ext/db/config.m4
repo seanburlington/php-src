@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.4 1999/11/14 23:03:45 sas Exp $
+dnl $Id: config.m4,v 1.5 1999/12/30 02:58:44 sas Exp $
 dnl config.m4 for extension db
 dnl don't forget to call PHP_EXTENSION(db)
 
-divert(1)
+divert(2)dnl
 
 AC_CHECK_HEADERS(db1/ndbm.h)
 
@@ -21,13 +21,13 @@ AC_DEFUN(AC_PREFERRED_DB_LIB,[
   else
     AC_MSG_RESULT($DBM_TYPE chosen)
   fi
-  AC_SUBST(DBM_LIB)
-  AC_SUBST(DBM_TYPE)
+  PHP_SUBST(DBM_LIB)
+  PHP_SUBST(DBM_TYPE)
 ])
 
 AC_PREFERRED_DB_LIB
 
-divert(3)
+divert(4)dnl
 
 if test "$DBM_LIB" = "-lgdbm"; then
   AC_CHECK_HEADER(gdbm.h, [ GDBM_INCLUDE="" ], [ 

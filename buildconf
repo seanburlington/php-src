@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: buildconf,v 1.47 1999/12/02 02:14:06 sas Exp $
+# $Id: buildconf,v 1.48 1999/12/30 02:58:26 sas Exp $
 
 supplied_flag=$1
 
@@ -26,4 +26,4 @@ else
   subdirs=''
 fi
 
-${MAKE:-make} -s -f build.mk AMFLAGS="$automake_flags" $subdirs
+${MAKE:-make} -s -f build/build.mk AMFLAGS="$automake_flags"

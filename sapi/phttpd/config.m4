@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.2 1999/12/29 21:24:40 sas Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.3 1999/12/30 02:59:45 sas Exp $ -*- sh -*-
 
 RESULT=no
 AC_MSG_CHECKING(for PHTTPD support)
@@ -14,7 +14,7 @@ AC_ARG_WITH(phttpd,
 	AC_DEFINE(HAVE_PHTTPD,1,[Whether you have phttpd])
 	PHP_SAPI=phttpd
 	PHP_BUILD_SHARED
-	INSTALL_IT="\$(SHELL) \$(srcdir)/install-sh -m 0755 $SAPI_SHARED $PHTTPD_DIR/modules/"
+	INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_SHARED $PHTTPD_DIR/modules/"
 	RESULT=yes
 ])
 AC_MSG_RESULT($RESULT)

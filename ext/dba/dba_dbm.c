@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_dbm.c,v 1.19 2002/11/06 01:53:50 helly Exp $ */
+/* $Id: dba_dbm.c,v 1.20 2002/11/06 02:21:49 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -73,11 +73,13 @@ DBA_OPEN_FUNC(dbm)
 			fmode = "r";
 			break;
 		case DBA_WRITER:
-			fmode = "a+";
+			fmode = "r+b";
 			break;
 		case DBA_CREAT:
+			fmode = "a+b";
+			break;
 		case DBA_TRUNC:
-			fmode = "w+";
+			fmode = "w+b";
 			break;
 		default:
 			return FAILURE; /* not possible */

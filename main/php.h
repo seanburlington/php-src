@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.32 1999/09/12 03:25:02 zeev Exp $ */
+/* $Id: php.h,v 1.33 1999/09/14 19:12:57 andi Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -93,6 +93,14 @@ extern unsigned char second_arg_allow_ref[];
 
 #if HAVE_ALLOCA_H
 #include <alloca.h>
+#endif
+
+#if !HAVE_STRLCPY
+size_t strlcpy(char *dst, const char *src, size_t siz);
+#endif
+
+#if !HAVE_STRLCAT
+size_t strlcat(char *dst, const char *src, size_t siz);
 #endif
 
 #include "request_info.h"

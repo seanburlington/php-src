@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.14 1999/07/23 19:51:27 andrey Exp $ */
+/* $Id: datetime.c,v 1.15 1999/07/24 02:43:22 rasmus Exp $ */
 
 
 #include "php.h"
@@ -29,6 +29,9 @@
 #include "php_globals.h"
 
 #include <time.h>
+#ifdef HAVE_SYS_TIME_H
+# include <sys/time.h>
+#endif
 #include <stdio.h>
 
 char *mon_full_names[] =

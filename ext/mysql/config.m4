@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.15 2000/03/06 22:38:48 sas Exp $
+dnl $Id: config.m4,v 1.16 2000/03/07 16:33:30 andi Exp $
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
 sinclude(ext/mysql/libmysql/mysql.m4)
@@ -7,10 +7,10 @@ AC_ARG_WITH(mysql,[],[enable_mysql=$withval])
 	
 AC_MSG_CHECKING(for MySQL support)
 AC_ARG_ENABLE(mysql,
-[  --enable-mysql          Enable embedded MySQL support],[
+[  --disable-mysql          Disable embedded MySQL support],[
   PHP_MYSQL=$enableval
 ],[
-  PHP_MYSQL=no
+  PHP_MYSQL=yes
 ])
 AC_MSG_RESULT($PHP_MYSQL)
 

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.1 1999/07/21 15:12:31 sas Exp $ */
+/* $Id: dba.c,v 1.2 1999/07/21 15:39:28 sas Exp $ */
 
 #include "php.h"
 
@@ -196,7 +196,7 @@ static void php3_info_dba(ZEND_MODULE_INFO_FUNC_ARGS)
 {
 	dba_handler *hptr;
 	
-	PUTS("V1 ($Id: dba.c,v 1.1 1999/07/21 15:12:31 sas Exp $)");
+	PUTS("V1 ($Id: dba.c,v 1.2 1999/07/21 15:39:28 sas Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);
@@ -308,6 +308,7 @@ static void _php3_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	info->mode = modenr;
 	info->argc = ac - 3;
 	info->argv = args + 3;
+	info->hnd = NULL;
 
 	if(hptr->open(info) != SUCCESS) {
 		dba_close(info);

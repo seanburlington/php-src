@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ifx.ec,v 1.64 2002/03/22 12:13:58 derick Exp $ */
+/* $Id: ifx.ec,v 1.65 2002/03/22 12:15:39 derick Exp $ */
 
 /* -------------------------------------------------------------------
  * if you want a function reference : "grep '^\*\*' ifx.ec" will give
@@ -774,7 +774,7 @@ EXEC SQL END DECLARE SECTION;
 	sprintf(cursorid, "cursor%x", IFXG(cursorid)); 
 	sprintf(descrpid, "descrp%x", IFXG(cursorid)); 
 
-	EXEC SQL set connection :ifx
+	EXEC SQL set connection :ifx;
 	PHP_IFX_CHECK_CONNECTION(ifx);
 
 	EXEC SQL PREPARE :statemid FROM :statement;

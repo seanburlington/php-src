@@ -16,7 +16,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.49 2002/03/16 02:46:04 helly Exp $ */
+/* $Id: image.c,v 1.50 2002/03/16 20:12:58 helly Exp $ */
 /*
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -316,7 +316,10 @@ static void php_skip_variable(php_stream * stream)
 	off_t length = ((unsigned int)php_read2(stream));
 
 	length = length-2;
-	if (length) php_stream_seek(stream, (long)length, SEEK_CUR);
+	if (length)
+	{
+		php_stream_seek(stream, (long)length, SEEK_CUR);
+	}
 }
 /* }}} */
 

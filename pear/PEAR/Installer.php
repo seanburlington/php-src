@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.40 2002/03/22 09:22:24 ssb Exp $
+// $Id: Installer.php,v 1.41 2002/03/23 05:29:09 imajes Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -68,7 +68,9 @@ class PEAR_Installer extends PEAR_Common
 
     // {{{ constructor
 
-    function PEAR_Installer(&$config)
+    function PEAR_Installer($phpdir = PEAR_INSTALL_DIR,
+                            $extdir = PEAR_EXTENSION_DIR,
+                            $docdir = null)
     {
         $this->PEAR();
         $this->phpdir = $phpdir;

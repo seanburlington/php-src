@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.203.2.4 2004/11/28 12:44:42 sesser Exp $ */
+/* $Id: php.h,v 1.203.2.5 2005/01/14 20:44:39 sniper Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -101,7 +101,7 @@
 #endif
 
 #if HAVE_BUILD_DEFS_H
-#include "build-defs.h"
+#include <build-defs.h>
 #endif
 
 /*

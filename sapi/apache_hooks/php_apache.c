@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.17 2004/05/30 17:53:12 zeev Exp $ */
+/* $Id: php_apache.c,v 1.17.2.1 2005/01/14 20:45:11 sniper Exp $ */
 
 #include "php_apache_http.h"
 
@@ -25,7 +25,7 @@
 #include "zend.h"
 #include "ap_compat.h"
 #else
-#include "build-defs.h"
+#include <build-defs.h>
 #endif
 
 #ifdef ZTS

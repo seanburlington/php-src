@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.103 2004/04/27 15:18:33 andi Exp $ */
+/* $Id: php_reflection.c,v 1.104 2004/05/31 21:43:43 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -942,6 +942,7 @@ static void _reflection_export(INTERNAL_FUNCTION_PARAMETERS, zend_class_entry *c
 	}
 
 	/* Create object */
+	INIT_PZVAL(&reflector);
 	if (object_and_properties_init(&reflector, ce_ptr, NULL) == FAILURE) {
 		_DO_THROW("Could not create reflector");
 	}

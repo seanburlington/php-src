@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php3.h,v 1.4 1999/04/10 12:17:20 zeev Exp $ */
+/* $Id: mod_php3.h,v 1.5 1999/04/10 13:32:47 zeev Exp $ */
 
 #ifndef _MOD_PHP3_H
 #define _MOD_PHP3_H
@@ -38,14 +38,7 @@
 #endif
 
 typedef struct {
-    char *smtp; /*win 32 only*/
-    char *sendmail_path;
-    char *sendmail_from; /*win 32 only*/
     long errors;
-    long track_errors;
-    long display_errors;
-    long log_errors;
-    long warn_plus_overloading;
     char *doc_root;
     char *user_dir;
     long track_vars;
@@ -53,8 +46,6 @@ typedef struct {
     char *isapi_ext;
     char *nsapi_ext;
     char *include_path;
-    char *auto_prepend_file;
-    char *auto_append_file;
     char *upload_tmp_dir;
 	long upload_max_filesize;
     char *extension_dir;

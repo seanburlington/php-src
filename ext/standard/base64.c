@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.7 1999/07/21 09:02:05 sas Exp $ */
+/* $Id: base64.c,v 1.8 1999/07/21 14:27:05 ssb Exp $ */
 
 #include <string.h>
 
@@ -74,18 +74,21 @@ unsigned char *_php3_base64_decode(const unsigned char *string, int length, int 
 	/* this sucks for threaded environments */
 	static short reverse_table[256];
 	static int table_built;
+	unsigned char *result;
 
-	if(++table_built == 1) {
+	if (++table_built == 1) {
 		char *chp;
 		for(ch = 0; ch < 256; ch++) {
 			chp = strchr(base64_table, ch);
-			if(chp)
+			if(chp) {
 				reverse_table[ch] = chp - base64_table;
-			else
+			} else {
 				reverse_table[ch] = -1;
+			}
+		}
 	}
 
-	unsigned char *result = (unsigned char *)emalloc((length / 4 * 3 + 1) * sizeof(char));
+	result = (unsigned char *)emalloc((length / 4 * 3 + 1) * sizeof(char));
 	if (result == NULL) {
 		return NULL;
 	}

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: transports.c,v 1.10 2004/01/08 08:17:59 andi Exp $ */
+/* $Id: transports.c,v 1.11 2004/01/27 22:40:44 wez Exp $ */
 
 #include "php.h"
 #include "php_streams_int.h"
@@ -163,7 +163,11 @@ PHPAPI php_stream *_php_stream_xport_create(const char *name, long namelen, int 
 
 	if (failed) {
 		/* failure means that they don't get a stream to play with */
-		php_stream_close(stream);
+		if (persistent_id) {
+			php_stream_pclose(stream);
+		} else {
+			php_stream_close(stream);
+		}
 		stream = NULL;
 	}
 

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.59 1999/05/21 19:22:17 zeev Exp $ */
+/* $Id: main.c,v 1.60 1999/05/22 01:15:25 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -793,6 +793,7 @@ int php_module_startup(sapi_module_struct *sf)
 #endif
 
 	SG(server_context) = NULL;
+	SG(request_info).request_method = NULL;
 	sapi_activate(SLS_C);
 
 	if (module_initialized) {

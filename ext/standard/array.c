@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.130 2001/09/03 01:54:04 jeroen Exp $ */
+/* $Id: array.c,v 1.131 2001/09/03 20:21:00 andi Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1376,8 +1376,11 @@ PHP_FUNCTION(range)
 /* }}} */
 
 
-static int array_data_shuffle(const void *a, const void*b) {
-	return php_rand_range(0,1) ? 1 : -1;
+static int array_data_shuffle(const void *a, const void*b)
+{
+	TSRMLS_FETCH();
+
+	return php_rand_range(0,1 TSRMLS_CC) ? 1 : -1;
 }
 
 

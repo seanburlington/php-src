@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.172 2002/11/12 01:41:16 zak Exp $ */
+/* $Id: php_mysql.c,v 1.173 2002/11/12 08:11:23 derick Exp $ */
 
 /* TODO:
  *
@@ -506,7 +506,9 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	int hashed_details_length, port = MYSQL_PORT;
 	int client_flags = 0;
 	php_mysql_conn *mysql=NULL;
+#if MYSQL_VERSION_ID <= 32230
 	void (*handler) (int);
+#endif
 	zval **z_host=NULL, **z_user=NULL, **z_passwd=NULL, **z_new_link=NULL, **z_client_flags=NULL;
 	zend_bool free_host=0, new_link=0;
 	long connect_timeout;

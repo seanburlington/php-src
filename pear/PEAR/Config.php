@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.14 2002/03/29 02:38:07 ssb Exp $
+// $Id: Config.php,v 1.15 2002/04/01 19:13:37 cox Exp $
 
 require_once 'PEAR.php';
 
@@ -28,6 +28,15 @@ $GLOBALS['_PEAR_Config_instance'] = null;
 
 define('PEAR_CONFIG_DEFAULT_DOCDIR',
        PHP_DATADIR.DIRECTORY_SEPARATOR.'pear'.DIRECTORY_SEPARATOR.'doc');
+
+// in case a --without-pear PHP installation is used
+if (!defined('PEAR_INSTALL_DIR')) {
+    define('PEAR_INSTALL_DIR', PHP_LIBDIR);
+}
+if (!defined('PEAR_EXTENSION_DIR')) {
+    define('PEAR_EXTENSION_DIR', PHP_EXTENSION_DIR);
+}
+
 /**
  * This is a class for storing simple configuration values keeping
  * track of which are system-defined, user-defined or defaulted.  By
@@ -766,6 +775,18 @@ when installing packages without a version or state specified',
     }
 
     // }}}
+
+    /**
+    * Returns the layers defined (except the 'default' one)
+    *
+    * @return array of the defined layers
+    */
+    function getLayers()
+    {
+        $cf = $this->configuration;
+        unset($cf['default']);
+        return array_keys($cf);
+    }
 }
 
 ?>

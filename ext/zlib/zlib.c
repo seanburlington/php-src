@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.8 1999/08/02 21:12:16 sr Exp $ */
+/* $Id: zlib.c,v 1.9 1999/08/09 20:18:00 eschmid Exp $ */
 #if !PHP_31 && defined(THREAD_SAFE)
 #undef THREAD_SAFE
 #endif
@@ -709,6 +709,10 @@ PHP_FUNCTION(gzwrite) {
 	ret = gzwrite(zp, arg2->value.str.val,num_bytes);
 	RETURN_LONG(ret);
 }	
+/* }}} */
+
+/* {{{ proto int gzputs(int zp, string str [, int length])
+   An alias for gzwrite */
 /* }}} */
 
 /* {{{ proto int gzrewind(int zp)

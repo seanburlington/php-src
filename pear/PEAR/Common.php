@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.31 2002/01/30 12:18:10 ssb Exp $
+// $Id: Common.php,v 1.32 2002/02/10 17:23:04 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -123,9 +123,8 @@ class PEAR_Common extends PEAR
 
     function mkTempDir()
     {
-        $tmpdir = System::mktemp('-d pear');
-        if (PEAR::isError($tmpdir)) {
-            return $tmpdir;
+        if (!$tmpdir = System::mktemp('-d pear')) {
+            return false;
         }
         $this->addTempFile($tmpdir);
         return $tmpdir;

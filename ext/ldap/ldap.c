@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.116 2002/02/28 08:26:18 sebastian Exp $ */
+/* $Id: ldap.c,v 1.116.2.1 2002/04/23 18:59:57 derick Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -263,7 +263,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.116 2002/02/28 08:26:18 sebastian Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.116.2.1 2002/04/23 18:59:57 derick Exp $" );
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -2040,7 +2040,7 @@ int _ldap_rebind_proc(LDAP *ldap, const char *url, ber_tag_t req, ber_int_t msgi
    	ZVAL_STRING(cb_url, estrdup(url), 0);
 	cb_args[0] = &cb_link;
 	cb_args[1] = &cb_url;
-	if (call_user_function_ex(EG(function_table), NULL, ld->rebindproc, &cb_retval, 2, cb_args, 0, NULL) == SUCCESS && cb_retval) {
+	if (call_user_function_ex(EG(function_table), NULL, ld->rebindproc, &cb_retval, 2, cb_args, 0, NULL TSRMLS_CC) == SUCCESS && cb_retval) {
 		convert_to_long_ex(&cb_retval);
 		retval = Z_LVAL_P(cb_retval);
 		zval_ptr_dtor(&cb_retval);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.55 2003/06/10 20:03:25 imajes Exp $ */
+/* $Id: bcmath.c,v 1.56 2003/06/12 12:21:33 andrey Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -485,7 +485,7 @@ PHP_FUNCTION(bcsqrt)
 }
 /* }}} */
 
-/* {{{ proto string bccomp(string left_operand, string right_operand [, int scale])
+/* {{{ proto int bccomp(string left_operand, string right_operand [, int scale])
    Compares two arbitrary precision numbers */
 PHP_FUNCTION(bccomp)
 {
@@ -527,7 +527,7 @@ PHP_FUNCTION(bccomp)
 }
 /* }}} */
 
-/* {{{ proto string bcscale(int scale)
+/* {{{ proto bool bcscale(int scale)
    Sets default scale parameter for all bc math functions */
 PHP_FUNCTION(bcscale)
 {

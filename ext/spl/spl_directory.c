@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.3 2003/07/19 18:53:10 helly Exp $ */
+/* $Id: spl_directory.c,v 1.4 2003/07/19 19:04:35 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -64,8 +64,6 @@ typedef struct _spl_dir_object {
 	char              *path;
 } spl_dir_object;
 
-static zend_object_value spl_dir_object_clone(zval *zobject TSRMLS_DC);
-
 /* {{{ spl_dir_object_dtor */
 static void spl_dir_object_dtor(void *object, zend_object_handle handle TSRMLS_DC)
 {
@@ -100,7 +98,7 @@ static zend_object_value spl_dir_object_new_ex(zend_class_entry *class_type, spl
 	zend_hash_init(intern->std.properties, 0, NULL, ZVAL_PTR_DTOR, 0);
 	zend_hash_copy(intern->std.properties, &class_type->default_properties, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
 
-	retval.handle = zend_objects_store_put(intern, spl_dir_object_dtor, spl_dir_object_clone TSRMLS_CC);
+	retval.handle = zend_objects_store_put(intern, spl_dir_object_dtor, NULL TSRMLS_CC);
 	retval.handlers = &spl_dir_handlers;
 	return retval;
 }

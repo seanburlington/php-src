@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.1.2.3 2002/12/19 16:55:57 edink Exp $
+dnl $Id: config9.m4,v 1.1.2.4 2003/02/23 09:36:47 sniper Exp $
 dnl
 
 AC_ARG_ENABLE(cgi,
@@ -135,7 +135,7 @@ if test "$PHP_SAPI" = "default"; then
     if test "$PHP_ENABLE_FASTCGI" = "yes"; then
       PHP_FASTCGI=1
       PHP_FCGI_FILES="libfcgi/fcgi_stdio.c libfcgi/fcgiapp.c libfcgi/os_unix.c"
-      PHP_FCGI_INCLUDE="$PHP_LIBFCGI_DIR/include"
+      PHP_FCGI_INCLUDE="-I$PHP_LIBFCGI_DIR/include"
       PHP_FCGI_STATIC=1
     else
       PHP_FASTCGI=0
@@ -148,7 +148,7 @@ if test "$PHP_SAPI" = "default"; then
     AC_MSG_RESULT($PHP_ENABLE_FASTCGI)
 
     INSTALL_IT="\$(INSTALL) -m 0755 \$(SAPI_CGI_PATH) \$(INSTALL_ROOT)\$(bindir)/php"
-    PHP_SELECT_SAPI(cgi, program, $PHP_FCGI_FILES cgi_main.c getopt.c, -I$PHP_FCGI_INCLUDE,'$(SAPI_CGI_PATH)')
+    PHP_SELECT_SAPI(cgi, program, $PHP_FCGI_FILES cgi_main.c getopt.c, $PHP_FCGI_INCLUDE, '$(SAPI_CGI_PATH)')
 
     case $host_alias in
       *darwin*)

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.40 2003/08/21 14:34:07 helly Exp $ 
+  $Id: mysqli_api.c,v 1.41 2003/08/28 21:00:19 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -173,7 +173,7 @@ PHP_FUNCTION(mysqli_bind_param)
 				break;
 
 			default:
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Undefined fieldtype %d (parameter %d)", Z_LVAL_PP(args[i]), i+1);
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Undefined fieldtype %ld (parameter %d)", Z_LVAL_PP(args[i]), i+1);
 				efree(args);
 				efree(bind);
 				RETURN_FALSE; 

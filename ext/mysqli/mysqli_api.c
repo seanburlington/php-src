@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.85 2004/07/07 08:02:27 georg Exp $ 
+  $Id: mysqli_api.c,v 1.86 2004/07/13 16:12:28 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1580,7 +1580,7 @@ PHP_FUNCTION(mysqli_stmt_param_count)
 }
 /* }}} */
 
-/* {{{ proto void mysqli_stmt_reset(object stmt)
+/* {{{ proto bool mysqli_stmt_reset(object stmt)
    reset a prepared statement */
 PHP_FUNCTION(mysqli_stmt_reset) 
 {
@@ -1593,9 +1593,10 @@ PHP_FUNCTION(mysqli_stmt_reset)
 
 	MYSQLI_FETCH_RESOURCE(stmt, MY_STMT *, &mysql_stmt, "mysqli_stmt");
 
-	mysql_stmt_reset(stmt->stmt);
-
-	return;
+	if (mysql_stmt_reset(stmt->stmt)) {
+		RETURN_FALSE;
+	}
+	RETURN_TRUE;
 }
 /* }}} */
 

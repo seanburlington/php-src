@@ -24,7 +24,7 @@
 #
 # Written by Stig Bakken <ssb@guardian.no> 1997-05-28.
 #
-# $Id: makedist,v 1.23 2002/02/03 20:54:41 jimw Exp $
+# $Id: makedist,v 1.24 2002/03/20 18:54:30 derick Exp $
 #
 
 if test "$#" != "2"; then
@@ -37,15 +37,15 @@ VER=$1 ; shift
 
 old_IFS="$IFS"
 IFS=.
-eval set `bison -V|sed "s/GNU Bison version //"`
-if test "$1" = "1" && test "28" -gt "$2"; then
-  echo "Please use Bison 1.28 or higher"
+eval set `bison --version| grep 'GNU Bison' | cut -d ' ' -f 4 | sed -e 's/\./ /'`
+if test "${1}" = "1" -a "${2}" -lt "28"; then
+  echo "You will need bison 1.28 if you want to regenerate the Zend parser (found ${1}.${2}).)"
   exit 10
 fi
 IFS="$old_IFS"
 
 PHPROOT=:pserver:cvsread@cvs.php.net:/repository
-ZENDROOT=:pserver:cvsread@cvs.zend.com:/repository
+ZENDROOT=:pserver:cvsread@cvs.php.net:/repository
 PHPMOD=php4
 ZENDMOD=Zend
 TSRMMOD=TSRM

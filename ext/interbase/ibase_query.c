@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.1 2004/04/05 13:22:33 abies Exp $ */
+/* $Id: ibase_query.c,v 1.2 2004/05/04 12:42:54 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -941,7 +941,7 @@ static int _php_ibase_exec(INTERNAL_FUNCTION_PARAMETERS, ibase_result **ib_resul
 			return SUCCESS;
 
 		default:
-			RETVAL_TRUE;
+			RETVAL_FALSE;
 	}
 
 	/* allocate sqlda and output buffers */
@@ -1027,7 +1027,11 @@ static int _php_ibase_exec(INTERNAL_FUNCTION_PARAMETERS, ibase_result **ib_resul
 			if (affected_rows > 0) {
 				ib_query->trans->affected_rows = affected_rows;
 				RETVAL_LONG(affected_rows);
+				break;
 			}
+			
+		default:
+			RETVAL_TRUE;
 	}
 
 	rv = SUCCESS;

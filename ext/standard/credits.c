@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.21 2002/11/10 23:49:04 imajes Exp $ */
+/* $Id: credits.c,v 1.21.2.1 2002/11/14 02:07:37 imajes Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -61,7 +61,7 @@ PHPAPI void php_print_credits(int flag)
 		CREDIT_LINE("UNIX Build and Modularization", "Stig Bakken, Sascha Schumann");
 		CREDIT_LINE("Win32 Port", "Shane Caraveo, Zeev Suraski");
 		CREDIT_LINE("Server API (SAPI) Abstraction Layer", "Andi Gutmans, Shane Caraveo, Zeev Suraski");
-		CREDIT_LINE("Streams Support and Development", "Wez Furlong");
+		CREDIT_LINE("Streams Abstraction Layer", "Wez Furlong");
 		php_info_print_table_end();
 	}
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.225 2002/11/23 11:20:51 moriyoshi Exp $ */
+/* $Id: gd.c,v 1.226 2002/11/23 19:20:44 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1867,12 +1867,12 @@ PHP_FUNCTION(imagecolordeallocate)
 
 	ZEND_FETCH_RESOURCE(im, gdImagePtr, IM, -1, "Image", le_gd);
 
-#	if HAVE_LIBGD20
+#if HAVE_LIBGD20
 	/* We can return right away for a truecolor image as deallocating colours is meaningless here */
 	if (gdImageTrueColor(im)) {
 		RETURN_TRUE;
 	}
-#	endif
+#endif
 
 	convert_to_long_ex(index);
 	col = Z_LVAL_PP(index);

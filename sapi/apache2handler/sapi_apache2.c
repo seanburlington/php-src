@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.35 2004/02/09 23:27:42 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.36 2004/02/11 00:45:07 hirokawa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -424,7 +424,7 @@ static void php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 	ap_set_content_type(r, apr_pstrdup(r->pool, content_type));
 	efree(content_type);
 
-	content_length = (char *) apr_table_get(f->r->headers_in, "Content-Length");
+	content_length = (char *) apr_table_get(r->headers_in, "Content-Length");
 	SG(request_info).content_length = (content_length ? atoi(content_length) : 0);
 
 	apr_table_unset(r->headers_out, "Content-Length");

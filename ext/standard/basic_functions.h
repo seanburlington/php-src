@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.107 2002/09/23 18:12:38 wez Exp $ */
+/* $Id: basic_functions.h,v 1.108 2002/09/30 03:02:52 jon Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -49,6 +49,8 @@ PHP_FUNCTION(long2ip);
 /* system functions */
 PHP_FUNCTION(getenv);
 PHP_FUNCTION(putenv);
+
+PHP_FUNCTION(getopt);
 
 PHP_FUNCTION(get_current_user);
 PHP_FUNCTION(set_time_limit);

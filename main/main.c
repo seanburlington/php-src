@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.609 2004/09/05 22:40:35 zeev Exp $ */
+/* $Id: main.c,v 1.610 2004/09/29 10:36:24 hyanantha Exp $ */
 
 /* {{{ includes
  */
@@ -32,14 +32,7 @@
 #include "win32/signal.h"
 #include <process.h>
 #elif defined(NETWARE)
-#ifdef NEW_LIBC
 #include <sys/timeval.h>
-#else
-#include "netware/time_nw.h"
-#endif
-/*#include "netware/signal_nw.h"*/
-/*#include "netware/env.h"*/    /* Temporary */
-/*#include <process.h>*/
 #ifdef USE_WINSOCK
 #include <novsock2.h>
 #endif

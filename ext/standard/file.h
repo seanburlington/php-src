@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.91 2004/07/30 22:49:02 fmk Exp $ */
+/* $Id: file.h,v 1.92 2004/09/26 21:55:22 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -39,6 +39,7 @@ PHPAPI PHP_FUNCTION(fgets);
 PHP_FUNCTION(fscanf);
 PHPAPI PHP_FUNCTION(fgetss);
 PHP_FUNCTION(fgetcsv);
+PHP_FUNCTION(fputcsv);
 PHPAPI PHP_FUNCTION(fwrite);
 PHPAPI PHP_FUNCTION(fflush);
 PHPAPI PHP_FUNCTION(rewind);

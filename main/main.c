@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.34 2003/05/16 20:33:18 fujimoto Exp $ */
+/* $Id: main.c,v 1.512.2.35 2003/05/17 07:55:18 sas Exp $ */
 
 /* {{{ includes
  */
@@ -1600,7 +1600,7 @@ PHPAPI int php_handle_special_queries(TSRMLS_D)
 PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 {
 	zend_file_handle *prepend_file_p, *append_file_p;
-	zend_file_handle prepend_file, append_file;
+	zend_file_handle prepend_file = {0}, append_file = {0};
 #if HAVE_BROKEN_GETCWD 
 	int old_cwd_fd = -1;
 #else

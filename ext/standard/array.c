@@ -22,7 +22,7 @@
 */
 
 
-/* $Id: array.c,v 1.199.2.39 2004/11/28 17:12:59 tony2001 Exp $ */
+/* $Id: array.c,v 1.199.2.40 2004/12/02 16:36:41 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2934,7 +2934,6 @@ PHP_FUNCTION(array_multisort)
 	   array, and the very first argument has to be an array.
 	 */
 	for (i = 0; i < argc; i++) {
-		SEPARATE_ZVAL(args[i]);
 		if (Z_TYPE_PP(args[i]) == IS_ARRAY) {
 			/* We see the next array, so we update the sort flags of
 			   the previous array and reset the sort flags. */

@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.8 2004/01/19 08:48:30 helly Exp $
+dnl $Id: config.m4,v 1.9 2004/01/19 11:07:19 chregu Exp $
 dnl config.m4 for extension SPL
 
 PHP_ARG_ENABLE(spl, enable SPL suppport,
-[  --disable-spl           Enable Standard PHP Library], yes)
+[  --disable-spl           Disable Standard PHP Library], yes)
 
 if test "$PHP_SPL" != "no"; then
 	if test "$ext_shared" = "yes"; then

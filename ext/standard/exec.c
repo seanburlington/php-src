@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.73 2002/04/25 06:43:11 derick Exp $ */
+/* $Id: exec.c,v 1.74 2002/05/05 17:14:12 stas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -283,7 +283,7 @@ int php_Exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 		}
 	}
 
-	php_stream_close(stream); 
+	FG(pclose_ret) = php_stream_close(stream); 
 
 #if HAVE_SYS_WAIT_H
 	if (WIFEXITED(FG(pclose_ret))) {

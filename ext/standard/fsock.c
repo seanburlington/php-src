@@ -13,12 +13,12 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Paul Panotzki - Bunyip Information Systems                  |
-   |          Jim Winstead (jimw@php.net)                                 |
+   |          Jim Winstead <jimw@php.net>                                 |
    |          Sascha Schumann <sascha@schumann.cx>                        |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.66 2001/04/17 17:06:06 wez Exp $ */
+/* $Id: fsock.c,v 1.67 2001/04/26 13:47:17 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -596,6 +596,7 @@ PHPAPI void php_sockset_timeout(int socket, struct timeval *timeout)
 	SOCK_FIND(sock, socket);
 
 	sock->timeout = *timeout;
+	sock->timeout_event = 0;
 }
 
 #define SOCK_FIND_AND_READ_MAX(max) \

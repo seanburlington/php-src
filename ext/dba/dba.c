@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.15 2000/04/06 12:26:16 riffraff Exp $ */
+/* $Id: dba.c,v 1.16 2000/05/02 03:38:26 sas Exp $ */
 
 #include "php.h"
 
@@ -71,6 +71,10 @@ zend_module_entry dba_module_entry = {
 	PHP_MINFO(dba),
 	STANDARD_MODULE_PROPERTIES
 };
+
+#ifdef COMPILE_DL_DBA
+ZEND_GET_MODULE(dba)
+#endif
 
 typedef struct dba_handler {
 	char *name;
@@ -202,7 +206,7 @@ static PHP_MINFO_FUNCTION(dba)
 	dba_handler *hptr;
 	
 	php_info_print_box_start(0);
-	PUTS("V1 ($Id: dba.c,v 1.15 2000/04/06 12:26:16 riffraff Exp $)");
+	PUTS("V1 ($Id: dba.c,v 1.16 2000/05/02 03:38:26 sas Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.15 1999/12/18 22:35:15 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.16 1999/12/22 22:47:18 sas Exp $ */
 
 
 /* TODO:
@@ -301,7 +301,7 @@ PHP_MINIT_FUNCTION(mysql)
 	ELS_FETCH();
 
 #ifdef ZTS
-	mysql_globals_id = ts_allocate_id(sizeof(php_mysql_globals), php_mysql_init_globals, NULL);
+	mysql_globals_id = ts_allocate_id(sizeof(php_mysql_globals), (ts_allocate_ctor) php_mysql_init_globals, NULL);
 #else
 	MySG(num_persistent)=0;
 #endif

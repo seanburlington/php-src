@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.43 2001/06/19 16:03:33 andi Exp $ */
+/* $Id: java.c,v 1.44 2001/07/11 09:39:06 zeev Exp $ */
 
 /*
  * This module implements Zend OO syntax overloading support for Java
@@ -401,7 +401,7 @@ static int checkError(pval *value) {
   if (value->type == IS_EXCEPTION) {
     php_error(E_WARNING, "%s", value->value.str.val);
     efree(value->value.str.val);
-    var_reset(value);
+    ZVAL_RESET(value);
     return 1;
   };
   return 0;

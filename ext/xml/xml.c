@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.80 2001/07/09 06:49:34 thies Exp $ */
+/* $Id: xml.c,v 1.81 2001/07/11 09:39:09 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -271,7 +271,7 @@ static zval *_xml_xmlchar_zval(const XML_Char *s, int len, const XML_Char *encod
 	MAKE_STD_ZVAL(ret);
 	
 	if (s == NULL) {
-		var_reset(ret);
+		ZVAL_RESET(ret);
 		return ret;
 	}
 	if (len == 0) {

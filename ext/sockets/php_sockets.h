@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.21 2002/03/06 05:21:56 jason Exp $ */
+/* $Id: php_sockets.h,v 1.22 2002/03/06 20:19:09 jason Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -42,12 +42,6 @@ extern zend_module_entry sockets_module_entry;
 PHP_MINIT_FUNCTION(sockets);
 PHP_MINFO_FUNCTION(sockets);
 
-PHP_FUNCTION(socket_fd_alloc);
-PHP_FUNCTION(socket_fd_free);
-PHP_FUNCTION(socket_fd_set);
-PHP_FUNCTION(socket_fd_isset);
-PHP_FUNCTION(socket_fd_clear);
-PHP_FUNCTION(socket_fd_zero);
 PHP_FUNCTION(socket_iovec_alloc);
 PHP_FUNCTION(socket_iovec_free);
 PHP_FUNCTION(socket_iovec_set);
@@ -98,11 +92,6 @@ typedef struct {
 	int		type;
 	int		error;
 } php_socket;
-
-typedef struct {
-	fd_set	set;
-	SOCKET	max_fd;
-} php_fd_set;
 
 typedef struct {
 	zend_bool	use_system_read;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_exceptions.c,v 1.1 2004/11/01 15:50:25 helly Exp $ */
+/* $Id: spl_exceptions.c,v 1.2 2004/11/01 17:26:15 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -56,7 +56,7 @@ PHP_MINIT_FUNCTION(spl_exceptions)
     REGISTER_SPL_SUB_CLASS_EX(OutOfRangeException,      LogicException,   NULL, NULL);
 
     REGISTER_SPL_SUB_CLASS_EX(RuntimeException,         Exception,        NULL, NULL);
-    REGISTER_SPL_SUB_CLASS_EX(OutOfBoundsException      RuntimeException, NULL, NULL);
+    REGISTER_SPL_SUB_CLASS_EX(OutOfBoundsException,     RuntimeException, NULL, NULL);
     REGISTER_SPL_SUB_CLASS_EX(OverflowException,        RuntimeException, NULL, NULL);
     REGISTER_SPL_SUB_CLASS_EX(RangeException,           RuntimeException, NULL, NULL);
     REGISTER_SPL_SUB_CLASS_EX(UnderflowException,       RuntimeException, NULL, NULL);

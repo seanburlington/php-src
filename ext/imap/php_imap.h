@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.12 2001/08/07 16:18:05 sniper Exp $ */
+/* $Id: php_imap.h,v 1.13 2001/08/08 02:55:07 sniper Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H
@@ -99,13 +99,11 @@ typedef struct php_imap_error_struct {
 	struct php_imap_error_struct *next;
 } ERRORLIST;
 
-
 typedef struct _php_imap_message_struct {
 	unsigned long msgid;
 	struct _php_imap_message_struct *next;
 } MESSAGELIST;
  
-
 
 /* Functions */
 

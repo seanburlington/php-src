@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.236 2001/09/06 08:54:54 sterling Exp $ */
+/* $Id: string.c,v 1.237 2001/09/06 08:56:24 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1328,8 +1328,8 @@ PHP_FUNCTION(stristr)
 		WRONG_PARAM_COUNT;
 	}
 
-	SEPERATE_ZVAL(haystack);
-	SEPERATE_ZVAL(needle);
+	SEPARATE_ZVAL(haystack);
+	SEPARATE_ZVAL(needle);
 	
 	convert_to_string_ex(haystack);
 

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.2 1999/07/06 19:49:48 zeev Exp $ */
+/* $Id: php_pcre.c,v 1.3 1999/07/08 21:42:29 andrey Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -568,7 +568,7 @@ static int _preg_do_eval(char *eval_str, char *subject, int *offsets,
 			walk++;
 		}
 	}
-	
+
 	/* Run the code */
 	zend_eval_string(code, &retval CLS_CC ELS_CC);
 	convert_to_string(&retval);

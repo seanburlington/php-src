@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.41 2000/04/08 11:16:19 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.42 2000/04/13 03:35:02 rasmus Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -277,7 +277,7 @@ static void php_apache_log_message(char *message)
 
 	if (SG(server_context)) {
 #if MODULE_MAGIC_NUMBER >= 19970831
-		aplog_error(NULL, 0, APLOG_ERR | APLOG_NOERRNO, ((request_rec *) SG(server_context))->server, message);
+		aplog_error(NULL, 0, APLOG_ERR | APLOG_NOERRNO, ((request_rec *) SG(server_context))->server, "%s", message);
 #else
 		log_error(message, ((requset_rec *) SG(server_context))->server);
 #endif

@@ -15,7 +15,7 @@
    | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.re,v 1.5 1999/09/18 12:16:16 sas Exp $ */
+/* $Id: url_scanner.re,v 1.6 1999/10/21 20:22:12 sas Exp $ */
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -143,6 +143,7 @@ static void url_scanner(lexdata *state)
 /*!re2c
   	"<" F R A M E ws+ S R C ws* "=" ws*		{ BEGIN(REF); }
   	"<" A ws+ H R E F ws* "="	ws*			{ BEGIN(REF); }
+	"<" A R E A ws+ H R E F ws* "=" ws*		{ BEGIN(REF); }
 	(all\[<])+							{ BEGIN(INITIAL); }
 	eof									{ FINISH; }
 */

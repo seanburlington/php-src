@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.21 2003/05/12 01:02:08 sas Exp $
+dnl $Id: config.m4,v 1.22 2003/11/27 23:04:10 sniper Exp $
 dnl
 
 AC_ARG_WITH(thttpd,
@@ -12,7 +12,7 @@ AC_ARG_WITH(thttpd,
   
   if grep thttpd.2.21b $withval/version.h >/dev/null; then
     patch="test -f $THTTPD/php_patched || \
-    (cd $THTTPD && patch -p 1 < $abs_srcdir/sapi/thttpd/thttpd_patch && touch php_patched)"
+    (cd $THTTPD && patch -p1 < $abs_srcdir/sapi/thttpd/thttpd_patch && touch php_patched)"
 
   elif grep Premium $withval/version.h >/dev/null; then
     patch=

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.137 2001/12/17 11:53:38 hholzgra Exp $ */
+/* $Id: pgsql.c,v 1.138 2001/12/17 12:14:46 hholzgra Exp $ */
 
 #include <stdlib.h>
 
@@ -1923,7 +1923,7 @@ PHP_FUNCTION(pg_lo_export)
 }
 /* }}} */
 
-/* {{{ proto bool pg_lo_lseek(resource large_object, int offset [, int whence])
+/* {{{ proto bool pg_lo_seek(resource large_object, int offset [, int whence])
    Seeks position of large object */
 PHP_FUNCTION(pg_lo_seek)
 {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.328 2002/10/24 19:11:49 helly Exp $ */
+/* $Id: string.c,v 1.329 2002/10/25 20:09:53 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -984,7 +984,7 @@ restore:
  */
 PHPAPI char *php_strtoupper(char *s, size_t len)
 {
-	char *c, *e;
+	unsigned char *c, *e;
 	
 	c = s;
 	e = c+len;
@@ -1018,7 +1018,7 @@ PHP_FUNCTION(strtoupper)
  */
 PHPAPI char *php_strtolower(char *s, size_t len)
 {
-	char *c, *e;
+	unsigned char *c, *e;
 	
 	c = s;
 	e = c+len;

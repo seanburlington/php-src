@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.19 2003/05/25 22:03:47 sterling Exp $ */
+/* $Id: simplexml.c,v 1.20 2003/05/26 00:27:30 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -87,7 +87,7 @@ sxe_property_read(zval *object, zval *member TSRMLS_DC)
 
 	MAKE_STD_ZVAL(return_value);
 	ZVAL_NULL(return_value);
-	
+
 	name = Z_STRVAL_P(member);
 
 	sxe = php_sxe_fetch_object(object TSRMLS_CC);
@@ -108,10 +108,10 @@ sxe_property_read(zval *object, zval *member TSRMLS_DC)
 		attr = attr->next;
 	}
 
-	node = node->xmlChildrenNode;
 	if (!sxe->node) {
 		sxe->node = node;
 	}
+	node = node->xmlChildrenNode;
 
 	while (node) {
 		if (!xmlStrcmp(node->name, name)) {
@@ -131,7 +131,6 @@ sxe_property_read(zval *object, zval *member TSRMLS_DC)
 		return_value = value;
 	}
 
-			
 	return return_value;
 }
 /* }}} */
@@ -216,13 +215,15 @@ static zval **
 sxe_property_get_ptr(zval *object, zval *member TSRMLS_DC)
 {
 	zval **property_ptr;
-	zval  *property;
-	
+	zval *property;
+
+	property_ptr = emalloc(sizeof(zval **));
+
 	property = sxe_property_read(object, member TSRMLS_CC);
 	zval_add_ref(&property);
 
-	property_ptr = &property;
-
+	memcpy(property_ptr, &property, sizeof(zval *));
+	
 	return property_ptr;
 }
 /* }}} */
@@ -640,7 +641,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.19 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.20 $");
 	php_info_print_table_end();
 
 }

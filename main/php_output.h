@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.36 2002/03/01 03:05:50 yohgaki Exp $ */
+/* $Id: php_output.h,v 1.37 2002/05/04 18:33:13 sas Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -93,6 +93,9 @@ ZEND_API extern php_output_globals output_globals;
 
 #define PHP_OUTPUT_HANDLER_INTERNAL     0
 #define PHP_OUTPUT_HANDLER_USER        1
+
+PHP_FUNCTION(output_add_rewrite_var);
+PHP_FUNCTION(output_reset_rewrite_vars);
 
 
 #endif /* PHP_OUTPUT_H */

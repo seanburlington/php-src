@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.475 2002/05/04 18:11:36 sas Exp $ */
+/* $Id: basic_functions.c,v 1.476 2002/05/04 18:33:13 sas Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -811,7 +811,7 @@ function_entry basic_functions[] = {
 	PHP_FE(aggregation_info,				first_arg_force_ref)
 
 	PHP_FE(output_add_rewrite_var,											NULL)
-	PHP_FE(output_remove_rewrite_var,										NULL)
+	PHP_FE(output_reset_rewrite_vars,										NULL)
 
 	{NULL, NULL, NULL}
 };

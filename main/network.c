@@ -15,7 +15,7 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.7 2000/09/05 19:06:29 zeev Exp $ */
+/* $Id: network.c,v 1.8 2000/09/07 17:56:12 venaas Exp $ */
 
 #include "php.h"
 
@@ -93,7 +93,7 @@ static int php_network_getaddresses(const char *host, struct sockaddr ***sal)
 		sap = *sal;
                 do {
                         switch (sai->ai_family) {
-#  ifdef AF_INET6
+#  ifdef HAVE_STRUCT_SOCKADDR_IN6
                         case AF_INET6: {
 				*sap = emalloc(sizeof(struct sockaddr_in6));
 				if (*sap == NULL) {
@@ -167,7 +167,7 @@ int php_hostconnect(char *host, unsigned short port, int socktype, int timeout)
 		s = socket((*sal)->sa_family, socktype, 0);
 		if (s != SOCK_ERR) {
 			switch ((*sal)->sa_family) {
-#if defined( HAVE_GETADDRINFO ) && defined( AF_INET6 )
+#if defined( HAVE_GETADDRINFO ) && defined( HAVE_STRUCT_SOCKADDR_IN6 )
 			case AF_INET6: {
 				struct sockaddr_in6 *sa =
 					(struct sockaddr_in6 *)*sal;

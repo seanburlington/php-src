@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.558 2003/06/12 08:38:58 derick Exp $ */
+/* $Id: main.c,v 1.559 2003/06/14 15:08:26 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -1580,6 +1580,21 @@ static zend_bool php_auto_globals_create_request(TSRMLS_D)
 			case 'C':
 				php_autoglobal_merge(Z_ARRVAL_P(form_variables), Z_ARRVAL_P(PG(http_globals)[TRACK_VARS_COOKIE]) TSRMLS_CC);
 				break;
+		}
+	}
+
+	if (PG(register_globals)) {
+		HashPosition pos;
+		zval **data;
+		char *string_key;
+		uint string_key_len;
+
+		zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(form_variables), &pos);
+		while (zend_hash_get_current_data_ex(Z_ARRVAL_P(form_variables), (void **)&data, &pos) == SUCCESS) {
+			zend_hash_get_current_key_ex(Z_ARRVAL_P(form_variables), &string_key, &string_key_len, NULL, 0, &pos);
+
+			ZEND_SET_SYMBOL_WITH_LENGTH(&EG(symbol_table), string_key, string_key_len, *data, (*data)->refcount+1, 0);
+			zend_hash_move_forward_ex(Z_ARRVAL_P(form_variables), &pos);
 		}
 	}
 

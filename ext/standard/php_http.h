@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_http.h,v 1.1 2003/09/06 12:56:02 sniper Exp $ */
+/* $Id: php_http.h,v 1.2 2004/01/06 20:07:06 iliaa Exp $ */
 
 #ifndef PHP_HTTP_H
 #define PHP_HTTP_H
@@ -27,7 +27,8 @@
 PHPAPI int php_url_encode_hash_ex(HashTable *ht, smart_str *formstr,
 				const char *num_prefix, int num_prefix_len,
 				const char *key_prefix, int key_prefix_len,
-				const char *key_suffix, int key_suffix_len TSRMLS_DC);
+				const char *key_suffix, int key_suffix_len, 
+				zval *type TSRMLS_DC);
 #define php_url_encode_hash(ht, formstr)	php_url_encode_hash_ex((ht), (formstr), NULL, 0, NULL, 0, NULL, 0 TSRMLS_CC)
 
 PHP_FUNCTION(http_build_query);

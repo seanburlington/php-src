@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.28.2.6 2003/07/24 02:47:10 sniper Exp $ */
+/* $Id: php_interbase.h,v 1.28.2.7 2003/08/13 13:27:36 abies Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -102,7 +102,7 @@ ZEND_BEGIN_MODULE_GLOBALS(ibase)
 	char *cfg_dateformat;
 	char *timeformat;
 	char *cfg_timeformat;
-	char *errmsg;
+	char errmsg[MAX_ERRMSG];
 ZEND_END_MODULE_GLOBALS(ibase)
 
 typedef struct {

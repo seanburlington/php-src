@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.91.2.14 2003/08/13 01:28:32 abies Exp $ */
+/* $Id: interbase.c,v 1.91.2.15 2003/08/13 13:27:36 abies Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -531,7 +531,6 @@ static void php_ibase_init_globals(zend_ibase_globals *ibase_globals)
 	ibase_globals->timestampformat = NULL;
 	ibase_globals->dateformat = NULL;
 	ibase_globals->timeformat = NULL;
-	ibase_globals->errmsg = NULL;
 	ibase_globals->num_persistent = 0;
 }
 
@@ -588,10 +587,7 @@ PHP_RINIT_FUNCTION(ibase)
 	}
 	IBG(timeformat) = DL_STRDUP(IBG(cfg_timeformat));
 
-	if (IBG(errmsg)) {
-		DL_FREE(IBG(errmsg));
-	}
-	IBG(errmsg) = DL_MALLOC(sizeof(char)*MAX_ERRMSG+1);
+	RESET_ERRMSG;
 
 	return SUCCESS;
 }
@@ -619,11 +615,6 @@ PHP_RSHUTDOWN_FUNCTION(ibase)
 	}
 	IBG(timeformat) = NULL;
 
-	if (IBG(errmsg)) {
-		DL_FREE(IBG(errmsg));
-	}
-	IBG(errmsg) = NULL;
-
 	return SUCCESS;
 } 
  
@@ -633,7 +624,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.14 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.15 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

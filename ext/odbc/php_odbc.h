@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.48 2002/08/11 23:39:03 kalowsky Exp $ */
+/* $Id: php_odbc.h,v 1.48.4.1 2002/12/31 16:35:05 sebastian Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H

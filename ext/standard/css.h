@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: css.h,v 1.1 2002/09/19 21:57:24 cmv Exp $ */
+/* $Id: css.h,v 1.1.2.1 2002/12/31 16:35:25 sebastian Exp $ */
 
 #ifndef CSS_H
 #define CSS_H

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky <ilia@prohost.org>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.23.8.1 2002/11/20 16:08:35 iliaa Exp $ */
+/* $Id: shmop.c,v 1.23.8.2 2002/12/31 16:35:20 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: incomplete_class.c,v 1.14.4.1 2002/12/05 21:09:18 helly Exp $ */
+/* $Id: incomplete_class.c,v 1.14.4.2 2002/12/31 16:35:29 sebastian Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"

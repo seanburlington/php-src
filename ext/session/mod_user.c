@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_user.c,v 1.25 2002/03/06 11:49:51 sas Exp $ */
+/* $Id: mod_user.c,v 1.25.8.1 2002/12/31 16:35:20 sebastian Exp $ */
 
 #include "php.h"
 #include "php_session.h"

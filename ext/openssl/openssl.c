@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.52.2.5 2002/12/12 18:36:38 iliaa Exp $ */
+/* $Id: openssl.c,v 1.52.2.6 2002/12/31 16:35:05 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.80 2002/10/24 13:14:42 sas Exp $ */
+/* $Id: oracle.c,v 1.80.2.1 2002/12/31 16:35:06 sebastian Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */

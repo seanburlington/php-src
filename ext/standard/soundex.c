@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
    | Author: Bjørn Borud - Guardian Networks AS <borud@guardian.no>       |
    +----------------------------------------------------------------------+
  */
-/* $Id: soundex.c,v 1.20 2001/12/11 15:30:36 sebastian Exp $ */
+/* $Id: soundex.c,v 1.20.8.1 2002/12/31 16:35:34 sebastian Exp $ */
 
 #include "php.h"
 #include <stdlib.h>

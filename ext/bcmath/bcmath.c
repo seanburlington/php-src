@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.39.4.2 2002/12/05 22:13:58 helly Exp $ */
+/* $Id: bcmath.c,v 1.39.4.3 2002/12/31 16:34:10 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

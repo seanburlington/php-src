@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_informix.h,v 1.18 2002/06/14 00:01:44 sniper Exp $ */
+/* $Id: php_informix.h,v 1.18.4.1 2002/12/31 16:34:44 sebastian Exp $ */
 
 #ifndef PHP_INFORMIX_H
 #define PHP_INFORMIX_H

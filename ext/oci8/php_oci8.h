@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.24 2002/09/12 09:48:03 thies Exp $ */
+/* $Id: php_oci8.h,v 1.24.2.1 2002/12/31 16:35:04 sebastian Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H

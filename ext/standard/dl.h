@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.h,v 1.16 2001/12/11 15:30:29 sebastian Exp $ */
+/* $Id: dl.h,v 1.16.8.1 2002/12/31 16:35:26 sebastian Exp $ */
 
 #ifndef DL_H
 #define DL_H

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: crypt_win32.h,v 1.3 2002/03/18 22:13:14 sebastian Exp $ */
+/* $Id: crypt_win32.h,v 1.3.6.1 2002/12/31 16:35:51 sebastian Exp $ */
 
 /* This code is distributed under the PHP license with permission from
    the author Jochen Obalek <jochen.obalek@bigfoot.de> */

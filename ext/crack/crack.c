@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
    | Authors: Alexander Feldman                                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: crack.c,v 1.18 2002/02/28 08:25:48 sebastian Exp $ */
+/* $Id: crack.c,v 1.18.8.1 2002/12/31 16:34:14 sebastian Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

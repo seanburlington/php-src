@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.48 2002/12/11 20:45:47 pajoye Exp $ */
+/* $Id: php_gd.h,v 1.49 2002/12/11 22:25:23 iliaa Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -112,12 +112,14 @@ PHP_FUNCTION(imagecreatefromstring);
 PHP_FUNCTION(imagecreatefromgif);
 PHP_FUNCTION(imagecreatefromjpeg);
 PHP_FUNCTION(imagecreatefromxbm);
-PHP_FUNCTION(imagecreatefromxpm);
 PHP_FUNCTION(imagecreatefrompng);
 PHP_FUNCTION(imagecreatefromwbmp);
 PHP_FUNCTION(imagecreatefromgd);
 PHP_FUNCTION(imagecreatefromgd2);
 PHP_FUNCTION(imagecreatefromgd2part);
+#if defined(HAVE_GD_XPM) && defined(HAVE_GD_BUNDLED)
+PHP_FUNCTION(imagecreatefromxpm);
+#endif
 
 PHP_FUNCTION(imagegammacorrect);
 PHP_FUNCTION(imagedestroy);

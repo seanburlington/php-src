@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.29.2.11 2003/02/01 19:01:11 helly Exp $
+dnl $Id: config.m4,v 1.29.2.12 2003/02/01 22:19:31 helly Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -306,7 +306,7 @@ AC_ARG_WITH(dbm,
     done
 
     if test -n "$THIS_INCLUDE"; then
-      for LIB in gdbm dbm c; do
+      for LIB in dbm c gdbm; do
         PHP_TEMP_LDFLAGS(-L$THIS_PREFIX/lib,[
           AC_CHECK_LIB($LIB, dbminit, [
             AC_MSG_CHECKING(for DBM using GDBM)

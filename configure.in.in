@@ -1,4 +1,4 @@
-dnl $Id: configure.in.in,v 1.43 1999/06/27 21:36:00 sas Exp $ -*- sh -*-
+dnl $Id: configure.in.in,v 1.44 1999/07/02 13:59:51 sas Exp $ -*- sh -*-
 dnl Process this file with autoconf to produce a configure script.
 
 
@@ -48,7 +48,7 @@ AM_INIT_AUTOMAKE(php, 4.0pa1)
 
 PHP_VERSION=$VERSION
 echo "#define PHP_VERSION \"$PHP_VERSION\"" > php_version.h.new
-cmp php_version.h.new php_version.h >/dev/null
+cmp php_version.h.new php_version.h >/dev/null 2>&1
 if test $? -ne 0 ; then
     rm -f php_version.h && mv php_version.h.new php_version.h && \
     echo 'Updated php_version.h'

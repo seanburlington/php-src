@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.303 2000/08/27 20:51:30 sas Exp $ */
+/* $Id: main.c,v 1.304 2000/08/29 09:18:48 ssb Exp $ */
 
 
 #include <stdio.h>
@@ -756,7 +756,6 @@ int php_global_shutdown_extensions(zend_module_entry **ptr, int count)
 	}
 	return SUCCESS;
 }
-
 
 int php_module_startup(sapi_module_struct *sf)
 {

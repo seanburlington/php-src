@@ -16,21 +16,16 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ticks.h,v 1.3 2000/07/24 05:41:00 david Exp $ */
+/* $Id: php_ticks.h,v 1.4 2000/08/29 09:18:48 ssb Exp $ */
 
 #ifndef PHP_TICKS_H
 #define PHP_TICKS_H
 
-struct _php_tick_function_entry {
-	void (*func)(int count);
-	struct _php_tick_function_entry *next;
-};
-
 int php_startup_ticks(PLS_D);
 void php_shutdown_ticks(PLS_D);
 void php_run_ticks(int count);
-PHPAPI int php_add_tick_function(void (*func)(int count));
-PHPAPI int php_remove_tick_function(void (*func)(int count));
+PHPAPI void php_add_tick_function(void (*func)(int));
+PHPAPI void php_remove_tick_function(void (*func)(int));
 
 #endif
 

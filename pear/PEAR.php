@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.42 2002/06/17 13:32:42 cox Exp $
+// $Id: PEAR.php,v 1.43 2002/06/17 13:39:29 cox Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -562,6 +562,35 @@ class PEAR
             $this->setErrorHandling($mode, $options);
         } else {
             PEAR::setErrorHandling($mode, $options);
+        }
+        return true;
+    }
+
+    // }}}
+    // {{{ assertExtension()
+
+    /**
+    * OS independant PHP extension load
+    *
+    * @param string $ext The extension name
+    * @return bool Success or not on the dl() call
+    */
+    function loadExtension($ext)
+    {
+        if (!extension_loaded($ext)) {
+            if (OS_WINDOWS) {
+                $suffix = '.dll';
+            } elseif (PHP_OS == 'HP-UX') {
+                $suffix = '.sl';
+            } elseif (PHP_OS == 'AIX') {
+                $suffix = '.a';
+            } elseif (PHP_OS == 'OSX') {
+                $suffix = '.bundle';
+            } else {
+                $suffix = '.so';
+            }
+            $ext = strtolower($ext);
+            return @dl('php_'.$ext.$suffix) || @dl($ext.$suffix);
         }
         return true;
     }

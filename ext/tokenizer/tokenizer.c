@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.12.2.3 2003/11/29 18:22:46 iliaa Exp $ */
+/* $Id: tokenizer.c,v 1.12.2.4 2003/11/29 19:05:58 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -346,16 +346,18 @@ static void tokenize(zval *return_value TSRMLS_DC)
 			MAKE_STD_ZVAL(keyword);
 			array_init(keyword);
 			add_next_index_long(keyword, token_type);
-			add_next_index_stringl(keyword, zendtext, zendleng, 1);
+			if (token_type == T_END_HEREDOC) {
+				add_next_index_stringl(keyword, Z_STRVAL(token), Z_STRLEN(token), 1);
+				efree(Z_STRVAL(token));
+			} else {
+				add_next_index_stringl(keyword, zendtext, zendleng, 1);
+			}
 			add_next_index_zval(return_value, keyword);
 		} else {
 			add_next_index_stringl(return_value, zendtext, zendleng, 1);
 		}
 		if (destroy && Z_TYPE(token) != IS_NULL) {
 			zval_dtor(&token);
-		}
-		if (token_type == T_END_HEREDOC) {
-			efree(Z_STRVAL(token));
 		}
 		ZVAL_NULL(&token);
 	}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.181 2004/02/03 14:12:58 stas Exp $ */
+/* $Id: var.c,v 1.182 2004/02/05 09:07:46 stas Exp $ */
 
 
 /* {{{ includes 
@@ -554,12 +554,13 @@ static void php_var_serialize_intern(smart_str *buf, zval **struc, HashTable *va
 			smart_str_appendl(buf, "R:", 2);
 			smart_str_append_long(buf, *var_already);
 			smart_str_appendc(buf, ';');
+			return;
 		} else if(Z_TYPE_PP(struc) == IS_OBJECT) {
 			smart_str_appendl(buf, "r:", 2);
 			smart_str_append_long(buf, *var_already);
 			smart_str_appendc(buf, ';');
+			return;
 		}
-		return;
 	}
 
 	switch (Z_TYPE_PP(struc)) {

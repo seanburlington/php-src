@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.701 2004/12/30 15:18:24 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.702 2005/01/08 20:44:23 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2292,6 +2292,7 @@ void php_call_shutdown_functions(void)
 			memcpy(&EG(bailout), &orig_bailout, sizeof(jmp_buf));
 			zend_hash_destroy(BG(user_shutdown_function_names));
 			FREE_HASHTABLE(BG(user_shutdown_function_names));
+			BG(user_shutdown_function_names) = NULL;
 		}
 		zend_end_try();
 }

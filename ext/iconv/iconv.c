@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.115 2003/12/27 23:07:47 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.116 2004/01/06 14:22:54 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1580,7 +1580,7 @@ static php_iconv_err_t _php_iconv_mime_decode(smart_str *pretval, const char *st
 						if (err != PHP_ICONV_ERR_SUCCESS) {
 							if ((mode & PHP_ICONV_MIME_DECODE_CONTINUE_ON_ERROR)) {
 								/* pass the entire chunk through the converter */
-								err = _php_iconv_appendl(pretval, encoded_word, (size_t)((p1 + 1) - encoded_word), cd_pl); 
+								err = _php_iconv_appendl(pretval, encoded_word, (size_t)(p1 - encoded_word), cd_pl); 
 								if (err != PHP_ICONV_ERR_SUCCESS) {
 									goto out;
 								}

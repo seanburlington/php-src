@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Login.php,v 1.4 2002/03/21 20:52:26 cox Exp $
+// $Id: Auth.php,v 1.1 2002/03/22 09:22:26 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Remote.php";
@@ -37,7 +37,7 @@ class PEAR_Command_Login extends PEAR_Command_Common
      */
     function PEAR_Command_Login(&$ui, &$config)
     {
-        parent::PEAR_Command_Common($ui);
+        parent::PEAR_Command_Common($ui, $config);
     }
 
     // }}}
@@ -66,7 +66,8 @@ class PEAR_Command_Login extends PEAR_Command_Common
      *
      * @param array list of additional parameters
      *
-     * @return bool TRUE on success, PEAR error on failure
+     * @return bool TRUE on success, FALSE for unknown commands, or
+     * a PEAR error on failure
      *
      * @access public
      */
@@ -77,6 +78,7 @@ class PEAR_Command_Login extends PEAR_Command_Common
         $server = $cf->get('master_server');
         switch ($command) {
             case 'login': {
+                $remote = new PEAR_Remote($cf);
                 $username = $cf->get('username');
                 if (empty($username)) {
                     $username = @$_ENV['USER'];
@@ -87,7 +89,6 @@ class PEAR_Command_Login extends PEAR_Command_Common
                 $cf->set('username', $username);
                 $password = trim($this->ui->userDialog('Password', 'password'));
                 $cf->set('password', $password);
-                $remote = new PEAR_Remote($cf);
                 $remote->expectError(401);
                 $ok = $remote->call('logintest');
                 $remote->popExpect();
@@ -107,8 +108,7 @@ class PEAR_Command_Login extends PEAR_Command_Common
                 break;
             }
             default: {
-                $failmsg = "unknown command: $command";
-                break;
+                return false;
             }
         }
         if ($failmsg) {

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.7 2002/03/21 22:29:03 cox Exp $
+// $Id: Install.php,v 1.8 2002/03/22 09:22:26 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -66,6 +66,7 @@ class PEAR_Command_Install extends PEAR_Command_Common
                                          $this->config->get('ext_dir'),
                                          $this->config->get('doc_dir'));
         $installer->debug = $this->config->get('verbose');
+
         $failmsg = '';
         $opts = array();
         switch ($command) {

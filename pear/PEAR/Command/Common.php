@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.6 2002/03/21 20:52:26 cox Exp $
+// $Id: Common.php,v 1.7 2002/03/22 09:22:26 ssb Exp $
 
 require_once "PEAR.php";
 //require_once "PEAR/CommandResponse.php";
@@ -45,8 +45,8 @@ class PEAR_Command_Common extends PEAR
     function PEAR_Command_Common(&$ui, &$config)
     {
         parent::PEAR();
-        $this->config =& $config;
-        $this->ui = $ui;
+        $this->config = &$config;
+        $this->ui = &$ui;
     }
 
     function getOptions()

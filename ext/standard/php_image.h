@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_image.h,v 1.26 2003/09/09 19:25:55 sniper Exp $ */
+/* $Id: php_image.h,v 1.27 2003/11/27 22:03:34 iliaa Exp $ */
 
 #ifndef PHP_IMAGE_H
 #define PHP_IMAGE_H
@@ -25,6 +25,7 @@
 PHP_FUNCTION(getimagesize);
 
 PHP_FUNCTION(image_type_to_mime_type);
+PHP_FUNCTION(image_type_to_extension);
 
 /* {{{ enum image_filetype
    This enum is used to have ext/standard/image.c and ext/exif/exif.c use

@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: rules.mk,v 1.6 2000/01/03 12:39:44 sas Exp $ 
+# $Id: rules.mk,v 1.7 2000/01/26 21:58:46 sas Exp $ 
 #
 
 include $(DEPTH)/config_vars.mk
@@ -88,7 +88,10 @@ distclean-recursive depend-recursive clean-recursive all-recursive install-recur
 		done; \
 		if test "$$otarget" = "all" && test -z '$(targets)'; then ok=yes; fi; \
 		if test "$$ok" != "yes"; then $(MAKE) "$$otarget-p" || exit 1; fi; \
-	fi; 
+	fi; \
+	if test -n '$(make_shared)'; then \
+		$(MAKE) shared || exit 1; \
+	fi;
 
 all-p: $(targets)
 install-p: $(targets) $(install_targets)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.73 2000/04/19 13:03:47 rasmus Exp $ */
+/* $Id: file.c,v 1.74 2000/04/23 19:16:24 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1183,15 +1183,17 @@ PHP_FUNCTION(ftell)
 }
 
 /* }}} */
-/* {{{ proto int fseek(int fp, int offset)
+/* {{{ proto int fseek(int fp, int offset [, int seekfrom])
    Seek on a file pointer */
 
 PHP_FUNCTION(fseek)
 {
-	pval **arg1, **arg2;
+	pval **arg1, **arg2, **arg3;
+	int argcount = ARG_COUNT(ht), seekfrom = 0;
 	void *what;
 	
-	if (ARG_COUNT(ht) != 2 || zend_get_parameters_ex(2, &arg1, &arg2) == FAILURE) {
+	if (argcount < 2 || argcount > 3 ||
+	    zend_get_parameters_ex(argcount, &arg1, &arg2, &arg3) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	
@@ -1199,8 +1201,12 @@ PHP_FUNCTION(fseek)
 	ZEND_VERIFY_RESOURCE(what);
 
 	convert_to_long_ex(arg2);
+	if (argcount > 2) {
+		convert_to_long_ex(arg3);
+		seekfrom = (*arg3)->value.lval;
+	}
 	
-	RETURN_LONG(fseek((FILE*)what,(*arg2)->value.lval,SEEK_SET));
+	RETURN_LONG(fseek((FILE*)what,(*arg2)->value.lval+seekfrom,SEEK_SET));
 }
 
 /* }}} */

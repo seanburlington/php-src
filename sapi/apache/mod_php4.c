@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.134 2002/06/21 14:47:58 sesser Exp $ */
+/* $Id: mod_php4.c,v 1.135 2002/08/14 17:15:49 kalowsky Exp $ */
 
 #include "php_apache_http.h"
 
@@ -129,6 +129,14 @@ int sapi_apache_read_post(char *buffer, uint count_bytes TSRMLS_DC)
 	request_rec *r = (request_rec *) SG(server_context);
 	void (*handler)(int);
 
+	/*
+	 * This handles the situation where the browser sends a Expect: 100-continue header
+	 * and needs to recieve confirmation from the server on whether or not it can send
+	 * the rest of the request. RFC 2616
+	 *
+	 */
+	if( !ap_should_client_block(r) ) return total_read_bytes;
+ 
 	handler = signal(SIGPIPE, SIG_IGN);
 	while (total_read_bytes<count_bytes) {
 		hard_timeout("Read POST information", r); /* start timeout timer */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.52 2002/10/03 02:32:09 yohgaki Exp $ */
+/* $Id: php_pgsql.h,v 1.53 2002/10/13 03:00:48 yohgaki Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -129,6 +129,7 @@ PHP_FUNCTION(pg_set_client_encoding);
 #if HAVE_PQESCAPE
 PHP_FUNCTION(pg_escape_string);
 PHP_FUNCTION(pg_escape_bytea);
+PHP_FUNCTION(pg_unescape_bytea);
 #endif
 
 /* misc functions */

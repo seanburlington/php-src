@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.65 2004/10/29 00:38:44 andi Exp $ */
+/* $Id: file.c,v 1.279.2.66 2004/12/06 23:31:58 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1198,6 +1198,14 @@ PHP_FUNCTION(popen)
 	convert_to_string_ex(arg1);
 	convert_to_string_ex(arg2);
 	p = estrndup(Z_STRVAL_PP(arg2), Z_STRLEN_PP(arg2));
+#ifndef PHP_WIN32
+	{
+		char *z = memchr(p, 'b', Z_STRLEN_PP(arg2));
+		if (z) {
+			memmove(p + (z - p), z + 1, Z_STRLEN_PP(arg2) - (z - p));
+		}
+	}
+#endif
 	if (PG(safe_mode)){
 		b = strchr(Z_STRVAL_PP(arg1), ' ');
 		if (!b) {

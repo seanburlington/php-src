@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.9 2001/05/17 17:02:37 dbeu Exp $ */
+/* $Id: php_sockets.h,v 1.10 2001/05/21 19:36:22 sterling Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -116,3 +116,4 @@ typedef struct {
  * c-basic-offset: 4
  * End:
  */
+

@@ -9,7 +9,7 @@
 #
 # Written by Sascha Schumann
 #
-# $Id: build.mk,v 1.19 1999/12/19 21:02:39 zeev Exp $ 
+# $Id: build.mk,v 1.20 1999/12/23 12:34:55 sas Exp $ 
 
 
 SUBDIRS = Zend TSRM
@@ -44,6 +44,6 @@ dist:
 
 cvsclean:
 	@for i in `find . -follow -name .cvsignore`; do \
-		(cd `dirname $$i` && rm -rf `cat .cvsignore`); \
+		(cd `dirname $$i` && (rm -f `cat .cvsignore` *.o *.a; rm -rf .libs .deps)); \
 	done
 	@rm -f $(SUBDIRS) 2>/dev/null || true

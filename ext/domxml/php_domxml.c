@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.116 2002/02/04 21:07:39 jarkol Exp $ */
+/* $Id: php_domxml.c,v 1.117 2002/02/20 23:35:20 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -3569,7 +3569,7 @@ PHP_FUNCTION(domxml_xslt_process)
 		RETURN_FALSE;
 	}
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "o|a|b", &idxml, &idparams, &xpath_params) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "o|ab", &idxml, &idparams, &xpath_params) == FAILURE) {
 		RETURN_FALSE;
 	}
 

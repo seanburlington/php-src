@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_birdstep.h,v 1.1.8.1 2002/12/31 16:35:04 sebastian Exp $ */
+/* $Id: php_birdstep.h,v 1.1.8.2 2003/07/14 16:13:30 sniper Exp $ */
 
 #ifndef PHP_BIRDSTEP_H
 #define PHP_BIRDSTEP_H

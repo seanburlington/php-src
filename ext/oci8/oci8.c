@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.67 2000/03/14 21:17:07 eschmid Exp $ */
+/* $Id: oci8.c,v 1.68 2000/03/14 21:47:47 eschmid Exp $ */
 
 /* TODO list:
  *
@@ -3139,7 +3139,7 @@ PHP_FUNCTION(ocicolumnprecision)
 
 /* }}} */
 
-/* {{{ proto mixed  ocicolumntype(int stmt, int col)
+/* {{{ proto mixed ocicolumntype(int stmt, int col)
    Tell the data type of a column */
 
 PHP_FUNCTION(ocicolumntype)
@@ -3202,7 +3202,7 @@ PHP_FUNCTION(ocicolumntype)
 
 /* }}} */
 
-/* {{{ proto mixed  ocicolumntyperaw(int stmt, int col)
+/* {{{ proto mixed ocicolumntyperaw(int stmt, int col)
    Tell the raw oracle data type of a column */
 
 PHP_FUNCTION(ocicolumntyperaw)

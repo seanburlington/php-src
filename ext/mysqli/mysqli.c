@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.54 2004/12/04 08:16:03 georg Exp $ 
+  $Id: mysqli.c,v 1.55 2004/12/09 08:22:06 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -108,7 +108,6 @@ void php_clear_stmt_bind(MY_STMT *stmt)
 /* {{{ php_clear_mysql */
 void php_clear_mysql(MY_MYSQL *mysql) {
 	if (mysql->li_read) {
-		printf("freeing...\n");
 		efree(Z_STRVAL_P(mysql->li_read));
 		FREE_ZVAL(mysql->li_read);
 		mysql->li_read = NULL;
@@ -920,12 +919,10 @@ void php_local_infile_end(void *ptr)
 	data= (mysqli_local_infile *)ptr;
 
 	if (!(mysql = data->userdata)) {
-		efree(data);
 		return;
 	}
 
 	php_stream_close(mysql->li_stream);
-	//efree(data);
 	return;	
 }
 /* }}} */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.55 2005/02/27 22:32:11 helly Exp $ */
+/* $Id: php_pdo_driver.h,v 1.56 2005/02/28 22:37:13 helly Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -69,12 +69,13 @@ enum pdo_param_type {
 	/* get_col ptr should point to a zend_bool */
 	PDO_PARAM_BOOL,
 
-
 	/* magic flag to denote a parameter as being input/output */
-	PDO_PARAM_INPUT_OUTPUT = 0x80000000
+	PDO_PARAM_INPUT_OUTPUT = 0x80000000	
 };
 
-#define PDO_PARAM_TYPE(x)		((x) & ~PDO_PARAM_INPUT_OUTPUT)
+#define PDO_PARAM_FLAGS			0xFFFF0000
+
+#define PDO_PARAM_TYPE(x)		((x) & ~PDO_PARAM_FLAGS)
 
 enum pdo_fetch_type {
 	PDO_FETCH_USE_DEFAULT,

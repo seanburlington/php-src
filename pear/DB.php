@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.18 2000/03/09 21:57:14 ssb Exp $
+// $Id: DB.php,v 1.19 2000/06/21 02:22:04 chagenbu Exp $
 //
 // Database independent query interface.
 //
@@ -161,7 +161,7 @@ class DB {
 	 * error
 	 */
     function &factory($type) {
-		if (!@import("DB/${type}.php")) {
+		if (!@include_once("DB/${type}.php")) {
 			return DB_ERROR_NOT_FOUND;
 		}
 		$classname = 'DB_' . $type;
@@ -190,7 +190,7 @@ class DB {
 
 		$dsninfo = DB::parseDSN($dsn);
 		$type = $dsninfo['phptype'];
-		if (!@import("DB/${type}.php")) {
+		if (!@include_once("DB/${type}.php")) {
 			return DB_ERROR_NOT_FOUND;
 		}
 		$classname = 'DB_' . $type;

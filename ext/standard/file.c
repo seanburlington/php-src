@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.365 2003/10/29 22:25:57 moriyoshi Exp $ */
+/* $Id: file.c,v 1.366 2003/11/24 01:42:43 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -263,12 +263,16 @@ PHP_FUNCTION(flock)
 		RETURN_FALSE;
 	}
 
+	if (arg3 && PZVAL_IS_REF(arg3)) {
+		convert_to_long_ex(&arg3);
+		Z_LVAL_P(arg3) = 0;
+	}
+
 	/* flock_values contains all possible actions if (operation & 4) we won't block on the lock */
 	act = flock_values[act - 1] | (operation & 4 ? LOCK_NB : 0);
 	if (!php_stream_lock(stream, act)) {
 		if (operation && errno == EWOULDBLOCK && arg3 && PZVAL_IS_REF(arg3)) {
-			convert_to_long_ex(&arg3);
-			ZVAL_LONG(arg3, 1);
+			Z_LVAL_P(arg3) = 1;
 		}
 		RETURN_TRUE;
 	}

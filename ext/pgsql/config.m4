@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.28 2002/03/12 16:31:48 sas Exp $
+dnl $Id: config.m4,v 1.29 2002/03/29 11:24:54 yohgaki Exp $
 dnl
 
 AC_DEFUN(PHP_PGSQL_CHECK_FUNCTIONS,[
@@ -50,6 +50,7 @@ if test "$PHP_PGSQL" != "no"; then
   old_LDFLAGS=$LDFLAGS
   LDFLAGS="$LDFLAGS -L$PGSQL_LIBDIR"
   AC_CHECK_LIB(pq, PQescapeString,AC_DEFINE(HAVE_PQESCAPE,1,[ ]))
+  AC_CHECK_LIB(pq, PQsetnonblocking,AC_DEFINE(HAVE_PQSETNONBLOCKING,1,[ ]))
   AC_CHECK_LIB(pq, PQcmdTuples,AC_DEFINE(HAVE_PQCMDTUPLES,1,[ ]))
   AC_CHECK_LIB(pq, PQoidValue,AC_DEFINE(HAVE_PQOIDVALUE,1,[ ]))
   AC_CHECK_LIB(pq, PQclientEncoding,AC_DEFINE(HAVE_PQCLIENTENCODING,1,[ ]))

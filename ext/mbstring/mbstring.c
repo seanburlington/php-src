@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.211 2004/03/08 22:18:03 derick Exp $ */
+/* $Id: mbstring.c,v 1.212 2004/03/10 20:55:42 moriyoshi Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -701,7 +701,8 @@ PHP_INI_BEGIN()
 	 PHP_INI_ENTRY("mbstring.script_encoding", NULL, PHP_INI_ALL, OnUpdate_mbstring_script_encoding)
 #endif /* ZEND_MULTIBYTE */
 	 PHP_INI_ENTRY("mbstring.substitute_character", NULL, PHP_INI_ALL, OnUpdate_mbstring_substitute_character)
-	 STD_PHP_INI_ENTRY("mbstring.func_overload", "0", PHP_INI_SYSTEM, OnUpdateLong, func_overload, zend_mbstring_globals, mbstring_globals)
+	 STD_PHP_INI_ENTRY("mbstring.func_overload", "0", PHP_INI_SYSTEM |
+	 PHP_INI_PERDIR, OnUpdateLong, func_overload, zend_mbstring_globals, mbstring_globals)
 	 	 								  
 	 STD_PHP_INI_BOOLEAN("mbstring.encoding_translation", "0",
 	 PHP_INI_SYSTEM | PHP_INI_PERDIR, OnUpdate_mbstring_encoding_translation, 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.325 2002/10/17 22:44:44 iliaa Exp $ */
+/* $Id: string.c,v 1.326 2002/10/18 13:07:50 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3225,7 +3225,7 @@ PHP_FUNCTION(setlocale)
 		}
 		
 		if (Z_TYPE_PP(args[1]) == IS_ARRAY) {
-			zend_hash_move_forward(Z_ARRVAL_PP(args[1]));
+			if (zend_hash_move_forward(Z_ARRVAL_PP(args[1])) == FAILURE) break;
 		} else {
 			if (++i >= n_args) break;
 		}

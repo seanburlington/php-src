@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.61.2.6 2002/12/11 10:37:53 helly Exp $ */
+/* $Id: dba.c,v 1.61.2.7 2002/12/20 16:47:15 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -504,9 +504,9 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		RETURN_FALSE;
 	}
 			
-	info = emalloc(sizeof(dba_info));
+	info = pemalloc(sizeof(dba_info), persistent);
 	memset(info, 0, sizeof(dba_info));
-	info->path = estrdup(Z_STRVAL_PP(args[0]));
+	info->path = pestrdup(Z_STRVAL_PP(args[0]), persistent);
 	info->mode = modenr;
 	info->argc = ac - 3;
 	info->argv = args + 3;
@@ -529,7 +529,7 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 
 	if (!error && lock_mode) {
 		if (lock_dbf) {
-			info->lock.name = estrdup(info->path);
+			info->lock.name = pestrdup(info->path, persistent);
 			lock_file_mode = file_mode;
 		} else {
 			spprintf(&info->lock.name, 0, "%s.lck", info->path);

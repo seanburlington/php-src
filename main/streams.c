@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.123 2002/11/01 04:58:23 wez Exp $ */
+/* $Id: streams.c,v 1.124 2002/11/06 00:15:24 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -823,6 +823,25 @@ PHPAPI size_t _php_stream_write(php_stream *stream, const char *buf, size_t coun
 		}
 	}
 	return didwrite;
+}
+
+PHPAPI size_t _php_stream_printf(php_stream *stream TSRMLS_DC, const char *fmt, ...)
+{
+	size_t count;
+	char *buf;
+	va_list ap;
+	
+	va_start(ap, fmt);
+	count = vspprintf(&buf, 0, fmt, ap);
+	va_end(ap);
+	
+	if (!buf)
+		return 0; /* error condition */
+	
+	count = php_stream_write(stream, buf, count);
+	efree(buf);
+	
+	return count;
 }
 
 PHPAPI off_t _php_stream_tell(php_stream *stream TSRMLS_DC)

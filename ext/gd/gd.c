@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.83 2000/07/14 22:07:57 rasmus Exp $ */
+/* $Id: gd.c,v 1.84 2000/08/21 14:11:19 stas Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1414,7 +1414,7 @@ PHP_FUNCTION(imagecolortransparent)
 
 	ZEND_FETCH_RESOURCE(im, gdImagePtr, IM, -1, "Image", GDG(le_gd));
 
-	if ((*COL) != NULL) {
+	if (COL != NULL && (*COL) != NULL) {
 		col = (*COL)->value.lval;
 		gdImageColorTransparent(im,col);
 	}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.12 2001/05/09 11:18:11 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.13 2001/05/10 13:12:03 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -765,6 +765,7 @@ PHP_FUNCTION(mb_substitute_character)
 			MBSTRG(current_filter_illegal_substchar) = Z_LVAL_PP(arg1);
 			break;
 		}
+		RETVAL_TRUE;
 	} else {
 		WRONG_PARAM_COUNT;
 	}

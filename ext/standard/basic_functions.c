@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.594 2003/03/06 20:31:16 sesser Exp $ */
+/* $Id: basic_functions.c,v 1.595 2003/03/09 23:12:31 pollita Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -898,7 +898,6 @@ function_entry basic_functions[] = {
 	PHP_FE(stream_bucket_prepend,				NULL)
 	PHP_FE(stream_bucket_append,				NULL)
 	PHP_FE(stream_bucket_new,					NULL)
-	PHP_FE(stream_bucket,						NULL)
 
 	/* functions from aggregate.c */
 	PHP_FE(aggregate,						first_arg_force_ref)

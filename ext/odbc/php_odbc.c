@@ -20,12 +20,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.86 2001/05/24 10:07:15 ssb Exp $ */
+/* $Id: php_odbc.c,v 1.87 2001/06/01 05:01:50 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-
+ 
 #include "php.h"
 #include "php_globals.h"
 
@@ -259,6 +259,8 @@ static PHP_INI_DISP(display_defPW)
 #else
 		PUTS("********");
 #endif
+	} else {
+		PUTS("<i>no value</i>");
 	}
 }
 

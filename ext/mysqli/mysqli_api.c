@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.11 2003/02/16 15:56:57 iliaa Exp $ 
+  $Id: mysqli_api.c,v 1.12 2003/02/16 17:59:30 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -643,7 +643,11 @@ PHP_FUNCTION(mysqli_fetch)
 							my_ulonglong lval;
 							memcpy (&lval, stmt->bind[i].buffer, sizeof(my_ulonglong));
 							if (lval != (long)lval) {
-								sprintf((char *)&tmp, "%llu", lval);
+								/* even though lval is declared as unsigned, the value
+								 * may be negative. Therefor we cannot use %llu and must
+								 * user %lld.
+								 */
+								sprintf((char *)&tmp, "%lld", lval);
 								ZVAL_STRING(stmt->vars[i], tmp, 1);
 							} else {
 								ZVAL_LONG(stmt->vars[i], lval);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.295 2004/07/19 07:19:37 andi Exp $ */
+/* $Id: gd.c,v 1.296 2004/07/23 02:28:18 edink Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -453,7 +453,7 @@ PHP_RSHUTDOWN_FUNCTION(gd)
 /* }}} */
 
 #if HAVE_GD_BUNDLED
-#define PHP_GD_VERSION_STRING "bundled (2.0.23 compatible)"
+#define PHP_GD_VERSION_STRING "bundled (2.0.28 compatible)"
 #elif HAVE_LIBGD20
 #define PHP_GD_VERSION_STRING "2.0 or higher"
 #elif HAVE_GDIMAGECOLORRESOLVE

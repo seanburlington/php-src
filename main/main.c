@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.114 1999/09/05 19:59:28 sas Exp $ */
+/* $Id: main.c,v 1.115 1999/09/06 22:40:26 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -854,7 +854,7 @@ int php_module_startup(sapi_module_struct *sf)
 	
 	PG(header_is_being_sent) = 0;
 	SG(request_info).headers_only = 0;
-	PG(connection_status) |= PHP_CONNECTION_NORMAL;
+	PG(connection_status) = PHP_CONNECTION_NORMAL;
 
 #if HAVE_SETLOCALE
 	setlocale(LC_CTYPE, "");

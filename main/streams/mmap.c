@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mmap.c,v 1.2 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: mmap.c,v 1.3 2003/07/14 19:38:13 wez Exp $ */
 
 /* Memory Mapping interface for streams */
 #include "php.h"
@@ -24,7 +24,12 @@
 
 PHPAPI char *_php_stream_mmap_range(php_stream *stream, size_t offset, size_t length, php_stream_mmap_operation_t mode, size_t *mapped_len TSRMLS_DC)
 {
-	php_stream_mmap_range range = { offset, length, mode, NULL };
+	php_stream_mmap_range range;
+	
+	range.offset = offset;
+	range.length = length;
+	range.mode = mode;
+	range.mapped = NULL;
 
 	/* TODO: Enforce system policy and limits for mmap sizes ? */
 	

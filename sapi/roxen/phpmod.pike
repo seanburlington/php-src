@@ -5,7 +5,7 @@
 inherit "module";
 inherit "roxenlib";
 
-constant cvs_version = "$Id: phpmod.pike,v 1.4 1999/11/25 02:05:35 neotron Exp $";
+constant cvs_version = "$Id: phpmod.pike,v 1.5 1999/11/25 02:15:59 neotron Exp $";
 constant thread_safe = 1;
 
 string trim( string what )
@@ -158,7 +158,7 @@ class PHPScript
     mapping options = ([
       "env":environment,
     ]);
-#if 0
+#if 1
     if(!QUERY(rxml)) {
       mid->my_fd->set_blocking();
       options->my_fd = mid->my_fd;

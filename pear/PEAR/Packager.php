@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.24 2002/02/22 21:57:03 vblavet Exp $
+// $Id: Packager.php,v 1.25 2002/02/23 15:32:33 ssb Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -120,7 +120,7 @@ class PEAR_Packager extends PEAR_Common
         }
         $pwd = getcwd();
         $pkgfile = basename($pkgfile);
-        if (isset($pkginfo['release_state']) && $pkginfo['release_state'] == 'snapshot') {
+        if (isset($pkginfo['release_state']) && $pkginfo['release_state'] == 'snapshot' && empty($pkginfo['version'])) {
             $pkginfo['version'] = date('Ymd');
         }
         // don't want strange characters

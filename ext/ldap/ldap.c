@@ -21,7 +21,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.34 2000/04/07 23:20:22 sterling Exp $ */
+/* $Id: ldap.c,v 1.35 2000/04/19 13:18:01 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -123,7 +123,7 @@ static void _free_ldap_result(LDAPMessage *result)
 
 PHP_INI_BEGIN()
 	STD_PHP_INI_ENTRY_EX("ldap.max_links",		"-1",	PHP_INI_SYSTEM,			OnUpdateInt,		max_links,			zend_ldap_globals,		ldap_globals,	display_link_numbers)
-	STD_PHP_INI_ENTRY("mysql.base_dn",			NULL,	PHP_INI_ALL,			OnUpdateString,		base_dn,			zend_ldap_globals,		ldap_globals)
+	STD_PHP_INI_ENTRY("ldap.base_dn",			NULL,	PHP_INI_ALL,			OnUpdateString,		base_dn,			zend_ldap_globals,		ldap_globals)
 PHP_INI_END()
 
 
@@ -156,8 +156,9 @@ PHP_MSHUTDOWN_FUNCTION(ldap)
 
 PHP_MINFO_FUNCTION(ldap)
 {
-	char maxl[32], tmp[32];
+	char maxl[32];
 #if HAVE_NSLDAP
+	char tmp[32]
 	LDAPVersion ver;
 	double SDKVersion;
 #endif
@@ -178,7 +179,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.34 2000/04/07 23:20:22 sterling Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.35 2000/04/19 13:18:01 zeev Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #if HAVE_NSLDAP

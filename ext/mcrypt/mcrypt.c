@@ -16,7 +16,7 @@
    |          Derick Rethans <d.rethans@jdimedia.nl>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.77 2002/06/26 09:09:35 derick Exp $ */
+/* $Id: mcrypt.c,v 1.77.4.1 2002/11/29 15:57:39 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1463,6 +1463,7 @@ PHP_FUNCTION(mcrypt_create_iv)
 		n = read_bytes;
 		close(fd);
 		if (n < size) {
+			efree(iv);
 			php_error(E_WARNING, "%s(): Could not gather sufficient random data", get_active_function_name(TSRMLS_C));
 			RETURN_FALSE;
 		}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.216 2001/08/03 23:09:05 jeroen Exp $ */
+/* $Id: string.c,v 1.217 2001/08/03 23:10:04 jeroen Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -492,7 +492,7 @@ PHP_FUNCTION(chop)
 	
 	if (ZEND_NUM_ARGS() < 1 || ZEND_NUM_ARGS() > 2)
 		WRONG_PARAM_COUNT;
-	zend_get_parameters_ex(2, &str, &what);
+	zend_get_parameters_ex(ZEND_NUM_ARGS(), &str, &what);
 	convert_to_string_ex(str);
 	if (ZEND_NUM_ARGS() == 2)
 		convert_to_string_ex(str);
@@ -512,7 +512,7 @@ PHP_FUNCTION(trim)
 	
 	if (ZEND_NUM_ARGS() < 1 || ZEND_NUM_ARGS() > 2)
 		WRONG_PARAM_COUNT;
-	zend_get_parameters_ex(2, &str, &what);
+	zend_get_parameters_ex(ZEND_NUM_ARGS(), &str, &what);
 	convert_to_string_ex(str);
 	if (ZEND_NUM_ARGS() == 2)
 		convert_to_string_ex(str);
@@ -529,7 +529,7 @@ PHP_FUNCTION(ltrim)
 	
 	if (ZEND_NUM_ARGS() < 1 || ZEND_NUM_ARGS() > 2)
 		WRONG_PARAM_COUNT;
-	zend_get_parameters_ex(2, &str, &what);
+	zend_get_parameters_ex(ZEND_NUM_ARGS(), &str, &what);
 	convert_to_string_ex(str);
 	if (ZEND_NUM_ARGS() == 2)
 		convert_to_string_ex(str);

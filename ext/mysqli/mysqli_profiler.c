@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_profiler.c,v 1.4 2003/03/15 22:51:49 hholzgra Exp $ 
+  $Id: mysqli_profiler.c,v 1.5 2003/03/20 20:03:21 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -32,6 +32,7 @@
 PR_COMMON *php_mysqli_profiler_new_object(PR_COMMON *parent, unsigned int type, unsigned int settime)
 {
 	PR_COMMON	*prnew, *child;
+	TSRMLS_FETCH();
 
 	switch (type) {
 		case MYSQLI_PR_MYSQL:

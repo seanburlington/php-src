@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.42 2002/03/20 12:40:27 sas Exp $
+dnl $Id: config.m4,v 1.43 2002/04/24 18:00:39 sniper Exp $
 dnl
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
@@ -100,7 +100,7 @@ elif test "$PHP_MYSQL" != "no"; then
       ], [
         -L$PHP_ZLIB_DIR/lib -L$MYSQL_LIB_DIR 
       ])  
-      MYSQL_LIBS="-L$PHP_ZLIB_DIR/lib -z"
+      MYSQL_LIBS="-L$PHP_ZLIB_DIR/lib -lz"
     else
       PHP_ADD_LIBRARY(z,, MYSQL_SHARED_LIBADD)
       PHP_CHECK_LIBRARY(mysqlclient, mysql_errno, [], [
@@ -108,7 +108,7 @@ elif test "$PHP_MYSQL" != "no"; then
       ], [
         -L$MYSQL_LIB_DIR
       ])   
-      MYSQL_LIBS="-z"
+      MYSQL_LIBS="-lz"
     fi
   ], [
     -L$MYSQL_LIB_DIR 

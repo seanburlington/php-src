@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.323 2000/10/13 00:09:31 hholzgra Exp $ */
+/* $Id: main.c,v 1.324 2000/10/13 10:04:17 hholzgra Exp $ */
 
 
 #include <stdio.h>
@@ -916,8 +916,6 @@ void php_module_shutdown()
 		return;
 	}
 
-	php_shutdown_fopen_wrappers();
-
 	/* close down the ini config */
 	php_config_ini_shutdown();
 
@@ -931,6 +929,7 @@ void php_module_shutdown()
 
 	global_lock_destroy();
 	zend_shutdown();
+	php_shutdown_fopen_wrappers();
 	UNREGISTER_INI_ENTRIES();
 	php_ini_mshutdown();
 	shutdown_memory_manager(0, 1);

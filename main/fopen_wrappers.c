@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.97 2000/10/13 09:13:01 dbeu Exp $ */
+/* $Id: fopen_wrappers.c,v 1.98 2000/10/13 10:04:17 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -110,9 +110,8 @@ PHPAPI int php_unregister_url_wrapper(char *protocol)
 
 int php_init_fopen_wrappers(void) 
 {
-	PLS_FETCH();
-
 	int status = SUCCESS;
+	PLS_FETCH();
 
 	if(PG(allow_url_fopen)) {
 		if (zend_hash_init(&fopen_url_wrappers_hash, 0, NULL, NULL, 1)==FAILURE) {

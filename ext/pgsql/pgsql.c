@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.244.2.2 2002/11/29 17:19:05 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.244.2.3 2002/12/16 15:30:51 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -427,7 +427,8 @@ PHP_MINIT_FUNCTION(pgsql)
 PHP_MSHUTDOWN_FUNCTION(pgsql)
 {
 	UNREGISTER_INI_ENTRIES();
-	
+	zend_hash_destroy(&PGG(notices));
+
 	return SUCCESS;
 }
 /* }}} */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.478 2002/08/12 20:12:31 helly Exp $ */
+/* $Id: main.c,v 1.479 2002/08/13 09:37:51 helly Exp $ */
 
 /* {{{ includes
  */
@@ -396,6 +396,10 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 	
 	vspprintf(&buffer, 0, format, args);
 	if (buffer) {
+		if (docref && docref[0] == '#') {
+			docref_target = strchr(docref, '#');
+			docref = NULL;
+		}
 		if (!docref) {
 			function = get_active_function_name(TSRMLS_C);
 			if (function) {

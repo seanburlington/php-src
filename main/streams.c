@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.73 2003/07/29 18:26:59 iliaa Exp $ */
+/* $Id: streams.c,v 1.125.2.74 2003/08/27 01:10:25 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1943,7 +1943,9 @@ PHPAPI php_stream *_php_stream_fopen(const char *filename, const char *mode, cha
 		return NULL;
 	}
 
-	realpath = expand_filepath(filename, NULL TSRMLS_CC);
+	if ((realpath = expand_filepath(filename, NULL TSRMLS_CC)) == NULL) {
+		return NULL;
+	}
 
 	if (persistent) {
 		spprintf(&persistent_id, 0, "streams_stdio_%d_%s", open_flags, realpath);

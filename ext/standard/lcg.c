@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lcg.c,v 1.33.2.2 2003/03/31 03:24:45 sas Exp $ */
+/* $Id: lcg.c,v 1.33.2.3 2003/03/31 05:39:45 sas Exp $ */
 
 #include "php.h"
 #include "php_lcg.h"
@@ -56,6 +56,8 @@ static php_lcg_globals lcg_globals;
  */
 
 #define MODMULT(a, b, c, m, s) q = s/a;s=b*(s-a*q)-c*q;if(s<0)s+=m
+
+static void lcg_seed(TSRMLS_D);
 
 PHPAPI double php_combined_lcg(TSRMLS_D)
 {

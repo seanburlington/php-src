@@ -16,7 +16,7 @@
 // |          Sebastian Bergmann <sb@sebastian-bergmann.de>               |
 // +----------------------------------------------------------------------+
 //
-// $Id: Cache.php,v 1.13 2001/07/07 23:15:08 sbergmann Exp $
+// $Id: Cache.php,v 1.14 2001/08/10 16:12:33 sebastian Exp $
 
 require_once 'Cache/Error.php';
 
@@ -58,7 +58,7 @@ require_once 'Cache/Error.php';
 *          bad circumstances  (especially with the file container)
 *
 * @author   Ulf Wendel <ulf.wendel@phpdoc.de>
-* @version  $Id: Cache.php,v 1.13 2001/07/07 23:15:08 sbergmann Exp $
+* @version  $Id: Cache.php,v 1.14 2001/08/10 16:12:33 sebastian Exp $
 * @package  Cache
 * @access   public
 */
@@ -121,18 +121,18 @@ class Cache extends PEAR {
 
     /**
     *
-    * @param    string  Name of storage container class
-    * @param    array   Array with storage class dependend config options
+    * @param    string  Name of container class
+    * @param    array   Array with container class options
     */
-    function Cache($storage_driver, $storage_options = '')
+    function Cache($container, $container_options = '')
     {
         $this->PEAR();
-        $storage_driver = strtolower($storage_driver);
-        $storage_class = 'Cache_Container_' . $storage_driver;
-        $storage_classfile = 'Cache/Container/' . $storage_driver . '.php';
+        $container = strtolower($container);
+        $container_class = 'Cache_Container_' . $container;
+        $container_classfile = 'Cache/Container/' . $container . '.php';
 
-        include_once $storage_classfile;
-        $this->container = new $storage_class($storage_options);
+        include_once $container_classfile;
+        $this->container = new $container_class($container_options);
     }
 
     //deconstructor

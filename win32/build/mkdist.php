@@ -1,4 +1,4 @@
-<?php # $Id: mkdist.php,v 1.3 2003/12/19 20:39:02 wez Exp $
+<?php # $Id: mkdist.php,v 1.4 2003/12/22 22:48:29 wez Exp $
 /* piece together a windows binary distro */
 
 $build_dir = $argv[1];
@@ -25,6 +25,11 @@ $per_module_deps = array();
 
 function get_depends($module)
 {
+	// skip this for now; working on a more portable solution
+	// since VC6 ships with an old version of depends.exe that
+	// doesn't have the command line options
+	return;
+
 	static $no_dist = array(
 		/* windows system dlls that should not be bundled */
 		'advapi32.dll', 'comdlg32.dll', 'gdi32.dll', 'kernel32.dll', 'ntdll.dll',

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.45 2003/12/16 17:14:06 iliaa Exp $ */
+/* $Id: php_dom.c,v 1.46 2003/12/17 18:59:05 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -267,10 +267,6 @@ void dom_write_property(zval *object, zval *member, zval *value TSRMLS_DC)
 	}
 	if (ret == SUCCESS) {
 		hnd->write_func(obj, value TSRMLS_CC);
-		if (! PZVAL_IS_REF(value) && value->refcount == 0) {
-			value->refcount++;
-			zval_ptr_dtor(&value);
-		}
 	} else {
 		std_hnd = zend_get_std_object_handlers();
 		std_hnd->write_property(object, member, value TSRMLS_CC);

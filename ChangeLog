@@ -1,3 +1,37 @@
+2005-03-21  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * (PHP_5_0)
+      NEWS:
+      - Fixed bug #32394 offsetUnset() segfaults in a foreach
+
+2005-03-21  Andi Gutmans  <andi@zend.com>
+
+    * (PHP_5_0)
+      ZendEngine2/zend_execute.c:
+      - Fix memset() bug (Joe Orton)
+
+2005-03-21  Anantha Kesari H Y  <hyanantha@novell.com>
+
+    * (PHP_5_0)
+      ext/standard/html.c:
+      NetWare can make use of configure generated php_config.h
+
+    * (PHP_5_0)
+      ext/standard/dl.c
+      ext/standard/file.c
+      ext/standard/ftp_fopen_wrapper.c
+      ext/standard/http_fopen_wrapper.c
+      ext/standard/pack.c:
+      NetWare LibC headers have sys/param.h
+
+2005-03-21  Andrei Zmievski  <andrei@gravitonic.com>
+
+    * main/php.h:
+      Define PHP_ABSTRACT_ME
+
+    * ZendEngine2/zend_API.c:
+      internal_function->fn_flags is not initialized at this point
+
 2005-03-20  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * ZendEngine2/tests/bug31102.phpt:
@@ -2291,7 +2325,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1929 2005/03/21 01:42:18 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1930 2005/03/22 01:34:18 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -2772,7 +2806,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1929 2005/03/21 01:42:18 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1930 2005/03/22 01:34:18 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -4246,7 +4280,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1929 2005/03/21 01:42:18 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1930 2005/03/22 01:34:18 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

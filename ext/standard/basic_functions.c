@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.420 2001/11/13 00:37:49 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.421 2001/11/15 09:53:40 stas Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -791,6 +791,13 @@ function_entry basic_functions[] = {
 
     /* functions from versioning.c */
     PHP_FE(version_compare,													NULL)
+
+	/* functions from ftok.c*/
+#if HAVE_SYSVSEM || HAVE_SYSVSHM  || HAVE_SHMOP
+	PHP_FE(ftok,	NULL)
+#else
+	PHP_FALIAS(ftok  , warn_not_available,      NULL)
+#endif	
 
 	{NULL, NULL, NULL}
 };

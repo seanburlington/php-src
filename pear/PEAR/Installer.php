@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.21 2001/10/08 16:52:33 cox Exp $
+// $Id: Installer.php,v 1.22 2001/10/09 02:56:33 cox Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -198,7 +198,7 @@ class PEAR_Installer extends PEAR_Common
     {
         $type = strtolower($atts['ROLE']);
         switch ($type) {
-            case "test":
+            case 'test':
                 // don't install test files for now
                 $this->log(2, "+ Test file $file won't be installed yet");
                 return true;

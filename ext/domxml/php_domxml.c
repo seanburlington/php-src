@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.219 2002/11/15 11:06:13 helly Exp $ */
+/* $Id: php_domxml.c,v 1.220 2002/11/26 15:37:54 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -616,11 +616,12 @@ static inline void node_list_wrapper_dtor(xmlNodePtr node)
 	}
 }
 
-static xmlNodeSetPtr php_get_elements_by_tagname(xmlNodePtr n, xmlChar* name)
+static xmlNodeSetPtr php_get_elements_by_tagname(xmlNodePtr n, xmlChar* name, xmlNodeSet *rv )
 {
-	xmlNodeSetPtr rv = NULL;
 	xmlNodePtr cld = NULL;
-
+	/* TODO
+	   Namespace support
+	 */
 	if ( n != NULL && name != NULL ) {
 		cld = n->children;
 		while ( cld != NULL ) {
@@ -632,6 +633,7 @@ static xmlNodeSetPtr php_get_elements_by_tagname(xmlNodePtr n, xmlChar* name)
 					xmlXPathNodeSetAdd( rv, cld );
 				}
 			}
+			rv = php_get_elements_by_tagname(cld, name, rv);
 			cld = cld->next;
 		}
 	}
@@ -3042,7 +3044,7 @@ PHP_FUNCTION(domxml_elem_get_elements_by_tagname)
 	xmlNode *nodep;
 	int name_len,i;
 	char *name;
-	xmlNodeSet *nodesetp;
+	xmlNodeSet *nodesetp = NULL;
 
 	DOMXML_PARAM_TWO(nodep, id, le_domxmlelementp, "s", &name, &name_len);
 
@@ -3053,7 +3055,7 @@ PHP_FUNCTION(domxml_elem_get_elements_by_tagname)
 		RETURN_FALSE;
 	}
 
-	nodesetp = php_get_elements_by_tagname(nodep,name);
+	nodesetp = php_get_elements_by_tagname(nodep, name, NULL);
 
 	if(nodesetp) {
 		for (i = 0; i < nodesetp->nodeNr; i++) {

@@ -27,10 +27,14 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: info.h,v 1.3 1999/05/09 08:48:01 zeev Exp $ */
+/* $Id: info.h,v 1.4 1999/05/11 00:43:46 zeev Exp $ */
 
 #ifndef _INFO_H
 #define _INFO_H
+
+#define PHP_ENTRY_NAME_COLOR "#999999"
+#define PHP_CONTENTS_COLOR "#DDDDDD"
+#define PHP_HEADER_COLOR "#00DDDD"
 
 void php3_version(INTERNAL_FUNCTION_PARAMETERS);
 void php3_info(INTERNAL_FUNCTION_PARAMETERS);

@@ -1,4 +1,4 @@
-# $Id: config.m4,v 1.1 1999/11/09 12:02:19 rubys Exp $
+# $Id: config.m4,v 1.2 1999/11/09 17:32:04 ssb Exp $
 # config.m4 for extension java
 
 AC_MSG_CHECKING(for Java support)
@@ -57,3 +57,5 @@ AC_ARG_WITH(java,
 AC_SUBST(JAVA_CFLAGS)
 AC_SUBST(JAVA_INCLUDE)
 AC_SUBST(JAVA_SHARED)
+AC_SUBST(JAVA_LFLAGS)
+

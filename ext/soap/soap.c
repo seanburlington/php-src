@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.106 2004/05/27 08:19:29 dmitry Exp $ */
+/* $Id: soap.c,v 1.107 2004/06/21 12:56:33 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2299,11 +2299,10 @@ PHP_METHOD(SoapClient, __doRequest)
 	    &version) == FAILURE) {
 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "wrong parameters");
 	}
-	if (send_http_soap_request(this_ptr, buf, buf_size, location, action, version TSRMLS_CC)) {
-		if (get_http_soap_response(this_ptr, &Z_STRVAL_P(return_value), &Z_STRLEN_P(return_value) TSRMLS_CC)) {
-			return_value->type = IS_STRING;
-			return;
-		}
+	if (make_http_soap_request(this_ptr, buf, buf_size, location, action, version,
+	    &Z_STRVAL_P(return_value), &Z_STRLEN_P(return_value) TSRMLS_CC)) {
+		return_value->type = IS_STRING;
+		return;
 	}
 	RETURN_NULL();
 }

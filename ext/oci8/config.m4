@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.26 2001/03/27 20:34:37 sniper Exp $
+dnl $Id: config.m4,v 1.27 2001/04/14 09:51:29 thies Exp $
 
 AC_DEFUN(AC_OCI8_VERSION,[
   AC_MSG_CHECKING([Oracle version])
@@ -73,6 +73,7 @@ if test "$PHP_OCI8" != "no"; then
 	8.1)
   	  PHP_ADD_LIBRARY(clntsh, 1, OCI8_SHARED_LIBADD)
   	  PHP_ADD_LIBPATH($OCI8_DIR/lib, OCI8_SHARED_LIBADD)
+  	  AC_DEFINE(HAVE_OCI8_TEMP_LOB,1,[ ])
 	  ;;
 	*)
       AC_MSG_ERROR(Unsupported Oracle version!)

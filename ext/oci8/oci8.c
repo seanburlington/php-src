@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.116 2001/04/14 08:38:46 thies Exp $ */
+/* $Id: oci8.c,v 1.117 2001/04/14 09:51:29 thies Exp $ */
 
 /* TODO list:
  *
@@ -54,7 +54,7 @@
 #include "php.h"
 #include "ext/standard/info.h"
 
-/* #define WITH_TEMP_LOBS 1 */
+/* #define HAVE_OCI8_TEMP_LOB 1 */
 #define WITH_COLLECTIONS 1
 
 #if HAVE_OCI8
@@ -209,7 +209,7 @@ PHP_FUNCTION(ociserverversion);
 PHP_FUNCTION(ocistatementtype);
 PHP_FUNCTION(ocirowcount);
 PHP_FUNCTION(ocisetprefetch);
-#ifdef WITH_TEMP_LOBS
+#ifdef HAVE_OCI8_TEMP_LOB
 PHP_FUNCTION(ociwritetemporarylob);
 PHP_FUNCTION(ocicloselob);
 #endif
@@ -328,7 +328,7 @@ static zend_function_entry php_oci_functions[] = {
 static zend_function_entry php_oci_lob_class_functions[] = {
     PHP_FALIAS(load,	    ociloadlob,       NULL)
     PHP_FALIAS(writetofile,	ociwritelobtofile,NULL)
-#ifdef WITH_TEMP_LOBS
+#ifdef HAVE_OCI8_TEMP_LOB
     PHP_FALIAS(writetemporary,	ociwritetemporarylob,NULL)
     PHP_FALIAS(close,      	ocicloselob,      NULL)
 #endif
@@ -584,7 +584,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.116 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.117 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -3182,7 +3182,7 @@ PHP_FUNCTION(ociwritelobtofile)
 }
 /* }}} */
 
-#ifdef WITH_TEMP_LOBS
+#ifdef HAVE_OCI8_TEMP_LOB
 /* {{{ proto int ociwritetemporarylob(int stmt, int loc, string var)
    Return the row count of an OCI statement */
 

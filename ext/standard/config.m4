@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.61 2003/06/28 05:38:52 sebastian Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.62 2003/06/30 16:33:50 sniper Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -225,6 +225,8 @@ AC_ARG_WITH(regex,
 ],[
   REGEX_TYPE=php
 ])
+
+PHP_REGEX
 
 AC_FUNC_FNMATCH	
 

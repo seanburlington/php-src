@@ -16,11 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.h,v 1.7 2002/02/28 08:26:49 sebastian Exp $ */
+/* $Id: uniqid.h,v 1.7.8.1 2002/12/20 16:37:44 helly Exp $ */
 
 #ifndef UNIQID_H
 #define UNIQID_H
 
+#ifdef HAVE_GETTIMEOFDAY
 PHP_FUNCTION(uniqid);
+#endif
 
 #endif /* UNIQID_H */

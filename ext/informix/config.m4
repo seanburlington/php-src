@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.17 2001/03/27 20:34:29 sniper Exp $
+dnl $Id: config.m4,v 1.18 2001/04/03 23:30:43 wsanchez Exp $
 
 PHPIFXLIB=ext/informix/libphp_ifx.a
 	
@@ -49,7 +49,7 @@ WARNING: You specified Informix base install directory that is different
         dnl Allow override to use static and/or threaded libs
         :
       fi
-      CFLAGS="$CFLAGS $IFX_INCLUDE"
+      CPPFLAGS="$CPPFLAGS $IFX_INCLUDE"
       LDFLAGS="$LDFLAGS $IFX_LFLAGS"
 
       case "$host_alias" in

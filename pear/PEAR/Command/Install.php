@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.21 2002/05/09 02:31:36 ssb Exp $
+// $Id: Install.php,v 1.22 2002/05/09 06:49:12 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -121,9 +121,9 @@ class PEAR_Command_Install extends PEAR_Command_Common
                 // fall through
             case 'install': {
                 if ($installer->install(@$params[0], $opts, $this->config)) {
-                    $this->ui->displayLine("install ok");
+                    $this->ui->displayLine("$command ok");
                 } else {
-                    $failmsg = "install failed";
+                    $failmsg = "$command failed";
                 }
                 break;
             }

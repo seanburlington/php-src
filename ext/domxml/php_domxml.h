@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.36 2002/01/13 01:17:34 zenderx Exp $ */
+/* $Id: php_domxml.h,v 1.37 2002/01/17 01:13:39 jarkol Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -166,8 +166,11 @@ PHP_FUNCTION(domxml_test);
 
 /* DOMXSLT functions */
 #if HAVE_DOMXSLT
-PHP_FUNCTION(domxml_xslt_version);
+PHP_FUNCTION(domxml_xslt_stylesheet);
+PHP_FUNCTION(domxml_xslt_stylesheet_doc);
+PHP_FUNCTION(domxml_xslt_stylesheet_file);
 PHP_FUNCTION(domxml_xslt_process);
+PHP_FUNCTION(domxml_xslt_version);
 #endif
 
 #else

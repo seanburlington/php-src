@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: classfactory.cpp,v 1.8 2004/01/17 13:00:01 sniper Exp $ */
+/* $Id: classfactory.cpp,v 1.9 2004/05/04 14:54:01 wez Exp $ */
 
 /* IClassFactory Implementation, and DllXXX function implementation */
 
@@ -145,10 +145,10 @@ static const struct reg_entry engine_entries[] = {
 	{ HKEY_CLASSES_ROOT,	"CLSID\\[CLSID]\\InprocServer32",	NULL, 				"[MODULENAME]" },
 	{ HKEY_CLASSES_ROOT,	"CLSID\\[CLSID]\\InprocServer32",	"ThreadingModel",	"[THREADING]" },
 	{ HKEY_CLASSES_ROOT,	"CLSID\\[CLSID]\\OLEScript",		NULL,				NULL },
-	{ HKEY_CLASSES_ROOT,	"CLSID\\[CLSID]\\ProgID",			NULL,				"ActivePHP" },
-	{ HKEY_CLASSES_ROOT,	"ActivePHP",						NULL,				"ActivePHP" },
-	{ HKEY_CLASSES_ROOT,	"ActivePHP\\CLSID",					NULL,				"[CLSID]"},
-	{ HKEY_CLASSES_ROOT,	"ActivePHP\\OLEScript",				NULL,				NULL},
+	{ HKEY_CLASSES_ROOT,	"CLSID\\[CLSID]\\ProgID",			NULL,				"ActivePHP5" },
+	{ HKEY_CLASSES_ROOT,	"ActivePHP5",						NULL,				"ActivePHP5" },
+	{ HKEY_CLASSES_ROOT,	"ActivePHP5\\CLSID",				NULL,				"[CLSID]"},
+	{ HKEY_CLASSES_ROOT,	"ActivePHP5\\OLEScript",			NULL,				NULL},
 	
 	{ 0, NULL, NULL, NULL }
 };

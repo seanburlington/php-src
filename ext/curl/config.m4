@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.22 2002/11/18 12:00:21 wez Exp $ 
+dnl $Id: config.m4,v 1.23 2003/03/23 18:14:41 wez Exp $ 
 dnl
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -18,6 +18,7 @@ if test "$PHP_CURL" != "no"; then
       if test -r $i/include/curl/easy.h; then
         CURL_DIR=$i
         AC_MSG_RESULT(found in $i)
+        break
       fi
     done
   fi

@@ -16,17 +16,18 @@
    |         Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.23 2000/08/06 11:32:32 hholzgra Exp $ */
+/* $Id: url_scanner.c,v 1.24 2000/08/17 13:17:14 hholzgra Exp $ */
 
 #include "php.h"
 
 #ifdef TRANS_SID
 
+#include "php_globals.h"
+
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "php.h"
 #include "basic_functions.h"
 #include "url_scanner.h"
 

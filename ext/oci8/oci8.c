@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.102 2000/10/29 09:14:52 thies Exp $ */
+/* $Id: oci8.c,v 1.103 2000/11/13 17:30:52 thies Exp $ */
 
 /* TODO list:
  *
@@ -491,7 +491,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.102 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.103 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -3461,7 +3461,7 @@ PHP_FUNCTION(ocifetchstatement)
 	int i;
 	int mode = OCI_NUM;
 	int rows = 0;
-	char namebuf[ 128 ];
+	char *namebuf;
 	int ac = ZEND_NUM_ARGS();
 
 	if (ac < 2 || ac > 3 || zend_get_parameters_ex(ac, &stmt, &array, &fmode) == FAILURE) {
@@ -3489,10 +3489,10 @@ PHP_FUNCTION(ocifetchstatement)
 		MAKE_STD_ZVAL(tmp);
 		array_init(tmp);
 
-		memcpy(namebuf,columns[ i ]->name, columns[ i ]->name_len);
-		namebuf[ columns[ i ]->name_len ] = 0;
+		namebuf = estrndup(columns[ i ]->name,columns[ i ]->name_len);
 				
 		zend_hash_update((*array)->value.ht, namebuf, columns[ i ]->name_len+1, (void *) &tmp, sizeof(zval*), (void **) &(outarrs[ i ]));
+		efree(namebuf);
 	}
 
 	while (oci_fetch(statement, nrows, "OCIFetchStatement")) {

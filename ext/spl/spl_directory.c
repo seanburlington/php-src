@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.36 2005/03/09 02:54:36 helly Exp $ */
+/* $Id: spl_directory.c,v 1.37 2005/03/09 03:07:42 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1298,6 +1298,7 @@ SPL_METHOD(File, fgetss)
 	FileFunctionCall(fgetss, arg2);
 
 	zval_ptr_dtor(&arg2);
+	intern->current_line_num++;
 } /* }}} */
 
 /* {{{ proto int File::fpassthru()
@@ -1311,7 +1312,14 @@ SPL_METHOD(File, fpassthru)
 
 /* {{{ proto bool File::fscanf(string format [, string ...])
    Implements a mostly ANSI compatible fscanf() */
-FileFunction(fscanf)
+SPL_METHOD(File, fscanf)
+{
+	spl_file_object *intern = (spl_file_object*)zend_object_store_get_object(getThis() TSRMLS_CC);
+
+	FileFunctionCall(fscanf, arg2);
+
+	intern->current_line_num++;
+}
 /* }}} */
 
 /* {{{ proto mixed File::fwrite(string str [, int length])

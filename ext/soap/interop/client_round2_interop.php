@@ -16,7 +16,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: client_round2_interop.php,v 1.14 2004/02/13 10:29:55 dmitry Exp $
+// $Id: client_round2_interop.php,v 1.15 2004/04/01 14:37:03 dmitry Exp $
 //
 require_once 'DB.php'; // PEAR/DB
 require_once 'client_round2_params.php';
@@ -309,9 +309,9 @@ class Interop_Client
     function decodeSoapval($soapval)
     {
         if (gettype($soapval) == "object" &&
-            (strcasecmp(get_class($soapval),"soapparam") == 0 ||
-             strcasecmp(get_class($soapval),"soapvar") == 0)) {
-                if (strcasecmp(get_class($soapval),"soapparam") == 0)
+            (strcasecmp(get_class($soapval),"SoapParam") == 0 ||
+             strcasecmp(get_class($soapval),"SoapVar") == 0)) {
+                if (strcasecmp(get_class($soapval),"SoapParam") == 0)
                     $val = $soapval->param_data->enc_value;
                 else
                     $val = $soapval->enc_value;
@@ -321,8 +321,8 @@ class Interop_Client
         if (is_array($val)) {
             foreach($val as $k => $v) {
                 if (gettype($v) == "object" &&
-                    (strcasecmp(get_class($soapval),"soapparam") == 0 ||
-                    strcasecmp(get_class($soapval),"soapvar") == 0)) {
+                    (strcasecmp(get_class($soapval),"SoapParam") == 0 ||
+                    strcasecmp(get_class($soapval),"SoapVar") == 0)) {
                     $val[$k] = $this->decodeSoapval($v);
                 }
             }

@@ -18,13 +18,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.6 2003/06/20 14:08:56 rrichards Exp $ */
+/* $Id: php_dom.h,v 1.7 2003/06/22 12:50:28 helly Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
 
 extern zend_module_entry dom_module_entry;
-#define dom_module_ptr &dom_module_entry
+#define phpext_dom_ptr &dom_module_entry
 
 #ifdef ZTS
 #include "TSRM.h"

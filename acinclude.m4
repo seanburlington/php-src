@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.218.2.23 2003/08/13 22:50:34 bfrance Exp $
+dnl $Id: acinclude.m4,v 1.218.2.24 2003/08/14 00:24:25 bfrance Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -1222,7 +1222,7 @@ AC_DEFUN([PHP_SHARED_MODULE],[
 	\$(LIBTOOL) --mode=install cp $3/$1.la \$(phplibdir)
 
 $3/$1.la: \$($2) \$(translit($1,a-z_-,A-Z__)_SHARED_DEPENDENCIES)
-	\$(LIBTOOL) --mode=link \$(CC) \$(COMMON_FLAGS) \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(LDFLAGS) -o \[$]@ -export-dynamic -avoid-version -prefer-non-pic -module -rpath \$(phplibdir) \$(EXTRA_LDFLAGS) \$($2) \$(translit($1,a-z_-,A-Z__)_SHARED_LIBADD)
+	\$(LIBTOOL) --mode=link \$(CC) \$(COMMON_FLAGS) \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(LDFLAGS) -o \[$]@ -export-dynamic -avoid-version -prefer-pic -module -rpath \$(phplibdir) \$(EXTRA_LDFLAGS) \$($2) \$(translit($1,a-z_-,A-Z__)_SHARED_LIBADD)
 
 EOF
 ])

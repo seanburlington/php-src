@@ -16,7 +16,7 @@
    |          Derick Rethans <d.rethans@jdimedia.nl>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.80 2003/01/06 01:26:14 edink Exp $ */
+/* $Id: mcrypt.c,v 1.81 2003/01/08 03:33:00 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -874,7 +874,6 @@ PHP_FUNCTION(mcrypt_get_key_size)
 	int   cipher_len, module_len; 
 	char *cipher_dir_string;
 	char *module_dir_string;
-	long key_size;
 	MCRYPT td;
 
 	MCRYPT_GET_INI

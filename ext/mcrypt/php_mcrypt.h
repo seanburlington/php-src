@@ -13,10 +13,10 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Sascha Schumann <sascha@schumann.cx>                        |
-   |          Derick Rethans <d.rethans@jdimedia.nl>                      |
+   |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_mcrypt.h,v 1.23 2003/06/10 20:03:31 imajes Exp $ */
+/* $Id: php_mcrypt.h,v 1.24 2003/10/13 09:33:00 derick Exp $ */
 
 #ifndef PHP_MCRYPT_H
 #define PHP_MCRYPT_H

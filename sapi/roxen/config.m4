@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.9 2000/06/06 00:02:03 neotron Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.10 2000/06/12 23:41:34 neotron Exp $ -*- sh -*-
 
 RESULT=no
 AC_MSG_CHECKING(for Roxen/Pike support)
@@ -36,7 +36,6 @@ AC_ARG_WITH(roxen,
 	Pike include dir:      $PIKE_INCLUDE_DIR
 	Pike module directory: $PIKE_MODULE_DIR"
 	PIKE_INCLUDE_DIR=" -I$PIKE_INCLUDE_DIR "
-#    PHP_SUBST(PIKE_INCLUDE_DIR)
 ])
 AC_MSG_RESULT($RESULT)
 

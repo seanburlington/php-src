@@ -1,9 +1,9 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 // +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
+// | PHP Version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2003 The PHP Group                                |
+// | Copyright (c) 1997-2004 The PHP Group                                |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 3.0 of the PHP license,       |
 // | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
 // | Author: Andrei Zmievski <andrei@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Getopt.php,v 1.21.4.9 2005/03/01 18:19:48 andrei Exp $
+// $Id: Getopt.php,v 1.21.4.10 2005/03/28 16:56:58 cellog Exp $
 
 require_once 'PEAR.php';
 

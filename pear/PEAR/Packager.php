@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.12 2001/08/19 12:53:01 cox Exp $
+// $Id: Packager.php,v 1.13 2001/09/27 23:31:15 cox Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -135,7 +135,7 @@ class PEAR_Packager extends PEAR_Common
         $pkgfile = basename($pkgfile);
         $pkgver = $pkginfo['package'] . '-' . $pkginfo['version'];
         // don't want strange characters
-        $pkgver = ereg_replace ('[^a-zA-Z0-9._-]', '_', $pkgver);
+        $pkgver = ereg_replace ('[^a-zA-Z0-9._]', '_', $pkgver);
         $this->tmpdir = $pwd . DIRECTORY_SEPARATOR . $pkgver;
         if (file_exists($this->tmpdir)) {
             return $this->raiseError('Tmpdir: ' . $this->tmpdir .' already exists',

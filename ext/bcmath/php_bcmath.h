@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php_bcmath.h,v 1.1 1999/12/04 19:19:53 sas Exp $ */
+/* $Id: php_bcmath.h,v 1.2 1999/12/17 20:54:46 zeev Exp $ */
 
 #ifndef _PHP_BCMATH_H
 #define _PHP_BCMATH_H
@@ -40,7 +40,7 @@
 
 #if WITH_BCMATH
 
-extern php3_module_entry bcmath_module_entry;
+extern zend_module_entry bcmath_module_entry;
 #define phpext_bcmath_ptr &bcmath_module_entry
 
 extern PHP_RINIT_FUNCTION(bcmath);

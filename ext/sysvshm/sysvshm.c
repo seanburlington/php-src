@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.12 1999/12/17 19:51:34 zeev Exp $ */
+/* $Id: sysvshm.c,v 1.13 1999/12/17 20:55:28 zeev Exp $ */
 
 /* This has been built and tested on Solaris 2.6.
  * It may not compile or execute correctly on other systems.
@@ -51,7 +51,7 @@ zend_module_entry sysvshm_module_entry = {
 
 
 #if COMPILE_DL
-php3_module_entry *get_module() { return &sysvshm_module_entry; }
+zend_module_entry *get_module() { return &sysvshm_module_entry; }
 #endif
 
 

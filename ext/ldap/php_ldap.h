@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_ldap.h,v 1.1 1999/12/04 19:15:53 sas Exp $ */
+/* $Id: php_ldap.h,v 1.2 1999/12/17 20:55:08 zeev Exp $ */
 
 #ifndef _PHP_LDAP_H
 #define _PHP_LDAP_H
@@ -43,7 +43,7 @@
 #include <lber.h>
 #include <ldap.h>
 
-extern php3_module_entry ldap_module_entry;
+extern zend_module_entry ldap_module_entry;
 #define ldap_module_ptr &ldap_module_entry
 
 /* LDAP functions */

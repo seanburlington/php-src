@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php_posix.h,v 1.1 1999/12/04 19:16:01 sas Exp $ */
+/* $Id: php_posix.h,v 1.2 1999/12/17 20:55:19 zeev Exp $ */
 
 #ifndef _PHP_POSIX_H
 #define _PHP_POSIX_H
@@ -42,7 +42,7 @@
 #define DLEXPORT
 #endif
 
-extern php3_module_entry posix_module_entry;
+extern zend_module_entry posix_module_entry;
 #define posix_module_ptr &posix_module_entry
 
 PHP_FUNCTION(posix_kill);

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_gd.h,v 1.1 1999/12/04 19:19:55 sas Exp $ */
+/* $Id: php_gd.h,v 1.2 1999/12/17 20:54:58 zeev Exp $ */
 
 #ifndef _PHP_GD_H
 #define _PHP_GD_H
@@ -49,7 +49,7 @@
 
 #include <gd.h>
 
-extern php3_module_entry gd_module_entry;
+extern zend_module_entry gd_module_entry;
 #define phpext_gd_ptr &gd_module_entry
 
 /* gd.c functions */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: domxml.c,v 1.4 1999/12/07 10:49:16 steinm Exp $ */
+/* $Id: domxml.c,v 1.5 1999/12/17 20:54:53 zeev Exp $ */
 
 
 #include "php.h"
@@ -70,7 +70,7 @@ static zend_function_entry php_domxmlattr_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-php3_module_entry php3_domxml_module_entry = {
+zend_module_entry php3_domxml_module_entry = {
 	"DOM", php_domxml_functions, PHP_MINIT(domxml), NULL, NULL, NULL, PHP_MINFO(domxml), STANDARD_MODULE_PROPERTIES
 };
 

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_domxml.h,v 1.1 1999/12/04 19:15:47 sas Exp $ */
+/* $Id: php_domxml.h,v 1.2 1999/12/17 20:54:53 zeev Exp $ */
 
 #ifndef _PHP_DOMXML_H
 #define _PHP_DOMXML_H
@@ -37,7 +37,7 @@
 #if HAVE_DOMXML
 #include <gnome-xml/parser.h>
 
-extern php3_module_entry php3_domxml_module_entry;
+extern zend_module_entry php3_domxml_module_entry;
 #define php3_domxml_module_ptr &php3_domxml_module_entry
 
 /* directory functions */

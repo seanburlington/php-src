@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.16 1999/12/11 10:56:41 kara Exp $ */
+/* $Id: php_odbc.c,v 1.17 1999/12/17 20:55:14 zeev Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -116,7 +116,7 @@ function_entry odbc_functions[] = {
 	{ NULL, NULL, NULL }
 };
 
-php3_module_entry odbc_module_entry = {
+zend_module_entry odbc_module_entry = {
     "ODBC", 
 	odbc_functions, 
 	PHP_MINIT(odbc), 
@@ -279,7 +279,7 @@ static PHP_INI_DISP(display_lrl)
 		if (atoi(value) <= 0) {
 			PUTS("Passthru");
 		} else {
-			php3_printf("return up to %s bytes", value);
+			php_printf("return up to %s bytes", value);
 		}
 	}
 }

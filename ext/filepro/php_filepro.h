@@ -34,12 +34,12 @@
 
  */
 
-/* $Id: php_filepro.h,v 1.2 1999/07/27 19:44:44 andrey Exp $ */
+/* $Id: php_filepro.h,v 1.3 1999/12/17 20:54:56 zeev Exp $ */
 
 #ifndef _FILEPRO_H
 #define _FILEPRO_H
 #if HAVE_FILEPRO
-extern php3_module_entry filepro_module_entry;
+extern zend_module_entry filepro_module_entry;
 #define phpext_filepro_ptr &filepro_module_entry
 
 PHP_FUNCTION(filepro);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.20 1999/12/17 19:51:29 zeev Exp $ */
+/* $Id: dir.c,v 1.21 1999/12/17 20:55:24 zeev Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -102,7 +102,7 @@ static zend_function_entry php_dir_class_functions[] = {
 };
 
 
-php3_module_entry php3_dir_module_entry = {
+zend_module_entry php3_dir_module_entry = {
 	"PHP_dir", php_dir_functions, PHP_MINIT(dir), NULL, NULL, NULL, NULL, STANDARD_MODULE_PROPERTIES
 };
 

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.h,v 1.10 1999/12/11 10:56:42 kara Exp $ */
+/* $Id: php_odbc.h,v 1.11 1999/12/17 20:55:14 zeev Exp $ */
 
 #ifndef _PHP_ODBC_H
 #define _PHP_ODBC_H
@@ -147,7 +147,7 @@ PHP_FUNCTION(solid_fetch_prev);
 #include <sqlext.h>
 #endif
 
-extern php3_module_entry odbc_module_entry;
+extern zend_module_entry odbc_module_entry;
 #define odbc_module_ptr &odbc_module_entry
 
 

@@ -26,7 +26,7 @@
    | Authors: Stephanie Wehner <_@r4k.net>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_yp.h,v 1.2 1999/12/15 03:45:59 evan Exp $ */ 
+/* $Id: php_yp.h,v 1.3 1999/12/17 20:55:30 zeev Exp $ */ 
 
 #ifndef _PHP_YP_H
 #define _PHP_YP_H
@@ -38,7 +38,7 @@
 
 #if HAVE_YP
 
-extern php3_module_entry yp_module_entry;
+extern zend_module_entry yp_module_entry;
 #define yp_module_ptr &yp_module_entry
 
 /* yp.c functions */

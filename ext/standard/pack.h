@@ -27,12 +27,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pack.h,v 1.4 1999/07/26 20:09:08 andrey Exp $ */
+/* $Id: pack.h,v 1.5 1999/12/17 20:55:24 zeev Exp $ */
 
 #ifndef _PACK_H
 #define _PACK_H
 
-extern php3_module_entry pack_module_entry;
+extern zend_module_entry pack_module_entry;
 #define pack_module_ptr &pack_module_entry
 
 extern PHP_MINIT_FUNCTION(pack);

@@ -28,12 +28,12 @@
  */
 
 
-/* $Id: php_aspell.h,v 1.1 1999/12/04 19:19:52 sas Exp $ */
+/* $Id: php_aspell.h,v 1.2 1999/12/17 20:54:45 zeev Exp $ */
 
 #ifndef _ASPELL_H
 #define _ASPELL_H
 #if HAVE_ASPELL
-extern php3_module_entry aspell_module_entry;
+extern zend_module_entry aspell_module_entry;
 #define aspell_module_ptr &aspell_module_entry
 
 extern PHP_MINIT_FUNCTION(aspell);

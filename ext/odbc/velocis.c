@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: velocis.c,v 1.10 1999/12/17 19:51:24 zeev Exp $ */
+/* $Id: velocis.c,v 1.11 1999/12/17 20:55:14 zeev Exp $ */
 
 /*
  * TODO:
@@ -59,14 +59,14 @@ function_entry velocis_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-php3_module_entry velocis_module_entry = {
+zend_module_entry velocis_module_entry = {
 	"Velocis", velocis_functions, PHP_MINIT(velocis), PHP_MSHUTDOWN(velocis),
 		PHP_RINIT(velocis), NULL, PHP_MINFO(velocis), STANDARD_MODULE_PROPERTIES
 };
 
 
 #if COMPILE_DL
-php3_module_entry *get_module() { return &velocis_module_entry; }
+zend_module_entry *get_module() { return &velocis_module_entry; }
 #endif
 
 THREAD_LS velocis_module php3_velocis_module;

@@ -26,7 +26,7 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_pdf.h,v 1.1 1999/12/04 19:16:00 sas Exp $ */
+/* $Id: php_pdf.h,v 1.2 1999/12/17 20:55:17 zeev Exp $ */
 
 #ifndef _PHP_PDF_H
 #define _PHP_PDF_H
@@ -37,7 +37,7 @@
 
 extern int le_fp;
 
-extern php3_module_entry pdf_module_entry;
+extern zend_module_entry pdf_module_entry;
 #define pdf_module_ptr &pdf_module_entry
 
 extern PHP_MINFO_FUNCTION(pdf);

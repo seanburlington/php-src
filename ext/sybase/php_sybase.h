@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php_sybase.h,v 1.1 1999/12/04 19:16:07 sas Exp $ */
+/* $Id: php_sybase.h,v 1.2 1999/12/17 20:55:25 zeev Exp $ */
 
 #ifndef _PHP_SYBASE_H
 #define _PHP_SYBASE_H
@@ -40,7 +40,7 @@
 
 #if HAVE_SYBASE
 
-extern php3_module_entry sybase_module_entry;
+extern zend_module_entry sybase_module_entry;
 #define sybase_module_ptr &sybase_module_entry
 
 extern int php3_minit_sybase(INIT_FUNC_ARGS);

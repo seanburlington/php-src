@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.30 1999/12/17 19:51:27 zeev Exp $ */
+/* $Id: pgsql.c,v 1.31 1999/12/17 20:55:18 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -74,12 +74,12 @@ function_entry pgsql_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-php3_module_entry pgsql_module_entry = {
+zend_module_entry pgsql_module_entry = {
 	"PostgreSQL", pgsql_functions, php3_minit_pgsql, NULL, php3_rinit_pgsql, NULL, NULL, STANDARD_MODULE_PROPERTIES
 };
 
 #if COMPILE_DL
-PHP_PGSQL_API php3_module_entry *get_module() { return &pgsql_module_entry; }
+PHP_PGSQL_API zend_module_entry *get_module() { return &pgsql_module_entry; }
 #endif
 
 static int le_link,le_plink,le_result,le_lofp,le_string;

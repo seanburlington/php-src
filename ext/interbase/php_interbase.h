@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.1 1999/12/04 19:19:57 sas Exp $ */
+/* $Id: php_interbase.h,v 1.2 1999/12/17 20:55:06 zeev Exp $ */
 
 #ifndef _PHP3_IBASE_H
 #define _PHP3_IBASE_H
@@ -41,7 +41,7 @@
 #if HAVE_IBASE
 #include <ibase.h>
 
-extern php3_module_entry ibase_module_entry;
+extern zend_module_entry ibase_module_entry;
 #define php3_ibase_module_ptr &ibase_module_entry
 
 extern PHP_MINIT_FUNCTION(ibase);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.11 1999/12/17 19:51:33 zeev Exp $ */
+/* $Id: sysvsem.c,v 1.12 1999/12/17 20:55:26 zeev Exp $ */
 
 /* This has been built and tested on Solaris 2.6 and Linux 2.1.122.
  * It may not compile or execute correctly on other systems.
@@ -61,7 +61,7 @@ zend_module_entry sysvsem_module_entry = {
 };
 
 #if COMPILE_DL
-php3_module_entry *get_module() { return &sysvsem_module_entry; }
+zend_module_entry *get_module() { return &sysvsem_module_entry; }
 #endif
 
 

@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php_sysvshm.h,v 1.1 1999/12/04 19:16:09 sas Exp $ */
+/* $Id: php_sysvshm.h,v 1.2 1999/12/17 20:55:27 zeev Exp $ */
 
 #ifndef _PHP_SYSVSHM_H
 #define _PHP_SYSVSHM_H
@@ -41,7 +41,7 @@
 
 #if HAVE_SYSVSHM
 
-extern php3_module_entry sysvshm_module_entry;
+extern zend_module_entry sysvshm_module_entry;
 #define sysvshm_module_ptr &sysvshm_module_entry
 
 #include <sys/types.h>

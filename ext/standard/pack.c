@@ -15,7 +15,7 @@
    | Authors: Chris Schneider <cschneid@relog.ch>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.10 1999/12/04 19:16:03 sas Exp $ */
+/* $Id: pack.c,v 1.11 1999/12/17 20:55:24 zeev Exp $ */
 
 #include "php.h"
 
@@ -56,7 +56,7 @@ function_entry pack_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-php3_module_entry pack_module_entry = {
+zend_module_entry pack_module_entry = {
 	"PHP_pack", pack_functions, PHP_MINIT(pack), NULL, NULL, NULL, NULL, STANDARD_MODULE_PROPERTIES
 };
 

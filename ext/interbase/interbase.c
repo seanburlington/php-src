@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.10 1999/12/17 19:51:18 zeev Exp $ */
+/* $Id: interbase.c,v 1.11 1999/12/17 20:55:06 zeev Exp $ */
 
 /* TODO: A lot... */
 
@@ -46,7 +46,7 @@ function_entry ibase_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-php3_module_entry ibase_module_entry =
+zend_module_entry ibase_module_entry =
 {
 	"InterBase",
 	ibase_functions,

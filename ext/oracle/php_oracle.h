@@ -1,4 +1,4 @@
-/* $Id: php_oracle.h,v 1.2 1999/12/09 11:02:41 thies Exp $ */
+/* $Id: php_oracle.h,v 1.3 1999/12/17 20:55:16 zeev Exp $ */
 
 /* synced with oracle.h,v 1.40 1999/06/01 08:11:04 thies Exp $ */
 
@@ -25,7 +25,7 @@
 #include "ociapr.h"
 #endif
 
-extern php3_module_entry oracle_module_entry;
+extern zend_module_entry oracle_module_entry;
 #define phpext_oracle_ptr &oracle_module_entry
 
 #ifdef ZTS

@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php_sysvsem.h,v 1.1 1999/12/04 19:16:08 sas Exp $ */
+/* $Id: php_sysvsem.h,v 1.2 1999/12/17 20:55:26 zeev Exp $ */
 
 #ifndef _PHP_SYSVSEM_H
 #define _PHP_SYSVSEM_H
@@ -40,7 +40,7 @@
 
 #if HAVE_SYSVSEM
 
-extern php3_module_entry sysvsem_module_entry;
+extern zend_module_entry sysvsem_module_entry;
 #define sysvsem_module_ptr &sysvsem_module_entry
 
 extern int php3_minit_sysvsem(INIT_FUNC_ARGS);

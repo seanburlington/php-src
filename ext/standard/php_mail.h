@@ -28,12 +28,12 @@
  */
 
 
-/* $Id: php_mail.h,v 1.1 1999/12/04 19:16:04 sas Exp $ */
+/* $Id: php_mail.h,v 1.2 1999/12/17 20:55:24 zeev Exp $ */
 
 #ifndef _MAIL_H
 #define _MAIL_H
 #if HAVE_SENDMAIL
-extern php3_module_entry mail_module_entry;
+extern zend_module_entry mail_module_entry;
 #define mail_module_ptr &mail_module_entry
 
 PHP_FUNCTION(mail);

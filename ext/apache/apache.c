@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache.c,v 1.22 1999/11/23 06:46:40 evan Exp $ */
+/* $Id: apache.c,v 1.23 1999/12/17 20:54:43 zeev Exp $ */
 #include "php.h"
 #include "ext/standard/head.h"
 #include "php_globals.h"
@@ -113,7 +113,7 @@ static PHP_MSHUTDOWN_FUNCTION(apache)
 }
 
 
-php3_module_entry apache_module_entry = {
+zend_module_entry apache_module_entry = {
 	"Apache", apache_functions, PHP_MINIT(apache), PHP_MSHUTDOWN(apache), NULL, NULL, PHP_MINFO(apache), STANDARD_MODULE_PROPERTIES
 };
 

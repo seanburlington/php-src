@@ -26,7 +26,7 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_cpdf.h,v 1.1 1999/12/04 19:15:44 sas Exp $ */
+/* $Id: php_cpdf.h,v 1.2 1999/12/17 20:54:47 zeev Exp $ */
 
 #ifndef _PHP_CPDF_H
 #define _PHP_CPDF_H
@@ -35,7 +35,7 @@
 
 #include <cpdflib.h>
 
-extern php3_module_entry cpdf_module_entry;
+extern zend_module_entry cpdf_module_entry;
 #define cpdf_module_ptr &cpdf_module_entry
 
 extern PHP_MINFO_FUNCTION(cpdf);

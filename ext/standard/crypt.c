@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.11 1999/12/04 19:16:03 sas Exp $ */
+/* $Id: crypt.c,v 1.12 1999/12/17 20:55:24 zeev Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -53,7 +53,7 @@ function_entry crypt_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-php3_module_entry crypt_module_entry = {
+zend_module_entry crypt_module_entry = {
 	"Crypt", crypt_functions, PHP_MINIT(crypt), NULL, NULL, NULL, NULL, STANDARD_MODULE_PROPERTIES
 };
 

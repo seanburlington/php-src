@@ -17,11 +17,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dir.h,v 1.1 1999/12/04 19:16:04 sas Exp $ */
+/* $Id: php_dir.h,v 1.2 1999/12/17 20:55:24 zeev Exp $ */
 
 #ifndef _PHP_DIR_H
 #define _PHP_DIR_H
-extern php3_module_entry php3_dir_module_entry;
+extern zend_module_entry php3_dir_module_entry;
 #define php3_dir_module_ptr &php3_dir_module_entry
 
 /* directory functions */

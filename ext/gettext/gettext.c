@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.9 1999/12/04 19:15:49 sas Exp $ */
+/* $Id: gettext.c,v 1.10 1999/12/17 20:55:00 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -36,7 +36,7 @@ function_entry php3_gettext_functions[] = {
     {NULL, NULL, NULL}
 };
 
-php3_module_entry php3_gettext_module_entry = {
+zend_module_entry php3_gettext_module_entry = {
 	"gettext", php3_gettext_functions, NULL, NULL, NULL, NULL, PHP_MINFO(gettext), STANDARD_MODULE_PROPERTIES
 };
 

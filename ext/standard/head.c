@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.20 1999/12/17 19:51:29 zeev Exp $ */
+/* $Id: head.c,v 1.21 1999/12/17 20:55:24 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -573,7 +573,7 @@ function_entry php_header_functions[] = {
 };
 
 
-php3_module_entry php_header_module_entry = {
+zend_module_entry php_header_module_entry = {
 	"PHP_head", php_header_functions, NULL, NULL, PHP_RINIT(head), NULL, NULL, STANDARD_MODULE_PROPERTIES
 };
 

@@ -18,7 +18,7 @@
 +----------------------------------------------------------------------+
 */
 
-/* $Id: php_snmp.h,v 1.1 1999/12/04 19:16:02 sas Exp $ */
+/* $Id: php_snmp.h,v 1.2 1999/12/17 20:55:20 zeev Exp $ */
 #ifndef _PHP_SNMP_H
 #define _PHP_SNMP_H
 
@@ -31,7 +31,7 @@
 #define DLEXPORT
 #endif
 
-extern php3_module_entry snmp_module_entry;
+extern zend_module_entry snmp_module_entry;
 #define snmp_module_ptr &snmp_module_entry
 
 extern int php3i_snmp_init(INIT_FUNC_ARGS);

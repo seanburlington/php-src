@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.1 1999/12/04 19:16:00 sas Exp $ */
+/* $Id: php_pgsql.h,v 1.2 1999/12/17 20:55:18 zeev Exp $ */
 
 #ifndef _PHP_PGSQL_H
 #define _PHP_PGSQL_H
@@ -39,7 +39,7 @@
 
 #if HAVE_PGSQL
 
-extern php3_module_entry pgsql_module_entry;
+extern zend_module_entry pgsql_module_entry;
 #define pgsql_module_ptr &pgsql_module_entry
 
 

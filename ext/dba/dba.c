@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.8 1999/12/17 19:51:07 zeev Exp $ */
+/* $Id: dba.c,v 1.9 1999/12/17 20:54:51 zeev Exp $ */
 
 #include "php.h"
 
@@ -62,7 +62,7 @@ static PHP_MINIT_FUNCTION(dba);
 static PHP_MSHUTDOWN_FUNCTION(dba);
 static PHP_MINFO_FUNCTION(dba);
 
-php3_module_entry dba_module_entry = {
+zend_module_entry dba_module_entry = {
 	    "DataBase API", dba_functions, 
 		PHP_MINIT(dba), 
 		PHP_MSHUTDOWN(dba), 
@@ -204,7 +204,7 @@ static PHP_MINFO_FUNCTION(dba)
 {
 	dba_handler *hptr;
 	
-	PUTS("V1 ($Id: dba.c,v 1.8 1999/12/17 19:51:07 zeev Exp $)");
+	PUTS("V1 ($Id: dba.c,v 1.9 1999/12/17 20:54:51 zeev Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);

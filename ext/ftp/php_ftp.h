@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.h,v 1.6 1999/10/04 18:30:37 askalski Exp $ */
+/* $Id: php_ftp.h,v 1.7 1999/12/17 20:54:57 zeev Exp $ */
 
 #ifndef	_INCLUDED_FTP_H
 #define	_INCLUDED_FTP_H
@@ -40,7 +40,7 @@
 
 #if HAVE_FTP
 
-extern php3_module_entry php3_ftp_module_entry;
+extern zend_module_entry php3_ftp_module_entry;
 #define php3_ftp_module_ptr &php3_ftp_module_entry
 
 #ifdef ZEND_VERSION

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.16 1999/12/17 19:16:47 zeev Exp $ */
+/* $Id: filestat.c,v 1.17 1999/12/17 20:55:24 zeev Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -173,7 +173,7 @@ PHP_FUNCTION(diskfreespace)
 		}
 	}
 	else {
-		php3_error(E_WARNING, "Unable to load kernel32.dll");
+		php_error(E_WARNING, "Unable to load kernel32.dll");
 		RETURN_FALSE;
 	}
 
@@ -591,7 +591,7 @@ function_entry php3_filestat_functions[] = {
 };
 
 
-php3_module_entry php3_filestat_module_entry = {
+zend_module_entry php3_filestat_module_entry = {
 	"PHP_filestat", php3_filestat_functions, NULL, NULL, PHP_RINIT(filestat),
 					PHP_RSHUTDOWN(filestat), NULL, STANDARD_MODULE_PROPERTIES
 };

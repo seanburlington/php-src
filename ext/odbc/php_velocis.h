@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_velocis.h,v 1.1 1999/12/04 19:15:57 sas Exp $ */
+/* $Id: php_velocis.h,v 1.2 1999/12/17 20:55:14 zeev Exp $ */
 
 #ifndef _PHP_VELOCIS_H
 #define _PHP_VELOCIS_H
@@ -70,7 +70,7 @@ typedef struct {
 	int le_link,le_result;
 } velocis_module;
 
-extern php3_module_entry velocis_module_entry;
+extern zend_module_entry velocis_module_entry;
 #define velocis_module_ptr &velocis_module_entry
 
 /* velocis.c functions */

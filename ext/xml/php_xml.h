@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xml.h,v 1.3 1999/12/05 16:43:42 thies Exp $ */
+/* $Id: php_xml.h,v 1.4 1999/12/17 20:55:29 zeev Exp $ */
 
 #ifndef _PHP_XML_H
 # define _PHP_XML_H
@@ -80,7 +80,7 @@ typedef struct {
 } xml_encoding;
 
 
-extern php3_module_entry xml_module_entry;
+extern zend_module_entry xml_module_entry;
 # define xml_module_ptr &xml_module_entry
 
 enum php3_xml_option {

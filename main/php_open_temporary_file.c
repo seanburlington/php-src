@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_open_temporary_file.c,v 1.30 2004/03/29 21:44:07 wez Exp $ */
+/* $Id: php_open_temporary_file.c,v 1.31 2004/10/07 12:22:16 hyanantha Exp $ */
 
 #include "php.h"
 
@@ -31,17 +31,11 @@
 #include "win32/winutil.h"
 #elif defined(NETWARE)
 #ifdef USE_WINSOCK
-/*#include <ws2nlm.h>*/
 #include <novsock2.h>
 #else
 #include <sys/socket.h>
 #endif
-#ifdef NEW_LIBC
 #include <sys/param.h>
-#else
-#include "netware/param.h"
-#endif
-#include "netware/mktemp.h"
 #else
 #include <sys/param.h>
 #include <sys/socket.h>

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.12 2003/06/21 13:35:26 georg Exp $ 
+  $Id: mysqli_fe.c,v 1.13 2003/06/22 08:46:39 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -114,6 +114,7 @@ function_entry mysqli_functions[] = {
 	PHP_FE(mysqli_stmt_close,							NULL)
 	PHP_FE(mysqli_stmt_errno,							NULL)
 	PHP_FE(mysqli_stmt_error,							NULL)
+	PHP_FE(mysqli_stmt_num_rows,						NULL)
 #if MYSQL_VERSION_ID >= 40101
 	PHP_FE(mysqli_stmt_sqlstate,   						NULL)
 #endif
@@ -231,6 +232,7 @@ function_entry mysqli_stmt_methods[] = {
 	PHP_FALIAS(close,mysqli_stmt_close,NULL)
 	PHP_FALIAS(errno,mysqli_stmt_errno,NULL)
 	PHP_FALIAS(error,mysqli_stmt_error,NULL)
+	PHP_FALIAS(num_rows, mysqli_stmt_num_rows,NULL)
 #if MYSQL_VERSION_ID >= 40101
 	PHP_FALIAS(sqlstate, mysqli_stmt_sqlstate,NULL)
 #endif

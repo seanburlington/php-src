@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.16 2003/06/21 13:35:26 georg Exp $ 
+  $Id: php_mysqli.h,v 1.17 2003/06/22 08:46:39 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -263,6 +263,7 @@ PHP_FUNCTION(mysqli_stmt_affected_rows);
 PHP_FUNCTION(mysqli_stmt_close);
 PHP_FUNCTION(mysqli_stmt_errno);
 PHP_FUNCTION(mysqli_stmt_error);
+PHP_FUNCTION(mysqli_stmt_num_rows);
 #if MYSQL_VERSION_ID >= 40101
 PHP_FUNCTION(mysqli_stmt_sqlstate);
 #endif

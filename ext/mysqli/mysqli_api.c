@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.32 2003/06/22 06:16:47 georg Exp $ 
+  $Id: mysqli_api.c,v 1.33 2003/06/22 08:46:39 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1697,6 +1697,25 @@ PHP_FUNCTION(mysqli_stmt_close)
 	MYSQLI_CLEAR_RESOURCE(&mysql_stmt);
 	RETURN_TRUE;
 
+}
+/* }}} */
+
+/* {{{ proto mixed mysqli_stmt_num_rows(object stmt)
+   Return the number of rows in statements result set */
+PHP_FUNCTION(mysqli_stmt_num_rows)
+{
+	STMT 			*stmt;
+	zval    		*mysql_stmt;
+	my_ulonglong	rc;
+	PR_STMT			*prstmt;
+
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "O", &mysql_stmt, mysqli_stmt_class_entry) == FAILURE) {
+		return;
+	}
+	MYSQLI_FETCH_RESOURCE(stmt, STMT *, prstmt, PR_STMT *, &mysql_stmt, "mysqli_stmt");
+
+	rc = mysql_stmt_num_rows(stmt->stmt);
+	MYSQLI_RETURN_LONG_LONG(rc)
 }
 /* }}} */
 

@@ -2,7 +2,7 @@
 || PEAR Coding Standards                                                 ||
 ===========================================================================
 
-$Id: CODING_STANDARDS,v 1.8 2001/07/17 23:56:46 jon Exp $
+$Id: CODING_STANDARDS,v 1.9 2001/07/18 00:27:15 jon Exp $
 
 -------------
 [1] Indenting
@@ -129,11 +129,12 @@ and each letter that starts a new "word" is capitalized.  Some examples:
 
     connect()       getData()       buildSomeWidget()
 
-Private methods (meaning methods that an intented to be called only from
-within the same class; PHP does not yet support truly-enforceable private
-namespaces) are preceeded by a single underscore.  For example:
+Private class members (meaning class members that an intented to be used
+only from within the same class in which they are declared; PHP does not yet
+support truly-enforceable private namespaces) are preceeded by a single
+underscore.  For example:
 
-    _sort()         _initTree()     _validateInput()
+    _sort()         _initTree()     $_status
 
 
 ------------
@@ -203,7 +204,7 @@ following comment block as the header:
 // |          Your Name <you@example.com>                                 |
 // +----------------------------------------------------------------------+
 //
-// $Id: CODING_STANDARDS,v 1.8 2001/07/17 23:56:46 jon Exp $
+// $Id: CODING_STANDARDS,v 1.9 2001/07/18 00:27:15 jon Exp $
 
 There's no hard rule to determine when a new code contributer should be
 added to the list of authors for a given source file.  In general, their

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.27 1999/11/01 01:07:51 evan Exp $ */
+/* $Id: basic_functions.h,v 1.28 1999/11/01 20:51:04 andrei Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -121,6 +121,7 @@ PHP_FUNCTION(extract);
 PHP_FUNCTION(compact);
 PHP_FUNCTION(range);
 PHP_FUNCTION(shuffle);
+PHP_FUNCTION(multisort);
 PHP_FUNCTION(array_push);
 PHP_FUNCTION(array_pop);
 PHP_FUNCTION(array_shift);
@@ -132,6 +133,7 @@ PHP_FUNCTION(array_keys);
 PHP_FUNCTION(array_values);
 PHP_FUNCTION(array_count_values);
 PHP_FUNCTION(array_reverse);
+PHP_FUNCTION(array_pad);
 
 PHP_FUNCTION(getservbyname);
 PHP_FUNCTION(getservbyport);

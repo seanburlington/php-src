@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.26 2001/05/28 11:00:06 wez Exp $ */
+/* $Id: html.c,v 1.27 2001/05/29 10:14:46 wez Exp $ */
 
 #include "php.h"
 #include "reg.h"
@@ -117,7 +117,7 @@ inline static unsigned short get_next_char(enum entity_charset charset,
 	int mbpos = 0;
 	unsigned short this_char = str[pos++];
 	
-	mbseq[mbpos++] = this_char;
+	mbseq[mbpos++] = (unsigned char)this_char;
 	
 	if (charset == cs_utf_8)	{
 		unsigned long utf = 0;
@@ -142,7 +142,7 @@ inline static unsigned short get_next_char(enum entity_charset charset,
 						/* last byte in sequence */
 						more = 0;
 						utf |= (this_char & 0x3f);
-						this_char = utf;
+						this_char = (unsigned short)utf;
 						break;
 					case 0x20:	/* 3, 2nd */
 					case 0x31:	/* 4, 3rd */
@@ -196,7 +196,7 @@ inline static unsigned short get_next_char(enum entity_charset charset,
 			if (more)
 			{
 				this_char = str[pos++];
-				mbseq[mbpos++] = this_char;
+				mbseq[mbpos++] = (unsigned char)this_char;
 			}
 		} while(more);
 	}
@@ -336,7 +336,7 @@ PHPAPI char *php_escape_html_entities(unsigned char *old, int oldlen, int *newle
 				memcpy(new + len, mbsequence, mbseqlen);
 				len += mbseqlen;
 			} else {
-				new [len++] = this_char;
+				new [len++] = (unsigned char)this_char;
 			}
 		}
 	}

@@ -17,10 +17,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.44 2000/02/05 17:58:11 andi Exp $ */
+/* $Id: xml.c,v 1.45 2000/02/10 18:03:55 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
+#define PHP_XML_INTERNAL
 #include "php_xml.h"
 #include "zend_variables.h"
 #include "ext/standard/php_string.h"

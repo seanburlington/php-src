@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: url_scanner_ex.c,v 1.88 2005/01/10 15:20:53 sniper Exp $ */
+/* $Id: url_scanner_ex.c,v 1.89 2005/04/03 12:19:23 tony2001 Exp $ */
 
 #include "php.h"
 
@@ -1061,7 +1061,7 @@ int php_url_scanner_reset_vars(TSRMLS_D)
 	BG(url_adapt_state_ex).form_app.len = 0;
 	BG(url_adapt_state_ex).url_app.len = 0;
 
-	return FAILURE;
+	return SUCCESS;
 }
 
 PHP_MINIT_FUNCTION(url_scanner)

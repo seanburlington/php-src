@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.34 2001/07/23 16:13:34 thies Exp $ */
+/* $Id: assert.c,v 1.35 2001/07/24 03:52:16 andi Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -118,6 +118,7 @@ PHP_MSHUTDOWN_FUNCTION(assert)
 	if (ASSERT(callback)) {
 		zval_ptr_dtor(&ASSERT(callback));
 	}
+	return SUCCESS;
 }
 
 PHP_RSHUTDOWN_FUNCTION(assert)

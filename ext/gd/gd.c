@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.163 2001/09/27 07:36:34 rasmus Exp $ */
+/* $Id: gd.c,v 1.164 2001/09/30 04:42:08 rasmus Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1578,7 +1578,7 @@ PHP_FUNCTION(imagecolorat)
 	ZEND_FETCH_RESOURCE(im, gdImagePtr, IM, -1, "Image", le_gd);
 
 #if HAVE_LIBGD20
-	if(im->truecolor) {
+	if(im->trueColor) {
 		php_error(E_WARNING, "ImageColorAt does not work on TrueColor images");
 		RETURN_FALSE;
 	}

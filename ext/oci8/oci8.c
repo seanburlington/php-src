@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.197 2002/12/31 16:07:06 sebastian Exp $ */
+/* $Id: oci8.c,v 1.198 2003/01/07 15:55:59 ldixon Exp $ */
 
 /* TODO list:
  *
@@ -464,10 +464,22 @@ PHP_MINIT_FUNCTION(oci)
 	zend_class_entry oci_coll_class_entry;
 #endif
 
+#ifdef HAVE_OCI8_SHARED_MODE
+
+#ifdef WITH_COLLECTIONS
+#define PHP_OCI_INIT_MODE OCI_SHARED | OCI_OBJECT
+#else
+#define PHP_OCI_INIT_MODE OCI_SHARED
+#endif
+
+#else
+
 #ifdef WITH_COLLECTIONS
 #define PHP_OCI_INIT_MODE OCI_DEFAULT | OCI_OBJECT
 #else
 #define PHP_OCI_INIT_MODE OCI_DEFAULT
+#endif
+
 #endif
 
 #if OCI_USE_EMALLOC
@@ -628,7 +640,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.197 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.198 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );

@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.76 2001/03/07 17:23:30 dbeu Exp $ */
+/* $Id: zlib.c,v 1.76.2.1 2001/04/02 16:52:13 avsm Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -1156,9 +1156,15 @@ PHP_FUNCTION(ob_gzhandler)
 					if (sapi_add_header("Content-Encoding: gzip", sizeof("Content-Encoding: gzip") - 1, 1)==FAILURE) {
 						return_original = 1;
 					}
+					if (sapi_add_header("Vary: Accept-Encoding", sizeof("Vary: Accept-Encoding") - 1, 1)==FAILURE) {
+						return_original = 1;
+					}
 					break;
 				case CODING_DEFLATE:
 					if (sapi_add_header("Content-Encoding: deflate", sizeof("Content-Encoding: deflate") - 1, 1)==FAILURE) {
+						return_original = 1;
+					}
+					if (sapi_add_header("Vary: Accept-Encoding", sizeof("Vary: Accept-Encoding") - 1, 1)==FAILURE) {
 						return_original = 1;
 					}
 					break;

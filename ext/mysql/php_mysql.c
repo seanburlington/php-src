@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.204 2004/01/12 02:34:54 helly Exp $ */
+/* $Id: php_mysql.c,v 1.205 2004/01/27 23:14:42 andrey Exp $ */
 
 /* TODO:
  *
@@ -1445,7 +1445,7 @@ PHP_FUNCTION(mysql_list_tables)
 			WRONG_PARAM_COUNT;
 			break;
 	}
-
+	php_error_docref(NULL TSRMLS_CC, E_STRICT, "mysql_list_tables() is deprecated");
 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, mysql_link, id, "MySQL-Link", le_link, le_plink);
 
 	convert_to_string_ex(db);

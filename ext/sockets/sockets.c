@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.121 2002/09/10 04:12:55 jason Exp $ */
+/* $Id: sockets.c,v 1.122 2002/09/23 03:34:21 jason Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -449,6 +449,8 @@ PHP_MINIT_FUNCTION(sockets)
 
 #ifndef WIN32
 # include "unix_socket_constants.h"
+#else
+# include "win32_socket_constants.h"
 #endif
 
 	if ((pe = getprotobyname("tcp"))) {

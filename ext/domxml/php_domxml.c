@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.118.2.14 2002/08/27 06:56:36 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.118.2.15 2002/08/27 07:26:33 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -4220,10 +4220,10 @@ static char *php_domxslt_string_to_xpathexpr(const char *str TSRMLS_DC)
 					  get_active_function_name(TSRMLS_C));
 			return NULL;
 		}
-		value = (xmlChar*) emalloc (str_len * sizeof(xmlChar *) );
+		value = (xmlChar*) emalloc (str_len * sizeof(xmlChar) );
 		snprintf(value, str_len, "'%s'", string);
 	} else {
-		value = (xmlChar*) emalloc (str_len * sizeof(xmlChar *) );
+		value = (xmlChar*) emalloc (str_len * sizeof(xmlChar) );
 		snprintf(value, str_len, "\"%s\"", string);
 	}
 

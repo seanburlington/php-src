@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.24 2004/03/14 22:59:04 helly Exp $ */
+/* $Id: type.c,v 1.25 2004/04/01 08:54:44 derick Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -215,6 +215,13 @@ static void php_is_type(INTERNAL_FUNCTION_PARAMETERS, int type)
 			zend_class_entry *ce;
 			ce = Z_OBJCE_PP(arg);
 			if (!strcmp(ce->name, INCOMPLETE_CLASS)) {
+				RETURN_FALSE;
+			}
+		}
+		if (type == IS_RESOURCE) {
+			char *type_name;
+			type_name = zend_rsrc_list_get_rsrc_type(Z_LVAL_PP(arg) TSRMLS_CC);
+			if (!type_name) {
 				RETURN_FALSE;
 			}
 		}

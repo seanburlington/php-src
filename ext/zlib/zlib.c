@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.166 2003/03/07 05:15:26 sniper Exp $ */
+/* $Id: zlib.c,v 1.167 2003/03/17 13:07:29 hholzgra Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -660,7 +660,7 @@ PHP_FUNCTION(gzinflate)
 }
 /* }}} */
 
-/*`{{{ proto zlib_get_coding_type()
+/*`{{{ proto string zlib_get_coding_type(void)
    Returns the coding type used for output compression */
 
 PHP_FUNCTION(zlib_get_coding_type)

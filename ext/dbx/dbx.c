@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx.c,v 1.47 2003/01/30 02:33:15 iliaa Exp $ */
+/* $Id: dbx.c,v 1.48 2003/03/17 13:08:57 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -548,7 +548,7 @@ ZEND_FUNCTION(dbx_error)
 }
 /* }}} */
 
-/* {{{ proto string dbx_esc(dbx_link_object dbx_link, string sz)
+/* {{{ proto string dbx_escape_string(dbx_link_object dbx_link, string sz)
    Returns escaped string or NULL on error
 */
 ZEND_FUNCTION(dbx_escape_string)

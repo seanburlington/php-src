@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.85 2003/03/06 20:31:14 sesser Exp $ */
+/* $Id: db.c,v 1.86 2003/03/17 13:08:33 hholzgra Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -183,7 +183,7 @@ dbm_info *php_find_dbm(pval *id TSRMLS_DC)
 }
 /* }}} */
 
-/* {{{ proto array dblist(void)
+/* {{{ proto array db_id_list(void)
    Return an associative array id->filename */ 
 #if HELLY_0
 /* New function not needed yet */

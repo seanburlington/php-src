@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.67 2004/01/28 22:51:54 georg Exp $ 
+  $Id: mysqli_api.c,v 1.68 2004/01/31 07:51:03 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -258,7 +258,6 @@ PHP_FUNCTION(mysqli_bind_result)
 		col_type = (stmt->stmt->fields) ? stmt->stmt->fields[ofs].type : MYSQL_TYPE_STRING;
 
 		switch (col_type) {
-			case MYSQL_TYPE_DECIMAL:
 			case MYSQL_TYPE_DOUBLE:
 			case MYSQL_TYPE_FLOAT:
 				convert_to_double_ex(args[i]);
@@ -300,6 +299,7 @@ PHP_FUNCTION(mysqli_bind_result)
 			case MYSQL_TYPE_STRING:
 			case MYSQL_TYPE_BLOB:
 			case MYSQL_TYPE_TIMESTAMP:
+			case MYSQL_TYPE_DECIMAL:
 				stmt->result.buf[ofs].type = IS_STRING; 
 				stmt->result.buf[ofs].buflen = (stmt->stmt->fields) ? stmt->stmt->fields[ofs].length + 1: 256;
 				stmt->result.buf[ofs].buffer = (char *)emalloc(stmt->result.buf[ofs].buflen);

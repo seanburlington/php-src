@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.58 2004/03/26 20:53:09 abies Exp $ */
+/* $Id: file.c,v 1.279.2.59 2004/04/02 16:54:44 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2330,6 +2330,11 @@ PHP_FUNCTION(fgetcsv)
 		add_next_index_string(return_value, "", 1);	\
 	}	\
 }
+
+	if (!(e - s)) {
+		CSV_ADD_ENTRY(s, e, s);
+		goto done;
+	}
 
 csv_start:
 	if (!enclosure || !(p = _php_fgetcsv_find_enclosure(s, (e - s), enclosure, 0))) {

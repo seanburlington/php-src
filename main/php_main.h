@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: php_main.h,v 1.16 2001/12/11 15:31:04 sebastian Exp $ */
+/* $Id: php_main.h,v 1.17 2002/02/26 18:59:27 andi Exp $ */
 
 
 #ifndef PHP_MAIN_H
@@ -30,7 +30,7 @@
 
 PHPAPI int php_request_startup(TSRMLS_D);
 PHPAPI void php_request_shutdown(void *dummy);
-PHPAPI void php_request_shutdown_for_exec(void *dummy);
+PHPAPI void php_request_shutdown_for_exec(void *dummy TSRMLS_DC);
 PHPAPI int php_module_startup(sapi_module_struct *sf);
 PHPAPI void php_module_shutdown(TSRMLS_D);
 PHPAPI void php_module_shutdown_for_exec(void);

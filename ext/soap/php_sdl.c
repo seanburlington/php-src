@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.59 2004/02/13 15:19:09 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.60 2004/02/16 16:32:52 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -877,7 +877,7 @@ static sdlPtr load_wsdl(char *struri)
 #define WSDL_CACHE_VERSION 01
 
 #define WSDL_CACHE_GET(ret,type,buf)   memcpy(&ret,*buf,sizeof(type)); *buf += sizeof(type);
-#define WSDL_CACHE_GET_INT(ret,buf)    ret = ((int)(*buf)[0])+((int)(*buf)[1]<<8)+((int)(*buf)[2]<<16)+((int)(*buf)[3]<<24); *buf += 4;
+#define WSDL_CACHE_GET_INT(ret,buf)    ret = ((int)(*buf)[0])|((int)(*buf)[1]<<8)|((int)(*buf)[2]<<16)|((int)(*buf)[3]<<24); *buf += 4;
 #define WSDL_CACHE_GET_1(ret,type,buf) ret = (type)(**buf); (*buf)++;
 #define WSDL_CACHE_GET_N(ret,n,buf)    memcpy(ret,*buf,n); *buf += n;
 #define WSDL_CACHE_SKIP(n,buf)         *buf += n;

@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.14 1999/10/20 19:16:16 andi Exp $ */
+/* $Id: internal_functions_win32.c,v 1.15 1999/10/27 18:30:40 thies Exp $ */
 
 
 #include "php.h"
@@ -45,6 +45,7 @@
 #include "ext/standard/php3_syslog.h"
 #include "ext/standard/php3_standard.h"
 #include "ext/standard/php_lcg.h"
+#include "ext/standard/php_output.h"
 #include "ext/COM/php_COM.h"
 #include "ext/standard/reg.h"
 #include "ext/pcre/php_pcre.h"
@@ -80,7 +81,8 @@ zend_module_entry *php3_builtin_modules[] = {
 	phpext_pcre_ptr,
 	phpext_odbc_ptr,
 	phpext_lcg_ptr,
-	phpext_session_ptr
+	phpext_session_ptr,
+	phpext_output_ptr
 };
 
 	

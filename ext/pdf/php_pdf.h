@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdf.h,v 1.18 2001/07/30 01:56:35 zeev Exp $ */
+/* $Id: php_pdf.h,v 1.19 2001/08/07 17:26:32 phanto Exp $ */
 
 #ifndef PHP_PDF_H
 #define PHP_PDF_H
@@ -168,7 +168,6 @@ PHP_FUNCTION(pdf_setmatrix);
 #endif /* PDFlib >= V4 */
 
 #ifdef ZTS
-#define PDFG(v) (pdf_globals->v)
 #define PDFG(v) TSRMG(pdf_globals_id, php_pdf_globals *, v)
 #else
 #define PDFG(v) (pdf_globals.v)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.93 2001/08/05 16:21:29 sas Exp $ */
+/* $Id: pdf.c,v 1.94 2001/08/07 17:26:30 phanto Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -347,7 +347,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.93 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.94 $" );
 	php_info_print_table_end();
 
 }
@@ -2727,7 +2727,7 @@ PHP_FUNCTION(pdf_open_pdi)
 	convert_to_long_ex(arg4);
 
 #ifdef VIRTUAL_DIR
-	virtual_filepath(Z_STRVAL_PP(arg2), &file) TSRMLS_CC;
+	virtual_filepath(Z_STRVAL_PP(arg2), &file TSRMLS_CC);
 #else
 	file = Z_STRVAL_PP(arg2);
 #endif  

@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: dbx_pgsql.c,v 1.10 2001/08/07 19:09:58 fmk Exp $ */
+
 #include "dbx.h"
 #include "php_dbx.h"
 #include "dbx_pgsql.h"

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.150 2001/08/13 06:43:47 rasmus Exp $ */
+/* $Id: info.c,v 1.151 2001/08/13 07:28:57 rasmus Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -464,6 +464,8 @@ PHP_FUNCTION(phpinfo)
 	if(!argc) {
 		flag = 0xFFFFFFFF;
 	}
+
+	php_print_info(flag TSRMLS_CC);
 
 	RETURN_TRUE;
 }

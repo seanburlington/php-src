@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.88 2003/06/10 20:03:30 imajes Exp $ */
+/* $Id: iconv.c,v 1.89 2003/06/16 13:32:00 andrey Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1800,7 +1800,7 @@ PHP_FUNCTION(iconv_set_encoding)
 }
 /* }}} */
 
-/* {{{ proto array iconv_get_encoding([string type])
+/* {{{ proto mixed iconv_get_encoding([string type])
    Get internal encoding and output encoding for ob_iconv_handler() */
 PHP_FUNCTION(iconv_get_encoding)
 {

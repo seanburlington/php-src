@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.92 2004/09/08 23:37:55 pollita Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.93 2004/09/27 15:55:04 hyanantha Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -38,14 +38,6 @@
 #ifdef PHP_WIN32
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
-#elif defined(NETWARE)
-/*#include <ws2nlm.h>*/
-/*#include <sys/socket.h>*/
-#ifdef NEW_LIBC
-#include <sys/param.h>
-#else
-#include "netware/param.h"
-#endif
 #else
 #include <sys/param.h>
 #endif
@@ -60,7 +52,6 @@
 #ifdef PHP_WIN32
 #include <winsock2.h>
 #elif defined(NETWARE) && defined(USE_WINSOCK)
-/*#include <ws2nlm.h>*/
 #include <novsock2.h>
 #else
 #include <netinet/in.h>

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.63 2000/10/25 17:44:02 andrei Exp $ */
+/* $Id: xml.c,v 1.64 2000/10/26 18:15:18 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -94,7 +94,6 @@ int  _xml_externalEntityRefHandler(XML_Parser, const XML_Char *, const XML_Char 
 /* }}} */
 /* {{{ extension definition structures */
 
-static unsigned char second_arg_force_ref[] = { 2, BYREF_NONE, BYREF_FORCE };
 static unsigned char third_and_fourth_args_force_ref[] = { 4, BYREF_NONE, BYREF_NONE, BYREF_FORCE, BYREF_FORCE };
 
 function_entry xml_functions[] = {

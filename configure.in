@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.145 2004/12/30 07:02:16 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.146 2005/01/07 06:21:42 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -35,7 +35,7 @@ for arg in $0 "$@"; do
   CONFIGURE_COMMAND="$CONFIGURE_COMMAND '$arg'"
 done
 
-AC_CANONICAL_HOST
+PHP_CANONICAL_HOST
 AC_CONFIG_HEADER(main/php_config.h)
 
 MAJOR_VERSION=4
@@ -176,11 +176,6 @@ PHP_C_BIGENDIAN
 
 dnl Platform-specific compile settings.
 dnl -------------------------------------------------------------------------
-
-dnl if host_alias is empty, ac_cv_host_alias may still have the info
-if test -z "$host_alias"; then
-    host_alias=$ac_cv_host_alias
-fi
 
 case $host_alias in
 *solaris*)

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 1999/11/24 06:21:48 steinm Exp $
+dnl $Id: config.m4,v 1.2 1999/11/25 06:56:40 steinm Exp $
 
 AC_MSG_CHECKING(whether to include DOM support)
 AC_ARG_WITH(dom,
@@ -12,12 +12,17 @@ AC_ARG_WITH(dom,
     yes)
       AC_MSG_RESULT(yes)
       PHP_EXTENSION(domxml)
+      old_LIBS=$LIBS
+      LIBS="$LIBS -lgz"
       AC_CHECK_LIB(xml, xmlNewDoc, [AC_DEFINE(HAVE_DOMXML)],
         [AC_MSG_ERROR(DOM module requires libxml >= 1.0)])
+      LIBS=$old_LIBS
       AC_ADD_LIBRARY(xml)
+      AC_ADD_LIBRARY(gz)
+      AC_ADD_INCLUDE(/usr/local/include)
       ;;
     *)
-      test -f $withval/include/gnome-xml/tree.h && DOMXML_INCLUDE="$withval/include/gnome-xml"
+      test -f $withval/include/gnome-xml/tree.h && DOMXML_INCLUDE="$withval/include"
       test -f $withval/include/tree.h && DOMXML_INCLUDE="$withval/include"
       if test -n "$DOMXML_INCLUDE" ; then
         AC_MSG_RESULT(yes)

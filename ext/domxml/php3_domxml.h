@@ -29,13 +29,13 @@
  */
 
 
-/* $Id: php3_domxml.h,v 1.1 1999/11/24 06:21:48 steinm Exp $ */
+/* $Id: php3_domxml.h,v 1.2 1999/11/25 06:56:40 steinm Exp $ */
 
 #ifndef _PHP3_DOMXML_H
 #define _PHP3_DOMXML_H
 
 #if HAVE_DOMXML
-#include <parser.h>
+#include <gnome-xml/parser.h>
 
 extern php3_module_entry php3_domxml_module_entry;
 #define php3_domxml_module_ptr &php3_domxml_module_entry

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.75 2001/08/25 15:57:42 zeev Exp $ */
+/* $Id: output.c,v 1.76 2001/08/31 15:16:15 zeev Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -200,7 +200,8 @@ PHPAPI void php_end_ob_buffer(zend_bool send_buffer, zend_bool just_flush TSRMLS
 
 	to_be_destroyed_buffer = OG(active_ob_buffer).buffer;
 	if (OG(active_ob_buffer).internal_output_handler
-		&& (final_buffer != OG(active_ob_buffer).internal_output_handler_buffer)) {
+		&& (final_buffer != OG(active_ob_buffer).internal_output_handler_buffer)
+		&& (final_buffer != OG(active_ob_buffer).buffer)) {
 		to_be_destroyed_handled_output[0] = final_buffer;
 	}
 

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: mysql.c,v 1.2 1999/04/23 11:12:41 zeev Exp $ */
+/* $Id: mysql.c,v 1.3 1999/04/23 12:38:45 zeev Exp $ */
 
 
 /* TODO:
@@ -63,7 +63,7 @@
 
 
 /* True globals, no need for thread safety */
-int le_result,le_link,le_plink;
+static int le_result,le_link,le_plink;
 
 #include "php_ini.h"
 

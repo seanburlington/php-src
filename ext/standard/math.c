@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.97.2.10 2004/04/30 13:26:06 iliaa Exp $ */
+/* $Id: math.c,v 1.97.2.11 2004/05/24 17:02:31 iliaa Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -622,9 +622,9 @@ PHP_FUNCTION(sqrt)
    disappear in the next version of PHP!
 */
 
+#ifdef HAVE_HYPOT
 PHP_FUNCTION(hypot)
 {
-#ifdef HAVE_HYPOT
 	zval **num1, **num2;
 
 	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters_ex(2, &num1, &num2) == FAILURE) {
@@ -634,8 +634,8 @@ PHP_FUNCTION(hypot)
 	convert_to_double_ex(num2);
 	Z_DVAL_P(return_value) = hypot(Z_DVAL_PP(num1), Z_DVAL_PP(num2));
 	Z_TYPE_P(return_value) = IS_DOUBLE;
-#endif
 }
+#endif
 
 /* }}} */
 

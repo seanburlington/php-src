@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.37 2004/05/10 07:25:11 helly Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.38 2004/05/24 17:02:31 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -494,7 +494,9 @@ function_entry basic_functions[] = {
 	PHP_FE(log,																NULL)
 	PHP_FE(log10,															NULL)
 	PHP_FE(sqrt,															NULL)
+#ifdef HAVE_HYPOT
 	PHP_FE(hypot,															NULL)
+#endif	
 	PHP_FE(deg2rad,															NULL)
 	PHP_FE(rad2deg,															NULL)
 	PHP_FE(bindec,															NULL)

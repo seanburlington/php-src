@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_dotnet.c,v 1.10 2004/08/03 12:41:26 wez Exp $ */
+/* $Id: com_dotnet.c,v 1.11 2004/08/07 21:00:59 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -101,6 +101,7 @@ PHP_FUNCTION(com_dotnet_create_instance)
 	int assembly_name_len, datatype_name_len;
 	struct dotnet_runtime_stuff *stuff;
 	DISPPARAMS params;
+	OLECHAR *olestring;
 	VARIANT vargs[2];
 	VARIANT retval;
 	HRESULT hr;
@@ -138,10 +139,14 @@ PHP_FUNCTION(com_dotnet_create_instance)
 	VariantInit(&retval);
 
 	V_VT(&vargs[0]) = VT_BSTR;
-	V_BSTR(&vargs[0]) = php_com_string_to_olestring(datatype_name, datatype_name_len, obj->code_page TSRMLS_CC);
+	olestring = php_com_string_to_olestring(datatype_name, datatype_name_len, obj->code_page TSRMLS_CC);
+	V_BSTR(&vargs[0]) = SysAllocStringByteLen((char*)olestring, datatype_name_len * sizeof(OLECHAR));
+	efree(olestring);
 
 	V_VT(&vargs[1]) = VT_BSTR;
-	V_BSTR(&vargs[1]) = php_com_string_to_olestring(assembly_name, assembly_name_len, obj->code_page TSRMLS_CC);
+	olestring = php_com_string_to_olestring(assembly_name, assembly_name_len, obj->code_page TSRMLS_CC);
+	V_BSTR(&vargs[1]) = SysAllocStringByteLen((char*)olestring, assembly_name_len * sizeof(OLECHAR));
+	efree(olestring);
 
 	where = "IDispatch_Invoke";
 	hr = IDispatch_Invoke(stuff->dotnet_domain, stuff->create_instance, &IID_NULL, LOCALE_SYSTEM_DEFAULT,

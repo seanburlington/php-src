@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.12 2000/10/25 17:43:59 andrei Exp $ */
+/* $Id: pspell.c,v 1.13 2001/02/02 18:28:48 rasmus Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -37,6 +37,7 @@
 #define PSPELL_BAD_SPELLERS 3L
 #define PSPELL_SPEED_MASK_INTERNAL 3L
 #define PSPELL_RUN_TOGETHER 8L
+#define USE_ORIGINAL_MANAGER_FUNCS 1L
 
 function_entry pspell_functions[] = {
 	PHP_FE(pspell_new,		NULL)

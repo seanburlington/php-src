@@ -26,7 +26,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.2 1999/04/18 15:58:26 zeev Exp $ */
+/* $Id: exec.c,v 1.3 1999/04/21 04:02:11 zeev Exp $ */
 
 #ifdef THREAD_SAFE
 #include "tls.h"
@@ -342,6 +342,7 @@ PHP_FUNCTION(shell_exec)
 	FILE *in;
 	int readbytes,total_readbytes=0,allocated_space;
 	pval *cmd;
+	PLS_FETCH();
 
 	if (ARG_COUNT(ht)!=1 || getParameters(ht, 1, &cmd)==FAILURE) {
 		WRONG_PARAM_COUNT;

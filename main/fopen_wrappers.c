@@ -27,7 +27,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.5 1999/04/17 00:37:05 ssb Exp $ */
+/* $Id: fopen_wrappers.c,v 1.6 1999/04/21 04:02:11 zeev Exp $ */
 
 #ifdef THREAD_SAFE
 #include "tls.h"
@@ -106,6 +106,7 @@ PHPAPI int _php3_check_open_basedir(char *path)
 	char resolved_name[MAXPATHLEN];
 	char local_open_basedir[MAXPATHLEN];
 	int local_open_basedir_pos;
+	PLS_FETCH();
 	
 	/* Only check when open_basedir is available */
 	if (PG(open_basedir) && *PG(open_basedir)) {
@@ -177,6 +178,8 @@ PHPAPI int _php3_check_open_basedir(char *path)
 PHPAPI FILE *php3_fopen_wrapper(char *path, char *mode, int options, int *issock, int *socketd)
 {
 	int cm=2;  /* checkuid mode: 2 = if file does not exist, check directory */
+	PLS_FETCH();
+
 #if PHP3_URL_FOPEN
 	if (!(options & IGNORE_URL)) {
 		return php3_fopen_url_wrapper(path, mode, options, issock, socketd);
@@ -203,8 +206,7 @@ FILE *php3_fopen_for_parser(void)
 	struct stat st;
 	char *temp, *path_info, *fn;
 	int l;
-	TLS_VARS;
-
+	PLS_FETCH();
 
 	fn = GLOBAL(request_info).filename;
 	path_info = GLOBAL(request_info).path_info;
@@ -306,7 +308,7 @@ PHPAPI FILE *php3_fopen_with_path(char *filename, char *mode, char *path, char *
 	struct stat sb;
 	FILE *fp;
 	int cm=2;
-	TLS_VARS;
+	PLS_FETCH();
 
 	if(!strcmp(mode,"r") || !strcmp(mode,"r+")) cm=0;
 	if (opened_path) {
@@ -879,6 +881,8 @@ static FILE *php3_fopen_url_wrapper(const char *path, char *mode, int options, i
 		return (fp);
 
 	} else {
+		PLS_FETCH();
+
 		if (options & USE_PATH) {
 			fp = php3_fopen_with_path((char *) path, mode, PG(include_path), NULL);
 		} else {

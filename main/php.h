@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.4 1999/04/20 01:03:09 ssb Exp $ */
+/* $Id: php.h,v 1.5 1999/04/21 04:02:11 zeev Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -370,7 +370,7 @@ extern void html_putc(char c);
 #ifndef THREAD_SAFE
 extern int end_current_file_execution(int *retval);
 #endif
-extern int _php3_hash_environment(void);
+extern int _php3_hash_environment(PLS_D);
 extern int module_startup_modules(void);
 
 /* needed for modules only */

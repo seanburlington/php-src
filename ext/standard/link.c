@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: link.c,v 1.2 1999/04/21 04:02:11 zeev Exp $ */
 #ifdef THREAD_SAFE
 #include "tls.h"
 #endif
@@ -174,7 +174,7 @@ void php3_unlink(INTERNAL_FUNCTION_PARAMETERS)
 {
 	pval *filename;
 	int ret;
-	TLS_VARS;
+	PLS_FETCH();
 	
 	if (ARG_COUNT(ht) != 1 || getParameters(ht, 1, &filename) == FAILURE) {
 		WRONG_PARAM_COUNT;

@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build2.mk,v 1.27.4.1 2003/06/27 00:19:26 sas Exp $ 
+# $Id: build2.mk,v 1.27.4.2 2004/12/20 20:24:23 sniper Exp $ 
 #
 
 include generated_lists
@@ -46,7 +46,8 @@ $(config_h_in): configure acconfig.h
 # correctly otherwise (timestamps are not updated)
 	@echo rebuilding $@
 	@rm -f $@
-	@autoheader 2>&1 | $(SUPPRESS_WARNINGS)
+	@autoheader=`./build/shtool path autoheader-2.13 autoheader`; \
+	$$autoheader 2>&1 | $(SUPPRESS_WARNINGS)
 
 $(TOUCH_FILES):
 	touch $(TOUCH_FILES)
@@ -61,4 +62,5 @@ aclocal.m4: configure.in acinclude.m4
 
 configure: aclocal.m4 configure.in $(config_m4_files)
 	@echo rebuilding $@
-	@autoconf 2>&1 | $(SUPPRESS_WARNINGS)
+	@autoconf=`./build/shtool path autoconf-2.13 autoconf`; \
+	$$autoconf 2>&1 | $(SUPPRESS_WARNINGS)

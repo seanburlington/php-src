@@ -22,7 +22,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.56 2000/03/19 22:59:08 tedp Exp $ */
+/* $Id: imap.c,v 1.57 2000/03/20 06:46:58 eschmid Exp $ */
 
 #define IMAP41
 
@@ -3870,9 +3870,8 @@ void mm_fatal (char *str)
 {
 }
 
-/* {{{ proto array mime_decode(string str)
-   Decode mime header element in accordance with RFC 2047
-   return array of objects containing 'charset' encoding and decoded 'text' */
+/* {{{ proto array imap_mime_header_decode(string str)
+   Decode mime header element in accordance with RFC 2047 and return array of objects containing 'charset' encoding and decoded 'text' */
 PHP_FUNCTION(imap_mime_header_decode)
 {
 	zval **str,*myobject;

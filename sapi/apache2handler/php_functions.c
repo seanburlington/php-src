@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.1.2.10 2003/11/11 20:04:19 iliaa Exp $ */
+/* $Id: php_functions.c,v 1.1.2.11 2005/01/11 14:09:56 jorton Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_smart_str.h"
@@ -63,6 +63,11 @@ static request_rec *php_apache_lookup_uri(char *filename TSRMLS_DC)
 	}
 	
 	ctx = SG(server_context);
+
+	/* Ensure that the ap_r* layer is flushed, to work around 2.0 bug:
+	 * http://issues.apache.org/bugzilla/show_bug.cgi?id=17629 */
+	ap_rflush(ctx->r);
+
 	return ap_sub_req_lookup_uri(filename, ctx->r, ctx->r->output_filters);
 }
 

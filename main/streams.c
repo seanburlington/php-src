@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.113 2002/10/20 20:44:10 iliaa Exp $ */
+/* $Id: streams.c,v 1.114 2002/10/21 01:33:31 moriyoshi Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1521,9 +1521,9 @@ PHPAPI php_stream *_php_stream_fopen_with_path(char *filename, char *mode, char 
 	if (*filename == '.' && (*(filename+1) == '/' || *(filename+1) == '.')) {
 		/* further checks, we could have ....... filenames */
 		ptr = filename + 1;
-		if (ptr == '.') {
+		if (*ptr == '.') {
 			while (*(++ptr) == '.');
-			if (ptr != '/') { /* not a relative path after all */
+			if (*ptr != '/') { /* not a relative path after all */
 				goto not_relative_path;
 			}
 		}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.330 2002/10/03 07:23:50 andi Exp $ */
+/* $Id: session.c,v 1.331 2002/10/03 15:10:36 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -790,6 +790,8 @@ static int php_session_cache_limiter(TSRMLS_D)
 {
 	php_session_cache_limiter_t *lim;
 
+	if (PS(cache_limiter)[0] == '\0') return 0;
+	
 	if (SG(headers_sent)) {
 		char *output_start_filename = php_get_output_start_filename(TSRMLS_C);
 		int output_start_lineno = php_get_output_start_lineno(TSRMLS_C);
@@ -800,17 +802,17 @@ static int php_session_cache_limiter(TSRMLS_D)
 		} else {
 			php_error(E_WARNING, "Cannot send session cache limiter - headers already sent");
 		}	
-		return (-2);
+		return -2;
 	}
 	
 	for (lim = php_session_cache_limiters; lim->name; lim++) {
 		if (!strcasecmp(lim->name, PS(cache_limiter))) {
 			lim->func(TSRMLS_C);
-			return (0);
+			return 0;
 		}
 	}
 
-	return (-1);
+	return -1;
 }
 
 #define COOKIE_SET_COOKIE "Set-Cookie: "

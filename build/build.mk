@@ -1,4 +1,4 @@
-# Copyright (c) 1999 Sascha Schumann. All rights reserved.
+# Copyright (c) 1999, 2000 Sascha Schumann. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: build.mk,v 1.2 1999/12/30 04:07:16 sas Exp $ 
+# $Id: build.mk,v 1.3 2000/01/01 20:48:42 sas Exp $ 
 #
 # Makefile to generate build tools
 #

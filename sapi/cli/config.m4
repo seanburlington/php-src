@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11.2.3 2003/02/12 04:05:33 sniper Exp $
+dnl $Id: config.m4,v 1.11.2.4 2003/02/12 04:39:30 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for CLI build)
@@ -31,8 +31,10 @@ if test "$PHP_SAPI_CLI" != "no"; then
     ;;
   esac
   INSTALL_CLI="\$(mkinstalldirs) \$(INSTALL_ROOT)\$(bindir); \$(INSTALL) -m 0755 \$(SAPI_CLI_PATH) \$(INSTALL_ROOT)\$(bindir)/php"
+
   PHP_SUBST(BUILD_CLI)
   PHP_SUBST(INSTALL_CLI)
+  PHP_OUTPUT(sapi/cli/php.1)
 else
   PHP_DISABLE_CLI
 fi

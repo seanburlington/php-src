@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.37 2003/05/31 17:02:01 moriyoshi Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.38 2003/06/03 10:08:17 edink Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -303,7 +303,7 @@ static int sapi_cgi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 	if (SG(sapi_headers).http_response_code != 200) {
 		int len;
 		
-		if (rfc2616_headers) {
+		if (rfc2616_headers && SG(sapi_headers).http_status_line) {
 			len = snprintf(buf, SAPI_CGI_MAX_HEADER_LENGTH, 
 						   "%s\r\n", SG(sapi_headers).http_status_line);
 

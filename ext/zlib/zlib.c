@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.153.2.14 2003/08/28 16:05:17 sr Exp $ */
+/* $Id: zlib.c,v 1.153.2.15 2003/08/28 20:01:34 iliaa Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -818,7 +818,7 @@ PHP_FUNCTION(gzencode)
 	}
 
 	if((level<-1)||(level>9)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "compression level(%d) must be within -1..9", level);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "compression level(%ld) must be within -1..9", level);
 		RETURN_FALSE;
 	}
 

@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.81.2.17 2003/10/31 04:55:00 cellog Exp $
+// $Id: Installer.php,v 1.81.2.18 2003/11/17 05:47:51 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -506,7 +506,9 @@ class PEAR_Installer extends PEAR_Common
                 case 'delete':
                     break;
                 case 'installed_as':
-                    unset($this->pkginfo['filelist'][$data[0]]['installed_as']);
+                    if (isset($this->pkginfo['filelist'])) {
+                        unset($this->pkginfo['filelist'][$data[0]]['installed_as']);
+                    }
                     if (isset($this->pkginfo['filelist']['dirtree'][dirname($data[1])])) {
                         unset($this->pkginfo['filelist']['dirtree'][dirname($data[1])]);
                         while(!empty($data[3]) && $data[3] != '/' && $data[3] != '\\'
@@ -729,6 +731,24 @@ class PEAR_Installer extends PEAR_Common
             if (!is_file($pkgfile)) {
                 $origpkgfile = $pkgfile;
                 $pkgfile = $this->extractDownloadFileName($pkgfile, $version);
+                if (preg_match('#^(http|ftp)://#', $pkgfile)) {
+                    $pkgfile = $this->_downloadFile($pkgfile, $config, $options,
+                                                    $errors, $version, $origpkgfile,
+                                                    $state);
+                    if (PEAR::isError($pkgfile)) {
+                        return $pkgfile;
+                    }
+                    $tempinfo = $this->infoFromAny($pkgfile);
+                    if (isset($options['alldeps']) || isset($options['onlyreqdeps'])) {
+                        // ignore dependencies if there are any errors
+                        if (!PEAR::isError($tempinfo)) {
+                            $mywillinstall[strtolower($tempinfo['package'])] = @$tempinfo['release_deps'];
+                        }
+                    }
+                    $installpackages[] = array('pkg' => $tempinfo['package'],
+                                               'file' => $pkgfile, 'info' => $tempinfo);
+                    continue;
+                }
                 if (!$this->validPackageName($pkgfile)) {
                     return $this->raiseError("Package name '$pkgfile' not valid");
                 }
@@ -1314,11 +1334,6 @@ class PEAR_Installer extends PEAR_Common
                 $code = $depchecker->callCheckMethod($error, $dep);
                 if ($code) {
                     if (isset($dep['optional']) && $dep['optional'] == 'yes') {
-/* die ugly hack die
-                        // Ugly hack to adjust the error messages
-                        $error = str_replace('requires ', '', $error);
-                        $error = ucfirst($error);
-                        $error = $error . ' is recommended to utilize some features.';*/
                         $optional_deps[] = array($dep, $code, $error);
                     } else {
                         $failed_deps[] = array($dep, $code, $error);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.78 2002/10/24 14:12:06 moriyoshi Exp $ */
+/* $Id: dl.c,v 1.79 2002/11/04 12:53:24 moriyoshi Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -129,7 +129,7 @@ void php_dl(pval *file, int type, pval *return_value TSRMLS_DC)
 		if (IS_SLASH(extension_dir[extension_dir_len-1])) {
 			sprintf(libpath, "%s%s", extension_dir, Z_STRVAL_P(file)); /* SAFE */
 		} else {
-			sprintf(libpath, "%s/%s", extension_dir, Z_STRVAL_P(file)); /* SAFE */
+			sprintf(libpath, "%s%c%s", extension_dir, DEFAULT_SLASH, Z_STRVAL_P(file)); /* SAFE */
 		}
 	} else {
 		libpath = estrndup(Z_STRVAL_P(file), Z_STRLEN_P(file));

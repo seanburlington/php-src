@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.26 2000/06/20 22:12:22 zeev Exp $
+dnl $Id: config.m4,v 1.27 2000/11/21 11:07:50 sniper Exp $
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
 sinclude(ext/mysql/libmysql/mysql.m4)
@@ -22,6 +22,7 @@ AC_DEFUN(PHP_MYSQL_SOCK,[
       /var/run/mysqld/mysqld.sock \
       /var/tmp/mysql.sock \
       /var/lib/mysql/mysql.sock \
+      /var/mysql/mysql.sock \
       ; do
     if test -r $i; then
       MYSQL_SOCK=$i

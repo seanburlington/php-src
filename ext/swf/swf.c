@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.46.2.2 2003/09/12 04:53:39 iliaa Exp $ */
+/* $Id: swf.c,v 1.46.2.3 2004/12/23 18:04:10 iliaa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -239,12 +239,17 @@ PHP_FUNCTION(swf_openfile)
 	}
 	na = tmpna;
 #endif
+	if (php_check_open_basedir(na TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(na, "wb+", CHECKUID_CHECK_MODE_PARAM))) {
+		goto err;
+	}
+	
 	if (!SWFG(use_file))
 		SWFG(tmpfile_name) = na;
 
 	swf_openfile(na,(float)Z_DVAL_PP(sizeX), (float)Z_DVAL_PP(sizeY),
       		 	 (float)Z_DVAL_PP(frameRate), (float)Z_DVAL_PP(r), 
       		 	 (float)Z_DVAL_PP(g), (float)Z_DVAL_PP(b));
+err:
 #ifdef VIRTUAL_DIR
 	free(na);
 #endif

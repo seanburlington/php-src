@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.90 2002/05/18 13:31:31 mfischer Exp $ */
+/* $Id: dir.c,v 1.91 2002/05/19 14:32:23 edink Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -40,7 +40,11 @@
 #endif
 
 #ifdef HAVE_GLOB
+#ifndef PHP_WIN32
 #include <glob.h>
+#else
+#include "win32/glob.h"
+#endif
 #endif
 
 typedef struct {

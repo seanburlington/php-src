@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h.in,v 1.2 2002/05/10 04:58:05 edink Exp $
+	$Id: config.w32.h.in,v 1.3 2002/05/19 14:32:24 edink Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -160,3 +160,4 @@
 #undef HAVE_RINT
 #define HAVE_STRFTIME 1
 #define SIZEOF_INT 4
+#define HAVE_GLOB

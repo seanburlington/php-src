@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.34 2003/02/23 22:03:54 rasmus Exp $ */
+/* $Id: streams.c,v 1.125.2.35 2003/03/04 16:20:24 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2208,7 +2208,7 @@ static php_stream *php_plain_files_stream_opener(php_stream_wrapper *wrapper, ch
 		return php_stream_fopen_with_path_rel(path, mode, PG(include_path), opened_path, options);
 	}
 
-	if ((options & STREAM_DISABLE_OPEN_BASEDIR == 0) && php_check_open_basedir(path TSRMLS_CC)) {
+	if (((options & STREAM_DISABLE_OPEN_BASEDIR) == 0) && php_check_open_basedir(path TSRMLS_CC)) {
 		return NULL;
 	}
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.20 2003/12/27 10:29:52 rrichards Exp $ */
+/* $Id: node.c,v 1.21 2003/12/27 12:39:10 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -64,7 +64,7 @@ static void dom_reconcile_ns(xmlDocPtr doc, xmlNodePtr nodep) {
 		if (nodep->nsDef != NULL && nodep->nsDef->href != NULL) {
 			if((nsptr = xmlSearchNsByHref(doc, nodep->parent, nodep->nsDef->href)) && 
 				(nodep->nsDef->prefix == NULL || xmlStrEqual(nsptr->prefix, nodep->nsDef->prefix))) {
-				dom_set_old_ns(doc, nodep->ns);
+				dom_set_old_ns(doc, nodep->nsDef);
 				nodep->nsDef = NULL;
 			}
 		}

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.126 2004/11/16 21:04:10 iliaa Exp $ */
+/* $Id: soap.c,v 1.127 2004/12/14 13:58:57 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2800,10 +2800,13 @@ static sdlFunctionPtr deserialize_function_call(sdlPtr sdl, xmlDocPtr request, c
 	trav = body->children;
 	while (trav != NULL) {
 		if (trav->type == XML_ELEMENT_NODE) {
+/*
 			if (func != NULL) {
 				soap_server_fault("Client", "looks like we got \"Body\" with several functions call", NULL, NULL, NULL TSRMLS_CC);
 			}
+*/
 			func = trav;
+			break; /* FIXME: the rest of body is ignored */
 		}
 		trav = trav->next;
 	}

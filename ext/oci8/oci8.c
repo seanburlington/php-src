@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.183.2.8 2004/01/15 15:14:41 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.183.2.9 2004/01/20 11:37:17 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -641,7 +641,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.8 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.9 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -3118,8 +3118,8 @@ PHP_FUNCTION(ocisavelob)
 
 			if (offparam == -1) {
 				offset = curloblen;
-			} else if ((ub4) offparam >= curloblen) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset smaller than current LOB-Size - appending");
+			} else if (offparam >= curloblen) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset is bigger than current LOB-Size - appending");
 				offset = curloblen;
 			} else {
 				offset = offparam;
@@ -3128,7 +3128,6 @@ PHP_FUNCTION(ocisavelob)
 			WRONG_PARAM_COUNT;
 		}
 
-		offset++;
 		convert_to_string_ex(arg);
 		loblen = Z_STRLEN_PP(arg);
 	

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.60 2000/02/01 20:02:44 andrei Exp $ */
+/* $Id: file.c,v 1.61 2000/02/01 22:13:13 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -939,7 +939,7 @@ PHP_FUNCTION(socket_get_status)
 	void *what;
 	int socketd = 0;
 	struct php_sockbuf *sock;
-	FLS_FETCH();
+	//FLS_FETCH();
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(ZEND_NUM_ARGS(), &socket) == FAILURE) {
 		WRONG_PARAM_COUNT;

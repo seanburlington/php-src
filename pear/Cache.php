@@ -16,7 +16,9 @@
 // |          Sebastian Bergmann <sb@sebastian-bergmann.de>               |
 // +----------------------------------------------------------------------+
 //
-// $Id: Cache.php,v 1.5 2001/03/06 15:27:30 sbergmann Exp $
+// $Id: Cache.php,v 1.6 2001/03/08 20:39:15 uw Exp $
+
+require_once "Cache/Error.php";
 
 /**
 * Cache is a base class for cache implementations.
@@ -24,7 +26,7 @@
 * TODO: Simple usage example goes here.
 *
 * @author   Ulf Wendel <ulf.wendel@phpdoc.de>
-* @version  $Id: Cache.php,v 1.5 2001/03/06 15:27:30 sbergmann Exp $
+* @version  $Id: Cache.php,v 1.6 2001/03/08 20:39:15 uw Exp $
 * @package  Cache
 * @access   public 
 */
@@ -136,7 +138,7 @@ class Cache {
     * @param    mixed   userdefined expire date
     * @param    string  cache group
     * @return   boolean
-    * @throws   CacheError
+    * @throws   Cache_Error
     * @access   public
     * @see      getUserdata()
     */

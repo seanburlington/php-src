@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.95 2001/09/09 13:28:54 derick Exp $ */
+/* $Id: ldap.c,v 1.96 2001/09/19 19:43:59 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -207,7 +207,7 @@ PHP_MINIT_FUNCTION(ldap)
 
 	le_result = zend_register_list_destructors_ex(_free_ldap_result, NULL, "ldap result", module_number);
 	le_link = zend_register_list_destructors_ex(_close_ldap_link, NULL, "ldap link", module_number);
-	le_result_entry = zend_register_list_destructors_ex(_free_ldap_result, NULL, "ldap result entry", module_number);
+	le_result_entry = zend_register_list_destructors_ex(NULL, NULL, "ldap result entry", module_number);
 
 	ldap_module_entry.type = type;
 
@@ -251,7 +251,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.95 2001/09/09 13:28:54 derick Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.96 2001/09/19 19:43:59 venaas Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #ifdef LDAP_API_VERSION

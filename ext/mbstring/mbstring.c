@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.150 2002/11/23 20:14:33 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.151 2002/11/25 17:20:19 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -78,6 +78,11 @@
 #if HAVE_MBREGEX
 #include "mbregex.h"
 #endif
+/* }}} */
+
+/* {{{ prototypes */
+static void _php_mb_globals_ctor(zend_mbstring_globals *pglobals TSRMLS_DC);
+static void _php_mb_globals_dtor(zend_mbstring_globals *pglobals TSRMLS_DC);
 /* }}} */
 
 /* {{{ php_mb_default_identify_list[] */
@@ -680,8 +685,7 @@ PHP_INI_END()
 /* }}} */
 
 /* {{{ module global initialize handler */
-static void
-php_mb_init_globals(zend_mbstring_globals *pglobals TSRMLS_DC)
+static void _php_mb_globals_ctor(zend_mbstring_globals *pglobals TSRMLS_DC)
 {
 	MBSTRG(language) = mbfl_no_language_uni;
 	MBSTRG(current_language) = MBSTRG(language);
@@ -712,17 +716,16 @@ php_mb_init_globals(zend_mbstring_globals *pglobals TSRMLS_DC)
 	MBSTRG(encoding_translation) = 0;
 	pglobals->outconv = NULL;
 #if HAVE_MBREGEX
-	php_mb_regex_globals_ctor(pglobals TSRMLS_CC);
+	_php_mb_regex_globals_ctor(pglobals TSRMLS_CC);
 #endif
 }
 /* }}} */
 
 /* {{{ static void mbstring_globals_dtor() */
-static void
-mbstring_globals_dtor(zend_mbstring_globals *pglobals TSRMLS_DC)
+static void _php_mb_globals_dtor(zend_mbstring_globals *pglobals TSRMLS_DC)
 {
 #if HAVE_MBREGEX
-	php_mb_regex_globals_dtor(pglobals TSRMLS_CC);
+	_php_mb_regex_globals_dtor(pglobals TSRMLS_CC);
 #endif
 }
 /* }}} */
@@ -732,10 +735,10 @@ PHP_MINIT_FUNCTION(mbstring)
 {
 #ifdef ZTS
 	ts_allocate_id(&mbstring_globals_id, sizeof(zend_mbstring_globals),
-		(ts_allocate_ctor) php_mb_init_globals,
-		(ts_allocate_dtor) mbstring_globals_dtor);
+		(ts_allocate_ctor) _php_mb_globals_ctor,
+		(ts_allocate_dtor) _php_mb_globals_dtor);
 #else
-	php_mb_init_globals(&mbstring_globals TSRMLS_CC);
+	_php_mb_globals_ctor(&mbstring_globals TSRMLS_CC);
 #endif
 
 	REGISTER_INI_ENTRIES();
@@ -787,7 +790,7 @@ PHP_MSHUTDOWN_FUNCTION(mbstring)
 #ifdef ZTS
 	ts_free_id(mbstring_globals_id);
 #else
-	mbstring_globals_dtor(&mbstring_globals TSRMLS_CC);
+	_php_mb_globals_dtor(&mbstring_globals TSRMLS_CC);
 #endif
 
 	return SUCCESS;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ii.h,v 1.11.8.1 2002/12/31 16:34:45 sebastian Exp $ */
+/* $Id: ii.h,v 1.11.8.2 2003/02/21 06:46:27 sniper Exp $ */
 
 #ifndef II_H
 #define II_H
@@ -43,13 +43,13 @@ static int ii_success(IIAPI_GENPARM *genParm);
 #define II_OK 1
 #define II_NO_DATA 2
 static int _close_statement(II_LINK *link);
-static int _rollback_transaction(II_LINK *link);
+static int _rollback_transaction(II_LINK *link TSRMLS_DC);
 static void _close_ii_link(II_LINK *link TSRMLS_DC);
 static void _close_ii_plink(zend_rsrc_list_entry *link TSRMLS_DC);
 static int php_ii_get_default_link(INTERNAL_FUNCTION_PARAMETERS);
 static void php_ii_set_default_link(int id TSRMLS_DC);
 static void php_ii_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent);
-static char *php_ii_field_name(II_LINK *ii_link, int index);
+static char *php_ii_field_name(II_LINK *ii_link, int index TSRMLS_DC);
 static void php_ii_field_info(INTERNAL_FUNCTION_PARAMETERS, int info_type);
 static void php_ii_fetch(INTERNAL_FUNCTION_PARAMETERS, II_LINK *ii_link, int result_type);
 

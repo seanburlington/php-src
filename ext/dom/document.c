@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.49 2004/02/16 13:06:33 rrichards Exp $ */
+/* $Id: document.c,v 1.50 2004/03/03 20:59:02 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1484,7 +1484,10 @@ static void dom_parse_document(INTERNAL_FUNCTION_PARAMETERS, int mode) {
 	int source_len, refcount, ret;
 
 	id = getThis();
-	
+	if (id != NULL && ! instanceof_function(Z_OBJCE_P(id), dom_document_class_entry TSRMLS_CC)) {
+		id = NULL;
+	}
+
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &source, &source_len) == FAILURE) {
 		return;
 	}
@@ -1978,7 +1981,7 @@ static void dom_load_html(INTERNAL_FUNCTION_PARAMETERS, int mode)
 	if (!newdoc)
 		RETURN_FALSE;
 
-	if (id != NULL) {
+	if (id != NULL && instanceof_function(Z_OBJCE_P(id), dom_document_class_entry TSRMLS_CC)) {
 		intern = (dom_object *)zend_object_store_get_object(id TSRMLS_CC);
 		if (intern != NULL) {
 			docp = (xmlDocPtr) dom_object_get_node(intern);

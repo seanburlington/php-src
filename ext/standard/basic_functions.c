@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.683 2004/08/11 03:57:15 pollita Exp $ */
+/* $Id: basic_functions.c,v 1.684 2004/08/19 13:59:29 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1364,6 +1364,13 @@ PHP_FUNCTION(ip2long)
 	}
 
 	convert_to_string_ex(str);
+
+	/* the only special case when we should return -1 ourselves,
+	 * because inet_addr() considers it wrong.
+	 */
+	if (!strcasecmp(Z_STRVAL_PP(str), "255.255.255.255")) {
+		RETURN_LONG(-1);
+	}
 
 	if (Z_STRLEN_PP(str) == 0 || (ip = inet_addr(Z_STRVAL_PP(str))) == INADDR_NONE) {
 		RETURN_FALSE;

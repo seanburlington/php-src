@@ -17,7 +17,7 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.47.2.5 2003/07/23 16:03:27 iliaa Exp $ */
+/* $Id: sendmail.c,v 1.47.2.6 2003/08/11 16:38:08 iliaa Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
@@ -623,6 +623,7 @@ send_chunk:
 			i = data_cln_len - (parts * 1024);
 			strlcpy(Buffer, p, i);
 			Buffer[i] = '\0';
+			parts++;
 			goto send_chunk;
 		}
 	}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.64 2000/11/17 15:09:46 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.65 2000/11/17 15:48:09 kalowsky Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1847,7 +1847,7 @@ int odbc_sqlconnect(odbc_connection **conn, char *db, char *uid, char *pwd, int 
 	SQLAllocEnv(&((*conn)->henv));
 	SQLAllocConnect((*conn)->henv, &((*conn)->hdbc));
 	
-#ifdef HAVE_SOLID
+#if defined(HAVE_SOLID) || defined(HAVE_SOLID_30) 
 	SQLSetConnectOption((*conn)->hdbc, SQL_TRANSLATE_OPTION,
 			SQL_SOLID_XLATOPT_NOCNV);
 #endif

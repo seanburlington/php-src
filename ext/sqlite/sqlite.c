@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.127 2004/03/06 18:14:54 iliaa Exp $ 
+   $Id: sqlite.c,v 1.128 2004/03/06 18:29:54 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1054,7 +1054,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.127 2004/03/06 18:14:54 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.128 2004/03/06 18:29:54 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1268,7 +1268,7 @@ PHP_FUNCTION(sqlite_open)
 PHP_FUNCTION(sqlite_factory)
 {
 	long mode = 0666;
-	char *filename, *fullname = NULL;
+	char *filename, *fullpath = NULL;
 	long filename_len;
 	zval *errmsg = NULL;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.685 2004/08/19 15:14:04 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.686 2004/09/10 20:45:33 pollita Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -623,6 +623,8 @@ function_entry basic_functions[] = {
 	PHP_FE(stream_get_line,												NULL)
 	PHP_FE(stream_wrapper_register,											NULL)
 	PHP_FALIAS(stream_register_wrapper, stream_wrapper_register,			NULL)
+	PHP_FE(stream_wrapper_unregister,										NULL)
+	PHP_FE(stream_wrapper_restore,											NULL)
 	PHP_FE(stream_get_wrappers,												NULL)
 	PHP_FE(stream_get_transports,											NULL)
 	PHP_FE(get_headers,													NULL)

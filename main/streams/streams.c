@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.63 2004/09/08 18:42:15 pollita Exp $ */
+/* $Id: streams.c,v 1.64 2004/09/10 20:45:35 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -52,6 +52,11 @@ PHPAPI int php_file_le_pstream(void)
 PHPAPI HashTable *_php_stream_get_url_stream_wrappers_hash(TSRMLS_D)
 {
 	return (FG(stream_wrappers) ? FG(stream_wrappers) : &url_stream_wrappers_hash);
+}
+
+PHPAPI HashTable *php_stream_get_url_stream_wrappers_hash_global(void)
+{
+	return &url_stream_wrappers_hash;
 }
 
 static int _php_stream_release_context(list_entry *le, void *pContext TSRMLS_DC)
@@ -1417,6 +1422,18 @@ PHPAPI int php_register_url_stream_wrapper_volatile(char *protocol, php_stream_w
 	return zend_hash_add(FG(stream_wrappers), protocol, strlen(protocol), wrapper, sizeof(*wrapper), NULL);
 }
 
+PHPAPI int php_unregister_url_stream_wrapper_volatile(char *protocol TSRMLS_DC)
+{
+	if (!FG(stream_wrappers)) {
+		php_stream_wrapper tmpwrapper;
+
+		FG(stream_wrappers) = emalloc(sizeof(HashTable));
+		zend_hash_init(FG(stream_wrappers), 0, NULL, NULL, 1);
+		zend_hash_copy(FG(stream_wrappers), &url_stream_wrappers_hash, NULL, &tmpwrapper, sizeof(php_stream_wrapper));
+	}
+
+	return zend_hash_del(FG(stream_wrappers), protocol, strlen(protocol));
+}
 /* }}} */
 
 /* {{{ php_stream_locate_url_wrapper */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.33 2003/10/17 15:56:06 rrichards Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.34 2003/10/20 15:43:02 rrichards Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -3078,11 +3078,11 @@ PHP_FUNCTION(domxml_doc_get_elements_by_tagname)
 		DOMXML_GET_OBJ(contextnodep, contextnode, le_domxmlnodep);
 	}
 	ctxp->node = contextnodep;
-	str = (char*) emalloc((name_len+3) * sizeof(char)) ;
+	str = (char*) emalloc((name_len+23) * sizeof(char)) ;
 	if (str == NULL) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot allocate memory for string");
 	}
-	sprintf(str ,"//%s",name);
+	sprintf(str ,"//*[local-name() = '%s']", name);
 
 	xpathobjp = xmlXPathEval(str, ctxp);
 	efree(str);

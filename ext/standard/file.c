@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.205.2.2 2002/05/12 16:08:31 rasmus Exp $ */
+/* $Id: file.c,v 1.205.2.3 2002/07/10 14:59:21 jason Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -878,7 +878,7 @@ PHP_FUNCTION(set_socket_blocking)
    Set timeout on socket read to seconds + microseonds */
 PHP_FUNCTION(socket_set_timeout)
 {
-#if HAVE_SYS_TIME_H
+#if HAVE_SYS_TIME_H || defined(PHP_WIN32)
 	zval **socket, **seconds, **microseconds;
 	int type;
 	void *what;

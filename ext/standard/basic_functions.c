@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.447.2.5 2002/06/24 08:07:40 derick Exp $ */
+/* $Id: basic_functions.c,v 1.447.2.6 2002/07/10 14:59:22 jason Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -626,7 +626,7 @@ function_entry basic_functions[] = {
 	PHP_FALIAS(fopenstream, warn_not_available,								NULL)
 #endif
 
-#if HAVE_SYS_TIME_H
+#if HAVE_SYS_TIME_H || defined(PHP_WIN32)
 	PHP_FE(socket_set_timeout,												NULL)
 #else
 	PHP_FALIAS(socket_set_timeout, warn_not_available,						NULL)

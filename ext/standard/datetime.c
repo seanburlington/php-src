@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.63 2001/01/14 05:37:33 david Exp $ */
+/* $Id: datetime.c,v 1.64 2001/01/17 21:09:16 andrei Exp $ */
 
 
 #include "php.h"
@@ -441,7 +441,7 @@ php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 #if HAVE_TM_GMTOFF
 				sprintf(tmp_buff, "%ld", ta->tm_gmtoff);
 #else
-				sprintf(tmp_buff, "%ld", ta->tm_isdst ? timezone - 3600 : timezone);
+				sprintf(tmp_buff, "%ld", ta->tm_isdst ? -(timezone - 3600) : -timezone);
 #endif
 				strcat(return_value->value.str.val, tmp_buff);
 				break;

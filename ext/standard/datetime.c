@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.54 2000/09/03 03:50:59 sniper Exp $ */
+/* $Id: datetime.c,v 1.55 2000/09/03 04:09:48 sniper Exp $ */
 
 
 #include "php.h"
@@ -616,7 +616,7 @@ char *php_std_date(time_t t)
 
 
 /* {{{ proto bool checkdate(int month, int day, int year)
-   Returns true(1) if it is a valid date */
+   Returns true(1) if it is a valid date in gregorian calendar */
 PHP_FUNCTION(checkdate)
 {
 	pval **month, **day, **year;
@@ -640,7 +640,7 @@ PHP_FUNCTION(checkdate)
 	m = (*month)->value.lval;
 	d = (*day)->value.lval;
 
-	if (y < 0 || y > 32767) {
+	if (y < 1 || y > 32767) {
 		RETURN_FALSE;
 	}
 	if (m < 1 || m > 12) {

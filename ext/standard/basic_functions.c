@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.704 2005/01/18 10:38:03 dmitry Exp $ */
+/* $Id: basic_functions.c,v 1.705 2005/03/07 19:37:26 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -192,6 +192,7 @@ function_entry basic_functions[] = {
 	PHP_FE(htmlspecialchars,												NULL)
 	PHP_FE(htmlentities,													NULL)
 	PHP_FE(html_entity_decode,												NULL)
+	PHP_FE(htmlspecialchars_decode,												NULL)
 	PHP_FE(get_html_translation_table,										NULL)
 	PHP_FE(sha1,															NULL)
 	PHP_FE(sha1_file,														NULL)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.102 2005/03/06 19:36:51 iliaa Exp $ */
+/* $Id: html.c,v 1.103 2005/03/07 19:37:26 iliaa Exp $ */
 
 /*
  * HTML entity resources:
@@ -1203,6 +1203,57 @@ void register_html_constants(INIT_FUNC_ARGS)
 PHP_FUNCTION(htmlspecialchars)
 {
 	php_html_entities(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+}
+/* }}} */
+
+/* {{{ proto string htmlspecialchars(string string [, int quote_style])
+   Convert special HTML entities back to characters */
+PHP_FUNCTION(htmlspecialchars_decode)
+{
+	char *str, *new_str, *e, *p;
+	int len, i, new_len;
+	long quote_style = ENT_COMPAT;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &str, &len, &quote_style) == FAILURE) {
+		return;
+	}
+
+	new_str = estrndup(str, len);
+	new_len = len;
+
+	for (i = 0; basic_entities[i].charcode != 0; i++) {
+		if (basic_entities[i].flags && !(quote_style & basic_entities[i].flags)) {
+			continue;
+		}
+
+		e = new_str + new_len;
+		p = new_str;
+
+		while ((p = php_memnstr(p, basic_entities[i].entity, basic_entities[i].entitylen, e))) {
+			int e_len = basic_entities[i].entitylen - 1;
+		
+			*p++ = basic_entities[i].charcode;
+			memmove(p, p + e_len, (e - p - e_len));
+
+			new_len -= e_len;	
+			e -= e_len;
+		}
+	}
+
+	e = new_str + new_len;
+	p = new_str;
+	while ((p = php_memnstr(p, "&amp;", sizeof("&amp;") - 1, e))) {
+		int e_len = sizeof("&amp;") - 2;
+
+		p++;
+		memmove(p, p + e_len, (e - p - e_len));
+
+		new_len -= e_len;	
+		e -= e_len;
+	}
+
+	new_str[new_len] = '\0';
+	RETURN_STRINGL(new_str, new_len, 0);
 }
 /* }}} */
 

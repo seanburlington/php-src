@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.h,v 1.18 2004/01/08 17:32:51 sniper Exp $ */
+/* $Id: html.h,v 1.19 2005/03/07 19:37:26 iliaa Exp $ */
 
 #ifndef HTML_H
 #define HTML_H
@@ -33,6 +33,7 @@ void register_html_constants(INIT_FUNC_ARGS);
 
 PHP_FUNCTION(htmlspecialchars);
 PHP_FUNCTION(htmlentities);
+PHP_FUNCTION(htmlspecialchars_decode);
 PHP_FUNCTION(html_entity_decode);
 PHP_FUNCTION(get_html_translation_table);
 

@@ -5,7 +5,7 @@ InterBase: BLOB test
 --POST--
 --GET--
 --FILE--
-<?php /* $Id: 004.phpt,v 1.12 2004/02/17 12:53:54 abies Exp $ */
+<?php /* $Id: 004.phpt,v 1.13 2004/04/03 11:04:21 abies Exp $ */
 
     require("interbase.inc");
     
@@ -32,6 +32,7 @@ InterBase: BLOB test
 
     $bl_s = ibase_blob_import($link,$ftmp);
     ibase_query($link, "INSERT INTO test4 (v_integer, v_blob) VALUES (1, ?)", $bl_s);
+    fclose($ftmp);
 
     echo "test blob 1\n";
     $q = ibase_query("SELECT v_blob FROM test4 WHERE v_integer = 1");

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.8 2002/04/16 00:31:16 cox Exp $
+// $Id: Registry.php,v 1.9 2002/05/09 02:31:36 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Registry.php';
@@ -48,7 +48,8 @@ class PEAR_Command_Registry extends PEAR_Command_Common
      */
     function getCommands()
     {
-        return array('list-installed', 'shell-test');
+        return array('list-installed' => 'List Installed Packages',
+                     'shell-test' => 'Shell Script Test');
     }
 
     function getHelp($command)

@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.8 2002/04/01 19:16:01 cox Exp $
+// $Id: Config.php,v 1.9 2002/05/09 02:31:36 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";
@@ -55,7 +55,9 @@ class PEAR_Command_Config extends PEAR_Command_Common
      */
     function getCommands()
     {
-        return array('config-show', 'config-get', 'config-set');
+        return array('config-show' => 'Show All Settings',
+                     'config-get' => 'Show One Setting',
+                     'config-set' => 'Change Setting');
     }
 
     // }}}

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.21 2002/04/16 00:22:55 cox Exp $
+// $Id: Package.php,v 1.22 2002/05/09 02:31:36 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Packager.php';
@@ -67,11 +67,11 @@ class PEAR_Command_Package extends PEAR_Command_Common
      */
     function getCommands()
     {
-        return array('package',
-                     'package-info',
-                     'package-list',
-                     'package-validate',
-                     'cvstag');
+        return array('package' => 'Build Package',
+                     'package-info' => 'Show Package Info',
+                     'package-list' => 'List Files in Package',
+                     'package-validate' => 'Validate Package',
+                     'cvstag' => 'Set CVS Release Tag');
     }
 
     // }}}

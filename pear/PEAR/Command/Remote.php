@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.7 2002/04/29 06:23:51 ssb Exp $
+// $Id: Remote.php,v 1.8 2002/05/09 02:31:36 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -48,10 +48,10 @@ class PEAR_Command_Remote extends PEAR_Command_Common
      */
     function getCommands()
     {
-        return array('remote-package-info',
-                     'list-upgrades',
-                     'list-remote-packages',
-                     'download');
+        return array('remote-package-info' => 'Information About Remote Package',
+                     'list-upgrades' => 'List Available Upgrades',
+                     'list-remote-packages' => 'List Remote Packages',
+                     'download' => 'Download Package');
     }
 
     // }}}

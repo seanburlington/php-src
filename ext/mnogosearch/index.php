@@ -2,7 +2,7 @@
 
 /* 
     $Source: /repository/php-src/ext/mnogosearch/Attic/index.php,v $
-    $Id: index.php,v 1.8 2001/12/01 20:09:14 gluke Exp $ 
+    $Id: index.php,v 1.9 2001/12/02 07:25:25 gluke Exp $ 
 */
 
 /*   mnoGoSearch-php-lite v.1.2
@@ -905,8 +905,7 @@ if(($errno=Udm_Errno($udm_agent))>0){
 
         $stored_link=-1;
 	if ((Udm_Api_Version() >= 30203) && ($storedaddr != '')) {
-	    Udm_Set_Agent_Param($udm_agent,UDM_PARAM_STOREDADDR,$storedaddr);
-	    $stored_link=Udm_Open_Stored($udm_agent);
+	    $stored_link=Udm_Open_Stored($udm_agent,$storedaddr);
 	}
                         
         for($i=0;$i<$rows;$i++){

@@ -3,7 +3,7 @@ Various pow() tests
 --POST--
 --GET--
 --FILE--
-<?php // $Id: pow.phpt,v 1.11 2002/03/05 09:00:56 derick Exp $
+<?php // $Id: pow.phpt,v 1.11.2.1 2002/03/21 14:23:24 sander Exp $
 
 define('LONG_MAX', is_int(5000000000)? 9223372036854775807 : 0x7FFFFFFF);
 define('LONG_MIN', -LONG_MAX - 1);
@@ -118,6 +118,12 @@ sqrt(2) ~== pow(2,1/2)
  1.0  === pow( 2.0, 0)
  2.0  === pow( 2.0, 1)
  4.0  === pow( 2.0, 2)
+ 2.0  === pow(   4, 0.5)
+ 2.0  === pow( 4.0, 0.5)
+ 3.0  === pow(  27, 1/3)
+ 3.0  === pow(27.0, 1/3)
+ 0.5  === pow(   4, -0.5)
+ 0.5  === pow( 4.0, -0.5)
 LONG_MAX-1 === pow(LONG_MAX-1,1)
 LONG_MIN+1 === pow(LONG_MIN+1,1)
 (LONG_MAX-1)*(LONG_MAX-1) ~== pow(LONG_MAX-1,2)

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.221.4.1 2001/03/13 16:23:52 zeev Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.221.4.2 2001/03/20 01:38:28 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -389,6 +389,7 @@ putenv \
 random \
 rand_r \
 regcomp \
+res_search \
 setitimer \
 setlocale \
 localeconv \

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.163 2001/12/11 15:29:58 sebastian Exp $ */
+/* $Id: oci8.c,v 1.164 2001/12/13 12:23:32 thies Exp $ */
 
 /* TODO list:
  *
@@ -622,7 +622,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.163 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.164 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2969,7 +2969,7 @@ PHP_FUNCTION(ocisavelob)
 		loblen = Z_STRLEN_PP(arg);
 	
 		if (loblen < 1) {
-			php_error(E_WARNING, "Cannot save a lob wich size is less than 1 byte");
+			php_error(E_WARNING, "Cannot save a lob which size is less than 1 byte");
 			RETURN_FALSE;
 		}
 

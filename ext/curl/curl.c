@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.83 2001/09/10 00:24:29 sterling Exp $ */
+/* $Id: curl.c,v 1.84 2001/09/10 00:25:59 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -961,7 +961,7 @@ PHP_FUNCTION(curl_error)
 	ZEND_FETCH_RESOURCE(ch, php_curl *, zid, -1, le_curl_name, le_curl);
 
 	ch->err.str[CURL_ERROR_SIZE] = 0;
-	RETURN_STRINGL(ch->err.str, CURL_ERROR_SIZE, 1);
+	RETURN_STRINGL(ch->err.str, 1);
 }
 /* }}} */
 

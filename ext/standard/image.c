@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.72.2.12 2003/11/04 01:38:33 iliaa Exp $ */
+/* $Id: image.c,v 1.72.2.13 2003/11/12 22:56:09 helly Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -1201,7 +1201,7 @@ PHP_FUNCTION(getimagesize)
 		WRONG_PARAM_COUNT;
 	}
 
-	stream = php_stream_open_wrapper(Z_STRVAL_PP(arg1), "rb", REPORT_ERRORS|IGNORE_PATH|ENFORCE_SAFE_MODE, NULL);
+	stream = php_stream_open_wrapper(Z_STRVAL_PP(arg1), "rb", STREAM_MUST_SEEK|REPORT_ERRORS|IGNORE_PATH|ENFORCE_SAFE_MODE, NULL);
 
 	if (!stream) {
 		RETURN_FALSE;

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.119 2004/02/15 20:15:34 iliaa Exp $ 
+   $Id: sqlite.c,v 1.120 2004/02/15 20:42:58 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -906,7 +906,7 @@ void sqlite_iterator_get_current_data(zend_object_iterator *iter, zval ***data T
 	*data = &((sqlite_object_iterator*)iter)->value;
 	if (res && !**data) {
 		MAKE_STD_ZVAL(**data);
-		php_sqlite_fetch_array(res, PHPSQLITE_NUM, 1, 0, **data TSRMLS_CC);
+		php_sqlite_fetch_array(res, res->mode, 1, 0, **data TSRMLS_CC);
 	}
 	
 }
@@ -1054,7 +1054,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.119 2004/02/15 20:15:34 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.120 2004/02/15 20:42:58 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

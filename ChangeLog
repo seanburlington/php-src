@@ -1,3 +1,32 @@
+2004-09-17  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * main/network.c
+      main/streams/xp_socket.c:
+      Make new poll stuff work on win32 (and still be safe on unix)
+
+    * ext/readline/readline.c:
+      standardize the callback support to allow array($obj, 'method') callbacks.
+      Add a couple of utility functions.
+
+2004-09-17  Stanislav Malyshev  <stas@zend.com>
+
+    * ZendEngine2/zend_execute_API.c
+      ZendEngine2/zend_objects_API.c
+      ZendEngine2/zend_objects_API.h:
+      fix crash when dtor is fialing on shutdown
+
+2004-09-17  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      NEWS
+      main/php_ini.c
+      main/php_ini.c:
+      MFH: Fixed bug #30050 (Possible crash inside php_shutdown_config()).
+
+    * main/php_ini.c:
+      Fixed bug #30050 (Possible crash inside php_shutdown_config()).
+      
+
 2004-09-16  Andi Gutmans  <andi@zend.com>
 
     * (PHP_5_0)
@@ -9836,7 +9865,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1749 2004/09/17 00:33:40 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1750 2004/09/18 00:35:22 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

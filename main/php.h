@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.135 2001/04/17 17:03:18 wez Exp $ */
+/* $Id: php.h,v 1.136 2001/04/27 16:41:53 dbeu Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -42,6 +42,7 @@
 #endif
 
 #ifdef PHP_WIN32
+#include "tsrm_win32.h"
 #include "win95nt.h"
 #	ifdef PHP_EXPORTS
 #	define PHPAPI __declspec(dllexport)

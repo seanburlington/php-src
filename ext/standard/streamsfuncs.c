@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.50 2005/01/04 15:30:45 wez Exp $ */
+/* $Id: streamsfuncs.c,v 1.51 2005/01/14 09:02:02 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -260,7 +260,7 @@ PHP_FUNCTION(stream_socket_accept)
 				&tv, &errstr
 				TSRMLS_CC) && clistream) {
 
-		Z_TYPE_P(peername) = IS_STRING;
+		if (peername) {Z_TYPE_P(peername) = IS_STRING;}
 		php_stream_to_zval(clistream, return_value);
 	} else {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "accept failed: %s", errstr ? errstr : "Unknown error");

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.92 2002/05/02 04:04:59 yohgaki Exp $ */
+/* $Id: output.c,v 1.93 2002/05/02 06:50:18 yohgaki Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -211,9 +211,6 @@ PHPAPI void php_end_ob_buffer(zend_bool send_buffer, zend_bool just_flush TSRMLS
 		if (SG(headers_sent) && !SG(request_info).headers_only) {
 			OG(php_body_write) = php_ub_body_write_no_header;
 		} else {
-			 /* Set Content-Length only if unerasable */
-			if (!OG(active_ob_buffer).erase && status == (PHP_OUTPUT_HANDLER_START|PHP_OUTPUT_HANDLER_END))
-				ADD_CL_HEADER(OG(active_ob_buffer).text_length);
 			OG(php_body_write) = php_ub_body_write;
 		}
 	}
@@ -242,6 +239,9 @@ PHPAPI void php_end_ob_buffer(zend_bool send_buffer, zend_bool just_flush TSRMLS
 	OG(ob_nesting_level)--;
 
 	if (send_buffer) {
+		/* FIXME: It's better to make it work with the last buffer */
+		if (OG(ob_nesting_level) == 1 && status == (PHP_OUTPUT_HANDLER_START|PHP_OUTPUT_HANDLER_END))
+			ADD_CL_HEADER(final_buffer_length);
 		OG(php_body_write)(final_buffer, final_buffer_length TSRMLS_CC);
 	}
 

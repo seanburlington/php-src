@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.18 2001/02/26 06:07:14 andi Exp $ */
+/* $Id: readline.c,v 1.19 2001/02/27 20:16:35 andi Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -397,7 +397,7 @@ static char **_readline_completion_cb(char *text, int start, int end)
 	}
 	
 	for (i = 0; i < 4; i++) {
-		zval_del_ref(&params[i]);
+		zval_ptr_dtor(&params[i]);
 	}
 	zval_dtor(&_readline_array);
 	

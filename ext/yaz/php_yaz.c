@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.41 2002/02/28 08:27:01 sebastian Exp $ */
+/* $Id: php_yaz.c,v 1.41.2.1 2002/04/19 20:39:17 dickmeiss Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -798,7 +798,8 @@ static int send_search (Yaz_Association t)
 static int send_sort_present (Yaz_Association t)
 {
 	if (!send_sort(t))
-		send_present (t);
+		return send_present (t);
+	return 1;
 }
 
 static int send_present (Yaz_Association t)

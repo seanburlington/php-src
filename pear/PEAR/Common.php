@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.10 2001/08/27 21:25:16 ssb Exp $
+// $Id: Common.php,v 1.11 2001/09/04 03:34:59 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -260,7 +260,7 @@ class PEAR_Common extends PEAR
             case 'SUMMARY':
                 $this->pkginfo['summary'] .= $data;
                 break;
-            case 'INITIALS':
+            case 'USER':
                 $this->current_maintainer['handle'] .= $data;
                 break;
             case 'EMAIL':

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.387 2002/10/24 12:21:06 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.388 2002/10/24 13:14:32 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -325,6 +325,7 @@ limits.h \
 locale.h \
 monetary.h \
 mach-o/dyld.h \
+netdb.h \
 pwd.h \
 resolv.h \
 signal.h \
@@ -1107,6 +1108,8 @@ PHP_ADD_MAKEFILE_FRAGMENT($abs_srcdir/Makefile.frag,$abs_srcdir/Zend,Zend)
 
 PHP_GEN_BUILD_DIRS
 PHP_GEN_GLOBAL_MAKEFILE
+
+AC_DEFINE([HAVE_BUILD_DEFS_H], 1, [ ])
 
 $php_shtool mkdir -p pear/scripts
 ALL_OUTPUT_FILES="php4.spec main/build-defs.h \

@@ -18,17 +18,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.75 2002/10/22 07:00:51 fmk Exp $ */
+/* $Id: dl.c,v 1.76 2002/10/24 13:14:42 sas Exp $ */
 
 #include "php.h"
 #include "dl.h"
 #include "php_globals.h"
 #include "ext/standard/info.h"
 #include "SAPI.h"
-
-#if !defined(PHP_WIN32) && !defined(NETWARE)
-#include "build-defs.h"
-#endif
 
 #if defined(HAVE_LIBDL) || HAVE_MACH_O_DYLD_H
 #include <stdlib.h>

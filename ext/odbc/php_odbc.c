@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.141 2002/08/14 20:40:48 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.142 2002/10/24 13:14:41 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -49,8 +49,6 @@
 #define ODBC_TYPE "Win32"
 #define PHP_ODBC_TYPE ODBC_TYPE
 
-#else
-#include "build-defs.h"
 #endif
 
 /*

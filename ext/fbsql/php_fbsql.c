@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.85 2002/10/06 02:10:19 fmk Exp $ */
+/* $Id: php_fbsql.c,v 1.86 2002/10/24 13:14:34 sas Exp $ */
 
 /* TODO:
  *
@@ -42,11 +42,10 @@
 #include "ext/standard/info.h"
 #include "ext/standard/php_string.h"
 
-#if WIN32|WINNT
+#ifdef PHP_WIN32
 #include <winsock.h>
 #else
 #include <php_config.h>
-#include <build-defs.h>
 
 #if HAVE_SYS_TYPES_H
 #include <sys/types.h>

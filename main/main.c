@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.504 2002/10/23 18:32:55 moriyoshi Exp $ */
+/* $Id: main.c,v 1.505 2002/10/24 13:14:44 sas Exp $ */
 
 /* {{{ includes
  */
@@ -40,8 +40,6 @@
 #ifdef USE_WINSOCK
 #include <novsock2.h>
 #endif
-#else
-#include "build-defs.h"
 #endif
 #if HAVE_SYS_TIME_H
 #include <sys/time.h>

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.109 2002/09/06 10:34:30 imajes Exp $ */
+/* $Id: xml.c,v 1.110 2002/10/24 13:14:44 sas Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -35,9 +35,6 @@
 
 #if HAVE_LIBEXPAT
 
-#if !defined(PHP_WIN32) && !defined(NETWARE)
-#  include "build-defs.h"
-# endif
 # include "ext/standard/head.h"
 
 /* Short-term TODO list:

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.110 2002/09/30 09:27:54 steinm Exp $ */
+/* $Id: hw.c,v 1.111 2002/10/24 13:14:36 sas Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -35,8 +35,6 @@
 
 #ifdef PHP_WIN32
 #include <winsock.h>
-#else
-#include "build-defs.h"
 #endif
 
 #if HYPERWAVE

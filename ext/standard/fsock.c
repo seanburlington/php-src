@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.105 2002/10/13 22:01:39 wez Exp $ */
+/* $Id: fsock.c,v 1.106 2002/10/24 13:14:42 sas Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -105,8 +105,6 @@ static int fsock_globals_id;
 #ifdef USE_WINSOCK
 #define EWOULDBLOCK WSAEWOULDBLOCK
 #endif
-#else
-#include "build-defs.h"
 #endif
 
 /* {{{ php_lookup_hostname */

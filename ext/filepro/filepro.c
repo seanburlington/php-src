@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filepro.c,v 1.46 2002/06/27 06:54:51 derick Exp $ */
+/* $Id: filepro.c,v 1.47 2002/10/24 13:14:35 sas Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com
@@ -151,7 +151,7 @@ zend_module_entry filepro_module_entry = {
 
 #ifdef COMPILE_DL_FILEPRO
 ZEND_GET_MODULE(filepro)
-#if (WIN32|WINNT) && defined(THREAD_SAFE)
+#if defined(PHP_WIN32) && defined(THREAD_SAFE)
 
 /*NOTE: You should have an odbc.def file where you
 export DllMain*/

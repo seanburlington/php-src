@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hwapi.cpp,v 1.1 2002/04/10 13:33:57 steinm Exp $ */
+/* $Id: hwapi.cpp,v 1.2 2002/10/24 13:14:36 sas Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -25,17 +25,17 @@ extern "C"
 {
 #include "php.h"
 #include "php_globals.h"
-//#include "ext/standard/php_standard.h"
 #include "ext/standard/head.h"
 #include "ext/standard/info.h"
-//#include "fopen-wrappers.h"
+#if 0
+#include "ext/standard/php_standard.h"
+#include "fopen-wrappers.h"
+#endif
 #include "SAPI.h"
 }
 
 #ifdef PHP_WIN32
 #include <winsock.h>
-#else
-#include "build-defs.h"
 #endif
 #ifdef HAVE_MMAP 
 #include <sys/mman.h>

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.79 2002/04/25 17:20:05 edink Exp $ */
+/* $Id: oracle.c,v 1.80 2002/10/24 13:14:42 sas Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -52,10 +52,6 @@
 #else
 #define PHP_ORA_API
 #endif                                   
-
-#ifndef PHP_WIN32
-#include "build-defs.h"
-#endif 
 
 #ifdef ZTS
 int ora_globals_id;

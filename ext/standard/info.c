@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.217 2002/10/12 03:11:28 iliaa Exp $ */
+/* $Id: info.c,v 1.218 2002/10/24 13:14:43 sas Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -31,9 +31,6 @@
 #include "SAPI.h"
 #include <time.h>
 #include "php_main.h"
-#if !defined(PHP_WIN32) && !defined(NETWARE)
-#include "build-defs.h"
-#endif
 #include "zend_globals.h"		/* needs ELS */
 #include "zend_extensions.h"
 #ifdef HAVE_SYS_UTSNAME_H

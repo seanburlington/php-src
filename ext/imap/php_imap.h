@@ -27,16 +27,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.23 2002/08/05 21:53:09 kalowsky Exp $ */
+/* $Id: php_imap.h,v 1.24 2002/10/24 13:14:37 sas Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H
 
 #if HAVE_IMAP
-
-#ifndef PHP_WIN32
-#include "build-defs.h"
-#endif
 
 #if defined(HAVE_IMAP2000) || defined(HAVE_IMAP2001)
  /* these are used for quota support */

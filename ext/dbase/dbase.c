@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dbase.c,v 1.59 2002/06/17 02:27:34 sniper Exp $ */
+/* $Id: dbase.c,v 1.60 2002/10/24 13:14:33 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -760,7 +760,7 @@ zend_module_entry dbase_module_entry = {
 #ifdef COMPILE_DL_DBASE
 ZEND_GET_MODULE(dbase)
 
-#if (WIN32|WINNT) && defined(THREAD_SAFE)
+#if defined(PHP_WIN32) && defined(THREAD_SAFE)
 
 /*NOTE: You should have an odbc.def file where you
 export DllMain*/

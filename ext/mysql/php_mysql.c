@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.168 2002/10/17 07:24:04 yohgaki Exp $ */
+/* $Id: php_mysql.c,v 1.169 2002/10/24 13:14:39 sas Exp $ */
 
 /* TODO:
  *
@@ -43,7 +43,6 @@
 # include <sys/socket.h>
 # define signal(a, b) NULL
 #else
-# include "build-defs.h"
 # if HAVE_SIGNAL_H
 #  include <signal.h>
 # endif

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.116 2002/10/22 15:34:50 iliaa Exp $ */
+/* $Id: streams.c,v 1.117 2002/10/24 13:14:47 sas Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -45,8 +45,6 @@
 
 #ifdef PHP_WIN32
 #define EWOULDBLOCK WSAEWOULDBLOCK
-#else
-#include "build-defs.h"
 #endif
 
 #define STREAM_DEBUG 0

@@ -16,7 +16,9 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: select.c,v 1.1 2003/02/27 22:23:39 wez Exp $ */
+#include "php.h"
+
+/* $Id: select.c,v 1.2 2003/02/27 22:43:51 wez Exp $ */
 
 /* Win32 select() will only work with sockets, so we roll our own implementation that will
  * get the OS file handle from regular fd's and sockets and then use WaitForMultipleObjects().

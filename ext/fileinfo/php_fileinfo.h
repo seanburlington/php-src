@@ -16,10 +16,10 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_fileinfo.h,v 1.1 2004/02/13 01:06:06 iliaa Exp $ */
+/* $Id: php_fileinfo.h,v 1.2 2004/05/08 17:37:28 iliaa Exp $ */
 
-#ifndef PHP_FILENINFO_H
-#define PHP_FILENINFO_H
+#ifndef PHP_FILEINFO_H
+#define PHP_FILEINFO_H
 
 extern zend_module_entry fileinfo_module_entry;
 #define phpext_fileinfo_ptr &fileinfo_module_entry

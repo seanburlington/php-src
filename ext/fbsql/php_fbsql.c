@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.79 2002/03/19 22:36:42 fmk Exp $ */
+/* $Id: php_fbsql.c,v 1.80 2002/03/19 22:38:35 fmk Exp $ */
 
 /* TODO:
  *
@@ -2275,7 +2275,7 @@ void phpfbColumnAsString (PHPFBResult* result, int column, void* data , int* len
 			FBLongInteger v = *((FBLongInteger*)data);
 			char  b[128];
 #ifdef PHP_WIN32
-			sprintf(b, "%i64", v);
+			sprintf(b, "%I64i", v);
 #else
 			sprintf(b, "%ll", v);
 #endif

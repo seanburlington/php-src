@@ -27,18 +27,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx.h,v 1.6 2001/01/11 16:19:20 sniper Exp $ */
+/* $Id: php_wddx.h,v 1.7 2001/05/12 10:22:16 sas Exp $ */
 
 #ifndef PHP_WDDX_H
 #define PHP_WDDX_H
 
 #if HAVE_WDDX
 
-#ifdef HAVE_LIBEXPAT2
 #include <expat.h>
-#else
-#include "xmlparse.h"
-#endif
 
 extern zend_module_entry wddx_module_entry;
 #define wddx_module_ptr &wddx_module_entry

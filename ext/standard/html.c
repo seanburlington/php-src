@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.57 2002/10/24 19:52:30 moriyoshi Exp $ */
+/* $Id: html.c,v 1.58 2002/10/24 21:10:45 moriyoshi Exp $ */
 
 #include "php.h"
 #include "reg.h"
@@ -533,6 +533,9 @@ static enum entity_charset determine_charset(char *charset_hint TSRMLS_DC)
 #if HAVE_MBSTRING
 	/* XXX: Ugly things. Why don't we look for a more sophisticated way? */
 		switch (MBSTRG(internal_encoding)) {
+			case mbfl_no_encoding_8859_1:
+				return cs_8859_1;
+
 			case mbfl_no_encoding_utf8:
 				return cs_utf_8;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.84 2001/05/27 00:01:54 rasmus Exp $ */
+/* $Id: pdf.c,v 1.85 2001/05/30 12:30:13 rasmus Exp $ */
 /* Id: pdf.c,v 1.73 2001/02/26 06:07:11 andi Exp  */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
@@ -320,7 +320,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.84 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.85 $" );
 	php_info_print_table_end();
 
 }
@@ -2935,7 +2935,7 @@ PHP_FUNCTION(pdf_setcolor) {
 			}
 			break;
 		case 7:
-			if(zend_get_parameters_ex(6, &arg1, &arg2, &arg3, &arg4, &arg5, &arg6, &arg7) == FAILURE) {
+			if(zend_get_parameters_ex(7, &arg1, &arg2, &arg3, &arg4, &arg5, &arg6, &arg7) == FAILURE) {
 				WRONG_PARAM_COUNT;
 			}
 			break;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.30.2.5 2003/11/13 08:59:16 helly Exp $ */
+/* $Id: dba_db2.c,v 1.30.2.6 2004/05/10 01:47:51 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -52,6 +52,10 @@ DBA_OPEN_FUNC(db2)
 	int filemode = 0644;
 	struct stat check_stat;
 	int s = VCWD_STAT(info->path, &check_stat);
+
+	if (!s && !check_stat.st_size) {
+		info->mode = DBA_TRUNC; /* force truncate */
+	}
 
 	type = info->mode == DBA_READER ? DB_UNKNOWN :
 		info->mode == DBA_TRUNC ? DB_BTREE :

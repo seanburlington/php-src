@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: apache_config.c,v 1.26 2002/11/02 16:04:26 imajes Exp $ */
+
 #include "php.h"
 #include "php_ini.h"
 #include "php_apache.h"

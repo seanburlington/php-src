@@ -38,9 +38,10 @@
 #include <php_config.h>
 #else
 #include <config.w32.h>
+#include <stdlib.h>
 #endif
 
-static const char rcsid[] = "#(@) $Id: encodings.c,v 1.4 2002/07/03 10:54:41 edink Exp $";
+static const char rcsid[] = "#(@) $Id: encodings.c,v 1.4.4.1 2002/11/27 04:07:00 fmk Exp $";
 
 #include <errno.h>
 

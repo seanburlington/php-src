@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.15 2000/02/17 20:21:01 ssb Exp $
+// $Id: DB.php,v 1.16 2000/02/25 21:18:01 ssb Exp $
 //
 // Database independent query interface.
 //
@@ -203,11 +203,20 @@ class DB {
 		// "include" should be replaced with "import" once PHP gets it
 		$pkgname = 'DB/' . $type;
 		if (!is_array($USED_PACKAGES) || !$USED_PACKAGES[$pkgname]) {
-			if (!@include("${pkgname}.php")) {
+			$file = "${pkgname}.php";
+			include($file);
+/*
+
+   This suddenly stopped working.  I thought include() was supposed to
+   return a boolean? [ssb 20000218]
+
+			if (!include($file)) {
+				print "'$file' not found<br>\n";
 				return DB_ERROR_NOT_FOUND;
 			} else {
 				$USED_PACKAGES[$pkgname] = true;
 			}
+*/
 		}
 		$classname = 'DB_' . $type;
 		$obj = new $classname;

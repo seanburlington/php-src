@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_db.h,v 1.12 2001/08/06 03:50:46 sas Exp $ */
+/* $Id: php_db.h,v 1.13 2001/08/14 17:46:19 dbeu Exp $ */
 
 
 #ifndef PHP_DB_H
@@ -51,16 +51,16 @@ typedef struct dbm_info {
 #define phpext_db_ptr NULL
 #endif
 
-dbm_info *php_find_dbm(pval *id);
+dbm_info *php_find_dbm(pval *id TSRMLS_DC);
 int php_dbm_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
-dbm_info *php_dbm_open(char *filename, char *mode);
+dbm_info *php_dbm_open(char *filename, char *mode TSRMLS_DC);
 int php_dbm_insert(dbm_info *info, char *key, char *value TSRMLS_DC);
-char *php_dbm_fetch(dbm_info *info, char *key);
-int php_dbm_replace(dbm_info *info, char *key, char *value);
+char *php_dbm_fetch(dbm_info *info, char *key TSRMLS_DC);
+int php_dbm_replace(dbm_info *info, char *key, char *value TSRMLS_DC);
 int php_dbm_exists(dbm_info *info, char *key);
 int php_dbm_delete(dbm_info *info, char *key);
 char *php_dbm_first_key(dbm_info *info);
-char *php_dbm_nextkey(dbm_info *info, char *key);
+char *php_dbm_nextkey(dbm_info *info, char *key TSRMLS_DC);
 
 /* db file functions */
 PHP_MINIT_FUNCTION(db);

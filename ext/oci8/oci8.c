@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.132 2001/07/09 06:48:15 thies Exp $ */
+/* $Id: oci8.c,v 1.133 2001/07/09 18:01:18 thies Exp $ */
 
 /* TODO list:
  *
@@ -581,7 +581,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.132 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.133 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -649,7 +649,7 @@ _oci_bind_post_exec(void *data)
 		zval *val = bind->zval;
 		zval_dtor(val);
 		ZVAL_NULL(val);
-	} else if (bind->zval->type == IS_STRING) {
+	} else if (bind->zval->type == IS_STRING && (bind->zval->value.str.val != empty_string)) {
 		bind->zval->value.str.val = erealloc(bind->zval->value.str.val, bind->zval->value.str.len+1);
 		bind->zval->value.str.val[ bind->zval->value.str.len ] = '\0';
 	}

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.16 2001/03/27 20:34:30 sniper Exp $
+dnl $Id: config.m4,v 1.16.2.1 2001/05/12 09:29:06 sas Exp $
 
 AC_DEFUN(PHP_LDAP_CHECKS, [
   if test -f $1/include/ldap.h; then
@@ -17,7 +17,8 @@ AC_DEFUN(PHP_LDAP_CHECKS, [
 ])
                           
 PHP_ARG_WITH(ldap,whether to include LDAP support,
-[  --with-ldap[=DIR]       Include LDAP support.  DIR is the LDAP base install directory.])
+[  --with-ldap[=DIR]       Include LDAP support.  DIR is the LDAP base 
+                          install directory.])
 
 if test "$PHP_LDAP" != "no"; then
 

@@ -1,9 +1,9 @@
 dnl
-dnl $Id: zlib.m4,v 1.1 2001/05/10 00:57:36 sniper Exp $
+dnl $Id: zlib.m4,v 1.1.2.1 2001/05/12 09:29:08 sas Exp $
 dnl
 
 PHP_ARG_WITH(zlib-dir,if the location of ZLIB install directory is defined,
-[  --with-zlib-dir=<DIR>]  Define the location of zlib install directory])
+[  --with-zlib-dir[=DIR]   Define the location of zlib install directory])
 
 PHP_ARG_WITH(zlib,whether to include ZLIB support,
 [  --with-zlib[=DIR]       Include zlib support (requires zlib >= 1.0.9).

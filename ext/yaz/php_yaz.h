@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.h,v 1.8 2001/12/11 15:30:55 sebastian Exp $ */
+/* $Id: php_yaz.h,v 1.9 2002/01/17 23:21:27 dickmeiss Exp $ */
 
 #ifndef PHP_YAZ_H
 #define PHP_YAZ_H
@@ -45,6 +45,7 @@ PHP_FUNCTION(yaz_range);
 PHP_FUNCTION(yaz_itemorder);
 PHP_FUNCTION(yaz_scan);
 PHP_FUNCTION(yaz_scan_result);
+PHP_FUNCTION(yaz_es_result);
 PHP_FUNCTION(yaz_present);
 PHP_FUNCTION(yaz_ccl_conf);
 PHP_FUNCTION(yaz_ccl_parse);

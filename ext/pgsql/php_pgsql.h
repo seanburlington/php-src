@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.15 2000/06/10 08:47:57 andi Exp $ */
+/* $Id: php_pgsql.h,v 1.16 2000/07/02 08:59:44 hirokawa Exp $ */
 
 #ifndef _PHP_PGSQL_H
 #define _PHP_PGSQL_H
@@ -85,6 +85,8 @@ PHP_FUNCTION(pg_lowrite);
 PHP_FUNCTION(pg_loreadall);
 PHP_FUNCTION(pg_loimport);
 PHP_FUNCTION(pg_loexport);
+PHP_FUNCTION(pg_clientencoding);
+PHP_FUNCTION(pg_setclientencoding);
 
 void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent);
 int php_pgsql_get_default_link(INTERNAL_FUNCTION_PARAMETERS);

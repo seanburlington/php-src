@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.76 2003/07/14 05:52:57 sebastian Exp $ 
+   $Id: sqlite.c,v 1.77 2003/07/19 11:00:17 sebastian Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -953,7 +953,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.76 2003/07/14 05:52:57 sebastian Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.77 2003/07/19 11:00:17 sebastian Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1081,7 +1081,7 @@ PHP_FUNCTION(sqlite_popen)
 				int type;
 				/* sanity check to ensure that the resource is still a valid regular resource
 				 * number */
-				if (_zend_list_find(db->rsrc_id, &type TSRMLS_CC) == db) {
+				if (zend_list_find(db->rsrc_id, &type) == db) {
 					/* already accessed this request; map it */
 					zend_list_addref(db->rsrc_id);
 					ZVAL_RESOURCE(return_value, db->rsrc_id);

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.13 2003/07/18 06:17:39 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.14 2003/07/28 10:23:36 sniper Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -146,7 +146,8 @@ PHP_FUNCTION(mysqli_fetch_object)
 
 /* {{{ proto resource mysqli_query(object link, string query [,int resultmode])
    Send a MySQL query */
-PHP_FUNCTION(mysqli_query) {
+PHP_FUNCTION(mysqli_query)
+{
 	MYSQL				*mysql;
 	zval				*mysql_link;
 	MYSQLI_RESOURCE		*mysqli_resource;

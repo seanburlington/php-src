@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.144 2001/10/22 20:49:27 rasmus Exp $ */
+/* $Id: array.c,v 1.145 2001/10/23 18:46:35 rasmus Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1325,9 +1325,9 @@ PHP_FUNCTION(compact)
 }
 /* }}} */
 
-/* {{{ proto array array_init(int start_key, int num, mixed val)
+/* {{{ proto array array_fill(int start_key, int num, mixed val)
    Create an array containing num elements starting with index start_key each initialized to val */
-PHP_FUNCTION(array_init)
+PHP_FUNCTION(array_fill)
 {
 	zval **start_key, **num, **val, *newval;
 	long i;

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.67 2002/08/22 17:42:18 wez Exp $ */
+/* $Id: streams.c,v 1.68 2002/08/22 22:28:19 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1138,12 +1138,25 @@ static ssize_t stream_cookie_writer(void *cookie, const char *buffer, size_t siz
 	return php_stream_write(((php_stream *)cookie), (char *)buffer, size);
 }
 
+#ifdef COOKIE_SEEKER_USES_FPOS_T
+static int stream_cookie_seeker(void *cookie, fpos_t *position, int whence)
+{
+	TSRMLS_FETCH();
+	
+	*position = php_stream_seek((php_stream *)cookie, *position, whence);
+
+	if (*position == -1)
+		return -1;
+	return 0;
+}
+#else
 static int stream_cookie_seeker(void *cookie, off_t position, int whence)
 {
 	TSRMLS_FETCH();
 
 	return php_stream_seek((php_stream *)cookie, position, whence);
 }
+#endif
 
 static int stream_cookie_closer(void *cookie)
 {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.h,v 1.11 2002/02/28 08:27:01 sebastian Exp $ */
+/* $Id: php_yaz.h,v 1.12 2002/07/11 13:04:02 dickmeiss Exp $ */
 
 #ifndef PHP_YAZ_H
 #define PHP_YAZ_H
@@ -55,22 +55,14 @@ PHP_FUNCTION(yaz_schema);
 
 ZEND_BEGIN_MODULE_GLOBALS(yaz)
     int assoc_seq;
+    int max_links;
+    char *log_file;
 ZEND_END_MODULE_GLOBALS(yaz)
-
+    
 #ifdef ZTS
-# define YAZSLS_D	zend_mysql_globals *yaz_globals
-# define YAZSLS_DC	, YAZSLS_D
-# define YAZSLS_C	yaz_globals
-# define YAZSLS_CC , YAZSLS_C
-# define YAZSG(v) (yaz_globals->v)
-# define YAZSLS_FETCH()	zend_yaz_globals *yaz_globals = ts_resource(yaz_globals_id)
+#define YAZSG(v) TSRMG(yaz_globals_id, zend_yaz_globals *. v)
 #else
-# define YAZSLS_D
-# define YAZSLS_DC
-# define YAZSLS_C
-# define YAZSLS_CC
-# define YAZSG(v) (yaz_globals.v)
-# define YAZSLS_FETCH()
+#define YAZSG(v) (yaz_globals.v)
 #endif
 
 #else

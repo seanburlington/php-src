@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.122 2003/05/20 00:36:59 iliaa Exp $ */
+/* $Id: pdf.c,v 1.123 2003/05/21 00:57:33 iliaa Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -332,7 +332,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.122 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.123 $" );
 	php_info_print_table_end();
 
 }
@@ -2335,6 +2335,11 @@ PHP_FUNCTION(pdf_open_file)
 	if (argc == 2) {
 		convert_to_string_ex(arg2);
 		filename = Z_STRVAL_PP(arg2);
+
+		if (php_check_open_basedir(filename TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(filename, "wb+", CHECKUID_CHECK_MODE_PARAM))) {
+			RETURN_FALSE;
+		}
+
 		pdf_file = PDF_open_file(pdf, filename);
 	} else {
 		/* open in memory */

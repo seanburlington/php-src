@@ -17,14 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.h,v 1.22 2001/03/14 21:28:58 jmoore Exp $ */
+/* $Id: info.h,v 1.23 2001/06/19 15:21:28 sbergmann Exp $ */
 
 #ifndef INFO_H
 #define INFO_H
 
-#define PHP_ENTRY_NAME_COLOR "#CCCCFF"
-#define PHP_CONTENTS_COLOR "#CCCCCC"
-#define PHP_HEADER_COLOR "#9999CC"
+#define PHP_ENTRY_NAME_COLOR "#ccccff"
+#define PHP_CONTENTS_COLOR "#cccccc"
+#define PHP_HEADER_COLOR "#9999cc"
 
 #define PHP_INFO_GENERAL			(1<<0)
 #define PHP_INFO_CREDITS			(1<<1)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.74 2003/03/10 02:14:09 sniper Exp $ */
+/* $Id: fdf.c,v 1.75 2003/03/17 12:59:20 hholzgra Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -991,7 +991,7 @@ PHP_FUNCTION(fdf_set_opt)
 }
 /* }}} */
 
-/* {{{ proto mixed fdf_get_option(resource fdfdof, string fieldname [, int element])
+/* {{{ proto mixed fdf_get_opt(resource fdfdof, string fieldname [, int element])
    Gets a value from the opt array of a field */
 PHP_FUNCTION(fdf_get_opt) {
  	zval *r_fdf;
@@ -1573,7 +1573,7 @@ PHP_FUNCTION(fdf_enum_values) {
 }
 /* }}} */
 
-/* {{{ proto fdf_header() 
+/* {{{ proto void fdf_header(void) 
    Set FDF specific HTTP headers */
 PHP_FUNCTION(fdf_header) {
 	sapi_header_line ctr = {0};

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.9 2001/09/05 13:18:05 sniper Exp $
+dnl $Id: config.m4,v 1.10 2001/09/08 16:51:00 andre Exp $
 dnl config.m4 for extension CURL
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -28,6 +28,10 @@ if test "$PHP_CURL" != "no"; then
 
   if ${CURL_DIR}/bin/curl-config --libs print > /dev/null 2>&1; then
     CURL_CONFIG=${CURL_DIR}/bin/curl-config
+  else
+    if ${CURL_DIR}/curl-config --libs print > /dev/null 2>&1; then
+       CURL_CONFIG=${CURL_DIR}/curl-config
+    fi
   fi
 
   curl_version_full=`$CURL_CONFIG --version`

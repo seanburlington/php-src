@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.264 2001/08/06 18:43:02 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.265 2001/08/07 13:29:09 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -991,6 +991,7 @@ dnl  fi
 
 
   if test -n "$DEBUG_LOG"; then
+    rm -f config.cache
 cat <<X
 +--------------------------------------------------------------------+
 |                       *** ATTENTION ***                            |

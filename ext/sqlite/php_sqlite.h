@@ -15,7 +15,7 @@
   | Author: Wez Furlong <wez@thebrainroom.com>                           |
   +----------------------------------------------------------------------+
 
-  $Id: php_sqlite.h,v 1.5 2003/04/18 12:22:43 wez Exp $ 
+  $Id: php_sqlite.h,v 1.6 2003/04/18 16:30:16 wez Exp $ 
 */
 
 #ifndef PHP_SQLITE_H
@@ -41,6 +41,7 @@ PHP_RSHUTDOWN_FUNCTION(sqlite);
 PHP_MINFO_FUNCTION(sqlite);
 
 PHP_FUNCTION(sqlite_open);
+PHP_FUNCTION(sqlite_popen);
 PHP_FUNCTION(sqlite_close);
 PHP_FUNCTION(sqlite_query);
 PHP_FUNCTION(sqlite_unbuffered_query);

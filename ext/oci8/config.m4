@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.37.2.6 2003/04/30 10:20:14 sniper Exp $
+dnl $Id: config.m4,v 1.37.2.7 2003/06/03 12:46:47 edink Exp $
 dnl
 
 AC_DEFUN(PHP_OCI_IF_DEFINED,[
@@ -100,7 +100,6 @@ if test "$PHP_OCI8" != "no"; then
       PHP_ADD_LIBRARY(clntsh, 1, OCI8_SHARED_LIBADD)
       PHP_ADD_LIBPATH($OCI8_DIR/lib, OCI8_SHARED_LIBADD)
       AC_DEFINE(HAVE_OCI8_ATTR_STATEMENT,1,[ ])
-      AC_DEFINE(HAVE_OCI8_SHARED_MODE,1,[ ])
 
       dnl These functions are only available in version >= 9.2
       PHP_CHECK_LIBRARY(clntsh, OCIEnvNlsCreate,

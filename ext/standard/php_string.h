@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_string.h,v 1.20 2000/06/06 18:58:15 ccollie Exp $ */
+/* $Id: php_string.h,v 1.21 2000/06/06 20:42:33 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -86,6 +86,7 @@ PHP_FUNCTION(substr_replace);
 PHP_FUNCTION(strnatcmp);
 PHP_FUNCTION(strnatcasecmp);
 PHP_FUNCTION(substr_count);
+PHP_FUNCTION(str_pad);
 PHP_FUNCTION(sscanf);
 
 #define strnatcmp(a, b) \

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.146 2000/06/11 18:51:17 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.147 2000/06/12 15:55:15 zeev Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -867,7 +867,7 @@ if true; then
 cat <<X
 +--------------------------------------------------------------------+
 | ATTENTION!                                                         |
-| Something is likely to be screwed up here, because the configure   |
+| Something is likely to be messed up here, because the configure    |
 | script was not able to detect a simple feature on your platform.   |
 | This is often caused by incorrect configuration parameters. Please |
 | see the file debug.log for error messages.                         |

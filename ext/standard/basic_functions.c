@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.473 2002/05/03 08:00:39 thies Exp $ */
+/* $Id: basic_functions.c,v 1.474 2002/05/04 16:59:41 sas Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1224,7 +1224,6 @@ PHP_FUNCTION(putenv)
 	convert_to_string_ex(str);
 
 	if (Z_STRVAL_PP(str) && *(Z_STRVAL_PP(str))) {
-		int ret;
 		char *p, **env;
 		putenv_entry pe;
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.26 2002/09/27 10:38:08 derick Exp $
+dnl $Id: config.m4,v 1.27 2002/12/03 09:35:42 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_LDAP_CHECKS, [
@@ -55,6 +55,16 @@ if test "$PHP_LDAP" != "no"; then
   elif test -f $LDAP_LIBDIR/libldap.so.3; then
     PHP_ADD_LIBRARY_WITH_PATH(ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 
+  elif test -f $LDAP_LIBDIR/libssldap50.so -o -f $LDAP_LIBDIR/libssldap50.sl; then
+    if test -n "$LDAP_PTHREAD"; then 
+      PHP_ADD_LIBRARY($LDAP_PTHREAD)
+    fi
+    PHP_ADD_LIBRARY_WITH_PATH(nspr4, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
+    PHP_ADD_LIBRARY_WITH_PATH(plc4, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
+    PHP_ADD_LIBRARY_WITH_PATH(plds4, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
+    PHP_ADD_LIBRARY_WITH_PATH(ssldap50, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
+    AC_DEFINE(HAVE_NSLDAP,1,[ ])
+
   elif test -f $LDAP_LIBDIR/libldapssl41.so -o -f $LDAP_LIBDIR/libldapssl41.sl; then
     if test -n "$LDAP_PTHREAD"; then 
       PHP_ADD_LIBRARY($LDAP_PTHREAD)
@@ -86,7 +96,10 @@ if test "$PHP_LDAP" != "no"; then
   elif test -f $LDAP_LIBDIR/libclntsh.so; then
     PHP_ADD_LIBRARY_WITH_PATH(clntsh, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
     AC_DEFINE(HAVE_ORALDAP,1,[ ])
-  fi  
+
+  else
+    AC_MSG_ERROR(Cannot find ldap libraries in $LDAP_LIBDIR.)
+  fi
 
   PHP_ADD_INCLUDE($LDAP_INCDIR)
   PHP_SUBST(LDAP_SHARED_LIBADD)

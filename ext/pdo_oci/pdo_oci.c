@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_oci.c,v 1.3 2005/01/12 05:47:03 wez Exp $ */
+/* $Id: pdo_oci.c,v 1.4 2005/02/09 05:03:07 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -46,7 +46,7 @@ zend_module_entry pdo_oci_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(pdo_oci),
-	"0.1",
+	"0.2",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

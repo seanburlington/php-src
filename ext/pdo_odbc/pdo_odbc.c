@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_odbc.c,v 1.10 2005/02/07 00:02:51 wez Exp $ */
+/* $Id: pdo_odbc.c,v 1.11 2005/02/09 05:03:59 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -46,7 +46,7 @@ zend_module_entry pdo_odbc_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(pdo_odbc),
-	"0.1.1",
+	"0.2",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.31 2002/06/29 01:19:31 sniper Exp $
+dnl $Id: config.m4,v 1.32 2002/08/18 05:13:03 avsm Exp $
 dnl
 
 PHP_ARG_WITH(pdflib,for PDFlib support,
@@ -111,7 +111,7 @@ Use the options --with-tiff-dir=<DIR>, --with-jpeg-dir=<DIR>, --with-png-dir=<DI
 See config.log for more information.
 ])
         ],[
-          -L$PHP_PDFLIB/lib
+          -L$PHP_PDFLIB/lib $PDFLIB_SHARED_LIBADD
         ])
       else
         AC_MSG_ERROR([pdflib.h not found! Check the path passed to --with-pdflib=<PATH>. PATH should be the install prefix directory.])

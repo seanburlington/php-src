@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.12 2001/11/30 18:59:30 sniper Exp $
+dnl $Id: config.m4,v 1.13 2002/03/12 16:46:18 sas Exp $
 dnl 
 
 # Checks for libraries.
@@ -54,5 +54,5 @@ if test "$PHP_DB" != "no"; then
     EXTRA_LIBS="$EXTRA_LIBS $DBM_LIB"
   fi
 
-  PHP_EXTENSION(db)
+  PHP_EXTENSION(db, db.c)
 fi

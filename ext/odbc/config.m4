@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.50 2002/03/12 09:54:46 kara Exp $
+dnl $Id: config.m4,v 1.51 2002/03/12 16:49:55 sas Exp $
 dnl
 
 dnl
@@ -548,5 +548,5 @@ if test -n "$ODBC_TYPE"; then
   PHP_SUBST_OLD(ODBC_LIBS)
   PHP_SUBST_OLD(ODBC_LFLAGS)
   PHP_SUBST_OLD(ODBC_TYPE)
-  PHP_EXTENSION(odbc, $shared)
+  PHP_NEW_EXTENSION(odbc, php_odbc.c, $shared)
 fi

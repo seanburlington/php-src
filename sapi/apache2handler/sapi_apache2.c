@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.34 2004/10/21 19:43:37 jorton Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.35 2004/12/06 18:51:40 stas Exp $ */
 
 #include <fcntl.h>
 
@@ -544,9 +544,8 @@ zend_first_try {
 #if MEMORY_LIMIT
 		{
 			char *mem_usage;
-
+			
 			mem_usage = apr_psprintf(ctx->r->pool, "%u", AG(allocated_memory_peak));
-			AG(allocated_memory_peak) = 0;
 			apr_table_set(r->notes, "mod_php_memory_usage", mem_usage);
 		}
 #endif

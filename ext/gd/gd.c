@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.123.2.2 2001/05/24 12:41:51 ssb Exp $ */
+/* $Id: gd.c,v 1.123.2.3 2001/06/11 14:02:36 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -626,7 +626,7 @@ PHP_FUNCTION(imagesetthickness)
 	}
 
 	ZEND_FETCH_RESOURCE(im, gdImagePtr, IM, -1, "Image", le_gd);
-	convert_to_boolean_ex(thick);
+	convert_to_long_ex(thick);
 		
 	gdImageSetThickness(im, Z_LVAL_PP(thick));
 

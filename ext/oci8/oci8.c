@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.202 2003/01/27 19:52:11 maxim Exp $ */
+/* $Id: oci8.c,v 1.203 2003/01/27 20:05:48 maxim Exp $ */
 
 /* TODO list:
  *
@@ -640,7 +640,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.202 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.203 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2152,7 +2152,9 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 	oci_session *session = 0, *psession = 0;
 	OCISvcCtx *svchp = 0;
 	char *hashed_details;
+#ifdef HAVE_OCI9
 	ub2 charsetid;
+#endif
 	TSRMLS_FETCH();
 
 	/* 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.13 2004/05/21 14:15:02 wez Exp $ */
+/* $Id: mysql_driver.c,v 1.14 2004/05/25 12:03:41 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -116,6 +116,11 @@ int _pdo_mysql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *file, int lin
 			break;
 	}
 
+	if (!dbh->methods) {
+		zend_throw_exception_ex(php_pdo_get_exception(), *pdo_err TSRMLS_CC, "[%d] %s",
+				einfo->errcode, einfo->errmsg);
+	}
+	
 	return einfo->errcode;
 }
 /* }}} */

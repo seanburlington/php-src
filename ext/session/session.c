@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.305 2002/05/09 20:02:47 sander Exp $ */
+/* $Id: session.c,v 1.306 2002/05/09 20:03:34 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

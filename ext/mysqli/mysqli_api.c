@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.43 2003/08/31 11:03:05 helly Exp $ 
+  $Id: mysqli_api.c,v 1.44 2003/09/06 19:34:48 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -899,7 +899,7 @@ PHP_FUNCTION(mysqli_fetch_lengths)
    Get a result row as an enumerated array */
 PHP_FUNCTION(mysqli_fetch_row) 
 {
-	php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, MYSQLI_NUM);
+	php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, MYSQLI_NUM, 0);
 }
 /* }}} */
 

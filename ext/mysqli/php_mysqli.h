@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.20 2003/07/18 06:17:39 georg Exp $ 
+  $Id: php_mysqli.h,v 1.21 2003/09/06 19:34:48 helly Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -90,7 +90,7 @@ extern function_entry mysqli_functions[];
 extern function_entry mysqli_link_methods[];
 extern function_entry mysqli_stmt_methods[];
 extern function_entry mysqli_result_methods[];
-extern void php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAMETERS, int flag);
+extern void php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAMETERS, int override_flag, int into_object);
 extern void php_clear_stmt_bind(STMT *stmt);
 extern void php_free_stmt_bind_buffer(BIND_BUFFER bbuf, int type);
 

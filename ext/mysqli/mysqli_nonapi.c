@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.15 2003/09/05 19:27:26 helly Exp $ 
+  $Id: mysqli_nonapi.c,v 1.16 2003/09/06 19:34:48 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -120,7 +120,7 @@ PHP_FUNCTION(mysqli_connect_error)
    Fetch a result row as an associative array, a numeric array, or both */
 PHP_FUNCTION(mysqli_fetch_array) 
 {
-	php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+	php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0, 0);
 }
 /* }}} */
 
@@ -128,19 +128,15 @@ PHP_FUNCTION(mysqli_fetch_array)
    Fetch a result row as an associative array */
 PHP_FUNCTION(mysqli_fetch_assoc) 
 {
-	php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, MYSQLI_ASSOC);
+	php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, MYSQLI_ASSOC, 0);
 }
 /* }}} */
 
-/* {{{ proto array mysqli_fetch_object (object result)
+/* {{{ proto array mysqli_fetch_object (object result [, string class_name [, NULL|array ctor_params]])
    Fetch a result row as an object */
 PHP_FUNCTION(mysqli_fetch_object) 
 {
-	php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, MYSQLI_ASSOC);
-	
-	if (Z_TYPE_P(return_value) == IS_ARRAY) {
-		object_and_properties_init(return_value, ZEND_STANDARD_CLASS_DEF_PTR, Z_ARRVAL_P(return_value));
-	}
+	php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, MYSQLI_ASSOC, 1);	
 }
 /* }}} */
 

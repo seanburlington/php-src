@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 1999/04/22 00:25:55 ssb Exp $
+dnl $Id: config.m4,v 1.2 1999/10/10 12:10:40 sas Exp $
 
 divert(3)
 
@@ -60,7 +60,7 @@ WARNING: You specified Informix base install directory that is different
       AC_DEFINE_UNQUOTED(IFX_VERSION, $IFX_VERSION)
       AC_MSG_RESULT(yes)
       PHP_EXTENSION(informix)
-      EXTRA_LIBS="$EXTRA_LIBS $IFX_LIBS $IFX_LFLAGS"
+      IFX_LIBS="$IFX_LFLAGS $IFX_LIBS"
       INCLUDES="$INCLUDES $IFX_INCLUDE"
     fi
   else
@@ -71,7 +71,8 @@ WARNING: You specified Informix base install directory that is different
   AC_MSG_RESULT(no)
 ])
 AC_SUBST(INFORMIXDIR)
-
+AC_SUBST(IFX_LIBS)
+	
 divert(5)
 
 dnl Warn if Informix support was requested but environment is not set up correctly.

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.78 2002/02/28 08:26:31 sebastian Exp $ */
+/* $Id: oracle.c,v 1.78.2.1 2002/04/25 17:03:16 edink Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -112,6 +112,8 @@ PHP_MSHUTDOWN_FUNCTION(oracle);
 PHP_RSHUTDOWN_FUNCTION(oracle);
 PHP_MINFO_FUNCTION(oracle);
 /* }}} */
+
+static unsigned char second_arg_force_ref[] = { 2, BYREF_NONE, BYREF_FORCE };
 
 /* {{{ oracle_functions[]
  */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.h,v 1.4 2003/08/24 10:18:08 rrichards Exp $ */
+/* $Id: php_xsl.h,v 1.5 2003/11/19 12:07:59 chregu Exp $ */
 
 #ifndef PHP_XSL_H
 #define PHP_XSL_H
@@ -38,6 +38,10 @@ extern zend_module_entry xsl_module_entry;
 #include <libxslt/xsltInternals.h>
 #include <libxslt/xsltutils.h>
 #include <libxslt/transform.h>
+#if HAVE_XSL_EXSLT
+#include <libexslt/exslt.h>
+#include <libexslt/exsltconfig.h>
+#endif
 
 #include "../dom/xml_common.h"
 #include "xsl_fe.h"

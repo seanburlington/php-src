@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.6 2003/06/30 17:23:52 sniper Exp $
+dnl $Id: config.m4,v 1.7 2003/11/19 12:07:59 chregu Exp $
 dnl
 
 PHP_ARG_WITH(xsl, for XSL support,
@@ -33,9 +33,27 @@ if test "$PHP_XSL" != "no"; then
       XSL_INCS=`$XSLT_CONFIG --cflags`
       PHP_EVAL_LIBLINE($XSL_LIBS, XSL_SHARED_LIBADD)
       PHP_EVAL_INCLINE($XSL_INCS)
+      
+      AC_MSG_CHECKING([for EXSLT support])
+      for i in $PHP_XSL /usr/local /usr; do
+        if test -r "$i/include/libexslt/exslt.h"; then
+          PHP_XSL_EXSL_DIR=$i
+          break
+        fi
+      done
+      if test -z "$PHP_XSL_EXSL_DIR"; then
+        AC_MSG_RESULT(not found)
+      else 
+        AC_MSG_RESULT(found)
+        PHP_ADD_LIBRARY_WITH_PATH(exslt, $PHP_XSL_EXSL_DIR/lib, XSL_SHARED_LIBADD)
+        PHP_ADD_INCLUDE($PHP_XSL_EXSL_DIR/include)
+        AC_DEFINE(HAVE_XSL_EXSLT,1,[ ])
+      fi
     else
       AC_MSG_ERROR([libxslt version 1.0.18 or greater required.])
     fi
+    
+  
   fi
   
   AC_DEFINE(HAVE_XSL,1,[ ])

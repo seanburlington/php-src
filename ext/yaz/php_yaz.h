@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.h,v 1.12 2002/07/11 13:04:02 dickmeiss Exp $ */
+/* $Id: php_yaz.h,v 1.13 2002/07/12 11:45:04 sniper Exp $ */
 
 #ifndef PHP_YAZ_H
 #define PHP_YAZ_H
@@ -60,7 +60,7 @@ ZEND_BEGIN_MODULE_GLOBALS(yaz)
 ZEND_END_MODULE_GLOBALS(yaz)
     
 #ifdef ZTS
-#define YAZSG(v) TSRMG(yaz_globals_id, zend_yaz_globals *. v)
+#define YAZSG(v) TSRMG(yaz_globals_id, zend_yaz_globals *, v)
 #else
 #define YAZSG(v) (yaz_globals.v)
 #endif

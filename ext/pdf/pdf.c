@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.49 2000/07/05 14:30:50 steinm Exp $ */
+/* $Id: pdf.c,v 1.50 2000/07/23 08:31:10 joey Exp $ */
 
 /* pdflib 2.02 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -1844,6 +1844,11 @@ PHP_FUNCTION(pdf_set_parameter) {
 		RETURN_FALSE;
 	}
 
+    if (arg2->value.str.val == "compatibility") {
+		php_error(E_ERROR,"Compatibility modes not supported at this time");
+		RETURN_FALSE;
+	}
+	
 	PDF_set_parameter(pdf, arg2->value.str.val, arg3->value.str.val);
 
 	RETURN_TRUE;

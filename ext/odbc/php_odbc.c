@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.153 2003/01/24 22:40:38 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.154 2003/02/07 02:59:16 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1589,7 +1589,7 @@ PHP_FUNCTION(odbc_fetch_into)
 				if (rc == SQL_SUCCESS_WITH_INFO) {
 					Z_STRLEN_P(tmp) = result->longreadlen;
 				} else if (result->values[i].vallen == SQL_NULL_DATA) {
-					Z_STRVAL_P(tmp) = IS_NULL;
+					ZVAL_NULL(tmp);
 					break;
 				} else {
 					Z_STRLEN_P(tmp) = result->values[i].vallen;
@@ -1599,7 +1599,7 @@ PHP_FUNCTION(odbc_fetch_into)
 
 			default:
 				if (result->values[i].vallen == SQL_NULL_DATA) {
-					Z_STRVAL_P(tmp) = IS_NULL;
+					ZVAL_NULL(tmp);
 					break;
 				}
 				Z_STRLEN_P(tmp) = result->values[i].vallen;

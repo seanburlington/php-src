@@ -16,10 +16,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: flatfile.h,v 1.4.2.3 2003/01/31 20:10:11 helly Exp $ */
+/* $Id: flatfile.h,v 1.4.2.4 2003/02/19 06:35:57 sniper Exp $ */
 
-#ifndef PHP_LIBDBM_H
-#define PHP_LIBDBM_H
+#ifndef PHP_LIB_FLATFILE_H
+#define PHP_LIB_FLATFILE_H
 
 typedef struct {
 	char *dptr;

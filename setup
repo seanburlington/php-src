@@ -29,7 +29,7 @@
 # |             Ariel Shkedi <ars@ziplink.net> or <as@altavista.net>     |
 # +----------------------------------------------------------------------+
 # 
-# $Id: setup,v 1.8 1999/04/22 00:25:51 ssb Exp $
+# $Id: setup,v 1.9 1999/04/22 00:45:13 ssb Exp $
 
 if [ "$1" = "-q" ]; then
     quiet_mode=on
@@ -265,18 +265,6 @@ define_option with-interbase 'InterBase support?' yesnodir \
     'no /usr/interbase InterBase base install' \
 '     Whether to build PHP with InterBase support. More\n
       information about InterBase can be found at http://www.interbase.com/.'
-
-define_option with-ldap 'LDAP support?' yesnodir \
-    'no /usr/local/ldap LDAP base install' \
-'     Whether to build with LDAP (Lightweight Directory Access Protocol)\n
-     support.\n
-     More information about LDAP can be found in RFC1777 and RFC1778.'
-
-define_option with-imap 'IMAP support?' yesnodir \
-    'no /usr/local/imap IMAP base install' \
-'     Whether to build with IMAP (Internet Message Access Protocol)\n
-     support.\n
-     More information about LDAP can be found in RFC1777 and RFC1778.'
 
 define_option with-pdflib 'pdflib 0.6 support? ' yesnodir \
     'no /usr/local pdflib install' \

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: internal_functions.c,v 1.13 1999/04/22 00:25:51 ssb Exp $ */
+/* $Id: internal_functions.c,v 1.14 1999/04/22 00:45:13 ssb Exp $ */
 
 
 #include "php.h"
@@ -47,7 +47,7 @@
 #include "ext/gettext/php3_gettext.h"
 
 #include "ext/informix/php3_ifx.h"
-#include "functions/php3_ldap.h"
+#include "ext/ldap/php3_ldap.h"
 #include "ext/mysql/php3_mysql.h"
 #include "ext/bcmath/php3_bcmath.h"
 #include "ext/msql/php3_msql.h"
@@ -56,7 +56,7 @@
 #include "functions/php3_pgsql.h"
 #include "functions/php3_sybase.h"
 #include "functions/php3_sybase-ct.h"
-#include "functions/imap.h"
+#include "ext/imap/imap.h"
 #include "ext/standard/head.h"
 #include "functions/post.h"
 #include "ext/hyperwave/hw.h"

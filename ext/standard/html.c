@@ -18,7 +18,16 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.63.2.13 2003/05/02 11:01:00 moriyoshi Exp $ */
+/* $Id: html.c,v 1.63.2.14 2003/05/05 19:51:16 moriyoshi Exp $ */
+
+/*
+ * HTML entity resources:
+ *
+ * http://msdn.microsoft.com/workshop/author/dhtml/reference/charsets/charset2.asp
+ * http://msdn.microsoft.com/workshop/author/dhtml/reference/charsets/charset3.asp
+ * http://www.unicode.org/Public/MAPPINGS/OBSOLETE/UNI2SGML.TXT
+ *
+ */
 
 #include "php.h"
 #if PHP_WIN32

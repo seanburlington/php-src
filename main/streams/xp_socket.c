@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.23 2004/03/08 23:11:45 abies Exp $ */
+/* $Id: xp_socket.c,v 1.24 2004/07/31 10:49:09 wez Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -233,11 +233,13 @@ static int php_sockop_set_option(php_stream *stream, int option, int value, void
 				if (value == -1) {
 					if (sock->timeout.tv_sec == -1) {
 						tv.tv_sec = FG(default_socket_timeout);
+						tv.tv_usec = 0;
 					} else {
 						tv = sock->timeout;
 					}
 				} else {
 					tv.tv_sec = value;
+					tv.tv_usec = 0;
 				}
 
 				if (sock->socket == -1) {

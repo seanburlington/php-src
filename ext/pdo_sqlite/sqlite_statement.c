@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.4 2004/12/26 18:13:52 wez Exp $ */
+/* $Id: sqlite_statement.c,v 1.5 2005/01/07 05:27:26 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

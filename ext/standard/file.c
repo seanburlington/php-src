@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.39 2003/11/07 21:40:46 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.40 2003/11/24 01:43:59 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -247,12 +247,17 @@ PHP_FUNCTION(flock)
 		RETURN_FALSE;
 	}
 
+	if (arg_count == 3) {
+		convert_to_long_ex(arg3);
+		Z_LVAL_PP(arg3) = 0;
+	}
+
 	/* flock_values contains all possible actions
 	   if (arg2 & 4) we won't block on the lock */
 	act = flock_values[act - 1] | (Z_LVAL_PP(arg2) & 4 ? LOCK_NB : 0);
 	if (flock(fd, act)) {
 		if (errno == EWOULDBLOCK && arg_count == 3) {
-			ZVAL_LONG(*arg3, 1);
+			Z_LVAL_PP(arg3) = 1;
 		} else {
 			RETURN_FALSE;
 		}	

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.32 1999/10/20 14:34:16 thies Exp $ */
+/* $Id: var.c,v 1.33 1999/10/22 06:59:05 thies Exp $ */
 
 
 /* {{{ includes 
@@ -347,11 +347,12 @@ int php_var_unserialize(pval **rval, const char **p, const char *max)
 				return 0;
 			}
 			(*p) += 2;
-			str = emalloc(i + 1);
-			if (i > 0) {
-				memcpy(str, *p, i);
+
+			if (i == 0) {
+			  	str = empty_string;
+			} else  {
+			  	str = estrndup(*p,i);
 			}
-			str[i] = 0;
 			(*p) += i + 2;
 			(*rval)->type = IS_STRING;
 			(*rval)->value.str.val = str;
@@ -489,14 +490,16 @@ PHP_FUNCTION(unserialize)
 	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &buf) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
+
 	if ((*buf)->type == IS_STRING) {
 		const char *p = (*buf)->value.str.val;
-		const char *q;
 
-		q = p;
+		if ((*buf)->value.str.len == 0) {
+			RETURN_FALSE;
+		}
 
 		if (!php_var_unserialize(&return_value, &p, p + (*buf)->value.str.len)) {
-			php_error(E_NOTICE, "unserialize() failed at offset %d",p-q);
+			php_error(E_NOTICE, "unserialize() failed at offset %d of %d bytes",p-(*buf)->value.str.val,(*buf)->value.str.len);
 			RETURN_FALSE;
 		}
 	} else {

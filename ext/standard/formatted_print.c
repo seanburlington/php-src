@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.35 2001/07/18 16:48:52 stas Exp $ */
+/* $Id: formatted_print.c,v 1.36 2001/07/19 08:12:12 stas Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -219,7 +219,7 @@ php_sprintf_appendint(char **buffer, int *pos, int *size, long number,
 	do {
 		nmagn = magn / 10;
 
-		numbuf[--i] = (magn - (nmagn * 10)) + '0';
+		numbuf[--i] = (unsigned char)(magn - (nmagn * 10)) + '0';
 		magn = nmagn;
 	}
 	while (magn > 0 && i > 0);
@@ -254,7 +254,7 @@ php_sprintf_appenduint(char **buffer, int *pos, int *size,
 	do {
 		nmagn = magn / 10;
 
-		numbuf[--i] = (magn - (nmagn * 10)) + '0';
+		numbuf[--i] = (unsigned char)(magn - (nmagn * 10)) + '0';
 		magn = nmagn;
 	}
 	while (magn > 0 && i > 0);

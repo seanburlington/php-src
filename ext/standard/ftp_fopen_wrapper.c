@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.67 2003/12/10 07:15:28 moriyoshi Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.68 2003/12/10 21:23:34 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -576,7 +576,7 @@ static size_t php_ftp_dirstream_read(php_stream *stream, char *buf, size_t count
 		return 0;
 	}
 
-	php_basename(ent->d_name, tmp_len, NULL, 0, &basename, &basename_len);
+	php_basename(ent->d_name, tmp_len, NULL, 0, &basename, &basename_len TSRMLS_CC);
 	if (!basename) {
 		return 0;
 	}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: reentrancy.c,v 1.38 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: reentrancy.c,v 1.39 2003/08/20 16:40:21 iliaa Exp $ */
 
 #include <sys/types.h>
 #include <string.h>
@@ -35,7 +35,7 @@
 #endif
 
 #include "php_reentrancy.h"
-#include "ext/standard/php_rand.h"                   /* for RAND_MAX */
+#include "ext/standard/php_rand.h"                   /* for PHP_RAND_MAX */
 
 enum {
 	LOCALTIME_R,
@@ -368,7 +368,7 @@ void reentrancy_shutdown(void)
 static int
 do_rand(unsigned long *ctx)
 {
-	return ((*ctx = *ctx * 1103515245 + 12345) % ((u_long)RAND_MAX + 1));
+	return ((*ctx = *ctx * 1103515245 + 12345) % ((u_long)PHP_RAND_MAX + 1));
 }
 
 

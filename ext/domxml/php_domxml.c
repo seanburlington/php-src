@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.30 2001/03/20 16:20:42 steinm Exp $ */
+/* $Id: php_domxml.c,v 1.31 2001/03/20 17:04:45 sbergmann Exp $ */
 
 
 #include "php.h"
@@ -1620,7 +1620,6 @@ PHP_FUNCTION(domxml_elem_get_attribute_node)
 {
 	zval *id, *arg1;
 	xmlNode *nodep;
-	char *value;
 	
 	if ((ZEND_NUM_ARGS() == 1) && getParameters(ht, 1, &arg1) == SUCCESS) {
 		id = getThis();

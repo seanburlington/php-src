@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_stream_transport.h,v 1.5 2003/07/02 01:35:39 wez Exp $ */
+/* $Id: php_stream_transport.h,v 1.6 2003/08/17 13:49:52 sas Exp $ */
 
 #if HAVE_SYS_SOCKET_H
 # include <sys/socket.h>
@@ -98,9 +98,9 @@ typedef struct _php_stream_xport_param {
 		STREAM_XPORT_OP_GET_NAME,
 		STREAM_XPORT_OP_GET_PEER_NAME
 	} op;
-	int want_addr:1;
-	int want_textaddr:1;
-	int want_errortext:1;
+	unsigned int want_addr:1;
+	unsigned int want_textaddr:1;
+	unsigned int want_errortext:1;
 
 	struct {
 		char *name;

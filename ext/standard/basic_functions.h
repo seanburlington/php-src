@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.116 2003/04/01 05:01:50 sterling Exp $ */
+/* $Id: basic_functions.h,v 1.117 2003/04/01 05:30:32 sebastian Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -113,8 +113,6 @@ PHP_FUNCTION(stream_bucket_make_writeable);
 PHP_FUNCTION(stream_bucket_prepend);
 PHP_FUNCTION(stream_bucket_append);
 PHP_FUNCTION(stream_bucket_new);
-PHP_FUNCTION(landonize);
-PHP_FUNCTION(landonize_url);
 PHP_MINIT_FUNCTION(user_filters);
 
 #ifdef PHP_WIN32

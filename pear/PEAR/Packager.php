@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.39 2002/04/17 08:22:56 ssb Exp $
+// $Id: Packager.php,v 1.40 2002/04/29 06:29:07 ssb Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -43,7 +43,7 @@ class PEAR_Packager extends PEAR_Common
 
     function PEAR_Packager()
     {
-        $this->PEAR();
+        $this->PEAR_Common();
     }
 
     // }}}

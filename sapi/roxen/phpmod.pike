@@ -5,7 +5,7 @@
 inherit "module";
 inherit "roxenlib";
 
-constant cvs_version = "$Id: phpmod.pike,v 1.2 1999/11/24 02:34:50 neotron Exp $";
+constant cvs_version = "$Id: phpmod.pike,v 1.3 1999/11/25 00:28:19 neotron Exp $";
 constant thread_safe = 1;
 
 string trim( string what )
@@ -59,7 +59,7 @@ class PHPScript
     mid->do_not_disconnect = 0;
     //    destruct(interpretor);
     mid->file = ([ "len": written, "raw":1 ]);
-    mid->do_log();
+    //    mid->do_log();
   }
   void write_callback() 
   {
@@ -158,8 +158,8 @@ class PHPScript
     mapping options = ([
       "env":environment,
     ]);
-    interpretor->run(command, options, this_object(), done);
     mid->my_fd->set_close_callback(done);
+    interpretor->run(command, options, this_object(), done);
     return this_object();
   }
 

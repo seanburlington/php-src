@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: metaphone.c,v 1.21.4.1 2002/12/31 16:35:32 sebastian Exp $ */
+/* $Id: metaphone.c,v 1.21.4.2 2003/03/07 13:42:20 ddhill Exp $ */
 
 /*
 	Based on CPANs "Text-Metaphone-1.96" by Michael G Schwern <schwern@pobox.com> 
@@ -35,7 +35,8 @@ PHP_FUNCTION(metaphone)
 {
 	char *str;
 	char *result = 0;
-	int phones = 0, str_len;
+	int str_len;
+	long phones = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &str, &str_len,
 							  &phones) == FAILURE) {

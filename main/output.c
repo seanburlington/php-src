@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.142.2.4 2003/02/09 19:10:32 sniper Exp $ */
+/* $Id: output.c,v 1.142.2.5 2003/03/07 13:42:22 ddhill Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -715,7 +715,7 @@ static int php_ub_body_write(const char *str, uint str_length TSRMLS_DC)
 PHP_FUNCTION(ob_start)
 {
 	zval *output_handler=NULL;
-	uint chunk_size=0;
+	long chunk_size=0;
 	zend_bool erase=1;
 	int argc = ZEND_NUM_ARGS();
 	

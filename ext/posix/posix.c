@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.51.2.1 2002/12/31 16:35:13 sebastian Exp $ */
+/* $Id: posix.c,v 1.51.2.2 2003/03/07 13:42:17 ddhill Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -130,7 +130,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.51.2.1 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.51.2.2 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -702,7 +702,8 @@ PHP_FUNCTION(posix_getcwd)
 PHP_FUNCTION(posix_mkfifo)
 {
 	char *path;
-	long path_len, mode;
+	int path_len;
+	long mode;
 	int     result;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sl", &path, &path_len, &mode) == FAILURE)

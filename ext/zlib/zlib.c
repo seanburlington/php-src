@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.153.2.7 2003/03/06 20:58:18 sesser Exp $ */
+/* $Id: zlib.c,v 1.153.2.8 2003/03/07 13:42:21 ddhill Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -811,7 +811,7 @@ PHP_FUNCTION(gzencode)
 {
 	char *data, *s2;
 	int data_len;
-	int level = Z_DEFAULT_COMPRESSION, coding = CODING_GZIP;
+	long level = Z_DEFAULT_COMPRESSION, coding = CODING_GZIP;
 	int status;
 	z_stream stream;
 

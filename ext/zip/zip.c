@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zip.c,v 1.33.2.1 2002/12/31 16:35:47 sebastian Exp $ */
+/* $Id: zip.c,v 1.33.2.2 2003/03/07 13:42:21 ddhill Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -285,7 +285,7 @@ PHP_FUNCTION(zip_entry_read)
 	zval             *zzip_ent;
 	php_zzip_dirent  *entry = NULL;
 	char             *buf   = NULL;
-	int               len   = 1024;
+	long              len   = 1024;
 	int               ret   = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|l", &zzip_ent, &len) == FAILURE) {

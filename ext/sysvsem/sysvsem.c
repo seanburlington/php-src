@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.41.2.1 2002/12/31 16:35:39 sebastian Exp $ */
+/* $Id: sysvsem.c,v 1.41.2.2 2003/03/07 13:42:20 ddhill Exp $ */
 
 /* Latest update build anc tested on Linux 2.2.14
  *
@@ -161,7 +161,7 @@ PHP_MINIT_FUNCTION(sysvsem)
    Return an id for the semaphore with the given key, and allow max_acquire (default 1) processes to acquire it simultaneously */
 PHP_FUNCTION(sem_get)
 {
-	int key, max_acquire, perm, auto_release = 1;
+	long key, max_acquire, perm, auto_release = 1;
     int semid;
 	struct sembuf sop[3];
 	int count;

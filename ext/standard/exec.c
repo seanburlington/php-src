@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.84.2.6 2003/02/25 16:26:54 iliaa Exp $ */
+/* $Id: exec.c,v 1.84.2.7 2003/03/07 13:42:18 ddhill Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -671,7 +671,7 @@ PHP_FUNCTION(proc_open)
 #define MAX_DESCRIPTORS	16
 
 	char *command;
-	long command_len;
+	int command_len;
 	zval *descriptorspec;
 	zval *pipes;
 	int ndesc = 0;

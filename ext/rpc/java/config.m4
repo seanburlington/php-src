@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.46 2002/08/21 01:41:21 kalowsky Exp $
+dnl $Id: config.m4,v 1.46.4.1 2002/11/29 13:32:49 chregu Exp $
 dnl
 AC_DEFUN(JAVA_FIND_JAR, [
  AC_MSG_CHECKING([Java Jar location])
@@ -101,7 +101,7 @@ AC_DEFUN(JAVA_CHECK_LIB, [
      test -f $i/jni_md.h   && JAVA_INCLUDE="$JAVA_INCLUDE -I$i"
    done
 
-   for i in `find $PHP_JAVA -type d`; do
+   for i in `find $PHP_JAVA/ -type d`; do
      test -f $i/classes.zip && JAVA_CFLAGS=-DJNI_11
      test -f $i/rt.jar      && JAVA_CFLAGS=-DJNI_12
      test -f $i/classes.zip && JAVA_CLASSPATH=$i/classes.zip

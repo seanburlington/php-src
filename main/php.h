@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.52 1999/12/21 19:40:26 andrei Exp $ */
+/* $Id: php.h,v 1.53 1999/12/30 16:09:17 sas Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -106,6 +106,10 @@ size_t strlcat(char *dst, const char *src, size_t siz);
 
 #ifndef HAVE_STRTOK_R
 char *strtok_r(char *s, const char *delim, char **last);
+#endif
+
+#ifndef HAVE_SOCKLEN_T
+typedef unsigned int socklen_t;
 #endif
 
 #include "request_info.h"

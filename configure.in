@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.113 2000/04/16 15:44:04 rasmus Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.114 2000/04/20 13:47:15 andrei Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -230,6 +230,7 @@ crypt.h \
 dlfcn.h \
 fcntl.h \
 grp.h \
+ieeefp.h \
 limits.h \
 locale.h \
 memory.h \

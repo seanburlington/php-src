@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.59 2000/08/21 09:50:52 sas Exp $ */
+/* $Id: basic_functions.h,v 1.60 2000/08/24 18:49:48 zeev Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -106,7 +106,6 @@ PHP_FUNCTION(get_loaded_extensions);
 PHP_FUNCTION(extension_loaded);
 PHP_FUNCTION(get_extension_funcs);
 
-PHP_FUNCTION(warn_not_available);
 
 /* From the INI parser */
 PHP_FUNCTION(parse_ini_file);

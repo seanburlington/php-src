@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.57 2001/06/06 13:05:45 rasmus Exp $ */
+/* $Id: interbase.c,v 1.58 2001/06/09 09:30:42 dbeu Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -590,7 +590,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.57 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.58 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -2863,7 +2863,7 @@ PHP_FUNCTION(ibase_blob_import)
 		RETURN_FALSE;
 	}
 
-	what = zend_fetch_resource(arg1, -1, "File-Handle", &type, 2, php_file_le_fopen(), php_file_le_stream());
+	what = zend_fetch_resource(file_arg, -1, "File-Handle", &type, 2, php_file_le_fopen(), php_file_le_stream());
 	ZEND_VERIFY_RESOURCE(what);
 
 	if (type == php_file_le_fopen())

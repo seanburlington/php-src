@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.109.2.2 2004/09/28 09:13:37 wez Exp $ */
+/* $Id: network.c,v 1.109.2.3 2005/03/11 08:11:28 hyanantha Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -29,12 +29,8 @@
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
 #elif defined(NETWARE)
-#ifdef NEW_LIBC
 #include <sys/timeval.h>
 #include <sys/param.h>
-#else
-#include "netware/time_nw.h"
-#endif
 #else
 #include <sys/param.h>
 #endif
@@ -57,15 +53,11 @@
 
 #if defined(NETWARE)
 #ifdef USE_WINSOCK
-/*#include <ws2nlm.h>*/
 #include <novsock2.h>
 #else
-/* New headers for socket stuff */
-#ifdef NEW_LIBC
 #include <netinet/in.h>
 #include <netdb.h>
 #include <sys/select.h>
-#endif
 #include <sys/socket.h>
 #endif
 #elif !defined(PHP_WIN32)

@@ -16,7 +16,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: client_round2_interop.php,v 1.6 2004/01/28 13:36:31 dmitry Exp $
+// $Id: client_round2_interop.php,v 1.7 2004/01/28 16:47:48 dmitry Exp $
 //
 require_once 'DB.php'; // PEAR/DB
 require_once 'client_round2_params.php';
@@ -254,6 +254,10 @@ class Interop_Client
             $error = '';
         } else {
             $success = $result['fault']->faultcode;
+            $pos = strpos($success,':');
+            if ($pos !== false) {
+            	$success = substr($success,$pos+1);                	
+            }
             $error = $result['fault']->faultstring;
             if (!$wire) $wire= $result['fault']->detail;
         }
@@ -529,10 +533,15 @@ class Interop_Client
             } else {
                 $ok = 0;
                 $res =$fault->faultcode;
+                $pos = strpos($res,':');
+                if ($pos !== false) {
+                	$res = substr($res,$pos+1);                	
+                }
             }
             // save the wire
             $wire = "REQUEST:\n".str_replace('" ',"\" \n",str_replace('>',">\n",$soap->__getlastrequest()))."\n\n".
-                    "RESPONSE:\n".str_replace('" ',"\" \n",str_replace('>',">\n",$soap->__getlastresponse()));
+                    "RESPONSE:\n".str_replace('" ',"\" \n",str_replace('>',">\n",$soap->__getlastresponse()))."\n".
+                    "RESULTL:\n".var_dump_str($return);
             #print "Wire:".htmlentities($wire);
 
             $soap_test->setResult($ok,$res, $wire,$fault->faultstring, $fault);

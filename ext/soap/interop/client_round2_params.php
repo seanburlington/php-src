@@ -16,7 +16,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: client_round2_params.php,v 1.5 2004/01/12 15:18:13 dmitry Exp $
+// $Id: client_round2_params.php,v 1.6 2004/01/28 16:47:48 dmitry Exp $
 //
 
 define('SOAP_TEST_ACTOR_NEXT','http://schemas.xmlsoap.org/soap/actor/next');
@@ -115,7 +115,12 @@ class SOAP_Test {
         } else {
             $fault = $this->result['fault'];
             if ($fault) {
-                print "<font color=\"#ff0000\">FAILED: {$fault->faultcode} {$fault->faultstring}</font>\n";
+            		$res = $fault->faultcode;
+                $pos = strpos($res,':');
+                if ($pos !== false) {
+                	$res = substr($res,$pos+1);                	
+                }
+                print "<font color=\"#ff0000\">FAILED: [$res] {$fault->faultstring}</font>\n";
             } else {
                 print "<font color=\"#ff0000\">FAILED: ".$this->result['result']."</font>\n";
             }

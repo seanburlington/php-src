@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.h,v 1.44 2002/12/31 16:07:41 sebastian Exp $ */
+/* $Id: fsock.h,v 1.45 2003/02/27 17:43:37 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.24 1999-06-18 [ssb] */
 
@@ -39,10 +39,6 @@
 
 PHP_FUNCTION(fsockopen);
 PHP_FUNCTION(pfsockopen);
-
-PHPAPI int php_lookup_hostname(const char *addr, struct in_addr *in);
-
-PHP_RSHUTDOWN_FUNCTION(fsock);
 
 /*
  * Local variables:

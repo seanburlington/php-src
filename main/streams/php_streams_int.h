@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_streams_int.h,v 1.2 2003/02/19 08:40:19 sniper Exp $ */
+/* $Id: php_streams_int.h,v 1.3 2003/02/27 17:43:38 wez Exp $ */
 
 #if ZEND_DEBUG
 #define emalloc_rel_orig(size)	\
@@ -56,4 +56,6 @@ extern php_stream_wrapper php_plain_files_wrapper;
 #define S_ISREG(mode)	(((mode)&S_IFMT) == S_IFREG)
 #endif
 
+void php_stream_tidy_wrapper_error_log(php_stream_wrapper *wrapper TSRMLS_DC);
+void php_stream_display_wrapper_errors(php_stream_wrapper *wrapper, const char *path, const char *caption TSRMLS_DC);
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_openssl.h,v 1.11 2002/12/31 16:07:10 sebastian Exp $ */
+/* $Id: php_openssl.h,v 1.12 2003/02/27 17:43:36 wez Exp $ */
 
 #ifndef PHP_OPENSSL_H
 #define PHP_OPENSSL_H
@@ -25,6 +25,8 @@
 #if HAVE_OPENSSL_EXT
 extern zend_module_entry openssl_module_entry;
 #define phpext_openssl_ptr &openssl_module_entry
+
+php_stream_transport_factory_func php_openssl_ssl_socket_factory;
 
 PHP_MINIT_FUNCTION(openssl);
 PHP_MSHUTDOWN_FUNCTION(openssl);

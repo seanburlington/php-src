@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.589 2003/02/26 19:25:24 derick Exp $ */
+/* $Id: basic_functions.c,v 1.590 2003/02/27 17:43:37 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1166,9 +1166,6 @@ PHP_RINIT_FUNCTION(basic)
 	BG(locale_string) = NULL;
 	BG(user_compare_func_name) = NULL;
 	BG(array_walk_func_name) = NULL;
-#ifdef HAVE_MMAP
-	BG(mmap_file) = NULL;
-#endif
 	BG(page_uid) = -1;
 	BG(page_gid) = -1;
 	BG(page_inode) = -1;
@@ -1219,7 +1216,6 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 	}
 	STR_FREE(BG(locale_string));
 
-	PHP_RSHUTDOWN(fsock)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_RSHUTDOWN(filestat)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #ifdef HAVE_SYSLOG_H
 	PHP_RSHUTDOWN(syslog)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
@@ -1246,12 +1242,6 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 		BG(user_filter_map) = NULL;
 	}
 	
-#ifdef HAVE_MMAP
-	if (BG(mmap_file)) {
-		munmap(BG(mmap_file), BG(mmap_len));
-	}
-#endif
-
 	return SUCCESS;
 }
 

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Frank M. Kromann <frank@frontbase.com>                       |
+   | Author: Frank M. Kromann <frank@kromann.info>                        |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.96 2003/06/10 20:03:28 imajes Exp $ */
+/* $Id: php_fbsql.c,v 1.97 2003/06/14 03:33:55 fmk Exp $ */
 
 /* TODO:
  *

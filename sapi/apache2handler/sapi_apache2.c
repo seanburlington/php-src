@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.2 2003/02/20 18:20:03 jerenkrantz Exp $ */
+/* $Id: sapi_apache2.c,v 1.3 2003/02/22 04:42:34 jerenkrantz Exp $ */
 
 #include <fcntl.h>
 
@@ -481,13 +481,24 @@ static int php_handler(request_rec *r)
 	request_rec *parent_req = NULL;
 	TSRMLS_FETCH();
 
+	conf = ap_get_module_config(r->per_dir_config, &php4_module);
+	apply_config(conf);
+
 	if (strcmp(r->handler, PHP_MAGIC_TYPE) &&
 		strcmp(r->handler, PHP_SOURCE_MAGIC_TYPE) &&
 		strcmp(r->handler, PHP_SCRIPT)) {
-		return DECLINED;
+		char *xbithack;
+		/* Check for xbithack in this case. */
+		if (strcmp(r->handler, "text/html")) {
+			return DECLINED;
+		}
+		xbithack = get_php_config(conf, "xbithack", sizeof("xbithack"));
+		if (*xbithack == '\0' || *xbithack == '0'
+			|| !(r->finfo.protection & APR_UEXECUTE)) {
+			return DECLINED;
+		}
 	}
 
-	conf = ap_get_module_config(r->per_dir_config, &php4_module);
 	enabled = get_php_config(conf, "engine", sizeof("engine"));
 
 	/* handle situations where user turns the engine off */
@@ -515,7 +526,6 @@ static int php_handler(request_rec *r)
 		ctx->brigade = brigade;
 
 		php_apache_request_ctor(r, ctx TSRMLS_CC);
-		apply_config(conf);
 	}
 	else {
 		parent_req = ctx->r;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: domxml.c,v 1.19 2000/02/22 20:24:56 steinm Exp $ */
+/* $Id: domxml.c,v 1.20 2000/02/25 08:54:12 eschmid Exp $ */
 
 
 #include "php.h"
@@ -749,7 +749,7 @@ PHP_FUNCTION(xmldocfile)
 }
 /* }}} */
 
-/* {{{ proto string domxml_new_child([int node_handle], string name, string content)
+/* {{{ proto string domxml_new_child([int node_handle,] string name, string content)
    Adds child node to parent node */
 PHP_FUNCTION(domxml_new_child)
 {
@@ -807,7 +807,7 @@ PHP_FUNCTION(domxml_new_child)
 }
 /* }}} */
 
-/* {{{ proto string domxml_add_root([int doc_handle], string name)
+/* {{{ proto string domxml_add_root([int doc_handle,] string name)
    Adds root node to document */
 PHP_FUNCTION(domxml_add_root)
 {

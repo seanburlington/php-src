@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.c,v 1.39 2004/02/06 14:22:33 dmitry Exp $ */
+/* $Id: php_schema.c,v 1.40 2004/02/06 16:52:14 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -1990,7 +1990,7 @@ static int schema_attributeGroup(sdlPtr sdl, xmlAttrPtr tsn, xmlNodePtr attrGrou
 	return TRUE;
 }
 
-static void copy_extra_attribute(void *attribute) 
+static void copy_extra_attribute(void *attribute)
 {
 	sdlExtraAttributePtr *attr = (sdlExtraAttributePtr*)attribute;
 	sdlExtraAttributePtr new_attr;
@@ -2040,11 +2040,12 @@ static void schema_attribute_fixup(sdlCtx *ctx, sdlAttributePtr attr)
 			}
 		}
 		if (attr->name == NULL && attr->ref != NULL) {
-			char *name, *ns;
-			parse_namespace(attr->ref, &name, &ns);
-			attr->name = sdl_strdup(name);
-			if (name) {efree(name);}
-			if (ns) {efree(ns);}
+			char *name = strrchr(attr->ref, ':');
+			if (*name) {
+				attr->name = sdl_strdup(name+1);
+			} else{
+				attr->name = sdl_strdup(attr->ref);
+			}
 		}
 		efree(attr->ref);
 		attr->ref = NULL;

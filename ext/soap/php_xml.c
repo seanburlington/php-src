@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_xml.c,v 1.20 2004/02/06 08:01:35 dmitry Exp $ */
+/* $Id: php_xml.c,v 1.21 2004/02/06 16:52:14 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/parser.h"
@@ -46,7 +46,6 @@ static void cleanup_xml_node(xmlNodePtr node)
 	trav = node->children;
 	while (trav != NULL) {
 		if (del != NULL) {
-fprintf(stderr,"***garbage\n");
 			xmlUnlinkNode(del);
 			xmlFreeNode(del);
 			del = NULL;

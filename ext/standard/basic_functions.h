@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.126 2003/11/12 22:02:37 iliaa Exp $ */
+/* $Id: basic_functions.h,v 1.127 2003/11/12 23:43:46 iliaa Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -48,7 +48,9 @@ PHP_FUNCTION(constant);
 PHP_FUNCTION(toggle_short_open_tag);
 PHP_FUNCTION(sleep);
 PHP_FUNCTION(usleep);
+#if HAVE_NANOSLEEP
 PHP_FUNCTION(nanosleep);
+#endif
 PHP_FUNCTION(flush);
 PHP_FUNCTION(ip2long);
 PHP_FUNCTION(long2ip);

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.476 2003/10/30 15:14:29 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.477 2003/11/12 23:43:46 iliaa Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -526,6 +526,7 @@ tempnam \
 tzset \
 unsetenv \
 usleep \
+nanosleep \
 utime \
 vsnprintf \
 )

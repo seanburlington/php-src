@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.4 2000/07/24 01:39:49 david Exp $ */
+/* $Id: php_math.h,v 1.5 2000/08/19 22:01:37 jmcastagnetto Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H
@@ -97,8 +97,20 @@ PHP_FUNCTION(rad2deg);
 #define M_2_PI         0.63661977236758134308  /* 2/pi */
 #endif
 
+#ifndef M_SQRTPI
+#define M_SQRTPI       1.77245385090551602729  /* sqrt(pi) */
+#endif
+
 #ifndef M_2_SQRTPI
 #define M_2_SQRTPI     1.12837916709551257390  /* 2/sqrt(pi) */
+#endif
+
+#ifndef M_LNPI
+#define M_LNPI         1.14472988584940017414  /* ln(pi) */
+#endif
+
+#ifndef M_EULER
+#define M_EULER        0.57721566490153286061 /* Euler constant */
 #endif
 
 #ifndef M_SQRT2
@@ -107,6 +119,10 @@ PHP_FUNCTION(rad2deg);
 
 #ifndef M_SQRT1_2
 #define M_SQRT1_2      0.70710678118654752440  /* 1/sqrt(2) */
+#endif
+
+#ifndef M_SQRT3
+#define M_SQRT3	       1.73205080756887729352  /* sqrt(3) */
 #endif
 
 #endif /* PHP_MATH_H */

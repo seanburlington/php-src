@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.170.2.1 2005/02/02 23:43:47 iliaa Exp $ */
+/* $Id: fopen_wrappers.c,v 1.170.2.2 2005/03/11 06:55:22 hyanantha Exp $ */
 
 /* {{{ includes
  */
@@ -56,8 +56,6 @@
 #if HAVE_PWD_H
 #ifdef PHP_WIN32
 #include "win32/pwd.h"
-#elif defined(NETWARE)
-#include "netware/pwd.h"
 #else
 #include <pwd.h>
 #endif

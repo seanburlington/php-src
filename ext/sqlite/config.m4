@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 2003/04/19 11:47:17 wez Exp $
+dnl $Id: config.m4,v 1.7 2003/04/19 12:54:17 wez Exp $
 dnl config.m4 for extension sqlite
 
 PHP_ARG_WITH(sqlite, for sqlite support,
@@ -42,7 +42,7 @@ if test "$PHP_SQLITE" != "no"; then
 	])
  
 	PHP_SUBST(SQLITE_SHARED_LIBADD)
-	PHP_NEW_EXTENSION(sqlite, sqlite.c, $ext_shared)
+	PHP_NEW_EXTENSION(sqlite, sqlite.c libsqlite/src/encode.c, $ext_shared)
   else
 	# use bundled library
 	sources="libsqlite/src/opcodes.c

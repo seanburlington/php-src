@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.74 2001/02/26 06:07:16 andi Exp $ */
+/* $Id: basic_functions.h,v 1.75 2001/03/04 01:17:21 zeev Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -97,7 +97,6 @@ PHP_FUNCTION(ini_restore);
 PHP_FUNCTION(print_r);
 
 PHP_FUNCTION(connection_aborted);
-PHP_FUNCTION(connection_timeout);
 PHP_FUNCTION(connection_status);
 PHP_FUNCTION(ignore_user_abort);
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.311 2001/03/02 20:22:14 andrei Exp $ */
+/* $Id: basic_functions.c,v 1.312 2001/03/04 01:17:21 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -368,7 +368,6 @@ function_entry basic_functions[] = {
 	PHP_FE(headers_sent,							NULL)
 
 	PHP_FE(connection_aborted,			NULL)
-	PHP_FE(connection_timeout,			NULL)
 	PHP_FE(connection_status,			NULL)
 	PHP_FE(ignore_user_abort,			NULL)
 
@@ -2148,16 +2147,6 @@ PHP_FUNCTION(connection_aborted)
 	PLS_FETCH();
 
     RETURN_LONG(PG(connection_status)&PHP_CONNECTION_ABORTED);
-}
-/* }}} */
-
-/* {{{ proto int connection_timeout(void)
-   Returns true if script timed out */
-PHP_FUNCTION(connection_timeout)
-{
-	PLS_FETCH();
-
-    RETURN_LONG(PG(connection_status)&PHP_CONNECTION_TIMEOUT);
 }
 /* }}} */
 

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.122 2004/04/30 02:05:45 cellog Exp $
+// $Id: Common.php,v 1.123 2004/05/16 20:55:29 pajoye Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -1407,7 +1407,7 @@ class PEAR_Common extends PEAR
                     }
                     continue 2;
                 case T_DOUBLE_COLON:
-                    if ($tokens[$i - 1][0] != T_STRING) {
+                    if (!($tokens[$i - 1][0] == T_STRING || $tokens[$i - 1][0] == T_STRING)) {
                         PEAR::raiseError("Parser error: Invalid PHP file $file",
                             PEAR_COMMON_ERROR_INVALIDPHP);
                         return false;

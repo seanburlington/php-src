@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.67 2001/07/10 21:49:51 cox Exp $
+// $Id: DB.php,v 1.68 2001/07/11 11:03:27 cox Exp $
 //
 // Database independent query interface.
 //
@@ -297,7 +297,9 @@ class DB
      */
     function isManip($query)
     {
-        if (preg_match('/^\s*"?(INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|ALTER|GRANT|REVOKE)\s+/i', $query)) {
+        $manips = 'INSERT|UPDATE|DELETE|'.'REPLACE|CREATE|DROP|'.
+                  'ALTER|GRANT|REVOKE|'.'LOCK|UNLOCK';
+        if (preg_match('/^\s*"?('.$manips.')\s+/i', $query)) {
             return true;
         }
         return false;

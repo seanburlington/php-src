@@ -17,15 +17,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.11 2000/05/18 15:34:27 zeev Exp $ */
+/* $Id: php_interbase.h,v 1.12 2000/06/10 08:47:57 andi Exp $ */
 
 #ifndef _PHP_IBASE_H
 #define _PHP_IBASE_H
-
-#if COMPILE_DL
-#undef HAVE_IBASE
-#define HAVE_IBASE 1
-#endif
 
 #if HAVE_IBASE
 #include <ibase.h>

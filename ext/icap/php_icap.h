@@ -1,19 +1,11 @@
-/* $Id: php_icap.h,v 1.3 1999/12/17 22:01:09 zeev Exp $ */
+/* $Id: php_icap.h,v 1.4 2000/06/10 08:47:56 andi Exp $ */
 
 #ifndef _INCLUDED_ICAP_H
 #define _INCLUDED_ICAP_H
 
-#if COMPILE_DL
-#undef HAVE_ICAP
-#define HAVE_ICAP 1
-#endif
-
 #if HAVE_ICAP
 
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
-#ifndef MSVC5
+#ifndef PHP_WIN32
 #include "build-defs.h"
 #endif
 
@@ -48,7 +40,3 @@ PHP_FUNCTION(icap_list_alarms);
 
 
 #endif
-
-
-
-

@@ -23,15 +23,10 @@
  */
 
 
-/* $Id: php_hyperwave.h,v 1.4 2000/02/12 14:38:01 sas Exp $ */
+/* $Id: php_hyperwave.h,v 1.5 2000/06/10 08:47:56 andi Exp $ */
 
 #ifndef _HW_H
 #define _HW_H
-
-#if COMPILE_DL
-#undef HYPERWAVE
-#define HYPERWAVE 1
-#endif
 
 #ifdef PHP_WIN32
 #define PHP_HW_API __declspec(dllexport)

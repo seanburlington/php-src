@@ -28,15 +28,10 @@
  */
 
 
-/* $Id: php_msql.h,v 1.2 1999/09/04 11:05:33 zeev Exp $ */
+/* $Id: php_msql.h,v 1.3 2000/06/10 08:47:57 andi Exp $ */
 
 #ifndef _PHP_MSQL_H
 #define _PHP_MSQL_H
-
-#if COMPILE_DL
-#undef HAVE_MSQL
-#define HAVE_MSQL 1
-#endif
 
 #if HAVE_MSQL
 

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_gd.h,v 1.10 2000/06/07 23:04:39 jah Exp $ */
+/* $Id: php_gd.h,v 1.11 2000/06/10 08:47:56 andi Exp $ */
 
 #ifndef _PHP_GD_H
 #define _PHP_GD_H
@@ -38,11 +38,6 @@
 
 #if HAVE_LIBTTF|HAVE_LIBFREETYPE
 #define ENABLE_GD_TTF
-#endif
-
-#if COMPILE_DL
-#undef HAVE_LIBGD
-#define HAVE_LIBGD 1
 #endif
 
 #if HAVE_LIBGD

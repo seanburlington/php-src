@@ -28,15 +28,10 @@
  */
 
 
-/* $Id: php_sysvsem.h,v 1.4 1999/12/18 15:10:04 thies Exp $ */
+/* $Id: php_sysvsem.h,v 1.5 2000/06/10 08:47:58 andi Exp $ */
 
 #ifndef _PHP_SYSVSEM_H
 #define _PHP_SYSVSEM_H
-
-#if COMPILE_DL
-#undef HAVE_SYSVSEM
-#define HAVE_SYSVSEM 1
-#endif
 
 #if HAVE_SYSVSEM
 

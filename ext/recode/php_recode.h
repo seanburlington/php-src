@@ -17,15 +17,10 @@
  */
 
 
-/* $Id: php_recode.h,v 1.3 2000/06/06 14:13:35 thies Exp $ */
+/* $Id: php_recode.h,v 1.4 2000/06/10 08:47:58 andi Exp $ */
 
 #ifndef _PHP_RECODE_H
 #define _PHP_RECODE_H
-
-#ifdef COMPILE_DL_RECODE
-#undef HAVE_LIBRECODE
-#define HAVE_LIBRECODE 1
-#endif
 
 #ifdef PHP_WIN32
 #define PHP_MYSQL_API __declspec(dllexport)

@@ -28,16 +28,12 @@
  */
 
 
-/* $Id: php_posix.h,v 1.2 1999/12/17 20:55:19 zeev Exp $ */
+/* $Id: php_posix.h,v 1.3 2000/06/10 08:47:57 andi Exp $ */
 
 #ifndef _PHP_POSIX_H
 #define _PHP_POSIX_H
 
-#if COMPILE_DL
-#define HAVE_POSIX 1
-#endif
 
-#if HAVE_POSIX
 #ifndef DLEXPORT
 #define DLEXPORT
 #endif

@@ -26,15 +26,10 @@
    | Authors: Stephanie Wehner <_@r4k.net>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_yp.h,v 1.4 1999/12/18 03:20:53 zeev Exp $ */ 
+/* $Id: php_yp.h,v 1.5 2000/06/10 08:47:58 andi Exp $ */ 
 
 #ifndef _PHP_YP_H
 #define _PHP_YP_H
-
-#if COMPILE_DL
-#undef HAVE_YP
-#define HAVE_YP 1
-#endif
 
 #if HAVE_YP
 

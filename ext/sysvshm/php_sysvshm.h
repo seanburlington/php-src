@@ -28,16 +28,10 @@
  */
 
 
-/* $Id: php_sysvshm.h,v 1.3 1999/12/18 04:01:18 zeev Exp $ */
+/* $Id: php_sysvshm.h,v 1.4 2000/06/10 08:47:58 andi Exp $ */
 
 #ifndef _PHP_SYSVSHM_H
 #define _PHP_SYSVSHM_H
-
-#if COMPILE_DL
-#undef HAVE_SYSVSHM
-#define HAVE_SYSVSHM 1
-#endif
-
 
 #if HAVE_SYSVSHM
 

@@ -23,15 +23,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_zlib.h,v 1.5 2000/05/25 16:35:49 hholzgra Exp $ */
+/* $Id: php_zlib.h,v 1.6 2000/06/10 08:47:58 andi Exp $ */
 
 #ifndef _PHP_ZLIB_H
 #define _PHP_ZLIB_H
-
-#if COMPILE_DL_ZLIB
-#undef HAVE_ZLIB
-#define HAVE_ZLIB 1
-#endif
 
 #if HAVE_ZLIB
 

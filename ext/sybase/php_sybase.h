@@ -28,15 +28,10 @@
  */
 
 
-/* $Id: php_sybase.h,v 1.3 1999/12/18 03:20:50 zeev Exp $ */
+/* $Id: php_sybase.h,v 1.4 2000/06/10 08:47:58 andi Exp $ */
 
 #ifndef _PHP_SYBASE_H
 #define _PHP_SYBASE_H
-
-#if COMPILE_DL
-#undef HAVE_SYBASE
-#define HAVE_SYBASE 1
-#endif
 
 #if HAVE_SYBASE
 

@@ -18,14 +18,10 @@
 +----------------------------------------------------------------------+
 */
 
-/* $Id: php_snmp.h,v 1.7 2000/05/18 15:34:34 zeev Exp $ */
+/* $Id: php_snmp.h,v 1.8 2000/06/10 08:47:58 andi Exp $ */
 #ifndef _PHP_SNMP_H
 #define _PHP_SNMP_H
 
-#if COMPILE_DL
-#undef HAVE_SNMP
-#define HAVE_SNMP 1
-#endif
 #if HAVE_SNMP
 #ifndef DLEXPORT
 #define DLEXPORT

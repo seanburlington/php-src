@@ -28,15 +28,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_velocis.h,v 1.3 1999/12/17 22:27:25 zeev Exp $ */
+/* $Id: php_velocis.h,v 1.4 2000/06/10 08:47:57 andi Exp $ */
 
 #ifndef _PHP_VELOCIS_H
 #define _PHP_VELOCIS_H
-
-#if COMPILE_DL
-#undef HAVE_VELOCIS
-#define HAVE_VELOCIS 1
-#endif
 
 #if defined(HAVE_VELOCIS) && !HAVE_UODBC
 #define UNIX

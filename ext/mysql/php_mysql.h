@@ -17,15 +17,10 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.10 2000/05/18 15:34:30 zeev Exp $ */
+/* $Id: php_mysql.h,v 1.11 2000/06/10 08:47:57 andi Exp $ */
 
 #ifndef _PHP_MYSQL_H
 #define _PHP_MYSQL_H
-
-#ifdef COMPILE_DL
-# undef HAVE_MYSQL
-# define HAVE_MYSQL 1
-#endif
 
 #ifdef PHP_WIN32
 #define PHP_MYSQL_API __declspec(dllexport)
@@ -35,7 +30,7 @@
 
 #if HAVE_MYSQL
 
-#ifdef __ZTS
+#ifdef ZTS
 #include "TSRM.h"
 #endif
 

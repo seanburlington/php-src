@@ -28,15 +28,10 @@
  */
 
 
-/* $Id: php_bcmath.h,v 1.2 1999/12/17 20:54:46 zeev Exp $ */
+/* $Id: php_bcmath.h,v 1.3 2000/06/10 08:47:56 andi Exp $ */
 
 #ifndef _PHP_BCMATH_H
 #define _PHP_BCMATH_H
-
-#if COMPILE_DL
-#undef WITH_BCMATH
-#define WITH_BCMATH 1
-#endif
 
 #if WITH_BCMATH
 

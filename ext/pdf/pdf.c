@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.45 2000/06/15 23:45:04 andi Exp $ */
+/* $Id: pdf.c,v 1.46 2000/06/19 19:46:23 steinm Exp $ */
 
 /* pdflib 2.02 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -2523,7 +2523,7 @@ PHP_FUNCTION(pdf_close_image) {
 }
 /* }}} */
 
-/* {{{ proto void pdf_place_image(int pdf, int pdfimage, int x, int y, int scale)
+/* {{{ proto void pdf_place_image(int pdf, int pdfimage, double x, double y, double scale)
    Places image in the pdf document */
 PHP_FUNCTION(pdf_place_image) {
 	pval *arg1, *arg2, *arg3, *arg4, *arg5;

@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.184.2.10 2005/01/11 04:56:44 sniper Exp $ */
+/* $Id: php_imap.c,v 1.184.2.11 2005/01/18 16:33:28 iliaa Exp $ */
 
 #define IMAP41
 
@@ -3089,7 +3089,7 @@ PHP_FUNCTION(imap_mail_compose)
 				bod->contents.text.size = Z_STRLEN_PP(pvalue);
 			} else {
 				bod->contents.text.data = (char *) fs_get(1);
-				bod->contents.text.data = "";
+				memcpy(bod->contents.text.data, "", 1);
 				bod->contents.text.size = 0;
 			}
 			if (zend_hash_find(Z_ARRVAL_PP(data), "lines", sizeof("lines"), (void **) &pvalue)== SUCCESS) {
@@ -3104,9 +3104,8 @@ PHP_FUNCTION(imap_mail_compose)
 				convert_to_string_ex(pvalue);
 				bod->md5 = cpystr(Z_STRVAL_PP(pvalue));
 			}
-
-			zend_hash_move_forward(Z_ARRVAL_PP(body));
 		}
+		zend_hash_move_forward(Z_ARRVAL_PP(body));
 	}
 
 	rfc822_encode_body_7bit(env, topbod); 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.28 2004/04/29 23:02:11 helly Exp $ */
+/* $Id: php_spl.c,v 1.29 2004/10/07 23:08:16 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -45,6 +45,10 @@ function_entry spl_functions[] = {
 	PHP_FE(spl_classes,             NULL)
 	PHP_FE(class_parents,           NULL)
 	PHP_FE(class_implements,        NULL)
+#ifdef SPL_ITERATORS_H
+	PHP_FE(iterator_to_array,       NULL)
+	PHP_FE(iterator_count,          NULL)
+#endif /* SPL_ITERATORS_H */
 	{NULL, NULL, NULL}
 };
 /* }}} */

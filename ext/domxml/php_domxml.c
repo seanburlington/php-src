@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.108 2002/01/19 21:12:05 jarkol Exp $ */
+/* $Id: php_domxml.c,v 1.109 2002/01/20 14:40:59 hholzgra Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -3566,7 +3566,7 @@ PHP_FUNCTION(domxml_xslt_process)
 }
 /* }}} */
 
-/* {{{ proto string domxslt_version(void)
+/* {{{ proto string domxml_xslt_version(void)
    Get XSLT library version */
 PHP_FUNCTION(domxml_xslt_version)
 {

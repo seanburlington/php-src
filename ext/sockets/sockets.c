@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.35.2.2 2001/05/29 15:57:54 sniper Exp $ */
+/* $Id: sockets.c,v 1.35.2.3 2001/06/12 18:25:24 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1093,7 +1093,14 @@ PHP_FUNCTION(strerror)
 	}
 	if (Z_LVAL_PP(error) < -10000) {
 		Z_LVAL_PP(error) += 10000;
-		buf = hstrerror(-(Z_LVAL_PP(error)));
+#ifdef HAVE_HSTRERROR
+		buf = hstrerror(-(Z_LVAL_PP(error))); 
+#else
+		{
+		static char buf[100];
+		sprintf (buf, "Host lookup error %d", -(Z_LVAL_PP(error)));
+		}
+#endif
 	} else {
 		buf = strerror(-(Z_LVAL_PP(error)));
 	}

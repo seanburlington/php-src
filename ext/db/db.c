@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.83 2002/12/31 16:06:22 sebastian Exp $ */
+/* $Id: db.c,v 1.84 2003/01/18 19:49:25 iliaa Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -198,10 +198,8 @@ PHP_FUNCTION(db_id_list)
 		RETURN_FALSE;
 	}
 
-	if (array_init(return_value) == FAILURE) {
-		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Unable to initialize array");
-		RETURN_FALSE;
-	}
+	array_init(return_value);
+
 	numitems = zend_hash_next_free_element(&EG(regular_list));
 	for (i=1; i<numitems; i++) {
 		if (zend_hash_index_find(&EG(regular_list), i, (void **) &le)==FAILURE) {
@@ -395,10 +393,6 @@ dbm_info *php_dbm_open(char *filename, char *mode TSRMLS_DC)
 
 	if (dbf) {
 		info = (dbm_info *)emalloc(sizeof(dbm_info));
-		if (!info) {
-			php_error_docref1(NULL TSRMLS_CC, filename, E_ERROR, "Problem allocating memory!");
-			return NULL;
-		}
 
 		info->filename = estrdup(filename);
 		info->lockfn = lockfn;

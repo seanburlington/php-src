@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.245 2001/05/11 18:03:42 thies Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.246 2001/05/11 20:09:26 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -625,9 +625,6 @@ AC_CHECK_LIB(crypt, crypt, [
 divert(5)
 
 PHP_CONFIGURE_PART(Configuring extensions)
-
-# zlib checks have to be here
-sinclude(./ext/zlib/zlib.m4)
 
 # reading config stubs
 esyscmd(./scripts/config-stubs ext)

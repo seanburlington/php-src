@@ -1,5 +1,5 @@
 dnl
-dnl $Id: zlib.m4,v 1.1 2001/05/10 00:57:36 sniper Exp $
+dnl $Id: config0.m4,v 1.1 2001/05/11 20:09:30 sas Exp $
 dnl
 
 PHP_ARG_WITH(zlib-dir,if the location of ZLIB install directory is defined,

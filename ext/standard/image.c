@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.31 2001/05/04 06:25:10 sbergmann Exp $ */
+/* $Id: image.c,v 1.32 2001/05/16 04:50:49 sniper Exp $ */
 /*
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -241,15 +241,6 @@ static unsigned int php_next_marker(int socketd, FILE *fp, int issock)
 	 /* get next marker byte from file */
 {
 	int c;
-
-	/* skip unimportant stuff */
-
-	c = FP_FGETC(socketd,fp,issock);
-
-	while (c != 0xff) {
-		if ((c = FP_FGETC(socketd,fp,issock)) == EOF)
-			return M_EOI; /* we hit EOF */
-	}
 
 	/* get marker byte, swallowing possible padding */
 	do {

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.21 1999/11/06 10:06:37 zeev Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.22 1999/11/08 09:18:57 ssb Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -333,6 +333,7 @@ unsetenv \
 usleep \
 utime \
 vsnprintf \
+mkstemp \
 )
 
 AC_REPLACE_FUNCS(strlcat strlcpy)

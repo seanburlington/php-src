@@ -3,14 +3,14 @@
  * that will be used to create the PEAR folder
  * in the windows snapshot.
  * See win32/build/mkdist.php for more details
- * $Id: go-pear-list.php,v 1.5 2004/04/08 18:27:26 jon Exp $
+ * $Id: go-pear-list.php,v 1.6 2004/04/08 23:52:36 cellog Exp $
  */
 $packages  = array(
 "PEAR"                  =>    "1.3.1",
 "Mail"                  =>    "1.1.3",
 "Net_SMTP"              =>    "1.2.5",
 "Net_Socket"            =>    "1.0.1",
-"PHPUnit"               =>    "2.0.0beta1",
+"PHPUnit2"               =>    "2.0.0beta1",
 "Console_Getopt"        =>    "1.2",
 "DB"                    =>    "1.6.2",
 "HTTP"                  =>    "1.2.3",

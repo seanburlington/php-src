@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.72 2000/03/25 19:17:41 zeev Exp $ */
+/* $Id: php.h,v 1.73 2000/03/30 22:38:49 andi Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -284,6 +284,16 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #define PUTS_H(str)					php_header_write((str), strlen((str)))
 #define PUTC_H(c)					(php_header_write(&(c), 1), (c))
 
+/* Virtual current directory support */
+#ifdef VIRTUAL_DIR
+#define PHP_GETCWD(buff, size) virtual_getcwd(buff,size)
+#define PHP_FOPEN(path, mode) virtual_fopen(path, mode)
+#define PHP_CHDIR(path) virtual_chdir(path)
+#else
+#define PHP_GETCWD(buff, size) getcwd(buff,size)
+#define PHP_FOPEN(path, mode)  fopen(path, mode)
+#define PHP_CHDIR(path) chdir(path)
+#endif
 
 #include "zend_constants.h"
 

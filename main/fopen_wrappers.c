@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.46 2000/03/15 19:12:41 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.47 2000/03/30 22:38:49 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -970,7 +970,7 @@ PHPAPI char *expand_filepath(char *filepath)
 	if (filepath[0] == '.') {
 		char *cwd = malloc(MAXPATHLEN + 1);
 
-		if (getcwd(cwd, MAXPATHLEN)) {
+		if (PHP_GETCWD(cwd, MAXPATHLEN)) {
 			char *cwd_end = cwd + strlen(cwd);
 
 			if (filepath[1] == '.') {	/* parent directory - .. */

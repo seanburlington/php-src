@@ -1,3 +1,57 @@
+2005-03-30  Derick Rethans  <php@derickrethans.nl>
+
+    * (PHP_5_0)
+      configure.in
+      main/php_version.h:
+      - Back to dev so that we have working snapshots again.
+
+2005-03-30  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      configure.in
+      main/php_version.h:
+      back to dev.
+
+2005-03-30  Zeev Suraski  <zeev@zend.com>
+
+    * (PHP_5_0)
+      NEWS
+      configure.in
+      main/php_version.h:
+      Roll 5.0.4
+
+2005-03-30  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      NEWS
+      configure.in
+      main/php_version.h:
+      Tag 4.3.11
+
+2005-03-30  Joe Orton  <jorton@redhat.com>
+
+    * ext/mysqli/mysqli_driver.c
+      ext/mysqli/mysqli_prop.c:
+      Mark more private functions as static.
+
+2005-03-30  Edin Kadribasic  <edink@emini.dk>
+
+    * INSTALL
+      INSTALL
+      win32/install.txt
+      win32/install.txt:
+      Updated install instructions from the documentation project (Philip Olson)
+
+    * (PHP_5_0)
+      INSTALL
+      win32/install.txt:
+      Update instruction from the documentation project (Philip Olson)
+
+2005-03-30  Joe Orton  <jorton@redhat.com>
+
+    * ext/mysqli/mysqli_prop.c:
+      Mark private functions as static.
+
 2005-03-29  Ilia Alshanetsky  <ilia@prohost.org>
 
     * (PHP_5_0)
@@ -2780,7 +2834,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1938 2005/03/30 01:32:45 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1939 2005/03/31 01:32:08 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -3261,7 +3315,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1938 2005/03/30 01:32:45 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1939 2005/03/31 01:32:08 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -4735,7 +4789,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1938 2005/03/30 01:32:45 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1939 2005/03/31 01:32:08 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

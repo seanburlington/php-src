@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.31 1999/10/18 17:46:33 thies Exp $ */
+/* $Id: var.c,v 1.32 1999/10/20 14:34:16 thies Exp $ */
 
 
 /* {{{ includes 
@@ -87,8 +87,11 @@ void php_var_dump(pval **struc, int level)
 					PHPWRITE(buf, strlen(buf));
 				}
 				c++;
-				if (zend_hash_get_current_data(myht, (void **) (&data)) != SUCCESS || !data || (data == struc))
+				if (zend_hash_get_current_data(myht, (void **) (&data)) != SUCCESS || !data || (data == struc)) {
+					if (i == HASH_KEY_IS_STRING)
+						efree(key);
 					continue;
+				}
 				switch (i) {
 					case HASH_KEY_IS_LONG:{
 							pval *d = emalloc(sizeof(pval));
@@ -238,8 +241,9 @@ void php_var_serialize(pval *buf, pval **struc)
 					if ((i = zend_hash_get_current_key(myht, &key, &index)) == HASH_KEY_NON_EXISTANT) {
 						break;
 					}
-					if (zend_hash_get_current_data(myht, (void **) (&data)) !=
-							SUCCESS || !data || ((*data) == (*struc))) {
+					if (zend_hash_get_current_data(myht, (void **) (&data)) != SUCCESS || !data || ((*data) == (*struc))) {
+						if (i == HASH_KEY_IS_STRING)
+							efree(key);
 						continue;
 					}
 

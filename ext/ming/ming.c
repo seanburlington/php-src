@@ -4,10 +4,10 @@
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.01 of the PHP license,      |
+   | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.php.net/license/2_01.txt.                                 |
+   | http://www.php.net/license/3_0.txt.                                  |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -15,7 +15,7 @@
    | Author: dave@opaque.net                                              |
    +----------------------------------------------------------------------+
    
-  $Id: ming.c,v 1.46 2003/06/16 15:12:55 andrey Exp $ 
+  $Id: ming.c,v 1.47 2003/06/16 15:24:58 andrey Exp $ 
 
 */
 

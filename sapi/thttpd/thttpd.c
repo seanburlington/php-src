@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: thttpd.c,v 1.71 2002/10/26 15:47:22 sas Exp $ */
+/* $Id: thttpd.c,v 1.72 2002/10/26 20:45:35 sas Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -43,7 +43,6 @@ typedef struct {
 	httpd_conn *hc;
 	int read_post_data;	
 	void (*on_close)(int);
-	long async_send;
 
 	smart_str sbuf;
 	int seen_cl;
@@ -58,10 +57,6 @@ static int thttpd_globals_id;
 static php_thttpd_globals thttpd_globals;
 #define TG(v) (thttpd_globals.v)
 #endif
-
-PHP_INI_BEGIN()
-	STD_PHP_INI_ENTRY("async_send", "0", PHP_INI_ALL, OnUpdateInt, async_send, php_thttpd_globals, thttpd_globals)
-PHP_INI_END()
 
 static int sapi_thttpd_ub_write(const char *str, uint str_length TSRMLS_DC)
 {

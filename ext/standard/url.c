@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.38 2001/06/13 17:04:36 zeev Exp $ */
+/* $Id: url.c,v 1.39 2001/06/19 15:20:50 sbergmann Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -300,7 +300,6 @@ PHP_FUNCTION(urlencode)
 	}
 	str = php_url_encode((*arg)->value.str.val, (*arg)->value.str.len, &str_len);
 	RETVAL_STRINGL(str, str_len, 0);
-	efree(str);
 }
 /* }}} */
 

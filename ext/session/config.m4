@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.10 2001/03/27 20:34:42 sniper Exp $
+dnl $Id: config.m4,v 1.11 2001/05/11 17:43:40 sas Exp $
 
 PHP_ARG_WITH(mm,for mm support,
 [  --with-mm[=DIR]         Include mm support for session storage])
@@ -31,6 +31,7 @@ if test "$PHP_TRANS_SID" = "yes"; then
 fi
 
 if test "$PHP_SESSION" != "no"; then
+  AC_CHECK_FUNCS(pread pwrite)
   PHP_EXTENSION(session,$ext_shared)
   PHP_SUBST(SESSION_SHARED_LIBADD)
 fi

@@ -16,7 +16,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.70 2002/11/07 16:37:46 iliaa Exp $ */
+/* $Id: image.c,v 1.71 2002/11/08 03:04:23 iliaa Exp $ */
 /*
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -834,7 +834,7 @@ PHPAPI const char * php_image_type_to_mime_type(int image_type)
 }
 /* }}} */
 
-/* {{{ proto array image_type_to_mime_type(int imagetype)
+/* {{{ proto string image_type_to_mime_type(int imagetype)
    Get Mime-Type for image-type returned by getimagesize, exif_read_data, exif_thumbnail, exif_imagetype */
 PHP_FUNCTION(image_type_to_mime_type)
 {

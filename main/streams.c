@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.57 2002/06/19 00:31:30 edink Exp $ */
+/* $Id: streams.c,v 1.58 2002/08/09 00:33:06 imajes Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -473,6 +473,12 @@ PHPAPI size_t _php_stream_copy_to_stream(php_stream *src, php_stream *dest, size
 
 		if (fstat(srcfd, &sbuf) == 0) {
 			void *srcfile;
+
+			/* in the event that the source file is 0 bytes, return 1 to indicate success
+			 * because opening the file to write had already created a copy */
+
+			if(sbuf.st_size ==0)
+				return 1;
 
 			if (maxlen > sbuf.st_size || maxlen == 0)
 				maxlen = sbuf.st_size;

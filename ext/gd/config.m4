@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.88 2002/04/13 05:43:14 rasmus Exp $
+dnl $Id: config.m4,v 1.89 2002/04/13 09:26:29 sas Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -208,7 +208,7 @@ AC_DEFUN(PHP_GD_CHECK_VERSION,[
 PHP_ARG_WITH(gd, for GD support,
 [  --with-gd[=DIR]         Include GD support (DIR is GD's install dir).])
 
-if test "$PHP_GD" == "php"; then
+if test "$PHP_GD" = "php"; then
   GD_MODULE_TYPE=builtin
   sources="libgd/gd.c libgd/gd_gd.c libgd/gd_gd2.c libgd/gd_io.c libgd/gd_io_dp.c \
         libgd/gd_io_file.c libgd/gd_ss.c libgd/gd_io_ss.c libgd/gd_png.c libgd/gd_jpeg.c \

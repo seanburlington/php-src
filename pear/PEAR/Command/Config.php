@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.18 2002/06/08 18:44:34 dickmann Exp $
+// $Id: Config.php,v 1.18.4.1 2002/11/19 02:23:28 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";
@@ -187,7 +187,7 @@ displays help for all configuration parameters.
      */
     function _checkLayer($layer = null)
     {
-        if (!empty($layer)) {
+        if (!empty($layer) && $layer != 'default') {
             $layers = $this->config->getLayers();
             if (!in_array($layer, $layers)) {
                 return " only the layers: \"" . implode('" or "', $layers) . "\" are supported";

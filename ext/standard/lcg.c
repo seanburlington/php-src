@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lcg.c,v 1.33.2.1 2002/12/31 16:35:31 sebastian Exp $ */
+/* $Id: lcg.c,v 1.33.2.2 2003/03/31 03:24:45 sas Exp $ */
 
 #include "php.h"
 #include "php_lcg.h"
@@ -61,6 +61,10 @@ PHPAPI double php_combined_lcg(TSRMLS_D)
 {
 	php_int32 q;
 	php_int32 z;
+	
+	if (!LCG(seeded)) {
+		lcg_seed(TSRMLS_C);
+	}
 
 	MODMULT(53668, 40014, 12211, 2147483563L, LCG(s1));
 	MODMULT(52774, 40692, 3791, 2147483399L, LCG(s2));

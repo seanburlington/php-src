@@ -20,7 +20,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.8 1999/07/16 18:01:55 zeev Exp $ */
+/* $Id: ldap.c,v 1.9 1999/07/16 21:53:17 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -275,7 +275,7 @@ void php3_info_ldap(ZEND_MODULE_INFO_FUNC_ARGS)
 
 	php3_printf("<table>"
 				"<tr><td>Total links:</td><td>%d/%s</td></tr>\n"
-		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.8 1999/07/16 18:01:55 zeev Exp $</td></tr>\n"
+		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.9 1999/07/16 21:53:17 zeev Exp $</td></tr>\n"
 #if HAVE_NSLDAP
 				"<tr><td>SDK Version:</td><td>%f</td></tr>"
 				"<tr><td>Highest LDAP Protocol Supported:</td><td>%f</td></tr>"
@@ -803,7 +803,7 @@ PHP_FUNCTION(ldap_get_entries)
 			attribute = ldap_next_attribute(ldap, ldap_result_entry, ber);
 		}
 
-		tmp1 = (pval *) emalloc(sizeof(pval));
+		MAKE_STD_ZVAL(tmp1);
 		array_init(tmp1);
 
 		attr_count = 0;
@@ -812,7 +812,7 @@ PHP_FUNCTION(ldap_get_entries)
 			ldap_value = ldap_get_values(ldap, ldap_result_entry, attribute);
 			num_values = ldap_count_values(ldap_value);
 
-			tmp2 = (pval *) emalloc(sizeof(pval));
+			MAKE_STD_ZVAL(tmp2);
 			array_init(tmp2);
 			add_assoc_long(tmp2, "count", num_values);
 			for(i=0; i<num_values; i++) {
@@ -949,7 +949,7 @@ PHP_FUNCTION(ldap_get_attributes)
 		ldap_value = ldap_get_values(ldap, ldap_result_entry, attribute);
 		num_values = ldap_count_values(ldap_value);
 
-		tmp = (pval *) emalloc(sizeof(pval));
+		MAKE_STD_ZVAL(tmp);
 		array_init(tmp);
 		add_assoc_long(tmp, "count", num_values);
 		for(i=0; i<num_values; i++) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.65 2003/01/06 04:06:40 pollita Exp $ */
+/* $Id: php_streams.h,v 1.66 2003/01/06 14:00:57 wez Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -213,11 +213,11 @@ struct _php_stream_filter {
 	: (stream)->ops->read((stream), (buf), (size) TSRMLS_CC)
 
 #define php_stream_filter_flush_next(stream, thisfilter, closing) \
-	(thisfilter)->next ? (thisfilter)->next->fops->flush((stream), (thisfilter), (closing) TSRMLS_CC) \
+	(thisfilter)->next ? (thisfilter)->next->fops->flush((stream), (thisfilter)->next, (closing) TSRMLS_CC) \
 	: (stream)->ops->flush((stream) TSRMLS_CC)
 
 #define php_stream_filter_eof_next(stream, thisfilter) \
-	(thisfilter)->next ? (thisfilter)->next->fops->eof((stream), (thisfilter) TSRMLS_CC) \
+	(thisfilter)->next ? (thisfilter)->next->fops->eof((stream), (thisfilter)->next TSRMLS_CC) \
 	: (stream)->ops->read((stream), NULL, 0 TSRMLS_CC) == EOF ? 1 : 0
 
 #define PHP_STREAM_FLAG_NO_SEEK						1

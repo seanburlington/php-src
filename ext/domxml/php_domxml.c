@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.40 2001/07/08 00:54:25 joey Exp $ */
+/* $Id: php_domxml.c,v 1.41 2001/07/16 11:16:44 joey Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1821,6 +1821,13 @@ PHP_FUNCTION(domxml_doc_document_element)
 	int ret;
 	
 	id = getThis();
+	
+	if (!id) {
+		if ((ZEND_NUM_ARGS() != 1) || getParameters(ht, 1, &id) == FAILURE) {
+			RETURN_FALSE;
+		}
+	}
+
 	docp = php_dom_get_object(id, le_domxmldocp, 0);
 
 	node = docp->children;

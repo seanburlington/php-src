@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: qtdom.c,v 1.18 2003/01/15 02:54:52 iliaa Exp $ */
+/* $Id: qtdom.c,v 1.19 2003/01/18 19:28:07 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -119,8 +119,7 @@ static int qdom_find_attributes( zval **children, struct qdom_attribute *attr TS
     count = 0;
 
     MAKE_STD_ZVAL(*children);
-    if (array_init(*children) == FAILURE)
-        return -1;
+    array_init(*children);
     for ( i = 0; i < attr->Count; ++i )
     {
         node = qdom_do_attribute_at( attr, i );
@@ -158,8 +157,7 @@ static int qdom_find_children( zval **children, struct qdom_node *orig_node TSRM
 /*      node = orig_node; */
 
     MAKE_STD_ZVAL(*children);
-    if (array_init(*children) == FAILURE)
-        return -1;
+    array_init(*children);
     while( node )
     {
         int num_childs, num_attrs;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.130 2003/01/14 02:39:10 iliaa Exp $ */
+/* $Id: sockets.c,v 1.131 2003/01/18 19:28:06 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -473,10 +473,9 @@ PHP_MINFO_FUNCTION(sockets)
 /* {{{ PHP_RINIT_FUNCTION */
 PHP_RINIT_FUNCTION(sockets)
 {
-	if ((SOCKETS_G(strerror_buf) = emalloc(16384))) 
-		return SUCCESS;
-	
-	return FAILURE;
+	SOCKETS_G(strerror_buf) = emalloc(16384);
+
+	return SUCCESS;
 }
 /* }}} */
 

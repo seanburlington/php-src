@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xml.h,v 1.20 2002/12/31 16:08:07 sebastian Exp $ */
+/* $Id: php_xml.h,v 1.21 2003/01/18 19:28:06 iliaa Exp $ */
 
 #ifndef PHP_XML_H
 #define PHP_XML_H
@@ -97,10 +97,6 @@ enum php_xml_option {
     PHP_XML_OPTION_SKIP_TAGSTART,
     PHP_XML_OPTION_SKIP_WHITE
 };
-
-#define RETURN_OUT_OF_MEMORY \
-	php_error(E_WARNING, "Out of memory");\
-	RETURN_FALSE
 
 /* for xml_parse_into_struct */
 	

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.346 2003/01/16 07:21:49 sas Exp $ */
+/* $Id: session.c,v 1.347 2003/01/18 19:28:07 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1225,10 +1225,7 @@ PHP_FUNCTION(session_get_cookie_params)
 		WRONG_PARAM_COUNT;
 	}
 
-	if (array_init(return_value) == FAILURE) {
-		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Cannot initialize return value from session_get_cookie_parameters");
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 
 	add_assoc_long(return_value, "lifetime", PS(cookie_lifetime));
 	add_assoc_string(return_value, "path", PS(cookie_path), 1);

@@ -29,13 +29,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache.c,v 1.10 1999/05/21 10:05:42 sas Exp $ */
+/* $Id: apache.c,v 1.11 1999/05/22 09:24:21 zeev Exp $ */
 #include "php.h"
 #include "ext/standard/head.h"
 #include "php_globals.h"
 #include "php_ini.h"
 #include "SAPI.h"
-#include "mod_php3.h"
+#include "mod_php4.h"
 #include "ext/standard/info.h"
 
 #include <stdlib.h>

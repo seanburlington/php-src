@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php3.h,v 1.7 1999/04/10 17:39:08 zeev Exp $ */
+/* $Id: mod_php4.h,v 1.1 1999/05/22 09:24:19 zeev Exp $ */
 
 #ifndef _MOD_PHP3_H
 #define _MOD_PHP3_H

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.55 2000/01/01 01:31:27 sas Exp $ */
+/* $Id: php.h,v 1.56 2000/01/15 13:02:54 thies Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -320,6 +320,7 @@ int mergesort(void *base, size_t nmemb, register size_t size, int (*cmp) (const 
 extern PHPAPI int _php_error_log(int opt_err,char *message,char *opt,char *headers);
 
 PHPAPI void php_register_post_request_startup(void (*func)(void *), void *userdata);
+PHPAPI void php_register_pre_request_shutdown(void (*func)(void *), void *userdata);
 
 PHPAPI int cfg_get_long(char *varname, long *result);
 PHPAPI int cfg_get_double(char *varname, double *result);

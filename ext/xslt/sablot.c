@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.41 2002/04/18 14:05:27 sander Exp $ */
+/* $Id: sablot.c,v 1.42 2002/04/19 07:54:51 yohgaki Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1306,7 +1306,7 @@ struct _error_fields {
 	char *line;
 };
 
-static int
+static void
 _error_parse (char **fields, struct _error_fields *xse)
 {
 	char *val;

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.42 2003/12/04 22:53:16 moriyoshi Exp $
+dnl $Id: config.m4,v 1.43 2003/12/07 01:58:54 helly Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -201,6 +201,7 @@ dnl
 
 PHP_ARG_ENABLE(mbstring, whether to enable multibyte string support,
 [  --enable-mbstring       Enable multibyte string support])
+mbstring_shared=$ext_shared
 
 PHP_ARG_ENABLE([mbregex], [whether to enable multibyte regex support],
 [  --disable-mbregex         MBSTRING: Disable multibyte regex support], yes, no)
@@ -220,5 +221,6 @@ if test "$PHP_MBSTRING" != "no"; then
   
   dnl libmbfl is required
   PHP_MBSTRING_SETUP_LIBMBFL
+  ext_shared=$mbstring_shared
   PHP_MBSTRING_EXTENSION
 fi

@@ -17,7 +17,7 @@
 // | Authors: Andrei Zmievski <andrei@ispi.net>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: Getopt.php,v 1.3.2.1 2001/10/09 22:53:59 ssb Exp $
+// $Id: Getopt.php,v 1.3.2.2 2001/11/13 01:26:40 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -75,7 +75,7 @@ class Console_Getopt {
             sort($long_options);
 
         reset($args);
-        while (list(, $arg) = each($args)) {
+        while (list($i, $arg) = each($args)) {
 
             /* The special element '--' means explicit end of options. Treat the
                rest of the arguments as non-options and end the loop. */
@@ -84,9 +84,9 @@ class Console_Getopt {
                 break;
             }
 
-            if ($arg{0} != '-' || ($arg{1} == '-' && !$long_options)) {
+            if ($arg{0} != '-' || (strlen($arg) > 1 && $arg{1} == '-' && !$long_options)) {
                 $non_opts[] = $arg;
-            } else if ($arg{1} == '-') {
+            } else if (strlen($arg) > 1 && $arg{1} == '-') {
                 $error = Console_Getopt::_parseLongOption(substr($arg, 2), $long_options, $opts, $args);
                 if (PEAR::isError($error))
                     return $error;
@@ -147,7 +147,7 @@ class Console_Getopt {
      */
     function _parseLongOption($arg, $long_options, &$opts, &$args)
     {
-        list($opt, $opt_arg) = explode('=', $arg);
+        @list($opt, $opt_arg) = explode('=', $arg);
         $opt_len = strlen($opt);
 
         for ($i = 0; $i < count($long_options); $i++) {

@@ -2,7 +2,7 @@
 || PEAR Coding Standards                                                 ||
 ===========================================================================
 
-$Id: CODING_STANDARDS,v 1.9.2.2 2001/10/09 22:53:58 ssb Exp $
+$Id: CODING_STANDARDS,v 1.9.2.3 2001/11/13 01:26:39 ssb Exp $
 
 This document is no longer maintained, see
-http://php.net/manual/en/pear.standards.php instead.
+http://pear.php.net/manual/standards.php instead.

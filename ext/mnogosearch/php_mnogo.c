@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.84 2003/11/12 07:40:16 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.85 2003/12/08 08:12:30 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -1922,7 +1922,11 @@ DLEXPORT PHP_FUNCTION(udm_hash32)
 	str = Z_STRVAL_PP(yystr);
 
 	hash32=UdmHash32((str),strlen(str));
+#if UDM_VERSION_ID >= 30215
+	snprintf(buf,sizeof(buf)-1,"%i",hash32);
+#else
 	snprintf(buf,sizeof(buf)-1,"%u",hash32);
+#endif
 	
 	RETURN_STRING(buf,1);
 }

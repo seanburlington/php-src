@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.56 2003/06/22 17:19:45 helly Exp $ 
+   $Id: sqlite.c,v 1.57 2003/06/22 19:00:44 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -196,7 +196,7 @@ function_entry sqlite_functions[] = {
 
 function_entry sqlite_funcs_db[] = {
 	PHP_ME_MAPPING(sqlite_db, sqlite_open, NULL)
-	PHP_ME_MAPPING(close, sqlite_close, NULL)
+/*	PHP_ME_MAPPING(close, sqlite_close, NULL)*/
 	PHP_ME_MAPPING(query, sqlite_query, NULL)
 	PHP_ME_MAPPING(array_query, sqlite_array_query, NULL)
 	PHP_ME_MAPPING(unbuffered_query, sqlite_unbuffered_query, NULL)
@@ -933,7 +933,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.56 2003/06/22 17:19:45 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.57 2003/06/22 19:00:44 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: main.h,v 1.12 1999/12/05 14:16:35 rasmus Exp $ */
+/* $Id: main.h,v 1.13 1999/12/07 20:49:01 rubys Exp $ */
 
 
 #ifndef _MAIN_H
@@ -35,6 +35,10 @@ PHPAPI int php_module_startup(sapi_module_struct *sf);
 PHPAPI void php_module_shutdown(void);
 PHPAPI void php_module_shutdown_for_exec(void);
 PHPAPI int php_module_shutdown_wrapper(sapi_module_struct *sapi_globals);
+
+PHPAPI int php_startup_extensions(zend_module_entry **ptr, int count);
+PHPAPI int php_global_startup_extensions(zend_module_entry **ptr, int count);
+PHPAPI int php_global_shutdown_extensions(zend_module_entry **ptr, int count);
 
 PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_DC);
 

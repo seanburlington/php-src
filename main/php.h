@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.49 1999/12/04 23:03:01 zeev Exp $ */
+/* $Id: php.h,v 1.50 1999/12/07 20:49:01 rubys Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -312,9 +312,9 @@ extern void html_putc(char c);
 #define phpin zendin
 
 /* functions */
-int module_startup_modules(void);
-int module_global_startup_modules(void);
-int module_global_shutdown_modules(void);
+int php_startup_internal_extensions(void);
+int php_global_startup_internal_extensions(void);
+int php_global_shutdown_internal_extensions(void);
 
 int mergesort(void *base, size_t nmemb, register size_t size, int (*cmp) (const void *, const void *));
 

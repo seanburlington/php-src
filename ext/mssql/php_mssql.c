@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.132 2004/03/29 18:32:27 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.133 2004/03/30 17:54:10 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -2105,8 +2105,6 @@ PHP_FUNCTION(mssql_execute)
 				dbcanquery(mssql_ptr->link);
 				retval_results = dbresults(mssql_ptr->link);
 			} while (retval_results == SUCCEED);
-
-			_mssql_get_sp_result(mssql_ptr, statement TSRMLS_CC);
 		}
 		else {
 			/* Skip results not returning any columns */
@@ -2129,7 +2127,7 @@ PHP_FUNCTION(mssql_execute)
 			}
 		}
 	}
-	else if (retval_results == NO_MORE_RESULTS || retval_results == NO_MORE_RPC_RESULTS) {
+	if (retval_results == NO_MORE_RESULTS || retval_results == NO_MORE_RPC_RESULTS) {
 		_mssql_get_sp_result(mssql_ptr, statement TSRMLS_CC);
 	}
 	

@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.137 2003/10/10 16:55:38 cox Exp $
+// $Id: Installer.php,v 1.138 2003/10/10 17:13:37 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -1154,6 +1154,11 @@ class PEAR_Installer extends PEAR_Common
                 $this->log(1, "\nBuild process completed successfully");
                 foreach ($built as $ext) {
                     $bn = basename($ext['file']);
+                    list($_ext_name, ) = explode('.', $bn);
+                    if (extension_loaded($_ext_name)) {
+                        $this->raiseError("Extension '$_ext_name' already loaded. Please unload it ".
+                                          "in your php.ini file prior to install or upgrade it.");
+                    }
                     $dest = $this->config->get('ext_dir') . DIRECTORY_SEPARATOR . $bn;
                     $this->log(1, "Installing '$bn' at ext_dir ($dest)");
                     $this->log(3, "+ cp $ext[file] ext_dir ($dest)");

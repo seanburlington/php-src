@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.114 2000/09/30 16:12:54 andi Exp $ */
+/* $Id: info.c,v 1.115 2000/10/11 11:40:29 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -630,21 +630,30 @@ PHP_FUNCTION(phpcredits)
 /* }}} */
 
 
+/* {{{ proto string php_logo_guid(void)
+   Return the special ID used to request the PHP logo in phpinfo screens*/
 PHP_FUNCTION(php_logo_guid)
 {
 	RETURN_STRINGL(PHP_LOGO_GUID, sizeof(PHP_LOGO_GUID)-1, 1);
 }
+/* }}} */
 
+/* {{{ proto string php_egg_logo_id(void)
+   Return the special ID used to request the PHP logo in phpinfo screens*/
 PHP_FUNCTION(php_egg_logo_guid)
 {
 	RETURN_STRINGL(PHP_EGG_LOGO_GUID, sizeof(PHP_EGG_LOGO_GUID)-1, 1);
 }
+/* }}} */
 
 
+/* {{{ proto string zend_logo_id(void)
+   Return the special ID used to request the Zend logo in phpinfo screens*/
 PHP_FUNCTION(zend_logo_guid)
 {
 	RETURN_STRINGL(ZEND_LOGO_GUID, sizeof(ZEND_LOGO_GUID)-1, 1);
 }
+/* }}} */
 
 /* {{{ proto string php_sapi_name(void)
    Return the current SAPI module name */

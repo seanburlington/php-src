@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.16 2003/04/09 07:33:19 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.17 2003/04/09 20:36:44 helly Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -1798,7 +1798,7 @@ PHP_FUNCTION(domxml_attr_value)
 	DOMXML_NO_ARGS();
 
 	/* RETURN_STRING((char *) xmlNodeGetContent((xmlNodePtr) attrp), 1); */
-	if (content = xmlNodeGetContent((xmlNodePtr) attrp)) {
+	if ((content = xmlNodeGetContent((xmlNodePtr) attrp)) != NULL) {
 		RETVAL_STRING(content,1);
 	} else {
 		RETURN_EMPTY_STRING();
@@ -1879,7 +1879,7 @@ PHP_FUNCTION(domxml_pi_data)
 	DOMXML_NO_ARGS();
 
 	/* RETURN_STRING(xmlNodeGetContent(nodep), 1); */
-	if (content = xmlNodeGetContent(nodep)) {
+	if ((content = xmlNodeGetContent(nodep)) != NULL) {
 		RETVAL_STRING(content,1);
 	} else {
 		RETURN_EMPTY_STRING();

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_gd.h,v 1.3 1999/12/17 21:50:02 zeev Exp $ */
+/* $Id: php_gd.h,v 1.4 2000/02/25 06:43:51 jah Exp $ */
 
 #ifndef _PHP_GD_H
 #define _PHP_GD_H
@@ -48,6 +48,10 @@
 #if HAVE_LIBGD
 
 #include <gd.h>
+
+#if HAVE_LIBT1
+#include "gdt1.h"
+#endif
 
 extern zend_module_entry gd_module_entry;
 #define phpext_gd_ptr &gd_module_entry

@@ -17,7 +17,27 @@
    +----------------------------------------------------------------------+
  */
 
-/* 	$Id: gdt1.h,v 1.3 2000/02/19 23:21:29 zeev Exp $	 */
+/* 	$Id: gdt1.h,v 1.4 2000/02/25 06:43:51 jah Exp $	 */
+
+#if HAVE_LIBT1
+
+#include <t1lib.h>
+
+PHP_FUNCTION(imagepsloadfont);
+/*
+PHP_FUNCTION(imagepscopyfont);
+*/
+PHP_FUNCTION(imagepsfreefont);
+PHP_FUNCTION(imagepsencodefont);
+PHP_FUNCTION(imagepsextendfont);
+PHP_FUNCTION(imagepsslantfont);
+PHP_FUNCTION(imagepstext);
+PHP_FUNCTION(imagepsbbox);
+
+extern void php_free_ps_font(int *);
+extern void php_free_ps_enc(char **);
+
+#endif
 
 /*
  * Local variables:

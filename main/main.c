@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.175 2000/01/16 11:12:44 thies Exp $ */
+/* $Id: main.c,v 1.176 2000/01/16 12:34:18 thies Exp $ */
 
 
 #include <stdio.h>
@@ -716,6 +716,8 @@ int php_request_startup(CLS_D ELS_DC PLS_DC SLS_DC)
 	global_lock();
 	
 	php_output_startup();
+
+	PG(post_request_startup_ok) = PG(pre_request_shutdown_ok) = 0;
 
 #if APACHE
 	/*

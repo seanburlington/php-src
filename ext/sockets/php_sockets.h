@@ -19,7 +19,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.4 2000/08/20 10:31:27 sterling Exp $ */
+/* $Id: php_sockets.h,v 1.5 2000/09/07 12:32:47 thies Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -87,7 +87,7 @@ typedef struct {
 
 #ifdef ZTS
 #define SOCKETSG(v) (sockets_globals->v)
-#define SOCKETSLS_FETCH() php_sockets_globals *sockets_globals = ts_resource(sockets_global_id)
+#define SOCKETSLS_FETCH() php_sockets_globals *sockets_globals = ts_resource(sockets_globals_id)
 #else
 #define SOCKETSG(v) (sockets_globals.v)
 #define SOCKETSLS_FETCH()

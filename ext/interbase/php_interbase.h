@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.7 2000/04/30 05:46:04 jah Exp $ */
+/* $Id: php_interbase.h,v 1.8 2000/05/09 20:30:23 jah Exp $ */
 
 #ifndef _PHP_IBASE_H
 #define _PHP_IBASE_H
@@ -121,6 +121,7 @@ typedef struct {
 	XSQLDA *in_sqlda, *out_sqlda;
 	ibase_array *in_array, *out_array;
 	int in_array_cnt, out_array_cnt;
+	int dialect;
 } ibase_query;
 
 typedef struct {

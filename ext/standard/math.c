@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.96 2002/11/11 16:34:39 jason Exp $ */
+/* $Id: math.c,v 1.97 2002/11/12 11:46:21 helly Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -697,7 +697,7 @@ _php_math_basetozval(zval *arg, int base, zval *ret) {
 	int i;
 	int mode = 0;
 	char c, *s;
-	unsigned long cutoff;
+	long cutoff;
 	int cutlim;
 
 	if (Z_TYPE_P(arg) != IS_STRING || base < 2 || base > 36) {

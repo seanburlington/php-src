@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_standard.h,v 1.2 1999/04/22 00:25:57 ssb Exp $ */
+/* $Id: php3_standard.h,v 1.3 1999/04/22 02:48:25 ssb Exp $ */
 
 #include "basic_functions.h"
 #include "phpmath.h"
@@ -62,6 +62,9 @@
 #include "type.h"
 #include "dl.h"
 #include "php3_crypt.h"
+#include "head.h"
+#include "post.h"
+#include "mime.h"
 
 #define standard_module_ptr basic_functions_module_ptr
 

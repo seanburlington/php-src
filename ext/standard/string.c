@@ -30,14 +30,14 @@
  */
 
 
-/* $Id: string.c,v 1.5 1999/04/21 19:01:38 zeev Exp $ */
+/* $Id: string.c,v 1.6 1999/04/22 02:48:25 ssb Exp $ */
 #ifdef THREAD_SAFE
 #include "tls.h"
 #endif
 #include <stdio.h>
 #include "php.h"
 #include "reg.h"
-#include "functions/post.h"
+#include "post.h"
 #include "php3_string.h"
 #if HAVE_SETLOCALE
 #include <locale.h>

@@ -27,7 +27,7 @@
    |          Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
 */
-/* $Id: fsock.c,v 1.2 1999/04/18 15:58:26 zeev Exp $ */
+/* $Id: fsock.c,v 1.3 1999/04/22 02:48:25 ssb Exp $ */
 #ifdef THREAD_SAFE
 #include "tls.h"
 #endif
@@ -60,7 +60,7 @@
 
 #include "base64.h"
 #include "file.h"
-#include "functions/post.h"
+#include "post.h"
 #include "url.h"
 #include "fsock.h"
 

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.58 2004/06/29 21:51:53 wez Exp $ */
+/* $Id: streams.c,v 1.59 2004/07/10 10:54:09 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -592,7 +592,8 @@ PHPAPI size_t _php_stream_read(php_stream *stream, char *buf, size_t size TSRMLS
 		}
 
 		/* just break anyway, to avoid greedy read */
-		break;
+		if (stream->wrapper != &php_plain_files_wrapper)
+			break;
 	}
 
 	if (didread > 0) {

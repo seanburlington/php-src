@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.203.2.7 2005/03/08 21:45:38 sniper Exp $ */
+/* $Id: php.h,v 1.203.2.8 2005/03/10 11:32:36 hyanantha Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -205,13 +205,6 @@ char *strerror(int);
 # ifdef PHP_WIN32
 #include "win32/pwd.h"
 #include "win32/param.h"
-#elif defined(NETWARE)
-#ifdef NEW_LIBC
-#include <sys/param.h>
-#else
-#include "NetWare/param.h"
-#endif
-#include "NetWare/pwd.h"
 # else
 #include <pwd.h>
 #include <sys/param.h>

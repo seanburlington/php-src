@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.173 2000/12/15 01:01:13 ssb Exp $ */
+/* $Id: string.c,v 1.174 2000/12/17 02:09:07 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -263,6 +263,10 @@ PHP_FUNCTION(wordwrap)
 	}
 
 	convert_to_string_ex(ptext);
+	
+	if (Z_STRVAL_PP(ptext) == 0)
+		RETVAL_FALSE;
+	
 	text = (*ptext)->value.str.val;
 
 	if (ZEND_NUM_ARGS() > 1) {

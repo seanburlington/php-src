@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.48.2.9 2002/07/05 15:02:40 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.48.2.10 2002/07/15 18:02:09 edink Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -1005,18 +1005,21 @@ php_mbstr_encoding_handler(zval *arg, char *res, char *separator TSRMLS_DC)
 	mbfl_string_init_set(&string, MBSTRG(current_language), MBSTRG(current_internal_encoding));
 	mbfl_string_init_set(&resvar, MBSTRG(current_language), MBSTRG(current_internal_encoding));
 	mbfl_string_init_set(&resval, MBSTRG(current_language), MBSTRG(current_internal_encoding));
+
+	if (!res || *res == '\0') {
+		return;
+	}
 	
 	/* count the variables contained in the query */
-	num = 0;
+	num = 1;
 	var = res;
-	n = strlen(res);
-	while(n > 0) {
-		if (*var == '=') {
-			num++;
-		}
-		var++;
-		n--;
+	n = strlen(separator);
+
+	while (var=strstr(var, separator)) {
+		num++;
+		var+=n;
 	}
+
 	num *= 2;
 	val_list = (char **)ecalloc(num, sizeof(char *));
 	len_list = (int *)ecalloc(num, sizeof(int));

@@ -17,13 +17,15 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.8 2001/06/05 13:12:04 rasmus Exp $ */
+/* $Id: credits.c,v 1.9 2001/06/06 13:05:51 rasmus Exp $ */
 
 #include "php.h"
 #include "info.h"
 
 #define CREDIT_LINE(module, authors) php_info_print_table_row(2, module, authors)
 
+/* {{{ php_print_credits
+ */
 PHPAPI void php_print_credits(int flag)
 {
 	if (flag & PHP_CREDITS_FULLPAGE) {
@@ -109,10 +111,13 @@ PHPAPI void php_print_credits(int flag)
 		PUTS("</body></html>\n");
 	}
 }
+/* }}} */
+
 /*
  * Local variables:
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

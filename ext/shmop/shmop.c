@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky (iliaa@home.com)                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.12 2001/06/05 13:12:04 rasmus Exp $ */
+/* $Id: shmop.c,v 1.13 2001/06/06 13:05:50 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -348,5 +348,6 @@ PHP_FUNCTION(shmop_delete)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

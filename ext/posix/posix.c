@@ -1,33 +1,22 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP HTML Embedded Scripting Language Version 3.0                     |
+   | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-1999 PHP Development Team (See Credits file)      |
+   | Copyright (c) 1997-2001 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This program is free software; you can redistribute it and/or modify |
-   | it under the terms of one of the following licenses:                 |
-   |                                                                      |
-   |  A) the GNU General Public License as published by the Free Software |
-   |     Foundation; either version 2 of the License, or (at your option) |
-   |     any later version.                                               |
-   |                                                                      |
-   |  B) the PHP License as published by the PHP Development Team and     |
-   |     included in the distribution in the file: LICENSE                |
-   |                                                                      |
-   | This program is distributed in the hope that it will be useful,      |
-   | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
-   | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
-   | GNU General Public License for more details.                         |
-   |                                                                      |
-   | You should have received a copy of both licenses referred to here.   |
-   | If you did not, or have any questions about PHP licensing, please    |
-   | contact core@php.net.                                                |
+   | This source file is subject to version 2.02 of the PHP license,      |
+   | that is bundled with this package in the file LICENSE, and is        |
+   | available at through the world-wide-web at                           |
+   | http://www.php.net/license/2_02.txt.                                 |
+   | If you did not receive a copy of the PHP license and are unable to   |
+   | obtain it through the world-wide-web, please send a note to          |
+   | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Kristian Koehntopp <kris@koehntopp.de>                      |
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.30 2001/06/05 13:12:03 rasmus Exp $ */
+/* $Id: posix.c,v 1.31 2001/06/06 13:05:48 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -149,7 +138,7 @@ ZEND_GET_MODULE(posix)
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.30 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.31 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -968,5 +957,6 @@ PHP_FUNCTION(posix_getrlimit)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

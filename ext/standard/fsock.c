@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.69 2001/06/05 13:12:04 rasmus Exp $ */
+/* $Id: fsock.c,v 1.70 2001/06/06 13:05:51 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -737,6 +737,7 @@ PHPAPI size_t php_sock_fread(char *ptr, size_t size, int socket)
 }
 
 /* }}} */
+
 /* {{{ module start/shutdown functions */
 
 	/* {{{ php_msock_destroy */
@@ -761,5 +762,6 @@ PHP_RSHUTDOWN_FUNCTION(fsock)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

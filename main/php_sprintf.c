@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sprintf.c,v 1.8 2001/06/05 13:12:07 rasmus Exp $ */
+/* $Id: php_sprintf.c,v 1.9 2001/06/06 13:05:53 rasmus Exp $ */
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -46,5 +46,6 @@ php_sprintf (char*s, const char* format, ...)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.26 2001/06/05 13:12:07 rasmus Exp $ */
+/* $Id: php_variables.c,v 1.27 2001/06/06 13:05:53 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -333,5 +333,6 @@ void php_import_environment_variables(zval *array_ptr ELS_DC PLS_DC)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

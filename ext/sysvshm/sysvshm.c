@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.39 2001/06/05 13:12:05 rasmus Exp $ */
+/* $Id: sysvshm.c,v 1.40 2001/06/06 13:05:52 rasmus Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -422,5 +422,6 @@ int php_remove_shm_data(sysvshm_chunk_head *ptr, long shm_varpos) {
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

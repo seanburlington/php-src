@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.89 2001/06/05 13:12:05 rasmus Exp $ */
+/* $Id: var.c,v 1.90 2001/06/06 13:05:51 rasmus Exp $ */
 
 
 /* {{{ includes 
@@ -671,5 +671,6 @@ PHP_FUNCTION(unserialize)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

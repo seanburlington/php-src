@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.24 2001/02/26 06:07:35 andi Exp $ */
+/* $Id: sapi_apache.c,v 1.25 2001/06/06 13:05:54 rasmus Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -58,7 +58,8 @@
 #include "php_version.h"
 /*#include "mod_php4.h"*/
 
-
+/* {{{ apache_php_module_main
+ */
 int apache_php_module_main(request_rec *r, int display_source_mode CLS_DC ELS_DC PLS_DC SLS_DC)
 {
 	zend_file_handle file_handle;
@@ -96,10 +97,13 @@ int apache_php_module_main(request_rec *r, int display_source_mode CLS_DC ELS_DC
 	php_header();			/* Make sure headers have been sent */
 	return (OK);
 }
+/* }}} */
 
 /*
  * Local variables:
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

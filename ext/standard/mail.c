@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
+   | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.34 2001/06/05 13:12:04 rasmus Exp $ */
+/* $Id: mail.c,v 1.35 2001/06/06 13:05:51 rasmus Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -215,5 +215,6 @@ PHP_MINFO_FUNCTION(mail) {}
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

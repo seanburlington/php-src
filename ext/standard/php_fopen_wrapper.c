@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.3 2001/06/05 13:12:04 rasmus Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.4 2001/06/06 13:05:51 rasmus Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,7 +28,8 @@
 #include "php_fopen_wrappers.h"
 
 
-
+/* {{{ php_fopen_url_wrap_php
+ */
 FILE *php_fopen_url_wrap_php(char *path, char *mode, int options, int *issock, int *socketd, char **opened_path)
 {
 	const char *res = path + 6;
@@ -45,11 +46,13 @@ FILE *php_fopen_url_wrap_php(char *path, char *mode, int options, int *issock, i
 	
 	return NULL;
 }
+/* }}} */
 
 /*
  * Local variables:
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

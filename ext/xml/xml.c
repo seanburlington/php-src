@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.78 2001/06/05 13:12:05 rasmus Exp $ */
+/* $Id: xml.c,v 1.79 2001/06/06 13:05:52 rasmus Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -1652,5 +1652,6 @@ PHP_FUNCTION(utf8_decode)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

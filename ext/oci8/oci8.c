@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.128 2001/06/06 00:08:21 asautins Exp $ */
+/* $Id: oci8.c,v 1.129 2001/06/06 13:05:47 rasmus Exp $ */
 
 /* TODO list:
  *
@@ -581,7 +581,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.128 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.129 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -4239,6 +4239,7 @@ PHP_FUNCTION(ocistatementtype)
 			RETVAL_STRING("UNKNOWN",1);
 	}
 }
+/* }}} */
 
 /* {{{ proto int ocirowcount(int stmt)
    Return the row count of an OCI statement */
@@ -4290,8 +4291,7 @@ static oci_collection *oci_get_coll(int ind)
         return (oci_collection *) NULL;
     }
 }
-
-
+/* }}} */
 
 /* {{{ proto string ocifreecollection(object lob)
    Deletes collection object*/
@@ -4922,5 +4922,6 @@ PHP_FUNCTION(ocinewcollection)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */
-

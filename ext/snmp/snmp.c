@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.41 2001/06/05 13:12:04 rasmus Exp $ */
+/* $Id: snmp.c,v 1.42 2001/06/06 13:05:50 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -410,5 +410,6 @@ PHP_FUNCTION(snmpset) {
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filepro.c,v 1.33 2001/06/05 13:12:00 rasmus Exp $ */
+/* $Id: filepro.c,v 1.34 2001/06/06 13:05:44 rasmus Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com
@@ -572,5 +572,6 @@ PHP_FUNCTION(filepro_retrieve)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

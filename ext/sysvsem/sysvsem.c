@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.30 2001/06/05 13:12:05 rasmus Exp $ */
+/* $Id: sysvsem.c,v 1.31 2001/06/06 13:05:52 rasmus Exp $ */
 
 /* Latest update build anc tested on Linux 2.2.14
  *
@@ -433,5 +433,6 @@ PHP_FUNCTION(sem_remove)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim: sw=4 ts=4 tw=78 fdm=marker
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

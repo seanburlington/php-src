@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lcg.c,v 1.17 2001/05/06 17:55:10 sniper Exp $ */
+/* $Id: lcg.c,v 1.18 2001/06/06 13:05:51 rasmus Exp $ */
 
 #include "php.h"
 #include "php_lcg.h"
@@ -97,3 +97,12 @@ PHP_FUNCTION(lcg_value)
 	RETURN_DOUBLE(php_combined_lcg());
 }
 /* }}} */
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
+ */

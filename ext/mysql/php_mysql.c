@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.88 2001/06/05 16:06:31 jason Exp $ */
+/* $Id: php_mysql.c,v 1.89 2001/06/06 13:05:47 rasmus Exp $ */
 
 
 /* TODO:
@@ -2061,4 +2061,6 @@ PHP_FUNCTION(mysql_free_result)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

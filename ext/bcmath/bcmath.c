@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.28 2001/05/24 10:06:55 ssb Exp $ */
+/* $Id: bcmath.c,v 1.29 2001/06/06 13:05:41 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -499,4 +499,6 @@ PHP_FUNCTION(bcscale)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.18 1999/04/18 15:58:26 zeev Exp $ */
+/* $Id: main.c,v 1.19 1999/04/18 20:59:54 zeev Exp $ */
 
 /* #define CRASH_DETECTION */
 
@@ -610,7 +610,7 @@ static void php_message_handler_for_zend(long message, void *data)
 #	if APACHE  /* log into the errorlog, since at this time we can't send messages to the browser */
 					char memory_leak_buf[512];
 
-					snprintf(memory_leak_buf,512,"Possible PHP4 memory leak detected (harmless):  %d bytes from %s:%d",t->size,t->filename,t->lineno);
+					snprintf(memory_leak_buf,512,"Possible PHP4 memory leak detected (harmless):  0x%0.8lX, %d bytes from %s:%d", (long) t, t->size, t->filename, t->lineno);
 #		if MODULE_MAGIC_NUMBER >= 19970831
 					aplog_error(NULL, 0, APLOG_ERR | APLOG_NOERRNO, GLOBAL(php3_rqst)->server, memory_leak_buf);
 #		else

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_gd.h,v 1.11 2000/06/10 08:47:56 andi Exp $ */
+/* $Id: php_gd.h,v 1.12 2000/06/25 01:44:15 jah Exp $ */
 
 #ifndef _PHP_GD_H
 #define _PHP_GD_H
@@ -118,6 +118,7 @@ PHP_FUNCTION(imagesx);
 PHP_FUNCTION(imagesy);
 PHP_FUNCTION(imagecreatefrompng);
 PHP_FUNCTION(imagepng);
+PHP_FUNCTION(imagecreatefromwbmp);
 PHP_FUNCTION(imagewbmp);
 void php_gdimagecharup(gdImagePtr, gdFontPtr, int, int, int, int);
 PHP_FUNCTION(imagedashedline);

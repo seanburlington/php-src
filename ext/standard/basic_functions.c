@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.575 2003/02/09 19:09:50 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.576 2003/02/09 20:43:05 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -681,6 +681,7 @@ function_entry basic_functions[] = {
 	PHP_FALIAS(socket_set_blocking, stream_set_blocking,					NULL)
 
 	PHP_FE(stream_get_meta_data,											NULL)
+	PHP_FE(stream_get_line,												NULL)
 	PHP_FE(stream_register_wrapper,											NULL)
 	PHP_FE(stream_get_wrappers,												NULL)
 	PHP_FE(get_headers,													NULL)

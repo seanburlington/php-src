@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.73 2003/01/03 08:02:36 pollita Exp $ */
+/* $Id: file.h,v 1.74 2003/02/09 20:43:05 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -60,6 +60,7 @@ PHP_FUNCTION(stream_select);
 PHP_FUNCTION(stream_set_timeout);
 PHP_FUNCTION(stream_set_write_buffer);
 PHP_FUNCTION(stream_get_wrappers);
+PHP_FUNCTION(stream_get_line);
 PHP_FUNCTION(get_meta_tags);
 PHP_FUNCTION(flock);
 PHP_FUNCTION(fd_set);

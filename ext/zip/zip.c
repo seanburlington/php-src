@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zip.c,v 1.15 2001/08/14 13:01:11 andrei Exp $ */
+/* $Id: zip.c,v 1.16 2001/08/24 01:23:14 sterling Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -316,6 +316,6 @@ PHP_FUNCTION(zip_entry_close)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: noet sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: noet sw=4 ts=4 tw=78
  */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.38 2001/08/05 16:21:31 sas Exp $ */
+/* $Id: swf.c,v 1.39 2001/08/24 01:22:17 sterling Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1248,6 +1248,6 @@ PHP_FUNCTION(swf_posround)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: noet sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: noet sw=4 ts=4 tw=78
  */

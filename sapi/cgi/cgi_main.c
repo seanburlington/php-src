@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.233 2003/06/10 20:03:45 imajes Exp $ */
+/* $Id: cgi_main.c,v 1.234 2003/06/29 20:09:36 shane Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -684,8 +684,6 @@ static void init_request_info(TSRMLS_D)
 				_sapi_cgibin_putenv("ORIG_SCRIPT_FILENAME",env_script_filename TSRMLS_CC);
 			}
 			if (!env_document_root) {
-				/* IIS version of DOCUMENT_ROOT, not avail in cgi, but is in fastcgi */
-				env_document_root = sapi_cgibin_getenv("APPL_PHYSICAL_PATH",0 TSRMLS_CC);
 				/* ini version of document root */
 				if (!env_document_root) {
 					env_document_root = PG(doc_root);
@@ -1477,6 +1475,11 @@ consult the installation file that came with this distribution, or visit \n\
 		/* request startup only after we've done all we can to
 		   get path_translated */
 		if (php_request_startup(TSRMLS_C)==FAILURE) {
+#if PHP_FASTCGI
+			if (fastcgi) {
+				FCGX_Finish_r(&request);
+			}
+#endif
 			php_module_shutdown(TSRMLS_C);
 			return FAILURE;
 		}
@@ -1504,6 +1507,14 @@ consult the installation file that came with this distribution, or visit \n\
 		if (retval == FAILURE && file_handle.handle.fp == NULL) {
 			SG(sapi_headers).http_response_code = 404;
 			PUTS("No input file specified.\n");
+#if PHP_FASTCGI
+			/* we want to serve more requests if this is fastcgi
+			   so cleanup and continue, request shutdown is
+			   handled later */
+			if (fastcgi) {
+				goto fastcgi_request_done;
+			}
+#endif
 			php_request_shutdown((void *) 0);
 			php_module_shutdown(TSRMLS_C);
 			return FAILURE;
@@ -1573,6 +1584,9 @@ consult the installation file that came with this distribution, or visit \n\
 #endif
 		}
 
+#if PHP_FASTCGI
+fastcgi_request_done:
+#endif
 		{
 			char *path_translated;
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.43 2003/06/28 07:46:03 sterling Exp $ */
+/* $Id: simplexml.c,v 1.44 2003/06/28 21:38:44 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,6 +26,7 @@
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "php_simplexml.h"
+#include "zend_execute_locks.h"
 
 zend_class_entry *sxe_class_entry;
 
@@ -105,8 +106,7 @@ sxe_property_read(zval *object, zval *member TSRMLS_DC)
 	xmlAttrPtr      attr;
 	int             counter = 0;
 
-	ALLOC_ZVAL(return_value);
-	return_value->refcount = 0;
+	MAKE_STD_ZVAL(return_value);
 	ZVAL_NULL(return_value);
 
 	name = Z_STRVAL_P(member);
@@ -146,7 +146,6 @@ sxe_property_read(zval *object, zval *member TSRMLS_DC)
 			if (match_ns(sxe, node, name)) {
 				MAKE_STD_ZVAL(value);
 				_node_as_zval(sxe, node->parent, value TSRMLS_CC);
-				value->refcount = 0;
 				APPEND_CUR_ELEMENT(counter, value);
 				goto next_iter;
 			}
@@ -156,8 +155,6 @@ sxe_property_read(zval *object, zval *member TSRMLS_DC)
 			APPEND_PREV_ELEMENT(counter, value);
 			MAKE_STD_ZVAL(value);
 			_node_as_zval(sxe, node, value TSRMLS_CC);
-			value->refcount = 0;
-
 			APPEND_CUR_ELEMENT(counter, value);
 		}
 
@@ -172,6 +169,9 @@ next_iter:
 		FREE_ZVAL(return_value);
 		return_value = value;
 	}
+
+	/* create temporary variable */
+	PZVAL_UNLOCK(return_value);
 
 	return return_value;
 }
@@ -207,7 +207,7 @@ sxe_property_write(zval *object, zval *member, zval *value TSRMLS_DC)
 	php_sxe_object *sxe;
 	char           *name;
 	xmlNodePtr      node;
-	xmlNodePtr      newnode;
+	xmlNodePtr      newnode = NULL;
 	xmlAttrPtr      attr;
 	int             counter = 0;
 	int             is_attr = 0;
@@ -1048,7 +1048,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.43 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.44 $");
 	php_info_print_table_end();
 
 }

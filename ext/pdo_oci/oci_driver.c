@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.7 2004/05/21 15:25:22 wez Exp $ */
+/* $Id: oci_driver.c,v 1.8 2004/05/21 15:29:09 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -218,7 +218,7 @@ static int oci_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pd
 	return 1;
 }
 
-static int oci_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRMLS_DC)
+static long oci_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRMLS_DC)
 {
 	pdo_oci_db_handle *H = (pdo_oci_db_handle *)dbh->driver_data;
 	OCIStmt		*stmt;

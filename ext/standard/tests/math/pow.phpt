@@ -3,7 +3,7 @@ Various pow() tests
 --POST--
 --GET--
 --FILE--
-<?php // $Id: pow.phpt,v 1.6 2001/11/13 13:12:46 rasmus Exp $
+<?php // $Id: pow.phpt,v 1.7 2001/12/16 13:04:02 derick Exp $
 
 define('LONG_MAX', is_int(5000000000)? 9223372036854775807 : 0x7FFFFFFF);
 define('LONG_MIN', -LONG_MAX - 1);
@@ -136,10 +136,10 @@ LONG_MAX*LONG_MAX ~== pow(LONG_MAX,2.0)
 FALSE ===@pow(LONG_MIN,2.0)
 TESTS;
 
- echo "On failure, please mail result to jeroen@php.net\n";
+ echo "On failure, please mail result to php-dev@lists.php.net\n";
  include('../../../../tests/quicktester.inc');
 
 --EXPECT--
 1,1,0,0
-On failure, please mail result to jeroen@php.net
+On failure, please mail result to php-dev@lists.php.net
 OK

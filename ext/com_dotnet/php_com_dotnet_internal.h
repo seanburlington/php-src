@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_com_dotnet_internal.h,v 1.1 2003/08/14 16:49:55 wez Exp $ */
+/* $Id: php_com_dotnet_internal.h,v 1.2 2003/10/13 01:29:39 wez Exp $ */
 
 #ifndef PHP_COM_DOTNET_INTERNAL_H
 #define PHP_COM_DOTNET_INTERNAL_H
@@ -24,7 +24,9 @@
 #define _WIN32_DCOM
 #define COBJMACROS
 #include <ocidl.h>
-#include "oleauto.h"
+#include <oleauto.h>
+#include <unknwn.h>
+#include <dispex.h>
 #include "win32/winutil.h"
 
 /* brain-death in winutil.h defines the macro to hide the useful function... */

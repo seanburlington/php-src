@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.4 2003/10/07 15:47:22 zeev Exp $ */
+/* $Id: com_handlers.c,v 1.5 2003/10/13 01:29:39 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -316,7 +316,9 @@ static union _zend_function *com_method_get(zval *object, char *name, int len TS
 						ITypeComp_Release(bindptr.lptcomp);
 						break;
 				}
-				ITypeInfo_Release(TI);
+				if (TI) {
+					ITypeInfo_Release(TI);
+				}
 			}
 			ITypeComp_Release(comp);
 			efree(olename);

@@ -1,12 +1,12 @@
 --TEST--
-Sybase-CT bug #27843: notices when query is a stored procedure
+Sybase-CT bug #27843 (notices when query is a stored procedure)
 --SKIPIF--
 <?php require('skipif.inc'); ?>
 --FILE--
 <?php
 /* This file is part of PHP test framework for ext/sybase_ct
  *
- * $Id: bug27843.phpt,v 1.1 2004/07/11 16:31:32 thekid Exp $ 
+ * $Id: bug27843.phpt,v 1.2 2005/02/06 11:58:18 thekid Exp $ 
  */
 
   require('test.inc');

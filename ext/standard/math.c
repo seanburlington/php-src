@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.44 2001/08/03 22:19:11 jeroen Exp $ */
+/* $Id: math.c,v 1.45 2001/08/03 23:27:23 jeroen Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -433,7 +433,7 @@ PHP_FUNCTION(pow)
 		} else if (Z_DVAL_PP(zbase) == 0.0) {
 			if (lexp < 0) {
 				php_error(E_WARNING,
-					"Division by zero: pow(0.0,<negative integer>)");
+					"Division by zero: pow(0.0,[negative integer])");
 				RETURN_FALSE;
 			} else {
 				RETURN_DOUBLE(0.0);
@@ -458,7 +458,7 @@ PHP_FUNCTION(pow)
 		case 0:
 			if (lexp < 0) {
 				php_error(E_WARNING,
-					"Division by zero: pow(0,<negative integer>)");
+					"Division by zero: pow(0,[negative integer])");
 				RETURN_FALSE;
 			} else {
 				RETURN_LONG(0);

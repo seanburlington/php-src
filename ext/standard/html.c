@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.88 2003/10/02 19:06:44 moriyoshi Exp $ */
+/* $Id: html.c,v 1.89 2003/10/02 19:07:59 moriyoshi Exp $ */
 
 /*
  * HTML entity resources:
@@ -926,7 +926,11 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 				if (p[1] == '#') {
 					int invalid_code = 0;
 
-					code = strtol(p + 2, &next, 10);
+					if (p[2] == 'x' || p[2] == 'X') {
+						code = strtol(p + 3, &next, 16);
+					} else {
+						code = strtol(p + 2, &next, 10);
+					}
 
 					if (next != NULL && *next == ';') {
 						switch (charset) {

@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.81 2002/10/19 16:50:07 iliaa Exp $ */
+/* $Id: network.c,v 1.82 2002/10/19 17:05:08 iliaa Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -47,6 +47,10 @@
 
 #ifndef _FCNTL_H
 #include <fcntl.h>
+#endif
+
+#ifdef HAVE_OPENSSL_EXT
+#include <openssl/err.h>
 #endif
 
 #ifdef HAVE_SYS_SELECT_H

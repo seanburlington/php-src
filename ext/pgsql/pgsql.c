@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.250 2002/11/29 17:18:01 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.251 2002/12/15 06:44:30 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -447,7 +447,7 @@ PHP_RINIT_FUNCTION(pgsql)
 PHP_RSHUTDOWN_FUNCTION(pgsql)
 {
 	/* clean up notice messages */
-	zend_hash_clean(&PGG(notices));
+	zend_hash_destroy(&PGG(notices));
 	/* clean up persistent connection */
 	zend_hash_apply(&EG(persistent_list), (apply_func_t) _rollback_transactions TSRMLS_CC);
 	return SUCCESS;

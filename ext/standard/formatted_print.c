@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.20 2000/06/05 19:47:44 andi Exp $ */
+/* $Id: formatted_print.c,v 1.21 2000/06/25 17:21:04 eschmid Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -553,7 +553,7 @@ php_formatted_print(int ht, int *len)
 	return result;
 }
 
-/* {{{ proto string sprintf(string format [, mixed arg1 [, ...]])
+/* {{{ proto string sprintf(string format [, mixed arg1 [, mixed ...]])
    Return a formatted string */
 PHP_FUNCTION(user_sprintf)
 {
@@ -568,7 +568,7 @@ PHP_FUNCTION(user_sprintf)
 }
 /* }}} */
 
-/* {{{ proto int printf(string format [, mixed arg1 [, ...]])
+/* {{{ proto int printf(string format [, mixed arg1 [, mixed ...]])
    Output a formatted string */
 PHP_FUNCTION(user_printf)
 {

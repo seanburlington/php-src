@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.375 2003/08/29 12:33:47 sas Exp $ */
+/* $Id: session.c,v 1.376 2003/09/21 11:53:12 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -76,6 +76,7 @@ function_entry session_functions[] = {
 	PHP_FE(session_set_cookie_params, NULL)
 	PHP_FE(session_get_cookie_params, NULL)
 	PHP_FE(session_write_close,       NULL)
+	PHP_FALIAS(session_commit, session_write_close, NULL)
 	{NULL, NULL, NULL} 
 };
 /* }}} */

@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.1 2002/12/16 22:26:49 fmk Exp $
+dnl $Id: config.m4,v 1.2 2002/12/30 08:55:21 derick Exp $
 dnl
 
 PHP_ARG_WITH(mssql,for MSSQL support via FreeTDS,
-[  --with-mssql[=DIR]     Include MSSQL-DB support.  DIR is the FreeTDS home
+[  --with-mssql[=DIR]      Include MSSQL-DB support.  DIR is the FreeTDS home
                           directory, defaults to /usr/local/freetds.])
 
 

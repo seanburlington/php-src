@@ -1,3 +1,33 @@
+2005-03-08  Jani Taskinen  <jani.taskinen@kolumbus.fi>
+
+    * main/main.c
+      main/php.h:
+      This makes more sense. (Someone might actually use php_error_docref0() :)
+
+2005-03-08  Johannes Schlüter  <schlueter@phpbar.de>
+
+    * (PHP_5_0)
+      NEWS:
+      - BFN
+
+2005-03-08  Jani Taskinen  <jani.taskinen@kolumbus.fi>
+
+    * main/php.h:
+      - This was not needed (said Marcus)
+
+2005-03-08  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/standard/html.c:
+      Improve the performance of htmlspecialchars_decode() by 20-30%.
+
+2005-03-08  Jani Taskinen  <jani.taskinen@kolumbus.fi>
+
+    * ext/standard/var_unserializer.c:
+      update
+
+    * NEWS:
+      reorder
+
 2005-03-07  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * NEWS:
@@ -1353,7 +1383,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1916 2005/03/08 01:41:47 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1917 2005/03/09 01:40:19 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -1834,7 +1864,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1916 2005/03/08 01:41:47 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1917 2005/03/09 01:40:19 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -3308,7 +3338,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1916 2005/03/08 01:41:47 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1917 2005/03/09 01:40:19 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

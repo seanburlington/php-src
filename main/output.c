@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.56 2001/05/23 16:52:45 andi Exp $ */
+/* $Id: output.c,v 1.57 2001/05/29 20:32:57 andrei Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -43,9 +43,10 @@ int output_globals_id;
 php_output_globals output_globals;
 #endif
 
-static php_default_output_func(const char *str, uint str_len)
+static int php_default_output_func(const char *str, uint str_len)
 {
 	fwrite(str, 1, str_len, stderr);
+	return str_len;
 }
 
 

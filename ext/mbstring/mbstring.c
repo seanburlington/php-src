@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.61 2002/04/12 16:17:15 helly Exp $ */
+/* $Id: mbstring.c,v 1.62 2002/04/14 08:18:55 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -1536,6 +1536,10 @@ PHP_FUNCTION(mb_output_handler)
  			mbfl_buffer_converter_delete(MBSTRG(outconv) TSRMLS_CC);
  			MBSTRG(outconv) = NULL;
   		}
+		if (encoding == mbfl_no_encoding_pass) {
+			RETVAL_STRING(arg_string, 1);
+			return;
+		}
  		/* if content-type is not yet set, set it and activate the converter */
  		if (SG(sapi_headers).send_default_content_type ) {
 			mimetype = SG(default_mimetype) ? SG(default_mimetype) : SAPI_DEFAULT_MIMETYPE;

@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.59 2004/01/08 08:17:30 andi Exp $ */
+/* $Id: crypt.c,v 1.60 2004/01/19 03:14:58 sniper Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -118,10 +118,6 @@ PHP_FUNCTION(crypt)
 	char salt[PHP_MAX_SALT_LEN+1];
 	char *str, *salt_in = NULL;
 	int str_len, salt_in_len;
-
-	if (!BG(rand_is_seeded)) {
-		php_srand(GENERATE_SEED() TSRMLS_CC);
-	} 
 
 	salt[0]=salt[PHP_MAX_SALT_LEN]='\0';
 	/* This will produce suitable results if people depend on DES-encryption

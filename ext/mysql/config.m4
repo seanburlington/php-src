@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.60 2003/12/07 15:39:56 helly Exp $
+dnl $Id: config.m4,v 1.61 2003/12/31 11:27:52 derick Exp $
 dnl
 
 AC_DEFUN(MYSQL_LIB_CHK, [
@@ -21,6 +21,7 @@ AC_DEFUN(PHP_MYSQL_SOCKET_SEARCH, [
     /var/mysql/mysql.sock \
     /usr/local/mysql/var/mysql.sock \
     /Private/tmp/mysql.sock \
+    /private/tmp/mysql.sock \
     /tmp/mysql.sock \
   ; do
     if test -r $i; then

@@ -24,7 +24,7 @@
 # +----------------------------------------------------------------------+
 
 #
-# $Id: Makefile.in,v 1.33 1999/05/28 03:54:15 rasmus Exp $
+# $Id: Makefile.in,v 1.34 1999/05/29 15:10:05 zeev Exp $
 #
 
 prefix = @prefix@
@@ -87,7 +87,7 @@ php: all-recursive $(OBJS) @REGEX_LIB@ @FHTTPD_LIB@ @TSRM_LIB@
 	$(CC) $(CFLAGS) -o $(BINNAME) $(LDFLAGS) $(OBJS) $(LIBS)
 
 # Apache modules
-libphp4.a libmodphp4.a: all-recursive $(OBJS)
+libphp4.a libmodphp4.a: all-recursive $(OBJS) @REGEX_LIB@
 	$(AR) $@.tmp $(OBJS)
 	$(srcdir)/scripts/armerge $@ $@.tmp ext/libphpext.a $(srcdir)/libzend/libzend.a @TSRM_LIB@
 	@rm -f $@.tmp

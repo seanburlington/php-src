@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.13 2001/09/26 15:12:20 sas Exp $ */
+/* $Id: php_sockets.h,v 1.14 2001/11/01 16:51:59 dbeu Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -76,6 +76,7 @@ PHP_FUNCTION(socket_writev);
 PHP_FUNCTION(socket_getopt);
 PHP_FUNCTION(socket_setopt);
 PHP_FUNCTION(socket_shutdown);
+PHP_FUNCTION(socket_last_error);
 
 typedef struct php_iovec {
 	struct iovec	*iov_array;
@@ -87,8 +88,9 @@ typedef int SOCKET;
 #endif
 
 typedef struct {
-	SOCKET	  bsd_socket;
+	SOCKET	bsd_socket;
 	int		type;
+	int		error;
 } php_socket;
 
 typedef struct {
@@ -104,6 +106,9 @@ typedef struct {
 typedef struct {
 	zend_bool	use_system_read;
 } php_sockets_globals;
+
+int php_read(int bsd_socket, void *buf, int maxlen);
+char *php_strerror(int error);
 
 
 #ifdef ZTS

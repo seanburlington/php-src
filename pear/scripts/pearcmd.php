@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearcmd.php,v 1.12 2004/06/06 15:52:41 cellog Exp $
+// $Id: pearcmd.php,v 1.13 2004/06/08 17:49:19 cellog Exp $
 
 ob_end_clean();
 /**
@@ -270,7 +270,7 @@ function cmdHelp($command)
             return "$progname $command [options] $help[0]\n$help[1]";
         }
     }
-    return "No such command";
+    return "Command '$command' is not valid, try 'pear help'";
 }
 
 // }}}

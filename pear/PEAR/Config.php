@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.45 2003/06/18 19:27:55 cox Exp $
+// $Id: Config.php,v 1.46 2003/06/18 23:19:04 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'System.php';
@@ -73,7 +73,7 @@ if (getenv('PHP_PEAR_INSTALL_DIR')) {
 if (getenv('PHP_PEAR_EXTENSION_DIR')) {
     define('PEAR_CONFIG_DEFAULT_EXT_DIR', getenv('PHP_PEAR_EXTENSION_DIR'));
 } else {
-    if (!ini_get('extension_dir')) {
+    if (ini_get('extension_dir')) {
         define('PEAR_CONFIG_DEFAULT_EXT_DIR', ini_get('extension_dir'));
     } elseif (defined('PEAR_EXTENSION_DIR') && @is_dir(PEAR_EXTENSION_DIR)) {
         define('PEAR_CONFIG_DEFAULT_EXT_DIR', PEAR_EXTENSION_DIR);

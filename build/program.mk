@@ -14,10 +14,10 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: program.mk,v 1.3 2000/08/20 05:36:07 sas Exp $ 
+# $Id: program.mk,v 1.4 2001/08/09 04:27:40 sas Exp $ 
 #
 
 PROGRAM_OBJECTS = $(PROGRAM_SOURCES:.c=.lo)
 
 $(PROGRAM_NAME): $(PROGRAM_DEPENDENCIES) $(PROGRAM_OBJECTS)
-	$(LINK) $(PROGRAM_LDFLAGS) $(PROGRAM_OBJECTS) $(PROGRAM_LDADD)
+	$(LINK_CLEAN) $(PROGRAM_LDFLAGS) $(PROGRAM_OBJECTS) $(PROGRAM_LDADD)

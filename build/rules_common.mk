@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules_common.mk,v 1.8 2001/05/18 14:40:02 thies Exp $ 
+# $Id: rules_common.mk,v 1.9 2001/08/09 04:27:40 sas Exp $ 
 #
 
 include $(top_builddir)/config_vars.mk
@@ -27,6 +27,7 @@ SHARED_COMPILE = $(SHARED_LIBTOOL) --mode=compile $(CC) $(COMMON_FLAGS) $(CFLAGS
 CXX_SHARED_COMPILE = $(SHARED_LIBTOOL) --mode=compile $(CXX) $(COMMON_FLAGS) $(CXXFLAGS_CLEAN) -prefer-pic $(EXTRA_CXXFLAGS) -c $< && touch $@
 
 LINK = $(LIBTOOL) --mode=link $(COMPILE) $(LDFLAGS) -o $@
+LINK_CLEAN = $(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@
 
 mkinstalldirs = $(top_srcdir)/build/shtool mkdir -p
 INSTALL = $(top_srcdir)/build/shtool install -c

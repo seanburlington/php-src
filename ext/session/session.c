@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.40 2004/06/23 16:29:16 sas Exp $ */
+/* $Id: session.c,v 1.336.2.41 2004/07/21 16:25:27 sesser Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -503,13 +503,16 @@ break_outer_loop:
 
 static void php_session_track_init(TSRMLS_D)
 {
+	zval *session_vars = NULL;
+	
 	/* Unconditionally destroy existing arrays -- possible dirty data */
 	zend_hash_del(&EG(symbol_table), "HTTP_SESSION_VARS", 
 			sizeof("HTTP_SESSION_VARS"));
 	zend_hash_del(&EG(symbol_table), "_SESSION", sizeof("_SESSION"));
 
-	MAKE_STD_ZVAL(PS(http_session_vars));
-	array_init(PS(http_session_vars));
+	MAKE_STD_ZVAL(session_vars);
+	array_init(session_vars);
+	PS(http_session_vars) = session_vars;
 
 	ZEND_SET_GLOBAL_VAR_WITH_LENGTH("HTTP_SESSION_VARS", sizeof("HTTP_SESSION_VARS"), PS(http_session_vars), 2, 1);
 	ZEND_SET_GLOBAL_VAR_WITH_LENGTH("_SESSION", sizeof("_SESSION"), PS(http_session_vars), 2, 1);

@@ -20,7 +20,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_snmp.h,v 1.20 2003/07/14 18:10:22 harrie Exp $ */
+/* $Id: php_snmp.h,v 1.21 2003/07/16 09:28:47 sniper Exp $ */
 
 #ifndef PHP_SNMP_H
 #define PHP_SNMP_H
@@ -59,6 +59,9 @@ PHP_FUNCTION(snmp3_set);
 
 PHP_FUNCTION(snmp_set_valueretrieval);
 PHP_FUNCTION(snmp_get_valueretrieval);
+
+PHP_FUNCTION(snmp_read_mib);
+
 
 ZEND_BEGIN_MODULE_GLOBALS(snmp)
       int valueretrieval;

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.83 2003/07/16 06:03:46 sniper Exp $ */
+/* $Id: snmp.c,v 1.84 2003/07/16 09:28:47 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -136,6 +136,8 @@ function_entry snmp_functions[] = {
 	PHP_FE(snmp3_set, NULL)
 	PHP_FE(snmp_set_valueretrieval, NULL)
 	PHP_FE(snmp_get_valueretrieval, NULL)
+
+	PHP_FE(snmp_read_mib, NULL)
 	{NULL,NULL,NULL}
 };
 /* }}} */
@@ -1053,6 +1055,31 @@ PHP_FUNCTION(snmp_set_valueretrieval)
 PHP_FUNCTION(snmp_get_valueretrieval)
 {
 	RETURN_LONG(SNMP_G(valueretrieval));
+}
+/* }}} */
+
+/* {{{ proto int snmp_read_mib(string filename)
+   Reads and parses a MIB file into the active MIB tree. */
+PHP_FUNCTION(snmp_read_mib)
+{
+	zval **filename;
+
+	if (ZEND_NUM_ARGS() != 1 ||
+		zend_get_parameters_ex(ZEND_NUM_ARGS(), &filename) == FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+
+	convert_to_string_ex(filename);
+
+	/* Prevent read_mib() from printing any errors. */
+	snmp_disable_stderrlog();
+	
+	if (!read_mib(Z_STRVAL_PP(filename))) {
+		char *error = strerror(errno);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error while reading MIB file '%s': %s", Z_STRVAL_PP(filename), error);
+		RETURN_FALSE;
+	}
+	RETURN_TRUE;
 }
 /* }}} */
 

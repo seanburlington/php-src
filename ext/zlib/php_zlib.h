@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.32.4.4 2003/02/11 02:26:37 moriyoshi Exp $ */
+/* $Id: php_zlib.h,v 1.32.4.5 2003/03/10 13:35:21 ddhill Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -31,8 +31,8 @@ ZEND_BEGIN_MODULE_GLOBALS(zlib)
 	uLong crc;
 	int ob_gzhandler_status;
 	int ob_gzip_coding;
-	int output_compression;
-	int output_compression_level;
+	long output_compression;
+	long output_compression_level;
 	char *output_handler;
 ZEND_END_MODULE_GLOBALS(zlib)
 

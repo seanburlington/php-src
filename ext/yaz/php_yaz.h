@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.h,v 1.13.4.1 2002/12/31 16:35:46 sebastian Exp $ */
+/* $Id: php_yaz.h,v 1.13.4.2 2003/03/10 13:35:21 ddhill Exp $ */
 
 #ifndef PHP_YAZ_H
 #define PHP_YAZ_H
@@ -55,7 +55,7 @@ PHP_FUNCTION(yaz_schema);
 
 ZEND_BEGIN_MODULE_GLOBALS(yaz)
     int assoc_seq;
-    int max_links;
+    long max_links;
     char *log_file;
 ZEND_END_MODULE_GLOBALS(yaz)
     

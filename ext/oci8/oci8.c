@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.173 2002/04/14 18:27:27 thies Exp $ */
+/* $Id: oci8.c,v 1.174 2002/08/13 05:00:11 rasmus Exp $ */
 
 /* TODO list:
  *
@@ -631,7 +631,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.173 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.174 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -5098,8 +5098,7 @@ PHP_FUNCTION(ocicollsize)
 /* }}} */
 
 /* {{{ proto string ocicollmax(object collection)
-   Return the max value of a collection.  For a 
-   varray this is the maximum length of the array */
+   Return the max value of a collection.  For a varray this is the maximum length of the array */
 
 PHP_FUNCTION(ocicollmax)
 {

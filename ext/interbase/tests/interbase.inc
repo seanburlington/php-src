@@ -1,6 +1,6 @@
 <?php
 
-/* $Id: interbase.inc,v 1.2 2003/04/25 15:43:28 sniper Exp $ */
+/* $Id: interbase.inc,v 1.3 2003/04/30 10:42:24 sniper Exp $ */
 /* used in tests */
 
 srand((double)microtime()*1000000);
@@ -8,7 +8,7 @@ srand((double)microtime()*1000000);
 $test_base = dirname(__FILE__)."/ibase_test.tmp";
 @unlink($test_base);
 
-$name = dirname(__FILE__).tempnam("","CREATEDB");
+$name = tempnam(dirname(__FILE__), "CREATEDB");
 $ftmp = fopen($name,"w");
 fwrite($ftmp, 
 "

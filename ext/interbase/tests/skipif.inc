@@ -1,6 +1,6 @@
 <?php
 
-/* $Id: skipif.inc,v 1.1 2003/04/25 15:43:28 sniper Exp $ */
+/* $Id: skipif.inc,v 1.2 2003/04/30 10:42:24 sniper Exp $ */
 /* used in tests */
 
 if (!extension_loaded("interbase")) print "skip"; 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.20 2000/03/30 22:56:33 andi Exp $ */
+/* $Id: iptc.c,v 1.21 2000/04/15 14:28:47 andi Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -198,7 +198,7 @@ PHP_FUNCTION(iptcembed)
     if (php_check_open_basedir((*jpeg_file)->value.str.val)) 
 		RETURN_FALSE;
 
-    if ((fp = PHP_FOPEN((*jpeg_file)->value.str.val,"rb")) == 0) {
+    if ((fp = V_FOPEN((*jpeg_file)->value.str.val,"rb")) == 0) {
         php_error(E_WARNING, "Unable to open %s", (*jpeg_file)->value.str.val);
         RETURN_FALSE;
     }

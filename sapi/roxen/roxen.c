@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.28 2000/04/12 22:59:46 neotron Exp $ */
+/* $Id: roxen.c,v 1.29 2000/04/15 14:28:47 andi Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -447,7 +447,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.28 2000/04/12 22:59:46 neotron Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.29 2000/04/15 14:28:47 andi Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -601,7 +601,7 @@ static int php_roxen_module_main(SLS_D)
   /* VERY BAD, but should work */
   if(len > 0) {
     dir[len] = '\0';
-    PHP_CHDIR(dir);
+    V_CHDIR(dir);
   }
   free(dir);
 #endif

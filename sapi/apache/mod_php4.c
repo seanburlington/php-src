@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.127 2001/12/11 15:31:53 sebastian Exp $ */
+/* $Id: mod_php4.c,v 1.127.2.1 2002/04/24 01:51:50 sniper Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -434,7 +434,7 @@ static void init_request_info(TSRMLS_D)
 		authorization = table_get(r->headers_in, "Authorization");
 	}
 	if (authorization
-/* 		&& !auth_type(r) */
+		&& !auth_type(r)
 		&& !strcasecmp(getword(r->pool, &authorization, ' '), "Basic")) {
 		tmp = uudecode(r->pool, authorization);
 		SG(request_info).auth_user = getword_nulls_nc(r->pool, &tmp, ':');

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.52 2002/05/03 13:53:46 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.53 2002/05/16 21:59:26 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -68,7 +68,6 @@ PHP_FUNCTION(domxml_substitute_entities_default);
 /* Class Document methods */
 PHP_FUNCTION(domxml_doc_doctype);
 PHP_FUNCTION(domxml_doc_implementation);
-PHP_FUNCTION(domxml_doc_document_element);
 PHP_FUNCTION(domxml_doc_create_element);
 PHP_FUNCTION(domxml_doc_create_text_node);
 PHP_FUNCTION(domxml_doc_create_comment);
@@ -77,7 +76,9 @@ PHP_FUNCTION(domxml_doc_create_attribute);
 PHP_FUNCTION(domxml_doc_create_cdata_section);
 PHP_FUNCTION(domxml_doc_create_entity_reference);
 PHP_FUNCTION(domxml_doc_imported_node);
-PHP_FUNCTION(domxml_add_root);
+PHP_FUNCTION(domxml_doc_add_root);
+PHP_FUNCTION(domxml_doc_document_element);
+PHP_FUNCTION(domxml_doc_set_root);
 PHP_FUNCTION(domxml_intdtd);
 PHP_FUNCTION(domxml_doc_ids);
 PHP_FUNCTION(domxml_dump_mem);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.99 2002/05/04 18:33:13 sas Exp $ */
+/* $Id: output.c,v 1.100 2002/05/04 19:06:46 sas Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -324,8 +324,10 @@ PHPAPI void php_ob_set_internal_handler(php_output_handler_func_t internal_outpu
 	OG(active_ob_buffer).internal_output_handler = internal_output_handler;
 	OG(active_ob_buffer).internal_output_handler_buffer = (char *) emalloc(buffer_size);
 	OG(active_ob_buffer).internal_output_handler_buffer_size = buffer_size;
+	if (OG(active_ob_buffer).handler_name)
+		efree(OG(active_ob_buffer).handler_name);
 	OG(active_ob_buffer).handler_name = handler_name;
-	OG(active_ob_buffer).erase = erase;	
+	OG(active_ob_buffer).erase = erase;
 }
 /* }}} */
 

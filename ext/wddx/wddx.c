@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.88 2002/01/24 16:18:50 andrei Exp $ */
+/* $Id: wddx.c,v 1.89 2002/02/05 20:43:49 andi Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -548,6 +548,7 @@ static void php_wddx_serialize_array(wddx_packet *packet, zval *arr)
 	char tmp_buf[WDDX_BUF_LEN];
 	ulong ind = 0;
 	int type;
+	TSRMLS_FETCH();
 
 	target_hash = HASH_OF(arr);
 

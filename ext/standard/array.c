@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.155 2002/02/01 20:17:32 andrei Exp $ */
+/* $Id: array.c,v 1.156 2002/02/05 20:43:48 andi Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -237,8 +237,10 @@ int php_count_recursive(zval *array, long mode)
 {
 	long cnt = 0;
 	zval **element;
-	
 	HashTable *target_hash;
+
+	TSRMLS_FETCH();
+
 	target_hash = HASH_OF(array);
 
 	if (Z_TYPE_P(array) == IS_ARRAY)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: html_entities.c,v 1.1 2002/08/04 14:20:11 helly Exp $ */
+/* $Id: html_entities.c,v 1.2 2002/08/24 13:28:53 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

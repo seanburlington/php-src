@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.15 2003/05/19 18:46:59 helly Exp $ */
+/* $Id: plain_wrapper.c,v 1.16 2003/05/19 18:48:15 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -896,7 +896,7 @@ static int php_plain_files_unlink(php_stream_wrapper *wrapper, char *url, int op
 	zval funcname;
 	zval *retval = NULL;
 
-	if (p = strstr(url, "://")) {
+	if ((p = strstr(url, "://")) != NULL) {
 		url = p + 3;
 	}
 

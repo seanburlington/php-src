@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.7 2001/08/01 13:48:14 andrei Exp $ */
+/* $Id: php_math.h,v 1.8 2001/08/15 19:08:59 jeroen Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H
@@ -55,13 +55,15 @@ PHP_FUNCTION(number_format);
 PHP_FUNCTION(deg2rad);
 PHP_FUNCTION(rad2deg);
 
-PHP_FUNCTION(exp2);
-PHP_FUNCTION(exp10);
-PHP_FUNCTION(log2);
-PHP_FUNCTION(cbrt);
+   /*
+   WARNING: these functions are expermental: they could change their names or 
+   disappear in the next version of PHP!
+   */
 PHP_FUNCTION(hypot);
 PHP_FUNCTION(expm1);
 PHP_FUNCTION(log1p);
+
+
 PHP_FUNCTION(sinh);
 PHP_FUNCTION(cosh);
 PHP_FUNCTION(tanh);

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.51 2002/04/16 13:27:42 ssb Exp $
+// $Id: Common.php,v 1.52 2002/04/21 01:32:03 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -873,7 +873,7 @@ class PEAR_Common extends PEAR
     // }}}
     // {{{ _infoFromAny()
 
-    function _infoFromAny($any)
+    function _infoFromAny($info)
     {
         if (is_string($info) && file_exists($info)) {
             $tmp = substr($info, -4);
@@ -1127,7 +1127,7 @@ class PEAR_Common extends PEAR
         }
         $deps = array();
         foreach ($info['filelist'] as $file => $fa) {
-            
+
         }
     }
 

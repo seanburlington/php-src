@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.62 2003/06/10 20:03:43 imajes Exp $
+// $Id: PEAR.php,v 1.63 2003/07/03 06:54:26 cox Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -477,7 +477,7 @@ class PEAR
      * @see PEAR::setErrorHandling
      * @since PHP 4.0.5
      */
-    function &raiseError($message = null,
+    function raiseError($message = null,
                          $code = null,
                          $mode = null,
                          $options = null,

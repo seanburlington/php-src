@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.48 2000/10/29 09:14:53 thies Exp $ */
+/* $Id: dir.c,v 1.49 2000/11/04 14:58:50 thies Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -102,8 +102,12 @@ static void php_set_default_dir(int id DIRLS_DC)
     if (DIRG(default_dir)!=-1) {
         zend_list_delete(DIRG(default_dir));
     }
-    DIRG(default_dir) = id;
-    zend_list_addref(id);
+
+	if (id != -1) {
+		zend_list_addref(id);
+	}
+	
+	DIRG(default_dir) = id;
 }
 
 
@@ -211,6 +215,10 @@ PHP_FUNCTION(closedir)
 	FETCH_DIRP();
 
 	zend_list_delete(dirp->id);
+
+	if (dirp->id == DIRG(default_dir)) {
+		php_set_default_dir(-1);
+	}
 }
 
 /* }}} */

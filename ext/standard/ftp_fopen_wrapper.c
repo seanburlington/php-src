@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.38.2.5 2003/06/27 16:42:51 sniper Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.38.2.6 2003/08/25 22:26:37 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -422,13 +422,6 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 		php_stream_close(datastream);
 		datastream = NULL;
 		goto errexit;	
-	}
-	
-	/* close control connection if not in ssl mode */
-	if (!use_ssl) {
-		php_stream_write_string(stream, "QUIT\r\n");
-		php_stream_close(stream);
-		stream = NULL;
 	}
 		
 	php_stream_context_set(datastream, context);

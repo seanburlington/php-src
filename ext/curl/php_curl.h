@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Sterling Hughes <Sterling.Hughes@pentap.net>                 |
+   | Author: Sterling Hughes <sterling@php.net>                           |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.16 2001/01/12 10:49:38 sterling Exp $ */
+/* $Id: php_curl.h,v 1.17 2001/02/15 16:20:12 sterling Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H

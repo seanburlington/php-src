@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Sterling Hughes <Sterling.Hughes@pentap.net>                 |
+   | Author: Sterling Hughes <sterling@php.net>                           |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.29 2000/12/09 10:35:18 sas Exp $ */
+/* $Id: swf.c,v 1.30 2001/02/15 16:20:13 sterling Exp $ */
 
 
 #include "php.h"

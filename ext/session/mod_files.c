@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.61 2001/06/06 14:32:23 rasmus Exp $ */
+/* $Id: mod_files.c,v 1.62 2001/06/10 23:26:35 phanto Exp $ */
 
 #include "php.h"
 
@@ -98,7 +98,7 @@ static char *ps_files_path_create(char *buf, size_t buflen, ps_files *data, cons
 	memcpy(buf, data->basedir, data->basedir_len);
 	n = data->basedir_len;
 	buf[n++] = PHP_DIR_SEPARATOR;
-	for (i = 0; i < data->dirdepth; i++) {
+	for (i = 0; i < (int)data->dirdepth; i++) {
 		buf[n++] = *p++;
 		buf[n++] = PHP_DIR_SEPARATOR;
 	}
@@ -290,7 +290,7 @@ PS_WRITE_FUNC(files)
 	 * the existing data set.
 	 */
 	
-	if (vallen < data->st_size)
+	if (vallen < (int)data->st_size)
 		ftruncate(data->fd, 0);
 
 #ifdef HAVE_PWRITE

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.209 2001/06/10 14:12:28 sas Exp $ */
+/* $Id: session.c,v 1.210 2001/06/10 23:26:35 phanto Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -303,7 +303,7 @@ PS_SERIALIZER_ENCODE_FUNC(php_binary)
 			php_var_serialize(buf, struc, &var_hash);
 		} else {
 			if (key_length > PS_BIN_MAX) continue;
-			strbuf[0] = (unsigned char) key_length & PS_BIN_UNDEF;
+			strbuf[0] = (unsigned char) (key_length & PS_BIN_UNDEF);
 			memcpy(strbuf + 1, key, key_length);
 			
 			STR_CAT(buf, strbuf, key_length + 1);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.50 2005/01/14 22:44:35 sniper Exp $ */
+/* $Id: gd.c,v 1.221.2.51 2005/01/14 23:08:48 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -3033,9 +3033,10 @@ static void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode, int 
 		col = Z_LVAL_PP(COL);
 		y = Z_LVAL_PP(Y);
 		x = Z_LVAL_PP(X);
+	}
 
 #if HAVE_GD_STRINGFTEX
-		if (EXT)	{
+		if (extended && EXT) {
 			/* parse extended info */
 
 			HashPosition pos;
@@ -3064,8 +3065,6 @@ static void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode, int 
 			} while(zend_hash_move_forward_ex(HASH_OF(*EXT), &pos) == SUCCESS);
 		}
 #endif
-
-	}
 
 	ptsize = Z_DVAL_PP(PTSIZE);
 	angle = Z_DVAL_PP(ANGLE) * (M_PI/180); /* convert to radians */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_var.h,v 1.8 2001/07/01 20:18:51 dbeu Exp $ */
+/* $Id: php_var.h,v 1.9 2001/07/09 09:03:05 thies Exp $ */
 
 #ifndef PHP_VAR_H
 #define PHP_VAR_H
@@ -25,13 +25,13 @@ PHP_FUNCTION(var_dump);
 PHP_FUNCTION(serialize);
 PHP_FUNCTION(unserialize);
 
-void php_var_dump(pval **struc, int level);
+void php_var_dump(zval **struc, int level);
 
 /* typdef HashTable php_serialize_data_t; */
 #define php_serialize_data_t HashTable
 
-PHPAPI void php_var_serialize(pval *buf, pval **struc, php_serialize_data_t *var_hash);
-PHPAPI int php_var_unserialize(pval **rval, const char **p, const char *max, php_serialize_data_t *var_hash);
+PHPAPI void php_var_serialize(zval *buf, zval **struc, php_serialize_data_t *var_hash);
+PHPAPI int php_var_unserialize(zval **rval, const char **p, const char *max, php_serialize_data_t *var_hash);
 
 #define PHP_VAR_SERIALIZE_INIT(var_hash) \
    zend_hash_init(&(var_hash),10,NULL,NULL,0)

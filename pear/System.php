@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.18 2002/08/25 18:11:24 pajoye Exp $
+// $Id: System.php,v 1.19 2002/08/26 00:18:00 pajoye Exp $
 //
 
 require_once 'PEAR.php';
@@ -43,7 +43,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.18 $
+* @version  $Revision: 1.19 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -391,19 +391,19 @@ class System
     function tmpdir()
     {
         if (OS_WINDOWS) {
-            if (getenv('TEMP')) {
-                return getenv('TEMP');
+            if (($var=$_ENV['TEMP']) || $var=getenv('TEMP')) {
+                 return $var;
             }
-            if (getenv('TMP')) {
-                return getenv('TMP');
+            if (($var=$_ENV['TMP']) || $var=getenv('TMP')) {
+                 return $var;
             }
-            if (getenv('windir')) {
-                return getenv('windir') . '\temp';
+            if (($var=$_ENV['windir']) || $var=getenv('windir')) {
+                 return $var;
             }
             return getenv('SystemRoot') . '\temp';
         }
-        if (getenv('TMPDIR')) {
-            return getenv('TMPDIR');
+        if (($var=$_ENV['TMPDIR']) || $var=getenv('TMPDIR')) {
+             return $var;
         }
         return '/tmp';
     }

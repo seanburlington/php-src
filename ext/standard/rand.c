@@ -19,17 +19,13 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.6 1999/09/25 12:09:50 sas Exp $ */
+/* $Id: rand.c,v 1.7 1999/10/06 16:34:36 andrei Exp $ */
 
 #include <stdlib.h>
 
 #include "php.h"
 #include "phpmath.h"
-
-#ifndef RAND_MAX
-#define RAND_MAX (1<<15)
-
-#endif
+#include "php_rand.h"
 
 /*
    This is the ``Mersenne Twister'' random number generator MT19937, which
@@ -193,13 +189,6 @@ static inline uint32 randomMT(void)
     y ^= (y << 15) & 0xEFC60000U;
     return(y ^ (y >> 18));
 }
-
-
-#if HAVE_LRAND48
-#define PHP_RAND_MAX 2147483647
-#else
-#define PHP_RAND_MAX RAND_MAX
-#endif
 
 /* {{{ proto void srand(int seed)
    Seeds random number generator */

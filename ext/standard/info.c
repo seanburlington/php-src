@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.153 2001/08/13 19:31:16 zeev Exp $ */
+/* $Id: info.c,v 1.154 2001/08/15 22:37:31 sniper Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -182,7 +182,7 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		php_info_print_box_end();
 		php_info_print_table_start();
 		php_info_print_table_row(2, "System", php_uname );
-		php_info_print_table_row(2, "Build Date", __DATE__ );
+		php_info_print_table_row(2, "Build Date", __DATE__ " " __TIME__ );
 #ifdef CONFIGURE_COMMAND
 		php_info_print_table_row(2, "Configure Command", CONFIGURE_COMMAND );
 #endif

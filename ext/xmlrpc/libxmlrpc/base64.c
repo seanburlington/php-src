@@ -1,4 +1,4 @@
-static const char rcsid[] = "#(@) $Id: base64.c,v 1.2.8.1 2002/11/27 04:07:00 fmk Exp $";
+static const char rcsid[] = "#(@) $Id: base64.c,v 1.2.8.2 2004/04/27 17:34:05 iliaa Exp $";
 
 /*
 
@@ -104,13 +104,13 @@ void base64_encode(struct buffer_st *b, const char *source, int length)
       for (i = 0; i < 4; i++) {
 	buffer_add(b, ogroup[i]);
 	if (!(b->offset % 72)) {
-	  // buffer_add(b, '\r');
+	  /* buffer_add(b, '\r'); */
 	  buffer_add(b, '\n');
 	}
       }
     }
   }
-  // buffer_add(b, '\r');
+  /* buffer_add(b, '\r'); */
   buffer_add(b, '\n');
 }
 

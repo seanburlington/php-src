@@ -31,7 +31,7 @@
 */
 
 
-static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.4.4.1 2003/12/16 21:00:36 sniper Exp $";
+static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.4.4.2 2004/04/27 17:34:05 iliaa Exp $";
 
 
 /****h* ABOUT/xmlrpc
@@ -43,6 +43,9 @@ static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.4.4.1 2003/12/16 21:00:36 sn
  *   9/1999 - 10/2000
  * HISTORY
  *   $Log: xmlrpc.c,v $
+ *   Revision 1.4.4.2  2004/04/27 17:34:05  iliaa
+ *   MFH: Removed C++ style comments.
+ *
  *   Revision 1.4.4.1  2003/12/16 21:00:36  sniper
  *   MFH: fix compile warnings
  *
@@ -224,7 +227,7 @@ static int date_from_ISO8601 (const char *text, time_t * value) {
 static int date_to_ISO8601 (time_t value, char *buf, int length) {
    struct tm *tm;
    tm = localtime(&value);
-#if 0  // TODO: soap seems to favor this method. xmlrpc the latter.
+#if 0  /* TODO: soap seems to favor this method. xmlrpc the latter. */
 	return strftime (buf, length, "%Y-%m-%dT%H:%M:%SZ", tm);
 #else
    return strftime(buf, length, "%Y%m%dT%H:%M:%S", tm);
@@ -990,7 +993,7 @@ int XMLRPC_SetIsVector(XMLRPC_VALUE value, XMLRPC_VECTOR_TYPE type) {
    int bSuccess = 0;
 
 	if (value) {
-		// we can change the type so long as nothing is currently stored.
+		/* we can change the type so long as nothing is currently stored. */
 		if(value->type == xmlrpc_vector) {
 			if(value->v) {
 				if(!Q_Size(value->v->q)) {

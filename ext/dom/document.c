@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.38 2003/11/29 20:40:17 rrichards Exp $ */
+/* $Id: document.c,v 1.39 2003/12/01 08:18:35 chregu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -123,8 +123,14 @@ static void php_dom_ctx_error_level(int level, void *ctx, const char *msg)
 	TSRMLS_FETCH();
 
 	parser = (xmlParserCtxtPtr) ctx;
-	php_error_docref(NULL TSRMLS_CC, level, "%s in %s, line: %d", msg, parser->input->filename, parser->input->line);
 
+	if (parser != NULL && parser->input != NULL) {
+		if (parser->input->filename) {
+			php_error_docref(NULL TSRMLS_CC, level, "%s in %s, line: %d", msg, parser->input->filename, parser->input->line);
+		} else {
+			php_error_docref(NULL TSRMLS_CC, level, "%s in Entity, line: %d", msg, parser->input->line);
+		}
+	}
 }
 /* }}} end php_dom_ctx_error */
 

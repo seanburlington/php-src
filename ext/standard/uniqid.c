@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.39 2004/01/08 08:17:34 andi Exp $ */
+/* $Id: uniqid.c,v 1.40 2004/10/28 22:22:22 iliaa Exp $ */
 
 #include "php.h"
 
@@ -50,11 +50,10 @@ PHP_FUNCTION(uniqid)
 	zend_bool more_entropy = 0;
 #endif
 	char *uniqid;
-	int sec, usec, argc, prefix_len = 0;
+	int sec, usec, prefix_len = 0;
 	struct timeval tv;
 
-	argc = ZEND_NUM_ARGS();
-	if (zend_parse_parameters(argc TSRMLS_CC, "|sb", &prefix, &prefix_len,
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|sb", &prefix, &prefix_len,
 							  &more_entropy)) {
 		return;
 	}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.318 2002/09/26 18:12:27 iliaa Exp $ */
+/* $Id: session.c,v 1.319 2002/09/29 15:26:50 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -567,6 +567,10 @@ static void php_session_save_current_state(TSRMLS_D)
 	HashPosition pos;
 	
 	if (!PG(register_globals) && !PS(http_session_vars)) {
+		return;
+	}
+		
+	if (PS(http_session_vars) && PS(http_session_vars)->type!=IS_ARRAY) {
 		return;
 	}
 		

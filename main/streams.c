@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.66 2002/08/22 10:16:03 helly Exp $ */
+/* $Id: streams.c,v 1.67 2002/08/22 17:42:18 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -388,7 +388,7 @@ PHPAPI char *_php_stream_gets(php_stream *stream, char *buf, size_t maxlen TSRML
 
 		/* TODO: look at error returns? */
 
-		while (--maxlen > 0 && php_stream_read(stream, buf, 1 TSRMLS_CC) == 1 && *buf++ != '\n')
+		while (--maxlen > 0 && php_stream_read(stream, buf, 1) == 1 && *buf++ != '\n')
 			;
 		*buf = '\0';
 
@@ -910,8 +910,11 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 	php_stdio_stream_data *data = (php_stdio_stream_data*) stream->abstract;
 	size_t size;
 	int fd;
+#ifdef O_NONBLOCK
+	/* FIXME: make this work for win32 */
 	int flags;
 	int oldval;
+#endif
 	
 	switch(option) {
 		case PHP_STREAM_OPTION_BLOCKING:

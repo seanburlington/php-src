@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.19 2003/05/13 00:18:27 wez Exp $ */
+/* $Id: file.c,v 1.279.2.20 2003/05/14 01:08:47 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -434,14 +434,15 @@ PHP_FUNCTION(file_get_contents)
 	}
 
 	/* uses mmap if possible */
-	if ((len = php_stream_copy_to_mem(stream, &contents, PHP_STREAM_COPY_ALL, 0)) >= 0) {
-		
+	if ((len = php_stream_copy_to_mem(stream, &contents, PHP_STREAM_COPY_ALL, 0)) > 0) {
 		if (PG(magic_quotes_runtime)) {
 			contents = php_addslashes(contents, len, &newlen, 1 TSRMLS_CC); /* 1 = free source string */
 			len = newlen;
 		}
 
 		RETVAL_STRINGL(contents, len, 0);
+	} else if (len == 0) {
+		RETVAL_EMPTY_STRING();
 	} else {
 		RETVAL_FALSE;
 	}

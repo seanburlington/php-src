@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.22 2000/02/10 15:55:09 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.23 2000/02/10 16:44:58 zeev Exp $ */
 
 #include "zend.h"
 #include "php.h"
@@ -284,11 +284,30 @@ static void php_apache_log_message(char *message)
 }
 
 
+static int php_apache_sapi_activate(SLS_D)
+{
+	/*
+	 * For the Apache module version, this bit of code registers a cleanup
+	 * function that gets triggered when our request pool is destroyed.
+	 * We need this because at any point in our code we can be interrupted
+	 * and that may happen before we have had time to free our memory.
+	 * The php_request_shutdown function needs to free all outstanding allocated
+	 * memory.  
+	 */
+	block_alarms();
+	register_cleanup(((request_rec *) (server_context))->pool, NULL, php_request_shutdown, php_request_shutdown_for_exec);
+	unblock_alarms();
+}
+
+
 static sapi_module_struct sapi_module = {
 	"Apache",						/* name */
 									
 	php_apache_startup,				/* startup */
 	php_module_shutdown_wrapper,	/* shutdown */
+
+	php_apache_sapi_activate,		/* activate */
+	NULL,							/* deactivate */
 
 	sapi_apache_ub_write,			/* unbuffered write */
 	sapi_apache_flush,				/* flush */

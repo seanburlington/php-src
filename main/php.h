@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.13 1999/04/26 14:00:46 zeev Exp $ */
+/* $Id: php.h,v 1.14 1999/04/26 17:26:32 zeev Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -197,9 +197,6 @@ extern char *strerror(int);
 #include "http_log.h"
 #define BLOCK_INTERRUPTIONS block_alarms
 #define UNBLOCK_INTERRUPTIONS unblock_alarms
-# ifndef THREAD_SAFE
-extern request_rec *php3_rqst;
-# endif
 #endif
 
 #if HAVE_PWD_H

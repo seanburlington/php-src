@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php3_gd.h,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: php3_gd.h,v 1.2 1999/04/26 17:26:34 zeev Exp $ */
 
 #ifndef _PHP3_GD_H
 #define _PHP3_GD_H
@@ -49,7 +49,7 @@ extern php3_module_entry gd_module_entry;
 /* gd.c functions */
 extern void php3_info_gd(void);
 extern int php3_minit_gd(INIT_FUNC_ARGS);
-extern int php3_mend_gd(void);
+extern int php3_mend_gd(SHUTDOWN_FUNC_ARGS);
 extern int gdImageColorResolve(gdImagePtr, int, int, int);
 extern void php3_imagearc(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_imagechar(INTERNAL_FUNCTION_PARAMETERS);

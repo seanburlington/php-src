@@ -1,4 +1,4 @@
-dnl $Id: config0.m4,v 1.10 1999/09/14 19:24:37 andrey Exp $
+dnl $Id: config0.m4,v 1.11 1999/09/16 15:35:49 sas Exp $
 dnl config.m4 for extension pcre
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -6,9 +6,10 @@ dnl if DIR is supplied, we'll use that for linking
 
 AC_MSG_CHECKING(whether to include PCRE support)
 AC_ARG_WITH(pcre-regex,
-[  --without-pcre-regex    Don't include Perl Compatible Regular Expressions support
-                          Use --with-pcre-regex=DIR to specify DIR where PCRE include
-                          and library files are located],[
+[  --without-pcre-regex    Do not include Perl Compatible Regular Expressions 
+                          support. Use --with-pcre-regex=DIR to specify DIR
+                          where PCRE's include and library files are located],
+[
 	case "$withval" in 
 		no)
 			AC_MSG_RESULT(no)

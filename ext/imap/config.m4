@@ -1,8 +1,9 @@
-dnl $Id: config.m4,v 1.7 1999/07/21 14:43:12 ssb Exp $
+dnl $Id: config.m4,v 1.8 1999/09/16 15:35:48 sas Exp $
 
 AC_MSG_CHECKING(for IMAP support)
 AC_ARG_WITH(imap,
-[  --with-imap[=DIR]       Include IMAP support (DIR is the IMAP include dir and c-client.a dir).],
+[  --with-imap[=DIR]       Include IMAP support.  DIR is the IMAP include
+                          and c-client.a directory.],
 [
 	if test "$withval" = "yes"; then
 		if test -f /usr/local/include/mail.h; then

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.17 2003/03/12 04:30:01 sniper Exp $ */
+/* $Id: gd.c,v 1.221.2.18 2003/03/30 18:05:40 rasmus Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -284,7 +284,11 @@ zend_module_entry gd_module_entry = {
 	PHP_MINIT(gd),
 	NULL,
 	NULL,
+#if HAVE_LIBGD20 && HAVE_GD_STRINGFT
 	PHP_RSHUTDOWN(gd),
+#else
+	NULL,
+#endif
 	PHP_MINFO(gd),
 	NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES

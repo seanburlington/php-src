@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.69 2002/03/06 00:05:14 yohgaki Exp $ */
+/* $Id: mod_files.c,v 1.70 2002/03/06 07:49:49 yohgaki Exp $ */
 
 #include "php.h"
 
@@ -136,8 +136,10 @@ static void ps_files_open(ps_files *data, const char *key TSRMLS_DC)
 		ps_files_close(data);
 		
 		if (!ps_files_valid_key(key) || 
-				!ps_files_path_create(buf, sizeof(buf), data, key))
+			!ps_files_path_create(buf, sizeof(buf), data, key)) {
+			data->fd = -1;
 			return;
+		}
 		
 		data->lastkey = estrdup(key);
 		

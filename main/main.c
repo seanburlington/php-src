@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.356.2.2 2001/04/06 02:09:43 sniper Exp $ */
+/* $Id: main.c,v 1.356.2.3 2001/04/06 15:18:52 sniper Exp $ */
 
 
 #include <stdio.h>
@@ -139,6 +139,18 @@ static void php_disable_functions()
 }
 
 
+static PHP_INI_MH(OnUpdateDeprecated)
+{
+	PLS_FETCH();
+
+	PG(arg_separator.output) = new_value;
+
+	if (stage==PHP_INI_STAGE_RUNTIME) {
+		php_error(E_WARNING, "The arg_separator directive is deprecated. Use arg_separator.output instead");
+	}
+	return SUCCESS;
+}
+
 static PHP_INI_MH(OnUpdateTimeout)
 {
 	ELS_FETCH();
@@ -211,6 +223,7 @@ PHP_INI_BEGIN()
 
 	STD_PHP_INI_ENTRY("arg_separator.output",	"&",		PHP_INI_ALL,		OnUpdateStringUnempty,	arg_separator.output,	php_core_globals,	core_globals)
 	STD_PHP_INI_ENTRY("arg_separator.input",	"&",		PHP_INI_SYSTEM|PHP_INI_PERDIR,	OnUpdateStringUnempty,	arg_separator.input,	php_core_globals,	core_globals)
+	PHP_INI_ENTRY("arg_separator",				"&",		PHP_INI_ALL,		OnUpdateDeprecated)
 
 	STD_PHP_INI_ENTRY("auto_append_file",		NULL,		PHP_INI_ALL,		OnUpdateString,			auto_append_file,		php_core_globals,	core_globals)
 	STD_PHP_INI_ENTRY("auto_prepend_file",		NULL,		PHP_INI_ALL,		OnUpdateString,			auto_prepend_file,		php_core_globals,	core_globals)

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.360 2001/04/25 21:46:40 ssb Exp $ */
+/* $Id: main.c,v 1.361 2001/04/29 12:58:50 andi Exp $ */
 
 
 #include <stdio.h>
@@ -526,7 +526,7 @@ static void php_message_handler_for_zend(long message, void *data)
 
 					if (message==ZMSG_MEMORY_LEAK_DETECTED) {
 						zend_mem_header *t = (zend_mem_header *) data;
-						void *ptr = (void *)((char *)t+sizeof(zend_mem_header)+PLATFORM_PADDING);
+						void *ptr = (void *)((char *)t+sizeof(zend_mem_header)+MEM_HEADER_PADDING);
 
 						snprintf(memory_leak_buf, 512, "%s(%d) :  Freeing 0x%.8lX (%d bytes), script=%s\n", t->filename, t->lineno, (unsigned long)ptr, t->size, SAFE_FILENAME(SG(request_info).path_translated));
 						if (t->orig_filename) {

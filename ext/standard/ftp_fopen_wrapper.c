@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.58 2003/06/18 03:26:29 pollita Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.59 2003/08/08 06:18:25 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -745,6 +745,7 @@ static int php_stream_ftp_url_stat(php_stream_wrapper *wrapper, char *url, php_s
 	sscanf(tmp_line + 4, "%d", (int *)&(ssb->sb.st_size));
 
 	php_stream_close(stream);
+	php_url_free(resource);
 	return 0;
 
  stat_errexit:

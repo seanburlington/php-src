@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hartmut@six.de>                         |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.8 2002/06/26 18:49:08 derick Exp $ 
+  $Id: mime_magic.c,v 1.9 2002/08/22 12:21:25 iliaa Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the lincense section is a little bit longer than usual:
@@ -235,7 +235,7 @@ ZEND_GET_MODULE(mime_magic)
 /* {{{ PHP_INI
  */
 PHP_INI_BEGIN()
-STD_PHP_INI_ENTRY("mime_magic.magicfile", "/usr/share/misc/magic.mime", PHP_INI_SYSTEM, OnUpdateString, magicfile, zend_mime_magic_globals, mime_magic_globals)
+STD_PHP_INI_ENTRY("mime_magic.magicfile", PHP_MIME_MAGIC_FILE_PATH, PHP_INI_SYSTEM, OnUpdateString, magicfile, zend_mime_magic_globals, mime_magic_globals)
 PHP_INI_END()
 /* }}} */
 

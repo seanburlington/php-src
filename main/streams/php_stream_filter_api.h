@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_filter_api.h,v 1.1 2003/02/18 01:22:21 wez Exp $ */
+/* $Id: php_stream_filter_api.h,v 1.2 2003/02/18 02:53:23 pollita Exp $ */
 
 /* The filter API works on the principle of "Bucket-Brigades".  This is
  * partially inspired by the Apache 2 method of doing things, although
@@ -33,6 +33,10 @@
  * The first filter in the chain is invoked on the brigade and (depending on
  * it's return value), the next filter is invoked and so on.
  * */
+
+#define PHP_STREAM_FILTER_READ	0x0001
+#define PHP_STREAM_FILTER_WRITE	0x0002
+#define PHP_STREAM_FILTER_ALL	(PHP_STREAM_FILTER_READ | PHP_STREAM_FILTER_WRITE)
 
 typedef struct _php_stream_bucket			php_stream_bucket;
 typedef struct _php_stream_bucket_brigade	php_stream_bucket_brigade;

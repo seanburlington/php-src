@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.678 2004/07/29 11:54:12 wez Exp $ */
+/* $Id: basic_functions.c,v 1.679 2004/07/31 17:28:27 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1015,7 +1015,7 @@ PHP_MINIT_FUNCTION(basic)
 #else
 	basic_globals_ctor(&basic_globals TSRMLS_CC);
 #ifdef PHP_WIN32
-	php_win32_core_globals_ctor(&php_win32_core_globals TSRMLS_CC);
+	php_win32_core_globals_ctor(&the_php_win32_core_globals TSRMLS_CC);
 #endif
 #endif
 

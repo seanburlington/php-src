@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_win32_globals.h,v 1.2 2004/07/30 16:49:55 fmk Exp $ */
+/* $Id: php_win32_globals.h,v 1.3 2004/07/31 17:28:27 wez Exp $ */
 
 #ifndef PHP_WIN32_GLOBALS_H
 #define PHP_WIN32_GLOBALS_H
@@ -31,8 +31,8 @@ typedef struct _php_win32_core_globals php_win32_core_globals;
 # define PW32G(v)		TSRMG(php_win32_core_globals_id, php_win32_core_globals*, v)
 extern PHPAPI int php_win32_core_globals_id;
 #else
-# define PW32G(v)		(php_win32_core_globals.v)
-extern PHPAPI struct _php_win32_core_globals php_win32_core_globals;
+# define PW32G(v)		(the_php_win32_core_globals.v)
+extern PHPAPI struct _php_win32_core_globals the_php_win32_core_globals;
 #endif
 
 struct _php_win32_core_globals {

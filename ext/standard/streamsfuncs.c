@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.38 2004/07/28 23:34:27 iliaa Exp $ */
+/* $Id: streamsfuncs.c,v 1.39 2004/07/31 17:28:27 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1212,7 +1212,7 @@ PHP_FUNCTION(stream_socket_enable_crypto)
 
 	if (ZEND_NUM_ARGS() >= 3) {
 		if (zsessstream) {
-			php_stream_from_zval(sessstream, zsessstream);
+			php_stream_from_zval(sessstream, &zsessstream);
 		}
 		
 		if (php_stream_xport_crypto_setup(stream, cryptokind, sessstream TSRMLS_CC) < 0) {

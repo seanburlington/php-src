@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: globals.c,v 1.3 2004/07/30 16:49:55 fmk Exp $ */
+/* $Id: globals.c,v 1.4 2004/07/31 17:28:27 wez Exp $ */
 
 #include "php.h"
 #include "php_win32_globals.h"
@@ -24,7 +24,7 @@
 #ifdef ZTS
 PHPAPI int php_win32_core_globals_id;
 #else
-php_win32_core_globals php_win32_core_globals;
+php_win32_core_globals the_php_win32_core_globals;
 #endif
 
 void php_win32_core_globals_ctor(void *vg TSRMLS_DC)
@@ -39,7 +39,7 @@ PHP_RSHUTDOWN_FUNCTION(win32_core_globals)
 #ifdef ZTS
 		ts_resource(php_win32_core_globals_id)
 #else
-		&php_win32_core_globals
+		&the_php_win32_core_globals
 #endif
 		;
 

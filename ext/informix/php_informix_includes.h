@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_informix_includes.h,v 1.1.4.2 2003/02/20 11:57:28 nobbie Exp $ */
+/* $Id: php_informix_includes.h,v 1.1.4.3 2003/02/20 12:09:20 nobbie Exp $ */
 
 #ifndef PHP_INFORMIX_INCLUDES_H
 #define PHP_INFORMIX_INCLUDES_H
@@ -40,12 +40,14 @@ typedef struct ifx_res {
 	char connecid[32];
 	char cursorid[32];
 	char descrpid[32];
+	char i_descrpid[32];
 	char statemid[32];
 	int  isscroll;
 	int  ishold;
 	int  iscursory;
 	int  paramquery;
 	int  numcols;
+	int  numicols;
 	int  rowid;
 	int  affected_rows;
 	long sqlerrd[6];

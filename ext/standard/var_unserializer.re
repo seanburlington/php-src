@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.15 2003/05/24 17:10:03 helly Exp $ */
+/* $Id: var_unserializer.re,v 1.16 2003/06/02 15:53:04 sebastian Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -377,7 +377,7 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 	
 	do {
 		/* Try to find class directly */
-		if (zend_lookup_ns_class(class_name, len2, &pce TSRMLS_CC) == SUCCESS) {
+		if (zend_lookup_class(class_name, len2, &pce TSRMLS_CC) == SUCCESS) {
 			ce = *pce;
 			break;
 		}
@@ -408,7 +408,7 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 		}
 		
 		/* The callback function may have defined the class */
-		if (zend_lookup_ns_class(class_name, len2, &pce TSRMLS_CC) == SUCCESS) {
+		if (zend_lookup_class(class_name, len2, &pce TSRMLS_CC) == SUCCESS) {
 			ce = *pce;
 		} else {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Function %s() hasn't defined the class it was called for", user_func->value.str.val);

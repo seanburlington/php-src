@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.61 2003/07/30 13:20:49 iliaa Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.62 2003/08/07 12:05:00 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -370,6 +370,7 @@ unix.h \
 utime.h \
 sys/utsname.h \
 sys/ipc.h \
+dlfcn.h
 ],[],[],[
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.16 2003/02/15 13:26:05 edink Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.17 2003/03/10 02:17:06 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -233,6 +233,7 @@ static int sapi_cgibin_ub_write(const char *str, uint str_length TSRMLS_DC)
 		ret = sapi_cgibin_single_write(ptr, remaining TSRMLS_CC);
 		if (!ret) {
 			php_handle_aborted_connection();
+			return str_length - remaining;
 		}
 		ptr += ret;
 		remaining -= ret;

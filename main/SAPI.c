@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.142 2002/08/01 21:12:09 sr Exp $ */
+/* $Id: SAPI.c,v 1.143 2002/08/02 06:53:48 hirokawa Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -759,6 +759,13 @@ SAPI_API void sapi_unregister_post_entry(sapi_post_entry *post_entry)
 SAPI_API int sapi_register_default_post_reader(void (*default_post_reader)(TSRMLS_D))
 {
 	sapi_module.default_post_reader = default_post_reader;
+	return SUCCESS;
+}
+
+
+SAPI_API int sapi_register_treat_data(void (*treat_data)(int arg, char *str, zval *destArray TSRMLS_DC))
+{
+	sapi_module.treat_data = treat_data;
 	return SUCCESS;
 }
 

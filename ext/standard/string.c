@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.278 2002/07/30 10:51:33 rasmus Exp $ */
+/* $Id: string.c,v 1.279 2002/08/02 06:53:48 hirokawa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3223,14 +3223,14 @@ PHP_FUNCTION(parse_str)
 	old_rg = PG(register_globals);
 	if(argCount == 1) {
 		PG(register_globals) = 1;
-		php_treat_data(PARSE_STRING, res, NULL TSRMLS_CC);
+		sapi_module.treat_data(PARSE_STRING, res, NULL TSRMLS_CC);
 	} else 	{
 		PG(register_globals) = 0;
 		/* Clear out the array that was passed in. */
 		zval_dtor(*arrayArg);
 		array_init(*arrayArg);
 		
-		php_treat_data(PARSE_STRING, res, *arrayArg TSRMLS_CC);
+		sapi_module.treat_data(PARSE_STRING, res, *arrayArg TSRMLS_CC);
 	}
 	PG(register_globals) = old_rg;
 }

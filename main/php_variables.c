@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.39 2002/07/31 16:25:12 zeev Exp $ */
+/* $Id: php_variables.c,v 1.40 2002/08/02 06:53:48 hirokawa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -216,8 +216,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(php_std_post_handler)
 	}
 }
 
-
-void php_treat_data(int arg, char *str, zval* destArray TSRMLS_DC)
+SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 {
 	char *res = NULL, *var, *val, *separator=NULL;
 	const char *c_var;

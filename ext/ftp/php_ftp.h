@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.h,v 1.15 2002/01/01 22:15:22 mfischer Exp $ */
+/* $Id: php_ftp.h,v 1.16 2002/01/02 14:58:17 mfischer Exp $ */
 
 #ifndef	_INCLUDED_FTP_H
 #define	_INCLUDED_FTP_H
@@ -26,6 +26,8 @@
 
 extern zend_module_entry php_ftp_module_entry;
 #define php_ftp_module_ptr &php_ftp_module_entry
+
+#define PHP_FTP_OPT_TIMEOUT_SEC	0
 
 PHP_MINIT_FUNCTION(ftp);
 PHP_MINFO_FUNCTION(ftp);
@@ -52,6 +54,8 @@ PHP_FUNCTION(ftp_rename);
 PHP_FUNCTION(ftp_delete);
 PHP_FUNCTION(ftp_site);
 PHP_FUNCTION(ftp_close);
+PHP_FUNCTION(ftp_set_option);
+PHP_FUNCTION(ftp_get_option);
 
 #define phpext_ftp_ptr php_ftp_module_ptr
 

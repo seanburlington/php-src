@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.132 2002/03/29 12:56:25 sniper Exp $ */
+/* $Id: php_mysql.c,v 1.133 2002/04/18 16:48:03 sebastian Exp $ */
 
 
 /* TODO:
@@ -33,6 +33,8 @@
 #include "php_mysql.h"
 #include "ext/standard/info.h"
 #include "ext/standard/php_string.h"
+
+#if HAVE_MYSQL
 
 #ifdef PHP_WIN32
 #include <winsock.h>
@@ -2254,6 +2256,8 @@ PHP_FUNCTION(mysql_ping)
 	RETURN_BOOL(! mysql_ping(&mysql->conn));
 }
 /* }}} */
+
+#endif
 
 /*
  * Local variables:

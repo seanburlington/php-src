@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.46 2000/10/20 18:25:04 andrei Exp $ */
+/* $Id: interbase.c,v 1.47 2000/10/21 17:38:08 dbeu Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -436,7 +436,7 @@ static void _php_ibase_free_query(ibase_query *ib_query)
 
 static void php_ibase_free_query_rsrc(zend_rsrc_list_entry *rsrc)
 {
-	ibase_query *query = (ibase_auery *)rsrc->ptr;
+	ibase_query *query = (ibase_query *)rsrc->ptr;
 	_php_ibase_free_query(query);
 }
 
@@ -596,7 +596,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.46 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.47 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

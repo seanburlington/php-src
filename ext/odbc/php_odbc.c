@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.182 2005/01/13 02:06:39 wez Exp $ */
+/* $Id: php_odbc.c,v 1.183 2005/01/17 15:05:11 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2712,15 +2712,17 @@ static void php_odbc_lasterror(INTERNAL_FUNCTION_PARAMETERS, int mode)
 	} else { /* last error message */
 		len = SQL_MAX_MESSAGE_LENGTH;
 	}
-	ptr = ecalloc(len + 1, 1);
+
 	if (argc == 1) {
 		ZEND_FETCH_RESOURCE2(conn, odbc_connection *, pv_handle, -1, "ODBC-Link", le_conn, le_pconn);
+		ptr = ecalloc(len + 1, 1);
 		if (mode == 0) {
 			strlcpy(ptr, conn->laststate, len+1);
 		} else {
 			strlcpy(ptr, conn->lasterrormsg, len+1);
 		}
 	} else {
+		ptr = ecalloc(len + 1, 1);
 		if (mode == 0) {
 			strlcpy(ptr, ODBCG(laststate), len+1);
 		} else {

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.42.2.1 2002/03/14 19:17:23 rasmus Exp $ */
+/* $Id: safe_mode.c,v 1.42.2.2 2002/03/20 09:02:54 sesser Exp $ */
 
 #include "php.h"
 
@@ -46,7 +46,7 @@
 PHPAPI int php_checkuid(const char *filename, char *fopen_mode, int mode)
 {
 	struct stat sb;
-	int ret;
+	int ret, nofile=0;
 	long uid=0L, gid=0L, duid=0L, dgid=0L;
 	char path[MAXPATHLEN];
 	char *s;
@@ -86,6 +86,7 @@ PHPAPI int php_checkuid(const char *filename, char *fopen_mode, int mode)
 				php_error(E_WARNING, "Unable to access %s", filename);
 				return 1;
 			}
+			nofile = 1;
 		} else {
 			uid = sb.st_uid;
 			gid = sb.st_gid;
@@ -150,6 +151,13 @@ PHPAPI int php_checkuid(const char *filename, char *fopen_mode, int mode)
 			*s = 0;
 		}
 	}
+	
+	if (nofile) {
+		uid = duid;
+		gid = dgid;
+		filename = path;
+	}
+	
 	if (PG(safe_mode_gid)) {
 		php_error(E_WARNING, "SAFE MODE Restriction in effect.  The script whose uid/gid is %ld/%ld is not allowed to access %s owned by uid/gid %ld/%ld", php_getuid(), php_getgid(), filename, uid, gid);
 	} else {

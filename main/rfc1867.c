@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.122.2.19 2004/05/21 08:14:24 derick Exp $ */
+/* $Id: rfc1867.c,v 1.122.2.20 2004/05/21 08:16:26 derick Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -1031,7 +1031,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 					php_mb_gpc_encoding_converter(&filename, &str_len, 1, NULL, NULL TSRMLS_CC);
 				}
 				s = php_mb_strrchr(filename, '\\' TSRMLS_CC);
-				if (tmp = php_mb_strrchr(filename, '/')) {
+				if (tmp = php_mb_strrchr(filename, '/' TSRMLS_CC)) {
 					s = tmp;
 				}
 				num_vars--;

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.4 1999/05/24 18:02:42 zeev Exp $ */
+/* $Id: internal_functions_win32.c,v 1.5 1999/07/06 19:49:48 zeev Exp $ */
 
 
 #include "php.h"
@@ -57,6 +57,7 @@
 #include "ext/standard/php3_standard.h"
 #include "ext/COM/php3_COM.h"
 #include "ext/standard/reg.h"
+#include "ext/pcre/php_pcre.h"
 
 /* SNMP has to be moved to ext */
 /* #include "dl/snmp/php3_snmp.h" */
@@ -81,7 +82,8 @@ zend_module_entry *php3_builtin_modules[] = {
 	phpext_bcmath_ptr,
 	phpext_standard_ptr,
 	COM_module_ptr,
-	phpext_regex_ptr
+	phpext_regex_ptr,
+	phpext_pcre_ptr
 };
 
 	

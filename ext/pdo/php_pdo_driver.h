@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.39 2005/01/21 03:57:05 wez Exp $ */
+/* $Id: php_pdo_driver.h,v 1.40 2005/01/23 15:34:48 wez Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -419,7 +419,7 @@ struct _pdo_dbh_t {
 	unsigned int refcount;
 
 	/* driver specific "class" methods for the dbh and stmt */
-	HashTable *cls_methods[PDO_DBH_DRIVER_METHOD_KIND__MAX-1];
+	HashTable *cls_methods[PDO_DBH_DRIVER_METHOD_KIND__MAX];
 };
 
 /* describes a column */

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.168 2005/02/14 22:16:06 sniper Exp $ */
+/* $Id: sockets.c,v 1.169 2005/02/14 23:44:23 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1052,6 +1052,8 @@ PHP_FUNCTION(socket_create)
 		RETURN_FALSE;
 	}
 
+	php_sock->error = 0;
+
 	ZEND_REGISTER_RESOURCE(return_value, php_sock, le_socket);
 }
 /* }}} */
@@ -1688,6 +1690,8 @@ PHP_FUNCTION(socket_create_pair)
 	php_sock[1]->bsd_socket = fds_array[1];
 	php_sock[0]->type		= domain;
 	php_sock[1]->type		= domain;
+	php_sock[0]->error		= 0;
+	php_sock[1]->error		= 0;
 
 	ZEND_REGISTER_RESOURCE(retval[0], php_sock[0], le_socket);
 	ZEND_REGISTER_RESOURCE(retval[1], php_sock[1], le_socket);

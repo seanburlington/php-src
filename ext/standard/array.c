@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.201 2002/11/15 02:16:41 moriyoshi Exp $ */
+/* $Id: array.c,v 1.202 2002/11/23 11:27:56 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1435,19 +1435,29 @@ PHP_FUNCTION(range)
 
 	/* If the range is given as strings, generate an array of characters. */
 	if (Z_TYPE_P(zlow) == IS_STRING && Z_TYPE_P(zhigh) == IS_STRING) {
-		char *low, *high;
+		unsigned char *low, *high;
 
 		convert_to_string_ex(&zlow);
 		convert_to_string_ex(&zhigh);
-		low = Z_STRVAL_P(zlow);
-		high = Z_STRVAL_P(zhigh);
+		low = (unsigned char *)Z_STRVAL_P(zlow);
+		high = (unsigned char *)Z_STRVAL_P(zhigh);
 
 		if (*low > *high) {		/* Negative steps */
-			for (; *low >= *high; (*low) -= step) {
+			if (*low - *high < step || step <= 0) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "step exceeds the specified range");
+				zval_dtor(return_value);
+				RETURN_FALSE;
+			}
+			for (; *low >= *high; (*low) -= (unsigned int)step) {
 				add_next_index_stringl(return_value, low, 1, 1);
 			}
 		} else {				/* Positive steps */
-			for (; *low <= *high; (*low) += step) {
+			if (*high - *low < step || step <= 0) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "step exceeds the specified range");
+				zval_dtor(return_value);
+				RETURN_FALSE;
+			}
+			for (; *low <= *high; (*low) += (unsigned int)step) {
 				add_next_index_stringl(return_value, low, 1, 1);
 			}
 		}
@@ -1460,10 +1470,20 @@ PHP_FUNCTION(range)
 		high = Z_LVAL_P(zhigh);
 
 		if (low > high) { 		/* Negative steps */
+			if (low - high < step || step <= 0) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "step exceeds the specified range");
+				zval_dtor(return_value);
+				RETURN_FALSE;
+			}
 			for (; low >= high; low -= step) {
 				add_next_index_long(return_value, low);
 			}	
 		} else {				/* Positive steps */
+			if (high - low < step || step <= 0) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "step exceeds the specified range");
+				zval_dtor(return_value);
+				RETURN_FALSE;
+			}
 			for (; low <= high; low += step) {
 				add_next_index_long(return_value, low);
 			}	

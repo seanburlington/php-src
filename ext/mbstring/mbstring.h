@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.h,v 1.29 2002/08/14 06:38:07 dets Exp $ */
+/* $Id: mbstring.h,v 1.30 2002/09/26 00:53:47 wez Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -75,6 +75,9 @@ PHP_MSHUTDOWN_FUNCTION(mbstring);
 PHP_RINIT_FUNCTION(mbstring);
 PHP_RSHUTDOWN_FUNCTION(mbstring);
 PHP_MINFO_FUNCTION(mbstring);
+
+/* functions in php_unicode.c */
+PHP_FUNCTION(mb_convert_case);
 
 /* php function registration */
 PHP_FUNCTION(mb_language);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.470 2002/08/02 06:53:48 hirokawa Exp $ */
+/* $Id: main.c,v 1.471 2002/08/07 18:29:35 helly Exp $ */
 
 /* {{{ includes
  */
@@ -382,6 +382,67 @@ PHPAPI int php_printf(const char *format, ...)
 	va_end(args);
 	
 	return ret;
+}
+/* }}} */
+
+/* {{{ php_verror */
+PHPAPI void php_verror(int type, const char *format, va_list args TSRMLS_DC)
+{
+	char *buffer = NULL;
+	
+	if (format)
+		vspprintf(&buffer, 0, format, args);
+	if (buffer) {
+		php_error(type, "%s", buffer);
+		efree(buffer);
+	} else {
+		php_error(E_ERROR, "%s(): Out of memory", get_active_function_name(TSRMLS_C));
+	}
+}
+/* }}} */
+
+/* {{{ php_error_func0 */
+PHPAPI void php_error_func0(int type TSRMLS_DC, const char *format, ...)
+{
+	char *message;
+	va_list args;
+	
+	spprintf(&message, 0, "%s(): %s", get_active_function_name(TSRMLS_C), format);
+	va_start(args, format);
+	php_verror(type, message, args TSRMLS_CC);
+	va_end(args);
+	if (message)
+		efree(message);
+}
+/* }}} */
+
+/* {{{ php_error_func1 */
+PHPAPI void php_error_func1(int type, const char *param1 TSRMLS_DC, const char *format, ...)
+{
+	char *message;
+	va_list args;
+	
+	spprintf(&message, 0, "%s(%s): %s", get_active_function_name(TSRMLS_C), param1, format);
+	va_start(args, format);
+	php_verror(type, message, args TSRMLS_CC);
+	va_end(args);
+	if (message)
+		efree(message);
+}
+/* }}} */
+
+/* {{{ php_error_func2 */
+PHPAPI void php_error_func2(int type, const char *param1, const char *param2 TSRMLS_DC, const char *format, ...)
+{
+	char *message;
+	va_list args;
+	
+	spprintf(&message, 0, "%s(%s,%s): %s", get_active_function_name(TSRMLS_C), param1, param2, format);
+	va_start(args, format);
+	php_verror(type, message, args TSRMLS_CC);
+	va_end(args);
+	if (message)
+		efree(message);
 }
 /* }}} */
 
@@ -1108,7 +1169,7 @@ static int php_hash_environment(TSRMLS_D)
 	char *p;
 	unsigned char _gpc_flags[3] = {0, 0, 0};
 	zend_bool have_variables_order;
-	zval *dummy_track_vars_array;
+	zval *dummy_track_vars_array = NULL;
 	zend_bool initialized_dummy_track_vars_array=0;
 	int i;
 	char *variables_order;

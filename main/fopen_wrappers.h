@@ -15,7 +15,7 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.h,v 1.24 2001/02/26 06:07:31 andi Exp $ */
+/* $Id: fopen_wrappers.h,v 1.25 2001/07/21 15:11:29 andi Exp $ */
 
 #ifndef FOPEN_WRAPPERS_H
 #define FOPEN_WRAPPERS_H
@@ -66,7 +66,8 @@
 
 PHPAPI FILE *php_fopen_wrapper(char *filename, char *mode, int options, int *issock, int *socketd, char **opened_path);
 
-PHPAPI FILE *php_fopen_primary_script(void);
+PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle);
+PHPAPI char *expand_filepath(const char *filepath, char *real_path);
 
 PHPAPI int php_check_open_basedir(char *path);
 PHPAPI int php_check_specific_open_basedir(char *basedir, char *path PLS_DC);

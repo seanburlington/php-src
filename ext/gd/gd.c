@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.14 1999/08/02 19:16:41 zeev Exp $ */
+/* $Id: gd.c,v 1.15 1999/08/05 16:25:09 steinm Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -196,6 +196,12 @@ PHP_MSHUTDOWN_FUNCTION(gd)
 	PHP3_MUTEX_UNLOCK(gdlib_mutex);
 #endif
 	return SUCCESS;
+}
+
+/* Need this for cpdf. See also comment in file.c php3i_get_le_fp() */
+PHPAPI int phpi_get_le_gd(void){
+	GD_TLS_VARS;
+	return GD_GLOBAL(le_gd);
 }
 
 /********************************************************************/

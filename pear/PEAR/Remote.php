@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.41 2003/07/12 14:25:06 cox Exp $
+// $Id: Remote.php,v 1.42 2003/08/02 15:34:19 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -91,7 +91,7 @@ class PEAR_Remote extends PEAR
         $filename = $cachedir.'/xmlrpc_cache_'.$id;
 
         $fp = @fopen($filename, "wb");
-        if ($fp !== null) {
+        if (!$fp) {
             fwrite($fp, serialize($data));
             fclose($fp);
         };

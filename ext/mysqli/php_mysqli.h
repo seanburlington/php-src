@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.1 2003/02/12 00:45:53 georg Exp $ 
+  $Id: php_mysqli.h,v 1.2 2003/02/12 10:39:06 georg Exp $ 
 */
 
 #include <mysql.h>
@@ -186,7 +186,6 @@ PHP_FUNCTION(mysqli_kill);
 PHP_FUNCTION(mysqli_master_query);
 PHP_FUNCTION(mysqli_num_fields);
 PHP_FUNCTION(mysqli_num_rows);
-PHP_FUNCTION(mysqli_num_warnings);
 PHP_FUNCTION(mysqli_options);
 PHP_FUNCTION(mysqli_param_count);
 PHP_FUNCTION(mysqli_ping);

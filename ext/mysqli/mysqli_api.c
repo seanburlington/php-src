@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.1 2003/02/12 00:45:53 georg Exp $ 
+  $Id: mysqli_api.c,v 1.2 2003/02/12 10:39:06 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1079,22 +1079,6 @@ PHP_FUNCTION(mysqli_num_rows)
 	}
 
 	RETURN_LONG(mysql_num_rows(result));
-}
-/* }}} */
-
-/* {{{ proto int mysqli_num_warnings 
- */
-PHP_FUNCTION(mysqli_num_warnings)
-{
-	MYSQL *mysql;
-	zval  *mysql_link = NULL;
-
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "O", &mysql_link, mysqli_link_class_entry) == FAILURE) {
-		return;
-	}
-	MYSQLI_FETCH_RESOURCE(mysql, MYSQL *, &mysql_link, "mysqli_link"); 
-
-	RETURN_LONG(mysql_warning_count(mysql));
 }
 /* }}} */
 

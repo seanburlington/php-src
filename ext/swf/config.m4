@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 2000/05/02 04:01:15 sas Exp $
+dnl $Id: config.m4,v 1.4 2000/05/17 15:47:15 steinm Exp $
 dnl config.m4 for extension libswf
 dnl don't forget to call PHP_EXTENSION(swf)
 dnl This file is a modified version of config.m4
@@ -9,7 +9,7 @@ PHP_ARG_WITH(swf, for libswf support,
 
 if test "$PHP_SWF" != "no"; then
   for i in /usr/local /usr $PHP_SWF; do
-    if test -r $i/libswf.a; then
+    if test -r $i/lib/libswf.a; then
       SWF_DIR=$i
     fi
   done
@@ -18,10 +18,10 @@ if test "$PHP_SWF" != "no"; then
     AC_MSG_ERROR(Please reinstall libswf.a - I cannot find libswf.a)
   fi
 
-  AC_ADD_INCLUDE($SWF_DIR)
+  AC_ADD_INCLUDE($SWF_DIR/include)
 
   PHP_SUBST(SWF_SHARED_LIBADD)
-  AC_ADD_LIBRARY_WITH_PATH(swf, $SWF_DIR, SWF_SHARED_LIBADD)
+  AC_ADD_LIBRARY_WITH_PATH(swf, $SWF_DIR/lib, SWF_SHARED_LIBADD)
   AC_DEFINE(HAVE_SWF,1,[ ])
 
   PHP_EXTENSION(swf, $ext_shared)

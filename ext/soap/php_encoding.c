@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.69 2004/04/21 16:57:18 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.70 2004/04/23 12:22:41 dmitry Exp $ */
 
 #include <time.h>
 
@@ -461,6 +461,8 @@ static zval *to_zval_string(encodeTypePtr type, xmlNodePtr data)
 	if (data && data->children) {
 		if (data->children->type == XML_TEXT_NODE && data->children->next == NULL) {
 			ZVAL_STRING(ret, data->children->content, 1);
+		} else if (data->children->type == XML_CDATA_SECTION_NODE && data->children->next == NULL) {
+			ZVAL_STRING(ret, data->children->content, 1);
 		} else {
 			php_error(E_ERROR,"SOAP-ERROR: Encoding: Violation of encoding rules");
 		}
@@ -479,6 +481,8 @@ static zval *to_zval_stringr(encodeTypePtr type, xmlNodePtr data)
 		if (data->children->type == XML_TEXT_NODE && data->children->next == NULL) {
 			whiteSpace_replace(data->children->content);
 			ZVAL_STRING(ret, data->children->content, 1);
+		} else if (data->children->type == XML_CDATA_SECTION_NODE && data->children->next == NULL) {
+			ZVAL_STRING(ret, data->children->content, 1);
 		} else {
 			php_error(E_ERROR,"SOAP-ERROR: Encoding: Violation of encoding rules");
 		}
@@ -496,6 +500,8 @@ static zval *to_zval_stringc(encodeTypePtr type, xmlNodePtr data)
 	if (data && data->children) {
 		if (data->children->type == XML_TEXT_NODE && data->children->next == NULL) {
 			whiteSpace_collapse(data->children->content);
+			ZVAL_STRING(ret, data->children->content, 1);
+		} else if (data->children->type == XML_CDATA_SECTION_NODE && data->children->next == NULL) {
 			ZVAL_STRING(ret, data->children->content, 1);
 		} else {
 			php_error(E_ERROR,"SOAP-ERROR: Encoding: Violation of encoding rules");

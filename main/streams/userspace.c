@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.25 2004/05/06 14:29:32 pollita Exp $ */
+/* $Id: userspace.c,v 1.26 2004/06/21 18:58:55 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -59,7 +59,6 @@ static void stream_wrapper_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	struct php_user_stream_wrapper * uwrap = (struct php_user_stream_wrapper*)rsrc->ptr;
 
-	php_unregister_url_stream_wrapper(uwrap->protoname TSRMLS_CC);
 	efree(uwrap->protoname);
 	efree(uwrap->classname);
 	efree(uwrap);
@@ -415,10 +414,10 @@ PHP_FUNCTION(stream_wrapper_register)
 	uwrap->wrapper.abstract = uwrap;
 
 	rsrc_id = ZEND_REGISTER_RESOURCE(NULL, uwrap, le_protocols);
-	
+
 	if (zend_lookup_class(uwrap->classname, classname_len, (zend_class_entry***)&uwrap->ce TSRMLS_CC) == SUCCESS) {
 		uwrap->ce = *(zend_class_entry**)uwrap->ce;
-		if (php_register_url_stream_wrapper(protocol, &uwrap->wrapper TSRMLS_CC) == SUCCESS) {
+		if (php_register_url_stream_wrapper_volatile(protocol, &uwrap->wrapper TSRMLS_CC) == SUCCESS) {
 			RETURN_TRUE;
 		} else {
 			/* We failed.  But why? */

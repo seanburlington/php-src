@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.140 2003/08/31 12:41:50 zeev Exp $ */
+/* $Id: xml.c,v 1.141 2003/10/19 23:17:55 shane Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -37,6 +37,9 @@
 
 #include "php_xml.h"
 # include "ext/standard/head.h"
+#ifdef LIBXML_EXPAT_COMPAT
+#include "ext/libxml/php_libxml.h"
+#endif
 
 /* Short-term TODO list:
  * - Implement XML_ExternalEntityParserCreate()
@@ -238,7 +241,7 @@ PHP_MINIT_FUNCTION(xml)
 	php_xml_mem_hdlrs.free_fcn = php_xml_free_wrapper;
 
 #ifdef LIBXML_EXPAT_COMPAT
-	xmlInitParser();
+	php_libxml_initialize();
 #endif
 	return SUCCESS;
 }
@@ -253,7 +256,7 @@ PHP_RINIT_FUNCTION(xml)
 PHP_MSHUTDOWN_FUNCTION(xml)
 {
 #ifdef LIBXML_EXPAT_COMPAT
-	xmlCleanupParser();
+	php_libxml_shutdown();
 #endif
 	return SUCCESS;
 }

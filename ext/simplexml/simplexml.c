@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.64 2003/10/07 15:47:23 zeev Exp $ */
+/* $Id: simplexml.c,v 1.65 2003/10/19 23:17:56 shane Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,6 +28,7 @@
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "php_simplexml.h"
+#include "ext/libxml/php_libxml.h"
 
 zend_class_entry *sxe_class_entry;
 
@@ -1037,7 +1038,7 @@ PHP_MINIT_FUNCTION(simplexml)
 	sxe.create_object = sxe_object_new;
 	sxe_class_entry = zend_register_internal_class(&sxe TSRMLS_CC);
 
-	xmlInitParser();
+	php_libxml_initialize();
 
 	return SUCCESS;
 }
@@ -1047,7 +1048,7 @@ PHP_MINIT_FUNCTION(simplexml)
  */
 PHP_MSHUTDOWN_FUNCTION(simplexml)
 {
-	xmlCleanupParser();
+	php_libxml_shutdown();
 
 	return SUCCESS;
 }
@@ -1075,7 +1076,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.64 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.65 $");
 	php_info_print_table_end();
 }
 /* }}} */

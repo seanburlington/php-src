@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.1 2003/10/19 21:48:46 shane Exp $ */
+/* $Id: php_libxml.h,v 1.2 2003/10/19 23:17:56 shane Exp $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -55,6 +55,9 @@ PHP_FUNCTION(libxml_set_streams_context);
 #else
 #define LIBXML(v) (libxml_globals.v)
 #endif
+
+PHP_LIBXML_API void php_libxml_initialize();
+PHP_LIBXML_API void php_libxml_shutdown();
 
 #endif /* PHP_LIBXML_H */
 

@@ -6,7 +6,7 @@ Sybase-CT unbuffered query
 <?php
 /* This file is part of PHP test framework for ext/sybase_ct
  *
- * $Id: test_unbuffered_query.phpt,v 1.1 2004/02/09 00:32:39 thekid Exp $ 
+ * $Id: test_unbuffered_query.phpt,v 1.2 2004/05/21 20:54:39 thekid Exp $ 
  */
 
   require('test.inc');
@@ -38,15 +38,6 @@ Sybase-CT unbuffered query
   }
   var_dump($i, $j, $i - $j);
   
-  // Test #4: Auto-cancel
-  $q= sybase_unbuffered_query('select name from master..systypes', $db);
-  var_dump($q);
-  sybase_fetch_assoc($q);
-  $q= sybase_unbuffered_query('select name from master..systypes', $db);
-  var_dump($q);
-  sybase_fetch_assoc($q);
-  sybase_free_result($q);
-  
   sybase_close($db);
 ?>
 --EXPECTF--
@@ -59,12 +50,8 @@ resource(%d) of type (sybase-ct result)
 resource(%d) of type (Unknown)
 
 Warning: sybase_num_rows(): %d is not a valid Sybase result resource in %s/test_unbuffered_query.php on line %d
-NULL
+bool(false)
 resource(%d) of type (sybase-ct result)
 int(%d)
 int(%d)
 int(4)
-resource(%d) of type (sybase-ct result)
-
-Notice: sybase_unbuffered_query(): called without first fetching all rows from a previous unbuffered query in %s/test_unbuffered_query.php on line %d
-resource(%d) of type (sybase-ct result)

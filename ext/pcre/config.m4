@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.14 1999/10/04 15:18:16 sas Exp $
+dnl $Id: config.m4,v 1.15 1999/10/24 16:37:28 sas Exp $
 dnl config.m4 for extension pcre
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -60,3 +60,5 @@ AC_ARG_WITH(pcre-regex,
 ]) 
 AC_SUBST(PCRE_LIBADD)
 AC_SUBST(PCRE_SUBDIRS)
+
+AC_CHECK_FUNC(memmove, [], [AC_DEFINE(USE_BCOPY, 1)])

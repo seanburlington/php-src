@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_variables.h,v 1.13 2001/12/11 15:31:05 sebastian Exp $ */
+/* $Id: php_variables.h,v 1.14 2002/10/13 08:38:09 shane Exp $ */
 
 #ifndef PHP_VARIABLES_H
 #define PHP_VARIABLES_H
@@ -31,7 +31,7 @@
 #define PARSE_STRING 3
 
 void php_treat_data(int arg, char *str, zval* destArray TSRMLS_DC);
-PHPAPI void php_import_environment_variables(zval *array_ptr TSRMLS_DC);
+extern PHPAPI void (*php_import_environment_variables)(zval *array_ptr TSRMLS_DC);
 PHPAPI void php_register_variable(char *var, char *val, pval *track_vars_array TSRMLS_DC);
 /* binary-safe version */
 PHPAPI void php_register_variable_safe(char *var, char *val, int val_len, pval *track_vars_array TSRMLS_DC);

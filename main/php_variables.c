@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.44 2002/09/08 00:27:05 yohgaki Exp $ */
+/* $Id: php_variables.c,v 1.45 2002/10/13 08:38:09 shane Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -28,6 +28,9 @@
 
 #include "zend_globals.h"
 
+/* for systems that need to override reading of environment variables */
+void _php_import_environment_variables(zval *array_ptr TSRMLS_DC);
+PHPAPI void (*php_import_environment_variables)(zval *array_ptr TSRMLS_DC) = _php_import_environment_variables;
 
 PHPAPI void php_register_variable(char *var, char *strval, zval *track_vars_array TSRMLS_DC)
 {
@@ -318,8 +321,7 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 	}
 }
 
-
-void php_import_environment_variables(zval *array_ptr TSRMLS_DC)
+void _php_import_environment_variables(zval *array_ptr TSRMLS_DC)
 {
 	char **env, *p, *t;
 

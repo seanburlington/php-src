@@ -1,15 +1,12 @@
-dnl $Id: config.m4,v 1.2 2001/01/27 10:05:29 sas Exp $
+dnl $Id: config.m4,v 1.3 2001/03/16 00:36:30 sniper Exp $
 dnl config.m4 for extension libming
-dnl don't forget to call PHP_EXTENSION(ming)
-dnl This file is a modified version of config.m4
-dnl in php4/ext/mcrypt
 
-PHP_ARG_WITH(ming, for ming support,
+PHP_ARG_WITH(ming, whether to include ming support,
 [  --with-ming[=DIR]        Include ming support])
 
 if test "$PHP_MING" != "no"; then
-  for i in /usr/lib /usr/local /usr $PHP_MING; do
-    if test -r $i/libming.so; then
+  for i in $PHP_MING /usr/local /usr; do
+    if test -r $i/lib/libming.so; then
       MING_DIR=$i
     fi
   done
@@ -18,10 +15,10 @@ if test "$PHP_MING" != "no"; then
     AC_MSG_ERROR(Please reinstall libming.so - I cannot find libming.so)
   fi
 
-  AC_ADD_INCLUDE($MING_DIR)
+  AC_ADD_INCLUDE($MING_DIR/include)
 
   PHP_SUBST(MING_SHARED_LIBADD)
-  AC_ADD_LIBRARY_WITH_PATH(ming, $MING_DIR, MING_SHARED_LIBADD)
+  AC_ADD_LIBRARY_WITH_PATH(ming, $MING_DIR/lib, MING_SHARED_LIBADD)
   AC_DEFINE(HAVE_MING,1,[ ])
 
   PHP_EXTENSION(ming, $ext_shared)

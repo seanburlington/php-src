@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.130 2003/08/12 02:16:40 abies Exp $ */
+/* $Id: interbase.c,v 1.131 2003/08/12 10:02:25 abies Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -687,7 +687,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.130 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.131 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "Yes");
 #endif
@@ -2468,8 +2468,6 @@ static void _php_ibase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int fetch_type)
 	ibase_result *ib_result;
 	XSQLVAR *var;
 	
-	RESET_ERRMSG;
-	
 	switch (ZEND_NUM_ARGS()) {
 		case 1:
 			if (ZEND_NUM_ARGS() == 1 && zend_get_parameters_ex(1, &result_arg) == FAILURE) {
@@ -2490,14 +2488,11 @@ static void _php_ibase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int fetch_type)
 
 	ZEND_FETCH_RESOURCE(ib_result, ibase_result *, result_arg, -1, "InterBase result", le_result);
 
-	if (ib_result->out_sqlda == NULL) {
-		_php_ibase_module_error("Trying to fetch results from a non-select query");
+	if (ib_result->out_sqlda == NULL || !ib_result->has_more_rows) {
 		RETURN_FALSE;
-	}
-	
-	if (!ib_result->has_more_rows) {
-		RETURN_FALSE;
-	}
+	} /* might have been because of an error */
+
+	RESET_ERRMSG;
 	
 	array_init(return_value);
 	

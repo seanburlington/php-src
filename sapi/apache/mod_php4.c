@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.7 1999/12/17 14:24:39 sas Exp $ */
+/* $Id: mod_php4.c,v 1.8 1999/12/20 23:09:50 sas Exp $ */
 
 #include "zend.h"
 #include "php.h"
@@ -212,7 +212,7 @@ int sapi_apache_send_headers(sapi_headers_struct *sapi_headers SLS_DC)
 
 
 sapi_module_struct sapi_module = {
-	"PHP Language",					/* name */
+	"Apache",						/* name */
 									
 	php_module_startup,				/* startup */
 	php_module_shutdown_wrapper,	/* shutdown */

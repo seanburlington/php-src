@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.6 1999/12/04 13:25:41 zeev Exp $ */
+/* $Id: roxen.c,v 1.7 1999/12/20 23:09:52 sas Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -458,7 +458,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
   char buf[512];
 	
   PUTS("<table border=5 width=600>\n");
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.6 1999/12/04 13:25:41 zeev Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.7 1999/12/20 23:09:52 sas Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -505,7 +505,7 @@ static int php_roxen_startup(sapi_module_struct *sapi_module)
 void pike_module_exit(void);
 
 static sapi_module_struct sapi_module = {
-  "PHP Language",
+  "Roxen",
 
   php_module_startup,						/* startup */
   pike_module_exit,			/* shutdown */

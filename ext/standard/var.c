@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.54 2000/04/04 15:14:23 thies Exp $ */
+/* $Id: var.c,v 1.55 2000/05/17 19:42:08 hholzgra Exp $ */
 
 
 /* {{{ includes 
@@ -132,7 +132,8 @@ void php_var_dump(pval **struc, int level)
 /* }}} */
 
 
-/* {{{ php_var_dump */
+/* {{{ proto void var_dump(mixed var)
+   Dumps a string representation of variable to output */
 PHP_FUNCTION(var_dump)
 {
 	zval ***args;

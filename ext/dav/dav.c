@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dav.c,v 1.11 2000/02/19 23:21:26 zeev Exp $ */
+/* $Id: dav.c,v 1.12 2000/02/22 15:48:42 eschmid Exp $ */
 
 #define IS_EXT_MODULE
 #if COMPILE_DL
@@ -241,7 +241,7 @@ int phpdav_mkcol_create_handler(request_rec *r)
 
 /************************* EXTENSION FUNCTIONS *************************/
 
-/* {{{ proto void   dav_set_mkcol_handlers(string test, string create)
+/* {{{ proto void dav_set_mkcol_handlers(string test, string create)
    Sets the function to test whether a DAV collection exists for MKCOL */
 PHP_FUNCTION(dav_set_mkcol_handlers)
 {

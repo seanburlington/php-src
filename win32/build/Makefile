@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.23.2.1 2005/01/22 03:38:41 edink Exp $
+# $Id: Makefile,v 1.23.2.2 2005/02/24 23:31:37 edink Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -73,7 +73,7 @@ clean-sapi:
 clean: clean-sapi
 	@echo Cleaning build dirs
 	@for %D in (_x $(BUILD_DIRS_SUB)) do @if exist %D @del /F /Q %D\*.* > NUL
-	-@del /F /Q $(BUILD_DIR)\*.res $(BUILD_DIR)\*.lib $(BUILD_DIR)\*.ilk $(BUILD_DIR)\*.pdb $(BUILD_DIR)\*.exp $(PHPDEF) $(BUILD_DIR)\php-$(PHP_VERSION_STRING).zip > NUL
+	-@del /F /Q $(BUILD_DIR)\*.res $(BUILD_DIR)\*.lib $(BUILD_DIR)\*.ilk $(BUILD_DIR)\*.pdb $(BUILD_DIR)\*.exp $(PHPDEF) $(BUILD_DIR)\php-$(PHP_VERSION_STRING)-Win32.zip $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)-Win32.zip > NUL
 	-rmdir /s /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING) 
 
 clean-pecl:
@@ -95,13 +95,14 @@ build-snap:
 build-dist: $(BUILD_DIR)\deplister.exe
 	-rmdir /s /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING)
 	-rmdir /s /q $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)
-	-del /f /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING).zip
+	-del /f /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING)-Win32.zip
+	-del /f /q $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)-Win32.zip
 	$(BUILD_DIR)\php.exe -n win32/build/mkdist.php "$(BUILD_DIR)" "$(PHPDLL)" "$(SAPI_TARGETS)" "$(EXT_TARGETS)" "$(PECL_TARGETS)" "$(SNAPSHOT_TEMPLATE)"
 	cd $(BUILD_DIR)\php-$(PHP_VERSION_STRING)
-	-$(ZIP) -9 -r ..\php-$(PHP_VERSION_STRING).zip .
+	-$(ZIP) -9 -r ..\php-$(PHP_VERSION_STRING)-Win32.zip .
 	cd ..\..
 	cd $(BUILD_DIR)\pecl-$(PHP_VERSION_STRING)
-	-$(ZIP) -9 -r ..\pecl-$(PHP_VERSION_STRING).zip .
+	-$(ZIP) -9 -r ..\pecl-$(PHP_VERSION_STRING)-Win32.zip .
 	cd ..\..
 
 dist: all build-dist

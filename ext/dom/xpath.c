@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.2 2003/08/22 15:04:10 wez Exp $ */
+/* $Id: xpath.c,v 1.3 2003/08/24 10:24:22 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -92,7 +92,7 @@ int dom_xpath_document_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 	ALLOC_ZVAL(*retval);
 	if (NULL == (*retval = php_dom_create_object((xmlNodePtr) docp, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
+		php_error(E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -115,7 +115,7 @@ PHP_FUNCTION(dom_xpath_query)
 
 	ctxp = (xmlXPathContextPtr) intern->ptr;
 	if (ctxp == NULL) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid XPath Context");
+		php_error(E_WARNING, "Invalid XPath Context");
 		RETURN_FALSE;
 	}
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.13 2003/07/27 17:57:05 rrichards Exp $ */
+/* $Id: php_dom.h,v 1.14 2003/08/24 10:24:22 rrichards Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -71,7 +71,8 @@ zend_object_value dom_objects_new(zend_class_entry *class_type TSRMLS_DC);
 #if defined(LIBXML_XPATH_ENABLED)
 zend_object_value dom_xpath_objects_new(zend_class_entry *class_type TSRMLS_DC);
 #endif
-void php_dom_throw_error(int error_code, zval **retval TSRMLS_DC);
+int dom_get_strict_error(dom_ref_obj *document);
+void php_dom_throw_error(int error_code, int strict_error TSRMLS_DC);
 void node_free_resource(xmlNodePtr node TSRMLS_DC);
 void node_list_unlink(xmlNodePtr node TSRMLS_DC);
 int decrement_node_ptr(dom_object *object TSRMLS_DC);

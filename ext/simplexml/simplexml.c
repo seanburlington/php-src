@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.141 2004/07/25 14:59:21 chregu Exp $ */
+/* $Id: simplexml.c,v 1.142 2004/08/04 14:41:56 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -764,8 +764,8 @@ sxe_objects_compare(zval *object1, zval *object2 TSRMLS_DC)
 }
 /* }}} */
 
-/* {{{ xpath()
- */
+/* {{{ array SimpleXMLElement::xpath(string path)
+   Runs XPath query on the XML data */
 SXE_METHOD(xpath)
 {
 	php_sxe_object    *sxe;
@@ -868,8 +868,8 @@ SXE_METHOD(registerXPathNamespace)
 
 /* }}} */
 
-/* {{{ proto asXML([string filename])
- */
+/* {{{ proto string SimpleXMLElement::asXML([string filename])
+   Return a well-formed XML string based on SimpleXML element */
 SXE_METHOD(asXML)
 {
 	php_sxe_object     *sxe;
@@ -941,8 +941,8 @@ SXE_METHOD(asXML)
 }
 /* }}} */
 
-/* {{{ simplexml_children()
- */
+/* {{{ proto object SimpleXMLElement::children()
+   Finds children of given node */
 SXE_METHOD(children)
 {
 	php_sxe_object *sxe;
@@ -963,8 +963,8 @@ SXE_METHOD(children)
 }
 /* }}} */
 
-/* {{{ simplexml_attributes()
- */
+/* {{{ proto array SimpleXMLElement::attributes([string ns])
+   Identifies an element's attributes */
 SXE_METHOD(attributes)
 {
 	php_sxe_object *sxe;
@@ -1303,6 +1303,9 @@ PHP_FUNCTION(simplexml_load_string)
 }
 /* }}} */
 
+
+/* {{{ proto SimpleXMLElement::__construct()
+   SimpleXMLElement constructor */
 SXE_METHOD(__construct)
 {
 	php_sxe_object *sxe = php_sxe_fetch_object(getThis() TSRMLS_CC);
@@ -1327,6 +1330,8 @@ SXE_METHOD(__construct)
 	php_libxml_increment_doc_ref((php_libxml_node_object *)sxe, docp TSRMLS_CC);
 	php_libxml_increment_node_ptr((php_libxml_node_object *)sxe, xmlDocGetRootElement(docp), NULL TSRMLS_CC);
 }
+/* }}} */
+
 
 typedef struct {
 	zend_object_iterator  intern;
@@ -1675,7 +1680,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.141 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.142 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

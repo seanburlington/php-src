@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.244.2.25 2003/08/28 21:09:21 andrey Exp $ */
+/* $Id: pgsql.c,v 1.244.2.26 2003/09/06 15:31:14 helly Exp $ */
 
 #include <stdlib.h>
 
@@ -319,7 +319,9 @@ static int _rollback_transactions(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	}
 	orig = PGG(ignore_notices);
 	PGG(ignore_notices) = 1;
-	res = PQexec(link,"BEGIN;ROLLBACK;");
+	res = PQexec(link,"BEGIN;");
+	PQclear(res);
+	res = PQexec(link,"ROLLBACK;");
 	PQclear(res);
 	PGG(ignore_notices) = orig;
 

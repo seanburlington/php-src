@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.70 2002/06/07 10:18:59 cox Exp $
+// $Id: Common.php,v 1.71 2002/06/07 10:22:00 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -547,7 +547,6 @@ class PEAR_Common extends PEAR
                 break;
             case 'dep':
                 if ($data && !$this->in_changelog) {
-                    echo "D:: $data\n";
                     $this->pkginfo['release_deps'][$this->d_i]['name'] = $data;
                 }
                 break;

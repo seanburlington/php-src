@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.22 2003/03/29 16:14:41 moriyoshi Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.23 2003/03/29 16:18:11 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -334,9 +334,11 @@ static int sapi_cgi_read_post(char *buffer, uint count_bytes TSRMLS_DC)
 			tmp_read_bytes = FCGX_GetStr( pos, count_bytes-read_bytes, request->in );
 			pos += tmp_read_bytes;
 		} else {
-#endif
 			tmp_read_bytes = read(0, buffer+read_bytes, count_bytes-read_bytes);
 		}
+#else
+		tmp_read_bytes = read(0, buffer+read_bytes, count_bytes-read_bytes);
+#endif
 
 		if (tmp_read_bytes<=0) {
 			break;

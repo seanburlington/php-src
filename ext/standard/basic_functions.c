@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.343 2001/05/21 13:36:42 elixer Exp $ */
+/* $Id: basic_functions.c,v 1.344 2001/05/21 15:27:11 andi Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -2390,8 +2390,6 @@ PHP_FUNCTION(get_loaded_extensions)
    Return an array containing the names and values of all defined constants */
 PHP_FUNCTION(get_defined_constants)
 {
-	ELS_FETCH();
-
 	if (ZEND_NUM_ARGS() != 0) {
 		WRONG_PARAM_COUNT;
 	}

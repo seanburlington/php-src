@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.68 2001/02/26 06:07:17 andi Exp $ */
+/* $Id: datetime.c,v 1.69 2001/04/29 15:48:07 derick Exp $ */
 
 
 #include "php.h"
@@ -786,6 +786,8 @@ PHP_FUNCTION(strtotime)
 	}
 
 	convert_to_string_ex(z_time);
+	if (Z_STRLEN_PP(z_time) == 0)
+		php_error (E_NOTICE, "strtotime() called with empty time parameter");
 	if (argc == 2) {
 		convert_to_long_ex(z_now);
 		now = Z_LVAL_PP(z_now);

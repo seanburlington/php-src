@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.37 2002/02/28 08:26:46 sebastian Exp $ */
+/* $Id: link.c,v 1.38 2002/06/16 21:24:15 sesser Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -114,6 +114,18 @@ PHP_FUNCTION(symlink)
 		RETURN_FALSE;
 	}
 
+	if (PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(frompath), NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
+		RETURN_FALSE;
+	}
+
+	if (php_check_open_basedir(Z_STRVAL_PP(topath) TSRMLS_CC)) {
+		RETURN_FALSE;
+	}
+
+	if (php_check_open_basedir(Z_STRVAL_PP(frompath) TSRMLS_CC)) {
+		RETURN_FALSE;
+	}
+
 	if (!strncasecmp(Z_STRVAL_PP(topath), "http://", 7) || !strncasecmp(Z_STRVAL_PP(topath), "ftp://", 6)) {
 		php_error(E_WARNING, "Unable to symlink to a URL");
 		RETURN_FALSE;
@@ -143,6 +155,18 @@ PHP_FUNCTION(link)
 	convert_to_string_ex(frompath);
 
 	if (PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(topath), NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
+		RETURN_FALSE;
+	}
+
+	if (PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(frompath), NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
+		RETURN_FALSE;
+	}
+
+	if (php_check_open_basedir(Z_STRVAL_PP(topath) TSRMLS_CC)) {
+		RETURN_FALSE;
+	}
+
+	if (php_check_open_basedir(Z_STRVAL_PP(frompath) TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 

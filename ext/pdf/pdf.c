@@ -27,9 +27,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.37 2000/05/18 05:35:10 steinm Exp $ */
+/* $Id: pdf.c,v 1.38 2000/05/18 15:34:32 zeev Exp $ */
 
-/* pdflib 2.01 is subject to the ALADDIN FREE PUBLIC LICENSE.
+/* pdflib 2.02 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
 
 /* Note that there is no code from the pdflib package in this file */

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.35.2.6 2003/06/17 17:13:18 pajoye Exp $
+// $Id: Config.php,v 1.35.2.7 2003/06/18 22:32:04 pajoye Exp $
 
 require_once 'PEAR.php';
 require_once 'System.php';
@@ -73,7 +73,15 @@ if (getenv('PHP_PEAR_INSTALL_DIR')) {
 if (getenv('PHP_PEAR_EXTENSION_DIR')) {
     define('PEAR_CONFIG_DEFAULT_EXT_DIR', getenv('PHP_PEAR_EXTENSION_DIR'));
 } else {
-    define('PEAR_CONFIG_DEFAULT_EXT_DIR', ini_get('extension_dir'));
+    if (!ini_get('extension_dir')) {
+        define('PEAR_CONFIG_DEFAULT_EXT_DIR', ini_get('extension_dir'));
+    } elseif (defined('PEAR_EXTENSION_DIR') && @is_dir(PEAR_EXTENSION_DIR)) {
+        define('PEAR_CONFIG_DEFAULT_EXT_DIR', PEAR_EXTENSION_DIR);
+    } elseif (defined('PHP_EXTENSION_DIR')) {
+        define('PEAR_CONFIG_DEFAULT_EXT_DIR', PHP_EXTENSION_DIR);
+    } else {
+        define('PEAR_CONFIG_DEFAULT_EXT_DIR', '.');
+    }
 }
 
 // Default for doc_dir

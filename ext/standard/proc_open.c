@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.7 2003/02/17 03:26:16 shane Exp $ */
+/* $Id: proc_open.c,v 1.8 2003/02/17 05:47:56 shane Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -476,7 +476,7 @@ PHP_FUNCTION(proc_open)
 	struct php_process_handle *proc;
 	int is_persistent = 0; /* TODO: ensure that persistent procs will work */
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "saz/|sa!", &command,
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "saz/|s!a!", &command,
 				&command_len, &descriptorspec, &pipes, &cwd, &cwd_len, &environment) == FAILURE) {
 		RETURN_FALSE;
 	}
@@ -484,8 +484,6 @@ PHP_FUNCTION(proc_open)
 	if (FAILURE == php_make_safe_mode_command(command, &command, is_persistent TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
-
-	command_len = strlen(command);
 
 	if (cwd_len==0) cwd = NULL;
 

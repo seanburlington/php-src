@@ -1,3 +1,21 @@
+2005-02-19  Rui Hirokawa  <rui_hirokawa@ybb.ne.jp>
+
+    * (PHP_5_0)
+      ZendEngine2/zend_language_scanner.l:
+      MFH: fixed #31987 zend-multibyte in ZTS.
+
+    * ZendEngine2/zend_language_scanner.l:
+      fixed #31987 zend-multibyte in ZTS.
+
+2005-02-19  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ext/sqlite/tests/sqlite_oo_031.phpt
+      ext/sqlite/tests/sqlite_oo_032.phpt
+      ext/sqlite/tests/sqlite_spl_001.phpt
+      ext/sqlite/tests/sqlite_spl_002.phpt
+      ext/sqlite/tests/sqlite_spl_003.phpt:
+      - Regroup and add a test
+
 2005-02-18  Derick Rethans  <php@derickrethans.nl>
 
     * (PHP_4_3)
@@ -295,7 +313,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1899 2005/02/19 01:35:15 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1900 2005/02/20 01:35:54 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -776,7 +794,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1899 2005/02/19 01:35:15 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1900 2005/02/20 01:35:54 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -2250,7 +2268,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1899 2005/02/19 01:35:15 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1900 2005/02/20 01:35:54 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

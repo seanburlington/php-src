@@ -1,15 +1,15 @@
-dnl $Id: config.m4,v 1.31 2001/07/26 23:07:45 thies Exp $
+dnl $Id: config.m4,v 1.32 2001/09/07 00:24:04 sniper Exp $
 
 AC_DEFUN(AC_OCI8_VERSION,[
   AC_MSG_CHECKING([Oracle version])
   if test -s "$OCI8_DIR/orainst/unix.rgs"; then
 	OCI8_VERSION=`grep '"ocommon"' $OCI8_DIR/orainst/unix.rgs | sed 's/[ ][ ]*/:/g' | cut -d: -f 6 | cut -c 2-4`
 	test -z "$OCI8_VERSION" && OCI8_VERSION=7.3
-  elif test -f $OCI8_DIR/lib/libclntsh.s?.9.0; then
+  elif test -f $OCI8_DIR/lib/libclntsh.$SHLIB_SUFFIX_NAME.9.0; then
 	OCI8_VERSION=9.0
-  elif test -f $OCI8_DIR/lib/libclntsh.s?.8.0; then
+  elif test -f $OCI8_DIR/lib/libclntsh.$SHLIB_SUFFIX_NAME.8.0; then
 	OCI8_VERSION=8.1
-  elif test -f $OCI8_DIR/lib/libclntsh.s?.1.0; then
+  elif test -f $OCI8_DIR/lib/libclntsh.$SHLIB_SUFFIX_NAME.1.0; then
 	OCI8_VERSION=8.0
   elif test -f $OCI8_DIR/lib/libclntsh.a; then 
     if test -f $OCI8_DIR/lib/libcore4.a; then 

@@ -1,5 +1,5 @@
 # $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.31 2001/06/03 17:11:05 sas Exp $
+# $Id: config.m4,v 1.32 2001/09/07 00:24:06 sniper Exp $
 
 dnl Fallback for --with-xml[=DIR]
 AC_ARG_WITH(xml,[],enable_xml=$withval)
@@ -42,7 +42,7 @@ else
   AC_DEFINE(HAVE_LIBEXPAT,  1, [ ])
 
   for i in $PHP_XML $PHP_EXPAT_DIR; do
-    if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.s? ; then
+    if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.$SHLIB_SUFFIX_NAME ; then
       EXPAT_DIR=$i
     fi
   done

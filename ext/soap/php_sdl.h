@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.h,v 1.26 2004/02/10 13:41:21 dmitry Exp $ */
+/* $Id: php_sdl.h,v 1.27 2004/02/12 16:42:34 dmitry Exp $ */
 
 #ifndef PHP_SDL_H
 #define PHP_SDL_H
@@ -115,7 +115,6 @@ struct _sdlSoapBindingFunction {
 
 	sdlSoapBindingFunctionBody  input;
 	sdlSoapBindingFunctionBody  output;
-	sdlSoapBindingFunctionBody  fault;
 };
 
 struct _sdlRestrictionInt {

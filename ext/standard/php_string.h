@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.32 2001/01/14 16:36:30 elixer Exp $ */
+/* $Id: php_string.h,v 1.33 2001/01/15 10:48:48 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -79,6 +79,12 @@ PHP_FUNCTION(strnatcasecmp);
 PHP_FUNCTION(substr_count);
 PHP_FUNCTION(str_pad);
 PHP_FUNCTION(sscanf);
+
+
+#if defined(HAVE_LOCALECONV) && defined(ZTS)
+PHP_MINIT_FUNCTION(localeconv);
+PHP_MSHUTDOWN_FUNCTION(localeconv);
+#endif
 
 #define strnatcmp(a, b) \
 	strnatcmp_ex(a, strlen(a), b, strlen(b), 0)

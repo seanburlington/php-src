@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.52.2.1 2002/03/11 19:04:28 helly Exp $ */
+/* $Id: exif.c,v 1.52.2.2 2002/03/16 20:02:12 helly Exp $ */
 
 /*	ToDos
  *
@@ -1065,7 +1065,7 @@ void add_assoc_image_info( pval *value, int sub_array, image_info_type *image_in
 */
 static void exif_process_COM (image_info_type *image_info, uchar *value, int length)
 {
-    exif_add_image_info( image_info, SECTION_COMMENT, "Comment", TAG_COMPUTED_VALUE, TAG_FMT_STRING, length, value);
+    exif_add_image_info( image_info, SECTION_COMMENT, "Comment", TAG_COMPUTED_VALUE, TAG_FMT_STRING, length-2, value+2);
 }
 /* }}} */
 
@@ -1788,7 +1788,7 @@ static int exif_scan_JPEG_header(image_info_type *ImageInfo, FILE *infile)
 				return (ImageInfo->sections_found&(~FOUND_COMPUTED)) ? TRUE : FALSE;
 
 			case M_COM: /* Comment section */
-				exif_process_COM(ImageInfo, (char *)Data+2, itemlen);
+				exif_process_COM(ImageInfo, (char *)Data, itemlen);
 				break;
 
 			case M_EXIF:

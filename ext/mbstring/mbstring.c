@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.10 2003/03/05 06:16:54 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.142.2.11 2003/04/01 11:50:31 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -2594,7 +2594,7 @@ PHP_FUNCTION(mb_convert_encoding)
 				zend_hash_move_forward(target_hash);
 				i--;
 			}
-			if ( !strlen(_from_encodings)) {
+			if (_from_encodings != NULL && !strlen(_from_encodings)) {
 				efree(_from_encodings);
 				_from_encodings = NULL;
 			}

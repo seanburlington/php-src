@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
 */
 
+/* $Id: getopt.c,v 1.5 2003/04/16 02:34:57 sniper Exp $ */
+
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>

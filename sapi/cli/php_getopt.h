@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
 */
 
+/* $Id: php_getopt.h,v 1.3 2003/04/16 02:34:57 sniper Exp $ */
+
 #include "php.h"
 
 /* Define structure for one recognized option (both single char and long name).

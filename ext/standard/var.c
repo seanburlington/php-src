@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.29 1999/09/24 18:57:02 andrey Exp $ */
+/* $Id: var.c,v 1.30 1999/10/18 15:03:29 thies Exp $ */
 
 
 /* {{{ includes 
@@ -419,6 +419,7 @@ int php_var_unserialize(pval **rval, const char **p, const char *max)
 				(*p)++;
 			}
 			if (**p != ':' || *((*p) + 1) != '{') {
+			  	pval_destructor(*rval);
 				return 0;
 			}
 			for ((*p) += 2; **p && **p != '}' && i > 0; i--) {
@@ -426,11 +427,13 @@ int php_var_unserialize(pval **rval, const char **p, const char *max)
 				pval *data = emalloc(sizeof(pval));
 				
 				if (!php_var_unserialize(&key, p, max)) {
+					pval_destructor(*rval);
 				    efree(key);
 					efree(data);
 					return 0;
 				}
 				if (!php_var_unserialize(&data, p, max)) {
+					pval_destructor(*rval);
 					pval_destructor(key);
 				    efree(key);
 					efree(data);

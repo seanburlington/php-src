@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.1 2002/03/18 17:39:45 ssb Exp $
+// $Id: Config.php,v 1.2 2002/03/21 11:16:15 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";
@@ -37,9 +37,9 @@ class PEAR_Command_Config extends PEAR_Command_Common
      *
      * @access public
      */
-    function PEAR_Command_Config($ui)
+    function PEAR_Command_Config(&$ui, &$config)
     {
-        parent::PEAR_Command_Common($ui);
+        parent::PEAR_Command_Common($ui, $config);
     }
 
     // }}}
@@ -59,9 +59,9 @@ class PEAR_Command_Config extends PEAR_Command_Common
     // }}}
     // {{{ run()
 
-    function run($command, $options, $params)
+    function run($command, $params)
     {
-        $cf = $this->config;
+        $cf =& $this->config;
         $failmsg = '';
         switch ($command) {
             case 'config-show': {

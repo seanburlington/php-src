@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Login.php,v 1.2 2002/03/19 19:31:02 ssb Exp $
+// $Id: Login.php,v 1.3 2002/03/21 11:16:15 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Remote.php";
@@ -35,7 +35,7 @@ class PEAR_Command_Login extends PEAR_Command_Common
      *
      * @access public
      */
-    function PEAR_Command_Login($ui)
+    function PEAR_Command_Login(&$ui, &$config)
     {
         parent::PEAR_Command_Common($ui);
     }
@@ -70,7 +70,7 @@ class PEAR_Command_Login extends PEAR_Command_Common
      *
      * @access public
      */
-    function run($command, $options, $params)
+    function run($command, $params)
     {
         $cf = $this->config;
         $failmsg = '';
@@ -83,7 +83,7 @@ class PEAR_Command_Login extends PEAR_Command_Common
                 }
                 $this->ui->displayLine("Logging in to $server.");
                 $username = trim($this->ui->userDialog('Username', 'text', $username));
-                
+
                 $cf->set('username', $username);
                 $password = trim($this->ui->userDialog('Password', 'password'));
                 $cf->set('password', $password);

@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: namedvalue_to_zval.c,v 1.4 2001/02/26 06:07:15 andi Exp $
+ * $Id: namedvalue_to_zval.c,v 1.5 2001/08/09 22:00:04 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -56,8 +56,15 @@ static zend_bool satellite_any_to_zval_long(
 		const CORBA_any * pSource, zval * pDestination)
 {
 	CORBA_long * p_value = (CORBA_long *)pSource->_value;
-	ZVAL_LONG(pDestination, *p_value);
-	return TRUE;
+	if (p_value)
+	{
+		ZVAL_LONG(pDestination, *p_value);
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
 }
 
 static zend_bool satellite_any_to_zval_short(

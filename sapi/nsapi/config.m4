@@ -1,8 +1,10 @@
-dnl ## $Id: config.m4,v 1.9 2001/04/03 20:59:49 wsanchez Exp $ -*- sh -*-
+dnl
+dnl $Id: config.m4,v 1.10 2001/11/30 19:01:31 sniper Exp $
+dnl
 
 AC_MSG_CHECKING(for NSAPI support)
 AC_ARG_WITH(nsapi,
-[  --with-nsapi=DIR        Specify path to the installed Netscape],[
+[  --with-nsapi=DIR        Build PHP as NSAPI module for use with iPlanet.],[
   PHP_NSAPI=$withval
 ],[
   PHP_NSAPI=no

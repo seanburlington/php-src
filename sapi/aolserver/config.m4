@@ -1,4 +1,6 @@
-dnl ## $Id: config.m4,v 1.13 2001/05/12 11:09:02 sas Exp $ -*- sh -*-
+dnl
+dnl $Id: config.m4,v 1.14 2001/11/30 19:01:28 sniper Exp $
+dnl
 
 AC_MSG_CHECKING(for AOLserver support)
 AC_ARG_WITH(aolserver,

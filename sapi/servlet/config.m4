@@ -1,5 +1,6 @@
-# $Id: config.m4,v 1.11 2001/10/30 23:27:26 sniper Exp $
-# config.m4 for servlet sapi
+dnl
+dnl $Id: config.m4,v 1.12 2001/11/30 19:01:32 sniper Exp $
+dnl
 
 AC_MSG_CHECKING(for Servlet support)
 AC_ARG_WITH(servlet,

@@ -1,3 +1,7 @@
+dnl
+dnl $Id: config.m4,v 1.5 2001/11/30 19:01:31 sniper Exp $
+dnl
+
 PHP_ARG_WITH(pi3web,for Pi3Web Support,
 [  --with-pi3web=DIR       Build PHP as a module for use with Pi3Web.])
 

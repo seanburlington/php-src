@@ -1,5 +1,6 @@
-dnl ## -*- sh -*-
-
+dnl
+dnl $Id: config.m4,v 1.45 2001/11/30 19:01:28 sniper Exp $
+dnl
 
 AC_MSG_CHECKING(for Apache module support via DSO through APXS)
 AC_ARG_WITH(apxs,

@@ -1,3 +1,7 @@
+dnl
+dnl $Id: config.m4,v 1.11 2001/11/30 19:01:30 sniper Exp $
+dnl
+
 AC_DEFUN(PHP_TEST_WRITE_STDOUT,[
   AC_CACHE_CHECK(whether writing to stdout works,ac_cv_write_stdout,[
     AC_TRY_RUN([

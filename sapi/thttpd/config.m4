@@ -1,3 +1,7 @@
+dnl
+dnl $Id: config.m4,v 1.14 2001/11/30 19:01:32 sniper Exp $
+dnl
+
 AC_ARG_WITH(thttpd,
 [  --with-thttpd=SRCDIR    Build PHP as thttpd module],[
   test -d $withval || AC_MSG_RESULT(thttpd directory does not exist ($withval))

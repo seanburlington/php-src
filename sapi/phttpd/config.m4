@@ -1,9 +1,11 @@
-dnl ## $Id: config.m4,v 1.5 2001/04/03 20:59:49 wsanchez Exp $ -*- sh -*-
+dnl
+dnl $Id: config.m4,v 1.6 2001/11/30 19:01:31 sniper Exp $
+dnl 
 
 RESULT=no
 AC_MSG_CHECKING(for PHTTPD support)
 AC_ARG_WITH(phttpd,
-[  --with-phttpd=DIR],
+[  --with-phttpd=DIR       Build PHP as phttpd module],
 [
 	if test ! -d $withval ; then
 		AC_MSG_ERROR(You did not specify a directory)

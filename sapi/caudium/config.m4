@@ -1,4 +1,6 @@
-dnl ## $Id: config.m4,v 1.9 2001/05/12 11:09:03 sas Exp $ -*- sh -*-
+dnl
+dnl $Id: config.m4,v 1.10 2001/11/30 19:01:30 sniper Exp $
+dnl 
 
 RESULT=no
 AC_MSG_CHECKING(for Caudium support)

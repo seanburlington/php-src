@@ -1,3 +1,7 @@
+dnl
+dnl $Id: config.m4,v 1.2 2001/11/30 19:01:32 sniper Exp $
+dnl
+
 AC_ARG_WITH(webjames,
 [  --with-webjames=SRCDIR  Build PHP as a WebJames module (RISC OS only)],[
   PHP_EXPAND_PATH($withval, WEBJAMES)

@@ -1,3 +1,7 @@
+dnl
+dnl $Id: config.m4,v 1.4 2001/11/30 19:01:30 sniper Exp $
+dnl
+
 AC_MSG_CHECKING(for FastCGI support)
 AC_ARG_WITH(fastcgi,
 [  --with-fastcgi=SRCDIR   Build PHP as FastCGI application],[

@@ -1,4 +1,6 @@
-dnl ## $Id: config.m4,v 1.12 2001/05/12 09:13:42 sas Exp $ -*- sh -*-
+dnl
+dnl $Id: config.m4,v 1.13 2001/11/30 19:01:31 sniper Exp $
+dnl
 
 RESULT=no
 AC_MSG_CHECKING(for Zeus ISAPI support)

@@ -16,7 +16,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.16 2000/02/23 14:13:34 sas Exp $ */
+/* $Id: microtime.c,v 1.17 2000/02/23 15:44:02 sas Exp $ */
+
+#include "php.h"
 
 #include <stdlib.h>
 #ifdef HAVE_UNISTD_H
@@ -28,7 +30,6 @@
 #include <sys/resource.h>
 #endif
 
-#include "php.h"
 #include "microtime.h"
 #include "snprintf.h"
 

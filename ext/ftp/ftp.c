@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.68.2.9 2003/08/31 21:09:14 iliaa Exp $ */
+/* $Id: ftp.c,v 1.68.2.10 2003/09/09 21:15:20 pollita Exp $ */
 
 #include "php.h"
 
@@ -421,9 +421,10 @@ ftp_chdir(ftpbuf_t *ftp, const char *dir)
 {
 	if (ftp == NULL)
 		return 0;
-	if (ftp->pwd)
+	if (ftp->pwd) {
 		efree(ftp->pwd);
-	ftp->pwd = NULL;
+		ftp->pwd = NULL;
+	}
 
 	if (!ftp_putcmd(ftp, "CWD", dir))
 		return 0;
@@ -442,9 +443,10 @@ ftp_cdup(ftpbuf_t *ftp)
 	if (ftp == NULL)
 		return 0;
 
-	if (ftp->pwd)
+	if (ftp->pwd) {
 		efree(ftp->pwd);
-	ftp->pwd = NULL;
+		ftp->pwd = NULL;
+	}
 
 	if (!ftp_putcmd(ftp, "CDUP", NULL))
 		return 0;
@@ -1535,8 +1537,7 @@ ftp_genlist(ftpbuf_t *ftp, const char *cmd, const char *path TSRMLS_DC)
 
 	return ret;
 bail:
-	if (data)
-		ftp->data = data_close(ftp, data);
+	ftp->data = data_close(ftp, data);
 	fclose(tmpfp);
 	if (ret)
 		efree(ret);

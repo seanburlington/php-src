@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.73 2000/12/22 12:57:05 zeev Exp $ */
+/* $Id: hw.c,v 1.74 2001/01/26 21:22:32 eschmid Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -2285,12 +2285,8 @@ PHP_FUNCTION(hw_setlinkroot) {
 }
 /* }}} */
 
-/* {{{ proto hwdoc hw_pipedocument(int link, int objid [, array urlprefixes ] )
-   Returns document with links inserted. Optionally a array with five urlprefixes
-   may be passed, which will be inserted for the different types of anchors. This should
-   be a named array with the following keys: HW_DEFAULT_LINK, HW_IMAGE_LINK, HW_BACKGROUND_LINK, 
-   HW_INTAG_LINK, and HW_APPLET_LINK.
-*/
+/* {{{ proto hwdoc hw_pipedocument(int link, int objid [, array urlprefixes])
+   Returns document with links inserted. Optionally a array with five urlprefixes may be passed, which will be inserted for the different types of anchors. This should be a named array with the following keys: HW_DEFAULT_LINK, HW_IMAGE_LINK, HW_BACKGROUND_LINK, HW_INTAG_LINK, and HW_APPLET_LINK */
 PHP_FUNCTION(hw_pipedocument) {
 	pval *arg1, *arg2, *arg3;
 	int i, link, id, type, argc, mode;

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.135 2005/02/02 09:11:45 dmitry Exp $ */
+/* $Id: soap.c,v 1.136 2005/02/02 10:34:39 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -536,6 +536,9 @@ PHP_MINIT_FUNCTION(soap)
 	REGISTER_LONG_CONSTANT("SOAP_COMPRESSION_ACCEPT", SOAP_COMPRESSION_ACCEPT, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SOAP_COMPRESSION_GZIP", SOAP_COMPRESSION_GZIP, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SOAP_COMPRESSION_DEFLATE", SOAP_COMPRESSION_DEFLATE, CONST_CS | CONST_PERSISTENT);
+
+	REGISTER_LONG_CONSTANT("SOAP_AUTHENTICATION_BASIC", SOAP_AUTHENTICATION_BASIC, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SOAP_AUTHENTICATION_DIGEST", SOAP_AUTHENTICATION_DIGEST, CONST_CS | CONST_PERSISTENT);
 
 	REGISTER_LONG_CONSTANT("UNKNOWN_TYPE", UNKNOWN_TYPE, CONST_CS | CONST_PERSISTENT);
 
@@ -2013,6 +2016,11 @@ PHP_METHOD(SoapClient, SoapClient)
 			if (zend_hash_find(ht, "password", sizeof("password"), (void**)&tmp) == SUCCESS &&
 			    Z_TYPE_PP(tmp) == IS_STRING) {
 				add_property_stringl(this_ptr, "_password", Z_STRVAL_PP(tmp), Z_STRLEN_PP(tmp), 1);
+			}
+			if (zend_hash_find(ht, "authentication", sizeof("authentication"), (void**)&tmp) == SUCCESS &&
+			    Z_TYPE_PP(tmp) == IS_LONG &&
+			    Z_LVAL_PP(tmp) == SOAP_AUTHENTICATION_DIGEST) {
+				add_property_null(this_ptr, "_digest");
 			}
 		}
 		if (zend_hash_find(ht, "proxy_host", sizeof("proxy_host"), (void**)&tmp) == SUCCESS &&

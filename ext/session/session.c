@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.403 2004/12/09 17:15:52 tony2001 Exp $ */
+/* $Id: session.c,v 1.404 2005/01/09 17:42:02 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1361,12 +1361,21 @@ PHP_FUNCTION(session_set_save_handler)
 	zval **args[6];
 	int i;
 	ps_user *mdata;
+	char *name;
 
 	if (ZEND_NUM_ARGS() != 6 || zend_get_parameters_array_ex(6, args) == FAILURE)
 		WRONG_PARAM_COUNT;
 	
 	if (PS(session_status) != php_session_none) 
 		RETURN_FALSE;
+	
+	for (i = 0; i < 6; i++) {
+		if (!zend_is_callable(*args[i], 0, &name)) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Argument %d is not a valid callback", i+1);
+			efree(name);
+			RETURN_FALSE;
+		}		
+	}
 	
 	zend_alter_ini_entry("session.save_handler", sizeof("session.save_handler"), "user", sizeof("user")-1, PHP_INI_USER, PHP_INI_STAGE_RUNTIME);
 

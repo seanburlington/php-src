@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filepro.h,v 1.12 2004/01/08 17:32:07 sniper Exp $ */
+/* $Id: php_filepro.h,v 1.12.2.1 2005/02/07 13:31:42 tony2001 Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com
@@ -41,6 +41,8 @@ PHP_FUNCTION(filepro_fieldcount);
 PHP_FUNCTION(filepro_retrieve);
 
 PHP_MINIT_FUNCTION(filepro);
+PHP_RINIT_FUNCTION(filepro);
+PHP_RSHUTDOWN_FUNCTION(filepro);
 PHP_MSHUTDOWN_FUNCTION(filepro);
 #else
 #define phpext_filepro_ptr NULL

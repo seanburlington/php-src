@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.29 2000/02/19 23:41:21 zeev Exp $ */
+/* $Id: head.c,v 1.30 2000/03/06 20:37:11 ssb Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -267,15 +267,6 @@ PHP_FUNCTION(headers_sent)
 		RETURN_FALSE;
 	}
 }
-
-function_entry php_header_functions[] = {
-	{NULL, NULL, NULL}
-};
-
-
-zend_module_entry php_header_module_entry = {
-	"PHP_head", php_header_functions, NULL, NULL, PHP_RINIT(head), NULL, NULL, STANDARD_MODULE_PROPERTIES
-};
 
 /*
  * Local variables:

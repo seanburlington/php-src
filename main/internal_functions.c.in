@@ -1,4 +1,4 @@
-/*
+/* -*- C -*-
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions.c.in,v 1.12 2000/01/01 01:31:27 sas Exp $ */
+/* $Id: internal_functions.c.in,v 1.13 2000/03/06 20:37:11 ssb Exp $ */
 
 #include "php.h"
 #include "main.h"
@@ -40,23 +40,6 @@ unsigned char second_arg_force_ref[] = { 2, BYREF_NONE, BYREF_FORCE };
 unsigned char second_arg_allow_ref[] = { 2, BYREF_NONE, BYREF_ALLOW };
 
 zend_module_entry *php_builtin_extensions[] = {
-	phpext_regex_ptr,
-	phpext_dl_ptr,
-	phpext_file_ptr,
-	phpext_fsock_ptr,
-	phpext_head_ptr,
-	phpext_pack_ptr,
-	phpext_browscap_ptr,
-	phpext_crypt_ptr,
-	phpext_dir_ptr,
-	phpext_filestat_ptr,
-	phpext_mail_ptr,
-	phpext_syslog_ptr,
-	phpext_lcg_ptr,
-	phpext_metaphone_ptr,
-	phpext_output_ptr,
-	phpext_array_ptr,
-	phpext_assert_ptr,
 @EXT_MODULE_PTRS@
 };
 

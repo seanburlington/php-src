@@ -27,7 +27,7 @@
    |          Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
 */
-/* $Id: fsock.h,v 1.26 2000/02/11 15:59:29 zeev Exp $ */
+/* $Id: fsock.h,v 1.27 2000/03/06 20:37:11 ssb Exp $ */
 
 /* Synced with php 3.0 revision 1.24 1999-06-18 [ssb] */
 
@@ -54,9 +54,6 @@
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>
 #endif
-
-extern zend_module_entry fsock_module_entry;
-#define phpext_fsock_ptr &fsock_module_entry
 
 struct php_sockbuf {
 	int socket;

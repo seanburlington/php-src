@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.47 2000/02/19 23:41:21 zeev Exp $ */
+/* $Id: fsock.c,v 1.48 2000/03/06 20:37:11 ssb Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -94,27 +94,6 @@ extern int le_fp;
 #else
 #include "build-defs.h"
 #endif
-
-static unsigned char third_and_fourth_args_force_ref[] = { 4, BYREF_NONE, BYREF_NONE, BYREF_FORCE, BYREF_FORCE };
-
-function_entry fsock_functions[] = {
-      PHP_FE(fsockopen, 							third_and_fourth_args_force_ref)
-      PHP_FE(pfsockopen, 							third_and_fourth_args_force_ref)
-      {NULL, NULL, NULL}
-};
-
-
-zend_module_entry fsock_module_entry = {
-	"Socket functions",
-	fsock_functions,
-	PHP_MINIT(fsock),
-	PHP_MSHUTDOWN(fsock),
-	NULL,
-	PHP_RSHUTDOWN(fsock),
-	NULL,
-	STANDARD_MODULE_PROPERTIES
-};
- 
 
 /* {{{ lookup_hostname */
 

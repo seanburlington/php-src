@@ -30,32 +30,21 @@
  */
 
 
-/* $Id: dl.h,v 1.8 1999/12/17 20:55:24 zeev Exp $ */
+/* $Id: dl.h,v 1.9 2000/03/06 20:37:11 ssb Exp $ */
 
 #ifndef _DL_H
 #define _DL_H
 
 void php_dl(pval *file,int type,pval *return_value);
 
-
 #ifdef HAVE_LIBDL
 
-extern zend_module_entry dl_module_entry;
-#define dl_module_ptr &dl_module_entry
-
 /* dynamic loading functions */
-void dl(INTERNAL_FUNCTION_PARAMETERS);
-extern PHP_MINIT_FUNCTION(dl);
-extern PHP_MSHUTDOWN_FUNCTION(dl);
-extern PHP_RSHUTDOWN_FUNCTION(dl);
+PHP_FUNCTION(dl);
 PHP_MINFO_FUNCTION(dl);
 
 #else
 
-#define dl_module_ptr NULL
-
 #endif
-
-#define phpext_dl_ptr dl_module_ptr
 
 #endif /* _DL_H */

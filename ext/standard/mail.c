@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.19 2000/02/19 23:41:21 zeev Exp $ */
+/* $Id: mail.c,v 1.20 2000/03/06 20:37:11 ssb Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -32,16 +32,6 @@
 #ifdef PHP_WIN32
 #include "win32/sendmail.h"
 #endif
-
-function_entry mail_functions[] = {
-	PHP_FE(mail,									NULL)
-	{NULL, NULL, NULL}
-};
-
-zend_module_entry mail_module_entry = {
-	"Sendmail", mail_functions, NULL, NULL, NULL, NULL, PHP_MINFO(mail), STANDARD_MODULE_PROPERTIES
-};
-
 
 #if COMPILE_DL
 DLEXPORT zend_module_entry *get_module(void) { return &odbc_module_entry; }

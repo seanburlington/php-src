@@ -16,13 +16,17 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_assert.h,v 1.3 2000/02/19 23:41:21 zeev Exp $ */
+/* $Id: php_assert.h,v 1.4 2000/03/06 20:37:11 ssb Exp $ */
 
 #ifndef _PHP_ASSERT_H
 #define _PHP_ASSERT_H
 
-extern zend_module_entry assert_module_entry;
-#define phpext_assert_ptr &assert_module_entry
-
+PHP_MINIT_FUNCTION(assert);
+PHP_MSHUTDOWN_FUNCTION(assert);
+PHP_RINIT_FUNCTION(assert);
+PHP_RSHUTDOWN_FUNCTION(assert);
+PHP_MINFO_FUNCTION(assert);
+PHP_FUNCTION(assert);
+PHP_FUNCTION(assert_options);
 
 #endif /* _PHP_ASSERT_H */

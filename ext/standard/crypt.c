@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.20 2000/02/26 03:20:54 zeev Exp $ */
+/* $Id: crypt.c,v 1.21 2000/03/06 20:37:11 ssb Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -47,16 +47,6 @@ extern char *crypt(char *__key,char *__salt);
 #endif
 
 #include "php_crypt.h"
-
-function_entry crypt_functions[] = {
-	PHP_FE(crypt,									NULL)
-	{NULL, NULL, NULL}
-};
-
-zend_module_entry crypt_module_entry = {
-	"Crypt", crypt_functions, PHP_MINIT(crypt), NULL, NULL, NULL, NULL, STANDARD_MODULE_PROPERTIES
-};
-
 
 /* 
    The capabilities of the crypt() function is determined by the test programs

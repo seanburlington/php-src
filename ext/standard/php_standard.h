@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_standard.h,v 1.2 2000/01/28 13:31:12 zeev Exp $ */
+/* $Id: php_standard.h,v 1.3 2000/03/06 20:37:11 ssb Exp $ */
 
 #include "basic_functions.h"
 #include "phpmath.h"
@@ -63,6 +63,11 @@
 #include "dl.h"
 #include "php_crypt.h"
 #include "head.h"
+#include "php_lcg.h"
+#include "php_metaphone.h"
+#include "php_output.h"
+#include "php_array.h"
+#include "php_assert.h"
 
 #define phpext_standard_ptr basic_functions_module_ptr
 

@@ -27,15 +27,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.h,v 1.18 2000/03/04 17:23:03 andrei Exp $ */
+/* $Id: file.h,v 1.19 2000/03/06 20:37:11 ssb Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
 #ifndef _FILE_H
 #define _FILE_H
-
-extern zend_module_entry file_module_entry;
-#define file_module_ptr &file_module_entry
 
 extern PHP_MINIT_FUNCTION(file);
 
@@ -82,5 +79,4 @@ PHPAPI int php_file_le_fopen(void);
 PHPAPI int php_file_le_socket(void);
 PHPAPI int php_file_le_uploads(void);
 
-#define phpext_file_ptr file_module_ptr
 #endif /* _FILE_H */

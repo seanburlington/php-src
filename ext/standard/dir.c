@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.29 2000/02/24 09:32:50 thies Exp $ */
+/* $Id: dir.c,v 1.30 2000/03/06 20:37:11 ssb Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -82,18 +82,6 @@ static zend_class_entry *dir_class_entry_ptr;
 		ZEND_FETCH_RESOURCE(dirp,php_dir *,id,-1, "Directory", le_dirp); \
 	} 
 
-static zend_function_entry php_dir_functions[] = {
-	PHP_FE(opendir,				NULL)
-	PHP_FE(closedir,			NULL)
-	PHP_FE(chdir,				NULL)
-	PHP_FE(getcwd,				NULL)
-	PHP_FE(rewinddir,			NULL)
-	PHP_FE(readdir,				NULL)
-	PHP_FALIAS(dir,		getdir,	NULL)
-	{NULL, NULL, NULL}
-};
-
-
 static zend_function_entry php_dir_class_functions[] = {
 	PHP_FALIAS(close,	closedir,	NULL)
 	PHP_FALIAS(rewind,	rewinddir,	NULL)
@@ -101,10 +89,6 @@ static zend_function_entry php_dir_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-
-zend_module_entry php_dir_module_entry = {
-	"PHP_dir", php_dir_functions, PHP_MINIT(dir), NULL, NULL, NULL, NULL, STANDARD_MODULE_PROPERTIES
-};
 
 static void _dir_dtor(php_dir *dirp)
 {

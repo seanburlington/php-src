@@ -15,7 +15,7 @@
    | Authors: Chris Schneider <cschneid@relog.ch>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.18 2000/02/24 10:11:42 eschmid Exp $ */
+/* $Id: pack.c,v 1.19 2000/03/06 20:37:11 ssb Exp $ */
 
 #include "php.h"
 
@@ -49,16 +49,6 @@
 #if HAVE_NETINET_IN_H
 #include <netinet/in.h>
 #endif
-
-function_entry pack_functions[] = {
-	PHP_FE(pack,									NULL)
-	PHP_FE(unpack,									NULL)
-	{NULL, NULL, NULL}
-};
-
-zend_module_entry pack_module_entry = {
-	"PHP_pack", pack_functions, PHP_MINIT(pack), NULL, NULL, NULL, NULL, STANDARD_MODULE_PROPERTIES
-};
 
 /* Whether machine is little endian */
 char machine_little_endian;

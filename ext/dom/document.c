@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.26 2003/09/22 19:11:35 rrichards Exp $ */
+/* $Id: document.c,v 1.27 2003/09/24 12:56:37 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,6 +26,7 @@
 #include "php.h"
 #if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
+#include <libxml/SAX.h>
 
 typedef struct _idsIterator idsIterator;
 struct _idsIterator {
@@ -1270,8 +1271,12 @@ static xmlDocPtr dom_document_parser(zval *id, int mode, char *source TSRMLS_DC)
 
 	ctxt->vctxt.error = php_dom_ctx_error;
 	ctxt->vctxt.warning = php_dom_ctx_error;
+
 	if (ctxt->sax != NULL) {
 		ctxt->sax->error = php_dom_ctx_error;
+		if (ctxt->keepBlanks == 0) {
+			ctxt->sax->ignorableWhitespace = ignorableWhitespace;
+		}
 	}
 
 	xmlParseDocument(ctxt);

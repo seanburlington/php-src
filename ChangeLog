@@ -1,3 +1,8 @@
+2004-11-12  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/recode/recode.c:
+      Simplify and cleanup code.
+
 2004-11-11  Rob Richards  <rrichards@ctindustries.net>
 
     * (PHP_5_0)
@@ -12519,7 +12524,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1801 2004/11/12 01:51:37 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1802 2004/11/13 01:51:05 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

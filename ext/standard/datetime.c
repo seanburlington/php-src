@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.26 2000/01/01 01:31:49 sas Exp $ */
+/* $Id: datetime.c,v 1.27 2000/01/01 02:22:01 sas Exp $ */
 
 
 #include "php.h"
@@ -53,7 +53,7 @@ char *day_short_names[] =
 	"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
 };
 
-#if !defined(HAVE_TM_ZONE) && !defined(_TIMEZONE) && !(WIN32||WINNT)
+#if !defined(HAVE_TM_ZONE) && !defined(_TIMEZONE) && !defined(HAVE_DECLARED_TIMEZONE)
 extern time_t timezone;
 #endif
 

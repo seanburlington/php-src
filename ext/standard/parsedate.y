@@ -1,5 +1,5 @@
 %{
-/* $Revision: 1.14 $
+/* $Revision: 1.15 $
 **
 **  Originally written by Steven M. Bellovin <smb@research.att.com> while
 **  at the University of North Carolina at Chapel Hill.  Later tweaked by
@@ -46,14 +46,9 @@
 #include <alloca.h>
 #endif
 
-#if WIN32||WINNT
-#	include <time.h>
-#else
-#	if !defined(HAVE_TM_ZONE) && !defined(_TIMEZONE)
+#if !defined(HAVE_TM_ZONE) && !defined(_TIMEZONE) && !defined(HAVE_DECLARED_TIMEZONE)
 extern time_t timezone;
-#	endif
 #endif
-
 
 #define yylhs		date_yylhs
 #define yylen		date_yylen

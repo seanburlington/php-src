@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.8 2000/04/01 16:23:39 zeev Exp $ */
+/* $Id: php_mysql.h,v 1.9 2000/04/04 20:10:11 rubys Exp $ */
 
 #ifndef _PHP_MYSQL_H
 #define _PHP_MYSQL_H
@@ -95,7 +95,7 @@ ZEND_END_MODULE_GLOBALS(mysql);
 # define MySLS_C	mysql_globals
 # define MySLS_CC , MySLS_C
 # define MySG(v) (mysql_globals->v)
-# define MySLS_FETCH()	zend_mysql_globals *mysql_globals = ts_resource(mysql_module_entry.globals_id)
+# define MySLS_FETCH()	zend_mysql_globals *mysql_globals = ts_resource(mysql_globals_id)
 #else
 # define MySLS_D
 # define MySLS_DC

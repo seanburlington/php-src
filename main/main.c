@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.328 2000/10/26 21:16:12 sas Exp $ */
+/* $Id: main.c,v 1.329 2000/10/27 10:16:54 sas Exp $ */
 
 
 #include <stdio.h>
@@ -1212,6 +1212,31 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 	if (old_cwd[0] != '\0')
 		V_CHDIR(old_cwd);
 	free_alloca(old_cwd);
+}
+
+PHPAPI int php_handle_auth_data(const char *auth SLS_DC)
+{
+	int ret = -1;
+
+	if (auth && auth[0] != '\0'
+			&& strncmp(auth, "Basic ", 6) == 0) {
+		char *pass;
+		char *user;
+
+		user = php_base64_decode(auth + 6, strlen(auth) - 6, NULL);
+		if (user) {
+			pass = strchr(user, ':');
+			if (pass) {
+				*pass++ = '\0';
+				SG(request_info).auth_user = user;
+				SG(request_info).auth_password = estrdup(pass);
+				ret = 0;
+			} else {
+				efree(user);
+			}
+		}
+	}
+	return ret;
 }
 
 PHPAPI int php_lint_script(zend_file_handle *file CLS_DC ELS_DC PLS_DC)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.12 2002/10/07 17:59:48 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.13 2002/10/07 20:12:48 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -974,7 +974,7 @@ PHPAPI int php_mb_regex_set_options_by_string( const char *opt_str, int len )
 }
 /* }}} */
 
-/* {{{ proto bool mb_regex_set_options([string encoding])
+/* {{{ proto bool mb_regex_set_options([string options])
    Set the default options for mbregex functions */
 PHP_FUNCTION(mb_regex_set_options)
 {

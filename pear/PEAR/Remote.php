@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.19 2002/05/14 01:51:06 ssb Exp $
+// $Id: Remote.php,v 1.20 2002/05/20 22:29:52 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -64,7 +64,7 @@ class PEAR_Remote extends PEAR
         if ($username && $password) {
             $c->setCredentials($username, $password);
         }
-        $c->setDebug(1);
+//        $c->setDebug(1);
         $r = $c->send($f);
         if (!$r) {
             return $this->raiseError("XML_RPC send failed");

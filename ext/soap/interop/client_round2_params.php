@@ -16,7 +16,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: client_round2_params.php,v 1.4 2004/01/09 14:56:24 dmitry Exp $
+// $Id: client_round2_params.php,v 1.5 2004/01/12 15:18:13 dmitry Exp $
 //
 
 define('SOAP_TEST_ACTOR_NEXT','http://schemas.xmlsoap.org/soap/actor/next');
@@ -279,9 +279,9 @@ $soap_tests['base'][] = new SOAP_Test('echoDecimal', array('inputDecimal' =>
 // Base echoDate
 
 # php-soap doesn't handle datetime types properly yet
-$soap_tests['base'][] = new SOAP_Test('echoDate', array('inputDate' => '2001-05-24T17:31:41Z'));
+$soap_tests['base'][] = new SOAP_Test('echoDate', array('inputDate' => '2001-05-24T17:31:41Z'), null, 'date_compare');
 $soap_tests['base'][] = new SOAP_Test('echoDate', array('inputDate' =>
-        soap_value('inputDate','2001-05-24T17:31:41Z',XSD_DATETIME)));#'2001-04-25T13:31:41-0700'
+        soap_value('inputDate','2001-05-24T17:31:41Z',XSD_DATETIME)), null, 'date_compare');
 
 //***********************************************************
 // Base echoBoolean

@@ -27,10 +27,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dbase.h,v 1.4 1999/12/17 20:54:52 zeev Exp $ */
+/* $Id: php_dbase.h,v 1.5 2000/07/03 00:41:14 sas Exp $ */
 
-#ifndef _DBASE_H
-#define _DBASE_H
+#ifndef PHP_DBASE_H
+#define PHP_DBASE_H
 #if DBASE
 extern zend_module_entry dbase_module_entry;
 #define dbase_module_ptr &dbase_module_entry
@@ -52,4 +52,4 @@ PHP_FUNCTION(dbase_get_record_with_names);
 
 #define phpext_dbase_ptr dbase_module_ptr
 
-#endif /* _DBASE_H */
+#endif /* PHP_DBASE_H */

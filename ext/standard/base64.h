@@ -26,10 +26,10 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.h,v 1.4 1999/12/17 20:55:24 zeev Exp $ */
+/* $Id: base64.h,v 1.5 2000/07/03 00:41:16 sas Exp $ */
 
-#ifndef _BASE64_h
-#define _BASE64_h
+#ifndef BASE64_H
+#define BASE64_H
 
 PHP_FUNCTION(base64_decode);
 PHP_FUNCTION(base64_encode);
@@ -37,7 +37,7 @@ PHP_FUNCTION(base64_encode);
 extern unsigned char *php_base64_encode(const unsigned char *, int, int *);
 extern unsigned char *php_base64_decode(const unsigned char *, int, int *);
 
-#endif /* _BASE64_h */
+#endif /* BASE64_H */
 
 /*
  * Local variables:

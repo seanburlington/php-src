@@ -16,10 +16,10 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_metaphone.h,v 1.7 2000/05/18 15:34:35 zeev Exp $ */
+/* $Id: php_metaphone.h,v 1.8 2000/07/03 00:41:17 sas Exp $ */
 
-#ifndef _php_metaphone_h
-#define _php_metaphone_h
+#ifndef PHP_METAPHONE_H
+#define PHP_METAPHONE_H
 
 PHP_FUNCTION(metaphone);
 

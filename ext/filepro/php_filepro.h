@@ -34,10 +34,10 @@
 
  */
 
-/* $Id: php_filepro.h,v 1.3 1999/12/17 20:54:56 zeev Exp $ */
+/* $Id: php_filepro.h,v 1.4 2000/07/03 00:41:14 sas Exp $ */
 
-#ifndef _FILEPRO_H
-#define _FILEPRO_H
+#ifndef PHP_FILEPRO_H
+#define PHP_FILEPRO_H
 #if HAVE_FILEPRO
 extern zend_module_entry filepro_module_entry;
 #define phpext_filepro_ptr &filepro_module_entry
@@ -55,4 +55,4 @@ extern PHP_MSHUTDOWN_FUNCTION(filepro);
 #else
 #define phpext_filepro_ptr NULL
 #endif
-#endif /* _FILEPRO_H */
+#endif /* PHP_FILEPRO_H */

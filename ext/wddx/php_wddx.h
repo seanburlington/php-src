@@ -27,10 +27,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx.h,v 1.3 1999/10/01 14:54:55 andrei Exp $ */
+/* $Id: php_wddx.h,v 1.4 2000/07/03 00:41:17 sas Exp $ */
 
-#ifndef _WDDX_H
-#define _WDDX_H
+#ifndef PHP_WDDX_H
+#define PHP_WDDX_H
 
 #if HAVE_WDDX
 
@@ -56,4 +56,4 @@ PHP_FUNCTION(wddx_deserialize);
 
 #define phpext_wddx_ptr wddx_module_ptr
 
-#endif /* !_WDDX_H */
+#endif /* !PHP_WDDX_H */

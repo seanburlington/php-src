@@ -1,7 +1,7 @@
-/* $Id: php_icap.h,v 1.4 2000/06/10 08:47:56 andi Exp $ */
+/* $Id: php_icap.h,v 1.5 2000/07/03 00:41:15 sas Exp $ */
 
-#ifndef _INCLUDED_ICAP_H
-#define _INCLUDED_ICAP_H
+#ifndef PHP_ICAP_H
+#define PHP_ICAP_H
 
 #if HAVE_ICAP
 

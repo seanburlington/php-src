@@ -27,10 +27,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dba.h,v 1.4 2000/06/27 22:25:27 jah Exp $ */
+/* $Id: php_dba.h,v 1.5 2000/07/03 00:41:13 sas Exp $ */
 
-#ifndef _DBA_H
-#define _DBA_H
+#ifndef PHP_DBA_H
+#define PHP_DBA_H
 
 #if HAVE_DBA
 

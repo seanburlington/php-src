@@ -1,7 +1,7 @@
-/* $Id: php_mcal.h,v 1.8 2000/06/14 12:28:20 thies Exp $ */
+/* $Id: php_mcal.h,v 1.9 2000/07/03 00:41:16 sas Exp $ */
 
-#ifndef _INCLUDED_MCAL_H
-#define _INCLUDED_MCAL_H
+#ifndef PHP_MCAL_H
+#define PHP_MCAL_H
 
 #if HAVE_MCAL
 

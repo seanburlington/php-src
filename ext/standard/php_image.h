@@ -16,11 +16,11 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_image.h,v 1.4 2000/05/18 15:34:35 zeev Exp $ */
+/* $Id: php_image.h,v 1.5 2000/07/03 00:41:17 sas Exp $ */
 
-#ifndef _IMAGE_H
-#define _IMAGE_H
+#ifndef PHP_IMAGE_H
+#define PHP_IMAGE_H
 
 PHP_FUNCTION(getimagesize);
 
-#endif /* _IMAGE_H */
+#endif /* PHP_IMAGE_H */

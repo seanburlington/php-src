@@ -27,10 +27,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_gettext.h,v 1.5 2000/03/11 20:57:33 andi Exp $ */
+/* $Id: php_gettext.h,v 1.6 2000/07/03 00:41:14 sas Exp $ */
 
-#ifndef _GETTEXT_H
-#define _GETTEXT_H
+#ifndef PHP_GETTEXT_H
+#define PHP_GETTEXT_H
 
 #if HAVE_LIBINTL
 #ifndef INIT_FUNC_ARGS
@@ -54,4 +54,4 @@ PHP_FUNCTION(bindtextdomain);
 
 #define phpext_gettext_ptr gettext_module_ptr
 
-#endif /* _GETTEXT_H */
+#endif /* PHP_GETTEXT_H */

@@ -28,10 +28,10 @@
  */
 
 
-/* $Id: php_mail.h,v 1.5 2000/06/29 14:07:10 kk Exp $ */
+/* $Id: php_mail.h,v 1.6 2000/07/03 00:41:17 sas Exp $ */
 
-#ifndef _MAIL_H
-#define _MAIL_H
+#ifndef PHP_MAIL_H
+#define PHP_MAIL_H
 
 #if HAVE_SENDMAIL
 
@@ -42,4 +42,4 @@ extern int php_mail(char *to, char *subject, char *message, char *headers);
 
 #endif
 
-#endif /* _MAIL_H */
+#endif /* PHP_MAIL_H */

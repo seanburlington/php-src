@@ -27,10 +27,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_filestat.h,v 1.5 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: php_filestat.h,v 1.6 2000/07/03 00:41:17 sas Exp $ */
 
-#ifndef _FILESTAT_H
-#define _FILESTAT_H
+#ifndef PHP_FILESTAT_H
+#define PHP_FILESTAT_H
 
 PHP_RINIT_FUNCTION(filestat);
 PHP_RSHUTDOWN_FUNCTION(filestat);
@@ -61,4 +61,4 @@ PHP_FUNCTION(chmod);
 PHP_FUNCTION(touch);
 PHP_FUNCTION(clearstatcache);
 
-#endif /* _FILESTAT_H */
+#endif /* PHP_FILESTAT_H */

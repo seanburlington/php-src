@@ -29,12 +29,12 @@
  */
 
 
-/* $Id: php_string.h,v 1.21 2000/06/06 20:42:33 andrei Exp $ */
+/* $Id: php_string.h,v 1.22 2000/07/03 00:41:17 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
-#ifndef _PHPSTRING_H
-#define _PHPSTRING_H
+#ifndef PHP_STRING_H
+#define PHP_STRING_H
 
 PHP_FUNCTION(strspn);
 PHP_FUNCTION(strcspn);
@@ -123,4 +123,4 @@ PHPAPI char *php_strerror(int errnum);
 #define strerror php_strerror
 #endif
 
-#endif /* _PHPSTRING_H */
+#endif /* PHP_STRING_H */

@@ -17,10 +17,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.13 2000/06/24 16:24:29 jah Exp $ */
+/* $Id: php_interbase.h,v 1.14 2000/07/03 00:41:16 sas Exp $ */
 
-#ifndef _PHP_IBASE_H
-#define _PHP_IBASE_H
+#ifndef PHP_INTERBASE_H
+#define PHP_INTERBASE_H
 
 #if HAVE_IBASE
 #include <ibase.h>
@@ -171,7 +171,7 @@ extern PHP_IBASE_API php_ibase_globals ibase_globals;
 
 #endif /* HAVE_IBASE */
 
-#endif /* _PHP_IBASE_H */
+#endif /* PHP_INTERBASE_H */
 
 /*
  * Local variables:

@@ -28,12 +28,12 @@
  */
 
 
-/* $Id: php_iptc.h,v 1.1 1999/12/04 19:16:04 sas Exp $ */
+/* $Id: php_iptc.h,v 1.2 2000/07/03 00:41:17 sas Exp $ */
 
-#ifndef _PHPIPTC_H
-#define _PHPIPTC_H
+#ifndef PHP_IPTC_H
+#define PHP_IPTC_H
 
 PHP_FUNCTION(iptcparse);
 PHP_FUNCTION(iptcembed);
 
-#endif /* _PHPIPTC_H */
+#endif /* PHP_IPTC_H */

@@ -28,10 +28,10 @@
  */
 
 
-/* $Id: php_aspell.h,v 1.3 1999/12/17 21:13:13 zeev Exp $ */
+/* $Id: php_aspell.h,v 1.4 2000/07/03 00:41:13 sas Exp $ */
 
-#ifndef _ASPELL_H
-#define _ASPELL_H
+#ifndef PHP_ASPELL_H
+#define PHP_ASPELL_H
 #if HAVE_ASPELL
 extern zend_module_entry aspell_module_entry;
 #define aspell_module_ptr &aspell_module_entry
@@ -50,4 +50,4 @@ PHP_FUNCTION(aspell_suggest);
 
 #define phpext_aspell_ptr aspell_module_ptr
 
-#endif /* _ASPELL_H */
+#endif /* PHP_ASPELL_H */

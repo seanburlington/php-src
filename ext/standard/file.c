@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.262 2002/09/26 10:17:40 wez Exp $ */
+/* $Id: file.c,v 1.263 2002/09/26 12:12:26 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -132,6 +132,7 @@ static ZEND_RSRC_DTOR_FUNC(file_context_dtor)
 static void file_globals_ctor(php_file_globals *file_globals_p TSRMLS_DC)
 {
 	FG(pclose_ret) = 0;
+	FG(user_stream_current_filename) = NULL;
 	FG(def_chunk_size) = PHP_SOCK_CHUNK_SIZE;
 }
 

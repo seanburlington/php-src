@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.67 2002/09/26 10:17:40 wez Exp $ */
+/* $Id: file.h,v 1.68 2002/09/26 12:12:27 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -115,6 +115,7 @@ typedef struct {
 	int auto_detect_line_endings;
 	int default_socket_timeout;
 	char *user_agent;
+	char *user_stream_current_filename; /* for simple recursion protection */
 } php_file_globals;
 
 #ifdef ZTS

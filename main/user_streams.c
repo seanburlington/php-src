@@ -17,10 +17,11 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_streams.c,v 1.22 2002/09/23 18:18:40 wez Exp $ */
+/* $Id: user_streams.c,v 1.23 2002/09/26 12:12:27 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
+#include "ext/standard/file.h"
 
 static int le_protocols;
 
@@ -137,6 +138,13 @@ static php_stream *user_wrapper_opener(php_stream_wrapper *wrapper, char *filena
 	int call_result;
 	php_stream *stream = NULL;
 
+	/* Try to catch bad usage without prevent flexibility */
+	if (FG(user_stream_current_filename) != NULL && strcmp(filename, FG(user_stream_current_filename)) == 0) {
+		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "infinite recursion prevented");
+		return NULL;
+	}
+	FG(user_stream_current_filename) = filename;
+	
 	us = emalloc(sizeof(*us));
 	us->wrapper = uwrap;	
 
@@ -206,6 +214,8 @@ static php_stream *user_wrapper_opener(php_stream_wrapper *wrapper, char *filena
 	zval_ptr_dtor(&zmode);
 	zval_ptr_dtor(&zfilename);
 
+	FG(user_stream_current_filename) = NULL;
+		
 	return stream;
 }
 

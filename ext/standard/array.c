@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.238 2003/08/05 10:29:03 zeev Exp $ */
+/* $Id: array.c,v 1.239 2003/08/08 23:50:36 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3374,7 +3374,9 @@ PHP_FUNCTION(array_reduce)
 
 	if (ZEND_NUM_ARGS() > 2) {
 		result = *initial;
-		zval_add_ref(&result);
+	} else {
+		MAKE_STD_ZVAL(result);
+		ZVAL_LONG(result, 0);
 	}
 
 	/* (zval **)input points to an element of argument stack

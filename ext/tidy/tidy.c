@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.17 2003/11/03 22:34:44 john Exp $ */
+/* $Id: tidy.c,v 1.18 2003/11/13 17:50:39 john Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -146,7 +146,7 @@ zend_module_entry tidy_module_entry = {
 	NULL,
 	PHP_MINFO(tidy),
 #if ZEND_MODULE_API_NO >= 20010901
-	"0.7b",
+	"1.0",
 #endif
 	STANDARD_MODULE_PROPERTIES
 };

@@ -8,7 +8,7 @@
 **  This code is in the public domain and has no copyright.
 */
 
-/* $Id: parsedate.y,v 1.34.2.2 2003/07/28 04:02:55 iliaa Exp $ */
+/* $Id: parsedate.y,v 1.34.2.3 2003/11/12 02:58:37 iliaa Exp $ */
 
 #include "php.h"
 
@@ -308,7 +308,11 @@ date	: tUNUMBER '/' tUNUMBER {
 	}
 	| tMONTH tUNUMBER {
 	    ((struct date_yy *)parm)->yyMonth = $1;
-	    ((struct date_yy *)parm)->yyDay = $2;
+	    if ($2 > 1000) {
+		((struct date_yy *)parm)->yyYear = $2;
+	    } else {
+		((struct date_yy *)parm)->yyDay = $2;
+	    }
 	}
 	| tMONTH tUNUMBER ',' tUNUMBER {
 	    ((struct date_yy *)parm)->yyMonth = $1;
@@ -317,7 +321,11 @@ date	: tUNUMBER '/' tUNUMBER {
 	}
 	| tUNUMBER tMONTH {
 	    ((struct date_yy *)parm)->yyMonth = $2;
-	    ((struct date_yy *)parm)->yyDay = $1;
+	    if ($1 > 1000) {
+		((struct date_yy *)parm)->yyYear = $1;
+	    } else {
+		((struct date_yy *)parm)->yyDay = $1;
+	    }
 	}
 	| tUNUMBER tMONTH tUNUMBER {
 	    ((struct date_yy *)parm)->yyMonth = $2;

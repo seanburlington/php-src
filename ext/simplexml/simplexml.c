@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.55 2003/08/07 21:39:00 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.56 2003/08/18 11:26:12 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -179,8 +179,6 @@ next_iter:
 		zval_dtor(return_value);
 		FREE_ZVAL(return_value); 
 		return_value = value;
-	} else {
-		PZVAL_UNLOCK(return_value);
 	}
 
 	return return_value;
@@ -1058,7 +1056,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.55 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.56 $");
 	php_info_print_table_end();
 }
 /* }}} */

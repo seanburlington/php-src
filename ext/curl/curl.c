@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.44 2001/04/28 21:44:44 sterling Exp $ */
+/* $Id: curl.c,v 1.45 2001/04/30 09:57:16 dbeu Exp $ */
 
 
 #include "php.h"
@@ -71,7 +71,7 @@ static CURLcode win32_init()
 	WORD    requested_version = MAKEWORD(1, 1);
 	int     error;
 	
-	error = WSAStartup(requested_version, wsa_data);
+	error = WSAStartup(requested_version, &wsa_data);
 	if (error != 0) {
 		return CURLE_FAILED_INIT;
 	}

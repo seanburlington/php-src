@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.114 2002/03/18 18:54:29 wez Exp $ */
+/* $Id: zlib.c,v 1.115 2002/03/19 03:51:01 wez Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -237,9 +237,7 @@ PHP_MINFO_FUNCTION(zlib)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "ZLib Support", "enabled");
-#if HAVE_FOPENCOOKIE
 	php_info_print_table_row(2, "'zlib:' fopen wrapper", "enabled");
-#endif
 	php_info_print_table_row(2, "Compiled Version", ZLIB_VERSION );
 	php_info_print_table_row(2, "Linked Version", (char *)zlibVersion() );
 	php_info_print_table_end();

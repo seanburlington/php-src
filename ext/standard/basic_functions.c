@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.458 2002/03/18 10:44:39 wez Exp $ */
+/* $Id: basic_functions.c,v 1.459 2002/03/19 03:51:01 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -624,6 +624,7 @@ function_entry basic_functions[] = {
 	PHP_FE(socket_set_blocking,												NULL)
 
 	PHP_FE(fgetwrapperdata,													NULL)
+	PHP_FE(file_register_wrapper,											NULL)
 
 #if HAVE_SYS_TIME_H
 	PHP_FE(socket_set_timeout,												NULL)

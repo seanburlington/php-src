@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.18 2002/03/18 18:54:28 wez Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.19 2002/03/19 03:51:01 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -79,13 +79,14 @@ static int php_get_ftp_result(php_stream *stream TSRMLS_DC)
 
 php_stream_wrapper php_stream_ftp_wrapper =	{
 	php_stream_url_wrap_ftp,
+	NULL,
 	NULL
 };
 
 
 /* {{{ php_fopen_url_wrap_ftp
  */
-php_stream * php_stream_url_wrap_ftp(char *path, char *mode, int options, char **opened_path STREAMS_DC TSRMLS_DC)
+php_stream * php_stream_url_wrap_ftp(char *path, char *mode, int options, char **opened_path, void *wrappercontext STREAMS_DC TSRMLS_DC)
 {
 	php_stream *stream=NULL;
 	php_url *resource=NULL;

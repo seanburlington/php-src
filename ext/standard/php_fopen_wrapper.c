@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.14 2002/03/18 18:54:28 wez Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.15 2002/03/19 03:51:01 wez Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,7 +30,7 @@
 #include "php_standard.h"
 #include "php_fopen_wrappers.h"
 
-php_stream * php_stream_url_wrap_php(char * path, char * mode, int options, char ** opened_path STREAMS_DC TSRMLS_DC)
+php_stream * php_stream_url_wrap_php(char * path, char * mode, int options, char ** opened_path, void *wrappercontext STREAMS_DC TSRMLS_DC)
 {
 	FILE * fp = NULL;
 	php_stream * stream = NULL;
@@ -54,6 +54,7 @@ php_stream * php_stream_url_wrap_php(char * path, char * mode, int options, char
 
 php_stream_wrapper php_stream_php_wrapper =	{
 	php_stream_url_wrap_php,
+	NULL,
 	NULL
 };
 

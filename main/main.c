@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.103 1999/08/28 11:17:28 zeev Exp $ */
+/* $Id: main.c,v 1.104 1999/08/28 14:00:44 sas Exp $ */
 
 
 #include <stdio.h>
@@ -569,9 +569,17 @@ static void php_message_handler_for_zend(long message, void *data)
 {
 	switch (message) {
 		case ZMSG_ENABLE_TRACK_VARS: {
+				int old;
 				PLS_FETCH();
-
+				
+				old = PG(track_vars);
 				PG(track_vars) = 1;
+				
+				if(old == 0) {
+					php3_treat_data(PARSE_POST, NULL);
+					php3_treat_data(PARSE_COOKIE, NULL);
+					php3_treat_data(PARSE_GET, NULL);
+				}
 			}
 			break;
 		case ZMSG_FAILED_INCLUDE_FOPEN: {

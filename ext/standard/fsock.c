@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.84.2.2 2002/03/18 22:12:57 derick Exp $ */
+/* $Id: fsock.c,v 1.84.2.3 2002/10/24 11:14:58 hyanantha Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -45,6 +45,19 @@
 #endif
 #ifdef PHP_WIN32
 #include <winsock.h>
+#elif defined(NETWARE)
+#ifdef NEW_LIBC
+#ifdef USE_WINSOCK
+#include <novsock2.h>
+#else
+#include <netinet/in.h>
+#include <netdb.h>
+/*#include <sys/socket.h>*/
+#include <sys/select.h>
+/*#else
+#include <sys/socket.h>*/
+#endif
+#endif
 #else
 #include <netinet/in.h>
 #include <netdb.h>
@@ -52,7 +65,7 @@
 #include <arpa/inet.h>
 #endif
 #endif
-#if defined(PHP_WIN32) || defined(__riscos__)
+#if defined(PHP_WIN32) || defined(__riscos__) || defined(NETWARE)
 #undef AF_UNIX
 #endif
 #if defined(AF_UNIX)
@@ -111,6 +124,10 @@ extern int le_fp;
 
 #ifdef PHP_WIN32
 #define EWOULDBLOCK WSAEWOULDBLOCK
+#elif defined(NETWARE)
+#ifdef USE_WINSOCK
+#define EWOULDBLOCK WSAEWOULDBLOCK
+#endif
 #else
 #include "build-defs.h"
 #endif
@@ -320,7 +337,7 @@ PHPAPI void php_cleanup_sockbuf(int persistent TSRMLS_DC)
 }
 
 #define TOREAD(sock) ((sock)->writepos - (sock)->readpos)
-#define READPTR(sock) ((sock)->readbuf + (sock)->readpos)
+#define READPTR(sock) ((char *)(sock)->readbuf + (sock)->readpos)	/* Type-casting done due to NetWare */
 #define WRITEPTR(sock) ((sock)->readbuf + (sock)->writepos)
 #define SOCK_FIND(sock, socket) \
       php_sockbuf *sock; \
@@ -393,7 +410,7 @@ PHPAPI int php_sockdestroy(int socket)
 	return ret;
 }
 
-#if !defined(PHP_WIN32)
+#if !defined(PHP_WIN32) && !(defined(NETWARE) && defined(USE_WINSOCK))
 #undef closesocket
 #define closesocket close
 #endif

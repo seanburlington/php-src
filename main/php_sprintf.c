@@ -16,11 +16,15 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sprintf.c,v 1.12 2002/02/28 08:27:04 sebastian Exp $ */
+/* $Id: php_sprintf.c,v 1.12.2.1 2002/10/24 11:29:04 hyanantha Exp $ */
 
 #include <stdio.h>
 #include <stdarg.h>
+#ifndef NETWARE
 #include "php_config.h"
+#else
+#include "config.nw.h"
+#endif
 
 #if PHP_BROKEN_SPRINTF
 

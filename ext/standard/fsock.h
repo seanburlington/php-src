@@ -18,12 +18,20 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.h,v 1.41 2002/02/28 08:26:45 sebastian Exp $ */
+/* $Id: fsock.h,v 1.41.2.1 2002/10/24 11:15:09 hyanantha Exp $ */
 
 /* Synced with php 3.0 revision 1.24 1999-06-18 [ssb] */
 
 #ifndef FSOCK_H
 #define FSOCK_H
+
+#ifdef NETWARE
+#ifdef NEW_LIBC
+#include "sys/timeval.h"
+#else
+#include "netware/time_nw.h"    /* For 'timeval' */
+#endif
+#endif
 
 #include "file.h"
 

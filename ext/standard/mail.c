@@ -16,14 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.48.2.3 2002/08/24 11:38:13 sesser Exp $ */
+/* $Id: mail.c,v 1.48.2.4 2002/10/24 11:18:24 hyanantha Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
 #include "php.h"
 #include "ext/standard/info.h"
-#if !defined(PHP_WIN32)
+#if !defined(PHP_WIN32) && !defined(NETWARE)
 #include "build-defs.h"
 #if HAVE_SYSEXITS_H
 #include <sysexits.h>
@@ -40,6 +40,12 @@
 #if HAVE_SENDMAIL
 #ifdef PHP_WIN32
 #include "win32/sendmail.h"
+#endif
+
+/* Additional headers for NetWare */
+#ifdef NETWARE
+#include "netware/pipe.h"    /* For popen(), pclose() */
+#include "netware/sysexits.h"   /* For exit status codes like EX_OK */
 #endif
 
 /* {{{ proto int ezmlm_hash(string addr)
@@ -128,7 +134,7 @@ PHP_FUNCTION(mail)
  */
 PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char *extra_cmd)
 {
-#ifdef PHP_WIN32
+#if (defined PHP_WIN32) || (defined NETWARE)
 	int tsm_err;
 #endif
 	FILE *sendmail;
@@ -137,10 +143,10 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 	char *sendmail_cmd = NULL;
 
 	if (!sendmail_path) {
-#ifdef PHP_WIN32
+#if (defined PHP_WIN32) || (defined NETWARE)
 		/* handle old style win smtp sending */
 		if (TSendMail(INI_STR("SMTP"), &tsm_err, headers, subject, to, message) != SUCCESS){
-			php_error(E_WARNING, GetSMErrorText(tsm_err));
+			php_error(E_WARNING, (const char *)GetSMErrorText(tsm_err));	/* Type-casting done due to NetWare */
 			return 0;
 		}
 		return 1;

@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.37.2.1 2002/08/17 16:47:54 iliaa Exp $ */
+/* $Id: pack.c,v 1.37.2.2 2002/10/24 11:19:29 hyanantha Exp $ */
 
 #include "php.h"
 
@@ -30,6 +30,18 @@
 #include <winsock.h>
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
+#elif defined(NETWARE)
+#ifdef USE_WINSOCK
+/*#include <ws2nlm.h>*/
+#include <novsock2.h>
+#else
+#include <sys/socket.h>
+#endif
+#ifdef NEW_LIBC
+#include <sys/param.h>
+#else
+#include "netware/param.h"
+#endif
 #else
 #include <sys/param.h>
 #endif
@@ -40,6 +52,8 @@
 #if HAVE_PWD_H
 #ifdef PHP_WIN32
 #include "win32/pwd.h"
+#elif defined(NETWARE)
+#include "netware/pwd.h"
 #else
 #include <pwd.h>
 #endif

@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.30 2002/02/28 08:27:03 sebastian Exp $ */
+/* $Id: network.c,v 1.30.2.1 2002/10/24 11:27:00 hyanantha Exp $ */
 
 #include "php.h"
 
@@ -24,6 +24,13 @@
 #include <winsock.h>
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
+#elif defined(NETWARE)
+#ifdef NEW_LIBC
+#include <sys/timeval.h>
+#include <sys/param.h>
+#else
+#include "netware/time_nw.h"
+#endif
 #else
 #include <sys/param.h>
 #endif
@@ -41,7 +48,21 @@
 #include <sys/select.h>
 #endif
 
-#ifndef PHP_WIN32
+/* Rearranging... */
+#if defined(NETWARE)
+#ifdef USE_WINSOCK
+/*#include <ws2nlm.h>*/
+#include <novsock2.h>
+#else
+/* New headers for socket stuff */
+#ifdef NEW_LIBC
+#include <netinet/in.h>
+#include <netdb.h>
+#include <sys/select.h>
+#endif
+#include <sys/socket.h>
+#endif
+#elif !defined(PHP_WIN32)
 #include <netinet/in.h>
 #include <netdb.h>
 #if HAVE_ARPA_INET_H
@@ -49,13 +70,14 @@
 #endif
 #endif
 
+
 #ifndef HAVE_INET_ATON
 int		 inet_aton(const char *, struct in_addr *);
 #endif
 
 #include "php_network.h"
 
-#if defined(PHP_WIN32) || defined(__riscos__)
+#if defined(PHP_WIN32) || defined(__riscos__) || defined(NETWARE)
 #undef AF_UNIX
 #endif
 

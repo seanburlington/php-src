@@ -16,10 +16,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.80 2002/03/05 00:21:28 fmk Exp $ */
+/* $Id: php_ini.c,v 1.80.2.1 2002/10/24 11:27:55 hyanantha Exp $ */
 
 #include "php.h"
-#ifndef PHP_WIN32
+#if !defined(PHP_WIN32) && !defined(NETWARE)
 #include "build-defs.h"
 #endif
 #include "ext/standard/info.h"

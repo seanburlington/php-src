@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.159 2002/12/01 03:28:21 sas Exp $ */
+/* $Id: SAPI.c,v 1.160 2002/12/05 21:46:08 helly Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -186,7 +186,7 @@ SAPI_API SAPI_POST_READER_FUNC(sapi_read_standard_form_data)
 	int allocated_bytes=SAPI_POST_BLOCK_SIZE+1;
 
 	if (SG(request_info).content_length > SG(post_max_size)) {
-		php_error(E_WARNING, "POST Content-Length of %d bytes exceeds the limit of %d bytes",
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "POST Content-Length of %d bytes exceeds the limit of %d bytes",
 					SG(request_info).content_length, SG(post_max_size));
 		return;
 	}
@@ -199,7 +199,7 @@ SAPI_API SAPI_POST_READER_FUNC(sapi_read_standard_form_data)
 		}
 		SG(read_post_bytes) += read_bytes;
 		if (SG(read_post_bytes) > SG(post_max_size)) {
-			php_error(E_WARNING, "Actual POST length does not match Content-Length, and exceeds %d bytes", SG(post_max_size));
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Actual POST length does not match Content-Length, and exceeds %d bytes", SG(post_max_size));
 			return;
 		}
 		if (read_bytes < SAPI_POST_BLOCK_SIZE) {

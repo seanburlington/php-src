@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.332 2002/11/02 18:54:31 iliaa Exp $ */
+/* $Id: string.c,v 1.333 2002/11/05 13:52:11 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -889,9 +889,16 @@ PHP_FUNCTION(implode)
 	}
 
 	php_implode(delim, arr, return_value);
-	if (arg1 != NULL && arg1_separated) zval_ptr_dtor(arg1);
-	if (arg2 != NULL && arg2_separated) zval_ptr_dtor(arg2);
-	if (delim_needs_dtor) FREE_ZVAL(delim);
+
+	if (arg1 != NULL && arg1_separated) {
+		zval_ptr_dtor(arg1);
+	}
+	if (arg2 != NULL && arg2_separated) {
+		zval_ptr_dtor(arg2);
+	}
+	if (delim_needs_dtor) {
+		FREE_ZVAL(delim);
+	}
 }
 /* }}} */
 

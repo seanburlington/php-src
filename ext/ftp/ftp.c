@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.15 2000/02/22 20:50:00 askalski Exp $ */
+/* $Id: ftp.c,v 1.16 2000/05/04 10:38:13 sas Exp $ */
 
 #include "php.h"
 
@@ -635,7 +635,7 @@ ftp_mdtm(ftpbuf_t *ftp, const char *path)
 
 	/* figure out the GMT offset */
 	stamp = time(NULL);
-	gmt = gmtime_r(&stamp, &tmbuf);
+	gmt = php_gmtime_r(&stamp, &tmbuf);
 	gmt->tm_isdst = -1;
 
 	/* apply the GMT offset */

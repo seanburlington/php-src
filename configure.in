@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.117 2000/05/04 09:42:27 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.118 2000/05/04 10:38:12 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -136,6 +136,7 @@ divert(3)
 
 PHP_CONFIGURE_PART(Running system checks)
 
+PHP_MISSING_TIME_R_DECL
 
 dnl check for -R, etc. switch
 AC_MSG_CHECKING(whether compiler supports -R)

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_tidy.h,v 1.5 2003/09/20 19:45:32 iliaa Exp $ */
+/* $Id: php_tidy.h,v 1.6 2003/09/21 19:22:19 iliaa Exp $ */
 
 #ifndef PHP_TIDY_H
 #define PHP_TIDY_H
@@ -95,6 +95,8 @@ PHP_FUNCTION(tidy_getopt);
 PHP_FUNCTION(tidy_parse_string);
 PHP_FUNCTION(tidy_parse_file);
 PHP_FUNCTION(tidy_clean_repair);
+PHP_FUNCTION(tidy_repair_string);
+PHP_FUNCTION(tidy_repair_file);
 PHP_FUNCTION(tidy_diagnose);
 PHP_FUNCTION(tidy_get_output);
 PHP_FUNCTION(tidy_get_error_buffer);

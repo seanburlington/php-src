@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.143.2.13 2003/07/14 16:13:30 sniper Exp $ */
+/* $Id: php_odbc.c,v 1.143.2.14 2003/08/11 02:08:32 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1232,7 +1232,7 @@ PHP_FUNCTION(odbc_data_source)
 
 }
 /* }}} */
-#endif /* HAVE_SQLDATASOURCES *
+#endif /* HAVE_SQLDATASOURCES */
 
 /* {{{ proto resource odbc_exec(resource connection_id, string query [, int flags])
    Prepare and execute an SQL statement */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.617 2005/02/21 15:14:02 moriyoshi Exp $ */
+/* $Id: main.c,v 1.618 2005/02/27 12:50:22 sniper Exp $ */
 
 /* {{{ includes
  */
@@ -594,7 +594,8 @@ PHPAPI void php_html_puts(const char *str, uint size TSRMLS_DC)
 /* }}} */
 
 /* {{{ php_suppress_errors */
-PHPAPI void php_set_error_handling(error_handling_t error_handling, zend_class_entry *exception_class TSRMLS_DC) {
+PHPAPI void php_set_error_handling(error_handling_t error_handling, zend_class_entry *exception_class TSRMLS_DC)
+{
 	PG(error_handling) = error_handling;
 	PG(exception_class) = exception_class;
 	if (PG(last_error_message)) {

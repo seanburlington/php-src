@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.47 2002/07/13 05:42:46 sniper Exp $ */
+/* $Id: php_yaz.c,v 1.48 2002/07/29 19:56:58 dickmeiss Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2059,7 +2059,7 @@ PHP_FUNCTION(yaz_record)
 			}
 			else if (!strcmp (type, "array"))
 			{
-				Z_External *ext = (Z_External *) ZOOM_record_get (r, "raw", 0);
+				Z_External *ext = (Z_External *) ZOOM_record_get (r, "ext", 0);
 				oident *ent = oid_getentbyoid(ext->direct_reference);
 
 				if (ext->which == Z_External_grs1 && ent->value == VAL_GRS1)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.173 2003/09/04 14:18:39 abies Exp $ */
+/* $Id: interbase.c,v 1.174 2003/09/04 14:44:34 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -51,6 +51,9 @@
 #endif
 
 #define SAFE_STRING(s) ((s)?(s):"")
+
+#define ISC_LONG_MIN (-ISC_LONG_MAX - 1)
+#define ISC_LONG_MAX 2147483647
 
 #ifdef PHP_WIN32
 # ifndef ISC_UINT64
@@ -713,7 +716,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.173 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.174 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "Yes");
 #endif
@@ -1363,7 +1366,7 @@ static int _php_ibase_bind(XSQLDA *sqlda, zval **b_vars, BIND_BUF *buf, ibase_qu
 					convert_to_long(b_var);
 #if (SIZEOF_LONG > 4)
 					/* ISC_LONG is always 32-bit */
-					if (Z_LVAL_P(b_var) > INT_MAX || Z_LVAL_P(b_var) < INT_MIN) {
+					if (Z_LVAL_P(b_var) > ISC_LONG_MAX || Z_LVAL_P(b_var) < ISC_LONG_MIN) {
 						_php_ibase_module_error("Parameter %d exceeds field width" TSRMLS_CC, i+1);
 						rv = FAILURE;
 					}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_open_temporary_file.c,v 1.26 2003/04/11 11:08:44 wez Exp $ */
+/* $Id: php_open_temporary_file.c,v 1.27 2003/04/25 18:11:32 sniper Exp $ */
 
 #include "php.h"
 
@@ -105,11 +105,13 @@ static int php_do_open_temporary_file(const char *path, const char *pfx, char **
 	char *trailing_slash;
 	char *opened_path;
 	int fd = -1;
+#ifndef HAVE_MKSTEMP
 	int open_flags = O_CREAT | O_TRUNC | O_RDWR
 #ifdef PHP_WIN32
 		| _O_BINARY
 #endif
 		;
+#endif
 #ifdef NETWARE
     char *file_path = NULL;
 #endif

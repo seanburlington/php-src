@@ -1,3 +1,70 @@
+2005-03-06  Jani Taskinen  <jani.taskinen@kolumbus.fi>
+
+    * sapi/cgi/config9.m4
+      sapi/cgi/config9.m4:
+      MFB: Fix VPATH build
+
+2005-03-06  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ext/standard/image.c:
+      - Actuall the comments were correct
+
+    * ZendEngine2/zend_reflection_api.c:
+      - Fix by Tim
+
+    * ext/mysqli/mysqli.c:
+      - Bugfix #28840 __destruct of a class that extends mysqli not called
+
+2005-03-06  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_0)
+      ext/standard/html.c:
+      MFH: Make html_entity_decode() 15-20% faster by avoiding pointless string
+      duplication.
+
+    * ext/standard/html.c:
+      Make html_entity_decode() 15-20% faster by avoiding pointless string
+      duplication.
+
+2005-03-06  Jani Taskinen  <jani.taskinen@kolumbus.fi>
+
+    * NEWS
+      ext/fam/.cvsignore
+      ext/fam/CREDITS
+      ext/fam/config.m4
+      ext/fam/fam.c
+      ext/fam/package.xml
+      ext/fam/php_fam.h
+      ext/mnogosearch/.cvsignore
+      ext/mnogosearch/CREDITS
+      ext/mnogosearch/README
+      ext/mnogosearch/config.m4
+      ext/mnogosearch/index.php
+      ext/mnogosearch/php_mnogo.c
+      ext/mnogosearch/php_mnogo.h:
+      - Moved ext/fam and ext/mnogosearch to PECL
+
+2005-03-06  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      NEWS
+      NEWS
+      ext/standard/image.c
+      ext/standard/image.c:
+      MFH: Fixed bug #29424 (width and height inverted for JPEG2000 files).
+
+    * ext/standard/image.c:
+      Fixed bug #29424 (width and height inverted for JPEG2000 files).
+
+2005-03-06  Jani Taskinen  <jani.taskinen@kolumbus.fi>
+
+    * ZendEngine2/zend_compile.c
+      ZendEngine2/zend_compile.c:
+      Fixed compile warning (bug #32046)
+
+    * ZendEngine2/zend_mm.c:
+      Fix compile warning (bug #32047)
+
 2005-03-05  Rasmus Lerdorf  <rasmus@lerdorf.com>
 
     * (PHP_4_3)
@@ -1195,7 +1262,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1914 2005/03/06 01:46:24 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1915 2005/03/07 01:33:19 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -1676,7 +1743,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1914 2005/03/06 01:46:24 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1915 2005/03/07 01:33:19 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -3150,7 +3217,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1914 2005/03/06 01:46:24 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1915 2005/03/07 01:33:19 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

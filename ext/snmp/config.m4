@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 1999/09/03 16:04:28 gorgo Exp $
+dnl $Id: config.m4,v 1.7 1999/11/01 11:48:31 sas Exp $
 
 AC_MSG_CHECKING(for SNMP support)
 AC_ARG_WITH(snmp,
@@ -44,7 +44,7 @@ AC_ARG_WITH(snmp,
       AC_MSG_RESULT(yes (static))
       AC_ADD_LIBRARY_WITH_PATH(snmp, $SNMP_LIBDIR)
       AC_ADD_INCLUDE($SNMP_INCDIR)
-      SNMP_STATIC="libphpext_snmp.a"
+      SNMP_STATIC="libphpext_snmp.la"
     fi
     PHP_EXTENSION(snmp,$shared)
 	AC_CHECK_LIB(kstat, kstat_read, [

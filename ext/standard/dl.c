@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.86 2004/01/08 08:17:31 andi Exp $ */
+/* $Id: dl.c,v 1.87 2004/02/11 11:46:20 zeev Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -81,6 +81,7 @@ PHP_FUNCTION(dl)
 	} else if (PG(safe_mode)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Dynamically loaded extensions aren't allowed when running in Safe Mode");
 	} else {
+		zend_error(E_STRICT, "dl() is deprecated - use extension= in your php.ini");
 		php_dl(*file, MODULE_TEMPORARY, return_value TSRMLS_CC);
 		EG(full_tables_cleanup) = 1;
 	}

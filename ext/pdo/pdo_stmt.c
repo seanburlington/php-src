@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.12 2004/05/18 20:57:19 gschlossnagle Exp $ */
+/* $Id: pdo_stmt.c,v 1.13 2004/05/18 22:31:13 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -35,6 +35,7 @@
 #include "php_pdo_sql_parser.h"
 #include "zend_exceptions.h"
 
+#if COMPILE_DL_PDO
 /* {{{ content from zend_arg_defs.c:
  * since it is a .c file, it won't be installed for use by PECL extensions, so we include it here. */
 ZEND_BEGIN_ARG_INFO(first_arg_force_ref, 0)
@@ -64,6 +65,7 @@ ZEND_END_ARG_INFO();
 ZEND_BEGIN_ARG_INFO(all_args_by_ref, 1)
 ZEND_END_ARG_INFO();
 /* }}} */
+#endif
 
 static PHP_FUNCTION(dbstmt_constructor) /* {{{ */
 {

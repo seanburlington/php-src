@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.18 2001/10/30 12:29:55 ssb Exp $
+// $Id: Packager.php,v 1.19 2001/10/31 05:39:11 ssb Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -114,6 +114,9 @@ class PEAR_Packager extends PEAR_Common
         }
         $pwd = getcwd();
         $pkgfile = basename($pkgfile);
+        if ($pkginfo['release_state'] == 'snapshot') {
+            $pkginfo['version'] = date('Ymd');
+        }
         // don't want strange characters
         $pkgname    = ereg_replace ('[^a-zA-Z0-9._]', '_', $pkginfo['package']);
         $pkgversion = ereg_replace ('[^a-zA-Z0-9._\-]', '_', $pkginfo['version']);

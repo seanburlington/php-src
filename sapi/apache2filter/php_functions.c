@@ -16,13 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.34 2002/12/31 15:59:03 sebastian Exp $ */
+/* $Id: php_functions.c,v 1.35 2003/01/11 22:36:38 moriyoshi Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_smart_str.h"
 #include "ext/standard/info.h"
 #include "SAPI.h"
 
+#define CORE_PRIVATE
 #include "apr_strings.h"
 #include "apr_time.h"
 #include "ap_config.h"

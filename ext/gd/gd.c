@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.27 1999/12/04 19:15:48 sas Exp $ */
+/* $Id: gd.c,v 1.28 1999/12/12 10:53:45 sas Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -601,13 +601,14 @@ PHP_FUNCTION(imagegif )
 		output = php3_header();
 
 		if (output) {
-			SLS_FETCH();
-			
 			gdImageGif (im, tmp);
 			fseek(tmp, 0, SEEK_SET);
 #if APACHE && defined(CHARSET_EBCDIC)
-			/* This is a binary file already: avoid EBCDIC->ASCII conversion */
-			ap_bsetflag(((request_rec *) SG(server_context))->connection->client, B_EBCDIC2ASCII, 0);
+			{
+				SLS_FETCH();
+				/* This is a binary file already: avoid EBCDIC->ASCII conversion */
+				ap_bsetflag(((request_rec *) SG(server_context))->connection->client, B_EBCDIC2ASCII, 0);
+			}
 #endif
 			while ((b = fread(buf, 1, sizeof(buf), tmp)) > 0) {
 				php3_write(buf, b);

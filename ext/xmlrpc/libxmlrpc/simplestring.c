@@ -31,7 +31,7 @@
 */
 
 
-static const char rcsid[] = "#(@) $Id: simplestring.c,v 1.1 2001/09/06 04:13:29 danda Exp $";
+static const char rcsid[] = "#(@) $Id: simplestring.c,v 1.2 2002/07/05 04:43:53 danda Exp $";
 
 
 #define SIMPLESTRING_INCR 32
@@ -44,6 +44,16 @@ static const char rcsid[] = "#(@) $Id: simplestring.c,v 1.1 2001/09/06 04:13:29 
  * CREATION DATE
  *   06/2000
  * HISTORY
+ *   $Log: simplestring.c,v $
+ *   Revision 1.2  2002/07/05 04:43:53  danda
+ *   merged in updates from SF project.  bring php repository up to date with xmlrpc-epi version 0.51
+ *
+ *   Revision 1.4  2002/02/13 20:58:50  danda
+ *   patch to make source more windows friendly, contributed by Jeff Lawson
+ *
+ *   Revision 1.3  2001/09/29 21:58:05  danda
+ *   adding cvs log to history section
+ *
  *   10/15/2000 -- danda -- adding robodoc documentation
  * PORTABILITY
  *   Coded on RedHat Linux 6.2.  Builds on Solaris x86.  Should build on just

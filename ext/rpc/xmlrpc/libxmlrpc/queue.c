@@ -1,4 +1,4 @@
-static const char rcsid[] = "#(@) $Id: queue.c,v 1.3 2001/12/03 22:33:31 shane Exp $";
+static const char rcsid[] = "#(@) $Id: queue.c,v 1.4 2002/07/05 04:43:53 danda Exp $";
 
 /* 
  * Date last modified: Jan 2001
@@ -367,6 +367,7 @@ int Q_PushTail(queue *q, void *d)
 
       return True_;
    }
+   return False_;
 }
 
 

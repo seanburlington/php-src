@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.17 2002/03/15 13:56:32 ssb Exp $
+dnl $Id: config.m4,v 1.18 2002/03/17 21:09:21 sniper Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -69,29 +69,10 @@ if test "$PHP_XSLT" != "no"; then
       PHP_ADD_LIBRARY(xmltok)
     fi
 
-    found_iconv=no
-
-    if test -z "$ICONV_DIR"; then
-      AC_MSG_ERROR(Please specify the location of iconv with --with-iconv)
-    fi
-  
-    if test -f $ICONV_DIR/lib/lib${iconv_lib_name}.a ||
-       test -f $ICONV_DIR/lib/lib${iconv_lib_name}.$SHLIB_SUFFIX_NAME
-    then
-      PHP_ADD_LIBRARY_WITH_PATH($iconv_lib_name, $ICONV_DIR/lib, XSLT_SHARED_LIBADD)
-      AC_CHECK_LIB($iconv_lib_name, libiconv_open, [
-        found_iconv=yes
-      ])
-    else
-      AC_CHECK_LIB(c, iconv_open, [
-        found_iconv=yes
-      ])
-    fi
-
-    if test "$found_iconv" = "no"; then
+    PHP_SETUP_ICONV(XSLT_SHARED_LIBADD, [], [
       AC_MSG_ERROR([iconv not found, in order to build sablotron you need the iconv library])
-    fi
- 
+    ])
+     
     if test "$PHP_SABLOT_JS" != "no"; then
       found_js=no
       AC_CHECK_LIB(js, JS_GetRuntime, found_js=yes)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.36 2001/12/17 00:24:59 yohgaki Exp $ */
+/* $Id: php_pgsql.h,v 1.37 2002/01/25 00:43:50 yohgaki Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -148,6 +148,7 @@ typedef struct {
 	long num_links,num_persistent;
 	long max_links,max_persistent;
 	long allow_persistent;
+	long auto_reset_persistent;
 	int le_lofp,le_string;
 	int ignore_notices;
 	char *last_notice;

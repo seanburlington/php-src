@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.125.2.12 2003/04/16 17:32:41 moriyoshi Exp $ */
+/* $Id: sockets.c,v 1.125.2.13 2003/04/16 19:19:13 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -276,7 +276,8 @@ int accept_connect(php_socket *in_sock, php_socket **new_sock, struct sockaddr *
 /* {{{ php_read -- wrapper around read() so that it only reads to a \r or \n. */
 int php_read(int bsd_socket, void *buf, size_t maxlen, int flags)
 {
-	int m = 0, n = 0;
+	int m = 0;
+	size_t n = 0;
 	int no_read = 0;
 	int nonblock = 0;
 	char *t = (char *) buf;

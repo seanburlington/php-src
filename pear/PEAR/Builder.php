@@ -16,7 +16,7 @@
 // | Authors: Stig Sæther Bakken <ssb@php.net>                            |
 // +----------------------------------------------------------------------+
 //
-// $Id: Builder.php,v 1.12 2003/06/16 17:10:09 cox Exp $
+// $Id: Builder.php,v 1.13 2003/10/05 16:42:18 mj Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -206,7 +206,7 @@ class PEAR_Builder extends PEAR_Common
             return $this->raiseError("`phpize' failed");
         }
 
-        // start of interactive part
+        // {{{ start of interactive part
         $configure_command = "$dir/configure";
         if (isset($info['configure_options'])) {
             foreach ($info['configure_options'] as $o) {
@@ -222,9 +222,9 @@ class PEAR_Builder extends PEAR_Common
                 }
             }
         }
-        // end of interactive part
+        // }}} end of interactive part
 
-        // make configurable
+        // FIXME make configurable
         if(!$user=getenv('USER')){
             $user='defaultuser';
         }

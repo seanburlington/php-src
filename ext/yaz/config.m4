@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.8 2002/06/02 21:58:34 dickmeiss Exp $
+dnl $Id: config.m4,v 1.9 2002/07/11 13:02:51 dickmeiss Exp $
 dnl
 
 PHP_ARG_WITH(yaz,for YAZ support,
@@ -27,6 +27,11 @@ if test "$PHP_YAZ" != "no"; then
       case $c in
        -L*)
          dir=`echo $c|cut -c 3-|sed 's%/\.libs%%g'`
+        ;;
+       -lyaz*)
+        ;;
+       *)
+       PHP_EVAL_LIBLINE($c, YAZ_SHARED_LIBADD)
         ;;
       esac
     done

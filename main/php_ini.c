@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.113 2003/02/03 12:25:28 sniper Exp $ */
+/* $Id: php_ini.c,v 1.114 2003/02/18 09:37:54 wez Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -370,7 +370,7 @@ int php_init_config()
 	PG(safe_mode) = 0;
 	PG(open_basedir) = NULL;
 
-	fh.handle.fp = NULL;
+	memset(&fh, 0, sizeof(fh));
 	/* Check if php_ini_path_override is a file */
 	if (!sapi_module.php_ini_ignore) {
 		if (sapi_module.php_ini_path_override && sapi_module.php_ini_path_override[0]) {

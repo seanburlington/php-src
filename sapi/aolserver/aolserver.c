@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: aolserver.c,v 1.7 1999/09/25 21:08:36 sas Exp $ */
+/* $Id: aolserver.c,v 1.1 1999/09/27 16:34:28 ssb Exp $ */
 
 /* conflict between PHP and aolserver */
 #define Debug php_Debug

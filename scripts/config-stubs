@@ -1,7 +1,8 @@
 #!/bin/sh
 #
-# $Id: config-stubs,v 1.1 1999/04/17 00:37:12 ssb Exp $
+# $Id: config-stubs,v 1.2 1999/09/27 16:34:28 ssb Exp $
 
-for stubfile in ext/*/config.m4; do
+dir=$1; shift
+for stubfile in $dir/*/config.m4; do
     echo "sinclude($stubfile)"
 done

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.156.2.1 2001/05/19 07:43:25 sas Exp $ */
+/* $Id: file.c,v 1.156.2.2 2001/05/20 13:28:57 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1877,7 +1877,15 @@ PHP_FUNCTION(copy)
 		RETURN_FALSE;
 	}
 
+	if (php_check_open_basedir((*source)->value.str.val)) {
+		RETURN_FALSE;
+	}
+
 	if (PG(safe_mode) &&(!php_checkuid((*target)->value.str.val, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+		RETURN_FALSE;
+	}
+
+	if (php_check_open_basedir((*target)->value.str.val)) {
 		RETURN_FALSE;
 	}
 

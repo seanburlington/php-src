@@ -19,10 +19,12 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_rand.h,v 1.3 2000/02/19 23:41:21 zeev Exp $ */
+/* $Id: php_rand.h,v 1.4 2000/04/22 15:44:35 andi Exp $ */
 
 #ifndef _PHP_RAND_H
 #define	_PHP_RAND_H
+
+#include <stdlib.h>
 
 #ifndef RAND_MAX
 #define RAND_MAX (1<<15)

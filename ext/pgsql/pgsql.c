@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.89 2001/02/15 02:15:36 zeev Exp $ */
+/* $Id: pgsql.c,v 1.90 2001/02/19 07:50:06 sas Exp $ */
 
 #include <stdlib.h>
 
@@ -236,7 +236,7 @@ PHP_RINIT_FUNCTION(pgsql)
 
 PHP_RSHUTDOWN_FUNCTION(pgsql)
 {
-	zend_hash_apply(&EG(persistent_list),_rollback_transactions);
+	zend_hash_apply(&EG(persistent_list), (apply_func_t) _rollback_transactions);
 
 	return SUCCESS;
 }

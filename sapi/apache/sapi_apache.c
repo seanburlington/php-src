@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.19 2000/07/29 14:46:08 zeev Exp $ */
+/* $Id: sapi_apache.c,v 1.20 2000/08/13 18:08:01 stas Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -72,6 +72,7 @@ int apache_php_module_main(request_rec *r, int display_source_mode CLS_DC ELS_DC
 	file_handle.type = ZEND_HANDLE_FILENAME;
 	file_handle.handle.fd = 0;
 	file_handle.filename = SG(request_info).path_translated;
+	file_handle.opened_path = NULL;
 	file_handle.free_filename = 0;
 
 	if (display_source_mode) {

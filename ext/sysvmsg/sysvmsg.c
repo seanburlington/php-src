@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.16 2004/01/08 08:17:37 andi Exp $ */
+/* $Id: sysvmsg.c,v 1.16.2.1 2005/01/24 14:25:16 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -142,7 +142,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.16 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.16.2.1 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -330,6 +330,7 @@ PHP_FUNCTION(msg_receive)
 		/* got it! */
 		ZVAL_LONG(out_msgtype, messagebuffer->mtype);
 
+		RETVAL_TRUE;
 		if (do_unserialize)	{
 			php_unserialize_data_t var_hash;
 			zval *tmp = NULL;
@@ -347,7 +348,6 @@ PHP_FUNCTION(msg_receive)
 		} else {
 			ZVAL_STRINGL(out_message, messagebuffer->mtext, result, 1);
 		}
-		RETVAL_TRUE;
 	} else if (zerrcode) {
 		ZVAL_LONG(zerrcode, errno);
 	}

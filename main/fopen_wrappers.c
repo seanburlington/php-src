@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.38 2000/02/10 17:14:05 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.39 2000/02/10 19:41:18 zeev Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -208,7 +208,6 @@ PHPAPI FILE *php_fopen_wrapper(char *path, char *mode, int options, int *issock,
 	}
 }
 
-#if CGI_BINARY || FHTTPD || USE_SAPI
 
 PHPAPI FILE *php_fopen_primary_script(void)
 {
@@ -307,7 +306,6 @@ PHPAPI FILE *php_fopen_primary_script(void)
 	return fp;
 }
 
-#endif							/* CGI_BINARY || USE_SAPI */
 
 /*
  * Tries to open a file with a PATH-style list of directories.

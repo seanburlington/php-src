@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.15 2000/01/01 01:31:52 sas Exp $ */
+/* $Id: mail.c,v 1.16 2000/02/10 19:41:19 zeev Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -27,12 +27,6 @@
 #endif
 #include "php_mail.h"
 #include "php_ini.h"
-
-#if APACHE
-#  ifndef DEBUG
-#  undef palloc
-#  endif
-#endif
 
 #if HAVE_SENDMAIL
 #if MSVC5

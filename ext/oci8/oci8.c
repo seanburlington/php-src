@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.53 2000/02/07 10:31:43 thies Exp $ */
+/* $Id: oci8.c,v 1.54 2000/02/10 19:41:19 zeev Exp $ */
 
 /* TODO list:
  *
@@ -1642,7 +1642,7 @@ oci_failover_callback(dvoid *svchp,
 		case OCI_FO_ERROR:
 			{
 				printf(" Failover error gotten. Sleeping...\n");
-				sleep(3);
+				php_sleep(3);
 				/* cannot find this blody define !!! return OCI_FO_RETRY; */
 				break;
 			}

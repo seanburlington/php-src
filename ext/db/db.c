@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.21 2000/02/05 15:16:09 zeev Exp $ */
+/* $Id: db.c,v 1.22 2000/02/10 19:41:18 zeev Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 # include "dl/phpdl.h"
@@ -317,7 +317,7 @@ dbm_info *php_dbm_open(char *filename, char *mode) {
 #if NFS_HACK 
 		while((last_try = stat(lockfn,&sb))==0) {
 			retries++;
-			sleep(1);
+			php_sleep(1);
 			if (retries>30) break;
 		}	
 		if (last_try!=0) {

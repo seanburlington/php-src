@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.19 2000/02/08 22:21:43 zeev Exp $ */
+/* $Id: url.c,v 1.20 2000/02/10 19:41:19 zeev Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -27,7 +27,7 @@
 #include "url.h"
 #ifdef _OSD_POSIX
 #ifndef APACHE
-#error On this EBCDIC platform, PHP3 is only supported as an Apache module.
+#error On this EBCDIC platform, PHP is only supported as an Apache module.
 #else /*APACHE*/
 #ifndef CHARSET_EBCDIC
 #define CHARSET_EBCDIC /* this machine uses EBCDIC, not ASCII! */

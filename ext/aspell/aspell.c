@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: aspell.c,v 1.12 2000/01/01 01:31:28 sas Exp $ */
+/* $Id: aspell.c,v 1.13 2000/02/10 19:41:18 zeev Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)
@@ -29,11 +29,6 @@
 #if HAVE_ASPELL
 
 #include "php_aspell.h"
-#if APACHE
-#  ifndef DEBUG
-#  undef palloc
-#  endif
-#endif
 #include <aspell-c.h>
 
 function_entry aspell_functions[] = {

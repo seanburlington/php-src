@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.93 2000/02/08 22:21:43 zeev Exp $ */
+/* $Id: string.c,v 1.94 2000/02/10 19:41:19 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1503,8 +1503,7 @@ PHP_FUNCTION(stripslashes)
 /* }}} */
 
 #ifndef HAVE_STRERROR
-#if !APACHE
-char *strerror(int errnum) 
+char *php_strerror(int errnum) 
 {
 	extern int sys_nerr;
 	extern char *sys_errlist[];
@@ -1514,7 +1513,6 @@ char *strerror(int errnum)
 	(void)sprintf(BG(str_ebuf), "Unknown error: %d", errnum);
 	return(BG(str_ebuf));
 }
-#endif
 #endif
 
 PHPAPI void php_stripcslashes(char *str, int *len)

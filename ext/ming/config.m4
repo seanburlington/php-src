@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.17 2002/10/08 00:15:09 rasmus Exp $
+dnl $Id: config.m4,v 1.18 2002/10/08 00:16:52 rasmus Exp $
 dnl
 
 PHP_ARG_WITH(ming, for MING support,
@@ -17,12 +17,6 @@ if test "$PHP_MING" != "no"; then
   if test -z "$MING_DIR"; then
     AC_MSG_ERROR(Please reinstall ming distribution. libming.(a|so) not found.)
   fi
-
-  for i in /usr/local /usr; do
-    if test -f $i/lib/libming.$SHLIB_SUFFIX_NAME -o -f $i/lib/libming.a; then
-      MING_DIR=$i
-    fi
-  done
 
   for i in $MING_DIR/include $MING_DIR/include/ming $MING_DIR/ming/include; do
     if test -f $i/ming.h; then

@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.19 2003/05/15 18:55:41 mj Exp $
+// $Id: Dependency.php,v 1.20 2003/05/15 19:44:32 mj Exp $
 
 require_once "PEAR.php";
 
@@ -51,8 +51,8 @@ class PEAR_Dependency
     }
 
     /**
-    * This method maps the xml dependency definition to the
-    * PEAR_dependecy one
+    * This method maps the XML dependency definition to the
+    * corresponding one from PEAR_Dependency
     *
     * $opts => Array
     *    (
@@ -61,6 +61,10 @@ class PEAR_Dependency
     *        [version] => 3.4
     *        [name] => HTML_Common
     *    )
+    *
+    * @param  string Error message
+    * @param  array  Options
+    * @return boolean
     */
     function callCheckMethod(&$errmsg, $opts)
     {

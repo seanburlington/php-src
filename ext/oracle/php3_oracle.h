@@ -1,4 +1,4 @@
-/* $Id: oracle.h,v 1.3 1999/05/09 08:48:00 zeev Exp $ */
+/* $Id: php3_oracle.h,v 1.1 1999/05/12 13:44:08 thies Exp $ */
 
 #ifndef _PHP3_ORACLE_H
 #define _PHP3_ORACLE_H
@@ -25,6 +25,7 @@
 
 extern php3_module_entry oracle_module_entry;
 #define oracle_module_ptr &oracle_module_entry
+#define phpext_oracle_ptr &oracle_module_entry
 
 /* oparse flags */
 #define  DEFER_PARSE        1

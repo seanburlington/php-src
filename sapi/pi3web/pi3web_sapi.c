@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.32 2001/08/14 17:31:00 dbeu Exp $ */
+/* $Id: pi3web_sapi.c,v 1.32.2.1 2001/10/12 11:56:37 ssb Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -77,7 +77,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.32 2001/08/14 17:31:00 dbeu Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.32.2.1 2001/10/12 11:56:37 ssb Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -121,6 +121,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 
 
 static zend_module_entry php_pi3web_module = {
+	STANDARD_MODULE_HEADER,
 	"PI3WEB",
 	NULL,
 	NULL,
@@ -128,6 +129,7 @@ static zend_module_entry php_pi3web_module = {
 	NULL,
 	NULL,
 	php_info_pi3web,
+	NULL,
 	STANDARD_MODULE_PROPERTIES
 };
 

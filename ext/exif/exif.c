@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.139 2003/01/18 18:51:12 iliaa Exp $ */
+/* $Id: exif.c,v 1.140 2003/01/18 19:06:29 helly Exp $ */
 
 /*  ToDos
  *
@@ -95,7 +95,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.139 2003/01/18 18:51:12 iliaa Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.140 2003/01/18 19:06:29 helly Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -1486,12 +1486,11 @@ static int exif_file_sections_realloc(image_info_type *ImageInfo, int section_in
 {
 	void *tmp;
 
+	/* This is not a malloc/realloc check. It is a plausibility check for the
+	 * function parameters (requirements engineering).
+	 */
 	if (section_index >= ImageInfo->file.count) {
 		EXIF_ERRLOG_FSREALLOC
-		return -1;
-	}
-	tmp = erealloc(ImageInfo->file.list[section_index].data, size);
-	if (size == 0 || section_index >= ImageInfo->file.count) {
 		return -1;
 	}
 	tmp = erealloc(ImageInfo->file.list[section_index].data, size);

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.346 2001/01/07 18:38:38 zeev Exp $ */
+/* $Id: main.c,v 1.347 2001/01/13 13:10:50 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -102,10 +102,6 @@ static MUTEX_T global_lock;
 static void php_build_argv(char *s, zval *track_vars_array ELS_DC PLS_DC);
 
 void *gLock;					/*mutex variable */
-
-
-/* True globals (no need for thread safety) */
-HashTable configuration_hash;
 
 #define SAFE_FILENAME(f) ((f)?(f):"-")
 

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.36 2001/05/17 17:02:37 dbeu Exp $ */
+/* $Id: sockets.c,v 1.37 2001/05/21 16:55:27 sterling Exp $ */
 
 #include "php.h"
 
@@ -939,7 +939,7 @@ PHP_FUNCTION(socket_connect)
 		RETURN_FALSE;
 	}
 
-	RETURN_FALSE;
+	RETURN_TRUE;
 }
 /* }}} */
 

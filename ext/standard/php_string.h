@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.80 2003/10/30 00:49:33 iliaa Exp $ */
+/* $Id: php_string.h,v 1.81 2003/12/10 06:08:39 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -142,6 +142,16 @@ PHPAPI size_t php_strcspn(char *s1, char *s2, char *s1_end, char *s2_end);
 #ifndef HAVE_STRERROR
 PHPAPI char *php_strerror(int errnum);
 #define strerror php_strerror
+#endif
+
+#ifndef HAVE_MBLEN
+# define php_mblen(ptr, len) 1
+#else
+# if defined(_REENTRANT) && defined(HAVE_MBRLEN) && defined(HAVE_MBSTATE_T)
+#  define php_mblen(ptr, len) ((ptr) == NULL ? mbsinit(&BG(mblen_state)): (int)mbrlen(ptr, len, &BG(mblen_state)))
+# else
+#  define php_mblen(ptr, len) mblen(ptr, len)
+# endif
 #endif
 
 void register_string_constants(INIT_FUNC_ARGS);

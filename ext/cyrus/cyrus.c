@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyrus.c,v 1.11 2002/06/26 07:24:47 derick Exp $ */
+/* $Id: cyrus.c,v 1.12 2002/09/20 15:39:50 martin Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -102,7 +102,7 @@ PHP_MINIT_FUNCTION(cyrus)
 PHP_MINFO_FUNCTION(cyrus)
 {
 	php_info_print_table_start();
-	php_info_print_table_header(2, "Cyrus IMAP support", "enabled");
+	php_info_print_table_row(2, "Cyrus IMAP support", "enabled");
 	php_info_print_table_end();
 }
 

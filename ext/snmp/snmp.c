@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.81 2003/07/16 04:54:40 sniper Exp $ */
+/* $Id: snmp.c,v 1.82 2003/07/16 05:10:29 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1000,8 +1000,6 @@ PHP_FUNCTION(snmp3_getnext)
 	php_snmpv3(INTERNAL_FUNCTION_PARAM_PASSTHRU, 2);
 }
 /* }}} */
-
-/* {{{ proto int snmp3_walk(string host, string sec_name, string sec_level, string auth_protocol, string auth_passphrase, string priv_protocol, string priv_passphrase, string object_id [, int timeout [, int retries]])
 
 /* {{{ proto int snmp3_walk(string host, string sec_name, string sec_level, string auth_protocol, string auth_passphrase, string priv_protocol, string priv_passphrase, string object_id [, int timeout [, int retries]])
    Fetch the value of a SNMP object */

@@ -21,7 +21,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.26 1999/12/20 13:28:17 eschmid Exp $ */
+/* $Id: imap.c,v 1.27 1999/12/23 12:46:25 thies Exp $ */
 
 #define IMAP41
 
@@ -419,6 +419,8 @@ PHP_MINFO_FUNCTION(imap)
 
 PHP_MINIT_FUNCTION(imap)
 {
+	ELS_FETCH();
+
 	unsigned long sa_all =	SA_MESSAGES | SA_RECENT | SA_UNSEEN |
 				SA_UIDNEXT | SA_UIDVALIDITY;
 

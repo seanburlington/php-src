@@ -30,8 +30,13 @@
 
 */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
-static const char rcsid[] = "#(@) $Id: encodings.c,v 1.1.4.1 2002/03/26 00:16:00 sniper Exp $";
+#include <php_config.h>
+
+static const char rcsid[] = "#(@) $Id: encodings.c,v 1.1.4.2 2002/06/30 05:12:21 sniper Exp $";
 
 #include <errno.h>
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.20 2004/04/06 18:26:19 rrichards Exp $ */
+/* $Id: xpath.c,v 1.21 2004/05/16 10:30:16 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -49,14 +49,18 @@ PHP_METHOD(domxpath, __construct)
 	dom_object *docobj, *intern;
 	xmlXPathContextPtr ctx, oldctx;
 
+	php_set_error_handling(EH_THROW, dom_domexception_class_entry TSRMLS_CC);
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "OO", &id, dom_xpath_class_entry, &doc, dom_document_class_entry) == FAILURE) {
+		php_std_error_handling();
 		return;
 	}
 
+	php_std_error_handling();
 	DOM_GET_OBJ(docp, doc, xmlDocPtr, docobj);
 
 	ctx = xmlXPathNewContext(docp);
 	if (ctx == NULL) {
+		php_dom_throw_error(INVALID_STATE_ERR, 1 TSRMLS_CC);
 		RETURN_FALSE;
 	}
 

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.154 2005/01/10 07:19:08 helly Exp $ 
+   $Id: sqlite.c,v 1.155 2005/01/24 18:46:50 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -43,6 +43,10 @@
 
 #include "zend_exceptions.h"
 #include "zend_interfaces.h"
+
+#ifdef HAVE_SPL
+extern PHPAPI zend_class_entry *spl_ce_RuntimeException;
+#endif
 
 #ifndef safe_emalloc
 # define safe_emalloc(a,b,c) emalloc((a)*(b)+(c))
@@ -998,7 +1002,11 @@ PHP_MINIT_FUNCTION(sqlite)
 	REGISTER_SQLITE_CLASS(Database,   db,        NULL);
 	REGISTER_SQLITE_CLASS(Result,     query,     NULL);
 	REGISTER_SQLITE_CLASS(Unbuffered, ub_query,  NULL);
+#ifdef HAVE_SPL
+	REGISTER_SQLITE_CLASS(Exception,  exception, spl_ce_RuntimeException);
+#else
 	REGISTER_SQLITE_CLASS(Exception,  exception, zend_exception_get_default());
+#endif 
 	sqlite_object_handlers_query.get_class_entry = sqlite_get_ce_query;
 	sqlite_object_handlers_ub_query.get_class_entry = sqlite_get_ce_ub_query;
 
@@ -1073,7 +1081,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.154 2005/01/10 07:19:08 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.155 2005/01/24 18:46:50 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

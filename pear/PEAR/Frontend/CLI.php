@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.10 2002/04/07 19:42:05 ssb Exp $
+  $Id: CLI.php,v 1.11 2002/04/10 15:09:36 cox Exp $
 */
 
 require_once "PEAR.php";
@@ -69,6 +69,11 @@ class PEAR_Frontend_CLI extends PEAR
     function displayLine($text)
     {
         print "$this->lp$text\n";
+    }
+
+    function display($text)
+    {
+        print $text;
     }
 
     // }}}

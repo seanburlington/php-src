@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.153 1999/12/07 20:49:01 rubys Exp $ */
+/* $Id: main.c,v 1.154 1999/12/12 10:49:03 sas Exp $ */
 
 
 #include <stdio.h>
@@ -78,6 +78,8 @@ php_core_globals core_globals;
 #else
 PHPAPI int core_globals_id;
 #endif
+
+#define NO_GLOBAL_LOCK
 
 /* temporary workaround for thread-safety issues in libzend */
 #if defined(ZTS) && !defined(NO_GLOBAL_LOCK)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.139 2003/03/25 08:07:12 sebastian Exp $ */
+/* $Id: php_pcre.c,v 1.140 2003/05/20 18:11:09 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -56,13 +56,15 @@ static void *php_pcre_malloc(size_t size)
 
 static void php_pcre_free(void *ptr)
 {
-	pefree(ptr, 1);
+	if (ptr)
+		pefree(ptr, 1);
 }
 
 
 static void php_free_pcre_cache(void *data)
 {
 	pcre_cache_entry *pce = (pcre_cache_entry *) data;
+	if (!pce) return;
 	pefree(pce->re, 1);
 #if HAVE_SETLOCALE
 	if ((void*)pce->tables) pefree((void*)pce->tables, 1);

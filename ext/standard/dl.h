@@ -30,7 +30,7 @@
  */
 
 
-/* $Id: dl.h,v 1.6 1999/10/13 19:55:25 thies Exp $ */
+/* $Id: dl.h,v 1.7 1999/12/04 20:55:33 ssb Exp $ */
 
 #ifndef _DL_H
 #define _DL_H
@@ -38,7 +38,7 @@
 void php_dl(pval *file,int type,pval *return_value);
 
 
-#if HAVE_LIBDL
+#ifdef HAVE_LIBDL
 
 extern php3_module_entry dl_module_entry;
 #define dl_module_ptr &dl_module_entry

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_flatfile.c,v 1.6 2002/11/08 01:03:53 helly Exp $ */
+/* $Id: dba_flatfile.c,v 1.7 2002/11/10 17:58:46 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -39,38 +39,10 @@
 
 DBA_OPEN_FUNC(flatfile)
 {
-	char *fmode;
-	php_stream *fp;
-
 	info->dbf = emalloc(sizeof(flatfile));
 	memset(info->dbf, 0, sizeof(flatfile));
 
-	switch(info->mode) {
-		case DBA_READER:
-			fmode = "r";
-			break;
-		case DBA_WRITER:
-			fmode = "r+b";
-			break;
-		case DBA_CREAT:
-			fmode = "a+b";
-			break;
-		case DBA_TRUNC:
-			fmode = "w+b";
-			break;
-		default:
-			efree(info->dbf);
-			return FAILURE; /* not possible */
-	}
-
-	fp = php_stream_open_wrapper(info->path, fmode, STREAM_MUST_SEEK|IGNORE_PATH|ENFORCE_SAFE_MODE, NULL);
-	if (!fp) {
-		*error = "Unable to open file";
-		efree(info->dbf);
-		return FAILURE;
-	}
-
-	((flatfile*)info->dbf)->fp = fp;
+	((flatfile*)info->dbf)->fp = info->fp;
 
 	return SUCCESS;
 }
@@ -79,7 +51,6 @@ DBA_CLOSE_FUNC(flatfile)
 {
 	FLATFILE_DATA;
 
-	php_stream_close(dba->fp);
 	if (dba->nextkey.dptr)
 		efree(dba->nextkey.dptr);
 	efree(dba);

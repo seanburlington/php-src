@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.243 2000/05/04 10:38:12 sas Exp $ */
+/* $Id: main.c,v 1.244 2000/05/17 19:45:46 hholzgra Exp $ */
 
 
 #include <stdio.h>
@@ -502,7 +502,8 @@ static void php_unset_timeout(void)
 #endif
 }
 
-
+/* {{{ proto void set_time_limit(int seconds)
+   Sets the maximum time a script can run */
 PHP_FUNCTION(set_time_limit)
 {
 	pval *new_timeout;
@@ -529,7 +530,7 @@ PHP_FUNCTION(set_time_limit)
 	php_unset_timeout();
 	php_set_timeout(new_timeout->value.lval);
 }
-
+/* }}} */
 
 static FILE *php_fopen_wrapper_for_zend(const char *filename, char **opened_path)
 {

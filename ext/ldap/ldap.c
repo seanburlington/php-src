@@ -20,7 +20,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.12 1999/08/07 16:32:50 zeev Exp $ */
+/* $Id: ldap.c,v 1.13 1999/08/20 13:03:22 andrey Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -67,7 +67,7 @@ ldap_module php3_ldap_module;
 
 function_entry ldap_functions[] = {
 	PHP_FE(ldap_connect,							NULL)
-	PHP_FE(ldap_close,								NULL)
+	PHP_FALIAS(ldap_close,		ldap_unbind,		NULL)
 	PHP_FE(ldap_bind,								NULL)
 	PHP_FE(ldap_unbind,								NULL)
 	PHP_FE(ldap_read,								NULL)
@@ -277,7 +277,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_printf("<table>"
 				"<tr><td>Total links:</td><td>%d/%s</td></tr>\n"
-		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.12 1999/08/07 16:32:50 zeev Exp $</td></tr>\n"
+		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.13 1999/08/20 13:03:22 andrey Exp $</td></tr>\n"
 #if HAVE_NSLDAP
 				"<tr><td>SDK Version:</td><td>%f</td></tr>"
 				"<tr><td>Highest LDAP Protocol Supported:</td><td>%f</td></tr>"

@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.13 1999/11/22 00:42:06 sas Exp $ */
+/* $Id: aolserver.c,v 1.14 1999/11/22 01:30:28 sas Exp $ */
 
 /* conflict between PHP and AOLserver */
 #define Debug php_Debug
@@ -194,7 +194,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	int uptime = Ns_InfoUptime();
 	
 	PUTS("<table border=5 width=600>\n");
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.13 1999/11/22 00:42:06 sas Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.14 1999/11/22 01:30:28 sas Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -300,6 +300,7 @@ php_ns_hash_environment(NSLS_D CLS_DC ELS_DC PLS_DC SLS_DC)
 	int i;
 	char buf[NS_BUF_SIZE + 1];
 	zval *pval;
+	char *tmp;
 
 	for(i = 0; i < Ns_SetSize(NSG(conn->headers)); i++) {
 		char *key = Ns_SetKey(NSG(conn->headers), i);
@@ -352,8 +353,11 @@ php_ns_hash_environment(NSLS_D CLS_DC ELS_DC PLS_DC SLS_DC)
 	snprintf(buf, NS_BUF_SIZE, "%d", Ns_ConnPort(NSG(conn)));
 	ADD_STRING("SERVER_PORT");
 
-	strncpy(buf, Ns_ConnHost(NSG(conn)), NS_BUF_SIZE);
-	ADD_STRING("SERVER_NAME");
+	tmp = Ns_ConnHost(NSG(conn));
+	if (tmp) {
+		strncpy(buf, tmp, NS_BUF_SIZE);
+		ADD_STRING("SERVER_NAME");
+	}	
 
 	strncpy(buf, SG(request_info).path_translated, NS_BUF_SIZE);
 	ADD_STRING("PATH_TRANSLATED");

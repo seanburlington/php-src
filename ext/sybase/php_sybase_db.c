@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.32 2001/09/26 08:41:04 jeroen Exp $ */
+/* $Id: php_sybase_db.c,v 1.33 2001/09/26 08:51:51 jeroen Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1286,7 +1286,7 @@ PHP_FUNCTION(sybase_result)
 			break;
 	}
 
-	*return_value = *Z_LVAL_P(result->data[row][field_offset]);
+	*return_value = *result->data[Z_LVAL_P(row)][field_offset];
 	pval_copy_constructor(return_value);
 }
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.95.2.1 2004/11/15 23:44:14 iliaa Exp $ */
+/* $Id: php_streams.h,v 1.95.2.2 2005/02/22 00:24:50 iliaa Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -331,11 +331,11 @@ PHPAPI php_stream_dirent *_php_stream_readdir(php_stream *dirstream, php_stream_
 #define php_stream_closedir(dirstream)	php_stream_close((dirstream))
 #define php_stream_rewinddir(dirstream)	php_stream_rewind((dirstream))
 
-PHPAPI int php_stream_dirent_alphasort(const php_stream_dirent **a, const php_stream_dirent **b);
-PHPAPI int php_stream_dirent_alphasortr(const php_stream_dirent **a, const php_stream_dirent **b);
+PHPAPI int php_stream_dirent_alphasort(const char **a, const char **b);
+PHPAPI int php_stream_dirent_alphasortr(const char **a, const char **b);
 
-PHPAPI int _php_stream_scandir(char *dirname, php_stream_dirent **namelist[], int flags, php_stream_context *context,
-			int (*compare) (const php_stream_dirent **a, const php_stream_dirent **b) TSRMLS_DC);
+PHPAPI int _php_stream_scandir(char *dirname, char **namelist[], int flags, php_stream_context *context,
+			int (*compare) (const char **a, const char **b) TSRMLS_DC);
 #define php_stream_scandir(dirname, namelist, context, compare) _php_stream_scandir((dirname), (namelist), 0, (context), (compare) TSRMLS_CC)
 
 PHPAPI int _php_stream_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC);

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_odbc.c,v 1.7 2004/05/25 17:44:36 wez Exp $ */
+/* $Id: pdo_odbc.c,v 1.8 2005/01/07 05:25:35 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -79,8 +79,6 @@ PHP_MINIT_FUNCTION(pdo_odbc)
 	if (FAILURE == php_pdo_register_driver(&pdo_odbc_driver)) {
 		return FAILURE;
 	}
-
-	pdo_odbc_init_error_table();
 
 #ifdef SQL_ATTR_CONNECTION_POOLING
 	/* ugh, we don't really .ini stuff in PDO, but since ODBC connection

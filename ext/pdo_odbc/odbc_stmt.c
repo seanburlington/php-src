@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_stmt.c,v 1.5 2004/05/25 18:34:46 wez Exp $ */
+/* $Id: odbc_stmt.c,v 1.6 2005/01/07 05:25:35 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -233,8 +233,7 @@ static int odbc_stmt_set_param(pdo_stmt_t *stmt, long attr, zval *val TSRMLS_DC)
 		default:
 			strcpy(S->einfo.last_err_msg, "Unknown Attribute");
 			S->einfo.what = "setAttribute";
-			stmt->error_code = PDO_ERR_NOT_IMPLEMENTED;
-			S->einfo.last_state[0] = '\0';
+			strcpy(S->einfo.last_state, "IM0001");
 			return -1;
 	}
 

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.8 1999/11/09 15:55:37 rasmus Exp $
+dnl $Id: config.m4,v 1.9 1999/11/09 16:01:30 rasmus Exp $
 
 AC_MSG_CHECKING(for SNMP support)
 AC_ARG_WITH(snmp,
@@ -31,6 +31,10 @@ AC_ARG_WITH(snmp,
 	  test -f /usr/include/snmp/include/ucd-snmp/snmp.h && SNMP_INCDIR=/usr/include/snmp/include/ucd-snmp
 	  test -f /usr/lib/libsnmp.a && SNMP_LIBDIR=/usr/lib
 	  test -f /usr/lib/libsnmp.so && SNMP_LIBDIR=/usr/lib
+	  test -f /usr/local/lib/libsnmp.a && SNMP_LIBDIR=/usr/local/lib
+	  test -f /usr/local/lib/libsnmp.so && SNMP_LIBDIR=/usr/local/lib
+	  test -f /usr/local/snmp/lib/libsnmp.a && SNMP_LIBDIR=/usr/local/snmp/lib
+	  test -f /usr/local/snmp/lib/libsnmp.so && SNMP_LIBDIR=/usr/local/snmp/lib
     else
       SNMP_INCDIR=$withval/include
       test -d $withval/include/ucd-snmp && SNMP_INCDIR=$withval/include/ucd-snmp

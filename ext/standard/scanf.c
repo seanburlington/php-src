@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.3 2000/07/24 01:39:49 david Exp $ */
+/* $Id: scanf.c,v 1.4 2000/10/30 16:44:01 stas Exp $ */
 
 /*
    scanf.c --
@@ -1235,7 +1235,8 @@ inline void scan_set_error_return(int numVars,pval **return_value) {
 		(*return_value)->type = IS_LONG;
 		(*return_value)->value.lval = SCAN_ERROR_EOF;  /* EOF marker */
 	} else {	
-		pval_destructor( *return_value );	
+	  /* pval_destructor( *return_value ); */ 
+	  /* convert_to_null calls destructor */
    		convert_to_null( *return_value );
 	}	
 }

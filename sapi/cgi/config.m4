@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.13 2002/03/07 14:19:51 sas Exp $
+dnl $Id: config.m4,v 1.14 2002/07/04 08:39:11 markonen Exp $
 dnl
 
 AC_DEFUN(PHP_TEST_WRITE_STDOUT,[
@@ -97,3 +97,13 @@ INCLUDES="$INCLUDES $FHTTPD_INCLUDE"
 dnl## AC_SUBST(FHTTPD_INCLUDE)
 PHP_SUBST(FHTTPD_LIB)
 PHP_SUBST(FHTTPD_TARGET)
+
+case $host_alias in
+  *darwin*)
+    BUILD_CGI="\$(CC) \$(COMMON_FLAGS) \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS) \$(LDFLAGS) \$(PHP_RPATHS) \$(PHP_GLOBAL_OBJS:.lo=.o) \$(PHP_SAPI_OBJS:.lo=.o) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o php"
+    ;;
+  *)
+    BUILD_CGI="\$(LIBTOOL) --mode=link \$(CC) -export-dynamic \$(COMMON_FLAGS) \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS) \$(LDFLAGS) \$(PHP_RPATHS) \$(PHP_GLOBAL_OBJS) \$(PHP_SAPI_OBJS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o php"
+    ;;
+esac
+PHP_SUBST(BUILD_CGI)

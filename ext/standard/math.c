@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.86 2002/08/24 01:19:28 helly Exp $ */
+/* $Id: math.c,v 1.87 2002/09/06 07:44:30 hyanantha Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -314,7 +314,8 @@ PHP_FUNCTION(tanh)
 
 /* }}} */
 
-#ifndef PHP_WIN32
+/*#ifndef PHP_WIN32*/
+#if !defined(PHP_WIN32) && !defined(NETWARE)
 /* {{{ proto float asinh(float number)
    Returns the inverse hyperbolic sine of the number, i.e. the value whose hyperbolic sine is number */
 
@@ -471,7 +472,8 @@ PHP_FUNCTION(exp)
 /* }}} */
 
 
-#ifndef PHP_WIN32
+/*#ifndef PHP_WIN32*/
+#if !defined(PHP_WIN32) && !defined(NETWARE)
 /* {{{ proto float expm1(float number)
    Returns exp(number) - 1, computed in a way that accurate even when the value of number is close to zero */
 

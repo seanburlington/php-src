@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.37 2002/08/19 21:59:46 iliaa Exp $ */
+/* $Id: microtime.c,v 1.38 2002/09/06 07:44:30 hyanantha Exp $ */
 
 #include "php.h"
 
@@ -25,6 +25,12 @@
 #endif
 #ifdef PHP_WIN32
 #include "win32/time.h"
+#elif defined(NETWARE)
+#ifdef NEW_LIBC
+#include <sys/timeval.h>
+#else
+#include "netware/time_nw.h"
+#endif
 #else
 #include <sys/time.h>
 #endif

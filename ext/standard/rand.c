@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.59 2002/06/09 04:26:36 andrei Exp $ */
+/* $Id: rand.c,v 1.60 2002/09/06 07:44:30 hyanantha Exp $ */
 
 #include <stdlib.h>
 
@@ -29,6 +29,10 @@
 #  define WIN32_LEAN_AND_MEAN
 # endif
 # include <windows.h>
+#endif
+
+#if defined(NETWARE) && !defined(NEW_LIBC)  /* For getpid() used below */
+#include "netware/pwd.h"
 #endif
 
 #include "php.h"

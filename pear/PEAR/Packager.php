@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.32 2002/04/07 10:38:03 ssb Exp $
+// $Id: Packager.php,v 1.33 2002/04/07 15:07:26 ssb Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -136,7 +136,7 @@ class PEAR_Packager extends PEAR_Common
         $this->log(1, "Package $dest_package done");
         $cvsversion = preg_replace('/[^a-z0-9]/i', '_', $pkgversion);
         $cvstag = "RELEASE_$cvsversion";
-        $this->log(1, "CVS release tag: $cvstag");
+        $this->log(0, "Tag the released code with: cvs tag $cvstag");
         return $dest_package;
     }
 

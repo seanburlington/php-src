@@ -18,7 +18,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_mailparse.h,v 1.2 2001/07/28 11:35:58 zeev Exp $ */
+/* $Id: php_mailparse.h,v 1.3 2001/08/28 21:52:10 wez Exp $ */
 
 #ifndef PHP_MAILPARSE_H
 #define PHP_MAILPARSE_H
@@ -58,6 +58,7 @@ PHP_FUNCTION(mailparse_msg_extract_file);
 PHP_FUNCTION(mailparse_rfc822_parse_addresses);
 PHP_FUNCTION(mailparse_determine_best_xfer_encoding);
 PHP_FUNCTION(mailparse_stream_encode);
+PHP_FUNCTION(mailparse_uudecode_all);
 
 #include "rfc2045.h"
 #include "mailparse_rfc822.h"

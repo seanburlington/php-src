@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.121 2004/06/28 14:33:57 derick Exp $ */
+/* $Id: datetime.c,v 1.122 2004/07/28 01:44:39 iliaa Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -1080,8 +1080,10 @@ PHP_FUNCTION(strtotime)
 	}
 
 	convert_to_string_ex(z_time);
-	if (Z_STRLEN_PP(z_time) == 0)
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Called with empty time parameter");
+	if (!Z_STRLEN_PP(z_time)) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Called with an empty time parameter.");
+		RETURN_LONG(-1);
+	}
 	if (argc == 2) {
 		convert_to_long_ex(z_now);
 		now = Z_LVAL_PP(z_now);

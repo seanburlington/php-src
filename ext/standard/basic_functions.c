@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.474 2002/05/04 16:59:41 sas Exp $ */
+/* $Id: basic_functions.c,v 1.475 2002/05/04 18:11:36 sas Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1277,7 +1277,7 @@ PHP_FUNCTION(putenv)
 			}
 		}
 
-		if ((ret = putenv(pe.putenv_string)) == 0) {	/* success */
+		if (putenv(pe.putenv_string) == 0) {	/* success */
 			zend_hash_add(&BG(putenv_ht), pe.key, pe.key_len+1, (void **) &pe, sizeof(putenv_entry), NULL);
 #ifdef HAVE_TZSET
 			if (!strncmp(pe.key, "TZ", 2)) {

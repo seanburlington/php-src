@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.141 2003/10/31 22:52:33 cellog Exp $
+// $Id: Installer.php,v 1.142 2003/11/17 05:45:48 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -731,6 +731,24 @@ class PEAR_Installer extends PEAR_Common
             if (!is_file($pkgfile)) {
                 $origpkgfile = $pkgfile;
                 $pkgfile = $this->extractDownloadFileName($pkgfile, $version);
+                if (preg_match('#^(http|ftp)://#', $pkgfile)) {
+                    $pkgfile = $this->_downloadFile($pkgfile, $config, $options,
+                                                    $errors, $version, $origpkgfile,
+                                                    $state);
+                    if (PEAR::isError($pkgfile)) {
+                        return $pkgfile;
+                    }
+                    $tempinfo = $this->infoFromAny($pkgfile);
+                    if (isset($options['alldeps']) || isset($options['onlyreqdeps'])) {
+                        // ignore dependencies if there are any errors
+                        if (!PEAR::isError($tempinfo)) {
+                            $mywillinstall[strtolower($tempinfo['package'])] = @$tempinfo['release_deps'];
+                        }
+                    }
+                    $installpackages[] = array('pkg' => $tempinfo['package'],
+                                               'file' => $pkgfile, 'info' => $tempinfo);
+                    continue;
+                }
                 if (!$this->validPackageName($pkgfile)) {
                     return $this->raiseError("Package name '$pkgfile' not valid");
                 }

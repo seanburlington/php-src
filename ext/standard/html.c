@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.55 2002/10/22 20:11:48 moriyoshi Exp $ */
+/* $Id: html.c,v 1.56 2002/10/23 23:09:08 helly Exp $ */
 
 #include "php.h"
 #include "reg.h"
@@ -715,7 +715,7 @@ PHPAPI char *php_escape_html_entities(unsigned char *old, int oldlen, int *newle
 
 		if (all) {
 			/* look for a match in the maps for this charset */
-			unsigned char *rep;
+			unsigned char *rep = NULL;
 
 
 			for (j = 0; entity_map[j].charset != cs_terminator; j++) {

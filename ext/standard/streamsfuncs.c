@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.46 2004/12/13 13:52:01 wez Exp $ */
+/* $Id: streamsfuncs.c,v 1.47 2004/12/23 05:56:50 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -250,7 +250,7 @@ PHP_FUNCTION(stream_socket_accept)
 
 	if (peername) {
 		zval_dtor(peername);
-		ZVAL_STRING(peername, NULL, 0);
+		ZVAL_STRING(peername, "", 0);
 	}
 
 	if (0 == php_stream_xport_accept(stream, &clistream,

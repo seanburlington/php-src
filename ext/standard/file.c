@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.1 2002/11/27 20:32:26 sterling Exp $ */
+/* $Id: file.c,v 1.279.2.2 2002/11/30 19:13:28 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2210,11 +2210,6 @@ PHP_FUNCTION(fgetcsv)
 		if (enclosure && *bptr == enclosure) {
 			bptr++;	/* move on to first character in field */
 			
-			/* Check if there is an end to the enclosure */
-			if (!strchr(bptr, enclosure)) {
-				continue;
-			}
-		
 			/* 2A. handle enclosure delimited field */
 			while (*bptr) {
 				if (*bptr == enclosure) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.4 2003/06/12 20:02:05 rrichards Exp $ */
+/* $Id: php_dom.h,v 1.5 2003/06/15 19:58:42 rrichards Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -61,9 +61,6 @@ dom_object *dom_object_get_data(xmlNodePtr obj);
 void php_dom_throw_error(int error_code, zval **retval TSRMLS_DC);
 void node_free_resource(xmlNodePtr node TSRMLS_DC);
 void node_list_unlink(xmlNodePtr node TSRMLS_DC);
-void dom_del_from_list(xmlNodePtr nodep, dom_object *intern TSRMLS_DC);
-void dom_add_to_list(xmlNodePtr nodep, dom_object *intern TSRMLS_DC);
-void dom_clean_nodes(dom_object *object TSRMLS_DC);
 int increment_document_reference(dom_object *object, xmlDocPtr docp TSRMLS_DC);
 int decrement_document_reference(dom_object *object TSRMLS_DC);
 xmlNsPtr dom_get_ns(char *uri, char *qName, int uri_len, int qName_len, int *errorcode, char **localname);

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.60 2004/01/29 11:51:11 dmitry Exp $ */
+/* $Id: soap.c,v 1.61 2004/01/29 15:11:16 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1543,6 +1543,8 @@ PHP_METHOD(soapobject, __useproxy)
 	if (proxy_pass) {
 		add_property_stringl(this_ptr,"_proxy_password",proxy_pass,proxy_pass_len, 1);
 	}
+	zend_hash_del(Z_OBJPROP_P(this_ptr), "httpsocket", sizeof("httpsocket"));
+	zend_hash_del(Z_OBJPROP_P(this_ptr), "_use_proxy", sizeof("_use_proxy"));
 }
 
 PHP_METHOD(soapobject, __call)

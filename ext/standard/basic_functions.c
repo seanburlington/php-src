@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.633 2003/10/19 20:04:32 shane Exp $ */
+/* $Id: basic_functions.c,v 1.634 2003/10/20 01:59:35 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2397,7 +2397,7 @@ static int php_ini_check_path(char *option_name, int option_len, char *new_optio
 		return 0;
 	}
 	
-	return strncmp(option_name, new_option_name, option_len);
+	return !strncmp(option_name, new_option_name, option_len);
 }
 
 /* {{{ proto string ini_set(string varname, string newvalue)

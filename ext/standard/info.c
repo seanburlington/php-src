@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.243 2004/03/15 07:45:25 jon Exp $ */
+/* $Id: info.c,v 1.244 2004/04/23 13:28:25 derick Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -394,7 +394,7 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 
 	if (flag & PHP_INFO_GENERAL) {
 		char *zend_version = get_zend_version();
-		char temp_api[9];
+		char temp_api[10];
 		char *logo_guid;
 
 		php_uname = php_get_uname('a');

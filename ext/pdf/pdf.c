@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.113 2002/12/02 06:35:28 iliaa Exp $ */
+/* $Id: pdf.c,v 1.114 2002/12/03 19:25:16 iliaa Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -276,7 +276,7 @@ static void custom_errorhandler(PDF *p, int type, const char *shortmsg)
 		case PDF_SystemError:
 		case PDF_UnknownError:
 		default:
-			php_error(E_WARNING,"PDFlib error: %s", shortmsg);
+			php_error(E_ERROR,"PDFlib error: %s", shortmsg);
 		}
 }
 /* }}} */
@@ -331,7 +331,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.113 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.114 $" );
 	php_info_print_table_end();
 
 }
@@ -1963,17 +1963,30 @@ PHP_FUNCTION(pdf_open_memory_image)
 	ZEND_FETCH_RESOURCE(im, gdImagePtr, arg2, -1, "Image", le_gd);
 
 	count = 3 * im->sx * im->sy;
-	if(NULL == (buffer = (unsigned char *) emalloc(count))) {
-		RETURN_FALSE;
-	}
+	buffer = (unsigned char *) emalloc(count);
 
 	ptr = buffer;
 	for(i=0; i<im->sy; i++) {
 		for(j=0; j<im->sx; j++) {
-			color = im->pixels[i][j];
-			*ptr++ = im->red[color];
-			*ptr++ = im->green[color];
-			*ptr++ = im->blue[color];
+#if HAVE_LIBGD20
+			if(gdImageTrueColor(im)) {
+				if (im->tpixels && gdImageBoundsSafe(im, j, i)) {
+					color = gdImageTrueColorPixel(im, j, i);
+					*ptr++ = (color >> 16) & 0xFF;
+					*ptr++ = (color >> 8) & 0xFF;
+					*ptr++ = color & 0xFF;
+				}
+			} else {
+#endif
+				if (im->pixels && gdImageBoundsSafe(im, j, i)) {
+					color = im->pixels[im->sy][im->sx];
+					*ptr++ = im->red[color];
+					*ptr++ = im->green[color];
+					*ptr++ = im->blue[color];
+				}
+#if HAVE_LIBGD20
+			}
+#endif		
 		}
 	}
 

@@ -17,7 +17,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mailparse.c,v 1.16 2001/12/21 12:57:16 mfischer Exp $ */
+/* $Id: mailparse.c,v 1.17 2002/02/04 14:27:37 yohgaki Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -99,6 +99,13 @@ PHP_INI_END()
 
 PHP_MINIT_FUNCTION(mailparse)
 {
+#ifdef ZTS
+	zend_mailparse_globals *mailparse_globals;
+
+	ts_allocate_id(&mailparse_globals_id, sizeof(zend_mailparse_globals), NULL, NULL);
+	mailparse_globals = ts_resource(mailparse_globals_id);
+#endif
+
 	le_rfc2045 = 		zend_register_list_destructors_ex(rfc2045_dtor, NULL, mailparse_msg_name, module_number);
 	le_rfc2045_nofree = zend_register_list_destructors_ex(NULL, NULL, mailparse_msg_name, module_number);
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.29.2.2 2004/08/08 18:05:47 chregu Exp $ */
+/* $Id: xsltprocessor.c,v 1.29.2.3 2004/08/10 08:02:00 chregu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -400,7 +400,10 @@ static xmlDocPtr php_xsl_apply_stylesheet(xsl_object *intern, xsltStylesheetPtr 
 	char **params = NULL;
 	int clone;
 
-
+	if (style == NULL) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "No stylesheet associated to this object");
+		return NULL;
+	}
 	if (intern->parameter) {
 		params = php_xsl_xslt_make_params(intern->parameter, 0 TSRMLS_CC);
 	}

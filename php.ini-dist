@@ -1,5 +1,5 @@
 [PHP]
-; $Id: php.ini-dist,v 1.74 2001/03/20 22:45:10 phanto Exp $
+; $Id: php.ini-dist,v 1.75 2001/03/24 21:38:58 sbergmann Exp $
 
 ;;;;;;;;;;;;;;;;;;;
 ; About this file ;
@@ -378,6 +378,7 @@ allow_url_fopen = On
 ;extension=php_db.dll
 ;extension=php_dba.dll
 ;extension=php_dbase.dll
+;extension=php_dbx.dll
 ;extension=php_domxml.dll
 ;extension=php_dotnet.dll
 ;extension=php_exif.dll

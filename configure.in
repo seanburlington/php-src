@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.63 1999/12/07 16:26:36 andrei Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.64 1999/12/07 16:52:13 rasmus Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -800,6 +800,16 @@ if true; then
       mv internal_functions.c.old internal_functions.c
   else
       rm -f internal_functions.c.old
+  fi
+  
+  if test -n "$APXS" ; then
+    if test "a`$APXS -q LD_SHLIB`" = "a" || test "`$APXS -q LIBEXECDIR`" = "modules"; then
+        echo "+--------------------------------------------------------------------+"
+        echo "| WARNING: Your $APXS script is most likely broken."
+        echo "|                                                                    |"
+        echo "| Please go read http://www.php.net/FAQ.php3#4.11 and make the       |"
+        echo "| changes described there and try again.                             |"
+    fi
   fi
 
   # Warn about CGI version with no extra security options.

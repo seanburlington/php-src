@@ -22,7 +22,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.55 2000/07/28 21:48:16 sniper Exp $ */
+/* $Id: ldap.c,v 1.56 2000/07/28 22:39:22 sniper Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -186,7 +186,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.55 2000/07/28 21:48:16 sniper Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.56 2000/07/28 22:39:22 sniper Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #if HAVE_NSLDAP
@@ -978,11 +978,12 @@ PHP_FUNCTION(ldap_get_values_len)
 		WRONG_PARAM_COUNT;
 	}
 	
-	if ((ldap = _get_ldap_link(link)) == NULL) {
-		RETURN_FALSE;
-	}
-	
+	ldap = _get_ldap_link(link);
+	if (ldap == NULL) RETURN_FALSE;
+
 	ldap_result_entry = _get_ldap_result_entry(result_entry);
+	if (ldap_result_entry == NULL) RETURN_FALSE;
+
 	convert_to_string_ex(attr);
 	attribute = (*attr)->value.str.val;
 	

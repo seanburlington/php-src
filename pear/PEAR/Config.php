@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.19 2002/05/14 17:59:41 cox Exp $
+// $Id: Config.php,v 1.20 2002/05/20 10:42:47 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -658,6 +658,29 @@ when installing packages without a version or state specified',
     {
         if (isset($this->configuration[$layer][$key])) {
             unset($this->configuration[$layer][$key]);
+            return true;
+        }
+        return false;
+    }
+
+    // }}}
+    // {{{ removeLayer(layer)
+
+    /**
+     * Temporarily remove an entire config layer.  USE WITH CARE!
+     *
+     * @param string config key
+     *
+     * @param string (optional) config layer
+     *
+     * @return bool TRUE on success, FALSE on failure
+     *
+     * @access public
+     */
+    function removeLayer($layer)
+    {
+        if (isset($this->configuration[$layer])) {
+            unset($this->configuration[$layer]);
             return true;
         }
         return false;

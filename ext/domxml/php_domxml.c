@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.68 2001/08/21 21:49:32 joey Exp $ */
+/* $Id: php_domxml.c,v 1.69 2001/08/26 11:36:27 joey Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -2559,6 +2559,12 @@ static void php_xpathptr_new_context(INTERNAL_FUNCTION_PARAMETERS, int mode)
 	int ret;
 
 	id = getThis();
+
+	if (!id) {
+		php_error(E_ERROR, "Invalid object");
+		RETURN_FALSE;
+	}
+
 	docp = php_dom_get_object(id, le_domxmldocp, 0 TSRMLS_CC);
 
 #if defined(LIBXML_XPTR_ENABLED)

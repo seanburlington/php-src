@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.84 2002/11/04 17:38:30 iliaa Exp $ */
+/* $Id: exec.c,v 1.84.2.1 2002/12/05 21:09:18 helly Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -72,7 +72,7 @@ static int php_make_safe_mode_command(char *cmd, char **safecmd TSRMLS_DC)
 	larg0 = strlen(arg0);
 
 	if (strstr(arg0, "..")) {
-		php_error(E_WARNING, "No '..' components allowed in path");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "No '..' components allowed in path");
 		efree(arg0);
 		return FAILURE;
 	}

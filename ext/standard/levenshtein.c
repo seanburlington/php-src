@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
+   | Author: Hartmut Holzgraefe <hholzgra@php.net>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.25 2002/08/24 01:19:28 helly Exp $ */
+/* $Id: levenshtein.c,v 1.25.4.1 2002/12/05 21:09:18 helly Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -77,10 +77,12 @@ static int reference_levdist(const char *s1, int l1,
  */
 static int custom_levdist(char *str1, char *str2, char *callback_name) 
 {
-		php_error(E_WARNING, "the general Levenshtein support is not there yet");
-		/* not there yet */
+	TSRMLS_FETCH();
 
-		return -1;
+	php_error_docref(NULL TSRMLS_CC, E_WARNING, "The general Levenshtein support is not there yet");
+	/* not there yet */
+
+	return -1;
 }
 /* }}} */
 

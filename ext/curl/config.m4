@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5.2.3 2001/05/29 07:24:43 sterling Exp $
+dnl $Id: config.m4,v 1.5.2.4 2001/05/29 23:41:20 sterling Exp $
 dnl config.m4 for extension CURL
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -31,7 +31,7 @@ if test "$PHP_CURL" != "no"; then
   fi
 
   curl_version_full=`$CURL_CONFIG --version`
-  curl_version=`echo ${curl_version_full} | sed -e 's/libcurl //' | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+  curl_version=`$CURL_CONFIG --vernum`
   if test "$curl_version" -ge 70800; then
     AC_MSG_RESULT($curl_version_full)
     CURL_LIBS=`$CURL_CONFIG --libs`

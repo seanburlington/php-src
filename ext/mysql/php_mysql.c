@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.101 2001/09/25 22:48:39 jeroen Exp $ */
+/* $Id: php_mysql.c,v 1.102 2001/10/08 06:28:16 derick Exp $ */
 
 
 /* TODO:
@@ -1925,6 +1925,11 @@ static void php_mysql_field_info(INTERNAL_FUNCTION_PARAMETERS, int entry_type)
 #ifdef ENUM_FLAG
 			if (mysql_field->flags&ENUM_FLAG) {
 				strcat(buf, "enum ");
+			}
+#endif
+#ifdef SET_FLAG
+			if (mysql_field->flags&SET_FLAG) {
+				strcat(buf, "set ");
 			}
 #endif
 #ifdef AUTO_INCREMENT_FLAG

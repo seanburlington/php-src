@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.22 2000/05/05 10:36:00 sas Exp $ */
+/* $Id: crypt.c,v 1.23 2000/05/17 19:37:08 hholzgra Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -116,6 +116,8 @@ static void php_to64(char *s, long v, int n)	{
 	} 
 } 
 
+/* {{{ proto string crypt(string str [, string salt])
+   Encrypt a string */
 PHP_FUNCTION(crypt)
 {
 	char salt[PHP_MAX_SALT_LEN+1];
@@ -175,7 +177,7 @@ PHP_FUNCTION(crypt)
 	return_value->type = IS_STRING;
 	pval_copy_constructor(return_value);
 }
-
+/* }}} */
 #endif
 
 

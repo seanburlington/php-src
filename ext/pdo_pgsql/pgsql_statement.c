@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.3 2004/05/20 17:43:56 iliaa Exp $ */
+/* $Id: pgsql_statement.c,v 1.4 2004/05/20 18:10:16 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -110,6 +110,10 @@ static int pgsql_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC)
 	pdo_pgsql_stmt *S = (pdo_pgsql_stmt*)stmt->driver_data;
 	struct pdo_column_data *cols = stmt->columns;
 
+	if (!S->result) {
+		return 0;
+	}
+
 	cols[colno].name = estrdup(PQfname(S->result, colno));
 	cols[colno].namelen = strlen(cols[colno].name);
 	cols[colno].maxlen = PQfsize(S->result, colno);
@@ -122,6 +126,10 @@ static int pgsql_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC)
 static int pgsql_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr, unsigned long *len TSRMLS_DC)
 {
 	pdo_pgsql_stmt *S = (pdo_pgsql_stmt*)stmt->driver_data;
+
+	if (!S->result) {
+		return 0;
+	}
 
 	/* We have already increased count by 1 in pgsql_stmt_fetch() */
 	*ptr = PQgetvalue(S->result, S->current_row - 1, colno);

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.171 2002/07/08 07:32:59 derick Exp $ */
+/* $Id: array.c,v 1.172 2002/07/08 07:33:22 derick Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3238,7 +3238,7 @@ PHP_FUNCTION(array_map)
 		uint str_key_len;
 		ulong num_key;
 		char *str_key;
-		int key_type;
+		int key_type = 0;
 
 		/*
 		 * If no callback, the result will be an array, consisting of current

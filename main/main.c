@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.350 2001/02/21 01:43:15 hholzgra Exp $ */
+/* $Id: main.c,v 1.351 2001/02/21 20:50:49 shane Exp $ */
 
 
 #include <stdio.h>
@@ -1263,7 +1263,8 @@ PHPAPI int php_lint_script(zend_file_handle *file CLS_DC ELS_DC PLS_DC)
 
 	op_array = zend_compile_file(file, ZEND_INCLUDE CLS_CC);
 	retval = (op_array?SUCCESS:FAILURE);
-	destroy_op_array(op_array);
+	/* SMC op_array may be NULL */
+	if (op_array != NULL) destroy_op_array(op_array);
 
 	return retval;
 }

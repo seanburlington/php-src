@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: rules.mk,v 1.5 2000/01/01 20:48:42 sas Exp $ 
+# $Id: rules.mk,v 1.6 2000/01/03 12:39:44 sas Exp $ 
 #
 
 include $(DEPTH)/config_vars.mk
@@ -86,8 +86,8 @@ distclean-recursive depend-recursive clean-recursive all-recursive install-recur
 			fi; \
 			(cd $$i && $(MAKE) $$target) || exit 1; \
 		done; \
-		test "$otarget" = "all" && test -z '$(targets)' && ok=yes; \
-		test "$ok" = "yes" || $(MAKE) "$$otarget-p" || exit 1; \
+		if test "$$otarget" = "all" && test -z '$(targets)'; then ok=yes; fi; \
+		if test "$$ok" != "yes"; then $(MAKE) "$$otarget-p" || exit 1; fi; \
 	fi; 
 
 all-p: $(targets)

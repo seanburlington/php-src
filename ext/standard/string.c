@@ -30,7 +30,7 @@
  */
 
 
-/* $Id: string.c,v 1.14 1999/05/16 11:19:26 sas Exp $ */
+/* $Id: string.c,v 1.15 1999/05/16 11:32:51 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -45,9 +45,9 @@
 
 static char hexconvtab[] = "0123456789abcdef";
 
-static char *php_bin2hex(const char *old, const size_t oldlen, size_t *newlen)
+static char *php_bin2hex(const unsigned char *old, const size_t oldlen, size_t *newlen)
 {
-	char *new = NULL;
+	unsigned char *new = NULL;
 	int i, j;
 
 	new = (char *) emalloc(oldlen * 2 * sizeof(char));

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_driver.c,v 1.9 2004/05/22 14:51:26 wez Exp $ */
+/* $Id: odbc_driver.c,v 1.10 2004/05/22 15:04:26 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -146,9 +146,9 @@ static int odbc_handle_closer(pdo_dbh_t *dbh TSRMLS_DC)
 	
 	if (H->dbc != SQL_NULL_HANDLE) {
 		SQLEndTran(SQL_HANDLE_DBC, H->dbc, SQL_ROLLBACK);
+		SQLDisconnect(H->dbc);
+		SQLFreeHandle(SQL_HANDLE_DBC, H->dbc);
 	}
-
-	SQLFreeHandle(SQL_HANDLE_DBC, H->dbc);
 	SQLFreeHandle(SQL_HANDLE_ENV, H->env);
 	pefree(H, dbh->is_persistent);
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_odbc.c,v 1.4 2004/05/22 14:51:26 wez Exp $ */
+/* $Id: pdo_odbc.c,v 1.5 2004/05/22 15:04:26 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -132,6 +132,8 @@ PHP_MINFO_FUNCTION(pdo_odbc)
 #ifdef SQL_ATTR_CONNECTION_POOLING
 	php_info_print_table_row(2, "ODBC Connection Pooling",	pdo_odbc_pool_on == SQL_CP_OFF ?
 			"Disabled" : (pdo_odbc_pool_mode == SQL_CP_STRICT_MATCH ? "Enabled, strict matching" : "Enabled, relaxed matching"));
+#else
+	php_info_print_table_row(2, "ODBC Connection Pooling", "Not supported in this build");
 #endif
 	php_info_print_table_end();
 

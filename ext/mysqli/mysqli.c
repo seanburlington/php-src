@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.59 2005/01/07 16:34:55 georg Exp $ 
+  $Id: mysqli.c,v 1.60 2005/01/08 13:34:03 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -578,7 +578,6 @@ PHP_MINIT_FUNCTION(mysqli)
  */
 PHP_MSHUTDOWN_FUNCTION(mysqli)
 {
-	zend_hash_destroy(&mysqli_driver_properties);
 	zend_hash_destroy(&mysqli_driver_properties);
 	zend_hash_destroy(&mysqli_result_properties);
 	zend_hash_destroy(&mysqli_stmt_properties);

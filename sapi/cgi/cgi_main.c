@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.23 2003/03/29 16:18:11 moriyoshi Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.24 2003/05/15 14:47:00 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -521,7 +521,7 @@ static void php_cgi_usage(char *argv0)
 		prog = "php";
 	}
 
-	php_printf("Usage: %s [-q] [-h] [-s [-v] [-i] [-f <file>] \n"
+	php_printf("Usage: %s [-q] [-h] [-s] [-v] [-i] [-f <file>] \n"
 			   "       %s <file> [args...]\n"
 			   "  -a               Run interactively\n"
 #if PHP_FASTCGI

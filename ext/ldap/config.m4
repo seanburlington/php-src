@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.9 2000/08/02 19:49:04 rasmus Exp $
+dnl $Id: config.m4,v 1.10 2000/08/19 14:10:11 venaas Exp $
 
 PHP_ARG_WITH(ldap,whether to include LDAP support,
 [  --with-ldap[=DIR]       Include LDAP support.  DIR is the LDAP base
@@ -14,6 +14,10 @@ if test "$PHP_LDAP" != "no"; then
 		elif test -f $i/include/umich-ldap/ldap.h; then
 			LDAP_DIR=$i
 			LDAP_INCDIR=$i/include/umich-ldap
+			LDAP_LIBDIR=$i/lib
+		elif test -f $i/ldap/public/ldap.h; then
+			LDAP_DIR=$i
+			LDAP_INCDIR=$i/ldap/public
 			LDAP_LIBDIR=$i/lib
  		fi
 	done
@@ -56,6 +60,9 @@ if test "$PHP_LDAP" != "no"; then
 	elif test -f $LDAP_LIBDIR/libumich_ldap.so; then
 		AC_ADD_LIBRARY_WITH_PATH(umich_lber, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 		AC_ADD_LIBRARY_WITH_PATH(umich_ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
+	elif test -f $LDAP_LIBDIR/libclntsh.so; then
+		AC_ADD_LIBRARY_WITH_PATH(clntsh, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
+		AC_DEFINE(HAVE_ORALDAP,1,[ ])
 	fi  
 
 	AC_ADD_INCLUDE($LDAP_INCDIR)

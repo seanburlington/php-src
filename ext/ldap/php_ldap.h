@@ -18,12 +18,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ldap.h,v 1.10 2000/08/02 13:11:46 sniper Exp $ */
+/* $Id: php_ldap.h,v 1.11 2000/08/19 14:05:34 venaas Exp $ */
 
 #ifndef PHP_LDAP_H
 #define PHP_LDAP_H
 
+#ifndef HAVE_ORALDAP
 #include <lber.h>
+#endif
 #include <ldap.h>
 
 extern zend_module_entry ldap_module_entry;

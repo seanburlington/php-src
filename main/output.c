@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.146 2003/01/27 17:22:22 iliaa Exp $ */
+/* $Id: output.c,v 1.147 2003/02/03 23:36:19 hholzgra Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -890,7 +890,7 @@ PHP_FUNCTION(ob_get_level)
 }
 /* }}} */
 
-/* {{{ proto string ob_get_length(void)
+/* {{{ proto int ob_get_length(void)
    Return the length of the output buffer */
 PHP_FUNCTION(ob_get_length)
 {

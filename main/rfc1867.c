@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.24 2000/01/29 11:55:43 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.25 2000/02/12 17:37:11 thies Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -37,6 +37,7 @@ static void php_mime_split(char *buf, int cnt, char *boundary)
 {
 	char *ptr, *loc, *loc2, *s, *name, *filename, *u, *fn;
 	int len, state = 0, Done = 0, rem, urem;
+	int eolsize;
 	long bytes, max_file_size = 0;
 	char *namebuf=NULL, *filenamebuf=NULL, *lbuf=NULL;
 	FILE *fp;
@@ -64,8 +65,13 @@ static void php_mime_split(char *buf, int cnt, char *boundary)
 					if (!strncmp(loc, boundary, len)) {
 
 						state = 1;
-						rem -= (loc - ptr) + len + 2;
-						ptr = loc + len + 2;
+
+						eolsize = 2;
+						if(*(loc+len)==0x0a)
+							eolsize = 1;
+
+						rem -= (loc - ptr) + len + eolsize;
+						ptr = loc + len + eolsize;
 					} else {
 						rem -= (loc - ptr) + 1;
 						ptr = loc + 1;

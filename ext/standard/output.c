@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.41 2001/03/04 01:09:36 zeev Exp $ */
+/* $Id: output.c,v 1.42 2001/03/04 01:45:19 zeev Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -68,17 +68,23 @@ PHP_GINIT_FUNCTION(output)
 PHPAPI void php_output_startup()
 {
 	OLS_FETCH();
-	ELS_FETCH();
 
 	OG(php_body_write) = php_ub_body_write;
 	OG(php_header_write) = sapi_module.ub_write;
 	OG(nesting_level) = 0;
 	OG(lock) = 0;
+}
+
+
+void php_output_register_constants()
+{
+	ELS_FETCH();
 
 	REGISTER_MAIN_LONG_CONSTANT("PHP_OUTPUT_HANDLER_START", PHP_OUTPUT_HANDLER_START, CONST_CS | CONST_PERSISTENT);
 	REGISTER_MAIN_LONG_CONSTANT("PHP_OUTPUT_HANDLER_CONT", PHP_OUTPUT_HANDLER_CONT, CONST_CS | CONST_PERSISTENT);
 	REGISTER_MAIN_LONG_CONSTANT("PHP_OUTPUT_HANDLER_END", PHP_OUTPUT_HANDLER_END, CONST_CS | CONST_PERSISTENT);
 }
+
 
 PHPAPI int php_body_write(const char *str, uint str_length)
 {

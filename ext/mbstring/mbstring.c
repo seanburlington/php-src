@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.64 2002/04/23 08:07:19 yohgaki Exp $ */
+/* $Id: mbstring.c,v 1.65 2002/04/23 08:10:45 yohgaki Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -1563,7 +1563,6 @@ PHP_FUNCTION(mb_output_handler)
  	/* just return if the converter is not activated. */
  	if (MBSTRG(outconv) == NULL) {
 		RETURN_STRINGL(arg_string, arg_string_len, 1);
-		return;
 	}
 
  	/* flag */

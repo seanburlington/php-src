@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.58.2.9 2003/10/13 04:28:33 iliaa Exp $ */
+/* $Id: url.c,v 1.58.2.10 2003/12/03 20:59:12 moriyoshi Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -104,7 +104,7 @@ PHPAPI php_url *php_url_parse(char *str)
 			 * correctly parse things like a.com:80
 			 */
 			p = e + 1;
-			while (isdigit(*p)) {
+			while (isdigit((int)*(unsigned char *)p)) {
 				p++;
 			}
 			
@@ -145,7 +145,7 @@ PHPAPI php_url *php_url_parse(char *str)
 		p = e + 1;
 		pp = p;
 		
-		while (pp-p < 6 && isdigit(*pp)) {
+		while (pp-p < 6 && isdigit((int)*(unsigned char *)pp)) {
 			pp++;
 		}
 		
@@ -330,12 +330,12 @@ static int php_htoi(char *s)
 	int value;
 	int c;
 
-	c = s[0];
+	c = ((unsigned char *)s)[0];
 	if (isupper(c))
 		c = tolower(c);
 	value = (c >= '0' && c <= '9' ? c - '0' : c - 'a' + 10) * 16;
 
-	c = s[1];
+	c = ((unsigned char *)s)[1];
 	if (isupper(c))
 		c = tolower(c);
 	value += c >= '0' && c <= '9' ? c - '0' : c - 'a' + 10;
@@ -443,7 +443,7 @@ PHPAPI int php_url_decode(char *str, int len)
 	while (len--) {
 		if (*data == '+')
 			*dest = ' ';
-		else if (*data == '%' && len >= 2 && isxdigit((int) *(data + 1)) && isxdigit((int) *(data + 2))) {
+		else if (*data == '%' && len >= 2 && isxdigit((int) *(unsigned char *)(data + 1)) && isxdigit((int) *(unsigned char *)(data + 2))) {
 #ifndef CHARSET_EBCDIC
 			*dest = (char) php_htoi(data + 1);
 #else

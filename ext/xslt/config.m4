@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.20 2002/03/22 13:49:05 sniper Exp $
+dnl $Id: config.m4,v 1.21 2002/03/22 13:55:09 sniper Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -69,7 +69,9 @@ if test "$PHP_XSLT" != "no"; then
       PHP_ADD_LIBRARY(xmltok)
     fi
 
-    PHP_ICONV=yes
+    if test "$PHP_ICONV" = "no"; then
+      PHP_ICONV=yes
+    fi
     PHP_SETUP_ICONV(XSLT_SHARED_LIBADD, [], [
       AC_MSG_ERROR([iconv not found, in order to build sablotron you need the iconv library])
     ])

@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.125 2003/09/17 03:19:47 cellog Exp $
+// $Id: Installer.php,v 1.126 2003/09/17 03:22:55 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -406,8 +406,8 @@ class PEAR_Installer extends PEAR_Common
                     break;
                 case 'chmod':
                     // check that file is writable
-                    if (!is_writable($data[0])) {
-                        $errors[] = "permission denied ($type): $data[0] $data[1]";
+                    if (!is_writable($data[1])) {
+                        $errors[] = "permission denied ($type): $data[1] " . decoct($data[0]);
                     }
                     break;
                 case 'delete':
@@ -439,7 +439,7 @@ class PEAR_Installer extends PEAR_Common
                     $this->log(3, "+ mv $data[0] $data[1]");
                     break;
                 case 'chmod':
-                    @chmod($data[0], $data[1]);
+                    @chmod($data[1], $data[0]);
                     $octmode = decoct($data[0]);
                     $this->log(3, "+ chmod $octmode $data[1]");
                     break;

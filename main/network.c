@@ -15,7 +15,7 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.23 2001/12/11 15:31:03 sebastian Exp $ */
+/* $Id: network.c,v 1.24 2001/12/23 00:46:13 alexwaugh Exp $ */
 
 #include "php.h"
 
@@ -55,7 +55,7 @@ int		 inet_aton(const char *, struct in_addr *);
 
 #include "php_network.h"
 
-#ifdef PHP_WIN32
+#if defined(PHP_WIN32) || defined(__riscos__)
 #undef AF_UNIX
 #endif
 

@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.139 2001/12/11 15:31:01 sebastian Exp $ */
+/* $Id: fopen_wrappers.c,v 1.140 2001/12/23 00:46:13 alexwaugh Exp $ */
 
 /* {{{ includes
  */
@@ -73,7 +73,7 @@
 #endif
 #endif
 
-#ifdef PHP_WIN32
+#if defined(PHP_WIN32) || defined(__riscos__)
 #undef AF_UNIX
 #endif
 

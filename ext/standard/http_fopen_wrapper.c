@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.21 2001/12/11 15:30:31 sebastian Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.22 2001/12/23 00:46:13 alexwaugh Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -56,7 +56,7 @@
 #endif
 #endif
 
-#ifdef PHP_WIN32
+#if defined(PHP_WIN32) || defined(__riscos__)
 #undef AF_UNIX
 #endif
 

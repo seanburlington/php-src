@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.369 2002/08/17 15:53:02 venaas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.370 2002/08/21 12:40:40 iliaa Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -323,6 +323,7 @@ ieeefp.h \
 langinfo.h \
 limits.h \
 locale.h \
+monetary.h \
 mach-o/dyld.h \
 pwd.h \
 resolv.h \

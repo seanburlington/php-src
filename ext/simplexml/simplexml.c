@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.32 2003/06/09 03:11:28 sterling Exp $ */
+/* $Id: simplexml.c,v 1.33 2003/06/09 03:29:33 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -783,12 +783,13 @@ sxe_object_dtor(void *object, zend_object_handle handle TSRMLS_DC)
 
 	sxe = (php_sxe_object *) object;
 
-	FREE_HASHTABLE(sxe->zo.properties);
-
-	if (--sxe->document->refcount <= 0) {
-		xmlFreeDoc(sxe->document->ptr);
+	if (--sxe->document->refcount > 0) {
+		return;
 	}
 	
+	xmlFreeDoc(sxe->document->ptr);
+	FREE_HASHTABLE(sxe->zo.properties);
+
 	if (sxe->xpath) {
 		xmlXPathFreeContext(sxe->xpath);
 	}
@@ -1014,7 +1015,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.32 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.33 $");
 	php_info_print_table_end();
 
 }

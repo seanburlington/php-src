@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.47 2000/02/26 14:53:18 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.48 2000/03/04 02:59:14 zeev Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -106,6 +106,9 @@ PHP_FUNCTION(getprotobynumber);
 PHP_FUNCTION(get_loaded_extensions);
 PHP_FUNCTION(extension_loaded);
 PHP_FUNCTION(get_extension_funcs);
+
+/* From the INI parser */
+PHP_FUNCTION(parse_ini_file);
 
 #ifdef PHP_WIN32
 typedef unsigned int php_stat_len;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.118 2003/03/18 15:53:33 helly Exp $ */
+/* $Id: php_ini.c,v 1.119 2003/03/22 18:54:35 shane Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -306,6 +306,14 @@ int php_init_config()
 		 * Prepare search path
 		 */
 
+		/* Add environment location */
+		if (env_location[0]) {
+			if (*php_ini_search_path) {
+				strcat(php_ini_search_path, paths_separator);
+			}
+			strcat(php_ini_search_path, env_location);
+		}
+
 		/* Add cwd */
 #ifdef INI_CHECK_CWD
 		if (strcmp(sapi_module.name, "cli") != 0) {
@@ -341,14 +349,6 @@ int php_init_config()
 			}
 			strcat(php_ini_search_path, binary_location);
 			efree(binary_location);
-		}
-
-		/* Add environment location */
-		if (env_location[0]) {
-			if (*php_ini_search_path) {
-				strcat(php_ini_search_path, paths_separator);
-			}
-			strcat(php_ini_search_path, env_location);
 		}
 
 		/* Add default location */

@@ -16,12 +16,15 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ftok.c,v 1.8 2002/10/20 13:35:56 derick Exp $ */
+/* $Id: ftok.c,v 1.9 2002/11/04 20:08:09 dreid Exp $ */
 
 #include "php.h"
 
 #include <sys/types.h>                                                                                                        
+
+#ifdef HAVE_SYS_IPC_H
 #include <sys/ipc.h>
+#endif
 
 #if HAVE_FTOK
 /* {{{ proto int ftok(string pathname, string proj)

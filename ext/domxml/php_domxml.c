@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.8 2000/08/07 11:55:48 steinm Exp $ */
+/* $Id: php_domxml.c,v 1.9 2000/08/10 08:13:15 hholzgra Exp $ */
 
 
 #include "php.h"
@@ -62,7 +62,6 @@ static zend_function_entry domxml_functions[] = {
 
 static zend_function_entry php_domxmldoc_class_functions[] = {
 	PHP_FALIAS(root,	domxml_root,	NULL)
-	PHP_FALIAS(children,	domxml_children,	NULL)
 	PHP_FALIAS(add_root,	domxml_add_root,	NULL)
 	PHP_FALIAS(dtd,	domxml_intdtd,	NULL)
 	PHP_FALIAS(dumpmem,	domxml_dumpmem,	NULL)

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.274 2002/10/21 22:54:37 wez Exp $ */
+/* $Id: file.c,v 1.275 2002/10/22 18:07:11 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -461,7 +461,7 @@ PHP_FUNCTION(file)
 {
 	char *filename;
 	int filename_len;
-	char *slashed, *target_buf, *p, *s, *e;
+	char *slashed, *target_buf=NULL, *p, *s, *e;
 	register int i = 0;
 	int target_len, len;
 	char eol_marker = '\n';
@@ -516,7 +516,9 @@ PHP_FUNCTION(file)
   		}
   	}
 
- 	efree(target_buf);
+ 	if (target_buf) {
+ 		efree(target_buf);
+ 	}	
 	php_stream_close(stream);
 }
 /* }}} */

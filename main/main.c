@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.329 2000/10/27 10:16:54 sas Exp $ */
+/* $Id: main.c,v 1.330 2000/10/27 10:28:57 sas Exp $ */
 
 
 #include <stdio.h>
@@ -1236,6 +1236,10 @@ PHPAPI int php_handle_auth_data(const char *auth SLS_DC)
 			}
 		}
 	}
+
+	if (ret == -1)
+		SG(request_info).auth_user = SG(request_info).auth_password = NULL;
+
 	return ret;
 }
 

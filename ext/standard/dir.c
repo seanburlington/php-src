@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.19 1999/12/17 19:16:47 zeev Exp $ */
+/* $Id: dir.c,v 1.20 1999/12/17 19:51:29 zeev Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -209,7 +209,7 @@ PHP_FUNCTION(closedir)
 
 	FETCH_DIRP();
 
-	php3_list_delete(dirp->id);
+	zend_list_delete(dirp->id);
 }
 
 /* }}} */

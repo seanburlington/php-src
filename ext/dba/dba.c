@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.7 1999/12/04 19:15:46 sas Exp $ */
+/* $Id: dba.c,v 1.8 1999/12/17 19:51:07 zeev Exp $ */
 
 #include "php.h"
 
@@ -107,7 +107,7 @@ typedef struct dba_handler {
 	convert_to_string_ex(key)
 
 #define DBA_IF_NOT_CORRECT_TYPE(link_id) 						\
-	info = php3_list_find(link_id, &type); 						\
+	info = zend_list_find(link_id, &type); 						\
 	if(!info || (type != GLOBAL(le_db) && type != GLOBAL(le_pdb)))
 	
 #define DBA_ID_GET 												\
@@ -204,7 +204,7 @@ static PHP_MINFO_FUNCTION(dba)
 {
 	dba_handler *hptr;
 	
-	PUTS("V1 ($Id: dba.c,v 1.7 1999/12/04 19:15:46 sas Exp $)");
+	PUTS("V1 ($Id: dba.c,v 1.8 1999/12/17 19:51:07 zeev Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);
@@ -277,7 +277,7 @@ static void _php3_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		
 		if(zend_hash_find(&ht_keys, key, keylen, (void **) &info) == SUCCESS) {
 			FREENOW;
-			RETURN_LONG(php3_list_insert(info, GLOBAL(le_pdb)));
+			RETURN_LONG(zend_list_insert(info, GLOBAL(le_pdb)));
 		}
 	}
 	
@@ -327,7 +327,7 @@ static void _php3_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	info->argc = 0;
 	info->argv = NULL;
 
-	listid = php3_list_insert(info, persistent?GLOBAL(le_pdb):GLOBAL(le_db));
+	listid = zend_list_insert(info, persistent?GLOBAL(le_pdb):GLOBAL(le_db));
 	if(persistent) {
 		zend_hash_update(&ht_keys, key, keylen, info, sizeof(*info), NULL);
 	}
@@ -361,7 +361,7 @@ PHP_FUNCTION(dba_close)
 {
 	DBA_ID_GET1;	
 	
-	php3_list_delete((*id)->value.lval);
+	zend_list_delete((*id)->value.lval);
 }
 /* }}} */
 

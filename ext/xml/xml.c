@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.36 1999/12/14 18:37:14 joey Exp $ */
+/* $Id: xml.c,v 1.37 1999/12/17 19:51:35 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -1381,7 +1381,7 @@ PHP_FUNCTION(xml_parser_free)
 
 	ZEND_FETCH_RESOURCE(parser,xml_parser *, pind, -1, "XML Parser", le_xml_parser);
 
-	if (php3_list_delete(parser->index) == FAILURE) {
+	if (zend_list_delete(parser->index) == FAILURE) {
 		RETURN_FALSE;
 	}
 

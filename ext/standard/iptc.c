@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.10 1999/12/17 19:16:47 zeev Exp $ */
+/* $Id: iptc.c,v 1.11 1999/12/17 19:51:29 zeev Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -204,7 +204,7 @@ PHP_FUNCTION(iptcembed)
     }
 
 	if (spool > 0) 
-		if (!php3_header()){  /* we got a HEAD request. */
+		if (!php_header()){  /* we got a HEAD request. */
 			if (spool == 2){ 
 				RETURN_TRUE;	/* we only wanted to spool - report success. */
 			} else 

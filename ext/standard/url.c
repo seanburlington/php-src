@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.14 1999/11/21 20:08:43 sas Exp $ */
+/* $Id: url.c,v 1.15 1999/12/17 19:51:29 zeev Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -395,13 +395,13 @@ PHP_FUNCTION(rawurldecode)
 	if (!(*arg)->value.str.len) {
 		RETURN_FALSE;
 	}
-	len = _php3_rawurldecode((*arg)->value.str.val, (*arg)->value.str.len);
+	len = php_raw_url_decode((*arg)->value.str.val, (*arg)->value.str.len);
 
 	RETVAL_STRINGL((*arg)->value.str.val, len, 1);
 }
 /* }}} */
 
-int _php3_rawurldecode(char *str, int len)
+int php_raw_url_decode(char *str, int len)
 {
 	char *dest = str;
 	char *data = str;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.31 1999/12/17 19:16:47 zeev Exp $ */
+/* $Id: fsock.c,v 1.32 1999/12/17 19:51:29 zeev Exp $ */
 
 /* Synced with php3 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php3 revision 1.133 1999-07-21 [sas] */
@@ -444,7 +444,7 @@ static php3i_sockbuf *_php3_sock_create(int socket FLS_DC)
 	return sock;
 }
 
-size_t _php3_sock_set_def_chunk_size(size_t size)
+size_t php_sock_set_def_chunk_size(size_t size)
 {
 	size_t old;
 	FLS_FETCH();

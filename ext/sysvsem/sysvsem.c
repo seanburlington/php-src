@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.10 1999/12/04 19:16:08 sas Exp $ */
+/* $Id: sysvsem.c,v 1.11 1999/12/17 19:51:33 zeev Exp $ */
 
 /* This has been built and tested on Solaris 2.6 and Linux 2.1.122.
  * It may not compile or execute correctly on other systems.
@@ -272,7 +272,7 @@ PHP_FUNCTION(sysvsem_get)
 	sem_ptr->semid = semid;
 	sem_ptr->count = 0;
 
-	return_value->value.lval = php3_list_insert(sem_ptr, php3_sysvsem_module.le_sem);
+	return_value->value.lval = zend_list_insert(sem_ptr, php3_sysvsem_module.le_sem);
 	return_value->type = IS_LONG;
 
 	sem_ptr->id = (int)return_value->value.lval;
@@ -299,7 +299,7 @@ static void _php3_sysvsem_semop(INTERNAL_FUNCTION_PARAMETERS, int acquire)
 			break;
 	}
 
-	sem_ptr = (sysvsem_sem *) php3_list_find(id, &type);
+	sem_ptr = (sysvsem_sem *) zend_list_find(id, &type);
 	if (type!=php3_sysvsem_module.le_sem) {
 		php_error(E_WARNING, "%d is not a SysV semaphore index", id);
 		RETURN_FALSE;

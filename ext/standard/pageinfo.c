@@ -15,7 +15,7 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: pageinfo.c,v 1.10 1999/12/12 16:14:40 sas Exp $ */
+/* $Id: pageinfo.c,v 1.11 1999/12/17 19:51:29 zeev Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"
@@ -81,7 +81,7 @@ static void _php3_statpage(void)
 #endif
 }
 
-long _php3_getuid(void)
+long php_getuid(void)
 {
 	BLS_FETCH();
 
@@ -95,7 +95,7 @@ PHP_FUNCTION(getmyuid)
 {
 	long uid;
 	
-	uid = _php3_getuid();
+	uid = php_getuid();
 	if (uid < 0) {
 		RETURN_FALSE;
 	} else {

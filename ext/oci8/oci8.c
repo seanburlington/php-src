@@ -22,7 +22,7 @@
 
 #define OCI_USE_EMALLOC 0		/* set this to 1 if you want to use the php memory manager! */
 
-/* $Id: oci8.c,v 1.44 1999/12/17 19:16:45 zeev Exp $ */
+/* $Id: oci8.c,v 1.45 1999/12/17 19:51:23 zeev Exp $ */
 
 /* TODO list:
  *
@@ -704,7 +704,7 @@ static void oci_debug(const char *format,...)
 		vsnprintf(buffer, sizeof(buffer)-1, format, args);
 		va_end(args);
 		buffer[sizeof(buffer)-1] = '\0';
-		if (php3_header()) {
+		if (php_header()) {
 			php_printf("OCIDebug: %s<br>\n", buffer);
 		}
 	}
@@ -2765,7 +2765,7 @@ PHP_FUNCTION(ociwritelobtofile)
 					goto bail;
 				}
 			} else {
-				if (php3_header()) {
+				if (php_header()) {
 					PHPWRITE(buffer,toread);
 				}
 			}

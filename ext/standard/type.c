@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: type.c,v 1.2 1999/07/16 13:12:57 zeev Exp $ */
+/* $Id: type.c,v 1.3 1999/12/17 19:51:29 zeev Exp $ */
 #include "php.h"
 #include "type.h"
 
@@ -58,7 +58,7 @@ int php3_check_type(char *str)
  * 1 - non-index array
  * 2 - index array
  */
-int php3_check_ident_type(char *str)
+int php_check_ident_type(char *str)
 {
 	char *s;
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.100 2003/08/12 00:55:58 iliaa Exp $ */
+/* $Id: php_fbsql.c,v 1.101 2003/10/02 18:49:18 fmk Exp $ */
 
 /* TODO:
  *
@@ -2278,7 +2278,7 @@ void phpfbColumnAsString(PHPFBResult* result, int column, void* data , int* leng
 #ifdef FB_TinyInteger
 		case FB_TinyInteger:
 		{ 
-			short int   v = *((short int*)data);
+			short int   v = *((FBTinyInteger*)data);
 			char  b[128];
 			sprintf(b, "%d", v);
 			phpfbestrdup(b, length, value);

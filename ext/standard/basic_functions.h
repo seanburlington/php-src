@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.79 2001/05/21 15:44:25 andrei Exp $ */
+/* $Id: basic_functions.h,v 1.80 2001/05/22 19:19:04 andi Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -39,7 +39,6 @@ PHP_MSHUTDOWN_FUNCTION(basic);
 PHP_RINIT_FUNCTION(basic);
 PHP_RSHUTDOWN_FUNCTION(basic);
 PHP_MINFO_FUNCTION(basic);
-PHP_GINIT_FUNCTION(basic);
 
 PHP_FUNCTION(constant);
 PHP_FUNCTION(intval);

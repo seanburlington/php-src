@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.91 2001/04/16 04:56:31 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.92 2001/04/22 17:20:03 sas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -60,7 +60,7 @@ static void php_free_pcre_cache(void *data)
 	pcre_cache_entry *pce = (pcre_cache_entry *) data;
 	pefree(pce->re, 1);
 #if HAVE_SETLOCALE
-	pefree((void*)pce->tables, 1);
+	if ((void*)pce->tables) pefree((void*)pce->tables, 1);
 #endif
 }
 

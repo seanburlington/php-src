@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.222 2003/01/12 14:47:18 sebastian Exp $ */
+/* $Id: info.c,v 1.223 2003/01/17 18:07:10 derick Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -768,14 +768,14 @@ PHPAPI void php_info_print_table_row(int num_cols, ...)
 				PUTS(row_element);
 				if (i < num_cols-1) {
 					PUTS(" => ");
-				} else {
-					PUTS("\n");
 				}	
 			}
 		}
 		if (PG(html_errors)) {
 			php_printf(" </td>");
-		}	
+		} else if (i == (num_cols - 1)) {
+			PUTS("\n");
+		}
 	}
 	if (PG(html_errors)) {
 		php_printf("</tr>\n");

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.10 1999/11/18 20:29:32 askalski Exp $ */
+/* $Id: ftp.c,v 1.11 1999/11/19 18:33:21 thies Exp $ */
 
 #include "php.h"
 
@@ -45,8 +45,12 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <errno.h>
-#include "ftp.h"
 
+#if HAVE_SYS_TIME_H
+#include <sys/time.h>
+#endif
+
+#include "ftp.h"
 
 /* sends an ftp command, returns true on success, false on error.
  * it sends the string "cmd args\r\n" if args is non-null, or

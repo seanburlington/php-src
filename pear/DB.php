@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.20 2000/06/30 19:20:03 chagenbu Exp $
+// $Id: DB.php,v 1.21 2000/07/02 19:04:36 chagenbu Exp $
 //
 // Database independent query interface.
 //
@@ -469,7 +469,7 @@ class DB_result {
 		if (DB::isError($err)) {
 			return $err;
 		}
-		$this->dbh = $this->result = false;
+		$this->result = false;
 		return true;
     }
 

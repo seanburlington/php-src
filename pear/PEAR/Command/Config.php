@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.3 2002/03/21 20:52:26 cox Exp $
+// $Id: Config.php,v 1.4 2002/03/22 12:45:41 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";
@@ -66,25 +66,28 @@ class PEAR_Command_Config extends PEAR_Command_Common
         switch ($command) {
             case 'config-show': {
                 $keys = $cf->getKeys();
+                sort($keys);
+                $this->ui->startTable(array('caption' => 'Configuration:'));
                 if (isset($params[0]) && $cf->isDefined($params[0])) {
                     foreach ($keys as $key) {
                         $type = $cf->getType($key);
-                        if ($type == 'password') {
-                            $this->ui->displayLine("$key = ********");
-                        } else {
-                            $this->ui->displayLine("$key = " . $cf->get($key, $params[0]));
+                        $value = $cf->get($key, $params[0]);
+                        if ($type == 'password' && $value) {
+                            $value = '********';
                         }
+                        $this->ui->tableRow(array($key, $value));
                     }
                 } else {
                     foreach ($keys as $key) {
                         $type = $cf->getType($key);
-                        if ($type == 'password') {
-                            $this->ui->displayLine("$key = ********");
-                        } else {
-                            $this->ui->displayLine("$key = " . $cf->get($key));
+                        $value = $cf->get($key, $params[0]);
+                        if ($type == 'password' && $value) {
+                            $value = '********';
                         }
+                        $this->ui->tableRow(array($key, $value));
                     }
                 }
+                $this->ui->endTable();
                 break;
             }
             case 'config-get': {

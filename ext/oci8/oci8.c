@@ -22,7 +22,7 @@
 
 #define OCI_USE_EMALLOC 0		/* set this to 1 if you want to use the php memory manager! */
 
-/* $Id: oci8.c,v 1.46 1999/12/17 20:55:13 zeev Exp $ */
+/* $Id: oci8.c,v 1.47 1999/12/17 22:27:23 zeev Exp $ */
 
 /* TODO list:
  *
@@ -405,7 +405,7 @@ PHP_RINIT_FUNCTION(oci)
 
 	OCI(debug_mode) = 0; /* start "fresh" */
 
-    oci_debug("php3_rinit_oci8");
+    oci_debug("php_rinit_oci8");
 
     return SUCCESS;
 }
@@ -428,7 +428,7 @@ PHP_MSHUTDOWN_FUNCTION(oci)
 {
 	OCILS_FETCH();
 
-    oci_debug("php3_mshutdown_oci8");
+    oci_debug("php_mshutdown_oci8");
 
 	zend_hash_apply(OCI(user),(int (*)(void *))_user_pcleanup);
 	zend_hash_apply(OCI(server),(int (*)(void *))_server_pcleanup);
@@ -483,7 +483,7 @@ PHP_RSHUTDOWN_FUNCTION(oci)
 {
 	OCILS_FETCH();
 
-    oci_debug("php3_rshutdown_oci8");
+    oci_debug("php_rshutdown_oci8");
 
 	zend_hash_apply(OCI(user),(int (*)(void *))_user_cleanup);
 	zend_hash_apply(OCI(server),(int (*)(void *))_server_cleanup);

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_zlib.h,v 1.2 1999/12/17 20:55:31 zeev Exp $ */
+/* $Id: php_zlib.h,v 1.3 1999/12/17 22:34:03 zeev Exp $ */
 
 #ifndef _PHP_ZLIB_H
 #define _PHP_ZLIB_H
@@ -39,8 +39,8 @@ typedef struct {
 	int gzgetss_state;
 } php_zlib_globals;
 
-extern zend_module_entry php3_zlib_module_entry;
-#define zlib_module_ptr &php3_zlib_module_entry
+extern zend_module_entry php_zlib_module_entry;
+#define zlib_module_ptr &php_zlib_module_entry
 
 extern PHP_MINIT_FUNCTION(zlib);
 extern PHP_MSHUTDOWN_FUNCTION(zlib);

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_velocis.h,v 1.2 1999/12/17 20:55:14 zeev Exp $ */
+/* $Id: php_velocis.h,v 1.3 1999/12/17 22:27:25 zeev Exp $ */
 
 #ifndef _PHP_VELOCIS_H
 #define _PHP_VELOCIS_H
@@ -92,7 +92,7 @@ PHP_FUNCTION(velocis_rollback);
 PHP_FUNCTION(velocis_fieldnum);
 PHP_FUNCTION(velocis_fieldname);
 
-extern velocis_module php3_velocis_module;
+extern velocis_module php_velocis_module;
 
 #else
 

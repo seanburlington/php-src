@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.94 2004/02/25 20:16:24 abies Exp $ */
+/* $Id: soap.c,v 1.95 2004/02/27 12:49:00 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -979,7 +979,7 @@ PHP_METHOD(soapserver,setpersistence)
 				value == SOAP_PERSISTENCE_REQUEST) {
 				service->soap_class.persistance = value;
 			} else {
-				php_error(E_ERROR, "Tried to set persistence with bogus value (%d)", value);
+				php_error(E_ERROR, "Tried to set persistence with bogus value (%ld)", value);
 			}
 		} else {
 			php_error(E_ERROR, "Tried to set persistence when you are using you SOAP SERVER in function mode, no persistence needed");
@@ -1293,10 +1293,17 @@ PHP_METHOD(soapserver, handle)
 				doc_request = soap_xmlParseMemory(Z_STRVAL_PP(raw_post),Z_STRLEN_PP(raw_post));
 			}
 		} else {
-			if (!zend_ini_long("always_populate_raw_post_data", sizeof("always_populate_raw_post_data"), 0)) {
-				php_error(E_ERROR, "PHP-SOAP requires 'always_populate_raw_post_data' to be on please check your php.ini file");
+			if (zend_hash_find(&EG(symbol_table), "_SERVER", sizeof("_SERVER"), (void **)&server_vars) == SUCCESS) {
+				zval **req_method;
+				if (zend_hash_find(Z_ARRVAL_PP(server_vars), "REQUEST_METHOD", sizeof("REQUEST_METHOD"), (void **)&req_method) == SUCCESS) {
+					if (!strcmp(Z_STRVAL_PP(req_method), "POST")) {
+						if (!zend_ini_long("always_populate_raw_post_data", sizeof("always_populate_raw_post_data"), 0)) {
+							php_error(E_ERROR, "PHP-SOAP requires 'always_populate_raw_post_data' to be on please check your php.ini file");
+						}
+					}
+				}
 			}
-			php_error(E_ERROR, "Can't find HTTP_RAW_POST_DATA");
+			php_error(E_ERROR, "Bad Request. Can't find HTTP_RAW_POST_DATA");
 			return;
 		}
 	} else {

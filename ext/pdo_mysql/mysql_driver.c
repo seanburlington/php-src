@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.32 2005/02/13 00:55:16 hholzgra Exp $ */
+/* $Id: mysql_driver.c,v 1.33 2005/02/13 06:37:29 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -318,9 +318,9 @@ static int pdo_mysql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 			pdo_mysql_error(dbh);
 			goto cleanup;
 		}
-
-		mysql_handle_autocommit(dbh);
 	}
+	
+	mysql_handle_autocommit(dbh);
 
 #ifndef PHP_WIN32
 	if (vars[2].optval && !strcmp("localhost", vars[2].optval)) {

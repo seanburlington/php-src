@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.43 2002/03/11 22:37:32 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.44 2002/04/05 15:27:52 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -157,6 +157,11 @@ PHP_FUNCTION(domxml_entity_notation_name);
 /* Class ProcessingInstructions */
 PHP_FUNCTION(domxml_pi_target);
 PHP_FUNCTION(domxml_pi_data);
+
+/* Class Parser methods */
+PHP_FUNCTION(domxml_parser);
+PHP_FUNCTION(domxml_parser_add_chunk);
+PHP_FUNCTION(domxml_parser_end);
 
 /* Class XPathContext methods */
 #if defined(LIBXML_XPATH_ENABLED)

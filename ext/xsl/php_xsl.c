@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.22 2004/07/12 13:04:01 chregu Exp $ */
+/* $Id: php_xsl.c,v 1.23 2004/07/25 08:37:39 chregu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -285,6 +285,7 @@ PHP_MSHUTDOWN_FUNCTION(xsl)
  */
 PHP_RINIT_FUNCTION(xsl)
 {
+	xsltSetGenericErrorFunc(NULL, php_libxml_error_handler);
 	return SUCCESS;
 }
 /* }}} */
@@ -294,6 +295,7 @@ PHP_RINIT_FUNCTION(xsl)
  */
 PHP_RSHUTDOWN_FUNCTION(xsl)
 {
+	xsltSetGenericErrorFunc(NULL, NULL);
 	return SUCCESS;
 }
 /* }}} */

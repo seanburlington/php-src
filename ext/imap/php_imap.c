@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.184.2.14 2005/01/20 18:08:54 tony2001 Exp $ */
+/* $Id: php_imap.c,v 1.184.2.15 2005/01/20 18:44:25 tony2001 Exp $ */
 
 #define IMAP41
 
@@ -2468,7 +2468,7 @@ PHP_FUNCTION(imap_sort)
 	if (myargc >= 4) {
 		convert_to_long_ex(flags);
 		if (Z_LVAL_PP(flags) < 0) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Search options parameter has to be greater than or equal to 0cannot be less than 0");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Search options parameter has to be greater than or equal to 0");
 			RETURN_FALSE;
 		}
 	}

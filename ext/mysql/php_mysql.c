@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.90 2001/07/28 11:36:02 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.91 2001/07/28 19:02:53 andi Exp $ */
 
 
 /* TODO:
@@ -1619,10 +1619,12 @@ PHP_FUNCTION(mysql_fetch_row)
 PHP_FUNCTION(mysql_fetch_object)
 {
 	php_mysql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, MYSQL_ASSOC, 2);
-	if (return_value->type==IS_ARRAY) {
-		return_value->type=IS_OBJECT;
-		return_value->value.obj.properties = return_value->value.ht;
-		return_value->value.obj.ce = &zend_standard_class_def;
+
+	if (Z_TYPE_P(return_value) == IS_ARRAY) {
+		/* OBJECTS_FIXME: Fix this for new object model */
+		Z_TYPE_P(return_value) = IS_OBJECT;
+		Z_OBJPROP_P(return_value) = return_value->value.ht;
+		Z_OBJCE_P(return_value) = &zend_standard_class_def;
 	}
 }
 /* }}} */

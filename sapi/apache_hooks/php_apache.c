@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.1 2002/11/18 01:01:21 gschlossnagle Exp $ */
+/* $Id: php_apache.c,v 1.2 2002/11/18 06:09:23 gschlossnagle Exp $ */
 
 #include "php_apache_http.h"
 
@@ -35,6 +35,9 @@ php_apache_info_struct php_apache_info;
 #endif
 
 #define SECTION(name)  PUTS("<H2 align=\"center\">" name "</H2>\n")
+
+#undef offsetof
+#define offsetof(s_type,field) ((size_t)&(((s_type*)0)->field))
 
 extern module *top_module;
 static int le_apachereq;

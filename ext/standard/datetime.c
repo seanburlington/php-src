@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.97 2002/12/05 22:28:01 iliaa Exp $ */
+/* $Id: datetime.c,v 1.98 2002/12/19 17:06:36 iliaa Exp $ */
 
 
 #include "php.h"
@@ -196,7 +196,7 @@ void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gm)
 	t = mktime(ta); 
 
 #ifdef PHP_WIN32
-	if (t < 0) {
+	if (t - chgsecs < 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Windows does not support negative values for this function");
 		RETURN_LONG(-1);
 	}

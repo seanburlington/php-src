@@ -12,11 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
-   |          Stefan Röhrich <sr@linux.de>                                |
+   | Authors: Hartmut Holzgraefe <hartmut@six.de>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.1 2000/11/21 00:40:13 hholzgra Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.2 2000/11/21 00:43:25 hholzgra Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 

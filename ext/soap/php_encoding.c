@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.64 2004/02/25 14:34:50 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.65 2004/02/27 14:52:22 dmitry Exp $ */
 
 #include <time.h>
 
@@ -660,7 +660,7 @@ static xmlNodePtr to_xml_ulong(encodeTypePtr type, zval *data, int style, xmlNod
 
 	if (Z_TYPE_P(data) == IS_DOUBLE) {
 		char s[16];
-		sprintf(s, "%0.0F",Z_DVAL_P(data));
+		sprintf(s, "%0.0f",Z_DVAL_P(data));
 		xmlNodeSetContent(ret, s);
 	} else {
 		zval tmp = *data;

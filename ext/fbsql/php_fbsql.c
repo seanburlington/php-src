@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.42 2001/07/31 05:43:52 zeev Exp $ */
+/* $Id: php_fbsql.c,v 1.43 2001/08/10 20:34:05 fmk Exp $ */
 
 /* TODO:
  *
@@ -1449,7 +1449,7 @@ PHP_FUNCTION(fbsql_db_status)
 
 /* {{{ mdOk
  */
-int mdOk(PHPFBLink* link, FBCMetaData* md)
+int mdOk(PHPFBLink* link, FBCMetaData* md, char* sql)
 {
 	FBCDatabaseConnection* c = link->connection;
 	int result = 1;
@@ -1475,7 +1475,7 @@ int mdOk(PHPFBLink* link, FBCMetaData* md)
 		if (FB_SQL_G(generateWarnings))
 		{
 			if (emg)
-				php_error(E_WARNING, emg);
+				php_error(E_WARNING, "Error in statement: '%s' %s", sql, emg);
 			else
 				php_error(E_WARNING,"No message");
 		}
@@ -1499,7 +1499,7 @@ static void phpfbQuery(INTERNAL_FUNCTION_PARAMETERS, char* sql, PHPFBLink* link)
 
 	meta     = fbcdcExecuteDirectSQL(link->connection, sql);
 
-	if (!mdOk(link, meta))
+	if (!mdOk(link, meta, sql))
 	{
 		fbcmdRelease(meta);
 		ZVAL_BOOL(return_value, 0)

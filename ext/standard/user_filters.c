@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.26 2004/05/05 18:18:56 pollita Exp $ */
+/* $Id: user_filters.c,v 1.27 2004/05/06 14:29:32 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -525,7 +525,6 @@ PHP_FUNCTION(stream_filter_register)
 
 	fdat = ecalloc(1, sizeof(*fdat) + classname_len);
 	memcpy(fdat->classname, classname, classname_len);
-	zend_str_tolower(fdat->classname, classname_len);
 
 	if (zend_hash_add(BG(user_filter_map), filtername, filtername_len, (void*)fdat,
 				sizeof(*fdat) + classname_len, NULL) == SUCCESS &&

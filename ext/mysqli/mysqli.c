@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.43.2.3 2004/08/09 04:33:40 georg Exp $ 
+  $Id: mysqli.c,v 1.43.2.4 2004/08/13 16:27:35 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -200,11 +200,21 @@ zval *mysqli_read_property(zval *object, zval *member, int type TSRMLS_DC)
 		ret = zend_hash_find(obj->prop_handler, Z_STRVAL_P(member), Z_STRLEN_P(member)+1, (void **) &hnd);
 	}
 	if (ret == SUCCESS) {
-		/* check if connection is still valid */
- 		if (!obj->ptr ||
-		    !((MYSQL *)((MY_MYSQL *)((MYSQLI_RESOURCE *)(obj->ptr))->ptr)->mysql)->thread_id) {
-			retval = EG(uninitialized_zval_ptr);
-			return(retval);
+		/* check if mysqli object is still valid */
+		if (!strcmp(obj->zo.ce->name, "mysqli")) {
+			if (!obj->ptr ||
+		    	!((MYSQL *)((MY_MYSQL *)((MYSQLI_RESOURCE *)(obj->ptr))->ptr)->mysql)->thread_id) {
+				retval = EG(uninitialized_zval_ptr);
+				return(retval);
+			}
+		} else
+		/* check if stmt object is still valid */
+		if (!strcmp(obj->zo.ce->name, "mysqli_stmt")) {
+			if (!obj->ptr ||
+		    	!((MYSQL_STMT *)((MY_STMT *)((MYSQLI_RESOURCE *)(obj->ptr))->ptr)->stmt)->mysql) {
+				retval = EG(uninitialized_zval_ptr);
+				return(retval);
+			}
 		}
 
 		ret = hnd->read_func(obj, &retval TSRMLS_CC);

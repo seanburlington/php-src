@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.12.2.7 2002/06/01 18:39:36 dickmann Exp $
+  $Id: CLI.php,v 1.12.2.8 2002/06/02 06:09:43 ssb Exp $
 */
 
 require_once "PEAR.php";
@@ -94,11 +94,6 @@ class PEAR_Frontend_CLI extends PEAR
 
     function displayError($eobj)
     {
-        trigger_error("Frontend::displayError deprecated", E_USER_ERROR);
-    }
-
-    function _displayError($eobj)
-    {
         return $this->_displayLine($eobj->getMessage());
     }
 
@@ -106,11 +101,6 @@ class PEAR_Frontend_CLI extends PEAR
     // {{{ displayFatalError(eobj)
 
     function displayFatalError($eobj)
-    {
-        trigger_error("Frontend::displayFatalError deprecated", E_USER_ERROR);
-    }
-
-    function _displayFatalError($eobj)
     {
         $this->_displayError($eobj);
         exit(1);

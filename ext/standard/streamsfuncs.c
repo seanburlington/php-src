@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.17 2003/06/16 18:19:14 pollita Exp $ */
+/* $Id: streamsfuncs.c,v 1.18 2003/06/17 18:38:56 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -726,7 +726,6 @@ PHP_FUNCTION(stream_context_get_options)
 	context = decode_context_param(zcontext TSRMLS_CC);
 	ZEND_VERIFY_RESOURCE(context);
 
-	array_init(return_value);
 	*return_value = *context->options;
 	zval_copy_ctor(return_value);
 		

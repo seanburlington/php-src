@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.28 2002/11/04 13:39:17 helly Exp $ */
+/* $Id: dba_db2.c,v 1.29 2002/11/05 14:46:35 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -63,8 +63,9 @@ DBA_OPEN_FUNC(db2)
 		info->mode == DBA_WRITER ? 0         : 
 		info->mode == DBA_TRUNC ? DB_CREATE | DB_TRUNCATE : -1;
 
-	if (gmode == -1)
-		return FAILURE;
+	if (gmode == -1) {
+		return FAILURE;/* not possible */
+	}
 
 	if (info->argc > 0) {
 		convert_to_long_ex(info->argv[0]);
@@ -76,6 +77,10 @@ DBA_OPEN_FUNC(db2)
 	}
 
 	info->dbf = ecalloc(sizeof(dba_db2_data), 1);
+	if (!info->dbf) {
+		*error = "Out of memory";
+		return FAILURE;
+	}
 	((dba_db2_data *) info->dbf)->dbp = dbp;
 	return SUCCESS;
 }

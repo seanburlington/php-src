@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dba.h,v 1.16 2002/11/04 12:27:13 helly Exp $ */
+/* $Id: php_dba.h,v 1.17 2002/11/05 14:46:36 helly Exp $ */
 
 #ifndef PHP_DBA_H
 #define PHP_DBA_H
@@ -48,7 +48,7 @@ extern zend_module_entry dba_module_entry;
 /* common prototypes which must be supplied by modules */
 
 #define DBA_OPEN_FUNC(x) \
-	int dba_open_##x(dba_info *info TSRMLS_DC)
+	int dba_open_##x(dba_info *info, char **error TSRMLS_DC)
 #define DBA_CLOSE_FUNC(x) \
 	void dba_close_##x(dba_info *info TSRMLS_DC)
 #define DBA_FETCH_FUNC(x) \

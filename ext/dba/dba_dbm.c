@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_dbm.c,v 1.16 2002/11/04 13:39:17 helly Exp $ */
+/* $Id: dba_dbm.c,v 1.17 2002/11/05 14:46:36 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -79,6 +79,10 @@ DBA_OPEN_FUNC(dbm)
 	}
 
 	info->dbf = ecalloc(sizeof(dba_dbm_data), 1);
+	if (!info->dbf) {
+		*error = "Out of memory";
+		return FAILURE;
+	}
 	return SUCCESS;
 }
 

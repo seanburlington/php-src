@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_ndbm.c,v 1.12 2002/04/18 12:30:18 derick Exp $ */
+/* $Id: dba_ndbm.c,v 1.13 2002/11/05 14:46:36 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -55,7 +55,7 @@ DBA_OPEN_FUNC(ndbm)
 			gmode = O_RDWR | O_CREAT | O_TRUNC;
 			break;
 		default:
-			return FAILURE;
+			return FAILURE; /* not possible */
 	}
 
 	if(info->argc > 0) {
@@ -69,6 +69,7 @@ DBA_OPEN_FUNC(ndbm)
 		pinfo->dbf = dbf;
 		return SUCCESS;
 	}
+	*error = "Out of memory";
 	return FAILURE;
 }
 

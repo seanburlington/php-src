@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_gdbm.c,v 1.12 2002/11/04 13:39:17 helly Exp $ */
+/* $Id: dba_gdbm.c,v 1.13 2002/11/05 14:46:36 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -49,7 +49,7 @@ DBA_OPEN_FUNC(gdbm)
 		info->mode == DBA_TRUNC ? GDBM_NEWDB : -1;
 		
 	if(gmode == -1) 
-		return FAILURE;
+		return FAILURE; /* not possible */
 
 	if(info->argc > 0) {
 		convert_to_long_ex(info->argv[0]);
@@ -63,6 +63,7 @@ DBA_OPEN_FUNC(gdbm)
 		((dba_gdbm_data *) info->dbf)->dbf = dbf;
 		return SUCCESS;
 	}
+	*error = "Out of memory";
 	return FAILURE;
 }
 

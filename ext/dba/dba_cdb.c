@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_cdb.c,v 1.19 2002/11/05 11:22:48 helly Exp $ */
+/* $Id: dba_cdb.c,v 1.20 2002/11/05 14:46:35 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -74,11 +74,13 @@ DBA_OPEN_FUNC(cdb)
 			make = 0;
 			file = php_stream_open_wrapper(info->path, "rb", STREAM_MUST_SEEK|IGNORE_PATH|ENFORCE_SAFE_MODE, NULL);
 			if (!file) {
+				*error = "Unable to open file";
 				return FAILURE;
 			}
 #else
 			file = VCWD_OPEN(info->path, O_RDONLY);
 			if (file < 0) {
+				*error = "Unable to open file";
 				return FAILURE;
 			}
 #endif
@@ -89,24 +91,28 @@ DBA_OPEN_FUNC(cdb)
 			make = 1;
 			file = php_stream_open_wrapper(info->path, "wb", STREAM_MUST_SEEK|IGNORE_PATH|ENFORCE_SAFE_MODE, NULL);
 			if (!file) {
+				*error = "Unable to open file";
 				return FAILURE;
 			}
 			break;
 		case DBA_WRITER:
+			*error = "Update operations are not supported";
 			return FAILURE; /* not supported */
 #endif
 		default: 
- 		/* currently not supported: */
+			*error = "Currently not supported";
 			return FAILURE;
 	}
 
 	cdb = ecalloc(sizeof(dba_cdb), 1);
 	if (!cdb) {
+	pinfo->dbf = cdb;
 #if DBA_CDB_BUILTIN
 		php_stream_close(file);
 #else
 		close(file);
 #endif
+		*error = "Out of memory";
 		return FAILURE;
 	}
 

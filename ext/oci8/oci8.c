@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.183.2.2 2003/01/31 14:21:19 sniper Exp $ */
+/* $Id: oci8.c,v 1.183.2.3 2003/04/21 17:53:59 sniper Exp $ */
 
 /* TODO list:
  *
@@ -641,7 +641,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.2 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.3 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2154,7 +2154,7 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 	OCISvcCtx *svchp = 0;
 	char *hashed_details;
 #ifdef HAVE_OCI9
-	ub2 charsetid;
+	ub2 charsetid = 0;
 #endif
 	TSRMLS_FETCH();
 
@@ -2218,9 +2218,10 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 							OCI(pEnv),
 							charset));
 		
-		session->charsetId = charsetid;
 		oci_debug("oci_do_connect: using charset id=%d",charsetid);
 	}
+
+	session->charsetId = charsetid;
 	
 	/* create an environment using the character set id, Oracle 9i+ ONLY */
 	CALL_OCI(OCIEnvNlsCreate(
@@ -2648,6 +2649,7 @@ static void oci_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent,int exclu
 		username = Z_STRVAL_PP(userParam);
 		password = Z_STRVAL_PP(passParam);
 		dbname = Z_STRVAL_PP(dbParam);
+		charset = "";
 	} else if (zend_get_parameters_ex(2, &userParam, &passParam) == SUCCESS) {
 		convert_to_string_ex(userParam);
 		convert_to_string_ex(passParam);
@@ -2655,6 +2657,7 @@ static void oci_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent,int exclu
 		username = Z_STRVAL_PP(userParam);
 		password = Z_STRVAL_PP(passParam);
 		dbname = "";
+		charset = "";
 	} else {
 		WRONG_PARAM_COUNT;
 	}

@@ -17,13 +17,23 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.70 2002/08/25 22:17:55 sebastian Exp $ */
+/* $Id: php_ftp.c,v 1.71 2002/09/05 10:13:27 hyanantha Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+
+#ifdef NETWARE
+#ifdef USE_WINSOCK
+#include <novsock2.h>
+#else
+#ifndef NEW_LIBC
+#include <sys/socket.h>
+#endif
+#endif
+#endif
 
 #if HAVE_FTP
 

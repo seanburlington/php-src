@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.37.2.7 2003/06/03 12:46:47 edink Exp $
+dnl $Id: config.m4,v 1.37.2.8 2003/10/03 05:25:39 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_OCI_IF_DEFINED,[
@@ -42,8 +42,7 @@ AC_DEFUN(AC_OCI8_VERSION,[
 ])                                                                                                                                                                
 
 PHP_ARG_WITH(oci8, for Oracle-OCI8 support,
-[  --with-oci8[=DIR]       Include Oracle-oci8 support. Default DIR is 
-                          ORACLE_HOME.])
+[  --with-oci8[=DIR]       Include Oracle-oci8 support. Default DIR is ORACLE_HOME.])
 
 if test "$PHP_OCI8" != "no"; then
   AC_MSG_CHECKING([Oracle Install-Dir])

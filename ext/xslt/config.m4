@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.30.2.5 2003/10/01 02:54:08 sniper Exp $
+dnl $Id: config.m4,v 1.30.2.6 2003/10/03 05:25:43 sniper Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -10,16 +10,16 @@ PHP_ARG_ENABLE(xslt, whether to enable xslt support,
 [  --enable-xslt           Enable xslt support.])
 
 PHP_ARG_WITH(xslt-sablot, for XSLT Sablotron backend,
-[  --with-xslt-sablot=DIR    XSLT: Enable the sablotron backend.], no, no)
+[  --with-xslt-sablot=<DIR>  XSLT: Enable the sablotron backend.], no, no)
 
 PHP_ARG_WITH(expat-dir, for libexpat dir for Sablotron XSL support,
-[  --with-expat-dir=DIR      XSLT: libexpat dir for Sablotron.], no, no)
+[  --with-expat-dir=<DIR>    XSLT: libexpat dir for Sablotron.], no, no)
 
 PHP_ARG_WITH(iconv-dir, for iconv dir for Sablotron XSL support,
-[  --with-iconv-dir=DIR      XSLT: iconv dir for Sablotron.], no, no)
+[  --with-iconv-dir=<DIR>    XSLT: iconv dir for Sablotron.], no, no)
 
 PHP_ARG_WITH(sablot-js, for JavaScript for Sablotron XSL support,
-[  --with-sablot-js=DIR      XSLT: enable JavaScript support for Sablotron.], no, no)
+[  --with-sablot-js=<DIR>    XSLT: enable JavaScript support for Sablotron.], no, no)
 
 
 if test "$PHP_XSLT" != "no"; then

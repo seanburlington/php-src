@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.38.2.1 2003/07/21 08:42:48 sniper Exp $
+dnl $Id: config.m4,v 1.38.2.2 2003/10/03 05:25:42 sniper Exp $
 dnl
 
 AC_C_BIGENDIAN
@@ -14,7 +14,7 @@ PHP_ARG_ENABLE(xml,whether to enable XML support,
 [  --disable-xml           Disable XML support using bundled expat lib], yes)
 
 PHP_ARG_WITH(expat-dir, external libexpat install dir,
-[  --with-expat-dir=DIR    XML: external libexpat install dir], no, no)
+[  --with-expat-dir=<DIR>    XML: external libexpat install dir], no, no)
 
 if test "$PHP_XML" = "yes"; then
   AC_DEFINE(HAVE_LIBEXPAT,  1, [ ])

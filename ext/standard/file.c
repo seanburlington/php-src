@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.31 2003/07/24 15:23:14 wez Exp $ */
+/* $Id: file.c,v 1.279.2.32 2003/07/27 18:46:03 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1156,7 +1156,7 @@ PHPAPI PHP_FUNCTION(fclose)
 	}
 
 	php_stream_from_zval(stream, arg1);
-	php_stream_close(stream);
+	zend_list_delete(stream->rsrc_id);
 
 	RETURN_TRUE;
 }

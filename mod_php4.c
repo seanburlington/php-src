@@ -28,7 +28,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.9 1999/07/12 13:56:29 thies Exp $ */
+/* $Id: mod_php4.c,v 1.10 1999/07/14 10:26:43 zeev Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -522,8 +522,8 @@ handler_rec php_handlers[] =
 
 command_rec php_commands[] =
 {
-	{"php4_value",		php_apache_value_handler, NULL, OR_OPTIONS, TAKE2, "PHP Value Modifier"},
-	{"php4_flag",			php_apache_flag_handler, NULL, OR_OPTIONS, TAKE2, "PHP Flag Modifier"},
+	{"php_value",		php_apache_value_handler, NULL, OR_OPTIONS, TAKE2, "PHP Value Modifier"},
+	{"php_flag",			php_apache_flag_handler, NULL, OR_OPTIONS, TAKE2, "PHP Flag Modifier"},
 	{NULL}
 };
 

@@ -16,12 +16,16 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.h,v 1.1 2000/05/25 21:54:34 dickmeiss Exp $ */
+/* $Id: php_yaz.h,v 1.2 2000/11/01 22:10:54 dickmeiss Exp $ */
 
 #ifndef PHP_YAZ_H
 #define PHP_YAZ_H
 
 #if HAVE_YAZ
+
+#ifdef ZTS
+#include "TSRM.h"
+#endif
 
 extern zend_module_entry yaz_module_entry;
 #define yaz_module_ptr &yaz_module_entry

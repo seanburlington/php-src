@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pfpro.h,v 1.6 2001/02/26 06:07:12 andi Exp $ */
+/* $Id: php_pfpro.h,v 1.7 2001/03/21 20:07:18 andi Exp $ */
 
 #ifndef PHP_PFPRO_H
 #define PHP_PFPRO_H
@@ -46,7 +46,7 @@ PHP_FUNCTION(pfpro_process);            /* Transaction processing     */
 
 typedef struct {
 	int le_pfpro;
-	int initialised;
+	int initialized;
 	char *defaulthost;
 	int defaultport;
 	int defaulttimeout;

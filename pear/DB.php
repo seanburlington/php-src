@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.57 2001/04/16 22:16:38 ssb Exp $
+// $Id: DB.php,v 1.58 2001/04/17 01:51:26 ssb Exp $
 //
 // Database independent query interface.
 //
@@ -188,7 +188,8 @@ class DB
         @$obj =& new $classname;
 
         if (!$obj) {
-            return new DB_Error(DB_ERROR_NOT_FOUND);
+            return PEAR::raiseError(DB_ERROR_NOT_FOUND,
+                                    null, null, null, null, 'DB_Error', true);
         }
 
         return $obj;
@@ -235,7 +236,8 @@ class DB
         }
 
         if (!$obj) {
-            return new DB_Error(DB_ERROR_NOT_FOUND);
+            return PEAR::raiseError(DB_ERROR_NOT_FOUND,
+                                    null, null, null, null, 'DB_Error', true);
         }
 
         if (is_array($options)) {
@@ -278,8 +280,8 @@ class DB
     function isError($value)
     {
         return (is_object($value) &&
-            (get_class($value) == 'db_error' ||
-             is_subclass_of($value, 'db_error')));
+                (get_class($value) == 'db_error' ||
+                 is_subclass_of($value, 'db_error')));
     }
 
     /**

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.6 2003/06/14 18:15:50 rrichards Exp $ */
+/* $Id: php_simplexml.h,v 1.7 2003/10/25 21:08:33 helly Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H
@@ -62,6 +62,7 @@ typedef struct {
 	simplexml_ref_obj *document;
 	xmlHashTablePtr nsmap;
 	xmlXPathContextPtr xpath;
+	HashTable *properties;
 } php_sxe_object;
 
 

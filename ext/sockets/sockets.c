@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.125.2.9 2003/04/01 18:12:24 rasmus Exp $ */
+/* $Id: sockets.c,v 1.125.2.10 2003/04/04 14:18:31 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -576,10 +576,21 @@ PHP_FUNCTION(socket_select)
 
 	/* If seconds is not set to null, build the timeval, else we wait indefinitely */
 	if (sec != NULL) {
-		convert_to_long_ex(&sec);
+		zval tmp;
+
+		if (Z_TYPE_P(sec) != IS_LONG) {
+			tmp = *sec;
+			zval_copy_ctor(&tmp);
+			convert_to_long(&tmp);
+			sec = &tmp;
+		}
 		tv.tv_sec = Z_LVAL_P(sec);
 		tv.tv_usec = usec;
 		tv_p = &tv;
+
+		if (sec == &tmp) {
+			zval_dtor(&tmp);
+		}
 	}
 
 	retval = select(max_fd+1, &rfds, &wfds, &efds, tv_p);

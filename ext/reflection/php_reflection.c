@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.19 2003/08/02 14:22:18 helly Exp $ */
+/* $Id: php_reflection.c,v 1.20 2003/08/03 17:40:44 zeev Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -1621,7 +1621,7 @@ ZEND_FUNCTION(reflection_class_getinterfaces)
 	array_init(return_value);
 
 	if (ce->num_interfaces) {
-		int i;
+		zend_uint i;
 
 	   	for (i=0; i < ce->num_interfaces; i++) {
 			zval *interface;

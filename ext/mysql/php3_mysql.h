@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php3_mysql.h,v 1.2 1999/04/23 11:12:41 zeev Exp $ */
+/* $Id: php3_mysql.h,v 1.3 1999/05/08 18:16:30 andrey Exp $ */
 
 #ifndef _PHP3_MYSQL_H
 #define _PHP3_MYSQL_H
@@ -115,5 +115,7 @@ extern ZEND_API php_mysql_globals mysql_globals;
 #define mysql_module_ptr NULL
 
 #endif
+
+#define phpext_mysql_ptr mysql_module_ptr
 
 #endif /* _PHP3_MYSQL_H */

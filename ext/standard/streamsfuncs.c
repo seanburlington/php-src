@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.35.2.7 2004/12/23 19:39:49 wez Exp $ */
+/* $Id: streamsfuncs.c,v 1.35.2.8 2005/01/04 15:31:34 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -347,6 +347,7 @@ PHP_FUNCTION(stream_socket_recvfrom)
 		}
 	}
 
+	efree(read_buf);
 	RETURN_FALSE;
 }
 /* }}} */

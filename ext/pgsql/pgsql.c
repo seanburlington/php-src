@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.135 2001/12/17 00:24:59 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.136 2001/12/17 11:48:07 hholzgra Exp $ */
 
 #include <stdlib.h>
 
@@ -2554,7 +2554,7 @@ PHP_FUNCTION(pg_send_query)
 /* }}} */
 
 
-/* {{{ proto query resouce pg_get_result(resource connection)
+/* {{{ proto resource pg_get_result([resource connection])
    Get asynchronous query result */
 PHP_FUNCTION(pg_get_result)
 {

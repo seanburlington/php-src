@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.32 2000/03/28 16:45:04 steinm Exp $ */
+/* $Id: pdf.c,v 1.33 2000/04/06 21:07:42 cmv Exp $ */
 
 /* pdflib 2.01 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -41,6 +41,7 @@
 #include "php.h"
 #include "php_globals.h"
 #include "ext/standard/head.h"
+#include "ext/standard/info.h"
 
 #include <math.h>
 
@@ -235,13 +236,23 @@ PHP_MINIT_FUNCTION(pdf)
 	return SUCCESS;
 }
 
-PHP_MINFO_FUNCTION(pdf) {
-	/* need to use a PHPAPI function here because it is external module in windows */
-	php_printf("pdflib %d.%02d<BR>",  PDF_get_majorversion(), PDF_get_minorversion());
-		php_printf("The CJK fonts supported.");
+PHP_MINFO_FUNCTION(pdf)
+{
+	char tmp[32];
+
+	snprintf(tmp, 31, "%d.%02d", PDF_get_majorversion(), PDF_get_minorversion() );
+	tmp[32]=0;
+
+	php_info_print_table_start();
+	php_info_print_table_row(2, "PDF Support", "enabled" );
+	php_info_print_table_row(2, "PDFLib Version", tmp );
+	php_info_print_table_row(2, "CJK Font Support", "yes" );
 #ifdef PDF_OPEN_MEM_SUPPORTED
-	php_printf("Support for in memory pdf creation.");
+	php_info_print_table_row(2, "In-memory PDF Creation Support", "yes" );
+#else
+	php_info_print_table_row(2, "In-memory PDF Creation Support", "no" );
 #endif
+	php_info_print_table_end();
 
 }
 

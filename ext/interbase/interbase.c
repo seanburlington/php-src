@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.19 2000/04/06 17:01:41 cmv Exp $ */
+/* $Id: interbase.c,v 1.20 2000/04/06 21:07:39 cmv Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -512,30 +512,32 @@ PHP_RSHUTDOWN_FUNCTION(ibase)
 PHP_MINFO_FUNCTION(ibase)
 {
 
-	char tmp[128];
+	char tmp[32];
 
 	IBLS_FETCH();
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.19 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.20 $");
 #ifdef COMPILE_DL
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
 	php_info_print_table_row(2, "Allow Persistent Links", (IBG(allow_persistent)?"Yes":"No") );
 
 	if (IBG(max_persistent) == -1) {
-		snprintf(tmp, 128, "%d/unlimited", IBG(num_persistent));
+		snprintf(tmp, 31, "%d/unlimited", IBG(num_persistent));
 	} else {
-		snprintf(tmp, 128, "%d/%ld", IBG(num_persistent), IBG(max_persistent));
+		snprintf(tmp, 31, "%d/%ld", IBG(num_persistent), IBG(max_persistent));
 	}
+	tmp[31]=0;
 	php_info_print_table_row(2, "Persistent Links", tmp );
 
 	if (IBG(max_links) == -1) {
-		snprintf(tmp, 128, "%d/unlimited", IBG(num_links));
+		snprintf(tmp, 31, "%d/unlimited", IBG(num_links));
 	} else {
-		snprintf(tmp, 128, "%d/%ld", IBG(num_links), IBG(max_links));
+		snprintf(tmp, 31, "%d/%ld", IBG(num_links), IBG(max_links));
 	}
+	tmp[31]=0;
 	php_info_print_table_row(2, "Total Links", tmp );
 
 	php_info_print_table_row(2, "Time Format", IBG(timeformat) );

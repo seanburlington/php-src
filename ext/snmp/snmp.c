@@ -17,9 +17,10 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.27 2000/03/30 00:19:24 sterling Exp $ */
+/* $Id: snmp.c,v 1.28 2000/04/06 21:07:43 cmv Exp $ */
 
 #include "php.h"
+#include "ext/standard/info.h"
 #if defined(COMPILE_DL)
 #include "dl/phpdl.h"
 #endif
@@ -105,7 +106,9 @@ PHP_MINIT_FUNCTION(snmp)
 
 PHP_MINFO_FUNCTION(snmp)
 {
-	php_printf("ucd-snmp");
+	php_info_print_table_start();
+	php_info_print_table_row(2, "UCD-SNMP Support", "enabled");
+	php_info_print_table_end();
 }
 
 

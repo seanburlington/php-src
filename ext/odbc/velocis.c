@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: velocis.c,v 1.15 2000/03/06 18:41:13 ssb Exp $ */
+/* $Id: velocis.c,v 1.16 2000/04/06 21:07:40 cmv Exp $ */
 
 /*
  * TODO:
@@ -42,6 +42,7 @@
 
 #ifdef HAVE_VELOCIS
 #include "php_velocis.h"
+#include "ext/standard/info.h"
 
 function_entry velocis_functions[] = {
 	PHP_FE(velocis_connect,								NULL)
@@ -115,7 +116,9 @@ PHP_RINIT_FUNCTION(velocis)
 
 PHP_MINFO_FUNCTION(velocis)
 {
-	php_printf("RAIMA Velocis Support Active");
+	php_info_print_table_start();
+	php_info_print_table_row(2, "RAIMA Velocis Support", "enabled" );
+	php_info_print_table_end();
 }
 
 PHP_MSHUTDOWN_FUNCTION(velocis)

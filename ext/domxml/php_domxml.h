@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_domxml.h,v 1.10 2000/02/26 03:20:49 zeev Exp $ */
+/* $Id: php_domxml.h,v 1.11 2000/03/02 16:39:50 steinm Exp $ */
 
 #ifndef _PHP_DOMXML_H
 #define _PHP_DOMXML_H
@@ -67,6 +67,7 @@ PHP_FUNCTION(domxml_new_child);
 /* Class Attribute methods */
 PHP_FUNCTION(domxml_attrname);
 
+PHP_FUNCTION(domxml_test);
 #else
 #define php_domxml_module_ptr NULL
 #endif /* HAVE_DOMXML */

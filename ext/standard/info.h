@@ -27,7 +27,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: info.h,v 1.12 2000/04/19 23:17:02 cmv Exp $ */
+/* $Id: info.h,v 1.13 2000/06/26 14:43:37 kk Exp $ */
 
 #ifndef _INFO_H
 #define _INFO_H
@@ -63,6 +63,7 @@ PHP_FUNCTION(phpinfo);
 PHP_FUNCTION(phpcredits);
 PHP_FUNCTION(php_logo_guid);
 PHP_FUNCTION(zend_logo_guid);
+PHP_FUNCTION(php_sapi_name);
 PHPAPI void php_print_info(int flag);
 PHPAPI void php_print_credits(int flag);
 PHPAPI void php_print_style(void);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.87 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: var.c,v 1.88 2001/05/29 13:19:24 stas Exp $ */
 
 
 /* {{{ includes 
@@ -371,7 +371,7 @@ int php_var_unserialize(pval **rval, const char **p, const char *max, HashTable 
 	ELS_FETCH();
 	BLS_FETCH();
 
-	if(var_hash) {
+	if(var_hash && **p != 'R') {  /* references aren't counted by serializer! */
 		zend_hash_next_index_insert(var_hash, rval, sizeof(*rval), NULL);
 	}
 

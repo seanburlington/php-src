@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 2001/09/06 09:36:57 danda Exp $
+dnl $Id: config.m4,v 1.3 2001/09/07 00:25:10 sniper Exp $
 dnl config.m4 for extension Xmlrpc
 
 
@@ -16,7 +16,7 @@ if test "$PHP_XMLRPC" != "no"; then
 
   testval=no
   for i in $PHP_EXPAT_DIR $XMLRPC_DIR; do
-    if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.s?; then
+    if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.$SHLIB_SUFFIX_NAME; then
       AC_DEFINE(HAVE_LIBEXPAT2,1,[ ])
       PHP_ADD_LIBRARY_WITH_PATH(expat, $i/lib, XMLRPC_SHARED_LIBADD)
       PHP_ADD_INCLUDE($i/include)
@@ -29,7 +29,7 @@ dnl  found_iconv=no
   AC_CHECK_LIB(c, iconv_open, found_iconv=yes)
   if test "$found_iconv" = "no"; then
       for i in /usr /usr/local $ICONV_DIR; do
-        if test -f $i/lib/libconv.a -o -f $i/lib/libiconv.s?; then
+        if test -f $i/lib/libconv.a -o -f $i/lib/libiconv.$SHLIB_SUFFIX_NAME; then
           PHP_ADD_LIBRARY_WITH_PATH(iconv, $i/lib, XMLRPC_SHARED_LIBADD)
           found_iconv=yes
         fi

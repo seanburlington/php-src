@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.43 2002/04/19 22:17:22 sterling Exp $ */
+/* $Id: sablot.c,v 1.44 2002/04/19 23:46:08 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -335,7 +335,7 @@ PHP_FUNCTION(xslt_set_scheme_handlers)
 		key_type = zend_hash_get_current_key(scheme_handlers, &string_key, &num_key, 0);
 		if (key_type == HASH_KEY_IS_LONG) {
 			php_error(E_NOTICE, "Numerical key %d (with value %s) being ignored "
-					            "in xslt_set_scheme_handlers()",
+					  "in xslt_set_scheme_handlers()",
 					  num_key, Z_STRVAL_PP(handler));
 			continue;
 		}
@@ -434,6 +434,8 @@ PHP_FUNCTION(xslt_set_encoding)
 
 	/* Set the encoding */
 	SablotSetEncoding(XSLT_PROCESSOR(handle), Z_STRVAL_PP(encoding));
+#else
+	php_error(E_WARNING, "Sablotron not compiled with encoding support");
 #endif
 
 }

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearwin.php,v 1.8.10.3 2003/06/17 17:13:19 pajoye Exp $
+// $Id: pearwin.php,v 1.8.10.4 2003/07/02 10:38:09 pajoye Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Common.php';

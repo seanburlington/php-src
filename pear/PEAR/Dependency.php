@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.14.4.7 2003/06/17 17:13:18 pajoye Exp $
+// $Id: Dependency.php,v 1.14.4.8 2003/07/02 10:38:08 pajoye Exp $
 
 require_once "PEAR.php";
 

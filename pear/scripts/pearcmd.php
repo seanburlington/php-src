@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearcmd.php,v 1.1.2.2 2003/06/17 17:13:19 pajoye Exp $
+// $Id: pearcmd.php,v 1.1.2.3 2003/07/02 10:38:09 pajoye Exp $
 
 ob_end_clean();
 /**
@@ -242,7 +242,10 @@ function cmdHelp($command)
         return $ret;
 
     } elseif ($command == "version") {
-        return "PEAR Version: ".$GLOBALS['pear_package_version']."\nPHP Version: ".phpversion()."\nZend Engine Version: ".zend_version();
+        return "PEAR Version: ".$GLOBALS['pear_package_version'].
+               "\nPHP Version: ".phpversion().
+               "\nZend Engine Version: ".zend_version().
+               "\nRunning on: ".php_uname();
 
     } elseif ($help = PEAR_Command::getHelp($command)) {
         if (is_string($help)) {

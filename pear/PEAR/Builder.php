@@ -16,7 +16,7 @@
 // | Authors: Stig Sæther Bakken <ssb@php.net>                            |
 // +----------------------------------------------------------------------+
 //
-// $Id: Builder.php,v 1.7.4.4 2003/06/17 17:13:18 pajoye Exp $
+// $Id: Builder.php,v 1.7.4.5 2003/07/02 10:38:08 pajoye Exp $
 
 require_once 'PEAR/Common.php';
 

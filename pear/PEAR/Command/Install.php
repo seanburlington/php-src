@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.38.2.7 2003/06/17 17:13:18 pajoye Exp $
+// $Id: Install.php,v 1.38.2.8 2003/07/02 10:38:09 pajoye Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";

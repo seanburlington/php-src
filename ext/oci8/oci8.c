@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.165 2002/01/17 18:40:59 thies Exp $ */
+/* $Id: oci8.c,v 1.166 2002/01/30 07:41:04 thies Exp $ */
 
 /* TODO list:
  *
@@ -630,7 +630,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.165 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.166 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -922,6 +922,10 @@ static ub4
 oci_handle_error(oci_connection *connection, ub4 errcode)
 {
 	switch (errcode) {
+		case 1013: /* user requested cancel of current operation */
+			zend_bailout();
+			break;
+
     	case 22:   /* ORA-00022 Invalid session id */
        	case 1012: /* ORA-01012: */
        	case 3113: /* ORA-03113: end-of-file on communication channel */

@@ -1,5 +1,5 @@
 # $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.27 2001/05/12 11:09:01 sas Exp $
+# $Id: config.m4,v 1.28 2001/05/20 22:15:25 sas Exp $
 
 dnl Fallback for --with-xml[=DIR]
 AC_ARG_WITH(xml,[],enable_xml=$withval)
@@ -19,9 +19,10 @@ if test "$PHP_XML" != "no"; then
   if test "$PHP_XML" = "yes"; then
     AC_DEFINE(HAVE_LIBEXPAT, 1, [ ])
     AC_DEFINE(HAVE_LIBEXPAT_BUNDLED, 1, [ ])
-    CPPFLAGS="$CPPFLAGS -DXML_BYTE_ORDER=$order"
+    XML_CPPFLAGS=-DXML_BYTE_ORDER=$order
     EXPAT_INTERNAL_LIBADD=expat/libexpat.la
     PHP_SUBST(EXPAT_INTERNAL_LIBADD)
+    PHP_SUBST(XML_CPPFLAGS)
     EXPAT_SUBDIRS=expat
     PHP_SUBST(EXPAT_SUBDIRS)
     PHP_SUBST(EXPAT_SHARED_LIBADD)

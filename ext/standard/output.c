@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.32 2000/09/04 22:21:10 sterling Exp $ */
+/* $Id: output.c,v 1.33 2000/10/26 18:10:57 sas Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -330,7 +330,7 @@ static int php_b_body_write(const char *str, uint str_length)
 static int php_ub_body_write_no_header(const char *str, uint str_length)
 {
 	char *newstr = NULL;
-	uint new_length=0;
+	size_t new_length=0;
 	int result;
 	OLS_FETCH();
 	BLS_FETCH();

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.43 2001/12/15 14:23:07 hholzgra Exp $ */
+/* $Id: php_ftp.c,v 1.44 2001/12/30 08:21:58 eschmid Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -285,7 +285,7 @@ PHP_FUNCTION(ftp_chdir)
 /* }}} */
 
 /* {{{ proto int ftp_exec(int stream, string command)
-    Request execution of a program on the ftp server */
+   Requests execution of a program on the ftp server */
 PHP_FUNCTION(ftp_exec)
 {
 	pval		*arg1, *arg2;

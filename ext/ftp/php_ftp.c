@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.67 2002/08/08 18:55:19 sebastian Exp $ */
+/* $Id: php_ftp.c,v 1.68 2002/08/13 04:19:25 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -581,7 +581,7 @@ PHP_FUNCTION(ftp_get)
 }
 /* }}} */
 
-/* {{{ proto inf ftp_async_get(resource stream, string local_file, string remote_file, int mode[, int resume_pos])
+/* {{{ proto int ftp_async_get(resource stream, string local_file, string remote_file, int mode[, int resume_pos])
    Retrieves a file from the FTP server asynchronly and writes it to a local file */
 PHP_FUNCTION(ftp_async_get)
 {

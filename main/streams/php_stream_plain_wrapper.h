@@ -16,12 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_plain_wrapper.h,v 1.5 2004/01/08 17:33:06 sniper Exp $ */
+/* $Id: php_stream_plain_wrapper.h,v 1.6 2004/02/20 08:22:12 hholzgra Exp $ */
 
 /* definitions for the plain files wrapper */
 
 /* operations for a plain file; use the php_stream_fopen_XXX funcs below */
 PHPAPI extern php_stream_ops php_stream_stdio_ops;
+
+BEGIN_EXTERN_C()
 
 /* like fopen, but returns a stream */
 PHPAPI php_stream *_php_stream_fopen(const char *filename, const char *mode, char **opened_path, int options STREAMS_DC TSRMLS_DC);
@@ -50,6 +52,8 @@ PHPAPI php_stream *_php_stream_fopen_temporary_file(const char *dir, const char 
  * will most likely fail on systems with fopencookie. */
 PHPAPI FILE * _php_stream_open_wrapper_as_file(char * path, char * mode, int options, char **opened_path STREAMS_DC TSRMLS_DC);
 #define php_stream_open_wrapper_as_file(path, mode, options, opened_path) _php_stream_open_wrapper_as_file((path), (mode), (options), (opened_path) STREAMS_CC TSRMLS_CC)
+
+END_EXTERN_C()
 
 /*
  * Local variables:

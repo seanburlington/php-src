@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_context.h,v 1.8 2004/01/08 17:33:06 sniper Exp $ */
+/* $Id: php_stream_context.h,v 1.9 2004/02/20 08:22:12 hholzgra Exp $ */
 
 /* Stream context and status notification related definitions */
 
@@ -57,6 +57,7 @@ struct _php_stream_context {
 	int rsrc_id;	/* used for auto-cleanup */
 };
 
+BEGIN_EXTERN_C()
 PHPAPI void php_stream_context_free(php_stream_context *context);
 PHPAPI php_stream_context *php_stream_context_alloc(void);
 PHPAPI int php_stream_context_get_option(php_stream_context *context,
@@ -73,6 +74,7 @@ PHPAPI int php_stream_context_del_link(php_stream_context *context,
 
 PHPAPI php_stream_notifier *php_stream_notification_alloc(void);
 PHPAPI void php_stream_notification_free(php_stream_notifier *notifier);
+END_EXTERN_C()
 
 /* not all notification codes are implemented */
 #define PHP_STREAM_NOTIFY_RESOLVE		1
@@ -90,9 +92,11 @@ PHPAPI void php_stream_notification_free(php_stream_notifier *notifier);
 #define PHP_STREAM_NOTIFY_SEVERITY_WARN	1
 #define PHP_STREAM_NOTIFY_SEVERITY_ERR	2
 
+BEGIN_EXTERN_C()
 PHPAPI void php_stream_notification_notify(php_stream_context *context, int notifycode, int severity,
 		char *xmsg, int xcode, size_t bytes_sofar, size_t bytes_max, void * ptr TSRMLS_DC);
 PHPAPI php_stream_context *php_stream_context_set(php_stream *stream, php_stream_context *context);
+END_EXTERN_C()
 
 #define php_stream_notify_info(context, code, xmsg, xcode)	do { if ((context) && (context)->notifier) { \
 	php_stream_notification_notify((context), (code), PHP_STREAM_NOTIFY_SEVERITY_INFO, \

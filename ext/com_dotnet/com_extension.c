@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_extension.c,v 1.10 2004/04/28 08:23:22 wez Exp $ */
+/* $Id: com_extension.c,v 1.11 2004/04/28 23:24:33 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -197,7 +197,7 @@ PHP_MINIT_FUNCTION(com_dotnet)
 	INIT_CLASS_ENTRY(ce, "com_safearray_proxy", NULL);
 	php_com_saproxy_class_entry = zend_register_internal_class(&ce TSRMLS_CC);
 	php_com_saproxy_class_entry->ce_flags |= ZEND_ACC_FINAL;
-	php_com_saproxy_class_entry->constructor->common.fn_flags |= ZEND_ACC_PROTECTED;
+//	php_com_saproxy_class_entry->constructor->common.fn_flags |= ZEND_ACC_PROTECTED;
 	php_com_saproxy_class_entry->get_iterator = php_com_saproxy_iter_get;
 	
 	INIT_CLASS_ENTRY(ce, "variant", NULL);

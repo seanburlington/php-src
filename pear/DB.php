@@ -17,12 +17,12 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.16 2000/02/25 21:18:01 ssb Exp $
+// $Id: DB.php,v 1.17 2000/02/27 14:46:27 ssb Exp $
 //
 // Database independent query interface.
 //
 
-if ($GLOBALS['USED_PACKAGES']['DB']) return;
+if (!empty($GLOBALS['USED_PACKAGES']['DB'])) return;
 $GLOBALS['USED_PACKAGES']['DB'] = true;
 
 // {{{ Database independent error codes.

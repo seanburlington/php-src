@@ -17,12 +17,12 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: HTTP.php,v 1.2 2000/02/26 16:03:50 ssb Exp $
+// $Id: HTTP.php,v 1.3 2000/02/27 14:46:27 ssb Exp $
 //
 // HTTP utility functions.
 //
 
-if ($GLOBALS['USED_PACKAGES']['HTTP']) return;
+if (!empty($GLOBALS['USED_PACKAGES']['HTTP'])) return;
 $GLOBALS['USED_PACKAGES']['HTTP'] = true;
 
 class HTTP {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.602 2004/05/20 10:24:39 derick Exp $ */
+/* $Id: main.c,v 1.603 2004/05/23 16:02:36 andi Exp $ */
 
 /* {{{ includes
  */
@@ -1529,6 +1529,8 @@ void php_module_shutdown(TSRMLS_D)
 #ifndef ZTS
 	zend_ini_shutdown(TSRMLS_C);
 	shutdown_memory_manager(CG(unclean_shutdown), 1 TSRMLS_CC);
+#else
+	zend_ini_global_shutdown(TSRMLS_C);
 #endif
 
 	module_initialized = 0;

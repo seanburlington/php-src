@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_odbc_int.h,v 1.7 2005/02/07 00:02:51 wez Exp $ */
+/* $Id: php_pdo_odbc_int.h,v 1.8 2005/02/07 03:27:54 wez Exp $ */
 
 #ifdef PHP_WIN32
 # define PDO_ODBC_TYPE	"Win32"
@@ -145,6 +145,11 @@ typedef struct {
 	pdo_odbc_db_handle *H;
 	pdo_odbc_errinfo einfo;
 } pdo_odbc_stmt;
+
+typedef struct {
+	SQLINTEGER len;
+	SQLSMALLINT paramtype;
+} pdo_odbc_param;
 	
 extern pdo_driver_t pdo_odbc_driver;
 extern struct pdo_stmt_methods odbc_stmt_methods;

@@ -15,10 +15,10 @@
   | Author: Hartmut Holzgraefe  <hartmut@six.de>                         |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.11 2002/08/22 13:23:51 edink Exp $ 
+  $Id: mime_magic.c,v 1.12 2002/09/24 06:39:43 sas Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
-  so the lincense section is a little bit longer than usual:
+  so the license section is a little bit longer than usual:
 
   ====================================================================
  * The Apache Software License, Version 1.1

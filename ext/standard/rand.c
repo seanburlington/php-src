@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.64 2003/08/11 00:42:29 sniper Exp $ */
+/* $Id: rand.c,v 1.65 2004/01/06 03:55:57 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -311,7 +311,7 @@ PHP_FUNCTION(mt_srand)
  * -RL
  */    
 
-/* {{{ proto int rand([int min, int max])
+/* {{{ proto int rand(int min, int max)
    Returns a random number */
 PHP_FUNCTION(rand)
 {
@@ -336,7 +336,7 @@ PHP_FUNCTION(rand)
 }
 /* }}} */
 
-/* {{{ proto int mt_rand([int min, int max])
+/* {{{ proto int mt_rand(int min, int max)
    Returns a random number from Mersenne Twister */
 PHP_FUNCTION(mt_rand)
 {

@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.34 2003/12/06 23:45:36 cellog Exp $
+// $Id: Dependency.php,v 1.35 2003/12/11 23:57:15 cellog Exp $
 
 require_once "PEAR.php";
 
@@ -162,7 +162,10 @@ class PEAR_Dependency
                     $code = $this->codeFromRelation($relation, $version, $req, $opt);
                     if ($opt) {
                         $errmsg = "package `$name' version " . $this->signOperator($relation) .
-                            " $req is recommended to utilize some features.  Installed version is $version";
+                            " $req is recommended to utilize some features.";
+                        if ($version) {
+                            $errmsg .= "  Installed version is $version";
+                        }
                         return $code;
                     }
                     $errmsg = "requires package `$name' " .

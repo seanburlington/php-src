@@ -18,9 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.30 2003/12/12 17:19:10 iliaa Exp $ */
-
-#include <fcntl.h>
+/* $Id: sapi_apache2.c,v 1.31 2003/12/19 18:28:56 wez Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -29,6 +27,8 @@
 #include "php_ini.h"
 #include "php_variables.h"
 #include "SAPI.h"
+
+#include <fcntl.h>
 
 #include "ext/standard/php_smart_str.h"
 #ifndef NETWARE

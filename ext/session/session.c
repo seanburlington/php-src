@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.213 2001/06/21 18:46:25 thies Exp $ */
+/* $Id: session.c,v 1.214 2001/06/29 05:27:57 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -832,6 +832,7 @@ static void php_session_start(PSLS_D)
 				zend_hash_find(Z_ARRVAL_PP(data), PS(session_name),
 					lensess + 1, (void **) &ppid) == SUCCESS) {
 			PPID2SID;
+			send_cookie = 0;
 		}
 
 		if (!PS(id) &&
@@ -841,6 +842,7 @@ static void php_session_start(PSLS_D)
 				zend_hash_find(Z_ARRVAL_PP(data), PS(session_name),
 					lensess + 1, (void **) &ppid) == SUCCESS) {
 			PPID2SID;
+			send_cookie = 0;
 		}
 	}
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.8 1999/07/16 17:27:42 zeev Exp $ */
+/* $Id: pgsql.c,v 1.9 1999/07/17 12:56:38 sas Exp $ */
 
 #include <stdlib.h>
 
@@ -865,7 +865,7 @@ PHP_FUNCTION(pgsql_result)
 
 static void php3_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 {
-	pval *result, *row, *pval_ptr, *arg3;
+	pval *result, *row, *arg3;
 	PGresult *pgsql_result;
 	pgsql_result_handle *pg_result;
 	int type;
@@ -1455,7 +1455,7 @@ PHP_FUNCTION(pgsql_lo_readall)
 	tbytes = 0;
 	while ((nbytes = lo_read((PGconn *)pgsql->conn, pgsql->lofd, buf, 8192))>0) {
 		for(i=0; i<nbytes; i++) {
-			if (output) PUTC(buf[i]);
+			if (output) { (void) PUTC(buf[i]); }
 		}
 		tbytes += i;
 	}

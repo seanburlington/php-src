@@ -1,4 +1,4 @@
-static const char rcsid[] = "#(@) $Id: base64.c,v 1.1 2001/09/06 04:13:29 danda Exp $";
+static const char rcsid[] = "#(@) $Id: base64.c,v 1.2 2001/10/26 12:54:54 thies Exp $";
 
 /*
 
@@ -14,6 +14,7 @@ static const char rcsid[] = "#(@) $Id: base64.c,v 1.1 2001/09/06 04:13:29 danda 
 
 /*  ENCODE  --	Encode binary file into base64.  */
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "base64.h"
 

@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build2.mk,v 1.32 2005/01/19 22:27:39 sniper Exp $ 
+# $Id: build2.mk,v 1.33 2005/01/19 23:03:29 sniper Exp $ 
 #
 
 include generated_lists
@@ -32,6 +32,11 @@ acconfig_h_SOURCES = acconfig.h.in $(config_h_files)
 
 targets = $(TOUCH_FILES) configure $(config_h_in)
 
+ifeq ($(SHOW_WARNINGS), no)
+	SUPPRESS_WARNINGS = 2>&1 | (egrep -v '(AC_TRY_RUN called without default to allow cross compiling|AC_PROG_CXXCPP was called before AC_PROG_CXX|defined in acinclude.m4 but never used|AC_PROG_LEX invoked multiple times|AC_DECL_YYTEXT is expanded from...|the top level)'||true)
+	libtoolize_flags = --automake
+endif
+
 
 all: $(targets)
 
@@ -39,14 +44,12 @@ acconfig.h: $(acconfig_h_SOURCES)
 	@echo rebuilding $@
 	cat $(acconfig_h_SOURCES) > $@
 
-SUPPRESS_WARNINGS = (egrep -v '(AC_TRY_RUN called without default to allow cross compiling|AC_PROG_CXXCPP was called before AC_PROG_CXX|defined in acinclude.m4 but never used|AC_PROG_LEX invoked multiple times)'||true)
-
 $(config_h_in): configure acconfig.h
 # explicitly remove target since autoheader does not seem to work 
 # correctly otherwise (timestamps are not updated)
 	@echo rebuilding $@
 	@rm -f $@
-	@autoheader 2>&1 | $(SUPPRESS_WARNINGS)
+	@autoheader $(SUPPRESS_WARNINGS)
 
 $(TOUCH_FILES):
 	touch $(TOUCH_FILES)
@@ -54,11 +57,11 @@ $(TOUCH_FILES):
 aclocal.m4: configure.in acinclude.m4
 	@echo rebuilding $@
 	@libtoolize=`./build/shtool path glibtoolize libtoolize`; \
-	$$libtoolize --copy --automake; \
+	$$libtoolize --copy $(libtoolize_flags); \
 	ltpath=`dirname $$libtoolize`; \
 	ltfile=`cd $$ltpath/../share/aclocal; pwd`/libtool.m4; \
 	cat acinclude.m4 $$ltfile > $@
 
 configure: aclocal.m4 configure.in $(config_m4_files)
 	@echo rebuilding $@
-	@autoconf 2>&1 | $(SUPPRESS_WARNINGS)
+	@autoconf $(SUPPRESS_WARNINGS)

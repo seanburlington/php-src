@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.95.2.3 2002/05/07 21:34:19 jason Exp $ */
+/* $Id: sockets.c,v 1.95.2.4 2002/05/08 15:33:49 jason Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1263,7 +1263,7 @@ PHP_FUNCTION(socket_recv)
 		zval_dtor(buf);
 		Z_TYPE_P(buf)=IS_NULL;
 	} else {
-		recv_buf[retval+1] = '\0';
+		recv_buf[retval] = '\0';
 
 		/* Rebuild buffer zval */
 		zval_dtor(buf);

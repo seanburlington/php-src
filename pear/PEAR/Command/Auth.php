@@ -16,29 +16,26 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.3.2.1 2002/04/09 18:04:31 ssb Exp $
+// $Id: Auth.php,v 1.4.2.1 2002/04/09 18:04:31 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
-require_once "PEAR/Installer.php";
+require_once "PEAR/Remote.php";
+require_once "PEAR/Config.php";
 
 /**
- * PEAR commands for installation or deinstallation/upgrading of
- * packages.
+ * PEAR commands for managing configuration data.
  *
  */
-class PEAR_Command_Install extends PEAR_Command_Common
+class PEAR_Command_Auth extends PEAR_Command_Common
 {
-    // {{{ properties
-    // }}}
-
     // {{{ constructor
 
     /**
-     * PEAR_Command_Install constructor.
+     * PEAR_Command_Auth constructor.
      *
      * @access public
      */
-    function PEAR_Command_Install(&$ui, &$config)
+    function PEAR_Command_Auth(&$ui, &$config)
     {
         parent::PEAR_Command_Common($ui, $config);
     }
@@ -54,43 +51,60 @@ class PEAR_Command_Install extends PEAR_Command_Common
      */
     function getCommands()
     {
-        return array('install', 'uninstall', 'upgrade');
+        return array('login', 'logout');
     }
 
     // }}}
     // {{{ run()
 
+    /**
+     * Execute the command.
+     *
+     * @param string command name
+     *
+     * @param array option_name => value
+     *
+     * @param array list of additional parameters
+     *
+     * @return bool TRUE on success, FALSE for unknown commands, or
+     * a PEAR error on failure
+     *
+     * @access public
+     */
     function run($command, $options, $params)
     {
-        $installer = &new PEAR_Installer($this->config->get('php_dir'),
-                                         $this->config->get('ext_dir'),
-                                         $this->config->get('doc_dir'));
-        $installer->debug = $this->config->get('verbose');
-
+        $cf = $this->config;
         $failmsg = '';
-        $opts = array();
+        $server = $cf->get('master_server');
         switch ($command) {
-            case 'upgrade':
-                $opts['upgrade'] = true;
-                // fall through
-            case 'install': {
-                if (isset($options['f'])) {
-                    $opts['force'] = true;
+            case 'login': {
+                $remote = new PEAR_Remote($cf);
+                $username = $cf->get('username');
+                if (empty($username)) {
+                    $username = @$_ENV['USER'];
                 }
-                // XXX The ['nodeps'] option is still missing
-                if ($installer->install(@$params[0], $opts, $this->config)) {
-                    $this->ui->displayLine("install ok");
+                $this->ui->displayLine("Logging in to $server.");
+                $username = trim($this->ui->userDialog('Username', 'text', $username));
+
+                $cf->set('username', $username);
+                $password = trim($this->ui->userDialog('Password', 'password'));
+                $cf->set('password', $password);
+                $remote->expectError(401);
+                $ok = $remote->call('logintest');
+                $remote->popExpect();
+                if ($ok === true) {
+                    $this->ui->displayLine("Logged in.");
+                    $cf->store();
                 } else {
-                    $failmsg = "install failed";
+                    $this->ui->displayLine("Login failed!");
                 }
                 break;
             }
-            case 'uninstall': {
-                if ($installer->uninstall($params[0], $options)) {
-                    $this->ui->displayLine("uninstall ok");
-                } else {
-                    $failmsg = "uninstall failed";
-                }
+            case 'logout': {
+                $this->ui->displayLine("Logging out from $server.");
+                $cf->remove('username');
+                $cf->remove('password');
+                $cf->store();
                 break;
             }
             default: {
@@ -104,11 +118,6 @@ class PEAR_Command_Install extends PEAR_Command_Common
     }
 
     // }}}
-
-    function getOptions()
-    {
-        return array('f');
-    }
 }
 
 ?>

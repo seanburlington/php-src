@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.154.2.9 2001/11/13 13:54:20 rasmus Exp $ */
+/* $Id: gd.c,v 1.154.2.10 2001/11/16 12:02:30 rasmus Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1592,8 +1592,9 @@ PHP_FUNCTION(imagecolorat)
 #if HAVE_LIBGD20
 	if(gdImageTrueColor(im)) {
 		if (im->tpixels && gdImageBoundsSafe(im, Z_LVAL_PP(x), Z_LVAL_PP(y))) {
-			RETURN_LONG(im->tpixels[Z_LVAL_PP(x)][Z_LVAL_PP(y)]);
+			RETURN_LONG(gdImageTrueColorPixel(im, Z_LVAL_PP(x), Z_LVAL_PP(y)));
 		} else {
+			php_error(E_NOTICE, "%ld,%ld is out of bounds",Z_LVAL_PP(x), Z_LVAL_PP(y));
 			RETURN_FALSE;
 		}
 	} else {
@@ -1605,6 +1606,7 @@ PHP_FUNCTION(imagecolorat)
 			RETURN_LONG(im->pixels[Z_LVAL_PP(x)][Z_LVAL_PP(y)]);
 #endif
 		} else {
+			php_error(E_NOTICE, "%ld,%ld is out of bounds",Z_LVAL_PP(x), Z_LVAL_PP(y));
 			RETURN_FALSE;
 		}
 #if HAVE_LIBGD20

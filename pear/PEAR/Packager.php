@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.29 2002/03/28 23:49:34 ssb Exp $
+// $Id: Packager.php,v 1.30 2002/03/31 19:04:26 cox Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -142,6 +142,15 @@ class PEAR_Packager extends PEAR_Common
     }
 
     // }}}
+}
+
+if (!function_exists('md5_file')) {
+    function &md5_file($file) {
+        if (!$fd = @fopen($file, 'r')) {
+            return false;
+        }
+        return md5(fread($fd, filesize($file)));
+    }
 }
 
 ?>

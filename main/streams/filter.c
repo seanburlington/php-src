@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.2 2003/02/18 01:22:21 wez Exp $ */
+/* $Id: filter.c,v 1.3 2003/02/18 01:39:26 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -110,7 +110,7 @@ PHPAPI php_stream_bucket *php_stream_bucket_make_writeable(php_stream_bucket *bu
 	retval->refcount = 1;
 	retval->own_buf = 1;
 
-	php_stream_bucket_delref(bucket);
+	php_stream_bucket_delref(bucket TSRMLS_CC);
 	
 	return retval;
 }

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.26 2001/11/30 18:59:51 sniper Exp $
+dnl $Id: config.m4,v 1.26.2.1 2002/07/23 13:03:03 edink Exp $
 dnl
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -25,6 +25,7 @@ if test "$PHP_PCRE_REGEX" != "no"; then
   else
     test -f $PHP_PCRE_REGEX/pcre.h && PCRE_INCDIR=$PHP_PCRE_REGEX
     test -f $PHP_PCRE_REGEX/include/pcre.h && PCRE_INCDIR=$PHP_PCRE_REGEX/include
+    test -f $PHP_PCRE_REGEX/include/pcre/pcre.h && PCRE_INCDIR=$PHP_PCRE_REGEX/include/pcre
     
     if test -z "$PCRE_INCDIR"; then
       AC_MSG_RESULT(Could not find pcre.h in $PHP_PCRE_REGEX)

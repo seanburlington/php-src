@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.28 2003/06/04 14:21:40 hholzgra Exp $ 
+  $Id: mime_magic.c,v 1.29 2003/06/05 14:42:12 hholzgra Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -324,7 +324,7 @@ PHP_FUNCTION(mime_content_type)
 		{
 			php_stream *stream;
 
-			php_stream_from_zval(stream, &what);
+			php_stream_from_zval_no_verify(stream, &what);
 			if (stream) {
 				break;
 			}

@@ -3,7 +3,7 @@ dnl +---------------------------------------------------------------------------
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
 dnl |  backend the user chooses, this script performs the magic                    |
 dnl +------------------------------------------------------------------------------+
-dnl   $Id: config.m4,v 1.6 2001/06/30 00:48:34 sniper Exp $
+dnl   $Id: config.m4,v 1.7 2001/07/02 01:55:42 hirokawa Exp $
 
 PHP_ARG_ENABLE(xslt, whether to enable xslt support,
 [  --enable-xslt           Enable xslt support])
@@ -58,7 +58,7 @@ if test "$PHP_XSLT" != "no"; then
       if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.so; then
         AC_DEFINE(HAVE_LIBEXPAT2, 1, [ ])
         PHP_ADD_INCLUDE($i/include)
-        PHP_ADD_LIBRARY_WITH_PATH(expat, $i/lib)
+        PHP_ADD_LIBRARY_WITH_PATH(expat, $i/lib, XSLT_SHARED_LIBADD)
         found_expat=yes
       fi
     done

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.18 2001/06/01 06:40:15 sniper Exp $
+dnl $Id: config.m4,v 1.19 2001/07/02 01:55:42 hirokawa Exp $
 dnl config.m4 for extension Sablot
 
 PHP_ARG_WITH(sablot, for Sablotron XSL support,
@@ -36,7 +36,7 @@ if test "$PHP_SABLOT" != "no"; then
   for i in $PHP_EXPAT_DIR $SABLOT_DIR; do
     if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.s?; then
       AC_DEFINE(HAVE_LIBEXPAT2,1,[ ])
-      PHP_ADD_LIBRARY_WITH_PATH(expat, $i/lib)
+      PHP_ADD_LIBRARY_WITH_PATH(expat, $i/lib, SABLOT_SHARED_LIBADD)
       PHP_ADD_INCLUDE($i/include)
       AC_CHECK_LIB(sablot, SablotSetEncoding, AC_DEFINE(HAVE_SABLOT_SET_ENCODING,1,[ ]))
       testval=yes

@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.38 2004/06/07 18:03:51 fmk Exp $ */
+/* $Id: php_mssql.h,v 1.39 2005/01/18 06:29:45 fmk Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -33,8 +33,8 @@
 
 
 #define MSSQL_VERSION "7.0"
-#include "sqlfront.h"
-#include "sqldb.h"
+#include <sqlfront.h>
+#include <sqldb.h>
 
 typedef short TDS_SHORT;
 #if HAVE_FREETDS
@@ -62,6 +62,7 @@ typedef short TDS_SHORT;
 #define SQLVARBINARY SYBVARBINARY
 #ifdef SQLUNIQUE /* FreeTSD 0.61+ */
 #define SQLUNIQUE SYBUNIQUE
+#define dbfreelogin dbloginfree
 #endif
 #define DBERRHANDLE(a, b) dberrhandle(b)
 #define DBMSGHANDLE(a, b) dbmsghandle(b)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.100 2000/05/29 17:08:01 hholzgra Exp $ */
+/* $Id: php.h,v 1.101 2000/06/02 12:35:53 zeev Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -248,12 +248,7 @@ extern void php_log_err(char *log_message);
 extern int Debug(char *format, ...);
 extern int cfgparse(void);
 
-#if ZEND_NEW_ERROR_HANDLING
 #define php_error zend_error
-#else
-extern PHPAPI void php_error_cb(int type, const char *format, ...);
-#define php_error php_error_cb
-#endif
 
 
 #define zenderror phperror

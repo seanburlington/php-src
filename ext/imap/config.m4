@@ -1,6 +1,14 @@
-dnl $Id: config.m4,v 1.23 2001/02/25 04:41:18 kalowsky Exp $
+dnl $Id: config.m4,v 1.24 2001/02/26 15:17:12 kalowsky Exp $
 
-AC_DEFUN(IMAP_INC_CHK,[if test -r $i$1/rfc822.h; then IMAP_DIR=$i; IMAP_INC_DIR=$i$1])
+AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
+		AC_DEFINE(HAVE_IMAP2000, 1, [ ])
+		IMAP_DIR=$i
+		IMAP_INC_DIR=$i$1
+	elif test -r "$i$1/rfc822.h"; then 
+		IMAP_DIR=$i; 
+		IMAP_INC_DIR=$i$1
+	
+])
 
 AC_DEFUN(IMAP_LIB_CHK,[
 		str="$IMAP_DIR/$1/lib$lib.*"

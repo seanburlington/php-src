@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 1999/09/03 14:58:51 gorgo Exp $
+dnl $Id: config.m4,v 1.5 1999/10/04 15:18:17 sas Exp $
 
 AC_MSG_CHECKING(for PostgresSQL support)
 AC_ARG_WITH(pgsql,
@@ -47,7 +47,7 @@ AC_ARG_WITH(pgsql,
       AC_MSG_RESULT(yes (static))
       AC_ADD_LIBRARY_WITH_PATH(pq, $PGSQL_LIBDIR)
       AC_ADD_INCLUDE($PGSQL_INCDIR)
-      PGSQL_STATIC="libphpext_pgsql.a"
+      PGSQL_STATIC="libphpext_pgsql.la"
     fi
     AC_CHECK_FUNC(PQcmdTuples,AC_DEFINE(HAVE_PQCMDTUPLES))
     CFLAGS=$old_CFLAGS; LDFLAGS=$old_LDFLAGS; LIBS=$old_LIBS

@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.1 1999/09/03 19:54:12 zeev Exp $ */
+/* $Id: php_mysql.h,v 1.2 1999/10/04 15:18:14 sas Exp $ */
 
 #ifndef _PHP_MYSQL_H
 #define _PHP_MYSQL_H
@@ -38,7 +38,7 @@
 #define DLEXPORT
 #endif
 
-#ifdef ZTS
+#ifdef __ZTS
 #include "TSRM.h"
 #endif
 

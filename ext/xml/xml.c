@@ -17,13 +17,8 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.23 1999/10/01 13:44:07 thies Exp $ */
+/* $Id: xml.c,v 1.24 1999/10/04 15:18:22 sas Exp $ */
 #define IS_EXT_MODULE
-
-/* boldly assume that if PIC is defined, we are being compiled dynamically */
-#ifdef PIC
-# define COMPILE_DL 1
-#endif
 
 #if COMPILE_DL
 # include "dl/phpdl.h"

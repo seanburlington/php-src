@@ -1,5 +1,5 @@
-# $Id: Makefile.am,v 1.2 1999/05/12 14:21:37 thies Exp $
+# $Id: Makefile.am,v 1.3 1999/10/04 15:18:15 sas Exp $
 
 INCLUDES=@INCLUDES@ -I@top_srcdir@ -I@top_srcdir@/libzend
-noinst_LIBRARIES=libphpext_oracle.a
-libphpext_oracle_a_SOURCES=oracle.c
+noinst_LTLIBRARIES=libphpext_oracle.la
+libphpext_oracle_la_SOURCES=oracle.c

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.2 1999/09/29 15:17:01 ssb Exp $ */
+/* $Id: mod_php4.c,v 1.3 1999/10/04 15:18:25 sas Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -65,7 +65,7 @@ PHPAPI int apache_php_module_main(request_rec *r, int fd, int display_source_mod
 module MODULE_VAR_EXPORT php4_module;
 
 int saved_umask;
-static unsigned char apache_php_initialized=0;
+static unsigned char apache_php_initialized;
 
 typedef struct _php_per_dir_entry {
 	char *key;

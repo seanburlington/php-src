@@ -1,5 +1,5 @@
-# $Id: Makefile.am,v 1.2 1999/09/20 14:10:25 askalski Exp $
+# $Id: Makefile.am,v 1.3 1999/10/04 15:18:07 sas Exp $
 
 INCLUDES=@INCLUDES@ -I@top_srcdir@ -I@top_srcdir@/libzend
-noinst_LIBRARIES=libphpext_ftp.a
-libphpext_ftp_a_SOURCES=php_ftp.c ftp.c
+noinst_LTLIBRARIES=libphpext_ftp.la
+libphpext_ftp_la_SOURCES=php_ftp.c ftp.c

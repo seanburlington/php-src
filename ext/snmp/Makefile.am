@@ -1,14 +1,11 @@
-# $Id: Makefile.am,v 1.2 1999/09/03 16:04:28 gorgo Exp $
-
-phplibdir=$(libdir)/php
+# $Id: Makefile.am,v 1.3 1999/10/04 15:18:18 sas Exp $
 
 SRC=snmp.c
 INCLUDES=@INCLUDES@ @SNMP_INCLUDE@ -I@top_srcdir@ -I@top_srcdir@/libzend
-noinst_LIBRARIES=@SNMP_STATIC@
-EXTRA_LIBRARIES=libphpext_snmp.a
-libphpext_snmp_a_SOURCES=$(SRC)
+noinst_LTLIBRARIES=@SNMP_STATIC@
+EXTRA_LTLIBRARIES=libphpext_snmp.la snmp.la
+libphpext_snmp_la_SOURCES=$(SRC)
 phplib_LTLIBRARIES=@SNMP_SHARED@
-EXTRA_LTLIBRARIES=snmp.la
 snmp_la_SOURCES=$(SRC)
 snmp_la_LIBADD=@SNMP_LIBDIR@ -lsnmp @KSTAT_LIBS@
 snmp_la_LDFLAGS=-avoid-version -module -rpath $(phplibdir)

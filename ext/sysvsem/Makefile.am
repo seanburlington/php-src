@@ -1,6 +1,6 @@
-# $Id: Makefile.am,v 1.1 1999/04/22 02:48:26 ssb Exp $
+# $Id: Makefile.am,v 1.2 1999/10/04 15:18:20 sas Exp $
 
 INCLUDES=@INCLUDES@ -I@top_srcdir@ -I@top_srcdir@/libzend
-noinst_LIBRARIES=libphpext_sysvsem.a
-libphpext_sysvsem_a_SOURCES=sysvsem.c
+noinst_LTLIBRARIES=libphpext_sysvsem.la
+libphpext_sysvsem_la_SOURCES=sysvsem.c
 

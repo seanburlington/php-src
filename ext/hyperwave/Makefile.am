@@ -1,6 +1,6 @@
-# $Id: Makefile.am,v 1.1 1999/04/21 23:11:20 ssb Exp $
+# $Id: Makefile.am,v 1.2 1999/10/04 15:18:09 sas Exp $
 
 INCLUDES=@INCLUDES@ -I@top_srcdir@ -I@top_srcdir@/libzend
-noinst_LIBRARIES=libphpext_hyperwave.a
-libphpext_hyperwave_a_SOURCES=hw.c hg_comm.c
+noinst_LTLIBRARIES=libphpext_hyperwave.la
+libphpext_hyperwave_la_SOURCES=hw.c hg_comm.c
 

@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: apache.c,v 1.1 1999/09/29 15:17:01 ssb Exp $ */
+/* $Id: sapi_apache.c,v 1.1 1999/10/04 15:18:25 sas Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"

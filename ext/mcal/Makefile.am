@@ -1,6 +1,6 @@
-# $Id: Makefile.am,v 1.1 1999/09/01 20:30:26 musone Exp $
+# $Id: Makefile.am,v 1.2 1999/10/04 15:18:12 sas Exp $
 
 INCLUDES=@INCLUDES@ -I@top_srcdir@ -I@top_srcdir@/libzend
-noinst_LIBRARIES=libphpext_mcal.a
-libphpext_mcal_a_SOURCES=php3_mcal.c
+noinst_LTLIBRARIES=libphpext_mcal.la
+libphpext_mcal_la_SOURCES=php3_mcal.c
 

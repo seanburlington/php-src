@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db4.c,v 1.5 2002/12/30 13:09:03 helly Exp $ */
+/* $Id: dba_db4.c,v 1.6 2002/12/30 17:42:55 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -80,6 +80,10 @@ DBA_OPEN_FUNC(db4)
 		convert_to_long_ex(info->argv[0]);
 		filemode = Z_LVAL_PP(info->argv[0]);
 	}
+
+#ifdef DB_FCNTL_LOCKING
+	gmode |= DB_FCNTL_LOCKING;
+#endif
 
 	if ((err=db_create(&dbp, NULL, 0)) == 0) {
 	    dbp->set_errcall(dbp, php_dba_db4_errcall_fcn);

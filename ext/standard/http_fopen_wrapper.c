@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.15 2001/07/31 07:09:45 zeev Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.16 2001/07/31 23:32:24 zeev Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -70,7 +70,7 @@
 
 /* {{{ php_fopen_url_wrap_http
  */
-FILE *php_fopen_url_wrap_http(char *path, char *mode, int options, int *issock, int *socketd, char **opened_path TSRMLS_DC)
+FILE *php_fopen_url_wrap_http(const char *path, char *mode, int options, int *issock, int *socketd, char **opened_path TSRMLS_DC)
 {
 	FILE *fp=NULL;
 	php_url *resource=NULL;

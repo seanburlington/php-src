@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.18 2001/07/31 07:09:45 zeev Exp $ */
+/* $Id: php_zlib.h,v 1.19 2001/07/31 23:32:24 zeev Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -64,7 +64,7 @@ PHP_FUNCTION(gzinflate);
 PHP_FUNCTION(gzencode);
 PHP_FUNCTION(ob_gzhandler);
 
-FILE *zlib_fopen_wrapper(char *path, char *mode, int options, int *issock, int *socketd, char **opened_path TSRMLS_DC);
+FILE *zlib_fopen_wrapper(const char *path, char *mode, int options, int *issock, int *socketd, char **opened_path TSRMLS_DC);
 int php_enable_output_compression(int buffer_size);
 
 

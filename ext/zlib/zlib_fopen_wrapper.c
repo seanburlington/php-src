@@ -15,7 +15,7 @@
    | Authors: Hartmut Holzgraefe <hartmut@six.de>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.5 2001/07/31 07:09:46 zeev Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.6 2001/07/31 23:32:24 zeev Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 
@@ -59,7 +59,7 @@ static COOKIE_IO_FUNCTIONS_T gz_cookie_functions =
 , gz_closer
 };
 
-FILE *zlib_fopen_wrapper(char *path, char *mode, int options, int *issock, int *socketd, char **opened_path TSRMLS_DC)
+FILE *zlib_fopen_wrapper(const char *path, char *mode, int options, int *issock, int *socketd, char **opened_path TSRMLS_DC)
 {
 	struct gz_cookie *gc = NULL;
 	FILE *fp;

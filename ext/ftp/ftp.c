@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.25 2000/09/13 22:00:31 derick Exp $ */
+/* $Id: ftp.c,v 1.26 2000/10/27 20:47:36 sniper Exp $ */
 
 #include "php.h"
 
@@ -732,7 +732,7 @@ ftp_putcmd(ftpbuf_t *ftp, const char *cmd, const char *args)
 	char		*data;
 
 	/* build the output buffer */
-	if (args) {
+	if (args && args[0]) {
 		/* "cmd args\r\n\0" */
 		if (strlen(cmd) + strlen(args) + 4 > FTP_BUFSIZE)
 			return 0;

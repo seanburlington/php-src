@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.116.2.2 2002/08/24 13:13:19 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.116.2.3 2002/08/24 13:16:23 zeev Exp $ */
 
 
 /* TODO:
@@ -1146,7 +1146,7 @@ PHP_FUNCTION(mysql_db_query)
 			break;
 	}
 	
-	if (!strcasecmp(get_active_function_name(), "mysql")) {
+	if (!strcasecmp(get_active_function_name(TSRMLS_C), "mysql")) {
 		zend_error(E_NOTICE, "%s is deprecated; use mysql_db_query()", get_active_function_name(TSRMLS_C));
 	}
 	

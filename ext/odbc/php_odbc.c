@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.126 2002/04/30 13:17:48 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.127 2002/06/14 00:07:13 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -30,13 +30,12 @@
 #include "php_globals.h"
 
 #include "ext/standard/info.h"
-
 #include "ext/standard/php_string.h"
 #include "ext/standard/php_standard.h"
 
 #include "php_odbc.h"
+#include "php_odbc_includes.h"
 #include "php_globals.h"
-
 
 #if HAVE_UODBC
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.88 2002/10/02 13:25:38 helly Exp $ */
+/* $Id: streams.c,v 1.89 2002/10/03 16:06:41 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -519,8 +519,10 @@ PHPAPI size_t _php_stream_read(php_stream *stream, char *buf, size_t size TSRMLS
 		didread += toread;
 	}
 
-	if (size == 0)
+	if (size == 0) {
+		stream->position += didread;
 		return didread;
+	}
 	
 	if (stream->flags & PHP_STREAM_FLAG_NO_BUFFER || stream->chunk_size == 1) {
 		if (stream->filterhead) {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.65 2000/10/29 09:14:54 thies Exp $ */
+/* $Id: xml.c,v 1.65.2.1 2000/12/13 23:02:10 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -358,7 +358,7 @@ xml_call_handler(xml_parser *parser, zval *handler, int argc, zval **argv)
 		retval->type = IS_BOOL;
 		retval->value.lval = 0;
 
-		result = call_user_function(EG(function_table), parser->object, handler, retval, argc, argv);
+		result = call_user_function(EG(function_table), &parser->object, handler, retval, argc, argv);
 
 		if (result == FAILURE) {
 			zval **method;

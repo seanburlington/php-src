@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.58 2002/02/28 08:26:49 sebastian Exp $ */
+/* $Id: reg.c,v 1.58.2.1 2002/05/05 08:39:57 hirokawa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -371,7 +371,7 @@ PHPAPI char *php_reg_replace(const char *pattern, const char *replace, const cha
 					&& subs[walk[1] - '0'].rm_so > -1
 					&& subs[walk[1] - '0'].rm_eo > -1
 					/* this next case shouldn't happen. it does. */
-					&& subs[walk[1] - '0'].rm_so < subs[walk[1] - '0'].rm_eo) {
+					&& subs[walk[1] - '0'].rm_so <= subs[walk[1] - '0'].rm_eo) {
 					tmp = subs[walk[1] - '0'].rm_eo
 						- subs[walk[1] - '0'].rm_so;
 					memcpy (walkbuf,

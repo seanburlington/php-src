@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.60 2004/11/25 23:44:20 iliaa Exp $ */
+/* $Id: tidy.c,v 1.61 2004/12/30 11:56:18 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -429,14 +429,16 @@ static void php_tidy_quick_repair(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_fil
 	
 	/* We can't use TIDY_APPLY_CONFIG_ZVAL() here, it uses RETURN_FALSE */
 
-	if(Z_TYPE_P(config) == IS_ARRAY) {
-		_php_tidy_apply_config_array(doc, HASH_OF(config) TSRMLS_CC);
-	} else {
-		convert_to_string_ex(&config);
-		TIDY_SAFE_MODE_CHECK(Z_STRVAL_P(config));
-		if (tidyLoadConfig(doc, Z_STRVAL_P(config)) < 0) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not load configuration file '%s'", Z_STRVAL_P(config));
-			RETVAL_FALSE;
+	if (ZEND_NUM_ARGS() > 1) {
+		if(Z_TYPE_P(config) == IS_ARRAY) {
+			_php_tidy_apply_config_array(doc, HASH_OF(config) TSRMLS_CC);
+		} else {
+			convert_to_string_ex(&config);
+			TIDY_SAFE_MODE_CHECK(Z_STRVAL_P(config));
+			if (tidyLoadConfig(doc, Z_STRVAL_P(config)) < 0) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not load configuration file '%s'", Z_STRVAL_P(config));
+				RETVAL_FALSE;
+			}
 		}
 	}
 
@@ -954,7 +956,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.60 2004/11/25 23:44:20 iliaa Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.61 2004/12/30 11:56:18 tony2001 Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

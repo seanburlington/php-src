@@ -1,6 +1,4 @@
-# $Id: Makefile.am,v 1.4 1999/09/02 18:22:07 ssb Exp $
-
-phplibdir=$(libdir)/php
+# $Id: Makefile.am,v 1.5 1999/09/24 15:35:35 ssb Exp $
 
 SRC=xml.c
 INCLUDES=@INCLUDES@ @XML_INCLUDE@ -I@top_srcdir@ -I@top_srcdir@/libzend

@@ -1,5 +1,5 @@
 # $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.11 1999/09/17 01:47:15 sas Exp $
+# $Id: config.m4,v 1.12 1999/09/24 15:35:35 ssb Exp $
 
 AC_MSG_CHECKING(for XML support)
 AC_ARG_WITH(xml,
@@ -7,19 +7,7 @@ AC_ARG_WITH(xml,
                           in DIR if specified.  Set DIR to "shared" to
                           build as a dl, or "shared,DIR" to build as a dl
                           and still specify DIR.],[
-  case $withval in
-    shared)
-      shared=yes
-      withval=yes
-      ;;
-    shared,*)
-      shared=yes
-      withval=`echo $withval | sed -e 's/^shared,//'`
-      ;;
-    *)
-      shared=no
-      ;;
-  esac
+  PHP_WITH_SHARED
   if test "$withval" != "no"; then
     if test "$shared" = "yes"; then
       AC_MSG_RESULT([yes (shared)])

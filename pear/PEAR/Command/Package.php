@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.17 2002/04/09 13:49:47 cox Exp $
+// $Id: Package.php,v 1.18 2002/04/09 17:15:17 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Packager.php';
@@ -293,8 +293,7 @@ class PEAR_Command_Package extends PEAR_Command_Common
 
             case 'package-validate': {
                 if (sizeof($params) < 1) {
-                    $help = $this->getHelp($command);
-                    return $this->raiseError("$command: missing parameter: $help[0]");
+                    $params[0] = "package.xml";
                 }
                 $obj = new PEAR_Common;
                 $info = null;

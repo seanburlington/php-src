@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.130 2002/04/27 17:03:32 thies Exp $ */
+/* $Id: zlib.c,v 1.131 2002/04/27 18:41:38 sas Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -72,6 +72,17 @@
 #define PHPWRITE(a,n) php_write((a),(n) TSRMLS_CC)
 #endif
 #endif
+
+#include "ext/standard/php_smart_str.h"
+
+#define ADD_CL_HEADER(len) do {								\
+			smart_str str = {0};							\
+															\
+			smart_str_appends(&str, "Content-Length: ");	\
+			smart_str_append_long(&str, len);				\
+			smart_str_0(&str);								\
+			sapi_add_header(str.c, str.len, 0);				\
+		} while(0)
 
 #define OS_CODE			0x03 /* FIXME */
 #define CODING_GZIP		1
@@ -927,12 +938,9 @@ PHP_FUNCTION(ob_gzhandler)
 
 		if (return_original) {
 			zval_dtor(return_value);
-		} else if (do_start && do_end) {
-			char lenbuf[64];
-			
-			sprintf(lenbuf,"Content-Length: %d",Z_STRLEN_P(return_value));
-			sapi_add_header(lenbuf,strlen(lenbuf), 1);
-		}
+		} else if (do_start && do_end)
+			ADD_CL_HEADER(Z_STRLEN_P(return_value));
+		
 	} else {
 		return_original = 1;
 	}
@@ -956,12 +964,8 @@ static void php_gzip_output_handler(char *output, uint output_len, char **handle
 	if (php_deflate_string(output, output_len, handled_output, handled_output_len, ZLIBG(ob_gzip_coding), do_start, do_end, ZLIBG(output_compression_level) TSRMLS_CC)!=SUCCESS) {
 		zend_error(E_ERROR, "Compression failed");
 	} else {
-		if (do_start && do_end) {
-			char lenbuf[64];
-
-			sprintf(lenbuf,"Content-Length: %d", *handled_output_len);
-			sapi_add_header(lenbuf,strlen(lenbuf), 1);
-		}
+		if (do_start && do_end)
+		   ADD_CL_HEADER(*handled_output_len);	
 	}
 }
 /* }}} */

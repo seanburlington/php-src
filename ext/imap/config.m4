@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.37 2001/08/03 05:17:17 sniper Exp $
+dnl $Id: config.m4,v 1.38 2001/08/03 19:36:58 jon Exp $
 dnl
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
@@ -69,7 +69,7 @@ AC_DEFUN(PHP_IMAP_SSL_CHK, [
     PHP_ADD_LIBRARY_DEFER(crypto,, IMAP_SHARED_LIBADD)
   else
     old_LIBS=$LIBS
-    LIBS="$LIBS -L$IMAP_LIBDIR -lc-client"
+    LIBS="$LIBS -L$IMAP_LIBDIR -l$IMAP_LIB"
     if test $PHP_KERBEROS != "no"; then
       LIBS="$LIBS -L$PHP_KERBEROS/lib -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err"
     fi

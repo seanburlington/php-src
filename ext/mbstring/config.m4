@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.51 2004/06/10 14:06:17 iliaa Exp $
+dnl $Id: config.m4,v 1.51.2.1 2004/07/19 05:09:46 moriyoshi Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -84,6 +84,7 @@ int main() { return foo(10, "", 3.14); }
 
     PHP_MBSTRING_ADD_CFLAG([-DNOT_RUBY])
     PHP_MBSTRING_ADD_BUILD_DIR([oniguruma])
+    PHP_MBSTRING_ADD_BUILD_DIR([oniguruma/enc])
     PHP_MBSTRING_ADD_INCLUDE([oniguruma])
     PHP_MBSTRING_ADD_CONFIG_HEADER([oniguruma/config.h])
 

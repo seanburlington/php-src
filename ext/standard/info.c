@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.187 2002/08/04 22:49:48 helly Exp $ */
+/* $Id: info.c,v 1.188 2002/08/05 19:00:09 helly Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -36,6 +36,14 @@
 #include "zend_highlight.h"
 #ifdef HAVE_SYS_UTSNAME_H
 #include <sys/utsname.h>
+#endif
+
+#ifdef PHP_ATOM_INC
+#include "php_have_iconv.h"
+#endif
+#if HAVE_ICONV
+#include "ext/iconv/php_iconv.h"
+ZEND_EXTERN_MODULE_GLOBALS(iconv)
 #endif
 
 #define SECTION(name)  PUTS("<h2 align=\"center\">" name "</h2>\n")
@@ -203,12 +211,13 @@ PHPAPI char *php_get_uname(char mode)
  */
 PHPAPI void php_print_info(int flag TSRMLS_DC)
 {
-	char **env, *tmp1, *tmp2, *charset = NULL;
+	char **env, *tmp1, *tmp2;
+	const char *charset = NULL;
 	char *php_uname;
 	int expose_php = INI_INT("expose_php");
 	time_t the_time;
 	struct tm *ta, tmbuf;
-	
+
 
 	the_time = time(NULL);
 	ta = php_localtime_r(&the_time, &tmbuf);
@@ -219,6 +228,11 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 	if (SG(default_charset)) {
 		charset = SG(default_charset);
 	}
+#if HAVE_ICONV
+	if (php_ob_handler_used("ob_iconv_handler" TSRMLS_CC)) {
+		charset = ICONVG(output_encoding);
+	}
+#endif
 	if (!charset || !charset[0]) {
 		charset = "US-ASCII";
 	}

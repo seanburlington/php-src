@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.19 2002/06/28 02:27:02 sniper Exp $
+dnl $Id: config.m4,v 1.20 2002/09/04 13:52:41 kalowsky Exp $
 dnl
 
 PHP_ARG_WITH(mm,for mm support,
@@ -9,9 +9,6 @@ PHP_ARG_ENABLE(session, whether to enable PHP sessions,
 [  --disable-session       Disable session support], yes)
 
 if test "$PHP_SESSION" != "no"; then
-  AC_CHECK_FUNCS(pread pwrite)
-  PHP_MISSING_PWRITE_DECL
-  PHP_MISSING_PREAD_DECL
   PHP_NEW_EXTENSION(session, session.c mod_files.c mod_mm.c mod_user.c, $ext_shared)
   PHP_SUBST(SESSION_SHARED_LIBADD)
   AC_DEFINE(HAVE_PHP_SESSION,1,[ ])

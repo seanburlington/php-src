@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.39 2002/02/06 07:25:51 yohgaki Exp $ */
+/* $Id: php_pgsql.h,v 1.39.2.1 2002/10/24 09:57:25 hyanantha Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -34,6 +34,8 @@ extern zend_module_entry pgsql_module_entry;
 #ifdef PHP_WIN32
 #define INV_WRITE            0x00020000
 #define INV_READ             0x00040000
+#elif defined NETWARE
+#include <libpq-fs.h>
 #else
 #include <libpq/libpq-fs.h>
 #endif

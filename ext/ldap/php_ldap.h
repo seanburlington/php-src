@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ldap.h,v 1.25 2002/01/04 20:56:03 venaas Exp $ */
+/* $Id: php_ldap.h,v 1.25.2.1 2002/10/24 09:53:21 hyanantha Exp $ */
 
 #ifndef PHP_LDAP_H
 #define PHP_LDAP_H
@@ -89,9 +89,11 @@ PHP_FUNCTION(ldap_parse_reference);
 PHP_FUNCTION(ldap_rename);
 #endif
 
+#ifndef NETWARE		/* The below function not supported on NetWare */
 #if LDAP_API_VERSION > 2000
 PHP_FUNCTION(ldap_start_tls);
 #endif
+#endif	/* NETWARE */
 
 #if defined(LDAP_API_FEATURE_X_OPENLDAP) && defined(HAVE_3ARG_SETREBINDPROC)
 PHP_FUNCTION(ldap_set_rebind_proc);

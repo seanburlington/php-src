@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.80 2002/03/02 17:08:09 hholzgra Exp $ */
+/* $Id: math.c,v 1.80.2.1 2002/04/01 09:21:29 derick Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -138,7 +138,7 @@ PHP_FUNCTION(round)
 			return_val = (Z_TYPE_PP(value) == IS_LONG) ?
 							(double)Z_LVAL_PP(value) : Z_DVAL_PP(value);
 
-			f = pow(10.0, places);
+			f = pow(10.0, (double) places);
 
 			return_val *= f;
 			if (return_val >= 0.0)

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.189 2002/09/11 18:40:56 derick Exp $ */
+/* $Id: array.c,v 1.190 2002/09/11 23:09:11 edink Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2621,7 +2621,7 @@ out:
 }
 /* }}} */
 
-static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior TSRMLS_DC)
+static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior)
 {
 	zval ***args = NULL;
 	HashTable *hash;
@@ -2756,7 +2756,7 @@ out:
    Returns the entries of arr1 that have values which are not present in any of the others arguments */
 PHP_FUNCTION(array_diff)
 {
-	php_array_diff(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0 TSRMLS_CC);
+	php_array_diff(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 }
 /* }}} */
 
@@ -2764,7 +2764,7 @@ PHP_FUNCTION(array_diff)
    Returns the entries of arr1 that have values which are not present in any of the others arguments but do additional checks whether the keys are equal */
 PHP_FUNCTION(array_diff_assoc)
 {
-	php_array_diff(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1 TSRMLS_CC);
+	php_array_diff(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
 }
 /* }}} */
 

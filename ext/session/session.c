@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.402 2004/12/09 14:14:21 tony2001 Exp $ */
+/* $Id: session.c,v 1.403 2004/12/09 17:15:52 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1339,8 +1339,7 @@ PHP_FUNCTION(session_module_name)
 
 		if (PS(mod) && PS(mod)->s_name) {
 			RETVAL_STRING(safe_estrdup(PS(mod)->s_name), 0);
-		}
-		else {
+		} else {
 			RETVAL_EMPTY_STRING();
 		}
 		
@@ -1348,8 +1347,7 @@ PHP_FUNCTION(session_module_name)
 	} else {
 		if (PS(mod) && PS(mod)->s_name) {
 			RETURN_STRING(safe_estrdup(PS(mod)->s_name), 0);
-		}
-		else {
+		} else {
 			RETURN_EMPTY_STRING();
 		}
 	}

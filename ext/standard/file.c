@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.205.2.4 2002/08/27 00:22:17 helly Exp $ */
+/* $Id: file.c,v 1.205.2.5 2002/09/02 14:36:20 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1265,8 +1265,8 @@ PHP_FUNCTION(fwrite)
 		socketd = *(int *) what;
 	}
 
+	buffer = estrndup(Z_STRVAL_PP(arg2), Z_STRLEN_PP(arg2));
 	if (!arg3 && PG(magic_quotes_runtime)) {
-		buffer = estrndup(Z_STRVAL_PP(arg2), Z_STRLEN_PP(arg2));
 		php_stripslashes(buffer, &num_bytes TSRMLS_CC);
 	}
 

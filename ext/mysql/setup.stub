@@ -1,0 +1,6 @@
+# $Id: setup.stub,v 1.1 1999/04/21 21:22:53 ssb Exp $
+
+define_option with-mysql 'mysql support?' yesnodir \
+    "defs" \
+'    Whether to include mysql support.'
+	

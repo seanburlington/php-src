@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.15 2004/01/20 20:59:45 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.16 2004/01/26 22:30:24 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -880,6 +880,9 @@ static INLINE void spl_limit_it_seek(spl_dual_it_object *intern, long pos TSRMLS
 		INIT_PZVAL(&zpos);
 		ZVAL_LONG(&zpos, pos);
 		zend_call_method_with_1_params(&intern->inner.zobject, intern->inner.ce, NULL, "seek", NULL, &zpos);
+		spl_dual_it_free(intern TSRMLS_CC);
+		zend_user_it_free_current(intern->inner.iterator TSRMLS_CC);
+		spl_dual_it_fetch(intern, 1 TSRMLS_CC);
 		intern->current.pos = pos;
 	} else {
 		/* emulate the forward seek, by next() calls */

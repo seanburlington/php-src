@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.117 2001/06/06 13:05:53 rasmus Exp $ */
+/* $Id: fopen_wrappers.c,v 1.118 2001/07/10 18:49:47 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -247,16 +247,16 @@ PHPAPI int php_check_open_basedir(char *path)
  */
 static FILE *php_fopen_and_set_opened_path(const char *path, char *mode, char **opened_path)
 {
-		FILE *fp;
+	FILE *fp;
 
-		if (php_check_open_basedir((char *)path)) {
-			return NULL;
-		}
-		fp = VCWD_FOPEN(path, mode);
-		if (fp && opened_path) {
-			*opened_path = expand_filepath(path,NULL);
-		}
-		return fp;
+	if (php_check_open_basedir((char *)path)) {
+		return NULL;
+	}
+	fp = VCWD_FOPEN(path, mode);
+	if (fp && opened_path) {
+		*opened_path = expand_filepath(path,NULL);
+	}
+	return fp;
 }
 /* }}} */
 

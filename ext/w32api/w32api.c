@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: w32api.c,v 1.5.2.1 2002/11/27 00:40:02 fmk Exp $ */
+/* $Id: w32api.c,v 1.5.2.2 2003/04/16 20:03:13 moriyoshi Exp $ */
 
 /*
  * Win32 API Extension for PHP 4
@@ -82,7 +82,7 @@
  * static int Win32::UnregisterFunction(string FunctionName)
  * ---------------------------------------------------------
  *
- * Allows the PHP programmer to force a funciton to be unregistered saving on memory resources. Can
+ * Allows the PHP programmer to force a function to be unregistered saving on memory resources. Can
  * be useful in long running scripts.
  *
  * Returns TRUE on success, FALSE on error.
@@ -576,7 +576,7 @@ static int php_w32api_load_function (char *definition, int definition_len, int f
 	if(zend_hash_add(&WG(win32_ce)->function_table, (*fh)->function_name,
 					 strlen((*fh)->function_name) + 1, &function, sizeof(zend_function), NULL) == FAILURE)
 	{
-		php_error(E_ERROR, "Could not register funciton %s into function table", (*fh)->function_name);
+		php_error(E_ERROR, "Could not register function %s into function table", (*fh)->function_name);
 		zend_hash_del(WG(funcs), (*fh)->function_name, strlen((*fh)->function_name) +1);
 
 		return FAILURE;;

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.526 2004/11/15 13:42:21 derick Exp $ -*- autoconf -*-
+dnl ## $Id: configure.in,v 1.527 2004/12/06 20:39:20 derick Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -981,7 +981,7 @@ fi
 
 if test "$abs_srcdir" != "$abs_builddir"; then
   INCLUDES="$INCLUDES -I\$(top_srcdir)/main -I\$(top_srcdir)/Zend"
-  INCLUDES="$INCLUDES -I\$(top_srcdir)/TSRM"
+  INCLUDES="$INCLUDES -I\$(top_srcdir)/TSRM -I\$(top_builddir)/"
 fi
 
 ZEND_EXTRA_LIBS="$LIBS"

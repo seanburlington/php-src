@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 4                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2002 The PHP Group                                |
+  | Copyright (c) 1997-2003 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 2.02 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ming.h,v 1.8.4.2 2003/07/11 07:48:34 sniper Exp $ */
+/* $Id: php_ming.h,v 1.8.4.3 2003/07/14 16:02:29 sniper Exp $ */
 
 #ifndef _PHP_MING_H
 #define _PHP_MING_H

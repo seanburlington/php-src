@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.45.4.7 2002/10/08 02:17:02 gschlossnagle Exp $ */
+/* $Id: php_apache.c,v 1.45.4.8 2002/10/08 06:25:02 gschlossnagle Exp $ */
 
 #include "php_apache_http.h"
 
@@ -968,6 +968,7 @@ PHP_FUNCTION(apache_request_send_http_header)
         r->content_type = pstrdup(r->pool, type);
     }
     ap_send_http_header(r);
+    SG(headers_sent) = 1;
     AP(headers_sent) = 1;
     RETURN_TRUE;
 }
@@ -980,6 +981,7 @@ PHP_FUNCTION(apache_request_basic_http_header)
     APREQ_GET_REQUEST(id, r);
 
     ap_basic_http_header((request_rec *)SG(server_context));
+    SG(headers_sent) = 1;
     AP(headers_sent) = 1;
     RETURN_TRUE;
 }
@@ -992,6 +994,7 @@ PHP_FUNCTION(apache_request_send_http_trace)
     APREQ_GET_REQUEST(id, r);
 
     ap_send_http_trace((request_rec *)SG(server_context));
+    SG(headers_sent) = 1;
     AP(headers_sent) = 1;
     RETURN_TRUE;
 }
@@ -1004,6 +1007,7 @@ PHP_FUNCTION(apache_request_send_http_options)
     APREQ_GET_REQUEST(id, r);
 
     ap_send_http_options((request_rec *)SG(server_context));
+    SG(headers_sent) = 1;
     AP(headers_sent) = 1;
     RETURN_TRUE;
 }
@@ -1270,6 +1274,7 @@ PHP_FUNCTION(apache_request_send_header_field)
     APREQ_GET_REQUEST(id, r);
 
     ap_send_header_field(r, Z_STRVAL_PP(fieldname), Z_STRVAL_PP(fieldval));
+    SG(headers_sent) = 1;
     AP(headers_sent) = 1;
 }
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.66 2002/12/12 13:25:51 moriyoshi Exp $ */
+/* $Id: html.c,v 1.67 2002/12/12 14:50:58 iliaa Exp $ */
 
 #include "php.h"
 #if PHP_WIN32
@@ -130,7 +130,7 @@ static entity_table_t ent_uni_greek[] = {
 	/* 938 - 944 are not mapped */
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 	"alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta",
-	"iota", "kappa", "lamda", "mu", "nu", "x1", "omicron", "p1", "rho",
+	"iota", "kappa", "lambda", "mu", "nu", "x1", "omicron", "p1", "rho",
 	"sigmaf", "sigma", "tau", "upsilon", "ph1", "ch1", "ps1", "omega",
 	/* 970 - 976 are not mapped */
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL,

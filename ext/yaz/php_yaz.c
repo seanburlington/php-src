@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.2 2000/06/05 19:47:45 andi Exp $ */
+/* $Id: php_yaz.c,v 1.3 2000/06/10 03:35:56 sas Exp $ */
 
 #include "php.h"
 
@@ -1584,8 +1584,8 @@ zend_module_entry yaz_module_entry = {
 	STANDARD_MODULE_PROPERTIES
 };
 
-#if COMPILE_DL
-DLEXPORT zend_module_entry *get_module(void) { return &yaz_module_entry; }
+#ifdef COMPILE_DL_YAZ
+ZEND_GET_MODULE(yaz)
 #endif
 
 

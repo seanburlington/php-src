@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.80 2001/05/21 21:06:07 jmoore Exp $ */
+/* $Id: pdf.c,v 1.81 2001/05/21 22:35:55 derick Exp $ */
 /* Id: pdf.c,v 1.73 2001/02/26 06:07:11 andi Exp  */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
@@ -27,7 +27,7 @@
 #include "php.h"
 #include "php_ini.h"
 #include "php_globals.h"
-#include "zend/zend_list.h"
+#include "zend_list.h"
 #include "ext/standard/head.h"
 #include "ext/standard/info.h"
 #include "ext/standard/file.h"
@@ -316,7 +316,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.80 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.81 $" );
 	php_info_print_table_end();
 
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.49 2000/11/02 23:08:05 andi Exp $ */
+/* $Id: filestat.c,v 1.49.2.1 2000/12/07 19:15:02 sas Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -709,12 +709,12 @@ FileFunction(PHP_FN(file_exists),15)
 
 /* {{{ proto array lstat(string filename)
    Give information about a file or symbolic link */
-FileFunction(PHP_FN(lstat),16)
+FileFunction(php_if_lstat,16)
 /* }}} */
 
 /* {{{ proto array stat(string filename)
    Give information about a file */
-FileFunction(PHP_FN(stat),17)
+FileFunction(php_if_stat,17)
 /* }}} */
 
 /*

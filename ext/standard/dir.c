@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.50 2000/11/04 17:15:00 andi Exp $ */
+/* $Id: dir.c,v 1.50.2.1 2000/12/07 19:15:02 sas Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -92,7 +92,7 @@ static zend_class_entry *dir_class_entry_ptr;
 static zend_function_entry php_dir_class_functions[] = {
 	PHP_FALIAS(close,	closedir,	NULL)
 	PHP_FALIAS(rewind,	rewinddir,	NULL)
-	PHP_FALIAS(read,	readdir,	NULL)
+	PHP_STATIC_FE("read", php_if_readdir, NULL)
 	{NULL, NULL, NULL}
 };
 
@@ -294,7 +294,7 @@ PHP_FUNCTION(rewinddir)
 /* {{{ proto string readdir([int dir_handle])
    Read directory entry from dir_handle */
 
-PHP_FUNCTION(readdir)
+PHP_NAMED_FUNCTION(php_if_readdir)
 {
 	pval **id, **tmp, *myself;
 	php_dir *dirp;

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.125 2000/11/22 10:08:25 dbeu Exp $ */
+/* $Id: file.c,v 1.125.2.1 2000/12/07 19:15:02 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -500,7 +500,7 @@ PHP_FUNCTION(tempnam)
 /* }}} */
 /* {{{ proto int tmpfile(void)
    Create a temporary file that will be deleted automatically after use */
-PHP_FUNCTION(tmpfile)
+PHP_NAMED_FUNCTION(php_if_tmpfile)
 {
 	FILE *fp;
 	if (ARG_COUNT(ht) != 0) {
@@ -518,7 +518,7 @@ PHP_FUNCTION(tmpfile)
 /* {{{ proto int fopen(string filename, string mode [, int use_include_path])
    Open a file or a URL and return a file pointer */
 
-PHP_FUNCTION(fopen)
+PHP_NAMED_FUNCTION(php_if_fopen)
 {
 	pval **arg1, **arg2, **arg3;
 	FILE *fp;
@@ -1552,7 +1552,7 @@ PHP_FUNCTION(unlink)
 
 /* {{{ proto int ftruncate (int fp, int size)
    Truncate file to 'size' length */
-PHP_FUNCTION(ftruncate)
+PHP_NAMED_FUNCTION(php_if_ftruncate)
 {
 	zval **fp , **size;
 	short int ret;
@@ -1581,7 +1581,7 @@ PHP_FUNCTION(ftruncate)
 
 /* {{{ proto int fstat(int fp)
    Stat() on a filehandle */
-PHP_FUNCTION(fstat)
+PHP_NAMED_FUNCTION(php_if_fstat)
 {
 	zval **fp;
 	int type;

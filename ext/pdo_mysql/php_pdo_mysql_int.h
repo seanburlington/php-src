@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql_int.h,v 1.8 2004/05/20 16:13:13 iliaa Exp $ */
+/* $Id: php_pdo_mysql_int.h,v 1.9 2004/05/20 16:17:37 wez Exp $ */
 
 #ifndef PHP_PDO_MYSQL_INT_H
 #define PHP_PDO_MYSQL_INT_H
@@ -62,8 +62,8 @@ typedef struct {
 extern pdo_driver_t pdo_mysql_driver;
 
 extern int _pdo_mysql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *file, int line TSRMLS_DC);
-#define pdo_mysql_error(s) _pdo_mysql_error(s, NULL, __FILE__, __LINE__ TSRMLS_DC)
-#define pdo_mysql_error_stmt(s) _pdo_mysql_error(stmt->dbh, stmt, __FILE__, __LINE__ TSRMLS_DC)
+#define pdo_mysql_error(s) _pdo_mysql_error(s, NULL, __FILE__, __LINE__ TSRMLS_CC)
+#define pdo_mysql_error_stmt(s) _pdo_mysql_error(stmt->dbh, stmt, __FILE__, __LINE__ TSRMLS_CC)
 
 extern struct pdo_stmt_methods mysql_stmt_methods;
 #endif

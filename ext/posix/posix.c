@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.40 2002/03/05 16:04:04 mfischer Exp $ */
+/* $Id: posix.c,v 1.41 2002/03/06 11:26:05 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -128,7 +128,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.40 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.41 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -852,7 +852,7 @@ PHP_FUNCTION(posix_getpwuid)
 
 /* {{{ posix_addlimit
  */
-static int posix_addlimit(int limit, char *name, zval *return_value) {
+static int posix_addlimit(int limit, char *name, zval *return_value TSRMLS_DC) {
 	int result;
 	struct rlimit rl;
 	char hard[80];
@@ -956,7 +956,7 @@ PHP_FUNCTION(posix_getrlimit)
 	}
 
 	for (l=limits; l->name; l++) {
-		if (posix_addlimit(l->limit, l->name, return_value) == FAILURE)
+		if (posix_addlimit(l->limit, l->name, return_value TSRMLS_CC) == FAILURE)
 			RETURN_FALSE;
 	}
 }

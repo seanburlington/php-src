@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.84 2001/12/02 16:17:51 mfischer Exp $ */
+/* $Id: php_domxml.c,v 1.85 2001/12/02 17:40:38 mfischer Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1888,7 +1888,7 @@ PHP_FUNCTION(domxml_elem_get_attribute)
 }
 /* }}} */
 
-/* {{{ proto bool domxml_elem_set_attribute(string attrname, string value)&name, &name_len, &value, &value_len
+/* {{{ proto bool domxml_elem_set_attribute(string attrname, string value)
    Sets value of given attribute */
 PHP_FUNCTION(domxml_elem_set_attribute)
 {

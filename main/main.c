@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.428 2002/03/04 18:46:54 sas Exp $ */
+/* $Id: main.c,v 1.429 2002/03/04 19:08:17 derick Exp $ */
 
 /* {{{ includes
  */
@@ -373,19 +373,19 @@ PHPAPI void php_html_puts(const char *str, uint size TSRMLS_DC)
 				smart_str_appendl(&s, "<br />", sizeof("<br />")-1);
 				break;
 			case '<':
-				smart_str_appends(&s, "&lt;");
+				smart_str_appendl(&s, "&lt;", sizeof("&lt;")-1);
 				break;
 			case '>':
-				smart_str_appends(&s, "&gt;");
+				smart_str_appendl(&s, "&gt;", sizeof("&gt;")-1);
 				break;
 			case '&':
-				smart_str_appends(&s, "&amp;");
+				smart_str_appendl(&s, "&amp;", sizeof("&amp;")-1);
 				break;
 			case ' ':
 				smart_str_appendl(&s, "&nbsp;", sizeof("&nbsp;")-1);
 				break;
 			case '\t':
-				smart_str_appends(&s, "&nbsp;&nbsp;&nbsp;&nbsp;");
+				smart_str_appendl(&s, "&nbsp;&nbsp;&nbsp;&nbsp;", sizeof("&nbsp;&nbsp;&nbsp;&nbsp;")-1);
 				break;
 			default:
 				smart_str_appendc(&s, *str);

@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.198 2002/07/20 01:28:56 sas Exp $
+dnl $Id: acinclude.m4,v 1.199 2002/07/21 14:42:01 markonen Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -875,7 +875,7 @@ AC_DEFUN(PHP_ADD_LIBPATH,[
       PHP_ADD_LIBPATH_GLOBAL([$ai_p])
     ],[
       if test "$ext_shared" = "yes"; then
-        $2="-R$ai_p -L$ai_p [$]$2"
+        $2="$ld_runpath_switch$ai_p -L$ai_p [$]$2"
       else
         PHP_ADD_LIBPATH_GLOBAL([$ai_p])
       fi

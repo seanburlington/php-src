@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.189 2003/09/26 10:06:22 abies Exp $ */
+/* $Id: interbase.c,v 1.190 2004/01/07 09:43:55 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,7 @@
 
 #include "php.h"
 
-#define FILE_REVISION "$Revision: 1.189 $"
+#define FILE_REVISION "$Revision: 1.190 $"
 
 #if HAVE_IBASE
 
@@ -1578,12 +1578,6 @@ static int _php_ibase_bind(XSQLDA *sqlda, zval **b_vars, BIND_BUF *buf, ibase_qu
 		var->sqlind = &buf[i].sqlind;
 		
 		if (Z_TYPE_P(b_var) == IS_NULL) {
-
-			if ((var->sqltype & 1) != 1) {
-				_php_ibase_module_error("Parameter %d must have a value" TSRMLS_CC, i+1);
-				rv = FAILURE;
-			}
-
 			buf[i].sqlind = -1;
 		} else {
 			buf[i].sqlind = 0;

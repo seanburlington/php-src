@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.43 2002/09/07 21:04:14 yohgaki Exp $ */
+/* $Id: php_variables.c,v 1.44 2002/09/08 00:27:05 yohgaki Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -300,7 +300,7 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 
 			*val++ = '\0';
 			php_url_decode(var, strlen(var));
-			val_len = php_url_decode(val, val-var);
+			val_len = php_url_decode(val, strlen(val));
 			php_register_variable_safe(var, val, val_len, array_ptr TSRMLS_CC);
 		} else {
 			php_url_decode(var, strlen(var));

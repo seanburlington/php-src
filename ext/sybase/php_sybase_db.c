@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.58 2004/01/08 08:17:36 andi Exp $ */
+/* $Id: php_sybase_db.c,v 1.59 2004/01/17 12:59:52 sniper Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -281,7 +281,7 @@ PHP_RINIT_FUNCTION(sybase)
 {
 	php_sybase_module.default_link=-1;
 	php_sybase_module.num_links = php_sybase_module.num_persistent;
-	php_sybase_module.appname = estrndup("PHP 4.0",7);
+	php_sybase_module.appname = estrndup("PHP 5", 5);
 	php_sybase_module.server_message = empty_string;
 	php_sybase_module.min_error_severity = php_sybase_module.cfg_min_error_severity;
 	php_sybase_module.min_message_severity = php_sybase_module.cfg_min_message_severity;

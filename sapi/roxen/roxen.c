@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.58 2004/01/08 08:18:17 andi Exp $ */
+/* $Id: roxen.c,v 1.59 2004/01/17 13:00:15 sniper Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -438,7 +438,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.58 2004/01/08 08:18:17 andi Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.59 2004/01/17 13:00:15 sniper Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -615,12 +615,12 @@ void f_php_roxen_request_handler(INT32 args)
   TSRMLS_FETCH();
 
   if(current_thread == th_self())
-    php_error(E_WARNING, "PHP4.Interpreter->run: Tried to run a PHP-script from a PHP "
+    php_error(E_WARNING, "PHP5.Interpreter->run: Tried to run a PHP-script from a PHP "
 	  "callback!");
-  get_all_args("PHP4.Interpreter->run", args, "%S%m%O%*", &script,
+  get_all_args("PHP5.Interpreter->run", args, "%S%m%O%*", &script,
 	       &request_data, &my_fd_obj, &done_callback);
   if(done_callback->type != PIKE_T_FUNCTION) 
-    php_error(E_WARNING, "PHP4.Interpreter->run: Bad argument 4, expected function.\n");
+    php_error(E_WARNING, "PHP5.Interpreter->run: Bad argument 4, expected function.\n");
   PHP_LOCK(THIS); /* Need to lock here or reusing the same object might cause
 		       * problems in changing stuff in that object */
 #ifndef ROXEN_USE_ZTS
@@ -656,7 +656,7 @@ void f_php_roxen_request_handler(INT32 args)
   {
     int fd = fd_from_object(raw_fd->u.object);
     if(fd == -1)
-      php_error(E_WARNING, "PHP4.Interpreter->run: my_fd object not open or not an FD.\n");
+      php_error(E_WARNING, "PHP5.Interpreter->run: my_fd object not open or not an FD.\n");
     THIS->my_fd = fd;
   } else
     THIS->my_fd = 0;

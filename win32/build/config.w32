@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.22 2003/12/23 17:20:50 wez Exp $
+// $Id: config.w32,v 1.23 2004/01/17 13:00:23 sniper Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -32,7 +32,7 @@ DEFINE('PHP_PREFIX', PHP_PREFIX);
 DEFINE("BASE_INCLUDES", "/I . /I main /I regex /I Zend /I TSRM ");
 
 // CFLAGS for building the PHP dll
-DEFINE("CFLAGS_PHP", "/D _USRDLL /D PHP4DLLTS_EXPORTS /D PHP_EXPORTS \
+DEFINE("CFLAGS_PHP", "/D _USRDLL /D PHP5DLLTS_EXPORTS /D PHP_EXPORTS \
 /D LIBZEND_EXPORTS /D TSRM_EXPORTS /D SAPI_EXPORTS /D WINVER=0x400");
 
 DEFINE('CFLAGS_PHP_OBJ', '$(CFLAGS_PHP) $(STATIC_EXT_CFLAGS)');

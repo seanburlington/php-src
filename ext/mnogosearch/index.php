@@ -2,7 +2,7 @@
 
 /* 
     $Source: /repository/php-src/ext/mnogosearch/Attic/index.php,v $
-    $Id: index.php,v 1.15 2002/08/03 11:34:52 gluke Exp $ 
+    $Id: index.php,v 1.16 2004/01/17 12:59:36 sniper Exp $ 
 */
 
 /*   mnoGoSearch-php-lite v.1.4
@@ -12,7 +12,7 @@
  */
 
 if (!extension_loaded('mnogosearch')) {
-	print "<b>This script requires PHP4.0.5+ with mnoGoSearch extension</b>";
+	print "<b>This script requires PHP 4.0.5+ with mnoGoSearch extension</b>";
 	exit;
 }
 

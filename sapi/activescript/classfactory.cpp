@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: classfactory.cpp,v 1.7 2004/01/08 17:33:15 sniper Exp $ */
+/* $Id: classfactory.cpp,v 1.8 2004/01/17 13:00:01 sniper Exp $ */
 
 /* IClassFactory Implementation, and DllXXX function implementation */
 
@@ -32,8 +32,8 @@ HINSTANCE module_handle;
 
 #include <comcat.h>
 #include "TSRM.h"
-#include "php4as_classfactory.h"
-#include "php4as_scriptengine.h"
+#include "php5as_classfactory.h"
+#include "php5as_scriptengine.h"
 
 volatile LONG TPHPClassFactory::factory_count = 0;
 volatile LONG TPHPClassFactory::object_count = 0;

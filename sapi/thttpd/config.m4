@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.22 2003/11/27 23:04:10 sniper Exp $
+dnl $Id: config.m4,v 1.23 2004/01/17 13:00:16 sniper Exp $
 dnl
 
 AC_ARG_WITH(thttpd,
@@ -21,10 +21,10 @@ AC_ARG_WITH(thttpd,
   fi
   PHP_TARGET_RDYNAMIC
   INSTALL_IT="\
-    echo 'PHP_LIBS = -L. -lphp4 \$(PHP_LIBS) \$(EXTRA_LIBS)' > $THTTPD/php_makefile; \
+    echo 'PHP_LIBS = -L. -lphp5 \$(PHP_LIBS) \$(EXTRA_LIBS)' > $THTTPD/php_makefile; \
     echo 'PHP_LDFLAGS = \$(NATIVE_RPATHS) \$(PHP_LDFLAGS)' >> $THTTPD/php_makefile; \
     echo 'PHP_CFLAGS = \$(COMMON_FLAGS) \$(CFLAGS_CLEAN) \$(CPPFLAGS) \$(EXTRA_CFLAGS)' >> $THTTPD/php_makefile; \
-    rm -f $THTTPD/php_thttpd.c $THTTPD/php_thttpd.h $THTTPD/libphp4.a; \
+    rm -f $THTTPD/php_thttpd.c $THTTPD/php_thttpd.h $THTTPD/libphp5.a; \
     \$(LN_S) $abs_srcdir/sapi/thttpd/thttpd.c $THTTPD/php_thttpd.c; \
     \$(LN_S) $abs_srcdir/sapi/thttpd/php_thttpd.h $abs_builddir/$SAPI_STATIC $THTTPD/;\
     $patch"

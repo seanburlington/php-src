@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.6 2003/12/19 20:39:01 wez Exp $
+// $Id: config.w32,v 1.7 2004/01/17 13:00:04 sniper Exp $
 
 ARG_ENABLE('apache', 'Build Apache 1.3.x version of PHP', 'no');
 
@@ -17,7 +17,7 @@ if (PHP_APACHE != "no") {
 		// headers
 		SAPI('apache', 'mod_php5.c sapi_apache.c php_apache.c',
 				'php' + PHP_VERSION + 'apache.dll',
-				'/D APACHEPHP4_EXPORTS /D APACHE_READDIR_H /I win32');
+				'/D APACHEPHP5_EXPORTS /D APACHE_READDIR_H /I win32');
 	} else {
 		WARNING("Could not find apache libraries/headers");
 	}

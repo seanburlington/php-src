@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.86 2004/01/08 08:17:37 andi Exp $ */
+/* $Id: php_sybase_ct.c,v 1.87 2004/01/17 12:59:53 sniper Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -386,7 +386,7 @@ PHP_RINIT_FUNCTION(sybase)
 {
 	SybCtG(default_link)=-1;
 	SybCtG(num_links) = SybCtG(num_persistent);
-	SybCtG(appname) = estrndup("PHP 4.0", 7);
+	SybCtG(appname) = estrndup("PHP 5", 5);
 	SybCtG(server_message) = empty_string;
 	return SUCCESS;
 }

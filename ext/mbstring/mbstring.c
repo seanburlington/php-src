@@ -17,10 +17,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.207 2004/01/08 08:15:59 andi Exp $ */
+/* $Id: mbstring.c,v 1.208 2004/01/17 12:59:30 sniper Exp $ */
 
 /*
- * PHP4 Multibyte String module "mbstring"
+ * PHP 4 Multibyte String module "mbstring"
  *
  * History:
  *   2000.5.19  Release php-4.0RC2_jstring-1.0

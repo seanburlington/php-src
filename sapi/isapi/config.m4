@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.15 2003/10/03 05:24:31 sniper Exp $
+dnl $Id: config.m4,v 1.16 2004/01/17 13:00:13 sniper Exp $
 dnl
 
 RESULT=no
@@ -16,7 +16,7 @@ AC_ARG_WITH(isapi,
 	PHP_BUILD_THREAD_SAFE
 	AC_DEFINE(WITH_ZEUS,1,[ ])
 	PHP_ADD_INCLUDE($ZEUSPATH/web/include)
-    PHP_SELECT_SAPI(isapi, shared, php4isapi.c)
+    PHP_SELECT_SAPI(isapi, shared, php5isapi.c)
 	INSTALL_IT="\$(SHELL) \$(srcdir)/install-sh -m 0755 $SAPI_SHARED \$(INSTALL_ROOT)$ZEUSPATH/web/bin/"
 	RESULT=yes
 ])

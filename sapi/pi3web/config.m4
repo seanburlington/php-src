@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9 2003/10/03 05:24:32 sniper Exp $
+dnl $Id: config.m4,v 1.10 2004/01/17 13:00:15 sniper Exp $
 dnl
 
 RESULT=no
@@ -20,7 +20,7 @@ if test "$withval" != "no"; then
 	PHP_ADD_INCLUDE($PI3PATH/PiAPI)
 	PHP_ADD_INCLUDE($PI3PATH/Pi2API)
 	PHP_ADD_INCLUDE($PI3PATH/Pi3API)
-	PHP_ADD_INCLUDE($PI3PATH/PHP4)
+	PHP_ADD_INCLUDE($PI3PATH/PHP5)
 	PHP_SELECT_SAPI(pi3web, shared, pi3web_sapi.c)
 	INSTALL_IT="\$(SHELL) \$(srcdir)/install-sh -m 0755 $SAPI_SHARED \$(INSTALL_ROOT)$PI3PATH/bin/"
 	RESULT=yes

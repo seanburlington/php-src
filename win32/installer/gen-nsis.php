@@ -1,7 +1,7 @@
 ; PHP Installer for NSIS
 ; Based on Welcome/Finish Page Example Script (Written by Joost Verburg)
 ; Author: Wez Furlong <wez@thebrainroom.com>
-; $Id: gen-nsis.php,v 1.3 2003/02/13 10:25:30 wez Exp $
+; $Id: gen-nsis.php,v 1.4 2004/01/17 13:00:24 sniper Exp $
 <?php
 
 define('PHPVERSION', phpversion());
@@ -22,7 +22,7 @@ $sections = array(
 		"files" => array(
 			"$SYSDIR" => array(
 				"dlls\\*.dll",
-				"php4ts.dll",
+				"php5ts.dll",
 			),
 			"\$INSTDIR" => array(
 				"*.txt",
@@ -42,7 +42,7 @@ $sections = array(
 	  			"php.exe"
 	  		),
 			"\$INSTDIR\\sapi" => array(
-				"sapi\\pws-php4cgi.reg"
+				"sapi\\pws-php5cgi.reg"
 			),
 	  	),
 	),
@@ -171,7 +171,7 @@ function add_sections($pattern, $groupname, $abbrev, &$sections, $sourcedirs, $i
 
 	foreach ($avail as $extname) {
 		/* mangle name */
-		if (preg_match('/(php_|php4|php)([^_].*)\.dll/', basename($extname), $matches)) {
+		if (preg_match('/(php_|php5|php)([^_].*)\.dll/', basename($extname), $matches)) {
 			$ext = $matches[2];
 		} else {
 			$ext = basename($extname);
@@ -388,7 +388,7 @@ Function CopyPHPIni
 	CopyFiles "$INSTDIR\php.ini-dist" "$WINDIR\php.ini"
 
 ; These files will be deleted during post-installation
-	CopyFiles "<?= $SYSDIR ?>\php4ts.dll" "$INSTDIR\php4ts.dll"
+	CopyFiles "<?= $SYSDIR ?>\php5ts.dll" "$INSTDIR\php5ts.dll"
 	File "<?= dirname(__FILE__) ?>\setini.php"
 
 ; Set the extension_dir setting in the php.ini
@@ -411,7 +411,7 @@ Section -post
 
 	Delete "$INSTDIR\.ini-add" ; Created by the AddIniSetting function
 	Delete "$INSTDIR\setini.php"
-	Delete "$INSTDIR\php4ts.dll"
+	Delete "$INSTDIR\php5ts.dll"
 
 	; Add to Add/Remove programs list
 	WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PHP-<?= PHPVERSION ?>" "UninstallString" "$INSTDIR\Uninstall.exe"

@@ -16,11 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: w32api.c,v 1.12 2003/08/12 00:55:55 iliaa Exp $ */
+/* $Id: w32api.c,v 1.13 2004/01/17 12:59:55 sniper Exp $ */
 
 /*
- * Win32 API Extension for PHP 4
- * =============================
+ * Win32 API Extension for PHP
+ * ===========================
  *
  * This extension allows PHP Developers to access the underlying functions in the
  * Win32 API Dll's in a generic way, it provides a mechanism for the user to load

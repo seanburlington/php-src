@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.56 2004/01/08 08:18:16 andi Exp $ */
+/* $Id: pi3web_sapi.c,v 1.57 2004/01/17 13:00:15 sniper Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -79,7 +79,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.56 2004/01/08 08:18:16 andi Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.57 2004/01/17 13:00:15 sniper Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -386,7 +386,7 @@ static sapi_module_struct pi3web_sapi_module = {
 	STANDARD_SAPI_MODULE_PROPERTIES
 };
 
-MODULE_API DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
+MODULE_API DWORD PHP5_wrapper(LPCONTROL_BLOCK lpCB)
 {
 	zend_file_handle file_handle;
 	int iRet = PIAPI_COMPLETED;
@@ -455,7 +455,7 @@ MODULE_API DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 	return iRet;
 }
 
-MODULE_API BOOL PHP4_startup() {
+MODULE_API BOOL PHP5_startup() {
 	tsrm_startup(1, 1, 0, NULL);
 	sapi_startup(&pi3web_sapi_module);
 	if (pi3web_sapi_module.startup) {
@@ -465,7 +465,7 @@ MODULE_API BOOL PHP4_startup() {
 	return IWasLoaded;
 };
 
-MODULE_API BOOL PHP4_shutdown() {
+MODULE_API BOOL PHP5_shutdown() {
 	if (pi3web_sapi_module.shutdown) {
 		pi3web_sapi_module.shutdown(&pi3web_sapi_module);
 	};

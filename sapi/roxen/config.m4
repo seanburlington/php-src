@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.15 2002/03/07 14:19:58 sas Exp $
+dnl $Id: config.m4,v 1.16 2004/01/17 13:00:15 sniper Exp $
 dnl
 
 RESULT=no
@@ -31,7 +31,7 @@ AC_ARG_WITH(roxen,
 	PHP_ADD_INCLUDE($PIKE_INCLUDE_DIR)
 	AC_DEFINE(HAVE_ROXEN,1,[Whether you use Roxen])
 	PHP_SELECT_SAPI(roxen, shared, roxen.c)
-	INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_SHARED $PIKE_MODULE_DIR/PHP4.so"
+	INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_SHARED $PIKE_MODULE_DIR/PHP5.so"
 	RESULT="yes
 	Pike binary used:      $PIKE
 	Pike include dir:      $PIKE_INCLUDE_DIR

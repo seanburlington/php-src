@@ -19,7 +19,7 @@
 /* For more information on Continuity: http://www.ashpool.com/ */
 
 /*
- * This code is based on the PHP4 SAPI module for NSAPI by Jayakumar
+ * This code is based on the PHP5 SAPI module for NSAPI by Jayakumar
  * Muthukumarasamy
  */
 
@@ -110,7 +110,7 @@ PHP_MSHUTDOWN_FUNCTION(continuity)
 PHP_MINFO_FUNCTION(continuity)
 {
         php_info_print_table_start();
-        php_info_print_table_row(2, "Continuity Module Revision", "$Revision: 1.7 $");
+        php_info_print_table_row(2, "Continuity Module Revision", "$Revision: 1.8 $");
         php_info_print_table_row(2, "Server Version", conFget_build());
 #ifdef CONTINUITY_CDPEXT
 	php_info_print_table_row(2,"CDP Extensions", "enabled");

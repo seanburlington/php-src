@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: scriptengine.cpp,v 1.10 2004/01/08 17:33:15 sniper Exp $ */
+/* $Id: scriptengine.cpp,v 1.11 2004/01/17 13:00:02 sniper Exp $ */
 
 /* Implementation Notes:
  *
@@ -42,13 +42,13 @@ extern "C" {
 #include "php_globals.h"
 #include "php_variables.h"
 #include "php_ini.h"
-#include "php4activescript.h"
+#include "php5activescript.h"
 #include "ext/com_dotnet/php_com_dotnet.h"
 #include "ext/com_dotnet/php_com_dotnet_internal.h"
 }
 #include "php_ticks.h"
-#include "php4as_scriptengine.h"
-#include "php4as_classfactory.h"
+#include "php5as_scriptengine.h"
+#include "php5as_classfactory.h"
 #include <objbase.h>
 
 /* {{{ trace */

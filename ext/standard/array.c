@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.205 2002/11/26 22:12:40 moriyoshi Exp $ */
+/* $Id: array.c,v 1.206 2002/12/03 15:02:06 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -994,7 +994,7 @@ static int php_array_walk(HashTable *target_hash, zval **userdata TSRMLS_DC)
 
 		zend_hash_move_forward_ex(target_hash, &pos);
 	}
-	efree(key);
+	zval_ptr_dtor(&key);
 	
 	return 0;
 }

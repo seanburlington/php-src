@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.15 2003/06/10 20:03:33 imajes Exp $ 
+  $Id: php_mysqli.h,v 1.16 2003/06/21 13:35:26 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -254,12 +254,18 @@ PHP_FUNCTION(mysqli_select_db);
 PHP_FUNCTION(mysqli_send_long_data);
 PHP_FUNCTION(mysqli_send_query);
 PHP_FUNCTION(mysqli_slave_query);
+#if MYSQL_VERSION_ID >= 40101
+PHP_FUNCTION(mysqli_sqlstate);
+#endif
 PHP_FUNCTION(mysqli_ssl_set);
 PHP_FUNCTION(mysqli_stat);
 PHP_FUNCTION(mysqli_stmt_affected_rows);
 PHP_FUNCTION(mysqli_stmt_close);
 PHP_FUNCTION(mysqli_stmt_errno);
 PHP_FUNCTION(mysqli_stmt_error);
+#if MYSQL_VERSION_ID >= 40101
+PHP_FUNCTION(mysqli_stmt_sqlstate);
+#endif
 PHP_FUNCTION(mysqli_stmt_store_result);
 PHP_FUNCTION(mysqli_store_result);
 PHP_FUNCTION(mysqli_thread_id);

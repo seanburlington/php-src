@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.45 2002/04/23 22:22:17 mfischer Exp $ */
+/* $Id: posix.c,v 1.46 2002/05/04 16:54:13 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -130,7 +130,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.45 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.46 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -563,12 +563,11 @@ PHP_FUNCTION(posix_times)
 PHP_FUNCTION(posix_ctermid)
 {
 	char  buffer[L_ctermid];
-	char *p;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "") == FAILURE)
 		return;
 
-	if (NULL == (p = ctermid(buffer))) {
+	if (NULL == ctermid(buffer)) {
 		/* Found no documentation how the defined behaviour is when this
 		 * function fails
 		 */

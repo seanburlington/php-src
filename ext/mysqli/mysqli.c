@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.60 2005/01/08 13:34:03 helly Exp $ 
+  $Id: mysqli.c,v 1.61 2005/01/27 14:41:48 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -776,6 +776,11 @@ void php_mysqli_fetch_into_hash(INTERNAL_FUNCTION_PARAMETERS, int override_flags
 		}
 	}
 	MYSQLI_FETCH_RESOURCE(result, MYSQL_RES *, &mysql_result, "mysqli_result"); 
+
+	if ((fetchtype & MYSQLI_BOTH) == 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The result type should be either MYSQLI_NUM, MYSQLI_ASSOC or MYSQLI_BOTH");
+		RETURN_FALSE;
+	}
 
 	if (!(row = mysql_fetch_row(result))) {
 		RETURN_NULL();

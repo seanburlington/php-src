@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.85 2003/11/28 22:48:31 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.86 2003/11/29 12:02:40 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -660,7 +660,7 @@ PHPAPI int _php_stream_eof(php_stream *stream TSRMLS_DC)
 		return 0;
 
 	if (!stream->eof && php_stream_is(stream, PHP_STREAM_IS_SOCKET)) {
-		stream->eof = !_php_network_is_stream_alive(stream);
+		stream->eof = !_php_network_is_stream_alive(stream TSRMLS_CC);
 	}
 	
 	return stream->eof;

@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.83.2.21 2003/11/28 22:11:34 wez Exp $ */
+/* $Id: network.c,v 1.83.2.22 2003/11/29 12:02:40 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -1133,7 +1133,7 @@ static int php_sockop_set_option(php_stream *stream, int option, int value, void
 }
 
 /* private API; don't use in extensions */
-int _php_network_is_stream_alive(php_stream *stream)
+int _php_network_is_stream_alive(php_stream *stream TSRMLS_DC)
 {
 	php_netstream_data_t *sock = (php_netstream_data_t*)stream->abstract;
 	int alive = 1;

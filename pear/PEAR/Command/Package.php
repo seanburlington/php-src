@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.19 2002/04/10 12:23:31 cox Exp $
+// $Id: Package.php,v 1.20 2002/04/13 00:23:19 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Packager.php';
@@ -79,7 +79,7 @@ class PEAR_Command_Package extends PEAR_Command_Common
 
     function getOptions()
     {
-        return array('Z', 'n' /*, 'f', 'd', 'q', 'Q'*/);
+        return array('Z', 'n', 'F' /*, 'd', 'q', 'Q'*/);
     }
 
     // }}}
@@ -358,8 +358,8 @@ class PEAR_Command_Package extends PEAR_Command_Common
                 }
                 */
                 $command .= ' tag';
-                if (isset($options['f'])) {
-                    $command .= ' -f';
+                if (isset($options['F'])) {
+                    $command .= ' -F';
                 }
                 /* neither will this one:
                 if (isset($options['d'])) {

@@ -16,11 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.30 1999/12/05 16:25:28 sas Exp $ */
+/* $Id: php_pcre.c,v 1.31 1999/12/06 16:41:55 andrei Exp $ */
 
 /*
 	TODO:
 	- Allow user to set PCRE_NOTEMPTY, PCRE_ANCHORED at execution time
+	- Make new modifier, similar to /e, that passes matches to
+      a user-defined function
 */
 
 #include "php.h"

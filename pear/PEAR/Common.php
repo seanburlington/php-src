@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.88 2003/03/18 12:06:06 ssb Exp $
+// $Id: Common.php,v 1.89 2003/03/26 22:43:42 mj Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -1121,7 +1121,7 @@ class PEAR_Common extends PEAR
         }
         $pn = $info['package'];
         $pnl = strlen($pn);
-        foreach ($this->pkginfo['provides'] as $key => $what) {
+        foreach ((array)$this->pkginfo['provides'] as $key => $what) {
             if (isset($what['explicit'])) {
                 // skip conformance checks if the provides entry is
                 // specified in the package.xml file

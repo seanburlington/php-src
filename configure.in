@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.119 2000/05/04 11:57:59 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.120 2000/05/05 11:23:11 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -202,6 +202,8 @@ AC_CHECK_LIB(nsl, gethostbyaddr, [
 AC_CHECK_LIB(crypt, crypt, [
  AC_ADD_LIBRARY(crypt)
  AC_DEFINE(HAVE_LIBCRYPT,1,[ ]) ], [])
+
+AC_CHECK_LIB(dl, dlopen,[AC_ADD_LIBRARY(dl)])
 
 dnl The sin may be in a library which need not be specifed
 dnl as well as res_search resides in libsocket

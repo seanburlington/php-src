@@ -17,11 +17,10 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.74 2001/08/11 22:55:00 zeev Exp $ */
+/* $Id: output.c,v 1.75 2001/08/25 15:57:42 zeev Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
-#include "ext/session/php_session.h"
 #include "ext/standard/basic_functions.h"
 #include "SAPI.h"
 
@@ -253,10 +252,6 @@ PHPAPI void php_end_ob_buffers(zend_bool send_buffer TSRMLS_DC)
 	while (OG(ob_nesting_level)!=0) {
 		php_end_ob_buffer(send_buffer, 0 TSRMLS_CC);
 	}
-
-	if (!OG(disable_output) && send_buffer && BG(use_trans_sid)) {
-		session_adapt_flush(OG(php_header_write) TSRMLS_CC);
-	}
 }
 /* }}} */
 
@@ -427,11 +422,7 @@ static int php_ub_body_write_no_header(const char *str, uint str_length TSRMLS_D
 
 	if (OG(disable_output)) {
 		return 0;
-	}
-	if (BG(use_trans_sid)) {
-		session_adapt_uris(str, str_length, &newstr, &new_length TSRMLS_CC);
-	}
-		
+	}		
 	if (newstr) {
 		str = newstr;
 		str_length = new_length;

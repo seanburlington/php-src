@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.23 2004/01/08 17:32:52 sniper Exp $ */
+/* $Id: var_unserializer.re,v 1.24 2004/02/03 14:12:59 stas Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -274,6 +274,27 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 	*rval = *rval_ref;
 	(*rval)->refcount++;
 	(*rval)->is_ref = 1;
+	
+	return 1;
+}
+
+"r:" iv ";"		{
+	int id;
+
+ 	*p = YYCURSOR;
+	if (!var_hash) return 0;
+
+	id = parse_iv(start + 2) - 1;
+	if (id == -1 || var_access(var_hash, id, &rval_ref) != SUCCESS) {
+		return 0;
+	}
+
+	if (*rval != NULL) {
+		zval_ptr_dtor(rval);
+	}
+	*rval = *rval_ref;
+	(*rval)->refcount++;
+	(*rval)->is_ref = 0;
 	
 	return 1;
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.45.2.1 2001/10/11 23:52:09 ssb Exp $ */
+/* $Id: sysvshm.c,v 1.45.2.2 2001/11/22 14:35:55 derick Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -208,6 +208,12 @@ PHP_FUNCTION(shm_remove)
 	id = (*arg_id)->value.lval;
 
 	shm_list_ptr = (sysvshm_shm *) zend_list_find(id, &type);
+
+    if (!shm_list_ptr) {
+		php_error(E_WARNING, "The parameter is not a valid shm_indentifier");
+		RETURN_FALSE;
+	}
+
 	if(shmctl(shm_list_ptr->id,IPC_RMID,NULL)<0) {
 		php_error(E_WARNING, "shm_remove() failed for key 0x%x, id %i: %s", shm_list_ptr->key, id,strerror(errno));
 		RETURN_FALSE;

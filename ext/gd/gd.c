@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.80 2000/06/26 12:23:02 jah Exp $ */
+/* $Id: gd.c,v 1.81 2000/06/26 15:23:52 jah Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -850,7 +850,7 @@ PHP_FUNCTION(imagecolorclosest)
    Get the index of the color which has the hue, white and blackness nearest to the given color */
 PHP_FUNCTION(imagecolorclosesthwb)
 {
-#if HAVE_GDIMAGECOLORRESOLVE
+#if HAVE_COLORCLOSESTHWB
 	zval **imgind, **r, **g, **b;
 	int col;
 	gdImagePtr im;

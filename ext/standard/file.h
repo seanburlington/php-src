@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.h,v 1.22 2000/06/06 18:58:15 ccollie Exp $ */
+/* $Id: file.h,v 1.23 2000/07/02 15:12:34 andi Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -60,6 +60,7 @@ PHP_FUNCTION(fpassthru);
 PHP_FUNCTION(readfile);
 PHP_FUNCTION(umask);
 PHP_FUNCTION(rename);
+PHP_FUNCTION(unlink);
 PHP_FUNCTION(copy);
 PHP_FUNCTION(file);
 PHP_FUNCTION(set_socket_blocking); /* deprecated */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.25 2000/06/25 17:02:45 zeev Exp $ */
+/* $Id: link.c,v 1.26 2000/07/02 15:12:34 andi Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -158,36 +158,8 @@ PHP_FUNCTION(link)
 }
 /* }}} */
 
-/* {{{ proto int unlink(string filename)
-   Delete a file */
-PHP_FUNCTION(unlink)
-{
-	pval **filename;
-	int ret;
-	PLS_FETCH();
-	
-	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &filename) == FAILURE) {
-		WRONG_PARAM_COUNT;
-	}
-	convert_to_string_ex(filename);
-
-	if (PG(safe_mode) && !php_checkuid((*filename)->value.str.val, NULL, 2)) {
-		RETURN_FALSE;
-	}
-
-	ret = V_UNLINK((*filename)->value.str.val);
-	if (ret == -1) {
-		php_error(E_WARNING, "Unlink failed (%s)", strerror(errno));
-		RETURN_FALSE;
-	}
-	/* Clear stat cache */
-	PHP_FN(clearstatcache)(INTERNAL_FUNCTION_PARAM_PASSTHRU);
-	RETURN_TRUE;
-}
-/* }}} */
 
 #endif
-
 
 /*
  * Local variables:

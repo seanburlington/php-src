@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.57 2000/06/30 19:22:52 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.58 2000/07/02 15:12:34 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1227,7 +1227,7 @@ PHP_FUNCTION(odbc_fetch_into)
 }
 /* }}} */
 
-#ifdef HAVE_SOLID || defined(HAVE_SOLID_35)
+#if defined(HAVE_SOLID) || defined(HAVE_SOLID_35)
 PHP_FUNCTION(solid_fetch_prev)
 {
 	odbc_result *result;

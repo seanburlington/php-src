@@ -12,11 +12,14 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
+   | Contributed by ECL IP'S Software & Services                          |
+   |                http://www.eclips-software.com                        |
+   |                mailto://idev@eclips-software.com                     |
    | Author: David Hénot <henot@php.net>                                  |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ii.c,v 1.6 2000/08/05 03:22:13 henot Exp $ */
+/* $Id: ii.c,v 1.7 2000/08/25 15:56:40 henot Exp $ */
 
 #include "php.h"
 #include "php_globals.h"

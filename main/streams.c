@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.107 2002/10/15 16:38:11 wez Exp $ */
+/* $Id: streams.c,v 1.108 2002/10/15 16:45:26 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1028,7 +1028,7 @@ PHPAPI size_t _php_stream_copy_to_mem(php_stream *src, char **buf, size_t maxlen
 #endif
 		
 			srcfile = mmap(NULL, maxlen, PROT_READ, MAP_SHARED, srcfd, 0);
-			if (srcfile != (void*)MAP_FAILED && ret > 0) {
+			if (srcfile != (void*)MAP_FAILED) {
 
 				*buf = pemalloc_rel_orig(maxlen + 1, persistent);
 

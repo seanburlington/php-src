@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.26 2003/04/25 00:50:31 iliaa Exp $ */
+/* $Id: gd.c,v 1.221.2.27 2003/05/15 02:25:59 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -3396,28 +3396,32 @@ PHP_FUNCTION(imagepstext)
 		transform = T1_RotateMatrix(NULL, angle);
 	}
 
-	extend = T1_GetExtend(*f_ind);
-	str_path = T1_GetCharOutline(*f_ind, str[0], size, transform);
+	if (width) {
+		extend = T1_GetExtend(*f_ind);
+		str_path = T1_GetCharOutline(*f_ind, str[0], size, transform);
 
-	if (!str_path) {
-		if (T1_errno) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "libt1 returned error %d", T1_errno);
+		if (!str_path) {
+			if (T1_errno) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "libt1 returned error %d", T1_errno);
+			}
+			RETURN_FALSE;
 		}
-		RETURN_FALSE;
+
+		for (i = 1; i < str_len; i++) {
+			amount_kern = (int) T1_GetKerning(*f_ind, str[i-1], str[i]);
+			amount_kern += str[i-1] == ' ' ? space : 0;
+			add_width = (int) (amount_kern+width)/extend;
+
+			char_path = T1_GetMoveOutline(*f_ind, add_width, 0, 0, size, transform);
+			str_path = T1_ConcatOutlines(str_path, char_path);
+	
+			char_path = T1_GetCharOutline(*f_ind, str[i], size, transform);
+			str_path = T1_ConcatOutlines(str_path, char_path);
+		}
+		str_img = T1_AAFillOutline(str_path, 0);
+	} else {
+		str_img = T1_AASetString(*f_ind, str,  str_len, space, T1_KERNING, size, transform);
 	}
-
-	for (i = 1; i < str_len; i++) {
-		amount_kern = (int) T1_GetKerning(*f_ind, str[i-1], str[i]);
-		amount_kern += str[i-1] == ' ' ? space : 0;
-		add_width = (int) (amount_kern+width)/extend;
-
-		char_path = T1_GetMoveOutline(*f_ind, add_width, 0, 0, size, transform);
-		str_path = T1_ConcatOutlines(str_path, char_path);
-
-		char_path = T1_GetCharOutline(*f_ind, str[i], size, transform);
-		str_path = T1_ConcatOutlines(str_path, char_path);
-	}
-	str_img = T1_AAFillOutline(str_path, 0);
 
 	if (T1_errno) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "libt1 returned error %d", T1_errno);

@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.13 2000/01/01 01:31:48 sas Exp $ */
+/* $Id: base64.c,v 1.14 2000/02/06 15:18:59 thies Exp $ */
 
 #include <string.h>
 
@@ -88,7 +88,7 @@ unsigned char *php_base64_decode(const unsigned char *string, int length, int *r
 		}
 	}
 
-	result = (unsigned char *)emalloc((length / 4 * 3 + 1) * sizeof(char));
+	result = (unsigned char *)emalloc(length + 1);
 	if (result == NULL) {
 		return NULL;
 	}

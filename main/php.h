@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.22 1999/07/26 20:09:04 andrey Exp $ */
+/* $Id: php.h,v 1.23 1999/07/28 13:59:35 andrey Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -275,6 +275,7 @@ extern char **environ;
 
 extern void phperror(char *error);
 extern PHPAPI void php3_error(int type, const char *format,...);
+extern PHPAPI int php3_write(void *buf, int size);
 extern PHPAPI int php3_printf(const char *format,...);
 extern void php3_log_err(char *log_message);
 extern int Debug(char *format,...);

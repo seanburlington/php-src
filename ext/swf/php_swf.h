@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Sterling Hughes <sterling@php.net>                           |
+   | Author: Sterling Hughes <Sterling.Hughes@pentap.net>                 |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_swf.h,v 1.9 2000/08/15 17:30:41 sterling Exp $ */
+/* $Id: php_swf.h,v 1.10 2000/10/27 19:10:21 sterling Exp $ */
 
 #ifndef PHP_SWF_H
 #define PHP_SWF_H

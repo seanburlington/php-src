@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Chris Vandomelen <chrisv@b0rked.dhs.org>                    |
-   |          Sterling Hughes <sterling@php.net>                          |
+   |          Sterling Hughes <Sterling.Hughes@pentap.net>                |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.20 2000/10/25 17:44:00 andrei Exp $ */
+/* $Id: sockets.c,v 1.21 2000/10/27 19:10:21 sterling Exp $ */
 
 #include "php.h"
 

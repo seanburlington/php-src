@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zip.c,v 1.29.2.1 2002/04/06 17:29:44 derick Exp $ */
+/* $Id: zip.c,v 1.29.2.2 2002/04/14 08:50:22 derick Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -282,6 +282,7 @@ PHP_FUNCTION(zip_entry_read)
 
 	buf = emalloc(len + 1);
 	ret = zzip_read(entry->fp, buf, len);
+	buf[ret] = 0;
 	if (ret == 0) {
 		RETURN_FALSE;
 	} else {

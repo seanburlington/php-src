@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.82 2001/04/19 21:42:45 andi Exp $ */
+/* $Id: php_odbc.c,v 1.83 2001/05/02 23:20:04 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -2498,17 +2498,17 @@ static void php_odbc_lasterror(INTERNAL_FUNCTION_PARAMETERS, int mode)
     if (argc == 1) {
         ZEND_FETCH_RESOURCE2(conn, odbc_connection *, pv_handle, -1, "ODBC-Link", le_conn, le_pconn);
         if (mode == 0) {
-            strncpy(ptr, conn->laststate, len);
+            strlcpy(ptr, conn->laststate, len+1);
         } else {
-            strncpy(ptr, conn->lasterrormsg, len);
+            strlcpy(ptr, conn->lasterrormsg, len+1);
         }
     } else {
 		ODBCLS_FETCH();
 
         if (mode == 0) {
-            strncpy(ptr, ODBCG(laststate), len);
+            strlcpy(ptr, ODBCG(laststate), len+1);
         } else {
-            strncpy(ptr, ODBCG(lasterrormsg), len);
+            strlcpy(ptr, ODBCG(lasterrormsg), len+1);
         }
     }
     RETVAL_STRING(ptr, 0);

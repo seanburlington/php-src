@@ -2,8 +2,12 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.63 2003/01/15 16:53:49 sebastian Exp $
+	$Id: config.w32.h,v 1.64 2003/01/16 18:16:50 phanto Exp $
 */
+
+#ifndef ZEND_ENGINE_2
+#error HEAD does not work with ZendEngine1 anymore
+#endif
 
 /* Default PHP / PEAR directories */
 #define CONFIGURATION_FILE_PATH "php.ini"
@@ -34,6 +38,9 @@
 
 /* Enable / Disable RPC extension (default: enabled) */
 #define HAVE_RPC 1
+
+/* Enable / Disable COM extension (default: enabled) */
+#define HAVE_COM 1
 
 /* Enable / Disable CTYPE extension (default: enabled) */
 #define HAVE_CTYPE 1

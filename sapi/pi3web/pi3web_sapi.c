@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.34 2001/09/27 20:01:21 jeroen Exp $ */
+/* $Id: pi3web_sapi.c,v 1.35 2001/10/09 19:19:19 derick Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -77,7 +77,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.34 2001/09/27 20:01:21 jeroen Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.35 2001/10/09 19:19:19 derick Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -91,7 +91,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	php_info_print_table_row(2, "Server PID", variable_buf);
 	php_info_print_table_row(2, "Server Platform", PIPlatform_getDescription());
 
-	PUTS("</table><BR>");	
+	PUTS("</table><br />");	
 
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">HTTP Request Information</th></tr>\n");

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fribidi.c,v 1.9 2001/09/09 13:28:48 derick Exp $ */
+/* $Id: fribidi.c,v 1.10 2001/10/09 19:19:18 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -190,7 +190,7 @@ PHP_FUNCTION(fribidi_log2vis)
 			fribidi_isiri_3342_to_unicode(inString, u_logical_str);
 			break;
 		default:
-			zend_error(E_ERROR,"unknown character set %d<BR>", Z_LVAL_PP(parameter3));
+			zend_error(E_ERROR,"unknown character set %d<br />", Z_LVAL_PP(parameter3));
 	}
 	
 	
@@ -227,7 +227,7 @@ PHP_FUNCTION(fribidi_log2vis)
 			fribidi_unicode_to_isiri_3342(u_visual_str, len , outString);
 			break;
 		default:
-			zend_error(E_ERROR,"unknown character set %d<BR>", Z_LVAL_PP(parameter3));
+			zend_error(E_ERROR,"unknown character set %d<br />", Z_LVAL_PP(parameter3));
 	}
 	
 

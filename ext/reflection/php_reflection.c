@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.40 2003/08/30 23:51:42 helly Exp $ */
+/* $Id: php_reflection.c,v 1.41 2003/08/31 10:06:13 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -80,17 +80,18 @@ string *string_printf(string *str, const char *format, ...)
 {
 	int n;
 	va_list arg;
-	va_start(arg, format); 
-	n = vsnprintf(str->string + str->len - 1, str->alloced - str->len, format, arg);
-	if (n > str->alloced - str->len) {
-		while (n + str->len > str->alloced ) {
-			str->alloced *= 2;
-		}
-		str->string = erealloc(str->string, str->alloced + 1);
-		n = vsnprintf(str->string + str->len - 1, str->alloced - str->len, format, arg);
+	char *s_tmp;
+
+	va_start(arg, format);
+	n = zend_vspprintf(&s_tmp, 0, format, arg);
+	if (n) {
+		str->alloced += n;
+		str->string = erealloc(str->string, str->alloced);
+		memcpy(str->string + str->len - 1, s_tmp, n);
+		str->len += n;
 	}
+	efree(s_tmp);
 	va_end(arg);
-	str->len += n;
 	return str;
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.65 2005/03/06 22:57:05 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.66 2005/03/06 23:07:43 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -168,7 +168,7 @@ static void spl_recursive_it_move_forward_ex(spl_recursive_it_object *object, zv
 	zend_object_iterator      *sub_iter;
 	int                       has_children;
 
-	while (1) {
+	while (!EG(exception)) {
 next_step:
 		iterator = object->iterators[object->level].iterator;
 		switch (object->iterators[object->level].state) {

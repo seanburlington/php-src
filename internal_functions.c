@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: internal_functions.c,v 1.5 1999/04/19 15:04:09 ssb Exp $ */
+/* $Id: internal_functions.c,v 1.6 1999/04/20 01:03:09 ssb Exp $ */
 
 
 #include "php.h"
@@ -96,7 +96,7 @@ zend_module_entry *php3_builtin_modules[] =
 	filepro_module_ptr,
 	sybase_module_ptr,
 	sybct_module_ptr,
-	uodbc_module_ptr,
+	odbc_module_ptr,
 	dbase_module_ptr,
 	hw_module_ptr,
 	regexp_module_ptr,

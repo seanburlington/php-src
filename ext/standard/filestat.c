@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.42 2000/07/27 13:28:21 stas Exp $ */
+/* $Id: filestat.c,v 1.43 2000/07/27 13:47:03 stas Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -396,7 +396,7 @@ PHP_FUNCTION(touch)
 	}
 	convert_to_string_ex(filename);
 
-	if (PG(safe_mode) &&(!php_checkuid((*filename)->value.str.val, NULL, 1))) {
+	if (PG(safe_mode) &&(!php_checkuid((*filename)->value.str.val, NULL, 2))) {
 		if (newtime) efree(newtime);
 		RETURN_FALSE;
 	}

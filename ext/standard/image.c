@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.106 2005/02/24 20:22:18 helly Exp $ */
+/* $Id: image.c,v 1.107 2005/02/24 20:22:40 helly Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -628,12 +628,19 @@ static struct gfxinfo *php_handle_jpc(php_stream * stream TSRMLS_DC)
 	result->height = php_read4(stream TSRMLS_CC); /* Xsiz */
 	result->width = php_read4(stream TSRMLS_CC); /* Ysiz */
 
+#if MBO_0
 	dummy_int = php_read4(stream TSRMLS_CC); /* XOsiz */
 	dummy_int = php_read4(stream TSRMLS_CC); /* YOsiz */
 	dummy_int = php_read4(stream TSRMLS_CC); /* XTsiz */
 	dummy_int = php_read4(stream TSRMLS_CC); /* YTsiz */
 	dummy_int = php_read4(stream TSRMLS_CC); /* XTOsiz */
 	dummy_int = php_read4(stream TSRMLS_CC); /* YTOsiz */
+#else
+	if (php_stream_seek(stream, 24, SEEK_CUR)) {
+		efree(result);
+		return NULL;
+	}
+#endif
 
 	result->channels = php_read2(stream TSRMLS_CC); /* Csiz */
 	if (result->channels < 0 || result->channels > 256) {

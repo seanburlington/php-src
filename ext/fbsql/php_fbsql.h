@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.h,v 1.3 2001/04/17 17:39:43 fmk Exp $ */
+/* $Id: php_fbsql.h,v 1.4 2001/04/25 18:00:55 fmk Exp $ */
 
 #define HAVE_FBSQL 1
 
@@ -28,10 +28,6 @@
 #define HAVE_FBSQL 1
 #endif
 #if HAVE_FBSQL
-
-#ifdef ZTS
-#include "TSRM.h"
-#endif
 
 extern zend_module_entry fbsql_module_entry;
 #define fbsql_module_ptr &fbsql_module_entry

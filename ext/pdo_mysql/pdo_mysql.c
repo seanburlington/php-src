@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_mysql.c,v 1.1 2004/05/18 18:01:52 gschlossnagle Exp $ */
+/* $Id: pdo_mysql.c,v 1.2 2004/05/19 13:34:40 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -61,8 +61,7 @@ ZEND_GET_MODULE(pdo_mysql)
  */
 PHP_MINIT_FUNCTION(pdo_mysql)
 {
-	php_pdo_register_driver(&pdo_mysql_driver);
-	return SUCCESS;
+	return php_pdo_register_driver(&pdo_mysql_driver);
 }
 /* }}} */
 

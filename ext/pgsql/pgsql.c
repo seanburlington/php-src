@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.40 2000/02/19 23:41:18 zeev Exp $ */
+/* $Id: pgsql.c,v 1.41 2000/02/24 07:27:39 eschmid Exp $ */
 
 #include <stdlib.h>
 
@@ -394,7 +394,7 @@ int php_pgsql_get_default_link(INTERNAL_FUNCTION_PARAMETERS)
 }
 
 
-/* {{{ proto int pg_connect([string connection_string] | [string host, string port, [string options, [string tty,]] string database)
+/* {{{ proto int pg_connect([string connection_string] | [string host, string port [, string options [, string tty,]] string database)
    Open a PostgreSQL connection */
 PHP_FUNCTION(pg_connect)
 {
@@ -402,7 +402,7 @@ PHP_FUNCTION(pg_connect)
 }
 /* }}} */
 
-/* {{{ proto int pg_pconnect([string connection_string] | [string host, string port, [string options, [string tty,]] string database)
+/* {{{ proto int pg_pconnect([string connection_string] | [string host, string port [, string options [, string tty,]] string database)
    Open a persistent PostgreSQL connection */
 PHP_FUNCTION(pg_pconnect)
 {
@@ -1186,7 +1186,7 @@ PHP_FUNCTION(pg_locreate)
 }
 /* }}} */
 
-/* {{{ proto void pg_lounlink([int connection, ] int large_obj_id)
+/* {{{ proto void pg_lounlink([int connection,] int large_obj_id)
    Delete a large object */
 PHP_FUNCTION(pg_lounlink)
 {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.32 2004/02/12 20:52:48 helly Exp $ */
+/* $Id: spl_array.c,v 1.33 2004/02/12 21:43:10 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -198,11 +198,7 @@ static void spl_array_write_dimension(zval *object, zval *offset, zval *value TS
 
 	switch(Z_TYPE_P(offset)) {
 	case IS_STRING:
-		if (!value->is_ref) {
-			value->refcount++;
-		} else {
-			SEPARATE_ZVAL_IF_NOT_REF(&value);
-		}
+		value->refcount++;
 		zend_symtable_update(HASH_OF(intern->array), Z_STRVAL_P(offset), Z_STRLEN_P(offset)+1, (void**)&value, sizeof(void*), NULL);
 		return;
 	case IS_DOUBLE:
@@ -214,11 +210,7 @@ static void spl_array_write_dimension(zval *object, zval *offset, zval *value TS
 		} else {
 			index = Z_LVAL_P(offset);
 		}
-		if (!value->is_ref) {
-			value->refcount++;
-		} else {
-			SEPARATE_ZVAL_IF_NOT_REF(&value);
-		}
+		value->refcount++;
 		add_index_zval(intern->array, index, value);
 		return;
 	default:

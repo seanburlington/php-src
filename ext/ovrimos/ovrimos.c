@@ -12,19 +12,22 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Dimitris Souflis <dsouflis@acm.org>, <dsouflis@ovrimos.com> |
-   |       integrated to php by Nikos Mavroyanopoulos <nmav@altera.gr>    |
+   | Authors: Dimitris Souflis, Nikos Mavroyanopoulos                     |
+   |          for Ovrimos S.A.                                            |
+   |                                                                      |
+   | Contact support@ovrimos.com for questions regarding this module      |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ovrimos.c,v 1.7 2001/06/06 13:05:48 rasmus Exp $ */
+/* $Id: ovrimos.c,v 1.8 2001/07/04 13:33:10 nmav Exp $ */
 
 #include <php.h>
 #include <php_globals.h>
 #include <zend_API.h>
 #include "ext/standard/php_standard.h"
 #include "ext/standard/info.h"
-#include <sqlcli.h>
+#include <sqlcli.h> /* ovrimos header 
+                     */
 #if !defined(WIN32)
 # define stricmp strcasecmp
 #endif
@@ -36,7 +39,16 @@ PHP_MINFO_FUNCTION(ovrimos)
 	php_printf("&quot;Ovrimos&quot; module<br>\n");
 }
 
-/* Main User Functions */
+/* Main User Functions 
+ */
+ 
+/* ovrimos_connect() currently does not support secure (SSL/TLS) connections.
+ * As an alternative you can use the unixODBC driver available at 
+ * http://www.ovrimos.com which supports SSL.
+ *
+ * Contact support@ovrimos.com for more information.
+ */
+ 
 /* {{{ proto int ovrimos_connect(string host, string db, string user, string password)
    Connect to an Ovrimos database */
 PHP_FUNCTION(ovrimos_connect)
@@ -1006,7 +1018,13 @@ PHP_FUNCTION(ovrimos_commit)
 	    || arg1->type != IS_LONG) {
 		WRONG_PARAM_COUNT;
 	}
+	
+	convert_to_long( arg1);
 	conn = (SQLH) (arg1->value.lval - 1);
+        /* use of sqlcli 1.1.7 and later versions, 
+         * is recommended due to a bug which prevented proper
+         * commit.
+         */
 	if (!sqlTransactCommit(conn)) {
 		RETURN_FALSE;
 	}

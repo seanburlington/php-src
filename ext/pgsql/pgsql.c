@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.194 2002/04/23 03:42:25 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.195 2002/04/24 22:57:21 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -1347,7 +1347,7 @@ PHP_FUNCTION(pg_fetch_array)
    Fetch a row as an object */
 PHP_FUNCTION(pg_fetch_object)
 {
-	php_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+	php_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, PGSQL_ASSOC);
 	if (Z_TYPE_P(return_value)==IS_ARRAY) {
 		object_and_properties_init(return_value, ZEND_STANDARD_CLASS_DEF_PTR, Z_ARRVAL_P(return_value));
 	}

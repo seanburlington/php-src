@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.19 2003/06/27 16:42:51 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.20 2003/07/24 08:04:20 zeev Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -937,6 +937,8 @@ static void php_putenv_destructor(putenv_entry *pe)
 	} else {
 # if HAVE_UNSETENV
 		unsetenv(pe->key);
+# elif defined(PHP_WIN32)
+		SetEnvironmentVariable(pe->key, NULL);
 # else
 		char **env;
 

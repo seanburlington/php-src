@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.26 2000/10/27 20:47:36 sniper Exp $ */
+/* $Id: ftp.c,v 1.27 2000/10/27 20:53:04 sniper Exp $ */
 
 #include "php.h"
 
@@ -1204,7 +1204,7 @@ ftp_genlist(ftpbuf_t *ftp, const char *cmd, const char *path)
 
 	fclose(tmpfp);
 
-	if (!ftp_getresp(ftp) || ftp->resp != 226) {
+	if (!ftp_getresp(ftp) || ftp->resp != 226 || ftp->resp != 250) {
 		free(ret);
 		return NULL;
 	}

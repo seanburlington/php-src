@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.255 2004/04/26 14:49:41 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.256 2004/07/12 07:40:05 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -786,7 +786,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.255 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.256 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -3698,8 +3698,8 @@ break;
 	}
 
 	memset((void*)&bind,0,sizeof(oci_bind));
-	zend_hash_next_index_insert(statement->binds,&bind,sizeof(oci_bind),(void **)&bindp);
-
+	zend_hash_update(statement->binds, Z_STRVAL_PP(name), Z_STRLEN_PP(name) + 1, &bind, sizeof(oci_bind), (void **)&bindp);
+	
 	bindp->descr = mydescr;
 	bindp->pStmt = mystmt;
 	bindp->zval = *var;

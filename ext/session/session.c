@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.265 2001/12/04 22:57:16 hholzgra Exp $ */
+/* $Id: session.c,v 1.266 2001/12/06 13:33:10 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1276,7 +1276,7 @@ PHP_FUNCTION(session_unregister)
 	
 	convert_to_string_ex(p_name);
 	
-	PS_DEL_VAR(Z_STRVAL_PP(p_name));
+	PS_DEL_VARL(Z_STRVAL_PP(p_name), Z_STRLEN_PP(p_name));
 
 	RETURN_TRUE;
 }

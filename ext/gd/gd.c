@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.196 2002/06/28 09:23:50 sniper Exp $ */
+/* $Id: gd.c,v 1.197 2002/06/28 09:53:25 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -2936,6 +2936,7 @@ PHP_FUNCTION(imagepsextendfont)
 
 	ZEND_FETCH_RESOURCE(f_ind, int *, fnt, -1, "Type 1 font", le_ps_font);
 
+	T1_DeleteAllSizes(*f_ind);
 	if (T1_ExtendFont(*f_ind, Z_DVAL_PP(ext)) != 0) RETURN_FALSE;
 
 	RETURN_TRUE;

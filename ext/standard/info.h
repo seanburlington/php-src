@@ -27,7 +27,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: info.h,v 1.8 1999/12/21 20:35:43 zeev Exp $ */
+/* $Id: info.h,v 1.9 2000/02/18 17:59:44 zeev Exp $ */
 
 #ifndef _INFO_H
 #define _INFO_H
@@ -46,10 +46,12 @@
 #define PHP_INFO_ALL				0xFFFFFFFF
 
 
-#define PHP_CREDITS_GENERAL			(1<<0)
-#define PHP_CREDITS_MODULES			(1<<1)
-#define PHP_CREDITS_DOCS			(1<<2)
-#define PHP_CREDITS_FULLPAGE		(1<<3)
+#define PHP_CREDITS_GROUP			(1<<0)
+#define PHP_CREDITS_GENERAL			(1<<1)
+#define PHP_CREDITS_SAPI			(1<<2)
+#define PHP_CREDITS_MODULES			(1<<3)
+#define PHP_CREDITS_DOCS			(1<<4)
+#define PHP_CREDITS_FULLPAGE		(1<<5)
 #define PHP_CREDITS_ALL				0xFFFFFFFF
 
 #define PHP_LOGO_GUID	"PHPE9568F34-D428-11d2-A769-00AA001ACF42"

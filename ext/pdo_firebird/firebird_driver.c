@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.8 2004/06/15 14:16:22 abies Exp $ */
+/* $Id: firebird_driver.c,v 1.9 2004/06/23 13:26:08 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -372,7 +372,7 @@ static int firebird_handle_rollback(pdo_dbh_t *dbh TSRMLS_DC) /* {{{ */
 /* }}} */
 
 /* used by prepare and exec to allocate a statement handle and prepare the SQL */
-static int firebird_alloc_prepare_stmt(pdo_dbh_t *dbh, const char *sql, long sql_len,
+static int firebird_alloc_prepare_stmt(pdo_dbh_t *dbh, const char *sql, long sql_len, /* {{{ */
 	XSQLDA *out_sqlda, isc_stmt_handle *s, HashTable *named_params TSRMLS_DC)
 {
 	pdo_firebird_db_handle *H = (pdo_firebird_db_handle *)dbh->driver_data;
@@ -419,14 +419,14 @@ static int firebird_alloc_prepare_stmt(pdo_dbh_t *dbh, const char *sql, long sql
 				}
 			} else {
 				if ((in_param &= (sql[l] == '_') || (sql[l] >= 'A' && sql[l] <= 'Z') 
-						|| (sql[l] >= 'a' && sql[l] <= 'z')	|| (sql[l] >= '0' && sql[l] <= '9'))) {
+						|| (sql[l] >= 'a' && sql[l] <= 'z') || (sql[l] >= '0' && sql[l] <= '9'))) {
 					*ppname++ = sql[l];
 					continue;
 				} else {
 					*ppname++ = 0;
 					if (named_params) {
 						zend_hash_update(named_params, pname, (unsigned int)(ppname-pname),
-							(void*)&pindex, sizeof(long),NULL);
+							(void*)&pindex, sizeof(long)+1,NULL);
 					}
 				}
 			}
@@ -444,6 +444,7 @@ static int firebird_alloc_prepare_stmt(pdo_dbh_t *dbh, const char *sql, long sql
 	efree(new_sql);
 	return 1;
 }
+/* }}} */
 	
 /* called by PDO to set a driver-specific dbh attribute */
 static int firebird_handle_set_attribute(pdo_dbh_t *dbh, long attr, zval *val TSRMLS_DC) /* {{{ */

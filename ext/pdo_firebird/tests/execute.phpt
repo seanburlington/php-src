@@ -5,7 +5,7 @@ PDO_Firebird: prepare/execute/binding
 --INI--
 ibase.timestampformat=%Y-%m-%d %H:%M:%S
 --FILE--
-<?php /* $Id: execute.phpt,v 1.3 2004/06/12 18:56:07 abies Exp $ */
+<?php /* $Id: execute.phpt,v 1.4 2004/06/23 13:26:09 abies Exp $ */
 
 	require("testdb.inc");
     
@@ -47,9 +47,9 @@ bool(true)
 int(1)
 array(6) {
   ["ID"]=>
-  int(1)
+  string(1) "1"
   [0]=>
-  int(1)
+  string(1) "1"
   ["TEXT"]=>
   string(3) "bla"
   [1]=>

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.2 2004/06/12 22:17:16 abies Exp $
+dnl $Id: config.m4,v 1.3 2004/06/23 13:26:08 abies Exp $
 dnl
 
 PHP_ARG_WITH(pdo-firebird,for Firebird support for PDO,
@@ -19,11 +19,11 @@ if test "$PHP_PDO_FIREBIRD" != "no"; then
   [
     FIREBIRD_LIBNAME=gds
   ], [
-    PHP_CHECK_LIBRARY(fbclient, isc_detach_database,
+    PHP_CHECK_LIBRARY(ib_util, isc_detach_database,
     [
-      FIREBIRD_LIBNAME=fbclient
+      FIREBIRD_LIBNAME=ib_util
     ], [
-      AC_MSG_ERROR([libgds or libfbclient not found! Check config.log for more information.])
+      AC_MSG_ERROR([libgds or libib_util not found! Check config.log for more information.])
     ], [
       -L$FIREBIRD_LIBDIR
     ])

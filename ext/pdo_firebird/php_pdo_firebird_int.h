@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_firebird_int.h,v 1.7 2004/06/15 14:16:22 abies Exp $ */
+/* $Id: php_pdo_firebird_int.h,v 1.8 2004/06/23 13:26:08 abies Exp $ */
 
 #ifndef PHP_PDO_FIREBIRD_INT_H
 #define PHP_PDO_FIREBIRD_INT_H
@@ -53,6 +53,10 @@
 typedef void (__stdcall *info_func_t)(char*);
 #else
 typedef void (*info_func_t)(char*);
+#endif
+
+#ifndef min
+#define min(a,b) ((a)<(b)?(a):(b))
 #endif
 
 typedef struct {

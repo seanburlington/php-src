@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.58 2003/09/02 22:37:26 abies Exp $ */
+/* $Id: php_interbase.h,v 1.59 2003/09/04 11:09:46 abies Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -130,9 +130,8 @@ typedef struct tr_list {
 
 typedef struct {
 	ISC_ARRAY_DESC ar_desc;
-	int el_type, /* sqltype kinda SQL_TEXT, ...*/
-		el_size; /* element size in bytes */
-	ISC_LONG ar_size; /* all array size in bytes */
+	ISC_LONG ar_size; /* size of entire array in bytes */
+	unsigned short el_type, el_size;
 } ibase_array;
 
 typedef struct {
@@ -158,7 +157,6 @@ typedef struct {
 	isc_stmt_handle stmt;
 	XSQLDA *in_sqlda, *out_sqlda;
 	ibase_array *in_array, *out_array;
-	int in_array_cnt, out_array_cnt;
 	unsigned short dialect;
 	char statement_type;
 	char *query;

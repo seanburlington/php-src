@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: php_main.h,v 1.18 2002/02/26 19:38:41 andi Exp $ */
+/* $Id: php_main.h,v 1.19 2002/03/04 18:46:55 sas Exp $ */
 
 
 #ifndef PHP_MAIN_H
@@ -44,6 +44,8 @@ PHPAPI int php_lint_script(zend_file_handle *file TSRMLS_DC);
 
 PHPAPI void php_handle_aborted_connection(void);
 PHPAPI int php_handle_auth_data(const char *auth TSRMLS_DC);
+
+PHPAPI void php_html_puts(const char *str, uint siz TSRMLS_DC);
 
 extern void php_call_shutdown_functions(void);
 

@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearcmd.php,v 1.5 2003/12/11 05:54:35 cellog Exp $
+// $Id: pearcmd.php,v 1.6 2003/12/18 17:48:54 cellog Exp $
 
 ob_end_clean();
 /**
@@ -265,21 +265,21 @@ function cmdHelp($command)
 // }}}
 
 function error_handler($errno, $errmsg, $file, $line, $vars) {
-    if (error_reporting() == 0) {
+    if (error_reporting() == 0 || ($errno & E_STRICT)) {
         return; // @silenced error
     }
     $errortype = array (
-        1   =>  "Error",
-        2   =>  "Warning",
-        4   =>  "Parsing Error",
-        8   =>  "Notice",
-        16  =>  "Core Error",
-        32  =>  "Core Warning",
-        64  =>  "Compile Error",
-        128 =>  "Compile Warning",
-        256 =>  "User Error",
-        512 =>  "User Warning",
-        1024=>  "User Notice"
+        E_ERROR   =>  "Error",
+        E_WARNING   =>  "Warning",
+        E_PARSE   =>  "Parsing Error",
+        E_NOTICE   =>  "Notice",
+        E_CORE_ERROR  =>  "Core Error",
+        E_CORE_WARNING  =>  "Core Warning",
+        E_COMPILE_ERROR  =>  "Compile Error",
+        E_COMPILE_WARNING =>  "Compile Warning",
+        E_USER_ERROR =>  "User Error",
+        E_USER_WARNING =>  "User Warning",
+        E_USER_NOTICE =>  "User Notice"
     );
     $prefix = $errortype[$errno];
     $file = basename($file);

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.h,v 1.23 2004/02/04 14:46:11 dmitry Exp $ */
+/* $Id: php_sdl.h,v 1.24 2004/02/06 11:56:03 dmitry Exp $ */
 
 #ifndef PHP_SDL_H
 #define PHP_SDL_H
@@ -36,19 +36,30 @@
 #define SOAP_LITERAL 2
 
 struct _sdl {
-	HashTable  docs;             /* pointer to the parsed xml file */
 	HashTable  functions;        /* array of sdlFunction */
 	HashTable *types;            /* array of sdlTypesPtr */
 	HashTable *elements;         /* array of sdlTypesPtr */
 	HashTable *encoders;         /* array of encodePtr */
 	HashTable *bindings;         /* array of sdlBindings (key'd by name) */
 	HashTable *requests;         /* array of sdlFunction (references) */
-	HashTable *attributes;       /* array of sdlAttributePtr */
-	HashTable *attributeGroups;  /* array of sdlTypesPtr */
 	HashTable *groups;           /* array of sdlTypesPtr */
 	char      *target_ns;
 	char      *source;
 };
+
+typedef struct sdlCtx {
+	sdlPtr     sdl;
+
+	HashTable  docs;             /* array of xmlDocPtr */
+
+	HashTable  messages;         /* array of xmlNodePtr */
+	HashTable  bindings;         /* array of xmlNodePtr */
+	HashTable  portTypes;        /* array of xmlNodePtr */
+	HashTable  services;         /* array of xmlNodePtr */
+
+	HashTable *attributes;       /* array of sdlAttributePtr */
+	HashTable *attributeGroups;  /* array of sdlTypesPtr */
+} sdlCtx;
 
 struct _sdlBinding {
 	char *name;
@@ -192,6 +203,10 @@ typedef enum _sdlForm {
 	XSD_FORM_UNQUALIFIED
 } sdlForm;
 
+typedef struct _sdlExtraAttribute {
+	char *ns;
+	char *val;
+} sdlExtraAttribute, *sdlExtraAttributePtr;
 
 struct _sdlAttribute {
 	char      *name;
@@ -200,7 +215,7 @@ struct _sdlAttribute {
 	char      *fixed;
 	sdlForm    form;
 	sdlUse     use;
-	HashTable *extraAttributes;			/* array of xmlNodePtr */
+	HashTable *extraAttributes;			/* array of sdlExtraAttribute */
 	encodePtr  encode;
 };
 

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.h,v 1.30 2004/02/05 20:26:02 dmitry Exp $ */
+/* $Id: php_encoding.h,v 1.31 2004/02/06 11:56:03 dmitry Exp $ */
 
 #ifndef PHP_ENCODING_H
 #define PHP_ENCODING_H
@@ -203,9 +203,9 @@ void whiteSpace_collapse(char* str);
 xmlNodePtr sdl_guess_convert_xml(encodeTypePtr enc, zval* data, int style, xmlNodePtr parent);
 zval *sdl_guess_convert_zval(encodeTypePtr enc, xmlNodePtr data);
 
-#define get_conversion(e) get_conversion_ex(SOAP_GLOBAL(defEncIndex), e)
-#define get_conversion_from_type(n, t) get_conversion_from_type_ex(SOAP_GLOBAL(defEnc), n, t)
-#define get_conversion_from_href_type(t) get_conversion_from_href_type_ex(SOAP_GLOBAL(defEnc), t, strlen(t))
+#define get_conversion(e) get_conversion_ex(&SOAP_GLOBAL(defEncIndex), e)
+#define get_conversion_from_type(n, t) get_conversion_from_type_ex(&SOAP_GLOBAL(defEnc), n, t)
+#define get_conversion_from_href_type(t) get_conversion_from_href_type_ex(&SOAP_GLOBAL(defEnc), t, strlen(t))
 
 void encode_reset_ns();
 xmlNsPtr encode_add_ns(xmlNodePtr node, const char* ns);

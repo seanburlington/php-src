@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.428 2001/12/07 13:20:18 sterling Exp $ */
+/* $Id: basic_functions.c,v 1.429 2001/12/08 23:44:34 derick Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -533,6 +533,7 @@ function_entry basic_functions[] = {
 	PHP_FE(unserialize,														NULL)
 
 	PHP_FE(var_dump,														NULL)
+	PHP_FE(var_export,														NULL)
 	PHP_FE(print_r,															NULL)
 
 	PHP_FE(register_shutdown_function,										NULL)

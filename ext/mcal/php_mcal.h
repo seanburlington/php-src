@@ -1,4 +1,4 @@
-/* $Id: php_mcal.h,v 1.7 2000/06/10 08:47:57 andi Exp $ */
+/* $Id: php_mcal.h,v 1.8 2000/06/14 12:28:20 thies Exp $ */
 
 #ifndef _INCLUDED_MCAL_H
 #define _INCLUDED_MCAL_H
@@ -10,7 +10,7 @@
 #endif
 
 /* Functions accessable to PHP */
-//extern zend_module_entry php_mcal_module_entry;
+/* extern zend_module_entry php_mcal_module_entry; */
 extern zend_module_entry php_mcal_module_entry;
 #define php_mcal_module_ptr &php_mcal_module_entry
 #define phpext_mcal_ptr php_mcal_module_ptr

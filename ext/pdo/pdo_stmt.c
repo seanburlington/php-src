@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.61 2005/01/21 03:57:05 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.62 2005/02/05 21:29:42 wez Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -680,7 +680,7 @@ static PHP_METHOD(PDOStatement, rowCount)
 }
 /* }}} */
 
-/* {{{ proto int PDOStatement::errorCode()
+/* {{{ proto string PDOStatement::errorCode()
    Fetch the error code associated with the last operation on the statement handle */
 static PHP_METHOD(PDOStatement, errorCode)
 {

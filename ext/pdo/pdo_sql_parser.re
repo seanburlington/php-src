@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.13 2005/01/21 03:57:05 wez Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.14 2005/02/05 21:29:42 wez Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -160,7 +160,8 @@ PDO_API int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len,
 			}
 			if (stmt->dbh->methods->quoter) {
 				if (!stmt->dbh->methods->quoter(stmt->dbh, Z_STRVAL_P(param->parameter),
-						Z_STRLEN_P(param->parameter), &plc->quoted, &plc->qlen TSRMLS_CC)) {
+						Z_STRLEN_P(param->parameter), &plc->quoted, &plc->qlen,
+						param->param_type TSRMLS_CC)) {
 					/* bork */
 					ret = -1;
 					strcpy(stmt->error_code, stmt->dbh->error_code);

@@ -2,12 +2,8 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.64 2003/01/16 18:16:50 phanto Exp $
+	$Id: config.w32.h,v 1.65 2003/01/16 22:09:58 phanto Exp $
 */
-
-#ifndef ZEND_ENGINE_2
-#error HEAD does not work with ZendEngine1 anymore
-#endif
 
 /* Default PHP / PEAR directories */
 #define CONFIGURATION_FILE_PATH "php.ini"

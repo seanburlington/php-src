@@ -16,8 +16,12 @@
 	|          Zeev Suraski <zeev@zend.com>                                |
 	+----------------------------------------------------------------------+
 
-	$Id: internal_functions_win32.c,v 1.69 2003/01/16 18:17:48 phanto Exp $
+	$Id: internal_functions_win32.c,v 1.70 2003/01/16 22:09:58 phanto Exp $
 */
+
+#ifndef ZEND_ENGINE_2
+#error HEAD does not work with ZendEngine1 anymore
+#endif
 
 /* {{{ includes
  */

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.12 2001/05/12 11:08:56 sas Exp $
+dnl $Id: config.m4,v 1.13 2001/05/20 23:39:09 sas Exp $
 
 PHP_ARG_WITH(mm,for mm support,
 [  --with-mm[=DIR]         Include mm support for session storage])
@@ -32,6 +32,8 @@ fi
 
 if test "$PHP_SESSION" != "no"; then
   AC_CHECK_FUNCS(pread pwrite)
+  PHP_MISSING_PWRITE_DECL
+  PHP_MISSING_PREAD_DECL
   PHP_EXTENSION(session,$ext_shared)
   PHP_SUBST(SESSION_SHARED_LIBADD)
 fi

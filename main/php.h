@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.137 2001/04/30 14:23:41 dbeu Exp $ */
+/* $Id: php.h,v 1.138 2001/05/20 23:39:09 sas Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -236,6 +236,14 @@ extern pval *data;
 #if !defined(PHP_WIN32)
 extern char **environ;
 #define php_sleep sleep
+#endif
+
+#ifdef PHP_PWRITE_64
+ssize_t pwrite(int, void *, size_t, off64_t);
+#endif
+
+#ifdef PHP_PREAD_64
+ssize_t pread(int, void *, size_t, off64_t);
 #endif
 
 void phperror(char *error);

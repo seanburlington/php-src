@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.80 2003/08/31 12:41:42 zeev Exp $ */
+/* $Id: openssl.c,v 1.81 2003/08/31 20:45:42 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2298,7 +2298,7 @@ PHP_FUNCTION(openssl_pkcs7_encrypt)
 			cipher = EVP_des_ede3_cbc();
 			break;
 		default:
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid cipher type `%d'", cipherid);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid cipher type `%ld'", cipherid);
 			goto clean_exit;
 	}
 	if (cipher == NULL) {

@@ -1,10 +1,10 @@
-# $Id: htaccessfix.awk,v 1.1 1999/07/15 18:33:41 andi Exp $
+# $Id: htaccessfix.awk,v 1.2 1999/08/07 15:31:57 zeev Exp $
 
-/php3_*/ {
+/^[ \t]*php3_*/ {
 	phpcommand=substr($1,6)
 	phpvalue=tolower($2)
 	print "<IfModule mod_php3.c>"
-	print $1 $2
+	print $0
 	print "</IfModule>"
 	print "<IfModule mod_php4.c>"
 	if (phpvalue=="on") {
@@ -17,7 +17,7 @@
 	print "</IfModule>"
 }
 
-! /php3_*/ {
+! /^[ \t]*php3_*/ {
 	print $0
 }
 

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.22 2000/05/23 13:56:04 askalski Exp $ */
+/* $Id: ftp.c,v 1.23 2000/06/17 16:49:03 zeev Exp $ */
 
 #include "php.h"
 
@@ -464,7 +464,7 @@ ftp_pasv(ftpbuf_t *ftp, int pasv)
 		return 0;
 
 	for (n=0; n<6; n++)
-		ipbox.c[n] = b[n];
+		ipbox.c[n] = (unsigned char) b[n];
 
 	memset(&ftp->pasvaddr, 0, sizeof(ftp->pasvaddr));
 	ftp->pasvaddr.sin_family = AF_INET;

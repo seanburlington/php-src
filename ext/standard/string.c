@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.130 2000/06/17 14:48:02 andi Exp $ */
+/* $Id: string.c,v 1.131 2000/06/17 16:49:03 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2126,7 +2126,7 @@ PHP_FUNCTION(setlocale)
 		cat = LC_COLLATE;
 	else if (!strcasecmp ("LC_CTYPE", category->value.str.val))
 		cat = LC_CTYPE;
-#ifndef PHP_WIN32
+#ifdef LC_MESSAGES
 	else if (!strcasecmp ("LC_MESSAGES", category->value.str.val))
 		cat = LC_MESSAGES;
 #endif

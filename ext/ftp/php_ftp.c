@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.23 2000/06/05 19:47:41 andi Exp $ */
+/* $Id: php_ftp.c,v 1.24 2000/06/17 16:49:03 zeev Exp $ */
 
 #include "php.h"
 
@@ -151,7 +151,7 @@ PHP_FUNCTION(ftp_connect)
 			WRONG_PARAM_COUNT;
 		}
 		convert_to_long(arg2);
-		port = arg2->value.lval;
+		port = (short) arg2->value.lval;
 		break;
 	default:
 		WRONG_PARAM_COUNT;

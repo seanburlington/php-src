@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.53 2000/05/01 18:56:58 rasmus Exp $ */
+/* $Id: gd.c,v 1.54 2000/05/01 22:14:54 rasmus Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1463,10 +1463,6 @@ static void php_imagepolygon(INTERNAL_FUNCTION_PARAMETERS, int filled) {
 	}
 
 	points = (gdPointPtr) emalloc(npoints * sizeof(gdPoint));
-	if (points == NULL) {
-		php_error(E_WARNING, "ImagePolygon: Memory allocation fault");
-		RETURN_FALSE;
-	}
 
 	for (i = 0; i < npoints; i++) {
 		if (zend_hash_index_find((*POINTS)->value.ht, (i * 2), (void **) &var) == SUCCESS) {

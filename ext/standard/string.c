@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.20 1999/06/21 15:57:20 thies Exp $ */
+/* $Id: string.c,v 1.21 1999/06/22 19:36:52 andrey Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -1375,7 +1375,7 @@ _php3_memnstr(char *haystack, char *needle, int needle_len, char *end)
 	return NULL;
 }
 
-static char *_php3_str_to_str(char *haystack, int length, 
+PHPAPI char *_php3_str_to_str(char *haystack, int length, 
 	char *needle, int needle_len, char *str, int str_len, int *_new_length)
 {
 	char *p, *q;
@@ -1444,7 +1444,7 @@ static char *_php3_memstr(char *s, char *c, size_t n, size_t m)
     no += sz
 
 
-static char *_php3_str_to_str(char *a, int al, char *b, int bl, char *c, int cl,
+PHPAPI char *_php3_str_to_str(char *a, int al, char *b, int bl, char *c, int cl,
         int *newlen)
 {
     char *n = NULL, *p, *q;

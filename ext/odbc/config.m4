@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.47 2001/11/30 18:59:47 sniper Exp $
+dnl $Id: config.m4,v 1.48 2002/02/06 19:10:35 derick Exp $
 dnl
 
 dnl
@@ -538,7 +538,7 @@ fi
 if test -n "$ODBC_TYPE"; then
   INCLUDES="$INCLUDES $ODBC_INCLUDE"
   if test "$ODBC_TYPE" != "dbmaker"; then
-    if test $shared != "yes"; then
+    if test "$shared" != "yes"; then
       EXTRA_LIBS="$EXTRA_LIBS $ODBC_LFLAGS $ODBC_LIBS"
     fi
   fi

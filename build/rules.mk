@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: rules.mk,v 1.19 2000/07/09 20:39:18 sas Exp $ 
+# $Id: rules.mk,v 1.20 2000/07/10 08:45:07 sas Exp $ 
 #
 
 include $(top_builddir)/config_vars.mk
@@ -43,13 +43,15 @@ DEFS = -DHAVE_CONFIG_H -I. -I$(srcdir) -I$(top_builddir) -I$(top_builddir)/main
 
 moduledir    = $(EXTENSION_DIR)
 
+CXX_SUFFIX = .cxx
+	
 .SUFFIXES:
-.SUFFIXES: .slo .c .cxx .lo .o .s .y .l
+.SUFFIXES: .slo .c $(CXX_SUFFIX) .lo .o .s .y .l
 
 .c.o:
 	$(COMPILE) -c $<
 
-.cxx.o:
+$(CXX_SUFFIX).o:
 	$(CXX_COMPILE) -c $<
 
 .s.o:
@@ -58,7 +60,7 @@ moduledir    = $(EXTENSION_DIR)
 .c.lo:
 	$(PHP_COMPILE)
 
-.cxx.lo:
+$(CXX_SUFFIX).lo:
 	$(CXX_PHP_COMPILE)
 
 .s.lo:
@@ -67,7 +69,7 @@ moduledir    = $(EXTENSION_DIR)
 .c.slo:
 	$(SHARED_COMPILE)
 
-.cxx.slo:
+$(CXX_SUFFIX).slo:
 	$(CXX_SHARED_COMPILE)
 
 .y.c:

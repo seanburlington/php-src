@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.227 2001/08/22 05:47:11 swm Exp $ */
+/* $Id: string.c,v 1.228 2001/09/03 04:49:36 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3724,38 +3724,32 @@ PHP_FUNCTION(str_pad)
    Implements an ANSI C compatible sscanf */
 PHP_FUNCTION(sscanf)
 {
-    zval **format;
-    zval **literal;
-    int  result;
-	zval ***args;
-	int	argCount;	
+    zval ***args;
+    int     result;
+	int	    argc = ZEND_NUM_ARGS();	
 
-    argCount = ZEND_NUM_ARGS();
-	if (argCount < 2) {
+	if (argc < 2) {
 		WRONG_PARAM_COUNT;
 	}
-	args = (zval ***)emalloc(argCount * sizeof(zval **));
-	if (!args || (zend_get_parameters_array_ex(argCount, args) == FAILURE)) {
-		efree( args );
+
+	args = (zval ***) emalloc(argc * sizeof(zval **));
+	if (zend_get_parameters_array_ex(argc, args) == FAILURE) {
+		efree(args);
 		WRONG_PARAM_COUNT;
 	}
-	
-	literal = args[0];
-	format  = args[1];
 
-	convert_to_string_ex( format );
-	convert_to_string_ex( literal );
+	convert_to_string_ex(args[0]);
+	convert_to_string_ex(args[1]);
 	
-	result = php_sscanf_internal( (*literal)->value.str.val,
-								  (*format)->value.str.val,
-								  argCount, args,
-								  2, &return_value TSRMLS_CC);
+	result = php_sscanf_internal(Z_STRVAL_PP(args[0]),
+								 Z_STRVAL_PP(args[1]),
+								 argc, args,
+								 2, &return_value TSRMLS_CC);
 	efree(args);
 
 	if (SCAN_ERROR_WRONG_PARAM_COUNT == result) {
 		WRONG_PARAM_COUNT;
 	}
-
 }
 /* }}} */
 

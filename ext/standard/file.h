@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.55 2002/03/19 17:48:57 wez Exp $ */
+/* $Id: file.h,v 1.56 2002/03/20 14:38:11 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -105,7 +105,6 @@ typedef struct _php_meta_tags_data {
 php_meta_tags_token php_next_meta_token(php_meta_tags_data * TSRMLS_DC);
 
 typedef struct {
-  int fgetss_state;
   int pclose_ret;
   HashTable ht_persistent_socks;
   size_t def_chunk_size;

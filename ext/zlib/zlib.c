@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.117 2002/03/20 14:21:29 wez Exp $ */
+/* $Id: zlib.c,v 1.118 2002/03/20 14:38:13 wez Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -517,7 +517,7 @@ PHP_FUNCTION(gzgetss)
 	}
 
 	/* strlen() can be used here since we are doing it on the return of an fgets() anyway */
-	php_strip_tags(buf, strlen(buf), ZLIBG(gzgetss_state), allowed_tags, allowed_tags_len);
+	php_strip_tags(buf, strlen(buf), &ZLIBG(gzgetss_state), allowed_tags, allowed_tags_len);
 	RETURN_STRING(buf, 0);
 	
 }

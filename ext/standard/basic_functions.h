@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.106 2002/09/07 15:45:29 sterling Exp $ */
+/* $Id: basic_functions.h,v 1.107 2002/09/23 18:12:38 wez Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -141,9 +141,6 @@ typedef struct {
 
 	HashTable sm_protected_env_vars;
 	char *sm_allowed_env_vars;
-
-	/* file.c */
-	char *user_agent;
 	
 	/* pageinfo.c */
 	long page_uid;

@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.48 2002/09/23 01:47:01 wez Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.49 2002/09/23 18:12:38 wez Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -203,8 +203,8 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 	if (context && 
 	    php_stream_context_get_option(context, "http", "user_agent", &ua_zval) == SUCCESS) {
 		ua_str = Z_STRVAL_PP(ua_zval);
-	} else if (BG(user_agent)) {
-		ua_str = BG(user_agent);
+	} else if (FG(user_agent)) {
+		ua_str = FG(user_agent);
 	}
 
 	if (ua_str) {

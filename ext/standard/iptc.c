@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.38 2002/05/04 17:41:11 sas Exp $ */
+/* $Id: iptc.c,v 1.39 2002/05/04 17:41:51 sas Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -112,9 +112,7 @@ static int php_iptc_get1(FILE *fp, int spool, unsigned char **spoolbuf TSRMLS_DC
  */
 static int php_iptc_read_remaining(FILE *fp, int spool, unsigned char **spoolbuf TSRMLS_DC)
 {
- 	int c;
-
-  	while ((c = php_iptc_get1(fp, spool, spoolbuf TSRMLS_CC)) != EOF) continue;
+  	while (php_iptc_get1(fp, spool, spoolbuf TSRMLS_CC) != EOF) continue;
 
 	return M_EOI;
 }

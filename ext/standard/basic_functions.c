@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.648 2003/12/19 13:49:59 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.649 2003/12/22 16:00:52 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -90,6 +90,10 @@ typedef struct yy_buffer_state *YY_BUFFER_STATE;
 
 #ifdef PHP_WIN32
 # include "win32/unistd.h"
+#endif
+
+#ifndef INADDR_NONE
+#define INADDR_NONE ((unsigned long int) -1)
 #endif
 
 #include "zend_globals.h"

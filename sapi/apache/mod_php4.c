@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.28 2000/02/10 19:24:44 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.29 2000/02/10 19:29:21 zeev Exp $ */
 
 #include "zend.h"
 #include "php.h"
@@ -149,11 +149,13 @@ static int sapi_apache_ub_write(const char *str, uint str_length)
 
 static void sapi_apache_flush(void *server_context)
 {
+	if (server_context) {
 #if MODULE_MAGIC_NUMBER > 19970110
-	rflush((request_rec *) server_context);
+		rflush((request_rec *) server_context);
 #else
-	bflush((request_rec *) server_context->connection->client);
+		bflush((request_rec *) server_context->connection->client);
 #endif
+	}
 }
 
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.33 2001/05/22 00:39:17 sniper Exp $
+dnl $Id: config.m4,v 1.34 2001/06/26 05:50:42 sniper Exp $
 dnl
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
@@ -53,7 +53,7 @@ AC_DEFUN(PHP_IMAP_SSL_CHK, [
     PHP_ADD_LIBRARY_DEFER(ssl)
 
     old_LIBS=$LIBS
-    LIBS="$LIBS -lc-client"
+    LIBS="$LIBS -lc-client -lcrypto -lssl"
     if test $PHP_KERBEROS != "no"; then
       LIBS="$LIBS -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err"
     fi
@@ -81,7 +81,7 @@ AC_DEFUN(PHP_IMAP_SSL_CHK, [
     ],[
       AC_DEFINE(HAVE_IMAP_SSL,1,[ ])
     ], [
-      AC_MSG_ERROR(This c-client library does not support SSL. Recompile or remove --with-imap-ssl from configure line.)
+      AC_MSG_ERROR(Problem with c-client library. Please check config.log for more information.)
     ])
     LIBS=$old_LIBS
   fi

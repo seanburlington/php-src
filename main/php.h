@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.164 2002/03/16 17:54:11 wez Exp $ */
+/* $Id: php.h,v 1.165 2002/03/16 20:11:06 helly Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -172,6 +172,7 @@ char *strerror(int);
 #endif
 
 #include "php_streams.h"
+#include "php_memory_streams.h"
 #include "fopen_wrappers.h"
 
 #if (REGEX == 1 || REGEX == 0) && !defined(NO_REGEX_EXTRA_H)
@@ -357,7 +358,7 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #define XtOffsetOf(s_type, field) XtOffset(s_type*, field)
 #endif
 #endif /* !XtOffsetOf */
-	
+
 PHPAPI PHP_FUNCTION(warn_not_available);
 
 #endif

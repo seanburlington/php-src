@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.12 2002/07/11 03:37:28 yohgaki Exp $
+dnl $Id: config.m4,v 1.13 2002/08/08 01:46:07 yohgaki Exp $
 dnl
 
 PHP_ARG_WITH(iconv, for iconv support,
@@ -38,11 +38,12 @@ int main() {
 }
 ],[
 	AC_MSG_RESULT(yes)
-	PHP_DEFINE(ICONV_SUPPORTS_ERRNO)
+        AC_DEFINE(ICONV_SUPPORTS_ERRNO,1,[Whether iconv supports error no or not])
 ],[
 	AC_MSG_RESULT(no)
 ])
 
+    AC_DEFINE(HAVE_ICONV,1,[Whether to build ICONV support or not])
     PHP_NEW_EXTENSION(iconv, iconv.c, $ext_shared)
     PHP_SUBST(ICONV_SHARED_LIBADD)
   ], [

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.65 2001/06/08 01:15:35 cox Exp $
+// $Id: DB.php,v 1.66 2001/07/10 11:55:15 cox Exp $
 //
 // Database independent query interface.
 //
@@ -73,7 +73,7 @@ define('DB_WARNING_READ_ONLY', -1001);
  *
  * The prepare/execute model in DB is mostly borrowed from the ODBC
  * extension, in a query the "?" character means a scalar parameter.
- * There is one extension though, a "*" character means an opaque
+ * There is one extension though, a "&" character means an opaque
  * parameter.  An opaque parameter is simply a file name, the real
  * data are in that file (useful for stuff like putting uploaded files
  * into your database).

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.8.2.1 2004/08/05 21:03:15 edink Exp $ */
+/* $Id: php_libxml.h,v 1.8.2.2 2004/09/08 10:16:57 rrichards Exp $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -80,6 +80,7 @@ void php_libxml_node_decrement_resource(php_libxml_node_object *object TSRMLS_DC
 PHP_LIBXML_API void php_libxml_error_handler(void *ctx, const char *msg, ...);
 void php_libxml_ctx_warning(void *ctx, const char *msg, ...);
 void php_libxml_ctx_error(void *ctx, const char *msg, ...);
+PHP_LIBXML_API int php_libxml_xmlCheckUTF8(const unsigned char *s);
 
 #endif /* HAVE_LIBXML */
 

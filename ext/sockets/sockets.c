@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.27 2001/01/03 18:06:10 jon Exp $ */
+/* $Id: sockets.c,v 1.28 2001/01/16 20:37:51 rasmus Exp $ */
 
 #include "php.h"
 
@@ -1077,7 +1077,6 @@ PHP_FUNCTION(strerror)
 {
 	zval **error;
 	const char *buf;
-	char *obuf;
 
 	if (ZEND_NUM_ARGS() != 1 || 
 	    zend_get_parameters_ex(1, &error) == FAILURE) {
@@ -1333,7 +1332,6 @@ PHP_FUNCTION(free_iovec)
 {
 	zval **iovec_id;
 	php_iovec_t *vector;
-	int pos;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &iovec_id) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -2028,9 +2026,8 @@ PHP_FUNCTION(setsockopt)
    Creates a pair of indistinguishable sockets and stores them in fds. */
 PHP_FUNCTION(socketpair)
 {
-	zval **domain, **type, **protocol, **fds, **fd;
+	zval **domain, **type, **protocol, **fds;
 	int ret, fds_ar[2];
-	HashTable *fd_ar;
 	
 	if (ZEND_NUM_ARGS() != 4 ||
 	    zend_get_parameters_ex(4, &domain, &type, &protocol, &fds) == FAILURE) {

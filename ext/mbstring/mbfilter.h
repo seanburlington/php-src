@@ -84,7 +84,7 @@
  *
  */
 
-/* $Id: mbfilter.h,v 1.2 2001/05/07 13:57:59 hirokawa Exp $ */
+/* $Id: mbfilter.h,v 1.3 2001/05/08 14:33:20 hirokawa Exp $ */
 
 
 #ifndef MBFL_MBFILTER_H
@@ -255,6 +255,7 @@ void mbfl_string_init(mbfl_string *string);
 mbfl_language * mbfl_name2language(const char *name);
 mbfl_language * mbfl_no2language(enum mbfl_no_language no_language);
 enum mbfl_no_language mbfl_name2no_language(const char *name);
+const char * mbfl_no_language2name(enum mbfl_no_language no_language);
 
 
 /*

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.84 2002/12/31 16:18:26 sebastian Exp $
+// $Id: Installer.php,v 1.85 2003/01/29 21:42:54 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -451,10 +451,12 @@ class PEAR_Installer extends PEAR_Common
 
     function _prependPath($path, $prepend)
     {
-        if (OS_WINDOWS && preg_match('/^[a-z]:/i', $path)) {
-            $path = $prepend . substr($path, 2);
-        } else {
-            $path = $prepend . $path;
+        if (strlen($prepend) > 0) {
+            if (OS_WINDOWS && preg_match('/^[a-z]:/i', $path)) {
+                $path = $prepend . substr($path, 2);
+            } else {
+                $path = $prepend . $path;
+            }
         }
         return $path;
     }

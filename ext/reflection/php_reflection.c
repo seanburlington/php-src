@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.34 2003/08/27 20:45:34 helly Exp $ */
+/* $Id: php_reflection.c,v 1.35 2003/08/27 20:48:41 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -1583,7 +1583,6 @@ ZEND_METHOD(reflection_class, newinstance)
 	/* Run the constructor if there is one */
 	if (ce->constructor) {
 		zval ***params;
-		zval *fname;
 		zend_fcall_info fci;
 		zend_fcall_info_cache fcc;
 

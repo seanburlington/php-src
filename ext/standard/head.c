@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.77 2004/09/25 15:33:57 hyanantha Exp $ */
+/* $Id: head.c,v 1.78 2005/01/07 20:55:46 tony2001 Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -23,7 +23,6 @@
 #include "SAPI.h"
 #include "php_main.h"
 #include "head.h"
-#include "SAPI.h"
 #ifdef TM_IN_SYS_TIME
 #include <sys/time.h>
 #else

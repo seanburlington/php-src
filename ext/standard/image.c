@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.23 2000/07/29 15:29:35 thies Exp $ */
+/* $Id: image.c,v 1.24 2000/08/11 23:24:54 derick Exp $ */
 /* 
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -94,7 +94,7 @@ static unsigned long php_read4(FILE *fp)
 
 }
 
-static unsigned long int php_swf_get_bits (unsigned char* buffer, int pos, int count)
+static unsigned long int php_swf_get_bits (unsigned char* buffer, unsigned int pos, unsigned int count)
 {
 	unsigned int loop;
 	unsigned long int result = 0;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.50 2002/07/04 13:48:48 sniper Exp $ */
+/* $Id: ftp.c,v 1.51 2002/07/11 02:48:00 sniper Exp $ */
 
 #include "php.h"
 
@@ -919,6 +919,9 @@ ftp_getresp(ftpbuf_t *ftp)
 			(ftp->inbuf[2] - '0');
 
 	memmove(ftp->inbuf, ftp->inbuf + 4, FTP_BUFSIZE - 4);
+
+	if (ftp->extra)
+		ftp->extra -= 4;
 
 	return 1;
 }

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.117 2004/06/03 12:42:05 iliaa Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.118 2004/06/10 14:48:46 derick Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1407,7 +1407,7 @@ cat <<X
 | If your application relies on register_globals being ON, you       |
 | should explicitly set it to on in your php.ini file.               |
 | Note that you are strongly encouraged to read                      |
-| http://www.php.net/manual/en/security.registerglobals.php          |
+| http://www.php.net/manual/en/security.globals.php                  |
 | about the implications of having register_globals set to on, and   |
 | avoid using it if possible.                                        |
 +--------------------------------------------------------------------+

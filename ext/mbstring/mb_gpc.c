@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mb_gpc.c,v 1.5 2003/02/19 20:56:47 rasmus Exp $ */
+/* $Id: mb_gpc.c,v 1.6 2003/02/20 22:21:48 rasmus Exp $ */
 
 /* {{{ includes */
 #ifdef HAVE_CONFIG_H
@@ -342,7 +342,7 @@ int _php_mb_encoding_handler_ex(int data_type, zval *arg, char *res, char *separ
 			val_len = len_list[n];
 		}
 		n++;
-		val_len = sapi_module.input_filter(data_type, var, val, val_len TSRMLS_CC);
+		val_len = sapi_module.input_filter(data_type, var, &val, val_len TSRMLS_CC);
 		/* add variable to symbol table */
 		php_register_variable_safe(var, val, val_len, array_ptr TSRMLS_CC);
 		if (convd != NULL){

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.42 2003/06/25 16:26:32 sterling Exp $ */
+/* $Id: simplexml.c,v 1.43 2003/06/28 07:46:03 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -543,6 +543,8 @@ simplexml_ce_xpath_search(INTERNAL_FUNCTION_PARAMETERS)
 #define SCHEMA_BLOB 1
 #define SCHEMA_OBJECT 2
 
+#ifdef xmlSchemaParserCtxtPtr
+
 /* {{{ simplexml_ce_schema_validate_file()
  */
 static void
@@ -589,6 +591,8 @@ simplexml_ce_schema_validate(INTERNAL_FUNCTION_PARAMETERS, int type)
 	}
 }
 /* }}} */
+
+#endif
 
 /* {{{ simplexml_ce_register_ns()
  */
@@ -657,10 +661,12 @@ sxe_call_method(char *method, INTERNAL_FUNCTION_PARAMETERS)
 {
 	if (!strcmp(method, "xsearch")) {
 		simplexml_ce_xpath_search(INTERNAL_FUNCTION_PARAM_PASSTHRU);
+#ifdef xmlSchemaParserCtxtPtr
 	} else if (!strcmp(method, "validate_schema_file")) {
 		simplexml_ce_schema_validate(INTERNAL_FUNCTION_PARAM_PASSTHRU, SCHEMA_FILE);	
 	} else if (!strcmp(method, "validate_schema_buffer")) {
 		simplexml_ce_schema_validate(INTERNAL_FUNCTION_PARAM_PASSTHRU, SCHEMA_BLOB);
+#endif
 	} else if (!strcmp(method, "register_ns")) {
 		simplexml_ce_register_ns(INTERNAL_FUNCTION_PARAM_PASSTHRU);
 	} else if (!strcmp(method, "to_xml")) {
@@ -1042,7 +1048,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.42 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.43 $");
 	php_info_print_table_end();
 
 }

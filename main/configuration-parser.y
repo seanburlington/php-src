@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.20 1999/10/31 11:56:22 rubys Exp $ */
+/* $Id: configuration-parser.y,v 1.21 1999/12/04 19:48:08 rubys Exp $ */
 
 #define DEBUG_CFG_PARSER 1
 #include "php.h"
@@ -27,7 +27,7 @@
 #include "php_ini.h"
 #include "ext/standard/dl.h"
 #include "ext/standard/file.h"
-#include "ext/standard/php3_browscap.h"
+#include "ext/standard/php_browscap.h"
 #include "zend_extensions.h"
 
 #undef YYPARSE_PARAM

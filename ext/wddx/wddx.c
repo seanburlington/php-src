@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.53 2000/09/13 13:55:35 andrei Exp $ */
+/* $Id: wddx.c,v 1.54 2000/09/13 15:31:50 andrei Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -746,6 +746,7 @@ static void php_wddx_pop_element(void *user_data, const char *name)
 			unsigned char *new_str;
 
 			new_str = php_base64_decode(Z_STRVAL_P(ent1->data), Z_STRLEN_P(ent1->data), &new_len);
+			STR_FREE(Z_STRVAL_P(ent1->data));
 			Z_STRVAL_P(ent1->data) = new_str;
 			Z_STRLEN_P(ent1->data) = new_len;
 		}

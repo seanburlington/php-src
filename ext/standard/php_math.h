@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: phpmath.h,v 1.3 2000/04/08 23:53:19 hholzgra Exp $ */
+/* $Id: php_math.h,v 1.1 2000/06/13 16:31:57 sas Exp $ */
 
 #ifndef _PHPMATH_H
 #define _PHPMATH_H

@@ -19,12 +19,12 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.19 2000/06/05 19:47:44 andi Exp $ */
+/* $Id: rand.c,v 1.20 2000/06/13 16:31:57 sas Exp $ */
 
 #include <stdlib.h>
 
 #include "php.h"
-#include "phpmath.h"
+#include "php_math.h"
 #include "php_rand.h"
 
 #include "basic_functions.h"

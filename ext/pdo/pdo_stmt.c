@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.40 2004/06/12 02:35:34 abies Exp $ */
+/* $Id: pdo_stmt.c,v 1.41 2004/06/13 22:09:54 abies Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -324,6 +324,7 @@ static PHP_METHOD(PDOStatement, execute)
 			RETURN_FALSE;
 		}
 	} else if (!dispatch_param_event(stmt, PDO_PARAM_EVT_EXEC_PRE TSRMLS_CC)) {
+		PDO_HANDLE_STMT_ERR();
 		RETURN_FALSE;
 	}
 	if (stmt->methods->executer(stmt TSRMLS_CC)) {

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.8 2002/11/17 00:08:42 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.9 2002/11/17 00:11:19 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2370,7 +2370,7 @@ PHPAPI int _php_stream_make_seekable(php_stream *origstream, php_stream **newstr
 
 	*newstream = NULL;
 	
-	if ((flags & PHP_STREAM_FORCE_CONVERSION == 0) && origstream->ops->seek != NULL) {
+	if (((flags & PHP_STREAM_FORCE_CONVERSION) == 0) && origstream->ops->seek != NULL) {
 		*newstream = origstream;
 		return PHP_STREAM_UNCHANGED;
 	}

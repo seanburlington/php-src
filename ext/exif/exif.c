@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.118.2.18 2003/04/16 18:20:27 helly Exp $ */
+/* $Id: exif.c,v 1.118.2.19 2003/04/16 18:25:35 helly Exp $ */
 
 /*  ToDos
  *
@@ -70,11 +70,6 @@
 
 typedef unsigned char uchar;
 
-//#undef safe_emalloc
-#ifndef safe_emalloc
-# define safe_emalloc(a,b,c) emalloc((a)*(b)+(c))
-#endif
-
 #ifndef TRUE
 #	define TRUE 1
 #	define FALSE 0
@@ -100,7 +95,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.18 2003/04/16 18:20:27 helly Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.19 2003/04/16 18:25:35 helly Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */

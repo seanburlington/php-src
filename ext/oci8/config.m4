@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.48 2003/12/16 15:58:10 tony2001 Exp $
+dnl $Id: config.m4,v 1.49 2004/01/15 06:30:22 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_OCI_IF_DEFINED,[
@@ -143,7 +143,7 @@ if test "$PHP_OCI8" != "no"; then
   dnl
   PHP_CHECK_LIBRARY(clntsh, OCICollAssign,
   [
-    AC_DEFINE(HAVE_OCI8_COLLECTIONS,1,[ ])
+    AC_DEFINE(PHP_OCI8_HAVE_COLLECTIONS,1,[ ])
   ], [], [
     -L$OCI8_DIR/lib $OCI8_SHARED_LIBADD
   ])

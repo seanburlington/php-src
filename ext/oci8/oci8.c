@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.232 2004/01/08 08:16:32 andi Exp $ */
+/* $Id: oci8.c,v 1.233 2004/01/15 06:30:23 sniper Exp $ */
 
 /* TODO list:
  *
@@ -784,7 +784,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.232 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.233 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -803,7 +803,7 @@ PHP_MINFO_FUNCTION(oci)
 	php_info_print_table_row(2, "Temporary Lob support", "disabled" );
 #endif
 
-#ifdef HAVE_OCI8_COLLECTIONS
+#ifdef PHP_OCI8_HAVE_COLLECTIONS
 	php_info_print_table_row(2, "Collections support", "enabled" );
 #else
 	php_info_print_table_row(2, "Collections support", "disabled" );

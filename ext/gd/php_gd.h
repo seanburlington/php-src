@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.55 2003/06/10 20:03:29 imajes Exp $ */
+/* $Id: php_gd.h,v 1.56 2003/06/15 20:00:08 helly Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -175,6 +175,7 @@ PHP_FUNCTION(image2wbmp);
 PHP_FUNCTION(imagelayereffect);
 PHP_FUNCTION(imagecolormatch);
 PHP_FUNCTION(imagefilter);
+PHP_FUNCTION(imagexbm);
 #endif
 
 PHP_GD_API int phpi_get_le_gd(void);

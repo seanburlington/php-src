@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.190 2002/06/24 19:31:44 derick Exp $ */
+/* $Id: gd.c,v 1.191 2002/06/25 09:00:09 helly Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -133,14 +133,17 @@ function_entry gd_functions[] = {
 	PHP_FE(imagecreatetruecolor,					NULL)
 	PHP_FE(imagetruecolortopalette,					NULL)
 	PHP_FE(imagesetthickness,						NULL)
-	PHP_FE(imageellipse,							NULL)
-	PHP_FE(imagefilledellipse,						NULL)
 	PHP_FE(imagefilledarc,							NULL)
+	PHP_FE(imagefilledellipse,						NULL)
 	PHP_FE(imagealphablending,						NULL)
 	PHP_FE(imagecolorresolvealpha, 					NULL)
 	PHP_FE(imagecolorclosestalpha,					NULL)
 	PHP_FE(imagecolorexactalpha,					NULL)
 	PHP_FE(imagecopyresampled,						NULL)
+#endif
+
+#if HAVE_GD_IMAGEELLIPSE
+	PHP_FE(imageellipse,							NULL)
 #endif
 
 #if HAVE_GD_IMAGESETTILE
@@ -645,7 +648,7 @@ PHP_FUNCTION(imagesetthickness)
 }
 /* }}} */
 
-#if 0  /* this function is missing from GD 2.0.1 */
+#ifdef HAVE_GD_IMAGEELLIPSE  /* this function is missing from GD 2.0.1 */
 /* {{{ proto void imageellipse(resource im, int cx, int cy, int w, int h, int color)
    Draw an ellipse */
 PHP_FUNCTION(imageellipse)

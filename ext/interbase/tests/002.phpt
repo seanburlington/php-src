@@ -5,12 +5,10 @@ InterBase: connect, close and pconnect
 --POST--
 --GET--
 --FILE--
-<?php /* $Id: 002.phpt,v 1.2.4.1 2003/04/25 15:43:35 sniper Exp $ */
+<?php /* $Id: 002.phpt,v 1.2.4.2 2003/08/16 20:05:36 abies Exp $ */
 
 	require("interbase.inc");
     
-	$test_base = dirname(__FILE__)."/ibase_test.tmp";
-
 	ibase_connect($test_base);
 	out_table("test1");
 	ibase_close();

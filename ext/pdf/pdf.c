@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.97 2001/09/10 17:14:37 derick Exp $ */
+/* $Id: pdf.c,v 1.98 2001/09/10 19:28:49 dbeu Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -345,7 +345,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.97 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.98 $" );
 	php_info_print_table_end();
 
 }
@@ -2266,7 +2266,7 @@ PHP_FUNCTION(pdf_get_minorversion)
 }
 
 /* }}} */
-/* {{{ proto void pdf_delete(int pdfdoc)
+/* {{{ proto bool pdf_delete(int pdfdoc)
    Deletes the PDF object */
 PHP_FUNCTION(pdf_delete)
 {
@@ -2278,9 +2278,7 @@ PHP_FUNCTION(pdf_delete)
 	}
 
 	ZEND_FETCH_RESOURCE(pdf, PDF *, arg1, -1, "pdf object", le_pdf);
-
-	PDF_delete(pdf);
-	zend_list_delete(Z_LVAL_PP(arg1));
+	zend_list_delete(Z_RESVAL_PP(arg1));
 
 	RETURN_TRUE;
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.60.2.14 2003/07/09 18:51:18 jay Exp $ */
+/* $Id: browscap.c,v 1.60.2.15 2003/08/13 23:39:03 sniper Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -248,7 +248,7 @@ PHP_FUNCTION(get_browser)
 
 	if (ZEND_NUM_ARGS() == 2) {
 		convert_to_boolean_ex(retarr);
-		return_array = Z_LVAL_PP(retarr);
+		return_array = Z_BVAL_PP(retarr);
 	}
 
 	if (zend_hash_find(&browser_hash, Z_STRVAL_PP(agent_name), Z_STRLEN_PP(agent_name)+1, (void **) &agent)==FAILURE) {

@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.14 2002/03/17 22:50:58 wez Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.15 2002/03/18 11:49:40 wez Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 
@@ -63,7 +63,7 @@ static int php_gziop_seek(php_stream *stream, off_t offset, int whence)
 static int php_gziop_close(php_stream *stream, int close_handle)
 {
 	struct php_gz_stream_data_t *self = (struct php_gz_stream_data_t *)stream->abstract;
-	int ret;
+	int ret = EOF;
 	
 	if (close_handle)
 		ret = gzclose(self->gz_file);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.338 2001/05/15 23:28:17 jon Exp $ */
+/* $Id: basic_functions.c,v 1.339 2001/05/15 23:43:18 jon Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -505,6 +505,7 @@ function_entry basic_functions[] = {
 	PHP_FE(chmod,					NULL)
 	PHP_FE(touch,					NULL)
 	PHP_FE(clearstatcache,			NULL)
+	PHP_FE(disk_total_space,		NULL)
 	PHP_FE(disk_free_space,			NULL)
 	PHP_FALIAS(diskfreespace,	disk_free_space,	NULL)
 

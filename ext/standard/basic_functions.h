@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.76 2001/05/09 20:06:39 andrei Exp $ */
+/* $Id: basic_functions.h,v 1.77 2001/05/18 23:38:46 sas Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -187,6 +187,11 @@ typedef struct {
 	url_adapt_state_t url_adapt_state;
 	/* url_scanner_ex.re */
 	url_adapt_state_ex_t url_adapt_state_ex;
+#endif
+
+#ifdef HAVE_MMAP
+	void *mmap_file;
+	size_t mmap_len;
 #endif
 } php_basic_globals;
 

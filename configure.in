@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.212 2001/01/17 01:15:11 elixer Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.213 2001/01/17 12:32:45 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -823,6 +823,7 @@ PHP_CONFIGURE_PART(Generating files)
 
 PHP_GEN_CONFIG_VARS
 
+$php_shtool mkdir -p pear/scripts
 ALL_OUTPUT_FILES="php4.spec Zend/Makefile main/build-defs.h \
 pear/scripts/pear pear/scripts/phpize pear/scripts/php-config pear/PEAR.php \
 TSRM/Makefile $PHP_OUTPUT_FILES"

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.232 2003/01/10 18:07:36 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.233 2003/01/13 08:19:50 derick Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -899,6 +899,7 @@ static zval *xpath_context_get_data(void *obj)
 static void php_xpath_set_context(zval *wrapper, void *obj, int rsrc_type)
 {
 	zval *handle, *addr;
+	TSRMLS_FETCH();
 
 	MAKE_STD_ZVAL(handle);
 	Z_TYPE_P(handle) = IS_LONG;
@@ -954,6 +955,7 @@ static void xmlparser_set_data(void *obj, zval *wrapper)
 static void php_xmlparser_set_object(zval *wrapper, void *obj, int rsrc_type)
 {
 	zval *handle, *addr;
+	TSRMLS_FETCH();
 
 	MAKE_STD_ZVAL(handle);
 	Z_TYPE_P(handle) = IS_LONG;
@@ -1071,6 +1073,7 @@ void *php_dom_get_object(zval *wrapper, int rsrc_type1, int rsrc_type2 TSRMLS_DC
 static void php_dom_set_object(zval *wrapper, void *obj, int rsrc_type)
 {
 	zval *handle, *addr;
+	TSRMLS_FETCH();
 
 	MAKE_STD_ZVAL(handle);
 	Z_TYPE_P(handle) = IS_LONG;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.195 2002/06/28 06:43:17 derick Exp $ */
+/* $Id: gd.c,v 1.196 2002/06/28 09:23:50 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -963,7 +963,7 @@ static int _php_image_type (char data[8])
 #ifdef HAVE_LIBGD15
 	/* Based on ext/standard/images.c */
 
-	if (data == NULL)
+	if (data == NULL || strlen(data) <= 0)
 		return -1;
 
 	if (!memcmp(data, php_sig_gd2, 3))

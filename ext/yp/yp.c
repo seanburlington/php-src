@@ -16,7 +16,7 @@
    |          Fredrik Ohrn                                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.36 2003/02/26 16:06:06 hholzgra Exp $ */
+/* $Id: yp.c,v 1.37 2003/02/27 10:21:31 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -298,8 +298,7 @@ static int php_foreach_cat (int instatus, char *inkey, int inkeylen, char *inval
 		if (inkeylen) {
 			char *key = emalloc(inkeylen+1);
 			if(key) {
-				strncpy(key, inkey, inkeylen);
-				key[inkeylen] = '\0';
+				strlcpy(key, inkey, inkeylen+1);
 				add_assoc_stringl_ex((zval *) indata, key, inkeylen+1, inval, invallen, 1);
 				efree(key);
 			} else {

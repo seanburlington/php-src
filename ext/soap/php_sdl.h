@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.h,v 1.30 2004/02/19 08:21:13 dmitry Exp $ */
+/* $Id: php_sdl.h,v 1.31 2004/02/24 15:06:41 dmitry Exp $ */
 
 #ifndef PHP_SDL_H
 #define PHP_SDL_H
@@ -97,6 +97,7 @@ typedef struct _sdlSoapBindingFunctionHeader {
 	sdlTypePtr           element;
 	encodePtr            encode;
 	sdlRpcEncodingStyle  encodingStyle; /* not implemented yet */
+	HashTable           *headerfaults;  /* array of sdlSoapBindingFunctionHeaderPtr */
 } sdlSoapBindingFunctionHeader, *sdlSoapBindingFunctionHeaderPtr;
 
 typedef struct _sdlSoapBindingFunctionFault {

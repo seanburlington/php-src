@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.44 2000/05/18 15:34:30 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.45 2000/05/23 09:33:41 sas Exp $ */
 
 
 /* TODO:
@@ -151,7 +151,7 @@ zend_module_entry mysql_module_entry = {
 
 ZEND_DECLARE_MODULE_GLOBALS(mysql)
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_MYSQL)
+#ifdef COMPILE_DL_MYSQL
 ZEND_GET_MODULE(mysql)
 #endif
 

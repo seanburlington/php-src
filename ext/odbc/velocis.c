@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: velocis.c,v 1.19 2000/05/18 15:34:31 zeev Exp $ */
+/* $Id: velocis.c,v 1.20 2000/05/23 09:33:43 sas Exp $ */
 
 /*
  * TODO:
@@ -66,7 +66,7 @@ zend_module_entry velocis_module_entry = {
 };
 
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_ODBC)
+#ifdef COMPILE_DL_ODBC
 ZEND_GET_MODULE(velocis)
 #endif
 

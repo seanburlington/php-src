@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.22 2000/05/18 15:34:37 zeev Exp $ */
+/* $Id: sysvsem.c,v 1.23 2000/05/23 09:33:49 sas Exp $ */
 
 /* This has been built and tested on Solaris 2.6 and Linux 2.1.122.
  * It may not compile or execute correctly on other systems.
@@ -60,7 +60,7 @@ zend_module_entry sysvsem_module_entry = {
 	"sysvsem", sysvsem_functions, PHP_MINIT(sysvsem), NULL, NULL, NULL, NULL, STANDARD_MODULE_PROPERTIES
 };
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_SYSVSEM)
+#ifdef COMPILE_DL_SYSVSEM
 ZEND_GET_MODULE(sysvsem)
 #endif
 

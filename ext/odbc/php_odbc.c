@@ -18,9 +18,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.49 2000/05/21 08:46:51 kara Exp $ */
+/* $Id: php_odbc.c,v 1.50 2000/05/23 09:33:42 sas Exp $ */
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_ODBC)
+#ifdef COMPILE_DL_ODBC
 #include "dl/phpdl.h"
 #endif
 
@@ -133,7 +133,7 @@ int odbc_globals_id;
 ZEND_API php_odbc_globals odbc_globals;
 #endif
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_ODBC)
+#ifdef COMPILE_DL_ODBC
 ZEND_GET_MODULE(odbc)
 #endif
 

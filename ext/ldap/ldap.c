@@ -21,7 +21,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.38 2000/05/18 15:34:28 zeev Exp $ */
+/* $Id: ldap.c,v 1.39 2000/05/23 09:33:39 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -100,7 +100,7 @@ zend_module_entry ldap_module_entry = {
 
 
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_LDAP)
+#ifdef COMPILE_DL_LDAP
 ZEND_GET_MODULE(ldap)
 #endif
 
@@ -179,7 +179,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.38 2000/05/18 15:34:28 zeev Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.39 2000/05/23 09:33:39 sas Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #if HAVE_NSLDAP

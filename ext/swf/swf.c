@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.14 2000/05/23 04:09:20 sterling Exp $ */
+/* $Id: swf.c,v 1.15 2000/05/23 09:33:47 sas Exp $ */
 
 
 #include "php.h"
@@ -108,7 +108,7 @@ zend_module_entry swf_module_entry = {
 	STANDARD_MODULE_PROPERTIES
 };
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_SWF)
+#ifdef COMPILE_DL_SWF
 ZEND_GET_MODULE(swf)
 #endif
 

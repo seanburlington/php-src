@@ -16,10 +16,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dav.c,v 1.18 2000/05/18 15:34:23 zeev Exp $ */
+/* $Id: dav.c,v 1.19 2000/05/23 09:33:34 sas Exp $ */
 
 #define IS_EXT_MODULE
-#if defined(COMPILE_DL) || defined(COMPILE_DL_DAV)
+#ifdef COMPILE_DL_DAV
 # if PHP_31
 #  include "../phpdl.h"
 # else
@@ -68,7 +68,7 @@ phpdav_module php_dav_module;
 /* }}} */
 /* {{{ dynamically loadable module stuff */
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_DAV)
+#ifdef COMPILE_DL_DAV
 ZEND_GET_MODULE(phpdav)
 # endif /* COMPILE_DL */
 

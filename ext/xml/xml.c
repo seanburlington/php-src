@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.54 2000/05/18 15:34:38 zeev Exp $ */
+/* $Id: xml.c,v 1.55 2000/05/23 09:33:50 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -56,7 +56,7 @@ PHP_XML_API php_xml_globals xml_globals;
 
 /* {{{ dynamically loadable module stuff */
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_XML)
+#ifdef COMPILE_DL_XML
 # include "dl/phpdl.h"
 ZEND_GET_MODULE(xml)
 #endif /* COMPILE_DL_XML */

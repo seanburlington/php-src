@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.52 2000/05/18 15:34:32 zeev Exp $ */
+/* $Id: php_pcre.c,v 1.53 2000/05/23 09:33:44 sas Exp $ */
 
 /*
 	TODO:
@@ -1213,7 +1213,7 @@ zend_module_entry pcre_module_entry = {
 		   STANDARD_MODULE_PROPERTIES
 };
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_PCRE)
+#ifdef COMPILE_DL_PCRE
 ZEND_GET_MODULE(pcre)
 #endif
 

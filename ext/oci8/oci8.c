@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.81 2000/05/18 15:34:30 zeev Exp $ */
+/* $Id: oci8.c,v 1.82 2000/05/23 09:33:42 sas Exp $ */
 
 /* TODO list:
  *
@@ -93,7 +93,7 @@ PHP_OCI_API php_oci_globals oci_globals;
 /* }}} */
 /* {{{ dynamically loadable module stuff */
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_OCI8)
+#ifdef COMPILE_DL_OCI8
 ZEND_GET_MODULE(oci8)
 #endif /* COMPILE_DL */
 

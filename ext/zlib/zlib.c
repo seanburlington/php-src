@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.42 2000/05/18 15:34:39 zeev Exp $ */
+/* $Id: zlib.c,v 1.43 2000/05/23 09:33:51 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -56,7 +56,7 @@
 
 #include <zlib.h>
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_ZLIB)
+#ifdef COMPILE_DL_ZLIB
 #include "dl/phpdl.h"
 #ifndef PUTS
 #define PUTS(a) php_printf("%s",a)
@@ -109,7 +109,7 @@ zend_module_entry php_zlib_module_entry = {
 	STANDARD_MODULE_PROPERTIES
 };
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_ZLIB)
+#ifdef COMPILE_DL_ZLIB
 ZEND_GET_MODULE(php_zlib)
 #endif
 

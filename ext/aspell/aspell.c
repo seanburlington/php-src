@@ -16,11 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: aspell.c,v 1.20 2000/05/18 15:34:22 zeev Exp $ */
+/* $Id: aspell.c,v 1.21 2000/05/23 09:33:34 sas Exp $ */
 
 #include "php.h"
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_ASPELL)
+#ifdef COMPILE_DL_ASPELL
 #include "phpdl.h"
 #endif
 #include <stdlib.h>
@@ -48,7 +48,7 @@ zend_module_entry aspell_module_entry = {
 };
 
 
-#if defined(COMPILE_DL) || defined(COMPILE_DL_ASPELL)
+#ifdef COMPILE_DL_ASPELL
 ZEND_GET_MODULE(aspell)
 #endif
 

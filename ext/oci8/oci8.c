@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.72 2000/04/24 12:35:30 thies Exp $ */
+/* $Id: oci8.c,v 1.73 2000/04/24 16:46:56 thies Exp $ */
 
 /* TODO list:
  *
@@ -340,8 +340,8 @@ static void php_oci_init_globals(OCILS_D)
 
 PHP_MINIT_FUNCTION(oci)
 {
-	OCILS_FETCH();
 	zend_class_entry oci_lob_class_entry;
+	OCILS_FETCH();
 
 	OCI(shutdown) = 0;
 

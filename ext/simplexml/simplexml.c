@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.60 2003/10/02 19:45:05 moriyoshi Exp $ */
+/* $Id: simplexml.c,v 1.61 2003/10/05 08:08:48 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -261,41 +261,6 @@ next_iter:
 		php_error(E_WARNING, "Cannot assign to an array of nodes (duplicate subnodes or attr detected)\n");
 	}
 		
-}
-/* }}} */
-
-/* {{{ sxe_property_get_ptr()
- */
-static zval **
-sxe_property_get_ptr(zval *object, zval *member TSRMLS_DC)
-{
-#if 0
-	zval **property_ptr;
-	zval  *property;
-
-	property_ptr = emalloc(sizeof(zval **));
-
-	property = sxe_property_read(object, member, 0 TSRMLS_CC);
-
-	*property_ptr = property;
-	
-	return property_ptr;
-#else
-	/* necessary voodoo hack */
-	struct compounded_zval_ptr {
-		zval zv;
-		zval *pzv;
-	};
-
-	zval  *property;
-
-	property = sxe_property_read(object, member, 0 TSRMLS_CC);
-	property = erealloc(property, sizeof(struct compounded_zval_ptr));
-
-	((struct compounded_zval_ptr *)property)->pzv = property;
-	
-	return &((struct compounded_zval_ptr *)property)->pzv;
-#endif
 }
 /* }}} */
 
@@ -830,8 +795,7 @@ static zend_object_handlers sxe_object_handlers = {
 	sxe_property_write,
 	NULL,
 	NULL,
-	sxe_property_get_ptr,
-	sxe_property_get_ptr,
+	NULL,
 	sxe_object_get,
 	sxe_object_set,
 	sxe_property_exists,
@@ -1085,7 +1049,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.60 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.61 $");
 	php_info_print_table_end();
 }
 /* }}} */

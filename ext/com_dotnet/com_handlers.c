@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.2 2003/08/18 04:41:48 iliaa Exp $ */
+/* $Id: com_handlers.c,v 1.3 2003/10/05 08:08:44 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -202,15 +202,6 @@ static void com_write_dimension(zval *object, zval *offset, zval *value TSRMLS_D
 		/* TODO: check for safearray */
 		php_com_throw_exception("this variant is not an array type" TSRMLS_CC);
 	}
-}
-
-static zval **com_property_get_ptr(zval *object, zval *member TSRMLS_DC)
-{
-	zval **prop_ptr;
-
-	prop_ptr = emalloc(sizeof(zval **));
-	*prop_ptr = com_property_read(object, member, 0 TSRMLS_CC);
-	return prop_ptr;
 }
 
 static void com_object_set(zval **property, zval *value TSRMLS_DC)
@@ -512,8 +503,7 @@ zend_object_handlers php_com_object_handlers = {
 	com_property_write,
 	com_read_dimension,
 	com_write_dimension,
-	com_property_get_ptr,
-	com_property_get_ptr,
+	NULL,
 	com_object_get,
 	com_object_set,
 	com_property_exists,

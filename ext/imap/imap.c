@@ -21,7 +21,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.14 1999/08/27 04:39:19 zeev Exp $ */
+/* $Id: imap.c,v 1.15 1999/09/29 21:18:35 chagenbu Exp $ */
 
 #define IMAP41
 
@@ -1577,7 +1577,7 @@ void imap_add_body( pval *arg, BODY *body )
 	}
 	if ( body->id ){
 		add_property_long( arg, "ifid", 1 );
-		if(body->description) add_property_string( arg, "id",  body->description, 1 );
+		add_property_string( arg, "id",  body->id, 1 );
 	} else {
 		add_property_long( arg, "ifid", 0 );
 	}

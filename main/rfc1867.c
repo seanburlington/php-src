@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.11 1999/09/16 23:18:15 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.12 1999/10/12 18:50:04 thies Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -25,7 +25,7 @@
 #include "rfc1867.h"
 
 #ifndef THREAD_SAFE
-int le_uploads;
+extern int le_uploads; /* "borrowed" from file.c */
 extern HashTable list;
 #endif
 

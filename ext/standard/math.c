@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.81 2002/03/10 23:46:43 jimw Exp $ */
+/* $Id: math.c,v 1.82 2002/03/11 05:43:23 sebastian Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -430,8 +430,8 @@ PHP_FUNCTION(pow)
 	}
 
 	/* make sure we're dealing with numbers */
-	convert_scalar_to_number(zbase);
-	convert_scalar_to_number(zexp);
+	convert_scalar_to_number(zbase TSRMLS_CC);
+	convert_scalar_to_number(zexp TSRMLS_CC);
 
 	/* if both base and exponent were longs, we'll try to get a long out */
 	wantlong = Z_TYPE_P(zbase) == IS_LONG 

@@ -18,7 +18,7 @@
 +----------------------------------------------------------------------+
 */
 
-/* $Id: php_snmp.h,v 1.5 2000/02/19 23:41:20 zeev Exp $ */
+/* $Id: php_snmp.h,v 1.6 2000/03/25 19:58:19 sterling Exp $ */
 #ifndef _PHP_SNMP_H
 #define _PHP_SNMP_H
 
@@ -38,7 +38,6 @@ PHP_MINIT_FUNCTION(snmp);
 PHP_FUNCTION(snmpget);
 PHP_FUNCTION(snmpwalk);
 PHP_FUNCTION(snmprealwalk);
-PHP_FUNCTION(snmpwalkoid);
 PHP_FUNCTION(snmp_get_quick_print);
 PHP_FUNCTION(snmp_set_quick_print);
 PHP_FUNCTION(snmpset);

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.27.4.1 2003/01/13 23:31:32 sniper Exp $
+dnl $Id: config.m4,v 1.27.4.2 2003/02/21 06:49:35 sniper Exp $
 dnl
 
 PHP_ARG_WITH(informix,for Informix support,
@@ -44,7 +44,7 @@ if test "$PHP_INFORMIX" != "no"; then
   esac
 
   AC_MSG_CHECKING([Informix version])
-  IFX_VERSION=[`$INFORMIXDIR/bin/esql -V | sed -ne '1 s/^.*Version \([0-9]\)\.\([0-9]*\).*$/\1\2/p'`]
+  IFX_VERSION=[`$INFORMIXDIR/bin/esql -V | grep "ESQL Version" | sed -ne '1 s/\(.*\)ESQL Version \([0-9]\)\.\([0-9]*\).*/\2\3/p'`]
   AC_MSG_RESULT($IFX_VERSION)
   AC_DEFINE_UNQUOTED(IFX_VERSION, $IFX_VERSION, [ ])
 

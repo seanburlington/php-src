@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.34 2003/07/29 18:26:59 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.35 2003/09/10 00:22:19 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -43,6 +43,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #ifdef PHP_WIN32
+#include <io.h>
 #include <windows.h>
 #include <winsock.h>
 #define O_RDONLY _O_RDONLY
@@ -2378,6 +2379,15 @@ PHP_FUNCTION(realpath)
 	convert_to_string_ex(path);
 
 	if (VCWD_REALPATH(Z_STRVAL_PP(path), resolved_path_buff)) {
+#if ZTS
+# if PHP_WIN32
+		if (_access(resolved_path_buff, 0))
+			RETURN_FALSE;
+# else
+		if (access(resolved_path_buff, F_OK))
+			RETURN_FALSE;
+# endif
+#endif
 		RETURN_STRING(resolved_path_buff, 1);
 	} else {
 		RETURN_FALSE;

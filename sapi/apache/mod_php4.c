@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.136 2002/08/15 23:59:47 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.137 2002/08/18 13:05:44 sesser Exp $ */
 
 #include "php_apache_http.h"
 
@@ -135,7 +135,9 @@ int sapi_apache_read_post(char *buffer, uint count_bytes TSRMLS_DC)
 	 * the rest of the request. RFC 2616
 	 *
 	 */
-	if( !ap_should_client_block(r) ) return total_read_bytes;
+	if (!SG(read_post_bytes) && !ap_should_client_block(r)) {
+		return total_read_bytes;
+	}
  
 	handler = signal(SIGPIPE, SIG_IGN);
 	while (total_read_bytes<count_bytes) {

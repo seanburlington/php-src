@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.17 2004/01/09 13:32:20 wez Exp $
+# $Id: Makefile,v 1.18 2004/01/10 01:11:42 wez Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -86,6 +86,7 @@ build-snap:
 	@$(MAKE) "$(BUILD_DIR)\$(PHPDLL)"
 	for %T in ($(SAPI_TARGETS)) do $(MAKE) /I /nologo "%T"
 	for %T in ($(EXT_TARGETS)) do $(MAKE) /I /nologo "%T"
+	for %T in ($(PECL_TARGETS)) do $(MAKE) /I /nologo "%T"
 
 build-dist: $(BUILD_DIR)\deplister.exe
 	-rmdir /s /q $(BUILD_DIR)\php-$(PHP_VERSION_STRING)

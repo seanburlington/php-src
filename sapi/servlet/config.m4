@@ -1,4 +1,4 @@
-# $Id: config.m4,v 1.2 1999/12/01 14:26:00 rubys Exp $
+# $Id: config.m4,v 1.3 1999/12/29 21:24:43 sas Exp $
 # config.m4 for servlet sapi
 
 AC_MSG_CHECKING(for Servlet support)
@@ -24,7 +24,7 @@ AC_ARG_WITH(servlet,
       fi
     fi
 
-    AC_DEFINE(SAPI_SERVLET)
+    AC_DEFINE(SAPI_SERVLET, 1, [Whether you use Servlet])
     PHP_EXTENSION(servlet, "shared")
     PHP_SAPI=servlet
     PHP_BUILD_SHARED

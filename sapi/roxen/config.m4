@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.4 1999/12/22 05:02:07 neotron Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.5 1999/12/29 21:24:41 sas Exp $ -*- sh -*-
 
 RESULT=no
 AC_MSG_CHECKING(for Roxen/Pike support)
@@ -26,7 +26,7 @@ AC_ARG_WITH(roxen,
 		AC_MSG_ERROR(Roxen/PHP requires Pike 0.7.79 or newer)
 	fi
 	AC_ADD_INCLUDE($PIKE_INCLUDE_DIR)
-	AC_DEFINE(HAVE_ROXEN)
+	AC_DEFINE(HAVE_ROXEN,1,[Whether you use Roxen])
 	PHP_SAPI=roxen
 	PHP_BUILD_SHARED
 	INSTALL_IT="\$(SHELL) \$(srcdir)/install-sh -m 0755 $SAPI_SHARED $PIKE_MODULE_DIR/PHP4.so"
@@ -47,7 +47,7 @@ if test "$RESULT" != "no" ; then
                           are normally made in a serialized mode.],
  [
  	PHP_BUILD_THREAD_SAFE
-	AC_DEFINE(ROXEN_USE_ZTS)
+	AC_DEFINE(ROXEN_USE_ZTS,1,[Whether to use Roxen in ZTS mode])
 	RESULT="yes
 	***   You have choosen to compile with PHP thread safety
 	***   enabled. This is not a requirement for the Roxen

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.229 2003/05/26 23:22:05 sniper Exp $ */
+/* $Id: cgi_main.c,v 1.230 2003/05/30 16:10:58 derick Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1384,7 +1384,11 @@ consult the installation file that came with this distribution, or visit \n\
 							SG(headers_sent) = 1;
 							SG(request_info).no_headers = 1;
 						}
-						php_printf("PHP %s (%s), Copyright (c) 1997-2003 The PHP Group\n%s", PHP_VERSION, sapi_module.name, get_zend_version());
+#if ZEND_DEBUG
+						php_printf("PHP %s (%s) (built: %s %s) (DEBUG)\nCopyright (c) 1997-2003 The PHP Group\n%s", PHP_VERSION, sapi_module.name, __DATE__, __TIME__, get_zend_version());
+#else
+						php_printf("PHP %s (%s) (built: %s %s)\nCopyright (c) 1997-2003 The PHP Group\n%s", PHP_VERSION, sapi_module.name, __DATE__, __TIME__, get_zend_version());
+#endif
 						php_end_ob_buffers(1 TSRMLS_CC);
 						exit(1);
 						break;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.92 2003/05/30 00:11:37 helly Exp $ */
+/* $Id: php_cli.c,v 1.93 2003/05/30 16:10:58 derick Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -651,7 +651,11 @@ int main(int argc, char *argv[])
 				if (php_request_startup(TSRMLS_C)==FAILURE) {
 					goto err;
 				}
+#if ZEND_DEBUG
+				php_printf("PHP %s (%s) (built: %s %s) (DEBUG)\nCopyright (c) 1997-2003 The PHP Group\n%s", PHP_VERSION, sapi_module.name, __DATE__, __TIME__, get_zend_version());
+#else
 				php_printf("PHP %s (%s) (built: %s %s)\nCopyright (c) 1997-2003 The PHP Group\n%s", PHP_VERSION, sapi_module.name, __DATE__, __TIME__, get_zend_version());
+#endif
 				php_end_ob_buffers(1 TSRMLS_CC);
 				exit_status=1;
 				goto out;

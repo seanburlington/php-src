@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.13 2002/05/21 01:40:35 ssb Exp $
+// $Id: Registry.php,v 1.14 2002/05/21 02:04:03 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Registry.php';
@@ -98,8 +98,10 @@ Tests if a package is installed in the system. Will exit(1) if it is not.
             if (PEAR::isError($info)) {
                 return $this->raiseError($info);
             }
-
-            $list =$info['filelist'];
+            if ($info === null) {
+                return $this->raiseError("`$params[0]' not installed");
+            }
+            $list = $info['filelist'];
             $caption = 'Contents of ' . basename($params[0]);
             $this->ui->startTable(array('caption' => $caption,
                                         'border' => true));
@@ -113,7 +115,12 @@ Tests if a package is installed in the system. Will exit(1) if it is not.
                 }
                 switch ($att['role']) {
                     case 'test':
-                        $dest = '-- will not be installed --'; break;
+                    case 'data':
+                        if ($installed) {
+                            break 2;
+                        }
+                        $dest = '-- will not be installed --';
+                        break;
                     case 'doc':
                         $dest = $this->config->get('doc_dir') . DIRECTORY_SEPARATOR .
                             $dest;

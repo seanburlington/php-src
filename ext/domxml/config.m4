@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 2000/02/02 20:57:49 steinm Exp $
+dnl $Id: config.m4,v 1.7 2000/03/15 08:09:14 steinm Exp $
 
 AC_MSG_CHECKING(whether to include DOM support)
 AC_ARG_WITH(dom,
@@ -13,11 +13,11 @@ AC_ARG_WITH(dom,
       AC_MSG_RESULT(yes)
       PHP_EXTENSION(domxml)
       old_LIBS=$LIBS
-      LIBS="$LIBS -lgz"
+      LIBS="$LIBS -lz"
       AC_CHECK_LIB(xml, xmlNewDoc, [AC_DEFINE(HAVE_DOMXML,1,[ ])],
         [AC_MSG_ERROR(DOM module requires libxml >= 1.0)])
       LIBS=$old_LIBS
-      AC_ADD_LIBRARY(gz)
+      AC_ADD_LIBRARY(z)
       AC_ADD_LIBRARY(xml)
       AC_ADD_INCLUDE(/usr/local/include)
       ;;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.604 2004/05/28 14:14:26 iliaa Exp $ */
+/* $Id: main.c,v 1.605 2004/07/15 22:22:06 helly Exp $ */
 
 /* {{{ includes
  */
@@ -667,7 +667,7 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 				 * but DO NOT overwrite a pending excepption
 				 */
 				if (PG(error_handling) == EH_THROW && !EG(exception)) {
-					zend_throw_exception(PG(exception_class), buffer, 0 TSRMLS_CC);
+					zend_throw_error_exception(PG(exception_class), buffer, 0, type TSRMLS_CC);
 				}
 				efree(buffer);
 				return;

@@ -1,4 +1,4 @@
-/* $Id: ftp.h,v 1.1 1999/09/16 15:57:51 askalski Exp $ */
+/* $Id: ftp.h,v 1.2 1999/09/16 18:38:11 askalski Exp $ */
 
 #ifndef	_INCLUDED_FTP_H
 #define	_INCLUDED_FTP_H
@@ -19,6 +19,8 @@ PHP_FUNCTION(ftp_connect);
 PHP_FUNCTION(ftp_login);
 PHP_FUNCTION(ftp_chdir);
 PHP_FUNCTION(ftp_nlist);
+PHP_FUNCTION(ftp_listraw);
+PHP_FUNCTION(ftp_systype);
 PHP_FUNCTION(ftp_get);
 PHP_FUNCTION(ftp_put);
 PHP_FUNCTION(ftp_quit);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.52 2001/02/26 06:07:00 andi Exp $ */
+/* $Id: interbase.c,v 1.53 2001/05/02 22:31:19 andi Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -596,7 +596,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.52 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.53 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1727,15 +1727,10 @@ static int _php_ibase_var_pval(pval *val, void *data, int type, int len, int sca
 			/* fallout */
 		case SQL_TEXT:
 			val->value.str.val = (char *)emalloc(sizeof(char)*(len+1));
-            strncpy(val->value.str.val, data, len);
+            memcpy(val->value.str.val, data, len);
+			val->value.str.val[len] = '\0';
 			if (PG(magic_quotes_runtime)) {
-				/*
-				char *tmp = val->value.str.val;
-				*/
-				val->value.str.val = php_addslashes(val->value.str.val, len, &len, 0);
-				/*
-				efree(tmp);
-				*/
+				val->value.str.val = php_addslashes(val->value.str.val, len, &len, 1);
             }
 			val->type = IS_STRING;
 			val->value.str.len = len;
@@ -1745,8 +1740,9 @@ static int _php_ibase_var_pval(pval *val, void *data, int type, int len, int sca
 				int j, f = 1;
 				float n = (float) *(long *)(data);
 				
-				for (j = 0; j < -scale; j++)
+				for (j = 0; j < -scale; j++) {
 					f *= 10;
+				}
 				val->type = IS_STRING;
 				val->value.str.len = sprintf(string_data, "%.*f", -scale, n / f);
 				val->value.str.val = estrdup(string_data);
@@ -1779,8 +1775,8 @@ static int _php_ibase_var_pval(pval *val, void *data, int type, int len, int sca
 #ifdef SQL_INT64
 		case SQL_INT64:
 			val->type = IS_STRING;
-			val->value.str.len = sprintf(string_data, "%Ld.%Ld",
-										 (ISC_INT64) (*((ISC_INT64 *)data) / (int) pow(10.0, (double) -scale)),
+			val->value.str.len = sprintf(string_data, "%Ld.%0*Ld",
+										 (ISC_INT64) (*((ISC_INT64 *)data) / (int) pow(10.0, (double) -scale)), -scale,
 										 (ISC_INT64) abs((int) (*((ISC_INT64 *)data) % (int) pow(10.0, (double) -scale))));
 			val->value.str.val = estrdup(string_data);
 			break;

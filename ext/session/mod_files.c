@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.72 2002/03/06 11:49:51 sas Exp $ */
+/* $Id: mod_files.c,v 1.72.2.1 2002/04/23 18:10:49 sas Exp $ */
 
 #include "php.h"
 
@@ -141,14 +141,7 @@ static void ps_files_open(ps_files *data, const char *key TSRMLS_DC)
 		
 		data->lastkey = estrdup(key);
 		
-#ifdef O_EXCL
-		data->fd = VCWD_OPEN(buf, O_RDWR | O_BINARY);
-		
-		if (data->fd == -1 && errno == ENOENT) 
-			data->fd = VCWD_OPEN_MODE(buf, O_EXCL | O_RDWR | O_CREAT | O_BINARY, 0600);
-#else
 		data->fd = VCWD_OPEN_MODE(buf, O_CREAT | O_RDWR | O_BINARY, 0600);
-#endif
 		if (data->fd != -1) 
 			flock(data->fd, LOCK_EX);
 

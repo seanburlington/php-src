@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.43 2003/12/02 15:17:02 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.44 2003/12/08 17:08:10 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1092,18 +1092,20 @@ xmlNode *dom_get_elements_by_tag_name_ns_raw(xmlNodePtr nodep, char *ns, char *l
 	xmlNodePtr ret = NULL;
 
 	while (nodep != NULL && (*cur <= index || index == -1)) {
-		if (nodep->type == XML_ELEMENT_NODE && xmlStrEqual(nodep->name, local)) {
-			if (ns == NULL || (nodep->ns != NULL && xmlStrEqual(nodep->ns->href, ns))) {
-				if (*cur == index) {
-					ret = nodep;
-					break;
+		if (nodep->type == XML_ELEMENT_NODE) {
+			if (xmlStrEqual(nodep->name, local)) {
+				if (ns == NULL || (nodep->ns != NULL && xmlStrEqual(nodep->ns->href, ns))) {
+					if (*cur == index) {
+						ret = nodep;
+						break;
+					}
+					(*cur)++;
 				}
-				(*cur)++;
 			}
-		}
-		ret = dom_get_elements_by_tag_name_ns_raw(nodep->children, ns, local, cur, index);
-		if (ret != NULL) {
-			break;
+			ret = dom_get_elements_by_tag_name_ns_raw(nodep->children, ns, local, cur, index);
+			if (ret != NULL) {
+				break;
+			}
 		}
 		nodep = nodep->next;
 	}

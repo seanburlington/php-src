@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: inifile.c,v 1.4 2003/02/22 23:47:09 helly Exp $ */
+/* $Id: inifile.c,v 1.5 2003/02/26 22:03:00 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -44,7 +44,7 @@
 /* {{{ inifile_version */
 char *inifile_version() 
 {
-	return "1.0, $Revision: 1.4 $";
+	return "1.0, $Revision: 1.5 $";
 }
 /* }}} */ 
 
@@ -261,8 +261,8 @@ val_type inifile_fetch(inifile *dba, const key_type *key, int skip TSRMLS_DC) {
 		/* specific instance or not same key -> restart search */
 		/* the slow way: restart and seacrch */
 		php_stream_rewind(dba->fp);
+		inifile_line_free(&dba->next);
 	}
-	inifile_line_free(&dba->next);
 	if (skip == -1) {
 		skip = 0;
 	}
@@ -273,7 +273,7 @@ val_type inifile_fetch(inifile *dba, const key_type *key, int skip TSRMLS_DC) {
 				/* allow faster access by updating key read into next */
 				inifile_line_free(&dba->next);
 				dba->next = ln;
-				dba->next.pos = php_stream_tell(dba->fp);;
+				dba->next.pos = php_stream_tell(dba->fp);
 				return val;
 			}
 			skip--;
@@ -285,7 +285,7 @@ val_type inifile_fetch(inifile *dba, const key_type *key, int skip TSRMLS_DC) {
 		}
 	}
 	inifile_line_free(&ln);
-	inifile_line_free(&dba->next);
+	dba->next.pos = php_stream_tell(dba->fp);
 	return ln.val;
 }
 /* }}} */

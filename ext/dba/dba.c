@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.53 2002/11/06 04:16:17 helly Exp $ */
+/* $Id: dba.c,v 1.54 2002/11/06 09:17:50 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -35,6 +35,7 @@
 #include "php_cdb.h"
 #include "php_db2.h"
 #include "php_db3.h"
+#include "php_flatfile.h"
 
 /* {{{ dba_functions[]
  */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zip.c,v 1.29 2002/02/28 08:27:01 sebastian Exp $ */
+/* $Id: zip.c,v 1.29.2.1 2002/04/06 17:29:44 derick Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -285,7 +285,7 @@ PHP_FUNCTION(zip_entry_read)
 	if (ret == 0) {
 		RETURN_FALSE;
 	} else {
-		RETURN_STRINGL(buf, len, 0);
+		RETURN_STRINGL(buf, ret, 0);
 	}
 }
 /* }}} */

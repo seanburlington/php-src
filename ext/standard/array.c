@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.157.2.2 2002/06/03 17:57:41 edink Exp $ */
+/* $Id: array.c,v 1.157.2.3 2002/06/10 16:36:28 jan Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2545,7 +2545,7 @@ PHP_FUNCTION(array_diff)
 	/* for each argument, create and sort list with pointers to the hash buckets */
 	lists = (Bucket ***)emalloc(argc * sizeof(Bucket **));
 	ptrs = (Bucket ***)emalloc(argc * sizeof(Bucket **));
-    set_compare_func(SORT_STRING TSRMLS_CC);
+	set_compare_func(SORT_STRING TSRMLS_CC);
 	for (i=0; i<argc; i++) {
 		if (Z_TYPE_PP(args[i]) != IS_ARRAY) {
 			php_error(E_WARNING, "Argument #%d to array_diff() is not an array", i+1);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.55 2002/07/26 22:14:55 fmk Exp $ */
+/* $Id: ftp.c,v 1.56 2002/07/27 09:18:51 sesser Exp $ */
 
 #include "php.h"
 
@@ -158,6 +158,8 @@ ftp_close(ftpbuf_t *ftp)
 		return NULL;
 	if (ftp->fd != -1)
 		closesocket(ftp->fd);
+	if (ftp->data) 
+		data_close(ftp->data);
 	ftp_gc(ftp);
 	free(ftp);
 	return NULL;

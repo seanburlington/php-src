@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.195 2002/04/24 22:57:21 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.196 2002/04/24 23:03:48 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -1343,7 +1343,7 @@ PHP_FUNCTION(pg_fetch_array)
 }
 /* }}} */
 
-/* {{{ proto object pg_fetch_object(resource result [, int row [, int result_type]])
+/* {{{ proto object pg_fetch_object(resource result [, int row])
    Fetch a row as an object */
 PHP_FUNCTION(pg_fetch_object)
 {

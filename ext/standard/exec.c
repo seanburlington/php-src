@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.36 2000/06/25 17:02:45 zeev Exp $ */
+/* $Id: exec.c,v 1.37 2000/06/26 17:12:38 stas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -86,7 +86,11 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 		tmp = php_escape_shell_cmd(d);
 		efree(d);
 		d = tmp;
+#ifdef PHP_WIN32
 		fp = V_POPEN(d, "rb");
+#else
+		fp = V_POPEN(d, "r");
+#endif
 		if (!fp) {
 			php_error(E_WARNING, "Unable to fork [%s]", d);
 			efree(d);
@@ -94,7 +98,11 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 			return -1;
 		}
 	} else { /* not safe_mode */
+#ifdef PHP_WIN32
 		fp = V_POPEN(cmd, "rb");
+#else
+		fp = V_POPEN(cmd, "r");
+#endif
 		if (!fp) {
 			php_error(E_WARNING, "Unable to fork [%s]", cmd);
 			efree(buf);

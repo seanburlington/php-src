@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.75 2002/07/03 13:36:19 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.76 2002/07/03 18:23:55 fmk Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -1327,7 +1327,7 @@ SAPI_POST_HANDLER_FUNC(php_mbstr_post_handler)
 #define IS_SJIS1(c) ((((c)>=0x81 && (c)<=0x9f) || ((c)>=0xe0 && (c)<=0xf5)) ? 1 : 0)
 #define IS_SJIS2(c) ((((c)>=0x40 && (c)<=0x7e) || ((c)>=0x80 && (c)<=0xfc)) ? 1 : 0)
 
-char *mbstr_strrchr(const char *s, char c){
+char *mbstr_strrchr(const char *s, char c TSRMLS_DC){
 	unsigned char *p = (unsigned char *)s, *last = NULL;
 	while(*p++) {
 		if (*p == c) {

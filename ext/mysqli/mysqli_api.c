@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.2 2003/02/12 10:39:06 georg Exp $ 
+  $Id: mysqli_api.c,v 1.3 2003/02/13 00:11:17 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -944,6 +944,23 @@ PHP_FUNCTION(mysqli_get_server_info)
 	MYSQLI_FETCH_RESOURCE(mysql, MYSQL *, &mysql_link, "mysqli_link"); 
 
 	RETURN_STRING((char *)mysql_get_server_info(mysql), 1);
+}
+
+/* }}} */
+
+/* {{{ proto int mysqli_get_server_version 
+*/
+PHP_FUNCTION(mysqli_get_server_version)
+{
+	MYSQL	*mysql;
+	zval  	*mysql_link = NULL;
+
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "O", &mysql_link, mysqli_link_class_entry) == FAILURE) {
+		return;
+	}
+	MYSQLI_FETCH_RESOURCE(mysql, MYSQL *, &mysql_link, "mysqli_link"); 
+
+	RETURN_LONG(mysql_get_server_version(mysql));
 }
 
 /* }}} */

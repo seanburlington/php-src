@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.2 2003/02/12 10:39:06 georg Exp $ 
+  $Id: php_mysqli.h,v 1.3 2003/02/13 00:11:17 georg Exp $ 
 */
 
 #include <mysql.h>
@@ -179,6 +179,7 @@ PHP_FUNCTION(mysqli_get_client_info);
 PHP_FUNCTION(mysqli_get_host_info);
 PHP_FUNCTION(mysqli_get_proto_info);
 PHP_FUNCTION(mysqli_get_server_info);
+PHP_FUNCTION(mysqli_get_server_version);
 PHP_FUNCTION(mysqli_info);
 PHP_FUNCTION(mysqli_insert_id);
 PHP_FUNCTION(mysqli_init);

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.3 2003/02/12 21:07:28 georg Exp $ 
+  $Id: mysqli_fe.c,v 1.4 2003/02/13 00:11:17 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -73,6 +73,7 @@ function_entry mysqli_functions[] = {
 	PHP_FE(mysqli_get_host_info,						NULL)
 	PHP_FE(mysqli_get_proto_info,						NULL)
 	PHP_FE(mysqli_get_server_info,						NULL)
+	PHP_FE(mysqli_get_server_version,					NULL)
 	PHP_FE(mysqli_init, 								NULL)
 	PHP_FE(mysqli_info,									NULL)
 	PHP_FE(mysqli_insert_id,							NULL)
@@ -141,6 +142,7 @@ function_entry mysqli_link_methods[] = {
 	PHP_FALIAS(get_host_info,mysqli_get_host_info,NULL)
 	PHP_FALIAS(get_proto_info,mysqli_get_proto_info,NULL)
 	PHP_FALIAS(get_server_info,mysqli_get_server_info,NULL)
+	PHP_FALIAS(get_server_version,mysqli_get_server_version,NULL)
 	PHP_FALIAS(init,mysqli_init,NULL)
 	PHP_FALIAS(info,mysqli_info,NULL)
 	PHP_FALIAS(insert_id,mysqli_insert_id,NULL)

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.49.2.2 2003/01/28 06:56:42 sniper Exp $
+dnl $Id: config.m4,v 1.49.2.3 2003/02/23 08:14:34 sniper Exp $
 dnl
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
@@ -211,7 +211,7 @@ if test "$PHP_IMAP" != "no"; then
     ], [], $TST_LIBS)
 
     AC_MSG_CHECKING(whether IMAP works)
-    PHP_IMAP_TEST_BUILD(mail_open, [
+    PHP_IMAP_TEST_BUILD(mail_newbody, [
       AC_MSG_RESULT(yes)
     ], [
       AC_MSG_RESULT(no)

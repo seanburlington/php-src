@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.30 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: element.c,v 1.30.2.1 2004/08/30 15:09:07 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -455,7 +455,7 @@ PHP_FUNCTION(dom_element_get_elements_by_tag_name)
 	php_dom_create_interator(return_value, DOM_NODELIST TSRMLS_CC);
 	namednode = (dom_object *)zend_objects_get_address(return_value TSRMLS_CC);
 	local = xmlCharStrndup(name, name_len);
-	dom_namednode_iter(intern, 0, namednode, NULL, local, NULL);
+	dom_namednode_iter(intern, 0, namednode, NULL, local, NULL TSRMLS_CC);
 }
 /* }}} end dom_element_get_elements_by_tag_name */
 
@@ -777,7 +777,7 @@ PHP_FUNCTION(dom_element_get_elements_by_tag_name_ns)
 	namednode = (dom_object *)zend_objects_get_address(return_value TSRMLS_CC);
 	local = xmlCharStrndup(name, name_len);
 	nsuri = xmlCharStrndup(uri, uri_len);
-	dom_namednode_iter(intern, 0, namednode, NULL, local, nsuri);
+	dom_namednode_iter(intern, 0, namednode, NULL, local, nsuri TSRMLS_CC);
 
 }
 /* }}} end dom_element_get_elements_by_tag_name_ns */

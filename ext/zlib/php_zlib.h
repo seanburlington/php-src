@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.30 2002/04/10 22:42:24 wez Exp $ */
+/* $Id: php_zlib.h,v 1.31 2002/07/28 14:08:07 sr Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -65,6 +65,9 @@ extern php_stream_wrapper php_stream_gzip_wrapper;
 #endif
 
 #define phpext_zlib_ptr zlib_module_ptr
+
+#define CODING_GZIP		1
+#define CODING_DEFLATE	2
 
 #endif /* PHP_ZLIB_H */
 

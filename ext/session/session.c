@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.38 2004/04/13 18:23:10 iliaa Exp $ */
+/* $Id: session.c,v 1.336.2.39 2004/05/08 06:01:11 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1350,7 +1350,7 @@ static void php_register_var(zval** entry TSRMLS_DC)
 	} else {
 		convert_to_string_ex(entry);
 
-		if ((strcmp(Z_STRVAL_PP(entry), "HTTP_SESSION_VARS") != 0) ||
+		if ((strcmp(Z_STRVAL_PP(entry), "HTTP_SESSION_VARS") != 0) &&
 		   (strcmp(Z_STRVAL_PP(entry), "_SESSION") != 0)) {
 			PS_ADD_VARL(Z_STRVAL_PP(entry), Z_STRLEN_PP(entry));
 		}

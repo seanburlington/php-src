@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.26.2.2 2003/04/05 17:34:04 sniper Exp $ */
+/* $Id: php_sockets.h,v 1.26.2.3 2003/04/17 23:20:58 sniper Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -102,9 +102,10 @@ typedef struct {
 } php_sockets_globals;
 
 /* Prototypes */
-int open_listen_sock(php_socket **php_sock, int port, int backlog TSRMLS_DC);
-int accept_connect(php_socket *in_sock, php_socket **new_sock, struct sockaddr *la TSRMLS_DC);
-int php_read(int bsd_socket, void *buf, size_t maxlen, int flags);
+static int php_open_listen_sock(php_socket **php_sock, int port, int backlog TSRMLS_DC);
+static int php_accept_connect(php_socket *in_sock, php_socket **new_sock, struct sockaddr *la TSRMLS_DC);
+static int php_read(int bsd_socket, void *buf, size_t maxlen, int flags);
+static char *php_strerror(int error TSRMLS_DC);
 
 ZEND_BEGIN_MODULE_GLOBALS(sockets)
 	int last_error;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.26 2004/02/18 20:37:30 rrichards Exp $ */
+/* $Id: node.c,v 1.27 2004/05/30 17:34:11 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1412,7 +1412,7 @@ PHP_FUNCTION(dom_node_has_attributes)
 /* }}} end dom_node_has_attributes */
 
 
-/* {{{ proto unsigned short dom_node_compare_document_position(node other);
+/* {{{ proto short dom_node_compare_document_position(node other);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#Node3-compareDocumentPosition
 Since: DOM Level 3
 */

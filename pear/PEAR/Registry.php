@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.9 2001/11/13 01:06:48 ssb Exp $
+// $Id: Registry.php,v 1.10 2001/12/10 17:01:32 ssb Exp $
 
 require_once "System.php";
 
@@ -109,7 +109,7 @@ class PEAR_Registry
     // }}}
     // {{{ packageInfo()
 
-    function packageInfo($package = null)
+    function packageInfo($package = null, $key = null)
     {
         if ($package === null) {
             return array_map(array($this, "packageInfo"),
@@ -121,7 +121,14 @@ class PEAR_Registry
         }
         $data = fread($fp, filesize($this->_packageFileName($package)));
         $this->_closePackageFile($fp);
-        return unserialize($data);
+        $data = unserialize($data);
+        if ($key === null) {
+            return $data;
+        }
+        if (isset($data[$key])) {
+            return $data[$key];
+        }
+        return null;
     }
 
     // }}}

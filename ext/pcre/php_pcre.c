@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.58 2000/06/10 19:43:20 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.59 2000/06/10 19:44:34 andrei Exp $ */
 
 /*
 	TODO:
@@ -739,6 +739,7 @@ char *php_pcre_replace(char *regex,   int regex_len,
 				/* stick that last bit of string on our output */
 				memcpy(&result[*result_len], piece, subject_len - start_offset);
 				*result_len += subject_len - start_offset;
+				result[*result_len] = '\0';
 				break;
 			}
 		}

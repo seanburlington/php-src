@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.46 2001/07/06 14:30:34 kalowsky Exp $
+dnl $Id: config.m4,v 1.46.2.1 2002/03/01 19:50:06 rasmus Exp $
 
 dnl
 dnl Figure out which library file to link with for the Solid support.
@@ -536,7 +536,7 @@ fi
 if test -n "$ODBC_TYPE"; then
   INCLUDES="$INCLUDES $ODBC_INCLUDE"
   if test "$ODBC_TYPE" != "dbmaker"; then
-    if test $shared != "yes"; then
+    if test "$shared" != "yes"; then
       EXTRA_LIBS="$EXTRA_LIBS $ODBC_LFLAGS $ODBC_LIBS"
     fi
   fi

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.96 1999/08/13 21:03:26 zeev Exp $ */
+/* $Id: main.c,v 1.97 1999/08/14 09:55:43 andi Exp $ */
 
 
 #include <stdio.h>
@@ -804,9 +804,8 @@ int php_module_startup(sapi_module_struct *sf)
 	zuf.get_ini_entry = php_get_ini_entry_for_zend;
 	zend_startup(&zuf, NULL);
 
-	tsrm_set_new_thread_end_handler(php_new_thread_end_handler);
-
 #ifdef ZTS
+	tsrm_set_new_thread_end_handler(php_new_thread_end_handler);
 	core_globals_id = ts_allocate_id(sizeof(php_core_globals), NULL, NULL);
 	core_globals = ts_resource(core_globals_id);
 #endif

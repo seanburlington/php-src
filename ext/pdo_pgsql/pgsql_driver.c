@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.22 2004/07/29 00:18:02 iliaa Exp $ */
+/* $Id: pgsql_driver.c,v 1.23 2004/09/23 20:43:11 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -310,7 +310,8 @@ static struct pdo_dbh_methods pgsql_methods = {
 	NULL,
 	pdo_pgsql_last_insert_id,
 	pdo_pgsql_fetch_error_func,
-	pdo_pgsql_get_attribute
+	pdo_pgsql_get_attribute,
+	NULL	/* check_liveness */
 };
 
 static int pdo_pgsql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_DC) /* {{{ */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.10 2004/07/31 18:46:18 wez Exp $ */
+/* $Id: oci_driver.c,v 1.11 2004/09/23 20:43:10 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -346,6 +346,8 @@ static struct pdo_dbh_methods oci_methods = {
 	oci_handle_set_attribute,
 	NULL,
 	pdo_oci_fetch_error_func,
+	NULL,	/* get_attr */
+	NULL	/* check_liveness */
 };
 
 static int pdo_oci_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_DC) /* {{{ */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.361 2003/02/24 22:19:36 moriyoshi Exp $ */
+/* $Id: string.c,v 1.362 2003/03/06 23:07:27 ddhill Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -202,7 +202,8 @@ PHP_FUNCTION(bin2hex)
 static void php_spn_common_handler(INTERNAL_FUNCTION_PARAMETERS, int behavior)
 {
 	char *s11, *s22;
-	int len1, len2, start, len;
+	int len1, len2;
+	long start, len;
 	
 	start = 0;
 	len = 0;
@@ -1228,7 +1229,7 @@ PHP_FUNCTION(pathinfo)
 	zval *tmp;
 	char *path, *ret = NULL;
 	int path_len;
-	int opt = PHP_PATHINFO_ALL;
+	long opt = PHP_PATHINFO_ALL;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &path, &path_len, &opt) == FAILURE) {
 		return;

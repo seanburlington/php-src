@@ -16,7 +16,7 @@
    |          Derick Rethans <d.rethans@jdimedia.nl>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.82 2003/01/18 19:41:48 iliaa Exp $ */
+/* $Id: mcrypt.c,v 1.83 2003/03/06 23:07:25 ddhill Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1210,7 +1210,7 @@ PHP_FUNCTION(mcrypt_ofb)
 PHP_FUNCTION(mcrypt_create_iv)
 {
 	char *iv;
-	iv_source source = RANDOM;
+	long source = RANDOM;
 	long size;
 	int n = 0;
 

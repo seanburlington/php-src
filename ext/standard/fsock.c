@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.111 2003/02/28 19:53:20 wez Exp $ */
+/* $Id: fsock.c,v 1.112 2003/03/06 23:07:27 ddhill Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -33,7 +33,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 {
 	char *host;
 	long host_len;
-	int port = -1;
+	long port = -1;
 	zval *zerrno = NULL, *zerrstr = NULL;
 	double timeout = FG(default_socket_timeout);
 	unsigned long conv;

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.67 2002/12/31 16:07:42 sebastian Exp $ */
+/* $Id: head.c,v 1.68 2003/03/06 23:07:27 ddhill Exp $ */
 
 #include <stdio.h>
 
@@ -142,7 +142,7 @@ PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, t
 PHP_FUNCTION(setcookie)
 {
 	char *name, *value = NULL, *path = NULL, *domain = NULL;
-	time_t expires = 0;
+	long expires = 0;
 	zend_bool secure = 0;
 	int name_len, value_len, path_len, domain_len;
 

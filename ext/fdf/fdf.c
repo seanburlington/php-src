@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.72 2003/02/10 00:47:45 hholzgra Exp $ */
+/* $Id: fdf.c,v 1.73 2003/03/06 23:07:23 ddhill Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -551,7 +551,8 @@ PHP_FUNCTION(fdf_set_ap)
 PHP_FUNCTION(fdf_get_ap) {
 	zval *r_fdf;
 	char *fieldname, *filename;
-	int fieldname_len, filename_len, face;
+	int fieldname_len, filename_len;
+	long face;
 	FDFDoc fdf;
 	FDFErc err;
 	FDFAppFace facenr;
@@ -938,7 +939,8 @@ PHP_FUNCTION(fdf_set_flags)
 PHP_FUNCTION(fdf_get_flags) {
  	zval *r_fdf;
 	char *fieldname;
-	int fieldname_len, whichflags;
+	int fieldname_len;
+	long whichflags;
 	FDFDoc fdf;
 	FDFErc err;
 	ASUns32 flags;
@@ -994,7 +996,8 @@ PHP_FUNCTION(fdf_set_opt)
 PHP_FUNCTION(fdf_get_opt) {
  	zval *r_fdf;
 	char *fieldname;
-	int fieldname_len, element = -1;
+	int fieldname_len;
+	long element = -1;
 	FDFDoc fdf;
 	FDFErc err;
 

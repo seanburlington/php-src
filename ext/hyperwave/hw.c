@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.38 2000/02/02 11:18:01 steinm Exp $ */
+/* $Id: hw.c,v 1.39 2000/02/03 17:20:48 steinm Exp $ */
 #if COMPILE_DL
 #include "dl/phpdl.h"
 #endif
@@ -2924,7 +2924,7 @@ PHP_FUNCTION(hw_docbyanchor) {
 	int link, id, type;
 	hw_connection *ptr;
 
-	if (ARG_COUNT(ht) != 2 || getParameters(ht, 2, &arg1, &arg2) == FAILURE) {
+	if (ARG_COUNT(ht) != 2 || zend_get_parameters_ex(ht, 2, &arg1, &arg2) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_long_ex(arg1);

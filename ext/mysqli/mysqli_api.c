@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.87.2.10 2005/01/27 10:20:21 georg Exp $ 
+  $Id: mysqli_api.c,v 1.87.2.11 2005/01/28 17:37:42 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -44,6 +44,9 @@ PHP_FUNCTION(mysqli_affected_rows)
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link");
 
 	rc = mysql_affected_rows(mysql->mysql);
+	if (rc == (my_ulonglong) -1) {
+		RETURN_LONG(-1);
+	}
 	MYSQLI_RETURN_LONG_LONG(rc);
 }
 /* }}} */
@@ -1480,6 +1483,9 @@ PHP_FUNCTION(mysqli_stmt_affected_rows)
 	MYSQLI_FETCH_RESOURCE(stmt, MY_STMT *, &mysql_stmt, "mysqli_stmt");
 
 	rc = mysql_stmt_affected_rows(stmt->stmt);
+	if (rc == (my_ulonglong) -1) {
+		RETURN_LONG(-1);
+	}
 	MYSQLI_RETURN_LONG_LONG(rc)
 }
 /* }}} */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.21 2003/02/25 09:44:12 sniper Exp $ */
+/* $Id: snprintf.c,v 1.22 2003/05/05 19:54:28 iliaa Exp $ */
 
 /* ====================================================================
  * Copyright (c) 1995-1998 The Apache Group.  All rights reserved.
@@ -386,6 +386,10 @@ ap_php_gcvt(double number, int ndigit, char *buf, boolean_e altform)
 	register char *p1, *p2;
 	register int i;
 	char buf1[NDIG];
+
+	if (ndigit >= NDIG - 1) {
+		ndigit = NDIG - 2;	
+	}
 
 	p1 = ap_php_ecvt(number, ndigit, &decpt, &sign, buf1);
 	p2 = buf;

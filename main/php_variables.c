@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.35.2.3 2002/08/01 02:21:00 yohgaki Exp $ */
+/* $Id: php_variables.c,v 1.35.2.4 2002/09/07 21:01:41 yohgaki Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -300,10 +300,11 @@ void php_treat_data(int arg, char *str, zval* destArray TSRMLS_DC)
 
 			*val++ = '\0';
 			php_url_decode(var, strlen(var));
-			val_len = php_url_decode(val, strlen(val));
+			val_len = php_url_decode(val, val-var);
 			php_register_variable_safe(var, val, val_len, array_ptr TSRMLS_CC);
 		}
 		else {
+			php_url_decode(var, strlen(var));
 			php_register_variable_safe(var, "", 0, array_ptr TSRMLS_CC);
 		}
 		

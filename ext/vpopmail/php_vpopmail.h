@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.h,v 1.9 2001/07/28 11:36:23 zeev Exp $ */
+/* $Id: php_vpopmail.h,v 1.10 2001/09/17 13:37:11 dbeu Exp $ */
 
 #ifndef PHP_VPOPMAIL_H
 #define PHP_VPOPMAIL_H
@@ -75,7 +75,7 @@ ZEND_BEGIN_MODULE_GLOBALS(vpopmail)
 ZEND_END_MODULE_GLOBALS(vpopmail)
 
 #ifdef ZTS
-#define VPOPMAILG(v) TSRMG(gd_vpopmail_id, php_vpopmail_globals *, v)
+#define VPOPMAILG(v) TSRMG(vpopmail_globals_id, zend_vpopmail_globals *, v)
 #else
 #define VPOPMAILG(v) (vpopmail_globals.v)
 #endif

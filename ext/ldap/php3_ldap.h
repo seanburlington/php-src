@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php3_ldap.h,v 1.4 1999/05/22 16:12:07 sas Exp $ */
+/* $Id: php3_ldap.h,v 1.5 1999/08/02 15:02:52 andrey Exp $ */
 
 #ifndef _PHP3_LDAP_H
 #define _PHP3_LDAP_H
@@ -47,10 +47,10 @@ extern php3_module_entry ldap_module_entry;
 #define ldap_module_ptr &ldap_module_entry
 
 /* LDAP functions */
-int php3_minit_ldap(INIT_FUNC_ARGS);
-int php3_mshutdown_ldap(SHUTDOWN_FUNC_ARGS);
+PHP_MINIT_FUNCTION(ldap);
+PHP_MSHUTDOWN_FUNCTION(ldap);
 
-void php3_info_ldap(ZEND_MODULE_INFO_FUNC_ARGS);
+PHP_MINFO_FUNCTION(ldap);
 
 PHP_FUNCTION(ldap_connect);
 

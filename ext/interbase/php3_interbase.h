@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_interbase.h,v 1.3 1999/05/21 10:05:58 sas Exp $ */
+/* $Id: php3_interbase.h,v 1.4 1999/08/02 15:02:52 andrey Exp $ */
 
 #ifndef _PHP3_IBASE_H
 #define _PHP3_IBASE_H
@@ -44,10 +44,11 @@
 extern php3_module_entry ibase_module_entry;
 #define php3_ibase_module_ptr &ibase_module_entry
 
-extern int php3_minit_ibase(INIT_FUNC_ARGS);
-extern int php3_rinit_ibase(INIT_FUNC_ARGS);
-extern int php3_mfinish_ibase(void);
-void php3_info_ibase(ZEND_MODULE_INFO_FUNC_ARGS);
+extern PHP_MINIT_FUNCTION(ibase);
+extern PHP_RINIT_FUNCTION(ibase);
+extern PHP_MSHUTDOWN_FUNCTION(ibase);
+PHP_MINFO_FUNCTION(ibase);
+
 PHP_FUNCTION(ibase_connect);
 PHP_FUNCTION(ibase_pconnect);
 PHP_FUNCTION(ibase_close);

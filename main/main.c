@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.218 2000/02/26 14:29:27 zeev Exp $ */
+/* $Id: main.c,v 1.219 2000/02/26 15:36:23 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -690,7 +690,7 @@ static int php_body_write_wrapper(const char *str, uint str_length)
 #ifdef ZTS
 static void php_new_thread_end_handler(THREAD_T thread_id)
 {
-	php_ini_refresh_caches();
+	php_ini_refresh_caches(PHP_INI_STAGE_STARTUP);
 }
 #endif
 

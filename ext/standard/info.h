@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.h,v 1.33 2003/04/19 17:40:19 sas Exp $ */
+/* $Id: info.h,v 1.34 2003/05/20 13:32:21 hholzgra Exp $ */
 
 #ifndef INFO_H
 #define INFO_H
@@ -55,6 +55,7 @@
 #define ZEND_LOGO_GUID		"PHPE9568F35-D428-11d2-A769-00AA001ACF42"
 #define PHP_CREDITS_GUID  "PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000"
 
+BEGIN_EXTERN_C()
 PHP_FUNCTION(phpversion);
 PHP_FUNCTION(phpinfo);
 PHP_FUNCTION(phpcredits);
@@ -82,5 +83,6 @@ PHPAPI void php_info_print_hr(void);
 PHPAPI char *php_logo_guid(void);
 
 void register_phpinfo_constants(INIT_FUNC_ARGS);
+END_EXTERN_C();
 
 #endif /* INFO_H */

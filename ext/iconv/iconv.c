@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.57 2002/10/26 08:52:17 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.58 2002/10/29 01:28:21 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -384,7 +384,7 @@ PHP_FUNCTION(ob_iconv_handler)
 	char *out_buffer, *content_type, *mimetype = NULL, *s;
 	zval *zv_string;
 	unsigned int out_len;
-	int err, status, mimetype_alloced  = 0;
+	int status, mimetype_alloced  = 0;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zl", &zv_string, &status) == FAILURE)
 		return;

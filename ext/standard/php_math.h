@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_math.h,v 1.1 2000/06/13 16:31:57 sas Exp $ */
+/* $Id: php_math.h,v 1.2 2000/06/13 16:35:40 sas Exp $ */
 
 #ifndef _PHPMATH_H
 #define _PHPMATH_H
@@ -67,6 +67,7 @@ PHP_FUNCTION(number_format);
 PHP_FUNCTION(deg2rad);
 PHP_FUNCTION(rad2deg);
 
+#include <math.h>
 
 #ifndef M_E
 #define M_E            2.7182818284590452354   /* e */

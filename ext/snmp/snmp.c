@@ -17,11 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.9 1999/09/03 16:04:28 gorgo Exp $ */
-
-#ifdef PIC
-# define COMPILE_DL 1
-#endif
+/* $Id: snmp.c,v 1.10 1999/10/10 12:41:55 sas Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)

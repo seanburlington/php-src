@@ -17,13 +17,9 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.22 1999/10/06 13:15:23 sas Exp $ */
+/* $Id: pgsql.c,v 1.23 1999/10/10 12:41:56 sas Exp $ */
 
 #include <stdlib.h>
-
-#ifdef PIC
-# define COMPILE_DL 1
-#endif
 
 #include "php.h"
 #include "php3_pgsql.h"

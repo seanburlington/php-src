@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.98.2.2 2004/08/11 12:31:37 derick Exp $ */
+/* $Id: image.c,v 1.98.2.3 2004/10/04 20:43:21 iliaa Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -957,7 +957,7 @@ static int php_get_wbmp(php_stream *stream, struct gfxinfo **result, int check T
 	} while (i & 0x80);
 
 	/* maximum valid sizes for wbmp (although 127x127 may be a more accurate one) */
-	if (height > 2048 || width > 2048) {
+	if (!height || !width || height > 2048 || width > 2048) {
 		return 0;
 	}
 	

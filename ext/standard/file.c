@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.187 2001/10/07 18:34:44 derick Exp $ */
+/* $Id: file.c,v 1.188 2001/10/13 23:43:49 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1646,7 +1646,7 @@ PHP_FUNCTION(mmapfile)
 	char        *in_addr;
 	struct stat f_stat;
 
-	memset (&f_stat, 0, sizeof (stat));
+	memset (&f_stat, 0, sizeof (f_stat));
    
 	/* check args */
 	switch (ARG_COUNT(ht)) {

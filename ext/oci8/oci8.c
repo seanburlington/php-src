@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.183.2.10 2004/01/26 14:04:22 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.183.2.11 2004/02/03 14:22:34 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -641,7 +641,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.10 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.11 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -4833,7 +4833,7 @@ PHP_FUNCTION(ocicollappend)
 			CALL_OCI_RETURN(connection->error, OCICollAppend(
 				  connection->session->pEnv, 
 				  connection->pError, 
-				  (dword *)0, 
+				  (dvoid *)0, 
 				  &null_ind, 
 				  coll->coll));
 			if (connection->error) {
@@ -5139,7 +5139,7 @@ PHP_FUNCTION(ocicollassignelem)
 				  connection->session->pEnv, 
 				  connection->pError, 
 				  ndx, 
-				  (dword *)0, 
+				  (dvoid *)0, 
 				  &null_ind, 
 				  coll->coll));
 			if (connection->error) {
@@ -5172,7 +5172,7 @@ PHP_FUNCTION(ocicollassignelem)
 							connection->session->pEnv, 
 							connection->pError, 
 							ndx, 
-							(dword *)&dt, 
+							(dvoid *)&dt, 
 							&new_ind, 
 							coll->coll));
 
@@ -5200,7 +5200,7 @@ PHP_FUNCTION(ocicollassignelem)
 							connection->session->pEnv, 
 							connection->pError, 
 							ndx, 
-							(dword *)ocistr, 
+							(dvoid *)ocistr, 
 							&new_ind, 
 							coll->coll));
 
@@ -5239,7 +5239,7 @@ PHP_FUNCTION(ocicollassignelem)
 							connection->session->pEnv, 
 							connection->pError, 
 							ndx, 
-							(dword *)&num, 
+							(dvoid *)&num, 
 							&new_ind, 
 							coll->coll));
 

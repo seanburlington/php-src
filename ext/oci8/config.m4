@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.22 2000/10/29 04:10:06 sniper Exp $
+dnl $Id: config.m4,v 1.23 2000/10/29 04:36:32 sniper Exp $
 
 AC_DEFUN(AC_OCI8_VERSION,[
   AC_MSG_CHECKING([Oracle version])
-  if test -f "$OCI8_DIR/orainst/unix.rgs"; then
+  if test -s "$OCI8_DIR/orainst/unix.rgs"; then
 	OCI8_VERSION=`grep '"ocommon"' $OCI8_DIR/orainst/unix.rgs | sed 's/[ ][ ]*/:/g' | cut -d: -f 6 | cut -c 2-4`
 	test -z "$OCI8_VERSION" && OCI8_VERSION=7.3
   elif test -f $OCI8_DIR/lib/libclntsh.s?.8.0; then

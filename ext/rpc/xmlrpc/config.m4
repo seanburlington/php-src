@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.8 2002/01/25 19:56:47 derick Exp $
+dnl $Id: config.m4,v 1.8.2.1 2002/03/13 09:59:52 ssb Exp $
 dnl
 
 sinclude(ext/xmlrpc/libxmlrpc/acinclude.m4)
@@ -38,7 +38,7 @@ dnl  found_iconv=no
   AC_CHECK_LIB(c, iconv_open, found_iconv=yes)
   if test "$found_iconv" = "no"; then
       for i in /usr /usr/local $ICONV_DIR; do
-        if test -f $i/lib/libconv.a -o -f $i/lib/libiconv.$SHLIB_SUFFIX_NAME; then
+        if test -f $i/lib/libiconv.a -o -f $i/lib/libiconv.$SHLIB_SUFFIX_NAME; then
           PHP_ADD_LIBRARY_WITH_PATH(iconv, $i/lib, XMLRPC_SHARED_LIBADD)
           found_iconv=yes
         fi

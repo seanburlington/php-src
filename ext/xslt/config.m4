@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.14 2002/02/15 03:08:40 elixer Exp $
+dnl $Id: config.m4,v 1.14.2.1 2002/03/13 09:59:52 ssb Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -73,7 +73,7 @@ if test "$PHP_XSLT" != "no"; then
     AC_CHECK_LIB(c, iconv_open, found_iconv=yes)
     if test "$found_iconv" = "no"; then
         for i in /usr /usr/local $ICONV_DIR; do
-          if test -f $i/lib/libconv.a -o -f $i/lib/libiconv.so; then
+          if test -f $i/lib/libiconv.a -o -f $i/lib/libiconv.so; then
             PHP_ADD_LIBRARY_WITH_PATH(iconv, $i/lib, XSLT_SHARED_LIBADD)
             found_iconv=yes
           fi

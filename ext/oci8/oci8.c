@@ -22,7 +22,7 @@
 
 #define OCI_USE_EMALLOC 0		/* set this to 1 if you want to use the php memory manager! */
 
-/* $Id: oci8.c,v 1.34 1999/10/27 17:51:22 thies Exp $ */
+/* $Id: oci8.c,v 1.35 1999/11/10 05:50:20 rasmus Exp $ */
 
 /* TODO list:
  *
@@ -3068,7 +3068,7 @@ PHP_FUNCTION(ocicolumnisnull)
 }
 
 /* }}} */
-/* {{{ Proto void   OCIDebug(int onoff)
+/* {{{ proto void   OCIDebug(int onoff)
   Toggle internal debugging output for the OCI extension.
  */
 
@@ -3368,7 +3368,7 @@ PHP_FUNCTION(ocilogoff)
 }
 
 /* }}} */
-/* {{{ proto int    OCILogon(string user, string pass[, string db])
+/* {{{ proto int    OCINLogon(string user, string pass[, string db])
   Connect to an Oracle database and log on. returns a new session.
  */
 
@@ -3397,7 +3397,7 @@ PHP_FUNCTION(ocilogon)
 
 /* }}} */
 /* {{{ proto int    OCIPLogon(string user, string pass[, string db])
-  Connect to an Oracle database and log on. returns a new session.
+  Connect to an Oracle database using a persistent connection and log on. returns a new session.
  */
 
 /* Connects to an Oracle 8 database and logs on.  If the

@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.109 2002/07/14 00:27:52 sniper Exp $ */
+/* $Id: rfc1867.c,v 1.110 2002/07/15 16:37:15 sesser Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -364,7 +364,7 @@ static int multipart_buffer_headers(multipart_buffer *self, zend_llist *header T
 			entry.value = estrdup(value);
 			entry.key = estrdup(key);
 
-		} else if (header->count) { /* If no ':' on the line, add to previous line */
+		} else if (zend_llist_count(header)) { /* If no ':' on the line, add to previous line */
 
 			prev_len = strlen(prev_entry.value);
 			cur_len = strlen(line);

@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.29 2002/11/12 18:29:11 hholzgra Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.29.2.1 2002/11/21 10:53:18 hholzgra Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -95,8 +95,8 @@ static size_t php_stream_input_read(php_stream *stream, char *buf, size_t count 
 			stream->eof = 1;
 		}
 	}
-
-    return read_bytes;
+	SG(read_post_bytes) += read_bytes;
+	return read_bytes;
 }
 
 static int php_stream_input_close(php_stream *stream, int close_handle TSRMLS_DC)

@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.7 1999/08/04 20:56:33 slawrance Exp $ */
+/* $Id: snmp.c,v 1.8 1999/08/04 21:12:57 slawrance Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)
@@ -367,7 +367,7 @@ PHP_FUNCTION(snmp_set_quick_print)
 
 /* {{{ proto int snmpset(string host, string community, string object_id, string type, mixed value [, int timeout [, int retries]]) 
 Set the value of a SNMP object */
-PHP_FUNCTION(php3_snmpset) {
+PHP_FUNCTION(snmpset) {
 	_php3_snmp(INTERNAL_FUNCTION_PARAM_PASSTHRU,11);
 }
 /* }}} */

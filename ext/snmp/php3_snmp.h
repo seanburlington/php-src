@@ -18,7 +18,7 @@
 +----------------------------------------------------------------------+
 */
 
-/* $Id: php3_snmp.h,v 1.4 1999/08/04 20:56:33 slawrance Exp $ */
+/* $Id: php3_snmp.h,v 1.5 1999/08/04 21:12:57 slawrance Exp $ */
 #ifndef _PHP3_SNMP_H
 #define _PHP3_SNMP_H
 

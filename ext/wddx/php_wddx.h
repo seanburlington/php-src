@@ -16,14 +16,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx.h,v 1.14 2002/12/31 16:08:02 sebastian Exp $ */
+/* $Id: php_wddx.h,v 1.15 2003/05/19 23:45:20 sniper Exp $ */
 
 #ifndef PHP_WDDX_H
 #define PHP_WDDX_H
 
 #if HAVE_WDDX
-
-#include <expat.h>
 
 extern zend_module_entry wddx_module_entry;
 #define wddx_module_ptr &wddx_module_entry

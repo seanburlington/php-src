@@ -16,12 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.103 2003/05/18 23:20:10 helly Exp $ */
+/* $Id: wddx.c,v 1.104 2003/05/19 23:45:20 sniper Exp $ */
 
 #include "php.h"
 
 #if HAVE_WDDX
 
+#include "ext/xml/expat_compat.h"
 #include "php_wddx.h"
 #include "php_wddx_api.h"
 

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.72 1999/06/11 09:22:59 zeev Exp $ */
+/* $Id: main.c,v 1.73 1999/06/11 11:59:35 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -560,11 +560,17 @@ static void php_message_handler_for_zend(long message, void *data)
 				PG(track_vars) = 1;
 			}
 			break;
-		case ZMSG_FAILED_INCLUDE_FOPEN:
-			php3_error(E_WARNING, "Failed opening '%s' for inclusion", php3_strip_url_passwd((char *) data));
+		case ZMSG_FAILED_INCLUDE_FOPEN: {
+				PLS_FETCH();
+
+				php3_error(E_WARNING, "Failed opening '%s' for inclusion (include_path='%s')", php3_strip_url_passwd((char *) data), PG(include_path));
+			}
 			break;
-		case ZMSG_FAILED_REQUIRE_FOPEN:
-			php3_error(E_COMPILE_ERROR, "Failed opening required '%s'", php3_strip_url_passwd((char *) data));
+		case ZMSG_FAILED_REQUIRE_FOPEN: {
+				PLS_FETCH();
+
+				php3_error(E_COMPILE_ERROR, "Failed opening required '%s' (include_path='%s')", php3_strip_url_passwd((char *) data), PG(include_path));
+			}
 			break;
 		case ZMSG_FAILED_HIGHLIGHT_FOPEN:
 			php3_error(E_WARNING, "Failed opening '%s' for highlighting", php3_strip_url_passwd((char *) data));

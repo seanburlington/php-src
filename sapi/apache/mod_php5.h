@@ -15,10 +15,10 @@
    | Author: Rasmus Lerdorf <rasmus@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.h,v 1.18 2002/12/31 15:59:02 sebastian Exp $ */
+/* $Id: mod_php5.h,v 1.1 2003/03/29 04:52:46 sterling Exp $ */
 
-#ifndef MOD_PHP4_H
-#define MOD_PHP4_H
+#ifndef MOD_PHP5_H
+#define MOD_PHP5_H
 
 #if !defined(WIN32) && !defined(WINNT)
 #ifndef MODULE_VAR_EXPORT
@@ -44,7 +44,7 @@ extern php_apache_info_struct php_apache_info;
 #define AP(v) (php_apache_info.v)
 #endif
 
-#endif							/* MOD_PHP4_H */
+#endif							/* MOD_PHP5_H */
 
 /*
  * Local variables:

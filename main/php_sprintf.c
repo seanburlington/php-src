@@ -16,13 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sprintf.c,v 1.5 2000/05/18 15:34:21 zeev Exp $ */
+/* $Id: php_sprintf.c,v 1.6 2000/07/23 08:25:27 joey Exp $ */
 
 #include <stdio.h>
 #include <stdarg.h>
 #include "php_config.h"
 
-#if BROKEN_SPRINTF
+#if PHP_BROKEN_SPRINTF
 
 int
 php_sprintf (char*s, const char* format, ...)

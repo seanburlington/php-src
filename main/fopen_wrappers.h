@@ -15,7 +15,7 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.h,v 1.9 1999/10/15 15:22:19 thies Exp $ */
+/* $Id: fopen_wrappers.h,v 1.10 1999/11/30 20:18:06 andi Exp $ */
 
 /* Synced with php3 revision 1.25 1999-06-16 [ssb] */
 
@@ -66,7 +66,7 @@
 #define IS_SOCKET		1
 #define BAD_URL			2
 
-extern PHPAPI FILE *php3_fopen_wrapper(char *filename, char *mode, int options, int *issock, int *socketd);
+extern PHPAPI FILE *php3_fopen_wrapper(char *filename, char *mode, int options, int *issock, int *socketd, char **opened_path);
 
 PHPAPI FILE *php3_fopen_for_parser(void);
 

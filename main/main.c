@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.140 1999/11/26 16:32:02 sas Exp $ */
+/* $Id: main.c,v 1.141 1999/11/30 20:18:06 andi Exp $ */
 
 
 #include <stdio.h>
@@ -573,14 +573,14 @@ PHP_FUNCTION(set_time_limit)
 }
 
 
-static FILE *php_fopen_wrapper_for_zend(const char *filename)
+static FILE *php_fopen_wrapper_for_zend(const char *filename, char **opened_path)
 {
 	int issock=0, socketd=0;
 	int old_chunk_size;
 	FILE *retval;
 	
 	old_chunk_size = _php3_sock_set_def_chunk_size(1);
-	retval=php3_fopen_wrapper((char *) filename, "r", USE_PATH|IGNORE_URL_WIN, &issock, &socketd);
+	retval=php3_fopen_wrapper((char *) filename, "r", USE_PATH|IGNORE_URL_WIN, &issock, &socketd, opened_path);
 	_php3_sock_set_def_chunk_size(old_chunk_size);
 	
 	if (issock) {

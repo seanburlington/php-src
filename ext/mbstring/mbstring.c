@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.130 2002/11/09 17:05:47 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.131 2002/11/09 23:10:02 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -2645,7 +2645,7 @@ PHP_FUNCTION(mb_convert_case)
 }
 /* }}} */
 
-/* {{{ proto string mb_strtoupper(string sourcestring, [, string encoding])
+/* {{{ proto string mb_strtoupper(string sourcestring [, string encoding])
  *  Returns a uppercased version of sourcestring
  */
 PHP_FUNCTION(mb_strtoupper)
@@ -2668,7 +2668,7 @@ PHP_FUNCTION(mb_strtoupper)
 }
 /* }}} */
 
-/* {{{ proto string mb_strtolower(string sourcestring, [, string encoding])
+/* {{{ proto string mb_strtolower(string sourcestring [, string encoding])
  *  Returns a lowercased version of sourcestring
  */
 PHP_FUNCTION(mb_strtolower)

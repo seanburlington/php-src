@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.50 2002/10/11 08:01:18 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.51 2002/10/11 08:15:05 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -116,16 +116,14 @@ PHP_MINIT_FUNCTION(miconv)
 	{
 		static char buf[16];
 		impl_name = "libiconv"; 
-		snprintf( buf, sizeof(buf), "%d.%d", ((_libiconv_version >> 8) & 0x0f),
-		                                     (_libiconv_version & 0x0f) ); 
+		snprintf(buf, sizeof(buf), "%d.%d",
+		    ((_libiconv_version >> 8) & 0x0f), (_libiconv_version & 0x0f)); 
 		version = buf;
 	}
 #endif
 
-	REGISTER_STRING_CONSTANT( "ICONV_IMPL", ICONV_IMPL, CONST_CS
-	                                                    | CONST_PERSISTENT );
-	REGISTER_STRING_CONSTANT( "ICONV_VERSION", version, CONST_CS
-	                                                    | CONST_PERSISTENT );
+	REGISTER_STRING_CONSTANT("ICONV_IMPL", ICONV_IMPL, CONST_CS | CONST_PERSISTENT);
+	REGISTER_STRING_CONSTANT("ICONV_VERSION", version, CONST_CS | CONST_PERSISTENT);
 
 	return SUCCESS;
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.146 2002/05/03 09:45:09 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.147 2002/05/03 09:46:27 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -3265,7 +3265,7 @@ PHP_FUNCTION(domxml_dump_node)
 	int level = 0;
 	int format = 0;
 	
-	DOMXML_PARAM_THREE(docp, id, le_domxmldocp,"o|lls",&nodep,&format,&level);
+	DOMXML_PARAM_THREE(docp, id, le_domxmldocp,"o|ll",&nodep,&format,&level);
 	
 	DOMXML_GET_OBJ(elementp, nodep, le_domxmlnodep);
 

@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.37 2001/12/11 15:30:37 sebastian Exp $ */
+/* $Id: url_scanner.c,v 1.38 2002/08/28 06:13:49 kalowsky Exp $ */
 
 #include "php.h"
 
@@ -361,6 +361,8 @@ char *url_adapt(const char *src, size_t srclen, const char *data, size_t *newlen
 					US.p = US.val+US.l;
 				}
 			}
+			break;
+		default:
 			break;
 		}
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.h,v 1.29.2.2 2003/04/19 17:41:12 sas Exp $ */
+/* $Id: info.h,v 1.29.2.3 2003/04/22 03:27:01 sas Exp $ */
 
 #ifndef INFO_H
 #define INFO_H
@@ -72,7 +72,6 @@ PHPAPI void php_info_print_style(void);
 PHPAPI void php_info_print_table_colspan_header(int num_cols, char *header);
 PHPAPI void php_info_print_table_header(int num_cols, ...);
 PHPAPI void php_info_print_table_row(int num_cols, ...);
-PHPAPI void php_info_print_table_row_ex(int num_cols, const char *, ...);
 PHPAPI void php_info_print_table_start(void);
 PHPAPI void php_info_print_table_end(void);
 PHPAPI void php_info_print_box_start(int bg);

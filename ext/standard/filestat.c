@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.105 2002/09/05 18:11:33 derick Exp $ */
+/* $Id: filestat.c,v 1.106 2002/09/05 21:16:34 sniper Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -337,7 +337,6 @@ PHP_FUNCTION(disk_free_space)
    Change file group */
 PHP_FUNCTION(chgrp)
 {
-/*#ifndef WINDOWS*/
 #if !defined(WINDOWS) && !defined(NETWARE)  /* I guess 'chgrp' won't be available on NetWare */
 	pval **filename, **group;
 	gid_t gid;
@@ -386,7 +385,6 @@ PHP_FUNCTION(chgrp)
    Change file owner */
 PHP_FUNCTION(chown)
 {
-/*#ifndef WINDOWS*/
 #if !defined(WINDOWS) && !defined(NETWARE)  /* I guess 'chown' won't be available on NetWare */
 	pval **filename, **user;
 	int ret;

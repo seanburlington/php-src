@@ -1,4 +1,6 @@
-dnl $Id: config.m4,v 1.12 2000/02/29 13:21:51 sas Exp $
+dnl $Id: config.m4,v 1.13 2000/03/03 11:47:13 sas Exp $
+
+AC_DEFUN(IMAP_INC_CHK,[if test -r $i$1/rfc822.h; then IMAP_DIR=$i; IMAP_INC_DIR=$i$1])
 
 RESULT=no
 AC_MSG_CHECKING(for IMAP support)
@@ -8,16 +10,11 @@ AC_ARG_WITH(imap,
 [
   if test "$withval" != "no"; then  
     for i in /usr/local /usr $withval; do
-        if test -f $i/rfc822.h; then
-          IMAP_DIR=$i
-          IMAP_INC_DIR=$i
-        elif test -f $i/imap/rfc822.h; then
-          IMAP_DIR=$i
-          IMAP_INC_DIR=$i/imap
-        elif test -f $i/c-client/rfc822.h; then
-          IMAP_DIR=$i
-          IMAP_INC_DIR=$i/c-client
-        fi
+      IMAP_INC_CHK()
+      el[]IMAP_INC_CHK(/include)
+      el[]IMAP_INC_CHK(/imap)
+      el[]IMAP_INC_CHK(/c-client)
+      fi
     done
 
     AC_EXPAND_PATH($IMAP_DIR, IMAP_DIR)

@@ -18,7 +18,7 @@
    |         Wez Furlong  <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: COM.c,v 1.90.2.5 2003/02/24 18:30:19 phanto Exp $ */
+/* $Id: COM.c,v 1.90.2.6 2003/03/27 19:56:09 phanto Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -124,7 +124,7 @@ PHPAPI HRESULT php_COM_invoke(comval *obj, DISPID dispIdMember, WORD wFlags, DIS
 	if (C_ISREFD(obj)) {
 		if (C_HASTLIB(obj)) {
 			hr = C_TYPEINFO_VT(obj)->Invoke(C_TYPEINFO(obj), C_DISPATCH(obj), dispIdMember, wFlags, pDispParams, pVarResult, &ExceptInfo, &ArgErr);
-			if (FAILED(hr)) {
+			if (FAILED(hr) && (hr != DISP_E_EXCEPTION)) {
 				hr = C_DISPATCH_VT(obj)->Invoke(C_DISPATCH(obj), dispIdMember, &IID_NULL, LOCALE_SYSTEM_DEFAULT, wFlags, pDispParams, pVarResult, &ExceptInfo, &ArgErr);
 				if (SUCCEEDED(hr)) {
 					/*

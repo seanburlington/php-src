@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.21 2001/12/11 15:29:59 sebastian Exp $ */
+/* $Id: php_oci8.h,v 1.22 2002/02/08 18:50:12 thies Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -118,6 +118,7 @@ typedef struct {
 	HashTable *defines;
 	int ncolumns;
 	int executed;
+	ub2 stmttype;
 } oci_statement;
 
 typedef struct {

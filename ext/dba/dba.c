@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.61.2.13 2003/04/13 20:16:14 helly Exp $ */
+/* $Id: dba.c,v 1.61.2.14 2003/04/16 19:14:29 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -382,7 +382,7 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	}
 	
 	/* we pass additional args to the respective handler */
-	args = emalloc(ac * sizeof(zval *));
+	args = safe_emalloc(ac, sizeof(zval *), 0);
 	if (zend_get_parameters_array_ex(ac, args) != SUCCESS) {
 		FREENOW;
 		WRONG_PARAM_COUNT;

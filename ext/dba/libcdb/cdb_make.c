@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cdb_make.c,v 1.2.2.3 2003/01/31 20:10:11 helly Exp $ */
+/* $Id: cdb_make.c,v 1.2.2.4 2003/04/16 19:14:29 helly Exp $ */
 
 /* incorporated from D.J.Bernstein's cdb-0.75 (http://cr.yp.to/cdb.html)*/
 
@@ -79,8 +79,7 @@ int cdb_make_addend(struct cdb_make *c, unsigned int keylen, unsigned int datale
 
 	head = c->head;
 	if (!head || (head->num >= CDB_HPLIST)) {
-		head = (struct cdb_hplist *)
-			emalloc(sizeof(struct cdb_hplist));
+		head = (struct cdb_hplist *) emalloc(sizeof(struct cdb_hplist));
 		if (!head)
 			return -1;
 		head->num = 0;
@@ -172,8 +171,7 @@ int cdb_make_finish(struct cdb_make *c TSRMLS_DC)
 		return -1;
 	}
 
-	c->split = (struct cdb_hp *)
-		emalloc(memsize * sizeof(struct cdb_hp));
+	c->split = (struct cdb_hp *) safe_emalloc(memsize, sizeof(struct cdb_hp), 0);
 	if (!c->split)
 		return -1;
 
@@ -242,5 +240,5 @@ int cdb_make_finish(struct cdb_make *c TSRMLS_DC)
 /* {{{ cdb_make_version */
 char *cdb_make_version() 
 {
-	return "0.75, $Revision: 1.2.2.3 $";
+	return "0.75, $Revision: 1.2.2.4 $";
 }

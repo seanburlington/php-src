@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.86 2002/01/08 06:06:58 sterling Exp $ */
+/* $Id: sockets.c,v 1.87 2002/01/09 16:51:53 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -746,7 +746,7 @@ PHP_FUNCTION(socket_write)
 
 typedef int (*read_func)(int, void *, int);
 
-/* {{{ proto mixed socket_read(resource socket, int length [, int type])
+/* {{{ proto string socket_read(resource socket, int length [, int type])
    Reads length bytes from socket */
 PHP_FUNCTION(socket_read)
 {
@@ -897,7 +897,7 @@ PHP_FUNCTION(socket_getpeername)
 }
 /* }}} */
 
-/* {{{ proto mixed socket_create(int domain, int type, int protocol)
+/* {{{ proto resource socket_create(int domain, int type, int protocol)
    Creates an endpoint for communication in the domain specified by domain, of type specified by type */
 PHP_FUNCTION(socket_create)
 {
@@ -1289,7 +1289,7 @@ PHP_FUNCTION(socket_writev)
 }
 /* }}} */
 
-/* {{{ proto mixed socket_recv(resource socket, int len, int flags)
+/* {{{ proto string socket_recv(resource socket, int len, int flags)
    Receives data from a connected socket */
 PHP_FUNCTION(socket_recv)
 {

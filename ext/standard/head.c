@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.50 2001/09/09 13:29:18 derick Exp $ */
+/* $Id: head.c,v 1.51 2001/10/19 19:21:28 eschmid Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -35,8 +35,8 @@
 
 
 /* Implementation of the language Header() function */
-/* {{{ proto void header(string header[, bool replace])
-   Send a raw HTTP header */
+/* {{{ proto void header(string header [, bool replace])
+   Sends a raw HTTP header */
 PHP_FUNCTION(header)
 {
 	pval **arg1, **arg2;
@@ -71,8 +71,8 @@ PHPAPI int php_header()
 
 
 /* php_set_cookie(name, value, expires, path, domain, secure) */
-/* {{{ proto void setcookie(string name [, string value [, int expires [, string path [, string domain [, string secure]]]]])
-   Send a cookie */
+/* {{{ proto bool setcookie(string name [, string value [, int expires [, string path [, string domain [, string secure]]]]])
+   Sends a cookie */
 PHP_FUNCTION(setcookie)
 {
 	char *cookie, *encoded_value = NULL;
@@ -177,7 +177,7 @@ PHP_FUNCTION(setcookie)
 
 
 /* {{{ proto int headers_sent(void)
-   Return true if headers have already been sent, false otherwise */
+   Returns true if headers have already been sent, false otherwise */
 PHP_FUNCTION(headers_sent)
 {
 	if (ZEND_NUM_ARGS() != 0) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.12 2003/06/19 22:18:58 iliaa Exp $ */
+/* $Id: curl.c,v 1.124.2.13 2003/07/20 15:19:39 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -191,7 +191,7 @@ PHP_MINIT_FUNCTION(curl)
 	REGISTER_CURL_CONSTANT(CURLOPT_SSLENGINE);
 	REGISTER_CURL_CONSTANT(CURLOPT_SSLENGINE_DEFAULT);
 	REGISTER_CURL_CONSTANT(CURLOPT_CRLF);
-#ifdef CURLOPT_ENCODING
+#if LIBCURL_VERSION_NUM >= 0x070a00
 	REGISTER_CURL_CONSTANT(CURLOPT_ENCODING);
 #endif
 		
@@ -740,7 +740,7 @@ PHP_FUNCTION(curl_setopt)
 		case CURLOPT_SSLKEYTYPE: 
 		case CURLOPT_SSLKEYPASSWD:
 		case CURLOPT_SSLENGINE: 
-#ifdef CURLOPT_ENCODING
+#if LIBCURL_VERSION_NUM >= 0x070a00
 		case CURLOPT_ENCODING: 
 #endif
 		case CURLOPT_SSLENGINE_DEFAULT: {

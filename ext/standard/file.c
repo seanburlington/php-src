@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.189 2001/10/23 11:14:51 sniper Exp $ */
+/* $Id: file.c,v 1.190 2001/11/10 17:24:02 jmoore Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1634,7 +1634,7 @@ PHP_FUNCTION(readfile)
 /* }}} */
 
 
-#if HAVE_MMAP
+#ifdef HAVE_MMAP
 
 /* {{{ proto string mmapfile (string filename [, int bytes_to_read])
    Read a file into a variable with mmap */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.415 2001/10/29 09:45:47 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.416 2001/11/10 17:24:01 jmoore Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -576,7 +576,7 @@ function_entry basic_functions[] = {
 	PHP_FE(pclose,															NULL)
 	PHP_FE(popen,															NULL)
 	PHP_FE(readfile,														NULL)
-#if HAVE_MMAP
+#ifdef HAVE_MMAP
 	PHP_FE(mmapfile,														NULL)
 #endif
 	PHP_FE(rewind,															NULL)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.57 2002/11/05 19:57:02 iliaa Exp $ */
+/* $Id: php_yaz.c,v 1.58 2002/11/13 17:17:31 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -214,9 +214,11 @@ static long *array_lookup_bool(HashTable *ht, const char *idx)
 	return 0;
 }
 
+#if iliaa_0 /* compile warning fix */
 static int send_present (Yaz_Association t);
 static int send_sort_present (Yaz_Association t);
 static int send_sort (Yaz_Association t);
+#endif
 
 const char *option_get (Yaz_Association as, const char *name)
 {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.43 2002/08/13 21:35:54 kalowsky Exp $ */
+/* $Id: cpdf.c,v 1.44 2002/12/06 16:33:57 helly Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -37,8 +37,12 @@
 #include "ext/standard/php_standard.h"
 #include "ext/standard/head.h"
 #include <math.h>
-#if HAVE_LIBGD13
-#include <gd.h>
+#if HAVE_GD_BUNDLED
+# include "../gd/libgd/gd.h"
+#else
+# if HAVE_LIBGD13
+#  include <gd.h>
+# endif
 #endif
 
 #ifdef HAVE_UNISTD_H

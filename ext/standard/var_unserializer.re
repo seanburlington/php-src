@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.27.2.10 2005/02/14 21:00:36 helly Exp $ */
+/* $Id: var_unserializer.re,v 1.27.2.11 2005/02/28 16:33:09 sesser Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -450,6 +450,10 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 	int elements = parse_iv(start + 2);
 
 	*p = YYCURSOR;
+
+	if (elements < 0) {
+		return 0;
+	}
 
 	INIT_PZVAL(*rval);
 	Z_TYPE_PP(rval) = IS_ARRAY;

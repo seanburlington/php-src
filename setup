@@ -29,7 +29,7 @@
 # |             Ariel Shkedi <ars@ziplink.net> or <as@altavista.net>     |
 # +----------------------------------------------------------------------+
 # 
-# $Id: setup,v 1.5 1999/04/21 22:49:13 ssb Exp $
+# $Id: setup,v 1.6 1999/04/21 23:11:18 ssb Exp $
 
 if [ "$1" = "-q" ]; then
     quiet_mode=on
@@ -265,10 +265,6 @@ define_option with-interbase 'InterBase support?' yesnodir \
     'no /usr/interbase InterBase base install' \
 '     Whether to build PHP with InterBase support. More\n
       information about InterBase can be found at http://www.interbase.com/.'
-
-define_option with-hyperwave 'Hyperwave support?' yesno no \
-'     Whether to build with Hyperwave support. More\n
-     information about Hyperwave can be found at http://www.hyperwave.com.'
 
 define_option with-ldap 'LDAP support?' yesnodir \
     'no /usr/local/ldap LDAP base install' \

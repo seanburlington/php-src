@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.1.2.4 2003/02/23 09:36:47 sniper Exp $
+dnl $Id: config9.m4,v 1.1.2.5 2003/05/29 14:55:07 sas Exp $
 dnl
 
 AC_ARG_ENABLE(cgi,
@@ -133,6 +133,7 @@ if test "$PHP_SAPI" = "default"; then
       exit 1
     fi
     if test "$PHP_ENABLE_FASTCGI" = "yes"; then
+      PHP_ADD_BUILD_DIR($abs_builddir/sapi/cgi/libfcgi)
       PHP_FASTCGI=1
       PHP_FCGI_FILES="libfcgi/fcgi_stdio.c libfcgi/fcgiapp.c libfcgi/os_unix.c"
       PHP_FCGI_INCLUDE="-I$PHP_LIBFCGI_DIR/include"

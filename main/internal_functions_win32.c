@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.50 2001/12/11 15:31:02 sebastian Exp $ */
+/* $Id: internal_functions_win32.c,v 1.51 2002/04/17 04:44:01 sebastian Exp $ */
 
 /* {{{ includes
  */
@@ -63,6 +63,7 @@
 #if HAVE_OVERLOAD
 #include "ext/overload/php_overload.h"
 #endif
+#include "ext/tokenizer/php_tokenizer.h"
 /* }}} */
 
 /* {{{ php_builtin_extensions[]

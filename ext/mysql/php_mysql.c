@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.104 2001/11/02 06:42:12 sniper Exp $ */
+/* $Id: php_mysql.c,v 1.105 2001/11/02 07:08:48 sniper Exp $ */
 
 
 /* TODO:
@@ -55,14 +55,16 @@ static int le_result, le_link, le_plink;
 
 #include "php_ini.h"
 
-# if HAVE_MYSQL_MYSQL_H
-#  include <mysql/mysql.h>
-# else
-#  include <mysql.h>
-# endif
+#if HAVE_MYSQL_MYSQL_H
+# include <mysql/mysql.h>
+#else
+# include <mysql.h>
+#endif
 
-#ifdef HAVE_ERRMSG_H
-#include <errmsg.h>
+#ifdef HAVE_MYSQL_REAL_CONNECT
+# ifdef HAVE_ERRMSG_H
+#  include <errmsg.h>
+# endif
 #endif
 
 #define SAFE_STRING(s) ((s)?(s):"")

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: config.nw.h,v 1.4 2003/06/10 20:03:41 imajes Exp $ */
+/* $Id: config.nw.h,v 1.5 2003/12/09 23:59:33 sniper Exp $ */
 
 /* config.nw.h.  Configure file for NetWare platform */
 
@@ -33,7 +33,7 @@
 #define HAVE_GETPROTOBYNUMBER 1
 
 /* set to enable bcmath */
-#define WITH_BCMATH 1
+#define HAVE_BCMATH 1
 
 /* set to enable mysql */
 #define HAVE_MYSQL 1

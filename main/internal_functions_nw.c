@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: internal_functions_nw.c,v 1.4 2003/06/10 20:03:41 imajes Exp $ */
+/* $Id: internal_functions_nw.c,v 1.5 2003/12/09 23:59:33 sniper Exp $ */
 
 /* {{{ includes
  */
@@ -65,7 +65,7 @@
  */
 zend_module_entry *php_builtin_extensions[] = {
 	phpext_standard_ptr,
-#if WITH_BCMATH
+#if HAVE_BCMATH
 	phpext_bcmath_ptr,
 #endif
 	phpext_calendar_ptr,

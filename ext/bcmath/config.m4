@@ -1,12 +1,11 @@
 dnl
-dnl $Id: config.m4,v 1.15 2002/11/20 21:16:39 andi Exp $
+dnl $Id: config.m4,v 1.16 2003/12/09 23:59:32 sniper Exp $
 dnl
 
 PHP_ARG_ENABLE(bcmath, whether to enable bc style precision math functions,
 [  --enable-bcmath         Enable bc style precision math functions.])
 
 if test "$PHP_BCMATH" != "no"; then
-  AC_DEFINE(WITH_BCMATH, 1, [Whether you have bcmath])
   PHP_NEW_EXTENSION(bcmath, bcmath.c \
 libbcmath/src/add.c libbcmath/src/div.c libbcmath/src/init.c libbcmath/src/neg.c libbcmath/src/outofmem.c libbcmath/src/raisemod.c libbcmath/src/rt.c libbcmath/src/sub.c \
 libbcmath/src/compare.c libbcmath/src/divmod.c libbcmath/src/int2num.c libbcmath/src/num2long.c libbcmath/src/output.c libbcmath/src/recmul.c \
@@ -14,4 +13,5 @@ libbcmath/src/sqrt.c libbcmath/src/zero.c libbcmath/src/debug.c libbcmath/src/do
 libbcmath/src/rmzero.c libbcmath/src/str2num.c,
           $ext_shared,,-I@ext_srcdir@/libbcmath/src)
   PHP_ADD_BUILD_DIR($ext_builddir/libbcmath/src)
+  AC_DEFINE(HAVE_BCMATH, 1, [Whether you have bcmath])
 fi

@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.82 2003/12/04 01:40:59 wez Exp $
+	$Id: config.w32.h,v 1.83 2003/12/09 23:59:33 sniper Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -20,7 +20,7 @@
 #define PHP_SYSCONFDIR "c:\\php5"
 
 /* Enable / Disable BCMATH extension (default: enabled) */
-#define WITH_BCMATH 1
+#define HAVE_BCMATH 1
 
 /* Enable / Disable crypt() function (default: enabled) */
 #define HAVE_CRYPT 1

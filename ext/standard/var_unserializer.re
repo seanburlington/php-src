@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.42 2005/02/23 11:17:52 stas Exp $ */
+/* $Id: var_unserializer.re,v 1.43 2005/02/23 18:26:39 sesser Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -294,7 +294,7 @@ static inline int object_custom(UNSERIALIZE_PARAMETER, zend_class_entry *ce)
 
 	(*p) += 2;
 
-	if((*p) + datalen >= max) {
+	if(datalen < 0 || (*p) + datalen >= max) {
 		zend_error(E_WARNING, "Unsifficient data for unserializing - %d required, %d present", datalen, max - (*p));
 		return 0;
 	}

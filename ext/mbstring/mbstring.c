@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.195 2003/08/31 12:41:37 zeev Exp $ */
+/* $Id: mbstring.c,v 1.196 2003/09/23 02:43:04 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -95,7 +95,7 @@ static const enum mbfl_no_encoding php_mb_default_identify_list[] = {
 };
 #endif
 
-#if defined(HAVE_MBSTR_CN) & !defined(HAVE_MBSTR_JA)
+#if defined(HAVE_MBSTR_CN) && !defined(HAVE_MBSTR_JA)
 static const enum mbfl_no_encoding php_mb_default_identify_list[] = {
 	mbfl_no_encoding_ascii,
 	mbfl_no_encoding_utf8,
@@ -104,7 +104,7 @@ static const enum mbfl_no_encoding php_mb_default_identify_list[] = {
 };
 #endif
 
-#if defined(HAVE_MBSTR_TW) & !defined(HAVE_MBSTR_CN) & !defined(HAVE_MBSTR_JA)
+#if defined(HAVE_MBSTR_TW) && !defined(HAVE_MBSTR_CN) && !defined(HAVE_MBSTR_JA)
 static const enum mbfl_no_encoding php_mb_default_identify_list[] = {
 	mbfl_no_encoding_ascii,
 	mbfl_no_encoding_utf8,
@@ -113,7 +113,7 @@ static const enum mbfl_no_encoding php_mb_default_identify_list[] = {
 };
 #endif
 
-#if defined(HAVE_MBSTR_KR) & !defined(HAVE_MBSTR_TW) & !defined(HAVE_MBSTR_CN) & !defined(HAVE_MBSTR_JA)
+#if defined(HAVE_MBSTR_KR) && !defined(HAVE_MBSTR_TW) && !defined(HAVE_MBSTR_CN) && !defined(HAVE_MBSTR_JA)
 static const enum mbfl_no_encoding php_mb_default_identify_list[] = {
 	mbfl_no_encoding_ascii,
 	mbfl_no_encoding_utf8,
@@ -122,7 +122,7 @@ static const enum mbfl_no_encoding php_mb_default_identify_list[] = {
 };
 #endif
 
-#if defined(HAVE_MBSTR_RU) & !defined(HAVE_MBSTR_KR) & !defined(HAVE_MBSTR_TW) & !defined(HAVE_MBSTR_CN) & !defined(HAVE_MBSTR_JA)
+#if defined(HAVE_MBSTR_RU) && !defined(HAVE_MBSTR_KR) && !defined(HAVE_MBSTR_TW) && !defined(HAVE_MBSTR_CN) && !defined(HAVE_MBSTR_JA)
 static const enum mbfl_no_encoding php_mb_default_identify_list[] = {
 	mbfl_no_encoding_ascii,
 	mbfl_no_encoding_utf8,
@@ -132,7 +132,7 @@ static const enum mbfl_no_encoding php_mb_default_identify_list[] = {
 };
 #endif
 
-#if !defined(HAVE_MBSTR_RU) & !defined(HAVE_MBSTR_KR) & !defined(HAVE_MBSTR_TW) & !defined(HAVE_MBSTR_CN) & !defined(HAVE_MBSTR_JA)
+#if !defined(HAVE_MBSTR_RU) && !defined(HAVE_MBSTR_KR) && !defined(HAVE_MBSTR_TW) && !defined(HAVE_MBSTR_CN) && !defined(HAVE_MBSTR_JA)
 static const enum mbfl_no_encoding php_mb_default_identify_list[] = {
 	mbfl_no_encoding_ascii,
 	mbfl_no_encoding_utf8

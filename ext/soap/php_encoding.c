@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.53 2004/02/11 13:53:48 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.54 2004/02/13 08:29:11 dmitry Exp $ */
 
 #include <time.h>
 
@@ -824,9 +824,11 @@ static void model_to_zval_object(zval *ret, sdlContentModelPtr model, xmlNodePtr
 				model_to_zval_object(ret, *tmp, data, sdl TSRMLS_CC);
 				zend_hash_move_forward(model->u.content);
 			}
+			break;
 		}
 		case XSD_CONTENT_GROUP:
 			model_to_zval_object(ret, model->u.group->model, data, sdl TSRMLS_CC);
+			break;
 		default:
 		  break;
 	}

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.120.2.7 2003/01/20 10:39:39 sniper Exp $
+dnl $Id: config.m4,v 1.120.2.8 2003/01/23 06:22:42 sniper Exp $
 dnl
 
 dnl
@@ -183,6 +183,7 @@ AC_DEFUN(PHP_GD_FREETYPE2,[
     
     if test -n "$FREETYPE2_DIR" ; then
       PHP_ADD_LIBRARY_WITH_PATH(freetype, $FREETYPE2_DIR/lib, GD_SHARED_LIBADD)
+      PHP_ADD_INCLUDE($FREETYPE2_DIR/include)
       PHP_ADD_INCLUDE($FREETYPE2_INC_DIR)
       AC_DEFINE(USE_GD_IMGSTRTTF, 1, [ ])
       AC_DEFINE(HAVE_LIBFREETYPE,1,[ ])

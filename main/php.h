@@ -28,10 +28,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.8 1999/04/21 19:10:18 zeev Exp $ */
+/* $Id: php.h,v 1.9 1999/04/21 19:39:21 ssb Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
+
+#define PHP_API_VERSION 19990421
 
 #define YYDEBUG 0
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_tidy.h,v 1.21 2004/02/23 00:59:29 sniper Exp $ */
+/* $Id: php_tidy.h,v 1.22 2004/04/12 03:14:19 john Exp $ */
 
 #ifndef PHP_TIDY_H
 #define PHP_TIDY_H
@@ -91,6 +91,7 @@ TIDY_NODE_METHOD(isPhp);
 
 ZEND_BEGIN_MODULE_GLOBALS(tidy)
 	char *default_config;
+    zval *inst;
 ZEND_END_MODULE_GLOBALS(tidy)
 
 #ifdef ZTS

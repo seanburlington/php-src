@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.19 2000/05/18 15:34:32 zeev Exp $ */
+/* $Id: php_pcre.h,v 1.20 2000/06/01 16:34:50 andrei Exp $ */
 
 #ifndef _PHP_PCRE_H
 #define _PHP_PCRE_H
@@ -40,7 +40,10 @@ PHP_FUNCTION(preg_split);
 PHP_FUNCTION(preg_quote);
 PHP_FUNCTION(preg_grep);
 
-char *_php_pcre_replace(char *regex, char *subject, char *replace);
+char *php_pcre_replace(char *regex,   int regex_len,
+					   char *subject, int subject_len,
+					   char *replace, int replace_len,
+					   int  *result_len);
 
 extern zend_module_entry pcre_module_entry;
 #define pcre_module_ptr &pcre_module_entry

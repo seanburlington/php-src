@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.17 2001/08/31 13:27:46 cox Exp $
+// $Id: PEAR.php,v 1.18 2001/08/31 16:12:33 cox Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -234,11 +234,11 @@ class PEAR
         if (isset($this)) {
             $setmode     = &$this->_default_error_mode;
             $setoptions  = &$this->_default_error_options;
-            $setcallback = &$this->_default_error_callback;
+            //$setcallback = &$this->_default_error_callback;
         } else {
             $setmode     = &$GLOBALS['_PEAR_default_error_mode'];
             $setoptions  = &$GLOBALS['_PEAR_default_error_options'];
-            $setcallback = &$GLOBALS['_PEAR_default_error_callback'];
+            //$setcallback = &$GLOBALS['_PEAR_default_error_callback'];
         }
 
         switch ($mode) {
@@ -256,7 +256,7 @@ class PEAR
                 if ((is_string($options) && function_exists($options)) ||
                     (is_array($options) && method_exists(@$options[0], @$options[1])))
                 {
-                    $setcallback = $options;
+                    $setoptions = $options;
                 } else {
                     trigger_error("invalid error callback", E_USER_WARNING);
                 }
@@ -389,10 +389,10 @@ class PEAR
                 !(is_array($options) && sizeof($options) == 2 &&
                   is_object($options[0]) && is_string($options[1])))
             {
-                if (isset($this) && isset($this->_default_error_callback)) {
-                    $options = $this->_default_error_callback;
+                if (isset($this) && isset($this->_default_error_options)) {
+                    $options = $this->_default_error_options;
                 } else {
-                    $options = $GLOBALS['_PEAR_default_error_callback'];
+                    $options = $GLOBALS['_PEAR_default_error_options'];
                 }
             }
         } else {

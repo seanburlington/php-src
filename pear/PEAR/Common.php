@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.99 2003/08/05 15:35:17 cox Exp $
+// $Id: Common.php,v 1.100 2003/08/13 21:12:15 cellog Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -924,6 +924,9 @@ class PEAR_Common extends PEAR
                 if (isset($dep['version'])) {
                     $ret .= " version=\"$dep[version]\"";
                 }
+                if (isset($dep['optional'])) {
+                    $ret .= " optional=\"$dep[optional]\"";
+                }
                 if (isset($dep['name'])) {
                     $ret .= ">$dep[name]</dep>\n";
                 } else {
@@ -1089,6 +1092,11 @@ class PEAR_Common extends PEAR
                     $errors[] = "dependency $i: missing relation";
                 } elseif (!in_array($d['rel'], $_PEAR_Common_dependency_relations)) {
                     $errors[] = "dependency $i: invalid relation, should be one of: ".implode(' ', $_PEAR_Common_dependency_relations);
+                }
+                if (!empty($d['optional'])) {
+                    if (!in_array($d['optional'], array('yes', 'no'))) {
+                        $errors[] = "dependency $i: invalid relation optional attribute, should be one of: yes no";
+                    }
                 }
                 if ($d['rel'] != 'has' && empty($d['version'])) {
                     $warnings[] = "dependency $i: missing version";

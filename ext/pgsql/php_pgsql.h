@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.20 2000/09/11 21:28:47 jah Exp $ */
+/* $Id: php_pgsql.h,v 1.21 2000/09/12 23:19:58 hirokawa Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -88,8 +88,8 @@ PHP_FUNCTION(pg_loexport);
 PHP_FUNCTION(pg_put_line);
 PHP_FUNCTION(pg_end_copy);
 #if HAVE_PQCLIENTENCODING
-PHP_FUNCTION(pg_clientencoding);
-PHP_FUNCTION(pg_setclientencoding);
+PHP_FUNCTION(pg_client_enc);
+PHP_FUNCTION(pg_set_client_enc);
 #endif
 
 void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent);

@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.94 2002/01/09 23:47:18 jimw Exp $ */
+/* $Id: rfc1867.c,v 1.95 2002/03/10 11:03:04 sesser Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -807,12 +807,18 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 			} else {
 				register_http_post_files_variable(lbuf, filename, http_post_files, 0 TSRMLS_CC);
 			}
-			s = "";
 			efree(filename);
+			s = NULL;
 	
 			/* Possible Content-Type: */
 			if (!(cd = php_mime_get_hdr_value(header, "Content-Type")) || filename == "") {
 				cd = "";
+			} else { 
+				/* fix for Opera 6.01 */
+				s = strchr(cd, ';');
+				if (s != NULL) {
+					*s = '\0';
+				}
 			}
 
 			/* Add $foo_type */
@@ -830,6 +836,12 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 				sprintf(lbuf, "%s[type]", param);
 			}
 			register_http_post_files_variable(lbuf, cd, http_post_files, 0 TSRMLS_CC);
+
+			/* Restore Content-Type Header */
+			if (s != NULL) {
+				*s = ';';
+			}
+			s = "";
 
 			/* Initialize variables */
 			add_protected_variable(param TSRMLS_CC);

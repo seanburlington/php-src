@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.165 2000/11/22 04:15:27 sas Exp $ */
+/* $Id: string.c,v 1.166 2000/11/22 04:16:25 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -796,7 +796,7 @@ PHP_FUNCTION(pathinfo)
 		efree(ret);
 	}
 	
-	if (argc < 2 || opt == PHP_PATHINFO_BASENAME) 
+	if (argc < 2 || opt == PHP_PATHINFO_BASENAME) {
 		ret = php_basename(Z_STRVAL_PP(path), len);
 		add_assoc_string(tmp, "basename", ret, 0);
 	}			

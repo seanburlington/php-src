@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.297 2001/01/14 16:36:30 elixer Exp $ */
+/* $Id: basic_functions.c,v 1.298 2001/01/17 01:10:50 elixer Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -162,6 +162,11 @@ function_entry basic_functions[] = {
 	PHP_FE(strstr,									NULL)
 	PHP_FE(stristr,									NULL)
 	PHP_FE(strrchr,									NULL)
+#ifdef HAVE_STRCOLL
+	PHP_FE(strcoll,									NULL)
+#else
+	PHP_FALIAS(strcoll, warn_not_available,			NULL)
+#endif
 	PHP_FE(substr,									NULL)
 	PHP_FE(substr_replace,							NULL)
 	PHP_FE(quotemeta,								NULL)

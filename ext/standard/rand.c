@@ -15,9 +15,10 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    |          Zeev Suraski <zeev@zend.com>                                |
    |          Pedro Melo <melo@ip.pt>                                     |
+   |          Jeroen van Wolffelaar <jeroen@php.net>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.32 2001/09/03 01:06:23 jeroen Exp $ */
+/* $Id: rand.c,v 1.33 2001/09/03 01:09:35 jeroen Exp $ */
 
 #include <stdlib.h>
 

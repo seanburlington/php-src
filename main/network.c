@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.70 2002/09/28 22:12:23 wez Exp $ */
+/* $Id: network.c,v 1.71 2002/10/04 18:21:40 sas Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -923,7 +923,8 @@ php_stream_ops php_stream_socket_ops = {
 	NULL, /* seek */
 	php_sockop_cast,
 	php_sockop_stat,
-	php_sockop_set_option
+	php_sockop_set_option,
+	1
 };
 
 

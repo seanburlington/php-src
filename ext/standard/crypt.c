@@ -28,7 +28,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.3 1999/06/11 12:48:22 rasmus Exp $ */
+/* $Id: crypt.c,v 1.4 1999/07/02 14:37:36 sas Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -172,8 +172,8 @@ PHP_FUNCTION(crypt)
 #else
 #if PHP3_MD5_CRYPT
 		strcpy(salt, "$1$");
-		to64(&salt[3], PHP3_CRYPT_RAND, 4);
-		to64(&salt[7], PHP3_CRYPT_RAND, 4);
+		php3i_to64(&salt[3], PHP3_CRYPT_RAND, 4);
+		php3i_to64(&salt[7], PHP3_CRYPT_RAND, 4);
 		strcpy(&salt[11], "$");
 #endif
 #endif

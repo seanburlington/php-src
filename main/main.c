@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.141 1999/11/30 20:18:06 andi Exp $ */
+/* $Id: main.c,v 1.142 1999/12/01 17:07:24 sas Exp $ */
 
 
 #include <stdio.h>
@@ -850,16 +850,8 @@ static void php_new_thread_end_handler(THREAD_T thread_id)
 static void core_globals_ctor(php_core_globals *core_globals)
 {
 	memset(core_globals,0,sizeof(*core_globals));
-	zend_hash_init(&core_globals->ht_fsock_keys, 0, NULL, NULL, 1);
-	zend_hash_init(&core_globals->ht_fsock_socks, 0, NULL, (int (*)(void *))php_msock_destroy, 1);
 }
 
-
-static void core_globals_dtor(php_core_globals *core_globals)
-{
-	zend_hash_destroy(&core_globals->ht_fsock_keys);
-	zend_hash_destroy(&core_globals->ht_fsock_socks);
-}
 #endif
 
 
@@ -904,7 +896,7 @@ int php_module_startup(sapi_module_struct *sf)
 #ifdef ZTS
 	tsrm_set_new_thread_end_handler(php_new_thread_end_handler);
 	executor_globals = ts_resource(executor_globals_id);
-	core_globals_id = ts_allocate_id(sizeof(php_core_globals), core_globals_ctor, core_globals_dtor);
+	core_globals_id = ts_allocate_id(sizeof(php_core_globals), core_globals_ctor, NULL);
 	core_globals = ts_resource(core_globals_id);
 #endif
 	EG(error_reporting) = E_ALL & ~E_NOTICE;

@@ -27,7 +27,7 @@
    |          Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
 */
-/* $Id: fsock.h,v 1.13 1999/08/25 16:24:14 andi Exp $ */
+/* $Id: fsock.h,v 1.14 1999/12/01 17:07:25 sas Exp $ */
 
 /* Synced with php3 revision 1.24 1999-06-18 [ssb] */
 
@@ -76,5 +76,28 @@ PHPAPI int connect_nonb(int sockfd, struct sockaddr *addr, int addrlen, struct t
 PHP_MINIT_FUNCTION(fsock);
 PHP_MSHUTDOWN_FUNCTION(fsock);
 PHP_RSHUTDOWN_FUNCTION(fsock);
+
+typedef struct {
+	HashTable ht_fsock_keys;
+	HashTable ht_fsock_socks;
+	struct php3i_sockbuf *phpsockbuf;
+	size_t def_chunk_size;
+} php_fsock_globals;
+
+#ifdef ZTS
+#define FLS_D php_fsock_globals *fsock_globals
+#define FLS_DC , FLS_D
+#define FLS_C fsock_globals
+#define FLS_CC , FLS_C
+#define FG(v) (fsock_globals->v)
+#define FLS_FETCH() php_fsock_globals *fsock_globals = ts_resource(fsock_globals_id)
+#else
+#define FLS_D
+#define FLS_DC
+#define FLS_C
+#define FLS_CC
+#define FG(v) (fsock_globals.v)
+#define FLS_FETCH()
+#endif
 
 #endif /* _FSOCK_H */

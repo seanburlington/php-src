@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.213 2004/03/12 01:59:46 iliaa Exp $ */
+/* $Id: mbstring.c,v 1.214 2004/06/26 05:39:00 moriyoshi Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -2614,6 +2614,7 @@ detect_end:
 							stack[stack_level] = var;
 							stack_level++;
 							var = hash_entry;
+							SEPARATE_ZVAL(hash_entry);
 							target_hash = HASH_OF(*var);
 							if (target_hash != NULL) {
 								zend_hash_internal_pointer_reset(target_hash);

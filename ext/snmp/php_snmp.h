@@ -15,10 +15,11 @@
 | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
 |          Mike Jackson <mhjack@tscnet.com>                            |
 |          Steven Lawrance <slawrance@technologist.com>                |
+|          Harrie Hazewinkel <harrie@lisanza.net>                      |
 +----------------------------------------------------------------------+
 */
 
-/* $Id: php_snmp.h,v 1.12 2002/02/28 08:26:42 sebastian Exp $ */
+/* $Id: php_snmp.h,v 1.13 2002/11/11 21:09:19 harrie Exp $ */
 #ifndef PHP_SNMP_H
 #define PHP_SNMP_H
 
@@ -37,6 +38,12 @@ PHP_FUNCTION(snmprealwalk);
 PHP_FUNCTION(snmp_get_quick_print);
 PHP_FUNCTION(snmp_set_quick_print);
 PHP_FUNCTION(snmpset);
+PHP_FUNCTION(snmpv3get);
+PHP_FUNCTION(snmpv3getnext);
+PHP_FUNCTION(snmpv3walk);
+PHP_FUNCTION(snmpv3realwalk);
+PHP_FUNCTION(snmpv3set);
+PHP_FUNCTION(snmpv3getbulk);
 PHP_MINFO_FUNCTION(snmp);
 #else
 

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_array.h,v 1.16 2000/07/24 01:39:49 david Exp $ */
+/* $Id: php_array.h,v 1.17 2000/10/25 17:40:10 andrei Exp $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H
@@ -72,6 +72,7 @@ PHP_FUNCTION(array_rand);
 PHP_FUNCTION(array_unique);
 PHP_FUNCTION(array_intersect);
 PHP_FUNCTION(array_diff);
+PHP_FUNCTION(array_sum);
 
 HashTable* php_splice(HashTable *, int, int, zval ***, int, HashTable **);
 int multisort_compare(const void *a, const void *b);

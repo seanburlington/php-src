@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.120 2001/07/10 20:40:56 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.121 2001/07/11 17:10:13 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -449,7 +449,6 @@ PHPAPI FILE *php_fopen_with_path(char *filename, char *mode, char *path, char **
 	{
 		char *exec_fname;
 		int exec_fname_len;
-		char *filename_dir;
 		ELS_FETCH();
 
 		exec_fname = zend_get_executed_filename(ELS_C);

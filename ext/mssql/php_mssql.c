@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.86.2.40 2004/12/08 19:02:29 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.86.2.41 2004/12/14 17:22:10 iliaa Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -2254,7 +2254,7 @@ PHP_FUNCTION(mssql_guid_string)
 			break;
 	}
 
-	dbconvert(NULL, SQLBINARY, (BYTE*)Z_STRVAL_PP(binary), min(16, Z_STRLEN_PP(binary)), SQLCHAR, buffer, -1);
+	dbconvert(NULL, SQLBINARY, (BYTE*)Z_STRVAL_PP(binary), MIN(16, Z_STRLEN_PP(binary)), SQLCHAR, buffer, -1);
 
 	if (sf) {
 		php_strtoupper(buffer, 32);

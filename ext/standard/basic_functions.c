@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.657 2004/03/26 19:45:09 helly Exp $ */
+/* $Id: basic_functions.c,v 1.658 2004/03/26 19:53:07 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -967,7 +967,7 @@ static double php_get_inf()
 {
 #if defined(__i386__) || defined(_X86_) || defined(ALPHA) || defined(_ALPHA) || defined(__alpha)
 	double val;
-	((php_uint32*)&val)[1] = PHP_DOUBLE_QUIET_INF_HIGH;
+	((php_uint32*)&val)[1] = PHP_DOUBLE_INFINITY_HIGH;
 	((php_uint32*)&val)[0] = 0;
 	return val;
 #else

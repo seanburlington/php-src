@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.15 2002/05/31 23:20:04 sniper Exp $
+dnl $Id: config.m4,v 1.16 2002/06/06 12:44:28 sniper Exp $
 dnl
 
 PHP_ARG_ENABLE(mbstr_enc_trans, whether to enable encoding translation,
@@ -8,8 +8,8 @@ PHP_ARG_ENABLE(mbstr_enc_trans, whether to enable encoding translation,
 PHP_ARG_ENABLE(mbregex, whether to enable multibyte regex support,
 [  --enable-mbregex         Enable multibyte regex support], yes)
 
-PHP_ARG_WITH(mbstring, whether to enable multibyte string support,
-[  --without-mbstring       Disable multibyte string support], yes)
+PHP_ARG_ENABLE(mbstring, whether to enable multibyte string support,
+[  --disable-mbstring       Disable multibyte string support], yes)
 
 if test "$PHP_MBSTRING" != "no"; then  
   AC_DEFINE(HAVE_MBSTRING,1,[whether to have multibyte string support])

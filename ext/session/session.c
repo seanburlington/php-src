@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.319 2002/09/29 15:26:50 iliaa Exp $ */
+/* $Id: session.c,v 1.320 2002/09/29 15:55:11 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -462,6 +462,11 @@ static void php_session_track_init(TSRMLS_D)
 static char *php_session_encode(int *newlen TSRMLS_DC)
 {
 	char *ret = NULL;
+
+	if (!PS(http_session_vars)) {
+		 php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot encode non-existent session.");
+		 return NULL;
+	}
 
 	if (PS(serializer)->encode(&ret, newlen TSRMLS_CC) == FAILURE)
 		ret = NULL;
@@ -1318,6 +1323,10 @@ PHP_FUNCTION(session_encode)
 	}
 
 	enc = php_session_encode(&len TSRMLS_CC);
+	if (enc == NULL) {
+		RETURN_FALSE;
+	}
+	
 	RETVAL_STRINGL(enc, len, 0);
 }
 /* }}} */

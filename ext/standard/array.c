@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.235 2003/07/22 16:08:49 zeev Exp $ */
+/* $Id: array.c,v 1.236 2003/07/25 03:03:26 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3629,7 +3629,6 @@ PHP_FUNCTION(array_key_exists)
 {
 	zval **key,					/* key to check for */
 		 **array;				/* array to check in */
-	long   lvalue;
 
 	if (ZEND_NUM_ARGS() != 2 ||
 		zend_get_parameters_ex(ZEND_NUM_ARGS(), &key, &array) == FAILURE) {

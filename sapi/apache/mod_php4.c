@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.117 2001/08/05 15:29:40 sas Exp $ */
+/* $Id: mod_php4.c,v 1.118 2001/08/08 14:01:18 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -502,7 +502,7 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 		return OK;
 	}
 
-	zend_try {
+	zend_first_try {
 		/* We don't accept OPTIONS requests, but take everything else */
 		if (r->method_number == M_OPTIONS) {
 			r->allowed |= (1 << METHODS) - 1;

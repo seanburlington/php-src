@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.207 2000/02/14 15:36:45 ssb Exp $ */
+/* $Id: main.c,v 1.208 2000/02/16 16:46:01 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -795,6 +795,7 @@ int php_module_startup(sapi_module_struct *sf)
 	global_lock_init();
 	SG(server_context) = NULL;
 	SG(request_info).request_method = NULL;
+	SG(request_info).auth_user = SG(request_info).auth_password = NULL;
 	sapi_activate(SLS_C);
 
 	if (module_initialized) {

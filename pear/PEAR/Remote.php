@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.6 2001/12/11 15:31:42 sebastian Exp $
+// $Id: Remote.php,v 1.7 2001/12/12 00:10:47 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -110,6 +110,8 @@ class PEAR_Remote extends PEAR
     // }}}
 }
 
-overload("PEAR_Remote");
+if (function_exists("overload")) {
+    overload("PEAR_Remote");
+}
 
 ?>

@@ -23,7 +23,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.77 2001/01/08 18:13:08 venaas Exp $ */
+/* $Id: ldap.c,v 1.78 2001/01/08 18:31:59 eschmid Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -235,7 +235,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.77 2001/01/08 18:13:08 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.78 2001/01/08 18:31:59 eschmid Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 #ifdef LDAP_API_VERSION
 	snprintf(ldapapiversion, 31, "%d", LDAP_API_VERSION);
@@ -717,7 +717,7 @@ static void php_ldap_do_search(INTERNAL_FUNCTION_PARAMETERS, int scope)
 }
 
 
-/* {{{ proto int ldap_read(int link, string base_dn, string filter [, array attrs [, int attrsonly [, int sizelimit [, int timelimit [, int deref]]]]] )
+/* {{{ proto int ldap_read(int link, string base_dn, string filter [, array attrs [, int attrsonly [, int sizelimit [, int timelimit [, int deref]]]]])
    Read an entry */
 PHP_FUNCTION(ldap_read)
 {
@@ -726,7 +726,7 @@ PHP_FUNCTION(ldap_read)
 /* }}} */
 
 
-/* {{{ proto int ldap_list(int link, string base_dn, string filter [, array attrs [, int attrsonly [, int sizelimit [, int timelimit [, int deref]]]]] )
+/* {{{ proto int ldap_list(int link, string base_dn, string filter [, array attrs [, int attrsonly [, int sizelimit [, int timelimit [, int deref]]]]])
    Single-level search */
 PHP_FUNCTION(ldap_list)
 {
@@ -735,7 +735,7 @@ PHP_FUNCTION(ldap_list)
 /* }}} */
 
 
-/* {{{ proto int ldap_search(int link, string base_dn, string filter [, array attrs [, int attrsonly [, int sizelimit [, int timelimit [, int deref]]]]] )
+/* {{{ proto int ldap_search(int link, string base_dn, string filter [, array attrs [, int attrsonly [, int sizelimit [, int timelimit [, int deref]]]]])
    Search LDAP tree under base_dn */
 PHP_FUNCTION(ldap_search)
 {
@@ -1738,9 +1738,7 @@ PHP_FUNCTION(ldap_set_option) {
 /* }}} */
 
 
-/* {{{ proto boolean ldap_parse_result(int link, int result, int errcode,
-                                   string matcheddn, string errmsg,
-				   array referrals)
+/* {{{ proto boolean ldap_parse_result(int link, int result, int errcode, string matcheddn, string errmsg, array referrals)
    Extract information from result */
 PHP_FUNCTION(ldap_parse_result) {
 	LDAP *ldap;
@@ -1922,8 +1920,7 @@ PHP_FUNCTION(ldap_parse_reference)
 /* }}} */
 
 
-/* {{{ proto boolean ldap_rename(int link, string dn, string newrdn,
-                                 string newparent, boolean deleteoldrdn);
+/* {{{ proto boolean ldap_rename(int link, string dn, string newrdn, string newparent, boolean deleteoldrdn);
    Modify the name of an entry */
 PHP_FUNCTION(ldap_rename)
 {

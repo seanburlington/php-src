@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.83 2004/01/26 13:40:49 dickmeiss Exp $ */
+/* $Id: php_yaz.c,v 1.84 2004/02/23 10:48:44 dickmeiss Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -33,9 +33,9 @@
 #include <yaz/yaz-version.h>
 
 #ifndef YAZ_VERSIONL
-#error YAZ version 2.0.6 or later must be used.
-#elif YAZ_VERSIONL < 0x020006
-#error YAZ version 2.0.6 or later must be used.
+#error YAZ version 2.0.13 or later must be used.
+#elif YAZ_VERSIONL < 0x02000D
+#error YAZ version 2.0.13 or later must be used.
 #endif
 
 #ifdef PHP_WIN32
@@ -1267,6 +1267,9 @@ PHP_FUNCTION(yaz_sort)
 		convert_to_string_ex(pval_criteria);
 		xfree(p->sort_criteria);
 		p->sort_criteria = xstrdup((*pval_criteria)->value.str.val);
+		if (p->zoom_set)
+			ZOOM_resultset_sort(p->zoom_set, "yaz",
+								(*pval_criteria)->value.str.val);
 	}
 	release_assoc(p);
 }

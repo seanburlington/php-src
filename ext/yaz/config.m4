@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.15 2004/01/26 13:40:49 dickmeiss Exp $
+dnl $Id: config.m4,v 1.16 2004/02/23 10:48:44 dickmeiss Exp $
 dnl
 
 PHP_ARG_WITH(yaz,for YAZ support,
@@ -23,14 +23,14 @@ if test "$PHP_YAZ" != "no"; then
     AC_DEFINE(HAVE_YAZ,1,[Whether you have YAZ])
     . $yazconfig
 
-    dnl Check version (2.0.6 or greater required)
+    dnl Check version (2.0.13 or greater required)
     AC_MSG_CHECKING([for YAZ version])
     yaz_version=`echo $YAZVERSION | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
     echo $yaz_version
-    if test "$yaz_version" -ge 2000006; then
+    if test "$yaz_version" -ge 2000013; then
       AC_MSG_RESULT([$YAZVERSION])
     else
-      AC_MSG_ERROR([YAZ version 2.0.6 or later required.])
+      AC_MSG_ERROR([YAZ version 2.0.13 or later required.])
     fi
 
     for c in $YAZLIB; do

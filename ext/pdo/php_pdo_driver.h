@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.9 2004/05/19 13:43:07 wez Exp $ */
+/* $Id: php_pdo_driver.h,v 1.10 2004/05/19 13:55:41 wez Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -215,6 +215,10 @@ struct _pdo_dbh_t {
 	/* data source string used to open this handle */
 	const char *data_source;
 	unsigned long data_source_len;
+
+	/* the number of rows affected by last $dbh->exec().  Not always
+	 * meaningful */
+	int affected_rows;
 
 #if 0
 	/* persistent hash key associated with this handle */

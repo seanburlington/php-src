@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filestat.h,v 1.16 2002/04/26 23:46:51 yohgaki Exp $ */
+/* $Id: php_filestat.h,v 1.17 2002/07/03 06:45:01 derick Exp $ */
 
 #ifndef PHP_FILESTAT_H
 #define PHP_FILESTAT_H
@@ -36,7 +36,9 @@ PHP_FUNCTION(filesize);
 PHP_FUNCTION(filetype);
 PHP_FUNCTION(is_writable);
 PHP_FUNCTION(is_readable);
+#ifndef PHP_WIN32
 PHP_FUNCTION(is_executable);
+#endif
 PHP_FUNCTION(is_file);
 PHP_FUNCTION(is_dir);
 PHP_FUNCTION(is_link);

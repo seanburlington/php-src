@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.166 2002/03/04 18:46:53 sas Exp $ */
+/* $Id: info.c,v 1.167 2002/03/04 20:14:52 sas Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -27,6 +27,7 @@
 #include "credits.h"
 #include "SAPI.h"
 #include <time.h>
+#include "php_main.h"
 #if !defined(PHP_WIN32)
 #include "build-defs.h"
 #endif

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.433 2001/12/30 09:36:24 zak Exp $ */
+/* $Id: basic_functions.c,v 1.434 2002/01/02 21:21:48 zak Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -789,6 +789,7 @@ function_entry basic_functions[] = {
 	/* aliases from array.c */
 	PHP_FALIAS(pos, 				current, 				 first_arg_force_ref)
 	PHP_FALIAS(sizeof, 				count, 									NULL)
+	PHP_FALIAS(key_exists,			array_key_exists,						NULL)
 
 	/* functions from assert.c */
 	PHP_FE(assert,															NULL)

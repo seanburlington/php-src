@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.97 2001/09/25 22:48:34 jeroen Exp $ */
+/* $Id: hw.c,v 1.98 2001/09/26 09:00:28 jeroen Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -2851,7 +2851,7 @@ PHP_FUNCTION(hw_new_document)
 	}
 	memcpy(doc->data, Z_STRVAL_P(arg2), Z_LVAL_P(arg3));
 	ptr = doc->data;
-	Z_LVAL_P(ptr[arg3)] = '\0';
+	ptr[Z_LVAL_P(arg3)] = '\0';
 	doc->attributes = strdup(Z_STRVAL_P(arg1));
 	doc->bodytag = NULL;
 	doc->size = Z_LVAL_P(arg3);

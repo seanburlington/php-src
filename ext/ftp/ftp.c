@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.54 2002/07/26 22:00:25 sesser Exp $ */
+/* $Id: ftp.c,v 1.55 2002/07/26 22:14:55 fmk Exp $ */
 
 #include "php.h"
 
@@ -1550,6 +1550,8 @@ ftp_async_continue_write(ftpbuf_t *ftp)
 	int			size;
 	char			*ptr;
 	int 			ch;
+	TSRMLS_FETCH();
+
 
 	/* check if we can write more data */
 	if (!data_writeable(ftp, ftp->data->fd)) {

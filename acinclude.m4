@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.218.2.11 2003/03/17 13:50:20 wez Exp $
+dnl $Id: acinclude.m4,v 1.218.2.12 2003/03/25 13:43:56 sniper Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -531,7 +531,7 @@ PHP_ALWAYS_SHARED([$1])
 ])
 
 AC_DEFUN([PHP_ARG_ANALYZE],[
-ifelse([$3],yes,[PHP_ARG_ANALYZE_EX([$1])])
+ifelse([$3],yes,[PHP_ARG_ANALYZE_EX([$1])],[ext_output=ifelse([$]$1,,no,[$]$1)])
 ifelse([$2],,,[AC_MSG_RESULT([$ext_output])])
 ])
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.49 2002/08/25 19:44:25 wez Exp $ */
+/* $Id: html.c,v 1.50 2002/08/28 22:14:42 rasmus Exp $ */
 
 #include "php.h"
 #include "reg.h"
@@ -787,7 +787,7 @@ PHP_FUNCTION(htmlspecialchars)
 /* }}} */
 
 /* {{{ proto string html_entity_decode(string string [, int quote_style][, string charset])
-   Convert all applicable characters to HTML entities */
+   Convert all HTML entities to their applicable characters */
 PHP_FUNCTION(html_entity_decode)
 {
 	char *str, *hint_charset = NULL;

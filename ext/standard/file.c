@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.177 2001/08/04 12:36:51 elixer Exp $ */
+/* $Id: file.c,v 1.178 2001/08/04 13:47:44 elixer Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -285,7 +285,6 @@ PHP_FUNCTION(flock)
 #define PHP_META_UNSAFE ".\\+*?[^]$() "
 
 /* {{{ proto array get_meta_tags(string filename [, int use_include_path])
-
    Extracts all meta tag content attributes from a file and returns an array */
 
 PHP_FUNCTION(get_meta_tags)
@@ -2381,7 +2380,6 @@ size_t php_fread_all(char **buf, int socket, FILE *fp, int issock) {
 #define PHP_META_HTML401_CHARS "-_.:"
 
 /* {{{ php_next_meta_token
-
    Tokenizes an HTML file for get_meta_tags */
 php_meta_tags_token php_next_meta_token(php_meta_tags_data *md)
 {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.80 2001/09/09 13:29:18 derick Exp $ */
+/* $Id: fsock.c,v 1.81 2001/09/21 21:59:23 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -284,14 +284,14 @@ static void php_fsockopen(INTERNAL_FUNCTION_PARAMETERS, int persistent) {
 }
 /* }}} */
 
-/* {{{ proto int fsockopen(string hostname, int port [, int errno [, string errstr [, double timeout]]])
+/* {{{ proto int fsockopen(string hostname, int port [, int errno [, string errstr [, float timeout]]])
    Open Internet or Unix domain socket connection */
 PHP_FUNCTION(fsockopen)
 {
 	php_fsockopen(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 }
 /* }}} */
-/* {{{ proto int pfsockopen(string hostname, int port [, int errno [, string errstr [, double timeout]]])
+/* {{{ proto int pfsockopen(string hostname, int port [, int errno [, string errstr [, float timeout]]])
    Open persistent Internet or Unix domain socket connection */
 PHP_FUNCTION(pfsockopen)
 {

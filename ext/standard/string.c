@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.241 2001/09/21 16:17:14 sas Exp $ */
+/* $Id: string.c,v 1.242 2001/09/21 21:59:23 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2108,7 +2108,7 @@ static int php_similar_char(const char *txt1, int len1,
 }
 /* }}} */
 
-/* {{{ proto int similar_text(string str1, string str2 [, double percent])
+/* {{{ proto int similar_text(string str1, string str2 [, float percent])
    Calculates the similarity between two strings */
 PHP_FUNCTION(similar_text)
 {

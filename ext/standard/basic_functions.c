@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.398 2001/09/21 21:29:14 hholzgra Exp $ */
+/* $Id: basic_functions.c,v 1.399 2001/09/21 21:59:22 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1296,7 +1296,7 @@ PHP_FUNCTION(intval)
 }
 /* }}} */
 
-/* {{{ proto double floatval(mixed var)
+/* {{{ proto float floatval(mixed var)
    Get the float value of a variable */
 PHP_FUNCTION(floatval)
 {

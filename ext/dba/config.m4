@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.27 2002/11/06 09:17:50 helly Exp $
+dnl $Id: config.m4,v 1.28 2002/11/06 10:08:38 helly Exp $
 dnl
 
 AC_DEFUN(PHP_TEMP_LDFLAGS,[
@@ -242,8 +242,8 @@ AC_MSG_CHECKING(for CDB support)
 AC_DBA_STD_RESULT
 
 AC_ARG_WITH(flatfile,
-[  --with-flatfile[=DIR]   Include FlatFile support],[
-  if test "$withval" = "yes"; then
+[  --with-flatfile         Include FlatFile support],[
+  if test "$withval" != "no"; then
     PHP_ADD_BUILD_DIR($ext_builddir/libflatfile)
     AC_DEFINE(DBA_FLATFILE, 1, [ ])
     flat_sources="dba_flatfile.c libflatfile/flatfile.c"

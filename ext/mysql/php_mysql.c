@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.160 2002/09/09 15:53:05 georg Exp $ */
+/* $Id: php_mysql.c,v 1.161 2002/09/11 21:06:52 derick Exp $ */
 
 /* TODO:
  *
@@ -1601,8 +1601,6 @@ PHP_FUNCTION(mysql_escape_string)
 	 * we don't realloc() down to the real size since it'd most probably not
 	 * be worth it
 	 */
-
-	php_error_docref(NULL TSRMLS_CC, E_NOTICE, "This function is deprecated, please use mysql_real_escape_string() instead");
 
 	Z_STRVAL_P(return_value) = (char *) emalloc(Z_STRLEN_PP(str)*2+1);
 	Z_STRLEN_P(return_value) = mysql_escape_string(Z_STRVAL_P(return_value), Z_STRVAL_PP(str), Z_STRLEN_PP(str));

@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.54 2001/12/11 19:28:31 hholzgra Exp $ */
+/* $Id: ereg.c,v 1.55 2001/12/22 03:04:32 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -156,7 +156,8 @@ static void php_ereg(INTERNAL_FUNCTION_PARAMETERS, int icase)
 		**array = NULL;		/* Optional register array */
 	regex_t re;
 	regmatch_t *subs;
-	int err, i, match_len, string_len;
+	int err, match_len, string_len;
+	uint i;
 	int copts = 0;
 	off_t start, end;
 	char *buf = NULL;

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.13 2002/09/27 17:03:53 wez Exp $
+dnl $Id: config.m4,v 1.14 2003/06/16 20:16:06 pollita Exp $
 dnl
 
 PHP_ARG_WITH(ncurses, for ncurses support,
@@ -56,7 +56,7 @@ if test "$PHP_NCURSES" != "no"; then
  
    AC_CHECK_LIB($LIBNAME, color_set,   [AC_DEFINE(HAVE_NCURSES_COLOR_SET,  1, [ ])])
    AC_CHECK_LIB($LIBNAME, slk_color,   [AC_DEFINE(HAVE_NCURSES_SLK_COLOR,  1, [ ])])
-   AC_CHECK_LIB($LIBNAME, asume_default_colors,   [AC_DEFINE(HAVE_NCURSES_ASSUME_DEFAULT_COLORS,  1, [ ])])
+   AC_CHECK_LIB($LIBNAME, assume_default_colors,   [AC_DEFINE(HAVE_NCURSES_ASSUME_DEFAULT_COLORS,  1, [ ])])
    AC_CHECK_LIB($LIBNAME, use_extended_names,   [AC_DEFINE(HAVE_NCURSES_USE_EXTENDED_NAMES,  1, [ ])])
 
    PHP_NEW_EXTENSION(ncurses, ncurses.c ncurses_fe.c ncurses_functions.c, $ext_shared, cli)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.151 2002/08/09 21:13:00 georg Exp $ */
+/* $Id: php_mysql.c,v 1.152 2002/08/23 10:16:19 georg Exp $ */
 
 /* TODO:
  *
@@ -699,13 +699,14 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		 * and add a pointer to it with hashed_details as the key.
 		 */
 		if (!new_link && zend_hash_find(&EG(regular_list), hashed_details, hashed_details_length+1,(void **) &index_ptr)==SUCCESS) {
-			int type, link;
+			int type;
+			long link;
 			void *ptr;
 
 			if (Z_TYPE_P(index_ptr) != le_index_ptr) {
 				MYSQL_DO_CONNECT_RETURN_FALSE();
 			}
-			link = (int) index_ptr->ptr;
+			link = (long) index_ptr->ptr;
 			ptr = zend_list_find(link,&type);   /* check if the link is still there */
 			if (ptr && (type==le_link || type==le_plink)) {
 				zend_list_addref(link);

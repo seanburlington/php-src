@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib_fopen_wrapper.c,v 1.41 2003/07/24 00:03:42 iliaa Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.42 2003/12/12 23:05:18 pollita Exp $ */
 
 #define _GNU_SOURCE
 
@@ -160,7 +160,8 @@ static php_stream_wrapper_ops gzip_stream_wops = {
 	NULL, /* stat_url */
 	NULL, /* opendir */
 	"ZLIB",
-	NULL /* unlink */
+	NULL, /* unlink */
+	NULL  /* rename */
 };
 
 php_stream_wrapper php_stream_gzip_wrapper =	{

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.3 2003/12/09 16:29:54 sniper Exp $ */
+/* $Id: bz2.c,v 1.4 2003/12/12 23:05:18 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -226,7 +226,8 @@ static php_stream_wrapper_ops bzip2_stream_wops = {
 	NULL, /* stat */
 	NULL, /* opendir */
 	"BZip2",
-	NULL  /* unlink */
+	NULL, /* unlink */
+	NULL  /* rename */
 };
 
 php_stream_wrapper php_stream_bzip2_wrapper = {

@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.40 2003/06/10 20:03:38 imajes Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.41 2003/12/12 23:05:15 pollita Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -233,7 +233,8 @@ static php_stream_wrapper_ops php_stdio_wops = {
 	NULL, /* stat */
 	NULL, /* opendir */
 	"PHP",
-	NULL /* unlink */
+	NULL, /* unlink */
+	NULL  /* rename */
 };
 
 php_stream_wrapper php_stream_php_wrapper =	{

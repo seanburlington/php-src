@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.42 2002/07/07 20:42:08 ssb Exp $
+// $Id: Packager.php,v 1.43 2002/09/09 21:42:32 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'System.php';
@@ -109,7 +109,6 @@ class PEAR_Packager extends PEAR_Common
         $np = @fopen($newpkgfile, "w");
         if (!$np) {
             chdir($oldcwd);
-            system("ls -l ".dirname($newpkgfile));
             return $this->raiseError("PEAR_Packager: unable to rewrite $pkgfile as $newpkgfile");
         }
         fwrite($np, $new_xml);

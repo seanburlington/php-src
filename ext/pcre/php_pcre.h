@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.25 2001/02/26 06:07:11 andi Exp $ */
+/* $Id: php_pcre.h,v 1.26 2001/03/13 05:24:03 andrei Exp $ */
 
 #ifndef PHP_PCRE_H
 #define PHP_PCRE_H
@@ -36,6 +36,7 @@
 PHP_FUNCTION(preg_match);
 PHP_FUNCTION(preg_match_all);
 PHP_FUNCTION(preg_replace);
+PHP_FUNCTION(preg_replace_callback);
 PHP_FUNCTION(preg_split);
 PHP_FUNCTION(preg_quote);
 PHP_FUNCTION(preg_grep);

@@ -1,11 +1,5 @@
-# $Id: Makefile.in,v 1.1 1999/12/30 02:59:14 sas Exp $
-
-DEPTH     = ../..
-topsrcdir = @topsrcdir@
-srcdir    = @srcdir@
-VPATH     = @srcdir@
 
 LTLIBRARY_NAME    = libpdf.la
 LTLIBRARY_SOURCES = pdf.c
 
-include $(topsrcdir)/build/ltlib.mk
+include $(top_srcdir)/build/ltlib.mk

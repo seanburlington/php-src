@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.47 1999/05/05 21:29:26 zeev Exp $ */
+/* $Id: main.c,v 1.48 1999/05/06 21:58:49 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -758,6 +758,12 @@ static core_globals_ctor(php_core_globals *core_globals)
 #endif
 
 
+static int zend_body_write_wrapper(const char *str, uint str_length)
+{
+	return zend_body_write(str, str_length);
+}
+
+
 int php_module_startup(sapi_module_struct *sf)
 {
 	zend_utility_functions zuf;
@@ -784,7 +790,7 @@ int php_module_startup(sapi_module_struct *sf)
 
 	zuf.error_function = php3_error;
 	zuf.printf_function = php3_printf;
-	zuf.write_function = zend_body_write;
+	zuf.write_function = zend_body_write_wrapper;
 	zuf.fopen_function = php_fopen_wrapper_for_zend;
 	zuf.message_handler = php_message_handler_for_zend;
 	zuf.block_interruptions = BLOCK_INTERRUPTIONS;

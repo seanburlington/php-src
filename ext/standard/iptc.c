@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.41.4.2 2002/12/31 16:35:31 sebastian Exp $ */
+/* $Id: iptc.c,v 1.41.4.3 2004/03/06 17:41:31 pajoye Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -320,7 +320,7 @@ PHP_FUNCTION(iptcparse)
 	tagsfound = 0; /* number of tags already found */
 
 	while (inx < length) { /* find 1st tag */
-		if ((buffer[inx] == 0x1c) && (buffer[inx+1] == 0x02)){ 
+		if ((buffer[inx] == 0x1c) && ((buffer[inx+1] == 0x01) || (buffer[inx+1] == 0x02))){
 			break;
 		} else {
 			inx++;

@@ -17,14 +17,26 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.h,v 1.24 2004/02/06 11:56:03 dmitry Exp $ */
+/* $Id: php_sdl.h,v 1.25 2004/02/06 14:22:33 dmitry Exp $ */
 
 #ifndef PHP_SDL_H
 #define PHP_SDL_H
 
+#ifdef SDL_CACHE
+# define SDL_PERSISTENT  1
+# define sdl_malloc      malloc
+# define sdl_strdup      strdup
+# define sdl_free        free
+#else
+# define SDL_PERSISTENT  0
+# define sdl_malloc      emalloc
+# define sdl_strdup      estrdup
+# define sdl_free        efree
+#endif
+
 #define XSD_WHITESPACE_COLLAPSE 1
 #define XSD_WHITESPACE_PRESERVE 1
-#define XSD_WHITESPACE_REPLACE 1
+#define XSD_WHITESPACE_REPLACE  1
 
 #define BINDING_SOAP 1
 #define BINDING_HTTP 2
@@ -229,5 +241,6 @@ sdlBindingPtr get_binding_from_type(sdlPtr sdl, int type);
 sdlBindingPtr get_binding_from_name(sdlPtr sdl, char *name, char *ns);
 
 void delete_sdl(void *handle);
+void delete_sdl_ptr(void *handle);
 
 #endif

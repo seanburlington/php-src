@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.1 2003/03/29 04:52:46 sterling Exp $ */
+/* $Id: mod_php5.c,v 1.2 2003/05/08 09:27:18 edink Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -534,6 +534,11 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 	HashTable *per_dir_conf;
 	TSRMLS_FETCH();
 
+	per_dir_conf = (HashTable *) get_module_config(r->per_dir_config, &php4_module);
+	if (per_dir_conf) {
+		zend_hash_apply((HashTable *) per_dir_conf, (apply_func_t) php_apache_alter_ini_entries TSRMLS_CC);
+	}
+
 	if (AP(in_request)) {
 		zend_file_handle fh;
 
@@ -557,11 +562,6 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 			return DECLINED;
 		}
 
-		per_dir_conf = (HashTable *) get_module_config(r->per_dir_config, &php5_module);
-		if (per_dir_conf) {
-			zend_hash_apply((HashTable *) per_dir_conf, (apply_func_t) php_apache_alter_ini_entries TSRMLS_CC);
-		}
-		
 		/* If PHP parser engine has been turned off with an "engine off"
 		 * directive, then decline to handle this request
 		 */

@@ -15,12 +15,14 @@
   | Author: Wez Furlong <wez@thebrainroom.com>                           |
   +----------------------------------------------------------------------+
 
-  $Id: sqlite.c,v 1.10 2003/04/17 18:54:40 wez Exp $ 
+  $Id: sqlite.c,v 1.11 2003/04/17 19:13:21 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+
+#define PHP_SQLITE_MODULE_VERSION	"0.7"
 
 #include "php.h"
 #include "php_ini.h"
@@ -73,7 +75,7 @@ zend_module_entry sqlite_module_entry = {
 	NULL,
 	PHP_MINFO(sqlite),
 #if ZEND_MODULE_API_NO >= 20010901
-	"0.1",
+	PHP_SQLITE_MODULE_VERSION,
 #endif
 	STANDARD_MODULE_PROPERTIES
 };
@@ -221,7 +223,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", "$Id: sqlite.c,v 1.10 2003/04/17 18:54:40 wez Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.11 2003/04/17 19:13:21 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

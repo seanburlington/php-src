@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.60 2002/08/09 20:53:37 helly Exp $ */
+/* $Id: head.c,v 1.61 2002/08/09 22:29:57 helly Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -126,9 +126,7 @@ PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, t
 	ctr.line_len = strlen(cookie);
 
 	result = sapi_header_op(SAPI_HEADER_ADD, &ctr TSRMLS_CC);
-	if (result == FAILURE) {
-		efree(cookie);
-	}
+	efree(cookie);
 	return result;
 }
 

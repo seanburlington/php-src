@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.31 2002/07/28 14:08:07 sr Exp $ */
+/* $Id: php_zlib.h,v 1.32 2002/08/09 22:29:58 helly Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -33,6 +33,7 @@ ZEND_BEGIN_MODULE_GLOBALS(zlib)
 	int ob_gzip_coding;
 	int output_compression;
 	int output_compression_level;
+	char *output_handler;
 ZEND_END_MODULE_GLOBALS(zlib)
 
 extern zend_module_entry php_zlib_module_entry;

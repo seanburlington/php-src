@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.135 2002/04/05 15:47:08 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.136 2002/04/05 18:18:23 jtate Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -329,6 +329,7 @@ static zend_function_entry php_domxmlnode_class_functions[] = {
 	PHP_FALIAS(has_attributes,			domxml_node_has_attributes,		NULL)
 	PHP_FALIAS(node,					domxml_node,					NULL)
 	PHP_FALIAS(unlink,					domxml_node_unlink_node,		NULL)
+	PHP_FALIAS(unlink_node,					domxml_node_unlink_node,		NULL)
 	PHP_FALIAS(replace_node,			domxml_node_replace_node,		NULL)
 	PHP_FALIAS(set_content,				domxml_node_set_content,		NULL)
 	PHP_FALIAS(get_content,				domxml_node_get_content,		NULL)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.76 2003/01/11 23:06:35 iliaa Exp $ */
+/* $Id: php_sybase_ct.c,v 1.77 2003/01/11 23:50:37 iliaa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1059,7 +1059,7 @@ static int php_sybase_fetch_result_row (sybase_result *result, int numrows)
 						convert_to_long(&result->data[i][j]);
 						break;
 					case 2: 
-						convert_to_double(&result->data[i][j]); result->numerics[j]= 1; 
+						convert_to_double(&result->data[i][j]);
 						break;
 				}
 			}

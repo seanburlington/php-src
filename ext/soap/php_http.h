@@ -17,12 +17,12 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.h,v 1.12 2004/01/29 11:51:11 dmitry Exp $ */
+/* $Id: php_http.h,v 1.13 2004/05/20 16:55:02 dmitry Exp $ */
 
 #ifndef PHP_HTTP_H
 #define PHP_HTTP_H
 
-int send_http_soap_request(zval *this_ptr, xmlDoc *doc, char *location, char *soapaction, int soap_version TSRMLS_DC);
+int send_http_soap_request(zval *this_ptr, char *request, int request_size, char *location, char *soapaction, int soap_version TSRMLS_DC);
 int get_http_soap_response(zval *this_ptr, char **buffer, int *buffer_len TSRMLS_DC);
 
 #endif

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.125 2004/02/08 17:25:54 zeev Exp $ */
+/* $Id: simplexml.c,v 1.126 2004/02/10 09:30:38 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1013,6 +1013,21 @@ sxe_object_cast(zval *readobj, zval *writeobj, int type, int should_free TSRMLS_
 }
 /* }}} */
 
+static zval *sxe_get_value(zval *z TSRMLS_DC)
+{
+	zval *retval;
+
+	MAKE_STD_ZVAL(retval);
+
+	if (sxe_object_cast(z, retval, IS_STRING, 0 TSRMLS_CC)==FAILURE) {
+		zend_error(E_ERROR, "Unable to cast node to string");
+	}
+
+	retval->refcount = 0;
+	return retval;
+}
+
+
 static zend_object_handlers sxe_object_handlers = {
 	ZEND_OBJECTS_STORE_HANDLERS,
 	sxe_property_read,
@@ -1020,7 +1035,7 @@ static zend_object_handlers sxe_object_handlers = {
 	sxe_dimension_read,
 	sxe_dimension_write,
 	NULL,
-	NULL,
+	sxe_get_value,			/* get */
 	NULL,
 	sxe_property_exists,
 	sxe_property_delete,
@@ -1577,7 +1592,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.125 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.126 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

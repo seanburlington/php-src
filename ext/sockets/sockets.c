@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.125.2.16 2003/04/25 08:10:23 sniper Exp $ */
+/* $Id: sockets.c,v 1.125.2.17 2003/06/05 23:48:17 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -82,6 +82,7 @@ ZEND_DECLARE_MODULE_GLOBALS(sockets)
 #define PF_INET AF_INET
 #endif
 
+static char *php_strerror(int error TSRMLS_DC);
 
 #define PHP_NORMAL_READ 0x0001
 #define PHP_BINARY_READ 0x0002

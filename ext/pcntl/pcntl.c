@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.28.4.2 2002/12/31 16:35:08 sebastian Exp $ */
+/* $Id: pcntl.c,v 1.28.4.3 2003/06/05 23:48:17 iliaa Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -69,6 +69,9 @@ zend_module_entry pcntl_module_entry = {
 #ifdef COMPILE_DL_PCNTL
 ZEND_GET_MODULE(pcntl)
 #endif
+
+static void pcntl_signal_handler(int);
+static void pcntl_tick_handler();
   
 void php_register_signal_constants(INIT_FUNC_ARGS)
 {

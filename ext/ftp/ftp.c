@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.75 2003/01/27 19:51:50 pollita Exp $ */
+/* $Id: ftp.c,v 1.76 2003/01/31 04:54:57 pollita Exp $ */
 
 #include "php.h"
 
@@ -440,6 +440,27 @@ ftp_exec(ftpbuf_t *ftp, const char *cmd)
 	}
 
 	return 1;
+}
+/* }}} */
+
+/* {{{ ftp_raw
+ */
+void
+ftp_raw(ftpbuf_t *ftp, const char *cmd, zval *return_value)
+{
+	if (ftp == NULL || cmd == NULL) {
+		RETURN_NULL();
+	}
+	if (!ftp_putcmd(ftp, cmd, NULL)) {
+		RETURN_NULL();
+	}
+	array_init(return_value);
+	while (ftp_readline(ftp)) {
+		add_next_index_string(return_value, ftp->inbuf, 1);
+		if (isdigit(ftp->inbuf[0]) && isdigit(ftp->inbuf[1]) && isdigit(ftp->inbuf[2]) && ftp->inbuf[3] == ' ') {
+			return;
+		}
+	}
 }
 /* }}} */
 

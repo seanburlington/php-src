@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.35 2003/01/27 19:51:50 pollita Exp $ */
+/* $Id: ftp.h,v 1.36 2003/01/31 04:54:57 pollita Exp $ */
 
 #ifndef	FTP_H
 #define	FTP_H
@@ -120,6 +120,9 @@ const char*	ftp_pwd(ftpbuf_t *ftp);
 
 /* exec a command [special features], return true on success, false on error */
 int 	ftp_exec(ftpbuf_t *ftp, const char *cmd);
+
+/* send a raw ftp command, return response as a hashtable, NULL on error */
+void	ftp_raw(ftpbuf_t *ftp, const char *cmd, zval *return_value);
 
 /* changes directories, return true on success, false on error */
 int		ftp_chdir(ftpbuf_t *ftp, const char *dir);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.h,v 1.23 2003/01/27 02:54:12 pollita Exp $ */
+/* $Id: php_ftp.h,v 1.24 2003/01/31 04:54:57 pollita Exp $ */
 
 #ifndef	_INCLUDED_FTP_H
 #define	_INCLUDED_FTP_H
@@ -43,6 +43,7 @@ PHP_FUNCTION(ftp_pwd);
 PHP_FUNCTION(ftp_cdup);
 PHP_FUNCTION(ftp_chdir);
 PHP_FUNCTION(ftp_exec);
+PHP_FUNCTION(ftp_raw);
 PHP_FUNCTION(ftp_mkdir);
 PHP_FUNCTION(ftp_rmdir);
 PHP_FUNCTION(ftp_chmod);

@@ -16,7 +16,7 @@
 // |          Sebastian Bergmann <sb@sebastian-bergmann.de>               |
 // +----------------------------------------------------------------------+
 //
-// $Id: Cache.php,v 1.1 2001/03/01 16:32:28 chagenbu Exp $
+// $Id: Cache.php,v 1.2 2001/03/02 10:29:34 sbergmann Exp $
 
 /**
 * Cache is a base class for cache implementations.
@@ -24,7 +24,7 @@
 * TODO: Simple usage example goes here.
 *
 * @author   Ulf Wendel <ulf.wendel@phpdoc.de>
-* @version  $Id: Cache.php,v 1.1 2001/03/01 16:32:28 chagenbu Exp $
+* @version  $Id: Cache.php,v 1.2 2001/03/02 10:29:34 sbergmann Exp $
 * @package  Cache
 * @access   public 
 */
@@ -85,7 +85,7 @@ class Cache {
     {
         $storage_driver = strtolower($storage_driver);
         $storage_class = 'Cache_Container_' . $storage_driver;
-	$storage_classfile = 'Cache/Container/' . $storage_driver . '.php';
+        $storage_classfile = 'Cache/Container/' . $storage_driver . '.php';
 	
         if (@include_once $storage_classfile) {
             $this->container = new $storage_class($storage_options);

@@ -24,7 +24,7 @@
 #
 # Written by Stig Bakken <ssb@guardian.no> 1997-05-28.
 #
-# $Id: makedist,v 1.5 1999/07/19 17:58:51 zeev Exp $
+# $Id: makedist,v 1.6 1999/08/04 22:33:18 zeev Exp $
 #
 
 CVSROOT=:pserver:cvsread@cvs.php.net:/repository
@@ -123,7 +123,8 @@ set +x
 INC="$INC \
 configuration-scanner.c \
 configuration-parser.c configuration-parser.h \
-acconfig.h aclocal.m4 configure.in missing mkinstalldirs php_config.h.in \
+acconfig.h aclocal.m4 configure.in missing mkinstalldirs \
+ltconfig ltmain.sh config.sub config.guess php_config.h.in \
 configure"
 
 

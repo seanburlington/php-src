@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
+   | Authors: Stig Sæther Bakken <ssb@php.net>                            |
    |          Thies C. Arntzen <thies@thieso.net>                         |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xml.h,v 1.21 2003/01/18 19:28:06 iliaa Exp $ */
+/* $Id: php_xml.h,v 1.22 2003/03/18 12:06:04 ssb Exp $ */
 
 #ifndef PHP_XML_H
 #define PHP_XML_H

@@ -13,11 +13,11 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Stig Bakken <ssb@fast.no>                                   |
+// | Authors: Stig Bakken <ssb@php.net>                                   |
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Guess.php,v 1.7 2003/01/25 00:44:41 ssb Exp $
+// $Id: Guess.php,v 1.8 2003/03/18 12:06:06 ssb Exp $
 
 // {{{ uname examples
 

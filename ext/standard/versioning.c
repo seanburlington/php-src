@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
+   | Author: Stig Sæther Bakken <ssb@php.net>                             |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: versioning.c,v 1.13 2002/12/31 16:07:57 sebastian Exp $ */
+/* $Id: versioning.c,v 1.14 2003/03/18 12:06:04 ssb Exp $ */
 
 #include <stdio.h>
 #include <sys/types.h>

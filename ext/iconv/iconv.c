@@ -13,12 +13,12 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Rui Hirokawa <rui_hirokawa@ybb.ne.jp>                       |
-   |          Stig Bakken <ssb@fast.no>                                   |
+   |          Stig Bakken <ssb@php.net>                                   |
    |          Moriyoshi Koizumi <moriyoshi@php.net>                       |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.85 2003/03/06 23:07:24 ddhill Exp $ */
+/* $Id: iconv.c,v 1.86 2003/03/18 12:06:00 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

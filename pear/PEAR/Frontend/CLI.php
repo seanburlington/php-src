@@ -13,10 +13,10 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Stig Sæther Bakken <ssb@fast.no>                             |
+  | Author: Stig Sæther Bakken <ssb@php.net>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.29 2003/01/09 15:06:14 ssb Exp $
+  $Id: CLI.php,v 1.30 2003/03/18 12:06:07 ssb Exp $
 */
 
 require_once "PEAR.php";

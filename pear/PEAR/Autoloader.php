@@ -13,11 +13,11 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Author: Stig Bakken <ssb@fast.no>                                    |
+// | Author: Stig Bakken <ssb@php.net>                                    |
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Autoloader.php,v 1.5 2002/12/31 16:18:26 sebastian Exp $
+// $Id: Autoloader.php,v 1.6 2003/03/18 12:06:06 ssb Exp $
 
 if (!extension_loaded("overload")) {
     // die hard without ext/overload
@@ -38,7 +38,7 @@ require_once "PEAR.php";
  * methods, an instance of each class providing separated methods is
  * stored and called every time the aggregated method is called.
  *
- * @author Stig Sæther Bakken <ssb@fast.no>
+ * @author Stig Sæther Bakken <ssb@php.net>
  */
 class PEAR_Autoloader extends PEAR
 {

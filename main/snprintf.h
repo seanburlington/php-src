@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
+   | Author: Stig Sæther Bakken <ssb@php.net>                             |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.h,v 1.21 2003/02/25 09:44:12 sniper Exp $ */
+/* $Id: snprintf.h,v 1.22 2003/03/18 12:06:04 ssb Exp $ */
 
 /*
 

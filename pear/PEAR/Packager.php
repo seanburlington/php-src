@@ -13,11 +13,11 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Stig Bakken <ssb@fast.no>                                   |
+// | Authors: Stig Bakken <ssb@php.net>                                   |
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.45 2003/02/25 02:44:10 ssb Exp $
+// $Id: Packager.php,v 1.46 2003/03/18 12:06:06 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'System.php';
@@ -29,7 +29,7 @@ require_once 'System.php';
  *  - add an extra param the dir where to place the created package
  *
  * @since PHP 4.0.2
- * @author Stig Bakken <ssb@fast.no>
+ * @author Stig Bakken <ssb@php.net>
  */
 class PEAR_Packager extends PEAR_Common
 {

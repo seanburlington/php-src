@@ -13,11 +13,11 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Stig Bakken <ssb@fast.no>                                   |
+// | Authors: Stig Bakken <ssb@php.net>                                   |
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.49 2003/02/25 02:44:10 ssb Exp $
+// $Id: Package.php,v 1.50 2003/03/18 12:06:07 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';

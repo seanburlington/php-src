@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Stig Bakken <ssb@fast.no>                                    |
+   | Author: Stig Bakken <ssb@php.net>                                    |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ticks.h,v 1.9 2002/12/31 15:58:54 sebastian Exp $ */
+/* $Id: php_ticks.h,v 1.10 2003/03/18 12:06:04 ssb Exp $ */
 
 #ifndef PHP_TICKS_H
 #define PHP_TICKS_H

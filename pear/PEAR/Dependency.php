@@ -14,10 +14,10 @@
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
-// |          Stig Bakken <ssb@fast.no>                                   |
+// |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.16 2002/12/31 16:18:26 sebastian Exp $
+// $Id: Dependency.php,v 1.17 2003/03/18 12:06:06 ssb Exp $
 
 /**
 * Methods for dependencies check. Based on Stig's dependencies RFC

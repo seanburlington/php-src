@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
+   | Authors: Stig Sæther Bakken <ssb@php.net>                            |
    |          Thies C. Arntzen <thies@thieso.net>                         |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.27 2003/01/31 14:18:50 sniper Exp $ */
+/* $Id: php_oci8.h,v 1.28 2003/03/18 12:06:01 ssb Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H

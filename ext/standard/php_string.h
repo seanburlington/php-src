@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
-   |          Stig Sæther Bakken <ssb@fast.no>                            |
+   |          Stig Sæther Bakken <ssb@php.net>                            |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.72 2003/02/24 22:01:11 moriyoshi Exp $ */
+/* $Id: php_string.h,v 1.73 2003/03/18 12:06:03 ssb Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 

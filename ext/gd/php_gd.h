@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
-   |          Stig Bakken <ssb@fast.no>                                   |
+   |          Stig Bakken <ssb@php.net>                                   |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.52 2003/02/26 23:21:44 pajoye Exp $ */
+/* $Id: php_gd.h,v 1.53 2003/03/18 12:05:59 ssb Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
+   | Author: Stig Sæther Bakken <ssb@php.net>                             |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.42 2003/01/03 14:37:42 hyanantha Exp $ */
+/* $Id: syslog.c,v 1.43 2003/03/18 12:06:04 ssb Exp $ */
 
 #include "php.h"
 

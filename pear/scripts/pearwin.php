@@ -13,11 +13,11 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Stig Bakken <ssb@fast.no>                                   |
+// | Authors: Stig Bakken <ssb@php.net>                                   |
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearwin.php,v 1.9 2002/12/31 16:18:29 sebastian Exp $
+// $Id: pearwin.php,v 1.10 2003/03/18 12:06:08 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Common.php';

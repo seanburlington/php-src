@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
+   | Author: Stig Sæther Bakken <ssb@php.net>                             |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.36 2002/12/31 16:07:56 sebastian Exp $ */
+/* $Id: uniqid.c,v 1.37 2003/03/18 12:06:04 ssb Exp $ */
 
 #include "php.h"
 

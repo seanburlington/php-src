@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Jim Winstead <jimw@php.net>                                 |
-   |          Stig Sæther Bakken <ssb@fast.no>                            |
+   |          Stig Sæther Bakken <ssb@php.net>                            |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.18 2002/12/31 16:07:52 sebastian Exp $ */
+/* $Id: php_math.h,v 1.19 2003/03/18 12:06:03 ssb Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H

@@ -13,11 +13,11 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Stig Bakken <ssb@fast.no>                                   |
+// | Authors: Stig Bakken <ssb@php.net>                                   |
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.87 2003/02/25 02:44:10 ssb Exp $
+// $Id: Common.php,v 1.88 2003/03/18 12:06:06 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';

@@ -12,7 +12,7 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
+   | Authors: Stig Sæther Bakken <ssb@php.net>                            |
    |          Mitch Golden <mgolden@interport.net>                        |
    |          Rasmus Lerdorf <rasmus@php.net>                             |
    |          Andreas Karajannis <Andreas.Karajannis@gmd.de>              |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.87 2003/01/19 23:32:20 iliaa Exp $ */
+/* $Id: oracle.c,v 1.88 2003/03/18 12:06:01 ssb Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */

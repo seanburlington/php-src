@@ -16,10 +16,10 @@
    | (with helpful hints from Dean Gaudet <dgaudet@arctic.org>            |
    | PHP 4.0 patches by:                                                  |
    | Zeev Suraski <zeev@zend.com>                                         |
-   | Stig Bakken <ssb@fast.no>                                            |
+   | Stig Bakken <ssb@php.net>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.4 2002/12/31 15:59:05 sebastian Exp $ */
+/* $Id: sapi_apache.c,v 1.5 2003/03/18 12:06:09 ssb Exp $ */
 
 #include "php_apache_http.h"
 

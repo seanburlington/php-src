@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
+   | Authors: Stig Sæther Bakken <ssb@php.net>                            |
    |          Thies C. Arntzen <thies@thieso.net>                         | 
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.114 2003/01/18 19:28:06 iliaa Exp $ */
+/* $Id: xml.c,v 1.115 2003/03/18 12:06:04 ssb Exp $ */
 
 #define IS_EXT_MODULE
 

@@ -13,13 +13,13 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Jim Winstead <jimw@php.net>                                 |
-   |          Stig Sæther Bakken <ssb@fast.no>                            |
+   |          Stig Sæther Bakken <ssb@php.net>                            |
    |          Zeev Suraski <zeev@zend.com>                                |
    | PHP 4.0 patches by Thies C. Arntzen <thies@thieso.net>               |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.102 2003/01/16 13:19:50 edink Exp $ */
+/* $Id: math.c,v 1.103 2003/03/18 12:06:03 ssb Exp $ */
 
 #include "php.h"
 #include "php_math.h"

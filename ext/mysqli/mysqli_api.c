@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.48 2003/10/30 12:35:16 georg Exp $ 
+  $Id: mysqli_api.c,v 1.49 2003/11/19 20:11:29 hholzgra Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1014,7 +1014,7 @@ PHP_FUNCTION(mysqli_get_host_info)
 }
 /* }}} */
 
-/* {{{ proto int mysqli_get_proto_info 
+/* {{{ proto int mysqli_get_proto_info(object link) 
    Get MySQL protocol information */
 PHP_FUNCTION(mysqli_get_proto_info)
 {

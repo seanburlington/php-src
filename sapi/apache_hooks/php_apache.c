@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.14 2003/06/10 20:03:44 imajes Exp $ */
+/* $Id: php_apache.c,v 1.15 2003/11/19 20:13:49 hholzgra Exp $ */
 
 #include "php_apache_http.h"
 
@@ -1228,7 +1228,7 @@ PHP_FUNCTION(apache_request_sub_req_method_uri)
 }
 /* }}} */
 
-/* {{{ proto long apache_request_run
+/* {{{ proto long apache_request_run()
     This is a wrapper for ap_sub_run_req and ap_destory_sub_req.  It takes 
     sub_request, runs it, destroys it, and returns it's status.
 */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.40 2004/07/30 14:37:17 wez Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.41 2004/07/30 16:52:35 fmk Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -31,6 +31,10 @@
 #include "ext/standard/info.h"
 #include "ext/session/php_session.h"
 #include "zend_operators.h"
+
+#ifdef PHP_WIN32
+#include "win32/php_win32_globals.h"
+#endif
 
 #include <stdarg.h>
 #include <stdlib.h>

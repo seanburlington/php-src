@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: http.c,v 1.1 2003/09/06 00:35:21 pollita Exp $ */
+/* $Id: http.c,v 1.2 2003/09/06 05:41:36 pollita Exp $ */
 
 #include "http.h"
 #include "php_ini.h"
@@ -37,6 +37,11 @@ PHPAPI int php_url_encode_hash_ex(HashTable *ht, smart_str *formstr,
 
 	if (!ht) {
 		return FAILURE;
+	}
+
+	if (ht->nApplyCount > 0) {
+		/* Prevent Recuriosn */
+		return SUCCESS;
 	}
 
 	arg_sep = INI_STR("arg_separator.output");
@@ -106,7 +111,9 @@ PHPAPI int php_url_encode_hash_ex(HashTable *ht, smart_str *formstr,
 				*(p++) = '[';
 				*p = '\0';
 			}
+			ht->nApplyCount++;
 			php_url_encode_hash_ex(Z_ARRVAL_PP(zdata), formstr, NULL, 0, newprefix, newprefix_len, "]", 1 TSRMLS_CC);
+			ht->nApplyCount--;
 			efree(newprefix);
 		} else {
 			if (formstr->len) {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.80 2001/11/30 10:48:38 derick Exp $ */
+/* $Id: output.c,v 1.81 2001/12/03 07:43:50 derick Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -572,6 +572,14 @@ PHP_FUNCTION(ob_get_contents)
 	if (php_ob_get_buffer(return_value TSRMLS_CC)==FAILURE) {
 		RETURN_FALSE;
 	}
+}
+/* }}} */
+
+/* {{{ proto integer ob_get_level(void)
+   Return the nesting level of the output buffer */
+PHP_FUNCTION(ob_get_level)
+{
+	RETURN_LONG (OG(ob_nesting_level));
 }
 /* }}} */
 

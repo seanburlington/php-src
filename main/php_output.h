@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.31 2001/11/30 10:48:38 derick Exp $ */
+/* $Id: php_output.h,v 1.32 2001/12/03 07:43:52 derick Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -49,6 +49,7 @@ PHP_FUNCTION(ob_end_flush);
 PHP_FUNCTION(ob_end_clean);
 PHP_FUNCTION(ob_get_contents);
 PHP_FUNCTION(ob_get_length);
+PHP_FUNCTION(ob_get_level);
 PHP_FUNCTION(ob_implicit_flush);
 
 typedef struct _php_ob_buffer {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.27 2001/04/13 12:00:12 wez Exp $ */
+/* $Id: php_gd.h,v 1.28 2001/05/16 23:11:33 jmoore Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -162,7 +162,7 @@ PHP_FUNCTION(jpeg2wbmp);
 PHP_FUNCTION(png2wbmp);
 PHP_FUNCTION(image2wbmp);
 
-PHPAPI int phpi_get_le_gd(void);
+PHP_GD_API int phpi_get_le_gd(void);
 
 /* This is missing from gd.h */
 #if HAVE_COLORCLOSESTHWB

@@ -1,8 +1,7 @@
-dnl $Id: config.m4,v 1.14 2000/10/19 12:10:59 hirokawa Exp $
+dnl $Id: config.m4,v 1.15 2000/10/19 14:34:03 sas Exp $
 dnl config.m4 for extension domxml
 
 PHP_ARG_WITH(dom, for DOM support,
-Make sure that the comment is aligned:
 [  --with-dom[=DIR]       Include DOM support (requires libxml >= 2.0).
                           DIR is the libxml install directory,
                           defaults to /usr.])

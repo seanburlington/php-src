@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: classfactory.cpp,v 1.2 2002/05/20 15:38:19 phanto Exp $ */
+/* $Id: classfactory.cpp,v 1.2.4.1 2003/04/24 13:52:16 wez Exp $ */
 
 /* IClassFactory Implementation, and DllXXX function implementation */
 
@@ -243,7 +243,7 @@ static int perform_registration(BOOL do_reg)
 {
 	char module_name[MAX_PATH];
 	char classid[40];
-	int ret = 0;
+	int ret = 1;
 	int i, j;
 	struct reg_subst subst = {0};
 	LPOLESTR classidw;

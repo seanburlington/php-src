@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.28 1999/09/20 14:14:26 andrey Exp $ */
+/* $Id: var.c,v 1.29 1999/09/24 18:57:02 andrey Exp $ */
 
 
 /* {{{ includes 
@@ -117,6 +117,15 @@ void php_var_dump(pval **struc, int level)
 			i = sprintf(buf, "%*c}\n", level, ' ');
 			PHPWRITE(&buf[1], i - 1);
 			break;
+			
+		case IS_RESOURCE: {
+			int type;
+			zend_list_find((*struc)->value.lval, &type);
+			i = sprintf(buf, "%*cresource(%ld) of type %d\n", level, ' ',
+						(*struc)->value.lval, type);
+			PHPWRITE(&buf[1], i - 1);
+			break;
+		}
 
 		default:
 			i = sprintf(buf, "%*ci:0\n", level, ' ');

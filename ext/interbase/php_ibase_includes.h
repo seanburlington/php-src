@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ibase_includes.h,v 1.10 2004/05/21 13:14:56 abies Exp $ */
+/* $Id: php_ibase_includes.h,v 1.11 2004/05/28 23:39:33 abies Exp $ */
 
 #ifndef PHP_IBASE_INCLUDES_H
 #define PHP_IBASE_INCLUDES_H
@@ -49,6 +49,9 @@ extern int le_link, le_plink, le_trans;
 
 #define IBASE_MSGSIZE 256
 #define MAX_ERRMSG (IBASE_MSGSIZE*2)
+
+#define IB_DEF_DATE_FMT "%Y-%m-%d"
+#define IB_DEF_TIME_FMT "%H:%M:%S"
 
 /* this value should never be > USHRT_MAX */
 #define IBASE_BLOB_SEG 4096

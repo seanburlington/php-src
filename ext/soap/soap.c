@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.92 2004/02/25 14:04:41 dmitry Exp $ */
+/* $Id: soap.c,v 1.93 2004/02/25 14:37:05 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1285,6 +1285,7 @@ PHP_METHOD(soapserver, handle)
 				if (call_user_function(CG(function_table), (zval**)NULL, &func, &retval, 1, params TSRMLS_CC) == SUCCESS &&
 				    Z_TYPE(retval) == IS_STRING) {
 					doc_request = soap_xmlParseMemory(Z_STRVAL(retval),Z_STRLEN(retval));
+					zval_dtor(&retval);
 				} else {
 					php_error(E_ERROR,"Can't uncompress compressed request");
 				}

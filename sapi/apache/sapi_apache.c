@@ -19,13 +19,21 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.39 2001/12/11 15:31:55 sebastian Exp $ */
+/* $Id: sapi_apache.c,v 1.39.2.1 2002/10/24 11:54:21 hyanantha Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
 #include <winsock2.h>
 #include <stddef.h>
 #endif
+
+#ifdef NETWARE
+#ifdef NEW_LIBC /* Works fine for both Winsock and Berkeley sockets */
+#include <netinet/in.h>
+#else
+#include <sys/socket.h>
+#endif
+#endif	/* NETWARE */
 
 #include "php.h"
 

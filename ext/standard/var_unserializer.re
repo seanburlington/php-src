@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.11.4.10 2005/01/17 11:46:11 sesser Exp $ */
+/* $Id: var_unserializer.re,v 1.11.4.11 2005/01/17 12:28:08 sesser Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -155,10 +155,10 @@ any = [\000-\277];
 
 
 
-static inline int parse_iv2(const unsigned char *p, const unsigned char **q)
+static inline long parse_iv2(const unsigned char *p, const unsigned char **q)
 {
 	char cursor;
-	int result = 0;
+	long result = 0;
 	int neg = 0;
 
 	switch (*p) {
@@ -183,7 +183,7 @@ static inline int parse_iv2(const unsigned char *p, const unsigned char **q)
 	return result;
 }
 
-static inline int parse_iv(const unsigned char *p)
+static inline long parse_iv(const unsigned char *p)
 {
 	return parse_iv2(p, NULL);
 }

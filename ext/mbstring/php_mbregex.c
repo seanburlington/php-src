@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.3 2002/03/23 07:33:13 hirokawa Exp $ */
+/* $Id: php_mbregex.c,v 1.4 2002/04/26 10:13:45 sas Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -30,7 +30,7 @@
 
 #if HAVE_MBREGEX
 
-extern ZEND_DECLARE_MODULE_GLOBALS(mbstring)
+ZEND_EXTERN_MODULE_GLOBALS(mbstring)
 
 /*
  * string buffer

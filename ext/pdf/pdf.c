@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.120 2003/02/04 10:57:34 steinm Exp $ */
+/* $Id: pdf.c,v 1.121 2003/04/30 21:53:52 iliaa Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -332,7 +332,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.120 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.121 $" );
 	php_info_print_table_end();
 
 }
@@ -2457,7 +2457,7 @@ PHP_FUNCTION(pdf_setpolydash)
 	array = Z_ARRVAL_PP(arg2);
 	len = zend_hash_num_elements(array);
 
-	darray = emalloc(len * sizeof(double));
+	darray = safe_emalloc(len, sizeof(double), 0);
 	zend_hash_internal_pointer_reset(array);
 	for (i=0; i<len; i++) {
 	    zval *keydata, **keydataptr;

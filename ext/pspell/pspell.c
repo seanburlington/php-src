@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.42 2004/02/11 21:20:22 sniper Exp $ */
+/* $Id: pspell.c,v 1.43 2004/02/13 02:20:20 iliaa Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -805,7 +805,7 @@ PHP_FUNCTION(pspell_config_ignore)
 }
 /* }}} */
 
-static int pspell_config_path(INTERNAL_FUNCTION_PARAMETERS, char *option)
+static void pspell_config_path(INTERNAL_FUNCTION_PARAMETERS, char *option)
 {
 	int type;
 	zval **sccin, **value;

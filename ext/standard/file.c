@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.379 2004/01/25 06:09:36 sniper Exp $ */
+/* $Id: file.c,v 1.380 2004/02/25 20:16:26 abies Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -502,7 +502,8 @@ PHP_FUNCTION(file_put_contents)
 	char *filename;
 	size_t filename_len;
 	zval *data;
-	int numbytes = 0, flags = 0;
+	int numbytes = 0;
+	long flags = 0;
 	zval *zcontext = NULL;
 	php_stream_context *context = NULL;
 	

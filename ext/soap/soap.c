@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.93 2004/02/25 14:37:05 dmitry Exp $ */
+/* $Id: soap.c,v 1.94 2004/02/25 20:16:24 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -967,7 +967,7 @@ PHP_FUNCTION(SoapServer,map)
 PHP_METHOD(soapserver,setpersistence)
 {
 	soapServicePtr service;
-	int value;
+	long value;
 
 	SOAP_SERVER_BEGIN_CODE();
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sunfuncs.c,v 1.5 2004/01/08 08:17:34 andi Exp $ */
+/* $Id: sunfuncs.c,v 1.6 2004/02/25 20:16:26 abies Exp $ */
 
 /*
 	The sun position algorithm taken from the 'US Naval Observatory's
@@ -156,7 +156,8 @@ static void php_do_date_sunrise_sunset(INTERNAL_FUNCTION_PARAMETERS, int calc_su
 {
 	zval *date;
 	double latitude, longitude, zenith, gmt_offset, ret;
-	int time, N, retformat;
+	int time, N;
+	long retformat;
 	char retstr[6];
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z|ldddd", &date, &retformat, &latitude, &longitude, &zenith, &gmt_offset) == FAILURE) {

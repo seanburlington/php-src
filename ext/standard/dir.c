@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.133 2004/01/28 22:21:53 pollita Exp $ */
+/* $Id: dir.c,v 1.134 2004/02/25 20:16:26 abies Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -450,7 +450,7 @@ PHP_FUNCTION(scandir)
 {
 	char *dirn;
 	int dirn_len;
-	int flags = 0;
+	long flags = 0;
 	php_stream_dirent **namelist;
 	int n, i;
 	zval *zcontext = NULL;

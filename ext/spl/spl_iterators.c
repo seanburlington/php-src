@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.21 2004/02/25 14:58:47 zeev Exp $ */
+/* $Id: spl_iterators.c,v 1.22 2004/02/25 20:16:24 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -318,7 +318,7 @@ SPL_METHOD(RecursiveIteratorIterator, __construct)
 	spl_recursive_it_object   *intern;
 	zval                      *iterator;
 	zend_class_entry          *ce_iterator;
-	int                       mode = RIT_LEAVES_ONLY;
+	long                       mode = RIT_LEAVES_ONLY;
 
 	php_set_error_handling(EH_THROW, zend_exception_get_default() TSRMLS_CC);
 
@@ -401,7 +401,7 @@ SPL_METHOD(RecursiveIteratorIterator, getDepth)
 SPL_METHOD(RecursiveIteratorIterator, getSubIterator)
 {
 	spl_recursive_it_object   *object = (spl_recursive_it_object*)zend_object_store_get_object(getThis() TSRMLS_CC);
-	int  level = object->level;
+	long  level = object->level;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &level) == FAILURE) {
 		return;

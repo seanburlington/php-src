@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.99 2004/01/08 08:15:27 andi Exp $ */
+/* $Id: php_ftp.c,v 1.100 2004/02/25 20:16:21 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -444,7 +444,7 @@ PHP_FUNCTION(ftp_alloc)
 {
 	zval		*z_ftp, *zresponse = NULL;
 	ftpbuf_t	*ftp;
-	int			size, ret;
+	long		size, ret;
 	char		*response = NULL;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rl|z", &z_ftp, &size, &zresponse) == FAILURE) {

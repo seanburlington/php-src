@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_report.c,v 1.6 2004/01/28 22:51:54 georg Exp $ 
+  $Id: mysqli_report.c,v 1.7 2004/02/25 20:16:22 abies Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -31,7 +31,7 @@
    sets report level */
 PHP_FUNCTION(mysqli_report)
 {
-	int		flags;
+	long		flags;
 
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &flags) == FAILURE) {

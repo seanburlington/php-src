@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.16.2.1 2005/01/24 14:25:16 tony2001 Exp $ */
+/* $Id: sysvmsg.c,v 1.16.2.2 2005/01/24 22:23:35 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -142,7 +142,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.16.2.1 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.16.2.2 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -334,7 +334,7 @@ PHP_FUNCTION(msg_receive)
 		if (do_unserialize)	{
 			php_unserialize_data_t var_hash;
 			zval *tmp = NULL;
-			const char *p = (const char *) messagebuffer->mtext;
+			const unsigned char *p = (const unsigned char *) messagebuffer->mtext;
 
 			MAKE_STD_ZVAL(tmp);
 			PHP_VAR_UNSERIALIZE_INIT(var_hash);

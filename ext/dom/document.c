@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.36 2003/10/27 19:52:50 chregu Exp $ */
+/* $Id: document.c,v 1.37 2003/10/28 04:21:29 shane Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -120,6 +120,7 @@ static void php_dom_validate_error(void *ctx, const char *msg, ...)
 static void php_dom_ctx_error_level(int level, void *ctx, const char *msg)
 {
 	xmlParserCtxtPtr parser;
+	TSRMLS_FETCH();
 
 	parser = (xmlParserCtxtPtr) ctx;
 	php_error_docref(NULL TSRMLS_CC, level, "%s in %s, line: %d", msg, parser->input->filename, parser->input->line);

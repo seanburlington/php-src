@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.27 2002/02/20 07:24:53 derick Exp $ */
+/* $Id: iconv.c,v 1.28 2002/02/20 15:53:25 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -193,7 +193,7 @@ PHP_NAMED_FUNCTION(php_if_iconv)
 	if (php_iconv_string(Z_STRVAL_PP(in_buffer), Z_STRLEN_PP(in_buffer),
 						 &out_buffer,  &out_len,
 						 Z_STRVAL_PP(in_charset), Z_STRVAL_PP(out_charset)) == SUCCESS) {
-		RETVAL_STRINGL(out_buffer, out_len, 0);
+		RETVAL_STRINGL(out_buffer, out_len + 1, 0);
 	} else {
 		RETURN_FALSE;
 	}

@@ -16,11 +16,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ftok.h,v 1.4 2002/10/20 10:18:20 derick Exp $ */
+/* $Id: php_ftok.h,v 1.5 2002/10/20 13:35:56 derick Exp $ */
 
 #ifndef PHP_FTOK_H
 #define PHP_FTOK_H
 
+#if HAVE_FTOK
 PHP_FUNCTION(ftok);
+#endif
 
 #endif /* PHP_FTOK_H */

@@ -16,13 +16,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ftok.c,v 1.7 2002/10/20 10:18:20 derick Exp $ */
+/* $Id: ftok.c,v 1.8 2002/10/20 13:35:56 derick Exp $ */
 
 #include "php.h"
 
 #include <sys/types.h>                                                                                                        
 #include <sys/ipc.h>
 
+#if HAVE_FTOK
 /* {{{ proto int ftok(string pathname, string proj)
    Convert a pathname and a project identifier to a System V IPC key */
 PHP_FUNCTION(ftok)
@@ -53,6 +54,7 @@ PHP_FUNCTION(ftok)
     RETURN_LONG(k);
 }
 /* }}} */
+#endif
 
 /*
  * Local variables:

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.531 2002/10/20 10:18:19 derick Exp $ */
+/* $Id: basic_functions.c,v 1.532 2002/10/20 13:35:56 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -832,7 +832,9 @@ function_entry basic_functions[] = {
     PHP_FE(version_compare,													NULL)
 
 	/* functions from ftok.c*/
+#if HAVE_FTOK
 	PHP_FE(ftok,	NULL)
+#endif
 
 	PHP_FE(str_rot13, NULL)
 

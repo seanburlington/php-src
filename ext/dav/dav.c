@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dav.c,v 1.6 1999/12/17 21:13:14 zeev Exp $ */
+/* $Id: dav.c,v 1.7 1999/12/19 02:15:18 evan Exp $ */
 
 #define IS_EXT_MODULE
 #if COMPILE_DL
@@ -36,8 +36,6 @@
 #if HAVE_MOD_DAV
 
 # include "mod_dav.h"
-# include "phpdav.h"
-# include "variables.h"
 
 /* {{{ thread safety stuff */
 

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.62.2.26 2004/07/18 10:31:32 wez Exp $ 
+   $Id: sqlite.c,v 1.62.2.27 2004/07/27 16:53:48 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -684,7 +684,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.26 2004/07/18 10:31:32 wez Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.27 2004/07/27 16:53:48 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1795,12 +1795,14 @@ PHP_FUNCTION(sqlite_escape_string)
 		enclen = sqlite_encode_binary((const unsigned char*)string, stringlen, ret+1);
 		RETVAL_STRINGL(ret, enclen+1, 0);
 		
-	} else  {
+	} else if (stringlen) {
 		ret = sqlite_mprintf("%q", string);
 		if (ret) {
 			RETVAL_STRING(ret, 1);
 			sqlite_freemem(ret);
 		}
+	} else {
+		RETURN_STRINGL(empty_string, 0, 1);
 	}
 }
 /* }}} */

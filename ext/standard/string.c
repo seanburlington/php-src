@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.251 2001/11/02 19:19:24 jmoore Exp $ */
+/* $Id: string.c,v 1.252 2001/11/02 19:31:57 jmoore Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -926,7 +926,7 @@ PHP_FUNCTION(strtok)
 	int skipped = 0;
 	
 	if (ZEND_NUM_ARGS() < 1 || ZEND_NUM_ARGS() > 2 ||
-	    zend_get_parameters_array_ex(ZEND_NUM_ARGS(), args) == FAILURE)
+		zend_get_parameters_array_ex(ZEND_NUM_ARGS(), args) == FAILURE)
 		WRONG_PARAM_COUNT;
 	
 	switch (ZEND_NUM_ARGS()) {
@@ -977,11 +977,11 @@ PHP_FUNCTION(strtok)
 	/* We know at this place that *p is no delimiter, so skip it */	
 	while (++p < pe)
 		if (STRTOK_TABLE(p))
-		   goto return_token;	
+			goto return_token;	
 
 	if (p - BG(strtok_last)) {
 return_token:
-	RETVAL_STRINGL(BG(strtok_last) + skipped, (p - BG(strtok_last)) - skipped, 1);
+		RETVAL_STRINGL(BG(strtok_last) + skipped, (p - BG(strtok_last)) - skipped, 1);
 		BG(strtok_last) = p + 1;
 	} else {
 		RETVAL_FALSE;

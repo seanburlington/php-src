@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.16 2004/02/23 19:50:47 iliaa Exp $ */
+/* $Id: curl.c,v 1.124.2.17 2004/03/09 17:06:53 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -802,7 +802,9 @@ PHP_FUNCTION(curl_setopt)
 
 			if (Z_LVAL_PP(zvalue)) {
 				ch->handlers->write->method = PHP_CURL_RETURN;
-			}
+			} else {
+				ch->handlers->write->method = PHP_CURL_STDOUT;
+			}	
 			break;
 		case CURLOPT_BINARYTRANSFER:
 			convert_to_long_ex(zvalue);	

@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.43 2000/05/17 15:41:32 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.44 2000/05/17 23:42:18 andi Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -492,8 +492,8 @@ statement:
 			}
 		}
 	|	T_ZEND_EXTENSION_DEBUG '=' cfg_string { 
-#if !defined(ZTS) && ZEND_DEBUG
 			if (parsing_mode==PARSING_MODE_CFG) {
+#if !defined(ZTS) && ZEND_DEBUG
 				zend_load_extension($3.value.str.val);
 #endif
 				free($3.value.str.val);

@@ -18,7 +18,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_php5.c,v 1.1 2003/10/21 11:48:31 sniper Exp $ */
+/* $Id: mod_php5.c,v 1.2 2003/10/27 19:05:01 sniper Exp $ */
+
+#define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
 #include "php.h"
 #include "php_apache.h"

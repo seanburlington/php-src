@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.312 2002/03/13 12:30:48 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.313 2002/03/14 02:17:22 yohgaki Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -363,6 +363,7 @@ ApplicationServices/ApplicationServices.h \
 alloca.h \
 arpa/inet.h \
 arpa/nameser.h \
+assert.h \
 crypt.h \
 fcntl.h \
 grp.h \

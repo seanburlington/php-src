@@ -17,7 +17,7 @@
 // | Authors: Dietrich Ayala <dietrich@ganx4.com> Original Author         |
 // +----------------------------------------------------------------------+
 //
-// $Id: server_round2_base.php,v 1.5 2004/01/28 13:36:31 dmitry Exp $
+// $Id: server_round2_base.php,v 1.6 2004/02/03 16:44:57 dmitry Exp $
 //
 
 class SOAP_Interop_Base {
@@ -99,7 +99,7 @@ class SOAP_Interop_Base {
     }
 }
 
-$server = new SoapServer("http://test-uri");
+$server = new SoapServer("http://soapinterop.org/");
 $server->bind((isset($_SERVER['HTTPS'])?"https://":"http://").$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/interop.wsdl.php");
 $server->setClass("SOAP_Interop_Base");
 $server->handle();

@@ -17,11 +17,11 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_packet_soap.h,v 1.8 2004/01/29 11:51:11 dmitry Exp $ */
+/* $Id: php_packet_soap.h,v 1.9 2004/02/03 16:44:56 dmitry Exp $ */
 
 #ifndef PHP_PACKET_SOAP_H
 #define PHP_PACKET_SOAP_H
 
-int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunctionPtr fn, char *fn_name, zval *return_value TSRMLS_DC);
+int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunctionPtr fn, char *fn_name, zval *return_value, zval *soap_headers TSRMLS_DC);
 
 #endif

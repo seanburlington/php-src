@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: dynlib.m4,v 1.6 2001/02/26 06:06:47 andi Exp $ 
+# $Id: dynlib.m4,v 1.7 2001/12/06 19:01:43 sniper Exp $ 
 #
 
 
@@ -32,7 +32,7 @@ AC_DEFUN(LIB_SHARED_MODULE,[
   lib_target="\$(LTLIBRARY_SHARED_NAME)"
   cat >>$1<<EOF
 \$(LTLIBRARY_SHARED_NAME): \$(LTLIBRARY_SHARED_OBJECTS) \$(LTLIBRARY_DEPENDENCIES)
-	\$(SHARED_LIBTOOL) --mode=link \$(COMPILE) \$(LDFLAGS) -o \[$]@ -avoid-version -module -rpath \$(phplibdir) \$(LTLIBRARY_LDFLAGS) \$(LTLIBRARY_OBJECTS) \$(LTLIBRARY_SHARED_LIBADD)
+	\$(SHARED_LIBTOOL) --mode=link \$(CC) \$(COMMON_FLAGS) \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(LDFLAGS) -o \[$]@ -avoid-version -module -rpath \$(phplibdir) \$(LTLIBRARY_LDFLAGS) \$(LTLIBRARY_OBJECTS) \$(LTLIBRARY_SHARED_LIBADD)
 	\$(SHARED_LIBTOOL) --mode=install cp \[$]@ \$(phplibdir)
 
 EOF

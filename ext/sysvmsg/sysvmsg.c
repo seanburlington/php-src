@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: sysvmsg.c,v 1.4 2002/10/27 11:56:06 msopacua Exp $ */
+/* $Id: sysvmsg.c,v 1.4.2.1 2002/11/14 16:33:18 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -88,7 +88,7 @@ PHP_INI_END()
 */
 /* }}} */
 
-static void sysvmsg_release(zend_rsrc_list_entry *rsrc)
+static void sysvmsg_release(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	sysvmsg_queue_t * mq = (sysvmsg_queue_t*)rsrc->ptr;
 	efree(mq);
@@ -120,7 +120,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.4 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.4.2.1 $");
 	php_info_print_table_end();
 }
 /* }}} */

@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hartmut@six.de>                         |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.15 2002/11/15 15:13:30 moriyoshi Exp $ 
+  $Id: mime_magic.c,v 1.16 2002/11/15 16:25:31 moriyoshi Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -348,7 +348,7 @@ static int apprentice(void)
     magic_server_config_rec *conf = &mime_global;
 
     fname = conf->magicfile; /* todo cwd? */
-    f = fopen(fname, "rt");
+    f = fopen(fname, "rb");
     if (f == NULL) {
 		(int) conf->magic = -1;
 		return -1;

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.80 2003/11/03 13:50:43 sterling Exp $ */
+/* $Id: simplexml.c,v 1.81 2003/11/03 13:55:19 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -81,8 +81,8 @@ _node_as_zval(php_sxe_object *sxe, xmlNodePtr node, zval *value TSRMLS_DC)
 	}
 
 #define GET_NODE(__s, __n) { \
-	if (__s->node && __s->node->node) { \
-		__n = __s->node->node; \
+	if ((__s)->node && (__s)->node->node) { \
+		__n = (__s)->node->node; \
 	} else { \
 		__n = NULL; \
 		php_error(E_WARNING, "Node no longer exists"); \
@@ -1391,7 +1391,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.80 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.81 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

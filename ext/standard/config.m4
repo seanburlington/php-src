@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.31.2.1 2002/04/11 12:53:19 derick Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.31.2.2 2002/04/13 00:17:37 sniper Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -203,7 +203,11 @@ AC_ARG_WITH(regex,
 [
   case $withval in 
     system)
-      REGEX_TYPE=system
+      if test "$PHP_SAPI" = "apache" || test "$PHP_SAPI" = "apache2filter"; then
+        REGEX_TYPE=php
+      else
+        REGEX_TYPE=system
+      fi
       ;;
     apache)
       REGEX_TYPE=apache

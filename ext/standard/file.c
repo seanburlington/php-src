@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.166 2001/07/05 23:29:11 elixer Exp $ */
+/* $Id: file.c,v 1.167 2001/07/15 19:03:03 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2257,7 +2257,7 @@ PHP_FUNCTION(fd_set)
 
 	if(ARG_COUNT(ht) <= 0) {
 			php_error(E_WARNING, "fd_set: Must be passed at least one value" );
-			var_uninit(return_value);
+			return_value->type = IS_NULL;
 			return;
 	}
 	else if(ARG_COUNT(ht) == 1) {

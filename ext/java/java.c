@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.46 2001/07/11 12:42:21 thies Exp $ */
+/* $Id: java.c,v 1.47 2001/07/15 19:03:03 zeev Exp $ */
 
 /*
  * This module implements Zend OO syntax overloading support for Java
@@ -552,7 +552,7 @@ static pval _java_getset_property
     0, (void **) &pobject);
   obj = zend_list_find((*pobject)->value.lval,&type);
   result = (jlong)(long) &presult;
-  var_uninit(&presult);
+  presult.type = IS_NULL;
 
   if (!obj || (type!=le_jobject)) {
     php_error(E_ERROR,

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/08/05 16:25:10 steinm Exp $
+dnl $Id: config.m4,v 1.3 1999/08/10 17:06:59 steinm Exp $
 
 AC_MSG_CHECKING(whether to include Pdflib 2.0 support)
 AC_ARG_WITH(pdflib,
@@ -13,7 +13,7 @@ echo $withval
     yes)
       AC_MSG_RESULT(yes)
       PHP_EXTENSION(pdf)
-      AC_CHECK_LIB(pdf, PDF_close, [AC_DEFINE(HAVE_PDFLIB) PDFLIB_LIBS="-lpdf"],
+      AC_CHECK_LIB(pdf, PDF_close, [AC_DEFINE(HAVE_PDFLIB) PDFLIB_LIBS="-lpdf -lz"],
         [AC_MSG_ERROR(pdflib extension requires pdflib 2.0.)])
       EXTRA_LIBS="$EXTRA_LIBS $PDFLIB_LIBS"
       ;;
@@ -24,7 +24,7 @@ echo $withval
         PHP_EXTENSION(pdf)
         old_LIBS=$LIBS
 
-        if test -z $ZLIB_LIBS; then
+        if test $HAVE_ZLIB; then
           old_withval=$withval
           AC_MSG_CHECKING([for zlib (needed by pdflib 2.0)])
           AC_ARG_WITH(zlib-dir,
@@ -39,12 +39,12 @@ echo $withval
             AC_MSG_RESULT(no)
             AC_MSG_WARN(If configure fails try --with-zlib=<DIR>)
           ])
+          withval=$old_withval
         else
           echo "checking for libz needed by pdflib 2.0... already zlib support"
           PDFLIB_LIBS="$ZLIB_LIBS"
-          LIBS="$LIBS $ZLIB_LIBS"
+          LIBS="$LIBS -lz"
         fi
-        withval=$old_withval
 
         LIBS="$LIBS -L$withval/lib"
         AC_CHECK_LIB(pdf, PDF_close, [AC_DEFINE(HAVE_PDFLIB) PDFLIB_LIBS="-L$withval/lib -lpdf"],

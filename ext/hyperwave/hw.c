@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.90 2001/08/05 01:42:35 zeev Exp $ */
+/* $Id: hw.c,v 1.91 2001/08/05 16:22:49 sas Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -3006,7 +3006,7 @@ PHP_FUNCTION(hw_output_document)
 		RETURN_FALSE;
 	}
 
-	php_write(ptr->data, ptr->size);
+	php_write(ptr->data, ptr->size TSRMLS_CC);
 
 	RETURN_TRUE;
 }

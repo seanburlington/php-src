@@ -1,5 +1,13 @@
 #!/bin/sh
-# $Id: buildconf,v 1.55 2002/07/20 14:33:09 sas Exp $
+# $Id: buildconf,v 1.56 2002/07/20 16:40:14 imajes Exp $
+
+acv=`autoconf --version | grep GNU |cut -d ' ' -f 4`     
+res=`expr $acv '>=' 2.5`
+
+if test $res = 1; then
+    echo "cleaning checkout to force rebuild, due to bad autoconf"
+    ./cvsclean
+fi
 
 while test $# -gt 0; do
     if test "$1" = "--copy"; then

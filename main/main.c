@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.462 2002/06/30 13:38:16 sander Exp $ */
+/* $Id: main.c,v 1.463 2002/07/01 09:00:00 sniper Exp $ */
 
 /* {{{ includes
  */
@@ -1357,13 +1357,11 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 		}
 
 		if(primary_file->filename) {			
-			char *realfile;
+			char realfile[MAXPATHLEN];
 			int dummy = 1;
-			realfile = emalloc(PATH_MAX);
-			if(realpath(primary_file->filename, realfile)) {
+			if(VCWD_REALPATH(primary_file->filename, realfile)) {
 				zend_hash_add(&EG(included_files), realfile, strlen(realfile)+1, (void *)&dummy, sizeof(int), NULL);
 			}
-			efree(realfile);
 		}
 
 		if (PG(auto_prepend_file) && PG(auto_prepend_file)[0]) {

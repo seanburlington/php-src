@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.33 2001/02/26 06:07:09 andi Exp $ */
+/* $Id: php_odbc.h,v 1.34 2001/03/09 23:44:55 fmk Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -207,6 +207,7 @@ PHP_FUNCTION(odbc_field_name);
 PHP_FUNCTION(odbc_field_type);
 PHP_FUNCTION(odbc_field_num);
 PHP_FUNCTION(odbc_free_result);
+PHP_FUNCTION(odbc_next_result);
 PHP_FUNCTION(odbc_num_fields);
 PHP_FUNCTION(odbc_num_rows);
 PHP_FUNCTION(odbc_prepare);

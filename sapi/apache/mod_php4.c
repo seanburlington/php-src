@@ -17,9 +17,13 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.129 2002/04/23 03:02:20 sniper Exp $ */
+/* $Id: mod_php4.c,v 1.130 2002/05/08 12:33:44 hirokawa Exp $ */
 
 #include "php_apache_http.h"
+
+#if defined(ZEND_MULTIBYTE) && defined(HAVE_MBSTRING)
+#include "ext/mbstring/mbstring.h"
+#endif /* defined(ZEND_MULTIBYTE) && defined(HAVE_MBSTRING) */
 
 #undef shutdown
 
@@ -459,6 +463,11 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 		fh.opened_path = NULL;
 		fh.free_filename = 0;
 		fh.type = ZEND_HANDLE_FILENAME;
+
+#if defined(ZEND_MULTIBYTE) && defined(HAVE_MBSTRING)
+		php_mbstring_set_zend_encoding(TSRMLS_C);
+#endif /* defined(ZEND_MULTIBYTE) && defined(HAVE_MBSTRING) */
+
 		zend_execute_scripts(ZEND_INCLUDE TSRMLS_CC, NULL, 1, &fh);
 		return OK;
 	}

@@ -86,7 +86,7 @@
  *
  */
 
-/* $Id: mbfilter.h,v 1.8 2002/04/30 12:00:41 hirokawa Exp $ */
+/* $Id: mbfilter.h,v 1.9 2002/05/08 12:30:47 hirokawa Exp $ */
 
 
 #ifndef MBFL_MBFILTER_H
@@ -460,6 +460,14 @@ mbfl_identify_encoding_no(mbfl_string *string, enum mbfl_no_encoding *elist, int
  */
 int
 mbfl_strlen(mbfl_string *string TSRMLS_DC);
+
+#ifdef ZEND_MULTIBYTE
+/*
+ * oddlen
+ */
+int
+mbfl_oddlen(mbfl_string *string);
+#endif /* ZEND_MULTIBYTE */
 
 /*
  * strpos

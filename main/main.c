@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.447 2002/05/02 01:58:12 yohgaki Exp $ */
+/* $Id: main.c,v 1.448 2002/05/08 12:33:41 hirokawa Exp $ */
 
 /* {{{ includes
  */
@@ -74,6 +74,10 @@
 #include "php_ticks.h"
 #include "php_logos.h"
 #include "php_streams.h"
+
+#if defined(ZEND_MULTIBYTE) && defined(HAVE_MBSTRING)
+#include "ext/mbstring/mbstring.h"
+#endif /* defined(ZEND_MULTIBYTE) && defined(HAVE_MBSTRING) */
 
 #include "SAPI.h"
 /* }}} */
@@ -1402,6 +1406,9 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 		} else {
 			append_file_p = NULL;
 		}
+#if defined(ZEND_MULTIBYTE) && defined(HAVE_MBSTRING)
+		php_mbstring_set_zend_encoding(TSRMLS_C);
+#endif /* ZEND_MULTIBYTE && HAVE_MBSTRING */
 		retval = (zend_execute_scripts(ZEND_REQUIRE TSRMLS_CC, NULL, 3, prepend_file_p, primary_file, append_file_p) == SUCCESS);
 	} zend_end_try();
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pspell.h,v 1.3 2000/07/24 01:39:48 david Exp $ */
+/* $Id: php_pspell.h,v 1.4 2000/07/25 22:09:52 vlad Exp $ */
 
 #ifndef _PSPELL_H
 #define _PSPELL_H
@@ -31,6 +31,10 @@ PHP_FUNCTION(pspell_mode);
 PHP_FUNCTION(pspell_runtogether);
 PHP_FUNCTION(pspell_check);
 PHP_FUNCTION(pspell_suggest);
+PHP_FUNCTION(pspell_store_replacement);
+PHP_FUNCTION(pspell_add_to_personal);
+PHP_FUNCTION(pspell_add_to_session);
+PHP_FUNCTION(pspell_clear_session);
 #else
 #define pspell_module_ptr NULL
 #endif

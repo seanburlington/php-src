@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.137.2.5 2004/12/03 02:26:36 iliaa Exp $ */
+/* $Id: php_mssql.c,v 1.137.2.6 2004/12/06 19:45:57 iliaa Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -800,10 +800,6 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 			char *data = charcol(offset);
 
 			length=dbdatlen(mssql_ptr->link,offset);
-			if (!length) {
-				ZVAL_EMPTY_STRING(result);
-				break;
-			}
 #if ilia_0
 			while (length>0 && data[length-1] == ' ') { /* nuke trailing whitespace */
 				length--;

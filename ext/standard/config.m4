@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 1999/04/25 04:03:36 rasmus Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.6 1999/09/21 15:00:22 sas Exp $ -*- sh -*-
 
 divert(1)
 
@@ -115,9 +115,9 @@ AC_CHECK_LIB(bind, inet_aton, [
   AC_DEFINE(HAVE_LIBBIND) ], []) 
 
 
-AC_CRYPT_CAP
-
 divert(3)
+
+AC_CRYPT_CAP
 
 PHP_EXTENSION(standard)
 

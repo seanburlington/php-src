@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_filter_api.h,v 1.8 2004/03/31 23:48:59 pollita Exp $ */
+/* $Id: php_stream_filter_api.h,v 1.9 2004/05/26 21:19:21 wez Exp $ */
 
 /* The filter API works on the principle of "Bucket-Brigades".  This is
  * partially inspired by the Apache 2 method of doing things, although
@@ -129,8 +129,8 @@ PHPAPI php_stream_filter *_php_stream_filter_alloc(php_stream_filter_ops *fops, 
 END_EXTERN_C()
 #define php_stream_filter_alloc(fops, thisptr, persistent) _php_stream_filter_alloc((fops), (thisptr), (persistent) STREAMS_CC TSRMLS_CC)
 #define php_stream_filter_alloc_rel(fops, thisptr, persistent) _php_stream_filter_alloc((fops), (thisptr), (persistent) STREAMS_REL_CC TSRMLS_CC)
-#define php_stream_fitler_prepend(chain, filter) _php_stream_filter_prepend((chain), (filter) TSRMLS_CC)
-#define php_stream_fitler_append(chain, filter) _php_stream_filter_append((chain), (filter) TSRMLS_CC)
+#define php_stream_filter_prepend(chain, filter) _php_stream_filter_prepend((chain), (filter) TSRMLS_CC)
+#define php_stream_filter_append(chain, filter) _php_stream_filter_append((chain), (filter) TSRMLS_CC)
 
 #define php_stream_is_filtered(stream)	((stream)->readfilters.head || (stream)->writefilters.head)
 

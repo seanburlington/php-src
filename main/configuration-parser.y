@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.21 1999/12/04 19:48:08 rubys Exp $ */
+/* $Id: configuration-parser.y,v 1.22 1999/12/08 22:22:19 zeev Exp $ */
 
 #define DEBUG_CFG_PARSER 1
 #include "php.h"
@@ -40,7 +40,6 @@
 #include "win32/wfile.h"
 #endif
 
-#undef YYSTYPE
 #define YYSTYPE pval
 
 #define PARSING_MODE_CFG 0

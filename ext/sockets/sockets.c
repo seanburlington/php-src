@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.28 2001/01/16 20:37:51 rasmus Exp $ */
+/* $Id: sockets.c,v 1.29 2001/01/18 20:49:12 sterling Exp $ */
 
 #include "php.h"
 
@@ -272,7 +272,7 @@ PHP_FUNCTION(fd_alloc)
 }
 /* }}} */
 
-/* {{{ proto bool fd_dealloc(void)
+/* {{{ proto bool fd_dealloc(int set)
    De-allocates a file descriptor set */
 PHP_FUNCTION(fd_dealloc)
 {

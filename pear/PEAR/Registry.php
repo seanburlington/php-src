@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.35.2.3 2003/04/11 23:48:38 ssb Exp $
+// $Id: Registry.php,v 1.35.2.4 2003/05/09 12:17:07 pajoye Exp $
 
 /*
 TODO:
@@ -485,7 +485,7 @@ class PEAR_Registry extends PEAR
             }
             $pkgs = array();
             foreach ($path as $name => $attrs) {
-                if (isset($attrs['baseinstalldir'])) {
+                if (is_array($attrs) && isset($attrs['baseinstalldir'])) {
                     $name = $attrs['baseinstalldir'].DIRECTORY_SEPARATOR.$name;
                 }
                 $pkgs[$name] = $this->checkFileMap($name);

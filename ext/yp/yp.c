@@ -16,7 +16,7 @@
    |          Fredrik Ohrn                                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.17 2001/03/19 17:01:35 ohrn Exp $ */
+/* $Id: yp.c,v 1.18 2001/03/20 12:50:26 sas Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -214,6 +214,7 @@ PHP_FUNCTION(yp_next) {
 static int php_foreach_all (int instatus, char *inkey, int inkeylen, char *inval, int invallen, char *indata)
 {
 	int r;
+	CLS_FETCH();
 
 	zval *status, *key, *value;
 	zval **args [3] = { &status, &key, &value };
@@ -227,8 +228,6 @@ static int php_foreach_all (int instatus, char *inkey, int inkeylen, char *inval
 
 	MAKE_STD_ZVAL (value);
 	ZVAL_STRINGL (value, inval, invallen, 1);
-
-	CLS_FETCH();
 
 	if(call_user_function_ex(CG(function_table), NULL, *((zval **)indata), &retval, 3, args, 0, NULL) != SUCCESS)
 	{

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.63.2.3 2004/12/30 14:52:28 sniper Exp $
+dnl $Id: config.m4,v 1.63.2.4 2005/01/11 04:56:44 sniper Exp $
 dnl
 
 AC_DEFUN([IMAP_INC_CHK],[if test -r "$i$1/c-client.h"; then
@@ -110,6 +110,12 @@ if test "$PHP_IMAP" != "no"; then
       fi
     done
 
+    dnl Check for c-client version 2004
+    AC_EGREP_HEADER(mail_fetch_overview_sequence, $IMAP_INC_DIR/mail.h, [
+      AC_DEFINE(HAVE_IMAP2004,1,[ ])
+    ])
+
+    dnl Check for c-client version 2001
     old_CPPFLAGS=$CPPFLAGS
     CPPFLAGS=-I$IMAP_INC_DIR
     AC_EGREP_CPP(this_is_true, [

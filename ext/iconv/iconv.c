@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.72 2003/01/03 05:32:13 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.73 2003/01/03 05:34:05 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1077,6 +1077,10 @@ static php_iconv_err_t _php_iconv_mime_encode(smart_str *pretval, const char *fn
 								goto out;
 
 							case E2BIG:
+								if (prev_in_left == in_left) {
+									err = PHP_ICONV_ERR_TOO_BIG;
+									goto out;
+								}
 								break;
 
 							default:

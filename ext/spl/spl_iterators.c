@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.67 2005/03/12 23:03:31 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.68 2005/03/31 21:49:47 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1823,7 +1823,7 @@ static zend_function_entry spl_funcs_AppendIterator[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ array iterator_to_array(IteratorAggregate it) 
+/* {{{ array iterator_to_array(Traversable it) 
    Copy the iterator into an array */
 PHP_FUNCTION(iterator_to_array)
 {
@@ -1834,7 +1834,7 @@ PHP_FUNCTION(iterator_to_array)
 	ulong                   int_key;
 	int                     key_type;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O", &obj, zend_ce_aggregate) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O", &obj, zend_ce_traversable) == FAILURE) {
 		RETURN_FALSE;
 	}
 	

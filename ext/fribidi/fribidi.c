@@ -12,11 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Onn Ben-Zvi <onn@zend.com>, onnb@mercury.co.il               |
+   | Authors: Onn Ben-Zvi <onnb@mercury.co.il>                            |
+   |          Tal Peer <tal@php.net>
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fribidi.c,v 1.15 2002/09/15 09:32:29 tal Exp $ */
+/* $Id: fribidi.c,v 1.16 2002/09/15 09:58:35 tal Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -236,7 +237,14 @@ PHP_FUNCTION(fribidi_log2vis)
 			fribidi_unicode_to_isiri_3342(u_visual_str, len , outString);
 			break;
 		default:
-			zend_error(E_ERROR,"unknown character set %d<br />", Z_LVAL_PP(parameter3));
+			php_error_docref(NULL TSRMLS_CC, E_ERROR, "Unknown charset");
+			efree(u_logical_str);
+			efree(u_visual_str);
+			efree(position_L_to_V_list);
+			efree(position_V_to_L_list);
+			efree(embedding_level_list);
+			efree(outString);
+			RETURN_FALSE;
 	}
 	
 

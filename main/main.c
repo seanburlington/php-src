@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.552 2003/05/13 02:26:42 sas Exp $ */
+/* $Id: main.c,v 1.553 2003/05/13 18:48:01 sas Exp $ */
 
 /* {{{ includes
  */
@@ -1594,6 +1594,9 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 #if HAVE_BROKEN_GETCWD
 			/* this looks nasty to me */
 			old_cwd_fd = open(".", 0);
+			if (old_cwd_fd == -1) {
+				zend_bailout();
+			}
 #else
 			VCWD_GETCWD(old_cwd, OLD_CWD_SIZE-1);
 #endif

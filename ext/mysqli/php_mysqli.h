@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.21 2003/09/06 19:34:48 helly Exp $ 
+  $Id: php_mysqli.h,v 1.22 2003/09/25 11:19:25 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -245,7 +245,7 @@ PHP_FUNCTION(mysqli_param_count);
 PHP_FUNCTION(mysqli_ping);
 PHP_FUNCTION(mysqli_prepare);
 PHP_FUNCTION(mysqli_query);
-PHP_FUNCTION(mysqli_prepare_result);
+PHP_FUNCTION(mysqli_get_metadata);
 PHP_FUNCTION(mysqli_profiler);
 PHP_FUNCTION(mysqli_read_query_result);
 PHP_FUNCTION(mysqli_real_connect);

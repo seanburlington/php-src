@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.58 2002/07/03 10:42:30 sas Exp $ */
+/* $Id: head.c,v 1.59 2002/07/08 12:52:22 derick Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -158,7 +158,7 @@ PHP_FUNCTION(setcookie)
 PHP_FUNCTION(headers_sent)
 {
 	if (ZEND_NUM_ARGS() != 0) {
-		php_error(E_WARNING, "%s() expects no parameters, %d given",
+		php_error(E_WARNING, "%s(): No parameters expected, %d given",
 				  get_active_function_name(TSRMLS_C), ZEND_NUM_ARGS());
 		return;
 	}

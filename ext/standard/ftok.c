@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ftok.c,v 1.4 2002/02/28 08:26:45 sebastian Exp $ */
+/* $Id: ftok.c,v 1.5 2002/07/08 12:52:22 derick Exp $ */
 
 #include "php.h"
 
@@ -41,12 +41,12 @@ PHP_FUNCTION(ftok)
     convert_to_string_ex(proj);
 
     if (Z_STRLEN_PP(pathname)==0){
-        php_error(E_WARNING, "Invalid argument 1 in ftok");
+        php_error(E_WARNING, "%s(): First argument invalid", get_active_function_name(TSRMLS_C));
         RETURN_LONG(-1);
     }
 
     if (Z_STRLEN_PP(proj)!=1){
-        php_error(E_WARNING, "Invalid argument 2 in ftok");
+        php_error(E_WARNING, "%s(): Second argument invalid", get_active_function_name(TSRMLS_C));
         RETURN_LONG(-1);
     }
 

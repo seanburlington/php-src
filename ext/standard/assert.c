@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.47 2002/02/28 08:26:44 sebastian Exp $ */
+/* $Id: assert.c,v 1.48 2002/07/08 12:52:22 derick Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -206,9 +206,9 @@ PHP_FUNCTION(assert)
 
 	if (ASSERTG(warning)) {
 		if (myeval) {
-			php_error(E_WARNING, "Assertion \"%s\" failed", myeval);
+			php_error(E_WARNING, "%s(): Assertion \"%s\" failed", get_active_function_name (TSRMLS_C), myeval);
 		} else {
-			php_error(E_WARNING, "Assertion failed");
+			php_error(E_WARNING, "%s(): Assertion failed", get_active_function_name (TSRMLS_C));
 		}
 	}
 
@@ -282,7 +282,7 @@ PHP_FUNCTION(assert_options)
 		break;
 
 	default:
-		php_error(E_WARNING, "Unknown value %d.", Z_LVAL_PP(what));
+		php_error(E_WARNING, "%s(): Unknown value %d", get_active_function_name (TSRMLS_C), Z_LVAL_PP(what));
 		break;
 	}
 

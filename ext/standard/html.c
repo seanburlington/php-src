@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.47 2002/06/03 18:26:27 rasmus Exp $ */
+/* $Id: html.c,v 1.48 2002/07/08 12:52:22 derick Exp $ */
 
 #include "php.h"
 #include "reg.h"
@@ -749,7 +749,8 @@ PHPAPI char *php_escape_html_entities(unsigned char *old, int oldlen, int *newle
 static void php_html_entities(INTERNAL_FUNCTION_PARAMETERS, int all)
 {
 	char *str, *hint_charset = NULL;
-	int str_len, hint_charset_len, len, quote_style = ENT_COMPAT;
+	int str_len, hint_charset_len = 0;
+	int len, quote_style = ENT_COMPAT;
 	char *replaced;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|ls", &str, &str_len,

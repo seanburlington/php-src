@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.146.2.8 2003/05/09 09:08:09 edink Exp $ */
+/* $Id: mod_php4.c,v 1.146.2.9 2003/05/17 08:06:52 sas Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -534,7 +534,7 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 	TSRMLS_FETCH();
 
 	if (AP(in_request)) {
-		zend_file_handle fh;
+		zend_file_handle fh = {0};
 
 		fh.filename = r->filename;
 		fh.opened_path = NULL;

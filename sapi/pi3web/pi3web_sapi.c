@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.46.2.2 2002/12/31 16:27:16 sebastian Exp $ */
+/* $Id: pi3web_sapi.c,v 1.46.2.3 2003/05/17 08:06:53 sas Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -78,7 +78,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.46.2.2 2002/12/31 16:27:16 sebastian Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.46.2.3 2003/05/17 08:06:53 sas Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -387,7 +387,7 @@ static sapi_module_struct pi3web_sapi_module = {
 
 DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 {
-	zend_file_handle file_handle;
+	zend_file_handle file_handle = {0};
 	int iRet = PIAPI_COMPLETED;
 	TSRMLS_FETCH();
 

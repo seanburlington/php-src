@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.15 2000/01/28 17:38:08 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.16 2000/01/29 11:55:43 zeev Exp $ */
 
 #include "zend.h"
 #include "php.h"
@@ -245,14 +245,14 @@ static void sapi_apache_register_server_variables(zval *track_vars_array ELS_DC 
 		} else {
 			val = empty_string;
 		}
-		php_register_variable(val, elts[i].key, NULL ELS_CC PLS_CC);
+		php_register_variable(elts[i].key, val, NULL ELS_CC PLS_CC);
 	}
 
 	/* insert special variables */
 	if (script_filename) {
-		php_register_variable(script_filename, "PATH_TRANSLATED", NULL ELS_CC PLS_CC);
+		php_register_variable("PATH_TRANSLATED", script_filename, NULL ELS_CC PLS_CC);
 	}
-	php_register_variable(((request_rec *) SG(server_context))->uri, "PHP_SELF", NULL ELS_CC PLS_CC);
+	php_register_variable("PHP_SELF", ((request_rec *) SG(server_context))->uri, NULL ELS_CC PLS_CC);
 }
 
 

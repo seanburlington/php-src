@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.166 2000/08/06 17:42:54 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.167 2000/08/07 13:24:06 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -114,6 +114,9 @@ AC_C_CONST
 if test "$ac_cv_c_const" = "yes" ; then
   LEX_CFLAGS="-DYY_USE_CONST"
 fi
+
+abs_srcdir=`(cd $srcdir; pwd)`
+abs_builddir=`pwd`
 
 sinclude(Zend/acinclude.m4)
 sinclude(Zend/Zend.m4)
@@ -410,9 +413,6 @@ fi
 divert(4)
 
 
-	
-abs_srcdir=`(cd $srcdir; pwd)`
-abs_builddir=`pwd`
 
 PHP_ARG_WITH(config-file-path,whether to use a configuration file,
 [  --with-config-file-path=PATH  

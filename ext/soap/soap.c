@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.84 2004/02/13 15:19:09 dmitry Exp $ */
+/* $Id: soap.c,v 1.85 2004/02/16 12:04:48 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1366,8 +1366,12 @@ PHP_METHOD(soapserver, handle)
 			soapHeader *h = header;
 
 			header = header->next;
-			if (h->mustUnderstand && service->sdl && !h->function && !h->hdr) {
-				soap_server_fault("MustUnderstand","Header not understood", NULL, NULL TSRMLS_CC);
+			if (service->sdl && !h->function && !h->hdr) {
+				if (h->mustUnderstand) {
+					soap_server_fault("MustUnderstand","Header not understood", NULL, NULL TSRMLS_CC);
+				} else {
+					continue;
+				}
 			}
 
 			fn_name = estrndup(Z_STRVAL(h->function_name),Z_STRLEN(h->function_name));

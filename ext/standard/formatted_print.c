@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.13 1999/12/18 04:01:14 zeev Exp $ */
+/* $Id: formatted_print.c,v 1.14 1999/12/18 22:35:27 zeev Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -378,7 +378,7 @@ php_formatted_print(int ht, int *len)
 	}
 	args = (pval ***)emalloc(argc * sizeof(pval *));
 
-	if (getParametersArrayEx(argc, args) == FAILURE) {
+	if (zend_get_parameters_array_ex(argc, args) == FAILURE) {
 		efree(args);
 		WRONG_PARAM_COUNT_WITH_RETVAL(NULL);
 	}

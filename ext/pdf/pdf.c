@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.19 1999/12/17 20:55:17 zeev Exp $ */
+/* $Id: pdf.c,v 1.20 1999/12/18 22:35:21 zeev Exp $ */
 
 /* pdflib 2.01 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -365,7 +365,7 @@ PHP_FUNCTION(pdf_open) {
 	PDF *pdf;
 	PDF_TLS_VARS;
 
-	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &file) == FAILURE) {
+	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &file) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.38 1999/12/18 04:01:15 zeev Exp $ */
+/* $Id: var.c,v 1.39 1999/12/18 22:35:28 zeev Exp $ */
 
 
 /* {{{ includes 
@@ -151,7 +151,7 @@ PHP_FUNCTION(var_dump)
 	argc = ARG_COUNT(ht);
 	
 	args = (zval ***)emalloc(argc * sizeof(zval **));
-	if (ARG_COUNT(ht) == 0 || getParametersArrayEx(argc, args) == FAILURE) {
+	if (ARG_COUNT(ht) == 0 || zend_get_parameters_array_ex(argc, args) == FAILURE) {
 		efree(args);
 		WRONG_PARAM_COUNT;
 	}
@@ -472,7 +472,7 @@ PHP_FUNCTION(serialize)
 {
 	pval **struc;
 
-	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &struc) == FAILURE) {
+	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &struc) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	return_value->type = IS_STRING;
@@ -490,7 +490,7 @@ PHP_FUNCTION(unserialize)
 {
 	pval **buf;
 	
-	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &buf) == FAILURE) {
+	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &buf) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 

@@ -15,7 +15,7 @@
    | Author: Bjørn Borud - Guardian Networks AS <borud@guardian.no>       |
    +----------------------------------------------------------------------+
  */
-/* $Id: soundex.c,v 1.8 1999/12/04 19:16:06 sas Exp $ */
+/* $Id: soundex.c,v 1.9 1999/12/18 22:35:28 zeev Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -61,7 +61,7 @@ PHP_FUNCTION(soundex)
 	 0,							/* Y */
 	 '2'};						/* Z */
 
-	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &parg) == FAILURE) {
+	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &parg) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(parg);

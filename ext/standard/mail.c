@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.13 1999/12/18 04:01:14 zeev Exp $ */
+/* $Id: mail.c,v 1.14 1999/12/18 22:35:27 zeev Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -62,7 +62,7 @@ PHP_FUNCTION(mail)
 	int argc;
 	
 	argc = ARG_COUNT(ht);
-	if (argc < 3 || argc > 4 || getParametersArrayEx(argc, argv) == FAILURE) {
+	if (argc < 3 || argc > 4 || zend_get_parameters_array_ex(argc, argv) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	/* To: */

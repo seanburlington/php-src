@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.14 1999/12/17 19:16:47 zeev Exp $ */
+/* $Id: link.c,v 1.15 1999/12/18 22:35:27 zeev Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -57,7 +57,7 @@ PHP_FUNCTION(readlink)
 	char buff[256];
 	int ret;
 
-	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &filename) == FAILURE) {
+	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &filename) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(filename);
@@ -83,7 +83,7 @@ PHP_FUNCTION(linkinfo)
 	struct stat sb;
 	int ret;
 
-	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &filename) == FAILURE) {
+	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &filename) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(filename);
@@ -107,7 +107,7 @@ PHP_FUNCTION(symlink)
 	int ret;
 	PLS_FETCH();
 
-	if (ARG_COUNT(ht) != 2 || getParametersEx(2, &topath, &frompath) == FAILURE) {
+	if (ARG_COUNT(ht) != 2 || zend_get_parameters_ex(2, &topath, &frompath) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(topath);
@@ -140,7 +140,7 @@ PHP_FUNCTION(link)
 	int ret;
 	PLS_FETCH();
 
-	if (ARG_COUNT(ht) != 2 || getParametersEx(2, &topath, &frompath) == FAILURE) {
+	if (ARG_COUNT(ht) != 2 || zend_get_parameters_ex(2, &topath, &frompath) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(topath);
@@ -172,7 +172,7 @@ PHP_FUNCTION(unlink)
 	int ret;
 	PLS_FETCH();
 	
-	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &filename) == FAILURE) {
+	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &filename) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(filename);

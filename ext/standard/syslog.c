@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.10 1999/12/17 20:55:24 zeev Exp $ */
+/* $Id: syslog.c,v 1.11 1999/12/18 22:35:28 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -205,7 +205,7 @@ PHP_FUNCTION(define_syslog_variables)
 PHP_FUNCTION(openlog)
 {
 	pval **ident, **option, **facility;
-	if (ARG_COUNT(ht) != 3 || getParametersEx(3, &ident, &option, &facility) == FAILURE) {
+	if (ARG_COUNT(ht) != 3 || zend_get_parameters_ex(3, &ident, &option, &facility) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(ident);
@@ -239,7 +239,7 @@ PHP_FUNCTION(syslog)
 {
 	pval **priority, **message;
 
-	if (ARG_COUNT(ht) != 2 || getParametersEx(2, &priority, &message) == FAILURE) {
+	if (ARG_COUNT(ht) != 2 || zend_get_parameters_ex(2, &priority, &message) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_long_ex(priority);

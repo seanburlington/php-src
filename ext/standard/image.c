@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.10 1999/12/18 04:01:14 zeev Exp $ */
+/* $Id: image.c,v 1.11 1999/12/18 22:35:27 zeev Exp $ */
 /* 
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -306,14 +306,14 @@ PHP_FUNCTION(getimagesize)
 	
 	switch(ARG_COUNT(ht)){
 	case 1:
-		if (getParametersEx(1, &arg1) == FAILURE) {
+		if (zend_get_parameters_ex(1, &arg1) == FAILURE) {
 			WRONG_PARAM_COUNT;
 		}
 		convert_to_string_ex(arg1);
 		break;
 
 	case 2:
-		if (getParametersEx(2, &arg1, &info) == FAILURE) {
+		if (zend_get_parameters_ex(2, &arg1, &info) == FAILURE) {
 			WRONG_PARAM_COUNT;
 		}
 		if (!ParameterPassedByReference(ht, 2)) {

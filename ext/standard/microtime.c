@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.10 1999/09/24 19:35:25 sas Exp $ */
+/* $Id: microtime.c,v 1.11 1999/12/18 22:35:28 zeev Exp $ */
 
 #include <stdlib.h>
 #ifdef HAVE_UNISTD_H
@@ -97,7 +97,7 @@ PHP_FUNCTION(getrusage)
 	int who = RUSAGE_SELF;
 
 	if(ac == 1 &&
-		getParametersEx(ac, &pwho) != FAILURE) {
+		zend_get_parameters_ex(ac, &pwho) != FAILURE) {
 		convert_to_long_ex(pwho);
 		if((*pwho)->value.lval == 1)
 			who = RUSAGE_CHILDREN;

@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.13 1999/12/18 04:01:14 zeev Exp $ */
+/* $Id: crypt.c,v 1.14 1999/12/18 22:35:27 zeev Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -129,12 +129,12 @@ PHP_FUNCTION(crypt)
 
 	switch (ARG_COUNT(ht)) {
 		case 1:
-			if (getParametersEx(1, &arg1)==FAILURE) {
+			if (zend_get_parameters_ex(1, &arg1)==FAILURE) {
 				RETURN_FALSE;
 			}
 			break;
 		case 2:
-			if (getParametersEx(2, &arg1, &arg2)==FAILURE) {
+			if (zend_get_parameters_ex(2, &arg1, &arg2)==FAILURE) {
 				RETURN_FALSE;
 			}
 			convert_to_string_ex(arg2);

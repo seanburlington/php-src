@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.22 1999/12/18 04:01:14 zeev Exp $ */
+/* $Id: dir.c,v 1.23 1999/12/18 22:35:27 zeev Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -76,7 +76,7 @@ static zend_class_entry *dir_class_entry_ptr;
 		} else { \
 			ZEND_FETCH_RESOURCE(dirp,php_dir *,0,DIR(default_dir), "Directory", le_dirp); \
 		} \
-	} else if ((ARG_COUNT(ht) != 1) || getParametersEx(1, &id) == FAILURE) { \
+	} else if ((ARG_COUNT(ht) != 1) || zend_get_parameters_ex(1, &id) == FAILURE) { \
 		WRONG_PARAM_COUNT; \
 	} else { \
 		ZEND_FETCH_RESOURCE(dirp,php_dir *,id,-1, "Directory", le_dirp); \
@@ -146,7 +146,7 @@ static void _php_do_opendir(INTERNAL_FUNCTION_PARAMETERS, int createobject)
 	php_dir *dirp;
 	DIRLS_FETCH();
 	
-	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &arg) == FAILURE) {
+	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(arg);
@@ -221,7 +221,7 @@ PHP_FUNCTION(chdir)
 	pval **arg;
 	int ret;
 	
-	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &arg) == FAILURE) {
+	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(arg);

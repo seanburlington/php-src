@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.214 2002/10/06 17:04:10 rasmus Exp $ */
+/* $Id: info.c,v 1.215 2002/10/09 14:39:39 cmv Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -191,7 +191,7 @@ void php_info_print_style(void)
 PHPAPI char *php_info_html_esc(char *string TSRMLS_DC)
 {
 	int new_len;
-	return php_escape_html_entities(string, strlen(string), &new_len, 1, ENT_COMPAT, NULL TSRMLS_CC);
+	return php_escape_html_entities(string, strlen(string), &new_len, 0, ENT_NOQUOTES, NULL TSRMLS_CC);
 }
 /* }}} */
 
@@ -277,6 +277,9 @@ PHPAPI char *php_get_uname(char mode)
  */
 PHPAPI void php_print_info_htmlhead(TSRMLS_D)
 {
+
+/*** none of this is needed now ***
+
 	const char *charset = NULL;
 
 	if (SG(default_charset)) {
@@ -303,12 +306,17 @@ PHPAPI void php_print_info_htmlhead(TSRMLS_D)
 		charset = "US-ASCII";
 	}
 
+*** none of that is needed now ***/
+
+
 	PUTS("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"DTD/xhtml1-transitional.dtd\">\n");
 	PUTS("<html>");
 	PUTS("<head>\n");
 	php_info_print_style();
 	PUTS("<title>phpinfo()</title>");
+/*
 	php_printf("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%s\" />\n", charset);
+*/
 	PUTS("</head>\n");
 	PUTS("<body><center>\n");
 }

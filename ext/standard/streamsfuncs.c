@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.13 2003/05/21 13:33:55 wez Exp $ */
+/* $Id: streamsfuncs.c,v 1.14 2003/06/02 16:36:10 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -334,6 +334,8 @@ PHP_FUNCTION(stream_get_meta_data)
 #endif
 	
 	add_assoc_long(return_value, "unread_bytes", stream->writepos - stream->readpos);
+
+	add_assoc_bool(return_value, "seekable", (stream->ops->seek) && (stream->flags & PHP_STREAM_FLAG_NO_SEEK) == 0);
 
 	if (!php_stream_populate_meta_data(stream, return_value)) {
 		add_assoc_bool(return_value, "timed_out", 0);

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.67 2003/10/25 21:08:33 helly Exp $ */
+/* $Id: simplexml.c,v 1.68 2003/10/25 21:28:01 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1086,7 +1086,13 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.67 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.68 $");
+	php_info_print_table_row(2, "Schema support", 
+#ifdef LIBXML_SCHEMAS_ENABLED
+		"enabled");
+#else
+		"not available");
+#endif
 	php_info_print_table_end();
 }
 /* }}} */

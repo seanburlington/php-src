@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.h,v 1.4 1999/09/23 17:54:26 askalski Exp $ */
+/* $Id: php_ftp.h,v 1.5 1999/09/27 14:07:09 askalski Exp $ */
 
 #ifndef	_INCLUDED_FTP_H
 #define	_INCLUDED_FTP_H
@@ -59,8 +59,13 @@ PHP_FUNCTION(ftp_rmdir);
 PHP_FUNCTION(ftp_nlist);
 PHP_FUNCTION(ftp_rawlist);
 PHP_FUNCTION(ftp_systype);
+PHP_FUNCTION(ftp_pasv);
 PHP_FUNCTION(ftp_get);
+PHP_FUNCTION(ftp_fget);
 PHP_FUNCTION(ftp_put);
+PHP_FUNCTION(ftp_fput);
+PHP_FUNCTION(ftp_size);
+PHP_FUNCTION(ftp_mdtm);
 PHP_FUNCTION(ftp_quit);
 
 #define phpext_ftp_ptr php3_ftp_module_ptr

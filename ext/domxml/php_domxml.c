@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.61 2001/08/14 07:14:23 sniper Exp $ */
+/* $Id: php_domxml.c,v 1.62 2001/08/14 07:34:20 joey Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -697,7 +697,7 @@ static zval *php_domobject_new(xmlNodePtr obj, int *found TSRMLS_DC)
 				add_property_stringl(wrapper, "content", (char *) content, strlen(content), 1);
 			break;
 		}
-	
+
 		case XML_COMMENT_NODE:
 		{
 			xmlNodePtr nodep = obj;
@@ -732,7 +732,7 @@ static zval *php_domobject_new(xmlNodePtr obj, int *found TSRMLS_DC)
 				add_property_stringl(wrapper, "content", (char *) content, strlen(content), 1);
 			break;
 		}
-	
+
 		case XML_ENTITY_DECL:
 		case XML_ELEMENT_DECL:
 		{
@@ -1114,7 +1114,7 @@ PHP_FUNCTION(domxml_node_name)
 		case XML_CDATA_SECTION_NODE:
 			str = "#cdata-section";
 			break;
-	
+
 		case XML_ENTITY_REF_NODE:
 			str = n->name;
 			break;
@@ -2681,10 +2681,10 @@ static void php_xpathptr_eval(INTERNAL_FUNCTION_PARAMETERS, int mode, int expr)
 	add_property_long(rv, "type", xpathobjp->type);
 
 	switch (xpathobjp->type) {
-	
+
 		case XPATH_UNDEFINED:
 			break;
-	
+
 		case XPATH_NODESET:
 		{
 			int i;
@@ -2729,16 +2729,16 @@ static void php_xpathptr_eval(INTERNAL_FUNCTION_PARAMETERS, int mode, int expr)
 
 		case XPATH_POINT:
 			break;
-	
+
 		case XPATH_RANGE:
 			break;
-	
+
 		case XPATH_LOCATIONSET:
 			break;
-	
+
 		case XPATH_USERS:
 			break;
-	
+
 		case XPATH_XSLT_TREE:
 			break;
 	}

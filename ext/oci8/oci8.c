@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.183.2.11 2004/02/03 14:22:34 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.183.2.12 2004/02/05 08:30:17 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -641,7 +641,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.11 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.12 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -3118,11 +3118,11 @@ PHP_FUNCTION(ocisavelob)
 
 			if (offparam == -1) {
 				offset = curloblen;
-			} else if (offparam >= curloblen) {
+			} else if ((ub4)offparam >= curloblen) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset is bigger than current LOB-Size - appending");
 				offset = curloblen;
 			} else {
-				offset = offparam;
+				offset = (ub4)offparam;
 			}
 		} else if (zend_get_parameters_ex(1, &arg) == FAILURE) {
 			WRONG_PARAM_COUNT;
@@ -3136,6 +3136,10 @@ PHP_FUNCTION(ocisavelob)
 			RETURN_FALSE;
 		}
 
+		if (offset <= 0) {
+			offset = 1;
+		}
+		
 		CALL_OCI_RETURN(connection->error, OCILobWrite(
 					connection->pServiceContext, 
 					connection->pError,

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2001/06/12 21:15:49 hholzgra Exp $
+dnl $Id: config.m4,v 1.2 2001/09/17 16:24:11 hholzgra Exp $
 dnl config.m4 for extension ncurses
 
 PHP_ARG_WITH(ncurses, for ncurses support,
@@ -39,6 +39,11 @@ if test "$PHP_NCURSES" != "no"; then
   
    PHP_SUBST(NCURSES_SHARED_LIBADD)
    PHP_ADD_LIBRARY_WITH_PATH($LIBNAME, $NCURSES_DIR/lib, SAPRFC_SHARED_LIBADD)
+
+	 AC_CHECK_LIB(ncurses, color_set,   [AC_DEFINE(HAVE_NCURSES_COLOR_SET,  1, [ ])])
+	 AC_CHECK_LIB(ncurses, slk_color,   [AC_DEFINE(HAVE_NCURSES_SLK_COLOR,  1, [ ])])
+	 AC_CHECK_LIB(ncurses, use_extended_names,   [AC_DEFINE(HAVE_NCURSES_USE_EXTENDED_NAMES,  1, [ ])])
+
 
   PHP_EXTENSION(ncurses, $ext_shared)
 fi

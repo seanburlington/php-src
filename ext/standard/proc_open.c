@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.2 2003/01/15 18:54:03 wez Exp $ */
+/* $Id: proc_open.c,v 1.3 2003/01/24 16:45:34 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -216,7 +216,7 @@ PHP_FUNCTION(proc_get_status)
 	array_init(return_value);
 
 	add_assoc_string(return_value, "command", proc->command, 1);
-	add_assoc_long(return_value, "pid", proc->child);
+	add_assoc_long(return_value, "pid", (long) proc->child);
 	
 #ifdef PHP_WIN32
 	

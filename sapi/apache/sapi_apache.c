@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.2 1999/10/30 14:22:10 rasmus Exp $ */
+/* $Id: sapi_apache.c,v 1.3 1999/12/04 13:25:39 zeev Exp $ */
 
 #include "php.h"
 
@@ -71,6 +71,7 @@ PHPAPI int apache_php_module_main(request_rec *r, int fd, int display_source_mod
 	file_handle.type = ZEND_HANDLE_FD;
 	file_handle.handle.fd = fd;
 	file_handle.filename = SG(request_info).path_translated;
+	file_handle.free_filename = 0;
 
 	if (display_source_mode) {
 		zend_syntax_highlighter_ini syntax_highlighter_ini;

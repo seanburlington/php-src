@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: ErrorStack.php,v 1.6 2004/05/23 06:06:10 cellog Exp $
+// $Id: ErrorStack.php,v 1.7 2004/06/12 05:36:40 cellog Exp $
 
 /**
  * Error Stack Implementation
@@ -595,6 +595,7 @@ class PEAR_ErrorStack {
             }
             $ret = new $exception($msg, $code);
             $ret->errorData = $err;
+            return $ret;
         }
         return $err;
     }

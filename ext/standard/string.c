@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.140 2000/07/22 01:12:24 david Exp $ */
+/* $Id: string.c,v 1.141 2000/07/26 11:43:01 eschmid Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -227,8 +227,8 @@ PHP_FUNCTION(ltrim)
 /* }}} */
 
 
-/* {{{ proto string wordwrap(string str[, int width[, string break]])
- * wrap buffer to selected number of characters using string break char */
+/* {{{ proto string wordwrap(string str [, int width [, string break]])
+ * Wrap buffer to selected number of characters using string break char */
 PHP_FUNCTION(wordwrap)
 {
 	pval **ptext, **plinelength, **pbreakchar;
@@ -2322,7 +2322,7 @@ PHP_FUNCTION(setlocale)
 /* }}} */
 
 /* {{{ proto void parse_str(string encoded_string)
-   Parses GET/POST/COOKIE data and sets global variables. */
+   Parses GET/POST/COOKIE data and sets global variables */
 PHP_FUNCTION(parse_str)
 {
 	zval **arg;

@@ -2,10 +2,8 @@
 InterBase: BLOB test
 --SKIPIF--
 <?php include("skipif.inc"); ?>
---POST--
---GET--
 --FILE--
-<?php /* $Id: 004.phpt,v 1.13 2004/04/03 11:04:21 abies Exp $ */
+<?php /* $Id: 004.phpt,v 1.14 2004/05/19 08:54:52 helly Exp $ */
 
     require("interbase.inc");
     

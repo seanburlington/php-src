@@ -2,10 +2,8 @@
 InterBase: binding (may take a while)
 --SKIPIF--
 <?php include("skipif.inc"); ?>
---POST--
---GET--
 --FILE--
-<?php /* $Id: 006.phpt,v 1.9 2004/04/01 16:42:25 abies Exp $ */
+<?php /* $Id: 006.phpt,v 1.10 2004/05/19 08:54:52 helly Exp $ */
 
 	require("interbase.inc");
 	

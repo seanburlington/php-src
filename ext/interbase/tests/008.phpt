@@ -5,10 +5,8 @@ InterBase: event handling
 if (PHP_OS == "WINNT") echo "skip";
 include("skipif.inc"); 
 ?>
---POST--
---GET--
 --FILE--
-<?php /* $Id: 008.phpt,v 1.2 2004/04/03 15:29:10 abies Exp $ */
+<?php /* $Id: 008.phpt,v 1.3 2004/05/19 08:54:52 helly Exp $ */
 
 require("interbase.inc");
 

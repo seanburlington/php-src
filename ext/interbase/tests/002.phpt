@@ -2,10 +2,8 @@
 InterBase: connect, close and pconnect
 --SKIPIF--
 <?php include("skipif.inc"); ?>
---POST--
---GET--
 --FILE--
-<?php /* $Id: 002.phpt,v 1.5 2004/04/01 16:25:51 abies Exp $ */
+<?php /* $Id: 002.phpt,v 1.6 2004/05/19 08:54:52 helly Exp $ */
 
 	require("interbase.inc");
     

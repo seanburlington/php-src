@@ -2,10 +2,8 @@
 InterBase: array handling
 --SKIPIF--
 <?php include("skipif.inc"); ?>
---POST--
---GET--
 --FILE--
-<?php /* $Id: 007.phpt,v 1.2 2003/09/05 17:02:02 abies Exp $ */
+<?php /* $Id: 007.phpt,v 1.3 2004/05/19 08:54:52 helly Exp $ */
 
 	require("interbase.inc");
 	

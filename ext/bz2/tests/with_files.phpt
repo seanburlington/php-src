@@ -2,10 +2,8 @@
 BZ2 with files
 --SKIPIF--
 <?php if (!extension_loaded("bz2")) print "skip"; ?>
---POST--
---GET--
 --FILE--
-<?php // $Id: with_files.phpt,v 1.1 2003/05/17 14:27:07 sterling Exp $
+<?php // $Id: with_files.phpt,v 1.2 2004/05/19 08:56:50 helly Exp $
 
 error_reporting(E_ALL);
 

@@ -2,10 +2,8 @@
 InterBase: transactions
 --SKIPIF--
 <?php include("skipif.inc"); ?>
---POST--
---GET--
 --FILE--
-<?php /* $Id: 005.phpt,v 1.7 2004/04/01 16:25:51 abies Exp $ */
+<?php /* $Id: 005.phpt,v 1.8 2004/05/19 08:54:52 helly Exp $ */
 
     require("interbase.inc");
     

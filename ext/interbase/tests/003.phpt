@@ -2,10 +2,8 @@
 InterBase: misc sql types (may take a while)
 --SKIPIF--
 <?php include("skipif.inc"); ?>
---POST--
---GET--
 --FILE--
-<?php /* $Id: 003.phpt,v 1.7 2004/04/01 18:23:45 abies Exp $ */
+<?php /* $Id: 003.phpt,v 1.8 2004/05/19 08:54:52 helly Exp $ */
 
     require("interbase.inc");
     ibase_connect($test_base);

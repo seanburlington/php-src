@@ -2,10 +2,8 @@
 BZ2 with strings
 --SKIPIF--
 <?php if (!extension_loaded("bz2")) print "skip"; ?>
---POST--
---GET--
 --FILE--
-<?php // $Id: with_strings.phpt,v 1.2 2003/08/18 22:57:49 iliaa Exp $
+<?php // $Id: with_strings.phpt,v 1.3 2004/05/19 08:56:50 helly Exp $
 
 error_reporting(E_ALL);
 

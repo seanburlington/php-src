@@ -1,7 +1,7 @@
-// $Id: config.w32,v 1.1 2004/07/13 17:01:30 rrichards Exp $
+// $Id: config.w32,v 1.2 2004/07/29 20:43:00 edink Exp $
 // vim:ft=javascript
 
-ARG_WITH("xmlwriter", "XMLWriter support", "yes");
+ARG_WITH("xmlwriter", "XMLWriter support", "no");
 
 if (PHP_XMLWRITER == "yes" && PHP_LIBXML == "yes") {
 	EXTENSION("xmlwriter", "php_xmlwriter.c");

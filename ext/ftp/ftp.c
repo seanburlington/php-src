@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.92 2003/09/18 17:36:08 pollita Exp $ */
+/* $Id: ftp.c,v 1.93 2003/09/18 17:51:55 pollita Exp $ */
 
 #include "php.h"
 
@@ -616,7 +616,7 @@ ftp_alloc(ftpbuf_t *ftp, const int size, char **response)
 		return 0;
 	}
 
-	snprintf(buffer, 64, "%d", size);
+	snprintf(buffer, sizeof(buffer) - 1, "%d", size);
 
 	if (!ftp_putcmd(ftp, "ALLO", buffer)) {
 		return 0;

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.58 2002/08/09 00:33:06 imajes Exp $ */
+/* $Id: streams.c,v 1.59 2002/08/10 20:20:55 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1006,7 +1006,6 @@ PHPAPI int _php_stream_cast(php_stream *stream, int castas, void **ret, int show
 		static const char *cast_names[3] = {
 			"STDIO FILE*", "File Descriptor", "Socket Descriptor"
 		};
-		TSRMLS_FETCH();
 
 		zend_error(E_WARNING, "%s(): cannot represent a stream of type %s as a %s",
 			get_active_function_name(TSRMLS_C),

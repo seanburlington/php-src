@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.101 2003/01/10 13:32:24 wez Exp $ */
+/* $Id: math.c,v 1.102 2003/01/16 13:19:50 edink Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -1011,7 +1011,7 @@ PHPAPI char *_php_math_number_format(double d, int dec, char dec_point, char tho
 
 	/* allow for thousand separators */
 	if (thousand_sep) {
-		integral += integral / 3;
+		integral += (integral-1) / 3;
 	}
 	
 	reslen = integral;

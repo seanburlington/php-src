@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.28.2.4 2003/10/26 03:42:27 moriyoshi Exp $
+dnl $Id: config.m4,v 1.28.2.5 2003/10/27 17:50:07 moriyoshi Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -53,6 +53,7 @@ AC_DEFUN([PHP_MBSTRING_SETUP_MBREGEX], [
     AC_DEFINE([HAVE_MBREGEX], 1, [whether to have multibyte regex support])
 
     PHP_MBSTRING_ADD_INCLUDE([mbregex])
+    PHP_MBSTRING_ADD_BUILD_DIR([mbregex])
 
     PHP_MBSTRING_ADD_SOURCES([
       php_mbregex.c

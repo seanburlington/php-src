@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.13 1999/09/05 19:36:04 andi Exp $ */
+/* $Id: internal_functions_win32.c,v 1.14 1999/10/20 19:16:16 andi Exp $ */
 
 
 #include "php.h"
@@ -45,7 +45,7 @@
 #include "ext/standard/php3_syslog.h"
 #include "ext/standard/php3_standard.h"
 #include "ext/standard/php_lcg.h"
-#include "ext/COM/php3_COM.h"
+#include "ext/COM/php_COM.h"
 #include "ext/standard/reg.h"
 #include "ext/pcre/php_pcre.h"
 #include "ext/odbc/php_odbc.h"

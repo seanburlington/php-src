@@ -1,10 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.15 2004/03/09 12:01:23 georg Exp $
+dnl $Id: config.m4,v 1.16 2004/03/31 21:11:23 derick Exp $
 dnl config.m4 for extension mysqli
 
 PHP_ARG_WITH(mysqli, for MySQLi support,
-[  --with-mysqli[=FILE]    Include MySQLi support. FILE is the optional 
-                          pathname to mysql_config.])
+[  --with-mysqli[=FILE]    Include MySQLi support. FILE is the optional pathname 
+                        to mysql_config.])
 
 PHP_ARG_ENABLE(embedded_mysqli, whether to enable embedded MySQLi support,
 [  --enable-embedded-mysqli  MYSQLi: Enable embedded support.], no, no)

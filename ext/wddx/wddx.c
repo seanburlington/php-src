@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.48 2000/06/23 17:00:47 sas Exp $ */
+/* $Id: wddx.c,v 1.49 2000/06/23 23:13:35 zeev Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -389,6 +389,7 @@ static void php_wddx_serialize_object(wddx_packet *packet, zval *obj)
 	ulong idx;
 	char tmp_buf[WDDX_BUF_LEN];
 	CLS_FETCH();
+	BLS_FETCH();
 
 	MAKE_STD_ZVAL(fname);
 	ZVAL_STRING(fname, "__sleep", 1);

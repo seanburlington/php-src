@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.562 2003/01/15 18:54:02 wez Exp $ */
+/* $Id: basic_functions.c,v 1.563 2003/01/18 15:03:00 andrey Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -548,7 +548,7 @@ function_entry basic_functions[] = {
 	PHP_FE(debug_zval_dump,														NULL)
 	PHP_FE(print_r,															NULL)
 #if MEMORY_LIMIT 
-	PHP_FE(get_memory_usage,												NULL)
+	PHP_FE(memory_get_usage,												NULL)
 #endif
 
 	PHP_FE(register_shutdown_function,										NULL)

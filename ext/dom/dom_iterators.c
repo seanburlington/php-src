@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_iterators.c,v 1.7 2004/02/17 11:13:47 rrichards Exp $ */
+/* $Id: dom_iterators.c,v 1.8 2004/03/08 21:15:39 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -130,7 +130,7 @@ static void php_dom_iterator_dtor(zend_object_iterator *iter TSRMLS_DC)
 	efree(iterator);
 }
 
-static int php_dom_iterator_has_more(zend_object_iterator *iter TSRMLS_DC)
+static int php_dom_iterator_valid(zend_object_iterator *iter TSRMLS_DC)
 {
 
 	php_dom_iterator *iterator = (php_dom_iterator *)iter;
@@ -243,7 +243,7 @@ static void php_dom_iterator_move_forward(zend_object_iterator *iter TSRMLS_DC)
 
 zend_object_iterator_funcs php_dom_iterator_funcs = {
 	php_dom_iterator_dtor,
-	php_dom_iterator_has_more,
+	php_dom_iterator_valid,
 	php_dom_iterator_current_data,
 	php_dom_iterator_current_key,
 	php_dom_iterator_move_forward,

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.188 2003/09/23 23:08:59 abies Exp $ */
+/* $Id: interbase.c,v 1.189 2003/09/26 10:06:22 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,7 @@
 
 #include "php.h"
 
-#define FILE_REVISION "$Revision: 1.188 $"
+#define FILE_REVISION "$Revision: 1.189 $"
 
 #if HAVE_IBASE
 
@@ -2068,7 +2068,7 @@ PHP_FUNCTION(ibase_trans)
 				convert_to_long_ex(args[i]);
 				trans_argl = Z_LVAL_PP(args[i]);
 
-				if (trans_argl) {
+				if (trans_argl != PHP_IBASE_DEFAULT) {
 					last_tpb[tpb_len++] = isc_tpb_version3;
 
 					/* access mode */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.166 2003/03/04 17:10:29 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.167 2003/03/05 06:16:22 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -920,6 +920,9 @@ PHP_MINFO_FUNCTION(mbstring)
 #endif
 #if defined(HAVE_MBSTR_KR)
 	php_info_print_table_row(2, "Korean support", "enabled");	
+#endif
+#if defined(HAVE_MBSTR_RU)
+	php_info_print_table_row(2, "Russian support", "enabled");	
 #endif
 	if (MBSTRG(encoding_translation)) {
 		php_info_print_table_row(2, "HTTP input encoding translation", "enabled");	

@@ -1,3 +1,62 @@
+2003-03-06  David Hill  <David.Hill@hp.com>
+
+    * ext/bz2/bz2.c
+      ext/dio/dio.c
+      ext/domxml/php_domxml.c
+      ext/fdf/fdf.c
+      ext/ftp/php_ftp.c
+      ext/iconv/iconv.c
+      ext/ldap/ldap.c
+      ext/mcrypt/mcrypt.c
+      ext/mhash/mhash.c
+      ext/openssl/openssl.c
+      ext/pgsql/pgsql.c
+      ext/posix/posix.c
+      ext/sockets/sockets.c
+      ext/standard/fsock.c
+      ext/standard/head.c
+      ext/standard/html.c
+      ext/standard/metaphone.c
+      ext/standard/string.c
+      ext/sysvsem/sysvsem.c
+      ext/zip/zip.c
+      ext/zlib/zlib.c
+      main/output.c:
+      64-bit correction to variables passed to zend_parse_parameters
+
+2003-03-06  Stefan Esser  <s.esser@e-matters.de>
+
+    * ext/cyrus/cyrus.c
+      ext/db/db.c
+      ext/domxml/php_domxml.c
+      ext/fbsql/php_fbsql.c
+      ext/gd/libgd/gdtestft.c
+      ext/ming/ming.c
+      ext/msession/msession.c
+      ext/standard/basic_functions.c
+      ext/standard/file.c
+      ext/xslt/sablot.c
+      ext/zlib/zlib.c
+      main/main.c
+      main/streams/streams.c
+      sapi/servlet/servlet.c:
+      Fixing functionicalls with variable number of parameters...
+
+2003-03-06  Moriyoshi Koizumi  <moriyoshi@at.wakwak.com>
+
+    * tests/lang/bug19943.phpt:
+      Further testing on this feature should have been done...
+
+    * tests/classes/abstract_class.phpt
+      tests/classes/abstract_inherit.phpt:
+      Fixed typo
+
+2003-03-06  Jani Taskinen  <sniper@iki.fi>
+
+    * tests/lang/bug19943.phpt:
+      
+      added test for the memleak part from bug #19943
+
 2003-03-05  Sascha Schumann  <sascha@schumann.cx>
 
     * acinclude.m4:
@@ -1161,7 +1220,7 @@
 
     * sapi/apache/libpre.c
       sapi/apache/php_apache_http.h:
-      Added missing headers and $Id: ChangeLog,v 1.1286 2003/03/06 01:33:04 changelog Exp $ tags.
+      Added missing headers and $Id: ChangeLog,v 1.1287 2003/03/07 01:32:22 changelog Exp $ tags.
 
     * sapi/cgi/config9.m4:
       MFB: Fixed bug #22356 (Do not add empty -I flags).
@@ -1720,7 +1779,7 @@
       main/streams/plain_wrapper.c
       main/streams/streams.c
       main/streams/userspace.c:
-      ws fixes + missing $Id: ChangeLog,v 1.1286 2003/03/06 01:33:04 changelog Exp $ tags, headers added
+      ws fixes + missing $Id: ChangeLog,v 1.1287 2003/03/07 01:32:22 changelog Exp $ tags, headers added
 
 2003-02-19  Corne' Cornelius  <cornec@reach.co.za>
 
@@ -2638,7 +2697,7 @@
 
     * (PHP_4_3)
       sapi/cgi/cgi_main.c:
-      Added missing $Id: ChangeLog,v 1.1286 2003/03/06 01:33:04 changelog Exp $ tag
+      Added missing $Id: ChangeLog,v 1.1287 2003/03/07 01:32:22 changelog Exp $ tag
 
 2003-02-14  Thies C. Arntzen  <thies@thieso.net>
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.77 2000/12/22 16:31:42 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.78 2000/12/27 13:59:40 andrei Exp $ */
 
 /*
 	TODO:
@@ -1084,7 +1084,7 @@ PHP_FUNCTION(preg_split)
 
 	/* Get function parameters and do error checking */	
 	argc = ZEND_NUM_ARGS();
-	if (argc < 1 || argc > 4 || zend_get_parameters_ex(argc, &regex, &subject, &limit, &flags) == FAILURE) {
+	if (argc < 2 || argc > 4 || zend_get_parameters_ex(argc, &regex, &subject, &limit, &flags) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	

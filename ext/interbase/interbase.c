@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.41 2000/07/09 10:27:41 jah Exp $ */
+/* $Id: interbase.c,v 1.42 2000/07/09 10:30:52 jah Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -55,10 +55,10 @@ A lot... */
 #define SQL_DIALECT_CURRENT 1
 #endif
 
-#define IBDEBUG(a) php_printf("::: %s (%d)\n", a, __LINE__);
 /*
-#define IBDEBUG(a)
+#define IBDEBUG(a) php_printf("::: %s (%d)\n", a, __LINE__);
 */
+#define IBDEBUG(a)
 
 #define SAFE_STRING(s) ((s)?(s):"")
 
@@ -579,7 +579,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.41 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.42 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

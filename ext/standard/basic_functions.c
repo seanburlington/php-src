@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.271 2000/10/29 11:38:24 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.272 2000/10/29 22:42:01 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -2314,6 +2314,49 @@ PHP_FUNCTION(move_uploaded_file)
 		php_error(E_WARNING, "Unable to move '%s' to '%s'", Z_STRVAL_PP(path), Z_STRVAL_PP(new_path));
 	}
 	RETURN_BOOL(successful);
+}
+/* }}} */
+
+
+
+static void php_simple_ini_parser_cb(zval *arg1, zval *arg2, int callback_type, zval *arr)
+{
+	zval *element;
+
+	switch (callback_type) {
+		case ZEND_INI_PARSER_ENTRY:
+			ALLOC_ZVAL(element);
+			*element = *arg2;
+			zval_copy_ctor(element);
+			INIT_PZVAL(element);
+			zend_hash_update(arr->value.ht, Z_STRVAL_P(arg1), Z_STRLEN_P(arg1)+1, &element, sizeof(zval *), NULL);
+			break;
+		case ZEND_INI_PARSER_SECTION:
+			break;
+	}
+}
+
+
+/* {{{ proto void parse_ini_file(string filename)
+   Parse configuration file */
+PHP_FUNCTION(parse_ini_file)
+{
+	zval **filename;
+	zend_file_handle fh;
+
+	if (ARG_COUNT(ht)!=1 || zend_get_parameters_ex(1, &filename)==FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+	convert_to_string_ex(filename);
+	fh.handle.fp = V_FOPEN((*filename)->value.str.val, "r");
+	if (!fh.handle.fp) {
+		php_error(E_WARNING,"Cannot open '%s' for reading", (*filename)->value.str.val);
+		return;
+	}
+	fh.type = ZEND_HANDLE_FP;
+	array_init(return_value);
+	zend_parse_ini_file(&fh, (zend_ini_parser_cb_t) php_simple_ini_parser_cb, return_value);
+
 }
 /* }}} */
 

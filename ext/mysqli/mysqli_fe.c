@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.4 2003/02/13 00:11:17 georg Exp $ 
+  $Id: mysqli_fe.c,v 1.5 2003/02/16 12:03:37 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -105,6 +105,7 @@ function_entry mysqli_functions[] = {
 	PHP_FE(mysqli_slave_query,							NULL)
 	PHP_FE(mysqli_ssl_set,								NULL)
 	PHP_FE(mysqli_stat,									NULL)
+	PHP_FE(mysqli_stmt_affected_rows,					NULL)
 	PHP_FE(mysqli_stmt_close,							NULL)
 	PHP_FE(mysqli_stmt_errno,							NULL)
 	PHP_FE(mysqli_stmt_error,							NULL)
@@ -211,6 +212,7 @@ function_entry mysqli_stmt_methods[] = {
 	PHP_FALIAS(fetch,mysqli_fetch,NULL)
 	PHP_FALIAS(param_count,mysqli_param_count,NULL)
 	PHP_FALIAS(send_long_data,mysqli_send_long_data,NULL)
+	PHP_FALIAS(affected_rows,mysqli_stmt_affected_rows,NULL)
 	PHP_FALIAS(close,mysqli_stmt_close,NULL)
 	PHP_FALIAS(errno,mysqli_stmt_errno,NULL)
 	PHP_FALIAS(error,mysqli_stmt_error,NULL)

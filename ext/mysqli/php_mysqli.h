@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.6 2003/02/14 21:27:13 iliaa Exp $ 
+  $Id: php_mysqli.h,v 1.7 2003/02/16 12:03:37 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -216,6 +216,7 @@ PHP_FUNCTION(mysqli_send_query);
 PHP_FUNCTION(mysqli_slave_query);
 PHP_FUNCTION(mysqli_ssl_set);
 PHP_FUNCTION(mysqli_stat);
+PHP_FUNCTION(mysqli_stmt_affected_rows);
 PHP_FUNCTION(mysqli_stmt_close);
 PHP_FUNCTION(mysqli_stmt_errno);
 PHP_FUNCTION(mysqli_stmt_error);

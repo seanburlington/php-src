@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.361 2002/07/17 21:56:40 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.362 2002/07/20 01:28:56 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -892,7 +892,7 @@ AC_SUBST(EXPANDED_SYSCONFDIR)
 AC_SUBST(EXPANDED_LOCALSTATEDIR)
 AC_SUBST(EXPANDED_PHP_CONFIG_FILE_PATH)
 
-PHP_BUILD_RPATH
+PHP_UTILIZE_RPATHS
 
 PHP_REMOVE_USR_LIB(PHP_LDFLAGS)
 PHP_REMOVE_USR_LIB(LDFLAGS)

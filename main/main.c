@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.204 2000/02/11 21:14:42 andrei Exp $ */
+/* $Id: main.c,v 1.205 2000/02/13 00:26:53 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -625,7 +625,6 @@ int php_request_startup(CLS_D ELS_DC PLS_DC SLS_DC)
 
 	/* initialize global variables */
 	PG(header_is_being_sent) = 0;
-	PG(already_in_shutdown) = 0;
 	
 	zend_activate(CLS_C ELS_CC);
 	sapi_activate(SLS_C);	
@@ -664,10 +663,7 @@ void php_request_shutdown(void *dummy)
 	sapi_send_headers();
 	php_end_ob_buffering(SG(request_info).headers_only?0:1);
 
-	if (!PG(already_in_shutdown)) {
-		PG(already_in_shutdown) = 1;
-		php_call_shutdown_functions();
-	}
+	php_call_shutdown_functions();
 	
 	php_ini_rshutdown();
 

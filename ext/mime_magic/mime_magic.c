@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.30 2003/06/10 20:03:32 imajes Exp $ 
+  $Id: mime_magic.c,v 1.31 2003/08/19 22:13:01 iliaa Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -167,6 +167,18 @@
 #ifdef PHP_WIN32
 #define PHP_MIME_MAGIC_FILE_PATH PHP_PREFIX "\\magic.mime"
 #endif
+
+#define BYTE	1
+#define SHORT	2
+#define LONG	4
+#define STRING	5
+#define DATE	6
+#define BESHORT	7
+#define BELONG	8
+#define BEDATE	9
+#define LESHORT	10
+#define LELONG	11
+#define LEDATE	12
 
 static int apprentice(void);
 static int ascmagic(unsigned char *, int);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.132.2.12 2003/12/16 21:52:12 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.132.2.13 2003/12/16 21:55:22 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -112,7 +112,7 @@ static PHP_MINIT_FUNCTION(pcre)
 
 #ifdef NO_RECURSE
 	pcre_stack_malloc = php_pcre_malloc;
-	pcre_stack_free = php_pcre_stack_free;
+	pcre_stack_free = php_pcre_free;
 #endif
 	
 	return SUCCESS;

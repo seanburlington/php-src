@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.10 2000/02/02 11:18:00 steinm Exp $ */
+/* $Id: cpdf.c,v 1.11 2000/03/09 14:59:05 steinm Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -800,10 +800,11 @@ PHP_FUNCTION(cpdf_set_font) {
 		RETURN_FALSE;
 	}
 	
-	if(arg4->value.lval > 6) {
+/*	if(arg4->value.lval > 6) {
 		php_error(E_WARNING,"Font encoding set to 5");
 		arg4->value.lval = 5;
 	}
+*/
 	cpdf_setFont(pdf, arg2->value.str.val, arg4->value.str.val, (float) arg3->value.dval);
 
 	RETURN_TRUE;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.21.2.4 2003/07/28 10:44:59 sniper Exp $ */
+/* $Id: credits.c,v 1.21.2.5 2003/08/07 15:41:43 iliaa Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -48,7 +48,7 @@ PHPAPI void php_print_credits(int flag)
 	if (flag & PHP_CREDITS_GENERAL) {
 		/* Design & Concept */
 		php_info_print_table_start();
-		php_info_print_table_header(1, "Language Design & Concept");
+		php_info_print_table_header(1, "Language Design &amp; Concept");
 		php_info_print_table_row(1, "Andi Gutmans, Rasmus Lerdorf, Zeev Suraski");
 		php_info_print_table_end();
 

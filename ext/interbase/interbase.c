@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.96 2003/01/15 15:36:28 iliaa Exp $ */
+/* $Id: interbase.c,v 1.97 2003/01/15 19:36:13 iliaa Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -609,7 +609,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.96 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.97 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -2717,14 +2717,14 @@ static void _php_ibase_blob_end(INTERNAL_FUNCTION_PARAMETERS, int bl_end)
 		}
 		ib_blob->bl_handle = NULL;
 		RETVAL_STRINGL((char *)ib_blob, sizeof(ibase_blob_handle), 1);
-		zend_list_delete(Z_LVAL_P(blob_arg));
+		zend_list_delete(Z_LVAL_PP(blob_arg));
 	} else { /* discard created blob */
 		if (isc_cancel_blob(IB_STATUS, &ib_blob->bl_handle)) {
 			_php_ibase_error(TSRMLS_C);
 			RETURN_FALSE;
 		}
 		ib_blob->bl_handle = NULL;
-		zend_list_delete(Z_LVAL_P(blob_arg));
+		zend_list_delete(Z_LVAL_PP(blob_arg));
 		RETURN_TRUE;
 	}
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_apache.h,v 1.5 2003/06/10 20:03:44 imajes Exp $ */
+/* $Id: php_apache.h,v 1.6 2003/10/21 11:48:31 sniper Exp $ */
 
 #ifndef PHP_APACHE_H
 #define PHP_APACHE_H
@@ -51,6 +51,7 @@ void *create_php_config(apr_pool_t *p, char *dummy);
 char *get_php_config(void *conf, char *name, size_t name_len);
 void apply_config(void *);
 extern const command_rec php_dir_cmds[];
+void php_ap2_register_hook(apr_pool_t *p);
 
 #define APR_ARRAY_FOREACH_OPEN(arr, key, val) 		\
 {													\

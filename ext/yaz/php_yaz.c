@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.26 2001/08/10 12:53:06 dickmeiss Exp $ */
+/* $Id: php_yaz.c,v 1.27 2001/09/07 13:35:31 dbeu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2609,7 +2609,7 @@ void yaz_close_session(Yaz_Association *as)
 	}
 }
 
-static void yaz_close_link (zend_rsrc_list_entry *rsrc)
+static void yaz_close_link (zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	Yaz_Association *as = (Yaz_Association *) rsrc->ptr;
 	yaz_close_session (as);

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.46.4.1 2002/11/29 13:32:49 chregu Exp $
+dnl $Id: config.m4,v 1.46.4.2 2003/02/06 16:21:24 sniper Exp $
 dnl
 AC_DEFUN(JAVA_FIND_JAR, [
  AC_MSG_CHECKING([Java Jar location])
@@ -97,7 +97,7 @@ AC_DEFUN(JAVA_CHECK_LIB, [
    dnl We have to find everything
    dnl
    for i in `find $PHP_JAVA/include -type d`; do
-     test -f $i/jni.h      && JAVA_INCLUDE=-I$i
+     test -f $i/jni.h      && JAVA_INCLUDE="$JAVA_INCLUDE -I$i"
      test -f $i/jni_md.h   && JAVA_INCLUDE="$JAVA_INCLUDE -I$i"
    done
 
@@ -178,6 +178,8 @@ if test "$PHP_JAVA" != "no"; then
   fi
 
   PHP_SUBST(JAVA_CLASSPATH)
+  PHP_SUBST(JAVA_INCLUDE)
+  PHP_SUBST(JAVA_CFLAGS)
 
   PHP_ADD_MAKEFILE_FRAGMENT
 fi

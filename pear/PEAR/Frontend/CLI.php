@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.22 2002/06/19 23:38:59 cox Exp $
+  $Id: CLI.php,v 1.23 2002/07/02 13:04:01 dickmann Exp $
 */
 
 require_once "PEAR.php";
@@ -375,6 +375,7 @@ class PEAR_Frontend_CLI extends PEAR
                 foreach($data['data'] as $category) {
                     foreach($category as $pkg) {
                         unset($pkg[3]);
+                        unset($pkg[4]);
                         $this->_tableRow($pkg, null, array(1 => array('wrap' => 55)));
                     }
                 };

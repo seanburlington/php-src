@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.236 2004/01/21 16:18:58 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.237 2004/01/22 08:05:14 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -785,7 +785,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.236 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.237 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -3842,8 +3842,8 @@ PHP_FUNCTION(oci_lob_save)
 
 			if (offparam == -1) {
 				offset = curloblen;
-			} else if ((ub4) offparam >= curloblen) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset smaller than current LOB-Size - appending");
+			} else if (offparam >= curloblen) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset is bigger than current LOB-Size - appending");
 				offset = curloblen;
 			} else {
 				offset = offparam;
@@ -3852,7 +3852,6 @@ PHP_FUNCTION(oci_lob_save)
 			WRONG_PARAM_COUNT;
 		}
 
-		offset++;
 		convert_to_string_ex(arg);
 		loblen = Z_STRLEN_PP(arg);
 	

@@ -8,7 +8,7 @@
 **  This code is in the public domain and has no copyright.
 */
 
-/* $Id: parsedate.y,v 1.41 2003/08/19 06:34:46 derick Exp $ */
+/* $Id: parsedate.y,v 1.42 2003/09/26 07:51:52 hholzgra Exp $ */
 
 #include "php.h"
 
@@ -840,7 +840,7 @@ LookupWord (lvalp,buff)
   return tID;
 }
 
-yylex (YYSTYPE *lvalp, void *parm)
+int yylex (YYSTYPE *lvalp, void *parm)
 {
   register unsigned char c;
   register char *p;

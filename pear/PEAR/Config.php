@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.24 2002/05/27 22:27:40 ssb Exp $
+// $Id: Config.php,v 1.25 2002/05/27 22:28:26 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -25,6 +25,14 @@ require_once 'PEAR.php';
  * @var object
  */
 $GLOBALS['_PEAR_Config_instance'] = null;
+
+// in case a --without-pear PHP installation is used
+if (!defined('PEAR_INSTALL_DIR')) {
+    define('PEAR_INSTALL_DIR', PHP_LIBDIR);
+}
+if (!defined('PEAR_EXTENSION_DIR')) {
+    define('PEAR_EXTENSION_DIR', PHP_EXTENSION_DIR);
+}
 
 define('PEAR_CONFIG_DEFAULT_BINDIR',
        PHP_BINDIR);
@@ -38,14 +46,6 @@ define('PEAR_CONFIG_DEFAULT_DATADIR',
 define('PEAR_CONFIG_DEFAULT_TESTDIR',
        PEAR_INSTALL_DIR.DIRECTORY_SEPARATOR.'tests');
 define('PEAR_DEFAULT_UMASK', umask());
-
-// in case a --without-pear PHP installation is used
-if (!defined('PEAR_INSTALL_DIR')) {
-    define('PEAR_INSTALL_DIR', PHP_LIBDIR);
-}
-if (!defined('PEAR_EXTENSION_DIR')) {
-    define('PEAR_EXTENSION_DIR', PHP_EXTENSION_DIR);
-}
 
 /**
  * This is a class for storing configuration data, keeping track of

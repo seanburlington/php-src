@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.203.2.5 2005/01/14 20:44:39 sniper Exp $ */
+/* $Id: php.h,v 1.203.2.6 2005/03/08 21:23:21 sniper Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -320,15 +320,13 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 #endif
 
 /* PHPAPI void php_error(int type, const char *format, ...); */
-PHPAPI void php_error_docref0(const char *docref TSRMLS_DC, int type, const char *format, ...)
+PHPAPI void php_error_docref(const char *docref TSRMLS_DC, int type, const char *format, ...)
 	PHP_ATTRIBUTE_FORMAT(printf, PHP_ATTR_FMT_OFFSET + 3, PHP_ATTR_FMT_OFFSET + 4);
 PHPAPI void php_error_docref1(const char *docref TSRMLS_DC, const char *param1, int type, const char *format, ...)
 	PHP_ATTRIBUTE_FORMAT(printf, PHP_ATTR_FMT_OFFSET + 4, PHP_ATTR_FMT_OFFSET + 5);
 PHPAPI void php_error_docref2(const char *docref TSRMLS_DC, const char *param1, const char *param2, int type, const char *format, ...)
 	PHP_ATTRIBUTE_FORMAT(printf, PHP_ATTR_FMT_OFFSET + 5, PHP_ATTR_FMT_OFFSET + 6);
 END_EXTERN_C()
-
-#define php_error_docref php_error_docref0
 
 #define zenderror phperror
 #define zendlex phplex

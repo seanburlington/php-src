@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.51 2001/09/16 03:46:59 sterling Exp $ */
+/* $Id: rand.c,v 1.52 2001/09/16 03:50:04 sterling Exp $ */
 
 #include <stdlib.h>
 
@@ -198,12 +198,12 @@ PHPAPI php_uint32 php_mt_rand(TSRMLS_D)
    Seeds random number generator */
 PHP_FUNCTION(srand)
 {
-	long seed = 0;
+	long seed;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &seed) == FAILURE)
 		return;
 
-	if (!seed)
+	if (ZEND_NUM_ARGS() == 0)
 		seed = GENERATE_SEED();
 
 	php_srand(seed);
@@ -214,12 +214,12 @@ PHP_FUNCTION(srand)
    Seeds Mersenne Twister random number generator */
 PHP_FUNCTION(mt_srand)
 {
-	long seed = 0;
+	long seed;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &seed) == FAILURE) 
 		return;
 
-	if (!seed)
+	if (ZEND_NUM_ARGS() == 0)
 		seed = GENERATE_SEED();
 
 	php_mt_srand(seed TSRMLS_CC);

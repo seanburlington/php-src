@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.25 2000/11/09 02:11:45 sniper Exp $ */
+/* $Id: curl.c,v 1.26 2000/11/22 15:19:59 sterling Exp $ */
 
 
 #include "php.h"
@@ -308,7 +308,6 @@ PHP_FUNCTION(curl_init)
 
 		urlstr = estrndup(Z_STRVAL_PP(url), Z_STRLEN_PP(url));
 		curl_easy_setopt(curl_handle->cp, CURLOPT_URL, urlstr);
-		efree(urlstr);
 	}
 
 	curl_easy_setopt(curl_handle->cp, CURLOPT_NOPROGRESS, 1);

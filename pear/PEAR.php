@@ -19,7 +19,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.29 2001/12/15 15:01:35 mj Exp $
+// $Id: PEAR.php,v 1.30 2002/02/18 10:27:36 mj Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -432,7 +432,7 @@ class PEAR
 
     /**
     * Push a new error handler on top of the error handler options stack. With this
-    * you can easely override the actual error handler for some code and restore
+    * you can easily override the actual error handler for some code and restore
     * it later with popErrorHandling.
     *
     * @param $mode mixed (same as setErrorHandling)

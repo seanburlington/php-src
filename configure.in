@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.190 2000/10/26 18:00:30 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.191 2000/10/26 20:39:57 venaas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -401,7 +401,7 @@ vsnprintf \
 dnl Check for getaddrinfo, should be a better way, but...
 AC_CACHE_CHECK([for getaddrinfo], ac_cv_func_getaddrinfo,
 [AC_TRY_COMPILE([#include <netdb.h>],
-                [struct addrinfo h;getaddrinfo("","",&h,&h);],
+                [struct addrinfo *g,h;g=&h;getaddrinfo("","",g,&g);],
   ac_cv_func_getaddrinfo=yes, ac_cv_func_getaddrinfo=no)])
 if test "$ac_cv_func_getaddrinfo" = yes; then
   AC_DEFINE(HAVE_GETADDRINFO,1,[Define if you have the getaddrinfo function])

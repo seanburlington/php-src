@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.20 1999/09/08 12:29:12 steinm Exp $ */
+/* $Id: hw.c,v 1.21 1999/09/15 05:42:34 andi Exp $ */
 #if COMPILE_DL
 #include "dl/phpdl.h"
 #endif
@@ -579,7 +579,7 @@ static char * make_objrec_from_array(HashTable *lht) {
 						}
 						*ptr1++ = '\n';
 						*ptr1 = '\0';
-						strncpy(str, ptr, 1023);
+						strlcpy(str, ptr, sizeof(str));
 					}
 					break;
 				}
@@ -1663,7 +1663,7 @@ PHP_FUNCTION(hw_modifyobject) {
 								ptr1[-1] = ':';
 						}
 						*ptr1 = '\0';
-						strncpy(addattribute, ptr, BUFFERLEN);
+						strlcpy(addattribute, ptr, sizeof(addattribute));
 						noinsert = 0;
 					}
 					break;
@@ -1735,7 +1735,7 @@ PHP_FUNCTION(hw_modifyobject) {
 						}
 						*ptr1++ = '\n';
 						*ptr1 = '\0';
-						strncpy(remattribute, ptr, BUFFERLEN);
+						strlcpy(remattribute, ptr, sizeof(remattribute));
 						noinsert = 0;
 					}
 					break;

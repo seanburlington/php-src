@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.29 1999/09/12 20:36:48 zeev Exp $ */
+/* $Id: file.c,v 1.30 1999/09/15 05:42:34 andi Exp $ */
 
 /* Synced with php3 revision 1.218 1999-06-16 [ssb] */
 
@@ -528,7 +528,7 @@ PHP_FUNCTION(tempnam)
 	convert_to_string(arg1);
 	convert_to_string(arg2);
 	d = estrndup(arg1->value.str.val,arg1->value.str.len);
-	strncpy(p,arg2->value.str.val,sizeof(p));
+	strlcpy(p,arg2->value.str.val,sizeof(p));
 
 	t = tempnam(d,p);
 	efree(d);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.68.2.15 2004/03/04 22:29:23 pollita Exp $ */
+/* $Id: ftp.c,v 1.68.2.16 2004/03/18 17:15:47 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -652,7 +652,6 @@ int
 ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, int resumepos)
 {
 	databuf_t		*data = NULL;
-	char			*ptr;
 	int			lastch;
 	size_t			rcvd;
 	char			arg[11];
@@ -703,12 +702,39 @@ ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, 
 		}
 
 		if (type == FTPTYPE_ASCII) {
-			for (ptr = data->buf; rcvd; rcvd--, ptr++) {
-				if (lastch == '\r' && *ptr != '\n')
+			char *s;
+			char *ptr = data->buf;
+			char *e = ptr + rcvd;
+			/* logic depends on the OS EOL
+			 * Win32 -> \r\n
+			 * Everything Else \n
+			 */
+#ifdef PHP_WIN32
+			while ((s = strpbrk(ptr, "\r\n"))) {
+				if (*s == '\n') {
 					php_stream_putc(outstream, '\r');
-				if (*ptr != '\r')
-					php_stream_putc(outstream, *ptr);
-				lastch = *ptr;
+				} else if (*s == '\r' && *(s + 1) == '\n') {
+					s++;
+				}
+				s++;
+				php_stream_write(outstream, ptr, (s - ptr));
+				if (*(s - 1) == '\r') {
+					php_stream_putc(outstream, '\n');
+				}
+				ptr = s;
+			}
+#else 
+			while ((s = memchr(ptr, '\r', (e - ptr)))) {
+				php_stream_write(outstream, ptr, (s - ptr));
+				if (*(s + 1) == '\n') {
+					s++;
+				}
+				php_stream_putc(outstream, '\n');
+				ptr = s + 1;
+			}
+#endif
+			if (ptr < e) {
+				php_stream_write(outstream, ptr, (e - ptr));
 			}
 		}
 		else {
@@ -716,9 +742,6 @@ ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, 
 				goto bail;
 		}
 	}
-
-	if (type == FTPTYPE_ASCII && lastch == '\r')
-		php_stream_putc(outstream, '\r');
 
 	ftp->data = data = data_close(ftp, data);
 

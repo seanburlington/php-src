@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Downloader.php,v 1.2 2003/12/01 00:59:14 cellog Exp $
+// $Id: Downloader.php,v 1.3 2003/12/03 23:00:05 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -404,7 +404,6 @@ class PEAR_Downloader extends PEAR_Common
             $this->log(0, "Package '{$curinfo['package']}' already installed, skipping");
             return false;
         }
-        $curver = $curinfo['version'];
         $releases = $this->_remote->call('package.info', $pkgfile, 'releases');
         if (!count($releases)) {
             return $this->raiseError("No releases found for package '$pkgfile'");

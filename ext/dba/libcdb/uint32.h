@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uint32.h,v 1.1 2002/11/04 17:53:04 helly Exp $ */
+/* $Id: uint32.h,v 1.1.2.1 2002/11/19 01:07:09 edink Exp $ */
 
 /* incorporated from D.J.Bernstein's cdb-0.75 (http://cr.yp.to/cdb.html)*/
 
@@ -33,7 +33,7 @@ typedef unsigned long uint32;
 #error Need type which holds 32 bits
 #endif
 
-PHPAPI void uint32_pack(char *out, uint32 in);
-PHPAPI void uint32_unpack(const char *in, uint32 *out);
+void uint32_pack(char *out, uint32 in);
+void uint32_unpack(const char *in, uint32 *out);
 
 #endif

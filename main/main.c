@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.130 1999/10/15 19:55:18 andrei Exp $ */
+/* $Id: main.c,v 1.131 1999/10/15 20:27:38 andrei Exp $ */
 
 
 #include <stdio.h>
@@ -333,11 +333,13 @@ void php3_log_err(char *log_message)
 	}
 #endif							/*APACHE */
 
+#if 0
 #if CGI_BINARY
 	if (php3_header()) {
 		fprintf(stderr, log_message);
 		fprintf(stderr, "\n");
 	}
+#endif
 #endif
 }
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.27 2003/02/13 01:23:39 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.28 2003/02/13 14:43:19 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2434,7 +2434,7 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 	}
 	
 	if (stream == NULL && (options & REPORT_ERRORS)) {
-		display_wrapper_errors(wrapper, path, "failed to create stream" TSRMLS_CC);
+		display_wrapper_errors(wrapper, path, "failed to open stream" TSRMLS_CC);
 	}
 	tidy_wrapper_error_log(wrapper TSRMLS_CC);
 #if ZEND_DEBUG

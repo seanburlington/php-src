@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.14 2005/02/09 05:16:03 wez Exp $
+dnl $Id: config.m4,v 1.15 2005/02/13 07:15:02 hholzgra Exp $
 dnl
 
 AC_DEFUN(PDO_MYSQL_LIB_CHK, [
@@ -53,6 +53,11 @@ Note that the MySQL client library is not bundled anymore.])
 	PDO_MYSQL_LIBS=`$PDO_MYSQL_CONFIG --libs`
 	PHP_SUBST_OLD(PDO_MYSQL_LIBS)
   fi
+
+  _SAVE_LDFLAGS=$LDFLAGS
+  LDFLAGS="$LDFLAGS $PDO_MYSQL_LIBS"
+  AC_CHECK_FUNCS([mysql_commit mysql_rollback mysql_autocommit]) 	
+  LDFLAGS=$_SAVE_LDFLAGS
 
   if test -f $prefix/include/php/ext/pdo/php_pdo_driver.h; then
   	pdo_inc_path=$prefix/include/php/ext

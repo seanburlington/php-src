@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.51 2004/11/01 04:55:01 iliaa Exp $ */
+/* $Id: interface.c,v 1.52 2004/11/14 20:00:16 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -369,7 +369,14 @@ PHP_MINIT_FUNCTION(curl)
 	REGISTER_CURL_CONSTANT(CURLM_INTERNAL_ERROR);
 
 	REGISTER_CURL_CONSTANT(CURLMSG_DONE);
-	
+
+#ifdef CURLOPT_FTPSSLAUTH
+	REGISTER_CURL_CONSTANT(CURLOPT_FTPSSLAUTH);
+	REGISTER_CURL_CONSTANT(CURLFTPAUTH_DEFAULT);
+	REGISTER_CURL_CONSTANT(CURLFTPAUTH_SSL);
+	REGISTER_CURL_CONSTANT(CURLFTPAUTH_TLS);
+#endif
+
 	if (curl_global_init(CURL_GLOBAL_SSL) != CURLE_OK) {
 		return FAILURE;
 	}
@@ -924,6 +931,10 @@ PHP_FUNCTION(curl_setopt)
 #if LIBCURL_VERSION_NUM > 0x070a06 /* CURLOPT_PROXYAUTH is available since curl 7.10.7 */
 		case CURLOPT_PROXYAUTH:
 #endif
+
+#ifdef CURLOPT_FTPSSLAUTH
+		case CURLOPT_FTPSSLAUTH:
+#edif
 		case CURLOPT_UNRESTRICTED_AUTH:
 		case CURLOPT_PORT:
 			convert_to_long_ex(zvalue);

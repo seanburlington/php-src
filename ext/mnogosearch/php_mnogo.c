@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.12 2001/02/08 13:33:36 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.13 2001/02/09 13:29:19 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -67,6 +67,8 @@
 #define UDM_PARAM_FOUND		257
 #define UDM_PARAM_WORDINFO	258
 #define UDM_PARAM_SEARCHTIME	259
+#define UDM_PARAM_FIRST_DOC	260
+#define UDM_PARAM_LAST_DOC	261
 
 /* True globals, no need for thread safety */
 static int le_link,le_res;
@@ -167,6 +169,8 @@ DLEXPORT PHP_MINIT_FUNCTION(mnogosearch)
 	REGISTER_LONG_CONSTANT("UDM_PARAM_WORD_INFO",	UDM_PARAM_WORDINFO,CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("UDM_PARAM_SEARCHTIME",	UDM_PARAM_SEARCHTIME,CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("UDM_PARAM_SEARCH_TIME",	UDM_PARAM_SEARCHTIME,CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("UDM_PARAM_FIRST_DOC",	UDM_PARAM_FIRST_DOC,CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("UDM_PARAM_LAST_DOC",	UDM_PARAM_LAST_DOC,CONST_CS | CONST_PERSISTENT);
 
 	/* search modes */
 	REGISTER_LONG_CONSTANT("UDM_MODE_ALL",		UDM_MODE_ALL,CONST_CS | CONST_PERSISTENT);
@@ -635,6 +639,14 @@ DLEXPORT PHP_FUNCTION(udm_get_res_param)
 		case UDM_PARAM_SEARCHTIME: 	
 			RETURN_DOUBLE(((double)Res->work_time)/1000);
 			break;			
+			
+		case UDM_PARAM_FIRST_DOC:	 	
+			RETURN_LONG(Res->first);
+			break;
+
+		case UDM_PARAM_LAST_DOC:	 	
+			RETURN_LONG(Res->last);
+			break;
 
 		default:
 			php_error(E_WARNING,"Udm_Get_Res_Param: Unknown mnoGoSearch param name");

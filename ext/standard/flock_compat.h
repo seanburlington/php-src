@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: flock_compat.h,v 1.13 2002/02/28 08:26:45 sebastian Exp $ */
+/* $Id: flock_compat.h,v 1.14 2002/11/11 16:43:19 helly Exp $ */
 
 #ifndef FLOCK_COMPAT_H
 #define FLOCK_COMPAT_H
@@ -26,7 +26,7 @@
 #	define LOCK_EX 2
 #	define LOCK_NB 4
 #	define LOCK_UN 8
-int flock(int fd, int operation);
+PHPAPI int flock(int fd, int operation);
 #endif
 
 #ifdef PHP_WIN32

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: flock_compat.c,v 1.17 2002/09/05 14:21:55 hyanantha Exp $ */
+/* $Id: flock_compat.c,v 1.18 2002/11/11 16:43:19 helly Exp $ */
 
 #include <php.h>
 #include <errno.h>
@@ -41,7 +41,7 @@
 #endif
 
 #ifndef HAVE_FLOCK
-int flock(int fd, int operation)
+PHPAPI int flock(int fd, int operation)
 #if HAVE_STRUCT_FLOCK
 {
 	struct flock flck;

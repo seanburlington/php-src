@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.263 2004/10/23 09:32:44 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.264 2004/11/21 06:17:32 andi Exp $ */
 
 /* TODO list:
  *
@@ -576,21 +576,21 @@ static void php_oci_init_globals(php_oci_globals *oci_globals_p TSRMLS_DC)
 	);
 }
 
-static int _sessions_pcleanup(zend_llist *session_list TSRMLS_DC)
+static int _sessions_pcleanup(zend_llist *session_list)
 {
 	zend_llist_destroy(session_list);
 
 	return 1;
 }
 
-static int _session_pcleanup(oci_session *session TSRMLS_DC)
+static int _session_pcleanup(oci_session *session)
 {
 	_oci_close_session(session);
 
 	return 1;
 }
 
-static int _server_pcleanup(oci_server *server TSRMLS_DC)
+static int _server_pcleanup(oci_server *server)
 {
 	_oci_close_server(server);
 
@@ -786,7 +786,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.263 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.264 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);

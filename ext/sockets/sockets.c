@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.125.2.25 2005/02/12 18:16:04 sniper Exp $ */
+/* $Id: sockets.c,v 1.125.2.26 2005/02/14 22:17:30 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -644,6 +644,8 @@ PHP_FUNCTION(socket_create_listen)
 		RETURN_FALSE;
 	}
 
+	sock->error = 0;
+
 	ZEND_REGISTER_RESOURCE(return_value, php_sock, le_socket);
 }
 /* }}} */
@@ -662,10 +664,10 @@ PHP_FUNCTION(socket_accept)
 	ZEND_FETCH_RESOURCE(php_sock, php_socket *, &arg1, -1, le_socket_name, le_socket);
 	
 	if (!php_accept_connect(php_sock, &new_sock, (struct sockaddr *) &sa TSRMLS_CC)) {
-		php_error(E_WARNING, "%s() unable to accept socket connection [%d]: %s",
-				  get_active_function_name(TSRMLS_C), errno, php_strerror(errno TSRMLS_CC));
 		RETURN_FALSE;
 	}
+
+	new_sock->error = 0;
 	
 	ZEND_REGISTER_RESOURCE(return_value, new_sock, le_socket);
 }

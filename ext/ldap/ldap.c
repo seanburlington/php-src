@@ -21,7 +21,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.44 2000/06/13 19:50:05 venaas Exp $ */
+/* $Id: ldap.c,v 1.45 2000/06/18 19:18:30 eschmid Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -179,7 +179,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.44 2000/06/13 19:50:05 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.45 2000/06/18 19:18:30 eschmid Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #if HAVE_NSLDAP
@@ -939,7 +939,7 @@ PHP_FUNCTION(ldap_get_values)
 /* }}} */
 
 /* {{{ proto array ldap_get_values_len(int link, int result, string attribute)
-   Get all values from a result entry */
+   Get the lengths for all values from a result entry */
 PHP_FUNCTION(ldap_get_values_len)
 {
 	pval **link, **result_entry, **attr;

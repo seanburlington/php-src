@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.24 2000/02/21 16:23:07 steinm Exp $ */
+/* $Id: pdf.c,v 1.25 2000/02/23 14:50:39 eschmid Exp $ */
 
 /* pdflib 2.01 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -607,7 +607,7 @@ PHP_FUNCTION(pdf_show_xy) {
 }
 /* }}} */
 
-/* {{{ proto void pdf_set_font(int pdfdoc, string font, double size, int encoding, [int embed])
+/* {{{ proto void pdf_set_font(int pdfdoc, string font, double size, string encoding, [int embed])
    Select the current font face, size and encoding */
 PHP_FUNCTION(pdf_set_font) {
 	pval *arg1, *arg2, *arg3, *arg4, *arg5;

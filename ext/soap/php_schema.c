@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.c,v 1.44 2004/02/17 15:10:16 dmitry Exp $ */
+/* $Id: php_schema.c,v 1.45 2004/02/24 09:02:33 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -2133,10 +2133,16 @@ static void schema_type_fixup(sdlCtx *ctx, sdlTypePtr type)
 	if (type->ref != NULL) {
 		if (ctx->sdl->elements != NULL) {
 			if (zend_hash_find(ctx->sdl->elements, type->ref, strlen(type->ref)+1, (void**)&tmp) == SUCCESS) {
+				type->kind = (*tmp)->kind;
 				type->encode = (*tmp)->encode;
-				/* TODO: nillable */
 				if ((*tmp)->nillable) {
 				  type->nillable = 1;
+				}
+				if ((*tmp)->fixed) {
+				  type->fixed = estrdup((*tmp)->fixed);
+				}
+				if ((*tmp)->def) {
+				  type->def = estrdup((*tmp)->def);
 				}
 			} else {
 				php_error(E_ERROR, "SOAP-ERROR: Parsing Schema: unresolved element 'ref' attribute");

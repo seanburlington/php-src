@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.221 2002/12/31 16:07:43 sebastian Exp $ */
+/* $Id: info.c,v 1.222 2003/01/12 14:47:18 sebastian Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -135,7 +135,7 @@ static void php_print_gpcse_array(char *name, uint name_length TSRMLS_DC)
 				if (PG(html_errors)) {
 					PUTS("<pre>");
 				}
-				zend_print_zval_r(*tmp, 0);
+				zend_print_zval_r(*tmp, 0 TSRMLS_CC);
 				if (PG(html_errors)) {
 					PUTS("</pre>");
 				}

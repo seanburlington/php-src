@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.455 2002/03/18 08:05:27 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.456 2002/03/18 08:29:17 sas Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -623,7 +623,7 @@ function_entry basic_functions[] = {
 	PHP_FE(set_socket_blocking,												NULL)
 	PHP_FE(socket_set_blocking,												NULL)
 
-#if HAVE_PHP_STREAM
+#if PHP_HAVE_STREAMS
 	PHP_FE(fgetwrapperdata,													NULL)
 #endif
 

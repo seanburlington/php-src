@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.46 2002/07/05 01:52:09 ssb Exp $
+// $Id: PEAR.php,v 1.47 2002/07/21 07:04:45 ssb Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -44,6 +44,8 @@ $GLOBALS['_PEAR_default_error_options']  = E_USER_NOTICE;
 $GLOBALS['_PEAR_destructor_object_list'] = array();
 $GLOBALS['_PEAR_shutdown_funcs']         = array();
 $GLOBALS['_PEAR_error_handler_stack']    = array();
+
+ini_set('track_errors', true);
 
 /**
  * Base class for other PEAR classes.  Provides rudimentary
@@ -506,6 +508,27 @@ class PEAR
             return new $ec($code, $mode, $options, $userinfo);
         } else {
             return new $ec($message, $code, $mode, $options, $userinfo);
+        }
+    }
+
+    // }}}
+    // {{{ throwError()
+
+    /**
+     * Simpler form of raiseError with fewer options.  In most cases
+     * message, code and userinfo are enough.
+     *
+     * @param string $message
+     *
+     */
+    function &throwError($message = null,
+                         $code = null,
+                         $userinfo = null)
+    {
+        if (isset($this)) {
+            return $this->raiseError($message, $code, null, null, $userinfo);
+        } else {
+            return PEAR::raiseError($message, $code, null, null, $userinfo);
         }
     }
 

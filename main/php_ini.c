@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.116 2003/02/19 09:38:11 sniper Exp $ */
+/* $Id: php_ini.c,v 1.117 2003/02/28 20:48:38 rasmus Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -447,6 +447,7 @@ int php_init_config()
 					if (S_ISREG(sb.st_mode)) {
 						if ((fh.handle.fp = VCWD_FOPEN(ini_file, "r"))) {
 							fh.filename = ini_file;
+							fh.type = ZEND_HANDLE_FP;
 							zend_parse_ini_file(&fh, 1, php_config_ini_parser_cb, &extension_lists);
 							/* Here, add it to the list of ini files read */
 							l = strlen(ini_file);

@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.23 2002/07/02 13:04:01 dickmann Exp $
+  $Id: CLI.php,v 1.24 2002/07/07 20:41:20 ssb Exp $
 */
 
 require_once "PEAR.php";
@@ -130,7 +130,7 @@ class PEAR_Frontend_CLI extends PEAR
             $fp = fopen("php://stdin", "r");
             foreach ($prompts as $key => $prompt) {
                 $type = $types[$key];
-                $default = $defaults[$key];
+                $default = @$defaults[$key];
                 if ($type == 'password') {
                     system('stty -echo');
                 }

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.91 2002/03/04 05:27:04 jason Exp $ */
+/* $Id: sockets.c,v 1.92 2002/03/04 15:02:23 jason Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -341,7 +341,7 @@ static char *php_strerror(int error) {
 #ifndef PHP_WIN32
 	if (error < -10000) {
 		error += 10000;
-		error=-error;
+		error = -error;
 
 #ifdef HAVE_HSTRERROR
 		buf = hstrerror(error);

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.78 2004/03/09 12:01:23 georg Exp $ 
+  $Id: mysqli_api.c,v 1.79 2004/03/10 09:50:05 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1482,6 +1482,27 @@ PHP_FUNCTION(mysqli_stmt_data_seek)
 	return;
 }
 /* }}} */
+
+#ifndef HAVE_MYSQLI_OLDAPI
+/* {{{ proto void mysqli_stmt_free_result(object stmt)
+   Free stored result memory for the given statement handle */
+PHP_FUNCTION(mysqli_stmt_free_result) 
+{
+	STMT 			*stmt;
+	zval    		*mysql_stmt;
+
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "O", &mysql_stmt, mysqli_stmt_class_entry) == FAILURE) {
+		return;
+	}
+
+	MYSQLI_FETCH_RESOURCE(stmt, STMT *, &mysql_stmt, "mysqli_stmt");
+
+	mysql_stmt_free_result(stmt->stmt);
+
+	return;
+}
+/* }}} */
+#endif
 
 /* {{{ proto mixed mysqli_stmt_num_rows(object stmt)
    Return the number of rows in statements result set */

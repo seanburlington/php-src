@@ -2,10 +2,8 @@
 gzdeflate()/gzinflate()
 --SKIPIF--
 <?php if (!extension_loaded("zlib")) print "skip"; ?>
---POST--
---GET--
 --FILE--
-<?php /* $Id: 001.phpt,v 1.3 2003/09/06 15:31:35 sr Exp $ */
+<?php /* $Id: 001.phpt,v 1.4 2004/05/19 08:45:23 helly Exp $ */
 $original = str_repeat("hallo php",4096);
 $packed=gzdeflate($original);
 echo strlen($packed)." ".strlen($original)."\n";

@@ -1,10 +1,8 @@
 --TEST--
 gzfile(), gzreadfile()
 --SKIPIF--
-<?php /* $Id: gzfilegzreadfile.phpt,v 1.1 2003/09/06 15:31:35 sr Exp $ */
+<?php /* $Id: gzfilegzreadfile.phpt,v 1.2 2004/05/19 08:45:23 helly Exp $ */
 if (!extension_loaded("zlib")) print "skip"; ?>
---POST--
---GET--
 --FILE--
 <?php
 $original = <<<EOD

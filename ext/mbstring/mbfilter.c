@@ -1,4 +1,6 @@
-/* charset=UTF-8 */
+/* charset=UTF-8
+ * vim: encoding=utf-8:
+ * */
 
 /*
  * "streamable kanji code filter and converter"
@@ -77,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.8 2001/05/12 23:42:09 wez Exp $ */
+/* $Id: mbfilter.c,v 1.9 2001/05/12 23:49:29 wez Exp $ */
 
 
 #include <stdlib.h>
@@ -5312,7 +5314,6 @@ mbfl_convert_filter_get_vtbl(enum mbfl_no_encoding from, enum mbfl_no_encoding t
 
 	if (to == mbfl_no_encoding_base64 ||
 	    to == mbfl_no_encoding_qprint ||
-	    to == mbfl_no_encoding_uuencode ||
 	    to == mbfl_no_encoding_7bit) {
 		from = mbfl_no_encoding_8bit;
 	} else if (from == mbfl_no_encoding_base64 ||

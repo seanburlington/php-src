@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.332 2002/10/03 15:33:00 sas Exp $ */
+/* $Id: session.c,v 1.333 2002/10/06 17:17:38 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1011,10 +1011,8 @@ PHPAPI void php_session_start(TSRMLS_D)
 		php_session_send_cookie(TSRMLS_C);
 	}
 
-	/* check if SID constant exists, if it does destroy it. */
-	if (zend_hash_find(EG(zend_constants), "sid", 4, (void **) &c) != FAILURE) {
-		zend_hash_del(EG(zend_constants), "sid", 4);
-	}
+	/* if the SID constant exists, destroy it. */
+	zend_hash_del(EG(zend_constants), "sid", sizeof("sid"));
 	
 	if (define_sid) {
 		smart_str var = {0};

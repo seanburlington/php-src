@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.c,v 1.49.2.1 2004/08/26 18:36:46 dmitry Exp $ */
+/* $Id: php_schema.c,v 1.49.2.2 2005/03/18 18:31:25 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -135,7 +135,6 @@ static void schema_load_file(sdlCtx *ctx, xmlAttrPtr ns, xmlChar *location, xmlA
 			new_tns = get_attribute(schema->properties, "targetNamespace");
 			if (new_tns == NULL) {
 				if (tns != NULL) {
-					xmlFreeDoc(doc);
 					xmlSetProp(schema, "targetNamespace", tns->children->content);
 				}
 			} else if (tns != NULL && strcmp(tns->children->content,new_tns->children->content) != 0) {

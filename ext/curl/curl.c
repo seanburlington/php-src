@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.55 2001/05/24 10:06:56 ssb Exp $ */
+/* $Id: curl.c,v 1.56 2001/05/27 01:15:27 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,7 +42,7 @@
 #include "php_curl.h"
 
 static int  le_curl;
-static char le_curl_name[] = "cURL handle";
+#define le_curl_name "cURL handle";
 
 static void _php_curl_close(zend_rsrc_list_entry *rsrc);
 

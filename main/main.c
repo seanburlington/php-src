@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.595 2004/02/25 10:58:06 zeev Exp $ */
+/* $Id: main.c,v 1.596 2004/03/14 23:56:07 helly Exp $ */
 
 /* {{{ includes
  */
@@ -752,7 +752,12 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 			efree(log_buffer);
 		}
 		if (PG(display_errors)
-			&& ((!PG(during_request_startup) && PG(display_startup_errors)) || module_initialized)) {
+			&& ((module_initialized && !PG(during_request_startup))
+				|| (PG(display_startup_errors) 
+					&& (OG(php_body_write)==php_default_output_func || OG(php_body_write)==php_ub_body_write_no_header || OG(php_body_write)==php_ub_body_write)
+					)
+				)
+			) {
 
 			if (PG(xmlrpc_errors)) {
 				php_printf("<?xml version=\"1.0\"?><methodResponse><fault><value><struct><member><name>faultCode</name><value><int>%ld</int></value></member><member><name>faultString</name><value><string>%s:%s in %s on line %d</string></value></member></struct></value></fault></methodResponse>", PG(xmlrpc_error_number), error_type_str, buffer, error_filename, error_lineno);

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.92 2002/10/24 18:31:11 sniper Exp $ */
+/* $Id: math.c,v 1.93 2002/10/24 19:15:40 helly Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -677,7 +677,7 @@ _php_math_basetolong(zval *arg, int base) {
 PHPAPI int
 _php_math_basetozval(zval *arg, int base, zval *ret) {
 	long num = 0;
-	double fnum;
+	double fnum = 0;
 	int i;
 	int mode = 0;
 	char c, *s;

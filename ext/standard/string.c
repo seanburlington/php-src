@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.327 2002/10/22 18:27:56 helly Exp $ */
+/* $Id: string.c,v 1.328 2002/10/24 19:11:49 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -915,6 +915,7 @@ PHP_FUNCTION(strtok)
 	case 1:
 		tok = args[0];
 		break;
+	default:
 	case 2:
 		str = args[0];
 		tok = args[1];
@@ -1198,7 +1199,7 @@ PHP_FUNCTION(dirname)
 PHP_FUNCTION(pathinfo)
 {
 	zval *tmp;
-	char *path, *ret;
+	char *path, *ret = NULL;
 	int path_len;
 	int opt = PHP_PATHINFO_ALL;
 
@@ -3182,6 +3183,7 @@ PHP_FUNCTION(setlocale)
 
 	if (Z_TYPE_PP(args[1]) == IS_ARRAY) {
 		zend_hash_internal_pointer_reset(Z_ARRVAL_PP(args[1]));
+		i=0; /* not needed in this case: only kill a compiler warning */
 	} else {
 		i=1;
 	}

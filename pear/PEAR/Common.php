@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.121 2004/03/12 18:22:48 pajoye Exp $
+// $Id: Common.php,v 1.122 2004/04/30 02:05:45 cellog Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -1235,7 +1235,10 @@ class PEAR_Common extends PEAR
     function buildProvidesArray($srcinfo)
     {
         $file = basename($srcinfo['source_file']);
-        $pn  = $this->_packageName;
+        $pn = '';
+        if (isset($this->_packageName)) {
+            $pn = $this->_packageName;
+        }
         $pnl = strlen($pn);
         foreach ($srcinfo['declared_classes'] as $class) {
             $key = "class;$class";

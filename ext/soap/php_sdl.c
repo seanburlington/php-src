@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.46 2004/01/29 11:51:11 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.47 2004/01/30 15:07:19 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -178,6 +178,7 @@ static void load_wsdl_ex(char *struri, sdlCtx *ctx, int include)
 	if (!wsdl) {
 		php_error(E_ERROR, "SOAP-ERROR: Parsing WSDL: Couldn't load from '%s'", struri);
 	}
+	cleanup_xml(wsdl);
 
 	zend_hash_add(&tmpsdl->docs, struri, strlen(struri)+1, (void**)&wsdl, sizeof(xmlDocPtr), NULL);
 

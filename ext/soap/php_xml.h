@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_xml.h,v 1.11 2004/01/29 11:51:11 dmitry Exp $ */
+/* $Id: php_xml.h,v 1.12 2004/01/30 15:07:19 dmitry Exp $ */
 
 #ifndef PHP_SOAP_XML_H
 #define PHP_SOAP_XML_H
@@ -40,6 +40,8 @@ xmlNodePtr get_node_recursive_ex(xmlNodePtr node,char *name, char *ns);
 xmlNodePtr get_node_with_attribute_ex(xmlNodePtr node, char *name, char *name_ns, char *attribute, char *value, char *attr_ns);
 xmlNodePtr get_node_with_attribute_recursive_ex(xmlNodePtr node, char *name, char *name_ns, char *attribute, char *value, char *attr_ns);
 int parse_namespace(const char *inval,char **value,char **namespace);
+
+void cleanup_xml(xmlDocPtr doc);
 
 int php_stream_xmlIO_match_wrapper(const char *filename);
 void *php_stream_xmlIO_open_wrapper(const char *filename);

@@ -16,7 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_cdb.c,v 1.12 2002/02/28 08:25:58 sebastian Exp $ */
+/* $Id: dba_cdb.c,v 1.13 2002/04/18 12:30:18 derick Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

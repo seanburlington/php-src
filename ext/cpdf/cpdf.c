@@ -16,14 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.42 2002/06/26 07:15:03 derick Exp $ */
+/* $Id: cpdf.c,v 1.43 2002/08/13 21:35:54 kalowsky Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
 
 /* Note that there is no code from the cpdflib package in this file */
 
-#if !PHP_31 && defined(THREAD_SAFE)
+#if defined(THREAD_SAFE)
 #undef THREAD_SAFE
 #endif
 

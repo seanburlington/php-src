@@ -34,7 +34,7 @@
 
  */
 
-/* $Id: php_filepro.h,v 1.1 1999/05/21 10:05:50 sas Exp $ */
+/* $Id: php_filepro.h,v 1.2 1999/07/27 19:44:44 andrey Exp $ */
 
 #ifndef _FILEPRO_H
 #define _FILEPRO_H
@@ -49,8 +49,9 @@ PHP_FUNCTION(filepro_fieldtype);
 PHP_FUNCTION(filepro_fieldwidth);
 PHP_FUNCTION(filepro_fieldcount);
 PHP_FUNCTION(filepro_retrieve);
-extern int php3_minit_filepro(INIT_FUNC_ARGS);
-extern int php3_mend_filepro(void);
+
+extern PHP_MINIT_FUNCTION(filepro);
+extern PHP_MSHUTDOWN_FUNCTION(filepro);
 #else
 #define phpext_filepro_ptr NULL
 #endif

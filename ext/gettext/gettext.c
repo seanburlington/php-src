@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.5 1999/07/16 13:12:47 zeev Exp $ */
+/* $Id: gettext.c,v 1.6 1999/07/27 19:44:45 andrey Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -27,20 +27,20 @@
 #include <libintl.h>
 
 function_entry php3_gettext_functions[] = {
-    {"textdomain",		php3_textdomain,		NULL},
-    {"gettext",			php3_gettext,			NULL},
-    {"_",				php3_gettext,			NULL},
-	{"dgettext",		php3_dgettext,			NULL},
-	{"dcgettext",		php3_dcgettext,			NULL},
-	{"bindtextdomain",	php3_bindtextdomain,	NULL},
+    PHP_FE(textdomain,								NULL)
+    PHP_FE(gettext,									NULL)
+    PHP_FALIAS(_,				gettext,			NULL)
+	PHP_FE(dgettext,								NULL)
+	PHP_FE(dcgettext,								NULL)
+	PHP_FE(bindtextdomain,							NULL)
     {NULL, NULL, NULL}
 };
 
 php3_module_entry php3_gettext_module_entry = {
-	"gettext", php3_gettext_functions, NULL, NULL, NULL, NULL, php3_info_gettext, STANDARD_MODULE_PROPERTIES
+	"gettext", php3_gettext_functions, NULL, NULL, NULL, NULL, PHP_MINFO(gettext), STANDARD_MODULE_PROPERTIES
 };
 
-void php3_info_gettext(ZEND_MODULE_INFO_FUNC_ARGS)
+PHP_MINFO_FUNCTION(gettext)
 {
 	php3_printf("GNU gettext support active.");
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.29 2003/12/01 19:47:04 pollita Exp $ */
+/* $Id: plain_wrapper.c,v 1.30 2003/12/02 01:04:14 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -899,8 +899,8 @@ static php_stream *php_plain_files_stream_opener(php_stream_wrapper *wrapper, ch
 static int php_plain_files_url_stater(php_stream_wrapper *wrapper, char *url, int flags, php_stream_statbuf *ssb, php_stream_context *context TSRMLS_DC)
 {
 
-	if (strncmp(url, "file://", 7) == 0) {
-		url += 7;
+	if (strncmp(url, "file://", sizeof("file://") - 1) == 0) {
+		url += sizeof("file://") - 1;
 	}
 
 	if (PG(safe_mode) &&(!php_checkuid_ex(url, NULL, CHECKUID_CHECK_FILE_AND_DIR, (flags & PHP_STREAM_URL_STAT_QUIET) ? CHECKUID_NO_ERRORS : 0))) {

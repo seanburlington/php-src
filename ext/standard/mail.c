@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.35 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: mail.c,v 1.36 2001/06/11 15:18:44 dbeu Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -132,7 +132,7 @@ PHP_FUNCTION(mail)
 
 /* {{{ php_mail
  */
-int php_mail(char *to, char *subject, char *message, char *headers, char *extra_cmd)
+PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char *extra_cmd)
 {
 #ifdef PHP_WIN32
 	int tsm_err;

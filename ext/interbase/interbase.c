@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.186 2003/09/23 20:58:13 abies Exp $ */
+/* $Id: interbase.c,v 1.187 2003/09/23 22:17:40 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,7 @@
 
 #include "php.h"
 
-#define FILE_REVISION "$Revision: 1.186 $"
+#define FILE_REVISION "$Revision: 1.187 $"
 
 #if HAVE_IBASE
 
@@ -116,7 +116,7 @@ function_entry ibase_functions[] = {
 #if HAVE_STRFTIME
 	PHP_FE(ibase_timefmt, NULL)
 #endif
-    PHP_FE(ibase_gen_id, NULL)
+	PHP_FE(ibase_gen_id, NULL)
 	PHP_FE(ibase_num_fields, NULL)
 	PHP_FE(ibase_num_params, NULL)
 #if abies_0
@@ -267,9 +267,9 @@ static void _php_ibase_module_error(char *msg TSRMLS_DC, ...)
 /* {{{ internal macros, functions and structures */
 
 typedef struct {
-    isc_db_handle *db_ptr;
-    long tpb_len;
-    char *tpb_ptr;
+	isc_db_handle *db_ptr;
+	long tpb_len;
+	char *tpb_ptr;
 } ISC_TEB;
 
 typedef struct {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.604.2.3 2004/10/16 10:34:59 hyanantha Exp $ */
+/* $Id: main.c,v 1.604.2.4 2004/10/18 06:04:10 derick Exp $ */
 
 /* {{{ includes
  */
@@ -1321,6 +1321,7 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	sapi_module = *sf;
 
 	php_output_startup();
+	php_output_activate(TSRMLS_C);
 
 	zuf.error_function = php_error_cb;
 	zuf.printf_function = php_printf;

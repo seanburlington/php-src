@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.86 2002/03/01 09:29:32 yohgaki Exp $ */
+/* $Id: output.c,v 1.87 2002/03/02 16:40:52 hholzgra Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -673,7 +673,7 @@ static int php_ob_buffer_status(php_ob_buffer *ob_buffer, zval *result)
 }
 
 
-/* {{{ poto array ob_get_status([bool full_status])
+/* {{{ proto array ob_get_status([bool full_status])
    Return the nesting level of the output buffer */
 PHP_FUNCTION(ob_get_status)
 {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: aggregation.c,v 1.2 2002/02/28 08:26:43 sebastian Exp $ */
+/* $Id: aggregation.c,v 1.3 2002/03/02 16:41:55 hholzgra Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -457,7 +457,7 @@ PHP_FUNCTION(aggregate_properties)
 /* }}} */
 
 
-/* {{{ proto void aggregate_properites_by_list(object obj, string class, array props_list [, bool exclude])
+/* {{{ proto void aggregate_properties_by_list(object obj, string class, array props_list [, bool exclude])
    */
 PHP_FUNCTION(aggregate_properties_by_list)
 {

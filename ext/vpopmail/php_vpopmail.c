@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.c,v 1.24.2.1 2002/03/20 07:53:26 mfischer Exp $ */
+/* $Id: php_vpopmail.c,v 1.24.2.2 2002/03/20 08:56:14 derick Exp $ */
 
 /* TODO: move to config.m4 when support for old versions is ready or just
  * don't support rather old vpopmail. current version must bail out if
@@ -926,7 +926,7 @@ PHP_FUNCTION(vpopmail_error)
 }
 /* }}} */
 
-#endif /* HAVE_VPOPMAIL */
+#endif
 
 /*
  * Local variables:

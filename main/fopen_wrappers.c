@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.61 2000/06/08 09:43:12 hholzgra Exp $ */
+/* $Id: fopen_wrappers.c,v 1.62 2000/06/09 13:50:39 andrei Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -987,7 +987,7 @@ static FILE *php_fopen_url_wrapper(const char *path, char *mode, int options, in
 	const char *protocol=NULL;
 	int n=0;
 
-	for(p=path;isalnum(*p);p++) 
+	for(p=path;isalnum((int)*p);p++) 
 		n++;
 	if((*p==':')&&(n>1)) {
 		protocol=path;

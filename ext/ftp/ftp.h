@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.8 1999/11/18 20:29:32 askalski Exp $ */
+/* $Id: ftp.h,v 1.9 2000/02/22 20:50:00 askalski Exp $ */
 
 #ifndef	_FTP_H
 #define	_FTP_H
@@ -154,5 +154,8 @@ int		ftp_rename(ftpbuf_t *ftp, const char *src, const char *dest);
 
 /* deletes the file from the server */
 int		ftp_delete(ftpbuf_t *ftp, const char *path);
+
+/* sends a SITE command to the server */
+int		ftp_site(ftpbuf_t *ftp, const char *cmd);
 
 #endif

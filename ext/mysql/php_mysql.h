@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.28 2002/03/24 17:19:19 georg Exp $ */
+/* $Id: php_mysql.h,v 1.29 2002/03/24 17:34:20 zak Exp $ */
 
 #ifndef PHP_MYSQL_H
 #define PHP_MYSQL_H
@@ -89,6 +89,7 @@ PHP_FUNCTION(mysql_get_server_info);
 PHP_FUNCTION(mysql_stat);
 PHP_FUNCTION(mysql_thread_id);
 PHP_FUNCTION(mysql_character_set_name);
+PHP_FUNCTION(mysql_ping);
 
 ZEND_BEGIN_MODULE_GLOBALS(mysql)
 	long default_link;

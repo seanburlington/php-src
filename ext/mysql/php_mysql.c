@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.120 2002/03/24 17:19:19 georg Exp $ */
+/* $Id: php_mysql.c,v 1.121 2002/03/24 17:34:20 zak Exp $ */
 
 
 /* TODO:
@@ -159,6 +159,7 @@ function_entry mysql_functions[] = {
 	PHP_FE(mysql_stat,									NULL)
 	PHP_FE(mysql_thread_id,								NULL)
 	PHP_FE(mysql_character_set_name,					NULL)
+	PHP_FE(mysql_ping,									NULL)
 #ifdef HAVE_GETINFO_FUNCS
 	PHP_FE(mysql_get_client_info,						NULL)
 	PHP_FE(mysql_get_host_info,							NULL)
@@ -2237,6 +2238,27 @@ PHP_FUNCTION(mysql_free_result)
 }
 /* }}} */
 
+/* {{{ proto resource mysql_ping([int link_identifier])
+   Ping a server connection. If no connection then reconnect. */
+PHP_FUNCTION(mysql_ping)
+{
+	zval           *mysql_link = NULL;
+	int             id         = -1;
+	php_mysql_conn *mysql;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|r", &mysql_link)==FAILURE) {
+		return;
+	}
+	
+	if (! ZEND_NUM_ARGS()) {
+		id = php_mysql_get_default_link(INTERNAL_FUNCTION_PARAM_PASSTHRU);
+		CHECK_LINK(id);
+	}
+	
+	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &mysql_link, id, "MySQL-Link", le_link, le_plink);
+	RETURN_BOOL(! mysql_ping(&mysql->conn));
+}
+/* }}} */
 
 /*
  * Local variables:

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.16 2000/07/07 12:06:05 jah Exp $ */
+/* $Id: php_interbase.h,v 1.17 2000/07/17 20:51:47 zeev Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -96,7 +96,7 @@ ZEND_END_MODULE_GLOBALS(ibase)
 typedef struct {
 	isc_tr_handle trans[IBASE_TRANS_ON_LINK];
 	isc_db_handle link;
-	int dialect;
+	unsigned short dialect;
 } ibase_db_link;
 
 typedef struct {
@@ -126,7 +126,7 @@ typedef struct {
 	XSQLDA *in_sqlda, *out_sqlda;
 	ibase_array *in_array, *out_array;
 	int in_array_cnt, out_array_cnt;
-	int dialect;
+	unsigned short dialect;
 	int cursor_open;
 } ibase_query;
 

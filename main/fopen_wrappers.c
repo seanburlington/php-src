@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.153 2002/11/08 22:48:01 iliaa Exp $ */
+/* $Id: fopen_wrappers.c,v 1.154 2002/12/01 21:28:27 shane Exp $ */
 
 /* {{{ includes
  */
@@ -348,8 +348,8 @@ PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC)
 		fp = NULL;
 	}
 	if (!fp) {
-		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Unable to open %s", filename);
 		STR_FREE(SG(request_info).path_translated);	/* for same reason as above */
+		SG(request_info).path_translated = NULL;
 		return FAILURE;
 	}
 

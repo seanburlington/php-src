@@ -16,7 +16,9 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.c,v 1.1 2001/01/14 08:54:00 david Exp $ */
+/* $Id: php_vpopmail.c,v 1.2 2001/01/14 09:01:25 david Exp $ */
+
+#undef VPOPMAIL_IS_REALLY_OLD
 
 #include "php.h"
 #include "php_ini.h"
@@ -110,9 +112,14 @@ PHP_FUNCTION(vpopmail_adddomain)
 	convert_to_long_ex(gid);
 
 	retval = vadddomain(Z_STRVAL_PP(domain),
-						/*						Z_STRVAL_PP(dir),
-												Z_LVAL_PP(uid), */
-						Z_LVAL_PP(gid));
+#ifdef VPOPMAIL_IS_REALLY_OLD
+						Z_STRVAL_PP(dir),
+						Z_LVAL_PP(uid),
+						Z_LVAL_PP(gid)
+#else
+						0
+#endif
+						);
 
 	if (retval == VA_SUCCESS) {
 		RETURN_TRUE;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.404.2.4 2001/11/19 15:00:42 zeev Exp $ */
+/* $Id: main.c,v 1.404.2.5 2001/12/17 21:19:51 derick Exp $ */
 
 /* {{{ includes
  */
@@ -1000,9 +1000,7 @@ void php_module_shutdown(TSRMLS_D)
 	/* close down the ini config */
 	php_shutdown_config();
 
-#ifdef ZTS
-	ts_free_thread();
-#else
+#ifndef ZTS
 	zend_ini_shutdown(TSRMLS_C);
 	shutdown_memory_manager(CG(unclean_shutdown), 1);
 #endif

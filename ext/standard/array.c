@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.158 2002/03/12 06:56:57 yohgaki Exp $ */
+/* $Id: array.c,v 1.159 2002/03/12 07:20:00 sebastian Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -273,7 +273,7 @@ PHP_FUNCTION(count)
 			RETURN_LONG(0);
 			break;
 		case IS_ARRAY:
-			RETURN_LONG (php_count_recursive (array, mode) TSRMLS_CC);
+			RETURN_LONG (php_count_recursive (array, mode TSRMLS_CC));
 			break;
 		default:
 			RETURN_LONG(1);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: versioning.c,v 1.11 2002/07/05 01:00:05 ssb Exp $ */
+/* $Id: versioning.c,v 1.12 2002/07/07 08:19:36 sebastian Exp $ */
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -89,7 +89,7 @@ typedef struct {
 static int
 compare_special_version_forms(char *form1, char *form2)
 {
-	int i, found1 = -1, found2 = -1;
+	int found1 = -1, found2 = -1;
 	special_forms_t special_forms[9] = {
 		{"dev", 0},
 		{"alpha", 1},

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.234 2000/04/15 14:19:58 andi Exp $ */
+/* $Id: main.c,v 1.235 2000/04/15 14:30:18 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -840,7 +840,7 @@ int php_module_startup(sapi_module_struct *sf)
 #endif
 
 	SET_MUTEX(gLock);
-	le_index_ptr = zend_register_list_destructors(NULL, NULL, 0, NULL);
+	le_index_ptr = zend_register_list_destructors(NULL, NULL, 0);
 	FREE_MUTEX(gLock);
 
 	php_ini_mstartup();

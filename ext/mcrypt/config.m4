@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.7 2000/03/27 23:43:00 sas Exp $
+dnl $Id: config.m4,v 1.8 2000/05/02 03:29:28 sas Exp $
 dnl config.m4 for extension mcrypt
 dnl don't forget to call PHP_EXTENSION(mcrypt)
 
@@ -18,9 +18,14 @@ if test "$PHP_MCRYPT" != "no"; then
   fi
 
   AC_ADD_INCLUDE($MCRYPT_DIR/include)
-  AC_ADD_LIBRARY_WITH_PATH(mcrypt, $MCRYPT_DIR/lib)
+  if test "$ext_shared" = "yes"; then
+    MCRYPT_SHARED_LIBADD="-R$MCRYPT_DIR/lib -L$MCRYPT_DIR/lib -lmcrypt"
+    PHP_SUBST(MCRYPT_SHARED_LIBADD)
+  else
+    AC_ADD_LIBRARY_WITH_PATH(mcrypt, $MCRYPT_DIR/lib)
+  fi
 
   AC_DEFINE(HAVE_LIBMCRYPT,1,[ ])
 
-  PHP_EXTENSION(mcrypt)
+  PHP_EXTENSION(mcrypt, $ext_shared)
 fi

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 1999/12/30 04:07:33 sas Exp $
+dnl $Id: config.m4,v 1.6 1999/12/30 04:52:08 sas Exp $
 dnl config.m4 for extension mhash
 dnl don't forget to call PHP_EXTENSION(mhash)
 
@@ -19,7 +19,7 @@ AC_ARG_WITH(mhash,
     AC_ADD_INCLUDE($MHASH_DIR/include)
     AC_ADD_LIBRARY_WITH_PATH(mhash, $MHASH_DIR/lib)
 
-    AC_DEFINE(HAVE_LIBMHASH,,[ ])
+    AC_DEFINE(HAVE_LIBMHASH,1,[ ])
 
     AC_MSG_RESULT(yes)
     PHP_EXTENSION(mhash)

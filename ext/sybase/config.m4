@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 1999/12/30 04:07:41 sas Exp $
+dnl $Id: config.m4,v 1.5 1999/12/30 04:52:13 sas Exp $
 
 AC_MSG_CHECKING(for Sybase support)
 AC_ARG_WITH(sybase,
@@ -20,9 +20,9 @@ AC_ARG_WITH(sybase,
     PHP_EXTENSION(sybase)
     AC_CHECK_LIB(dnet_stub, dnet_addr,
      [ AC_ADD_LIBRARY(dnet_stub)
-        AC_DEFINE(HAVE_LIBDNET_STUB,,[ ])
+        AC_DEFINE(HAVE_LIBDNET_STUB,1,[ ])
      ])
-    AC_DEFINE(HAVE_SYBASE,,[ ])
+    AC_DEFINE(HAVE_SYBASE,1,[ ])
   else
     AC_MSG_RESULT(no)
   fi

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.11 1999/12/30 04:07:40 sas Exp $
+dnl $Id: config.m4,v 1.12 1999/12/30 04:52:11 sas Exp $
 
 AC_MSG_CHECKING(for SNMP support)
 AC_ARG_WITH(snmp,
@@ -40,7 +40,7 @@ AC_ARG_WITH(snmp,
       test -d $withval/include/ucd-snmp && SNMP_INCDIR=$withval/include/ucd-snmp
       SNMP_LIBDIR=$withval/lib
     fi
-    AC_DEFINE(HAVE_SNMP,,[ ])
+    AC_DEFINE(HAVE_SNMP,1,[ ])
     if test "$shared" = "yes"; then
       AC_MSG_RESULT(yes (shared))
       SNMP_INCLUDE="-I$SNMP_INCDIR"

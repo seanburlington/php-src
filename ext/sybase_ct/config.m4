@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/12/30 04:07:43 sas Exp $
+dnl $Id: config.m4,v 1.3 1999/12/30 04:52:13 sas Exp $
 
 AC_MSG_CHECKING(for Sybase-CT support)
 AC_ARG_WITH(sybase-ct,
@@ -10,7 +10,7 @@ AC_ARG_WITH(sybase-ct,
     if test -z "$SYBASE_LIBS"; then
       PHP_EXTENSION(sybase_ct)
     fi
-    AC_DEFINE(HAVE_SYBASE_CT,,[ ])
+    AC_DEFINE(HAVE_SYBASE_CT,1,[ ])
     if test "$withval" = "yes"; then
       SYBASE_CT_INCDIR=/home/sybase/include
       SYBASE_CT_LIBDIR=/home/sybase/lib

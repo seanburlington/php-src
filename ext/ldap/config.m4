@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 1999/12/30 04:07:31 sas Exp $
+dnl $Id: config.m4,v 1.6 1999/12/30 04:52:05 sas Exp $
 
 AC_MSG_CHECKING(for LDAP support)
 AC_ARG_WITH(ldap,
@@ -50,17 +50,17 @@ dnl these here if necessary.   -RL
 	elif test -f $LDAP_LIBDIR/libldapssl30.so; then
         AC_ADD_LIBRARY(ldapssl30)
         AC_ADD_LIBRARY($LDAP_PTHREAD)
-		AC_DEFINE(HAVE_NSLDAP,,[ ])
+		AC_DEFINE(HAVE_NSLDAP,1,[ ])
 	elif test -f $LDAP_LIBDIR/libldapssl30.sl; then
         AC_ADD_LIBRARY(ldapssl30)
-		AC_DEFINE(HAVE_NSLDAP,,[ ])
+		AC_DEFINE(HAVE_NSLDAP,1,[ ])
 	elif test -f $LDAP_LIBDIR/libldap30.so; then
         AC_ADD_LIBRARY(ldap30)
         AC_ADD_LIBRARY($LDAP_PTHREAD)
-		AC_DEFINE(HAVE_NSLDAP,,[ ])
+		AC_DEFINE(HAVE_NSLDAP,1,[ ])
 	elif test -f $LDAP_LIBDIR/libldap30.sl; then
         AC_ADD_LIBRARY(ldap30)
-		AC_DEFINE(HAVE_NSLDAP,,[ ])
+		AC_DEFINE(HAVE_NSLDAP,1,[ ])
 	elif test -f $LDAP_LIBDIR/libumich_ldap.so; then
         AC_ADD_LIBRARY(umich_ldap)
         AC_ADD_LIBRARY(umich_lber)
@@ -69,7 +69,7 @@ dnl these here if necessary.   -RL
     AC_ADD_INCLUDE($LDAP_INCDIR)
     AC_ADD_LIBPATH($LDAP_LIBDIR)
 
-    AC_DEFINE(HAVE_LDAP,,[ ])
+    AC_DEFINE(HAVE_LDAP,1,[ ])
 
     AC_MSG_RESULT(yes)
     PHP_EXTENSION(ldap)

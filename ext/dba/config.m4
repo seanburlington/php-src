@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 1999/12/30 04:07:20 sas Exp $
+dnl $Id: config.m4,v 1.5 1999/12/30 04:51:59 sas Exp $
 dnl config.m4 for extension dba
 dnl don't forget to call PHP_EXTENSION(dba)
 
@@ -90,7 +90,7 @@ AC_ARG_WITH(ndbm,
 	done
     
     if test "$NDBM_EXTRA" != ""; then
-      eval "AC_DEFINE($NDBM_EXTRA, 1, [ ])"
+      eval "AC_DEFINE($NDBM_EXTRA, 1)"
     fi
 
     for LIB in db1 ndbm c; do
@@ -135,7 +135,7 @@ AC_ARG_WITH(db2,
     fi
     
     if test -n "$DB2_EXTRA"; then
-      eval "AC_DEFINE($DB2_EXTRA, 1, [ ])"
+      eval "AC_DEFINE($DB2_EXTRA, 1)"
     fi
 
     for LIB in db db2 c; do
@@ -163,7 +163,7 @@ AC_ARG_WITH(db3,
 	done
 
     if test -n "$DB3_EXTRA"; then
-      eval "AC_DEFINE($DB3_EXTRA, 1, [ ])"
+      eval "AC_DEFINE($DB3_EXTRA, 1)"
     fi
 
     for LIB in db; do

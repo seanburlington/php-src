@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/12/30 04:07:30 sas Exp $
+dnl $Id: config.m4,v 1.3 1999/12/30 04:52:04 sas Exp $
 
 AC_MSG_CHECKING(for InterBase support)
 AC_ARG_WITH(interbase,
@@ -16,7 +16,7 @@ AC_ARG_WITH(interbase,
     IBASE_INCLUDE=-I$IBASE_INCDIR
     IBASE_LFLAGS=-L$IBASE_LIBDIR
     IBASE_LIBS="-lgds"
-    AC_DEFINE(HAVE_IBASE,,[ ])
+    AC_DEFINE(HAVE_IBASE,1,[ ])
     AC_MSG_RESULT(yes)
     EXTRA_LIBS="$EXTRA_LIBS $IBASE_LFLAGS $IBASE_LIBS"
     INCLUDES="$INCLUDES $IBASE_INCLUDE"

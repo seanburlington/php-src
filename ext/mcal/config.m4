@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 1999/12/30 04:07:32 sas Exp $
+dnl $Id: config.m4,v 1.4 1999/12/30 04:52:06 sas Exp $
 
 AC_MSG_CHECKING(for MCAL support)
 AC_ARG_WITH(mcal,
@@ -13,7 +13,7 @@ AC_ARG_WITH(mcal,
     
     AC_ADD_INCLUDE($MCAL_DIR)
     AC_ADD_LIBRARY_WITH_PATH(mcal, $MCAL_DIR)
-    AC_DEFINE(HAVE_MCAL,,[ ])
+    AC_DEFINE(HAVE_MCAL,1,[ ])
     PHP_EXTENSION(mcal)
     AC_MSG_RESULT(yes)
   else

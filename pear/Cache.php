@@ -16,7 +16,7 @@
 // |          Sebastian Bergmann <sb@sebastian-bergmann.de>               |
 // +----------------------------------------------------------------------+
 //
-// $Id: Cache.php,v 1.14 2001/08/10 16:12:33 sebastian Exp $
+// $Id: Cache.php,v 1.15 2001/08/11 08:08:05 sebastian Exp $
 
 require_once 'Cache/Error.php';
 
@@ -58,7 +58,7 @@ require_once 'Cache/Error.php';
 *          bad circumstances  (especially with the file container)
 *
 * @author   Ulf Wendel <ulf.wendel@phpdoc.de>
-* @version  $Id: Cache.php,v 1.14 2001/08/10 16:12:33 sebastian Exp $
+* @version  $Id: Cache.php,v 1.15 2001/08/11 08:08:05 sebastian Exp $
 * @package  Cache
 * @access   public
 */
@@ -257,12 +257,12 @@ class Cache extends PEAR {
     * @return   boolean
     * @access   public
     */
-    function delete($id, $group = 'default') {
+    function remove($id, $group = 'default') {
         if (!$this->caching)
             return true;
 
-        return $this->container->delete($id, $group);
-    } // end func delete
+        return $this->container->remove($id, $group);
+    } // end func remove
 
     /**
     * Flushes the cache - removes all data from it

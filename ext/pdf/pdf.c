@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.30 2000/03/09 14:41:14 steinm Exp $ */
+/* $Id: pdf.c,v 1.31 2000/03/09 14:53:29 steinm Exp $ */
 
 /* pdflib 2.01 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -151,8 +151,6 @@ function_entry pdf_functions[] = {
 	PHP_FE(pdf_open_gif, NULL)
 	PHP_FE(pdf_close_image, NULL)
 	PHP_FE(pdf_place_image, NULL)
-	PHP_FE(pdf_put_image, NULL)
-	PHP_FE(pdf_execute_image, NULL)
 	PHP_FE(pdf_add_weblink, NULL)
 	PHP_FE(pdf_add_pdflink, NULL)
 	PHP_FE(pdf_add_annotation, NULL)
@@ -425,8 +423,7 @@ PHP_FUNCTION(pdf_open) {
 		if (0 > PDF_open_fp(pdf, fp))
 			RETURN_FALSE;
 	} else {
-		if (0 > PDF_open_mem(pdf, pdf_flushwrite))
-			RETURN_FALSE;
+		PDF_open_mem(pdf, pdf_flushwrite);
 	}
 
 	id = zend_list_insert(pdf,PDF_GLOBAL(le_pdf));

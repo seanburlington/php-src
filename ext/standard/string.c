@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.378 2003/05/04 11:45:58 moriyoshi Exp $ */
+/* $Id: string.c,v 1.379 2003/05/04 12:44:35 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3847,11 +3847,18 @@ PHPAPI size_t php_strip_tags(char *rbuf, int len, int *stateptr, char *allow, in
 						}
 						break;
 						
-					case 3: /* JavaScript/CSS/etc... */
+					case 3:
 						state = 0;
 						tp = tbuf;
 						break;
-					
+
+					case 4: /* JavaScript/CSS/etc... */
+						if (p >= buf + 2 && *(p-1) == '-' && *(p-2) == '-') {
+							state = 0;
+							tp = tbuf;
+						}
+						break;
+
 					default:
 						*(rp++) = c;
 						break;
@@ -3888,6 +3895,12 @@ PHPAPI size_t php_strip_tags(char *rbuf, int len, int *stateptr, char *allow, in
 							tp = tbuf;
 						}
 					}
+				}
+				break;
+
+			case '-':
+				if (state == 3 && p >= buf + 2 && *(p-1) == '-' && *(p-2) == '!') {
+					state = 4;
 				}
 				break;
 

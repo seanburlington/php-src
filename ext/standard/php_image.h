@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_image.h,v 1.19.4.1 2002/12/31 16:35:33 sebastian Exp $ */
+/* $Id: php_image.h,v 1.19.4.2 2003/02/03 13:08:19 sniper Exp $ */
 
 #ifndef PHP_IMAGE_H
 #define PHP_IMAGE_H
@@ -45,7 +45,7 @@ typedef enum
   IMAGE_FILETYPE_JPX,
   IMAGE_FILETYPE_JB2,
   IMAGE_FILETYPE_SWC,
-  IMAGE_FILETYPE_IFF,
+  IMAGE_FILETYPE_IFF
 /* WHEN EXTENDING: PLEASE ALSO REGISTER IN image.c:PHP_MINIT_FUNCTION(imagetypes) */
 } image_filetype;
 /* }}} */

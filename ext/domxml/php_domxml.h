@@ -16,13 +16,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.61 2002/06/14 12:37:28 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.62 2002/06/25 09:19:20 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
 
 #if HAVE_DOMXML
 #include <libxml/parser.h>
+#include <libxml/parserInternals.h>
 #include <libxml/tree.h>
 #include <libxml/xmlerror.h>
 #if defined(LIBXML_HTML_ENABLED)

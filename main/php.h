@@ -28,10 +28,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.17 1999/06/04 10:45:53 zeev Exp $ */
+/* $Id: php.h,v 1.18 1999/06/26 00:34:36 sas Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
+
+#ifdef HAVE_DMALLOC
+#include <dmalloc.h>
+#endif
 
 #define PHP_API_VERSION 19990421
 

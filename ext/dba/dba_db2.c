@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.17 2001/12/11 15:29:02 sebastian Exp $ */
+/* $Id: dba_db2.c,v 1.18 2002/01/12 07:23:35 swm Exp $ */
 
 #include "php.h"
 
@@ -47,13 +47,15 @@ DBA_OPEN_FUNC(db2)
 	int gmode = 0;
 	int filemode = 0644;
 	struct stat check_stat;
-	
+	int ret;
+	int s = VCWD_STAT(info->path, &check_stat);
 	type =  info->mode == DBA_READER ? DB_UNKNOWN :
 		info->mode == DBA_TRUNC ? DB_BTREE :
-		VCWD_STAT(info->path, &check_stat) ? DB_BTREE : DB_UNKNOWN;
+		s ? DB_BTREE : DB_UNKNOWN;
 	  
 	gmode = info->mode == DBA_READER ? DB_RDONLY :
-		info->mode == DBA_CREAT  ? DB_CREATE : 
+		(info->mode == DBA_CREAT && s) ? DB_CREATE : 
+		(info->mode == DBA_CREAT && !s) ? 0 :
 		info->mode == DBA_WRITER ? 0         : 
 		info->mode == DBA_TRUNC ? DB_CREATE | DB_TRUNCATE : -1;
 
@@ -65,11 +67,13 @@ DBA_OPEN_FUNC(db2)
 		filemode = Z_LVAL_PP(info->argv[0]);
 	}
 
-	if(!db_open(info->path, type, gmode, filemode, NULL, NULL, &dbp)) {
+	if(!(ret = db_open(info->path, type, gmode, filemode, NULL, NULL, &dbp))) {
 		info->dbf = malloc(sizeof(dba_db2_data));
 		memset(info->dbf, 0, sizeof(dba_db2_data));
 		((dba_db2_data *) info->dbf)->dbp = dbp;
 		return SUCCESS;
+	} else {
+		printf("Failed: type = %i\ngmode = %i\n%s\n",type,gmode,strerror(ret));
 	}
 	return FAILURE;
 }

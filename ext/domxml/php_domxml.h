@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.72 2002/08/23 15:26:19 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.73 2002/11/29 11:22:06 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -214,6 +214,7 @@ PHP_FUNCTION(xpath_new_context);
 PHP_FUNCTION(xpath_eval);
 PHP_FUNCTION(xpath_eval_expression);
 PHP_FUNCTION(xpath_register_ns);
+PHP_FUNCTION(xpath_register_ns_auto);
 PHP_FUNCTION(domxml_doc_get_elements_by_tagname);
 PHP_FUNCTION(domxml_doc_get_element_by_id);
 #endif

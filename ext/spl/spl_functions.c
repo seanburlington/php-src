@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.c,v 1.26 2004/10/31 20:59:37 helly Exp $ */
+/* $Id: spl_functions.c,v 1.27 2004/11/08 13:42:53 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -75,7 +75,11 @@ void spl_register_sub_class(zend_class_entry ** ppce, zend_class_entry * parent_
 	*ppce = zend_register_internal_class_ex(&ce, parent_ce, NULL TSRMLS_CC);
 
 	/* entries changed by initialize */
-	(*ppce)->create_object = obj_ctor;
+	if (obj_ctor) {
+		(*ppce)->create_object = obj_ctor;
+	} else {
+		(*ppce)->create_object = parent_ce->create_object;
+	}
 }
 /* }}} */
 

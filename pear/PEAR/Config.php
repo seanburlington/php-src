@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.21 2002/05/27 00:16:40 ssb Exp $
+// $Id: Config.php,v 1.22 2002/05/27 00:20:03 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -131,10 +131,9 @@ class PEAR_Config extends PEAR
         'preferred_state' => array(
             'type' => 'set',
             'default' => 'stable',
-            'doc' => 'the installer will prefer releases with this state
-when installing packages without a version or state specified',
+            'doc' => 'the installer will prefer releases with this state when installing packages without a version or state specified',
             'valid_set' => array(
-                'stable', 'beta', 'alpha', 'devel', 'snapshot', 'any'),
+                'stable', 'beta', 'alpha', 'devel', 'snapshot'),
             ),
         'http_proxy' => array(
             'type' => 'string',

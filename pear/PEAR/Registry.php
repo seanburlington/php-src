@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.35.2.4 2003/05/09 12:17:07 pajoye Exp $
+// $Id: Registry.php,v 1.35.2.5 2003/05/28 01:52:45 pajoye Exp $
 
 /*
 TODO:
@@ -404,7 +404,7 @@ class PEAR_Registry extends PEAR
         if (PEAR::isError($e = $this->_lock(LOCK_EX))) {
             return $e;
         }
-        $fp = $this->_openPackageFile($package, 'w');
+        $fp = $this->_openPackageFile($package, 'wb');
         if ($fp === null) {
             $this->_unlock();
             return false;

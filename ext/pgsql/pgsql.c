@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.213 2002/07/28 11:17:57 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.214 2002/08/23 20:57:30 sniper Exp $ */
 
 #include <stdlib.h>
 
@@ -194,7 +194,7 @@ zend_module_entry pgsql_module_entry = {
 	PHP_RINIT(pgsql),
 	PHP_RSHUTDOWN(pgsql),
 	PHP_MINFO(pgsql),
-    NO_VERSION_YET,
+	NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
@@ -1551,8 +1551,8 @@ PHP_FUNCTION(pg_trace)
 			ZEND_WRONG_PARAM_COUNT();
 			break;
 	}
-		
-    ZEND_FETCH_RESOURCE2(pgsql, PGconn *, z_pgsql_link, id, "PostgreSQL link", le_link, le_plink);
+
+	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, z_pgsql_link, id, "PostgreSQL link", le_link, le_plink);
 	convert_to_string_ex(z_filename);
 
 	stream = php_stream_open_wrapper(Z_STRVAL_PP(z_filename), mode, ENFORCE_SAFE_MODE|REPORT_ERRORS, NULL);

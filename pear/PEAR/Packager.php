@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.10 2001/08/19 12:30:24 cox Exp $
+// $Id: Packager.php,v 1.11 2001/08/19 12:37:51 cox Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -155,13 +155,13 @@ class PEAR_Packager extends PEAR_Common
                 }
             }
             //Maintain original file perms
-            $orig_perms = fileperms($fname);
+            $orig_perms = @fileperms($fname);
             if (!@copy($fname, $file)) {
                 $this->log(0, "could not copy $fname to $file");
             } else {
                 $this->log(2, "+ copying from $fname to $file");
+                @chmod($file, $orig_perms);
             }
-            chmod($file, $orig_perms);
         }
         // XXX TODO: Rebuild the package file as the old method did?
 

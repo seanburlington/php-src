@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.39 2000/03/02 14:32:24 ssb Exp $ */
+/* $Id: mod_php4.c,v 1.40 2000/04/02 19:45:02 andi Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -483,7 +483,7 @@ int send_php(request_rec *r, int display_source_mode, char *filename)
 	SG(server_context) = r;
 	
 	php_save_umask();
-	chdir_file(filename);
+	PHP_CHDIR_FILE(filename);
 	add_common_vars(r);
 	add_cgi_vars(r);
 

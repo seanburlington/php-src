@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.83 2001/05/05 11:11:32 sas Exp $ */
+/* $Id: php_mysql.c,v 1.84 2001/05/07 11:02:31 wez Exp $ */
 
 
 /* TODO:
@@ -304,6 +304,8 @@ PHP_MINIT_FUNCTION(mysql)
 	REGISTER_LONG_CONSTANT("MYSQL_ASSOC", MYSQL_ASSOC, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MYSQL_NUM", MYSQL_NUM, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MYSQL_BOTH", MYSQL_BOTH, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("MYSQL_USE_RESULT", MYSQL_USE_RESULT, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("MYSQL_STORE_RESULT", MYSQL_STORE_RESULT, CONST_CS | CONST_PERSISTENT);
 
 	return SUCCESS;
 }
@@ -1041,7 +1043,7 @@ PHP_FUNCTION(mysql_unbuffered_query)
    Send an SQL query to MySQL */
 PHP_FUNCTION(mysql_db_query)
 {
-	zval **db, **query, **mysql_link;
+	zval **db, **query, **mysql_link, **resmode;
 	int id, use_store=MYSQL_STORE_RESULT;
 	MySLS_FETCH();
 	
@@ -1059,12 +1061,21 @@ PHP_FUNCTION(mysql_db_query)
 			}
 			id = -1;
 			break;
+		case 4:
+			if (zend_get_parameters_ex(4, &db, &query, &mysql_link, &resmode)==FAILURE) {
+				RETURN_FALSE;
+			}
+			id = -1;
+			convert_to_long_ex(resmode);
+			use_store = Z_LVAL_PP(resmode);
+			break;
+
 		default:
 			WRONG_PARAM_COUNT;
 			break;
 	}
 	
-	php_mysql_do_query_general(query, mysql_link, id, db, MYSQL_STORE_RESULT, return_value);
+	php_mysql_do_query_general(query, mysql_link, id, db, use_store, return_value);
 }
 /* }}} */
 

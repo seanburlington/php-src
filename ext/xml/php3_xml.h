@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_xml.h,v 1.3 1999/05/22 16:12:09 sas Exp $ */
+/* $Id: php3_xml.h,v 1.4 1999/07/02 15:31:02 thies Exp $ */
 
 #if HAVE_LIBEXPAT
 # ifndef _PHP_XML_H
@@ -66,7 +66,7 @@ typedef struct {
 	int level;
 	int toffset;
 	int curtag;
-	pval *ctag;
+	pval **ctag;
 	char **ltags;
 	int lastwasopen;
 	int skipwhite;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.13 1999/10/05 14:36:00 thies Exp $ */
+/* $Id: dir.c,v 1.14 1999/10/05 16:18:40 sas Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -50,7 +50,7 @@ typedef struct {
 #define DIRLS_FETCH() php_dir_globals *dir_globals = ts_resource(dir_globals_id)
 int dir_globals_id;
 #else
-#define DIR(v) (xml_globals.v)
+#define DIR(v) (dir_globals.v)
 #define DIRLS_FETCH()
 php_dir_globals dir_globals;
 #endif

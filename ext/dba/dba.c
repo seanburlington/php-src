@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.63 2002/11/14 21:09:40 helly Exp $ */
+/* $Id: dba.c,v 1.64 2002/11/22 15:47:47 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -285,6 +285,8 @@ static void php_dba_update(INTERNAL_FUNCTION_PARAMETERS, int mode)
 {
 	DBA_ID_PARS;
 	zval **val, **key;
+	char *v;
+	int len;
 
 	if(ac != 3 || zend_get_parameters_ex(ac, &key, &val, &id) != SUCCESS) {
 		WRONG_PARAM_COUNT;
@@ -295,8 +297,19 @@ static void php_dba_update(INTERNAL_FUNCTION_PARAMETERS, int mode)
 
 	DBA_WRITE_CHECK;
 	
-	if(info->hnd->update(info, VALLEN(key), VALLEN(val), mode TSRMLS_CC) == SUCCESS)
-		RETURN_TRUE;
+	if (PG(magic_quotes_runtime)) {
+		len = Z_STRLEN_PP(val);
+		v = estrndup(Z_STRVAL_PP(val), len);
+		php_stripslashes(v, &len TSRMLS_CC); 
+		if(info->hnd->update(info, VALLEN(key), v, len, mode TSRMLS_CC) == SUCCESS) {
+			efree(v);
+			RETURN_TRUE;
+		}
+		efree(v);
+	} else {
+		if(info->hnd->update(info, VALLEN(key), VALLEN(val), mode TSRMLS_CC) == SUCCESS)
+			RETURN_TRUE;
+	}
 	RETURN_FALSE;
 }
 /* }}} */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.29 2004/09/17 12:44:56 wez Exp $ */
+/* $Id: xp_socket.c,v 1.30 2004/09/17 14:36:55 wez Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -126,6 +126,9 @@ static void php_sock_stream_wait_for_data(php_stream *stream, php_netstream_data
 			sock->timeout_event = 1;
 
 		if (retval >= 0)
+			break;
+
+		if (php_socket_errno() != EINTR)
 			break;
 	}
 }

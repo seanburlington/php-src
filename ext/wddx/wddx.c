@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.15 1999/10/05 13:33:57 andrei Exp $ */
+/* $Id: wddx.c,v 1.16 1999/10/12 15:23:59 thies Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -853,7 +853,7 @@ PHP_FUNCTION(wddx_add_vars)
 	
 	packet_id = args[0];
 
-	packet = (wddx_packet *)zend_fetch_resource(packet_id, -1, "WDDX packet ID", le_wddx);
+	packet = (wddx_packet *)zend_fetch_resource(packet_id, -1, "WDDX packet ID", NULL, 1, le_wddx);
 	if (!packet)
 	{
 		efree(args);

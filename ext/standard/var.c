@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.102 2001/08/03 07:25:27 sas Exp $ */
+/* $Id: var.c,v 1.103 2001/08/03 09:35:33 sas Exp $ */
 
 
 /* {{{ includes 
@@ -606,6 +606,7 @@ PHP_FUNCTION(serialize)
 	PHP_VAR_SERIALIZE_INIT(var_hash);
 	php_var_serialize(&buf, struc, &var_hash);
 	PHP_VAR_SERIALIZE_DESTROY(var_hash);
+	smart_str_0(&buf);
 	RETVAL_STRINGL(buf.c, buf.len, 0);
 }
 

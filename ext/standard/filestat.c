@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.29 2000/03/17 12:41:55 hholzgra Exp $ */
+/* $Id: filestat.c,v 1.30 2000/03/30 22:56:33 andi Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -387,7 +387,7 @@ PHP_FUNCTION(touch)
 	/* create the file if it doesn't exist already */
 	ret = stat((*filename)->value.str.val, &sb);
 	if (ret == -1) {
-		file = fopen((*filename)->value.str.val, "w");
+		file = PHP_FOPEN((*filename)->value.str.val, "w");
 		if (file == NULL) {
 			php_error(E_WARNING, "unable to create file %s because %s", (*filename)->value.str.val, strerror(errno));
 			if (newtime) efree(newtime);

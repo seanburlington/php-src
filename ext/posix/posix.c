@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.8 2000/03/06 18:41:15 ssb Exp $ */
+/* $Id: posix.c,v 1.9 2000/03/30 22:56:32 andi Exp $ */
 
 
 #include "php.h"
@@ -134,7 +134,7 @@ DLEXPORT zend_module_entry *get_module(void) { return &posix__module_entry; }
 
 static PHP_MINFO_FUNCTION(posix)
 {
-    PUTS("$Revision: 1.8 $\n");
+    PUTS("$Revision: 1.9 $\n");
 }
 
 /* {{{ proto int posix_kill(int pid, int sig)
@@ -568,7 +568,7 @@ PHP_FUNCTION(posix_getcwd)
 	char  buffer[MAXPATHLEN];
 	char *p;
 
-	p = getcwd(buffer, MAXPATHLEN);
+	p = PHP_GETCWD(buffer, MAXPATHLEN);
 	if (!p) {
 		php_error(E_WARNING, "posix_getcwd() failed with '%s'",
 			strerror(errno));

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.26 2000/03/11 20:48:44 andi Exp $ */
+/* $Id: db.c,v 1.27 2000/03/30 22:56:31 andi Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 # include "dl/phpdl.h"
@@ -122,7 +122,7 @@ static int php_dbm_key_exists(DBM *dbf, datum key_datum) {
 #define DBM_CREATE_MODE "a+b"
 #define DBM_NEW_MODE "w+b"
 #define DBM_DEFAULT_MODE "r"
-#define DBM_OPEN(filename, mode) fopen(filename, mode)
+#define DBM_OPEN(filename, mode) PHP_FOPEN(filename, mode)
 #define DBM_CLOSE(dbf) fclose(dbf)
 #define DBM_STORE(dbf, key, value, mode) flatfile_store(dbf, key, value, mode)
 #define DBM_FETCH(dbf, key) flatfile_fetch(dbf, key)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.331.2.1 2001/05/19 07:43:25 sas Exp $ */
+/* $Id: basic_functions.c,v 1.331.2.2 2001/05/19 22:23:13 sniper Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -237,7 +237,10 @@ function_entry basic_functions[] = {
 	PHP_FE(mt_rand,									NULL)
 	PHP_FE(mt_srand,								NULL)
 	PHP_FE(mt_getrandmax,							NULL)
+
+#if HAVE_GETSERVBYNAME
 	PHP_FE(getservbyname, NULL)
+#endif
 #if HAVE_GETSERVBYPORT
 	PHP_FE(getservbyport, NULL)
 #endif
@@ -247,6 +250,7 @@ function_entry basic_functions[] = {
 #if HAVE_GETPROTOBYNUMBER
 	PHP_FE(getprotobynumber, NULL)
 #endif
+
 	PHP_FE(gethostbyaddr,							NULL)
 	PHP_FE(gethostbyname,							NULL)
 	PHP_FE(gethostbynamel,							NULL)
@@ -2235,6 +2239,7 @@ PHP_FUNCTION(ignore_user_abort)
 
 /* {{{ proto int getservbyname(string service, string protocol)
    Returns port associated with service. Protocol must be "tcp" or "udp". */
+#if HAVE_GETSERVBYNAME
 PHP_FUNCTION(getservbyname)
 {
 	pval **name,**proto;
@@ -2253,6 +2258,7 @@ PHP_FUNCTION(getservbyname)
 
 	RETURN_LONG(ntohs(serv->s_port));
 }
+#endif
 /* }}} */
 
 

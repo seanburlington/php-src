@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.117 2003/02/28 20:48:38 rasmus Exp $ */
+/* $Id: php_ini.c,v 1.118 2003/03/18 15:53:33 helly Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -274,6 +274,10 @@ int php_init_config()
 
 	if (zend_hash_init(&configuration_hash, 0, NULL, (dtor_func_t) pvalue_config_destructor, 1) == FAILURE) {
 		return FAILURE;
+	}
+
+	if (sapi_module.ini_defaults) {
+		sapi_module.ini_defaults(&configuration_hash);
 	}
 
 	zend_llist_init(&extension_lists.engine, sizeof(char *), (llist_dtor_func_t) free_estring, 1);

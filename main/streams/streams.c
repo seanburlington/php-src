@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.16 2003/03/31 23:22:10 moriyoshi Exp $ */
+/* $Id: streams.c,v 1.17 2003/04/04 01:33:58 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -801,6 +801,10 @@ PHPAPI char *php_stream_get_record(php_stream *stream, size_t maxlen, size_t *re
 		} else {
 			toread = e - (char *) stream->readbuf;
 		}
+	}
+
+	if (toread > maxlen && maxlen > 0) {
+		toread = maxlen;
 	}
 
 	buf = emalloc(toread + 1);

@@ -80,7 +80,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.54 2003/03/24 21:22:22 moriyoshi Exp $ */
+/* $Id: mbfilter.c,v 1.55 2003/04/04 09:06:23 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -8138,6 +8138,13 @@ mbfl_strcut(
 	mbfl_string_init(result);
 	result->no_language = string->no_language;
 	result->no_encoding = string->no_encoding;
+
+	if (from > (int)string->len) {
+		result->len = 0;
+		result->val = mbfl_malloc(1);
+		result->val[0] = '\0';
+		return result; 
+	}
 
 	if ((encoding->flag & (MBFL_ENCTYPE_SBCS | MBFL_ENCTYPE_WCS2BE | MBFL_ENCTYPE_WCS2LE | MBFL_ENCTYPE_WCS4BE | MBFL_ENCTYPE_WCS4LE)) ||
 	   encoding->mblen_table != NULL) {

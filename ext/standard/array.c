@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.162 2002/05/13 17:28:38 andrei Exp $ */
+/* $Id: array.c,v 1.163 2002/06/03 17:49:48 edink Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2878,15 +2878,7 @@ PHP_FUNCTION(array_rand)
 	zend_hash_internal_pointer_reset_ex(Z_ARRVAL_PP(input), &pos);
 	while (num_req_val && (key_type = zend_hash_get_current_key_ex(Z_ARRVAL_PP(input), &string_key, &string_key_len, &num_key, 0, &pos)) != HASH_KEY_NON_EXISTANT) {
 
-#ifdef HAVE_RANDOM
-		randval = random();
-#else
-#ifdef HAVE_LRAND48
-		randval = lrand48();
-#else
-		randval = rand();
-#endif
-#endif
+		randval = php_rand(TSRMLS_C);
 
 		if ((double)(randval/(PHP_RAND_MAX+1.0)) < (double)num_req_val/(double)num_avail) {
 			/* If we are returning a single result, just do it. */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.574 2003/02/09 03:49:41 shane Exp $ */
+/* $Id: basic_functions.c,v 1.575 2003/02/09 19:09:50 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -886,7 +886,7 @@ function_entry basic_functions[] = {
 	PHP_FE(aggregate_methods_by_list,		first_arg_force_ref)
 	PHP_FE(aggregate_properties,			first_arg_force_ref)
 	PHP_FE(aggregate_properties_by_list,	first_arg_force_ref)
-#if HAVE_PCRE || HAVE_BUNDLED_PCRE
+#if (HAVE_PCRE || HAVE_BUNDLED_PCRE) && !defined(COMPILE_DL_PCRE)
 	PHP_FE(aggregate_methods_by_regexp,		first_arg_force_ref)
 	PHP_FE(aggregate_properties_by_regexp,	first_arg_force_ref)
 #endif

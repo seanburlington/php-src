@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: aggregation.c,v 1.17 2003/02/09 18:47:21 sniper Exp $ */
+/* $Id: aggregation.c,v 1.18 2003/02/09 19:09:50 sniper Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -524,7 +524,7 @@ PHP_FUNCTION(aggregate_properties_by_list)
 }
 /* }}} */
 
-#if HAVE_PCRE || HAVE_BUNDLED_PCRE
+#if (HAVE_PCRE || HAVE_BUNDLED_PCRE) && !defined(COMPILE_DL_PCRE)
 /* {{{ proto void aggregate_methods_by_regexp(object obj, string class, string regexp [, bool exclude])
    */
 PHP_FUNCTION(aggregate_methods_by_regexp)

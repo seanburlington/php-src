@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.262 2002/01/22 03:35:23 elixer Exp $ */
+/* $Id: string.c,v 1.263 2002/03/02 14:06:57 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -865,7 +865,8 @@ PHP_FUNCTION(implode)
 		convert_to_string_ex(arg1);
 		delim = *arg1;
 	} else {
-		php_error(E_WARNING, "Bad arguments to implode()");
+		php_error(E_WARNING, "Bad arguments to %s()",
+			get_active_function_name(TSRMLS_C));
 		return;
 	}
 

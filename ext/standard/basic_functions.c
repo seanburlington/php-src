@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.419 2001/11/11 18:28:43 derick Exp $ */
+/* $Id: basic_functions.c,v 1.420 2001/11/13 00:37:49 sniper Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -2229,14 +2229,16 @@ static int php_ini_get_option(zend_ini_entry *ini_entry, int num_args, va_list a
 		MAKE_STD_ZVAL(option);
 		array_init(option);
 
-		if(ini_entry->value) {
+		if(ini_entry->orig_value) {
+			add_assoc_stringl(option, "global_value", ini_entry->orig_value, ini_entry->orig_value_length, 1);
+		} else if (ini_entry->value) {
 			add_assoc_stringl(option, "global_value", ini_entry->value, ini_entry->value_length, 1);
 		} else {
 			add_assoc_null(option, "global_value");
 		}
 
-		if(ini_entry->orig_value) {
-			add_assoc_stringl(option, "local_value", ini_entry->orig_value, ini_entry->orig_value_length, 1);
+		if(ini_entry->value) {
+			add_assoc_stringl(option, "local_value", ini_entry->value, ini_entry->value_length, 1);
 		} else {
 			add_assoc_null(option, "local_value");
 		}

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.244 2003/08/13 01:37:31 sniper Exp $ */
+/* $Id: array.c,v 1.245 2003/09/11 17:40:18 jay Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2209,7 +2209,15 @@ static void php_array_merge_wrapper(INTERNAL_FUNCTION_PARAMETERS, int recursive)
 		efree(args);
 		WRONG_PARAM_COUNT;
 	}
-	
+
+	for (i=0; i<argc; i++) {
+		if (Z_TYPE_PP(args[i]) != IS_ARRAY) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Argument #%d is not an array", i+1);
+			efree(args);
+			return;
+		}
+	}
+
 	array_init(return_value);
 	
 	for (i=0; i<argc; i++) {

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.6 2004/01/08 08:14:18 andi Exp $ */
+/* $Id: bz2.c,v 1.7 2004/07/20 05:26:33 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -243,13 +243,14 @@ static void php_bz2_error(INTERNAL_FUNCTION_PARAMETERS, int);
 PHP_MINIT_FUNCTION(bz2)
 {
 	php_register_url_stream_wrapper("compress.bzip2", &php_stream_bzip2_wrapper TSRMLS_CC);
-
+	php_stream_filter_register_factory("bzip2.*", &php_bz2_filter_factory TSRMLS_CC);
 	return SUCCESS;
 }
 
 PHP_MSHUTDOWN_FUNCTION(bz2)
 {
 	php_unregister_url_stream_wrapper("compress.bzip2" TSRMLS_CC);
+	php_stream_filter_unregister_factory("bzip2.*" TSRMLS_CC);
 
 	return SUCCESS;
 }
@@ -258,6 +259,8 @@ PHP_MINFO_FUNCTION(bz2)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "BZip2 Support", "Enabled");
+	php_info_print_table_row(2, "Stream Wrapper support", "compress.bz2://");
+	php_info_print_table_row(2, "Stream Filter support", "bzip2.decompress, bzip2.compress");
 	php_info_print_table_row(2, "BZip2 Version", (char *) BZ2_bzlibVersion());
 	php_info_print_table_end();
 }

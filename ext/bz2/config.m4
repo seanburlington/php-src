@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.3 2004/01/21 05:04:30 sniper Exp $
+dnl $Id: config.m4,v 1.4 2004/07/20 05:26:33 pollita Exp $
 dnl
 
 PHP_ARG_WITH(bz2, for BZip2 support,
@@ -35,6 +35,6 @@ if test "$PHP_BZ2" != "no"; then
     -L$BZIP_DIR/lib
   ])
 
-  PHP_NEW_EXTENSION(bz2, bz2.c, $ext_shared)
+  PHP_NEW_EXTENSION(bz2, bz2.c bz2_filter.c, $ext_shared)
   PHP_SUBST(BZ2_SHARED_LIBADD)
 fi

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_bz2.h,v 1.5 2004/01/12 16:30:55 martin Exp $ */
+/* $Id: php_bz2.h,v 1.6 2004/07/20 05:26:33 pollita Exp $ */
 
 #ifndef PHP_BZ2_H
 #define PHP_BZ2_H
@@ -62,8 +62,15 @@ PHP_BZ2_API php_stream *_php_stream_bz2open_from_BZFILE(BZFILE *bz, char *mode, 
 #define php_stream_bz2open_from_BZFILE(bz, mode, innerstream)	_php_stream_bz2open_from_BZFILE((bz), (mode), (innerstream) STREAMS_CC TSRMLS_CC)
 #define php_stream_bz2open(wrapper, path, mode, options, opened_path)	_php_stream_bz2open((wrapper), (path), (mode), (options), (opened_path), NULL STREAMS_CC TSRMLS_CC)
 
+php_stream_filter_factory php_bz2_filter_factory;
 extern php_stream_ops php_stream_bz2io_ops;
 #define PHP_STREAM_IS_BZIP2	&php_stream_bz2io_ops
+
+/* 400kb */
+#define PHP_BZ2_FILTER_DEFAULT_BLOCKSIZE        4
+
+/* BZ2 Internal Default */
+#define PHP_BZ2_FILTER_DEFAULT_WORKFACTOR       0
 
 #endif
 

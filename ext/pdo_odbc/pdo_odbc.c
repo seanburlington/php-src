@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_odbc.c,v 1.2 2004/05/21 21:20:00 wez Exp $ */
+/* $Id: pdo_odbc.c,v 1.3 2004/05/22 00:30:00 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -68,6 +68,7 @@ ZEND_GET_MODULE(pdo_odbc)
 PHP_MINIT_FUNCTION(pdo_odbc)
 {
 	php_pdo_register_driver(&pdo_odbc_driver);
+	pdo_odbc_init_error_table();
 	return SUCCESS;
 }
 /* }}} */
@@ -77,6 +78,7 @@ PHP_MINIT_FUNCTION(pdo_odbc)
 PHP_MSHUTDOWN_FUNCTION(pdo_odbc)
 {
 	php_pdo_unregister_driver(&pdo_odbc_driver);
+	pdo_odbc_fini_error_table();
 	return SUCCESS;
 }
 /* }}} */

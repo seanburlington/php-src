@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_stmt.c,v 1.2 2004/05/17 22:20:11 wez Exp $ */
+/* $Id: odbc_stmt.c,v 1.3 2004/05/22 00:30:00 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -73,11 +73,11 @@ static int odbc_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 			break;
 		case SQL_NO_DATA_FOUND:
 		case SQL_SUCCESS_WITH_INFO:
-			odbc_error(stmt->dbh, "SQLExecute", S->stmt);
+			pdo_odbc_stmt_error("SQLExecute");
 			break;
 
 		default:
-			odbc_error(stmt->dbh, "SQLExecute", S->stmt);
+			pdo_odbc_stmt_error("SQLExecute");
 			return 0;
 	}
 
@@ -156,7 +156,7 @@ static int odbc_stmt_fetch(pdo_stmt_t *stmt TSRMLS_DC)
 		return 0;
 	}
 
-	odbc_error(stmt->dbh, "SQLFetch", S->stmt);
+	pdo_odbc_stmt_error("SQLFetch");
 
 	return 0;
 }

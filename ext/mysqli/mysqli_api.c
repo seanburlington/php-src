@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.18 2003/03/08 23:33:12 georg Exp $ 
+  $Id: mysqli_api.c,v 1.19 2003/03/11 01:19:21 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -48,7 +48,7 @@ PHP_FUNCTION(mysqli_affected_rows)
 
 	MYSQLI_PROFILER_COMMAND_START(prcommand, prmysql);
 	rc = mysql_affected_rows(mysql);
-	MYSQLI_PROFILER_COMMAND_RETURNLONG(prcommand, rc);
+	MYSQLI_PROFILER_COMMAND_RETURNLONG(prcommand, (long)rc);
 	MYSQLI_RETURN_LONG_LONG(rc);
 }
 /* }}} */
@@ -491,14 +491,17 @@ PHP_FUNCTION(mysqli_data_seek)
 */
 PHP_FUNCTION(mysqli_debug)
 {
-	char	*debug;
-	int	 debug_len;
+	char		*debug;
+	int			debug_len;
+	PR_COMMAND	*prcommand;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &debug, &debug_len) == FAILURE) {
 		return;
 	}
 	
+	MYSQLI_PROFILER_COMMAND_START(prcommand, prmain);
 	mysql_debug(debug);
+	MYSQLI_PROFILER_COMMAND_RETURNSTRING(prcommand, NULL);
 	RETURN_TRUE;
 }
 /* }}} */

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.7 2003/03/08 23:33:12 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.8 2003/03/11 01:19:21 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -78,7 +78,7 @@ PHP_FUNCTION(mysqli_connect)
 	}
 
 	if (MyG(profiler)) {
-		prmysql = (PR_MYSQL *)MYSQLI_PROFILER_NEW(NULL, MYSQLI_PR_MYSQL, 0);
+		prmysql = (PR_MYSQL *)MYSQLI_PROFILER_NEW(prmain, MYSQLI_PR_MYSQL, 0);
 		php_mysqli_profiler_timediff(starttime, &prmysql->header.elapsedtime);
 		MYSQLI_PROFILER_STARTTIME(prmysql);
 		prmysql->hostname = estrdup(hostname);

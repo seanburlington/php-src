@@ -8,6 +8,8 @@ Release
 Release_inline
 Debug
 Release_TS
+Release_TS_SSL
 Release_TSDbg
 Release_TS_inline
 Debug_TS
+Debug_TS_SSL

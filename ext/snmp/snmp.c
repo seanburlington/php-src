@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.59 2002/07/13 05:42:01 sniper Exp $ */
+/* $Id: snmp.c,v 1.60 2002/09/05 11:50:43 hyanantha Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -32,6 +32,20 @@
 #include <errno.h>
 #include <process.h>
 #include "win32/time.h"
+#elif defined(NETWARE)
+#ifdef USE_WINSOCK
+/*#include <ws2nlm.h>*/
+#include <novsock2.h>
+#else
+#include <sys/socket.h>
+#endif
+#include <errno.h>
+/*#include <process.h>*/
+#ifdef NEW_LIBC
+#include <sys/timeval.h>
+#else
+#include "netware/time_nw.h"
+#endif
 #else
 #include <sys/socket.h>
 #include <netinet/in.h>

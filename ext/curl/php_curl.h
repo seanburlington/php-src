@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.9 2000/08/20 08:28:00 sterling Exp $ */
+/* $Id: php_curl.h,v 1.10 2000/08/27 22:53:33 sterling Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -27,6 +27,8 @@
 #endif
 
 #if HAVE_CURL
+
+#include <curl/curl.h>
 
 extern zend_module_entry curl_module_entry;
 #define curl_module_ptr &curl_module_entry
@@ -88,16 +90,15 @@ PHP_FUNCTION(curl_close);
 #define C_LAST 45
 #define CURLOPT_RETURNTRANSFER 500
 
-struct curl_file_id_table {
-	int id;
+typedef struct {
 	int return_transfer;
-	int output_to_file;
-	struct curl_file_id_table *next;
-};
+	int output_file;
+	int php_stdout;
+	CURL *cp;
+} php_curl;
 
 typedef struct {
 	int le_curl;
-	struct curl_file_id_table *output_node, *output_previous, output_start;
 } php_curl_globals;
 
 #ifdef ZTS

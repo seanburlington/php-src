@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.40 2002/07/11 03:37:28 yohgaki Exp $ */
+/* $Id: iconv.c,v 1.41 2002/07/13 08:42:38 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -228,7 +228,7 @@ static int php_iconv_string(const char *in_p, size_t in_len,
 	out_p = out_buf;
 
 	while(in_left > 0) {
-		result = icv(cd, (char **)&in_p, &in_left, (char **) &out_p, &out_left);
+		result = icv(cd, (const char **)&in_p, &in_left, (char **) &out_p, &out_left);
 		out_size = bsz - out_left;
 		if( result == (size_t)(-1) ) {
 			if( errno == E2BIG && in_left > 0 ) {

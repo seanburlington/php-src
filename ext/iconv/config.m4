@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.16 2002/10/11 15:25:36 sniper Exp $
+dnl $Id: config.m4,v 1.17 2002/10/11 17:48:39 moriyoshi Exp $
 dnl
 
 PHP_ARG_WITH(iconv, for iconv support,
@@ -58,20 +58,22 @@ int main() {
       AC_TRY_COMPILE([#include <iconv.h>],[void __gconv(); int main() { __gconv(); }],
       [
         AC_MSG_RESULT(yes)
-        PHP_DEFINE([ICONV_IMPL],["glibc"])
-        AC_DEFINE([ICONV_IMPL],["glibc"],[Which iconv implementation to use])
+        PHP_DEFINE([HAVE_GLIBC_ICONV],1)
+        AC_DEFINE([HAVE_GLIBC_ICONV],1,[glibc's iconv implementation])
+        PHP_DEFINE([PHP_ICONV_IMPL],[\"glibc\"])
+        AC_DEFINE([PHP_ICONV_IMPL],["glibc"],[Which iconv implementation to use])
       ],[
         AC_MSG_RESULT(no)
       ])
     else
       case "$iconv_lib_name" in
         iconv [)]
-          PHP_DEFINE([ICONV_IMPL],["libiconv"])
-          AC_DEFINE([ICONV_IMPL],["libiconv"],[Which iconv implementation to use])
+          PHP_DEFINE([PHP_ICONV_IMPL],[\"libiconv\"])
+          AC_DEFINE([PHP_ICONV_IMPL],["libiconv"],[Which iconv implementation to use])
           ;;
         giconv [)]
-          PHP_DEFINE([ICONV_IMPL],["giconv"])
-          AC_DEFINE([ICONV_IMPL],["giconv"],[Which iconv implementation to use])
+          PHP_DEFINE([PHP_ICONV_IMPL],[\"giconv\"])
+          AC_DEFINE([PHP_ICONV_IMPL],["giconv"],[Which iconv implementation to use])
           ;;
       esac
     fi 

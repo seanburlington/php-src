@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.122 1999/09/12 20:36:47 zeev Exp $ */
+/* $Id: main.c,v 1.123 1999/09/16 23:18:15 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -63,6 +63,8 @@
 #include "zend_execute.h"
 #include "zend_highlight.h"
 #include "zend_indent.h"
+
+#include "php_content_types.h"
 
 #if USE_SAPI
 #include "serverapi/sapi.h"
@@ -876,6 +878,7 @@ int php_module_startup(sapi_module_struct *sf)
 	zuv.short_tags = (unsigned char) PG(short_tags);
 	zuv.asp_tags = (unsigned char) PG(asp_tags);
 	zend_set_utility_values(&zuv);
+	php_startup_SAPI_content_types();
 
 	if (module_startup_modules() == FAILURE) {
 		php_printf("Unable to start modules\n");

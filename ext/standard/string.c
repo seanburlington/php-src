@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.36 1999/09/11 14:09:29 zeev Exp $ */
+/* $Id: string.c,v 1.37 1999/09/16 23:18:15 zeev Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -82,13 +82,13 @@ PHP_FUNCTION(bin2hex)
    Get string length */
 PHP_FUNCTION(strlen)
 {
-	pval *str;
+	pval **str;
 	
-	if (ARG_COUNT(ht) != 1 || getParameters(ht, 1, &str) == FAILURE) {
+	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &str) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
-	convert_to_string(str);
-	RETVAL_LONG(str->value.str.len);
+	convert_to_string_ex(str);
+	RETVAL_LONG((*str)->value.str.len);
 }
 /* }}} */
 

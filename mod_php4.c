@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.25 1999/09/13 00:35:03 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.26 1999/09/16 23:18:15 zeev Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -193,7 +193,9 @@ sapi_module_struct sapi_module = {
 	NULL,							/* send header handler */
 
 	sapi_apache_read_post,			/* read POST data */
-	sapi_apache_read_cookies		/* read Cookies */
+	sapi_apache_read_cookies,		/* read Cookies */
+
+	STANDARD_SAPI_MODULE_PROPERTIES
 };
 
 

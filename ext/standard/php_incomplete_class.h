@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_incomplete_class.h,v 1.5 2001/07/28 11:36:18 zeev Exp $ */
+/* $Id: php_incomplete_class.h,v 1.6 2001/07/29 08:14:29 andi Exp $ */
 
 #ifndef PHP_INCOMPLETE_CLASS_H
 #define PHP_INCOMPLETE_CLASS_H
@@ -30,13 +30,14 @@
 	(PHP_IC_ENTRY ? PHP_IC_ENTRY : php_create_incomplete_class(TSRMLS_C))
 
 
-#define PHP_SET_CLASS_ATTRIBUTES(struc) 				\
-	if ((struc)->value.obj.ce == BG(incomplete_class)) {				\
+#define PHP_SET_CLASS_ATTRIBUTES(struc) 								\
+	/* OBJECTS_FIXME: Fix for new object model */						\
+	if (Z_OBJCE_P(struc) == BG(incomplete_class)) {						\
 		class_name = php_lookup_class_name(struc, &name_len, 1);		\
 		free_class_name = 1;											\
 	} else {															\
-		class_name = (struc)->value.obj.ce->name;						\
-		name_len   = (struc)->value.obj.ce->name_length;				\
+		class_name = Z_OBJCE_P(struc)->name;							\
+		name_len   = Z_OBJCE_P(struc)->name_length;						\
 	}
 
 #define PHP_CLEANUP_CLASS_ATTRIBUTES()									\

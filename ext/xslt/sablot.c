@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.40 2002/04/16 15:54:58 sterling Exp $ */
+/* $Id: sablot.c,v 1.41 2002/04/18 14:05:27 sander Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1300,8 +1300,6 @@ static SAX_RETURN sax_enddoc(void *ctx)
 
 /* {{{ _error_parse()
    Parse a char ** array into an _error_fields structure */
-#define MIN(__a, __b) ((__a) < (__b) ? (__a) : (__b))
-
 struct _error_fields {
 	char *message;
 	char *type;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ldap.h,v 1.21 2001/11/21 20:14:17 venaas Exp $ */
+/* $Id: php_ldap.h,v 1.22 2001/11/29 20:26:20 venaas Exp $ */
 
 #ifndef PHP_LDAP_H
 #define PHP_LDAP_H
@@ -92,6 +92,10 @@ PHP_FUNCTION(ldap_rename);
 
 #if LDAP_API_VERSION > 2000
 PHP_FUNCTION(ldap_start_tls);
+#endif
+
+#ifdef HAVE_3ARG_SETREBINDPROC
+PHP_FUNCTION(ldap_set_rebind_proc);
 #endif
 
 #ifdef STR_TRANSLATION

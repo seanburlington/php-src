@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.331 2002/10/03 15:10:36 sas Exp $ */
+/* $Id: session.c,v 1.332 2002/10/03 15:33:00 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1427,6 +1427,9 @@ PHP_FUNCTION(session_decode)
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &str) == FAILURE)
 		WRONG_PARAM_COUNT;
+
+	if (PS(session_status) == php_session_none)
+		RETURN_FALSE;
 
 	convert_to_string_ex(str);
 

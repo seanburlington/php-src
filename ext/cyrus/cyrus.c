@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyrus.c,v 1.14 2003/01/18 21:31:04 iliaa Exp $ */
+/* $Id: cyrus.c,v 1.15 2003/03/06 20:31:14 sesser Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -110,7 +110,7 @@ extern void fatal(char *s, int exit)
 {
 	TSRMLS_FETCH();
 
-	php_error_docref(NULL TSRMLS_CC, E_ERROR, s);
+	php_error_docref(NULL TSRMLS_CC, E_ERROR, "%s", s);
 }
 
 /* {{{ proto resource cyrus_connect([ string host [, string port [, int flags]]])

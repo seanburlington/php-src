@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.7 2003/02/27 17:43:38 wez Exp $ */
+/* $Id: streams.c,v 1.8 2003/03/06 20:31:20 sesser Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -174,7 +174,7 @@ PHPAPI void php_stream_wrapper_log_error(php_stream_wrapper *wrapper, int option
 	va_end(args);
 
 	if (options & REPORT_ERRORS || wrapper == NULL) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, buffer);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", buffer);
 		efree(buffer);
 	} else {
 		/* append to stack */
@@ -341,7 +341,7 @@ fprintf(stderr, "stream_free: %s:%p[%s] preserve_handle=%d release_cast=%d remov
 # if defined(PHP_WIN32)
 			OutputDebugString(leakbuf);
 # else
-			fprintf(stderr, leakbuf);
+			fprintf(stderr, "%s", leakbuf);
 # endif
 		} else {
 			STR_FREE(stream->__orig_path);

@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h.in,v 1.1 2002/05/02 09:49:41 sebastian Exp $
+	$Id: config.w32.h.in,v 1.2 2002/05/10 04:58:05 edink Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -24,7 +24,7 @@
 #define HAVE_CRYPT 1
 #define PHP_STD_DES_CRYPT 1
 #define PHP_EXT_DES_CRYPT 0
-#define PHP_MD5_CRYPT 0
+#define PHP_MD5_CRYPT 1
 #define PHP_BLOWFISH_CRYPT 0
 
 /* Enable / Disable CALENDAR extension (default: enabled) */

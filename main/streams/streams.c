@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.52 2004/03/07 22:06:36 wez Exp $ */
+/* $Id: streams.c,v 1.53 2004/03/31 23:48:59 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -215,6 +215,9 @@ PHPAPI php_stream *_php_stream_alloc(php_stream_ops *ops, void *abstract, const 
 	ret = (php_stream*) pemalloc_rel_orig(sizeof(php_stream), persistent_id ? 1 : 0);
 
 	memset(ret, 0, sizeof(php_stream));
+
+	ret->readfilters.stream = ret;
+	ret->writefilters.stream = ret;
 
 #if STREAM_DEBUG
 fprintf(stderr, "stream_alloc: %s:%p persistent=%s\n", ops->label, ret, persistent_id);

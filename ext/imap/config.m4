@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.53 2003/02/23 08:14:25 sniper Exp $
+dnl $Id: config.m4,v 1.54 2003/03/11 02:11:57 sniper Exp $
 dnl
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
@@ -118,8 +118,8 @@ AC_DEFUN(PHP_IMAP_SSL_CHK, [
   if test "$PHP_IMAP_SSL" != "no"; then
     AC_MSG_RESULT([$PHP_IMAP_SSL/lib])
     AC_DEFINE(HAVE_IMAP_SSL,1,[ ])
-    PHP_ADD_LIBRARY_DEFER(crypto,, IMAP_SHARED_LIBADD)
-    PHP_ADD_LIBRARY_DEFER(ssl,, IMAP_SHARED_LIBADD)
+    PHP_ADD_LIBRARY_DEFER(ssl,    1, IMAP_SHARED_LIBADD)
+    PHP_ADD_LIBRARY_DEFER(crypto, 1, IMAP_SHARED_LIBADD)
     PHP_ADD_LIBPATH($PHP_IMAP_SSL/lib, IMAP_SHARED_LIBADD)
   else
     TST_LIBS="-L$IMAP_LIBDIR -l$IMAP_LIB"
@@ -197,10 +197,10 @@ if test "$PHP_IMAP" != "no"; then
     fi
 
     PHP_ADD_INCLUDE($IMAP_INC_DIR)
-    PHP_IMAP_KRB_CHK
-    PHP_IMAP_SSL_CHK
     PHP_ADD_LIBRARY_DEFER($IMAP_LIB,, IMAP_SHARED_LIBADD)
     PHP_ADD_LIBPATH($IMAP_LIBDIR, IMAP_SHARED_LIBADD)
+    PHP_IMAP_KRB_CHK
+    PHP_IMAP_SSL_CHK
 
     dnl Test the build in the end
     TST_LIBS="$DLIBS $IMAP_SHARED_LIBADD"

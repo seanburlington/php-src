@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.13 2001/05/12 10:33:52 sas Exp $
+dnl $Id: config.m4,v 1.14 2001/05/17 15:27:12 martin Exp $
 dnl config.m4 for extension dba
 dnl don't forget to call PHP_EXTENSION(dba)
 
@@ -162,7 +162,7 @@ AC_ARG_WITH(db3,
       AC_DEFINE_UNQUOTED(DB3_INCLUDE_FILE, "$DB3_EXTRA", [ ])
     fi
 
-    for LIB in db db-3; do
+    for LIB in db db-3 db3; do
       PHP_TEMP_LDFLAGS(-L$THIS_PREFIX/lib,[
       AC_CHECK_LIB($LIB, db_create, [AC_DEFINE(DBA_DB3,1,[ ]) THIS_LIBS=$LIB])
       ])

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.101 2002/04/30 22:01:06 mfischer Exp $ */
+/* $Id: sockets.c,v 1.102 2002/04/30 22:03:51 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1938,7 +1938,7 @@ PHP_FUNCTION(socket_last_error)
 }
 /* }}} */
 
-/* {{{ proto void socket_clear_error(resource socket)
+/* {{{ proto void socket_clear_error([resource socket])
    Clears the error on the socket or the last error code. */
 PHP_FUNCTION(socket_clear_error)
 {

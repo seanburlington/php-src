@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.20 2003/09/29 01:07:55 iliaa Exp $ */
+/* $Id: spprintf.c,v 1.21 2003/10/21 07:36:43 helly Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -87,6 +87,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#ifdef HAVE_INTTYPES_H
+#include <inttypes.h>
+#endif
 
 #include "snprintf.h"
 

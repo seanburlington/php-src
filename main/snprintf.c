@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.31 2003/09/29 23:44:07 iliaa Exp $ */
+/* $Id: snprintf.c,v 1.32 2003/10/21 07:36:43 helly Exp $ */
 
 /* ====================================================================
  * Copyright (c) 1995-1998 The Apache Group.  All rights reserved.
@@ -83,6 +83,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#ifdef HAVE_INTTYPES_H
+#include <inttypes.h>
+#endif
 
 #define FALSE			0
 #define TRUE			1

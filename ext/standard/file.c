@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.193 2001/11/11 20:33:27 jeroen Exp $ */
+/* $Id: file.c,v 1.194 2001/11/14 12:57:06 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1391,9 +1391,6 @@ PHP_FUNCTION(set_file_buffer)
 		ret = setvbuf((FILE *) what, NULL, _IOFBF, buff);
 	}
 
-	if (ret) {
-		php_error(E_WARNING, "Illegal value for set_file_buffer()");
-	}
 	RETURN_LONG(ret);
 }
 /* }}} */

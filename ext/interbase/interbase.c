@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.115 2003/08/05 23:40:30 abies Exp $ */
+/* $Id: interbase.c,v 1.116 2003/08/06 12:09:30 abies Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -75,7 +75,8 @@ A lot... */
 #endif
 
 #ifdef ZEND_DEBUG
-#define IBDEBUG(a) php_printf("::: %s (%s:%d)\n", a, __FILE__, __LINE__);
+/* #define IBDEBUG(a) php_printf("::: %s (%d)\n", a, __LINE__); */
+#define IBDEBUG(a)
 #else
 #define IBDEBUG(a)
 #endif
@@ -670,7 +671,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.115 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.116 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1152,8 +1153,8 @@ static int _php_ibase_alloc_query(ibase_query **ib_queryp, isc_db_handle link, i
 		goto _php_ibase_alloc_query_error;
 	}
 
-	IB_QUERY->out_sqlda = (XSQLDA *) emalloc(XSQLDA_LENGTH(0));
-	IB_QUERY->out_sqlda->sqln = 0;
+	IB_QUERY->out_sqlda = (XSQLDA *) emalloc(XSQLDA_LENGTH(1));
+	IB_QUERY->out_sqlda->sqln = 1;
 	IB_QUERY->out_sqlda->version = SQLDA_VERSION1;
 
 	if (isc_dsql_prepare(IB_STATUS, &IB_QUERY->trans, &IB_QUERY->stmt, 0, query, dialect, IB_QUERY->out_sqlda)) {
@@ -1173,8 +1174,8 @@ static int _php_ibase_alloc_query(ibase_query **ib_queryp, isc_db_handle link, i
 	}
 
 	/* maybe have input placeholders? */
-	IB_QUERY->in_sqlda = emalloc(XSQLDA_LENGTH(0));
-	IB_QUERY->in_sqlda->sqln = 0;
+	IB_QUERY->in_sqlda = emalloc(XSQLDA_LENGTH(1));
+	IB_QUERY->in_sqlda->sqln = 1;
 	IB_QUERY->in_sqlda->version = SQLDA_VERSION1;
 	if (isc_dsql_describe_bind(IB_STATUS, &IB_QUERY->stmt, SQLDA_VERSION1, IB_QUERY->in_sqlda)) {
 		_php_ibase_error(TSRMLS_C);
@@ -1583,7 +1584,7 @@ _php_ibase_exec_error:		 /* I'm a bad boy... */
 
 PHP_FUNCTION(ibase_trans)
 {
-	unsigned i, argn, link_cnt = 0, tpb_len = 0;
+	unsigned short i, argn, link_cnt = 0, tpb_len = 0;
 	char last_tpb[TPB_MAX_SIZE];
 	ibase_db_link **ib_link = NULL;
 	ibase_trans *ib_trans;

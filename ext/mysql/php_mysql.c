@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.129 2002/03/25 01:19:59 sterling Exp $ */
+/* $Id: php_mysql.c,v 1.130 2002/03/25 12:09:38 georg Exp $ */
 
 
 /* TODO:
@@ -2206,7 +2206,7 @@ PHP_FUNCTION(mysql_free_result)
 }
 /* }}} */
 
-/* {{{ proto resource mysql_ping([int link_identifier])
+/* {{{ proto bool mysql_ping([int link_identifier])
    Ping a server connection. If no connection then reconnect. */
 PHP_FUNCTION(mysql_ping)
 {

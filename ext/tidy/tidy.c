@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.34 2004/01/14 08:15:57 john Exp $ */
+/* $Id: tidy.c,v 1.35 2004/01/14 12:19:17 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -768,7 +768,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.34 2004/01/14 08:15:57 john Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.35 2004/01/14 12:19:17 wez Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -897,6 +897,7 @@ PHP_FUNCTION(tidy_parse_file)
 
 	if (!(contents = php_tidy_file_to_mem(inputfile, use_include_path TSRMLS_CC))) {
 		TIDY_THROW("Cannot Load '%s' into memory %s", inputfile, (use_include_path) ? "(Using include path)" : "");
+		return;
 	}
 
 	TIDY_APPLY_CONFIG_ZVAL(obj->ptdoc->doc, options);

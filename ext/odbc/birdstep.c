@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: birdstep.c,v 1.7 2003/06/10 20:03:33 imajes Exp $ */
+/* $Id: birdstep.c,v 1.8 2003/06/16 16:36:41 andrey Exp $ */
 
 /*
  * TODO:
@@ -226,7 +226,7 @@ static void birdstep_del_result(HashTable *list,int ind)
 
 /* Users functions */
 
-/* {{{ proto int birdstep_connect(string server, string user, sting pass)
+/* {{{ proto int birdstep_connect(string server, string user, string pass)
  */
 PHP_FUNCTION(birdstep_connect)
 {

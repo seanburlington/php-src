@@ -31,7 +31,7 @@
    |          Rasmus Lerdorf      <rasmus@lerdorf.on.ca>                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.1 1999/04/22 00:45:13 ssb Exp $ */
+/* $Id: imap.c,v 1.2 1999/04/23 19:50:28 zeev Exp $ */
 
 #define IMAP41
 
@@ -39,9 +39,6 @@
 #undef ERROR
 #endif
 
-#if !(WIN32|WINNT)
-#include "config.h"
-#endif
 #include "php.h"
 
 #if COMPILE_DL

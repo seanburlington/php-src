@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.34 2002/03/12 16:26:00 sas Exp $
+dnl $Id: config.m4,v 1.35 2002/08/20 07:26:50 edink Exp $
 dnl
 
 AC_DEFUN(AC_OCI8_VERSION,[
@@ -70,6 +70,7 @@ if test "$PHP_OCI8" != "no"; then
   	  PHP_ADD_LIBRARY(clntsh, 1, OCI8_SHARED_LIBADD)
   	  PHP_ADD_LIBPATH($OCI8_DIR/lib, OCI8_SHARED_LIBADD)
   	  AC_DEFINE(HAVE_OCI8_TEMP_LOB,1,[ ])
+          AC_DEFINE(HAVE_OCI8_ATTR_STATEMENT,1,[ ])
 	  ;;
 
 	*)

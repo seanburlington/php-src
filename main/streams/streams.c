@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.60 2004/07/12 20:59:24 wez Exp $ */
+/* $Id: streams.c,v 1.61 2004/07/13 16:34:56 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1376,7 +1376,7 @@ int php_init_stream_wrappers(int module_number TSRMLS_DC)
 int php_shutdown_stream_wrappers(int module_number TSRMLS_DC)
 {
 	zend_hash_destroy(&url_stream_wrappers_hash);
-	zend_hash_destroy(php_get_stream_filters_hash());
+	zend_hash_destroy(php_get_stream_filters_hash_global());
 	zend_hash_destroy(php_stream_xport_get_hash());
 	return SUCCESS;
 }

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.128 2001/09/03 01:06:23 jeroen Exp $ */
+/* $Id: array.c,v 1.129 2001/09/03 01:46:03 jeroen Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1381,7 +1381,7 @@ static int array_data_shuffle(const void *a, const void*b) {
 }
 
 
-/* {{{ proto int shuffle(array array_arg)
+/* {{{ proto bool shuffle(array array_arg)
    Randomly shuffle the contents of an array */
 PHP_FUNCTION(shuffle)
 {

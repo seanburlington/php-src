@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@php.net>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.30 2003/03/18 12:06:07 ssb Exp $
+  $Id: CLI.php,v 1.31 2003/04/03 23:12:40 ssb Exp $
 */
 
 require_once "PEAR.php";
@@ -254,7 +254,7 @@ class PEAR_Frontend_CLI extends PEAR
 
     function endTable()
     {
-        trigger_error("PEAR_Frontend_CLI::tableRow deprecated", E_USER_ERROR);
+        trigger_error("PEAR_Frontend_CLI::endTable deprecated", E_USER_ERROR);
     }
 
     function _endTable()
@@ -275,6 +275,7 @@ class PEAR_Frontend_CLI extends PEAR
                 }
             }
         }
+        $border = false;
         if (empty($border)) {
             $cellstart = '';
             $cellend = ' ';
@@ -358,7 +359,7 @@ class PEAR_Frontend_CLI extends PEAR
                 if (isset($data['release_warnings'])) {
                     $this->_displayLine('');
                     $this->_startTable(array(
-                        'border' => true,
+                        'border' => false,
                         'caption' => 'Release Warnings'
                         ));
                     $this->_tableRow(array($data['release_warnings']), null, array(1 => array('wrap' => 55)));
@@ -394,7 +395,7 @@ class PEAR_Frontend_CLI extends PEAR
                 $this->_endTable();
                 break;
             case 'config-show':
-                $data['border'] = true;
+                $data['border'] = false;
                 $opts = array(0 => array('wrap' => 30),
                               1 => array('wrap' => 20),
                               2 => array('wrap' => 35));
@@ -417,7 +418,7 @@ class PEAR_Frontend_CLI extends PEAR
             case 'remote-info':
                 $data = array(
                     'caption' => 'Package details:',
-                    'border' => true,
+                    'border' => false,
                     'data' => array(
                         array("Latest",    $data['stable']),
                         array("Installed", $data['installed']),

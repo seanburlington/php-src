@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.35 2002/10/22 23:07:10 ssb Exp $
+// $Id: Config.php,v 1.36 2002/11/26 00:05:21 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'System.php';
@@ -256,6 +256,13 @@ class PEAR_Config extends PEAR
             'default' => PEAR_DEFAULT_GPG_BIN,
             'doc' => 'which package signature mechanism to use',
             'prompt' => 'Signature Handling Program',
+            'group' => 'Maintainers',
+            ),
+        'sig_keyid' => array(
+            'type' => 'string',
+            'default' => '',
+            'doc' => 'which key to use for signing with',
+            'prompt' => 'Signature Key Id',
             'group' => 'Maintainers',
             ),
         'sig_keydir' => array(

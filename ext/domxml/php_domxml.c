@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.223 2002/11/29 11:22:06 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.224 2002/11/29 16:31:41 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -4737,7 +4737,7 @@ static void php_xpathptr_eval(INTERNAL_FUNCTION_PARAMETERS, int mode, int expr)
 	xmlXPathContextPtr ctxp;
 	xmlXPathObjectPtr xpathobjp;
 	xmlNode *contextnodep;
-	int ret, str_len, nsNr;
+	int ret, str_len;
 	char *str;
 	contextnode = NULL;
 	contextnodep = NULL;

@@ -86,7 +86,7 @@
  *
  */
 
-/* $Id: mbfilter.h,v 1.9 2002/05/08 12:30:47 hirokawa Exp $ */
+/* $Id: mbfilter.h,v 1.10 2002/05/12 13:06:13 hirokawa Exp $ */
 
 
 #ifndef MBFL_MBFILTER_H
@@ -111,7 +111,8 @@ enum mbfl_no_language {
 	mbfl_no_language_polish,		/* pl */
 	mbfl_no_language_portuguese,	        /* pt */
 	mbfl_no_language_swedish,		/* sv */
-	mbfl_no_language_chinese,		/* zh */
+	mbfl_no_language_simplified_chinese,		/* zh-cn */
+	mbfl_no_language_traditional_chinese,		/* zh-tw */
 	mbfl_no_language_max
 };
 
@@ -172,7 +173,9 @@ enum mbfl_no_encoding {
 	mbfl_no_encoding_euc_tw,
 	mbfl_no_encoding_big5,
 	mbfl_no_encoding_euc_kr,
+	mbfl_no_encoding_2022kr,
 	mbfl_no_encoding_uhc,
+	mbfl_no_encoding_hz,
 	mbfl_no_encoding_charset_max
 };
 

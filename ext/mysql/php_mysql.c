@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.30 2000/02/19 23:41:16 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.31 2000/02/19 23:43:27 zeev Exp $ */
 
 
 /* TODO:
@@ -33,6 +33,7 @@
 
 #ifdef PHP_WIN32
 #include <winsock.h>
+#define signal(a,b) NULL
 #else
 #include "build-defs.h"
 

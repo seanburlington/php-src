@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.h,v 1.2 2004/01/08 17:31:48 sniper Exp $ */
+/* $Id: php_reflection.h,v 1.3 2004/09/28 19:06:15 helly Exp $ */
 
 #ifndef ZEND_REFLECTION_API_H
 #define ZEND_REFLECTION_API_H
@@ -24,6 +24,7 @@
 BEGIN_EXTERN_C()
 
 ZEND_API void zend_register_reflection_api(TSRMLS_D);
+ZEND_API void zend_reflection_class_factory(zend_class_entry *ce, zval *object TSRMLS_DC);
 	
 END_EXTERN_C()
 

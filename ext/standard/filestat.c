@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.49 2000/11/02 23:08:05 andi Exp $ */
+/* $Id: filestat.c,v 1.50 2000/12/03 13:42:54 stas Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -551,6 +551,9 @@ static void php_stat(const char *filename, int type, pval *return_value)
 		case S_IFDIR: RETURN_STRING("dir",1);
 		case S_IFBLK: RETURN_STRING("block",1);
 		case S_IFREG: RETURN_STRING("file",1);
+#ifndef ZEND_WIN32
+		case S_IFSOCK: RETURN_STRING("socket",1);
+#endif
 		}
 		php_error(E_WARNING,"Unknown file type (%d)",BG(sb).st_mode&S_IFMT);
 		RETURN_STRING("unknown",1);

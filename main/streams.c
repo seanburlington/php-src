@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125 2002/11/10 05:14:26 iliaa Exp $ */
+/* $Id: streams.c,v 1.126 2002/11/14 10:56:35 derick Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2029,7 +2029,8 @@ static php_stream_wrapper_ops php_plain_files_wrapper_ops = {
 	NULL,
 	NULL,
 	php_plain_files_url_stater,
-	php_plain_files_dir_opener
+	php_plain_files_dir_opener,
+	"plainfile"
 };
 
 static php_stream_wrapper php_plain_files_wrapper = {

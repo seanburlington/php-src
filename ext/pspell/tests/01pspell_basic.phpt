@@ -1,11 +1,16 @@
 --TEST--
 pspell basic tests
 --SKIPIF--
-<?php if (!extension_loaded("pspell")) print "skip"; ?>
+<?php 
+	if (!extension_loaded("pspell")) print "skip"; 
+	if (!@pspell_new ("en", "", "", "", (PSPELL_FAST|PSPELL_RUN_TOGETHER))) {
+		die("skip English dictionary is not avaliable");
+	}
+?>
 --POST--
 --GET--
 --FILE--
-<?php // $Id: 01pspell_basic.phpt,v 1.1 2002/03/24 16:22:50 jan Exp $
+<?php // $Id: 01pspell_basic.phpt,v 1.2 2002/11/08 01:09:47 iliaa Exp $
 
 error_reporting(E_ALL);
 $string = "";

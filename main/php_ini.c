@@ -16,13 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.99 2002/08/29 10:24:02 jan Exp $ */
+/* $Id: php_ini.c,v 1.100 2002/09/09 11:43:50 hyanantha Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
 
 #include "php.h"
-#ifndef PHP_WIN32
+#if !defined(PHP_WIN32) && !defined(NETWARE)
 #include "build-defs.h"
 #endif
 #include "ext/standard/info.h"

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.184 2002/07/01 18:52:30 derick Exp $ */
+/* $Id: info.c,v 1.185 2002/08/04 18:57:02 georg Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -216,7 +216,7 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 	PUTS("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n<html>\n");
 	PUTS("<head>");
 	php_info_print_style();
-	PUTS("<title>phpinfo()</title></head><body>");
+	PUTS("<title>phpinfo()</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">/head><body>");
 
 	if (flag & PHP_INFO_GENERAL) {
 		char *zend_version = get_zend_version();

@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.20 2001/09/25 22:48:43 jeroen Exp $ */
+/* $Id: levenshtein.c,v 1.21 2001/10/19 19:21:58 andrei Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -102,8 +102,7 @@ PHP_FUNCTION(levenshtein)
 		convert_to_string_ex(str2);
 
 		distance = reference_levdist(Z_STRVAL_PP(str1), Z_STRLEN_PP(str1), 
-																 Z_STRVAL_PP(str2), Z_STRLEN_PP(str2),
-																 1, 1, 1);
+									 Z_STRVAL_PP(str2), Z_STRLEN_PP(str2), 1, 1, 1);
 
 		break;
 
@@ -117,12 +116,10 @@ PHP_FUNCTION(levenshtein)
 		convert_to_long_ex(cost_rep);
 		convert_to_long_ex(cost_del);
 		
-		distance = reference_levdist(Z_STRVAL_PP(str1), Z_STRLEN_PP(str1), 
-																 Z_STRVAL_PP(str2), Z_STRLEN_PP(str2),
-																 Z_LVAL_PP(cost_ins),
-																 Z_LVAL_PP(cost_rep),
-																 Z_LVAL_PP(cost_del)
-																);
+		distance = reference_levdist(Z_STRVAL_PP(str1), Z_STRLEN_PP(str1),
+									 Z_STRVAL_PP(str2), Z_STRLEN_PP(str2),
+									 Z_LVAL_PP(cost_ins), Z_LVAL_PP(cost_rep),
+									 Z_LVAL_PP(cost_del));
 		
 		break;
 
@@ -134,10 +131,8 @@ PHP_FUNCTION(levenshtein)
 		convert_to_string_ex(str2);
 		convert_to_string_ex(callback_name);
 
-		distance = custom_levdist(Z_STRVAL_PP(str1)
-																, Z_STRVAL_PP(str2)
-																, Z_STRVAL_PP(callback_name)
-																);
+		distance = custom_levdist(Z_STRVAL_PP(str1), Z_STRVAL_PP(str2),
+								  Z_STRVAL_PP(callback_name));
 		break;
 
 	default: 

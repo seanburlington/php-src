@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.147 2003/11/25 20:02:22 sniper Exp $ */
+/* $Id: php_pcre.c,v 1.148 2003/12/16 21:53:27 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -428,7 +428,7 @@ static void php_pcre_match(INTERNAL_FUNCTION_PARAMETERS, int global)
 	subpat_names = (char **)safe_emalloc(num_subpats, sizeof(char *), 0);
 	memset(subpat_names, 0, sizeof(char *) * num_subpats);
 	{
-		int name_cnt, name_size, ni = 0;
+		int name_cnt = 0, name_size, ni = 0;
 		char *name_table;
 		unsigned short name_idx;
 

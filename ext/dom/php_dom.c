@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.18 2003/07/12 17:29:20 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.19 2003/07/19 14:59:29 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -659,7 +659,7 @@ PHP_MSHUTDOWN_FUNCTION(dom)
 	uncomment the following line, this will tell you the amount of not freed memory
 	and the total used memory into apaches error_log  */
 /*  xmlMemoryDump();*/
-xmlMemoryDump();
+
 	return SUCCESS;
 }
 

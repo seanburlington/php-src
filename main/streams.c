@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.98 2002/10/06 23:27:53 wez Exp $ */
+/* $Id: streams.c,v 1.99 2002/10/07 03:12:06 sas Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1280,11 +1280,15 @@ static int php_stdiop_flush(php_stream *stream TSRMLS_DC)
 
 	assert(data != NULL);
 
-	if (data->fd >= 0) {
-		return fsync(data->fd);
-	} else {
+	/*
+	 * stdio buffers data in user land. By calling fflush(3), this
+	 * data is send to the kernel using write(2). fsync'ing is
+	 * something completely different.
+	 */
+	if (data->fd < 0) {
 		return fflush(data->file);
 	}
+	return 0;
 }
 
 static int php_stdiop_seek(php_stream *stream, off_t offset, int whence, off_t *newoffset TSRMLS_DC)

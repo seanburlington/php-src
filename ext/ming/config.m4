@@ -1,11 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.14 2002/03/27 15:30:51 sniper Exp $
+dnl $Id: config.m4,v 1.15 2002/04/29 02:55:54 hirokawa Exp $
 dnl
 
 PHP_ARG_WITH(ming, for MING support,
 [  --with-ming[=DIR]       Include MING support])
 
 if test "$PHP_MING" != "no"; then
+  PHP_SHLIB_SUFFIX_NAME
   for i in $PHP_MING /usr/local /usr; do
     if test -f $i/lib/libming.$SHLIB_SUFFIX_NAME -o -f $i/lib/libming.a; then
       MING_DIR=$i
@@ -21,7 +22,7 @@ if test "$PHP_MING" != "no"; then
   ],[
     AC_MSG_ERROR([Ming library 0.2a or greater required.])
   ],[
-    -L$MING_DIR/lib
+    -L$MING_DIR/lib -lm
   ])
 
   PHP_ADD_INCLUDE($MING_DIR/include)

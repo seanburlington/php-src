@@ -17,8 +17,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.h,v 1.2 2001/02/26 06:07:17 andi Exp $ */
+/* $Id: credits.h,v 1.3 2001/03/14 21:28:58 jmoore Exp $ */
 
+#ifndef CREDITS_H
+#define CREDITS_H
+
+#ifndef HAVE_CREDITS_DEFS
+#define HAVE_CREDITS_DEFS
 
 #define PHP_CREDITS_GROUP			(1<<0)
 #define PHP_CREDITS_GENERAL			(1<<1)
@@ -26,7 +31,12 @@
 #define PHP_CREDITS_MODULES			(1<<3)
 #define PHP_CREDITS_DOCS			(1<<4)
 #define PHP_CREDITS_FULLPAGE		(1<<5)
+#define PHP_CREDITS_QA				(1<<6)
+#define PHP_CREDITS_WEB             (1<<7)
 #define PHP_CREDITS_ALL				0xFFFFFFFF
+
+#endif /* HAVE_CREDITS_DEFS */
 
 PHPAPI void php_print_credits(int flag);
 
+#endif

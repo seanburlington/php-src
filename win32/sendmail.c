@@ -18,6 +18,8 @@
  *
  */
 
+/* $Id: sendmail.c,v 1.24 2001/12/20 18:06:13 fmk Exp $ */
+
 #include "php.h"				/*php specific */
 #include <stdio.h>
 #include <stdlib.h>

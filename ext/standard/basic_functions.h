@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.124 2003/10/04 02:51:19 moriyoshi Exp $ */
+/* $Id: basic_functions.h,v 1.125 2003/11/07 09:26:18 helly Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -27,6 +27,8 @@
 #ifdef HAVE_WCHAR_H
 #include <wchar.h>
 #endif
+
+#include "php_filestat.h"
 
 #include "zend_highlight.h"
 
@@ -119,12 +121,6 @@ PHP_FUNCTION(stream_bucket_append);
 PHP_FUNCTION(stream_bucket_new);
 PHP_MINIT_FUNCTION(user_filters);
 PHP_RSHUTDOWN_FUNCTION(user_filters);
-
-#ifdef PHP_WIN32
-typedef unsigned int php_stat_len;
-#else
-typedef int php_stat_len;
-#endif
 
 PHPAPI int _php_error_log(int opt_err, char *message, char *opt, char *headers TSRMLS_DC);
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filestat.h,v 1.21 2003/11/07 09:16:16 helly Exp $ */
+/* $Id: php_filestat.h,v 1.22 2003/11/07 09:26:18 helly Exp $ */
 
 #ifndef PHP_FILESTAT_H
 #define PHP_FILESTAT_H
@@ -73,6 +73,12 @@ PHP_FUNCTION(clearstatcache);
 #define getgroups(a, b) 0
 #define getgid() 1
 #define getuid() 1
+#endif
+
+#ifdef PHP_WIN32
+typedef unsigned int php_stat_len;
+#else
+typedef int php_stat_len;
 #endif
 
 PHPAPI void php_stat(const char *filename, php_stat_len filename_length, int type, pval *return_value TSRMLS_DC);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.110 2002/10/24 13:14:44 sas Exp $ */
+/* $Id: xml.c,v 1.111 2002/11/18 17:34:55 thies Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -699,7 +699,7 @@ void _xml_startElementHandler(void *userData, const char *name, const char **att
 				zend_hash_add(Z_ARRVAL_P(tag),"attributes",sizeof("attributes"),&atr,sizeof(zval*),NULL);
 			} else {
 				zval_dtor(atr);
-				efree(atr);
+				FREE_ZVAL(atr);
 			}
 
 			zend_hash_next_index_insert(Z_ARRVAL_P(parser->data),&tag,sizeof(zval*),(void *) &parser->ctag);

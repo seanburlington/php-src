@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.253 2001/11/10 23:44:04 andrei Exp $ */
+/* $Id: string.c,v 1.254 2001/12/01 15:45:55 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1114,24 +1114,15 @@ PHPAPI char *php_basename(char *s, size_t len, char *suffix, size_t sufflen)
    Returns the filename component of the path */
 PHP_FUNCTION(basename)
 {
-	zval **str, **suffix;
 	char *ret;
-	char *suffixp = NULL;
-	int   suffix_len = 0;
-	int   argc = ZEND_NUM_ARGS();
+	char *string, *suffix = NULL;
+	int   string_len, suffix_len = 0;
 
-	if (argc < 1 || argc > 2 ||
-	    zend_get_parameters_ex(argc, &str, &suffix) == FAILURE) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|s", &string, &string_len, &suffix, &suffix_len) == FAILURE) {
+		return;
 	}
 
-	if (argc > 1) {
-		convert_to_string_ex(suffix);
-		suffixp = Z_STRVAL_PP(suffix);
-		suffix_len = Z_STRLEN_PP(suffix);
-	}
-
-	ret = php_basename(Z_STRVAL_PP(str), Z_STRLEN_PP(str), suffixp, suffix_len);	
+	ret = php_basename(string, string_len, suffix, suffix_len);	
 	RETURN_STRING(ret, 0);
 }
 /* }}} */

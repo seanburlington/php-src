@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.28 2005/02/10 15:52:38 rrichards Exp $ */
+/* $Id: libxml.c,v 1.29 2005/02/20 21:49:45 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -385,6 +385,15 @@ static void php_libxml_ctx_error_level(int level, void *ctx, const char *msg TSR
 		} else {
 			php_error_docref(NULL TSRMLS_CC, level, "%s in Entity, line: %d", msg, parser->input->line);
 		}
+	}
+}
+
+void php_libxml_issue_error(int level, const char *msg TSRMLS_DC)
+{
+	if (LIBXML(error_list)) {
+		_php_list_set_error_structure(NULL, msg);
+	} else {
+		php_error_docref(NULL TSRMLS_CC, level, "%s", msg);
 	}
 }
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.12 2005/02/10 15:52:38 rrichards Exp $ */
+/* $Id: php_libxml.h,v 1.13 2005/02/20 21:49:45 rrichards Exp $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -88,6 +88,7 @@ void php_libxml_ctx_warning(void *ctx, const char *msg, ...);
 void php_libxml_ctx_error(void *ctx, const char *msg, ...);
 PHP_LIBXML_API int php_libxml_xmlCheckUTF8(const unsigned char *s);
 PHP_LIBXML_API zval *php_libxml_switch_context(zval *context TSRMLS_DC);
+PHP_LIBXML_API void php_libxml_issue_error(int level, const char *msg TSRMLS_DC);
 
 #endif /* HAVE_LIBXML */
 

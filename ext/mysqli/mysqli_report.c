@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_report.c,v 1.3 2003/12/22 16:56:14 georg Exp $ 
+  $Id: mysqli_report.c,v 1.4 2003/12/22 17:00:54 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -59,9 +59,9 @@ void php_mysqli_report_error(char *sqlstate, int errorno, char *error TSRMLS_DC)
 
 /* {{{ void php_mysqli_report_index() */ 
 void php_mysqli_report_index(char *query, unsigned int status TSRMLS_DC) {
+#if MYSQL_VERSION_ID > 40101
 	char index[15];
 
-#if MYSQL_VERSION_ID > 40101
 	if (status & SERVER_QUERY_NO_GOOD_INDEX_USED) {
 		strcpy(index, "Bad index");
 	} else if (status & SERVER_QUERY_NO_INDEX_USED) {
@@ -69,11 +69,10 @@ void php_mysqli_report_index(char *query, unsigned int status TSRMLS_DC) {
 	} else {
 		return;
 	}
+	php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s used in query %s", index, query);
 #else
 	return;
 #endif
-
-	php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s used in query %s", index, query);
 }
 /* }}} */
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.6 2001/12/07 09:08:01 ssb Exp $
+dnl $Id: config.m4,v 1.7 2002/01/04 14:15:23 hholzgra Exp $
 dnl
 
 sinclude(ext/xmlrpc/libxmlrpc/acinclude.m4)
@@ -42,7 +42,7 @@ dnl  found_iconv=no
   fi
   
   if test "$found_iconv" = "no"; then
-    AC_MSG_ERROR(iconv not found, in order to build xmlrpc you need the iconv library)
+    AC_MSG_ERROR([iconv not found, in order to build xmlrpc you need the iconv library])
   fi
   
 fi

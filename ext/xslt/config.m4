@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11 2001/11/30 19:00:09 sniper Exp $
+dnl $Id: config.m4,v 1.12 2002/01/04 14:15:23 hholzgra Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -78,7 +78,7 @@ if test "$PHP_XSLT" != "no"; then
     fi
 
     if test "$found_iconv" = "no"; then
-      AC_MSG_ERROR(iconv not found, in order to build sablotron you need the iconv library)
+      AC_MSG_ERROR([iconv not found, in order to build sablotron you need the iconv library])
     fi
  
     AC_DEFINE(HAVE_SABLOT_BACKEND, 1, [ ])

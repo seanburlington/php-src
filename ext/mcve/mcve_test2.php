@@ -1,6 +1,6 @@
 <?
  #
- # $Id: mcve_test2.php,v 1.1 2002/02/27 19:46:58 bradmssw Exp $
+ # $Id: mcve_test2.php,v 1.1 2002/03/27 15:39:29 sniper Exp $
  #
 
 $connect_type = "IP";

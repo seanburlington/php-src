@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.178 2002/08/01 16:39:52 sniper Exp $ */
+/* $Id: array.c,v 1.179 2002/08/01 16:44:47 sniper Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1709,9 +1709,6 @@ static void _phpi_pop(INTERNAL_FUNCTION_PARAMETERS, int off_the_end)
 			zend_hash_rehash(Z_ARRVAL_PP(stack));
 		}
 		HANDLE_UNBLOCK_INTERRUPTIONS();
-	} else {
-		Z_ARRVAL_PP(stack)->nNextFreeElement--;
-		zend_hash_rehash(Z_ARRVAL_PP(stack));
 	}
 }
 /* }}} */

@@ -1,11 +1,11 @@
-dnl ## $Id: configure.in,v 1.288 2002/01/09 03:41:48 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.289 2002/01/12 14:51:54 edink Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
 
 AC_INIT(README.CVS-RULES)
 
-PHP_FAST_OUTPUT(sapi/Makefile ext/Makefile Makefile pear/Makefile main/Makefile)
+PHP_FAST_OUTPUT(sapi/Makefile ext/Makefile Makefile pear/Makefile main/Makefile sapi/cli/Makefile)
 
 if test "$with_shared_apache" != "no" && test -n "$with_shared_apache" ; then
   AC_MSG_ERROR([--with-shared-apache is not supported. Please refer to the documentation for using APXS])

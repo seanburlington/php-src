@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.25 2000/03/06 19:27:59 neotron Exp $ */
+/* $Id: roxen.c,v 1.26 2000/03/07 20:20:42 neotron Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -130,7 +130,7 @@ extern int fd_from_object(struct object *o);
 static unsigned char roxen_php_initialized;
 
 /* This allows calling of pike functions from the PHP callbacks,
- * which requires the Pike interpretor to be locked.
+ * which requires the Pike interpreter to be locked.
  */
 #define THREAD_SAFE_RUN(COMMAND, what)  do {\
   struct thread_state *state;\
@@ -206,7 +206,7 @@ INLINE static int lookup_integer_header(char *headername, int default_value)
 /*
  * php_roxen_low_ub_write() writes data to the client connection. Might be
  * rewritten to do more direct IO to save CPU and the need to lock the *
- * interpretor for better threading.
+ * interpreter for better threading.
  */
 
 static int
@@ -448,7 +448,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
   extern void php_info_print_table_row( int, ... );
 	
   PUTS("<table border=5 width=600>\n");
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.25 2000/03/06 19:27:59 neotron Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.26 2000/03/07 20:20:42 neotron Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -636,10 +636,10 @@ void f_php_roxen_request_handler(INT32 args)
   if(current_thread == th_self())
     error("PHP4.Interpetor->run: Tried to run a PHP-script from a PHP "
 	  "callback!");
-  get_all_args("PHP4.Interpretor->run", args, "%S%m%O%*", &script,
+  get_all_args("PHP4.Interpreter->run", args, "%S%m%O%*", &script,
 	       &request_data, &my_fd_obj, &done_callback);
   if(done_callback->type != PIKE_T_FUNCTION) 
-    error("PHP4.Interpretor->run: Bad argument 4, expected function.\n");
+    error("PHP4.Interpreter->run: Bad argument 4, expected function.\n");
   PHP_LOCK(THIS); /* Need to lock here or reusing the same object might cause
 		       * problems in changing stuff in that object */
 #ifndef ROXEN_USE_ZTS
@@ -669,7 +669,7 @@ void f_php_roxen_request_handler(INT32 args)
   {
     int fd = fd_from_object(raw_fd->u.object);
     if(fd == -1)
-      error("PHP4.Interpretor->run: my_fd object not open or not an FD.\n");
+      error("PHP4.Interpreter->run: my_fd object not open or not an FD.\n");
     THIS->my_fd = fd;
   } else
     THIS->my_fd = 0;
@@ -717,7 +717,7 @@ void pike_module_init()
   set_init_callback(clear_struct);
   pike_add_function("run", f_php_roxen_request_handler,
 		    "function(string,mapping,object,function:int)", 0);
-  add_program_constant("Interpretor", (php_program = end_program()), 0);
+  add_program_constant("Interpreter", (php_program = end_program()), 0);
 }
 
 /*

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.55 2002/11/12 17:31:39 sniper Exp $
+dnl $Id: config.m4,v 1.56 2003/01/07 22:56:58 kalowsky Exp $
 dnl
 
 dnl
@@ -373,6 +373,7 @@ AC_ARG_WITH(iodbc,
     ODBC_LFLAGS=-L$withval/lib
     ODBC_LIBS=-liodbc
     AC_DEFINE(HAVE_IODBC,1,[ ])
+    AC_DEFINE(HAVE_ODBC2,1,[ ])
     AC_MSG_RESULT(yes)
   else
     AC_MSG_RESULT(no)

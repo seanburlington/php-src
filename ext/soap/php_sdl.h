@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.h,v 1.32 2004/08/26 18:40:10 dmitry Exp $ */
+/* $Id: php_sdl.h,v 1.33 2004/11/09 08:13:35 dmitry Exp $ */
 
 #ifndef PHP_SDL_H
 #define PHP_SDL_H
@@ -249,7 +249,7 @@ struct _sdlAttribute {
 	encodePtr  encode;
 };
 
-sdlPtr get_sdl(char *uri TSRMLS_DC);
+sdlPtr get_sdl(zval *this_ptr, char *uri TSRMLS_DC);
 
 encodePtr get_encoder_from_prefix(sdlPtr sdl, xmlNodePtr data, const char *type);
 encodePtr get_encoder(sdlPtr sdl, const char *ns, const char *type);

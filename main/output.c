@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.85 2002/03/01 03:05:50 yohgaki Exp $ */
+/* $Id: output.c,v 1.86 2002/03/01 09:29:32 yohgaki Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -654,9 +654,10 @@ static int php_ob_buffer_status(php_ob_buffer *ob_buffer, zval *result)
 	zval *elem;
 
 	MAKE_STD_ZVAL(elem);
-	if (array_init(elem))
+	if (array_init(elem) == FAILURE) {
 		return FAILURE;
-	
+	}
+
 	if (ob_buffer->internal_output_handler) {
 		add_assoc_long(elem, "type", PHP_OUTPUT_HANDLER_INTERNAL);
 	}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.98 2000/07/02 15:12:34 andi Exp $ */
+/* $Id: file.c,v 1.99 2000/07/07 09:06:47 stas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -993,7 +993,7 @@ PHP_FUNCTION(fgets)
 			return_value->value.str.len = strlen(return_value->value.str.val);
 			/* resize buffer if it's much larger than the result */
 			if(return_value->value.str.len < len/2) {
-				return_value->value.str.val = erealloc(buf,return_value->value.str.len);
+				return_value->value.str.val = erealloc(buf,return_value->value.str.len+1);
 			}
 		}
 		return_value->type = IS_STRING;

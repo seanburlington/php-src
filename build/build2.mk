@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build2.mk,v 1.27.4.3 2004/12/30 19:54:46 rasmus Exp $ 
+# $Id: build2.mk,v 1.27.4.4 2004/12/31 07:10:57 sniper Exp $ 
 #
 
 include generated_lists
@@ -47,7 +47,7 @@ $(config_h_in): configure acconfig.h
 	@echo rebuilding $@
 	@rm -f $@
 	@autoheader=`./build/shtool path autoheader-2.13 autoheader`; \
-	$$autoheader -W none 2>&1 | $(SUPPRESS_WARNINGS)
+	$$autoheader 2>&1 | $(SUPPRESS_WARNINGS)
 
 $(TOUCH_FILES):
 	touch $(TOUCH_FILES)

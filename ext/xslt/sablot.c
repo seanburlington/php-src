@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.19.2.4 2001/12/15 12:30:23 derick Exp $ */
+/* $Id: sablot.c,v 1.19.2.5 2001/12/15 13:08:21 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -349,7 +349,8 @@ PHP_FUNCTION(xslt_set_scheme_handlers)
 		}
 		/* Invalid handler name */
 		else {
-			php_error(E_WARNING, "Invalid option to xslt_set_scheme_handlers(): %s", string_key);
+			php_error(E_WARNING, "%s() invalid option '%s', skipping", get_active_function_name(TSRMLS_C), string_key);
+			continue;
 		}
 
 		*assign_handle = *handler;

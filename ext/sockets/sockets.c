@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.148 2003/08/03 17:44:37 zeev Exp $ */
+/* $Id: sockets.c,v 1.149 2003/08/03 18:55:51 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -110,7 +110,7 @@ static
 		ZEND_ARG_PASS_INFO(1)
 	ZEND_END_ARG_INFO();
 
-static unsigned char second_fifth_and_sixth_args_force_ref[] =
+static 
 	ZEND_BEGIN_ARG_INFO(second_fifth_and_sixth_args_force_ref, 0)
 		ZEND_ARG_PASS_INFO(0)
 		ZEND_ARG_PASS_INFO(1)

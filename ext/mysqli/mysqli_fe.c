@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.17 2003/08/03 17:44:36 zeev Exp $ 
+  $Id: mysqli_fe.c,v 1.18 2003/08/03 18:51:26 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -237,7 +237,7 @@ function_entry mysqli_result_methods[] = {
 function_entry mysqli_stmt_methods[] = {
 	PHP_FALIAS(affected_rows,mysqli_stmt_affected_rows,NULL)
 	PHP_FALIAS(bind_param,mysqli_bind_param,second_arg_force_by_ref_rest)
-	PHP_FALIAS(bind_result,mysqli_bind_result, all_args_force_ref)
+	PHP_FALIAS(bind_result,mysqli_bind_result, all_args_by_ref)
 	PHP_FALIAS(execute,mysqli_execute,NULL)
 	PHP_FALIAS(fetch,mysqli_fetch,NULL)
 	PHP_FALIAS(param_count,mysqli_param_count,NULL)

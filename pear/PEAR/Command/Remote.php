@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.32 2003/06/30 13:12:50 cox Exp $
+// $Id: Remote.php,v 1.33 2003/08/05 23:17:40 pajoye Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -282,7 +282,8 @@ parameter.
         }
         $server = $this->config->get('master_server');
         if (!ereg('^http://', $params[0])) {
-            $pkgfile = "http://$server/get/$params[0]";
+            $getoption = isset($options['nocompress'])&&$options['nocompress']==1?'?uncompress=on':'';
+            $pkgfile = "http://$server/get/$params[0]".$getoption;
         } else {
             $pkgfile = $params[0];
         }

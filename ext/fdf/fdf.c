@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.57 2001/08/11 16:38:26 zeev Exp $ */
+/* $Id: fdf.c,v 1.58 2001/08/13 06:43:42 rasmus Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -208,6 +208,9 @@ PHP_FUNCTION(fdf_create)
 {
 	FDFDoc fdf;
 	FDFErc err;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "") == FAILURE)
+		return;
 
 	err = FDFCreate(&fdf);
 

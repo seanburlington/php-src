@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.45 2001/08/05 01:42:40 zeev Exp $ */
+/* $Id: snmp.c,v 1.46 2001/08/13 06:43:46 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -402,6 +402,9 @@ PHP_FUNCTION(snmprealwalk)
    Return the current status of quick_print */
 PHP_FUNCTION(snmp_get_quick_print)
 {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "") == FAILURE)
+		return;
+
 	RETURN_LONG(snmp_get_quick_print() ? 1 : 0);
 }
 /* }}} */
@@ -410,12 +413,12 @@ PHP_FUNCTION(snmp_get_quick_print)
    Return all objects including their respective object id withing the specified one */
 PHP_FUNCTION(snmp_set_quick_print)
 {
-	zval **a1;
-	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &a1) == FAILURE) {
-		WRONG_PARAM_COUNT;
-	}
-	convert_to_long_ex(a1);
-	snmp_set_quick_print((int)(*a1)->value.lval);
+	int argc = ZEND_NUM_ARGS();
+	long a1;
+
+	if (zend_parse_parameters(argc, "l", &a1) == FAILURE)
+		return;
+	snmp_set_quick_print((int)a1);
 }
 /* }}} */
 

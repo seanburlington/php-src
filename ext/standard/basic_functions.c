@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.383 2001/08/13 00:32:03 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.384 2001/08/13 06:43:47 rasmus Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1316,6 +1316,9 @@ PHP_FUNCTION(settype)
    Get the name of the owner of the current PHP script */
 PHP_FUNCTION(get_current_user)
 {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "") == FAILURE)
+		return;
+
 	RETURN_STRING(php_get_current_user(), 1);
 }
 /* }}} */

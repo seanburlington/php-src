@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.59 2001/07/31 05:44:05 zeev Exp $ */
+/* $Id: sockets.c,v 1.60 2001/08/13 06:43:46 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -396,6 +396,9 @@ PHP_MINFO_FUNCTION(sockets)
 PHP_FUNCTION(socket_fd_alloc)
 {
 	php_fd_set *php_fd;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "") == FAILURE)
+		return;
 
 	php_fd = (php_fd_set*)emalloc(sizeof(php_fd_set));
 

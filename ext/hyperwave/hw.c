@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.92 2001/08/11 16:38:40 zeev Exp $ */
+/* $Id: hw.c,v 1.93 2001/08/13 06:43:43 rasmus Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -1331,6 +1331,9 @@ PHP_FUNCTION(hw_errormsg)
    Returns object id of root collection */
 PHP_FUNCTION(hw_root)
 {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "") == FAILURE)
+		return;
+
 	return_value->value.lval = 0;
 	return_value->type = IS_LONG;
 }

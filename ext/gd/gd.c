@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.152 2001/08/11 16:38:28 zeev Exp $ */
+/* $Id: gd.c,v 1.153 2001/08/13 06:43:43 rasmus Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -931,6 +931,9 @@ PHP_FUNCTION(imagetypes)
 #ifdef HAVE_GD_XPM
 	ret |= 16;
 #endif
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "") == FAILURE)
+		return;
+
 	RETURN_LONG(ret);
 }
 /* }}} */

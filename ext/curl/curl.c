@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.77 2001/08/02 19:28:33 sterling Exp $ */
+/* $Id: curl.c,v 1.78 2001/08/13 06:43:42 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -504,6 +504,9 @@ static void curl_free_slist(void **slist)
    Return the CURL version string. */
 PHP_FUNCTION(curl_version)
 {
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "") == FAILURE)
+		return;
+
 	RETURN_STRING(curl_version(), 1);
 }
 /* }}} */

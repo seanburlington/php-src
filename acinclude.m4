@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.114 2000/11/21 08:38:19 hholzgra Exp $
+dnl $Id: acinclude.m4,v 1.115 2000/12/03 10:58:18 sas Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -176,7 +176,7 @@ case "[$]$1" in
 shared,*)
   ext_output="yes, shared"
   ext_shared=yes
-  $1=`echo $ac_n "[$]$1$ac_c"|sed s/^shared,//`
+  $1=`echo "[$]$1"|sed 's/^shared,//'`
   ;;
 shared)
   ext_output="yes, shared"

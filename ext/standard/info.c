@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.207 2002/09/26 19:48:56 sebastian Exp $ */
+/* $Id: info.c,v 1.208 2002/09/27 10:17:52 jan Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -330,12 +330,7 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 	if (PG(html_errors)) {
 		php_print_info_htmlhead(TSRMLS_C);
 	} else {
-		PUTS("       _           _        __        ____  \n");
-		PUTS(" _ __ | |__  _ __ (_)_ __  / _| ___  / /\\ \\ \n");
-		PUTS("| '_ \\| '_ \\| '_ \\| | '_ \\| |_ / _ \\| |  | |\n");
-		PUTS("| |_) | | | | |_) | | | | |  _| (_) | |  | |\n");
-		PUTS("| .__/|_| |_| .__/|_|_| |_|_|  \\___/| |  | |\n");
-		PUTS("|_|         |_|                      \\_\\/_/ \n\n");
+		PUTS("phpinfo()\n");
 	}	
 
 	if (flag & PHP_INFO_GENERAL) {

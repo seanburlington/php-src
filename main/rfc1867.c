@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.46 2000/09/05 19:06:29 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.47 2000/09/07 04:12:31 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -105,7 +105,7 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr)
 	ALLOC_ZVAL(http_post_files);
 	array_init(http_post_files);
 	INIT_PZVAL(http_post_files);
-	PG(http_globals)[TRACK_VARS_POST] = http_post_files;
+	PG(http_globals)[TRACK_VARS_FILES] = http_post_files;
 
 	ptr = buf;
 	rem = cnt;

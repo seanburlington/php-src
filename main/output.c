@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.73 2001/08/05 15:55:43 sas Exp $ */
+/* $Id: output.c,v 1.74 2001/08/11 22:55:00 zeev Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -482,12 +482,11 @@ static int php_ub_body_write(const char *str, uint str_length TSRMLS_DC)
    Turn on Output Buffering (specifying an optional output handler). */
 PHP_FUNCTION(ob_start)
 {
-	zval *output_handler;
+	zval *output_handler=NULL;
 	uint chunk_size=0;
 
 	switch (ZEND_NUM_ARGS()) {
 		case 0:
-			output_handler = NULL;
 			break;
 		case 1: {
 				zval **output_handler_p;
@@ -506,9 +505,11 @@ PHP_FUNCTION(ob_start)
 				if (zend_get_parameters_ex(2, &output_handler_p, &chunk_size_p)==FAILURE) {
 					RETURN_FALSE;
 				}
-				SEPARATE_ZVAL(output_handler_p);
-				output_handler = *output_handler_p;
-				output_handler->refcount++;
+				if (Z_STRLEN_PP(output_handler_p)>0) {
+					SEPARATE_ZVAL(output_handler_p);
+					output_handler = *output_handler_p;
+					output_handler->refcount++;
+				}
 				convert_to_long_ex(chunk_size_p);
 				chunk_size = (uint) Z_LVAL_PP(chunk_size_p);
 			}

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.h,v 1.11 2000/09/13 22:00:31 derick Exp $ */
+/* $Id: php_ftp.h,v 1.12 2000/10/08 11:45:17 dbeu Exp $ */
 
 #ifndef	_INCLUDED_FTP_H
 #define	_INCLUDED_FTP_H
@@ -39,6 +39,7 @@ extern zend_module_entry php_ftp_module_entry;
 #define php_ftp_module_ptr &php_ftp_module_entry
 
 PHP_MINIT_FUNCTION(ftp);
+PHP_MINFO_FUNCTION(ftp);
 
 PHP_FUNCTION(ftp_connect);
 PHP_FUNCTION(ftp_login);

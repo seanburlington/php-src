@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.33 2000/10/06 00:03:02 andi Exp $ */
+/* $Id: internal_functions_win32.c,v 1.34 2000/10/08 11:45:18 dbeu Exp $ */
 
 
 #include "php.h"
@@ -64,19 +64,19 @@
 /* #include "dl/snmp/php_snmp.h" */
 
 zend_module_entry *php_builtin_extensions[] = {
+	phpext_standard_ptr,
 #if WITH_BCMATH
 	phpext_bcmath_ptr,
 #endif
-	phpext_standard_ptr,
 	phpext_calendar_ptr,
 	COM_module_ptr,
 	phpext_ftp_ptr,
-	phpext_pcre_ptr,
+	phpext_mysql_ptr,
 	phpext_odbc_ptr,
+	phpext_pcre_ptr,
 	phpext_session_ptr,
 	phpext_xml_ptr,
-	phpext_wddx_ptr,
-	phpext_mysql_ptr
+	phpext_wddx_ptr
 };
 
 #define EXTCOUNT (sizeof(php_builtin_extensions)/sizeof(zend_module_entry *))

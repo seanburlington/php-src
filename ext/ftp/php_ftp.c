@@ -28,12 +28,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.27 2000/09/13 22:00:31 derick Exp $ */
+/* $Id: php_ftp.c,v 1.28 2000/10/08 11:45:17 dbeu Exp $ */
 
 #include "php.h"
 
 #if HAVE_FTP
 
+#include "ext/standard/info.h"
 #include "ext/standard/file.h"
 
 #include "php_ftp.h"
@@ -75,7 +76,7 @@ zend_module_entry php_ftp_module_entry = {
 	NULL,
 	NULL,
 	NULL,
-	NULL,
+	PHP_MINFO(ftp),
 	STANDARD_MODULE_PROPERTIES
 };
 
@@ -100,6 +101,13 @@ PHP_MINIT_FUNCTION(ftp)
 	REGISTER_MAIN_LONG_CONSTANT("FTP_TEXT", FTPTYPE_ASCII,
 		CONST_PERSISTENT | CONST_CS);
 	return SUCCESS;
+}
+
+PHP_MINFO_FUNCTION(ftp)
+{
+  php_info_print_table_start();
+  php_info_print_table_row(2, "FTP support", "enabled");
+  php_info_print_table_end();
 }
 
 

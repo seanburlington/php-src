@@ -1,6 +1,6 @@
-dnl $Id: config.m4,v 1.19 2000/04/16 15:44:04 rasmus Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.20 2000/05/04 09:42:27 sas Exp $ -*- sh -*-
 
-divert(2)dnl
+divert(3)dnl
 
 dnl
 dnl Check for crypt() capabilities
@@ -133,7 +133,7 @@ AC_CHECK_LIB(crypt, crypt, [
 AC_CHECK_FUNCS(getcwd)
 AC_CHECK_FUNCS(getwd)
 
-divert(4)dnl
+divert(5)dnl
 
 AC_ARG_WITH(regex,
 [  --with-regex=TYPE       regex library type: system, apache, php],

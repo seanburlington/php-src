@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.14 2000/02/26 03:20:50 zeev Exp $
+dnl $Id: config.m4,v 1.15 2000/05/04 09:42:27 sas Exp $
 
 PHPIFXLIB=ext/informix/libphp_ifx.a
 	
@@ -100,7 +100,7 @@ WARNING: You specified Informix base install directory that is different
 PHP_SUBST(INFORMIXDIR)
 PHP_SUBST(IFX_LIBS)
 	
-divert(6)dnl
+divert(7)dnl
 
 dnl Warn if Informix support was requested but environment is not set up correctly.
 if test "$INFORMIX_WARNING" != ""; then

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.49 2000/05/18 15:34:40 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.50 2000/05/26 18:43:09 rasmus Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -457,7 +457,7 @@ int send_php(request_rec *r, int display_source_mode, char *filename)
 
 	/* Make sure file exists */
 	if (filename == NULL && r->finfo.st_mode == 0) {
-		return NOT_FOUND;
+		return DECLINED;
 	}
 
 	/* If PHP parser engine has been turned off with an "engine off"

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.247 2004/02/10 17:44:30 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.248 2004/02/11 14:52:12 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -274,7 +274,7 @@ static void sapi_cgibin_flush(void *server_context)
 	if (!FCGX_IsCGI()) {
 		FCGX_Request *request = (FCGX_Request *)server_context;
 		if (
-#ifdef PHP_WIN32
+#ifndef PHP_WIN32
 		!parent && 
 #endif
 		(!request || FCGX_FFlush(request->out) == -1)) {

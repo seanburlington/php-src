@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.299 2003/02/09 20:43:05 iliaa Exp $ */
+/* $Id: file.c,v 1.300 2003/02/09 23:11:23 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1802,7 +1802,7 @@ PHP_FUNCTION(mkdir)
 	}
 
 	if (!recursive) {
-		ret = php_mkdir(dir, mode);
+		ret = php_mkdir(dir, mode TSRMLS_CC);
 	} else {
 		/* we look for directory separator from the end of string, thus hopefuly reducing our work load */
 		char *p, *e, *buf;
@@ -1820,8 +1820,8 @@ PHP_FUNCTION(mkdir)
 			}
 		}
 		if (p == buf) {
-			ret = php_mkdir(dir, mode);
-		} else if (!(ret = php_mkdir(buf, mode))) {
+			ret = php_mkdir(dir, mode TSRMLS_CC);
+		} else if (!(ret = php_mkdir(buf, mode TSRMLS_CC))) {
 			if (!p) {
 				p = buf;
 			}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.43 2000/03/03 12:37:09 steinm Exp $ */
+/* $Id: hw.c,v 1.44 2000/03/05 07:00:15 eschmid Exp $ */
 #if COMPILE_DL
 #include "dl/phpdl.h"
 #endif
@@ -1287,7 +1287,7 @@ php_printf("%s", object);
 }
 /* }}} */
 
-/* {{{ proto string hw_getobject(int link, int objid¸ [string linkroot])
+/* {{{ proto string hw_getobject(int link, int objid [, string linkroot])
    Returns object record  */
 PHP_FUNCTION(hw_getobject) {
 	pval **argv[3];

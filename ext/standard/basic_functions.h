@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.108 2002/09/30 03:02:52 jon Exp $ */
+/* $Id: basic_functions.h,v 1.109 2002/11/05 06:05:48 ssb Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -78,6 +78,9 @@ PHP_FUNCTION(ini_get);
 PHP_FUNCTION(ini_get_all);
 PHP_FUNCTION(ini_set);
 PHP_FUNCTION(ini_restore);
+PHP_FUNCTION(get_include_path);
+PHP_FUNCTION(set_include_path);
+PHP_FUNCTION(restore_include_path);
 
 PHP_FUNCTION(print_r);
 

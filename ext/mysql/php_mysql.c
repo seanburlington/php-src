@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.116.2.3 2002/08/24 13:16:23 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.116.2.4 2002/08/29 01:18:28 sniper Exp $ */
 
 
 /* TODO:
@@ -103,7 +103,7 @@ static int le_result, le_link, le_plink;
 #define MYSQL_USE_RESULT	0
 #define MYSQL_STORE_RESULT	1
 
-#if MYSQL_VERSION_ID < 32223
+#if MYSQL_VERSION_ID < 32224
 #define PHP_MYSQL_VALID_RESULT(mysql)		\
 	(mysql_num_fields(mysql)>0)
 #else

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.32 2000/04/02 21:27:32 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.33 2000/04/02 22:15:14 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -31,7 +31,7 @@
 #define SAFE_RETURN { if (namebuf) efree(namebuf); if (filenamebuf) efree(filenamebuf); if (lbuf) efree(lbuf); return; }
 
 /* The longest property name we use in an uploaded file array */
-#define MAX_SIZE_OF_INDEX sizeof("[tmpname]")
+#define MAX_SIZE_OF_INDEX sizeof("[tmp_name]")
 
 
 static void register_http_post_files_variable(char *strvar, char *val, zval *http_post_files ELS_DC PLS_DC)

@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.39 2000/03/07 04:28:29 andrei Exp $ */
+/* $Id: configuration-parser.y,v 1.40 2000/03/29 19:45:15 zeev Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -205,11 +205,7 @@ int php_init_config(void)
 		PG(open_basedir) = open_basedir;
 
 		if (!cfgin) {
-# ifdef PHP_WIN32
-			return FAILURE;
-# else
 			return SUCCESS;  /* having no configuration file is ok */
-# endif
 		}
 
 		if (opened_path) {

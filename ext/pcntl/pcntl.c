@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.17 2001/12/11 15:30:05 sebastian Exp $ */
+/* $Id: pcntl.c,v 1.18 2002/01/04 14:08:25 hholzgra Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -368,7 +368,7 @@ PHP_FUNCTION(pcntl_wstopsig)
 }
 /* }}} */
 
-/* {{{ proto bool pcntl_exec(string path, [array args], [array envs])
+/* {{{ proto bool pcntl_exec(string path [, array args [, array envs]])
    Executes specified program in current process space as defined by exec(2) */
 PHP_FUNCTION(pcntl_exec)
 {

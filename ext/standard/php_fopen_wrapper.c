@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.43 2004/01/08 08:17:33 andi Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.44 2004/04/19 17:41:39 wez Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -166,11 +166,11 @@ php_stream * php_stream_url_wrap_php(php_stream_wrapper *wrapper, char *path, ch
 	}  
 	
 	if (!strcasecmp(path, "stdin")) {
-		fd = dup(STDIN_FILENO);
+		fd = !strcmp(sapi_module.name, "cli") ? STDIN_FILENO : dup(STDIN_FILENO);
 	} else if (!strcasecmp(path, "stdout")) {
-		fd = dup(STDOUT_FILENO);
+		fd = !strcmp(sapi_module.name, "cli") ? STDOUT_FILENO : dup(STDOUT_FILENO);
 	} else if (!strcasecmp(path, "stderr")) {
-		fd = dup(STDERR_FILENO);
+		fd = !strcmp(sapi_module.name, "cli") ? STDERR_FILENO : dup(STDERR_FILENO);
 	} else if (!strncasecmp(path, "filter/", 7)) {
 		/* Save time/memory when chain isn't specified */
 		if (strchr(mode, 'r') || strchr(mode, '+')) {

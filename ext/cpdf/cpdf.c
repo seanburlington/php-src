@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.26 2001/06/06 13:05:42 rasmus Exp $ */
+/* $Id: cpdf.c,v 1.27 2001/06/28 21:59:26 derick Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -33,7 +33,7 @@
 
 #include "php.h"
 #include "php_globals.h"
-#include "zend/zend_list.h"
+#include "zend_list.h"
 #include "ext/standard/php_standard.h"
 #include "ext/standard/head.h"
 #include <math.h>

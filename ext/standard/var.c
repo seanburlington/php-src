@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.182 2004/02/05 09:07:46 stas Exp $ */
+/* $Id: var.c,v 1.183 2004/02/16 11:21:31 stas Exp $ */
 
 
 /* {{{ includes 
@@ -107,8 +107,6 @@ PHPAPI void php_var_dump(zval **struc, int level TSRMLS_DC)
 			PUTS("*RECURSION*\n");
 			return;
 		}
-
-		ce = Z_OBJCE(**struc);
 
 		Z_OBJ_HANDLER(**struc, get_class_name)(*struc, &class_name, &class_name_len, 0 TSRMLS_CC);
 		php_printf("%sobject(%s)#%d (%d) {\n", COMMON, class_name, Z_OBJ_HANDLE_PP(struc), myht ? zend_hash_num_elements(myht) : 0);

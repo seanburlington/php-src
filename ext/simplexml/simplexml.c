@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.114 2004/01/18 15:21:49 helly Exp $ */
+/* $Id: simplexml.c,v 1.115 2004/01/18 22:20:54 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -34,7 +34,7 @@
 #include "simplexml.h"
 #include "zend_default_classes.h"
 #include "zend_interfaces.h"
-#if HAVE_SPL
+#if HAVE_SPL && !defined(COMPILE_DL_SPL)
 #include "ext/spl/spl_sxe.h"
 #endif
 
@@ -1491,7 +1491,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.114 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.115 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

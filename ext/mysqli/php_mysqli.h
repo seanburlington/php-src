@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.34 2004/03/10 09:50:05 georg Exp $ 
+  $Id: php_mysqli.h,v 1.35 2004/03/16 21:43:25 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -47,6 +47,7 @@ typedef struct {
 	MYSQL_STMT	*stmt;
 	BIND_BUFFER	param;
 	BIND_BUFFER	result;
+	char		*query;
 } STMT;
 
 typedef struct {
@@ -349,6 +350,7 @@ PHP_FUNCTION(mysqli_stmt_errno);
 PHP_FUNCTION(mysqli_stmt_error);
 #ifndef HAVE_MYSQLI_OLDAPI
 PHP_FUNCTION(mysqli_stmt_free_result);
+PHP_FUNCTION(mysqli_stmt_reset);
 #endif
 PHP_FUNCTION(mysqli_stmt_num_rows);
 #if MYSQL_VERSION_ID >= 40101

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_report.c,v 1.7 2004/02/25 20:16:22 abies Exp $ 
+  $Id: mysqli_report.c,v 1.8 2004/03/16 21:43:25 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -62,7 +62,7 @@ void php_mysqli_report_index(char *query, unsigned int status TSRMLS_DC) {
 	} else {
 		return;
 	}
-	php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s used in query %s", index, query);
+	php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s used in query/prepared statement %s", index, query);
 #else
 	return;
 #endif

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.34 2004/03/09 14:29:20 helly Exp $ 
+  $Id: mysqli.c,v 1.35 2004/03/16 21:43:25 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -64,11 +64,14 @@ void php_free_stmt_bind_buffer(BIND_BUFFER bbuf, int type)
 	}
 
 	for (i=0; i < bbuf.var_cnt; i++) {
+
+		/* free temporary bind buffer */
 		if (type == FETCH_RESULT) {
 			if (bbuf.buf[i].type == IS_STRING) {
 				efree(bbuf.buf[i].val);
 			}
 		}
+
 		if (bbuf.vars[i]) {
 			zval_ptr_dtor(&bbuf.vars[i]);
 		}	
@@ -96,6 +99,9 @@ void php_clear_stmt_bind(STMT *stmt)
 	php_free_stmt_bind_buffer(stmt->param, FETCH_SIMPLE);
 	php_free_stmt_bind_buffer(stmt->result, FETCH_RESULT);
 
+	if (stmt->query) {
+		efree(stmt->query);
+	}
 	efree(stmt);
 	return;
 }

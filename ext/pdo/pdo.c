@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.4 2004/05/19 19:27:53 gschlossnagle Exp $ */
+/* $Id: pdo.c,v 1.5 2004/05/19 20:38:25 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -213,7 +213,8 @@ PHP_MINIT_FUNCTION(pdo)
 
 	REGISTER_LONG_CONSTANT("PDO_ATTR_AUTOCOMMIT",	(long)PDO_ATTR_AUTOCOMMIT,	CONST_CS|CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PDO_ATTR_SCROLL", 		(long)PDO_ATTR_SCROLL,		CONST_CS|CONST_PERSISTENT);
-		
+	REGISTER_LONG_CONSTANT("PDO_ATTR_TIMEOUT", 		(long)PDO_ATTR_TIMEOUT,		CONST_CS|CONST_PERSISTENT);
+
 	INIT_CLASS_ENTRY(ce, "PDOException", NULL);
 	pdo_exception_ce = zend_register_internal_class_ex(&ce, zend_exception_get_default(), NULL TSRMLS_CC);
 

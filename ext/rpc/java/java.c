@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.57 2001/08/13 16:02:44 andi Exp $ */
+/* $Id: java.c,v 1.58 2001/08/14 07:09:19 sniper Exp $ */
 
 /*
  * This module implements Zend OO syntax overloading support for Java
@@ -689,7 +689,8 @@ JNIEXPORT void JNICALL Java_net_php_reflect_setResultFromObject
   /* wrapper the java object in a pval object */
   pval *presult = (pval*)(long)result;
   pval *handle;
-
+  TSRMLS_FETCH();
+  
   if (presult->type != IS_OBJECT) {
 	object_init_ex(presult, &java_class_entry);
 	presult->is_ref=1;

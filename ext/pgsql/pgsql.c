@@ -17,13 +17,15 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.44 2000/05/02 00:44:25 sas Exp $ */
+/* $Id: pgsql.c,v 1.45 2000/05/02 05:27:35 sas Exp $ */
 
 #include <stdlib.h>
 
 #if defined(COMPILE_DL) || defined(COMPILE_DL_PGSQL)
 #include "dl/phpdl.h"
 #endif
+
+#define PHP_PGSQL_PRIVATE 1
 
 #include "php.h"
 #include "php_ini.h"

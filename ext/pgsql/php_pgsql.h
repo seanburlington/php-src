@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.7 2000/02/12 14:38:31 sas Exp $ */
+/* $Id: php_pgsql.h,v 1.8 2000/05/02 05:27:35 sas Exp $ */
 
 #ifndef _PHP_PGSQL_H
 #define _PHP_PGSQL_H
@@ -42,6 +42,7 @@
 extern zend_module_entry pgsql_module_entry;
 #define pgsql_module_ptr &pgsql_module_entry
 
+#ifdef PHP_PGSQL_PRIVATE
 
 #include <libpq-fe.h>
 
@@ -137,6 +138,7 @@ typedef struct {
 # define PGG(v) (pgsql_globals.v)
 # define PGLS_FETCH()
 extern PHP_PGSQL_API php_pgsql_globals pgsql_globals;
+#endif
 #endif
 
 #else

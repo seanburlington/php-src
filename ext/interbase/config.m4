@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.14 2003/08/05 16:30:32 sniper Exp $
+dnl $Id: config.m4,v 1.15 2003/09/16 19:25:11 abies Exp $
 dnl
 
 PHP_ARG_WITH(interbase,for InterBase support,
@@ -15,15 +15,22 @@ if test "$PHP_INTERBASE" != "no"; then
     IBASE_LIBDIR=$PHP_INTERBASE/lib
   fi
 
-  PHP_CHECK_LIBRARY(gds, isc_detach_database,
+  PHP_CHECK_LIBRARY(fbclient, isc_detach_database,
   [
-    IBASE_LIBNAME=gds
+    IBASE_LIBNAME=fbclient
   ], [
-    PHP_CHECK_LIBRARY(ib_util, isc_detach_database,
+    PHP_CHECK_LIBRARY(gds, isc_detach_database,
     [
-      IBASE_LIBNAME=ib_util
+      IBASE_LIBNAME=gds
     ], [
-      AC_MSG_ERROR([libgds or libib_util not found! Check config.log for more information.])
+      PHP_CHECK_LIBRARY(ib_util, isc_detach_database,
+      [
+        IBASE_LIBNAME=ib_util
+      ], [
+        AC_MSG_ERROR([libgds, libib_util or libfbclient not found! Check config.log for more information.])
+      ], [
+        -L$IBASE_LIBDIR
+      ])
     ], [
       -L$IBASE_LIBDIR
     ])

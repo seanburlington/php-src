@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 1999/12/30 06:09:46 sas Exp $
+dnl $Id: config.m4,v 1.7 2000/03/27 22:40:27 sas Exp $
 dnl config.m4 for extension dba
 dnl don't forget to call PHP_EXTENSION(dba)
 
@@ -155,18 +155,18 @@ AC_DBA_STD_RESULT
 AC_ARG_WITH(db3,
 [  --with-db3[=DIR]        Include Berkeley DB3 support],[
   if test "$withval" != "no"; then
-    for i in /usr/local /usr $withval; do
+    for i in /usr/local /usr /usr/local/BerkeleyDB.3.0 $withval; do
       if test -f "$i/include/db.h" ; then
         THIS_PREFIX="$i"
         DB3_EXTRA="db.h"
       fi
-	done
+    done
 
     if test -n "$DB3_EXTRA"; then
       AC_DEFINE_UNQUOTED(DB3_INCLUDE_FILE, "$DB3_EXTRA", [ ])
     fi
 
-    for LIB in db; do
+    for LIB in db db-3; do
       AC_TEMP_LDFLAGS(-L$THIS_PREFIX/lib,[
       AC_CHECK_LIB($LIB, db_create, [AC_DEFINE(DBA_DB3,1,[ ]) THIS_LIBS="$LIB"])
       ])

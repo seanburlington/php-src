@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config0.m4,v 1.9 2002/10/07 20:55:41 rasmus Exp $
+dnl $Id: config0.m4,v 1.10 2002/10/07 20:59:59 rasmus Exp $
 dnl
 
 PHP_ARG_WITH(zlib,for ZLIB support,
@@ -35,6 +35,8 @@ if test "$PHP_ZLIB" != "no" -o "$PHP_ZLIB_DIR" != "no"; then
   if test -z "$ZLIB_DIR"; then
     AC_MSG_ERROR(Cannot find libz)
   fi
+
+  AC_DEFINE(HAVE_ZLIB,1,[ ])
 
   PHP_ADD_LIBPATH($ZLIB_DIR/lib, ZLIB_SHARED_LIBADD)
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.170 2002/05/07 22:00:33 sas Exp $ */
+/* $Id: php.h,v 1.171 2002/05/31 04:49:45 rvenkat Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -59,6 +59,12 @@
 #define PHPAPI
 #define THREAD_LS
 #define PHP_DIR_SEPARATOR '/'
+#endif
+
+#ifdef NETWARE
+#define PHP_UNAME  "NetWare"    /* For php_get_uname() function */
+#define PHP_OS      PHP_UNAME  /* This is obtained using 'uname' on Unix and assigned in the case of Windows;
+                                   we'll do it this way atleast for now */
 #endif
 
 #include "php_regex.h"
@@ -179,6 +185,9 @@ char *strerror(int);
 # ifdef PHP_WIN32
 #include "win32/pwd.h"
 #include "win32/param.h"
+#elif defined(NETWARE)
+#include <sys/param.h>
+#include "NetWare/pwd.h"
 # else
 #include <pwd.h>
 #include <sys/param.h>

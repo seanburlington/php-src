@@ -17,9 +17,13 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.131 2002/05/11 03:33:29 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.132 2002/05/31 04:47:15 rvenkat Exp $ */
 
 #include "php_apache_http.h"
+
+#ifdef NETWARE
+#define SIGPIPE SIGINT
+#endif
 
 #if defined(ZEND_MULTIBYTE) && defined(HAVE_MBSTRING)
 #include "ext/mbstring/mbstring.h"

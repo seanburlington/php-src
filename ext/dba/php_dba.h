@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dba.h,v 1.14 2002/10/25 10:06:35 helly Exp $ */
+/* $Id: php_dba.h,v 1.15 2002/11/03 16:43:06 helly Exp $ */
 
 #ifndef PHP_DBA_H
 #define PHP_DBA_H
@@ -52,7 +52,7 @@ extern zend_module_entry dba_module_entry;
 #define DBA_CLOSE_FUNC(x) \
 	void dba_close_##x(dba_info *info)
 #define DBA_FETCH_FUNC(x) \
-	char *dba_fetch_##x(dba_info *info, char *key, int keylen, int *newlen)
+	char *dba_fetch_##x(dba_info *info, char *key, int keylen, int skip, int *newlen)
 #define DBA_UPDATE_FUNC(x) \
 	int dba_update_##x(dba_info *info, char *key, int keylen, char *val, int vallen, int mode)
 #define DBA_EXISTS_FUNC(x) \

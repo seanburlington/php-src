@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.37 1999/10/16 16:35:18 andrei Exp $ */
+/* $Id: file.c,v 1.38 1999/10/26 20:09:59 thies Exp $ */
 
 /* Synced with php3 revision 1.218 1999-06-16 [ssb] */
 
@@ -1074,7 +1074,6 @@ PHP_FUNCTION(set_file_buffer)
 	pval **arg1, **arg2;
 	int ret,type,buff;
 	void *what;
-	PLS_FETCH();
       
 	switch (ARG_COUNT(ht)) {
 	case 2:
@@ -1526,7 +1525,6 @@ PHP_FUNCTION(fgetcsv) {
 	int issock=0;
 	int socketd=0;
 	void *what;
-	PLS_FETCH();
 	
 	switch(ARG_COUNT(ht)) {
 	case 2:

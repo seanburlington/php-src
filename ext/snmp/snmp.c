@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.92 2004/03/23 23:12:50 iliaa Exp $ */
+/* $Id: snmp.c,v 1.92.2.1 2004/12/07 00:33:58 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -787,7 +787,21 @@ static int netsnmp_session_set_sec_protocol(struct snmp_session *s, char *prot T
 			s->securityPrivProtoLen = OIDSIZE(usmDESPrivProtocol);
 			return (0);
 #ifdef HAVE_AES
-		} else if (!strcasecmp(prot, "AES128")) {
+		} else if (!strcasecmp(prot, "AES128")
+#ifdef SNMP_VALIDATE_ERR
+/* 
+* In Net-SNMP before 5.2, the following symbols exist:
+* usmAES128PrivProtocol, usmAES192PrivProtocol, usmAES256PrivProtocol
+* In an effort to be more standards-compliant, 5.2 removed the last two.
+* As of 5.2, the symbols are:
+* usmAESPrivProtocol, usmAES128PrivProtocol
+* 
+* As we want this extension to compile on both versions, we use the latter
+* symbol on purpose, as it's defined to be the same as the former.
+*/
+			|| !strcasecmp(prot, "AES")) {
+#else			
+		) {
 			s->securityPrivProto = usmAES128PrivProtocol;
 			s->securityPrivProtoLen = OIDSIZE(usmAES128PrivProtocol);
 			return (0);
@@ -799,6 +813,7 @@ static int netsnmp_session_set_sec_protocol(struct snmp_session *s, char *prot T
 			s->securityPrivProto = usmAES256PrivProtocol;
 			s->securityPrivProtoLen = OIDSIZE(usmAES256PrivProtocol);
 			return (0);
+#endif
 #endif
 		} else if (strlen(prot)) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid privacy protocol: %s", prot);

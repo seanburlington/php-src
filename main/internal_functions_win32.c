@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.35 2001/01/28 03:40:15 phanto Exp $ */
+/* $Id: internal_functions_win32.c,v 1.36 2001/02/13 15:58:58 thies Exp $ */
 
 
 #include "php.h"
@@ -60,9 +60,6 @@
 #include "ext/xml/php_xml.h"
 #include "ext/wddx/php_wddx.h"
 #include "ext/mysql/php_mysql.h"
-
-/* SNMP has to be moved to ext */
-/* #include "dl/snmp/php_snmp.h" */
 
 zend_module_entry *php_builtin_extensions[] = {
 	phpext_standard_ptr,

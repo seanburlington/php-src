@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.192 2001/02/26 13:04:00 jmoore Exp $ */
+/* $Id: string.c,v 1.193 2001/02/26 15:49:38 andi Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -378,7 +378,7 @@ PHP_FUNCTION(wordwrap)
 			l = 0;
 			while (newtext[i+l] != breakchar[0]) {
 				if (newtext[i+l] == '\0') {
-					l --;
+					l--;
 					break;
 				}
 				l++;
@@ -392,7 +392,7 @@ PHP_FUNCTION(wordwrap)
 						newtext[i+l] = breakchar[0];
 						break;
 					}
-					l --;
+					l--;
 				}
 				if (l == -1) {
 					/* couldn't break is backwards, try looking forwards */
@@ -402,7 +402,7 @@ PHP_FUNCTION(wordwrap)
 							newtext[i+l] = breakchar[0];
 							break;
 						}
-						l ++;
+						l++;
 					}
 				}
 			}
@@ -425,7 +425,7 @@ PHP_FUNCTION(wordwrap)
 					if (breakcharlen == 1 || strncmp(text+i+l, breakchar, breakcharlen)==0)
 						break;
 				}
-				l ++;
+				l++;
 			}
 			if (l >= linelength) {
 				pgr = l;
@@ -439,7 +439,7 @@ PHP_FUNCTION(wordwrap)
 						last = i + l + 1;
 						break;
 					}
-					l --;
+					l--;
 				}
 				if (l == -1) {
 					/* couldn't break it backwards, try looking forwards */
@@ -463,7 +463,7 @@ PHP_FUNCTION(wordwrap)
 								break;
 							}
 						}
-						l ++;
+						l++;
 					}
 				}
 				i += l+1;

@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.25 2001/04/30 11:11:17 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.26 2001/05/03 08:59:47 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -1155,7 +1155,8 @@ DLEXPORT PHP_FUNCTION(udm_cat_list)
 		
 		while(c->rec_id){			
 			snprintf(buf, UDMSTRSIZ, "%s%s",c->link[0]?"@ ":"", c->name);				 
-			add_assoc_string(return_value, c->link[0]?c->link:c->path, buf, 1);
+			add_next_index_string(return_value, c->link[0]?c->link:c->path, 1);
+			add_next_index_string(return_value, buf, 1);
 			c++;
 		}
 		
@@ -1204,7 +1205,8 @@ DLEXPORT PHP_FUNCTION(udm_cat_path)
 		
 		while(c->rec_id){			
 			snprintf(buf, UDMSTRSIZ, "%s%s",c->link[0]?"@ ":"", c->name);				 
-			add_assoc_string(return_value, c->link[0]?c->link:c->path, buf, 1);
+			add_next_index_string(return_value, c->link[0]?c->link:c->path, 1);
+			add_next_index_string(return_value, buf, 1);
 			c++;
 		}
 		

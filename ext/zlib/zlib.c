@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.174 2003/08/09 11:20:38 derick Exp $ */
+/* $Id: zlib.c,v 1.175 2003/08/11 01:56:43 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -326,7 +326,6 @@ PHP_FUNCTION(gzopen)
 {
 	zval **arg1, **arg2, **arg3;
 	php_stream *stream;
-	char *p;
 	int use_include_path = 0;
 	
 	switch (ZEND_NUM_ARGS()) {

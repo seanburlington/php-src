@@ -1,10 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.5 2003/03/19 23:52:45 sniper Exp $
+dnl $Id: config.m4,v 1.6 2003/03/30 09:24:40 sebastian Exp $
 dnl config.m4 for extension mysqli
 
 PHP_ARG_WITH(mysqli, for MySQLi support,
 [  --with-mysqli[=FILE]         Include MySQLi support. FILE is the optional 
-                               pathname to mysql-config.])
+                               pathname to mysql_config.])
 
 if test "$PHP_MYSQLI" != "no"; then
 
@@ -22,7 +22,7 @@ if test "$PHP_MYSQLI" != "no"; then
     MYSQLI_INCLINE=`$MYSQL_CONFIG --cflags | sed -e "s/'//g"`
     MYSQLI_LIBLINE=`$MYSQL_CONFIG --libs   | sed -e "s/'//g"`
   else
-    AC_MSG_RESULT([mysql-config not found])
+    AC_MSG_RESULT([mysql_config not found])
     AC_MSG_ERROR([Please reinstall the mysql distribution])
   fi
 

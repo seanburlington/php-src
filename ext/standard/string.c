@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.184 2001/01/17 01:10:50 elixer Exp $ */
+/* $Id: string.c,v 1.185 2001/01/18 21:46:24 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -442,7 +442,7 @@ PHP_FUNCTION(wordwrap)
 				}
 				if (l == -1) {
 					/* couldn't break it backwards, try looking forwards */
-					l = linelength;
+					l = linelength - 1;
 					while (l <= pgr) {
 						if (docut == 0)
 						{
@@ -456,13 +456,12 @@ PHP_FUNCTION(wordwrap)
 						if (docut == 1)
 						{
 							if (text[i+l] == ' ' || l > i-last) {
-								strncat(newtext, text+last, i+l-last);
+								strncat(newtext, text+last, i+l-last+1);
 								strcat(newtext, breakchar);
-								last = i + l;
+								last = i + l + 1;
 								break;
 							}
 						}
-						l ++;
 					}
 				}
 				i += l+1;

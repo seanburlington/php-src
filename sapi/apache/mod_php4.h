@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.h,v 1.14.2.3 2002/08/28 18:56:51 gschlossnagle Exp $ */
+/* $Id: mod_php4.h,v 1.14.2.4 2002/08/30 19:12:28 gschlossnagle Exp $ */
 
 #ifndef MOD_PHP4_H
 #define MOD_PHP4_H
@@ -37,6 +37,15 @@ typedef struct {
 	zend_bool apache_config_loaded;
         zend_bool headers_sent;
 } php_apache_info_struct;
+
+typedef struct _php_handler {
+    long type;
+    long stage;
+    char *name;
+} php_handler;
+
+#define AP_HANDLER_TYPE_FILE 0
+#define AP_HANDLER_TYPE_METHOD 1
 
 extern zend_module_entry apache_module_entry;
 

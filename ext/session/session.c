@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.237.2.5 2002/01/07 08:20:08 yohgaki Exp $ */
+/* $Id: session.c,v 1.237.2.6 2002/02/22 15:01:20 yohgaki Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -437,7 +437,7 @@ static void php_session_track_init(TSRMLS_D)
 	  MAKE_STD_ZVAL(PS(http_session_vars));
 	  array_init(PS(http_session_vars));
 	  ZEND_SET_GLOBAL_VAR_WITH_LENGTH("HTTP_SESSION_VARS", sizeof("HTTP_SESSION_VARS"), PS(http_session_vars), 1, 0);
-	  ZEND_SET_GLOBAL_VAR_WITH_LENGTH("_SESSION", sizeof("_SESSION"), PS(http_session_vars), 1, 0);
+	  ZEND_SET_GLOBAL_VAR_WITH_LENGTH("_SESSION", sizeof("_SESSION"), PS(http_session_vars), 2, 0);
 	}
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.61 2001/10/29 01:51:08 fmk Exp $ */
+/* $Id: php_fbsql.c,v 1.62 2001/10/29 18:53:52 fmk Exp $ */
 
 /* TODO:
  *
@@ -639,7 +639,7 @@ int phpfbFetchRow(PHPFBResult* result, int row)
 	for (;;)
 	{
 		void *rawData; 
-		if (row >=  result->rowCount) return 0;
+		if (row > result->rowCount) return 0;
 		if (fbcrhRowCount(result->rowHandler) > (unsigned int)row) return 1;
 		rawData = fbcdcFetch(result->link->connection, result->batchSize, result->fetchHandle);
 		if (!fbcrhAddBatch(result->rowHandler, rawData)) result->rowCount = fbcrhRowCount(result->rowHandler);

@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.53.2.17 2004/02/26 00:03:57 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.53.2.18 2004/02/26 00:13:02 sniper Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -388,7 +388,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 			zend_hash_next_index_insert(Z_ARRVAL_PP(response_header), &http_response, sizeof(zval *), NULL);
 		}
 	} else {
-		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "HTTP request failed, unexpected end of socket.!");
+		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "HTTP request failed, unexpected end of socket!");
 		goto out;
 	}
 	

@@ -1,7 +1,7 @@
-dnl $Id: config.m4,v 1.11 2000/11/30 15:20:40 sterling Exp $
+dnl $Id: config.m4,v 1.12 2000/12/06 17:34:57 sas Exp $
 
-PHP_ARG_WITH(bcmath, for bc style precision math functions,
-[  --without-bcmath         Compile without bc style precision math functions. ], yes)
+PHP_ARG_ENABLE(bcmath, for bc style precision math functions,
+[  --enable-bcmath         Enable bc style precision math functions.])
 
 if test "$PHP_BCMATH" != "no"; then
   AC_DEFINE(WITH_BCMATH, 1, [Whether you have bcmath])

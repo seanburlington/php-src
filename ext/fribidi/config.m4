@@ -1,13 +1,13 @@
-dnl $Id: config.m4,v 1.1 2000/11/13 15:57:57 onn Exp $
+dnl $Id: config.m4,v 1.2 2000/12/06 17:34:55 sas Exp $
 dnl config.m4 for extension fribidi
 dnl don't forget to call PHP_EXTENSION(fribidi)
 
 
 
 PHP_ARG_WITH(fribidi, whether to add fribidi support,
-[  --with-fribidi[=DIR]             Include fribidi support (requires FriBidi >=0.1.12).
-                                    DIR is the fribidi installation directory - 
-                                    default /usr/local/],"no")
+[  --with-fribidi[=DIR]    Include fribidi support (requires FriBidi >=0.1.12).
+                          DIR is the fribidi installation directory - 
+                          default /usr/local/])
 
 
 

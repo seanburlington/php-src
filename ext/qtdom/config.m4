@@ -1,10 +1,10 @@
-dnl $Id: config.m4,v 1.1 2000/11/15 18:54:59 amos Exp $
+dnl $Id: config.m4,v 1.2 2000/12/06 17:34:55 sas Exp $
 dnl config.m4 for extension qtdom
 dnl don't forget to call PHP_EXTENSION(qtdom)
 
 AC_MSG_CHECKING(whether to include QDOM support)
 AC_ARG_WITH(qtdom,
-[  --with-qtdom        Include QtDOM support (requires Qt >= 2.2.0).],
+[  --with-qtdom            Include QtDOM support (requires Qt >= 2.2.0).],
 [
 case "$withval" in
     no)

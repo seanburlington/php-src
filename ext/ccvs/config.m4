@@ -1,11 +1,10 @@
-dnl $Id: config.m4,v 1.5 2000/10/02 17:35:56 rasmus Exp $
+dnl $Id: config.m4,v 1.6 2000/12/06 17:34:56 sas Exp $
 dnl config.m4 for PHP4 CCVS Extension
 
 AC_MSG_CHECKING(CCVS Support)
 AC_ARG_WITH(ccvs,
-[  --with-ccvs[=DIR]       Compile CCVS support into PHP4. 
-                          Please specify your CCVS base install directory as DIR.
-],
+[  --with-ccvs[=DIR]       Compile CCVS support into PHP4. Please specify your 
+                          CCVS base install directory as DIR.],
 [
   if test "$withval" != "no"; then
      CCVS_DIR="$withval"

@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.16 2000/11/23 09:56:18 steinm Exp $
+dnl $Id: config.m4,v 1.17 2000/12/06 17:34:56 sas Exp $
 dnl config.m4 for extension domxml
 
 PHP_ARG_WITH(dom, for DOM support,
-[  --with-dom[=DIR]       Include DOM support (requires libxml >= 2.0).
+[  --with-dom[=DIR]        Include DOM support (requires libxml >= 2.0).
                           DIR is the libxml install directory,
                           defaults to /usr.])
 

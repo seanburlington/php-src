@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.24 2002/09/12 09:48:03 thies Exp $ */
+/* $Id: php_oci8.h,v 1.25 2002/12/06 13:44:35 abonamous Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -70,6 +70,8 @@ typedef struct {
 	char *hashed_details;
 	oci_server *server;
 	OCISession *pSession;
+	OCIEnv *pEnv;				//sessions own environment
+	ub2 charsetId;				//sessions used character set (mostly this will be 0, so NLS_LANG will be used.
 } oci_session;
 
 typedef struct {

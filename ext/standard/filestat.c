@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.100 2002/07/26 08:04:42 sesser Exp $ */
+/* $Id: filestat.c,v 1.101 2002/07/30 20:24:13 kalowsky Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -481,9 +481,7 @@ PHP_FUNCTION(touch)
 	newtime = &newtimebuf;
 
 	if (ac == 1 && zend_get_parameters_ex(1, &filename) != FAILURE) {
-#ifndef HAVE_UTIME_NULL
 		newtime->modtime = newtime->actime = time(NULL);
-#endif
 	} else if (ac == 2 && zend_get_parameters_ex(2, &filename, &filetime) != FAILURE) {
 		convert_to_long_ex(filetime);
 		newtime->actime = time(NULL);

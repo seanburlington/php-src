@@ -1,5 +1,5 @@
 /* 
-   +----------------------------------------------------------------------+
+   +----------------------------------------------------------------------
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group                   |
@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.191 2000/02/05 15:16:09 zeev Exp $ */
+/* $Id: main.c,v 1.192 2000/02/05 19:32:27 thies Exp $ */
 
 
 #include <stdio.h>
@@ -116,22 +116,6 @@ static PHP_INI_MH(OnSetPrecision)
 	ELS_FETCH();
 
 	EG(precision) = atoi(new_value);
-	return SUCCESS;
-}
-
-
-static PHP_INI_MH(OnChangeMaxExecutionTime)
-{
-	int new_timeout;
-	PLS_FETCH();
-	
-	if (new_value) {
-		new_timeout = atoi(new_value);
-	} else {
-		new_timeout = 0;
-	}
-	PG(max_execution_time) = new_timeout;
-	php_set_timeout(new_timeout);
 	return SUCCESS;
 }
 
@@ -240,7 +224,7 @@ PHP_INI_BEGIN()
 
 	PHP_INI_ENTRY_EX("define_syslog_variables",	"0",		PHP_INI_ALL,		NULL,	php_ini_boolean_displayer_cb)
 
-	PHP_INI_ENTRY("max_execution_time",		"30",			PHP_INI_ALL,		OnChangeMaxExecutionTime)
+	STD_PHP_INI_ENTRY("max_execution_time",		"30",			PHP_INI_ALL,		OnUpdateInt, 				max_execution_time,	php_core_globals,	core_globals)
 #if MEMORY_LIMIT
 	PHP_INI_ENTRY("memory_limit",			"8388608",		PHP_INI_ALL,		OnChangeMemoryLimit)
 #endif

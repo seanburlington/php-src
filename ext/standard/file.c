@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.382.2.4 2005/03/03 03:30:23 iliaa Exp $ */
+/* $Id: file.c,v 1.382.2.5 2005/03/07 00:17:51 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1780,6 +1780,8 @@ PHP_FUNCTION(fgetcsv)
 			if (len < 0) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length parameter may not be negative");
 				RETURN_FALSE;
+			} else if (len == 0) {
+				len = 1;
 			}
 		} else {
 			len = -1;

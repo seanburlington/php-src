@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.100 2003/08/13 21:12:15 cellog Exp $
+// $Id: Common.php,v 1.101 2003/08/27 19:27:45 cellog Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -1355,6 +1355,30 @@ class PEAR_Common extends PEAR
             "used_classes" => array_diff(array_keys($used_classes), $nodeps),
             "inheritance" => $extends,
             );
+    }
+
+    // }}}
+    // {{{  betterStates()
+
+    /**
+     * Return an array containing all of the states that are more stable than
+     * or equal to the passed in state
+     *
+     * @param string Release state
+     * @param boolean Determines whether to include $state in the list
+     * @return false|array False if $state is not a valid release state
+     */
+    function betterStates($state, $include = false)
+    {
+        static $states = array('devel', 'snapshot', 'alpha', 'beta', 'stable');
+        $i = array_search($state, $states);
+        if ($i === false) {
+            return false;
+        }
+        if ($include) {
+            $i--;
+        }
+        return array_slice($states, $i + 1);
     }
 
     // }}}

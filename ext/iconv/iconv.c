@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.47 2002/09/04 05:17:16 yohgaki Exp $ */
+/* $Id: iconv.c,v 1.48 2002/09/07 21:08:47 yohgaki Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -139,7 +139,7 @@ static int php_iconv_string(const char *in_p, size_t in_len,
 							char **out, size_t *out_len,
 							const char *in_charset, const char *out_charset, int *err TSRMLS_DC)
 {
-#if ICONV_SUPPORTS_ERRNO
+#if !ICONV_SUPPORTS_ERRNO
 	unsigned int in_size, out_size, out_left;
 	char *out_buffer, *out_p;
 	iconv_t cd;

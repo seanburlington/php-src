@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.89 2004/01/08 08:16:00 andi Exp $ */
+/* $Id: mcrypt.c,v 1.90 2004/04/18 14:04:48 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -216,8 +216,8 @@ ZEND_GET_MODULE(mcrypt)
 #define MCRYPT_ENTRY2_4(a) MCRYPT_ENTRY_NAMED(a, a)
 
 PHP_INI_BEGIN()
-	STD_PHP_INI_ENTRY("mcrypt.algorithms_dir",	NULL, PHP_INI_ALL, OnUpdateString, algorithms_dir, zend_mcrypt_globals, mcrypt_globals)
-	STD_PHP_INI_ENTRY("mcrypt.modes_dir",	NULL, PHP_INI_ALL, OnUpdateString, modes_dir, zend_mcrypt_globals, mcrypt_globals)
+	STD_PHP_INI_ENTRY("mcrypt.algorithms_dir", NULL, PHP_INI_ALL, OnUpdateString, algorithms_dir, zend_mcrypt_globals, mcrypt_globals)
+	STD_PHP_INI_ENTRY("mcrypt.modes_dir",      NULL, PHP_INI_ALL, OnUpdateString, modes_dir, zend_mcrypt_globals, mcrypt_globals)
 PHP_INI_END()
 
 static void php_mcrypt_module_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)

@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.4 2000/01/01 01:31:43 sas Exp $ */
+/* $Id: php_mysql.h,v 1.5 2000/02/12 14:38:02 sas Exp $ */
 
 #ifndef _PHP_MYSQL_H
 #define _PHP_MYSQL_H
@@ -27,7 +27,7 @@
 # define HAVE_MYSQL 1
 #endif
 
-#if WIN32||WINNT
+#ifdef PHP_WIN32
 #define PHP_MYSQL_API __declspec(dllexport)
 #else
 #define PHP_MYSQL_API

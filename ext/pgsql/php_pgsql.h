@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.6 2000/02/05 17:26:35 zeev Exp $ */
+/* $Id: php_pgsql.h,v 1.7 2000/02/12 14:38:31 sas Exp $ */
 
 #ifndef _PHP_PGSQL_H
 #define _PHP_PGSQL_H
@@ -52,7 +52,7 @@ extern zend_module_entry pgsql_module_entry;
 #include <libpq/libpq-fs.h>
 #endif
 
-#if WIN32||WINNT
+#ifdef PHP_WIN32
 #define PHP_PGSQL_API __declspec(dllexport)
 #else
 #define PHP_PGSQL_API

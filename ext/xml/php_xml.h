@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xml.h,v 1.7 2000/02/10 18:03:55 sas Exp $ */
+/* $Id: php_xml.h,v 1.8 2000/02/12 14:38:31 sas Exp $ */
 
 #ifndef _PHP_XML_H
 #define _PHP_XML_H
@@ -38,7 +38,7 @@ extern zend_module_entry xml_module_entry;
 #include <xmltok.h>
 #include <xmlparse.h>
 
-#if WIN32||WINNT
+#ifdef PHP_WIN32
 #define PHP_XML_API __declspec(dllexport)
 #else
 #define PHP_XML_API

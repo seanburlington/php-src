@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.49 2001/09/03 08:44:02 sterling Exp $ */
+/* $Id: ereg.c,v 1.50 2001/09/03 08:47:45 sterling Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -218,7 +218,7 @@ static void php_ereg(INTERNAL_FUNCTION_PARAMETERS, int icase)
 			RETURN_FALSE;
 		}
 
-		zval_ptr_dtor(array);	/* start with clean array */
+		zval_dtor(*array);	/* start with clean array */
 		array_init(*array);
 
 		for (i = 0; i < NS; i++) {

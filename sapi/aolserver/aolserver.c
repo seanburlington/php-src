@@ -1,4 +1,4 @@
-/* 
+/*
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.61 2001/08/05 15:29:40 sas Exp $ */
+/* $Id: aolserver.c,v 1.62 2001/08/14 17:04:49 dbeu Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -111,11 +111,10 @@ php_ns_sapi_ub_write(const char *str, uint str_length TSRMLS_DC)
  */
 
 static int
-php_ns_sapi_header_handler(sapi_header_struct *sapi_header, sapi_headers_struct *sapi_headers)
+php_ns_sapi_header_handler(sapi_header_struct *sapi_header, sapi_headers_struct *sapi_headers TSRMLS_DC)
 {
 	char *header_name, *header_content;
 	char *p;
-	TSRMLS_FETCH();
 
 	header_name = sapi_header->header;
 	header_content = p = strchr(header_name, ':');
@@ -146,10 +145,8 @@ php_ns_sapi_header_handler(sapi_header_struct *sapi_header, sapi_headers_struct 
  */
 
 static int
-php_ns_sapi_send_headers(sapi_headers_struct *sapi_headers)
+php_ns_sapi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 {
-	TSRMLS_FETCH();
-
 	if(SG(sapi_headers).send_default_content_type) {
 		Ns_ConnSetRequiredHeaders(NSG(conn), "text/html", 0);
 	}
@@ -165,11 +162,10 @@ php_ns_sapi_send_headers(sapi_headers_struct *sapi_headers)
  */
 
 static int
-php_ns_sapi_read_post(char *buf, uint count_bytes)
+php_ns_sapi_read_post(char *buf, uint count_bytes TSRMLS_DC)
 {
 	uint max_read;
 	uint total_read = 0;
-	TSRMLS_FETCH();
 
 	max_read = MIN(NSG(data_avail), count_bytes);
 	
@@ -189,12 +185,10 @@ php_ns_sapi_read_post(char *buf, uint count_bytes)
  * the HTTP request header
  */
 	
-static char *
-php_ns_sapi_read_cookies()
+static char *php_ns_sapi_read_cookies(TSRMLS_D)
 {
 	int i;
 	char *http_cookie = NULL;
-	TSRMLS_FETCH();
 	
 	i = Ns_SetIFind(NSG(conn->headers), "cookie");
 	if(i != -1) {
@@ -209,10 +203,9 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	char buf[512];
 	int uptime = Ns_InfoUptime();
 	int i;
-	TSRMLS_FETCH();
 	
 	php_info_print_table_start();
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.61 2001/08/05 15:29:40 sas Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.62 2001/08/14 17:04:49 dbeu Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -266,7 +259,6 @@ static zend_module_entry php_aolserver_module = {
 PHP_FUNCTION(getallheaders)
 {
 	int i;
-	TSRMLS_FETCH();
 
 	if (array_init(return_value) == FAILURE) {
 		RETURN_FALSE;

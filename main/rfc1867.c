@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.114 2002/08/16 19:34:43 kalowsky Exp $ */
+/* $Id: rfc1867.c,v 1.115 2002/08/17 11:31:06 sesser Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -639,10 +639,6 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 		return;
 	}
 
-	/* search for the end of the boundary */
-	boundary_end = strchr(boundary, ',');
-	if (boundary_end ) *boundary_end = 0;
-
 	boundary++;
 	boundary_len = strlen(boundary);
 
@@ -654,6 +650,13 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 		boundary++;
 		boundary_len -= 2;
 		boundary[boundary_len] = '\0';
+	} else {
+		/* search for the end of the boundary */
+		boundary_end = strchr(boundary, ',');
+		if (boundary_end) {
+			boundary_end[0] = '\0';
+			boundary_len = boundary_end-boundary;
+		}
 	}
 
 	/* Initialize the buffer */

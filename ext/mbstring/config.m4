@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.27 2002/10/10 16:57:52 moriyoshi Exp $
+dnl $Id: config.m4,v 1.28 2002/11/13 04:36:04 andrei Exp $
 dnl
 
 PHP_ARG_ENABLE(mbstring, whether to enable multibyte string support,
-[  --disable-mbstring      Disable multibyte string support], yes)
+[  --enable-mbstring       Enable multibyte string support])
 
 if test "$PHP_MBSTRING" != "no"; then  
   AC_DEFINE(HAVE_MBSTRING,1,[whether to have multibyte string support])
@@ -36,7 +36,7 @@ fi
 
 
 PHP_ARG_ENABLE(mbregex, whether to enable multibyte regex support,
-[  --disable-mbregex       Disable multibyte regex support], yes, no)
+[  --enable-mbregex        Enable multibyte regex support], no, no)
 
 if test "$PHP_MBREGEX" != "no" ; then
   AC_DEFINE(HAVE_MBREGEX, 1, [whether to have multibyte regex support])

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.26.2.1 2001/08/18 21:09:41 sniper Exp $
+dnl $Id: config.m4,v 1.26.2.2 2001/09/07 00:28:26 sniper Exp $
 dnl config.m4 for extension domxml
 
 AC_DEFUN(PHP_DOM_CHECK_VERSION,[
@@ -40,7 +40,7 @@ if test "$PHP_DOM" != "no"; then
 
   PHP_DOM_CHECK_VERSION
 
-  if test -f $DOMXML_DIR/lib/libxml2.a -o -f $DOMXML_DIR/lib/libxml2.s? ; then
+  if test -f $DOMXML_DIR/lib/libxml2.a -o -f $DOMXML_DIR/lib/libxml2.$SHLIB_SUFFIX_NAME ; then
     DOM_LIBNAME=xml2
   else
     DOM_LIBNAME=xml

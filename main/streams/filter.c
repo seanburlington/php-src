@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.10 2004/03/31 23:48:59 pollita Exp $ */
+/* $Id: filter.c,v 1.11 2004/04/01 03:52:34 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -311,7 +311,7 @@ PHPAPI void php_stream_filter_append(php_stream_filter_chain *chain, php_stream_
 	chain->tail = filter;
 	filter->chain = chain;
 
-	if ((stream->writepos - stream->readpos) > 0) {
+	if (&(stream->readfilters) == chain && (stream->writepos - stream->readpos) > 0) {
 		/* Let's going ahead and wind anything in the buffer through this filter */
 		php_stream_bucket_brigade brig_in = { NULL, NULL }, brig_out = { NULL, NULL };
 		php_stream_bucket_brigade *brig_inp = &brig_in, *brig_outp = &brig_out;

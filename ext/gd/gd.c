@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.2 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: gd.c,v 1.3 1999/04/21 21:27:18 ssb Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -62,11 +62,7 @@
 #include <gdfontl.h>  /* 4 Large font */
 #include <gdfontg.h>  /* 5 Giant font */
 #if HAVE_LIBTTF
-# if PHP_31
-#  include "gdttf.h"
-# else
-#  include "functions/gdttf.h"
-# endif
+# include "gdttf.h"
 #endif
 
 #ifndef M_PI

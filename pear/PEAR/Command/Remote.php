@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.21 2002/07/02 13:04:01 dickmann Exp $
+// $Id: Remote.php,v 1.22 2002/10/02 21:27:25 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -147,7 +147,7 @@ version of DB is 1.2, the downloaded file will be DB-1.2.tgz.',
             'headline' => array('Package', 'Version'),
             );
         foreach ($available as $name => $info) {
-            $data['data'][] = array($name, $info['stable']);
+            $data['data'][] = array($name, isset($info['stable']) ? $info['stable'] : '-n/a-');
         }
         if (count($available)==0) {
             $data = '(no packages installed yet)';

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.147 2004/01/17 17:44:26 andrey Exp $ */
+/* $Id: xml.c,v 1.148 2004/02/23 08:21:07 chregu Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -1109,7 +1109,11 @@ PHP_FUNCTION(xml_parser_create)
    Create an XML parser */
 PHP_FUNCTION(xml_parser_create_ns)
 {
+#if defined(HAVE_LIBXML) && defined(HAVE_XML) && !defined(HAVE_LIBEXPAT) && LIBXML_VERSION < 20600 
+	php_error_docref(NULL TSRMLS_CC, E_ERROR, "is broken with libxml2 %d. Please upgrade to libxml2 2.6", LIBXML_DOTTED_VERSION);
+#else
 	php_xml_parser_create_impl(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
+#endif
 }
 /* }}} */
 

@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.50 2001/12/11 15:31:02 sebastian Exp $ */
+/* $Id: internal_functions_win32.c,v 1.50.4.1 2002/03/16 22:22:32 phanto Exp $ */
 
 /* {{{ includes
  */
@@ -50,7 +50,7 @@
 #include "ext/standard/php_array.h"
 #include "ext/standard/php_assert.h"
 #include "ext/calendar/php_calendar.h"
-#include "ext/com/php_COM.h"
+#include "ext/rpc/php_rpc.h"
 #include "ext/ftp/php_ftp.h"
 #include "ext/standard/reg.h"
 #include "ext/pcre/php_pcre.h"
@@ -73,7 +73,7 @@ zend_module_entry *php_builtin_extensions[] = {
 	phpext_bcmath_ptr,
 #endif
 	phpext_calendar_ptr,
-	phpext_com_ptr,
+	phpext_rpc_ptr,
 	phpext_ftp_ptr,
 #if defined(MBSTR_ENC_TRANS)
 	phpext_mbstring_ptr,

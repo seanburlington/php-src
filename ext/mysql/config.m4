@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.35 2001/05/29 11:59:33 sniper Exp $
+dnl $Id: config.m4,v 1.35.2.1 2001/11/02 01:39:30 sniper Exp $
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
 sinclude(ext/mysql/libmysql/mysql.m4)
@@ -80,7 +80,7 @@ elif test "$PHP_MYSQL" != "no"; then
 
   if test "$PHP_ZLIB_DIR" != "no"; then
     PHP_ADD_LIBRARY(z,, MYSQL_SHARED_LIBADD)
-    MYSQL_LIBS="-L$PHP_ZLIB_DIR -z"
+    MYSQL_LIBS="-L$PHP_ZLIB_DIR/lib -z"
   fi
 
   PHP_ADD_LIBRARY_WITH_PATH(mysqlclient, $MYSQL_LIB_DIR, MYSQL_SHARED_LIBADD)

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.22 2000/07/01 12:23:09 andi Exp $ */
+/* $Id: image.c,v 1.23 2000/07/29 15:29:35 thies Exp $ */
 /* 
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -223,6 +223,7 @@ static void php_read_APP(FILE *fp,unsigned int marker,pval *info)
 	unsigned short length;
 	unsigned char *buffer;
 	unsigned char markername[ 16 ];
+	zval *tmp;
 
 	length = php_read2(fp);
 	length -= 2;				/* length includes itself */
@@ -235,7 +236,10 @@ static void php_read_APP(FILE *fp,unsigned int marker,pval *info)
 
 	sprintf(markername,"APP%d",marker - M_APP0);
 
-	add_assoc_stringl(info,markername,buffer,length,1);
+	if (zend_hash_find(info->value.ht, markername, strlen(markername)+1, (void **) &tmp) == FAILURE) {
+		/* XXX we onyl catch the 1st tag of it's kind! */
+		add_assoc_stringl(info,markername,buffer,length,1);
+	}
 
 	efree(buffer);
 }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.441 2002/02/10 06:52:35 jason Exp $ */
+/* $Id: basic_functions.c,v 1.442 2002/02/10 17:38:15 jason Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -516,7 +516,7 @@ function_entry basic_functions[] = {
 
 	PHP_FE(var_dump,														NULL)
 	PHP_FE(var_export,														NULL)
-	PHP_FE(zval_debug_dump,														NULL)
+	PHP_FE(debug_zval_dump,														NULL)
 	PHP_FE(print_r,															NULL)
 
 	PHP_FE(register_shutdown_function,										NULL)

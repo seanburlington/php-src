@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_int.h,v 1.3 2004/05/19 18:04:47 fmk Exp $ */
+/* $Id: php_pdo_int.h,v 1.4 2004/05/20 00:05:22 wez Exp $ */
 
 /* Stuff private to the PDO extension and not for consumption by PDO drivers
  * */
@@ -35,6 +35,14 @@ void pdo_dbstmt_free_storage(zend_object *object TSRMLS_DC);
 extern zend_object_handlers pdo_dbstmt_object_handlers;
 
 extern pdo_driver_t *pdo_find_driver(const char *name, int namelen);
+
+extern void pdo_handle_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt TSRMLS_DC);
+
+#define PDO_DBH_CLEAR_ERR()		dbh->error_code = PDO_ERR_NONE
+#define PDO_STMT_CLEAR_ERR()	stmt->error_code = PDO_ERR_NONE
+#define PDO_HANDLE_DBH_ERR()	pdo_handle_error(dbh, NULL TSRMLS_CC)
+#define PDO_HANDLE_STMT_ERR()	pdo_handle_error(stmt->dbh, stmt TSRMLS_CC)
+
 
 /*
  * Local variables:

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.105 2003/12/18 21:28:00 iliaa Exp $ 
+   $Id: sqlite.c,v 1.106 2003/12/27 22:11:48 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -375,6 +375,9 @@ static int php_sqlite_forget_persistent_id_numbers(zend_rsrc_list_entry *rsrc TS
 {
 	struct php_sqlite_db *db;
 
+	/* prevent bad mojo if someone tries to use a previously registered function in the next request */
+	zend_hash_apply(&db->callbacks, (apply_func_t)php_sqlite_callback_invalidator TSRMLS_CC);
+
 	if (Z_TYPE_P(rsrc) != le_sqlite_pdb) {
 		return 0;
 	}
@@ -385,9 +388,6 @@ static int php_sqlite_forget_persistent_id_numbers(zend_rsrc_list_entry *rsrc TS
 
 	/* don't leave pending commits hanging around */
 	sqlite_exec(db->db, "ROLLBACK", NULL, NULL, NULL);
-	
-	/* prevent bad mojo if someone tries to use a previously registered function in the next request */
-	zend_hash_apply(&db->callbacks, (apply_func_t)php_sqlite_callback_invalidator TSRMLS_CC);
 	
 	return 0;
 }
@@ -1073,7 +1073,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.105 2003/12/18 21:28:00 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.106 2003/12/27 22:11:48 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

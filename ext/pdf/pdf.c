@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.28 2000/03/07 17:29:24 steinm Exp $ */
+/* $Id: pdf.c,v 1.29 2000/03/07 20:51:14 steinm Exp $ */
 
 /* pdflib 2.01 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -192,7 +192,6 @@ static void _free_outline(int *outline)
 	if(outline) efree(outline);
 }
 
-#if PDFLIB_MAJORVERSION > 1 & PDFLIB_MINORVERSION > 0
 static void custom_errorhandler(PDF *p, int type, const char*shortmsg) {
 	switch (type){
 		case PDF_NonfatalError:
@@ -226,7 +225,6 @@ static void *pdf_realloc(PDF *p, void *mem, size_t size, const char *caller) {
 static void pdf_efree(PDF *p, void *mem) {
 	return(efree(mem));
 }
-#endif
 
 #if PDFLIB_MAJORVERSION >= 3 | (PDFLIB_MAJORVERSION >= 2 & PDFLIB_MINORVERSION >= 10)
 static size_t pdf_flushwrite(PDF *p, void *data, size_t size){
@@ -254,7 +252,7 @@ PHP_MINFO_FUNCTION(pdf) {
 	php_printf("Support for in memory pdf creation.");
 #endif
 
-#if PDFLIB_MINORVERSION > 0
+#if PDFLIB_MAJORVERSION >= 3 | PDFLIB_MINORVERSION > 0
 		php_printf("The function pdf_put_image() and pdf_execute_image() are <B>not</B> available");
 #else
 		php_printf("The function pdf_put_image() and pdf_execute_image() are available");
@@ -420,7 +418,7 @@ PHP_FUNCTION(pdf_open) {
 	int argc;
 	PDF_TLS_VARS;
 
-#if PDFLIB_MAJORVERSION >= 2 & PDFLIB_MINORVERSION >= 10
+#if PDFLIB_MAJORVERSION >= 3 | (PDFLIB_MAJORVERSION >= 2 & PDFLIB_MINORVERSION >= 10)
 	argc = ARG_COUNT(ht);
 	if(argc > 1)
 		WRONG_PARAM_COUNT;
@@ -440,11 +438,7 @@ PHP_FUNCTION(pdf_open) {
 	/* XXX should do anzend_list_addref for <fp> here! */
 #endif
 
-#if PDFLIB_MAJORVERSION > 1 & PDFLIB_MINORVERSION > 0
 	pdf = PDF_new2(custom_errorhandler, pdf_emalloc, pdf_realloc, pdf_efree, NULL);
-#else
-	pdf = PDF_new();
-#endif
 
 #if PDFLIB_MAJORVERSION >= 2 & PDFLIB_MINORVERSION >= 10 & defined PDF_OPEN_MEM_SUPPORTED
 	if(fp) {

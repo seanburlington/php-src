@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.246 2000/09/04 22:21:09 sterling Exp $ */
+/* $Id: basic_functions.c,v 1.247 2000/09/05 14:23:16 stas Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1889,7 +1889,7 @@ PHP_FUNCTION(ini_restore)
 
 	convert_to_string_ex(varname);
 
-	php_restore_ini_entry((*varname)->value.str.val, (*varname)->value.str.len, PHP_INI_STAGE_RUNTIME);
+	php_restore_ini_entry((*varname)->value.str.val, (*varname)->value.str.len+1, PHP_INI_STAGE_RUNTIME);
 }
 /* }}} */
 

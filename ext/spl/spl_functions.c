@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.c,v 1.21 2004/01/25 17:30:19 helly Exp $ */
+/* $Id: spl_functions.c,v 1.22 2004/01/26 07:52:52 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -133,10 +133,11 @@ void spl_add_interfaces(zval *list, zend_class_entry * pce, int allow, int ce_fl
 /* {{{ spl_add_classes */
 int spl_add_classes(zend_class_entry ** ppce, zval *list, int sub, int allow, int ce_flags TSRMLS_DC)
 {
+	zend_class_entry *pce = *ppce;
+
 	if (!ppce) {
 		return 0;
 	}
-	zend_class_entry *pce = *ppce;
 	spl_add_class_name(list, pce, allow, ce_flags TSRMLS_CC);
 	if (sub) {
 		spl_add_interfaces(list, pce, allow, ce_flags TSRMLS_CC);

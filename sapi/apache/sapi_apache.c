@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.22 2000/11/02 12:05:54 zeev Exp $ */
+/* $Id: sapi_apache.c,v 1.23 2000/11/13 18:54:37 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -92,8 +92,8 @@ int apache_php_module_main(request_rec *r, int display_source_mode CLS_DC ELS_DC
         if (setjmp(EG(bailout))!=0) {
 		return OK;
 	}
-	php_header();			/* Make sure headers have been sent */
 	php_end_ob_buffers(1);
+	php_header();			/* Make sure headers have been sent */
 	return (OK);
 }
 

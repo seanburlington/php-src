@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.17 2000/05/18 15:34:35 zeev Exp $ */
+/* $Id: formatted_print.c,v 1.18 2000/05/31 22:27:09 jah Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -157,6 +157,10 @@ php_sprintf_appendstring(char **buffer, int *pos, int *size, char *add,
 
 	if (npad<0) {
 		npad=0;
+	}
+	
+	if (sign) {
+		len--;
 	}
 	
 	PRINTF_DEBUG(("sprintf: appendstring(%x, %d, %d, \"%s\", %d, '%c', %d)\n",

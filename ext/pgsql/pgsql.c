@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.107 2001/05/27 23:26:58 sniper Exp $ */
+/* $Id: pgsql.c,v 1.108 2001/05/28 03:30:11 sterling Exp $ */
 
 #include <stdlib.h>
 
@@ -175,10 +175,11 @@ static int _rollback_transactions(zend_rsrc_list_entry *rsrc)
 	PGconn *link;
 	PGLS_FETCH();
 
-	if (rsrc->type != le_plink) return 0;
-	
-	link = (PGconn *)rsrc->ptr;
+	if (rsrc->type != le_plink) 
+		return 0;
 
+	link = (PGconn *) rsrc->ptr;
+	
 	PGG(ignore_notices) = 1;
 	PQexec(link,"BEGIN;ROLLBACK;");
 	PGG(ignore_notices) = 0;

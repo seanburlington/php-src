@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.29 2004/02/18 19:48:12 iliaa Exp $ */
+/* $Id: scanf.c,v 1.30 2004/11/03 23:36:50 derick Exp $ */
 
 /*
    scanf.c --
@@ -78,6 +78,7 @@
 #endif
 #include "zend_execute.h"
 #include "zend_operators.h"
+#include "zend_strtod.h"
 #include "php_globals.h"
 #include "basic_functions.h"
 #include "scanf.h"
@@ -1204,7 +1205,7 @@ PHPAPI int php_sscanf_internal(	char *string, char *format,
 				if (!(flags & SCAN_SUPPRESS)) {
 					double dvalue;
 					*end = '\0';
-					dvalue = strtod(buf, NULL);
+					dvalue = zend_strtod(buf, NULL);
 					if (numVars) {
 						current = args[objIndex++];
 						convert_to_double( *current );

@@ -86,7 +86,7 @@
  *
  */
 
-/* $Id: mbfilter.h,v 1.16 2002/11/09 17:05:47 moriyoshi Exp $ */
+/* $Id: mbfilter.h,v 1.17 2002/11/12 19:24:45 moriyoshi Exp $ */
 
 
 #ifndef MBFL_MBFILTER_H
@@ -94,6 +94,7 @@
 
 enum mbfl_no_language {
 	mbfl_no_language_invalid = -1,
+	mbfl_no_language_neutral,
 	mbfl_no_language_uni,
 	mbfl_no_language_min,
 	mbfl_no_language_catalan,		/* ca */

@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.92 2001/12/16 21:59:13 sesser Exp $ */
+/* $Id: rfc1867.c,v 1.93 2002/01/04 22:57:36 jon Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -582,7 +582,7 @@ static char *multipart_buffer_read_body(multipart_buffer *self TSRMLS_DC)
 
 SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 {
-	char *boundary, *s=NULL, *start_arr=NULL, *end_arr=NULL, *array_index=NULL;
+	char *boundary, *s=NULL, *start_arr=NULL, *array_index=NULL;
 	char *temp_filename=NULL, *lbuf=NULL, *abuf=NULL;
 	int boundary_len=0, total_bytes=0, cancel_upload=0, is_arr_upload=0, array_len=0, max_file_size=0;
 	zval *http_post_files=NULL;
@@ -764,7 +764,6 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 			/* is_arr_upload is true when name of file upload field
 			 * ends in [.*]
 			 * start_arr is set to point to 1st [
-			 * end_arr points to last ]
 			 */
 			is_arr_upload =	(start_arr = strchr(param,'[')) &&
 							(param[strlen(param)-1] == ']');

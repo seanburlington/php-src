@@ -19,7 +19,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.28 2001/12/11 15:31:09 sebastian Exp $
+// $Id: PEAR.php,v 1.29 2001/12/15 15:01:35 mj Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -45,7 +45,6 @@ $GLOBALS['_PEAR_destructor_object_list'] = array();
 
 //
 // Tests needed: - PEAR inheritance
-//               - destructors
 //
 
 /**

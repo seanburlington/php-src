@@ -1,10 +1,11 @@
 dnl
-dnl $Id: config.m4,v 1.10 2003/03/31 19:48:53 moriyoshi Exp $
+dnl $Id: config.m4,v 1.11 2003/10/03 05:24:23 sniper Exp $
 dnl
 
 PHP_ARG_WITH(mime-magic, whether to include mime_magic support,
-[  --with-mime-magic[=FILE]  Include mime_magic support. FILE is the optional
-                            pathname to the magic.mime file.])
+[  --with-mime-magic[=FILE]  
+                          Include mime_magic support. FILE is the optional
+                          pathname to the magic.mime file.])
 
 if test "$PHP_MIME_MAGIC" != "no"; then
 

@@ -1,10 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.15 2003/10/02 10:47:12 moriyoshi Exp $
+dnl $Id: config.m4,v 1.16 2003/10/03 05:24:33 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for Servlet support)
 AC_ARG_WITH(servlet,
-[  --with-servlet[=DIR]      Include servlet support. DIR is the base install
+[  --with-servlet[=DIR]    Include servlet support. DIR is the base install
                           directory for the JSDK.  This SAPI prereqs the
                           java extension must be built as a shared dl.],
 [

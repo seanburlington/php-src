@@ -1,10 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.5 2002/12/01 13:44:22 phanto Exp $
+dnl $Id: config.m4,v 1.6 2003/10/03 05:24:31 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for Milter support)
 AC_ARG_WITH(milter,
-[  --with-milter=DIR       Build PHP as Milter application],[
+[  --with-milter[=DIR]     Build PHP as Milter application],[
   if test "$withval" = "yes"; then
     if test -f /usr/lib/libmilter.a ; then
       MILTERPATH=/usr/lib

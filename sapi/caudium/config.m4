@@ -1,11 +1,11 @@
 dnl
-dnl $Id: config.m4,v 1.11 2002/03/07 14:19:50 sas Exp $
+dnl $Id: config.m4,v 1.12 2003/10/03 05:24:28 sniper Exp $
 dnl 
 
 RESULT=no
 AC_MSG_CHECKING(for Caudium support)
 AC_ARG_WITH(caudium, 
-[  --with-caudium=DIR      Build PHP as a Pike module for use with Caudium
+[  --with-caudium[=DIR]    Build PHP as a Pike module for use with Caudium
                           DIR is the Caudium server dir, with the default value
                           /usr/local/caudium/server.],
 [

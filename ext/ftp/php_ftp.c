@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.53 2002/02/28 08:26:10 sebastian Exp $ */
+/* $Id: php_ftp.c,v 1.53.2.1 2002/03/30 01:58:24 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -136,7 +136,7 @@ PHP_FUNCTION(ftp_connect)
 	}
 
 	/* connect */
-	ftp = ftp_open(host, htons((short)port), timeout_sec);
+	ftp = ftp_open(host, (short)port, timeout_sec);
 	if (ftp == NULL) {
 		RETURN_FALSE;
 	}

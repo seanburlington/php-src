@@ -19,12 +19,12 @@
 */
 
 
-/* $Id: main.c,v 1.201 2000/02/10 20:13:08 zeev Exp $ */
+/* $Id: main.c,v 1.202 2000/02/11 12:56:53 andi Exp $ */
 
 
 #include <stdio.h>
 #include "php.h"
-#ifdef MSVC5
+#if PHP_WIN32
 #include "win32/time.h"
 #include "win32/signal.h"
 #include <process.h>

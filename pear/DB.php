@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.63 2001/06/07 12:55:14 cox Exp $
+// $Id: DB.php,v 1.64 2001/06/07 13:44:44 cox Exp $
 //
 // Database independent query interface.
 //
@@ -32,7 +32,7 @@ require_once "PEAR.php";
  * version of it in DB::errorMessage().
  */
 
-define("DB_OK",                         0);
+define("DB_OK",                         1);
 define("DB_ERROR",                     -1);
 define("DB_ERROR_SYNTAX",              -2);
 define("DB_ERROR_CONSTRAINT",          -3);

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.20 2002/05/20 10:42:47 ssb Exp $
+// $Id: Config.php,v 1.21 2002/05/27 00:16:40 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -122,7 +122,11 @@ class PEAR_Config extends PEAR
         'verbose' => array(
             'type' => 'integer',
             'default' => 1,
-            'doc' => 'verbosity level',
+            'doc' => 'verbosity level
+0: really quiet
+1: somewhat quiet
+2: verbose
+3: debug',
             ),
         'preferred_state' => array(
             'type' => 'set',

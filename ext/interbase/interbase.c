@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.101 2003/03/14 17:37:44 sniper Exp $ */
+/* $Id: interbase.c,v 1.102 2003/03/16 00:37:01 sniper Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -609,7 +609,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.101 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.102 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1578,6 +1578,11 @@ static int _php_ibase_def_trans(ibase_db_link * ib_link, int trans_n)
 {
 	TSRMLS_FETCH();
 	
+	if (ib_link == NULL) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid database link");
+		return FAILURE;
+	}
+
 	if (trans_n == 0 && ib_link->trans[0] == NULL) { 
 		if (isc_start_transaction(IB_STATUS, &ib_link->trans[0], 1, &ib_link->link, 0, NULL)) {
 			_php_ibase_error(TSRMLS_C);
@@ -1613,6 +1618,11 @@ static void _php_ibase_trans_end(INTERNAL_FUNCTION_PARAMETERS, int commit)
 		default:
 			WRONG_PARAM_COUNT;
 			break;
+	}
+
+	if (ib_link == NULL) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid database link");
+		RETURN_FALSE;
 	}
 
 	if (ib_link->trans[trans_n] == NULL) {

@@ -18,7 +18,7 @@
    |         Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: COM.c,v 1.84 2002/06/26 07:14:45 derick Exp $ */
+/* $Id: COM.c,v 1.85 2002/08/05 23:41:25 phanto Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -1566,7 +1566,12 @@ static void do_COM_propput(pval *return_value, comval *obj, pval *arg_property, 
 		FREE_VARIANT(var_result);
 		FREE_VARIANT(new_value);
 
-		RETURN_NULL();
+
+		if (return_value) {
+			RETVAL_NULL();
+		}
+
+		return;
 	}
 
 	php_pval_to_variant(value, new_value, codepage TSRMLS_CC);
@@ -1592,7 +1597,11 @@ static void do_COM_propput(pval *return_value, comval *obj, pval *arg_property, 
 		efree(new_value);
 		efree(propname);
 
-		RETURN_NULL();
+		if (return_value) {
+			RETVAL_NULL();
+		}
+
+		return;
 	}
 
 	if (return_value) {

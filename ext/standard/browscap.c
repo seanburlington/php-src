@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.77 2003/06/10 20:03:37 imajes Exp $ */
+/* $Id: browscap.c,v 1.78 2003/06/30 20:31:57 shane Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -145,7 +145,7 @@ PHP_MINIT_FUNCTION(browscap)
 {
 	char *browscap = INI_STR("browscap");
 
-	if (browscap) {
+	if (browscap && browscap[0]) {
 		zend_file_handle fh;
 		memset(&fh, 0, sizeof(fh));
 
@@ -173,7 +173,8 @@ PHP_MINIT_FUNCTION(browscap)
  */
 PHP_MSHUTDOWN_FUNCTION(browscap)
 {
-	if (INI_STR("browscap")) {
+	char *browscap = INI_STR("browscap");
+	if (browscap && browscap[0]) {
 		zend_hash_destroy(&browser_hash);
 	}
 	return SUCCESS;
@@ -224,8 +225,9 @@ PHP_FUNCTION(get_browser)
 	zval *found_browser_entry, *tmp_copy;
 	char *lookup_browser_name;
 	zend_bool return_array = 0;
+	char *browscap = INI_STR("browscap");
 
-	if (!INI_STR("browscap")) {
+	if (!browscap || !browscap[0]) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "browscap ini directive not set.");
 		RETURN_FALSE;
 	}

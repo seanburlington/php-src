@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_scandir.c,v 1.9 2004/01/08 08:17:54 andi Exp $ */
+/* $Id: php_scandir.c,v 1.10 2004/09/29 16:11:47 hyanantha Exp $ */
 
 #ifdef PHP_WIN32
 #include "config.w32.h"
@@ -42,7 +42,9 @@
 #endif  
 
 #include <stdlib.h>
+#ifndef NETWARE
 #include <search.h>
+#endif
 
 #endif /* HAVE_SCANDIR */
 

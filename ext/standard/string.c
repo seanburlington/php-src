@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.420.2.4 2004/11/21 13:35:50 tony2001 Exp $ */
+/* $Id: string.c,v 1.420.2.5 2005/01/18 15:48:39 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1836,6 +1836,10 @@ PHP_FUNCTION(chunk_split)
 	if (chunklen <= 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Chunk length should be greater than zero.");
 		RETURN_FALSE;
+	}
+
+	if (chunklen > Z_STRLEN_PP(p_str)) {
+		RETURN_STRINGL(Z_STRVAL_PP(p_str), Z_STRLEN_PP(p_str), 1);	
 	}
 
 	if (!Z_STRLEN_PP(p_str)) {

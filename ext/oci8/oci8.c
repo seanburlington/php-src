@@ -12,7 +12,7 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Stig Sæther Bakken <ssb@php.net>                            |
+   | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
    |          Thies C. Arntzen <thies@thieso.net>                         |
    |          Maxim Maletsky <maxim@maxim.cx>                             |
    |                                                                      |
@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.207 2003/04/30 10:17:25 sniper Exp $ */
+/* $Id: oci8.c,v 1.208 2003/04/30 10:19:21 sniper Exp $ */
 
 /* TODO list:
  *
@@ -641,7 +641,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.207 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.208 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2349,7 +2349,7 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 
 	return psession;
 
- CLEANUP:
+CLEANUP:
 	oci_debug("_oci_open_session: FAILURE -> CLEANUP called");
 
 	_oci_close_session(session);
@@ -2526,7 +2526,7 @@ static oci_server *_oci_open_server(char *dbname,int persistent)
 
 	return pserver;
 
- CLEANUP:
+CLEANUP:
 	oci_debug("_oci_open_server: FAILURE -> CLEANUP called");
 
 	_oci_close_server(server);
@@ -2769,7 +2769,7 @@ static void oci_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent,int exclu
 
 	RETURN_RESOURCE(connection->id);
 	
- CLEANUP:
+CLEANUP:
 	oci_debug("oci_do_connect: FAILURE -> CLEANUP called");
 
 	if (connection->id) {
@@ -3415,7 +3415,7 @@ PHP_FUNCTION(ociwritelobtofile)
 		RETURN_TRUE;
 	}
 	
- bail:
+bail:
 	if (fp != -1) {
 		close(fp);
 	}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.48 2000/08/31 19:49:36 andi Exp $ */
+/* $Id: dl.c,v 1.49 2000/11/05 15:03:41 zeev Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -100,9 +100,9 @@ void php_dl(pval *file, int type, pval *return_value)
 
 
 	if (type==MODULE_PERSISTENT) {
-		/* Use the configuration hash directly */
+		/* Use the configuration hash directly, the INI mechanism is not yet initialized */
 		if (cfg_get_string("extension_dir", &extension_dir)==FAILURE) {
-			extension_dir = NULL;
+			extension_dir = PHP_EXTENSION_DIR;
 		}
 	} else {
 		extension_dir = PG(extension_dir);

@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.31 2002/05/26 17:37:52 cox Exp $
+// $Id: Install.php,v 1.31.2.1 2002/05/28 02:14:10 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -148,9 +148,6 @@ specified at once.
 
     function doInstall($command, $options, $params)
     {
-        if (sizeof($params) < 1) {
-            return $this->raiseError('Missing package to install. Try "help install"');
-        }
         if (empty($this->installer)) {
             $this->installer = &new PEAR_Installer($ui);
         }
@@ -163,7 +160,7 @@ specified at once.
             if (is_array($info)) {
                 if ($this->config->get('verbose') > 0) {
                     $label = "$info[package] $info[version]";
-                    $this->ui->displayLine("$command ok: $label");
+                    $this->ui->outputData("$command ok: $label", $command);
                 }
             } else {
                 return $this->raiseError("$command failed");
@@ -179,7 +176,7 @@ specified at once.
         foreach ($params as $pkg) {
             if ($this->installer->uninstall($pkg, $options)) {
                 if ($this->config->get('verbose') > 0) {
-                    $this->ui->displayLine("uninstall ok");
+                    $this->ui->outputData("uninstall ok", $command);
                 }
             } else {
                 return $this->raiseError("uninstall failed");

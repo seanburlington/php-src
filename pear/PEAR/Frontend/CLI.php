@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.12 2002/04/14 13:34:52 mfischer Exp $
+  $Id: CLI.php,v 1.12.2.1 2002/05/28 02:14:10 ssb Exp $
 */
 
 require_once "PEAR.php";
@@ -105,27 +105,36 @@ class PEAR_Frontend_CLI extends PEAR
     // }}}
     // {{{ userDialog(prompt, [type], [default])
 
-    function userDialog($prompt, $type = 'text', $default = '')
+    function userDialog($command, $prompts, $types = array(), $defaults = array())
     {
-        if ($type == 'password') {
-            system('stty -echo');
+        $result = array();
+        if (is_array($prompts)) {
+            $fp = fopen("php://stdin", "r");
+            foreach ($prompts as $key => $prompt) {
+                $type = $types[$key];
+                $default = $defaults[$key];
+                if ($type == 'password') {
+                    system('stty -echo');
+                }
+                print "$this->lp$prompt ";
+                if ($default) {
+                    print "[$default] ";
+                }
+                print ": ";
+                $line = fgets($fp, 2048);
+                if ($type == 'password') {
+                    system('stty echo');
+                    print "\n";
+                }
+                if ($default && trim($line) == "") {
+                    $result[$key] = $default;
+                } else {
+                    $result[$key] = $line;
+                }
+            }
+            fclose($fp);
         }
-        print "$this->lp$prompt ";
-        if ($default) {
-            print "[$default] ";
-        }
-        print ": ";
-        $fp = fopen("php://stdin", "r");
-        $line = fgets($fp, 2048);
-        fclose($fp);
-        if ($type == 'password') {
-            system('stty echo');
-            print "\n";
-        }
-        if ($default && trim($line) == "") {
-            return $default;
-        }
-        return $line;
+        return $result;
     }
 
     // }}}
@@ -304,6 +313,39 @@ class PEAR_Frontend_CLI extends PEAR
             $this->displayLine($borderline);
         }
     }
+    
+    function outputData($data, $command)
+    {
+        switch ($command)
+        {
+        case 'list-all':
+            $this->startTable($data);
+            if (isset($data['headline']) && is_array($data['headline']))
+                $this->tableRow($data['headline'], array('bold' => true), array(1 => array('wrap' => 55)));
+            
+            foreach($data['data'] as $category) {
+                foreach($category as $pkg) {
+                    unset($pkg[3]);
+                    $this->tableRow($pkg, null, array(1 => array('wrap' => 55)));
+                }
+            };
+            $this->endTable();
+            break;
+        default:
+            if (is_array($data))
+            {
+                $this->startTable($data);
+                if (isset($data['headline']) && is_array($data['headline']))
+                    $this->tableRow($data['headline'], array('bold' => true), array(1 => array('wrap' => 55)));
+                foreach($data['data'] as $row)
+                    $this->tableRow($row);
+                $this->endTable();
+            } else {
+                $this->displayLine($data);
+            };
+        };
+        
+    }
 
     // }}}
     // {{{ bold($text)
@@ -320,3 +362,4 @@ class PEAR_Frontend_CLI extends PEAR
 }
 
 ?>
+

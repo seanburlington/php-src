@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.67 2002/05/27 21:36:28 ssb Exp $
+// $Id: Common.php,v 1.67.2.1 2002/05/28 02:14:09 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -209,6 +209,7 @@ class PEAR_Common extends PEAR
     {
         if ($this->debug >= $level) {
             if (is_object($this->ui)) {
+                // XXX convert to new Frontend API?
                 $this->ui->displayLine($msg);
             } else {
                 print "$msg\n";

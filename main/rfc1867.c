@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.71.2.2 2002/02/21 18:46:45 sesser Exp $ */
+/* $Id: rfc1867.c,v 1.71.2.3 2002/02/28 03:51:48 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -162,20 +162,21 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr T
 						SAFE_RETURN;
 					}
 					/* some other headerfield found, skip it */
-					loc = (char *) memchr(ptr, '\n', rem)+1;
+					loc = (char *) memchr(ptr, '\n', rem);
 					if (!loc) {
 						/* broken */
 						php_error(E_WARNING, "File Upload Mime headers garbled ptr: [%c%c%c%c%c]", *ptr, *(ptr + 1), *(ptr + 2), *(ptr + 3), *(ptr + 4));
 						SAFE_RETURN;
-					}
+					} else loc++;
+
 					while (*loc == ' ' || *loc == '\t') {
 						/* other field is folded, skip it */
-						loc = (char *) memchr(loc, '\n', rem-(loc-ptr))+1;
+						loc = (char *) memchr(loc, '\n', rem-(loc-ptr));
 						if (!loc) {
 							/* broken */
 							php_error(E_WARNING, "File Upload Mime headers garbled ptr: [%c%c%c%c%c]", *ptr, *(ptr + 1), *(ptr + 2), *(ptr + 3), *(ptr + 4));
 							SAFE_RETURN;
-						}
+						} else loc++;
 					}
 					rem -= (loc - ptr);
 					ptr = loc;

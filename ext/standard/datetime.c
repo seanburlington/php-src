@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.59 2001/01/02 20:26:51 rasmus Exp $ */
+/* $Id: datetime.c,v 1.60 2001/01/05 17:34:47 dbeu Exp $ */
 
 
 #include "php.h"
@@ -256,7 +256,7 @@ php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 			case 'F':		/* month, textual, full */
 			case 'l':		/* day (of the week), textual */
 			case 'T':		/* timezone name */
-				size += 9;
+				size += 28;
 				break;
 			case 'Z':		/* timezone offset in seconds */
 				size += 6;

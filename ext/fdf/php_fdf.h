@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_fdf.h,v 1.15 2002/02/28 08:26:07 sebastian Exp $ */
+/* $Id: php_fdf.h,v 1.15.2.1 2002/03/20 00:40:53 sniper Exp $ */
 
 #ifndef PHP_FDF_H
 #define PHP_FDF_H
@@ -27,7 +27,11 @@
 #define UNIX_DEV
 #endif
 
-#include <FdfTk.h>
+#if HAVE_FDFTK_H_LOWER
+# include <fdftk.h>
+#else
+# include <FdfTk.h>
+#endif
 
 extern zend_module_entry fdf_module_entry;
 #define fdf_module_ptr &fdf_module_entry

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.138 2000/07/20 23:08:26 hholzgra Exp $ */
+/* $Id: string.c,v 1.139 2000/07/21 15:29:59 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1706,7 +1706,8 @@ PHPAPI char *php_addslashes(char *str, int length, int *new_length, int should_f
 		return str;
 	}
 	new_str = (char *) emalloc((length?length:(length=strlen(str)))*2+1);
-	for (source=str,end=source+length,target=new_str; (c = *source) || source<end; source++) {
+	for (source=str,end=source+length,target=new_str; source<end; source++) {
+		c = *source;
 		switch(c) {
 			case '\0':
 				*target++ = '\\';

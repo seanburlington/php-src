@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.63 2000/09/08 21:56:46 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.64 2000/09/08 22:26:07 zeev Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -109,7 +109,7 @@ PHP_FUNCTION(get_extension_funcs);
 PHP_FUNCTION(register_tick_function);
 PHP_FUNCTION(unregister_tick_function);
 
-PHP_FUNCTION(is_upload_file);
+PHP_FUNCTION(is_uploaded_file);
 
 /* From the INI parser */
 PHP_FUNCTION(parse_ini_file);

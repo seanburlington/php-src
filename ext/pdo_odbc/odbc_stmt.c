@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_stmt.c,v 1.11 2005/01/19 05:27:15 wez Exp $ */
+/* $Id: odbc_stmt.c,v 1.12 2005/01/21 06:11:10 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -135,17 +135,20 @@ static int odbc_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *p
 				} else {
 					ctype = SQL_C_CHAR;
 				}
-
 				rc = SQLBindParameter(S->stmt, param->paramno+1,
-						param->max_value_len <= 0 ? SQL_PARAM_INPUT : SQL_PARAM_INPUT_OUTPUT,
+						param->max_value_len <= 0 ? SQL_PARAM_INPUT : SQL_PARAM_OUTPUT,
 						ctype, sqltype, precision, scale,
 						Z_STRVAL_P(param->parameter),
 						param->max_value_len <= 0 ? 0 : param->max_value_len,
 						/* XXX: this has the wrong type for DB2 (should be SQLINTEGER*) */
 						&Z_STRLEN_P(param->parameter)
 						);
-				
-				return 1;
+	
+				if (rc == SQL_SUCCESS || rc == SQL_SUCCESS_WITH_INFO) {
+					return 1;
+				}
+				pdo_odbc_stmt_error("SQLBindParameter");
+				return 0;
 		}
 	}
 	return 1;

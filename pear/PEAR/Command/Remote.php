@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.15 2002/06/07 15:06:25 cox Exp $
+// $Id: Remote.php,v 1.16 2002/06/08 18:44:34 dickmann Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -125,6 +125,8 @@ version of DB is 1.2, the downloaded file will be DB-1.2.tgz.',
         $info['installed'] = $installed['version'] ? $installed['version'] : '- no -';
 
         $this->ui->outputData($info, $command);
+        
+        return true;
     }
 
     // }}}
@@ -175,6 +177,19 @@ version of DB is 1.2, the downloaded file will be DB-1.2.tgz.',
             $desc = $info['summary'];
             if (isset($params[$name]))
                 $desc .= "\n\n".$info['description'];
+
+            if (isset($options['mode']))
+            {
+                if ($options['mode'] == 'installed' && !isset($installed['version']))
+                    continue;
+                if ($options['mode'] == 'notinstalled' && isset($installed['version']))
+                    continue;
+                if ($options['mode'] == 'upgrades' 
+                    && (!isset($installed['version']) || $installed['version'] == $info['stable']))
+                {
+                    continue;
+                };
+            };
 
             $data['data'][$info['category']][] = array(
                 $name,

@@ -1,3 +1,71 @@
+2003-03-12  Jani Taskinen  <sniper@iki.fi>
+
+    * (PHP_4_3)
+      NEWS:
+      We should get this out before April..
+
+    * (PHP_4_3)
+      configure.in
+      main/php_version.h:
+      - Backup to 4.3.2RC
+
+    * (PHP_4_3)
+      configure.in
+      main/php_version.h:
+      - Bump the version to RC1.
+
+2003-03-12  Stefan Esser  <s.esser@e-matters.de>
+
+    * main/main.c:
+      reverting half the patch (it is not that simple)
+
+2003-03-12  Sterling Hughes  <sterling@bumblebury.com>
+
+    * ext/standard/basic_functions.c
+      ext/standard/file.c
+      ext/standard/file.h:
+      
+
+2003-03-12  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/odbc/php_odbc.c:
+      Fixed spprintf() usage.
+      Fixed compiler warnings.
+
+2003-03-12  Jani Taskinen  <sniper@iki.fi>
+
+    * ext/gd/gd.c:
+      Added the type constants for imagegd2()
+
+    * ext/gd/gd.c
+      ext/gd/gd_ctx.c:
+      Fix bug #22646
+
+    * acinclude.m4:
+      prevent warning
+
+    * NEWS:
+      This was merged into PHP_4_3 branch..
+
+2003-03-12  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/gd/libgd/gd.c
+      ext/gd/libgd/xbm.c:
+      Style fixes.
+
+2003-03-12  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * tests/classes/interface_class.phpt
+      tests/classes/interface_doubled.phpt
+      tests/classes/interface_implemented.phpt
+      tests/classes/interface_instantiate.phpt
+      tests/classes/interface_member.phpt
+      tests/classes/interface_method.phpt
+      tests/classes/interface_method_final.phpt
+      tests/classes/interface_method_private.phpt
+      tests/classes/interface_must_be_implemented.phpt:
+      Added some interface tests
+
 2003-03-11  Jani Taskinen  <sniper@iki.fi>
 
     * (PHP_4_3)
@@ -1646,7 +1714,7 @@
 
     * sapi/apache/libpre.c
       sapi/apache/php_apache_http.h:
-      Added missing headers and $Id: ChangeLog,v 1.1292 2003/03/12 01:33:20 changelog Exp $ tags.
+      Added missing headers and $Id: ChangeLog,v 1.1293 2003/03/13 01:33:01 changelog Exp $ tags.
 
     * sapi/cgi/config9.m4:
       MFB: Fixed bug #22356 (Do not add empty -I flags).
@@ -2205,7 +2273,7 @@
       main/streams/plain_wrapper.c
       main/streams/streams.c
       main/streams/userspace.c:
-      ws fixes + missing $Id: ChangeLog,v 1.1292 2003/03/12 01:33:20 changelog Exp $ tags, headers added
+      ws fixes + missing $Id: ChangeLog,v 1.1293 2003/03/13 01:33:01 changelog Exp $ tags, headers added
 
 2003-02-19  Corne' Cornelius  <cornec@reach.co.za>
 
@@ -3123,7 +3191,7 @@
 
     * (PHP_4_3)
       sapi/cgi/cgi_main.c:
-      Added missing $Id: ChangeLog,v 1.1292 2003/03/12 01:33:20 changelog Exp $ tag
+      Added missing $Id: ChangeLog,v 1.1293 2003/03/13 01:33:01 changelog Exp $ tag
 
 2003-02-14  Thies C. Arntzen  <thies@thieso.net>
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.74 2001/09/09 13:28:46 derick Exp $ */
+/* $Id: php_domxml.c,v 1.75 2001/09/19 02:24:05 joey Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -2270,7 +2270,6 @@ PHP_FUNCTION(xmldocfile)
 	if (!docp) {
 		RETURN_FALSE;
 	}
-	ret = zend_list_insert(docp, le_domxmldocp);
 
 	rv = php_domobject_new((xmlNodePtr) docp, &ret TSRMLS_CC);
 	SEPARATE_ZVAL(&rv);

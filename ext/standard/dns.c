@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.44 2002/10/18 22:08:23 sniper Exp $ */
+/* $Id: dns.c,v 1.44.2.1 2002/12/05 22:46:40 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -174,9 +174,7 @@ PHP_FUNCTION(gethostbynamel)
 	}
 	convert_to_string_ex(arg);
 
-	if (array_init(return_value) == FAILURE) {
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 
 	hp = gethostbyname(Z_STRVAL_PP(arg));
 	if (hp == NULL || hp->h_addr_list == NULL) {
@@ -304,9 +302,7 @@ PHP_FUNCTION(getmxrr)
 			}
 			need_weight = 1;
 			pval_destructor(weight_list); /* start with clean array */
-			if (array_init(weight_list) == FAILURE) {
-				RETURN_FALSE;
-			}
+			array_init(weight_list);
 			break;
 
 		default:
@@ -315,9 +311,7 @@ PHP_FUNCTION(getmxrr)
 
 	convert_to_string(host);
 	pval_destructor(mx_list); /* start with clean array */
-	if (array_init(mx_list) == FAILURE ) {
-		RETURN_FALSE;
-	}
+	array_init(mx_list);
 
 	/* Go! */
 	i = res_search(Z_STRVAL_P(host), C_IN, T_MX, (u_char *)&ans, sizeof(ans));

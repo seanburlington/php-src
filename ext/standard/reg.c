@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.66.2.1 2002/12/05 21:09:19 helly Exp $ */
+/* $Id: reg.c,v 1.66.2.2 2002/12/05 22:46:40 iliaa Exp $ */
 
 #include <stdio.h>
 #include <ctype.h>
@@ -517,10 +517,7 @@ static void php_split(INTERNAL_FUNCTION_PARAMETERS, int icase)
 		RETURN_FALSE;
 	}
 
-	if (array_init(return_value) == FAILURE) {
-		regfree(&re);
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 
 	/* churn through str, generating array entries as we go */
 	while ((count == -1 || count > 1) && !(err = regexec(&re, strp, 1, subs, 0))) {

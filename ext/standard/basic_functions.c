@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.1 2002/12/02 06:45:57 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.2 2002/12/05 22:46:40 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1504,9 +1504,7 @@ PHP_FUNCTION(getopt)
 	}
 
 	/* Initialize the return value as an array. */
-	if (array_init(return_value)) {
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 
 	/* Disable getopt()'s error messages. */
 	opterr = 0;

@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.40.2.1 2002/12/05 21:09:19 helly Exp $ */
+/* $Id: pack.c,v 1.40.2.2 2002/12/05 22:46:40 iliaa Exp $ */
 
 #include "php.h"
 
@@ -534,8 +534,7 @@ PHP_FUNCTION(unpack)
 	inputlen = Z_STRLEN_PP(inputarg);
 	inputpos = 0;
 
-	if (array_init(return_value) == FAILURE)
-		RETURN_FALSE;
+	array_init(return_value);
 
 	while (formatlen-- > 0) {
 		char type = *(format++);

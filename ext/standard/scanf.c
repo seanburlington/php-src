@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.16.4.1 2002/12/05 21:09:19 helly Exp $ */
+/* $Id: scanf.c,v 1.16.4.2 2002/12/05 22:46:40 iliaa Exp $ */
 
 /*
    scanf.c --
@@ -656,10 +656,8 @@ PHPAPI int php_sscanf_internal(	char *string, char *format,
 
     if (!numVars) {
         /* allocate an array for return */
-        if (array_init(*return_value) == FAILURE) {
-			scan_set_error_return(0, return_value);			
-            return FAILURE;
-        }
+        array_init(*return_value);
+
         for (i = 0; i < totalVars; i++) {
            	if (add_next_index_null(*return_value) == FAILURE) {
 				scan_set_error_return(0, return_value);

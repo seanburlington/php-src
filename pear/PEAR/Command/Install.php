@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.12 2002/04/01 17:25:42 cox Exp $
+// $Id: Install.php,v 1.13 2002/04/01 19:17:59 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -77,7 +77,7 @@ class PEAR_Command_Install extends PEAR_Command_Common
         $ret[1] = "{$ret[1]}\n" .
                   "   -f    forces the installation of the package\n".
                   "         when it is already installed\n".
-                  "   -n    do not take care package dependencies";
+                  "   -n    do not take care of package dependencies";
         return $ret;
     }
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cybercash.c,v 1.16 2001/10/11 23:32:38 ssb Exp $ */
+/* $Id: cybercash.c,v 1.17 2001/12/07 10:10:47 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -72,7 +72,7 @@ PHP_MINFO_FUNCTION(cybercash)
 }
 /* }}} */
 
-/* {{{ proto cybercash_encr(string wmk, string sk, string data)
+/* {{{ proto array cybercash_encr(string wmk, string sk, string data)
    Cybercash encrypt */
 PHP_FUNCTION(cybercash_encr)
 {

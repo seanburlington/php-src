@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: post.h,v 1.5 1999/09/12 23:51:12 zeev Exp $ */
+/* $Id: post.h,v 1.6 2000/01/28 12:53:05 zeev Exp $ */
 
 #ifndef _POST_H
 #define _POST_H
@@ -40,6 +40,5 @@
 
 void php_treat_data(int arg, char *str ELS_DC PLS_DC SLS_DC);
 void php_parse_gpc_data(char *val, char *var, pval *track_vars_array ELS_DC PLS_DC);
-void php_parse_gpc_data2(char *val, char *var, pval *track_vars_array ELS_DC PLS_DC);
 
 #endif

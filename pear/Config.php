@@ -16,7 +16,7 @@
 // |          Christian Stocker <chregu@phant.ch>                         |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.1 2001/07/02 09:14:26 chregu Exp $
+// $Id: Config.php,v 1.2 2001/07/03 09:34:35 chregu Exp $
 
 require_once( "PEAR.php") ;
 
@@ -36,7 +36,7 @@ require_once( "PEAR.php") ;
 *
 * @author      Alexander Merz <alexander.merz@t-online.de>
 * @access      public
-* @version     $Id: Config.php,v 1.1 2001/07/02 09:14:26 chregu Exp $
+* @version     $Id: Config.php,v 1.2 2001/07/03 09:34:35 chregu Exp $
 * @package     Config
 */
 
@@ -280,6 +280,7 @@ class Config  {
         if( empty( $datasrc ) ) {
             $datasrc = $this -> datasrc ;
         }
+        $this->container->data = $this->data
         $this->container->writeInput($datasrc,$preserve);
     }
 

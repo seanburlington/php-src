@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.13 2003/06/19 04:39:42 sterling Exp $
+dnl $Id: config.m4,v 1.14 2003/06/19 08:41:51 derick Exp $
 dnl
 
 PHP_ARG_ENABLE(sockets, whether to enable sockets support,
-[  --enable-sockets        Enable sockets support], yes)
+[  --enable-sockets        Enable sockets support])
 
 if test "$PHP_SOCKETS" != "no"; then
   dnl Check for struct cmsghdr

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.319 2001/03/21 13:53:38 elixer Exp $ */
+/* $Id: basic_functions.c,v 1.320 2001/03/22 14:43:48 elixer Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -919,7 +919,7 @@ PHP_FUNCTION(constant)
 /* }}} */
 
 
-/* {{{ proto int ip2long(string ip_address)
+/* {{{ proto string ip2long(string ip_address)
    Converts a string containing an (IPv4) Internet Protocol dotted address into a proper address */
 PHP_FUNCTION(ip2long)
 {

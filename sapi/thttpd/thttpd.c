@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: thttpd.c,v 1.93 2004/12/20 19:33:40 rasmus Exp $ */
+/* $Id: thttpd.c,v 1.94 2005/03/14 19:25:39 rasmus Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -451,6 +451,8 @@ static void thttpd_request_ctor(TSRMLS_D)
 	smart_str_0(&s);
 	SG(request_info).request_uri = s.c;
 	SG(request_info).request_method = httpd_method_str(TG(hc)->method);
+	if (TG(hc)->one_one) SG(request_info).proto_num = 1001;
+	else SG(request_info).proto_num = 1000;
 	SG(sapi_headers).http_response_code = 200;
 	if (TG(hc)->contenttype)
 		SG(request_info).content_type = strdup(TG(hc)->contenttype);

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>					  |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.6 2004/12/20 19:33:36 rasmus Exp $ */
+/* $Id: mod_php5.c,v 1.7 2005/03/14 19:25:38 rasmus Exp $ */
 
 #include "php_apache_http.h"
 
@@ -571,6 +571,7 @@ static void init_request_info(TSRMLS_D)
 	SG(request_info).path_translated = r->filename;
 	SG(request_info).request_uri = r->uri;
 	SG(request_info).request_method = (char *)r->method;
+	SG(request_info).proto_num = r->proto_num;
 	SG(request_info).content_type = (char *) table_get(r->subprocess_env, "CONTENT_TYPE");
 	SG(request_info).content_length = (content_length ? atoi(content_length) : 0);
 	SG(sapi_headers).http_response_code = r->status;

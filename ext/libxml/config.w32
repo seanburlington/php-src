@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.6.2.1 2004/08/04 17:11:42 fmk Exp $
+// $Id: config.w32,v 1.6.2.2 2004/08/04 17:22:14 fmk Exp $
 // vim:ft=javascript
 
 ARG_WITH("libxml", "LibXML support", "yes");
@@ -15,7 +15,6 @@ if (PHP_LIBXML == "yes") {
 		if (!PHP_LIBXML_SHARED) {
 			ADD_DEF_FILE("ext\\libxml\\php_libxml2.def");
 		}
-		ADD_EXTENSION_DEP('libxml', 'iconv');
 	}
 }
 

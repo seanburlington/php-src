@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcntl.h,v 1.12 2002/12/31 16:07:11 sebastian Exp $ */
+/* $Id: php_pcntl.h,v 1.13 2003/02/18 01:41:06 iliaa Exp $ */
 
 #ifndef PHP_PCNTL_H
 #define PHP_PCNTL_H
@@ -50,6 +50,8 @@ PHP_FUNCTION(pcntl_wtermsig);
 PHP_FUNCTION(pcntl_wstopsig);
 PHP_FUNCTION(pcntl_signal);
 PHP_FUNCTION(pcntl_exec);
+PHP_FUNCTION(pcntl_getpriority);
+PHP_FUNCTION(pcntl_setpriority);
 
 static void pcntl_signal_handler(int);
 static void pcntl_tick_handler();

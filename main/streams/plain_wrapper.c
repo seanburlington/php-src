@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.4 2003/02/25 01:39:06 iliaa Exp $ */
+/* $Id: plain_wrapper.c,v 1.5 2003/02/25 01:41:58 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -561,7 +561,7 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 				return 0;
 			}
 
-			if (!php_flock(fd, value) || (errno == EWOULDBLOCK && value & LOCK_NB)) {
+			if (!flock(fd, value) || (errno == EWOULDBLOCK && value & LOCK_NB)) {
 				data->lock_flag = value;
 				return 0;
 			} else {

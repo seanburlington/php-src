@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.7 2003/10/05 16:37:50 shane Exp $ */
+/* $Id: xpath.c,v 1.8 2003/10/20 15:50:34 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -214,8 +214,27 @@ PHP_FUNCTION(dom_xpath_query)
 		for (i = 0; i < nodesetp->nodeNr; i++) {
 			xmlNodePtr node = nodesetp->nodeTab[i];
 			zval *child;
-			MAKE_STD_ZVAL(child);
 
+			MAKE_STD_ZVAL(child);
+			
+			if (node->type == XML_NAMESPACE_DECL) {
+				xmlNsPtr curns;
+				xmlNodePtr nsparent;
+
+				nsparent = node->_private;
+				curns = xmlNewNs(NULL, node->name, NULL);
+				if (node->children) {
+					curns->prefix = xmlStrdup((char *) node->children);
+				}
+				if (node->children) {
+					node = xmlNewDocNode(docp, NULL, (char *) node->children, node->name);
+				} else {
+					node = xmlNewDocNode(docp, NULL, "xmlns", node->name);
+				}
+				node->type = XML_NAMESPACE_DECL;
+				node->parent = nsparent;
+				node->ns = curns;
+			}
 			child = php_dom_create_object(node, &ret, NULL, child, intern TSRMLS_CC);
 			add_next_index_zval(return_value, child);
 		}

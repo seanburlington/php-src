@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.8 2005/02/13 01:54:59 wez Exp $
+dnl $Id: config.m4,v 1.9 2005/02/17 04:23:14 wez Exp $
 dnl config.m4 for extension pdo
 dnl vim:se ts=2 sw=2 et:
 
@@ -51,8 +51,8 @@ in a future PHP/PEAR release.
 fi
 ])
 
-PHP_ARG_ENABLE(pdo, whether to disable PDO support,
-[  --disable-pdo            Disable PHP Data Objects support], yes)
+PHP_ARG_ENABLE(pdo, whether to enable PDO support,
+[  --enable-pdo=yes         Enable PHP Data Objects support (recommended)], yes)
 
 if test "$PHP_PDO" != "no"; then
   if test "$ext_shared" = "yes" ; then

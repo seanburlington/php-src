@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.5 2005/02/13 07:30:55 hholzgra Exp $
+dnl $Id: config.m4,v 1.6 2005/02/17 04:23:14 wez Exp $
 dnl
 
 AC_DEFUN([PHP_PGSQL_CHECK_FUNCTIONS],[
@@ -97,17 +97,18 @@ if test "$PHP_PDO_PGSQL" != "no"; then
 
   PHP_ADD_INCLUDE($PGSQL_INCLUDE)
 
-dnl find PDO sources
-  if test -f $prefix/include/php/ext/pdo/php_pdo_driver.h; then
-  	pdo_inc_path=$prefix/include/php/ext
+  AC_MSG_CHECKING([for PDO includes])
+  if test -f $abs_srcdir/include/php/ext/pdo/php_pdo_driver.h; then
+    pdo_inc_path=$abs_srcdir/ext
   elif test -f $abs_srcdir/ext/pdo/php_pdo_driver.h; then
-  	pdo_inc_path=$abs_srcdir/ext
-  elif test -f ext/pdo/php_pdo_driver.h; then
-  	pdo_inc_path=ext
+    pdo_inc_path=$abs_srcdir/ext
+  elif test -f $prefix/include/php/ext/pdo/php_pdo_driver.h; then
+    pdo_inc_path=$prefix/include/php/ext
   else
-	AC_MSG_ERROR([Cannot find php_pdo_driver.h.])
+    AC_MSG_ERROR([Cannot find php_pdo_driver.h.])
   fi
+  AC_MSG_RESULT($pdo_inc_path)
 
   PHP_NEW_EXTENSION(pdo_pgsql, pdo_pgsql.c pgsql_driver.c pgsql_statement.c, $ext_shared,,-I$pdo_inc_path $PDO_PGSQL_CFLAGS)
-dnl  PHP_ADD_EXTENSION_DEP(pdo_pgsql, pdo) 
+  PHP_ADD_EXTENSION_DEP(pdo_pgsql, pdo) 
 fi

@@ -3,7 +3,7 @@ dnl +---------------------------------------------------------------------------
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
 dnl |  backend the user chooses, this script performs the magic                    |
 dnl +------------------------------------------------------------------------------+
-dnl   $Id: config.m4,v 1.5 2001/06/01 06:41:44 sniper Exp $
+dnl   $Id: config.m4,v 1.6 2001/06/30 00:48:34 sniper Exp $
 
 PHP_ARG_ENABLE(xslt, whether to enable xslt support,
 [  --enable-xslt           Enable xslt support])
@@ -24,6 +24,10 @@ if test "$PHP_XSLT" != "no"; then
     XSLT_TEST_FILE=/include/sablot.h
     XSLT_BACKEND_NAME=Sablotron
     XSLT_LIBNAME=sablot
+  fi
+
+  if test -z "$XSLT_BACKEND_NAME"; then
+    AC_MSG_ERROR(No backend specified for XSLT extension.)
   fi
 
   condition="$XSLT_CHECK_DIR$XSLT_TEST_FILE"

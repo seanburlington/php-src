@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.262 2001/08/02 21:20:20 rasmus Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.263 2001/08/04 04:47:24 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -622,7 +622,7 @@ if test "$PHP_PHP_STREAMS" = "yes"; then
 fi
 
 AC_CHECK_LIB(crypt, crypt, [
-  PHP_ADD_LIBRARY(crypt)
+  PHP_ADD_LIBRARY(crypt, 1)
   AC_DEFINE(HAVE_CRYPT,1,[ ]) 
 ])
 

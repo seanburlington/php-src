@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: expat_compat.h,v 1.7 2003/05/22 03:29:05 sterling Exp $ */
+/* $Id: expat_compat.h,v 1.8 2003/06/08 18:29:55 zeev Exp $ */
 
 #ifndef PHP_EXPAT_COMPAT_H
 #define PHP_EXPAT_COMPAT_H
@@ -135,7 +135,7 @@ int  XML_GetCurrentByteIndex(XML_Parser);
 const XML_Char *XML_ExpatVersion(void);
 void XML_ParserFree(XML_Parser);
 
-#else 
+#elif defined(HAVE_LIBEXPAT)
 #include <expat.h>
 #endif /* HAVE_LIBEXPAT */
 

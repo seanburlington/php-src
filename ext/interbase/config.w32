@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.5 2004/02/06 15:11:17 abies Exp $
+// $Id: config.w32,v 1.6 2004/04/05 13:22:33 abies Exp $
 // vim:ft=javascript
 
 ARG_WITH("interbase", "InterBase support", "no");
@@ -9,7 +9,7 @@ if (PHP_INTERBASE != "no" || PHP_INTERBASE5 != "no") {
 	if (CHECK_HEADER_ADD_INCLUDE("ibase.h", "CFLAGS_INTERBASE", PHP_PHP_BUILD + "\\interbase\\include;" + PHP_INTERBASE) &&
 			(CHECK_LIB("fbclient_ms.lib", "interbase", PHP_PHP_BUILD + "\\interbase\\lib_ms;" + PHP_INTERBASE) ||
 			 CHECK_LIB("gds32_ms.lib", "interbase", PHP_PHP_BUILD + "\\interbase\\lib_ms;" + PHP_INTERBASE))) {
-		EXTENSION("interbase", "interbase.c ibase_service.c ibase_events.c ibase_blobs.c");
+		EXTENSION("interbase", "interbase.c ibase_query.c ibase_service.c ibase_events.c ibase_blobs.c");
 		AC_DEFINE('HAVE_IBASE', 1, 'Have interbase library');
 
 		if (PHP_INTERBASE != "no") {

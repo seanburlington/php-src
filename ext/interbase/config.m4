@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.18 2004/02/11 16:20:48 abies Exp $
+dnl $Id: config.m4,v 1.19 2004/04/05 13:22:33 abies Exp $
 dnl
 
 PHP_ARG_WITH(interbase,for InterBase support,
@@ -53,6 +53,6 @@ if test "$PHP_INTERBASE" != "no"; then
   PHP_ADD_LIBRARY_WITH_PATH($IBASE_LIBNAME, $IBASE_LIBDIR, INTERBASE_SHARED_LIBADD)
   PHP_ADD_INCLUDE($IBASE_INCDIR)
   AC_DEFINE(HAVE_IBASE,1,[ ])
-  PHP_NEW_EXTENSION(interbase, interbase.c ibase_service.c ibase_events.c ibase_blobs.c, $ext_shared)
+  PHP_NEW_EXTENSION(interbase, interbase.c ibase_query.c ibase_service.c ibase_events.c ibase_blobs.c, $ext_shared)
   PHP_SUBST(INTERBASE_SHARED_LIBADD)
 fi

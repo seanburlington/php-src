@@ -20,13 +20,9 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.68 2004/01/19 03:14:58 sniper Exp $ */
+/* $Id: rand.c,v 1.69 2004/09/25 15:39:26 hyanantha Exp $ */
 
 #include <stdlib.h>
-
-#if defined(NETWARE) && !defined(NEW_LIBC)  /* For getpid() used below */
-#include "netware/pwd.h"
-#endif
 
 #include "php.h"
 #include "php_math.h"

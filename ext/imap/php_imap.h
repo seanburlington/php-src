@@ -22,11 +22,12 @@
    |          Andrew Skalski      <askalski@chekinc.com>                  |
    |          Hartmut Holzgraefe  <hartmut@six.de>                        |
    |          Jani Taskinen       <sniper@iki.fi>                         |
+   |          Daniel R. Kalowsky  <kalowsky@php.net>                      |
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.19 2002/05/12 20:53:25 jon Exp $ */
+/* $Id: php_imap.h,v 1.20 2002/07/26 16:22:43 kalowsky Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H
@@ -208,8 +209,7 @@ ZEND_BEGIN_MODULE_GLOBALS(imap)
 	unsigned long status_uidnext;
 	unsigned long status_uidvalidity;
 #if defined(HAVE_IMAP2000) || defined(HAVE_IMAP2001)
-	unsigned long quota_usage;
-	unsigned long quota_limit;
+	zval *quota_return;
 #endif
 ZEND_END_MODULE_GLOBALS(imap)
 

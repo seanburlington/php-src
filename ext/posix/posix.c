@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.43 2002/04/10 06:22:12 derick Exp $ */
+/* $Id: posix.c,v 1.44 2002/04/13 00:31:55 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -130,7 +130,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.43 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.44 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -367,8 +367,9 @@ PHP_FUNCTION(posix_getgroups)
 	}
 
 	if (array_init(return_value) == FAILURE) {
-		// TODO: Should we issue a warning here so we don't have ambiguity
-		// with the above return value ?
+		/* TODO: Should we issue a warning here so we don't have ambiguity
+		 * with the above return value ?
+		 */
 		RETURN_FALSE;
 	}
 
@@ -501,8 +502,9 @@ PHP_FUNCTION(posix_uname)
 	}
 
 	if (array_init(return_value) == FAILURE) {
-		// TODO: Should we issue a warning here so we don't have ambiguity
-		// with the above return value ?
+		/* TODO: Should we issue a warning here so we don't have ambiguity
+		 * with the above return value ?
+		 */
 		RETURN_FALSE;
 	}
 
@@ -537,8 +539,9 @@ PHP_FUNCTION(posix_times)
 	}
 
 	if (array_init(return_value) == FAILURE) {
-		// TODO: Should we issue a warning here so we don't have ambiguity
-		// with the above return value ?
+		/* TODO: Should we issue a warning here so we don't have ambiguity
+		 * with the above return value ?
+		 */
 		RETURN_FALSE;
 	}
 
@@ -566,8 +569,9 @@ PHP_FUNCTION(posix_ctermid)
 		return;
 
 	if (NULL == (p = ctermid(buffer))) {
-		// Found no documentation how the defined behaviour is when this
-		// function fails
+		/* Found no documentation how the defined behaviour is when this
+		 * function fails
+		 */
 		POSIX_G(last_error) = errno;
 		RETURN_FALSE;
 	}
@@ -733,8 +737,9 @@ PHP_FUNCTION(posix_getgrnam)
 	}
 	
 	if (array_init(return_value) == FAILURE) {
-		// TODO: Should we issue a warning here so we don't have ambiguity
-		// with the above return value ?
+		/* TODO: Should we issue a warning here so we don't have ambiguity
+		 * with the above return value ?
+		 */
 		RETURN_FALSE;
 	}
 
@@ -762,8 +767,9 @@ PHP_FUNCTION(posix_getgrgid)
 	}
 
 	if (array_init(return_value) == FAILURE) {
-		// TODO: Should we issue a warning here so we don't have ambiguity
-		// with the above return value ?
+		/* TODO: Should we issue a warning here so we don't have ambiguity
+		 * with the above return value ?
+		 */
 		RETURN_FALSE;
 	}
 

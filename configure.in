@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.330 2002/03/30 23:44:50 ssb Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.331 2002/03/31 13:02:36 stas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1086,7 +1086,7 @@ PHP_ADD_SOURCES(Zend, \
     zend_list.c zend_indent.c zend_builtin_functions.c zend_sprintf.c \
     zend_ini.c zend_qsort.c)
 
-if test -r "Zend/zend_objects.c"; then
+if test -r "$abs_srcdir/Zend/zend_objects.c"; then
   PHP_ADD_SOURCES(Zend, zend_objects.c zend_object_handlers.c)
 fi
 

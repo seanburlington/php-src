@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.40 2002/11/20 19:48:12 andi Exp $ */
+/* $Id: bcmath.c,v 1.41 2002/11/20 20:03:00 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -65,9 +65,9 @@ static long bc_precision;
 #endif
 
 /* Storage used for special numbers. */
-extern bc_num BCG(_zero_);
-extern bc_num BCG(_one_);
-extern bc_num BCG(_two_);
+extern bc_num _zero_;
+extern bc_num _one_;
+extern bc_num _two_;
 
 
 /* Make a copy of a number!  Just increments the reference count! */
@@ -81,15 +81,15 @@ bc_num copy_num (bc_num num)
 /* Initialize a number NUM by making it a copy of zero. */
 void init_num (bc_num *num)
 {
-	*num = copy_num (BCG(_zero_));
+	*num = copy_num (_zero_);
 }
 
 
 PHP_RSHUTDOWN_FUNCTION(bcmath)
 {
-	bc_free_num(&BCG(_zero_));
-	bc_free_num(&BCG(_one_));
-	bc_free_num(&BCG(_two_));
+	bc_free_num(&_zero_);
+	bc_free_num(&_one_);
+	bc_free_num(&_two_);
 
 	return SUCCESS;
 }

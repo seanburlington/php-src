@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.23 2004/02/12 10:43:25 zeev Exp $ */
+/* $Id: spl_directory.c,v 1.24 2004/03/08 17:33:29 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -251,9 +251,9 @@ SPL_METHOD(DirectoryIterator, next)
 }
 /* }}} */
 
-/* {{{ proto string DirectoryIterator::hasMore()
+/* {{{ proto string DirectoryIterator::valid()
    Check whether dir contains more entries */
-SPL_METHOD(DirectoryIterator, hasMore)
+SPL_METHOD(DirectoryIterator, valid)
 {
 	zval *object = getThis();
 	spl_ce_dir_object *intern = (spl_ce_dir_object*)zend_object_store_get_object(object TSRMLS_CC);
@@ -734,7 +734,7 @@ ZEND_END_ARG_INFO();
 static zend_function_entry spl_ce_dir_class_functions[] = {
 	SPL_ME(DirectoryIterator, __construct,   arginfo_dir___construct, ZEND_ACC_PUBLIC)
 	SPL_ME(DirectoryIterator, rewind,        NULL, ZEND_ACC_PUBLIC)
-	SPL_ME(DirectoryIterator, hasMore,       NULL, ZEND_ACC_PUBLIC)
+	SPL_ME(DirectoryIterator, valid,         NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(DirectoryIterator, key,           NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(DirectoryIterator, current,       NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(DirectoryIterator, next,          NULL, ZEND_ACC_PUBLIC)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.33 2004/02/12 21:43:10 helly Exp $ */
+/* $Id: spl_array.c,v 1.34 2004/03/08 17:33:29 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -39,7 +39,7 @@ SPL_METHOD(Array, rewind);
 SPL_METHOD(Array, current);
 SPL_METHOD(Array, key);
 SPL_METHOD(Array, next);
-SPL_METHOD(Array, hasMore);
+SPL_METHOD(Array, valid);
 
 static
 ZEND_BEGIN_ARG_INFO(arginfo_array___construct, 0)
@@ -58,7 +58,7 @@ static zend_function_entry spl_funcs_ArrayIterator[] = {
 	SPL_ME(Array, current,       NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(Array, key,           NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(Array, next,          NULL, ZEND_ACC_PUBLIC)
-	SPL_ME(Array, hasMore,       NULL, ZEND_ACC_PUBLIC)
+	SPL_ME(Array, valid,         NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 
@@ -485,9 +485,9 @@ SPL_METHOD(Array, next)
 }
 /* }}} */
 
-/* {{{ proto bool ArrayIterator::hasMore()
+/* {{{ proto bool ArrayIterator::valid()
    Check whether array contains more entries */
-SPL_METHOD(Array, hasMore)
+SPL_METHOD(Array, valid)
 {
 	zval *object = getThis();
 	spl_array_object *intern = (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC);

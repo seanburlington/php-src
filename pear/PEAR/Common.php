@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.40 2002/03/31 19:04:53 cox Exp $
+// $Id: Common.php,v 1.41 2002/04/02 09:21:08 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -67,6 +67,13 @@ class PEAR_Common extends PEAR
      * @var array
      */
     var $releases_states  = array('alpha','beta','stable','snapshot','devel');
+
+    /**
+     * User Interface object (PEAR_Frontend_* class).  If null,
+     * log() uses print.
+     * @var object
+     */
+    var $ui = null;
 
     // }}}
 
@@ -159,7 +166,11 @@ class PEAR_Common extends PEAR
     function log($level, $msg)
     {
         if ($this->debug >= $level) {
-            print "$msg\n";
+            if (is_object($this->ui)) {
+                $this->ui->displayLine($msg);
+            } else {
+                print "$msg\n";
+            }
         }
     }
 
@@ -192,6 +203,15 @@ class PEAR_Common extends PEAR
     }
 
     // }}}
+    // {{{ setFrontend()
+
+    function setFrontend(&$ui)
+    {
+        $this->ui = &$ui;
+    }
+
+    // }}}
+
     // {{{ _element_start()
 
     /**

@@ -28,7 +28,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.7 1999/06/05 17:47:16 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.8 1999/07/03 18:13:43 sas Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -337,7 +337,7 @@ int send_parsed_php(request_rec * r)
 
 int send_parsed_php_source(request_rec * r)
 {
-	return send_php(r, 0, NULL);
+	return send_php(r, 1, NULL);
 }
 
 

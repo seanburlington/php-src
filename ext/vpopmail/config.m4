@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.13 2002/03/20 18:22:31 bbonev Exp $
+dnl $Id: config.m4,v 1.14 2002/03/20 19:22:53 bbonev Exp $
 dnl
 
 PHP_ARG_WITH(vpopmail, for vpopmail support,
@@ -75,8 +75,8 @@ Use ./configure --with-vpopmail=<vpopmail-home-dir> if necessary)
 	vpopmail_internal_api=1
 	version=`grep VERSION $VPOPMAIL_INC_DIR/vpopmail_config.h`
 	if test -n "$version"; then
-		version_major=`echo "$version" | sed 's/^[[^"]]\+"\([[0-9]]\+\)\.[[0-9]]\+"/\1/'`;
-		version_minor=`echo "$version" | sed 's/^[[^"]]\+"[[0-9]]\+\.\([[0-9]]\+\)"/\1/'`
+		version_major=`echo "$version" | tr "\"#." "   " | awk '{print $3}'`
+		version_minor=`echo "$version" | tr "\"#." "   " | awk '{print $4}'`
 		if test $version_major -ge 5; then
 			if test $version_major -eq 5; then
 				if test $version_minor -ge 2; then

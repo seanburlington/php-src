@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.105 2003/08/31 18:54:38 cellog Exp $
+// $Id: Common.php,v 1.106 2003/09/02 03:15:27 cellog Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -332,6 +332,11 @@ class PEAR_Common extends PEAR
                 $elem_start = '_element_start_'. $vs;
                 $elem_end = '_element_end_'. $vs;
                 $cdata = '_pkginfo_cdata_'. $vs;
+                if (!method_exists($this, $elem_start) ||
+                      !method_exists($this, $elem_end) ||
+                      !method_exists($this, $cdata)) {
+                    $this->raiseError("No handlers for package.xml version $attribs[version]");
+                }
                 xml_set_element_handler($xp, $elem_start, $elem_end);
                 xml_set_character_data_handler($xp, $cdata);
                 break;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.135 2000/07/09 19:33:19 eschmid Exp $ */
+/* $Id: string.c,v 1.136 2000/07/17 10:22:30 stas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1617,7 +1617,10 @@ PHPAPI void php_stripcslashes(char *str, int *len)
 			*target++=*source;
 		}
 	}
-	*target='\0';
+
+	if(nlen != 0) {
+		*target='\0';
+	}
 
 	*len = nlen;
 }

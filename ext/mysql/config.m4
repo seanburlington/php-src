@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.38.2.4 2002/04/25 21:08:47 edink Exp $
+dnl $Id: config.m4,v 1.38.2.5 2002/04/27 01:09:56 sniper Exp $
 dnl
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
@@ -60,6 +60,9 @@ if test "$PHP_MYSQL" = "yes"; then
   PHP_ADD_INCLUDE($ext_srcdir/libmysql)
   MYSQL_MODULE_TYPE=builtin
 elif test "$PHP_MYSQL" != "no"; then
+
+  MYSQL_TYPE_CHECKS
+
   for i in $PHP_MYSQL; do
     if test -r $i/include/mysql/mysql.h; then
       MYSQL_DIR=$i

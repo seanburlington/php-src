@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: zval_to_namedvalue.c,v 1.3 2001/02/26 06:07:15 andi Exp $
+ * $Id: zval_to_namedvalue.c,v 1.4 2001/08/09 21:59:26 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -92,7 +92,7 @@ static zend_bool satellite_zval_to_namedvalue_long(const zval * pSource,
 	if (pSource == NULL)
 		return TRUE;
 	
-	/*convert_to_long(pSource);*/
+	convert_to_long((zval*)pSource);	/* so long "const" */
 	if (pSource->type != IS_LONG)
 		return FALSE;
 

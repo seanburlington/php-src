@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.49 2001/03/17 03:03:50 zeev Exp $ */
+/* $Id: output.c,v 1.50 2001/03/28 19:41:38 andre Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -475,7 +475,7 @@ static int php_ub_body_write(const char *str, uint str_length)
  */
 
 
-/* {{{ proto void ob_start([ string user_function])
+/* {{{ proto void ob_start([ string user_function, [ int chunk_size]])
    Turn on Output Buffering (specifying an optional output handler). */
 PHP_FUNCTION(ob_start)
 {

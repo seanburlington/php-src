@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.114 2004/11/15 14:00:48 tony2001 Exp $ */
+/* $Id: php_cli.c,v 1.115 2004/12/20 19:33:38 rasmus Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -342,6 +342,7 @@ static sapi_module_struct cli_sapi_module = {
 
 	sapi_cli_register_variables,	/* register server variables */
 	sapi_cli_log_message,			/* Log message */
+	NULL,							/* Get request time */
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };

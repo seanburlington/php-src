@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.256 2004/07/14 22:30:27 edink Exp $ */
+/* $Id: cgi_main.c,v 1.257 2004/12/20 19:33:37 rasmus Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -539,6 +539,7 @@ static sapi_module_struct cgi_sapi_module = {
 
 	sapi_cgi_register_variables,	/* register server variables */
 	sapi_cgi_log_message,			/* Log message */
+	NULL,							/* Get request time */
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };

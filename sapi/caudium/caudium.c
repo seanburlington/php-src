@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: caudium.c,v 1.33 2004/01/17 13:00:10 sniper Exp $ */
+/* $Id: caudium.c,v 1.34 2004/12/20 19:33:36 rasmus Exp $ */
 
 #include "php.h"
 #ifdef HAVE_CAUDIUM
@@ -444,7 +444,7 @@ static void php_info_caudium(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.33 2004/01/17 13:00:10 sniper Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.34 2004/12/20 19:33:36 rasmus Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -550,6 +550,7 @@ static sapi_module_struct caudium_sapi_module = {
   php_caudium_sapi_read_cookies,	/* read cookies */
   sapi_caudium_register_variables,	/* register server variables */
   NULL,					/* Log message */
+  NULL,					/* Get request time */
 
   STANDARD_SAPI_MODULE_PROPERTIES
 };

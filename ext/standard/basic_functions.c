@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.408 2001/10/11 23:33:48 ssb Exp $ */
+/* $Id: basic_functions.c,v 1.409 2001/10/16 17:08:11 sniper Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -2796,7 +2796,7 @@ static int copy_request_variable(void *pDest, int num_args, va_list args, zend_h
 	return 0;
 }
 
-/* {{{ proto bool import_request_variables(string types, string prefix)
+/* {{{ proto bool import_request_variables(string types [, string prefix])
    Import GET/POST/Cookie variables into the global scope */
 PHP_FUNCTION(import_request_variables)
 {

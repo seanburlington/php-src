@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.42 2001/03/04 01:45:19 zeev Exp $ */
+/* $Id: output.c,v 1.43 2001/03/04 15:46:13 zeev Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -106,7 +106,11 @@ PHPAPI int php_start_ob_buffer(zval *output_handler, uint chunk_size)
 	if (OG(lock)) {
 		return FAILURE;
 	}
-	php_ob_init(40*1024, 10*1024, output_handler, chunk_size);
+	if (chunk_size) {
+		php_ob_init((chunk_size*3/2), chunk_size/2, output_handler, chunk_size);
+	} else {
+		php_ob_init(40*1024, 10*1024, output_handler, chunk_size);
+	}
 	OG(php_body_write) = php_b_body_write;
 	return SUCCESS;
 }
@@ -301,7 +305,6 @@ static void php_ob_append(const char *text, uint text_length)
 	if (OG(active_ob_buffer).chunk_size
 		&& OG(active_ob_buffer).text_length >= OG(active_ob_buffer).chunk_size) {
 		zval *output_handler = OG(active_ob_buffer).output_handler;
-		uint chunk_size = OG(active_ob_buffer).chunk_size;
 
 		if (output_handler) {
 			output_handler->refcount++;

@@ -1,10 +1,10 @@
-dnl $Id: config.m4,v 1.2 2001/07/04 21:51:22 jason Exp $
+dnl $Id: config.m4,v 1.3 2001/09/19 09:17:54 sas Exp $
 dnl config.m4 for extension pcntl
 
 dnl Process Control (pcntl) extentsion --EXPERIMENTAL--
 dnl TODO - Add platform checks 
 PHP_ARG_ENABLE(pcntl, whether to enable pcntl support,
-[  --enable-pcntl           Enable experimental pcntl support (CGI ONLY!)])
+[  --enable-pcntl          Enable experimental pcntl support (CGI ONLY!)])
 
 if test "$PHP_PCNTL" != "no"; then
   if test "$PHP_SAPI" != "cgi"; then
@@ -16,5 +16,4 @@ if test "$PHP_PCNTL" != "no"; then
   AC_CHECK_FUNCS(sigaction, [ AC_DEFINE(HAVE_SIGACTION,1,[ ]) ], [ AC_MSG_ERROR(pcntl: sigaction() not supported by this platform) ])
   
   PHP_EXTENSION(pcntl, $ext_shared)
-  
 fi

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.8.2.6 2002/08/30 03:06:52 sniper Exp $
+dnl $Id: config.m4,v 1.8.2.7 2002/09/01 00:19:38 sniper Exp $
 dnl
 
 sinclude(ext/xmlrpc/libxmlrpc/acinclude.m4)
@@ -55,7 +55,7 @@ fi
 if test "$PHP_XMLRPC" = "yes"; then
   XMLRPC_CHECKS
   XMLRPC_LIBADD=libxmlrpc/libxmlrpc.la
-  XMLRPC_SHARED_LIBADD=libxmlrpc/libxmlrpc.la
+  XMLRPC_SHARED_LIBADD="$XMLRPC_SHARED_LIBADD libxmlrpc/libxmlrpc.la"
   XMLRPC_SUBDIRS=libxmlrpc
   PHP_SUBST(XMLRPC_LIBADD)
   PHP_SUBST(XMLRPC_SUBDIRS)

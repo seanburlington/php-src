@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.50 2003/11/22 21:20:06 georg Exp $ 
+  $Id: mysqli_api.c,v 1.51 2003/11/30 10:56:55 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1836,7 +1836,7 @@ PHP_FUNCTION(mysqli_sqlstate)
 #endif
 /* }}} */
 
-/* {{{ proto string mysqli_ssl_set(object link [,string key [,string cert [,string ca [,string capath [,string cipher]]]]])
+/* {{{ proto bool mysqli_ssl_set(object link ,string key ,string cert ,string ca ,string capath ,string cipher])
 */
 PHP_FUNCTION(mysqli_ssl_set)
 {

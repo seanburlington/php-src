@@ -23,12 +23,12 @@
    | If you did not, or have any questions about PHP licensing, please    |
    | contact core@php.net.                                                |
    +----------------------------------------------------------------------+
-   | Authors: Kristian Koehntopp (kris@koehntopp.de)                      |
+   | Authors: Kristian Koehntopp <kris@koehntopp.de>                      |
    +----------------------------------------------------------------------+
  */
 
 
-/* $Id: php_posix.h,v 1.5 2000/07/02 23:46:45 sas Exp $ */
+/* $Id: php_posix.h,v 1.6 2000/07/15 14:35:41 eschmid Exp $ */
 
 #ifndef PHP_POSIX_H
 #define PHP_POSIX_H

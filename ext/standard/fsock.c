@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.107 2002/12/31 16:07:41 sebastian Exp $ */
+/* $Id: fsock.c,v 1.108 2003/01/09 03:33:15 iliaa Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -178,7 +178,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	}
 	if (zerrstr) {
 		zval_dtor(zerrstr);
-		ZVAL_STRING(zerrno, "", 1);
+		ZVAL_STRING(zerrstr, "", 1);
 	}
 
 	if (port > 0)	{ /* connect to a host */
@@ -261,6 +261,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			char *buf = php_socket_strerror(err, NULL, 0);
 
 			/* no need to dup; we would only need to efree buf anyway */
+			zval_dtor(zerrstr);
 			ZVAL_STRING(zerrstr, buf, 0);
 		}
 		RETURN_FALSE;

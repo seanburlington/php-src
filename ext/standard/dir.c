@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.99 2002/09/26 07:15:33 hholzgra Exp $ */
+/* $Id: dir.c,v 1.100 2002/09/26 07:30:16 sebastian Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -338,7 +338,6 @@ PHP_NAMED_FUNCTION(php_if_readdir)
    Find pathnames matching a pattern */
 PHP_FUNCTION(glob)
 {
-	cwd_state new_state;
 	char cwd[MAXPATHLEN];
 	int cwd_skip = 0;
 	char work_pattern[MAXPATHLEN];
@@ -348,7 +347,6 @@ PHP_FUNCTION(glob)
 	long flags = 0;
 	glob_t globbuf;
 	int n, ret;
-	TSRMLS_FETCH();
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &pattern, &pattern_len, &flags) == FAILURE) 
 		return;

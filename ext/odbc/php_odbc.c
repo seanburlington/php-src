@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.135 2002/08/13 04:47:02 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.136 2002/08/13 04:52:50 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -221,7 +221,7 @@ static void _close_odbc_conn(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 }
 /* }}} */
 
-/* {{{ void _close_odbc_pcon
+/* {{{ void _close_odbc_pconn
  */
 static void _close_odbc_pconn(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {

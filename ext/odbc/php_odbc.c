@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.46 2000/05/11 16:24:03 kara Exp $ */
+/* $Id: php_odbc.c,v 1.47 2000/05/11 16:25:58 kara Exp $ */
 
 #if defined(COMPILE_DL) || defined(COMPILE_DL_ODBC)
 #include "dl/phpdl.h"
@@ -1090,7 +1090,7 @@ PHP_FUNCTION(odbc_exec)
 }
 /* }}} */
 
-/* {{{ proto int odbc_fetch_into(int result_id, array result_array [, int rownumber])
+/* {{{ proto int odbc_fetch_into(int result_id [, int rownumber], array result_array)
    Fetch one result row into an array */ 
 PHP_FUNCTION(odbc_fetch_into)
 {

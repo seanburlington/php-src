@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.88 2000/01/28 17:24:50 zeev Exp $ */
+/* $Id: string.c,v 1.89 2000/01/29 17:54:30 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1215,7 +1215,7 @@ static void php_strtr_array(zval *return_value,char *str,int slen,HashTable *has
 
 				if ((newpos + tlen + 1) > newlen) {
 					newlen = newpos + tlen + 1 + 8192;
-					newstr = realloc(newstr,newlen);
+					newstr = erealloc(newstr,newlen);
 				}
 				
 				memcpy(newstr+newpos,tval,tlen);
@@ -1233,7 +1233,7 @@ static void php_strtr_array(zval *return_value,char *str,int slen,HashTable *has
 		if (! found) {
 			if ((newpos + 1) > newlen) {
 				newlen = newpos + 1 + 8192;
-				newstr = realloc(newstr,newlen);
+				newstr = erealloc(newstr,newlen);
 			}
 			
 			newstr[ newpos++ ] = str[ pos++ ];

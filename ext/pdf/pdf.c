@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.86 2001/06/05 13:12:03 rasmus Exp $ */
+/* $Id: pdf.c,v 1.87 2001/06/06 09:58:21 wez Exp $ */
 /* Id: pdf.c,v 1.73 2001/02/26 06:07:11 andi Exp  */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
@@ -60,7 +60,6 @@ static int le_gd;
 static int le_pdf;
 
 /* {{{ constants
-/*
  * to adopt the php way of error handling to PDFlib
  * The image related functions in PDFlib return -1 on error
  * but they may return 0 (FALSE) in normal cases
@@ -351,7 +350,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.86 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.87 $" );
 	php_info_print_table_end();
 
 }
@@ -487,8 +486,9 @@ PHP_FUNCTION(pdf_open)
 	} else {
 		PDF_open_mem(pdf, pdf_flushwrite);
 	}
-
+#if (PDFLIB_MAJORVERSION >= 4)
 	PDF_set_parameter(pdf, "imagewarning", "true");
+#endif
 	PDF_set_parameter(pdf, "binding", "PHP");
 
 	ZEND_REGISTER_RESOURCE(return_value, pdf, le_pdf);
@@ -2226,7 +2226,9 @@ PHP_FUNCTION(pdf_new) {
 	PDF *pdf;
 
 	pdf = PDF_new2(custom_errorhandler, pdf_emalloc, pdf_realloc, pdf_efree, NULL);
+#if (PDFLIB_MAJORVERSION >= 4)
 	PDF_set_parameter(pdf, "imagewarning", "true");
+#endif
 	PDF_set_parameter(pdf, "binding", "PHP");
 
 	ZEND_REGISTER_RESOURCE(return_value, pdf, le_pdf);

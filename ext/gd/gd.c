@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.44 2000/03/13 05:58:50 rasmus Exp $ */
+/* $Id: gd.c,v 1.45 2000/03/13 10:09:02 rasmus Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -708,7 +708,7 @@ PHP_FUNCTION(imagejpeg)
 		}
 	}
 
-	if (argc > 1 && strlen(fn)) {
+	if (argc > 1 && fn && strlen(fn)) {
 		fp = fopen(fn, "wb");
 		if (!fp) {
 			php_error(E_WARNING, "ImageJpeg: unable to open %s for writing", fn);

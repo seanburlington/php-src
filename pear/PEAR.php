@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.9 2001/07/29 04:25:33 cox Exp $
+// $Id: PEAR.php,v 1.10 2001/07/31 07:57:12 ssb Exp $
 //
 
 define('PEAR_ERROR_RETURN', 1);
@@ -251,7 +251,6 @@ class PEAR
      *
      * @since PHP 4.0.5
      */
-
     function &raiseError($message = null,
                          $code = null,
                          $mode = null,
@@ -318,6 +317,7 @@ class PEAR
     }
 
     // }}}
+    // {{{ pushErrorHandling()
 
     /**
     * Push a new error handler on top of the error handler options stack. With this
@@ -362,6 +362,9 @@ class PEAR
         return true;
     }
 
+    // }}}
+    // {{{ popErrorHandling()
+
     /**
     * Pop the last error handler used
     *
@@ -382,6 +385,7 @@ class PEAR
         return true;
     }
 
+    // }}}
 }
 
 // {{{ _PEAR_call_destructors()

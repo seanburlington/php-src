@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.20 1999/09/04 20:37:24 rasmus Exp $ */
+/* $Id: mod_php4.c,v 1.21 1999/09/04 21:16:41 rasmus Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -93,8 +93,8 @@ void php_save_umask()
 
 static int zend_apache_ub_write(const char *str, uint str_length)
 {
-	SLS_FETCH();
 	int ret;
+	SLS_FETCH();
 		
 	if (SG(server_context)) {
 		ret = rwrite(str, str_length, (request_rec *) SG(server_context));

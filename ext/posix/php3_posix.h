@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php3_posix.h,v 1.1 1999/12/03 13:13:48 sas Exp $ */
+/* $Id: php3_posix.h,v 1.2 1999/12/03 13:24:30 sas Exp $ */
 
 #ifndef _PHP3_POSIX_H
 #define _PHP3_POSIX_H
@@ -36,8 +36,6 @@
 #if COMPILE_DL
 #define HAVE_POSIX 1
 #endif
-
-#define HAVE_POSIX 1
 
 #if HAVE_POSIX
 #ifndef DLEXPORT

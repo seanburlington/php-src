@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.526 2002/10/06 16:33:14 sander Exp $ */
+/* $Id: basic_functions.c,v 1.527 2002/10/06 17:00:33 sander Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1442,7 +1442,7 @@ PHP_FUNCTION(getopt)
 		if (optarg != NULL) {
 			ZVAL_STRING(val, optarg, 1);
 		} else {
-			ZVAL_NULL(val);
+			ZVAL_FALSE(val);
 		}
 
 		/* Add this option / argument pair to the result hash. */

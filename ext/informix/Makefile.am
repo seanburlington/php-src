@@ -1,8 +1,10 @@
-# $Id: Makefile.am,v 1.3 1999/10/04 15:18:10 sas Exp $
+# $Id: Makefile.am,v 1.4 1999/10/06 14:41:35 sas Exp $
 
 INCLUDES=@INCLUDES@ -I@top_srcdir@ -I@top_srcdir@/libzend
 noinst_LTLIBRARIES=libphpext_informix.la
 libphpext_informix_la_SOURCES=ifx.c
+
+CLEANFILES = ifx.c
 
 ifx.c: ifx.ec
 	(if test -d @INFORMIXDIR@; then \
@@ -11,5 +13,3 @@ ifx.c: ifx.ec
 	   touch ifx.c; \
 	 fi)
 
-clean:
-	-rm -f ifx.c

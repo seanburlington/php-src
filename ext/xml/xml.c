@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.75 2001/05/11 17:57:35 thies Exp $ */
+/* $Id: xml.c,v 1.76 2001/05/14 11:35:25 thies Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -229,6 +229,7 @@ PHP_MINFO_FUNCTION(xml)
         php_info_print_table_start();
 		php_info_print_table_row(2, "XML Support", "active");
 		php_info_print_table_row(2, "XML Namespace Support", "active");
+		php_info_print_table_row(2, "EXPAT Version",XML_ExpatVersion());
         php_info_print_table_end();
 }
 

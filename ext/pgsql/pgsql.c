@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.97 2001/04/05 12:29:24 romolo Exp $ */
+/* $Id: pgsql.c,v 1.98 2001/04/14 10:32:14 hirokawa Exp $ */
 
 #include <stdlib.h>
 
@@ -532,8 +532,6 @@ PHP_FUNCTION(pg_close)
 	}
 	
 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, pgsql_link, id, "PostgreSQL link", le_link, le_plink);
-
-	printf("\npg_close %d\n",id);
 
 	if (id==-1) { /* explicit resource number */
 		zend_list_delete(Z_RESVAL_PP(pgsql_link));

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.198 2004/02/02 14:57:20 abies Exp $ */
+/* $Id: interbase.c,v 1.199 2004/02/06 15:11:17 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,7 @@
 
 #include "php.h"
 
-#define FILE_REVISION "$Revision: 1.198 $"
+#define FILE_REVISION "$Revision: 1.199 $"
 
 #if HAVE_IBASE
 
@@ -514,6 +514,7 @@ static void _php_ibase_free_event(zend_rsrc_list_entry *rsrc TSRMLS_DC) /* {{{ *
 }
 /* }}} */
 
+#if HAVE_IBASE6_API
 static void _php_ibase_free_service(zend_rsrc_list_entry *rsrc TSRMLS_DC) /* {{{ */
 {
 	ibase_service *sv = (ibase_service *) rsrc->ptr;
@@ -534,6 +535,7 @@ static void _php_ibase_free_service(zend_rsrc_list_entry *rsrc TSRMLS_DC) /* {{{
 	efree(sv);
 }
 /* }}} */
+#endif
 
 /* {{{ startup, shutdown and info functions */
 PHP_INI_BEGIN()
@@ -569,7 +571,9 @@ PHP_MINIT_FUNCTION(ibase)
 	le_plink = zend_register_list_destructors_ex(php_ibase_commit_link_rsrc, _php_ibase_close_plink, "interbase link persistent", module_number);
 	le_trans = zend_register_list_destructors_ex(_php_ibase_free_trans, NULL, "interbase transaction", module_number);
 	le_event = zend_register_list_destructors_ex(_php_ibase_free_event, NULL, "interbase event", module_number);
+#if HAVE_IBASE6_API
 	le_service = zend_register_list_destructors_ex(_php_ibase_free_service, NULL, "interbase service manager handle", module_number);
+#endif
 
 	REGISTER_LONG_CONSTANT("IBASE_DEFAULT", PHP_IBASE_DEFAULT, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IBASE_TEXT", PHP_IBASE_FETCH_BLOBS, CONST_PERSISTENT); /* deprecated, for BC only */

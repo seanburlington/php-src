@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.23 2002/11/04 17:53:04 helly Exp $
+dnl $Id: config.m4,v 1.24 2002/11/05 12:03:01 helly Exp $
 dnl
 
 AC_DEFUN(PHP_TEMP_LDFLAGS,[
@@ -215,6 +215,7 @@ AC_ARG_WITH(cdb,
 [  --with-cdb[=DIR]        Include CDB support],[
   if test "$withval" = "yes"; then
     PHP_ADD_BUILD_DIR($ext_builddir/libcdb)
+    AC_DEFINE(DBA_CDB_BUILTIN, 1, [ ])
     AC_DEFINE(DBA_CDB_MAKE, 1, [ ])
     AC_DEFINE(DBA_CDB, 1, [ ])
     cdb_sources="libcdb/cdb.c libcdb/cdb_make.c libcdb/uint32.c"

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.9 2003/03/01 17:27:23 wez Exp $ */
+/* $Id: plain_wrapper.c,v 1.10 2003/03/15 13:29:56 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -487,7 +487,7 @@ static int php_stdiop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)
 					data->file = fdopen(data->fd, stream->mode);
 				}
 				
-				*ret = data->file;
+				*(FILE**)ret = data->file;
 				data->fd = -1;
 			}
 			return SUCCESS;
@@ -505,7 +505,7 @@ static int php_stdiop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)
 				fflush(data->file);
 			}
 			if (ret) {
-				*ret = (void*)fd;
+				*(int*)ret = fd;
 			}
 			return SUCCESS;
 		default:

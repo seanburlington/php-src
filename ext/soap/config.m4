@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 2003/03/04 23:01:23 wez Exp $
+dnl $Id: config.m4,v 1.6 2003/03/14 01:58:21 alan_k Exp $
 dnl config.m4 for extension soap
 
 PHP_ARG_ENABLE(soap, whether to enable soap support,
@@ -29,4 +29,5 @@ if test "$PHP_SOAP" != "no"; then
   PHP_ADD_INCLUDE($XML2_INCDIR)
   PHP_ADD_LIBRARY_WITH_PATH(xml2,$XML2_LIBDIR,SOAP_SHARED_LIBADD)
   PHP_NEW_EXTENSION(soap, soap.c php_encoding.c php_http.c php_packet_soap.c php_schema.c php_sdl.c php_xml.c, $ext_shared)
+  PHP_SUBST(SOAP_SHARED_LIBADD)
 fi

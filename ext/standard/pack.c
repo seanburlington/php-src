@@ -15,7 +15,7 @@
    | Authors: Chris Schneider <cschneid@relog.ch>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.24 2000/09/10 11:03:32 stas Exp $ */
+/* $Id: pack.c,v 1.25 2000/09/10 13:34:03 stas Exp $ */
 
 #include "php.h"
 
@@ -302,6 +302,10 @@ PHP_FUNCTION(pack)
 				convert_to_string_ex(val);
 				v = (*val)->value.str.val;
 				outputpos--;
+				if(arg > (*val)->value.str.len) {
+					php_error(E_WARNING,"pack type %c: not enough characters in string",code);
+					arg = (*val)->value.str.len;
+				}
 
 				while (arg-- > 0) {
 					char n = *(v++);

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.287 2003/07/27 17:05:56 helly Exp $ */
+/* $Id: pgsql.c,v 1.288 2003/07/27 17:44:20 helly Exp $ */
 
 #include <stdlib.h>
 
@@ -343,7 +343,7 @@ static int _rollback_transactions(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 		PQclear(res);
 	}
 #if HAVE_PGTRANSACTIONSTATUS && HAVE_PQPROTOCOLVERSION
-	if ((PQprotocolVersion(link) >= 3 && PQtransactionStatus(link) != PQTRANS_IDLE) || (PQprotocolVersion(link) < 3)
+	if ((PQprotocolVersion(link) >= 3 && PQtransactionStatus(link) != PQTRANS_IDLE) || PQprotocolVersion(link) < 3)
 #endif
 	{
 		orig = PGG(ignore_notices);

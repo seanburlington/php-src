@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.38 2000/05/18 15:34:35 zeev Exp $ */
+/* $Id: datetime.c,v 1.39 2000/05/26 17:04:02 hholzgra Exp $ */
 
 
 #include "php.h"
@@ -677,11 +677,17 @@ void _php_strftime(INTERNAL_FUNCTION_PARAMETERS, int gm)
 	efree(buf);
 	RETURN_FALSE;
 }
+#endif
+
 /* {{{ proto string strftime(string format [, int timestamp])
    Format a local time/date according to locale settings */
 PHP_FUNCTION(strftime)
 {
+#if HAVE_STRFTIME
 	_php_strftime(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+#else
+    PHP_NOT_IN_THIS_BUILD;
+#endif
 }
 /* }}} */
 
@@ -689,11 +695,14 @@ PHP_FUNCTION(strftime)
    Format a GMT/CUT time/date according to locale settings */
 PHP_FUNCTION(gmstrftime)
 {
+#if HAVE_STRFTIME
 	_php_strftime(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
+#else
+    PHP_NOT_IN_THIS_BUILD;
+#endif
 }
 /* }}} */
 
-#endif
 
 /* {{{ proto int strtotime(string time, int now)
    Convert string representation of date and time to a timestamp */

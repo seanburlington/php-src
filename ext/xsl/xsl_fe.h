@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xsl_fe.h,v 1.3 2003/06/10 20:03:40 imajes Exp $ */
+/* $Id: xsl_fe.h,v 1.4 2003/11/21 12:21:35 chregu Exp $ */
 
 #ifndef XSL_FE_H
 #define XSL_FE_H
@@ -31,5 +31,5 @@ PHP_FUNCTION(xsl_xsltprocessor_transform_to_xml);
 PHP_FUNCTION(xsl_xsltprocessor_set_parameter);
 PHP_FUNCTION(xsl_xsltprocessor_get_parameter);
 PHP_FUNCTION(xsl_xsltprocessor_remove_parameter);
-
+PHP_FUNCTION(xsl_xsltprocessor_has_exslt_support);
 #endif

@@ -1,7 +1,7 @@
 <?php
 /* This file is part of PHP test framework for ext/sybase_ct
  *
- * $Id: index.php,v 1.2 2005/02/06 14:06:21 thekid Exp $
+ * $Id: index.php,v 1.3 2005/02/06 14:08:11 thekid Exp $
  */
 
   // {{{ class PHPTExpectancy
@@ -80,6 +80,7 @@
         E_WARNING   => 'Warning'
       );
       
+      if (!(error_reporting() & $errno)) return;
       printf(
         "\n%s: %s in %s on line %d\n", 
         $names[$errno], 

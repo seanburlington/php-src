@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.49 2004/10/27 23:12:05 iliaa Exp $ */
+/* $Id: microtime.c,v 1.50 2004/12/30 01:23:44 iliaa Exp $ */
 
 #include "php.h"
 
@@ -93,7 +93,7 @@ PHP_FUNCTION(microtime)
 }
 /* }}} */
 
-/* {{{ proto array gettimeofday(void)
+/* {{{ proto array gettimeofday([bool get_as_float])
    Returns the current time as array */
 PHP_FUNCTION(gettimeofday)
 {

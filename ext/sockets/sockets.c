@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.57 2001/07/25 22:03:55 dbeu Exp $ */
+/* $Id: sockets.c,v 1.58 2001/07/30 08:24:34 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -450,7 +450,7 @@ PHP_FUNCTION(socket_fd_set)
 		FD_SET(php_sock->socket, &(php_fd->set));
 		max_fd = php_sock->socket;
 	} else {
-		php_error(E_ERROR, "expecting variable of type array or resource in %s()", get_active_function_name());
+		php_error(E_ERROR, "expecting variable of type array or resource in %s()", get_active_function_name(TSRMLS_C));
 		RETURN_FALSE;
 	}
 
@@ -484,7 +484,7 @@ PHP_FUNCTION(socket_fd_clear)
 		ZEND_FETCH_RESOURCE(php_sock, php_socket*, arg2, -1, le_socket_name, le_socket);
 		FD_CLR(php_sock->socket, &(php_fd->set));
 	} else {
-		php_error(E_ERROR, "expecting variable of type array or resource in %s()", get_active_function_name());
+		php_error(E_ERROR, "expecting variable of type array or resource in %s()", get_active_function_name(TSRMLS_C));
 		RETURN_FALSE;
 	}
 	
@@ -571,7 +571,7 @@ PHP_FUNCTION(socket_select)
 	}
 
 	if (!sets) {
-		php_error(E_ERROR, "expecting atleast one %s in %s()", le_destroy_name, get_active_function_name());
+		php_error(E_ERROR, "expecting atleast one %s in %s()", le_destroy_name, get_active_function_name(TSRMLS_C));
 		RETURN_FALSE;
 	}
 

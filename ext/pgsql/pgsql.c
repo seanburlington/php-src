@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.118 2001/07/30 06:18:01 zeev Exp $ */
+/* $Id: pgsql.c,v 1.119 2001/07/30 08:24:32 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -43,7 +43,7 @@
 #define PGSQL_NUM		1<<1
 #define PGSQL_BOTH		(PGSQL_ASSOC|PGSQL_NUM)
 
-#define CHECK_DEFAULT_LINK(x) if (x == -1) { php_error(E_WARNING, "%s: no PostgreSQL link opened yet", get_active_function_name()); }
+#define CHECK_DEFAULT_LINK(x) if (x == -1) { php_error(E_WARNING, "%s: no PostgreSQL link opened yet", get_active_function_name(TSRMLS_C)); }
 
 /* {{{ pgsql_functions[]
  */

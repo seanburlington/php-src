@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_user.c,v 1.16 2001/07/27 10:16:28 zeev Exp $ */
+/* $Id: mod_user.c,v 1.17 2001/07/30 08:24:34 zeev Exp $ */
 
 #include "php.h"
 #include "php_session.h"
@@ -59,7 +59,7 @@ static zval *ps_call_handler(zval *func, int argc, zval **argv)
 	
 	MAKE_STD_ZVAL(retval);
 	if (call_user_function(EG(function_table), NULL, func, retval, 
-				argc, argv) == FAILURE) {
+				argc, argv TSRMLS_CC) == FAILURE) {
 		zval_ptr_dtor(&retval);
 		retval = NULL;
 	}

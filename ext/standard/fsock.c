@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.73 2001/07/30 06:18:06 zeev Exp $ */
+/* $Id: fsock.c,v 1.74 2001/07/30 08:24:36 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -679,13 +679,14 @@ static int php_sockop_flush(php_stream * stream)
 static int php_sockop_cast(php_stream * stream, int castas, void ** ret)
 {
 	php_sockbuf * sock = (php_sockbuf*)stream->abstract;
+	TSRMLS_FETCH();
 
 	switch(castas)	{
 		case PHP_STREAM_AS_STDIO:
 			if (ret)	{
 				/* DANGER!: data buffered in stream->readbuf will be forgotten! */
 				if (TOREAD(sock) > 0)
-					zend_error(E_WARNING, "%s(): buffered data lost during conversion to FILE*!", get_active_function_name());
+					zend_error(E_WARNING, "%s(): buffered data lost during conversion to FILE*!", get_active_function_name(TSRMLS_C));
 				*ret = fdopen(sock->socket, stream->mode);
 				if (*ret)
 					return SUCCESS;

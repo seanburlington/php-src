@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ii.c,v 1.20 2001/07/30 06:17:54 zeev Exp $ */
+/* $Id: ii.c,v 1.21 2001/07/30 08:24:28 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -191,7 +191,7 @@ static void _close_ii_plink(zend_rsrc_list_entry *rsrc)
 */
 static void _clean_ii_plink(zend_rsrc_list_entry *rsrc)
 {
-	II_LINK *link = (II_LINK *)rsrc->ptr;
+  II_LINK *link = (II_LINK *)rsrc->ptr;
   IIAPI_AUTOPARM autoParm;
   TSRMLS_FETCH();
 

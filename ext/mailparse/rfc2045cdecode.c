@@ -1,4 +1,4 @@
-/* $Id: rfc2045cdecode.c,v 1.2 2001/05/28 10:57:22 wez Exp $ */
+/* $Id: rfc2045cdecode.c,v 1.3 2001/07/30 08:24:29 zeev Exp $ */
 /*
  ** Copyright 1998 - 1999 Double Precision, Inc.  See COPYING for
  ** distribution information.
@@ -28,13 +28,14 @@ void rfc2045_cdecode_start(struct rfc2045 *p,
 			void *miscptr)
 {
 	enum mbfl_no_encoding from = mbfl_no_encoding_8bit;
-	
+	TSRMLS_FETCH();
+
 	if (p->content_transfer_encoding)
 	{
 		from = mbfl_name2no_encoding(p->content_transfer_encoding);
 		if (from == mbfl_no_encoding_invalid)	{
 			zend_error(E_WARNING, "%s(): I don't know how to decode %s transfer encoding!",
-					get_active_function_name(),
+					get_active_function_name(TSRMLS_C),
 					p->content_transfer_encoding);
 			from = mbfl_no_encoding_8bit;
 		}

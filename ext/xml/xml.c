@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.88 2001/07/30 06:18:08 zeev Exp $ */
+/* $Id: xml.c,v 1.89 2001/07/30 08:24:38 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -378,7 +378,7 @@ xml_call_handler(xml_parser *parser, zval *handler, int argc, zval **argv)
 		MAKE_STD_ZVAL(retval);
 		ZVAL_FALSE(retval);
 
-		result = call_user_function(EG(function_table), &parser->object, handler, retval, argc, argv);
+		result = call_user_function(EG(function_table), &parser->object, handler, retval, argc, argv TSRMLS_CC);
 
 		if (result == FAILURE) {
 			zval **method;

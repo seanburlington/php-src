@@ -15,7 +15,7 @@
    | Authors:                                                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: crack.c,v 1.7 2001/07/30 06:17:50 zeev Exp $ */
+/* $Id: crack.c,v 1.8 2001/07/30 08:24:23 zeev Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -61,7 +61,7 @@ PHP_INI_BEGIN()
 	STD_PHP_INI_ENTRY("crack.default_dictionary", NULL, PHP_INI_SYSTEM, OnUpdateString, default_dictionary, zend_crack_globals, crack_globals)
 PHP_INI_END()
 
-long _crack_open_dict(char *dictpath)
+long _crack_open_dict(char *dictpath TSRMLS_DC)
 {
 	PWDICT *pwdict;
 	long resource;
@@ -145,7 +145,7 @@ ZEND_FUNCTION(crack_opendict)
 
 	convert_to_string_ex(dictpath);
 
-	if (-1 == (resource = _crack_open_dict(Z_STRVAL_PP(dictpath)))) {
+	if (-1 == (resource = _crack_open_dict(Z_STRVAL_PP(dictpath) TSRMLS_CC))) {
 		RETURN_FALSE;
 	}
 	
@@ -202,7 +202,7 @@ ZEND_FUNCTION(crack_check)
 				RETURN_FALSE;
 			}
 			if (NULL != CRACKG(default_dictionary) && CRACKG(current_id) == -1) {
-				_crack_open_dict(CRACKG(default_dictionary));
+				_crack_open_dict(CRACKG(default_dictionary) TSRMLS_CC);
 			}
 			id = CRACKG(current_id);
 			break;

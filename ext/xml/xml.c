@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.99 2001/12/11 15:30:52 sebastian Exp $ */
+/* $Id: xml.c,v 1.100 2001/12/14 09:42:39 thies Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -42,6 +42,9 @@
 
 /* Short-term TODO list:
  * - Implement XML_ExternalEntityParserCreate()
+ * - XML_SetCommentHandler
+ * - XML_SetCdataSectionHandler
+ * - XML_SetParamEntityParsing
  */
 
 /* Long-term TODO list:

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.44 2002/02/06 09:51:39 yohgaki Exp $ */
+/* $Id: mbstring.c,v 1.45 2002/02/06 10:03:40 yohgaki Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -1429,7 +1429,6 @@ PHP_FUNCTION(mb_parse_str)
    Returns string in output buffer converted to the http_output encoding */
 PHP_FUNCTION(mb_output_handler)
 {
-/* 	pval **arg_string, **arg_status; */
 	char *arg_string;
 	size_t arg_string_len;
 	long arg_status;

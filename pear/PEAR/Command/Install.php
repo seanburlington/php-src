@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.25 2002/05/14 01:49:18 ssb Exp $
+// $Id: Install.php,v 1.26 2002/05/20 00:17:43 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -142,24 +142,6 @@ More than one package may be specified at once.
     function PEAR_Command_Install(&$ui, &$config)
     {
         parent::PEAR_Command_Common($ui, $config);
-    }
-
-    // }}}
-
-    // {{{ getCommands()
-
-    /**
-     * Return a list of all the commands defined by this class.
-     * @return array list of commands
-     * @access public
-     */
-    function getCommands()
-    {
-        $ret = array();
-        foreach (array_keys($this->commands) as $command) {
-            $ret[$command] = $this->commands[$command]['summary'];
-        }
-        return $ret;
     }
 
     // }}}

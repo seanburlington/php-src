@@ -18,9 +18,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.74 1999/12/14 03:52:12 thies Exp $ */
+/* $Id: string.c,v 1.75 1999/12/18 04:01:15 zeev Exp $ */
 
-/* Synced with php3 revision 1.193 1999-06-16 [ssb] */
+/* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
 #include <stdio.h>
 #include "php.h"

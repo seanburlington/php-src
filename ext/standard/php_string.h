@@ -29,9 +29,9 @@
  */
 
 
-/* $Id: php_string.h,v 1.5 1999/12/14 03:52:12 thies Exp $ */
+/* $Id: php_string.h,v 1.6 1999/12/18 04:01:14 zeev Exp $ */
 
-/* Synced with php3 revision 1.43 1999-06-16 [ssb] */
+/* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
 #ifndef _PHPSTRING_H
 #define _PHPSTRING_H

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: quot_print.c,v 1.3 1999/07/16 13:12:57 zeev Exp $ */
+/* $Id: quot_print.c,v 1.4 1999/12/18 04:01:15 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -34,7 +34,7 @@
 /*
 *  Converting HEX char to INT value
 */
-static char _php3_hex2int(int c)
+static char php_hex2int(int c)
 {
 	if ( isdigit(c) )
 	{
@@ -78,8 +78,8 @@ PHP_FUNCTION(quoted_printable_decode)
     	     ( isdigit((int)str[i+2]) || (str[i+2]<='F' && str[i+2]>='A'))
     	   )
     	{
-    		str[j++] = (_php3_hex2int((int)str[i+1]) << 4 ) 
-    		           + _php3_hex2int((int)str[i+2]);
+    		str[j++] = (php_hex2int((int)str[i+1]) << 4 ) 
+    		           + php_hex2int((int)str[i+2]);
     		i += 3;
     	}
     	else if ( str[i] == 13 )

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.37 1999/12/09 11:24:51 thies Exp $ */
+/* $Id: var.c,v 1.38 1999/12/18 04:01:15 zeev Exp $ */
 
 
 /* {{{ includes 
@@ -409,7 +409,7 @@ int php_var_unserialize(pval **rval, const char **p, const char *max)
 					}
 
 					efree(class_name);
-				} else { /* old php3 data 'o' */
+				} else { /* old php 3.0 data 'o' */
 					ce = &zend_standard_class_def;
 				}
 

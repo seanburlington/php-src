@@ -15,7 +15,7 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: pageinfo.c,v 1.11 1999/12/17 19:51:29 zeev Exp $ */
+/* $Id: pageinfo.c,v 1.12 1999/12/18 04:01:14 zeev Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"
@@ -40,7 +40,7 @@
 
 #include "ext/standard/basic_functions.h"
 
-static void _php3_statpage(void)
+static void php_statpage(void)
 {
 #if !APACHE
 	char *path;
@@ -85,7 +85,7 @@ long php_getuid(void)
 {
 	BLS_FETCH();
 
-	_php3_statpage();
+	php_statpage();
 	return (BG(page_uid));
 }
 
@@ -125,7 +125,7 @@ PHP_FUNCTION(getmyinode)
 {
 	BLS_FETCH();
 
-	_php3_statpage();
+	php_statpage();
 	if (BG(page_inode) < 0) {
 		RETURN_FALSE;
 	} else {
@@ -140,7 +140,7 @@ PHP_FUNCTION(getlastmod)
 {
 	BLS_FETCH();
 
-	_php3_statpage();
+	php_statpage();
 	if (BG(page_mtime) < 0) {
 		RETURN_FALSE;
 	} else {

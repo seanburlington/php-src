@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php_mail.h,v 1.2 1999/12/17 20:55:24 zeev Exp $ */
+/* $Id: php_mail.h,v 1.3 1999/12/18 04:01:14 zeev Exp $ */
 
 #ifndef _MAIL_H
 #define _MAIL_H
@@ -38,7 +38,7 @@ extern zend_module_entry mail_module_entry;
 
 PHP_FUNCTION(mail);
 PHP_MINFO_FUNCTION(mail);
-extern int _php3_mail(char *to, char *subject, char *message, char *headers);
+extern int php_mail(char *to, char *subject, char *message, char *headers);
 
 #else
 #define mail_module_ptr NULL

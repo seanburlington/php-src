@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php_ereg.h,v 1.5 1999/12/17 20:55:24 zeev Exp $ */
+/* $Id: php_ereg.h,v 1.6 1999/12/18 04:01:15 zeev Exp $ */
 
 #ifndef _REG_H
 #define _REG_H
@@ -36,7 +36,7 @@
 extern zend_module_entry regexp_module_entry;
 #define regexp_module_ptr &regexp_module_entry
 
-char *_php3_regreplace(const char *pattern, const char *replace, const char *string, int icase, int extended);
+char *php_reg_replace(const char *pattern, const char *replace, const char *string, int icase, int extended);
 
 PHP_FUNCTION(ereg);
 PHP_FUNCTION(eregi);

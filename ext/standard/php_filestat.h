@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_filestat.h,v 1.3 1999/12/17 20:55:24 zeev Exp $ */
+/* $Id: php_filestat.h,v 1.4 1999/12/18 04:01:14 zeev Exp $ */
 
 #ifndef _FILESTAT_H
 #define _FILESTAT_H
@@ -61,9 +61,9 @@ PHP_FUNCTION(chmod);
 PHP_FUNCTION(touch);
 PHP_FUNCTION(clearstatcache);
 
-extern zend_module_entry php3_filestat_module_entry;
-#define php3_filestat_module_ptr &php3_filestat_module_entry
+extern zend_module_entry php_filestat_module_entry;
+#define php_filestat_module_ptr &php_filestat_module_entry
 
-#define phpext_filestat_ptr php3_filestat_module_ptr
+#define phpext_filestat_ptr php_filestat_module_ptr
 
 #endif /* _FILESTAT_H */

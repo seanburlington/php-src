@@ -26,7 +26,7 @@
    | Authors: Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.h,v 1.3 1999/12/17 19:51:29 zeev Exp $ */
+/* $Id: url.h,v 1.4 1999/12/18 04:01:15 zeev Exp $ */
 
 typedef struct url {
 	char *scheme;
@@ -41,10 +41,10 @@ typedef struct url {
 
 void free_url(url *);
 extern url *url_parse(char *);
-extern int _php3_urldecode(char *, int); /* return value: length of decoded string */
-extern char *_php3_urlencode(char *, int);
+extern int php_url_decode(char *, int); /* return value: length of decoded string */
+extern char *php_url_encode(char *, int);
 extern int php_raw_url_decode(char *, int); /* return value: length of decoded string */
-extern char *_php3_rawurlencode(char *, int);
+extern char *php_raw_url_encode(char *, int);
 
 PHP_FUNCTION(parse_url);
 PHP_FUNCTION(urlencode);

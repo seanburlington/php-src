@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: type.c,v 1.3 1999/12/17 19:51:29 zeev Exp $ */
+/* $Id: type.c,v 1.4 1999/12/18 04:01:15 zeev Exp $ */
 #include "php.h"
 #include "type.h"
 
@@ -24,7 +24,7 @@
  *
  * Note that leading zeroes automatically force a STRING type
  */
-int php3_check_type(char *str)
+int php_check_type(char *str)
 {
 	char *s;
 	int type = IS_LONG;
@@ -51,7 +51,7 @@ int php3_check_type(char *str)
 		return (IS_STRING);
 
 	return (type);
-}								/* php3_check_type */
+}								/* php_check_type */
 
 /*
  * 0 - simple variable
@@ -74,7 +74,7 @@ int php_check_ident_type(char *str)
 	return (GPC_INDEXED_ARRAY);
 }
 
-char *php3_get_ident_index(char *str)
+char *php_get_ident_index(char *str)
 {
 	char *temp;
 	char *s, *t;

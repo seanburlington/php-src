@@ -17,12 +17,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dir.h,v 1.2 1999/12/17 20:55:24 zeev Exp $ */
+/* $Id: php_dir.h,v 1.3 1999/12/18 04:01:14 zeev Exp $ */
 
 #ifndef _PHP_DIR_H
 #define _PHP_DIR_H
-extern zend_module_entry php3_dir_module_entry;
-#define php3_dir_module_ptr &php3_dir_module_entry
+extern zend_module_entry php_dir_module_entry;
+#define php_dir_module_ptr &php_dir_module_entry
 
 /* directory functions */
 extern PHP_MINIT_FUNCTION(dir);
@@ -34,6 +34,6 @@ PHP_FUNCTION(rewinddir);
 PHP_FUNCTION(readdir);
 PHP_FUNCTION(getdir);
 
-#define phpext_dir_ptr php3_dir_module_ptr
+#define phpext_dir_ptr php_dir_module_ptr
 
 #endif /* _PHP_DIR_H */

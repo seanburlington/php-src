@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: datetime.h,v 1.3 1999/07/23 19:51:27 andrey Exp $ */
+/* $Id: datetime.h,v 1.4 1999/12/18 04:01:14 zeev Exp $ */
 
 #ifndef _DATETIME_H
 #define _DATETIME_H
@@ -46,7 +46,7 @@ PHP_FUNCTION(strftime);
 #endif
 PHP_FUNCTION(strtotime);
 
-extern char *php3_std_date(time_t t);
-void _php3_mktime(INTERNAL_FUNCTION_PARAMETERS, int gm);
+extern char *php_std_date(time_t t);
+void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gm);
 
 #endif /* _DATETIME_H */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.16 2004/02/15 10:54:37 rrichards Exp $ */
+/* $Id: xpath.c,v 1.17 2004/02/17 11:13:47 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -85,8 +85,6 @@ int dom_xpath_document_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 	if (ctx) {
 		docp = (xmlDocPtr) ctx->doc;
-	} else {
-		printf("NONE");
 	}
 
 	ALLOC_ZVAL(*retval);

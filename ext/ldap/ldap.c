@@ -22,7 +22,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.58 2000/08/04 17:18:54 sniper Exp $ */
+/* $Id: ldap.c,v 1.59 2000/08/07 03:18:00 hirokawa Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -170,6 +170,9 @@ PHP_MSHUTDOWN_FUNCTION(ldap)
 PHP_MINFO_FUNCTION(ldap)
 {
 	char maxl[32];
+#ifdef LDAP_API_VERSION
+	char ldapapiversion[32];
+#endif
 #if HAVE_NSLDAP
 	char tmp[32];
 	LDAPVersion ver;
@@ -192,9 +195,12 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.58 2000/08/04 17:18:54 sniper Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.59 2000/08/07 03:18:00 hirokawa Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
-
+#ifdef LDAP_API_VERSION
+	snprintf(ldapapiversion, 31, "%ld", LDAP_API_VERSION);
+	php_info_print_table_row(2, "API Version", ldapapiversion);
+#endif
 #if HAVE_NSLDAP
 
 	snprintf(tmp, 31, "%f", SDKVersion/100.0 );
@@ -549,17 +555,29 @@ static void php_ldap_do_search(INTERNAL_FUNCTION_PARAMETERS, int scope)
 
 	/* sizelimit */
 	if(ldap_sizelimit > -1) {
+#if LDAP_API_VERSION < 2004
 		ldap->ld_sizelimit = ldap_sizelimit; 
+#else
+		ldap_set_option(ldap, LDAP_OPT_SIZELIMIT, &ldap_sizelimit);
+#endif
 	}
 
 	/* timelimit */
 	if(ldap_timelimit > -1) {
+#if LDAP_API_VERSION < 2004
 		ldap->ld_timelimit = ldap_timelimit; 
+#else
+		ldap_set_option(ldap, LDAP_OPT_TIMELIMIT, &ldap_timelimit);
+#endif
 	}
 
 	/* deref */
 	if(ldap_deref > -1) {
+#if LDAP_API_VERSION < 2004
 		ldap->ld_deref = ldap_deref; 
+#else
+		ldap_set_option(ldap, LDAP_OPT_DEREF, &ldap_deref);
+#endif
 	}
 
 	/* Run the actual search */	

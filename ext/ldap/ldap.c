@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.154 2004/06/28 22:31:28 iliaa Exp $ */
+/* $Id: ldap.c,v 1.154.2.1 2005/01/05 10:24:40 hyanantha Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -30,7 +30,7 @@
 #endif
 
 /* Additional headers for NetWare */
-#if defined(NETWARE) && (NEW_LIBC)
+#if defined(NETWARE)
 #include <sys/select.h>
 #include <sys/timeval.h>
 #endif
@@ -303,7 +303,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.154 2004/06/28 22:31:28 iliaa Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.154.2.1 2005/01/05 10:24:40 hyanantha Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));

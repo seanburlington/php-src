@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.10 2001/02/06 15:40:32 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.11 2001/02/08 10:14:56 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -72,6 +72,7 @@
 /* True globals, no need for thread safety */
 static int le_link,le_res;
 
+#include <udm_config.h>
 #include <udmsearch.h>
 
 function_entry mnogosearch_functions[] = {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.33 2003/05/16 19:28:17 moriyoshi Exp $ */
+/* $Id: main.c,v 1.512.2.34 2003/05/16 20:33:18 fujimoto Exp $ */
 
 /* {{{ includes
  */
@@ -89,10 +89,6 @@
 #include "php_ticks.h"
 #include "php_logos.h"
 #include "php_streams.h"
-
-#if defined(ZEND_MULTIBYTE) && defined(HAVE_MBSTRING)
-#include "ext/mbstring/mbstring.h"
-#endif /* defined(ZEND_MULTIBYTE) && defined(HAVE_MBSTRING) */
 
 #include "SAPI.h"
 #include "rfc1867.h"

@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.51 2002/06/11 03:55:28 jason Exp $ */
+/* $Id: network.c,v 1.52 2002/07/19 16:22:36 sniper Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 #define MAX_CHUNKS_PER_READ 10
@@ -58,7 +58,7 @@
 #endif
 
 #ifndef HAVE_INET_ATON
-int		 inet_aton(const char *, struct in_addr *);
+int inet_aton(const char *, struct in_addr *);
 #endif
 
 #include "php_network.h"

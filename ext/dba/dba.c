@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.79 2002/12/31 16:06:23 sebastian Exp $ */
+/* $Id: dba.c,v 1.80 2003/01/06 01:08:59 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -260,7 +260,7 @@ static void dba_close_rsrc(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 
 /* {{{ PHP_INI
  */
-ZEND_API ZEND_INI_MH(OnUpdateDefaultHandler)
+ZEND_INI_MH(OnUpdateDefaultHandler)
 {
 	dba_handler *hptr;
 

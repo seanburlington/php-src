@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.102 2001/05/16 18:28:18 sterling Exp $ */
+/* $Id: mod_php4.c,v 1.103 2001/05/23 15:24:53 martin Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -400,6 +400,9 @@ static void init_request_info(SLS_D)
 /* 		&& !auth_type(r) */
 		&& !strcasecmp(getword(r->pool, &authorization, ' '), "Basic")) {
 		tmp = uudecode(r->pool, authorization);
+#ifdef CHARSET_EBCDIC
+		ascii2ebcdic(tmp,tmp,strlen(tmp));
+#endif
 		SG(request_info).auth_user = getword_nulls_nc(r->pool, &tmp, ':');
 		if (SG(request_info).auth_user) {
 			r->connection->user = pstrdup(r->connection->pool,SG(request_info).auth_user);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.18 1999/12/28 18:45:10 sas Exp $ */
+/* $Id: php_mysql.c,v 1.19 1999/12/31 14:06:31 zeev Exp $ */
 
 
 /* TODO:
@@ -1255,9 +1255,7 @@ PHP_FUNCTION(mysql_result)
 			return_value->value.str.val = (char *) safe_estrndup(sql_row[field_offset],return_value->value.str.len);
 		}
 	} else {
-		return_value->value.str.val = undefined_variable_string;
-		return_value->value.str.len=0;
-		return_value->type = IS_STRING;
+		return_value->type = IS_UNSET;
 	}
 	
 	return_value->type = IS_STRING;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.409 2001/10/16 17:08:11 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.410 2001/10/21 07:42:35 rasmus Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -755,6 +755,7 @@ function_entry basic_functions[] = {
 	PHP_FE(array_search,													NULL)
 	PHP_FE(extract,															NULL)
 	PHP_FE(compact,															NULL)
+	PHP_FE(array_init,														NULL)
 	PHP_FE(range,															NULL)
 	PHP_FE(array_multisort,													NULL)
 	PHP_FE(array_push,				first_arg_force_ref)

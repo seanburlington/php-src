@@ -27,7 +27,7 @@
    |          Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
 */
-/* $Id: fsock.h,v 1.14 1999/12/01 17:07:25 sas Exp $ */
+/* $Id: fsock.h,v 1.15 1999/12/03 14:57:29 sas Exp $ */
 
 /* Synced with php3 revision 1.24 1999-06-18 [ssb] */
 
@@ -71,7 +71,7 @@ int _php3_sock_close(int socket);
 size_t _php3_sock_set_def_chunk_size(size_t size);
 int php_msock_destroy(int *data);
 
-PHPAPI int connect_nonb(int sockfd, struct sockaddr *addr, int addrlen, struct timeval *timeout);
+PHPAPI int connect_nonb(int sockfd, struct sockaddr *addr, socklen_t addrlen, struct timeval *timeout);
 
 PHP_MINIT_FUNCTION(fsock);
 PHP_MSHUTDOWN_FUNCTION(fsock);

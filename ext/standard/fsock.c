@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.28 1999/12/01 17:21:52 sas Exp $ */
+/* $Id: fsock.c,v 1.29 1999/12/03 14:57:28 sas Exp $ */
 
 /* Synced with php3 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php3 revision 1.133 1999-07-21 [sas] */
@@ -161,7 +161,7 @@ int _php3_is_persistent_sock(int sock)
 /* {{{ connect_nonb */
 PHPAPI int connect_nonb(int sockfd,
 						struct sockaddr *addr,
-						int addrlen,
+						socklen_t addrlen,
 						struct timeval *timeout)
 {
 /* probably won't work on Win32, someone else might try it (read: fix it ;) */
@@ -174,7 +174,7 @@ PHPAPI int connect_nonb(int sockfd,
 	int flags;
 	int n;
 	int error = 0;
-	int len;
+	socklen_t len;
 	int ret = 0;
 	fd_set rset;
 	fd_set wset;

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2001/06/12 21:15:49 hholzgra Exp $
+dnl $Id: config.m4,v 1.1.2.1 2001/11/18 12:02:34 derick Exp $
 dnl config.m4 for extension ncurses
 
 PHP_ARG_WITH(ncurses, for ncurses support,
@@ -32,7 +32,7 @@ if test "$PHP_NCURSES" != "no"; then
    LIBNAME=ncurses 
    LIBSYMBOL=initscr 
    old_LIBS=$LIBS
-   LIBS="$LIBS -L$NCURSES_DIR/lib -lm -ldl"
+   LIBS="$LIBS -L$NCURSES_DIR/lib -lm"
    AC_CHECK_LIB($LIBNAME, $LIBSYMBOL, [AC_DEFINE(HAVE_NCURSESLIB,1,[ ])],
 				[AC_MSG_ERROR(wrong ncurses lib version or lib not found)])
    LIBS=$old_LIBS

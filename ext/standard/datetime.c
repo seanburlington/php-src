@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.96.2.4 2003/02/03 22:48:35 iliaa Exp $ */
+/* $Id: datetime.c,v 1.96.2.5 2003/02/09 12:28:31 k.schroeder Exp $ */
 
 
 #include "php.h"
@@ -123,7 +123,15 @@ void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gm)
 	*/
 	switch(arg_count) {
 	case 7: /* daylight saving time flag */
+#ifdef PHP_WIN32
+		if (daylight > 0) {
+			ta->tm_isdst = is_dst = Z_LVAL_PP(arguments[6]);
+		} else {
+			ta->tm_isdst = is_dst = 0;
+		}
+#else
 		ta->tm_isdst = is_dst = Z_LVAL_PP(arguments[6]);
+#endif
 		/* fall-through */
 	case 6: /* year */
 		/* special case: 

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.60 2001/04/19 02:32:33 ssb Exp $
+// $Id: DB.php,v 1.61 2001/04/19 21:54:37 ssb Exp $
 //
 // Database independent query interface.
 //
@@ -600,7 +600,7 @@ class DB_result
      */
     function fetchRow($fetchmode = DB_FETCHMODE_DEFAULT, $rownum=null)
     {
-        $res = $this->fetchInto ($arr, $fetchmode, $rownum);
+        $res = $this->fetchInto($arr, $fetchmode, $rownum);
         if ($res !== DB_OK) {
             return $res;
         }
@@ -618,7 +618,7 @@ class DB_result
      */
     function fetchInto(&$arr, $fetchmode = DB_FETCHMODE_DEFAULT, $rownum=null)
     {
-        if ($fetchmode == DB_FETCHMODE_DEFAULT) {
+        if ($fetchmode === DB_FETCHMODE_DEFAULT) {
             $fetchmode = $this->dbh->fetchmode;
         }
         return $this->dbh->fetchInto($this->result, $arr, $fetchmode, $rownum);

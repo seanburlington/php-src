@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.47 2000/10/29 09:14:53 thies Exp $ */
+/* $Id: filestat.c,v 1.48 2000/10/31 18:05:19 zeev Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -324,7 +324,8 @@ PHP_FUNCTION(chown)
 PHP_FUNCTION(chmod)
 {
 	pval **filename, **mode;
-	int ret,imode;
+	int ret;
+	mode_t imode;
 	PLS_FETCH();
 
 	if (ZEND_NUM_ARGS()!=2 || zend_get_parameters_ex(2,&filename,&mode)==FAILURE) {
@@ -341,7 +342,7 @@ PHP_FUNCTION(chmod)
 	if (php_check_open_basedir((*filename)->value.str.val))
 		RETURN_FALSE;
 
-	imode = (*mode)->value.lval;
+	imode = (mode_t) (*mode)->value.lval;
 	/* in safe mode, do not allow to setuid files.
 	   Setuiding files could allow users to gain privileges
 	   that safe mode doesn't give them.

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.18 2000/05/23 08:05:22 fmk Exp $ */
+/* $Id: ftp.c,v 1.19 2000/05/23 10:36:48 fmk Exp $ */
 
 #include "php.h"
 
@@ -37,7 +37,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
-#if HAVE_UINSTD_H
+#ifdef HAVE_UINSTD_H
 #include <unistd.h>
 #endif
 #include <fcntl.h>

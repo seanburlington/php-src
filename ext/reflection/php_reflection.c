@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.32 2003/08/24 15:07:54 helly Exp $ */
+/* $Id: php_reflection.c,v 1.33 2003/08/24 16:35:58 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -357,9 +357,6 @@ static void _function_string(string *str, zend_function *fptr, char* indent TSRM
 
 	string_printf(str, fptr->common.scope ? "%sMethod [ " : "%sFunction [ ", indent);
 	string_printf(str, (fptr->type == ZEND_USER_FUNCTION) ? "<user> " : "<internal> ");
-	if (fptr->common.fn_flags & ZEND_ACC_ALIAS) {
-		string_printf(str, "<alias> ");
-	}
 	if (fptr->common.fn_flags & ZEND_ACC_CTOR) {
 		string_printf(str, "<ctor> ");
 	}
@@ -640,14 +637,6 @@ ZEND_METHOD(reflection_function, isuserdefined)
 	METHOD_NOTSTATIC_NUMPARAMS(0);
 	GET_REFLECTION_OBJECT_PTR(fptr);
 	RETURN_BOOL(fptr->type == ZEND_USER_FUNCTION);
-}
-/* }}} */
-
-/* {{{ proto public bool Reflection_Function::isAlias()
-   Returns whether this method is static */
-ZEND_METHOD(reflection_function, isalias)
-{
-	_function_check_flag(INTERNAL_FUNCTION_PARAM_PASSTHRU, ZEND_ACC_ALIAS);
 }
 /* }}} */
 

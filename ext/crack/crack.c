@@ -15,7 +15,7 @@
    | Authors: Alexander Feldman                                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: crack.c,v 1.21 2003/06/10 20:03:26 imajes Exp $ */
+/* $Id: crack.c,v 1.22 2003/06/12 12:35:19 andrey Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -140,7 +140,7 @@ ZEND_MODULE_INFO_D(crack)
 	DISPLAY_INI_ENTRIES();
 }
 
-/* {{{ proto string crack_opendict(string dictionary)
+/* {{{ proto resource crack_opendict(string dictionary)
    Opens a new cracklib dictionary */
 ZEND_FUNCTION(crack_opendict)
 {
@@ -161,7 +161,7 @@ ZEND_FUNCTION(crack_opendict)
 }
 /* }}} */
 
-/* {{{ proto string crack_closedict([int link_identifier])
+/* {{{ proto bool crack_closedict([resource dictionary])
    Closes an open cracklib dictionary */
 ZEND_FUNCTION(crack_closedict)
 {
@@ -194,7 +194,7 @@ ZEND_FUNCTION(crack_closedict)
 }
 /* }}} */
 
-/* {{{ proto string crack_check([int dictionary,] string password)
+/* {{{ proto bool crack_check([resource dictionary,] string password)
    Performs an obscure check with the given password */
 ZEND_FUNCTION(crack_check)
 {

@@ -17,7 +17,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.36 2002/06/06 07:22:23 cox Exp $
+// $Id: Package.php,v 1.37 2002/06/06 09:05:04 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';
@@ -208,7 +208,7 @@ List all depencies the package has.'
             return $info;
         }
         $data = &PEAR_Command_Package::_infoForDisplaying($info);
-        $this->ui->outputData($data, $command);
+        $this->ui->outputData($data, 'package-info');
     }
 
     /**
@@ -270,7 +270,7 @@ List all depencies the package has.'
                 $info[$key] = preg_replace('/  +/', ' ', $info[$key]);
             }
         }
-        $caption = 'About ' . basename($params[0]);
+        $caption = 'About ' . $info['package'];
         $data = array(
             'caption' => $caption,
             'border' => true);

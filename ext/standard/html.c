@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.103 2005/03/07 19:37:26 iliaa Exp $ */
+/* $Id: html.c,v 1.104 2005/03/08 21:13:03 iliaa Exp $ */
 
 /*
  * HTML entity resources:
@@ -467,6 +467,12 @@ static const struct {
 	{ '<',	"&lt;",		4,	0 },
 	{ '>',	"&gt;",		4,	0 },
 	{ 0, NULL, 0, 0 }
+};
+	
+struct basic_entities_dec {
+	unsigned short charcode;
+	char entity[8];
+	int entitylen;	
 };
 	
 #define MB_RETURN { \
@@ -1211,8 +1217,9 @@ PHP_FUNCTION(htmlspecialchars)
 PHP_FUNCTION(htmlspecialchars_decode)
 {
 	char *str, *new_str, *e, *p;
-	int len, i, new_len;
+	int len, j, i, new_len;
 	long quote_style = ENT_COMPAT;
+	struct basic_entities_dec basic_entities_dec[8];
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &str, &len, &quote_style) == FAILURE) {
 		return;
@@ -1220,37 +1227,51 @@ PHP_FUNCTION(htmlspecialchars_decode)
 
 	new_str = estrndup(str, len);
 	new_len = len;
+	e = new_str + new_len;
 
-	for (i = 0; basic_entities[i].charcode != 0; i++) {
+	if (!(p = memchr(new_str, '&', new_len))) {
+		RETURN_STRINGL(new_str, new_len, 0);
+	}
+
+	for (j = 0, i = 0; basic_entities[i].charcode != 0; i++) {
 		if (basic_entities[i].flags && !(quote_style & basic_entities[i].flags)) {
 			continue;
 		}
-
-		e = new_str + new_len;
-		p = new_str;
-
-		while ((p = php_memnstr(p, basic_entities[i].entity, basic_entities[i].entitylen, e))) {
-			int e_len = basic_entities[i].entitylen - 1;
+		basic_entities_dec[j].charcode = basic_entities[i].charcode;
+		memcpy(basic_entities_dec[j].entity, basic_entities[i].entity, basic_entities[i].entitylen + 1);
+		basic_entities_dec[j].entitylen = basic_entities[i].entitylen;
+		j++;
+	}
+	basic_entities_dec[j].charcode = '&';
+	basic_entities_dec[j].entitylen = sizeof("&amp;") - 1;
+	memcpy(basic_entities_dec[j].entity, "&amp;", sizeof("&amp;"));
+	i = j + 1;
+	
+	do {
+		int l = e - p;
+	
+		for (j = 0; j < i; j++) {
+			if (basic_entities_dec[j].entitylen > l) {
+				continue;
+			}
+			if (!memcmp(p, basic_entities_dec[j].entity, basic_entities_dec[j].entitylen)) {
+				int e_len = basic_entities_dec[j].entitylen - 1;
 		
-			*p++ = basic_entities[i].charcode;
-			memmove(p, p + e_len, (e - p - e_len));
-
-			new_len -= e_len;	
-			e -= e_len;
+				*p++ = basic_entities_dec[j].charcode;
+				memmove(p, p + e_len, (e - p - e_len));
+				e -= e_len;
+				goto done;
+			}
 		}
-	}
-
-	e = new_str + new_len;
-	p = new_str;
-	while ((p = php_memnstr(p, "&amp;", sizeof("&amp;") - 1, e))) {
-		int e_len = sizeof("&amp;") - 2;
-
 		p++;
-		memmove(p, p + e_len, (e - p - e_len));
 
-		new_len -= e_len;	
-		e -= e_len;
-	}
+done:
+		if (p >= e) {
+			break;
+		}
+	} while ((p = memchr(p, '&', (e - p))));
+
+	new_len = e - new_str;
 
 	new_str[new_len] = '\0';
 	RETURN_STRINGL(new_str, new_len, 0);

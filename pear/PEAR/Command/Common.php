@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.16 2002/06/07 08:43:45 cox Exp $
+// $Id: Common.php,v 1.17 2002/10/10 00:51:21 ssb Exp $
 
 require_once "PEAR.php";
 
@@ -194,30 +194,21 @@ class PEAR_Command_Common extends PEAR
         {
             $help = "Options:\n";
             foreach ($this->commands[$command]['options'] as $k => $v) {
+                if (isset($v['arg'])) {
+                    if ($v['arg']{0} == '(') {
+                        $arg = substr($v['arg'], 1, -1);
+                        $sapp = " [$arg]";
+                        $lapp = "[=$arg]";
+                    } else {
+                        $sapp = " $v[arg]";
+                        $lapp = "=$v[arg]";
+                    }
+                }
                 if (isset($v['shortopt'])) {
                     $s = $v['shortopt'];
-                    if (strlen($s) > 1 && $s{1} == ':') {
-                        $argname = '';
-                        $optional = false;
-                        if (strlen($s) > 2 && $s{2} == ':') {
-                            $optional = true;
-                            $argname = substr($s, 3);
-                        } else {
-                            $argname = substr($s, 2);
-                        }
-                        if (empty($argname)) {
-                            $argname = 'arg';
-                        }
-                        if ($optional) {
-                            $help .= "  -$s [$argname], --{$k}[=$argname]\n";
-                        } else {
-                            $help .= "  -$s $argname, --$k=$argname\n";
-                        }
-                    } else {
-                        $help .= "  -$s, --$k\n";
-                    }
+                    $help .= "  -$s$sapp, --$k$lapp\n";
                 } else {
-                    $help .= "  --$k\n";
+                    $help .= "  --$k$lapp\n";
                 }
                 $help .= "        $v[doc]\n";
             }

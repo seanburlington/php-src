@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.107 2000/07/02 23:46:50 sas Exp $ */
+/* $Id: php.h,v 1.108 2000/08/06 04:55:17 rasmus Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -150,6 +150,8 @@ typedef zval pval;
 #else
 # ifndef HAVE_MEMCPY
 #  define memcpy(d, s, n)	bcopy((s), (d), (n))
+# endif
+# ifndef HAVE_MEMMOVE
 #  define memmove(d, s, n)	bcopy ((s), (d), (n))
 # endif
 #endif

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.22 2003/12/15 21:56:55 iliaa Exp $ */
+/* $Id: tidy.c,v 1.23 2003/12/17 16:34:10 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -156,7 +156,6 @@ zend_module_entry tidy_module_entry = {
 ZEND_GET_MODULE(tidy)
 #endif
 
-#if MEMORY_LIMIT
 void *php_tidy_malloc(size_t len)
 {
 	return emalloc(len);
@@ -171,7 +170,7 @@ void php_tidy_free(void *buf)
 {
 	efree(buf);
 }
-#endif
+
 void php_tidy_panic(ctmbstr msg)
 {
 	zend_error(E_ERROR, "Could not allocate memory for tidy! (Reason: %s)", (char *)msg);
@@ -297,11 +296,9 @@ static void tidy_object_new(zend_class_entry *class_type, zend_object_handlers *
 			break;
 
 		case is_doc:
-#if MEMORY_LIMIT
 			tidySetMallocCall(php_tidy_malloc);
 			tidySetReallocCall(php_tidy_realloc);
 			tidySetFreeCall(php_tidy_free);
-#endif
 			tidySetPanicCall(php_tidy_panic);
 
 			intern->ptdoc = emalloc(sizeof(PHPTidyDoc));
@@ -742,7 +739,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Library Version", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.22 2003/12/15 21:56:55 iliaa Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.23 2003/12/17 16:34:10 iliaa Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

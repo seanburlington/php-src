@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.76 2004/01/25 23:53:13 pajoye Exp $
+// $Id: PEAR.php,v 1.77 2004/02/07 04:42:07 cellog Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -38,6 +38,15 @@ if (substr(PHP_OS, 0, 3) == 'WIN') {
     define('OS_WINDOWS', false);
     define('OS_UNIX',    true);
     define('PEAR_OS',    'Unix'); // blatant assumption
+}
+
+// instant backwards compatibility
+if (!defined('PATH_SEPARATOR')) {
+    if (OS_WINDOWS) {
+        define('PATH_SEPARATOR', ';');
+    } else {
+        define('PATH_SEPARATOR', ':');
+    }
 }
 
 $GLOBALS['_PEAR_default_error_mode']     = PEAR_ERROR_RETURN;

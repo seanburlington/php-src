@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.242 2000/08/27 19:42:45 ssb Exp $ */
+/* $Id: basic_functions.c,v 1.243 2000/08/27 22:46:40 rasmus Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -793,8 +793,8 @@ PHP_MINFO_FUNCTION(basic)
 	PHP_MINFO(regex)(ZEND_MODULE_INFO_FUNC_ARGS_PASSTHRU);
 	PHP_MINFO(dl)(ZEND_MODULE_INFO_FUNC_ARGS_PASSTHRU);
 	PHP_MINFO(mail)(ZEND_MODULE_INFO_FUNC_ARGS_PASSTHRU);
-	PHP_MINFO(assert)(ZEND_MODULE_INFO_FUNC_ARGS_PASSTHRU);
 	php_info_print_table_end();
+	PHP_MINFO(assert)(ZEND_MODULE_INFO_FUNC_ARGS_PASSTHRU);
 }
 
 /* {{{ proto int ip2long(string ip_address)

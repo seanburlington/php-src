@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: incomplete_class.c,v 1.22 2004/03/18 16:54:36 dmitry Exp $ */
+/* $Id: incomplete_class.c,v 1.23 2004/03/30 08:56:29 andi Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -42,8 +42,9 @@ static void incomplete_class_message(int error_type TSRMLS_DC)
 		class_name = php_lookup_class_name(EG(This), NULL);
 	}
 	
-	if (!class_name)
-		class_name = estrdup("unknown");
+	if (!class_name) {
+		class_name = estrndup("unknown", sizeof("unknown")-1);
+	}
 	
 	snprintf(buf, sizeof(buf)-1, INCOMPLETE_CLASS_MSG, class_name);
 	

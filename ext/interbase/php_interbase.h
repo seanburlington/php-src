@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.44 2003/08/12 17:41:37 sniper Exp $ */
+/* $Id: php_interbase.h,v 1.45 2003/08/12 18:01:59 abies Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -153,6 +153,9 @@ typedef struct {
 	int in_array_cnt, out_array_cnt;
 	unsigned short dialect;
 	int cursor_open;
+	char statement_type;
+	char *query;
+	int trans_res_id;
 } ibase_query;
 
 typedef struct {

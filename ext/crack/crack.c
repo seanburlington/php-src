@@ -15,7 +15,7 @@
    | Authors:                                                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: crack.c,v 1.8 2001/07/30 08:24:23 zeev Exp $ */
+/* $Id: crack.c,v 1.9 2001/07/31 04:53:46 zeev Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -65,7 +65,6 @@ long _crack_open_dict(char *dictpath TSRMLS_DC)
 {
 	PWDICT *pwdict;
 	long resource;
-	TSRMLS_FETCH();
 
 	if (CRACKG(current_id) != -1) {
 		zend_error(E_WARNING, "Can not use more than one open dictionary with this implementation of libcrack");

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.25 2001/07/30 08:24:41 zeev Exp $ */
+/* $Id: pi3web_sapi.c,v 1.26 2001/07/31 04:53:53 zeev Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -78,7 +78,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.25 2001/07/30 08:24:41 zeev Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.26 2001/07/31 04:53:53 zeev Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -157,13 +157,13 @@ static int sapi_pi3web_header_handler(sapi_header_struct *sapi_header, sapi_head
 
 
 
-static void accumulate_header_length(sapi_header_struct *sapi_header, uint *total_length)
+static void accumulate_header_length(sapi_header_struct *sapi_header, uint *total_length TSRMLS_DC)
 {
 	*total_length += sapi_header->header_len+2;
 }
 
 
-static void concat_header(sapi_header_struct *sapi_header, char **combined_headers_ptr)
+static void concat_header(sapi_header_struct *sapi_header, char **combined_headers_ptr TSRMLS_DC)
 {
 	memcpy(*combined_headers_ptr, sapi_header->header, sapi_header->header_len);
 	*combined_headers_ptr += sapi_header->header_len;
@@ -187,9 +187,9 @@ static int sapi_pi3web_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 
  	if (SG(sapi_headers).send_default_content_type) {
 		sapi_get_default_content_type_header(&default_content_type TSRMLS_CC);
-		accumulate_header_length(&default_content_type, (void *) &total_length);
+		accumulate_header_length(&default_content_type, (void *) &total_length TSRMLS_CC);
 	}
-	zend_llist_apply_with_argument(&SG(sapi_headers).headers, (void (*)(void *, void *)) accumulate_header_length, (void *) &total_length);
+	zend_llist_apply_with_argument(&SG(sapi_headers).headers, (llist_apply_with_arg_func_t) accumulate_header_length, (void *) &total_length TSRMLS_CC);
 
 	/* Generate headers */
 	combined_headers = (char *) emalloc(total_length+1);
@@ -198,7 +198,7 @@ static int sapi_pi3web_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 		concat_header(&default_content_type, (void *) &combined_headers_ptr);
 		sapi_free_header(&default_content_type); /* we no longer need it */
 	}
-	zend_llist_apply_with_argument(&SG(sapi_headers).headers, (void (*)(void *, void *)) concat_header, (void *) &combined_headers_ptr);
+	zend_llist_apply_with_argument(&SG(sapi_headers).headers, (llist_apply_with_arg_func_t) concat_header, (void *) &combined_headers_ptr TSRMLS_CC);
 	*combined_headers_ptr++ = '\r';
 	*combined_headers_ptr++ = '\n';
 	*combined_headers_ptr = 0;

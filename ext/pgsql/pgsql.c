@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.119 2001/07/30 08:24:32 zeev Exp $ */
+/* $Id: pgsql.c,v 1.120 2001/07/31 04:53:49 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -187,10 +187,9 @@ _notice_handler(void *arg, const char *message)
 
 /* {{{ _rollback_transactions
  */
-static int _rollback_transactions(zend_rsrc_list_entry *rsrc)
+static int _rollback_transactions(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	PGconn *link;
-	TSRMLS_FETCH();
 
 	if (rsrc->type != le_plink) 
 		return 0;
@@ -293,7 +292,7 @@ PHP_RINIT_FUNCTION(pgsql)
  */
 PHP_RSHUTDOWN_FUNCTION(pgsql)
 {
-	zend_hash_apply(&EG(persistent_list), (apply_func_t) _rollback_transactions);
+	zend_hash_apply(&EG(persistent_list), (apply_func_t) _rollback_transactions TSRMLS_CC);
 	return SUCCESS;
 }
 /* }}} */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.398 2003/09/26 17:57:13 pollita Exp $ */
+/* $Id: string.c,v 1.399 2003/09/29 02:23:40 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3192,10 +3192,9 @@ static void php_str_replace_common(INTERNAL_FUNCTION_PARAMETERS, int case_sensit
 				SEPARATE_ZVAL(subject_entry);
 				php_str_replace_in_subject(*search, *replace, subject_entry, result, case_sensitivity, (argc > 3) ? &count : NULL);
 			} else {
-				MAKE_STD_ZVAL(result);
-				SEPARATE_ZVAL(subject_entry);
-				*result = **subject_entry;
-				zval_copy_ctor(result);
+				ALLOC_ZVAL(result);
+				ZVAL_ADDREF(*subject_entry);
+				COPY_PZVAL_TO_ZVAL(*result, *subject_entry);
 			}
 			/* Add to return array */
 			switch (zend_hash_get_current_key_ex(Z_ARRVAL_PP(subject), &string_key,

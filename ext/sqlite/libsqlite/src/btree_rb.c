@@ -9,7 +9,7 @@
 **    May you share freely, never taking more than you give.
 **
 *************************************************************************
-** $Id: btree_rb.c,v 1.2 2003/06/06 22:44:56 wez Exp $
+** $Id: btree_rb.c,v 1.3 2003/10/28 04:22:12 iliaa Exp $
 **
 ** This file implements an in-core database using Red-Black balanced
 ** binary trees.
@@ -281,7 +281,7 @@ static char *append_node(char * orig, BtRbNode *pNode, int indent)
 static void print_node(BtRbNode *pNode)
 {
     char * str = append_node(0, pNode, 0);
-    printf(str);
+    printf("%s", str);
 }
 
 /* 

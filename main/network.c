@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.82 2002/10/19 17:05:08 iliaa Exp $ */
+/* $Id: network.c,v 1.83 2002/10/29 14:57:12 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -504,7 +504,7 @@ void php_any_addr(int family, php_sockaddr_storage *addr, unsigned short port)
 		struct sockaddr_in *sin = (struct sockaddr_in *) addr;
 		sin->sin_family = AF_INET;
 		sin->sin_port = htons(port);
-		sin->sin_addr.s_addr = INADDR_ANY;
+		sin->sin_addr.s_addr = htonl(INADDR_ANY);
 		break;
 	}
 	}

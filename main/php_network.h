@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.36 2002/10/14 16:14:18 sebastian Exp $ */
+/* $Id: php_network.h,v 1.37 2002/10/29 14:57:12 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -98,8 +98,13 @@ PHPAPI char *php_socket_strerror(long err, char *buf, size_t bufsize);
 typedef struct sockaddr_storage php_sockaddr_storage;
 #else
 typedef struct {
+#ifdef HAVE_SOCKADDR_LEN
+		unsigned char ss_len;
+		unsigned char ss_family;
+#else
         unsigned short ss_family;
-        char info[256];
+#endif
+        char info[126];
 } php_sockaddr_storage;
 #endif
 

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.392 2002/10/28 02:13:43 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.393 2002/10/29 14:57:12 wez Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -408,6 +408,15 @@ AC_CACHE_CHECK([for struct sockaddr_storage], ac_cv_sockaddr_storage,
 if test "$ac_cv_sockaddr_storage" = yes; then
   AC_DEFINE(HAVE_SOCKADDR_STORAGE,1,[Whether you have struct sockaddr_storage])
 fi
+
+dnl Check if sockaddr data structure includes an "sa_len" member
+AC_CHECK_MEMBER([struct sockaddr.sa_len],
+  [AC_DEFINE(HAVE_SOCKADDR_LEN,1,[Whether sockaddr struct has sa_len])],
+  [],
+[
+#include <sys/types.h>
+#include <sys/socket.h>
+])
 
 dnl Check for IPv6 support
 AC_CACHE_CHECK([for IPv6 support], ac_cv_ipv6_support,

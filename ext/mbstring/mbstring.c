@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.121 2002/10/24 19:09:04 helly Exp $ */
+/* $Id: mbstring.c,v 1.122 2002/10/25 08:31:27 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -993,7 +993,7 @@ PHP_RSHUTDOWN_FUNCTION(mbstring)
 PHP_MINFO_FUNCTION(mbstring)
 {
 	php_info_print_table_start();
-	php_info_print_table_header(2, "Multibyte Support", "enabled");
+	php_info_print_table_row(2, "Multibyte Support", "enabled");
 #if defined(HAVE_MBSTR_JA)
 	php_info_print_table_row(2, "Japanese support", "enabled");	
 #endif

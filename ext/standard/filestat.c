@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.23 2000/02/11 15:59:29 zeev Exp $ */
+/* $Id: filestat.c,v 1.24 2000/02/14 14:18:17 andrei Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -542,7 +542,8 @@ void name(INTERNAL_FUNCTION_PARAMETERS) { \
 		WRONG_PARAM_COUNT; \
 	} \
 	convert_to_string_ex(filename); \
-	php_stat((*filename)->value.str.val, funcnum, return_value); \
+	if ((*filename)->value.str.len) \
+		php_stat((*filename)->value.str.val, funcnum, return_value); \
 }
 
 FileFunction(PHP_FN(fileperms),0)

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.4 2002/03/02 15:44:08 hholzgra Exp $
+dnl $Id: config.m4,v 1.5 2002/03/12 16:44:00 sas Exp $
 dnl
 
 PHP_ARG_ENABLE(ctype, whether to enable ctype functions,
@@ -7,5 +7,5 @@ PHP_ARG_ENABLE(ctype, whether to enable ctype functions,
 
 if test "$PHP_CTYPE" != "no"; then
   AC_DEFINE(HAVE_CTYPE, 1, [ ])
-  PHP_EXTENSION(ctype, $ext_shared)
+  PHP_NEW_EXTENSION(ctype, ctype.c, $ext_shared)
 fi

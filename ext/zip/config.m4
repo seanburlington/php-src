@@ -1,12 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.3 2001/11/30 19:00:10 sniper Exp $
+dnl $Id: config.m4,v 1.4 2002/03/12 16:39:16 sas Exp $
 dnl 
 
 PHP_ARG_WITH(zip,for ZIP support, 
 [  --with-zip[=DIR]        Include ZIP support (requires zziplib >= 0.10.6).])
 
 if test "$PHP_ZIP" != "no"; then
-  PHP_EXTENSION(zip, $ext_shared)
+  PHP_NEW_EXTENSION(zip, zip.c, $ext_shared)
   for i in $PHP_ZIP /usr/local /usr ; do
     if test -f $i/include/zzlib/zziplib.h; then
       ZZIPLIB_DIR=$i

@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer-minus-download.php,v 1.2 2003/11/30 22:00:59 cellog Exp $
+// $Id: Installer-minus-download.php,v 1.3 2003/12/01 01:00:57 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -581,6 +581,8 @@ class PEAR_Installer extends PEAR_Downloader
     {
         // trickiness: initialize here
         parent::PEAR_Downloader($this->ui, $options, $config);
+        $errors = $this->getErrorMsgs();
+        $installpackages = $this->getDownloadedPackages();
         return parent::download($packages);
     }
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.47 2003/07/01 00:49:25 helly Exp $ */
+/* $Id: simplexml.c,v 1.48 2003/07/04 21:58:09 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -177,7 +177,7 @@ next_iter:
 	if (counter == 1) {
 		SEPARATE_ZVAL(&value);
 		zval_dtor(return_value);
-		FREE_ZVAL(return_value);
+		FREE_ZVAL(return_value); 
 		return_value = value;
 	}
 
@@ -715,7 +715,7 @@ sxe_class_name_get(zval *object, char **class_name, zend_uint *class_name_len, i
 
 /* {{{ cast_object()
  */
-static inline void
+static void
 cast_object(zval *object, int type, char *contents TSRMLS_DC)
 {
 	if (contents) {
@@ -727,7 +727,8 @@ cast_object(zval *object, int type, char *contents TSRMLS_DC)
 
 	switch (type) {
 		case IS_STRING:
-			return;
+			convert_to_string(object);
+			break;
 		case IS_BOOL:
 			convert_to_boolean(object);
 			break;
@@ -762,9 +763,8 @@ sxe_object_cast(zval *readobj, zval *writeobj, int type, int should_free TSRMLS_
 	}
 
 	if (sxe->node) {
-		contents = xmlNodeListGetString((xmlDocPtr) sxe->document->ptr, sxe->node->children, 1);
-		if (!xmlIsBlankNode(sxe->node->children) && contents) {
-			cast_object(writeobj, type, NULL TSRMLS_CC);
+		if (sxe->node->children) {
+			contents = xmlNodeListGetString((xmlDocPtr) sxe->document->ptr, sxe->node->children, 1);
 		}
 	} 
 
@@ -1059,7 +1059,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.47 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.48 $");
 	php_info_print_table_end();
 
 }

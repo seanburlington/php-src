@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.56 2000/06/18 16:07:06 jah Exp $ */
+/* $Id: pgsql.c,v 1.57 2000/06/18 16:31:51 eschmid Exp $ */
 
 #include <stdlib.h>
 
@@ -1555,8 +1555,8 @@ PHP_FUNCTION(pg_loimport)
 }
 /* }}} */
 
-/* {{{ proto bool pg_loexport(int objoid, string filename[, resource connection])
-   Emport large object direct to filesystem */
+/* {{{ proto int pg_loexport(int objoid, string filename [, resource connection])
+   Export large object direct to filesystem */
 PHP_FUNCTION(pg_loexport)
 {
 	zval **pgsql_link, **oid_id, **file_out;

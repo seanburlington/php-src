@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.58 2000/06/16 18:23:56 hholzgra Exp $ */
+/* $Id: hw.c,v 1.59 2000/06/18 16:31:51 eschmid Exp $ */
 #ifdef COMPILE_DL_HYPERWAVE
 #include "dl/phpdl.h"
 #endif
@@ -904,7 +904,7 @@ PHP_FUNCTION(hw_connect)
 }
 /* }}} */
 
-/* {{{ proto int hw_pconnect(string host, int port [string username [, string password]])
+/* {{{ proto int hw_pconnect(string host, int port [, string username [, string password]])
    Connect to the Hyperwave server persistent */
 PHP_FUNCTION(hw_pconnect)
 {

@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.14 2001/08/15 21:26:12 chagenbu Exp $
+// $Id: PEAR.php,v 1.15 2001/08/30 15:27:55 cox Exp $
 //
 
 define('PEAR_ERROR_RETURN', 1);
@@ -360,7 +360,6 @@ class PEAR
         // The error is yet a PEAR error object
         if (is_object($message)) {
             $code        = $message->getCode();
-            $mode        = $message->getMode();
             $userinfo    = $message->getUserInfo();
             $error_class = $message->getType();
             $message     = $message->getMessage();

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.106 2003/12/05 03:14:54 wez Exp $ */
+/* $Id: iconv.c,v 1.107 2003/12/05 09:35:21 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2547,6 +2547,7 @@ static php_iconv_err_t php_iconv_stream_filter_unregister_factory(TSRMLS_D)
 	}
 	return PHP_ICONV_ERR_SUCCESS;
 }
+/* }}} */
 /* }}} */
 #endif
 

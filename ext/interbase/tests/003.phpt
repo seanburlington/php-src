@@ -3,7 +3,7 @@ InterBase: misc sql types (may take a while)
 --SKIPIF--
 <?php include("skipif.inc"); ?>
 --FILE--
-<?php /* $Id: 003.phpt,v 1.9 2004/05/21 14:24:34 abies Exp $ */
+<?php /* $Id: 003.phpt,v 1.10 2004/05/30 16:20:25 abies Exp $ */
 
     require("interbase.inc");
     ibase_connect($test_base);
@@ -31,7 +31,7 @@ InterBase: misc sql types (may take a while)
 	@ibase_query("insert into test3 (iter) values (?)", null);
 
     /* if timefmt is not supported, suppress error here */
-    @ibase_timefmt("%m/%d/%Y %H:%M:%S");
+    ini_set('ibase.timestampformat',"%m/%d/%Y %H:%M:%S");
 
     for($iter = 0; $iter < 10; $iter++){
     	/* prepare data  */

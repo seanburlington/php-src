@@ -3,7 +3,7 @@ InterBase: array handling
 --SKIPIF--
 <?php include("skipif.inc"); ?>
 --FILE--
-<?php /* $Id: 007.phpt,v 1.3 2004/05/19 08:54:52 helly Exp $ */
+<?php /* $Id: 007.phpt,v 1.4 2004/05/30 16:20:25 abies Exp $ */
 
 	require("interbase.inc");
 	
@@ -26,7 +26,7 @@ InterBase: array handling
 	ibase_commit();
 
 	/* if timefmt not supported, hide error */
-	@ibase_timefmt("%m/%d/%Y %H:%M:%S");
+	ini_set('ibase.timestampformat',"%m/%d/%Y %H:%M:%S");
 
 	echo "insert\n";
 	

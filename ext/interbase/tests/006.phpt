@@ -3,7 +3,7 @@ InterBase: binding (may take a while)
 --SKIPIF--
 <?php include("skipif.inc"); ?>
 --FILE--
-<?php /* $Id: 006.phpt,v 1.10 2004/05/19 08:54:52 helly Exp $ */
+<?php /* $Id: 006.phpt,v 1.11 2004/05/30 16:20:25 abies Exp $ */
 
 	require("interbase.inc");
 	
@@ -32,7 +32,7 @@ InterBase: binding (may take a while)
 	ibase_commit();
 
 	/* if timefmt not supported, hide error */
-	@ibase_timefmt("%m/%d/%Y %H:%M:%S");
+	ini_set('ibase.timestampformat',"%m/%d/%Y %H:%M:%S");
 
 	echo "insert\n";
 
@@ -54,7 +54,7 @@ InterBase: binding (may take a while)
 			values (?,?,?,?,?,?,?,?,?,?)",
 			$iter, $v_char, $v_date, $v_decimal, $v_double, $v_float,
 			$v_integer, $v_numeric, $v_smallint, $v_varchar);
-		$sel = ibase_query("select * from test6 where iter = $iter");
+		$sel = ibase_query("select * from test6 where iter = ?", $iter);
 
 		$row = ibase_fetch_object($sel);
 		if(substr($row->V_CHAR,0,strlen($v_char)) != $v_char) {

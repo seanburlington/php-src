@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sess_sqlite.c,v 1.4 2003/07/02 00:03:41 sterling Exp $ */
+/* $Id: sess_sqlite.c,v 1.5 2003/07/02 00:04:58 sterling Exp $ */
 
 #include "php.h"
 
@@ -149,7 +149,6 @@ PS_READ_FUNC(sqlite)
 			}
 			break;
 		default:
-			//php_error_docref(NULL TSRMLS_CC, E_WARNING, "SQLite: session read query failed: %s", error);
 			sqlite_freemem(error);
 			error = NULL;
 	}

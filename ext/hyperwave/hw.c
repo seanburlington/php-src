@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.62 2000/07/05 19:47:42 steinm Exp $ */
+/* $Id: hw.c,v 1.63 2000/08/28 13:04:35 steinm Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -3367,7 +3367,7 @@ PHP_FUNCTION(hw_identify) {
 }
 /* }}} */
 
-/* {{{ proto array hw_objrec2array(string objrec)
+/* {{{ proto array hw_objrec2array(string objrec, [array format])
    Returns object array of object record */
 PHP_FUNCTION(hw_objrec2array) {
 	zval **arg1, **arg2;

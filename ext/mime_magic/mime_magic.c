@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.31 2003/08/19 22:13:01 iliaa Exp $ 
+  $Id: mime_magic.c,v 1.32 2003/09/26 07:47:01 hholzgra Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -182,7 +182,7 @@
 
 static int apprentice(void);
 static int ascmagic(unsigned char *, int);
-static int is_tar(unsigned char *, int);
+static int is_tar(unsigned char *, unsigned int);
 static int softmagic(unsigned char *, int);
 static void tryit(unsigned char *, int, int);
 
@@ -576,7 +576,7 @@ static int parse(char *l, int lineno)
 			t = l;
 		if (*t++ != ')') {
 			if(MIME_MAGIC_G(debug))
-				php_error_docref("http://www.php.net/mime_magic" TSRMLS_CC, E_WARNING, ": (%s:%s) missing ')' in indirect offset", MIME_MAGIC_G(magicfile), lineno);
+				php_error_docref("http://www.php.net/mime_magic" TSRMLS_CC, E_WARNING, ": (%s:%d) missing ')' in indirect offset", MIME_MAGIC_G(magicfile), lineno);
 		}
 		l = t;
     }
@@ -1460,7 +1460,7 @@ static int ascmagic(unsigned char *buf, int nbytes)
  * old UNIX tar file, 2 for Unix Std (POSIX) tar file.
  */
 
-static int is_tar(unsigned char *buf, int nbytes)
+static int is_tar(unsigned char *buf, unsigned int nbytes)
 {
     register union record *header = (union record *) buf;
     register int i;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.95 2003/02/28 21:03:36 wez Exp $ */
+/* $Id: network.c,v 1.96 2003/03/01 15:49:06 moriyoshi Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -509,7 +509,7 @@ static void populate_name(
 
 				break;
 
-#if HAVE_IPV6
+#if HAVE_IPV6 && HAVE_INET_NTOP
 			case AF_INET6:
 				buf = (char*)inet_ntop(sa->sa_family, &((struct sockaddr_in6*)sa)->sin6_addr, (char *)&abuf, sizeof(abuf));
 				if (buf) {

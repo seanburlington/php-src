@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.183 2001/08/15 05:21:43 sterling Exp $ */
+/* $Id: file.c,v 1.183.2.1 2001/10/23 11:18:48 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2208,7 +2208,7 @@ PHP_FUNCTION(fgetcsv)
 /* }}} */
 
 
-#if (!defined(PHP_WIN32) && !defined(__BEOS__)) || defined(ZTS)
+#if (!defined(PHP_WIN32) && !defined(__BEOS__) && HAVE_REALPATH) || defined(ZTS)
 /* {{{ proto string realpath(string path)
    Return the resolved path */
 PHP_FUNCTION(realpath)

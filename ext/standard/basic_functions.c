@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.385.2.4 2001/10/11 23:52:05 ssb Exp $ */
+/* $Id: basic_functions.c,v 1.385.2.5 2001/10/23 11:18:46 sniper Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -467,7 +467,7 @@ function_entry basic_functions[] = {
 	PHP_FALIAS(socket_set_timeout, warn_not_available,      NULL)
 #endif
 	PHP_FE(socket_get_status,	NULL)
-#if (!defined(PHP_WIN32) && !defined(__BEOS__)) || defined(ZTS)
+#if (!defined(PHP_WIN32) && !defined(__BEOS__) && HAVE_REALPATH) || defined(ZTS)
 	PHP_FE(realpath,			NULL)
 #else
 	PHP_FALIAS(realpath,		warn_not_available,		NULL)

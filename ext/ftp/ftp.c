@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.12 1999/11/26 16:51:54 sas Exp $ */
+/* $Id: ftp.c,v 1.13 1999/11/27 20:58:33 askalski Exp $ */
 
 #include "php.h"
 
@@ -824,7 +824,7 @@ my_send(int s, void *buf, size_t len)
 		if (sent == -1)
 			return -1;
 
-		buf += sent;
+		buf = (char*) buf + sent;
 		size -= sent;
 	}
 

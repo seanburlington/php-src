@@ -1,8 +1,8 @@
 ===========================================================================
-|  PEAR Coding Standards                                                  |
+|| PEAR Coding Standards                                                 ||
 ===========================================================================
 
-$Id: CODING_STANDARDS,v 1.15 2003/12/19 15:02:15 derick Exp $
+$Id: CODING_STANDARDS,v 1.16 2003/12/19 15:22:43 derick Exp $
 
 This document is no longer maintained, see
 http://pear.php.net/manual/ instead.

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.61 2001/04/19 21:54:37 ssb Exp $
+// $Id: DB.php,v 1.62 2001/04/19 23:56:57 cox Exp $
 //
 // Database independent query interface.
 //
@@ -187,8 +187,8 @@ class DB
         $classname = "DB_${type}";
 
         if (!class_exists($classname)) {
-            return PEAR::raiseError(DB_ERROR_NOT_FOUND,
-                                    null, null, null, null, 'DB_Error', true);
+            return PEAR::raiseError(null, DB_ERROR_NOT_FOUND,
+                                    null, null, null, 'DB_Error', true);
         }
 
         @$obj =& new $classname;
@@ -234,8 +234,8 @@ class DB
 
         $classname = "DB_${type}";
         if (!class_exists($classname)) {
-            return PEAR::raiseError(DB_ERROR_NOT_FOUND,
-                                    null, null, null, null, 'DB_Error', true);
+            return PEAR::raiseError(null, DB_ERROR_NOT_FOUND,
+                                    null, null, null, 'DB_Error', true);
         }
 
         @$obj =& new $classname;

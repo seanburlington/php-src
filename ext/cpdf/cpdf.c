@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.39 2001/12/11 15:28:56 sebastian Exp $ */
+/* $Id: cpdf.c,v 1.40 2001/12/15 14:12:33 hholzgra Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -1131,7 +1131,7 @@ PHP_FUNCTION(cpdf_set_text_pos)
 /* }}} */
 
 /* {{{ proto void cpdf_rotate_text(int pdfdoc, float angle)
-   Sets character spacing */
+   Sets text rotation angle */
 PHP_FUNCTION(cpdf_rotate_text)
 {
 	pval *arg1, *arg2;

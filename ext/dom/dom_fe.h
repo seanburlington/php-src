@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_fe.h,v 1.12 2004/07/18 13:47:44 rrichards Exp $ */
+/* $Id: dom_fe.h,v 1.13 2004/10/03 09:55:29 rrichards Exp $ */
 #ifndef DOM_FE_H
 #define DOM_FE_H
 
@@ -259,6 +259,7 @@ PHP_FUNCTION(dom_string_extend_find_offset32);
 PHP_METHOD(domxpath, __construct);
 PHP_FUNCTION(dom_xpath_register_ns);
 PHP_FUNCTION(dom_xpath_query);
+PHP_FUNCTION(dom_xpath_evaluate);
 #endif
 
 #endif /* DOM_FE_H */

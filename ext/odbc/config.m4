@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.41.2.2 2001/06/01 05:02:32 sniper Exp $
+dnl $Id: config.m4,v 1.41.2.3 2001/06/01 06:26:34 sniper Exp $
 
 dnl
 dnl Figure out which library file to link with for the Solid support.
@@ -366,7 +366,7 @@ AC_ARG_WITH(iodbc,
   fi
   if test "$withval" != "no"; then
     PHP_ADD_LIBRARY_WITH_PATH(iodbc, $withval/lib)
-    PHP_ADD_INCLUDE($withval/include)
+    PHP_ADD_INCLUDE($withval/include, 1)
     ODBC_TYPE=iodbc
     ODBC_INCLUDE=-I$withval/include
     ODBC_LFLAGS=-L$withval/lib

@@ -17,7 +17,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.31 2002/05/25 09:03:19 mj Exp $
+// $Id: Package.php,v 1.32 2002/05/26 17:48:40 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';
@@ -376,7 +376,8 @@ List all depencies the package has.'
         if (is_array($info['release_deps'])) {
             $this->ui->startTable(array('caption' => 'Dependencies for ' . $info['package'],
                                         'border' => true));
-            $this->ui->tableRow(array("Type", "Name", "Relation", "Version"));
+            $this->ui->tableRow(array("Type", "Name", "Relation", "Version"),
+                                array('bold' => true));
 
             foreach ($info['release_deps'] as $d) {
 

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.28.2.3 2002/06/01 18:39:36 dickmann Exp $
+// $Id: Config.php,v 1.28.2.4 2002/06/02 09:57:37 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -156,14 +156,14 @@ class PEAR_Config extends PEAR
             'type' => 'string',
             'default' => '',
             'doc' => '(maintainers) your PEAR account name',
-            'prompt' => 'PEAR username (for package maintainers)',
+            'prompt' => 'PEAR username (for maintainers)',
             'group' => 'Maintainers',
             ),
         'password' => array(
             'type' => 'password',
             'default' => '',
             'doc' => '(maintainers) your PEAR account password',
-            'prompt' => 'PEAR password (for package maintainers)',
+            'prompt' => 'PEAR password (for maintainers)',
             'group' => 'Maintainers',
             ),
         // Advanced

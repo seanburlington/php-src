@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.50 2002/12/31 16:06:40 sebastian Exp $ */
+/* $Id: php_gd.h,v 1.51 2003/01/26 01:15:02 pollita Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -62,6 +62,7 @@ PHP_RSHUTDOWN_FUNCTION(gd);
 
 PHP_FUNCTION(gd_info);
 PHP_FUNCTION(imagearc);
+PHP_FUNCTION(imageellipse);
 PHP_FUNCTION(imagechar);
 PHP_FUNCTION(imagecharup);
 PHP_FUNCTION(imageistruecolor);
@@ -85,17 +86,19 @@ PHP_FUNCTION(imagecreate);
 PHP_FUNCTION(imageftbbox);
 PHP_FUNCTION(imagefttext);
 
+#ifdef HAVE_LIBGD20
 PHP_FUNCTION(imagecreatetruecolor);
 PHP_FUNCTION(imagetruecolortopalette);
 PHP_FUNCTION(imagesetthickness);
-PHP_FUNCTION(imageellipse);
 PHP_FUNCTION(imagefilledellipse);
 PHP_FUNCTION(imagefilledarc);
 PHP_FUNCTION(imagealphablending);
+PHP_FUNCTION(imagecolorallocatealpha);
 PHP_FUNCTION(imagecolorresolvealpha);
 PHP_FUNCTION(imagecolorclosestalpha);
 PHP_FUNCTION(imagecolorexactalpha);
 PHP_FUNCTION(imagecopyresampled);
+#endif
 
 #ifdef HAVE_GD_BUNDLED
 PHP_FUNCTION(imagerotate);

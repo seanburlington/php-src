@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.26 2000/09/08 22:31:21 zeev Exp $ */
+/* $Id: file.h,v 1.27 2000/09/09 11:41:14 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -70,7 +70,7 @@ PHPAPI int php_set_sock_blocking(int socketd, int block);
 PHPAPI int php_file_le_fopen(void);
 PHPAPI int php_file_le_popen(void);
 PHPAPI int php_file_le_socket(void);
-PHPAPI int php_file_le_uploads(void);
 PHPAPI int php_copy_file(char *src, char *dest);
+PHPAPI FILE *php_open_temporary_file(const char *dir, const char *pfx, char **opened_path_p);
 
 #endif /* FILE_H */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.445 2002/04/30 00:16:00 wez Exp $ */
+/* $Id: main.c,v 1.446 2002/04/30 00:17:48 wez Exp $ */
 
 /* {{{ includes
  */
@@ -963,11 +963,6 @@ int php_module_startup(sapi_module_struct *sf)
 
 	REGISTER_INI_ENTRIES();
 
-	if (php_iface_init(TSRMLS_C) == FAILURE) {
-		php_printf("PHP:  Unable to initialize interface subsystem.\n");
-		return FAILURE;
-	}
-	
 	/* initialize stream wrappers registry
 	 * (this uses configuration parameters from php.ini)
 	 */
@@ -1077,7 +1072,6 @@ void php_module_shutdown(TSRMLS_D)
 	zend_shutdown(TSRMLS_C);
 
 	php_shutdown_stream_wrappers(TSRMLS_C);
-	php_iface_shutdown(TSRMLS_C);
 
 	php_shutdown_info_logos();
 	UNREGISTER_INI_ENTRIES();

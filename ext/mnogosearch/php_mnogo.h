@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.h,v $ */
-/* $Id: php_mnogo.h,v 1.19.4.1 2002/12/31 16:34:56 sebastian Exp $ */
+/* $Id: php_mnogo.h,v 1.19.4.2 2003/04/19 05:10:27 sas Exp $ */
 
 /* 
    +----------------------------------------------------------------------+
@@ -27,6 +27,8 @@
 
 #if HAVE_MNOGOSEARCH
 
+#undef HAVE_PGSQL
+#undef HAVE_MYSQL
 #include <udm_config.h>
 #include <udmsearch.h>
 

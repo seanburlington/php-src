@@ -17,10 +17,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.10 2001/09/05 19:47:55 sniper Exp $ */
+/* $Id: php_math.h,v 1.11 2001/12/03 05:12:48 fmk Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H
+
+PHPAPI char *_php_math_number_format(double, int, char , char);
+
 PHP_FUNCTION(sin);
 PHP_FUNCTION(cos);
 PHP_FUNCTION(tan);

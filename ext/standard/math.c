@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.64 2001/09/26 09:21:58 jeroen Exp $ */
+/* $Id: math.c,v 1.65 2001/12/03 05:12:48 fmk Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -30,9 +30,6 @@
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
-
-
-char *_php_math_number_format(double, int, char , char);
 
 /* {{{ proto int abs(int number)
 
@@ -977,7 +974,7 @@ PHP_FUNCTION(base_convert)
 /* }}} */
 /* {{{ _php_math_number_format */
 
-char *_php_math_number_format(double d, int dec, char dec_point, char thousand_sep)
+PHPAPI char *_php_math_number_format(double d, int dec, char dec_point, char thousand_sep)
 {
 	char *tmpbuf, *resbuf;
 	char *s, *t;  /* source, target */

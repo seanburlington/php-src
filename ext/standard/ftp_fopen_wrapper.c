@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.74.2.1 2004/08/16 01:41:17 iliaa Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.74.2.2 2005/02/27 17:08:26 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -645,7 +645,7 @@ php_stream * php_stream_ftp_opendir(php_stream_wrapper *wrapper, char *path, cha
 {
 	php_stream *stream, *reuseid, *datastream = NULL;
 	php_url *resource = NULL;
-	int result, use_ssl, use_ssl_on_data = 0;
+	int result = 0, use_ssl, use_ssl_on_data = 0;
 	char *hoststart = NULL, tmp_line[512];
 	char ip[sizeof("123.123.123.123")];
 	unsigned short portno;

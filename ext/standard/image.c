@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.98.2.4 2005/02/24 20:54:12 helly Exp $ */
+/* $Id: image.c,v 1.98.2.5 2005/02/27 17:08:26 iliaa Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -604,7 +604,7 @@ static struct gfxinfo *php_handle_jpc(php_stream * stream TSRMLS_DC)
 {
 	struct gfxinfo *result = NULL;
 	unsigned short dummy_short;
-	int dummy_int, highest_bit_depth, bit_depth;
+	int highest_bit_depth, bit_depth;
 	unsigned char first_marker_id;
 	unsigned int i;
 

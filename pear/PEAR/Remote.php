@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.29 2002/07/06 14:44:05 dickmann Exp $
+// $Id: Remote.php,v 1.30 2002/07/09 10:52:04 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -290,7 +290,8 @@ class PEAR_Remote extends PEAR
                     ($lastkey + 1) == count($php_val)) {
                     $is_continous = true;
                     reset($php_val);
-                    for ($expect = 0; $expect < count($php_val); $expect++) {
+                    $size = count($php_val);
+                    for ($expect = 0; $expect < $size; $expect++, next($php_val)) {
                         if (key($php_val) !== $expect) {
                             $is_continous = false;
                             break;

@@ -1,4 +1,4 @@
-static const char rcsid[] = "#(@) $Id: queue.c,v 1.1 2001/09/06 04:13:29 danda Exp $";
+static const char rcsid[] = "#(@) $Id: queue.c,v 1.2 2001/10/30 02:33:11 danda Exp $";
 
 /* 
  * Date last modified: Jan 2001
@@ -476,7 +476,7 @@ void *Q_Next(queue *q)
    if(!q)
       return NULL;
 
-   if(q->cursor->next == NULL)
+   if(!q->cursor || q->cursor->next == NULL)
       return NULL;
 
    q->cursor = (node *)q->cursor->next;

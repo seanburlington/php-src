@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.20 2002/11/14 18:54:42 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.21 2002/11/14 19:04:29 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -34,7 +34,7 @@
 ZEND_EXTERN_MODULE_GLOBALS(mbstring)
 
 #ifdef ZTS
-static MUTEX_T mbregex_locale_mutex = NULL;
+MUTEX_T mbregex_locale_mutex = NULL;
 #endif
 
 /*

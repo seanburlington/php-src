@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.29 2004/01/28 22:51:54 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.30 2004/02/23 06:35:18 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -82,6 +82,8 @@ PHP_FUNCTION(mysqli_connect)
 
 	/* clear error */
 	php_mysqli_set_error(mysql_errno(mysql), (char *) mysql_error(mysql) TSRMLS_CC);
+
+	mysql->reconnect = 0;
 
 	mysqli_resource = (MYSQLI_RESOURCE *)ecalloc (1, sizeof(MYSQLI_RESOURCE));
 	mysqli_resource->ptr = (void *)mysql;

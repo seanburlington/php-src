@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_standard.h,v 1.5 1999/06/12 17:50:39 zeev Exp $ */
+/* $Id: php3_standard.h,v 1.6 1999/09/02 11:58:23 thies Exp $ */
 
 #include "basic_functions.h"
 #include "phpmath.h"
@@ -53,7 +53,7 @@
 #include "cyr_convert.h"
 #include "php3_link.h"
 #include "fsock.h"
-#include "image.h"
+#include "php_image.h"
 #include "php3_iptc.h"
 #include "info.h"
 #include "uniqid.h"

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 1999/07/19 20:24:03 andrey Exp $
+dnl $Id: config.m4,v 1.2 1999/12/30 04:07:44 sas Exp $
 dnl config.m4 for extension wddx
 
 AC_MSG_CHECKING(whether to include WDDX support)
@@ -8,7 +8,7 @@ AC_ARG_WITH(wddx,
     if test "${with_xml+set}" != "set" -o "$with_xml" = "no"; then
 	AC_MSG_ERROR(WDDX requires --with-xml)
     else
-        AC_DEFINE(HAVE_WDDX, 1)
+        AC_DEFINE(HAVE_WDDX, 1, [ ])
         AC_MSG_RESULT(yes)
         PHP_EXTENSION(wddx)
     fi

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/09/13 17:17:50 ssb Exp $
+dnl $Id: config.m4,v 1.3 1999/12/30 04:07:27 sas Exp $
 dnl config.m4 for extension gettext
 dnl don't forget to call PHP_EXTENSION(gettext)
 
@@ -31,7 +31,7 @@ AC_ARG_WITH(gettext,
         ],)
     ],)
 
-    AC_DEFINE(HAVE_LIBINTL)
+    AC_DEFINE(HAVE_LIBINTL,,[ ])
     PHP_EXTENSION(gettext)
 
 	EXTRA_LIBS="$EXTRA_LIBS $GETTEXT_LFLAGS $GETTEXT_LIBS"

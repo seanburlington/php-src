@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/07/01 15:39:58 sas Exp $
+dnl $Id: config.m4,v 1.3 1999/12/30 04:07:46 sas Exp $
 
 AC_MSG_CHECKING(whether to include zlib support)
 AC_ARG_WITH(zlib,
@@ -12,7 +12,7 @@ AC_ARG_WITH(zlib,
     yes)
       AC_MSG_RESULT(yes)
       PHP_EXTENSION(zlib)
-      AC_CHECK_LIB(z, gzgets, [AC_DEFINE(HAVE_ZLIB)],
+      AC_CHECK_LIB(z, gzgets, [AC_DEFINE(HAVE_ZLIB,,[ ])],
         [AC_MSG_ERROR(Zlib module requires zlib >= 1.0.9.)])
       AC_ADD_LIBRARY(z)
       ;;
@@ -24,7 +24,7 @@ AC_ARG_WITH(zlib,
         PHP_EXTENSION(zlib)
         old_LIBS=$LIBS
         LIBS="$LIBS -L$withval/lib"
-        AC_CHECK_LIB(z, gzgets, [AC_DEFINE(HAVE_ZLIB)],
+        AC_CHECK_LIB(z, gzgets, [AC_DEFINE(HAVE_ZLIB,,[ ])],
           [AC_MSG_ERROR(Zlib module requires zlib >= 1.0.9.)])
         LIBS=$old_LIBS
         AC_ADD_LIBRARY_WITH_PATH(z, $withval/lib)

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 1999/09/16 15:57:51 askalski Exp $
+dnl $Id: config.m4,v 1.2 1999/12/30 04:07:26 sas Exp $
 dnl config.m4 for extension ftp
 dnl don't forget to call PHP_EXTENSION(ftp)
 
@@ -7,7 +7,7 @@ AC_ARG_WITH(ftp,
 [  --with-ftp              Include FTP support.],
 [
   if test "$withval" != "no"; then
-    AC_DEFINE(HAVE_FTP)
+    AC_DEFINE(HAVE_FTP,,[ ])
     PHP_EXTENSION(ftp)
     AC_MSG_RESULT(yes)
   else

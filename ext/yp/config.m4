@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/09/13 17:17:51 ssb Exp $
+dnl $Id: config.m4,v 1.3 1999/12/30 04:07:45 sas Exp $
 dnl config.m4 for extension yp
 dnl don't forget to call PHP_EXTENSION(yp)
 
@@ -8,13 +8,13 @@ AC_ARG_WITH(yp,
 [
 	if test "$withval" = "yes"; then
 		AC_MSG_RESULT(yes)
-		AC_DEFINE(HAVE_YP)
+		AC_DEFINE(HAVE_YP,,[ ])
 		PHP_EXTENSION(yp)
 		if test `uname` = "SunOS";then
 			release=`uname -r`
 			case "$release" in
 				5*)
-					AC_DEFINE(SOLARIS_YP)
+					AC_DEFINE(SOLARIS_YP,,[ ])
 					;;
 				*)
 					;;

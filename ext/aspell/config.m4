@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/07/12 19:17:53 rasmus Exp $
+dnl $Id: config.m4,v 1.3 1999/12/30 04:07:17 sas Exp $
 
 AC_MSG_CHECKING(for ASPELL support)
 AC_ARG_WITH(aspell,
@@ -17,7 +17,7 @@ AC_ARG_WITH(aspell,
     if test ! -f "$ASPELL_DIR/include/aspell-c.h"; then
       AC_MSG_ERROR(Could not find aspell-c.h in $ASPELL_DIR/include - please copy it manually from the aspell sources to $ASPELL_DIR/include)
     fi
-    AC_DEFINE(HAVE_ASPELL)
+    AC_DEFINE(HAVE_ASPELL,1,[Whether you have aspell])
     AC_MSG_RESULT(yes)
 	PHP_EXTENSION(aspell)
   else

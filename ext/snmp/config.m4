@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.10 1999/12/30 02:59:21 sas Exp $
+dnl $Id: config.m4,v 1.11 1999/12/30 04:07:40 sas Exp $
 
 AC_MSG_CHECKING(for SNMP support)
 AC_ARG_WITH(snmp,
@@ -40,7 +40,7 @@ AC_ARG_WITH(snmp,
       test -d $withval/include/ucd-snmp && SNMP_INCDIR=$withval/include/ucd-snmp
       SNMP_LIBDIR=$withval/lib
     fi
-    AC_DEFINE(HAVE_SNMP)
+    AC_DEFINE(HAVE_SNMP,,[ ])
     if test "$shared" = "yes"; then
       AC_MSG_RESULT(yes (shared))
       SNMP_INCLUDE="-I$SNMP_INCDIR"
@@ -73,7 +73,7 @@ AC_MSG_CHECKING(whether to enable UCD SNMP hack)
 AC_ARG_ENABLE(ucd-snmp-hack,
 [  --enable-ucd-snmp-hack  Enable UCD SNMP hack],[
   if test "$enableval" = "yes" ; then
-    AC_DEFINE(UCD_SNMP_HACK, 1)
+    AC_DEFINE(UCD_SNMP_HACK, 1, [ ])
     AC_MSG_RESULT(yes)
   else
     AC_MSG_RESULT(no)

@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: build2.mk,v 1.2 1999/12/30 03:23:05 sas Exp $
+# $Id: build2.mk,v 1.3 1999/12/30 04:07:16 sas Exp $
 
 include generated_lists
 
@@ -36,7 +36,7 @@ config_h_in = php_config.h.in
 
 acconfig_h_SOURCES = acconfig.h.in $(config_h_files)
 
-targets = $(makefile_in_files) configure $(config_h_in) $(TOUCH_FILES)
+targets = $(TOUCH_FILES) $(makefile_in_files) configure $(config_h_in)
 
 
 all: .deps Zend/Makefile.am TSRM/Makefile.am $(targets)

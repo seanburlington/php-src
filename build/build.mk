@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: build.mk,v 1.1 1999/12/30 02:58:32 sas Exp $ 
+# $Id: build.mk,v 1.2 1999/12/30 04:07:16 sas Exp $ 
 #
 # Makefile to generate build tools
 #
@@ -38,8 +38,7 @@ all: $(STAMP) $(ALWAYS)
 generated_lists:
 	@echo makefile_am_files = Zend/Makefile.am \
 		TSRM/Makefile.am > $@
-	@echo config_h_files = Zend/acconfig.h TSRM/acconfig.h \
-		ext/*/config.h.stub >> $@
+	@echo config_h_files = Zend/acconfig.h TSRM/acconfig.h >> $@
 	@echo config_m4_files = Zend/Zend.m4 TSRM/tsrm.m4 \
 		Zend/acinclude.m4 ext/*/config.m4 sapi/*/config.m4 >> $@
 

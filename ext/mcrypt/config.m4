@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 1999/06/20 18:52:41 sas Exp $
+dnl $Id: config.m4,v 1.5 1999/12/30 04:07:32 sas Exp $
 dnl config.m4 for extension mcrypt
 dnl don't forget to call PHP_EXTENSION(mcrypt)
 
@@ -19,7 +19,7 @@ AC_ARG_WITH(mcrypt,
     AC_ADD_INCLUDE($MCRYPT_DIR/include)
     AC_ADD_LIBRARY_WITH_PATH(mcrypt, $MCRYPT_DIR/lib)
 
-    AC_DEFINE(HAVE_LIBMCRYPT)
+    AC_DEFINE(HAVE_LIBMCRYPT,,[ ])
 
     AC_MSG_RESULT(yes)
     PHP_EXTENSION(mcrypt)

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 1999/12/30 02:59:18 sas Exp $
+dnl $Id: config.m4,v 1.5 1999/12/30 04:07:40 sas Exp $
 dnl config.m4 for extension readline
 dnl don't forget to call PHP_EXTENSION(readline)
 
@@ -24,7 +24,7 @@ AC_ARG_WITH(readline,
 
     AC_MSG_RESULT(yes)
 
-	AC_DEFINE(HAVE_LIBREADLINE, 1)
+	AC_DEFINE(HAVE_LIBREADLINE, 1, [ ])
 	PHP_EXTENSION(readline)
   else
     AC_MSG_RESULT(no)

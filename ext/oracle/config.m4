@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 1999/12/30 02:59:11 sas Exp $
+dnl $Id: config.m4,v 1.6 1999/12/30 04:07:35 sas Exp $
 
 AC_DEFUN(AC_ORACLE_VERSION,[
   AC_MSG_CHECKING([Oracle version])
@@ -146,11 +146,11 @@ AC_ARG_WITH(oracle,
     	else
     	  ORACLE_SHLIBS="$ORACLE_STLIBS"
     	fi
-        AC_DEFINE(HAVE_OCI8)
+        AC_DEFINE(HAVE_OCI8,,[ ])
     	;;
       8.1)
 	ORACLE_SHLIBS="-lclntsh $ORA_SYSLIB"
-	AC_DEFINE(HAVE_OCI8)
+	AC_DEFINE(HAVE_OCI8,,[ ])
 	;;
       *)
   	ORACLE_SHLIBS=
@@ -160,7 +160,7 @@ AC_ARG_WITH(oracle,
     # only using shared libs right now
     ORACLE_LIBS=$ORACLE_SHLIBS
 
-    AC_DEFINE(HAVE_ORACLE)
+    AC_DEFINE(HAVE_ORACLE,,[ ])
 
   fi
 

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.7 1999/12/09 07:15:36 steinm Exp $
+dnl $Id: config.m4,v 1.8 1999/12/30 04:07:38 sas Exp $
 
 AC_MSG_CHECKING(whether to include Pdflib 2.x support)
 AC_ARG_WITH(pdflib,
@@ -16,7 +16,7 @@ echo $withval
       old_LDFLAGS=$LDFLAGS
 		  old_LIBS=$LIBS
 		  LIBS="$LIBS -ltiff -ljpeg -lz"
-      AC_CHECK_LIB(pdf, PDF_close, [AC_DEFINE(HAVE_PDFLIB)],
+      AC_CHECK_LIB(pdf, PDF_close, [AC_DEFINE(HAVE_PDFLIB,,[ ])],
         [AC_MSG_ERROR(pdflib extension requires pdflib 2.x. You may as well need libtiff and libjpeg. In such a case use the options --with-tiff-dir=<DIR> and --with-jpeg-dir=<DIR>)])
       LIBS=$old_LIBS
       LDFLAGS=$old_LDFLAGS
@@ -94,7 +94,7 @@ echo $withval
 
         old_LIBS=$LIBS
         LIBS="$LIBS -L$withval/lib"
-        AC_CHECK_LIB(pdf, PDF_close, [AC_DEFINE(HAVE_PDFLIB) PDFLIB_LIBS="$PDFLIB_LIBS -L$withval/lib -lpdf"],
+        AC_CHECK_LIB(pdf, PDF_close, [AC_DEFINE(HAVE_PDFLIB,,[ ]) PDFLIB_LIBS="$PDFLIB_LIBS -L$withval/lib -lpdf"],
           [AC_MSG_ERROR(pdflib extension requires pdflib 2.x.)])
         LIBS=$old_LIBS
         AC_ADD_LIBRARY_WITH_PATH(pdf, $withval/lib)

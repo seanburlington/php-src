@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.7 1999/12/30 02:59:16 sas Exp $
+dnl $Id: config.m4,v 1.8 1999/12/30 04:07:38 sas Exp $
 
 AC_MSG_CHECKING(for PostgresSQL support)
 AC_ARG_WITH(pgsql,
@@ -37,7 +37,7 @@ AC_ARG_WITH(pgsql,
 
     old_CFLAGS=$CFLAGS
     CFLAGS="$CFLAGS $PGSQL_INCLUDE"
-    AC_DEFINE(HAVE_PGSQL)
+    AC_DEFINE(HAVE_PGSQL,,[ ])
     if test "$shared" = "yes"; then
       AC_MSG_RESULT(yes (shared))
       PGSQL_SHARED="pgsql.la"
@@ -47,7 +47,7 @@ AC_ARG_WITH(pgsql,
       AC_ADD_INCLUDE($PGSQL_INCDIR)
       PGSQL_STATIC="libphpext_pgsql.la"
     fi
-    AC_CHECK_FUNC(PQcmdTuples,AC_DEFINE(HAVE_PQCMDTUPLES))
+    AC_CHECK_FUNC(PQcmdTuples,AC_DEFINE(HAVE_PQCMDTUPLES,,[ ]))
     CFLAGS=$old_CFLAGS
     PHP_EXTENSION(pgsql,$shared)
   else

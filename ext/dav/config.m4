@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 1999/04/21 22:49:15 ssb Exp $
+dnl $Id: config.m4,v 1.2 1999/12/30 04:07:19 sas Exp $
 dnl config.m4 for extension dav
 dnl don't forget to call PHP_EXTENSION(dav)
 
@@ -13,17 +13,17 @@ AC_ARG_WITH(mod-dav,
   else
     if test "$withval" != "no"; then
       AC_MSG_RESULT(yes)
-      AC_DEFINE(HAVE_MOD_DAV, 1)
+      AC_DEFINE(HAVE_MOD_DAV, 1, [Whether you have mod_dav])
       CFLAGS="$CFLAGS -DHAVE_MOD_DAV -I$withval"
       INCLUDES="$INCLUDES -I$withval"
       PHP_EXTENSION(dav)
     else
       AC_MSG_RESULT(no)
-      AC_DEFINE(HAVE_MOD_DAV, 0)
+      AC_DEFINE(HAVE_MOD_DAV, 0, [Whether you have mod_dav])
     fi
   fi
 ],[
   AC_MSG_RESULT(no)
-  AC_DEFINE(HAVE_MOD_DAV, 0)
+  AC_DEFINE(HAVE_MOD_DAV, 0, [Whether you have mod_dav])
 ])
 

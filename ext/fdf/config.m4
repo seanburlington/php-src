@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 1999/12/07 10:49:17 steinm Exp $
+dnl $Id: config.m4,v 1.5 1999/12/30 04:07:22 sas Exp $
 
 AC_MSG_CHECKING(whether to include fdftk support)
 AC_ARG_WITH(fdftk,
@@ -13,7 +13,7 @@ AC_ARG_WITH(fdftk,
       AC_MSG_RESULT(yes)
       PHP_EXTENSION(fdf)
       AC_CHECK_LIB(FdfTk, FDFOpen, [
-        AC_DEFINE(HAVE_FDFLIB)
+        AC_DEFINE(HAVE_FDFLIB,,[ ])
         EXTRA_LIBS="$EXTRA_LIBS -lFdfTk"
       ],[AC_MSG_ERROR(fdftk module requires fdftk 2.0)])
       ;;
@@ -25,7 +25,7 @@ AC_ARG_WITH(fdftk,
         old_LIBS=$LIBS
         LIBS="$LIBS -L$withval/lib"
         AC_CHECK_LIB(FdfTk, FDFOpen, [
-          AC_DEFINE(HAVE_FDFLIB)
+          AC_DEFINE(HAVE_FDFLIB,,[ ])
           EXTRA_LIBS="$EXTRA_LIBS -L$withval/lib -lFdfTk"
         ],[AC_MSG_ERROR(fdftk module requires fdftk lib 2.0.)])
         LIBS=$old_LIBS

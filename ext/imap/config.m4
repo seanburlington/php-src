@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.8 1999/09/16 15:35:48 sas Exp $
+dnl $Id: config.m4,v 1.9 1999/12/30 04:07:29 sas Exp $
 
 AC_MSG_CHECKING(for IMAP support)
 AC_ARG_WITH(imap,
@@ -50,7 +50,7 @@ AC_ARG_WITH(imap,
 		fi
 		AC_ADD_LIBRARY_WITH_PATH($IMAP_LIB, $IMAP_LIBDIR)
 		AC_ADD_INCLUDE($IMAP_INC_DIR)
-		AC_DEFINE(HAVE_IMAP)
+		AC_DEFINE(HAVE_IMAP,,[ ])
 		AC_MSG_RESULT(yes)
 		PHP_EXTENSION(imap)
 	else

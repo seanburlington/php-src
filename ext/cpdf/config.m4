@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/12/09 07:15:34 steinm Exp $
+dnl $Id: config.m4,v 1.3 1999/12/30 04:07:18 sas Exp $
 
 AC_MSG_CHECKING(whether to include cpdflib support)
 AC_ARG_WITH(cpdflib,
@@ -12,7 +12,7 @@ AC_ARG_WITH(cpdflib,
     yes)
       AC_MSG_RESULT(yes)
       PHP_EXTENSION(cpdflib)
-      AC_CHECK_LIB(cpdf, cpdf_open, [AC_DEFINE(HAVE_CPDFLIB)],
+      AC_CHECK_LIB(cpdf, cpdf_open, [AC_DEFINE(HAVE_CPDFLIB,1,[Whether you have cpdflib])],
         [AC_MSG_ERROR(Cpdf module requires cpdflib >= 2.)])
       AC_ADD_LIBRARY(cpdf)
       AC_ADD_LIBRARY(tiff)
@@ -58,7 +58,7 @@ AC_ARG_WITH(cpdflib,
         withval=$old_withval
 
           LIBS="$LIBS -L$withval/lib"
-        AC_CHECK_LIB(cpdf, cpdf_open, [AC_DEFINE(HAVE_CPDFLIB)],
+        AC_CHECK_LIB(cpdf, cpdf_open, [AC_DEFINE(HAVE_CPDFLIB,1,[Whether you have cpdflib])],
           [AC_MSG_ERROR(Cpdflib module requires cpdflib >= 2.)])
         LIBS=$old_LIBS
         AC_ADD_LIBRARY_WITH_PATH(cpdf, $withval/lib)

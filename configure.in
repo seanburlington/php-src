@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.302.2.1 2002/03/18 14:52:41 derick Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.302.2.2 2002/03/22 12:48:28 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1136,7 +1136,7 @@ dnl  fi
     echo "+--------------------------------------------------------------------+"
     echo "| WARNING: Your $APXS script is most likely broken."
     echo "|                                                                    |"
-    echo "| Please go read http://www.php.net/manual/en/faq.build.php#AEN61338 |"
+    echo "| Please go read http://www.php.net/faq.build#faq.build.apxs         |"
     echo "| and make the changes described there and try again.                |"
   fi
 

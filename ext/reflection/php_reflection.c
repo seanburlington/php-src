@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.141 2004/12/25 16:27:27 helly Exp $ */
+/* $Id: php_reflection.c,v 1.142 2004/12/27 11:41:45 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -623,7 +623,7 @@ static void _function_string(string *str, zend_function *fptr, char* indent TSRM
 			string_printf(str, "protected ");
 			break;
 		default:
-		    string_printf(str, "<visibilty error> ");
+		    string_printf(str, "<visibility error> ");
 		    break;
 	}
 
@@ -3542,7 +3542,7 @@ static int add_extension_class(zend_class_entry **pce, int num_args, va_list arg
 			zend_reflection_class_factory(*pce, zclass TSRMLS_CC);
 			add_assoc_zval_ex(class_array, (*pce)->name, (*pce)->name_length + 1, zclass);
 		} else {
-			add_next_index_stringl(class_array, (*pce)->name, (*pce)->name_length + 1, 1);
+			add_next_index_stringl(class_array, (*pce)->name, (*pce)->name_length, 1);
 		}
 	}
 	return ZEND_HASH_APPLY_KEEP;

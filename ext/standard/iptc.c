@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.29 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: iptc.c,v 1.30 2001/07/13 14:35:05 thies Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -351,7 +351,7 @@ PHP_FUNCTION(iptcparse)
 
 		sprintf(key,"%d#%03d",(unsigned int) dataset,(unsigned int) recnum);
 
-		if ((inx + len) > length)
+		if ((len > length) || (inx + len) > length)
 			break;
 
 		if (tagsfound == 0) { /* found the 1st tag - initialize the return array */

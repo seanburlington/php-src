@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.13 2002/04/26 21:26:47 sas Exp $
+dnl $Id: config.m4,v 1.14 2002/05/05 09:40:31 markonen Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 2.0 module support via DSO through APXS)
@@ -57,7 +57,7 @@ AC_ARG_WITH(apxs2,
     INSTALL_IT="$APXS -i -a -n php4 $SAPI_LIBTOOL" 
     ;;
   *darwin*)
-    MH_BUNDLE_FLAGS="-bundle -bundle_loader $APXS_HTTPD"
+    MH_BUNDLE_FLAGS="-bind_at_load -bundle -bundle_loader $APXS_HTTPD"
     PHP_SUBST(MH_BUNDLE_FLAGS)
     PHP_SELECT_SAPI(apache2filter, bundle, sapi_apache2.c apache_config.c php_functions.c)
     SAPI_SHARED=libs/libphp4.so

@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: library.mk,v 1.3 2000/02/16 16:06:12 sas Exp $ 
+# $Id: library.mk,v 1.4 2000/02/22 14:23:45 andrei Exp $ 
 #
 
 LTLIBRARY_OBJECTS = $(LTLIBRARY_SOURCES:.c=.lo)
@@ -32,7 +32,7 @@ $(LTLIBRARY_NAME): $(LTLIBRARY_OBJECTS) $(LTLIBRARY_DEPENDENCIES)
 $(LTLIBRARY_SHARED_NAME): $(LTLIBRARY_OBJECTS) $(LTLIBRARY_DEPENDENCIES)
 	@test -d $(phplibdir) || $(mkinstalldirs) $(phplibdir)
 	$(LINK) -avoid-version -module -rpath $(phplibdir) $(LTLIBRARY_LDFLAGS) $(LTLIBRARY_OBJECTS) $(LTLIBRARY_SHARED_LIBADD)
-	$(SHLIBTOOL) --mode=install install $@ $(phplibdir)
+	$(SHLIBTOOL) --mode=install cp $@ $(phplibdir)
 
 shared:
 	@if test -z '$(LTLIBRARY_SHARED_NAME)'; then \

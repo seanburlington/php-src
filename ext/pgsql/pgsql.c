@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.62 2000/07/02 08:59:44 hirokawa Exp $ */
+/* $Id: pgsql.c,v 1.63 2000/07/05 22:17:30 jah Exp $ */
 
 #include <stdlib.h>
 
@@ -370,6 +370,7 @@ void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 			if (ptr && (type==le_link || type==le_plink)) {
 				return_value->value.lval = PGG(default_link) = link;
 				return_value->type = IS_RESOURCE;
+				zend_list_addref(link);
 				efree(hashed_details);
 				return;
 			} else {
@@ -462,7 +463,7 @@ PHP_FUNCTION(pg_close)
 	}
 	
 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, pgsql_link, id, "PostgreSQL link", le_link, le_plink);
-	zend_list_delete(Z_LVAL_PP(pgsql_link));
+	zend_list_delete(id);
 	RETURN_TRUE;
 }
 /* }}} */

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.22 2001/07/30 10:09:51 sniper Exp $
+dnl $Id: config.m4,v 1.23 2001/08/03 05:17:18 sniper Exp $
 
 PHP_ARG_WITH(informix,for Informix support,
 [  --with-informix[=DIR]   Include Informix support.  DIR is the Informix base
@@ -62,7 +62,7 @@ if test "$PHP_INFORMIX" != "no"; then
       *.o)
         IFX_LIBOBJS="$IFX_LIBOBJS $i"
         PHP_ADD_LIBPATH($ext_builddir, INFORMIX_SHARED_LIBADD)
-        PHP_ADD_LIBRARY_DEFER(phpifx, 1)
+        PHP_ADD_LIBRARY_DEFER(phpifx, 1, INFORMIX_SHARED_LIBADD)
         ;;
       -lm)
         ;;
@@ -70,7 +70,7 @@ if test "$PHP_INFORMIX" != "no"; then
         ;;
       -l*)
         lib=`echo $i | cut -c 3-`
-        PHP_ADD_LIBRARY_DEFER($lib, 1)
+        PHP_ADD_LIBRARY_DEFER($lib, 1, INFORMIX_SHARED_LIBADD)
         ;;
       *.a)
         case "`uname -s 2>/dev/null`" in

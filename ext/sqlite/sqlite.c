@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.152 2005/01/10 07:13:56 helly Exp $ 
+   $Id: sqlite.c,v 1.153 2005/01/10 07:16:25 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1073,7 +1073,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.152 2005/01/10 07:13:56 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.153 2005/01/10 07:16:25 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1593,8 +1593,8 @@ PHP_FUNCTION(sqlite_fetch_column_types)
 		DB_FROM_OBJECT(db, object);
 	} else {
 		if (FAILURE == zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET,
-				ZEND_NUM_ARGS() TSRMLS_CC, "sr", &tbl, &tbl_len, &zdb) && 
-			FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs", &zdb, &tbl, &tbl_len)) {
+				ZEND_NUM_ARGS() TSRMLS_CC, "sr|l", &tbl, &tbl_len, &zdb, &result_type) && 
+			FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs|l", &zdb, &tbl, &tbl_len, &result_type)) {
 			return;
 		}
 		DB_FROM_ZVAL(db, &zdb);

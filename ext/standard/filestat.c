@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.53 2001/02/15 20:33:09 eschmid Exp $ */
+/* $Id: filestat.c,v 1.54 2001/02/21 07:18:28 sas Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -593,7 +593,7 @@ static void php_stat(const char *filename, int type, pval *return_value)
 		add_next_index_long(return_value, stat_sb->st_nlink);
 		add_next_index_long(return_value, stat_sb->st_uid);
 		add_next_index_long(return_value, stat_sb->st_gid);
-#ifdef HAVE_ST_BLKSIZE
+#ifdef HAVE_ST_RDEV
 		add_next_index_long(return_value, stat_sb->st_rdev);
 #else
 		add_next_index_long(return_value, -1);

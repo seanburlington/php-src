@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.141 2001/02/16 13:13:52 eschmid Exp $ */
+/* $Id: file.c,v 1.142 2001/02/21 07:18:28 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1624,8 +1624,10 @@ PHP_NAMED_FUNCTION(php_if_fstat)
 	add_assoc_long ( return_value , "uid" , stat_sb.st_uid );
 	add_assoc_long ( return_value , "gid" , stat_sb.st_gid );
 
-#ifdef HAVE_ST_BLKSIZE
+#ifdef HAVE_ST_RDEV
 	add_assoc_long ( return_value, "rdev" , stat_sb.st_rdev );
+#endif
+#ifdef HAVE_ST_BLKSIZE
 	add_assoc_long ( return_value , "blksize" , stat_sb.st_blksize );
 #endif
 	

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.626 2003/09/06 00:35:21 pollita Exp $ */
+/* $Id: basic_functions.c,v 1.627 2003/09/06 14:52:10 pollita Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -27,7 +27,7 @@
 #include "internal_functions_registry.h"
 #include "php_standard.h"
 #include "php_math.h"
-#include "http.h"
+#include "php_http.h"
 #include "php_incomplete_class.h"
 #include "ext/standard/info.h"
 #include "ext/session/php_session.h"

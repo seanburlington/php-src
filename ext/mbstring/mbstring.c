@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.103 2002/10/16 13:22:57 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.104 2002/10/16 13:27:40 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -654,6 +654,14 @@ static PHP_INI_MH(OnUpdate_mbstring_encoding_translation)
 {
 	if (new_value == NULL) {
 	   return FAILURE;
+	}
+
+	if(!strncasecmp(new_value, "off", sizeof("off"))) {
+		new_value = "0";
+		new_value_length = sizeof("0");
+	} else if(!strncasecmp(new_value, "on", sizeof("on"))) {
+		new_value = "1";
+		new_value_length = sizeof("1");
 	}
 
 	MBSTRG(encoding_translation) =  (zend_bool) atoi(new_value);

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.29.2.4 2003/12/16 21:52:12 andrei Exp $
+dnl $Id: config.m4,v 1.29.2.5 2003/12/16 22:14:55 andrei Exp $
 dnl
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -50,7 +50,7 @@ if test "$PHP_PCRE_REGEX" != "no"; then
     
     AC_DEFINE(HAVE_PCRE, 1, [ ])
     PHP_ADD_INCLUDE($PCRE_INCDIR)
-    PHP_NEW_EXTENSION(pcre, php_pcre.c, $ext_shared,,-DSUPPORT_UTF8 -DLINK_SIZE=2 -DPOSIX_MALLOC_THRESHOLD=10 -DNO_RECURSE)
+    PHP_NEW_EXTENSION(pcre, php_pcre.c, $ext_shared,,-DSUPPORT_UTF8 -DLINK_SIZE=2 -DPOSIX_MALLOC_THRESHOLD=10)
   fi
   PHP_SUBST(PCRE_SHARED_LIBADD)
 fi

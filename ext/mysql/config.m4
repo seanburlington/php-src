@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.48 2002/06/09 10:46:13 sander Exp $
+dnl $Id: config.m4,v 1.49 2002/06/09 11:43:50 imajes Exp $
 dnl
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
@@ -53,13 +53,9 @@ if test "$PHP_MYSQL" != "no"; then
 
   AC_MSG_CHECKING(for MySQL UNIX socket location)
   if test "$PHP_MYSQL_SOCK" != "no"; then
-    if test -r $PHP_MYSQL_SOCK; then
       MYSQL_SOCK=$PHP_MYSQL_SOCK
       AC_DEFINE_UNQUOTED(MYSQL_UNIX_ADDR, "$MYSQL_SOCK", [ ])
       AC_MSG_RESULT([$MYSQL_SOCK])
-    else
-      AC_MSG_RESULT([warning: The specified $PHP_MYSQL_SOCK was not found!])
-    fi
   else 
     PHP_MYSQL_SOCKET_SEARCH
   fi

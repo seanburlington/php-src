@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.101 2000/07/22 04:23:41 david Exp $ */
+/* $Id: file.c,v 1.102 2000/08/03 16:37:35 stas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -75,7 +75,7 @@
 #endif
 
 #if MISSING_FCLOSE_DECL
-extern int fclose();
+extern int fclose(FILE *);
 #endif
 
 #ifdef HAVE_SYS_MMAN_H

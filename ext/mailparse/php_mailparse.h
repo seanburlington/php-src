@@ -17,7 +17,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_mailparse.h,v 1.6 2002/02/28 08:26:20 sebastian Exp $ */
+/* $Id: php_mailparse.h,v 1.7 2002/04/02 16:46:29 wez Exp $ */
 
 #ifndef PHP_MAILPARSE_H
 #define PHP_MAILPARSE_H
@@ -43,6 +43,7 @@ PHP_FUNCTION(mailparse_msg_get_structure);
 PHP_FUNCTION(mailparse_msg_get_part_data);
 PHP_FUNCTION(mailparse_msg_extract_part);
 PHP_FUNCTION(mailparse_msg_extract_part_file);
+PHP_FUNCTION(mailparse_msg_extract_whole_part_file);
 
 PHP_FUNCTION(mailparse_msg_create);
 PHP_FUNCTION(mailparse_msg_free);

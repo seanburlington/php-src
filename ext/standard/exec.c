@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.24 2000/02/11 15:59:29 zeev Exp $ */
+/* $Id: exec.c,v 1.25 2000/02/11 19:16:36 andrei Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -169,7 +169,7 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 	} else {
 		int b, i;
 
-		while ((b = fread(buf, 1, sizeof(buf), fp)) > 0) {
+		while ((b = fread(buf, 1, buflen, fp)) > 0) {
 			for (i = 0; i < b; i++)
 				if (output) (void)PUTC(buf[i]);
 		}
@@ -181,8 +181,6 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 		
 		tmp = php_addslashes(buf, 0, &len, 0);
 		RETVAL_STRINGL(tmp,len,0);
-	} else {
-		RETVAL_STRING(buf,1);
 	}
 	
 	ret = pclose(fp);

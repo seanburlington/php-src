@@ -3,7 +3,7 @@
 // XXX TODO write the config file at the end as for example
 // in 'system' layer
 
-/* $Id: install-pear.php,v 1.8 2003/06/29 20:49:09 cox Exp $ */
+/* $Id: install-pear.php,v 1.9 2003/06/29 20:50:05 cox Exp $ */
 
 $pear_dir = dirname(__FILE__);
 ini_set('include_path', $pear_dir);
@@ -48,7 +48,7 @@ if (!empty($with_dir)) {
     $config->set('data_dir', $with_dir . $ds . 'data', 'default');
     $config->set('test_dir', $with_dir . $ds . 'test', 'default');
 }
-///* Print PEAR Conf (useful for debuging do NOT REMOVE)
+/* Print PEAR Conf (useful for debuging do NOT REMOVE)
 sort($keys);
 foreach ($keys as $key) {
     echo $config->getPrompt($key) . ": " . $config->get($key) . "\n";

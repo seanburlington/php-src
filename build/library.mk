@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: library.mk,v 1.4 2000/02/22 14:23:45 andrei Exp $ 
+# $Id: library.mk,v 1.5 2000/03/30 23:50:15 sas Exp $ 
 #
 
 LTLIBRARY_OBJECTS = $(LTLIBRARY_SOURCES:.c=.lo)
@@ -42,4 +42,4 @@ shared:
 		$(MAKE) 'LIBTOOL=$(SHLIBTOOL)' $(LTLIBRARY_SHARED_NAME); \
 	else \
 		$(MAKE) $(LTLIBRARY_SHARED_NAME); \
-	fi; \
+	fi

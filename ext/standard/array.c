@@ -22,7 +22,7 @@
 */
 
 
-/* $Id: array.c,v 1.199.2.38 2004/11/19 16:58:38 tony2001 Exp $ */
+/* $Id: array.c,v 1.199.2.39 2004/11/28 17:12:59 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3228,6 +3228,7 @@ PHP_FUNCTION(array_reduce)
 	efree(callback_name);
 
 	if (ZEND_NUM_ARGS() > 2) {
+		convert_to_long_ex(initial);
 		result = *initial;
 	} else {
 		MAKE_STD_ZVAL(result);

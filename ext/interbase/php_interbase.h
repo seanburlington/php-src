@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.52 2003/08/16 15:31:06 abies Exp $ */
+/* $Id: php_interbase.h,v 1.53 2003/08/18 00:14:53 abies Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -114,6 +114,7 @@ ZEND_BEGIN_MODULE_GLOBALS(ibase)
 	char *cfg_timeformat;
 	char errmsg[MAX_ERRMSG];
 	long sql_code;
+	HashTable blob_table;
 ZEND_END_MODULE_GLOBALS(ibase)
 
 typedef struct {
@@ -142,10 +143,10 @@ typedef struct {
 } ibase_array;
 
 typedef struct {
-	isc_tr_handle trans_handle; 
-	isc_db_handle link;
-	ISC_QUAD bl_qd;
+	ibase_db_link *link;
 	isc_blob_handle bl_handle;
+	ISC_QUAD bl_qd;
+	unsigned short type;
 } ibase_blob_handle;
 
 typedef struct {
@@ -164,8 +165,8 @@ typedef struct {
 } ibase_query;
 
 typedef struct {
-	isc_db_handle link; /* db link for this result */
-	isc_tr_handle trans;
+	ibase_db_link *link;
+	ibase_trans *trans;
 	isc_stmt_handle stmt;
 	int drop_stmt;
 	XSQLDA *out_sqlda;

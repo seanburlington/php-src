@@ -15,7 +15,7 @@
    | Author: Bjørn Borud - Guardian Networks AS <borud@guardian.no>       |
    +----------------------------------------------------------------------+
  */
-/* $Id: soundex.c,v 1.23 2004/01/08 08:17:34 andi Exp $ */
+/* $Id: soundex.c,v 1.24 2004/06/17 00:17:49 iliaa Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -74,7 +74,7 @@ PHP_FUNCTION(soundex)
 		/* BUG: should also map here accented letters used in non */
 		/* English words or names (also found in English text!): */
 		/* esstsett, thorn, n-tilde, c-cedilla, s-caron, ... */
-		code = toupper(str[i]);
+		code = toupper((int)(unsigned char)str[i]);
 		if (code >= 'A' && code <= 'Z') {
 			if (_small == 0) {
 				/* remember first valid char */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.75 2001/07/31 05:43:50 zeev Exp $ */
+/* $Id: curl.c,v 1.76 2001/08/02 19:25:46 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -418,7 +418,6 @@ static size_t curl_write_header(char *data, size_t size, size_t nmemb, void *ctx
 	}
 	case PHP_CURL_IGNORE:
 		length = size * nmemb;
-
 		break;
 	}
 	

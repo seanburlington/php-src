@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.233 2002/12/04 20:58:03 iliaa Exp $ */
+/* $Id: gd.c,v 1.234 2002/12/04 23:21:30 rasmus Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1422,9 +1422,11 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 			case PHP_GDIMG_TYPE_GD2PART:
 				im = (*func_p)(fp, Z_LVAL_PP(srcx), Z_LVAL_PP(srcy), Z_LVAL_PP(width), Z_LVAL_PP(height));
 				break;
+#ifdef HAVE_GD_XPM
 			case PHP_GDIMG_TYPE_XPM:
 				im = gdImageCreateFromXpm(fn);
 				break;
+#endif
 			default:
 				im = (*func_p)(fp);
 				break;

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.15 2002/04/07 10:38:04 ssb Exp $
+// $Id: Install.php,v 1.16 2002/04/07 14:30:32 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -73,12 +73,12 @@ class PEAR_Command_Install extends PEAR_Command_Common
                              'Upgrades a PEAR package installed in the system');
                 break;
         }
-        $ret[0] = "[-n] [-f] {$ret[0]}";
+        $ret[0] = "[-n] [-f] [-s] [-Z] {$ret[0]}";
         $ret[1] = "{$ret[1]}\n" .
                   "   -f    forces the installation of the package\n".
                   "         when it is already installed\n".
                   "   -n    do not take care of package dependencies\n".
-                  "   -s    soft update: install or upgrade only if needed".
+                  "   -s    soft update: install or upgrade only if needed\n".
                   "   -Z    no compression: download plain .tar files";
         return $ret;
     }

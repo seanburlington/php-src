@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.35 2002/03/16 12:07:27 wez Exp $ */
+/* $Id: network.c,v 1.36 2002/03/16 14:39:51 wez Exp $ */
 
 #define PHP_SOCK_CHUNK_SIZE	8192
 #define MAX_CHUNKS_PER_READ 10
@@ -675,22 +675,24 @@ static size_t php_sockop_read(php_stream *stream, char *buf, size_t count)
 	return ret;
 }
 
-static int php_sockop_close(php_stream *stream)
+static int php_sockop_close(php_stream *stream, int close_handle)
 {
 	php_netstream_data_t *sock = (php_netstream_data_t*)stream->abstract;
 
+	if (close_handle) {
 #if HAVE_OPENSSL_EXT
-	if (sock->ssl_active)	{
-		SSL_shutdown(sock->ssl_handle);
-		sock->ssl_active = 0;
-		SSL_free(sock->ssl_handle);
-		sock->ssl_handle = NULL;
-	}
+		if (sock->ssl_active) {
+			SSL_shutdown(sock->ssl_handle);
+			sock->ssl_active = 0;
+			SSL_free(sock->ssl_handle);
+			sock->ssl_handle = NULL;
+		}
 #endif
-	
-	shutdown(sock->socket, 0);
-	closesocket(sock->socket);
 
+		shutdown(sock->socket, 0);
+		closesocket(sock->socket);
+
+	}
 	if (sock->readbuf)
 		pefree(sock->readbuf, php_stream_is_persistent(stream));
 

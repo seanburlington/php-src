@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.365 2003/03/31 12:08:31 momo Exp $ */
+/* $Id: string.c,v 1.366 2003/03/31 18:56:41 momo Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2331,13 +2331,18 @@ PHPAPI void php_stripslashes(char *str, int *len TSRMLS_DC)
 					l--;
 				}
 				*s++ = *t++;
-			} else if (*t == '\\' && l > 0 && t[1] == '0') {
+			} else if (*t == '\\' && l > 0) {
+				if(t[1] == '0') {
 					*s++='\0';
-					t += 2;
-					if (len != NULL) {
-						(*len)--;
-					}
-					l--;
+					t++;
+				} else {
+					*s++=*(++t);
+				}
+				t++;
+				if (len != NULL) {
+					(*len)--;
+				}
+				l--;
 			} else {
 				*s++ = *t++;
 			}
@@ -2627,6 +2632,10 @@ PHPAPI char *php_addslashes(char *str, int length, int *new_length, int should_f
 				case '\'':
 					*target++ = '\'';
 					*target++ = '\'';
+					break;
+				case '\\':
+					*target++ = '\\';
+					*target++ = '\\';
 					break;
 				default:
 					*target++ = *source;

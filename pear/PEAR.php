@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.43 2002/06/17 13:39:29 cox Exp $
+// $Id: PEAR.php,v 1.44 2002/06/17 14:04:01 cox Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -567,7 +567,7 @@ class PEAR
     }
 
     // }}}
-    // {{{ assertExtension()
+    // {{{ loadExtension()
 
     /**
     * OS independant PHP extension load

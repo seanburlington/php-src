@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.19 2002/06/07 15:06:23 cox Exp $
+  $Id: CLI.php,v 1.20 2002/06/09 16:28:46 cox Exp $
 */
 
 require_once "PEAR.php";
@@ -351,7 +351,7 @@ class PEAR_Frontend_CLI extends PEAR
     // }}}
     // {{{ outputData()
 
-    function outputData($data, $command)
+    function outputData($data, $command = '_default')
     {
         switch ($command)
         {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.44 2000/03/06 18:41:14 ssb Exp $ */
+/* $Id: php_pcre.c,v 1.45 2000/04/05 20:42:59 cmv Exp $ */
 
 /*
 	TODO:
@@ -29,6 +29,7 @@
 #include "php.h"
 #include "php_globals.h"
 #include "php_pcre.h"
+#include "ext/standard/info.h"
 
 #if HAVE_PCRE || HAVE_BUNDLED_PCRE
 
@@ -87,11 +88,9 @@ static void _php_pcre_shutdown_globals(php_pcre_globals *pcre_globals)
 static /* {{{ PHP_MINFO_FUNCTION(pcre) */
 PHP_MINFO_FUNCTION(pcre)
 {
-	php_printf("Perl Compatible Regular Expressions");
-	php_printf("<table cellpadding=5>"
-				"<tr><td>PCRE library version:</td>"
-				"<td>%s</td></tr>"
-				"</table>", pcre_version());
+	php_info_print_table_start();
+	php_info_print_table_row(2, "PCRE Library Version", pcre_version() );
+	php_info_print_table_end();
 }
 /* }}} */
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.417 2002/01/06 13:58:05 edink Exp $ */
+/* $Id: main.c,v 1.418 2002/01/10 16:00:08 derick Exp $ */
 
 /* {{{ includes
  */
@@ -391,8 +391,6 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 				error_type_str = "Parse error";
 				break;
 			case E_NOTICE:
-				error_type_str = "Warning";
-				break;
 			case E_USER_NOTICE:
 				error_type_str = "Notice";
 				break;

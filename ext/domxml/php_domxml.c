@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.113 2002/01/22 18:47:06 jarkol Exp $ */
+/* $Id: php_domxml.c,v 1.114 2002/01/25 07:40:38 derick Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -960,8 +960,10 @@ static zval *php_domobject_new(xmlNodePtr obj, int *found TSRMLS_DC)
 			object_init_ex(wrapper, domxmlcomment_class_entry);
 			rsrc_type = le_domxmlcommentp;
 			content = xmlNodeGetContent(nodep);
-			if (content)
+			if (content) {
+				add_property_long(wrapper, "type", Z_TYPE_P(nodep));
 				add_property_stringl(wrapper, "content", (char *) content, strlen(content), 1);
+			}
 			break;
 		}
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.97.2.4 2005/01/11 20:59:10 moriyoshi Exp $ */
+/* $Id: html.c,v 1.97.2.5 2005/03/06 19:37:17 iliaa Exp $ */
 
 /*
  * HTML entity resources:
@@ -940,9 +940,11 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 						return 0;
 				}
 
-				replaced = php_str_to_str(ret, retlen, entity, entity_length, replacement, replacement_len, &retlen);
-				efree(ret);
-				ret = replaced;
+				if (php_memnstr(ret, entity, entity_length, ret+retlen)) {
+					replaced = php_str_to_str(ret, retlen, entity, entity_length, replacement, replacement_len, &retlen);
+					efree(ret);
+					ret = replaced;
+				}
 			}
 		}
 	}
@@ -954,10 +956,12 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 		
 		replacement[0] = (unsigned char)basic_entities[j].charcode;
 		replacement[1] = '\0';
-		
-		replaced = php_str_to_str(ret, retlen, basic_entities[j].entity, basic_entities[j].entitylen, replacement, 1, &retlen);
-		efree(ret);
-		ret = replaced;
+
+		if (php_memnstr(ret, basic_entities[j].entity, basic_entities[j].entitylen, ret+retlen)) {		
+			replaced = php_str_to_str(ret, retlen, basic_entities[j].entity, basic_entities[j].entitylen, replacement, 1, &retlen);
+			efree(ret);
+			ret = replaced;
+		}
 	}
 
 	/* replace numeric entities & "&amp;" */

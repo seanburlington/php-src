@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.99 2000/03/07 18:05:16 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.100 2000/03/09 17:30:08 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -279,9 +279,6 @@ AC_STRUCT_ST_RDEV
 dnl Checks for types
 AC_TYPE_SIZE_T
 AC_TYPE_UID_T
-dnl This is required for QNX and may be some BSD derived systems
-AC_CHECK_TYPE( uint, unsigned int )
-AC_CHECK_TYPE( ulong, unsigned long )
 
 dnl Checks for library functions.
 AC_FUNC_VPRINTF

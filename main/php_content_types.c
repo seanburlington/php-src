@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_content_types.c,v 1.15 2001/08/05 01:42:44 zeev Exp $ */
+/* $Id: php_content_types.c,v 1.16 2001/08/15 18:01:48 dbeu Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -35,7 +35,7 @@ static sapi_post_entry php_post_entries[] = {
 
 /* {{{ SAPI_POST_READER_FUNC
  */
-SAPI_POST_READER_FUNC(php_default_post_reader)
+SAPI_API SAPI_POST_READER_FUNC(php_default_post_reader)
 {
 	char *data;
 

@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.30 2001/08/06 03:50:52 sas Exp $ */
+/* $Id: php_variables.c,v 1.31 2001/08/15 18:01:48 dbeu Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -191,7 +191,7 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 }
 
 
-SAPI_POST_HANDLER_FUNC(php_std_post_handler)
+SAPI_API SAPI_POST_HANDLER_FUNC(php_std_post_handler)
 {
 	char *var, *val;
 	char *strtok_buf = NULL;

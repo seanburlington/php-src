@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.71 2001/08/05 01:42:44 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.72 2001/08/15 18:01:48 dbeu Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -443,7 +443,7 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr T
 }
 
 
-SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
+SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 {
 	char *boundary;
 	uint boundary_len;

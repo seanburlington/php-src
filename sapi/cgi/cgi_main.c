@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.46 2003/09/02 11:23:57 sas Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.47 2003/09/02 16:16:12 sas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -491,8 +491,16 @@ static int php_cgi_startup(sapi_module_struct *sapi_module)
 
 static int sapi_cgi_get_fd(int *fd TSRMLS_DC)
 {
+#if PHP_FASTCGI
+	FCGX_Request *request = (FCGX_Request *)SG(server_context);
+	
+	*fd = request->ipcFd;
+	if (*fd >= 0) return SUCCESS;
+	return FAILURE;
+#else
 	*fd = STDOUT_FILENO;
 	return SUCCESS;
+#endif
 }
 
 static int sapi_cgi_force_http_10(TSRMLS_D)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.22 2000/10/30 01:09:15 chrisv Exp $ */
+/* $Id: sockets.c,v 1.23 2000/11/06 23:38:15 sas Exp $ */
 
 #include "php.h"
 
@@ -1937,7 +1937,7 @@ PHP_FUNCTION(getsockopt)
 	zval **fd, **level, **optname, **optval;
 	struct linger linger_val;
 	int other_val;
-	int optlen;
+	socklen_t optlen;
 	int ret;
 
 	fd = level = optname = optval = NULL;

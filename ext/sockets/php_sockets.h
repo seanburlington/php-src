@@ -17,10 +17,10 @@
    +----------------------------------------------------------------------+
  */
 
-#ifndef _PHP_SOCKETS_H
-#define _PHP_SOCKETS_H
+#ifndef PHP_SOCKETS_H
+#define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.1 2000/07/03 04:35:57 chrisv Exp $ */
+/* $Id: php_sockets.h,v 1.2 2000/07/03 06:45:07 sas Exp $ */
 
 /* You should tweak config.m4 so this symbol (or some else suitable)
    gets defined.
@@ -99,7 +99,7 @@ typedef struct {
 
 #endif
 
-#endif	/* _PHP_SOCKETS_H */
+#endif	/* PHP_SOCKETS_H */
 
 
 /*

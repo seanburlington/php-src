@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.182 2004/01/08 08:17:53 andi Exp $ */
+/* $Id: SAPI.c,v 1.183 2004/03/09 02:24:02 iliaa Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -657,14 +657,9 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 #else
 				{
 					myuid = php_getuid();
-					result = emalloc(sizeof("WWW-Authenticate: ")+20);
-					newlen = sprintf(result, "WWW-Authenticate: %ld", myuid);	
-					newheader = estrndup(result,newlen);
 					efree(header_line);
-					sapi_header.header = newheader;
-					sapi_header.header_len = newlen;
-					efree(result);
-				} 
+					sapi_header.header_len = spprintf(&sapi_header.header, 0, "WWW-Authenticate: Basic realm=\"%ld\"", myuid);
+				}
 #endif
 			}
 			if (sapi_header.header==header_line) {

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.315 2000/09/08 12:32:29 stas Exp $ */
+/* $Id: main.c,v 1.316 2000/09/08 12:52:05 stas Exp $ */
 
 
 #include <stdio.h>
@@ -317,6 +317,9 @@ PHPAPI int php_printf(const char *format, ...)
 
 	va_start(args, format);
 	size = vsnprintf(buffer, sizeof(buffer), format, args);
+	if(size > sizeof(buffer) - 1) {
+		size = sizeof(buffer) - 1;
+	}
 	ret = PHPWRITE(buffer, size);
 	va_end(args);
 	

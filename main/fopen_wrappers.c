@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.88 2000/09/05 16:36:56 venaas Exp $ */
+/* $Id: fopen_wrappers.c,v 1.89 2000/09/08 12:52:05 stas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -567,6 +567,9 @@ static FILE *php_fopen_url_wrap_http(const char *path, char *mode, int options, 
 	} else {
 		len = snprintf(hdr_line, sizeof(hdr_line),
 					   "Host: %s\r\n", resource->host);
+	}
+	if(len > sizeof(hdr_line) - 1) {
+		len = sizeof(hdr_line) - 1;
 	}
 	if (len > 0) {
 		SOCK_WRITE(hdr_line, *socketd);

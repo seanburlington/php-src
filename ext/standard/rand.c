@@ -19,7 +19,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.43 2001/09/05 21:38:49 sterling Exp $ */
+/* $Id: rand.c,v 1.44 2001/09/05 21:46:44 sterling Exp $ */
 
 #include <stdlib.h>
 
@@ -196,7 +196,7 @@ PHP_FUNCTION(srand)
 {
 	long seed;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l", &seed) == FAILURE)
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &seed) == FAILURE)
 		return;
 
 	php_srand(seed);
@@ -209,7 +209,7 @@ PHP_FUNCTION(mt_srand)
 {
 	long seed;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "l", &seed) == FAILURE) 
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &seed) == FAILURE) 
 		return;
 
 	seedMT(seed TSRMLS_CC);
@@ -254,7 +254,7 @@ PHP_FUNCTION(rand)
 	long number;
 	int  argc = ZEND_NUM_ARGS();
 
-	if (argc != 0 && zend_parse_parameters(argc, "ll", &min, &max) == FAILURE)
+	if (argc != 0 && zend_parse_parameters(argc TSRMLS_CC, "ll", &min, &max) == FAILURE)
 		return;
 
 	number = php_rand();
@@ -275,7 +275,7 @@ PHP_FUNCTION(mt_rand)
 	long number;
 	int  argc = ZEND_NUM_ARGS();
 
-	if (argc != 0 && zend_parse_parameters(argc, "ll", &min, &max) == FAILURE)
+	if (argc != 0 && zend_parse_parameters(argc TSRMLS_CC, "ll", &min, &max) == FAILURE)
 		return;
 
 	/*

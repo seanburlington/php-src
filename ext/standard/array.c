@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.108 2001/04/30 04:06:09 david Exp $ */
+/* $Id: array.c,v 1.109 2001/05/10 16:30:12 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2856,6 +2856,7 @@ PHP_FUNCTION(array_reduce)
 		efree(callback_name);
 		return;
 	}
+	efree(callback_name);
 
 	if (ZEND_NUM_ARGS() > 2)
 		result = *initial;
@@ -2922,6 +2923,7 @@ PHP_FUNCTION(array_filter)
 			efree(callback_name);
 			return;
 		}
+		efree(callback_name);
 	}
 
 	array_init(return_value);
@@ -2994,6 +2996,7 @@ PHP_FUNCTION(array_map)
 		efree(args);
 		return;
 	}
+	efree(callback_name);
 
 	/* Cache array sizes. */
 	array_len = (int*)emalloc((ZEND_NUM_ARGS()-1) * sizeof(int));

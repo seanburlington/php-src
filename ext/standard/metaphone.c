@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: metaphone.c,v 1.22 2002/12/31 16:07:48 sebastian Exp $ */
+/* $Id: metaphone.c,v 1.23 2003/01/18 20:01:46 iliaa Exp $ */
 
 /*
 	Based on CPANs "Text-Metaphone-1.96" by Michael G Schwern <schwern@pobox.com> 
@@ -145,9 +145,7 @@ static char Lookahead(char *word, int how_far)
  * could be one though; or more too). */
 #define Phonize(c)	{ \
 						if (p_idx >= max_buffer_len) { \
-							if (NULL == (*phoned_word = erealloc(*phoned_word, max_buffer_len + 2))) { \
-								return -1; \
-							} \
+							*phoned_word = erealloc(*phoned_word, max_buffer_len + 2); \
 							max_buffer_len += 2; \
 						} \
 						(*phoned_word)[p_idx++] = c; \
@@ -185,13 +183,9 @@ static int metaphone(char *word, int word_len, int max_phonemes, char **phoned_w
 	if (max_phonemes == 0) {	/* Assume largest possible */
 		max_buffer_len = word_len;
 		*phoned_word = emalloc(sizeof(char) * word_len + 1);
-		if (!*phoned_word)
-			return -1;
 	} else {
 		max_buffer_len = max_phonemes;
 		*phoned_word = emalloc(sizeof(char) * max_phonemes + 1);
-		if (!*phoned_word)
-			return -1;
 	}
 
 

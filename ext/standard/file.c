@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.294 2003/01/18 14:10:22 wez Exp $ */
+/* $Id: file.c,v 1.295 2003/01/18 20:01:41 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1495,7 +1495,7 @@ PHP_FUNCTION(fscanf)
 		WRONG_PARAM_COUNT;
 	}
 	args = (zval ***)emalloc(argCount * sizeof(zval **));
-	if (!args || (zend_get_parameters_array_ex(argCount, args) == FAILURE)) {
+	if (zend_get_parameters_array_ex(argCount, args) == FAILURE) {
 		efree( args );
 		WRONG_PARAM_COUNT;
 	}

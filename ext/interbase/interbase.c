@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.91.2.18 2003/08/17 13:26:13 abies Exp $ */
+/* $Id: interbase.c,v 1.91.2.19 2003/08/17 16:43:49 abies Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -624,7 +624,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.18 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.19 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1361,8 +1361,9 @@ static int _php_ibase_bind(XSQLDA *sqlda, zval **b_vars, BIND_BUF *buf, ibase_qu
 							efree(ib_blob);
 							return FAILURE;
 						}
-						ib_blob_id = ib_blob;
-						var->sqldata = (void ISC_FAR *) &ib_blob_id->bl_qd;
+						buf[i].val.qval = ib_blob->bl_qd;
+						var->sqldata = (void ISC_FAR *) &buf[i].val.qval;
+						efree(ib_blob);
 /*
 						_php_ibase_module_error("Invalid blob id string");
 						return FAILURE;
@@ -2698,6 +2699,7 @@ PHP_FUNCTION(ibase_blob_open)
 	
 	RETURN_LONG(zend_list_insert(ib_blob, le_blob));
 }
+/* }}} */
 
 /* {{{ proto bool ibase_blob_add(int blob_id, string data)
    Add data into created blob */

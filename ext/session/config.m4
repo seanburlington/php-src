@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/08/27 21:03:22 sas Exp $
+dnl $Id: config.m4,v 1.3 1999/09/03 17:46:39 sas Exp $
 dnl config.m4 for extension session
 dnl don't forget to call PHP_EXTENSION(session)
 
@@ -23,6 +23,7 @@ AC_ARG_WITH(mm,
 		AC_ADD_INCLUDE($MM_DIR/include)
 		AC_DEFINE(HAVE_LIBMM, 1)
 		MM_RESULT=yes
+		PHP_EXTENSION(ps_mm)
 	fi
 ])
 AC_MSG_RESULT($MM_RESULT)

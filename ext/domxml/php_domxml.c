@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.254 2003/05/13 14:52:36 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.255 2003/06/02 18:57:59 rrichards Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -866,7 +866,7 @@ static void php_xsltstylesheet_set_object(zval *wrapper, void *obj, int rsrc_typ
 
 	MAKE_STD_ZVAL(addr);
 	Z_TYPE_P(addr) = IS_LONG;
-	Z_LVAL_P(addr) = (int) obj;
+	Z_LVAL_P(addr) = (long) obj;
 
 	zend_hash_index_update(Z_OBJPROP_P(wrapper), 0, &handle, sizeof(zval *), NULL);
 	zend_hash_index_update(Z_OBJPROP_P(wrapper), 1, &addr, sizeof(zval *), NULL);
@@ -980,7 +980,7 @@ static void php_xpath_set_context(zval *wrapper, void *obj, int rsrc_type TSRMLS
 
 	MAKE_STD_ZVAL(addr);
 	Z_TYPE_P(addr) = IS_LONG;
-	Z_LVAL_P(addr) = (int) obj;
+	Z_LVAL_P(addr) = (long) obj;
 
 	zend_hash_index_update(Z_OBJPROP_P(wrapper), 0, &handle, sizeof(zval *), NULL);
 	zend_hash_index_update(Z_OBJPROP_P(wrapper), 1, &addr, sizeof(zval *), NULL);
@@ -1035,7 +1035,7 @@ static void php_xmlparser_set_object(zval *wrapper, void *obj, int rsrc_type TSR
 
 	MAKE_STD_ZVAL(addr);
 	Z_TYPE_P(addr) = IS_LONG;
-	Z_LVAL_P(addr) = (int) obj;
+	Z_LVAL_P(addr) = (long) obj;
 
 	zend_hash_index_update(Z_OBJPROP_P(wrapper), 0, &handle, sizeof(zval *), NULL);
 	zend_hash_index_update(Z_OBJPROP_P(wrapper), 1, &addr, sizeof(zval *), NULL);
@@ -1151,7 +1151,7 @@ static void php_dom_set_object(zval *wrapper, void *obj, int rsrc_type TSRMLS_DC
 
 	MAKE_STD_ZVAL(addr);
 	Z_TYPE_P(addr) = IS_LONG;
-	Z_LVAL_P(addr) = (int) obj;
+	Z_LVAL_P(addr) = (long) obj;
 
 	zend_hash_index_update(Z_OBJPROP_P(wrapper), 0, &handle, sizeof(zval *), NULL);
 	zend_hash_index_update(Z_OBJPROP_P(wrapper), 1, &addr, sizeof(zval *), NULL);

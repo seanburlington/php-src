@@ -15,7 +15,7 @@
   | Author: Wez Furlong <wez@thebrainroom.com>                           |
   +----------------------------------------------------------------------+
 
-  $Id: sqlite.c,v 1.17 2003/04/18 19:43:38 helly Exp $ 
+  $Id: sqlite.c,v 1.18 2003/04/19 10:28:45 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -144,7 +144,9 @@ static void real_result_dtor(struct php_sqlite_result *res)
 	for (i = 0; i < res->nrows; i++) {
 		base = i * res->ncolumns;
 		for (j = 0; j < res->ncolumns; j++) {
-			efree(res->table[base + j]);
+			if (res->table[base + j] != NULL) {
+				efree(res->table[base + j]);
+			}
 		}
 	}
 	if (res->table) {
@@ -341,7 +343,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.17 2003/04/18 19:43:38 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.18 2003/04/19 10:28:45 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -464,7 +466,6 @@ PHP_FUNCTION(sqlite_popen)
 	efree(hashkey);
 }
 /* }}} */
-
 
 /* {{{ proto resource sqlite_open(string filename [, int mode, string &errmessage])
    Opens an SQLite database.  Will create the database if it does not exist */
@@ -891,7 +892,7 @@ PHP_FUNCTION(sqlite_field_name)
 			RETURN_FALSE;
 		}
 
-		RETURN_STRING(res->table[field], 1);
+		RETURN_STRING(res->col_names[field], 1);
 	} else {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Field name not available for unbuffered queries");
 		RETURN_FALSE;

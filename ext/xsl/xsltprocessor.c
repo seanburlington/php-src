@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.8 2003/07/07 19:45:24 rrichards Exp $ */
+/* $Id: xsltprocessor.c,v 1.9 2003/08/07 18:38:39 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,7 +147,6 @@ PHP_FUNCTION(xsl_xsltprocessor_import_stylesheet)
 	if ((oldsheetp = (xsltStylesheetPtr)intern->ptr)) { 
 		/* free wrapper */
 		if (((xsltStylesheetPtr) intern->ptr)->_private != NULL) {
-			efree(((xsltStylesheetPtr) intern->ptr)->_private);
 			((xsltStylesheetPtr) intern->ptr)->_private = NULL;   
 		}
 		if (intern->document != NULL) {

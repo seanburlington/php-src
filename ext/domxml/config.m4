@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.48 2003/06/14 11:27:49 helly Exp $
+dnl $Id: config.m4,v 1.49 2003/06/14 13:35:09 helly Exp $
 dnl
 
 AC_DEFUN(PHP_DOM_XSLT_CHECK_VERSION,[
@@ -36,7 +36,7 @@ AC_DEFUN(PHP_DOM_EXSLT_CHECK_VERSION,[
   CPPFLAGS=$old_CPPFLAGS
 ])
 
-PHP_ARG_WITH(dom, for DOM support,
+PHP_ARG_WITH(dom, for old deprecated DOM support,
 [  --with-dom[=DIR]        Old deprecated DOM support (requires libxml >= 2.4.14).
                           DIR is the libxml install directory.])
 

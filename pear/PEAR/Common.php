@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.67 2002/05/27 21:36:28 ssb Exp $
+// $Id: Common.php,v 1.68 2002/06/02 13:07:18 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -67,7 +67,7 @@ $GLOBALS['_PEAR_Common_file_roles'] = array('php','ext','test','doc','data','src
  * Valid replacement types
  * @var array
  */
-$GLOBALS['_PEAR_Common_replacement_types'] = array('php-const', 'pear-config');
+$GLOBALS['_PEAR_Common_replacement_types'] = array('php-const', 'pear-config', 'package-info');
 
 /**
  * Valid "provide" types
@@ -130,6 +130,7 @@ class PEAR_Common extends PEAR
     {
         parent::PEAR();
         $this->config = &PEAR_Config::singleton();
+        $this->debug = $this->config->get('verbose');
     }
 
     // }}}
@@ -209,7 +210,7 @@ class PEAR_Common extends PEAR
     {
         if ($this->debug >= $level) {
             if (is_object($this->ui)) {
-                $this->ui->displayLine($msg);
+                $this->ui->log($msg);
             } else {
                 print "$msg\n";
             }

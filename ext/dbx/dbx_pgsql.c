@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dbx_pgsql.c,v 1.19 2002/10/30 12:02:50 mboeren Exp $ */
+/* $Id: dbx_pgsql.c,v 1.20 2002/10/30 15:03:00 mboeren Exp $ */
 
 #include "dbx.h"
 #include "php_dbx.h"
@@ -288,7 +288,7 @@ int dbx_pgsql_esc(zval **rv, zval **dbx_handle, zval **string, INTERNAL_FUNCTION
 	if (Z_STRLEN_PP(string) == 0) {
 		ZVAL_EMPTY_STRING(*rv);
 		return 1;
-		}
+	}
 	tmpstr = estrdup(Z_STRVAL_PP(string));
 	tmplen = Z_STRLEN_PP(string);
 	/* php_str_to_str uses a smart_str that allocates memory */

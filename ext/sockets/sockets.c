@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.32.2.1 2001/03/22 13:20:35 sniper Exp $ */
+/* $Id: sockets.c,v 1.32.2.2 2001/04/10 22:01:57 jason Exp $ */
 
 #include "php.h"
 
@@ -34,6 +34,10 @@
 #define _XOPEN_SOURCE_EXTENDED
 #define _XPG4_2
 #define __EXTENSIONS__
+
+#ifndef __PRAGMA_REDEFINE_EXTNAME
+#define __PRAGMA_REDEFINE_EXTNAME
+#endif
 
 #include "ext/standard/info.h"
 #include "php_sockets.h"

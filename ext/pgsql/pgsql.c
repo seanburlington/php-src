@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.188 2002/04/21 10:22:31 sas Exp $ */
+/* $Id: pgsql.c,v 1.189 2002/04/21 10:28:01 sas Exp $ */
 
 #include <stdlib.h>
 
@@ -4074,7 +4074,7 @@ PHPAPI int php_pgsql_update(PGconn *pg_link, const char *table, zval *var_array,
 {
 	zval *var_converted = NULL, *ids_converted = NULL;
 	smart_str querystr = {0};
-	int ret = SUCCESS;
+	int ret = FAILURE;
 
 	assert(pg_link != NULL);
 	assert(table != NULL);

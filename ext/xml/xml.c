@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.32 1999/12/05 16:43:42 thies Exp $ */
+/* $Id: xml.c,v 1.33 1999/12/05 16:59:15 eschmid Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -1038,7 +1038,7 @@ PHP_FUNCTION(xml_parser_create)
 }
 /* }}} */
 
-/* {{{ proto int xml_set_object(int pind,object &obj) 
+/* {{{ proto int xml_set_object(int pind, object &obj) 
    Set up object which should be used for callbacks */
 PHP_FUNCTION(xml_set_object)
 {

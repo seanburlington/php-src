@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.26 2002/05/06 23:01:46 jason Exp $ */
+/* $Id: pcntl.c,v 1.27 2002/06/04 15:51:24 edink Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -51,6 +51,7 @@ function_entry pcntl_functions[] = {
 	PHP_FE(pcntl_wtermsig,		NULL)
 	PHP_FE(pcntl_wstopsig,		NULL)
 	PHP_FE(pcntl_exec,			NULL)
+	PHP_FE(pcntl_alarm,			NULL)
 	{NULL, NULL, NULL}	
 };
 
@@ -213,6 +214,19 @@ PHP_FUNCTION(pcntl_fork)
 	}
 	
 	RETURN_LONG((long) id);
+}
+/* }}} */
+
+/* {{{ proto int pcntl_alarm(int seconds)
+   Set an alarm clock for delivery of a signal*/
+PHP_FUNCTION(pcntl_alarm)
+{
+	long seconds;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &seconds) == FAILURE)
+		return;
+	
+	RETURN_LONG ((long) alarm(seconds));
 }
 /* }}} */
 

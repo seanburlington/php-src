@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcntl.h,v 1.9 2002/03/16 22:31:57 mfischer Exp $ */
+/* $Id: php_pcntl.h,v 1.10 2002/06/04 15:51:25 edink Exp $ */
 
 #ifndef PHP_PCNTL_H
 #define PHP_PCNTL_H
@@ -39,6 +39,7 @@ PHP_RINIT_FUNCTION(pcntl);
 PHP_RSHUTDOWN_FUNCTION(pcntl);
 PHP_MINFO_FUNCTION(pcntl);
 
+PHP_FUNCTION(pcntl_alarm);
 PHP_FUNCTION(pcntl_fork);
 PHP_FUNCTION(pcntl_waitpid);
 PHP_FUNCTION(pcntl_wifexited);

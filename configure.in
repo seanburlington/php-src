@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.207 2001/01/05 18:37:01 jon Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.208 2001/01/07 21:21:12 venaas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -507,7 +507,7 @@ AC_ARG_WITH(exec-dir,
 ])
 
 PHP_ARG_WITH(openssl,for OpenSSL support,
-[  --with-openssl[=DIR]    Include OpenSSL support (requires OpenSSL >= 0.9.6) ])
+[  --with-openssl[=DIR]    Include OpenSSL support (requires OpenSSL >= 0.9.5) ])
 if test "$PHP_OPENSSL" = "yes"; then
   PHP_OPENSSL="/usr/local/ssl /usr/local /usr /usr/local/openssl"
 fi

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.55 2002/05/12 21:09:03 ssb Exp $
+// $Id: Installer.php,v 1.56 2002/05/19 06:19:26 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -139,6 +139,19 @@ class PEAR_Installer extends PEAR_Common
 
     function _installFile($file, $atts, $tmp_path)
     {
+        static $os;
+        if (isset($atts['platform'])) {
+            if (empty($os)) {
+                include_once "OS/Guess.php";
+                $os = new OS_Guess();
+            }
+            // return if this file is meant for another platform
+            if (!$os->matchSignature($atts['platform'])) {
+                $this->log(1, "skipped $file (meant for $atts[platform], we are ".$os->getSignature().")");
+                return;
+            }
+        }
+
         switch ($atts['role']) {
             case 'test': case 'data': case 'ext':
                 // don't install test files for now

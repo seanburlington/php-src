@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.39 2003/08/30 13:47:27 helly Exp $ */
+/* $Id: php_reflection.c,v 1.40 2003/08/30 23:51:42 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -973,7 +973,7 @@ ZEND_METHOD(reflection_method, invoke)
 	if (!(mptr->common.fn_flags & ZEND_ACC_PUBLIC) ||
 		(mptr->common.fn_flags & ZEND_ACC_ABSTRACT)) {
 		if (mptr->common.fn_flags & ZEND_ACC_ABSTRACT) {
-			zend_throw_exception_ex(zend_exception_get_abstract(), 0 TSRMLS_CC, 
+			zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, 
 				"Trying to invoke abstract method %s::%s", 
 				mptr->common.scope->name, mptr->common.function_name);
 		} else {

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.29 2001/05/12 11:08:52 sas Exp $
+dnl $Id: config.m4,v 1.30 2001/06/23 10:20:58 sniper Exp $
 
 AC_DEFUN(AC_OCI8_VERSION,[
   AC_MSG_CHECKING([Oracle version])
@@ -33,15 +33,6 @@ if test "$PHP_OCI8" != "no"; then
   	OCI8_DIR=$PHP_OCI8
   fi
   AC_MSG_RESULT($OCI8_DIR)
-
-  if test "$PHP_SIGCHILD" != "yes"; then
-	echo "+--------------------------------------------------------------------+"
-	echo "| Notice:                                                            |"
-	echo "| If you encounter <defunc> processes when using a local Oracle-DB   |"
-	echo "| please recompile PHP and specify --enable-sigchild when configuring|"
-	echo "| (This problem has been reported un Linux using Oracle >= 8.1.5)    |"
-	echo "+--------------------------------------------------------------------+"
-  fi
 
   if test -d "$OCI8_DIR/rdbms/public"; then
   	PHP_ADD_INCLUDE($OCI8_DIR/rdbms/public)

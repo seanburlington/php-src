@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.56.2.1 2003/06/27 07:13:18 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.56.2.2 2003/06/27 07:30:41 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -440,7 +440,7 @@ dnl Check for IPv6 support
 AC_CACHE_CHECK([for IPv6 support], ac_cv_ipv6_support,
 [AC_TRY_LINK([ #include <sys/types.h>
 #include <sys/socket.h>
-#include <netinet/in.h>], [struct sockaddr_in6 s; struct in6_addr t=in6addr_any; int i=AF_INET6; s; t.s6_addr[0] = 0;],
+#include <netinet/in.h>], [struct sockaddr_in6 s; struct in6_addr t=in6addr_any; int i=AF_INET6; s; t.s6_addr[0] = 0; return(inet_pton(0,0,0)); ],
   [ac_cv_ipv6_support=yes], [ac_cv_ipv6_support=no])])
 
 

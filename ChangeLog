@@ -1,3 +1,39 @@
+2004-11-20  Stefan Esser  <sesser@suspekt.org>
+
+    * main/rfc1867.c:
+      Fixed: strip quotes from filename
+
+2004-11-20  Pierre-Alain Joye  <pierre@dotgeek.org>
+
+    * (PHP_4_3)
+      NEWS:
+      - Entry for #30229
+
+    * (PHP_4_3)
+      ext/gd/libgd/gd.c:
+      - Fix #30229, imagerectangle draw the corners twice, making it useless
+        with alpha channel.
+        Fix it to work well with thick>1 as well, both filled and wired
+      rectangle
+
+    * ext/gd/libgd/gdft.c:
+      - Attempt to fix #28598, bug introduced in GD (around php 4.3.4)
+        The way they fix MS Symbol are wrong, multiple faces support hould added
+        later, safer.
+      
+        Please test it with your weird fonts, if it works, MFH will be done.
+
+2004-11-20  Rob Richards  <rrichards@ctindustries.net>
+
+    * (PHP_5_0)
+      ext/com_dotnet/com_handlers.c:
+      MFH: fix crash when calling com methods
+       - due to change in Zend
+
+    * ext/com_dotnet/com_handlers.c:
+      fix crash when calling com methods
+       - due to change in Zend
+
 2004-11-19  Antony Dovgal  <tony2001@phpclub.net>
 
     * (PHP_4_3)
@@ -12882,7 +12918,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1809 2004/11/20 01:36:16 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1810 2004/11/21 01:36:52 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

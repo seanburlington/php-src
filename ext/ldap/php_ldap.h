@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_ldap.h,v 1.4 2000/04/01 16:23:39 zeev Exp $ */
+/* $Id: php_ldap.h,v 1.5 2000/04/06 12:36:47 sterling Exp $ */
 
 #ifndef _PHP_LDAP_H
 #define _PHP_LDAP_H
@@ -82,6 +82,10 @@ PHP_FUNCTION(ldap_modify);
 PHP_FUNCTION(ldap_mod_add);
 PHP_FUNCTION(ldap_mod_replace);
 PHP_FUNCTION(ldap_mod_del);
+
+PHP_FUNCTION(ldap_errno);
+PHP_FUNCTION(ldap_err2str);
+PHP_FUNCTION(ldap_error);
 
 ZEND_BEGIN_MODULE_GLOBALS(ldap)
 	long default_link;

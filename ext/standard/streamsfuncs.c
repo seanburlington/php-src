@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.7 2003/04/04 08:57:40 wez Exp $ */
+/* $Id: streamsfuncs.c,v 1.8 2003/04/04 20:43:36 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -201,7 +201,7 @@ PHP_FUNCTION(stream_socket_accept)
 
 	char *errstr = NULL;
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|dz!", &zstream, &timeout, &peername) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|dz", &zstream, &timeout, &peername) == FAILURE) {
 		RETURN_FALSE;
 	}
 	

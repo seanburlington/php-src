@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.22 2000/07/02 23:46:44 sas Exp $ */
+/* $Id: php_pcre.h,v 1.23 2001/01/22 19:29:44 andrei Exp $ */
 
 #ifndef PHP_PCRE_H
 #define PHP_PCRE_H
@@ -49,8 +49,8 @@ extern zend_module_entry pcre_module_entry;
 #define pcre_module_ptr &pcre_module_entry
 
 typedef struct {
-        pcre *re;
-        pcre_extra *extra;
+	pcre *re;
+	pcre_extra *extra;
 	int preg_options;
 #if HAVE_SETLOCALE
 	char *locale;

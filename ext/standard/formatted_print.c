@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.46 2002/02/28 08:26:45 sebastian Exp $ */
+/* $Id: formatted_print.c,v 1.47 2002/03/22 09:09:18 derick Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -480,6 +480,14 @@ php_formatted_print(int ht, int *len, int use_array TSRMLS_DC)
 				while (isdigit((int)format[temppos])) temppos++;
 				if (format[temppos] == '$') {
 					argnum = php_sprintf_getnumber(format, &inpos);
+
+					if (argnum == 0) {
+						efree(result);
+						efree(args);
+						php_error(E_WARNING, "%s(): zero is not a valid argument number", get_active_function_name(TSRMLS_C));
+						return NULL;
+					}
+	
 					inpos++;  /* skip the '$' */
 				} else {
 					argnum = currarg++;

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.51.2.3 2003/01/09 22:34:27 iliaa Exp $ */
+/* $Id: safe_mode.c,v 1.51.2.4 2003/03/17 13:50:23 wez Exp $ */
 
 #include "php.h"
 
@@ -125,6 +125,11 @@ PHPAPI int php_checkuid_ex(const char *filename, char *fopen_mode, int mode, int
 			VCWD_REALPATH(filename, path);
 			*s = DEFAULT_SLASH;
 		} else {
+			/* Under Solaris, getcwd() can fail if there are no
+			 * read permissions on a component of the path, even
+			 * though it has the required x permissions */
+			path[0] = '.';
+			path[1] = '\0';
 			VCWD_GETCWD(path, sizeof(path));
  		}
 	} /* end CHECKUID_ALLOW_ONLY_DIR */

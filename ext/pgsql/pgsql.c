@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.18 1999/09/10 02:37:46 musone Exp $ */
+/* $Id: pgsql.c,v 1.19 1999/09/10 02:47:49 musone Exp $ */
 
 #include <stdlib.h>
 
@@ -940,7 +940,6 @@ static void php3_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 				field_name = PQfname(pgsql_result,i);
 				add_assoc_stringl(return_value, field_name, data, data_len, should_copy);
 			}
-	efree(element);
         } else {
             /* NULL field, don't set it */
             /* add_get_index_stringl(return_value, i, empty_string, 0, (void **) &pval_ptr); */

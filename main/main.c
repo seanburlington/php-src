@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.220 2000/02/26 16:36:57 zeev Exp $ */
+/* $Id: main.c,v 1.221 2000/02/26 18:59:29 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -956,7 +956,7 @@ static int php_hash_environment(ELS_D SLS_DC PLS_DC)
 		php_import_environment_variables(ELS_C PLS_CC);
 	}
 
-	PG(http_globals).post = PG(http_globals).get = PG(http_globals).cookie = PG(http_globals).server = PG(http_globals).environment = NULL;
+	PG(http_globals).post = PG(http_globals).get = PG(http_globals).cookie = PG(http_globals).server = PG(http_globals).environment = PG(http_globals).post_files = NULL;
 
 	while(*p) {
 		switch(*p++) {
@@ -1013,7 +1013,9 @@ static int php_hash_environment(ELS_D SLS_DC PLS_DC)
 	if (PG(http_globals).environment) {
 		zend_hash_add_ptr(&EG(symbol_table), "HTTP_ENV_VARS", sizeof("HTTP_ENV_VARS"), PG(http_globals).environment, sizeof(zval *), NULL);
 	}
-
+	if (PG(http_globals).post_files) {
+		zend_hash_add_ptr(&EG(symbol_table), "HTTP_POST_FILES", sizeof("HTTP_POST_FILES"), PG(http_globals).post_files, sizeof(zval *),NULL);
+	}
 
 	if (!have_variables_order) {
 		php_register_server_variables(ELS_C SLS_CC PLS_CC);

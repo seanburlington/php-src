@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.30 2001/05/06 01:34:56 rasmus Exp $ */
+/* $Id: php_pgsql.h,v 1.31 2001/06/19 18:10:08 jon Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -112,6 +112,7 @@ typedef struct pgLofp {
 typedef struct _php_pgsql_result_handle {
 	PGconn *conn;
 	PGresult *result;
+	int row;
 } pgsql_result_handle;
 
 typedef struct {

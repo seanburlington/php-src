@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.35 2003/10/05 11:52:22 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.36 2003/10/06 21:28:01 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1276,12 +1276,15 @@ void dom_set_old_ns(xmlDoc *doc, xmlNs *ns) {
 int dom_check_qname(char *qname, char **localname, char **prefix, int uri_len, int name_len) {
 	int errorcode = 0;
 
-	if (uri_len > 0 && name_len > 0) {
+	if (name_len > 0) {
 		*localname = xmlSplitQName2(qname, (xmlChar **) prefix);
 		if (*localname == NULL) {
 			*localname = xmlStrdup(qname);
+			if (*prefix == NULL && uri_len == 0) {
+				return errorcode;
+			}
 		}
-		if (*localname == NULL || (xmlStrchr(*localname, (xmlChar) ':') != NULL)) {
+		if (uri_len == 0 || *localname == NULL || (xmlStrchr(*localname, (xmlChar) ':') != NULL)) {
 			errorcode = NAMESPACE_ERR;
 		}
 	} else {

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.17 1999/04/18 15:09:46 zeev Exp $ */
+/* $Id: main.c,v 1.18 1999/04/18 15:58:26 zeev Exp $ */
 
 /* #define CRASH_DETECTION */
 
@@ -75,6 +75,7 @@
 #include <io.h>
 #include <fcntl.h>
 #include "win32/syslog.h"
+#include "win32/php_registry.h"
 #else
 #include <syslog.h>
 #endif

@@ -27,12 +27,22 @@
    |          Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
 */
-/* $Id: fsock.h,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: fsock.h,v 1.2 1999/04/18 15:58:26 zeev Exp $ */
 
 #ifndef _FSOCK_H
 #define _FSOCK_H
 
+#if WIN32|WINNT
+#	ifndef WINNT
+#	define WINNT 1
+#	endif
+#undef FD_SETSIZE
+#include "arpa/inet.h"
+#endif
+
+#if HAVE_NETINET_IN_H
 #include <netinet/in.h>
+#endif
 
 extern php3_module_entry fsock_module_entry;
 #define fsock_module_ptr &fsock_module_entry

@@ -26,7 +26,7 @@
    | Authors: Chris Schneider <cschneid@relog.ch>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.1 1999/04/17 00:37:07 ssb Exp $ */
+/* $Id: pack.c,v 1.2 1999/04/18 15:58:27 zeev Exp $ */
 #ifdef THREAD_SAFE
 #include "tls.h"
 #endif
@@ -46,7 +46,7 @@
 #else
 #include <sys/param.h>
 #endif
-#include "head.h"
+#include "functions/head.h"
 #include "safe_mode.h"
 #include "php3_string.h"
 #include "pack.h"

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.h,v 1.2 1999/04/21 18:10:18 sas Exp $ */
+/* $Id: file.h,v 1.3 1999/04/27 13:06:58 rasmus Exp $ */
 
 #ifndef _FILE_H
 #define _FILE_H
@@ -46,6 +46,7 @@ extern void php3_fread(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_fgetc(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_fgets(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_fgetss(INTERNAL_FUNCTION_PARAMETERS);
+extern void php3_fgetcsv(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_fwrite(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_rewind(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_ftell(INTERNAL_FUNCTION_PARAMETERS);

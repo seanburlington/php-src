@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.392 2004/07/19 07:19:43 andi Exp $ */
+/* $Id: session.c,v 1.393 2004/08/02 08:27:46 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1060,7 +1060,7 @@ static void php_session_reset_id(TSRMLS_D)
 		smart_str_0(&var);
 		REGISTER_STRINGL_CONSTANT("SID", var.c, var.len, 0);
 	} else {
-		REGISTER_STRINGL_CONSTANT("SID", "", 0, 1);
+		REGISTER_STRINGL_CONSTANT("SID", STR_EMPTY_ALLOC(), 0, 1);
 	}
 
 	if (PS(apply_trans_sid)) {

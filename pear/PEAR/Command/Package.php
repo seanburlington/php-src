@@ -17,7 +17,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.55 2003/06/15 16:29:10 cox Exp $
+// $Id: Package.php,v 1.56 2003/06/15 16:52:08 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';
@@ -561,6 +561,16 @@ Wrote: /usr/src/redhat/RPMS/i386/PEAR::Net_Socket-1.0-1.i386.rpm
 
     // }}}
     // {{{ doMakeRPM()
+    /*
+    (cox)
+    TODO:
+        - Fill the rpm dependencies in the template file.
+    IDEAS:
+        - Instead of mapping the role to rpm vars, perhaps it's better
+          to use directly the pear cmd to install the files by itself
+          in %postrun so:
+          pear -d php_dir=%{_libdir}/php/pear -d test_dir=.. <package>
+    */
 
     function doMakeRPM($command, $options, $params)
     {

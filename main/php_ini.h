@@ -16,19 +16,19 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ini.h,v 1.41 2003/08/18 23:19:27 wez Exp $ */
+/* $Id: php_ini.h,v 1.42 2003/09/02 13:07:17 abies Exp $ */
 
 #ifndef PHP_INI_H
 #define PHP_INI_H
 
 #include "zend_ini.h"
 
-BEGIN_EXTERN_C();
+BEGIN_EXTERN_C()
 int php_init_config();
 int php_shutdown_config(void);
 void php_ini_delayed_modules_startup(TSRMLS_D);
 zval *cfg_get_entry(char *name, uint name_length);
-END_EXTERN_C();
+END_EXTERN_C()
 
 #define PHP_INI_USER	ZEND_INI_USER
 #define PHP_INI_PERDIR	ZEND_INI_PERDIR

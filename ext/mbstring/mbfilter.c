@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.24 2002/04/30 12:45:14 hirokawa Exp $ */
+/* $Id: mbfilter.c,v 1.25 2002/05/05 02:22:36 hirokawa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -653,7 +653,7 @@ static mbfl_encoding mbfl_encoding_eucjp_win = {
 	MBFL_ENCTYPE_MBCS
 };
 
-static const char *mbfl_encoding_sjis_win_aliases[] = {"SJIS-open", "MS_Kanji", "Windows-31J", NULL};
+static const char *mbfl_encoding_sjis_win_aliases[] = {"SJIS-open", "MS_Kanji", "Windows-31J", "CP932", NULL};
 
 static mbfl_encoding mbfl_encoding_sjis_win = {
 	mbfl_no_encoding_sjis_win,

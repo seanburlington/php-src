@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_saproxy.c,v 1.4 2004/02/12 10:43:19 zeev Exp $ */
+/* $Id: com_saproxy.c,v 1.5 2004/02/12 13:53:51 zeev Exp $ */
 
 /* This module implements a SafeArray proxy which is used internally
  * by the engine when resolving multi-dimensional array accesses on
@@ -77,7 +77,7 @@ static void saproxy_property_write(zval *object, zval *member, zval *value TSRML
 	php_com_throw_exception(E_INVALIDARG, "safearray has no properties" TSRMLS_CC);
 }
 
-static zval *saproxy_read_dimension(zval *object, zval *offset TSRMLS_DC)
+static zval *saproxy_read_dimension(zval *object, zval *offset, int type TSRMLS_DC)
 {
 	php_com_saproxy *proxy = SA_FETCH(object);
 	zval *return_value;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.52.2.13 2003/05/05 16:29:57 wez Exp $ */
+/* $Id: openssl.c,v 1.52.2.14 2003/06/08 23:42:44 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1913,7 +1913,7 @@ PHP_FUNCTION(openssl_pkey_export_to_file)
 		bio_out = BIO_new_file(filename, "w");
 
 		if (passphrase && req.priv_key_encrypt)
-			cipher = EVP_des_ede3_cbc();
+			cipher = (EVP_CIPHER *) EVP_des_ede3_cbc();
 		else
 			cipher = NULL;
 		
@@ -1964,7 +1964,7 @@ PHP_FUNCTION(openssl_pkey_export)
 		bio_out = BIO_new(BIO_s_mem());
 
 		if (passphrase && req.priv_key_encrypt)
-			cipher = EVP_des_ede3_cbc();
+			cipher = (EVP_CIPHER *) EVP_des_ede3_cbc();
 		else
 			cipher = NULL;
 		
@@ -2224,7 +2224,7 @@ PHP_FUNCTION(openssl_pkcs7_encrypt)
 	}
 
 	/* TODO: allow user to choose a different cipher */
-	cipher = EVP_rc2_40_cbc();
+	cipher = (EVP_CIPHER *) EVP_rc2_40_cbc();
 	if (cipher == NULL)
 		goto clean_exit;
 

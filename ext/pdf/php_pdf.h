@@ -26,7 +26,7 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_pdf.h,v 1.4 2000/02/15 08:10:32 steinm Exp $ */
+/* $Id: php_pdf.h,v 1.5 2000/02/21 16:23:07 steinm Exp $ */
 
 #ifndef _PHP_PDF_H
 #define _PHP_PDF_H
@@ -66,7 +66,9 @@ PHP_FUNCTION(pdf_set_leading);
 PHP_FUNCTION(pdf_set_text_rendering);
 PHP_FUNCTION(pdf_set_horiz_scaling);
 PHP_FUNCTION(pdf_set_text_rise);
+#if PDFLIB_MAJORVERSION < 3 & PDFLIB_MINORVERSION < 30
 PHP_FUNCTION(pdf_set_text_matrix);
+#endif
 PHP_FUNCTION(pdf_set_text_pos);
 PHP_FUNCTION(pdf_set_char_spacing);
 PHP_FUNCTION(pdf_set_word_spacing);

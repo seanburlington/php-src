@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.23 2000/02/15 08:10:32 steinm Exp $ */
+/* $Id: pdf.c,v 1.24 2000/02/21 16:23:07 steinm Exp $ */
 
 /* pdflib 2.01 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -98,7 +98,9 @@ function_entry pdf_functions[] = {
 	PHP_FE(pdf_set_text_rendering, NULL)
 	PHP_FE(pdf_set_horiz_scaling, NULL)
 	PHP_FE(pdf_set_text_rise, NULL)
+#if PDFLIB_MAJORVERSION < 3 & PDFLIB_MINORVERSION < 30
 	PHP_FE(pdf_set_text_matrix, NULL)
+#endif
 	PHP_FE(pdf_set_text_pos, NULL)
 	PHP_FE(pdf_set_char_spacing, NULL)
 	PHP_FE(pdf_set_word_spacing, NULL)
@@ -875,6 +877,7 @@ PHP_FUNCTION(pdf_set_text_rise) {
 }
 /* }}} */
 
+#if PDFLIB_MAJORVERSION < 3 & PDFLIB_MINORVERSION < 30
 /* {{{ proto void pdf_set_text_matrix(int pdfdoc, arry matrix)
    Sets the text matrix */
 PHP_FUNCTION(pdf_set_text_matrix) {
@@ -926,6 +929,7 @@ PHP_FUNCTION(pdf_set_text_matrix) {
 	RETURN_TRUE;
 }
 /* }}} */
+#endif
 
 /* {{{ proto void pdf_set_text_pos(int pdfdoc, double x, double y)
    Set the position of text for the next pdf_show call */

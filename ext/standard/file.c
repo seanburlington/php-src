@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.55 2004/01/19 18:40:45 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.56 2004/01/21 02:33:22 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1899,11 +1899,12 @@ PHP_FUNCTION(rename)
 	old_name = Z_STRVAL_PP(old_arg);
 	new_name = Z_STRVAL_PP(new_arg);
 
-	if (PG(safe_mode) &&(!php_checkuid(old_name, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+	if (PG(safe_mode) && (!php_checkuid(old_name, NULL, CHECKUID_CHECK_FILE_AND_DIR) ||
+				!php_checkuid(new_name, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 		RETURN_FALSE;
 	}
 
-	if (php_check_open_basedir(old_name TSRMLS_CC)) {
+	if (php_check_open_basedir(old_name TSRMLS_CC) || php_check_open_basedir(new_name TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 

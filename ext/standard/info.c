@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.122 2000/11/11 18:38:26 sas Exp $ */
+/* $Id: info.c,v 1.123 2000/11/19 19:18:12 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -369,7 +369,7 @@ void php_print_credits(int flag)
 		php_info_print_table_end();
 	}
 
-	if (flag & PHP_CREDITS_GENERAL) {
+	if (flag & PHP_CREDITS_SAPI) {
 		/* SAPI Modules */
 
 		php_info_print_table_start();

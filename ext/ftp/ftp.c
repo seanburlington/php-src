@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.106 2004/10/05 23:53:09 iliaa Exp $ */
+/* $Id: ftp.c,v 1.107 2005/02/17 15:37:24 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -846,16 +846,22 @@ ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, 
 			 * Everything Else \n
 			 */
 #ifdef PHP_WIN32
-			while ((s = strpbrk(ptr, "\r\n"))) {
-				if (*s == '\n') {
-					php_stream_putc(outstream, '\r');
-				} else if (*s == '\r' && *(s + 1) == '\n') {
-					s++;
-				}
-				s++;
+			while ((s = strpbrk(ptr, "\r\n")) && (s < e)) {
 				php_stream_write(outstream, ptr, (s - ptr));
-				if (*(s - 1) == '\r') {
-					php_stream_putc(outstream, '\n');
+				php_stream_write(outstream, "\r\n", sizeof("\r\n")-1);
+
+				if (*s == '\r') {
+					*s++;
+				}
+				/* for some reason some servers prefix a \r before a \n, 
+				 * resulting in a \r\r\n in the buffer when
+				 * the remote file already has windoze style line endings.
+				 */
+				if (*s == '\r') {
+					*s++;
+				}
+				if (*s == '\n') {
+					*s++;
 				}
 				ptr = s;
 			}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.228 2002/11/24 00:59:41 moriyoshi Exp $ */
+/* $Id: gd.c,v 1.229 2002/11/28 22:48:20 helly Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -3988,7 +3988,7 @@ static void php_image_filter_smooth(INTERNAL_FUNCTION_PARAMETERS)
 	if (im_src==NULL) {
 		RETURN_FALSE;
 	}
-	if (gdImageSmooth(im_src, weight)==1) {
+	if (gdImageSmooth(im_src, (float)weight)==1) {
 		RETURN_TRUE;
 	}
 	RETURN_FALSE;

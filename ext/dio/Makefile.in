@@ -1,0 +1,8 @@
+# $Id: Makefile.in,v 1.1 2001/11/06 12:24:09 sterling Exp $
+
+LTLIBRARY_NAME        = libdio.la
+LTLIBRARY_SOURCES     = dio.c
+LTLIBRARY_SHARED_NAME = dio.la
+LTLIBRARY_SHARED_LIBADD  = $(DIO_SHARED_LIBADD)
+
+include $(top_srcdir)/build/dynlib.mk

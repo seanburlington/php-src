@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.73 2002/07/28 08:52:29 ssb Exp $
+// $Id: Installer.php,v 1.74 2002/09/09 21:41:32 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -400,7 +400,7 @@ class PEAR_Installer extends PEAR_Common
             return $pkginfo;
         }
         $this->validatePackageInfo($pkginfo, $errors, $warnings);
-        // XXX We allow warnings, have we to do it?
+        // XXX We allow warnings, do we have to do it?
         if (count($errors)) {
             if (empty($options['force'])) {
                 return $this->raiseError("The following errors where found (use force option to install anyway):\n".
@@ -618,9 +618,6 @@ class PEAR_Installer extends PEAR_Common
 
     function _buildCallback($what, $data)
     {
-        switch ($what) {
-
-        }
         if (($what == 'cmdoutput' && $this->debug > 1) ||
             ($what == 'output' && $this->debug > 0)) {
             $this->ui->outputData(rtrim($data), 'build');

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.49 2002/03/16 12:45:43 mfischer Exp $ */
+/* $Id: mail.c,v 1.50 2002/03/16 15:42:34 mfischer Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -156,6 +156,7 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 		if (EACCES == errno) {
 			php_error(E_WARNING, "%s() permission denied; unable to execute shell to run mail delivery binary",
 					  get_active_function_name(TSRMLS_C));
+			pclose(sendmail);
 			return 0;
 		}
 #endif

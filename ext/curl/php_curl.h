@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.40 2004/03/11 00:11:18 iliaa Exp $ */
+/* $Id: php_curl.h,v 1.41 2004/03/12 18:37:55 sterling Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -61,6 +61,7 @@ PHP_MSHUTDOWN_FUNCTION(curl);
 PHP_MINFO_FUNCTION(curl);
 PHP_FUNCTION(curl_version);
 PHP_FUNCTION(curl_init);
+PHP_FUNCTION(curl_copy_handle);
 PHP_FUNCTION(curl_setopt);
 PHP_FUNCTION(curl_exec);
 PHP_FUNCTION(curl_getinfo);

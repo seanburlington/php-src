@@ -19,13 +19,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.89 2002/10/04 02:21:33 sas Exp $ */
+/* $Id: math.c,v 1.90 2002/10/15 14:51:01 sterling Exp $ */
 
 #include "php.h"
 #include "php_math.h"
 
 #include <math.h>
 #include <float.h>
+#include <stdlib.h>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -1078,6 +1079,6 @@ PHP_FUNCTION(fmod)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 fdm=marker
- * vim<600: sw=4 ts=4
+ * vim600: fdm=marker
+ * vim: noet sw=4 ts=4
  */

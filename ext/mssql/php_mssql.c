@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.29 2000/10/20 20:49:35 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.30 2000/10/20 20:58:57 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -716,6 +716,7 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 			if (dbwillconvert(column_type,SQLCHAR)) {
 				char *res_buf;
 				int res_length = dbdatlen(mssql_ptr->link,offset) + 1;
+				if (column_type == SQLDATETIM4) res_length += 14;
 				if (column_type == SQLDATETIME) res_length += 10;
 			
 				res_buf = (char *) emalloc(res_length);

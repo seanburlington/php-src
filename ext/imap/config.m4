@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.38 2001/08/03 19:36:58 jon Exp $
+dnl $Id: config.m4,v 1.39 2001/08/04 10:50:55 thies Exp $
 dnl
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
@@ -92,7 +92,7 @@ AC_DEFUN(PHP_IMAP_SSL_CHK, [
       void mm_expunged(void){}
       char mail_open();
       int main() {
-        mail_open();
+        mail_open(0,"",0);
         return 0;
       }
     ],,[

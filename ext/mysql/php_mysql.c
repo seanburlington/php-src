@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.179 2002/12/31 16:07:03 sebastian Exp $ */
+/* $Id: php_mysql.c,v 1.180 2003/01/05 20:53:06 georg Exp $ */
 
 /* TODO:
  *
@@ -987,7 +987,7 @@ PHP_FUNCTION(mysql_get_server_info)
    Returns a string containing information about the most recent query */
 PHP_FUNCTION(mysql_info)
 {
-	zval **mysql_link;
+	zval *mysql_link;
 	int id = -1;
 	char *str;
 	php_mysql_conn *mysql;

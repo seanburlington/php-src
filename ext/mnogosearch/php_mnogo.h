@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.h,v $ */
-/* $Id: php_mnogo.h,v 1.11 2001/11/05 19:07:24 gluke Exp $ */
+/* $Id: php_mnogo.h,v 1.12 2001/12/01 14:05:12 gluke Exp $ */
 
 /* 
    +----------------------------------------------------------------------+
@@ -30,6 +30,10 @@
 #include <udm_config.h>
 #include <udmsearch.h>
 
+#if UDM_VERSION_ID >= 30203
+#include <udm_crc32.h>
+#endif
+
 extern zend_module_entry mnogosearch_module_entry;
 #define mnogosearch_module_ptr &mnogosearch_module_entry
 
@@ -52,6 +56,10 @@ DLEXPORT PHP_MINFO_FUNCTION(mnogosearch);
 DLEXPORT PHP_FUNCTION(udm_api_version);
 #if UDM_VERSION_ID >= 30200
 DLEXPORT PHP_FUNCTION(udm_check_charset);
+#endif
+
+#if UDM_VERSION_ID >= 30203
+DLEXPORT PHP_FUNCTION(udm_crc32);
 #endif
 
 DLEXPORT PHP_FUNCTION(udm_alloc_agent);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdf.h,v 1.15 2001/03/01 19:51:54 rjs Exp $ */
+/* $Id: php_pdf.h,v 1.16 2001/03/21 20:55:34 rjs Exp $ */
 
 #ifndef PHP_PDF_H
 #define PHP_PDF_H
@@ -151,6 +151,7 @@ PHP_FUNCTION(pdf_open_memory_image);
 PHP_FUNCTION(pdf_open_pdi);
 PHP_FUNCTION(pdf_close_pdi);
 PHP_FUNCTION(pdf_open_pdi_page);
+PHP_FUNCTION(pdf_place_pdi_page);
 PHP_FUNCTION(pdf_close_pdi_page);
 PHP_FUNCTION(pdf_get_pdi_parameter);
 PHP_FUNCTION(pdf_get_pdi_value);

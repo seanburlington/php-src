@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.176 2000/01/16 12:34:18 thies Exp $ */
+/* $Id: main.c,v 1.177 2000/01/16 14:34:28 thies Exp $ */
 
 
 #include <stdio.h>
@@ -797,6 +797,8 @@ void php_request_shutdown(void *dummy)
 	ELS_FETCH();
 	SLS_FETCH();
 
+	php_execute_pre_request_shutdown(PLS_C);
+
 	sapi_send_headers();
 	php_end_ob_buffering(SG(request_info).headers_only?0:1);
 
@@ -1298,7 +1300,6 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 		EG(active_op_array) = EG(main_op_array);
 		php_execute_post_request_startup(PLS_C);
 		zend_execute(EG(main_op_array) ELS_CC);
-		php_execute_pre_request_shutdown(PLS_C);
 	}
 }
 

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.81 2002/11/13 14:17:23 dickmann Exp $
+// $Id: Common.php,v 1.82 2002/11/14 23:23:21 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -764,7 +764,7 @@ class PEAR_Common extends PEAR
     function infoFromString($data)
     {
         require_once('PEAR/Dependency.php');
-        if ($error = PEAR_Dependency::checkExtension('xml')) {
+        if (PEAR_Dependency::checkExtension($error, 'xml')) {
             return $this->raiseError($error);
         }
         $xp = @xml_parser_create();

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.133 2002/06/13 22:13:57 sniper Exp $ */
+/* $Id: mod_php4.c,v 1.134 2002/06/21 14:47:58 sesser Exp $ */
 
 #include "php_apache_http.h"
 
@@ -163,6 +163,7 @@ int sapi_apache_header_handler(sapi_header_struct *sapi_header, sapi_headers_str
 
 	header_content = p = strchr(header_name, ':');
 	if (!p) {
+		efree(sapi_header->header);
 		return 0;
 	}
 

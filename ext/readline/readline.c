@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.37 2004/09/17 11:26:43 wez Exp $ */
+/* $Id: readline.c,v 1.38 2004/09/26 13:52:09 wez Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -435,12 +435,12 @@ static char **_readline_completion_cb(const char *text, int start, int end)
 PHP_FUNCTION(readline_completion_function)
 {
 	zval *arg = NULL;
+	char *name = NULL;
 
 	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &arg)) {
 		RETURN_FALSE;
 	}
 
-	char *name = NULL;
 	if (!zend_is_callable(arg, 0, &name)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s is not callable", name);
 		RETURN_FALSE;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.50 2000/05/02 00:44:25 sas Exp $ */
+/* $Id: php_pcre.c,v 1.51 2000/05/06 17:57:34 andrei Exp $ */
 
 /*
 	TODO:
@@ -585,7 +585,10 @@ static int _preg_do_eval(char *eval_str, char *subject, int *offsets,
 	}
 
 	/* Run the code */
-	zend_eval_string(code, &retval CLS_CC ELS_CC);
+	if (zend_eval_string(code, &retval CLS_CC ELS_CC) == FAILURE) {
+		zend_error(E_ERROR, "Failed evaluating code:\n%s\n", code);
+		/* zend_error() does not return in this case */
+	}
 	convert_to_string(&retval);
 	
 	/* Save the return value and its length */

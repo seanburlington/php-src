@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.151 2001/08/10 12:48:06 zeev Exp $ */
+/* $Id: php.h,v 1.152 2001/08/11 01:13:31 zeev Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -248,6 +248,42 @@ PHPAPI void php_register_pre_request_shutdown(void (*func)(void *), void *userda
 PHPAPI int cfg_get_long(char *varname, long *result);
 PHPAPI int cfg_get_double(char *varname, double *result);
 PHPAPI int cfg_get_string(char *varname, char **result);
+
+
+/* PHP-named Zend macro wrappers */
+#define PHP_FN					ZEND_FN
+#define PHP_NAMED_FUNCTION		ZEND_NAMED_FUNCTION
+#define PHP_FUNCTION			ZEND_FUNCTION
+
+#define PHP_NAMED_FE	ZEND_NAMED_FE
+#define PHP_FE			ZEND_FE
+#define PHP_FALIAS		ZEND_FALIAS
+#define PHP_STATIC_FE	ZEND_STATIC_FE
+
+#define PHP_MODULE_STARTUP_N	ZEND_MODULE_STARTUP_N
+#define PHP_MODULE_SHUTDOWN_N	ZEND_MODULE_SHUTDOWN_N
+#define PHP_MODULE_ACTIVATE_N	ZEND_MODULE_ACTIVATE_N
+#define PHP_MODULE_DEACTIVATE_N	ZEND_MODULE_DEACTIVATE_N
+#define PHP_MODULE_INFO_N		ZEND_MODULE_INFO_N
+
+#define PHP_MODULE_STARTUP_D	ZEND_MODULE_STARTUP_D
+#define PHP_MODULE_SHUTDOWN_D	ZEND_MODULE_SHUTDOWN_D
+#define PHP_MODULE_ACTIVATE_D	ZEND_MODULE_ACTIVATE_D
+#define PHP_MODULE_DEACTIVATE_D	ZEND_MODULE_DEACTIVATE_D
+#define PHP_MODULE_INFO_D		ZEND_MODULE_INFO_D
+
+/* Compatibility macros */
+#define PHP_MINIT		ZEND_MODULE_STARTUP_N
+#define PHP_MSHUTDOWN	ZEND_MODULE_SHUTDOWN_N
+#define PHP_RINIT		ZEND_MODULE_ACTIVATE_N
+#define PHP_RSHUTDOWN	ZEND_MODULE_DEACTIVATE_N
+#define PHP_MINFO		ZEND_MODULE_INFO_N
+
+#define PHP_MINIT_FUNCTION		ZEND_MODULE_STARTUP_D
+#define PHP_MSHUTDOWN_FUNCTION	ZEND_MODULE_SHUTDOWN_D
+#define PHP_RINIT_FUNCTION		ZEND_MODULE_ACTIVATE_D
+#define PHP_RSHUTDOWN_FUNCTION	ZEND_MODULE_DEACTIVATE_D
+#define PHP_MINFO_FUNCTION		ZEND_MODULE_INFO_D
 
 
 /* Output support */

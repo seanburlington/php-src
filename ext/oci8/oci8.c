@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.257 2004/07/15 11:00:14 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.258 2004/07/19 07:19:40 andi Exp $ */
 
 /* TODO list:
  *
@@ -786,7 +786,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.257 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.258 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -880,12 +880,12 @@ static int _oci_bind_post_exec(void *data TSRMLS_DC)
 
 	if (bind->indicator == -1) { /* NULL */
 		zval *val = bind->zval;
-		if (Z_TYPE_P(val) == IS_STRING && (Z_STRVAL_P(val) != empty_string)) {
+		if (Z_TYPE_P(val) == IS_STRING)) {
 			*Z_STRVAL_P(val) = '\0'; /* XXX avoid warning in debug mode */
 		}
 		zval_dtor(val);
 		ZVAL_NULL(val);
-	} else if (Z_TYPE_P(bind->zval) == IS_STRING && (Z_STRVAL_P(bind->zval) != empty_string)) {
+	} else if (Z_TYPE_P(bind->zval) == IS_STRING) {
 		Z_STRVAL_P(bind->zval) = erealloc(Z_STRVAL_P(bind->zval), Z_STRLEN_P(bind->zval)+1);
 		Z_STRVAL_P(bind->zval)[ Z_STRLEN_P(bind->zval) ] = '\0';
 	}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.209 2004/06/04 15:26:54 iliaa Exp $ */
+/* $Id: php_mysql.c,v 1.210 2004/07/19 07:19:39 andi Exp $ */
 
 /* TODO:
  *
@@ -2245,9 +2245,9 @@ PHP_FUNCTION(mysql_fetch_field)
 	}
 	object_init(return_value);
 
-	add_property_string(return_value, "name",(mysql_field->name?mysql_field->name:empty_string), 1);
-	add_property_string(return_value, "table",(mysql_field->table?mysql_field->table:empty_string), 1);
-	add_property_string(return_value, "def",(mysql_field->def?mysql_field->def:empty_string), 1);
+	add_property_string(return_value, "name",(mysql_field->name?mysql_field->name:""), 1);
+	add_property_string(return_value, "table",(mysql_field->table?mysql_field->table:""), 1);
+	add_property_string(return_value, "def",(mysql_field->def?mysql_field->def:""), 1);
 	add_property_long(return_value, "max_length", mysql_field->max_length);
 	add_property_long(return_value, "not_null", IS_NOT_NULL(mysql_field->flags)?1:0);
 	add_property_long(return_value, "primary_key", IS_PRI_KEY(mysql_field->flags)?1:0);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.127 2004/02/14 12:35:59 derick Exp $ */
+/* $Id: php_ini.c,v 1.128 2004/07/19 07:19:48 andi Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -170,7 +170,7 @@ PHPAPI void display_ini_entries(zend_module_entry *module)
  */
 static void pvalue_config_destructor(zval *pvalue)
 {   
-	if (Z_TYPE_P(pvalue) == IS_STRING && Z_STRVAL_P(pvalue) != empty_string) {
+	if (Z_TYPE_P(pvalue) == IS_STRING) {
 		free(Z_STRVAL_P(pvalue));
 	}
 }

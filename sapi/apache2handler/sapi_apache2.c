@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.41 2004/07/17 21:29:50 moriyoshi Exp $ */
+/* $Id: sapi_apache2.c,v 1.42 2004/07/19 07:19:50 andi Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -215,7 +215,7 @@ php_apache_sapi_register_variables(zval *track_vars_array TSRMLS_DC)
 	char *key, *val;
 	
 	APR_ARRAY_FOREACH_OPEN(arr, key, val)
-		if (!val) val = empty_string;
+		if (!val) val = "";
 		php_register_variable(key, val, track_vars_array TSRMLS_CC);
 	APR_ARRAY_FOREACH_CLOSE()
 		

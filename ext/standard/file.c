@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.382 2004/06/16 23:57:25 abies Exp $ */
+/* $Id: file.c,v 1.383 2004/07/19 07:19:44 andi Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -416,7 +416,7 @@ PHP_FUNCTION(get_meta_tags)
 				if (have_content) {
 					add_assoc_string(return_value, name, value, 0); 
 				} else {
-					add_assoc_string(return_value, name, empty_string, 0);
+					add_assoc_string(return_value, name, "", 0);
 				}
 
 				efree(name);

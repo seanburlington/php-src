@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: safe_mode.c,v 1.58 2004/01/08 08:17:54 andi Exp $ */
+/* $Id: safe_mode.c,v 1.59 2004/07/19 07:19:48 andi Exp $ */
 
 #include "php.h"
 
@@ -207,11 +207,11 @@ PHPAPI char *php_get_current_user()
 	pstat = sapi_get_stat(TSRMLS_C);
 
 	if (!pstat) {
-		return empty_string;
+		return "";
 	}
 
 	if ((pwd=getpwuid(pstat->st_uid))==NULL) {
-		return empty_string;
+		return "";
 	}
 	SG(request_info).current_user_length = strlen(pwd->pw_name);
 	SG(request_info).current_user = estrndup(pwd->pw_name, SG(request_info).current_user_length);

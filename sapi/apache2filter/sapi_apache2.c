@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.125 2004/06/18 00:36:58 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.126 2004/07/19 07:19:49 andi Exp $ */
 
 #include <fcntl.h>
 
@@ -220,7 +220,7 @@ php_apache_sapi_register_variables(zval *track_vars_array TSRMLS_DC)
 	char *key, *val;
 	
 	APR_ARRAY_FOREACH_OPEN(arr, key, val)
-		if (!val) val = empty_string;
+		if (!val) val = "";
 		php_register_variable(key, val, track_vars_array TSRMLS_CC);
 	APR_ARRAY_FOREACH_CLOSE()
 		

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.97 2004/07/10 07:46:08 andi Exp $ */
+/* $Id: php_sybase_ct.c,v 1.98 2004/07/19 07:19:47 andi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -428,7 +428,7 @@ PHP_RINIT_FUNCTION(sybase)
 	SybCtG(default_link)=-1;
 	SybCtG(num_links) = SybCtG(num_persistent);
 	SybCtG(appname) = estrndup("PHP " PHP_VERSION, sizeof("PHP " PHP_VERSION));
-	SybCtG(server_message) = empty_string;
+	SybCtG(server_message) = STR_EMPTY_ALLOC();
 	return SUCCESS;
 }
 
@@ -1274,7 +1274,7 @@ static sybase_result * php_sybase_fetch_result_set (sybase_link *sybase_ptr, int
 			result->fields[i].name = estrdup(computed_buf);
 			j++;
 		}
-		result->fields[i].column_source = empty_string;
+		result->fields[i].column_source = STR_EMPTY_ALLOC();
 		result->fields[i].max_length = result->datafmt[i].maxlength-1;
 		result->fields[i].numeric = result->numerics[i];
 		Z_TYPE(result->fields[i]) = result->types[i];

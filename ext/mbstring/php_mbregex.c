@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.48 2004/02/28 20:45:23 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.49 2004/07/19 07:19:38 andi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -864,7 +864,7 @@ PHP_FUNCTION(mb_split)
 	if (n > 0) {
 		add_next_index_stringl(return_value, pos, n, 1);
 	} else {
-		add_next_index_stringl(return_value, empty_string, 0, 1);
+		add_next_index_stringl(return_value, "", 0, 1);
 	}
 }
 /* }}} */

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.10 2004/07/14 09:43:26 sesser Exp $ */
+/* $Id: mod_php5.c,v 1.11 2004/07/19 07:19:49 andi Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -235,7 +235,7 @@ static void sapi_apache_register_server_variables(zval *track_vars_array TSRMLS_
 		if (elts[i].val) {
 			val = elts[i].val;
 		} else {
-			val = empty_string;
+			val = "";
 		}
 		php_register_variable(elts[i].key, val, track_vars_array  TSRMLS_CC);
 	}

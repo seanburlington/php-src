@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.13 2004/01/08 08:18:05 andi Exp $ */
+/* $Id: php_functions.c,v 1.14 2004/07/19 07:19:50 andi Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -183,7 +183,7 @@ PHP_FUNCTION(apache_request_headers)
 	arr = apr_table_elts(ctx->r->headers_in);
 
 	APR_ARRAY_FOREACH_OPEN(arr, key, val)
-		if (!val) val = empty_string;
+		if (!val) val = "";
 		add_assoc_string(return_value, key, val, 1);
 	APR_ARRAY_FOREACH_CLOSE()
 }
@@ -203,7 +203,7 @@ PHP_FUNCTION(apache_response_headers)
 	arr = apr_table_elts(ctx->r->headers_out);
 
 	APR_ARRAY_FOREACH_OPEN(arr, key, val)
-		if (!val) val = empty_string;
+		if (!val) val = "";
 		add_assoc_string(return_value, key, val, 1);
 	APR_ARRAY_FOREACH_CLOSE()
 }
@@ -423,7 +423,7 @@ PHP_MINFO_FUNCTION(apache)
 		php_info_print_table_header(2, "Variable", "Value");
 		APR_ARRAY_FOREACH_OPEN(arr, key, val)
 			if (!val) {
-				val = empty_string;
+				val = "";
 			}
 			php_info_print_table_row(2, key, val);
 		APR_ARRAY_FOREACH_CLOSE()
@@ -438,7 +438,7 @@ PHP_MINFO_FUNCTION(apache)
 		arr = apr_table_elts(((php_struct *) SG(server_context))->r->headers_in);
 		APR_ARRAY_FOREACH_OPEN(arr, key, val)
 			if (!val) {
-				val = empty_string;
+				val = "";
 			}
 		        php_info_print_table_row(2, key, val);
 		APR_ARRAY_FOREACH_CLOSE()
@@ -447,7 +447,7 @@ PHP_MINFO_FUNCTION(apache)
 		arr = apr_table_elts(((php_struct *) SG(server_context))->r->headers_out);
 		APR_ARRAY_FOREACH_OPEN(arr, key, val)
 			if (!val) {
-				val = empty_string;
+				val = "";
 			}
 		        php_info_print_table_row(2, key, val);
 		APR_ARRAY_FOREACH_CLOSE()

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.27 2004/03/27 00:50:39 helly Exp $ */
+/* $Id: var_unserializer.re,v 1.28 2004/07/19 07:19:46 andi Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -350,11 +350,7 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 
 	len = parse_iv(start + 2);
 
-	if (len == 0) {
-		str = empty_string;
-	} else {
-		str = estrndup(YYCURSOR, len);
-	}
+	str = estrndup(YYCURSOR, len);
 
 	YYCURSOR += len + 2;
 	*p = YYCURSOR;

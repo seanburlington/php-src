@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.159 2001/09/25 22:48:40 jeroen Exp $ */
+/* $Id: oci8.c,v 1.160 2001/09/26 08:35:42 jeroen Exp $ */
 
 /* TODO list:
  *
@@ -620,7 +620,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.159 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.160 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -688,9 +688,9 @@ _oci_bind_post_exec(void *data TSRMLS_DC)
 		zval *val = bind->zval;
 		zval_dtor(val);
 		ZVAL_NULL(val);
-	} else if (bind->Z_TYPE_P(zval) == IS_STRING && (bind->Z_STRVAL_P(zval) != empty_string)) {
-		bind->Z_STRVAL_P(zval) = erealloc(bind->Z_STRVAL_P(zval), bind->Z_STRLEN_P(zval)+1);
-		bind->Z_STRVAL_P(zval)[ bind->Z_STRLEN_P(zval) ] = '\0';
+	} else if (Z_TYPE_P(bind->zval) == IS_STRING && (Z_STRVAL_P(bind->zval) != empty_string)) {
+		Z_STRVAL_P(bind->zval) = erealloc(Z_STRVAL_P(bind->zval), Z_STRLEN_P(bind->zval)+1);
+		Z_STRVAL_P(bind->zval)[ Z_STRLEN_P(bind->zval) ] = '\0';
 	}
 
 
@@ -2056,11 +2056,11 @@ oci_bind_out_callback(dvoid *octxp,      /* context pointer */
 		zval_dtor(val);
 		
 		Z_STRLEN_P(val) = OCI_PIECE_SIZE; /* 64K-1 is max XXX */
-		Z_STRVAL_P(val) = emalloc(phpbind->Z_STRLEN_P(zval));
+		Z_STRVAL_P(val) = emalloc(Z_STRLEN_P(phpbind->zval));
 		
 		/* XXX we assume that zend-zval len has 4 bytes */
-		*alenpp = (ub4*) &phpbind->Z_STRLEN_P(zval); 
-		*bufpp = phpbind->Z_STRVAL_P(zval);
+		*alenpp = (ub4*) &Z_STRLEN_P(phpbind->zval); 
+		*bufpp = Z_STRVAL_P(phpbind->zval);
 		*piecep = OCI_ONE_PIECE;
 		*rcodepp = &phpbind->retcode;
 		*indpp = &phpbind->indicator;

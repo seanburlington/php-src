@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.157 2002/12/31 00:04:51 iliaa Exp $ */
+/* $Id: zlib.c,v 1.158 2002/12/31 11:42:15 wez Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -352,7 +352,7 @@ PHP_FUNCTION(gzopen)
 	convert_to_string_ex(arg2);
 	p = estrndup(Z_STRVAL_PP(arg2),Z_STRLEN_PP(arg2));
 	
-	stream = php_stream_gzopen(NULL, Z_STRVAL_PP(arg1), p, use_include_path|ENFORCE_SAFE_MODE, NULL, NULL STREAMS_CC TSRMLS_CC);
+	stream = php_stream_gzopen(NULL, Z_STRVAL_PP(arg1), p, use_include_path|ENFORCE_SAFE_MODE|REPORT_ERRORS, NULL, NULL STREAMS_CC TSRMLS_CC);
 	if (!stream) {
 		RETURN_FALSE;
 	}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.30 1999/10/18 15:03:29 thies Exp $ */
+/* $Id: var.c,v 1.31 1999/10/18 17:46:33 thies Exp $ */
 
 
 /* {{{ includes 
@@ -487,11 +487,16 @@ PHP_FUNCTION(unserialize)
 	}
 	if ((*buf)->type == IS_STRING) {
 		const char *p = (*buf)->value.str.val;
+		const char *q;
+
+		q = p;
 
 		if (!php_var_unserialize(&return_value, &p, p + (*buf)->value.str.len)) {
+			php_error(E_NOTICE, "unserialize() failed at offset %d",p-q);
 			RETURN_FALSE;
 		}
 	} else {
+		php_error(E_NOTICE, "argument passed to unserialize() is not an string");
 		RETURN_FALSE;
 	}
 }

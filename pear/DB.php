@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.64 2001/06/07 13:44:44 cox Exp $
+// $Id: DB.php,v 1.65 2001/06/08 01:15:35 cox Exp $
 //
 // Database independent query interface.
 //
@@ -604,7 +604,7 @@ class DB_result
             $fetchmode = $this->dbh->fetchmode;
         }
 
-        $res = $this->dbh->fetchInto($arr, $fetchmode, $rownum);
+        $res = $this->dbh->fetchInto($this->result, $arr, $fetchmode, $rownum);
         if ($res !== DB_OK) {
             return $res;
         }

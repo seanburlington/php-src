@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.1 2000/06/30 16:24:15 zeev Exp $ */
+/* $Id: php_sybase_db.c,v 1.2 2000/07/03 22:04:09 zeev Exp $ */
 
 
 #include "php.h"
@@ -583,9 +583,10 @@ PHP_FUNCTION(sybase_select_db)
 
 static void php_sybase_get_column_content(sybase_link *sybase_ptr,int offset,pval **result_ptr, int column_type)
 {
-	zval *result = *result_ptr;
+	zval *result;
 
 	ALLOC_INIT_ZVAL(result);
+	*result_ptr = result;
 
 	if (dbdatlen(sybase_ptr->link,offset) == 0) {
 		var_reset(result);

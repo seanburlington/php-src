@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.51 2001/10/08 16:42:19 fmk Exp $ */
+/* $Id: php_fbsql.c,v 1.52 2001/10/08 22:24:59 fmk Exp $ */
 
 /* TODO:
  *
@@ -364,7 +364,7 @@ static void php_fbsql_init_globals(zend_fbsql_globals *fbsql_globals)
 		char name[256];
 		gethostname(name, sizeof(name));
 		name[sizeof(name)-1] = 0;
-		fbsql_globals->hostName = estrdup(name);
+		fbsql_globals->hostName = strdup(name);
 	}
 
 	fbsql_globals->persistantCount	= 0;
@@ -1531,7 +1531,7 @@ int mdOk(PHPFBLink* link, FBCMetaData* md, char* sql)
 			else
 				php_error(E_WARNING, "No message");
 		}
-		link->errorText = estrdup(emg);
+		link->errorText = strdup(emg);
 		link->errorNo  = 1;
 		free(emg);
 		fbcemdRelease(emd);

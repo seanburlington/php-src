@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_db.h,v 1.14 2001/12/11 15:29:00 sebastian Exp $ */
+/* $Id: php_db.h,v 1.15 2002/01/20 04:55:40 elixer Exp $ */
 
 
 #ifndef PHP_DB_H
@@ -52,7 +52,7 @@ typedef struct dbm_info {
 #endif
 
 dbm_info *php_find_dbm(pval *id TSRMLS_DC);
-int php_dbm_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
+void php_dbm_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 dbm_info *php_dbm_open(char *filename, char *mode TSRMLS_DC);
 int php_dbm_insert(dbm_info *info, char *key, char *value TSRMLS_DC);
 char *php_dbm_fetch(dbm_info *info, char *key TSRMLS_DC);

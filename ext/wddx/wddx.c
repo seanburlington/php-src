@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.113 2005/03/12 01:44:04 helly Exp $ */
+/* $Id: wddx.c,v 1.114 2005/03/12 01:46:47 helly Exp $ */
 
 #include "php.h"
 
@@ -1030,6 +1030,7 @@ static void php_wddx_process_data(void *user_data, const XML_Char *s, int len)
 
 			case ST_BINARY:
 				if (Z_STRLEN_P(ent->data) == 0) {
+					STR_FREE(Z_STRVAL_P(ent->data));
 					Z_STRVAL_P(ent->data) = estrndup(s, len + 1);
 				} else {
 					Z_STRVAL_P(ent->data) = erealloc(Z_STRVAL_P(ent->data), Z_STRLEN_P(ent->data) + len + 1);

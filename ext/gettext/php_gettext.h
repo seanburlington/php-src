@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gettext.h,v 1.15 2001/12/11 15:29:24 sebastian Exp $ */
+/* $Id: php_gettext.h,v 1.16 2002/12/31 16:06:40 sebastian Exp $ */
 
 #ifndef PHP_GETTEXT_H
 #define PHP_GETTEXT_H

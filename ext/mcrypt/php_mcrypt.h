@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |          Derick Rethans <d.rethans@jdimedia.nl>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_mcrypt.h,v 1.20 2001/12/20 17:08:16 sebastian Exp $ */
+/* $Id: php_mcrypt.h,v 1.21 2002/12/31 16:06:55 sebastian Exp $ */
 
 #ifndef PHP_MCRYPT_H
 #define PHP_MCRYPT_H

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.73 2002/11/29 11:22:06 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.74 2002/12/31 16:06:32 sebastian Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.25 2002/11/25 12:30:23 hholzgra Exp $ */
+/* $Id: php_imap.h,v 1.26 2002/12/31 16:06:45 sebastian Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H

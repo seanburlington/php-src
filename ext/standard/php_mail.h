@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_mail.h,v 1.14 2002/08/08 17:53:52 helly Exp $ */
+/* $Id: php_mail.h,v 1.15 2002/12/31 16:07:52 sebastian Exp $ */
 
 #ifndef PHP_MAIL_H
 #define PHP_MAIL_H

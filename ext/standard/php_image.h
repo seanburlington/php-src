@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_image.h,v 1.19 2002/06/24 19:36:26 helly Exp $ */
+/* $Id: php_image.h,v 1.20 2002/12/31 16:07:51 sebastian Exp $ */
 
 #ifndef PHP_IMAGE_H
 #define PHP_IMAGE_H

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.31 2004/09/12 12:23:16 helly Exp $ */
+/* $Id: var_unserializer.re,v 1.32 2004/09/12 12:43:05 helly Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -217,6 +217,11 @@ static inline int process_nested_data(UNSERIALIZE_PARAMETER, HashTable *ht, int 
 		
 		zval_dtor(key);
 		FREE_ZVAL(key);
+
+		if (elements && *(*p-1) != ';' &&  *(*p-1) != '}') {
+			(*p)--;
+			return 0;
+		}
 	}
 
 	return 1;

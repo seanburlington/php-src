@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Command.php,v 1.4 2002/03/18 17:39:44 ssb Exp $
+// $Id: Command.php,v 1.5 2002/03/21 11:10:17 cox Exp $
 
 
 require_once "PEAR.php";
@@ -88,14 +88,14 @@ class PEAR_Command
      *
      * @access public
      */
-    function factory($command)
+    function factory($command, &$config)
     {
         if (empty($GLOBALS['_PEAR_Command_commandlist'])) {
             PEAR_Command::registerCommands();
         }
         if (isset($GLOBALS['_PEAR_Command_commandlist'][$command])) {
             $class = $GLOBALS['_PEAR_Command_commandlist'][$command];
-            $obj = &new $class(PEAR_Command::getUIObject());
+            $obj = &new $class(PEAR_Command::getUIObject(), $config);
             return $obj;
         }
         return PEAR::raiseError("unknown command `$command'");

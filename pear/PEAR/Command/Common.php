@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.4 2002/03/18 17:39:45 ssb Exp $
+// $Id: Common.php,v 1.5 2002/03/21 11:10:17 cox Exp $
 
 require_once "PEAR.php";
 //require_once "PEAR/CommandResponse.php";
@@ -42,10 +42,10 @@ class PEAR_Command_Common extends PEAR
      *
      * @access public
      */
-    function PEAR_Command_Common(&$ui)
+    function PEAR_Command_Common(&$ui, &$config)
     {
         parent::PEAR();
-        $this->config = &PEAR_Config::singleton();
+        $this->config =& $config;
         $this->ui = $ui;
     }
 

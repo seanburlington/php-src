@@ -1,9 +1,6 @@
-# $Id: Makefile.am,v 1.8 1999/11/27 22:04:25 sas Exp $
+# $Id: Makefile.am,v 1.9 1999/12/05 23:11:37 sas Exp $
 
 noinst_LTLIBRARIES=libphpext_informix.la
-noinst_LIBRARIES=libphp_ifx.a
-libphp_ifx_a_SOURCES=stub.c
-libphp_ifx_a_LIBADD=@IFX_OBJS@
 libphpext_informix_la_SOURCES=ifx.c
 libphpext_informix_la_LIBADD=@IFX_LIBS@
 

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.65 1999/05/28 03:54:15 rasmus Exp $ */
+/* $Id: main.c,v 1.66 1999/05/28 11:09:36 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -701,8 +701,8 @@ void php_request_shutdown(void *dummy)
 
 
 	shutdown_scanner(CLS_C);
-	shutdown_compiler(CLS_C);
 	shutdown_executor(ELS_C);
+	shutdown_compiler(CLS_C);
 
 	sapi_deactivate(SLS_C);
 

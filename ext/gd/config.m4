@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.66 2001/06/03 21:32:53 sniper Exp $
+dnl $Id: config.m4,v 1.67 2001/06/04 01:36:14 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -144,7 +144,7 @@ AC_DEFUN(PHP_GD_T1LIB,[
       fi
     done
 
-    if test "$T1_DIR"; then
+    if test -n "$T1_DIR"; then
       AC_CHECK_LIB(t1, T1_GetExtend, 
       [
         AC_DEFINE(HAVE_LIBT1,1,[ ])

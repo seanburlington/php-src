@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Command.php,v 1.3 2002/03/01 09:43:18 ssb Exp $
+// $Id: Command.php,v 1.4 2002/03/18 17:39:44 ssb Exp $
 
 
 require_once "PEAR.php";
@@ -26,6 +26,12 @@ require_once "PEAR.php";
  * @var array command => implementing class
  */
 $GLOBALS['_PEAR_Command_commandlist'] = array();
+
+/**
+ * Which user interface class is being used.
+ * @var string class name
+ */
+$GLOBALS['_PEAR_Command_uiclass'] = 'PEAR_CommandUI_CLI';
 
 /**
  * PEAR command class, a simple factory class for administrative
@@ -82,17 +88,40 @@ class PEAR_Command
      *
      * @access public
      */
-    function factory(&$config, $command)
+    function factory($command)
     {
         if (empty($GLOBALS['_PEAR_Command_commandlist'])) {
             PEAR_Command::registerCommands();
         }
         if (isset($GLOBALS['_PEAR_Command_commandlist'][$command])) {
             $class = $GLOBALS['_PEAR_Command_commandlist'][$command];
-            $obj =& new $class($config);
+            $obj = &new $class(PEAR_Command::getUIObject());
             return $obj;
         }
-        return PEAR::raiseError("unknown command: $command");
+        return PEAR::raiseError("unknown command `$command'");
+    }
+
+    function &getUIObject()
+    {
+        global $_PEAR_Command_uiclass, $_PEAR_Command_uiobject;
+        if (empty($_PEAR_Command_uiobject)) {
+            $_PEAR_Command_uiobject = &new $_PEAR_Command_uiclass;
+        }
+        return $_PEAR_Command_uiobject;
+    }
+
+    function setUIClass($uiclass)
+    {
+        $GLOBALS['_PEAR_Command_uiclass'] = $uiclass;
+        $file = str_replace("_", "/", $uiclass) . '.php';
+        include_once $file;
+        return class_exists(strtolower($uiclass));
+    }
+
+    function setUIType($uitype)
+    {
+        $uiclass = 'PEAR_CommandUI_' . $uitype;
+        return PEAR_Command::setUIClass($uiclass);
     }
 
     /**
@@ -119,13 +148,16 @@ class PEAR_Command
         }
         $dp = @opendir($dir);
         if (empty($dp)) {
-            return PEAR::raiseError("PEAR_Command::registerCommands: opendir($dir) failed");
+            return PEAR::raiseError("PEAR_Command::registerCommands: ".
+                                    "opendir($dir) failed");
         }
         if (!$merge) {
             $GLOBALS['_PEAR_Command_commandlist'] = array();
         }
         while ($entry = readdir($dp)) {
-            if ($entry{0} == '.' || substr($entry, -4) != '.php' || $entry == 'Common.php') {
+            if ($entry{0} == '.' || substr($entry, -4) != '.php' ||
+                $entry == 'Common.php')
+            {
                 continue;
             }
             $class = "PEAR_Command_".substr($entry, 0, -4);
@@ -149,6 +181,9 @@ class PEAR_Command
      */
     function getCommands()
     {
+        if (empty($GLOBALS['_PEAR_Command_commandlist'])) {
+            PEAR_Command::registerCommands();
+        }
         return $GLOBALS['_PEAR_Command_commandlist'];
     }
 }

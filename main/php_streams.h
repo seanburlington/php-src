@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.86 2003/11/28 23:25:26 pollita Exp $ */
+/* $Id: php_streams.h,v 1.87 2003/12/01 19:47:03 pollita Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -319,6 +319,7 @@ PHPAPI int _php_stream_set_option(php_stream *stream, int option, int value, voi
 
 /* Flags for url_stat method in wrapper ops */
 #define PHP_STREAM_URL_STAT_LINK	1
+#define PHP_STREAM_URL_STAT_QUIET	2
 
 /* change the blocking mode of stream: value == 1 => blocking, value == 0 => non-blocking. */
 #define PHP_STREAM_OPTION_BLOCKING	1

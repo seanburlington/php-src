@@ -20,7 +20,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.23 2000/02/05 15:16:10 zeev Exp $ */
+/* $Id: ldap.c,v 1.24 2000/02/16 09:33:19 andi Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -31,7 +31,7 @@
 #include "ext/standard/dl.h"
 #include "php_ldap.h"
 
-#if WIN32|WINNT
+#ifdef PHP_WIN32
 #include <string.h>
 #if HAVE_NSLDAP
 #include <winsock.h>
@@ -277,7 +277,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_printf("<table>"
 				"<tr><td>Total links:</td><td>%d/%s</td></tr>\n"
-		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.23 2000/02/05 15:16:10 zeev Exp $</td></tr>\n"
+		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.24 2000/02/16 09:33:19 andi Exp $</td></tr>\n"
 #if HAVE_NSLDAP
 				"<tr><td>SDK Version:</td><td>%f</td></tr>"
 				"<tr><td>Highest LDAP Protocol Supported:</td><td>%f</td></tr>"

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_service.c,v 1.7 2004/04/05 13:22:33 abies Exp $ */
+/* $Id: ibase_service.c,v 1.8 2004/04/07 10:36:00 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,6 +28,12 @@
 
 #include "php_interbase.h"
 #include "php_ibase_includes.h"
+
+typedef struct {
+	isc_svc_handle handle;
+	char *hostname;
+	char *username;
+} ibase_service;
 
 static int le_service;
 

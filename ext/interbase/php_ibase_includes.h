@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ibase_includes.h,v 1.6 2004/04/05 13:22:34 abies Exp $ */
+/* $Id: php_ibase_includes.h,v 1.7 2004/04/07 10:36:00 abies Exp $ */
 
 #ifndef PHP_IBASE_INCLUDES_H
 #define PHP_IBASE_INCLUDES_H
@@ -144,12 +144,6 @@ typedef struct event {
 	struct event *event_next;
 	enum event_state { NEW, ACTIVE, DEAD } state;
 } ibase_event;
-
-typedef struct {
-	isc_svc_handle handle;
-	char *hostname;
-	char *username;
-} ibase_service;
 
 enum php_interbase_option {
 	PHP_IBASE_DEFAULT 			= 0,

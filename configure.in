@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.337 2002/04/11 15:15:33 wez Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.338 2002/04/23 02:51:17 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -135,6 +135,9 @@ AC_AIX
 
 abs_srcdir=`(cd $srcdir; pwd)`
 abs_builddir=`pwd`
+
+php_abs_top_srcdir=`(cd $srcdir; pwd)`
+php_abs_top_builddir=`pwd`
 
 dnl Because ``make install'' is often performed by the superuser,
 dnl we create the libs subdirectory as the user who configures PHP.
@@ -977,6 +980,9 @@ PHP_SUBST(EXT_LIBS)
 
 PHP_SUBST_OLD(abs_builddir)
 PHP_SUBST_OLD(abs_srcdir)
+PHP_SUBST_OLD(php_abs_top_builddir)
+PHP_SUBST_OLD(php_abs_top_srcdir)
+
 PHP_SUBST(bindir)
 PHP_SUBST(exec_prefix)
 PHP_SUBST(includedir)
@@ -1005,7 +1011,8 @@ PHP_SUBST_OLD(EXTENSION_DIR)
 PHP_SUBST(EXTRA_LDFLAGS)
 PHP_SUBST_OLD(EXTRA_LIBS)
 PHP_SUBST_OLD(ZEND_EXTRA_LIBS)
-PHP_SUBST(INCLUDES)
+PHP_SUBST_OLD(INCLUDES)
+PHP_SUBST_OLD(EXTRA_INCLUDES)
 PHP_SUBST_OLD(INCLUDE_PATH)
 PHP_SUBST_OLD(INSTALL_IT)
 PHP_SUBST(LEX)

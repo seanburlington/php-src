@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php_sybase.h,v 1.4 2000/06/10 08:47:58 andi Exp $ */
+/* $Id: php_sybase_db.h,v 1.1 2000/06/30 16:24:16 zeev Exp $ */
 
 #ifndef _PHP_SYBASE_H
 #define _PHP_SYBASE_H
@@ -117,7 +117,7 @@ typedef struct {
 } sybase_field;
 
 typedef struct {
-	pval **data;
+	pval ***data;
 	sybase_field *fields;
 	sybase_link *sybase_ptr;
 	int cur_row,cur_field;

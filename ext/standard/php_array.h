@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_array.h,v 1.46 2004/01/08 17:32:51 sniper Exp $ */
+/* $Id: php_array.h,v 1.47 2004/07/21 21:17:56 andrey Exp $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H
@@ -76,12 +76,16 @@ PHP_FUNCTION(array_change_key_case);
 PHP_FUNCTION(array_rand);
 PHP_FUNCTION(array_unique);
 PHP_FUNCTION(array_intersect);
+PHP_FUNCTION(array_intersect_key);
+PHP_FUNCTION(array_intersect_ukey);
 PHP_FUNCTION(array_uintersect);
 PHP_FUNCTION(array_intersect_assoc);
 PHP_FUNCTION(array_uintersect_assoc);
 PHP_FUNCTION(array_intersect_uassoc);
 PHP_FUNCTION(array_uintersect_uassoc);
 PHP_FUNCTION(array_diff);
+PHP_FUNCTION(array_diff_key);
+PHP_FUNCTION(array_diff_ukey);
 PHP_FUNCTION(array_udiff);
 PHP_FUNCTION(array_diff_assoc);
 PHP_FUNCTION(array_udiff_assoc);

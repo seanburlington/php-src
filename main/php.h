@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.112 2000/08/20 12:49:56 sas Exp $ */
+/* $Id: php.h,v 1.113 2000/08/20 14:02:57 sas Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -65,9 +65,11 @@ extern unsigned char second_arg_allow_ref[];
 #	else
 #	define PHPAPI __declspec(dllimport) 
 #	endif
+#define PHP_SEPARATOR '\\'
 #else
 #define PHPAPI
 #define THREAD_LS
+#define PHP_SEPARATOR '/'
 #endif
 
 #include "php_regex.h"

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.19 2004/07/18 11:45:12 rrichards Exp $ */
+/* $Id: libxml.c,v 1.20 2004/07/25 10:37:27 chregu Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -355,7 +355,7 @@ static void php_libxml_internal_error_handler(int error_type, void *ctx, const c
 				php_libxml_ctx_error_level(E_NOTICE, ctx, LIBXML(error_buffer).c TSRMLS_CC);
 				break;
 			default:
-				php_error(E_WARNING, "%s", LIBXML(error_buffer).c);
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", LIBXML(error_buffer).c);
 		}
 		smart_str_free(&LIBXML(error_buffer));
 	}

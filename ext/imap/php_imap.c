@@ -25,7 +25,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.105 2001/10/11 23:32:54 ssb Exp $ */
+/* $Id: php_imap.c,v 1.106 2001/11/24 15:32:00 zeev Exp $ */
 
 #define IMAP41
 
@@ -4078,6 +4078,9 @@ void mm_log(char *str, long errflg)
 	TSRMLS_FETCH();
   
 	/* Author: CJH */
+	if (!(EG(error_reporting) & E_NOTICE)) {
+		return;
+	}
 	if (errflg != NIL) { /* CJH: maybe put these into a more comprehensive log for debugging purposes? */
 		if (IMAPG(imap_errorstack) == NIL) {
 			IMAPG(imap_errorstack) = mail_newerrorlist();

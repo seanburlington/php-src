@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.24 2004/08/20 00:57:35 iliaa Exp $ */
+/* $Id: curl.c,v 1.124.2.25 2004/08/20 13:52:15 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -782,9 +782,6 @@ PHP_FUNCTION(curl_setopt)
 		case CURLOPT_HTTPGET:
 		case CURLOPT_HTTP_VERSION:
 		case CURLOPT_CRLF:
-		case CURL_TIMECOND_IFMODSINCE:
-		case CURL_TIMECOND_IFUNMODSINCE:
-		case CURL_TIMECOND_LASTMOD:
 #if LIBCURL_VERSION_NUM > 0x070a05 /* CURLOPT_HTTPAUTH is available since curl 7.10.6 */
 		case CURLOPT_HTTPAUTH:
 #endif

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.57 2004/11/04 15:30:28 dmitry Exp $ */
+/* $Id: php_http.c,v 1.58 2004/12/01 16:59:48 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -380,6 +380,10 @@ try_again:
 		smart_str_append_const(&soap_headers, " HTTP/1.1\r\n"
 			"Host: ");
 		smart_str_appends(&soap_headers, phpurl->host);
+		if (phpurl->port != 80) {
+			smart_str_appendc(&soap_headers, ':');
+			smart_str_append_unsigned(&soap_headers, phpurl->port);
+		}
 		smart_str_append_const(&soap_headers, "\r\n"
 			"Connection: Keep-Alive\r\n"
 /*

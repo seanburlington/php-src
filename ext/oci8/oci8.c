@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.82 2000/05/23 09:33:42 sas Exp $ */
+/* $Id: oci8.c,v 1.83 2000/05/23 22:30:21 hholzgra Exp $ */
 
 /* TODO list:
  *
@@ -3255,9 +3255,9 @@ PHP_FUNCTION(ocicolumnisnull)
 
 /* }}} */
 
-/* {{{ proto void ocidebug(int onoff)
-   Toggle internal debugging output for the OCI extension */
 
+/* {{{ proto void ociinternaldebug(int onoff)
+   Toggle internal debugging output for the OCI extension */
 /* Disables or enables the internal debug output.
  * By default it is disabled.
  */

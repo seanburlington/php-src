@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.47 2004/08/04 12:59:09 georg Exp $ 
+  $Id: mysqli.c,v 1.48 2004/08/04 13:15:48 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -170,8 +170,6 @@ static int mysqli_write_na(mysqli_object *obj, zval *newval TSRMLS_DC)
 	return FAILURE;
 }
 /* }}} */
-
-MYSQL *p;
 
 /* {{{ mysqli_read_property */
 zval *mysqli_read_property(zval *object, zval *member, int type TSRMLS_DC)

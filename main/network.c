@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.47 2002/04/15 20:12:29 wez Exp $ */
+/* $Id: network.c,v 1.48 2002/04/19 10:06:41 wez Exp $ */
 
 #define MAX_CHUNKS_PER_READ 10
 
@@ -465,7 +465,7 @@ PHPAPI php_stream *_php_stream_sock_open_unix(const char *path, int pathlen, int
 	memset(&unix_addr, 0, sizeof(unix_addr));
 	unix_addr.sun_family = AF_UNIX;
 
-	/* we need to be binary safe for the on systems that support an abstract
+	/* we need to be binary safe on systems that support an abstract
 	 * namespace */
 	if (pathlen >= sizeof(unix_addr.sun_path)) {
 		/* On linux, when the path begins with a NUL byte we are

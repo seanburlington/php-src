@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.128 2002/04/16 22:14:24 wez Exp $ */
+/* $Id: zlib.c,v 1.129 2002/04/19 10:06:41 wez Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -181,7 +181,7 @@ PHP_MINIT_FUNCTION(zlib)
 #ifdef ZTS
 	ts_allocate_id(&zlib_globals_id, sizeof(zend_zlib_globals), (ts_allocate_ctor) php_zlib_init_globals, NULL);
 #endif
-	php_register_url_stream_wrapper("zlib", &php_stream_gzip_wrapper TSRMLS_CC);
+	php_register_url_stream_wrapper("compress.zlib", &php_stream_gzip_wrapper TSRMLS_CC);
 
 	REGISTER_LONG_CONSTANT("FORCE_GZIP", CODING_GZIP, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FORCE_DEFLATE", CODING_DEFLATE, CONST_CS | CONST_PERSISTENT);

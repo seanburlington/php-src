@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.94 2002/03/20 14:21:28 wez Exp $ */
+/* $Id: fsock.c,v 1.95 2002/04/19 10:06:41 wez Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -84,8 +84,6 @@
 
 #ifdef ZTS
 static int fsock_globals_id;
-#else
-extern int le_fp;
 #endif
 
 #ifdef PHP_WIN32

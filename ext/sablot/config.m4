@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.12 2001/01/11 18:25:33 sniper Exp $
+dnl $Id: config.m4,v 1.13 2001/01/18 15:09:35 sniper Exp $
 dnl config.m4 for extension Sablot
 
 PHP_ARG_WITH(expat-dir, for Sablotron XSL support,
@@ -45,7 +45,7 @@ if test "$PHP_SABLOT" != "no"; then
     fi
   done
 
-  if test "$testval" == "no"; then
+  if test "$testval" = "no"; then
     AC_ADD_LIBRARY(xmlparse)
     AC_ADD_LIBRARY(xmltok)
   fi

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.174 2003/08/28 16:35:32 sniper Exp $ */
+/* $Id: php_odbc.c,v 1.175 2003/08/31 12:41:41 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -154,6 +154,9 @@ ZEND_API php_odbc_globals odbc_globals;
 
 #ifdef COMPILE_DL_ODBC
 ZEND_GET_MODULE(odbc)
+# ifdef PHP_WIN32
+# include "zend_arg_defs.c"
+# endif
 #endif
 
 /* {{{ _free_odbc_result

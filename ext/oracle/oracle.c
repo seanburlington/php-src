@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.92 2003/08/12 00:55:56 iliaa Exp $ */
+/* $Id: oracle.c,v 1.93 2003/08/31 12:41:44 zeev Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -195,6 +195,9 @@ static const text *ora_func_tab[] =
 
 #ifdef COMPILE_DL_ORACLE
 ZEND_GET_MODULE(oracle)
+# ifdef PHP_WIN32
+# include "zend_arg_defs.c"
+# endif
 #endif
 
 /* {{{ _close_oraconn

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.90 2003/08/29 23:30:03 helly Exp $ 
+   $Id: sqlite.c,v 1.91 2003/08/31 12:41:48 zeev Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -276,6 +276,9 @@ zend_module_entry sqlite_module_entry = {
 
 #ifdef COMPILE_DL_SQLITE
 ZEND_GET_MODULE(sqlite)
+# ifdef PHP_WIN32
+# include "zend_arg_defs.c"
+# endif
 #endif
 
 static int php_sqlite_callback_invalidator(struct php_sqlite_agg_functions *funcs TSRMLS_DC)
@@ -941,7 +944,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.90 2003/08/29 23:30:03 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.91 2003/08/31 12:41:48 zeev Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1754,10 +1757,15 @@ PHP_FUNCTION(sqlite_fetch_object)
 		}
 		fci.no_separation = 1;
 	
+
 		fcc.initialized = 1;
+
 		fcc.function_handler = ce->constructor;
+
 		fcc.calling_scope = EG(scope);
+
 		fcc.object_pp = &return_value;
+
 	
 		if (zend_call_function(&fci, &fcc TSRMLS_CC) == FAILURE) {
 			zend_throw_exception_ex(sqlite_ce_exception, 0 TSRMLS_CC, "Could not execute %s::%s()", class_name, ce->constructor->common.function_name);

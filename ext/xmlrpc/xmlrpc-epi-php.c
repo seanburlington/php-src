@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.33 2003/08/03 17:44:38 zeev Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.34 2003/08/31 12:41:52 zeev Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -113,6 +113,9 @@ zend_module_entry xmlrpc_module_entry = {
 
 #ifdef COMPILE_DL_XMLRPC
 ZEND_GET_MODULE(xmlrpc)
+# ifdef PHP_WIN32
+# include "zend_arg_defs.c"
+# endif
 #endif
 
 /*******************************

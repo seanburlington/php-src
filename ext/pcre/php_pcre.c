@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.144 2003/08/28 17:09:44 sas Exp $ */
+/* $Id: php_pcre.c,v 1.145 2003/08/31 12:41:46 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1529,6 +1529,9 @@ zend_module_entry pcre_module_entry = {
 
 #ifdef COMPILE_DL_PCRE
 ZEND_GET_MODULE(pcre)
+# ifdef PHP_WIN32
+# include "zend_arg_defs.c"
+# endif
 #endif
 
 /* }}} */

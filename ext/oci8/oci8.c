@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.215 2003/08/12 11:37:40 andrey Exp $ */
+/* $Id: oci8.c,v 1.216 2003/08/31 12:41:40 zeev Exp $ */
 
 /* TODO list:
  *
@@ -144,6 +144,9 @@ PHP_OCI_API php_oci_globals oci_globals;
 
 #ifdef COMPILE_DL_OCI8
 ZEND_GET_MODULE(oci8)
+# ifdef PHP_WIN32
+# include "zend_arg_defs.c"
+# endif
 #endif /* COMPILE_DL */
 
 /* }}} */
@@ -644,7 +647,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.215 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.216 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );

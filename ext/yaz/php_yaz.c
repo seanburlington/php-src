@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.79 2003/08/03 17:44:38 zeev Exp $ */
+/* $Id: php_yaz.c,v 1.80 2003/08/31 12:41:53 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1604,6 +1604,9 @@ zend_module_entry yaz_module_entry = {
 
 #ifdef COMPILE_DL_YAZ
 ZEND_GET_MODULE(yaz)
+# ifdef PHP_WIN32
+# include "zend_arg_defs.c"
+# endif
 #endif
 
 #endif

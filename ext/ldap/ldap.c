@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.144 2003/08/05 11:54:01 sniper Exp $ */
+/* $Id: ldap.c,v 1.145 2003/08/31 12:41:36 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -180,6 +180,9 @@ zend_module_entry ldap_module_entry = {
 
 #ifdef COMPILE_DL_LDAP
 ZEND_GET_MODULE(ldap)
+# ifdef PHP_WIN32
+# include "zend_arg_defs.c"
+# endif
 #endif
 
 static void _close_ldap_link(zend_rsrc_list_entry *rsrc TSRMLS_DC)
@@ -299,7 +302,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.144 2003/08/05 11:54:01 sniper Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.145 2003/08/31 12:41:36 zeev Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: mcve.c,v 1.25 2003/08/29 00:53:45 sniper Exp $ */
+/* $Id: mcve.c,v 1.26 2003/08/31 12:41:38 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -150,6 +150,9 @@ zend_module_entry mcve_module_entry = {
 /* declare the module for dynamic loading */
 #ifdef COMPILE_DL_MCVE
 ZEND_GET_MODULE(mcve)
+# ifdef PHP_WIN32
+# include "zend_arg_defs.c"
+# endif
 #endif
 
 /* {{{ MCVE_CONN destructor */

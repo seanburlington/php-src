@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.79 2003/08/03 17:44:37 zeev Exp $ */
+/* $Id: openssl.c,v 1.80 2003/08/31 12:41:42 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -145,6 +145,9 @@ zend_module_entry openssl_module_entry = {
 
 #ifdef COMPILE_DL_OPENSSL
 ZEND_GET_MODULE(openssl)
+# ifdef PHP_WIN32
+# include "zend_arg_defs.c"
+# endif
 #endif
 
 static int le_key;

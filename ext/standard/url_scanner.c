@@ -15,11 +15,9 @@
    | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.33 2001/07/28 11:36:19 zeev Exp $ */
+/* $Id: url_scanner.c,v 1.34 2001/08/25 16:09:22 zeev Exp $ */
 
 #include "php.h"
-
-#ifdef TRANS_SID
 
 #include "php_globals.h"
 
@@ -373,7 +371,6 @@ char *url_adapt(const char *src, size_t srclen, const char *data, size_t *newlen
 	return out;
 }
 /* }}} */
-#endif
 
 /*
  * Local variables:

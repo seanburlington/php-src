@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.88 2001/08/08 20:05:36 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.89 2001/08/25 16:09:22 zeev Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -26,10 +26,8 @@
 
 #include "zend_highlight.h"
 
-#ifdef TRANS_SID
-#  include "url_scanner.h"
-#  include "url_scanner_ex.h"
-#endif
+#include "url_scanner.h"
+#include "url_scanner_ex.h"
 
 extern zend_module_entry basic_functions_module;
 #define basic_functions_module_ptr &basic_functions_module
@@ -183,12 +181,10 @@ typedef struct {
 	zend_class_entry *incomplete_class;
 	zend_bool use_trans_sid;
 
-#ifdef TRANS_SID
 	/* url_scanner.c */
 	url_adapt_state_t url_adapt_state;
 	/* url_scanner_ex.re */
 	url_adapt_state_ex_t url_adapt_state_ex;
-#endif
 
 #ifdef HAVE_MMAP
 	void *mmap_file;

@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hartmut@six.de>                         |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.10 2002/08/22 13:16:03 edink Exp $ 
+  $Id: mime_magic.c,v 1.11 2002/08/22 13:23:51 edink Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the lincense section is a little bit longer than usual:
@@ -165,7 +165,7 @@
 #endif
 
 #ifdef PHP_WIN32
-#define PHP_MIME_MAGIC_FILE_PATH PHP_PREFIX "\\mime.magic"
+#define PHP_MIME_MAGIC_FILE_PATH PHP_PREFIX "\\magic.mime"
 #endif
 
 #define MODNAME "mime_magic"

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.43 2000/02/02 18:42:03 zeev Exp $ */
+/* $Id: xml.c,v 1.44 2000/02/05 17:58:11 andi Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -158,9 +158,6 @@ static void php_xml_init_globals(php_xml_globals *xml_globals)
 
 PHP_MINIT_FUNCTION(xml)
 {
-
-	ELS_FETCH();
-
 	le_xml_parser =	register_list_destructors(xml_parser_dtor, NULL);
 
 #ifdef ZTS

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: mysql.c,v 1.3 1999/04/23 12:38:45 zeev Exp $ */
+/* $Id: mysql.c,v 1.4 1999/04/28 20:26:31 zeev Exp $ */
 
 
 /* TODO:
@@ -239,7 +239,7 @@ static PHP_INI_MH(OnMySQLInt)
 	base = (char *) mysql_globals;
 #endif
 
-	p = (long *) (base+(size_t) mh_arg);
+	p = (long *) (base+(size_t) mh_arg1);
 
 	*p = atoi(new_value);
 	return SUCCESS;	
@@ -258,7 +258,7 @@ static PHP_INI_MH(OnMySQLStr)
 	base = (char *) mysql_globals;
 #endif
 
-	p = (char **) (base+(size_t) mh_arg);
+	p = (char **) (base+(size_t) mh_arg1);
 
 	*p = new_value;
 	return SUCCESS;
@@ -292,13 +292,13 @@ static PHP_INI_MH(OnMySQLPort)
 
 
 PHP_INI_BEGIN()
-	PHP_INI_ENTRY("mysql.allow_persistent",	"1",	PHP_INI_SYSTEM,		OnMySQLInt,		(void *) XtOffsetOf(php_mysql_globals, allow_persistent))
-	PHP_INI_ENTRY("mysql.max_persistent",	"-1",	PHP_INI_SYSTEM,		OnMySQLInt,		(void *) XtOffsetOf(php_mysql_globals, max_persistent))
-	PHP_INI_ENTRY("mysql.max_links",		"-1",	PHP_INI_SYSTEM,		OnMySQLInt,		(void *) XtOffsetOf(php_mysql_globals, max_links))
-	PHP_INI_ENTRY("mysql.default_host",		NULL,	PHP_INI_ALL,		OnMySQLStr,		(void *) XtOffsetOf(php_mysql_globals, default_host))
-	PHP_INI_ENTRY("mysql.default_user",		NULL,	PHP_INI_ALL,		OnMySQLStr,		(void *) XtOffsetOf(php_mysql_globals, default_user))
-	PHP_INI_ENTRY("mysql.default_password",	NULL,	PHP_INI_ALL,		OnMySQLStr,		(void *) XtOffsetOf(php_mysql_globals, default_password))
-	PHP_INI_ENTRY("mysql.default_port",		NULL,	PHP_INI_ALL,		OnMySQLPort,	NULL)
+	PHP_INI_ENTRY1("mysql.allow_persistent",	"1",	PHP_INI_SYSTEM,		OnMySQLInt,		(void *) XtOffsetOf(php_mysql_globals, allow_persistent))
+	PHP_INI_ENTRY1("mysql.max_persistent",	"-1",	PHP_INI_SYSTEM,		OnMySQLInt,		(void *) XtOffsetOf(php_mysql_globals, max_persistent))
+	PHP_INI_ENTRY1("mysql.max_links",		"-1",	PHP_INI_SYSTEM,		OnMySQLInt,		(void *) XtOffsetOf(php_mysql_globals, max_links))
+	PHP_INI_ENTRY1("mysql.default_host",		NULL,	PHP_INI_ALL,		OnMySQLStr,		(void *) XtOffsetOf(php_mysql_globals, default_host))
+	PHP_INI_ENTRY1("mysql.default_user",		NULL,	PHP_INI_ALL,		OnMySQLStr,		(void *) XtOffsetOf(php_mysql_globals, default_user))
+	PHP_INI_ENTRY1("mysql.default_password",	NULL,	PHP_INI_ALL,		OnMySQLStr,		(void *) XtOffsetOf(php_mysql_globals, default_password))
+	PHP_INI_ENTRY1("mysql.default_port",		NULL,	PHP_INI_ALL,		OnMySQLPort,	NULL)
 PHP_INI_END()
 
 

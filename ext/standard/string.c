@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.12 2003/02/10 19:37:27 pollita Exp $ */
+/* $Id: string.c,v 1.333.2.13 2003/02/14 18:44:50 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -836,7 +836,8 @@ PHPAPI void php_implode(zval *delim, zval *arr, zval *return_value)
 	while (zend_hash_get_current_data_ex(Z_ARRVAL_P(arr), 
 										 (void **) &tmp,
 										 &pos) == SUCCESS) {
-		convert_to_string_ex(tmp);
+		SEPARATE_ZVAL(tmp);
+		convert_to_string(&tmp);
 
 		smart_str_appendl(&implstr, Z_STRVAL_PP(tmp), Z_STRLEN_PP(tmp));
 		if (++i != numelems) {

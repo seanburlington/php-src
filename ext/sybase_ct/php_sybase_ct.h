@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php3_sybase-ct.h,v 1.3 1999/05/21 10:06:19 sas Exp $ */
+/* $Id: php_sybase_ct.h,v 1.1 1999/08/13 00:14:16 zeev Exp $ */
 
 #ifndef _PHP3_SYBASE_CT_H
 #define _PHP3_SYBASE_CT_H
@@ -119,5 +119,7 @@ extern sybct_module php3_sybct_module;
 #define sybct_module_ptr NULL
 
 #endif
+
+#define phpext_sybase_ct_ptr sybct_module_ptr
 
 #endif /* _PHP3_SYBASE_CT_H */

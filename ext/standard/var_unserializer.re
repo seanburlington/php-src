@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.26 2004/03/23 22:30:25 helly Exp $ */
+/* $Id: var_unserializer.re,v 1.27 2004/03/27 00:50:39 helly Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -320,7 +320,24 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 	return 1;
 }
 
-"d:" (iv | nv | nvexp | "NAN" | "-"? "INF") ";"	{
+"d:" ("NAN" | "-"? "INF") ";"	{
+	*p = YYCURSOR;
+	INIT_PZVAL(*rval);
+#if defined(HAVE_ATOF_ACCEPTS_NAN) && defined(HAVE_ATOF_ACCEPTS_INF)
+	ZVAL_DOUBLE(*rval, atof(start + 2));
+#else
+	if (!strncmp(start + 2, "NAN", 3)) {
+		ZVAL_DOUBLE(*rval, php_get_nan());
+	} else if (!strncmp(start + 2, "INF", 3)) {
+		ZVAL_DOUBLE(*rval, php_get_inf());
+	} else if (!strncmp(start + 2, "-INF", 4)) {
+		ZVAL_DOUBLE(*rval, -php_get_inf());
+	}
+#endif
+	return 1;
+}
+
+"d:" (iv | nv | nvexp) ";"	{
 	*p = YYCURSOR;
 	INIT_PZVAL(*rval);
 	ZVAL_DOUBLE(*rval, atof(start + 2));

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.658 2004/03/26 19:53:07 helly Exp $ */
+/* $Id: basic_functions.c,v 1.659 2004/03/27 00:50:39 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -950,7 +950,7 @@ static void basic_globals_dtor(php_basic_globals *basic_globals_p TSRMLS_DC)
 #define PHP_DOUBLE_INFINITY_HIGH       0x7ff00000
 #define PHP_DOUBLE_QUIET_NAN_HIGH      0xfff80000
 
-static double php_get_nan()
+PHPAPI double php_get_nan()
 {
 #if defined(__i386__) || defined(_X86_) || defined(ALPHA) || defined(_ALPHA) || defined(__alpha)
 	double val;
@@ -963,7 +963,7 @@ static double php_get_nan()
 #endif
 }
 
-static double php_get_inf()
+PHPAPI double php_get_inf()
 {
 #if defined(__i386__) || defined(_X86_) || defined(ALPHA) || defined(_ALPHA) || defined(__alpha)
 	double val;

@@ -17,9 +17,10 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.150 2002/12/31 15:59:01 sebastian Exp $ */
+/* $Id: mod_php4.c,v 1.151 2003/01/21 11:03:58 sas Exp $ */
 
 #include "php_apache_http.h"
+#include "http_conf_globals.h"
 
 #ifdef NETWARE
 #define SIGPIPE SIGINT
@@ -371,6 +372,22 @@ static int sapi_apache_force_http_10(TSRMLS_D)
 	return 0;
 }
 
+/* {{{ sapi_apache_get_target_uid
+ */
+static int sapi_apache_get_target_uid(uid_t *obj TSRMLS_DC)
+{
+	*obj = ap_user_id;
+	return 0;
+}
+
+/* {{{ sapi_apache_get_target_gid
+ */
+static int sapi_apache_get_target_gid(gid_t *obj TSRMLS_DC)
+{
+	*obj = ap_group_id;
+	return 0;
+}
+
 /* {{{ sapi_module_struct apache_sapi_module
  */
 static sapi_module_struct apache_sapi_module = {
@@ -415,7 +432,9 @@ static sapi_module_struct apache_sapi_module = {
 	NULL,							/* exe location */
 	0,								/* ini ignore */
 	sapi_apache_get_fd,
-	sapi_apache_force_http_10
+	sapi_apache_force_http_10,
+	sapi_apache_get_target_uid,
+	sapi_apache_get_target_gid
 };
 /* }}} */
 

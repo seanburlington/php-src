@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.48 2001/02/16 17:14:39 chagenbu Exp $
+// $Id: DB.php,v 1.49 2001/02/20 23:00:08 ssb Exp $
 //
 // Database independent query interface.
 //
@@ -413,7 +413,7 @@ class DB
 	    $dsn = $arr[1];
         }
 
-        if (preg_match("|^([^:]+):([^@]+)@?(.*)$|", $dsn, $arr)) {
+        if (preg_match("|^([^:]+):([^@]*)@?(.*)$|", $dsn, $arr)) {
 	    $parsed["username"] = urldecode($arr[1]);
 	    $parsed["password"] = urldecode($arr[2]);
 	    $dsn = $arr[3];

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.321 2002/10/10 18:41:24 andrey Exp $ */
+/* $Id: string.c,v 1.322 2002/10/11 03:19:38 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3210,12 +3210,12 @@ PHP_FUNCTION(setlocale)
 			RETVAL_STRING(retval, 1);
 			
 			if (cat == LC_NUMERIC || cat == LC_ALL) {
-				struct lconv *lc;
-				lc = localeconv();
+				struct lconv lc;
+				localeconv_r(&lc);
 			
-				EG(float_separator)[0] = (lc->decimal_point)[0];
+				EG(float_separator)[0] = (lc.decimal_point)[0];
 
-				if ((lc->decimal_point)[0] != '.') {
+				if ((lc.decimal_point)[0] != '.') {
 					/* set locale back to C */
 					setlocale(LC_NUMERIC, "C");	
 				}

@@ -24,7 +24,7 @@
 #
 # Written by Stig Bakken <ssb@guardian.no> 1997-05-28.
 #
-# $Id: makedist.ZendEngine2,v 1.2 2002/05/27 05:48:01 andi Exp $
+# $Id: makedist.ZendEngine2,v 1.3 2002/09/08 15:38:44 andi Exp $
 #
 
 if test "$#" != "2"; then
@@ -46,9 +46,9 @@ IFS="$old_IFS"
 
 PHPROOT=:pserver:cvsread@cvs.php.net:/repository
 ZENDROOT=:pserver:cvsread@cvs.php.net:/repository
-PHPMOD=php4
-ZENDMOD=ZendEngine2
-TSRMMOD=TSRM
+PHPMOD=php4-ze2
+#ZENDMOD=ZendEngine2
+#TSRMMOD=TSRM
 LT_TARGETS='ltconfig ltmain.sh config.guess config.sub'
 
 if echo '\c' | grep -s c >/dev/null 2>&1
@@ -96,10 +96,10 @@ echo ""
 cd $DIR || exit 5
 
 # Export Zend
-$ECHO_N "makedist: exporting tag '$CVSTAG' from '$ZENDMOD'...$ECHO_C"
-cvs -z 9 -d $ZENDROOT -Q export -r $CVSTAG $ZENDMOD || exit 4
-mv ZendEngine2 Zend
-echo ""
+#$ECHO_N "makedist: exporting tag '$CVSTAG' from '$ZENDMOD'...$ECHO_C"
+#cvs -z 9 -d $ZENDROOT -Q export -r $CVSTAG $ZENDMOD || exit 4
+#mv ZendEngine2 Zend
+#echo ""
 
 # Export TSRM
 #$ECHO_N "makedist: exporting tag '$CVSTAG' from '$TSRMMOD'...$ECHO_C"

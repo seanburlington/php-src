@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.280 2001/10/23 11:14:51 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.281 2001/11/16 17:31:13 dreid Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -107,10 +107,10 @@ case $host_alias in
 *bsdi*)
     BSD_MAKEFILE=yes;;
 *beos*)
-	beos_threads=1
-	LIBS="$LIBS -lbe -lroot";;
+    beos_threads=1
+    LIBS="$LIBS -lbe -lroot";;
 *mips*)
-	CPPFLAGS="$CPPFLAGS -D_XPG_IV";;
+    CPPFLAGS="$CPPFLAGS -D_XPG_IV";;
 esac
 
 AM_PROG_CC_STDC

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.221.4.2 2001/03/20 01:38:28 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.221.4.3 2001/03/20 18:15:10 andi Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -644,6 +644,11 @@ esac
 if test "$PHP_SAPI" = "cgi"; then
   PHP_PROGRAM=php
 fi
+
+if test "$PHP_SAPI" = "fastcgi"; then
+  PHP_PROGRAM=php
+fi
+
 
 PHP_REGEX
 

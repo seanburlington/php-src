@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_string.h,v 1.7 1999/12/28 18:47:59 sas Exp $ */
+/* $Id: php_string.h,v 1.8 2000/02/08 21:29:18 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -95,7 +95,7 @@ extern PHPAPI char *php_stristr(unsigned char *s, unsigned char *t, size_t s_len
 extern PHPAPI char *php_str_to_str(char *haystack, int length, char *needle,
 		int needle_len, char *str, int str_len, int *_new_length);
 extern PHPAPI void php_trim(pval *str, pval *return_value, int mode);
-extern PHPAPI void php_strip_tags(char *rbuf, int len, int state, char *allow);
+extern PHPAPI void php_strip_tags(char *rbuf, int len, int state, char *allow, int allow_len);
 
 extern PHPAPI void php_char_to_str(char *str, uint len, char from, char *to, int to_len, pval *result);
 

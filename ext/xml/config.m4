@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.37 2002/09/04 18:47:24 sniper Exp $
+dnl $Id: config.m4,v 1.38 2002/11/07 19:31:08 bfrance Exp $
 dnl
 
 AC_C_BIGENDIAN
@@ -38,7 +38,7 @@ if test "$PHP_XML" = "yes"; then
     fi
 
     PHP_ADD_INCLUDE($EXPAT_DIR/include)
-    PHP_ADD_LIBRARY_WITH_PATH(expat, $EXPAT_DIR/lib, EXPAT_SHARED_LIBADD)
-    PHP_SUBST(EXPAT_SHARED_LIBADD)
+    PHP_ADD_LIBRARY_WITH_PATH(expat, $EXPAT_DIR/lib, XML_SHARED_LIBADD)
+    PHP_SUBST(XML_SHARED_LIBADD)
   fi
 fi

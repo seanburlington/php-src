@@ -74,7 +74,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.1 2001/05/01 01:48:50 hirokawa Exp $ */
+/* $Id: mbfilter.c,v 1.2 2001/05/04 10:42:54 hirokawa Exp $ */
 
 
 #include <stdlib.h>
@@ -2279,12 +2279,16 @@ mbfl_filt_conv_common_ctor(mbfl_convert_filter *filter)
 static int
 mbfl_filt_conv_common_flush(mbfl_convert_filter *filter)
 {
+	filter->status = 0;
+	filter->cache = 0;
 	return 0;
 }
 
 static void
 mbfl_filt_conv_common_dtor(mbfl_convert_filter *filter)
 {
+	filter->status = 0;
+	filter->cache = 0;
 }
 
 static int

@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hartmut@six.de>                         |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.12 2002/09/24 06:39:43 sas Exp $ 
+  $Id: mime_magic.c,v 1.13 2002/10/04 19:01:34 wez Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -465,7 +465,7 @@ static int parse(char *l, int lineno)
     m->offset = (int) strtol(l, &t, 0);
     if (l == t) {
 		php_error(E_WARNING,
-					 MODNAME ": offset %s invalid", l);
+					 MODNAME ": (line %d) offset `%s' invalid", lineno, l);
     }
     l = t;
 

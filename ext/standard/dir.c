@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.11 1999/08/19 16:52:53 andi Exp $ */
+/* $Id: dir.c,v 1.12 1999/09/05 19:04:40 andi Exp $ */
 
 #include "php.h"
 #include "fopen-wrappers.h"
@@ -33,10 +33,8 @@
 
 #include <errno.h>
 
-#if MSVC5
-#if !(APACHE)
+#if WIN32||WINNT
 #define NEEDRDH 1
-#endif
 #include "win32/readdir.h"
 #endif
 

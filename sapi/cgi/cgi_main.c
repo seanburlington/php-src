@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.30 2003/05/25 18:35:18 shane Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.31 2003/05/25 19:22:25 shane Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1427,7 +1427,7 @@ consult the installation file that came with this distribution, or visit \n\
 			rely on the web server giving us the info
 			we need in the environment. 
 		*/
-		if (cgi 
+		if (SG(request_info).path_translated || cgi 
 #if PHP_FASTCGI
 			|| fastcgi
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.8 2005/03/07 00:40:57 helly Exp $ */
+/* $Id: spl_directory.h,v 1.9 2005/03/31 21:51:46 helly Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -37,6 +37,8 @@ typedef struct _spl_ce_dir_object {
 	char              *path;
 	char              *path_name;
 	int               path_name_len;
+	char              *sub_path;
+	int               sub_path_len;
 	int               index;
 } spl_ce_dir_object;
 

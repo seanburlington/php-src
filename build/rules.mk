@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules.mk,v 1.27 2000/12/07 08:06:41 ssb Exp $ 
+# $Id: rules.mk,v 1.28 2000/12/13 14:01:39 ssb Exp $ 
 #
 
 include $(top_srcdir)/build/rules_common.mk
@@ -55,9 +55,9 @@ distclean: distclean-recursive clean-x
 
 test: $(top_builddir)/php
 	@if test "$(TESTS)" = ""; then \
-		$(top_builddir)/php -q $(top_srcdir)/run-tests.php `pwd`; \
+		$(top_builddir)/php -d include_path=".:$(top_srcdir)/pear:$(PEAR_INSTALLDIR)" -q $(top_srcdir)/run-tests.php `pwd`; \
 	else \
-		$(top_builddir)/php -q $(top_srcdir)/run-tests.php $(TESTS); \
+		$(top_builddir)/php -d include_path=".:$(top_srcdir)/pear:$(PEAR_INSTALLDIR)" -q $(top_srcdir)/run-tests.php $(TESTS); \
 	fi
 
 include $(builddir)/.deps

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.131 2003/08/12 10:02:25 abies Exp $ */
+/* $Id: interbase.c,v 1.132 2003/08/12 11:27:03 abies Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -687,7 +687,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.131 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.132 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "Yes");
 #endif
@@ -1901,23 +1901,6 @@ PHP_FUNCTION(ibase_rollback_ret)
 }
 /* }}} */
 
-/* {{{ _php_ibase_do_fetch() */
-
-static void _php_ibase_do_fetch(ibase_result *ib_result TSRMLS_DC)
-{
-	if (ib_result->has_more_rows) {
-		if (isc_dsql_fetch(IB_STATUS, &ib_result->stmt, 1, ib_result->out_sqlda)) {
-
-			ib_result->has_more_rows = 0;
-			if (IB_STATUS[0] && IB_STATUS[1]) { /* error in fetch */
-				_php_ibase_error(TSRMLS_C);
-			}
-		}
-	}
-}	
-	
-/* }}} */
-
 /* {{{ proto resource ibase_query([resource link_identifier [, resource link_identifier ] ,] string query [, int bind_args])
    Execute a query */
 PHP_FUNCTION(ibase_query)
@@ -2161,7 +2144,6 @@ PHP_FUNCTION(ibase_query)
 		ib_query->stmt = NULL; /* keep stmt when free query */
 		_php_ibase_free_query(ib_query TSRMLS_CC);
 		ib_result->has_more_rows = 1;
-		_php_ibase_do_fetch(ib_result TSRMLS_CC);
 		ZEND_REGISTER_RESOURCE(return_value, ib_result, le_result);
 	} else {
 		_php_ibase_free_query(ib_query TSRMLS_CC);
@@ -2468,6 +2450,8 @@ static void _php_ibase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int fetch_type)
 	ibase_result *ib_result;
 	XSQLVAR *var;
 	
+	RESET_ERRMSG;
+	
 	switch (ZEND_NUM_ARGS()) {
 		case 1:
 			if (ZEND_NUM_ARGS() == 1 && zend_get_parameters_ex(1, &result_arg) == FAILURE) {
@@ -2490,10 +2474,17 @@ static void _php_ibase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int fetch_type)
 
 	if (ib_result->out_sqlda == NULL || !ib_result->has_more_rows) {
 		RETURN_FALSE;
-	} /* might have been because of an error */
+	}
 
-	RESET_ERRMSG;
-	
+	if (isc_dsql_fetch(IB_STATUS, &ib_result->stmt, 1, ib_result->out_sqlda)) {
+
+		ib_result->has_more_rows = 0;
+		if (IB_STATUS[0] && IB_STATUS[1]) { /* error in fetch */
+			_php_ibase_error(TSRMLS_C);
+		}
+		RETURN_FALSE;
+	}
+
 	array_init(return_value);
 	
 	arr_cnt = 0;
@@ -2530,13 +2521,13 @@ static void _php_ibase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int fetch_type)
 						
 						if (isc_open_blob(IB_STATUS, &ib_result->link, &ib_result->trans, &bl_handle, (ISC_QUAD ISC_FAR *) var->sqldata)) {
 							_php_ibase_error(TSRMLS_C);
-							goto _php_ibase_fetch_hash_error;
+							RETURN_FALSE;
 						}
 						
 						bl_items[0] = isc_info_blob_total_length;
 						if (isc_blob_info(IB_STATUS, &bl_handle, sizeof(bl_items), bl_items, sizeof(bl_info), bl_info)) {
 							_php_ibase_error(TSRMLS_C);
-							goto _php_ibase_fetch_hash_error;
+							RETURN_FALSE;
 						}
 						
 						/* find total length of blob's data */
@@ -2562,14 +2553,14 @@ static void _php_ibase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int fetch_type)
 							if (cur_len > max_len) { /* never! */
 								efree(bl_data);
 								_php_ibase_module_error("PHP module internal error");
-								goto _php_ibase_fetch_hash_error;
+								RETURN_FALSE;
 							}
 						}
 						
 						if (IB_STATUS[0] && IB_STATUS[1] && (IB_STATUS[1] != isc_segstr_eof)) {
 							efree(bl_data);
 							_php_ibase_error(TSRMLS_C);
-							goto _php_ibase_fetch_hash_error;
+							RETURN_FALSE;
 						}
 						bl_data[cur_len] = '\0';
 						if (isc_close_blob(IB_STATUS, &bl_handle)) {
@@ -2611,13 +2602,13 @@ static void _php_ibase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int fetch_type)
 					if (isc_array_get_slice(IB_STATUS, &ib_result->link, &ib_result->trans, &ar_qd, &ib_array->ar_desc, ar_data, &ib_array->ar_size)) {
 						_php_ibase_error(TSRMLS_C);
 						efree(ar_data);
-						goto _php_ibase_fetch_hash_error;
+						RETURN_FALSE;
 					}
 					
 					tmp_ptr = ar_data; /* avoid changes in _arr_zval */
 					if (_php_ibase_arr_zval(tmp, &tmp_ptr, ib_array, 0, flag TSRMLS_CC) == FAILURE) {
 						efree(ar_data);
-						goto _php_ibase_fetch_hash_error;
+						RETURN_FALSE;
 					}
 					efree(ar_data);
 				}
@@ -2663,12 +2654,6 @@ static void _php_ibase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int fetch_type)
 			arr_cnt++;
 		}
 	} /* for field */
-	_php_ibase_do_fetch(ib_result TSRMLS_CC);
-	return;
-
-_php_ibase_fetch_hash_error:
-	_php_ibase_do_fetch(ib_result TSRMLS_CC);
-	RETURN_FALSE;
 }
 /* }}} */
 
@@ -2846,7 +2831,6 @@ PHP_FUNCTION(ibase_execute)
 	if (ib_result) { /* select statement */
 		ib_query->cursor_open = 1;
 		ib_result->has_more_rows = 1;
-		_php_ibase_do_fetch(ib_result TSRMLS_CC);
 		ZEND_REGISTER_RESOURCE(return_value, ib_result, le_result);
 	} else {
 		ib_query->cursor_open = 0;

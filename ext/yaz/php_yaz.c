@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.21 2001/06/06 13:05:52 rasmus Exp $ */
+/* $Id: php_yaz.c,v 1.22 2001/06/24 22:18:50 sniper Exp $ */
 
 #include "php.h"
 
@@ -2468,7 +2468,7 @@ PHP_RINIT_FUNCTION(yaz)
 }
 
 zend_module_entry yaz_module_entry = {
-	"YAZ",
+	"yaz",
 	yaz_functions,
 	PHP_MINIT(yaz),
 	PHP_MSHUTDOWN(yaz),

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.47 2003/12/22 21:03:54 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.48 2003/12/23 11:02:26 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2257,11 +2257,11 @@ PHP_FUNCTION(fgetcsv)
 	re = e = buf + buf_len;
 
 	/* strip leading spaces */
-	while (isspace((int)*(unsigned char *)s) && *s != delimiter) {
+	while (isspace((int)*(unsigned char *)s) && *s != delimiter && s < re) {
 		s++;
 	}
 	/* strip trailing spaces */
-	while (isspace((int)*(unsigned char *)(--e)) && *e != delimiter);
+	while (e >= s && isspace((int)*(unsigned char *)(--e)) && *e != delimiter);
 	e++;
 
 	array_init(return_value);

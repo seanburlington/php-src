@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.121 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: php_ini.c,v 1.122 2003/10/19 10:39:27 stas Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -31,6 +31,9 @@
 #include "SAPI.h"
 #include "php_main.h"
 #include "php_scandir.h"
+#ifdef PHP_WIN32
+#include "win32/php_registry.h"
+#endif
 
 #if HAVE_SCANDIR && HAVE_ALPHASORT && HAVE_DIRENT_H
 #include <dirent.h>
@@ -297,11 +300,23 @@ int php_init_config()
 	} else {
 		char *default_location;
 		static const char paths_separator[] = { ZEND_PATHS_SEPARATOR, 0 };
+		char *reg_location;
 
-		php_ini_search_path = (char *) emalloc(MAXPATHLEN * 3 + strlen(env_location) + 3 + 1);
+		php_ini_search_path = (char *) emalloc(MAXPATHLEN * 4 + strlen(env_location) + 3 + 1);
 		free_ini_search_path = 1;
 		php_ini_search_path[0] = 0;
 
+#ifdef PHP_WIN32
+		/* Add registry location */
+		reg_location = GetIniPathFromRegistry();
+		if(reg_location != NULL) {
+			if (*php_ini_search_path) {
+				strcat(php_ini_search_path, paths_separator);
+			}
+			strcat(php_ini_search_path, reg_location);
+			efree(reg_location);
+		}
+#endif
 		/*
 		 * Prepare search path
 		 */

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.103 2003/08/29 14:02:20 cox Exp $
+// $Id: Common.php,v 1.104 2003/08/29 18:23:30 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -27,6 +27,9 @@ require_once 'PEAR/Config.php';
 // {{{ constants and globals
 
 define('PEAR_COMMON_PACKAGE_NAME_PREG', '/^([A-Z][a-zA-Z0-9_]+|[a-z][a-z0-9_]+)$/');
+
+// XXX far from perfect :-)
+define('PEAR_COMMON_PACKAGE_DOWNLOAD_PREG', '/^([A-Z][a-zA-Z0-9_]+|[a-z][a-z0-9_]+)(-([.0-9a-zA-Z]+))?$/');
 
 /**
  * List of temporary files and directories registered by

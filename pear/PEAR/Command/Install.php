@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.48 2003/08/28 03:42:18 cellog Exp $
+// $Id: Install.php,v 1.49 2003/08/29 18:23:31 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -256,7 +256,7 @@ package if needed.
             $this->installer = &new PEAR_Installer($this->ui);
         }
         if ($command == 'upgrade') {
-            $options[$command] = true;
+            $options['upgrade'] = true;
         }
         if ($command == 'upgrade-all') {
             include_once "PEAR/Remote.php";
@@ -292,7 +292,12 @@ package if needed.
         $errors = array();
         $downloaded = array();
         $this->installer->download($params, $options, $this->config, $downloaded,
-            $errors);
+                                   $errors);
+        if ($command != 'upgrade-all') {
+            for ($i = 0; $i < count($params); $i++) {
+                $params[$i] = $this->installer->extractDownloadFileName($params[$i], $_tmp);
+            }
+        }
         if (count($errors)) {
             $err['data'] = array($errors);
             $err['headline'] = 'Install Errors';

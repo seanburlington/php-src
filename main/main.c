@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.280 2000/07/09 13:20:27 sas Exp $ */
+/* $Id: main.c,v 1.281 2000/07/12 11:59:09 thies Exp $ */
 
 
 #include <stdio.h>
@@ -440,7 +440,7 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 			break;
 	}
 
-	if (PG(track_errors)) {
+	if (PG(track_errors) && EG(active_symbol_table)) {
 		pval *tmp;
 
 		args = orig_args;

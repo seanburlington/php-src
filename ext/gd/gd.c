@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.187 2002/06/09 12:44:33 sander Exp $ */
+/* $Id: gd.c,v 1.188 2002/06/15 17:46:44 mfischer Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1214,6 +1214,7 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 
 	if (im) {
 		ZEND_REGISTER_RESOURCE(return_value, im, le_gd);
+		php_stream_close(stream);
 		return;
 	}
 

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.229 2003/05/20 16:46:53 sterling Exp $ */
+/* $Id: array.c,v 1.230 2003/05/20 18:18:56 sterling Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -530,7 +530,7 @@ static int array_user_compare(const void *a, const void *b TSRMLS_DC)
 	args[0] = (zval **) f->pData;
 	args[1] = (zval **) s->pData;
 
-	if (fast_call_user_function(EG(function_table), NULL, *BG(user_compare_func_name), &retval_ptr, 2, args, 0, NULL, &BG(user_compare_func_ptr) TSRMLS_CC) == SUCCESS
+	if (fast_call_user_function(EG(function_table), NULL, *BG(user_compare_func_name), &retval_ptr, 2, args, 0, NULL, &BG(user_compare_func_ptr) TSRMLS_CC)== SUCCESS
 		&& retval_ptr) {
 		long retval;
 

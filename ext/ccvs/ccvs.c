@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */ 
 /* 
-*	cvvs.c $Revision: 1.2 $ - PHP4 Interface to the RedHat CCVS API
+*	cvvs.c $Revision: 1.3 $ - PHP4 Interface to the RedHat CCVS API
 *	 -------
 *	 Interfaces RedHat's CCVS [Credit Card Verification System] <http://www.redhat.com/products/ccvs/>
 *	 This code is ported from an original php3 interface written by RedHat's Doug DeJulio <ddj@redhat.com>
@@ -27,10 +27,10 @@
 
 /* 
 *	Code started on 2000.07.24@09.04.EST by Brendan W. McAdams <brendan@plexmedia.com>
-*	$Revision: 1.2 $
+*	$Revision: 1.3 $
 */
 
-static char const cvsid[] = "$Id: ccvs.c,v 1.2 2000/08/08 23:15:56 bmcadams Exp $";
+static char const cvsid[] = "$Id: ccvs.c,v 1.3 2000/08/09 01:18:28 bmcadams Exp $";
 
 #include <php.h>
 #include <stdlib.h>

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.289 2002/09/05 14:00:28 iliaa Exp $ */
+/* $Id: string.c,v 1.290 2002/09/05 21:29:39 kalowsky Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -641,7 +641,7 @@ PHP_FUNCTION(wordwrap)
 		/* Multiple character line break or forced cut */
 		if (linelength > 0) {
 			/* Add extra 10% to accomodate strings with unpredicatable number of breaks */
-			newtextlen = textlen + (textlen/linelength + 1) * breakcharlen * 1.1 + 1;
+			newtextlen = textlen + (int)((textlen/linelength + 1) * breakcharlen * 1.1) + 1;
 		}
 		else {
 			newtextlen = textlen * (breakcharlen + 1) + 1;

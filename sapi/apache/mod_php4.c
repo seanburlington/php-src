@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.95 2001/05/11 18:17:08 thies Exp $ */
+/* $Id: mod_php4.c,v 1.94.2.1 2001/05/13 09:07:02 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -285,7 +285,9 @@ static void php_apache_log_message(char *message)
 static void php_apache_request_shutdown(void *dummy)
 {
 	SLS_FETCH();
+	APLS_FETCH();
 
+	AP(in_request)=0;
 	SG(server_context) = NULL; /* The server context (request) is invalid by the time run_cleanups() is called */
 	php_request_shutdown(dummy);
 }
@@ -446,7 +448,7 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 	PLS_FETCH();
 	APLS_FETCH();
 
-	if (r->assbackwards && r->protocol && !strcmp(r->protocol, "INCLUDED")) {
+	if (AP(in_request)) {
 		zend_file_handle fh;
 
 		fh.filename = r->filename;
@@ -456,6 +458,7 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 		zend_execute_scripts(ZEND_INCLUDE CLS_CC ELS_CC, 1, &fh);
 		return OK;
 	}
+	AP(in_request)=1;
 
 	if (setjmp(EG(bailout))!=0) {
 		return OK;
@@ -540,19 +543,7 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 
 static int send_parsed_php(request_rec * r)
 {
-	int result =  send_php(r, 0, NULL);
-
-#if MEMORY_USAGE_INFO
-    {
-        char mem_usage[ 32 ];
-        ALS_FETCH()
- 
-        sprintf(mem_usage,"%u", (int) AG(max_allocated_memory));
-        ap_table_setn(r->notes, "mod_php_memory_usage", ap_pstrdup(r->pool,mem_usage));
-    }
-#endif
-
-	return result;
+	return send_php(r, 0, NULL);
 }
 
 

@@ -15,7 +15,7 @@
    | Author: dave@opaque.net                                              |
    +----------------------------------------------------------------------+
    
-  $Id: ming.c,v 1.47 2003/06/16 15:24:58 andrey Exp $ 
+  $Id: ming.c,v 1.48 2003/07/02 02:03:59 iliaa Exp $ 
 
 */
 
@@ -2386,6 +2386,11 @@ PHP_FUNCTION(swftext_addString)
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &s) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
+	if (!getFont(getText(getThis() TSRMLS_CC))) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "You must specify a font before writing text.");
+		RETURN_FALSE;
+	}
+
 	convert_to_string_ex(s);
 	SWFText_addString(text, Z_STRVAL_PP(s), NULL);
 }

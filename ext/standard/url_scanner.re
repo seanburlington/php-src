@@ -15,7 +15,10 @@
    | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.re,v 1.7 1999/11/02 18:35:59 sas Exp $ */
+/* $Id: url_scanner.re,v 1.8 1999/11/09 13:57:11 sas Exp $ */
+
+#include "php.h"
+#include "snprintf.h"
 
 #include <sys/types.h>
 #include <stdio.h>

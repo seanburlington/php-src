@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.14 2000/06/19 09:27:16 thies Exp $
+dnl $Id: config.m4,v 1.15 2000/06/23 00:46:04 rasmus Exp $
 
 AC_DEFUN(AC_ORACLE_VERSION,[
   AC_MSG_CHECKING([Oracle version])
@@ -18,7 +18,7 @@ AC_DEFUN(AC_ORACLE_VERSION,[
 ])
 
 PHP_ARG_WITH(oracle, for Oracle-ORACLE support,
-[  --with-oracle[=DIR]     Include oracle support. DIR is the ORACLE_HOME.])
+[  --with-oracle[=DIR]     Include Oracle-oci7 support. Default DIR is ORACLE_HOME.])
 
 if test "$PHP_ORACLE" != "no"; then
   AC_MSG_CHECKING([Oracle Install-Dir])

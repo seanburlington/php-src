@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.497 2002/08/24 01:19:27 helly Exp $ */
+/* $Id: basic_functions.c,v 1.498 2002/08/25 18:21:40 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1574,7 +1574,7 @@ PHP_FUNCTION(call_user_func)
 	}
 
 	if (!zend_is_callable(*params[0], 0, &name)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "First argumented is expected to be a valid callback, '%s' was given", name);
+		php_error_docref1(NULL TSRMLS_CC, name, E_WARNING, "First argumented is expected to be a valid callback");
 		efree(name);
 		efree(params);
 		RETURN_NULL();
@@ -1583,7 +1583,19 @@ PHP_FUNCTION(call_user_func)
 	if (call_user_function_ex(EG(function_table), NULL, *params[0], &retval_ptr, argc-1, params+1, 0, NULL TSRMLS_CC) == SUCCESS && retval_ptr) {
 		COPY_PZVAL_TO_ZVAL(*return_value, retval_ptr);
 	} else {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call %s()", name);
+		if (argc>1) {
+			SEPARATE_ZVAL(params[1]);
+			convert_to_string_ex(params[1]);
+			if (argc>2) {
+				SEPARATE_ZVAL(params[2]);
+				convert_to_string_ex(params[2]);
+				php_error_docref1(NULL TSRMLS_CC, name, E_WARNING, "Unable to call %s(%s,%s)", name, Z_STRVAL_PP(params[1]), Z_STRVAL_PP(params[2]));
+			} else {
+				php_error_docref1(NULL TSRMLS_CC, name, E_WARNING, "Unable to call %s(%s)", name, Z_STRVAL_PP(params[1]));
+			}
+		} else {
+			php_error_docref1(NULL TSRMLS_CC, name, E_WARNING, "Unable to call %s()", name);
+		}
 	}
 
 	efree(name);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.654 2004/03/10 19:12:49 rasmus Exp $ */
+/* $Id: basic_functions.c,v 1.655 2004/03/23 22:30:25 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -982,6 +982,8 @@ PHP_MINIT_FUNCTION(basic)
 	REGISTER_MATH_CONSTANT(M_2_SQRTPI);
 	REGISTER_MATH_CONSTANT(M_SQRT2);
 	REGISTER_MATH_CONSTANT(M_SQRT1_2);
+	REGISTER_DOUBLE_CONSTANT("INF", atof("INF"), CONST_CS | CONST_PERSISTENT);
+	REGISTER_DOUBLE_CONSTANT("NAN", atof("NAN"), CONST_CS | CONST_PERSISTENT);
 
 #if ENABLE_TEST_CLASS
 	test_class_startup();

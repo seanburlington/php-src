@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.69 2004/02/11 07:38:43 georg Exp $ 
+  $Id: mysqli_api.c,v 1.70 2004/02/11 08:34:07 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1260,8 +1260,6 @@ PHP_FUNCTION(mysqli_prepare)
 		efree(stmt);
 		RETURN_FALSE;
 	}
-
-	if (stmt->stmt->fields) printf("**********\n");
 
 	mysqli_resource = (MYSQLI_RESOURCE *)ecalloc (1, sizeof(MYSQLI_RESOURCE));
 	mysqli_resource->ptr = (void *)stmt;

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.29 2004/02/11 07:38:43 georg Exp $ 
+  $Id: mysqli.c,v 1.30 2004/02/11 08:34:08 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -66,7 +66,6 @@ void php_free_stmt_bind_buffer(BIND_BUFFER bbuf, int type)
 	for (i=0; i < bbuf.var_cnt; i++) {
 		if (type == FETCH_RESULT) {
 			if (bbuf.buf[i].type == IS_STRING) {
-				printf ("--free--\n");
 				efree(bbuf.buf[i].buffer);
 			}
 		}

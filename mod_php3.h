@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php3.h,v 1.6 1999/04/10 16:25:23 zeev Exp $ */
+/* $Id: mod_php3.h,v 1.7 1999/04/10 17:39:08 zeev Exp $ */
 
 #ifndef _MOD_PHP3_H
 #define _MOD_PHP3_H
@@ -42,7 +42,9 @@ typedef struct {
     long last_modified;
 	char *dav_script;
 	long xbithack;
-} php3_ini_structure;
+} php_apache_info_struct;
+
+extern php_apache_info_struct php_apache_info;
 
 #if MSVC5
 #define S_IXUSR _S_IEXEC

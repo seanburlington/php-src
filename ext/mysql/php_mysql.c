@@ -1,4 +1,4 @@
-/*
+3/*
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.67 2001/01/31 22:04:30 elixer Exp $ */
+/* $Id: php_mysql.c,v 1.68 2001/01/31 23:35:37 eschmid Exp $ */
 
 
 /* TODO:
@@ -714,8 +714,7 @@ PHP_FUNCTION(mysql_get_client_info)
 /* }}} */
 
 /* {{{ proto string mysql_get_host_info([int link_identifier])
-   Returns a string describing the type of connection in use, including the
-   server host name */
+   Returns a string describing the type of connection in use, including the server host name */
 PHP_FUNCTION(mysql_get_host_info)
 {
 	zval **mysql_link;

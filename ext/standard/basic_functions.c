@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.234 2000/08/09 17:52:30 thies Exp $ */
+/* $Id: basic_functions.c,v 1.235 2000/08/11 13:30:37 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -620,6 +620,9 @@ static void basic_globals_ctor(BLS_D)
 	BG(left) = -1;
 	zend_hash_init(&BG(sm_protected_env_vars), 5, NULL, NULL, 1);
 	BG(sm_allowed_env_vars) = NULL;
+#ifdef PHP_WIN32
+	CoInitialize(NULL);
+#endif
 }
 
 static void basic_globals_dtor(BLS_D)
@@ -628,6 +631,9 @@ static void basic_globals_dtor(BLS_D)
 	if (BG(sm_allowed_env_vars)) {
 		free(BG(sm_allowed_env_vars));
 	}
+#ifdef PHP_WIN32
+	CoUninitialize();
+#endif
 }
 
 

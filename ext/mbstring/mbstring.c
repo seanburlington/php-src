@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.33 2003/10/29 17:37:10 fmk Exp $ */
+/* $Id: mbstring.c,v 1.142.2.34 2003/10/30 01:05:25 thetaphi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -1887,7 +1887,7 @@ PHP_FUNCTION(mb_parse_str)
 		convd = mbfl_buffer_converter_new(from_encoding, to_encoding, 0);
 		if (convd != NULL) {
 			mbfl_buffer_converter_illegal_mode(convd, MBSTRG(current_filter_illegal_mode));
-			mbfl_buffer_converter_illegal_substchar(convd, MBSTRG(current_filter_illegal_substchar) TSRMLS_CC);
+			mbfl_buffer_converter_illegal_substchar(convd, MBSTRG(current_filter_illegal_substchar));
 		} else {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to create converter");
 		}
@@ -3841,7 +3841,7 @@ MBSTRING_API int php_mb_gpc_encoding_detector(const char *arg_string, int arg_le
 	string.no_language = MBSTRG(current_language);
 	string.val = (char*)arg_string;
 	string.len = arg_length;
-	encoding = mbfl_identify_encoding_no(&string, elist, size TSRMLS_CC);
+	encoding = mbfl_identify_encoding_no(&string, elist, size);
 
 	if (encoding != mbfl_no_encoding_invalid) {
 		MBSTRG(http_input_identify) = encoding;

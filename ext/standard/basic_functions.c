@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.540 2002/10/30 15:11:10 hholzgra Exp $ */
+/* $Id: basic_functions.c,v 1.541 2002/11/02 10:34:51 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1519,6 +1519,9 @@ PHP_FUNCTION(getopt)
 		if(o == 0) {
 #ifdef HARTMUT_0
 			optname = (char *)longopts[longindex].name;
+#else                      
+			/* o == 0 shall never happen so this only fixes a compiler warning */
+			optname = NULL;
 #endif
 		} else {		
 			if(o == 1) o = '-';

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.5 2003/06/20 14:07:51 rrichards Exp $ */
+/* $Id: php_xsl.c,v 1.6 2003/07/05 23:43:10 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -91,8 +91,15 @@ void xsl_objects_dtor(void *object, zend_object_handle handle TSRMLS_DC)
 		if (((xsltStylesheetPtr) intern->ptr)->_private != NULL) {
 			((xsltStylesheetPtr) intern->ptr)->_private = NULL;   
 		}
-		/* libxslt uses _private for itself, so turning of the deregistering is maybe a solution 
-		   we copied the doc at import, so it shouldn't be possible to be used from php land */
+		if (intern->document != NULL) {
+			if (--intern->document->refcount == 0) {
+				xmlFreeDoc((xmlDocPtr) intern->document->ptr);
+				efree(intern->document);
+			}
+			((xsltStylesheetPtr) intern->ptr)->doc = NULL;
+			intern->document = NULL;
+		}
+
 		xsltFreeStylesheet((xsltStylesheetPtr) intern->ptr);
 		intern->ptr = NULL;
 	}

@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.25 2003/01/25 16:25:37 hholzgra Exp $ 
+  $Id: mime_magic.c,v 1.26 2003/01/26 09:13:31 sander Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -359,10 +359,9 @@ static int apprentice(void)
     char line[BUFSIZ + 1];
     int errs = 0;
     int lineno;
-	TSRMLS_FETCH();
-
     char *fname;
     magic_server_config_rec *conf = &mime_global;
+    TSRMLS_FETCH();
 
     fname = conf->magicfile; /* todo cwd? */
     f = fopen(fname, "rb");

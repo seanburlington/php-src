@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.138 2001/08/06 10:11:03 sniper Exp $
+dnl $Id: acinclude.m4,v 1.139 2001/08/21 11:02:42 sas Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -1101,7 +1101,7 @@ AC_DEFUN(PHP_FOPENCOOKIE,[
 									   ],
 	                   [ cookie_io_functions_t cookie; ],
                      [ have_cookie_io_functions_t=yes ],
-										 [ ] )
+										 [] )
 
 		  if test "$have_cookie_io_functions_t" = "yes" ; then
         cookie_io_functions_t=cookie_io_functions_t

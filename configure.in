@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.272 2001/08/20 14:04:21 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.273 2001/08/21 11:02:42 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -227,7 +227,7 @@ dnl are usually in libnsl
 
 unset ac_cv_func_yp_get_default_domain
 AC_CHECK_FUNC(yp_get_default_domain,
- [php_no_nsl_checks=yes],[ ])
+ [php_no_nsl_checks=yes],[])
 unset ac_cv_func_yp_get_default_domain
 
 if test "$php_no_nsl_checks" != "yes"; then

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.99 2000/05/29 16:22:26 zeev Exp $ */
+/* $Id: php.h,v 1.100 2000/05/29 17:08:01 hholzgra Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -365,6 +365,8 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #else
 #define XtOffsetOf(s_type,field) XtOffset(s_type*,field)
 #endif
+
+PHP_FUNCTION(warn_not_available);
 
 #endif
 

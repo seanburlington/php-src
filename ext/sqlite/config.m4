@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.21 2003/12/28 14:38:28 hirokawa Exp $
+dnl $Id: config.m4,v 1.22 2004/01/08 14:24:59 iliaa Exp $
 dnl config.m4 for extension sqlite
 dnl vim:et:ts=2:sw=2
 
@@ -60,6 +60,7 @@ if test "$PHP_SQLITE" != "no"; then
         libsqlite/src/update.c libsqlite/src/util.c libsqlite/src/vdbe.c \
         libsqlite/src/attach.c libsqlite/src/btree_rb.c libsqlite/src/pragma.c \
         libsqlite/src/vacuum.c libsqlite/src/copy.c \
+        libsqlite/src/vdbeaux.c libsqlite/src/date.c \
         libsqlite/src/where.c libsqlite/src/trigger.c"
     
     PHP_NEW_EXTENSION(sqlite, sqlite.c sess_sqlite.c $sources, $ext_shared,,$PHP_SQLITE_CFLAGS)

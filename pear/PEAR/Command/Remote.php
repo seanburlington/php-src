@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.27 2002/12/31 16:18:28 sebastian Exp $
+// $Id: Remote.php,v 1.28 2003/01/25 00:38:00 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -61,7 +61,7 @@ latest stable release of each package.',
             'shortcut' => 'sp',
             'options' => array(),
             'doc' => '
-Lists all packages which match the search paramteres (first param
+Lists all packages which match the search parameters (first param
 is package name, second package info)',
             ),
         'list-all' => array(

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.43 2002/09/01 11:33:19 sebastian Exp $ */
+/* $Id: php_output.h,v 1.44 2002/10/03 01:36:44 yohgaki Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -47,6 +47,8 @@ PHP_FUNCTION(ob_flush);
 PHP_FUNCTION(ob_clean);
 PHP_FUNCTION(ob_end_flush);
 PHP_FUNCTION(ob_end_clean);
+PHP_FUNCTION(ob_get_flush);
+PHP_FUNCTION(ob_get_clean);
 PHP_FUNCTION(ob_get_contents);
 PHP_FUNCTION(ob_get_length);
 PHP_FUNCTION(ob_get_level);

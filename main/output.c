@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.128 2002/10/02 15:36:29 helly Exp $ */
+/* $Id: output.c,v 1.129 2002/10/03 01:36:44 yohgaki Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -818,6 +818,56 @@ PHP_FUNCTION(ob_end_clean)
 	
 	php_end_ob_buffer(0, 0 TSRMLS_CC);
 	RETURN_TRUE;
+}
+/* }}} */
+
+/* {{{ proto bool ob_get_flush(void)
+   Get current buffer contents, flush (send) the output buffer, and delete current output buffer */
+PHP_FUNCTION(ob_get_flush)
+{
+	if (ZEND_NUM_ARGS() != 0)
+			WRONG_PARAM_COUNT;
+
+	/* get contents */
+	if (php_ob_get_buffer(return_value TSRMLS_CC)==FAILURE) {
+		RETURN_FALSE;
+	}
+	/* error checks */
+	if (!OG(ob_nesting_level)) {
+		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to delete and flush buffer. No buffer to delete or flush.");
+		RETURN_FALSE;
+	}
+	if (OG(ob_nesting_level) && !OG(active_ob_buffer).status && !OG(active_ob_buffer).erase) {
+		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to delete buffer %s.", OG(active_ob_buffer).handler_name);
+		RETURN_FALSE;
+	}
+	/* flush */
+	php_end_ob_buffer(1, 0 TSRMLS_CC);
+}
+/* }}} */
+
+/* {{{ proto bool ob_get_clean(void)
+   Get current buffer contents and delete current output buffer */
+PHP_FUNCTION(ob_get_clean)
+{
+	if (ZEND_NUM_ARGS() != 0)
+			WRONG_PARAM_COUNT;
+		
+	/* get contents */
+	if (php_ob_get_buffer(return_value TSRMLS_CC)==FAILURE) {
+		RETURN_FALSE;
+	}
+	/* error checks */
+	if (!OG(ob_nesting_level)) {
+		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to delete buffer. No buffer to delete.");
+		RETURN_FALSE;
+	}
+	if (OG(ob_nesting_level) && !OG(active_ob_buffer).status && !OG(active_ob_buffer).erase) {
+		php_error_docref("ref.outcontrol" TSRMLS_CC, E_NOTICE, "failed to delete buffer %s.", OG(active_ob_buffer).handler_name);
+		RETURN_FALSE;
+	}
+	/* delete buffer */
+	php_end_ob_buffer(0, 0 TSRMLS_CC);
 }
 /* }}} */
 

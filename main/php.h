@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.6 1999/04/21 17:11:00 sas Exp $ */
+/* $Id: php.h,v 1.7 1999/04/21 19:01:36 zeev Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -509,8 +509,6 @@ extern void phprestart(FILE *input_file);
 #else
 #define XtOffsetOf(s_type,field) XtOffset(s_type*,field)
 #endif
-
-#include "php_compat.h"
 
 #endif
 

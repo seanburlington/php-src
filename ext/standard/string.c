@@ -30,7 +30,7 @@
  */
 
 
-/* $Id: string.c,v 1.4 1999/04/21 17:11:01 sas Exp $ */
+/* $Id: string.c,v 1.5 1999/04/21 19:01:38 zeev Exp $ */
 #ifdef THREAD_SAFE
 #include "tls.h"
 #endif
@@ -1297,7 +1297,7 @@ static char *_php3_memstr(char *s, char *c, size_t n, size_t m)
 {
     char *p;
 
-    for(p = s; (p - s) < n; p++)
+    for(p = s; ((size_t) (p - s)) < n; p++)
         if(memcmp(p, c, m) == 0)
             return p;
     return NULL;

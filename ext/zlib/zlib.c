@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.60 2000/10/23 13:56:22 dbeu Exp $ */
+/* $Id: zlib.c,v 1.61 2000/10/23 14:04:54 sas Exp $ */
 #define IS_EXT_MODULE
 
 #ifndef PHP_WIN32
@@ -25,7 +25,6 @@
 
 #if HAVE_FOPENCOOKIE 
 #define _GNU_SOURCE
-#define __USE_GNU
 #include <stdio.h>
 #endif 
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.51 2004/05/11 15:59:07 iliaa Exp $ */
+/* $Id: tidy.c,v 1.52 2004/05/23 17:22:21 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -403,6 +403,9 @@ static void php_tidy_quick_repair(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_fil
 	tidyBufInit(errbuf);
 	
 	if (tidySetErrorBuffer(doc, errbuf) != 0) {
+		tidyBufFree(errbuf);
+		efree(errbuf);
+		tidyRelease(doc);
 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Could not set Tidy error buffer");
 	}
 	
@@ -524,6 +527,11 @@ static void tidy_object_new(zend_class_entry *class_type, zend_object_handlers *
 			tidyBufInit(intern->ptdoc->errbuf);
 
 			if (tidySetErrorBuffer(intern->ptdoc->doc, intern->ptdoc->errbuf) != 0) {
+				tidyBufFree(intern->ptdoc->errbuf);
+				efree(intern->ptdoc->errbuf);
+				tidyRelease(intern->ptdoc->doc);
+				efree(intern->ptdoc);
+				efree(intern);
 				php_error_docref(NULL TSRMLS_CC, E_ERROR, "Could not set Tidy error buffer");
 			}
 
@@ -931,7 +939,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.51 2004/05/11 15:59:07 iliaa Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.52 2004/05/23 17:22:21 iliaa Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

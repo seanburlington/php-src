@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.54 2001/08/07 19:02:00 phanto Exp $ */
+/* $Id: java.c,v 1.55 2001/08/08 01:52:21 sniper Exp $ */
 
 /*
  * This module implements Zend OO syntax overloading support for Java
@@ -554,9 +554,10 @@ static pval _java_getset_property
 
 pval java_get_property_handler(zend_property_reference *property_reference)
 {
+  pval presult;
   TSRMLS_FETCH();
 
-  pval presult = _java_getset_property(property_reference, 0 TSRMLS_CC);
+  presult = _java_getset_property(property_reference, 0 TSRMLS_CC);
   checkError(&presult);
   return presult;
 }

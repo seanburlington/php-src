@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pwd.c,v 1.5.4.2 2004/07/30 14:37:17 wez Exp $ */
+/* $Id: pwd.c,v 1.5.4.3 2004/10/21 23:43:41 edink Exp $ */
 
 #include "php.h"				/*php specific */
 #define WIN32_LEAN_AND_MEAN
@@ -50,7 +50,7 @@ getlogin()
 	STR_FREE(PW32G(login_name));	
 	GetUserName(name, &max_len);
 	name[max_len] = '\0';
-	PW32G(login_name) = strdup(name);
+	PW32G(login_name) = estrdup(name);
 	return PW32G(login_name);
 }
 

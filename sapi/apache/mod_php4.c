@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.25 2000/02/10 17:55:00 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.26 2000/02/10 18:19:04 zeev Exp $ */
 
 #include "zend.h"
 #include "php.h"
@@ -300,9 +300,9 @@ static int php_apache_sapi_activate(SLS_D)
 }
 
 
-static int php_apache_get_uid(SLS_D)
+static struct stat *php_apache_get_stat(SLS_D)
 {
-	return ((request_rec *) SG(server_context))->finfo.st_uid;
+	return &((request_rec *) SG(server_context))->finfo;
 }
 
 
@@ -325,7 +325,7 @@ static sapi_module_struct sapi_module = {
 
 	sapi_apache_ub_write,			/* unbuffered write */
 	sapi_apache_flush,				/* flush */
-	php_apache_get_uid,				/* get uid */
+	php_apache_get_stat,			/* get uid */
 	php_apache_getenv,				/* getenv */
 
 	php_error,						/* error handler */

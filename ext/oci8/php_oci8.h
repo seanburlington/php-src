@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.31 2003/12/16 10:29:11 phanto Exp $ */
+/* $Id: php_oci8.h,v 1.32 2003/12/25 13:54:50 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -91,6 +91,7 @@ typedef struct {
 	sword error;
     OCIError *pError;
 	int needs_commit;
+    HashTable *descriptors;
 } oci_connection;
 
 typedef struct {

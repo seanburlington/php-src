@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.67 2001/06/04 01:36:14 sniper Exp $
+dnl $Id: config.m4,v 1.68 2001/06/24 12:53:17 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -21,7 +21,7 @@ AC_DEFUN(PHP_GD_JPEG,[
       -L$PHP_JPEG_DIR/lib
     ])
   else 
-    AC_MSG_RESULT(not set. If configure fails try --with-jpeg-dir=<DIR>)
+    AC_MSG_RESULT(If configure fails try --with-jpeg-dir=<DIR>)
   fi
 ])
 

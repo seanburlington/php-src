@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.31 2004/05/21 22:24:20 gschlossnagle Exp $ */
+/* $Id: pdo_stmt.c,v 1.32 2004/05/25 14:30:07 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -526,6 +526,7 @@ static PHP_METHOD(PDOStatement, fetchAll)
 	PDO_STMT_CLEAR_ERR();
 	MAKE_STD_ZVAL(data);
 	if (!do_fetch(stmt, TRUE, data, how TSRMLS_CC)) {
+		FREE_ZVAL(data);
 		PDO_HANDLE_STMT_ERR();
 		RETURN_FALSE;
 	}
@@ -535,6 +536,7 @@ static PHP_METHOD(PDOStatement, fetchAll)
 		add_next_index_zval(return_value, data);
 		MAKE_STD_ZVAL(data);
 	} while (do_fetch(stmt, TRUE, data, how TSRMLS_CC));
+	FREE_ZVAL(data);
 }
 /* }}} */
 

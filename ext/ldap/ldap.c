@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.87 2001/06/06 13:05:46 rasmus Exp $ */
+/* $Id: ldap.c,v 1.88 2001/06/20 21:12:55 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -254,7 +254,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.87 2001/06/06 13:05:46 rasmus Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.88 2001/06/20 21:12:55 venaas Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #ifdef LDAP_API_VERSION
@@ -945,12 +945,22 @@ PHP_FUNCTION(ldap_get_entries)
 			add_index_string(tmp1, num_attrib, attribute, 1);
 
 			num_attrib++;
+#if ( LDAP_API_VERSION > 2000 ) || HAVE_NSLDAP || WINDOWS
+			ldap_memfree(attribute);
+#endif
 			attribute = ldap_next_attribute(ldap, ldap_result_entry, ber);
 		}
+#if ( LDAP_API_VERSION > 2000 ) || HAVE_NSLDAP || WINDOWS
+		if (ber != NULL)
+			ber_free(ber, 0);
+#endif
 
 		add_assoc_long(tmp1, "count", num_attrib);
 		dn = ldap_get_dn(ldap, ldap_result_entry);
 		add_assoc_string(tmp1, "dn", dn, 1);
+#if ( LDAP_API_VERSION > 2000 ) || HAVE_NSLDAP || WINDOWS
+		ldap_memfree(dn);
+#endif
 
 		zend_hash_index_update(return_value->value.ht, num_entries, (void *) &tmp1, sizeof(pval *), NULL);
 		

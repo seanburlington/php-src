@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.65 2003/02/20 00:32:51 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.66 2003/02/20 00:34:03 iliaa Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -354,7 +354,7 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 							s = resource->path;
 							*s = '/';
 						}
-						*(s + 1) = '\0'; 
+						s[1] = '\0'; 
 						if (resource->path && *(resource->path) == '/' && *(resource->path + 1) == '\0') {
 							snprintf(loc_path, sizeof(loc_path) - 1, "%s%s", resource->path, location);
 						} else {

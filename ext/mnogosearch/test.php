@@ -1,13 +1,10 @@
 <!-- 
     $Source: /repository/php-src/ext/mnogosearch/Attic/test.php,v $
-    $Id: test.php,v 1.16 2001/03/01 13:38:38 gluke Exp $ 
+    $Id: test.php,v 1.17 2001/03/01 14:18:06 gluke Exp $ 
 -->
 
 <html>
 <body>
-
-mnoGoSearch API version: <? echo Udm_Api_Version(); ?>
-<br>
 
 <form method=post>
 <input type=text size=30 name=q value="<? echo htmlspecialchars(stripslashes($q)); ?>">
@@ -27,7 +24,9 @@ mnoGoSearch API version: <? echo Udm_Api_Version(); ?>
 
 	$udm=Udm_Alloc_Agent("mysql://udm:udm@localhost/udm/",'single');	
 	
-	print  "Total number of urls in database: ".Udm_Get_Doc_Count($udm)."<br>\n";
+	if (Udm_Api_Version() >= 30111) {
+		print  "Total number of urls in database: ".Udm_Get_Doc_Count($udm)."<br>\n";
+	}
 	
 // Stage 2: set search parameters
 

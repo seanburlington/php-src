@@ -9,7 +9,7 @@
 #
 # Written by Sascha Schumann
 #
-# $Id: build.mk,v 1.13 1999/11/28 13:45:17 sas Exp $ 
+# $Id: build.mk,v 1.14 1999/11/28 22:51:50 ssb Exp $ 
 
 LT_TARGETS = ltconfig ltmain.sh config.guess config.sub
 
@@ -36,7 +36,7 @@ targets = $(makefile_in_files) configure $(config_h_in)
 all: $(targets)
 	@for i in $(SUBDIRS); do \
 		test -d $$i || (test -d ../$$i && ln -s ../$$i $$i); \
-		(cd $$i && $(MAKE) -f build.mk AMFLAGS=$(AMFLAGS)); \
+		(cd $$i>/dev/null && $(MAKE) -f build.mk AMFLAGS=$(AMFLAGS)); \
 	done
 
 all: $(STAMP)

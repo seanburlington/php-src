@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.255 2001/12/06 19:02:27 hholzgra Exp $ */
+/* $Id: string.c,v 1.256 2001/12/06 21:39:01 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3863,9 +3863,9 @@ PHP_FUNCTION(sscanf)
 }
 /* }}} */
 
-/* {{{ proto string rot13(string str)
+/* {{{ proto string str_rot13(string str)
    Perform the rot13 transform on a string */
-PHP_FUNCTION(rot13)
+PHP_FUNCTION(str_rot13)
 {
 	char *str;
 	int str_len;

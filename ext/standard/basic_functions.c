@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.425 2001/12/06 19:02:25 hholzgra Exp $ */
+/* $Id: basic_functions.c,v 1.426 2001/12/06 21:38:57 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -803,7 +803,7 @@ function_entry basic_functions[] = {
 	PHP_FALIAS(ftok  , warn_not_available,      NULL)
 #endif	
 
-	PHP_FE(rot13, NULL)
+	PHP_FE(str_rot13, NULL)
 	{NULL, NULL, NULL}
 };
 

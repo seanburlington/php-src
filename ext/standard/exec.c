@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.29 2000/02/24 08:07:29 eschmid Exp $ */
+/* $Id: exec.c,v 1.30 2000/03/06 15:32:05 hholzgra Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -173,7 +173,7 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 			tmp = php_addslashes(buf, 0, &len, 0);
 			RETVAL_STRINGL(tmp,len,0);
 		} else
-			RETVAL_STRINGL(buf,l,1);
+			RETVAL_STRINGL(buf,l+1,1);
 	} else {
 		int b, i;
 
@@ -196,6 +196,7 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 }
 
 /* {{{ proto int exec(string command [, array output [, int return_value]])
+
    Execute an external program */
 PHP_FUNCTION(exec)
 {
@@ -229,6 +230,7 @@ PHP_FUNCTION(exec)
 			break;
 	}
 }
+
 /* }}} */
 
 /* {{{ proto int system(string command [, int return_value])

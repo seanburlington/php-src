@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.35 2005/02/13 06:52:45 hholzgra Exp $ */
+/* $Id: mysql_driver.c,v 1.36 2005/02/13 17:16:24 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -324,8 +324,6 @@ static int pdo_mysql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 		}
 	}
 	
-	mysql_handle_autocommit(dbh TSRMLS_CC);
-
 	if (vars[2].optval && !strcmp("localhost", vars[2].optval)) {
 		unix_socket = vars[4].optval;  
 	} else {
@@ -336,6 +334,8 @@ static int pdo_mysql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 		pdo_mysql_error(dbh);
 		goto cleanup;
 	}
+
+	mysql_handle_autocommit(dbh TSRMLS_CC);
 
 	H->attached = 1;
 

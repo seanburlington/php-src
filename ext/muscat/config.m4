@@ -1,7 +1,7 @@
-dnl $Id: config.m4,v 1.1 2001/01/18 13:21:33 samjam Exp $
+dnl $Id: config.m4,v 1.2 2001/03/12 00:46:15 sniper Exp $
 
 PHP_ARG_WITH(muscat, for Muscat support,
-[  --with-muscat[=DIR]             Include muscat support.])
+[  --with-muscat[=DIR]     Include muscat support.])
 
 if test "$PHP_MUSCAT" != "no"; then
   PHP_EXTENSION(muscat, $ext_shared)

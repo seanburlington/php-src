@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.17 1999/08/02 19:16:34 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.18 1999/08/28 23:30:37 rasmus Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -214,7 +214,7 @@ static void init_request_info(SLS_D)
 		authorization = table_get(r->headers_in, "Authorization");
 	}
 	if (authorization
-		&& !auth_type(r)
+/* 		&& !auth_type(r) */
 		&& !strcmp(getword(r->pool, &authorization, ' '), "Basic")) {
 		tmp = uudecode(r->pool, authorization);
 		SG(request_info).auth_user = getword_nulls_nc(r->pool, &tmp, ':');

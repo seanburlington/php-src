@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.14 2003/06/10 20:03:33 imajes Exp $ 
+  $Id: mysqli.c,v 1.15 2003/07/15 10:37:19 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -37,32 +37,52 @@ ZEND_DECLARE_MODULE_GLOBALS(mysqli)
 static zend_object_handlers mysqli_object_handlers;
 PR_MAIN *prmain;
 
-/* {{{ php_clear_stmt_bind */
-void php_clear_stmt_bind(STMT *stmt)
+/* {{{ php_free_stmt_bind_buffer */
+void php_free_stmt_bind_buffer(BIND_BUFFER bbuf, int type)
 {
 	unsigned int i;
 
+	if (!bbuf.var_cnt) {
+		return;
+	}
+
+	if (bbuf.is_null) {
+		efree(bbuf.is_null);
+	}
+
+	for (i=0; i < bbuf.var_cnt; i++) {
+		if (type == FETCH_RESULT) {
+			if (bbuf.buf[i].type == IS_STRING) {
+				efree(bbuf.buf[i].buffer);
+			}
+		}
+		if (bbuf.vars[i]) {
+			ZVAL_DELREF(bbuf.vars[i]);
+		}	
+	}
+
+	if (bbuf.vars) {
+		efree(bbuf.vars);
+	}
+
+	if (type == FETCH_RESULT) {
+		efree(bbuf.buf);
+	}
+	bbuf.var_cnt = 0;
+	return;
+}
+/* }}} */
+
+/* {{{ php_clear_stmt_bind */
+void php_clear_stmt_bind(STMT *stmt)
+{
 	if (stmt->stmt) {
 		mysql_stmt_close(stmt->stmt);
 	}
 
-	if (stmt->var_cnt) {
-		for (i = 0; i < stmt->var_cnt; i++) {
-			if (stmt->type == FETCH_RESULT) {
-				if (stmt->bind[i].type == IS_STRING) {
-					efree(stmt->bind[i].buffer);
-				}
-			}
-			if (stmt->vars[i]) {	
-				ZVAL_DELREF(stmt->vars[i]);
-			}
-		}
-		if (stmt->type == FETCH_RESULT) {
-			efree(stmt->bind);
-		}
-		efree(stmt->vars);
-		efree(stmt->is_null);
-	}
+	php_free_stmt_bind_buffer(stmt->param, FETCH_SIMPLE);
+	php_free_stmt_bind_buffer(stmt->result, FETCH_RESULT);
+
 	efree(stmt);
 	return;
 }

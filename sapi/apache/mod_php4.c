@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.113 2001/07/31 04:53:53 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.114 2001/08/01 22:53:26 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -326,7 +326,6 @@ static void php_apache_request_shutdown(void *dummy)
 static int php_apache_sapi_activate(TSRMLS_D)
 {
 	request_rec *r = (request_rec *) SG(server_context); 
-	TSRMLS_FETCH();
 
 	/*
 	 * For the Apache module version, this bit of code registers a cleanup

@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.31 2001/07/30 04:58:07 zeev Exp $ */
+/* $Id: sapi_apache.c,v 1.32 2001/08/01 22:53:26 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -60,10 +60,9 @@
 
 /* {{{ apache_php_module_main
  */
-int apache_php_module_main(request_rec *r, int display_source_mode TSRMLS_DC TSRMLS_DC)
+int apache_php_module_main(request_rec *r, int display_source_mode TSRMLS_DC)
 {
 	zend_file_handle file_handle;
-	TSRMLS_FETCH();
 
 	if (php_request_startup(TSRMLS_C) == FAILURE) {
 		return FAILURE;

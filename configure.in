@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.12 1999/10/04 15:18:01 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.13 1999/10/04 18:07:44 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -724,8 +724,6 @@ AC_DEFINE_UNQUOTED(PHP_OS,"$PHP_OS")
 AC_SUBST(PHP_LIBS)
 AC_SUBST(PHP_SAPI)
 AC_SUBST(INSTALL_IT)
-
-PHP_OUTPUT_FILES=`echo $PHP_OUTPUT_FILES | sort`
 
 #libphp4.module 
 AC_OUTPUT([Makefile php4.spec ext/Makefile sapi/Makefile $PHP_OUTPUT_FILES

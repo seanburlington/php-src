@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.38 2000/08/01 07:22:59 stas Exp $ */
+/* $Id: exec.c,v 1.39 2000/08/06 17:56:56 eschmid Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -345,8 +345,8 @@ PHP_FUNCTION(escapeshellcmd)
 }
 /* }}} */
 
-/* {{{ proto string shell_exec(strng cmd)
-   What excatly is this variant for ??? */
+/* {{{ proto string shell_exec(string cmd)
+   Use pclose() for FILE* that has been opened via popen() */
 PHP_FUNCTION(shell_exec)
 {
 	FILE *in;

@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.50.2.16 2004/01/26 01:26:43 pajoye Exp $
+// $Id: PEAR.php,v 1.50.2.17 2004/02/27 02:27:12 cellog Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -38,6 +38,15 @@ if (substr(PHP_OS, 0, 3) == 'WIN') {
     define('OS_WINDOWS', false);
     define('OS_UNIX',    true);
     define('PEAR_OS',    'Unix'); // blatant assumption
+}
+
+// instant backwards compatibility
+if (!defined('PATH_SEPARATOR')) {
+    if (OS_WINDOWS) {
+        define('PATH_SEPARATOR', ';');
+    } else {
+        define('PATH_SEPARATOR', ':');
+    }
 }
 
 $GLOBALS['_PEAR_default_error_mode']     = PEAR_ERROR_RETURN;
@@ -184,7 +193,7 @@ class PEAR
     /**
     * If you have a class that's mostly/entirely static, and you need static
     * properties, you can use this method to simulate them. Eg. in your method(s)
-    * do this: $myVar = &PEAR::getStaticProperty('myVar');
+    * do this: $myVar = &PEAR::getStaticProperty('myclass', 'myVar');
     * You MUST use a reference, or they will not persist!
     *
     * @access public

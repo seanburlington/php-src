@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.51 2001/09/09 13:29:19 derick Exp $ */
+/* $Id: ereg.c,v 1.52 2001/12/03 05:15:29 fmk Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -263,7 +263,7 @@ PHP_FUNCTION(eregi)
 
 /* {{{ php_reg_replace
  * this is the meat and potatoes of regex replacement! */
-char *php_reg_replace(const char *pattern, const char *replace, const char *string, int icase, int extended)
+PHPAPI char *php_reg_replace(const char *pattern, const char *replace, const char *string, int icase, int extended)
 {
 	regex_t re;
 	regmatch_t subs[NS];

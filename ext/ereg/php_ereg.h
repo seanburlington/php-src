@@ -17,12 +17,12 @@
 */
 
 
-/* $Id: php_ereg.h,v 1.12 2001/07/28 11:36:18 zeev Exp $ */
+/* $Id: php_ereg.h,v 1.13 2001/12/03 05:15:29 fmk Exp $ */
 
 #ifndef REG_H
 #define REG_H
 
-char *php_reg_replace(const char *pattern, const char *replace, const char *string, int icase, int extended);
+PHPAPI char *php_reg_replace(const char *pattern, const char *replace, const char *string, int icase, int extended);
 
 PHP_FUNCTION(ereg);
 PHP_FUNCTION(eregi);

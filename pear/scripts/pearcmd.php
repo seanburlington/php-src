@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearcmd.php,v 1.8 2004/01/08 17:33:14 sniper Exp $
+// $Id: pearcmd.php,v 1.9 2004/01/26 01:59:14 pajoye Exp $
 
 ob_end_clean();
 /**
@@ -46,7 +46,8 @@ PEAR_Command::setFrontendType('CLI');
 $all_commands = PEAR_Command::getCommands();
 
 $argv = Console_Getopt::readPHPArgv();
-$progname = basename($argv[0]);
+/* $progname = basename($argv[0]); */
+$progname = 'pear';
 array_shift($argv);
 $options = Console_Getopt::getopt2($argv, "c:C:d:D:Gh?sSqu:vV");
 if (PEAR::isError($options)) {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.65 2002/07/26 22:00:25 sesser Exp $ */
+/* $Id: php_ftp.c,v 1.66 2002/07/30 20:37:59 sesser Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1021,7 +1021,7 @@ PHP_FUNCTION(ftp_close)
 
 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &z_ftp, -1, le_ftpbuf_name, le_ftpbuf);
 
-	zend_list_delete(Z_LVAL_P(z_ftp));
+	RETURN_BOOL(zend_list_delete(Z_LVAL_P(z_ftp)) == SUCCESS);
 }
 /* }}} */
 

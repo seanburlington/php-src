@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.94 2005/03/21 00:29:06 helly Exp $ */
+/* $Id: pdo_stmt.c,v 1.95 2005/03/24 12:32:06 helly Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -253,7 +253,7 @@ static int really_register_bound_param(struct pdo_bound_param_data *param, pdo_s
 		}
 	}
 
-	if (PDO_PARAM_TYPE(param->param_type) == PDO_PARAM_STR && param->max_value_len <= 0) {
+	if (PDO_PARAM_TYPE(param->param_type) == PDO_PARAM_STR && param->max_value_len <= 0 && ! ZVAL_IS_NULL(param->parameter)) {
 		convert_to_string(param->parameter);
 	}
 

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_profiler.c,v 1.9 2003/08/28 20:51:18 andrey Exp $ 
+  $Id: mysqli_profiler.c,v 1.10 2003/09/05 19:27:26 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -49,7 +49,9 @@ PR_COMMON *php_mysqli_profiler_new_object(PR_COMMON *parent, unsigned int type, 
 		break; 
 		case MYSQLI_PR_RESULT:
 			prnew = (PR_COMMON *)ecalloc(1, sizeof(PR_RESULT));
-		break; 
+		break;
+		default:
+			return NULL; 
 	}
 	prnew->header.type = type;
 	prnew->header.filename = estrdup(zend_get_executed_filename(TSRMLS_C));

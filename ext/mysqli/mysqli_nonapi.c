@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.14 2003/07/28 10:23:36 sniper Exp $ 
+  $Id: mysqli_nonapi.c,v 1.15 2003/09/05 19:27:26 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -194,6 +194,8 @@ PHP_FUNCTION(mysqli_query)
 	if (MyG(profiler)) {
 		gettimeofday(&starttime, NULL);
 		prresult = (PR_RESULT *)MYSQLI_PROFILER_NEW(prquery, MYSQLI_PR_RESULT, 1);
+	} else {
+		prresult = NULL;
 	}
 
 	result = (resultmode == MYSQLI_USE_RESULT) ? mysql_use_result(mysql) : mysql_store_result(mysql);

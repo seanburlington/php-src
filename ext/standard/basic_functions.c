@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.573 2003/02/07 21:36:18 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.574 2003/02/09 03:49:41 shane Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -747,9 +747,7 @@ function_entry basic_functions[] = {
 	PHP_FE(is_writable,														NULL)
 	PHP_FALIAS(is_writeable,		is_writable,							NULL)
 	PHP_FE(is_readable,														NULL)
-#ifndef PHP_WIN32
 	PHP_FE(is_executable,													NULL)
-#endif
 	PHP_FE(is_file,															NULL)
 	PHP_FE(is_dir,															NULL)
 	PHP_FE(is_link,															NULL)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.118 2003/01/09 21:57:44 pollita Exp $ */
+/* $Id: filestat.c,v 1.119 2003/02/09 03:49:41 shane Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -572,8 +572,6 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 		RETURN_FALSE;
 	}
 
-#ifndef PHP_WIN32
-
 	switch (type) {
 		case FS_IS_W:
 			RETURN_BOOL (!VCWD_ACCESS(filename, W_OK));
@@ -584,7 +582,6 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 		case FS_EXISTS:
 			RETURN_BOOL (!VCWD_ACCESS(filename, F_OK));
 	}
-#endif
 
 	stat_sb = &BG(sb);
 

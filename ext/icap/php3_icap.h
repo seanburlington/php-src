@@ -1,4 +1,4 @@
-/* $Id: php3_icap.h,v 1.4 1999/08/17 16:51:04 musone Exp $ */
+/* $Id: php3_icap.h,v 1.5 1999/08/23 17:19:05 musone Exp $ */
 
 #ifndef _INCLUDED_ICAP_H
 #define _INCLUDED_ICAP_H
@@ -17,9 +17,6 @@
 #include "build-defs.h"
 #endif
 
-typedef struct calendar_stream {
-int id;
-} CALENDARSTREAM;
 
 /* Functions accessable to PHP */
 extern php3_module_entry php3_icap_module_entry;
@@ -54,6 +51,7 @@ void php3_icap_list_alarms(INTERNAL_FUNCTION_PARAMETERS);
 
 
 #endif
+
 
 
 

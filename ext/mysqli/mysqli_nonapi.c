@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.34.2.4 2004/11/01 09:52:04 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.34.2.5 2005/02/24 23:59:49 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -72,6 +72,10 @@ PHP_FUNCTION(mysqli_connect)
 	if (!(mysql->mysql = mysql_init(NULL))) {
 		efree(mysql);
 		RETURN_FALSE;
+	}
+
+	if (!socket) {
+		socket = MyG(default_socket);
 	}
 
 	if (mysql_real_connect(mysql->mysql,hostname,username,passwd,dbname,port,socket,CLIENT_MULTI_RESULTS) == NULL) {

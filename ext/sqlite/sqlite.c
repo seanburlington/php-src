@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.62.2.27 2004/07/27 16:53:48 iliaa Exp $ 
+   $Id: sqlite.c,v 1.62.2.28 2004/11/26 13:08:37 stas Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -684,7 +684,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.27 2004/07/27 16:53:48 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.28 2004/11/26 13:08:37 stas Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -755,7 +755,7 @@ static struct php_sqlite_db *php_sqlite_open(char *filename, int mode, char *per
    Opens a persistent handle to an SQLite database.  Will create the database if it does not exist */
 PHP_FUNCTION(sqlite_popen)
 {
-	int mode = 0666;
+	long mode = 0666;
 	char *filename, *fullpath, *hashkey;
 	long filename_len, hashkeylen;
 	zval *errmsg = NULL;
@@ -830,7 +830,7 @@ PHP_FUNCTION(sqlite_popen)
    Opens an SQLite database.  Will create the database if it does not exist */
 PHP_FUNCTION(sqlite_open)
 {
-	int mode = 0666;
+	long mode = 0666;
 	char *filename, *fullpath = NULL;
 	long filename_len;
 	zval *errmsg = NULL;
@@ -1055,7 +1055,7 @@ PHP_FUNCTION(sqlite_unbuffered_query)
 	struct php_sqlite_db *db;
 	char *sql;
 	long sql_len;
-	int mode = PHPSQLITE_BOTH;
+	long mode = PHPSQLITE_BOTH;
 	char *errtext = NULL;
 
 	if (FAILURE == zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET,
@@ -1091,7 +1091,7 @@ PHP_FUNCTION(sqlite_query)
 	struct php_sqlite_db *db;
 	char *sql;
 	long sql_len;
-	int mode = PHPSQLITE_BOTH;
+	long mode = PHPSQLITE_BOTH;
 	char *errtext = NULL;
 
 	if (FAILURE == zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET,
@@ -1276,7 +1276,7 @@ static void php_sqlite_fetch_column(struct php_sqlite_result *res, zval *which, 
 PHP_FUNCTION(sqlite_fetch_all)
 {
 	zval *zres, *ent;
-	int mode = PHPSQLITE_BOTH;
+	long mode = PHPSQLITE_BOTH;
 	zend_bool decode_binary = 1;
 	struct php_sqlite_result *res;
 
@@ -1311,7 +1311,7 @@ PHP_FUNCTION(sqlite_fetch_all)
 PHP_FUNCTION(sqlite_fetch_array)
 {
 	zval *zres;
-	int mode = PHPSQLITE_BOTH;
+	long mode = PHPSQLITE_BOTH;
 	zend_bool decode_binary = 1;
 	struct php_sqlite_result *res;
 
@@ -1336,7 +1336,7 @@ PHP_FUNCTION(sqlite_array_query)
 	struct php_sqlite_result *rres;
 	char *sql;
 	long sql_len;
-	int mode = PHPSQLITE_BOTH;
+	long mode = PHPSQLITE_BOTH;
 	char *errtext = NULL;
 	zend_bool decode_binary = 1;
 
@@ -1523,7 +1523,7 @@ PHP_FUNCTION(sqlite_fetch_single)
 PHP_FUNCTION(sqlite_current)
 {
 	zval *zres;
-	int mode = PHPSQLITE_BOTH;
+	long mode = PHPSQLITE_BOTH;
 	zend_bool decode_binary = 1;
 	struct php_sqlite_result *res;
 
@@ -1697,7 +1697,7 @@ PHP_FUNCTION(sqlite_seek)
 {
 	zval *zres;
 	struct php_sqlite_result *res;
-	int row;
+	long row;
 
 	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rl", &zres, &row)) {
 		return;

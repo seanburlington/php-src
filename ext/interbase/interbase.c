@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.207 2004/03/08 10:49:17 abies Exp $ */
+/* $Id: interbase.c,v 1.208 2004/04/01 10:56:28 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -30,7 +30,7 @@
 
 #include "php.h"
 
-#define FILE_REVISION "$Revision: 1.207 $"
+#define FILE_REVISION "$Revision: 1.208 $"
 
 #if HAVE_IBASE
 
@@ -2372,6 +2372,7 @@ PHP_FUNCTION(ibase_query)
 						ib_link->handle = db;
 						ib_link->dialect = SQL_DIALECT_CURRENT;
 						ib_link->tr_list = NULL;
+                        ib_link->event_head = NULL;
 						
 						ZEND_REGISTER_RESOURCE(return_value, ib_link, le_link);
 						zend_list_addref(Z_LVAL_P(return_value));

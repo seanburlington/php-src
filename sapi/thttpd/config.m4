@@ -1,13 +1,15 @@
 dnl
-dnl $Id: config.m4,v 1.17 2002/10/13 11:28:34 sas Exp $
+dnl $Id: config.m4,v 1.18 2003/02/13 02:24:38 sas Exp $
 dnl
 
 AC_ARG_WITH(thttpd,
 [  --with-thttpd=SRCDIR    Build PHP as thttpd module],[
-  if ! test -d $withval; then
+  if test ! -d $withval; then
     AC_MSG_RESULT(thttpd directory does not exist ($withval))
   fi
-  if ! egrep thttpd.2.21b $withval/version.h >/dev/null; then
+  if egrep thttpd.2.21b $withval/version.h >/dev/null; then
+    :
+  else
     AC_MSG_ERROR([This version only supports thttpd-2.21b])
   fi
   PHP_EXPAND_PATH($withval, THTTPD)

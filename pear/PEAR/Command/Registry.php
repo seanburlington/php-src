@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.25 2002/11/26 18:23:58 ssb Exp $
+// $Id: Registry.php,v 1.26 2002/11/26 21:49:55 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Registry.php';
@@ -25,7 +25,7 @@ require_once 'PEAR/Config.php';
 
 class PEAR_Command_Registry extends PEAR_Command_Common
 {
-    // {{{ command definitions
+    // {{{ properties
 
     var $commands = array(
         'list' => array(
@@ -76,6 +76,7 @@ installed package.'
     }
 
     // }}}
+
     // {{{ doList()
 
     function _sortinfo($a, $b)

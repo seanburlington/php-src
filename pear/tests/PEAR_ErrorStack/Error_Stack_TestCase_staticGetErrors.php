@@ -3,7 +3,7 @@
 /**
  * API Unit tests for PEAR_ErrorStack package.
  * 
- * @version    $Id: Error_Stack_TestCase_staticGetErrors.php,v 1.2 2004/03/21 23:06:20 cellog Exp $
+ * @version    $Id: Error_Stack_TestCase_staticGetErrors.php,v 1.3 2004/05/21 03:33:51 cellog Exp $
  * @author     Laurent Laville <pear@laurent-laville.org> portions from HTML_CSS
  * @author     Greg Beaver
  * @package    PEAR_ErrorStack
@@ -142,7 +142,7 @@ class Error_Stack_TestCase_staticGetErrors extends PHPUnit_TestCase
         $this->stack->push(2, 'warning');
         for($i=0;$i<10000;$i++);
         PEAR_ErrorStack::staticPush('fronk', 3, 'foo');
-        $ret = PEAR_ErrorStack::staticGetErrors(true, true);
+        $ret = PEAR_ErrorStack::staticGetErrors(true, false, true);
         for ($i= 0; $i < 3; $i++) {
             unset($ret[$i]['time']);
             unset($ret[$i]['context']);
@@ -193,7 +193,7 @@ class Error_Stack_TestCase_staticGetErrors extends PHPUnit_TestCase
         for($i=0;$i<10000;$i++);
         PEAR_ErrorStack::staticPush('fronk', 3, 'foo');
         $this->wasCalled = false;
-        $ret = PEAR_ErrorStack::staticGetErrors(true, true, array(&$this, '_sortErrorsRev'));
+        $ret = PEAR_ErrorStack::staticGetErrors(true, false, true, array(&$this, '_sortErrorsRev'));
         $this->assertTrue($this->wasCalled, '_sortErrorsRev not called!');
         for ($i= 0; $i < 3; $i++) {
             unset($ret[$i]['time']);

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.318 2000/09/09 23:21:44 derick Exp $ */
+/* $Id: main.c,v 1.319 2000/09/11 14:50:26 stas Exp $ */
 
 
 #include <stdio.h>
@@ -1007,21 +1007,21 @@ static int php_hash_environment(ELS_D SLS_DC PLS_DC)
 			case 'p':
 			case 'P':
 				if (!_gpc_flags[0] && !SG(headers_sent) && SG(request_info).request_method && !strcasecmp(SG(request_info).request_method, "POST")) {
-					php_treat_data(PARSE_POST, NULL ELS_CC PLS_CC SLS_CC);	/* POST Data */
+					php_treat_data(PARSE_POST, NULL, NULL ELS_CC PLS_CC SLS_CC);	/* POST Data */
 					_gpc_flags[0]=1;
 				}
 				break;
 			case 'c':
 			case 'C':
 				if (!_gpc_flags[1]) {
-					php_treat_data(PARSE_COOKIE, NULL ELS_CC PLS_CC SLS_CC);	/* Cookie Data */
+					php_treat_data(PARSE_COOKIE, NULL, NULL  ELS_CC PLS_CC SLS_CC);	/* Cookie Data */
 					_gpc_flags[1]=1;
 				}
 				break;
 			case 'g':
 			case 'G':
 				if (!_gpc_flags[2]) {
-					php_treat_data(PARSE_GET, NULL ELS_CC PLS_CC SLS_CC);	/* GET Data */
+					php_treat_data(PARSE_GET, NULL, NULL  ELS_CC PLS_CC SLS_CC);	/* GET Data */
 					_gpc_flags[2]=1;
 				}
 				break;

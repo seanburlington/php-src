@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.175 2002/04/08 02:01:45 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.176 2002/04/08 04:21:04 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -3107,7 +3107,6 @@ PHPAPI int php_pgsql_convert(PGconn *pg_link, const char *table_name, const zval
 							}
 							else {
 								ZVAL_STRING(new_val, Z_STRVAL_PP(val), 1);
-								convert_to_long_ex(&new_val);
 							}
 						}
 						break;
@@ -3150,14 +3149,12 @@ PHPAPI int php_pgsql_convert(PGconn *pg_link, const char *table_name, const zval
 							}
 							else {
 								ZVAL_STRING(new_val, Z_STRVAL_PP(val), 1);
-								convert_to_double_ex(&new_val);
 							}
 						}
 						break;
 						
 					case IS_LONG:
 						ZVAL_LONG(new_val, Z_DVAL_PP(val));
-						convert_to_double_ex(&new_val);
 						break;
 						
 					case IS_DOUBLE:

@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.12.2.2 2001/08/29 11:33:06 wez Exp $ */
+/* $Id: mbfilter.c,v 1.12.2.3 2001/09/07 06:44:21 rasmus Exp $ */
 
 
 #include <stdlib.h>

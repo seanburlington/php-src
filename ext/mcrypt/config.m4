@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.20 2001/09/22 17:51:07 sniper Exp $
+dnl $Id: config.m4,v 1.21 2001/09/22 17:55:16 sniper Exp $
 dnl 
 
 PHP_ARG_WITH(mcrypt, for mcrypt support,
@@ -21,6 +21,14 @@ if test "$PHP_MCRYPT" != "no"; then
   [
     PHP_ADD_LIBRARY(ltdl,, MCRYPT_SHARED_LIBADD)
     AC_DEFINE(HAVE_LIBMCRYPT24,1,[ ])
+
+    PHP_CHECK_LIBRARY(mcrypt, mcrypt_generic_deinit, 
+    [
+      AC_DEFINE(HAVE_MCRYPT_GENERIC_DEINIT,1,[ ])
+    ],[],[
+      -L$MCRYPT_DIR/lib
+    ])
+
   ],[
     PHP_CHECK_LIBRARY(mcrypt, init_mcrypt, 
     [
@@ -28,13 +36,6 @@ if test "$PHP_MCRYPT" != "no"; then
     ],[
       AC_MSG_ERROR(Sorry, I was not able to diagnose which libmcrypt version you have installed.)
     ],[
-      -L$MCRYPT_DIR/lib
-    ])
-
-    PHP_CHECK_LIBRARY(mcrypt, mcrypt_generic_deinit, 
-    [
-      AC_DEFINE(HAVE_MCRYPT_GENERIC_DEINIT,1,[ ])
-    ],[],[
       -L$MCRYPT_DIR/lib
     ])
 

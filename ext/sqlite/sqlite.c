@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.101 2003/10/25 23:17:15 helly Exp $ 
+   $Id: sqlite.c,v 1.102 2003/12/10 01:02:19 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1072,7 +1072,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.101 2003/10/25 23:17:15 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.102 2003/12/10 01:02:19 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1845,7 +1845,11 @@ PHP_FUNCTION(sqlite_fetch_object)
 		return;
 	}
 
-	php_sqlite_fetch_array(res, PHPSQLITE_ASSOC, decode_binary, 1, &dataset TSRMLS_CC);
+	if (res->curr_row < res->nrows) {
+		php_sqlite_fetch_array(res, PHPSQLITE_ASSOC, decode_binary, 1, &dataset TSRMLS_CC);
+	} else {
+		RETURN_FALSE;
+	}
 
 	object_and_properties_init(return_value, ce, NULL);
 	zend_merge_properties(return_value, Z_ARRVAL(dataset), 1 TSRMLS_CC);

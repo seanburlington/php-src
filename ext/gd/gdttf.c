@@ -2,7 +2,7 @@
 /*                                          */
 /* John Ellson   ellson@lucent.com          */
 
-/* $Id: gdttf.c,v 1.14 2000/10/16 13:55:47 dbeu Exp $ */
+/* $Id: gdttf.c,v 1.15 2001/08/05 01:42:35 zeev Exp $ */
 
 #include "php.h"
 
@@ -332,11 +332,12 @@ fontFetch ( char **error, void *key )
 	fontkey_t		*b=(fontkey_t *)key;
 	int				i, n, map_found;
 	short			platform, encoding;
+	TSRMLS_FETCH();
 
 	a = (font_t *)malloc(sizeof(font_t));
 #ifdef VIRTUAL_DIR
 	/* a->fontname will be freed in fontRelease() later on */
-	if (virtual_filepath(b->fontname, &a->fontname)) {
+	if (virtual_filepath(b->fontname, &a->fontname TSRMLS_CC)) {
 		*error = "Could not find/open font";
 		return NULL;
 	}

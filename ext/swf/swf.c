@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.36 2001/07/28 11:36:20 zeev Exp $ */
+/* $Id: swf.c,v 1.37 2001/08/05 01:42:42 zeev Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -200,7 +200,7 @@ PHP_FUNCTION(swf_openfile)
 	if (strcasecmp("php://stdout", tmpna) == 0) {
 		FILE *fp;
 
-		fp = php_open_temporary_file(NULL, "php_swf_stdout", &na);
+		fp = php_open_temporary_file(NULL, "php_swf_stdout", &na TSRMLS_CC);
 		if (!fp) {
 			free_na = 0;
 			RETURN_FALSE;
@@ -215,7 +215,7 @@ PHP_FUNCTION(swf_openfile)
 	}
 
 #ifdef VIRTUAL_DIR
-	if (virtual_filepath(na, &tmpna)) {
+	if (virtual_filepath(na, &tmpna TSRMLS_CC)) {
 		if (free_na) {
 			efree(na);
 		}

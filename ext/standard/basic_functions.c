@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.376 2001/08/04 16:53:53 thies Exp $ */
+/* $Id: basic_functions.c,v 1.377 2001/08/05 01:42:41 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -2465,7 +2465,7 @@ PHP_FUNCTION(move_uploaded_file)
 	VCWD_UNLINK(Z_STRVAL_PP(new_path));
 	if (rename(Z_STRVAL_PP(path), Z_STRVAL_PP(new_path))==0) {
 		successful=1;
-	} else if (php_copy_file(Z_STRVAL_PP(path), Z_STRVAL_PP(new_path))==SUCCESS) {
+	} else if (php_copy_file(Z_STRVAL_PP(path), Z_STRVAL_PP(new_path) TSRMLS_CC)==SUCCESS) {
 		VCWD_UNLINK(Z_STRVAL_PP(path));
 		successful=1;
 	}

@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.92 2001/07/31 05:43:57 zeev Exp $ */
+/* $Id: ldap.c,v 1.93 2001/08/05 01:42:36 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -251,7 +251,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.92 2001/07/31 05:43:57 zeev Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.93 2001/08/05 01:42:36 zeev Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #ifdef LDAP_API_VERSION
@@ -1984,14 +1984,16 @@ static void php_ldap_do_translate(INTERNAL_FUNCTION_PARAMETERS, int way)
 
 /* {{{ proto string ldap_t61_to_8859(string value)
    Translate t61 characters to 8859 characters */
-PHP_FUNCTION(ldap_t61_to_8859) {
+PHP_FUNCTION(ldap_t61_to_8859)
+{
 	php_ldap_do_translate(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 }
 /* }}} */
 
 /* {{{ proto string ldap_8859_to_t61(string value)
    Translate 8859 characters to t61 characters */
-PHP_FUNCTION(ldap_8859_to_t61) {
+PHP_FUNCTION(ldap_8859_to_t61)
+{
 	php_ldap_do_translate(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
 }
 /* }}} */

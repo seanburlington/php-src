@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.39 2001/08/04 12:36:51 elixer Exp $ */
+/* $Id: file.h,v 1.40 2001/08/05 01:42:42 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -75,7 +75,7 @@ PHPAPI int php_file_le_fopen(void);
 PHPAPI int php_file_le_stream(void);
 PHPAPI int php_file_le_popen(void);
 PHPAPI int php_file_le_socket(void);
-PHPAPI int php_copy_file(char *src, char *dest);
+PHPAPI int php_copy_file(char *src, char *dest TSRMLS_DC);
 
 #define META_DEF_BUFSIZE 8192
 

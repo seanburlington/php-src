@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.43 2001/07/28 11:36:35 zeev Exp $ */
+/* $Id: roxen.c,v 1.44 2001/08/05 01:42:47 zeev Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -446,7 +446,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.43 2001/07/28 11:36:35 zeev Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.44 2001/08/05 01:42:47 zeev Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -716,7 +716,7 @@ void pike_module_init( void )
   ADD_STORAGE(php_roxen_request);
   set_init_callback(clear_struct);
   pike_add_function("run", f_php_roxen_request_handler,
-		    "function(string,mapping,object,function:int)", 0);
+		    "function(string, mapping, object, function:int)", 0);
   add_program_constant("Interpreter", (php_program = end_program()), 0);
 }
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.69 2001/07/31 06:28:04 zeev Exp $ */
+/* $Id: output.c,v 1.70 2001/08/05 01:42:44 zeev Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -173,12 +173,12 @@ PHPAPI void php_end_ob_buffer(zend_bool send_buffer, zend_bool just_flush)
 		TSRMLS_FETCH();
 
 		ALLOC_INIT_ZVAL(orig_buffer);
-		ZVAL_STRINGL(orig_buffer,OG(active_ob_buffer).buffer,OG(active_ob_buffer).text_length,0);
+		ZVAL_STRINGL(orig_buffer, OG(active_ob_buffer).buffer, OG(active_ob_buffer).text_length, 0);
 		orig_buffer->refcount=2;	/* don't let call_user_function() destroy our buffer */
 		orig_buffer->is_ref=1;
 
 		ALLOC_INIT_ZVAL(z_status);
-		ZVAL_LONG(z_status,status);
+		ZVAL_LONG(z_status, status);
 
 		params[0] = &orig_buffer;
 		params[1] = &z_status;
@@ -415,7 +415,7 @@ int php_ob_get_buffer(pval *p)
 	if (OG(ob_nesting_level)==0) {
 		return FAILURE;
 	}
-	ZVAL_STRINGL(p,OG(active_ob_buffer).buffer,OG(active_ob_buffer).text_length,1);
+	ZVAL_STRINGL(p, OG(active_ob_buffer).buffer, OG(active_ob_buffer).text_length, 1);
 	return SUCCESS;
 }
 /* }}} */
@@ -429,7 +429,7 @@ int php_ob_get_length(pval *p)
 	if (OG(ob_nesting_level) == 0) {
 		return FAILURE;
 	}
-	ZVAL_LONG(p,OG(active_ob_buffer).text_length);
+	ZVAL_LONG(p, OG(active_ob_buffer).text_length);
 	return SUCCESS;
 }
 /* }}} */

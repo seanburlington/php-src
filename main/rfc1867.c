@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.70 2001/07/31 04:53:52 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.71 2001/08/05 01:42:44 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -215,7 +215,7 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr T
 					if(is_arr_upload) {
 						arr_len = strlen(start_arr);
 						if(arr_index) efree(arr_index);
-						arr_index = estrndup(start_arr+1,arr_len-2);	
+						arr_index = estrndup(start_arr+1, arr_len-2);	
 					}
 				} else {
 					php_error(E_WARNING, "File upload error - no name component in content disposition");
@@ -366,13 +366,13 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr T
 				}
 				bytes = 0;
 
-				fp = php_open_temporary_file(PG(upload_tmp_dir), "php", &temp_filename);
+				fp = php_open_temporary_file(PG(upload_tmp_dir), "php", &temp_filename TSRMLS_CC);
 				if (!fp) {
 					php_error(E_WARNING, "File upload error - unable to create a temporary file");
 					SAFE_RETURN;
 				}
 				if ((loc - ptr - 4) > PG(upload_max_filesize)) {
-					php_error(E_WARNING, "Max file size of %ld bytes exceeded - file [%s] not saved", PG(upload_max_filesize),namebuf);
+					php_error(E_WARNING, "Max file size of %ld bytes exceeded - file [%s] not saved", PG(upload_max_filesize), namebuf);
 					upload_successful = 0;
 				} else if (max_file_size && ((loc - ptr - 4) > max_file_size)) {
 					php_error(E_WARNING, "Max file size exceeded - file [%s] not saved", namebuf);

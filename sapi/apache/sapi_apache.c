@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.32 2001/08/01 22:53:26 zeev Exp $ */
+/* $Id: sapi_apache.c,v 1.33 2001/08/05 01:42:45 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -75,7 +75,7 @@ int apache_php_module_main(request_rec *r, int display_source_mode TSRMLS_DC)
 		zend_syntax_highlighter_ini syntax_highlighter_ini;
 
 		php_get_highlight_struct(&syntax_highlighter_ini);
-		if (highlight_file(SG(request_info).path_translated,&syntax_highlighter_ini TSRMLS_CC)){
+		if (highlight_file(SG(request_info).path_translated, &syntax_highlighter_ini TSRMLS_CC)){
 			return OK;
 		} else {
 			return NOT_FOUND;

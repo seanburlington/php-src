@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.49 2001/08/04 20:58:47 jeroen Exp $ */
+/* $Id: math.c,v 1.50 2001/08/05 01:42:42 zeev Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -81,7 +81,8 @@ PHP_FUNCTION(ceil)
 /* {{{ proto double floor(double number)
    Returns the next lowest integer value from the number */
 
-PHP_FUNCTION(floor) {
+PHP_FUNCTION(floor)
+{
 	zval **value;
 	
 	if (ZEND_NUM_ARGS()!=1||zend_get_parameters_ex(1,&value)==FAILURE) {

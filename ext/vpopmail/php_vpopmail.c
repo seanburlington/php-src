@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.c,v 1.18 2001/07/31 03:00:04 zeev Exp $ */
+/* $Id: php_vpopmail.c,v 1.19 2001/08/05 01:42:42 zeev Exp $ */
 
 /* TODO: move to config.m4 when support for old versions is ready or just
  * don't support rather old vpopmail. current version must bail out if
@@ -427,7 +427,8 @@ PHP_FUNCTION(vpopmail_add_domain_ex)
 
 /* {{{ proto bool vpopmail_del_domain_ex(string domain)
    Delete a virtual domain */
-PHP_FUNCTION(vpopmail_del_domain_ex) {
+PHP_FUNCTION(vpopmail_del_domain_ex)
+{
 	zval **domain;
 	int retval=-1;
 	char *cmd,*escdomain;
@@ -469,7 +470,8 @@ PHP_FUNCTION(vpopmail_del_domain_ex) {
 
 /* {{{ proto bool vpopmail_add_alias_domain_ex(string olddomain, string newdomain)
    Add alias to an existing virtual domain */
-PHP_FUNCTION(vpopmail_add_alias_domain_ex) {
+PHP_FUNCTION(vpopmail_add_alias_domain_ex)
+{
 	zval **olddomain, **newdomain;
 	int retval;
 	char *cmd,*escolddomain,*escnewdomain;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.228 2001/08/03 11:00:16 sas Exp $ */
+/* $Id: session.c,v 1.229 2001/08/05 01:42:40 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -478,7 +478,7 @@ static char *_php_create_id(int *newlen TSRMLS_DC)
 	if (PS(entropy_length) > 0) {
 		int fd;
 
-		fd = VCWD_OPEN((PS(entropy_file), O_RDONLY));
+		fd = VCWD_OPEN(PS(entropy_file), O_RDONLY);
 		if (fd >= 0) {
 			char buf[2048];
 			int n;

@@ -16,7 +16,7 @@
    |          Fredrik Ohrn                                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.27 2001/07/31 23:49:07 sniper Exp $ */
+/* $Id: yp.c,v 1.28 2001/08/05 01:42:42 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -309,7 +309,8 @@ static int php_foreach_cat (int instatus, char *inkey, int inkeylen, char *inval
 
 /* {{{ proto array yp_cat(string domain, string map)
    Return an array containing the entire map */
-PHP_FUNCTION(yp_cat) {
+PHP_FUNCTION(yp_cat)
+{
 	pval **domain, **map;
 	struct ypall_callback callback;
 
@@ -343,7 +344,8 @@ PHP_FUNCTION(yp_errno)
 
 /* {{{ proto string yp_err_string(int errorcode)
    Returns the corresponding error string for the given error code */
-PHP_FUNCTION(yp_err_string) {
+PHP_FUNCTION(yp_err_string)
+{
 	pval **error;
 	char *string;
 

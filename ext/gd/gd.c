@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.147 2001/07/31 07:09:39 zeev Exp $ */
+/* $Id: gd.c,v 1.148 2001/08/05 01:42:35 zeev Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -2712,7 +2712,7 @@ void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode, int extende
 	l = strlen(str);
 
 #ifdef VIRTUAL_DIR
-	if(virtual_filepath(Z_STRVAL_PP(FONTNAME), &fontname)) {
+	if(virtual_filepath(Z_STRVAL_PP(FONTNAME), &fontname TSRMLS_CC)) {
 		fontname = (unsigned char*)Z_STRVAL_PP(FONTNAME);
 	}
 #else

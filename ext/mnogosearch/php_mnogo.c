@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.31 2001/07/31 05:43:58 zeev Exp $ */
+/* $Id: php_mnogo.c,v 1.32 2001/08/05 01:42:36 zeev Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -884,7 +884,8 @@ DLEXPORT PHP_FUNCTION(udm_find)
 
 /* {{{ proto string udm_get_res_field(int res, int row, int field)
    Fetch mnoGoSearch result field */
-DLEXPORT PHP_FUNCTION(udm_get_res_field){
+DLEXPORT PHP_FUNCTION(udm_get_res_field)
+{
 	pval **yyres, **yyrow_num, **yyfield_name;
 
 	UDM_RESULT * Res;

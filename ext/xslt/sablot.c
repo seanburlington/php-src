@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.34 2002/02/28 08:27:00 sebastian Exp $ */
+/* $Id: sablot.c,v 1.35 2002/03/22 01:10:31 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -81,8 +81,6 @@ function_entry xslt_functions[] = {
 	PHP_FE(xslt_set_base,		 NULL)
 #ifdef HAVE_SABLOT_SET_ENCODING
 	PHP_FE(xslt_set_encoding,        NULL)
-#else
-	PHP_FALIAS(xslt_set_encoding, warn_not_available, NULL)
 #endif
 	PHP_FE(xslt_set_log,             NULL)
 	PHP_FE(xslt_process,             NULL)

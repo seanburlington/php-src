@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.28 2002/02/28 08:26:39 sebastian Exp $ */
+/* $Id: readline.c,v 1.29 2002/03/22 01:10:30 hholzgra Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -59,8 +59,6 @@ static zend_function_entry php_readline_functions[] = {
 	PHP_FE(readline_clear_history, 		NULL)
 #ifdef HAVE_LIBREADLINE
 	PHP_FE(readline_list_history, 		NULL)
-#else
-	PHP_FALIAS(readline_list_history, warn_not_available,			NULL)
 #endif
 	PHP_FE(readline_read_history, 		NULL)
 	PHP_FE(readline_write_history, 		NULL)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.33 2004/03/09 17:11:22 rasmus Exp $ */
+/* $Id: interface.c,v 1.34 2004/03/11 00:11:18 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1333,8 +1333,11 @@ PHP_FUNCTION(curl_close)
 	}
 
 	ZEND_FETCH_RESOURCE(ch, php_curl *, zid, -1, le_curl_name, le_curl);
-	
-	zend_list_delete(Z_LVAL_PP(zid));
+	if (ch->uses) {	
+		ch->uses--;
+	} else {
+		zend_list_delete(Z_LVAL_PP(zid));
+	}
 }
 /* }}} */
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.39 2004/01/08 17:31:54 sniper Exp $ */
+/* $Id: php_curl.h,v 1.40 2004/03/11 00:11:18 iliaa Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -125,6 +125,7 @@ typedef struct {
 typedef struct {
 	int    still_running;
 	CURLM *multi;
+	zend_llist easyh;
 } php_curlm;
 
 void _php_curl_cleanup_handle(php_curl *);

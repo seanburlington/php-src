@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.86 2001/01/22 01:08:28 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.87 2001/01/22 01:10:21 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -250,7 +250,7 @@ static void sapi_apache_register_server_variables(zval *track_vars_array ELS_DC 
 	}
 	if (symbol_table
 		&& !zend_hash_exists(symbol_table, "PATH_TRANSLATED", sizeof("PATH_TRANSLATED"))
-		&& zend_hash_find(symbol_table, "SCRIPT_FILENAME", sizeof("SCRIPT_FILENAME"), (void **) &path_translated)=SUCCESS) {
+		&& zend_hash_find(symbol_table, "SCRIPT_FILENAME", sizeof("SCRIPT_FILENAME"), (void **) &path_translated)==SUCCESS) {
 		php_register_variable("PATH_TRANSLATED", Z_STRVAL_PP(path_translated), track_vars_array ELS_CC PLS_CC);
 	}
 

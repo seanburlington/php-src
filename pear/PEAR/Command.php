@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Command.php,v 1.13 2002/05/21 01:27:51 ssb Exp $
+// $Id: Command.php,v 1.14 2002/05/26 12:54:08 ssb Exp $
 
 
 require_once "PEAR.php";
@@ -88,7 +88,7 @@ $GLOBALS['_PEAR_Command_uiobject'] = null;
  *
  * - DON'T USE HTML! The text you return will be used from both Gtk,
  *   web and command-line interfaces, so for now, keep everything to
- *   plain text.  There may be a common (XML) markup format later.
+ *   plain text.
  *
  * - DON'T USE EXIT OR DIE! Always use pear errors.  From static
  *   classes do PEAR::raiseError(), from other classes do

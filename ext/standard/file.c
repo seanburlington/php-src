@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.23 2003/05/26 19:01:45 wez Exp $ */
+/* $Id: file.c,v 1.279.2.24 2003/05/31 00:33:06 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1867,6 +1867,14 @@ PHP_FUNCTION(rename)
 	ret = VCWD_RENAME(old_name, new_name);
 
 	if (ret == -1) {
+#ifdef EXDEV
+		if (errno == EXDEV) {
+			if (php_copy_file(old_name, new_name TSRMLS_CC)	== SUCCESS) {
+				VCWD_UNLINK(old_name);
+				RETURN_TRUE;
+			}
+		}
+#endif	
 		php_error_docref2(NULL TSRMLS_CC, old_name, new_name, E_WARNING, "%s", strerror(errno));
 		RETURN_FALSE;
 	}

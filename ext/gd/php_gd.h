@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.42 2002/08/22 07:28:25 ttoohey Exp $ */
+/* $Id: php_gd.h,v 1.43 2002/10/29 01:15:43 iliaa Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -93,6 +93,11 @@ PHP_FUNCTION(imagecolorresolvealpha);
 PHP_FUNCTION(imagecolorclosestalpha);
 PHP_FUNCTION(imagecolorexactalpha);
 PHP_FUNCTION(imagecopyresampled);
+
+#ifdef HAVE_GD_BUNDLED
+PHP_FUNCTION(imagerotate);
+#endif
+
 PHP_FUNCTION(imagesetthickness);
 PHP_FUNCTION(imagesettile);
 PHP_FUNCTION(imagecopymergegray);

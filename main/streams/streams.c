@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.40 2003/11/23 17:35:00 pollita Exp $ */
+/* $Id: streams.c,v 1.41 2003/11/28 00:00:28 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1692,9 +1692,9 @@ PHPAPI int php_stream_context_set_option(php_stream_context *context,
 	ALLOC_INIT_ZVAL(copied_val);
 	*copied_val = *optionvalue;
 	zval_copy_ctor(copied_val);
-	
+	INIT_PZVAL(copied_val);
+
 	if (FAILURE == zend_hash_find(Z_ARRVAL_P(context->options), (char*)wrappername, strlen(wrappername)+1, (void**)&wrapperhash)) {
-		
 		MAKE_STD_ZVAL(category);
 		array_init(category);
 		if (FAILURE == zend_hash_update(Z_ARRVAL_P(context->options), (char*)wrappername, strlen(wrappername)+1, (void**)&category, sizeof(zval *), NULL)) {

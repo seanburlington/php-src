@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sunfuncs.c,v 1.6.2.2 2004/08/04 00:28:05 iliaa Exp $ */
+/* $Id: sunfuncs.c,v 1.6.2.3 2005/02/10 14:35:13 pajoye Exp $ */
 
 /*
 	The sun position algorithm taken from the 'US Naval Observatory's
@@ -204,7 +204,7 @@ static void php_do_date_sunrise_sunset(INTERNAL_FUNCTION_PARAMETERS, int calc_su
 
 	switch (retformat) {
 		case SUNFUNCS_RET_TIMESTAMP:
-			RETURN_LONG((int) (time - (time % (24 * 3600))) + (int) (60 * ret));
+			RETURN_LONG((int) (time - (time % (24 * 3600))) + (int) (3600 * ret));
 			break;
 		case SUNFUNCS_RET_STRING:
 			N = (int) ret;

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.142 2001/10/21 07:42:35 rasmus Exp $ */
+/* $Id: array.c,v 1.143 2001/10/21 07:45:32 rasmus Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1340,8 +1340,6 @@ PHP_FUNCTION(array_init)
     if (array_init(return_value) == FAILURE) {
 		RETURN_FALSE;
     }
-
-	SEPARATE_ZVAL(val);
 
 	switch(Z_TYPE_PP(start_key)) {
 		case IS_STRING:

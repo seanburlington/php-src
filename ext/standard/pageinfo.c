@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pageinfo.c,v 1.38 2004/09/25 15:23:35 hyanantha Exp $ */
+/* $Id: pageinfo.c,v 1.39 2005/02/21 09:44:58 hyanantha Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"
@@ -27,11 +27,6 @@
 #if HAVE_PWD_H
 #ifdef PHP_WIN32
 #include "win32/pwd.h"
-#elif defined(NETWARE)
-#ifdef ZTS
-extern int basic_globals_id;
-#endif
-#include "netware/pwd.h"
 #else
 #include <pwd.h>
 #endif

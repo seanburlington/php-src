@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.239 2000/04/27 20:22:40 zeev Exp $ */
+/* $Id: main.c,v 1.240 2000/04/28 11:09:57 thies Exp $ */
 
 
 #include <stdio.h>
@@ -854,7 +854,7 @@ int php_module_startup(sapi_module_struct *sf)
 	PG(connection_status) = PHP_CONNECTION_NORMAL;
 
 #if HAVE_SETLOCALE
-	setlocale(LC_CTYPE, "");
+	setlocale(LC_ALL, "");
 #endif
 
 #ifdef PHP_WIN32

@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: build2.mk,v 1.13 2000/05/01 02:41:33 sas Exp $
+# $Id: build2.mk,v 1.14 2000/05/18 11:41:41 sas Exp $
 
 include generated_lists
 
@@ -52,7 +52,7 @@ acconfig.h: $(acconfig_h_SOURCES)
 	cat $(acconfig_h_SOURCES) > $@
 
 $(makefile_in_files): $(makefile_am_files) aclocal.m4 configure.in $(config_m4_files)
-	@echo rebuilding Makefile.in\'s
+	@echo rebuilding Makefile templates
 	@for i in $(LT_TARGETS); do \
 		if test -f "$$i"; then \
 			mv $$i $$i.bak; \

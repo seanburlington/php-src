@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ii.c,v 1.4 2000/07/17 23:57:35 henot Exp $ */
+/* $Id: ii.c,v 1.5 2000/07/18 22:34:41 sas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -69,8 +69,8 @@ zend_module_entry ingres_ii_module_entry = {
   STANDARD_MODULE_PROPERTIES
 };
 
-#ifdef COMPILE_DL_II
-ZEND_GET_MODULE(ii)
+#ifdef COMPILE_DL_INGRES_II
+ZEND_GET_MODULE(ingres_ii)
 #endif
 
 /* php.ini entries

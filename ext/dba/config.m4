@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.9 2000/05/02 04:01:14 sas Exp $
+dnl $Id: config.m4,v 1.10 2000/10/21 00:35:10 sniper Exp $
 dnl config.m4 for extension dba
 dnl don't forget to call PHP_EXTENSION(dba)
 
@@ -21,12 +21,11 @@ AC_DEFUN(AC_DBA_STD_ASSIGN,[
 dnl Standard check
 AC_DEFUN(AC_DBA_STD_CHECK,[
   THIS_RESULT="yes"
-  if test "$THIS_PREFIX" != "/usr"; then
-  if test "$THIS_INCLUDE" = "" ; then
+  if test "$THIS_PREFIX" != "/usr" -a "$THIS_INCLUDE" = ""; then
     AC_MSG_ERROR(cannot find necessary header file(s))
-  elif test "$THIS_LIBS" = "" ; then
-    AC_MSG_ERROR(cannot find necessary library)
   fi
+  if test "$THIS_LIBS" = "" ; then
+    AC_MSG_ERROR(cannot find necessary library)
   fi
 ])
 

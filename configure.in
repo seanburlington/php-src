@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.62 1999/12/07 15:22:49 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.63 1999/12/07 16:26:36 andrei Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -193,7 +193,10 @@ AC_CHECK_LIB(m, sin)
 
 AC_CHECK_LIB(bind, inet_aton, [
   AC_ADD_LIBRARY(bind)
-  AC_DEFINE(HAVE_LIBBIND) ], []) 
+  AC_DEFINE(HAVE_LIBBIND) ], [
+   AC_CHECK_LIB(bind, __inet_aton, [
+    AC_ADD_LIBRARY(bind)
+    AC_DEFINE(HAVE_LIBBIND) ], []) ]) 
 
 AC_CHECK_LIB(resolv, inet_aton)
 

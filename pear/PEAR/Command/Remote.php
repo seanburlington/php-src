@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.22.2.7 2003/06/17 17:13:18 pajoye Exp $
+// $Id: Remote.php,v 1.22.2.8 2003/06/26 08:45:51 pajoye Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -334,7 +334,8 @@ parameter.
             'border' => 1,
             'headline' => array('Package', 'Version', 'Size'),
             );
-        foreach ($latest as $package => $info) {
+        foreach ($latest as $pkg => $info) {
+            $package = strtolower($pkg);
             if (!isset($inst[$package])) {
                 // skip packages we don't have installed
                 continue;
@@ -354,7 +355,7 @@ parameter.
             } else {
                 $fs = "  -"; // XXX center instead
             }
-            $data['data'][] = array($package, $version, $fs);
+            $data['data'][] = array($pkg, $version, $fs);
         }
         if (empty($data['data'])) {
             $this->ui->outputData('No upgrades available');

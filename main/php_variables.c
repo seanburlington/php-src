@@ -17,15 +17,17 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.54 2003/03/02 15:41:12 zeev Exp $ */
+/* $Id: php_variables.c,v 1.55 2003/03/03 19:37:09 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
 #include "ext/standard/php_standard.h"
+#include "ext/standard/credits.h"
 #include "php_variables.h"
 #include "php_globals.h"
 #include "php_content_types.h"
 #include "SAPI.h"
+#include "php_logos.h"
 
 #include "zend_globals.h"
 

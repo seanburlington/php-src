@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rui Hirokawa <louis@cityfujisawa.ne.jp>                     |
+   | Authors: Rui Hirokawa <rui_hirokawa@ybb.ne.jp>                       |
    |          Stig Bakken <ssb@fast.no>                                   |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.24 2001/12/11 15:29:32 sebastian Exp $ */
+/* $Id: iconv.c,v 1.25 2001/12/13 14:31:16 hirokawa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

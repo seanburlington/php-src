@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.212 2002/09/12 21:42:33 sniper Exp $ */
+/* $Id: gd.c,v 1.213 2002/09/20 00:47:00 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -3068,17 +3068,20 @@ PHP_FUNCTION(imagepstext)
 			RETURN_FALSE;
 		}
 		convert_to_long_ex(sp);
-		convert_to_long_ex(aas);
 		convert_to_long_ex(wd);
 		convert_to_double_ex(ang);
+		convert_to_long_ex(aas);
 		space = Z_LVAL_PP(sp);
-		aa_steps = Z_LVAL_PP(aas);
 		width = Z_LVAL_PP(wd);
 		angle = Z_DVAL_PP(ang);
+		aa_steps = Z_LVAL_PP(aas);
 		break;
 	default:
 		ZEND_WRONG_PARAM_COUNT();
 	}
+
+	convert_to_string_ex(str);
+	convert_to_long_ex(sz);
 
 	ZEND_FETCH_RESOURCE(bg_img, gdImagePtr, img, -1, "Image", le_gd);
 	ZEND_FETCH_RESOURCE(f_ind, int *, fnt, -1, "Type 1 font", le_ps_font);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.11 2003/04/27 16:18:01 stas Exp $ */
+/* $Id: session.c,v 1.336.2.12 2003/05/15 13:33:52 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -278,8 +278,10 @@ void php_add_session_var(char *name, size_t namelen TSRMLS_DC)
 			/* The next call will increase refcount by NR_OF_SYM_TABLES==2 */
 			zend_set_hash_symbol(empty_var, name, namelen, 1, 2, Z_ARRVAL_P(PS(http_session_vars)), &EG(symbol_table));
 		} else if (sym_global == NULL) {
+			SEPARATE_ZVAL_IF_NOT_REF(sym_track);
 			zend_set_hash_symbol(*sym_track, name, namelen, 1, 1, &EG(symbol_table));
 		} else if (sym_track == NULL) {
+			SEPARATE_ZVAL_IF_NOT_REF(sym_global);
 			zend_set_hash_symbol(*sym_global, name, namelen, 1, 1, Z_ARRVAL_P(PS(http_session_vars)));
 		}
 	} else {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.52 2000/12/16 20:52:43 andi Exp $ */
+/* $Id: dir.c,v 1.53 2001/02/14 10:48:48 derick Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -219,6 +219,30 @@ PHP_FUNCTION(closedir)
 	if (dirp->id == DIRG(default_dir)) {
 		php_set_default_dir(-1 DIRLS_CC);
 	}
+}
+
+/* }}} */
+/* {{{ proto int chroot(string directory)
+   Change root directory */
+
+PHP_FUNCTION(chroot)
+{
+	pval **arg;
+	int ret;
+	
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+	convert_to_string_ex(arg);
+
+	ret = chroot((*arg)->value.str.val);
+	
+	if (ret != 0) {
+		php_error(E_WARNING, "chroot: %s (errno %d)", strerror(errno), errno);
+		RETURN_FALSE;
+	}
+
+	RETURN_TRUE;
 }
 
 /* }}} */

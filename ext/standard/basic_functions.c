@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.302 2001/02/05 21:59:16 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.303 2001/02/14 10:48:48 derick Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -465,6 +465,7 @@ function_entry basic_functions[] = {
 	PHP_FE(opendir,				NULL)
 	PHP_FE(closedir,			NULL)
 	PHP_FE(chdir,				NULL)
+	PHP_FE(chroot,				NULL)
 	PHP_FE(getcwd,				NULL)
 	PHP_FE(rewinddir,			NULL)
 	PHP_STATIC_FE("readdir", php_if_readdir, NULL)

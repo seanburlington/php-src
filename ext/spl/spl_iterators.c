@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.38.2.3 2004/10/30 19:21:59 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.38.2.4 2004/10/31 15:43:06 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1260,7 +1260,7 @@ SPL_METHOD(CachingIterator, __toString)
 static
 ZEND_BEGIN_ARG_INFO(arginfo_caching_it___construct, 0) 
 	ZEND_ARG_OBJ_INFO(0, iterator, Iterator, 0)
-	ZEND_ARG_INFO(0, getStrVal)
+	ZEND_ARG_INFO(0, flags)
 ZEND_END_ARG_INFO();
 
 static zend_function_entry spl_funcs_CachingIterator[] = {
@@ -1312,8 +1312,7 @@ SPL_METHOD(CachingRecursiveIterator, getChildren)
 static
 ZEND_BEGIN_ARG_INFO_EX(arginfo_caching_rec_it___construct, 0, ZEND_RETURN_REFERENCE_AGNOSTIC, 2) 
 	ZEND_ARG_OBJ_INFO(0, iterator, Iterator, 0)
-	ZEND_ARG_INFO(0, getStrVal)
-	ZEND_ARG_INFO(0, catch_getChildren)
+	ZEND_ARG_INFO(0, flags)
 ZEND_END_ARG_INFO();
 
 static zend_function_entry spl_funcs_CachingRecursiveIterator[] = {

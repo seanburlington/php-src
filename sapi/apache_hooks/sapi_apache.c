@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.1 2002/11/18 01:01:21 gschlossnagle Exp $ */
+/* $Id: sapi_apache.c,v 1.2 2002/11/18 19:07:37 gschlossnagle Exp $ */
 
 #include "php_apache_http.h"
 
@@ -71,7 +71,6 @@ int apache_php_module_hook(request_rec *r, php_handler *handler, zval **ret TSRM
 	signal(SIGCHLD, sigchld_handler);
 #endif
     if(AP(current_hook) == AP_RESPONSE) {
-        fprintf(stderr, "in Response\n");
         if (php_request_startup_for_hook(TSRMLS_C) == FAILURE)
             return FAILURE;
     }
@@ -104,7 +103,6 @@ int apache_php_module_hook(request_rec *r, php_handler *handler, zval **ret TSRM
                 ZVAL_STRING(class, handler->name, 1);
                 ALLOC_ZVAL(method);
                 ZVAL_STRING(method, tmp +2, 1);
-                fprintf(stderr, "calling coderef %s::%s\n", handler->name, tmp +2);
                 *tmp = ':';
                 call_user_function_ex(EG(function_table), &class, method, ret, 0, NULL, 0, NULL TSRMLS_CC);
                 zval_dtor(&class);

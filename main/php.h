@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.70 2000/03/12 15:47:30 sas Exp $ */
+/* $Id: php.h,v 1.71 2000/03/12 17:18:21 sas Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -188,7 +188,7 @@ extern char *strerror(int);
 #define LONG_MIN (- LONG_MAX - 1)
 #endif
 
-#if !defined(HAVE_SNPRINTF) || !defined(HAVE_VSNPRINTF)
+#if !defined(HAVE_SNPRINTF) || !defined(HAVE_VSNPRINTF) || defined(BROKEN_SPRINTF)
 #include "snprintf.h"
 #endif
 

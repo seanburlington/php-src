@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.36 2000/03/12 15:47:30 sas Exp $ */
+/* $Id: php_odbc.c,v 1.37 2000/03/12 17:18:21 sas Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -1725,7 +1725,7 @@ void odbc_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		RETURN_FALSE;
 	}
 
-	hashed_len = php_sprintf(hashed_details, "%s_%s_%s_%s_%d", ODBC_TYPE, db, uid, pwd, cur_opt);
+	hashed_len = sprintf(hashed_details, "%s_%s_%s_%s_%d", ODBC_TYPE, db, uid, pwd, cur_opt);
 
 	/* FIXME the idea of checking to see if our connection is already persistent
 		is good, but it adds a lot of overhead to non-persistent connections.  We

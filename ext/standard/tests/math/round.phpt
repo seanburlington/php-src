@@ -3,7 +3,7 @@ Simple math tests
 --POST--
 --GET--
 --FILE--
-<?php // $Id: round.phpt,v 1.1 2001/10/22 09:44:27 jeroen Exp $
+<?php // $Id: round.phpt,v 1.2 2002/03/05 09:00:56 derick Exp $
 
 define('LONG_MAX', is_int(5000000000)? 9223372036854775807 : 0x7FFFFFFF);
 define('LONG_MIN', -LONG_MAX - 1);
@@ -33,7 +33,7 @@ $tests = <<<TESTS
  LONG_MAX   ~== floor(LONG_MAX + 0.5)
 TESTS;
 
-include('../../../../tests/quicktester.inc');
+include('tests/quicktester.inc');
 --EXPECT--
 1,1,0,0
 OK

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.26 2000/07/21 19:58:38 joey Exp $ */
+/* $Id: php_sybase_ct.c,v 1.27 2000/07/24 19:12:32 joey Exp $ */
 
 
 #include "php.h"
@@ -310,7 +310,7 @@ PHP_RINIT_FUNCTION(sybase)
 {
 	sybase_globals.default_link=-1;
 	sybase_globals.num_links = sybase_globals.num_persistent;
-	sybase_globals.appname = estrndup("PHP 3.0",7);
+	sybase_globals.appname = estrndup("PHP 4.0",7);
 	sybase_globals.server_message = NULL;
 	sybase_globals.min_server_severity = sybase_globals.cfg_min_server_severity;
 	sybase_globals.min_client_severity = sybase_globals.cfg_min_client_severity;

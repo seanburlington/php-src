@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.43 2000/06/07 19:44:46 steinm Exp $ */
+/* $Id: pdf.c,v 1.44 2000/06/07 20:01:11 steinm Exp $ */
 
 /* pdflib 2.02 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -720,7 +720,7 @@ PHP_FUNCTION(pdf_get_font) {
 		RETURN_FALSE;
 	}
 	
-	font = (int) PDF_get_value(pdf, "font");
+	font = (int) PDF_get_value(pdf, "font", 0);
 
 	RETURN_LONG(font);
 }
@@ -747,7 +747,7 @@ PHP_FUNCTION(pdf_get_fontname) {
 		RETURN_FALSE;
 	}
 	
-	fontname = (char *) PDF_get_parameter(pdf, "fontname");
+	fontname = (char *) PDF_get_parameter(pdf, "fontname", 0);
 
 	RETURN_STRING(fontname, 1);
 }
@@ -774,7 +774,7 @@ PHP_FUNCTION(pdf_get_fontsize) {
 		RETURN_FALSE;
 	}
 	
-	fontsize = PDF_get_value(pdf, "fontsize");
+	fontsize = PDF_get_value(pdf, "fontsize", 0);
 
 	RETURN_DOUBLE(fontsize);
 }

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dba.h,v 1.2 1999/12/17 20:54:51 zeev Exp $ */
+/* $Id: php_dba.h,v 1.3 2000/06/27 21:36:26 jah Exp $ */
 
 #ifndef _DBA_H
 #define _DBA_H
@@ -40,6 +40,12 @@ typedef enum {
 	DBA_TRUNC,
 	DBA_CREAT
 } dba_mode_t;
+
+typedef enum { 
+	DBA_BTREE = 1,
+	DBA_HASH,
+	DBA_RECNO
+} dba_type_t;
 
 typedef struct dba_info {
 	/* public */

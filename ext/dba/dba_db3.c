@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db3.c,v 1.4 2000/04/20 17:23:59 zeev Exp $ */
+/* $Id: dba_db3.c,v 1.5 2000/06/27 21:36:26 jah Exp $ */
 
 #include "php.h"
 
@@ -74,6 +74,21 @@ DBA_OPEN_FUNC(db3)
 	if (info->argc > 0) {
 		convert_to_long_ex(info->argv[0]);
 		filemode = (*info->argv[0])->value.lval;
+	}
+
+	if(info->argc > 1
+	   && ((info->mode == DBA_CREAT && type != DB_UNKNOWN)
+	       || info->mode == DBA_TRUNC)) {
+		convert_to_long_ex(info->argv[1]);
+		switch ((*info->argv[1])->value.lval) {
+			case DBA_HASH:
+				type = DB_HASH;
+				break;
+			case DBA_BTREE:
+			default:
+				type = DB_BTREE;
+				break;
+		}
 	}
 
 	if (db_create(&dbp, NULL, 0) == 0 &&

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.42 2000/01/30 22:10:30 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.43 2000/01/30 22:14:58 zeev Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -182,7 +182,7 @@ typedef struct {
 } putenv_entry;
 #endif
 
-/* Values are coma-delimited
+/* Values are comma-delimited
  */
 #define SAFE_MODE_PROTECTED_ENV_VARS "LD_LIBRARY_PATH"
 

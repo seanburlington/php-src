@@ -1,3 +1,5 @@
+/* $Id: unix_socket_constants.h,v 1.2 2003/07/19 18:32:04 andrey Exp $ */
+
 /* This file is to be included by sockets.c */
 
 #ifdef EPERM

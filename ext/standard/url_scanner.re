@@ -15,12 +15,15 @@
    | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.re,v 1.2 1999/09/11 23:53:40 sas Exp $ */
+/* $Id: url_scanner.re,v 1.3 1999/09/12 13:03:10 sas Exp $ */
 
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#undef MIN
+#define MIN(a,b) (a)<(b)?(a):(b)
 
 #define YYCTYPE char
 #define YYCURSOR state->crs
@@ -71,9 +74,9 @@ typedef struct {
 	
 static void screw_url(lexdata *state)
 {
-	char *url;
 	int len;
 	char buf[URLLEN];
+	char url[URLLEN];
 	const char *p, *q;
 	char c;
 
@@ -95,8 +98,7 @@ static void screw_url(lexdata *state)
 	ATTACH(state->start, p-state->start);
 	
 	/* copy old URI */
-	len = q - p;
-	url = malloc(len + 1);
+	len = MIN(q - p, sizeof(buf) - 1);
 	memcpy(url, p, len);
 	url[len] = '\0';
 	
@@ -104,7 +106,6 @@ static void screw_url(lexdata *state)
 	len = snprintf(buf, sizeof(buf), "%s%c%s", url,
 			memchr(state->start, '?', len) ? '&' : '?',
 			state->data);
-	free(url);
 
 	/* attach new URI */
 	ATTACH(buf, len);

@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.3 2003/12/22 22:33:42 wez Exp $
+// $Id: config.w32,v 1.4 2003/12/31 19:28:31 fmk Exp $
 // vim:ft=javascript
 
 ARG_WITH("gd", "Bundled GD support", "yes");
@@ -7,7 +7,7 @@ if (PHP_GD != "no") {
 	if (CHECK_LIB("libjpeg.lib", "gd", PHP_GD) &&
 		CHECK_LIB("freetype2.lib", "gd", PHP_GD) &&
 		CHECK_LIB("libpng.lib", "gd", PHP_GD) &&
-		CHECK_LIB("zlib.lib", "gd", PHP_GD) &&
+		CHECK_LIB("zlib.lib", "gd", PHP_GD + ";..\\zlib;" + php_usual_lib_suspects) &&
 		CHECK_HEADER_ADD_INCLUDE("gd.h", "CFLAGS_GD", PHP_GD + ";ext\\gd\\libgd")) {
 
 		EXTENSION("gd", "gd.c gdttf.c", null, "-Iext/gd/libgd", "php_gd2.dll");

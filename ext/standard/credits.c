@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.24 2002/12/31 16:07:34 sebastian Exp $ */
+/* $Id: credits.c,v 1.25 2003/01/18 22:33:56 derick Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -95,7 +95,7 @@ PHPAPI void php_print_credits(int flag)
 
 	if (flag & PHP_CREDITS_QA) {
 		php_info_print_table_start();
-		php_info_print_table_header(1, "PHP 4.4 Quality Assurance Team");
+		php_info_print_table_header(1, "PHP 5.0 Quality Assurance Team");
 		php_info_print_table_row(1, "Ilia Alshanetsky, Joerg Behrens, Stefan Esser, Moriyoshi Koizumi, Sebastian Nohn, Derick Rethans, Melvyn Sopacua, Jani Taskinen");
 		php_info_print_table_end();
 	}

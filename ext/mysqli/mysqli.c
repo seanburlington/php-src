@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.16 2003/09/06 19:34:48 helly Exp $ 
+  $Id: mysqli.c,v 1.17 2003/10/30 13:32:18 zak Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -310,9 +310,7 @@ PHP_MINIT_FUNCTION(mysqli)
  */
 PHP_MSHUTDOWN_FUNCTION(mysqli)
 {
-	/* uncomment this line if you have INI entries
 	UNREGISTER_INI_ENTRIES();
-	*/
 	return SUCCESS;
 }
 /* }}} */

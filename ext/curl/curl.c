@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.93 2001/10/18 17:46:57 fmk Exp $ */
+/* $Id: curl.c,v 1.94 2001/10/18 19:24:51 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -282,11 +282,12 @@ PHP_MSHUTDOWN_FUNCTION(curl)
 
 /* {{{ curl_write
  */
-static size_t curl_write(char *data, size_t size, size_t nmemb, void *ctx TSRMLS_DC)
+static size_t curl_write(char *data, size_t size, size_t nmemb, void *ctx)
 {
 	php_curl       *ch     = (php_curl *) ctx;
 	php_curl_write *t      = ch->handlers->write;
 	size_t          length = size * nmemb;
+	TSRMLS_FETCH();
 
 	switch (t->method) {
 	case PHP_CURL_STDOUT:
@@ -392,12 +393,13 @@ static size_t curl_read(char *data, size_t size, size_t nmemb, void *ctx)
 
 /* {{{ curl_write_header
  */
-static size_t curl_write_header(char *data, size_t size, size_t nmemb, void *ctx TSRMLS_DC)
+static size_t curl_write_header(char *data, size_t size, size_t nmemb, void *ctx)
 {
 	php_curl       *ch  = (php_curl *) ctx;
 	php_curl_write *t   = ch->handlers->write_header;
 	int             error;
 	int             length;
+	TSRMLS_FETCH();
 	
 	switch (t->method) {
 	case PHP_CURL_STDOUT:

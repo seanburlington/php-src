@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.35.2.8 2003/06/26 14:38:04 pajoye Exp $
+// $Id: Registry.php,v 1.35.2.9 2003/06/28 18:15:35 mj Exp $
 
 /*
 TODO:
@@ -101,7 +101,7 @@ class PEAR_Registry extends PEAR
 
         // XXX Compatibility code should be removed in the future
         // rename all registry files if any to lowercase
-        if (!OS_WINDOWS && $handle = opendir($this->statedir)) {
+        if (!OS_WINDOWS && $handle = @opendir($this->statedir)) {
             $dest = $this->statedir . DIRECTORY_SEPARATOR;
             while (false !== ($file = readdir($handle))) {
                 if (preg_match('/^.*[A-Z].*\.reg$/', $file)) {

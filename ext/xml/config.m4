@@ -1,11 +1,17 @@
 # $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.17 2000/02/12 14:28:49 sas Exp $
+# $Id: config.m4,v 1.18 2000/02/12 15:08:32 sas Exp $
 
 dnl Fallback for --with-xml[=DIR]
 AC_ARG_WITH(xml,[],enable_xml=$withval)
 
 AC_C_BIGENDIAN
-	
+
+if test "$ac_cv_c_bigendian" = "yes"; then
+  order=21
+else
+  order=12
+fi
+
 AC_MSG_CHECKING(for XML support)
 AC_ARG_ENABLE(xml,
 [  --enable-xml            Include XML support using bundled expat lib],[
@@ -17,6 +23,7 @@ AC_MSG_RESULT($PHP_XML)
 
 if test "$PHP_XML" != "no"; then
   AC_DEFINE(HAVE_LIBEXPAT, 1, [ ])
+  CPPFLAGS="$CPPFLAGS -DXML_BYTE_ORDER=$order"
   if test "$PHP_XML" = "shared"; then
     shared=yes
   else

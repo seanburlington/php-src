@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.43 2000/06/09 20:18:36 andrei Exp $ */
+/* $Id: datetime.c,v 1.44 2000/06/14 16:35:48 rasmus Exp $ */
 
 
 #include "php.h"
@@ -600,6 +600,9 @@ PHP_FUNCTION(checkdate)
 	if (ZEND_NUM_ARGS() != 3 ||
 		zend_get_parameters_ex(3, &month, &day, &year) == FAILURE) {
 		WRONG_PARAM_COUNT;
+	}
+	if((*year)->type != IS_LONG) {
+		RETURN_FALSE;	
 	}
 	convert_to_long_ex(day);
 	convert_to_long_ex(month);

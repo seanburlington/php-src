@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.32 2002/06/02 13:07:18 ssb Exp $
+// $Id: Install.php,v 1.33 2002/06/06 10:51:26 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -52,6 +52,10 @@ class PEAR_Command_Install extends PEAR_Command_Common
                 'soft' => array(
                     'shortopt' => 's',
                     'doc' => 'soft install, fail silently, or upgrade if already installed',
+                    ),
+                'nobuild' => array(
+                    'shortopt' => 'B',
+                    'doc' => 'don\'t build C extensions',
                     ),
                 'nocompress' => array(
                     'shortopt' => 'Z',
@@ -94,6 +98,10 @@ four ways of specifying packages.
                 'register-only' => array(
                     'shortopt' => 'r',
                     'doc' => 'do not install files, only register the package as upgraded',
+                    ),
+                'nobuild' => array(
+                    'shortopt' => 'B',
+                    'doc' => 'don\'t build C extensions',
                     ),
                 'nocompress' => array(
                     'shortopt' => 'Z',

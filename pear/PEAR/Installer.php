@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.65 2002/06/02 13:07:18 ssb Exp $
+// $Id: Installer.php,v 1.66 2002/06/06 10:51:26 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -467,7 +467,7 @@ class PEAR_Installer extends PEAR_Common
                 }
             }
 
-            if ($this->source_files > 0) {
+            if ($this->source_files > 0 && empty($options['nobuild'])) {
                 $this->log(1, "$this->source_files source files, building");
                 $bob = &new PEAR_Builder($this->ui);
                 $bob->debug = $this->debug;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.48 2000/05/23 09:33:45 sas Exp $ */
+/* $Id: pgsql.c,v 1.49 2000/05/23 22:20:36 hholzgra Exp $ */
 
 #include <stdlib.h>
 
@@ -980,7 +980,7 @@ static void php_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 }
 
 
-/* {{{ proto array pg_fetchrow(int result, int row)
+/* {{{ proto array pg_fetch_row(int result, int row)
    Get a row as an enumerated array */ 
 PHP_FUNCTION(pg_fetch_row)
 {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.38 2001/09/25 21:57:56 jeroen Exp $ */
+/* $Id: ftp.c,v 1.39 2001/11/04 12:35:49 alexwaugh Exp $ */
 
 #include "php.h"
 
@@ -42,6 +42,10 @@
 
 #if HAVE_SYS_TIME_H
 #include <sys/time.h>
+#endif
+
+#ifdef HAVE_SYS_SELECT_H
+#include <sys/select.h>
 #endif
 
 #include "ftp.h"

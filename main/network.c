@@ -15,7 +15,7 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.21 2001/09/09 13:29:28 derick Exp $ */
+/* $Id: network.c,v 1.22 2001/11/04 12:35:48 alexwaugh Exp $ */
 
 #include "php.h"
 
@@ -35,6 +35,10 @@
 
 #ifndef _FCNTL_H
 #include <fcntl.h>
+#endif
+
+#ifdef HAVE_SYS_SELECT_H
+#include <sys/select.h>
 #endif
 
 #ifndef PHP_WIN32

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.16 2003/05/31 01:37:44 sniper Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.17 2003/07/11 04:24:11 sniper Exp $ */
 
 #include <fcntl.h>
 
@@ -470,9 +470,15 @@ static int php_handler(request_rec *r)
 		return DECLINED;
 	}
 
-	/* setup standard CGI variables */
-	ap_add_common_vars(r);
-	ap_add_cgi_vars(r);
+	/* Setup the CGI variables if this is the main request */
+	if (r->main == NULL || 
+		/* .. or if the sub-request envinronment differs from the main-request. */ 
+		r->subprocess_env != r->main->subprocess_env
+	) {
+		/* setup standard CGI variables */
+		ap_add_common_vars(r);
+		ap_add_cgi_vars(r);
+	}
 
 	ctx = SG(server_context);
 	if (ctx == NULL) {

@@ -22,7 +22,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.51 2000/07/26 11:01:44 sniper Exp $ */
+/* $Id: ldap.c,v 1.52 2000/07/26 11:28:14 eschmid Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -186,7 +186,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.51 2000/07/26 11:01:44 sniper Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.52 2000/07/26 11:28:14 eschmid Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #if HAVE_NSLDAP
@@ -1371,7 +1371,7 @@ PHP_FUNCTION(ldap_error) {
 
 
 /* {{{ proto int ldap_compare(int link, string dn, string attr, string value)
-	Determine if an entry has a specific value for one of its attributes. */
+   Determine if an entry has a specific value for one of its attributes */
 PHP_FUNCTION(ldap_compare) {
 	pval **link, **dn, **attr, **value;
 	char *ldap_dn, *ldap_attr, *ldap_value;

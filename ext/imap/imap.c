@@ -22,7 +22,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.47 2000/03/01 01:43:26 chagenbu Exp $ */
+/* $Id: imap.c,v 1.48 2000/03/03 21:57:26 chagenbu Exp $ */
 
 #define IMAP41
 
@@ -2285,7 +2285,7 @@ PHP_FUNCTION(imap_utf7_decode)
 			case ST_DECODE0:
 				state++;
 			case ST_NORMAL:
-				;
+				break;
 			}
 		}
 	}
@@ -2342,7 +2342,7 @@ PHP_FUNCTION(imap_utf7_decode)
 				*outp++ |= UNB64(*inp);
 				state = ST_DECODE0;
 			case ST_NORMAL:
-				;
+				break;
 			}
 		}
 	}
@@ -2469,7 +2469,7 @@ PHP_FUNCTION(imap_utf7_encode)
 				*outp++ = B64(*inp++);
 				state = ST_ENCODE0;
 			case ST_NORMAL:
-				;
+				break;
 			}
 		}
 	}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.150 2004/01/08 08:16:45 andi Exp $ */
+/* $Id: php_pcre.c,v 1.151 2004/01/16 02:29:49 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1386,6 +1386,11 @@ PHP_FUNCTION(preg_quote)
 			case ':':
 				*q++ = '\\';
 				*q++ = c;
+				break;
+
+			case '\0':
+				*q++ = '\\';
+				*q++ = '0';
 				break;
 
 			default:

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.9 1999/12/08 11:48:10 thies Exp $ */
+/* $Id: php_ftp.c,v 1.10 1999/12/12 10:51:13 sas Exp $ */
 
 #include "php.h"
 
@@ -39,6 +39,8 @@
 #include "php3_list.h"
 #define php_error php3_error
 #endif
+
+#include "ext/standard/file.h"
 
 #include "php_ftp.h"
 #include "ftp.h"

@@ -15,10 +15,12 @@
    | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.re,v 1.8 1999/11/09 13:57:11 sas Exp $ */
+/* $Id: url_scanner.re,v 1.9 1999/11/27 16:15:35 sas Exp $ */
 
 #include "php.h"
 #include "snprintf.h"
+
+#ifdef TRANS_SID
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -192,3 +194,5 @@ char *url_adapt(const char *src, size_t srclen, const char *data, size_t *newlen
 
 	return state.target;
 }
+
+#endif

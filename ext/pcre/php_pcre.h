@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.38 2004/01/31 22:36:33 moriyoshi Exp $ */
+/* $Id: php_pcre.h,v 1.39 2004/02/01 03:02:47 moriyoshi Exp $ */
 
 #ifndef PHP_PCRE_H
 #define PHP_PCRE_H
@@ -52,11 +52,11 @@ typedef struct {
 	pcre *re;
 	pcre_extra *extra;
 	int preg_options;
-	int compile_options;
 #if HAVE_SETLOCALE
 	char *locale;
 	unsigned const char *tables;
 #endif
+	int compile_options;
 } pcre_cache_entry;
 
 ZEND_BEGIN_MODULE_GLOBALS(pcre)

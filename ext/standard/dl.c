@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.84 2003/08/17 09:57:21 david Exp $ */
+/* $Id: dl.c,v 1.85 2003/12/17 11:20:35 helly Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -141,6 +141,7 @@ void php_dl(pval *file, int type, pval *return_value TSRMLS_DC)
 	handle = DL_LOAD(libpath);
 	if (!handle) {
 		php_error_docref(NULL TSRMLS_CC, error_type, "Unable to load dynamic library '%s' - %s", libpath, GET_DL_ERROR());
+		GET_DL_ERROR(); /* free the buffer storing the error */
 		efree(libpath);
 		RETURN_FALSE;
 	}

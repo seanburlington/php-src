@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.18 2001/07/08 12:37:08 thies Exp $ */
+/* $Id: php_oci8.h,v 1.19 2001/07/23 17:50:06 thies Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -151,8 +151,8 @@ typedef struct {
 	oci_define *define;
 	int piecewise;
 	ub4 cb_retlen;
-   ub2 scale;
-   ub2 precision;    	
+	ub2 scale;
+	ub2 precision;    	
 } oci_out_column;
 
 typedef struct {

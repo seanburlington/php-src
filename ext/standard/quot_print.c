@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: quot_print.c,v 1.19.2.1 2002/04/01 19:27:16 kir Exp $ */
+/* $Id: quot_print.c,v 1.19.2.2 2002/04/02 08:54:23 kir Exp $ */
 
 #include <stdlib.h>
 
@@ -130,7 +130,7 @@ PHP_FUNCTION(quoted_printable_decode)
     
     RETVAL_STRINGL(str_out, j, 0);
 }
-/* }}} */i
+/* }}} */
 
 /*
  * Local variables:

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.48 2002/01/02 14:58:17 mfischer Exp $ */
+/* $Id: php_ftp.c,v 1.49 2002/01/02 15:01:15 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -116,7 +116,7 @@ PHP_MINFO_FUNCTION(ftp)
 
 #define	FILEP(fp, pval)		ZEND_FETCH_RESOURCE(fp, FILE *, &pval, -1, "File-Handle", php_file_le_fopen());
 
-/* {{{ proto resource ftp_connect(string host [, int port])
+/* {{{ proto resource ftp_connect(string host [, int port [, int timeout)]])
    Opens a FTP stream */
 PHP_FUNCTION(ftp_connect)
 {

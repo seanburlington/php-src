@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.23 2002/03/12 16:22:40 sas Exp $
+dnl $Id: config.m4,v 1.24 2002/06/22 11:41:36 venaas Exp $
 dnl
 
 AC_DEFUN(PHP_LDAP_CHECKS, [
@@ -103,6 +103,8 @@ if test "$PHP_LDAP" != "no"; then
   fi
   CPPFLAGS=$_SAVE_CPPFLAGS
 
-  dnl Solaris 2.8 claims to be 2004 API, but doesn't have ldap_parse_reference
+  dnl Solaris 2.8 claims to be 2004 API, but doesn't have
+  dnl ldap_parse_reference() nor ldap_start_tls_s()
   AC_CHECK_FUNCS(ldap_parse_reference)
+  AC_CHECK_FUNCS(ldap_start_tls_s)
 fi 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx.c,v 1.35 2002/03/20 18:29:28 sander Exp $ */
+/* $Id: dbx.c,v 1.36 2002/03/26 08:29:14 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -157,8 +157,8 @@ zend_module_entry dbx_module_entry = {
 	dbx_functions,
 	ZEND_MINIT(dbx),
 	ZEND_MSHUTDOWN(dbx),
-	NULL, /*ZEND_RINIT(dbx),        / * Replace with NULL if there's nothing to do at request start */
-	NULL, /*ZEND_RSHUTDOWN(dbx),    / * Replace with NULL if there's nothing to do at request end */
+	NULL, /*ZEND_RINIT(dbx),         Replace with NULL if there's nothing to do at request start */
+	NULL, /*ZEND_RSHUTDOWN(dbx),     Replace with NULL if there's nothing to do at request end */
 	ZEND_MINFO(dbx),
     NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES

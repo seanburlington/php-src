@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.29 2000/08/27 19:46:00 ssb Exp $
+// $Id: DB.php,v 1.30 2000/08/28 23:09:36 ssb Exp $
 //
 // Database independent query interface.
 //
@@ -369,7 +369,7 @@ class DB {
 		if (!$parsed['database'])
 			$dsn = preg_replace('|/+$|', '', $dsn);
 
-		$parsed['hostspec'] = $dsn;
+		$parsed['hostspec'] = urldecode($dsn);
 
 		if (!$parsed['dbsyntax']) {
 			$parsed['dbsyntax'] = $parsed['phptype'];

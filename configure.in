@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.388 2002/10/24 13:14:32 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.389 2002/10/26 21:28:35 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -280,6 +280,9 @@ PHP_CHECK_FUNC(gethostbyaddr, nsl)
 PHP_CHECK_FUNC(yp_get_default_domain, nsl)
 
 PHP_CHECK_FUNC(dlopen, dl)
+if test "$ac_cv_func_dlopen" = "yes"; then
+  AC_DEFINE(HAVE_LIBDL, 1, [ ])
+fi
 AC_CHECK_LIB(m, sin)
 
 dnl Check for resolver routines.

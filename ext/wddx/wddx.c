@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.102 2003/05/18 23:05:38 wez Exp $ */
+/* $Id: wddx.c,v 1.103 2003/05/18 23:20:10 helly Exp $ */
 
 #include "php.h"
 
@@ -1281,7 +1281,7 @@ PHP_FUNCTION(wddx_deserialize)
 	else if (Z_TYPE_P(packet) == IS_RESOURCE) {
 		stream = php_stream_from_zval(stream, &packet);
 		if (stream) {
-			payload_len = php_stream_copy_to_mem(stream, &payload, PHP_STREAM_COPY_ALL);
+			payload_len = php_stream_copy_to_mem(stream, &payload, PHP_STREAM_COPY_ALL, 0);
 		}
 	} else {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Expecting parameter 1 to be a string or a stream");

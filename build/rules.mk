@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: rules.mk,v 1.11 2000/05/02 14:46:20 sas Exp $ 
+# $Id: rules.mk,v 1.12 2000/05/02 20:08:54 sas Exp $ 
 #
 
 include $(top_builddir)/config_vars.mk
@@ -100,13 +100,6 @@ clean-x:
 distclean: distclean-recursive clean-x
 	rm -f config.cache config.log config.status config_vars.mk libtool \
 	php_config.h stamp-h Makefile build-defs.h php4.spec libphp4.module
-
-install-modules:
-	@test -d modules && \
-	$(mkinstalldirs) $(moduledir) && \
-	echo "installing shared modules into $(moduledir)" && \
-	rm -f modules/*.la && \
-	cp modules/* $(moduledir) || true
 
 include $(builddir)/.deps
 

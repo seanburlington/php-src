@@ -19,7 +19,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_rand.h,v 1.8.8.1 2001/08/22 21:53:21 jeroen Exp $ */
+/* $Id: php_rand.h,v 1.8.8.2 2001/08/24 23:47:27 jeroen Exp $ */
 
 /* Layout implementation random functions
  *
@@ -115,6 +115,14 @@ void php_srand_mt(long seed TSRMLS_DC);
 /* Define random generator constants */
 #define RAND_SYS 1
 #define RAND_MT  2
+#define RAND_LCG 3
+#define RAND_SYS_STR "system"
+#define RAND_MT_STR  "mt"
+#define RAND_LCG_STR "lcg"
+
+#define RAND_DEFAULT     RAND_MT
+#define RAND_DEFAULT_STR RAND_MT_STR
+
 
 /* BC */
 #define PHP_RAND_MAX php_randmax()

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.88 2001/08/08 20:05:36 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.88.4.1 2001/08/24 23:47:27 jeroen Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -171,6 +171,10 @@ typedef struct {
 	struct stat lsb;
 
 	/* rand.c */
+	int rand_generator; /* current ini-setting */
+	int rand_generator_current; /* current (by overriding by [mt_]srand) */
+
+	/* rand_mt.c */
 	php_uint32   state[MT_N+1];  /* state vector + 1 extra to not violate ANSI C */
 	php_uint32   *next;       /* next random value is computed from here */
 	int      left;        /* can *next++ this many times before reloading */

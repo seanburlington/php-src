@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.69 2001/02/01 07:07:09 steinm Exp $ */
+/* $Id: pdf.c,v 1.70 2001/02/12 17:50:38 rjs Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -29,9 +29,9 @@
 #include "ext/standard/head.h"
 #include "ext/standard/info.h"
 #include "ext/standard/file.h"
-#include "ext/gd/php_gd.h"
 
 #if HAVE_LIBGD13
+#include "ext/gd/php_gd.h"
 #include "gd.h"
 #endif
 
@@ -193,25 +193,14 @@ zend_module_entry pdf_module_entry = {
 ZEND_GET_MODULE(pdf)
 #endif
 
-static void _free_pdf_image(zend_rsrc_list_entry *rsrc)
-{
-	int *pdf_image = (int *)rsrc->ptr;
-	if(pdf_image) efree(pdf_image);
-}
-
 static void _free_pdf_doc(zend_rsrc_list_entry *rsrc)
 {
-	PDF *pdf = (PDF *)rsrc->ptr;
 	/* RJS: TODO:
+	PDF *pdf = (PDF *)rsrc->ptr;
 	   check whether pdf-Pointer is still valid, before pdf_delete()
 	   + remove php-resource */
-	PDF_delete(pdf);
-}
-
-static void _free_outline(zend_rsrc_list_entry *rsrc)
-{
-	int *outline = (int *)rsrc->ptr;
-	if(outline) efree(outline);
+	/* PDF_delete(pdf);
+*/
 }
 
 static void custom_errorhandler(PDF *p, int type, const char *shortmsg)
@@ -275,7 +264,7 @@ PHP_MINFO_FUNCTION(pdf)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "PDF Support", "enabled" );
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
-	php_info_print_table_row(2, "Revision", "$Revision: 1.69 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.70 $" );
 	php_info_print_table_end();
 
 }
@@ -401,6 +390,7 @@ PHP_FUNCTION(pdf_open)
 	}
 
 	PDF_set_parameter(pdf, "imagewarning", "true");
+	PDF_set_parameter(pdf, "binding", "PHP");
 
 	ZEND_REGISTER_RESOURCE(return_value, pdf, le_pdf);
 }
@@ -2099,6 +2089,7 @@ PHP_FUNCTION(pdf_new) {
 
 	pdf = PDF_new2(custom_errorhandler, pdf_emalloc, pdf_realloc, pdf_efree, NULL);
 	PDF_set_parameter(pdf, "imagewarning", "true");
+	PDF_set_parameter(pdf, "binding", "PHP");
 
 	ZEND_REGISTER_RESOURCE(return_value, pdf, le_pdf);
 }

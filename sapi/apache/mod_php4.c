@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.146 2002/11/10 19:34:09 iliaa Exp $ */
+/* $Id: mod_php4.c,v 1.147 2002/11/26 05:15:55 sas Exp $ */
 
 #include "php_apache_http.h"
 
@@ -343,6 +343,23 @@ static char *php_apache_getenv(char *name, size_t name_len TSRMLS_DC)
 }
 /* }}} */
 
+/* {{{ sapi_apache_get_fd
+ */
+static int sapi_apache_get_fd(int *nfd TSRMLS_DC)
+{
+	request_rec *r = SG(server_context);
+	int fd;
+
+	fd = r->connection->client->fd;
+	
+	if (fd >= 0) {
+		if (nfd) *nfd = fd;
+		return 0;
+	}
+	return -1;
+}
+/* }}} */
+
 /* {{{ sapi_module_struct apache_sapi_module
  */
 static sapi_module_struct apache_sapi_module = {
@@ -382,7 +399,11 @@ static sapi_module_struct apache_sapi_module = {
 	unblock_alarms,					/* Unblock interruptions */
 #endif
 
-	STANDARD_SAPI_MODULE_PROPERTIES
+	NULL,							/* default post reader */
+	NULL,							/* treat data */
+	NULL,							/* exe location */
+	0,								/* ini ignore */
+	sapi_apache_get_fd
 };
 /* }}} */
 

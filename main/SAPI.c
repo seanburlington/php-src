@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.157 2002/11/21 10:29:11 hholzgra Exp $ */
+/* $Id: SAPI.c,v 1.158 2002/11/26 05:15:55 sas Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -848,6 +848,15 @@ SAPI_API char *sapi_getenv(char *name, size_t name_len TSRMLS_DC)
 		return sapi_module.getenv(name, name_len TSRMLS_CC);
 	} else {
 		return NULL;
+	}
+}
+
+SAPI_API int sapi_get_fd(int *fd TSRMLS_DC)
+{
+	if (sapi_module.get_fd) {
+		return sapi_module.get_fd(fd TSRMLS_CC);
+	} else {
+		return -1;
 	}
 }
 

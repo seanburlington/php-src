@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.130.2.5 2003/08/28 20:01:28 iliaa Exp $ */
+/* $Id: ldap.c,v 1.130.2.6 2003/09/13 17:31:24 pollita Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -286,7 +286,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.130.2.5 2003/08/28 20:01:28 iliaa Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.130.2.6 2003/09/13 17:31:24 pollita Exp $" );
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -1208,7 +1208,10 @@ PHP_FUNCTION(ldap_explode_dn)
 	convert_to_string_ex(dn);
 	convert_to_long_ex(with_attrib);
 
-	ldap_value = ldap_explode_dn(Z_STRVAL_PP(dn), Z_LVAL_PP(with_attrib));
+	if (!(ldap_value = ldap_explode_dn(Z_STRVAL_PP(dn), Z_LVAL_PP(with_attrib)))) {
+		/* Invalid parameters were passed to ldap_explode_dn */
+		RETURN_FALSE;
+	}
 
 	i=0;
 	while(ldap_value[i] != NULL) i++;

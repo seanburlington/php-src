@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.12 2003/11/28 23:20:22 wez Exp $ */
+/* $Id: xp_ssl.c,v 1.13 2003/12/03 15:50:26 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -196,10 +196,11 @@ static size_t php_openssl_sockop_read(php_stream *stream, char *buf, size_t coun
 static int php_openssl_sockop_close(php_stream *stream, int close_handle TSRMLS_DC)
 {
 	php_openssl_netstream_data_t *sslsock = (php_openssl_netstream_data_t*)stream->abstract;
+#ifdef PHP_WIN32
 	fd_set wrfds, efds;
 	int n;
 	struct timeval timeout;
-
+#endif
 	if (close_handle) {
 		if (sslsock->ssl_active) {
 			SSL_shutdown(sslsock->ssl_handle);

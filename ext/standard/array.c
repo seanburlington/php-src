@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.74 2000/09/19 17:37:32 zeev Exp $ */
+/* $Id: array.c,v 1.75 2000/09/19 18:19:02 andi Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2017,7 +2017,7 @@ PHP_FUNCTION(array_reverse)
 
 	if (ZEND_NUM_ARGS() > 1) {
 		convert_to_boolean_ex(z_preserve_keys);
-		preserve_keys = (zend_bool) Z_LVAL_PP(z_preserve_keys);
+		preserve_keys = Z_BVAL_PP(z_preserve_keys);
 	}
 	
 	/* Initialize return array */

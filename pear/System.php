@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.21.2.4 2003/02/15 20:28:49 ssb Exp $
+// $Id: System.php,v 1.21.2.5 2003/04/11 23:48:37 ssb Exp $
 //
 
 require_once 'PEAR.php';
@@ -43,7 +43,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.21.2.4 $
+* @version  $Revision: 1.21.2.5 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -415,7 +415,7 @@ class System
     *
     * @param string $program The command to search for
     * @return mixed A string with the full path or false if not found
-    * @author Stig Bakken <ssb@fast.no>
+    * @author Stig Bakken <ssb@php.net>
     */
     function which($program, $fallback = false)
     {

@@ -13,10 +13,10 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Author: Stig Bakken <ssb@fast.no>                                    |
+// | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Command.php,v 1.16.4.2 2003/02/15 20:28:50 ssb Exp $
+// $Id: Command.php,v 1.16.4.3 2003/04/11 23:48:38 ssb Exp $
 
 
 require_once "PEAR.php";

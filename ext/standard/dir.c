@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.123 2003/07/03 14:54:03 hholzgra Exp $ */
+/* $Id: dir.c,v 1.124 2003/07/04 13:24:47 hholzgra Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -437,7 +437,7 @@ PHP_FUNCTION(glob)
 				continue;
 			}
 
-			if (S_IFDIR != s.st_mode & S_IFMT) {
+			if (S_IFDIR != (s.st_mode & S_IFMT)) {
 				continue;
 			}
 		}

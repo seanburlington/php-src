@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.285 2002/08/25 10:26:58 wez Exp $ */
+/* $Id: string.c,v 1.286 2002/08/25 19:08:07 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -942,14 +942,14 @@ restore:
  */
 PHPAPI char *php_strtoupper(char *s, size_t len)
 {
-	char *c;
-	int ch;
-	size_t i;
-
+	char *c, *e;
+	
 	c = s;
-	for (i=0; i<len; i++) {
-		ch = toupper((unsigned char)*c);
-		*c++ = ch;
+	e = c+len;
+
+	while (c<e) {
+		*c = toupper(*c);
+		c++;
 	}
 	return s;
 }
@@ -976,14 +976,14 @@ PHP_FUNCTION(strtoupper)
  */
 PHPAPI char *php_strtolower(char *s, size_t len)
 {
-	register int ch;
-	char *c;
-	size_t i;
-
+	char *c, *e;
+	
 	c = s;
-	for (i=0; i<len; i++) {
-		ch = tolower((unsigned char)*c);
-		*c++ = ch;
+	e = c+len;
+
+	while (c<e) {
+		*c = tolower(*c);
+		c++;
 	}
 	return s;
 }

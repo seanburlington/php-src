@@ -17,11 +17,8 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.41 2000/06/15 23:45:03 andi Exp $ */
+/* $Id: db.c,v 1.42 2000/06/24 15:31:06 sas Exp $ */
 #define IS_EXT_MODULE
-#ifdef COMPILE_DL_DB
-# include "dl/phpdl.h"
-#endif
 
 #if 1
 

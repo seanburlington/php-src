@@ -16,10 +16,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.24 2000/06/12 21:39:51 zeev Exp $ */
+/* $Id: php_mssql.c,v 1.25 2000/06/24 15:31:09 sas Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
-#include "dl/phpdl.h"
 #define HAVE_MSSQL 1
 #endif
 

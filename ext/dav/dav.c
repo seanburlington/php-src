@@ -16,16 +16,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dav.c,v 1.22 2000/06/16 18:42:56 hholzgra Exp $ */
+/* $Id: dav.c,v 1.23 2000/06/24 15:31:06 sas Exp $ */
 
 #define IS_EXT_MODULE
-#ifdef COMPILE_DL_DAV
-# if PHP_31
-#  include "../phpdl.h"
-# else
-#  include "dl/phpdl.h"
-# endif
-#endif
 #include "php.h"
 #include "php_dav.h"
 

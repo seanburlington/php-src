@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.18 2000/06/16 18:23:56 hholzgra Exp $ */
+/* $Id: cpdf.c,v 1.19 2000/06/24 15:31:06 sas Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -159,7 +159,6 @@ zend_module_entry cpdf_module_entry = {
 };
 
 #ifdef COMPILE_DL_CPDF
-#include "dl/phpdl.h"
 ZEND_GET_MODULE(cpdf)
 #endif
 

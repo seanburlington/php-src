@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.46 2000/06/16 18:23:57 hholzgra Exp $ */
+/* $Id: zlib.c,v 1.47 2000/06/24 15:31:12 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -57,7 +57,6 @@
 #include <zlib.h>
 
 #ifdef COMPILE_DL_ZLIB
-#include "dl/phpdl.h"
 #ifndef PUTS
 #define PUTS(a) php_printf("%s",a)
 #endif

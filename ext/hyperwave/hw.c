@@ -16,10 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.59 2000/06/18 16:31:51 eschmid Exp $ */
-#ifdef COMPILE_DL_HYPERWAVE
-#include "dl/phpdl.h"
-#endif
+/* $Id: hw.c,v 1.60 2000/06/24 15:31:08 sas Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>

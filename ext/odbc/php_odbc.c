@@ -18,11 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.55 2000/06/15 23:45:04 andi Exp $ */
-
-#ifdef COMPILE_DL_ODBC
-#include "dl/phpdl.h"
-#endif
+/* $Id: php_odbc.c,v 1.56 2000/06/24 15:31:09 sas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"

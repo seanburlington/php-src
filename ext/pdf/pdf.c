@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.46 2000/06/19 19:46:23 steinm Exp $ */
+/* $Id: pdf.c,v 1.47 2000/06/24 15:31:10 sas Exp $ */
 
 /* pdflib 2.02 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -175,7 +175,6 @@ zend_module_entry pdf_module_entry = {
 };
 
 #ifdef COMPILE_DL_PDF
-#include "dl/phpdl.h"
 ZEND_GET_MODULE(pdf)
 #endif
 

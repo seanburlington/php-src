@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.35.2.4 2004/09/13 17:12:13 rjs Exp $
+dnl $Id: config.m4,v 1.35.2.5 2004/11/13 23:42:08 rjs Exp $
 dnl
 
 PHP_ARG_WITH(pdflib,for PDFlib support,
@@ -111,6 +111,13 @@ Use the options --with-tiff-dir=<DIR>, --with-jpeg-dir=<DIR>, --with-png-dir=<DI
 See config.log for more information.
 ])
       ])
+      AC_CHECK_LIB(pdf, PDF_load_font, [
+        AC_MSG_ERROR([
+This PDFlib extension only works up to PDFlib 4.0.x.
+For newer PDFlib version please use the PECL package:
+  pecl.php.net/packages/pdflib
+	 ])
+      ],[])
     ;;
     *)
       if test -f "$PHP_PDFLIB/include/pdflib.h" ; then
@@ -129,6 +136,13 @@ See config.log for more information.
         ],[
           -L$PHP_PDFLIB/lib $PDF_SHARED_LIBADD
         ])
+        AC_CHECK_LIB(pdf, PDF_load_font, [
+          AC_MSG_ERROR([
+This PDFlib extension only works up to PDFlib 4.0.x.
+For newer PDFlib version please use the PECL package:
+  pecl.php.net/packages/pdflib
+	 ])
+        ],[])
       else
         AC_MSG_ERROR([pdflib.h not found! Check the path passed to --with-pdflib=<PATH>. PATH should be the install prefix directory.])
       fi

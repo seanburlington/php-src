@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.18 2001/02/23 10:34:49 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.19 2001/03/01 11:38:17 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -140,6 +140,7 @@ ZEND_GET_MODULE(mnogosearch)
 
 static void _free_udm_agent(zend_rsrc_list_entry *rsrc){
 	UDM_AGENT * Agent = (UDM_AGENT *)rsrc->ptr;
+	UdmFreeEnv(Agent->Conf);
 	UdmFreeAgent(Agent);
 }
 
@@ -325,7 +326,7 @@ DLEXPORT PHP_FUNCTION(udm_alloc_agent)
 				Env=UdmAllocEnv();				
 				UdmEnvSetDBAddr(Env,dbaddr);
 				UdmEnvSetDBMode(Env,dbmode);				
-				Agent=UdmAllocAgent(Env,0,UDM_OPEN_MODE_READ);				
+				Agent=UdmAllocAgent(Env,0,UDM_OPEN_MODE_READ);
 				
 				ZEND_REGISTER_RESOURCE(return_value,Agent,le_link);
 			}

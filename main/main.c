@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.68 1999/05/30 12:00:06 sas Exp $ */
+/* $Id: main.c,v 1.69 1999/05/31 17:40:15 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -605,6 +605,9 @@ static void php_message_handler_for_zend(long message, void *data)
 #endif
 				}
 			}
+			break;
+		case ZMSG_LOG_SCRIPT_NAME:
+			fprintf(stderr, "Script:  '%s'\n", SG(request_info).path_translated);
 			break;
 	}
 }

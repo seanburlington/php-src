@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.93 2003/06/10 20:03:41 imajes Exp $ */
+/* $Id: php_globals.h,v 1.94 2003/12/24 16:38:22 iliaa Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -147,6 +147,9 @@ struct _php_core_globals {
 	int  last_error_lineno;
 	error_handling_t  error_handling;
 	zend_class_entry *exception_class;
+
+	char *disable_functions;
+	char *disable_classes;
 };
 
 

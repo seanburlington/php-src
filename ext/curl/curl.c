@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.97 2001/11/13 11:47:52 zeev Exp $ */
+/* $Id: curl.c,v 1.98 2001/11/20 11:29:54 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -706,8 +706,11 @@ PHP_FUNCTION(curl_setopt)
 	case CURLOPT_INFILE: 
 	case CURLOPT_WRITEHEADER:
 	case CURLOPT_STDERR: {
-		FILE *fp;
+		FILE *fp = NULL;
 		ZEND_FETCH_RESOURCE(fp, FILE *, zvalue, -1, "File-Handle", php_file_le_fopen());
+		if (!fp) {
+			RETURN_FALSE;
+		}
 
 		error = CURLE_OK;
 		switch (option) {
@@ -789,11 +792,8 @@ PHP_FUNCTION(curl_setopt)
 
 				zend_hash_get_current_key_ex(postfields, &string_key, &string_key_len, &num_key, 0, NULL);
 
-				postval = emalloc((string_key_len - 1) + Z_STRLEN_PP(current) + 1);
-				snprintf(postval, (sizeof("%s=%s") - 1) + (string_key_len - 1) + Z_STRLEN_PP(current), 
-				         "%s=%s", string_key, Z_STRVAL_PP(current));
-
-				error = curl_formparse(postval, &first, &last);
+				error = curl_formadd(&first, &last, CURLFORM_COPYNAME, string_key, 
+									 CURLFORM_PTRCONTENTS, Z_STRVAL_PP(current), CURLFORM_END);
 			}
 
 			if (error != CURLE_OK) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.96 2004/01/26 04:15:08 sniper Exp $ */
+/* $Id: php_globals.h,v 1.97 2004/03/16 19:49:19 zeev Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -121,6 +121,7 @@ struct _php_core_globals {
 	zend_bool register_globals;
 	zend_bool register_long_arrays;
 	zend_bool register_argc_argv;
+	zend_bool auto_globals_jit;
 
 	zend_bool y2k_compliance;
 

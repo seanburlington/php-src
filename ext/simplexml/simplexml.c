@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.53 2003/07/23 08:53:23 zeev Exp $ */
+/* $Id: simplexml.c,v 1.54 2003/08/03 17:44:37 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -489,7 +489,8 @@ sxe_method_get(zval *object, char *name, int len TSRMLS_DC)
 
 	f = emalloc(sizeof(zend_internal_function));
 	f->type = ZEND_OVERLOADED_FUNCTION;
-	f->arg_types = NULL;
+	f->arg_info = NULL;
+	f->num_args = 0;
 	f->scope = sxe_class_entry;
 	f->fn_flags = 0;
 	f->function_name = estrndup(name, len);
@@ -807,6 +808,7 @@ static zend_object_handlers sxe_object_handlers = {
 	sxe_object_set,
 	sxe_property_exists,
 	sxe_property_delete,
+	NULL,
 	sxe_properties_get,
 	sxe_method_get,
 	sxe_call_method,
@@ -1055,7 +1057,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.53 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.54 $");
 	php_info_print_table_end();
 }
 /* }}} */

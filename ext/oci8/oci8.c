@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.212 2003/07/22 10:38:34 thies Exp $ */
+/* $Id: oci8.c,v 1.213 2003/08/03 17:44:37 zeev Exp $ */
 
 /* TODO list:
  *
@@ -302,12 +302,9 @@ PHP_FUNCTION(ocicolltrim);
 #define OCI_FETCHSTATEMENT_BY_ROW       1<<5
 #define OCI_FETCHSTATEMENT_BY           (OCI_FETCHSTATEMENT_BY_COLUMN | OCI_FETCHSTATEMENT_BY_ROW)
 
-static unsigned char a3_arg_force_ref[] = { 3, BYREF_NONE, BYREF_NONE, BYREF_FORCE };
-static unsigned char a2_arg_force_ref[] = { 2, BYREF_NONE, BYREF_FORCE };
-
 static zend_function_entry php_oci_functions[] = {
-	PHP_FE(ocidefinebyname,        a3_arg_force_ref)
-	PHP_FE(ocibindbyname,          a3_arg_force_ref)
+	PHP_FE(ocidefinebyname,        third_arg_force_ref)
+	PHP_FE(ocibindbyname,          third_arg_force_ref)
 	PHP_FE(ocicolumnisnull,        NULL)
 	PHP_FE(ocicolumnname,          NULL)
 	PHP_FE(ocicolumnsize,          NULL)
@@ -318,8 +315,8 @@ static zend_function_entry php_oci_functions[] = {
 	PHP_FE(ociexecute,             NULL)
 	PHP_FE(ocicancel,              NULL)
 	PHP_FE(ocifetch,               NULL)
-	PHP_FE(ocifetchinto,           a2_arg_force_ref)
-	PHP_FE(ocifetchstatement,      a2_arg_force_ref)
+	PHP_FE(ocifetchinto,           second_arg_force_ref)
+	PHP_FE(ocifetchstatement,      second_arg_force_ref)
 	PHP_FE(ocifreestatement,       NULL)
 	PHP_FE(ociinternaldebug,       NULL)
 	PHP_FE(ocinumcols,             NULL)
@@ -647,7 +644,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.212 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.213 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: mcve.c,v 1.21 2003/07/09 13:45:19 bradmssw Exp $ */
+/* $Id: mcve.c,v 1.22 2003/08/03 17:44:36 zeev Exp $ */
 
 /* standard php include(s) */
 #include "php.h"
@@ -39,7 +39,6 @@ static int mcve_init;  /* For Safe Memory Deallocation */
 /* }}} */
 
 /* {{{ extension definition structures */
-static unsigned char second_arg_force_ref[] = { 2, BYREF_NONE, BYREF_FORCE };
 
 function_entry mcve_functions[] = {
 	PHP_FE(mcve_initengine,			NULL)

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.90 2003/06/22 14:33:03 andrey Exp $ */
+/* $Id: oracle.c,v 1.91 2003/08/03 17:44:37 zeev Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -109,8 +109,6 @@ PHP_RSHUTDOWN_FUNCTION(oracle);
 PHP_MINFO_FUNCTION(oracle);
 /* }}} */
 
-static unsigned char second_args_force_ref[] = { 2, BYREF_NONE, BYREF_FORCE };
-
 /* {{{ oracle_functions[]
  */
 function_entry oracle_functions[] = {
@@ -124,7 +122,7 @@ function_entry oracle_functions[] = {
 	PHP_FE(ora_errorcode,							NULL)
 	PHP_FE(ora_exec,								NULL)
 	PHP_FE(ora_fetch,								NULL)
-   	PHP_FE(ora_fetch_into,							second_args_force_ref)
+   	PHP_FE(ora_fetch_into,							second_arg_force_ref)
 	PHP_FE(ora_columntype,							NULL)
 	PHP_FE(ora_columnname,							NULL)
 	PHP_FE(ora_columnsize,							NULL)

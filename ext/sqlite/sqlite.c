@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.79 2003/07/20 18:05:03 helly Exp $ 
+   $Id: sqlite.c,v 1.80 2003/08/03 17:44:37 zeev Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -65,8 +65,6 @@ extern ps_module ps_mod_sqlite;
 
 extern int sqlite_encode_binary(const unsigned char *in, int n, unsigned char *out);
 extern int sqlite_decode_binary(const unsigned char *in, unsigned char *out);
-
-static unsigned char arg3_force_ref[] = {3, BYREF_NONE, BYREF_NONE, BYREF_FORCE };
 
 static int le_sqlite_db, le_sqlite_result, le_sqlite_pdb;
 
@@ -165,8 +163,8 @@ struct php_sqlite_agg_functions {
 enum { PHPSQLITE_ASSOC = 1, PHPSQLITE_NUM = 2, PHPSQLITE_BOTH = PHPSQLITE_ASSOC|PHPSQLITE_NUM };
 
 function_entry sqlite_functions[] = {
-	PHP_FE(sqlite_open, arg3_force_ref)
-	PHP_FE(sqlite_popen, arg3_force_ref)
+	PHP_FE(sqlite_open, third_arg_force_ref)
+	PHP_FE(sqlite_popen, third_arg_force_ref)
 	PHP_FE(sqlite_close, NULL)
 	PHP_FE(sqlite_query, NULL)
 	PHP_FE(sqlite_array_query, NULL)
@@ -197,7 +195,7 @@ function_entry sqlite_functions[] = {
 	PHP_FE(sqlite_unbuffered_query, NULL)
 	PHP_FE(sqlite_create_aggregate, NULL)
 	PHP_FE(sqlite_create_function, NULL)
-	PHP_FE(sqlite_factory, arg3_force_ref)
+	PHP_FE(sqlite_factory, third_arg_force_ref)
 	PHP_FE(sqlite_udf_encode_binary, NULL)
 	PHP_FE(sqlite_udf_decode_binary, NULL)
 	{NULL, NULL, NULL}
@@ -949,7 +947,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.79 2003/07/20 18:05:03 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.80 2003/08/03 17:44:37 zeev Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

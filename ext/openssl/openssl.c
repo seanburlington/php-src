@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.50 2002/07/12 21:46:34 sniper Exp $ */
+/* $Id: openssl.c,v 1.51 2002/08/10 20:19:46 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1299,7 +1299,7 @@ static X509_REQ * php_openssl_csr_from_zval(zval ** val, int makeresource, long 
 /* }}} */
 
 /* {{{ proto bool openssl_csr_export_to_file(resource csr, string outfilename [, bool notext=true])
-   Exports a CSR to file or a var */
+   Exports a CSR to file */
 PHP_FUNCTION(openssl_csr_export_to_file)
 {
 	X509_REQ * csr;

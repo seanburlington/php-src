@@ -1,9 +1,10 @@
 /*
 	Build Configuration Template for Win32.
-	$Id: config.w32.h.in,v 1.1 2003/12/02 23:17:04 wez Exp $
+	$Id: config.w32.h.in,v 1.2 2003/12/06 16:04:34 wez Exp $
 */
 
 /* Default PHP / PEAR directories */
+#define PHP_CONFIG_FILE_PATH (getenv("SystemRoot"))?getenv("SystemRoot"):""
 #define CONFIGURATION_FILE_PATH "php.ini"
 #define PEAR_INSTALLDIR "@PREFIX@\\pear"
 #define PHP_BINDIR "@PREFIX@"

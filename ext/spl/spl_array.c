@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.49.2.5 2005/03/05 11:38:29 helly Exp $ */
+/* $Id: spl_array.c,v 1.49.2.6 2005/03/08 21:37:51 johannes Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -320,7 +320,7 @@ static void spl_array_write_dimension_ex(int check_inherited, zval *object, zval
 
 static void spl_array_write_dimension(zval *object, zval *offset, zval *value TSRMLS_DC) /* {{{ */
 {
-	return spl_array_write_dimension_ex(1, object, offset, value TSRMLS_CC);
+	spl_array_write_dimension_ex(1, object, offset, value TSRMLS_CC);
 } /* }}} */
 
 static void spl_array_unset_dimension_ex(int check_inherited, zval *object, zval *offset TSRMLS_DC) /* {{{ */
@@ -367,7 +367,7 @@ static void spl_array_unset_dimension_ex(int check_inherited, zval *object, zval
 
 static void spl_array_unset_dimension(zval *object, zval *offset TSRMLS_DC) /* {{{ */
 {
-	return spl_array_unset_dimension_ex(1, object, offset TSRMLS_CC);
+	spl_array_unset_dimension_ex(1, object, offset TSRMLS_CC);
 } /* }}} */
 
 static int spl_array_has_dimension_ex(int check_inherited, zval *object, zval *offset, int check_empty TSRMLS_DC) /* {{{ */

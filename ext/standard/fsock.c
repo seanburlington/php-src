@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.39 2000/01/15 19:51:44 sas Exp $ */
+/* $Id: fsock.c,v 1.40 2000/01/15 20:39:06 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -538,7 +538,7 @@ static void php_sockwait_for_data(php_sockbuf *sock)
 	FD_SET(sock->socket, &fdr);
 	sock->timeout_event = 0;
 
-	if (timeout.tv_sec == -1) 
+	if (sock->timeout.tv_sec == -1) 
 		ptimeout = NULL;
 	else
 		ptimeout = &timeout;

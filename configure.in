@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.125 2000/05/15 16:02:42 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.126 2000/05/15 17:13:03 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -850,7 +850,7 @@ if true; then
     echo "+--------------------------------------------------------------------+"
     echo "| WARNING: Your $APXS script is most likely broken."
     echo "|                                                                    |"
-    echo "| Please go read http://www.php.net/FAQ.php3#4.11 and make the       |"
+    echo "| Please go read http://www.php.net/FAQ.php3#6.11 and make the       |"
     echo "| changes described there and try again.                             |"
   fi
 

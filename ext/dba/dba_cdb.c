@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_cdb.c,v 1.27 2003/02/01 18:59:59 helly Exp $ */
+/* $Id: dba_cdb.c,v 1.28 2003/04/14 21:50:48 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -86,10 +86,10 @@ DBA_OPEN_FUNC(cdb)
 			break;
 #if DBA_CDB_BUILTIN
 		case DBA_TRUNC:
-		case DBA_CREAT:
 			make = 1;
 			file = info->fp;
 			break;
+		case DBA_CREAT:
 		case DBA_WRITER:
 			*error = "Update operations are not supported";
 			return FAILURE; /* not supported */

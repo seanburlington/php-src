@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.4 1999/07/09 17:44:40 zeev Exp $ */
+/* $Id: iptc.c,v 1.5 1999/07/09 20:45:51 zeev Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -368,8 +368,7 @@ PHP_FUNCTION(iptcparse)
 
 		if (_php3_hash_find(return_value->value.ht,key,strlen(key) + 1,(void **) &element) == FAILURE) {
 			values = emalloc(sizeof(pval));
-			values->EA = 0;
-			values->refcount = 1;
+			INIT_PZVAL(values);
 			if (array_init(values) == FAILURE) {
 				php3_error(E_ERROR, "Unable to initialize array");
 				RETURN_FALSE;

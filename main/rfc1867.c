@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.4 1999/07/09 17:44:38 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.5 1999/07/09 20:45:50 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -61,8 +61,7 @@ void php_mime_split(char *buf, int cnt, char *boundary)
 	if (PG(track_vars)) {
 		http_post_vars = (pval *) emalloc(sizeof(pval));
 		array_init(http_post_vars);
-		http_post_vars->refcount=1;
-		http_post_vars->EA=0;
+		INIT_PZVAL(http_post_vars);
 		
 		zend_hash_add(&EG(symbol_table), "HTTP_POST_VARS", sizeof("HTTP_POST_VARS"), &http_post_vars, sizeof(pval *), NULL);
 	}

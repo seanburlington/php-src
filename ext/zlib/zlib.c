@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.17 1999/09/21 00:15:21 rasmus Exp $ */
+/* $Id: zlib.c,v 1.18 1999/09/21 00:21:01 rasmus Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -518,7 +518,7 @@ PHP_FUNCTION(gzgetss)
 		RETURN_FALSE;
 	}
 
-	_php3_strip_tags(buf, len, ZLIBG(gzgetss_state), allow);
+	_php3_strip_tags(buf, len, ZLIBG(gzgetss_state), allow->value.str.val);
 	RETURN_STRING(buf, 0);
 	
 }

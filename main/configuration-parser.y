@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.42 2000/04/15 14:37:28 andi Exp $ */
+/* $Id: configuration-parser.y,v 1.43 2000/05/17 15:41:32 zeev Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -466,36 +466,46 @@ statement:
 		}
 	|	TC_STRING { free($1.value.str.val); }
 	|	EXTENSION '=' cfg_string {
-			zval dummy;
+			if (parsing_mode==PARSING_MODE_CFG) {
+				zval dummy;
+
 #if DEBUG_CFG_PARSER
-			printf("Loading '%s'\n",$3.value.str.val);
+				printf("Loading '%s'\n",$3.value.str.val);
 #endif
-			
-			php_dl(&$3,MODULE_PERSISTENT,&dummy);
+				php_dl(&$3,MODULE_PERSISTENT,&dummy);
+			}
 		}
 	|	T_ZEND_EXTENSION '=' cfg_string {
+			if (parsing_mode==PARSING_MODE_CFG) {
 #if !defined(ZTS) && !ZEND_DEBUG
-			zend_load_extension($3.value.str.val);
+				zend_load_extension($3.value.str.val);
 #endif
-			free($3.value.str.val);
+				free($3.value.str.val);
+			}
 		}
 	|	T_ZEND_EXTENSION_TS '=' cfg_string { 
+			if (parsing_mode==PARSING_MODE_CFG) {
 #if defined(ZTS) && !ZEND_DEBUG
-			zend_load_extension($3.value.str.val);
+				zend_load_extension($3.value.str.val);
 #endif
-			free($3.value.str.val);
+				free($3.value.str.val);
+			}
 		}
 	|	T_ZEND_EXTENSION_DEBUG '=' cfg_string { 
 #if !defined(ZTS) && ZEND_DEBUG
-			zend_load_extension($3.value.str.val);
+			if (parsing_mode==PARSING_MODE_CFG) {
+				zend_load_extension($3.value.str.val);
 #endif
-			free($3.value.str.val);
+				free($3.value.str.val);
+			}
 		}
 	|	T_ZEND_EXTENSION_DEBUG_TS '=' cfg_string { 
+			if (parsing_mode==PARSING_MODE_CFG) {
 #if defined(ZTS) && ZEND_DEBUG
-			zend_load_extension($3.value.str.val);
+				zend_load_extension($3.value.str.val);
 #endif
-			free($3.value.str.val);
+				free($3.value.str.val);
+			}
 		}
 	|	SECTION { 
 			if (parsing_mode==PARSING_MODE_BROWSCAP) {

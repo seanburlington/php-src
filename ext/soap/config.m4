@@ -1,12 +1,7 @@
-dnl $Id: config.m4,v 1.4 2003/01/09 01:19:26 yohgaki Exp $
+dnl $Id: config.m4,v 1.5 2003/03/04 23:01:23 wez Exp $
 dnl config.m4 for extension soap
 
-dnl Comments in this file start with the string 'dnl'.
-dnl Remove where necessary. This file will not work
-dnl without editing.
-
 PHP_ARG_ENABLE(soap, whether to enable soap support,
-Make sure that the comment is aligned:
 [  --enable-soap[=DIR]      Enable soap support.  DIR is libxml2
                            library directory.])
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: domxml.c,v 1.36 2000/05/18 15:34:24 zeev Exp $ */
+/* $Id: domxml.c,v 1.37 2000/05/23 23:13:00 hholzgra Exp $ */
 
 
 #include "php.h"
@@ -380,7 +380,7 @@ PHP_FUNCTION(domxml_attrname)
 }
 /* }}} */
 
-/* {{{ proto class node(string name)
+/* {{{ proto class domxml_node(string name)
    Creates node */
 PHP_FUNCTION(domxml_node)
 {

@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.45 2000/05/18 15:34:21 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.46 2000/05/23 23:13:00 hholzgra Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -260,6 +260,8 @@ PHP_MINIT_FUNCTION(browscap)
 }
 
 
+/* {{{ proto void parse_ini_file(string filename)
+   Parse configuration file */
 PHP_FUNCTION(parse_ini_file)
 {
 #ifdef ZTS
@@ -286,7 +288,7 @@ PHP_FUNCTION(parse_ini_file)
 	fclose(cfgin);
 #endif
 }
-
+/* }}} */
 
 int php_shutdown_config(void)
 {

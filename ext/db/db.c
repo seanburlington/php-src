@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.37 2000/05/23 14:36:27 andi Exp $ */
+/* $Id: db.c,v 1.38 2000/05/23 23:13:00 hholzgra Exp $ */
 #define IS_EXT_MODULE
 #ifdef COMPILE_DL_DB
 # include "dl/phpdl.h"
@@ -740,7 +740,7 @@ int php_dbm_delete(dbm_info *info, char *key) {
 	return(ret);
 }
 
-/* {{{ string dbmfirstkey(int dbm_identifier)
+/* {{{ proto string dbmfirstkey(int dbm_identifier)
    Retrieves the first key from a dbm database */
 PHP_FUNCTION(dbmfirstkey)
 {

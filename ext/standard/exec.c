@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.32 2000/05/18 15:34:35 zeev Exp $ */
+/* $Id: exec.c,v 1.33 2000/05/23 23:13:01 hholzgra Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -324,7 +324,7 @@ char * php_escape_shell_cmd(char *str) {
 	return cmd;
 }
 
-/* {{{ proto escapeshellcmd(string command)
+/* {{{ proto string escapeshellcmd(string command)
    Escape shell metacharacters */
 PHP_FUNCTION(escapeshellcmd)
 {
@@ -344,7 +344,8 @@ PHP_FUNCTION(escapeshellcmd)
 }
 /* }}} */
 
-
+/* {{{ proto string shell_exec(strng cmd)
+   What excatly is this variant for ??? */
 PHP_FUNCTION(shell_exec)
 {
 	FILE *in;
@@ -387,7 +388,7 @@ PHP_FUNCTION(shell_exec)
 	return_value->value.str.len = total_readbytes;
 	return_value->type = IS_STRING;
 }
-
+/* }}} */
 
 /*
  * Local variables:

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.80 2000/05/23 17:02:21 andi Exp $ */
+/* $Id: file.c,v 1.81 2000/05/23 23:13:01 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -776,7 +776,7 @@ PHP_FUNCTION(feof)
 /* }}} */
 
 
-/* {{{ proto int socket_set_blocking(int socket descriptor, int mode)
+/* {{{ proto int set_socket_blocking(int socket descriptor, int mode)
    Set blocking/non-blocking mode on a socket */
 PHPAPI int php_set_sock_blocking(int socketd, int block)
 {

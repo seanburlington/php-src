@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.125.2.22 2004/05/18 12:17:40 edink Exp $ */
+/* $Id: sockets.c,v 1.125.2.23 2004/05/26 06:54:00 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -350,7 +350,7 @@ static char *php_strerror(int error TSRMLS_DC)
 		buf = hstrerror(error);
 #else
 		{
-			spprintf(&(SOCKETS_G(strerror_buf), "Host lookup error %d", error);
+			spprintf(&(SOCKETS_G(strerror_buf)), "Host lookup error %d", error);
 			buf = SOCKETS_G(strerror_buf);
 		}
 #endif

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.87.2.6 2004/12/20 16:42:20 georg Exp $ 
+  $Id: mysqli_api.c,v 1.87.2.7 2004/12/27 11:52:08 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -683,6 +683,8 @@ PHP_FUNCTION(mysqli_fetch_field)
 	add_property_string(return_value, "orgtable",(field->org_table ? field->org_table : ""), 1);
 	add_property_string(return_value, "def",(field->def ? field->def : ""), 1);
 	add_property_long(return_value, "max_length", field->max_length);
+	add_property_long(return_value, "length", field->length);
+	add_property_long(return_value, "charsetnr", field->charsetnr);
 	add_property_long(return_value, "flags", field->flags);
 	add_property_long(return_value, "type", field->type);
 	add_property_long(return_value, "decimals", field->decimals);
@@ -725,6 +727,8 @@ PHP_FUNCTION(mysqli_fetch_fields)
 		add_property_string(obj, "orgtable",(field->org_table ? field->org_table : ""), 1);
 		add_property_string(obj, "def",(field->def ? field->def : ""), 1);
 		add_property_long(obj, "max_length", field->max_length);
+		add_property_long(obj, "length", field->length);
+		add_property_long(obj, "charsetnr", field->charsetnr);
 		add_property_long(obj, "flags", field->flags);
 		add_property_long(obj, "type", field->type);
 		add_property_long(obj, "decimals", field->decimals);

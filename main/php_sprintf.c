@@ -16,11 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sprintf.c,v 1.1 1999/12/17 19:50:56 zeev Exp $ */
+/* $Id: php_sprintf.c,v 1.2 1999/12/21 01:22:31 sas Exp $ */
 
-#include "php_config.h"
 #include <stdio.h>
 #include <stdarg.h>
+#include "php_config.h"
 
 #if BROKEN_SPRINTF
 

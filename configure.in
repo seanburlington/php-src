@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.46 1999/11/27 12:04:14 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.47 1999/11/28 23:01:57 ssb Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -711,7 +711,7 @@ AC_SUBST(PHP_SAPI)
 AC_SUBST(INSTALL_IT)
 
 #libphp4.module 
-AC_OUTPUT([Makefile php4.spec ext/Makefile sapi/Makefile pecl/Makefile
+AC_OUTPUT([Makefile php4.spec ext/Makefile sapi/Makefile pear/Makefile
            $PHP_OUTPUT_FILES
            scripts/mkextlib build-defs.h], [], [
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.144 2000/08/17 08:47:42 stas Exp $ */
+/* $Id: string.c,v 1.145 2000/08/18 13:22:09 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -487,6 +487,7 @@ PHP_FUNCTION(implode)
 	if ((*arg1)->type == IS_ARRAY && (*arg2)->type == IS_STRING) {
 		SEPARATE_ZVAL(arg1);
 		arr = *arg1;
+		convert_to_string_ex(arg2);
 		delim = *arg2;
 	} else if ((*arg2)->type == IS_ARRAY) {
 		SEPARATE_ZVAL(arg2)

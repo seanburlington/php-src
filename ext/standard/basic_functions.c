@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.322 2001/03/24 01:08:13 sas Exp $ */
+/* $Id: basic_functions.c,v 1.323 2001/04/07 15:43:06 andre Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1230,7 +1230,7 @@ PHP_FUNCTION(gettype)
 }
 /* }}} */
 
-/* {{{ proto int settype(string var, string type)
+/* {{{ proto int settype(mixed var, string type)
    Set the type of the variable */
 PHP_FUNCTION(settype)
 {

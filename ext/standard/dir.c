@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.55 2001/02/15 00:43:44 derick Exp $ */
+/* $Id: dir.c,v 1.56 2001/02/15 05:21:27 sas Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -223,7 +223,7 @@ PHP_FUNCTION(closedir)
 
 /* }}} */
 
-#if !defined(ZEND_WIN32)&&!defined(ZTS)
+#if defined(HAVE_CHROOT) && !defined(ZTS)
 /* {{{ proto int chroot(string directory)
    Change root directory */
 

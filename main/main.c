@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.246 2000/05/18 19:45:34 thies Exp $ */
+/* $Id: main.c,v 1.247 2000/05/19 10:40:34 thies Exp $ */
 
 
 #include <stdio.h>
@@ -640,8 +640,8 @@ static void php_message_handler_for_zend(long message, void *data)
 #if PHP_SIGCHILD
 static int sigchld_handler(int apar)
 {
-    int status;             
-    wait(&status);
+    while (waitpid(-1, NULL, WNOHANG) > 0)
+		;
     signal(SIGCHLD,sigchld_handler);   
 }
 #endif

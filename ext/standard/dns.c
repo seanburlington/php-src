@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.27 2001/03/11 03:49:21 sniper Exp $ */
+/* $Id: dns.c,v 1.28 2001/03/16 07:13:06 sniper Exp $ */
 
 #include "php.h"
 #if HAVE_SYS_SOCKET_H
@@ -167,7 +167,7 @@ char *php_gethostbyname(char *name)
 	return estrdup(inet_ntoa(in));
 }
 
-#if HAVE_LIBBIND && !(defined(__BEOS__)||defined(PHP_WIN32))
+#if HAVE_RES_SEARCH && !(defined(__BEOS__)||defined(PHP_WIN32))
 
 /* {{{ proto int checkdnsrr(string host [, string type])
    Check DNS records corresponding to a given Internet host name or IP address */

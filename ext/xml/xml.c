@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.141 2003/10/19 23:17:55 shane Exp $ */
+/* $Id: xml.c,v 1.142 2003/11/04 16:15:52 moriyoshi Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -241,6 +241,12 @@ PHP_MINIT_FUNCTION(xml)
 	php_xml_mem_hdlrs.free_fcn = php_xml_free_wrapper;
 
 #ifdef LIBXML_EXPAT_COMPAT
+	REGISTER_STRING_CONSTANT("XML_SAX_IMPL", "libxml", CONST_CS|CONST_PERSISTENT);
+#else
+	REGISTER_STRING_CONSTANT("XML_SAX_IMPL", "expat", CONST_CS|CONST_PERSISTENT);
+#endif
+	
+#ifdef LIBXML_EXPAT_COMPAT
 	php_libxml_initialize();
 #endif
 	return SUCCESS;
@@ -273,7 +279,7 @@ PHP_MINFO_FUNCTION(xml)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "XML Support", "active");
 	php_info_print_table_row(2, "XML Namespace Support", "active");
-#ifdef LIBXML_DOTTED_VERSION
+#if defined(LIBXML_DOTTED_VERSION) && defined(LIBXML_EXPAT_COMPAT)
 	php_info_print_table_row(2, "libxml2 Version", LIBXML_DOTTED_VERSION);
 #else
 	php_info_print_table_row(2, "EXPAT Version", XML_ExpatVersion());

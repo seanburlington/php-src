@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.30 2001/06/06 13:05:43 rasmus Exp $ */
+/* $Id: php_fbsql.c,v 1.31 2001/06/06 16:57:16 fmk Exp $ */
 
 /* TODO:
  *
@@ -2433,7 +2433,7 @@ PHP_FUNCTION(fbsql_fetch_object)
    Fetch a result row as an array (associative, numeric or both)*/
 PHP_FUNCTION(fbsql_fetch_array)
 {
-	php_fbsql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, FBSQL_NUM);
+	php_fbsql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, FBSQL_BOTH);
 }
 /* }}} */
 

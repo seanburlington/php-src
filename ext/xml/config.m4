@@ -1,5 +1,5 @@
 # $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.18 2000/02/12 15:08:32 sas Exp $
+# $Id: config.m4,v 1.19 2000/03/02 19:35:41 sas Exp $
 
 dnl Fallback for --with-xml[=DIR]
 AC_ARG_WITH(xml,[],enable_xml=$withval)
@@ -17,7 +17,7 @@ AC_ARG_ENABLE(xml,
 [  --enable-xml            Include XML support using bundled expat lib],[
   PHP_XML=$enableval
 ],[
-  PHP_XML=no
+  PHP_XML=yes
 ])
 AC_MSG_RESULT($PHP_XML)
 

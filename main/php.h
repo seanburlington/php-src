@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.178.2.9 2004/11/15 13:40:31 derick Exp $ */
+/* $Id: php.h,v 1.178.2.10 2004/11/28 12:44:56 sesser Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -222,6 +222,14 @@ char *strerror(int);
 
 #ifndef LONG_MIN
 #define LONG_MIN (- LONG_MAX - 1)
+#endif
+
+#ifndef INT_MAX
+#define INT_MAX 2147483647
+#endif
+
+#ifndef INT_MIN
+#define INT_MIN (- INT_MAX - 1)
 #endif
 
 #define PHP_GCC_VERSION ZEND_GCC_VERSION

@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.60 2002/12/05 20:59:49 helly Exp $ */
+/* $Id: url.c,v 1.61 2002/12/30 16:42:49 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -157,12 +157,16 @@ PHPAPI php_url *php_url_parse(char *str)
 		goto nohost;
 	}
 	
-	if (!(e = strchr(s, '/'))) {
-		e = ue;
-	} else if (e && e == s) {
-		e = ue;
-	}
-
+	e = ue;
+	
+	if (!(p = strchr(s, '/'))) {
+		if ((p = strchr(s, '?'))) {
+			e = p;
+		}
+	} else {
+		e = p;
+	}	
+		
 	/* check for login and password */
 	if ((p = memchr(s, '@', (e-s)))) {
 		if ((pp = memchr(s, ':', (p-s)))) {

@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.127 2003/09/18 03:59:22 cellog Exp $
+// $Id: Installer.php,v 1.128 2003/09/18 04:32:56 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -491,6 +491,21 @@ class PEAR_Installer extends PEAR_Common
                 case 'chmod':
                     break;
                 case 'delete':
+                    break;
+                case 'installed_as':
+                    unset($this->pkginfo['filelist'][$data[0]]['installed_as']);
+                    if (isset($this->pkginfo['filelist']['dirtree'][dirname($data[1])])) {
+                        unset($this->pkginfo['filelist']['dirtree'][dirname($data[1])]);
+                        while(!empty($data[3]) && $data[3] != '/' && $data[3] != '\\'
+                              && $data[3] != '.') {
+                            unset($this->pkginfo['filelist']['dirtree']
+                                [$this->_prependPath($data[3], $data[2])]);
+                            $data[3] = dirname($data[3]);
+                        }
+                    }
+                    if (!count($this->pkginfo['filelist']['dirtree'])) {
+                        unset($this->pkginfo['filelist']['dirtree']);
+                    }
                     break;
             }
         }
@@ -1158,6 +1173,9 @@ class PEAR_Installer extends PEAR_Common
             return $this->raiseError("uninstall failed");
         } else {
             $this->startFileTransaction();
+            if (!isset($filelist['dirtree']) || !count($filelist['dirtree'])) {
+                return $this->registry->deletePackage($package);
+            }
             // attempt to delete empty directories
             uksort($filelist['dirtree'], array($this, '_sortDirs'));
             foreach($filelist['dirtree'] as $dir => $notused) {

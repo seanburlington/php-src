@@ -17,16 +17,17 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: mcve.c,v 1.24 2003/08/28 14:58:01 sniper Exp $ */
+/* $Id: mcve.c,v 1.25 2003/08/29 00:53:45 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
-#ifdef HAVE_MCVE
+#include "php.h"
+
+#if HAVE_MCVE
 
 /* standard php include(s) */
-#include "php.h"
 #include "ext/standard/head.h"
 #include "ext/standard/php_standard.h"
 #include "ext/standard/info.h"
@@ -45,7 +46,6 @@ static int mcve_init;  /* For Safe Memory Deallocation */
 /* }}} */
 
 /* {{{ extension definition structures */
-static unsigned char second_args_force_ref[] = { 2, BYREF_NONE, BYREF_FORCE };
 function_entry mcve_functions[] = {
 	PHP_FE(mcve_initengine,			NULL)
 	PHP_FE(mcve_initconn,			NULL)
@@ -82,7 +82,7 @@ function_entry mcve_functions[] = {
 	PHP_FE(mcve_monitor,			NULL)
 	PHP_FE(mcve_transinqueue,		NULL)
 	PHP_FE(mcve_checkstatus,		NULL)
-	PHP_FE(mcve_completeauthorizations,	second_args_force_ref)
+	PHP_FE(mcve_completeauthorizations,	second_arg_force_ref)
 	PHP_FE(mcve_sale,			NULL)
 	PHP_FE(mcve_preauth,			NULL)
 	PHP_FE(mcve_void,			NULL)

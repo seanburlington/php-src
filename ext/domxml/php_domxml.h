@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.48 2002/04/13 10:23:46 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.49 2002/04/15 14:45:38 steinm Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -111,6 +111,7 @@ PHP_FUNCTION(domxml_node_insert_before);
 PHP_FUNCTION(domxml_node_append_sibling);
 PHP_FUNCTION(domxml_node_append_child);
 PHP_FUNCTION(domxml_node_remove_child);
+PHP_FUNCTION(domxml_node_replace_child);
 PHP_FUNCTION(domxml_node_add_child);
 PHP_FUNCTION(domxml_node_has_attributes);
 PHP_FUNCTION(domxml_node_has_child_nodes);

@@ -18,7 +18,7 @@
    |         Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: com_wrapper.c,v 1.85 2003/01/19 00:45:47 iliaa Exp $ */
+/* $Id: com_wrapper.c,v 1.86 2003/02/09 21:40:12 wez Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -289,7 +289,9 @@ ZEND_API HRESULT php_COM_destruct(comval *obj)
 		C_ENUMVARIANT_VT(obj)->Release(C_ENUMVARIANT(obj));
 	}
 
-	hr = C_DISPATCH_VT(obj)->Release(C_DISPATCH(obj));
+	if (C_DISPATCH(obj)) {
+		hr = C_DISPATCH_VT(obj)->Release(C_DISPATCH(obj));
+	}
 	efree(obj);
 
 	return hr;
@@ -908,15 +910,13 @@ ZEND_API int php_COM_load_typelib(ITypeLib *TypeLib, int mode)
 PHPAPI zval *php_COM_object_from_dispatch(IDispatch *disp)
 {
 	comval *obj;
-	zval *zobj;
 	TSRMLS_FETCH();
 	
 	ALLOC_COM(obj);
-	MAKE_STD_ZVAL(zobj);
 	php_COM_set(obj, &disp, FALSE);
-	ZVAL_COM(zobj, obj);
 	
-	return zobj;
+	return rpc_object_from_data(NULL, com, obj, NULL);
+
 }
 
 #endif

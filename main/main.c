@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.13 2003/03/03 01:54:29 phanto Exp $ */
+/* $Id: main.c,v 1.512.2.14 2003/03/06 20:58:18 sesser Exp $ */
 
 /* {{{ includes
  */
@@ -832,7 +832,7 @@ static void php_message_handler_for_zend(long message, void *data)
 #	if defined(PHP_WIN32)
 					OutputDebugString(memory_leak_buf);
 #	else
-					fprintf(stderr, memory_leak_buf);
+					fprintf(stderr, "%s", memory_leak_buf);
 #	endif
 #endif
 				}

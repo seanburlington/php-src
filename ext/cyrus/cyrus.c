@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyrus.c,v 1.12.2.1 2002/12/31 16:34:16 sebastian Exp $ */
+/* $Id: cyrus.c,v 1.12.2.2 2003/03/06 20:58:14 sesser Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -108,7 +108,7 @@ PHP_MINFO_FUNCTION(cyrus)
 
 extern void fatal(char *s, int exit)
 {
-	php_error(E_ERROR, s);
+	php_error(E_ERROR, "%s", s);
 }
 
 /* {{{ proto resource cyrus_connect([ string host [, string port [, int flags]]])

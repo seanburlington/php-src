@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.8 2003/02/09 19:10:32 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.9 2003/03/06 20:58:16 sesser Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1906,7 +1906,7 @@ PHP_FUNCTION(call_user_method)
 	zval *retval_ptr;
 	int arg_count = ZEND_NUM_ARGS();
 
-	php_error_docref(NULL TSRMLS_CC, E_NOTICE, _CUM_DEPREC);
+	php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s", _CUM_DEPREC);
 
 	if (arg_count < 2) {
 		WRONG_PARAM_COUNT;
@@ -1943,7 +1943,7 @@ PHP_FUNCTION(call_user_method_array)
 	HashTable *params_ar;
 	int num_elems, element = 0;
 
-	php_error_docref(NULL TSRMLS_CC, E_NOTICE, _CUM_DEPREC);
+	php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s", _CUM_DEPREC);
 
 	if (ZEND_NUM_ARGS() != 3 || zend_get_parameters_ex(3, &method_name, &obj, &params) == FAILURE) {
 		WRONG_PARAM_COUNT;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.68.2.2 2002/12/31 16:35:45 sebastian Exp $ */
+/* $Id: sablot.c,v 1.68.2.3 2003/03/06 20:58:17 sesser Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1797,7 +1797,7 @@ static MH_ERROR error_print(void *user_data, SablotHandle proc, MH_ERROR code, M
 		XSLT_REG_ERRMSG(errmsg, handle);
 
 		/* Output a warning */
-		php_error(E_WARNING, msgbuf);
+		php_error(E_WARNING, "%s", msgbuf);
 
 		/* Cleanup */
 		efree(msgbuf);

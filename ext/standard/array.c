@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.266.2.13 2005/02/10 23:00:53 rrichards Exp $ */
+/* $Id: array.c,v 1.266.2.14 2005/02/18 13:39:44 derick Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1559,7 +1559,7 @@ PHP_FUNCTION(range)
 	array_init(return_value);
 
 	/* If the range is given as strings, generate an array of characters. */
-	if (Z_TYPE_P(zlow) == IS_STRING && Z_TYPE_P(zhigh) == IS_STRING) {
+	if (Z_TYPE_P(zlow) == IS_STRING && Z_TYPE_P(zhigh) == IS_STRING && Z_STRLEN_P(zlow) >= 1 && Z_STRLEN_P(zhigh) >= 1) {
 		int type1, type2;
 		unsigned char *low, *high;
 		long lstep = (long) step;

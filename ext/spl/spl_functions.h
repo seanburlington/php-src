@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.h,v 1.16 2004/01/25 17:30:19 helly Exp $ */
+/* $Id: spl_functions.h,v 1.17 2004/04/12 13:02:54 helly Exp $ */
 
 #ifndef PHP_FUNCTIONS_H
 #define PHP_FUNCTIONS_H
@@ -82,7 +82,7 @@ int spl_add_classes(zend_class_entry ** ppce, zval *list, int sub, int allow, in
 	PHP_METHOD(spl_ ## class_name, function_name)
 
 #define SPL_MA(class_name, function_name, alias_class, alias_function, arg_info, flags) \
-	ZEND_MALIAS(function_name, spl_ ## alias_class, alias_function, arg_info, flags)
+	ZEND_MALIAS(spl_ ## alias_class, function_name, alias_function, arg_info, flags)
 #endif /* PHP_FUNCTIONS_H */
 
 /*

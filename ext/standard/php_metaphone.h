@@ -16,12 +16,11 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_metaphone.h,v 1.4 2000/02/19 23:41:21 zeev Exp $ */
+/* $Id: php_metaphone.h,v 1.5 2000/03/05 04:25:12 andrei Exp $ */
 
 #ifndef _php_metaphone_h
 #define _php_metaphone_h
 
-char Lookahead(char *word, int how_far);
 extern zend_module_entry metaphone_module_entry;
 #define phpext_metaphone_ptr &metaphone_module_entry
 

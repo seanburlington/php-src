@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.34 2001/10/13 22:35:10 dickmeiss Exp $ */
+/* $Id: php_yaz.c,v 1.35 2001/12/04 22:49:52 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2557,8 +2557,8 @@ PHP_FUNCTION(yaz_ccl_parse)
 }
 /* }}} */
 
-/* {{{ proto int yaz_ccl_parse(int id, string query, array res)
-   Parse a CCL query */
+/* {{{ proto int yaz_database (int id, string databases)
+   Specify the databases within a session */
 
 PHP_FUNCTION(yaz_database)
 {

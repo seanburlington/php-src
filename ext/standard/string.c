@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.68 1999/12/09 23:45:30 andrei Exp $ */
+/* $Id: string.c,v 1.69 1999/12/10 04:44:32 andrei Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -425,6 +425,7 @@ PHPAPI char *php_strtolower(char *s, size_t len)
 {
 	register int ch;
 	char *c;
+	int i;
 
 	c = s;
 	for (i=0; i<len; i++) {
@@ -2161,7 +2162,7 @@ PHPAPI void php_strip_tags(char *rbuf, int len, int state, char *allow) {
 	rp = rbuf;
 	br = 0;
 	if(allow) {
-		php_strtolower(allow);
+		php_strtolower(allow, len);
 		tbuf = emalloc(PHP_TAG_BUF_SIZE+1);
 		tp = tbuf;
 	} else {

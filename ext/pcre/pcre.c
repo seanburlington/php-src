@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcre.c,v 1.12 1999/05/29 20:45:00 andrey Exp $ */
+/* $Id: pcre.c,v 1.13 1999/05/30 14:48:39 andrey Exp $ */
 
 #include "php.h"
 
@@ -380,6 +380,7 @@ void _pcre_match(INTERNAL_FUNCTION_PARAMETERS, int global)
 	piece = subject->value.str.val;
 	subject_end = piece + subject->value.str.len;
 	match = NULL;
+	matched = 0;
 	
 	do {
 		/* Execute the regular expression. */
@@ -396,7 +397,7 @@ void _pcre_match(INTERNAL_FUNCTION_PARAMETERS, int global)
 
 		/* If something has matched */
 		if (count >= 0) {
-			matched = 1;
+			matched++;
 			match = piece + offsets[0];
 
 			/* If subpatters array has been passed, fill it in with values. */
@@ -444,10 +445,6 @@ void _pcre_match(INTERNAL_FUNCTION_PARAMETERS, int global)
 				/* Advance to the position right after the last full match */
 				piece += offsets[1];
 			}
-		}
-		/* If nothing matched */
-		else {
-			matched = 0;
 		}
 	} while (global && count >= 0);
 

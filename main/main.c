@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.251 2000/05/22 23:24:55 hholzgra Exp $ */
+/* $Id: main.c,v 1.252 2000/05/23 10:36:18 thies Exp $ */
 
 
 #include <stdio.h>
@@ -1089,7 +1089,7 @@ static void php_build_argv(char *s, zval *track_vars_array ELS_DC PLS_DC)
 	INIT_PZVAL(arr);
 
 	/* Prepare argv */
-	if(*s) {
+	if (s && *s) {
 		ss = s;
 		while (ss) {
 			space = strchr(ss, '+');

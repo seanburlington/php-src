@@ -16,17 +16,13 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.8 1999/12/01 22:59:44 ssb Exp $ */
+/* $Id: php_mysql.c,v 1.9 1999/12/01 23:14:54 ssb Exp $ */
 
 
 /* TODO:
  *
  * ? Safe mode implementation
  */
-
-#ifdef PIC
-# define COMPILE_DL 1
-#endif
 
 #ifdef COMPILE_DL
 # include "dl/phpdl.h"

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.10 2005/02/06 22:25:33 wez Exp $
+dnl $Id: config.m4,v 1.11 2005/02/09 05:12:41 wez Exp $
 dnl config.m4 for extension pdo_odbc
 dnl vim:et:sw=2:ts=2:
 
@@ -144,6 +144,6 @@ functions required for PDO support.
   AC_MSG_RESULT($pdo_inc_path)
 
   PHP_NEW_EXTENSION(pdo_odbc, pdo_odbc.c odbc_driver.c odbc_stmt.c, $ext_shared,,-I$pdo_inc_path $PDO_ODBC_INCLUDE)
-  PHP_ADD_EXTENSION_DEP(pdo_odbc, pdo)
+dnl  PHP_ADD_EXTENSION_DEP(pdo_odbc, pdo)
 fi
 

@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky <ilia@prohost.org>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.29 2004/11/27 18:17:58 iliaa Exp $ */
+/* $Id: shmop.c,v 1.30 2005/02/08 15:30:42 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -65,7 +65,7 @@ zend_module_entry shmop_module_entry = {
 	"shmop",
 	shmop_functions,
 	PHP_MINIT(shmop),
-	PHP_MSHUTDOWN(shmop),
+	NULL,
 	NULL,
 	NULL,
 	PHP_MINFO(shmop),
@@ -95,14 +95,6 @@ PHP_MINIT_FUNCTION(shmop)
 {
 	shm_type = zend_register_list_destructors_ex(rsclean, NULL, "shmop", module_number);
 	
-	return SUCCESS;
-}
-/* }}} */
-
-/* {{{ PHP_MSHUTDOWN_FUNCTION
- */
-PHP_MSHUTDOWN_FUNCTION(shmop)
-{
 	return SUCCESS;
 }
 /* }}} */

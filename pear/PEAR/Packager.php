@@ -15,9 +15,10 @@
 // +----------------------------------------------------------------------+
 // | Authors: Stig Bakken <ssb@fast.no>                                   |
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
+// |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.11 2001/08/19 12:37:51 cox Exp $
+// $Id: Packager.php,v 1.12 2001/08/19 12:53:01 cox Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -114,8 +115,11 @@ class PEAR_Packager extends PEAR_Common
 
     // {{{ package()
 
-    function package($pkgfile = 'package.xml')
+    function package($pkgfile = null)
     {
+        if (empty($pkgfile)) {
+            $pkgfile = 'package.xml';
+        }
         $pkginfo = $this->infoFromDescriptionFile($pkgfile);
         if (PEAR::isError($pkginfo)) {
             return $pkginfo;

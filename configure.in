@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.151 2005/02/07 12:51:52 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.152 2005/02/10 22:20:27 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -371,7 +371,6 @@ stdlib.h \
 string.h \
 syslog.h \
 sysexits.h \
-sys/bitypes.h \
 sys/file.h \
 sys/mman.h \
 sys/mount.h \

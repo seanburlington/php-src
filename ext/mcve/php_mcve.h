@@ -1,7 +1,7 @@
 /*
  * basic mcve php module
  *
- * $Id: php_mcve.h,v 1.1 2002/02/27 19:46:58 bradmssw Exp $
+ * $Id: php_mcve.h,v 1.2 2002/03/02 16:48:51 hholzgra Exp $
  */
 
 #ifndef _PHP_MCVE_H
@@ -87,3 +87,11 @@ PHP_FUNCTION(mcve_edituser);
 PHP_FUNCTION(mcve_liststats);
 #endif /* _PHP_MCVE_H */
 
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

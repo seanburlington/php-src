@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.180 2002/08/01 17:34:31 rodif_bl Exp $ */
+/* $Id: array.c,v 1.181 2002/08/03 00:40:46 rodif_bl Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1704,6 +1704,7 @@ static void _phpi_pop(INTERNAL_FUNCTION_PARAMETERS, int off_the_end)
 			p = p->pListNext;
 		}
 		Z_ARRVAL_PP(stack)->nNextFreeElement = k+1;
+		zend_hash_rehash(Z_ARRVAL_PP(stack));
 	} else if(!key_len) {
 		Z_ARRVAL_PP(stack)->nNextFreeElement = Z_ARRVAL_PP(stack)->nNextFreeElement - 1;
 	}

@@ -24,8 +24,17 @@
 #
 # Written by Stig Bakken <ssb@guardian.no> 1997-05-28.
 #
-# $Id: makedist,v 1.17 2000/05/07 00:18:06 sas Exp $
+# $Id: makedist,v 1.18 2000/05/23 20:32:27 sas Exp $
 #
+
+old_IFS="$IFS"
+IFS=.
+eval set `bison -V|sed "s/GNU Bison version //"`
+if test "$1" = "1" && test "28" -gt "$2"; then
+  echo "Please use Bison 1.28 or higher"
+  exit 10
+fi
+IFS="$old_IFS"
 
 PHPROOT=:pserver:cvsread@cvs.php.net:/repository
 ZENDROOT=:pserver:cvsread@cvs.zend.com:/repository

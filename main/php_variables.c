@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.59 2003/03/28 17:09:04 moriyoshi Exp $ */
+/* $Id: php_variables.c,v 1.60 2003/03/30 01:06:54 shane Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -481,11 +481,14 @@ PHPAPI int php_handle_special_queries(TSRMLS_D)
 static inline void php_register_server_variables(TSRMLS_D)
 {
 	zval *array_ptr=NULL;
+	/* turn off magic_quotes while importing server variables */
+	int magic_quotes_gpc = PG(magic_quotes_gpc);
 
 	ALLOC_ZVAL(array_ptr);
 	array_init(array_ptr);
 	INIT_PZVAL(array_ptr);
 	PG(http_globals)[TRACK_VARS_SERVER] = array_ptr;
+	PG(magic_quotes_gpc) = 0;
 
 	/* Server variables */
 	if (sapi_module.register_server_variables) {
@@ -504,6 +507,7 @@ static inline void php_register_server_variables(TSRMLS_D)
 	if (SG(request_info).auth_password) {
 		php_register_variable("PHP_AUTH_PW", SG(request_info).auth_password, array_ptr TSRMLS_CC);
 	}
+	PG(magic_quotes_gpc) = magic_quotes_gpc;
 }
 /* }}} */
 
@@ -599,13 +603,8 @@ int php_hash_environment(TSRMLS_D)
 		}
 	}
 
-	if (!jit_initialization) {
-		if (!have_variables_order) {
-			php_register_server_variables(TSRMLS_C);
-		}
-		if (!PG(http_globals)[TRACK_VARS_ENV]) {
-
-		}
+	if (!jit_initialization && !have_variables_order) {
+		php_register_server_variables(TSRMLS_C);
 	}
 
 	for (i=0; i<num_track_vars; i++) {

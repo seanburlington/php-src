@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.51 1999/05/10 19:48:23 zeev Exp $ */
+/* $Id: main.c,v 1.52 1999/05/10 20:40:45 andrey Exp $ */
 
 
 #include <stdio.h>
@@ -470,7 +470,7 @@ static void php3_timeout(int dummy)
 {
 	PLS_FETCH();
 
-	php3_error(E_ERROR, "Maximum execution time of %s seconds exceeded", INI_STRING("max_execution_time"));
+	php3_error(E_ERROR, "Maximum execution time of %s seconds exceeded", INI_STR("max_execution_time"));
 }
 #endif
 

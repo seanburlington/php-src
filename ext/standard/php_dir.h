@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors:                                                             |
-   | PHP 4.0 patches by Thies C. Arntzen (thies@digicol.de)               |
+   | PHP 4.0 patches by Thies C. Arntzen (thies@thieso.net)               |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dir.h,v 1.9 2000/07/02 23:46:47 sas Exp $ */
+/* $Id: php_dir.h,v 1.10 2000/10/29 09:14:53 thies Exp $ */
 
 #ifndef PHP_DIR_H
 #define PHP_DIR_H

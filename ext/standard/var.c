@@ -13,12 +13,12 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Jani Lehtimäki <jkl@njet.net>                               |
-   |          Thies C. Arntzen <thies@digicol.de>                         |
+   |          Thies C. Arntzen <thies@thieso.net>                         |
    |          Sascha Schumann <sascha@schumann.cx>                        |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.75 2000/10/20 18:25:12 andrei Exp $ */
+/* $Id: var.c,v 1.76 2000/10/29 09:14:53 thies Exp $ */
 
 
 /* {{{ includes 

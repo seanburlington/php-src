@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Thies C. Arntzen (thies@digicol.de)                         |
+   | Authors: Thies C. Arntzen (thies@thieso.net)                         |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.15 2000/08/24 15:29:50 thies Exp $ */
+/* $Id: readline.c,v 1.16 2000/10/29 09:14:53 thies Exp $ */
 
 /* {{{ includes & prototypes */
 

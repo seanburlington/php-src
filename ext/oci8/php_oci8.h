@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
-   |          Thies C. Arntzen <thies@digicol.de>                         |
+   |          Thies C. Arntzen <thies@thieso.net>                         |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.11 2000/07/24 01:39:47 david Exp $ */
+/* $Id: php_oci8.h,v 1.12 2000/10/29 09:14:52 thies Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H

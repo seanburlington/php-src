@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Zeev Suraski <zeev@zend.com>                                |
-   |          Thies C. Arntzen <thies@digicol.de>                         |
+   |          Thies C. Arntzen <thies@thieso.net>                         |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.33 2000/10/26 18:10:57 sas Exp $ */
+/* $Id: output.c,v 1.34 2000/10/29 09:14:53 thies Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"

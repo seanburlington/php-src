@@ -15,11 +15,11 @@
    | Authors: Jim Winstead (jimw@php.net)                                 |
    |          Stig Sæther Bakken <ssb@guardian.no>                        |
    |          Zeev Suraski <zeev@zend.com>                                |
-   | PHP 4.0 patches by Thies C. Arntzen (thies@digicol.de)               |
+   | PHP 4.0 patches by Thies C. Arntzen (thies@thieso.net)               |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.37 2000/10/27 20:26:16 fmk Exp $ */
+/* $Id: math.c,v 1.38 2000/10/29 09:14:53 thies Exp $ */
 
 #include "php.h"
 #include "php_math.h"

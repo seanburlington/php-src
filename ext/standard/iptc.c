@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Thies C. Arntzen (thies@digicol.de)                         |
+   | Authors: Thies C. Arntzen (thies@thieso.net)                         |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.23 2000/06/05 19:47:44 andi Exp $ */
+/* $Id: iptc.c,v 1.24 2000/10/29 09:14:53 thies Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.

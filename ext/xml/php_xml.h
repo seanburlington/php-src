@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
-   |          Thies C. Arntzen <thies@digicol.de>                         |
+   |          Thies C. Arntzen <thies@thieso.net>                         |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xml.h,v 1.13 2000/08/22 19:32:07 andrei Exp $ */
+/* $Id: php_xml.h,v 1.14 2000/10/29 09:14:54 thies Exp $ */
 
 #ifndef PHP_XML_H
 #define PHP_XML_H

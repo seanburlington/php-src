@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Thies C. Arntzen (thies@digicol.de)                         |
+   | Authors: Thies C. Arntzen (thies@thieso.net)                         |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_readline.h,v 1.7 2000/07/02 23:46:46 sas Exp $ */
+/* $Id: php_readline.h,v 1.8 2000/10/29 09:14:53 thies Exp $ */
 
 #ifndef PHP_READLINE_H
 #define PHP_READLINE_H

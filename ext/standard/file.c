@@ -16,11 +16,11 @@
    |          Stig Bakken <ssb@fast.no>                                   |
    |          Andi Gutmans <andi@zend.com>                                |
    |          Zeev Suraski <zeev@zend.com>                                |
-   | PHP 4.0 patches by Thies C. Arntzen (thies@digicol.de)               |
+   | PHP 4.0 patches by Thies C. Arntzen (thies@thieso.net)               |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.119 2000/10/26 18:17:45 dbeu Exp $ */
+/* $Id: file.c,v 1.120 2000/10/29 09:14:53 thies Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 

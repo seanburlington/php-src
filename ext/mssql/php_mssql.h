@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.25 2002/12/16 22:26:49 fmk Exp $ */
+/* $Id: php_mssql.h,v 1.26 2002/12/16 22:44:08 fmk Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -68,7 +68,7 @@
 typedef unsigned char *LPBYTE;
 #else
 #define DBERRHANDLE(a, b) dbprocerrhandle(a, b)
-#define DBMSGHANDLE(a, b) dbprocerrhandle(a, b)
+#define DBMSGHANDLE(a, b) dbprocmsghandle(a, b)
 #define EHANDLEFUNC DBERRHANDLE_PROC
 #define MHANDLEFUNC DBMSGHANDLE_PROC
 #define DBSETOPT(a, b, c) dbsetopt(a, b, c)

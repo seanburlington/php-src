@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.40 2002/05/29 21:41:27 jan Exp $
+// $Id: PEAR.php,v 1.41 2002/05/29 21:55:52 jan Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -403,7 +403,7 @@ class PEAR
                     $deleted = false;
                 }   
             }
-            return $deleted?true:PEAR::raiseError("The expected error you submitted does not exist"); // IMPROVE ME
+            return $deleted ? true : PEAR::raiseError("The expected error you submitted does not exist"); // IMPROVE ME
         } elseif (!empty($error_code)) {
             // $error_code comes alone, trying to unset it
             if ($this->_checkDelExpect($error_code)) {

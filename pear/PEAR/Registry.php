@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.25 2002/04/09 14:00:05 alexmerz Exp $
+// $Id: Registry.php,v 1.26 2002/04/24 00:48:06 ssb Exp $
 
 require_once "System.php";
 require_once "PEAR.php";
@@ -360,6 +360,7 @@ class PEAR_Registry extends PEAR
             $this->_unlock();
             return false;
         }
+        $info['_lastmodified'] = time();
         fwrite($fp, serialize($info));
         $this->_closePackageFile($fp);
         $this->_unlock();
@@ -401,6 +402,7 @@ class PEAR_Registry extends PEAR
             $this->_unlock();
             return false;
         }
+        $info['_lastmodified'] = time();
         if ($merge) {
             fwrite($fp, serialize(array_merge($oldinfo, $info)));
         } else {

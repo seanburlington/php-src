@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.6 2000/08/15 16:50:14 sterling Exp $ */
+/* $Id: curl.c,v 1.7 2000/08/15 16:54:48 sterling Exp $ */
 
 
 #include "php.h"
@@ -86,7 +86,7 @@ zend_module_entry curl_module_entry = {
 	curl_functions,
 	PHP_MINIT(curl),
 	PHP_MSHUTDOWN(curl),
-	NULL,
+	PHP_RINIT(curl),
 	NULL,
 	PHP_MINFO(curl),
 	STANDARD_MODULE_PROPERTIES
@@ -209,6 +209,11 @@ PHP_MINIT_FUNCTION(curl)
 		return FAILURE;
 
 	return SUCCESS;
+}
+
+PHP_RINIT_FUNCTION(curl)
+{
+	CURLG(use_file) = 0;
 }
 
 PHP_MSHUTDOWN_FUNCTION(curl)

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.1 2004/05/20 02:27:49 edink Exp $ */
+/* $Id: pgsql_statement.c,v 1.2 2004/05/20 10:28:26 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -125,7 +125,7 @@ static int pgsql_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr, unsigned 
 	pdo_pgsql_stmt *S = (pdo_pgsql_stmt*)stmt->driver_data;
 
 	/* We have already increased count by 1 in pgsql_stmt_fetch() */
-	*ptr = estrdup(PQgetvalue(S->result, S->current_row - 1, colno));
+	*ptr = PQgetvalue(S->result, S->current_row - 1, colno);
 	*len = strlen(*ptr);
 
 	return 1;

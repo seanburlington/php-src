@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2000/11/22 01:00:44 hholzgra Exp $
+dnl $Id: config.m4,v 1.1.2.1 2000/12/06 17:41:39 sas Exp $
 dnl config.m4 for extension ctype
 dnl don't forget to call PHP_EXTENSION(ctype)
 
@@ -14,7 +14,8 @@ dnl [  --with-ctype             Include ctype support])
 
 dnl Otherwise use enable:
 
-PHP_ARG_ENABLE(ctype, whether to enable ctype support,[  --enable-ctype           Enable ctype support])
+PHP_ARG_ENABLE(ctype, whether to enable ctype support,
+[  --enable-ctype          Enable ctype support])
 
 if test "$PHP_CTYPE" != "no"; then
   dnl If you will not be testing anything external, like existence of

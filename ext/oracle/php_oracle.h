@@ -1,4 +1,4 @@
-/* $Id: php_oracle.h,v 1.6 2000/07/02 23:46:44 sas Exp $ */
+/* $Id: php_oracle.h,v 1.7 2000/07/15 14:15:07 thies Exp $ */
 
 /* synced with oracle.h,v 1.40 1999/06/01 08:11:04 thies Exp $ */
 
@@ -124,6 +124,7 @@ typedef struct {
 	long num_persistent;
 	long num_links;
 	HashTable *conns;
+	oraConnection db_err_conn; 
 } php_ora_globals;
 
 #else

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.172 2002/04/08 00:43:58 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.173 2002/04/08 00:50:44 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -2679,11 +2679,11 @@ PHP_FUNCTION(pg_result_status)
 
 	pgsql_result = pg_result->result;
 	if (result_type == PGSQL_STATUS_LONG) {
-		RETURN_STRING(PQcmdStatus(pgsql_result), 1);
-	}
-	else if (result_type == PGSQL_STATUS_STRING) {
 		status = PQresultStatus(pgsql_result);
 		RETURN_LONG((int)status);
+	}
+	else if (result_type == PGSQL_STATUS_STRING) {
+		RETURN_STRING(PQcmdStatus(pgsql_result), 1);
 	}
 	else {
 		php_error(E_WARNING, "%s() expects optional 2nd parameter to be PGSQL_STATUS_LONG or PGSQL_STATUS_STRING",

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_array.h,v 1.41 2003/01/13 18:12:23 andrey Exp $ */
+/* $Id: php_array.h,v 1.42 2003/02/05 17:56:08 iliaa Exp $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H
@@ -39,6 +39,7 @@ PHP_FUNCTION(usort);
 PHP_FUNCTION(uasort);
 PHP_FUNCTION(uksort);
 PHP_FUNCTION(array_walk);
+PHP_FUNCTION(array_walk_recursive);
 PHP_FUNCTION(count);
 PHP_FUNCTION(end);
 PHP_FUNCTION(prev);

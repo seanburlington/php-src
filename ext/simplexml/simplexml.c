@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.10 2003/05/20 02:12:03 sterling Exp $ */
+/* $Id: simplexml.c,v 1.11 2003/05/20 08:48:18 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -515,6 +515,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.11 $");
 	php_info_print_table_end();
 
 }

@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.23 2002/04/29 14:52:29 mfischer Exp $ */
+/* $Id: php_sockets.h,v 1.24 2002/05/01 11:08:08 mfischer Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -72,8 +72,8 @@ PHP_FUNCTION(socket_recvmsg);
 PHP_FUNCTION(socket_sendmsg);
 PHP_FUNCTION(socket_readv);
 PHP_FUNCTION(socket_writev);
-PHP_FUNCTION(socket_getopt);
-PHP_FUNCTION(socket_setopt);
+PHP_FUNCTION(socket_get_option);
+PHP_FUNCTION(socket_set_option);
 PHP_FUNCTION(socket_shutdown);
 PHP_FUNCTION(socket_last_error);
 PHP_FUNCTION(socket_clear_error);

@@ -17,9 +17,10 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.41 2002/04/29 06:38:07 ssb Exp $
+// $Id: Packager.php,v 1.42 2002/07/07 20:42:08 ssb Exp $
 
 require_once 'PEAR/Common.php';
+require_once 'System.php';
 
 /**
  * Administration class used to make a PEAR release tarball.
@@ -101,12 +102,15 @@ class PEAR_Packager extends PEAR_Common
             chdir($oldcwd);
             return $this->raiseError($new_xml);
         }
-        $tmpdir = $this->mkTempDir(getcwd());
+        if (!($tmpdir = System::mktemp('-t '.getcwd().' -d'))) {
+            return $this->raiseError("PEAR_Packager: mktemp failed");
+        }
         $newpkgfile = $tmpdir . DIRECTORY_SEPARATOR . 'package.xml';
         $np = @fopen($newpkgfile, "w");
         if (!$np) {
             chdir($oldcwd);
-            return $this->raiseError("PEAR_Packager: unable to rewrite $pkgfile");
+            system("ls -l ".dirname($newpkgfile));
+            return $this->raiseError("PEAR_Packager: unable to rewrite $pkgfile as $newpkgfile");
         }
         fwrite($np, $new_xml);
         fclose($np);

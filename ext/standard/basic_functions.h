@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.39 1999/12/26 00:18:44 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.40 2000/01/30 20:31:41 zeev Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -136,6 +136,8 @@ typedef struct {
 	zval **array_walk_func_name;
 	zval **user_compare_func_name;
 	
+	HashTable protected_env_vars;
+
 	/* pageinfo.c */
 	long page_uid;
 	long page_inode;
@@ -179,5 +181,11 @@ typedef struct {
 	int key_len;
 } putenv_entry;
 #endif
+
+/* Values are coma-delimited
+ * All variables, beginning with the following prefixes, will be protected
+ * from change by the PHP runtime function putenv()
+ */
+#define SAFE_MODE_PROTECTED_ENV_VARS "LD_"
 
 #endif /* _BASIC_FUNCTIONS_H */

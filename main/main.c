@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.188 2000/01/29 12:57:08 zeev Exp $ */
+/* $Id: main.c,v 1.189 2000/01/30 20:31:40 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -209,6 +209,7 @@ PHP_INI_BEGIN()
 	STD_PHP_INI_ENTRY("safe_mode_exec_dir",	"1",	PHP_INI_SYSTEM,			OnUpdateString,	safe_mode_exec_dir,		php_core_globals,	core_globals)
 	STD_PHP_INI_BOOLEAN("enable_dl",		"1",	PHP_INI_SYSTEM,			OnUpdateBool,	enable_dl,				php_core_globals,	core_globals)
 	STD_PHP_INI_BOOLEAN("expose_php",		"1",	PHP_INI_SYSTEM,			OnUpdateBool,	expose_php,				php_core_globals,	core_globals)
+
 
 	PHP_INI_ENTRY("SMTP",			"localhost",			PHP_INI_ALL,		NULL)
 	PHP_INI_ENTRY("sendmail_path",	DEFAULT_SENDMAIL_PATH,	PHP_INI_SYSTEM,		NULL)

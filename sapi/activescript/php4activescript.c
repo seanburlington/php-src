@@ -15,7 +15,9 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php4activescript.c,v 1.4 2002/12/31 15:58:59 sebastian Exp $ */
+/* $Id: php4activescript.c,v 1.5 2003/02/25 06:49:59 sniper Exp $ */
+
+#define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
 #include "php.h"
 #include "php_main.h"

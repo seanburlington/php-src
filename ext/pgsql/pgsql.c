@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.93.2.2 2001/03/30 07:36:21 romolo Exp $ */
+/* $Id: pgsql.c,v 1.93.2.3 2001/03/30 14:57:02 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -531,9 +531,7 @@ PHP_FUNCTION(pg_close)
 
 	if (id!=-1 
 		|| (pgsql_link && Z_RESVAL_PP(pgsql_link)==PGG(default_link))) {
-		if (id!=-1) {
-			zend_list_delete(PGG(default_link));
-		}
+		zend_list_delete(PGG(default_link));
 		PGG(default_link) = -1;
 	}
 

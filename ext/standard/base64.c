@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.33 2002/08/22 01:20:50 sniper Exp $ */
+/* $Id: base64.c,v 1.34 2002/12/01 02:44:50 moriyoshi Exp $ */
 
 #include <string.h>
 
@@ -140,7 +140,7 @@ unsigned char *php_base64_decode(const unsigned char *str, int length, int *ret_
 	}
 
 	/* run through the whole string, converting as we go */
-	while ((ch = *current++) != '\0') {
+	while ((ch = *current++) != '\0' && length-- > 0) {
 		if (ch == base64_pad) break;
 
 	    /* When Base64 gets POSTed, all pluses are interpreted as spaces.

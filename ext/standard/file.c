@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.207 2002/03/16 01:34:52 wez Exp $ */
+/* $Id: file.c,v 1.208 2002/03/16 02:32:59 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1284,7 +1284,9 @@ static size_t php_passthru_stream(php_stream *stream TSRMLS_DC)
 	size_t bcount = 0;
 	int ready = 0;
 	char buf[8192];
+#ifdef HAVE_MMAP
 	int fd;
+#endif
 
 #ifdef HAVE_MMAP
 	if (!php_stream_is(stream, PHP_STREAM_IS_SOCKET)

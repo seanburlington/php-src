@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.86 2002/03/16 01:34:52 wez Exp $ */
+/* $Id: fsock.c,v 1.87 2002/03/16 02:33:00 wez Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -193,7 +193,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		}
 		else
 #endif
-		stream = php_stream_sock_open_host(host, port, socktype, timeout, persistent);
+		stream = php_stream_sock_open_host(host, port, socktype, (int)timeout, persistent);
 
 #if HAVE_OPENSSL_EXT
 		if (stream)	{

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.37 2001/07/05 08:47:37 derick Exp $ */
+/* $Id: mail.c,v 1.38 2001/07/08 19:09:59 sas Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -35,6 +35,7 @@
 #include "php_mail.h"
 #include "php_ini.h"
 #include "safe_mode.h"
+#include "exec.h"
 
 #if HAVE_SENDMAIL
 #ifdef PHP_WIN32

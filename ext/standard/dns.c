@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.55 2003/02/20 05:34:58 sniper Exp $ */
+/* $Id: dns.c,v 1.56 2003/02/21 08:45:58 sniper Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -630,6 +630,7 @@ PHP_FUNCTION(dns_get_record)
 	}
 }
 /* }}} */
+#endif /* HAVE_DNS_FUNCS */
 
 /* {{{ proto bool dns_get_mx(string hostname, array mxhosts [, array weight])
    Get MX records corresponding to a given Internet host name */
@@ -712,7 +713,6 @@ PHP_FUNCTION(dns_get_mx)
 }
 /* }}} */
 
-#endif /* HAVE_DNS_FUNCS */
 #endif /* HAVE_RES_SEARCH && !(defined(__BEOS__)||defined(PHP_WIN32) || defined(NETWARE)) */
 
 /*

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.583 2003/02/18 09:37:52 wez Exp $ */
+/* $Id: basic_functions.c,v 1.584 2003/02/21 08:45:57 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -598,10 +598,10 @@ function_entry basic_functions[] = {
 #if HAVE_RES_SEARCH && !(defined(__BEOS__) || defined(PHP_WIN32) || defined(NETWARE))
 	PHP_FE(dns_check_record,												NULL)
 	PHP_FALIAS(checkdnsrr,			dns_check_record,						NULL)
+	PHP_FE(dns_get_mx,				second_and_third_args_force_ref)
+	PHP_FALIAS(getmxrr, 			dns_get_mx, second_and_third_args_force_ref)
 # if HAVE_DNS_FUNCS
 	PHP_FE(dns_get_record,			third_and_rest_force_ref)
-	PHP_FE(dns_get_mx,				second_and_third_args_force_ref)
-	PHP_FALIAS(getmxrr, 			dns_get_mx, 							NULL)
 # endif
 #endif
 

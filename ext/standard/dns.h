@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dns.h,v 1.13 2002/12/31 16:07:37 sebastian Exp $ */
+/* $Id: dns.h,v 1.14 2003/02/21 08:45:58 sniper Exp $ */
 
 #ifndef DNS_H
 #define DNS_H
@@ -34,11 +34,11 @@ PHP_FUNCTION(gethostbynamel);
 #if HAVE_RES_SEARCH && !(defined(__BEOS__)||defined(PHP_WIN32))
 
 PHP_FUNCTION(dns_check_record);
+PHP_FUNCTION(dns_get_mx);
 
 # if HAVE_DNS_FUNCS
 
 PHP_FUNCTION(dns_get_record);
-PHP_FUNCTION(dns_get_mx);
 
 PHP_MINIT_FUNCTION(dns);
 

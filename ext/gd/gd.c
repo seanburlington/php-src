@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.198 2002/06/28 12:35:30 sniper Exp $ */
+/* $Id: gd.c,v 1.199 2002/06/28 12:46:07 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -51,6 +51,7 @@
 
 static int le_gd, le_gd_font;
 #if HAVE_LIBT1
+#include <t1lib.h>
 static int le_ps_font, le_ps_enc;
 static void php_free_ps_font(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 static void php_free_ps_enc(zend_rsrc_list_entry *rsrc TSRMLS_DC);

@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.52 2000/07/13 18:21:40 eschmid Exp $ */
+/* $Id: zlib.c,v 1.53 2000/07/13 18:27:10 eschmid Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -679,7 +679,7 @@ PHP_FUNCTION(gzcompress)
 }
 /* }}} */
 
-/* {{{ proto string gzuncompress(string data ,int length) 
+/* {{{ proto string gzuncompress(string data, int length) 
    Unzip a gzip-compressed string */
 PHP_FUNCTION(gzuncompress)
 {

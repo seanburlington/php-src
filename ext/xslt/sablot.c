@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.55 2002/10/04 23:06:09 dviner Exp $ */
+/* $Id: sablot.c,v 1.56 2002/10/05 14:04:18 msopacua Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1632,6 +1632,10 @@ static MH_ERROR error_print(void *user_data, SablotHandle proc, MH_ERROR code, M
 		/* Allocate the message buffer and copy the data onto it */
 		msgbuf = emalloc((sizeof(msgformat) - 4) + strlen(errmsg) + strlen(errline) + 1);
 		sprintf(msgbuf, msgformat, errline, errmsg);
+
+		/* If an old message exists, remove it -> leak */
+		if (XSLT_ERRSTR(handle))
+			efree(XSLT_ERRSTR(handle));
 
 		/* Copy the error message onto the handle for use when 
 		   the xslt_error function is called */

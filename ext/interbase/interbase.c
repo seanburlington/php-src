@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.91.2.9 2003/06/14 17:46:33 daniela Exp $ */
+/* $Id: interbase.c,v 1.91.2.10 2003/06/16 10:47:35 daniela Exp $ */
   
 
 /* TODO: Arrays, roles?
@@ -628,7 +628,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.9 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.10 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1678,7 +1678,7 @@ static void _php_ibase_trans_end(INTERNAL_FUNCTION_PARAMETERS, int commit)
 }
 /* }}} */
 
-/* {{{ proto bool ibase_commit([resource link_identifier [, int trans_number]])
+/* {{{ proto bool ibase_commit(resource link_identifier)
    Commit transaction */
 PHP_FUNCTION(ibase_commit)
 {
@@ -1686,8 +1686,8 @@ PHP_FUNCTION(ibase_commit)
 }
 /* }}} */
 
-/* {{{ proto bool ibase_rollback([resource link_identifier [, int trans_number]])
-   Roolback transaction */
+/* {{{ proto bool ibase_rollback(resource link_identifier)
+   Rollback transaction */
 PHP_FUNCTION(ibase_rollback)
 {
 	_php_ibase_trans_end(INTERNAL_FUNCTION_PARAM_PASSTHRU, ROLLBACK);

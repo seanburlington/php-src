@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.35 2001/04/17 17:06:06 wez Exp $ */
+/* $Id: file.h,v 1.36 2001/05/12 21:49:13 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -73,6 +73,7 @@ PHP_FUNCTION(fopenstream);
 
 PHPAPI int php_set_sock_blocking(int socketd, int block);
 PHPAPI int php_file_le_fopen(void);
+PHPAPI int php_file_le_stream(void);
 PHPAPI int php_file_le_popen(void);
 PHPAPI int php_file_le_socket(void);
 PHPAPI int php_copy_file(char *src, char *dest);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ibase_includes.h,v 1.14 2004/06/01 08:38:33 abies Exp $ */
+/* $Id: php_ibase_includes.h,v 1.15 2004/07/06 13:46:19 abies Exp $ */
 
 #ifndef PHP_IBASE_INCLUDES_H
 #define PHP_IBASE_INCLUDES_H
@@ -64,10 +64,6 @@ ZEND_BEGIN_MODULE_GLOBALS(ibase)
 	ISC_STATUS status[20];
 	long default_link;
 	long num_links, num_persistent;
-	long max_links, max_persistent;
-	long allow_persistent;
-	char *default_db, *default_user, *default_password, *default_charset;
-	char *timestampformat, *dateformat, *timeformat;
 	char errmsg[MAX_ERRMSG];
 	long sql_code;
 ZEND_END_MODULE_GLOBALS(ibase)

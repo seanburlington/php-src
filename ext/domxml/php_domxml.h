@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.33 2002/01/09 03:42:30 sniper Exp $ */
+/* $Id: php_domxml.h,v 1.34 2002/01/10 01:53:22 mfischer Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -36,6 +36,7 @@
 #include <libxml/xpointer.h>
 #endif
 #if HAVE_DOMXSLT
+#include <libxslt/xsltconfig.h>
 #include <libxslt/xsltInternals.h>
 #include <libxslt/xsltutils.h>
 #include <libxslt/transform.h>

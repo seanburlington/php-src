@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.14.4.13 2003/11/01 05:07:55 cellog Exp $
+// $Id: Dependency.php,v 1.14.4.14 2003/11/01 05:14:11 cellog Exp $
 
 require_once "PEAR.php";
 
@@ -341,9 +341,8 @@ class PEAR_Dependency
     function checkProgram(&$errmsg, $program)
     {
         // XXX FIXME honor safe mode
-        $path_delim = OS_WINDOWS ? ';' : ':';
         $exe_suffix = OS_WINDOWS ? '.exe' : '';
-        $path_elements = explode($path_delim, getenv('PATH'));
+        $path_elements = explode(PATH_SEPARATOR, getenv('PATH'));
         foreach ($path_elements as $dir) {
             $file = $dir . DIRECTORY_SEPARATOR . $program . $exe_suffix;
             if (@file_exists($file) && @is_executable($file)) {

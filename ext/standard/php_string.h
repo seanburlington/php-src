@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.44 2001/08/04 05:22:55 sbergmann Exp $ */
+/* $Id: php_string.h,v 1.45 2001/08/05 20:02:22 jeroen Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -149,5 +149,6 @@ PHPAPI char *php_strerror(int errnum);
 #endif
 
 void register_string_constants(INIT_FUNC_ARGS);
+int php_charmask(unsigned char *input, int len, char *mask);
 
 #endif /* PHP_STRING_H */

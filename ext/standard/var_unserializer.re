@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.37 2005/01/15 18:30:16 sesser Exp $ */
+/* $Id: var_unserializer.re,v 1.38 2005/01/17 11:45:09 sesser Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -216,7 +216,7 @@ static inline size_t parse_uiv(const unsigned char *p)
 static inline int process_nested_data(UNSERIALIZE_PARAMETER, HashTable *ht, int elements)
 {
 	while (elements-- > 0) {
-		zval *key, *data, *old_data;
+		zval *key, *data, **old_data;
 
 		ALLOC_INIT_ZVAL(key);
 

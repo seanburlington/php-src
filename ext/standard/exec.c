@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.84.2.14 2004/05/18 13:43:33 iliaa Exp $ */
+/* $Id: exec.c,v 1.84.2.15 2004/11/10 20:28:27 wez Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -602,6 +602,7 @@ static void proc_open_rsrc_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	WaitForSingleObject(child, INFINITE);
 	GetExitCodeProcess(child, &wstatus);
 	FG(pclose_ret) = wstatus;
+	CloseHandle(child);
 #else
 # if HAVE_SYS_WAIT_H
 	int wstatus;

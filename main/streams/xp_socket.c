@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.23.2.3 2004/08/10 13:45:58 wez Exp $ */
+/* $Id: xp_socket.c,v 1.23.2.4 2004/08/22 18:05:27 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -93,7 +93,7 @@ retry:
 			} while (err == EINTR);
 		}
 		estr = php_socket_strerror(err, NULL, 0);
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "send of %ld bytes failed with errno=%d %s",
+		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "send of %ld bytes failed with errno=%ld %s",
 				(long)count, err, estr);
 		efree(estr);
 	}

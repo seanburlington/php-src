@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.143 2000/08/06 14:36:10 eschmid Exp $ */
+/* $Id: string.c,v 1.144 2000/08/17 08:47:42 stas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1040,11 +1040,15 @@ PHP_FUNCTION(chunk_split)
 			convert_to_string_ex(p_str);
 	}
 			
-	if(chunklen == 0) {
-		php_error(E_WARNING, "chunk length is 0");
+	if(chunklen <= 0) {
+		php_error(E_WARNING, "Chunk length should be greater than zero");
 		RETURN_FALSE;
 	}
-	
+
+	if((*p_str)->value.str.len == 0) {
+		RETURN_EMPTY_STRING();
+	}
+
 	result = php_chunk_split((*p_str)->value.str.val, (*p_str)->value.str.len,
 						     end, endlen, chunklen, &result_len);
 	

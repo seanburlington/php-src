@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.86 2002/06/06 19:47:28 daniela Exp $ */
+/* $Id: interbase.c,v 1.87 2002/06/26 07:54:50 sas Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -285,13 +285,12 @@ static void _php_ibase_error(void)
 static void _php_ibase_module_error(char *msg, ...)
 {
 	va_list ap;
-	int len;
 	TSRMLS_FETCH();
 
 	va_start(ap, msg);
-	len = vsnprintf(IBG(errmsg), MAX_ERRMSG - 1, msg, ap);
+	/* vsnprintf NUL terminates the buf and writes at most n-1 chars+NUL */
+	vsnprintf(IBG(errmsg), MAX_ERRMSG, msg, ap);
 	va_end(ap);
-	IBG(errmsg[len]) = '\0';
 	
 	php_error(E_WARNING, "InterBase module: %s", IBG(errmsg));
 }
@@ -609,7 +608,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.86 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.87 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

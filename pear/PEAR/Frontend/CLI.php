@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@php.net>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.31 2003/04/03 23:12:40 ssb Exp $
+  $Id: CLI.php,v 1.32 2003/06/06 16:09:01 mj Exp $
 */
 
 require_once "PEAR.php";
@@ -91,6 +91,9 @@ class PEAR_Frontend_CLI extends PEAR
     // }}}
     // {{{ displayError(eobj)
 
+    /**
+     * @param object PEAR_Error object
+     */
     function displayError($eobj)
     {
         return $this->_displayLine($eobj->getMessage());
@@ -99,6 +102,9 @@ class PEAR_Frontend_CLI extends PEAR
     // }}}
     // {{{ displayFatalError(eobj)
 
+    /**
+     * @param object PEAR_Error object
+     */
     function displayFatalError($eobj)
     {
         $this->displayError($eobj);

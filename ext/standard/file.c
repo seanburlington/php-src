@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.243 2002/08/18 06:55:32 iliaa Exp $ */
+/* $Id: file.c,v 1.244 2002/08/18 07:54:33 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1994,7 +1994,7 @@ PHP_FUNCTION(fgetcsv)
 			bptr++;	/* move on to first character in field */
 			
 			/* Check if there is an end to the enclosure */
-			if( !strchr(bptr, enclosure) ) {
+			if (!strchr(bptr, enclosure)) {
 				continue;
 			}
 		

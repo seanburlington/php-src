@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.224 2001/03/23 04:56:51 svanegmond Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.225 2001/03/26 21:34:59 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -253,9 +253,10 @@ AC_CHECK_LIB(m, sin)
 AC_CHECK_LIB(bind, inet_aton, [
   AC_ADD_LIBRARY(bind)
   AC_DEFINE(HAVE_LIBBIND,1,[Whether you have bind]) ], [
-    AC_CHECK_LIB(resolv, inet_aton)
+    AC_CHECK_LIB(bind, __inet_aton, [], [
+      AC_CHECK_LIB(resolv, inet_aton)
+    ])
   ])
-AC_CHECK_LIB(bind, __inet_aton)
 
 
 dnl The res_search may be in libsocket as well, and if it is

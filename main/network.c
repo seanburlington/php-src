@@ -15,7 +15,7 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.4 2000/09/05 13:56:11 venaas Exp $ */
+/* $Id: network.c,v 1.5 2000/09/05 16:36:56 venaas Exp $ */
 
 #include "php.h"
 
@@ -150,7 +150,7 @@ static int php_network_getaddresses(const char *host, struct sockaddr ***sal)
  * port, returns the created socket on success, else returns -1.
  * timeout gives timeout in seconds, 0 means blocking mode.
  */
-int hostconnect(char *host, int port, int socktype, int timeout)
+int php_hostconnect(char *host, int port, int socktype, int timeout)
 {	
 	int s;
 	struct sockaddr **sal, **psal;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.112.2.3 2002/12/31 16:35:11 sebastian Exp $ */
+/* $Id: pdf.c,v 1.112.2.4 2003/01/16 21:18:55 iliaa Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -331,7 +331,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.112.2.3 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.112.2.4 $" );
 	php_info_print_table_end();
 
 }
@@ -1979,7 +1979,7 @@ PHP_FUNCTION(pdf_open_memory_image)
 			} else {
 #endif
 				if (im->pixels && gdImageBoundsSafe(im, j, i)) {
-					color = im->pixels[im->sy][im->sx];
+					color = im->pixels[i][j];
 					*ptr++ = im->red[color];
 					*ptr++ = im->green[color];
 					*ptr++ = im->blue[color];

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.34 2000/06/05 19:47:44 andi Exp $ */
+/* $Id: exec.c,v 1.35 2000/06/12 19:39:04 andi Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -87,9 +87,9 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 		efree(d);
 		d = tmp;
 #ifdef PHP_WIN32
-		fp = popen(d, "rb");
+		fp = V_POPEN(d, "rb");
 #else
-		fp = popen(d, "r");
+		fp = V_POPEN(d, "r");
 #endif
 		if (!fp) {
 			php_error(E_WARNING, "Unable to fork [%s]", d);
@@ -99,9 +99,9 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 		}
 	} else { /* not safe_mode */
 #ifdef PHP_WIN32
-		fp = popen(cmd, "rb");
+		fp = V_POPEN(cmd, "rb");
 #else
-		fp = popen(cmd, "r");
+		fp = V_POPEN(cmd, "r");
 #endif
 		if (!fp) {
 			php_error(E_WARNING, "Unable to fork [%s]", cmd);
@@ -364,9 +364,9 @@ PHP_FUNCTION(shell_exec)
 
 	convert_to_string_ex(cmd);
 #ifdef PHP_WIN32
-	if ((in=popen((*cmd)->value.str.val,"rt"))==NULL) {
+	if ((in=V_POPEN((*cmd)->value.str.val,"rt"))==NULL) {
 #else
-	if ((in=popen((*cmd)->value.str.val,"r"))==NULL) {
+	if ((in=V_POPEN((*cmd)->value.str.val,"r"))==NULL) {
 #endif
 		php_error(E_WARNING,"Unable to execute '%s'",(*cmd)->value.str.val);
 	}

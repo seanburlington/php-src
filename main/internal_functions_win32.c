@@ -16,7 +16,7 @@
 	|          Zeev Suraski <zeev@zend.com>                                |
 	+----------------------------------------------------------------------+
 
-	$Id: internal_functions_win32.c,v 1.68 2003/01/10 23:35:52 phanto Exp $
+	$Id: internal_functions_win32.c,v 1.69 2003/01/16 18:17:48 phanto Exp $
 */
 
 /* {{{ includes
@@ -56,6 +56,9 @@
 #endif
 #if HAVE_RPC
 #include "ext/rpc/php_rpc.h"
+#if HAVE_COM
+#include "ext/rpc/com/php_com.h"
+#endif
 #endif
 #if HAVE_FTP
 #include "ext/ftp/php_ftp.h"
@@ -105,6 +108,9 @@ zend_module_entry *php_builtin_extensions[] = {
 #endif
 #if HAVE_RPC
 	,phpext_rpc_ptr
+#if HAVE_COM
+	,phpext_com_ptr
+#endif
 #endif
 #if HAVE_FTP
 	,phpext_ftp_ptr

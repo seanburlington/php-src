@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.130 2003/06/10 20:03:40 imajes Exp $ */
+/* $Id: xml.c,v 1.131 2003/06/14 11:22:13 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -35,10 +35,10 @@
 
 #if HAVE_XML
 
-int xml_parser_inited = 0;
-
 #include "php_xml.h"
 # include "ext/standard/head.h"
+
+PHP_XML_API int xml_parser_inited = 0;
 
 /* Short-term TODO list:
  * - Implement XML_ExternalEntityParserCreate()

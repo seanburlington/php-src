@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.35 2000/07/30 21:55:27 hholzgra Exp $ */
+/* $Id: math.c,v 1.36 2000/09/17 21:11:55 stas Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -433,7 +433,7 @@ _php_math_longtobase(zval *arg, int base)
 	static char digits[] = "0123456789abcdefghijklmnopqrstuvwxyz";
 	char *result, *ptr, *ret;
 	int len, digit;
-	long value;
+	unsigned long value;
 
 	if (arg->type != IS_LONG || base < 2 || base > 36) {
 		return empty_string;

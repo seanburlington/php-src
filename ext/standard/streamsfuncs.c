@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.35.2.4 2004/09/28 09:13:36 wez Exp $ */
+/* $Id: streamsfuncs.c,v 1.35.2.5 2004/10/11 18:32:59 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1059,11 +1059,11 @@ PHP_FUNCTION(stream_filter_append)
 
 /* }}} */
 
-/* {{{ proto string stream_get_line(resource stream, int maxlen, string ending)
+/* {{{ proto string stream_get_line(resource stream, int maxlen [, string ending])
    Read up to maxlen bytes from a stream or until the ending string is found */
 PHP_FUNCTION(stream_get_line)
 {
-	char *str;
+	char *str = NULL;
 	int str_len;
 	long max_length;
 	zval *zstream;
@@ -1071,7 +1071,7 @@ PHP_FUNCTION(stream_get_line)
 	size_t buf_size;
 	php_stream *stream;
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rls", &zstream, &max_length, &str, &str_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rl|s", &zstream, &max_length, &str, &str_len) == FAILURE) {
 		RETURN_FALSE;
 	}
 

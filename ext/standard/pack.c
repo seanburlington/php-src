@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.45 2003/01/11 23:05:19 moriyoshi Exp $ */
+/* $Id: pack.c,v 1.46 2003/02/16 03:48:47 wez Exp $ */
 
 #include "php.h"
 
@@ -27,7 +27,7 @@
 #include <fcntl.h>
 #ifdef PHP_WIN32
 #include <windows.h>
-#include <winsock.h>
+#include <winsock2.h>
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
 #elif defined(NETWARE)

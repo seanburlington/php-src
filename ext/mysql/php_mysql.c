@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.184 2003/01/30 02:33:14 iliaa Exp $ */
+/* $Id: php_mysql.c,v 1.185 2003/02/16 03:48:45 wez Exp $ */
 
 /* TODO:
  *
@@ -37,7 +37,7 @@
 #if HAVE_MYSQL
 
 #ifdef PHP_WIN32
-# include <winsock.h>
+# include <winsock2.h>
 # define signal(a, b) NULL
 #elif defined(NETWARE)
 # include <sys/socket.h>

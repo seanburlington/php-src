@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.61 2003/02/13 14:40:17 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.62 2003/02/16 03:48:47 wez Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -36,7 +36,7 @@
 
 #ifdef PHP_WIN32
 #include <windows.h>
-#include <winsock.h>
+#include <winsock2.h>
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
 #elif defined(NETWARE)
@@ -59,7 +59,7 @@
 #endif
 
 #ifdef PHP_WIN32
-#include <winsock.h>
+#include <winsock2.h>
 #elif defined(NETWARE) && defined(USE_WINSOCK)
 /*#include <ws2nlm.h>*/
 #include <novsock2.h>

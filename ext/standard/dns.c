@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.53 2002/12/31 16:07:36 sebastian Exp $ */
+/* $Id: dns.c,v 1.54 2003/02/16 03:48:47 wez Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -44,7 +44,7 @@
 #include "resolv.h"
 #endif
 #endif /* HAVE_LIBBIND */
-#include <winsock.h>
+#include <winsock2.h>
 #else	/* This holds good for NetWare too, both for Winsock and Berkeley sockets */
 #include <netinet/in.h>
 #if HAVE_ARPA_INET_H

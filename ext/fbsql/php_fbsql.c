@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.92 2003/02/12 20:44:00 iliaa Exp $ */
+/* $Id: php_fbsql.c,v 1.93 2003/02/16 03:48:44 wez Exp $ */
 
 /* TODO:
  *
@@ -43,7 +43,7 @@
 #include "ext/standard/php_string.h"
 
 #ifdef PHP_WIN32
-#include <winsock.h>
+#include <winsock2.h>
 #else
 #include <php_config.h>
 

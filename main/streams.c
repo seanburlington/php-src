@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.155 2003/02/15 19:56:12 moriyoshi Exp $ */
+/* $Id: streams.c,v 1.156 2003/02/16 03:48:48 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1332,6 +1332,15 @@ PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode STREAMS_DC
 		struct stat sb;
 		self->is_pipe = (fstat(self->fd, &sb) == 0 && S_ISFIFO(sb.st_mode)) ? 1 : 0;
 	}
+#elif defined(PHP_WIN32)
+	{
+		long handle = _get_osfhandle(self->fd);
+		DWORD in_buf_size, out_buf_size;
+
+		if (handle != 0xFFFFFFFF) {
+			self->is_pipe = GetNamedPipeInfo((HANDLE)handle, NULL, &out_buf_size, &in_buf_size, NULL);
+		}
+	}
 #endif
 	
 	stream = php_stream_alloc_rel(&php_stream_stdio_ops, self, 0, mode);
@@ -1364,6 +1373,15 @@ PHPAPI php_stream *_php_stream_fopen_from_file(FILE *file, const char *mode STRE
 	if (self->fd >= 0) {
 		struct stat sb;
 		self->is_pipe = (fstat(self->fd, &sb) == 0 && S_ISFIFO(sb.st_mode)) ? 1 : 0;
+	}
+#elif defined(PHP_WIN32)
+	{
+		long handle = _get_osfhandle(self->fd);
+		DWORD in_buf_size, out_buf_size;
+
+		if (handle != 0xFFFFFFFF) {
+			self->is_pipe = GetNamedPipeInfo((HANDLE)handle, NULL, &out_buf_size, &in_buf_size, NULL);
+		}
 	}
 #endif
 	

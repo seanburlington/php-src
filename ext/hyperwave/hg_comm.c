@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hg_comm.c,v 1.54 2003/01/14 17:45:30 iliaa Exp $ */
+/* $Id: hg_comm.c,v 1.55 2003/02/16 03:48:44 wez Exp $ */
 
 /* #define HW_DEBUG */
 
@@ -31,7 +31,7 @@
 #include <string.h> 
 #include <sys/types.h>
 #ifdef PHP_WIN32
-# include <winsock.h>
+# include <winsock2.h>
 # define EWOULDBLOCK WSAEWOULDBLOCK
 # define ETIMEDOUT WSAETIMEDOUT
 # define bcopy memcpy

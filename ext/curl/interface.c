@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.7 2003/02/03 20:56:23 iliaa Exp $ */
+/* $Id: interface.c,v 1.8 2003/02/16 03:48:43 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -30,7 +30,7 @@
 #include <string.h>
 
 #ifdef PHP_WIN32
-#include <winsock.h>
+#include <winsock2.h>
 #include <sys/types.h>
 #endif
 

@@ -18,7 +18,7 @@
    |         Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: com_wrapper.c,v 1.90 2003/02/10 23:22:48 wez Exp $ */
+/* $Id: com_wrapper.c,v 1.91 2003/02/16 03:48:46 wez Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -56,12 +56,12 @@
 
 #define _WIN32_DCOM
 
+#include "php.h"
+#include "php_ini.h"
+
 #include <iostream.h>
 #include <math.h>
 #include <ocidl.h>
-
-#include "php.h"
-#include "php_ini.h"
 
 #include "../rpc.h"
 #include "../php_rpc.h"

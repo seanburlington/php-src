@@ -17,10 +17,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.180 2003/01/03 12:48:14 hyanantha Exp $ */
+/* $Id: php.h,v 1.181 2003/02/16 03:48:48 wez Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
+
+#ifdef PHP_WIN32
+#include <winsock2.h>
+#endif
 
 #ifdef HAVE_DMALLOC
 #include <dmalloc.h>

@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.155 2002/12/31 15:58:51 sebastian Exp $ */
+/* $Id: fopen_wrappers.c,v 1.156 2003/02/16 03:48:48 wez Exp $ */
 
 /* {{{ includes
  */
@@ -33,7 +33,7 @@
 
 #ifdef PHP_WIN32
 #include <windows.h>
-#include <winsock.h>
+#include <winsock2.h>
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
 #elif defined(NETWARE)
@@ -74,7 +74,7 @@
 #endif
 
 #ifdef PHP_WIN32
-#include <winsock.h>
+#include <winsock2.h>
 #elif defined(NETWARE) && defined(USE_WINSOCK)
 /*#include <ws2nlm.h>*/
 #include <novsock2.h>

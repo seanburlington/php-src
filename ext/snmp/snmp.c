@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.75 2003/01/24 09:52:46 sniper Exp $ */
+/* $Id: snmp.c,v 1.76 2003/02/16 03:48:47 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -33,7 +33,7 @@
 
 #include <sys/types.h>
 #ifdef PHP_WIN32
-#include <winsock.h>
+#include <winsock2.h>
 #include <errno.h>
 #include <process.h>
 #include "win32/time.h"

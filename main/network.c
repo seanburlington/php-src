@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.86 2003/02/13 14:35:47 wez Exp $ */
+/* $Id: network.c,v 1.87 2003/02/16 03:48:48 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -26,7 +26,7 @@
 
 #ifdef PHP_WIN32
 #include <windows.h>
-#include <winsock.h>
+#include <winsock2.h>
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
 #elif defined(NETWARE)

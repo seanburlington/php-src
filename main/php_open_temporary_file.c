@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_open_temporary_file.c,v 1.22 2003/02/13 17:36:35 wez Exp $ */
+/* $Id: php_open_temporary_file.c,v 1.23 2003/02/16 03:48:48 wez Exp $ */
 
 #include "php.h"
 
@@ -27,7 +27,7 @@
 
 #ifdef PHP_WIN32
 #include <windows.h>
-#include <winsock.h>
+#include <winsock2.h>
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
 #include "win32/winutil.h"

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.108 2003/01/09 03:33:15 iliaa Exp $ */
+/* $Id: fsock.c,v 1.109 2003/02/16 03:48:47 wez Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -46,7 +46,7 @@
 #include <sys/socket.h>
 #endif
 #ifdef PHP_WIN32
-#include <winsock.h>
+#include <winsock2.h>
 #elif defined(NETWARE)
 #ifdef NEW_LIBC
 #ifdef USE_WINSOCK

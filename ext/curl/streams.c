@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: streams.c,v 1.3 2002/12/31 16:06:21 sebastian Exp $ */
+/* $Id: streams.c,v 1.4 2003/02/16 03:48:43 wez Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to
@@ -36,7 +36,7 @@
 #include <string.h>
 
 #ifdef PHP_WIN32
-#include <winsock.h>
+#include <winsock2.h>
 #include <sys/types.h>
 #endif
 

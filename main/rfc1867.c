@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.30 2000/02/26 18:59:29 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.31 2000/03/30 22:41:13 andi Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -254,7 +254,7 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr)
 				} else if ((loc - ptr - 4) <= 0) {
 					fn = "none";
 				} else {
-					fp = fopen(fn, "wb");
+					fp = PHP_FOPEN(fn, "wb");
 					if (!fp) {
 						php_error(E_WARNING, "File Upload Error - Unable to open temporary file [%s]", fn);
 						SAFE_RETURN;

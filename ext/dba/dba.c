@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.61.2.19 2003/06/14 18:51:17 edink Exp $ */
+/* $Id: dba.c,v 1.61.2.20 2003/06/14 19:27:01 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -54,8 +54,6 @@
 function_entry dba_functions[] = {
 	PHP_FE(dba_open, NULL)
 	PHP_FE(dba_popen, NULL)
-	/* Disabled until 4.3.1, when persistent STDIO streams are implemented.   */
-	/* PHP_FE(dba_popen, NULL) */
 	PHP_FE(dba_close, NULL)
 	PHP_FE(dba_delete, NULL)
 	PHP_FE(dba_exists, NULL)

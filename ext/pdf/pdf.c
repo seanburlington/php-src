@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.33 2000/04/06 21:07:42 cmv Exp $ */
+/* $Id: pdf.c,v 1.34 2000/04/07 18:50:07 cmv Exp $ */
 
 /* pdflib 2.01 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -241,7 +241,7 @@ PHP_MINFO_FUNCTION(pdf)
 	char tmp[32];
 
 	snprintf(tmp, 31, "%d.%02d", PDF_get_majorversion(), PDF_get_minorversion() );
-	tmp[32]=0;
+	tmp[31]=0;
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "PDF Support", "enabled" );

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.49 2000/04/05 22:31:40 cmv Exp $ */
+/* $Id: gd.c,v 1.50 2000/04/07 18:50:07 cmv Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -255,6 +255,9 @@ PHP_MINFO_FUNCTION(gd)
 #endif
 #ifdef HAVE_GD_PNG
 	php_info_print_table_row(2, "PNG Support", "enabled");
+#endif
+#ifdef HAVE_GD_JPG
+	php_info_print_table_row(2, "JPG Support", "enabled");
 #endif
 	php_info_print_table_end();
 }

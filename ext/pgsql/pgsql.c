@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.294 2003/08/28 23:04:27 helly Exp $ */
+/* $Id: pgsql.c,v 1.295 2003/09/06 15:30:28 helly Exp $ */
 
 #include <stdlib.h>
 
@@ -351,7 +351,9 @@ static int _rollback_transactions(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 #if HAVE_PGTRANSACTIONSTATUS && HAVE_PQPROTOCOLVERSION
 		res = PQexec(link,"ROLLBACK;");
 #else
-		res = PQexec(link,"BEGIN;ROLLBACK;");
+		res = PQexec(link,"BEGIN;");
+		PQclear(res);
+		res = PQexec(link,"ROLLBACK;");
 #endif
 		PQclear(res);
 		PGG(ignore_notices) = orig;

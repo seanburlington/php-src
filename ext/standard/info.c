@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.178 2002/05/12 14:50:54 sas Exp $ */
+/* $Id: info.c,v 1.179 2002/05/13 08:46:21 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -532,7 +532,10 @@ PHP_FUNCTION(phpinfo)
 		flag = PHP_INFO_ALL;
 	}
 
+	/* Andale!  Andale!  Yee-Hah! */
+	php_start_ob_buffer(NULL, 4096, 0 TSRMLS_CC);
 	php_print_info(flag TSRMLS_CC);
+	php_end_ob_buffer(1, 0 TSRMLS_CC);
 
 	RETURN_TRUE;
 }

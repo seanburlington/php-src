@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.122 2004/08/19 07:16:02 helly Exp $ */
+/* $Id: php_reflection.c,v 1.123 2004/08/19 07:42:02 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -1677,6 +1677,66 @@ ZEND_METHOD(reflection_parameter, isOptional)
 	GET_REFLECTION_OBJECT_PTR(param);
 
 	RETVAL_BOOL(param->offset >= param->required);
+}
+/* }}} */
+
+/* {{{ proto public bool ReflectionParameter::isDefaultValueAvailable()
+   Returns whether the default value of this parameter is available */
+ZEND_METHOD(reflection_parameter, isDefaultValueAvailable)
+{
+	reflection_object *intern;
+	parameter_reference *param;
+	zend_op *precv;
+
+	METHOD_NOTSTATIC_NUMPARAMS(0);
+	GET_REFLECTION_OBJECT_PTR(param);
+
+	if (param->fptr->type != ZEND_USER_FUNCTION)
+	{
+		RETURN_FALSE;
+	}
+	if (param->offset < param->required) {
+		RETURN_FALSE;
+	}
+	precv = &((zend_op_array*)param->fptr)->opcodes[param->offset*2 + 1];
+	if (precv->opcode != ZEND_RECV_INIT || precv->op2.op_type == IS_UNUSED) {
+		RETURN_FALSE;
+	}
+	RETURN_TRUE;
+}
+/* }}} */
+
+/* {{{ proto public bool ReflectionParameter::getDefaultValue()
+   Returns the default value of this parameter or throws an exception */
+ZEND_METHOD(reflection_parameter, getDefaultValue)
+{
+	reflection_object *intern;
+	parameter_reference *param;
+	zend_op *precv;
+	zval *zv, zv_copy;
+
+	METHOD_NOTSTATIC_NUMPARAMS(0);
+	GET_REFLECTION_OBJECT_PTR(param);
+
+	if (param->fptr->type != ZEND_USER_FUNCTION)
+	{
+		zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, "Cannot determine default value for internal functions");
+		return;
+	}
+	if (param->offset < param->required) {
+		zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, "Parameter is not optional"); 
+		return;
+	}
+	precv = &((zend_op_array*)param->fptr)->opcodes[param->offset*2 + 1];
+	if (precv->opcode != ZEND_RECV_INIT || precv->op2.op_type == IS_UNUSED) {
+		zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC, "Internal error"); 
+		return;
+	}
+
+	zv_copy = precv->op2.u.constant;
+	zv = &zv_copy;
+	zval_update_constant(&zv, (void*)1 TSRMLS_CC);
+	RETURN_ZVAL(zv, 1, 1);
 }
 /* }}} */
 
@@ -3419,6 +3479,8 @@ static zend_function_entry reflection_parameter_functions[] = {
 	ZEND_ME(reflection_parameter, getClass, NULL, 0)
 	ZEND_ME(reflection_parameter, allowsNull, NULL, 0)
 	ZEND_ME(reflection_parameter, isOptional, NULL, 0)
+	ZEND_ME(reflection_parameter, isDefaultValueAvailable, NULL, 0)
+	ZEND_ME(reflection_parameter, getDefaultValue, NULL, 0)
 	{NULL, NULL, NULL}
 };
 

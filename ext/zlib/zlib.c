@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.38 2000/04/20 16:59:55 fmk Exp $ */
+/* $Id: zlib.c,v 1.39 2000/04/20 17:24:01 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -206,7 +206,7 @@ static gzFile *php_gzopen_with_path(char *filename, char *mode, char *path, char
 			if(PG(doc_root)) {
 				snprintf(trypath, MAXPATHLEN, "%s%s", PG(doc_root), filename);
 			} else {
-				strncpy(trypath,filename,sizeof(trypath));
+				strlcpy(trypath,filename,sizeof(trypath));
 			}
 			if (!php_checkuid(trypath,2)) {
 				return(NULL);
@@ -251,7 +251,7 @@ static gzFile *php_gzopen_with_path(char *filename, char *mode, char *path, char
 		}
 		snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename);
 		if (PG(safe_mode)) {
-			if (stat(trypath,&sb) == 0 &&(!php_checkuid(trypath,2))) {
+			if (V_STAT(trypath,&sb) == 0 &&(!php_checkuid(trypath,2))) {
 				efree(pathbuf);
 				return(NULL);
 			}

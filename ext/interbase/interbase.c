@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.91.2.24 2003/11/14 10:38:41 abies Exp $ */
+/* $Id: interbase.c,v 1.91.2.25 2003/11/26 14:04:56 abies Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -624,7 +624,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.24 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.25 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -934,9 +934,9 @@ PHP_FUNCTION(ibase_pconnect)
    Close an InterBase connection */
 PHP_FUNCTION(ibase_close)
 {
-	zval **link_arg;
+	zval **link_arg = NULL;
 	ibase_db_link *ib_link;
-	int link_id;
+	int link_id = -1;
 	
 	RESET_ERRMSG;
 	
@@ -949,7 +949,6 @@ PHP_FUNCTION(ibase_close)
 				RETURN_FALSE;
 			}
 			convert_to_long_ex(link_arg);
-			link_id = Z_LVAL_PP(link_arg);
 			break;
 		default:
 			WRONG_PARAM_COUNT;

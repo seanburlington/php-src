@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 1999/04/21 23:37:46 ssb Exp $
+dnl $Id: config.m4,v 1.2 1999/04/22 03:01:32 ssb Exp $
 dnl config.m4 for extension db
 dnl don't forget to call PHP_EXTENSION(db)
 
@@ -42,6 +42,11 @@ if test "$DBM_LIB" = "-lgdbm"; then
       ])
     ])  
   ])
-    INCLUDES="$INCLUDES $GDBM_INCLUDES"
-dnl## AC_SUBST(GDBM_INCLUDE)
+
+if test -n "$DBM_LIB"; then
+  INCLUDES="$INCLUDES $GDBM_INCLUDE"
+  EXTRA_LIBS="$EXTRA_LIBS $DBM_LIB"
 fi
+
+PHP_EXTENSION(db)
+

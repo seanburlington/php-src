@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.320 2003/02/28 07:52:23 hholzgra Exp $ */
+/* $Id: file.c,v 1.321 2003/02/28 07:57:00 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -109,6 +109,7 @@ php_file_globals file_globals;
 #ifdef HAVE_FNMATCH
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include <fnmatch.h>
 #endif
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.4 2001/05/01 23:44:20 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.5 2001/05/02 13:24:26 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -482,6 +482,12 @@ PHP_RSHUTDOWN_FUNCTION(mbstring)
 		mbfl_buffer_converter_delete(MBSTRG(outconv));
 		MBSTRG(outconv) = NULL;
 	}
+
+	MBSTRG(http_input_identify) = mbfl_no_encoding_invalid;
+	MBSTRG(http_input_identify_post) = mbfl_no_encoding_invalid;
+	MBSTRG(http_input_identify_get) = mbfl_no_encoding_invalid;
+	MBSTRG(http_input_identify_cookie) = mbfl_no_encoding_invalid;
+	MBSTRG(http_input_identify_string) = mbfl_no_encoding_invalid;
 
 	return SUCCESS;
 }

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.28 2000/10/31 00:00:26 sniper Exp $ */
+/* $Id: ftp.c,v 1.29 2000/10/31 00:30:37 sniper Exp $ */
 
 #include "php.h"
 
@@ -543,7 +543,7 @@ ftp_get(ftpbuf_t *ftp, FILE *outfp, const char *path, ftptype_t type)
 	if (ferror(outfp))
 		goto bail;
 
-	if (!ftp_getresp(ftp) || ftp->resp != 226)
+	if (!ftp_getresp(ftp) || (ftp->resp != 226 && ftp->resp != 250))
 		goto bail;
 
 	return 1;
@@ -606,7 +606,7 @@ ftp_put(ftpbuf_t *ftp, const char *path, FILE *infp, ftptype_t type)
 
 	data = data_close(data);
 
-	if (!ftp_getresp(ftp) || ftp->resp != 226)
+	if (!ftp_getresp(ftp) || (ftp->resp != 226 && ftp->resp != 250))
 		goto bail;
 
 	return 1;

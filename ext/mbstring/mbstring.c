@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.4 2002/11/21 16:21:33 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.142.2.5 2002/11/24 19:21:58 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -1691,8 +1691,11 @@ PHP_FUNCTION(mb_parse_str)
 	var = encstr;
 	n = Z_STRLEN_PP(arg_str);
 	while (n > 0) {
-		if (*var == *separator) {
-			num++;
+		char *p;
+		for (p = separator; *p != '\0'; ++p) {
+			if (*p == *var) {
+				num++;
+			}
 		}
 		var++;
 		n--;

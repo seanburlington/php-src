@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.146 2003/09/12 01:31:54 sniper Exp $ */
+/* $Id: php_pcre.c,v 1.147 2003/11/25 20:02:22 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -84,8 +84,8 @@ static void php_pcre_shutdown_globals(zend_pcre_globals *pcre_globals TSRMLS_DC)
 }
 
 
-static /* {{{ PHP_MINFO_FUNCTION(pcre) */
-PHP_MINFO_FUNCTION(pcre)
+/* {{{ PHP_MINFO_FUNCTION(pcre) */
+static PHP_MINFO_FUNCTION(pcre)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "PCRE (Perl Compatible Regular Expressions) Support", "enabled" );

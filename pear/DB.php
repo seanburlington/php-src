@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.66 2001/07/10 11:55:15 cox Exp $
+// $Id: DB.php,v 1.67 2001/07/10 21:49:51 cox Exp $
 //
 // Database independent query interface.
 //
@@ -351,11 +351,12 @@ class DB
                 DB_ERROR_SYNTAX             => 'syntax error',
                 DB_ERROR_UNSUPPORTED        => 'not supported',
                 DB_ERROR_VALUE_COUNT_ON_ROW => 'value count on row',
-                DB_ERROR_INVALID_DSN        => "invalid DSN",
-                DB_ERROR_CONNECT_FAILED     => "connect failed",
+                DB_ERROR_INVALID_DSN        => 'invalid DSN',
+                DB_ERROR_CONNECT_FAILED     => 'connect failed',
                 DB_OK                       => 'no error',
                 DB_WARNING                  => 'unknown warning',
-                DB_WARNING_READ_ONLY        => 'read only'
+                DB_WARNING_READ_ONLY        => 'read only',
+                DB_ERROR_NEED_MORE_DATA     => 'insufficient data supplied'
             );
         }
 

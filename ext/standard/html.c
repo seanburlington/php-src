@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.63.2.19 2004/07/13 17:15:13 wez Exp $ */
+/* $Id: html.c,v 1.63.2.20 2005/01/09 21:05:31 sniper Exp $ */
 
 /*
  * HTML entity resources:
@@ -33,7 +33,7 @@
 #if PHP_WIN32
 #include "config.w32.h"
 #else
-#include "php_config.h"
+#include <php_config.h>
 #endif
 #include "reg.h"
 #include "html.h"

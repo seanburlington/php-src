@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_firebird_int.h,v 1.8 2004/06/23 13:26:08 abies Exp $ */
+/* $Id: php_pdo_firebird_int.h,v 1.9 2005/02/21 13:57:02 abies Exp $ */
 
 #ifndef PHP_PDO_FIREBIRD_INT_H
 #define PHP_PDO_FIREBIRD_INT_H
@@ -34,7 +34,7 @@
 #define SHORT_MAX (1 << (8*sizeof(short)-1))
 
 #if SIZEOF_LONG == 8
-# define LL_MASK l
+# define LL_MASK "l"
 # define LL_LIT(lit) lit ## L
 #else
 # ifdef PHP_WIN32

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.138 2002/07/28 14:08:08 sr Exp $ */
+/* $Id: SAPI.c,v 1.139 2002/07/31 17:55:15 helly Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -633,12 +633,23 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 }
 
 
+static void sapi_send_headers_free(TSRMLS_D)
+{
+	if (SG(sapi_headers).http_status_line) {
+		efree(SG(sapi_headers).http_status_line);
+	}
+	if (SG(sapi_headers).mimetype) {
+		efree(SG(sapi_headers).mimetype);
+	}
+}
+	
 SAPI_API int sapi_send_headers(TSRMLS_D)
 {
 	int retval;
 	int ret = FAILURE;
 
 	if (SG(headers_sent) || SG(request_info).no_headers) {
+		sapi_send_headers_free(TSRMLS_C);
 		return SUCCESS;
 	}
 
@@ -711,14 +722,9 @@ SAPI_API int sapi_send_headers(TSRMLS_D)
 			ret = FAILURE;
 			break;
 	}
-	
-	if (SG(sapi_headers).http_status_line) {
-		efree(SG(sapi_headers).http_status_line);
-	}
-	if (SG(sapi_headers).mimetype) {
-		efree(SG(sapi_headers).mimetype);
-	}
-	
+
+	sapi_send_headers_free(TSRMLS_C);
+
 	return ret;
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.80 2003/03/12 06:47:34 sterling Exp $ */
+/* $Id: file.h,v 1.81 2003/04/08 14:12:52 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -54,7 +54,7 @@ PHP_FUNCTION(unlink);
 PHP_FUNCTION(copy);
 PHP_FUNCTION(file);
 PHP_FUNCTION(file_get_contents);
-PHP_FUNCTION(file_set_contents);
+PHP_FUNCTION(file_put_contents);
 PHP_FUNCTION(get_meta_tags);
 PHP_FUNCTION(flock);
 PHP_FUNCTION(fd_set);

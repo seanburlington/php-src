@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.330 2003/04/08 00:02:47 pollita Exp $ */
+/* $Id: file.c,v 1.331 2003/04/08 14:12:52 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -465,9 +465,9 @@ PHP_FUNCTION(file_get_contents)
 }
 /* }}} */
 
-/* {{{ proto string file_set_contents(string file, string data)
+/* {{{ proto string file_put_contents(string file, string data)
    Write/Create a file with contents data */
-PHP_FUNCTION(file_set_contents)
+PHP_FUNCTION(file_put_contents)
 {
 	php_stream *stream;
 	char *filename, *data;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dba.h,v 1.11 2002/02/28 08:26:00 sebastian Exp $ */
+/* $Id: php_dba.h,v 1.12 2002/08/23 22:24:02 sniper Exp $ */
 
 #ifndef PHP_DBA_H
 #define PHP_DBA_H
@@ -37,7 +37,7 @@ typedef struct dba_info {
 	dba_mode_t mode;
 	/* arg[cv] are only available when the dba_open handler is called! */
 	int argc;
-	pval ***argv;
+	zval ***argv;
 	/* private */
 	struct dba_handler *hnd;
 } dba_info;

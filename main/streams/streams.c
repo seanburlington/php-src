@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.61 2004/07/13 16:34:56 wez Exp $ */
+/* $Id: streams.c,v 1.62 2004/08/31 11:37:02 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1454,7 +1454,11 @@ PHPAPI php_stream_wrapper *php_stream_locate_url_wrapper(const char *path, char 
 	}
 	/* TODO: curl based streams probably support file:// properly */
 	if (!protocol || !strncasecmp(protocol, "file", n))	{
+#ifdef PHP_WIN32		
+		if (protocol && path[n+1] == '/' && path[n+2] == '/' && path[n+4] != ':')	{
+#else
 		if (protocol && path[n+1] == '/' && path[n+2] == '/' && path[n+3] != '/')	{
+#endif
 			if (options & REPORT_ERRORS) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "remote host file access not supported, %s", path);
 			}

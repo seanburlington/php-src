@@ -1,24 +1,24 @@
 <?php
 //
-// +----------------------------------------------------------------------+
-// | PEAR, the PHP Extension and Application Repository                   |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2004 The PHP Group                                |
-// +----------------------------------------------------------------------+
-// | This source file is subject to version 2.0 of the PHP license,       |
-// | that is bundled with this package in the file LICENSE, and is        |
-// | available through the world-wide-web at the following url:           |
-// | http://www.php.net/license/3_0.txt.                                  |
-// | If you did not receive a copy of the PHP license and are unable to   |
-// | obtain it through the world-wide-web, please send a note to          |
-// | license@php.net so we can mail you a copy immediately.               |
-// +----------------------------------------------------------------------+
-// | Authors: Sterling Hughes <sterling@php.net>                          |
-// |          Stig Bakken <ssb@php.net>                                   |
-// |          Tomas V.V.Cox <cox@idecnet.com>                             |
-// +----------------------------------------------------------------------+
+// +--------------------------------------------------------------------+
+// | PEAR, the PHP Extension and Application Repository                 |
+// +--------------------------------------------------------------------+
+// | Copyright (c) 1997-2004 The PHP Group                              |
+// +--------------------------------------------------------------------+
+// | This source file is subject to version 2.0 of the PHP license,     |
+// | that is bundled with this package in the file LICENSE, and is      |
+// | available through the world-wide-web at the following url:         |
+// | http://www.php.net/license/3_0.txt.                                |
+// | If you did not receive a copy of the PHP license and are unable to |
+// | obtain it through the world-wide-web, please send a note to        |
+// | license@php.net so we can mail you a copy immediately.             |
+// +--------------------------------------------------------------------+
+// | Authors: Sterling Hughes <sterling@php.net>                        |
+// |          Stig Bakken <ssb@php.net>                                 |
+// |          Tomas V.V.Cox <cox@idecnet.com>                           |
+// +--------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.78 2004/02/27 02:27:00 cellog Exp $
+// $Id: PEAR.php,v 1.79 2004/03/21 22:11:18 ssb Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.77 2003/07/19 19:23:33 andrey Exp $ */
+/* $Id: php_yaz.c,v 1.78 2003/07/30 09:53:37 dickmeiss Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -943,6 +943,8 @@ PHP_FUNCTION(yaz_record)
 		if (r) {
 			if (!strcmp(type, "array")) {
 				Z_External *ext = (Z_External *) ZOOM_record_get(r, "ext", 0);
+				if (ext->which == Z_External_OPAC)
+					ext = ext->u.opac->bibliographicRecord;
 				if (ext) {
 					oident *ent = oid_getentbyoid(ext->direct_reference);
 					

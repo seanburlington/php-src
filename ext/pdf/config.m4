@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.15 2001/03/12 01:20:13 sniper Exp $
+dnl $Id: config.m4,v 1.16 2001/03/16 12:23:30 sas Exp $
 
 PHP_ARG_WITH(pdflib,whether to include PDFlib support,
 [  --with-pdflib[=DIR]     Include pdflib 3.x support. DIR is the pdflib
@@ -25,6 +25,8 @@ PHP_ARG_WITH(pdflib,whether to include PDFlib support,
       AC_ADD_LIBRARY(png)
       AC_ADD_LIBRARY(jpeg)
       AC_ADD_LIBRARY(z)
+      ;;
+    no)
       ;;
     *)
       test -f $withval/include/pdflib.h && PDFLIB_INCLUDE="$withval/include"

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.106 2002/04/09 17:32:39 ssb Exp $ */
+/* $Id: xml.c,v 1.107 2002/04/13 05:06:33 mfischer Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -352,6 +352,11 @@ static void xml_set_handler(zval **handler, zval **data)
 	/* IS_ARRAY might indicate that we're using array($obj, 'method') syntax */
 	if (Z_TYPE_PP(data) != IS_ARRAY) {
 		convert_to_string_ex(data);
+	}
+
+	/* If we have already a handler, release it */
+	if (*handler) {
+		zval_ptr_dtor(handler);
 	}
 
 	zval_add_ref(data);

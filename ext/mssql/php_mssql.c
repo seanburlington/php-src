@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.86.2.16 2003/03/14 17:50:02 sniper Exp $ */
+/* $Id: php_mssql.c,v 1.86.2.17 2003/04/30 21:52:06 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -768,6 +768,7 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 
 	switch (column_type)
 	{
+		case SQLBIT:
 		case SQLINT1:
 		case SQLINT2:
 		case SQLINT4:
@@ -1987,6 +1988,7 @@ PHP_FUNCTION(mssql_bind)
 				value=(LPBYTE)(&Z_DVAL_PP(var));
 				break;
 
+			case SQLBIT:
 			case SQLINT1:
 			case SQLINT2:
 			case SQLINT4:

@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.13 2001/08/08 02:55:07 sniper Exp $ */
+/* $Id: php_imap.h,v 1.14 2001/08/10 18:32:56 chagenbu Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H
@@ -178,6 +178,7 @@ PHP_FUNCTION(imap_thread);
 #if defined(HAVE_IMAP2000) || defined(HAVE_IMAP2001)
 PHP_FUNCTION(imap_get_quota);
 PHP_FUNCTION(imap_set_quota);
+PHP_FUNCTION(imap_setacl);
 #endif
 
 

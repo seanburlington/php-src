@@ -24,7 +24,7 @@
 #
 # Written by Stig Bakken <ssb@guardian.no> 1997-05-28.
 #
-# $Id: makedist,v 1.23.2.1 2002/03/20 18:54:47 derick Exp $
+# $Id: makedist,v 1.23.2.2 2002/08/24 01:07:31 zeev Exp $
 #
 
 if test "$#" != "2"; then
@@ -96,14 +96,14 @@ echo ""
 cd $DIR || exit 5
 
 # Export Zend
-$ECHO_N "makedist: exporting tag '$CVSTAG' from '$ZENDMOD'...$ECHO_C"
-cvs -z 9 -d $ZENDROOT -Q export -r $CVSTAG $ZENDMOD || exit 4
-echo ""
+#$ECHO_N "makedist: exporting tag '$CVSTAG' from '$ZENDMOD'...$ECHO_C"
+#cvs -z 9 -d $ZENDROOT -Q export -r $CVSTAG $ZENDMOD || exit 4
+#echo ""
 
 # Export TSRM
-$ECHO_N "makedist: exporting tag '$CVSTAG' from '$TSRMMOD'...$ECHO_C"
-cvs -z 9 -d $ZENDROOT -Q export -r $CVSTAG $TSRMMOD || exit 4
-echo ""
+#$ECHO_N "makedist: exporting tag '$CVSTAG' from '$TSRMMOD'...$ECHO_C"
+#cvs -z 9 -d $ZENDROOT -Q export -r $CVSTAG $TSRMMOD || exit 4
+#echo ""
 
 # remove CVS stuff...
 find . \( \( -name CVS -type d \) -o -name .cvsignore \) -exec rm -rf {} \;

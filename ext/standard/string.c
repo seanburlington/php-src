@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.274 2002/05/16 16:04:45 pbannister Exp $ */
+/* $Id: string.c,v 1.275 2002/06/17 11:37:49 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1826,7 +1826,7 @@ PHP_FUNCTION(ucfirst)
 	convert_to_string_ex(str);
 
 	if (!Z_STRLEN_PP(str)) {
-		RETURN_FALSE;
+		RETURN_EMPTY_STRING();
 	}
 
 	ZVAL_STRINGL(return_value, Z_STRVAL_PP(str), Z_STRLEN_PP(str), 1);
@@ -1847,7 +1847,7 @@ PHP_FUNCTION(ucwords)
 	convert_to_string_ex(str);
 
 	if (!Z_STRLEN_PP(str)) {
-		RETURN_FALSE;
+		RETURN_EMPTY_STRING();
 	}
 
 	ZVAL_STRINGL(return_value, Z_STRVAL_PP(str), Z_STRLEN_PP(str), 1);

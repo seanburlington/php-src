@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.68 2000/11/21 00:40:12 hholzgra Exp $ */
+/* $Id: zlib.c,v 1.69 2001/02/01 16:29:07 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -1032,6 +1032,7 @@ int php_deflate_string(const char *str, uint str_length, char **newstr, uint *ne
 
 	*new_length = buf_used + 10 + 8;
 	*newstr = buffer;
+	deflateEnd(&ZLIBG(stream));
 
 	return SUCCESS;
 }

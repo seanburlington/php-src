@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.106 2002/03/01 03:05:50 yohgaki Exp $ */
+/* $Id: zlib.c,v 1.107 2002/03/12 13:06:39 sr Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -919,7 +919,7 @@ PHP_FUNCTION(gzdeflate)
 }
 /* }}} */
 
-/* {{{ proto string gzinflate(string data, int length) 
+/* {{{ proto string gzinflate(string data [, int length]) 
    Unzip a gzip-compressed string */
 PHP_FUNCTION(gzinflate)
 {
@@ -967,7 +967,7 @@ PHP_FUNCTION(gzinflate)
 		if(! s2) { if(s1) efree(s1); RETURN_FALSE; }
 
 		stream.next_in = (Bytef*) Z_STRVAL_PP(data);
-		stream.avail_in = (uInt) Z_STRLEN_PP(data);
+		stream.avail_in = (uInt) Z_STRLEN_PP(data) + 1; /* there is room for \0 */
 
 		stream.next_out = s2;
 		stream.avail_out = (uInt) length;

@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.105 2003/09/26 08:09:55 hholzgra Exp $ */
+/* $Id: exec.c,v 1.106 2003/11/19 15:34:30 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -322,20 +322,33 @@ char *php_escape_shell_arg(char *str) {
 	
 	cmd = safe_emalloc(4, l, 3); /* worst case */
 	
+#ifdef PHP_WIN32
+	cmd[y++] = '"';
+#else
 	cmd[y++] = '\'';
-	
+#endif
+
 	for (x = 0; x < l; x++) {
 		switch (str[x]) {
+#ifdef PHP_WIN32
+		case '"':
+			cmd[y++] = '\\';
+#else
 		case '\'':
 			cmd[y++] = '\'';
 			cmd[y++] = '\\';
 			cmd[y++] = '\'';
+#endif
 			/* fall-through */
 		default:
 			cmd[y++] = str[x];
 		}
 	}
+#ifdef PHP_WIN32
+	cmd[y++] = '"';
+#else
 	cmd[y++] = '\'';
+#endif
 	cmd[y] = '\0';
 	return cmd;
 }

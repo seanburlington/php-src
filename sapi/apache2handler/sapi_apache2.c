@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.43 2004/08/10 17:40:00 rasmus Exp $ */
+/* $Id: sapi_apache2.c,v 1.44 2004/08/11 20:51:41 helly Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -278,8 +278,10 @@ static void php_apache_sapi_log_message_ex(char *msg, request_rec *r)
 }
 
 static time_t php_apache_sapi_get_request_time(void) {
-	php_struct *ctx = SG(server_context);
+	php_struct *ctx;
 	TSRMLS_FETCH();
+	
+	ctx = SG(server_context);
 
 	return ctx->r->request_time;
 }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.21 1999/09/25 16:42:31 thies Exp $ */
+/* $Id: xml.c,v 1.22 1999/09/29 19:13:08 thies Exp $ */
 #define IS_EXT_MODULE
 
 /* boldly assume that if PIC is defined, we are being compiled dynamically */
@@ -327,11 +327,12 @@ xml_destroy_parser(xml_parser *parser)
 static void
 xml_set_handler(char **nameBufp, zval **data)
 {
+	convert_to_string_ex(data);
+
 	if ((*data)->value.str.len > 0) {
 		if (*nameBufp != NULL) {
 			efree(*nameBufp);
 		}
-		convert_to_string_ex(data);
 		*nameBufp = estrndup((*data)->value.str.val, (*data)->value.str.len);
 	} else {
 		if (*nameBufp != NULL) {

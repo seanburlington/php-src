@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.58 2004/02/16 16:35:59 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.59 2004/02/17 08:18:53 dmitry Exp $ */
 
 #include <time.h>
 
@@ -1070,6 +1070,15 @@ static xmlNodePtr to_xml_object(encodeTypePtr type, zval *data, int style, xmlNo
 	int i;
 	sdlTypePtr sdlType = type->sdl_type;
 	TSRMLS_FETCH();
+
+	if (!data || Z_TYPE_P(data) == IS_NULL) {
+		xmlParam = xmlNewNode(NULL,"BOGUS");
+		xmlAddChild(parent, xmlParam);
+	  if (style == SOAP_ENCODED) {
+			xmlSetProp(xmlParam, "xsi:nil", "1");
+		}
+		return xmlParam;
+	}
 
 	if (sdlType) {
 		prop = NULL;

@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@php.net>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.40 2004/02/15 17:43:00 ssb Exp $
+  $Id: CLI.php,v 1.41 2004/02/17 05:49:16 ssb Exp $
 */
 
 require_once "PEAR.php";
@@ -47,7 +47,9 @@ class PEAR_Frontend_CLI extends PEAR
     {
         parent::PEAR();
         $term = getenv('TERM'); //(cox) $_ENV is empty for me in 4.1.1
-        if ($term) {
+        if (function_exists('posix_isatty') && !posix_isatty(1)) {
+            // output is being redirected to a file or through a pipe
+        } elseif ($term) {
             // XXX can use ncurses extension here, if available
             if (preg_match('/^(xterm|vt220|linux)/', $term)) {
                 $this->term['bold'] = sprintf("%c%c%c%c", 27, 91, 49, 109);

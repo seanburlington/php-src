@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.53 2003/08/10 20:39:18 helly Exp $ */
+/* $Id: ming.c,v 1.54 2003/08/11 01:54:44 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1441,8 +1441,10 @@ static void phpByteOutputMethod(byte b, void *data)
 PHP_FUNCTION(swfmovie_output)
 {
 	SWFMovie movie = getMovie(getThis() TSRMLS_CC);
-
 #ifdef HAVE_MING_ZLIB
+	zval **zlimit = NULL;
+	int limit = -1;
+
 	if (zend_get_parameters_ex(1, &zlimit) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
@@ -1476,6 +1478,10 @@ static void phpStreamOutputMethod(byte b, void * data)
 PHP_FUNCTION(swfmovie_saveToFile)
 {
 	zval **x;
+#ifdef HAVE_MING_ZLIB
+	zval **zlimit = NULL;
+	int limit = -1;
+#endif
 	SWFMovie movie = getMovie(getThis() TSRMLS_CC);
 	php_stream *what;
 
@@ -1514,6 +1520,10 @@ PHP_FUNCTION(swfmovie_saveToFile)
 PHP_FUNCTION(swfmovie_save)
 {
 	zval **x;
+#ifdef HAVE_MING_ZLIB
+	zval **zlimit = NULL;
+	int limit = -1;
+#endif
 	long retval;
 	php_stream *stream;
 

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.20.2.2 2001/09/07 00:28:27 sniper Exp $
+dnl $Id: config.m4,v 1.20.2.3 2001/10/19 09:22:13 derick Exp $
 dnl config.m4 for extension Sablot
 
 PHP_ARG_WITH(sablot, for Sablotron XSL support,
@@ -32,7 +32,7 @@ if test "$PHP_SABLOT" != "no"; then
 
   testval=no
   for i in $PHP_EXPAT_DIR $SABLOT_DIR; do
-    if test -f $i/lib/libexpat.a" -o -f "$i/lib/libexpat.$SHLIB_SUFFIX_NAME; then
+    if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.$SHLIB_SUFFIX_NAME; then
       AC_DEFINE(HAVE_LIBEXPAT2,1,[ ])
       PHP_ADD_LIBRARY_WITH_PATH(expat, $i/lib, SABLOT_SHARED_LIBADD)
       PHP_ADD_INCLUDE($i/include)

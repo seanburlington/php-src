@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.28 2000/12/01 09:50:01 andi Exp $ */
+/* $Id: swf.c,v 1.28.2.1 2000/12/09 10:36:13 sas Exp $ */
 
 
 #include "php.h"
@@ -151,6 +151,7 @@ PHP_MINIT_FUNCTION(swf)
 
 PHP_RINIT_FUNCTION(swf)
 {
+	SWFLS_FETCH();
 	SWFG(use_file) = 0;
 
 	return SUCCESS;

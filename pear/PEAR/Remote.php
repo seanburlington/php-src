@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.44 2003/08/04 10:15:34 cox Exp $
+// $Id: Remote.php,v 1.45 2003/08/04 10:38:18 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -61,7 +61,7 @@ class PEAR_Remote extends PEAR
         };
 
         $fp = fopen($filename, 'rb');
-        if ($fp === null) {
+        if (!$fp) {
             return null;
         }
         $content  = fread($fp, filesize($filename));

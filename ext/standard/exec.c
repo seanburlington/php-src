@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.84.2.12 2003/08/28 15:54:35 sas Exp $ */
+/* $Id: exec.c,v 1.84.2.13 2003/11/19 15:34:36 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -462,21 +462,33 @@ char *php_escape_shell_arg(char *str) {
 	l = strlen(str);
 	
 	cmd = emalloc(4 * l + 3); /* worst case */
-	
+#ifdef PHP_WIN32
+	cmd[y++] = '"';
+#else
 	cmd[y++] = '\'';
+#endif
 	
 	for (x = 0; x < l; x++) {
 		switch (str[x]) {
+#ifdef PHP_WIN32
+		case '"':
+			cmd[y++] = '\\';
+#else
 		case '\'':
 			cmd[y++] = '\'';
 			cmd[y++] = '\\';
 			cmd[y++] = '\'';
+#endif
 			/* fall-through */
 		default:
 			cmd[y++] = str[x];
 		}
 	}
+#ifdef PHP_WIN32
+	cmd[y++] = '"';
+#else
 	cmd[y++] = '\'';
+#endif
 	cmd[y] = '\0';
 	return cmd;
 }

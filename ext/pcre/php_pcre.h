@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.h,v 1.9 1999/06/10 14:41:37 andrey Exp $ */
+/* $Id: php_pcre.h,v 1.10 1999/07/05 15:25:51 andrey Exp $ */
 
 #ifndef _PHP_PCRE_H
 #define _PHP_PCRE_H
@@ -54,6 +54,7 @@ extern zend_module_entry pcre_module_entry;
 typedef struct {
         pcre *re;
         pcre_extra *extra;
+	int preg_options;
 } pcre_cache_entry;
 
 typedef struct {

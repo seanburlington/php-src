@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.68 2005/01/18 00:14:56 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.69 2005/03/03 03:31:59 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2141,6 +2141,12 @@ PHPAPI int php_copy_file(char *src, char *dest TSRMLS_DC)
 {
 	php_stream *srcstream = NULL, *deststream = NULL;
 	int ret = FAILURE;
+	struct stat src_s, dest_s;
+
+	/* safety check to ensure that source & destination files are not the same file */
+	if (stat(src, &src_s) || (stat(dest, &dest_s) == 0 && src_s.st_ino == dest_s.st_ino)) {
+		return ret;
+	}
 
 	srcstream = php_stream_open_wrapper(src, "rb",
 				STREAM_DISABLE_OPEN_BASEDIR | REPORT_ERRORS,

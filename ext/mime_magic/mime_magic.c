@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.38 2004/08/03 04:15:34 fmk Exp $ 
+  $Id: mime_magic.c,v 1.39 2004/12/16 12:34:31 sniper Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -349,7 +349,7 @@ PHP_FUNCTION(mime_content_type)
 
 	if (conf->magic == (struct magic *)-1) {
 		if(MIME_MAGIC_G(debug))
-			php_error_docref("http://www.php.net/mime_magic" TSRMLS_CC, E_ERROR, "mime_magic could not be initialized, magic file %s is not avaliable", conf->magicfile);
+			php_error_docref("http://www.php.net/mime_magic" TSRMLS_CC, E_ERROR, "mime_magic could not be initialized, magic file %s is not available", conf->magicfile);
 		RETURN_FALSE;
 	} 
 

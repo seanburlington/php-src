@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.49 2004/12/06 18:55:30 stas Exp $ */
+/* $Id: sapi_apache2.c,v 1.50 2004/12/16 12:34:32 sniper Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -142,7 +142,7 @@ php_apache_sapi_read_post(char *buf, uint count_bytes TSRMLS_DC)
 	/*
 	 * This loop is needed because ap_get_brigade() can return us partial data
 	 * which would cause premature termination of request read. Therefor we
-	 * need to make sure that if data is avaliable we fill the buffer completely.
+	 * need to make sure that if data is available we fill the buffer completely.
 	 */
 
 	while (ap_get_brigade(r->input_filters, brigade, AP_MODE_READBYTES, APR_BLOCK_READ, len) == APR_SUCCESS) {

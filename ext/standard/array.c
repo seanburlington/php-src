@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.68 2000/08/04 09:24:36 hholzgra Exp $ */
+/* $Id: array.c,v 1.69 2000/08/18 12:28:28 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1926,7 +1926,7 @@ PHP_FUNCTION(array_values)
 
 
 /* {{{ proto array array_count_values(array input)
-   Return the value as key and the frequency of that value in <input> as value */
+   Return the value as key and the frequency of that value in input as value */
 PHP_FUNCTION(array_count_values)
 {
 	zval	   **input,		/* Input array */

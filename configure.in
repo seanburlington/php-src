@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.52 1999/12/03 15:12:20 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.53 1999/12/03 18:53:41 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -181,6 +181,8 @@ AC_CHECK_LIB(crypt, crypt, [
 dnl The sin may be in a library which need not be specifed
 dnl as well as res_search resides in libsocket
 AC_CHECK_LIB(m, sin)
+
+AC_CHECK_LIB(resolv, inet_aton)
 
 dnl The res_search may be in libsocket as well, and if it is
 dnl make sure to check for dn_skipname in libresolv, or if res_search

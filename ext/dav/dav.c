@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dav.c,v 1.8 1999/12/24 17:39:25 andi Exp $ */
+/* $Id: dav.c,v 1.9 1999/12/26 21:20:43 zeev Exp $ */
 
 #define IS_EXT_MODULE
 #if COMPILE_DL
@@ -192,7 +192,7 @@ dav_call_handler(char *funcName, int argc, pval **argv)
 		HashTable *function_table;
 
 		func = php3i_string_pval(funcName);
-		retval = ALLOC_ZVAL();
+		ALLOC_ZVAL(retval);
 		function_table = php3i_get_function_table();
 		if (call_user_function(function_table, NULL, func, retval, argc, argv) == FAILURE) {
 			php3tls_pval_destructor(retval);

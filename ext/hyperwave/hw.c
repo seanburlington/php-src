@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.35 1999/12/24 15:43:36 andi Exp $ */
+/* $Id: hw.c,v 1.36 1999/12/26 21:20:44 zeev Exp $ */
 #if COMPILE_DL
 #include "dl/phpdl.h"
 #endif
@@ -1175,7 +1175,7 @@ php_printf("%s\n", ptr);
 	while(attrname != NULL) {
 		char *name;
 
-		user_arr = ALLOC_ZVAL();
+		ALLOC_ZVAL(user_arr);
 		if (array_init(user_arr) == FAILURE) {
 			efree(object);
 			RETURN_FALSE;

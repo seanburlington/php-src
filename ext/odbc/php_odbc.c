@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.21 1999/12/24 17:39:26 andi Exp $ */
+/* $Id: php_odbc.c,v 1.22 1999/12/26 21:20:45 zeev Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -1096,7 +1096,7 @@ PHP_FUNCTION(odbc_fetch_into)
 		result->fetched++;
 
 	for(i = 0; i < result->numcols; i++) {
-		tmp = ALLOC_ZVAL();
+		ALLOC_ZVAL(tmp);
 		tmp->refcount = 1;
 		tmp->type = IS_STRING;
 		tmp->value.str.len = 0;

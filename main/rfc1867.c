@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.17 1999/12/24 17:39:23 andi Exp $ */
+/* $Id: rfc1867.c,v 1.18 1999/12/26 21:20:41 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -45,7 +45,7 @@ static void php_mime_split(char *buf, int cnt, char *boundary)
 	PLS_FETCH();
 
 	if (PG(track_vars)) {
-		http_post_vars = ALLOC_ZVAL();
+		ALLOC_ZVAL(http_post_vars);
 		array_init(http_post_vars);
 		INIT_PZVAL(http_post_vars);
 		

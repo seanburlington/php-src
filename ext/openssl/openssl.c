@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.47 2002/05/01 08:22:16 wez Exp $ */
+/* $Id: openssl.c,v 1.48 2002/05/17 12:42:39 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2362,7 +2362,7 @@ PHP_FUNCTION(openssl_private_encrypt)
 }
 /* }}} */
 
-/* {{{ proto bool openssl_private_decrypt(string data, string crypted, mixed key [, int padding])
+/* {{{ proto bool openssl_private_decrypt(string data, string decrypted, mixed key [, int padding])
    Decrypts data with private key */
 PHP_FUNCTION(openssl_private_decrypt)
 {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.120 2002/03/07 23:52:57 jtate Exp $ */
+/* $Id: php_domxml.c,v 1.121 2002/03/08 09:18:31 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2614,17 +2614,22 @@ PHP_FUNCTION(domxml_intdtd)
 }
 /* }}} */
 
-/* {{{ proto string domxml_dump_mem([object doc_handle])
-   Dumps document into string */
+/* {{{ proto string domxml_dump_mem([object doc_handle[,int format] ])
+   Dumps document into string and optionally formats it */
 PHP_FUNCTION(domxml_dump_mem)
 {
 	zval *id;
 	xmlDoc *docp;
 	xmlChar *mem;
+	int format = 0;
 	int size;
 
-	DOMXML_PARAM_NONE(docp, id, le_domxmldocp);
-	xmlDocDumpMemory(docp, &mem, &size);
+	DOMXML_PARAM_ONE(docp, id, le_domxmldocp,"|l",&format);
+	if (format)
+		xmlDocDumpFormatMemory(docp, &mem, &size, format);
+	else
+		xmlDocDumpMemory(docp, &mem, &size);
+
 	if (!size) {
 		RETURN_FALSE;
 	}

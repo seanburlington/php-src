@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.19.2.1 2001/10/11 23:51:29 ssb Exp $ */
+/* $Id: iconv.c,v 1.19.2.2 2001/10/22 02:30:42 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -51,7 +51,7 @@
 /* {{{ iconv_functions[] 
  */
 function_entry iconv_functions[] = {
-    PHP_FE(iconv,									NULL)
+    PHP_NAMED_FE(iconv,php_if_iconv,                NULL)
     PHP_FE(ob_iconv_handler,						NULL)
     PHP_FE(iconv_get_encoding,						NULL)
     PHP_FE(iconv_set_encoding,						NULL)
@@ -164,7 +164,7 @@ int php_iconv_string(char *in_p, char **out, char *in_charset, char *out_charset
 
 /* {{{ proto string iconv(string in_charset, string out_charset, string str)
    Returns str converted to the out_charset character set */
-PHP_FUNCTION(iconv)
+PHP_NAMED_FUNCTION(php_if_iconv)
 {
     zval **in_charset, **out_charset, **in_buffer;
 	char *out_buffer;

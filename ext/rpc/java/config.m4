@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.33 2002/08/11 15:33:24 kalowsky Exp $
+dnl $Id: config.m4,v 1.34 2002/08/14 13:48:43 kalowsky Exp $
 dnl
 AC_DEFUN(JAVA_FIND_JAR, [
  AC_MSG_CHECKING([Java Jar location])
@@ -25,6 +25,20 @@ AC_DEFUN(JAVA_FIND_JAR, [
 AC_DEFUN(JAVA_FIND_C, [
  AC_MSG_CHECKING([Java C location])
   JAVA_C=`which javac`
+  if test -z "$JAVA_C"; then
+  dnl
+  dnl we will auto assume that the bin directory is underneath
+  dnl the user provided directory, and it includes the javac
+  dnl directory.  
+  dnl
+    if test -z "$PHP_JAVA" != "yes"; then
+     if test -z $PHP_JAVA/bin; then
+      JAVA_C=$PHP_JAVA/bin/javac
+     else
+      AC_MSG_ERROR([Unable to locate $PHP_JAVA/bin])
+     fi
+    fi
+  fi
   if test -z "$JAVA_C"; then
     AC_MSG_ERROR([Unable to locate the javac binary in your system path
 Either adjust your Java installation or provide the Java installation path,

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.188 2004/05/20 17:46:20 andrey Exp $ */
+/* $Id: var.c,v 1.189 2004/05/20 21:15:42 andrey Exp $ */
 
 
 /* {{{ includes 
@@ -85,7 +85,9 @@ static int php_object_property_dump(zval **zv, int num_args, va_list args, zend_
 			}
 		} else {
 			php_printf("%*c[\"%s", level + 1, ' ', hash_key->arKey);
+#ifdef ANDREY_0
 			ZEND_PUTS(":public");
+#endif
 		}
 		ZEND_PUTS("\"]=>\n");
 	}

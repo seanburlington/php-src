@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.66.2.2 2003/06/14 18:45:23 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.66.2.3 2003/06/30 17:44:19 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -2381,6 +2381,7 @@ DLEXPORT PHP_FUNCTION(udm_cat_list)
 			    add_next_index_stringl(return_value, C.Category[i].name,strlen(C.Category[i].name),1);
 			}
 		    } else {
+			free(buf);
 			RETURN_FALSE;
 		    }
 		}
@@ -2455,6 +2456,7 @@ DLEXPORT PHP_FUNCTION(udm_cat_path)
 			    add_next_index_stringl(return_value, C.Category[i].name,strlen(C.Category[i].name),1);
 			}
 		    } else {
+			free(buf);
 			RETURN_FALSE;
 		    }
 		}

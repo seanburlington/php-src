@@ -1,9 +1,5 @@
 PHP 4.0                                                                    NEWS
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-?? ??? 200?, Version 4.0.7-dev
-- Fixed race in writing session files (Sascha)
-- Fixed memory leak upon re-registering constants (Sascha, Zend Engine)
-- Upgraded expat to version 1.95.1. (Thies)
 
 ?? ??? 200?, Version 4.0.6
 - Fixed a possible crash in the PHP CGI when no input file is

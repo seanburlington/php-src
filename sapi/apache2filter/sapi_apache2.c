@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.131 2004/10/23 13:48:04 jorton Exp $ */
+/* $Id: sapi_apache2.c,v 1.132 2005/01/07 06:28:08 sniper Exp $ */
 
 #include <fcntl.h>
 
@@ -433,6 +433,9 @@ static void php_apache_request_dtor(ap_filter_t *f TSRMLS_DC)
 	}
 	if (SG(request_info).request_uri) {
 		free(SG(request_info).request_uri);
+	}
+	if (SG(request_info).path_translated) {
+		free(SG(request_info).path_translated);
 	}
 }
 

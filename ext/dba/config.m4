@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.29.2.6 2003/01/28 06:27:19 helly Exp $
+dnl $Id: config.m4,v 1.29.2.7 2003/01/28 15:00:15 sniper Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -10,8 +10,7 @@ AC_DEFUN(PHP_DBA_STD_BEGIN,[
 
 AC_DEFUN(PHP_TEMP_LDFLAGS,[
   old_LDFLAGS=$LDFLAGS
-dnl  LDFLAGS="$1 $LDFLAGS"
-  LDFLAGS="$1"
+  LDFLAGS="$1 $LDFLAGS"
   $2
   LDFLAGS=$old_LDFLAGS
 ])

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.h,v 1.6 2001/08/07 11:22:32 dickmeiss Exp $ */
+/* $Id: php_yaz.h,v 1.7 2001/08/10 12:53:06 dickmeiss Exp $ */
 
 #ifndef PHP_YAZ_H
 #define PHP_YAZ_H
@@ -49,6 +49,7 @@ PHP_FUNCTION(yaz_present);
 PHP_FUNCTION(yaz_ccl_conf);
 PHP_FUNCTION(yaz_ccl_parse);
 PHP_FUNCTION(yaz_database);
+PHP_FUNCTION(yaz_sort);
 
 ZEND_BEGIN_MODULE_GLOBALS(yaz)
     int assoc_seq;

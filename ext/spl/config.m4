@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2003/05/01 23:28:28 helly Exp $
+dnl $Id: config.m4,v 1.1.1.1 2003/05/01 23:28:28 helly Exp $
 dnl config.m4 for extension SPL
 
 PHP_ARG_ENABLE(spl, enable SPL suppport,

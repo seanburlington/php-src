@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.73 2003/01/03 05:34:05 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.74 2003/01/03 05:38:50 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1438,6 +1438,11 @@ static php_iconv_err_t _php_iconv_mime_decode(smart_str *pretval, const char *st
 		}
 	}
 
+	if (cd != (iconv_t)(-1)) {
+		if ((err = _php_iconv_appendl(pretval, NULL, 0, cd)) != PHP_ICONV_ERR_SUCCESS) {
+			goto out;
+		}
+	}
 	smart_str_0(pretval);
 out:
 	if (cd != (iconv_t)(-1)) {

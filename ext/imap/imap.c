@@ -21,7 +21,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.7 1999/07/31 10:38:33 zeev Exp $ */
+/* $Id: imap.c,v 1.8 1999/07/31 20:21:07 zeev Exp $ */
 
 #define IMAP41
 
@@ -182,12 +182,27 @@ MAILSTREAM *mail_close_it (pils *imap_le_struct)
 
 inline int add_assoc_object(pval *arg, char *key, pval *tmp)
 {
-	return _php3_hash_update(arg->value.ht, key, strlen(key)+1, (void *) &tmp, sizeof(pval *), NULL);
+	HashTable *symtable;
+	
+	if (arg->type == IS_OBJECT) {
+		symtable = arg->value.obj.properties;
+	} else {
+		symtable = arg->value.ht;
+	}
+	return _php3_hash_update(symtable, key, strlen(key)+1, (void *) &tmp, sizeof(pval *), NULL);
 }
 
 inline int add_next_index_object(pval *arg, pval *tmp)
 {
-	return _php3_hash_next_index_insert( arg->value.ht, (void *) &tmp, sizeof(pval *), NULL); 
+	HashTable *symtable;
+	
+	if (arg->type == IS_OBJECT) {
+		symtable = arg->value.obj.properties;
+	} else {
+		symtable = arg->value.ht;
+	}
+
+	return _php3_hash_next_index_insert(symtable, (void *) &tmp, sizeof(pval *), NULL); 
 }
 
 

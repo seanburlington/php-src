@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.401 2005/03/07 21:28:38 helly Exp $ */
+/* $Id: file.c,v 1.402 2005/03/07 21:52:34 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1240,8 +1240,8 @@ PHPAPI PHP_FUNCTION(fwrite)
 
 	PHP_STREAM_TO_ZVAL(stream, arg1);
 
-	if (!arg3 && PG(magic_quotes_runtime)) {
-		buffer = estrndup(Z_STRVAL_PP(arg2), Z_STRLEN_PP(arg2));
+	if (PG(magic_quotes_runtime)) {
+		buffer = estrndup(Z_STRVAL_PP(arg2), num_bytes);
 		php_stripslashes(buffer, &num_bytes TSRMLS_CC);
 	}
 

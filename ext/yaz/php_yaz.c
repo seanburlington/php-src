@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.9 2001/02/12 23:31:10 dickmeiss Exp $ */
+/* $Id: php_yaz.c,v 1.10 2001/02/13 20:02:52 dickmeiss Exp $ */
 
 #include "php.h"
 
@@ -746,11 +746,10 @@ static int send_present (Yaz_Association t)
 	Z_PresentRequest *req = apdu->u.presentRequest;
 	int i = 0;
 	
-	if (!t->resultSets)	           /* no result set yet? */
-	{
+	if (t->error)                  /* don't continue on error */
 		return 0;
-	}
-	
+	if (!t->resultSets)	           /* no result set yet? */
+		return 0;
 	while (t->resultSets->recordList)
 	{
 		if (i >= t->resultSets->recordList->num_records) 

@@ -25,7 +25,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.112.2.7 2002/09/09 20:59:17 kalowsky Exp $ */
+/* $Id: php_imap.c,v 1.112.2.8 2002/09/19 16:59:11 derick Exp $ */
 
 #define IMAP41
 
@@ -2309,7 +2309,7 @@ PHP_FUNCTION(imap_utf7_decode)
 				break;
 			case ST_DECODE2:
 				outp[1] = UNB64(*inp);
-				c = outpp[1] >> 2;
+				c = outp[1] >> 2;
 				*outp++ |= c;
 				*outp <<= 6;
 				state = ST_DECODE3;

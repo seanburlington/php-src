@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fribidi.c,v 1.28 2002/09/29 18:53:19 sniper Exp $ */
+/* $Id: fribidi.c,v 1.29 2002/10/10 04:26:03 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -99,8 +99,8 @@ PHP_MSHUTDOWN_FUNCTION(fribidi)
 PHP_MINFO_FUNCTION(fribidi)
 {
 	php_info_print_table_start();
-	php_info_print_table_header(2, "FriBidi support", "enabled");
-	php_info_print_table_header(2, "FriBidi version", FRIBIDI_VERSION);
+	php_info_print_table_row(2, "FriBidi support", "enabled");
+	php_info_print_table_row(2, "FriBidi version", FRIBIDI_VERSION);
 	php_info_print_table_end();
 }
 /* }}} */

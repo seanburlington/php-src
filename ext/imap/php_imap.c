@@ -23,7 +23,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.24 2000/05/11 13:52:24 andi Exp $ */
+/* $Id: php_imap.c,v 1.25 2000/05/17 17:54:54 hholzgra Exp $ */
 
 #define IMAP41
 
@@ -1576,7 +1576,7 @@ PHP_FUNCTION(imap_undelete)
 /* }}} */
 
 
-/* {{{ proto object imap_header(int stream_id, int msg_no [, int from_length [, int subject_length [, string default_host]]])
+/* {{{ proto object imap_headerinfo(int stream_id, int msg_no [, int from_length [, int subject_length [, string default_host]]])
    Read the headers of the message */
 PHP_FUNCTION(imap_headerinfo)
 {

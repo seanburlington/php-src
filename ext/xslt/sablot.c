@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.13 2001/06/26 22:48:43 sterling Exp $ */
+/* $Id: sablot.c,v 1.14 2001/07/03 12:16:02 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -437,7 +437,7 @@ PHP_FUNCTION(xslt_set_log)
 	}
 	ZEND_FETCH_RESOURCE(handle, php_xslt *, processor_p, -1, le_xslt_name, le_xslt);
 	
-	if (Z_TYPE_PP(logfile) == IS_LONG) {
+	if (Z_TYPE_PP(logfile) == IS_LONG || Z_TYPE_PP(logfile) == IS_BOOL || Z_TYPE_PP(logfile) == IS_DOUBLE) {
 		XSLT_LOG(handle).do_log = Z_LVAL_PP(logfile);
 		RETURN_NULL();
 	}

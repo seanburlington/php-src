@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.66 2000/09/19 17:32:27 sas Exp $ */
+/* $Id: basic_functions.h,v 1.67 2000/10/29 23:34:33 zeev Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -147,6 +147,8 @@ typedef struct {
 	zval **array_walk_func_name;
 	zval **user_compare_func_name;
 	zend_llist *user_tick_functions;
+
+	zval *active_ini_file_section;
 	
 	HashTable sm_protected_env_vars;
 	char *sm_allowed_env_vars;

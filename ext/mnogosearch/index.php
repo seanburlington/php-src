@@ -1,6 +1,6 @@
 <!-- 
     $Source: /repository/php-src/ext/mnogosearch/Attic/index.php,v $
-    $Id: index.php,v 1.2 2001/09/29 09:25:21 gluke Exp $ 
+    $Id: index.php,v 1.3 2001/09/29 14:09:40 gluke Exp $ 
 -->
 
 <?
@@ -543,6 +543,17 @@ function make_nav($query_orig){
 
    if ($localcharset != '') {
    	Udm_Set_Agent_Param($udm_agent,UDM_PARAM_CHARSET,$localcharset);
+   }
+   
+   if (Udm_Api_Version() >= 30200) {
+   	if ($localcharset == '') Udm_Set_Agent_Param($udm_agent,UDM_PARAM_CHARSET,'utf-8');
+   	if ($browsercharset != '') {
+   		Udm_Set_Agent_Param($udm_agent,UDM_PARAM_BROWSER_CHARSET,$browsercharset);
+		Header ("Content-Type: text/html; charset=$browsercharset"); ?>	
+	} else {
+		Udm_Set_Agent_Param($udm_agent,UDM_PARAM_BROWSER_CHARSET,'utf-8');
+		Header ("Content-Type: text/html; charset=utf-8"); ?>	
+	}	
    }
 
    for ($i=0; $i < count($stopwordtable_arr); $i++) {

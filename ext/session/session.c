@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.295 2002/03/29 16:00:27 mlwmohawk Exp $ */
+/* $Id: session.c,v 1.296 2002/03/30 16:29:15 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -495,7 +495,7 @@ static void php_session_decode(const char *val, int vallen TSRMLS_DC)
 
 static char hexconvtab[] = "0123456789abcdef";
 
-char *php_session_create_id(PS_CREATESID_ARGS)
+char *php_session_create_id(PS_CREATE_SID_ARGS)
 {
 	PHP_MD5_CTX context;
 	unsigned char digest[16];
@@ -557,7 +557,7 @@ static void php_session_initialize(TSRMLS_D)
 	
 	/* If there is no ID, use session module to create one */
 	if (!PS(id))
-		PS(id) = PS(mod)->createsid(&PS(mod_data), NULL);
+		PS(id) = PS(mod)->create_sid(&PS(mod_data), NULL TSRMLS_CC);
 	
 	/* Read data */
 	/* Question: if you create a SID here, should you also try to read data?

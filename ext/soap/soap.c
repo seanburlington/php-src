@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.110.2.14 2004/12/14 13:58:18 dmitry Exp $ */
+/* $Id: soap.c,v 1.110.2.15 2005/01/20 06:13:53 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1965,6 +1965,14 @@ PHP_METHOD(SoapClient, SoapClient)
 				    Z_TYPE_PP(tmp) == IS_STRING) {
 					add_property_stringl(this_ptr, "_proxy_password", Z_STRVAL_PP(tmp), Z_STRLEN_PP(tmp), 1);
 				}
+			}
+		}
+		if (zend_hash_find(ht, "local_cert", sizeof("local_cert"), (void**)&tmp) == SUCCESS &&
+		    Z_TYPE_PP(tmp) == IS_STRING) {
+			add_property_stringl(this_ptr, "_local_cert", Z_STRVAL_PP(tmp), Z_STRLEN_PP(tmp), 1);
+			if (zend_hash_find(ht, "passphrase", sizeof("passphrase"), (void**)&tmp) == SUCCESS &&
+			    Z_TYPE_PP(tmp) == IS_STRING) {
+				add_property_stringl(this_ptr, "_passphrase", Z_STRVAL_PP(tmp), Z_STRLEN_PP(tmp), 1);
 			}
 		}
 		if (zend_hash_find(ht, "trace", sizeof("trace"), (void**)&tmp) == SUCCESS &&

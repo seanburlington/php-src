@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.9 2003/03/15 22:51:49 hholzgra Exp $ 
+  $Id: mysqli_nonapi.c,v 1.10 2003/06/06 08:57:51 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -169,7 +169,7 @@ PHP_FUNCTION(mysqli_query) {
 	}
 
 	if (!mysql_field_count(mysql)) {
-		RETURN_FALSE;
+		RETURN_TRUE;
 	}
 
 	/* profiler result information */

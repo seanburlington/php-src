@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx.c,v 1.55 2003/09/08 07:19:08 mboeren Exp $ */
+/* $Id: dbx.c,v 1.56 2003/11/03 11:15:23 mboeren Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -365,7 +365,7 @@ ZEND_FUNCTION(dbx_close)
 }
 /* }}} */
 
-/* {{{ proto dbx_result_object dbx_query(dbx_link_object dbx_link, string sql_statement [, long flags])
+/* {{{ proto dbx_result_object dbx_query(dbx_link_object dbx_link, string sql_statement [, int flags])
    Returns a dbx_link_object on success and returns 0 on failure */
 ZEND_FUNCTION(dbx_query)
 {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_standard.h,v 1.17 2002/12/31 16:07:53 sebastian Exp $ */
+/* $Id: php_standard.h,v 1.18 2003/01/01 11:04:44 wez Exp $ */
 
 #include "basic_functions.h"
 #include "php_math.h"
@@ -62,6 +62,9 @@
 #include "aggregation.h"
 
 #define phpext_standard_ptr basic_functions_module_ptr
+PHP_MINIT_FUNCTION(standard_filters);
+PHP_MSHUTDOWN_FUNCTION(standard_filters);
+
 
 /*
  * Local variables:

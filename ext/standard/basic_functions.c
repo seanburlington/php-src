@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.551 2002/12/31 18:39:29 wez Exp $ */
+/* $Id: basic_functions.c,v 1.552 2003/01/01 11:04:43 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1031,7 +1031,7 @@ PHP_MINIT_FUNCTION(basic)
 	PHP_MINIT(file) (INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(pack) (INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(browscap) (INIT_FUNC_ARGS_PASSTHRU);
-	PHP_MINIT(string_filters) (INIT_FUNC_ARGS_PASSTHRU);
+	PHP_MINIT(standard_filters) (INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(user_filters) (INIT_FUNC_ARGS_PASSTHRU);
 
 #if defined(HAVE_LOCALECONV) && defined(ZTS)
@@ -1104,7 +1104,7 @@ PHP_MSHUTDOWN_FUNCTION(basic)
 	PHP_MSHUTDOWN(assert) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_MSHUTDOWN(url_scanner_ex) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_MSHUTDOWN(file) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
-	PHP_MSHUTDOWN(string_filters) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
+	PHP_MSHUTDOWN(standard_filters) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #if defined(HAVE_LOCALECONV) && defined(ZTS)
 	PHP_MSHUTDOWN(localeconv) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #endif

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.1 2002/12/31 18:39:35 wez Exp $ */
+/* $Id: user_filters.c,v 1.2 2003/01/01 11:04:44 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -445,3 +445,13 @@ PHP_FUNCTION(stream_register_filter)
 	efree(fdat);
 }
 /* }}} */
+
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
+ */

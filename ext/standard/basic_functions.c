@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.36 2004/04/02 09:33:49 derick Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.37 2004/05/10 07:25:11 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1004,7 +1004,7 @@ PHPAPI double php_get_nan(void)
 #if HAVE_HUGE_VAL_NAN
 	return HUGE_VAL + -HUGE_VAL;
 #elif defined(__i386__) || defined(_X86_) || defined(ALPHA) || defined(_ALPHA) || defined(__alpha)
-	double val = 0;
+	double val = 0.0;
 	((php_uint32*)&val)[1] = PHP_DOUBLE_QUIET_NAN_HIGH;
 	((php_uint32*)&val)[0] = 0;
 	return val;
@@ -1017,10 +1017,10 @@ PHPAPI double php_get_nan(void)
 
 PHPAPI double php_get_inf(void)
 {
-#if HAVE_HUGE_VAL_NAN
+#if HAVE_HUGE_VAL_INF
 	return HUGE_VAL;
 #elif defined(__i386__) || defined(_X86_) || defined(ALPHA) || defined(_ALPHA) || defined(__alpha)
-	double val = 0;
+	double val = 0.0;
 	((php_uint32*)&val)[1] = PHP_DOUBLE_INFINITY_HIGH;
 	((php_uint32*)&val)[0] = 0;
 	return val;

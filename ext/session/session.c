@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.320 2002/09/29 15:55:11 iliaa Exp $ */
+/* $Id: session.c,v 1.321 2002/09/29 18:33:14 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -537,6 +537,11 @@ static void php_session_initialize(TSRMLS_D)
 {
 	char *val;
 	int vallen;
+
+	if (!PS(mod)) {
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Failed to initialize session module.");
+		return;
+	}
 
 	/* Open session handler first */
 	if (PS(mod)->open(&PS(mod_data), PS(save_path), PS(session_name) TSRMLS_CC) == FAILURE) {

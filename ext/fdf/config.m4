@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.23 2003/08/05 11:17:01 sniper Exp $
+dnl $Id: config.m4,v 1.24 2003/10/01 02:53:05 sniper Exp $
 dnl
 
 PHP_ARG_WITH(fdftk, for FDF support,
@@ -23,7 +23,7 @@ if test "$PHP_FDFTK" != "no"; then
   esac
 
   if test "$PHP_FDFTK" = "yes"; then 
-    PHP_FDFTK="/usr /usr/local ../FDFToolkitForUNIX ext/fdf/FDFToolkitForUNIX ../fdftk ext/fdf/fdftk"
+    PHP_FDFTK="/usr/local /usr ../FDFToolkitForUNIX ext/fdf/FDFToolkitForUNIX ../fdftk ext/fdf/fdftk"
   fi
 
   for dir in $PHP_FDFTK; do

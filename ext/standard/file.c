@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.347 2003/06/13 21:33:59 pollita Exp $ */
+/* $Id: file.c,v 1.348 2003/06/14 17:08:49 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -131,6 +131,7 @@ static ZEND_RSRC_DTOR_FUNC(file_context_dtor)
 {
 	php_stream_context *context = (php_stream_context*)rsrc->ptr;
 	zval_dtor(context->options);
+	context->options = NULL;
 	php_stream_context_free(context);
 }
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.267 2000/10/16 22:12:28 rasmus Exp $ */
+/* $Id: basic_functions.c,v 1.268 2000/10/22 14:41:02 sas Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -729,7 +729,7 @@ PHP_MINIT_FUNCTION(basic)
 		if(FAILURE==php_register_url_wrapper("ftp",php_fopen_url_wrap_ftp)) {
 			return  FAILURE;
 		}  
-		if(FAILURE==php_register_url_wrapper("php",php_fopen_url_wrap_ftp)) {
+		if(FAILURE==php_register_url_wrapper("php",php_fopen_url_wrap_php)) {
 			return  FAILURE;
 		}  
 	}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.22 2001/02/01 15:40:35 stas Exp $ */
+/* $Id: php_gd.h,v 1.23 2001/02/20 18:00:43 dbeu Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -43,9 +43,16 @@
 #define PHP_GDIMG_TYPE_XBM 5
 #define PHP_GDIMG_TYPE_XPM 6
 
-extern const char php_sig_gif[3];
-extern const char php_sig_jpg[3];
-extern const char php_sig_png[3];
+#ifdef PHP_WIN32
+#define PHP_GD_API __declspec(dllexport)
+#else
+#define PHP_GD_API
+#endif
+
+
+PHPAPI extern const char php_sig_gif[3];
+PHPAPI extern const char php_sig_jpg[3];
+PHPAPI extern const char php_sig_png[3];
 
 extern zend_module_entry gd_module_entry;
 #define phpext_gd_ptr &gd_module_entry

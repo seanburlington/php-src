@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.25 2001/01/19 16:52:40 sniper Exp $ */
+/* $Id: image.c,v 1.26 2001/02/20 18:00:44 dbeu Exp $ */
 /* 
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -49,11 +49,11 @@
 #include "php_image.h"
 
 /* file type markers */
-const char php_sig_gif[3] = {'G', 'I', 'F'};
-const char php_sig_swf[3] = {'F', 'W', 'S'};
-const char php_sig_jpg[3] = {(char) 0xff, (char) 0xd8, (char) 0xff};
-const char php_sig_png[8] = {(char) 0x89, (char) 0x50, (char) 0x4e, (char) 0x47, 
-							 (char) 0x0d, (char) 0x0a, (char) 0x1a, (char) 0x0a};
+PHPAPI const char php_sig_gif[3] = {'G', 'I', 'F'};
+PHPAPI const char php_sig_swf[3] = {'F', 'W', 'S'};
+PHPAPI const char php_sig_jpg[3] = {(char) 0xff, (char) 0xd8, (char) 0xff};
+PHPAPI const char php_sig_png[8] = {(char) 0x89, (char) 0x50, (char) 0x4e, (char) 0x47, 
+(char) 0x0d, (char) 0x0a, (char) 0x1a, (char) 0x0a};
 
 /* return info as a struct, to make expansion easier */
 

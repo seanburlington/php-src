@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.115 2001/02/15 14:48:56 thies Exp $ */
+/* $Id: gd.c,v 1.116 2001/02/20 18:00:42 dbeu Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -48,6 +48,12 @@
 static int le_gd, le_gd_font;
 #if HAVE_LIBT1
 static int le_ps_font, le_ps_enc;
+#endif
+
+#ifdef ZTS
+int gd_globals_id;
+#else
+static php_gd_globals gd_globals;
 #endif
 
 #include <gd.h>
@@ -193,12 +199,6 @@ zend_module_entry gd_module_entry = {
 	"gd", gd_functions, PHP_MINIT(gd), NULL, NULL, NULL, PHP_MINFO(gd), STANDARD_MODULE_PROPERTIES
 };
 
-#ifdef ZTS
-int gd_globals_id;
-#else
-static php_gd_globals gd_globals;
-#endif
-
 #ifdef COMPILE_DL_GD
 ZEND_GET_MODULE(gd)
 #endif
@@ -310,7 +310,7 @@ PHP_MINFO_FUNCTION(gd)
 }
 
 /* Need this for cpdf. See also comment in file.c php3i_get_le_fp() */
-PHPAPI int phpi_get_le_gd(void)
+PHP_GD_API int phpi_get_le_gd(void)
 {
 	GDLS_FETCH();
 

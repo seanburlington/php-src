@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.61 2001/01/10 04:01:02 david Exp $ */
+/* $Id: datetime.c,v 1.62 2001/01/10 06:48:06 david Exp $ */
 
 
 #include "php.h"
@@ -458,7 +458,10 @@ php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 			case 'B':	/* Swatch Beat a.k.a. Internet Time */
 				beat =  (((((long)the_time)-(((long)the_time) -
 					((((long)the_time) % 86400) + 3600))) * 10) / 864);
-				if (beat > 999) beat = 0;
+				while (beat < 0) {
+					beat += 1000;
+				}
+				beat = beat % 1000;
 				sprintf(tmp_buff, "%03d", beat); /* SAFE */
 				strcat(return_value->value.str.val, tmp_buff);
 				break;

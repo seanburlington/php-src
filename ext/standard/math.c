@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.60 2001/09/19 10:57:50 sas Exp $ */
+/* $Id: math.c,v 1.61 2001/09/19 11:03:58 sas Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -718,7 +718,7 @@ _php_math_basetozval(zval *arg, int base, zval *ret) {
 
 	s = Z_STRVAL_P(arg);
 
-	for (i = Z_STRLEN_P(arg); i >= 0; i--) {
+	for (i = Z_STRLEN_P(arg); i > 0; i--) {
 		c = *s++;
 
 		digit = (c >= '0' && c <= '9') ? c - '0'

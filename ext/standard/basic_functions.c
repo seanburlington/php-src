@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.663 2004/04/12 12:21:24 andi Exp $ */
+/* $Id: basic_functions.c,v 1.664 2004/04/22 14:26:03 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -886,6 +886,13 @@ zend_module_entry basic_functions_module = {
 static void php_putenv_destructor(putenv_entry *pe)
 {
 	if (pe->previous_value) {
+#if _MSC_VER >= 1300
+		/* VS.Net has a bug in putenv() when setting a variable that
+		 * is already set; if the SetEnvironmentVariable() API call
+		 * fails, the Crt will double free() a string.
+		 * We try to avoid this by setting our own value first */
+		SetEnvironmentVariable(pe->key, "bugbug");
+#endif
 		putenv(pe->previous_value);
 	} else {
 # if HAVE_UNSETENV

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.16 1999/05/27 00:45:31 zeev Exp $ */
+/* $Id: php.h,v 1.17 1999/06/04 10:45:53 zeev Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -190,7 +190,7 @@ extern char *strerror(int);
 #endif
 
 #if HAVE_PWD_H
-# if MSVC5
+# if WIN32||WINNT
 #include "win32/pwd.h"
 #include "win32/param.h"
 # else
@@ -257,8 +257,6 @@ extern pval *data;
 #if !(WIN32||WINNT)
 extern char **environ;
 #endif
-
-extern PHPAPI int le_index_ptr;  /* list entry type for index pointers */
 
 extern void phperror(char *error);
 extern PHPAPI void php3_error(int type, const char *format,...);

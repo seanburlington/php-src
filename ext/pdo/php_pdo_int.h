@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_int.h,v 1.11 2005/01/12 04:49:12 wez Exp $ */
+/* $Id: php_pdo_int.h,v 1.12 2005/01/17 05:28:46 wez Exp $ */
 
 /* Stuff private to the PDO extension and not for consumption by PDO drivers
  * */
@@ -53,8 +53,8 @@ extern void pdo_handle_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt TSRMLS_DC);
 
 #define PDO_DBH_CLEAR_ERR()		strcpy(dbh->error_code, PDO_ERR_NONE)
 #define PDO_STMT_CLEAR_ERR()	strcpy(stmt->error_code, PDO_ERR_NONE)
-#define PDO_HANDLE_DBH_ERR()	if (dbh->error_code) { pdo_handle_error(dbh, NULL TSRMLS_CC); }
-#define PDO_HANDLE_STMT_ERR()	if (stmt->error_code) { pdo_handle_error(stmt->dbh, stmt TSRMLS_CC); }
+#define PDO_HANDLE_DBH_ERR()	if (strcmp(dbh->error_code, PDO_ERR_NONE)) { pdo_handle_error(dbh, NULL TSRMLS_CC); }
+#define PDO_HANDLE_STMT_ERR()	if (strcmp(stmt->error_code, PDO_ERR_NONE)) { pdo_handle_error(stmt->dbh, stmt TSRMLS_CC); }
 
 int pdo_sqlstate_init_error_table(void);
 void pdo_sqlstate_fini_error_table(void);

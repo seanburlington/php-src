@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.31 2000/03/30 22:41:13 andi Exp $ */
+/* $Id: rfc1867.c,v 1.32 2000/04/02 21:27:32 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -29,6 +29,9 @@
 
 #define NEW_BOUNDARY_CHECK 1
 #define SAFE_RETURN { if (namebuf) efree(namebuf); if (filenamebuf) efree(filenamebuf); if (lbuf) efree(lbuf); return; }
+
+/* The longest property name we use in an uploaded file array */
+#define MAX_SIZE_OF_INDEX sizeof("[tmpname]")
 
 
 static void register_http_post_files_variable(char *strvar, char *val, zval *http_post_files ELS_DC PLS_DC)
@@ -126,7 +129,7 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr)
 					if (lbuf) {
 						efree(lbuf);
 					}
-					lbuf = emalloc(s-name + MAX(MAX(sizeof("[name]"),sizeof("[size]")),sizeof("[type]")));
+					lbuf = emalloc(s-name + MAX_SIZE_OF_INDEX);
 					state = 2;
 					loc2 = memchr(loc + 1, '\n', rem);
 					rem -= (loc2 - ptr) + 1;
@@ -267,6 +270,10 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr)
 					}
 				}
 				php_register_variable(namebuf, fn, NULL ELS_CC PLS_CC);
+
+				/* Add $foo[tmp_name] */
+				sprintf(lbuf, "%s[tmp_name]", namebuf);
+				register_http_post_files_variable(lbuf, fn, http_post_files ELS_CC PLS_CC);
 				{
 					zval file_size;
 

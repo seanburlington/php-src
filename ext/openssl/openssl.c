@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: openssl.c,v 1.3 2000/11/14 17:05:38 venaas Exp $ */
+/* $Id: openssl.c,v 1.4 2000/11/17 19:17:06 venaas Exp $ */
 
 #include "php.h"
 #include "php_openssl.h"
@@ -39,7 +39,7 @@ static unsigned char arg2and3of4_force_ref[] =
 
 
 function_entry openssl_functions[] = {
-	PHP_FE(openssl_read_privatekey,    NULL)
+	PHP_FE(openssl_get_privatekey,     NULL)
 	PHP_FE(openssl_get_publickey,      NULL)
 	PHP_FE(openssl_free_key,           NULL)
 #if 0
@@ -87,6 +87,7 @@ PHP_MINIT_FUNCTION(openssl)
 						    "OpenSSL X.509",
 						    module_number);
 #endif
+	OpenSSL_add_all_ciphers();
 	return SUCCESS;
 }
 
@@ -98,9 +99,15 @@ PHP_MINFO_FUNCTION(openssl)
 	php_info_print_table_end();
 }
 
+PHP_MSHUTDOWN_FUNCTION(openssl)
+{
+	EVP_cleanup();
+	return SUCCESS;
+}
+
 /* {{{ proto int openssl_get_privatekey(string key)
-   Read private key */
-PHP_FUNCTION(openssl_read_privatekey)
+    Get private key */
+PHP_FUNCTION(openssl_get_privatekey)
 {
 	zval **key;
 	BIO *b;
@@ -112,14 +119,14 @@ PHP_FUNCTION(openssl_read_privatekey)
 	}
 	convert_to_string_ex(key);
 	
-	b = BIO_new_mem_buf(Z_STRVAL_PP(key), -1);
+	b = BIO_new_mem_buf(Z_STRVAL_PP(key), Z_STRLEN_PP(key));
         if (b == NULL) {
 		RETURN_FALSE;
 	}
 
         pkey = (EVP_PKEY *) PEM_ASN1_read_bio((char *(*)())d2i_PrivateKey,
-					  PEM_STRING_EVP_PKEY, b,
-					  NULL, NULL, NULL);
+					      PEM_STRING_EVP_PKEY, b,
+					      NULL, NULL, NULL);
 	BIO_free(b);
 
 	if (pkey == NULL) { 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.57 2005/01/09 16:12:23 sniper Exp $ */
+/* $Id: main.c,v 1.512.2.58 2005/01/09 16:30:22 sniper Exp $ */
 
 /* {{{ includes
  */
@@ -975,11 +975,12 @@ void php_request_shutdown(void *dummy)
 	} zend_end_try();
 
 	if (PG(modules_activated)) zend_try {
-		php_call_shutdown_functions();
+		php_call_shutdown_functions(TSRMLS_C);
 	} zend_end_try();
 	
 	if (PG(modules_activated)) {
 		zend_deactivate_modules(TSRMLS_C);
+		php_free_shutdown_functions(TSRMLS_C);
 	}
 
 	zend_try {

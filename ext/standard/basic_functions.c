@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.45 2005/01/08 20:45:43 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.46 2005/01/09 16:30:22 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2161,14 +2161,21 @@ static int user_tick_function_compare(user_tick_function_entry * tick_fe1, user_
 	}
 }
 
-void php_call_shutdown_functions(void)
+void php_call_shutdown_functions(TSRMLS_D)
 {
-	TSRMLS_FETCH();
-
 	if (BG(user_shutdown_function_names))
 		zend_try {
 			zend_hash_apply(BG(user_shutdown_function_names), (apply_func_t) user_shutdown_function_call TSRMLS_CC);
 			memcpy(&EG(bailout), &orig_bailout, sizeof(jmp_buf));
+			php_free_shutdown_functions(TSRMLS_C);
+		}
+		zend_end_try();
+}
+
+void php_free_shutdown_functions(TSRMLS_D)
+{
+	if (BG(user_shutdown_function_names))
+		zend_try {
 			zend_hash_destroy(BG(user_shutdown_function_names));
 			FREE_HASHTABLE(BG(user_shutdown_function_names));
 			BG(user_shutdown_function_names) = NULL;

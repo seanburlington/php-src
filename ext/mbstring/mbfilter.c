@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.19 2002/03/07 17:28:49 fmk Exp $ */
+/* $Id: mbfilter.c,v 1.20 2002/03/13 00:29:53 yohgaki Exp $ */
 
 #include "php.h"
 

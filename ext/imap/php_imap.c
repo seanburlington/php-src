@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.142.2.26 2004/08/12 18:02:14 chagenbu Exp $ */
+/* $Id: php_imap.c,v 1.142.2.27 2004/08/12 19:20:19 iliaa Exp $ */
 
 #define IMAP41
 
@@ -1775,13 +1775,12 @@ PHP_FUNCTION(imap_fetchbody)
 	if (myargc == 4) {
 		convert_to_long_ex(flags);
 	}
- 
-    if (myargc < 4 || !Z_LVAL_PP(flags) & FT_UID) {
-        /* If we're fetching via UID, checking the range of msgno is
-           DUMB. */
-        PHP_IMAP_CHECK_MSGNO(Z_LVAL_PP(msgno));
-    }
- 
+
+	if (myargc < 4 || !(Z_LVAL_PP(flags) & FT_UID)) {
+		/* only perform the check if the msgno is a message number and not a UID */
+		PHP_IMAP_CHECK_MSGNO(Z_LVAL_PP(msgno));
+	}
+
 	body = mail_fetchbody_full(imap_le_struct->imap_stream, Z_LVAL_PP(msgno), Z_STRVAL_PP(sec), &len, myargc==4 ? Z_LVAL_PP(flags) : NIL);
 
 	if (!body) {

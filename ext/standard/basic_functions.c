@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.568 2003/01/29 00:49:09 phanto Exp $ */
+/* $Id: basic_functions.c,v 1.569 2003/01/30 05:00:40 pollita Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -361,6 +361,7 @@ function_entry basic_functions[] = {
 	PHP_FE(addcslashes,														NULL)
 	PHP_FE(rtrim,															NULL)
 	PHP_FE(str_replace,														NULL)
+	PHP_FE(str_ireplace,													NULL)
 	PHP_FE(str_repeat,														NULL)
 	PHP_FE(count_chars,														NULL)
 	PHP_FE(chunk_split,														NULL)

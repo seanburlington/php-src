@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.68 2003/01/29 00:07:01 iliaa Exp $ */
+/* $Id: php_string.h,v 1.69 2003/01/30 05:00:40 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -27,6 +27,7 @@
 PHP_FUNCTION(strspn);
 PHP_FUNCTION(strcspn);
 PHP_FUNCTION(str_replace);
+PHP_FUNCTION(str_ireplace);
 PHP_FUNCTION(rtrim);
 PHP_FUNCTION(trim);
 PHP_FUNCTION(ltrim);
@@ -121,6 +122,8 @@ PHPAPI void php_stripcslashes(char *str, int *len);
 PHPAPI char *php_basename(char *str, size_t  len , char *suffix, size_t sufflen);
 PHPAPI void php_dirname(char *str, int len);
 PHPAPI char *php_stristr(unsigned char *s, unsigned char *t, size_t s_len, size_t t_len);
+PHPAPI char *php_str_to_str_ex(char *haystack, int length, char *needle,
+		int needle_len, char *str, int str_len, int *_new_length, int case_sensitivity);
 PHPAPI char *php_str_to_str(char *haystack, int length, char *needle,
 		int needle_len, char *str, int str_len, int *_new_length);
 PHPAPI char *php_trim(char *c, int len, char *what, int what_len, zval *return_value, int mode TSRMLS_DC);

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.27 2004/02/04 11:14:33 zeev Exp $ 
+  $Id: mysqli.c,v 1.28 2004/02/07 13:45:44 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -103,7 +103,7 @@ void php_clear_stmt_bind(STMT *stmt)
 
 /* {{{ mysqli_objects_free_storage
  */
-static void mysqli_objects_free_storage(void *object TSRMLS_DC)
+static void mysqli_objects_free_storage(zend_object *object TSRMLS_DC)
 {
 	mysqli_object 	*intern = (mysqli_object *)object;
 	MYSQLI_RESOURCE	*my_res = (MYSQLI_RESOURCE *)intern->ptr;

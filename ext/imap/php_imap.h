@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.17 2002/02/28 08:26:17 sebastian Exp $ */
+/* $Id: php_imap.h,v 1.18 2002/03/11 23:11:04 derick Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H
@@ -39,11 +39,11 @@
 
 #if defined(HAVE_IMAP2000) || defined(HAVE_IMAP2001)
  /* these are used for quota support */
- #include "c-client.h"	/* includes mail.h and rfc822.h */
- #include "imap4r1.h"	/* location of c-client quota functions */
+# include "c-client.h"	/* includes mail.h and rfc822.h */
+# include "imap4r1.h"	/* location of c-client quota functions */
 #else
- #include "mail.h"
- #include "rfc822.h" 
+# include "mail.h"
+# include "rfc822.h" 
 #endif
 
 extern zend_module_entry imap_module_entry;

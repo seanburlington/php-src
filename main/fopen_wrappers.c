@@ -27,7 +27,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.6 1999/04/21 04:02:11 zeev Exp $ */
+/* $Id: fopen_wrappers.c,v 1.7 1999/04/21 17:11:00 sas Exp $ */
 
 #ifdef THREAD_SAFE
 #include "tls.h"
@@ -131,6 +131,7 @@ PHPAPI int _php3_check_open_basedir(char *path)
 				local_open_basedir[local_open_basedir_pos--] = 0;
 			}
 			
+#if 0
 			/* Strip double (back)slashes */
 			if (local_open_basedir_pos > 0) {
 				while ((
@@ -144,7 +145,8 @@ PHPAPI int _php3_check_open_basedir(char *path)
 					local_open_basedir[local_open_basedir_pos--] = 0;
 				}
 			}
-			
+#endif
+
 		} else {
 			/* Else use the unmodified path */
 			strcpy(local_open_basedir, PG(open_basedir));

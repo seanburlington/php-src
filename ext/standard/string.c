@@ -30,7 +30,7 @@
  */
 
 
-/* $Id: string.c,v 1.3 1999/04/21 16:31:25 sas Exp $ */
+/* $Id: string.c,v 1.4 1999/04/21 17:11:01 sas Exp $ */
 #ifdef THREAD_SAFE
 #include "tls.h"
 #endif
@@ -972,7 +972,7 @@ void php3_ucwords(INTERNAL_FUNCTION_PARAMETERS)
 		if(*(r+1)){
 			r++;
 			*r=toupper((unsigned char)*r);
-		}
+		} else break;
 	}
 	RETVAL_STRING(arg->value.str.val,1);
 }

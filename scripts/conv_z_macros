@@ -16,9 +16,10 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+#
 #
-# $Id: conv_z_macros,v 1.2 2001/02/26 06:07:38 andi Exp $
+# $Id: conv_z_macros,v 1.3 2001/09/25 15:57:58 jeroen Exp $
 
 for i in $@; do
+	echo -n "Processing $i... "
 	sed \
 	-e 's/(\*\([a-z_][]a-z_\[]*\))->type/Z_TYPE_PP(\1)/g' \
 	-e 's/\([a-z_][]a-z_\[]*\)->type/Z_TYPE_P(\1)/g' \
@@ -38,7 +39,17 @@ for i in $@; do
 	-e 's/(\*\([a-z_][]a-z_\[]*\))->value\.str\.len/Z_STRLEN_PP(\1)/g' \
 	-e 's/\([a-z_][]a-z_\[]*\)->value\.str\.len/Z_STRLEN_P(\1)/g' \
 	-e 's/\([a-z_][]a-z_\[]*\)\.value\.str\.len/Z_STRLEN(\1)/g' \
+	-e 's/(\*\([a-z_][]a-z_\[]*\))->value\.obj.properties/Z_OBJPROP_PP(\1)/g' \
+	-e 's/\([a-z_][]a-z_\[]*\)->value\.obj.properties/Z_OBJPROP_P(\1)/g' \
+	-e 's/\([a-z_][]a-z_\[]*\)\.value\.obj.properties/Z_OBJPROP(\1)/g' \
+	-e 's/(\*\([a-z_][]a-z_\[]*\))->value\.obj.ce/Z_OBJCE_PP(\1)/g' \
+	-e 's/\([a-z_][]a-z_\[]*\)->value\.obj.ce/Z_OBJCE_P(\1)/g' \
+	-e 's/\([a-z_][]a-z_\[]*\)\.value\.obj.ce/Z_OBJCE(\1)/g' \
+	-e 's/(\*\([a-z_][]a-z_\[]*\))->value\.obj/Z_OBJ_PP(\1)/g' \
+	-e 's/\([a-z_][]a-z_\[]*\)->value\.obj/Z_OBJ_P(\1)/g' \
+	-e 's/\([a-z_][]a-z_\[]*\)\.value\.obj/Z_OBJ(\1)/g' \
 	< $i > tmp && cp tmp $i
+	echo "DONE"
 done
 
 rm -f tmp

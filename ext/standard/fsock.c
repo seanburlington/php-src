@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.88 2002/03/16 18:42:39 wez Exp $ */
+/* $Id: fsock.c,v 1.89 2002/03/16 22:08:23 phanto Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -130,7 +130,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	char *hashkey = NULL;
 	php_stream *stream = NULL;
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s|lzzd", &host, &host_len, &port, &zerrno, &zerrstr, &timeout) == FAILURE)	{
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|lzzd", &host, &host_len, &port, &zerrno, &zerrstr, &timeout) == FAILURE)	{
 		RETURN_FALSE;
 	}
 

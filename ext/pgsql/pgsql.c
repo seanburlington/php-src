@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.64 2000/07/11 12:38:06 sas Exp $ */
+/* $Id: pgsql.c,v 1.65 2000/07/29 04:24:11 jah Exp $ */
 
 #include <stdlib.h>
 
@@ -1664,6 +1664,12 @@ PHP_FUNCTION(pg_clientencoding)
 	}
 
 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, pgsql_link, id, "PostgreSQL link", le_link, le_plink);
+
+	/* Just do the same as found in PostgreSQL sources... */
+
+#ifndef HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT
+#define pg_encoding_to_char(x) "SQL_ASCII"
+#endif
 
 	return_value->value.str.val 
 		= (char *) pg_encoding_to_char(PQclientEncoding(pgsql));

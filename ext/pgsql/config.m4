@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.15 2000/07/11 12:38:06 sas Exp $
+dnl $Id: config.m4,v 1.16 2000/07/29 04:24:11 jah Exp $
 
 AC_DEFUN(PGSQL_INC_CHK,[if test -r $i$1/libpq-fe.h; then PGSQL_DIR=$i; PGSQL_INCDIR=$i$1])
 
@@ -30,7 +30,8 @@ if test "$PHP_PGSQL" != "no"; then
   LDFLAGS="$LDFLAGS -L$PGSQL_LIBDIR"
   AC_CHECK_LIB(pq, PQcmdTuples,AC_DEFINE(HAVE_PQCMDTUPLES,1,[ ]))
   AC_CHECK_LIB(pq, PQoidValue,AC_DEFINE(HAVE_PQOIDVALUE,1,[ ]))
-  AC_CHECK_LIB(pq, pg_encoding_to_char,AC_DEFINE(HAVE_PQCLIENTENCODING,1,[ ]))
+  AC_CHECK_LIB(pq, PQclientEncoding,AC_DEFINE(HAVE_PQCLIENTENCODING,1,[ ]))
+  AC_CHECK_LIB(pq, pg_encoding_to_char,AC_DEFINE(HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT,1,[ ]))
   LIBS="$old_LIBS"
   LDFLAGS="$old_LDFLAGS"
   

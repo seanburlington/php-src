@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: php_orbit.c,v 1.7 2001/07/30 06:18:02 zeev Exp $
+ * $Id: php_orbit.c,v 1.8 2001/08/09 21:55:09 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -64,6 +64,7 @@ static function_entry satellite_functions[] = {
 	PHP_FE(satellite_caught_exception, 	NULL)
 	PHP_FE(satellite_exception_id, 			NULL)
 	PHP_FE(satellite_exception_value, 	NULL)
+	PHP_FE(satellite_object_to_string, 	NULL)
 
 	/* support the old prefix orbit_ */
  	PHP_FALIAS(orbit_load_idl, 					satellite_load_idl, 					NULL)

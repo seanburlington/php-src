@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: php_orbit.h,v 1.4 2001/07/30 01:56:36 zeev Exp $
+ * $Id: php_orbit.h,v 1.5 2001/08/09 21:55:09 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -33,6 +33,7 @@ extern zend_module_entry satellite_module_entry;
 
 PHP_FUNCTION(satellite_load_idl);
 PHP_FUNCTION(satellite_get_repository_id);
+PHP_FUNCTION(satellite_object_to_string);
 
 /* exception handling */
 PHP_FUNCTION(satellite_caught_exception);

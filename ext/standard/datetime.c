@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.96.2.12 2004/03/12 17:27:55 rasmus Exp $ */
+/* $Id: datetime.c,v 1.96.2.13 2004/03/26 19:29:31 rasmus Exp $ */
 
 
 #include "php.h"
@@ -194,12 +194,12 @@ void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gm)
 		val = (*arguments[0])->value.lval; 
 		/* 
 		   We don't use 1 here to work around problems in some mktime implementations
-		   when it comes to daylight savings time.  Setting it to 2 and working back from
+		   when it comes to daylight savings time.  Setting it to 4 and working back from
 		   there with the chgsecs offset makes us immune to these problems.  
 		   See http://bugs.php.net/27533 for more info.
 		*/
-		if (val < 2) { 
-			chgsecs += (2-val) * 60*60; val = 2; 
+		if (val < 4) { 
+			chgsecs += (4-val) * 60*60; val = 4; 
 		} 
 		ta->tm_hour = val; 
 		/* fall-through */ 

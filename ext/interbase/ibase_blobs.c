@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_blobs.c,v 1.2 2004/02/01 17:52:36 abies Exp $ */
+/* $Id: ibase_blobs.c,v 1.3 2004/02/01 18:42:47 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -32,7 +32,7 @@
 #define BLOB_CLOSE		1
 #define BLOB_CANCEL		2
 
-inline int _php_ibase_string_to_quad(char const *id, ISC_QUAD *qd) /* {{{ */
+int _php_ibase_string_to_quad(char const *id, ISC_QUAD *qd) /* {{{ */
 {
 	/* shortcut for most common case */
 	if (sizeof(ISC_QUAD) == sizeof(ISC_UINT64)) {
@@ -49,7 +49,7 @@ inline int _php_ibase_string_to_quad(char const *id, ISC_QUAD *qd) /* {{{ */
 }
 /* }}} */
 
-inline char *_php_ibase_quad_to_string(ISC_QUAD const qd) /* {{{ */
+char *_php_ibase_quad_to_string(ISC_QUAD const qd) /* {{{ */
 {
 	char *result = (char *) emalloc(BLOB_ID_LEN+1);
 

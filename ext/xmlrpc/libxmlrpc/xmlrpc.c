@@ -31,7 +31,7 @@
 */
 
 
-static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.2 2001/10/30 02:33:11 danda Exp $";
+static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.3 2001/12/03 22:33:31 shane Exp $";
 
 
 /****h* ABOUT/xmlrpc
@@ -96,6 +96,9 @@ static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.2 2001/10/30 02:33:11 danda 
  *******/
 
 
+#ifdef _WIN32
+#include "xmlrpc_win32.h"
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

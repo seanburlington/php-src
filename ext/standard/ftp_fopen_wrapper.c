@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.41 2002/12/31 16:07:41 sebastian Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.42 2003/02/13 14:40:17 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -152,7 +152,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 
 	tmp_line[0] = '\0';
 
-	if (strchr(mode, 'a') || strchr(mode, '+')) {
+	if (strpbrk(mode, "a+")) {
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "FTP does not support simultaneous read/write connections.");
 		return NULL;
 	}

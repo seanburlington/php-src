@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.60 2003/02/13 13:38:20 wez Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.61 2003/02/13 14:40:17 iliaa Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -102,7 +102,7 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 	size_t chunk_size = 0, file_size = 0;
 	int eol_detect;
 
-	if (strchr(mode, 'a') || strchr(mode, '+') || strchr(mode, 'w')) {
+	if (strpbrk(mode, "awx+")) {
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "HTTP wrapper does not support writeable connections.");
 		return NULL;
 	}

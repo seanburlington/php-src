@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.148 2003/02/13 13:40:34 wez Exp $ */
+/* $Id: streams.c,v 1.149 2003/02/13 14:40:16 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1874,6 +1874,9 @@ PHPAPI int php_stream_parse_fopen_modes(const char *mode, int *open_flags)
 				flags = O_WRONLY;
 			}
 			flags |= O_CREAT|O_APPEND;
+			break;
+		case 'x':
+			flags = O_CREAT|O_EXCL;
 			break;
 		default:
 			/* unknown mode */

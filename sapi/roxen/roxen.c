@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.8 1999/12/22 01:00:30 neotron Exp $ */
+/* $Id: roxen.c,v 1.9 1999/12/22 01:09:08 neotron Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -467,10 +467,10 @@ php_roxen_sapi_read_cookies(SLS_D)
 
 static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
 {
-  //  char buf[512];
+  /*  char buf[512]; */
 	
   PUTS("<table border=5 width=600>\n");
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.8 1999/12/22 01:00:30 neotron Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.9 1999/12/22 01:09:08 neotron Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());

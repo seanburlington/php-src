@@ -1,0 +1,8 @@
+# $Id: Makefile.in,v 1.1 2000/07/17 21:29:29 henot Exp $
+
+LTLIBRARY_NAME        = libii.la
+LTLIBRARY_SOURCES     = ii.c
+LTLIBRARY_SHARED_NAME = ii.la
+LTLIBRARY_SHARED_LIBADD  = $(II_SHARED_LIBADD)
+
+include $(top_srcdir)/build/dynlib.mk

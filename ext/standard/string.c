@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.232 2001/09/04 09:33:30 sterling Exp $ */
+/* $Id: string.c,v 1.233 2001/09/04 09:35:53 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -488,7 +488,7 @@ int php_charmask(unsigned char *input, int len, char *mask TSRMLS_DC)
 /* {{{ php_trim
        Compatibility function, ports old-API to new one. (DEPRECATED)
 */
-void php_trim(zval *str, zval *return_value, int mode TSRMLS_DC)
+void php_trim(zval **str, zval *return_value, int mode TSRMLS_DC)
 {
 	php_trim2(str, NULL, return_value, mode TSRMLS_CC);
 }

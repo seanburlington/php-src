@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.50 2000/06/29 14:50:23 stas Exp $ */
+/* $Id: wddx.c,v 1.51 2000/07/05 15:18:26 andrei Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -753,7 +753,7 @@ static void php_wddx_pop_element(void *user_data, const char *name)
 						ent1->data->type == IS_STRING && ent1->data->value.str.len) {
 						zend_bool incomplete_class = 0;
 
-						zend_str_tolower(ent1->data->value.str.val,ent1->data->value.str.len);
+						zend_str_tolower(ent1->data->value.str.val, ent1->data->value.str.len);
 						if (zend_hash_find(EG(class_table), ent1->data->value.str.val,
 										   ent1->data->value.str.len+1, (void **) &ce)==FAILURE) {
 							BLS_FETCH();

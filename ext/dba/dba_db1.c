@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db1.c,v 1.1 2005/02/25 23:51:51 helly Exp $ */
+/* $Id: dba_db1.c,v 1.2 2005/02/26 02:06:49 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,7 +31,6 @@
 #include DB1_INCLUDE_FILE
 #endif
 
-#include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -101,14 +100,12 @@ DBA_FETCH_FUNC(db1)
 	DB1_DATA;
 	DB1_GKEY;
 
-	char *new = NULL;
-
 	memset(&gval, 0, sizeof(gval));
 	if (dba->dbp->get(dba->dbp, &gkey, &gval, 0) == RET_SUCCESS) {
 		if (newlen) *newlen = gval.size;
-		new = estrndup(gval.data, gval.size);
+		return estrndup(gval.data, gval.size);
 	}
-	return new;
+	return NULL;
 }
 
 DBA_UPDATE_FUNC(db1)
@@ -146,17 +143,14 @@ DBA_FIRSTKEY_FUNC(db1)
 	DBT gval;
 	DB1_DATA;
 
-	char *key = NULL;
-
 	memset(&gkey, 0, sizeof(gkey));
 	memset(&gval, 0, sizeof(gval));
 
 	if (dba->dbp->seq(dba->dbp, &gkey, &gval, R_FIRST) == RET_SUCCESS) {
 		if (newlen) *newlen = gkey.size;
-		key = estrndup(gkey.data, gkey.size);
+		return estrndup(gkey.data, gkey.size);
 	}
-
-	return key;
+	return NULL;
 }
 
 DBA_NEXTKEY_FUNC(db1)
@@ -165,16 +159,14 @@ DBA_NEXTKEY_FUNC(db1)
 	DBT gval;
 	DB1_DATA;
 
-	char *key = NULL;
-
 	memset(&gkey, 0, sizeof(gkey));
 	memset(&gval, 0, sizeof(gval));
 
 	if (dba->dbp->seq(dba->dbp, &gkey, &gval, R_NEXT) == RET_SUCCESS) {
 		if (newlen) *newlen = gkey.size;
-		key = estrndup(gkey.data, gkey.size);
+		return estrndup(gkey.data, gkey.size);
 	}
-	return key;
+	return NULL;
 }
 
 DBA_OPTIMIZE_FUNC(db1)

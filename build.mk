@@ -9,7 +9,7 @@
 #
 # Written by Sascha Schumann
 #
-# $Id: build.mk,v 1.21 1999/12/24 23:29:39 sas Exp $ 
+# $Id: build.mk,v 1.22 1999/12/28 05:38:43 sas Exp $ 
 
 
 SUBDIRS = Zend TSRM
@@ -17,8 +17,6 @@ SUBDIRS = Zend TSRM
 STAMP = buildmk.stamp
 
 ALWAYS = generated_lists
-
-.PHONY: $(ALWAYS)
 
 all: $(STAMP) $(ALWAYS)
 	@$(MAKE) -s -f build2.mk
@@ -47,3 +45,5 @@ cvsclean:
 		(cd `dirname $$i` 2>/dev/null && (rm -f `cat .cvsignore` *.o *.a; rm -rf .libs .deps) || true); \
 	done
 	@rm -f $(SUBDIRS) 2>/dev/null || true
+
+.PHONY: $(ALWAYS)

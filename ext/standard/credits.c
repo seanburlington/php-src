@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.15 2001/12/11 15:30:28 sebastian Exp $ */
+/* $Id: credits.c,v 1.16 2001/12/29 14:23:58 sebastian Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -36,7 +36,7 @@ PHPAPI void php_print_credits(int flag)
 
 	php_info_print_style();
 
-	PUTS("<h1 align=\"center\">PHP 4.0 Credits</h1>\n");
+	PUTS("<h1 align=\"center\">PHP 4 Credits</h1>\n");
 
 	if (flag & PHP_CREDITS_GROUP) {
 		/* Group */
@@ -54,9 +54,9 @@ PHPAPI void php_print_credits(int flag)
 		php_info_print_table_row(1, "Andi Gutmans, Rasmus Lerdorf, Zeev Suraski");
 		php_info_print_table_end();
 
-		/* PHP 4.0 Language */
+		/* PHP 4 Language */
 		php_info_print_table_start();
-		php_info_print_table_colspan_header(2, "PHP 4.0 Authors");
+		php_info_print_table_colspan_header(2, "PHP 4 Authors");
 		php_info_print_table_header(2, "Contribution", "Authors");
 		CREDIT_LINE("Zend Scripting Language Engine", "Andi Gutmans, Zeev Suraski");
 		CREDIT_LINE("Extension Module API", "Andi Gutmans, Zeev Suraski, Andrei Zmievski");

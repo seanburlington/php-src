@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.41 2004/07/30 16:52:35 fmk Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.42 2004/11/15 23:26:40 fmk Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -275,6 +275,7 @@ void test_class_startup(void)
 }
 #endif
 
+#undef sprintf
 
 function_entry basic_functions[] = {
 	PHP_FE(constant,														NULL)

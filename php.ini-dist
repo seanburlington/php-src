@@ -1,5 +1,5 @@
 [PHP]
-; $Id: php.ini-dist,v 1.73 2001/03/07 10:08:19 zeev Exp $
+; $Id: php.ini-dist,v 1.73.2.1 2001/04/06 02:09:43 sniper Exp $
 
 ;;;;;;;;;;;;;;;;;;;
 ; About this file ;
@@ -243,7 +243,12 @@ warn_plus_overloading = Off
 
 ; The separator used in PHP generated URLs to separate arguments.
 ; Default is "&". 
-;arg_separator = "&amp;"
+;arg_separator.output = "&amp;"
+
+; List of separator(s) used by PHP to parse input URLs into variables.
+; Default is "&". 
+; NOTE: Every character in this directive is considered as separator!
+;arg_separator.input = ";&"
 
 ; This directive describes the order in which PHP registers GET, POST, Cookie,
 ; Environment and Built-in variables (G, P, C, E & S respectively, often

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.23 2003/10/15 00:14:37 wez Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.24 2003/10/15 00:19:30 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -950,11 +950,13 @@ static void php_putenv_destructor(putenv_entry *pe)
 		}
 # endif
 	}
+#ifdef HAVE_TZSET
 	/* don't forget to reset the various libc globals that
 	 * we might have changed by an earlier call to tzset(). */
 	if (!strncmp(pe->key, "TZ", pe->key_len)) {
 		tzset();
 	}
+#endif
 		
 	efree(pe->putenv_string);
 	efree(pe->key);

@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.19 2000/06/05 19:47:44 andi Exp $ */
+/* $Id: base64.c,v 1.20 2000/11/27 13:31:21 sas Exp $ */
 
 #include <string.h>
 
@@ -160,11 +160,9 @@ PHP_FUNCTION(base64_encode) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(str);
-	result = php_base64_encode((*str)->value.str.val, (*str)->value.str.len, &ret_length);
+	result = php_base64_encode(Z_STRVAL_PP(str), Z_STRLEN_PP(str), &ret_length);
 	if (result != NULL) {
-		return_value->value.str.val = result;
-		return_value->value.str.len = ret_length;
-		return_value->type = IS_STRING;
+		RETVAL_STRINGL(result, ret_length, 0);
 	} else {
 		RETURN_FALSE;
 	}
@@ -183,11 +181,9 @@ PHP_FUNCTION(base64_decode) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(str);
-	result = php_base64_decode((*str)->value.str.val, (*str)->value.str.len, &ret_length);
+	result = php_base64_decode(Z_STRVAL_PP(str), Z_STRLEN_PP(str), &ret_length);
 	if (result != NULL) {
-		return_value->value.str.val = result;
-		return_value->value.str.len = ret_length;
-		return_value->type = IS_STRING;
+		RETVAL_STRINGL(result, ret_length, 0);
 	} else {
 		RETURN_FALSE;
 	}

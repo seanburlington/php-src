@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.122 2003/05/08 15:12:04 moriyoshi Exp $ */
+/* $Id: xml.c,v 1.123 2003/05/08 16:01:50 moriyoshi Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -227,6 +227,9 @@ PHP_MINIT_FUNCTION(xml)
 	php_xml_mem_hdlrs.realloc_fcn = php_xml_realloc_wrapper;
 	php_xml_mem_hdlrs.free_fcn = php_xml_free_wrapper;
 
+#ifdef LIBXML_EXPAT_COMPAT
+	xmlInitThreads();
+#endif
 	return SUCCESS;
 }
 

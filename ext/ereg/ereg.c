@@ -28,7 +28,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.11 1999/06/05 13:56:18 zeev Exp $ */
+/* $Id: ereg.c,v 1.12 1999/06/05 20:43:36 andrey Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -564,7 +564,6 @@ PHP_FUNCTION(split)
 
 	/* churn through str, generating array entries as we go */
 	while ((count == -1 || count > 0) && !(err = regexec(&re, strp, 1, subs, 0))) {
-		printf("In the loop...\n");
 		if (subs[0].rm_so == 0 && subs[0].rm_eo) {
 			/* match is at start of string, return empty string */
 			add_next_index_stringl(return_value, empty_string, 0, 1);

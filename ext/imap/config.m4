@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/04/22 04:21:04 rasmus Exp $
+dnl $Id: config.m4,v 1.3 1999/04/22 04:40:26 rasmus Exp $
 
 AC_MSG_CHECKING(for IMAP support)
 AC_ARG_WITH(imap,
@@ -54,9 +54,8 @@ AC_ARG_WITH(imap,
 				IMAP_LIBS="-L$IMAP_DIR/lib $IMAP_DIR/lib/c-client.a"
 			fi
 		fi
-		IMAP_INCLUDE="-I$IMAP_INC_DIR/"
-		AC_SUBST(IMAP_LIBS) 
-		LIBS="$LIBS $IMAP_LIBS"
+		INCLUDES="$INCLUDES -I$IMAP_INC_DIR"
+		EXTRA_LIBS="$EXTRA_LIBS $IMAP_LIBS"
 		AC_DEFINE(HAVE_IMAP)
 		AC_MSG_RESULT(yes)
 		PHP_EXTENSION(imap)

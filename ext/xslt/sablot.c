@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.50 2002/07/08 21:12:06 sterling Exp $ */
+/* $Id: sablot.c,v 1.51 2002/07/29 23:57:23 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -160,6 +160,10 @@ PHP_MINFO_FUNCTION(xslt)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "XSLT support", "enabled");
+	php_info_print_table_row(2, "Backend", "Sablotron");
+#ifdef SAB_VERSION
+	php_info_print_table_row(2, "Sablotron Version", SAB_VERSION);
+#endif
 	php_info_print_table_end();
 }
 /* }}} */

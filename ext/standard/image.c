@@ -16,7 +16,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.71 2002/11/08 03:04:23 iliaa Exp $ */
+/* $Id: image.c,v 1.72 2002/11/12 16:14:18 iliaa Exp $ */
 /*
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -174,14 +174,14 @@ static struct gfxinfo *php_handle_bmp (php_stream * stream TSRMLS_DC)
 	result = (struct gfxinfo *) ecalloc (1, sizeof(struct gfxinfo));
 
 	php_stream_read(stream, temp, sizeof(temp));
-	
+	php_stream_read(stream, (char*) &dim, sizeof(dim));
+
 #ifdef WORDS_BIGENDIAN
 	dim.in_width = (dim.in_width & 0x000000FF) << 24 | (dim.in_width & 0x0000FF00) << 8 | (dim.in_width & 0x00FF0000) >> 8 | (dim.in_width & 0xFF000000) >> 24;
 	dim.in_height = (dim.in_height & 0x000000FF) << 24 | (dim.in_height & 0x0000FF00) << 8 | (dim.in_height & 0x00FF0000) >> 8 | (dim.in_height & 0xFF000000) >> 24;
 	dim.bits = (dim.bits & 0x00FF) << 8 | (dim.bits & 0xFF00) >> 8;
 #endif	
 	
-	php_stream_read(stream, (char*) &dim, sizeof(dim));
 	result->width    = dim.in_width;
 	result->height   = dim.in_height;
 	result->bits     = dim.bits;

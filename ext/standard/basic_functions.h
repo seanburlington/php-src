@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.88.4.1 2001/08/24 23:47:27 jeroen Exp $ */
+/* $Id: basic_functions.h,v 1.88.4.2 2001/08/26 22:47:55 jeroen Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -173,6 +173,9 @@ typedef struct {
 	/* rand.c */
 	int rand_generator; /* current ini-setting */
 	int rand_generator_current; /* current (by overriding by [mt_]srand) */
+
+	/* rand_sys.c */
+	unsigned int rand_sys_seed; /* Current seed for system-rand() (necessary for thread-safety) */
 
 	/* rand_mt.c */
 	php_uint32   state[MT_N+1];  /* state vector + 1 extra to not violate ANSI C */

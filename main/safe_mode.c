@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.5 1999/04/26 17:26:32 zeev Exp $ */
+/* $Id: safe_mode.c,v 1.6 1999/06/26 19:14:26 zeev Exp $ */
 
 #include "php.h"
 
@@ -136,7 +136,7 @@ PHPAPI char *_php3_get_current_user()
 	USE_SAPI is defined, because cgi will also be
 	interfaced in USE_SAPI */
 #if CGI_BINARY || USE_SAPI || FHTTPD
-	if (!request_info.filename || (stat(request_info.filename,&statbuf)==-1)) {
+	if (!SG(request_info).path_translated || (stat(SG(request_info).path_translated,&statbuf)==-1)) {
 		return empty_string;
 	}
 	uid = statbuf.st_uid;

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.30.2.6 2003/10/03 05:25:43 sniper Exp $
+dnl $Id: config.m4,v 1.30.2.7 2004/03/29 00:09:34 iliaa Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -67,7 +67,7 @@ if test "$PHP_XSLT" != "no"; then
        SABINF_CFLAGS=`$XSLT_DIR/bin/sablot-config --cflags`
        SABINF_LIBS=`$XSLT_DIR/bin/sablot-config --libs`
        SABINF_PREFIX=`$XSLT_DIR/bin/sablot-config --prefix`
-       SABINF_ALL="\"Cflags: $SABINF_CFLAGS\nLibs: $SABINF_LIBS\nPrefix: $SABINF_PREFIX\""
+       SABINF_ALL="\"Cflags: $SABINF_CFLAGS Libs: $SABINF_LIBS Prefix: $SABINF_PREFIX\""
        PHP_DEFINE(SAB_INFO, "$SABINF_ALL")
     else
        AC_MSG_RESULT(not found)

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.7 2004/12/08 18:57:48 fmk Exp $
+dnl $Id: config.m4,v 1.8 2005/04/01 11:12:45 jorton Exp $
 dnl
 
 PHP_ARG_WITH(mssql,for MSSQL support via FreeTDS,
@@ -32,12 +32,12 @@ if test "$PHP_MSSQL" != "no"; then
     fi
   fi  
 
-  if test ! -r "$FREETDS_INSTALLATION_DIR/lib/libtds.a" && test ! -r "$FREETDS_INSTALLATION_DIR/lib/libtds.so"; then
-     AC_MSG_ERROR(Could not find $FREETDS_INSTALLATION_DIR/lib/libtds.[a|so])
+  if test ! -r "$FREETDS_INSTALLATION_DIR/$PHP_LIBDIR/libtds.a" && test ! -r "$FREETDS_INSTALLATION_DIR/$PHP_LIBDIR/libtds.so"; then
+     AC_MSG_ERROR(Could not find $FREETDS_INSTALLATION_DIR/$PHP_LIBDIR/libtds.[a|so])
   fi
 
   MSSQL_INCDIR=$FREETDS_INSTALLATION_DIR/include
-  MSSQL_LIBDIR=$FREETDS_INSTALLATION_DIR/lib
+  MSSQL_LIBDIR=$FREETDS_INSTALLATION_DIR/$PHP_LIBDIR
 
   PHP_ADD_INCLUDE($MSSQL_INCDIR)
   PHP_ADD_LIBRARY_WITH_PATH(sybdb, $MSSQL_LIBDIR, MSSQL_SHARED_LIBADD)

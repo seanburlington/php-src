@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.3 2003/02/14 18:18:12 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.4 2003/02/14 18:27:20 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -60,7 +60,8 @@ PHP_FUNCTION(mysqli_connect)
 
 	if (mysql_real_connect(mysql,hostname,username,passwd,dbname,port,socket,0) == NULL) {
 		/* Save error messages */
-		php_mysqli_set_error(mysql_errno(mysql), (char *mysql_error(mysql) TSRMLS_CC);
+
+		php_mysqli_set_error(mysql_errno(mysql), (char *) mysql_error(mysql) TSRMLS_CC);
 
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", mysql_error(mysql));
 		/* free mysql structure */

@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependencie.php,v 1.1 2001/12/02 00:44:02 cox Exp $
+// $Id: Dependency.php,v 1.1 2001/12/02 16:29:37 cox Exp $
 
 /**
 * Methods for dependencies check. Based on Stig's dependencies RFC
@@ -26,7 +26,7 @@
 * (requires php >= 4.1)
 */
 
-class PEAR_Dependencie
+class PEAR_Dependency
 {
     /**
     * Package dependencies check method

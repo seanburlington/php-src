@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.52 2001/03/23 01:15:05 ssb Exp $
+// $Id: DB.php,v 1.53 2001/03/24 07:00:44 ssb Exp $
 //
 // Database independent query interface.
 //
@@ -131,6 +131,17 @@ define('DB_FETCHMODE_FLIPPED', 4);
 define('DB_GETMODE_ORDERED', DB_FETCHMODE_ORDERED);
 define('DB_GETMODE_ASSOC',   DB_FETCHMODE_ASSOC);
 define('DB_GETMODE_FLIPPED', DB_FETCHMODE_FLIPPED);
+
+/**
+ * these are constants for the tableInfo-function
+ * they are bitwised or'ed. so if there are more constants to be defined
+ * in the future, adjust DB_TABLEINFO_FULL accordingly 
+ */
+
+define('DB_TABLEINFO_ORDER', 1);
+define('DB_TABLEINFO_ORDERTABLE', 2);
+define('DB_TABLEINFO_FULL', 3);
+
 
 /**
  * The main "DB" class is simply a container class with some static
@@ -625,6 +636,11 @@ class DB_result
         }
         $this->result = false;
         return true;
+    }
+
+    function tableInfo($mode = null)
+    {
+        return $this->dbh->tableInfo($this->result, $mode);
     }
 }
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.109 2000/09/08 22:31:21 zeev Exp $ */
+/* $Id: file.c,v 1.110 2000/09/09 01:15:50 ssb Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1770,7 +1770,7 @@ PHPAPI int php_copy_file(char *src, char *dest)
 #ifdef PHP_WIN32
 	if ((fd_t=V_OPEN((dest,_O_WRONLY|_O_CREAT|_O_TRUNC|_O_BINARY,_S_IREAD|_S_IWRITE)))==-1) {
 #else
-	if ((fd_t=V_CREAT((dest,0777))==-1) {
+	if ((fd_t=V_CREAT(dest,0777))==-1) {
 #endif
 		php_error(E_WARNING,"Unable to create '%s':  %s", dest, strerror(errno));
 		close(fd_s);

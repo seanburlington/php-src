@@ -1,5 +1,5 @@
 /* 
- * $Id: gdcache.c,v 1.6 2002/11/19 19:55:54 iliaa Exp $
+ * $Id: gdcache.c,v 1.7 2002/11/22 02:38:03 iliaa Exp $
  *
  * Caches of pointers to user structs in which the least-recently-used 
  * element is replaced in the event of a cache miss after the cache has 
@@ -35,6 +35,8 @@
  * probably limits the usefulness of this implementation to cache
  * sizes of a few tens of elements.
  */
+
+#include "php.h"
 
 /* This just seems unessacary */
 #if PHP_WIN32

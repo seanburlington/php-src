@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.101 2000/06/02 12:35:53 zeev Exp $ */
+/* $Id: php.h,v 1.102 2000/06/04 08:29:11 stas Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -306,6 +306,7 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #define V_UNLINK(path) virtual_unlink(path)
 #define V_MKDIR(pathname, mode) virtual_mkdir(pathname, mode)
 #define V_RMDIR(pathname) virtual_rmdir(pathname)
+#define V_OPENDIR(pathname) virtual_opendir(pathname)
 #else
 #define V_GETCWD(buff, size) getcwd(buff,size)
 #define V_FOPEN(path, mode)  fopen(path, mode)
@@ -319,6 +320,7 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #define V_UNLINK(path) unlink(path)
 #define V_MKDIR(pathname, mode) mkdir(pathname, mode)
 #define V_RMDIR(pathname) rmdir(pathname)
+#define V_OPENDIR(pathname) opendir(pathname)
 #endif
 
 #include "zend_constants.h"

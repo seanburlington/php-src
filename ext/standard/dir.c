@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.35 2000/06/04 07:57:40 stas Exp $ */
+/* $Id: dir.c,v 1.36 2000/06/04 08:29:11 stas Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -141,7 +141,7 @@ static void _php_do_opendir(INTERNAL_FUNCTION_PARAMETERS, int createobject)
 	
 	dirp = emalloc(sizeof(php_dir));
 
-	dirp->dir = opendir((*arg)->value.str.val);
+	dirp->dir = V_OPENDIR((*arg)->value.str.val);
 	
 	if (! dirp->dir) {
 		efree(dirp);

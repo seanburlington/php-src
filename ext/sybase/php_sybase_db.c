@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.27 2001/08/06 03:50:51 sas Exp $ */
+/* $Id: php_sybase_db.c,v 1.28 2001/08/11 12:02:15 thies Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1009,8 +1009,8 @@ PHP_FUNCTION(sybase_fetch_object)
 	php_sybase_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU);
 	if (return_value->type==IS_ARRAY) {
 		return_value->type=IS_OBJECT;
-		return_value->value.obj.properties = return_value->value.ht;
-		return_value->value.obj.ce = &zend_standard_class_def;
+		Z_OBJPROP_P(return_value) = return_value->value.ht;
+		Z_OBJCE_P(return_value) = &zend_standard_class_def;
 	}
 }
 /* }}} */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.241 2000/08/25 03:10:42 ssb Exp $ */
+/* $Id: basic_functions.c,v 1.242 2000/08/27 19:42:45 ssb Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -126,6 +126,7 @@ function_entry basic_functions[] = {
 	PHP_FE(php_logo_guid,							NULL)
 	PHP_FE(zend_logo_guid,							NULL)
 	PHP_FE(php_sapi_name,							NULL)
+	PHP_FE(php_uname,								NULL)
 	
 	PHP_FE(strnatcmp,								NULL)
 	PHP_FE(strnatcasecmp,							NULL)

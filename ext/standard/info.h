@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.h,v 1.16 2000/08/21 09:50:52 sas Exp $ */
+/* $Id: info.h,v 1.17 2000/08/27 19:42:45 ssb Exp $ */
 
 #ifndef INFO_H
 #define INFO_H
@@ -55,6 +55,7 @@ PHP_FUNCTION(php_logo_guid);
 PHP_FUNCTION(zend_logo_guid);
 PHP_FUNCTION(php_egg_logo_guid);
 PHP_FUNCTION(php_sapi_name);
+PHP_FUNCTION(php_uname);
 PHPAPI void php_print_info(int flag);
 PHPAPI void php_print_credits(int flag);
 PHPAPI void php_print_style(void);

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.94 2003/08/03 19:32:07 cox Exp $
+// $Id: Common.php,v 1.95 2003/08/04 10:32:11 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -568,7 +568,11 @@ class PEAR_Common extends PEAR
                 }
                 break;
             case 'license':
-                $this->pkginfo['release_license'] = $data;
+                if ($this->in_changelog) {
+                    $this->current_release['release_license'] = $data;
+                } else {
+                    $this->pkginfo['release_license'] = $data;
+                }
                 break;
             case 'dep':
                 if ($data && !$this->in_changelog) {

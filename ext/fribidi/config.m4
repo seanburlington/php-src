@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.10 2002/09/16 15:31:32 sniper Exp $
+dnl $Id: config.m4,v 1.11 2002/10/12 01:14:42 sniper Exp $
 dnl
 
 PHP_ARG_WITH(fribidi, for FriBidi support,
@@ -8,18 +8,19 @@ PHP_ARG_WITH(fribidi, for FriBidi support,
 if test "$PHP_FRIBIDI" != "no"; then
 
   if test "$PHP_FRIBIDI" = "yes"; then
-    PHP_FRIBIDI=/usr/local
+    AC_PATH_PROG(FRIBIDI_CONFIG,fribidi-config,,[/usr/local/bin:$PATH])
+  else
+    FRIBIDI_CONFIG="$PHP_FRIBIDI/bin/fribidi-config"
   fi
 
   dnl check for fribidi version
   AC_MSG_CHECKING([for FriBidi version])
-  FRIBIDI_CONFIG=$PHP_FRIBIDI/bin/fribidi-config
-  if test -x "$FRIBIDI_CONFIG"; then
-    fribidi_version_full=`$FRIBIDI_CONFIG --version`
-  else
+
+  if test ! -x "$FRIBIDI_CONFIG"; then
     AC_MSG_ERROR([fribidi-config not found.])
   fi
 
+  fribidi_version_full=`$FRIBIDI_CONFIG --version`
   fribidi_version=`echo ${fribidi_version_full} | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
 
   if test "$fribidi_version" -ge 10004; then

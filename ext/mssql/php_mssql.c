@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.86.2.35 2004/07/21 16:25:27 sesser Exp $ */
+/* $Id: php_mssql.c,v 1.86.2.36 2004/09/28 14:09:01 iliaa Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -866,6 +866,7 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 			
 					res_buf = (unsigned char *) emalloc(res_length+1);
 					res_length = dbconvert(NULL,coltype(offset),dbdata(mssql_ptr->link,offset), res_length, SQLCHAR,res_buf,-1);
+					res_buf[res_length] = '\0';
 				} else {
 					if (column_type == SQLDATETIM4) {
 						DBDATETIME temp;
@@ -939,7 +940,7 @@ static void php_mssql_get_column_content_without_type(mssql_link *mssql_ptr,int 
 			
 			res_buf = (unsigned char *) emalloc(res_length+1);
 			res_length = dbconvert(NULL,coltype(offset),dbdata(mssql_ptr->link,offset), res_length, SQLCHAR, res_buf, -1);
-
+			res_buf[res_length] = '\0';
 		} else {
 			if (column_type == SQLDATETIM4) {
 				DBDATETIME temp;

@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.160 2003/01/18 19:28:05 iliaa Exp $ */
+/* $Id: zlib.c,v 1.161 2003/02/10 19:04:41 moriyoshi Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -104,6 +104,7 @@ function_entry php_zlib_functions[] = {
 	PHP_FE(gzinflate,              			NULL)
 	PHP_FE(gzencode,						NULL)
 	PHP_FE(ob_gzhandler,					NULL)
+	PHP_FE(zlib_get_coding_type,			NULL)
 	{NULL, NULL, NULL}
 };
 /* }}} */
@@ -660,6 +661,23 @@ PHP_FUNCTION(gzinflate)
 	}
 }
 /* }}} */
+
+/*`{{{ proto zlib_get_coding_type()
+   Returns the coding type used for output compression */
+
+PHP_FUNCTION(zlib_get_coding_type)
+{
+	switch (ZLIBG(ob_gzip_coding)) {
+		case CODING_GZIP:
+			RETURN_STRINGL("gzip", sizeof("gzip") - 1, 1);
+
+		case CODING_DEFLATE:
+			RETURN_STRINGL("deflate", sizeof("deflate") - 1, 1);
+	}
+
+	RETURN_FALSE;
+}
+
 
 /* {{{ php_do_deflate
  */

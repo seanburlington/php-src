@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.35 2002/12/31 16:08:14 sebastian Exp $ */
+/* $Id: php_zlib.h,v 1.36 2003/02/10 19:04:40 moriyoshi Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -52,6 +52,7 @@ PHP_FUNCTION(gzdeflate);
 PHP_FUNCTION(gzinflate);
 PHP_FUNCTION(gzencode);
 PHP_FUNCTION(ob_gzhandler);
+PHP_FUNCTION(zlib_get_coding_type);
 
 int php_enable_output_compression(int buffer_size TSRMLS_DC);
 int php_ob_gzhandler_check(TSRMLS_D);

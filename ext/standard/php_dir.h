@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dir.h,v 1.15 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: php_dir.h,v 1.16 2001/09/12 02:07:46 sniper Exp $ */
 
 #ifndef PHP_DIR_H
 #define PHP_DIR_H
@@ -28,7 +28,7 @@ PHP_RINIT_FUNCTION(dir);
 PHP_FUNCTION(opendir);
 PHP_FUNCTION(closedir);
 PHP_FUNCTION(chdir);
-#if defined(HAVE_CHROOT) && !defined(ZTS)
+#if defined(HAVE_CHROOT) && !defined(ZTS) && ENABLE_CHROOT_FUNC
 PHP_FUNCTION(chroot);
 #endif
 PHP_FUNCTION(getcwd);

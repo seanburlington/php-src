@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.30 2001/06/07 12:18:02 rasmus Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.31 2001/09/12 02:07:46 sniper Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -228,5 +228,9 @@ AC_ARG_WITH(system-regex,
     REGEX_TYPE=php
   fi
 ])
+
+if test "$PHP_SAPI" = "cgi"; then
+  AC_DEFINE(ENABLE_CHROOT_FUNC, 1, [Whether to enable chroot() function])
+fi
 
 PHP_EXTENSION(standard)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.395 2001/09/09 13:29:14 derick Exp $ */
+/* $Id: basic_functions.c,v 1.396 2001/09/12 02:07:46 sniper Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -653,7 +653,7 @@ function_entry basic_functions[] = {
 	PHP_FE(closedir,														NULL)
 	PHP_FE(chdir,															NULL)
 
-#if defined(HAVE_CHROOT) && !defined(ZTS)
+#if defined(HAVE_CHROOT) && !defined(ZTS) && ENABLE_CHROOT_FUNC
 	PHP_FE(chroot,															NULL)
 #else
 	PHP_FALIAS(chroot,				warn_not_available,						NULL)

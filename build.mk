@@ -9,7 +9,7 @@
 #
 # Written by Sascha Schumann
 #
-# $Id: build.mk,v 1.5 1999/10/10 17:34:13 thies Exp $ 
+# $Id: build.mk,v 1.6 1999/10/10 18:08:31 sas Exp $ 
 
 
 LT_TARGETS = ltmain.sh ltconfig
@@ -69,7 +69,7 @@ $(LT_TARGETS): $(LT_PATCHES)
 	patch ltconfig < patch-aa
 	patch ltmain.sh < patch-ab
 
-$(makefile_in_files): $(makefile_am_files)
+$(makefile_in_files): $(makefile_am_files) aclocal.m4
 	@echo rebuilding Makefile.in\'s
 	@automake -a -i $(AMFLAGS) $(makefile_files) 2>&1 \
 		| grep -v PHP_OUTPUT_FILES || true >&2

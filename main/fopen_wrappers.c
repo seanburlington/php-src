@@ -27,10 +27,11 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.11 1999/04/26 14:00:46 zeev Exp $ */
+/* $Id: fopen_wrappers.c,v 1.12 1999/05/02 19:54:01 zeev Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
+#include "SAPI.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -205,9 +206,10 @@ PHPAPI FILE *php3_fopen_for_parser(void)
 	char *temp, *path_info, *fn;
 	int l;
 	PLS_FETCH();
+	SLS_FETCH();
 
 	fn = request_info.filename;
-	path_info = request_info.path_info;
+	path_info = SG(request_info).request_uri;
 #if HAVE_PWD_H
 	if (PG(user_dir) && *PG(user_dir)
 		&& path_info && '/' == path_info[0] && '~' == path_info[1]) {

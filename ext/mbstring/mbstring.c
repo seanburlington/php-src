@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.32 2001/10/11 23:33:02 ssb Exp $ */
+/* $Id: mbstring.c,v 1.33 2001/11/08 22:23:04 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -40,6 +40,7 @@
  *    Hironori Sato <satoh@jpnnet.com>
  *    Shigeru Kanemoto <sgk@happysize.co.jp>
  *    Tsukada Takuya <tsukada@fminn.nagano.nagano.jp>
+ *    Rui Hirokawa <rui_hirokawa@ybb.ne.jp>
  */
 
 
@@ -811,11 +812,11 @@ php_mbstr_encoding_handler(zval *arg, char *res, char *separator TSRMLS_DC)
 	string.no_encoding = MBSTRG(current_internal_encoding);
 	
 	/* count the variables contained in the query */
-	num = 1;
+	num = 0;
 	var = res;
 	n = strlen(res);
 	while(n > 0) {
-		if (*var == *separator) {
+		if (*var == '=') {
 			num++;
 		}
 		var++;
@@ -939,7 +940,7 @@ SAPI_POST_HANDLER_FUNC(php_mbstr_post_handler)
 /* http input processing */
 void mbstr_treat_data(int arg, char *str, zval* destArray TSRMLS_DC)
 {
-	char *res = NULL, *var, *val, *separator=NULL;
+	char *res = NULL, *separator=NULL;
 	const char *c_var;
 	pval *array_ptr;
 	int free_buffer=0;

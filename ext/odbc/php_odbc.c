@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.140 2002/08/14 16:23:16 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.141 2002/08/14 20:40:48 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1207,7 +1207,7 @@ PHP_FUNCTION(odbc_data_source)
 	}
 
 	convert_to_long_ex(zv_fetch_type);
-	fetch_type = Z_LVAL_PP(zv_fetch_type);
+	fetch_type = (SQLSMALLINT)Z_LVAL_PP(zv_fetch_type);
 
 	if (!(fetch_type == SQL_FETCH_FIRST ||
 	      fetch_type == SQL_FETCH_NEXT)) {

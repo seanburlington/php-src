@@ -15,7 +15,7 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.8 2000/09/07 17:56:12 venaas Exp $ */
+/* $Id: network.c,v 1.9 2000/09/18 15:15:27 stas Exp $ */
 
 #include "php.h"
 
@@ -113,6 +113,9 @@ static int php_network_getaddresses(const char *host, struct sockaddr ***sal)
 				*(struct sockaddr_in *)*sap =
 					*((struct sockaddr_in *)sai->ai_addr);
                         } break;
+			default: 
+				*sap = NULL;
+				break;
                         }
 			sap++;
                 } while ((sai = sai->ai_next) != NULL);

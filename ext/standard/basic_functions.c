@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.285 2000/12/08 14:37:49 sterling Exp $ */
+/* $Id: basic_functions.c,v 1.286 2000/12/13 22:50:10 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1618,7 +1618,7 @@ PHP_FUNCTION(call_user_method)
 	SEPARATE_ZVAL(params[0]);
 	SEPARATE_ZVAL(params[1]);
 	convert_to_string(*params[0]);
-	if (call_user_function_ex(CG(function_table), *params[1], *params[0], &retval_ptr, arg_count-2, params+2, 1, NULL)==SUCCESS
+	if (call_user_function_ex(CG(function_table), *params[1], params[0], &retval_ptr, arg_count-2, params+2, 1, NULL)==SUCCESS
 		&& retval_ptr) {
 		COPY_PZVAL_TO_ZVAL(*return_value, retval_ptr);
 	} else {
@@ -1659,7 +1659,7 @@ PHP_FUNCTION(call_user_method_array)
 	     zend_hash_move_forward(params_ar))
 		element++;
     
-    if (call_user_function_ex(CG(function_table), *obj, *method_name, &retval_ptr, num_elems, method_args, 1, NULL) == SUCCESS
+    if (call_user_function_ex(CG(function_table), obj, *method_name, &retval_ptr, num_elems, method_args, 1, NULL) == SUCCESS
         && retval_ptr) {
         COPY_PZVAL_TO_ZVAL(*return_value, retval_ptr);
     } else {

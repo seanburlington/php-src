@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.41 2000/11/27 13:31:21 sas Exp $ */
+/* $Id: exec.c,v 1.42 2000/12/13 22:50:10 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -421,7 +421,8 @@ PHP_FUNCTION(shell_exec)
 	allocated_space = EXEC_INPUT_BUF;
 	ret = (char *) emalloc(allocated_space);
 	while (1) {
-		readbytes = fread(ret+total_readbytes,1,EXEC_INPUT_BUF,in);
+//		readbytes = fread(ret+total_readbytes,1,EXEC_INPUT_BUF,in);
+		readbytes = fread(ret+total_readbytes,1,5,in);
 		if (readbytes<=0) {
 			break;
 		}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.38 2004/05/31 08:58:32 zeev Exp $ */
+/* $Id: spl_iterators.c,v 1.38.2.1 2004/07/28 22:55:26 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -634,8 +634,16 @@ SPL_METHOD(dual_it, getInnerIterator)
 	}
 } /* }}} */
 
+static INLINE void spl_dual_it_require(spl_dual_it_object *intern TSRMLS_DC)
+{
+	if (!intern->inner.iterator) {
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "The inner constructor wasn't initialized with an iterator instance");
+	}
+}
+
 static INLINE void spl_dual_it_free(spl_dual_it_object *intern TSRMLS_DC)
 {
+	spl_dual_it_require(intern TSRMLS_CC);
 	if (intern->inner.iterator && intern->inner.iterator->funcs->invalidate_current) {
 		intern->inner.iterator->funcs->invalidate_current(intern->inner.iterator TSRMLS_CC);
 	}
@@ -698,6 +706,8 @@ static INLINE void spl_dual_it_next(spl_dual_it_object *intern, int do_free TSRM
 {
 	if (do_free) {
 		spl_dual_it_free(intern TSRMLS_CC);
+	} else {
+		spl_dual_it_require(intern TSRMLS_CC);
 	}
 	intern->inner.iterator->funcs->move_forward(intern->inner.iterator TSRMLS_CC);
 	intern->current.pos++;

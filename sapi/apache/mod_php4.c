@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.34 2000/02/19 23:41:24 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.35 2000/02/24 22:00:47 ssb Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -428,7 +428,7 @@ int send_php(request_rec *r, int display_source_mode, char *filename)
 	 * directive, then decline to handle this request
 	 */
 	if (!php_apache_info.engine) {
-		r->content_type = "text/html;charset=iso-8859-1";
+		r->content_type = SAPI_DEFAULT_CONTENT_TYPE; /* XXX FIXME use default_{mimetype|charset} directives */
 		r->allowed |= (1 << METHODS) - 1;
 		return DECLINED;
 	}
@@ -460,7 +460,7 @@ int send_php(request_rec *r, int display_source_mode, char *filename)
 	}
 	/* Assume output will be HTML.  Individual scripts may change this 
 	   further down the line */
-	r->content_type = "text/html;charset=iso-8859-1";
+	r->content_type = SAPI_DEFAULT_CONTENT_TYPE; /* XXX FIXME use default_{mimetype|charset} directives */
 
 	/* Init timeout */
 	hard_timeout("send", r);

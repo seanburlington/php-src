@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.281 2002/08/20 20:47:47 wez Exp $ */
+/* $Id: string.c,v 1.282 2002/08/21 06:22:19 sebastian Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3993,12 +3993,12 @@ static php_stream_filter_factory strfilter_rot13_factory = {
 
 PHP_MINIT_FUNCTION(string_filters)
 {
-	return php_stream_filter_register_factory("string.rot13", &strfilter_rot13_factory);
+	return php_stream_filter_register_factory("string.rot13", &strfilter_rot13_factory TSRMLS_CC);
 }
 
 PHP_MSHUTDOWN_FUNCTION(string_filters)
 {
-	return php_stream_filter_unregister_factory("string.rot13");
+	return php_stream_filter_unregister_factory("string.rot13" TSRMLS_CC);
 }
 /* }}} */
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.2 2004/09/26 20:46:35 wez Exp $ */
+/* $Id: sqlite_statement.c,v 1.3 2004/09/26 20:52:07 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -51,7 +51,7 @@ static int pdo_sqlite_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 	pdo_sqlite_db_handle *H = S->H;
 	int i;
 
-	if (stmt->executed) {
+	if (stmt->executed && !S->done) {
 		sqlite3_reset(S->stmt);
 	}
 
@@ -149,7 +149,6 @@ static int pdo_sqlite_stmt_fetch(pdo_stmt_t *stmt TSRMLS_DC)
 			return 0;
 
 		default:
-		printf("cluck done=%d pre_fetched=%d executed=%d\n", S->done, S->pre_fetched, stmt->executed);
 			pdo_sqlite_error_stmt(stmt);
 			return 0;
 	}

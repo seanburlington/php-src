@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.42 1999/09/21 17:50:51 rasmus Exp $ */
+/* $Id: string.c,v 1.43 1999/09/24 15:34:54 ssb Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -1940,7 +1940,9 @@ void _php3_strip_tags(char *rbuf, int len, int state, char *allow) {
 		_php3_strtolower(allow);
 		tbuf = emalloc(PHP_TAG_BUF_SIZE+1);
 		tp = tbuf;
-	} else tp=NULL;
+	} else {
+		tbuf = tp = NULL;
+	}
 
 	while(i<len) {
 		switch (c) {

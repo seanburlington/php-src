@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.47 2005/02/19 23:11:23 helly Exp $ */
+/* $Id: php_pdo_driver.h,v 1.48 2005/02/19 23:48:30 helly Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -83,6 +83,7 @@ enum pdo_fetch_type {
 
 #define PDO_FETCH_FLAGS     0xFFFF0000  /* fetchAll() modes or'd to PDO_FETCH_XYZ */
 #define PDO_FETCH_GROUP     0x00010000  /* fetch into groups */
+#define PDO_FETCH_UNIQUE    0x00030000  /* fetch into groups assuming first col is unique */
 
 /* fetch orientation for scrollable cursors */
 enum pdo_fetch_orientation {

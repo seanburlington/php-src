@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx.h,v 1.12 2002/10/03 08:56:09 jan Exp $ */
+/* $Id: php_wddx.h,v 1.13 2002/10/03 18:30:27 andrei Exp $ */
 
 #ifndef PHP_WDDX_H
 #define PHP_WDDX_H
@@ -30,7 +30,6 @@ extern zend_module_entry wddx_module_entry;
 
 PHP_FUNCTION(wddx_serialize_value);
 PHP_FUNCTION(wddx_serialize_vars);
-PHP_FUNCTION(wddx_serialize_type);
 PHP_FUNCTION(wddx_packet_start);
 PHP_FUNCTION(wddx_packet_end);
 PHP_FUNCTION(wddx_add_vars);

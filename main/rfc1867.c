@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.99 2002/05/11 11:58:16 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.100 2002/05/31 09:05:39 derick Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -729,7 +729,9 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 			cancel_upload = 0;
 
 			if(strlen(filename) == 0) {
+#ifdef DEBUG_FILE_UPLOAD
 				sapi_module.sapi_error(E_NOTICE, "No file uploaded");
+#endif
 				cancel_upload = UPLOAD_ERROR_D;
 			}
 

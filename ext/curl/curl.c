@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.99 2001/12/03 09:19:14 sterling Exp $ */
+/* $Id: curl.c,v 1.100 2001/12/03 12:24:03 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -799,7 +799,9 @@ PHP_FUNCTION(curl_setopt)
 				}
 				else {
 					error = curl_formadd(&first, &last, CURLFORM_COPYNAME, string_key, 
-										 CURLFORM_PTRCONTENTS, postval, CURLFORM_END);
+										 CURLFORM_PTRCONTENTS, postval, 
+										 CURLFORM_CONTENTSLENGTH, Z_STRLEN_PP(current),
+										 CURLFORM_END);
 				}
 			}
 

@@ -1,7 +1,7 @@
-# $Id: Makefile.in,v 1.1 2001/05/01 01:48:50 hirokawa Exp $
+# $Id: Makefile.in,v 1.2 2002/01/11 13:21:09 hirokawa Exp $
 
 LTLIBRARY_NAME        = libmbstring.la
-LTLIBRARY_SOURCES     = mbfilter_ja.c mbfilter.c mbstring.c
+LTLIBRARY_SOURCES     = mbfilter_ja.c mbfilter.c mbstring.c mbregex.c php_mbregex.c
 LTLIBRARY_SHARED_NAME = mbstring.la
 
 include $(top_srcdir)/build/dynlib.mk

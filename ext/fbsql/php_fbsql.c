@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.84 2002/09/04 04:24:54 kalowsky Exp $ */
+/* $Id: php_fbsql.c,v 1.85 2002/10/06 02:10:19 fmk Exp $ */
 
 /* TODO:
  *
@@ -164,7 +164,7 @@ struct PHPFBLink
 #define FBSQL_ISO_VERSIONED 4
 
 #define FBSQL_LOB_DIRECT 0				/* default */
-#define FBSQL_LOB_HANDLE 1				/I default */
+#define FBSQL_LOB_HANDLE 1				/* default */
 
 
 /* {{{ fbsql_functions[]

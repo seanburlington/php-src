@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.92 2001/08/12 18:57:35 sebastian Exp $ */
+/* $Id: xml.c,v 1.92.2.1 2001/10/11 23:52:11 ssb Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -132,6 +132,7 @@ function_entry xml_functions[] = {
 };
 
 zend_module_entry xml_module_entry = {
+    STANDARD_MODULE_HEADER,
     "xml",                /* extension name */
     xml_functions,        /* extension function list */
     PHP_MINIT(xml),       /* extension-wide startup function */
@@ -139,6 +140,7 @@ zend_module_entry xml_module_entry = {
     PHP_RINIT(xml),       /* per-request startup function */
     PHP_RSHUTDOWN(xml),   /* per-request shutdown function */
     PHP_MINFO(xml),       /* information function */
+    NO_VERSION_YET,
     STANDARD_MODULE_PROPERTIES
 };
 

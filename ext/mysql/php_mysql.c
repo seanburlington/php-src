@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.97 2001/08/11 18:27:48 andi Exp $ */
+/* $Id: php_mysql.c,v 1.97.2.1 2001/10/11 23:51:44 ssb Exp $ */
 
 
 /* TODO:
@@ -182,8 +182,16 @@ function_entry mysql_functions[] = {
 /* {{{ mysql_module_entry
  */
 zend_module_entry mysql_module_entry = {
-	"mysql", mysql_functions, ZEND_MODULE_STARTUP_N(mysql), PHP_MSHUTDOWN(mysql), PHP_RINIT(mysql), PHP_RSHUTDOWN(mysql), 
-			 PHP_MINFO(mysql), STANDARD_MODULE_PROPERTIES
+	STANDARD_MODULE_HEADER,
+	"mysql",
+    mysql_functions,
+    ZEND_MODULE_STARTUP_N(mysql),
+    PHP_MSHUTDOWN(mysql),
+    PHP_RINIT(mysql),
+    PHP_RSHUTDOWN(mysql), 
+    PHP_MINFO(mysql),
+    NO_VERSION_YET,
+    STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
 

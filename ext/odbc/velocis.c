@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: velocis.c,v 1.27 2001/07/31 05:44:02 zeev Exp $ */
+/* $Id: velocis.c,v 1.27.2.1 2001/10/11 23:51:49 ssb Exp $ */
 
 /*
  * TODO:
@@ -65,8 +65,10 @@ function_entry velocis_functions[] = {
 };
 
 zend_module_entry velocis_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"velocis", velocis_functions, PHP_MINIT(velocis), PHP_MSHUTDOWN(velocis),
-		PHP_RINIT(velocis), NULL, PHP_MINFO(velocis), STANDARD_MODULE_PROPERTIES
+		PHP_RINIT(velocis), NULL, PHP_MINFO(velocis), NO_VERSION_YET,
+        STANDARD_MODULE_PROPERTIES
 };
 
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.28.2.1 2001/09/07 06:44:21 rasmus Exp $ */
+/* $Id: mbstring.c,v 1.28.2.2 2001/10/11 23:51:38 ssb Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -131,6 +131,7 @@ function_entry mbstring_functions[] = {
 };
 
 zend_module_entry mbstring_module_entry = {
+    STANDARD_MODULE_HEADER,
 	"mbstring",
 	mbstring_functions,
 	PHP_MINIT(mbstring),
@@ -138,6 +139,7 @@ zend_module_entry mbstring_module_entry = {
 	PHP_RINIT(mbstring),
 	PHP_RSHUTDOWN(mbstring),
 	PHP_MINFO(mbstring),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

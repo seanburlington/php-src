@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.94 2001/08/07 17:26:30 phanto Exp $ */
+/* $Id: pdf.c,v 1.94.2.1 2001/10/11 23:51:53 ssb Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -236,6 +236,7 @@ function_entry pdf_functions[] = {
 /* {{{ pdf_module_entry
  */
 zend_module_entry pdf_module_entry = {
+    STANDARD_MODULE_HEADER,
 	"pdf", 
 	pdf_functions, 
 	PHP_MINIT(pdf), 
@@ -243,6 +244,7 @@ zend_module_entry pdf_module_entry = {
 	NULL, 
 	NULL, 
 	PHP_MINFO(pdf), 
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES 
 };
 /* }}} */
@@ -347,7 +349,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.94 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.94.2.1 $" );
 	php_info_print_table_end();
 
 }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.64 2001/08/14 17:46:17 dbeu Exp $ */
+/* $Id: db.c,v 1.64.2.1 2001/10/11 23:51:14 ssb Exp $ */
 #define IS_EXT_MODULE
 
 #if 1
@@ -1234,7 +1234,16 @@ function_entry dbm_functions[] = {
 /* }}} */
 
 zend_module_entry dbm_module_entry = {
-	"db", dbm_functions, PHP_MINIT(db), PHP_MSHUTDOWN(db), PHP_RINIT(db), NULL, PHP_MINFO(db), STANDARD_MODULE_PROPERTIES
+    STANDARD_MODULE_HEADER,
+	"db",
+    dbm_functions,
+    PHP_MINIT(db),
+    PHP_MSHUTDOWN(db),
+    PHP_RINIT(db),
+    NULL,
+    PHP_MINFO(db),
+    NO_VERSION_YET,
+    STANDARD_MODULE_PROPERTIES
 };
 
 #ifdef COMPILE_DL_DB

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.19 2001/07/31 23:34:22 sniper Exp $ */
+/* $Id: sablot.c,v 1.19.2.1 2001/10/11 23:52:13 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -95,6 +95,7 @@ function_entry xslt_functions[] = {
 /* {{{ xslt_module_entry
  */
 zend_module_entry xslt_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"xslt",
 	xslt_functions,
 	PHP_MINIT(xslt),
@@ -102,6 +103,7 @@ zend_module_entry xslt_module_entry = {
 	NULL,	
 	NULL,
 	PHP_MINFO(xslt),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.23.2.1 2001/08/21 18:14:34 zeev Exp $ */
+/* $Id: openssl.c,v 1.23.2.2 2001/10/11 23:51:49 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -82,6 +82,7 @@ function_entry openssl_functions[] = {
 /* {{{ openssl_module_entry
  */
 zend_module_entry openssl_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"openssl",
 	openssl_functions,
 	PHP_MINIT(openssl),
@@ -89,6 +90,7 @@ zend_module_entry openssl_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(openssl),
+        NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

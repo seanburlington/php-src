@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.17 2001/07/30 06:18:02 zeev Exp $ */
+/* $Id: recode.c,v 1.17.2.1 2001/10/11 23:51:58 ssb Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -54,13 +54,15 @@ static zend_function_entry php_recode_functions[] = {
 };
 
 zend_module_entry recode_module_entry = {
-	"Recode", 
+    STANDARD_MODULE_HEADER,
+	"recode", 
 	php_recode_functions, 
 	PHP_MINIT(recode), 
 	PHP_MSHUTDOWN(recode), 
 	NULL,
 	NULL, 
 	PHP_MINFO(recode), 
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 
@@ -95,7 +97,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.17 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.17.2.1 $");
 	php_info_print_table_end();
 
 }

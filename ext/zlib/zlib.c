@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.94.2.1 2001/08/16 23:35:09 zeev Exp $ */
+/* $Id: zlib.c,v 1.94.2.2 2001/10/11 23:52:15 ssb Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -112,6 +112,7 @@ function_entry php_zlib_functions[] = {
 /* {{{ php_zlib_module_entry
  */
 zend_module_entry php_zlib_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"zlib",
 	php_zlib_functions,
 	PHP_MINIT(zlib),
@@ -119,6 +120,7 @@ zend_module_entry php_zlib_module_entry = {
 	PHP_RINIT(zlib),
 	NULL,
 	PHP_MINFO(zlib),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.32 2001/08/11 16:38:20 zeev Exp $ */
+/* $Id: cpdf.c,v 1.32.2.1 2001/10/11 23:51:10 ssb Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -155,7 +155,16 @@ function_entry cpdf_functions[] = {
 };
 
 zend_module_entry cpdf_module_entry = {
-	"cpdf", cpdf_functions, PHP_MINIT(cpdf), PHP_MSHUTDOWN(cpdf), PHP_RINIT(cpdf), NULL, PHP_MINFO(cpdf), STANDARD_MODULE_PROPERTIES
+    STANDARD_MODULE_HEADER,
+	"cpdf",
+    cpdf_functions,
+    PHP_MINIT(cpdf),
+    PHP_MSHUTDOWN(cpdf),
+    PHP_RINIT(cpdf),
+    NULL,
+    PHP_MINFO(cpdf),
+    NO_VERSION_YET,
+    STANDARD_MODULE_PROPERTIES
 };
 
 #ifdef COMPILE_DL_CPDF

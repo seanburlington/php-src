@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_icap.c,v 1.28 2001/08/13 18:47:51 andi Exp $ */
+/* $Id: php_icap.c,v 1.28.2.1 2001/10/11 23:51:29 ssb Exp $ */
 
 #define ICAP1
 
@@ -89,7 +89,16 @@ function_entry icap_functions[] = {
 
 
 zend_module_entry php_icap_module_entry = {
-    "icap", icap_functions, PHP_MINIT(icap), NULL, NULL, NULL, PHP_MINFO(icap), 0, 0, 0, NULL
+    STANDARD_MODULE_HEADER,
+    "icap",
+    icap_functions,
+    PHP_MINIT(icap),
+    NULL,
+    NULL,
+    NULL,
+    PHP_MINFO(icap),
+    NO_VERSION_YET,
+    STANDARD_MODULE_PROPERTIES
 };
 
 

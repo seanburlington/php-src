@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyrus.c,v 1.1 2001/08/05 17:43:03 sterling Exp $ */
+/* $Id: cyrus.c,v 1.1.2.1 2001/10/11 23:51:14 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -48,6 +48,7 @@ function_entry cyrus_functions[] = {
 };
 
 zend_module_entry cyrus_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"cyrus",
 	cyrus_functions,
 	PHP_MINIT(cyrus),
@@ -55,6 +56,7 @@ zend_module_entry cyrus_module_entry = {
 	NULL,	
 	NULL,
 	PHP_MINFO(cyrus),
+	NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.19 2001/08/11 16:38:47 zeev Exp $ */
+/* $Id: iconv.c,v 1.19.2.1 2001/10/11 23:51:29 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -62,6 +62,7 @@ function_entry iconv_functions[] = {
 /* {{{ iconv_module_entry
  */
 zend_module_entry iconv_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"iconv",
 	iconv_functions,
 	PHP_MINIT(miconv),
@@ -69,6 +70,7 @@ zend_module_entry iconv_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(miconv),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

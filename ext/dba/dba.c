@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.37 2001/08/14 05:44:33 sniper Exp $ */
+/* $Id: dba.c,v 1.37.2.1 2001/10/11 23:51:16 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -60,11 +60,15 @@ static PHP_MSHUTDOWN_FUNCTION(dba);
 static PHP_MINFO_FUNCTION(dba);
 
 zend_module_entry dba_module_entry = {
-	"dba", dba_functions, 
+    STANDARD_MODULE_HEADER,
+	"dba",
+    dba_functions, 
 	PHP_MINIT(dba), 
 	PHP_MSHUTDOWN(dba), 
-	NULL, NULL,
+	NULL,
+    NULL,
 	PHP_MINFO(dba),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

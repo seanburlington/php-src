@@ -18,7 +18,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mailparse.c,v 1.8 2001/07/30 08:24:29 zeev Exp $ */
+/* $Id: mailparse.c,v 1.8.2.1 2001/10/11 23:51:38 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -64,6 +64,7 @@ function_entry mailparse_functions[] = {
 };
 
 zend_module_entry mailparse_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"mailparse",
 	mailparse_functions,
 	PHP_MINIT(mailparse),
@@ -71,6 +72,7 @@ zend_module_entry mailparse_module_entry = {
 	PHP_RINIT(mailparse),
 	PHP_RSHUTDOWN(mailparse),
 	PHP_MINFO(mailparse),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.33 2001/08/08 02:02:02 sniper Exp $ */
+/* $Id: posix.c,v 1.33.2.1 2001/10/11 23:51:55 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -110,6 +110,7 @@ static PHP_MINFO_FUNCTION(posix);
 /* {{{ posix_module_entry
  */
 zend_module_entry posix_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"posix", 
 	posix_functions, 
 	NULL,
@@ -117,6 +118,7 @@ zend_module_entry posix_module_entry = {
 	NULL,
 	NULL, 
 	PHP_MINFO(posix),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
@@ -130,7 +132,7 @@ ZEND_GET_MODULE(posix)
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.33 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.33.2.1 $");
 	php_info_print_table_end();
 }
 /* }}} */

@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky (iliaa@home.com)                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.16 2001/08/07 13:33:27 dbeu Exp $ */
+/* $Id: shmop.c,v 1.16.2.1 2001/10/11 23:52:01 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -61,6 +61,7 @@ function_entry shmop_functions[] = {
 /* {{{ shmop_module_entry
  */
 zend_module_entry shmop_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"shmop",
 	shmop_functions,
 	PHP_MINIT(shmop),
@@ -68,6 +69,7 @@ zend_module_entry shmop_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(shmop),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

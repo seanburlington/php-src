@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.28 2001/08/11 12:02:15 thies Exp $ */
+/* $Id: php_sybase_db.c,v 1.28.2.1 2001/10/11 23:52:07 ssb Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -86,7 +86,8 @@ function_entry sybase_functions[] = {
 };
 
 zend_module_entry sybase_module_entry = {
-	"sybase", sybase_functions, PHP_MINIT(sybase), PHP_MSHUTDOWN(sybase), PHP_RINIT(sybase), PHP_RSHUTDOWN(sybase), PHP_MINFO(sybase), STANDARD_MODULE_PROPERTIES
+	STANDARD_MODULE_HEADER,
+	"sybase", sybase_functions, PHP_MINIT(sybase), PHP_MSHUTDOWN(sybase), PHP_RINIT(sybase), PHP_RSHUTDOWN(sybase), PHP_MINFO(sybase), NO_VERSION_YET, STANDARD_MODULE_PROPERTIES
 };
 
 #ifdef COMPILE_DL_SYBASE

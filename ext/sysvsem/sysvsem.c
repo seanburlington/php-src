@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.33 2001/07/31 05:44:08 zeev Exp $ */
+/* $Id: sysvsem.c,v 1.33.2.1 2001/10/11 23:52:08 ssb Exp $ */
 
 /* Latest update build anc tested on Linux 2.2.14
  *
@@ -70,7 +70,8 @@ function_entry sysvsem_functions[] = {
 /* {{{ sysvsem_module_entry
  */
 zend_module_entry sysvsem_module_entry = {
-	"sysvsem", sysvsem_functions, PHP_MINIT(sysvsem), NULL, NULL, NULL, NULL, STANDARD_MODULE_PROPERTIES
+    STANDARD_MODULE_HEADER,
+	"sysvsem", sysvsem_functions, PHP_MINIT(sysvsem), NULL, NULL, NULL, NULL, NO_VERSION_YET, STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
 

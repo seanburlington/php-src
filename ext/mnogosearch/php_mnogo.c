@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.32 2001/08/05 01:42:36 zeev Exp $ */
+/* $Id: php_mnogo.c,v 1.32.2.1 2001/10/11 23:51:42 ssb Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -145,6 +145,7 @@ function_entry mnogosearch_functions[] = {
 /* }}} */
 
 zend_module_entry mnogosearch_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"mnogosearch", 
 	mnogosearch_functions, 
 	PHP_MINIT(mnogosearch), 
@@ -152,6 +153,7 @@ zend_module_entry mnogosearch_module_entry = {
 	PHP_RINIT(mnogosearch), 
 	NULL,
 	PHP_MINFO(mnogosearch), 
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

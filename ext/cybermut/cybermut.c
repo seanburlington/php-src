@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cybermut.c,v 1.5 2001/08/11 16:38:21 zeev Exp $ */
+/* $Id: cybermut.c,v 1.5.2.1 2001/10/11 23:51:13 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -48,6 +48,7 @@ function_entry cybermut_functions[] = {
 /* {{{ cybermut_module_entry
  */
 zend_module_entry cybermut_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"cybermut",
 	cybermut_functions,
 	PHP_MINIT(cybermut),
@@ -55,6 +56,7 @@ zend_module_entry cybermut_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(cybermut),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.11 2001/07/30 20:51:57 jason Exp $ */
+/* $Id: pcntl.c,v 1.11.2.1 2001/10/11 23:51:51 ssb Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -54,12 +54,15 @@ function_entry pcntl_functions[] = {
 };
 
 zend_module_entry pcntl_module_entry = {
-	"pcntl",	pcntl_functions,
+	STANDARD_MODULE_HEADER,
+	"pcntl",
+	pcntl_functions,
 	PHP_MINIT(pcntl),
 	PHP_MSHUTDOWN(pcntl),
 	NULL,
 	NULL,
 	PHP_MINFO(pcntl),
+	NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

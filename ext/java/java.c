@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.58 2001/08/14 07:09:19 sniper Exp $ */
+/* $Id: java.c,v 1.58.2.1 2001/10/11 23:51:36 ssb Exp $ */
 
 /*
  * This module implements Zend OO syntax overloading support for Java
@@ -631,6 +631,7 @@ static PHP_MINFO_FUNCTION(java) {
 }
 
 zend_module_entry java_module_entry = {
+    STANDARD_MODULE_HEADER,
   "java",
   java_functions,
   PHP_MINIT(java),
@@ -638,6 +639,7 @@ zend_module_entry java_module_entry = {
   NULL,
   NULL,
   PHP_MINFO(java),
+	NO_VERSION_YET,
   STANDARD_MODULE_PROPERTIES
 };
 

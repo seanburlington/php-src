@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.26 2001/08/10 12:53:06 dickmeiss Exp $ */
+/* $Id: php_yaz.c,v 1.26.2.1 2001/10/11 23:52:13 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2678,6 +2678,7 @@ PHP_RINIT_FUNCTION(yaz)
 }
 
 zend_module_entry yaz_module_entry = {
+    STANDARD_MODULE_HEADER,
 	"yaz",
 	yaz_functions,
 	PHP_MINIT(yaz),
@@ -2685,6 +2686,7 @@ zend_module_entry yaz_module_entry = {
 	PHP_RINIT(yaz),
 	PHP_RSHUTDOWN(yaz),
 	PHP_MINFO(yaz),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

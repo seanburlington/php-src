@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ifx.ec,v 1.56 2001/08/07 18:36:54 sniper Exp $ */
+/* $Id: ifx.ec,v 1.56.2.1 2001/10/11 23:51:31 ssb Exp $ */
 
 /* -------------------------------------------------------------------
  * if you want a function reference : "grep '^\*\*' ifx.ec" will give
@@ -165,6 +165,7 @@ $endif;
 };
 
 zend_module_entry ifx_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"informix", 
 	ifx_functions, 
 	PHP_MINIT(ifx), 
@@ -172,6 +173,7 @@ zend_module_entry ifx_module_entry = {
 	PHP_RINIT(ifx), 
 	NULL, 
 	PHP_MINFO(ifx),
+	NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.79 2001/08/13 07:55:32 rasmus Exp $ */
+/* $Id: curl.c,v 1.79.2.1 2001/10/11 23:51:12 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -69,6 +69,7 @@ function_entry curl_functions[] = {
 /* {{{ curl_module_entry
  */
 zend_module_entry curl_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"curl",
 	curl_functions,
 	PHP_MINIT(curl),
@@ -76,6 +77,7 @@ zend_module_entry curl_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(curl),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.79.2.1 2001/08/21 18:14:37 zeev Exp $ */
+/* $Id: wddx.c,v 1.79.2.2 2001/10/11 23:52:10 ssb Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -105,6 +105,7 @@ PHP_MINFO_FUNCTION(wddx);
 /* {{{ wddx_module_entry
  */
 zend_module_entry wddx_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"wddx",
 	wddx_functions,
 	PHP_MINIT(wddx),
@@ -112,6 +113,7 @@ zend_module_entry wddx_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(wddx),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

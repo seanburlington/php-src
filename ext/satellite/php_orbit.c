@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: php_orbit.c,v 1.8 2001/08/09 21:55:09 eriksson Exp $
+ * $Id: php_orbit.c,v 1.8.2.1 2001/10/11 23:51:59 ssb Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -81,6 +81,7 @@ static function_entry satellite_functions[] = {
  * module entry
  */
 zend_module_entry satellite_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"satellite",
 	satellite_functions,
 	PHP_MINIT(satellite),			/* module startup */
@@ -88,6 +89,7 @@ zend_module_entry satellite_module_entry = {
 	NULL,											/* request startup */
 	NULL,											/* request shutdown */
 	PHP_MINFO(satellite),			/* module info */
+	NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

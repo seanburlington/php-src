@@ -16,7 +16,7 @@
    |          Fredrik Ohrn                                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.28 2001/08/05 01:42:42 zeev Exp $ */
+/* $Id: yp.c,v 1.28.2.1 2001/10/11 23:52:13 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -56,6 +56,7 @@ function_entry yp_functions[] = {
 };
 
 zend_module_entry yp_module_entry = {
+    STANDARD_MODULE_HEADER,
 	"yp",
 	yp_functions,
 	PHP_MINIT(yp),
@@ -63,6 +64,7 @@ zend_module_entry yp_module_entry = {
 	PHP_RINIT(yp),
 	NULL,
 	PHP_MINFO(yp),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

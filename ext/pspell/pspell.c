@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.20 2001/08/05 01:42:39 zeev Exp $ */
+/* $Id: pspell.c,v 1.20.2.1 2001/10/11 23:51:57 ssb Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -71,7 +71,8 @@ function_entry pspell_functions[] = {
 static int le_pspell, le_pspell_config;
 
 zend_module_entry pspell_module_entry = {
-	"pspell", pspell_functions, PHP_MINIT(pspell), NULL, NULL, NULL, PHP_MINFO(pspell), STANDARD_MODULE_PROPERTIES
+    STANDARD_MODULE_HEADER,
+	"pspell", pspell_functions, PHP_MINIT(pspell), NULL, NULL, NULL, PHP_MINFO(pspell), NO_VERSION_YET, STANDARD_MODULE_PROPERTIES
 };
 
 #ifdef COMPILE_DL_PSPELL

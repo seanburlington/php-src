@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.25 2001/12/16 15:36:33 yohgaki Exp $
+dnl $Id: config.m4,v 1.26 2001/12/18 23:47:12 yohgaki Exp $
 dnl
 
 AC_DEFUN(PHP_PGSQL_CHECK_FUNCTIONS,[
@@ -19,14 +19,14 @@ if test "$PHP_PGSQL" != "no"; then
   fi
   
   for i in $PGSQL_SEARCH_PATHS; do
-    for j in include include/pgsql include/postgres include/postgresql src/include/libpq ""; do
+    for j in include include/pgsql include/postgres include/postgresql ""; do
       if test -r "$i/$j/libpq-fe.h"; then
         PGSQL_INC_BASE=$i
         PGSQL_INCLUDE=$i/$j
       fi
     done
 
-    for j in lib lib/pgsql lib/postgres lib/postgresql src/interfaces/libpq ""; do
+    for j in lib lib/pgsql lib/postgres lib/postgresql ""; do
       if test -f "$i/$j/libpq.so"; then 
         PGSQL_LIBDIR=$i/$j
       fi

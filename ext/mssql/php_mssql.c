@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.92 2002/12/31 16:07:01 sebastian Exp $ */
+/* $Id: php_mssql.c,v 1.93 2003/01/08 23:19:53 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -446,7 +446,7 @@ static void php_mssql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	DBMSGHANDLE(mssql.login, (MHANDLEFUNC) php_mssql_message_handler);
 
 #ifndef HAVE_FREETDS
-	if (MS_SQL_G(secure_connection) == 1){
+	if (MS_SQL_G(secure_connection)){
 		DBSETLSECURE(mssql.login);
 	}
 	else {

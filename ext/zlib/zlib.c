@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.66 2000/11/13 19:05:25 zeev Exp $ */
+/* $Id: zlib.c,v 1.67 2000/11/20 21:36:38 hholzgra Exp $ */
 #define IS_EXT_MODULE
 
 #ifndef PHP_WIN32
@@ -967,7 +967,8 @@ static int gz_closer(void *cookie) {
 }
 
 
-static cookie_io_functions_t gz_cookie_functions =   
+
+static COOKIE_IO_FUNCTIONS_T gz_cookie_functions =   
 { gz_reader 
 , gz_writer
 , gz_seeker

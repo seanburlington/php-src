@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: text.c,v 1.10 2003/06/15 19:58:42 rrichards Exp $ */
+/* $Id: text.c,v 1.11 2003/07/07 19:37:32 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -84,7 +84,7 @@ int dom_text_whole_text_read(dom_object *obj, zval **retval TSRMLS_DC)
 	xmlNodePtr node;
 	xmlChar *wholetext;
 
-	node = obj->ptr;
+	node = dom_object_get_node(obj);
 
 	ALLOC_ZVAL(*retval);
 	wholetext = xmlNodeListGetString(node->doc, node, 1);

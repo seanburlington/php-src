@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.5 2003/06/15 19:58:42 rrichards Exp $ */
+/* $Id: element.c,v 1.6 2003/07/07 19:37:32 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -107,7 +107,7 @@ int dom_element_tag_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 {
 	xmlNodePtr nodep;
 
-	nodep = obj->ptr;
+	nodep = dom_object_get_node(obj);
 	ALLOC_ZVAL(*retval);
 	ZVAL_STRING(*retval, (char *) (nodep->name), 1);
 	return SUCCESS;
@@ -296,7 +296,7 @@ PHP_FUNCTION(dom_element_set_attribute_node)
 		if ((oldobj = dom_object_get_data((xmlNodePtr) existattrp)) == NULL) {
 			xmlUnlinkNode((xmlNodePtr) existattrp);
 		} else {
-			if (oldobj->ptr == attrp) {
+			if (oldobj->ptr->node == (xmlNodePtr) attrp) {
 				RETURN_NULL();
 			}
 			xmlUnlinkNode((xmlNodePtr) existattrp);
@@ -637,7 +637,7 @@ PHP_FUNCTION(dom_element_set_attribute_node_ns)
 		if ((oldobj = dom_object_get_data((xmlNodePtr) existattrp)) == NULL) {
 			xmlUnlinkNode((xmlNodePtr) existattrp);
 		} else {
-			if (oldobj->ptr == attrp) {
+			if (oldobj->ptr->node == (xmlNodePtr) attrp) {
 				RETURN_NULL();
 			}
 			xmlUnlinkNode((xmlNodePtr) existattrp);

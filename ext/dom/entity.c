@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: entity.c,v 1.2 2003/06/10 20:03:27 imajes Exp $ */
+/* $Id: entity.c,v 1.3 2003/07/07 19:37:32 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -48,7 +48,8 @@ Since:
 int dom_entity_public_id_read(dom_object *obj, zval **retval TSRMLS_DC)
 {
 	xmlEntity *nodep;
-	nodep = obj->ptr;
+
+	nodep = (xmlEntity *) dom_object_get_node(obj);
 
 	ALLOC_ZVAL(*retval);
 	if (nodep->etype != XML_EXTERNAL_GENERAL_UNPARSED_ENTITY) {
@@ -72,7 +73,8 @@ Since:
 int dom_entity_system_id_read(dom_object *obj, zval **retval TSRMLS_DC)
 {
 	xmlEntity *nodep;
-	nodep = obj->ptr;
+
+	nodep = (xmlEntity *) dom_object_get_node(obj);
 
 	ALLOC_ZVAL(*retval);
 	if (nodep->etype != XML_EXTERNAL_GENERAL_UNPARSED_ENTITY) {
@@ -98,7 +100,7 @@ int dom_entity_notation_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 	xmlEntity *nodep;
 	char *content;
 
-	nodep = obj->ptr;
+	nodep = (xmlEntity *) dom_object_get_node(obj);
 
 	ALLOC_ZVAL(*retval);
 	if (nodep->etype != XML_EXTERNAL_GENERAL_UNPARSED_ENTITY) {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: documenttype.c,v 1.3 2003/06/10 20:03:27 imajes Exp $ */
+/* $Id: documenttype.c,v 1.4 2003/07/07 19:37:32 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -67,7 +67,7 @@ int dom_documenttype_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 {
 	xmlDtdPtr dtdptr;
 
-	dtdptr = obj->ptr;
+	dtdptr = (xmlDtdPtr) dom_object_get_node(obj);
 	ALLOC_ZVAL(*retval);
 	ZVAL_STRING(*retval, (char *) (dtdptr->name), 1);
 
@@ -91,7 +91,7 @@ int dom_documenttype_entities_read(dom_object *obj, zval **retval TSRMLS_DC)
 	xmlNode *nodep = NULL;
 	int ret, htsize, index = 0;
 
-	doctypep = obj->ptr;
+	doctypep = (xmlDtdPtr) dom_object_get_node(obj);
 
 	ALLOC_ZVAL(*retval);
 	array_init(*retval);
@@ -137,7 +137,7 @@ int dom_documenttype_notations_read(dom_object *obj, zval **retval TSRMLS_DC)
 	xmlNode *nodep = NULL;
 	int ret, htsize, index = 0;
 
-	doctypep = obj->ptr;
+	doctypep = (xmlDtdPtr) dom_object_get_node(obj);
 
 	MAKE_STD_ZVAL(*retval);
 	array_init(*retval);
@@ -179,7 +179,7 @@ int dom_documenttype_public_id_read(dom_object *obj, zval **retval TSRMLS_DC)
 {
 	xmlDtdPtr dtdptr;
 
-	dtdptr = obj->ptr;
+	dtdptr = (xmlDtdPtr) dom_object_get_node(obj);
 
 	ALLOC_ZVAL(*retval);
 	if (dtdptr->ExternalID) {
@@ -204,7 +204,7 @@ int dom_documenttype_system_id_read(dom_object *obj, zval **retval TSRMLS_DC)
 {
 	xmlDtdPtr dtdptr;
 
-	dtdptr = obj->ptr;
+	dtdptr = (xmlDtdPtr) dom_object_get_node(obj);
 
 	ALLOC_ZVAL(*retval);
 	if (dtdptr->SystemID) {
@@ -232,7 +232,7 @@ int dom_documenttype_internal_subset_read(dom_object *obj, zval **retval TSRMLS_
 	xmlOutputBuffer *buff = NULL;
 	xmlChar *strintsubset;
 
-	dtdptr = obj->ptr;
+	dtdptr = (xmlDtdPtr) dom_object_get_node(obj);
 
 	ALLOC_ZVAL(*retval);
 

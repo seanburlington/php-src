@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: characterdata.c,v 1.5 2003/06/12 17:04:28 rrichards Exp $ */
+/* $Id: characterdata.c,v 1.6 2003/07/07 19:37:32 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -53,7 +53,7 @@ int dom_characterdata_data_read(dom_object *obj, zval **retval TSRMLS_DC)
 	xmlNodePtr nodep;
 	xmlChar *content;
 
-	nodep = obj->ptr;
+	nodep = dom_object_get_node(obj);
 
 	ALLOC_ZVAL(*retval);
 	
@@ -72,7 +72,7 @@ int dom_characterdata_data_write(dom_object *obj, zval *newval TSRMLS_DC)
 {
 	xmlNode *nodep;
 
-	nodep = obj->ptr;
+	nodep = dom_object_get_node(obj);
 	xmlNodeSetContentLen(nodep, Z_STRVAL_P(newval), Z_STRLEN_P(newval) + 1);
 	return SUCCESS;
 }
@@ -104,7 +104,7 @@ int dom_characterdata_length_read(dom_object *obj, zval **retval TSRMLS_DC)
 	xmlChar *content;
 	long length;
 
-	nodep = obj->ptr;
+	nodep = dom_object_get_node(obj);
 
 	ALLOC_ZVAL(*retval);
 	

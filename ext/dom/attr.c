@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: attr.c,v 1.3 2003/06/10 20:03:27 imajes Exp $ */
+/* $Id: attr.c,v 1.4 2003/07/07 19:37:32 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -89,7 +89,7 @@ int dom_attr_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 {
 	xmlAttrPtr attrp;
 
-	attrp = obj->ptr;
+	attrp = (xmlAttrPtr) dom_object_get_node(obj);
 	ALLOC_ZVAL(*retval);
 	ZVAL_STRING(*retval, (char *) (attrp->name), 1);
 
@@ -127,7 +127,7 @@ int dom_attr_value_read(dom_object *obj, zval **retval TSRMLS_DC)
 	xmlAttrPtr attrp;
 	xmlChar *content;
 
-	attrp = obj->ptr;
+	attrp = (xmlAttrPtr) dom_object_get_node(obj);
 
 	ALLOC_ZVAL(*retval);
 
@@ -148,7 +148,7 @@ int dom_attr_value_write(dom_object *obj, zval *newval TSRMLS_DC)
 {
 	xmlAttrPtr attrp;
 
-	attrp = obj->ptr;
+	attrp = (xmlAttrPtr) dom_object_get_node(obj);
 
 	if (attrp->children) {
 		node_list_unlink(attrp->children TSRMLS_CC);
@@ -172,7 +172,7 @@ int dom_attr_owner_element_read(dom_object *obj, zval **retval TSRMLS_DC)
 	xmlNodePtr nodep, nodeparent;
 	int ret;
 
-	nodep = obj->ptr;
+	nodep = dom_object_get_node(obj);
 
 	nodeparent = nodep->parent;
 	if (!nodeparent) {

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.15 2002/08/25 12:24:40 derick Exp $
+dnl $Id: config.m4,v 1.16 2002/09/04 18:47:22 sniper Exp $
 dnl
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -7,7 +7,7 @@ PHP_ARG_WITH(curl, for CURL support,
 
 dnl Temporary option while we develop this aspect of the extension
 PHP_ARG_WITH(curlwrappers, if we should use CURL for url streams,
-[  --with-curlwrappers     Use CURL for url streams])
+[  --with-curlwrappers     Use CURL for url streams], no, no)
 
 if test "$PHP_CURL" != "no"; then
   if test -r $PHP_CURL/include/curl/easy.h; then

@@ -1,12 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.20 2002/09/04 13:52:41 kalowsky Exp $
+dnl $Id: config.m4,v 1.21 2002/09/04 18:47:24 sniper Exp $
 dnl
-
-PHP_ARG_WITH(mm,for mm support,
-[  --with-mm[=DIR]         Include mm support for session storage])
 
 PHP_ARG_ENABLE(session, whether to enable PHP sessions,
 [  --disable-session       Disable session support], yes)
+
+PHP_ARG_WITH(mm,for mm support,
+[  --with-mm[=DIR]         Include mm support for session storage], no, no)
 
 if test "$PHP_SESSION" != "no"; then
   PHP_NEW_EXTENSION(session, session.c mod_files.c mod_mm.c mod_user.c, $ext_shared)

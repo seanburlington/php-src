@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.6 2002/03/07 14:19:54 sas Exp $
+dnl $Id: config.m4,v 1.7 2002/09/04 18:47:26 sniper Exp $
 dnl
 
 PHP_ARG_WITH(pi3web,for Pi3Web Support,
-[  --with-pi3web=DIR       Build PHP as a module for use with Pi3Web.])
+[  --with-pi3web=DIR       Build PHP as a module for use with Pi3Web.], no, no)
 
 if test "$PHP_PI3WEB" != "no"; then
 	if test "$PHP_PI3WEB" = "yes"; then

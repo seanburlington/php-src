@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.17 2002/08/06 17:51:24 markonen Exp $
+dnl $Id: config.m4,v 1.18 2002/09/04 18:47:26 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_TEST_WRITE_STDOUT,[
@@ -39,7 +39,7 @@ if test "$PHP_SAPI" = "default"; then
 [  --enable-force-cgi-redirect
                           Enable the security check for internal server
                           redirects.  You should use this if you are
-                          running the CGI version with Apache. ])
+                          running the CGI version with Apache. ], no, no)
 
   if test "$PHP_FORCE_CGI_REDIRECT" = "yes"; then
     REDIRECT=1
@@ -52,7 +52,7 @@ if test "$PHP_SAPI" = "default"; then
 [  --enable-discard-path   If this is enabled, the PHP CGI binary
                           can safely be placed outside of the
                           web tree and people will not be able
-                          to circumvent .htaccess security. ])
+                          to circumvent .htaccess security. ], no, no)
 
   if test "$PHP_DISCARD_PATH" = "yes"; then
     DISCARD_PATH=1

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.21 2002/03/16 22:31:57 mfischer Exp $ */
+/* $Id: pcntl.c,v 1.22 2002/03/17 08:10:04 mfischer Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -32,6 +32,7 @@
 
 #include "php.h"
 #include "php_ini.h"
+#include "ext/standard/info.h"
 #include "php_pcntl.h"
 #include "zend_extensions.h"
 
@@ -531,7 +532,7 @@ static void old_pcntl_signal_handler(int signo)
 	
 	zval_dtor(call_name);
 	efree(call_name);
-	efree(param)
+	efree(param);
 	efree(retval);
 
 	return;

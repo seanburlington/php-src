@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.h,v 1.13 2001/10/08 22:21:16 fmk Exp $ */
+/* $Id: php_fbsql.h,v 1.14 2001/10/10 00:42:00 fmk Exp $ */
 
 #define HAVE_FBSQL 1
 
@@ -80,6 +80,10 @@ PHP_FUNCTION(fbsql_set_transaction);
 PHP_FUNCTION(fbsql_autocommit);
 PHP_FUNCTION(fbsql_commit);
 PHP_FUNCTION(fbsql_rollback);
+
+PHP_FUNCTION(fbsql_create_blob);
+PHP_FUNCTION(fbsql_create_clob);
+
 PHP_FUNCTION(fbsql_hostname);
 PHP_FUNCTION(fbsql_database);
 PHP_FUNCTION(fbsql_database_password);

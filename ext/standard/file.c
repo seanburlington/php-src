@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.42 1999/11/24 06:16:37 evan Exp $ */
+/* $Id: file.c,v 1.43 1999/11/24 17:56:31 sas Exp $ */
 
 /* Synced with php3 revision 1.218 1999-06-16 [ssb] */
 
@@ -1695,7 +1695,6 @@ PHP_FUNCTION(fd_set)
         }
         else {
                 pval ***args = (pval ***) emalloc(sizeof(pval **) * ARG_COUNT(ht));
-                pval **max, result;
                 int i;
                 if(getParametersArrayEx(ARG_COUNT(ht), args) == FAILURE) {
                         efree(args);

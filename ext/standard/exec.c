@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.16 1999/10/13 14:01:47 thies Exp $ */
+/* $Id: exec.c,v 1.17 1999/11/24 17:56:31 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -145,7 +145,9 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 
 		
 			if (type == 1) {
+#if APACHE
 				SLS_FETCH();
+#endif
 				
 				if (output) PUTS(buf);
 #if APACHE

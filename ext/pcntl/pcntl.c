@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.44.2.1 2004/08/28 12:20:41 derick Exp $ */
+/* $Id: pcntl.c,v 1.44.2.2 2004/12/14 14:00:50 dmitry Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -148,8 +148,10 @@ void php_register_signal_constants(INIT_FUNC_ARGS)
 #ifdef SIGPWR
 	REGISTER_LONG_CONSTANT("SIGPWR",   (long) SIGPWR, CONST_CS | CONST_PERSISTENT);
 #endif
+#ifdef SIGSYS
 	REGISTER_LONG_CONSTANT("SIGSYS",   (long) SIGSYS, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SIGBABY",  (long) SIGSYS, CONST_CS | CONST_PERSISTENT);
+#endif
 
 #if HAVE_GETPRIORITY || HAVE_SETPRIORITY
 	REGISTER_LONG_CONSTANT("PRIO_PGRP", PRIO_PGRP, CONST_CS | CONST_PERSISTENT);

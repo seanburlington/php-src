@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.185 2002/11/15 02:05:06 maxim Exp $ */
+/* $Id: oci8.c,v 1.186 2002/11/15 02:06:11 maxim Exp $ */
 
 /* TODO list:
  *
@@ -47,7 +47,7 @@
  * - delay OCIInitialize() as far as we can.
  * - add PHP Array <-> OCICollection conversion
  * - add Collection iterator object for INDEX BY tables
- * - make auto-rollaback only happen if we have an outstanding transaction
+ * - make auto-rollback only happen if we have an outstanding transaction
  * - implement ocidisconnect
  */
 
@@ -628,7 +628,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.185 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.186 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );

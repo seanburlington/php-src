@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_statement.c,v 1.5 2004/07/19 14:40:46 wez Exp $ */
+/* $Id: oci_statement.c,v 1.6 2004/07/31 18:46:18 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,6 +29,7 @@
 #include "pdo/php_pdo_driver.h"
 #include "php_pdo_oci.h"
 #include "php_pdo_oci_int.h"
+#include "Zend/zend_extensions.h"
 
 #define STMT_CALL(name, params)	\
 	S->last_err = name params; \

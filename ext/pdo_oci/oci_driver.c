@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.9 2004/06/14 19:58:35 tony2001 Exp $ */
+/* $Id: oci_driver.c,v 1.10 2004/07/31 18:46:18 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,6 +29,7 @@
 #include "pdo/php_pdo_driver.h"
 #include "php_pdo_oci.h"
 #include "php_pdo_oci_int.h"
+#include "Zend/zend_exceptions.h"
 
 static int pdo_oci_fetch_error_func(pdo_dbh_t *dbh, pdo_stmt_t *stmt, zval *info TSRMLS_DC) /* {{{ */
 {

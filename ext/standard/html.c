@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.61 2002/10/29 15:05:07 moriyoshi Exp $ */
+/* $Id: html.c,v 1.62 2002/11/11 13:28:34 moriyoshi Exp $ */
 
 #include "php.h"
 #include "reg.h"
@@ -291,10 +291,10 @@ static const struct {
 	{ "BIG5",			cs_big5 },
 	{ "GB2312",			cs_gb2312 },
 	{ "BIG5-HKSCS",		cs_big5hkscs },
- 	{ "Shift_JIS",		cs_sjis },
- 	{ "SJIS",   		cs_sjis },
- 	{ "EUCJP",   		cs_eucjp },
- 	{ "EUC-JP",   		cs_eucjp },
+	{ "Shift_JIS",		cs_sjis },
+	{ "SJIS",   		cs_sjis },
+	{ "EUCJP",   		cs_eucjp },
+	{ "EUC-JP",   		cs_eucjp },
 	{ NULL }
 };
 

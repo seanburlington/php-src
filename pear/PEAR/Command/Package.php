@@ -17,7 +17,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.41 2002/10/12 14:19:50 ssb Exp $
+// $Id: Package.php,v 1.42 2002/10/22 23:08:55 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';
@@ -474,6 +474,12 @@ Wrote: /usr/src/redhat/RPMS/i386/PEAR::Net_Socket-1.0-1.i386.rpm
         } else {
             $arch = 'noarch';
         }
+        $cfk = array('master_server', 'php_dir', 'ext_dir', 'doc_dir',
+                     'bin_dir', 'data_dir', 'test_dir');
+        foreach ($cfg as $k) {
+            $info[$k] = $this->config->get($k);
+        }
+        $info['arch'] = $arch;
         $fp = @fopen($spec_template, "r");
         if (!$fp) {
             return $this->raiseError("could not open RPM spec file template $spec_template: $php_errormsg");

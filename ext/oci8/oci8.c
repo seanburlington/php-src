@@ -22,7 +22,7 @@
 
 #define OCI_USE_EMALLOC 0		/* set this to 1 if you want to use the php memory manager! */
 
-/* $Id: oci8.c,v 1.35 1999/11/10 05:50:20 rasmus Exp $ */
+/* $Id: oci8.c,v 1.36 1999/11/12 14:31:01 thies Exp $ */
 
 /* TODO list:
  *
@@ -816,8 +816,9 @@ oci_make_pval(pval *value,oci_statement *statement,oci_out_column *column, char 
 	}
 
 	if (column->is_cursor) { /* REFCURSOR -> simply return the statement id */
-		value->type = IS_LONG;
+		value->type = IS_RESOURCE;
 		value->value.lval = column->stmtid;
+		zend_list_addref(column->stmtid);
 	} else if (column->is_descr) {
 		if ((column->data_type != SQLT_RDD) && (mode & OCI_RETURN_LOBS)) {
 			/* OCI_RETURN_LOBS means that we want the content of the LOB back instead of the locator */
@@ -1996,10 +1997,18 @@ _oci_close_server(oci_server *server)
 
 	if (server->open) {
 		if (server->pServer && OCI(pError)) {
+#if APACHE
+			void (*handler) (int);
+			handler = signal(SIGCHLD, SIG_DFL);
+#endif
 			OCI(error) = 
 				OCIServerDetach(server->pServer,
 								OCI(pError),
 								OCI_DEFAULT);
+
+#if APACHE
+			signal(SIGCHLD,handler);
+#endif
 			
 			if (OCI(error)) {
 				oci_error(OCI(pError), "oci_close_server OCIServerDetach", OCI(error));

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.108 2000/07/26 05:41:38 sterling Exp $ */
+/* $Id: info.c,v 1.109 2000/08/20 14:43:56 sas Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -368,7 +368,7 @@ void php_print_credits(int flag)
 		/* SAPI Modules */
 
 		php_info_print_table_start();
-		php_info_print_table_colspan_header(2, "SAPI Module");
+		php_info_print_table_colspan_header(2, "SAPI Modules");
 		php_info_print_table_header(2, "Contribution", "Authors");
 		CREDIT_LINE("Apache", "Rasmus Lerdorf, Zeev Suraski");
 		CREDIT_LINE("ISAPI", "Andi Gutmans, Zeev Suraski");

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.5 2004/05/20 18:19:03 iliaa Exp $ */
+/* $Id: pgsql_driver.c,v 1.6 2004/05/20 19:09:36 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -131,9 +131,9 @@ static int pgsql_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquote
 {
 	pdo_pgsql_db_handle *H = (pdo_pgsql_db_handle *)dbh->driver_data;
 	*quoted = emalloc(2*unquotedlen + 3);
-	(*quoted)[0] = '"';
+	(*quoted)[0] = '\'';
 	*quotedlen = PQescapeString(*quoted + 1, unquoted, unquotedlen);
-	(*quoted)[*quotedlen + 1] = '"';
+	(*quoted)[*quotedlen + 1] = '\'';
 	(*quoted)[*quotedlen + 2] = '\0';
 	*quotedlen += 2;
 	return 1;

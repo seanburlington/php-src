@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.54 2000/02/10 19:41:19 zeev Exp $ */
+/* $Id: oci8.c,v 1.55 2000/02/19 13:11:02 zeev Exp $ */
 
 /* TODO list:
  *
@@ -774,7 +774,7 @@ static int oci_ping(oci_server *server)
 
 /* {{{ oci_debug() */
 
-static void oci_debug(const char *format,...)
+static void oci_debug(const char *format, ...)
 {
 	OCILS_FETCH();
 

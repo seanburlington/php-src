@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.210 2000/02/17 20:32:51 ssb Exp $ */
+/* $Id: main.c,v 1.211 2000/02/19 13:11:01 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -288,7 +288,7 @@ PHPAPI int php_write(void *buf, int size)
 	return PHPWRITE(buf, size);
 }
 
-PHPAPI int php_printf(const char *format,...)
+PHPAPI int php_printf(const char *format, ...)
 {
 	va_list args;
 	int ret;
@@ -305,7 +305,7 @@ PHPAPI int php_printf(const char *format,...)
 
 
 /* extended error handling function */
-PHPAPI void php_error(int type, const char *format,...)
+PHPAPI void php_error(int type, const char *format, ...)
 {
 	va_list args;
 	char *error_filename = NULL;

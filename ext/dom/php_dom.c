@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.5 2003/06/07 13:30:58 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.6 2003/06/07 15:07:42 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -431,7 +431,7 @@ PHP_MINIT_FUNCTION(dom)
 	REGISTER_DOM_CLASS(ce, "domtext", dom_characterdata_class_entry, php_dom_text_class_functions, dom_text_class_entry);
 	
 	zend_hash_init(&dom_text_prop_handlers, 0, NULL, NULL, 1);
-	dom_register_prop_handler(&dom_text_prop_handlers, "whole_text", dom_text_whole_text_read, NULL TSRMLS_CC);
+	dom_register_prop_handler(&dom_text_prop_handlers, "wholeText", dom_text_whole_text_read, NULL TSRMLS_CC);
 	zend_hash_merge(&dom_text_prop_handlers, &dom_characterdata_prop_handlers, NULL, NULL, sizeof(dom_prop_handler), 0);
 	zend_hash_add(&classes, ce.name, ce.name_length + 1, &dom_text_prop_handlers, sizeof(dom_text_prop_handlers), NULL);
 

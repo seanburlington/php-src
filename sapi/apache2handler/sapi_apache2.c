@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.8 2003/04/16 23:31:39 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.9 2003/05/07 14:12:57 moriyoshi Exp $ */
 
 #include <fcntl.h>
 
@@ -414,7 +414,7 @@ static void php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 	r->no_local_copy = 1;
 
 	content_type = sapi_get_default_content_type(TSRMLS_C);
-	ap_set_content_type(r, apr_pstrdup(r->pool, sapi_get_default_content_type(TSRMLS_C)));
+	ap_set_content_type(r, apr_pstrdup(r->pool, content_type));
 	efree(content_type);
 
 	apr_table_unset(r->headers_out, "Content-Length");

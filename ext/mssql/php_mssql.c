@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.44 2001/05/08 19:24:14 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.45 2001/05/09 16:20:34 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -760,13 +760,8 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 				if (column_type == SQLDATETIME) res_length += 10;
 			
 				res_buf = (char *) emalloc(res_length);
-				memset(res_buf, 0, res_length + 1);
-				dbconvert(NULL,column_type,dbdata(mssql_ptr->link,offset), res_length,SQLCHAR,res_buf,-1);
-		
-				while (res_length>0 && (res_buf[res_length-1] == ' ' || res_buf[res_length-1] == 0)) { /* nuke trailing whitespace */
-					res_length--;
-				}
-				res_buf[res_length] = 0;
+				res_length = dbconvert(NULL,column_type,dbdata(mssql_ptr->link,offset), res_length,SQLCHAR,res_buf,-1);
+
 				result->value.str.val = res_buf;
 				result->value.str.len = res_length;
 				result->type = IS_STRING;
@@ -806,14 +801,9 @@ static void php_mssql_get_column_content_without_type(mssql_link *mssql_ptr,int 
 		if (column_type == SQLDATETIM4) res_length += 14;
 		if (column_type == SQLDATETIME) res_length += 10;
 		
-		res_buf = (unsigned char *) emalloc(res_length+1);
-		memset(res_buf, 0, res_length + 1);
-		dbconvert(NULL,coltype(offset),dbdata(mssql_ptr->link,offset), res_length, SQLCHAR,res_buf,-1);
-		
-		while (res_length>0 && (res_buf[res_length-1] == ' ' || res_buf[res_length-1] == 0)) { /* nuke trailing whitespace */
-			res_length--;
-		}
-		res_buf[res_length] = 0;
+		res_buf = (unsigned char *) emalloc(res_length);
+		res_length = dbconvert(NULL,coltype(offset),dbdata(mssql_ptr->link,offset), res_length, SQLCHAR,res_buf,-1);
+
 		result->value.str.val = res_buf;
 		result->value.str.len = res_length;
 		result->type = IS_STRING;

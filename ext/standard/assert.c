@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.19 2000/05/06 17:57:34 andrei Exp $ */
+/* $Id: assert.c,v 1.20 2000/05/13 06:05:24 sas Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -25,10 +25,10 @@
 #include "php_ini.h"
 
 typedef struct {
-	int active;
-	int bail;
-	int warning;
-	int quiet_eval;
+	long active;
+	long bail;
+	long warning;
+	long quiet_eval;
 	char *default_callback;
 	char *callback;
 } php_assert_globals;

@@ -16,9 +16,9 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: http.c,v 1.4 2003/09/06 07:34:58 pollita Exp $ */
+/* $Id: http.c,v 1.5 2003/09/06 12:56:02 sniper Exp $ */
 
-#include "http.h"
+#include "php_http.h"
 #include "php_ini.h"
 #include "url.h"
 

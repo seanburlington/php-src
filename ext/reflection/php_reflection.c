@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.121 2004/08/18 23:07:12 helly Exp $ */
+/* $Id: php_reflection.c,v 1.122 2004/08/19 07:16:02 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -531,7 +531,8 @@ static void _parameter_string(string *str, zend_function *fptr, struct _zend_arg
 			zval *zv, zv_copy;
 			int use_copy;
 			string_write(str, " = ", sizeof(" = ")-1);
-			zv = &precv->op2.u.constant;
+			zv_copy = precv->op2.u.constant;
+			zv = &zv_copy;
 			zval_update_constant(&zv, (void*)1 TSRMLS_CC);
 			if (Z_TYPE_P(zv) == IS_NULL) {
 				string_write(str, "NULL", sizeof("NULL")-1);

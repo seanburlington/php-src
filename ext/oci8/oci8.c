@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.87 2000/06/08 09:49:31 thies Exp $ */
+/* $Id: oci8.c,v 1.88 2000/06/09 08:40:27 andi Exp $ */
 
 /* TODO list:
  *
@@ -367,7 +367,7 @@ PHP_MINIT_FUNCTION(oci)
 
 	INIT_CLASS_ENTRY(oci_lob_class_entry, "OCI-Lob", php_oci_lob_class_functions);
 
- 	oci_lob_class_entry_ptr = register_internal_class(&oci_lob_class_entry);
+ 	oci_lob_class_entry_ptr = zend_register_internal_class(&oci_lob_class_entry);
 
 /* thies@digicol.de 990203 i do not think that we will need all of them - just in here for completeness for now! */
 	REGISTER_LONG_CONSTANT("OCI_DEFAULT",OCI_DEFAULT, CONST_CS | CONST_PERSISTENT);

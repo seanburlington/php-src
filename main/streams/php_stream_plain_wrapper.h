@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.h,v 1.1 2003/02/17 00:20:38 wez Exp $ */
+/* $Id: php_stream_plain_wrapper.h,v 1.1 2003/02/18 01:22:21 wez Exp $ */
 
 /* definitions for the plain files wrapper */
 

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.304 2003/02/17 13:29:57 zeev Exp $ */
+/* $Id: file.c,v 1.305 2003/02/18 01:22:21 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -627,6 +627,7 @@ PHP_FUNCTION(stream_get_meta_data)
 	}
 	add_assoc_string(return_value, "stream_type", (char *)stream->ops->label, 1);
 
+#if 0	/* TODO: needs updating for new filter API */
 	if (stream->filterhead) {
 		php_stream_filter *filter;
 		
@@ -639,6 +640,7 @@ PHP_FUNCTION(stream_get_meta_data)
 
 		add_assoc_zval(return_value, "filters", newval);
 	}
+#endif
 	
 	add_assoc_long(return_value, "unread_bytes", stream->writepos - stream->readpos);
 	
@@ -1266,9 +1268,9 @@ static void apply_filter_to_stream(int append, INTERNAL_FUNCTION_PARAMETERS)
 	}
 
 	if (append) { 
-		php_stream_filter_append(stream, filter);
+		php_stream_filter_append(&stream->readfilters, filter);
 	} else {
-		php_stream_filter_prepend(stream, filter);
+		php_stream_filter_prepend(&stream->readfilters, filter);
 	}
 
 	RETURN_TRUE;

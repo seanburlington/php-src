@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.17 2002/03/12 16:13:26 sas Exp $
+dnl $Id: config.m4,v 1.18 2002/03/15 11:26:47 ssb Exp $
 dnl
 
 AC_DEFUN(PHP_TEMP_LDFLAGS,[
@@ -152,7 +152,10 @@ AC_ARG_WITH(db3,
 [  --with-db3[=DIR]        Include Berkeley DB3 support],[
   if test "$withval" != "no"; then
     for i in /usr/local /usr /usr/local/BerkeleyDB.3.0 $withval; do
-      if test -f "$i/include/db.h" ; then
+      if test -f "$i/include/db3/db.h"; then
+        THIS_PREFIX=$i
+        DB3_EXTRA=db3/db.h
+      elif test -f "$i/include/db.h" ; then
         THIS_PREFIX=$i
         DB3_EXTRA=db.h
       fi
@@ -162,7 +165,7 @@ AC_ARG_WITH(db3,
       AC_DEFINE_UNQUOTED(DB3_INCLUDE_FILE, "$DB3_EXTRA", [ ])
     fi
 
-    for LIB in db db-3 db3; do
+    for LIB in db-3 db3 db; do
       PHP_TEMP_LDFLAGS(-L$THIS_PREFIX/lib,[
       AC_CHECK_LIB($LIB, db_create, [AC_DEFINE(DBA_DB3,1,[ ]) THIS_LIBS=$LIB])
       ])

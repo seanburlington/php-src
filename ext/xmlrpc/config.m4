@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.18 2002/09/04 18:47:25 sniper Exp $
+dnl $Id: config.m4,v 1.18.2.1 2003/09/30 22:38:26 iliaa Exp $
 dnl
 
 sinclude(ext/xmlrpc/libxmlrpc/acinclude.m4)
@@ -22,7 +22,7 @@ if test "$PHP_XMLRPC" != "no"; then
   AC_DEFINE(HAVE_XMLRPC,1,[ ])
 
   testval=no
-  for i in /usr /usr/local $PHP_EXPAT_DIR $XMLRPC_DIR; do
+  for i in $PHP_EXPAT_DIR $XMLRPC_DIR /usr /usr/local; do
     if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.$SHLIB_SUFFIX_NAME; then
       AC_DEFINE(HAVE_LIBEXPAT2,1,[ ])
       PHP_ADD_LIBRARY_WITH_PATH(expat, $i/lib, XMLRPC_SHARED_LIBADD)

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9 2002/10/10 00:24:25 sniper Exp $
+dnl $Id: config.m4,v 1.9.2.1 2003/09/30 22:38:24 iliaa Exp $
 dnl
 
 PHP_ARG_WITH(pfpro, for Verisign Payflow Pro support,
@@ -9,7 +9,7 @@ if test "$PHP_PFPRO" != "no"; then
   PFPRO_LIB=libpfpro.so
   PFPRO_HDR=pfpro.h
 
-  for i in /usr/local /usr $PHP_PFPRO; do
+  for i in $PHP_PFPRO /usr/local /usr; do
     if test -r $i/$PFPRO_HDR; then
       PFPRO_INC_DIR=$i
     elif test -r $i/include/$PFPRO_HDR; then

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.7 2002/06/21 00:15:48 sniper Exp $
+dnl $Id: config.m4,v 1.7.4.1 2003/09/30 22:38:22 iliaa Exp $
 dnl
 
 PHP_ARG_WITH(gmp, for GNU MP support,
@@ -7,7 +7,7 @@ PHP_ARG_WITH(gmp, for GNU MP support,
 
 if test "$PHP_GMP" != "no"; then
 
-  for i in /usr/local /usr $PHP_GMP; do
+  for i in $PHP_GMP /usr/local /usr; do
     if test -f $i/include/gmp.h; then
       GMP_DIR=$i
     fi

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.30.2.3 2003/09/24 22:55:59 sniper Exp $
+dnl $Id: config.m4,v 1.30.2.4 2003/09/30 22:38:29 iliaa Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -123,7 +123,7 @@ int main ()
     ])
      
     if test "$PHP_SABLOT_JS" != "no"; then
-      for i in /usr/local /usr $PHP_SABLOT_JS; do
+      for i in $PHP_SABLOT_JS /usr/local /usr; do
         if test -f $i/lib/libjs.a -o -f $i/lib/libjs.$SHLIB_SUFFIX_NAME; then
           PHP_SABLOT_JS_DIR=$i
         fi

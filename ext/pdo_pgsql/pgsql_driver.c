@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.36 2005/02/20 19:26:27 helly Exp $ */
+/* $Id: pgsql_driver.c,v 1.37 2005/02/26 17:27:51 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -197,15 +197,19 @@ static int pgsql_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquote
 	return 1;
 }
 
-static long pdo_pgsql_last_insert_id(pdo_dbh_t *dbh TSRMLS_DC)
+static char *pdo_pgsql_last_insert_id(pdo_dbh_t *dbh, const char *name, unsigned int *len TSRMLS_DC)
 {
 	pdo_pgsql_db_handle *H = (pdo_pgsql_db_handle *)dbh->driver_data;
+	char *id = NULL;
 	
 	if (H->pgoid == InvalidOid) {
-		return -1;
+		return NULL;
 	}
 
-	return (long) H->pgoid;
+	/* TODO: if name != NULL, pull out last value for that sequence/column */
+
+	*len = spprintf(&id, 0, "%ld", H->pgoid);
+	return id;
 }
 
 static int pdo_pgsql_get_attribute(pdo_dbh_t *dbh, long attr, zval *return_value TSRMLS_DC)

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.14 2005/02/09 16:33:00 iliaa Exp $ */
+/* $Id: sqlite_driver.c,v 1.15 2005/02/26 17:27:51 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -156,11 +156,14 @@ static long sqlite_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSR
 	}
 }
 
-static long pdo_sqlite_last_insert_id(pdo_dbh_t *dbh TSRMLS_DC)
+static char *pdo_sqlite_last_insert_id(pdo_dbh_t *dbh, const char *name, unsigned int *len TSRMLS_DC)
 {
 	pdo_sqlite_db_handle *H = (pdo_sqlite_db_handle *)dbh->driver_data;
-
-	return (long) sqlite3_last_insert_rowid(H->db);
+	char *id;
+	
+	id = php_pdo_int64_to_str(sqlite3_last_insert_rowid(H->db) TSRMLS_CC);
+	*len = strlen(id);
+	return id;
 }
 
 /* NB: doesn't handle binary strings... use prepared stmts for that */

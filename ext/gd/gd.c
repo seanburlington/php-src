@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.29 2003/06/04 00:22:30 iliaa Exp $ */
+/* $Id: gd.c,v 1.221.2.30 2003/06/19 15:48:07 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -3012,8 +3012,9 @@ static void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode, int 
 			do {
 			  zval ** item;
 			  char * key;
+			  ulong num_key;
 
-			  if (zend_hash_get_current_key_ex(HASH_OF(*EXT), &key, NULL, NULL, 0, &pos) == FAILURE)
+			  if (zend_hash_get_current_key_ex(HASH_OF(*EXT), &key, NULL, &num_key, 0, &pos) != HASH_KEY_IS_STRING)
 				  continue;
 
 			  if (zend_hash_get_current_data_ex(HASH_OF(*EXT), (void**)&item, &pos) == FAILURE)

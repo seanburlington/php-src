@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.75 2003/02/27 17:43:37 wez Exp $ */
+/* $Id: php_streams.h,v 1.76 2003/02/27 19:10:23 wez Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -348,6 +348,9 @@ PHPAPI int _php_stream_set_option(php_stream *stream, int option, int value, voi
 
 PHPAPI int _php_stream_truncate_set_size(php_stream *stream, size_t newsize TSRMLS_DC);
 #define php_stream_truncate_set_size(stream, size)	_php_stream_truncate_set_size((stream), (size) TSRMLS_CC)
+
+#define PHP_STREAM_OPTION_META_DATA_API		11 /* ptrparam is a zval* to which to add meta data information */
+#define php_stream_populate_meta_data(stream, zv)	(_php_stream_set_option((stream), PHP_STREAM_OPTION_META_DATA_API, 0, zv TSRMLS_CC) == PHP_STREAM_OPTION_RETURN_OK ? 1 : 0)
 
 #define PHP_STREAM_OPTION_RETURN_OK			 0 /* option set OK */
 #define PHP_STREAM_OPTION_RETURN_ERR 		-1 /* problem setting option */

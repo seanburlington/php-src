@@ -17,12 +17,12 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.12 2000/06/04 20:24:07 jah Exp $ */
+/* $Id: php_pgsql.h,v 1.13 2000/06/06 07:26:04 fmk Exp $ */
 
 #ifndef _PHP_PGSQL_H
 #define _PHP_PGSQL_H
 
-#if COMPILE_DL
+#if COMPILE_DL || COMPILE_DL_PGSQL
 #undef HAVE_PGSQL
 #define HAVE_PGSQL 1
 #endif

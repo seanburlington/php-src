@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.110.2.25 2005/02/04 15:42:27 dmitry Exp $ */
+/* $Id: soap.c,v 1.110.2.26 2005/03/20 09:55:33 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2708,9 +2708,6 @@ static void set_soap_fault(zval *obj, char *fault_code, char *fault_string, char
 		add_property_string(obj, "faultactor", fault_actor, 1);
 	}
 	if (fault_detail != NULL) {
-#ifdef ZEND_ENGINE_2
-		fault_detail->refcount--;
-#endif
 		add_property_zval(obj, "detail", fault_detail);
 	}
 	if (name != NULL) {

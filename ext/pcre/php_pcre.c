@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.9 1999/07/20 20:57:04 andrey Exp $ */
+/* $Id: php_pcre.c,v 1.10 1999/07/22 14:22:32 andrey Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -231,7 +231,7 @@ static pcre* _pcre_get_compiled_regex(char *regex, pcre_extra *extra, int *preg_
 	*preg_options = 0;
 	
 	/* Parse through the options, setting appropriate flags.  Display
-	   a warning if we encounter an unknown option. */	
+	   a warning if we encounter an unknown modifier. */	
 	while (*pp != 0) {
 		switch (*pp++) {
 			/* Perl compatible options */
@@ -255,7 +255,7 @@ static pcre* _pcre_get_compiled_regex(char *regex, pcre_extra *extra, int *preg_
 				break;
 
 			default:
-				zend_error(E_WARNING, "Unknown option '%c'", pp[-1]);
+				zend_error(E_WARNING, "Unknown modifier '%c'", pp[-1]);
 				efree(pattern);
 				return NULL;
 		}

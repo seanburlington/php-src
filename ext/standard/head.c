@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.43 2001/07/21 01:15:18 zeev Exp $ */
+/* $Id: head.c,v 1.44 2001/07/21 12:43:23 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -157,11 +157,11 @@ PHP_FUNCTION(setcookie)
 		efree(encoded_value);
 	}
 
-	if (z_path && Z_STRVAL_PP(z_path) && Z_STRLEN_PP(z_path)>0) {
+	if (z_path && Z_STRLEN_PP(z_path)>0) {
 		strcat(cookie, "; path=");
 		strcat(cookie, Z_STRVAL_PP(z_path));
 	}
-	if (z_domain && Z_STRVAL_PP(z_domain) && Z_STRLEN_PP(z_domain)>0) {
+	if (z_domain && Z_STRLEN_PP(z_domain)>0) {
 		strcat(cookie, "; domain=");
 		strcat(cookie, Z_STRVAL_PP(z_domain));
 	}

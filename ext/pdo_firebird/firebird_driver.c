@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.13 2005/01/18 04:58:50 wez Exp $ */
+/* $Id: firebird_driver.c,v 1.14 2005/01/19 00:33:56 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -386,7 +386,7 @@ static int firebird_alloc_prepare_stmt(pdo_dbh_t *dbh, const char *sql, long sql
 		
 	/* Firebird allows SQL statements up to 64k, so bail if it doesn't fit */
 	if (sql_len > SHORT_MAX) {
-		dbh->error_code = PDO_ERR_TRUNCATED;
+		strcpy(dbh->error_code, "01004");
 		return 0;
 	}
 	

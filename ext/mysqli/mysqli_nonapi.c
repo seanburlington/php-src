@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.27 2004/01/12 00:34:37 helly Exp $ 
+  $Id: mysqli_nonapi.c,v 1.28 2004/01/26 07:39:57 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -163,7 +163,7 @@ PHP_FUNCTION(mysqli_connect_error)
 }
 /* }}} */
 
-/* {{{ proto array mysqli_fetch_array (object result [,int resulttype])
+/* {{{ proto mixed mysqli_fetch_array (object result [,int resulttype])
    Fetch a result row as an associative array, a numeric array, or both */
 PHP_FUNCTION(mysqli_fetch_array) 
 {
@@ -171,7 +171,7 @@ PHP_FUNCTION(mysqli_fetch_array)
 }
 /* }}} */
 
-/* {{{ proto array mysqli_fetch_assoc (object result)
+/* {{{ proto mixed mysqli_fetch_assoc (object result)
    Fetch a result row as an associative array */
 PHP_FUNCTION(mysqli_fetch_assoc) 
 {
@@ -179,7 +179,7 @@ PHP_FUNCTION(mysqli_fetch_assoc)
 }
 /* }}} */
 
-/* {{{ proto object mysqli_fetch_object (object result [, string class_name [, NULL|array ctor_params]])
+/* {{{ proto mixed mysqli_fetch_object (object result [, string class_name [, NULL|array ctor_params]])
    Fetch a result row as an object */
 PHP_FUNCTION(mysqli_fetch_object) 
 {

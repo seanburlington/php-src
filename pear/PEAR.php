@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.68 2003/09/11 13:21:07 cellog Exp $
+// $Id: PEAR.php,v 1.69 2003/09/11 16:45:03 cellog Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -311,45 +311,12 @@ class PEAR
 
             case PEAR_ERROR_CALLBACK:
                 $setmode = $mode;
-/*
-                $doSet = false;
-                // function callback
-                if (is_string($options) && function_exists($options)) {
-                    $doSet = true;
-                } */
                 // class/object method callback
                 if (is_callable($options)) {
                     $setoptions = $options;
                 } else {
                     trigger_error("invalid error callback", E_USER_WARNING);
                 }
-/*                if (is_array($options)) {
-                    if (isset($options[0]) && isset($options[1])) {
-                        $options = array(&$options[0], $options[1]);
-                        if (is_string($options[1])) {
-                            // static method callback
-                            if (is_string($options[0])) {
-                                if (class_exists($options[0]) && 
-                                    in_array(strtolower($options[1]),
-                                     get_class_methods($options[0])))
-                                {
-                                    $doSet = true;
-                                }
-                            }
-                            // object method callback
-                            if (is_object($options[0])) {
-                                if (method_exists($options[0], $options[1])) {
-                                    $doSet = true;
-                                }
-                            }
-                        }
-                    }
-                }
-                if ($doSet) {
-                    $setoptions = $options;
-                } else {
-                    trigger_error("invalid error callback", E_USER_WARNING);
-                } */
                 break;
 
             default:

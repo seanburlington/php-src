@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.92 1999/08/02 19:16:34 zeev Exp $ */
+/* $Id: main.c,v 1.93 1999/08/05 07:42:46 thies Exp $ */
 
 
 #include <stdio.h>
@@ -415,7 +415,7 @@ PHPAPI void php_error(int type, const char *format,...)
 			if (PG(log_errors)) {
 				char log_buffer[1024];
 
-				snprintf(log_buffer, 1024, "PHP 3 %s:  %s in %s on line %d", error_type_str, buffer, error_filename, error_lineno);
+				snprintf(log_buffer, 1024, "PHP %s:  %s in %s on line %d", error_type_str, buffer, error_filename, error_lineno);
 				php3_log_err(log_buffer);
 			}
 			if (PG(display_errors)) {

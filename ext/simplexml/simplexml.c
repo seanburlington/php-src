@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.142 2004/08/04 14:41:56 zeev Exp $ */
+/* $Id: simplexml.c,v 1.143 2004/08/04 14:57:40 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -847,7 +847,6 @@ SXE_METHOD(xpath)
 SXE_METHOD(registerXPathNamespace)
 {
 	php_sxe_object    *sxe;
-	zval *id;
 	int prefix_len, ns_uri_len;
 	char *prefix, *ns_uri;
 
@@ -1680,7 +1679,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.142 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.143 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_openssl.h,v 1.2 2000/11/14 09:54:24 venaas Exp $ */
+/* $Id: php_openssl.h,v 1.3 2000/11/16 11:16:24 sniper Exp $ */
 
 #ifndef PHP_OPENSSL_H
 #define PHP_OPENSSL_H
@@ -42,7 +42,7 @@ PHP_FUNCTION(openssl_open);
 
 #else
 
-#define phpext_extname_ptr NULL
+#define phpext_openssl_ptr NULL
 
 #endif
 

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.41 2000/09/04 20:46:10 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.42 2000/09/04 20:47:52 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -202,10 +202,8 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr)
 						}
 						abuf = estrndup(namebuf, strlen(namebuf)-arr_len);
 						sprintf(lbuf, "%s_name[%s]", abuf, arr_index);
-						add_protected_variable(lbuf PLS_CC);
 					} else {
 						sprintf(lbuf, "%s_name", namebuf);
-						add_protected_variable(lbuf PLS_CC);
 					}
 					s = strrchr(filenamebuf, '\\');
 					if (s && s > filenamebuf) {
@@ -213,6 +211,7 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr)
 					} else {
 						safe_php_register_variable(lbuf, filenamebuf, NULL ELS_CC PLS_CC);
 					}
+					add_protected_variable(lbuf PLS_CC);
 
 					/* Add $foo[name] */
                     if (is_arr_upload) {

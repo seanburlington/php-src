@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.113 2001/06/29 03:12:06 sniper Exp $ */
+/* $Id: pgsql.c,v 1.114 2001/07/13 17:13:00 rasmus Exp $ */
 
 #include <stdlib.h>
 
@@ -409,7 +409,7 @@ void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 			break;
 	}
 	
-	if (persistent) {
+	if (persistent && PGG(allow_persistent)) {
 		list_entry *le;
 		
 		/* try to find if we already have this link in our persistent list */

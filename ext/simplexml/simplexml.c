@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.89 2003/11/29 18:16:03 helly Exp $ */
+/* $Id: simplexml.c,v 1.90 2003/12/07 11:32:40 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -333,7 +333,18 @@ next_iter:
 		} else if (counter > 1) {
 			php_error(E_WARNING, "Cannot assign to an array of nodes (duplicate subnodes or attr detected)\n");
 		} else {
-			php_error(E_WARNING, "Cannot create new atrribute\n");
+			switch (Z_TYPE_P(value)) {
+				case IS_LONG:
+				case IS_BOOL:
+				case IS_DOUBLE:
+				case IS_NULL:
+					convert_to_string(value);
+				case IS_STRING:
+					newnode = (xmlNodePtr)xmlNewProp(node, name, Z_STRVAL_P(value));
+					break;
+				default:
+					php_error(E_WARNING, "It is not yet possible to assign complex types to attributes");
+			}
 		}
 	}
 
@@ -1560,7 +1571,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.89 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.90 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

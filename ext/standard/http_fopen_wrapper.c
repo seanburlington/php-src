@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.46 2002/09/07 21:57:11 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.47 2002/09/14 12:09:47 jan Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -164,7 +164,7 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 	/* send it */
 	php_stream_write(stream, scratch, strlen(scratch));
 
-	/* authz header if it was specified */
+	/* auth header if it was specified */
 	if (resource->user && resource->pass)	{
 		/* decode the strings first */
 		php_url_decode(resource->user, strlen(resource->user));

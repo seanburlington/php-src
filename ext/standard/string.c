@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.194 2001/04/13 18:22:13 thies Exp $ */
+/* $Id: string.c,v 1.195 2001/04/28 23:07:51 elixer Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2768,6 +2768,8 @@ PHPAPI void php_strip_tags(char *rbuf, int len, int state, char *allow, int allo
 						lc = '(';
 						br++;
 					}
+				} else if (state == 1) {
+					*(tp++) = c;
 				} else if (state == 0) {
 					*(rp++) = c;
 				}
@@ -2779,6 +2781,8 @@ PHPAPI void php_strip_tags(char *rbuf, int len, int state, char *allow, int allo
 						lc = ')';
 						br--;
 					}
+				} else if (state == 1) {
+					*(tp++) = c;
 				} else if (state == 0) {
 					*(rp++) = c;
 				}

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.7 2004/05/19 18:51:01 gschlossnagle Exp $
+dnl $Id: config.m4,v 1.8 2004/05/19 20:56:06 helly Exp $
 dnl
 
 AC_DEFUN(MYSQL_LIB_CHK, [
@@ -53,6 +53,8 @@ Note that the MySQL client library is not bundled anymore.])
   	pdo_inc_path=$prefix/include/php/ext
   elif test -f $abs_srcdir/include/php/ext/pdo/php_pdo_driver.h; then
   	pdo_inc_path=$abs_srcdir/ext
+  elif test -f ext/pdo/php_pdo_driver.h; then
+  	pdo_inc_path=ext
   else
 	AC_MSG_ERROR([Cannot find php_pdo_driver.h.])
   fi

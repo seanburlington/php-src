@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_notes.c,v 1.11 2001/12/11 15:29:57 sebastian Exp $ */
+/* $Id: php_notes.c,v 1.12 2001/12/15 14:19:59 hholzgra Exp $ */
 
 #ifdef COMPILE_DL_NOTES
 #define HAVE_NOTES 1
@@ -2193,10 +2193,6 @@ specified to indicate that we do not want any cutoff date.  */
 
 
 
-
-/* {{{ proto string notes_list(string database_name)
-   Returns the notes from a selected database_name 
-   */
 
 STATUS LNPUBLIC ReadSummaryData (     /* called for every document */
             VOID far *,

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.86 2000/01/12 19:56:12 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.87 2000/01/19 14:45:24 rubys Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -618,7 +618,6 @@ enable_static=yes
 case "$php_build_target" in
 program)
     enable_shared=no
-    PHP_PROGRAM=php
 ;;
 shared)
     enable_static=no
@@ -628,6 +627,10 @@ static)
     enable_shared=no
 ;;
 esac
+
+if test "$PHP_SAPI" = "cgi"; then
+  PHP_PROGRAM=php
+fi
 
 PHP_REGEX
 

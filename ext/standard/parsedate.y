@@ -1,5 +1,5 @@
 %{
-/* $Revision: 1.8 $
+/* $Revision: 1.9 $
 **
 **  Originally written by Steven M. Bellovin <smb@research.att.com> while
 **  at the University of North Carolina at Chapel Hill.  Later tweaked by
@@ -856,14 +856,11 @@ static int date_lex(void)
 
 time_t parsedate(char *p, TIMEINFO *now)
 {
-#ifdef YYPARSE_PARAM
-	extern int date_parse (void *);
-#else
-	extern int date_parse (void);
-#endif
+	extern int date_parse (YYPARSE_PARAM_ARG);
     struct tm		*tm, tmbuf;
     TIMEINFO		ti;
     time_t		Start;
+	CLS_FETCH();
 
     yyInput = p;
     if (now == NULL) {
@@ -891,7 +888,7 @@ time_t parsedate(char *p, TIMEINFO *now)
     yyHaveRel = 0;
     yyHaveTime = 0;
 
-    if (date_parse() || yyHaveTime > 1 || yyHaveDate > 1)
+    if (date_parse(YYPARSE_PARAM_ARG) || yyHaveTime > 1 || yyHaveDate > 1)
 	return -1;
 
     if (yyHaveDate || yyHaveTime) {

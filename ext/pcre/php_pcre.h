@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.h,v 1.11 1999/07/20 20:57:04 andrey Exp $ */
+/* $Id: php_pcre.h,v 1.12 1999/09/03 19:01:19 andrey Exp $ */
 
 #ifndef _PHP_PCRE_H
 #define _PHP_PCRE_H
@@ -39,10 +39,10 @@
 #include <locale.h>
 #endif
 
-extern void php_info_pcre(ZEND_MODULE_INFO_FUNC_ARGS);
-extern int php_minit_pcre(INIT_FUNC_ARGS);
-extern int php_mshutdown_pcre(SHUTDOWN_FUNC_ARGS);
-extern int php_rinit_pcre(INIT_FUNC_ARGS);
+PHP_MINFO_FUNCTION(pcre);
+PHP_MINIT_FUNCTION(pcre);
+PHP_MSHUTDOWN_FUNCTION(pcre);
+PHP_RINIT_FUNCTION(pcre);
 
 PHP_FUNCTION(preg_match);
 PHP_FUNCTION(preg_match_all);

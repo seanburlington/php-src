@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.17.2.1 2003/02/13 02:25:35 sas Exp $
+dnl $Id: config.m4,v 1.17.2.2 2003/05/06 10:14:39 sas Exp $
 dnl
 
 AC_ARG_WITH(thttpd,
@@ -18,10 +18,11 @@ AC_ARG_WITH(thttpd,
     echo 'PHP_LIBS = -L. -lphp4 \$(PHP_LIBS) \$(EXTRA_LIBS)' > $THTTPD/php_makefile; \
     echo 'PHP_LDFLAGS = \$(NATIVE_RPATHS) \$(PHP_LDFLAGS)' >> $THTTPD/php_makefile; \
     echo 'PHP_CFLAGS = \$(COMMON_FLAGS) \$(CFLAGS_CLEAN) \$(CPPFLAGS) \$(EXTRA_CFLAGS)' >> $THTTPD/php_makefile; \
+    rm -f $THTTPD/php_thttpd.c $THTTPD/thttpd.c $THTTPD/libphp4.a; \
     \$(LN_S) $abs_srcdir/sapi/thttpd/thttpd.c $THTTPD/php_thttpd.c; \
     \$(LN_S) $abs_srcdir/sapi/thttpd/php_thttpd.h $abs_builddir/$SAPI_STATIC $THTTPD/;\
     test -f $THTTPD/php_patched || \
-    (cd $THTTPD && patch < $abs_srcdir/sapi/thttpd/thttpd_patch && touch php_patched)"
+    (cd $THTTPD && patch -p 1 < $abs_srcdir/sapi/thttpd/thttpd_patch && touch php_patched)"
   PHP_THTTPD="yes, using $THTTPD"
   PHP_ADD_INCLUDE($THTTPD)
   PHP_SELECT_SAPI(thttpd, static)

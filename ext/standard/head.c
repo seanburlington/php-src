@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.9 1999/05/05 21:05:44 zeev Exp $ */
+/* $Id: head.c,v 1.10 1999/05/05 21:29:26 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -221,6 +221,8 @@ void php3_Header(INTERNAL_FUNCTION_PARAMETERS)
 	}
 	convert_to_string(arg1);
 	php4i_add_header_information(arg1->value.str.val, arg1->value.str.len);
+	arg1->type = IS_LONG; /* change arg1's type so that it doesn't get freed */
+	arg1->value.lval = 0;
 }
 
 
@@ -572,8 +574,6 @@ int php3_headers_unsent(void)
 
 
 function_entry php3_header_functions[] = {
-	{"setcookie",		php3_SetCookie,		NULL},
-	{"header",			php3_Header,		NULL},
 	{NULL, NULL, NULL}
 };
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.104 2000/11/16 10:16:22 thies Exp $ */
+/* $Id: oci8.c,v 1.104.2.1 2001/01/07 11:55:38 thies Exp $ */
 
 /* TODO list:
  *
@@ -488,7 +488,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.104 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.104.2.1 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -1219,12 +1219,6 @@ oci_execute(oci_statement *statement, char *func,ub4 mode)
 		statement->columns = emalloc(sizeof(HashTable));
 		zend_hash_init(statement->columns, 13, NULL, _oci_column_hash_dtor, 0);
 		
-		OCIHandleAlloc(OCI(pEnv),
-					   (dvoid **)&param,
-					   OCI_DTYPE_PARAM,
-					   0,
-					   NULL);
-
 		counter = 1;
 
 		statement->error = 
@@ -1261,7 +1255,7 @@ oci_execute(oci_statement *statement, char *func,ub4 mode)
 									   (dvoid *)statement->pStmt,
 									   OCI_HTYPE_STMT,
 									   statement->pError,
-									   (dvoid*)&param,
+									   (dvoid**)&param,
 									   counter));
 			if (statement->error) {
 				return 0; /* XXX we loose memory!!! */

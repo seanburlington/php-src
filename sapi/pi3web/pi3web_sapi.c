@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.44 2002/08/18 11:05:28 holger Exp $ */
+/* $Id: pi3web_sapi.c,v 1.45 2002/08/18 15:46:48 holger Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -77,7 +77,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.44 2002/08/18 11:05:28 holger Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.45 2002/08/18 15:46:48 holger Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -156,7 +156,6 @@ static int sapi_pi3web_header_handler(sapi_header_struct *sapi_header, sapi_head
 }
 
 
-
 static void accumulate_header_length(sapi_header_struct *sapi_header, uint *total_length TSRMLS_DC)
 {
 	*total_length += sapi_header->header_len+2;
@@ -208,6 +207,7 @@ static int sapi_pi3web_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 	efree(combined_headers);
 	if (SG(sapi_headers).http_status_line) {
 		efree(SG(sapi_headers).http_status_line);
+		SG(sapi_headers).http_status_line = 0;
 	}
 	return SAPI_HEADER_SENT_SUCCESSFULLY;
 }
@@ -305,12 +305,11 @@ static void sapi_pi3web_register_variables(zval *track_vars_array TSRMLS_DC)
 	while (*p) {
 		variable_len = PI3WEB_SERVER_VAR_BUF_SIZE;
 		if (lpCB->GetServerVariable(lpCB->ConnID, *p, static_variable_buf, &variable_len)
-			&& static_variable_buf[0]) {
+			&& (variable_len > 1)) {
 			php_register_variable(*p, static_variable_buf, track_vars_array TSRMLS_CC);
 		} else if (PIPlatform_getLastError()==PIAPI_EINVAL) {
 			variable_buf = (char *) emalloc(variable_len);
-			if (lpCB->GetServerVariable(lpCB->ConnID, *p, variable_buf, &variable_len)
-				&& variable_buf[0]) {
+			if (lpCB->GetServerVariable(lpCB->ConnID, *p, variable_buf, &variable_len)) {
 				php_register_variable(*p, variable_buf, track_vars_array TSRMLS_CC);
 			}
 			efree(variable_buf);
@@ -321,12 +320,13 @@ static void sapi_pi3web_register_variables(zval *track_vars_array TSRMLS_DC)
 	/* PHP_SELF support */
 	variable_len = PI3WEB_SERVER_VAR_BUF_SIZE;
 	if (lpCB->GetServerVariable(lpCB->ConnID, "SCRIPT_NAME", static_variable_buf, &variable_len)
-		&& static_variable_buf[0]) {
+		&& (variable_len > 1)) {
 		php_register_variable("PHP_SELF", static_variable_buf, track_vars_array TSRMLS_CC);
 	}
 
 	variable_len = PI3WEB_SERVER_VAR_BUF_SIZE;
-	if (lpCB->GetServerVariable(lpCB->ConnID, "ALL_HTTP", static_variable_buf, &variable_len)) {
+	if (lpCB->GetServerVariable(lpCB->ConnID, "ALL_HTTP", static_variable_buf, &variable_len)
+		&& (variable_len > 1)) {
 		variable_buf = static_variable_buf;
 	} else {
 		if (PIPlatform_getLastError()==PIAPI_EINVAL) {

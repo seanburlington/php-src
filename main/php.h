@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.205 2004/09/30 08:03:38 helly Exp $ */
+/* $Id: php.h,v 1.206 2004/11/02 17:03:19 andrey Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -252,6 +252,7 @@ char *strerror(int);
 /* global variables */
 extern pval *data;
 #if !defined(PHP_WIN32)
+#define PHP_SLEEP_NON_VOID
 #define php_sleep sleep
 extern char **environ;
 #endif	/* !defined(PHP_WIN32) */

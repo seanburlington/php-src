@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.1 2005/03/18 23:24:14 sniper Exp $
+// $Id: config.w32,v 1.2 2005/03/26 02:19:54 sniper Exp $
 // vim:ft=javascript ts=4 sw=4
 
 ARG_WITH("ingres", "Ingres support", "no");
@@ -13,7 +13,7 @@ if (PHP_INGRES != "no") {
 			if (CHECK_HEADER_ADD_INCLUDE("iiapi.h", "CFLAGS_INGRES", ii_system + "\\ingres\\files;" + PHP_INGRES) &&
 				CHECK_LIB("iilibapi.lib", "ingres", ii_system + "\\ingres\\lib;" + PHP_INGRES)) {
 				AC_DEFINE('HAVE_II', 1);
-				EXTENSION("ingres_ii","ii.c");
+				EXTENSION("ingres","ii.c");
 			} else {
 				// ingres is missing files
 				WARNING("Ingres not enabled; libraries and headers not found in " + ii_system);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.36 2003/08/29 21:46:12 helly Exp $ */
+/* $Id: php_reflection.c,v 1.37 2003/08/30 12:58:35 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -762,7 +762,7 @@ ZEND_METHOD(reflection_function, invoke)
 	fcc.calling_scope = EG(scope);
 	fcc.object_pp = NULL;
 
-	result = zend_call_function(&fci, NULL TSRMLS_CC);
+	result = zend_call_function(&fci, &fcc TSRMLS_CC);
 
 	efree(params);
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.37.2.4 2003/03/24 10:18:16 sniper Exp $
+dnl $Id: config.m4,v 1.37.2.5 2003/04/09 12:00:54 edink Exp $
 dnl
 
 AC_DEFUN(PHP_OCI_IF_DEFINED,[
@@ -89,7 +89,6 @@ if test "$PHP_OCI8" != "no"; then
     8.1)
       PHP_ADD_LIBRARY(clntsh, 1, OCI8_SHARED_LIBADD)
       PHP_ADD_LIBPATH($OCI8_DIR/lib, OCI8_SHARED_LIBADD)
-      AC_DEFINE(HAVE_OCI8_SHARED_MODE,1,[ ])
 
       dnl 
       dnl OCI_ATTR_STATEMENT is not available in all 8.1.x versions

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.h,v 1.31 2004/02/24 15:06:41 dmitry Exp $ */
+/* $Id: php_sdl.h,v 1.31.2.1 2004/08/26 18:36:46 dmitry Exp $ */
 
 #ifndef PHP_SDL_H
 #define PHP_SDL_H
@@ -239,6 +239,7 @@ typedef struct _sdlExtraAttribute {
 
 struct _sdlAttribute {
 	char      *name;
+	char      *namens;
 	char      *ref;
 	char      *def;
 	char      *fixed;

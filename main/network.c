@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.75 2002/10/13 22:01:39 wez Exp $ */
+/* $Id: network.c,v 1.76 2002/10/13 23:21:05 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -862,7 +862,7 @@ static int php_sockop_close(php_stream *stream, int close_handle TSRMLS_DC)
 		}
 #endif
 
-		shutdown(sock->socket, 0);
+		/* shutdown(sock->socket, 0); */
 		closesocket(sock->socket);
 
 	}

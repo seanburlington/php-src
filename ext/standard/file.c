@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.58 2000/01/15 19:42:40 andrei Exp $ */
+/* $Id: file.c,v 1.59 2000/02/01 06:06:03 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -85,6 +85,8 @@ extern int fclose();
 #ifndef MAP_FAILED
 #define MAP_FAILED ((void *) -1)
 #endif
+
+#include "php_realpath.h"
 
 /* }}} */
 /* {{{ ZTS-stuff / Globals / Prototypes */
@@ -243,6 +245,7 @@ function_entry file_functions[] = {
 #if HAVE_SYS_TIME_H
 	PHP_FE(set_socket_timeout,	NULL)
 #endif
+	PHP_FE(realpath,			NULL)
 #if 0 /* needs to be rethought 991221 thies@digicol.de */
 	PHP_FE(fd_set, NULL)
 	PHP_FE(fd_isset, NULL)
@@ -1685,6 +1688,26 @@ PHP_FUNCTION(fgetcsv) {
 	efree(buf);
 }
 
+/* }}} */
+
+/* {{{ proto string realpath(string path)
+   Returns the resolved path */
+PHP_FUNCTION(realpath)
+{
+	zval **path;
+	char resolved_path[MAXPATHLEN];
+
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &path) == FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+
+	convert_to_string_ex(path);
+	if (php_realpath((*path)->value.str.val, resolved_path)) {
+		RETURN_STRING(resolved_path, 1);
+	} else {
+		RETURN_FALSE;
+	}
+}
 /* }}} */
 
 #if 0

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.438 2003/04/02 21:17:16 helly Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.439 2003/04/03 20:59:42 helly Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -160,8 +160,8 @@ if test "$LEX" ;then
 		sed -e 's/^.* //' -e 's/\./ /g'`
 	if test ! -z "$flexvers"; then
 		set $flexvers
-		if test "${1}" != "2" -o "${2}" != "5" -o "${3}" -lt "4"; then
-			AC_MSG_WARN(You will need flex 2.5.4 or later if you want to regenerate Zend/PHP lexical parsers.)
+		if test "${1}" != "2" -o "${2}" != "5" -o "${3}" != "4"; then
+			AC_MSG_WARN(You will need flex 2.5.4 if you want to regenerate Zend/PHP lexical parsers.)
 		fi
 	fi
 AC_MSG_RESULT(${1}.${2}.${3} (ok))

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.27 2000/02/10 18:44:32 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.28 2000/02/10 19:24:44 zeev Exp $ */
 
 #include "zend.h"
 #include "php.h"
@@ -295,7 +295,7 @@ static int php_apache_sapi_activate(SLS_D)
 	 * memory.  
 	 */
 	block_alarms();
-	register_cleanup(((request_rec *) (server_context))->pool, NULL, php_request_shutdown, php_request_shutdown_for_exec);
+	register_cleanup(((request_rec *) SG(server_context))->pool, NULL, php_request_shutdown, php_request_shutdown_for_exec);
 	unblock_alarms();
 }
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.59 2003/01/06 10:28:34 hyanantha Exp $ */
+/* $Id: php_pgsql.h,v 1.60 2003/04/01 23:56:16 jay Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -196,6 +196,7 @@ typedef enum _php_pgsql_data_type {
 	PG_DATE,
 	PG_TIME,
 	PG_TIME_WITH_TIMEZONE,
+	PG_TIMESTAMP,
 	PG_TIMESTAMP_WITH_TIMEZONE,
 	PG_INTERVAL,
 	/* binary */

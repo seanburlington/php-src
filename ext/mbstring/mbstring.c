@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.154 2003/01/18 20:09:29 iliaa Exp $ */
+/* $Id: mbstring.c,v 1.155 2003/01/21 14:53:16 iliaa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -1008,7 +1008,7 @@ PHP_FUNCTION(mb_http_input)
 	retname = 1;
 	if (ZEND_NUM_ARGS() == 0) {
 		result = MBSTRG(http_input_identify);
-	} else if (ARG_COUNT(ht) == 1 && zend_get_parameters_ex(1, &arg1) != FAILURE) {
+	} else if (ZEND_NUM_ARGS() == 1 && zend_get_parameters_ex(1, &arg1) != FAILURE) {
 		convert_to_string_ex(arg1);
 		switch (*(Z_STRVAL_PP(arg1))) {
 		case 'G':

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.89 2003/01/18 19:49:22 iliaa Exp $ */
+/* $Id: php_fbsql.c,v 1.90 2003/01/21 14:53:15 iliaa Exp $ */
 
 /* TODO:
  *
@@ -2160,7 +2160,7 @@ PHP_FUNCTION(fbsql_errno)
    Enable or disable FrontBase warnings */
 PHP_FUNCTION(fbsql_warnings)
 {
-	int   argc     = ARG_COUNT(ht);
+	int   argc     = ZEND_NUM_ARGS();
 	zval	**argv[1];
 
 	if ((argc < 0) || (argc > 1)) WRONG_PARAM_COUNT;

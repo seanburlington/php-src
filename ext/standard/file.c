@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.295 2003/01/18 20:01:41 iliaa Exp $ */
+/* $Id: file.c,v 1.296 2003/01/21 14:53:17 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1233,7 +1233,7 @@ PHP_FUNCTION(pclose)
 	zval **arg1;
 	php_stream *stream;
 	
-	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &arg1) == FAILURE) {
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg1) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 

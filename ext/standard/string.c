@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.348 2003/01/19 11:32:54 moriyoshi Exp $ */
+/* $Id: string.c,v 1.349 2003/01/21 14:53:17 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3391,7 +3391,7 @@ PHP_FUNCTION(parse_str)
 	int argCount;
 	int old_rg;
 
-	argCount = ARG_COUNT(ht);
+	argCount = ZEND_NUM_ARGS();
 	if (argCount < 1 || argCount > 2 || zend_get_parameters_ex(argCount, &arg, &arrayArg) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}

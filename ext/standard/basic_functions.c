@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.564 2003/01/19 12:18:46 phanto Exp $ */
+/* $Id: basic_functions.c,v 1.565 2003/01/21 14:53:16 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2890,7 +2890,7 @@ PHP_FUNCTION(parse_ini_file)
 	zend_file_handle fh;
 	zend_ini_parser_cb_t ini_parser_cb;
 
-	switch (ARG_COUNT(ht)) {
+	switch (ZEND_NUM_ARGS()) {
 
 		case 1:
 			if (zend_get_parameters_ex(1, &filename) == FAILURE) {

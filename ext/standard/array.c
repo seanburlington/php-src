@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.215 2003/01/13 18:12:23 andrey Exp $ */
+/* $Id: array.c,v 1.216 2003/01/21 14:53:16 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2625,7 +2625,7 @@ static void php_array_intersect(INTERNAL_FUNCTION_PARAMETERS, int behavior)
 	Bucket ***lists, **list, ***ptrs, *p;
 
 	/* Get the argument count and check it */	
-	argc = ARG_COUNT(ht);
+	argc = ZEND_NUM_ARGS();
 	if (argc < 2) {
 		WRONG_PARAM_COUNT;
 	}
@@ -2773,7 +2773,7 @@ static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior)
 	Bucket ***lists, **list, ***ptrs, *p;
 
 	/* Get the argument count and check it */
-	argc = ARG_COUNT(ht);
+	argc = ZEND_NUM_ARGS();
 	if (argc < 2) {
 		WRONG_PARAM_COUNT;
 	}

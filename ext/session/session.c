@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.39 2004/05/08 06:01:11 pollita Exp $ */
+/* $Id: session.c,v 1.336.2.40 2004/06/23 16:29:16 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -930,8 +930,9 @@ static void php_session_reset_id(TSRMLS_D)
 {
 	int module_number = PS(module_number);
 	
-	if (PS(use_cookies)) {
+	if (PS(use_cookies) && PS(send_cookie)) {
 		php_session_send_cookie(TSRMLS_C);
+		PS(send_cookie) = 0;
 	}
 
 	/* if the SID constant exists, destroy it. */
@@ -1283,6 +1284,7 @@ PHP_FUNCTION(session_regenerate_id)
 	
 		PS(id) = PS(mod)->s_create_sid(&PS(mod_data), NULL TSRMLS_CC);
 
+		PS(send_cookie) = 1;
 		php_session_reset_id(TSRMLS_C);
 		
 		RETURN_TRUE;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.296 2001/01/13 23:49:44 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.297 2001/01/14 16:36:30 elixer Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -182,6 +182,7 @@ function_entry basic_functions[] = {
 	PHP_FE(explode,									NULL)
 	PHP_FE(implode,									NULL)
 	PHP_FE(setlocale,								NULL)
+	PHP_FE(localeconv,								NULL)
 	PHP_FE(soundex,									NULL)
 	PHP_FE(levenshtein,								NULL)
 	PHP_FE(chr,										NULL)
@@ -713,6 +714,9 @@ PHP_MINIT_FUNCTION(basic)
 	PHP_MINIT(pack)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(browscap)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(lcg)(INIT_FUNC_ARGS_PASSTHRU);
+#ifdef ZTS
+	PHP_MINIT(localeconv)(INIT_FUNC_ARGS_PASSTHRU);
+#endif
 
 #if HAVE_CRYPT
 	PHP_MINIT(crypt)(INIT_FUNC_ARGS_PASSTHRU);
@@ -769,6 +773,9 @@ PHP_MSHUTDOWN_FUNCTION(basic)
 	PHP_MSHUTDOWN(url_scanner_ex)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #endif
 	PHP_MSHUTDOWN(file)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#ifdef ZTS
+	PHP_MSHUTDOWN(localeconv)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#endif
 
 	return SUCCESS;
 }

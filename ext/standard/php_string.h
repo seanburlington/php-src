@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.31 2001/01/09 15:11:23 hirokawa Exp $ */
+/* $Id: php_string.h,v 1.32 2001/01/14 16:36:30 elixer Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -65,6 +65,7 @@ PHP_FUNCTION(chr);
 PHP_FUNCTION(ord);
 PHP_FUNCTION(nl2br);
 PHP_FUNCTION(setlocale);
+PHP_FUNCTION(localeconv);
 PHP_FUNCTION(stristr);
 PHP_FUNCTION(chunk_split);
 PHP_FUNCTION(parse_str);

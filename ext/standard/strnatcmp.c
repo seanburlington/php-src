@@ -35,7 +35,7 @@
 #endif
 
 static char const *version UNUSED =
-    "$Id: strnatcmp.c,v 1.1 2000/04/12 19:39:02 andrei Exp $";
+    "$Id: strnatcmp.c,v 1.2 2000/04/13 13:04:02 thies Exp $";
 
 PHPAPI int strnatcmp_ex(char const *a, size_t a_len, char const *b, size_t b_len, int fold_case)
 {
@@ -47,7 +47,10 @@ PHPAPI int strnatcmp_ex(char const *a, size_t a_len, char const *b, size_t b_len
 	if (a_len == 0 || b_len == 0)
 		return a_len - b_len;
 
+/*
 	assert(a && b);
+*/
+
 	ai = bi = 0;
 	while (1) {
 		ca = a[ai]; cb = b[bi];

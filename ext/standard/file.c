@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.8 2003/01/24 10:00:18 sniper Exp $ */
+/* $Id: file.c,v 1.279.2.9 2003/02/18 15:22:46 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2181,7 +2181,7 @@ PHP_FUNCTION(fgetcsv)
 	lineEnd = emalloc(len + 1);
 	bptr = buf;
 	tptr = buf + strlen(buf) -1;
-	while ( isspace((int) *tptr) && (*tptr!=delimiter) && (tptr > bptr) ) tptr--;
+	while ( isspace((int)*(unsigned char *)tptr) && (*tptr!=delimiter) && (tptr > bptr) ) tptr--;
 	tptr++;
 	strcpy(lineEnd, tptr);
 
@@ -2203,7 +2203,7 @@ PHP_FUNCTION(fgetcsv)
 
 	do {
 		/* 1. Strip any leading space */
-		while(isspace((int) *bptr) && (*bptr!=delimiter)) bptr++;
+		while(isspace((int)*(unsigned char *)bptr) && (*bptr!=delimiter)) bptr++;
 		/* 2. Read field, leaving bptr pointing at start of next field */
 		if (enclosure && *bptr == enclosure) {
 			bptr++;	/* move on to first character in field */
@@ -2252,7 +2252,7 @@ PHP_FUNCTION(fgetcsv)
 						temp = erealloc(temp, temp_len+1);
 						bptr = buf;
 						tptr = buf + strlen(buf) -1;
-						while (isspace((int) *tptr) && (*tptr!=delimiter) && (tptr > bptr)) 
+						while (isspace((int)*(unsigned char *)tptr) && (*tptr!=delimiter) && (tptr > bptr)) 
 							tptr--;
 						tptr++; 
 						strcpy(lineEnd, tptr);
@@ -2273,7 +2273,7 @@ PHP_FUNCTION(fgetcsv)
 
 			if (strlen(temp)) {
 				tptr--;
-				while (isspace((int)*tptr) && (*tptr!=delimiter)) 
+				while (isspace((int)*(unsigned char *)tptr) && (*tptr!=delimiter)) 
 					*tptr-- = 0;	/* strip any trailing spaces */
 			}
 			

@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.20 2002/08/29 10:08:37 pajoye Exp $
+// $Id: System.php,v 1.21 2002/10/12 14:17:44 ssb Exp $
 //
 
 require_once 'PEAR.php';
@@ -43,7 +43,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.20 $
+* @version  $Revision: 1.21 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -411,17 +411,17 @@ class System
     }
 
     /**
-    * The "type" command (show the full path of a command)
+    * The "which" command (show the full path of a command)
     *
     * @param string $program The command to search for
     * @return mixed A string with the full path or false if not found
     * @author Stig Bakken <ssb@fast.no>
     */
-    function type($program)
+    function which($program, $fallback = false)
     {
         // full path given
         if (basename($program) != $program) {
-            return (@is_executable($program)) ? $program : false;
+            return (@is_executable($program)) ? $program : $fallback;
         }
         // XXX FIXME honor safe mode
         $path_delim = OS_WINDOWS ? ';' : ':';
@@ -433,7 +433,7 @@ class System
                 return $file;
             }
         }
-        return false;
+        return $fallback;
     }
 }
 ?>

@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.15 2001/08/30 15:27:55 cox Exp $
+// $Id: PEAR.php,v 1.16 2001/08/30 19:55:57 cox Exp $
 //
 
 define('PEAR_ERROR_RETURN', 1);
@@ -447,9 +447,6 @@ class PEAR
                 $def_options = &$GLOBALS['_PEAR_default_error_options'];
                 // XXX Used anywhere?
                 //$def_callback = &$GLOBALS['_PEAR_default_error_callback'];
-            }
-            if (!isset($def_mode)) {
-                $def_mode = PEAR_ERROR_RETURN;
             }
             $stack = array();
             $stack[] = array($def_mode, $def_options);

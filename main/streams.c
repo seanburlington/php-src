@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.141 2003/01/06 04:06:40 pollita Exp $ */
+/* $Id: streams.c,v 1.142 2003/01/06 23:27:03 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -679,7 +679,7 @@ PHPAPI int _php_stream_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_D
 		return -1;
 	}
 
-	return stream->ops->stat(stream, ssb TSRMLS_CC);
+	return (stream->ops->stat)(stream, ssb TSRMLS_CC);
 }
 
 PHPAPI char *php_stream_locate_eol(php_stream *stream, char *buf, size_t buf_len TSRMLS_DC)

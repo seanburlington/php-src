@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.118 2005/03/15 22:41:12 andrei Exp $ */
+/* $Id: php_cli.c,v 1.119 2005/03/17 07:31:22 derick Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -395,7 +395,7 @@ static void php_cli_usage(char *argv0)
 }
 /* }}} */
 
-static void define_command_line_ini_entry(char *arg)
+static void define_command_line_ini_entry(char *arg TSRMLS_DC)
 {
 	char *name, *value;
 
@@ -661,7 +661,7 @@ int main(int argc, char *argv[])
 			switch (c) {
 
 			case 'd': /* define ini entries on command line */
-				define_command_line_ini_entry(php_optarg);
+				define_command_line_ini_entry(php_optarg TSRMLS_CC);
 				break;
 
 			case 'h': /* help & quit */

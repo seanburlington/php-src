@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: globals.c,v 1.1 2004/07/29 02:59:43 wez Exp $ */
+/* $Id: globals.c,v 1.2 2004/07/29 03:58:00 wez Exp $ */
 
 #include "php.h"
 #include "php_win32_globals.h"
@@ -46,5 +46,6 @@ PHP_RSHUTDOWN_FUNCTION(win32_core_globals)
 	STR_FREE(wg->login_name);
 	
 	memset(wg, 0, sizeof(*wg));
+	return SUCCESS;
 }
 

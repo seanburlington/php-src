@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.188 2004/08/10 17:39:59 rasmus Exp $ */
+/* $Id: SAPI.c,v 1.189 2004/08/11 06:18:25 rasmus Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -334,6 +334,7 @@ SAPI_API void sapi_activate(TSRMLS_D)
 	SG(request_info).current_user = NULL;
 	SG(request_info).current_user_length = 0;
 	SG(request_info).no_headers = 0;
+	SG(global_request_time) = 0;
 
 	/* It's possible to override this general case in the activate() callback, if
 	 * necessary.
@@ -430,6 +431,7 @@ SAPI_API void sapi_deactivate(TSRMLS_D)
 	SG(sapi_started) = 0;
 	SG(headers_sent) = 0;
 	SG(request_info).headers_read = 0;
+	SG(global_request_time) = 0;
 }
 
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.27 2000/06/29 14:07:10 kk Exp $ */
+/* $Id: mail.c,v 1.28 2000/08/03 19:26:19 hholzgra Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -25,6 +25,7 @@
 #include "ext/standard/info.h"
 #if !defined(PHP_WIN32)
 #include "build-defs.h"
+#include <sysexits.h>
 #endif
 #include "php_mail.h"
 #include "php_ini.h"
@@ -151,7 +152,7 @@ int php_mail(char *to, char *subject, char *message, char *headers)
 		}
 		fprintf(sendmail, "\n%s\n", message);
 		ret = pclose(sendmail);
-		if (ret == -1) {
+		if ((ret != EX_OK)&&(ret != EX_TEMPFAIL)) {
 			return 0;
 		} else {
 			return 1;

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.8 2001/08/29 13:13:24 wez Exp $
+dnl $Id: config.m4,v 1.9 2001/11/09 16:27:09 jon Exp $
 dnl config.m4 for extension gettext
 dnl don't forget to call PHP_EXTENSION(gettext)
 
@@ -48,5 +48,6 @@ if test "$PHP_GETTEXT" != "no"; then
   AC_CHECK_LIB($GETTEXT_CHECK_IN_LIB, ngettext,  [AC_DEFINE(HAVE_NGETTEXT, 1, [ ])])
   AC_CHECK_LIB($GETTEXT_CHECK_IN_LIB, dngettext,  [AC_DEFINE(HAVE_DNGETTEXT, 1, [ ])])
   AC_CHECK_LIB($GETTEXT_CHECK_IN_LIB, dcngettext,  [AC_DEFINE(HAVE_DCNGETTEXT, 1, [ ])])
+  AC_CHECK_LIB($GETTEXT_CHECK_IN_LIB, bind_textdomain_codeset,  [AC_DEFINE(HAVE_BIND_TEXTDOMAIN_CODESET, 1, [ ])])
   
 fi

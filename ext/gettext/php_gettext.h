@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gettext.h,v 1.13 2001/08/29 13:13:24 wez Exp $ */
+/* $Id: php_gettext.h,v 1.14 2001/11/09 16:27:09 jon Exp $ */
 
 #ifndef PHP_GETTEXT_H
 #define PHP_GETTEXT_H
@@ -44,6 +44,9 @@ PHP_FUNCTION(dngettext);
 #endif
 #if HAVE_DCNGETTEXT
 PHP_FUNCTION(dcngettext);
+#endif
+#if HAVE_BIND_TEXTDOMAIN_CODESET
+PHP_FUNCTION(bind_textdomain_codeset);
 #endif
 
 #else

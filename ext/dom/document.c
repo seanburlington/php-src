@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.59 2004/08/30 15:07:19 rrichards Exp $ */
+/* $Id: document.c,v 1.60 2004/10/07 11:40:19 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -170,28 +170,6 @@ int dom_document_document_element_read(dom_object *obj, zval **retval TSRMLS_DC)
 	}
 	return SUCCESS;
 }
-
-/* }}} */
-
-
-/* {{{ proto actualEncoding	string	
-readonly=no 
-URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-Document3-actualEncoding
-Since: DOM Level 3
-*/
-/* READ ONLY FOR NOW USING ENCODING PROPERTY
-int dom_document_actual_encoding_read(dom_object *obj, zval **retval TSRMLS_DC)
-{
-	ALLOC_ZVAL(*retval);
-	ZVAL_NULL(*retval);
-	return SUCCESS;
-}
-
-int dom_document_actual_encoding_write(dom_object *obj, zval *newval TSRMLS_DC)
-{
-	return SUCCESS;
-}
-*/
 
 /* }}} */
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: text.c,v 1.20 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: text.c,v 1.21 2004/10/07 11:40:20 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -38,6 +38,7 @@
 zend_function_entry php_dom_text_class_functions[] = {
 	PHP_FALIAS(splitText, dom_text_split_text, NULL)
 	PHP_FALIAS(isWhitespaceInElementContent, dom_text_is_whitespace_in_element_content, NULL)
+	PHP_FALIAS(isElementContentWhitespace, dom_text_is_whitespace_in_element_content, NULL)
 	PHP_FALIAS(replaceWholeText, dom_text_replace_whole_text, NULL)
 	PHP_ME(domtext, __construct, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}

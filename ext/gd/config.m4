@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.120.2.1 2002/11/17 20:19:28 iliaa Exp $
+dnl $Id: config.m4,v 1.120.2.2 2002/11/17 21:58:12 iliaa Exp $
 dnl
 
 dnl
@@ -248,9 +248,10 @@ dnl
 
 AC_TRY_COMPILE([
  #include <gd.h>
-], [gdIOCtx *ctx; ctx->ctx.gd_free = 1;],[],
-[AC_DEFINE(HAVE_LIBGD204, 1, [ ])]
-)
+ #include <stdlib.h>
+], [gdIOCtx *ctx; ctx = malloc(sizeof(gdIOCtx)); ctx->gd_free = 1], 
+	AC_DEFINE(HAVE_LIBGD204, 1, [ ])
+])
 
 dnl
 dnl Main GD configure

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.78 2000/11/02 23:08:05 andi Exp $ */
+/* $Id: pgsql.c,v 1.79 2000/11/03 00:51:53 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -486,7 +486,11 @@ PHP_FUNCTION(pg_close)
 	}
 	
 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, pgsql_link, id, "PostgreSQL link", le_link, le_plink);
-	zend_list_delete(id);
+	zend_list_delete(Z_RESVAL_PP(pgsql_link));
+	if (Z_RESVAL_PP(pgsql_link)==PGG(default_link)) {
+		zend_list_delete(PGG(default_link));
+	}
+
 	RETURN_TRUE;
 }
 /* }}} */

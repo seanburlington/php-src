@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_stream_transport.h,v 1.3 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: php_stream_transport.h,v 1.4 2003/07/01 19:51:06 wez Exp $ */
 
 typedef php_stream *(php_stream_transport_factory_func)(const char *proto, long protolen,
 		char *resourcename, long resourcenamelen,
@@ -73,7 +73,7 @@ PHPAPI int php_stream_xport_listen(php_stream *stream,
  * structure.  You must efree either of these if you request them */
 PHPAPI int php_stream_xport_accept(php_stream *stream, php_stream **client,
 		char **textaddr, int *textaddrlen,
-		void **addr, size_t *addrlen,
+		void **addr, socklen_t *addrlen,
 		struct timeval *timeout,
 		char **error_text
 		TSRMLS_DC);
@@ -81,7 +81,7 @@ PHPAPI int php_stream_xport_accept(php_stream *stream, php_stream **client,
 /* Get the name of either the socket or it's peer */
 PHPAPI int php_stream_xport_get_name(php_stream *stream, int want_peer,
 		char **textaddr, int *textaddrlen,
-		void **addr, size_t *addrlen
+		void **addr, socklen_t *addrlen
 		TSRMLS_DC);
 
 /* Structure definition for the set_option interface that the above functions wrap */
@@ -108,7 +108,7 @@ typedef struct _php_stream_xport_param {
 		php_stream *client;
 		int returncode;
 		struct sockaddr *addr;
-		size_t addrlen;
+		socklen_t addrlen;
 		char *textaddr;
 		long textaddrlen;
 

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.138 2002/08/19 15:52:21 rasmus Exp $ */
+/* $Id: mod_php4.c,v 1.139 2002/08/21 23:51:12 sniper Exp $ */
 
 #include "php_apache_http.h"
 
@@ -759,6 +759,7 @@ int php_xbithack_handler(request_rec * r)
 {
 	php_apache_info_struct *conf;
 	HashTable *per_dir_conf;
+	TSRMLS_FETCH();
 
 	if (!(r->finfo.st_mode & S_IXUSR)) {
 		r->allowed |= (1 << METHODS) - 1;

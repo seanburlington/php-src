@@ -16,7 +16,7 @@
    |         Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.27 2002/08/22 17:37:46 wez Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.28 2002/08/22 17:40:25 wez Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 
@@ -119,7 +119,7 @@ php_stream *php_stream_gzopen(php_stream_wrapper *wrapper, char *path, char *mod
 				gzclose(self->gz_file);
 			}
 			if (options & REPORT_ERRORS)
-				php_errordocref(NULL TSRMLS_CC, E_WARNING, "gzopen failed");
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "gzopen failed");
 		}
 	}
 	if (stream)

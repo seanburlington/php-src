@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.51 2002/08/19 21:15:57 dickmeiss Exp $ */
+/* $Id: php_yaz.c,v 1.52 2002/08/30 13:26:40 dickmeiss Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1273,6 +1273,7 @@ PHP_FUNCTION(yaz_connect)
 #if USE_ZOOM
 		if (persistent && as && !as->in_use &&
 			!strcmp_null(option_get(as, "host"), zurl_str) &&
+			!strcmp_null(option_get(as, "proxy"), proxy_str) &&
 			!strcmp_null(option_get(as, "user"), user_str) &&
 			!strcmp_null(option_get(as, "group"), group_str) &&
 			!strcmp_null(option_get(as, "pass"), pass_str) &&

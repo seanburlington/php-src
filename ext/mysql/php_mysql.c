@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.207 2004/04/23 17:03:52 iliaa Exp $ */
+/* $Id: php_mysql.c,v 1.208 2004/06/04 13:49:31 iliaa Exp $ */
 
 /* TODO:
  *
@@ -260,6 +260,9 @@ static void _free_mysql_result(zend_rsrc_list_entry *rsrc TSRMLS_DC)
  */
 static void php_mysql_set_default_link(int id TSRMLS_DC)
 {
+	if (MySG(default_link) != -1) {
+		zend_list_delete(MySG(default_link));
+	}
 	MySG(default_link) = id;
 	zend_list_addref(id);
 }

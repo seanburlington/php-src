@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.52 2001/08/09 12:41:39 joey Exp $ */
+/* $Id: php_domxml.c,v 1.53 2001/08/10 08:02:09 sniper Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -2519,7 +2519,7 @@ static void php_xpathptr_eval(INTERNAL_FUNCTION_PARAMETERS, int mode, int expr)
 	convert_to_string(str);
 	
 	if (contextnode) {
-		contextnodep = php_dom_get_object(contextnode, le_domxmlnodep, 0);
+		contextnodep = php_dom_get_object(contextnode, le_domxmlnodep, 0 TSRMLS_CC);
 	}
 	ctxp->node = contextnodep;
 

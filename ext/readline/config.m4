@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.16 2002/03/12 16:51:27 sas Exp $
+dnl $Id: config.m4,v 1.17 2002/08/22 00:34:07 sniper Exp $
 dnl
 
 PHP_ARG_WITH(libedit,for libedit readline replacement, 
@@ -68,7 +68,7 @@ if test "$PHP_LIBEDIT" != "no"; then
 
   AC_CHECK_LIB(ncurses, tgetent,
   [
-    PHP_ADD_LIBRARY_WITH_PATH(ncurses,,READLINE__SHARED_LIBADD)
+    PHP_ADD_LIBRARY_WITH_PATH(ncurses,,READLINE_SHARED_LIBADD)
   ],[
     AC_CHECK_LIB(termcap, tgetent,
     [

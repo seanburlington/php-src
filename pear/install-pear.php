@@ -1,6 +1,6 @@
 <?php
 
-/* $Id: install-pear.php,v 1.12 2003/07/03 07:08:21 cox Exp $ */
+/* $Id: install-pear.php,v 1.13 2003/07/10 01:34:46 cox Exp $ */
 
 $pear_dir = dirname(__FILE__);
 ini_set('include_path', $pear_dir);
@@ -115,13 +115,17 @@ foreach ($install_files as $package => $instfile) {
                             'a previous PEAR installation at ' .
                             "'$ufile'. You may probably want to remove it.");
         }
-        $ui->outputData('Writing PEAR system config file at: ' . $config->files['system']);
-        $ui->outputData('You may want to add: ' . $config->get('php_dir') . ' to your php.ini include_path');
         $config->set('verbose', 1, 'default');
         foreach ($config->getKeys() as $key) {
             $data[$key] = $config->get($key);
         }
-        $config->store('system', $data);
+        $cnf_file = $config->getConfFile('system');
+        if (!empty($install_root)) {
+            $cnf_file = $install_root . DIRECTORY_SEPARATOR . $cnf_file;
+        }
+        $config->writeConfigFile($cnf_file, 'system', $data);
+        $ui->outputData('Wrote PEAR system config file at: ' . $cnf_file);
+        $ui->outputData('You may want to add: ' . $config->get('php_dir') . ' to your php.ini include_path');
     }
 }
 ?>

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.247 2000/05/19 10:40:34 thies Exp $ */
+/* $Id: main.c,v 1.248 2000/05/19 10:48:05 thies Exp $ */
 
 
 #include <stdio.h>
@@ -57,6 +57,11 @@
 #include "win32/php_registry.h"
 #else
 #include <syslog.h>
+#endif
+
+#if PHP_SIGCHILD
+#include <sys/types.h>
+#include <sys/wait.h>
 #endif
 
 #include "zend_compile.h"
@@ -638,7 +643,7 @@ static void php_message_handler_for_zend(long message, void *data)
 
 
 #if PHP_SIGCHILD
-static int sigchld_handler(int apar)
+static void sigchld_handler(int apar)
 {
     while (waitpid(-1, NULL, WNOHANG) > 0)
 		;

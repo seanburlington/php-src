@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.19.2.1 2003/07/06 21:11:51 moriyoshi Exp $
+dnl $Id: config.m4,v 1.19.2.2 2003/07/30 14:09:52 sniper Exp $
 dnl
 
 PHP_ARG_WITH(iconv, for iconv support,
@@ -27,10 +27,10 @@ if test "$PHP_ICONV" != "no"; then
     LDFLAGS="-L$PHP_ICONV_PREFIX/lib $LDFLAGS"
 
     if test -r $PHP_ICONV_PREFIX/include/giconv.h; then
-      PHP_ICONV_H_PATH="$PHP_ICONV_PREFIX/include/giconv.h"
+      PHP_ICONV_H="giconv.h"
     else
-      PHP_ICONV_H_PATH="$PHP_ICONV_PREFIX/include/iconv.h"
-    fi 
+      PHP_ICONV_H="iconv.h"
+    fi
 
     if test -z "$iconv_lib_name"; then
       AC_MSG_CHECKING([if iconv is glibc's])
@@ -88,7 +88,7 @@ if test "$PHP_ICONV" != "no"; then
 
     AC_MSG_CHECKING([if iconv supports errno])
     AC_TRY_RUN([
-#include <$PHP_ICONV_H_PATH>
+#include <$PHP_ICONV_H>
 #include <errno.h>
 
 int main() {
@@ -97,7 +97,7 @@ int main() {
   if (cd == (iconv_t)(-1)) {
     if (errno == EINVAL) {
       return 0;
-	} else {
+    } else {
       return 1;
     }
   }
@@ -116,9 +116,6 @@ int main() {
 
     CFLAGS="$iconv_cflags_save"
     LDFLAGS="$iconv_ldflags_save"
-
-    PHP_DEFINE([PHP_ICONV_H_PATH], [<$PHP_ICONV_H_PATH>])
-    AC_DEFINE_UNQUOTED([PHP_ICONV_H_PATH], [<$PHP_ICONV_H_PATH>], [Path to iconv.h])
 
     PHP_NEW_EXTENSION(iconv, iconv.c, $ext_shared)
     PHP_SUBST(ICONV_SHARED_LIBADD)

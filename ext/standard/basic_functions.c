@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.43 2004/12/20 19:15:24 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.44 2004/12/28 09:01:48 zeev Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2473,7 +2473,7 @@ PHP_FUNCTION(ini_restore)
 }
 /* }}} */
 
-/* {{{ proto string set_include_path(string varname, string newvalue)
+/* {{{ proto string set_include_path(string new_include_path)
    Sets the include_path configuration option */
 
 PHP_FUNCTION(set_include_path)

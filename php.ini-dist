@@ -1,5 +1,5 @@
 [PHP]
-; $Id: php.ini-dist,v 1.87 2001/07/09 17:36:03 rasmus Exp $
+; $Id: php.ini-dist,v 1.88 2001/07/13 18:21:21 jflemer Exp $
 
 ;;;;;;;;;;;;;;;;;;;
 ; About this file ;
@@ -115,6 +115,12 @@ safe_mode = Off
 ; opening files. If you want to relax this to a GID compare,
 ; then turn on safe_mode_gid.
 safe_mode_gid = Off
+
+; When safe_mode is on, UID/GID checks are bypassed when
+; including files from this directory and its subdirectories.
+; (directory must also be in include_path or full path must
+; be used when including)
+safe_mode_include_dir =								
 
 ; When safe_mode is on, only executables located in the safe_mode_exec_dir
 ; will be allowed to be executed via the exec family of functions.

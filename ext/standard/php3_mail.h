@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php3_mail.h,v 1.3 1999/05/14 18:25:16 zeev Exp $ */
+/* $Id: php3_mail.h,v 1.4 1999/05/16 11:19:26 sas Exp $ */
 
 #ifndef _MAIL_H
 #define _MAIL_H
@@ -36,8 +36,8 @@
 extern php3_module_entry mail_module_entry;
 #define mail_module_ptr &mail_module_entry
 
-extern void php3_mail(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_info_mail(ZEND_MODULE_INFO_FUNC_ARGS);
+PHP_FUNCTION(mail);
+void php3_info_mail(ZEND_MODULE_INFO_FUNC_ARGS);
 extern int _php3_mail(char *to, char *subject, char *message, char *headers);
 
 #else

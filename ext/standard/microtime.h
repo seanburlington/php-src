@@ -27,11 +27,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.h,v 1.1 1999/04/17 00:37:07 ssb Exp $ */
+/* $Id: microtime.h,v 1.2 1999/05/16 11:19:26 sas Exp $ */
 
 #ifndef _MICROTIME_H
 #define _MICROTIME_H
 
-extern void php3_microtime(INTERNAL_FUNCTION_PARAMETERS);
+PHP_FUNCTION(microtime);
 
 #endif /* _MICROTIME_H */

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: iptc.c,v 1.2 1999/05/16 11:19:26 sas Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -44,7 +44,7 @@
 #include "php.h"
 #include "php3_iptc.h"
 
-void php3_iptcparse(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(iptcparse)
 {
 	unsigned int length, inx, len, inheader, tagsfound;
 	unsigned char *buffer;

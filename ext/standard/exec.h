@@ -28,15 +28,15 @@
  */
 
 
-/* $Id: exec.h,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: exec.h,v 1.2 1999/05/16 11:19:25 sas Exp $ */
 
 #ifndef _EXEC_H
 #define _EXEC_H
 
-extern void php3_system(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_exec(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_escapeshellcmd(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_passthru(INTERNAL_FUNCTION_PARAMETERS);
+PHP_FUNCTION(system);
+PHP_FUNCTION(exec);
+PHP_FUNCTION(escapeshellcmd);
+PHP_FUNCTION(passthru);
 PHP_FUNCTION(shell_exec);
 
 char *_php3_escapeshellcmd(char *);

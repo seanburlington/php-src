@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.4 1999/04/24 00:11:56 zeev Exp $ */
+/* $Id: filestat.c,v 1.5 1999/05/16 11:19:26 sas Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -111,7 +111,7 @@ int php3_shutdown_filestat(SHUTDOWN_FUNC_ARGS)
 	return SUCCESS;
 }
 
-void php3_chgrp(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(chgrp)
 {
 #ifndef WINDOWS
 	pval *filename, *group;
@@ -155,7 +155,7 @@ void php3_chgrp(INTERNAL_FUNCTION_PARAMETERS)
 }
 
 
-void php3_chown(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(chown)
 {
 #ifndef WINDOWS
 	pval *filename, *user;
@@ -197,7 +197,7 @@ void php3_chown(INTERNAL_FUNCTION_PARAMETERS)
 }
 
 
-void php3_chmod(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(chmod)
 {
 	pval *filename, *mode;
 	int ret;
@@ -225,7 +225,7 @@ void php3_chmod(INTERNAL_FUNCTION_PARAMETERS)
 }
 
 
-void php3_touch(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(touch)
 {
 #if HAVE_UTIME
 	pval *filename, *filetime;
@@ -292,7 +292,7 @@ void php3_touch(INTERNAL_FUNCTION_PARAMETERS)
 }
 
 
-void php3_clearstatcache(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(clearstatcache)
 {
 	if (CurrentStatFile) {
 		efree(CurrentStatFile);

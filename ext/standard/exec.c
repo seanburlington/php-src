@@ -26,7 +26,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.7 1999/04/26 17:26:36 zeev Exp $ */
+/* $Id: exec.c,v 1.8 1999/05/16 11:19:25 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -192,7 +192,7 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 
 /* {{{ proto int exec(string command [, array output [, int return_value]])
    Execute an external program */
-void php3_exec(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(exec)
 {
 	pval *arg1, *arg2, *arg3;
 	int arg_count = ARG_COUNT(ht);
@@ -228,7 +228,7 @@ void php3_exec(INTERNAL_FUNCTION_PARAMETERS)
 
 /* {{{ proto int system(string command [, int return_value])
    Execute an external program and display output */
-void php3_system(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(system)
 {
 	pval *arg1, *arg2;
 	int arg_count = ARG_COUNT(ht);
@@ -255,7 +255,7 @@ void php3_system(INTERNAL_FUNCTION_PARAMETERS)
 
 /* {{{ proto int passthru(string command [, int return_value])
    Execute an external program and display raw output */
-void php3_passthru(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(passthru)
 {
 	pval *arg1, *arg2;
 	int arg_count = ARG_COUNT(ht);
@@ -320,7 +320,7 @@ char * _php3_escapeshellcmd(char *str) {
 
 /* {{{ proto escapeshellcmd(string command)
    escape shell metacharacters */
-void php3_escapeshellcmd(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(escapeshellcmd)
 {
 	pval *arg1;
 	char *cmd;

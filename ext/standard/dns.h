@@ -29,17 +29,17 @@
  */
 
 
-/* $Id: dns.h,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: dns.h,v 1.2 1999/05/16 11:19:25 sas Exp $ */
 
 #ifndef _DNS_H
 #define _DNS_H
 
-extern void php3_gethostbyaddr(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_gethostbyname(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_gethostbynamel(INTERNAL_FUNCTION_PARAMETERS);
+PHP_FUNCTION(gethostbyaddr);
+PHP_FUNCTION(gethostbyname);
+PHP_FUNCTION(gethostbynamel);
 #if !(WIN32|WINNT)||(HAVE_BINDLIB)
-extern void php3_checkdnsrr(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_getmxrr(INTERNAL_FUNCTION_PARAMETERS);
+PHP_FUNCTION(checkdnsrr);
+PHP_FUNCTION(getmxrr);
 #endif
 
 #ifndef INT16SZ

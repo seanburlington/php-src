@@ -28,17 +28,17 @@
  */
 
 
-/* $Id: phpdir.h,v 1.1 1999/04/17 00:37:07 ssb Exp $ */
+/* $Id: phpdir.h,v 1.2 1999/05/16 11:19:26 sas Exp $ */
 
 #ifndef _PHPDIR_H
 #define _PHPDIR_H
 
 /* directory functions */
-extern void php3_opendir(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_closedir(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_chdir(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_rewinddir(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_readdir(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_getdir(INTERNAL_FUNCTION_PARAMETERS);
+PHP_FUNCTION(opendir);
+PHP_FUNCTION(closedir);
+PHP_FUNCTION(chdir);
+PHP_FUNCTION(rewinddir);
+PHP_FUNCTION(readdir);
+PHP_FUNCTION(getdir);
 
 #endif /* _PHPDIR_H */

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.3 1999/04/23 20:05:59 zeev Exp $ */
+/* $Id: link.c,v 1.4 1999/05/16 11:19:26 sas Exp $ */
 
 #include "php.h"
 #include "php3_filestat.h"
@@ -62,7 +62,7 @@
 
 /* {{{ proto string readlink(string filename)
    Return the target of a symbolic link */
-void php3_readlink(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(readlink)
 {
 #if HAVE_SYMLINK
 	pval *filename;
@@ -88,7 +88,7 @@ void php3_readlink(INTERNAL_FUNCTION_PARAMETERS)
 
 /* {{{ proto int linkinfo(string filename)
    Returns the st_dev field of the UNIX C stat structure describing the link */
-void php3_linkinfo(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(linkinfo)
 {
 #if HAVE_SYMLINK
 	pval *filename;
@@ -112,7 +112,7 @@ void php3_linkinfo(INTERNAL_FUNCTION_PARAMETERS)
 
 /* {{{ proto int symlink(string target, string link)
    Create a symbolic link */
-void php3_symlink(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(symlink)
 {
 #if HAVE_SYMLINK
 	pval *topath, *frompath;
@@ -140,7 +140,7 @@ void php3_symlink(INTERNAL_FUNCTION_PARAMETERS)
 
 /* {{{ proto int link(string target, string link)
    Create a hard link */
-void php3_link(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(link)
 {
 #if HAVE_LINK
 	pval *topath, *frompath;
@@ -168,7 +168,7 @@ void php3_link(INTERNAL_FUNCTION_PARAMETERS)
 
 /* {{{ proto int unlink(string filename)
    Delete a file */
-void php3_unlink(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(unlink)
 {
 	pval *filename;
 	int ret;

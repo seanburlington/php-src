@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.3 1999/04/24 00:11:57 zeev Exp $ */
+/* $Id: uniqid.c,v 1.4 1999/05/16 11:19:26 sas Exp $ */
 
 #include "php.h"
 
@@ -50,7 +50,7 @@
 
 /* {{{ proto string uniqid(string prefix)
    Generate a unique id */
-void php3_uniqid(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(uniqid)
 {
 #ifdef HAVE_GETTIMEOFDAY
 	pval *prefix;

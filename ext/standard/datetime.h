@@ -29,20 +29,20 @@
  */
 
 
-/* $Id: datetime.h,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: datetime.h,v 1.2 1999/05/16 11:19:25 sas Exp $ */
 
 #ifndef _DATETIME_H
 #define _DATETIME_H
 
-extern void php3_time(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_mktime(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_gmmktime(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_date(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_gmdate(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_getdate(INTERNAL_FUNCTION_PARAMETERS);
-extern void php3_checkdate(INTERNAL_FUNCTION_PARAMETERS);
+PHP_FUNCTION(time);
+PHP_FUNCTION(mktime);
+PHP_FUNCTION(gmmktime);
+PHP_FUNCTION(date);
+PHP_FUNCTION(gmdate);
+PHP_FUNCTION(getdate);
+PHP_FUNCTION(checkdate);
 #if HAVE_STRFTIME
-extern void php3_strftime(INTERNAL_FUNCTION_PARAMETERS);
+PHP_FUNCTION(strftime);
 #endif
 
 extern char *php3_std_date(time_t t);

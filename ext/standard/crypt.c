@@ -28,7 +28,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.1 1999/04/22 00:25:56 ssb Exp $ */
+/* $Id: crypt.c,v 1.2 1999/05/16 11:19:25 sas Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -128,7 +128,7 @@ static void php3i_to64(char *s, long v, int n)	{
 	} 
 } 
 
-void php3_crypt(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(crypt)
 {
 	char salt[PHP3_MAX_SALT_LEN];
 	pval *arg1, *arg2;

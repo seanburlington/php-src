@@ -26,7 +26,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.3 1999/04/24 00:11:54 zeev Exp $ */
+/* $Id: base64.c,v 1.4 1999/05/16 11:19:25 sas Exp $ */
 
 #include <string.h>
 
@@ -140,7 +140,7 @@ unsigned char *_php3_base64_decode(const unsigned char *string, int length, int 
 
 /* {{{ proto string base64_encode(string str)
    Encodes string using MIME base64 algorithm */
-void php3_base64_encode(INTERNAL_FUNCTION_PARAMETERS) {
+PHP_FUNCTION(base64_encode) {
 	pval *string;
 	unsigned char *result;
 	int ret_length;
@@ -163,7 +163,7 @@ void php3_base64_encode(INTERNAL_FUNCTION_PARAMETERS) {
 
 /* {{{ proto string base64_decode(string str)
    Decodes string using MIME base64 algorithm */
-void php3_base64_decode(INTERNAL_FUNCTION_PARAMETERS) {
+PHP_FUNCTION(base64_decode) {
 	pval *string;
 	unsigned char *result;
 	int ret_length;

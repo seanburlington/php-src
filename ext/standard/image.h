@@ -26,11 +26,11 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.h,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: image.h,v 1.2 1999/05/16 11:19:26 sas Exp $ */
 
 #ifndef _IMAGE_H
 #define _IMAGE_H
 
-extern void php3_getimagesize(INTERNAL_FUNCTION_PARAMETERS);
+PHP_FUNCTION(getimagesize);
 
 #endif /* _IMAGE_H */

@@ -27,12 +27,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyr_convert.h,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: cyr_convert.h,v 1.2 1999/05/16 11:19:25 sas Exp $ */
 
 #ifndef _CYR_CONVERT_H
 #define _CYR_CONVERT_H
 
-extern void php3_convert_cyr_string(INTERNAL_FUNCTION_PARAMETERS);
+PHP_FUNCTION(convert_cyr_string);
 
 #endif /* _CYR_CONVERT_H */
 

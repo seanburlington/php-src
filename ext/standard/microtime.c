@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.3 1999/04/24 00:11:56 zeev Exp $ */
+/* $Id: microtime.c,v 1.4 1999/05/16 11:19:26 sas Exp $ */
 
 #include <stdlib.h>
 #ifdef HAVE_UNISTD_H
@@ -57,7 +57,7 @@
 #ifdef __cplusplus
 void php3_microtime(HashTable *)
 #else
-void php3_microtime(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(microtime)
 #endif
 {
 #if HAVE_GETTIMEOFDAY

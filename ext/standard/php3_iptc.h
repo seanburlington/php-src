@@ -28,11 +28,11 @@
  */
 
 
-/* $Id: php3_iptc.h,v 1.1 1999/04/17 00:37:07 ssb Exp $ */
+/* $Id: php3_iptc.h,v 1.2 1999/05/16 11:19:26 sas Exp $ */
 
 #ifndef _PHPIPTC_H
 #define _PHPIPTC_H
 
-extern void php3_iptcparse(INTERNAL_FUNCTION_PARAMETERS);
+PHP_FUNCTION(iptcparse);
 
 #endif /* _PHPIPTC_H */

@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.12 1999/05/11 20:38:16 zeev Exp $ */
+/* $Id: head.c,v 1.13 1999/05/16 11:19:26 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -205,7 +205,7 @@ void php4i_add_header_information(char *header_information, uint header_length)
 
 
 /* Implementation of the language Header() function */
-void php3_Header(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(Header)
 {
 	pval *arg1;
 
@@ -429,7 +429,7 @@ CookieList *php3_PopCookieList(void)
 }
 
 /* php3_SetCookie(name,value,expires,path,domain,secure) */
-void php3_SetCookie(INTERNAL_FUNCTION_PARAMETERS)
+PHP_FUNCTION(SetCookie)
 {
 	char *cookie;
 	int len=sizeof("Set-Cookie: ");

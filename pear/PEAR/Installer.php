@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.126 2003/09/17 03:22:55 cellog Exp $
+// $Id: Installer.php,v 1.127 2003/09/18 03:59:22 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -455,7 +455,8 @@ class PEAR_Installer extends PEAR_Common
                     $this->pkginfo['filelist'][$data[0]]['installed_as'] = $data[1];
                     if (!isset($this->pkginfo['filelist']['dirtree'][dirname($data[1])])) {
                         $this->pkginfo['filelist']['dirtree'][dirname($data[1])] = true;
-                        while(!empty($data[3]) && $data[3] != '/' && $data[3] != '\\') {
+                        while(!empty($data[3]) && $data[3] != '/' && $data[3] != '\\'
+                              && $data[3] != '.') {
                             $this->pkginfo['filelist']['dirtree']
                                 [$this->_prependPath($data[3], $data[2])] = true;
                             $data[3] = dirname($data[3]);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.4 2003/09/08 18:28:35 rrichards Exp $ */
+/* $Id: xpath.c,v 1.5 2003/09/29 11:43:26 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -169,7 +169,7 @@ PHP_FUNCTION(dom_xpath_query)
 		nodep = xmlDocGetRootElement(docp);
 	}
 
-	if (docp != nodep->doc) {
+	if (nodep && docp != nodep->doc) {
 		php_error(E_WARNING, "Node From Wrong Document");
 		RETURN_FALSE;
 	}

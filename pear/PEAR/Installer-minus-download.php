@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer-minus-download.php,v 1.4 2003/12/01 01:02:40 cellog Exp $
+// $Id: Installer-minus-download.php,v 1.5 2003/12/03 22:39:55 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -582,11 +582,12 @@ class PEAR_Installer extends PEAR_Downloader
     {
         // trickiness: initialize here
         parent::PEAR_Downloader($this->ui, $options, $config);
+        $ret = parent::download($packages);
         $errors = $this->getErrorMsgs();
         $installpackages = $this->getDownloadedPackages();
         trigger_error("PEAR Warning: PEAR_Installer::download() is deprecated " .
                       "in favor of PEAR_Downloader class", E_USER_WARNING);
-        return parent::download($packages);
+        return $ret;
     }
 
     // }}}

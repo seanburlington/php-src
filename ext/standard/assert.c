@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.17 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: assert.c,v 1.18 2000/05/03 14:24:14 andrei Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -60,7 +60,7 @@ php_assert_globals assert_globals;
 #define ASSERT_QUIET_EVAL   5
 
 PHP_INI_BEGIN()
-	 STD_PHP_INI_ENTRY("assert.active",	    "0",	PHP_INI_ALL,	OnUpdateInt,		active,	 			php_assert_globals,		assert_globals)
+	 STD_PHP_INI_ENTRY("assert.active",	    "1",	PHP_INI_ALL,	OnUpdateInt,		active,	 			php_assert_globals,		assert_globals)
 	 STD_PHP_INI_ENTRY("assert.bail",	    "0",	PHP_INI_ALL,	OnUpdateInt,		bail,	 			php_assert_globals,		assert_globals)
 	 STD_PHP_INI_ENTRY("assert.warning",	"1",	PHP_INI_ALL,	OnUpdateInt,		warning, 			php_assert_globals,		assert_globals)
 	 STD_PHP_INI_ENTRY("assert.callback",   NULL,	PHP_INI_ALL,	OnUpdateString,		default_callback, 	php_assert_globals,		assert_globals)

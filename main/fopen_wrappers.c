@@ -27,7 +27,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.21 1999/06/22 01:59:30 ssb Exp $ */
+/* $Id: fopen_wrappers.c,v 1.22 1999/06/22 11:04:35 ssb Exp $ */
 
 /* Synced with php3 revision 1.66 1999-06-18 [ssb] */
 
@@ -572,7 +572,7 @@ static FILE *php3_fopen_url_wrapper(const char *path, char *mode, int options, i
 		if (!SOCK_FEOF(*socketd)) {
 			/* get response header */
 			if (SOCK_FGETS(tmp_line, sizeof(tmp_line), *socketd) != NULL) {
-				if (strncmp(tmp_line + 8, " 200 ", 5) == NULL) {
+				if (strncmp(tmp_line + 8, " 200 ", 5) == 0) {
 					reqok = 1;
 				}
 			}

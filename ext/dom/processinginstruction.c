@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: processinginstruction.c,v 1.8 2004/01/22 21:16:05 rrichards Exp $ */
+/* $Id: processinginstruction.c,v 1.9 2004/02/15 10:54:37 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -124,10 +124,25 @@ int dom_processinginstruction_data_read(dom_object *obj, zval **retval TSRMLS_DC
 
 int dom_processinginstruction_data_write(dom_object *obj, zval *newval TSRMLS_DC)
 {
+	zval value_copy;
 	xmlNode *nodep;
 
 	nodep = dom_object_get_node(obj);
+
+	if (newval->type != IS_STRING) {
+		if(newval->refcount > 1) {
+			value_copy = *newval;
+			zval_copy_ctor(&value_copy);
+			newval = &value_copy;
+		}
+		convert_to_string(newval);
+	}
+
 	xmlNodeSetContentLen(nodep, Z_STRVAL_P(newval), Z_STRLEN_P(newval) + 1);
+
+	if (newval == &value_copy) {
+		zval_dtor(newval);
+	}
 
 	return SUCCESS;
 }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.83 2002/02/05 07:37:42 yohgaki Exp $ */
+/* $Id: output.c,v 1.84 2002/02/07 02:50:28 yohgaki Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -269,7 +269,6 @@ PHPAPI void php_end_ob_buffers(zend_bool send_buffer TSRMLS_DC)
  */
 PHPAPI void php_start_implicit_flush(TSRMLS_D)
 {
-	php_end_ob_buffer(1, 0 TSRMLS_CC);		/* Switch out of output buffering if we're in it */
 	OG(implicit_flush)=1;
 }
 /* }}} */

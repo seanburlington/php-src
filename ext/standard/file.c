@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: file.c,v 1.12 1999/05/16 11:19:25 sas Exp $ */
+/* $Id: file.c,v 1.13 1999/05/20 13:56:19 sas Exp $ */
 #include "php.h"
 #include "php_globals.h"
 #include "ext/standard/flock_compat.h"
@@ -703,7 +703,6 @@ PHP_FUNCTION(feof)
 	int id, type;
 	int issock=0;
 	int socketd=0, *sock;
-	unsigned int temp;
 	
 	if (ARG_COUNT(ht) != 1 || getParameters(ht, 1, &arg1) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -721,7 +720,7 @@ PHP_FUNCTION(feof)
 		/* we're at the eof if the file doesn't exist */
 		RETURN_TRUE;
 	}
-	if ((issock?!(recv(socketd,(char *)&temp,1,MSG_PEEK)):feof(fp))) {
+	if ((issock?(_php3_sock_eof(socketd)):feof(fp))) {
 		RETURN_TRUE;
 	} else {
 		RETURN_FALSE;

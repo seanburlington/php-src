@@ -27,7 +27,7 @@
    |          Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
 */
-/* $Id: fsock.h,v 1.4 1999/05/16 11:19:26 sas Exp $ */
+/* $Id: fsock.h,v 1.5 1999/05/20 13:56:19 sas Exp $ */
 
 #ifndef _FSOCK_H
 #define _FSOCK_H
@@ -53,6 +53,7 @@ extern int lookup_hostname(const char *addr, struct in_addr *in);
 extern int _php3_sock_fgets(char *buf, int maxlen, int socket);
 extern int _php3_sock_fread(char *buf, int maxlen, int socket);
 extern int _php3_is_persistent_sock(int);
+int _php3_sock_eof(int socket);
 
 #define phpext_fsock_ptr fsock_module_ptr
 

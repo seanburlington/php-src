@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.63.2.10 2003/03/24 21:22:57 moriyoshi Exp $ */
+/* $Id: html.c,v 1.63.2.11 2003/04/22 20:44:55 rasmus Exp $ */
 
 #include "php.h"
 #if PHP_WIN32
@@ -400,6 +400,7 @@ static const struct {
 	{ '&',	"&amp;",	5,	0 },
 	{ '"',	"&quot;",	6,	ENT_HTML_QUOTE_DOUBLE },
 	{ '\'',	"&#039;",	6,	ENT_HTML_QUOTE_SINGLE },
+	{ '\'',	"&#39;",	5,	ENT_HTML_QUOTE_SINGLE },
 	{ '<',	"&lt;",		4,	0 },
 	{ '>',	"&gt;",		4,	0 },
 	{ 0, NULL, 0, 0 }

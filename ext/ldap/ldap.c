@@ -21,7 +21,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.40 2000/05/24 08:58:40 rasmus Exp $ */
+/* $Id: ldap.c,v 1.41 2000/06/05 15:17:25 hholzgra Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -158,7 +158,7 @@ PHP_MINFO_FUNCTION(ldap)
 {
 	char maxl[32];
 #if HAVE_NSLDAP
-	char tmp[32]
+	char tmp[32];
 	LDAPVersion ver;
 	double SDKVersion;
 #endif
@@ -179,7 +179,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.40 2000/05/24 08:58:40 rasmus Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.41 2000/06/05 15:17:25 hholzgra Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #if HAVE_NSLDAP

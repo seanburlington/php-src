@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: build2.mk,v 1.11 2000/04/29 16:14:17 rasmus Exp $
+# $Id: build2.mk,v 1.12 2000/04/29 16:16:31 rasmus Exp $
 
 include generated_lists
 
@@ -46,7 +46,7 @@ all: .deps Zend/Makefile.am TSRM/Makefile.am $(targets)
 	for i in `find ext sapi regex -type d \! -name \*CVS`; do \
 		list="$$list $$i/.deps"; \
 	done; \
-	touch $$list pear/.deps mysql/libmysql/.deps $@
+	touch $$list pear/.deps ext/mysql/libmysql/.deps $@
 
 Zend/Makefile.am:
 	test -d Zend || (test -d ../Zend && ln -s ../Zend Zend)

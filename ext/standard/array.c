@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.126 2001/08/28 21:50:37 rasmus Exp $ */
+/* $Id: array.c,v 1.127 2001/08/31 04:52:10 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1048,7 +1048,7 @@ static void php_search_array(INTERNAL_FUNCTION_PARAMETERS, int behavior)
 		WRONG_PARAM_COUNT;
 	}
 	
-	if (Z_TYPE_PP(value) == IS_ARRAY || Z_TYPE_PP(value) == IS_OBJECT) {
+	if (Z_TYPE_PP(value) == IS_OBJECT) {
 		php_error(E_WARNING, "Wrong datatype for first argument in call to %s", get_active_function_name(TSRMLS_C));
 		RETURN_FALSE;
 	}

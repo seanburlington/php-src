@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.71 2004/02/15 20:23:05 georg Exp $ 
+  $Id: mysqli_api.c,v 1.72 2004/02/18 13:26:57 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -711,7 +711,7 @@ PHP_FUNCTION(mysqli_fetch)
 			RETURN_FALSE;
 		break;
 		default:
-			RETURN_LONG(ret);
+			RETURN_NULL();
 		break;
 	}
 }

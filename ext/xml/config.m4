@@ -1,5 +1,5 @@
 # $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.6 1999/07/24 00:52:15 sas Exp $
+# $Id: config.m4,v 1.7 1999/07/24 21:40:37 sas Exp $
 
 AC_MSG_CHECKING(for XML support)
 AC_ARG_WITH(xml,
@@ -27,9 +27,9 @@ AC_ARG_WITH(xml,
       AC_MSG_RESULT([yes (static)])
     fi
     if test "$withval" = "yes"; then
-      test -d /usr/include/xmltok && XML_INCLUDE="-I/usr/include/xmltok"
-      test -d /usr/include/xml && XML_INCLUDE="-I/usr/include/xml"
-      test -d /usr/local/include/xml && XML_INCLUDE="-I/usr/local/include/xml"
+      test -d /usr/include/xmltok && XML_INCLUDE="/usr/include/xmltok"
+      test -d /usr/include/xml && XML_INCLUDE="/usr/include/xml"
+      test -d /usr/local/include/xml && XML_INCLUDE="/usr/local/include/xml"
       AC_CHECK_LIB(expat, main, XML_LIBS="-lexpat", XML_LIBS="-lxmlparse -lxmltok")
     else
       XML_LIBS="-L$withval/lib -lexpat"

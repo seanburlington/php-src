@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.41 2000/12/08 02:30:43 ssb Exp $
+// $Id: DB.php,v 1.42 2000/12/10 01:32:16 ssb Exp $
 //
 // Database independent query interface.
 //
@@ -259,7 +259,7 @@ class DB
      */
     function isManip($query)
     {
-        if (preg_match('/^\s*(INSERT|UPDATE|DELETE)\s+/i', $query)) {
+        if (preg_match('/^\s*(INSERT|UPDATE|DELETE|REPLACE)\s+/i', $query)) {
             return true;
         }
         return false;

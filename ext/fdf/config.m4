@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.11 2001/04/29 10:14:18 sniper Exp $
+dnl $Id: config.m4,v 1.12 2001/05/10 00:55:48 sniper Exp $
 
 PHP_ARG_WITH(fdftk, for fdftk support,
 [  --with-fdftk[=DIR]      Include fdftk support])
@@ -23,13 +23,10 @@ if test "$PHP_FDFTK" != "no"; then
 
   PHP_ADD_INCLUDE($FDFTK_DIR/include)
   
-  old_LIBS=$LIBS
-  LIBS="$LIBS -L$FDFTK_DIR/lib -lm"
   FDFLIBRARY=""
   for i in fdftk FdfTk; do
-    AC_CHECK_LIB($i, FDFOpen, [FDFLIBRARY=$i])
+    AC_CHECK_LIB($i, FDFOpen, [FDFLIBRARY=$i], [], [-L$FDFTK_DIR/lib -lm])
   done
-  LIBS=$old_LIBS
   
   if test $FDFLIBRARY = ""; then
     AC_MSG_ERROR(fdftk module requires fdftk 2.0)

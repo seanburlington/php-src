@@ -16,7 +16,7 @@
    |          Fredrik Ohrn                                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.31.8.3 2003/02/28 06:51:16 hholzgra Exp $ */
+/* $Id: yp.c,v 1.31.8.4 2003/09/26 10:13:30 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -298,7 +298,7 @@ static int php_foreach_cat (int instatus, char *inkey, int inkeylen, char *inval
 				add_assoc_stringl_ex((zval *) indata, key, inkeylen+1, inval, invallen, 1);
 				efree(key);
 			} else {
-				php_error(E_WARNING, "Can't allocate %d bytes for key buffer in yp_cat()");
+				php_error(E_WARNING, "Can't allocate %d bytes for key buffer in yp_cat()", inkeylen+1);
 			}
 		}
 

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.16 2000/01/29 11:55:43 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.17 2000/01/29 12:46:59 rasmus Exp $ */
 
 #include "zend.h"
 #include "php.h"
@@ -358,7 +358,7 @@ int send_php(request_rec *r, int display_source_mode, char *filename)
 	 * directive, then decline to handle this request
 	 */
 	if (!php_apache_info.engine) {
-		r->content_type = "text/html";
+		r->content_type = "text/html;charset=iso-8859-1";
 		r->allowed |= (1 << METHODS) - 1;
 		return DECLINED;
 	}
@@ -390,7 +390,7 @@ int send_php(request_rec *r, int display_source_mode, char *filename)
 	}
 	/* Assume output will be HTML.  Individual scripts may change this 
 	   further down the line */
-	r->content_type = "text/html";
+	r->content_type = "text/html;charset=iso-8859-1";
 
 	/* Init timeout */
 	hard_timeout("send", r);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.106 2000/08/20 05:27:59 sas Exp $ */
+/* $Id: file.c,v 1.107 2000/08/20 13:24:14 stas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1019,8 +1019,8 @@ PHP_FUNCTION(fgetc) {
 		socketd=*(int*)what;
 	}
 
-	buf = emalloc(sizeof(char) * 2);
-	if (!(*buf = FP_FGETC(socketd, (FILE*)what, issock))) {
+	buf = emalloc(sizeof(int));
+	if ((*buf = FP_FGETC(socketd, (FILE*)what, issock)) == EOF) {
 		efree(buf);
 		RETVAL_FALSE;
 	} else {
@@ -1320,6 +1320,7 @@ PHP_FUNCTION(ftell)
 {
 	pval **arg1;
 	void *what;
+	long ret;
 	
 	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &arg1) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -1327,8 +1328,13 @@ PHP_FUNCTION(ftell)
 	
 	what = zend_fetch_resource(arg1,-1,"File-Handle",NULL,2,le_fopen,le_popen);
 	ZEND_VERIFY_RESOURCE(what);
+
+	ret = ftell((FILE*) what);
+	if(ret == -1) {
+		RETURN_FALSE;
+	} 
 	
-	RETURN_LONG(ftell((FILE*) what));
+	RETURN_LONG(ret);
 }
 
 /* }}} */

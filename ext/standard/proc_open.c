@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.18 2003/12/05 13:48:40 wez Exp $ */
+/* $Id: proc_open.c,v 1.19 2003/12/06 10:48:56 sniper Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -444,7 +444,7 @@ struct php_proc_open_descriptor_item {
 };
 /* }}} */
 
-/* {{{ proto resource proc_open(string command, array descriptorspec, array &pipes [, string cwd [, array env] [, array other_options]])
+/* {{{ proto resource proc_open(string command, array descriptorspec, array &pipes [, string cwd [, array env [, array other_options]]])
    Run a process with more control over it's file descriptors */
 PHP_FUNCTION(proc_open)
 {

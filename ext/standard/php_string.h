@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.73 2003/03/18 12:06:03 ssb Exp $ */
+/* $Id: php_string.h,v 1.74 2003/04/08 17:15:43 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -133,31 +133,6 @@ PHPAPI size_t php_strip_tags(char *rbuf, int len, int *state, char *allow, int a
 PHPAPI int php_char_to_str(char *str, uint len, char from, char *to, int to_len, pval *result);
 PHPAPI void php_implode(zval *delim, zval *arr, zval *return_value);
 PHPAPI void php_explode(zval *delim, zval *str, zval *return_value, int limit);
-
-static inline char *
-php_memnstr(char *haystack, char *needle, int needle_len, char *end)
-{
-	char *p = haystack;
-	char ne = needle[needle_len-1];
-
-	end -= needle_len;
-
-	while (p <= end) {
-		if ((p = memchr(p, *needle, (end-p+1))) && ne == p[needle_len-1]) {
-			if (!memcmp(needle, p, needle_len-1)) {
-				return p;
-			}
-		}
-		
-		if (p == NULL) {
-			return NULL;
-		}
-		
-		p++;
-	}
-	
-	return NULL;
-}
 
 PHPAPI size_t php_strspn(char *s1, char *s2, char *s1_end, char *s2_end); 
 PHPAPI size_t php_strcspn(char *s1, char *s2, char *s1_end, char *s2_end); 

@@ -22,11 +22,12 @@
 
 #define OCI_USE_EMALLOC 0		/* set this to 1 if you want to use the php memory manager! */
 
-/* $Id: oci8.c,v 1.38 1999/11/12 17:05:57 thies Exp $ */
+/* $Id: oci8.c,v 1.39 1999/12/01 07:34:06 thies Exp $ */
 
 /* TODO list:
  *
  * - php.ini flags
+ * - Change return-value for OCIFetch*() (1-row read, 0-Normal end, false-error) 
  * - Error mode (print or shut up?)
  * - OCIPasswordChange()
  * - binding of arrays

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.35 2003/07/15 10:37:19 georg Exp $ 
+  $Id: mysqli_api.c,v 1.36 2003/07/15 14:00:18 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -454,7 +454,7 @@ PHP_FUNCTION(mysqli_commit)
 }
 /* }}} */
 
-/* {{{ proto void mysqli_data_seek(object result)
+/* {{{ proto void mysqli_data_seek(object result, int offset)
    Move internal result pointer */
 PHP_FUNCTION(mysqli_data_seek)
 {
@@ -464,7 +464,7 @@ PHP_FUNCTION(mysqli_data_seek)
 	PR_COMMAND	*prcommand;
 	long  		offset;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Orl", &mysql_result, mysqli_result_class_entry, &mysql_result, &offset) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Ol", &mysql_result, mysqli_result_class_entry, &offset) == FAILURE) {
 		return;
 	}
 
@@ -1671,6 +1671,27 @@ PHP_FUNCTION(mysqli_stmt_close)
 	MYSQLI_CLEAR_RESOURCE(&mysql_stmt);
 	RETURN_TRUE;
 
+}
+/* }}} */
+
+/* {{{ proto void mysqli_stmt_data_seek(object stmt, int offset)
+   Move internal result pointer */
+PHP_FUNCTION(mysqli_stmt_data_seek)
+{
+	STMT 		*stmt;
+	zval  		*mysql_stmt;
+	PR_STMT  	*prstmt;  
+	long  		offset;
+
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Ol", &mysql_stmt, mysqli_stmt_class_entry, &offset) == FAILURE) {
+		return;
+	}
+
+	MYSQLI_FETCH_RESOURCE(stmt, STMT *, prstmt, PR_STMT *, &mysql_stmt, "mysqli_stmt");
+
+
+	mysql_stmt_data_seek(stmt->stmt, offset);
+	return;
 }
 /* }}} */
 

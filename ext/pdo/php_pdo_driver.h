@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.6 2004/05/18 15:19:31 gschlossnagle Exp $ */
+/* $Id: php_pdo_driver.h,v 1.7 2004/05/18 19:30:43 gschlossnagle Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -204,9 +204,12 @@ struct _pdo_dbh_t {
 	 * the driver */
 	unsigned emulate_prepare:1;
 
+	/* max length a single character can become after correct quoting */
+	unsigned max_escaped_char_length:3;
+
 	/* the sum of the number of bits here and the bit fields preceeding should
 	 * equal 32 */
-	unsigned _reserved_flags:24;
+	unsigned _reserved_flags:21;
 
 	/* data source string used to open this handle */
 	const char *data_source;

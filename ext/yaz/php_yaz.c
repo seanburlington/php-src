@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.84 2004/02/23 10:48:44 dickmeiss Exp $ */
+/* $Id: php_yaz.c,v 1.85 2004/03/15 10:01:09 dickmeiss Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -868,9 +868,8 @@ static void retval_array2_grs1(zval *return_value, Z_GenericRecord *p)
 		zval *zval_sub;
 		Z_TaggedElement *e = p->elements[i];
 		
-		ALLOC_ZVAL(zval_element);
+		MAKE_STD_ZVAL(zval_element);
 		array_init(zval_element);
-		INIT_PZVAL(zval_element);
 		
 		if (e->tagType)
 			add_assoc_long(zval_element, "tagType", *e->tagType);
@@ -891,7 +890,7 @@ static void retval_array2_grs1(zval *return_value, Z_GenericRecord *p)
 			add_assoc_bool(zval_element, "content",*e->content->u.trueOrFalse);
 			break;
 		case Z_ElementData_subtree:
-			ALLOC_ZVAL(zval_sub);
+			MAKE_STD_ZVAL(zval_sub);
 			retval_array2_grs1(zval_sub, e->content->u.subtree);
 			add_assoc_zval(zval_element, "content", zval_sub);
 		}

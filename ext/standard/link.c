@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.50 2004/11/02 00:37:32 iliaa Exp $ */
+/* $Id: link.c,v 1.51 2005/02/21 09:12:44 hyanantha Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -33,8 +33,6 @@
 #if HAVE_PWD_H
 #ifdef PHP_WIN32
 #include "win32/pwd.h"
-#elif defined(NETWARE)
-#include "netware/pwd.h"
 #else
 #include <pwd.h>
 #endif

@@ -16,7 +16,7 @@
   |         Ilia Alshanetsky <ilia@prohost.org>                          |
   +----------------------------------------------------------------------+
 
-  $Id: enchant.c,v 1.6 2004/03/09 01:57:01 pajoye Exp $
+  $Id: enchant.c,v 1.7 2004/03/09 01:57:53 pajoye Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -231,7 +231,7 @@ PHP_MINFO_FUNCTION(enchant)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "enchant support", "enabled");
 	php_info_print_table_row(2, "Version", "@version@");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.6 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.7 $");
 	php_info_print_table_row(1, "Provides");
 	enchant_broker_describe(pbroker, __enumerate_providers_fn, NULL);
 	php_info_print_table_end();
@@ -531,8 +531,9 @@ PHP_FUNCTION(enchant_dict_quick_check)
 			for (i = 0; i < n_sugg; i++) {
 				add_next_index_string(sugg, suggs[i], 1);
 			}
+			enchant_dict_free_suggestions(pdict->pdict, suggs);
 		}
-		enchant_dict_free_suggestions(pdict->pdict, suggs);
+
 
 		RETURN_FALSE;
 	}

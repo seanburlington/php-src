@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.59 2004/04/02 16:54:44 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.60 2004/05/14 16:12:06 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1224,6 +1224,7 @@ PHP_FUNCTION(popen)
 
 		if (!fp) {
 			php_error_docref2(NULL TSRMLS_CC, buf, p, E_WARNING, "%s", strerror(errno));
+			efree(p);
 			RETURN_FALSE;
 		}
 	} else {

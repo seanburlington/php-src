@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pfpro.c,v 1.29 2003/06/10 20:03:34 imajes Exp $ */
+/* $Id: pfpro.c,v 1.30 2003/07/19 19:23:32 andrey Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -151,7 +151,7 @@ PHP_FUNCTION(pfpro_version)
 }
 /* }}} */
 
-/* {{{ proto void pfpro_init()
+/* {{{ proto bool pfpro_init()
    Initializes the Payflow Pro library */
 PHP_FUNCTION(pfpro_init)
 {
@@ -167,7 +167,7 @@ PHP_FUNCTION(pfpro_init)
 }
 /* }}} */
 
-/* {{{ proto void pfpro_cleanup()
+/* {{{ proto bool pfpro_cleanup()
    Shuts down the Payflow Pro library */
 PHP_FUNCTION(pfpro_cleanup)
 {

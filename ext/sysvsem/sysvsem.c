@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.46 2003/06/10 20:03:39 imajes Exp $ */
+/* $Id: sysvsem.c,v 1.47 2003/07/19 19:23:33 andrey Exp $ */
 
 /* Latest update build anc tested on Linux 2.2.14
  *
@@ -165,7 +165,7 @@ PHP_MINIT_FUNCTION(sysvsem)
 #undef SETVAL_WANTS_PTR
 #endif
 
-/* {{{ proto int sem_get(int key [, int max_acquire [, int perm [, int auto_release]])
+/* {{{ proto resource sem_get(int key [, int max_acquire [, int perm [, int auto_release]])
    Return an id for the semaphore with the given key, and allow max_acquire (default 1) processes to acquire it simultaneously */
 PHP_FUNCTION(sem_get)
 {
@@ -327,7 +327,7 @@ static void php_sysvsem_semop(INTERNAL_FUNCTION_PARAMETERS, int acquire)
 }
 /* }}} */
 
-/* {{{ proto int sem_acquire(int id)
+/* {{{ proto bool sem_acquire(resource id)
    Acquires the semaphore with the given id, blocking if necessary */
 PHP_FUNCTION(sem_acquire)
 {
@@ -335,7 +335,7 @@ PHP_FUNCTION(sem_acquire)
 }
 /* }}} */
 
-/* {{{ proto int sem_release(int id)
+/* {{{ proto bool sem_release(resource id)
    Releases the semaphore with the given id */
 PHP_FUNCTION(sem_release)
 {
@@ -343,7 +343,7 @@ PHP_FUNCTION(sem_release)
 }
 /* }}} */
 
-/* {{{ proto int sem_remove(int id)
+/* {{{ proto bool sem_remove(resource id)
    Removes semaphore from Unix systems */
 
 /*

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.56 2003/06/10 20:03:35 imajes Exp $ */
+/* $Id: posix.c,v 1.57 2003/07/19 19:23:32 andrey Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -130,7 +130,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.56 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.57 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -960,7 +960,7 @@ struct limitlist {
 /* }}} */
 
 
-/* {{{ proto int posix_getrlimit(void)
+/* {{{ proto array posix_getrlimit(void)
    Get system resource consumption limits (This is not a POSIX function, but a BSDism and a SVR4ism. We compile conditionally) */
 PHP_FUNCTION(posix_getrlimit)
 {

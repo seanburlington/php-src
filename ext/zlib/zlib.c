@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.171 2003/06/10 20:03:41 imajes Exp $ */
+/* $Id: zlib.c,v 1.172 2003/07/19 19:23:33 andrey Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -320,7 +320,7 @@ PHP_FUNCTION(gzfile)
 }
 /* }}} */
 
-/* {{{ proto int gzopen(string filename, string mode [, int use_include_path])
+/* {{{ proto resource gzopen(string filename, string mode [, int use_include_path])
    Open a .gz-file and return a .gz-file pointer */
 PHP_FUNCTION(gzopen)
 {

@@ -16,7 +16,7 @@
    |          Fredrik Ohrn                                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: yp.c,v 1.38 2003/06/10 20:03:41 imajes Exp $ */
+/* $Id: yp.c,v 1.39 2003/07/19 19:23:33 andrey Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -262,7 +262,7 @@ static int php_foreach_all (int instatus, char *inkey, int inkeylen, char *inval
 }
 /* }}} */
 
-/* {{{ proto void yp_all(string domain, string map, string callback)
+/* {{{ proto bool yp_all(string domain, string map, string callback)
    Traverse the map and call a function on each entry */
 PHP_FUNCTION(yp_all)
 {

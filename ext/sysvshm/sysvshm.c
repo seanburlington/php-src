@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.63 2003/06/10 20:03:39 imajes Exp $ */
+/* $Id: sysvshm.c,v 1.64 2003/07/19 19:23:33 andrey Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -174,7 +174,7 @@ PHP_FUNCTION(shm_attach)
 }
 /* }}} */
 
-/* {{{ proto int shm_detach(int shm_identifier)
+/* {{{ proto bool shm_detach(int shm_identifier)
    Disconnects from shared memory segment */
 PHP_FUNCTION(shm_detach)
 {
@@ -192,7 +192,7 @@ PHP_FUNCTION(shm_detach)
 }
 /* }}} */
 
-/* {{{ proto int shm_remove(int shm_identifier)
+/* {{{ proto bool shm_remove(int shm_identifier)
    Removes shared memory from Unix systems */
 PHP_FUNCTION(shm_remove)
 {
@@ -223,7 +223,7 @@ PHP_FUNCTION(shm_remove)
 }
 /* }}} */
 
-/* {{{ proto int shm_put_var(int shm_identifier, int variable_key, mixed variable)
+/* {{{ proto bool shm_put_var(int shm_identifier, int variable_key, mixed variable)
    Inserts or updates a variable in shared memory */
 PHP_FUNCTION(shm_put_var)
 {
@@ -318,7 +318,7 @@ PHP_FUNCTION(shm_get_var)
 }
 /* }}} */
 
-/* {{{ proto int shm_remove_var(int id, int variable_key)
+/* {{{ proto bool shm_remove_var(int id, int variable_key)
    Removes variable from shared memory */
 PHP_FUNCTION(shm_remove_var)
 {

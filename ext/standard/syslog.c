@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.20 2000/05/28 16:19:45 sas Exp $ */
+/* $Id: syslog.c,v 1.21 2000/05/28 16:22:28 sas Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -252,7 +252,7 @@ PHP_FUNCTION(syslog)
 	 * this will cause problems.
 	 */
 
-	syslog((*priority)->value.lval, (*message)->value.str.val);
+	php_syslog((*priority)->value.lval, (*message)->value.str.val);
 	RETURN_TRUE;
 }
 /* }}} */

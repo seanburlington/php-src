@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcntl.h,v 1.17 2004/01/08 17:32:37 sniper Exp $ */
+/* $Id: php_pcntl.h,v 1.18 2004/08/28 12:20:06 derick Exp $ */
 
 #ifndef PHP_PCNTL_H
 #define PHP_PCNTL_H
@@ -51,8 +51,12 @@ PHP_FUNCTION(pcntl_wtermsig);
 PHP_FUNCTION(pcntl_wstopsig);
 PHP_FUNCTION(pcntl_signal);
 PHP_FUNCTION(pcntl_exec);
+#ifdef HAVE_GETPRIORITY
 PHP_FUNCTION(pcntl_getpriority);
+#endif
+#ifdef HAVE_SETPRIORITY
 PHP_FUNCTION(pcntl_setpriority);
+#endif
 
 ZEND_BEGIN_MODULE_GLOBALS(pcntl)
 	HashTable php_signal_table;

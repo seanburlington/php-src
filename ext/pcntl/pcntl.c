@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.44 2004/06/30 01:12:04 iliaa Exp $ */
+/* $Id: pcntl.c,v 1.45 2004/08/28 12:20:06 derick Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -56,8 +56,12 @@ function_entry pcntl_functions[] = {
 	PHP_FE(pcntl_wstopsig,		NULL)
 	PHP_FE(pcntl_exec,			NULL)
 	PHP_FE(pcntl_alarm,			NULL)
+#ifdef HAVE_GETPRIORITY
 	PHP_FE(pcntl_getpriority,	NULL)
+#endif
+#ifdef HAVE_SETPRIORITY
 	PHP_FE(pcntl_setpriority,	NULL)
+#endif
 	{NULL, NULL, NULL}	
 };
 

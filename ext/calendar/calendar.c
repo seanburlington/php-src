@@ -18,7 +18,7 @@
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: calendar.c,v 1.28 2002/11/07 14:42:20 wez Exp $ */
+/* $Id: calendar.c,v 1.29 2002/11/07 14:46:40 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -381,7 +381,7 @@ PHP_FUNCTION(jdtogregorian)
 	for example both: year '5' and year '5000' product 'ä'.
 	use the numeric one for calculations. 
  */
-char* heb_number_to_chars(int n) {
+static char* heb_number_to_chars(int n) {
 		char *p, *old, *ret;
 		
 		p = emalloc(10);

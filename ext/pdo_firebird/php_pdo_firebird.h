@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_firebird.h,v 1.1 2004/06/11 01:37:05 abies Exp $ */
+/* $Id: php_pdo_firebird.h,v 1.2 2004/06/12 03:09:47 abies Exp $ */
 
 #ifndef PHP_PDO_FIREBIRD_H
 #define PHP_PDO_FIREBIRD_H
@@ -25,9 +25,15 @@ extern zend_module_entry pdo_firebird_module_entry;
 #define phpext_pdo_firebird_ptr &pdo_firebird_module_entry
 
 #ifdef PHP_WIN32
-#define PHP_PDO_FB_API __declspec(dllexport)
+# ifdef PDO_FIREBIRD_EXPORTS
+#  define PDO_FB_API __declspec(dllexport)
+# elif defined(COMPILE_DL_PDO_FIREBIRD)
+#  define PDO_FB_API __declspec(dllimport)
+# else
+#  define PDO_FB_API
+# endif
 #else
-#define PHP_PDO_FB_API
+# define PDO_FB_API
 #endif
 
 #ifdef ZTS

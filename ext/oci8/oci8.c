@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.103 2000/11/13 17:30:52 thies Exp $ */
+/* $Id: oci8.c,v 1.104 2000/11/16 10:16:22 thies Exp $ */
 
 /* TODO list:
  *
@@ -340,9 +340,6 @@ static void php_oci_init_globals(OCILS_D)
 PHP_MINIT_FUNCTION(oci)
 {
 	zend_class_entry oci_lob_class_entry;
-	OCILS_FETCH();
-
-	OCI(shutdown) = 0;
 
 #ifdef ZTS 
 #define PHP_OCI_INIT_MODE OCI_THREADED
@@ -491,7 +488,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.103 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.104 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );

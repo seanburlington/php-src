@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: php_main.h,v 1.24 2002/11/18 00:59:23 gschlossnagle Exp $ */
+/* $Id: php_main.h,v 1.25 2002/12/10 20:16:30 iliaa Exp $ */
 
 
 #ifndef PHP_MAIN_H
@@ -35,6 +35,7 @@ PHPAPI int php_module_startup(sapi_module_struct *sf, zend_module_entry *additio
 PHPAPI void php_module_shutdown(TSRMLS_D);
 PHPAPI void php_module_shutdown_for_exec(void);
 PHPAPI int php_module_shutdown_wrapper(sapi_module_struct *sapi_globals);
+PHPAPI int php_request_startup_for_hook(TSRMLS_D);
 
 PHPAPI int php_startup_extensions(zend_module_entry **ptr, int count);
 

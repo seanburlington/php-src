@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>					  |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.4 2002/11/26 05:57:02 sniper Exp $ */
+/* $Id: mod_php4.c,v 1.5 2002/12/10 20:16:30 iliaa Exp $ */
 
 #include "php_apache_http.h"
 
@@ -1087,7 +1087,6 @@ static CONST_PREFIX char *php_set_post_read_handler_code(cmd_parms *cmd, php_per
 
 static CONST_PREFIX char *php_set_require(cmd_parms *cmd, void *dummy, char *arg1)
 {
-	php_per_server_config *conf;
 	return php_set_server_handler(cmd->server, arg1, 0, AP_HANDLER_TYPE_FILE);
 }
 /* }}} */

@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.4 2002/11/18 12:52:57 edink Exp $ */
+/* $Id: php_apache.c,v 1.5 2002/12/10 20:16:30 iliaa Exp $ */
 
 #include "php_apache_http.h"
 
@@ -132,10 +132,12 @@ static request_rec *get_apache_request(pval *z TSRMLS_DC)
 /* {{{ php_apache_request_new(request_rec *r)
  * create a new zval-instance for ApacheRequest that wraps request_rec
  */
-zval *php_apache_request_new(request_rec *r TSRMLS_DC)
+zval *php_apache_request_new(request_rec *r)
 {
 	zval *req;
 	zval *addr;
+	
+	TSRMLS_FETCH();
 
 	MAKE_STD_ZVAL(addr);
 	Z_TYPE_P(addr) = IS_LONG;

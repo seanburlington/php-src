@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.53 2001/02/14 10:48:48 derick Exp $ */
+/* $Id: dir.c,v 1.54 2001/02/14 11:02:54 derick Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -239,6 +239,13 @@ PHP_FUNCTION(chroot)
 	
 	if (ret != 0) {
 		php_error(E_WARNING, "chroot: %s (errno %d)", strerror(errno), errno);
+		RETURN_FALSE;
+	}
+
+	ret = chdir("/");
+	
+	if (ret != 0) {
+		php_error(E_WARNING, "chdir: %s (errno %d)", strerror(errno), errno);
 		RETURN_FALSE;
 	}
 

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.48 2004/04/02 11:12:43 dmitry Exp $ */
+/* $Id: php_http.c,v 1.49 2004/04/02 15:43:41 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -169,6 +169,21 @@ static php_stream* http_connect(zval* this_ptr, php_url *phpurl, int use_ssl, in
 #endif
 	EG(error_reporting) = old_error_reporting;
 	return stream;
+}
+
+static int in_domain(const char *host, const char *domain)
+{
+  if (domain[0] == '.') {
+    int l1 = strlen(host);
+    int l2 = strlen(domain);
+    if (l1 > l2) {
+    	return strcmp(host+l1-l2,domain) == 0;
+    } else {
+      return 0;
+    }
+  } else {
+    return strcmp(host,domain) == 0;
+  }
 }
 
 int send_http_soap_request(zval *this_ptr, xmlDoc *doc, char *location, char *soapaction, int soap_version TSRMLS_DC)
@@ -440,7 +455,7 @@ int send_http_soap_request(zval *this_ptr, xmlDoc *doc, char *location, char *so
 						  if (zend_hash_index_find(Z_ARRVAL_PP(data), 1, (void**)&tmp) == SUCCESS &&
 						      strncmp(phpurl->path,Z_STRVAL_PP(tmp),Z_STRLEN_PP(tmp)) == 0 &&
 						      zend_hash_index_find(Z_ARRVAL_PP(data), 2, (void**)&tmp) == SUCCESS &&
-						      strcmp(phpurl->host,Z_STRVAL_PP(tmp)) == 0 &&
+						      in_domain(phpurl->host,Z_STRVAL_PP(tmp)) &&
 						      (use_ssl || zend_hash_index_find(Z_ARRVAL_PP(data), 3, (void**)&tmp) == FAILURE)) {
 								smart_str_appendl(&soap_headers, key, strlen(key));
 								smart_str_appendc(&soap_headers, '=');

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.95 2003/02/20 00:32:51 iliaa Exp $ */
+/* $Id: exec.c,v 1.96 2003/02/25 16:21:00 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -213,7 +213,7 @@ int php_Exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 	} else {
 		size_t b;
 
-		while ((b = fread(buf, buflen, 1, fp)) > 0) {
+		while((b = php_stream_read(stream, buf, EXEC_INPUT_BUF)) > 0) {
 			if (output) {
 				PHPWRITE(buf, b);
 			}

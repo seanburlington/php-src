@@ -15,11 +15,11 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.50 2000/09/09 15:02:15 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.51 2000/09/11 18:56:47 andi Exp $ */
 
 #include <stdio.h>
 #include "php.h"
-#include "ext/standard/php_standard.h"
+#include "php_open_temporary_file.h"
 #include "zend_globals.h"
 #include "php_globals.h"
 #include "php_variables.h"

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.47 2005/01/21 00:38:08 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.48 2005/01/21 04:41:52 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -356,6 +356,8 @@ static PHP_METHOD(PDO, prepare)
 		stmt->refcount = 1;
 		return;
 	}
+
+	efree(stmt->query_string);
 	efree(stmt);
 	PDO_HANDLE_DBH_ERR();
 	RETURN_FALSE;

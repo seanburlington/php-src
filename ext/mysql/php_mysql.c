@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.50 2000/07/05 19:48:24 steinm Exp $ */
+/* $Id: php_mysql.c,v 1.51 2000/07/05 20:41:06 zeev Exp $ */
 
 
 /* TODO:
@@ -598,9 +598,6 @@ PHP_FUNCTION(mysql_close)
 	}
 	
 	ZEND_FETCH_RESOURCE2(mysql, MYSQL *, mysql_link, id, "MySQL-Link", le_link, le_plink);
-
-	/* XXX shouldn't this be zend_list_delete((*mysql_link)->value.lval)
-	 * if the optional parameter is present? (steinm@php.net) */
 	zend_list_delete(id);
 	RETURN_TRUE;
 }

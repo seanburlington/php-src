@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.241 2004/01/08 08:17:32 andi Exp $ */
+/* $Id: info.c,v 1.242 2004/02/18 05:07:13 pollita Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -500,6 +500,47 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 			} else {
 				/* Any chances we will ever hit this? */
 				php_info_print_table_row(2, "PHP Streams", "disabled"); /* ?? */
+			}
+		}
+
+		{
+			HashTable *stream_xport_hash;
+			char *xport_name, *xport_buf = NULL;
+			int xport_name_len, xport_buf_len = 0, xport_buf_size = 0;
+			ulong num_key;
+
+			if ((stream_xport_hash = php_stream_xport_get_hash())) {
+				for(zend_hash_internal_pointer_reset(stream_xport_hash);
+					zend_hash_get_current_key_ex(stream_xport_hash, &xport_name, &xport_name_len, &num_key, 0, NULL) == HASH_KEY_IS_STRING;
+					zend_hash_move_forward(stream_xport_hash)) {
+					if (xport_buf_len + xport_name_len + 3 > xport_buf_size) {
+						while (xport_buf_len + xport_name_len + 3 > xport_buf_size) {
+							xport_buf_size += 256;
+						}
+						if (xport_buf) {
+							xport_buf = erealloc(xport_buf, xport_buf_size);
+						} else {
+							xport_buf = emalloc(xport_buf_size);
+						}
+					}
+					if (xport_buf_len > 0) {
+						xport_buf[xport_buf_len++] = ',';
+						xport_buf[xport_buf_len++] = ' ';
+					}
+					memcpy(xport_buf + xport_buf_len, xport_name, xport_name_len);
+					xport_buf_len += xport_name_len;
+					xport_buf[xport_buf_len] = '\0';
+				}
+				if (xport_buf) {
+					php_info_print_table_row(2, "Registered Stream Socket Transports", xport_buf);
+					efree(xport_buf);
+				} else {
+					/* Any chances we will ever hit this? */
+					php_info_print_table_row(2, "Registered Stream Socket Transports", "no transports registered");
+				}
+			} else {
+				/* Any chances we will ever hit this? */
+				php_info_print_table_row(2, "Stream Socket Transports", "disabled"); /* ?? */
 			}
 		}
 		

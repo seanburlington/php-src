@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.43 2003/08/04 19:05:05 sas Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.44 2003/08/13 02:01:59 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1555,6 +1555,7 @@ consult the installation file that came with this distribution, or visit \n\
 				if (open_file_for_scanning(&file_handle TSRMLS_CC) == SUCCESS) {
 					zend_strip(TSRMLS_C);
 					fclose(file_handle.handle.fp);
+					php_end_ob_buffers(1 TSRMLS_CC);
 				}
 				return SUCCESS;
 				break;
@@ -1566,6 +1567,7 @@ consult the installation file that came with this distribution, or visit \n\
 						php_get_highlight_struct(&syntax_highlighter_ini);
 						zend_highlight(&syntax_highlighter_ini TSRMLS_CC);
 						fclose(file_handle.handle.fp);
+						php_end_ob_buffers(1 TSRMLS_CC);
 					}
 					return SUCCESS;
 				}

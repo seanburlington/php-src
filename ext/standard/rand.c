@@ -20,13 +20,18 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.52 2001/09/16 03:50:04 sterling Exp $ */
+/* $Id: rand.c,v 1.53 2001/09/16 17:37:19 sterling Exp $ */
 
 #include <stdlib.h>
+
+#ifdef PHP_WIN32
+#include <windows.h>
+#endif
 
 #include "php.h"
 #include "php_math.h"
 #include "php_rand.h"
+#include "php_lcg.h"
 
 #include "basic_functions.h"
 
@@ -192,7 +197,11 @@ PHPAPI php_uint32 php_mt_rand(TSRMLS_D)
 	return y ^ (y >> 18);
 }
 
+#ifdef PHP_WIN32
+#define GENERATE_SEED() (time(0) * GetCurrentProcessId() * 1000000 * php_combined_lcg(TSRMLS_C))
+#else
 #define GENERATE_SEED() (time(0) * getpid() * 1000000 * php_combined_lcg(TSRMLS_C))
+#endif
 
 /* {{{ proto void srand([int seed])
    Seeds random number generator */

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.69 2004/07/19 21:10:09 fmk Exp $ */
+/* $Id: ming.c,v 1.70 2004/07/19 22:23:12 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2148,8 +2148,10 @@ PHP_METHOD(swfmovie, save)
 	
 	retval = SWFMovie_output(getMovie(getThis() TSRMLS_CC), &phpStreamOutputMethod, (void *)stream);
 	php_stream_close(stream);
+#ifdef HAVE_MING_ZLIB
     if(oldval >= -1 && oldval <=9)
 		Ming_setSWFCompression(oldval);
+#endif
     
 	RETURN_LONG(retval);
 }

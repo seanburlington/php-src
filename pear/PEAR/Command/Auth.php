@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Auth.php,v 1.1 2002/03/22 09:22:26 ssb Exp $
+// $Id: Auth.php,v 1.2 2002/03/22 11:09:58 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Remote.php";
@@ -26,16 +26,16 @@ require_once "PEAR/Config.php";
  * PEAR commands for managing configuration data.
  *
  */
-class PEAR_Command_Login extends PEAR_Command_Common
+class PEAR_Command_Auth extends PEAR_Command_Common
 {
     // {{{ constructor
 
     /**
-     * PEAR_Command_Login constructor.
+     * PEAR_Command_Auth constructor.
      *
      * @access public
      */
-    function PEAR_Command_Login(&$ui, &$config)
+    function PEAR_Command_Auth(&$ui, &$config)
     {
         parent::PEAR_Command_Common($ui, $config);
     }

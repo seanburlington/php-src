@@ -16,7 +16,7 @@
 // | Author: Vincent Blavet <vincent@blavet.net>                          |
 // +----------------------------------------------------------------------+
 //
-// $Id: Tar.php,v 1.12 2002/05/28 00:35:16 ssb Exp $
+// $Id: Tar.php,v 1.13 2002/07/26 15:39:16 cox Exp $
 
 require_once 'PEAR.php';
 
@@ -24,7 +24,7 @@ require_once 'PEAR.php';
 * Creates a (compressed) Tar archive
 *
 * @author   Vincent Blavet <vincent@blavet.net>
-* @version  $Revision: 1.12 $
+* @version  $Revision: 1.13 $
 * @package  Archive
 */
 class Archive_Tar extends PEAR
@@ -880,8 +880,10 @@ class Archive_Tar extends PEAR
       else
         $v_binary_data = @fread($this->_file, 512);
 
-      if (!$this->_readHeader($v_binary_data, $v_header))
+      if (!$this->_readHeader($v_binary_data, $v_header)) {
+        fclose($this->_file);
         return false;
+      }
 
       if ($v_header['filename'] == '')
         continue;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_tidy.h,v 1.19 2004/01/21 10:19:56 john Exp $ */
+/* $Id: php_tidy.h,v 1.20 2004/02/04 11:14:46 zeev Exp $ */
 
 #ifndef PHP_TIDY_H
 #define PHP_TIDY_H
@@ -200,7 +200,7 @@ struct _PHPTidyObj {
 };
 
 static char *php_tidy_file_to_mem(char *, zend_bool TSRMLS_DC);
-static void tidy_object_dtor(void *, zend_object_handle  TSRMLS_DC);
+static void tidy_object_free_storage(void * TSRMLS_DC);
 static zend_object_value tidy_object_new_node(zend_class_entry * TSRMLS_DC);
 static zend_object_value tidy_object_new_doc(zend_class_entry * TSRMLS_DC);
 static zend_object_value tidy_object_new_exception(zend_class_entry * TSRMLS_DC);

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.h,v 1.9 2004/01/19 15:07:08 chregu Exp $ */
+/* $Id: php_xsl.h,v 1.10 2004/02/04 11:14:47 zeev Exp $ */
 
 #ifndef PHP_XSL_H
 #define PHP_XSL_H
@@ -60,7 +60,7 @@ typedef struct _xsl_object {
 } xsl_object;
 
 void php_xsl_set_object(zval *wrapper, void *obj TSRMLS_DC);
-void xsl_objects_dtor(void *object, zend_object_handle handle TSRMLS_DC);
+void xsl_objects_free_storage(void *object TSRMLS_DC);
 zval *php_xsl_create_object(xsltStylesheetPtr obj, int *found, zval *wrapper_in, zval *return_value  TSRMLS_DC);
 
 #define REGISTER_XSL_CLASS(ce, name, parent_ce, funcs, entry) \

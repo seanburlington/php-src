@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.13 2004/01/13 16:05:38 wez Exp $ */
+/* $Id: com_handlers.c,v 1.14 2004/02/04 11:14:30 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -554,7 +554,7 @@ void php_com_object_enable_event_sink(php_com_dotnet_object *obj, int enable TSR
 	}
 }
 
-void php_com_object_dtor(void *object, zend_object_handle handle TSRMLS_DC)
+void php_com_object_free_storage(void *object TSRMLS_DC)
 {
 	php_com_dotnet_object *obj = (php_com_dotnet_object*)object;
 
@@ -616,7 +616,8 @@ zend_object_value php_com_object_new(zend_class_entry *ce TSRMLS_DC)
 	obj->code_page = CP_ACP;
 	obj->ce = ce;
 
-	retval.handle = zend_objects_store_put(obj, php_com_object_dtor, php_com_object_clone TSRMLS_CC);
+	
+	retval.handle = zend_objects_store_put(obj, NULL, php_com_object_free_storage, php_com_object_clone TSRMLS_CC);
 	retval.handlers = &php_com_object_handlers;
 
 	return retval;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_misc.c,v 1.3 2004/01/08 08:14:20 andi Exp $ */
+/* $Id: com_misc.c,v 1.4 2004/02/04 11:14:30 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -60,7 +60,7 @@ PHPAPI void php_com_wrap_dispatch(zval *z, IDispatch *disp,
 	IDispatch_GetTypeInfo(V_DISPATCH(&obj->v), 0, LANG_NEUTRAL, &obj->typeinfo);
 
 	Z_TYPE_P(z) = IS_OBJECT;
-	z->value.obj.handle = zend_objects_store_put(obj, php_com_object_dtor, php_com_object_clone TSRMLS_CC);
+	z->value.obj.handle = zend_objects_store_put(obj, NULL, php_com_object_free_storage, php_com_object_clone TSRMLS_CC);
 	z->value.obj.handlers = &php_com_object_handlers;
 }
 
@@ -83,7 +83,7 @@ PHPAPI void php_com_wrap_variant(zval *z, VARIANT *v,
 
 	Z_TYPE_P(z) = IS_OBJECT;
 	
-	z->value.obj.handle = zend_objects_store_put(obj, php_com_object_dtor, php_com_object_clone TSRMLS_CC);
+	z->value.obj.handle = zend_objects_store_put(obj, NULL, php_com_object_free_storage, php_com_object_clone TSRMLS_CC);
 	z->value.obj.handlers = &php_com_object_handlers;
 }
 

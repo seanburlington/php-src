@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.291 2000/08/13 18:00:36 stas Exp $ */
+/* $Id: main.c,v 1.292 2000/08/15 16:46:43 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -1187,7 +1187,7 @@ PHPAPI int php_lint_script(zend_file_handle *file CLS_DC ELS_DC PLS_DC)
 	UpdateIniFromRegistry(file->filename);
 #endif
 
-	op_array = zend_compile_file(file CLS_CC);
+	op_array = zend_compile_file(file, ZEND_INCLUDE CLS_CC);
 	retval = (op_array?SUCCESS:FAILURE);
 	destroy_op_array(op_array);
 

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.56 2004/01/21 02:33:22 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.57 2004/01/29 14:35:34 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2408,11 +2408,9 @@ enclosure:
 				e--;
 			}
 
-			if (e - s) {
-				buf2 = erealloc(buf2, buf2_len + (e - s) + 1);
-				memcpy(buf2 + buf2_len, s, (e - s));
-				buf2_len += e - s;
-			}
+			buf2 = erealloc(buf2, buf2_len + (e - s) + 1);
+			memcpy(buf2 + buf2_len, s, (e - s));
+			buf2_len += e - s;
 enclosure_done:
 			_php_fgetcsv_trim_enclosed(buf2, &buf2_len, enclosure);
 			CSV_ADD_ENTRY(buf2, buf2_len, 0);

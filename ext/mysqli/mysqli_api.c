@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.98 2005/01/07 14:59:59 georg Exp $ 
+  $Id: mysqli_api.c,v 1.99 2005/01/27 01:14:43 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -752,6 +752,11 @@ PHP_FUNCTION(mysqli_fetch_field_direct)
 	}
 
 	MYSQLI_FETCH_RESOURCE(result, MYSQL_RES *, &mysql_result, "mysqli_result"); 
+	
+	if (offset < 0 || offset >= mysql_num_fields(result)) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Field offset is invalid for resultset");
+		RETURN_FALSE; 
+	}
 
 	if (!(field = mysql_fetch_field_direct(result,offset))) {
 		RETURN_FALSE;

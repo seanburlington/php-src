@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.49 2002/06/03 20:52:07 mfischer Exp $ */
+/* $Id: posix.c,v 1.50 2002/06/04 08:54:14 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -131,7 +131,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.49 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.50 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -616,7 +616,7 @@ PHP_FUNCTION(posix_ttyname)
 
 	switch (Z_TYPE_P(z_fd)) {
 		case IS_RESOURCE:
-			if (!php_posix_stream_get_fd(Z_RESVAL_P(z_fd), &fd)) {
+			if (!php_posix_stream_get_fd(Z_RESVAL_P(z_fd), &fd TSRMLS_CC)) {
 				RETURN_FALSE;
 			}
 			break;
@@ -646,7 +646,7 @@ PHP_FUNCTION(posix_isatty)
 
 	switch (Z_TYPE_P(z_fd)) {
 		case IS_RESOURCE:
-			if (!php_posix_stream_get_fd(Z_RESVAL_P(z_fd), &fd)) {
+			if (!php_posix_stream_get_fd(Z_RESVAL_P(z_fd), &fd TSRMLS_CC)) {
 				RETURN_FALSE;
 			}
 			break;

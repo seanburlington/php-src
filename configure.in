@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.107 2000/03/26 19:18:59 zeev Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.108 2000/03/30 04:09:56 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -746,6 +746,8 @@ PHP_CONFIGURE_PART(Configuring libtool)
 old_CC="$CC"
 
 if test "$PHP_THREAD_SAFETY" = "yes" && test -n "$ac_cv_pthreads_cflags"; then
+  CXXFLAGS="$CXXFLAGS $ac_cv_pthreads_cflags"
+  INLINE_CFLAGS="$INLINE_CFLAGS $ac_cv_pthreads_cflags"
   cat >meta_ccld<<EOF
 #! /bin/sh
 exec $CC $ac_cv_pthreads_cflags \$@

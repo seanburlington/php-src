@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.24 2004/02/03 14:12:59 stas Exp $ */
+/* $Id: var_unserializer.re,v 1.25 2004/03/23 20:52:58 helly Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -320,7 +320,7 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 	return 1;
 }
 
-"d:" (iv | nv | nvexp) ";"	{
+"d:" (iv | nv | nvexp | "NAN" | "INF") ";"	{
 	*p = YYCURSOR;
 	INIT_PZVAL(*rval);
 	ZVAL_DOUBLE(*rval, atof(start + 2));

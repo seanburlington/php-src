@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.72 2002/07/26 11:48:55 cox Exp $
+// $Id: Installer.php,v 1.73 2002/07/28 08:52:29 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -402,8 +402,13 @@ class PEAR_Installer extends PEAR_Common
         $this->validatePackageInfo($pkginfo, $errors, $warnings);
         // XXX We allow warnings, have we to do it?
         if (count($errors)) {
-            return $this->raiseError("The following errors where found:\n".
-                                     implode("\n", $errors));
+            if (empty($options['force'])) {
+                return $this->raiseError("The following errors where found (use force option to install anyway):\n".
+                                         implode("\n", $errors));
+            } else {
+                $this->log(0, "warning : the following errors were found:\n".
+                           implode("\n", $errors));
+            }
         }
 
         $pkgname = $pkginfo['package'];

@@ -12,13 +12,13 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Sterling Hughes <sterling@php.net>                           |
-  |         Marcus Boerger <helly@php.net>                               |
-  |         Rob Richards <rrichards@php.net>                             |
+  | Authors: Sterling Hughes <sterling@php.net>                          |
+  |          Marcus Boerger <helly@php.net>                              |
+  |          Rob Richards <rrichards@php.net>                            |
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.117 2004/01/19 23:44:03 fmk Exp $ */
+/* $Id: simplexml.c,v 1.118 2004/01/20 05:31:50 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -268,7 +268,7 @@ change_node_zval(xmlNodePtr node, zval *value)
 			xmlNodeSetContentLen(node, Z_STRVAL_P(value), Z_STRLEN_P(value));
 			break;
 		default:
-			php_error(E_WARNING, "It is not yet possible to assign complex types to attributes");
+			php_error(E_WARNING, "It is not possible to assign complex types to nodes");
 			break;
 	}
 }
@@ -770,32 +770,70 @@ SXE_METHOD(xpath)
  */
 SXE_METHOD(asXML)
 {
-	php_sxe_object *sxe;
-	xmlChar *strval;
-	char           *filename;
-	int             filename_len;
+	php_sxe_object     *sxe;
+	xmlNodePtr          node;
+	xmlOutputBufferPtr  outbuf;
+	xmlChar            *strval;
+	int                 strval_len;
+	char               *filename;
+	int                 filename_len;
+
+	if (ZEND_NUM_ARGS() > 1) {
+		RETURN_FALSE;
+	}
 
 	if (ZEND_NUM_ARGS() == 1) {
 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &filename, &filename_len) == FAILURE) {
 			RETURN_FALSE;
 		}
-	
+		
 		sxe = php_sxe_fetch_object(getThis() TSRMLS_CC);
-	
-		xmlSaveFile(filename, (xmlDocPtr) sxe->document->ptr);
-	
-		RETURN_TRUE;
-	}
-	if (ZEND_NUM_ARGS() != 0) {
-		RETURN_FALSE;
+		GET_NODE(sxe, node);
+		
+		if (node) {
+			if (XML_DOCUMENT_NODE == node->parent->type) {
+				xmlSaveFile(filename, (xmlDocPtr) sxe->document->ptr);
+			} else {
+				outbuf = xmlOutputBufferCreateFilename(filename, NULL, 0);
+
+				if (outbuf == NULL) {
+					RETURN_FALSE;
+				}		
+
+				xmlNodeDumpOutput(outbuf, (xmlDocPtr) sxe->document->ptr, node, 0, 1, NULL);
+				xmlOutputBufferClose(outbuf);
+				RETURN_TRUE;
+			}
+		} else {
+			RETURN_FALSE;
+		}
 	}
 
 	sxe = php_sxe_fetch_object(getThis() TSRMLS_CC);
-	xmlDocDumpMemory((xmlDocPtr) sxe->document->ptr, &strval, &Z_STRLEN_P(return_value));
-	Z_STRVAL_P(return_value) = estrndup(strval, Z_STRLEN_P(return_value));
-	xmlFree(strval);
+	GET_NODE(sxe, node);
 
-	Z_TYPE_P(return_value) = IS_STRING;
+	if (node) {
+		if (XML_DOCUMENT_NODE == node->parent->type) {
+			xmlDocDumpMemory((xmlDocPtr) sxe->document->ptr, &strval, &strval_len);
+		} else {
+			/* Should we be passing encoding information instead of NULL? */
+			outbuf = xmlAllocOutputBuffer(NULL);
+
+			if (outbuf == NULL) {
+				RETURN_FALSE;
+			}		
+
+			xmlNodeDumpOutput(outbuf, (xmlDocPtr) sxe->document->ptr, node, 0, 1, ((xmlDocPtr) sxe->document->ptr)->encoding);
+			xmlOutputBufferFlush(outbuf);
+			strval = xmlStrndup(outbuf->buffer->content, outbuf->buffer->use);	
+			xmlOutputBufferClose(outbuf);
+		}
+
+		RETVAL_STRINGL(strval, strlen(strval), 1);
+		xmlFree(strval);
+	} else {
+		RETVAL_FALSE;
+	}
 }
 /* }}} */
 
@@ -1491,7 +1529,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.117 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.118 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

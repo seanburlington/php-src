@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.19 2003/07/02 16:19:57 moriyoshi Exp $ */
+/* $Id: var_unserializer.re,v 1.20 2003/08/05 09:15:31 stas Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -226,9 +226,11 @@ static inline int object_common2(UNSERIALIZE_PARAMETER, int elements)
 		return 0;
 	}
 
-	INIT_PZVAL(&fname);
-	ZVAL_STRINGL(&fname, "__wakeup", sizeof("__wakeup") - 1, 0);
-	call_user_function_ex(CG(function_table), rval, &fname, &retval_ptr, 0, 0, 1, NULL TSRMLS_CC);
+	if(Z_OBJCE_PP(rval) != PHP_IC_ENTRY) {
+		INIT_PZVAL(&fname);
+		ZVAL_STRINGL(&fname, "__wakeup", sizeof("__wakeup") - 1, 0);
+		call_user_function_ex(CG(function_table), rval, &fname, &retval_ptr, 0, 0, 1, NULL TSRMLS_CC);
+	}
 
 	if (retval_ptr)
 		zval_ptr_dtor(&retval_ptr);

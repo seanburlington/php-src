@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.47 2000/05/14 16:05:25 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.48 2000/05/17 08:11:20 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -227,6 +227,10 @@ int sapi_apache_header_handler(sapi_header_struct *sapi_header, sapi_headers_str
 
 int sapi_apache_send_headers(sapi_headers_struct *sapi_headers SLS_DC)
 {
+	if(SG(server_context) == NULL) { /* server_context is not here anymore */
+		return SAPI_HEADER_SEND_FAILED;
+	}
+
 	((request_rec *) SG(server_context))->status = SG(sapi_headers).http_response_code;
 	send_http_header((request_rec *) SG(server_context));
 	return SAPI_HEADER_SENT_SUCCESSFULLY;

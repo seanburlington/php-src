@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.33 2000/03/27 18:11:33 sterling Exp $ */
+/* $Id: datetime.c,v 1.34 2000/03/28 18:16:41 sterling Exp $ */
 
 
 #include "php.h"
@@ -443,6 +443,63 @@ PHP_FUNCTION(date)
 PHP_FUNCTION(gmdate)
 {
 	php_date(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
+}
+
+PHP_FUNCTION(localtime)
+{
+	zval **timestamp_arg, **assoc_array_arg;
+	struct tm *ta, tmbuf;
+	time_t timestamp;
+	int assoc_array = 0;
+	int arg_count = ARG_COUNT(ht);
+
+	if (arg_count < 0 || arg_count > 2 ||
+		zend_get_parameters_ex(arg_count, &timestamp_arg, &assoc_array_arg) == FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+
+	switch (arg_count) {
+		case 0:
+			timestamp = (long)time(NULL);
+			break;
+		case 1:
+			convert_to_long_ex(timestamp_arg);
+			timestamp = (*timestamp_arg)->value.lval;
+			break;
+		case 2:
+			convert_to_long_ex(timestamp_arg);
+			convert_to_long_ex(assoc_array_arg);
+			timestamp = (*timestamp_arg)->value.lval;
+			assoc_array = (*assoc_array_arg)->value.lval;
+			break;
+	}
+	ta = localtime_r(&timestamp, &tmbuf);
+	if (array_init(return_value) == FAILURE) {
+		php_error(E_ERROR, "Cannot prepare return array from localtime");
+		RETURN_FALSE;
+	}
+
+	if (assoc_array) {
+		add_assoc_long(return_value, "tm_sec",   ta->tm_sec);
+		add_assoc_long(return_value, "tm_min",   ta->tm_min);
+		add_assoc_long(return_value, "tm_hour",  ta->tm_hour);
+		add_assoc_long(return_value, "tm_mday",  ta->tm_mday);
+		add_assoc_long(return_value, "tm_mon",   ta->tm_mon);
+		add_assoc_long(return_value, "tm_year",  ta->tm_year);
+		add_assoc_long(return_value, "tm_wday",  ta->tm_wday);
+		add_assoc_long(return_value, "tm_yday",  ta->tm_yday);
+		add_assoc_long(return_value, "tm_isdst", ta->tm_isdst);
+	} else {
+		add_next_index_long(return_value, ta->tm_sec);
+		add_next_index_long(return_value, ta->tm_min);
+		add_next_index_long(return_value, ta->tm_hour);
+		add_next_index_long(return_value, ta->tm_mday);
+		add_next_index_long(return_value, ta->tm_mon);
+		add_next_index_long(return_value, ta->tm_year);
+		add_next_index_long(return_value, ta->tm_wday);
+		add_next_index_long(return_value, ta->tm_yday);
+		add_next_index_long(return_value, ta->tm_isdst);
+	}
 }
 
 PHP_FUNCTION(getdate)

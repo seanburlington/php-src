@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.235 2003/01/18 19:49:23 iliaa Exp $ */
+/* $Id: php_domxml.c,v 1.236 2003/02/13 21:41:00 helly Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -896,10 +896,9 @@ static zval *xpath_context_get_data(void *obj)
 	return ((zval *) (((xmlXPathContextPtr) obj)->user));
 }
 
-static void php_xpath_set_context(zval *wrapper, void *obj, int rsrc_type)
+static void php_xpath_set_context(zval *wrapper, void *obj, int rsrc_type TSRMLS_DC)
 {
 	zval *handle, *addr;
-	TSRMLS_FETCH();
 
 	MAKE_STD_ZVAL(handle);
 	Z_TYPE_P(handle) = IS_LONG;
@@ -940,7 +939,7 @@ static zval *php_xpathcontext_new(xmlXPathContextPtr obj, int *found TSRMLS_DC)
 */
 	object_init_ex(wrapper, xpathctx_class_entry);
 	rsrc_type = le_xpathctxp;
-	php_xpath_set_context(wrapper, (void *) obj, rsrc_type);
+	php_xpath_set_context(wrapper, (void *) obj, rsrc_type TSRMLS_CC);
 
 	return (wrapper);
 }
@@ -952,10 +951,9 @@ static void xmlparser_set_data(void *obj, zval *wrapper)
 }
 
 
-static void php_xmlparser_set_object(zval *wrapper, void *obj, int rsrc_type)
+static void php_xmlparser_set_object(zval *wrapper, void *obj, int rsrc_type TSRMLS_DC)
 {
 	zval *handle, *addr;
-	TSRMLS_FETCH();
 
 	MAKE_STD_ZVAL(handle);
 	Z_TYPE_P(handle) = IS_LONG;
@@ -988,7 +986,7 @@ static zval *php_xmlparser_new(xmlParserCtxtPtr obj, int *found TSRMLS_DC)
 	MAKE_STD_ZVAL(wrapper);
 	object_init_ex(wrapper, domxmlparser_class_entry);
 	rsrc_type = le_domxmlparserp;
-	php_xmlparser_set_object(wrapper, (void *) obj, rsrc_type);
+	php_xmlparser_set_object(wrapper, (void *) obj, rsrc_type TSRMLS_CC);
 
 	return (wrapper);
 }
@@ -1070,10 +1068,9 @@ void *php_dom_get_object(zval *wrapper, int rsrc_type1, int rsrc_type2 TSRMLS_DC
 }
 
 
-static void php_dom_set_object(zval *wrapper, void *obj, int rsrc_type)
+static void php_dom_set_object(zval *wrapper, void *obj, int rsrc_type TSRMLS_DC)
 {
 	zval *handle, *addr;
-	TSRMLS_FETCH();
 
 	MAKE_STD_ZVAL(handle);
 	Z_TYPE_P(handle) = IS_LONG;
@@ -1311,7 +1308,7 @@ PHPAPI zval *php_domobject_new(xmlNodePtr obj, int *found, zval *wrapper_in  TSR
 			return NULL;
 	}
 
-	php_dom_set_object(wrapper, (void *) obj, rsrc_type);
+	php_dom_set_object(wrapper, (void *) obj, rsrc_type TSRMLS_CC);
 	return (wrapper);
 }
 

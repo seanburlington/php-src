@@ -15,7 +15,7 @@
    | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.re,v 1.3 1999/09/12 13:03:10 sas Exp $ */
+/* $Id: url_scanner.re,v 1.4 1999/09/17 12:32:18 thies Exp $ */
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -158,8 +158,10 @@ static void url_scanner(lexdata *state)
   			break;
 	}
 nextiter:
+	;
 	}
 finish:
+	;
 }
 
 char *url_adapt(const char *src, size_t srclen, const char *data, size_t *newlen)

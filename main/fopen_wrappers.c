@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.56 2000/04/20 16:38:08 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.57 2000/04/20 21:07:39 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -989,7 +989,7 @@ PHPAPI char *expand_filepath(char *filepath)
 	char cwd[MAXPATHLEN+1];
 	char *result;
 
-	result = getcwd(cwd, MAXPATHLEN);	
+	result = V_GETCWD(cwd, MAXPATHLEN);	
 	if (!result) {
 		cwd[0] = '\0';
 	}

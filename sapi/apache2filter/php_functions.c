@@ -16,7 +16,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.37 2003/01/28 01:25:34 iliaa Exp $ */
+/* $Id: php_functions.c,v 1.38 2003/02/24 15:10:36 zeev Exp $ */
+
+
+#define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
 #include "php.h"
 #include "ext/standard/php_smart_str.h"

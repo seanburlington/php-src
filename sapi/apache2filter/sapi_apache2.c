@@ -18,9 +18,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.104 2003/02/10 19:12:02 moriyoshi Exp $ */
+/* $Id: sapi_apache2.c,v 1.105 2003/02/24 15:10:36 zeev Exp $ */
 
 #include <fcntl.h>
+
+#define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
 #include "php.h"
 #include "php_main.h"

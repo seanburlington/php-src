@@ -16,7 +16,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache_config.c,v 1.29 2002/12/31 15:59:03 sebastian Exp $ */
+/* $Id: apache_config.c,v 1.30 2003/02/24 15:10:36 zeev Exp $ */
+
+#define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
 #include "php.h"
 #include "php_ini.h"

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.33 2002/09/04 18:47:23 sniper Exp $
+dnl $Id: config.m4,v 1.34 2002/10/17 04:21:52 sniper Exp $
 dnl
 
 PHP_ARG_WITH(pdflib,for PDFlib support,
@@ -11,6 +11,10 @@ PHP_ARG_WITH(jpeg-dir, for the location of libjpeg,
 
 PHP_ARG_WITH(png-dir, for the location of libpng, 
 [  --with-png-dir[=DIR]      PDFLIB: define libpng install directory.
+                                     (OPTIONAL for PDFlib v4)], no, no)
+
+PHP_ARG_WITH(zlib-dir, for the location of libz, 
+[  --with-zlib-dir[=DIR]     PDFLIB: define libz install directory.
                                      (OPTIONAL for PDFlib v4)], no, no)
  
 PHP_ARG_WITH(tiff-dir, for the location of libtiff,

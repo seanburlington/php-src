@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.218.2.20 2003/07/01 23:54:44 sas Exp $
+dnl $Id: acinclude.m4,v 1.218.2.21 2003/07/02 03:03:41 sas Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -1603,12 +1603,17 @@ dnl
 AC_DEFUN([PHP_CHECK_LIBRARY], [
   save_old_LDFLAGS=$LDFLAGS
   ac_stuff="$5"
+  
+  save_ext_shared=$ext_shared
+  ext_shared=yes
   PHP_EVAL_LIBLINE([$]ac_stuff, LDFLAGS)
   AC_CHECK_LIB([$1],[$2],[
     LDFLAGS=$save_old_LDFLAGS
+    ext_shared=$save_ext_shared
     $3
   ],[
     LDFLAGS=$save_old_LDFLAGS
+    ext_shared=$save_ext_shared
     unset ac_cv_func_$1
     $4
   ])dnl

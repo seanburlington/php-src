@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.82 2003/10/20 16:58:55 iliaa Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.83 2003/10/24 17:51:03 iliaa Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -189,6 +189,7 @@ case $host_alias in
     CPPFLAGS="$CPPFLAGS -D_BSD_TIMEOFDAY_FLAVOR";;
 *darwin*|*rhapsody*)
     CPPFLAGS="$CPPFLAGS -no-cpp-precomp"
+    AC_DEFINE(BIND_8_COMPAT, 1, [Enabling BIND8 compatibility for Panther])
     php_multiple_shlib_versions_ok=yes;;
 *beos*)
     beos_threads=1

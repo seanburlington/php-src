@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.9 1999/12/17 20:54:51 zeev Exp $ */
+/* $Id: dba.c,v 1.10 1999/12/17 21:34:23 zeev Exp $ */
 
 #include "php.h"
 
@@ -180,7 +180,6 @@ static void dba_close(dba_info *info)
 	free(info);
 }
 /* }}} */
-	/* {{{ php3_minit_dba */
 
 static PHP_MINIT_FUNCTION(dba)
 {
@@ -189,31 +188,25 @@ static PHP_MINIT_FUNCTION(dba)
 	GLOBAL(le_pdb) = register_list_destructors(NULL, dba_close);
 	return SUCCESS;
 }
-/* }}} */
-	/* {{{ php3_mshutdown_dba */
 
 static PHP_MSHUTDOWN_FUNCTION(dba)
 {
 	zend_hash_destroy(&ht_keys);
 	return SUCCESS;
 }
-/* }}} */
-	/* {{{ php3_info_dba */
 
 static PHP_MINFO_FUNCTION(dba)
 {
 	dba_handler *hptr;
 	
-	PUTS("V1 ($Id: dba.c,v 1.9 1999/12/17 20:54:51 zeev Exp $)");
+	PUTS("V1 ($Id: dba.c,v 1.10 1999/12/17 21:34:23 zeev Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);
 	}
 }
-/* }}} */	
-	/* {{{ _php3_dba_update */
 
-static void _php3_dba_update(INTERNAL_FUNCTION_PARAMETERS, int mode)
+static void php_dba_update(INTERNAL_FUNCTION_PARAMETERS, int mode)
 {
 	DBA_ID_PARS;
 	pval **val, **key;
@@ -231,12 +224,10 @@ static void _php3_dba_update(INTERNAL_FUNCTION_PARAMETERS, int mode)
 		RETURN_TRUE;
 	RETURN_FALSE;
 }
-/* }}} */
-	/* {{{ _php3_dba_open */
 
 #define FREENOW if(args) efree(args); if(key) efree(key)
 
-static void _php3_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
+static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 {
 	pval ***args = (pval ***) NULL;
 	int ac = ARG_COUNT(ht);
@@ -343,7 +334,7 @@ static void _php3_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
    opens path using the specified handler in mode persistently */
 PHP_FUNCTION(dba_popen)
 {
-	_php3_dba_open(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
+	php_dba_open(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
 }
 /* }}} */
 
@@ -351,7 +342,7 @@ PHP_FUNCTION(dba_popen)
    opens path using the specified handler in mode*/
 PHP_FUNCTION(dba_open)
 {
-	_php3_dba_open(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+	php_dba_open(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 }
 /* }}} */
 
@@ -441,7 +432,7 @@ PHP_FUNCTION(dba_delete)
    inserts value as key, returns false, if key exists already */
 PHP_FUNCTION(dba_insert)
 {
-	_php3_dba_update(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
+	php_dba_update(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
 }
 /* }}} */
 
@@ -449,7 +440,7 @@ PHP_FUNCTION(dba_insert)
    inserts value as key, replaces key, if key exists already */
 PHP_FUNCTION(dba_replace)
 {
-	_php3_dba_update(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+	php_dba_update(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 }
 /* }}} */
 

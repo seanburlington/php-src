@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.65 2000/08/20 14:29:00 sas Exp $ */
+/* $Id: mod_php4.c,v 1.66 2000/09/08 14:43:55 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -305,6 +305,11 @@ static int php_apache_sapi_activate(SLS_D)
 	block_alarms();
 	register_cleanup(((request_rec *) SG(server_context))->pool, NULL, php_apache_request_shutdown, php_request_shutdown_for_exec);
 	unblock_alarms();
+
+	/* Override the default headers_only value - sometimes "GET" requests should actually only
+	 * send headers.
+	 */
+	SG(request_info).headers_only = r->header_only;
 	return SUCCESS;
 }
 
@@ -379,7 +384,6 @@ static void init_request_info(SLS_D)
 	SG(request_info).request_method = (char *)r->method;
 	SG(request_info).content_type = (char *) table_get(r->subprocess_env, "CONTENT_TYPE");
 	SG(request_info).content_length = (content_length ? atoi(content_length) : 0);
-	SG(request_info).headers_only = r->header_only;
 	SG(sapi_headers).http_response_code = r->status;
 
 	if (r->headers_in) {

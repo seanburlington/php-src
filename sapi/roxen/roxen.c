@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.36 2000/08/20 14:29:00 sas Exp $ */
+/* $Id: roxen.c,v 1.37 2000/09/08 14:43:57 zeev Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -447,7 +447,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.36 2000/08/20 14:29:00 sas Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.37 2000/09/08 14:43:57 zeev Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -660,11 +660,6 @@ void f_php_roxen_request_handler(INT32 args)
   SG(request_info).content_length = lookup_integer_header("HTTP_CONTENT_LENGTH", 0);
   SG(request_info).content_type = lookup_string_header("HTTP_CONTENT_TYPE", NULL);
   SG(sapi_headers).http_response_code = 200;
-  if (!strcmp(SG(request_info).request_method, "HEAD")) {
-    SG(request_info).headers_only = 1;
-  } else {
-    SG(request_info).headers_only = 0;
-  }
 
   /* FIXME: Check for auth stuff needs to be fixed... */ 
   SG(request_info).auth_user = NULL; 

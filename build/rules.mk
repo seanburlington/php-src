@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules.mk,v 1.35.2.2 2002/04/28 23:55:06 sniper Exp $ 
+# $Id: rules.mk,v 1.35.2.3 2002/06/29 00:59:32 sniper Exp $ 
 #
 
 include $(top_srcdir)/build/rules_common.mk
@@ -49,7 +49,7 @@ clean-modules:
 
 clean-x:
 	rm -f $(targets) *.lo *.slo *.la *.o $(CLEANFILES)
-	rm -rf .libs libs
+	rm -rf .libs libs/*
 
 distclean: distclean-recursive clean-x
 	rm -f config.cache config.log config.status config_vars.mk libtool \

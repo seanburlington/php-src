@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.231 2001/04/08 22:30:16 ssb Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.232 2001/04/09 11:35:10 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -603,6 +603,7 @@ PHP_CONFIGURE_PART(Configuring extensions)
 # reading config stubs
 esyscmd(./scripts/config-stubs ext)
 
+test "$PHP_SAPI" != "cgi" && PHP_FAST_OUTPUT(sapi/cgi/Makefile)
 PHP_FAST_OUTPUT(sapi/$PHP_SAPI/Makefile)
 
 AC_MSG_CHECKING(whether to enable versioning)

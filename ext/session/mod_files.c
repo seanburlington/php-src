@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.95 2004/03/29 21:44:07 wez Exp $ */
+/* $Id: mod_files.c,v 1.95.2.1 2005/01/05 11:09:12 hyanantha Exp $ */
 
 #include "php.h"
 
@@ -166,7 +166,7 @@ static void ps_files_open(ps_files *data, const char *key TSRMLS_DC)
 			flock(data->fd, LOCK_EX);
 
 #ifdef F_SETFD
-			if (fcntl(data->fd, F_SETFD, 1)) {
+			if (fcntl(data->fd, F_SETFD, FD_CLOEXEC)) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "fcntl(%d, F_SETFD, 1) failed: %s (%d)", data->fd, strerror(errno), errno);
 			}
 #endif

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.111 2000/09/09 11:41:14 zeev Exp $ */
+/* $Id: file.c,v 1.112 2000/09/09 12:02:31 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -170,6 +170,7 @@ static FILE *php_do_open_temporary_file(char *path, const char *pfx, char **open
 	char *trailing_slash;
 	FILE *fp;
 	char *opened_path;
+	int fd;
 
 	if (!path) {
 		return NULL;

@@ -29,10 +29,10 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.55 2000/06/23 16:21:31 sas Exp $ */
+/* $Id: basic_functions.h,v 1.56 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _BASIC_FUNCTIONS_H
-#define _BASIC_FUNCTIONS_H
+#ifndef BASIC_FUNCTIONS_H
+#define BASIC_FUNCTIONS_H
 
 #include <sys/stat.h>
 
@@ -207,4 +207,4 @@ typedef struct {
 #define SAFE_MODE_PROTECTED_ENV_VARS	"LD_LIBRARY_PATH"
 #define SAFE_MODE_ALLOWED_ENV_VARS		"PHP_"
 
-#endif /* _BASIC_FUNCTIONS_H */
+#endif /* BASIC_FUNCTIONS_H */

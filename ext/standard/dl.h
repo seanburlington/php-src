@@ -30,10 +30,10 @@
  */
 
 
-/* $Id: dl.h,v 1.11 2000/05/27 19:27:20 hholzgra Exp $ */
+/* $Id: dl.h,v 1.12 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _DL_H
-#define _DL_H
+#ifndef DL_H
+#define DL_H
 
 void php_dl(pval *file,int type,pval *return_value);
 
@@ -43,4 +43,4 @@ PHP_FUNCTION(dl);
 
 PHP_MINFO_FUNCTION(dl);
 
-#endif /* _DL_H */
+#endif /* DL_H */

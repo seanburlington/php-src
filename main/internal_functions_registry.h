@@ -18,10 +18,10 @@
  */
 
 
-/* $Id: internal_functions_registry.h,v 1.9 2000/05/18 15:34:21 zeev Exp $ */
+/* $Id: internal_functions_registry.h,v 1.10 2000/07/02 23:46:50 sas Exp $ */
 
-#ifndef _INTERNAL_FUNCTIONS_REGISTRY_H
-#define _INTERNAL_FUNCTIONS_REGISTRY_H
+#ifndef INTERNAL_FUNCTIONS_REGISTRY_H
+#define INTERNAL_FUNCTIONS_REGISTRY_H
 
 extern int php_init_mime(INIT_FUNC_ARGS);
 

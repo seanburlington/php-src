@@ -18,9 +18,9 @@
 +----------------------------------------------------------------------+
 */
 
-/* $Id: php_snmp.h,v 1.8 2000/06/10 08:47:58 andi Exp $ */
-#ifndef _PHP_SNMP_H
-#define _PHP_SNMP_H
+/* $Id: php_snmp.h,v 1.9 2000/07/02 23:46:47 sas Exp $ */
+#ifndef PHP_SNMP_H
+#define PHP_SNMP_H
 
 #if HAVE_SNMP
 #ifndef DLEXPORT
@@ -46,4 +46,4 @@ PHP_MINFO_FUNCTION(snmp);
 
 #define phpext_snmp_ptr snmp_module_ptr
 
-#endif  /* _PHP_SNMP_H */
+#endif  /* PHP_SNMP_H */

@@ -15,7 +15,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Header: /repository/php-src/win32/Attic/pwd.h,v 1.1 1999/04/07 21:05:12 zeev Exp $
+   $Header: /repository/php-src/win32/Attic/pwd.h,v 1.2 2000/07/02 23:46:51 sas Exp $
  */
 
 /* This 'implementation' is conjectured from the use of this functions in
@@ -26,8 +26,8 @@
    #define WIN32_LEAN_AND_MEAN
    #include <windows.h>
  */
-#ifndef _PWD_H_
-#define _PWD_H_
+#ifndef PWD_H
+#define PWD_H
 #if 0
 /* This is taken care of in Windows-NT/config.h.  */
 typedef int uid_t;

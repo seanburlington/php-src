@@ -27,13 +27,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pack.h,v 1.6 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: pack.h,v 1.7 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _PACK_H
-#define _PACK_H
+#ifndef PACK_H
+#define PACK_H
 
 extern PHP_MINIT_FUNCTION(pack);
 PHP_FUNCTION(pack);
 PHP_FUNCTION(unpack);
 
-#endif /* _PACK_H */
+#endif /* PACK_H */

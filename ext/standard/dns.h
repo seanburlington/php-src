@@ -29,10 +29,10 @@
  */
 
 
-/* $Id: dns.h,v 1.4 2000/02/11 15:59:29 zeev Exp $ */
+/* $Id: dns.h,v 1.5 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _DNS_H
-#define _DNS_H
+#ifndef DNS_H
+#define DNS_H
 
 PHP_FUNCTION(gethostbyaddr);
 PHP_FUNCTION(gethostbyname);
@@ -50,4 +50,4 @@ PHP_FUNCTION(getmxrr);
 #define INT32SZ		4
 #endif
 
-#endif /* _DNS_H */
+#endif /* DNS_H */

@@ -17,10 +17,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dir.h,v 1.8 2000/06/29 21:51:40 zeev Exp $ */
+/* $Id: php_dir.h,v 1.9 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _PHP_DIR_H
-#define _PHP_DIR_H
+#ifndef PHP_DIR_H
+#define PHP_DIR_H
 
 /* directory functions */
 PHP_MINIT_FUNCTION(dir);
@@ -33,4 +33,4 @@ PHP_FUNCTION(rewinddir);
 PHP_FUNCTION(readdir);
 PHP_FUNCTION(getdir);
 
-#endif /* _PHP_DIR_H */
+#endif /* PHP_DIR_H */

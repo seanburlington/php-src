@@ -27,10 +27,10 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.h,v 1.4 2000/02/19 20:12:26 zeev Exp $ */
+/* $Id: php_variables.h,v 1.5 2000/07/02 23:46:50 sas Exp $ */
 
-#ifndef _PHP_VARIABLES_H
-#define _PHP_VARIABLES_H
+#ifndef PHP_VARIABLES_H
+#define PHP_VARIABLES_H
 
 #include "php.h"
 #include "SAPI.h"
@@ -46,4 +46,4 @@ PHPAPI void php_register_variable(char *var, char *val, pval *track_vars_array E
 PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_array ELS_DC PLS_DC);
 
 
-#endif /* _PHP_VARIABLES_H */
+#endif /* PHP_VARIABLES_H */

@@ -29,10 +29,10 @@
  */
 
 
-/* $Id: php_gd.h,v 1.13 2000/06/25 02:55:31 sterling Exp $ */
+/* $Id: php_gd.h,v 1.14 2000/07/02 23:46:41 sas Exp $ */
 
-#ifndef _PHP_GD_H
-#define _PHP_GD_H
+#ifndef PHP_GD_H
+#define PHP_GD_H
 
 #define HAVE_GDIMAGECREATEFROMPNG 1
 
@@ -159,4 +159,4 @@ static void _php_image_output_wbmp(gdImagePtr im, FILE *fp);
 
 #endif
 
-#endif /* _PHP_GD_H */
+#endif /* PHP_GD_H */

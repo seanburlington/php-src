@@ -26,10 +26,10 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fdf.h,v 1.2 1999/12/17 20:54:55 zeev Exp $ */
+/* $Id: php_fdf.h,v 1.3 2000/07/02 23:46:40 sas Exp $ */
 
-#ifndef _PHP_FDF_H
-#define _PHP_FDF_H
+#ifndef PHP_FDF_H
+#define PHP_FDF_H
 
 #if HAVE_FDFLIB
 #if WIN32|WINNT
@@ -62,4 +62,4 @@ PHP_FUNCTION(fdf_add_template);
 #else
 #define phpext_fdf_ptr NULL
 #endif
-#endif /* _PHP_FDF_H */
+#endif /* PHP_FDF_H */

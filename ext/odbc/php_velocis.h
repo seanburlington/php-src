@@ -28,10 +28,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_velocis.h,v 1.4 2000/06/10 08:47:57 andi Exp $ */
+/* $Id: php_velocis.h,v 1.5 2000/07/02 23:46:44 sas Exp $ */
 
-#ifndef _PHP_VELOCIS_H
-#define _PHP_VELOCIS_H
+#ifndef PHP_VELOCIS_H
+#define PHP_VELOCIS_H
 
 #if defined(HAVE_VELOCIS) && !HAVE_UODBC
 #define UNIX
@@ -94,7 +94,7 @@ extern velocis_module php_velocis_module;
 #define velocis_module_ptr NULL
 
 #endif /* HAVE_VELOCIS */
-#endif /* _PHP_VELOCIS_H */
+#endif /* PHP_VELOCIS_H */
 
 /*
  * Local variables:

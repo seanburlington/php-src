@@ -28,10 +28,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.12 2000/05/23 10:12:42 thies Exp $ */
+/* $Id: ftp.h,v 1.13 2000/07/02 23:46:41 sas Exp $ */
 
-#ifndef	_FTP_H
-#define	_FTP_H
+#ifndef	FTP_H
+#define	FTP_H
 
 #include <stdio.h>
 #ifdef HAVE_NETINET_IN_H

@@ -16,10 +16,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_assert.h,v 1.5 2000/05/18 15:34:35 zeev Exp $ */
+/* $Id: php_assert.h,v 1.6 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _PHP_ASSERT_H
-#define _PHP_ASSERT_H
+#ifndef PHP_ASSERT_H
+#define PHP_ASSERT_H
 
 PHP_MINIT_FUNCTION(assert);
 PHP_MSHUTDOWN_FUNCTION(assert);
@@ -29,4 +29,4 @@ PHP_MINFO_FUNCTION(assert);
 PHP_FUNCTION(assert);
 PHP_FUNCTION(assert_options);
 
-#endif /* _PHP_ASSERT_H */
+#endif /* PHP_ASSERT_H */

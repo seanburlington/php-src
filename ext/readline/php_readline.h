@@ -16,10 +16,10 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_readline.h,v 1.6 2000/05/18 15:34:33 zeev Exp $ */
+/* $Id: php_readline.h,v 1.7 2000/07/02 23:46:46 sas Exp $ */
 
-#ifndef _PHP_READLINE_H
-#define _PHP_READLINE_H
+#ifndef PHP_READLINE_H
+#define PHP_READLINE_H
 
 #if HAVE_LIBREADLINE
 #ifdef ZTS 
@@ -39,5 +39,5 @@ extern zend_module_entry readline_module_entry;
 
 #endif /* HAVE_LIBREADLINE */
 
-#endif /* _PHP_READLINE_H */
+#endif /* PHP_READLINE_H */
 

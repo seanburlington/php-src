@@ -26,10 +26,10 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_cpdf.h,v 1.5 2000/02/26 03:20:48 zeev Exp $ */
+/* $Id: php_cpdf.h,v 1.6 2000/07/02 23:46:38 sas Exp $ */
 
-#ifndef _PHP_CPDF_H
-#define _PHP_CPDF_H
+#ifndef PHP_CPDF_H
+#define PHP_CPDF_H
 
 #if HAVE_CPDFLIB
 

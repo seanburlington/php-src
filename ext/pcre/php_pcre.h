@@ -16,10 +16,10 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pcre.h,v 1.21 2000/06/28 20:07:25 andrei Exp $ */
+/* $Id: php_pcre.h,v 1.22 2000/07/02 23:46:44 sas Exp $ */
 
-#ifndef _PHP_PCRE_H
-#define _PHP_PCRE_H
+#ifndef PHP_PCRE_H
+#define PHP_PCRE_H
 
 #if HAVE_PCRE || HAVE_BUNDLED_PCRE
 
@@ -87,4 +87,4 @@ extern ZEND_API php_pcre_globals pcre_globals;
 
 #define phpext_pcre_ptr pcre_module_ptr
 
-#endif /* _PHP_PCRE_H */
+#endif /* PHP_PCRE_H */

@@ -17,10 +17,10 @@
  */
 
 
-/* $Id: php_recode.h,v 1.4 2000/06/10 08:47:58 andi Exp $ */
+/* $Id: php_recode.h,v 1.5 2000/07/02 23:46:46 sas Exp $ */
 
-#ifndef _PHP_RECODE_H
-#define _PHP_RECODE_H
+#ifndef PHP_RECODE_H
+#define PHP_RECODE_H
 
 #ifdef PHP_WIN32
 #define PHP_MYSQL_API __declspec(dllexport)
@@ -86,4 +86,4 @@ extern PHP_MYSQL_API php_recode_globals recode_globals;
 #define phpext_recode_ptr NULL
 #endif
 
-#endif /* _PHP_RECODE_H */
+#endif /* PHP_RECODE_H */

@@ -27,12 +27,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.h,v 1.23 2000/07/02 15:12:34 andi Exp $ */
+/* $Id: file.h,v 1.24 2000/07/02 23:46:47 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
-#ifndef _FILE_H
-#define _FILE_H
+#ifndef FILE_H
+#define FILE_H
 
 extern PHP_MINIT_FUNCTION(file);
 
@@ -83,4 +83,4 @@ PHPAPI int php_file_le_popen(void);
 PHPAPI int php_file_le_socket(void);
 PHPAPI int php_file_le_uploads(void);
 
-#endif /* _FILE_H */
+#endif /* FILE_H */

@@ -28,10 +28,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.h,v 1.22 2000/06/30 19:22:52 kalowsky Exp $ */
+/* $Id: php_odbc.h,v 1.23 2000/07/02 23:46:44 sas Exp $ */
 
-#ifndef _PHP_ODBC_H
-#define _PHP_ODBC_H
+#ifndef PHP_ODBC_H
+#define PHP_ODBC_H
 
 #if HAVE_UODBC
 #define ODBCVER 0x0250
@@ -320,7 +320,7 @@ extern ZEND_API php_odbc_globals odbc_globals;
 
 #define phpext_odbc_ptr odbc_module_ptr
 
-#endif /* _PHP_ODBC_H */
+#endif /* PHP_ODBC_H */
 
 /*
  * Local variables:

@@ -17,10 +17,10 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.13 2000/06/19 12:56:30 thies Exp $ */
+/* $Id: php_mysql.h,v 1.14 2000/07/02 23:46:43 sas Exp $ */
 
-#ifndef _PHP_MYSQL_H
-#define _PHP_MYSQL_H
+#ifndef PHP_MYSQL_H
+#define PHP_MYSQL_H
 
 #ifdef PHP_WIN32
 #define PHP_MYSQL_API __declspec(dllexport)
@@ -110,4 +110,4 @@ ZEND_END_MODULE_GLOBALS(mysql)
 
 #define phpext_mysql_ptr mysql_module_ptr
 
-#endif /* _PHP_MYSQL_H */
+#endif /* PHP_MYSQL_H */

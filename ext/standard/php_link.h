@@ -28,9 +28,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_link.h,v 1.3 2000/07/02 15:12:34 andi Exp $ */
-#ifndef _PHP_LINK_H
-#define _PHP_LINK_H
+/* $Id: php_link.h,v 1.4 2000/07/02 23:46:47 sas Exp $ */
+#ifndef PHP_LINK_H
+#define PHP_LINK_H
 
 #ifdef HAVE_SYMLINK
 
@@ -41,4 +41,4 @@ PHP_FUNCTION(symlink);
 
 #endif
 
-#endif /* _PHP_LINK_H */
+#endif /* PHP_LINK_H */

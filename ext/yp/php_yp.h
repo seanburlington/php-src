@@ -26,10 +26,10 @@
    | Authors: Stephanie Wehner <_@r4k.net>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_yp.h,v 1.5 2000/06/10 08:47:58 andi Exp $ */ 
+/* $Id: php_yp.h,v 1.6 2000/07/02 23:46:49 sas Exp $ */ 
 
-#ifndef _PHP_YP_H
-#define _PHP_YP_H
+#ifndef PHP_YP_H
+#define PHP_YP_H
 
 #if HAVE_YP
 
@@ -53,4 +53,4 @@ PHP_MINFO_FUNCTION(yp);
 
 #define phpext_yp_ptr yp_module_ptr
 
-#endif /* _PHP_YP_H */
+#endif /* PHP_YP_H */

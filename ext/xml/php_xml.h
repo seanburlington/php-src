@@ -17,10 +17,10 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xml.h,v 1.11 2000/05/18 15:34:38 zeev Exp $ */
+/* $Id: php_xml.h,v 1.12 2000/07/02 23:46:49 sas Exp $ */
 
-#ifndef _PHP_XML_H
-#define _PHP_XML_H
+#ifndef PHP_XML_H
+#define PHP_XML_H
 
 #ifdef HAVE_LIBEXPAT
 
@@ -151,7 +151,7 @@ PHPAPI char *xml_utf8_decode(const XML_Char *, int, int *, const XML_Char *);
 #define XMLLS_FETCH()
 #endif
 
-#endif /* _PHP_XML_H */
+#endif /* PHP_XML_H */
 
 /*
  * Local variables:

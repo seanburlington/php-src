@@ -23,10 +23,10 @@
  */
 
 
-/* $Id: hg_comm.h,v 1.7 2000/06/15 23:45:04 andi Exp $ */
+/* $Id: hg_comm.h,v 1.8 2000/07/02 23:46:41 sas Exp $ */
 
-#ifndef _HG_COMM_H
-#define _HG_COMM_H
+#ifndef HG_COMM_H
+#define HG_COMM_H
 
 #if HYPERWAVE
 

@@ -29,10 +29,10 @@
  */
 
 
-/* $Id: php_domxml.h,v 1.12 2000/06/05 15:39:29 steinm Exp $ */
+/* $Id: php_domxml.h,v 1.13 2000/07/02 23:46:40 sas Exp $ */
 
-#ifndef _PHP_DOMXML_H
-#define _PHP_DOMXML_H
+#ifndef PHP_DOMXML_H
+#define PHP_DOMXML_H
 
 #if HAVE_DOMXML
 #include <libxml/parser.h>

@@ -27,11 +27,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.h,v 1.2 1999/05/16 11:19:26 sas Exp $ */
+/* $Id: uniqid.h,v 1.3 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _UNIQID_H
-#define _UNIQID_H
+#ifndef UNIQID_H
+#define UNIQID_H
 
 PHP_FUNCTION(uniqid);
 
-#endif /* _UNIQID_H */
+#endif /* UNIQID_H */

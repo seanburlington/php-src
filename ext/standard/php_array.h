@@ -19,10 +19,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_array.h,v 1.13 2000/06/10 19:09:56 venaas Exp $ */
+/* $Id: php_array.h,v 1.14 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _PHP_ARRAY_H
-#define _PHP_ARRAY_H
+#ifndef PHP_ARRAY_H
+#define PHP_ARRAY_H
 
 PHP_MINIT_FUNCTION(array);
 PHP_MSHUTDOWN_FUNCTION(array);
@@ -99,4 +99,4 @@ extern int array_globals_id;
 extern php_array_globals array_globals;
 #endif
 
-#endif /* _PHP_ARRAY_H */
+#endif /* PHP_ARRAY_H */

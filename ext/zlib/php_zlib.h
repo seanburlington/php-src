@@ -23,10 +23,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_zlib.h,v 1.6 2000/06/10 08:47:58 andi Exp $ */
+/* $Id: php_zlib.h,v 1.7 2000/07/02 23:46:50 sas Exp $ */
 
-#ifndef _PHP_ZLIB_H
-#define _PHP_ZLIB_H
+#ifndef PHP_ZLIB_H
+#define PHP_ZLIB_H
 
 #if HAVE_ZLIB
 
@@ -73,4 +73,4 @@ PHP_FUNCTION(gzuncompress);
 
 #define phpext_zlib_ptr zlib_module_ptr
 
-#endif /* _PHP_ZLIB_H */
+#endif /* PHP_ZLIB_H */

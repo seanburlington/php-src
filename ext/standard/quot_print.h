@@ -27,11 +27,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: quot_print.h,v 1.2 1999/05/16 11:19:26 sas Exp $ */
+/* $Id: quot_print.h,v 1.3 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _QUOT_PRINT_H
-#define _QUOT_PRINT_H
+#ifndef QUOT_PRINT_H
+#define QUOT_PRINT_H
 
 PHP_FUNCTION(quoted_printable_decode);
 
-#endif /* _QUOT_PRINT_H */
+#endif /* QUOT_PRINT_H */

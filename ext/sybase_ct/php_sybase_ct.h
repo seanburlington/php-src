@@ -28,10 +28,10 @@
  */
 
 
-/* $Id: php_sybase_ct.h,v 1.4 2000/06/10 08:47:58 andi Exp $ */
+/* $Id: php_sybase_ct.h,v 1.5 2000/07/02 23:46:48 sas Exp $ */
 
-#ifndef _PHP_SYBASE_CT_H
-#define _PHP_SYBASE_CT_H
+#ifndef PHP_SYBASE_CT_H
+#define PHP_SYBASE_CT_H
 
 #if HAVE_SYBASE_CT
 
@@ -116,4 +116,4 @@ typedef struct {
 
 #define phpext_sybase_ct_ptr sybase_module_ptr
 
-#endif /* _PHP_SYBASE_CT_H */
+#endif /* PHP_SYBASE_CT_H */

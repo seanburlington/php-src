@@ -28,10 +28,10 @@
  */
 
 
-/* $Id: php_msql.h,v 1.3 2000/06/10 08:47:57 andi Exp $ */
+/* $Id: php_msql.h,v 1.4 2000/07/02 23:46:42 sas Exp $ */
 
-#ifndef _PHP_MSQL_H
-#define _PHP_MSQL_H
+#ifndef PHP_MSQL_H
+#define PHP_MSQL_H
 
 #if HAVE_MSQL
 
@@ -91,4 +91,4 @@ typedef struct {
 
 #define phpext_msql_ptr msql_module_ptr
 
-#endif /* _PHP_MSQL_H */
+#endif /* PHP_MSQL_H */

@@ -19,10 +19,10 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_rand.h,v 1.5 2000/05/18 15:34:35 zeev Exp $ */
+/* $Id: php_rand.h,v 1.6 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _PHP_RAND_H
-#define	_PHP_RAND_H
+#ifndef PHP_RAND_H
+#define	PHP_RAND_H
 
 #include <stdlib.h>
 
@@ -36,4 +36,4 @@
 #define PHP_RAND_MAX RAND_MAX
 #endif
 
-#endif	/* _PHP_RAND_H */
+#endif	/* PHP_RAND_H */

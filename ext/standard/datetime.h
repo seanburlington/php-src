@@ -29,10 +29,10 @@
  */
 
 
-/* $Id: datetime.h,v 1.6 2000/03/28 20:26:02 sterling Exp $ */
+/* $Id: datetime.h,v 1.7 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _DATETIME_H
-#define _DATETIME_H
+#ifndef DATETIME_H
+#define DATETIME_H
 
 PHP_FUNCTION(time);
 PHP_FUNCTION(mktime);
@@ -54,4 +54,4 @@ void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gm);
 void _php_strftime(INTERNAL_FUNCTION_PARAMETERS, int gm);
 #endif
 
-#endif /* _DATETIME_H */
+#endif /* DATETIME_H */

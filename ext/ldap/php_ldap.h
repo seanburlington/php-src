@@ -29,10 +29,10 @@
  */
 
 
-/* $Id: php_ldap.h,v 1.6 2000/04/07 23:20:22 sterling Exp $ */
+/* $Id: php_ldap.h,v 1.7 2000/07/02 23:46:42 sas Exp $ */
 
-#ifndef _PHP_LDAP_H
-#define _PHP_LDAP_H
+#ifndef PHP_LDAP_H
+#define PHP_LDAP_H
 
 #include <lber.h>
 #include <ldap.h>
@@ -113,4 +113,4 @@ ZEND_END_MODULE_GLOBALS(ldap)
 
 #define phpext_ldap_ptr ldap_module_ptr
 
-#endif /* _PHP_LDAP_H */
+#endif /* PHP_LDAP_H */

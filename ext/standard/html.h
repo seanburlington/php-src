@@ -27,10 +27,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: html.h,v 1.4 2000/02/29 04:38:14 andrei Exp $ */
+/* $Id: html.h,v 1.5 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _HTML_H
-#define _HTML_H
+#ifndef HTML_H
+#define HTML_H
 
 void register_html_constants(INIT_FUNC_ARGS);
 
@@ -40,4 +40,4 @@ PHP_FUNCTION(get_html_translation_table);
 
 PHPAPI char *php_escape_html_entities(unsigned char *old, int oldlen, int *newlen, int all);
 
-#endif /* _HTML_H */
+#endif /* HTML_H */

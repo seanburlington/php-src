@@ -17,10 +17,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.106 2000/06/24 16:10:18 andi Exp $ */
+/* $Id: php.h,v 1.107 2000/07/02 23:46:50 sas Exp $ */
 
-#ifndef _PHP_H
-#define _PHP_H
+#ifndef PHP_H
+#define PHP_H
 
 #ifdef HAVE_DMALLOC
 #include <dmalloc.h>

@@ -28,10 +28,10 @@
  */
 
 
-/* $Id: php_posix.h,v 1.4 2000/06/10 14:16:34 andi Exp $ */
+/* $Id: php_posix.h,v 1.5 2000/07/02 23:46:45 sas Exp $ */
 
-#ifndef _PHP_POSIX_H
-#define _PHP_POSIX_H
+#ifndef PHP_POSIX_H
+#define PHP_POSIX_H
 
 #if HAVE_POSIX
 #ifndef DLEXPORT
@@ -90,4 +90,4 @@ typedef struct {
 
 #define phpext_posix_ptr posix_module_ptr
 
-#endif /* _PHP_POSIX_H */
+#endif /* PHP_POSIX_H */

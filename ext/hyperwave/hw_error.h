@@ -23,9 +23,9 @@
  */
 
 
-/* $Id: hw_error.h,v 1.2 1999/08/05 16:25:10 steinm Exp $ */
-#ifndef _HW_ERROR_H
-#define _HW_ERROR_H
+/* $Id: hw_error.h,v 1.3 2000/07/02 23:46:41 sas Exp $ */
+#ifndef HW_ERROR_H
+#define HW_ERROR_H
 
 #if HYPERWAVE
 

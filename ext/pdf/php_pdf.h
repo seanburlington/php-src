@@ -26,10 +26,10 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_pdf.h,v 1.9 2000/06/07 18:06:10 steinm Exp $ */
+/* $Id: php_pdf.h,v 1.10 2000/07/02 23:46:45 sas Exp $ */
 
-#ifndef _PHP_PDF_H
-#define _PHP_PDF_H
+#ifndef PHP_PDF_H
+#define PHP_PDF_H
 
 #if HAVE_PDFLIB
 
@@ -141,4 +141,4 @@ PHP_FUNCTION(pdf_get_image_height);
 #define pdf_module_ptr NULL
 #endif
 #define phpext_pdf_ptr pdf_module_ptr
-#endif /* _PHP_PDF_H */
+#endif /* PHP_PDF_H */

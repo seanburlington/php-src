@@ -16,10 +16,10 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_swf.h,v 1.7 2000/06/10 08:47:58 andi Exp $ */
+/* $Id: php_swf.h,v 1.8 2000/07/02 23:46:48 sas Exp $ */
 
-#ifndef _PHP_SWF_H
-#define _PHP_SWF_H
+#ifndef PHP_SWF_H
+#define PHP_SWF_H
 
 #if HAVE_SWF
 

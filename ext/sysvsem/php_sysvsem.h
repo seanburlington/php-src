@@ -28,10 +28,10 @@
  */
 
 
-/* $Id: php_sysvsem.h,v 1.5 2000/06/10 08:47:58 andi Exp $ */
+/* $Id: php_sysvsem.h,v 1.6 2000/07/02 23:46:48 sas Exp $ */
 
-#ifndef _PHP_SYSVSEM_H
-#define _PHP_SYSVSEM_H
+#ifndef PHP_SYSVSEM_H
+#define PHP_SYSVSEM_H
 
 #if HAVE_SYSVSEM
 
@@ -64,4 +64,4 @@ extern sysvsem_module php_sysvsem_module;
 
 #define phpext_sysvsem_ptr sysvsem_module_ptr
 
-#endif /* _PHP_SYSVSEM_H */
+#endif /* PHP_SYSVSEM_H */

@@ -28,10 +28,10 @@
  */
 
 
-/* $Id: reg.h,v 1.8 2000/06/23 11:48:02 thies Exp $ */
+/* $Id: reg.h,v 1.9 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _REG_H
-#define _REG_H
+#ifndef REG_H
+#define REG_H
 
 char *php_reg_replace(const char *pattern, const char *replace, const char *string, int icase, int extended);
 
@@ -68,4 +68,4 @@ PHP_MINFO_FUNCTION(regex);
 #define REGLS_FETCH()
 #endif
 
-#endif /* _REG_H */
+#endif /* REG_H */

@@ -17,10 +17,10 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.16 2000/07/02 08:59:44 hirokawa Exp $ */
+/* $Id: php_pgsql.h,v 1.17 2000/07/02 23:46:45 sas Exp $ */
 
-#ifndef _PHP_PGSQL_H
-#define _PHP_PGSQL_H
+#ifndef PHP_PGSQL_H
+#define PHP_PGSQL_H
 
 #if HAVE_PGSQL
 
@@ -142,4 +142,4 @@ extern PHP_PGSQL_API php_pgsql_globals pgsql_globals;
 
 #define phpext_pgsql_ptr pgsql_module_ptr
 
-#endif /* _PHP_PGSQL_H */
+#endif /* PHP_PGSQL_H */

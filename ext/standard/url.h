@@ -26,10 +26,10 @@
    | Authors: Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.h,v 1.5 2000/03/07 04:28:43 andrei Exp $ */
+/* $Id: url.h,v 1.6 2000/07/02 23:46:47 sas Exp $ */
 
-#ifndef _URL_H
-#define _URL_H
+#ifndef URL_H
+#define URL_H
 
 typedef struct url {
 	char *scheme;
@@ -55,7 +55,7 @@ PHP_FUNCTION(urldecode);
 PHP_FUNCTION(rawurlencode);
 PHP_FUNCTION(rawurldecode);
 
-#endif /* _URL_H */
+#endif /* URL_H */
 
 /*
  * Local variables:

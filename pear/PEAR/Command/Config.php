@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.15.2.4 2002/06/02 09:59:21 ssb Exp $
+// $Id: Config.php,v 1.15.2.5 2002/06/02 10:02:28 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";
@@ -115,9 +115,9 @@ in.  The default layer is "user".
         if (sizeof($params) < 1 || sizeof($params) > 2) {
             return $this->raiseError("config-get expects 1 or 2 parameters");
         } elseif (sizeof($params) == 1) {
-            $this->ui->outputData("$params[0] = " . $this->config->get($params[0]), $command);
+            $this->ui->outputData("$params[0]=" . $this->config->get($params[0]), $command);
         } else {
-            $data = "($params[1])$params[0] = " .$this->config->get($params[0], $params[1]);
+            $data = "$params[1].$params[0]=" .$this->config->get($params[0], $params[1]);
             $this->ui->outputData($data, $command);
         }
         return true;

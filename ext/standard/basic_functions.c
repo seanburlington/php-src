@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.536 2002/10/24 20:04:16 hholzgra Exp $ */
+/* $Id: basic_functions.c,v 1.537 2002/10/25 01:06:46 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2342,6 +2342,18 @@ PHP_FUNCTION(ini_set)
 				RETURN_FALSE;
 			}
 		}
+	}	
+		
+#define _CHECK_SAFEMODE_INI(ini, var) strncmp(ini, Z_STRVAL_PP(var), sizeof(ini))
+		
+	/* checks that ensure the user does not overwrite certain ini settings when safe_mode is enabled */
+	if (PG(safe_mode)) {
+		if (!_CHECK_SAFEMODE_INI("max_execution_time", varname) ||
+			!_CHECK_SAFEMODE_INI("memory_limit", varname) ||
+			!_CHECK_SAFEMODE_INI("child_terminate", varname)) {
+			zval_dtor(return_value);
+			RETURN_FALSE;
+		}	
 	}	
 		
 	if (zend_alter_ini_entry(Z_STRVAL_PP(varname), Z_STRLEN_PP(varname)+1, Z_STRVAL_PP(new_value), Z_STRLEN_PP(new_value),

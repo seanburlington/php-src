@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.89 2001/03/13 05:24:03 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.90 2001/03/13 16:39:47 fmk Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -961,7 +961,7 @@ static char *php_replace_in_subject(zval *regex, zval *replace, zval **subject, 
 }
 
 
-static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, int is_callable_replace)
+static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_callable_replace)
 {
 	zval		   **regex,
 				   **replace,

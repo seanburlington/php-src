@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.60 1999/11/28 00:31:02 sas Exp $ */
+/* $Id: string.c,v 1.61 1999/12/01 17:21:52 sas Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -32,12 +32,6 @@
 #endif
 #include "zend_execute.h"
 #include "php_globals.h"
-
-#ifdef ZTS
-extern int basic_globals_id;
-#else
-extern php_basic_globals basic_globals;
-#endif
 
 /* this is read-only, so it's ok */
 static char hexconvtab[] = "0123456789abcdef";

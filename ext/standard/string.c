@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.391 2003/06/20 15:41:43 pollita Exp $ */
+/* $Id: string.c,v 1.392 2003/06/23 14:09:14 stas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3194,7 +3194,8 @@ static void php_str_replace_common(INTERNAL_FUNCTION_PARAMETERS, int case_sensit
 		php_str_replace_in_subject(*search, *replace, subject, return_value, case_sensitivity, (argc > 3) ? &count : NULL);
 	}	
 	if (argc > 3) {
-		Z_LVAL_PP(zcount) = count;
+		zval_dtor(*zcount);
+		ZVAL_LONG(*zcount, count);
 	}
 }
 /* }}} */

@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearcmd.php,v 1.11 2004/06/06 15:04:16 cellog Exp $
+// $Id: pearcmd.php,v 1.12 2004/06/06 15:52:41 cellog Exp $
 
 ob_end_clean();
 /**
@@ -168,7 +168,7 @@ if ($fetype == 'Gtk') {
     } else {
         $tmp = Console_Getopt::getopt($options[1], $short_args, $long_args);
     }
-    if (PEAR::isError()) {
+    if (PEAR::isError($tmp)) {
         break;
     }
     list($tmpopt, $params) = $tmp;

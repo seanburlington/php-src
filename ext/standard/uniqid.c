@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.9 1999/08/31 15:57:30 ssb Exp $ */
+/* $Id: uniqid.c,v 1.10 1999/08/31 18:05:22 ssb Exp $ */
 
 #include "php.h"
 
@@ -35,7 +35,7 @@
 #include <sys/time.h>
 #endif
 
-#include "../lcg/php_lcg.h"
+#include "php_lcg.h"
 #include "uniqid.h"
 
 /* {{{ proto string uniqid(string prefix, [bool more_entropy])

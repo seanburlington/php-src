@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.9 1999/08/22 19:19:42 andi Exp $ */
+/* $Id: internal_functions_win32.c,v 1.10 1999/08/31 18:05:21 ssb Exp $ */
 
 
 #include "php.h"
@@ -44,11 +44,11 @@
 #include "ext/standard/php3_mail.h"
 #include "ext/standard/php3_syslog.h"
 #include "ext/standard/php3_standard.h"
+#include "ext/standard/php_lcg.h"
 #include "ext/COM/php3_COM.h"
 #include "ext/standard/reg.h"
 #include "ext/pcre/php_pcre.h"
 #include "ext/odbc/php3_odbc.h"
-#include "ext/lcg/php_lcg.h"
 
 /* SNMP has to be moved to ext */
 /* #include "dl/snmp/php3_snmp.h" */

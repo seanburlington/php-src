@@ -17,7 +17,7 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.43 2002/06/13 22:25:28 mfischer Exp $ */
+/* $Id: sendmail.c,v 1.44 2002/06/14 05:42:08 sebastian Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
@@ -589,7 +589,7 @@ int PostHeader(char *RPath, char *Subject, char *mailTo, char *xheaders, char *m
 	time_t tNow = time(NULL);
 	struct tm *tm = localtime(&tNow);
 	int zoneh = abs(_timezone);
-	int zonem, res, len;
+	int zonem, res;
 	char *header_buffer;
 	char *headers_lc = NULL;
 	size_t i;

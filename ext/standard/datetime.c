@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.87 2002/06/12 15:35:27 hholzgra Exp $ */
+/* $Id: datetime.c,v 1.88 2002/06/14 05:42:08 sebastian Exp $ */
 
 
 #include "php.h"
@@ -80,7 +80,7 @@ PHP_FUNCTION(time)
 void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gm)
 {
 	pval **arguments[7];
-	struct tm *ta, tmbuf, *t1, *t2;
+	struct tm *ta, tmbuf;
 	time_t t, seconds;
 	int i, gmadjust, arg_count = ZEND_NUM_ARGS();
 	int is_dst = -1, val, chgsecs = 0;

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.152 2002/01/09 16:03:34 derick Exp $ */
+/* $Id: array.c,v 1.153 2002/01/10 21:31:06 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -230,7 +230,7 @@ PHP_FUNCTION(ksort)
 
 int php_count_recursive(zval *array, long mode)
 {
-	long cnt = 0, i;
+	long cnt = 0;
 	zval **element;
 	
 	HashTable *target_hash;
@@ -240,13 +240,16 @@ int php_count_recursive(zval *array, long mode)
 	{
 		cnt += zend_hash_num_elements(target_hash);
 		if (mode == COUNT_RECURSIVE) {
-			for(i = 0; i < zend_hash_num_elements(target_hash); i++) {
-				if (zend_hash_index_find (Z_ARRVAL_P(array), i, (void **) &element) == SUCCESS) {
-					cnt += php_count_recursive(*element, COUNT_RECURSIVE);
-				}
+			HashPosition pos;
+
+			for (zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(array), &pos);
+				 zend_hash_get_current_data_ex(Z_ARRVAL_P(array), (void **) &element, &pos) == SUCCESS;
+				 zend_hash_move_forward_ex(Z_ARRVAL_P(array), &pos)) {
+				cnt += php_count_recursive(*element, COUNT_RECURSIVE);
 			}
 		}
 	}
+
 	return cnt;
 }
 

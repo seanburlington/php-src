@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.195 2004/02/01 16:13:06 abies Exp $ */
+/* $Id: interbase.c,v 1.196 2004/02/01 17:52:36 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,13 +26,14 @@
 
 #include "php.h"
 
-#define FILE_REVISION "$Revision: 1.195 $"
+#define FILE_REVISION "$Revision: 1.196 $"
 
 #if HAVE_IBASE
 
 #include "php_ini.h"
 #include "ext/standard/php_standard.h"
 #include "php_interbase.h"
+#include "interbase.h"
 
 #include <time.h>
 
@@ -106,7 +107,7 @@ function_entry ibase_functions[] = {
 	PHP_FE(ibase_errmsg, NULL)
 	PHP_FE(ibase_errcode, NULL)
 
-#ifdef SQL_DIALECT_V6
+#if HAVE_IBASE6_API
 	PHP_FE(ibase_add_user, NULL)
 	PHP_FE(ibase_modify_user, NULL)
 	PHP_FE(ibase_delete_user, NULL)
@@ -2201,7 +2202,7 @@ static void _php_ibase_trans_end(INTERNAL_FUNCTION_PARAMETERS, int commit) /* {{
 		case COMMIT:
 			result = isc_commit_transaction(IB_STATUS, &trans->handle);
 			break;
-#ifdef SQL_DIALECT_V6
+#if HAVE_IBASE6_API
 		case (ROLLBACK | RETAIN):
 			result = isc_rollback_retaining(IB_STATUS, &trans->handle);
 			break;
@@ -2250,7 +2251,7 @@ PHP_FUNCTION(ibase_commit_ret)
 
 /* {{{ proto bool ibase_rollback_ret( resource link_identifier )
    Rollback transaction and retain the transaction context */
-#ifdef SQL_DIALECT_V6
+#if HAVE_IBASE6_API
 PHP_FUNCTION(ibase_rollback_ret)
 {
 	_php_ibase_trans_end(INTERNAL_FUNCTION_PARAM_PASSTHRU, ROLLBACK | RETAIN);

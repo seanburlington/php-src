@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_blobs.c,v 1.1 2004/02/01 16:13:07 abies Exp $ */
+/* $Id: ibase_blobs.c,v 1.2 2004/02/01 17:52:36 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -27,6 +27,7 @@
 #if HAVE_IBASE
 
 #include "php_interbase.h"
+#include "interbase.h"
 
 #define BLOB_CLOSE		1
 #define BLOB_CANCEL		2

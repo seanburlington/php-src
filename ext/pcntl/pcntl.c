@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.22 2002/03/17 08:10:04 mfischer Exp $ */
+/* $Id: pcntl.c,v 1.23 2002/03/17 19:41:24 jason Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -34,7 +34,6 @@
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "php_pcntl.h"
-#include "zend_extensions.h"
 
 ZEND_DECLARE_MODULE_GLOBALS(pcntl)
 

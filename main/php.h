@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.167 2002/03/22 01:10:31 hholzgra Exp $ */
+/* $Id: php.h,v 1.168 2002/04/10 01:13:18 helly Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -204,6 +204,7 @@ char *strerror(int);
 #if !defined(HAVE_SNPRINTF) || !defined(HAVE_VSNPRINTF) || defined(BROKEN_SPRINTF) || defined(BROKEN_SNPRINTF) || defined(BROKEN_VSNPRINTF)
 #include "snprintf.h"
 #endif
+#include "spprintf.h"
 
 #define EXEC_INPUT_BUF 4096
 

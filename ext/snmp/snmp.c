@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.62 2002/10/15 00:43:34 sniper Exp $ */
+/* $Id: snmp.c,v 1.63 2002/10/16 00:29:56 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -338,7 +338,7 @@ retry:
 
 					if (st != 11) {
 #ifdef HAVE_NET_SNMP
-						snprint_value(buf, strlen(buf), vars->name, vars->name_length, vars);
+						snprint_value(buf, sizeof(buf), vars->name, vars->name_length, vars);
 #else
 						sprint_value((struct sbuf *) buf,vars->name, vars->name_length, vars);
 #endif
@@ -350,7 +350,7 @@ retry:
 						add_next_index_string(return_value,buf,1); /* Add to returned array */
 					} else if (st == 3)  {
 #ifdef HAVE_NET_SNMP
-						snprint_objid(buf2, strlen(buf2), vars->name, vars->name_length);
+						snprint_objid(buf2, sizeof(buf2), vars->name, vars->name_length);
 #else
 						sprint_objid((struct sbuf *)buf2, vars->name, vars->name_length);
 #endif
@@ -373,7 +373,7 @@ retry:
 						vars = vars->next_variable, count++);
 						if (vars) {
 #ifdef HAVE_NET_SNMP
-							snprint_objid(buf, strlen(buf), vars->name, vars->name_length);
+							snprint_objid(buf, sizeof(buf), vars->name, vars->name_length);
 #else
 							sprint_objid((struct sbuf *)buf,vars->name, vars->name_length);
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.173 2002/06/18 01:51:59 mfischer Exp $ */
+/* $Id: php_domxml.c,v 1.174 2002/06/19 15:12:14 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -4929,7 +4929,7 @@ PHP_FUNCTION(domxml_xslt_process)
 	- test other stuff
 	- check xsltsp->errors ???
 */
-	zval *rv, *idxsl, *idxml, *idparams = NULL;
+	zval *rv = NULL, *idxsl, *idxml, *idparams = NULL;
 	zend_bool xpath_params = 0;
 	xsltStylesheetPtr xsltstp;
 	xmlDocPtr xmldocp;

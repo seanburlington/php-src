@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.34.2.11 2003/10/20 15:51:44 cox Exp $
+// $Id: Remote.php,v 1.34.2.12 2003/12/06 23:44:23 cellog Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -307,7 +307,8 @@ class PEAR_Remote extends PEAR
                                              null, null, $ret['userinfo']);
                 }
             }
-        } elseif (is_array($ret) && sizeof($ret) == 1 && is_array($ret[0]) &&
+        } elseif (is_array($ret) && sizeof($ret) == 1 && isset($ret[0])
+                  && is_array($ret[0]) &&
                   !empty($ret[0]['faultString']) &&
                   !empty($ret[0]['faultCode'])) {
             extract($ret[0]);

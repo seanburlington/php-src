@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.88 2001/12/14 20:48:29 mfischer Exp $ */
+/* $Id: php_domxml.c,v 1.89 2001/12/14 21:03:06 mfischer Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1579,7 +1579,7 @@ PHP_FUNCTION(domxml_node_children)
 }
 /* }}} */
 
-/* {{{ proto object domxml_node_nlink_node(void)
+/* {{{ proto object domxml_node_unlink_node(void)
    Deletes node */
 PHP_FUNCTION(domxml_node_unlink_node)
 {

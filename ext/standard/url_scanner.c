@@ -16,7 +16,7 @@
    |         Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.22 2000/08/04 09:03:20 hholzgra Exp $ */
+/* $Id: url_scanner.c,v 1.23 2000/08/06 11:32:32 hholzgra Exp $ */
 
 #include "php.h"
 
@@ -82,7 +82,7 @@ static char *url_attr_addon(const char *tag,const char *attr,const char *val,con
 char *url_adapt(const char *src, size_t srclen, const char *data, size_t *newlen)
 {
 	char *out,*outp;
-	int maxl,n,no_output;
+	int maxl,n;
 
 	if(src==NULL) {
 		US.state=STATE_NORMAL;
@@ -98,7 +98,6 @@ char *url_adapt(const char *src, size_t srclen, const char *data, size_t *newlen
 	out=malloc(srclen+1);
 	maxl=srclen;
 	n=srclen;
-	no_output=0;
 
 	*newlen=0;
 	outp=out;
@@ -269,7 +268,6 @@ char *url_adapt(const char *src, size_t srclen, const char *data, size_t *newlen
 				}
 				break;
 			} else if(*src=='\\') {
-				no_output=1;
 				US.state=STATE_TAG_QVAL2b;
 			} else if (*src=='>') {
 				US.state=STATE_NORMAL;
@@ -344,11 +342,6 @@ char *url_adapt(const char *src, size_t srclen, const char *data, size_t *newlen
 			break;
 		}
 
-		if(no_output) {
-			src++;
-			no_output=0;
-			continue;
-		} 
 		*outp++=*src++;
 		*newlen+=1;
 	}

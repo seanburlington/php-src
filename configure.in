@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.352 2002/06/07 12:19:22 ssb Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.353 2002/06/11 09:35:50 edink Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -642,7 +642,7 @@ PHP_ARG_WITH(pear, [whether to install PEAR, and where],
 [  --with-pear=DIR         Install PEAR in DIR (default PREFIX/lib/php)
   --without-pear          Do not install PEAR], DEFAULT)
 
-if test "$PHP_PEAR" != "no"; then
+if test "$PHP_PEAR" != "no" && test "$disable_cli" != "1"; then
   install_pear="install-pear install-build install-headers install-programs"
   PEAR_INSTALLDIR=$PHP_PEAR
 fi

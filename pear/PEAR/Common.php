@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.60 2002/05/20 10:45:23 ssb Exp $
+// $Id: Common.php,v 1.61 2002/05/21 01:20:51 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -128,7 +128,7 @@ class PEAR_Common extends PEAR
      */
     function PEAR_Common()
     {
-        $this->PEAR();
+        parent::PEAR();
         $this->config = &PEAR_Config::singleton();
     }
 
@@ -899,13 +899,13 @@ class PEAR_Common extends PEAR
             } elseif ($tmp == '.tar' || $tmp == '.tgz') {
                 $info = $this->infoFromTgzFile($info);
             } else {
-                $fp = fopen($params[0], "r");
+                $fp = fopen($info, "r");
                 $test = fread($fp, 5);
                 fclose($fp);
                 if ($test == "<?xml") {
-                    $info = $obj->infoFromDescriptionFile($info);
+                    $info = $this->infoFromDescriptionFile($info);
                 } else {
-                    $info = $obj->infoFromTgzFile($info);
+                    $info = $this->infoFromTgzFile($info);
                 }
             }
             if (PEAR::isError($info)) {

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.117 2001/04/14 09:51:29 thies Exp $ */
+/* $Id: oci8.c,v 1.118 2001/04/19 22:00:34 jason Exp $ */
 
 /* TODO list:
  *
@@ -584,7 +584,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.117 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.118 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -788,14 +788,14 @@ static void
 _oci_coll_list_dtor(zend_rsrc_list_entry *rsrc)
 {
 	oci_collection *coll = (oci_collection *)rsrc->ptr;
-    oci_debug("START _oci_coll_list_dtor: %d",coll->id);
+	oci_debug("START _oci_coll_list_dtor: %d",coll->id);
 
 	zend_list_delete(coll->conn->id);
-	// Note sure if we need to free the object.  Have an
-    // oracle TAR out on this one.
-	//    OCIDescriptorFree(descr->ocidescr, descr->type);
+	/* Note sure if we need to free the object.  Have an
+	    oracle TAR out on this one.
+	    OCIDescriptorFree(descr->ocidescr, descr->type); */
 
-    oci_debug("END   _oci_coll_list_dtor: %d",coll->id);
+	oci_debug("END   _oci_coll_list_dtor: %d",coll->id);
 
 	efree(coll);
 }
@@ -5099,7 +5099,7 @@ PHP_FUNCTION(ocinewcollection)
         RETURN_FALSE;
     }
 
-   // get the collection type code of the attribute
+   /* get the collection type code of the attribute */
    connection->error = OCIAttrGet((dvoid*) parmp1, (ub4) OCI_DTYPE_PARAM,
                       (dvoid*) &(coll->coll_typecode), (ub4 *) 0,
                       (ub4) OCI_ATTR_COLLECTION_TYPECODE,

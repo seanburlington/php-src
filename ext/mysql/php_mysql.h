@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.18 2001/02/26 06:07:04 andi Exp $ */
+/* $Id: php_mysql.h,v 1.19 2001/03/13 22:52:53 zeev Exp $ */
 
 #ifndef PHP_MYSQL_H
 #define PHP_MYSQL_H
@@ -50,6 +50,7 @@ PHP_FUNCTION(mysql_select_db);
 PHP_FUNCTION(mysql_create_db);
 PHP_FUNCTION(mysql_drop_db);
 PHP_FUNCTION(mysql_query);
+PHP_FUNCTION(mysql_unbuffered_query);
 PHP_FUNCTION(mysql_db_query);
 PHP_FUNCTION(mysql_list_dbs);
 PHP_FUNCTION(mysql_list_tables);

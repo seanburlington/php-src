@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.3 2002/12/05 20:05:19 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.4 2002/12/26 22:36:21 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -273,14 +273,9 @@ PHP_FUNCTION(get_meta_tags)
 		return;
 	}
 
-	php_stream_open_wrapper(filename, "rb", 0, NULL);
-
-	
 	md.stream = php_stream_open_wrapper(filename, "rb",
 			(use_include_path ? USE_PATH : 0) | ENFORCE_SAFE_MODE | REPORT_ERRORS,
 			NULL);
-	
-
 
 	if (!md.stream)	{
 		RETURN_FALSE;

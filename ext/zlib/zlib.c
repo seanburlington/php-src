@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.11 1999/09/04 21:51:54 sr Exp $ */
+/* $Id: zlib.c,v 1.12 1999/09/06 08:59:48 sr Exp $ */
 #if !PHP_31 && defined(THREAD_SAFE)
 #undef THREAD_SAFE
 #endif
@@ -815,7 +815,7 @@ PHP_FUNCTION(gzpassthru) {
 }
 /* }}} */
 
-/* {{{ proto int gzread(int zp, int length)
+/* {{{ proto string gzread(int zp, int length)
 Binary-safe file read */
 PHP_FUNCTION(gzread)
 {

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx.c,v 1.36 2002/03/26 08:29:14 derick Exp $ */
+/* $Id: dbx.c,v 1.37 2002/04/18 14:04:10 sander Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -635,7 +635,6 @@ ZEND_FUNCTION(dbx_sort)
 	zval **arguments[2];
 	zval **zval_data;
 	zval *returned_zval;
-	int result=0;
 	if (ZEND_NUM_ARGS() !=number_of_arguments || zend_get_parameters_array_ex(number_of_arguments, arguments) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}

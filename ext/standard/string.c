@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.168 2000/12/01 01:55:31 fmk Exp $ */
+/* $Id: string.c,v 1.168.2.1 2000/12/14 16:00:31 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1559,6 +1559,11 @@ PHP_FUNCTION(strtr)
 	}
 
 	convert_to_string_ex(str);
+
+	/* shortcut for empty string */
+	if(Z_STRLEN_PP(str) == 0) {
+		RETURN_EMPTY_STRING();
+	}
 
 	if (ac == 2) {
 		php_strtr_array(return_value,(*str)->value.str.val,(*str)->value.str.len,HASH_OF(*from));

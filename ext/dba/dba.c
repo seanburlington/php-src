@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.36 2001/08/11 16:38:23 zeev Exp $ */
+/* $Id: dba.c,v 1.37 2001/08/14 05:44:33 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -74,7 +74,7 @@ ZEND_GET_MODULE(dba)
 
 typedef struct dba_handler {
 	char *name;
-	int (*open)(dba_info *);
+	int (*open)(dba_info * TSRMLS_DC);
 	void (*close)(dba_info *);
 	char* (*fetch)(dba_info *, char *, int, int *);
 	int (*update)(dba_info *, char *, int, char *, int, int);
@@ -345,7 +345,7 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	info->argv = args + 3;
 	info->hnd = NULL;
 
-	if(hptr->open(info) != SUCCESS) {
+	if(hptr->open(info TSRMLS_CC) != SUCCESS) {
 		dba_close(info);
 		php_error(E_WARNING, "driver initialization failed");
 		FREENOW;

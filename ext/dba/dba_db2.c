@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.13 2001/08/06 12:15:05 sniper Exp $ */
+/* $Id: dba_db2.c,v 1.14 2001/08/14 05:44:33 sniper Exp $ */
 
 #include "php.h"
 
@@ -47,7 +47,6 @@ DBA_OPEN_FUNC(db2)
 	int gmode = 0;
 	int filemode = 0644;
 	struct stat check_stat;
-	TSRMLS_FETCH();
 	
 	type =  info->mode == DBA_READER ? DB_UNKNOWN :
 		info->mode == DBA_TRUNC ? DB_BTREE :

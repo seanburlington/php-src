@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.35 2000/12/04 06:56:29 sbergmann Exp $
+// $Id: DB.php,v 1.36 2000/12/04 07:05:16 sbergmann Exp $
 //
 // Database independent query interface.
 //
@@ -80,8 +80,8 @@
    * into your database).
    */
 
-  define( "DB_PARAM_SCALAR", 1);
-  define( "DB_PARAM_OPAQUE", 2);
+  define( "DB_PARAM_SCALAR", 1 );
+  define( "DB_PARAM_OPAQUE", 2 );
 
   /*
    * These constants define different ways of returning binary data

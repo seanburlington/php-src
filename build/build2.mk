@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: build2.mk,v 1.3 1999/12/30 04:07:16 sas Exp $
+# $Id: build2.mk,v 1.4 1999/12/30 06:07:56 sas Exp $
 
 include generated_lists
 
@@ -73,7 +73,7 @@ $(makefile_in_files): $(makefile_am_files) aclocal.m4 configure.in $(config_m4_f
 aclocal.m4: configure.in acinclude.m4
 	aclocal
 
-$(config_h_in): configure.in acconfig.h
+$(config_h_in): configure acconfig.h
 # explicitly remove target since autoheader does not seem to work 
 # correctly otherwise (timestamps are not updated)
 	@echo rebuilding $@

@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.23.4.10 2004/04/20 23:37:26 fmk Exp $ */
+/* $Id: php_mssql.h,v 1.23.4.11 2004/06/04 01:02:21 pollita Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -37,9 +37,7 @@
 #include "sqldb.h"
 
 #if HAVE_FREETDS
-#ifndef SHORT
-typedef short SHORT;
-#endif
+typedef short TDS_SHORT;
 #define SQLTEXT SYBTEXT
 #define SQLCHAR SYBCHAR
 #define SQLVARCHAR SYBVARCHAR

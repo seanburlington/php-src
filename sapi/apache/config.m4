@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.48 2002/03/07 14:19:47 sas Exp $
+dnl $Id: config.m4,v 1.49 2002/03/29 19:25:55 markonen Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 1.x module support via DSO through APXS)
@@ -61,6 +61,11 @@ AC_ARG_WITH(apxs,
   *aix*)
     APXS_LIBEXECDIR=`$APXS -q LIBEXECDIR`
     EXTRA_LDFLAGS="$EXTRA_LDFLAGS -Wl,-bI:$APXS_LIBEXECDIR/httpd.exp"
+    ;;
+  *darwin*)
+    APXS_HTTPD=`$APXS -q SBINDIR`/`$APXS -q TARGET`
+    MH_BUNDLE_FLAGS="-bundle -bundle_loader $APXS_HTTPD"
+    PHP_SUBST(MH_BUNDLE_FLAGS)
     ;;
   esac
 ],[

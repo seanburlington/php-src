@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pfpro.c,v 1.6 2000/10/03 18:52:44 sas Exp $ */
+/* $Id: pfpro.c,v 1.7 2000/12/22 12:57:07 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -409,15 +409,13 @@ PHP_FUNCTION(pfpro_process)
 				parmlength += 1;
 			}
 
-			switch (zend_hash_get_current_key(target_hash, &string_key, &num_key)) {
+			switch (zend_hash_get_current_key(target_hash, &string_key, &num_key, 0)) {
 
 				case HASH_KEY_IS_STRING:
 
 					if (pass == 1)
 						strcpy(parmlist + parmlength, string_key);
 					parmlength += strlen(string_key);
-
-					efree(string_key);
 
 					break;
 

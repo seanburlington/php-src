@@ -23,7 +23,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.73 2000/12/04 17:07:27 sniper Exp $ */
+/* $Id: ldap.c,v 1.74 2000/12/22 12:57:06 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -226,7 +226,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.73 2000/12/04 17:07:27 sniper Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.74 2000/12/22 12:57:06 zeev Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 #ifdef LDAP_API_VERSION
 	snprintf(ldapapiversion, 31, "%d", LDAP_API_VERSION);
@@ -1264,9 +1264,8 @@ static void php_ldap_do_modify(INTERNAL_FUNCTION_PARAMETERS, int oper)
 		ldap_mods[i] = emalloc(sizeof(LDAPMod));
 		ldap_mods[i]->mod_op = oper | LDAP_MOD_BVALUES;
 
-		if (zend_hash_get_current_key((*entry)->value.ht,&attribute, &index) == HASH_KEY_IS_STRING) {
+		if (zend_hash_get_current_key((*entry)->value.ht, &attribute, &index, 0) == HASH_KEY_IS_STRING) {
 			ldap_mods[i]->mod_type = estrdup(attribute);
-			efree(attribute);
 		} else {
 			php_error(E_ERROR, "LDAP: Unknown Attribute in the data");
 			RETURN_FALSE;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.40 2000/11/16 22:19:47 jason Exp $ */
+/* $Id: java.c,v 1.41 2000/12/22 12:57:06 zeev Exp $ */
 
 /*
  * This module implements Zend OO syntax overloading support for Java
@@ -349,13 +349,12 @@ static jobject _java_makeObject(pval* arg JG_DC) {
       while(zend_hash_get_current_data(arg->value.ht, (void**)&value) == SUCCESS) {
         jval = _java_makeObject(*value JG_CC);
 
-        switch (zend_hash_get_current_key(arg->value.ht, &string_key, &num_key)) {
+        switch (zend_hash_get_current_key(arg->value.ht, &string_key, &num_key, 0)) {
           case HASH_KEY_IS_STRING:
             key.type = IS_STRING;
             key.value.str.val = string_key;
             key.value.str.len = strlen(string_key);
             jkey = _java_makeObject(&key JG_CC);
-            efree(string_key);
             break;
           case HASH_KEY_IS_LONG:
             key.type = IS_LONG;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.194 2005/02/21 20:57:18 sniper Exp $ */
+/* $Id: SAPI.c,v 1.195 2005/02/21 21:00:04 sniper Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -610,8 +610,6 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 					sapi_update_response_code(302 TSRMLS_CC);
 				}
 			} else if (!STRCASECMP(header_line, "WWW-Authenticate")) { /* HTTP Authentication */
-				int newlen;
-				char *result, *newheader;
 
 				sapi_update_response_code(401 TSRMLS_CC); /* authentication-required */
 
@@ -619,8 +617,8 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 #if (HAVE_PCRE || HAVE_BUNDLED_PCRE) && !defined(COMPILE_DL_PCRE)
 				{
 					zval *repl_temp;
-					char *ptr = colon_offset+1;
-					int ptr_len=0, result_len = 0;
+					char *ptr = colon_offset+1, *result, *newheader;
+					int ptr_len=0, result_len = 0, newlen = 0;
 
 					/* skip white space */
 					while (isspace(*ptr)) {

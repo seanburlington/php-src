@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.118 2004/01/26 00:49:16 pajoye Exp $
+// $Id: Common.php,v 1.119 2004/01/26 00:57:30 pajoye Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -148,12 +148,6 @@ class PEAR_Common extends PEAR
      * @access private
      */
     var $_packageSortTree;
-    /**
-     * Temporary variable used to store the current package name
-     * @var string
-     * @access private
-     */
-    var $_validPackageName;
 
     // }}}
 

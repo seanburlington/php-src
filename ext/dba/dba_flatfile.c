@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_flatfile.c,v 1.13 2003/06/10 20:03:26 imajes Exp $ */
+/* $Id: dba_flatfile.c,v 1.14 2003/12/14 22:08:18 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -41,6 +41,17 @@
 
 DBA_OPEN_FUNC(flatfile)
 {
+	int fd, flags;
+
+	if (info->mode != DBA_READER) {
+		if (SUCCESS != php_stream_cast(info->fp, PHP_STREAM_AS_FD, (void*)&fd, 1)) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not cast stream");
+			return FAILURE;
+		}
+		flags = fcntl(fd, F_SETFL);
+		fcntl(fd, F_SETFL, flags & ~O_APPEND);
+	}
+
 	info->dbf = pemalloc(sizeof(flatfile), info->flags&DBA_PERSISTENT);
 	memset(info->dbf, 0, sizeof(flatfile));
 

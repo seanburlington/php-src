@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.50 2002/01/03 05:55:22 eschmid Exp $ */
+/* $Id: php_ftp.c,v 1.51 2002/01/03 07:57:58 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -108,7 +108,7 @@ PHP_MINFO_FUNCTION(ftp)
 
 #define	XTYPE(xtype, mode)	{ \
 								if (mode != FTPTYPE_ASCII && mode != FTPTYPE_IMAGE) { \
-									php_error(E_WARNING, "%s(): mode must be FTP_ASCII or FTP_IMAGE", get_active_function_name(TSRMLS_C)); \
+									php_error(E_WARNING, "%s(): mode must be FTP_ASCII or FTP_BINARY", get_active_function_name(TSRMLS_C)); \
 									RETURN_FALSE; \
 								} \
 								xtype = mode; \

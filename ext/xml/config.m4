@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.48 2003/11/12 23:42:36 sniper Exp $
+dnl $Id: config.m4,v 1.49 2004/07/18 12:03:51 wez Exp $
 dnl
 
 PHP_ARG_ENABLE(xml,whether to enable XML support,
@@ -47,5 +47,6 @@ if test "$PHP_XML" != "no" && test "$PHP_LIBXML" != "no" -o "$PHP_LIBEXPAT_DIR" 
 
   PHP_NEW_EXTENSION(xml, xml.c $xml_extra_sources, $ext_shared)
   PHP_SUBST(XML_SHARED_LIBADD)
+  PHP_ADD_EXTENSION_DEP(xml, libxml)
   AC_DEFINE(HAVE_XML, 1, [ ])
 fi

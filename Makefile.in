@@ -24,7 +24,7 @@
 # +----------------------------------------------------------------------+
 
 #
-# $Id: Makefile.in,v 1.66 1999/09/27 16:34:27 ssb Exp $
+# $Id: Makefile.in,v 1.67 1999/09/27 16:49:23 sas Exp $
 #
 
 prefix = @prefix@
@@ -97,7 +97,7 @@ maintainer-clean-depend-recursive:
 		(cd $$subdir && $(MAKE) $$target) || fail=yes; \
 	done && test -z "$$fail"
 
-include sapi/$(PHP_SAPI)/Makefile.inc
+include $(srcdir)/sapi/$(PHP_SAPI)/Makefile.inc
 
 regex/libregex.a:
 	(cd regex; $(MAKE) lib)

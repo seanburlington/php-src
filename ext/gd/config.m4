@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.120.2.12 2003/04/19 07:16:06 moriyoshi Exp $
+dnl $Id: config.m4,v 1.120.2.13 2003/04/19 07:45:45 moriyoshi Exp $
 dnl
 
 dnl
@@ -230,7 +230,7 @@ AC_DEFUN(PHP_GD_TTSTR,[
 
 AC_DEFUN(PHP_GD_JISX0208,[
   if test "$PHP_GD_JIS_CONV" = "yes"; then
-   USE_GD_JIS_CONV=1
+    USE_GD_JIS_CONV=1
   fi
 ])
 
@@ -330,6 +330,7 @@ dnl enable the support in bundled GD library
   fi
 
   if test -n "$USE_GD_JIS_CONV"; then
+    AC_DEFINE(USE_GD_JISX0208, 1, [ ])
     GDLIB_CFLAGS="$GDLIB_CFLAGS -DJISX0208"
   fi
 

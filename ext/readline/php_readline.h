@@ -16,12 +16,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_readline.h,v 1.8 2000/10/29 09:14:53 thies Exp $ */
+/* $Id: php_readline.h,v 1.9 2001/01/18 11:42:09 stas Exp $ */
 
 #ifndef PHP_READLINE_H
 #define PHP_READLINE_H
 
-#if HAVE_LIBREADLINE
+#if HAVE_LIBREADLINE || HAVE_LIBEDIT
 #ifdef ZTS 
 #warning Readline module will *NEVER* be thread-safe
 #endif

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.88 2003/08/29 21:32:25 helly Exp $ 
+   $Id: sqlite.c,v 1.89 2003/08/29 21:33:24 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -941,7 +941,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.88 2003/08/29 21:32:25 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.89 2003/08/29 21:33:24 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1725,7 +1725,7 @@ PHP_FUNCTION(sqlite_fetch_object)
 		fci.symbol_table = NULL;
 		fci.object_pp = &return_value;
 		fci.retval_ptr_ptr = &retval_ptr;
-		if (ctor_params) {
+		if (ctor_params && Z_TYPE_P(ctor_params) != IS_NULL) {
 			if (Z_TYPE_P(ctor_params) == IS_ARRAY) {
 				HashTable *ht = Z_ARRVAL_P(ctor_params);
 				Bucket *p;

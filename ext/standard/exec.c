@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.100 2003/06/10 20:03:37 imajes Exp $ */
+/* $Id: exec.c,v 1.101 2003/08/05 20:15:53 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -260,18 +260,28 @@ PHP_FUNCTION(passthru)
 char *php_escape_shell_cmd(char *str) {
 	register int x, y, l;
 	char *cmd;
+	char *p = NULL;
 
 	l = strlen(str);
 	cmd = emalloc(2 * l + 1);
 	
 	for (x = 0, y = 0; x < l; x++) {
 		switch (str[x]) {
+			case '"':
+			case '\'':
+				if (!p && (p = memchr(str + x + 1, str[x], l - x - 1))) {
+					/* noop */
+				} else if (p && *p == str[x]) {
+					p = NULL;
+				} else {
+					cmd[y++] = '\\';
+				}
+				cmd[y++] = str[x];
+				break;
 			case '#': /* This is character-set independent */
 			case '&':
 			case ';':
 			case '`':
-			case '\'':
-			case '"':
 			case '|':
 			case '*':
 			case '?':

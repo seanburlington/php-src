@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.135 2001/09/09 13:29:13 derick Exp $ */
+/* $Id: array.c,v 1.136 2001/09/16 20:49:57 sterling Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1377,7 +1377,8 @@ PHP_FUNCTION(range)
 
 
 static int array_data_shuffle(const void *a, const void*b) {
-	return (php_rand() % 2) ? 1 : -1;
+	TSRMLS_FETCH();
+	return (php_rand(TSRMLS_C) % 2) ? 1 : -1;
 }
 
 
@@ -3176,6 +3177,6 @@ PHP_FUNCTION(key_exists)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 fdm=marker
- * vim<600: sw=4 ts=4
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
  */

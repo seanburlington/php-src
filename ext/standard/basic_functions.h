@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.93 2001/09/05 19:47:55 sniper Exp $ */
+/* $Id: basic_functions.h,v 1.94 2001/09/16 20:49:57 sterling Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -174,6 +174,8 @@ typedef struct {
 	php_uint32   *next;       /* next random value is computed from here */
 	int      left;        /* can *next++ this many times before reloading */
 
+	unsigned int rand_seed; /* Seed for rand() */
+    
 	/* syslog.c */
 	int syslog_started;
 	char *syslog_device;

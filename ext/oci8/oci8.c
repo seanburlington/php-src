@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.106 2001/02/12 14:36:28 thies Exp $ */
+/* $Id: oci8.c,v 1.107 2001/02/14 13:06:03 thies Exp $ */
 
 /* TODO list:
  *
@@ -489,7 +489,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.106 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.107 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2610,7 +2610,9 @@ PHP_FUNCTION(ocifreedesc)
 		}
 	}
 
-  RETURN_FALSE;
+	php_error(E_NOTICE, "OCIFreeDesc() should not be called like this. Use $somelob->free() to free a LOB");
+
+  	RETURN_FALSE;
 }
 /* }}} */
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.211 2004/04/05 13:22:33 abies Exp $ */
+/* $Id: interbase.c,v 1.212 2004/05/12 13:07:35 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -30,7 +30,7 @@
 
 #include "php.h"
 
-#define FILE_REVISION "$Revision: 1.211 $"
+#define FILE_REVISION "$Revision: 1.212 $"
 
 #if HAVE_IBASE
 
@@ -1210,7 +1210,10 @@ PHP_FUNCTION(ibase_gen_id)
 
 	RESET_ERRMSG;
 
-	zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|lr", &generator, &gen_len, &inc, &link);
+	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|lr", &generator, &gen_len,
+			&inc, &link)) {
+		RETURN_FALSE;
+	}
 
 	PHP_IBASE_LINK_TRANS(link, ib_link, trans);
 	

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.14 2001/03/12 02:06:06 sniper Exp $
+dnl $Id: config.m4,v 1.15 2001/03/26 10:30:48 sniper Exp $
 
 AC_DEFUN(PHP_LDAP_CHECKS, [
   if test -f $1/include/ldap.h; then
@@ -48,6 +48,9 @@ if test "$PHP_LDAP" != "no"; then
 
   if test -f $LDAP_LIBDIR/liblber.a -o -f $LDAP_LIBDIR/liblber.so -o -f $LDAP_LIBDIR/liblber.sl; then
     AC_ADD_LIBRARY_WITH_PATH(lber, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
+    AC_ADD_LIBRARY_WITH_PATH(ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
+
+  elif test -f $LDAP_LIBDIR/libldap.so.3; then
     AC_ADD_LIBRARY_WITH_PATH(ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 
   elif test -f $LDAP_LIBDIR/libldapssl41.so -o -f $LDAP_LIBDIR/libldapssl41.sl; then

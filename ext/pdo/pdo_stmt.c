@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.4 2004/05/18 05:31:01 gschlossnagle Exp $ */
+/* $Id: pdo_stmt.c,v 1.5 2004/05/18 05:34:52 gschlossnagle Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -244,7 +244,6 @@ static PHP_METHOD(PDOStatement, execute)
 		while (SUCCESS == zend_hash_get_current_data(Z_ARRVAL_P(input_params), (void*)&tmp)) {
 			char *quotedstr;
 			int  quotedstrlen;
-			int refcount;
 			memset(&param, 0, sizeof(param));
 
 			if (HASH_KEY_IS_STRING == zend_hash_get_current_key_ex(Z_ARRVAL_P(input_params),
@@ -266,11 +265,13 @@ static PHP_METHOD(PDOStatement, execute)
 			}
 
 			param.param_type = PDO_PARAM_STR;
-			stmt->dbh->methods->quoter(stmt->dbh, Z_STRVAL_PP(tmp), Z_STRLEN_PP(tmp), &quotedstr, &quotedstrlen TSRMLS_DC);
-			refcount = (*tmp)->refcount;
-			zval_dtor(*tmp);
-			ZVAL_STRINGL(*tmp, quotedstr, quotedstrlen, 0);
-			(*tmp)->refcount = refcount;
+			if(stmt->dbh->methods->quoter(stmt->dbh, Z_STRVAL_PP(tmp), Z_STRLEN_PP(tmp), 
+			   &quotedstr, &quotedstrlen TSRMLS_DC)) {
+				int refcount = (*tmp)->refcount;
+				zval_dtor(*tmp);
+				ZVAL_STRINGL(*tmp, quotedstr, quotedstrlen, 0);
+				(*tmp)->refcount = refcount;
+			}
 			param.parameter = *tmp;
 
 			if (!really_register_bound_param(&param, stmt, 1 TSRMLS_CC)) {

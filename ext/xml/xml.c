@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.100 2001/12/14 09:42:39 thies Exp $ */
+/* $Id: xml.c,v 1.101 2001/12/17 21:01:06 hholzgra Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -1049,7 +1049,7 @@ PHP_FUNCTION(xml_parser_create)
 }
 /* }}} */
 
-/* {{{ proto int xml_parser_create_ns([string encoding][, string sep]) 
+/* {{{ proto int xml_parser_create_ns([string encoding [, string sep]]) 
    Create an XML parser */
 PHP_FUNCTION(xml_parser_create_ns)
 {

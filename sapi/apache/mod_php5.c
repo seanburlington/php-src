@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.7 2004/01/08 08:18:03 andi Exp $ */
+/* $Id: mod_php5.c,v 1.8 2004/01/28 17:49:49 rasmus Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -837,6 +837,9 @@ static int php_xbithack_handler(request_rec * r)
 	}
 	if(!AP(xbithack)) {
 		r->allowed |= (1 << METHODS) - 1;
+		zend_try {
+			zend_ini_deactivate(TSRMLS_C);
+		} zend_end_try();
 		return DECLINED;
 	}
 	return send_parsed_php(r);

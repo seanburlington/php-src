@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.600 2003/04/01 10:02:29 sas Exp $ */
+/* $Id: basic_functions.c,v 1.601 2003/04/02 16:51:39 cmv Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -312,6 +312,8 @@ function_entry basic_functions[] = {
 	PHP_FE(phpversion,														NULL)
 	PHP_FE(phpcredits,														NULL)
 	PHP_FE(php_logo_guid,													NULL)
+	PHP_FE(php_real_logo_guid,												NULL)
+	PHP_FE(php_egg_logo_guid,												NULL)
 	PHP_FE(zend_logo_guid,													NULL)
 	PHP_FE(php_sapi_name,													NULL)
 	PHP_FE(php_uname,														NULL)

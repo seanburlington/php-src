@@ -15,8 +15,15 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.5 2003/02/14 16:49:09 iliaa Exp $ 
+  $Id: php_mysqli.h,v 1.6 2003/02/14 21:27:13 iliaa Exp $ 
 */
+
+/* A little hack to prevent build break, when mysql is used together with
+ * c-client, which also defines LIST.
+ */
+#ifdef LIST
+#undef LIST
+#endif
 
 #include <mysql.h>
 

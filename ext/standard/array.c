@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.265 2004/07/11 19:20:05 andrey Exp $ */
+/* $Id: array.c,v 1.266 2004/07/11 21:15:04 andrey Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1746,7 +1746,7 @@ HashTable* php_splice(HashTable *in_hash, int offset, int length,
 	/* ..and the length */
 	if (length < 0) {
 		length = num_in-offset+length;
-	} else if (offset+length > num_in) {
+	} else if (((unsigned) offset + (unsigned) length) > num_in) {
 		length = num_in-offset;
 	}
 
@@ -2125,7 +2125,7 @@ PHP_FUNCTION(array_slice)
 	/* ..and the length */
 	if (length_val < 0) {
 		length_val = num_in-offset_val+length_val;
-	} else if (offset_val+length_val > num_in) {
+	} else if (((unsigned) offset_val + (unsigned) length_val) > num_in) {
 		length_val = num_in-offset_val;
 	}
 	

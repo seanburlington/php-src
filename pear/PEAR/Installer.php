@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.81.2.1 2002/11/14 23:26:27 ssb Exp $
+// $Id: Installer.php,v 1.81.2.2 2002/11/26 01:33:37 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -220,8 +220,8 @@ class PEAR_Installer extends PEAR_Common
             $this->log(3, "+ mkdir $dest_dir");
         }
         if (empty($atts['replacements'])) {
-            if (!copy($orig_file, $dest_file)) {
-                return $this->raiseError("failed to copy $orig_file to $dest_file",
+            if (!@copy($orig_file, $dest_file)) {
+                return $this->raiseError("failed to write $dest_file",
                                          PEAR_INSTALLER_FAILED);
             }
             $this->log(3, "+ cp $orig_file $dest_file");
@@ -684,7 +684,7 @@ class PEAR_Installer extends PEAR_Common
                 $res = $this->_installFile($file, $atts, $tmp_path);
                 $this->popExpect();
                 if (PEAR::isError($res)) {
-                    if (empty($options['force'])) {
+                    if (empty($options['ignore-errors'])) {
                         $this->rollbackFileTransaction();
                         return $this->raiseError($res);
                     } else {

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.11 1999/04/24 00:11:49 zeev Exp $ */
+/* $Id: php.h,v 1.12 1999/04/25 19:35:44 andi Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -66,7 +66,7 @@ extern unsigned char second_arg_allow_ref[];
 */
 
 
-#if MSVC5
+#if WIN32
 #include "config.w32.h"
 #include "win95nt.h"
 # if defined(COMPILE_DL)

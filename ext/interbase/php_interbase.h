@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.28.2.1 2002/12/31 16:34:46 sebastian Exp $ */
+/* $Id: php_interbase.h,v 1.28.2.2 2003/05/14 08:26:34 daniela Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -30,9 +30,16 @@ extern zend_module_entry ibase_module_entry;
 
 #ifdef PHP_WIN32
 #define PHP_IBASE_API __declspec(dllexport)
+#ifndef ISC_INT64_FORMAT
+ #define ISC_INT64_FORMAT "I64"
+#endif
 #else
 #define PHP_IBASE_API
+#ifndef ISC_INT64_FORMAT
+ #define ISC_INT64_FORMAT "ll"
 #endif
+#endif
+
 
 PHP_MINIT_FUNCTION(ibase);
 PHP_RINIT_FUNCTION(ibase);

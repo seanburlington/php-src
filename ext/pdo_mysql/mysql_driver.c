@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.39 2005/02/26 17:27:51 wez Exp $ */
+/* $Id: mysql_driver.c,v 1.40 2005/02/27 01:30:58 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -160,7 +160,7 @@ static long mysql_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRM
 	}
 }
 
-static char *pdo_mysql_last_insert_id(pdo_dbh_t *dbh, const char *name, unsigned int *len, TSRMLS_DC)
+static char *pdo_mysql_last_insert_id(pdo_dbh_t *dbh, const char *name, unsigned int *len TSRMLS_DC)
 {
 	pdo_mysql_db_handle *H = (pdo_mysql_db_handle *)dbh->driver_data;
 	char *id = NULL;

@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.34 2004/01/08 17:32:48 sniper Exp $ */
+/* $Id: php_sockets.h,v 1.34.2.1 2005/02/14 08:25:30 sniper Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -81,10 +81,6 @@ typedef struct {
 	int		type;
 	int		error;
 } php_socket;
-
-typedef struct {
-	zend_bool	use_system_read;
-} php_sockets_globals;
 
 /* Prototypes */
 #ifdef ilia_0 /* not needed, only causes a compiler warning */

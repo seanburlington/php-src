@@ -17,13 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_scandir.c,v 1.10 2004/09/29 16:11:47 hyanantha Exp $ */
-
-#ifdef PHP_WIN32
-#include "config.w32.h"
-#else
-#include "php_config.h"
-#endif
+/* $Id: php_scandir.c,v 1.11 2004/10/18 10:42:16 hyanantha Exp $ */
 
 #include "php_scandir.h"
 

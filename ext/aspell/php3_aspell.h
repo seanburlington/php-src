@@ -28,16 +28,16 @@
  */
 
 
-/* $Id: php3_aspell.h,v 1.1 1999/07/09 14:56:33 rasmus Exp $ */
+/* $Id: php3_aspell.h,v 1.2 1999/07/12 19:17:53 rasmus Exp $ */
 
 #ifndef _ASPELL_H
 #define _ASPELL_H
 #if HAVE_ASPELL
 extern php3_module_entry aspell_module_entry;
-#define php3_aspell_module_ptr &aspell_module_entry
+#define aspell_module_ptr &aspell_module_entry
 
 extern int php3_minit_aspell(INIT_FUNC_ARGS);
-extern void php3_info_aspell(void);
+extern void php3_info_aspell(ZEND_MODULE_INFO_FUNC_ARGS);
 extern void php3_aspell_close();
 void php3_aspell_new(INTERNAL_FUNCTION_PARAMETERS);
 void php3_aspell_check(INTERNAL_FUNCTION_PARAMETERS);
@@ -45,6 +45,9 @@ void php3_aspell_check_raw(INTERNAL_FUNCTION_PARAMETERS);
 void php3_aspell_suggest(INTERNAL_FUNCTION_PARAMETERS);
 
 #else
-#define php3_aspell_module_ptr NULL
+#define aspell_module_ptr NULL
 #endif
+
+#define phpext_aspell_ptr aspell_module_ptr
+
 #endif /* _ASPELL_H */

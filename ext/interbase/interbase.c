@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.85 2002/05/12 12:18:56 daniela Exp $ */
+/* $Id: interbase.c,v 1.86 2002/06/06 19:47:28 daniela Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -105,10 +105,11 @@ function_entry ibase_functions[] = {
 	PHP_FE(ibase_blob_import, NULL)
 	PHP_FE(ibase_errmsg, NULL)
 
+#ifdef SQL_DIALECT_V6
 	PHP_FE(ibase_add_user, NULL)
 	PHP_FE(ibase_modify_user, NULL)
 	PHP_FE(ibase_delete_user, NULL)
-
+#endif
 	{NULL, NULL, NULL}
 };
 
@@ -608,7 +609,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.85 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.86 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -2872,7 +2873,7 @@ extern int le_fp, le_pp;
 extern int wsa_fp;
 */
 /*to handle reading and writing to windows sockets*/
-
+ 
 /* {{{ proto string ibase_blob_import([link_identifier, ] int file_id)
    Create blob, copy file in it, and close it */
 
@@ -2947,7 +2948,7 @@ PHP_FUNCTION(ibase_blob_import)
 	RETVAL_STRINGL((char *)&ib_blob, sizeof(ibase_blob_handle), 1);
 }
 /* }}} */
-
+#ifdef SQL_DIALECT_V6
 /* {{{ _php_ibase_user() */
 static void _php_ibase_user(INTERNAL_FUNCTION_PARAMETERS, int operation)
 {
@@ -3102,31 +3103,33 @@ static void _php_ibase_user(INTERNAL_FUNCTION_PARAMETERS, int operation)
 	
 	RETURN_TRUE;
 }
-
+/* }}} */
 
 /* {{{ proto int ibase_add_user(string server, string dba_user_name, string dba_password, string user_name, string password [, string first_name] [, string middle_name] [, string last_name])
-   Add an user to security database */
+   Add an user to security database (only for IB6 or later) */
 PHP_FUNCTION(ibase_add_user)
 {
 	_php_ibase_user(INTERNAL_FUNCTION_PARAM_PASSTHRU, isc_action_svc_add_user);
 }
 /* }}} */
 
-
 /* {{{ proto int ibase_modify_user(string server, string dba_user_name, string dba_password, string user_name, string password [, string first_name] [, string middle_name] [, string last_name])
-   Modify an user in security database */
+   Modify an user in security database (only for IB6 or later) */
 PHP_FUNCTION(ibase_modify_user)
 {
 	_php_ibase_user(INTERNAL_FUNCTION_PARAM_PASSTHRU, isc_action_svc_modify_user);
 }
-
+/* }}} */
 
 /* {{{ proto int ibase_delete_user(string server, string dba_user_name, string dba_password, string username)
-   Delete an user from security database */
+   Delete an user from security database (only for IB6 or later) */
 PHP_FUNCTION(ibase_delete_user)
 {
 	_php_ibase_user(INTERNAL_FUNCTION_PARAM_PASSTHRU, isc_action_svc_delete_user);
 }
+/* }}} */
+  
+#endif /* SQL_DIALECT_V6 */
 
 #endif /* HAVE_IBASE */
 

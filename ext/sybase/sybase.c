@@ -31,7 +31,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sybase.c,v 1.5 1999/05/21 10:06:19 sas Exp $ */
+/* $Id: sybase.c,v 1.6 1999/07/01 15:42:28 sas Exp $ */
 
 
 #ifndef MSVC5
@@ -484,11 +484,9 @@ static void php3_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 static int php3_sybase_get_default_link(INTERNAL_FUNCTION_PARAMETERS)
 {
 	if (php3_sybase_module.default_link==-1) { /* no link opened yet, implicitly open one */
-		HashTable dummy;
+		int ht;
 
-		_php3_hash_init(&dummy,0,NULL,NULL,0);
-		php3_sybase_do_connect(&dummy,return_value,list,plist,0);
-		_php3_hash_destroy(&dummy);
+		php3_sybase_do_connect(INTERNAL_FUNCTION_PARAM_PASSTHRU,0);
 	}
 	return php3_sybase_module.default_link;
 }

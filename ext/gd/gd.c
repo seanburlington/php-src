@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.107 2001/01/24 09:24:26 derick Exp $ */
+/* $Id: gd.c,v 1.108 2001/01/24 09:42:17 eschmid Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -2659,8 +2659,8 @@ PHP_FUNCTION(image2wbmp)
 }
 
 
-/* {{{ proto void jpeg2wbmp (string f_org, string f_dest, d_height, d_width)
-   Convert Jpeg Image to Wbmp image */
+/* {{{ proto void jpeg2wbmp (string f_org, string f_dest, int d_height, int d_width)
+   Convert Jpeg image to Wbmp image */
 PHP_FUNCTION(jpeg2wbmp)
 {
 #ifdef HAVE_GD_JPG
@@ -2672,8 +2672,8 @@ PHP_FUNCTION(jpeg2wbmp)
 }
 /* }}} */
 
-/* {{{ proto void png2wbmp (string f_org, string f_dest, d_height, d_width)
-   Convert Png Image to Wbmp image */
+/* {{{ proto void png2wbmp (string f_org, string f_dest, int d_height, int d_width)
+   Convert Png image to Wbmp image */
 PHP_FUNCTION(png2wbmp)
 {
 #ifdef HAVE_GD_PNG

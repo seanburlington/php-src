@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.52 2001/06/12 21:06:01 dbeu Exp $ */
+/* $Id: sockets.c,v 1.53 2001/06/24 21:16:21 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -164,8 +164,8 @@ zend_module_entry sockets_module_entry = {
 ZEND_GET_MODULE(sockets)
 #endif
 
-/* this should be mutex'ed */
-volatile int inet_ntoa_lock = 0;
+/* inet_ntop should be used instead of inet_ntoa */
+int inet_ntoa_lock = 0;
 
 static void destroy_fd_sets(zend_rsrc_list_entry *rsrc)
 {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.82 2002/04/04 02:15:47 daniela Exp $ */
+/* $Id: interbase.c,v 1.83 2002/05/09 21:41:20 daniela Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -478,19 +478,23 @@ static void _php_ibase_free_trans(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	ibase_tr_link *ib_trans = (ibase_tr_link *)rsrc->ptr;
 	ibase_db_link *ib_link;
+	int type;
+	void *ptr;
 
-	ib_link = (ibase_db_link *) zend_fetch_resource(NULL TSRMLS_CC, ib_trans->link_rsrc, "InterBase link", NULL, 2, le_link, le_plink);
+	ptr = zend_list_find(ib_trans->link_rsrc, &type);	 /* check if the link is still there */
+	if (ptr && (type==le_link || type==le_plink)) {
+		ib_link = (ibase_db_link *) zend_fetch_resource(NULL TSRMLS_CC, ib_trans->link_rsrc, "InterBase link", NULL, 2, le_link, le_plink);
 	
-	if (ib_link) {
-		if (ib_link->trans[ib_trans->trans_num] != NULL) {
-			IBDEBUG("Rolling back unhandled transaction...");
-			if (isc_rollback_transaction(IB_STATUS, &ib_link->trans[ib_trans->trans_num])) {
-				_php_ibase_error();
+		if (ib_link) {
+			if (ib_link->trans[ib_trans->trans_num] != NULL) {
+				IBDEBUG("Rolling back unhandled transaction...");
+				if (isc_rollback_transaction(IB_STATUS, &ib_link->trans[ib_trans->trans_num])) {
+					_php_ibase_error();
+				}
+				ib_link->trans[ib_trans->trans_num] = NULL;
 			}
-			ib_link->trans[ib_trans->trans_num] = NULL;
 		}
-	}
-	
+	}	
 	efree(ib_trans);
 }
 /* }}} */
@@ -604,7 +608,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.82 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.83 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.41 1999/09/21 17:06:30 andrey Exp $ */
+/* $Id: string.c,v 1.42 1999/09/21 17:50:51 rasmus Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -1789,7 +1789,7 @@ PHP_FUNCTION(strip_tags)
 	}
 	convert_to_string(str);
 	buf = estrdup(str->value.str.val);
-	_php3_strip_tags(buf, str->value.str.len, 0, allow->value.str.val);
+	_php3_strip_tags(buf, str->value.str.len, 0, allow?allow->value.str.val:NULL);
 	RETURN_STRING(buf, 0);
 }
 /* }}} */

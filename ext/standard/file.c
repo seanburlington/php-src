@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.32 1999/09/20 20:05:26 eschmid Exp $ */
+/* $Id: file.c,v 1.33 1999/09/21 17:50:50 rasmus Exp $ */
 
 /* Synced with php3 revision 1.218 1999-06-16 [ssb] */
 
@@ -973,7 +973,8 @@ PHP_FUNCTION(fgetss)
 		RETURN_FALSE;
 	}
 
-	_php3_strip_tags(buf, len, fgetss_state, allow->value.str.val);
+	/* strlen() can be used here since we are doing it on the return of an fgets() anyway */
+	_php3_strip_tags(buf, strlen(buf), fgetss_state, allow?allow->value.str.val:NULL);
 	RETURN_STRING(buf, 0);
 }
 /* }}} */

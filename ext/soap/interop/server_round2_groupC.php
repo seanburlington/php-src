@@ -16,7 +16,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: server_round2_groupC.php,v 1.6 2004/02/05 20:26:03 dmitry Exp $
+// $Id: server_round2_groupC.php,v 1.7 2004/02/13 10:29:55 dmitry Exp $
 //
 
 class SOAP_Interop_GroupC {
@@ -24,15 +24,11 @@ class SOAP_Interop_GroupC {
 
     function echoMeStringRequest($string)
     {
-//        return $string;
-//        return new SoapVar($string, XSD_STRING, "string", XSD_NAMESPACE, "echoMeStringResponse", $this->method_namespace);
         return new SoapHeader($this->method_namespace, "echoMeStringResponse", $string);
     }
 
     function echoMeStructRequest($struct)
     {
-//        return $struct;
-//        return new SoapVar($struct, SOAP_ENC_OBJECT, "SOAPStruct", "http://soapinterop.org/", "echoMeStructResponse",$this->method_namespace);
         return new SoapHeader($this->method_namespace, "echoMeStructResponse", $struct);
     }
 

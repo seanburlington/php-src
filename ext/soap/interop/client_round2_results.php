@@ -19,7 +19,7 @@
 // | Authors: Shane Caraveo <Shane@Caraveo.com>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: client_round2_results.php,v 1.3 2004/01/05 16:44:00 dmitry Exp $
+// $Id: client_round2_results.php,v 1.4 2004/02/13 10:29:55 dmitry Exp $
 //
 require_once 'client_round2_interop.php';
 ?>
@@ -41,11 +41,11 @@ TD.WSDLPARSER { background-color: Yellow; }
 TD.HTTP { background-color: Yellow; }
 TD.SMTP { background-color: Yellow; }
 </style>
-	<title>PEAR-PHP SOAP Interop Tests</title>
+  <title>PHP SOAP Client Interop Test Results</title>
 </head>
 
 <body bgcolor="White" text="Black">
-<h2 align="center">SOAP Client Interop Test Results: Round2</h2>
+<h2 align="center">PHP SOAP Client Interop Test Results: Round2</h2>
 
 <a href="index.php">Back to Interop Index</a><br>
 <p>&nbsp;</p>

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: domxml.c,v 1.34 2000/04/05 22:30:17 cmv Exp $ */
+/* $Id: domxml.c,v 1.35 2000/04/10 20:21:01 zeev Exp $ */
 
 
 #include "php.h"
@@ -168,7 +168,7 @@ pval domxmltestnode_class_get_property(zend_property_reference *property_referen
 
 	printf("Reading a property from a OverloadedTestClass object:\n");
 
-	for (element=property_reference->elements_list.head; element; element=element->next) {
+	for (element=property_reference->elements_list->head; element; element=element->next) {
 		overloaded_property = (zend_overloaded_element *) element->data;
 		switch (overloaded_property->type) {
 			case OE_IS_ARRAY:
@@ -206,7 +206,7 @@ int domxmltestnode_class_set_property(zend_property_reference *property_referenc
 	zend_print_variable(value);
 	printf("'\n");
 
-	for (element=property_reference->elements_list.head; element; element=element->next) {
+	for (element=property_reference->elements_list->head; element; element=element->next) {
 		overloaded_property = (zend_overloaded_element *) element->data;
 		switch (overloaded_property->type) {
 			case OE_IS_ARRAY:
@@ -239,7 +239,7 @@ void domxmltestnode_class_call_function(INTERNAL_FUNCTION_PARAMETERS, zend_prope
 
 	printf("Invoking a method on OverloadedTestClass object:\n");
 
-	for (element=property_reference->elements_list.head; element; element=element->next) {
+	for (element=property_reference->elements_list->head; element; element=element->next) {
 		overloaded_property = (zend_overloaded_element *) element->data;
 		switch (overloaded_property->type) {
 			case OE_IS_ARRAY:

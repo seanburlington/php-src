@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.57 2002/05/11 17:00:49 sterling Exp $ */
+/* $Id: snmp.c,v 1.58 2002/05/11 17:41:16 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -288,7 +288,7 @@ static void php_snmp(INTERNAL_FUNCTION_PARAMETERS, int st)
 		if (st == 1) {
 			pdu = snmp_pdu_create(SNMP_MSG_GET);
 			name_length = MAX_NAME_LEN;
-			if (!read_objid(objid, name, &name_length)1) {
+			if (!read_objid(objid, name, &name_length)) {
 				php_error(E_WARNING,"Invalid object identifier: %s\n", objid);
 				snmp_close(ss);
 				RETURN_FALSE;

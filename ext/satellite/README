@@ -1,4 +1,4 @@
-$Id: README,v 1.5 2001/08/09 21:42:53 eriksson Exp $
+$Id: README,v 1.6 2001/09/27 20:07:14 jeroen Exp $
 
 About Satellite
 ---------------
@@ -80,7 +80,7 @@ How to install ORBit from CVS
 
 (2) Set the environment variable CERTIFIED_GNOMIE to whatever you like.
 
-(3) Run ./autogen.sh, gmake och gmake install
+(3) Run ./autogen.sh, gmake and gmake install
 
 
 How to install ORBit from snapshot

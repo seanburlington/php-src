@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.15 2002/11/15 11:49:57 helly Exp $
+dnl $Id: config.m4,v 1.16 2003/08/15 18:42:42 sniper Exp $
 dnl 
 
 # Checks for libraries.
@@ -26,7 +26,7 @@ AC_DEFUN(AC_PREFERRED_DB_LIB,[
 
 
 PHP_ARG_WITH(db, for xDBM support,
-[  --with-db               Include old xDBM support (deprecated use --with-dba)])
+[  --with-db               Include old xDBM support (deprecated, use --enable-dba instead)])
 
 if test "$PHP_DB" != "no"; then
 

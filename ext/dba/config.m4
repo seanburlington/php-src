@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.53 2003/06/14 14:22:13 sniper Exp $
+dnl $Id: config.m4,v 1.54 2003/08/15 18:47:23 sniper Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -258,7 +258,7 @@ AC_ARG_WITH(db3,
     done
     PHP_DBA_DB_CHECK(3, db-3.3 db-3.2 db-3.1 db-3.0 db-3 db3 db, [(void)db_create((DB**)0, (DB_ENV*)0, 0)])
   fi
-      ])
+])
 AC_DBA_STD_RESULT(db3,Berkeley DB3)
 
 AC_ARG_WITH(db2,

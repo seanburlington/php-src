@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.31 2005/02/21 09:50:48 hyanantha Exp $ */
+/* $Id: proc_open.c,v 1.32 2005/03/07 16:17:12 iliaa Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -413,6 +413,8 @@ PHP_FUNCTION(proc_get_status)
 			stopped = 1;
 			stopsig = WSTOPSIG(wstatus);
 		}
+	} else {
+		running = 0;
 	}
 #endif
 

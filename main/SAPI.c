@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.148 2002/09/04 20:27:35 sesser Exp $ */
+/* $Id: SAPI.c,v 1.149 2002/09/07 17:48:51 hholzgra Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -311,6 +311,7 @@ SAPI_API void sapi_activate(TSRMLS_D)
 				|| (PG(allow_webdav_methods) 
 					&& (!strcmp(SG(request_info).request_method, "PROPFIND")
 					|| !strcmp(SG(request_info).request_method, "PROPPATCH")				
+					|| !strcmp(SG(request_info).request_method, "MKCOL")
 					|| !strcmp(SG(request_info).request_method, "PUT")
 					|| !strcmp(SG(request_info).request_method, "MOVE")
 					|| !strcmp(SG(request_info).request_method, "COPY")

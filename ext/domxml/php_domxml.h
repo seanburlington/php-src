@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.62 2002/06/25 09:19:20 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.63 2002/07/01 14:48:38 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -163,7 +163,9 @@ PHP_FUNCTION(domxml_elem_get_attribute);
 PHP_FUNCTION(domxml_elem_set_attribute);
 PHP_FUNCTION(domxml_elem_remove_attribute);
 PHP_FUNCTION(domxml_elem_get_attribute_node);
+/* since this function is not really implemented, outcomment it for the time beeing
 PHP_FUNCTION(domxml_elem_set_attribute_node);
+*/
 PHP_FUNCTION(domxml_elem_get_elements_by_tagname);
 PHP_FUNCTION(domxml_elem_has_attribute);
 /* Class CData methods */

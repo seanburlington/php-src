@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.2 1999/09/04 13:18:55 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.3 1999/09/06 05:21:45 zeev Exp $ */
 
 
 /* TODO:
@@ -84,6 +84,9 @@ static int le_result,le_link,le_plink;
 #define MYSQL_ASSOC		1<<0
 #define MYSQL_NUM		1<<1
 #define MYSQL_BOTH		(MYSQL_ASSOC|MYSQL_NUM)
+
+#define PHP_MYSQL_VALID_RESULT(mysql)		\
+	(mysql_num_fields(mysql)>0)
 
 function_entry mysql_functions[] = {
 	PHP_FE(mysql_connect,								NULL)
@@ -822,7 +825,7 @@ PHP_FUNCTION(mysql_query)
 	}
 #endif
 	if ((mysql_result=mysql_store_result(mysql))==NULL) {
-		if (mysql_num_fields(mysql_result)>0) { /* query should have returned rows */
+		if (PHP_MYSQL_VALID_RESULT(mysql)) { /* query should have returned rows */
 			php_error(E_WARNING, "MySQL:  Unable to save result set");
 			RETURN_FALSE;
 		} else {
@@ -883,7 +886,7 @@ PHP_FUNCTION(mysql_db_query)
 	}
 #endif
 	if ((mysql_result=mysql_store_result(mysql))==NULL) {
-		if (mysql_num_fields(mysql_result)>0) { /* query should have returned rows */
+		if (PHP_MYSQL_VALID_RESULT(mysql)) { /* query should have returned rows */
 			php_error(E_WARNING, "MySQL:  Unable to save result set");
 			RETURN_FALSE;
 		} else {

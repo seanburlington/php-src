@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.71 2000/12/18 19:23:50 zak Exp $ */
+/* $Id: basic_functions.h,v 1.72 2001/01/08 01:40:33 hirokawa Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -158,6 +158,11 @@ typedef struct {
 	HashTable sm_protected_env_vars;
 	char *sm_allowed_env_vars;
 
+#ifdef HAVE_ICONV
+	char *iconv_internal_encoding;
+	char *iconv_output_encoding;
+#endif
+ 
 	/* pageinfo.c */
 	long page_uid;
 	long page_inode;
@@ -221,5 +226,8 @@ typedef struct {
  */
 #define SAFE_MODE_PROTECTED_ENV_VARS	"LD_LIBRARY_PATH"
 #define SAFE_MODE_ALLOWED_ENV_VARS		"PHP_"
+
+#define ICONV_OUTPUT_ENCODING "ISO-8859-1"
+#define ICONV_INTERNAL_ENCODING "ISO-8859-1" 
 
 #endif /* BASIC_FUNCTIONS_H */

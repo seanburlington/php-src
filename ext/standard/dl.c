@@ -18,13 +18,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.49 2000/11/05 15:03:41 zeev Exp $ */
+/* $Id: dl.c,v 1.50 2000/11/05 15:10:47 sas Exp $ */
 
 #include "php.h"
 #include "dl.h"
 #include "php_globals.h"
 #include "ext/standard/info.h"
 #include "SAPI.h"
+#include "build-defs.h"
 
 #ifdef HAVE_LIBDL
 #include <stdlib.h>

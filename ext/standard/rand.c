@@ -19,7 +19,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.22 2001/02/06 16:27:08 jimjag Exp $ */
+/* $Id: rand.c,v 1.23 2001/02/19 19:20:47 derick Exp $ */
 
 #include <stdlib.h>
 
@@ -241,7 +241,7 @@ PHP_FUNCTION(rand)
 			}
 			convert_to_long_ex(p_min);
 			convert_to_long_ex(p_max);
-			if ((*p_max)->value.lval-(*p_min)->value.lval <= 0) {
+			if ((*p_max)->value.lval-(*p_min)->value.lval < 0) {
 				php_error(E_WARNING,"rand():  Invalid range:  %ld..%ld", (*p_min)->value.lval, (*p_max)->value.lval);
 			}else if ((*p_max)->value.lval-(*p_min)->value.lval > RAND_MAX){
 				php3_error(E_WARNING,"rand():  Invalid range:  %ld..%ld", (*p_min)->value.lval, (*p_max)->value.lval);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.137 2001/05/11 13:34:49 derick Exp $ */
+/* $Id: info.c,v 1.138 2001/05/20 01:31:53 sniper Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -373,7 +373,7 @@ PHPAPI void php_info_print_table_header(int num_cols, ...)
 
 	va_start(row_elements, num_cols);
 
-	php_printf("<TR VALIGN=\"bottom\" bgcolor=\"" PHP_HEADER_COLOR "\">");
+	php_printf("<TR VALIGN=\"middle\" bgcolor=\"" PHP_HEADER_COLOR "\">");
 	for (i=0; i<num_cols; i++) {
 		row_element = va_arg(row_elements, char *);
 		if (!row_element || !*row_element) {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: attr.c,v 1.14 2004/05/16 10:30:16 rrichards Exp $ */
+/* $Id: attr.c,v 1.15 2004/05/31 12:50:28 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,7 +31,7 @@
 
 
 /*
-* class domattr extends domnode 
+* class DOMAttr extends DOMNode 
 *
 * URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-637646024
 * Since: 
@@ -43,7 +43,7 @@ zend_function_entry php_dom_attr_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto void DomAttr::__construct(string name, [string value]); */
+/* {{{ proto void DOMAttr::__construct(string name, [string value]); */
 PHP_METHOD(domattr, __construct)
 {
 
@@ -85,7 +85,7 @@ PHP_METHOD(domattr, __construct)
 	}
 }
 
-/* }}} end DomAttr::__construct */
+/* }}} end DOMAttr::__construct */
 
 
 /* {{{ proto name	string	
@@ -200,7 +200,7 @@ int dom_attr_value_write(dom_object *obj, zval *newval TSRMLS_DC)
 
 
 
-/* {{{ proto ownerElement	element	
+/* {{{ proto ownerElement	DOMElement	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#Attr-ownerElement
 Since: DOM Level 2
@@ -236,7 +236,7 @@ int dom_attr_owner_element_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto schemaTypeInfo	typeinfo	
+/* {{{ proto schemaTypeInfo	DOMTypeInfo	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#Attr-schemaTypeInfo
 Since: DOM Level 3

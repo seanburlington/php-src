@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: namelist.c,v 1.4 2004/01/08 08:15:16 andi Exp $ */
+/* $Id: namelist.c,v 1.5 2004/05/31 12:50:28 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,7 +29,7 @@
 
 
 /*
-* class domnamelist 
+* class DOMNameList 
 *
 * URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#NameList
 * Since: DOM Level 3
@@ -41,9 +41,7 @@ zend_function_entry php_dom_namelist_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ attribute protos, not implemented yet */
-
-/* {{{ proto length	unsigned long	
+/* {{{ proto length	int	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#NameList-length
 Since: 
@@ -60,7 +58,7 @@ int dom_namelist_length_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto domstring dom_namelist_get_name(unsigned long index);
+/* {{{ proto string dom_namelist_get_name(int index);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#NameList-getName
 Since: 
 */
@@ -71,7 +69,7 @@ PHP_FUNCTION(dom_namelist_get_name)
 /* }}} end dom_namelist_get_name */
 
 
-/* {{{ proto domstring dom_namelist_get_namespace_uri(unsigned long index);
+/* {{{ proto string dom_namelist_get_namespace_uri(int index);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#NameList-getNamespaceURI
 Since: 
 */

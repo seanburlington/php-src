@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.21 2004/05/16 10:30:16 rrichards Exp $ */
+/* $Id: xpath.c,v 1.22 2004/05/31 12:50:28 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,7 +29,7 @@
 
 
 /*
-* class domxpath 
+* class DOMXPath 
 */
 
 #if defined(LIBXML_XPATH_ENABLED)
@@ -41,7 +41,7 @@ zend_function_entry php_dom_xpath_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto void DomXPath::__construct(domDocument doc); */
+/* {{{ proto void DOMXPath::__construct(DOMDocument doc); */
 PHP_METHOD(domxpath, __construct)
 {
 	zval *id, *doc;
@@ -76,9 +76,9 @@ PHP_METHOD(domxpath, __construct)
 		php_libxml_increment_doc_ref((php_libxml_node_object *)intern, docp TSRMLS_CC);
 	}
 }
-/* }}} end DomXPath::__construct */
+/* }}} end DOMXPath::__construct */
 
-/* {{{ proto domdocument document	document */
+/* {{{ proto document DOMDocument*/
 int dom_xpath_document_read(dom_object *obj, zval **retval TSRMLS_DC)
 {
 	xmlDoc *docp = NULL;
@@ -136,7 +136,7 @@ static void dom_xpath_iter(zval *baseobj, dom_object *intern)
 
 }
 
-/* {{{ proto domnodelist dom_xpath_query(string expr [,domNode context]); */
+/* {{{ proto DOMNodeList dom_xpath_query(string expr [,DOMNode context]); */
 PHP_FUNCTION(dom_xpath_query)
 {
 	zval *id, *retval, *context = NULL;

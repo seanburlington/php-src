@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domexception.c,v 1.8 2004/01/08 08:15:16 andi Exp $ */
+/* $Id: domexception.c,v 1.9 2004/05/31 12:50:28 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,7 +29,7 @@
 
 
 /*
-* class domexception 
+* class DOMException 
 *
 * URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-17189187
 * Since: 

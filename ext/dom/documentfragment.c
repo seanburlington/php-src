@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: documentfragment.c,v 1.10 2004/05/16 10:30:16 rrichards Exp $ */
+/* $Id: documentfragment.c,v 1.11 2004/05/31 12:50:28 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,7 +29,7 @@
 
 
 /*
-* class domdocumentfragment extends domnode 
+* class DOMDocumentFragment extends DOMNode 
 *
 * URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-B63ED1A3
 * Since: 
@@ -40,7 +40,7 @@ zend_function_entry php_dom_documentfragment_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto void DomDocumentFragment::__construct(); */
+/* {{{ proto void DOMDocumentFragment::__construct(); */
 PHP_METHOD(domdocumentfragment, __construct)
 {
 
@@ -72,5 +72,5 @@ PHP_METHOD(domdocumentfragment, __construct)
 		php_libxml_increment_node_ptr((php_libxml_node_object *)intern, nodep, (void *)intern TSRMLS_CC);
 	}
 }
-/* }}} end DomDocumentFragment::__construct */
+/* }}} end DOMDocumentFragment::__construct */
 #endif

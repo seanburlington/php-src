@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.85 2000/08/31 19:49:36 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.86 2000/08/31 22:23:53 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1077,7 +1077,8 @@ PHPAPI char *expand_filepath(const char *filepath, char *real_path)
 		memcpy(real_path,new_state.cwd,copy_len);
 		real_path[copy_len]='\0';
 	} else {
-		real_path = new_state.cwd;
+		real_path = estrndup(new_state.cwd, new_state.cwd_length);
+		free(new_state.cwd);
 	}
 
 	return real_path;

@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.53 2000/07/25 18:50:50 stas Exp $ */
+/* $Id: configuration-parser.y,v 1.54 2000/08/31 22:23:53 andi Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -223,13 +223,14 @@ int php_init_config(void)
 		if (opened_path) {
 			zval tmp;
 			
-			tmp.value.str.val = opened_path;
+			tmp.value.str.val = strdup(opened_path);
 			tmp.value.str.len = strlen(opened_path);
 			tmp.type = IS_STRING;
 			zend_hash_update(&configuration_hash,"cfg_file_path",sizeof("cfg_file_path"),(void *) &tmp,sizeof(zval),NULL);
 #if DEBUG_CFG_PARSER
 			php_printf("INI file opened at '%s'\n",opened_path);
 #endif
+			efree(opened_path);
 		}
 			
 		init_cfg_scanner();

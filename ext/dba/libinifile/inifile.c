@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: inifile.c,v 1.2 2003/02/22 17:37:27 helly Exp $ */
+/* $Id: inifile.c,v 1.3 2003/02/22 20:49:07 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -44,7 +44,7 @@
 /* {{{ inifile_version */
 char *inifile_version() 
 {
-	return "1.0, $Revision: 1.2 $";
+	return "1.0, $Revision: 1.3 $";
 }
 /* }}} */ 
 
@@ -235,8 +235,8 @@ static int inifile_key_cmp(const key_type *k1, const key_type *k2 TSRMLS_DC)
 {
 	assert(k1->group && k1->name && k2->group && k2->name);
 	
-	if (!strcmp(k1->group, k2->group)) {
-		if (!strcmp(k1->name, k2->name)) {
+	if (!strcasecmp(k1->group, k2->group)) {
+		if (!strcasecmp(k1->name, k2->name)) {
 			return 0;
 		} else {
 			return 1;

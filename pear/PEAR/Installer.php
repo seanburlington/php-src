@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.38 2002/02/28 08:27:16 sebastian Exp $
+// $Id: Installer.php,v 1.39 2002/03/21 22:29:03 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -347,6 +347,10 @@ class PEAR_Installer extends PEAR_Common
 
         // Register that the package is installed -----------------------
         if (empty($options['upgrade'])) {
+            // if 'force' is used, replace the info in registry
+            if (!empty($options['force']) && $this->registry->packageExists($pkgname)) {
+                $this->registry->deletePackage($pkgname);
+            }
             $ret = $this->registry->addPackage($pkgname, $this->pkginfo);
         } else {
             $ret = $this->registry->updatePackage($pkgname, $this->pkginfo, false);

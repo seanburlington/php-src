@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.15 2002/03/11 15:13:19 ssb Exp $
+// $Id: Registry.php,v 1.16 2002/03/21 22:29:03 cox Exp $
 
 require_once "System.php";
 require_once "PEAR.php";
@@ -197,6 +197,10 @@ class PEAR_Registry extends PEAR
         if ($mode != LOCK_UN && is_resource($this->lock_fp)) {
             // XXX does not check type of lock (LOCK_SH/LOCK_EX)
             return true;
+        }
+        $php_dir = dirname($this->lockfile);
+        if (!@is_dir($php_dir) && !System::mkDir("-p $php_dir")) {
+            return false;
         }
         $this->lock_fp = @fopen($this->lockfile, "w");
         if (!is_resource($this->lock_fp)) {

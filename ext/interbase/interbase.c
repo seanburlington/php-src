@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.91.2.26 2003/12/08 09:46:07 abies Exp $ */
+/* $Id: interbase.c,v 1.91.2.27 2004/01/07 09:44:21 abies Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -624,7 +624,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.26 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.27 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1195,12 +1195,6 @@ static int _php_ibase_bind(XSQLDA *sqlda, zval **b_vars, BIND_BUF *buf, ibase_qu
 		var->sqlind = &buf[i].sqlind;
 		
 		if (Z_TYPE_P(b_var) == IS_NULL) {
-
-			if ((var->sqltype & 1) != 1) {
-				_php_ibase_module_error("Parameter %d must have a value" TSRMLS_CC, i+1);
-				rv = FAILURE;
-			}
-
 			buf[i].sqlind = -1;
 		} else {
 			buf[i].sqlind = 0;

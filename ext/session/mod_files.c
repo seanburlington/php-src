@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.72.2.2 2002/09/04 13:49:58 kalowsky Exp $ */
+/* $Id: mod_files.c,v 1.72.2.3 2002/09/04 13:50:38 kalowsky Exp $ */
 
 #include "php.h"
 
@@ -282,12 +282,8 @@ PS_WRITE_FUNC(files)
 	if (vallen < (int)data->st_size)
 		ftruncate(data->fd, 0);
 
-#ifdef HAVE_PWRITE
-	n = pwrite(data->fd, val, vallen, 0);
-#else
 	lseek(data->fd, 0, SEEK_SET);
 	n = write(data->fd, val, vallen);
-#endif
 
 	if (n != vallen) {
 		php_error(E_WARNING, "write failed: %s (%d)", strerror(errno), errno);

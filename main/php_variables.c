@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.40 2002/08/02 06:53:48 hirokawa Exp $ */
+/* $Id: php_variables.c,v 1.41 2002/08/08 03:08:54 yohgaki Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -39,7 +39,8 @@ PHPAPI void php_register_variable(char *var, char *strval, zval *track_vars_arra
 PHPAPI void php_register_variable_safe(char *var, char *strval, int str_len, zval *track_vars_array TSRMLS_DC)
 {
 	zval new_entry;
-
+	assert(strval != NULL);
+	
 	/* Prepare value */
 	Z_STRLEN(new_entry) = str_len;
 	if (PG(magic_quotes_gpc)) {
@@ -64,6 +65,8 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 	HashTable *symtable1=NULL;
 	HashTable *symtable2=NULL;
 
+	assert(var != NULL);
+	
 	if (PG(register_globals)) {
 		symtable1 = EG(active_symbol_table);
 	}

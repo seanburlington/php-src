@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.c,v 1.30 2003/02/18 20:31:19 derick Exp $ */
+/* $Id: md5.c,v 1.31 2003/02/20 06:56:37 derick Exp $ */
 
 /* 
  * md5.c - Copyright 1997 Lachlan Roche 
@@ -49,7 +49,7 @@ PHP_NAMED_FUNCTION(php_if_md5)
 	zend_bool raw_output = 0;
 	char md5str[33];
 	PHP_MD5_CTX context;
-	unsigned char digest[17];
+	unsigned char digest[16];
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|b", &arg, &arg_len, &raw_output) == FAILURE) {
 		return;
@@ -60,7 +60,6 @@ PHP_NAMED_FUNCTION(php_if_md5)
 	PHP_MD5Update(&context, arg, arg_len);
 	PHP_MD5Final(digest, &context);
 	if (raw_output) {
-		digest[16] = '\0';
 		RETURN_STRINGL(digest, 16, 1);
 	} else {
 		make_digest(md5str, digest);

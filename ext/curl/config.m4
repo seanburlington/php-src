@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.25 2003/05/22 13:08:49 derick Exp $ 
+dnl $Id: config.m4,v 1.25.2.1 2005/02/09 16:23:31 rasmus Exp $ 
 dnl
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -32,10 +32,10 @@ if test "$PHP_CURL" != "no"; then
   CURL_CONFIG="curl-config"
   AC_MSG_CHECKING(for cURL 7.10.5 or greater)
 
-  if ${CURL_DIR}/bin/curl-config --libs print > /dev/null 2>&1; then
+  if ${CURL_DIR}/bin/curl-config --libs > /dev/null 2>&1; then
     CURL_CONFIG=${CURL_DIR}/bin/curl-config
   else
-    if ${CURL_DIR}/curl-config --libs print > /dev/null 2>&1; then
+    if ${CURL_DIR}/curl-config --libs > /dev/null 2>&1; then
        CURL_CONFIG=${CURL_DIR}/curl-config
     fi
   fi

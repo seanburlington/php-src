@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.95 2002/05/19 14:45:31 sander Exp $ */
+/* $Id: php_ini.c,v 1.96 2002/07/29 12:17:34 edink Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -312,7 +312,12 @@ int php_init_config()
 	}
 	/* Search php.ini file in search path */
 	if (!fh.handle.fp) {
-		fh.handle.fp = php_fopen_with_path("php.ini", "r", php_ini_search_path, &php_ini_opened_path TSRMLS_CC);
+		char *ini_fname=emalloc(10+strlen(sapi_module.name));
+		sprintf(ini_fname, "php-%s.ini", sapi_module.name);
+		if (!(fh.handle.fp = php_fopen_with_path(ini_fname, "r", php_ini_search_path, &php_ini_opened_path TSRMLS_CC))) {
+			fh.handle.fp = php_fopen_with_path("php.ini", "r", php_ini_search_path, &php_ini_opened_path TSRMLS_CC);
+		}
+		efree(ini_fname);
 		fh.filename = php_ini_opened_path;
 	}
 	if (free_ini_search_path) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.82 2001/02/01 05:04:58 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.83 2001/02/01 15:24:17 sas Exp $ */
 
 /*
 	TODO:
@@ -569,6 +569,7 @@ static int preg_do_repl_func(zval *function, char *subject, int *offsets, int co
 	int			 result_len;		/* Return value length */
 	int			 i;
 	CLS_FETCH();
+	ELS_FETCH();
 
 	MAKE_STD_ZVAL(subpats);
 	array_init(subpats);

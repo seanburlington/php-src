@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.155 2003/02/09 21:15:54 sas Exp $ */
+/* $Id: mod_php4.c,v 1.156 2003/02/11 02:23:29 sas Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -348,6 +348,7 @@ static char *php_apache_getenv(char *name, size_t name_len TSRMLS_DC)
  */
 static int sapi_apache_get_fd(int *nfd TSRMLS_DC)
 {
+#if PHP_APACHE_HAVE_CLIENT_FD
 	request_rec *r = SG(server_context);
 	int fd;
 
@@ -357,6 +358,7 @@ static int sapi_apache_get_fd(int *nfd TSRMLS_DC)
 		if (nfd) *nfd = fd;
 		return SUCCESS;
 	}
+#endif
 	return FAILURE;
 }
 /* }}} */

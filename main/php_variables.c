@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.81.2.3 2005/02/17 04:46:10 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.81.2.4 2005/04/03 11:55:44 tony2001 Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -676,7 +676,6 @@ int php_hash_environment(TSRMLS_D)
 		}
 
 		zend_hash_update(&EG(symbol_table), auto_global_records[i].name, auto_global_records[i].name_len, &PG(http_globals)[i], sizeof(zval *), NULL);
-		PG(http_globals)[i]->refcount++;
 		if (PG(register_long_arrays)) {
 			zend_hash_update(&EG(symbol_table), auto_global_records[i].long_name, auto_global_records[i].long_name_len, &PG(http_globals)[i], sizeof(zval *), NULL);
 			PG(http_globals)[i]->refcount++;

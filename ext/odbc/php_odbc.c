@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.53 2000/06/05 19:47:43 andi Exp $ */
+/* $Id: php_odbc.c,v 1.54 2000/06/07 18:10:21 zeev Exp $ */
 
 #ifdef COMPILE_DL_ODBC
 #include "dl/phpdl.h"
@@ -607,7 +607,7 @@ static int _close_pconn_with_id(list_entry *le, int *id)
 void odbc_column_lengths(INTERNAL_FUNCTION_PARAMETERS, int type)
 {
 	odbc_result *result;
-	SDWORD len;
+	SQLINTEGER len;
 	pval **pv_res, **pv_num;
 
 	if (zend_get_parameters_ex(2, &pv_res, &pv_num) == FAILURE) {
@@ -634,7 +634,8 @@ void odbc_column_lengths(INTERNAL_FUNCTION_PARAMETERS, int type)
 	}
 
 	SQLColAttributes(result->stmt, (UWORD)(*pv_num)->value.lval, 
-					(type?SQL_COLUMN_SCALE:SQL_COLUMN_PRECISION), NULL, 0, NULL, &len);
+					(SQLUSMALLINT) (type?SQL_COLUMN_SCALE:SQL_COLUMN_PRECISION),
+					NULL, 0, NULL, &len);
 
 	RETURN_LONG(len);
 }

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.3 2003/02/28 21:03:35 wez Exp $ */
+/* $Id: streamsfuncs.c,v 1.4 2003/03/01 01:27:50 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -260,6 +260,25 @@ PHP_FUNCTION(stream_socket_get_name)
 				TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
+}
+/* }}} */
+
+/* {{{ proto long stream_copy_to_stream(resource source, resource dest [, long maxlen ])
+   Reads up to maxlen bytes from source stream and writes them to dest stream. */
+PHP_FUNCTION(stream_copy_to_stream)
+{
+	php_stream *src, *dest;
+	zval *zsrc, *zdest;
+	long maxlen = PHP_STREAM_COPY_ALL;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rr|l", &zsrc, &zdest, &maxlen) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	php_stream_from_zval(src, &zsrc);
+	php_stream_from_zval(dest, &zdest);
+
+	RETURN_LONG(php_stream_copy_to_stream(src, dest, maxlen));
 }
 /* }}} */
 

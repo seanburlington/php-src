@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.10 2001/11/30 19:01:31 sniper Exp $
+dnl $Id: config.m4,v 1.10.2.1 2002/08/17 16:25:33 kalowsky Exp $
 dnl
 
 AC_MSG_CHECKING(for NSAPI support)
@@ -19,12 +19,16 @@ if test "$PHP_NSAPI" != "no"; then
   if test -d $PHP_NSAPI/include ; then
     NSAPI_INCLUDE=$PHP_NSAPI/include
     AC_MSG_RESULT(Netscape-Enterprise/3.x style)
-  elif test -d $PHP_NSAPI/plugins/include ; then
+  fi
+  if test -d $PHP_NSAPI/plugins/include ; then
     NSAPI_INCLUDE=$PHP_NSAPI/plugins/include
     AC_MSG_RESULT(iPlanet/4.x style)
-  else
+  fi
+
+  if test "$NSAPI_INCLUDE" = ""; then
     AC_MSG_ERROR(Please check you have nsapi.h in either DIR/include or DIR/plugins/include)
   fi
+
   PHP_ADD_INCLUDE($NSAPI_INCLUDE)
   PHP_BUILD_THREAD_SAFE
   AC_DEFINE(HAVE_NSAPI,1,[Whether you have a Netscape Server])

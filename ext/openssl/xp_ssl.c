@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.1 2003/02/27 17:43:36 wez Exp $ */
+/* $Id: xp_ssl.c,v 1.2 2003/02/27 23:50:54 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -372,11 +372,14 @@ static int php_openssl_sockop_set_option(php_stream *stream, int option, int val
 				case STREAM_XPORT_CRYPTO_OP_SETUP:
 					cparam->outputs.returncode = php_openssl_setup_crypto(stream, sslsock, cparam TSRMLS_CC);
 					return PHP_STREAM_OPTION_RETURN_OK;
+					break;
 				case STREAM_XPORT_CRYPTO_OP_ENABLE:
 					cparam->outputs.returncode = php_openssl_enable_crypto(stream, sslsock, cparam TSRMLS_CC);
 					return PHP_STREAM_OPTION_RETURN_OK;
+					break;
 				default:
 					/* fall through */
+					break;
 			}
 
 			break;
@@ -398,8 +401,10 @@ static int php_openssl_sockop_set_option(php_stream *stream, int option, int val
 						}
 					}
 					return PHP_STREAM_OPTION_RETURN_OK;
+					break;
 				default:
 					/* fall through */
+					break;
 			}
 	}
 

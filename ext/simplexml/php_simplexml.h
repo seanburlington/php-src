@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.11 2004/01/08 17:32:46 sniper Exp $ */
+/* $Id: php_simplexml.h,v 1.12 2004/01/09 06:12:29 sterling Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H
@@ -47,9 +47,9 @@ extern zend_module_entry simplexml_module_entry;
 #include <libxml/xmlschemas.h>
 
 PHP_MINIT_FUNCTION(simplexml);
-PHP_MSHUTDOWN_FUNCTION(simplexml);
+#if HAVE_SPL && !defined(COMPILE_DL_SPL)
 PHP_RINIT_FUNCTION(simplexml);
-PHP_RSHUTDOWN_FUNCTION(simplexml);
+#endif
 PHP_MINFO_FUNCTION(simplexml);
 
 typedef struct {
@@ -81,7 +81,6 @@ typedef struct {
 #endif
 
 #endif
-
 
 /*
  * Local variables:

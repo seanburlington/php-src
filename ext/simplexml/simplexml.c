@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.101 2004/01/08 22:40:08 sterling Exp $ */
+/* $Id: simplexml.c,v 1.102 2004/01/09 06:12:29 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1578,9 +1578,13 @@ zend_module_entry simplexml_module_entry = {
 	"simplexml",
 	simplexml_functions,
 	PHP_MINIT(simplexml),
-	PHP_MSHUTDOWN(simplexml),
-	PHP_RINIT(simplexml),	
-	PHP_RSHUTDOWN(simplexml),
+	NULL,
+#if HAVE_SPL && !defined(COMPILE_DL_SPL)
+	PHP_RINIT(simplexml),
+#else
+	NULL,
+#endif
+	NULL,
 	PHP_MINFO(simplexml),
 	"0.1",
 	STANDARD_MODULE_PROPERTIES
@@ -1631,32 +1635,16 @@ PHP_MINIT_FUNCTION(simplexml)
 }
 /* }}} */
 
-/* {{{ PHP_MSHUTDOWN_FUNCTION(simplexml)
- */
-PHP_MSHUTDOWN_FUNCTION(simplexml)
-{
-	return SUCCESS;
-}
-/* }}} */
-
+#if HAVE_SPL && !defined(COMPILE_DL_SPL)
 /* {{{ PHP_RINIT_FUNCTION(simplexml)
  */
 PHP_RINIT_FUNCTION(simplexml)
 {
-#if HAVE_SPL && !defined(COMPILE_DL_SPL)
 	zend_class_implements(sxe_class_entry TSRMLS_CC, 1, spl_ce_RecursiveIterator);
+	return SUCCESS;
+}
+/* }}} */
 #endif
-	return SUCCESS;
-}
-/* }}} */
-
-/* {{{ PHP_RSHUTDOWN_FUNCTION(simplexml)
- */
-PHP_RSHUTDOWN_FUNCTION(simplexml)
-{
-	return SUCCESS;
-}
-/* }}} */
 
 /* {{{ PHP_MINFO_FUNCTION(simplexml)
  */
@@ -1664,7 +1652,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.101 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.102 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

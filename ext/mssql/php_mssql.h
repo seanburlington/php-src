@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.20 2002/02/28 08:26:25 sebastian Exp $ */
+/* $Id: php_mssql.h,v 1.21 2002/05/09 20:37:45 fmk Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -119,6 +119,7 @@ ZEND_BEGIN_MODULE_GLOBALS(mssql)
 	long textsize, textlimit, batchsize;
 	long datetimeconvert;
 	HashTable *resource_list, *resource_plist;
+	long secure_connection;
 ZEND_END_MODULE_GLOBALS(mssql)
 
 #define MSSQL_ROWS_BLOCK 128

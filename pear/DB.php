@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.75 2001/10/14 01:23:07 mfischer Exp $
+// $Id: DB.php,v 1.76 2001/10/29 23:37:27 fmk Exp $
 //
 // Database independent query interface.
 //
@@ -686,6 +686,16 @@ class DB_result
     function numRows()
     {
         return $this->dbh->numRows($this->result);
+    }
+
+    /**
+     * Get the next result if a batch of queries was executed.
+     *
+     * @return bool true if a new result is available or false if not.
+     */
+    function nextResult()
+    {
+        return $this->dbh->nextResult($this->result);
     }
 
     /**

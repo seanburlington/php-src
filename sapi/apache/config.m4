@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.49 2002/03/29 19:25:55 markonen Exp $
+dnl $Id: config.m4,v 1.50 2002/03/30 03:17:25 markonen Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 1.x module support via DSO through APXS)
@@ -38,8 +38,24 @@ AC_ARG_WITH(apxs,
     -D*) CPPFLAGS="$CPPFLAGS $flag";;
     esac
   done
+  case $host_alias in
+  *aix*)
+    APXS_LIBEXECDIR=`$APXS -q LIBEXECDIR`
+    EXTRA_LDFLAGS="$EXTRA_LDFLAGS -Wl,-bI:$APXS_LIBEXECDIR/httpd.exp"
+    PHP_SELECT_SAPI(apache, shared, sapi_apache.c mod_php4.c php_apache.c)
+    ;;
+  *darwin*)
+    APXS_HTTPD=`$APXS -q SBINDIR`/`$APXS -q TARGET`
+    MH_BUNDLE_FLAGS="-dynamic -twolevel_namespace -bundle -bundle_loader $APXS_HTTPD"
+    PHP_SUBST(MH_BUNDLE_FLAGS)
+    SAPI_SHARED=libs/libphp4.so
+    PHP_SELECT_SAPI(apache, bundle, sapi_apache.c mod_php4.c php_apache.c)
+    ;;
+  *)
+    PHP_SELECT_SAPI(apache, shared, sapi_apache.c mod_php4.c php_apache.c)
+    ;;
+  esac
   PHP_ADD_INCLUDE($APXS_INCLUDEDIR)
-  PHP_SELECT_SAPI(apache, shared, sapi_apache.c mod_php4.c php_apache.c)
 
   # Test whether apxs support -S option
   $APXS -q -S CFLAGS="$APXS_CFLAGS" CFLAGS >/dev/null 2>&1
@@ -57,17 +73,6 @@ AC_ARG_WITH(apxs,
   AC_DEFINE(HAVE_AP_CONFIG_H,1,[ ])
   AC_DEFINE(HAVE_AP_COMPAT_H,1,[ ])
   AC_MSG_RESULT(yes)
-  case $host_alias in
-  *aix*)
-    APXS_LIBEXECDIR=`$APXS -q LIBEXECDIR`
-    EXTRA_LDFLAGS="$EXTRA_LDFLAGS -Wl,-bI:$APXS_LIBEXECDIR/httpd.exp"
-    ;;
-  *darwin*)
-    APXS_HTTPD=`$APXS -q SBINDIR`/`$APXS -q TARGET`
-    MH_BUNDLE_FLAGS="-bundle -bundle_loader $APXS_HTTPD"
-    PHP_SUBST(MH_BUNDLE_FLAGS)
-    ;;
-  esac
 ],[
   AC_MSG_RESULT(no)
 ])

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.29 2002/10/03 11:33:05 sesser Exp $ */
+/* $Id: ftp.h,v 1.30 2002/10/03 12:16:44 sesser Exp $ */
 
 #ifndef	FTP_H
 #define	FTP_H
@@ -49,8 +49,10 @@ typedef struct databuf
 	int		fd;			/* data connection */
 	ftptype_t	type;			/* transfer type */
 	char		buf[FTP_BUFSIZE];	/* data buffer */
+#if HAVE_OPENSSL_EXT
 	SSL		*ssl_handle;	/* ssl handle */
 	int		ssl_active;		/* flag if ssl is active or not */
+#endif
 } databuf_t;
 
 typedef struct ftpbuf

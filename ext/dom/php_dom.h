@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.21 2004/01/08 17:32:03 sniper Exp $ */
+/* $Id: php_dom.h,v 1.22 2004/01/10 11:50:25 rrichards Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -62,6 +62,8 @@ extern zend_module_entry dom_module_entry;
    Can be checked with phpversion("dom");
 */
 #define DOM_API_VERSION "20031129"
+/* Define a custom type for iterating using an unused nodetype */
+#define DOM_NODESET XML_XINCLUDE_START
 
 typedef struct _dom_nnodemap_object {
 	dom_object *baseobj;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.54 2003/08/03 17:44:37 zeev Exp $ */
+/* $Id: simplexml.c,v 1.55 2003/08/07 21:39:00 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -430,6 +430,7 @@ sxe_properties_get(zval *object TSRMLS_DC)
 				MAKE_STD_ZVAL(newptr);
 				array_init(newptr);
 
+				zval_add_ref(data_ptr);
 				zend_hash_next_index_insert(Z_ARRVAL_P(newptr), data_ptr, sizeof(zval *), NULL);
 				zend_hash_next_index_insert(Z_ARRVAL_P(newptr), &value, sizeof(zval *), NULL);
 
@@ -1057,7 +1058,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.54 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.55 $");
 	php_info_print_table_end();
 }
 /* }}} */

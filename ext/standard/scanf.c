@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.28 2004/01/08 08:17:34 andi Exp $ */
+/* $Id: scanf.c,v 1.29 2004/02/18 19:48:12 iliaa Exp $ */
 
 /*
    scanf.c --
@@ -933,7 +933,7 @@ PHPAPI int php_sscanf_internal(	char *string, char *format,
 				if (!(flags & SCAN_SUPPRESS)) {
 					if (numVars) {
 						current = args[objIndex++];
-						convert_to_string( *current );
+						zval_dtor( *current );
 						ZVAL_STRINGL( *current, string, end-string, 1);
 					} else {
 						add_index_stringl(*return_value, objIndex++, string, end-string, 1);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fribidi.c,v 1.27 2002/09/28 15:41:57 tal Exp $ */
+/* $Id: fribidi.c,v 1.28 2002/09/29 18:53:19 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -32,8 +32,7 @@
 #include <fribidi/fribidi.h>
 
 /* The fribidi guys dont believe in BC */
-#ifndef FRIBIDI_CHARSET_NOT_FOUND
-
+#ifdef FRIBIDI_CHAR_SET_UTF8
 #define FRIBIDI_CHARSET_UTF8                FRIBIDI_CHAR_SET_UTF8
 #define FRIBIDI_CHARSET_ISO8859_6           FRIBIDI_CHAR_SET_ISO8859_6
 #define FRIBIDI_CHARSET_ISO8859_8           FRIBIDI_CHAR_SET_ISO8859_8
@@ -41,7 +40,6 @@
 #define FRIBIDI_CHARSET_CP1256              FRIBIDI_CHAR_SET_CP1256
 #define FRIBIDI_CHARSET_ISIRI_3342          FRIBIDI_CHAR_SET_ISIRI_3342
 #define FRIBIDI_CHARSET_CAP_RTL             FRIBIDI_CHAR_SET_CAP_RTL
-
 #endif
 
 function_entry fribidi_functions[] = {

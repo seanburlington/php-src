@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.38 2000/04/07 16:46:59 cmv Exp $ */
+/* $Id: aolserver.c,v 1.39 2000/04/15 17:41:25 sas Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -36,6 +36,7 @@
 #endif
 
 #include "ext/standard/info.h"
+#define SECTION(name)  PUTS("<H2>" name "</H2>\n")
 
 #define NS_BUF_SIZE 511
 
@@ -206,7 +207,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	NSLS_FETCH();
 	
 	php_info_print_table_start();
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.38 2000/04/07 16:46:59 cmv Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.39 2000/04/15 17:41:25 sas Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());

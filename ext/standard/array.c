@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.247 2003/09/23 17:37:28 andrey Exp $ */
+/* $Id: array.c,v 1.248 2003/09/26 00:40:32 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2904,7 +2904,7 @@ static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior, int data_
 			}
 			arr_argc = argc;
 			diff_data_compare_func = array_data_compare;
-		} else if (data_compare_type = DIFF_COMP_DATA_USER) {
+		} else if (data_compare_type == DIFF_COMP_DATA_USER) {
 			/* array_udiff */
 			if (argc < 3) {
 				WRONG_PARAM_COUNT;

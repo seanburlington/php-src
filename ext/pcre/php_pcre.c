@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.132.2.16 2004/02/01 19:56:16 moriyoshi Exp $ */
+/* $Id: php_pcre.c,v 1.132.2.17 2004/04/23 17:51:39 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -46,20 +46,6 @@
 
 
 ZEND_DECLARE_MODULE_GLOBALS(pcre)
-
-
-static void *php_pcre_malloc(size_t size)
-{
-	return pemalloc(size, 1);
-}
-
-
-static void php_pcre_free(void *ptr)
-{
-	if (ptr)
-	pefree(ptr, 1);
-}
-
 
 static void php_free_pcre_cache(void *data)
 {
@@ -107,14 +93,6 @@ static PHP_MINIT_FUNCTION(pcre)
 	REGISTER_LONG_CONSTANT("PREG_SPLIT_OFFSET_CAPTURE", PREG_SPLIT_OFFSET_CAPTURE, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PREG_GREP_INVERT", PREG_GREP_INVERT, CONST_CS | CONST_PERSISTENT);
 
-	pcre_malloc = php_pcre_malloc;
-	pcre_free = php_pcre_free;
-
-#ifdef NO_RECURSE
-	pcre_stack_malloc = php_pcre_malloc;
-	pcre_stack_free = php_pcre_free;
-#endif
-	
 	return SUCCESS;
 }
 /* }}} */
@@ -548,7 +526,7 @@ static void php_pcre_match(INTERNAL_FUNCTION_PARAMETERS, int global)
 					}
 				}
 
-				php_pcre_free((void *) stringlist);
+				pcre_free((void *) stringlist);
 			}
 		}
 		else { /* Failed to match */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.160 2002/05/31 05:58:40 rodif_bl Exp $ */
+/* $Id: php_domxml.c,v 1.161 2002/05/31 06:14:29 rodif_bl Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2943,7 +2943,7 @@ PHP_FUNCTION(domxml_doc_implementation)
    Returns root node of document */
 PHP_FUNCTION(domxml_doc_document_element)
 {
-	zval *id, *rv;
+	zval *id, *rv = NULL;
 	xmlDoc *docp;
 	xmlNode *root;
 	int ret;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.321 2002/09/29 18:33:14 iliaa Exp $ */
+/* $Id: session.c,v 1.322 2002/09/29 19:28:12 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -580,7 +580,7 @@ static void php_session_save_current_state(TSRMLS_D)
 		return;
 	}
 		
-	if (PS(http_session_vars) && PS(http_session_vars)->type!=IS_ARRAY) {
+	if (PS(http_session_vars) && PS(http_session_vars)->type != IS_ARRAY) {
 		return;
 	}
 		

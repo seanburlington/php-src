@@ -17,7 +17,7 @@
 // | Authors: Andrei Zmievski <andrei@ispi.net>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: Getopt.php,v 1.8 2001/12/11 15:31:13 sebastian Exp $
+// $Id: Getopt.php,v 1.9 2001/12/26 03:58:44 cox Exp $
 
 require_once 'PEAR.php';
 
@@ -86,10 +86,10 @@ class Console_Getopt {
             }
 
             if ($arg{0} != '-' || (strlen($arg) > 1 && $arg{1} == '-' && !$long_options)) {
-                //$non_opts[] = $arg;
-                $non_opts = array_merge($non_opts, array_slice($args, $i));
-                break;
-            } else if (strlen($arg) > 1 && $arg{1} == '-') {
+                $non_opts[] = $arg;
+                //$non_opts = array_merge($non_opts, array_slice($args, $i));
+                //break;
+            } elseif (strlen($arg) > 1 && $arg{1} == '-') {
                 $error = Console_Getopt::_parseLongOption(substr($arg, 2), $long_options, $opts, $args);
                 if (PEAR::isError($error))
                     return $error;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.68 2002/05/15 12:13:56 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.69 2002/05/16 12:31:05 pbannister Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -2059,6 +2059,10 @@ PHP_FUNCTION(mb_strcut)
 		if (from < 0) {
 			from = 0;
 		}
+	} 
+	if (Z_STRLEN_PP(arg1) < from) {
+		/* keep index within string */
+		from = Z_STRLEN_PP(arg1);
 	}
 
 	/* if "length" position is negative, set it to the length
@@ -2069,6 +2073,10 @@ PHP_FUNCTION(mb_strcut)
 		if (len < 0) {
 			len = 0;
 		}
+	}
+	if (Z_STRLEN_PP(arg1) < (from + len)) {
+		/* limit span to characters in string */
+		len = Z_STRLEN_PP(arg1) - from;	
 	}
 
 	ret = mbfl_strcut(&string, &result, from, len TSRMLS_CC);

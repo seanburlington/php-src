@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.32 2002/01/08 19:13:42 jarkol Exp $ */
+/* $Id: php_domxml.h,v 1.33 2002/01/09 03:42:30 sniper Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -24,6 +24,7 @@
 #if HAVE_DOMXML
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+#include <libxml/xmlerror.h>
 #if defined(LIBXML_HTML_ENABLED)
 #include <libxml/HTMLparser.h>
 #include <libxml/HTMLtree.h>

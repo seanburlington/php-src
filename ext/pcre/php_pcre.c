@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.73 2000/11/24 00:12:19 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.74 2000/11/27 13:13:25 sas Exp $ */
 
 /*
 	TODO:
@@ -1199,6 +1199,8 @@ PHP_FUNCTION(preg_quote)
 		if (Z_STRLEN_PP(delim) > 0) {
 			delim_char = Z_STRVAL_PP(delim)[0];
 			quote_delim = 1;
+		} else {
+			delim_char = 0;
 		}
 	}
 	

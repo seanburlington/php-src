@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.45 2002/01/01 22:15:22 mfischer Exp $ */
+/* $Id: php_ftp.c,v 1.46 2002/01/02 00:42:11 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -388,7 +388,7 @@ PHP_FUNCTION(ftp_systype)
 }
 /* }}} */
 
-/* {{{ proto bool ftp_fget(resource stream, int fp, string remote_file, int mode)
+/* {{{ proto bool ftp_fget(resource stream, resource fp, string remote_file, int mode)
    Retrieves a file from the FTP server and writes it to an open file */
 PHP_FUNCTION(ftp_fget)
 {

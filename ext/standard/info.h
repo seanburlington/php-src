@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.h,v 1.18 2000/10/31 17:21:52 hholzgra Exp $ */
+/* $Id: info.h,v 1.19 2000/11/20 10:05:57 hholzgra Exp $ */
 
 #ifndef INFO_H
 #define INFO_H
@@ -58,7 +58,6 @@ PHP_FUNCTION(php_egg_logo_guid);
 PHP_FUNCTION(php_sapi_name);
 PHP_FUNCTION(php_uname);
 PHPAPI void php_print_info(int flag);
-PHPAPI void php_print_credits(int flag);
 PHPAPI void php_print_style(void);
 PHPAPI void php_info_print_style(void);
 PHPAPI void php_info_print_table_colspan_header(int num_cols, char *header);

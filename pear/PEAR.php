@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.19 2001/08/31 17:56:44 cox Exp $
+// $Id: PEAR.php,v 1.20 2001/08/31 19:13:24 cox Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -377,8 +377,10 @@ class PEAR
         }
 
         if ($mode == PEAR_ERROR_TRIGGER && $options === null) {
-            if (isset($this) && isset($this->_default_error_options)) {
-                $options = $this->_default_error_options;
+            if (isset($this)) {
+                if (isset($this->_default_error_options)) {
+                    $options = $this->_default_error_options;
+                }
             } else {
                 $options = $GLOBALS['_PEAR_default_error_options'];
             }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.34 2000/10/30 17:18:39 stas Exp $ */
+/* $Id: sysvshm.c,v 1.35 2000/12/18 12:22:28 hholzgra Exp $ */
 
 /* This has been built and tested on Solaris 2.6.
  * It may not compile or execute correctly on other systems.
@@ -125,7 +125,7 @@ PHP_FUNCTION(shm_attach)
 		}
 	}
 
-	if((shm_ptr = shmat(shm_id,NULL,0))==NULL) {
+	if((shm_ptr = shmat(shm_id,NULL,0))==(void *)-1) {
 		php_error(E_WARNING, "shmget() failed for key 0x%x: %s", shm_key, strerror(errno));
 		RETURN_FALSE;
 	}

@@ -15,7 +15,7 @@
    | Author: Edin Kadribasic <edink@php.net>                              |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_embed.c,v 1.8 2004/01/08 08:18:11 andi Exp $ */
+/* $Id: php_embed.c,v 1.8.2.1 2005/01/25 22:00:14 andrei Exp $ */
 
 #include "php_embed.h"
 
@@ -210,6 +210,7 @@ void php_embed_shutdown(TSRMLS_D)
 {
 	php_request_shutdown((void *) 0);
 	php_module_shutdown(TSRMLS_C);
+	sapi_shutdown();
 #ifdef ZTS
     tsrm_shutdown();
 #endif

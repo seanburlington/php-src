@@ -16,21 +16,21 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: flatfile.h,v 1.3 2002/11/07 23:03:16 helly Exp $ */
+/* $Id: flatfile.h,v 1.4 2002/11/13 16:28:44 helly Exp $ */
 
 #ifndef PHP_LIBDBM_H
 #define PHP_LIBDBM_H
 
 typedef struct {
 	char *dptr;
-	int dsize;
+	size_t dsize;
 } datum;
 
 typedef struct {
 	char *lockfn;
 	int lockfd;
 	php_stream *fp;
-	long CurrentFlatFilePos;
+	size_t CurrentFlatFilePos;
 	datum nextkey;
 } flatfile;
 

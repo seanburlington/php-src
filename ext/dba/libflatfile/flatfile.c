@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: flatfile.c,v 1.4 2002/11/11 11:57:25 helly Exp $ */
+/* $Id: flatfile.c,v 1.5 2002/11/13 16:28:43 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -80,7 +80,8 @@ PHPAPI int flatfile_store(flatfile *dba, datum key_datum, datum value_datum, int
  */
 PHPAPI datum flatfile_fetch(flatfile *dba, datum key_datum TSRMLS_DC) {
 	datum value_datum = {NULL, 0};
-	int num=0, buf_size=1024;
+	size_t num=0;
+	size_t buf_size = 1024;
 	char *buf;	
 
 	if (flatfile_findkey(dba, key_datum TSRMLS_CC)) {
@@ -108,11 +109,12 @@ PHPAPI datum flatfile_fetch(flatfile *dba, datum key_datum TSRMLS_DC) {
  */
 PHPAPI int flatfile_delete(flatfile *dba, datum key_datum TSRMLS_DC) {
 	char *key = key_datum.dptr;
-	int size = key_datum.dsize;
+	size_t size = key_datum.dsize;
 
 	char *buf;
-	int num, buf_size = 1024;
-	long pos;
+	size_t num;
+	size_t buf_size = 1024;
+	size_t pos;
 
 	php_stream_rewind(dba->fp);
 
@@ -167,11 +169,11 @@ PHPAPI int flatfile_delete(flatfile *dba, datum key_datum TSRMLS_DC) {
  */
 PHPAPI int flatfile_findkey(flatfile *dba, datum key_datum TSRMLS_DC) {
 	char *buf = NULL;
-	int num;
-	int buf_size=1024;
+	size_t num;
+	size_t buf_size = 1024;
 	int ret=0;
 	void *key = key_datum.dptr;
-	int size = key_datum.dsize;
+	size_t size = key_datum.dsize;
 
 	php_stream_rewind(dba->fp);
 	buf = emalloc((buf_size+1)*sizeof(char));
@@ -214,8 +216,8 @@ PHPAPI int flatfile_findkey(flatfile *dba, datum key_datum TSRMLS_DC) {
  */
 PHPAPI datum flatfile_firstkey(flatfile *dba TSRMLS_DC) {
 	datum buf;
-	int num;
-	int buf_size=1024;
+	size_t num;
+	size_t buf_size = 1024;
 
 	php_stream_rewind(dba->fp);
 	buf.dptr = emalloc((buf_size+1)*sizeof(char));
@@ -255,8 +257,8 @@ PHPAPI datum flatfile_firstkey(flatfile *dba TSRMLS_DC) {
  */
 PHPAPI datum flatfile_nextkey(flatfile *dba TSRMLS_DC) {
 	datum buf;
-	int num;
-	int buf_size=1024;
+	size_t num;
+	size_t buf_size = 1024;
 
 	php_stream_seek(dba->fp, dba->CurrentFlatFilePos, SEEK_SET);
 	buf.dptr = emalloc((buf_size+1)*sizeof(char));

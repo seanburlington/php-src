@@ -33,7 +33,7 @@
 
 #define OCI8_USE_EMALLOC 0		/* set this to 1 if you want to use the php memory manager! */
 
-/* $Id: oci8.c,v 1.3 1999/05/09 08:47:59 zeev Exp $ */
+/* $Id: oci8.c,v 1.1 1999/05/12 14:21:37 thies Exp $ */
 
 /* TODO list:
  *

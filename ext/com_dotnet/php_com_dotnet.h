@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_com_dotnet.h,v 1.1 2003/08/14 16:49:55 wez Exp $ */
+/* $Id: php_com_dotnet.h,v 1.2 2003/12/06 17:31:40 wez Exp $ */
 
 #ifndef PHP_COM_DOTNET_H
 #define PHP_COM_DOTNET_H
@@ -40,7 +40,7 @@ PHP_RINIT_FUNCTION(com_dotnet);
 PHP_RSHUTDOWN_FUNCTION(com_dotnet);
 PHP_MINFO_FUNCTION(com_dotnet);
 
-PHP_FUNCTION(confirm_com_dotnet_compiled);
+PHP_FUNCTION(com_create_guid);
 
 ZEND_BEGIN_MODULE_GLOBALS(com_dotnet)
 	zend_bool allow_dcom;

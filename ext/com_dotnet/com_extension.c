@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_extension.c,v 1.3 2003/10/17 20:52:17 wez Exp $ */
+/* $Id: com_extension.c,v 1.4 2003/12/06 17:31:40 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -60,6 +60,7 @@ function_entry com_dotnet_functions[] = {
 	PHP_FE(variant_get_type, NULL)
 	PHP_FE(variant_set_type, NULL)
 	PHP_FE(variant_cast, NULL)
+	PHP_FE(com_create_guid, NULL)
 	{ NULL, NULL, NULL }
 };
 

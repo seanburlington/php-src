@@ -19,7 +19,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.6 2000/10/22 23:43:48 chrisv Exp $ */
+/* $Id: php_sockets.h,v 1.7 2000/12/03 19:17:09 sterling Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -80,9 +80,7 @@ typedef struct php_iovec {
 } php_iovec_t;
 
 typedef struct {
-	int le_destroy;
-	int le_iov;
-	int use_system_read;
+	zend_bool use_system_read;
 } php_sockets_globals;
 
 

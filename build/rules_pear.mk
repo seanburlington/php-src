@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules_pear.mk,v 1.12 2000/08/25 08:15:10 sas Exp $ 
+# $Id: rules_pear.mk,v 1.13 2001/02/01 14:11:44 andrei Exp $ 
 #
 
 include $(top_srcdir)/build/rules_common.mk
@@ -54,6 +54,12 @@ clean-x:
 distclean: distclean-recursive clean-x
 	rm -f config.cache config.log config.status config_vars.mk libtool \
 	php_config.h stamp-h Makefile build-defs.h php4.spec libphp4.module
+
+cvsclean:
+	@for i in `find . -name .cvsignore`; do \
+		(cd `dirname $$i` 2>/dev/null && rm -rf `cat .cvsignore` *.o *.a || true); \
+	done
+	@rm -f $(SUBDIRS) 2>/dev/null || true
 
 install-modules:
 	@test -d modules && \

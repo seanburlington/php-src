@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.32 1999/12/01 17:21:52 sas Exp $ */
+/* $Id: basic_functions.h,v 1.33 1999/12/12 16:14:40 sas Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -113,6 +113,9 @@ typedef struct {
 	char str_ebuf[40];
 	zval **array_walk_func_name;
 	zval **user_compare_func_name;
+	long page_uid;
+	long page_inode;
+	long page_mtime;
 } php_basic_globals;
 
 #ifdef ZTS

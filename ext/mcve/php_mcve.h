@@ -16,7 +16,7 @@
    |          Chris Faulhaber <jedgar@fxp.org>                            |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_mcve.h,v 1.10 2003/06/16 14:20:05 andrey Exp $ */
+/* $Id: php_mcve.h,v 1.11 2003/07/08 02:59:50 bradmssw Exp $ */
 
 #ifndef _PHP_MCVE_H
 #define _PHP_MCVE_H
@@ -26,7 +26,7 @@ extern zend_module_entry mcve_module_entry;
 #define mcve_module_ptr &mcve_module_entry
 #define phpext_mcve_ptr mcve_module_ptr
 
-#define PHP_MCVE_VERSION	"3.0"
+#define PHP_MCVE_VERSION	"3.2"
 
 #define MCVE_CONST (CONST_CS | CONST_PERSISTENT)
 
@@ -40,6 +40,7 @@ PHP_FUNCTION(mcve_destroyconn);
 PHP_FUNCTION(mcve_setdropfile);
 PHP_FUNCTION(mcve_setip);
 PHP_FUNCTION(mcve_setssl);
+PHP_FUNCTION(mcve_setssl_files);
 PHP_FUNCTION(mcve_setblocking);
 PHP_FUNCTION(mcve_settimeout);
 PHP_FUNCTION(mcve_verifyconnection);

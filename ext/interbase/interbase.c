@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.128 2003/08/12 00:55:57 iliaa Exp $ */
+/* $Id: interbase.c,v 1.129 2003/08/12 02:11:41 sniper Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -687,7 +687,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.128 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.129 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "Yes");
 #endif
@@ -799,7 +799,7 @@ static void _php_ibase_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		WRONG_PARAM_COUNT;
 	}
 	
-	args = (zval ***) safe_emalloc(sizeof(zval **), ZEND_NUM_ARGS());
+	args = (zval ***) safe_emalloc(sizeof(zval **), ZEND_NUM_ARGS(), 0);
 	if (zend_get_parameters_array_ex(ZEND_NUM_ARGS(), args) == FAILURE) {
 		efree(args);
 		RETURN_FALSE;

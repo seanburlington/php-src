@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.59.2.7 2004/01/21 04:00:47 sniper Exp $ */
+/* $Id: formatted_print.c,v 1.59.2.8 2004/02/16 17:09:52 iliaa Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -613,6 +613,7 @@ php_formatted_print(int ht, int *len, int use_array TSRMLS_DC)
  				*tmp = **(args[argnum]);
  				zval_copy_ctor(tmp);
  			} else {
+ 				SEPARATE_ZVAL(args[argnum]);
  				tmp = *(args[argnum]);
  			}
 

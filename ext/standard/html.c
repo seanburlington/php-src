@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.90 2003/10/02 19:23:00 moriyoshi Exp $ */
+/* $Id: html.c,v 1.91 2003/10/21 01:46:54 moriyoshi Exp $ */
 
 /*
  * HTML entity resources:
@@ -1229,8 +1229,10 @@ PHP_FUNCTION(get_html_translation_table)
 					continue;
 				
 				ind[0] = (unsigned char)basic_entities[j].charcode;
-				add_assoc_string(return_value, ind, basic_entities[j].entity, 1);
+				add_assoc_stringl(return_value, ind, basic_entities[j].entity, basic_entities[j].entitylen, 1);
 			}
+			add_assoc_stringl(return_value, "&", "&amp;", sizeof("&amp;") - 1, 1);
+
 			break;
 	}
 }

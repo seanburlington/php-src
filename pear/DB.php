@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.71 2001/07/17 16:01:16 chagenbu Exp $
+// $Id: DB.php,v 1.72 2001/07/26 00:01:27 cox Exp $
 //
 // Database independent query interface.
 //
@@ -510,6 +510,9 @@ class DB
             @dl($name . $dlext);
         }
         if (!extension_loaded($name)) {
+            trigger_error("The extension '$name' couldn't be loaded. ".
+                            'Probably you don\'t have support in your PHP '.
+                            'to this Database backend', E_USER_ERROR);
             return false;
         }
         return true;

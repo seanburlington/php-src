@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.54 2002/10/12 08:16:20 sesser Exp $ */
+/* $Id: url.c,v 1.55 2002/10/12 16:09:01 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -132,8 +132,8 @@ PHPAPI php_url *php_url_parse(char *str)
 				php_replace_controlchars(ret->user);
 			}	
 		
-			if (p-pp > 1) {
-				p++;
+			pp++;
+			if (p-pp > 0) {
 				ret->pass = estrndup(pp, (p-pp));
 				php_replace_controlchars(ret->pass);
 			}	

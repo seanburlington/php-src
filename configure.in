@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.514.2.27 2004/12/20 20:38:05 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.514.2.28 2004/12/21 01:07:46 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -332,6 +332,8 @@ AC_HEADER_DIRENT
 PHP_MISSING_FCLOSE_DECL
 dnl QNX requires unix.h to allow functions in libunix to work properly
 AC_CHECK_HEADERS([ \
+inttypes.h \
+stdint.h \
 dirent.h \
 ApplicationServices/ApplicationServices.h \
 sys/param.h \

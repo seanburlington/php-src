@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.237 2001/09/06 08:56:24 sterling Exp $ */
+/* $Id: string.c,v 1.238 2001/09/09 11:42:36 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2978,14 +2978,27 @@ PHP_FUNCTION(hebrevc)
 PHP_FUNCTION(nl2br)
 {
 	zval **str;
+	char* tmp;
+	int new_length;
 	
 	if (ZEND_NUM_ARGS()!=1 || zend_get_parameters_ex(1, &str)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	
 	convert_to_string_ex(str);
-	
-	php_char_to_str((*str)->value.str.val, (*str)->value.str.len,'\n', "<br />\n", 7, return_value);
+
+	/* Windows style line-endings */
+	tmp = boyer_str_to_str((*str)->value.str.val, (*str)->value.str.len, "\r\n", 2, "<br />\r\n", 8, &new_length);
+	if (new_length != (*str)->value.str.len)
+		RETURN_STRINGL (tmp, new_length, 0);
+	efree (tmp);
+	/* Mac style line-endings */	
+	tmp = boyer_str_to_str((*str)->value.str.val, (*str)->value.str.len, "\n\r", 2, "<br />\n\r", 8, &new_length);
+	if (new_length != (*str)->value.str.len)
+		RETURN_STRINGL (tmp, new_length, 0);
+	efree (tmp);
+	/* Unix style line-endings */
+	php_char_to_str((*str)->value.str.val,(*str)->value.str.len, '\n',"<br />\n", 7, return_value);
 }
 /* }}} */
 

@@ -1,3 +1,46 @@
+2005-02-09  Frank M. Kromann  <frank@kromann.info>
+
+    * (PHP_4_3)
+      ext/fbsql/php_fbsql.c
+      ext/fbsql/php_fbsql.c:
+      MFH: change return value from false to true, when a statement was executed
+      with warnings
+
+    * ext/fbsql/php_fbsql.c:
+      change return value from false to true, when a statement was executed with
+      warnings
+
+    * (PHP_4_3)
+      ext/fbsql/php_fbsql.c
+      ext/fbsql/php_fbsql.c:
+      MFH: Check for warnings and return the warning texts
+
+    * ext/fbsql/php_fbsql.c:
+      Check for warnings and return the warning texts
+
+2005-02-09  Rasmus Lerdorf  <rasmus@lerdorf.com>
+
+    * ext/curl/config.m4:
+      Fix for bug #31901
+
+2005-02-09  Rob Richards  <rrichards@ctindustries.net>
+
+    * (PHP_5_0)
+      NEWS:
+      BFN
+
+    * (PHP_5_0)
+      ext/dom/php_dom.c:
+      MFH: Fixed bug #31878 (Segmentation fault using clone keyword on nodes)
+
+    * ext/dom/php_dom.c:
+      Fixed bug #31878 (Segmentation fault using clone keyword on nodes)
+
+2005-02-09  Moriyoshi Koizumi  <moriyoshi@at.wakwak.com>
+
+    * acinclude.m4:
+      - Complement for Jani's fix. Likely fix the iconv issue.
+
 2005-02-08  Ilia Alshanetsky  <ilia@prohost.org>
 
     * ext/shmop/php_shmop.h
@@ -281,7 +324,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1889 2005/02/09 01:33:26 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1890 2005/02/10 01:33:08 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -1755,7 +1798,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1889 2005/02/09 01:33:26 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1890 2005/02/10 01:33:08 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

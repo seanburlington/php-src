@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.31 2000/09/12 20:54:36 zeev Exp $ */
+/* $Id: php_sybase_ct.c,v 1.32 2000/09/20 04:12:03 joey Exp $ */
 
 
 #include "php.h"
@@ -996,7 +996,7 @@ PHP_FUNCTION(sybase_query)
 			break;
 	}
 	
-	ZEND_FETCH_RESOURCE2(sybase_ptr, sybase_link *, sybase_link_index, id, "Sybase-Link", sybase_globals.le_link, sybase_globals.le_plink);
+	ZEND_FETCH_RESOURCE2(sybase_ptr, sybase_link *, sybase_link_index, id, "Sybase-Link", le_link, le_plink);
 	
 	convert_to_string_ex(query);
 	

@@ -16,7 +16,7 @@
 // | Author: Vincent Blavet <vincent@blavet.net>                          |
 // +----------------------------------------------------------------------+
 //
-// $Id: Tar.php,v 1.10 2002/05/27 11:59:09 ssb Exp $
+// $Id: Tar.php,v 1.11 2002/05/27 19:28:09 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -24,7 +24,7 @@ require_once 'PEAR.php';
 * Creates a (compressed) Tar archive
 *
 * @author   Vincent Blavet <vincent@blavet.net>
-* @version  $Revision: 1.10 $
+* @version  $Revision: 1.11 $
 * @package  Archive
 */
 class Archive_Tar extends PEAR
@@ -65,8 +65,20 @@ class Archive_Tar extends PEAR
     {
         $this->PEAR();
         if ($p_compress === null) {
-            if (substr($p_tarname, -4) == '.tar') {
-                $p_compress = false;
+            if (@file_exists($p_tarname)) {
+                if ($fp = @fopen($p_tarname, "r")) {
+                    // look for gzip magic cookie
+                    $data = fread($fp, 2);
+                    if ($data == "\37\213") {
+                        $p_compress = true;
+                    }
+                }
+            } else {
+                // probably a remote file or some file accessible
+                // through a stream interface
+                if (substr($p_tarname, -2) == 'gz') {
+                    $p_compress = true;
+                }
             }
         }
         $this->_tarname = $p_tarname;
@@ -86,7 +98,7 @@ class Archive_Tar extends PEAR
                 return false;
             }
         }
-        $this->_compress = $p_compress;
+        $this->_compress = (bool)$p_compress;
     }
     // }}}
 

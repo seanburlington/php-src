@@ -19,14 +19,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.87 2002/01/09 16:51:53 mfischer Exp $ */
+/* $Id: sockets.c,v 1.88 2002/01/27 06:55:10 jon Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
-#include "php_network.h"
 
 #if HAVE_SOCKETS
 
@@ -34,7 +33,7 @@
 #define _XPG4_2
 #define __EXTENSIONS__
 
-
+#include "php_network.h"
 #include "ext/standard/info.h"
 #include "php_ini.h"
 

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.90 2003/05/26 18:37:48 derick Exp $ */
+/* $Id: php_cli.c,v 1.91 2003/05/29 14:45:03 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -239,11 +239,7 @@ static void sapi_cli_register_variables(zval *track_vars_array TSRMLS_DC)
 
 static void sapi_cli_log_message(char *message)
 {
-	TSRMLS_FETCH();
-
-	if (php_header(TSRMLS_C)) {
-		fprintf(stderr, "%s\n", message);
-	}
+	fprintf(stderr, "%s\n", message);
 }
 
 static int sapi_cli_deactivate(TSRMLS_D)

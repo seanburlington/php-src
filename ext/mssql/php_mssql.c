@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.93 2003/01/08 23:19:53 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.94 2003/01/09 02:44:44 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -705,7 +705,7 @@ PHP_FUNCTION(mssql_close)
 	ZEND_FETCH_RESOURCE2(mssql_ptr, mssql_link *, mssql_link_index, id, "MS SQL-Link", le_link, le_plink);
 
 	if (mssql_link_index) 
-		zend_list_delete(Z_LVAL_PP(mssql_link_index));
+		zend_list_delete(Z_RESVAL_PP(mssql_link_index));
 	else 
 		zend_list_delete(id);
 
@@ -1186,7 +1186,7 @@ PHP_FUNCTION(mssql_free_result)
 	if (dbdataready(result->mssql_ptr->link))
 		dbresults(result->mssql_ptr->link);
 #endif
-	zend_list_delete(Z_LVAL_PP(mssql_result_index));
+	zend_list_delete(Z_RESVAL_PP(mssql_result_index));
 	RETURN_TRUE;
 }
 

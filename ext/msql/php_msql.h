@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php_msql.h,v 1.1 1999/09/04 00:37:31 zeev Exp $ */
+/* $Id: php_msql.h,v 1.2 1999/09/04 11:05:33 zeev Exp $ */
 
 #ifndef _PHP_MSQL_H
 #define _PHP_MSQL_H
@@ -40,7 +40,7 @@
 
 #if HAVE_MSQL
 
-zend_module_entry msql_module_entry;
+extern zend_module_entry msql_module_entry;
 #define msql_module_ptr &msql_module_entry
 
 /* mSQL functions */
@@ -86,11 +86,8 @@ typedef struct {
 	int le_query;
 	int le_link;
 	int le_plink;
-} msql_module;
+} php_msql_globals;
 
-#ifndef THREAD_SAFE
-extern msql_module php_msql_module;
-#endif
 #else
 
 #define msql_module_ptr NULL

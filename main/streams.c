@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.87 2002/10/02 13:18:01 helly Exp $ */
+/* $Id: streams.c,v 1.88 2002/10/02 13:25:38 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -687,7 +687,7 @@ PHPAPI char *_php_stream_gets(php_stream *stream, char *buf, size_t maxlen TSRML
 
 PHPAPI int _php_stream_flush(php_stream *stream, int closing TSRMLS_DC)
 {
-	int ret;
+	int ret = 0;
 	
 	if (stream->filterhead)
 		stream->filterhead->fops->flush(stream, stream->filterhead, closing TSRMLS_CC);

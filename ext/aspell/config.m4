@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.6 2001/11/30 18:59:25 sniper Exp $
+dnl $Id: config.m4,v 1.7 2002/03/12 16:53:19 sas Exp $
 dnl
 
 AC_MSG_CHECKING(for ASPELL support)
@@ -21,7 +21,7 @@ AC_ARG_WITH(aspell,
     fi
     AC_DEFINE(HAVE_ASPELL,1,[Whether you have aspell])
     AC_MSG_RESULT(yes)
-    PHP_EXTENSION(aspell)
+    PHP_NEW_EXTENSION(aspell, aspell.c)
   else
     AC_MSG_RESULT(no)
   fi

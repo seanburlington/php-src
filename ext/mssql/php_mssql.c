@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.40 2001/03/13 16:33:39 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.41 2001/05/01 18:01:08 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -729,6 +729,22 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 			result->type = IS_DOUBLE;
 			break;
 		}
+		case SQLVARBINARY:
+		case SQLBINARY:
+		case SQLIMAGE: {
+			DBBINARY *bin;
+			unsigned char *res_buf;
+			int res_length = dbdatlen(mssql_ptr->link,offset);
+
+			res_buf = (unsigned char *) emalloc(res_length);
+			memset(res_buf, 0, res_length);
+			bin = ((DBBINARY *)dbdata(mssql_ptr->link,offset));
+			memcpy(res_buf,bin,res_length);
+			result->value.str.len = res_length;
+			result->value.str.val = res_buf;
+			result->type = IS_STRING;
+			}
+			break;
 		case SQLNUMERIC:
 		default: {
 			if (dbwillconvert(column_type,SQLCHAR)) {
@@ -759,7 +775,22 @@ static void php_mssql_get_column_content_without_type(mssql_link *mssql_ptr,int 
 		return;
 	}
 
-	if (dbwillconvert(coltype(offset),SQLCHAR)) {
+	if (column_type == SQLVARBINARY ||
+		column_type == SQLBINARY ||
+		column_type == SQLIMAGE) {
+		DBBINARY *bin;
+		unsigned char *res_buf;
+		int res_length = dbdatlen(mssql_ptr->link,offset);
+
+		res_buf = (unsigned char *) emalloc(res_length);
+		memset(res_buf, 0, res_length);
+		bin = ((DBBINARY *)dbdata(mssql_ptr->link,offset));
+		memcpy(res_buf,bin,res_length);
+		result->value.str.len = res_length;
+		result->value.str.val = res_buf;
+		result->type = IS_STRING;
+	}
+	else if  (dbwillconvert(coltype(offset),SQLCHAR)) {
 		unsigned char *res_buf;
 		int res_length = dbdatlen(mssql_ptr->link,offset);
 		

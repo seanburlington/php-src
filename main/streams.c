@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.77 2002/09/23 14:50:21 wez Exp $ */
+/* $Id: streams.c,v 1.78 2002/09/23 15:21:16 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -32,6 +32,8 @@
 #ifdef HAVE_SYS_MMAN_H
 #include <sys/mman.h>
 #endif
+
+#include <stddef.h>
 
 #include <fcntl.h>
 
@@ -320,7 +322,7 @@ static void php_stream_fill_read_buffer(php_stream *stream, size_t size TSRMLS_D
 	/* allocate/fill the buffer */
 	
 	/* is there enough data in the buffer ? */
-	while (stream->writepos - stream->readpos < size) {
+	while (stream->writepos - stream->readpos < (off_t)size) {
 		size_t justread;
 		
 		/* no; so lets fetch more data */
@@ -390,7 +392,7 @@ PHPAPI size_t _php_stream_read(php_stream *stream, char *buf, size_t size TSRMLS
 	} else {
 		php_stream_fill_read_buffer(stream, size TSRMLS_CC);
 
-		if (size > stream->writepos - stream->readpos)
+		if ((off_t)size > stream->writepos - stream->readpos)
 			size = stream->writepos - stream->readpos;
 
 		memcpy(buf, stream->readbuf + stream->readpos, size);

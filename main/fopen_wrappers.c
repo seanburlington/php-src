@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.50 2000/03/31 22:48:59 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.51 2000/04/07 22:10:04 zeev Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -199,12 +199,22 @@ PHPAPI FILE *php_fopen_wrapper(char *path, char *mode, int options, int *issock,
 	if (options & USE_PATH && PG(include_path) != NULL) {
 		return php_fopen_with_path(path, mode, PG(include_path), opened_path);
 	} else {
-		if(!strcmp(mode,"r") || !strcmp(mode,"r+")) cm=0;
+		FILE *fp;
+
+		if (!strcmp(mode,"r") || !strcmp(mode,"r+")) {
+			cm=0;
+		}
 		if (options & ENFORCE_SAFE_MODE && PG(safe_mode) && (!php_checkuid(path, cm))) {
 			return NULL;
 		}
-		if (php_check_open_basedir(path)) return NULL;
-		return PHP_FOPEN(path, mode);
+		if (php_check_open_basedir(path)) {
+			return NULL;
+		}
+		fp = PHP_FOPEN(path, mode);
+		if (fp && opened_path) {
+			*opened_path = expand_filepath(path);
+		}
+		return fp;
 	}
 }
 

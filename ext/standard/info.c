@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.230 2003/03/25 08:07:12 sebastian Exp $ */
+/* $Id: info.c,v 1.231 2003/04/01 11:04:38 thies Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -413,7 +413,7 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 				PUTS(SG(request_info).request_uri);
 			}
 			if ((ta->tm_mon==3) && (ta->tm_mday==1)) {
-				PUTS("?="PHP_EGG_LOGO_GUID"\" alt=\"Thies!\" /></a>");
+				PUTS("?="PHP_EGG_LOGO_GUID"\" alt=\"Dog!\" /></a>");
 			} else {
 				PUTS("?="PHP_LOGO_GUID"\" alt=\"PHP Logo\" /></a>");
 			}

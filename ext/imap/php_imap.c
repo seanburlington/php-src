@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.142.2.34 2004/12/30 04:38:40 iliaa Exp $ */
+/* $Id: php_imap.c,v 1.142.2.35 2004/12/30 05:33:53 sniper Exp $ */
 
 #define IMAP41
 
@@ -2951,7 +2951,7 @@ PHP_FUNCTION(imap_mail_compose)
 			bod->contents.text.size = Z_STRLEN_PP(pvalue);
 		} else {
 			bod->contents.text.data = (char *) fs_get(1);
-			bod->contents.text.data = "";
+			memcpy(bod->contents.text.data, "", 1);
 			bod->contents.text.size = 0;
 		}
 		if (zend_hash_find(Z_ARRVAL_PP(data), "lines", sizeof("lines"), (void **) &pvalue)== SUCCESS) {
@@ -3164,9 +3164,7 @@ PHP_FUNCTION(imap_mail_compose)
 
 	RETVAL_STRING(tempstring, 0);
 done:
-#if ilia_0 /* this should be done, otherwise we leak memory. Unfortunately this seems to cause a crash in some cases */
 	mail_free_body(&topbod);
-#endif
 	mail_free_envelope(&env);
 }
 /* }}} */

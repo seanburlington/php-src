@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.18 2000/05/02 02:02:18 sas Exp $ */
+/* $Id: php_ftp.c,v 1.19 2000/05/07 03:20:37 sas Exp $ */
 
 #include "php.h"
 
@@ -89,9 +89,6 @@ static void ftp_destructor_ftpbuf(ftpbuf_t *ftp)
 
 PHP_MINIT_FUNCTION(ftp)
 {
-
-	ELS_FETCH();
-
 	le_ftpbuf = register_list_destructors(ftp_destructor_ftpbuf, NULL);
 	REGISTER_MAIN_LONG_CONSTANT("FTP_ASCII", FTPTYPE_ASCII,
 		CONST_PERSISTENT | CONST_CS);

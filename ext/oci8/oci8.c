@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.175 2002/08/20 07:26:50 edink Exp $ */
+/* $Id: oci8.c,v 1.176 2002/09/12 09:48:02 thies Exp $ */
 
 /* TODO list:
  *
@@ -631,7 +631,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.175 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.176 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -1244,7 +1244,7 @@ _oci_make_zval(zval *value,oci_statement *statement,oci_out_column *column, char
 			oci_debug("_oci_make_zval: %16s,retlen = %4d,retlen4 = %d,storage_size4 = %4d,indicator %4d, retcode = %4d",
 					  column->name,column->retlen,column->retlen4,column->storage_size4,column->indicator,column->retcode);
 	
-	if (column->indicator == -1) { /* column is NULL */
+	if ((! statement->has_data) || (column->indicator == -1)) { /* column is NULL or statment has no current data */
 		ZVAL_NULL(value); 
 		return 0;
 	}
@@ -1392,7 +1392,9 @@ static oci_statement *oci_parse(oci_connection *connection, char *query, int len
 	if (query) {
 		statement->last_query = estrdup(query);
 	}
+
 	statement->conn = connection;
+	statement->has_data = 0;
 
 	statement->id = zend_list_insert(statement,le_stmt);
 
@@ -1769,6 +1771,7 @@ oci_fetch(oci_statement *statement, ub4 nrows, char *func TSRMLS_DC)
 		}
 
 		statement->error = 0; /* OCI_NO_DATA is NO error for us!!! */
+		statement->has_data = 0;
 
 		return 0;
 	}
@@ -1828,11 +1831,15 @@ oci_fetch(oci_statement *statement, ub4 nrows, char *func TSRMLS_DC)
 			_oci_make_zval(column->define->zval,statement,column,"OCIFetch",0 TSRMLS_CC);
 		}
 
+		statement->has_data = 1;
+
 		return 1;
 	}
 
 	oci_error(statement->pError, func, statement->error);
 	oci_handle_error(statement->conn, statement->error);
+
+	statement->has_data = 0;
 
 	return 0;
 }

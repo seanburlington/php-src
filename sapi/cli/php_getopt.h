@@ -16,13 +16,17 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_getopt.h,v 1.1.8.2 2003/05/31 01:37:45 sniper Exp $ */
+/* $Id: php_getopt.h,v 1.1.8.3 2003/05/31 02:20:08 helly Exp $ */
 
 #include "php.h"
 
-extern char *ap_php_optarg;
-extern int ap_php_optind;
- 
-int ap_php_getopt(int argc, char* const *argv, const char *optstr);
- 
- 
+/* Define structure for one recognized option (both single char and long name).
+ * If short_open is '-' this is the last option.
+ */
+typedef struct _opt_struct {
+	const char opt_char;
+	const int  need_param;
+	const char * opt_name;
+} opt_struct;
+
+int php_getopt(int argc, char* const *argv, const opt_struct opts[], char **optarg, int *optind, int show_err);

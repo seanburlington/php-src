@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.216 2001/07/11 13:27:27 hholzgra Exp $ */
+/* $Id: session.c,v 1.217 2001/07/11 13:46:11 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -801,6 +801,7 @@ static void php_session_start(PSLS_D)
 	int module_number = PS(module_number);
 	int nrand;
 	int lensess;
+	int stored_error_reporting;
 	ELS_FETCH();
 
 	if (PS(session_status) != php_session_none) 
@@ -889,7 +890,11 @@ static void php_session_start(PSLS_D)
 	
 	if (send_cookie)
 		php_session_send_cookie(PSLS_C);
-	
+
+	/* workaround to prevent warnings when redefining SID */
+	stored_error_reporting=EG(error_reporting);
+	EG(error_reporting) ^= E_NOTICE;
+
 	if (define_sid) {
 		smart_str var = {0};
 
@@ -901,6 +906,9 @@ static void php_session_start(PSLS_D)
 	} else
 		REGISTER_STRING_CONSTANT("SID", empty_string, 0);
 	PS(define_sid) = define_sid;
+
+	/* workaround to prevent warnings when redefining SID */
+	EG(error_reporting)=stored_error_reporting;
 
 	PS(session_status)= php_session_active;
 

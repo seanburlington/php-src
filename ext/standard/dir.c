@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.61 2001/04/09 21:08:47 jon Exp $ */
+/* $Id: dir.c,v 1.62 2001/04/09 21:12:54 elixer Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -141,7 +141,7 @@ PHP_MINIT_FUNCTION(dir)
 #endif
 	tmpstr[0] = DEFAULT_SLASH;
 	tmpstr[1] = '\0';
-	REGISTER_STRING_CONSTANT("DIRECTORY_SEPARATOR", tmpstr, CONST_PERSISTENT);
+	REGISTER_STRING_CONSTANT("DIRECTORY_SEPARATOR", tmpstr, CONST_CS|CONST_PERSISTENT);
 
 	return SUCCESS;
 }

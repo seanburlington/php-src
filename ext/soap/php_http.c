@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.55 2004/06/22 12:42:17 dmitry Exp $ */
+/* $Id: php_http.c,v 1.55.2.1 2004/09/28 09:13:36 wez Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -32,9 +32,11 @@ static int get_http_headers(php_stream *socketd,char **response, int *out_size T
 static int stream_alive(php_stream *stream  TSRMLS_DC)
 {
 	int socket;
-	fd_set rfds;
-	struct timeval tv;
 	char buf;
+
+	/* maybe better to use:
+	 * php_stream_set_option(stream, PHP_STREAM_OPTION_CHECK_LIVENESS, 0, NULL)
+	 * here instead */
 
 	if (stream == NULL || stream->eof || php_stream_cast(stream, PHP_STREAM_AS_FD_FOR_SELECT, (void**)&socket, 0) != SUCCESS) {
 		return FALSE;
@@ -42,11 +44,7 @@ static int stream_alive(php_stream *stream  TSRMLS_DC)
 	if (socket == -1) {
 		return FALSE;
 	} else {
-		FD_ZERO(&rfds);
-		FD_SET(socket, &rfds);
-		tv.tv_sec = 0;
-		tv.tv_usec = 0;
-		if (select(socket + 1, &rfds, NULL, NULL, &tv) > 0 && FD_ISSET(socket, &rfds)) {
+		if (php_pollfd_for_ms(socket, PHP_POLLREADABLE, 0) > 0) {
 			if (0 == recv(socket, &buf, sizeof(buf), MSG_PEEK) && php_socket_errno() != EAGAIN) {
 				return FALSE;
 			}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.59 2002/10/29 11:56:46 helly Exp $ */
+/* $Id: iconv.c,v 1.60 2002/10/29 19:09:27 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -128,7 +128,7 @@ static void php_iconv_init_globals(zend_iconv_globals *iconv_globals)
 /* {{{ PHP_MINIT_FUNCTION */
 PHP_MINIT_FUNCTION(miconv)
 {
-	char *version = "";
+	char *version = "unknown";
 
 	ZEND_INIT_MODULE_GLOBALS(iconv, php_iconv_init_globals, NULL);
 	REGISTER_INI_ENTRIES();

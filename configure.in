@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.391 2002/10/27 19:51:17 andrei Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.392 2002/10/28 02:13:43 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -29,6 +29,9 @@ dnl -------------------------------------------------------------------------
 
 AC_PREREQ(2.13)
 AC_INIT(README.CVS-RULES)
+
+dnl check for working sed
+PHP_PROG_SED
 
 PHP_CONFIG_NICE(config.nice)
 for arg in $0 "$@"; do
@@ -127,9 +130,6 @@ dnl AC_PROG_CXXCPP
 
 dnl check for -R, etc. switch
 PHP_RUNPATH_SWITCH
-
-dnl check for working sed (disabled for now, waiting for comments)
-dnl PHP_PROG_SED
 
 AC_PROG_RANLIB
 AC_PROG_LN_S

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.30 2003/12/15 13:53:01 tony2001 Exp $ */
+/* $Id: php_oci8.h,v 1.31 2003/12/16 10:29:11 phanto Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -68,10 +68,15 @@ typedef struct {
 
 typedef struct {
 	int num;
-	int persistent;
-	int is_open;
-	int exclusive;
-	char *hashed_details;
+	zend_bool persistent;
+	zend_bool is_open;
+	zend_bool exclusive;
+#if ZTS
+	THREAD_T thread;
+#else
+	zend_bool thread;
+#endif
+	zend_llist *sessions_list;
 	oci_server *server;
 	OCISession *pSession;
 	OCIEnv *pEnv;				/* sessions own environment */
@@ -185,12 +190,7 @@ typedef struct {
     long allow_persistent;
     long max_persistent;
     long max_links;
-    long num_persistent;
-    long num_links;
 	*/
-
-    HashTable *server;
-	HashTable *user;
 
     OCIEnv *pEnv;
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.99 2001/07/29 08:14:00 andi Exp $ */
+/* $Id: var.c,v 1.100 2001/07/30 04:58:05 zeev Exp $ */
 
 
 /* {{{ includes 
@@ -98,7 +98,9 @@ head_done:
 			break;
 		case IS_RESOURCE: {
 			char *type_name;
-			type_name = zend_rsrc_list_get_rsrc_type(Z_LVAL_PP(struc));
+			TSRMLS_FETCH();
+
+			type_name = zend_rsrc_list_get_rsrc_type(Z_LVAL_PP(struc) TSRMLS_CC);
 			php_printf("%sresource(%ld) of type (%s)\n", COMMON, Z_LVAL_PP(struc), type_name ? type_name : "Unknown");
 			break;
 		}

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.97 2001/07/28 19:29:16 andi Exp $ */
+/* $Id: php_odbc.c,v 1.98 2001/07/30 04:58:00 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2205,7 +2205,7 @@ PHP_FUNCTION(odbc_close)
 		WRONG_PARAM_COUNT;
 	}
 
-	conn = (odbc_connection *) zend_fetch_resource(pv_conn, -1, "ODBC-Link", &found_resource_type, 2, le_conn, le_pconn);
+	conn = (odbc_connection *) zend_fetch_resource(pv_conn TSRMLS_CC, -1, "ODBC-Link", &found_resource_type, 2, le_conn, le_pconn);
 	if (found_resource_type==le_pconn) {
 		is_pconn = 1;
 	}

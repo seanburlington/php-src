@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.58 2001/07/30 01:56:29 zeev Exp $ */
+/* $Id: php_mssql.c,v 1.59 2001/07/30 04:57:58 zeev Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -256,7 +256,7 @@ static mssql_statement* _mssql_get_statement(zval **stmt)
 {
 	mssql_statement *statement;
 
-	statement = (mssql_statement *) zend_fetch_resource(stmt, -1, "MS SQL-Statement", NULL, 1, le_statement);
+	statement = (mssql_statement *) zend_fetch_resource(stmt TSRMLS_CC, -1, "MS SQL-Statement", NULL, 1, le_statement);
 
 	if (statement) {
 		return statement;

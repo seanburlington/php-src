@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.86 2001/07/28 18:38:36 andi Exp $ */
+/* $Id: xml.c,v 1.87 2001/07/30 04:58:06 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -243,6 +243,8 @@ PHP_MINFO_FUNCTION(xml)
 static zval *_xml_resource_zval(long value)
 {
 	zval *ret;
+	TSRMLS_FETCH();
+
 	MAKE_STD_ZVAL(ret);
 
 	ret->type = IS_RESOURCE;

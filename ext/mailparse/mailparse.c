@@ -18,7 +18,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mailparse.c,v 1.6 2001/07/27 10:16:22 zeev Exp $ */
+/* $Id: mailparse.c,v 1.7 2001/07/30 04:57:58 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -204,7 +204,7 @@ PHP_FUNCTION(mailparse_determine_best_xfer_encoding)
 		WRONG_PARAM_COUNT;
 	}
 
-	what = zend_fetch_resource(file, -1, "File-Handle", &type, 2, php_file_le_fopen(), php_file_le_stream());
+	what = zend_fetch_resource(file TSRMLS_CC, -1, "File-Handle", &type, 2, php_file_le_fopen(), php_file_le_stream());
 	ZEND_VERIFY_RESOURCE(what);
 
 #if HAVE_PHP_STREAM

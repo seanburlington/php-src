@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.15 2001/07/30 01:56:35 zeev Exp $ */
+/* $Id: recode.c,v 1.16 2001/07/30 04:58:04 zeev Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -99,7 +99,7 @@ PHP_MINFO_FUNCTION(recode)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.15 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.16 $");
 	php_info_print_table_end();
 
 }
@@ -172,14 +172,14 @@ PHP_FUNCTION(recode_file)
 	 	WRONG_PARAM_COUNT;
 	}
 
-	in_fp = zend_fetch_resource(input,-1, "File-Handle", &in_type, 
+	in_fp = zend_fetch_resource(input TSRMLS_CC,-1, "File-Handle", &in_type, 
 		2, php_file_le_fopen(), php_file_le_popen());
 	if (!in_fp) {
 		php_error(E_WARNING,"Unable to find input file identifier");
 		RETURN_FALSE;
 	}
 
-	out_fp = zend_fetch_resource(output,-1, "File-Handle", &out_type,
+	out_fp = zend_fetch_resource(output TSRMLS_CC,-1, "File-Handle", &out_type,
 		2, php_file_le_fopen(), php_file_le_popen());
 	if (!out_fp) {
 		php_error(E_WARNING,"Unable to find output file identifier");

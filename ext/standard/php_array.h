@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_array.h,v 1.26 2001/07/28 11:36:18 zeev Exp $ */
+/* $Id: php_array.h,v 1.27 2001/07/30 04:58:05 zeev Exp $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H
@@ -85,7 +85,7 @@ int multisort_compare(const void *a, const void *b);
 
 typedef struct {
 	int *multisort_flags[2];
-	int (*compare_func)(zval *result, zval *op1, zval *op2);
+	int (*compare_func)(zval *result, zval *op1, zval *op2 TSRMLS_DC);
 } php_array_globals;
 
 #ifdef ZTS

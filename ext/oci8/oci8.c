@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.139 2001/07/30 01:56:32 zeev Exp $ */
+/* $Id: oci8.c,v 1.140 2001/07/30 04:57:59 zeev Exp $ */
 
 /* TODO list:
  *
@@ -579,7 +579,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.139 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.140 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -965,7 +965,7 @@ static oci_connection *oci_get_conn(zval **conn)
 {
 	oci_connection *connection;
 
-	connection = (oci_connection *) zend_fetch_resource(conn, -1, "OCI8-Connection", NULL, 1, le_conn);
+	connection = (oci_connection *) zend_fetch_resource(conn TSRMLS_CC, -1, "OCI8-Connection", NULL, 1, le_conn);
 
 	if (connection && connection->is_open) {
 		return connection;
@@ -981,7 +981,7 @@ static oci_statement *oci_get_stmt(zval **stmt)
 {
 	oci_statement *statement;
 
-	statement = (oci_statement *) zend_fetch_resource(stmt, -1, "OCI8-Statement", NULL, 1, le_stmt);
+	statement = (oci_statement *) zend_fetch_resource(stmt TSRMLS_CC, -1, "OCI8-Statement", NULL, 1, le_stmt);
 
 	if (statement && statement->conn->is_open) {
 		return statement;
@@ -3988,12 +3988,12 @@ PHP_FUNCTION(ocierror)
 	dvoid *errh = NULL;
 
 	if (zend_get_parameters_ex(1, &arg) == SUCCESS) {
-		statement = (oci_statement *) zend_fetch_resource(arg, -1, NULL, NULL, 1, le_stmt);
+		statement = (oci_statement *) zend_fetch_resource(arg TSRMLS_CC, -1, NULL, NULL, 1, le_stmt);
 		if (statement) {
 			errh = statement->pError;
 			error = statement->error;
 		} else {
-			connection = (oci_connection *) zend_fetch_resource(arg, -1, NULL, NULL, 1, le_conn);
+			connection = (oci_connection *) zend_fetch_resource(arg TSRMLS_CC, -1, NULL, NULL, 1, le_conn);
 			if (connection) {
 				errh = connection->pError;
 				error = connection->error;

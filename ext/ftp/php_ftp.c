@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.35 2001/07/17 05:53:03 jason Exp $ */
+/* $Id: php_ftp.c,v 1.36 2001/07/30 04:57:56 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -634,7 +634,7 @@ PHP_FUNCTION(ftp_fput)
 
 	FTPBUF(ftp, arg1);
 	convert_to_string(arg2);
-   	rsrc = zend_fetch_resource(&arg3,-1,"File-Handle",&type,3,php_file_le_fopen(),php_file_le_popen(),php_file_le_socket());
+   	rsrc = zend_fetch_resource(&arg3 TSRMLS_CC,-1,"File-Handle",&type,3,php_file_le_fopen(),php_file_le_popen(),php_file_le_socket());
 	ZEND_VERIFY_RESOURCE(rsrc);   
 	XTYPE(xtype, arg4);
 

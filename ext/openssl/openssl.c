@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.19 2001/07/05 21:18:19 wez Exp $ */
+/* $Id: openssl.c,v 1.20 2001/07/30 04:58:02 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -202,7 +202,7 @@ static X509 * php_openssl_x509_from_zval(zval ** val, int makeresource, long * r
 		void * what;
 		int type;
 
-		what = zend_fetch_resource(val, -1, "OpenSSL X.509", &type, 1, le_x509);
+		what = zend_fetch_resource(val TSRMLS_CC, -1, "OpenSSL X.509", &type, 1, le_x509);
 		if (!what)
 			return NULL;
 
@@ -297,7 +297,7 @@ static EVP_PKEY * php_openssl_evp_from_zval(zval ** val, int public_key, char * 
 		void * what;
 		int type;
 
-		what = zend_fetch_resource(val, -1, "OpenSSL X.509/key", &type, 2, le_x509, le_key);
+		what = zend_fetch_resource(val TSRMLS_CC, -1, "OpenSSL X.509/key", &type, 2, le_x509, le_key);
 		if (!what)
 			return NULL;
 

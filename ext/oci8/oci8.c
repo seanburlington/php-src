@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.264 2004/11/21 06:17:32 andi Exp $ */
+/* $Id: oci8.c,v 1.265 2004/11/22 21:44:42 andi Exp $ */
 
 /* TODO list:
  *
@@ -786,7 +786,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.264 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.265 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -5840,7 +5840,7 @@ PHP_FUNCTION(oci_new_connect)
    Connect to an Oracle database and log on. Returns a new session. */
 PHP_FUNCTION(oci_connect)
 {
-	oci_do_connect(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0, 0);
+	oci_do_connect(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0, 1);
 }
 /* }}} */
 

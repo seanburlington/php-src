@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.157 2003/05/16 19:08:13 wez Exp $ */
+/* $Id: output.c,v 1.158 2003/05/17 09:34:37 wez Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -408,7 +408,7 @@ PHPAPI int php_ob_init_conflict(char *handler_new, char *handler_set TSRMLS_DC)
  */
 static int php_ob_init_named(uint initial_size, uint block_size, char *handler_name, zval *output_handler, uint chunk_size, zend_bool erase TSRMLS_DC)
 {
-	if (!zend_is_callable(output_handler, 0, NULL)) {
+	if (output_handler && !zend_is_callable(output_handler, 0, NULL)) {
 		return FAILURE;
 	}
 	if (OG(ob_nesting_level)>0) {

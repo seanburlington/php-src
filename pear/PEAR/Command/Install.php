@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.27 2002/05/20 01:22:00 cox Exp $
+// $Id: Install.php,v 1.28 2002/05/20 10:43:29 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -161,8 +161,10 @@ More than one package may be specified at once.
                     $bn = basename($pkg);
                     $info = $this->installer->install($pkg, $options, $this->config);
                     if (is_array($info)) {
-                        $label = "$info[package] $info[version]";
-                        $this->ui->displayLine("$command ok: $label");
+                        if ($this->config->get('verbose') > 0) {
+                            $label = "$info[package] $info[version]";
+                            $this->ui->displayLine("$command ok: $label");
+                        }
                     } else {
                         $failmsg = "$command failed";
                     }
@@ -171,7 +173,9 @@ More than one package may be specified at once.
             case 'uninstall':
                 foreach ($params as $pkg) {
                     if ($this->installer->uninstall($pkg, $options)) {
-                        $this->ui->displayLine("uninstall ok");
+                        if ($this->config->get('verbose') > 0) {
+                            $this->ui->displayLine("uninstall ok");
+                        }
                     } else {
                         $failmsg = "uninstall failed";
                     }

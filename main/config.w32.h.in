@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h.in,v 1.20 2002/11/01 00:57:54 iliaa Exp $
+	$Id: config.w32.h.in,v 1.21 2002/11/01 03:25:21 iliaa Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -40,9 +40,6 @@
 
 /* Enable / Disable FTP extension (default: enabled) */
 #define HAVE_FTP 1
-
-/* Enable / Disable OpenSSL extension (default: enabled) */
-#define HAVE_OPENSSL_EXT 1
 
 /* Enable / Disable MBSTRING extension (default: enabled) */
 #define HAVE_MBSTRING 1

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filepro.c,v 1.44 2002/03/14 11:22:53 sesser Exp $ */
+/* $Id: filepro.c,v 1.45 2002/03/14 11:26:10 sesser Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com
@@ -227,16 +227,14 @@ PHP_FUNCTION(filepro)
 	FP_GLOBAL(fp_keysize) = -1;
 	
 	snprintf(workbuf, sizeof(workbuf), "%s/map", Z_STRVAL_P(dir));
-fp=fopen("/tmp/filepro","a+");if(fp){fprintf(fp,"workbuf:%s\n",workbuf);fclose(fp);}
+
 	if (PG(safe_mode) && (!php_checkuid(workbuf, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 		RETURN_FALSE;
 	}
-fp=fopen("/tmp/filepro","a+");if(fp){fprintf(fp,"2workbuf:%s\n",workbuf);fclose(fp);}
 	
 	if (php_check_open_basedir(workbuf TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
-fp=fopen("/tmp/filepro","a+");if(fp){fprintf(fp,"3workbuf:%s\n",workbuf);fclose(fp);}
 
 	if (!(fp = VCWD_FOPEN(workbuf, "r"))) {
 		php_error(E_WARNING, "filePro: cannot open map: [%d] %s",

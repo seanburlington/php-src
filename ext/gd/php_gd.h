@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.46 2002/11/23 22:11:59 moriyoshi Exp $ */
+/* $Id: php_gd.h,v 1.47 2002/12/06 02:16:06 pajoye Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -64,6 +64,7 @@ PHP_FUNCTION(gd_info);
 PHP_FUNCTION(imagearc);
 PHP_FUNCTION(imagechar);
 PHP_FUNCTION(imagecharup);
+PHP_FUNCTION(imageistruecolor);
 PHP_FUNCTION(imagecolorallocate);
 PHP_FUNCTION(imagepalettecopy);
 PHP_FUNCTION(imagecolorat);

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.111 2001/10/11 23:33:24 ssb Exp $ */
+/* $Id: php_odbc.c,v 1.112 2001/12/07 17:21:49 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1007,6 +1007,7 @@ PHP_FUNCTION(odbc_execute)
             odbc_sql_error(result->conn_ptr, result->stmt, "SQLExecute");
             break;
         default:
+			odbc_sql_error(result->conn_ptr, result->stmt, "SQLExecute");
             RETVAL_FALSE;
         }
 	}	

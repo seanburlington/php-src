@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.42 2002/11/04 23:24:15 iliaa Exp $ */
+/* $Id: link.c,v 1.43 2002/11/14 16:20:23 iliaa Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -146,7 +146,7 @@ PHP_FUNCTION(symlink)
 		RETURN_FALSE;
 	}
 
-	ret = symlink(dest_p, source_p);
+	ret = symlink(Z_STRVAL_PP(topath), Z_STRVAL_PP(frompath));
 	if (ret == -1) {
 		php_error(E_WARNING, "Symlink failed (%s)", strerror(errno));
 		RETURN_FALSE;
@@ -197,7 +197,7 @@ PHP_FUNCTION(link)
 		RETURN_FALSE;
 	}
 
-	ret = link(dest_p, source_p);
+	ret = link(Z_STRVAL_PP(topath), Z_STRVAL_PP(frompath));
 	if (ret == -1) {
 		php_error(E_WARNING, "Link failed (%s)", strerror(errno));
 		RETURN_FALSE;

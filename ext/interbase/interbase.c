@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.132 2003/08/12 11:27:03 abies Exp $ */
+/* $Id: interbase.c,v 1.133 2003/08/12 11:35:26 abies Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -687,7 +687,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.132 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.133 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "Yes");
 #endif
@@ -2201,6 +2201,20 @@ PHP_FUNCTION(ibase_affected_rows)
    Returns the number of rows in a result */
 PHP_FUNCTION(ibase_num_rows) 
 {
+	/**
+	 * This function relies on the InterBase API function isc_dsql_sql_info()
+	 * which has a couple of limitations (which I hope will be fixed in
+	 * future releases of Firebird):
+	 * - row count is always zero before the first fetch;
+	 * - row count for SELECT ... FOR UPDATE is broken -> never returns a
+	 *   higher number than the number of records fetched so far;
+	 * - row count for other statements is merely a lower bound on the number
+	 *   of records => calling ibase_num_rows() again after a couple of fetches
+	 *   will most likely return a new (higher) figure for large result sets.
+	 *
+	 * 12-aug-2003 Ard Biesheuvel
+	 */
+	
 	zval **result_arg;
 	ibase_result *ib_result;
 	char info_count[] = {isc_info_sql_records}, result[64];

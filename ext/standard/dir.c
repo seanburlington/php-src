@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.49 2000/11/04 14:58:50 thies Exp $ */
+/* $Id: dir.c,v 1.50 2000/11/04 17:15:00 andi Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -217,7 +217,7 @@ PHP_FUNCTION(closedir)
 	zend_list_delete(dirp->id);
 
 	if (dirp->id == DIRG(default_dir)) {
-		php_set_default_dir(-1);
+		php_set_default_dir(-1 DIRLS_CC);
 	}
 }
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.h,v 1.2 2003/03/01 01:27:50 wez Exp $ */
+/* $Id: streamsfuncs.h,v 1.3 2003/04/04 05:21:03 pollita Exp $ */
 
 /* Flags for stream_socket_client */
 #define PHP_STREAM_CLIENT_PERSISTENT	1
@@ -34,6 +34,7 @@ PHP_FUNCTION(stream_set_blocking);
 PHP_FUNCTION(stream_select);
 PHP_FUNCTION(stream_set_timeout);
 PHP_FUNCTION(stream_set_write_buffer);
+PHP_FUNCTION(stream_get_transports);
 PHP_FUNCTION(stream_get_wrappers);
 PHP_FUNCTION(stream_get_line);
 PHP_FUNCTION(stream_get_meta_data);

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Edin Kadribasic                                                             |
+   | Author: Edin Kadribasic                                              |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: md5crypt.c,v 1.2 2002/12/31 15:59:14 sebastian Exp $ */
+/* $Id: md5crypt.c,v 1.3 2003/01/17 22:45:23 moriyoshi Exp $ */
 
 /*
  * ----------------------------------------------------------------------------

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.78 2001/03/21 20:55:34 rjs Exp $ */
+/* $Id: pdf.c,v 1.79 2001/05/08 00:23:58 jmoore Exp $ */
 /* Id: pdf.c,v 1.73 2001/02/26 06:07:11 andi Exp  */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
@@ -171,6 +171,8 @@ function_entry pdf_functions[] = {
 	PHP_FE(pdf_add_annotation, NULL)
 #if HAVE_LIBGD13
 	PHP_FE(pdf_open_memory_image, NULL)
+#else
+	PHP_FALIAS(pdf_open_memory_image, warn_not_available, NULL)
 #endif
 	/* depreciatet after V4.0 of PDFlib */
 	PHP_FE(pdf_setgray_fill, NULL)
@@ -199,6 +201,24 @@ function_entry pdf_functions[] = {
 	PHP_FE(pdf_add_thumbnail, NULL)
 	PHP_FE(pdf_initgraphics, NULL)
 	PHP_FE(pdf_setmatrix, NULL)
+#else
+	PHP_FALIAS(pdf_open_pdi, warn_not_available, NULL)
+	PHP_FALIAS(pdf_close_pdi, warn_not_available, NULL)
+	PHP_FALIAS(pdf_open_pdi_page, warn_not_available, NULL)
+	PHP_FALIAS(pdf_place_pdi_page, warn_not_available, NULL)
+	PHP_FALIAS(pdf_close_pdi_page, warn_not_available, NULL)
+	PHP_FALIAS(pdf_get_pdi_parameter, warn_not_available, NULL)
+	PHP_FALIAS(pdf_get_pdi_value, warn_not_available, NULL)
+	PHP_FALIAS(pdf_begin_pattern, warn_not_available, NULL)
+	PHP_FALIAS(pdf_end_pattern, warn_not_available, NULL)
+	PHP_FALIAS(pdf_begin_template, warn_not_available, NULL)
+	PHP_FALIAS(pdf_end_template, warn_not_available, NULL)
+	PHP_FALIAS(pdf_setcolor, warn_not_available, NULL)
+	PHP_FALIAS(pdf_makespotcolor, warn_not_available, NULL)
+	PHP_FALIAS(pdf_arcn, warn_not_available, NULL)
+	PHP_FALIAS(pdf_add_thumbnail, warn_not_available, NULL)
+	PHP_FALIAS(pdf_initgraphics, warn_not_available, NULL)
+	PHP_FALIAS(pdf_setmatrix, warn_not_available, NULL)
 #endif /* PDFlib >= V4 */
 
 	{NULL, NULL, NULL}
@@ -294,7 +314,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.78 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.79 $" );
 	php_info_print_table_end();
 
 }

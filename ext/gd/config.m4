@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.120.2.6 2002/12/14 09:32:49 sniper Exp $
+dnl $Id: config.m4,v 1.120.2.7 2003/01/20 10:39:39 sniper Exp $
 dnl
 
 dnl
@@ -83,7 +83,11 @@ AC_DEFUN(PHP_GD_PNG,[
     if test "$PHP_ZLIB_DIR" = "no"; then
       AC_MSG_ERROR([PNG support requires ZLIB. Use --with-zlib-dir=<DIR>])
     fi
-    
+
+    if test ! -f $GD_PNG_DIR/include/png.h; then
+      AC_MSG_ERROR([png.h not found.])
+    fi
+
     PHP_CHECK_LIBRARY(png,png_write_image,
     [
       PHP_ADD_INCLUDE($GD_PNG_DIR/include)

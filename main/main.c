@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.277 2000/07/02 16:23:43 stas Exp $ */
+/* $Id: main.c,v 1.278 2000/07/02 16:36:31 stas Exp $ */
 
 
 #include <stdio.h>
@@ -417,17 +417,19 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 	}
 
 	switch (type) {
-		case E_ERROR:
 		case E_CORE_ERROR:
+			if(!module_initialized) {
+				/* bad error in module startup - no way we can live with this */
+				exit(-2);
+			}
+		/* no break - intentionally */
+		case E_ERROR:
 		/*case E_PARSE: the parser would return 1 (failure), we can bail out nicely */
 		case E_COMPILE_ERROR:
 		case E_USER_ERROR:
 			if (module_initialized) {
 				zend_bailout();
 				return;
-			} else {
-				/* bad error in module startup - no way we can live with this */
-				exit(-2);
 			}
 			break;
 	}

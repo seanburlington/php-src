@@ -16,10 +16,12 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.59 2000/10/23 13:19:07 stas Exp $ */
+/* $Id: zlib.c,v 1.60 2000/10/23 13:56:22 dbeu Exp $ */
 #define IS_EXT_MODULE
 
+#ifndef PHP_WIN32
 #include "php_config.h"
+#endif
 
 #if HAVE_FOPENCOOKIE 
 #define _GNU_SOURCE

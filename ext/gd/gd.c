@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.82 2000/07/14 21:51:31 rasmus Exp $ */
+/* $Id: gd.c,v 1.83 2000/07/14 22:07:57 rasmus Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -215,6 +215,11 @@ PHP_MINIT_FUNCTION(gd)
 	GDG(le_ps_font) = register_list_destructors(php_free_ps_font, NULL);
 	GDG(le_ps_enc) = register_list_destructors(php_free_ps_enc, NULL);
 #endif
+	REGISTER_LONG_CONSTANT("IMG_GIF", 1, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("IMG_JPG", 2, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("IMG_JPEG", 2, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("IMG_PNG", 4, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("IMG_WBMP", 8, CONST_CS | CONST_PERSISTENT);
 	return SUCCESS;
 }
 

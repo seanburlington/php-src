@@ -14,10 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Jouni Ahto <jouni.ahto@exdec.fi>                            |
    |          Andrew Avdeev <andy@rsc.mv.ru>                              |
+   |          Ard Biesheuvel <a.k.biesheuvel@its.tudelft.nl>              |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.142 2003/08/15 00:16:58 abies Exp $ */
+/* $Id: interbase.c,v 1.143 2003/08/15 16:13:51 abies Exp $ */
 
 /*
 	Changes:
@@ -137,6 +138,7 @@ function_entry ibase_functions[] = {
 #endif
 	PHP_FE(ibase_wait_event, NULL)
 	PHP_FE(ibase_set_event_handler, NULL)
+	PHP_FE(ibase_free_event_handler, NULL)
 	{NULL, NULL, NULL}
 };
 
@@ -725,7 +727,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.142 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.143 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "Yes");
 #endif
@@ -3965,16 +3967,13 @@ static isc_callback _php_ibase_callback(ibase_event *event, unsigned short buffe
 			}
 		}	
 
-		Z_TYPE(return_value) = IS_BOOL;
-		Z_BVAL(return_value) = 1;
-
 		/* call the callback provided by the user */
 		if (SUCCESS != call_user_function(EG(function_table), NULL, event->callback, &return_value, 2, args TSRMLS_CC)) {
 			_php_ibase_module_error("Error calling callback %s", Z_STRVAL_P(event->callback));
 			return 0;
 		}
 
-		if (! Z_BVAL(return_value)) {
+		if (Z_TYPE(return_value) == IS_BOOL && !Z_BVAL(return_value)) {
 			return 0;
 		}			
 	}
@@ -4042,7 +4041,7 @@ PHP_FUNCTION(ibase_set_event_handler)
 	}				
 		
 	/* get the callback */
-	if (!zend_is_callable(*args[i-1], 0, &callback_name)) {
+	if (!zend_is_callable(*cb_arg, 0, &callback_name)) {
 		_php_ibase_module_error("Callback argument %s is not a callable function", callback_name);
 		efree(callback_name);
 		efree(args);
@@ -4088,7 +4087,24 @@ PHP_FUNCTION(ibase_set_event_handler)
 	ZEND_REGISTER_RESOURCE(return_value, event, le_event);
 	zend_list_addref(Z_LVAL_P(return_value));
 }
-   
+
+/* {{{ proto bool ibase_free_vevent_handler(resource event)
+   Frees the event handler set by ibase_set_event_handler() */
+PHP_FUNCTION(ibase_free_event_handler)
+{
+	zval **event_arg;
+	ibase_event *event;
+	
+	RESET_ERRMSG;
+	
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &event_arg) == FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+
+	ZEND_FETCH_RESOURCE(event, ibase_event *, event_arg, -1, "Interbase event", le_event);
+	zend_list_delete(Z_LVAL_PP(event_arg));
+	RETURN_TRUE;
+}	
 /* }}} */
   
 #endif /* HAVE_IBASE */

@@ -14,10 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Jouni Ahto <jouni.ahto@exdec.fi>                            |
    |          Andrew Avdeev <andy@simgts.mv.ru>                           |
+   |          Ard Biesheuvel <a.k.biesheuvel@its.tudelft.nl>              |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.49 2003/08/15 00:06:07 abies Exp $ */
+/* $Id: php_interbase.h,v 1.50 2003/08/15 16:13:51 abies Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -92,6 +93,7 @@ PHP_FUNCTION(ibase_errcode);
 
 PHP_FUNCTION(ibase_wait_event);
 PHP_FUNCTION(ibase_set_event_handler);
+PHP_FUNCTION(ibase_free_event_handler);
 
 #define IBASE_MSGSIZE 256
 #define MAX_ERRMSG (IBASE_MSGSIZE*2)

@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.29 2002/03/24 17:34:20 zak Exp $ */
+/* $Id: php_mysql.h,v 1.30 2002/03/29 12:47:02 jan Exp $ */
 
 #ifndef PHP_MYSQL_H
 #define PHP_MYSQL_H
@@ -86,6 +86,7 @@ PHP_FUNCTION(mysql_get_client_info);
 PHP_FUNCTION(mysql_get_host_info);
 PHP_FUNCTION(mysql_get_proto_info);
 PHP_FUNCTION(mysql_get_server_info);
+PHP_FUNCTION(mysql_info);
 PHP_FUNCTION(mysql_stat);
 PHP_FUNCTION(mysql_thread_id);
 PHP_FUNCTION(mysql_character_set_name);

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.523 2004/11/03 14:07:09 jorton Exp $ -*- autoconf -*-
+dnl ## $Id: configure.in,v 1.524 2004/11/03 23:05:15 moriyoshi Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -36,6 +36,8 @@ for arg in $0 "$@"; do
 done
 
 AC_CANONICAL_HOST
+AC_CANONICAL_TARGET
+
 AC_CONFIG_HEADER(main/php_config.h)
 
 MAJOR_VERSION=5

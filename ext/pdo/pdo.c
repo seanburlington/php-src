@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.47 2005/03/22 10:36:25 helly Exp $ */
+/* $Id: pdo.c,v 1.48 2005/03/29 17:23:36 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -410,9 +410,11 @@ PHP_MINFO_FUNCTION(pdo)
 		ldrivers = drivers;
 	}
 	
-	php_info_print_table_row(2, "PDO drivers", drivers+2);
-	
-	efree(drivers);
+	php_info_print_table_row(2, "PDO drivers", drivers ? drivers+2 : "");
+
+	if (drivers) {
+		efree(drivers);
+	}
 
 	php_info_print_table_end();
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.201 2002/07/26 13:24:45 helly Exp $ */
+/* $Id: gd.c,v 1.202 2002/07/28 10:00:37 helly Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -654,35 +654,6 @@ PHP_FUNCTION(imagesetthickness)
 	convert_to_long_ex(thick);
 		
 	gdImageSetThickness(im, Z_LVAL_PP(thick));
-
-	RETURN_TRUE;
-}
-/* }}} */
-
-/* {{{ proto void imageellipse(resource im, int cx, int cy, int w, int h, int color)
-   Draw an ellipse */
-PHP_FUNCTION(imageellipse)
-{
-	zval **IM, **cx, **cy, **w, **h, **color;
-	gdImagePtr im;
-
-	if (ZEND_NUM_ARGS() != 6 || zend_get_parameters_ex(6, &IM, &cx, &cy, &w, &h, &color) == FAILURE) {
-		ZEND_WRONG_PARAM_COUNT();
-	}
-	
-	ZEND_FETCH_RESOURCE(im, gdImagePtr, IM, -1, "Image", le_gd);
-
-	convert_to_long_ex(cx);
-	convert_to_long_ex(cy);
-	convert_to_long_ex(w);
-	convert_to_long_ex(h);
-	convert_to_long_ex(color);
-
-#ifdef HAVE_GD_IMAGEELLIPSE  /* this function is missing from GD 2.0.1 */
-	gdImageEllipse(im, Z_LVAL_PP(cx), Z_LVAL_PP(cy), Z_LVAL_PP(w), Z_LVAL_PP(h), Z_LVAL_PP(color));
-#else
-	gdImageArc(im, Z_LVAL_PP(cx), Z_LVAL_PP(cy), Z_LVAL_PP(w), Z_LVAL_PP(h), 0, 360, Z_LVAL_PP(color));
-#endif
 
 	RETURN_TRUE;
 }
@@ -1975,6 +1946,35 @@ PHP_FUNCTION(imagearc)
 	RETURN_TRUE;
 }
 /* }}} */	
+
+/* {{{ proto void imageellipse(resource im, int cx, int cy, int w, int h, int color)
+   Draw an ellipse */
+PHP_FUNCTION(imageellipse)
+{
+	zval **IM, **cx, **cy, **w, **h, **color;
+	gdImagePtr im;
+
+	if (ZEND_NUM_ARGS() != 6 || zend_get_parameters_ex(6, &IM, &cx, &cy, &w, &h, &color) == FAILURE) {
+		ZEND_WRONG_PARAM_COUNT();
+	}
+	
+	ZEND_FETCH_RESOURCE(im, gdImagePtr, IM, -1, "Image", le_gd);
+
+	convert_to_long_ex(cx);
+	convert_to_long_ex(cy);
+	convert_to_long_ex(w);
+	convert_to_long_ex(h);
+	convert_to_long_ex(color);
+
+#ifdef HAVE_GD_IMAGEELLIPSE  /* this function is missing from GD 2.0.1 */
+	gdImageEllipse(im, Z_LVAL_PP(cx), Z_LVAL_PP(cy), Z_LVAL_PP(w), Z_LVAL_PP(h), Z_LVAL_PP(color));
+#else
+	gdImageArc(im, Z_LVAL_PP(cx), Z_LVAL_PP(cy), Z_LVAL_PP(w), Z_LVAL_PP(h), 0, 360, Z_LVAL_PP(color));
+#endif
+
+	RETURN_TRUE;
+}
+/* }}} */
 
 /* {{{ proto int imagefilltoborder(int im, int x, int y, int border, int col)
    Flood fill to specific color */

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.26 2002/11/26 21:49:55 ssb Exp $
+// $Id: Registry.php,v 1.27 2002/11/26 23:17:22 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Registry.php';
@@ -55,7 +55,7 @@ Tests if a package is installed in the system. Will exit(1) if it is not.
             'function' => 'doInfo',
             'shortcut' => 'in',
             'options'  => array(),
-            'doc'      => '<pacakge>
+            'doc'      => '<package>
 Displays information about a package. The package argument may be a
 local package file, an URL to a package file, or the name of an
 installed package.'

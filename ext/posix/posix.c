@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.16 2000/06/05 19:47:43 andi Exp $ */
+/* $Id: posix.c,v 1.17 2000/06/25 17:02:45 zeev Exp $ */
 
 
 #include "php.h"
@@ -136,7 +136,7 @@ ZEND_GET_MODULE(posix)
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.16 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.17 $");
 	php_info_print_table_end();
 }
 
@@ -603,7 +603,7 @@ PHP_FUNCTION(posix_mkfifo)
 	convert_to_string(path);
 	convert_to_long(mode);
 
-	if (php3_ini.safe_mode && (!php_checkuid(path->value.str.val, 3))) {
+	if (php3_ini.safe_mode && (!php_checkuid(path->value.str.val, NULL, 3))) {
 		RETURN_FALSE;
 	}
 	result = mkfifo(path->value.str.val, mode->value.lval);

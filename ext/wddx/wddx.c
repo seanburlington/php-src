@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.96.2.5 2003/10/20 15:42:10 moriyoshi Exp $ */
+/* $Id: wddx.c,v 1.96.2.6 2004/06/30 01:12:09 iliaa Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -1069,7 +1069,7 @@ static void php_wddx_process_data(void *user_data, const XML_Char *s, int len)
 			case ST_DATETIME: {
 				char *tmp;
 
-				tmp = do_alloca(len + 1);
+				tmp = emalloc(len + 1);
 				memcpy(tmp, s, len);
 				tmp[len] = '\0';
 
@@ -1080,7 +1080,7 @@ static void php_wddx_process_data(void *user_data, const XML_Char *s, int len)
 					Z_STRLEN_P(ent->data) = len;
 					Z_STRVAL_P(ent->data) = estrndup(s, len);
 				}
-				free_alloca(tmp);
+				efree(tmp);
 			}
 			default:
 				break;

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.14 1999/07/16 13:12:41 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.15 1999/07/21 20:31:07 zeev Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -149,6 +149,8 @@ int sapi_apache_header_handler(sapi_header_struct *sapi_header, sapi_headers_str
 
 	if (!strcasecmp(header_name, "Content-Type")) {
 		r->content_type = pstrdup(r->pool, header_content);
+	} else if (!strcasecmp(header_name, "Set-Cookie")) {
+		table_add(r->headers_out, header_name, header_content);
 	} else {
 		table_set(r->headers_out, header_name, header_content);
 	}

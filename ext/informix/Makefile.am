@@ -1,6 +1,5 @@
-# $Id: Makefile.am,v 1.6 1999/10/10 17:12:22 sas Exp $
+# $Id: Makefile.am,v 1.7 1999/11/13 12:40:37 sas Exp $
 
-INCLUDES=@INCLUDES@ -I@top_srcdir@ -I@top_srcdir@/libzend
 noinst_LTLIBRARIES=libphpext_informix.la
 noinst_LIBRARIES=libifx.a
 libifx_a_SOURCES=stub.c

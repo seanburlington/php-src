@@ -15,9 +15,9 @@
 	| Authors: Andi Gutmans <andi@zend.com>                                |
 	|          Zeev Suraski <zeev@zend.com>                                |
 	+----------------------------------------------------------------------+
-
-	$Id: internal_functions_win32.c,v 1.71 2003/01/17 06:15:24 sebastian Exp $
 */
+
+/* $Id: internal_functions_win32.c,v 1.72 2003/02/19 08:40:18 sniper Exp $ */
 
 /* {{{ includes
  */

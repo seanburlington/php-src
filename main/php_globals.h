@@ -16,6 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
+/* $Id: php_globals.h,v 1.88 2003/02/19 08:40:18 sniper Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H

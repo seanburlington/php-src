@@ -15,7 +15,8 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.54 2003/01/09 22:33:43 iliaa Exp $ */
+
+/* $Id: safe_mode.c,v 1.55 2003/02/19 08:40:19 sniper Exp $ */
 
 #include "php.h"
 

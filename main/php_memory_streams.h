@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: php_memory_streams.h,v 1.8 2003/02/19 08:40:19 sniper Exp $ */
+
 #ifndef PHP_MEMORY_STREAM_H
 #define PHP_MEMORY_STREAM_H
 

@@ -12,12 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
-   | Wez Furlong (wez@thebrainroom.com)                                   |
+   | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.1 2003/02/16 22:19:28 wez Exp $ */
+/* $Id: plain_wrapper.c,v 1.2 2003/02/19 08:40:19 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"

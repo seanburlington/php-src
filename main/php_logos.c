@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
 */
 
+/* $Id: php_logos.c,v 1.16 2003/02/19 08:40:18 sniper Exp $ */
+
 #include "php.h"
 #include "logos.h"
 #include "php_logos.h"

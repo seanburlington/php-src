@@ -16,7 +16,8 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.157 2003/02/17 13:29:56 zeev Exp $ */
+
+/* $Id: fopen_wrappers.c,v 1.158 2003/02/19 08:40:18 sniper Exp $ */
 
 /* {{{ includes
  */

@@ -12,12 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
-   | Wez Furlong (wez@thebrainroom.com)                                   |
+   | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cast.c,v 1.2 2003/02/18 01:22:21 wez Exp $ */
+/* $Id: cast.c,v 1.3 2003/02/19 08:40:19 sniper Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"

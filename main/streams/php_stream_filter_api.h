@@ -12,14 +12,14 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Wez Furlong (wez@thebrainroom.com)                           |
+   | Author: Wez Furlong <wez@thebrainroom.com>                           |
    | With suggestions from:                                               |
    |      Moriyoshi Koizumi <moriyoshi@at.wakwak.com>                     |
    |      Sara Golemon      <pollita@php.net>                             |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_filter_api.h,v 1.2 2003/02/18 02:53:23 pollita Exp $ */
+/* $Id: php_stream_filter_api.h,v 1.3 2003/02/19 08:40:19 sniper Exp $ */
 
 /* The filter API works on the principle of "Bucket-Brigades".  This is
  * partially inspired by the Apache 2 method of doing things, although

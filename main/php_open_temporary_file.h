@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
 */
 
+/* $Id: php_open_temporary_file.h,v 1.7 2003/02/19 08:40:19 sniper Exp $ */
+
 #ifndef PHP_OPEN_TEMPORARY_FILE_H
 #define PHP_OPEN_TEMPORARY_FILE_H
 

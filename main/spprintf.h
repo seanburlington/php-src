@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: spprintf.h,v 1.7 2003/02/19 08:40:19 sniper Exp $ */
+
 /* 
 
 The pbuf parameter of all spprintf version receives a pointer to the allocated

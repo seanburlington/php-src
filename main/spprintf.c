@@ -14,7 +14,9 @@
    +----------------------------------------------------------------------+
    | Author: Marcus Boerger <helly@php.net>                               |
    +----------------------------------------------------------------------+
- */
+*/
+
+/* $Id: spprintf.c,v 1.15 2003/02/19 08:40:19 sniper Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:

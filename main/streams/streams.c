@@ -12,15 +12,14 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
-   | Wez Furlong (wez@thebrainroom.com)                                   |
+   | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    | Borrowed code from:                                                  |
-   | Rasmus Lerdorf <rasmus@lerdorf.on.ca>                                |
-   | Jim Winstead <jimw@php.net>                                          |
+   |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.4 2003/02/18 19:03:44 wez Exp $ */
+/* $Id: streams.c,v 1.5 2003/02/19 08:40:19 sniper Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"

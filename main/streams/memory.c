@@ -12,10 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author:                                                              |
-   | Marcus Boerger <helly@php.net>                                       |
+   | Author: Marcus Boerger <helly@php.net>                               |
    +----------------------------------------------------------------------+
  */
+
+/* $Id: memory.c,v 1.2 2003/02/19 08:40:19 sniper Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"

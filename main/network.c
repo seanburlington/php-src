@@ -16,7 +16,8 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.88 2003/02/17 13:29:56 zeev Exp $ */
+
+/* $Id: network.c,v 1.89 2003/02/19 08:40:18 sniper Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 

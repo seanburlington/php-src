@@ -16,6 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: php_reentrancy.h,v 1.19 2003/02/19 08:40:19 sniper Exp $ */
 
 #ifndef PHP_REENTRANCY_H
 #define PHP_REENTRANCY_H

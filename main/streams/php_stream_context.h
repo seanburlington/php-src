@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Wez Furlong (wez@thebrainroom.com)                           |
+   | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_context.h,v 1.1 2003/02/18 01:22:21 wez Exp $ */
+/* $Id: php_stream_context.h,v 1.2 2003/02/19 08:40:19 sniper Exp $ */
 
 /* Stream context and status notification related definitions */
 

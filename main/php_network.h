@@ -15,7 +15,8 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.38 2002/12/31 15:58:53 sebastian Exp $ */
+
+/* $Id: php_network.h,v 1.39 2003/02/19 08:40:19 sniper Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.31 2003/01/23 20:07:39 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.32 2003/01/23 20:38:44 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -619,7 +619,7 @@ _php_mb_regex_ereg_replace_exec(INTERNAL_FUNCTION_PARAMETERS, int option)
 					p += 2;
 					i += 2;
 				} else {
-					_php_mb_regex_strbuf_ncat(pdevice, (const unsigned char *)p, 1);
+					_php_mb_regex_strbuf_ncat(pdevice, (const unsigned char *)p, fwd);
 					p += fwd;
 					i += fwd;
 				}

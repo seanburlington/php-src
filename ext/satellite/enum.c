@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: enum.c,v 1.2 2000/09/01 22:29:00 eriksson Exp $
+ * $Id: enum.c,v 1.3 2000/10/15 17:27:28 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -103,7 +103,7 @@ zend_bool OrbitEnum_Constructor(OrbitEnum ** ppEnum, int parameterCount,
 	p_enum->mpEnumType = TypeManager_FindEnum(ppParameters[0]->value.str.val);
 	if (p_enum->mpEnumType == NULL)
 	{
-		zend_error(E_ERROR, "(Satellite) unknown enum '%s'", ppParameters[0]->value.str.val);
+		zend_error(E_WARNING, "(Satellite) unknown enum '%s'", ppParameters[0]->value.str.val);
 		goto error;
 	}
 
@@ -157,7 +157,7 @@ zend_bool OrbitEnum_GetProperty(OrbitEnum * pEnum,
 
 	if (p_value == NULL)
 	{
-		zend_error(E_ERROR, "(Satellite) unknown member '%s' in enum '%s'",
+		zend_error(E_WARNING, "(Satellite) unknown member '%s' in enum '%s'",
 				pPropertyName, EnumType_GetRepositoryId(pEnum->mpEnumType));
 
 		ZVAL_NULL(pReturnValue);

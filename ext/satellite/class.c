@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: class.c,v 1.2 2000/09/01 22:29:00 eriksson Exp $
+ * $Id: class.c,v 1.3 2000/10/15 17:27:28 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -68,7 +68,7 @@ void orbit_class_function_call(
 		}
 		else
 		{
-			zend_error(E_ERROR, "(Satellite) This class has no constructor");\
+			zend_error(E_WARNING, "(Satellite) This class has no constructor");\
 		}
 	}
 	else
@@ -84,7 +84,7 @@ void orbit_class_function_call(
 				 * this means that the constructor has failed earlier! 
 				 * -- or should NULL be allowed here? 
 				 */
-				php_error(E_ERROR, "(Satellite) Class has no data!");
+				php_error(E_WARNING, "(Satellite) Class has no data!");
 				RETVAL_NULL();
 				goto orbit_class_function_call_exit;
 			}
@@ -95,7 +95,7 @@ void orbit_class_function_call(
 		}
 		else
 		{
-			zend_error(E_ERROR, "(Satellite) Can't call functions in this class");\
+			zend_error(E_WARNING, "(Satellite) Can't call functions in this class");\
 		}
 	}
 

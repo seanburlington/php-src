@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: class.h,v 1.2 2000/09/01 22:29:00 eriksson Exp $
+ * $Id: class.h,v 1.3 2000/10/15 17:27:28 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -120,7 +120,7 @@ static int  _##name##_PutProperty(zend_property_reference * pPropertyReference, 
 	}\
 	else\
 	{\
-		zend_error(E_ERROR, "(Satellite) Can't set members in class");\
+		zend_error(E_WARNING, "(Satellite) Can't set members in class");\
 	}\
 	return result;\
 }
@@ -146,7 +146,7 @@ static zval _##name##_GetProperty(zend_property_reference * pPropertyReference)\
 	}\
 	else\
 	{\
-		zend_error(E_ERROR, "(Satellite) Can't get members in class");\
+		zend_error(E_WARNING, "(Satellite) Can't get members in class");\
 	}\
 	return value;\
 }

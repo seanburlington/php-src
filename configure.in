@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.102 2000/03/11 11:36:46 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.103 2000/03/11 20:48:44 andi Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -406,11 +406,9 @@ AC_MSG_CHECKING(whether to include debugging symbols)
 AC_MSG_RESULT($PHP_DEBUG)
 
 if test "$PHP_DEBUG" = "yes"; then
-  AC_DEFINE(DEBUG,1)
   PHP_DEBUG=1
   ZEND_DEBUG=yes
 else
-  AC_DEFINE(DEBUG,0)
   PHP_DEBUG=0
   ZEND_DEBUG=no
 fi

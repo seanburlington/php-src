@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.33 2000/03/09 22:19:57 codelion Exp $ */
+/* $Id: php_odbc.c,v 1.34 2000/03/11 20:48:49 andi Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -243,7 +243,7 @@ static PHP_INI_DISP(display_defPW)
 	}
 
 	if (value) {
-#if DEBUG
+#if PHP_DEBUG
 		php_printf("%s", value);
 #else
 		PUTS("********");

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.68 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: php.h,v 1.69 2000/03/11 20:48:44 andi Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -73,11 +73,11 @@ extern unsigned char second_arg_allow_ref[];
 #include "php_regex.h"
 
 /* PHP's DEBUG value must match Zend's ZEND_DEBUG value */
-#undef DEBUG
-#define DEBUG ZEND_DEBUG
+#undef PHP_DEBUG
+#define PHP_DEBUG ZEND_DEBUG
 
 
-#if DEBUG || !(defined(__GNUC__)||defined(PHP_WIN32))
+#if PHP_DEBUG || !(defined(__GNUC__)||defined(PHP_WIN32))
 #ifdef inline
 #undef inline
 #endif

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.242 2003/10/17 02:21:26 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.243 2003/10/31 01:29:59 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -544,7 +544,7 @@ static void php_cgi_usage(char *argv0)
 	php_printf("Usage: %s [-q] [-h] [-s] [-v] [-i] [-f <file>]\n"
 			   "       %s <file> [args...]\n"
 			   "  -a               Run interactively\n"
-#if PHP_FASTCGI
+#if PHP_FASTCGI && !defined(PHP_WIN32)
 			   "  -b <address:port>|<port> Bind Path for external FASTCGI Server mode\n"
 #endif
 			   "  -C               Do not chdir to the script's directory\n"

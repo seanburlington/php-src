@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.37 2004/01/08 17:33:13 sniper Exp $
+// $Id: Remote.php,v 1.38 2004/04/03 06:04:31 cellog Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -250,14 +250,14 @@ parameter.
 
         $r = new PEAR_Remote($this->config);
         $reg = new PEAR_Registry($this->config->get('php_dir'));
-        $available = $r->call('package.listAll', true);
+        $available = $r->call('package.listAll', true, false);
         if (PEAR::isError($available)) {
             return $this->raiseError($available);
         }
         $data = array(
             'caption' => 'Matched packages:',
             'border' => true,
-            'headline' => array('Package', 'Latest', 'Local'),
+            'headline' => array('Package', 'Stable/(Latest)', 'Local'),
             );
 
         foreach ($available as $name => $info) {
@@ -274,9 +274,13 @@ parameter.
             if (isset($params[$name]))
                 $desc .= "\n\n".$info['description'];
 
+            $unstable = '';
+            if ($info['unstable']) {
+                $unstable = '/(' . $info['unstable'] . $info['state'] . ')';
+            }
             $data['data'][$info['category']][] = array(
                 $name,
-                $info['stable'],
+                $info['stable'] . $unstable,
                 $installed['version'],
                 $desc,
                 );

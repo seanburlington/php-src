@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql_int.h,v 1.3 2004/05/18 19:25:45 wez Exp $ */
+/* $Id: php_pdo_mysql_int.h,v 1.4 2004/05/19 12:40:11 wez Exp $ */
 
 #ifndef PHP_PDO_MYSQL_INT_H
 #define PHP_PDO_MYSQL_INT_H
@@ -26,7 +26,7 @@
 /* stuff we use in a mySQL database handle */
 typedef struct {
 	MYSQL 		*server;
-	unsigned int	last_err;
+	int	last_err;
 	unsigned attached:1;
 	unsigned _reserved:31;
 } pdo_mysql_db_handle;
@@ -53,8 +53,8 @@ typedef struct {
 
 extern pdo_driver_t pdo_mysql_driver;
 
-extern int _mysql_error(char *what, int errno, const char *file, int line TSRMLS_DC);
-#define pdo_mysql_error(w,s)	_mysql_error(w, s, __FILE__, __LINE__ TSRMLS_CC)
+extern int _pdo_mysql_error(char *what, int errno, const char *file, int line TSRMLS_DC);
+#define pdo_mysql_error(w,s)	_pdo_mysql_error(w, s, __FILE__, __LINE__ TSRMLS_CC)
 extern int mysql_handle_error(pdo_dbh_t *dbh, pdo_mysql_db_handle *H, int errcode);
 
 extern struct pdo_stmt_methods mysql_stmt_methods;

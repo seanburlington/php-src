@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.19 1999/09/04 20:12:47 rasmus Exp $ */
+/* $Id: mod_php4.c,v 1.20 1999/09/04 20:37:24 rasmus Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -103,6 +103,7 @@ static int zend_apache_ub_write(const char *str, uint str_length)
 	}
 	if(ret != str_length) {
 		PG(connection_status) = PHP_CONNECTION_ABORTED;
+		if(!PG(ignore_user_abort)) zend_bailout();
 	}
 	return ret;
 }

@@ -1,4 +1,4 @@
-dnl $Id: configure.in.in,v 1.30 1999/05/22 19:41:28 sas Exp $ -*- sh -*-
+dnl $Id: configure.in.in,v 1.31 1999/05/27 01:34:17 sas Exp $ -*- sh -*-
 dnl Process this file with autoconf to produce a configure script.
 
 
@@ -875,6 +875,7 @@ AC_DEFINE_UNQUOTED(PHP_OS,"$PHP_OS")
 
 AC_OUTPUT(Makefile libphp4.module
           scripts/mkextlib regex/Makefile ext/Makefile
+		  ext/pcre/pcrelib/Makefile
           @@EXT_MAKEFILES@@ build-defs.h, [
 ], [
 

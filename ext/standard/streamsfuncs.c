@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.32 2004/01/08 08:17:34 andi Exp $ */
+/* $Id: streamsfuncs.c,v 1.33 2004/02/23 16:26:34 abies Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -954,7 +954,8 @@ static void apply_filter_to_stream(int append, INTERNAL_FUNCTION_PARAMETERS)
 	zval *zstream;
 	php_stream *stream;
 	char *filtername;
-	int filternamelen, read_write = 0;
+	int filternamelen;
+	long read_write = 0;
 	zval *filterparams = NULL;
 	php_stream_filter *filter;
 

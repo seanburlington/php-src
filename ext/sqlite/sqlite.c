@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.122 2004/02/23 01:21:16 abies Exp $ 
+   $Id: sqlite.c,v 1.123 2004/02/23 16:26:34 abies Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1054,7 +1054,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.122 2004/02/23 01:21:16 abies Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.123 2004/02/23 16:26:34 abies Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1823,7 +1823,7 @@ PHP_FUNCTION(sqlite_fetch_all)
 PHP_FUNCTION(sqlite_fetch_array)
 {
 	zval *zres;
-	int mode = PHPSQLITE_BOTH;
+	long mode = PHPSQLITE_BOTH;
 	zend_bool decode_binary = 1;
 	struct php_sqlite_result *res;
 	zval *object = getThis();

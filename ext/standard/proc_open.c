@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.28.2.2 2005/03/07 16:19:31 iliaa Exp $ */
+/* $Id: proc_open.c,v 1.28.2.3 2005/03/11 09:01:52 hyanantha Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -398,7 +398,11 @@ PHP_FUNCTION(proc_get_status)
 		}
 		if (WIFSIGNALED(wstatus)) {
 			signaled = 1;
+#ifdef NETWARE
+			termsig = WIFTERMSIG(wstatus);
+#else
 			termsig = WTERMSIG(wstatus);
+#endif
 		}
 		if (WIFSTOPPED(wstatus)) {
 			stopped = 1;

@@ -17,11 +17,13 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.5 2001/06/22 07:07:48 sas Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.6 2001/06/26 13:33:24 zeev Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
+#if HAVE_UNISTD_H
 #include <unistd.h>
+#endif
 
 #include "php.h"
 #include "php_globals.h"

@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: rules.mk,v 1.17 2000/06/11 18:16:37 sas Exp $ 
+# $Id: rules.mk,v 1.18 2000/06/11 19:53:19 rasmus Exp $ 
 #
 
 include $(top_builddir)/config_vars.mk
@@ -34,7 +34,7 @@ mkinstalldirs = $(top_srcdir)/build/shtool mkdir -p
 INSTALL = $(top_srcdir)/build/shtool install -c
 INSTALL_DATA = $(INSTALL) -m 644
 SHARED_COMPILE = $(SHARED_LIBTOOL) --mode=compile $(CC) $(DEFS)   $(INCLUDES) $(EXTRA_INCLUDES) $(CPPFLAGS) $(CFLAGS) $(EXTRA_CFLAGS) -c $< && touch $@
-DEFS = -DHAVE_CONFIG_H -I. -I$(srcdir) -I$(top_builddir) -I$(top_builddir)/core
+DEFS = -DHAVE_CONFIG_H -I. -I$(srcdir) -I$(top_builddir) -I$(top_builddir)/main
 
 moduledir    = $(EXTENSION_DIR)
 

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_array.h,v 1.19 2001/02/20 05:36:40 jason Exp $ */
+/* $Id: php_array.h,v 1.20 2001/02/20 14:23:03 andrei Exp $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H
@@ -49,7 +49,7 @@ PHP_FUNCTION(key);
 PHP_FUNCTION(min);
 PHP_FUNCTION(max);
 PHP_FUNCTION(in_array);
-PHP_FUNCTION(search_array);
+PHP_FUNCTION(array_search);
 PHP_FUNCTION(extract);
 PHP_FUNCTION(compact);
 PHP_FUNCTION(range);

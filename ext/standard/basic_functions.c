@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.306 2001/02/20 05:36:40 jason Exp $ */
+/* $Id: basic_functions.c,v 1.307 2001/02/20 14:23:03 andrei Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -550,7 +550,7 @@ function_entry basic_functions[] = {
 	PHP_FE(min,										NULL)
 	PHP_FE(max,										NULL)
 	PHP_FE(in_array,								NULL)
-	PHP_FE(search_array,								NULL)
+	PHP_FE(array_search,							NULL)
 	PHP_FE(extract,									NULL)
 	PHP_FE(compact,									NULL)
 	PHP_FE(range,									NULL)

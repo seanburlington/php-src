@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_openssl.h,v 1.6 2001/04/01 23:06:14 wez Exp $ */
+/* $Id: php_openssl.h,v 1.7 2001/05/04 23:42:10 wez Exp $ */
 
 #ifndef PHP_OPENSSL_H
 #define PHP_OPENSSL_H
@@ -37,6 +37,10 @@ PHP_FUNCTION(openssl_sign);
 PHP_FUNCTION(openssl_verify);
 PHP_FUNCTION(openssl_seal);
 PHP_FUNCTION(openssl_open);
+PHP_FUNCTION(openssl_private_encrypt);
+PHP_FUNCTION(openssl_private_decrypt);
+PHP_FUNCTION(openssl_public_encrypt);
+PHP_FUNCTION(openssl_public_decrypt);
 
 PHP_FUNCTION(openssl_pkcs7_verify);
 PHP_FUNCTION(openssl_pkcs7_decrypt);

@@ -2,7 +2,7 @@
 || PEAR Coding Standards                                                 ||
 ===========================================================================
 
-$Id: CODING_STANDARDS,v 1.5 2001/02/18 17:47:43 jon Exp $
+$Id: CODING_STANDARDS,v 1.6 2001/05/06 23:44:06 ssb Exp $
 
 -------------
 [1] Indenting
@@ -17,7 +17,10 @@ need to ensure that it is called when you are editing php files):
   (setq tab-width 4
         c-basic-offset 4
         c-hanging-comment-ender-p nil
-        indent-tabs-mode nil))
+  	indent-tabs-mode
+	(not
+	 (and (string-match "/\\(PEAR\\|pear\\)/" (buffer-file-name))
+	      (string-match "\.php$" (buffer-file-name))))))
 
 Here are vim rules for the same thing:
 
@@ -188,7 +191,7 @@ following comment block as the header:
 // |          Your Name <you@example.com>                                 |
 // +----------------------------------------------------------------------+
 //
-// $Id: CODING_STANDARDS,v 1.5 2001/02/18 17:47:43 jon Exp $
+// $Id: CODING_STANDARDS,v 1.6 2001/05/06 23:44:06 ssb Exp $
 
 There's no hard rule to determine when a new code contributer should be
 added to the list of authors for a given source file.  In general, their

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.151 2002/10/21 16:41:06 hholzgra Exp $ */
+/* $Id: SAPI.c,v 1.152 2002/10/21 18:44:50 hholzgra Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -321,12 +321,8 @@ SAPI_API void sapi_activate(TSRMLS_D)
 				   it is up to the webserver to decide whether to allow a method or not
 				*/
 				SG(request_info).content_type_dup = NULL;
-				if(PG(always_populate_raw_post_data)) {
-					if(sapi_module.default_post_reader) {
-						sapi_module.default_post_reader(TSRMLS_C);
-					}
-				} else {
-					sapi_module.sapi_error(E_WARNING, "No content-type in %s request", SG(request_info).request_method);
+				if(sapi_module.default_post_reader) {
+					sapi_module.default_post_reader(TSRMLS_C);
 				}
 			}
 		} else {

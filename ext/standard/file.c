@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.99 2000/07/07 09:06:47 stas Exp $ */
+/* $Id: file.c,v 1.100 2000/07/22 01:53:16 david Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -827,7 +827,7 @@ PHPAPI int php_set_sock_blocking(int socketd, int block)
       
 #ifdef PHP_WIN32
       /* with ioctlsocket, a non-zero sets nonblocking, a zero sets blocking */
-	  flags = block;
+	  flags = block ? 0 : 1;
 	  if (ioctlsocket(socketd,FIONBIO,&flags)==SOCKET_ERROR){
 		  php_error(E_WARNING,"%s",WSAGetLastError());
 		  ret = FALSE;

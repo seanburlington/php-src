@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Downloader.php,v 1.16 2004/05/16 15:37:13 pajoye Exp $
+// $Id: Downloader.php,v 1.17 2004/06/18 14:41:01 mj Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -456,9 +456,9 @@ class PEAR_Downloader extends PEAR_Common
                 if ($version == 0) {
                     return $this->raiseError("No release with state '$state' found for '$pkgfile'");
                 }
-            // invalid postfix passed
+            // invalid suffix passed
             } else {
-                return $this->raiseError("Invalid postfix '-$version', be sure to pass a valid PEAR ".
+                return $this->raiseError("Invalid suffix '-$version', be sure to pass a valid PEAR ".
                                          "version number or release state");
             }
         // Guess what to download

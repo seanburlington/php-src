@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.76 2000/04/28 10:37:16 thies Exp $ */
+/* $Id: oci8.c,v 1.77 2000/04/30 19:01:16 andi Exp $ */
 
 /* TODO list:
  *
@@ -2690,7 +2690,7 @@ PHP_FUNCTION(ocisavelobfile)
 
 		filename = (*arg)->value.str.val;
 
-		if ((fp = open(filename, O_RDONLY)) == -1) {
+		if ((fp = V_OPEN((filename, O_RDONLY))) == -1) {
 			php_error(E_WARNING, "Can't open file %s", filename);
 			RETURN_FALSE;
         } 
@@ -2812,7 +2812,7 @@ PHP_FUNCTION(ociwritelobtofile)
 				goto bail;
 			}
 
-			if ((fp = open(filename,O_CREAT|O_TRUNC|O_WRONLY)) == -1) {
+			if ((fp = V_OPEN((filename,O_CREAT|O_TRUNC|O_WRONLY))) == -1) {
 				php_error(E_WARNING, "Can't create file %s", filename);
 				goto bail;
 			} 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.30 2000/04/20 17:23:59 zeev Exp $ */
+/* $Id: db.c,v 1.31 2000/04/30 19:01:15 andi Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 # include "dl/phpdl.h"
@@ -333,7 +333,7 @@ dbm_info *php_dbm_open(char *filename, char *mode) {
 		}
 #else /* NFS_HACK */
 
-		lockfd = open(lockfn,O_RDWR|O_CREAT,0644);
+		lockfd = V_OPEN((lockfn,O_RDWR|O_CREAT,0644));
 
 		if (lockfd) {
 			flock(lockfd,LOCK_EX);
@@ -428,7 +428,7 @@ int php_dbm_close(dbm_info *info) {
 	unlink(info->lockfn);
 #else
 	if (info->lockfn) {
-		lockfd = open(info->lockfn,O_RDWR,0644);
+		lockfd = V_OPEN((info->lockfn,O_RDWR,0644));
 		flock(lockfd,LOCK_UN);
 		close(lockfd);
 	}

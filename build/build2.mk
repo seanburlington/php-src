@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build2.mk,v 1.15 2000/08/20 05:36:07 sas Exp $ 
+# $Id: build2.mk,v 1.16 2000/11/27 13:27:51 sas Exp $ 
 #
 
 include generated_lists
@@ -26,7 +26,7 @@ LT_TARGETS = ltconfig ltmain.sh config.guess config.sub
 makefile_in_files = $(makefile_am_files:.am=.in)
 makefile_files    = $(makefile_am_files:e.am=e)
 
-config_h_in = php_config.h.in
+config_h_in = main/php_config.h.in
 
 acconfig_h_SOURCES = acconfig.h.in $(config_h_files)
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: build-defs.h.in,v 1.15 2000/07/24 01:39:43 david Exp $ */
+/* $Id: build-defs.h.in,v 1.1 2000/11/27 13:27:51 sas Exp $ */
 
 #define CONFIGURE_COMMAND "@CONFIGURE_COMMAND@"
 #define PHP_ADA_INCLUDE		""

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.42 2003/11/30 12:30:29 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.43 2003/12/02 15:17:02 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -103,6 +103,7 @@ int dom_node_children_valid(xmlNodePtr node) {
 		case XML_COMMENT_NODE:
 		case XML_TEXT_NODE:
 		case XML_CDATA_SECTION_NODE:
+		case XML_NOTATION_NODE:
 			return FAILURE;
 			break;
 		default:

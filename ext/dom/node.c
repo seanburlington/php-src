@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.16 2003/11/29 20:40:17 rrichards Exp $ */
+/* $Id: node.c,v 1.17 2003/12/02 15:17:02 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -279,13 +279,20 @@ Since:
 */
 int dom_node_child_nodes_read(dom_object *obj, zval **retval TSRMLS_DC)
 {
+	xmlNode *nodep;
 	dom_object *intern;
 
-	ALLOC_ZVAL(*retval);
-	php_dom_create_interator(*retval, DOM_NODELIST TSRMLS_CC);
+	nodep = dom_object_get_node(obj);
 
-	intern = (dom_object *)zend_objects_get_address(*retval TSRMLS_CC);
-	dom_namednode_iter(obj, XML_ELEMENT_NODE, intern, NULL, NULL, NULL);
+	ALLOC_ZVAL(*retval);
+	
+	if (dom_node_children_valid(nodep) == FAILURE) {
+		ZVAL_NULL(*retval);
+	} else {
+		php_dom_create_interator(*retval, DOM_NODELIST TSRMLS_CC);
+		intern = (dom_object *)zend_objects_get_address(*retval TSRMLS_CC);
+		dom_namednode_iter(obj, XML_ELEMENT_NODE, intern, NULL, NULL, NULL);
+	}
 
 	return SUCCESS;
 }
@@ -427,13 +434,20 @@ Since:
 */
 int dom_node_attributes_read(dom_object *obj, zval **retval TSRMLS_DC)
 {
+	xmlNode *nodep;
 	dom_object *intern;
 
-	ALLOC_ZVAL(*retval);
-	php_dom_create_interator(*retval, DOM_NAMEDNODEMAP TSRMLS_CC);
+	nodep = dom_object_get_node(obj);
 
-	intern = (dom_object *)zend_objects_get_address(*retval TSRMLS_CC);
-	dom_namednode_iter(obj, XML_ATTRIBUTE_NODE, intern, NULL, NULL, NULL);
+	ALLOC_ZVAL(*retval);
+
+	if (nodep->type == XML_ELEMENT_NODE) {
+		php_dom_create_interator(*retval, DOM_NAMEDNODEMAP TSRMLS_CC);
+		intern = (dom_object *)zend_objects_get_address(*retval TSRMLS_CC);
+		dom_namednode_iter(obj, XML_ATTRIBUTE_NODE, intern, NULL, NULL, NULL);
+	} else {
+		ZVAL_NULL(*retval);
+	}
 
 	return SUCCESS;
 }

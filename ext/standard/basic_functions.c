@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.247 2000/09/05 14:23:16 stas Exp $ */
+/* $Id: basic_functions.c,v 1.248 2000/09/05 16:55:32 rasmus Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -212,6 +212,7 @@ function_entry basic_functions[] = {
 	PHP_FE(exec, 									second_and_third_args_force_ref)
 	PHP_FE(system, 									second_arg_force_ref)
 	PHP_FE(escapeshellcmd, 							NULL)
+	PHP_FE(escapeshellarg, 							NULL)
 	PHP_FE(passthru, 								second_arg_force_ref)
 	PHP_FE(shell_exec, 								NULL)
 

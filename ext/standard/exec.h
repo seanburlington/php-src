@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: exec.h,v 1.5 2000/07/24 01:39:49 david Exp $ */
+/* $Id: exec.h,v 1.6 2000/09/05 16:55:32 rasmus Exp $ */
 
 #ifndef EXEC_H
 #define EXEC_H
@@ -24,6 +24,7 @@
 PHP_FUNCTION(system);
 PHP_FUNCTION(exec);
 PHP_FUNCTION(escapeshellcmd);
+PHP_FUNCTION(escapeshellarg);
 PHP_FUNCTION(passthru);
 PHP_FUNCTION(shell_exec);
 

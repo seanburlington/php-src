@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.62.2.19 2004/04/11 18:53:36 iliaa Exp $ 
+   $Id: sqlite.c,v 1.62.2.20 2004/04/22 22:36:14 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -82,6 +82,12 @@ PHP_INI_END()
 
 
 #define DB_FROM_ZVAL(db, zv)	ZEND_FETCH_RESOURCE2(db, struct php_sqlite_db *, zv, -1, "sqlite database", le_sqlite_db, le_sqlite_pdb)
+
+#define PHP_SQLITE_EMPTY_QUERY \
+	if (!sql_len) { \
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot execute empty query."); \
+		RETURN_FALSE; \
+	}
 
 struct php_sqlite_result {
 	struct php_sqlite_db *db;
@@ -669,7 +675,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.19 2004/04/11 18:53:36 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.20 2004/04/22 22:36:14 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1051,6 +1057,8 @@ PHP_FUNCTION(sqlite_unbuffered_query)
 
 	DB_FROM_ZVAL(db, &zdb);
 
+	PHP_SQLITE_EMPTY_QUERY;
+
 	/* avoid doing work if we can */
 	if (!return_value_used) {
 		db->last_err_code = sqlite_exec(db->db, sql, NULL, NULL, &errtext);
@@ -1083,6 +1091,8 @@ PHP_FUNCTION(sqlite_query)
 		return;
 	}
 	DB_FROM_ZVAL(db, &zdb);
+
+	PHP_SQLITE_EMPTY_QUERY;
 
 	/* avoid doing work if we can */
 	if (!return_value_used) {
@@ -1297,6 +1307,8 @@ PHP_FUNCTION(sqlite_array_query)
 	}
 	DB_FROM_ZVAL(db, &zdb);
 
+	PHP_SQLITE_EMPTY_QUERY;
+
 	/* avoid doing work if we can */
 	if (!return_value_used) {
 		db->last_err_code = sqlite_exec(db->db, sql, NULL, NULL, &errtext);
@@ -1399,6 +1411,8 @@ PHP_FUNCTION(sqlite_single_query)
 		return;
 	}
 	DB_FROM_ZVAL(db, &zdb);
+
+	PHP_SQLITE_EMPTY_QUERY;
 
 	/* avoid doing work if we can */
 	if (!return_value_used) {

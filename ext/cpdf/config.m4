@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.15 2003/06/26 18:15:56 sniper Exp $
+dnl $Id: config.m4,v 1.16 2003/09/11 15:25:45 sniper Exp $
 
 AC_DEFUN(CPDF_JPEG_TEST,[
   AC_ARG_WITH(jpeg-dir,
@@ -53,7 +53,7 @@ AC_ARG_WITH(cpdflib,
   PHP_WITH_SHARED
   if test "$withval" != "no"; then
     cpdf_withval=$withval
-    PHP_NEW_EXTENSION(cpdf, cpdf.c, $ext_shared)
+    PHP_NEW_EXTENSION(cpdf, cpdf.c, $ext_shared,, \\$(GDLIB_CFLAGS))
     PHP_SUBST(CPDF_SHARED_LIBADD)
     CPDF_JPEG_TEST
     CPDF_TIFF_TEST

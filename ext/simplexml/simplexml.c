@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.59 2003/08/22 15:04:22 wez Exp $ */
+/* $Id: simplexml.c,v 1.60 2003/10/02 19:45:05 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -269,6 +269,7 @@ next_iter:
 static zval **
 sxe_property_get_ptr(zval *object, zval *member TSRMLS_DC)
 {
+#if 0
 	zval **property_ptr;
 	zval  *property;
 
@@ -279,6 +280,22 @@ sxe_property_get_ptr(zval *object, zval *member TSRMLS_DC)
 	*property_ptr = property;
 	
 	return property_ptr;
+#else
+	/* necessary voodoo hack */
+	struct compounded_zval_ptr {
+		zval zv;
+		zval *pzv;
+	};
+
+	zval  *property;
+
+	property = sxe_property_read(object, member, 0 TSRMLS_CC);
+	property = erealloc(property, sizeof(struct compounded_zval_ptr));
+
+	((struct compounded_zval_ptr *)property)->pzv = property;
+	
+	return &((struct compounded_zval_ptr *)property)->pzv;
+#endif
 }
 /* }}} */
 
@@ -1068,7 +1085,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.59 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.60 $");
 	php_info_print_table_end();
 }
 /* }}} */

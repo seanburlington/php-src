@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.36 2004/12/06 18:55:16 stas Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.37 2004/12/16 12:36:43 sniper Exp $ */
 
 #include <fcntl.h>
 
@@ -140,7 +140,7 @@ php_apache_sapi_read_post(char *buf, uint count_bytes TSRMLS_DC)
 	/*
 	 * This loop is needed because ap_get_brigade() can return us partial data
 	 * which would cause premature termination of request read. Therefor we
-	 * need to make sure that if data is avaliable we fill the buffer completely.
+	 * need to make sure that if data is available we fill the buffer completely.
 	 */
 
 	while (ap_get_brigade(r->input_filters, brigade, AP_MODE_READBYTES, APR_BLOCK_READ, len) == APR_SUCCESS) {

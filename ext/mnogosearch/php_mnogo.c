@@ -1,11 +1,11 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.90.2.3 2004/11/14 19:30:15 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.90.2.4 2004/11/15 19:02:38 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    |                      and Ramil Kalimullin <ram@izhcom.ru>            |
    |  Further development by  Sergey Kartashoff <gluke@mail.ru>           |
    +----------------------------------------------------------------------+
- */
+*/
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_statement.c,v 1.15 2005/02/06 23:58:53 wez Exp $ */
+/* $Id: firebird_statement.c,v 1.16 2005/02/07 01:21:56 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -605,7 +605,7 @@ static int firebird_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_dat
 			caller_frees = 0;
 			
 			if (firebird_stmt_get_col(stmt, param->paramno, &value, &value_len, &caller_frees TSRMLS_CC)) {
-				switch (param->param_type) {
+				switch (PDO_PARAM_TYPE(param->param_type)) {
 					case PDO_PARAM_STR:
 						if (value) {
 							ZVAL_STRINGL(param->parameter, value, value_len, 1);

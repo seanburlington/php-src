@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.8 2005/02/06 22:34:53 wez Exp $ */
+/* $Id: sqlite_statement.c,v 1.9 2005/02/07 01:21:58 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -94,7 +94,7 @@ static int pdo_sqlite_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_d
 			}
 			
 			if (param->is_param) {
-				switch (param->param_type) {
+				switch (PDO_PARAM_TYPE(param->param_type)) {
 					case PDO_PARAM_LOB:
 					case PDO_PARAM_STMT:
 						return 0;

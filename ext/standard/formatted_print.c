@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.77 2004/05/19 16:46:29 abies Exp $ */
+/* $Id: formatted_print.c,v 1.77.2.1 2004/07/18 17:28:04 iliaa Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -398,9 +398,6 @@ php_sprintf_appenddouble(char **buffer, int *pos,
 
 	numbuf[i] = '\0';
 
-	if (precision > 0) {
-		width += (precision + 1);
-	}
 	php_sprintf_appendstring(buffer, pos, size, numbuf, width, 0, padding,
 							 alignment, i, sign, 0, always_sign);
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: aggregation.c,v 1.7 2002/03/21 15:28:46 andrei Exp $ */
+/* $Id: aggregation.c,v 1.8 2002/04/30 11:29:28 stas Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -408,7 +408,8 @@ static void aggregate(INTERNAL_FUNCTION_PARAMETERS, int aggr_what, int aggr_type
 		 * and stuff this where it belongs so we don't have to work so hard next
 		 * time.
 		 */
-		Z_OBJCE_P(obj) = new_ce;
+		/* OBJECT FIXME!! won't work with non-standard objects */
+		Z_OBJ_P(obj)->ce = new_ce;
 		aggr_info_new.new_ce = new_ce;
 		MAKE_STD_ZVAL(aggr_info_new.aggr_members);
 		array_init(aggr_info_new.aggr_members);
@@ -628,7 +629,8 @@ PHP_FUNCTION(deaggregate)
 			}
 		}
 
-		Z_OBJCE_P(obj) = orig_ce;
+		/* OBJECT FIXME!! won't work with non-standard objects */
+		Z_OBJ_P(obj)->ce = orig_ce;
 		zend_hash_index_del(BG(aggregation_table), (long)obj);
 	}
 }

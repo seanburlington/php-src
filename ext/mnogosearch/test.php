@@ -1,6 +1,6 @@
 <!-- 
     $Source: /repository/php-src/ext/mnogosearch/Attic/test.php,v $
-    $Id: test.php,v 1.19 2001/03/02 11:41:34 gluke Exp $ 
+    $Id: test.php,v 1.20 2001/03/02 11:43:26 gluke Exp $ 
 -->
 
 <html>
@@ -63,10 +63,10 @@
 //		exit;
 //	}
 
-	if (! Udm_Load_Ispell_Data($udm,UDM_ISPELL_TYPE_SERVER,'','',1)) {
-		printf("Error loading ispell data from server<br>\n");
-		exit;
-	}
+//	if (! Udm_Load_Ispell_Data($udm,UDM_ISPELL_TYPE_SERVER,'','',1)) {
+//		printf("Error loading ispell data from server<br>\n");
+//		exit;
+//	}
 
 // Stage 3: add search limits
 //	Udm_Add_Search_Limit($udm,UDM_LIMIT_URL,"http://www.mydomain.com/%");

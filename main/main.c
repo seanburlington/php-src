@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.339 2000/11/13 18:54:37 zeev Exp $ */
+/* $Id: main.c,v 1.340 2000/11/20 22:31:38 fmk Exp $ */
 
 
 #include <stdio.h>
@@ -51,6 +51,7 @@
 #include "fopen-wrappers.h"
 #include "ext/standard/php_standard.h"
 #include "php_variables.h"
+#include "ext/standard/credits.h"
 #ifdef PHP_WIN32
 #include <io.h>
 #include <fcntl.h>

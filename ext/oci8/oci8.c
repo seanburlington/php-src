@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.59 2000/02/27 14:31:04 thies Exp $ */
+/* $Id: oci8.c,v 1.60 2000/02/27 18:02:14 thies Exp $ */
 
 /* TODO list:
  *
@@ -43,6 +43,7 @@
  * - cleanup the ociexecute semantics for refcursors
  * - make $lob->savefile use O_BINARY
  * - line 2728: ub4 length = -1; needs fixing
+ * - delay OCIInitialize() as far as we can.
  */
 
 /* {{{ includes & stuff */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.102 2000/11/08 18:41:22 mathieu Exp $ */
+/* $Id: gd.c,v 1.103 2000/11/18 18:09:42 jmoore Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -531,6 +531,8 @@ gdImagePtr _php_image_create_from_string (zval **data, char *tn, gdImagePtr (*io
 	}
 
 	return im;
+#else
+	return NULL;
 #endif
 }
 

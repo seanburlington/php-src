@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.174.2.1 2002/11/15 10:44:23 derick Exp $ */
+/* $Id: php_mysql.c,v 1.174.2.2 2002/11/20 23:01:02 sniper Exp $ */
 
 /* TODO:
  *
@@ -231,6 +231,7 @@ static void _free_mysql_result(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	MYSQL_RES *mysql_result = (MYSQL_RES *)rsrc->ptr;
 
 	mysql_free_result(mysql_result);
+	MySG(result_allocated)--;
 }
 /* }}} */
 

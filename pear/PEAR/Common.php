@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.7 2001/08/11 16:11:49 cox Exp $
+// $Id: Common.php,v 1.8 2001/08/11 16:14:14 cox Exp $
 
 require_once 'PEAR.php';
 
@@ -291,7 +291,6 @@ class PEAR_Common extends PEAR
             $this->pkginfo[$k] = trim($v);
         }
         $this->pkginfo['filelist'] = &$this->filelist;
-        //print_r($this->pkginfo);exit;
         return $this->pkginfo;
     }
 

@@ -16,7 +16,7 @@
    |         Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.33.2.3 2002/11/19 21:11:03 wez Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.33.2.4 2002/12/31 11:43:02 wez Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 
@@ -104,12 +104,6 @@ php_stream *php_stream_gzopen(php_stream_wrapper *wrapper, char *path, char *mod
 	if (strchr(mode, '+')) {
 		if (options & REPORT_ERRORS) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "cannot open a zlib stream for reading and writing at the same time!");
-		}
-		return NULL;
-	}
-	if (strchr(mode, 'a')) {
-		if (options & REPORT_ERRORS) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "cannot append to a zlib stream!");
 		}
 		return NULL;
 	}

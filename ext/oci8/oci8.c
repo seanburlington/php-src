@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.156 2001/09/17 20:52:31 dbenson Exp $ */
+/* $Id: oci8.c,v 1.157 2001/09/19 19:25:43 asautins Exp $ */
 
 /* TODO list:
  *
@@ -620,7 +620,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.156 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.157 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -4625,7 +4625,7 @@ PHP_FUNCTION(ocicollgetelem)
 	ub4  ndx;
 	int inx;
 	dvoid *elem;
-	OCIInd elemind;
+	OCIInd *elemind;
 	boolean exists;
 	OCIString *ocistr = (OCIString *)0;
 	text *str;
@@ -4667,7 +4667,7 @@ PHP_FUNCTION(ocicollgetelem)
 		}
 
 		/* Return null if the value is null */
-		if(elemind == OCI_IND_NULL) {
+		if(*elemind == OCI_IND_NULL) {
 			RETURN_FALSE;
 		} 
 

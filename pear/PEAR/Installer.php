@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.46 2002/04/09 14:12:12 cox Exp $
+// $Id: Installer.php,v 1.47 2002/04/13 05:52:54 mfischer Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -261,7 +261,11 @@ class PEAR_Installer extends PEAR_Common
                 }
                 $need_download = true;
             } else {
-                return $this->raiseError("could not open the package file: $pkgfile");
+                if (strlen($pkgfile)) {
+                    return $this->raiseError("Could not open the package file: $pkgfile");
+                } else {
+                    return $this->raiseError("No package file given");
+                }
             }
         }
 

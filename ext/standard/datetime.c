@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.13 1999/07/22 15:15:41 andrey Exp $ */
+/* $Id: datetime.c,v 1.14 1999/07/23 19:51:27 andrey Exp $ */
 
 
 #include "php.h"
@@ -61,6 +61,8 @@ static int phpday_tab[2][12] =
 };
 
 #define isleap(year) (((year%4) == 0 && (year%100)!=0) || (year%400)==0)
+
+extern PHPAPI time_t parsedate(char *p, struct timeval *now);
 
 PHP_FUNCTION(time)
 {
@@ -550,6 +552,32 @@ PHP_FUNCTION(strftime)
 	RETURN_FALSE;
 }
 #endif
+
+/* {{{ proto int strtotime(string time, int now) */
+PHP_FUNCTION(strtotime)
+{
+	pval	*timep, *nowp;
+	int 	 ac;
+	struct timeval tv;
+
+	ac = ARG_COUNT(ht);
+
+	if (ac < 1 || ac > 2 || getParameters(ht, ac, &timep, &nowp)==FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+
+	convert_to_string(timep);
+	if (ac == 2) {
+		convert_to_long(nowp);
+		tv.tv_sec = nowp->value.lval;
+		tv.tv_usec = 0;
+		RETURN_LONG(parsedate(timep->value.str.val, &tv));
+	} else {
+		RETURN_LONG(parsedate(timep->value.str.val, NULL));
+	}
+}
+/* }}} */
+
 /*
  * Local variables:
  * tab-width: 4

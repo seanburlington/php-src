@@ -27,12 +27,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.45 2000/06/19 14:04:57 andrei Exp $ */
+/* $Id: wddx.c,v 1.46 2000/06/21 18:22:22 thies Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
 
 #if HAVE_WDDX
+
+#include "ext/standard/php_var.h" /* for php_create_empty_class */
 
 #include "php_wddx_api.h"
 #define PHP_XML_INTERNAL
@@ -739,8 +741,13 @@ static void php_wddx_pop_element(void *user_data, const char *name)
 
 						if (zend_hash_find(EG(class_table), ent1->data->value.str.val,
 										   ent1->data->value.str.len+1, (void **) &ce)==FAILURE) {
+
+							ce = php_create_empty_class(ent1->data->value.str.val,ent1->data->value.str.len);
+
+							/*
 							php_error(E_NOTICE, "Deserializing non-existant class: %s! No methods will be available!", ent1->data->value.str.val);
 							ce = &zend_standard_class_def;
+							*/
 						}
 
 						/* Initialize target object */

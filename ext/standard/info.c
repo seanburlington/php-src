@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.131 2001/03/04 15:49:38 zeev Exp $ */
+/* $Id: info.c,v 1.132 2001/03/04 22:03:23 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -89,7 +89,7 @@ static void php_print_gpcse_array(char *name, uint name_length ELS_DC)
 				tmp2 = **tmp;
 				zval_copy_ctor(&tmp2);
 				convert_to_string(&tmp2);
-				PUTS(&tmp2.value.str.val);
+				PUTS(tmp2.value.str.val);
 				zval_dtor(&tmp2);
 			} else {
 				PUTS((*tmp)->value.str.val);

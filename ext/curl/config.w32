@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.1 2003/12/04 03:46:12 wez Exp $
+// $Id: config.w32,v 1.2 2003/12/19 12:52:39 wez Exp $
 // vim:ft=javascript
 
 ARG_WITH("curl", "CURL support", "no");
@@ -15,6 +15,6 @@ if (PHP_CURL != "no") {
 		// TODO: check for curl_version_info
 		AC_DEFINE('PHP_CURL_URL_WRAPPERS', 0, 'Use curl for URL wrappers [experimental]');
 	} else {
-		WARNING("cpdf not enabled; libraries and headers not found");
+		WARNING("curl not enabled; libraries and headers not found");
 	}
 }

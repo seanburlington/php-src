@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.19 1999/10/01 17:36:54 andrei Exp $ */
+/* $Id: basic_functions.h,v 1.20 1999/10/04 21:10:26 andrei Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -122,6 +122,8 @@ PHP_FUNCTION(function_exists);
 PHP_FUNCTION(in_array);
 PHP_FUNCTION(extract);
 PHP_FUNCTION(compact);
+PHP_FUNCTION(range);
+PHP_FUNCTION(shuffle);
 PHP_FUNCTION(array_push);
 PHP_FUNCTION(array_pop);
 PHP_FUNCTION(array_shift);

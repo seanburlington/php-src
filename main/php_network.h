@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.21 2002/06/11 03:55:28 jason Exp $ */
+/* $Id: php_network.h,v 1.22 2002/07/19 20:34:35 jason Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -42,6 +42,12 @@
 #	define fsync _commit
 #	define ftruncate(a, b) chsize(a, b)
 #endif /* defined(PHP_WIN32) */
+
+#ifdef PHP_WIN32
+#define streams_socket_errno WSAGetLastError()
+#else
+#define streams_socket_errno errno
+#endif
 
 #ifdef HAVE_NETINET_IN_H
 # include <netinet/in.h>

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.212 2003/02/16 01:23:11 helly Exp $ */
+/* $Id: cgi_main.c,v 1.213 2003/02/17 03:39:58 shane Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -715,7 +715,7 @@ static void init_request_info(TSRMLS_D)
 			 * of it by stat'ing back through the '/'
 			 * this fixes url's like /info.php/test
 			 */
-			if (stat( script_path_translated, &st ) == -1 ) {
+			if (script_path_translated && stat( script_path_translated, &st ) == -1 ) {
 				char *pt = estrdup(script_path_translated);
 				int len = strlen(pt);
 				char *ptr;
@@ -1456,7 +1456,7 @@ consult the installation file that came with this distribution, or visit \n\
 			if we are unable to open path_translated and we are not
 			running from shell (so fp == NULL), then fail.
 		*/
-		if (retval == FAILURE || file_handle.handle.fp == NULL) {
+		if (retval == FAILURE && file_handle.handle.fp == NULL) {
 			SG(sapi_headers).http_response_code = 404;
 			PUTS("No input file specified.\n");
 			php_request_shutdown((void *) 0);

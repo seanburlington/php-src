@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.105.2.1 2004/12/23 19:29:24 iliaa Exp $ */
+/* $Id: php_fbsql.c,v 1.105.2.2 2004/12/29 20:19:52 fmk Exp $ */
 
 /* TODO:
  *
@@ -843,7 +843,7 @@ PHP_FUNCTION(fbsql_set_transaction)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid locking type.");
 		RETURN_FALSE;
 	}
-	if (Z_LVAL_PP(strIsolation) < 0 || Z_LVAL_PP(Isolation) > 4) {
+	if (Z_LVAL_PP(Isolation) < 0 || Z_LVAL_PP(Isolation) > 4) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid isolation type.");
 		RETURN_FALSE;
 	}

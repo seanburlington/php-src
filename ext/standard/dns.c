@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.61 2003/06/10 20:03:37 imajes Exp $ */
+/* $Id: dns.c,v 1.62 2003/09/01 22:38:40 pollita Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -173,12 +173,12 @@ PHP_FUNCTION(gethostbynamel)
 	}
 	convert_to_string_ex(arg);
 
-	array_init(return_value);
-
 	hp = gethostbyname(Z_STRVAL_PP(arg));
 	if (hp == NULL || hp->h_addr_list == NULL) {
 		RETURN_FALSE;
 	}
+
+	array_init(return_value);
 
 	for (i = 0 ; hp->h_addr_list[i] != 0 ; i++) {
 		in = *(struct in_addr *) hp->h_addr_list[i];

@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.218.2.40 2004/12/20 20:38:18 sniper Exp $ -*- autoconf -*-
+dnl $Id: acinclude.m4,v 1.218.2.41 2004/12/21 15:40:19 edink Exp $ -*- autoconf -*-
 dnl
 dnl This file contains local autoconf functions.
 
@@ -1885,7 +1885,7 @@ int main(void)
 }
   ], [ac_cv_c_bigendian_php=yes], [ac_cv_c_bigendian_php=no], [ac_cv_c_bigendian_php=unknown])
   if test $ac_cv_c_bigendian_php = yes; then
-    AC_DEFINE(WORDS_BIGENDIAN)
+    AC_DEFINE(WORDS_BIGENDIAN, [], [Define if processor uses big-endian word])
   fi
  ])
 ])

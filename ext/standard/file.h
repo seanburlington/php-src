@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.25 2000/07/24 01:39:49 david Exp $ */
+/* $Id: file.h,v 1.26 2000/09/08 22:31:21 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -71,5 +71,6 @@ PHPAPI int php_file_le_fopen(void);
 PHPAPI int php_file_le_popen(void);
 PHPAPI int php_file_le_socket(void);
 PHPAPI int php_file_le_uploads(void);
+PHPAPI int php_copy_file(char *src, char *dest);
 
 #endif /* FILE_H */

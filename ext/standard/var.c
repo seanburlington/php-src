@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.94 2001/07/11 11:45:05 stas Exp $ */
+/* $Id: var.c,v 1.95 2001/07/15 14:08:58 zeev Exp $ */
 
 
 /* {{{ includes 
@@ -154,9 +154,8 @@ PHP_FUNCTION(var_dump)
 /* }}} */
 /* {{{ php_var_serialize */
 
-inline int php_add_var_hash(HashTable *var_hash, zval *var, void *var_old);
-
-inline int php_add_var_hash(HashTable *var_hash, zval *var, void *var_old) {
+static inline int php_add_var_hash(HashTable *var_hash, zval *var, void *var_old)
+{
 	ulong var_no;
 	char id[sizeof(void *)*2+3];
 

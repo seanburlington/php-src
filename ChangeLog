@@ -1,3 +1,40 @@
+2005-02-18  Derick Rethans  <php@derickrethans.nl>
+
+    * (PHP_4_3)
+      ext/standard/tests/array/bug32021.phpt:
+      - Added test case for bug #32021.
+
+    * (PHP_5_0)
+      NEWS
+      ext/standard/array.c
+      ext/standard/tests/array/bug32021.phpt:
+      - MFH: Fixed bug #32021: Crash caused by range('', 'z')
+
+    * ext/standard/array.c:
+      - Fixed bug #32021: Crash caused by range('', 'z')
+
+    * ext/standard/tests/array/bug32021.phpt:
+        1.1.4;
+      - Fixed bug #32021: Crash caused by range('', 'z')
+
+2005-02-18  Rob Richards  <rrichards@ctindustries.net>
+
+    * ext/dom/documentfragment.c:
+      Fragment must have associated document to append xml otherwise it is
+      read-only
+
+    * (PHP_5_0)
+      NEWS:
+      BFN
+
+    * (PHP_5_0)
+      ext/dom/node.c:
+      MFH: Fixed bug #32011 (Fragments which replaced Nodes are not globaly
+      useable)
+
+    * ext/dom/node.c:
+      Fixed bug #32011 (Fragments which replaced Nodes are not globaly useable)
+
 2005-02-17  Andi Gutmans  <andi@zend.com>
 
     * (PHP_5_0)
@@ -258,7 +295,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1898 2005/02/18 01:36:27 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1899 2005/02/19 01:35:15 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -739,7 +776,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1898 2005/02/18 01:36:27 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1899 2005/02/19 01:35:15 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -2213,7 +2250,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1898 2005/02/18 01:36:27 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1899 2005/02/19 01:35:15 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.62 2002/05/26 11:46:11 ssb Exp $
+// $Id: Installer.php,v 1.63 2002/05/27 12:45:03 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -356,7 +356,7 @@ class PEAR_Installer extends PEAR_Common
             }
             $this->log(2, '+ tmp dir created at ' . $tmpdir);
 
-            $tar = new Archive_Tar($pkgfile, true);
+            $tar = new Archive_Tar($pkgfile);
             if (!@$tar->extract($tmpdir)) {
                 return $this->raiseError("unable to unpack $pkgfile");
             }

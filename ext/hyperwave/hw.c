@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.116 2003/01/18 19:49:22 iliaa Exp $ */
+/* $Id: hw.c,v 1.117 2003/01/24 16:39:48 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -2733,8 +2733,7 @@ PHP_FUNCTION(hw_new_document_from_file)
 	convert_to_string_ex(arg1);
 	convert_to_string_ex(arg2);
 
-	stream = php_stream_open_wrapper(Z_STRVAL_PP(arg2), "r", use_include_path|ENFORCE_SAFE_MODE|REPORT_ERRORS,
-			NULL TSRMLS_CC);
+	stream = php_stream_open_wrapper(Z_STRVAL_PP(arg2), "r", use_include_path|ENFORCE_SAFE_MODE|REPORT_ERRORS, NULL);
 
 	if (stream == NULL)	{
 		RETURN_FALSE;

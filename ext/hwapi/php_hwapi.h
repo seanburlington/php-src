@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hwapi.h,v 1.2 2003/06/10 20:03:29 imajes Exp $ */
+/* $Id: php_hwapi.h,v 1.2.2.1 2005/02/08 05:38:04 rasmus Exp $ */
 
 #ifndef PHP_HWAPI_H
 #define PHP_HWAPI_H
@@ -66,8 +66,6 @@ extern PHP_HWAPI_API zend_hwapi_globals hwapi_globals;
 #endif
 
 extern PHP_MINIT_FUNCTION(hwapi);
-extern PHP_MSHUTDOWN_FUNCTION(hwapi);
-extern PHP_RINIT_FUNCTION(hwapi);
 PHP_MINFO_FUNCTION(hwapi);
 
 /* HW_API */

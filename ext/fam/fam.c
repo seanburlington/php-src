@@ -15,7 +15,7 @@
   | Author: Sascha Schumann <sascha@schumann.cx>                         |
   +----------------------------------------------------------------------+
 
-  $Id: fam.c,v 1.8 2004/05/20 17:03:24 derick Exp $ 
+  $Id: fam.c,v 1.8.2.1 2005/02/08 05:38:04 rasmus Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -64,9 +64,9 @@ zend_module_entry fam_module_entry = {
 	"fam",
 	fam_functions,
 	PHP_MINIT(fam),
-	PHP_MSHUTDOWN(fam),
-	PHP_RINIT(fam),		/* Replace with NULL if there's nothing to do at request start */
-	PHP_RSHUTDOWN(fam),	/* Replace with NULL if there's nothing to do at request end */
+	NULL,
+	NULL,
+	NULL,
 	PHP_MINFO(fam),
 #if ZEND_MODULE_API_NO >= 20010901
 	"0.1", /* Replace with version number for your extension */
@@ -124,35 +124,6 @@ PHP_MINIT_FUNCTION(fam)
 	REGISTER_LONG_CONSTANT("FAMAcknowledge", FAMAcknowledge, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FAMExists", FAMExists, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FAMEndExist", FAMEndExist, CONST_PERSISTENT);
-	return SUCCESS;
-}
-/* }}} */
-
-/* {{{ PHP_MSHUTDOWN_FUNCTION
- */
-PHP_MSHUTDOWN_FUNCTION(fam)
-{
-	/* uncomment this line if you have INI entries
-	UNREGISTER_INI_ENTRIES();
-	*/
-	return SUCCESS;
-}
-/* }}} */
-
-/* Remove if there's nothing to do at request start */
-/* {{{ PHP_RINIT_FUNCTION
- */
-PHP_RINIT_FUNCTION(fam)
-{
-	return SUCCESS;
-}
-/* }}} */
-
-/* Remove if there's nothing to do at request end */
-/* {{{ PHP_RSHUTDOWN_FUNCTION
- */
-PHP_RSHUTDOWN_FUNCTION(fam)
-{
 	return SUCCESS;
 }
 /* }}} */

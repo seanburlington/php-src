@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.514.2.26 2004/12/16 11:49:55 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.514.2.27 2004/12/20 20:38:05 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -169,6 +169,10 @@ AC_MSG_RESULT(${1}.${2}.${3} (ok))
 else
 	AC_MSG_WARN(You will need flex 2.5.4 or later if you want to regenerate Zend/PHP lexical parsers.)
 fi
+
+dnl Check whether byte ordering is bigendian
+PHP_C_BIGENDIAN
+
 
 dnl Platform-specific compile settings.
 dnl -------------------------------------------------------------------------

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.120 2001/08/31 14:34:40 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.121 2001/09/06 22:51:47 sterling Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -713,7 +713,7 @@ CONST_PREFIX char *php_apache_value_handler_ex(cmd_parms *cmd, HashTable *conf, 
 	memcpy(per_dir_entry.value, arg2, per_dir_entry.value_length);
 	per_dir_entry.value[per_dir_entry.value_length] = 0;
 
-	zend_hash_update((HashTable *) conf, per_dir_entry.key, per_dir_entry.key_length, &per_dir_entry, sizeof(php_per_dir_entry), NULL);
+	zend_hash_update(conf, per_dir_entry.key, per_dir_entry.key_length, &per_dir_entry, sizeof(php_per_dir_entry), NULL);
 	return NULL;
 }
 /* }}} */

@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.14 2002/05/27 00:21:36 ssb Exp $
+// $Id: Config.php,v 1.15 2002/05/27 21:59:19 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";
@@ -153,6 +153,9 @@ displays help for all configuration parameters.
             if ($error = $this->_checkLayer(@$params[2])) {
                 $failmsg .= $error;
                 break;
+            }
+            if ($params[0] == 'umask') {
+                list($params[1]) = sscanf($params[1], '%o');
             }
             if (!call_user_func_array(array(&$this->config, 'set'), $params))
             {

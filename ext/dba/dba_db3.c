@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db3.c,v 1.2 1999/12/04 19:15:46 sas Exp $ */
+/* $Id: dba_db3.c,v 1.3 1999/12/30 06:09:46 sas Exp $ */
 
 #include "php.h"
 
@@ -36,14 +36,8 @@
 #include <sys/stat.h>
 
 #include <string.h>
-#if DB3_DB3_DB_H
-#include <db3/db.h>
-#elif DB3_DB_DB3_H
-#include <db/db3.h>
-#elif DB3_DB3_H
-#include <db3.h>
-#elif DB3_DB_H
-#include <db.h>
+#ifdef DB3_INCLUDE_FILE
+#include DB3_INCLUDE_FILE
 #endif
 
 #define DB3_DATA dba_db3_data *dba = info->dbf

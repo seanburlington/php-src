@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_ndbm.c,v 1.3 1999/12/04 19:15:46 sas Exp $ */
+/* $Id: dba_ndbm.c,v 1.4 1999/12/30 06:09:46 sas Exp $ */
 
 #include "php.h"
 
@@ -35,11 +35,8 @@
 #include "php_ndbm.h"
 
 #include <fcntl.h>
-
-#if NDBM_DB1_NDBM_H 
-#include <db1/ndbm.h>
-#elif NDBM_NDBM_H
-#include <ndbm.h>
+#ifdef NDBM_INCLUDE_FILE
+#include NDBM_INCLUDE_FILE
 #endif
 
 #define NDBM_GKEY datum gkey; gkey.dptr = (char *) key; gkey.dsize = keylen

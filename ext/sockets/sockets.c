@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.135 2003/04/04 14:16:59 moriyoshi Exp $ */
+/* $Id: sockets.c,v 1.136 2003/04/16 17:31:31 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -354,14 +354,15 @@ static char *php_strerror(int error TSRMLS_DC) {
 #else 
 	{
 		LPTSTR tmp = NULL;
+		buf = NULL;
 
-		FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |	FORMAT_MESSAGE_IGNORE_INSERTS,
-				  NULL, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR) &tmp, 0, NULL);
-
-		strlcpy(SOCKETS_G(strerror_buf), (char *) tmp, 10000);
-		LocalFree(tmp);
+		if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |	FORMAT_MESSAGE_IGNORE_INSERTS,
+				  NULL, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR) &tmp, 0, NULL)) {
+			strlcpy(SOCKETS_G(strerror_buf), (char *) tmp, 10000);
+			LocalFree(tmp);
 		
-		buf = SOCKETS_G(strerror_buf);
+			buf = SOCKETS_G(strerror_buf);
+		}
 	}
 #endif
 	

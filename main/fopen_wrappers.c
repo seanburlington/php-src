@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.160 2003/03/26 23:01:39 sterling Exp $ */
+/* $Id: fopen_wrappers.c,v 1.161 2003/03/26 23:03:48 sterling Exp $ */
 
 /* {{{ includes
  */
@@ -493,7 +493,7 @@ PHPAPI char *php_strip_url_passwd(char *url)
 	register char *p, *url_start;
 	
 	if (url == NULL) {
-		return NULL;
+		return "";
 	}
 	
 	p = url;

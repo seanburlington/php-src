@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.66.2.5 2003/05/09 09:56:51 hholzgra Exp $ */
+/* $Id: fdf.c,v 1.66.2.6 2003/05/09 13:55:44 hholzgra Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -178,7 +178,6 @@ PHP_MINIT_FUNCTION(fdf)
 
 /* {{{ RINIT */
 PHP_RINIT_FUNCTION(fdf) {
-	FDF_G(error) = FDFErcOK;
 	return SUCCESS;
 }
 /* }}} */

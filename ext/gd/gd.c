@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.112 2001/02/01 15:40:34 stas Exp $ */
+/* $Id: gd.c,v 1.113 2001/02/09 21:04:45 hholzgra Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -2761,6 +2761,7 @@ static void _php_image_bw_convert( gdImagePtr im_org, int threshold, FILE *out) 
 }
 
 
+#ifdef HAVE_GD_JPG
 /* _php_image_convert converts jpeg/png images to wbmp and resizes them as needed  */
 static void _php_image_convert(INTERNAL_FUNCTION_PARAMETERS, int image_type ) {
 	zval **f_org, **f_dest, **height, **width, **threshold;
@@ -2938,6 +2939,8 @@ static void _php_image_convert(INTERNAL_FUNCTION_PARAMETERS, int image_type ) {
 	}
 	WRONG_PARAM_COUNT;
 }
+#endif /* HAVE_GD_JPG */
+
 #endif /* HAVE_GD_WBMP */
 
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.9 2003/05/19 16:27:46 sterling Exp $ */
+/* $Id: simplexml.c,v 1.10 2003/05/20 02:12:03 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -363,7 +363,7 @@ php_sxe_object_new(TSRMLS_D)
 {
 	php_sxe_object *intern;
 
-	intern = emalloc(sizeof(php_sxe_object));
+	intern = ecalloc(1, sizeof(php_sxe_object));
 	intern->zo.ce = sxe_class_entry;
 	intern->zo.in_get = 0;
 	intern->zo.in_set = 0;

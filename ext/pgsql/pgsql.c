@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.208 2002/07/20 07:08:17 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.209 2002/07/20 07:24:15 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -2925,7 +2925,7 @@ static php_pgsql_data_type php_pgsql_get_data_type(const char *type_name, size_t
 	   user defined types. (Yasuo) */
 	
 	/* boolean */
-	if (!strcmp(type_name, "boolean"))
+	if (!strcmp(type_name, "bool")|| !strcmp(type_name, "boolean"))
 		return PG_BOOL;
 	/* object id */
 	if (!strcmp(type_name, "oid"))

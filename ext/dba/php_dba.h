@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dba.h,v 1.23 2002/12/31 16:06:25 sebastian Exp $ */
+/* $Id: php_dba.h,v 1.24 2003/03/04 23:45:48 helly Exp $ */
 
 #ifndef PHP_DBA_H
 #define PHP_DBA_H
@@ -33,7 +33,6 @@ typedef enum {
 
 typedef struct dba_lock {
 	php_stream *fp;
-	int fd;
 	char *name;
 	int mode; /* LOCK_EX,LOCK_SH */
 } dba_lock;

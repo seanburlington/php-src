@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php.in,v 1.4 2000/08/28 23:09:36 ssb Exp $
+// $Id: PEAR.php.in,v 1.5 2000/09/07 16:36:22 andrei Exp $
 //
 
 define('PEAR_ERROR_RETURN', 0);
@@ -233,14 +233,14 @@ class PEAR_Error
 	}
 
     // }}}
-    // {{{ __string_value()
+    // {{{ toString()
 
 	/**
 	 * Make a string representation of this object.
 	 *
 	 * @return string a string with an object "summary"
 	 */
-	function __string_value() {
+	function toString() {
 		$modes = array(PEAR_ERROR_RETURN => "return",
 					   PEAR_ERROR_PRINT => "print",
 					   PEAR_ERROR_TRIGGER => "trigger",

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.25 2000/09/12 04:18:20 andi Exp $ */
+/* $Id: swf.c,v 1.26 2000/10/09 19:10:39 andrei Exp $ */
 
 
 #include "php.h"
@@ -157,6 +157,8 @@ PHP_MINIT_FUNCTION(swf)
 PHP_RINIT_FUNCTION(swf)
 {
 	SWFG(use_file) = 0;
+
+	return SUCCESS;
 }
          
 /* {{{ proto void swf_openfile(string name, double xsize, double ysize, double framerate, double r, double g, double b)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.155.2.17 2004/03/09 02:24:20 iliaa Exp $ */
+/* $Id: SAPI.c,v 1.155.2.18 2004/03/27 01:45:44 helly Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -550,8 +550,9 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 			if (!STRCASECMP(header_line, "Content-Type")) {
 				char *ptr = colon_offset+1, *mimetype = NULL, *newheader;
 				size_t len = header_line_len - (ptr - header_line), newlen;
-				while (*ptr == ' ' && *ptr != '\0') {
+				while (*ptr == ' ') {
 					ptr++;
+					len--;
 				}
 #if HAVE_ZLIB
 				if(!strncmp(ptr, "image/", sizeof("image/")-1)) {

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.75 1999/06/19 19:23:24 zeev Exp $ */
+/* $Id: main.c,v 1.76 1999/06/19 22:56:34 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -553,12 +553,10 @@ static FILE *php_fopen_wrapper_for_zend(const char *filename)
 
 static int php_get_ini_entry_for_zend(char *name, uint name_length, zval *contents)
 {
-	php_ini_entry *ini_entry = get_ini_entry(name, name_length);
+	zval *retval = cfg_get_entry(name, name_length);
 
-	if (ini_entry) {
-		contents->type = IS_STRING;
-		contents->value.str.val = ini_entry->value;
-		contents->value.str.len = ini_entry->value_length;
+	if (retval) {
+		*contents = *retval;
 		return SUCCESS;
 	} else {
 		return FAILURE;

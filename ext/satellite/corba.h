@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: David Eriksson <eriksson@php.net>                            |
+   | Author: David Eriksson <david@2good.com>                            |
    +----------------------------------------------------------------------+
  */
 
 /*
- * $Id: corba.h,v 1.1 2000/09/01 22:10:14 eriksson Exp $
+ * $Id: corba.h,v 1.2 2000/09/01 22:29:00 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 

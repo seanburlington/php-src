@@ -18,7 +18,7 @@
    |         Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: com_wrapper.c,v 1.91 2003/02/16 03:48:46 wez Exp $ */
+/* $Id: com_wrapper.c,v 1.92 2003/03/27 19:56:58 phanto Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -89,7 +89,7 @@ ZEND_API HRESULT php_COM_invoke(comval *obj, DISPID dispIdMember, WORD wFlags,
 	if (C_HASTLIB(obj)) {
 		hr = C_TYPEINFO_VT(obj)->Invoke(C_TYPEINFO(obj), C_DISPATCH(obj),
 			dispIdMember, wFlags, pDispParams, pVarResult, &ExceptInfo, &ArgErr);
-		if (FAILED(hr)) {
+		if (FAILED(hr) && (hr != DISP_E_EXCEPTION)) {
 			hr = C_DISPATCH_VT(obj)->Invoke(C_DISPATCH(obj), dispIdMember, &IID_NULL,
 				LOCALE_SYSTEM_DEFAULT, wFlags, pDispParams, pVarResult, &ExceptInfo, &ArgErr);
 			if (SUCCEEDED(hr)) {

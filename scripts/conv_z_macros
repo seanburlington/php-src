@@ -16,7 +16,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+#
 #
-# $Id: conv_z_macros,v 1.9 2001/09/26 08:53:36 jeroen Exp $
+# $Id: conv_z_macros,v 1.10 2001/09/26 09:11:49 jeroen Exp $
 
 for i in $@; do
 	echo -n "Processing $i... "
@@ -24,7 +24,7 @@ for i in $@; do
 	-e 's/(\*\([^()]\+\))->type/Z_TYPE_PP(\1)/g' \
 	-e 's/\([a-z_][]a-z_0-9\[]*\)->type/Z_TYPE_P(\1)/g' \
 	-e 's/\([a-z_][]a-z_0-9\[]*\)\.type/Z_TYPE(\1)/g' \
-	-e 's/(\*\([^()]\+\)))->value\.dval/Z_DVAL_PP(\1)/g' \
+	-e 's/(\*\([^()]\+\))->value\.dval/Z_DVAL_PP(\1)/g' \
 	-e 's/\([a-z_][]a-z_0-9\[]*\)->value\.dval/Z_DVAL_P(\1)/g' \
 	-e 's/\([a-z_][]a-z_0-9\[]*\)\.value\.dval/Z_DVAL(\1)/g' \
 	-e 's/(\*\([^()]\+\))->value\.lval/Z_LVAL_PP(\1)/g' \

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.39 2002/08/02 10:08:53 hholzgra Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.40 2002/09/19 21:57:24 cmv Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -240,7 +240,7 @@ PHP_NEW_EXTENSION(standard,	array.c base64.c basic_functions.c browscap.c crc32.
         parsedate.c quot_print.c rand.c reg.c soundex.c string.c scanf.c \
 	syslog.c type.c uniqid.c url.c url_scanner.c var.c versioning.c assert.c \
 	strnatcmp.c levenshtein.c incomplete_class.c url_scanner_ex.c \
-	ftp_fopen_wrapper.c http_fopen_wrapper.c php_fopen_wrapper.c credits.c \
+	ftp_fopen_wrapper.c http_fopen_wrapper.c php_fopen_wrapper.c credits.c css.c \
 	var_unserializer.c ftok.c aggregation.c sha1.c )
 
 PHP_ADD_MAKEFILE_FRAGMENT

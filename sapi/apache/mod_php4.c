@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.73 2000/10/29 11:38:25 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.74 2000/10/29 16:01:01 sas Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -126,7 +126,6 @@ static int sapi_apache_ub_write(const char *str, uint str_length)
 {
 	int ret;
 	SLS_FETCH();
-	PLS_FETCH();
 		
 	if (SG(server_context)) {
 		ret = rwrite(str, str_length, (request_rec *) SG(server_context));
@@ -134,10 +133,7 @@ static int sapi_apache_ub_write(const char *str, uint str_length)
 		ret = fwrite(str, 1, str_length, stderr);
 	}
 	if(ret != str_length) {
-		PG(connection_status) = PHP_CONNECTION_ABORTED;
-		if (!PG(ignore_user_abort)) {
-			zend_bailout();
-		}
+		php_handle_aborted_connection();
 	}
 	return ret;
 }

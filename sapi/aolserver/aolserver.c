@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.50 2000/10/29 11:38:25 zeev Exp $ */
+/* $Id: aolserver.c,v 1.51 2000/10/29 16:01:01 sas Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -98,6 +98,9 @@ php_ns_sapi_ub_write(const char *str, uint str_length)
 
 	sent_bytes = Ns_ConnWrite(NSG(conn), (void *) str, str_length);
 
+	if (sent_bytes != str_length)
+		php_handle_aborted_connection();
+	
 	return sent_bytes;
 }
 
@@ -208,7 +211,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	NSLS_FETCH();
 	
 	php_info_print_table_start();
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.50 2000/10/29 11:38:25 zeev Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.51 2000/10/29 16:01:01 sas Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());

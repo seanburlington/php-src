@@ -17,12 +17,11 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.21 1999/10/04 13:04:32 thies Exp $ */
+/* $Id: reg.c,v 1.22 1999/10/30 14:22:09 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
 #include "php3_string.h"
-#include "php_regex.h"
 #include "reg.h"
 
 unsigned char third_argument_force_ref[] = { 3, BYREF_NONE, BYREF_NONE, BYREF_FORCE };

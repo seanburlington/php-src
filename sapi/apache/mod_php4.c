@@ -17,7 +17,10 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.3 1999/10/04 15:18:25 sas Exp $ */
+/* $Id: mod_php4.c,v 1.4 1999/10/30 14:22:10 rasmus Exp $ */
+
+#include "zend.h"
+#include "php.h"
 
 #include "httpd.h"
 #include "http_config.h"
@@ -34,8 +37,6 @@
 #include "http_request.h"
 #include "http_log.h"
 
-#include "zend.h"
-#include "php.h"
 #include "php_ini.h"
 #include "php_globals.h"
 #include "SAPI.h"

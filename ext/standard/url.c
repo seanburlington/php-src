@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.12 1999/10/19 11:02:05 thies Exp $ */
+/* $Id: url.c,v 1.13 1999/10/30 14:22:09 rasmus Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -23,7 +23,6 @@
 #include <sys/types.h>
 
 #include "php.h"
-#include "php_regex.h"
 
 #include "url.h"
 #ifdef _OSD_POSIX

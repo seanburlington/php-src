@@ -19,7 +19,9 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.1 1999/10/04 15:18:25 sas Exp $ */
+/* $Id: sapi_apache.c,v 1.2 1999/10/30 14:22:10 rasmus Exp $ */
+
+#include "php.h"
 
 #include "httpd.h"
 #include "http_config.h"
@@ -37,7 +39,6 @@
 #include "http_log.h"
 
 #include "zend.h"
-#include "php.h"
 #include "php_ini.h"
 #include "php_globals.h"
 #include "SAPI.h"

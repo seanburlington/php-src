@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.19 2003/12/09 20:04:17 sniper Exp $
+dnl $Id: config.m4,v 1.20 2003/12/09 20:10:22 sniper Exp $
 
 AC_DEFUN(CPDF_JPEG_TEST,[
   AC_ARG_WITH(jpeg-dir,
@@ -44,7 +44,7 @@ AC_DEFUN(CPDF_TIFF_TEST,[
   ],)
 ])
 
-PHP_ARG_WITH(cpdflib,
+PHP_ARG_WITH(cpdflib, for cpdflib support,
 [  --with-cpdflib[=DIR]    Include cpdflib support (requires cpdflib >= 2).])
 
 if test "$PHP_CPDFLIB" != "no"; then

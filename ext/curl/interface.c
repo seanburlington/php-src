@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.2 2002/11/14 11:41:24 wez Exp $ */
+/* $Id: interface.c,v 1.3 2002/12/21 18:03:46 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -805,6 +805,7 @@ PHP_FUNCTION(curl_setopt)
 		case CURLOPT_COOKIEJAR:
 		case CURLOPT_SSL_CIPHER_LIST: 
 		case CURLOPT_SSLKEY:
+		case CURLOPT_SSLCERT:
 		case CURLOPT_SSLKEYTYPE: 
 		case CURLOPT_SSLKEYPASSWD: 
 		case CURLOPT_SSLENGINE: 

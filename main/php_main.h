@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: php_main.h,v 1.25 2002/12/10 20:16:30 iliaa Exp $ */
+/* $Id: php_main.h,v 1.26 2002/12/31 15:58:53 sebastian Exp $ */
 
 
 #ifndef PHP_MAIN_H

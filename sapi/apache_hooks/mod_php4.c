@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4														|
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group								|
+   | Copyright (c) 1997-2003 The PHP Group								|
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,	  |
    | that is bundled with this package in the file LICENSE, and is		|
@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>					  |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.5 2002/12/10 20:16:30 iliaa Exp $ */
+/* $Id: mod_php4.c,v 1.6 2002/12/31 15:59:05 sebastian Exp $ */
 
 #include "php_apache_http.h"
 

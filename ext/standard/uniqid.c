@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.10 1999/08/31 18:05:22 ssb Exp $ */
+/* $Id: uniqid.c,v 1.11 1999/09/07 10:34:17 steinm Exp $ */
 
 #include "php.h"
 
@@ -63,7 +63,7 @@ PHP_FUNCTION(uniqid)
 		return;
 	}
 #if HAVE_USLEEP && !(WIN32|WINNT)
-	if (!flags->value.lval) {
+	if (argc == 2 && !flags->value.lval) {
 		usleep(1);
 	}
 #endif

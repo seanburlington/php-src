@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.89 2001/06/23 13:43:20 venaas Exp $ */
+/* $Id: ldap.c,v 1.90 2001/07/15 11:12:28 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -254,7 +254,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.89 2001/06/23 13:43:20 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.90 2001/07/15 11:12:28 venaas Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #ifdef LDAP_API_VERSION
@@ -960,6 +960,8 @@ PHP_FUNCTION(ldap_get_entries)
 		add_assoc_string(tmp1, "dn", dn, 1);
 #if ( LDAP_API_VERSION > 2000 ) || HAVE_NSLDAP || WINDOWS
 		ldap_memfree(dn);
+#else
+		free(dn);
 #endif
 
 		zend_hash_index_update(return_value->value.ht, num_entries, (void *) &tmp1, sizeof(pval *), NULL);
@@ -1194,6 +1196,8 @@ PHP_FUNCTION(ldap_get_dn)
 		RETVAL_STRING(text,1);
 #if ( LDAP_API_VERSION > 2000 ) || HAVE_NSLDAP || WINDOWS
 		ldap_memfree(text);
+#else
+		free(text);
 #endif
 	} else {
 		RETURN_FALSE;

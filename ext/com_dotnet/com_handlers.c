@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.23 2004/07/27 01:59:44 wez Exp $ */
+/* $Id: com_handlers.c,v 1.24 2004/07/27 02:37:54 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -350,8 +350,8 @@ static union _zend_function *com_method_get(zval *object, char *name, int len TS
 							break;
 
 						case DESCKIND_NONE:
-						default:
-							fptr = NULL;
+						//default:
+						//	fptr = NULL;
 							break;
 					}
 					if (TI) {

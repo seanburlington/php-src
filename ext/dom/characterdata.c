@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: characterdata.c,v 1.7 2003/08/22 15:04:10 wez Exp $ */
+/* $Id: characterdata.c,v 1.8 2003/08/24 10:23:43 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -150,8 +150,7 @@ PHP_FUNCTION(dom_characterdata_substring_data)
 
 	if (offset < 0 || count < 0 || offset > length) {
 		xmlFree(cur);
-		php_dom_throw_error(INDEX_SIZE_ERR, &return_value TSRMLS_CC);
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Index Size Error");
+		php_dom_throw_error(INDEX_SIZE_ERR, dom_get_strict_error(intern->document) TSRMLS_CC);
 		RETURN_FALSE;
 	}
 
@@ -226,8 +225,7 @@ PHP_FUNCTION(dom_characterdata_insert_data)
 
 	if (offset < 0 || offset > length) {
 		xmlFree(cur);
-		php_dom_throw_error(INDEX_SIZE_ERR, &return_value TSRMLS_CC);
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Index Size Error");
+		php_dom_throw_error(INDEX_SIZE_ERR, dom_get_strict_error(intern->document) TSRMLS_CC);
 		RETURN_FALSE;
 	}
 
@@ -274,8 +272,7 @@ PHP_FUNCTION(dom_characterdata_delete_data)
 
 	if (offset < 0 || count < 0 || offset > length) {
 		xmlFree(cur);
-		php_dom_throw_error(INDEX_SIZE_ERR, &return_value TSRMLS_CC);
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Index Size Error");
+		php_dom_throw_error(INDEX_SIZE_ERR, dom_get_strict_error(intern->document) TSRMLS_CC);
 		RETURN_FALSE;
 	}
 
@@ -331,8 +328,7 @@ PHP_FUNCTION(dom_characterdata_replace_data)
 
 	if (offset < 0 || count < 0 || offset > length) {
 		xmlFree(cur);
-		php_dom_throw_error(INDEX_SIZE_ERR, &return_value TSRMLS_CC);
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Index Size Error");
+		php_dom_throw_error(INDEX_SIZE_ERR, dom_get_strict_error(intern->document) TSRMLS_CC);
 		RETURN_FALSE;
 	}
 

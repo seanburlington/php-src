@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.22 2000/02/29 01:11:16 neotron Exp $ */
+/* $Id: roxen.c,v 1.23 2000/02/29 01:12:28 neotron Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -42,7 +42,6 @@
  *
  */
 #define NO_PIKE_SHORTHAND
-
 
 #include <fdlib.h>
 #include <program.h>
@@ -477,7 +476,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
   /*  char buf[512]; */
 	
   PUTS("<table border=5 width=600>\n");
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.22 2000/02/29 01:11:16 neotron Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.23 2000/02/29 01:12:28 neotron Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.403 2001/10/05 18:38:52 edink Exp $ */
+/* $Id: basic_functions.c,v 1.404 2001/10/05 23:56:19 ssb Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -786,6 +786,9 @@ function_entry basic_functions[] = {
 	/* functions from assert.c */
 	PHP_FE(assert,															NULL)
 	PHP_FE(assert_options,													NULL)
+
+    /* functions from versioning.c */
+    PHP_FE(version_compare,													NULL)
 
 	{NULL, NULL, NULL}
 };

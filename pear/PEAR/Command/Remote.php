@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.22 2002/10/02 21:27:25 ssb Exp $
+// $Id: Remote.php,v 1.23 2002/11/24 10:06:54 dickmann Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -169,6 +169,9 @@ version of DB is 1.2, the downloaded file will be DB-1.2.tgz.',
         $available = $r->call('package.listAll', $list_options);
         if (PEAR::isError($available)) {
             return $this->raiseError($available);
+        }
+        if (!is_array($available)) {
+            return $this->raiseError('The package list could not be fetched from the remote server. Please try again. (Debug info: "'.$available.'")');
         }
         $data = array(
             'caption' => 'All packages:',

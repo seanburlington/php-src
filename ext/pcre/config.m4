@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.19 2000/05/01 02:41:44 sas Exp $
+dnl $Id: config.m4,v 1.20 2000/05/02 04:01:15 sas Exp $
 dnl config.m4 for extension pcre
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -49,11 +49,7 @@ if test "$PHP_PCRE_REGEX" != "no"; then
       AC_MSG_ERROR(Could not find libpcre.a in $PHP_PCRE_REGEX)
     fi
 
-    if test "$ext_shared" = "yes"; then
-      PCRE_SHARED_LIBADD="-R$PCRE_LIBDIR -L$PCRE_LIBDIR -lpcre"
-    else
-      AC_ADD_LIBRARY_WITH_PATH(pcre, $PCRE_LIBDIR)
-    fi
+    AC_ADD_LIBRARY_WITH_PATH(pcre, $PCRE_LIBDIR, PCRE_SHARED_LIBADD)
     
     AC_ADD_INCLUDE($PCRE_INCDIR)
     AC_DEFINE(HAVE_PCRE, 1, [ ])

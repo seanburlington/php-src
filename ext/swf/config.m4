@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 2000/05/01 02:42:26 sas Exp $
+dnl $Id: config.m4,v 1.3 2000/05/02 04:01:15 sas Exp $
 dnl config.m4 for extension libswf
 dnl don't forget to call PHP_EXTENSION(swf)
 dnl This file is a modified version of config.m4
@@ -20,12 +20,8 @@ if test "$PHP_SWF" != "no"; then
 
   AC_ADD_INCLUDE($SWF_DIR)
 
-  if test "$ext_shared" = "yes"; then
-    SWF_SHARED_LIBADD="-R$SWF_DIR -L$SWF_DIR -lswf"
-    PHP_SUBST(SWF_SHARED_LIBADD)
-  else
-    AC_ADD_LIBRARY_WITH_PATH(swf, $SWF_DIR)
-  fi
+  PHP_SUBST(SWF_SHARED_LIBADD)
+  AC_ADD_LIBRARY_WITH_PATH(swf, $SWF_DIR, SWF_SHARED_LIBADD)
   AC_DEFINE(HAVE_SWF,1,[ ])
 
   PHP_EXTENSION(swf, $ext_shared)

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.10 2000/05/01 21:32:26 sas Exp $
+dnl $Id: config.m4,v 1.11 2000/05/02 04:01:15 sas Exp $
 
 AC_DEFUN(PGSQL_INC_CHK,[if test -r $i$1/libpq-fe.h; then PGSQL_DIR=$i; PGSQL_INCDIR=$i$1])
 
@@ -34,11 +34,7 @@ if test "$PHP_PGSQL" != "no"; then
   
   AC_DEFINE(HAVE_PGSQL,1,[ ])
 
-  if test "$ext_shared" = "yes"; then
-    PGSQL_SHARED_LIBADD="-R$PGSQL_LIBDIR -L$PGSQL_LIBDIR -lpq"
-  else
-    AC_ADD_LIBRARY_WITH_PATH(pq, $PGSQL_LIBDIR)
-  fi
+  AC_ADD_LIBRARY_WITH_PATH(pq, $PGSQL_LIBDIR, PGSQL_SHARED_LIBADD)
   
   PHP_EXTENSION(pgsql,$ext_shared)
 fi

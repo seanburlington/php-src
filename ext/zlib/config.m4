@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 2000/05/02 01:15:10 sas Exp $
+dnl $Id: config.m4,v 1.6 2000/05/02 04:01:15 sas Exp $
 
 
 
@@ -32,12 +32,8 @@ if test "$PHP_ZLIB" != "no"; then
   LIBS="$old_LIBS"
   LDFLAGS="$old_LDFLAGS"
 
-  if test "$ext_shared" = "yes"; then
-    ZLIB_SHARED_LIBADD="-R$ZLIB_LIBDIR -L$ZLIB_LIBDIR -lz"
-    PHP_SUBST(ZLIB_SHARED_LIBADD)
-  else
-    AC_ADD_LIBRARY_WITH_PATH(z, $ZLIB_LIBDIR)
-  fi
+  PHP_SUBST(ZLIB_SHARED_LIBADD)
+  AC_ADD_LIBRARY_WITH_PATH(z, $ZLIB_LIBDIR, ZLIB_SHARED_LIBADD)
   
   AC_ADD_INCLUDE($ZLIB_INCLUDE)
 fi

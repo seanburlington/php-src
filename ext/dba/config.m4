@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.8 2000/05/02 03:38:26 sas Exp $
+dnl $Id: config.m4,v 1.9 2000/05/02 04:01:14 sas Exp $
 dnl config.m4 for extension dba
 dnl don't forget to call PHP_EXTENSION(dba)
 
@@ -33,15 +33,7 @@ AC_DEFUN(AC_DBA_STD_CHECK,[
 dnl Attach THIS_x to DBA_x
 AC_DEFUN(AC_DBA_STD_ATTACH,[
   AC_ADD_INCLUDE($THIS_INCLUDE)
-  if test "$ext_shared" = "yes"; then
-    if test -z "$THIS_LFLAGS"; then
-      DBA_SHARED_LIBADD="$DBA_SHARED_LIBADD -l$THIS_LIBS"
-    else
-      DBA_SHARED_LIBADD="$DBA_SHARED_LIBADD -R$THIS_LFLAGS -L$THIS_LFLAGS -l$THIS_LIBS"
-    fi
-  else
-    AC_ADD_LIBRARY_WITH_PATH($THIS_LIBS, $THIS_LFLAGS)
-  fi
+  AC_ADD_LIBRARY_WITH_PATH($THIS_LIBS, $THIS_LFLAGS, DBA_SHARED_LIBADD)
 
   THIS_INCLUDE=""
   THIS_LIBS=""

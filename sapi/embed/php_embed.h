@@ -15,7 +15,7 @@
    | Author: Edin Kadribasic <edink@php.net>                              |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_embed.h,v 1.2 2002/12/31 15:59:09 sebastian Exp $ */
+/* $Id: php_embed.h,v 1.3 2003/01/28 10:49:56 edink Exp $ */
 
 #ifndef _PHP_EMBED_H_
 #define _PHP_EMBED_H_
@@ -54,6 +54,7 @@
 BEGIN_EXTERN_C() 
 int php_embed_init(int argc, char **argv PTSRMLS_DC);
 void php_embed_shutdown(TSRMLS_D);
+extern sapi_module_struct php_embed_module;
 END_EXTERN_C()
 
 

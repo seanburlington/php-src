@@ -15,7 +15,7 @@
    | Author: Edin Kadribasic <edink@php.net>                              |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_embed.c,v 1.3 2002/12/31 15:59:09 sebastian Exp $ */
+/* $Id: php_embed.c,v 1.4 2003/01/28 10:49:56 edink Exp $ */
 
 #include "php_embed.h"
 
@@ -99,7 +99,7 @@ static int php_embed_startup(sapi_module_struct *sapi_module)
 	return SUCCESS;
 }
 
-static sapi_module_struct php_embed_module = {
+sapi_module_struct php_embed_module = {
 	"embedded",                    /* name */
 	"PHP Embedded Library",        /* pretty name */
 	

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.70.2.5 2003/09/29 14:04:16 stas Exp $ */
+/* $Id: file.h,v 1.70.2.6 2004/06/21 19:33:47 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -118,6 +118,7 @@ typedef struct {
 	long default_socket_timeout;
 	char *user_agent;
 	char *user_stream_current_filename; /* for simple recursion protection */
+	HashTable *stream_wrappers;			/* per-request copy of url_stream_wrappers_hash */
 } php_file_globals;
 
 #ifdef ZTS

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.38 2004/05/24 17:02:31 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.39 2004/06/21 19:33:47 pollita Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1188,6 +1188,9 @@ PHP_RINIT_FUNCTION(basic)
 	/* Reset magic_quotes_runtime */
 	PG(magic_quotes_runtime) = INI_BOOL("magic_quotes_runtime");
 
+	/* Default to global wrappers only */
+	FG(stream_wrappers) = NULL;
+
 	return SUCCESS;
 }
 
@@ -1210,6 +1213,12 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 		setlocale(LC_CTYPE, "");
 	}
 	STR_FREE(BG(locale_string));
+
+	if (FG(stream_wrappers)) {
+		zend_hash_destroy(FG(stream_wrappers));
+		efree(FG(stream_wrappers));
+		FG(stream_wrappers) = NULL;
+ 	}
 
 	PHP_RSHUTDOWN(fsock) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_RSHUTDOWN(filestat) (SHUTDOWN_FUNC_ARGS_PASSTHRU);

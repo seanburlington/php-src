@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_streams.c,v 1.29.2.3 2004/02/11 17:09:09 iliaa Exp $ */
+/* $Id: user_streams.c,v 1.29.2.4 2004/06/21 19:33:47 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -51,7 +51,6 @@ static void stream_wrapper_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	struct php_user_stream_wrapper * uwrap = (struct php_user_stream_wrapper*)rsrc->ptr;
 
-	php_unregister_url_stream_wrapper(uwrap->protoname TSRMLS_CC);
 	efree(uwrap->protoname);
 	efree(uwrap->classname);
 	efree(uwrap);
@@ -361,7 +360,7 @@ PHP_FUNCTION(stream_register_wrapper)
 #ifdef ZEND_ENGINE_2
 		uwrap->ce = *(zend_class_entry**)uwrap->ce;
 #endif
-		if (php_register_url_stream_wrapper(protocol, &uwrap->wrapper TSRMLS_CC) == SUCCESS) {
+		if (php_register_url_stream_wrapper_volatile(protocol, &uwrap->wrapper TSRMLS_CC) == SUCCESS) {
 			RETURN_TRUE;
 		}
 	} else {

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.41 2003/06/14 18:15:50 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.42 2003/06/25 16:26:32 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -738,12 +738,18 @@ sxe_object_cast(zval *readobj, zval *writeobj, int type, int should_free TSRMLS_
 		zval_dtor(writeobj);
 	}
 
+	if (!sxe->node) {
+		if (sxe->document) {
+			sxe->node = xmlDocGetRootElement((xmlDocPtr) sxe->document->ptr);
+		}
+	}
+
 	if (sxe->node) {
 		contents = xmlNodeListGetString((xmlDocPtr) sxe->document->ptr, sxe->node->children, 1);
 		if (!xmlIsBlankNode(sxe->node->children) && contents) {
 			cast_object(writeobj, type, NULL TSRMLS_CC);
 		}
-	}
+	} 
 
 	cast_object(writeobj, type, contents TSRMLS_CC);
 
@@ -1036,7 +1042,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.41 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.42 $");
 	php_info_print_table_end();
 
 }

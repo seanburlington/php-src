@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.118 2002/10/23 16:54:31 moriyoshi Exp $ */
+/* $Id: rfc1867.c,v 1.119 2002/10/23 19:51:50 moriyoshi Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -904,7 +904,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 
 #if HAVE_MBSTRING && !defined(COMPILE_DL_MBSTRING)
 			if (php_mb_encoding_translation(TSRMLS_C)) {
-				s = mbstr_strrchr(filename, '\\' TSRMLS_CC);
+				s = php_mb_strrchr(filename, '\\' TSRMLS_CC);
 			} else {
 				s = strrchr(filename, '\\');
 			}

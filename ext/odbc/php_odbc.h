@@ -14,11 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Stig Sæther Bakken <ssb@php.net>                            |
    |          Andreas Karajannis <Andreas.Karajannis@gmd.de>              |
-   |	        Kevin N. Shallow <kshallow@tampabay.rr.com> Birdstep Support |
+   |	      Kevin N. Shallow <kshallow@tampabay.rr.com> (Birdstep)      |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.56 2003/06/10 20:03:33 imajes Exp $ */
+/* $Id: php_odbc.h,v 1.57 2003/07/14 16:11:38 sniper Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H

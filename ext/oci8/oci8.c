@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.177 2002/10/17 08:09:31 thies Exp $ */
+/* $Id: oci8.c,v 1.178 2002/10/19 15:51:04 maxim Exp $ */
 
 /* TODO list:
  *
@@ -631,7 +631,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.177 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.178 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2765,7 +2765,7 @@ PHP_FUNCTION(ocidefinebyname)
 
 /* }}} */
 
-/* {{{ proto int ocibindbyname(int stmt, string name, mixed &var, int maxlength [, int type])
+/* {{{ proto int ocibindbyname(int stmt, string name, mixed &var, [, int maxlength] [, int type])
    Bind a PHP variable to an Oracle placeholder by name */
 /* if you want to bind a LOB/CLOB etc make sure you allocate it via OCINewDescriptor BEFORE binding!!!
  */

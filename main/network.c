@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.83.2.10 2003/05/13 00:18:27 wez Exp $ */
+/* $Id: network.c,v 1.83.2.11 2003/05/13 01:58:16 iliaa Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -202,7 +202,7 @@ static int php_network_getaddresses(const char *host, struct sockaddr ***sal TSR
 
 		sai = res;
 		for (n = 1; (sai = sai->ai_next) != NULL; n++);
-		*sal = emalloc((n + 1) * sizeof(*sal));
+		*sal = safe_emalloc((n + 1), sizeof(*sal), 0);
 		sai = res;
 		sap = *sal;
 		do {

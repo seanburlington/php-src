@@ -1,4 +1,4 @@
-dnl $Id: configure.in.in,v 1.89 1999/09/24 15:34:06 ssb Exp $ -*- sh -*-
+dnl $Id: configure.in.in,v 1.90 1999/09/25 00:32:25 sas Exp $ -*- sh -*-
 dnl Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -621,6 +621,27 @@ AC_SUBST(STRONGHOLD)
 AC_SUBST(PHP_LIBS)
 fi
 fi
+
+RESULT=no
+AC_MSG_CHECKING(for AOLserver support)
+AC_ARG_WITH(aolserver,
+[  --with-aolserver=DIR],
+[
+  if test ! -d $withval ; then
+    AC_MSG_ERROR(You did not specify a directory)
+  fi
+  if test "$enable_thread_safety" != "yes"; then
+    AC_MSG_ERROR(AOLserver must be compiled using --enable-thread-safety)
+  fi
+  NS_DIR=$withval
+  AC_ADD_INCLUDE($NS_DIR/include)
+  AC_DEFINE(HAVE_AOLSERVER)
+  BINNAME=php4_aol.so
+  INSTALL_IT="\$(SHELL) \$(srcdir)/install-sh -m 0755 $BINNAME $NS_DIR/root/bin/$BINNAME"
+  CFLAGS="$CFLAGS -rdynamic"
+  RESULT=yes
+])
+AC_MSG_RESULT($RESULT)
 
 AC_MSG_CHECKING(whether to use bundled regex library)
 AC_ARG_WITH(system-regex,

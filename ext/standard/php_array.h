@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_array.h,v 1.2 1999/11/21 12:37:53 thies Exp $ */
+/* $Id: php_array.h,v 1.3 1999/12/05 10:29:06 ssb Exp $ */
 
 #ifndef _PHP_ARRAY_H
 #define _PHP_ARRAY_H
@@ -77,6 +77,8 @@ PHP_FUNCTION(array_reverse);
 PHP_FUNCTION(array_pad);
 PHP_FUNCTION(array_flip);
 
+HashTable* _phpi_splice(HashTable *, int, int, zval ***, int, HashTable **);
+int multisort_compare(const void *a, const void *b);
 
 #define phpext_array_ptr array_module_ptr
 #endif /* _PHP_ARRAY_H */

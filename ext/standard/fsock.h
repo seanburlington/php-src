@@ -27,7 +27,7 @@
    |          Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
 */
-/* $Id: fsock.h,v 1.16 1999/12/03 20:08:24 rubys Exp $ */
+/* $Id: fsock.h,v 1.17 1999/12/05 10:29:06 ssb Exp $ */
 
 /* Synced with php3 revision 1.24 1999-06-18 [ssb] */
 
@@ -93,7 +93,7 @@ typedef struct {
 #define FG(v) (fsock_globals->v)
 #define FLS_FETCH() php_fsock_globals *fsock_globals = ts_resource(fsock_globals_id)
 #else
-#define FLS_D
+#define FLS_D	void
 #define FLS_DC
 #define FLS_C
 #define FLS_CC

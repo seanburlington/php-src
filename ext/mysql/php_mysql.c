@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.12 1999/12/04 19:15:56 sas Exp $ */
+/* $Id: php_mysql.c,v 1.13 1999/12/05 10:29:04 ssb Exp $ */
 
 
 /* TODO:
@@ -367,7 +367,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 #endif
 	char *user,*passwd,*host,*socket=NULL,*tmp;
 	char *hashed_details;
-	int hashed_details_length,port;
+	int hashed_details_length,port = MYSQL_PORT;
 	MYSQL *mysql;
 	MySLS_FETCH();
 	PLS_FETCH();

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.35 2004/02/17 21:30:57 iliaa Exp $ */
+/* $Id: gd.c,v 1.221.2.36 2004/02/22 18:03:24 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1617,8 +1617,11 @@ static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char
 
 		switch(image_type) {
 			case PHP_GDIMG_CONVERT_WBM:
-				if(q<0||q>255) {
+				if (q == -1) {
+ 					q = 0;
+ 				} else if (q < 0 || q > 255) {
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid threshold value '%d'. It must be between 0 and 255", q);
+					q = 0;
 				}
 				gdImageWBMP(im, q, fp);
 				break;
@@ -1661,8 +1664,11 @@ static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char
 
 		switch(image_type) {
 			case PHP_GDIMG_CONVERT_WBM:
-				if(q<0||q>255) {
+				if (q == -1) {
+ 					q = 0;
+ 				} else if (q < 0 || q > 255) {
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid threshold value '%d'. It must be between 0 and 255", q);
+					q = 0;
 				}
 				gdImageWBMP(im, q, tmp);
 				break;

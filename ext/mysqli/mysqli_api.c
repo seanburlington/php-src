@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.59 2004/01/08 08:16:25 andi Exp $ 
+  $Id: mysqli_api.c,v 1.60 2004/01/24 14:38:16 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -699,7 +699,7 @@ PHP_FUNCTION(mysqli_fetch)
 }
 /* }}} */
 
-/* {{{ proto int mysqli_fetch_field (object result)
+/* {{{ proto object mysqli_fetch_field (object result)
    Get column information from a result and return as an object */
 PHP_FUNCTION(mysqli_fetch_field) 
 {
@@ -731,7 +731,7 @@ PHP_FUNCTION(mysqli_fetch_field)
 }
 /* }}} */
 
-/* {{{ proto int mysqli_fetch_fields (object result)
+/* {{{ proto array mysqli_fetch_fields (object result)
    Return array of objects containing field meta-data */
 PHP_FUNCTION(mysqli_fetch_fields) 
 {

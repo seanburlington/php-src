@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.25 2000/10/09 15:12:34 hholzgra Exp $ */
+/* $Id: posix.c,v 1.26 2000/10/09 15:24:26 hholzgra Exp $ */
 
 
 #include "php.h"
@@ -138,7 +138,7 @@ ZEND_GET_MODULE(posix)
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.25 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.26 $");
 	php_info_print_table_end();
 }
 
@@ -515,10 +515,6 @@ PHP_FUNCTION(posix_uname)
     add_assoc_string(return_value, "release",  u.release, 1);
     add_assoc_string(return_value, "version",  u.version, 1);
     add_assoc_string(return_value, "machine",  u.machine, 1);
-	
-#ifdef _GNU_SOURCE
-    add_assoc_string(return_value, "domainname",  u.domainname, 1);	
-#endif
 }
 /* }}} */
 

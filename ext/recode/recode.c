@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.4 2000/04/06 21:07:42 cmv Exp $ */
+/* $Id: recode.c,v 1.5 2000/04/09 15:36:59 kk Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -91,8 +91,8 @@ PHP_MINFO_FUNCTION(recode)
 	ReSLS_FETCH();
 
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Recode Support", "enabled);
-	php_info_print_table_row(2, "Revision", "$Revision: 1.4 $");
+	php_info_print_table_row(2, "Recode Support", "enabled");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.5 $");
 	php_info_print_table_end();
 
 }

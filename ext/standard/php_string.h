@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.61 2002/09/25 18:06:05 andrey Exp $ */
+/* $Id: php_string.h,v 1.62 2002/10/09 13:37:02 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -133,19 +133,24 @@ static inline char *
 php_memnstr(char *haystack, char *needle, int needle_len, char *end)
 {
 	char *p = haystack;
-	char first = *needle;
+	char ne = needle[needle_len-1];
 
-	/* let end point to the last character where needle may start */
 	end -= needle_len;
-	
+
 	while (p <= end) {
-		while (*p != first)
-			if (++p > end)
-				return NULL;
-		if (memcmp(p, needle, needle_len) == 0)
-			return p;
+		if ((p = strchr(p, *needle)) &&  ne == p[needle_len-1]) {
+			if (!memcmp(needle, p, needle_len-1)) {
+				return p;
+			}
+		}
+		
+		if (p == NULL) {
+			return NULL;
+		}
+		
 		p++;
 	}
+	
 	return NULL;
 }
 

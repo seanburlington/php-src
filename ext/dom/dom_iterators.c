@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_iterators.c,v 1.2 2003/12/08 17:08:10 rrichards Exp $ */
+/* $Id: dom_iterators.c,v 1.3 2003/12/29 16:44:47 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -207,6 +207,8 @@ static void php_dom_iterator_move_forward(zend_object_iterator *iter TSRMLS_DC)
 				basenode = dom_object_get_node(objmap->baseobj);
 				if (basenode && (basenode->type == XML_DOCUMENT_NODE || basenode->type == XML_HTML_DOCUMENT_NODE)) {
 					basenode = xmlDocGetRootElement((xmlDoc *) basenode);
+				} else {
+					basenode = basenode->children;
 				}
 				curnode = dom_get_elements_by_tag_name_ns_raw(basenode, objmap->ns, objmap->local, &previndex, iter->index);
 			}
@@ -264,6 +266,8 @@ zend_object_iterator *php_dom_get_iterator(zend_class_entry *ce, zval *object TS
 		} else {
 			if (nodep->type == XML_DOCUMENT_NODE || nodep->type == XML_HTML_DOCUMENT_NODE) {
 				nodep = xmlDocGetRootElement((xmlDoc *) nodep);
+			} else {
+				nodep = nodep->children;
 			}
 			curnode = dom_get_elements_by_tag_name_ns_raw(nodep, objmap->ns, objmap->local, &curindex, 0);
 		}

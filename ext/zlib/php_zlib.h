@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.38 2003/06/10 20:03:41 imajes Exp $ */
+/* $Id: php_zlib.h,v 1.39 2003/09/06 15:31:34 sr Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -30,7 +30,6 @@ ZEND_BEGIN_MODULE_GLOBALS(zlib)
 	z_stream stream;
 	uLong crc;
 	int ob_gzhandler_status;
-	int ob_gzip_coding;
 	long output_compression;
 	long output_compression_level;
 	char *output_handler;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.68 2002/08/21 01:41:21 kalowsky Exp $ */
+/* $Id: java.c,v 1.69 2002/08/21 04:42:57 kalowsky Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -36,6 +36,7 @@
 
 #if HAVE_JAVAVM_JAVAVM_H
 #include <JavaVM/JavaVM.h>
+#include <JavaVM/jni.h>
 #define JNI_12
 #else
 #include <jni.h>

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: expat_compat.h,v 1.15 2004/01/08 17:32:59 sniper Exp $ */
+/* $Id: expat_compat.h,v 1.16 2004/02/22 17:51:01 chregu Exp $ */
 
 #ifndef PHP_EXPAT_COMPAT_H
 #define PHP_EXPAT_COMPAT_H
@@ -54,8 +54,6 @@ typedef struct _XML_Memory_Handling_Suite {
 typedef struct _XML_Parser {
 	int use_namespace;
 
-	xmlHashTablePtr _ns_map;
-	xmlHashTablePtr _reverse_ns_map;
 	xmlChar *_ns_seperator;
 
 	void *user;

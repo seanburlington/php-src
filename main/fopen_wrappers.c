@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.158 2003/02/19 08:40:18 sniper Exp $ */
+/* $Id: fopen_wrappers.c,v 1.159 2003/02/23 22:30:02 sniper Exp $ */
 
 /* {{{ includes
  */
@@ -191,7 +191,7 @@ PHPAPI int php_check_open_basedir(const char *path TSRMLS_DC)
 			ptr = end;
 		}
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, 
-			"open_basedir restriction in effect. File(%s) is not within the allowed path(s): (%s)", path, pathbuf);
+			"open_basedir restriction in effect. File(%s) is not within the allowed path(s): (%s)", path, PG(open_basedir));
 		efree(pathbuf);
 		errno = EPERM; /* we deny permission to open it */
 		return -1;

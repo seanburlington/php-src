@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_open_temporary_file.c,v 1.30 2004/03/29 21:44:07 wez Exp $ */
+/* $Id: php_open_temporary_file.c,v 1.30.2.1 2005/03/11 08:18:14 hyanantha Exp $ */
 
 #include "php.h"
 
@@ -138,12 +138,6 @@ static int php_do_open_temporary_file(const char *path, const char *pfx, char **
 		 * which means that opening it will fail... */
 		VCWD_CHMOD(opened_path, 0600);
 		fd = VCWD_OPEN_MODE(opened_path, open_flags, 0600);
-	}
-#elif defined(NETWARE)
-	/* Using standard mktemp() implementation for NetWare */
-	file_path = mktemp(opened_path);
-	if (file_path) {
-		fd = VCWD_OPEN(file_path, open_flags);
 	}
 #elif defined(HAVE_MKSTEMP)
 	fd = mkstemp(opened_path);

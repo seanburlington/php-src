@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.6 2000/07/15 13:00:41 eschmid Exp $ */
+/* $Id: php_domxml.c,v 1.7 2000/08/07 11:40:54 steinm Exp $ */
 
 
 #include "php.h"
@@ -106,6 +106,10 @@ void domxmltestnode_class_startup();
 zend_module_entry php_domxml_module_entry = {
 	"domxml", php_domxml_functions, PHP_MINIT(domxml), NULL, NULL, NULL, PHP_MINFO(domxml), STANDARD_MODULE_PROPERTIES
 };
+
+#ifdef COMPILE_DL_DOMXML
+ZEND_GET_MODULE(php_domxml)
+#endif
 
 void _free_node(xmlNode *tmp) {
 /*fprintf(stderr, "Freeing node: %s\n", tmp->name);*/

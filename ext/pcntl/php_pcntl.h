@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcntl.h,v 1.13 2003/02/18 01:41:06 iliaa Exp $ */
+/* $Id: php_pcntl.h,v 1.14 2003/05/29 23:39:41 iliaa Exp $ */
 
 #ifndef PHP_PCNTL_H
 #define PHP_PCNTL_H
@@ -52,10 +52,6 @@ PHP_FUNCTION(pcntl_signal);
 PHP_FUNCTION(pcntl_exec);
 PHP_FUNCTION(pcntl_getpriority);
 PHP_FUNCTION(pcntl_setpriority);
-
-static void pcntl_signal_handler(int);
-static void pcntl_tick_handler();
-
 
 ZEND_BEGIN_MODULE_GLOBALS(pcntl)
 	HashTable php_signal_table;

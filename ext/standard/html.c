@@ -18,9 +18,10 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.63 2002/11/11 13:31:08 moriyoshi Exp $ */
+/* $Id: html.c,v 1.63.2.1 2002/11/15 16:29:03 moriyoshi Exp $ */
 
 #include "php.h"
+#include "php_config.h"
 #include "reg.h"
 #include "html.h"
 #include "php_string.h"

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.142.2.15 2003/08/08 23:44:04 iliaa Exp $ */
+/* $Id: output.c,v 1.142.2.16 2004/10/20 15:27:25 stas Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -703,6 +703,9 @@ static int php_ub_body_write(const char *str, uint str_length TSRMLS_DC)
 	int result = 0;
 
 	if (SG(request_info).headers_only) {
+		if(SG(headers_sent)) {
+			return 0;
+		}
 		php_header();
 		zend_bailout();
 	}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.34 1999/09/07 16:09:18 andrey Exp $ */
+/* $Id: string.c,v 1.35 1999/09/07 20:29:31 andi Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -1325,7 +1325,7 @@ PHPAPI void php_stripcslashes(char *str, int *len)
 							numtmp[1] = '\0';
 							nlen-=2;
 						}
-						*target++=strtol(numtmp, NULL, 16);
+						*target++=(char)strtol(numtmp, NULL, 16);
 						break;
 					}
 					/* break is left intentionally */
@@ -1335,7 +1335,7 @@ PHPAPI void php_stripcslashes(char *str, int *len)
 					}
 					if (i) {
 						numtmp[i]='\0';
-						*target++=strtol(numtmp, NULL, 8);
+						*target++=(char)strtol(numtmp, NULL, 8);
 						nlen-=i;
 						source--;
 					} else {

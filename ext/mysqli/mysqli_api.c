@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.70 2004/02/11 08:34:07 georg Exp $ 
+  $Id: mysqli_api.c,v 1.71 2004/02/15 20:23:05 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -109,6 +109,11 @@ PHP_FUNCTION(mysqli_bind_param)
 	if (strlen(types) != argc - start) {
 		/* number of bind variables doesn't match number of elements in type definition string */
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Number of elements in type definition string doesn't match number of bind variables");
+	}
+
+	if (argc - start != stmt->stmt->param_count) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Number of variables doesn't match number of parameters in prepared statement");
+		RETURN_FALSE;
 	}
 
 	/* prevent leak if variables are already bound */
@@ -236,6 +241,11 @@ PHP_FUNCTION(mysqli_bind_result)
 	
 	var_cnt = argc - start;
 
+	if (var_cnt != stmt->stmt->field_count) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Number of bind variables doesn't match number of fields in prepared statmement.");
+		RETURN_FALSE;
+	}
+
 	/* prevent leak if variables are already bound */
 	if (stmt->result.var_cnt) {
 		php_free_stmt_bind_buffer(stmt->result, FETCH_RESULT);
@@ -295,7 +305,8 @@ PHP_FUNCTION(mysqli_bind_result)
 			case MYSQL_TYPE_TIMESTAMP:
 			case MYSQL_TYPE_DECIMAL:
 				stmt->result.buf[ofs].type = IS_STRING; 
-				stmt->result.buf[ofs].buflen = (stmt->stmt->fields) ? stmt->stmt->fields[ofs].length + 1: 256;
+				stmt->result.buf[ofs].buflen =
+					(stmt->stmt->fields) ? (stmt->stmt->fields[ofs].length) ? stmt->stmt->fields[ofs].length + 1: 256: 256;
 				stmt->result.buf[ofs].buffer = (char *)emalloc(stmt->result.buf[ofs].buflen);
 				bind[ofs].buffer_type = MYSQL_TYPE_STRING;
 				bind[ofs].buffer = stmt->result.buf[ofs].buffer;

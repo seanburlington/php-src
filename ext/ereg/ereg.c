@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.70 2003/01/10 04:44:21 moriyoshi Exp $ */
+/* $Id: ereg.c,v 1.71 2003/01/11 22:32:19 moriyoshi Exp $ */
 
 #include <stdio.h>
 #include <ctype.h>
@@ -605,7 +605,7 @@ PHPAPI PHP_FUNCTION(sql_regcase)
 	
 	tmp = emalloc((Z_STRLEN_PP(string) * 4) + 1);
 	
-	for (i = j = 0; i < Z_STRLEN_PP(string); i++) {
+	for (i = j = 0; i < (int)Z_STRLEN_PP(string); i++) {
 		c = (unsigned char) Z_STRVAL_PP(string)[i];
 		if(isalpha(c)) {
 			tmp[j++] = '[';

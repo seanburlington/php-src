@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.123.2.2 2001/08/27 16:52:08 andrei Exp $ */
+/* $Id: array.c,v 1.123.2.3 2001/08/28 21:52:38 rasmus Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3062,7 +3062,8 @@ PHP_FUNCTION(array_map)
 
 	/* We iterate through all the arrays at once. */
 	for (k = 0; k < maxlen; k++) {
-		uint num_key, str_key_len;
+		uint str_key_len;
+		ulong num_key;
 		char *str_key;
 		int key_type;
 

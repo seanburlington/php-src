@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.377 2001/08/05 01:42:41 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.378 2001/08/05 16:21:30 sas Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1614,7 +1614,7 @@ PHPAPI int _php_error_log(int opt_err, char *message, char *opt, char *headers T
 			fclose(logfile);
 			break;
 		default:
-			php_log_err(message);
+			php_log_err(message TSRMLS_CC);
 			break;
 	}
 	return SUCCESS;

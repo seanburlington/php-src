@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.30 2001/07/31 05:43:48 zeev Exp $ */
+/* $Id: cpdf.c,v 1.31 2001/08/05 16:21:28 sas Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -2335,7 +2335,7 @@ PHP_FUNCTION(cpdf_output_buffer)
 
 	buffer = cpdf_getBufferForPDF(pdf, &lenght);
 
-	php_write(buffer, lenght);
+	php_write(buffer, lenght TSRMLS_CC);
 
 	RETURN_TRUE;
 }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.147 2001/08/05 15:55:43 sas Exp $ */
+/* $Id: php.h,v 1.148 2001/08/05 16:21:32 sas Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -245,9 +245,9 @@ ssize_t pread(int, void *, size_t, off64_t);
 #endif
 
 void phperror(char *error);
-PHPAPI int php_write(void *buf, uint size);
+PHPAPI int php_write(void *buf, uint size TSRMLS_DC);
 PHPAPI int php_printf(const char *format, ...);
-PHPAPI void php_log_err(char *log_message);
+PHPAPI void php_log_err(char *log_message TSRMLS_DC);
 int Debug(char *format, ...);
 int cfgparse(void);
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.92 2001/08/05 01:42:38 zeev Exp $ */
+/* $Id: pdf.c,v 1.93 2001/08/05 16:21:29 sas Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -325,8 +325,9 @@ static void pdf_efree(PDF *p, void *mem)
  */
 static size_t pdf_flushwrite(PDF *p, void *data, size_t size)
 {
-	return(php_write(data, size));
-	return 0;
+	TSRMLS_FETCH();
+
+	return(php_write(data, size TSRMLS_CC));
 }
 /* }}} */
 
@@ -346,7 +347,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.92 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.93 $" );
 	php_info_print_table_end();
 
 }

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.148 2001/08/05 01:42:35 zeev Exp $ */
+/* $Id: gd.c,v 1.149 2001/08/05 16:21:29 sas Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1382,7 +1382,7 @@ static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char
 		ap_bsetflag(php3_rqst->connection->client, B_EBCDIC2ASCII, 0);
 #endif
 		while ((b = fread(buf, 1, sizeof(buf), tmp)) > 0) {
-			php_write(buf, b);
+			php_write(buf, b TSRMLS_CC);
 		}
 
         fclose(tmp);

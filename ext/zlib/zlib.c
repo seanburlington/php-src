@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.92 2001/08/05 15:29:39 sas Exp $ */
+/* $Id: zlib.c,v 1.93 2001/08/05 16:21:31 sas Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -67,7 +67,7 @@
 #define PUTC(a) PUTS(a)
 #endif
 #ifndef PHPWRITE
-#define PHPWRITE(a,n) php_write((a),(n))
+#define PHPWRITE(a,n) php_write((a),(n) TSRMLS_CC)
 #endif
 #endif
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.123 2001/07/31 23:47:32 sniper Exp $ */
+/* $Id: pgsql.c,v 1.124 2001/08/05 16:21:30 sas Exp $ */
 
 #include <stdlib.h>
 
@@ -174,7 +174,7 @@ _notice_handler(void *arg, const char *message)
 	TSRMLS_FETCH();
 
 	if (! PGG(ignore_notices)) {
-		php_log_err((char *) message);
+		php_log_err((char *) message TSRMLS_CC);
 		if (PGG(last_notice) != NULL) {
 			efree(PGG(last_notice));
 		}

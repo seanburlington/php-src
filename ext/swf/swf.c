@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.37 2001/08/05 01:42:42 zeev Exp $ */
+/* $Id: swf.c,v 1.38 2001/08/05 16:21:31 sas Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -255,7 +255,7 @@ PHP_FUNCTION(swf_closefile)
 		}
 		
 		while ((b = fread(buf, 1, sizeof(buf), f)) > 0)
-			php_write(buf, b);
+			php_write(buf, b TSRMLS_CC);
 		
 		fclose(f);
 		

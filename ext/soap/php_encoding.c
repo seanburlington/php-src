@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.56 2004/02/13 15:19:09 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.57 2004/02/16 09:56:29 dmitry Exp $ */
 
 #include <time.h>
 
@@ -1148,13 +1148,17 @@ static xmlNodePtr to_xml_object(encodeTypePtr type, zval *data, int style, xmlNo
 				xmlNodePtr property;
 				zval **zprop;
 				char *str_key;
+				ulong index;
+				int key_type;
 
-				zend_hash_get_current_key(prop, &str_key, NULL, FALSE);
+				key_type = zend_hash_get_current_key(prop, &str_key, &index, FALSE);
 				zend_hash_get_current_data(prop, (void **)&zprop);
 
 				property = master_to_xml(get_conversion((*zprop)->type), (*zprop), style, xmlParam);
 
-				xmlNodeSetName(property, str_key);
+				if (key_type == HASH_KEY_IS_STRING) {
+					xmlNodeSetName(property, str_key);
+				}
 				zend_hash_move_forward(prop);
 			}
 		}

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.41 2004/02/03 16:44:56 dmitry Exp $ */
+/* $Id: php_http.c,v 1.42 2004/02/16 09:56:30 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -224,9 +224,9 @@ int send_http_soap_request(zval *this_ptr, xmlDoc *doc, char *location, char *so
 	}
 
 	use_ssl = 0;
-	if (strcmp(phpurl->scheme, "https") == 0) {
+	if (phpurl->scheme != NULL && strcmp(phpurl->scheme, "https") == 0) {
 		use_ssl = 1;
-	} else if (strcmp(phpurl->scheme, "http") != 0) {
+	} else if (phpurl->scheme == NULL || strcmp(phpurl->scheme, "http") != 0) {
 		xmlFree(buf);
 		php_url_free(phpurl);
 		add_soap_fault(this_ptr, "HTTP", "Unknown protocol. Only http and https are allowed.", NULL, NULL TSRMLS_CC);

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_driver.c,v 1.1 2004/05/17 15:43:01 wez Exp $ */
+/* $Id: odbc_driver.c,v 1.2 2004/05/18 08:47:10 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -101,7 +101,7 @@ static int odbc_handle_doer(pdo_dbh_t *dbh, const char *sql TSRMLS_DC)
 	return 0;
 }
 
-static int odbc_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, char **quoted, int *quotedlen  TSRMLS_DC)
+static int odbc_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen  TSRMLS_DC)
 {
 	pdo_odbc_db_handle *H = (pdo_odbc_db_handle *)dbh->driver_data;
 

@@ -2,7 +2,7 @@
 || PEAR Coding Standards                                                 ||
 ===========================================================================
 
-$Id: CODING_STANDARDS,v 1.7 2001/07/17 23:55:10 jon Exp $
+$Id: CODING_STANDARDS,v 1.8 2001/07/17 23:56:46 jon Exp $
 
 -------------
 [1] Indenting
@@ -124,7 +124,7 @@ function connect(&$dsn, $persistent = false)
 }
 
 Functions should be named using the "studly caps" style (also referred to as
-"bumpy case" or "camel caps".  The initial letter of the name is lowercase,
+"bumpy case" or "camel caps").  The initial letter of the name is lowercase,
 and each letter that starts a new "word" is capitalized.  Some examples:
 
     connect()       getData()       buildSomeWidget()
@@ -203,7 +203,7 @@ following comment block as the header:
 // |          Your Name <you@example.com>                                 |
 // +----------------------------------------------------------------------+
 //
-// $Id: CODING_STANDARDS,v 1.7 2001/07/17 23:55:10 jon Exp $
+// $Id: CODING_STANDARDS,v 1.8 2001/07/17 23:56:46 jon Exp $
 
 There's no hard rule to determine when a new code contributer should be
 added to the list of authors for a given source file.  In general, their

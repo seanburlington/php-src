@@ -1,3 +1,31 @@
+2004-07-24  Rob Richards  <rrichards@ctindustries.net>
+
+    * sapi/activescript/classfactory.cpp
+      sapi/activescript/php5activescript.dsp:
+      fix build for VC++ 6
+      update dsp (Enable IObjectSafety)
+
+2004-07-24  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * sapi/activescript/config.w32:
+      Enable IObjectSafety so that we can be used in the M$ scripting control.
+      Thanks to Rob for checking this out.
+
+2004-07-24  Andrey Hristov  <php@hristov.com>
+
+    * ext/standard/array.c:
+      make behavior a bit field
+
+2004-07-24  Sara Golemon  <php@alphaweb.net>
+
+    * ext/standard/ftp_fopen_wrapper.c:
+      Oh by the way, only use proxy mode for reading...
+
+    * NEWS
+      ext/standard/ftp_fopen_wrapper.c
+      ext/standard/http_fopen_wrapper.c:
+      Add proxy support to ftp using http wrapper
+
 2004-07-23  Andi Gutmans  <andi@zend.com>
 
     * ext/standard/tests/time/001.phpt:
@@ -6945,7 +6973,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1695 2004/07/24 00:32:53 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1696 2004/07/25 00:32:53 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

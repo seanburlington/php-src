@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.114 2002/08/21 03:04:17 helly Exp $ */
+/* $Id: output.c,v 1.115 2002/08/22 10:52:40 helly Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -119,7 +119,7 @@ PHPAPI int php_ob_default_buffer_size(TSRMLS_D)
 {
 	uint buffer_size = (uint)(PG(output_buffering) > 1 ? PG(output_buffering) : 4096);
 	if (OG(ob_nesting_level)==0 && PG(double_buffering)!=0) {
-		buffer_size = (uint)(PG(double_buffering) >= buffer_size ? PG(double_buffering) : 4*buffer_size);
+		buffer_size = (uint)(PG(double_buffering)) >= buffer_size ? (uint)(PG(double_buffering)) : 4*buffer_size;
 	}
 	return buffer_size;
 }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.65 2001/04/30 12:43:39 andi Exp $ */
+/* $Id: dir.c,v 1.65.2.1 2001/06/20 14:50:17 rasmus Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -281,6 +281,9 @@ PHP_FUNCTION(chdir)
 	}
 	convert_to_string_ex(arg);
 
+	if (PG(safe_mode) && !php_checkuid((*arg)->value.str.val, NULL, CHECKUID_ALLOW_ONLY_DIR)) {
+		RETURN_FALSE;
+	}
 	ret = VCWD_CHDIR((*arg)->value.str.val);
 	
 	if (ret != 0) {
@@ -364,4 +367,6 @@ PHP_NAMED_FUNCTION(php_if_readdir)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

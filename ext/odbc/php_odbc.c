@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.132 2002/08/12 16:17:18 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.133 2002/08/12 18:21:33 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1135,7 +1135,8 @@ PHP_FUNCTION(odbc_data_source)
 	}
 
 	if (zend_get_parameters_ex(2, &zv_conn, &zv_fetch_type) == FAILURE) {
-		php_error(E_WARNING, "%s(): Unable to get parameters", get_active_function_name(TSRMLS_C));
+		php_error(E_WARNING, "Unable to get parameters");
+		RETURN_FALSE;
 	}
 
 	convert_to_long_ex(zv_fetch_type);

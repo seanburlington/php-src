@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.42.2.2 2002/04/13 00:34:42 sniper Exp $ */
+/* $Id: posix.c,v 1.42.2.3 2002/05/20 23:31:02 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -130,7 +130,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.42.2.2 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.42.2.3 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -585,13 +585,15 @@ PHP_FUNCTION(posix_ctermid)
    Determine terminal device name (POSIX.1, 4.7.2) */
 PHP_FUNCTION(posix_ttyname)
 {
-	long fd;
+	zval *z_fd;
 	char *p;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &fd) == FAILURE)
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &z_fd) == FAILURE)
 		return;
 
-	if (NULL == (p = ttyname(fd))) {
+	convert_to_long(z_fd);
+
+	if (NULL == (p = ttyname(Z_LVAL_P(z_fd)))) {
 		POSIX_G(last_error) = errno;
 		RETURN_FALSE;
 	}
@@ -604,13 +606,15 @@ PHP_FUNCTION(posix_ttyname)
    Determine if filedesc is a tty (POSIX.1, 4.7.1) */
 PHP_FUNCTION(posix_isatty)
 {
-	long fd;
+	zval *z_fd;
 	int   result;
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &fd) == FAILURE)
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &z_fd) == FAILURE)
 		return;
 
-	result = isatty(fd);
+	convert_to_long(z_fd);
+
+	result = isatty(Z_LVAL_P(z_fd));
 	if (!result)
 		RETURN_FALSE;
 

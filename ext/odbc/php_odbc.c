@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.172 2003/08/27 18:21:51 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.173 2003/08/28 09:55:11 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1430,7 +1430,7 @@ static void php_odbc_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 				}
 
 				if (result->binmode == 1) {
-					sql_c-type = SQL_C_BINARY;
+					sql_c_type = SQL_C_BINARY;
 				}
 			case SQL_LONGVARCHAR:
 				if (IS_SQL_LONG(result->values[i].coltype) && result->longreadlen <= 0) {

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.25 2000/12/15 01:01:13 ssb Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.26 2001/01/09 15:11:23 hirokawa Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -160,15 +160,6 @@ AC_ARG_WITH(system-regex,
   else
     REGEX_TYPE=php
   fi
-])
-
-AC_CHECK_LIB(c, iconv_open, [
-  AC_DEFINE(HAVE_ICONV, 1, [ ])
-], [
-  AC_CHECK_LIB(iconv, iconv_open, [
-    EXTRA_LIBS="$EXTRA_LIBS -liconv"
-    AC_DEFINE(HAVE_ICONV, 1, [ ])
-  ])
 ])
 
 PHP_EXTENSION(standard)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.30 2001/01/08 02:39:52 hirokawa Exp $ */
+/* $Id: php_string.h,v 1.31 2001/01/09 15:11:23 hirokawa Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -78,9 +78,6 @@ PHP_FUNCTION(strnatcasecmp);
 PHP_FUNCTION(substr_count);
 PHP_FUNCTION(str_pad);
 PHP_FUNCTION(sscanf);
-PHP_FUNCTION(iconv);
-PHP_FUNCTION(ob_iconv_handler);
-PHP_FUNCTION(iconv_set_encoding);
 
 #define strnatcmp(a, b) \
 	strnatcmp_ex(a, strlen(a), b, strlen(b), 0)

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 2000/05/02 04:26:22 sas Exp $
+dnl $Id: config.m4,v 1.5 2000/05/12 03:02:14 jah Exp $
 
 PHP_ARG_WITH(interbase,for InterBase support,
 [  --with-interbase[=DIR]  Include InterBase support.  DIR is the InterBase base
@@ -15,6 +15,7 @@ if test "$PHP_INTERBASE" != "no"; then
   AC_ADD_LIBRARY_WITH_PATH(gds, $IBASE_LIBDIR, INTERBASE_SHARED_LIBADD)
   AC_ADD_INCLUDE($IBASE_INCDIR)
   AC_DEFINE(HAVE_IBASE,1,[ ])
+dnl  AC_CHECK_LIB(c, strptime, [AC_DEFINE(HAVE_STRPTIME,1,[])])
   PHP_EXTENSION(interbase, $ext_shared)
   PHP_SUBST(INTERBASE_SHARED_LIBADD)
 fi

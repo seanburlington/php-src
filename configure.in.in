@@ -1,4 +1,4 @@
-dnl $Id: configure.in.in,v 1.78 1999/09/15 09:35:20 ssb Exp $ -*- sh -*-
+dnl $Id: configure.in.in,v 1.79 1999/09/16 08:26:46 sas Exp $ -*- sh -*-
 dnl Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -77,7 +77,8 @@ if test -n "$auto_cflags" && test "`uname -s 2>/dev/null`" = "HP-UX"; then
 fi
 
 dnl Checks for programs.
-AC_PROG_LIBTOOL
+AM_PROG_LIBTOOL
+AM_SET_LIBTOOL_VARIABLE([--silent])
 AC_PROG_YACC
 if test "$YACC" != "bison -y"; then
     AC_MSG_WARN(You will need bison if you want to regenerate the PHP parsers.)

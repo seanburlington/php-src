@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.27 1999/09/13 17:17:50 ssb Exp $
+dnl $Id: acinclude.m4,v 1.28 1999/09/16 08:26:46 sas Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -79,6 +79,10 @@ AC_DEFUN(AC_ADD_LIBRARY_WITH_PATH,[
   AC_ADD_LIBRARY($1)
 ])
 
+
+AC_DEFUN(AM_SET_LIBTOOL_VARIABLE,[
+  LIBTOOL='$(SHELL) $(top_builddir)/libtool $1'
+])
 
 dnl
 dnl Check for cc option

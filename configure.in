@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.302.2.2 2002/03/22 12:48:28 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.302.2.3 2002/03/22 14:26:09 derick Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -36,7 +36,7 @@ for arg in $0 "$@"; do
 done
 
 AC_CANONICAL_HOST
-AM_INIT_AUTOMAKE(php, 4.2.0-dev, nodefine)
+AM_INIT_AUTOMAKE(php, 4.2.0RC, nodefine)
 AM_CONFIG_HEADER(main/php_config.h)
 AM_MAINTAINER_MODE
 

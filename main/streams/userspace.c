@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.19 2004/01/21 10:17:12 hholzgra Exp $ */
+/* $Id: userspace.c,v 1.20 2004/01/27 03:20:35 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1202,7 +1202,6 @@ static int php_userstreamop_rewinddir(php_stream *stream, off_t offset, int when
 {
 	zval func_name;
 	zval *retval = NULL;
-	zval **args[1];
 	php_userstream_data_t *us = (php_userstream_data_t *)stream->abstract;
 
 	ZVAL_STRINGL(&func_name, USERSTREAM_DIR_REWIND, sizeof(USERSTREAM_DIR_REWIND)-1, 0);

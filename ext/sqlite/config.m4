@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.29 2005/01/09 21:05:05 sniper Exp $
+dnl $Id: config.m4,v 1.30 2005/02/13 03:15:11 wez Exp $
 dnl config.m4 for extension sqlite
 dnl vim:et:ts=2:sw=2
 
@@ -90,7 +90,7 @@ if test "$PHP_SQLITE" != "no"; then
 	
     sed -e s/--VERS--/$SQLITE_VERSION/ -e s/--ENCODING--/$SQLITE_ENCODING/ $ext_srcdir/libsqlite/src/sqlite.h.in >$ext_srcdir/libsqlite/src/sqlite.h
 
-    if test "$ext_shared" = "no"; then
+    if test "$ext_shared" = "no" -o "$ext_srcdir" != "$abs_srcdir"; then
       echo '#include <php_config.h>' > $ext_srcdir/libsqlite/src/config.h
     else
       echo "#include \"$abs_builddir/config.h\"" > $ext_srcdir/libsqlite/src/config.h

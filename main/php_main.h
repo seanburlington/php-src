@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: php_main.h,v 1.10 2001/04/30 13:27:53 hirokawa Exp $ */
+/* $Id: php_main.h,v 1.11 2001/05/01 01:52:55 hirokawa Exp $ */
 
 
 #ifndef PHP_MAIN_H
@@ -53,8 +53,8 @@ extern void php_call_shutdown_functions(void);
 extern int php_init_environ(void);
 extern int php_shutdown_environ(void);
 
-#if defined(JSTR_ENC_TRANS)
-#define php_treat_data jstr_treat_data
+#if defined(MBSTR_ENC_TRANS)
+#define php_treat_data mbstr_treat_data
 #endif
 
 #endif

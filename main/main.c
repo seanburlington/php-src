@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.16 1999/04/17 00:37:05 ssb Exp $ */
+/* $Id: main.c,v 1.17 1999/04/18 15:09:46 zeev Exp $ */
 
 /* #define CRASH_DETECTION */
 
@@ -1189,6 +1189,9 @@ static void php3_parse(zend_file_handle *primary_file CLS_DC ELS_DC)
 	}
 	_php3_hash_environment();
 
+#if WIN32||WINNT
+	UpdateIniFromRegistry(primary_file->filename);
+#endif
 
 	if (PG(auto_prepend_file) && PG(auto_prepend_file)[0]) {
 		prepend_file.filename = PG(auto_prepend_file);

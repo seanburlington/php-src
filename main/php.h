@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.122 2000/08/27 18:27:37 andi Exp $ */
+/* $Id: php.h,v 1.123 2000/09/03 18:45:02 andi Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -290,7 +290,7 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #define VIRTUAL_DIR
 #endif
 
-#include "php_virtual_cwd.h"
+#include "tsrm_virtual_cwd.h"
 
 /* Virtual current directory support */
 #ifdef VIRTUAL_DIR

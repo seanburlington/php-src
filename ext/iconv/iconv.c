@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.65.2.12 2003/11/22 13:38:46 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.65.2.13 2004/11/23 09:45:22 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -83,24 +83,11 @@ ZEND_DECLARE_MODULE_GLOBALS(iconv)
 ZEND_GET_MODULE(iconv)
 #endif
 
-/* {{{ typedef enum php_iconv_err_t */
-typedef enum _php_iconv_err_t {
-	PHP_ICONV_ERR_SUCCESS           = SUCCESS,
-	PHP_ICONV_ERR_CONVERTER         = 1,
-	PHP_ICONV_ERR_WRONG_CHARSET     = 2,
-	PHP_ICONV_ERR_TOO_BIG           = 3,
-	PHP_ICONV_ERR_ILLEGAL_SEQ       = 4,
-	PHP_ICONV_ERR_ILLEGAL_CHAR      = 5,
-	PHP_ICONV_ERR_UNKNOWN           = 6
-} php_iconv_err_t;
-/* }}} */
-
 #ifdef HAVE_LIBICONV
 #define iconv libiconv
 #endif
 
 /* {{{ prototypes */ 
-static php_iconv_err_t php_iconv_string(const char * in_p, size_t in_len, char **out, size_t *out_len, const char *in_charset, const char *out_charset);
 static void _php_iconv_show_error(php_iconv_err_t err, const char *in_charset, const char *out_charset TSRMLS_DC);
 /* }}} */
 
@@ -185,7 +172,7 @@ PHP_MINFO_FUNCTION(miconv)
 
 /* {{{ php_iconv_string
  */
-php_iconv_err_t php_iconv_string(const char *in_p, size_t in_len,
+PHP_ICONV_API php_iconv_err_t php_iconv_string(const char *in_p, size_t in_len,
 							char **out, size_t *out_len,
 							const char *in_charset, const char *out_charset)
 {

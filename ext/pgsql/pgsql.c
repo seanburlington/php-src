@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.21 1999/09/10 02:59:37 zeev Exp $ */
+/* $Id: pgsql.c,v 1.22 1999/10/06 13:15:23 sas Exp $ */
 
 #include <stdlib.h>
 
@@ -887,7 +887,7 @@ static void php3_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 			}
 			break;
 		case 3:
-			if (getParameters(ht, 2, &result, &row, &arg3)==FAILURE) {
+			if (getParameters(ht, 3, &result, &row, &arg3)==FAILURE) {
 				RETURN_FALSE;
 			}
 			convert_to_long(arg3);

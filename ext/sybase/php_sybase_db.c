@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.59 2004/01/17 12:59:52 sniper Exp $ */
+/* $Id: php_sybase_db.c,v 1.60 2004/01/28 01:43:39 iliaa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -330,7 +330,7 @@ static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 		case 2: {
 				zval **yyhost, **yyuser;
 				
-				if (zend_get_parameters_ex(ht, 2, &yyhost, &yyuser) == FAILURE) {
+				if (zend_get_parameters_ex(2, &yyhost, &yyuser) == FAILURE) {
 					RETURN_FALSE;
 				}
 				convert_to_string_ex(yyhost);

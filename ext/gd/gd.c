@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.34 2000/01/01 01:31:33 sas Exp $ */
+/* $Id: gd.c,v 1.35 2000/01/24 20:25:57 eschmid Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1550,7 +1550,7 @@ PHP_FUNCTION(imagefontwidth)
 /* }}} */
 
 /* {{{ proto int imagefontheight(int font)
-Get font height */
+   Get font height */
 PHP_FUNCTION(imagefontheight)
 {
 	php_imagefontsize(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
@@ -1818,7 +1818,7 @@ PHP_FUNCTION(imagesx)
 /* }}} */
 
 /* {{{ proto int imagesy(int im)
-Get image height */
+   Get image height */
 PHP_FUNCTION(imagesy)
 {
 	pval *IM;

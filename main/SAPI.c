@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.124 2001/12/11 15:31:00 sebastian Exp $ */
+/* $Id: SAPI.c,v 1.125 2001/12/16 14:47:18 sesser Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -504,6 +504,7 @@ SAPI_API int sapi_add_header_ex(char *header_line, uint header_line_len, zend_bo
 								efree(result);
 								conv_len = sprintf(conv_temp," realm=\"%ld\"",myuid);		
 								result = emalloc(ptr_len+conv_len+1);
+								result_len = ptr_len+conv_len;
 								memcpy(result, ptr, ptr_len);	
 								memcpy(result+ptr_len, conv_temp, conv_len);
 								*(result+ptr_len+conv_len) = '\0';

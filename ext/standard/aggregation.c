@@ -16,11 +16,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: aggregation.c,v 1.3.2.1 2002/03/22 01:12:52 sniper Exp $ */
+/* $Id: aggregation.c,v 1.3.2.2 2002/04/11 12:53:19 derick Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
 #include "aggregation.h"
+
+#ifdef HAVE_AGGREGATE
+
 #if HAVE_PCRE || HAVE_BUNDLED_PCRE
 #include "ext/pcre/php_pcre.h"
 #endif
@@ -597,6 +600,8 @@ PHP_FUNCTION(deaggregate)
 	}
 }
 /* }}} */
+
+#endif /* HAVE_AGGREGATE */
 
 /*
  * Local variables:

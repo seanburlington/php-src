@@ -16,7 +16,9 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: aggregation.h,v 1.2 2002/02/28 08:26:44 sebastian Exp $ */
+/* $Id: aggregation.h,v 1.2.2.1 2002/04/11 12:53:19 derick Exp $ */
+
+#ifdef HAVE_AGGREGATE
 
 #ifndef AGGREGATION_H
 #define AGGREGATION_H
@@ -49,3 +51,5 @@ PHP_FUNCTION(deaggregate);
 PHP_FUNCTION(aggregation_info);
 
 #endif /* AGGREGATION_H */
+
+#endif /* HAVE_AGGREGATE */

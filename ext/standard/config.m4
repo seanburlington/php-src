@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.31 2001/09/12 02:07:46 sniper Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.31.2.1 2002/04/11 12:53:19 derick Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -228,6 +228,14 @@ AC_ARG_WITH(system-regex,
     REGEX_TYPE=php
   fi
 ])
+
+
+PHP_ARG_ENABLE(aggregate, whether to enable aggregation support,
+[  --enable-aggregate      EXPERIMENTAL: Enable user-space aggregation support.], no)
+
+if test "$PHP_AGGREGATE" != "no"; then
+  AC_DEFINE(HAVE_AGGREGATE, 1, [ ])
+fi
 
 if test "$PHP_SAPI" = "cgi"; then
   AC_DEFINE(ENABLE_CHROOT_FUNC, 1, [Whether to enable chroot() function])

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.16 2003/01/14 01:23:35 moriyoshi Exp $ */
+/* $Id: filters.c,v 1.17 2003/01/14 01:27:57 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1264,6 +1264,9 @@ out_failure:
 	if (read_cd != NULL) {
 		php_conv_dtor(read_cd);
 		pefree(read_cd, persistent);
+	}
+	if (inst->filtername != NULL) {
+		pefree(inst->filtername, persistent);
 	}
 	return FAILURE;
 }

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlite2.c,v 1.2 2005/03/12 00:07:44 wez Exp $ */
+/* $Id: pdo_sqlite2.c,v 1.3 2005/03/12 00:50:20 helly Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -310,7 +310,9 @@ static int pdo_sqlite2_fetch_error_func(pdo_dbh_t *dbh, pdo_stmt_t *stmt, zval *
 
 	if (einfo->errcode) {
 		add_next_index_long(info, einfo->errcode);
-		add_next_index_string(info, einfo->errmsg, 1);
+		if (einfo->errmsg) {
+			add_next_index_string(info, einfo->errmsg, 1);
+		}
 	}
 
 	return 1;

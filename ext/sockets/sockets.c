@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.125.2.26 2005/02/14 22:17:30 sniper Exp $ */
+/* $Id: sockets.c,v 1.125.2.27 2005/02/14 22:18:46 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -644,7 +644,7 @@ PHP_FUNCTION(socket_create_listen)
 		RETURN_FALSE;
 	}
 
-	sock->error = 0;
+	php_sock->error = 0;
 
 	ZEND_REGISTER_RESOURCE(return_value, php_sock, le_socket);
 }

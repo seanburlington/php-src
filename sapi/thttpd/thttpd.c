@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: thttpd.c,v 1.76 2002/11/07 11:56:02 sas Exp $ */
+/* $Id: thttpd.c,v 1.77 2002/11/08 13:29:32 sas Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -371,7 +371,7 @@ static zend_module_entry php_thttpd_module = {
 
 static int php_thttpd_startup(sapi_module_struct *sapi_module)
 {
-#if PHP_API >= 20020918
+#if PHP_API_VERSION >= 20020918
 	if (php_module_startup(sapi_module, &php_thttpd_module, 1) == FAILURE) {
 #else
 	if (php_module_startup(sapi_module) == FAILURE

@@ -17,12 +17,14 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.42 2002/04/08 01:37:37 yohgaki Exp $ */
+/* $Id: php_pgsql.h,v 1.43 2002/04/20 02:38:30 yohgaki Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
 
 #if HAVE_PGSQL
+
+#define PHP_PGSQL_API 20020419
 
 extern zend_module_entry pgsql_module_entry;
 #define pgsql_module_ptr &pgsql_module_entry

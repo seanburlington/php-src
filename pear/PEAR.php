@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.44 2002/06/17 14:04:01 cox Exp $
+// $Id: PEAR.php,v 1.45 2002/06/17 14:35:12 cox Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -570,7 +570,8 @@ class PEAR
     // {{{ loadExtension()
 
     /**
-    * OS independant PHP extension load
+    * OS independant PHP extension load. Remember to take care
+    * on the correct extension name for case sensitive OSes.
     *
     * @param string $ext The extension name
     * @return bool Success or not on the dl() call
@@ -589,7 +590,6 @@ class PEAR
             } else {
                 $suffix = '.so';
             }
-            $ext = strtolower($ext);
             return @dl('php_'.$ext.$suffix) || @dl($ext.$suffix);
         }
         return true;

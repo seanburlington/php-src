@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.98.2.5 2005/02/27 17:08:26 iliaa Exp $ */
+/* $Id: image.c,v 1.98.2.6 2005/03/01 10:13:15 helly Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -632,12 +632,12 @@ static struct gfxinfo *php_handle_jpc(php_stream * stream TSRMLS_DC)
 	result->width = php_read4(stream TSRMLS_CC); /* Ysiz */
 
 #if MBO_0
-	dummy_int = php_read4(stream TSRMLS_CC); /* XOsiz */
-	dummy_int = php_read4(stream TSRMLS_CC); /* YOsiz */
-	dummy_int = php_read4(stream TSRMLS_CC); /* XTsiz */
-	dummy_int = php_read4(stream TSRMLS_CC); /* YTsiz */
-	dummy_int = php_read4(stream TSRMLS_CC); /* XTOsiz */
-	dummy_int = php_read4(stream TSRMLS_CC); /* YTOsiz */
+	php_read4(stream TSRMLS_CC); /* XOsiz */
+	php_read4(stream TSRMLS_CC); /* YOsiz */
+	php_read4(stream TSRMLS_CC); /* XTsiz */
+	php_read4(stream TSRMLS_CC); /* YTsiz */
+	php_read4(stream TSRMLS_CC); /* XTOsiz */
+	php_read4(stream TSRMLS_CC); /* YTOsiz */
 #else
 	if (php_stream_seek(stream, 24, SEEK_CUR)) {
 		efree(result);

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.h,v 1.2 2000/01/01 01:32:00 sas Exp $ */
+/* $Id: mod_php4.h,v 1.3 2000/02/08 18:03:19 andrei Exp $ */
 
 #ifndef _MOD_PHP4_H
 #define _MOD_PHP4_H
@@ -33,6 +33,7 @@ typedef struct {
 	long xbithack;
 } php_apache_info_struct;
 
+extern zend_module_entry apache_module_entry;
 extern php_apache_info_struct php_apache_info;
 
 #if MSVC5

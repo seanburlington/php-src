@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.20 2000/02/02 17:19:35 andrei Exp $ */
+/* $Id: mod_php4.c,v 1.21 2000/02/08 18:03:19 andrei Exp $ */
 
 #include "zend.h"
 #include "php.h"
@@ -57,8 +57,6 @@
 #if HAVE_MOD_DAV
 # include "mod_dav.h"
 #endif
-
-extern zend_module_entry apache_module_entry;
 
 PHPAPI int apache_php_module_main(request_rec *r, int fd, int display_source_mode SLS_DC);
 void php_save_umask(void);

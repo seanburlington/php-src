@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.133 2000/07/08 20:38:23 andrei Exp $ */
+/* $Id: string.c,v 1.134 2000/07/08 22:55:40 eschmid Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2582,7 +2582,7 @@ PHP_FUNCTION(substr_count)
 /* }}} */	
 
 
-/* {{{ proto string str_pad(string input, int pad_length [, string pad_string [, int pad_type ]])
+/* {{{ proto string str_pad(string input, int pad_length [, string pad_string [, int pad_type]])
    Returns input string padded on the left or right to specified length with pad_string */
 PHP_FUNCTION(str_pad)
 {

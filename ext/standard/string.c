@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.76 1999/12/18 22:35:28 zeev Exp $ */
+/* $Id: string.c,v 1.77 1999/12/19 02:12:31 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1607,7 +1607,7 @@ PHPAPI char *php_addcslashes(char *str, int length, int *new_length, int should_
 					case '\v': *target++ = 'v'; break;
 					case '\b': *target++ = 'b'; break;
 					case '\f': *target++ = 'f'; break;
-					default: target += sprintf(target, "%03o", (unsigned char)c);
+					default: target += zend_sprintf(target, "%03o", (unsigned char)c);
 				}
 				continue;
 			} 

@@ -1,5 +1,8 @@
-dnl $Id: config.m4,v 1.9 2001/01/06 08:37:00 hirokawa Exp $
+dnl $Id: config.m4,v 1.10 2001/01/09 22:15:56 hirokawa Exp $
 dnl config.m4 for extension Sablot
+
+PHP_ARG_WITH(expat-dir, for Sablotron XSL support,
+[  --with-expat-dir=DIR    Sablotron: libexpat dir for Sablotron 0.50])
 
 PHP_ARG_WITH(sablot, for Sablotron XSL support,
 [  --with-sablot[=DIR]     Include Sablotron support])
@@ -27,13 +30,22 @@ if test "$PHP_SABLOT" != "no"; then
   PHP_SUBST(SABLOT_SHARED_LIBADD)
   AC_ADD_LIBRARY_WITH_PATH(sablot, $SABLOT_DIR/lib, SABLOT_SHARED_LIBADD)
 
-  if test -f $SABLOT_DIR/lib/libexpat.a -o -f $SABLOT_DIR/lib/libexpat.so ; then
-	AC_ADD_LIBRARY(expat)
-  	AC_CHECK_LIB(sablot, SablotSetEncoding,
-		AC_DEFINE(HAVE_SABLOT_SET_ENCODING,1,[ ]))
-  else
-	AC_ADD_LIBRARY(xmlparse)
-	AC_ADD_LIBRARY(xmltok)
+  if test -z "$PHP_EXPAT_DIR"; then
+    PHP_EXPAT_DIR=""
+  fi
+
+  testval=no
+  for i in $PHP_EXPAT_DIR $SABLOT_DIR; do
+    if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.so; then
+      AC_ADD_LIBRARY_WITH_PATH(expat, $i/lib)
+      AC_CHECK_LIB(sablot, SablotSetEncoding, AC_DEFINE(HAVE_SABLOT_SET_ENCODING,1,[ ]))
+      testval=yes
+    fi
+  done
+
+  if test "$testval" == "no"; then
+    AC_ADD_LIBRARY(xmlparse)
+    AC_ADD_LIBRARY(xmltok)
   fi
   
   AC_DEFINE(HAVE_SABLOT,1,[ ])

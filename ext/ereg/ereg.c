@@ -28,7 +28,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.12 1999/06/05 20:43:36 andrey Exp $ */
+/* $Id: ereg.c,v 1.13 1999/06/07 15:01:25 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -319,7 +319,7 @@ char *_php3_regreplace(const char *pattern, const char *replace, const char *str
 
 	string_len = strlen(string);
 	if (!string_len)
-		return (char *)string;
+		return estrndup("", 0);
 
 	if (icase)
 		copts = REG_ICASE;

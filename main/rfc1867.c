@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.51 2000/09/11 18:56:47 andi Exp $ */
+/* $Id: rfc1867.c,v 1.52 2000/10/17 18:13:35 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -24,6 +24,7 @@
 #include "php_globals.h"
 #include "php_variables.h"
 #include "rfc1867.h"
+#include "ext/standard/type.h"
 
 
 #define NEW_BOUNDARY_CHECK 1

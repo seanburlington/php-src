@@ -1,9 +1,9 @@
 <?php
 /* vim: set ts=4 sw=4: */
 // +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
+// | PHP Version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2003 The PHP Group                                |
+// | Copyright (c) 1997-2004 The PHP Group                                |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 3.0 of the PHP license,       |
 // | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
 // | Author: Vincent Blavet <vincent@blavet.net>                          |
 // +----------------------------------------------------------------------+
 //
-// $Id: Tar.php,v 1.19 2003/11/17 02:27:23 ssb Exp $
+// $Id: Tar.php,v 1.20 2004/01/08 17:33:09 sniper Exp $
 
 require_once 'PEAR.php';
 
@@ -24,7 +24,7 @@ require_once 'PEAR.php';
 * Creates a (compressed) Tar archive
 *
 * @author   Vincent Blavet <vincent@blavet.net>
-* @version  $Revision: 1.19 $
+* @version  $Revision: 1.20 $
 * @package  Archive
 */
 class Archive_Tar extends PEAR

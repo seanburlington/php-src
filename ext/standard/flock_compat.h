@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: flock_compat.h,v 1.18 2003/06/10 20:03:37 imajes Exp $ */
+/* $Id: flock_compat.h,v 1.19 2004/01/08 17:32:51 sniper Exp $ */
 
 #ifndef FLOCK_COMPAT_H
 #define FLOCK_COMPAT_H

@@ -1,7 +1,7 @@
 #  +----------------------------------------------------------------------+
-#  | PHP Version 4                                                        |
+#  | PHP Version 5                                                        |
 #  +----------------------------------------------------------------------+
-#  | Copyright (c) 1997-2002 The PHP Group                                |
+#  | Copyright (c) 1997-2004 The PHP Group                                |
 #  +----------------------------------------------------------------------+
 #  | This source file is subject to version 3.0 of the PHP license,       |
 #  | that is bundled with this package in the file LICENSE, and is        |
@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build2.mk,v 1.29 2003/06/27 00:19:43 sas Exp $ 
+# $Id: build2.mk,v 1.30 2004/01/08 17:31:49 sniper Exp $ 
 #
 
 include generated_lists

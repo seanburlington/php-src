@@ -1,8 +1,8 @@
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 4                                                        |
+  | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2003 The PHP Group                                |
+  | Copyright (c) 1997-2004 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.22 2004/01/02 03:26:24 helly Exp $ */
+/* $Id: var_unserializer.re,v 1.23 2004/01/08 17:32:52 sniper Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"

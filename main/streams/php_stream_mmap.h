@@ -1,8 +1,8 @@
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 4                                                        |
+  | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2003 The PHP Group                                |
+  | Copyright (c) 1997-2004 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_stream_mmap.h,v 1.2 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: php_stream_mmap.h,v 1.3 2004/01/08 17:33:06 sniper Exp $ */
 
 /* Memory Mapping interface for streams.
  * The intention is to provide a uniform interface over the most common

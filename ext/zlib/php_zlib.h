@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.39 2003/09/06 15:31:34 sr Exp $ */
+/* $Id: php_zlib.h,v 1.40 2004/01/08 17:33:03 sniper Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H

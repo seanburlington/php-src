@@ -1,9 +1,9 @@
 <?php
 //
 // +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
+// | PHP Version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2003 The PHP Group                                |
+// | Copyright (c) 1997-2004 The PHP Group                                |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 3.0 of the PHP license,       |
 // | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
 // | Authors: Stig Sæther Bakken <ssb@php.net>                            |
 // +----------------------------------------------------------------------+
 //
-// $Id: Builder.php,v 1.13 2003/10/05 16:42:18 mj Exp $
+// $Id: Builder.php,v 1.14 2004/01/08 17:33:12 sniper Exp $
 
 require_once 'PEAR/Common.php';
 

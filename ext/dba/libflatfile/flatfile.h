@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: flatfile.h,v 1.9 2003/06/10 20:03:26 imajes Exp $ */
+/* $Id: flatfile.h,v 1.10 2004/01/08 17:31:57 sniper Exp $ */
 
 #ifndef PHP_LIB_FLATFILE_H
 #define PHP_LIB_FLATFILE_H

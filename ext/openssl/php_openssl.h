@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_openssl.h,v 1.14 2003/06/27 16:41:41 sniper Exp $ */
+/* $Id: php_openssl.h,v 1.15 2004/01/08 17:32:36 sniper Exp $ */
 
 #ifndef PHP_OPENSSL_H
 #define PHP_OPENSSL_H

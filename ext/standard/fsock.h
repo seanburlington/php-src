@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.h,v 1.46 2003/06/10 20:03:37 imajes Exp $ */
+/* $Id: fsock.h,v 1.47 2004/01/08 17:32:51 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.24 1999-06-18 [ssb] */
 

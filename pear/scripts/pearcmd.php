@@ -1,9 +1,9 @@
 <?php
 //
 // +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
+// | PHP Version 5                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2002 The PHP Group                                |
+// | Copyright (c) 1997-2004 The PHP Group                                |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 3.0 of the PHP license,       |
 // | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearcmd.php,v 1.7 2003/12/18 22:09:17 ssb Exp $
+// $Id: pearcmd.php,v 1.8 2004/01/08 17:33:14 sniper Exp $
 
 ob_end_clean();
 /**

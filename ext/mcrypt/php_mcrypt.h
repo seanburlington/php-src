@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_mcrypt.h,v 1.24 2003/10/13 09:33:00 derick Exp $ */
+/* $Id: php_mcrypt.h,v 1.25 2004/01/08 17:32:21 sniper Exp $ */
 
 #ifndef PHP_MCRYPT_H
 #define PHP_MCRYPT_H

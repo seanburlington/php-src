@@ -1,11 +1,11 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.h,v $ */
-/* $Id: php_mnogo.h,v 1.23 2003/06/10 20:03:32 imajes Exp $ */
+/* $Id: php_mnogo.h,v 1.24 2004/01/08 17:32:25 sniper Exp $ */
 
 /* 
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |

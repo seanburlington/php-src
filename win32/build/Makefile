@@ -1,7 +1,7 @@
 #  +----------------------------------------------------------------------+
 #  | PHP Version 5                                                        |
 #  +----------------------------------------------------------------------+
-#  | Copyright (c) 1997-2002 The PHP Group                                |
+#  | Copyright (c) 1997-2004 The PHP Group                                |
 #  +----------------------------------------------------------------------+
 #  | This source file is subject to version 3.0 of the PHP license,       |
 #  | that is bundled with this package in the file LICENSE, and is        |
@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.14 2004/01/07 23:36:36 wez Exp $
+# $Id: Makefile,v 1.15 2004/01/08 17:33:29 sniper Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"

@@ -3,7 +3,7 @@
 // +----------------------------------------------------------------------+
 // | PEAR, the PHP Extension and Application Repository                   |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2003 The PHP Group                                |
+// | Copyright (c) 1997-2004 The PHP Group                                |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2.0 of the PHP license,       |
 // | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.72 2003/12/06 02:00:33 cellog Exp $
+// $Id: PEAR.php,v 1.73 2004/01/08 17:33:08 sniper Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);

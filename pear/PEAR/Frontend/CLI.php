@@ -1,9 +1,9 @@
 <?php
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 4                                                        |
+  | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2003 The PHP Group                                |
+  | Copyright (c) 1997-2004 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@php.net>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.38 2003/12/07 00:10:40 cellog Exp $
+  $Id: CLI.php,v 1.39 2004/01/08 17:33:13 sniper Exp $
 */
 
 require_once "PEAR.php";

@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.33 2003/08/16 06:34:36 jason Exp $ */
+/* $Id: php_sockets.h,v 1.34 2004/01/08 17:32:48 sniper Exp $ */
 
 #if HAVE_SOCKETS
 

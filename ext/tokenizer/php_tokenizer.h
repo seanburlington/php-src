@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_tokenizer.h,v 1.7 2003/07/19 18:52:49 andrey Exp $ */
+/* $Id: php_tokenizer.h,v 1.8 2004/01/08 17:32:57 sniper Exp $ */
 
 #ifndef PHP_TOKENIZER_H
 #define PHP_TOKENIZER_H

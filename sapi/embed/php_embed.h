@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
    | Author: Edin Kadribasic <edink@php.net>                              |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_embed.h,v 1.4 2003/06/10 20:03:45 imajes Exp $ */
+/* $Id: php_embed.h,v 1.5 2004/01/08 17:33:24 sniper Exp $ */
 
 #ifndef _PHP_EMBED_H_
 #define _PHP_EMBED_H_

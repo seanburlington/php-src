@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2003 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2004 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        | 
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.h,v 1.1 2003/06/30 20:03:56 gschlossnagle Exp $ */
+/* $Id: php_reflection.h,v 1.2 2004/01/08 17:31:48 sniper Exp $ */
 
 #ifndef ZEND_REFLECTION_API_H
 #define ZEND_REFLECTION_API_H

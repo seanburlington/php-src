@@ -1,8 +1,8 @@
 /* -*- C -*-
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: internal_functions.c.in,v 1.26 2003/09/23 16:04:03 sniper Exp $ */
+/* $Id: internal_functions.c.in,v 1.27 2004/01/08 17:33:04 sniper Exp $ */
 
 #include "php.h"
 #include "php_main.h"

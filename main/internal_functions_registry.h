@@ -1,8 +1,8 @@
 /* 
    +----------------------------------------------------------------------+
-   | PHP Version 4                                                        |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: internal_functions_registry.h,v 1.15 2003/06/10 20:03:41 imajes Exp $ */
+/* $Id: internal_functions_registry.h,v 1.16 2004/01/08 17:33:04 sniper Exp $ */
 
 #ifndef INTERNAL_FUNCTIONS_REGISTRY_H
 #define INTERNAL_FUNCTIONS_REGISTRY_H

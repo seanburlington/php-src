@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2004 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: scriptengine.cpp,v 1.9 2004/01/07 21:01:13 wez Exp $ */
+/* $Id: scriptengine.cpp,v 1.10 2004/01/08 17:33:15 sniper Exp $ */
 
 /* Implementation Notes:
  *

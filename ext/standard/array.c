@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.109 2001/05/10 16:30:12 andrei Exp $ */
+/* $Id: array.c,v 1.110 2001/05/23 01:50:11 jdonagher Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -232,6 +232,7 @@ PHP_FUNCTION(ksort)
 	}
 	RETURN_TRUE;
 }
+/* }}} */
 
 /* {{{ proto int count(mixed var)
    Count the number of elements in a variable (usually an array) */

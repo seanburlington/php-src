@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.233 2004/01/15 06:30:23 sniper Exp $ */
+/* $Id: oci8.c,v 1.234 2004/01/15 15:06:57 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -784,7 +784,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.233 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.234 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -2747,7 +2747,7 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 	CALL_OCI(
 		OCIEnvNlsCreate(
 			&session->pEnv,
-			OCI_DEFAULT, 
+			PHP_OCI_INIT_MODE, 
 			0, 
 			NULL,
 			NULL,
@@ -6893,7 +6893,7 @@ PHP_FUNCTION(oci_new_collection)
 	if (ac < 2 || ac > 3 || zend_get_parameters_ex(ac, &conn, &tdo, &schema) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
-
+    
 	convert_to_string_ex(tdo);
 
 	if (ac == 3) {

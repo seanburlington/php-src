@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.254 2003/03/12 04:29:51 sniper Exp $ */
+/* $Id: gd.c,v 1.255 2003/03/17 13:00:13 hholzgra Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -4126,7 +4126,7 @@ PHP_FUNCTION(imagefilter)
 /* }}} */
 /* End section: Filters */
 
-/* {{{ proto imagesetantialias(int im, bool on)
+/* {{{ proto bool imagesetantialias(int im, bool on)
         Should antialiased functions used or not*/
 PHP_FUNCTION(imageantialias)
 {

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.94 2002/11/11 05:21:35 jason Exp $ */
+/* $Id: math.c,v 1.95 2002/11/11 05:35:04 jason Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -542,7 +542,7 @@ PHP_FUNCTION(log)
 			convert_to_double_ex(base);
 		
 			if (Z_DVAL_PP(base) <= 0.0) {
-				php_error(E_WARNING, "base must be greater than 0", Z_DVAL_PP(base));
+				php_error(E_WARNING, "log(): base must be greater than 0", Z_DVAL_PP(base));
 				RETURN_FALSE;
 			}
 			RETURN_DOUBLE(log(Z_DVAL_PP(num)) / log(Z_DVAL_PP(base)));

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.123 2002/03/24 17:59:39 derick Exp $ */
+/* $Id: php_mysql.c,v 1.124 2002/03/24 18:01:41 sander Exp $ */
 
 
 /* TODO:
@@ -1509,7 +1509,7 @@ PHP_FUNCTION(mysql_escape_string)
 /* }}} */
 
 /* {{{ proto string mysql_real_escape_string(string to_be_escaped, [int link_identifier])
-	Escape special characters in a string for ise in a SQL statement, taking into account the current charset of the connection */
+	Escape special characters in a string for use in a SQL statement, taking into account the current charset of the connection */
 PHP_FUNCTION(mysql_real_escape_string)
 {
 	zval *mysql_link = NULL;

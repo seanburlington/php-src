@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_flatfile.c,v 1.1 2002/11/06 09:17:50 helly Exp $ */
+/* $Id: dba_flatfile.c,v 1.2 2002/11/06 10:43:41 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -157,16 +157,16 @@ DBA_CLOSE_FUNC(flatfile)
 {
 	DBM_DATA;
 
-#if NFS_HACK
-	VCWD_UNLINK(dba->lockfn);
-#else
 	if (dba->lockfn) {
+#if NFS_HACK
+		VCWD_UNLINK(dba->lockfn);
+#else
 		/*dba->lockfd = VCWD_OPEN_MODE(dba->lockfn, O_RDWR, 0644);*/
 		flock(dba->lockfd, LOCK_UN);
 		close(dba->lockfd);
-	}
 #endif
-	efree(dba->lockfn);
+		efree(dba->lockfn);
+	}
 
 	php_stream_close(dba->fp);
 	if (dba->nextkey.dptr)

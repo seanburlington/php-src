@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.49 2000/03/30 22:41:13 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.50 2000/03/31 22:48:59 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -58,7 +58,7 @@
 #endif
 
 #ifndef S_ISREG
-#define S_ISREG(mode)	(((mode)&S_IFMT) == S_IFREG)
+#define S_ISREG(mode)	(((mode)&S_IFMT) & S_IFREG)
 #endif
 
 #ifdef PHP_WIN32

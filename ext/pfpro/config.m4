@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 2001/05/01 05:04:42 jdonagher Exp $
+dnl $Id: config.m4,v 1.6 2001/07/13 01:46:29 jdonagher Exp $
 dnl config.m4 for extension pfpro
 
 PHP_ARG_WITH(pfpro, whether to include Verisign Payflow Pro support,
@@ -38,8 +38,8 @@ if test "$PHP_PFPRO" != "no"; then
                  ./configure --with-pfpro=<pfpro-dir> if necessary)
   fi
 
-  PFPRO_VERSION3=`nm $PFPRO_LIB_DIR/$PFPRO_LIB | awk '{print $3}' | grep ^pfpro > /dev/null && echo 1 || echo 0`
-  PFPRO_VERSION2=`nm $PFPRO_LIB_DIR/$PFPRO_LIB | awk '{print $3}' | grep ^PN > /dev/null && echo 1 || echo 0`
+  PFPRO_VERSION3=`nm $PFPRO_LIB_DIR/$PFPRO_LIB | awk '{print $3}' | grep '^pfpro' > /dev/null && echo 1 || echo 0`
+  PFPRO_VERSION2=`nm $PFPRO_LIB_DIR/$PFPRO_LIB | awk '{print $3}' | grep '^PN' > /dev/null && echo 1 || echo 0`
 
   if test "$PFPRO_VERSION3" -eq 1 ; then
 	PFPRO_VERSION=3

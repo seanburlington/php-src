@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.48 2000/04/05 22:30:18 cmv Exp $ */
+/* $Id: gd.c,v 1.49 2000/04/05 22:31:40 cmv Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -251,10 +251,10 @@ PHP_MINFO_FUNCTION(gd)
 /* this next part is stupid ... if I knew better, I'd put them all on one row (cmv) */
 
 #ifdef HAVE_GD_GIF
-	php_info_print_table_row(2, "GIF Support", "enabled);
+	php_info_print_table_row(2, "GIF Support", "enabled");
 #endif
 #ifdef HAVE_GD_PNG
-	php_info_print_table_row(2, "PNG Support", "enabled);
+	php_info_print_table_row(2, "PNG Support", "enabled");
 #endif
 	php_info_print_table_end();
 }

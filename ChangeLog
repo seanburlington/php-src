@@ -1,3 +1,20 @@
+2004-05-07  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * ext/pcre/config.w32:
+      spot the vim user
+
+    * ext/pcre/config.w32:
+      Fix Bug #28317: Avoid recursion in libpcre on windows platform.
+
+2004-05-07  Ard Biesheuvel  <a.k.biesheuvel@ewi.tudelft.nl>
+
+    * (PHP_4_3)
+      ext/interbase/interbase.c:
+      MFH: fixed unregistered pointer juggling bug
+
+    * ext/interbase/ibase_query.c:
+      Fix unregistered bug in zval pointer/array juggling
+
 2004-05-06  Derick Rethans  <php@derickrethans.nl>
 
     * tests/lang/bug22367.phpt:
@@ -2877,7 +2894,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1621 2004/05/07 00:31:54 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1622 2004/05/08 00:33:46 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.3 2004/10/08 14:54:15 rrichards Exp $ */
+/* $Id: php_xmlwriter.c,v 1.4 2005/02/20 19:00:25 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -172,15 +172,15 @@ PHP_FUNCTION(xmlwriter_set_indent)
 	zval *pind;
 	xmlwriter_object *intern;
 	xmlTextWriterPtr ptr;
-	int indent, retval;
+	zend_bool indent, retval;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rb", &pind, &indent) == FAILURE) {
 		return;
 	}
 
 	ZEND_FETCH_RESOURCE(intern,xmlwriter_object *, &pind, -1, "XMLWriter", le_xmlwriter);
-	ptr = intern->ptr;
 
+	ptr = intern->ptr;
 	if (ptr) {
 		retval = xmlTextWriterSetIndent(ptr, indent);
 		if (retval == 0) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.55 2002/12/11 07:29:50 iliaa Exp $ */
+/* $Id: openssl.c,v 1.56 2002/12/12 12:18:43 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -298,7 +298,7 @@ static time_t asn1_time_to_time_t(ASN1_UTCTIME * timestr TSRMLS_DC)
 	** the value of timezone - 3600 seconds. Otherwise, we need to overcorrect and
 	** set the adjustment to the main timezone + 3600 seconds.
 	*/
-	gmadjust = -(thetime.tm_isdst ? timezone - 3600 : timezone + 3600);
+	gmadjust = -(thetime.tm_isdst ? (long)timezone - 3600 : (long)timezone + 3600);
 #endif
 	ret += gmadjust;
 

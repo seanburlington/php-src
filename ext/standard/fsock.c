@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.90 2002/03/17 01:58:41 wez Exp $ */
+/* $Id: fsock.c,v 1.91 2002/03/17 13:19:23 wez Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -219,7 +219,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 #endif
 		
 	} else	
-		stream = php_stream_sock_open_unix(host, persistent, &tv);
+		stream = php_stream_sock_open_unix(host, host_len, persistent, &tv);
 
 	if (stream && persistent)	{
 		zend_hash_update(&FG(ht_persistent_socks), hashkey, strlen(hashkey) + 1,

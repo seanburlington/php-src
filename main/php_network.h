@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.15 2002/03/16 02:33:00 wez Exp $ */
+/* $Id: php_network.h,v 1.16 2002/03/17 13:19:27 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -106,7 +106,7 @@ PHPAPI php_stream *php_stream_sock_open_from_socket(int socket, int persistent);
 /* open a connection to a host using php_hostconnect and return a stream */
 PHPAPI php_stream *php_stream_sock_open_host(const char *host, unsigned short port,
 		int socktype, int timeout, int persistent);
-PHPAPI php_stream *php_stream_sock_open_unix(const char *path, int persistent, struct timeval *timeout);
+PHPAPI php_stream *php_stream_sock_open_unix(const char *path, int pathlen, int persistent, struct timeval *timeout);
 
 PHPAPI void php_stream_sock_set_timeout(php_stream *stream, struct timeval *timeout);
 PHPAPI int php_stream_sock_set_blocking(php_stream *stream, int mode);

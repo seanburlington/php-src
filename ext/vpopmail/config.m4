@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.12 2002/03/19 22:47:34 mfischer Exp $
+dnl $Id: config.m4,v 1.13 2002/03/20 18:22:31 bbonev Exp $
 dnl
 
 PHP_ARG_WITH(vpopmail, for vpopmail support,
@@ -53,7 +53,7 @@ Use ./configure --with-vpopmail=<vpopmail-home-dir> if necessary)
 	dnl check for valias functions in the -lvpopmail
 	PHP_CHECK_LIBRARY(vpopmail, valias_select, [
 		AC_DEFINE(HAVE_VPOPMAIL_VALIAS,1,[Whether vpopmail has valias support])
-	],[],
+	],[],[
 		-L$VPOPMAIL_LIB_DIR 
 	])
 

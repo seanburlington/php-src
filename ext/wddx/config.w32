@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.1 2003/12/02 23:16:59 wez Exp $
+// $Id: config.w32,v 1.2 2003/12/22 13:16:41 wez Exp $
 // vim:ft=javascript
 
 ARG_WITH("wddx", "WDDX support", "yes");
@@ -6,6 +6,7 @@ ARG_WITH("wddx", "WDDX support", "yes");
 if (PHP_WDDX == "yes" && PHP_LIBXML == "yes") {
 	EXTENSION("wddx", "wddx.c");
 	AC_DEFINE("HAVE_WDDX", 1, "WDDX support");
+	ADD_EXTENSION_DEP('wddx', 'libxml');
 }
 
 

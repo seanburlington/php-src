@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.1 2003/12/05 07:17:11 fmk Exp $
+// $Id: config.w32,v 1.2 2003/12/22 13:16:39 wez Exp $
 // vim:ft=javascript
 
 ARG_WITH("exif", "exif", "no");
@@ -6,4 +6,5 @@ ARG_WITH("exif", "exif", "no");
 if (PHP_EXIF == "yes") {
 	EXTENSION("exif", "exif.c");
 	AC_DEFINE('HAVE_EXIF', 1, 'Have exif');
+	ADD_EXTENSION_DEP('exif', 'mbstring');
 }

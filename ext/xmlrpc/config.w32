@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.1 2003/12/19 16:59:37 wez Exp $
+// $Id: config.w32,v 1.2 2003/12/22 13:16:42 wez Exp $
 // vim:ft=javascript
 
 ARG_WITH("xmlrpc", "XMLRPC-EPI support", "no");
@@ -9,5 +9,6 @@ if (PHP_XMLRPC != "no") {
 	ADD_SOURCES(configure_module_dirname + "/libxmlrpc", "base64.c simplestring.c xml_to_dandarpc.c \
 	xmlrpc_introspection.c encodings.c system_methods.c xml_to_xmlrpc.c \
 	queue.c xml_element.c xmlrpc.c xml_to_soap.c", "xmlrpc");
+	ADD_EXTENSION_DEP('xmlrpc', 'libxml');
 }
 

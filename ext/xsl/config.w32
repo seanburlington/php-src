@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.7 2003/12/07 11:11:46 rrichards Exp $
+// $Id: config.w32,v 1.8 2003/12/22 13:16:43 wez Exp $
 // vim: ft=javascript
 
 ARG_WITH("xsl", "xsl support", "no");
@@ -25,6 +25,7 @@ if (PHP_XSL != "no") {
 					ADD_FLAG("LDFLAGS_XSL", "/nodefaultlib:msvcrt");
 				}
 			}
+			ADD_EXTENSION_DEP('xsl', 'libxml');
 		} else {
 			WARNING("xsl not enabled; libraries and headers not found");
 		}

@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.14 2002/06/02 13:07:18 ssb Exp $
+// $Id: Common.php,v 1.15 2002/06/06 06:40:05 cox Exp $
 
 require_once "PEAR.php";
 
@@ -174,10 +174,10 @@ class PEAR_Command_Common extends PEAR
             foreach ($this->commands[$command]['options'] as $k => $v) {
                 if (isset($v['shortopt'])) {
                     $s = $v['shortopt'];
-                    if (@$s{1} == ':') {
+                    if (strlen($s) > 1 && $s{1} == ':') {
                         $argname = '';
                         $optional = false;
-                        if (@$s{2} == ':') {
+                        if (strlen($s) > 2 && $s{2} == ':') {
                             $optional = true;
                             $argname = substr($s, 3);
                         } else {

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.13 2004/05/20 17:22:13 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.14 2004/05/20 18:05:44 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -363,7 +363,7 @@ static PHP_METHOD(PDO, lastInsertId)
 
 	PDO_DBH_CLEAR_ERR();
 	if (!dbh->methods->last_id) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "This driver last inserted id retrieval.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "This driver does not support last inserted id retrieval.");
 	} else {
 		RETURN_LONG(dbh->methods->last_id(dbh TSRMLS_CC));
 	}

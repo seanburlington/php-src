@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.575 2003/09/02 12:12:05 helly Exp $ */
+/* $Id: main.c,v 1.576 2003/09/04 14:43:36 helly Exp $ */
 
 /* {{{ includes
  */
@@ -554,7 +554,7 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 			efree(target);
 		}
 	} else {
-		spprintf(&message, 0, "%s: %s ", origin, buffer);
+		spprintf(&message, 0, "%s: %s", origin, buffer);
 	}
 	efree(buffer);
 	efree(origin);

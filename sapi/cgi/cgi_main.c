@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.219 2003/03/25 08:07:13 sebastian Exp $ */
+/* $Id: cgi_main.c,v 1.220 2003/03/27 17:52:33 shane Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -827,7 +827,9 @@ static void init_request_info(TSRMLS_D)
 #endif
 		SG(request_info).request_method = sapi_cgibin_getenv("REQUEST_METHOD",0 TSRMLS_CC);
 		SG(request_info).query_string = sapi_cgibin_getenv("QUERY_STRING",0 TSRMLS_CC);
-		if (script_path_translated)
+		/* some server configurations allow '..' to slip through in the
+		   translated path.   We'll just refuse to handle such a path. */
+		if (script_path_translated && !strstr(script_path_translated,".."))
 			SG(request_info).path_translated = estrdup(script_path_translated);
 		SG(request_info).content_type = (content_type ? content_type : "" );
 		SG(request_info).content_length = (content_length?atoi(content_length):0);

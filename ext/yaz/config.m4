@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11 2002/09/20 15:42:20 sniper Exp $
+dnl $Id: config.m4,v 1.12 2003/01/15 07:57:51 dickmeiss Exp $
 dnl
 
 PHP_ARG_WITH(yaz,for YAZ support,
@@ -32,25 +32,19 @@ if test "$PHP_YAZ" != "no"; then
       AC_MSG_ERROR([YAZ version 1.9 or later required.])
     fi
 
-    dir=""
     for c in $YAZLIB; do
       case $c in
        -L*)
          dir=`echo $c|cut -c 3-|sed 's%/\.libs%%g'`
+         PHP_ADD_LIBPATH($dir,YAZ_SHARED_LIBADD)
         ;;
-       -lyaz*)
-        ;;
-       *)
-       PHP_EVAL_LIBLINE($c, YAZ_SHARED_LIBADD)
+       -l*)
+         lib=`echo $c|cut -c 3-`
+	 PHP_ADD_LIBRARY($lib,YAZ_SHARED_LIBADD)
         ;;
       esac
     done
-    if test -n "$dir"; then
-      PHP_ADD_LIBPATH($dir,YAZ_SHARED_LIBADD)
-    fi
-    PHP_ADD_LIBRARY_DEFER(yaz,1,YAZ_SHARED_LIBADD)
     PHP_EVAL_INCLINE($YAZINC)
-    PHP_SUBST(YAZ_SHARED_LIBADD)
     PHP_NEW_EXTENSION(yaz, php_yaz.c, $ext_shared)
   else
     AC_MSG_ERROR([YAZ not found (missing $yazconfig)])

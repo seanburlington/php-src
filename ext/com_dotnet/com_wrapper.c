@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_wrapper.c,v 1.2 2004/01/08 08:14:20 andi Exp $ */
+/* $Id: com_wrapper.c,v 1.3 2004/03/18 02:16:34 iliaa Exp $ */
 
 /* This module exports a PHP object as a COM object by wrapping it
  * using IDispatchEx */
@@ -272,7 +272,7 @@ static HRESULT STDMETHODCALLTYPE disp_invokeex(
 		
 		/* convert args into zvals.
 		 * Args are in reverse order */
-		params = (zval ***)emalloc(sizeof(zval **) * pdp->cArgs);
+		params = (zval ***)safe_emalloc(sizeof(zval **), pdp->cArgs, 0);
 		for (i = 0; i < pdp->cArgs; i++) {
 			VARIANT *arg;
 			zval *zarg;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.115 2003/01/28 01:48:57 iliaa Exp $ */
+/* $Id: dir.c,v 1.116 2003/02/19 09:27:29 sniper Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -24,9 +24,10 @@
 #include "fopen_wrappers.h"
 #include "file.h"
 #include "php_dir.h"
+#include "php_scandir.h"
 
 #ifdef HAVE_DIRENT_H
-# include <dirent.h>
+#include <dirent.h>
 #endif
 
 #if HAVE_UNISTD_H
@@ -39,9 +40,6 @@
 #include "win32/readdir.h"
 #endif
 
-#if !HAVE_ALPHASORT || !HAVE_SCANDIR
-#include "php_scandir.h"
-#endif
 
 #ifdef HAVE_GLOB
 #ifndef PHP_WIN32
@@ -466,9 +464,9 @@ PHP_FUNCTION(scandir)
 	}
 
 	if (!flags) {
-		n = scandir(path, &namelist, 0, alphasort);
+		n = php_scandir(path, &namelist, 0, php_alphasort);
 	} else {
-		n = scandir(path, &namelist, 0, php_alphasortr);
+		n = php_scandir(path, &namelist, 0, php_alphasortr);
 	}
 
 	if (n < 0) {

@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.31 2002/10/05 10:59:34 wez Exp $ */
+/* $Id: php_network.h,v 1.32 2002/10/13 22:01:40 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -44,10 +44,15 @@
 #endif /* defined(PHP_WIN32) */
 
 #ifdef PHP_WIN32
-#define streams_socket_errno WSAGetLastError()
+#define php_socket_errno() WSAGetLastError()
 #else
-#define streams_socket_errno errno
+#define php_socket_errno() errno
 #endif
+
+/* like strerror, but caller must efree the returned string,
+ * unless buf is not NULL.
+ * Also works sensibly for win32 */
+PHPAPI char *php_socket_strerror(long err, char *buf, size_t bufsize);
 
 #ifdef HAVE_NETINET_IN_H
 # include <netinet/in.h>

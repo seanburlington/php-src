@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.87 2003/11/02 23:12:02 iliaa Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.88 2003/11/29 13:35:32 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1204,13 +1204,6 @@ AC_OUTPUT($ALL_OUTPUT_FILES, [], [
 
 if test "\$CONFIG_FILES" = "$ALL_OUTPUT_FILES" || test "\$CONFIG_FILES" = " $ALL_OUTPUT_FILES" || test -z "\$CONFIG_FILES"; then
   REDO_ALL=yes
-fi
-
-if test ! -f $srcdir/ext/bcmath/number.c; then
-  echo "creating number.c"
-  echo "/* Dummy File */" > $srcdir/ext/bcmath/number.c
-  echo "creating number.h"
-  echo "/* Dummy File */" > $srcdir/ext/bcmath/number.h
 fi
 
 ################################################################

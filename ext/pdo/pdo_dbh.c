@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.54 2005/02/11 01:20:59 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.55 2005/02/11 02:05:05 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -722,7 +722,7 @@ static PHP_METHOD(PDO, query)
 	stmt->query_string = estrndup(statement, statement_len);
 	stmt->query_stringlen = statement_len;
 	stmt->default_fetch_type = PDO_FETCH_BOTH;
-	stmt->active_query_string = stmt->query_stirng;
+	stmt->active_query_string = stmt->query_string;
 	stmt->active_query_stringlen = statement_len;
 
 	if (dbh->methods->preparer(dbh, statement, statement_len, stmt, driver_options TSRMLS_CC)) {

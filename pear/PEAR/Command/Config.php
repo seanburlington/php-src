@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.12 2002/05/21 01:38:46 ssb Exp $
+// $Id: Config.php,v 1.13 2002/05/26 19:08:21 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";
@@ -83,8 +83,7 @@ in.  The default layer is "user".
     {
         // $params[0] -> the layer
         if ($error = $this->_checkLayer(@$params[0])) {
-            $failmsg .= $error;
-            break;
+            return $this->raiseError($error);
         }
         $keys = $this->config->getKeys();
         sort($keys);
@@ -115,11 +114,10 @@ in.  The default layer is "user".
         // $params[0] -> the parameter
         // $params[1] -> the layer
         if ($error = $this->_checkLayer(@$params[1])) {
-            $failmsg .= $error;
-            break;
+            return $this->raiseError($error);
         }
         if (sizeof($params) < 1 || sizeof($params) > 2) {
-            $failmsg .= "config-get expects 1 or 2 parameters";
+            return $this->raiseError("config-get expects 1 or 2 parameters");
         } elseif (sizeof($params) == 1) {
             $this->ui->displayLine("$params[0] = " . $this->config->get($params[0]));
         } else {
@@ -135,20 +133,22 @@ in.  The default layer is "user".
         // $param[1] -> the value for the parameter
         // $param[2] -> the layer
         $failmsg = '';
-        if (sizeof($params) < 2 || sizeof($params) > 3) {
-            $failmsg .= "config-set expects 2 or 3 parameters";
-            break;
-        }
-        if ($error = $this->_checkLayer(@$params[2])) {
-            $failmsg .= $error;
-            break;
-        }
-        if (!call_user_func_array(array(&$this->config, 'set'), $params))
-        {
-            $failmsg = "config-set (" . implode(", ", $params) . ") failed";
-        } else {
-            $this->config->store();
-        }
+        do {
+            if (sizeof($params) < 2 || sizeof($params) > 3) {
+                $failmsg .= "config-set expects 2 or 3 parameters";
+                break;
+            }
+            if ($error = $this->_checkLayer(@$params[2])) {
+                $failmsg .= $error;
+                break;
+            }
+            if (!call_user_func_array(array(&$this->config, 'set'), $params))
+            {
+                $failmsg = "config-set (" . implode(", ", $params) . ") failed";
+            } else {
+                $this->config->store();
+            }
+        } while (false);
         if ($failmsg) {
             return $this->raiseError($failmsg);
         }

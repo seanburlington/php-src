@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.25 2004/07/31 10:56:55 wez Exp $ */
+/* $Id: xp_socket.c,v 1.26 2004/07/31 16:34:44 wez Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -331,7 +331,7 @@ static int php_sockop_set_option(php_stream *stream, int option, int value, void
 							xparam->inputs.buf, xparam->inputs.buflen,
 							flags,
 							xparam->inputs.addr,
-							xparam->inputs.addrlen);
+							xparam->inputs.addrlen TSRMLS_CC);
 					if (xparam->outputs.returncode == -1) {
 						char *err = php_socket_strerror(php_socket_errno(), NULL, 0);
 						php_error_docref(NULL TSRMLS_CC, E_WARNING,

@@ -1,3 +1,15 @@
+2004-08-28  Derick Rethans  <php@derickrethans.nl>
+
+    * (PHP_5_0)
+      NEWS
+      ext/pcntl/pcntl.c
+      ext/pcntl/php_pcntl.h:
+      - MFH: Fixed bug #29873 (No defines around pcntl_*priority definitions).
+
+    * ext/pcntl/pcntl.c
+      ext/pcntl/php_pcntl.h:
+      - Fixed bug #29873 (No defines around pcntl_*priority definitions).
+
 2004-08-27  Christian Stocker  <chregu@phant.ch>
 
     * (PHP_5_0)
@@ -9026,7 +9038,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1730 2004/08/28 00:34:00 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1731 2004/08/29 00:34:14 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

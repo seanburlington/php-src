@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: flatfile.c,v 1.10 2003/02/18 22:19:18 helly Exp $ */
+/* $Id: flatfile.c,v 1.11 2003/04/24 20:54:43 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -91,7 +91,7 @@ datum flatfile_fetch(flatfile *dba, datum key_datum TSRMLS_DC) {
 	if (flatfile_findkey(dba, key_datum TSRMLS_CC)) {
 		if (php_stream_gets(dba->fp, buf, sizeof(buf))) {
 			value_datum.dsize = atoi(buf);
-			value_datum.dptr = emalloc(value_datum.dsize+1);
+			value_datum.dptr = safe_emalloc(value_datum.dsize, 1, 1);
 			value_datum.dsize = php_stream_read(dba->fp, value_datum.dptr, value_datum.dsize);
 		} else {
 			value_datum.dptr = NULL;
@@ -307,7 +307,7 @@ datum flatfile_nextkey(flatfile *dba TSRMLS_DC) {
 /* {{{ flatfile_version */
 char *flatfile_version() 
 {
-	return "1.0, $Revision: 1.10 $";
+	return "1.0, $Revision: 1.11 $";
 }
 /* }}} */ 
 

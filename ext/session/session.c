@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.327 2002/10/03 05:53:45 sas Exp $ */
+/* $Id: session.c,v 1.328 2002/10/03 06:29:58 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -624,7 +624,7 @@ static void migrate_global(HashTable *ht, HashPosition *pos TSRMLS_DC)
 		case HASH_KEY_IS_STRING:
 			zend_hash_find(&EG(symbol_table), str, str_len, (void **) &val);
 			if (val) {
-				ZEND_SET_SYMBOL_WITH_LENGTH(ht, str, str_len, *val, 1, 0);
+				ZEND_SET_SYMBOL_WITH_LENGTH(ht, str, str_len, *val, (*val)->refcount + 1 , 1);
 			}
 			break;
 		case HASH_KEY_IS_LONG:

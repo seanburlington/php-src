@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.449 2002/05/09 19:58:39 sniper Exp $ */
+/* $Id: main.c,v 1.450 2002/05/11 03:41:16 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -959,7 +959,7 @@ int php_module_startup(sapi_module_struct *sf)
 	/* this will read in php.ini, set up the configuration parameters,
 	   load zend extensions and register php function extensions 
 	   to be loaded later */
-	if (php_init_config(sf->php_ini_path_override) == FAILURE) {
+	if (php_init_config() == FAILURE) {
 		return FAILURE;
 	}
 

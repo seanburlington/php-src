@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hartmut@six.de>                         |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.13.2.3 2002/11/18 21:16:24 moriyoshi Exp $ 
+  $Id: mime_magic.c,v 1.13.2.4 2002/11/18 21:23:11 moriyoshi Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -982,7 +982,7 @@ static int magic_process(char *filename TSRMLS_DC)
 		return result;
     }
 
-    stream = php_stream_open_wrapper(filename, "r", IGNORE_PATH | ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
+    stream = php_stream_open_wrapper(filename, "rb", IGNORE_PATH | ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
 
     if (stream == NULL) {
 		/* We can't open it, but we were able to stat it. */

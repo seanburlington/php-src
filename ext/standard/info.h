@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.h,v 1.35 2003/06/10 20:03:38 imajes Exp $ */
+/* $Id: info.h,v 1.36 2003/09/02 13:34:22 abies Exp $ */
 
 #ifndef INFO_H
 #define INFO_H
@@ -83,6 +83,6 @@ PHPAPI void php_info_print_hr(void);
 PHPAPI char *php_logo_guid(void);
 
 void register_phpinfo_constants(INIT_FUNC_ARGS);
-END_EXTERN_C();
+END_EXTERN_C()
 
 #endif /* INFO_H */

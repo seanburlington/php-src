@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.545 2005/03/17 08:15:50 sniper Exp $ -*- autoconf -*-
+dnl ## $Id: configure.in,v 1.546 2005/03/26 03:09:09 sniper Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -808,6 +808,9 @@ dnl Extensions post-config
 dnl -------------------------------------------------------------------------
 
 if test "$PHP_VERSIONING" = "yes"; then
+  if test -n "$PHP_MODULES"; then
+    AC_MSG_ERROR([--enable-versioning cannot be used with shared modules])
+  fi
   test -z "$PHP_SYM_FILE" && PHP_SYM_FILE="$abs_srcdir/sapi/$PHP_SAPI/php.sym"
   if test -f "$PHP_SYM_FILE"; then
     EXTRA_LDFLAGS="-export-symbols $PHP_SYM_FILE $EXTRA_LDFLAGS"

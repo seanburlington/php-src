@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.447 2002/03/01 03:05:49 yohgaki Exp $ */
+/* $Id: basic_functions.c,v 1.447.2.1 2002/03/17 20:54:57 sesser Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -2354,6 +2354,10 @@ PHP_FUNCTION(move_uploaded_file)
 	}
 
 	if (PG(safe_mode) && (!php_checkuid(Z_STRVAL_PP(new_path), NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+		RETURN_FALSE;
+	}
+	
+	if (php_check_open_basedir(Z_STRVAL_PP(new_path) TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 

@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Stig Bakken <ssb@gaurdian.no>                               |
+   | Authors: Stig Bakken <ssb@php.net>                                   |
    |          Zeev Suraski <zeev@zend.com>                                |
    |          Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.60 2004/01/19 03:14:58 sniper Exp $ */
+/* $Id: crypt.c,v 1.61 2004/02/12 19:05:41 ssb Exp $ */
 #include <stdlib.h>
 
 #include "php.h"

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.127 2002/06/14 00:07:13 sniper Exp $ */
+/* $Id: php_odbc.c,v 1.128 2002/07/31 13:50:51 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1631,6 +1631,11 @@ PHP_FUNCTION(odbc_result)
 	
 	/* get field index if the field parameter was a string */
 	if (field != NULL) {
+		if (result->values == NULL) {
+			php_error(E_WARNING, "Result set contains no data");
+			RETURN_FALSE;
+		}
+
 		for(i = 0; i < result->numcols; i++) {
 			if (!strcasecmp(result->values[i].name, field)) {
 				field_ind = i;

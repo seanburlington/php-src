@@ -85,7 +85,7 @@ PHP_MINFO_FUNCTION(my_input_filter)
 {
     php_info_print_table_start();
     php_info_print_table_row( 2, "My Input Filter Support", "enabled" );
-    php_info_print_table_row( 2, "Revision", "$Revision: 1.6 $");
+    php_info_print_table_row( 2, "Revision", "$Revision: 1.7 $");
     php_info_print_table_end();
 }
 
@@ -155,7 +155,7 @@ PHP_FUNCTION(my_get_raw)
     HashTable *hash_ptr;
     char *raw_var;
 
-    if(zend_parse_parameters(2 TSRMLS_CC, "ls|l", &arg, &var, &var_len) == FAILURE) {
+    if(zend_parse_parameters(2 TSRMLS_CC, "ls", &arg, &var, &var_len) == FAILURE) {
         return;
     }
 

@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.h,v $ */
-/* $Id: php_mnogo.h,v 1.18 2002/06/06 05:45:45 gluke Exp $ */
+/* $Id: php_mnogo.h,v 1.19 2002/08/03 08:53:26 gluke Exp $ */
 
 /* 
    +----------------------------------------------------------------------+
@@ -67,6 +67,7 @@ DLEXPORT PHP_FUNCTION(udm_crc32);
 #endif
 #if UDM_VERSION_ID >= 30204
 DLEXPORT PHP_FUNCTION(udm_parse_query_string);
+DLEXPORT PHP_FUNCTION(udm_make_excerpt);
 #endif
 #endif
 

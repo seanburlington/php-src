@@ -2,7 +2,7 @@
 
 /* 
     $Source: /repository/php-src/ext/mnogosearch/Attic/index.php,v $
-    $Id: index.php,v 1.12 2002/06/29 10:42:52 gluke Exp $ 
+    $Id: index.php,v 1.13 2002/08/03 08:53:25 gluke Exp $ 
 */
 
 /*   mnoGoSearch-php-lite v.1.3
@@ -970,6 +970,10 @@ if(($errno=Udm_Errno($udm_agent))>0){
 	}
                         
         for($i=0;$i<$rows;$i++){
+        	if (Udm_Api_Version() >= 30204) {
+        		$excerpt_flag=Udm_Make_Excerpt($udm_agent, $res, $i);
+        	}
+	
 		$ndoc=Udm_Get_Res_Field($res,$i,UDM_FIELD_ORDER);
 		$rating=Udm_Get_Res_Field($res,$i,UDM_FIELD_RATING);
 		$url=Udm_Get_Res_Field($res,$i,UDM_FIELD_URL);

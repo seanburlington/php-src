@@ -1,3 +1,38 @@
+2005-04-05  Antony Dovgal  <tony2001@phpclub.net>
+
+    * ext/ldap/ldap.c:
+      remove proto, it's internal func
+
+2005-04-05  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      NEWS
+      NEWS
+      ext/imap/php_imap.c
+      ext/imap/php_imap.c:
+      MFH: Fixed bug #32589 (Possible crash inside imap_mail_compose, with
+      charsets).
+
+    * ext/imap/php_imap.c:
+      Fixed bug #32589 (Possible crash inside imap_mail_compose, with charsets).
+
+2005-04-05  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ext/standard/tests/serialize/005.phpt:
+      - Add new test
+
+    * ZendEngine2/zend_interfaces.c:
+      - Just return FAILURE & allow NULL without emmidiate error
+
+2005-04-05  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_0)
+      main/streams/streams.c:
+      MFH: Fixed bug #30362 (stream_get_line() not reading data correctly).
+
+    * main/streams/streams.c:
+      Fixed bug #30362 (stream_get_line() not reading data correctly).
+
 2005-04-04  Sara Golemon  <php@alphaweb.net>
 
     * (PHP_4_3)
@@ -3106,7 +3141,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1944 2005/04/05 00:35:27 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1945 2005/04/06 00:35:58 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -3587,7 +3622,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1944 2005/04/05 00:35:27 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1945 2005/04/06 00:35:58 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -5061,7 +5096,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1944 2005/04/05 00:35:27 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1945 2005/04/06 00:35:58 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

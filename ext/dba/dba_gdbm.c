@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_gdbm.c,v 1.16.2.3 2003/01/31 20:10:11 helly Exp $ */
+/* $Id: dba_gdbm.c,v 1.16.2.4 2003/02/01 19:01:12 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -27,7 +27,9 @@
 #if DBA_GDBM
 #include "php_gdbm.h"
 
-#include <gdbm.h>
+#ifdef GDBM_INCLUDE_FILE
+#include GDBM_INCLUDE_FILE
+#endif
 
 #define GDBM_DATA dba_gdbm_data *dba = info->dbf
 #define GDBM_GKEY datum gkey; gkey.dptr = (char *) key; gkey.dsize = keylen

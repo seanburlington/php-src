@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_syslog.h,v 1.9 2004/01/08 17:33:04 sniper Exp $ */
+/* $Id: php_syslog.h,v 1.9.2.1 2005/01/09 21:05:17 sniper Exp $ */
 
 #ifndef PHP_SYSLOG_H
 #define PHP_SYSLOG_H
@@ -29,7 +29,7 @@
 #include <syslog.h>
 #endif
 #else
-#include "php_config.h"
+#include <php_config.h>
 #ifdef HAVE_SYSLOG_H
 #include <syslog.h>
 #endif

@@ -2,14 +2,14 @@
 /*                                          */
 /* John Ellson   ellson@lucent.com          */
 
-/* $Id: gdttf.c,v 1.20 2003/12/28 21:08:46 iliaa Exp $ */
+/* $Id: gdttf.c,v 1.20.2.1 2005/01/09 21:05:16 sniper Exp $ */
 
 #include "php.h"
 
 #if PHP_WIN32
 #include "config.w32.h"
 #else
-#include "php_config.h"
+#include <php_config.h>
 #endif
 #if HAVE_LIBTTF && !defined(USE_GD_IMGSTRTTF)
 #include <stdio.h>

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.420.2.5 2005/01/18 15:48:39 iliaa Exp $ */
+/* $Id: string.c,v 1.420.2.6 2005/03/01 15:01:08 hyanantha Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1090,7 +1090,7 @@ PHPAPI void php_basename(char *s, size_t len, char *suffix, size_t sufflen, char
 			case 0:
 				goto quit_loop;
 			case 1:
-#ifdef PHP_WIN32
+#if defined(PHP_WIN32) || defined(NETWARE)
 				if (*c == '/' || *c == '\\') {
 #else
 				if (*c == '/') {

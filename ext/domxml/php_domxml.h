@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.28 2001/12/01 19:42:34 mfischer Exp $ */
+/* $Id: php_domxml.h,v 1.29 2001/12/02 12:21:50 mfischer Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -141,45 +141,6 @@ PHP_FUNCTION(xptr_new_context);
 PHP_FUNCTION(xptr_eval);
 #endif
 PHP_FUNCTION(domxml_test);
-
-/* General macros used by domxml */
-#define DOMXML_DOMOBJ_NEW(zval, obj, ret)			if (NULL == (zval = php_domobject_new(obj, ret TSRMLS_CC))) { \
-														php_error(E_WARNING, "%s() cannot create required DOM object", \
-																  get_active_function_name(TSRMLS_C)); \
-														RETURN_FALSE; \
-													}
-
-#define DOMXML_RET_ZVAL(zval)						SEPARATE_ZVAL(&zval); \
-													*return_value = *zval; \
-													FREE_ZVAL(zval);
-
-#define DOMXML_RET_OBJ(zval, obj, ret)				DOMXML_DOMOBJ_NEW(zval, obj, ret); \
-													DOMXML_RET_ZVAL(zval);
-
-#define DOMXML_GET_THIS(zval)						if (NULL == (zval = getThis())) { \
-														php_error(E_WARNING, "%s() underlying object missing", \
-																  get_active_function_name(TSRMLS_C)); \
-														RETURN_FALSE; \
-													}
-
-#define DOMXML_GET_OBJ(ret, zval, le)				if (NULL == (ret = php_dom_get_object(zval, le, 0 TSRMLS_CC))) { \
-														php_error(E_WARNING, "%s() cannot fetch DOM object", \
-																  get_active_function_name(TSRMLS_C)); \
-														RETURN_FALSE; \
-													}
-
-#define DOMXML_GET_THIS_OBJ(ret, zval, le)			DOMXML_GET_THIS(zval); \
-													DOMXML_GET_OBJ(ret, zval, le);
-
-#define DOMXML_NO_ARGS()							if (ZEND_NUM_ARGS() != 0) { \
-														php_error(E_WARNING, "%s() expects exactly 0 parameters, %d given", \
-																  get_active_function_name(TSRMLS_C), ZEND_NUM_ARGS()); \
-														return; \
-													}
-
-#define DOMXML_NOT_IMPLEMENTED()					php_error(E_WARNING, "%s() not yet implemented", \
-															  get_active_function_name(TSRMLS_C)); \
-													return;
 
 #else
 #define domxml_module_ptr NULL

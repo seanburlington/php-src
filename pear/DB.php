@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.38 2000/12/05 07:00:57 ssb Exp $
+// $Id: DB.php,v 1.39 2000/12/06 02:53:14 ssb Exp $
 //
 // Database independent query interface.
 //
@@ -535,7 +535,7 @@ class DB_result
      */
     function free() {
 	$err = $this->dbh->freeResult($this->result);
-	if( DB::isError($err)) {
+	if(DB::isError($err)) {
 	    return $err;
 	}
 	$this->result = false;

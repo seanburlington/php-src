@@ -27,7 +27,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: info.h,v 1.11 2000/04/07 16:41:19 cmv Exp $ */
+/* $Id: info.h,v 1.12 2000/04/19 23:17:02 cmv Exp $ */
 
 #ifndef _INFO_H
 #define _INFO_H
@@ -54,8 +54,9 @@
 #define PHP_CREDITS_FULLPAGE		(1<<5)
 #define PHP_CREDITS_ALL				0xFFFFFFFF
 
-#define PHP_LOGO_GUID	"PHPE9568F34-D428-11d2-A769-00AA001ACF42"
-#define ZEND_LOGO_GUID	"PHPE9568F35-D428-11d2-A769-00AA001ACF42"
+#define PHP_LOGO_GUID		"PHPE9568F34-D428-11d2-A769-00AA001ACF42"
+#define PHP_EGG_LOGO_GUID	"PHPE9568F36-D428-11d2-A769-00AA001ACF42"
+#define ZEND_LOGO_GUID		"PHPE9568F35-D428-11d2-A769-00AA001ACF42"
 
 PHP_FUNCTION(phpversion);
 PHP_FUNCTION(phpinfo);

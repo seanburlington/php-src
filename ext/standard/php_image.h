@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_image.h,v 1.25 2003/06/10 20:03:38 imajes Exp $ */
+/* $Id: php_image.h,v 1.26 2003/09/09 19:25:55 sniper Exp $ */
 
 #ifndef PHP_IMAGE_H
 #define PHP_IMAGE_H
@@ -57,6 +57,6 @@ PHP_MINIT_FUNCTION(imagetypes);
 
 PHPAPI int php_getimagetype(php_stream *stream, char *filetype TSRMLS_DC);
 
-PHPAPI const char * php_image_type_to_mime_type(int image_type);
+PHPAPI char * php_image_type_to_mime_type(int image_type);
 
 #endif /* PHP_IMAGE_H */

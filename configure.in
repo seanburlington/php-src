@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.157 2000/07/09 20:39:18 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.158 2000/07/10 09:10:40 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -695,6 +695,7 @@ PHP_SUBST(CPP)
 PHP_SUBST(CPPFLAGS)
 PHP_SUBST(CXX)
 PHP_SUBST(CXXFLAGS)
+PHP_SUBST(CXX_PHP_COMPILE)
 PHP_SUBST(DEBUG_CFLAGS)
 PHP_SUBST(DEFS)
 PHP_SUBST(EXTENSION_DIR)

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.15 1999/09/04 22:15:51 rasmus Exp $ */
+/* $Id: exec.c,v 1.16 1999/10/13 14:01:47 thies Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -398,7 +398,7 @@ PHP_FUNCTION(shell_exec)
 		allocated_space = total_readbytes+EXEC_INPUT_BUF;
 		return_value->value.str.val = (char *) erealloc(return_value->value.str.val,allocated_space);
 	}
-	fclose(in);
+	pclose(in);
 		
 	return_value->value.str.val = erealloc(return_value->value.str.val,total_readbytes+1);
 	return_value->value.str.val[total_readbytes]=0;

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.44 2003/03/31 14:01:55 ddhill Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.45 2003/04/01 15:36:21 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -479,6 +479,7 @@ memmove \
 mkstemp \
 mmap \
 nl_langinfo \
+perror \
 poll \
 putenv \
 realpath \

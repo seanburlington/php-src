@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.75 2001/07/31 05:44:06 zeev Exp $ */
+/* $Id: dir.c,v 1.76 2001/07/31 06:28:03 zeev Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -148,7 +148,7 @@ static void _php_do_opendir(INTERNAL_FUNCTION_PARAMETERS, int createobject)
 	}
 	convert_to_string_ex(arg);
 
-	if (php_check_open_basedir((*arg)->value.str.val)) {
+	if (php_check_open_basedir((*arg)->value.str.val TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 	

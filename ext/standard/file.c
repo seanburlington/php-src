@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.174 2001/07/31 05:44:06 zeev Exp $ */
+/* $Id: file.c,v 1.175 2001/07/31 06:28:03 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1907,7 +1907,7 @@ PHP_FUNCTION(copy)
 		RETURN_FALSE;
 	}
 
-	if (php_check_open_basedir((*source)->value.str.val)) {
+	if (php_check_open_basedir((*source)->value.str.val TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 
@@ -1915,7 +1915,7 @@ PHP_FUNCTION(copy)
 		RETURN_FALSE;
 	}
 
-	if (php_check_open_basedir((*target)->value.str.val)) {
+	if (php_check_open_basedir((*target)->value.str.val TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pageinfo.c,v 1.25 2001/07/28 11:36:17 zeev Exp $ */
+/* $Id: pageinfo.c,v 1.26 2001/07/31 06:28:03 zeev Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"
@@ -47,7 +47,7 @@ static void php_statpage(TSRMLS_D)
 {
 	struct stat *pstat;
 
-	pstat = sapi_get_stat();
+	pstat = sapi_get_stat(TSRMLS_C);
 
 	if (BG(page_uid)==-1 || BG(page_gid)==-1) {
 		if(pstat) {

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.35 2001/07/28 11:36:28 zeev Exp $ */
+/* $Id: safe_mode.c,v 1.36 2001/07/31 06:28:04 zeev Exp $ */
 
 #include "php.h"
 
@@ -166,7 +166,7 @@ PHPAPI char *php_get_current_user()
 	USE_SAPI is defined, because cgi will also be
 	interfaced in USE_SAPI */
 
-	pstat = sapi_get_stat();
+	pstat = sapi_get_stat(TSRMLS_C);
 
 	if (!pstat) {
 		return empty_string;

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.60 2001/07/30 09:16:44 zeev Exp $ */
+/* $Id: exec.c,v 1.61 2001/07/31 06:28:03 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -175,7 +175,7 @@ int php_Exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 		
 			if (type == 1) {
 				if (output) PUTS(buf);
-				sapi_flush();
+				sapi_flush(TSRMLS_C);
 			}
 			else if (type == 2) {
 				/* strip trailing whitespaces */	

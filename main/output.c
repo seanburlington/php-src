@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.68 2001/07/30 08:24:40 zeev Exp $ */
+/* $Id: output.c,v 1.69 2001/07/31 06:28:04 zeev Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -470,7 +470,7 @@ static int php_ub_body_write_no_header(const char *str, uint str_length)
 	result = OG(php_header_write)(str, str_length);
 
 	if (OG(implicit_flush)) {
-		sapi_flush();
+		sapi_flush(TSRMLS_C);
 	}
 
 	return result;

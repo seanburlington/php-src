@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.73 2001/07/30 06:18:06 zeev Exp $ */
+/* $Id: filestat.c,v 1.74 2001/07/31 06:28:03 zeev Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -141,7 +141,9 @@ PHP_FUNCTION(disk_total_space)
 
 	convert_to_string_ex(path);
 
-	if (php_check_open_basedir((*path)->value.str.val)) RETURN_FALSE;
+	if (php_check_open_basedir((*path)->value.str.val TSRMLS_CC)) {
+		RETURN_FALSE;
+	}
 
 #ifdef WINDOWS
 	/* GetDiskFreeSpaceEx is only available in NT and Win95 post-OSR2,
@@ -242,7 +244,9 @@ PHP_FUNCTION(disk_free_space)
 
 	convert_to_string_ex(path);
 
-	if (php_check_open_basedir((*path)->value.str.val)) RETURN_FALSE;
+	if (php_check_open_basedir((*path)->value.str.val TSRMLS_CC)) {
+		RETURN_FALSE;
+	}
 
 #ifdef WINDOWS
 	/* GetDiskFreeSpaceEx is only available in NT and Win95 post-OSR2,
@@ -335,8 +339,9 @@ PHP_FUNCTION(chgrp)
 	}
 
 	/* Check the basedir */
-	if (php_check_open_basedir((*filename)->value.str.val))
+	if (php_check_open_basedir((*filename)->value.str.val TSRMLS_CC)) {
 		RETURN_FALSE;
+	}
 
 	ret = VCWD_CHOWN((*filename)->value.str.val, -1, gid);
 	if (ret == -1) {
@@ -382,8 +387,9 @@ PHP_FUNCTION(chown)
 	}
 
 	/* Check the basedir */
-	if (php_check_open_basedir((*filename)->value.str.val))
+	if (php_check_open_basedir((*filename)->value.str.val TSRMLS_CC)) {
 		RETURN_FALSE;
+	}
 
 	ret = VCWD_CHOWN((*filename)->value.str.val, uid, -1);
 	if (ret == -1) {
@@ -414,8 +420,9 @@ PHP_FUNCTION(chmod)
 	}
 
 	/* Check the basedir */
-	if (php_check_open_basedir((*filename)->value.str.val))
+	if (php_check_open_basedir((*filename)->value.str.val TSRMLS_CC)) {
 		RETURN_FALSE;
+	}
 
 	imode = (mode_t) (*mode)->value.lval;
 	/* in safe mode, do not allow to setuid files.
@@ -476,8 +483,10 @@ PHP_FUNCTION(touch)
 	}
 
 	/* Check the basedir */
-	if (php_check_open_basedir((*filename)->value.str.val)) {
-		if (newtime) efree(newtime);
+	if (php_check_open_basedir((*filename)->value.str.val TSRMLS_CC)) {
+		if (newtime) {
+			efree(newtime);
+		}
 		RETURN_FALSE;
 	}
 

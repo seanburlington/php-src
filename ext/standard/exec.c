@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.66 2001/12/11 15:30:29 sebastian Exp $ */
+/* $Id: exec.c,v 1.66.2.1 2002/04/25 14:02:51 sniper Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -459,6 +459,7 @@ PHP_FUNCTION(shell_exec)
 	if ((in=VCWD_POPEN(Z_STRVAL_PP(cmd), "r"))==NULL) {
 #endif
 		php_error(E_WARNING, "Unable to execute '%s'", Z_STRVAL_PP(cmd));
+		RETURN_FALSE;
 	}
 	allocated_space = EXEC_INPUT_BUF;
 	ret = (char *) emalloc(allocated_space);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.3 2003/06/10 20:03:27 imajes Exp $ */
+/* $Id: php_dom.h,v 1.4 2003/06/12 20:02:05 rrichards Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -73,6 +73,7 @@ void dom_normalize (xmlNodePtr nodep TSRMLS_DC);
 void dom_get_elements_by_tag_name_ns_raw(xmlNodePtr nodep, char *ns, char *local, zval **retval, dom_object *intern  TSRMLS_DC);
 void php_dom_create_implementation(zval **retval  TSRMLS_DC);
 int dom_hierarchy(xmlNodePtr parent, xmlNodePtr child);
+int dom_has_feature(char *feature, char *version);
 
 #define DOM_NO_ARGS() \
 	if (ZEND_NUM_ARGS() != 0) { \

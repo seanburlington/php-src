@@ -12,11 +12,11 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Wez Furlong <wez@thebrainroom.com>                           |
-  |         Tal Peer <tal@php.net                                        |
+  | Authors: Wez Furlong <wez@thebrainroom.com>                          |
+  |          Tal Peer <tal@php.net                                       |
   +----------------------------------------------------------------------+
 
-  $Id: php_sqlite.h,v 1.8 2003/04/20 13:15:45 tal Exp $ 
+  $Id: php_sqlite.h,v 1.9 2003/04/20 13:17:17 tal Exp $ 
 */
 
 #ifndef PHP_SQLITE_H

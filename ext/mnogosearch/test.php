@@ -1,6 +1,6 @@
 <!-- 
     $Source: /repository/php-src/ext/mnogosearch/Attic/test.php,v $
-    $Id: test.php,v 1.6 2001/02/05 15:15:08 gluke Exp $ 
+    $Id: test.php,v 1.7 2001/02/06 14:30:54 gluke Exp $ 
 -->
 
 <html>
@@ -62,9 +62,10 @@
 		// Get result parameters
 		$total=Udm_Get_Res_Param($res,UDM_PARAM_FOUND);
 		$rows=Udm_Get_Res_Param($res,UDM_PARAM_NUM_ROWS);
+		$wordinfo=Udm_Get_Res_Param($res,UDM_PARAM_WORDINFO);
 
-		printf("Documents %d-%d from %d total found\n\n",
-			$first,$first+$rows-1,$total);
+		printf("Documents %d-%d from %d total found; %s\n\n",
+			$first,$first+$rows-1,$total,$wordinfo);
 
 		// Fetch all rows
 		for($i=0;$i<$rows;$i++){

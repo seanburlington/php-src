@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.135 2001/07/14 12:45:42 thies Exp $ */
+/* $Id: oci8.c,v 1.136 2001/07/25 22:34:25 thies Exp $ */
 
 /* TODO list:
  *
@@ -581,7 +581,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.135 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.136 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -863,6 +863,8 @@ oci_handle_error(oci_connection *connection, ub4 errcode)
     	case 22:   /* ORA-00022 Invalid session id */
        	case 1012: /* ORA-01012: */
        	case 3113: /* ORA-03113: end-of-file on communication channel */
+		case 604:
+		case 1041:
         	connection->is_open = 0;
            	connection->session->is_open = 0;
            	connection->session->server->is_open = 0;

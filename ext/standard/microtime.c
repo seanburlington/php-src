@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.36 2002/02/28 08:26:46 sebastian Exp $ */
+/* $Id: microtime.c,v 1.37 2002/08/19 21:59:46 iliaa Exp $ */
 
 #include "php.h"
 
@@ -43,6 +43,7 @@
 
 #define NUL  '\0'
 #define MICRO_IN_SEC 1000000.00
+#define SEC_IN_MIN 60
 
 /* {{{ proto string microtime(void)
    Returns a string containing the current time in seconds and microseconds */
@@ -81,7 +82,11 @@ PHP_FUNCTION(gettimeofday)
 		array_init(return_value);
 		add_assoc_long(return_value, "sec", tp.tv_sec);
 		add_assoc_long(return_value, "usec", tp.tv_usec);
+#ifdef PHP_WIN32
+		add_assoc_long(return_value, "minuteswest", tz.tz_minuteswest/SEC_IN_MIN);
+#else
 		add_assoc_long(return_value, "minuteswest", tz.tz_minuteswest);
+#endif			
 		add_assoc_long(return_value, "dsttime", tz.tz_dsttime);
 		return;
 	} else

@@ -1,10 +1,10 @@
-$Id: README.SELF-CONTAINED-EXTENSIONS,v 1.10 2002/03/07 14:17:43 sas Exp $
+$Id: README.SELF-CONTAINED-EXTENSIONS,v 1.11 2002/10/20 23:35:56 elixer Exp $
 =============================================================================
 
 HOW TO CREATE A SELF-CONTAINED PHP EXTENSION
 
   A self-contained extension can be distributed independently of
-  the PHP source. To create such an extension, three things are
+  the PHP source. To create such an extension, two things are
   required:
 
   - Configuration file (config.m4)

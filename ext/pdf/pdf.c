@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.96 2001/09/09 13:29:03 derick Exp $ */
+/* $Id: pdf.c,v 1.97 2001/09/10 17:14:37 derick Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -257,12 +257,8 @@ ZEND_GET_MODULE(pdf)
  */
 static void _free_pdf_doc(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
-	/* RJS: TODO:
 	PDF *pdf = (PDF *)rsrc->ptr;
-	   check whether pdf-Pointer is still valid, before pdf_delete()
-	   + remove php-resource */
-	/* PDF_delete(pdf);
-*/
+	PDF_delete(pdf);
 }
 /* }}} */
 
@@ -349,7 +345,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.96 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.97 $" );
 	php_info_print_table_end();
 
 }

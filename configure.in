@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.329 2002/03/28 11:21:47 derick Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.330 2002/03/30 23:44:50 ssb Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -406,6 +406,7 @@ sys/wait.h \
 unistd.h \
 unix.h \
 utime.h \
+sys/utsname.h \
 )
 
 

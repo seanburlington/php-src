@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcntl.h,v 1.5 2001/07/30 20:51:57 jason Exp $ */
+/* $Id: php_pcntl.h,v 1.6 2001/09/30 06:59:12 jason Exp $ */
 
 #ifndef PHP_PCNTL_H
 #define PHP_PCNTL_H
@@ -48,6 +48,7 @@ PHP_FUNCTION(pcntl_wexitstatus);
 PHP_FUNCTION(pcntl_wtermsig);
 PHP_FUNCTION(pcntl_wstopsig);
 PHP_FUNCTION(pcntl_signal);
+PHP_FUNCTION(pcntl_exec);
 
 static void pcntl_signal_handler(int);
 

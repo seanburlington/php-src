@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.36 2003/08/13 18:59:44 vlad Exp $ */
+/* $Id: pspell.c,v 1.37 2003/08/13 21:01:04 vlad Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -735,7 +735,6 @@ PHP_FUNCTION(pspell_config_ignore)
 	zval **sccin, **pignore;
 	int argc;
 
-	/* Hack. But I cannot imagine any word being more than 999 characters long */
 	int loc = PSPELL_LARGEST_WORD;
 	char ignore_str[PSPELL_LARGEST_WORD + 1];	
 	long ignore = 0L;

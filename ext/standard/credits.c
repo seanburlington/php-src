@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.30 2003/08/07 15:41:24 iliaa Exp $ */
+/* $Id: credits.c,v 1.31 2003/08/18 23:26:31 wez Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -50,9 +50,9 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 		php_info_print_table_row(1, "Andi Gutmans, Rasmus Lerdorf, Zeev Suraski");
 		php_info_print_table_end();
 
-		/* PHP 4 Language */
+		/* PHP Language */
 		php_info_print_table_start();
-		php_info_print_table_colspan_header(2, "PHP 4 Authors");
+		php_info_print_table_colspan_header(2, "PHP 5 Authors");
 		php_info_print_table_header(2, "Contribution", "Authors");
 		CREDIT_LINE("Zend Scripting Language Engine", "Andi Gutmans, Zeev Suraski");
 		CREDIT_LINE("Extension Module API", "Andi Gutmans, Zeev Suraski, Andrei Zmievski");

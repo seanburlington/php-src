@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.377 2003/10/08 10:22:51 sniper Exp $ */
+/* $Id: session.c,v 1.378 2003/12/02 23:14:31 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -589,7 +589,7 @@ static char *bin_to_readable(char *in, size_t inlen, char *out, char nbits)
 	return out;
 }
 
-char *php_session_create_id(PS_CREATE_SID_ARGS)
+PHPAPI char *php_session_create_id(PS_CREATE_SID_ARGS)
 {
 	PHP_MD5_CTX md5_context;
 	PHP_SHA1_CTX sha1_context;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.95 2003/06/16 16:14:38 stas Exp $ */
+/* $Id: php_cli.c,v 1.96 2003/08/01 12:26:28 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1009,13 +1009,11 @@ int main(int argc, char *argv[])
 		if (cli_sapi_module.php_ini_path_override) {
 			free(cli_sapi_module.php_ini_path_override);
 		}
-
-	} zend_catch {
-		exit_status = EG(exit_status);
 	} zend_end_try();
 
 out:
 	php_request_shutdown((void *) 0);
+	exit_status = EG(exit_status);
 out_err:	
 	if (module_started) {
 		php_module_shutdown(TSRMLS_C);

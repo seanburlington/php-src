@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.224 2000/02/26 23:50:11 zeev Exp $ */
+/* $Id: main.c,v 1.225 2000/03/05 21:37:47 rubys Exp $ */
 
 
 #include <stdio.h>
@@ -961,7 +961,7 @@ static int php_hash_environment(ELS_D SLS_DC PLS_DC)
 		php_import_environment_variables(ELS_C PLS_CC);
 	}
 
-	while(*p) {
+	while(p && *p) {
 		switch(*p++) {
 			case 'p':
 			case 'P':

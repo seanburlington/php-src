@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.75 2002/05/23 07:52:03 derick Exp $ */
+/* $Id: exec.c,v 1.76 2002/05/23 10:17:07 wez Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -591,16 +591,16 @@ PHP_MINIT_FUNCTION(proc_open)
    close a process opened by proc_open */
 PHP_FUNCTION(proc_close)
 {
-	zval **proc;
+	zval *proc;
 	void *child;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &proc) == FAILURE) {
 		RETURN_FALSE;
 	}
 
-	ZEND_FETCH_RESOURCE(child, void *, proc, -1, "process", le_proc_open);
+	ZEND_FETCH_RESOURCE(child, void *, &proc, -1, "process", le_proc_open);
 	
-	zend_list_delete(Z_LVAL_PP(proc));
+	zend_list_delete(Z_LVAL_P(proc));
 	RETURN_LONG(FG(pclose_ret));
 }
 /* }}} */

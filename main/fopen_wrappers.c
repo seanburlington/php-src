@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.67 2000/06/16 01:23:03 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.68 2000/06/16 01:25:02 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -333,7 +333,6 @@ PHPAPI FILE *php_fopen_primary_script(void)
 #else
 		if (IS_SLASH(*PG(doc_root))) {
 #endif
-			length = strlen(PG(doc_root));
 			filename = emalloc(length + strlen(path_info) + 2);
 			if (filename) {
 				memcpy(filename, PG(doc_root), length);

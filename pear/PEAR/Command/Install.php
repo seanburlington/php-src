@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.10 2002/03/23 15:56:14 cox Exp $
+// $Id: Install.php,v 1.11 2002/04/01 14:32:40 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -55,6 +55,21 @@ class PEAR_Command_Install extends PEAR_Command_Common
     function getCommands()
     {
         return array('install', 'uninstall', 'upgrade');
+    }
+
+    function getHelp($command)
+    {
+        switch ($command) {
+            case 'install':
+                return array('<pear package>',
+                             'Installs a PEAR package created by the "package" command');
+            case 'uninstall':
+                return array('<package>',
+                             'Uninstalls a previously installed PEAR package');
+            case 'upgrade':
+                return array('<pear package>',
+                             'Upgrades a PEAR package installed in the system');
+        }
     }
 
     // }}}

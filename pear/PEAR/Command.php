@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Command.php,v 1.7 2002/03/22 09:22:24 ssb Exp $
+// $Id: Command.php,v 1.8 2002/04/01 14:32:39 cox Exp $
 
 
 require_once "PEAR.php";
@@ -204,6 +204,15 @@ class PEAR_Command
             PEAR_Command::registerCommands();
         }
         return $GLOBALS['_PEAR_Command_commandopts'];
+    }
+
+    function getHelp($command)
+    {
+        $cmds = PEAR_Command::getCommands();
+        if (isset($cmds[$command])) {
+            return call_user_func(array($cmds[$command], 'getHelp'), $command);
+        }
+        return false;
     }
 }
 

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.7 2002/03/22 09:22:26 ssb Exp $
+// $Id: Common.php,v 1.8 2002/04/01 14:32:40 cox Exp $
 
 require_once "PEAR.php";
 //require_once "PEAR/CommandResponse.php";
@@ -52,6 +52,11 @@ class PEAR_Command_Common extends PEAR
     function getOptions()
     {
         return array();
+    }
+
+    function getHelp($command)
+    {
+        return array(null, 'No help avaible yet');
     }
 
     /**

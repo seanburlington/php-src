@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.159 2001/10/11 23:33:49 ssb Exp $ */
+/* $Id: info.c,v 1.160 2001/12/06 13:31:34 sterling Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -463,7 +463,7 @@ PHP_FUNCTION(phpinfo)
 	}
 
 	if(!argc) {
-		flag = 0xFFFFFFFF;
+		flag = PHP_INFO_ALL;
 	}
 
 	php_print_info(flag TSRMLS_CC);
@@ -508,7 +508,7 @@ PHP_FUNCTION(phpcredits)
 	}
 
 	if(!argc) {
-		flag = 0xFFFFFFFF;
+		flag = PHP_CREDITS_ALL;
 	} 
 
 	php_print_credits(flag);

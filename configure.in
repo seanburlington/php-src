@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.425 2003/02/25 07:40:51 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.426 2003/02/25 11:23:09 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -779,8 +779,12 @@ PHP_HELP_SEPARATOR([Other settings:])
 AC_MSG_CHECKING([whether to enable versioning])
 AC_ARG_ENABLE(versioning,
 [  --enable-versioning     Export only required symbols.
-                          See INSTALL for more information],[
-  PHP_VERSIONING=$enableval
+                          See INSTALL for more information], [
+  if test "x$APXS" != "x"; then
+    PHP_VERSIONING=$enableval
+  else
+    PHP_VERSIONING=no
+  fi
 ],[
   PHP_VERSIONING=no
 ])
@@ -789,7 +793,7 @@ AC_MSG_RESULT([$PHP_VERSIONING])
 if test "$PHP_VERSIONING" = "yes"; then
   test -z "$PHP_SYM_FILE" && PHP_SYM_FILE="$abs_srcdir/sapi/$PHP_SAPI/php.sym"
   if test -f "$PHP_SYM_FILE"; then
-    EXTRA_LDFLAGS="-export-symbols $PHP_SYM_FILE"
+    EXTRA_LDFLAGS="-export-symbols $PHP_SYM_FILE $EXTRA_LDFLAGS"
   fi
 fi
 

@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.10 2003/12/22 13:13:39 wez Exp $
+# $Id: Makefile,v 1.11 2003/12/23 05:43:19 fmk Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -99,3 +99,7 @@ snap: build-snap build-dist
 msi-installer: dist
 	$(BUILD_DIR)\php.exe ..\php-installer\build-installer.php "$(BUILD_DIR)" "$(PHPDLL)" "$(SAPI_TARGETS)" "$(EXT_TARGETS)"
 
+install: all
+	@copy $(BUILD_DIR)\*.exe $(PHP_PREFIX) /y >null
+	@copy $(BUILD_DIR)\*.dll $(PHP_PREFIX) /y >null
+	

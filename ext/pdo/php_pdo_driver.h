@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.19 2004/05/20 22:28:53 wez Exp $ */
+/* $Id: php_pdo_driver.h,v 1.20 2004/05/21 13:26:58 wez Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -352,6 +352,10 @@ struct _pdo_stmt_t {
 
 	/* the cursor specific error code. */
 	enum pdo_error_type error_code;
+
+	/* for lazy fetches, we always return the same lazy object handle.
+	 * Let's keep it here. */
+	zval lazy_object_ref;
 };
 
 /* call this in MINIT to register your PDO driver */

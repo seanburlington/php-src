@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_int.h,v 1.5 2004/05/20 19:16:49 wez Exp $ */
+/* $Id: php_pdo_int.h,v 1.6 2004/05/21 13:26:58 wez Exp $ */
 
 /* Stuff private to the PDO extension and not for consumption by PDO drivers
  * */
@@ -33,6 +33,13 @@ extern function_entry pdo_dbstmt_functions[];
 extern zend_class_entry *pdo_dbstmt_ce;
 void pdo_dbstmt_free_storage(zend_object *object TSRMLS_DC);
 extern zend_object_handlers pdo_dbstmt_object_handlers;
+
+extern zend_object_value pdo_row_new(zend_class_entry *ce TSRMLS_DC);
+extern function_entry pdo_row_functions[];
+extern zend_class_entry *pdo_row_ce;
+void pdo_row_free_storage(zend_object *object TSRMLS_DC);
+extern zend_object_handlers pdo_row_object_handlers;
+
 
 extern pdo_driver_t *pdo_find_driver(const char *name, int namelen);
 

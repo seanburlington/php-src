@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.19 2004/05/20 22:28:53 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.20 2004/05/21 13:26:58 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -242,6 +242,9 @@ static PHP_METHOD(PDO, prepare)
 		stmt->database_object_handle = *getThis();
 		zend_objects_store_add_ref(getThis() TSRMLS_CC);
 		stmt->dbh = dbh;
+
+		/* we haven't created a lazy object yet */
+		ZVAL_NULL(&stmt->lazy_object_ref);
 		return;
 	}
 	efree(stmt);

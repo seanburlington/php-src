@@ -8,7 +8,7 @@
 **  This code is in the public domain and has no copyright.
 */
 
-/* $Id: parsedate.y,v 1.44 2003/11/18 06:45:01 hholzgra Exp $ */
+/* $Id: parsedate.y,v 1.45 2003/11/18 06:46:07 hholzgra Exp $ */
 
 #include "php.h"
 
@@ -661,30 +661,30 @@ static TABLE const TimezoneTable[] = {
 
 /* Military timezone table. */
 static TABLE const MilitaryTable[] = {
-    { "a",	tZONE,	HOUR (  1) },
-    { "b",	tZONE,	HOUR (  2) },
-    { "c",	tZONE,	HOUR (  3) },
-    { "d",	tZONE,	HOUR (  4) },
-    { "e",	tZONE,	HOUR (  5) },
-    { "f",	tZONE,	HOUR (  6) },
-    { "g",	tZONE,	HOUR (  7) },
-    { "h",	tZONE,	HOUR (  8) },
-    { "i",	tZONE,	HOUR (  9) },
-    { "k",	tZONE,	HOUR ( 10) },
-    { "l",	tZONE,	HOUR ( 11) },
-    { "m",	tZONE,	HOUR ( 12) },
-    { "n",	tZONE,	HOUR (- 1) },
-    { "o",	tZONE,	HOUR (- 2) },
-    { "p",	tZONE,	HOUR (- 3) },
-    { "q",	tZONE,	HOUR (- 4) },
-    { "r",	tZONE,	HOUR (- 5) },
-    { "s",	tZONE,	HOUR (- 6) },
-    { "t",	tTZONE,	HOUR (- 7) },
-    { "u",	tZONE,	HOUR (- 8) },
-    { "v",	tZONE,	HOUR (- 9) },
-    { "w",	tZONE,	HOUR (-10) },
-    { "x",	tZONE,	HOUR (-11) },
-    { "y",	tZONE,	HOUR (-12) },
+    { "a",	tZONE,	HOUR (- 1) },
+    { "b",	tZONE,	HOUR (- 2) },
+    { "c",	tZONE,	HOUR (- 3) },
+    { "d",	tZONE,	HOUR (- 4) },
+    { "e",	tZONE,	HOUR (- 5) },
+    { "f",	tZONE,	HOUR (- 6) },
+    { "g",	tZONE,	HOUR (- 7) },
+    { "h",	tZONE,	HOUR (- 8) },
+    { "i",	tZONE,	HOUR (- 9) },
+    { "k",	tZONE,	HOUR (-10) },
+    { "l",	tZONE,	HOUR (-11) },
+    { "m",	tZONE,	HOUR (-12) },
+    { "n",	tZONE,	HOUR (  1) },
+    { "o",	tZONE,	HOUR (  2) },
+    { "p",	tZONE,	HOUR (  3) },
+    { "q",	tZONE,	HOUR (  4) },
+    { "r",	tZONE,	HOUR (  5) },
+    { "s",	tZONE,	HOUR (  6) },
+    { "t",	tTZONE,	HOUR (  7) },
+    { "u",	tZONE,	HOUR (  8) },
+    { "v",	tZONE,	HOUR (  9) },
+    { "w",	tZONE,	HOUR ( 10) },
+    { "x",	tZONE,	HOUR ( 11) },
+    { "y",	tZONE,	HOUR ( 12) },
     { "z",	tZZONE,	HOUR (  0) },
     { NULL, 0, 0 }
 };

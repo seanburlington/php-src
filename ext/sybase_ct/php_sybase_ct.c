@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.51 2001/07/11 12:42:23 thies Exp $ */
+/* $Id: php_sybase_ct.c,v 1.52 2001/07/23 16:10:10 pwmoosman Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -640,6 +640,7 @@ static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			link = (int) index_ptr->ptr;
 			ptr = zend_list_find(link, &type);   /* check if the link is still there */
 			if (ptr && (type==le_link || type==le_plink)) {
+				zend_list_addref(link);
 				return_value->value.lval = SybCtG(default_link) = link;
 				return_value->type = IS_RESOURCE;
 				efree(hashed_details);
@@ -678,6 +679,7 @@ static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	}
 	efree(hashed_details);
 	SybCtG(default_link)=return_value->value.lval;
+	zend_list_addref(SybCtG(default_link));
 }
 
 

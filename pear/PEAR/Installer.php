@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.105 2003/09/02 03:10:57 cellog Exp $
+// $Id: Installer.php,v 1.106 2003/09/04 22:21:33 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -384,6 +384,7 @@ class PEAR_Installer extends PEAR_Common
             list($type, $data) = $tr;
             switch ($type) {
                 case 'rename':
+                    @unlink($data[1]);
                     @rename($data[0], $data[1]);
                     $this->log(3, "+ mv $data[0] $data[1]");
                     break;

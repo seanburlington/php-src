@@ -16,9 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.24 2001/01/21 17:26:43 rasmus Exp $ */
+/* $Id: syslog.c,v 1.25 2001/02/24 21:08:15 sas Exp $ */
 
 #include "php.h"
+
+#ifdef HAVE_SYSLOG_H
 #include "php_ini.h"
 #include "zend_globals.h"
 
@@ -261,6 +263,8 @@ PHP_FUNCTION(syslog)
 	RETURN_TRUE;
 }
 /* }}} */
+
+#endif
 
 /*
  * Local variables:

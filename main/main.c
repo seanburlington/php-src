@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.133 1999/10/19 19:11:02 andrei Exp $ */
+/* $Id: main.c,v 1.134 1999/11/05 17:52:00 rubys Exp $ */
 
 
 #include <stdio.h>
@@ -482,7 +482,9 @@ PHPAPI void php_error(int type, const char *format,...)
 		case E_CORE_ERROR:
 		/*case E_PARSE: the parser would return 1 (failure), we can bail out nicely */
 		case E_COMPILE_ERROR:
-			zend_bailout();
+			if (module_initialized) {
+				zend_bailout();
+			}
 			break;
 	}
 }

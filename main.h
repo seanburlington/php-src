@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: main.h,v 1.6 1999/04/26 14:00:46 zeev Exp $ */
+/* $Id: main.h,v 1.7 1999/05/02 18:07:40 andi Exp $ */
 
 
 #ifndef _MAIN_H
@@ -42,9 +42,10 @@
 PHPAPI int php_request_startup(CLS_D ELS_DC PLS_DC);
 PHPAPI void php_request_shutdown(void *dummy);
 PHPAPI void php_request_shutdown_for_exec(void *dummy);
-PHPAPI int php_module_startup(sapi_functions_struct *sf);
+PHPAPI int php_module_startup(sapi_module_struct *sf);
 PHPAPI void php_module_shutdown();
 PHPAPI void php_module_shutdown_for_exec(void);
+PHPAPI int php_module_shutdown_wrapper(sapi_module_struct *sapi_globals);
 
 PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_DC);
 

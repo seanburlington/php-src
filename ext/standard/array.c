@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.199.2.22 2003/08/08 23:54:25 iliaa Exp $ */
+/* $Id: array.c,v 1.199.2.23 2003/08/09 16:47:21 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3210,7 +3210,7 @@ PHP_FUNCTION(array_reduce)
 		result = *initial;
 	} else {
 		MAKE_STD_ZVAL(result);
-		ZVAL_LONG(result, 0);
+		ZVAL_NULL(result);
 	}
 
 	/* (zval **)input points to an element of argument stack

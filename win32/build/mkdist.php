@@ -1,4 +1,4 @@
-<?php # $Id: mkdist.php,v 1.12 2005/02/26 00:37:10 edink Exp $
+<?php # $Id: mkdist.php,v 1.13 2005/03/26 21:32:20 edink Exp $
 /* piece together a windows binary distro */
 
 $build_dir = $argv[1];
@@ -335,7 +335,7 @@ function copy_dir($source, $dest)
 
 /* change this next line to true to use good-old
  * hand-assembled go-pear-bundle from the snapshot template */
-$use_pear_template = false;
+$use_pear_template = true;
 
 if (!$use_pear_template) {
 	/* Let's do a PEAR-less pear setup */

@@ -21,7 +21,7 @@
  * - write documentation
  */
 
-/* $Id: aolserver.c,v 1.9 1999/10/20 13:49:19 sas Exp $ */
+/* $Id: aolserver.c,v 1.10 1999/10/20 15:53:23 sas Exp $ */
 
 /* conflict between PHP and AOLserver */
 #define Debug php_Debug
@@ -187,7 +187,27 @@ php_ns_sapi_read_cookies(SLS_D)
 
 static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 {
-	PUTS("AOLserver SAPI module ($Id: aolserver.c,v 1.9 1999/10/20 13:49:19 sas Exp $)<br>");
+	char buf[512];
+	int uptime = Ns_InfoUptime();
+	
+	PUTS("<table border=5 width=600>\n");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.10 1999/10/20 15:53:23 sas Exp $");
+	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
+	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
+	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
+	php_info_print_table_row(2, "Installation path", Ns_InfoHomePath());
+	php_info_print_table_row(2, "Hostname of server", Ns_InfoHostname());
+	php_info_print_table_row(2, "Source code label", Ns_InfoLabel());
+	php_info_print_table_row(2, "Server platform", Ns_InfoPlatform());
+	snprintf(buf, 511, "%s/%s", Ns_InfoServerName(), Ns_InfoServerVersion());
+	php_info_print_table_row(2, "Server version", buf);
+	snprintf(buf, 511, "%d day(s), %02d:%02d:%02d", 
+			uptime / 86400,
+			(uptime / 3600) % 24,
+			(uptime / 60) % 60,
+			uptime % 60);
+	php_info_print_table_row(2, "Server uptime", buf);
+	PUTS("</table>");
 }
 
 static zend_module_entry php_aolserver_module = {

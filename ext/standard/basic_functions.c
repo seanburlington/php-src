@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.274 2000/10/30 23:39:14 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.275 2000/11/04 01:18:10 jmcastagnetto Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1700,7 +1700,7 @@ ZEND_API void php_get_highlight_struct(zend_syntax_highlighter_ini *syntax_highl
 }
 
 
-/* {{{ proto void highlight_file(string file_name)
+/* {{{ proto boolean highlight_file(string file_name)
    Syntax highlight a source file */
 PHP_FUNCTION(highlight_file)
 {
@@ -1723,7 +1723,7 @@ PHP_FUNCTION(highlight_file)
 /* }}} */
 
 
-/* {{{ proto void highlight_string(string string)
+/* {{{ proto boolean highlight_string(string string)
    Syntax highlight a string */
 PHP_FUNCTION(highlight_string)
 {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.h,v 1.19 2000/11/20 10:05:57 hholzgra Exp $ */
+/* $Id: info.h,v 1.20 2000/12/19 22:59:14 zeev Exp $ */
 
 #ifndef INFO_H
 #define INFO_H
@@ -42,6 +42,7 @@
 #define PHP_CREDITS_MODULES			(1<<3)
 #define PHP_CREDITS_DOCS			(1<<4)
 #define PHP_CREDITS_FULLPAGE		(1<<5)
+#define PHP_CREDITS_QA				(1<<6)
 #define PHP_CREDITS_ALL				0xFFFFFFFF
 
 #define PHP_LOGO_GUID		  "PHPE9568F34-D428-11d2-A769-00AA001ACF42"

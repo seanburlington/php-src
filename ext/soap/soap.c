@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.78 2004/02/11 13:53:48 dmitry Exp $ */
+/* $Id: soap.c,v 1.79 2004/02/12 10:39:20 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1601,7 +1601,7 @@ static void soap_error_handler(int error_num, const char *error_filename, const 
 				*exception = *fault;
 				zval_copy_ctor(exception);
 				INIT_PZVAL(exception);
-				EG(exception) = exception;
+				zend_throw_exception_object(exception TSRMLS_CC);
 				zend_bailout();
 			} else {
 				old_error_handler(error_num, error_filename, error_lineno, format, args);
@@ -1916,7 +1916,7 @@ static void do_soap_call(zval* this_ptr,
 		*exception = *return_value;
 		zval_copy_ctor(exception);
 		INIT_PZVAL(exception);
-		EG(exception) = exception;
+		zend_throw_exception_object(exception TSRMLS_CC);
 	}
 #endif
 	SOAP_GLOBAL(sdl) = old_sdl;

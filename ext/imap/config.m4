@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.21 2000/08/01 15:24:56 sas Exp $
+dnl $Id: config.m4,v 1.22 2000/10/02 22:16:53 rasmus Exp $
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r $i$1/rfc822.h; then IMAP_DIR=$i; IMAP_INC_DIR=$i$1])
 
@@ -21,6 +21,17 @@ fi
 
 if test "$PHP_KERBEROS" != "no"; then
   PHP_KERBEROS_LIBDIR=$PHP_KERBEROS/lib
+fi
+
+PHP_ARG_WITH(imap-ssl,for SSL support in IMAP,
+[  --with-imap-ssl[=DIR]   Include SSL support in IMAP.])
+
+if test "$PHP_IMAP_SSL" = "yes"; then
+  PHP_IMAP_SSL=/usr
+fi
+
+if test "$PHP_IMAP_SSL" != "no"; then
+  PHP_SSL_LIBDIR=$PHP_IMAP_SSL/lib
 fi
 
 PHP_ARG_WITH(imap,for IMAP support,
@@ -75,6 +86,12 @@ PHP_ARG_WITH(imap,for IMAP support,
       AC_ADD_LIBRARY(k5crypto,, IMAP_SHARED_LIBADD)
       AC_ADD_LIBRARY(krb5,, IMAP_SHARED_LIBADD)
       AC_ADD_LIBRARY(gssapi_krb5,, IMAP_SHARED_LIBADD)
+    fi
+
+    if test "$PHP_IMAP_SSL" != "no"; then
+      AC_ADD_LIBPATH($PHP_SSL_LIBDIR, IMAP_SHARED_LIBADD)
+      AC_ADD_LIBRARY(ssl,, IMAP_SHARED_LIBADD)
+      AC_ADD_LIBRARY(crypto,, IMAP_SHARED_LIBADD)
     fi
 
     PHP_EXTENSION(imap, $ext_shared)

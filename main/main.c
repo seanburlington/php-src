@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.377 2001/07/15 12:02:58 zeev Exp $ */
+/* $Id: main.c,v 1.378 2001/07/15 12:22:11 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -623,7 +623,7 @@ int php_request_startup(CLS_D ELS_DC PLS_DC SLS_DC)
 	signal(SIGCHLD,sigchld_handler);
 #endif
 
-	if (setjmp(EG(bailout))==0) {
+	if (setjmp(EG(bailout))!=0) {
 		return FAILURE;
 	}
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.126 2003/08/11 02:32:16 sniper Exp $ */
+/* $Id: pdf.c,v 1.127 2003/08/11 11:27:24 andrey Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -322,7 +322,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.126 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.127 $" );
 	php_info_print_table_end();
 
 }
@@ -2690,7 +2690,7 @@ PHP_FUNCTION(pdf_add_note)
 /* }}} */
 
 /* {{{ proto bool pdf_add_locallink(resource pdfdoc, float llx, float lly, float urx, float ury, int page, string dest)
-   Adds link to web resource */
+   Adds link to local resource */
 PHP_FUNCTION(pdf_add_locallink)
 {
 	zval **arg1, **arg2, **arg3, **arg4, **arg5, **arg6, **arg7;

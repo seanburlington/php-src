@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.66.2.11 2003/09/11 01:45:02 hholzgra Exp $ */
+/* $Id: fdf.c,v 1.66.2.12 2004/05/16 14:38:26 iliaa Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -719,6 +719,10 @@ PHP_FUNCTION(fdf_set_file)
 							 &target_frame, &target_frame_len)
 	   == FAILURE) {
 		return;
+	}
+
+	if (php_check_open_basedir(filename TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(filename, "wb+", CHECKUID_CHECK_MODE_PARAM))) {
+		RETURN_FALSE;
 	}
 
 	ZEND_FETCH_RESOURCE(fdf, FDFDoc *, &r_fdf, -1, "fdf", le_fdf);
@@ -1480,6 +1484,10 @@ PHP_FUNCTION(fdf_get_attachment) {
 	}
 	
 	ZEND_FETCH_RESOURCE(fdf, FDFDoc *, &r_fdf, -1, "fdf", le_fdf);
+
+	if (php_check_open_basedir(savepath TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(savepath, "wb+", CHECKUID_CHECK_MODE_PARAM))) {
+		RETURN_FALSE;
+	}
 
 	strncpy(pathbuf	, savepath, MAXPATHLEN-1);
 	pathbuf[MAXPATHLEN-1] = '\0';

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.55 2001/03/28 23:52:21 cox Exp $
+// $Id: DB.php,v 1.56 2001/04/16 21:24:38 ssb Exp $
 //
 // Database independent query interface.
 //
@@ -207,10 +207,11 @@ class DB
      * DB_common::setOption for more information on connection
      * options.
      *
-     * @return object a newly created DB object, or a DB error code on
-     * error
+     * @return object a newly created DB connection object, or a DB
+     * error object on error
      *
      * @see DB::parseDSN
+     * @see DB::isError
      */
     function &connect($dsn, $options = false)
     {
@@ -221,9 +222,17 @@ class DB
         }
         $type = $dsninfo["phptype"];
 
-        @include_once "DB/${type}.php";
-        $classname = "DB_${type}";
-        @$obj =& new $classname;
+        if (is_array($options) && isset($options["debug"]) &&
+            $options["debug"] >= 2) {
+            // expose php errors with sufficient debug level
+            include_once "DB/${type}.php";
+            $classname = "DB_${type}";
+            $obj =& new $classname;
+        } else {
+            @include_once "DB/${type}.php";
+            $classname = "DB_${type}";
+            @$obj =& new $classname;
+        }
 
         if (!$obj) {
             return new DB_Error(DB_ERROR_NOT_FOUND);
@@ -242,6 +251,7 @@ class DB
         $err = $obj->connect($dsninfo, $obj->getOption('persistent'));
 
         if (DB::isError($err)) {
+            $err->addUserInfo($dsn);
             return $err;
         }
 
@@ -347,7 +357,7 @@ class DB
         }
 
         if (DB::isError($value)) {
-            $value = $value->code;
+            $value = $value->getCode();
         }
 
         return $errorMessages[$value];

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.10 1999/07/22 14:22:32 andrey Exp $ */
+/* $Id: php_pcre.c,v 1.11 1999/08/01 18:18:40 eschmid Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -962,7 +962,8 @@ PHP_FUNCTION(preg_split)
 /* }}} */
 
 
-/* {{{ proto string preg_quote(string str) */
+/* {{{ proto string preg_quote(string str)
+   Quote regular expression characters */
 PHP_FUNCTION(preg_quote)
 {
 	zval 	*in_str_arg;	/* Input string argument */

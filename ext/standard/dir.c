@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.128 2003/09/20 02:51:20 iliaa Exp $ */
+/* $Id: dir.c,v 1.129 2003/09/26 08:09:55 hholzgra Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -361,7 +361,8 @@ PHP_FUNCTION(glob)
 	int pattern_len;
 	long flags = 0;
 	glob_t globbuf;
-	int n, ret;
+	unsigned int n;
+	int ret;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &pattern, &pattern_len, &flags) == FAILURE) 
 		return;

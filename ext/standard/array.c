@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.248 2003/09/26 00:40:32 iliaa Exp $ */
+/* $Id: array.c,v 1.249 2003/09/26 08:09:55 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1890,7 +1890,7 @@ static void _phpi_pop(INTERNAL_FUNCTION_PARAMETERS, int off_the_end)
 	
 	/* If we did a shift... re-index like it did before */
 	if (!off_the_end) {
-		int k = 0;
+		unsigned int k = 0;
 		int should_rehash = 0;
 		Bucket *p = Z_ARRVAL_PP(stack)->pListHead;
 		while (p != NULL) {

@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.62 2003/08/28 16:28:33 sas Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.63 2003/09/26 08:09:55 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -586,7 +586,7 @@ static size_t php_ftp_dirstream_read(php_stream *stream, char *buf, size_t count
 		return 0;
 	}
 
-	memcpy(ent->d_name, basename, MIN(sizeof(ent->d_name), basename_len)-1);
+	memcpy(ent->d_name, basename, MIN((int)sizeof(ent->d_name), basename_len)-1);
 	ent->d_name[sizeof(ent->d_name)-1] = '\0';
 	efree(basename);
 

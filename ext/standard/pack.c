@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.49 2003/08/11 23:16:53 iliaa Exp $ */
+/* $Id: pack.c,v 1.50 2003/09/26 08:09:55 hholzgra Exp $ */
 
 #include "php.h"
 
@@ -847,7 +847,7 @@ PHP_MINIT_FUNCTION(pack)
 		/* Where to get lo to hi bytes from */
 		byte_map[0] = 0;
 
-		for (i = 0; i < sizeof(int); i++) {
+		for (i = 0; i < (int)sizeof(int); i++) {
 			int_map[i] = i;
 		}
 
@@ -879,7 +879,7 @@ PHP_MINIT_FUNCTION(pack)
 		/* Where to get hi to lo bytes from */
 		byte_map[0] = size - 1;
 
-		for (i = 0; i < sizeof(int); i++) {
+		for (i = 0; i < (int)sizeof(int); i++) {
 			int_map[i] = size - (sizeof(int) - i);
 		}
 

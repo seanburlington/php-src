@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.62 2003/09/01 22:38:40 pollita Exp $ */
+/* $Id: dns.c,v 1.63 2003/09/26 08:09:55 hholzgra Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -746,7 +746,7 @@ PHP_FUNCTION(dns_get_mx)
 	if (i < 0) {
 		RETURN_FALSE;
 	}
-	if (i > sizeof(ans)) {
+	if (i > (int)sizeof(ans)) {
 		i = sizeof(ans);
 	}
 	hp = (HEADER *)&ans;

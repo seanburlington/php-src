@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.114 2001/12/23 14:37:24 alexwaugh Exp $ */
+/* $Id: php_mysql.c,v 1.115 2001/12/30 10:00:26 zak Exp $ */
 
 
 /* TODO:
@@ -1633,10 +1633,13 @@ static void php_mysql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type, 
 			}
 		} else {
 			/* NULL value. */
-			if (result_type & MYSQL_NUM)
+			if (result_type & MYSQL_NUM) {
 				add_index_null(return_value, i);
-			else
+            }
+
+            if (result_type & MYSQL_ASSOC) {
 				add_assoc_null(return_value, mysql_field->name);
+            }
 		}
 	}
 }

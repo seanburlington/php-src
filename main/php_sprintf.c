@@ -16,17 +16,20 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sprintf.c,v 1.17.2.1 2004/11/15 13:41:41 derick Exp $ */
+/* $Id: php_sprintf.c,v 1.17.2.2 2004/11/15 23:14:40 fmk Exp $ */
 
 #include <stdio.h>
 #include <stdarg.h>
-#ifdef NETWARE
+#include "php.h"
+#ifdef PHP_WIN32
+#include "config.w32.h"
+#elif defined NETWARE
 #include "config.nw.h"
 #else
 #include "php_config.h"
 #endif
 
-int
+PHPAPI int
 php_sprintf (char*s, const char* format, ...)
 {
   va_list args;

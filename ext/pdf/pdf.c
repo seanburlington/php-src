@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.110 2002/03/22 01:10:30 hholzgra Exp $ */
+/* $Id: pdf.c,v 1.111 2002/08/30 02:41:51 sniper Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -40,7 +40,11 @@
 
 #if HAVE_LIBGD13
 #include "ext/gd/php_gd.h"
+#if HAVE_GD_BUNDLED
+#include "ext/gd/libgd/gd.h"
+#else
 #include "gd.h"
+#endif
 static int le_gd;
 #endif
 
@@ -328,7 +332,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.110 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.111 $" );
 	php_info_print_table_end();
 
 }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.80 2004/07/11 20:13:39 sesser Exp $ */
+/* $Id: php_variables.c,v 1.81 2004/07/11 21:14:50 sesser Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -318,6 +318,9 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 			}
 			efree(val);
 		} else {
+			int val_len;
+			unsigned int new_val_len;
+
 			php_url_decode(var, strlen(var));
 			val_len = 0;
 			val = estrndup("", val_len);

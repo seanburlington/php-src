@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.99 2000/10/21 21:17:31 dbeu Exp $ */
+/* $Id: oci8.c,v 1.100 2000/10/22 19:33:59 thies Exp $ */
 
 /* TODO list:
  *
@@ -491,7 +491,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.99 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.100 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2456,7 +2456,8 @@ PHP_FUNCTION(ocibindbyname)
 	sb4 value_sz = -1;
 	int ac = ZEND_NUM_ARGS(), inx;
 
-    if (ac < 3 || ac > 5 || zend_get_parameters_ex(ac, &stmt, &name, &var, &maxlen, &type) == FAILURE) {        WRONG_PARAM_COUNT;
+    if (ac < 3 || ac > 5 || zend_get_parameters_ex(ac, &stmt, &name, &var, &maxlen, &type) == FAILURE) {
+		WRONG_PARAM_COUNT;
     }
 
     switch (ac) {
@@ -2472,29 +2473,36 @@ PHP_FUNCTION(ocibindbyname)
 
 	OCI_GET_STMT(statement,stmt);
 
-	switch ((*var)->type) {
-	case IS_OBJECT :
-		if ((inx = _oci_get_ocidesc(*var,&descr)) == 0) {
-			RETURN_FALSE;
-		}
+	switch (ocitype) {
+		case SQLT_BFILEE:
+		case SQLT_CFILEE:
+		case SQLT_CLOB:
+		case SQLT_BLOB:
+			if ((*var)->type != IS_OBJECT) {
+				php_error(E_WARNING,"Variable must be allocated using OCINewDescriptor()");
+				RETURN_FALSE;
+			}
+
+			if ((inx = _oci_get_ocidesc(*var,&descr)) == 0) {
+				php_error(E_WARNING,"Variable must be allocated using OCINewDescriptor()");
+				RETURN_FALSE;
+			}
 		
-		mydescr = (dvoid *) descr->ocidescr;
-		
-		if (! mydescr) {
-			RETURN_FALSE;
-		}
-		value_sz = sizeof(void*);
-		break;
-		
-	default:
-		if (ocitype == SQLT_RSET) { 
-			/* XXX refcursor binding */
-			OCI_GET_STMT(bindstmt,var);
-			
-			mystmt = bindstmt->pStmt;
+			if (! (mydescr = (dvoid *) descr->ocidescr)) {
+				php_error(E_WARNING,"Descriptor empty");
+				RETURN_FALSE;
+			}
 			value_sz = sizeof(void*);
-		}
-		break;
+			break;
+
+		case SQLT_RSET:
+			OCI_GET_STMT(bindstmt,var);
+
+			if (! (mystmt = bindstmt->pStmt)) {
+				RETURN_FALSE;
+			}
+			value_sz = sizeof(void*);
+			break;
 	}
 	
 	if ((ocitype == SQLT_CHR) && (value_sz == -1)) {

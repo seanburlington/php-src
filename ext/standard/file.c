@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.258 2002/09/25 15:25:11 wez Exp $ */
+/* $Id: file.c,v 1.259 2002/09/25 15:46:46 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1243,7 +1243,7 @@ PHPAPI PHP_FUNCTION(fgetss)
 }
 /* }}} */
 
-/* {{{ proto mixed fscanf(string str, string format [, string ...])
+/* {{{ proto mixed fscanf(resource stream, string format [, string ...])
    Implements a mostly ANSI compatible fscanf() */
 PHP_FUNCTION(fscanf)
 {

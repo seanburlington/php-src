@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.81 2002/09/19 18:59:32 iliaa Exp $ */
+/* $Id: exec.c,v 1.82 2002/09/25 15:46:46 wez Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -732,7 +732,7 @@ PHP_FUNCTION(proc_open)
 			php_stream *stream;
 			int fd;
 
-			ZEND_FETCH_RESOURCE(stream, php_stream *, descitem, -1, "File-Handle", php_file_le_stream());
+			php_stream_from_zval(stream, descitem);
 
 			if (FAILURE == php_stream_cast(stream, PHP_STREAM_AS_FD, (void **)&fd, REPORT_ERRORS)) {
 				goto exit_fail;

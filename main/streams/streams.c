@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.31 2003/07/28 18:57:28 iliaa Exp $ */
+/* $Id: streams.c,v 1.32 2003/07/29 18:26:34 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -254,7 +254,7 @@ fprintf(stderr, "stream_alloc: %s:%p persistent=%s\n", ops->label, ret, persiste
 
 static int _php_stream_free_persistent(list_entry *le, void *pStream TSRMLS_DC)
 {
-	return (le->ptr == pStream && !((php_stream *)pStream)->in_free);
+	return le->ptr == pStream;
 }
 
 PHPAPI int _php_stream_free(php_stream *stream, int close_options TSRMLS_DC) /* {{{ */
@@ -358,7 +358,7 @@ fprintf(stderr, "stream_free: %s:%p[%s] preserve_handle=%d release_cast=%d remov
 			stream->readbuf = NULL;
 		}
 
-		if (stream->is_persistent) {
+		if (stream->is_persistent && (close_options & PHP_STREAM_FREE_PERSISTENT)) {
 			/* we don't work with *stream but need its value for comparison */
 			zend_hash_apply_with_argument(&EG(persistent_list), (apply_func_arg_t) _php_stream_free_persistent, stream TSRMLS_CC);
 		}

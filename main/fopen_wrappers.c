@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.142.2.1 2002/05/11 19:56:10 rasmus Exp $ */
+/* $Id: fopen_wrappers.c,v 1.142.2.2 2002/05/11 20:02:21 rasmus Exp $ */
 
 /* {{{ includes
  */
@@ -233,8 +233,6 @@ PHPAPI int php_check_safe_mode_include_dir(char *path TSRMLS_DC)
 		char *ptr;
 		char *end;
 		char resolved_name[MAXPATHLEN];
-
-		php_printf("safe_mode_include_dir check for %s<br>\n",path);
 
 		/* Resolve the real path into resolved_name */
 		if (expand_filepath(path, resolved_name TSRMLS_CC) == NULL)

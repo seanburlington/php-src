@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.45 2002/02/06 10:03:40 yohgaki Exp $ */
+/* $Id: mbstring.c,v 1.46 2002/02/10 02:27:09 yohgaki Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -589,7 +589,7 @@ PHP_RINIT_FUNCTION(mbstring)
 				
 				if (zend_hash_find(EG(function_table), p->orig_func, 
 								   strlen(p->orig_func)+1, (void **)&orig) != SUCCESS) {
-					php_error(E_ERROR, "mbstring couldn't found function %s.", p->orig_func);
+					php_error(E_ERROR, "mbstring couldn't find function %s.", p->orig_func);
 				}
 				zend_hash_add(EG(function_table), p->save_func, strlen(p->save_func)+1, orig, sizeof(zend_function), NULL);
 				if (zend_hash_update(EG(function_table), p->orig_func, strlen(p->orig_func)+1,

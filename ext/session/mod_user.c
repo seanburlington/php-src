@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_user.c,v 1.22 2002/03/06 00:05:20 yohgaki Exp $ */
+/* $Id: mod_user.c,v 1.23 2002/03/06 00:12:48 yohgaki Exp $ */
 
 #include "php.h"
 #include "php_session.h"
@@ -145,7 +145,7 @@ PS_WRITE_FUNC(user)
 	SESS_ZVAL_STRING(key, args[0]);
 	SESS_ZVAL_STRINGN(val, vallen, args[1]);
 
-	retval = ps_call_handler(PSF(write), 2, args);
+	retval = ps_call_handler(PSF(write), 2, args TSRMLS_CC);
 
 	FINISH;
 }

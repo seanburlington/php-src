@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.24 2000/12/16 20:52:43 andi Exp $ */
+/* $Id: safe_mode.c,v 1.25 2001/01/09 11:58:57 thies Exp $ */
 
 #include "php.h"
 
@@ -121,6 +121,14 @@ PHPAPI int php_checkuid(const char *filename, char *fopen_mode, int mode)
 	if (duid == (uid=php_getuid())) {
 		return 1;
 	} else {
+		SLS_FETCH();
+
+		if (SG(rfc1867_uploaded_files)) {
+			if (zend_hash_exists(SG(rfc1867_uploaded_files),filename,strlen(filename)+1)) {
+				return 1;
+			}
+		}
+
 		php_error(E_WARNING, "SAFE MODE Restriction in effect.  The script whose uid is %ld is not allowed to access %s owned by uid %ld", uid, filename, duid);
 		return 0;
 	}

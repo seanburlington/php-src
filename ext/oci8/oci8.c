@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.148 2001/08/11 10:29:14 thies Exp $ */
+/* $Id: oci8.c,v 1.149 2001/08/11 10:52:52 thies Exp $ */
 
 /* TODO list:
  *
@@ -577,7 +577,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.148 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.149 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -1101,7 +1101,7 @@ _oci_get_ocicoll(zval *id,oci_collection **collection TSRMLS_DC)
 {
     zval **coll;
     
-    if (zend_hash_find(Z_OBJPROP(*id), "collection", sizeof("collection"), (void **)&coll) == FAILURE) {
+    if (zend_hash_find(Z_OBJPROP_P(id), "collection", sizeof("collection"), (void **)&coll) == FAILURE) {
         php_error(E_WARNING, "cannot find collection");
         return 0;
     }
@@ -1125,7 +1125,7 @@ _oci_get_ocidesc(zval *id,oci_descriptor **descriptor TSRMLS_DC)
 {
 	zval **desc;
 	
-	if (zend_hash_find(Z_OBJPROP(*id), "descriptor", sizeof("descriptor"), (void **)&desc) == FAILURE) {
+	if (zend_hash_find(Z_OBJPROP_P(id), "descriptor", sizeof("descriptor"), (void **)&desc) == FAILURE) {
 		php_error(E_WARNING, "cannot find descriptor");
 		return 0;
 	}

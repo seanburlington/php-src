@@ -15,7 +15,7 @@
   | Author: Wez Furlong <wez@thebrainroom.com>                           |
   +----------------------------------------------------------------------+
 
-  $Id: sqlite.c,v 1.12 2003/04/17 20:08:00 wez Exp $ 
+  $Id: sqlite.c,v 1.13 2003/04/17 20:09:45 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -111,8 +111,7 @@ static ZEND_RSRC_DTOR_FUNC(php_sqlite_result_dtor)
 	efree(res);
 }
 
-/* PHP Function interface */
-
+/* {{{ PHP Function interface */
 static void php_sqlite_function_callback(sqlite_func *func, int argc, const char **argv)
 {
 	zval *retval = NULL;
@@ -192,9 +191,9 @@ static void php_sqlite_function_callback(sqlite_func *func, int argc, const char
 		efree(zargs);
 	}
 }
+/* }}} */
 
-/* Authorization Callback */
-
+/* {{{ Authorization Callback */
 static int php_sqlite_authorizer(void *autharg, int access_type, const char *arg3, const char *arg4)
 {
 	switch (access_type) {
@@ -216,6 +215,7 @@ static int php_sqlite_authorizer(void *autharg, int access_type, const char *arg
 			return SQLITE_OK;
 	}
 }
+/* }}} */
 
 PHP_MINIT_FUNCTION(sqlite)
 {
@@ -233,7 +233,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.12 2003/04/17 20:08:00 wez Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.13 2003/04/17 20:09:45 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

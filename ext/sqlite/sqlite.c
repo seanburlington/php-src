@@ -15,7 +15,7 @@
   | Author: Wez Furlong <wez@thebrainroom.com>                           |
   +----------------------------------------------------------------------+
 
-  $Id: sqlite.c,v 1.4 2003/04/17 03:14:14 wez Exp $ 
+  $Id: sqlite.c,v 1.5 2003/04/17 03:38:20 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -106,6 +106,7 @@ static void php_sqlite_function_callback(sqlite_func *func, int argc, const char
 	zval ***zargs;
 	zval funcname;
 	int i, res;
+	char *callable = NULL, *errbuf=NULL;
 
 	/* sanity check the args */
 	if (argc == 0) {
@@ -115,10 +116,14 @@ static void php_sqlite_function_callback(sqlite_func *func, int argc, const char
 	
 	ZVAL_STRING(&funcname, (char*)argv[0], 0);
 
-	if (!zend_is_callable(&funcname, 0, NULL)) {
-		sqlite_set_result_error(func, "function is not callable", -1);
+	if (!zend_is_callable(&funcname, 0, &callable)) {
+		spprintf(&errbuf, 0, "function `%s' is not callable", callable);
+		sqlite_set_result_error(func, errbuf, -1);
+		efree(errbuf);
+		efree(callable);
 		return;
 	}
+	efree(callable);
 	
 	if (argc > 1) {
 		zargs = (zval ***)emalloc((argc - 1) * sizeof(zval **));
@@ -190,7 +195,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", "$Id: sqlite.c,v 1.4 2003/04/17 03:14:14 wez Exp $");
+	php_info_print_table_row(2, "PECL Module version", "$Id: sqlite.c,v 1.5 2003/04/17 03:38:20 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

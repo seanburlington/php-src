@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.21 2001/11/30 18:59:42 sniper Exp $
+dnl $Id: config.m4,v 1.22 2001/12/25 14:36:06 venaas Exp $
 dnl
 
 AC_DEFUN(PHP_LDAP_CHECKS, [
@@ -102,4 +102,7 @@ if test "$PHP_LDAP" != "no"; then
     AC_DEFINE(HAVE_3ARG_SETREBINDPROC,1,[Whether 3 arg set_rebind_proc()])
   fi
   CPPFLAGS=$_SAVE_CPPFLAGS
+
+  dnl Solaris 2.8 claims to be 2004 API, but doesn't have ldap_parse_reference
+  AC_CHECK_FUNCS(ldap_parse_reference)
 fi 

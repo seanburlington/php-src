@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.669 2004/05/28 10:45:18 derick Exp $ */
+/* $Id: basic_functions.c,v 1.670 2004/06/20 09:37:35 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1932,7 +1932,7 @@ PHP_FUNCTION(call_user_func_array)
 	}
 
 	if (!zend_is_callable(*func, 0, &name)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "First argumented is expected to be a valid callback, '%s' was given", name);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "First argument is expected to be a valid callback, '%s' was given", name);
 		efree(name);
 		RETURN_NULL();
 	}

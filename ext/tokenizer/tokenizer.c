@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.29 2004/03/08 08:02:02 derick Exp $ */
+/* $Id: tokenizer.c,v 1.29.2.1 2004/12/30 15:23:07 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -88,7 +88,7 @@ struct yy_buffer_state
 
 #include "zend.h"
 #include "zend_language_scanner.h"
-#include "zend_language_parser.h"
+#include <zend_language_parser.h>
 
 #define zendtext LANG_SCNG(yy_text)
 #define zendleng LANG_SCNG(yy_leng)

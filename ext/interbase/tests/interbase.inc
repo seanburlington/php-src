@@ -1,8 +1,36 @@
-<?
-/* $Id: interbase.inc,v 1.1 2000/08/27 19:45:58 ssb Exp $ */
+<?php
+
+/* $Id: interbase.inc,v 1.1.16.1 2003/04/25 15:43:35 sniper Exp $ */
 /* used in tests */
 
 srand((double)microtime()*1000000);
+
+$test_base = dirname(__FILE__)."/ibase_test.tmp";
+@unlink($test_base);
+
+$name = dirname(__FILE__).tempnam("","CREATEDB");
+$ftmp = fopen($name,"w");
+fwrite($ftmp, 
+"
+	create database \"$test_base\";
+	create table test1 (i integer, c varchar(100));
+	commit;
+   	insert into test1(i, c) values(1,  'test table created with isql');
+	exit;
+"
+);
+fclose($ftmp);
+
+/* set the correct binary */
+if (is_executable('isql')) {
+	$cmd = 'isql';
+} else {
+	$cmd = '/opt/interbase/bin/isql';
+}
+
+exec("$cmd -i $name 2>&1");
+@unlink($name);
+
 
 function out_table($table_name)
 {

@@ -1,14 +1,13 @@
 --TEST--
 InterBase: connect, close and pconnect
 --SKIPIF--
-<?php if (!extension_loaded("interbase")) print "skip"; ?>
+<?php include("skipif.inc"); ?>
 --POST--
 --GET--
 --FILE--
-<?
-/* $Id: 002.phpt,v 1.2 2002/03/19 16:52:41 ludoo Exp $ */
+<?php /* $Id: 002.phpt,v 1.2.4.1 2003/04/25 15:43:35 sniper Exp $ */
 
-    require(dirname(__FILE__)."/interbase.inc");
+	require("interbase.inc");
     
 	$test_base = dirname(__FILE__)."/ibase_test.tmp";
 

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.61 2001/08/13 07:55:37 rasmus Exp $ */
+/* $Id: sockets.c,v 1.62 2001/08/24 01:21:14 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2020,6 +2020,6 @@ PHP_FUNCTION(socket_shutdown)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: noet sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: noet sw=4 ts=4 tw=78
  */

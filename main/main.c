@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.106 1999/09/01 19:28:07 andi Exp $ */
+/* $Id: main.c,v 1.107 1999/09/03 02:39:35 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -732,7 +732,7 @@ void php_request_shutdown(void *dummy)
 	SLS_FETCH();
 
 	sapi_send_headers();
-	zend_end_ob_buffering(1);
+	zend_end_ob_buffering(SG(request_info).headers_only?0:1);
 
 	php3_call_shutdown_functions();
 	

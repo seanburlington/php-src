@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pfpro.h,v 1.13 2002/12/31 16:07:16 sebastian Exp $ */
+/* $Id: php_pfpro.h,v 1.14 2003/03/10 14:50:14 ddhill Exp $ */
 
 #ifndef PHP_PFPRO_H
 #define PHP_PFPRO_H
@@ -54,10 +54,10 @@ PHP_FUNCTION(pfpro_process);            /* Transaction processing     */
 ZEND_BEGIN_MODULE_GLOBALS(pfpro)
 	int initialized;
 	char *defaulthost;
-	int defaultport;
-	int defaulttimeout;
+	long defaultport;
+	long defaulttimeout;
 	char *proxyaddress;
-	int proxyport;
+	long proxyport;
 	char *proxylogon;
 	char *proxypassword;
 ZEND_END_MODULE_GLOBALS(pfpro)

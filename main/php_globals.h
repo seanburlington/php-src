@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.89 2003/03/02 10:19:15 zeev Exp $ */
+/* $Id: php_globals.h,v 1.90 2003/03/10 14:50:14 ddhill Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -59,7 +59,7 @@ struct _php_core_globals {
 	zend_bool allow_call_time_pass_reference;
 	zend_bool implicit_flush;
 
-	int output_buffering;
+	long output_buffering;
 
 	char *safe_mode_include_dir;
 	zend_bool safe_mode_gid;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.66.2.5 2003/05/07 20:32:28 pollita Exp $ */
+/* $Id: mail.c,v 1.66.2.6 2003/08/27 23:53:31 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -195,6 +195,13 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 #ifdef PHP_WIN32
 	sendmail = popen(sendmail_cmd, "wb");
 #else
+	/* make sure that sendmail_path contains a valid executable, failure to do
+	 * would make PHP abruptly exit without a useful error message. */
+	if (access(sendmail_path, X_OK)) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Permission denied: unable to execute shell to run mail delivery binary '%s'", sendmail_path);
+		return 0;
+	}
+
 	/* Since popen() doesn't indicate if the internal fork() doesn't work
 	 * (e.g. the shell can't be executed) we explicitely set it to 0 to be
 	 * sure we don't catch any older errno value. */
@@ -207,7 +214,7 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 	if (sendmail) {
 #ifndef PHP_WIN32
 		if (EACCES == errno) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Permission denied: unable to execute shell to run mail delivery binary");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Permission denied: unable to execute shell to run mail delivery binary '%s'", sendmail_path);
 			pclose(sendmail);
 			return 0;
 		}
@@ -236,7 +243,7 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 			return 1;
 		}
 	} else {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not execute mail delivery program");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not execute mail delivery program '%s'", sendmail_path);
 		return 0;
 	}
 

@@ -16,12 +16,10 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.32 2001/12/03 07:43:52 derick Exp $ */
+/* $Id: php_output.h,v 1.33 2001/12/05 13:46:36 zeev Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
-
-#include "php.h"
 
 typedef void (*php_output_handler_func_t)(char *output, uint output_len, char **handled_output, uint *handled_output_len, int mode TSRMLS_DC);
 

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.24 2000/08/10 21:13:08 sniper Exp $ */
+/* $Id: ftp.c,v 1.25 2000/09/13 22:00:31 derick Exp $ */
 
 #include "php.h"
 
@@ -311,6 +311,20 @@ ftp_pwd(ftpbuf_t *ftp)
 	*end = '"';
 
 	return ftp->pwd;
+}
+
+
+int
+ftp_exec(ftpbuf_t *ftp, const char *cmd)
+{
+	if (ftp == NULL)
+		return 0;
+	if (!ftp_putcmd(ftp, "SITE EXEC", cmd))
+		return 0;
+	if (!ftp_getresp(ftp) || ftp->resp != 200)
+		return 0;
+
+	return 1;
 }
 
 

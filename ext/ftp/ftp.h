@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.13 2000/07/02 23:46:41 sas Exp $ */
+/* $Id: ftp.h,v 1.14 2000/09/13 22:00:31 derick Exp $ */
 
 #ifndef	FTP_H
 #define	FTP_H
@@ -99,6 +99,9 @@ const char*	ftp_syst(ftpbuf_t *ftp);
 
 /* returns the present working directory (NULL on error) */
 const char*	ftp_pwd(ftpbuf_t *ftp);
+
+/* exec a command [special features], return true on success, false on error */
+int 	ftp_exec(ftpbuf_t *ftp, const char *cmd);
 
 /* changes directories, return true on success, false on error */
 int		ftp_chdir(ftpbuf_t *ftp, const char *dir);

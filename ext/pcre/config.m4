@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.20 2000/05/02 04:01:15 sas Exp $
+dnl $Id: config.m4,v 1.21 2001/02/20 22:21:06 andrei Exp $
 dnl config.m4 for extension pcre
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -16,6 +16,7 @@ if test "$PHP_PCRE_REGEX" != "no"; then
     PCRE_LIBADD=pcrelib/libpcre.la
     PCRE_SHARED_LIBADD=pcrelib/libpcre.la
     PCRE_SUBDIRS=pcrelib
+	CFLAGS="$CFLAGS -DSUPPORT_UTF8"
     PHP_SUBST(PCRE_LIBADD)
     PHP_SUBST(PCRE_SUBDIRS)
     AC_DEFINE(HAVE_BUNDLED_PCRE, 1, [ ])

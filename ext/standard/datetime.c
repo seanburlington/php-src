@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.74 2001/08/11 17:03:36 zeev Exp $ */
+/* $Id: datetime.c,v 1.75 2001/08/13 00:32:04 zeev Exp $ */
 
 
 #include "php.h"
@@ -690,7 +690,7 @@ PHP_FUNCTION(checkdate)
 	}
 
 	if((*year)->type == IS_STRING) {
-		res = is_numeric_string((*year)->value.str.val, (*year)->value.str.len, NULL, NULL);
+		res = is_numeric_string((*year)->value.str.val, (*year)->value.str.len, NULL, NULL, 0);
 		if(res!=IS_LONG && res !=IS_DOUBLE) {
 			RETURN_FALSE;	
 		}

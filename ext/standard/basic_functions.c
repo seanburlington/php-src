@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.382 2001/08/11 17:03:36 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.383 2001/08/13 00:32:03 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1470,7 +1470,7 @@ PHP_FUNCTION(is_numeric)
 			break;
 
 		case IS_STRING:
-			result = is_numeric_string(Z_STRVAL_PP(arg), Z_STRLEN_PP(arg), NULL, NULL);
+			result = is_numeric_string(Z_STRVAL_PP(arg), Z_STRLEN_PP(arg), NULL, NULL, 0);
 			if (result == IS_LONG || result == IS_DOUBLE) {
 				RETURN_TRUE;
 			} else {

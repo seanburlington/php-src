@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.8 2000/07/14 13:13:25 rasmus Exp $
+dnl $Id: config.m4,v 1.9 2000/08/02 19:49:04 rasmus Exp $
 
 PHP_ARG_WITH(ldap,whether to include LDAP support,
 [  --with-ldap[=DIR]       Include LDAP support.  DIR is the LDAP base
@@ -37,8 +37,8 @@ if test "$PHP_LDAP" != "no"; then
 	PHP_SUBST(LDAP_SHARED_LIBADD)
 
 	if test -f $LDAP_LIBDIR/liblber.a; then
-		AC_ADD_LIBRARY_WITH_PATH(ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 		AC_ADD_LIBRARY_WITH_PATH(lber, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
+		AC_ADD_LIBRARY_WITH_PATH(ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 	elif test -f $LDAP_LIBDIR/libldapssl30.so; then
 		AC_ADD_LIBRARY($LDAP_PTHREAD)
 		AC_ADD_LIBRARY_WITH_PATH(ldapssl30, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
@@ -54,8 +54,8 @@ if test "$PHP_LDAP" != "no"; then
 		AC_ADD_LIBRARY_WITH_PATH(ldap30, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 		AC_DEFINE(HAVE_NSLDAP,1,[ ])
 	elif test -f $LDAP_LIBDIR/libumich_ldap.so; then
-		AC_ADD_LIBRARY_WITH_PATH(umich_ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 		AC_ADD_LIBRARY_WITH_PATH(umich_lber, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
+		AC_ADD_LIBRARY_WITH_PATH(umich_ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 	fi  
 
 	AC_ADD_INCLUDE($LDAP_INCDIR)

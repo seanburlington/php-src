@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearcmd.php,v 1.1.2.11 2004/01/26 01:34:03 pajoye Exp $
+// $Id: pearcmd.php,v 1.1.2.12 2004/03/13 17:34:36 cellog Exp $
 
 ob_end_clean();
 /**
@@ -28,7 +28,9 @@ if ('@include_path@' != '@'.'include_path'.'@') {
     ini_set('include_path', '@include_path@');
 }
 ini_set('allow_url_fopen', true);
-set_time_limit(0);
+if (!ini_get('safe_mode')) {
+    set_time_limit(0);
+}
 ob_implicit_flush(true);
 ini_set('track_errors', true);
 ini_set('html_errors', false);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.108 2002/10/07 16:46:38 rasmus Exp $ */
+/* $Id: dir.c,v 1.109 2002/11/13 13:31:33 john Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -133,6 +133,12 @@ PHP_MINIT_FUNCTION(dir)
 	REGISTER_STRING_CONSTANT("DIRECTORY_SEPARATOR", tmpstr, CONST_CS|CONST_PERSISTENT);
 
 #ifdef HAVE_GLOB
+#ifdef GLOB_BRACE
+	REGISTER_LONG_CONSTANT("GLOB_BRACE", GLOB_BRACE, CONST_CS | CONST_PERSISTENT);
+#endif
+#ifdef GLOB_ONLYDIR
+	REGISTER_LONG_CONSTANT("GLOB_ONLYDIR", GLOB_ONLYDIR, CONST_CS | CONST_PERSISTENT);
+#endif
 #ifdef GLOB_MARK
 	REGISTER_LONG_CONSTANT("GLOB_MARK", GLOB_MARK, CONST_CS | CONST_PERSISTENT);
 #endif

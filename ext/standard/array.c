@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.198 2002/11/05 16:19:19 iliaa Exp $ */
+/* $Id: array.c,v 1.199 2002/11/13 13:31:32 john Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3250,7 +3250,7 @@ PHP_FUNCTION(array_filter)
 	}
 
 	if (Z_TYPE_PP(input) != IS_ARRAY) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The first argument shouldbe an array");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The first argument should be an array");
 		return;
 	}
 

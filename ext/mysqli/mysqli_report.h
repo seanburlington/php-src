@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_report.h,v 1.3 2004/02/26 12:33:23 sniper Exp $
+  $Id: mysqli_report.h,v 1.4 2005/01/16 19:28:55 zak Exp $
 */
 
 #ifndef __HAVE_MYSQLI_PROFILER_H__
@@ -52,3 +52,13 @@ typedef struct {
 
 
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * indent-tabs-mode: t
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

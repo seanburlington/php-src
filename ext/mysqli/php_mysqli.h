@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.42 2005/01/07 14:59:59 georg Exp $ 
+  $Id: php_mysqli.h,v 1.43 2005/01/16 19:28:55 zak Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -436,4 +436,6 @@ ZEND_EXTERN_MODULE_GLOBALS(mysqli)
  * c-basic-offset: 4
  * indent-tabs-mode: t
  * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
  */

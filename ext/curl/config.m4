@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.24 2003/05/21 15:47:01 sterling Exp $ 
+dnl $Id: config.m4,v 1.25 2003/05/22 13:08:49 derick Exp $ 
 dnl
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -46,7 +46,7 @@ if test "$PHP_CURL" != "no"; then
     AC_MSG_RESULT($curl_version_full)
     CURL_LIBS=`$CURL_CONFIG --libs`
   else
-    AC_MSG_ERROR(cURL version 7.10.2 or later is required to compile php with cURL support)
+    AC_MSG_ERROR(cURL version 7.10.5 or later is required to compile php with cURL support)
   fi
 
   PHP_ADD_INCLUDE($CURL_DIR/include)

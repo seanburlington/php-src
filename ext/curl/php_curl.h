@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.25 2001/06/25 15:14:20 sterling Exp $ */
+/* $Id: php_curl.h,v 1.25.2.1 2001/11/20 11:55:34 sterling Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -41,6 +41,7 @@ extern zend_module_entry curl_module_entry;
 #define CURLOPT_BINARYTRANSFER 19914
 
 PHP_MINIT_FUNCTION(curl);
+PHP_MSHUTDOWN_FUNCTION(curl);
 PHP_MINFO_FUNCTION(curl);
 PHP_FUNCTION(curl_version);
 PHP_FUNCTION(curl_init);
@@ -90,6 +91,7 @@ typedef struct {
 	struct _php_curl_error   err;
 	struct _php_curl_free    to_free;
 	long                     id;
+    int                      performed;
 } php_curl;
 
 

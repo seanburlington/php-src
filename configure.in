@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.468 2003/10/07 09:33:19 helly Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.469 2003/10/07 09:40:39 helly Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -137,7 +137,7 @@ if test "$YACC" != "bison -y"; then
 else
     AC_MSG_CHECKING([bison version])
     set `bison --version| grep 'GNU Bison' | cut -d ' ' -f 4 | sed -e 's/\./ /'|tr -d a-z`
-    if test "${1}" = "1" -a "${2}" != "28" -a "${2}" != "35" -a "${2}" != "75" -a "${2}" != "875"; then
+    if test "${1}" -ne "1" -o "(" "${2}" != "28" -a "${2}" != "35" -a "${2}" != "75" -a "${2}" != "875" ")"; then
       AC_MSG_WARN([You will need bison 1.28, 1.35, 1.75 or 1.875 if you want to regenerate the Zend parser (found ${1}.${2}).])
     fi
     AC_MSG_RESULT(${1}.${2} (ok))

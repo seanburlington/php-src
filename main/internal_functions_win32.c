@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.48 2001/10/17 12:50:44 phanto Exp $ */
+/* $Id: internal_functions_win32.c,v 1.49 2001/12/10 17:14:42 sebastian Exp $ */
 
 /* {{{ includes
  */
@@ -60,6 +60,9 @@
 #include "ext/wddx/php_wddx.h"
 #include "ext/mysql/php_mysql.h"
 #include "ext/mbstring/mbstring.h"
+#if HAVE_OVERLOAD
+#include "ext/overload/php_overload.h"
+#endif
 /* }}} */
 
 /* {{{ php_builtin_extensions[]
@@ -77,6 +80,9 @@ zend_module_entry *php_builtin_extensions[] = {
 #endif
 	phpext_mysql_ptr,
 	phpext_odbc_ptr,
+#if HAVE_OVERLOAD
+  phpext_overload_ptr,
+#endif
 	phpext_pcre_ptr,
 	phpext_session_ptr,
 	phpext_xml_ptr,

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_filter_api.h,v 1.3 2003/02/19 08:40:19 sniper Exp $ */
+/* $Id: php_stream_filter_api.h,v 1.4 2003/04/16 14:30:25 moriyoshi Exp $ */
 
 /* The filter API works on the principle of "Bucket-Brigades".  This is
  * partially inspired by the Apache 2 method of doing things, although
@@ -126,12 +126,12 @@ PHPAPI php_stream_filter *_php_stream_filter_alloc(php_stream_filter_ops *fops, 
 #define php_stream_is_filtered(stream)	((stream)->readfilters.head || (stream)->writefilters.head)
 
 typedef struct _php_stream_filter_factory {
-	php_stream_filter *(*create_filter)(const char *filtername, const char *filterparams, int filterparamslen, int persistent TSRMLS_DC);
+	php_stream_filter *(*create_filter)(const char *filtername, zval *filterparams, int persistent TSRMLS_DC);
 } php_stream_filter_factory;
 
 PHPAPI int php_stream_filter_register_factory(const char *filterpattern, php_stream_filter_factory *factory TSRMLS_DC);
 PHPAPI int php_stream_filter_unregister_factory(const char *filterpattern TSRMLS_DC);
-PHPAPI php_stream_filter *php_stream_filter_create(const char *filtername, const char *filterparams, int filterparamslen, int persistent TSRMLS_DC);
+PHPAPI php_stream_filter *php_stream_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC);
 
 /*
  * Local variables:

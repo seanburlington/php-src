@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.79.2.3 2001/10/27 06:28:44 sniper Exp $ */
+/* $Id: wddx.c,v 1.79.2.4 2001/11/18 01:23:14 andrei Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -80,6 +80,7 @@ typedef struct {
 typedef struct {
 	int top, max;
 	char *varname;
+	zend_bool done;
 	void **elements;
 } wddx_stack;
 
@@ -129,6 +130,7 @@ static int wddx_stack_init(wddx_stack *stack)
 	} else {
 		stack->max = STACK_BLOCK_SIZE;
 		stack->varname = NULL;
+		stack->done = 0;
 		return SUCCESS;
 	}
 }
@@ -382,7 +384,7 @@ static void php_wddx_serialize_string(wddx_packet *packet, zval *var)
 					break;
 
 				default:
-					if (iscntrl((int)*p)) {
+					if (iscntrl((int)*p) && *p != '\n') {
 						FLUSH_BUF();
 						sprintf(control_buf, WDDX_CHAR, *p);
 						php_wddx_add_chunk(packet, control_buf);
@@ -884,7 +886,8 @@ static void php_wddx_pop_element(void *user_data, const char *name)
 				}
 			}
 			efree(ent1);
-		}
+		} else
+			stack->done = 1;
 	} else if (!strcmp(name, EL_VAR) && stack->varname) {
 		efree(stack->varname);
 	}
@@ -901,7 +904,7 @@ static void php_wddx_process_data(void *user_data, const char *s, int len)
 	int decoded_len;
 	TSRMLS_FETCH();
 
-	if (!wddx_stack_is_empty(stack)) {
+	if (!wddx_stack_is_empty(stack) && !stack->done) {
 		wddx_stack_top(stack, (void**)&ent);
 		switch (Z_TYPE_P(ent)) {
 			case ST_STRING: 

@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.68 2003/08/11 23:16:53 iliaa Exp $ */
+/* $Id: url.c,v 1.69 2003/10/13 04:27:23 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -197,17 +197,17 @@ PHPAPI php_url *php_url_parse(char *str)
 	if ((p = memchr(s, ':', (e-s)))) {
 		if (!ret->port) {
 			p++;
-			if ( e-p > 5 || e-p < 1 ) { /* port cannot be longer then 5 characters */
+			if (e-p > 5) { /* port cannot be longer then 5 characters */
 				STR_FREE(ret->scheme);
 				STR_FREE(ret->user);
 				STR_FREE(ret->pass);
 				efree(ret);
 				return NULL;
+			} else if (e - p > 0) {
+				memcpy(port_buf, p, (e-p));
+				port_buf[e-p] = '\0';
+				ret->port = atoi(port_buf);
 			}
-		
-			memcpy(port_buf, p, (e-p));
-			port_buf[e-p] = '\0';
-			ret->port = atoi(port_buf);
 			p--;
 		}	
 	} else {

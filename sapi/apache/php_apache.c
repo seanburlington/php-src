@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.25 2000/12/13 13:19:56 sas Exp $ */
+/* $Id: php_apache.c,v 1.26 2000/12/14 22:16:21 dbeu Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -115,6 +115,7 @@ zend_module_entry apache_module_entry = {
 PHP_FUNCTION(apache_child_terminate)
 {
 	APLS_FETCH();
+	SLS_FETCH();
 
 	if (AP(terminate_child)) {
 		ap_child_terminate( ((request_rec *)SG(server_context)) );

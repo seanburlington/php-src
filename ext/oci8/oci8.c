@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.69 2000/04/06 21:07:40 cmv Exp $ */
+/* $Id: oci8.c,v 1.70 2000/04/21 09:54:15 thies Exp $ */
 
 /* TODO list:
  *
@@ -2482,10 +2482,10 @@ PHP_FUNCTION(ocibindbyname)
 	if ((ocitype == SQLT_CHR) && (value_sz == -1)) {
 		convert_to_string_ex(var);
 		value_sz = (*var)->value.str.len;
-		if (value_sz == 0) {
-			php_error(E_WARNING, "bindlength == 0"); /* XXX shitty message */
-			RETURN_FALSE;
-		}
+	}
+
+	if (value_sz == 0) { 
+		value_sz = 1;
 	}
 
 	convert_to_string_ex(name);

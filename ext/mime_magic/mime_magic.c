@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hartmut@six.de>                         |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.6 2002/06/11 09:37:31 hholzgra Exp $ 
+  $Id: mime_magic.c,v 1.7 2002/06/20 20:13:20 sander Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the lincense section is a little bit longer than usual:
@@ -949,6 +949,7 @@ static int magic_process(char *filename)
     unsigned char buf[HOWMANY + 1];	/* one extra for terminating '\0' */
     int nbytes = 0;		/* number of bytes read from a datafile */
     int result;
+    TSRMLS_FETCH();
 
     /*
      * first try judging the file based on its filesystem status
@@ -1035,6 +1036,7 @@ static void tryit(unsigned char *buf, int nb, int checkzmagic)
 static int fsmagic(char *filename)
 {
 	php_stream_statbuf stat_ssb;
+	TSRMLS_FETCH();
 
 	if(!php_stream_stat_path(filename, &stat_ssb)) {
 		return MIME_MAGIC_OK;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.49 2005/02/20 14:31:44 helly Exp $ */
+/* $Id: php_pdo_driver.h,v 1.50 2005/02/20 15:07:29 helly Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -35,7 +35,7 @@ struct pdo_bound_param_data;
 # define FALSE 0
 #endif
 
-#define PDO_DRIVER_API	20050214
+#define PDO_DRIVER_API	20050220
 
 enum pdo_param_type {
 	PDO_PARAM_NULL,

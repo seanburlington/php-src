@@ -21,7 +21,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.36 2000/02/14 13:09:51 hholzgra Exp $ */
+/* $Id: imap.c,v 1.37 2000/02/15 20:06:53 chagenbu Exp $ */
 
 #define IMAP41
 
@@ -143,7 +143,8 @@ function_entry imap_functions[] = {
 	PHP_FE(imap_deletemailbox,	NULL)
 	PHP_FALIAS(imap_listmailbox,imap_list,	NULL)
 	PHP_FALIAS(imap_getmailboxes,imap_list_full, NULL)
-	PHP_FALIAS(imap_scanmailbox,imap_listscan,	NULL)
+	PHP_FALIAS(imap_scanmailbox,imap_listscan, NULL)
+	PHP_FALIAS(imap_listsubscribed,imap_lsub, NULL)
 	PHP_FALIAS(imap_getsubscribed,imap_lsub_full, NULL)
 	PHP_FE(imap_subscribe,		NULL)
 	PHP_FE(imap_unsubscribe,	NULL)

@@ -19,13 +19,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ovrimos.c,v 1.21 2003/01/19 00:45:43 iliaa Exp $ */
+/* $Id: ovrimos.c,v 1.22 2003/02/17 03:07:32 sniper Exp $ */
 
-#include <php.h>
-#include <php_globals.h>
-#include <zend_API.h>
+#include "php.h"
+#include "php_globals.h"
+#include "zend_API.h"
 #include "ext/standard/php_standard.h"
 #include "ext/standard/info.h"
+
 #include <sqlcli.h> /* ovrimos header 
                      */
 

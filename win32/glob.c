@@ -34,7 +34,7 @@
  * SUCH DAMAGE.
  */
 
-/* $Id: glob.c,v 1.4 2003/01/27 16:29:47 edink Exp $ */
+/* $Id: glob.c,v 1.5 2003/02/17 03:07:32 sniper Exp $ */
 
 /*
  * glob(3) -- a superset of the one defined in POSIX 1003.2.
@@ -72,7 +72,7 @@
 #endif
 #endif
 
-#include <php.h>
+#include "php.h"
 #include <sys/stat.h>
 
 #include <ctype.h>

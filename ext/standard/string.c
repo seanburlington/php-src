@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.167 2000/12/01 01:26:42 fmk Exp $ */
+/* $Id: string.c,v 1.168 2000/12/01 01:55:31 fmk Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -331,7 +331,7 @@ PHP_FUNCTION(wordwrap)
 				}
 				l ++;
 			}
-			if (l > linelength) {
+			if (l >= linelength) {
 				pgr = l;
 				l = linelength;
 

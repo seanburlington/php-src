@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.62 2000/10/25 17:44:02 andrei Exp $ */
+/* $Id: zlib.c,v 1.63 2000/10/27 10:48:07 hholzgra Exp $ */
 #define IS_EXT_MODULE
 
 #ifndef PHP_WIN32
@@ -783,8 +783,8 @@ static ssize_t gz_writer(void *cookie, const char *buffer, size_t size) {
 	return gzwrite(((struct gz_cookie *)cookie)->gz_file,(char *)buffer,size); 
 }
 
-static int gz_seeker(void *cookie,fpos_t position, int whence) {
-	return gzseek(((struct gz_cookie *)cookie)->gz_file,position,whence); 
+static int gz_seeker(void *cookie,off_t position, int whence) {
+	return gzseek(((struct gz_cookie *)cookie)->gz_file,(z_off_t)position,whence); 
 }
 
 static int gz_closer(void *cookie) {

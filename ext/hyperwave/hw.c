@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.108 2002/07/03 06:10:28 steinm Exp $ */
+/* $Id: hw.c,v 1.109 2002/07/24 05:59:00 steinm Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -4311,7 +4311,6 @@ PHP_FUNCTION(hw_insertanchors)
 	pval **arg1, **arg2, **arg3, **arg4;
 	hw_document *hwdoc;
 	int type, docid, error, argc, count;
-	char *anchorstr;
 	char **anchorrecs;
 	char **dest;
 	char **urlprefix;

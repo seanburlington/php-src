@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.57 2002/06/13 09:05:56 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.58 2002/06/13 10:47:19 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -51,7 +51,7 @@
     therefore it's easier for the script-programmers to check, what's working how
    Can be checked with phpversion("domxml");
 */
-#define DOMXML_API_VERSION "20020607"
+#define DOMXML_API_VERSION "20020713"
 
 extern zend_module_entry domxml_module_entry;
 #define domxml_module_ptr &domxml_module_entry

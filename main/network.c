@@ -15,12 +15,14 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.34 2002/03/16 11:58:38 wez Exp $ */
+/* $Id: network.c,v 1.35 2002/03/16 12:07:27 wez Exp $ */
 
 #define PHP_SOCK_CHUNK_SIZE	8192
 #define MAX_CHUNKS_PER_READ 10
 
 #include "php.h"
+
+#include <stddef.h>
 
 #ifdef PHP_WIN32
 #include <windows.h>

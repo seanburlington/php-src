@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.66.2.6 2003/07/18 08:48:33 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.66.2.7 2003/07/18 09:15:04 gluke Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -85,6 +85,7 @@
 #define UDM_PARAM_GROUPBYSITE		27
 #define UDM_PARAM_SITEID		28
 #define UDM_PARAM_DETECT_CLONES		29
+#define UDM_PARAM_SORT_ORDER		30
 
 /* udm_add_search_limit constants */
 #define UDM_LIMIT_URL		1
@@ -322,6 +323,7 @@ DLEXPORT PHP_MINIT_FUNCTION(mnogosearch)
 	REGISTER_LONG_CONSTANT("UDM_PARAM_QUERY",	UDM_PARAM_QUERY,CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("UDM_PARAM_SITEID",	UDM_PARAM_SITEID,CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("UDM_PARAM_DETECT_CLONES",UDM_PARAM_DETECT_CLONES,CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("UDM_PARAM_SORT_ORDER",UDM_PARAM_SORT_ORDER,CONST_CS | CONST_PERSISTENT);
 	
 	/* udm_add_search_limit constants */
 	REGISTER_LONG_CONSTANT("UDM_LIMIT_CAT",		UDM_LIMIT_CAT,CONST_CS | CONST_PERSISTENT);
@@ -1080,6 +1082,13 @@ DLEXPORT PHP_FUNCTION(udm_set_agent_param)
 					break;
 			}
 			
+			break;
+#endif
+
+#if UDM_VERSION_ID >= 30214
+		case UDM_PARAM_SORT_ORDER: 
+			UdmVarListReplaceStr(&Agent->Conf->Vars,"s",val);
+		
 			break;
 #endif
 

@@ -30,7 +30,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.12 1999/04/27 10:00:54 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.13 1999/05/20 12:06:43 andi Exp $ */
 
 #define DEBUG_CFG_PARSER 1
 #include "php.h"
@@ -382,25 +382,25 @@ statement:
 			php3_dl(&$3,MODULE_PERSISTENT,&dummy);
 		}
 	|	T_ZEND_EXTENSION '=' string {
-#if !defined(ZTS) && !defined(ZEND_DEBUG)
+#if !defined(ZTS) && !ZEND_DEBUG
 			zend_load_extension($3.value.str.val);
 #endif
 			free($3.value.str.val);
 		}
 	|	T_ZEND_EXTENSION_TS '=' string { 
-#if defined(ZTS) && !defined(ZEND_DEBUG)
+#if defined(ZTS) && !ZEND_DEBUG
 			zend_load_extension($3.value.str.val);
 #endif
 			free($3.value.str.val);
 		}
 	|	T_ZEND_EXTENSION_DEBUG '=' string { 
-#if !defined(ZTS) && defined(ZEND_DEBUG)
+#if !defined(ZTS) && ZEND_DEBUG
 			zend_load_extension($3.value.str.val);
 #endif
 			free($3.value.str.val);
 		}
 	|	T_ZEND_EXTENSION_DEBUG_TS '=' string { 
-#if defined(ZTS) && defined(ZEND_DEBUG)
+#if defined(ZTS) && ZEND_DEBUG
 			zend_load_extension($3.value.str.val);
 #endif
 			free($3.value.str.val);

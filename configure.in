@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.418 2003/02/10 17:09:47 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.419 2003/02/11 21:11:41 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1065,6 +1065,8 @@ if test "$enable_debug" != "yes"; then
   PHP_SET_LIBTOOL_VARIABLE([--silent])
 fi
 
+dnl libtool 1.4.3 needs this.
+PHP_SET_LIBTOOL_VARIABLE([--preserve-dup-deps])
 
 test -z "$PHP_COMPILE" && PHP_COMPILE='$(LIBTOOL) --mode=compile $(COMPILE) -c $<'
 test -z "$CXX_PHP_COMPILE" && CXX_PHP_COMPILE='$(LIBTOOL) --mode=compile $(CXX_COMPILE) -c $<'

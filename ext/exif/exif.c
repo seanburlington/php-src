@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.80 2002/04/01 08:05:17 mfischer Exp $ */
+/* $Id: exif.c,v 1.81 2002/04/03 19:50:02 derick Exp $ */
 
 /*  ToDos
  *
@@ -86,6 +86,11 @@ typedef unsigned char uchar;
 	#define FALSE 0
 #endif
 
+#ifndef MB_CUR_MAX
+	#define MB_CUR_MAX 8
+	/* Should be a library constant */
+#endif
+
 #ifndef max
 	#define max(a,b) ((a)>(b) ? (a) : (b))
 #endif
@@ -102,7 +107,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.3 $Id: exif.c,v 1.80 2002/04/01 08:05:17 mfischer Exp $"
+#define EXIF_VERSION "1.3 $Id: exif.c,v 1.81 2002/04/03 19:50:02 derick Exp $"
 
 PHP_MINFO_FUNCTION(exif);
 

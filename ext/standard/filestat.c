@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.99 2002/07/08 12:52:22 derick Exp $ */
+/* $Id: filestat.c,v 1.100 2002/07/26 08:04:42 sesser Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -552,6 +552,10 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 	int rmask=S_IROTH, wmask=S_IWOTH, xmask=S_IXOTH; /* access rights defaults to other */
 	char *stat_sb_names[13]={"dev", "ino", "mode", "nlink", "uid", "gid", "rdev",
 			      "size", "atime", "mtime", "ctime", "blksize", "blocks"};
+
+	if (PG(safe_mode) &&(!php_checkuid(filename, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+		RETURN_FALSE;
+	}
 
 	if (php_check_open_basedir(filename TSRMLS_CC)) {
 		RETURN_FALSE;

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9 2004/08/11 21:04:36 helly Exp $
+dnl $Id: config.m4,v 1.10 2004/08/15 13:43:56 helly Exp $
 dnl
 
 AC_DEFUN(MYSQL_LIB_CHK, [
@@ -12,8 +12,8 @@ AC_DEFUN(MYSQL_LIB_CHK, [
   done
 ])
 
-PHP_ARG_WITH(pdo_mysql, for MySQL support,
-[  --with-pdo_mysql[=DIR]       Include MySQL support. DIR is the MySQL base directory.])
+PHP_ARG_WITH(pdo-mysql, for MySQL support,
+[  --with-pdo-smysql[=DIR]       Include MySQL support. DIR is the MySQL base directory.])
 
 if test "$PHP_PDO_MYSQL" != "no"; then
   AC_DEFINE(HAVE_MYSQL, 1, [Whether you have MySQL])

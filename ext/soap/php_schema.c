@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.c,v 1.53 2005/03/22 10:19:07 dmitry Exp $ */
+/* $Id: php_schema.c,v 1.54 2005/04/03 15:39:55 gschlossnagle Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -1890,7 +1890,25 @@ static int schema_attribute(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr attrType, sdl
 		}
 		attr = attr->next;
 	}
-
+	if(newAttr->form == XSD_FORM_DEFAULT) {
+  		xmlNodePtr parent = attrType->parent;
+  		while(parent) {
+			if(node_is_equal_ex(parent, "schema", SCHEMA_NAMESPACE)) {
+				xmlAttrPtr def;
+				def = get_attribute(parent->properties, "attributeFormDefault");
+				if(def == NULL || strncmp(def->children->content, "qualified", sizeof("qualified"))) {
+					newAttr->form = XSD_FORM_UNQUALIFIED;
+				} else {
+					newAttr->form = XSD_FORM_QUALIFIED;
+				}
+				break;
+			}
+			parent = parent->parent;
+  		}
+		if(parent == NULL) {
+			newAttr->form = XSD_FORM_UNQUALIFIED;
+		}	
+	}
 	trav = attrType->children;
 	if (trav != NULL && node_is_equal(trav, "annotation")) {
 		/* TODO: <annotation> support */

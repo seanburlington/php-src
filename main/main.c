@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.295 2000/08/20 18:12:16 andi Exp $ */
+/* $Id: main.c,v 1.296 2000/08/20 19:56:24 andi Exp $ */
 
 
 #include <stdio.h>
@@ -1148,7 +1148,7 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 			&& primary_file->filename) {
 		char *filename;
 
-		filename = strrchr(primary_file->filename, PHP_SEPARATOR);
+		filename = strrchr(primary_file->filename, PHP_DIR_SEPARATOR);
 		
 		if (filename) {
 			filename++;

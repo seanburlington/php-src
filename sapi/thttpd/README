@@ -1,5 +1,5 @@
 README FOR THTTPD MODULE (by Sascha Schumann)        
-($Date: 2000/08/21 20:23:02 $)
+($Date: 2000/11/13 12:39:15 $)
 
 	This is a SAPI module for PHP 4.0 supporting thttpd, the tiny,
 	turbo, throttling HTTP server by Jef Poskanzer.
@@ -11,6 +11,10 @@ README FOR THTTPD MODULE (by Sascha Schumann)
 	This is a functional and stable module (it runs a large application
 	like IMP 2.2.0 without any problems). Its original intention was to
 	demonstrate the ability of PHP to work in every web server environment.
+
+	NOTE: All requests will be serialized. That means, one long running
+	      script will block all other requests. Choose another web-server,
+	      if you want to execute arbitrary scripts.
 
 REQUIRED DOWNLOADS
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.86 2000/04/20 17:58:25 andi Exp $ */
+/* $Id: php.h,v 1.87 2000/04/27 18:37:02 zeev Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -242,12 +242,19 @@ extern char **environ;
 #endif
 
 extern void phperror(char *error);
-extern PHPAPI void php_error(int type, const char *format, ...);
 extern PHPAPI int php_write(void *buf, int size);
 extern PHPAPI int php_printf(const char *format, ...);
 extern void php_log_err(char *log_message);
 extern int Debug(char *format, ...);
 extern int cfgparse(void);
+
+#if ZEND_NEW_ERROR_HANDLING
+#define php_error zend_error
+#else
+extern PHPAPI void php_error_cb(int type, const char *format, ...);
+#define php_error php_error_cb
+#endif
+
 
 extern void html_putc(char c);
 

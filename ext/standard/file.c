@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.264 2002/09/27 23:42:38 wez Exp $ */
+/* $Id: file.c,v 1.265 2002/09/28 13:04:47 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -761,6 +761,7 @@ PHP_FUNCTION(stream_select)
 
 	RETURN_LONG(retval);
 }
+/* }}} */
 
 
 /* {{{ stream_context related functions */

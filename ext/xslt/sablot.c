@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.71 2003/01/18 19:51:20 iliaa Exp $ */
+/* $Id: sablot.c,v 1.72 2003/01/18 21:31:08 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1659,11 +1659,11 @@ static MH_ERROR error_log(void *user_data, SablotHandle proc, MH_ERROR code, MH_
 static MH_ERROR error_print(void *user_data, SablotHandle proc, MH_ERROR code, MH_LEVEL level, char **fields)
 {
 	php_xslt *handle = (php_xslt *) user_data;   /* A PHP-XSLT processor */
+	TSRMLS_FETCH();
 	
 	if (XSLT_ERROR(handle)) {
 		zval   *argv[4];   /* Arguments to the error function */
 		zval   *retval;    /* Return value from the error function */
-        TSRMLS_FETCH();
         
 		/* Allocate and initialize */
 		MAKE_STD_ZVAL(argv[0]);

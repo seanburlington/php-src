@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.68 2000/09/26 10:58:56 sas Exp $ */
+/* $Id: mod_php4.c,v 1.69 2000/09/29 19:08:17 sas Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -62,6 +62,8 @@
 #if HAVE_MOD_DAV
 # include "mod_dav.h"
 #endif
+
+#undef shutdown
 
 int apache_php_module_main(request_rec *r, int display_source_mode CLS_DC ELS_DC PLS_DC SLS_DC);
 void php_save_umask(void);

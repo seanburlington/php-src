@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.107 2000/07/25 10:54:07 stas Exp $ */
+/* $Id: info.c,v 1.108 2000/07/26 05:41:38 sterling Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -389,6 +389,7 @@ void php_print_credits(int flag)
 		CREDIT_LINE("Apache", "Rasmus Lerdorf, Stig Bakken, David Sklar");
 		CREDIT_LINE("Assert", "Thies C. Arntzen");
 		CREDIT_LINE("BC Math", "Andi Gutmans");
+		CREDIT_LINE("CURL", "Sterling Hughes");
 		CREDIT_LINE("CyberCash", "Evan Klinger");
 		CREDIT_LINE("Win32 COM", "Zeev Suraski");
 		CREDIT_LINE("DAV", "Stig Bakken");

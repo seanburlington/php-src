@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.30 2003/09/16 16:53:11 cox Exp $
+// $Id: System.php,v 1.31 2003/12/06 22:07:49 cellog Exp $
 //
 
 require_once 'PEAR.php';
@@ -48,7 +48,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.30 $
+* @version  $Revision: 1.31 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -66,7 +66,7 @@ class System
     function _parseArgs($argv, $short_options, $long_options = null)
     {
         if (!is_array($argv) && $argv !== null) {
-            $argv = preg_split('/\s+/', ': '.$argv);
+            $argv = preg_split('/\s+/', $argv);
         }
         return Console_Getopt::getopt($argv, $short_options);
     }

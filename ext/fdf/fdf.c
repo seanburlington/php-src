@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.17 2000/02/02 11:18:01 steinm Exp $ */
+/* $Id: fdf.c,v 1.18 2000/02/17 20:23:59 zeev Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -26,6 +26,22 @@
 #if !PHP_31 && defined(THREAD_SAFE)
 #undef THREAD_SAFE
 #endif
+
+
+#if 0
+	if((NULL != SG(request_info).content_type) && (0 == strcmp(SG(request_info).content_type, "application/vnd.fdf"))) {
+		pval *tmp;
+
+		ALLOC_ZVAL(tmp);
+		tmp->value.str.len = SG(request_info).post_data_length;
+		tmp->value.str.val = estrndup(SG(request_info).post_data, SG(request_info).post_data_length);
+		tmp->type = IS_STRING;
+		INIT_PZVAL(tmp);
+		zend_hash_add(&EG(symbol_table), "HTTP_FDF_DATA", sizeof("HTTP_FDF_DATA"), &tmp, sizeof(pval *),NULL);
+
+	} else {
+#endif
+
 
 #include "php.h"
 #include "ext/standard/head.h"

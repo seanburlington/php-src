@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.204 2001/07/05 10:53:15 wez Exp $ */
+/* $Id: string.c,v 1.205 2001/07/09 17:44:07 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -31,7 +31,6 @@
 # include <locale.h>
 #endif
 #ifdef HAVE_LANGINFO_H
-#define __USE_GNU
 # include <langinfo.h>
 #endif
 #include "scanf.h"

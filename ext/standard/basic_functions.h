@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.51 2000/03/16 16:02:23 andrei Exp $ */
+/* $Id: basic_functions.h,v 1.52 2000/05/28 16:19:45 sas Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -162,6 +162,10 @@ typedef struct {
 	php_uint32   state[MT_N+1];  /* state vector + 1 extra to not violate ANSI C */
 	php_uint32   *next;       /* next random value is computed from here */
 	int      left;        /* can *next++ this many times before reloading */
+
+	/* syslog.c */
+	int syslog_started;
+	char *syslog_device;
 } php_basic_globals;
 
 #ifdef ZTS

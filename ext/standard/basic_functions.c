@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.13 2003/04/23 02:37:29 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.14 2003/05/16 01:09:10 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2376,7 +2376,7 @@ PHP_FUNCTION(ini_set)
 }
 /* }}} */
 
-/* {{{ proto string ini_restore(string varname)
+/* {{{ proto void ini_restore(string varname)
    Restore the value of a configuration option specified by varname */
 PHP_FUNCTION(ini_restore)
 {
@@ -2439,7 +2439,7 @@ PHP_FUNCTION(get_include_path)
 
 /* }}} */
 
-/* {{{ proto string restore_include_path()
+/* {{{ proto void restore_include_path()
    Restore the value of the include_path configuration option */
 
 PHP_FUNCTION(restore_include_path)

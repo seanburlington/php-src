@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.35 1999/12/10 14:27:19 andrei Exp $ */
+/* $Id: xml.c,v 1.36 1999/12/14 18:37:14 joey Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -906,7 +906,7 @@ void _xml_unparsedEntityDeclHandler(void *userData,
 	xml_parser *parser = (xml_parser *)userData;
 
 	if (parser && parser->unparsedEntityDeclHandler) {
-		zval *retval, *args[5];
+		zval *retval, *args[6];
 
 		args[0] = _xml_resource_zval(parser->index);
 		args[1] = _xml_xmlchar_zval(entityName, 0, parser->target_encoding);

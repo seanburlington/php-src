@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.20 2003/07/05 08:25:25 wez Exp $ */
+/* $Id: plain_wrapper.c,v 1.21 2003/08/27 01:10:10 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -100,7 +100,9 @@ PHPAPI php_stream *_php_stream_fopen(const char *filename, const char *mode, cha
 		return NULL;
 	}
 	
-	realpath = expand_filepath(filename, NULL TSRMLS_CC);
+	if ((realpath = expand_filepath(filename, NULL TSRMLS_CC)) == NULL) {
+		return NULL;
+	}
 
 	if (persistent) {
 		spprintf(&persistent_id, 0, "streams_stdio_%d_%s", open_flags, realpath);

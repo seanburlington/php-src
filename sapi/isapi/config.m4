@@ -1,11 +1,10 @@
-dnl ## $Id: config.m4,v 1.1 1999/09/27 16:34:28 ssb Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.2 1999/09/28 12:08:34 ssb Exp $ -*- sh -*-
 
 AC_MSG_CHECKING(for Zeus ISAPI support)
 AC_ARG_WITH(zeus,
 [  --with-zeus=DIR         Build PHP as an ISAPI module for use with Zeus.],
 [
 	if test "$withval" != "no"; then
-		SAPI_TARGET=libphp4_isapi.so
 		AC_MSG_RESULT(yes)
 		if test "${enable_thread_safety}" != "yes"; then
 			AC_MSG_ERROR(You must specify --enable-thread-safety to build as an ISAPI module)
@@ -16,6 +15,7 @@ AC_ARG_WITH(zeus,
 		if ! test -f "$zeuspath/web/include/httpext.h"; then
 			AC_MSG_ERROR(Unable to find httpext.h in $zeuspath/web/include)
 		fi
+		AC_DEFINE(WITH_ZEUS)
 		AC_ADD_INCLUDE($zeuspath/web/include)
 		PHP_SAPI=isapi
 		SAPI_TARGET=php4isapi.so

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: thttpd.c,v 1.86 2003/05/12 01:29:21 sas Exp $ */
+/* $Id: thttpd.c,v 1.87 2003/05/16 22:32:22 sas Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -633,8 +633,10 @@ static off_t thttpd_real_php_request(httpd_conn *hc, int show_source TSRMLS_DC)
 	TG(hc) = hc;
 	hc->bytes_sent = 0;
 
-	if (hc->method == METHOD_POST)
+	if (hc->contentlength != -1) {
 		hc->should_linger = 1;
+		hc->do_keep_alive = 0;
+	}
 	
 	if (hc->contentlength != -1
 			&& SIZEOF_UNCONSUMED_BYTES() < hc->contentlength) {

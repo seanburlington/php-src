@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.118 2003/05/19 15:35:06 derick Exp $ */
+/* $Id: basic_functions.h,v 1.119 2003/05/20 16:46:53 sterling Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -148,7 +148,9 @@ typedef struct {
 	ulong strtok_len;
 	char str_ebuf[40];
 	zval **array_walk_func_name;
+	zend_function *array_walk_func_ptr;
 	zval **user_compare_func_name;
+	zend_function *user_compare_func_ptr;
 	zend_llist *user_tick_functions;
 
 	zval *active_ini_file_section;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: http.c,v 1.11 2004/01/08 08:17:32 andi Exp $ */
+/* $Id: http.c,v 1.12 2004/02/20 20:38:14 pollita Exp $ */
 
 #include "php_http.h"
 #include "php_ini.h"
@@ -59,9 +59,9 @@ PHPAPI int php_url_encode_hash_ex(HashTable *ht, smart_str *formstr,
 			/* We don't want that trailing NULL */
 			key_len -= 1;
 		}
-	
+
 		/* handling for private & protected object properties */
-		if (*key == '\0' && type != NULL) {
+		if (key && *key == '\0' && type != NULL) {
 			char *tmp;
 
 			zend_object *zobj = zend_objects_get_address(type TSRMLS_CC);

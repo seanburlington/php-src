@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: php_sqlite.h,v 1.30 2004/05/13 14:19:10 stas Exp $ 
+   $Id: php_sqlite.h,v 1.31 2005/01/10 07:13:56 helly Exp $ 
 */
 
 #ifndef PHP_SQLITE_H
@@ -65,6 +65,7 @@ PHP_FUNCTION(sqlite_seek);
 PHP_FUNCTION(sqlite_rewind);
 PHP_FUNCTION(sqlite_next);
 PHP_FUNCTION(sqlite_prev);
+PHP_FUNCTION(sqlite_key);
 
 PHP_FUNCTION(sqlite_valid);
 PHP_FUNCTION(sqlite_has_prev);

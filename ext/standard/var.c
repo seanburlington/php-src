@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.150.2.15 2004/09/24 21:57:18 helly Exp $ */
+/* $Id: var.c,v 1.150.2.16 2004/10/08 19:03:14 helly Exp $ */
 
 
 /* {{{ includes 
@@ -725,7 +725,7 @@ PHP_FUNCTION(unserialize)
 		}
 		PHP_VAR_UNSERIALIZE_DESTROY(var_hash);
 	} else {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Argument is not an string");
+		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Argument is not a string");
 		RETURN_FALSE;
 	}
 }

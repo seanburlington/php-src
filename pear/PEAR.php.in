@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php.in,v 1.22 2001/04/16 21:45:21 ssb Exp $
+// $Id: PEAR.php.in,v 1.23 2001/04/17 01:17:58 ssb Exp $
 //
 
 define('PEAR_ERROR_RETURN', 1);
@@ -399,7 +399,11 @@ class PEAR_Error
             trigger_error($this->getMessage(), $this->level);
         }
         if ($this->mode & PEAR_ERROR_DIE) {
-            die($this->getMessage());
+            $msg = $this->getMessage();
+            if (substr($msg, -1) != "\n") {
+                $msg .= "\n";
+            }
+            die($msg);
         }
         if ($this->mode & PEAR_ERROR_CALLBACK) {
             if (is_string($this->callback) && strlen($this->callback)) {

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.353 2002/06/11 09:35:50 edink Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.354 2002/06/16 17:38:19 andi Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1108,7 +1108,7 @@ PHP_ADD_SOURCES(Zend, \
     zend_ini.c zend_qsort.c zend_multibyte.c)
 
 if test -r "$abs_srcdir/Zend/zend_objects.c"; then
-  PHP_ADD_SOURCES(Zend, zend_objects.c zend_object_handlers.c zend_objects_API.c)
+  PHP_ADD_SOURCES(Zend, zend_objects.c zend_object_handlers.c zend_objects_API.c zend_mm.c)
 fi
 
 dnl Selectively disable optimization due to high RAM usage during

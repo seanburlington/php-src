@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_saproxy.c,v 1.7 2004/03/08 21:17:39 helly Exp $ */
+/* $Id: com_saproxy.c,v 1.8 2004/04/13 17:51:36 wez Exp $ */
 
 /* This module implements a SafeArray proxy which is used internally
  * by the engine when resolving multi-dimensional array accesses on
@@ -58,16 +58,14 @@ typedef struct {
 
 #define SA_FETCH(zv)			(php_com_saproxy*)zend_object_store_get_object(zv TSRMLS_CC)
 
-static zval *saproxy_property_read(zval *object, zval *member, zend_bool silent TSRMLS_DC)
+static zval *saproxy_property_read(zval *object, zval *member, int type TSRMLS_DC)
 {
 	zval *return_value;
 	
 	MAKE_STD_ZVAL(return_value);
 	ZVAL_NULL(return_value);
 
-	if (!silent) {
-		php_com_throw_exception(E_INVALIDARG, "safearray has no properties" TSRMLS_CC);
-	}
+	php_com_throw_exception(E_INVALIDARG, "safearray has no properties" TSRMLS_CC);
 
 	return return_value;
 }

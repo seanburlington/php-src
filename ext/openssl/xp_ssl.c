@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.8 2003/06/15 23:34:46 edink Exp $ */
+/* $Id: xp_ssl.c,v 1.9 2003/09/21 18:02:07 wez Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -482,6 +482,7 @@ static int php_openssl_sockop_cast(php_stream *stream, int castas, void **ret TS
 				return FAILURE;
 			}
 			return SUCCESS;
+		case PHP_STREAM_AS_FD_FOR_SELECT:
 		case PHP_STREAM_AS_FD:
 		case PHP_STREAM_AS_SOCKETD:
 			if (sslsock->ssl_active) {

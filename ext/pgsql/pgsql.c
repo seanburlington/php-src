@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.244.2.20 2003/07/22 22:06:05 helly Exp $ */
+/* $Id: pgsql.c,v 1.244.2.21 2003/08/05 13:34:20 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -811,6 +811,7 @@ static void php_pgsql_get_link_info(INTERNAL_FUNCTION_PARAMETERS, int entry_type
 		Z_STRLEN_P(return_value) = 0;
 		Z_STRVAL_P(return_value) = (char *) estrdup("");
 	}
+	Z_TYPE_P(return_value) = IS_STRING;
 }
 /* }}} */
 

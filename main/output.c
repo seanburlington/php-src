@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.142.2.14 2003/07/31 19:48:05 iliaa Exp $ */
+/* $Id: output.c,v 1.142.2.15 2003/08/08 23:44:04 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -247,7 +247,9 @@ PHPAPI void php_end_ob_buffer(zend_bool send_buffer, zend_bool just_flush TSRMLS
 			}
 		}
 		OG(ob_lock) = 0;
-		zval_ptr_dtor(&OG(active_ob_buffer).output_handler);
+		if (!just_flush) {
+			zval_ptr_dtor(&OG(active_ob_buffer).output_handler);
+		}
 		orig_buffer->refcount -=2;
 		if (orig_buffer->refcount <= 0) { /* free the zval */
 			zval_dtor(orig_buffer);

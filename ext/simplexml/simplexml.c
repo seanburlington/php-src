@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.11 2003/05/20 08:48:18 derick Exp $ */
+/* $Id: simplexml.c,v 1.12 2003/05/20 11:17:04 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -264,6 +264,15 @@ sxe_property_delete(zval *object, zval *member TSRMLS_DC)
 }
 /* }}} */
 
+/* {{{ sxe_properties_get()
+ */
+static HashTable *
+sxe_properties_get(zval *object TSRMLS_DC)
+{
+	return NULL;
+}
+/* }}} */
+
 /* {{{ sxe_objects_compare()
  */
 static int
@@ -318,6 +327,17 @@ sxe_class_entry_get(zval *object TSRMLS_DC)
 }
 /* }}} */
 
+/* {{{ sxe_class_name_get()
+ */
+static int
+sxe_class_name_get(zval *object, char** class_name, zend_uint *class_name_len, int parent TSRMLS_DC)
+{
+	*class_name = estrdup("simplexml_element");
+	*class_name_len = sizeof("simplexml_element");
+	return 0;
+}
+/* }}} */
+
 
 static zend_object_handlers sxe_object_handlers[] = {
 	ZEND_OBJECTS_STORE_HANDLERS,
@@ -329,12 +349,12 @@ static zend_object_handlers sxe_object_handlers[] = {
 	NULL,
 	sxe_property_exists,
 	sxe_property_delete,
-	NULL,
+	sxe_properties_get,
 	sxe_method_get,
 	sxe_call_method,
 	sxe_constructor_get,
 	sxe_class_entry_get,
-	NULL,
+	sxe_class_name_get,
 	sxe_objects_compare
 };
 
@@ -515,7 +535,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.11 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.12 $");
 	php_info_print_table_end();
 
 }

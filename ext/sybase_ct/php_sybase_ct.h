@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sybase_ct.h,v 1.17 2004/01/08 17:32:54 sniper Exp $ */
+/* $Id: php_sybase_ct.h,v 1.18 2004/01/25 20:03:10 thekid Exp $ */
 
 #ifndef PHP_SYBASE_CT_H
 #define PHP_SYBASE_CT_H
@@ -65,6 +65,7 @@ ZEND_BEGIN_MODULE_GLOBALS(sybase)
 	long default_link;
 	long num_links,num_persistent;
 	long max_links,max_persistent;
+	long login_timeout;
 	long allow_persistent;
 	char *appname;
 	char *hostname;
@@ -83,6 +84,7 @@ typedef struct {
 	int dead;
 	int active_result_index;
 	long affected_rows;
+	zval *callback_name;
 } sybase_link;
 
 #define SYBASE_ROWS_BLOCK 128

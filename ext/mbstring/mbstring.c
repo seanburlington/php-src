@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.212 2004/03/10 20:55:42 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.213 2004/03/12 01:59:46 iliaa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -2249,7 +2249,7 @@ PHP_FUNCTION(mb_list_encodings)
 	i = 0;
 	encodings = mbfl_get_supported_encodings();
 	while ((encoding = encodings[i++]) != NULL) {
-		add_next_index_string(return_value, encoding->name, 1);
+		add_next_index_string(return_value, (char *) encoding->name, 1);
 	}
 }
 /* }}} */

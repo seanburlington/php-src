@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.131 2002/04/27 18:41:38 sas Exp $ */
+/* $Id: zlib.c,v 1.132 2002/04/27 23:37:17 sas Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -75,11 +75,11 @@
 
 #include "ext/standard/php_smart_str.h"
 
-#define ADD_CL_HEADER(len) do {								\
+#define ADD_CL_HEADER(xln) do {								\
 			smart_str str = {0};							\
 															\
 			smart_str_appends(&str, "Content-Length: ");	\
-			smart_str_append_long(&str, len);				\
+			smart_str_append_long(&str, xln);				\
 			smart_str_0(&str);								\
 			sapi_add_header(str.c, str.len, 0);				\
 		} while(0)

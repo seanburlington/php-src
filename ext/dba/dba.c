@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.52 2002/11/05 15:01:20 helly Exp $ */
+/* $Id: dba.c,v 1.53 2002/11/06 04:16:17 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -184,6 +184,9 @@ static dba_handler handler[] = {
 #endif
 #if DBA_DB3
 	DBA_HND(db3)
+#endif
+#if DBA_FLATFILE
+	DBA_HND(flatfile)
 #endif
 	{ NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL }
 };

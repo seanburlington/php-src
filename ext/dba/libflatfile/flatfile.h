@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dbm.h,v 1.1 2002/11/06 01:47:06 helly Exp $ */
+/* $Id: flatfile.h,v 1.1 2002/11/06 04:16:18 helly Exp $ */
 
 #ifndef PHP_LIBDBM_H
 #define PHP_LIBDBM_H
@@ -27,6 +27,8 @@ typedef struct {
 } datum;
 
 typedef struct {
+	char *lockfn;
+	int lockfd;
 	php_stream *fp;
 	long CurrentFlatFilePos;
 	datum nextkey;

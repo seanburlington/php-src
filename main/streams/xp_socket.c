@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.16 2003/11/27 17:39:01 wez Exp $ */
+/* $Id: xp_socket.c,v 1.17 2003/11/28 23:20:23 wez Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -203,9 +203,15 @@ static int php_sockop_set_option(php_stream *stream, int option, int value, void
 		case PHP_STREAM_OPTION_CHECK_LIVENESS:
 			{
 				fd_set rfds;
-				struct timeval tv = {0,0};
+				struct timeval tv;
 				char buf;
 				int alive = 1;
+
+				if (sock->timeout.tv_sec == -1) {
+					tv.tv_sec = FG(default_socket_timeout);
+				} else {
+					tv = sock->timeout;
+				}
 
 				if (sock->socket == -1) {
 					alive = 0;

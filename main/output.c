@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.143 2002/12/30 19:39:30 iliaa Exp $ */
+/* $Id: output.c,v 1.144 2002/12/31 00:04:51 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -409,7 +409,7 @@ static int php_ob_init_named(uint initial_size, uint block_size, char *handler_n
 {
 	if (OG(ob_nesting_level)>0) {
 #ifdef HAVE_ZLIB
-		if (!strncmp(handler_name, "ob_gzhandler", sizeof("ob_gzhandler")) && php_ob_gzhandler_check(TSRMLS_CC)) {
+		if (!strncmp(handler_name, "ob_gzhandler", sizeof("ob_gzhandler")) && php_ob_gzhandler_check(TSRMLS_C)) {
 			return FAILURE;
 		}
 #endif

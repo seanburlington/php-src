@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.8 2003/02/28 01:47:28 wez Exp $ */
+/* $Id: plain_wrapper.c,v 1.9 2003/03/01 17:27:23 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -203,6 +203,7 @@ PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode STREAMS_DC
 	php_stream *stream;
 	
 	self = emalloc_rel_orig(sizeof(*self));
+	memset(self, 0, sizeof(*self));
 	self->file = NULL;
 	self->is_pipe = 0;
 	self->lock_flag = LOCK_UN;
@@ -246,6 +247,7 @@ PHPAPI php_stream *_php_stream_fopen_from_file(FILE *file, const char *mode STRE
 	php_stream *stream;
 	
 	self = emalloc_rel_orig(sizeof(*self));
+	memset(self, 0, sizeof(*self));
 	self->file = file;
 	self->is_pipe = 0;
 	self->lock_flag = LOCK_UN;
@@ -289,6 +291,7 @@ PHPAPI php_stream *_php_stream_fopen_from_pipe(FILE *file, const char *mode STRE
 	php_stream *stream;
 
 	self = emalloc_rel_orig(sizeof(*self));
+	memset(self, 0, sizeof(*self));
 	self->file = file;
 	self->is_pipe = 1;
 	self->lock_flag = LOCK_UN;

@@ -17,7 +17,7 @@
 // | Authors: Andrei Zmievski <andrei@ispi.net>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: Getopt.php,v 1.5 2001/11/11 03:59:22 mfischer Exp $
+// $Id: Getopt.php,v 1.6 2001/11/11 04:09:08 mfischer Exp $
 
 require_once 'PEAR.php';
 
@@ -75,7 +75,7 @@ class Console_Getopt {
             sort($long_options);
 
         reset($args);
-        while (list(, $arg) = each($args)) {
+        while (list($i, $arg) = each($args)) {
 
             /* The special element '--' means explicit end of options. Treat the
                rest of the arguments as non-options and end the loop. */
@@ -84,9 +84,9 @@ class Console_Getopt {
                 break;
             }
 
-            if ($arg{0} != '-' || ($arg{1} == '-' && !$long_options)) {
+            if ($arg{0} != '-' || (strlen($arg) > 1 && $arg{1} == '-' && !$long_options)) {
                 $non_opts[] = $arg;
-            } else if ($arg{1} == '-') {
+            } else if (strlen($arg) > 1 && $arg{1} == '-') {
                 $error = Console_Getopt::_parseLongOption(substr($arg, 2), $long_options, $opts, $args);
                 if (PEAR::isError($error))
                     return $error;

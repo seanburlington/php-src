@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 2001/09/05 13:18:06 sniper Exp $
+dnl $Id: config.m4,v 1.6 2001/09/26 10:45:21 eriksson Exp $
 dnl vim: syntax=config
 
 dnl My first config.m4 - now much improved... :-)
@@ -28,6 +28,7 @@ if test "$PHP_SATELLITE" != "no"; then
       dnl Save directory and report result
       ORBIT_PATH=$i
       AC_MSG_RESULT(found in $i)
+      break
 
     fi
   done

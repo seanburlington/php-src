@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.65 2003/08/18 12:27:00 iliaa Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.66 2003/08/18 14:02:28 iliaa Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -41,7 +41,7 @@ AC_CONFIG_HEADER(main/php_config.h)
 MAJOR_VERSION=4
 MINOR_VERSION=3
 RELEASE_VERSION=3
-EXTRA_VERSION="RC4"
+EXTRA_VERSION="RC4-dev"
 VERSION="$MAJOR_VERSION.$MINOR_VERSION.$RELEASE_VERSION$EXTRA_VERSION"
 
 dnl Define where extension directories are located in the configure context

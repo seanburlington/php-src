@@ -34,7 +34,7 @@
 # merged into the output archive.  The prefix used is the same as the
 # directory name with "/" replaced by "_" and a "_" at the end.
 #
-# $Id: armerge,v 1.5 1999/06/01 17:53:15 sas Exp $
+# $Id: armerge,v 1.6 1999/07/03 17:44:20 sas Exp $
 #
 
 die() {
@@ -59,7 +59,7 @@ mkdir $tmpdir || die "can not create temporary directory $tmpdir"
 ( cd $tmpdir;
 
 for archive in $in_archives; do
-    files=`ar t $cwd/$archive`
+    files=`ar t $cwd/$archive | sed -e 's/__\.SYMDEF SORTED//'`
     ar x $cwd/$archive
     dir=`dirname $archive`
     if test "$dir" = "."; then

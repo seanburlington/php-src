@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.101 2001/05/06 01:34:56 rasmus Exp $ */
+/* $Id: pgsql.c,v 1.102 2001/05/06 06:33:48 eschmid Exp $ */
 
 #include <stdlib.h>
 
@@ -875,7 +875,7 @@ PHP_FUNCTION(pg_cmdtuples)
 /* }}} */
 
 /* {{{ proto int pg_last_notice(int connection)
-    Returns the last notice set by the backend */
+   Returns the last notice set by the backend */
 PHP_FUNCTION(pg_last_notice) {
 	if (PGG(last_notice) == NULL) {
 		RETURN_FALSE;

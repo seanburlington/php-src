@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_blobs.c,v 1.7 2004/04/19 14:13:41 edink Exp $ */
+/* $Id: ibase_blobs.c,v 1.8 2004/06/03 12:00:23 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -78,10 +78,10 @@ char *_php_ibase_quad_to_string(ISC_QUAD const qd) /* {{{ */
 
 	/* shortcut for most common case */
 	if (sizeof(ISC_QUAD) == sizeof(ISC_UINT64)) {
-		sprintf(result, BLOB_ID_MASK, *(ISC_UINT64*)(void *) &qd);
+		sprintf(result, "0x%0*" LL_MASK "x", 16, *(ISC_UINT64*)(void *) &qd);
 	} else {
 		ISC_UINT64 res = ((ISC_UINT64) qd.gds_quad_high << 0x20) | qd.gds_quad_low;
-		sprintf(result, BLOB_ID_MASK, res);
+		sprintf(result, "0x%0*" LL_MASK "x", 16, res);
 	}
 	result[BLOB_ID_LEN] = '\0';
 	return result;

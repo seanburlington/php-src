@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.118 2000/10/31 17:21:52 hholzgra Exp $ */
+/* $Id: info.c,v 1.119 2000/11/02 19:07:15 neotron Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -380,7 +380,7 @@ void php_print_credits(int flag)
 		CREDIT_LINE("CGI", "Rasmus Lerdorf, Stig Bakken");
 		CREDIT_LINE("AOLserver", "Sascha Schumann");
 		CREDIT_LINE("Java Servlet", "Sam Ruby");
-		CREDIT_LINE("Roxen", "David Hedbor");
+		CREDIT_LINE("Caudium / Roxen", "David Hedbor");
 		CREDIT_LINE("thttpd", "Sascha Schumann");
 		php_info_print_table_end();
 	}

@@ -1,7 +1,7 @@
-// $Id: config.w32,v 1.1 2003/12/03 00:17:04 fmk Exp $
+// $Id: config.w32,v 1.2 2003/12/03 00:22:40 fmk Exp $
 // vim:ft=javascript
 
-ARG_ENABLE("mssql", "mssql support", "no");
+ARG_WITH("mssql", "mssql support", "no");
 
 if (PHP_MSSQL == "yes") {
 	EXTENSION("mssql", "php_mssql.c");

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.56 2002/06/07 14:56:08 jtate Exp $ */
+/* $Id: php_domxml.h,v 1.57 2002/06/13 09:05:56 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -103,7 +103,7 @@ PHP_FUNCTION(domxml_doc_ids);
 PHP_FUNCTION(domxml_dump_mem);
 PHP_FUNCTION(domxml_dump_mem_file);
 PHP_FUNCTION(domxml_dump_node);
-
+PHP_FUNCTION(domxml_doc_validate);
 #if defined(LIBXML_HTML_ENABLED)
 PHP_FUNCTION(domxml_html_dump_mem);
 #endif
@@ -211,9 +211,14 @@ PHP_FUNCTION(domxml_xslt_stylesheet_file);
 PHP_FUNCTION(domxml_xslt_process);
 PHP_FUNCTION(domxml_xslt_version);
 #endif
-
+typedef struct {
+   zval *errors;
+   xmlValidCtxtPtr valid;
+   xmlParserCtxtPtr parser;
+} domxml_ErrorCtxt;
 #else
 #define domxml_module_ptr NULL
+
 #endif /* HAVE_DOMXML */
 #define phpext_domxml_ptr domxml_module_ptr
 

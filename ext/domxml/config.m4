@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.19 2000/12/08 13:09:32 sniper Exp $
+dnl $Id: config.m4,v 1.20 2001/01/29 23:15:11 sniper Exp $
 dnl config.m4 for extension domxml
 
 AC_DEFUN(PHP_DOM_CHECK_VERSION,[
@@ -46,8 +46,14 @@ if test "$PHP_DOM" != "no"; then
 
   AC_ADD_INCLUDE($DOMXML_DIR/include)
 
+  if test -f $DOMXML_DIR/lib/libxml2.a -o -f $DOMXML_DIR/lib/libxml2.s? ; then
+    DOM_LIBNAME="xml2"
+  else
+    DOM_LIBNAME="xml"
+  fi
+
   PHP_SUBST(DOMXML_SHARED_LIBADD)
-  AC_ADD_LIBRARY_WITH_PATH(xml, $DOMXML_DIR/lib, DOMXML_SHARED_LIBADD)
+  AC_ADD_LIBRARY_WITH_PATH($DOM_LIBNAME, $DOMXML_DIR/lib, DOMXML_SHARED_LIBADD)
 
   if test $HAVE_ZLIB; then
     old_withval=$withval

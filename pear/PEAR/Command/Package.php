@@ -17,7 +17,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.56 2003/06/15 16:52:08 cox Exp $
+// $Id: Package.php,v 1.57 2003/06/27 10:46:54 pajoye Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';
@@ -662,7 +662,7 @@ Wrote: /usr/src/redhat/RPMS/i386/PEAR::Net_Socket-1.0-1.i386.rpm
         $spec_contents = preg_replace('/@([a-z0-9_-]+)@/e', '$info["\1"]', fread($fp, filesize($spec_template)));
         fclose($fp);
         $spec_file = "$info[rpm_package]-$info[version].spec";
-        $wp = fopen($spec_file, "w");
+        $wp = fopen($spec_file, "wb");
         if (!$wp) {
             return $this->raiseError("could not write RPM spec file $spec_file: $php_errormsg");
         }

@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.90 2003/06/16 17:12:33 cox Exp $
+// $Id: Installer.php,v 1.91 2003/06/27 10:46:53 pajoye Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -261,7 +261,7 @@ class PEAR_Installer extends PEAR_Common
             if (sizeof($subst_from)) {
                 $contents = str_replace($subst_from, $subst_to, $contents);
             }
-            $wp = @fopen($dest_file, "w");
+            $wp = @fopen($dest_file, "wb");
             if (!is_resource($wp)) {
                 return $this->raiseError("failed to create $dest_file: $php_errormsg",
                                          PEAR_INSTALLER_FAILED);

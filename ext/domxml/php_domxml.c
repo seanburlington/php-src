@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.5 2002/12/31 16:34:25 sebastian Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.6 2003/01/06 08:48:38 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2294,6 +2294,12 @@ PHP_FUNCTION(domxml_node_append_child)
 
 	if (child->type == XML_ATTRIBUTE_NODE) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Can't append attribute node");
+		RETURN_FALSE;
+	}
+
+	/* XXX:ls */
+	if (child == parent) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Can't append node to itself");
 		RETURN_FALSE;
 	}
 	

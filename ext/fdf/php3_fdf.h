@@ -23,51 +23,41 @@
    | If you did not, or have any questions about PHP licensing, please    |
    | contact core@php.net.                                                |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
-   |                                                                      |
+   | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
+/* $Id: php3_fdf.h,v 1.1 1999/04/22 00:25:53 ssb Exp $ */
 
-/* $Id: php3_standard.h,v 1.2 1999/04/22 00:25:57 ssb Exp $ */
+#ifndef _PHP3_FDF_H
+#define _PHP3_FDF_H
 
-#include "basic_functions.h"
-#include "phpmath.h"
-#include "php3_string.h"
-#include "base64.h"
-#include "php3_dir.h"
-#include "dns.h"
-#include "reg.h"
-#include "php3_mail.h"
-#include "md5.h"
-#include "html.h"
-#include "exec.h"
-#include "file.h"
-#include "php3_syslog.h"
-#include "php3_filestat.h"
-#include "php3_browscap.h"
-#include "pack.h"
-#include "datetime.h"
-#include "microtime.h"
-#include "url.h"
-#include "pageinfo.h"
-#include "cyr_convert.h"
-#include "php3_link.h"
-#include "fsock.h"
-#include "image.h"
-#include "php3_iptc.h"
-#include "info.h"
-#include "uniqid.h"
-#include "php3_var.h"
-#include "quot_print.h"
-#include "type.h"
-#include "dl.h"
-#include "php3_crypt.h"
+#if HAVE_FDFLIB
+#if WIN32|WINNT
+#else
+#define UNIX_DEV
+#endif
 
-#define standard_module_ptr basic_functions_module_ptr
+#include <FdfTk.h>
 
-/*
- * Local variables:
- * tab-width: 4
- * c-basic-offset: 4
- * End:
- */
+extern php3_module_entry fdf_module_entry;
+#define fdf_module_ptr &fdf_module_entry
+
+extern int php3_minit_fdf(INIT_FUNC_ARGS);
+extern int php3_mend_fdf(void);
+extern void php3_info_fdf(void);
+extern void php3_fdf_open(INTERNAL_FUNCTION_PARAMETERS);
+extern void php3_fdf_close(INTERNAL_FUNCTION_PARAMETERS);
+extern void php3_fdf_create(INTERNAL_FUNCTION_PARAMETERS);
+extern void php3_fdf_save(INTERNAL_FUNCTION_PARAMETERS);
+extern void php3_fdf_get_value(INTERNAL_FUNCTION_PARAMETERS);
+extern void php3_fdf_set_value(INTERNAL_FUNCTION_PARAMETERS);
+extern void php3_fdf_next_field_name(INTERNAL_FUNCTION_PARAMETERS);
+extern void php3_fdf_set_ap(INTERNAL_FUNCTION_PARAMETERS);
+extern void php3_fdf_get_status(INTERNAL_FUNCTION_PARAMETERS);
+extern void php3_fdf_set_status(INTERNAL_FUNCTION_PARAMETERS);
+extern void php3_fdf_set_file(INTERNAL_FUNCTION_PARAMETERS);
+extern void php3_fdf_get_file(INTERNAL_FUNCTION_PARAMETERS);
+#else
+#define fdf_module_ptr NULL
+#endif
+#endif /* _PHP3_FDF_H */

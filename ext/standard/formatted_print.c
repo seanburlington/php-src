@@ -27,14 +27,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.2 1999/04/18 15:58:26 zeev Exp $ */
+/* $Id: formatted_print.c,v 1.3 1999/04/22 00:25:57 ssb Exp $ */
 
 #include <math.h>				/* modf() */
 #ifdef THREAD_SAFE
 #include "tls.h"
 #endif
 #include "php.h"
-#include "functions/head.h"
+#include "ext/standard/head.h"
 #include "php3_string.h"
 #include "zend_execute.h"
 #include <stdio.h>

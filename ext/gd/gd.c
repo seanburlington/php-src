@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.3 1999/04/21 21:27:18 ssb Exp $ */
+/* $Id: gd.c,v 1.4 1999/04/22 00:25:54 ssb Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -39,7 +39,7 @@
 # include "tls.h"
 #endif
 #include "php.h"
-#include "functions/head.h"
+#include "ext/standard/head.h"
 #include <math.h>
 #include "php3_gd.h"
 

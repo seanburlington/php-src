@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: file.c,v 1.6 1999/04/21 19:01:38 zeev Exp $ */
+/* $Id: file.c,v 1.7 1999/04/22 00:25:56 ssb Exp $ */
 #ifdef THREAD_SAFE
 #include "tls.h"
 #endif
@@ -51,7 +51,7 @@
 #include <sys/socket.h>
 /* #include <sys/uio.h> */
 #endif
-#include "functions/head.h"
+#include "ext/standard/head.h"
 #include "safe_mode.h"
 #include "php3_string.h"
 #include "file.h"

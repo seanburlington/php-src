@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.1 1999/04/21 23:11:20 ssb Exp $ */
+/* $Id: hw.c,v 1.2 1999/04/22 00:25:55 ssb Exp $ */
 #if COMPILE_DL
 #include "dl/phpdl.h"
 #endif
@@ -34,7 +34,7 @@
 #include "config.h"
 #endif
 #include "php.h"
-#include "functions/head.h"
+#include "ext/standard/head.h"
 
 #if HYPERWAVE
 

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.21 1999/04/21 17:28:54 zeev Exp $ */
+/* $Id: main.c,v 1.22 1999/04/22 00:25:51 ssb Exp $ */
 
 /* #define CRASH_DETECTION */
 
@@ -69,7 +69,7 @@
 #include "fopen-wrappers.h"
 #include "ext/standard/php3_standard.h"
 #include "functions/post.h"
-#include "functions/head.h"
+#include "ext/standard/head.h"
 #include "snprintf.h"
 #if WIN32|WINNT
 #include <io.h>

@@ -26,7 +26,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.3 1999/04/21 04:02:11 zeev Exp $ */
+/* $Id: exec.c,v 1.4 1999/04/22 00:25:56 ssb Exp $ */
 
 #ifdef THREAD_SAFE
 #include "tls.h"
@@ -36,7 +36,7 @@
 #include <ctype.h>
 #include "php3_string.h"
 #include "safe_mode.h"
-#include "functions/head.h"
+#include "ext/standard/head.h"
 #include "exec.h"
 #include "php_globals.h"
 

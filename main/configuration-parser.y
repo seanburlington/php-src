@@ -30,13 +30,13 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.7 1999/04/21 17:28:54 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.8 1999/04/22 00:25:51 ssb Exp $ */
 
 #define DEBUG_CFG_PARSER 1
 #include "php.h"
 #include "php_globals.h"
 #include "php_ini.h"
-#include "functions/dl.h"
+#include "ext/standard/dl.h"
 #include "ext/standard/file.h"
 #include "ext/standard/php3_browscap.h"
 #include "zend_extensions.h"

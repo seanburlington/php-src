@@ -1,8 +1,8 @@
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 4                                                        |
+  | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2002 The PHP Group                                |
+  | Copyright (c) 1997-2003 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 2.02 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.9 2003/02/18 08:49:00 georg Exp $ 
+  $Id: php_mysqli.h,v 1.10 2003/02/22 07:31:01 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -113,7 +113,13 @@ PHP_MYSQLI_EXPORT(zend_object_value) mysqli_objects_new(zend_class_entry * TSRML
   		php_error(E_WARNING, "Couldn't fetch %s", intern->zo.ce->name);\
   		RETURN_NULL();\
   	}\
-}
+	if (!strcmp((char *)__name, "mysqli_stmt")) {\
+		if (!((STMT *)__ptr)->stmt->mysql) {\
+  			php_error(E_WARNING, "Statement isn't valid anymore");\
+			RETURN_NULL();\
+		}\
+	}\
+} 
 
 #define MYSQLI_CLEAR_RESOURCE(__id) \
 { \

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.64 2001/05/01 17:01:51 andrei Exp $ */
+/* $Id: wddx.c,v 1.65 2001/05/28 11:05:14 wez Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -560,7 +560,7 @@ void php_wddx_serialize_var(wddx_packet *packet, zval *var, char *name, int name
 	int name_esc_len;
 
 	if (name) {
-		name_esc = php_escape_html_entities(name, name_len, &name_esc_len, 0, ENT_QUOTES);
+		name_esc = php_escape_html_entities(name, name_len, &name_esc_len, 0, ENT_QUOTES, NULL);
 		sprintf(tmp_buf, WDDX_VAR_S, name_esc);
 		php_wddx_add_chunk(packet, tmp_buf);
 		efree(name_esc);

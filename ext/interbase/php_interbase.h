@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.61 2003/09/04 21:10:03 abies Exp $ */
+/* $Id: php_interbase.h,v 1.62 2003/09/23 20:58:14 abies Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -50,7 +50,7 @@ PHP_FUNCTION(ibase_free_query);
 #if HAVE_STRFTIME
 PHP_FUNCTION(ibase_timefmt);
 #endif
-
+PHP_FUNCTION(ibase_gen_id);
 PHP_FUNCTION(ibase_num_fields);
 PHP_FUNCTION(ibase_num_params);
 #if abies_0

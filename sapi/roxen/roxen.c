@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.35 2000/08/13 18:00:39 stas Exp $ */
+/* $Id: roxen.c,v 1.36 2000/08/20 14:29:00 sas Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -447,7 +447,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.35 2000/08/13 18:00:39 stas Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.36 2000/08/20 14:29:00 sas Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -591,19 +591,6 @@ static int php_roxen_module_main(SLS_D)
 #ifdef ROXEN_USE_ZTS
   GET_THIS();
 #endif
-#endif
-
-#ifdef VIRTUAL_DIR
-  /* Change virtual directory, if the feature is enabled */
-  dir = malloc(len = strlen(THIS->filename));
-  strcpy(dir, THIS->filename);
-  while(--len >= 0 && dir[len] != '/')
-    ;
-  if(len > 0) {
-    dir[len] = '\0';
-  }
-  V_CHDIR(dir);
-  free(dir);
 #endif
 
   file_handle.type = ZEND_HANDLE_FILENAME;

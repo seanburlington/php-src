@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.34 2001/07/17 05:53:03 jason Exp $ */
+/* $Id: ftp.c,v 1.35 2001/07/17 16:56:51 jason Exp $ */
 
 #include "php.h"
 
@@ -45,6 +45,7 @@
 #endif
 
 #include "ftp.h"
+#include "ext/standard/fsock.h"
 
 /* define closesocket macro for portability */
 #ifndef PHP_WIN32

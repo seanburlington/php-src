@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 4                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2002 The PHP Group                                |
+  | Copyright (c) 1997-2003 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 2.02 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
   | Author: Wez Furlong <wez@thebrainroom.com>                           |
   +----------------------------------------------------------------------+
 
-  $Id: sqlite.c,v 1.2 2003/04/17 01:57:55 wez Exp $ 
+  $Id: sqlite.c,v 1.3 2003/04/17 02:20:26 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -55,6 +55,7 @@ function_entry sqlite_functions[] = {
 	PHP_FE(sqlite_num_fields, NULL)
 	PHP_FE(sqlite_field_name, NULL)
 	PHP_FE(sqlite_seek, NULL)
+	PHP_FE(sqlite_escape_string, NULL)
 	{NULL, NULL, NULL}
 };
 
@@ -113,7 +114,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", "$Id: sqlite.c,v 1.2 2003/04/17 01:57:55 wez Exp $");
+	php_info_print_table_row(2, "PECL Module version", "$Id: sqlite.c,v 1.3 2003/04/17 02:20:26 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -394,4 +395,26 @@ PHP_FUNCTION(sqlite_seek)
 	RETURN_TRUE;
 }
 /* }}} */
+
+/* {{{ proto string sqlite_escape_string(string item)
+   Escapes a string for use as a query parameter */
+PHP_FUNCTION(sqlite_escape_string)
+{
+	char *string;
+	long stringlen;
+	char *ret;
+
+	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &string, &stringlen)) {
+		return;
+	}
+
+	ret = sqlite_mprintf("%q", string);
+
+	if (ret) {
+		RETVAL_STRING(ret, 1);
+		sqlite_freemem(ret);
+	}
+}
+/* }}} */
+
 

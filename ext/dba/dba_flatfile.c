@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_flatfile.c,v 1.14 2003/12/14 22:08:18 helly Exp $ */
+/* $Id: dba_flatfile.c,v 1.15 2003/12/16 21:40:19 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -48,8 +48,13 @@ DBA_OPEN_FUNC(flatfile)
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not cast stream");
 			return FAILURE;
 		}
+#ifdef F_SETFL
+		/* Needed becasue some systems do not allow to write to the original 
+		 * file contents with O_APPEND being set.
+		 */
 		flags = fcntl(fd, F_SETFL);
 		fcntl(fd, F_SETFL, flags & ~O_APPEND);
+#endif
 	}
 
 	info->dbf = pemalloc(sizeof(flatfile), info->flags&DBA_PERSISTENT);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.156 2001/08/24 20:05:58 sniper Exp $ */
+/* $Id: gd.c,v 1.157 2001/08/26 01:10:10 rasmus Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -308,7 +308,7 @@ PHP_MINFO_FUNCTION(gd)
 #ifdef HAVE_GD_GIF_READ
 	php_info_print_table_row(2, "GIF Read Support", "enabled");
 #endif
-#ifdef(HAVE_GD_GID_CREATE)
+#ifdef HAVE_GD_GIF_CREATE
 	php_info_print_table_row(2, "GIF Create Support", "enabled");
 #endif
 #ifdef HAVE_GD_JPG

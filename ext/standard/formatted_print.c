@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.57 2002/10/15 12:07:36 iliaa Exp $ */
+/* $Id: formatted_print.c,v 1.58 2002/10/26 20:45:17 iliaa Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -605,10 +605,10 @@ php_formatted_print(int ht, int *len, int use_array TSRMLS_DC)
 					convert_to_string_ex(args[argnum]);
 					php_sprintf_appendstring(&result, &outpos, &size,
 											 Z_STRVAL_PP(args[argnum]),
-											 width, precision, padding,
+											 width, 0, padding,
 											 alignment,
 											 Z_STRLEN_PP(args[argnum]),
-											 0, expprec);
+											 0, 0);
 					break;
 
 				case 'd':

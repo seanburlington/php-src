@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.20 2003/12/09 20:10:22 sniper Exp $
+dnl $Id: config.m4,v 1.20.2.1 2004/12/21 04:22:06 sniper Exp $
 
 AC_DEFUN(CPDF_JPEG_TEST,[
   AC_ARG_WITH(jpeg-dir,
@@ -58,14 +58,22 @@ if test "$PHP_CPDFLIB" != "no"; then
       CPDFLIB_INCLUDE=$i/include
 
       PHP_CHECK_LIBRARY(cpdf, cpdf_open, [
-        PHP_ADD_INCLUDE($CPDFLIB_INCLUDE)
-        PHP_ADD_LIBRARY_WITH_PATH(cpdf, $i/lib, CPDF_SHARED_LIBADD)
-        AC_DEFINE(HAVE_CPDFLIB,1,[Whether you have cpdflib])
+        cpdf_libname=cpdf
       ], [
-        AC_MSG_ERROR([Cpdflib module requires cpdflib >= 2.])
+        PHP_CHECK_LIBRARY(cpdfm, cpdf_open, [
+          cpdf_libname=cpdfm
+        ], [
+          AC_MSG_ERROR([Cpdflib module requires cpdflib >= 2.])
+        ], [
+          -L$i/lib $CPDF_SHARED_LIBADD
+        ])
       ], [
         -L$i/lib $CPDF_SHARED_LIBADD
       ])
+
+      PHP_ADD_LIBRARY_WITH_PATH($cpdf_libname, $i/lib, CPDF_SHARED_LIBADD)
+      PHP_ADD_INCLUDE($CPDFLIB_INCLUDE)
+      AC_DEFINE(HAVE_CPDFLIB,1,[Whether you have cpdflib])
       break
     fi
   done  

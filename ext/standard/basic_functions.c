@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.647 2003/12/19 13:33:51 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.648 2003/12/19 13:49:59 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1189,7 +1189,7 @@ PHP_FUNCTION(ip2long)
 
 	convert_to_string_ex(str);
 
-	if (Z_STRVAL_PP(str) == "" || (ip = inet_addr(Z_STRVAL_PP(str))) == INADDR_NONE) {
+	if (Z_STRLEN_PP(str) == 0 || (ip = inet_addr(Z_STRVAL_PP(str))) == INADDR_NONE) {
 		RETURN_LONG(-1);
 	}
 

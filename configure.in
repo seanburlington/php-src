@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.258 2001/07/04 10:10:29 wez Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.259 2001/07/20 12:22:43 zeev Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1040,7 +1040,7 @@ cat <<X
 | Notice:                                                            |
 | If you encounter <defunc> processes when using a local Oracle-DB   |
 | please recompile PHP and specify --enable-sigchild when configuring|
-| (This problem has been reported un Linux using Oracle >= 8.1.5)    |
+| (This problem has been reported under Linux using Oracle >= 8.1.5) |
 X
     fi
   fi

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.26 2003/08/08 19:47:30 helly Exp $ */
+/* $Id: snprintf.c,v 1.27 2003/08/08 19:48:33 helly Exp $ */
 
 /* ====================================================================
  * Copyright (c) 1995-1998 The Apache Group.  All rights reserved.
@@ -315,14 +315,12 @@ ap_php_cvt(double arg, int ndigits, int *decpt, int *sign, int eflag, char *buf)
 		p1 = &buf[NDIG];
 		while (fi != 0) {
 			fj = modf(fi / 10, &fi);
-			if (p1 > &buf[0]) {
-				*--p1 = (int) ((fj + .03) * 10) + '0';
-			} else {
+			if (p1 <= &buf[0]) {
 				mvl = NDIG - ndigits;
 				memmove(&buf[mvl], &buf[0], NDIG-mvl-1);
 				p1 += mvl;
-				*--p1 = (int) ((fj + .03) * 10) + '0';
 			}
+			*--p1 = (int) ((fj + .03) * 10) + '0';
 			r2++;
 		}
 		while (p1 < &buf[NDIG])

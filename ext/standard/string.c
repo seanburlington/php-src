@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.360 2003/02/24 22:01:12 moriyoshi Exp $ */
+/* $Id: string.c,v 1.361 2003/02/24 22:19:36 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3746,7 +3746,9 @@ reg_char:
 		c = *(++p);
 		i++;
 	}	
-	*rp = '\0';
+	if (rp < rbuf + len) {
+		*rp = '\0';
+	}
 	efree(buf);
 	if (allow)
 		efree(tbuf);

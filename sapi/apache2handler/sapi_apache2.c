@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.50 2004/12/16 12:34:32 sniper Exp $ */
+/* $Id: sapi_apache2.c,v 1.51 2005/01/17 12:24:40 jorton Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -121,8 +121,16 @@ static int
 php_apache_sapi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 {
 	php_struct *ctx = SG(server_context);
+	const char *sline = SG(sapi_headers).http_status_line;
 
 	ctx->r->status = SG(sapi_headers).http_response_code;
+
+	/* httpd requires that r->status_line is set to the first digit of
+	 * the status-code: */
+	if (sline && strlen(sline) > 12 && strncmp(sline, "HTTP/1.", 7) == 0 
+		&& sline[8] == ' ') {
+		ctx->r->status_line = apr_pstrdup(ctx->r->pool, sline + 9);
+	}
 
 	return SAPI_HEADER_SENT_SUCCESSFULLY;
 }

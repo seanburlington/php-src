@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.43.4.6 2004/05/10 22:13:39 iliaa Exp $ */
+/* $Id: cpdf.c,v 1.43.4.7 2004/11/09 00:45:39 iliaa Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -1563,7 +1563,9 @@ PHP_FUNCTION(cpdf_setdash)
 		php_error(E_WARNING, "%s(): Unable to find identifier %d", get_active_function_name(TSRMLS_C), id);
 		RETURN_FALSE;
 	}
-
+	if (!pdf->currentMemStream) {
+		RETURN_FALSE;
+	}
 	snprintf(buffer, BUFFERLEN, "[%d %d] 0", (int) Z_LVAL_P(arg2), (int) Z_LVAL_P(arg3));
 	cpdf_setdash(pdf, buffer);
 

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.110 2004/01/08 08:17:29 andi Exp $ 
+   $Id: sqlite.c,v 1.111 2004/01/08 19:28:55 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -42,11 +42,6 @@
 #include <sqlite.h>
 
 #include "zend_default_classes.h"
-
-#ifdef HAVE_SPL
-#include "ext/spl/php_spl.h"
-#include "ext/spl/spl_functions.h"
-#endif
 
 #ifndef safe_emalloc
 # define safe_emalloc(a,b,c) emalloc((a)*(b)+(c))
@@ -1059,16 +1054,6 @@ PHP_MINIT_FUNCTION(sqlite)
 
 PHP_RINIT_FUNCTION(sqlite)
 {
-#if 0 && HAVE_SPL
-	if (!sqlite_ce_query->num_interfaces) {
-		spl_register_implement(sqlite_ce_query, spl_ce_forward TSRMLS_CC);
-		spl_register_implement(sqlite_ce_query, spl_ce_sequence TSRMLS_CC);
-	}
-	if (!sqlite_ce_ub_query->num_interfaces) {
-		spl_register_implement(sqlite_ce_ub_query, spl_ce_forward TSRMLS_CC);
-	}
-#endif
-
 	return SUCCESS;
 }
 
@@ -1076,7 +1061,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.110 2004/01/08 08:17:29 andi Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.111 2004/01/08 19:28:55 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

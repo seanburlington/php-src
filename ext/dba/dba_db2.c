@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.30 2002/11/06 17:59:03 sas Exp $ */
+/* $Id: dba_db2.c,v 1.30.2.1 2002/12/20 20:25:19 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -76,7 +76,7 @@ DBA_OPEN_FUNC(db2)
 		return FAILURE;
 	}
 
-	info->dbf = emalloc(sizeof(dba_db2_data));
+	info->dbf = pemalloc(sizeof(dba_db2_data), info->flags&DBA_PERSISTENT);
 	memset(info->dbf, 0, sizeof(dba_db2_data));
 	((dba_db2_data *) info->dbf)->dbp = dbp;
 	return SUCCESS;
@@ -89,7 +89,7 @@ DBA_CLOSE_FUNC(db2)
 	if (dba->cursor) 
 		dba->cursor->c_close(dba->cursor);
 	dba->dbp->close(dba->dbp, 0);
-	efree(dba);
+	pefree(dba, info->flags&DBA_PERSISTENT);
 }
 
 DBA_FETCH_FUNC(db2)

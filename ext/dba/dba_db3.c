@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db3.c,v 1.21.2.1 2002/11/23 21:12:31 helly Exp $ */
+/* $Id: dba_db3.c,v 1.21.2.2 2002/12/20 20:25:19 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -80,8 +80,8 @@ DBA_OPEN_FUNC(db3)
 			dbp->open(dbp, info->path, NULL, type, gmode, filemode) == 0) {
 #endif
 		dba_db3_data *data;
- 
-		data = emalloc(sizeof(*data));
+
+		data = pemalloc(sizeof(*data), info->flags&DBA_PERSISTENT);
 		data->dbp = dbp;
 		data->cursor = NULL;
 		info->dbf = data;
@@ -100,7 +100,7 @@ DBA_CLOSE_FUNC(db3)
 	
 	if (dba->cursor) dba->cursor->c_close(dba->cursor);
 	dba->dbp->close(dba->dbp, 0);
-	efree(dba);
+	pefree(dba, info->flags&DBA_PERSISTENT);
 }
 
 DBA_FETCH_FUNC(db3)

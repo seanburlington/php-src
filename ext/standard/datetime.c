@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.45 2000/06/14 20:31:31 rasmus Exp $ */
+/* $Id: datetime.c,v 1.46 2000/06/14 22:11:10 hholzgra Exp $ */
 
 
 #include "php.h"
@@ -662,6 +662,9 @@ void _php_strftime(INTERNAL_FUNCTION_PARAMETERS, int gm)
 
 	convert_to_string_ex(format_arg);
 	if ((*format_arg)->value.str.len==0) {
+		RETURN_FALSE;
+	}
+	if (timestamp < 0) {
 		RETURN_FALSE;
 	}
 	format = (*format_arg)->value.str.val;

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.39 2003/08/12 00:55:56 iliaa Exp $ 
+  $Id: mysqli_api.c,v 1.40 2003/08/21 14:34:07 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1214,7 +1214,7 @@ PHP_FUNCTION(mysqli_options)
 	long  			ret;
 	PR_MYSQL		*prmysql;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Oslz", &mysql_link, mysqli_link_class_entry, &mysql_option, &mysql_value) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Olz", &mysql_link, mysqli_link_class_entry, &mysql_option, &mysql_value) == FAILURE) {
 		return;
 	}
 	MYSQLI_FETCH_RESOURCE(mysql, MYSQL *, prmysql, PR_MYSQL *, &mysql_link, "mysqli_link");

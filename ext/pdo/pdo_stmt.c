@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.56 2005/01/18 00:58:15 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.57 2005/01/18 04:58:49 wez Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -315,7 +315,8 @@ static PHP_METHOD(PDOStatement, execute)
 		}
 	}
 
-	if (!stmt->dbh->supports_placeholders) {
+	/* TODO: handle the non-native types too... doh. */
+	if (PDO_PLACEHOLDER_NONE == stmt->supports_placeholders) {
 		int error_pos;
 		/* handle the emulated parameter binding,
          * stmt->active_query_string holds the query with binds expanded and 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.12 2005/01/13 18:02:13 wez Exp $ */
+/* $Id: firebird_driver.c,v 1.13 2005/01/18 04:58:50 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -182,6 +182,7 @@ static int firebird_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_le
 	
 		stmt->driver_data = S;
 		stmt->methods = &firebird_stmt_methods;
+		stmt->supports_placeholders = PDO_PLACEHOLDER_POSITIONAL;
 	
 		return 1;
 
@@ -626,7 +627,6 @@ static int pdo_firebird_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRM
 		}
 		
 		dbh->methods = &firebird_methods;
-		dbh->supports_placeholders = PDO_PLACEHOLDER_POSITIONAL;
 		dbh->native_case = PDO_CASE_UPPER;
 		dbh->alloc_own_columns = 1;
 

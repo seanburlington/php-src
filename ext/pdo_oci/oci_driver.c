@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.15 2005/01/12 05:58:58 wez Exp $ */
+/* $Id: oci_driver.c,v 1.16 2005/01/18 04:58:50 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -240,6 +240,7 @@ static int oci_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pd
 
 	stmt->driver_data = S;
 	stmt->methods = &oci_stmt_methods;
+	stmt->supports_placeholders = PDO_PLACEHOLDER_NAMED;
 	
 	return 1;
 }
@@ -472,7 +473,6 @@ static int pdo_oci_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_DC
 	
 	dbh->methods = &oci_methods;
 	dbh->alloc_own_columns = 1;
-	dbh->supports_placeholders = PDO_PLACEHOLDER_NAMED;
 	dbh->native_case = PDO_CASE_UPPER;
 
 	ret = 1;

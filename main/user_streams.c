@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_streams.c,v 1.27 2002/10/14 00:16:02 wez Exp $ */
+/* $Id: user_streams.c,v 1.28 2002/10/15 01:57:19 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -464,8 +464,10 @@ static size_t php_userstreamop_read(php_stream *stream, char *buf, size_t count 
 	}
 	zval_ptr_dtor(&zcount);
 
-	if (retval)
+	if (retval) {
 		zval_ptr_dtor(&retval);
+		retval = NULL;
+	}
 
 	/* since the user stream has no way of setting the eof flag directly, we need to ask it if we hit eof */
 
@@ -485,6 +487,11 @@ static size_t php_userstreamop_read(php_stream *stream, char *buf, size_t count 
 				us->wrapper->classname);
 
 		stream->eof = 1;
+	}
+
+	if (retval) {
+		zval_ptr_dtor(&retval);
+		retval = NULL;
 	}
 
 	return didread;
@@ -586,8 +593,10 @@ static int php_userstreamop_seek(php_stream *stream, off_t offset, int whence, o
 		ret = -1;
 	}
 
-	if (retval)
+	if (retval) {
 		zval_ptr_dtor(&retval);
+		retval = NULL;
+	}
 
 	/* now determine where we are */
 	ZVAL_STRINGL(&func_name, USERSTREAM_TELL, sizeof(USERSTREAM_TELL)-1, 0);
@@ -603,10 +612,10 @@ static int php_userstreamop_seek(php_stream *stream, off_t offset, int whence, o
 	else
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s::" USERSTREAM_TELL " is not implemented!",
 				us->wrapper->classname);
-	
+
 	if (retval)
 		zval_ptr_dtor(&retval);
-
+	
 	return 0;
 }
 

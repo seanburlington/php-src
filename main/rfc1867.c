@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.52 2000/10/17 18:13:35 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.53 2000/10/20 23:40:07 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -442,6 +442,12 @@ SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 	}
 	boundary++;
 	boundary_len = strlen(boundary);
+
+	if (boundary[0] == '"' && boundary[boundary_len-1] == '"') {
+		boundary++;
+		boundary_len -= 2;
+		boundary[boundary_len] = '\0';
+	}
 
 	if (SG(request_info).post_data) {
 		php_mime_split(SG(request_info).post_data, SG(request_info).post_data_length, boundary, array_ptr SLS_CC PLS_CC);

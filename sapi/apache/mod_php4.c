@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.58 2000/07/10 07:57:01 thies Exp $ */
+/* $Id: mod_php4.c,v 1.59 2000/07/10 09:20:35 sas Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -78,7 +78,7 @@ int php_xbithack_handler(request_rec * r);
 void php_init_handler(server_rec *s, pool *p);
 
 #if MODULE_MAGIC_NUMBER >= 19970728
-void php_child_exit_handler(server_rec *s, pool *p);
+static void php_child_exit_handler(server_rec *s, pool *p);
 #endif
 
 #if MODULE_MAGIC_NUMBER > 19961007
@@ -109,20 +109,6 @@ typedef struct _php_per_dir_entry {
 	uint value_length;
 	int type;
 } php_per_dir_entry;
-
-/* handled apropriately in apache_php_module_main */
-/* popenf isn't working on Windows, use open instead
-#if WIN32|WINNT
-# ifdef popenf
-#  undef popenf
-# endif
-# define popenf(p,n,f,m) open((n),(f),(m))
-# ifdef pclosef
-#  undef pclosef
-# endif
-# define pclosef(p,f) close(f)
-#endif
-*/
 
 php_apache_info_struct php_apache_info;		/* active config */
 

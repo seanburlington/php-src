@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.55 2003/12/16 08:18:31 georg Exp $ 
+  $Id: mysqli_api.c,v 1.56 2003/12/28 22:26:59 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -199,7 +199,7 @@ PHP_FUNCTION(mysqli_bind_param)
 }
 /* }}} */
 
-/* {{{ proto bool mysqli_bind_result(object stmt, mixed var, int len [,mixed,int....])
+/* {{{ proto bool mysqli_bind_result(object stmt, mixed var, [,mixed, ...])
    Bind variables to a prepared statement for result storage */
 
 /* TODO:

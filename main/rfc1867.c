@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.122.2.23 2004/07/25 19:19:32 iliaa Exp $ */
+/* $Id: rfc1867.c,v 1.122.2.24 2004/08/11 04:31:03 pollita Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -781,7 +781,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 	zend_llist header;
 
 	if (SG(request_info).content_length > SG(post_max_size)) {
-		sapi_module.sapi_error(E_WARNING, "POST Content-Length of %d bytes exceeds the limit of %d bytes", SG(request_info).content_length, SG(post_max_size));
+		sapi_module.sapi_error(E_WARNING, "POST Content-Length of %ld bytes exceeds the limit of %ld bytes", SG(request_info).content_length, SG(post_max_size));
 		return;
 	}
 
@@ -969,7 +969,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 					wlen = fwrite(buff, 1, blen, fp);
 			
 					if (wlen < blen) {
-						sapi_module.sapi_error(E_WARNING, "Only %d bytes were written, expected to write %ld", wlen, blen);
+						sapi_module.sapi_error(E_WARNING, "Only %d bytes were written, expected to write %d", wlen, blen);
 						cancel_upload = UPLOAD_ERROR_C;
 					} else {
 						total_bytes += wlen;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.48.2.1 2002/03/16 07:13:14 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.48.2.2 2002/03/23 01:12:54 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -1473,18 +1473,17 @@ PHP_FUNCTION(mb_output_handler)
  			MBSTRG(outconv) = NULL;
   		}
  		/* if content-type is not yet set, set it and activate the converter */
- 		if (SG(sapi_headers).send_default_content_type) {
- 			mimetype = SG(default_mimetype) ? SG(default_mimetype) : SAPI_DEFAULT_MIMETYPE;
- 			charset = mbfl_no2preferred_mime_name(encoding);
- 			len = (sizeof ("Content-Type:")-1) + strlen(mimetype) + (sizeof (";charset=")-1) + strlen(charset) + 1;
- 			p = emalloc(len);
- 			strcpy(p, "Content-Type:");
- 			strcat(p, mimetype);
- 			strcat(p, ";charset=");
- 			strcat(p, charset);
- 			if (sapi_add_header(p, len, 0) != FAILURE)
- 				SG(sapi_headers).send_default_content_type = 0;
- 
+ 		if (SG(sapi_headers).send_default_content_type ) {
+			mimetype = SG(default_mimetype) ? SG(default_mimetype) : SAPI_DEFAULT_MIMETYPE;
+			charset = mbfl_no2preferred_mime_name(encoding);
+			len = (sizeof ("Content-Type:")-1) + strlen(mimetype) + (sizeof (";charset=")-1) + strlen(charset) + 1;
+			p = emalloc(len);
+			strcpy(p, "Content-Type:");
+			strcat(p, mimetype);
+			strcat(p, ";charset=");
+			strcat(p, charset);
+			if (sapi_add_header(p, len, 0) != FAILURE)
+				SG(sapi_headers).send_default_content_type = 0;
  			/* activate the converter */
  			MBSTRG(outconv) = mbfl_buffer_converter_new(MBSTRG(current_internal_encoding), encoding, 0);
  		}

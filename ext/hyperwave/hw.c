@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.48 2000/04/04 13:35:06 steinm Exp $ */
+/* $Id: hw.c,v 1.49 2000/04/06 16:57:32 cmv Exp $ */
 #if COMPILE_DL
 #include "dl/phpdl.h"
 #endif
@@ -3664,7 +3664,10 @@ PHP_FUNCTION(hw_getrellink) {
 
 PHP_MINFO_FUNCTION(hw)
 {
-	php_printf("HG-CSP Version: 7.17<BR>\n");
+	php_info_print_table_start();
+	php_info_print_table_row(2, "Hyperwave Support", "enabled");
+	php_info_print_table_row(2, "HG-CSP Version", "7.17");
+	php_info_print_table_end();
 	DISPLAY_INI_ENTRIES();
 }
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: namednodemap.c,v 1.4 2003/11/29 20:40:17 rrichards Exp $ */
+/* $Id: namednodemap.c,v 1.5 2003/12/21 18:22:14 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -200,6 +200,8 @@ PHP_FUNCTION(dom_namednodemap_item)
 				itemnode = curnode;
 			}
 		}
+	} else {
+		RETVAL_NULL();
 	}
 
 	if (itemnode) {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.40 2003/12/12 13:54:52 rrichards Exp $ */
+/* $Id: document.c,v 1.41 2003/12/21 18:22:14 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1526,6 +1526,8 @@ _dom_document_schema_validate(INTERNAL_FUNCTION_PARAMETERS, int type)
 		/* If loading from memory, we need to set the base directory for the document 
 		   but it is not apparent how to do that for schema's */
 		break;
+	default:
+		return;
 	}
 
 	xmlSchemaSetParserErrors(parser,
@@ -1609,6 +1611,8 @@ _dom_document_relaxNG_validate(INTERNAL_FUNCTION_PARAMETERS, int type)
 		/* If loading from memory, we need to set the base directory for the document 
 		   but it is not apparent how to do that for schema's */
 		break;
+	default:
+		return;
 	}
 
 	xmlRelaxNGSetParserErrors(parser,

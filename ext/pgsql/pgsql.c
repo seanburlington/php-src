@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.281 2003/07/21 20:53:00 helly Exp $ */
+/* $Id: pgsql.c,v 1.282 2003/07/22 21:12:32 helly Exp $ */
 
 #include <stdlib.h>
 
@@ -626,7 +626,7 @@ static void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			}
 			if (atof(PG_VERSION) >= 7.2) {
 				PGresult *pg_result;
-				pg_result = PQexec(le->ptr, "RESET ALL");
+				pg_result = PQexec(le->ptr, "BEGIN;COMMIT;RESET ALL;");
 				PQclear(pg_result);
 			}
 			pgsql = (PGconn *) le->ptr;

@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.44 2003/01/11 22:32:19 moriyoshi Exp $ */
+/* $Id: pack.c,v 1.45 2003/01/11 23:05:19 moriyoshi Exp $ */
 
 #include "php.h"
 
@@ -320,7 +320,7 @@ PHP_FUNCTION(pack)
 				val = argv[currentarg++];
 				convert_to_string_ex(val);
 				memcpy(&output[outputpos], Z_STRVAL_PP(val),
-					   ((int)Z_STRLEN_PP(val) < arg) ? Z_STRLEN_PP(val) : arg);
+					   (Z_STRLEN_PP(val) < arg) ? Z_STRLEN_PP(val) : arg);
 				outputpos += arg;
 				break;
 
@@ -334,7 +334,7 @@ PHP_FUNCTION(pack)
 				convert_to_string_ex(val);
 				v = Z_STRVAL_PP(val);
 				outputpos--;
-				if(arg > (int)Z_STRLEN_PP(val)) {
+				if(arg > Z_STRLEN_PP(val)) {
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Type %c: not enough characters in string", code);
 					arg = Z_STRLEN_PP(val);
 				}

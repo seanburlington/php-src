@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.29.2.17 2003/05/14 06:22:58 helly Exp $
+dnl $Id: config.m4,v 1.29.2.18 2003/05/18 12:36:34 helly Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -355,7 +355,7 @@ AC_DEFUN(PHP_DBA_BUILTIN_CDB,[
 
 AC_ARG_WITH(cdb,
 [  --with-cdb[=DIR]          DBA: Include CDB support],[
-  if test "$withval" = "yes"; then
+  if test "$withval" = "yes" -o "$HAVE_DBA" = "1"; then
     PHP_DBA_BUILTIN_CDB
   elif test "$withval" != "no"; then
     PHP_DBA_STD_BEGIN
@@ -385,7 +385,7 @@ AC_ARG_WITH(cdb,
     PHP_DBA_STD_ATTACH
   fi
 ],[
-  if test "$PHP_DBA" != "no"; then
+  if test "$PHP_DBA" != "no" -o "$HAVE_DBA" = "1"; then
     PHP_DBA_BUILTIN_CDB
   fi
 ])
@@ -407,7 +407,7 @@ AC_ARG_WITH(flatfile,
     PHP_DBA_BUILTIN_FLATFILE
   fi
 ],[
-  if test "$PHP_DBA" != "no"; then
+  if test "$PHP_DBA" != "no" -o "$HAVE_DBA" = "1"; then
     PHP_DBA_BUILTIN_FLATFILE
   fi
 ])

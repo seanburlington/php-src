@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.1.2.6 2003/03/25 01:38:50 sniper Exp $ */
+/* $Id: php_functions.c,v 1.1.2.7 2003/03/25 15:35:27 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_smart_str.h"
@@ -478,6 +478,9 @@ PHP_INI_END()
 
 static PHP_MINIT_FUNCTION(apache)
 {
+#ifdef ZTS
+	ts_allocate_id(&php_apache2_info_id, sizeof(php_apache2_info_struct), (ts_allocate_ctor) NULL, NULL);
+#endif
 	REGISTER_INI_ENTRIES();
 	return SUCCESS;
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filestat.h,v 1.12 2001/05/15 23:43:18 jon Exp $ */
+/* $Id: php_filestat.h,v 1.13 2001/06/11 14:46:44 dbeu Exp $ */
 
 #ifndef PHP_FILESTAT_H
 #define PHP_FILESTAT_H
@@ -55,5 +55,22 @@ PHP_FUNCTION(clearstatcache);
 	MAKE_STD_ZVAL(name); \
 	ZVAL_LONG(name,val); \
 	name->refcount++; 
+
+#ifdef PHP_WIN32
+#define S_IRUSR S_IREAD
+#define S_IWUSR S_IWRITE
+#define S_IXUSR S_IEXEC
+#define S_IRGRP S_IREAD
+#define S_IWGRP S_IWRITE
+#define S_IXGRP S_IEXEC
+#define S_IROTH S_IREAD
+#define S_IWOTH S_IWRITE
+#define S_IXOTH S_IEXEC
+
+#undef getgid
+#define getgroups(a,b) 0
+#define getgid() 1
+#define getuid() 1
+#endif
 
 #endif /* PHP_FILESTAT_H */

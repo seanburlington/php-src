@@ -3,7 +3,7 @@
 // XXX TODO write the config file at the end as for example
 // in 'system' layer
 
-/* $Id: install-pear.php,v 1.6.2.6 2003/07/02 10:38:07 pajoye Exp $ */
+/* $Id: install-pear.php,v 1.6.2.7 2003/07/04 11:04:07 pajoye Exp $ */
 
 $pear_dir = dirname(__FILE__);
 ini_set('include_path', $pear_dir);
@@ -20,7 +20,7 @@ for ($i = 0; $i < sizeof($argv); $i++) {
     $bn = basename($arg);
     if (ereg('package-(.*)\.xml$', $bn, $matches) ||
         ereg('([A-Za-z0-9_:]+)-.*\.(tar|tgz)$', $bn, $matches)) {
-        $install_files[$matches[1]] = $bn;
+        $install_files[$matches[1]] = $arg;
     } elseif ($arg == '--force') {
         $force = true;
     } elseif ($arg == '-d') {

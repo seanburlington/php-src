@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.84 2000/12/22 12:57:08 zeev Exp $ */
+/* $Id: var.c,v 1.85 2000/12/24 15:50:39 sas Exp $ */
 
 
 /* {{{ includes 
@@ -340,7 +340,6 @@ void php_var_serialize(pval *buf, pval **struc, HashTable *var_hash)
 							d->value.str.val = key;
 							d->value.str.len = strlen(key);
 							php_var_serialize(buf, &d, NULL);
-							efree(key);
 							FREE_ZVAL(d);
 							break;
 					}

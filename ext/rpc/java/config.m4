@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.43 2002/08/14 17:04:04 kalowsky Exp $
+dnl $Id: config.m4,v 1.44 2002/08/14 17:49:40 kalowsky Exp $
 dnl
 AC_DEFUN(JAVA_FIND_JAR, [
  AC_MSG_CHECKING([Java Jar location])
@@ -90,10 +90,10 @@ AC_DEFUN(JAVA_CHECK_LIB, [
    for i in $PHP_JAVA/include/*; do
      test -f $i/jni_md.h && JAVA_INCLUDE="$JAVA_INCLUDE $i"
    done
-dnl
-dnl sample JDK v 1.4 path
-dnl /usr/java/j2sdk1.4.0_01/jre/lib/i386/libjava.so
-dnl
+   dnl
+   dnl sample JDK v 1.4 path
+   dnl /usr/java/j2sdk1.4.0_01/jre/lib/i386/libjava.so
+   dnl
  else
    dnl
    dnl We have to find everything
@@ -122,7 +122,7 @@ dnl
 
    if test -z "$JAVA_INCLUDE"; then
      AC_MSG_RESULT(no)
-     AC_MSG_ERROR(unable to find Java VM libraries)
+     AC_MSG_ERROR(unable to find Java VM includes)
    fi
 
    JAVA_CFLAGS="$JAVA_CFLAGS -D_REENTRANT"
@@ -157,7 +157,7 @@ if test "$PHP_JAVA" != "no"; then
     AC_DEFINE(HAVE_JAVA,1,[ ])
 
     if test -z "$JAVA_LIBPATH"; then
-      AC_MSG_ERROR(unable to find Java VM libraries)
+      AC_MSG_ERROR([unable to find Java VM libraries in $PHP_JAVA])
     fi
 
     PHP_ADD_LIBPATH($JAVA_LIBPATH)

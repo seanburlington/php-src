@@ -14,7 +14,7 @@
 ./"    | Author: Marcus Boerger <helly@php.net>                               |
 ./"    +----------------------------------------------------------------------+
 ./" 
-./" $Id: php.1,v 1.6 2003/02/11 20:31:34 helly Exp $
+./" $Id: php.1.in,v 1.1 2003/02/12 04:38:30 sniper Exp $
 ./" 
 .TH PHP 1 "Feb 2003" "The PHP Group" "Scripting Language"
 .SH NAME
@@ -281,7 +281,7 @@ A List of active developers can be found here:
 And last but not least PHP was developed with the help of a huge amount of 
 contributors all around the world.
 .SH VERSION INFORMATION
-This manpage describes \fBphp\fP, version 5.0.0.
+This manpage describes \fBphp\fP, version @PHP_VERSION@.
 .SH COPYRIGHT
 Copyright \(co 1997\-2003 The PHP Group
 .LP

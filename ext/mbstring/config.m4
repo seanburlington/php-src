@@ -1,12 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.16 2002/06/06 12:44:28 sniper Exp $
+dnl $Id: config.m4,v 1.17 2002/07/14 00:11:44 sniper Exp $
 dnl
 
 PHP_ARG_ENABLE(mbstr_enc_trans, whether to enable encoding translation,
-[  --enable-mbstr-enc-trans Enable encoding translation], yes)
+[  --disable-mbstr-enc-trans Enable encoding translation], yes)
 
 PHP_ARG_ENABLE(mbregex, whether to enable multibyte regex support,
-[  --enable-mbregex         Enable multibyte regex support], yes)
+[  --disable-mbregex         Enable multibyte regex support], yes)
 
 PHP_ARG_ENABLE(mbstring, whether to enable multibyte string support,
 [  --disable-mbstring       Disable multibyte string support], yes)

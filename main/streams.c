@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.18 2002/12/10 16:18:59 edink Exp $ */
+/* $Id: streams.c,v 1.125.2.19 2002/12/10 16:37:48 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1768,16 +1768,12 @@ PHPAPI php_stream *_php_stream_fopen(const char *filename, const char *mode, cha
 	if (fp)	{
 		/* sanity checks for include/require */
 		if (options & STREAM_OPEN_FOR_INCLUDE && (fstat(fileno(fp), &st) == -1 || !S_ISREG(st.st_mode))) {
-			int is_unc = 0;
-
 #ifdef PHP_WIN32
 			/* skip the sanity check; fstat doesn't appear to work on
 			 * UNC paths */
-			is_unc = IS_UNC_PATH(filename, strlen(filename));
-#endif
-			if (!is_unc) {
+			if (!IS_UNC_PATH(filename, strlen(filename)))
+#endif			
 				goto err;
-			}
 		} 
 	
 		ret = php_stream_fopen_from_file_rel(fp, mode);

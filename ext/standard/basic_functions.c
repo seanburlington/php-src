@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.688 2004/09/20 22:08:05 wez Exp $ */
+/* $Id: basic_functions.c,v 1.689 2004/09/25 13:19:45 hyanantha Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -51,18 +51,11 @@ typedef struct yy_buffer_state *YY_BUFFER_STATE;
 #include <time.h>
 #include <stdio.h>
 
-#ifndef NETWARE
-#include <netdb.h>
-#else
-/*#include "netware/env.h"*/    /* Temporary */
-#ifdef NEW_LIBC /* Same headers hold good for Winsock and Berkeley sockets */
+#ifdef NETWARE
 #include <netinet/in.h>
-/*#include <arpa/inet.h>*/
-#include <netdb.h>
-#else
-#include <sys/socket.h>
 #endif
-#endif
+
+#include<netdb.h>
 
 #if HAVE_ARPA_INET_H
 # include <arpa/inet.h>
@@ -696,8 +689,10 @@ function_entry basic_functions[] = {
 	PHP_FE(is_link,															NULL)
 	PHP_NAMED_FE(stat,				php_if_stat,							NULL)
 	PHP_NAMED_FE(lstat,				php_if_lstat,							NULL)
+#ifndef NETWARE
 	PHP_FE(chown,															NULL)
 	PHP_FE(chgrp,															NULL)
+#endif
 	PHP_FE(chmod,															NULL)
 #if HAVE_UTIME
 	PHP_FE(touch,															NULL)

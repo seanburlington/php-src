@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx.h,v 1.4 2000/07/03 00:41:17 sas Exp $ */
+/* $Id: php_wddx.h,v 1.5 2000/09/13 20:58:19 andrei Exp $ */
 
 #ifndef PHP_WDDX_H
 #define PHP_WDDX_H
@@ -35,8 +35,6 @@
 #if HAVE_WDDX
 
 #include "xmlparse.h"
-
-extern int php_minit_wddx(INIT_FUNC_ARGS);
 
 extern zend_module_entry wddx_module_entry;
 #define wddx_module_ptr &wddx_module_entry

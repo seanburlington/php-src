@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.91 2003/05/07 01:02:23 helly Exp $ */
+/* $Id: php_globals.h,v 1.92 2003/05/08 01:23:21 iliaa Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -69,6 +69,7 @@ struct _php_core_globals {
 	char *output_handler;
 
 	char *unserialize_callback_func;
+	long serialize_precision;
 
 	char *safe_mode_exec_dir;
 

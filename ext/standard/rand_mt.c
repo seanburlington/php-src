@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand_mt.c,v 1.2 2001/09/03 01:10:29 jeroen Exp $ */
+/* $Id: rand_mt.c,v 1.3 2001/09/04 02:19:30 dbeu Exp $ */
 
 #include <stdlib.h>
 
@@ -85,7 +85,7 @@
 
 static        void _php_srand_mt(long seed TSRMLS_DC);
 static inline long _php_rand_mt_reload(TSRMLS_D);
-static        long _php_rand_mt(void);
+static        long _php_rand_mt(TSRMLS_D);
 /*
  * Melo: it could be 2^^32 but we only use 2^^31 to maintain
  * compatibility with the previous php_rand
@@ -100,6 +100,8 @@ PHP_MINIT_FUNCTION(rand_mt)
 		PHP_RANDMAX_MT,	/* long randmax				*/
 		"mt"			/* char *ini_str			*/
 	);
+
+	return SUCCESS;
 }
 
 #define N             MT_N                 /* length of state vector */
@@ -210,10 +212,9 @@ static inline long _php_rand_mt_reload(TSRMLS_D)
 /*}}}*/
 
 /* {{{ long _php_rand_mt(void) */
-static long _php_rand_mt(void)
+static long _php_rand_mt(TSRMLS_D)
 {
     php_uint32 y;
-	TSRMLS_FETCH();
 
     if(--BG(left) < 0)
         return(_php_rand_mt_reload(TSRMLS_C));

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.131 2001/09/03 20:21:00 andi Exp $ */
+/* $Id: array.c,v 1.132 2001/09/04 02:19:30 dbeu Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2765,7 +2765,7 @@ PHP_FUNCTION(array_rand)
 
 	
 
-	randval = php_drand();
+	randval = php_drand(TSRMLS_C);
 		if (randval < (double)num_req_val/(double)num_avail) {
 			/* If we are returning a single result, just do it. */
 			if (Z_TYPE_P(return_value) != IS_ARRAY) {

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.51 2003/06/14 18:16:47 helly Exp $ 
+   $Id: sqlite.c,v 1.52 2003/06/18 19:48:02 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -42,7 +42,7 @@
 #define safe_emalloc(a,b,c) emalloc((a)*(b)+(c))
 #endif
 
-#ifndef OnUpdateLong
+#ifndef ZEND_ENGINE_2
 # define OnUpdateLong OnUpdateInt
 #endif
 
@@ -651,7 +651,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.51 2003/06/14 18:16:47 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.52 2003/06/18 19:48:02 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

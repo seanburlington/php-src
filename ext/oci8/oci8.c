@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.83 2000/05/23 22:30:21 hholzgra Exp $ */
+/* $Id: oci8.c,v 1.84 2000/05/25 07:44:45 thies Exp $ */
 
 /* TODO list:
  *
@@ -654,12 +654,14 @@ _oci_conn_list_dtor(oci_connection *connection)
 	}
 
 	if (connection->pServiceContext) {
-		/*
-		connection->error = 
-			OCITransCommit(connection->pServiceContext,
-						   connection->pError, 
-						   (ub4)0);
-		*/
+		connection->error =
+			OCITransRollback(connection->pServiceContext,
+							 connection->pError,
+							 (ub4)0);
+ 
+		if (connection->error) {
+			oci_error(connection->pError, "failed to rollback outstanding transactions!", connection->error);
+		}
 
 		OCIHandleFree((dvoid *) connection->pServiceContext, (ub4) OCI_HTYPE_SVCCTX);
 	}

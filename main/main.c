@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.1 1999/04/07 21:02:34 zeev Exp $ */
+/* $Id: main.c,v 1.2 1999/04/08 14:55:42 zeev Exp $ */
 
 /* #define CRASH_DETECTION */
 
@@ -1431,6 +1431,11 @@ any .htaccess restrictions anywhere on your site you can leave doc_root undefine
 					php3_noheader();
 					break;
 				case 'v':
+					if (!_cgi_started) {
+						if (php3_module_startup(CLS_C ELS_CC) == FAILURE || php3_request_startup(CLS_C ELS_CC) == FAILURE) {
+							return FAILURE;
+						}
+					}
 					php3_printf("%s\n", PHP_VERSION);
 					exit(1);
 					break;

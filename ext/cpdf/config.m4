@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.10.4.5 2003/09/11 15:26:53 sniper Exp $
+dnl $Id: config.m4,v 1.10.4.6 2003/10/01 02:53:53 sniper Exp $
 
 AC_DEFUN(CPDF_JPEG_TEST,[
   AC_ARG_WITH(jpeg-dir,
@@ -58,7 +58,7 @@ AC_ARG_WITH(cpdflib,
     CPDF_JPEG_TEST
     CPDF_TIFF_TEST
 
-    for i in $cpdf_withval /usr /usr/local; do
+    for i in $cpdf_withval /usr/local /usr; do
       if test -f "$i/include/cpdflib.h"; then
         CPDFLIB_INCLUDE=$i/include
         AC_MSG_CHECKING(for cpdflib.h)

@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.37 2002/02/28 08:26:46 sebastian Exp $ */
+/* $Id: pack.c,v 1.38 2002/08/13 21:56:39 kalowsky Exp $ */
 
 #include "php.h"
 
@@ -209,6 +209,9 @@ PHP_FUNCTION(pack)
 				break;
 
 			default:
+				efree(argv);
+				efree(formatcodes);
+				efree(formatargs);
 				php_error(E_WARNING, "pack type %c: unknown format code", code);
 				RETURN_FALSE;
 		}

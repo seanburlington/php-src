@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.20.2.1 2001/10/11 23:51:57 ssb Exp $ */
+/* $Id: pspell.c,v 1.20.2.2 2002/02/25 23:00:11 yohgaki Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -65,6 +65,7 @@ function_entry pspell_functions[] = {
 	PHP_FE(pspell_config_personal,		NULL)
 	PHP_FE(pspell_config_repl,		NULL)
 	PHP_FE(pspell_config_save_repl,		NULL)
+	{NULL, NULL, NULL}
 };
 /* }}} */
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.94 2002/06/04 18:44:54 sniper Exp $
+dnl $Id: config.m4,v 1.95 2002/06/09 11:27:04 sander Exp $
 dnl
 
 dnl
@@ -266,7 +266,7 @@ dnl These are always available with bundled library
 dnl Depending which libraries were included to PHP configure,
 dnl enable the support in bundled GD library
 
-  if test -n "$GD_JPG_DIR"; then
+  if test -n "$GD_JPEG_DIR"; then
     AC_DEFINE(HAVE_GD_JPG, 1, [ ])
     GDLIB_CFLAGS="$GDLIB_CFLAGS -DHAVE_LIBJPEG"
   fi

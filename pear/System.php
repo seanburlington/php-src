@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.4 2001/12/16 01:36:49 cox Exp $
+// $Id: System.php,v 1.5 2001/12/18 17:06:28 mj Exp $
 //
 
 // TODO:
@@ -41,7 +41,7 @@ require_once 'Console/Getopt.php';
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Version$
+* @version  $Revision: 1.5 $
 * @access   public
 */
 class System extends PEAR

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.47 2001/01/13 21:52:09 derick Exp $ */
+/* $Id: exec.c,v 1.48 2001/01/14 16:30:22 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -39,7 +39,7 @@
  * If type==3, output will be printed binary, no lines will be saved or returned (passthru)
  *
  */
-static int _Exec(int type, char *cmd, pval *array, pval *return_value)
+int _Exec(int type, char *cmd, pval *array, pval *return_value)
 {
 	FILE *fp;
 	char *buf, *tmp=NULL;

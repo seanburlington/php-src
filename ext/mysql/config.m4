@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.53 2002/09/04 18:47:23 sniper Exp $
+dnl $Id: config.m4,v 1.54 2002/10/21 02:46:12 sniper Exp $
 dnl
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
@@ -48,8 +48,14 @@ PHP_ARG_WITH(mysql, for MySQL support,
                           If unspecified, the bundled MySQL library will be used.], yes)
 
 PHP_ARG_WITH(mysql-sock, for specified location of the MySQL UNIX socket,
-[  --with-mysql-sock[=DIR] Location of the MySQL unix socket pointer.
-                          If unspecified, the default locations are searched.], no, no)
+[  --with-mysql-sock[=DIR]   MySQL: Location of the MySQL unix socket pointer.
+                            If unspecified, the default locations are searched.], no, no)
+
+if test -z "$PHP_ZLIB_DIR"; then
+  PHP_ARG_WITH(zlib-dir, for the location of libz, 
+  [  --with-zlib-dir[=DIR]     MySQL: Set the path to libz install prefix.], no, no)
+fi
+
 
 if test "$PHP_MYSQL" != "no"; then
   AC_DEFINE(HAVE_MYSQL, 1, [Whether you have MySQL])

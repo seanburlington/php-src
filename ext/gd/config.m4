@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.116 2002/10/19 13:27:53 sniper Exp $
+dnl $Id: config.m4,v 1.117 2002/10/21 02:46:12 sniper Exp $
 dnl
 
 dnl
@@ -9,14 +9,20 @@ dnl
 PHP_ARG_WITH(gd, for GD support,
 [  --with-gd[=DIR]         Include GD support (DIR is GD's install dir).])
 
-PHP_ARG_WITH(jpeg-dir, for the location of libjpeg,
-[  --with-jpeg-dir=DIR       GD: Set the path to libjpeg install prefix.], no, no)
+if test -z "$PHP_JPEG_DIR"; then
+  PHP_ARG_WITH(jpeg-dir, for the location of libjpeg,
+  [  --with-jpeg-dir=DIR       GD: Set the path to libjpeg install prefix.], no, no)
+fi
 
-PHP_ARG_WITH(png-dir, for the location of libpng,
-[  --with-png-dir=DIR        GD: Set the path to libpng install prefix.], no, no)
+if test -z "$PHP_PNG_DIR"; then
+  PHP_ARG_WITH(png-dir, for the location of libpng,
+  [  --with-png-dir=DIR        GD: Set the path to libpng install prefix.], no, no)
+fi
 
-PHP_ARG_WITH(zlib-dir, for the location of libz, 
-[  --with-zlib-dir[=DIR]     GD: Set the path to libz install prefix.], no, no)
+if test -z "$PHP_ZLIB_DIR"; then
+  PHP_ARG_WITH(zlib-dir, for the location of libz, 
+  [  --with-zlib-dir[=DIR]     GD: Set the path to libz install prefix.], no, no)
+fi
 
 PHP_ARG_WITH(xpm-dir, for the location of libXpm,
 [  --with-xpm-dir=DIR        GD: Set the path to libXpm install prefix.], no, no)

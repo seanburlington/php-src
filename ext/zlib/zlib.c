@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.112 2002/03/17 22:50:58 wez Exp $ */
+/* $Id: zlib.c,v 1.113 2002/03/18 08:05:28 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -188,7 +188,7 @@ PHP_MINIT_FUNCTION(zlib)
 	le_zp = zend_register_list_destructors_ex(phpi_destructor_gzclose, NULL, "zlib", module_number);
 
 	if(PG(allow_url_fopen)) {
-		php_register_url_stream_wrapper("zlib", &php_stream_gzip_wrapper);
+		php_register_url_stream_wrapper("zlib", &php_stream_gzip_wrapper TSRMLS_CC);
 	}
 
 	REGISTER_LONG_CONSTANT("FORCE_GZIP", CODING_GZIP, CONST_CS | CONST_PERSISTENT);

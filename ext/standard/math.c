@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.50 2001/08/05 01:42:42 zeev Exp $ */
+/* $Id: math.c,v 1.51 2001/08/05 14:40:14 stas Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -751,6 +751,10 @@ _php_math_basetolong(zval *arg, int base) {
 		}
 		if (digit >= base) {
 			continue;
+		}
+		if(!mult || digit > LONG_MAX/mult || num > LONG_MAX-mult*digit) {
+			php_error(E_WARNING, "base_to_long: number '%s' is too big to fit in long", s);
+			return LONG_MAX;
 		}
 		num += mult * digit;
 	}

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.h,v 1.5 2003/11/19 12:07:59 chregu Exp $ */
+/* $Id: php_xsl.h,v 1.6 2003/11/28 22:08:13 chregu Exp $ */
 
 #ifndef PHP_XSL_H
 #define PHP_XSL_H
@@ -45,6 +45,9 @@ extern zend_module_entry xsl_module_entry;
 
 #include "../dom/xml_common.h"
 #include "xsl_fe.h"
+
+#include <libxslt/extensions.h>
+#include <libxml/xpathInternals.h>
 
 typedef struct _xsl_object {
 	zend_object  std;

@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@php.net>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.35 2003/09/11 14:47:03 cox Exp $
+  $Id: CLI.php,v 1.36 2003/10/27 06:52:14 ssb Exp $
 */
 
 require_once "PEAR.php";
@@ -304,6 +304,12 @@ class PEAR_Frontend_CLI extends PEAR
         }
         for ($i = 0; $i < sizeof($table_data); $i++) {
             extract($table_data[$i]);
+            if (!is_array($rowparams)) {
+                $rowparams = array();
+            }
+            if (!is_array($colparams)) {
+                $colparams = array();
+            }
             $rowlines = array();
             if ($height > 1) {
                 for ($c = 0; $c < sizeof($data); $c++) {

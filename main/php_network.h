@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.32 2002/10/13 22:01:40 wez Exp $ */
+/* $Id: php_network.h,v 1.33 2002/10/13 23:43:21 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -27,6 +27,9 @@
 # undef FD_SETSIZE
 # include "arpa/inet.h"
 # define socklen_t unsigned int
+# define SHUT_RD	SD_RECEIVE
+# define SHUT_WR	SD_SEND
+# define SHUT_RDWR	SD_BOTH
 #else
 # undef closesocket
 # define closesocket close
@@ -60,6 +63,14 @@ PHPAPI char *php_socket_strerror(long err, char *buf, size_t bufsize);
 
 #ifdef HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
+#endif
+
+/* These are here, rather than with the win32 counterparts above,
+ * since <sys/socket.h> defines them. */
+#ifndef SHUT_RD
+# define SHUT_RD 0
+# define SHUT_WR 1
+# define SHUT_RDWR 2
 #endif
 
 #ifdef HAVE_SYS_TIME_H

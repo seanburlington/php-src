@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.55 2002/10/28 10:56:23 dickmeiss Exp $ */
+/* $Id: php_yaz.c,v 1.56 2002/11/05 09:19:23 dickmeiss Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -973,17 +973,9 @@ PHP_FUNCTION(yaz_record)
                 int rlen;
 				const char *info = ZOOM_record_get (r, type, &rlen);
 
-                if (rlen <= 0)
-                {
-                    return_value->value.str.len = 0;
-                    return_value->value.str.val = "";
-                }
-                else
-                {
-                    return_value->value.str.len = rlen;
-                    return_value->value.str.val =
-                        estrndup(info, return_value->value.str.len);
-                }
+                return_value->value.str.len = (rlen > 0) ? rlen : 0;
+                return_value->value.str.val =
+                    estrndup(info, return_value->value.str.len);
                 return_value->type = IS_STRING;
 			}
 		}

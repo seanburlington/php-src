@@ -26,7 +26,7 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: pageinfo.c,v 1.6 1999/06/26 19:14:26 zeev Exp $ */
+/* $Id: pageinfo.c,v 1.7 1999/06/26 23:21:18 zeev Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"
@@ -78,6 +78,8 @@ static void _php3_statpage(void)
 	page_mtime = r->finfo.st_mtime;
 #else
 	if (page_uid == -1) {
+		SLS_FETCH();
+
 		path = SG(request_info).path_translated;
 		if (path != NULL) {
 			if (stat(path, &sb) == -1) {

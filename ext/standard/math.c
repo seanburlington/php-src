@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.76 2002/01/27 18:19:18 jon Exp $ */
+/* $Id: math.c,v 1.77 2002/01/28 16:06:27 jon Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -29,11 +29,6 @@
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
-#endif
-
-#ifdef PHP_WIN32
-# define zend_finite(x) _finite(x)
-# define zend_isnan(x) _isnan(x)
 #endif
 
 /* {{{ proto int abs(int number)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: reentrancy.c,v 1.40 2004/01/08 08:17:54 andi Exp $ */
+/* $Id: reentrancy.c,v 1.41 2004/09/29 12:25:56 hyanantha Exp $ */
 
 #include <sys/types.h>
 #include <string.h>
@@ -27,11 +27,6 @@
 
 #ifdef PHP_WIN32
 #include "win32/readdir.h"
-#endif
-
-#if defined(NETWARE) && !(NEW_LIBC)
-/*#include <ws2nlm.h>*/
-#include <sys/socket.h>
 #endif
 
 #include "php_reentrancy.h"

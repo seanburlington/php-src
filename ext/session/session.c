@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.391 2004/07/10 07:46:08 andi Exp $ */
+/* $Id: session.c,v 1.391.2.1 2004/09/02 02:44:12 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -451,6 +451,11 @@ PS_SERIALIZER_ENCODE_FUNC(php)
 
 	PS_ENCODE_LOOP(
 			smart_str_appendl(&buf, key, (unsigned char) key_length);
+			if (memchr(key, PS_DELIMITER, key_length)) {
+				PHP_VAR_SERIALIZE_DESTROY(var_hash);
+				smart_str_free(&buf);				
+				return FAILURE;
+			}
 			smart_str_appendc(&buf, PS_DELIMITER);
 			
 			php_var_serialize(&buf, struc, &var_hash TSRMLS_CC);

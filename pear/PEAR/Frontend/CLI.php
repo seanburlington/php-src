@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@php.net>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.37 2003/12/06 23:37:30 cellog Exp $
+  $Id: CLI.php,v 1.38 2003/12/07 00:10:40 cellog Exp $
 */
 
 require_once "PEAR.php";
@@ -451,7 +451,7 @@ class PEAR_Frontend_CLI extends PEAR
                                       1 => array('wrap' => 48)
                         );
                     } elseif ($count == 3) {
-                        $opts = array(0 => array('wrap' => 20),
+                        $opts = array(0 => array('wrap' => 30),
                                       1 => array('wrap' => 20),
                                       2 => array('wrap' => 35)
                         );

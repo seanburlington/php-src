@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.284 2002/01/03 20:30:07 hholzgra Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.285 2002/01/04 15:00:26 hholzgra Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -242,7 +242,7 @@ AC_CHECK_LIB(nsl, gethostname, [
 
 fi
 
-AC_CHECK_LIB(dl, dlopen,[PHP_ADD_LIBRARY(dl)])
+AC_CHECK_LIB(dl, dlopen,[LIBS="-ldl $LIBS"])
 
 dnl The sin may be in a library which need not be specifed
 dnl as well as res_search resides in libsocket

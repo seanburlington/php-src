@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.18 2001/05/12 11:08:51 sas Exp $
+dnl $Id: config.m4,v 1.19 2001/05/21 19:47:15 sniper Exp $
 
 AC_DEFUN(PHP_LDAP_CHECKS, [
   if test -f $1/include/ldap.h; then
@@ -58,6 +58,9 @@ if test "$PHP_LDAP" != "no"; then
     if test -n "$LDAP_PTHREAD"; then 
       PHP_ADD_LIBRARY($LDAP_PTHREAD)
     fi
+    PHP_ADD_LIBRARY_WITH_PATH(nspr3, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
+    PHP_ADD_LIBRARY_WITH_PATH(plc3, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
+    PHP_ADD_LIBRARY_WITH_PATH(plds3, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
     PHP_ADD_LIBRARY_WITH_PATH(ldapssl41, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
     AC_DEFINE(HAVE_NSLDAP,1,[ ])
 

@@ -14,13 +14,14 @@
    +----------------------------------------------------------------------+
    | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
    |          Thies C. Arntzen <thies@thieso.net>                         |
+   |          Maxim Maletsky <maxim@maxim.cx>                             |
    |                                                                      |
    | Collection support by Andy Sautins <asautins@veripost.net>           |
    | Temporary LOB support by David Benson <dbenson@mancala.com>          |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.203 2003/01/27 20:05:48 maxim Exp $ */
+/* $Id: oci8.c,v 1.204 2003/01/29 18:31:48 maxim Exp $ */
 
 /* TODO list:
  *
@@ -640,7 +641,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.203 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.204 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );

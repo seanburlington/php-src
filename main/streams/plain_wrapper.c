@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.38 2004/05/25 13:17:01 wez Exp $ */
+/* $Id: plain_wrapper.c,v 1.39 2004/05/25 13:23:20 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -35,6 +35,7 @@
 #ifdef HAVE_SYS_MMAN_H
 #include <sys/mman.h>
 #endif
+#include "SAPI.h"
 
 #include "php_streams_int.h"
 

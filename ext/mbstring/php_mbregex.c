@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.9 2002/10/06 16:37:33 rasmus Exp $ */
+/* $Id: php_mbregex.c,v 1.10 2002/10/07 16:15:36 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -430,15 +430,15 @@ php_mbereg_replace_exec(INTERNAL_FUNCTION_PARAMETERS, int option)
 	pos = 0;
 	while (err >= 0) {
 		err = mbre_search(&re, string, string_len, pos, string_len - pos, &regs);
-		if ( regs.beg[0] == regs.end[0] ) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty regular expression");
-			break;
-		}
 		if (err <= -2) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "mbregex search failure in php_mbereg_replace_exec()");
 			break;
 		}
 		if (err >= 0) {
+			if ( regs.beg[0] == regs.end[0] ) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty regular expression");
+				break;
+			}
 			/* copy the part of the string before the match */
 			php_mbregex_strbuf_ncat(&outdev, &string[pos], regs.beg[0] - pos);
 			/* copy replacement and backrefs */

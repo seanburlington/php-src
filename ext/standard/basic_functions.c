@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.260 2000/09/19 17:37:33 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.261 2000/09/19 17:39:43 sas Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -26,7 +26,6 @@
 #include "php_standard.h"
 #include "php_math.h"
 #include "ext/standard/info.h"
-#include "ext/standard/url_scanner.h"
 #include "zend_operators.h"
 #include <stdarg.h>
 #include <stdlib.h>

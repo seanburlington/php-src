@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.668 2004/05/26 18:00:27 andi Exp $ */
+/* $Id: basic_functions.c,v 1.669 2004/05/28 10:45:18 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1247,7 +1247,7 @@ PHP_FUNCTION(ip2long)
 	convert_to_string_ex(str);
 
 	if (Z_STRLEN_PP(str) == 0 || (ip = inet_addr(Z_STRVAL_PP(str))) == INADDR_NONE) {
-		RETURN_LONG(-1);
+		RETURN_FALSE;
 	}
 
 	RETURN_LONG(ntohl(ip));

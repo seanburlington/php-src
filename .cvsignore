@@ -60,3 +60,5 @@ autom4te.cache
 .FBCLockFolder
 debug.log
 confdefs.h
+*.gcda
+*.gcno

@@ -6,3 +6,5 @@ phpt.*
 *.php
 test.dbm
 test.dbm.lck
+*.gcda
+*.gcno

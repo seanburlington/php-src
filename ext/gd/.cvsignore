@@ -18,3 +18,5 @@ Release_TS_bundled
 Release_TSDbg_bundled
 Release_TS_inline_bundled
 Debug_TS_bundled
+*.gcda
+*.gcno

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.59 2004/07/10 10:54:09 wez Exp $ */
+/* $Id: streams.c,v 1.60 2004/07/12 20:59:24 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1231,6 +1231,8 @@ PHPAPI size_t _php_stream_copy_to_mem(php_stream *src, char **buf, size_t maxlen
 			*buf = perealloc_rel_orig(*buf, max_len + step, persistent);
 			max_len += step;
 			ptr = *buf + len;
+		} else {
+			ptr += ret;
 		}
 	}
 	if (len) {

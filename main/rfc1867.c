@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.60 2001/02/26 06:07:31 andi Exp $ */
+/* $Id: rfc1867.c,v 1.61 2001/04/30 12:43:40 andi Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -85,7 +85,7 @@ static void register_http_post_files_variable_ex(char *var, zval *val, zval *htt
 
 static int unlink_filename(char **filename)
 {
-	V_UNLINK(*filename);
+	VCWD_UNLINK(*filename);
 	return 0;
 }
 

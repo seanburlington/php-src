@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.120 2001/04/25 17:48:30 asautins Exp $ */
+/* $Id: oci8.c,v 1.121 2001/04/30 12:43:37 andi Exp $ */
 
 /* TODO list:
  *
@@ -577,7 +577,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.120 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.121 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2925,7 +2925,7 @@ PHP_FUNCTION(ocisavelobfile)
 
 		filename = (*arg)->value.str.val;
 
-		if ((fp = V_OPEN((filename, O_RDONLY|O_BINARY))) == -1) {
+		if ((fp = VCWD_OPEN((filename, O_RDONLY|O_BINARY))) == -1) {
 			php_error(E_WARNING, "Can't open file %s", filename);
 			RETURN_FALSE;
         } 
@@ -3043,7 +3043,7 @@ PHP_FUNCTION(ociwritelobtofile)
 				goto bail;
 			}
 
-			if ((fp = V_OPEN((filename,O_CREAT | O_RDWR | O_BINARY | O_TRUNC, 0600))) == -1) {
+			if ((fp = VCWD_OPEN((filename,O_CREAT | O_RDWR | O_BINARY | O_TRUNC, 0600))) == -1) {
 				php_error(E_WARNING, "Can't create file %s", filename);
 				goto bail;
 			} 

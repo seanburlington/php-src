@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.13 2001/04/05 08:40:26 wez Exp $ */
+/* $Id: openssl.c,v 1.14 2001/04/30 12:43:38 andi Exp $ */
 
 #include "php.h"
 #include "php_openssl.h"
@@ -778,7 +778,7 @@ static X509_STORE * setup_verify(zval * calist)
 
 			convert_to_string_ex(item);
 
-			if (V_STAT(Z_STRVAL_PP(item), &sb) == -1)	{
+			if (VCWD_STAT(Z_STRVAL_PP(item), &sb) == -1)	{
 				zend_error(E_WARNING, "%s() unable to stat %s", get_active_function_name(), Z_STRVAL_PP(item));
 				continue;
 			}

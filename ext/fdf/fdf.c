@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.45 2001/04/07 02:48:19 sniper Exp $ */
+/* $Id: fdf.c,v 1.46 2001/04/30 12:43:35 andi Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -748,7 +748,7 @@ SAPI_POST_HANDLER_FUNC(fdf_post_handler)
 		}   
 		
 		FDFClose(theFDF);
-		V_UNLINK((const char *)filename);
+		VCWD_UNLINK((const char *)filename);
 		efree(filename);
 
 		if(name)          efree(name);

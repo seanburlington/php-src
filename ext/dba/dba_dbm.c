@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_dbm.c,v 1.6 2000/12/16 20:56:44 andi Exp $ */
+/* $Id: dba_dbm.c,v 1.7 2001/04/30 12:43:32 andi Exp $ */
 
 #include "php.h"
 
@@ -47,7 +47,7 @@
 #define TRUNC_IT(extension, mode) \
 	snprintf(buf, MAXPATHLEN, "%s" extension, info->path); \
 	buf[MAXPATHLEN-1] = '\0'; \
-	if((fd = V_OPEN((buf, O_CREAT | mode | O_WRONLY, filemode))) == -1) \
+	if((fd = VCWD_OPEN((buf, O_CREAT | mode | O_WRONLY, filemode))) == -1) \
 		return FAILURE; \
 	close(fd);
 

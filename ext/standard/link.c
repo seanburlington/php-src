@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.28 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: link.c,v 1.29 2001/04/30 12:43:39 andi Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -87,7 +87,7 @@ PHP_FUNCTION(linkinfo)
 	}
 	convert_to_string_ex(filename);
 
-	ret = V_LSTAT((*filename)->value.str.val, &sb);
+	ret = VCWD_LSTAT((*filename)->value.str.val, &sb);
 	if (ret == -1) {
 		php_error(E_WARNING, "LinkInfo failed (%s)", strerror(errno));
 		RETURN_LONG(-1L);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: caudium.c,v 1.11 2001/04/24 01:08:35 neotron Exp $ */
+/* $Id: caudium.c,v 1.12 2001/04/30 12:43:40 andi Exp $ */
 
 #include "php.h"
 #ifdef HAVE_CAUDIUM
@@ -442,7 +442,7 @@ static void php_info_caudium(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.11 2001/04/24 01:08:35 neotron Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.12 2001/04/30 12:43:40 andi Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -640,7 +640,7 @@ static void php_caudium_module_main(php_caudium_request *ureq)
    * isn't. Not a problem though, since it's on by default when using ZTS
    * which we require.
    */
-  V_CHDIR_FILE(THIS->filename->str);
+  VCWD_CHDIR_FILE(THIS->filename->str);
 #endif
   
   file_handle.type = ZEND_HANDLE_FILENAME;

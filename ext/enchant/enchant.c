@@ -15,7 +15,7 @@
   | Author: Pierre-Alain Joye <paj@pearfr.org>                           |
   +----------------------------------------------------------------------+
 
-  $Id: enchant.c,v 1.3 2004/03/08 22:21:36 iliaa Exp $
+  $Id: enchant.c,v 1.4 2004/03/08 23:08:17 pajoye Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -229,7 +229,7 @@ PHP_MINFO_FUNCTION(enchant)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "enchant support", "enabled");
 	php_info_print_table_row(2, "Version", "@version@");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.3 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.4 $");
 	php_info_print_table_row(1, "Provides");
 	enchant_broker_describe(pbroker, __enumerate_providers_fn, NULL);
 	php_info_print_table_end();
@@ -316,7 +316,7 @@ PHP_FUNCTION(enchant_broker_get_error)
 /* }}} */
 
 /* {{{ proto resource enchant_broker_request_dict(resource broker, string tag)
-	create a new dict using tag, the non-empty language tag you wish to request
+	create a new dictionary using tag, the non-empty language tag you wish to request
 	a dictionary for ("en_US", "de_DE", ...) */
 PHP_FUNCTION(enchant_broker_request_dict)
 {
@@ -366,8 +366,8 @@ PHP_FUNCTION(enchant_broker_request_dict)
 /* }}} */
 
 /* {{{ proto resource enchant_broker_request_pwl_dict(resource dict, string tag)
-   creates a dictionnary using a PWL file. A PWL file is personal word file one word per line.
-   It must exists before the call.*/
+   creates a dictionary using a PWL file. A PWL file is personal word file one word per line.
+   It must exist before the call.*/
 PHP_FUNCTION(enchant_broker_request_pwl_dict)
 {
 	zval *broker;
@@ -430,7 +430,7 @@ PHP_FUNCTION(enchant_broker_free_dict)
 }
 /* }}} */
 
-/* {{{ proto bool enchant_new_dmy(resource broker, string tag)
+/* {{{ proto bool enchant_broker_dict_exists(resource broker, string tag)
    Wether a dictionary exists or not. Using non-empty tag */
 PHP_FUNCTION(enchant_broker_dict_exists)
 {
@@ -455,7 +455,7 @@ PHP_FUNCTION(enchant_broker_dict_exists)
 	described/referred to by 'tag'. The ordering is a comma delimited
 	list of provider names. As a special exception, the "*" tag can
 	be used as a language tag to declare a default ordering for any
-	 language that does not explictly declare an ordering. */
+	language that does not explictly declare an ordering. */
 
 PHP_FUNCTION(enchant_broker_set_ordering)
 {
@@ -516,7 +516,7 @@ PHP_FUNCTION(enchant_dict_check)
 /* }}} */
 
 /* {{{ proto array enchant_dict_suggest(resource broker, string word)
-    Will return an list of values if any of those pre-conditions are not met.*/
+    Will return a list of values if any of those pre-conditions are not met.*/
 PHP_FUNCTION(enchant_dict_suggest)
 {
 	zval *dict;

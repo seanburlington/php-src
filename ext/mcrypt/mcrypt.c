@@ -16,6 +16,7 @@
    |          Derick Rethans <d.rethans@jdimedia.nl>                      |
    +----------------------------------------------------------------------+
  */
+/* $Id: mcrypt.c,v 1.73 2001/12/20 16:50:49 cmv Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

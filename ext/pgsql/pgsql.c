@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.46 2000/05/18 15:34:32 zeev Exp $ */
+/* $Id: pgsql.c,v 1.47 2000/05/23 06:03:34 jah Exp $ */
 
 #include <stdlib.h>
 
@@ -1127,6 +1127,7 @@ PHP_FUNCTION(pg_getlastoid)
 		RETURN_FALSE;
 	}
 	pgsql_result = pg_result->result;
+#ifndef HAVE_PQOIDVALUE
 	return_value->value.str.val = (char *) PQoidStatus(pgsql_result);
 	if (return_value->value.str.val) {
 		return_value->value.str.len = strlen(return_value->value.str.val);
@@ -1134,7 +1135,15 @@ PHP_FUNCTION(pg_getlastoid)
 		return_value->type = IS_STRING;
 	} else {
 		return_value->value.str.val = empty_string;
-	} 
+	}
+#else
+	return_value->value.lval = (int) PQoidValue(pgsql_result);
+	if (return_value->value.lval == InvalidOid) {
+		RETURN_FALSE;
+	} else {
+		return_value->type = IS_LONG;
+	}
+#endif
 }
 /* }}} */
 

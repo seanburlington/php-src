@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.84 2002/04/17 17:25:18 sebastian Exp $ */
+/* $Id: php_ini.c,v 1.85 2002/04/19 05:48:22 yohgaki Exp $ */
 
 #include "php.h"
 #ifndef PHP_WIN32
@@ -30,10 +30,6 @@
 #include "zend_highlight.h"
 #include "SAPI.h"
 #include "php_main.h"
-
-#ifndef S_ISDIR
-#define S_ISDIR( m )    (((m) & S_IFMT) == S_IFDIR)
-#endif
 
 typedef struct _php_extension_lists {
 	zend_llist engine;
@@ -272,7 +268,7 @@ int php_init_config(char *php_ini_path_override)
 	if (php_ini_path_override && php_ini_path_override[0]) {
 		struct stat statbuf;
 		if (!VCWD_STAT(php_ini_path_override, &statbuf)) {
-			if (!S_ISDIR(statbuf.st_mode)) {
+			if (!((statbuf.st_mode & S_IFMT) == S_IFDIR)) {
 				fh.handle.fp = VCWD_FOPEN(php_ini_path_override, "r");
 			}
 		}

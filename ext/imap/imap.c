@@ -21,7 +21,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.11 1999/08/02 19:16:42 zeev Exp $ */
+/* $Id: imap.c,v 1.12 1999/08/18 17:19:20 chagenbu Exp $ */
 
 #define IMAP41
 
@@ -1646,7 +1646,7 @@ void imap_add_body( pval *arg, BODY *body )
 
 	/* encapsulated message ? */
 
-	if ( ( body->type == TYPEMESSAGE ) && (!strncasecmp(body->subtype, "rfc822", 6))) {
+	if ((body->type == TYPEMESSAGE) && (!strcasecmp(body->subtype, "rfc822"))) {
 		body=body->CONTENT_MSG_BODY;
 		MAKE_STD_ZVAL(parametres);
 		array_init(parametres);

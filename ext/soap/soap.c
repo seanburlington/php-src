@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.120 2004/09/13 11:55:24 dmitry Exp $ */
+/* $Id: soap.c,v 1.121 2004/09/15 10:43:07 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2494,7 +2494,7 @@ static void clear_soap_fault(zval *obj TSRMLS_DC)
 zval* add_soap_fault(zval *obj, char *fault_code, char *fault_string, char *fault_actor, zval *fault_detail TSRMLS_DC)
 {
 	zval *fault;
-	MAKE_STD_ZVAL(fault);
+	ALLOC_INIT_ZVAL(fault);
 	set_soap_fault(fault, fault_code, fault_string, fault_actor, fault_detail, NULL TSRMLS_CC);
 #ifdef ZEND_ENGINE_2
 	fault->refcount--;  /*FIXME*/

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.18 2001/07/31 23:22:18 sterling Exp $ */
+/* $Id: sablot.c,v 1.19 2001/07/31 23:34:22 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -281,7 +281,7 @@ PHP_FUNCTION(xslt_set_sax_handlers)
 		}
 	}
 }
-/* }}} *
+/* }}} */
 
 /* {{{ proto void xslt_set_scheme_handlers(resource processor, array handlers)
    Set the scheme handlers for the XSLT processor */

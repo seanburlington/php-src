@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: msql.c,v 1.10 1999/07/16 18:05:23 sas Exp $ */
+/* $Id: msql.c,v 1.11 1999/07/19 19:10:11 eschmid Exp $ */
 
 #include "php.h"
 #if COMPILE_DL
@@ -1101,7 +1101,7 @@ DLEXPORT PHP_FUNCTION(msql_fetch_row)
 /* }}} */
 
 
-/* {{{ proto object msql_fetch_object(int query)
+/* {{{ proto object msql_fetch_object(int query [, int result_type])
    Fetch a result row as an object */
 DLEXPORT PHP_FUNCTION(msql_fetch_object)
 {
@@ -1114,7 +1114,7 @@ DLEXPORT PHP_FUNCTION(msql_fetch_object)
 }
 /* }}} */
 
-/* {{{ proto array msql_fetch_array(int query)
+/* {{{ proto array msql_fetch_array(int query [, int result_type])
    Fetch a result row as an associative array */
 DLEXPORT PHP_FUNCTION(msql_fetch_array)
 {

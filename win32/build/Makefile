@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.7 2003/12/04 17:28:08 wez Exp $
+# $Id: Makefile,v 1.8 2003/12/06 16:14:03 wez Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -71,7 +71,10 @@ clean: clean-sapi
 
 test:
 	<<test_suite_uses_lame_env_vars.bat
-set TEST_PHP_EXECUTABLE=$(BUILD_DIR)\\php.exe
-$(BUILD_DIR)\\php.exe -d open_basedir= -d safe_mode=0 -d output_buffering=0 run-tests.php $(TESTS)
+set TEST_PHP_EXECUTABLE=$(BUILD_DIR)\php.exe
+$(BUILD_DIR)\php.exe -d open_basedir= -d safe_mode=0 -d output_buffering=0 run-tests.php $(TESTS)
 <<NOKEEP
-	
+
+dist: all
+	$(BUILD_DIR)\php.exe win32/build/mkdist.php "$(BUILD_DIR)" "$(PHPDLL)" "$(SAPI_TARGETS)" "$(EXT_TARGETS)" "$(SNAPSHOT_TEMPLATE)"
+

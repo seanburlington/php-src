@@ -15,7 +15,7 @@
    | Authors:                                                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: crack.c,v 1.14 2001/11/25 18:51:00 eschmid Exp $ */
+/* $Id: crack.c,v 1.15 2001/12/07 09:47:35 eschmid Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -155,7 +155,7 @@ ZEND_FUNCTION(crack_opendict)
 /* }}} */
 
 /* {{{ proto string crack_closedict([int link_identifier])
-   Closes an open cracklib dictionary. */
+   Closes an open cracklib dictionary */
 ZEND_FUNCTION(crack_closedict)
 {
 	PWDICT *pwdict;

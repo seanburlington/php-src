@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: hg_comm.h,v 1.13 2001/02/26 06:06:57 andi Exp $ */
+/* $Id: hg_comm.h,v 1.14 2001/03/16 17:40:37 steinm Exp $ */
 
 #ifndef HG_COMM_H
 #define HG_COMM_H
@@ -85,6 +85,7 @@
 #define HW_BACKGROUND_LINK            2
 #define HW_INTAG_LINK                 3
 #define HW_APPLET_LINK                4
+#define HW_INTAGNODEL_LINK            5
 
 #define COPY                          0
 #define MOVE                          1

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_statement.c,v 1.6 2004/07/31 18:46:18 wez Exp $ */
+/* $Id: oci_statement.c,v 1.7 2004/12/21 00:37:01 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -135,7 +135,7 @@ static sb4 oci_bind_input_cb(dvoid *ctx, OCIBind *bindp, ub4 iter, ub4 index, dv
 		ub4 *alenp, ub1 *piecep, dvoid **indpp)
 {
 	struct pdo_bound_param_data *param = (struct pdo_bound_param_data*)ctx;
-	pdo_oci_bound_param *P = (pdo_oci_bound_param*)ecalloc(1, sizeof(pdo_oci_bound_param));
+	pdo_oci_bound_param *P = (pdo_oci_bound_param*)param->driver_data;
 	TSRMLS_FETCH();
 
 	if (!param || !param->parameter) {
@@ -168,7 +168,7 @@ static sb4 oci_bind_output_cb(dvoid *ctx, OCIBind *bindp, ub4 iter, ub4 index, d
 		ub1 *piecep, dvoid **indpp, ub2 **rcodepp)
 {
 	struct pdo_bound_param_data *param = (struct pdo_bound_param_data*)ctx;
-	pdo_oci_bound_param *P = (pdo_oci_bound_param*)ecalloc(1, sizeof(pdo_oci_bound_param));
+	pdo_oci_bound_param *P = (pdo_oci_bound_param*)param->driver_data;
 	TSRMLS_FETCH();
 
 	if (!param || !param->parameter) {

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.53 2004/01/19 19:57:17 helly Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.54 2004/02/10 00:03:44 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -293,7 +293,7 @@ static int sapi_cgi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 	char buf[SAPI_CGI_MAX_HEADER_LENGTH];
 	sapi_header_struct *h;
 	zend_llist_position pos;
-	long rfc2616_headers = 0;
+	long rfc2616_headers = 0, nph = 0;
 
 	if(SG(request_info).no_headers == 1) {
 		return  SAPI_HEADER_SENT_SUCCESSFULLY;
@@ -307,7 +307,11 @@ static int sapi_cgi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 		rfc2616_headers = 0;
 	}
 
-	if (SG(sapi_headers).http_response_code != 200) {
+	if (cfg_get_long("cgi.nph", &nph) == FAILURE) {
+		nph = 0;
+	}
+
+	if (nph || SG(sapi_headers).http_response_code != 200) {
 		int len;
 		
 		if (rfc2616_headers && SG(sapi_headers).http_status_line) {

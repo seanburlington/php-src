@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.71 2004/09/02 20:56:38 fmk Exp $ */
+/* $Id: ming.c,v 1.72 2004/09/07 19:40:17 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -238,6 +238,10 @@ static SWFCharacter getCharacter(zval *id TSRMLS_DC)
 		return (SWFCharacter)getBitmap(id TSRMLS_CC);
 	else if(Z_OBJCE_P(id) == sound_class_entry_ptr)
 		return (SWFCharacter)getSound(id TSRMLS_CC);
+	else if(Z_OBJCE_P(id) == videostream_class_entry_ptr)
+		return (SWFCharacter)getVideoStream(id TSRMLS_CC);
+	else if(Z_OBJCE_P(id) == prebuiltclip_class_entry_ptr)
+		return (SWFCharacter)getPrebuiltClip(id TSRMLS_CC);
 /*
 	else if(Z_OBJCE_P(id) == soundinstance_class_entry_ptr)
 		return (SWFCharacter)getSoundInstance(id TSRMLS_CC);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.78 2003/05/20 13:36:38 hholzgra Exp $ */
+/* $Id: fdf.c,v 1.79 2003/05/21 17:04:08 iliaa Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -223,6 +223,10 @@ PHP_FUNCTION(fdf_open)
 	}
 
 	convert_to_string_ex(file);
+
+	if (php_check_open_basedir(Z_STRVAL_PP(file) TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(file), "wb+", CHECKUID_CHECK_MODE_PARAM))) {
+		RETURN_FALSE;
+	}
 
 	err = FDFOpen(Z_STRVAL_PP(file), 0, &fdf);
 
@@ -511,6 +515,11 @@ PHP_FUNCTION(fdf_set_ap)
 	convert_to_string_ex(fieldname);
 	convert_to_long_ex(face);
 	convert_to_string_ex(filename);
+
+	if (php_check_open_basedir(Z_STRVAL_PP(filename) TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(filename), "wb+", CHECKUID_CHECK_MODE_PARAM))) {
+		RETURN_FALSE;
+	}
+
 	convert_to_long_ex(pagenr);
 
 	switch(Z_LVAL_PP(face)) {
@@ -561,6 +570,10 @@ PHP_FUNCTION(fdf_get_ap) {
 	}
 
 	ZEND_FETCH_RESOURCE(fdf, FDFDoc *, &r_fdf, -1, "fdf", le_fdf);
+
+	if (php_check_open_basedir(filename TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(filename, "wb+", CHECKUID_CHECK_MODE_PARAM))) {
+		RETURN_FALSE;
+	}
 
 	switch(face) {
 		case 1:
@@ -771,6 +784,9 @@ PHP_FUNCTION(fdf_save)
 	ZEND_FETCH_RESOURCE(fdf, FDFDoc *, &r_fdf, -1, "fdf", le_fdf);
 
 	if(filename) {
+		if (php_check_open_basedir(filename TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(filename, "wb+", CHECKUID_CHECK_MODE_PARAM))) {
+			RETURN_FALSE;
+		}
 		err = FDFSave(fdf, filename);	
 	} else {
 		FILE *fp;
@@ -884,6 +900,10 @@ PHP_FUNCTION(fdf_add_template)
 	convert_to_string_ex(filename);
 	convert_to_string_ex(template);
 	convert_to_long_ex(rename);
+
+	if (php_check_open_basedir(Z_STRVAL_PP(filename) TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(filename), "wb+", CHECKUID_CHECK_MODE_PARAM))) {
+		RETURN_FALSE;
+	}
 
 	filespec.FS = NULL;
 	filespec.F = Z_STRVAL_PP(filename);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.61 2004/12/29 16:11:42 tony2001 Exp $ */
+/* $Id: spl_iterators.c,v 1.62 2005/01/24 20:21:11 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1282,6 +1282,7 @@ static INLINE void spl_caching_it_next(spl_dual_it_object *intern TSRMLS_DC)
 					zval_copy_ctor(intern->u.caching.zstr);
 					zval_dtor(&expr_copy);
 				} else {
+					INIT_PZVAL(intern->u.caching.zstr);
 					zval_copy_ctor(intern->u.caching.zstr);
 				}
 			}

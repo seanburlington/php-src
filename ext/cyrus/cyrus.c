@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyrus.c,v 1.9 2002/02/28 08:25:54 sebastian Exp $ */
+/* $Id: cyrus.c,v 1.10 2002/04/23 19:01:31 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -357,7 +357,7 @@ static void cyrus_generic_callback(struct imclient *client,
 		argv[3] = &msgno;
 
 		if (call_user_function_ex(EG(function_table), NULL, callback->function, 
-                                  &retval, 4, argv, 0, NULL) == FAILURE) {
+                                  &retval, 4, argv, 0, NULL TSRMLS_CC) == FAILURE) {
 			php_error(E_WARNING, "Couldn't call the %s handler", 
 			          callback->trigger);
 		}

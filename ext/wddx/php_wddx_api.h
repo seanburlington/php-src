@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx_api.h,v 1.14 2001/04/25 20:14:29 andrei Exp $ */
+/* $Id: php_wddx_api.h,v 1.15 2001/05/01 17:01:51 andrei Exp $ */
 
 #ifndef PHP_WDDX_API_H
 #define PHP_WDDX_API_H
@@ -53,8 +53,8 @@
 
 typedef smart_str wddx_packet;
 
-wddx_packet *php_wddx_constructor(void);
-#define	php_wddx_destructor(packet) smart_str_free(packet)
+wddx_packet* php_wddx_constructor(void);
+void		 php_wddx_destructor(wddx_packet *packet);
 
 void 		 php_wddx_packet_start(wddx_packet *packet, char *comment, int comment_len);
 void 		 php_wddx_packet_end(wddx_packet *packet);

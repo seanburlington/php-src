@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.241 2002/10/19 12:58:41 derick Exp $ */
+/* $Id: pgsql.c,v 1.242 2002/10/24 19:05:29 helly Exp $ */
 
 #include <stdlib.h>
 
@@ -3048,7 +3048,7 @@ PHP_FUNCTION(pg_get_notify)
 PHP_FUNCTION(pg_get_pid)
 {
 	zval *pgsql_link;
-	int id = -1, pid;
+	int id = -1;
 	PGconn *pgsql;
 
 	if (zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET, ZEND_NUM_ARGS() TSRMLS_CC, "r",

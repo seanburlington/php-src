@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.120 2002/10/23 23:25:26 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.121 2002/10/24 19:09:04 helly Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -3475,7 +3475,7 @@ PHPAPI size_t php_mb_mbchar_bytes(const char *s TSRMLS_DC)
 PHPAPI char *php_mb_safe_strrchr_ex(const char *s, unsigned int c, size_t nbytes, const mbfl_encoding *enc)
 {
 	register const char *p = s;
-	char *last;
+	char *last=NULL;
 
 	if (nbytes == (size_t)-1) {
 		while (*p != '\0') {

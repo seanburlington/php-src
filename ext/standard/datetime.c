@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.91 2002/08/24 01:19:27 helly Exp $ */
+/* $Id: datetime.c,v 1.92 2002/09/05 12:09:57 hyanantha Exp $ */
 
 
 #include "php.h"
@@ -55,6 +55,9 @@ char *day_short_names[] =
 };
 
 #if !defined(HAVE_TM_ZONE) && !defined(_TIMEZONE) && !defined(HAVE_DECLARED_TIMEZONE)
+#if defined(NETWARE) && defined(NEW_LIBC)
+#define timezone    _timezone   /* timezone is called '_timezone' in new version of LibC */
+#endif
 extern time_t timezone;
 extern int daylight;
 #endif

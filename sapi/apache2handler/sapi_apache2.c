@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.35 2004/12/06 18:51:40 stas Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.36 2004/12/06 18:55:16 stas Exp $ */
 
 #include <fcntl.h>
 
@@ -399,7 +399,7 @@ static apr_status_t php_server_context_cleanup(void *data_)
 	return APR_SUCCESS;
 }
 
-static void php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
+static int php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 {
 	char *content_type;
 	char *content_length;
@@ -432,7 +432,7 @@ static void php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 		SG(request_info).auth_user = NULL;
 		SG(request_info).auth_password = NULL;
 	}
-	php_request_startup(TSRMLS_C);
+	return php_request_startup(TSRMLS_C);
 }
 
 static void php_apache_request_dtor(request_rec *r TSRMLS_DC)
@@ -511,7 +511,9 @@ zend_first_try {
 		brigade = apr_brigade_create(r->pool, r->connection->bucket_alloc);
 		ctx->brigade = brigade;
 
-		php_apache_request_ctor(r, ctx TSRMLS_CC);
+		if (php_apache_request_ctor(r, ctx TSRMLS_CC)!=SUCCESS) {
+			zend_bailout();
+		}
 	} else {
 		parent_req = ctx->r;
 		ctx->r = r;

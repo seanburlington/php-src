@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.217 2001/08/03 23:10:04 jeroen Exp $ */
+/* $Id: string.c,v 1.218 2001/08/04 16:53:57 thies Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -867,8 +867,8 @@ PHP_FUNCTION(strtok)
 
 		zval_add_ref(str);
 		if (BG(strtok_zval))
-			zval_ptr_dtor(BG(strtok_zval));
-		BG(strtok_zval) = str;
+			zval_ptr_dtor(&BG(strtok_zval));
+		BG(strtok_zval) = *str;
 		
 		BG(strtok_last) = BG(strtok_string) = Z_STRVAL_PP(str);
 		BG(strtok_len) = Z_STRLEN_PP(str);

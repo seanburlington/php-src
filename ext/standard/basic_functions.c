@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.375 2001/08/03 09:50:38 sas Exp $ */
+/* $Id: basic_functions.c,v 1.376 2001/08/04 16:53:53 thies Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -894,7 +894,7 @@ PHP_RINIT_FUNCTION(basic)
 PHP_RSHUTDOWN_FUNCTION(basic)
 {
 	if (BG(strtok_zval))
-		zval_ptr_dtor(BG(strtok_zval));
+		zval_ptr_dtor(&BG(strtok_zval));
 	BG(strtok_string) = NULL;
 	BG(strtok_zval) = NULL;
 #ifdef HAVE_PUTENV

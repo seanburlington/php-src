@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.90 2001/02/19 07:50:06 sas Exp $ */
+/* $Id: pgsql.c,v 1.91 2001/02/19 16:31:17 sas Exp $ */
 
 #include <stdlib.h>
 
@@ -31,6 +31,9 @@
 
 #if HAVE_PGSQL
 
+#ifndef InvalidOid
+#define InvalidOid ((Oid) 0)
+#endif
 
 #define PGSQL_ASSOC		1<<0
 #define PGSQL_NUM		1<<1

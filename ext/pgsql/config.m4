@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.19 2001/02/19 08:14:45 sas Exp $
+dnl $Id: config.m4,v 1.20 2001/02/19 16:31:17 sas Exp $
 
 AC_DEFUN(PGSQL_INC_CHK,[if test -r $i$1/libpq-fe.h; then PGSQL_DIR=$i; PGSQL_INCDIR=$i$1])
 
@@ -22,26 +22,6 @@ if test "$PHP_PGSQL" != "no"; then
   fi
 
   PGSQL_INCLUDE="-I$PGSQL_INCDIR"
-
-  AC_CACHE_CHECK([whether PostgreSQL needs postgres.h], ac_cv_php_pgsql_postgres_h,[
-  old_CPPFLAGS=$CPPFLAGS
-  CPPFLAGS="$CPPFLAGS $PGSQL_INCLUDE"
-  AC_TRY_COMPILE([
-#include <libpq-fe.h>
-],[
-  Oid x = InvalidOid;
-],[
-  ac_cv_php_pgsql_postgres_h=no
-],[
-  ac_cv_php_pgsql_postgres_h=yes
-])
-  CPPFLAGS=$old_CPPFLAGS
-])
-  
-  if test "$ac_cv_php_pgsql_postgres_h" = "yes"; then
-    AC_DEFINE(PHP_PGSQL_NEEDS_POSTGRES_H, 1, [whether pgsql needs postgres.h])
-  fi
-  
   PGSQL_LIBDIR=$PGSQL_DIR/lib
   test -d $PGSQL_DIR/lib/pgsql && PGSQL_LIBDIR=$PGSQL_DIR/lib/pgsql
 

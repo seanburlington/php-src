@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.26 2001/02/19 08:14:45 sas Exp $ */
+/* $Id: php_pgsql.h,v 1.27 2001/02/19 16:31:17 sas Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -29,9 +29,6 @@ extern zend_module_entry pgsql_module_entry;
 
 #ifdef PHP_PGSQL_PRIVATE
 #undef SOCKET_SIZE_TYPE
-#ifdef PHP_PGSQL_NEEDS_POSTGRES_H
-#include <postgres.h>
-#endif
 #include <libpq-fe.h>
 
 #ifdef PHP_WIN32

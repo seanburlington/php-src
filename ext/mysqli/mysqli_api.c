@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.87.2.7 2004/12/27 11:52:08 georg Exp $ 
+  $Id: mysqli_api.c,v 1.87.2.8 2004/12/27 15:40:40 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -983,14 +983,15 @@ PHP_FUNCTION(mysqli_info)
    Initialize mysqli and return a resource for use with mysql_real_connect */
 PHP_FUNCTION(mysqli_init)
 {
+	MYSQLI_RESOURCE *mysqli_resource;
 	MY_MYSQL *mysql = (MY_MYSQL *)calloc(1, sizeof(MY_MYSQL));
-
-	MYSQLI_RESOURCE *mysqli_resource = (MYSQLI_RESOURCE *)ecalloc (1, sizeof(MYSQLI_RESOURCE));
 
 	if (!(mysql->mysql = mysql_init(NULL))) {
 		efree(mysql);
 		RETURN_FALSE;
 	}
+
+	mysqli_resource = (MYSQLI_RESOURCE *)ecalloc (1, sizeof(MYSQLI_RESOURCE));
 	mysqli_resource->ptr = (void *)mysql;
 	MYSQLI_RETURN_RESOURCE(mysqli_resource, mysqli_link_class_entry);	
 }

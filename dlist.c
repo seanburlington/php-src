@@ -4,7 +4,7 @@
 *							All rights reserved.
 *
 * Filename:		$RCSfile: dlist.c,v $
-* Version:		$Revision: 1.1 $
+* Version:		$Revision: 1.2 $
 *
 * Language:		ANSI C
 * Environment:	any
@@ -12,12 +12,15 @@
 * Description:	Module to implement doubly linked lists. Includes a routine
 *				to peform a mergesort on the doubly linked list.
 *
-* $Id: dlist.c,v 1.1 1999/07/19 18:58:44 andrey Exp $
+* $Id: dlist.c,v 1.2 1999/08/23 19:43:01 sas Exp $
 *
 * Revision History:
 * -----------------
 *
 * $Log: dlist.c,v $
+* Revision 1.2  1999/08/23 19:43:01  sas
+* malloc.h is deprecated, use stdlib.h instead
+*
 * Revision 1.1  1999/07/19 18:58:44  andrey
 * Moving dlist stuff into core.
 *
@@ -64,7 +67,7 @@
 #endif
 
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <signal.h>
 #include "dlist.h"
 

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.26 2001/03/27 20:34:28 sniper Exp $
+dnl $Id: config.m4,v 1.27 2001/04/10 17:31:35 jon Exp $
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
 		AC_DEFINE(HAVE_IMAP2000, 1, [ ])
@@ -60,7 +60,7 @@ PHP_ARG_WITH(imap,for IMAP support,
     PHP_EXPAND_PATH($IMAP_DIR, IMAP_DIR)
 
     if test -z "$IMAP_DIR"; then
-      AC_MSG_ERROR(Cannot find rfc822.h. Please check your IMAP installation)
+      AC_MSG_ERROR(Cannot find rfc822.h. Please check your IMAP installation.)
     fi
 
     if test -r "$IMAP_DIR/c-client/c-client.a"; then
@@ -76,7 +76,7 @@ PHP_ARG_WITH(imap,for IMAP support,
     done
 
     if test -z "$IMAP_LIBDIR"; then
-      AC_MSG_ERROR(Cannot find imap library. Please check your IMAP installation)
+      AC_MSG_ERROR(Cannot find imap library. Please check your IMAP installation.)
     fi
 
     PHP_ADD_INCLUDE($IMAP_INC_DIR)

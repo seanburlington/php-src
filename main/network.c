@@ -15,7 +15,9 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.2 2000/09/03 19:12:28 venaas Exp $ */
+/* $Id: network.c,v 1.3 2000/09/04 12:58:08 sas Exp $ */
+
+#include "php.h"
 
 #ifdef PHP_WIN32
 #include <windows.h>

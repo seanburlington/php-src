@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.95 2004/03/29 21:44:07 wez Exp $ */
+/* $Id: mod_files.c,v 1.96 2004/08/02 08:27:24 sas Exp $ */
 
 #include "php.h"
 
@@ -320,6 +320,12 @@ PS_READ_FUNC(files)
 		return FAILURE;
 	
 	data->st_size = *vallen = sbuf.st_size;
+	
+	if (sbuf.st_size == 0) {
+		*val = STR_EMPTY_ALLOC();
+		return SUCCESS;
+	}
+	
 	*val = emalloc(sbuf.st_size);
 
 #if defined(HAVE_PREAD)

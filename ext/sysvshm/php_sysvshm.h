@@ -23,12 +23,12 @@
    | If you did not, or have any questions about PHP licensing, please    |
    | contact core@php.net.                                                |
    +----------------------------------------------------------------------+
-   | Authors: Christian Cartus <chc@idgruppe.de>                          |
+   | Authors: Christian Cartus <cartus@atrior.de>                         |
    +----------------------------------------------------------------------+
  */
 
 
-/* $Id: php_sysvshm.h,v 1.5 2000/07/02 23:46:49 sas Exp $ */
+/* $Id: php_sysvshm.h,v 1.6 2000/07/10 19:46:29 eschmid Exp $ */
 
 #ifndef PHP_SYSVSHM_H
 #define PHP_SYSVSHM_H

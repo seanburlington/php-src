@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.63 2002/07/26 13:03:08 sesser Exp $ */
+/* $Id: php_ftp.c,v 1.64 2002/07/26 16:26:55 sesser Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -516,7 +516,7 @@ PHP_FUNCTION(ftp_get)
 		RETURN_FALSE;
 	}
 
-	if (!ftp_get(ftp, outstream, remote, xtype, resumepos) || php_stream_error(tmpstream)) {
+	if (!ftp_get(ftp, outstream, remote, xtype, resumepos) || php_stream_error(outstream)) {
 		php_stream_close(outstream);
 		php_error(E_WARNING, "%s(): %s", get_active_function_name(TSRMLS_C), ftp->inbuf);
 		RETURN_FALSE;

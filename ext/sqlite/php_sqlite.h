@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: php_sqlite.h,v 1.26 2003/08/28 23:19:51 helly Exp $ 
+   $Id: php_sqlite.h,v 1.27 2003/12/18 21:28:00 iliaa Exp $ 
 */
 
 #ifndef PHP_SQLITE_H
@@ -87,6 +87,8 @@ PHP_FUNCTION(sqlite_udf_decode_binary);
 PHP_FUNCTION(sqlite_udf_encode_binary);
 
 PHP_FUNCTION(sqlite_factory);
+
+PHP_FUNCTION(sqlite_fetch_column_types);
 
 ZEND_BEGIN_MODULE_GLOBALS(sqlite)
 	 int assoc_case;

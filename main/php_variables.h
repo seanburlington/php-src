@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_variables.h,v 1.18 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: php_variables.h,v 1.19 2003/08/18 23:19:27 wez Exp $ */
 
 #ifndef PHP_VARIABLES_H
 #define PHP_VARIABLES_H
@@ -30,6 +30,7 @@
 #define PARSE_COOKIE 2
 #define PARSE_STRING 3
 
+BEGIN_EXTERN_C();
 void php_treat_data(int arg, char *str, zval* destArray TSRMLS_DC);
 void php_startup_auto_globals(TSRMLS_D);
 extern PHPAPI void (*php_import_environment_variables)(zval *array_ptr TSRMLS_DC);
@@ -39,7 +40,7 @@ PHPAPI void php_register_variable_safe(char *var, char *val, int val_len, pval *
 PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_array TSRMLS_DC);
 
 int php_hash_environment(TSRMLS_D);
-
+END_EXTERN_C();
 
 #define NUM_TRACK_VARS	6
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_main.h,v 1.28 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: php_main.h,v 1.29 2003/08/18 23:19:27 wez Exp $ */
 
 #ifndef PHP_MAIN_H
 #define PHP_MAIN_H
@@ -26,6 +26,7 @@
 #include "php_globals.h"
 #include "SAPI.h"
 
+BEGIN_EXTERN_C();
 PHPAPI int php_request_startup(TSRMLS_D);
 PHPAPI void php_request_shutdown(void *dummy);
 PHPAPI void php_request_shutdown_for_exec(void *dummy);
@@ -52,5 +53,6 @@ extern void php_call_shutdown_functions(void);
 /* environment module */
 extern int php_init_environ(void);
 extern int php_shutdown_environ(void);
+END_EXTERN_C();
 
 #endif

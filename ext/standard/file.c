@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.22 1999/07/24 22:16:54 andrey Exp $ */
+/* $Id: file.c,v 1.23 1999/07/26 20:09:08 andrey Exp $ */
 
 /* Synced with php3 revision 1.218 1999-06-16 [ssb] */
 
@@ -215,7 +215,7 @@ function_entry php3_file_functions[] = {
 php3_module_entry php3_file_module_entry = {
 	"File functions",
 	php3_file_functions,
-	php3_minit_file,
+	PHP_MINIT(file),
 	NULL,
 	NULL,
 	NULL,
@@ -495,7 +495,7 @@ static void php3i_destructor_fclose(FILE *fp) {
 	(void)fclose(fp);
 }
 
-int php3_minit_file(INIT_FUNC_ARGS)
+PHP_MINIT_FUNCTION(file)
 {
 	le_fp = register_list_destructors(php3i_destructor_fclose, NULL);
 	le_pp = register_list_destructors(__pclose, NULL);

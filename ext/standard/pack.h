@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pack.h,v 1.3 1999/05/16 11:19:26 sas Exp $ */
+/* $Id: pack.h,v 1.4 1999/07/26 20:09:08 andrey Exp $ */
 
 #ifndef _PACK_H
 #define _PACK_H
@@ -35,7 +35,7 @@
 extern php3_module_entry pack_module_entry;
 #define pack_module_ptr &pack_module_entry
 
-extern int php3_minit_pack(INIT_FUNC_ARGS);
+extern PHP_MINIT_FUNCTION(pack);
 PHP_FUNCTION(pack);
 PHP_FUNCTION(unpack);
 

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.h,v 1.8 1999/06/16 17:06:52 ssb Exp $ */
+/* $Id: file.h,v 1.9 1999/07/26 20:09:08 andrey Exp $ */
 
 /* Synced with php3 revision 1.30 1999-06-16 [ssb] */
 
@@ -37,7 +37,8 @@
 extern php3_module_entry php3_file_module_entry;
 #define php3_file_module_ptr &php3_file_module_entry
 
-extern int php3_minit_file(INIT_FUNC_ARGS);
+extern PHP_MINIT_FUNCTION(file);
+
 PHP_FUNCTION(tempnam);
 PHP_FUNCTION(fopen);
 PHP_FUNCTION(fclose);

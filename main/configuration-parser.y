@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.16 1999/07/16 13:12:41 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.17 1999/07/26 20:09:04 andrey Exp $ */
 
 #define DEBUG_CFG_PARSER 1
 #include "php.h"
@@ -244,7 +244,7 @@ int php3_init_config(void)
 }
 
 
-int php3_minit_browscap(INIT_FUNC_ARGS)
+PHP_MINIT_FUNCTION(browscap)
 {
 	char *browscap = INI_STR("browscap");
 
@@ -277,7 +277,7 @@ int php3_shutdown_config(void)
 }
 
 
-int php3_mshutdown_browscap(SHUTDOWN_FUNC_ARGS)
+PHP_MSHUTDOWN_FUNCTION(browscap)
 {
 	if (INI_STR("browscap")) {
 		_php3_hash_destroy(&browser_hash);

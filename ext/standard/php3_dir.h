@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php3_dir.h,v 1.3 1999/05/16 11:19:26 sas Exp $ */
+/* $Id: php3_dir.h,v 1.4 1999/07/26 20:09:08 andrey Exp $ */
 
 #ifndef _PHP3_DIR_H
 #define _PHP3_DIR_H
@@ -37,7 +37,7 @@ extern php3_module_entry php3_dir_module_entry;
 #define php3_dir_module_ptr &php3_dir_module_entry
 
 /* directory functions */
-extern int php3_minit_dir(INIT_FUNC_ARGS);
+extern PHP_MINIT_FUNCTION(dir);
 PHP_FUNCTION(opendir);
 PHP_FUNCTION(closedir);
 PHP_FUNCTION(chdir);

@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php3_bcmath.h,v 1.3 1999/05/21 10:05:43 sas Exp $ */
+/* $Id: php3_bcmath.h,v 1.4 1999/07/26 20:09:07 andrey Exp $ */
 
 #ifndef _PHP3_BCMATH_H
 #define _PHP3_BCMATH_H
@@ -43,17 +43,17 @@
 extern php3_module_entry bcmath_module_entry;
 #define phpext_bcmath_ptr &bcmath_module_entry
 
-extern int php3_rinit_bcmath(INIT_FUNC_ARGS);
-extern int php3_rend_bcmath(SHUTDOWN_FUNC_ARGS);
-PHP_FUNCTION(bcmath_add);
-PHP_FUNCTION(bcmath_sub);
-PHP_FUNCTION(bcmath_mul);
-PHP_FUNCTION(bcmath_div);
-PHP_FUNCTION(bcmath_mod);
-PHP_FUNCTION(bcmath_pow);
-PHP_FUNCTION(bcmath_sqrt);
-PHP_FUNCTION(bcmath_comp);
-PHP_FUNCTION(bcmath_set_scale);
+extern PHP_RINIT_FUNCTION(bcmath);
+extern PHP_RSHUTDOWN_FUNCTION(bcmath);
+PHP_FUNCTION(bcadd);
+PHP_FUNCTION(bcsub);
+PHP_FUNCTION(bcmul);
+PHP_FUNCTION(bcdiv);
+PHP_FUNCTION(bcmod);
+PHP_FUNCTION(bcpow);
+PHP_FUNCTION(bcsqrt);
+PHP_FUNCTION(bccomp);
+PHP_FUNCTION(bcscale);
 
 #else
 

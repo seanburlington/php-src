@@ -30,7 +30,7 @@
  */
 
 
-/* $Id: dl.h,v 1.4 1999/05/16 11:19:25 sas Exp $ */
+/* $Id: dl.h,v 1.5 1999/07/26 20:09:08 andrey Exp $ */
 
 #ifndef _DL_H
 #define _DL_H
@@ -45,10 +45,10 @@ extern php3_module_entry dl_module_entry;
 
 /* dynamic loading functions */
 void dl(INTERNAL_FUNCTION_PARAMETERS);
-extern int php3_minit_dl(INIT_FUNC_ARGS);
-extern int php3_mshutdown_dl(SHUTDOWN_FUNC_ARGS);
-extern int php3_rshutdown_dl(SHUTDOWN_FUNC_ARGS);
-void php3_info_dl(ZEND_MODULE_INFO_FUNC_ARGS);
+extern PHP_MINIT_FUNCTION(dl);
+extern PHP_MSHUTDOWN_FUNCTION(dl);
+extern PHP_RSHUTDOWN_FUNCTION(dl);
+PHP_MINFO_FUNCTION(dl);
 
 #else
 

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.11 1999/07/24 22:16:54 andrey Exp $ */
+/* $Id: basic_functions.h,v 1.12 1999/07/26 20:09:08 andrey Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -39,10 +39,11 @@
 extern php3_module_entry basic_functions_module;
 #define basic_functions_module_ptr &basic_functions_module
 
-extern int php3_minit_basic(INIT_FUNC_ARGS);
-extern int php3_mshutdown_basic(SHUTDOWN_FUNC_ARGS);
-extern int php3_rinit_basic(INIT_FUNC_ARGS);
-extern int php3_rshutdown_basic(SHUTDOWN_FUNC_ARGS);
+PHP_MINIT_FUNCTION(basic);
+PHP_MSHUTDOWN_FUNCTION(basic);
+PHP_RINIT_FUNCTION(basic);
+PHP_RSHUTDOWN_FUNCTION(basic);
+
 PHP_FUNCTION(intval);
 PHP_FUNCTION(doubleval);
 PHP_FUNCTION(strval);

@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.45 2003/05/20 00:20:29 sniper Exp $
+dnl $Id: config.m4,v 1.46 2003/06/25 20:53:52 sterling Exp $
 dnl
 
 PHP_ARG_ENABLE(xml,whether to enable XML support,
-[  --disable-xml           Disable XML support. Requires libxml2.], yes)
+[  --disable-xml           Disable XML support.], yes)
 
 PHP_ARG_WITH(libxml-dir, libxml install dir,
 [  --with-libxml-dir=DIR     XML: libxml install prefix], no, no)

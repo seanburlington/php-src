@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.29 2001/06/04 02:04:46 sniper Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.30 2001/06/07 12:18:02 rasmus Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -159,12 +159,12 @@ main() {
 
 main() {
 #if HAVE_CRYPT
-    char salt[25], answer[70];
+    char salt[30], answer[70];
     
     salt[0]='$'; salt[1]='2'; salt[2]='a'; salt[3]='$'; salt[4]='0'; salt[5]='7'; salt[6]='$'; salt[7]='\0';
-    strcat(salt,"rasmuslerd");
+    strcat(salt,"rasmuslerd............");
     strcpy(answer,salt);
-    strcpy(&answer[16],"O............gl95GkTKn53Of.H4YchXl5PwvvW.5ri");
+    strcpy(&answer[29],"nIdrcHdxcUxWomQX9j6kvERCFjTg7Ra");
     exit (strcmp((char *)crypt("rasmuslerdorf",salt),answer));
 #else
 	exit(0);

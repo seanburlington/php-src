@@ -16,7 +16,7 @@
   |          Tal Peer <tal@php.net>                                      |
   +----------------------------------------------------------------------+
 
-  $Id: sqlite.c,v 1.27 2003/04/22 00:21:02 wez Exp $ 
+  $Id: sqlite.c,v 1.28 2003/04/22 19:06:31 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -604,7 +604,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.27 2003/04/22 00:21:02 wez Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.28 2003/04/22 19:06:31 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -930,6 +930,7 @@ next_row:
 		case SQLITE_MISUSE:
 		default:
 			/* fall through to finalize */
+			;
 	}
 
 	ret = sqlite_finalize(rres->vm, &errtext);

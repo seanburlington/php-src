@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.63 2002/06/17 15:10:22 andrei Exp $ */
+/* $Id: reg.c,v 1.64 2002/08/19 20:47:42 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -342,7 +342,7 @@ PHPAPI char *php_reg_replace(const char *pattern, const char *replace, const cha
 			while (*walk)
 				if ('\\' == *walk
 					&& '0' <= walk[1] && '9' >= walk[1]
-					&& walk[1] - '0' <= re.re_nsub
+					&& walk[1] - '0' <= ((char) re.re_nsub)
 					&& subs[walk[1] - '0'].rm_so > -1
 					&& subs[walk[1] - '0'].rm_eo > -1) {
 					new_l += subs[walk[1] - '0'].rm_eo

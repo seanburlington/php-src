@@ -17,7 +17,7 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.47.2.9 2005/01/19 17:38:41 sniper Exp $ */
+/* $Id: sendmail.c,v 1.47.2.10 2005/01/19 18:54:57 iliaa Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
@@ -462,7 +462,7 @@ int SendText(char *RPath, char *Subject, char *mailTo, char *mailCc, char *mailB
 		efree(tempMailTo);
 	}
 	/* Send mail to all Cc rcpt's */
-	else if (headers && (pos1 = strstr(headers_lc, "cc:")) && ((pos1 == headers_lc) || iscntrl(*(pos1-1)))) {
+	else if (headers && (pos1 = strstr(headers_lc, "cc:")) && ((pos1 == headers_lc) || (*(pos1-1) == '\n'))) {
 		/* Real offset is memaddress from the original headers + difference of
 		 * string found in the lowercase headrs + 3 characters to jump over
 		 * the cc: */

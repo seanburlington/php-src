@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.15 2005/02/20 23:08:34 hholzgra Exp $ */
+/* $Id: mysql_statement.c,v 1.16 2005/02/20 23:56:14 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -191,7 +191,7 @@ static int pdo_mysql_stmt_col_meta(pdo_stmt_t *stmt, long colno, zval *return_va
 	zval *flags;
 	char *str;
 	
-	if(S->current_data == NULL || !S->result) {
+	if(!S->result) {
 		return FAILURE;
 	}
 	if(colno >= mysql_num_fields(S->result)) {

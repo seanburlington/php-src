@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.117 2004/07/25 18:20:33 helly Exp $ */
+/* $Id: php_reflection.c,v 1.118 2004/08/02 23:10:29 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -1363,6 +1363,34 @@ ZEND_METHOD(reflection_function, returnsReference)
 	GET_REFLECTION_OBJECT_PTR(fptr);
 
 	RETURN_BOOL(fptr->op_array.return_reference);
+}
+/* }}} */
+
+/* {{{ proto public bool ReflectionFunction::getNumberOfParameters()
+   Gets the number of required parameters */
+ZEND_METHOD(reflection_function, getNumberOfParameters)
+{
+	reflection_object *intern;
+	zend_function *fptr;
+
+	METHOD_NOTSTATIC;
+	GET_REFLECTION_OBJECT_PTR(fptr);
+
+	RETURN_LONG(fptr->common.num_args);
+}
+/* }}} */
+
+/* {{{ proto public bool ReflectionFunction::getNumberOfRequiredParameters()
+   Gets the number of required parameters */
+ZEND_METHOD(reflection_function, getNumberOfRequiredParameters)
+{
+	reflection_object *intern;
+	zend_function *fptr;
+
+	METHOD_NOTSTATIC;
+	GET_REFLECTION_OBJECT_PTR(fptr);
+
+	RETURN_LONG(fptr->common.required_num_args);
 }
 /* }}} */
 
@@ -3264,6 +3292,8 @@ static zend_function_entry reflection_function_functions[] = {
 	ZEND_ME(reflection_function, invoke, NULL, 0)
 	ZEND_ME(reflection_function, returnsReference, NULL, 0)
 	ZEND_ME(reflection_function, getParameters, NULL, 0)
+	ZEND_ME(reflection_function, getNumberOfParameters, NULL, 0)
+	ZEND_ME(reflection_function, getNumberOfRequiredParameters, NULL, 0)
 	{NULL, NULL, NULL}
 };
 

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.16 2002/04/07 14:30:32 cox Exp $
+// $Id: Install.php,v 1.17 2002/04/07 16:51:17 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -28,9 +28,6 @@ require_once "PEAR/Installer.php";
  */
 class PEAR_Command_Install extends PEAR_Command_Common
 {
-    // {{{ properties
-    // }}}
-
     // {{{ constructor
 
     /**

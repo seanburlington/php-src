@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.56 2002/03/20 14:38:11 wez Exp $ */
+/* $Id: php_string.h,v 1.57 2002/07/03 18:23:24 fmk Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -100,6 +100,10 @@ PHP_MINIT_FUNCTION(nl_langinfo);
 #define strnatcasecmp(a, b) \
 	strnatcmp_ex(a, strlen(a), b, strlen(b), 1)
 PHPAPI int strnatcmp_ex(char const *a, size_t a_len, char const *b, size_t b_len, int fold_case);
+
+#ifdef HAVE_LOCALECONV
+struct lconv *localeconv_r(struct lconv *out);
+#endif
 
 PHPAPI char *php_strtoupper(char *s, size_t len);
 PHPAPI char *php_strtolower(char *s, size_t len);

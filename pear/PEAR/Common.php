@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.59 2002/05/20 01:17:09 cox Exp $
+// $Id: Common.php,v 1.60 2002/05/20 10:45:23 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -888,9 +888,9 @@ class PEAR_Common extends PEAR
     }
 
     // }}}
-    // {{{ _infoFromAny()
+    // {{{ infoFromAny()
 
-    function _infoFromAny($info)
+    function infoFromAny($info)
     {
         if (is_string($info) && file_exists($info)) {
             $tmp = substr($info, -4);
@@ -926,7 +926,7 @@ class PEAR_Common extends PEAR
             $_PEAR_Common_dependency_relations,
             $_PEAR_Common_file_roles,
             $_PEAR_Common_replacement_types;
-        if (PEAR::isError($info = $this->_infoFromAny($info))) {
+        if (PEAR::isError($info = $this->infoFromAny($info))) {
             return $this->raiseError($info);
         }
         if (!is_array($info)) {
@@ -1142,7 +1142,7 @@ class PEAR_Common extends PEAR
         if (!function_exists("token_get_all")) {
             return false;
         }
-        if (PEAR::isError($info = $this->_infoFromAny($any))) {
+        if (PEAR::isError($info = $this->infoFromAny($any))) {
             return $this->raiseError($info);
         }
         if (!is_array($info)) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.23 2003/04/16 12:44:54 sas Exp $ */
+/* $Id: main.c,v 1.512.2.24 2003/04/24 18:25:47 ddhill Exp $ */
 
 /* {{{ includes
  */
@@ -683,7 +683,7 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 					trigger_break=0;
 					break;
 			}
-//			zend_output_debug_string(trigger_break, "%s(%d) : %s - %s", error_filename, error_lineno, error_type_str, buffer);
+/*			zend_output_debug_string(trigger_break, "%s(%d) : %s - %s", error_filename, error_lineno, error_type_str, buffer); */
 		}
 #endif
 	}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.63.2.11 2003/04/22 20:44:55 rasmus Exp $ */
+/* $Id: html.c,v 1.63.2.12 2003/04/24 18:25:46 ddhill Exp $ */
 
 #include "php.h"
 #if PHP_WIN32
@@ -677,6 +677,7 @@ static enum entity_charset determine_charset(char *charset_hint TSRMLS_DC)
 			return cs_8859_5;
 
 		default:	
+			;
 	}
 #else
 	{

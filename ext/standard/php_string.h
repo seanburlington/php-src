@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.63 2002/10/11 14:48:25 iliaa Exp $ */
+/* $Id: php_string.h,v 1.64 2002/10/17 03:27:19 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -83,6 +83,7 @@ PHP_FUNCTION(substr_count);
 PHP_FUNCTION(str_pad);
 PHP_FUNCTION(sscanf);
 PHP_FUNCTION(str_shuffle);
+PHP_FUNCTION(word_count);
 #ifdef HAVE_STRCOLL
 PHP_FUNCTION(strcoll);
 #endif

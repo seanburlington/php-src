@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.528 2002/10/06 17:04:10 rasmus Exp $ */
+/* $Id: basic_functions.c,v 1.529 2002/10/17 03:27:19 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -334,6 +334,7 @@ function_entry basic_functions[] = {
 	PHP_FE(stristr,															NULL)
 	PHP_FE(strrchr,															NULL)
 	PHP_FE(str_shuffle,															NULL)
+	PHP_FE(word_count,														NULL)
 
 #ifdef HAVE_STRCOLL
 	PHP_FE(strcoll,															NULL)

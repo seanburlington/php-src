@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.88 2004/02/14 19:02:23 jan Exp $ */
+/* $Id: dl.c,v 1.89 2004/05/01 20:34:15 helly Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -108,6 +108,8 @@ void php_dl(pval *file, int type, pval *return_value TSRMLS_DC)
 	zend_module_entry *(*get_module)(void);
 	int error_type;
 	char *extension_dir;
+	int name_len;
+	char *lcname;
 
 	if (type==MODULE_PERSISTENT) {
 		/* Use the configuration hash directly, the INI mechanism is not yet initialized */
@@ -234,6 +236,15 @@ void php_dl(pval *file, int type, pval *return_value TSRMLS_DC)
 			DL_UNLOAD(handle);
 			RETURN_FALSE;
 	}
+	name_len = strlen(module_entry->name);
+	lcname = zend_str_tolower_dup(module_entry->name, name_len);
+	if (zend_hash_exists(&module_registry, lcname, name_len+1)) {
+		efree(lcname);
+		php_error_docref(NULL TSRMLS_CC, error_type, "Module '%s' already loaded", module_entry->name);
+		DL_UNLOAD(handle);
+		RETURN_FALSE;
+	}
+	efree(lcname);
 	Z_TYPE_P(module_entry) = type;
 	module_entry->module_number = zend_next_free_module();
 	if (module_entry->module_startup_func) {

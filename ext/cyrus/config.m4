@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.10 2002/12/09 18:29:22 sniper Exp $
+dnl $Id: config.m4,v 1.11 2002/12/09 18:30:50 sniper Exp $
 dnl
 
 PHP_ARG_WITH(cyrus, for cyrus imap support,
@@ -27,7 +27,7 @@ if test "$PHP_CYRUS" != "no"; then
     AC_MSG_ERROR(Please Re-install the cyrus distribution)
   fi
 
-  dnk
+  dnl
   dnl sasl/sasl2 
   dnl
   for i in $PHP_CYRUS /usr/local /usr; do
@@ -54,7 +54,7 @@ if test "$PHP_CYRUS" != "no"; then
     AC_MSG_ERROR(Please Re-install the cyrus distribution)
   fi
 
-  dnk
+  dnl
   dnl OpenSSL
   dnl
   if test "$PHP_OPENSSL" = "no"; then

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.6.2.2 2003/01/28 06:52:33 sniper Exp $
+dnl $Id: config.m4,v 1.6.2.3 2003/03/31 19:49:37 moriyoshi Exp $
 dnl
 
 PHP_ARG_WITH(mime-magic, whether to include mime_magic support,
@@ -22,7 +22,7 @@ if test "$PHP_MIME_MAGIC" != "no"; then
       AC_MSG_ERROR([File '$PHP_MIME_MAGIC' not found!])
     fi
   else
-    MAGIC_MIME_LOCATIONS="/usr/share/magic.mime /usr/share/misc/magic.mime /etc/magic.mime"
+    MAGIC_MIME_LOCATIONS="/usr/local/apache/conf/magic /usr/local/etc/apache/conf/magic /etc/apache/magic /etc/httpd/conf/magic /usr/share/magic.mime /usr/share/misc/magic.mime /etc/magic.mime"
 
     for i in $MAGIC_MIME_LOCATIONS; do
       if test -f $i; then

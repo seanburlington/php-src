@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.112.2.10 2004/07/16 05:08:15 pollita Exp $ */
+/* $Id: filestat.c,v 1.112.2.11 2004/09/02 09:38:56 stas Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -128,6 +128,7 @@ PHP_RSHUTDOWN_FUNCTION(filestat)
 {
 	if (BG(CurrentStatFile)) {
 		efree (BG(CurrentStatFile));
+		BG(CurrentStatFile) = NULL;
 	}
 	return SUCCESS;
 }

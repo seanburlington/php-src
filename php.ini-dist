@@ -1,5 +1,5 @@
 [PHP]
-; $Id: php.ini-dist,v 1.72 2001/03/03 13:10:13 sbergmann Exp $
+; $Id: php.ini-dist,v 1.73 2001/03/07 10:08:19 zeev Exp $
 
 ;;;;;;;;;;;;;;;;;;;
 ; About this file ;
@@ -81,6 +81,11 @@ output_buffering = Off
 ; transparently compressed for browsers that support gzip or deflate encoding.
 ; Setting an output handler automatically turns on output buffering.
 output_handler =
+
+; Transparent output compression using the zlib library
+; Valid values for this option are 'off', 'on', or a specific buffer size
+; to be used for compression (default is 4KB)
+zlib.output_compression = Off
 
 ; Implicit flush tells PHP to tell the output layer to flush itself
 ; automatically after every output block.  This is equivalent to calling the

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.179 2000/01/16 21:03:48 zeev Exp $ */
+/* $Id: main.c,v 1.180 2000/01/18 19:15:45 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -1191,6 +1191,7 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 	zend_file_handle prepend_file, append_file;
 	SLS_FETCH();
 
+	zend_activate_modules();
 	if (SG(request_info).query_string && SG(request_info).query_string[0]=='=' 
 		&& PG(expose_php)) {
 		if (!strcmp(SG(request_info).query_string+1, PHP_LOGO_GUID)) {
@@ -1239,7 +1240,6 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 	if (EG(main_op_array)) {
 		zend_hash_environment(PLS_C ELS_CC SLS_CC);
 		EG(active_op_array) = EG(main_op_array);
-		zend_activate_modules();
 		zend_execute(EG(main_op_array) ELS_CC);
 	}
 }

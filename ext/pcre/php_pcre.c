@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.23 1999/10/15 16:57:54 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.24 1999/10/15 20:04:31 andrei Exp $ */
 
 /*
 	TODO:
@@ -566,9 +566,9 @@ static int _preg_do_eval(char *eval_str, char *subject, int *offsets,
 			match = subject + offsets[backref<<1];
 			match_len = offsets[(backref<<1)+1] - offsets[backref<<1];
 			sprintf(backref_buf, "\\%d", backref);
-			new_code = _php3_str_to_str(code, code_len,
-										backref_buf, (backref > 9) ? 3 : 2,
-										match, match_len, &new_code_len);
+			new_code = php_str_to_str(code, code_len,
+									  backref_buf, (backref > 9) ? 3 : 2,
+									  match, match_len, &new_code_len);
 			
 			/* Adjust the walk pointer */
 			walk = new_code + (walk - code) + match_len;

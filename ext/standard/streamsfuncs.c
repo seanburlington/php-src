@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.35.2.2 2004/07/28 23:34:30 iliaa Exp $ */
+/* $Id: streamsfuncs.c,v 1.35.2.3 2004/08/06 14:18:49 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -542,7 +542,7 @@ static int stream_array_to_fd_set(zval *stream_array, fd_set *fds, php_socket_t 
 		 * when casting.  It is only used here so that the buffered data warning
 		 * is not displayed.
 		 * */
-		if (SUCCESS == php_stream_cast(stream, PHP_STREAM_AS_FD_FOR_SELECT | PHP_STREAM_CAST_INTERNAL, (void*)&this_fd, 1)) {
+		if (SUCCESS == php_stream_cast(stream, PHP_STREAM_AS_FD_FOR_SELECT | PHP_STREAM_CAST_INTERNAL, (void*)&this_fd, 1) && this_fd >= 0) {
 			FD_SET(this_fd, fds);
 			if (this_fd > *max_fd) {
 				*max_fd = this_fd;
@@ -578,7 +578,7 @@ static int stream_array_from_fd_set(zval *stream_array, fd_set *fds TSRMLS_DC)
 		 * when casting.  It is only used here so that the buffered data warning
 		 * is not displayed.
 		 */
-		if (SUCCESS == php_stream_cast(stream, PHP_STREAM_AS_FD_FOR_SELECT | PHP_STREAM_CAST_INTERNAL, (void*)&this_fd, 1)) {
+		if (SUCCESS == php_stream_cast(stream, PHP_STREAM_AS_FD_FOR_SELECT | PHP_STREAM_CAST_INTERNAL, (void*)&this_fd, 1) && this_fd >= 0) {
 			if (FD_ISSET(this_fd, fds)) {
 				zend_hash_next_index_insert(new_hash, (void *)elem, sizeof(zval *), (void **)&dest_elem);
 				if (dest_elem) {

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.199.2.9 2002/12/06 17:36:25 iliaa Exp $ */
+/* $Id: array.c,v 1.199.2.10 2002/12/25 20:00:12 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1429,18 +1429,17 @@ PHP_FUNCTION(range)
 	array_init(return_value);
 
 	if (Z_TYPE_PP(zlow)==IS_STRING && Z_TYPE_PP(zhigh)==IS_STRING) {
-		char *low, *high;
-		convert_to_string_ex(zlow);
-		convert_to_string_ex(zhigh);
-		low = Z_STRVAL_PP(zlow);
-		high = Z_STRVAL_PP(zhigh);
-		if (*low>*high) {
-			for (; *low >= *high; (*low)--) {
-				add_next_index_stringl(return_value, low, 1, 1);
+		unsigned char low, high;
+		low = *((unsigned char *)Z_STRVAL_PP(zlow));
+		high = *((unsigned char *)Z_STRVAL_PP(zhigh));
+		
+		if (low>high) {
+			for (; low >= high; (low)--) {
+				add_next_index_stringl(return_value, (char *)&low, 1, 1);
 			}	
 		} else {
-			for (; *low <= *high; (*low)++) {
-				add_next_index_stringl(return_value, low, 1, 1);
+			for (; low <= high; (low)++) {
+				add_next_index_stringl(return_value, (char *)&low, 1, 1);
 			}	
 		}
 	} else {

@@ -23,7 +23,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.66 2000/10/20 18:25:04 andrei Exp $ */
+/* $Id: ldap.c,v 1.67 2000/10/20 20:22:59 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -224,7 +224,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.66 2000/10/20 18:25:04 andrei Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.67 2000/10/20 20:22:59 venaas Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 #ifdef LDAP_API_VERSION
 	snprintf(ldapapiversion, 31, "%ld", LDAP_API_VERSION);
@@ -357,7 +357,21 @@ PHP_FUNCTION(ldap_connect)
 		RETURN_FALSE;
 	}
 
-	ldap = ldap_open(host,port);
+#ifdef LDAP_API_FEATURE_X_OPENLDAP
+	if (strchr(host, '/')) {
+		int rc;
+		
+		rc = ldap_initialize(&ldap, host);
+		if (rc != LDAP_SUCCESS) {
+			php_error(E_WARNING, "Could not create LDAP session handle (%d): %s\n", rc, ldap_err2string(rc));
+			RETURN_FALSE;
+		}
+	} else
+#endif
+	{
+		ldap = ldap_open(host,port);
+	}
+	
 	if ( ldap == NULL ) {
 		RETURN_FALSE;
 	} else {

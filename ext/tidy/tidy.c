@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.54 2004/06/08 14:55:14 iliaa Exp $ */
+/* $Id: tidy.c,v 1.55 2004/06/24 14:20:59 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -952,7 +952,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.54 2004/06/08 14:55:14 iliaa Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.55 2004/06/24 14:20:59 iliaa Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1042,7 +1042,11 @@ PHP_FUNCTION(tidy_get_error_buffer)
 {
 	TIDY_FETCH_OBJECT;
 
-	RETURN_STRING(obj->ptdoc->errbuf->bp, 1);
+	if (obj->ptdoc->errbuf && obj->ptdoc->errbuf->bp) {
+		RETURN_STRING(obj->ptdoc->errbuf->bp, 1);
+	} else {
+		RETURN_FALSE;
+	}
 }
 /* }}} */
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.23 2003/04/16 23:49:45 iliaa Exp $ */
+/* $Id: string.c,v 1.333.2.24 2003/05/04 11:46:23 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3397,10 +3397,8 @@ PHPAPI size_t php_strip_tags(char *rbuf, int len, int *stateptr, char *allow, in
 						break;
 						
 					case 3: /* JavaScript/CSS/etc... */
-						if (*(p-1) == '-' && *(p-2) == '-') {
-							state = 0;
-							tp = tbuf;
-						}
+						state = 0;
+						tp = tbuf;
 						break;
 					
 					default:

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.299 2000/08/27 19:38:18 sas Exp $ */
+/* $Id: main.c,v 1.300 2000/08/27 19:40:21 sas Exp $ */
 
 
 #include <stdio.h>
@@ -1106,7 +1106,7 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 	zend_file_handle *prepend_file_p, *append_file_p;
 	zend_file_handle prepend_file, append_file;
 	char old_cwd[4096];
-	char new_path[4096] = "";
+	char new_path[4096];
 	SLS_FETCH();
 
 	old_cwd[0] = new_path[0] = '\0';

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.2 2001/10/27 07:52:12 ssb Exp $
+// $Id: Config.php,v 1.3 2001/10/30 12:27:58 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -178,6 +178,14 @@ class PEAR_Config extends PEAR
         } elseif (isset($this->defaulted[$key])) {
             unset($this->defaulted[$key]);
         }
+    }
+
+    // }}}
+    // {{{ getKeys()
+
+    function getKeys()
+    {
+        return array_keys($this->configuration);
     }
 
     // }}}

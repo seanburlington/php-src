@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.65 2002/06/01 17:38:23 sas Exp $ */
+/* $Id: php_apache.c,v 1.66 2002/08/13 04:03:20 rasmus Exp $ */
 
 #include "php_apache_http.h"
 
@@ -108,7 +108,7 @@ zend_module_entry apache_module_entry = {
 	STANDARD_MODULE_PROPERTIES
 };
 
-/* {{{ proto bool string apache_child_terminate(void)
+/* {{{ proto bool apache_child_terminate(void)
    Terminate apache process after this request */
 PHP_FUNCTION(apache_child_terminate)
 {

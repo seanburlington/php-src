@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.82 2003/07/16 05:10:29 sniper Exp $ */
+/* $Id: snmp.c,v 1.83 2003/07/16 06:03:46 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -224,6 +224,8 @@ static void php_snmp_getvalue(struct variable_list *vars, zval *snmpval TSRMLS_D
 	char buf[2048];
 #endif
 
+	buf[0] = 0;
+
 	if (SNMP_G(valueretrieval) == 0) {
 #ifdef HAVE_NET_SNMP
 		snprint_value(buf, sizeof(buf), vars->name, vars->name_length, vars);
@@ -337,7 +339,7 @@ static void php_snmp_internal(INTERNAL_FUNCTION_PARAMETERS, int st,
 	char buf2[2048];
 	int keepwalking=1;
 	char *err;
-	zval *snmpval;
+	zval *snmpval = NULL;
 
 	if (st >= 3) { /* walk */
 		rootlen = MAX_NAME_LEN;

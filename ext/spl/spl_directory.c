@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.5 2003/08/04 23:15:56 helly Exp $ */
+/* $Id: spl_directory.c,v 1.6 2003/08/10 15:05:14 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -237,11 +237,8 @@ SPL_CLASS_FUNCTION(dir, next)
 	zval *object = getThis();
 	spl_dir_object *intern = (spl_dir_object*)zend_object_store_get_object(object TSRMLS_CC);
 
-	if (intern->dirp && php_stream_readdir(intern->dirp, &intern->entry)) {
-		RETURN_TRUE;
-	} else {
+	if (!intern->dirp || !php_stream_readdir(intern->dirp, &intern->entry)) {
 		intern->entry.d_name[0] = '\0';
-		RETURN_FALSE;
 	}
 }
 /* }}} */

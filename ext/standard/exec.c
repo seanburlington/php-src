@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.30 2000/03/06 15:32:05 hholzgra Exp $ */
+/* $Id: exec.c,v 1.31 2000/03/06 16:01:54 eschmid Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -196,7 +196,6 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 }
 
 /* {{{ proto int exec(string command [, array output [, int return_value]])
-
    Execute an external program */
 PHP_FUNCTION(exec)
 {

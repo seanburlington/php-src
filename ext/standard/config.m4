@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.47.2.12 2004/04/04 10:24:09 abies Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.47.2.13 2004/04/04 12:31:38 helly Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -353,6 +353,7 @@ AC_CACHE_CHECK(whether HUGE_VAL + -HUGEVAL == NAN, ac_cv_huge_val_nan,[
 int main(int argc, char** argv)
 {
 #if defined(__sparc__) && !(__GNUC__ >= 3)
+	/* prevent bug #27830 */
 	return 1;
 #else
 	return zend_isinf(HUGE_VAL) && zend_isnan(HUGE_VAL + -HUGE_VAL) ? 0 : 1;

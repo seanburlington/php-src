@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.42 2004/06/15 10:06:41 abies Exp $ */
+/* $Id: pdo_stmt.c,v 1.43 2004/06/15 10:22:21 abies Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -554,13 +554,12 @@ static int register_bound_param(INTERNAL_FUNCTION_PARAMETERS, pdo_stmt_t *stmt, 
 	param.paramno = -1;
 	param.param_type = PDO_PARAM_STR;
 
-	if (FAILURE == zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET,
-				ZEND_NUM_ARGS() TSRMLS_CC, "sz|llz!",
-				&param.name, &param.namelen, &param.parameter, &param.param_type,
-				&param.max_value_len,
+	if (FAILURE == zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET, ZEND_NUM_ARGS() TSRMLS_CC,
+			"lz|llz!", &param.paramno, &param.parameter, &param.param_type, &param.max_value_len,
+			&param.driver_params)) {
+		if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sz|llz!", &param.name,
+				&param.namelen, &param.parameter, &param.param_type, &param.max_value_len, 
 				&param.driver_params)) {
-		if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lz|llz!", &param.paramno,
-					&param.parameter, &param.param_type, &param.max_value_len, &param.driver_params)) {
 			return 0;
 		}	
 	}

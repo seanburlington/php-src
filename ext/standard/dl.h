@@ -30,7 +30,7 @@
  */
 
 
-/* $Id: dl.h,v 1.2 1999/05/09 08:48:01 zeev Exp $ */
+/* $Id: dl.h,v 1.3 1999/05/14 18:25:16 zeev Exp $ */
 
 #ifndef _DL_H
 #define _DL_H
@@ -56,5 +56,6 @@ extern void php3_info_dl(ZEND_MODULE_INFO_FUNC_ARGS);
 
 #endif
 
+#define phpext_dl_ptr dl_module_ptr
 
 #endif /* _DL_H */

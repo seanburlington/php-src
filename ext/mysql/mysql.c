@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: mysql.c,v 1.6 1999/05/09 08:47:58 zeev Exp $ */
+/* $Id: mysql.c,v 1.7 1999/05/14 18:25:15 zeev Exp $ */
 
 
 /* TODO:
@@ -1481,6 +1481,8 @@ void php3_mysql_fetch_object(INTERNAL_FUNCTION_PARAMETERS)
 	php3_mysql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU);
 	if (return_value->type==IS_ARRAY) {
 		return_value->type=IS_OBJECT;
+		return_value->value.obj.properties = return_value->value.ht;
+		return_value->value.obj.ce = &standard_class;
 	}
 }
 /* }}} */

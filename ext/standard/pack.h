@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pack.h,v 1.1 1999/04/17 00:37:07 ssb Exp $ */
+/* $Id: pack.h,v 1.2 1999/05/14 18:25:16 zeev Exp $ */
 
 #ifndef _PACK_H
 #define _PACK_H
@@ -38,5 +38,7 @@ extern php3_module_entry pack_module_entry;
 extern int php3_minit_pack(INIT_FUNC_ARGS);
 extern void php3_pack(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_unpack(INTERNAL_FUNCTION_PARAMETERS);
+
+#define phpext_pack_ptr pack_module_ptr
 
 #endif /* _PACK_H */

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php3_dir.h,v 1.1 1999/04/17 00:37:07 ssb Exp $ */
+/* $Id: php3_dir.h,v 1.2 1999/05/14 18:25:16 zeev Exp $ */
 
 #ifndef _PHP3_DIR_H
 #define _PHP3_DIR_H
@@ -44,5 +44,7 @@ extern void php3_chdir(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_rewinddir(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_readdir(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_getdir(INTERNAL_FUNCTION_PARAMETERS);
+
+#define phpext_dir_ptr php3_dir_module_ptr
 
 #endif /* _PHP3_DIR_H */

@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.203 2005/01/25 14:20:02 tony2001 Exp $ */
+/* $Id: php_imap.c,v 1.204 2005/02/20 18:23:33 iliaa Exp $ */
 
 #define IMAP41
 
@@ -3169,8 +3169,7 @@ PHP_FUNCTION(imap_mail_compose)
 
 		efree(tempstring);
 	} else {
-		mystring = emalloc(strlen(tmp) + 1);
-		strcpy(mystring, tmp);
+		mystring = estrdup(tmp);
 	}
 
 	bod = topbod;
@@ -3206,10 +3205,9 @@ PHP_FUNCTION(imap_mail_compose)
 
 			/* output cookie, mini-header, and contents */
 				tempstring=emalloc(strlen(mystring)+strlen(tmp)+1);
-				strcpy(tempstring, mystring);
+				sprintf(tempstring, "%s%s", mystring, tmp);
 				efree(mystring);
 				mystring=tempstring;
-				strcat(mystring, tmp);
 
 				bod=&part->body;
 

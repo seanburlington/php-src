@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.107 2003/12/05 09:35:21 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.108 2003/12/06 11:10:13 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2239,6 +2239,7 @@ typedef struct _php_iconv_stream_filter {
 /* {{{ php_iconv_stream_filter_dtor */
 static void php_iconv_stream_filter_dtor(php_iconv_stream_filter *self)
 {
+	iconv_close(self->cd);
 	pefree(self->to_charset, self->persistent);
 	pefree(self->from_charset, self->persistent);
 }

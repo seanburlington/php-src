@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.24 2003/08/12 15:04:52 iliaa Exp $ */
+/* $Id: mbstring.c,v 1.142.2.25 2003/08/19 08:34:51 derick Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -2625,7 +2625,7 @@ PHP_FUNCTION(mb_convert_encoding)
 	if (ret != NULL) {
 		RETVAL_STRINGL(ret, size, 0);		/* the string is already strdup()'ed */
 	} else {
-		RETVAL_FALSE;
+		RETVAL_STRINGL("", 0, 1);
 	}
 	if ( s_free) {
 		efree(s_free);

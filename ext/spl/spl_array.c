@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.64 2005/03/11 00:41:42 helly Exp $ */
+/* $Id: spl_array.c,v 1.65 2005/03/13 16:35:01 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -57,12 +57,12 @@ ZEND_BEGIN_ARG_INFO(arginfo_array___construct, 0)
 ZEND_END_ARG_INFO();
 
 static
-ZEND_BEGIN_ARG_INFO(arginfo_array_offsetGet, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_array_offsetGet, 0, 0, 1)
 	ZEND_ARG_INFO(0, index)
 ZEND_END_ARG_INFO();
 
 static
-ZEND_BEGIN_ARG_INFO(arginfo_array_offsetSet, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_array_offsetSet, 0, 0, 2)
 	ZEND_ARG_INFO(0, index)
 	ZEND_ARG_INFO(0, newval)
 ZEND_END_ARG_INFO();

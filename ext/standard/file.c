@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.275 2002/10/22 18:07:11 iliaa Exp $ */
+/* $Id: file.c,v 1.276 2002/10/24 19:17:08 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1310,7 +1310,7 @@ PHP_FUNCTION(stream_set_timeout)
 PHPAPI PHP_FUNCTION(fgets)
 {
 	zval **arg1, **arg2;
-	int len;
+	int len = 1024;
 	char *buf = NULL;
 	int argc = ZEND_NUM_ARGS();
 	size_t line_len = 0;

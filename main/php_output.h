@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.29 2001/08/05 15:29:40 sas Exp $ */
+/* $Id: php_output.h,v 1.30 2001/08/05 15:55:43 sas Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -29,8 +29,8 @@ PHPAPI void php_output_startup(void);
 PHPAPI void php_output_activate(TSRMLS_D);
 PHPAPI void php_output_set_status(zend_bool status TSRMLS_DC);
 void php_output_register_constants(TSRMLS_D);
-PHPAPI int  php_body_write(const char *str, uint str_length);
-PHPAPI int  php_header_write(const char *str, uint str_length);
+PHPAPI int  php_body_write(const char *str, uint str_length TSRMLS_DC);
+PHPAPI int  php_header_write(const char *str, uint str_length TSRMLS_DC);
 PHPAPI int php_start_ob_buffer(zval *output_handler, uint chunk_size TSRMLS_DC);
 PHPAPI void php_end_ob_buffer(zend_bool send_buffer, zend_bool just_flush TSRMLS_DC);
 PHPAPI void php_end_ob_buffers(zend_bool send_buffer TSRMLS_DC);

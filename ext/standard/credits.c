@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.10 2001/07/09 18:54:59 andrei Exp $ */
+/* $Id: credits.c,v 1.11 2001/08/05 15:55:42 sas Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -28,6 +28,8 @@
  */
 PHPAPI void php_print_credits(int flag)
 {
+	TSRMLS_FETCH();
+
 	if (flag & PHP_CREDITS_FULLPAGE) {
 		PUTS("<html><head><title>PHP Credits</title></head><body>\n");
 	}

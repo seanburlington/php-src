@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.64 2001/07/31 05:43:59 zeev Exp $ */
+/* $Id: php_mssql.c,v 1.65 2001/08/05 15:55:41 sas Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -103,6 +103,7 @@ ZEND_GET_MODULE(mssql)
 static PHP_INI_DISP(display_text_size)
 {
 	char *value;
+	TSRMLS_FETCH();
 	
     if (type == PHP_INI_DISPLAY_ORIG && ini_entry->modified) {
 		value = ini_entry->orig_value;

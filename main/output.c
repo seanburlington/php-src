@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.72 2001/08/05 15:29:40 sas Exp $ */
+/* $Id: output.c,v 1.73 2001/08/05 15:55:43 sas Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -95,15 +95,13 @@ void php_output_register_constants(TSRMLS_D)
 }
 
 
-PHPAPI int php_body_write(const char *str, uint str_length)
+PHPAPI int php_body_write(const char *str, uint str_length TSRMLS_DC)
 {
-	TSRMLS_FETCH();
 	return OG(php_body_write)(str, str_length TSRMLS_CC);	
 }
 
-PHPAPI int php_header_write(const char *str, uint str_length)
+PHPAPI int php_header_write(const char *str, uint str_length TSRMLS_DC)
 {
-	TSRMLS_FETCH();
 	if (OG(disable_output)) {
 		return 0;
 	} else {

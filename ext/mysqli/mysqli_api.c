@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.87 2004/07/13 17:04:16 georg Exp $ 
+  $Id: mysqli_api.c,v 1.88 2004/07/17 10:48:28 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1720,7 +1720,7 @@ PHP_FUNCTION(mysqli_stmt_attr_set)
 	}
 	MYSQLI_FETCH_RESOURCE(stmt, MY_STMT *, &mysql_stmt, "mysqli_stmt"); 
 
-	if (rc = mysql_stmt_attr_set(stmt->stmt, attr, (void *)&mode)) {
+	if ((rc = mysql_stmt_attr_set(stmt->stmt, attr, (void *)&mode))) {
 		RETURN_FALSE;
 	}
 	RETURN_TRUE;
@@ -1742,7 +1742,7 @@ PHP_FUNCTION(mysqli_stmt_attr_get)
 	}
 	MYSQLI_FETCH_RESOURCE(stmt, MY_STMT *, &mysql_stmt, "mysqli_stmt"); 
 
-	if (rc = mysql_stmt_attr_get(stmt->stmt, attr, &value)) {
+	if ((rc = mysql_stmt_attr_get(stmt->stmt, attr, &value))) {
 		RETURN_FALSE;
 	}
 	RETURN_LONG(value);

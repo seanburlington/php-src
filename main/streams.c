@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.114 2002/10/21 01:33:31 moriyoshi Exp $ */
+/* $Id: streams.c,v 1.115 2002/10/21 22:54:37 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1820,7 +1820,9 @@ PHPAPI int _php_stream_cast(php_stream *stream, int castas, void **ret, int show
 
 exit_success:
 
-	if ((stream->writepos - stream->readpos) > 0 && stream->fclose_stdiocast != PHP_STREAM_FCLOSE_FOPENCOOKIE) {
+	if ((stream->writepos - stream->readpos) > 0 &&
+			stream->fclose_stdiocast != PHP_STREAM_FCLOSE_FOPENCOOKIE &&
+			(flags & PHP_STREAM_CAST_INTERNAL) == 0) {
 		/* the data we have buffered will be lost to the third party library that
 		 * will be accessing the stream.  Emit a warning so that the end-user will
 		 * know that they should try something else */

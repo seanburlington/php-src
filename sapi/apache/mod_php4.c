@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.74 2000/10/29 16:01:01 sas Exp $ */
+/* $Id: mod_php4.c,v 1.75 2000/10/31 18:27:28 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -124,7 +124,7 @@ void php_save_umask(void)
 
 static int sapi_apache_ub_write(const char *str, uint str_length)
 {
-	int ret;
+	uint ret;
 	SLS_FETCH();
 		
 	if (SG(server_context)) {
@@ -576,11 +576,8 @@ static void *php_create_dir(pool *p, char *dummy)
 
 static void *php_merge_dir(pool *p, void *basev, void *addv)
 {
-	php_per_dir_entry tmp;
-
 	/* This function *must* return addv, and not modify basev */
 	zend_hash_merge_ex((HashTable *) addv, (HashTable *) basev, (copy_ctor_func_t) copy_per_dir_entry, sizeof(php_per_dir_entry), (zend_bool (*)(void *, void *)) should_overwrite_per_dir_entry);
-	/*zend_hash_merge((HashTable *) addv, (HashTable *) basev, (void (*)(void *)) copy_per_dir_entry, &tmp, sizeof(php_per_dir_entry), 0);*/
 	return addv;
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.84 2001/10/06 18:55:09 sterling Exp $ */
+/* $Id: filestat.c,v 1.85 2001/10/06 18:59:39 sterling Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -579,7 +579,7 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 		BG(lsb).st_mode = 0; /* mark lstat buf invalid */
 #endif
 		if (VCWD_STAT(BG(CurrentStatFile), &BG(sb)) == -1) {
-			if (!(IS_LINK_OPERATION() && IS_EXISTS_CHECK(type)) || errno != ENOENT) { /* fileexists() test must print no error */
+			if (!IS_LINK_OPERATION() && (!IS_EXISTS_CHECK(type) || errno != ENOENT)) { /* fileexists() test must print no error */
 				php_error(E_WARNING, "stat failed for %s (errno=%d - %s)", BG(CurrentStatFile), errno, strerror(errno));
 			}
 			efree(BG(CurrentStatFile));

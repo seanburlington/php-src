@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.303 2002/03/06 22:26:01 derick Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.302.2.1 2002/03/18 14:52:41 derick Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -36,7 +36,7 @@ for arg in $0 "$@"; do
 done
 
 AC_CANONICAL_HOST
-AM_INIT_AUTOMAKE(php, 4.3.0-dev, nodefine)
+AM_INIT_AUTOMAKE(php, 4.2.0-dev, nodefine)
 AM_CONFIG_HEADER(main/php_config.h)
 AM_MAINTAINER_MODE
 
@@ -141,8 +141,8 @@ AC_PROG_CC_C_O
 dnl Change to AC_PROG_CC_STDC when we start requiring a post-2.13 autoconf
 AM_PROG_CC_STDC
 AC_PROG_CPP
-AC_PROG_CXX
-AC_PROG_CXXCPP
+dnl AC_PROG_CXX
+dnl AC_PROG_CXXCPP
 dnl check for -R, etc. switch
 AC_MSG_CHECKING([whether compiler supports -R])
 AC_CACHE_VAL(php_cv_cc_dashr,[

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.27 2003/09/19 00:44:50 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.28 2003/10/02 03:24:36 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -257,6 +257,7 @@ php_apache_sapi_flush(void *server_context)
 	brigade = ctx->brigade;
 
 	r->status = SG(sapi_headers).http_response_code;
+	SG(headers_sent) = 1;
 
 	/* Send a flush bucket down the filter chain. */
 	bucket = apr_bucket_flush_create(r->connection->bucket_alloc);

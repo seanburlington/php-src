@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_odbc_int.h,v 1.3 2004/05/22 00:30:00 wez Exp $ */
+/* $Id: php_pdo_odbc_int.h,v 1.4 2004/05/22 14:51:26 wez Exp $ */
 
 /* {{{ Roll a dice, pick a header at random... */
 #if HAVE_SQLCLI1_H
@@ -143,6 +143,11 @@ void pdo_odbc_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, PDO_ODBC_HSTMT statement, 
 
 void pdo_odbc_init_error_table(void);
 void pdo_odbc_fini_error_table(void);
+
+#ifdef SQL_ATTR_CONNECTION_POOLING
+extern SQLUINTEGER pdo_odbc_pool_on;
+extern SQLUINTEGER pdo_odbc_pool_mode;
+#endif
 
 /*
  * Local variables:

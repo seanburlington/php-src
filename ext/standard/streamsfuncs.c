@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.4 2003/03/01 01:27:50 wez Exp $ */
+/* $Id: streamsfuncs.c,v 1.5 2003/03/18 23:45:27 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -309,6 +309,8 @@ PHP_FUNCTION(stream_get_meta_data)
 	}
 	add_assoc_string(return_value, "stream_type", (char *)stream->ops->label, 1);
 
+	add_assoc_string(return_value, "mode", stream->mode, 1);
+	
 #if 0	/* TODO: needs updating for new filter API */
 	if (stream->filterhead) {
 		php_stream_filter *filter;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.58 2004/07/01 04:43:29 pollita Exp $ */
+/* $Id: cpdf.c,v 1.59 2004/11/09 00:44:12 iliaa Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -1285,6 +1285,10 @@ PHP_FUNCTION(cpdf_setdash)
 	CPDF_FETCH_CPDFDOC(arg1);
 	convert_to_long_ex(arg2);
 	convert_to_long_ex(arg3);
+
+	if (!pdf->currentMemStream) {
+		RETURN_FALSE;
+	}
 
 	snprintf(buffer, BUFFERLEN, "[%d %d] 0", (int) Z_LVAL_PP(arg2), (int) Z_LVAL_PP(arg3));
 	cpdf_setdash(pdf, buffer);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_flatfile.c,v 1.11 2002/12/31 16:06:24 sebastian Exp $ */
+/* $Id: dba_flatfile.c,v 1.12 2003/02/26 22:05:32 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -53,8 +53,9 @@ DBA_CLOSE_FUNC(flatfile)
 {
 	FLATFILE_DATA;
 
-	if (dba->nextkey.dptr)
+	if (dba->nextkey.dptr) {
 		efree(dba->nextkey.dptr);
+	}
 	pefree(dba, info->flags&DBA_PERSISTENT);
 }
 
@@ -67,8 +68,10 @@ DBA_FETCH_FUNC(flatfile)
 	FLATFILE_GKEY;
 
 	gval = flatfile_fetch(dba, gkey TSRMLS_CC);
-	if(gval.dptr) {
-		if(newlen) *newlen = gval.dsize;
+	if (gval.dptr) {
+		if (newlen) {
+			*newlen = gval.dsize;
+		}
 		new = estrndup(gval.dptr, gval.dsize);
 		efree(gval.dptr);
 	}
@@ -104,7 +107,7 @@ DBA_EXISTS_FUNC(flatfile)
 	FLATFILE_GKEY;
 	
 	gval = flatfile_fetch(dba, gkey TSRMLS_CC);
-	if(gval.dptr) {
+	if (gval.dptr) {
 		efree(gval.dptr);
 		return SUCCESS;
 	}
@@ -122,12 +125,14 @@ DBA_FIRSTKEY_FUNC(flatfile)
 {
 	FLATFILE_DATA;
 
-	if (dba->nextkey.dptr)
+	if (dba->nextkey.dptr) {
 		efree(dba->nextkey.dptr);
+	}
 	dba->nextkey = flatfile_firstkey(dba TSRMLS_CC);
-	if(dba->nextkey.dptr) {
-		if(newlen) 
+	if (dba->nextkey.dptr) {
+		if (newlen)  {
 			*newlen = dba->nextkey.dsize;
+		}
 		return estrndup(dba->nextkey.dptr, dba->nextkey.dsize);
 	}
 	return NULL;
@@ -137,15 +142,18 @@ DBA_NEXTKEY_FUNC(flatfile)
 {
 	FLATFILE_DATA;
 	
-	if(!dba->nextkey.dptr) 
+	if (!dba->nextkey.dptr) {
 		return NULL;
+	}
 	
-	if (dba->nextkey.dptr)
+	if (dba->nextkey.dptr) {
 		efree(dba->nextkey.dptr);
+	}
 	dba->nextkey = flatfile_nextkey(dba TSRMLS_CC);
-	if(dba->nextkey.dptr) {
-		if(newlen) 
+	if (dba->nextkey.dptr) {
+		if (newlen) {
 			*newlen = dba->nextkey.dsize;
+		}
 		return estrndup(dba->nextkey.dptr, dba->nextkey.dsize);
 	}
 	return NULL;

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.173 2000/08/31 23:43:51 andi Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.174 2000/09/02 15:24:18 andi Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -633,7 +633,9 @@ LDFLAGS=""
 
 PHP_CONFIGURE_PART(Configuring TSRM)
 TSRM_BASIC_CHECKS
-TSRM_OTHER_CHECKS
+if test "$PHP_THREAD_SAFETY" = "yes"; then
+TSRM_THREADS_CHECKS
+fi
 EXTRA_LDFLAGS="$EXTRA_LDFLAGS $LDFLAGS"
 EXTRA_LIBS="$EXTRA_LIBS $LIBS"
 LDFLAGS=""

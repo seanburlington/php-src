@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.72 2002/05/24 22:30:24 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.73 2002/06/18 00:56:11 sniper Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -2792,8 +2792,8 @@ PHP_FUNCTION(mb_convert_variables)
 							}
 						}
 					} else if (Z_TYPE_PP(var) == IS_STRING) {
-						string.val = Z_STRVAL_PP(args[n]);
-						string.len = Z_STRLEN_PP(args[n]);
+						string.val = Z_STRVAL_PP(var);
+						string.len = Z_STRLEN_PP(var);
 						if (mbfl_encoding_detector_feed(identd, &string TSRMLS_CC)) {
 							goto detect_end;		/* complete detecting */
 						}

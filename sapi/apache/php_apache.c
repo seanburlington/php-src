@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.45.4.6 2002/08/28 21:23:12 gschlossnagle Exp $ */
+/* $Id: php_apache.c,v 1.45.4.7 2002/10/08 02:17:02 gschlossnagle Exp $ */
 
 #include "php_apache_http.h"
 
@@ -958,8 +958,15 @@ PHP_FUNCTION(apache_request_send_http_header)
 {
     zval *id;
     request_rec *r;
+    char *type = NULL;
+    int typelen;
 
+    if (zend_parse_parameters(ZEND_NUM_ARGS()  TSRMLS_CC, "|s", &type, &typelen) == FAILURE) 
+        return;
     APREQ_GET_REQUEST(id, r);
+    if(type) {
+        r->content_type = pstrdup(r->pool, type);
+    }
     ap_send_http_header(r);
     AP(headers_sent) = 1;
     RETURN_TRUE;
@@ -1324,6 +1331,7 @@ static function_entry php_apache_request_class_functions[] = {
 #undef some_auth_required
 #undef update_mtime
 #undef send_http_header
+#undef send_header_field
 #undef basic_http_header
 #undef send_http_trace
 #undef send_http_options

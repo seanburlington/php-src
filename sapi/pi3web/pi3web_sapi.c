@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.42 2002/07/03 10:42:31 sas Exp $ */
+/* $Id: pi3web_sapi.c,v 1.43 2002/07/23 17:12:54 holger Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -77,7 +77,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.42 2002/07/03 10:42:31 sas Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.43 2002/07/23 17:12:54 holger Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -278,9 +278,6 @@ static char *sapi_pi3web_read_cookies(TSRMLS_D)
 
 static void init_request_info(LPCONTROL_BLOCK lpCB TSRMLS_DC)
 {
-	char *path_end = strrchr(lpCB->lpszFileName, PHP_DIR_SEPARATOR);
-	if ( path_end ) *path_end = PHP_DIR_SEPARATOR;
-
 	SG(server_context) = lpCB;
 	SG(request_info).request_method  = lpCB->lpszMethod;
 	SG(request_info).query_string    = lpCB->lpszQueryString;

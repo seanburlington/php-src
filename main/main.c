@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.561 2003/07/21 17:41:42 zeev Exp $ */
+/* $Id: main.c,v 1.562 2003/07/30 16:15:03 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -1141,8 +1141,13 @@ void php_request_shutdown(void *dummy)
 	TSRMLS_FETCH();
 
 	/* EG(opline_ptr) points into nirvana and therefore cannot be safely accessed
-	   inside zend_executor callback functions. */
+	 * inside zend_executor callback functions.
+	 */
 	EG(opline_ptr) = NULL;
+
+	zend_try {
+		zend_exec_finished(TSRMLS_C);
+	} zend_end_try();
 
 	zend_try {
 		php_end_ob_buffers((zend_bool)(SG(request_info).headers_only?0:1) TSRMLS_CC);

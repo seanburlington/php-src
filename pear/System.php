@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.29 2003/09/16 16:49:26 cox Exp $
+// $Id: System.php,v 1.30 2003/09/16 16:53:11 cox Exp $
 //
 
 require_once 'PEAR.php';
@@ -48,7 +48,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.29 $
+* @version  $Revision: 1.30 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -517,7 +517,6 @@ class System
         }
         if (count($patterns)) {
             $patterns = implode('|', $patterns);
-            echo "p: $patterns\n";
             $ret = array();
             for ($i = 0; $i < count($files); $i++) {
                 if (preg_match("#^$patterns\$#", $files[$i])) {

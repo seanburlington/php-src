@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.24 2000/11/18 02:59:31 zeev Exp $ */
+/* $Id: bcmath.c,v 1.25 2000/11/18 12:48:31 zeev Exp $ */
 
 #include "php.h"
 
@@ -60,7 +60,15 @@ static long bc_precision;
 
 PHP_MINIT_FUNCTION(bcmath)
 {
+	extern bc_num _zero_;
+	extern bc_num _one_;
+	extern bc_num _two_;
+
 	init_numbers();
+	persist_alloc(_zero_);
+	persist_alloc(_one_);
+	persist_alloc(_two_);
+
 	return SUCCESS;
 }
 

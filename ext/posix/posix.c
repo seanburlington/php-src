@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.32 2001/07/28 11:36:10 zeev Exp $ */
+/* $Id: posix.c,v 1.33 2001/08/08 02:02:02 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -24,20 +24,15 @@
 
 #include "php.h"
 #include "ext/standard/info.h"
-#if !defined(PHP_API_VERSION) || PHP_API_VERSION < 19990421
-#include "internal_functions.h"
-#endif
-#if PHP_31 || PHP_API_VERSION >= 19990421
-# include "ext/standard/php_string.h"
-#else
-# include "php_string.h"
-#endif
+#include "ext/standard/php_string.h"
 #include "php_posix.h"
 
 #if HAVE_POSIX
+
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>
 #endif
+
 #include <unistd.h>
 #include <sys/resource.h>
 #include <sys/utsname.h>
@@ -48,9 +43,6 @@
 #include <errno.h>
 #include <grp.h>
 #include <pwd.h>
-#if !defined(PHP_API_VERSION) || PHP_API_VERSION < 19990421
-#include "php3_list.h"
-#endif
 
 #define SAFE_STRING(s) ((s)?(s):"")
 
@@ -138,7 +130,7 @@ ZEND_GET_MODULE(posix)
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.32 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.33 $");
 	php_info_print_table_end();
 }
 /* }}} */

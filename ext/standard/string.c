@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.245 2001/09/25 21:58:24 jeroen Exp $ */
+/* $Id: string.c,v 1.246 2001/09/25 22:48:43 jeroen Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3501,8 +3501,8 @@ static void php_strnatcmp(INTERNAL_FUNCTION_PARAMETERS, int fold_case)
 	convert_to_string_ex(s1);
 	convert_to_string_ex(s2);
 
-	RETURN_LONG(strnatcmp_ex((*s1)->value.str.val, (*s1)->value.str.len,
-							 (*s2)->value.str.val, (*s2)->value.str.len,
+	RETURN_LONG(strnatcmp_ex(Z_STRVAL_PP(s1), Z_STRLEN_PP(s1),
+							 Z_STRVAL_PP(s2), Z_STRLEN_PP(s2),
 							 fold_case));
 }
 /* }}} */

@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: struct.c,v 1.7 2001/08/12 09:48:02 eriksson Exp $
+ * $Id: struct.c,v 1.8 2001/09/25 22:48:42 jeroen Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -240,11 +240,11 @@ zend_bool  OrbitStruct_Constructor(OrbitStruct  ** ppStruct,
 	}
 
 	/* validate parameter types */
-	if (ppParameters[0]->type != IS_STRING)
+	if (ppPZ_TYPE_P(arameters[0]) != IS_STRING)
 		goto error;
 	
 	/* initialize struct */
-	if (!OrbitStruct_Initialize(ppParameters[0]->value.str.val, p_struct))
+	if (!OrbitStruct_Initialize(ppPZ_STRVAL_P(arameters[0]), p_struct))
 		goto error;
 	
 	*ppStruct = p_struct;

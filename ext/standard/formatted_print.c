@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.42 2001/09/25 21:58:23 jeroen Exp $ */
+/* $Id: formatted_print.c,v 1.43 2001/09/25 22:48:43 jeroen Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -444,12 +444,12 @@ php_formatted_print(int ht, int *len, int use_array TSRMLS_DC)
 		}
 	}
 	convert_to_string_ex(args[0]);
-	format = (*args[0])->value.str.val;
+	format = Z_STRVAL_PP(args[0]);
 	result = emalloc(size);
 
 	currarg = 1;
 
-	while (inpos<(*args[0])->value.str.len) {
+	while (inpos<Z_STRLEN_PP(args[0])) {
 		int expprec = 0;
 
 		PRINTF_DEBUG(("sprintf: format[%d]='%c'\n", inpos, format[inpos]));

@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: enum.c,v 1.5 2001/08/09 21:56:24 eriksson Exp $
+ * $Id: enum.c,v 1.6 2001/09/25 22:48:42 jeroen Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -96,14 +96,14 @@ zend_bool OrbitEnum_Constructor(OrbitEnum ** ppEnum, int parameterCount,
 	}
 
 	/* validate parameter types */
-	if (ppParameters[0]->type != IS_STRING)
+	if (ppPZ_TYPE_P(arameters[0]) != IS_STRING)
 		goto error;
 
 	/* find type information */
-	p_enum->mpEnumType = TypeManager_FindEnum(ppParameters[0]->value.str.val);
+	p_enum->mpEnumType = TypeManager_FindEnum(ppPZ_STRVAL_P(arameters[0]));
 	if (p_enum->mpEnumType == NULL)
 	{
-		zend_error(E_WARNING, "(Satellite) unknown enum '%s'", ppParameters[0]->value.str.val);
+		zend_error(E_WARNING, "(Satellite) unknown enum '%s'", ppPZ_STRVAL_P(arameters[0]));
 		goto error;
 	}
 

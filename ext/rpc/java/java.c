@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.59 2001/09/25 21:58:00 jeroen Exp $ */
+/* $Id: java.c,v 1.60 2001/09/25 22:48:37 jeroen Exp $ */
 
 /*
  * This module implements Zend OO syntax overloading support for Java
@@ -438,7 +438,7 @@ void java_call_function_handler(INTERNAL_FUNCTION_PARAMETERS, zend_property_refe
       return;
     }
 
-    className=(*jenv)->NewStringUTF(jenv, arguments[0]->value.str.val);
+    className=(*jenv)->NewStringUTF(jenv, Z_STRVAL_P(arguments[0]));
     (*jenv)->CallVoidMethod(jenv, JG(php_reflect), co,
       className, _java_makeArray(arg_count-1, arguments+1 TSRMLS_CC), result);
 

@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.97 2001/09/25 21:58:01 jeroen Exp $ */
+/* $Id: ldap.c,v 1.98 2001/09/25 22:48:37 jeroen Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -251,7 +251,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.97 2001/09/25 21:58:01 jeroen Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.98 2001/09/25 22:48:37 jeroen Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #ifdef LDAP_API_VERSION
@@ -934,7 +934,7 @@ PHP_FUNCTION(ldap_get_entries)
 			ldap_value_free(ldap_value);
 
 			attr_len = strlen(attribute);
-			zend_hash_update(tmp1->value.ht, php_strtolower(attribute, attr_len), attr_len+1, (void *) &tmp2, sizeof(pval *), NULL);
+			zend_hash_update(Z_ARRVAL_P(tmp1), php_strtolower(attribute, attr_len), attr_len+1, (void *) &tmp2, sizeof(pval *), NULL);
 			add_index_string(tmp1, num_attrib, attribute, 1);
 
 			num_attrib++;

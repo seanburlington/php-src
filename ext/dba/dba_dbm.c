@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_dbm.c,v 1.11 2001/09/09 13:28:45 derick Exp $ */
+/* $Id: dba_dbm.c,v 1.12 2001/09/25 22:48:32 jeroen Exp $ */
 
 #include "php.h"
 
@@ -52,7 +52,7 @@ DBA_OPEN_FUNC(dbm)
 
 	if(info->argc > 0) {
 		convert_to_long_ex(info->argv[0]);
-		filemode = (*info->argv[0])->value.lval;
+		filemode = Z_LVAL_PP(info->argv[0]);
 	}
 	
 	if(info->mode == DBA_TRUNC) {

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.74 2001/09/25 21:58:11 jeroen Exp $ */
+/* $Id: oracle.c,v 1.75 2001/09/25 22:48:41 jeroen Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -430,8 +430,8 @@ void ora_do_logon(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	convert_to_string_ex(arg1);
 	convert_to_string_ex(arg2);
   
-	user = (*arg1)->value.str.val;
-	passwd = (*arg2)->value.str.val;
+	user = Z_STRVAL_PP(arg1);
+	passwd = Z_STRVAL_PP(arg2);
 
 	hashed_details_length = sizeof("oracle__")-1+strlen(user)+strlen(passwd);
 	hashed_details = (char *) emalloc(hashed_details_length+1);

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.158 2001/09/25 21:58:07 jeroen Exp $ */
+/* $Id: oci8.c,v 1.159 2001/09/25 22:48:40 jeroen Exp $ */
 
 /* TODO list:
  *
@@ -620,7 +620,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.158 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.159 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2518,15 +2518,15 @@ static void oci_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent,int exclu
 		convert_to_string_ex(passParam);
 		convert_to_string_ex(dbParam);
 
-		username = (*userParam)->value.str.val;
-		password = (*passParam)->value.str.val;
-		dbname = (*dbParam)->value.str.val;
+		username = Z_STRVAL_PP(userParam);
+		password = Z_STRVAL_PP(passParam);
+		dbname = Z_STRVAL_PP(dbParam);
     } else if (zend_get_parameters_ex(2, &userParam, &passParam) == SUCCESS) {
 		convert_to_string_ex(userParam);
 		convert_to_string_ex(passParam);
 
-		username = (*userParam)->value.str.val;
-		password = (*passParam)->value.str.val;
+		username = Z_STRVAL_PP(userParam);
+		password = Z_STRVAL_PP(passParam);
 		dbname = "";
     } else {
 		WRONG_PARAM_COUNT;

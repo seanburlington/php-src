@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: object.c,v 1.9 2001/09/25 21:58:18 jeroen Exp $
+ * $Id: object.c,v 1.10 2001/09/25 22:48:42 jeroen Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -277,7 +277,7 @@ zend_bool  OrbitObject_Constructor(OrbitObject  ** ppObject,
 	}
 
 	/* validate parameter types */
-	if (ppParameters[0]->type != IS_STRING)
+	if (ppPZ_TYPE_P(arameters[0]) != IS_STRING)
 	{
 		zend_error(E_WARNING, "(Satellite) IOR is not a string");
 		goto error;
@@ -286,7 +286,7 @@ zend_bool  OrbitObject_Constructor(OrbitObject  ** ppObject,
 	/* initialize data object */
 	if ( !OrbitObject_InitializeData(
 			p_object,
-			ppParameters[0]->value.str.val) )
+			ppPZ_STRVAL_P(arameters[0])) )
 	{
 		goto error;
 	}

@@ -77,41 +77,41 @@
  *
  */
 
-/* $Id: mbfilter_ja.c,v 1.2 2001/05/07 13:57:59 hirokawa Exp $ */
+/* $Id: mbfilter_ja.c,v 1.3 2001/12/03 15:32:12 sas Exp $ */
 
 #include "mbfilter.h"
 #include "mbfilter_ja.h"
 
 /* cp932 table */
-extern const unsigned short cp932ext3_eucjp_table[];
-extern const int cp932ext3_eucjp_table_size;
+static const unsigned short cp932ext3_eucjp_table[];
+static const int cp932ext3_eucjp_table_size;
 
 /* unicode table */
-extern const unsigned short jisx0208_ucs_table[];
-extern const unsigned short jisx0212_ucs_table[];
-extern const unsigned short cp932ext1_ucs_table[];
-extern const unsigned short cp932ext2_ucs_table[];
-extern const unsigned short cp932ext3_ucs_table[];
-extern const unsigned short ucs_a1_jis_table[];
-extern const unsigned short ucs_a2_jis_table[];
-extern const unsigned short ucs_i_jis_table[];
-extern const unsigned short ucs_r_jis_table[];
-extern const int jisx0208_ucs_table_size;
-extern const int jisx0212_ucs_table_size;
-extern const int cp932ext1_ucs_table_min;
-extern const int cp932ext1_ucs_table_max;
-extern const int cp932ext2_ucs_table_min;
-extern const int cp932ext2_ucs_table_max;
-extern const int cp932ext3_ucs_table_min;
-extern const int cp932ext3_ucs_table_max;
-extern const int ucs_a1_jis_table_min;
-extern const int ucs_a1_jis_table_max;
-extern const int ucs_a2_jis_table_min;
-extern const int ucs_a2_jis_table_max;
-extern const int ucs_i_jis_table_min;
-extern const int ucs_i_jis_table_max;
-extern const int ucs_r_jis_table_min;
-extern const int ucs_r_jis_table_max;
+static const unsigned short jisx0208_ucs_table[];
+static const unsigned short jisx0212_ucs_table[];
+static const unsigned short cp932ext1_ucs_table[];
+static const unsigned short cp932ext2_ucs_table[];
+static const unsigned short cp932ext3_ucs_table[];
+static const unsigned short ucs_a1_jis_table[];
+static const unsigned short ucs_a2_jis_table[];
+static const unsigned short ucs_i_jis_table[];
+static const unsigned short ucs_r_jis_table[];
+static const int jisx0208_ucs_table_size;
+static const int jisx0212_ucs_table_size;
+static const int cp932ext1_ucs_table_min;
+static const int cp932ext1_ucs_table_max;
+static const int cp932ext2_ucs_table_min;
+static const int cp932ext2_ucs_table_max;
+static const int cp932ext3_ucs_table_min;
+static const int cp932ext3_ucs_table_max;
+static const int ucs_a1_jis_table_min;
+static const int ucs_a1_jis_table_max;
+static const int ucs_a2_jis_table_min;
+static const int ucs_a2_jis_table_max;
+static const int ucs_i_jis_table_min;
+static const int ucs_i_jis_table_max;
+static const int ucs_r_jis_table_min;
+static const int ucs_r_jis_table_max;
 
 #define CK(statement)	do { if ((statement) < 0) return (-1); } while (0)
 

@@ -19,7 +19,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.47 2001/09/06 06:41:16 sterling Exp $ */
+/* $Id: rand.c,v 1.48 2001/09/06 07:33:45 sterling Exp $ */
 
 #include <stdlib.h>
 
@@ -245,7 +245,7 @@ PHP_FUNCTION(mt_srand)
  * -RL
  */    
 #define RAND_RANGE(__n, __min, __max) \
-	(__n) = (__min) + (long) ((double) ((__max) - (__min) + 1.0)) * ((__n) / (PHP_RAND_MAX + 1.0))
+	(__n) = (__min) + (long) ((double) ((__max) - (__min) + 1.0) * ((__n) / (PHP_RAND_MAX + 1.0)))
 
 /* {{{ proto int rand([int min, int max])
    Returns a random number */

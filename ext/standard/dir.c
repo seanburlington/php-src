@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.116 2003/02/19 09:27:29 sniper Exp $ */
+/* $Id: dir.c,v 1.117 2003/02/27 23:53:55 iliaa Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -466,7 +466,7 @@ PHP_FUNCTION(scandir)
 	if (!flags) {
 		n = php_scandir(path, &namelist, 0, php_alphasort);
 	} else {
-		n = php_scandir(path, &namelist, 0, php_alphasortr);
+		n = php_scandir(path, &namelist, 0, (void *) php_alphasortr);
 	}
 
 	if (n < 0) {

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ii.c,v 1.40 2004/01/08 08:15:49 andi Exp $ */
+/* $Id: ii.c,v 1.41 2004/05/18 23:26:41 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -541,6 +541,7 @@ static void php_ii_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		} else { /* already open persistent connection */
 
 			if (Z_TYPE_P(le) != le_ii_plink) {
+				efree(hashed_details);
 				RETURN_FALSE;
 			}
 			/* here we should ensure that the link did not die */

@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.5 2005/01/21 00:04:50 wez Exp $
+// $Id: config.w32,v 1.6 2005/02/13 01:32:27 wez Exp $
 // vim:ft=javascript
 
 ARG_WITH("pdo-dblib", "freetds dblib (Sybase, MS-SQL) support for PDO", "no");
@@ -45,8 +45,12 @@ if (PHP_PDO_MSSQL != "no") {
 					CHECK_HEADER_ADD_INCLUDE("sqlfront.h", "CFLAGS_PDO_MSSQL",
 					pdo_mssql_locations[i] + "\\DevTools\\Include",
 					null, null, true)) {
-				pdo_mssql_locations[i].match(new RegExp("(\\d)"));
-				PDO_DBLIB_FLAVOUR = RegExp.$1 + 0;
+				if (pdo_mssql_locations[i] == 'yes') {
+					PDO_DBLIB_FLAVOUR = 'UNKNOWN';
+				} else {
+					pdo_mssql_locations[i].match(new RegExp("(\\d)"));
+					PDO_DBLIB_FLAVOUR = RegExp.$1 + 0;
+				}
 				break;
 			}
 		}

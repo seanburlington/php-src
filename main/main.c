@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.48 2003/10/01 21:24:19 andrei Exp $ */
+/* $Id: main.c,v 1.512.2.49 2003/10/01 23:13:04 andrei Exp $ */
 
 /* {{{ includes
  */
@@ -1558,6 +1558,7 @@ static void php_build_argv(char *s TSRMLS_DC)
 	ALLOC_ZVAL(arr);
 	array_init(arr);
 	arr->is_ref = 0;
+	arr->refcount = 0;
 
 	/* Prepare argv */
 	if (SG(request_info).argc) { /* are we in cli sapi? */
@@ -1611,6 +1612,7 @@ static void php_build_argv(char *s TSRMLS_DC)
 	}
 	Z_TYPE_P(argc) = IS_LONG;
 	argc->is_ref = 0;
+	argc->refcount = 0;
 
 	if (PG(register_globals) || SG(request_info).argc) {
 		arr->refcount++;

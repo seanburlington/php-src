@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.23 2000/08/16 12:47:09 hholzgra Exp $ */
+/* $Id: assert.c,v 1.24 2000/09/06 13:50:09 thies Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -301,12 +301,12 @@ PHP_FUNCTION(assert_options)
 		RETVAL_STRING(SAFE_STRING(oldstr),1);
 
 		if (ac == 2) {
+			if (oldstr) {
+				efree(oldstr);
+			} 
 			convert_to_string_ex(value);
 			ASSERT(callback) = estrndup((*value)->value.str.val,(*value)->value.str.len);
 		}
-		if (oldstr) {
-			efree(oldstr);
-		} 
 		return;
 		break;
 

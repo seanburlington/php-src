@@ -1,3 +1,44 @@
+2005-02-20  Moriyoshi Koizumi  <moriyoshi@at.wakwak.com>
+
+    * (PHP_5_0)
+      NEWS:
+      - BFN & some
+
+    * (PHP_5_0)
+      ext/mbstring/config.m4
+      ext/mbstring/config.w32
+      ext/mbstring/php_mbregex.c
+      ext/mbstring/tests/bug31911.phpt:
+      - MFH: Update libmbfl
+      - MFH: Update oniguruma to 3.7.0.
+
+    * ext/mbstring/tests/bug31911.phpt:
+      
+      - Update libmbfl (fixes bug #30549 and #31911).
+      - Update oniguruma to 3.7.0
+
+    * ext/mbstring/config.m4
+      ext/mbstring/config.w32
+      ext/mbstring/php_mbregex.c:
+      - Update libmbfl (fixes bug #30549 and #31911).
+      - Update oniguruma to 3.7.0
+
+2005-02-20  Rob Richards  <rrichards@ctindustries.net>
+
+    * ext/dom/domexception.c
+      ext/dom/php_dom.h:
+      use new error handling when not throwing exceptions
+
+2005-02-20  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/imap/php_imap.c:
+      Simplify Code.
+
+2005-02-20  Dmitry Stogov  <dmitry@zend.com>
+
+    * ZendEngine2/zend_compile.c:
+      Fixed possible memory corruption
+
 2005-02-19  Rui Hirokawa  <rui_hirokawa@ybb.ne.jp>
 
     * (PHP_5_0)
@@ -313,7 +354,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1900 2005/02/20 01:35:54 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1901 2005/02/21 01:33:52 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -794,7 +835,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1900 2005/02/20 01:35:54 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1901 2005/02/21 01:33:52 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -2268,7 +2309,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1900 2005/02/20 01:35:54 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1901 2005/02/21 01:33:52 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.23 2001/11/30 18:59:57 sniper Exp $
+dnl $Id: config.m4,v 1.24 2002/01/16 22:32:40 rasmus Exp $
 dnl
 
 PHP_ARG_WITH(snmp,for SNMP support,
@@ -53,7 +53,7 @@ PHP_ARG_WITH(snmp,for SNMP support,
         PHP_ADD_LIBRARY(ssl,   1, SNMP_SHARED_LIBADD)
         PHP_ADD_LIBRARY(crypto,1, SNMP_SHARED_LIBADD)
       else
-        AC_MSG_ERROR(The UCD-SNMP in this system is build with SSL support. 
+        AC_MSG_ERROR(The UCD-SNMP in this system is built with SSL support. 
 
         Add --with-openssl<=DIR> to your configure line.)
       fi

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.25 2004/04/01 08:54:44 derick Exp $ */
+/* $Id: type.c,v 1.26 2005/03/11 02:11:44 helly Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -153,8 +153,7 @@ PHP_FUNCTION(intval)
 			WRONG_PARAM_COUNT;
 	}
 
-	*return_value = **num;
-	zval_copy_ctor(return_value);
+	RETVAL_ZVAL(*num, 1, 0);
 	convert_to_long_base(return_value, base);
 }
 /* }}} */
@@ -169,8 +168,7 @@ PHP_FUNCTION(floatval)
 		WRONG_PARAM_COUNT;
 	}
 
-	*return_value = **num;
-	zval_copy_ctor(return_value);
+	RETVAL_ZVAL(*num, 1, 0);
 	convert_to_double(return_value);
 }
 /* }}} */
@@ -179,7 +177,7 @@ PHP_FUNCTION(floatval)
    Get the string value of a variable */
 PHP_FUNCTION(strval)
 {
-	pval **num;
+	pval **num, *tmp;
 	zval expr_copy;
 	int use_copy;
 
@@ -187,16 +185,12 @@ PHP_FUNCTION(strval)
 		WRONG_PARAM_COUNT;
 	}
 
-	*return_value = **num;
-
-	zend_make_printable_zval(return_value, &expr_copy, &use_copy);
+	zend_make_printable_zval(*num, &expr_copy, &use_copy);
 	if (use_copy) {
-		*return_value = expr_copy;
-		INIT_PZVAL(return_value);
-		zval_copy_ctor(return_value);
-		zval_dtor(&expr_copy);
+		tmp = &expr_copy;
+		RETVAL_ZVAL(tmp, 0, 0);
 	} else {
-		zval_copy_ctor(return_value);
+		RETVAL_ZVAL(*num, 0, 0);
 	}
 }
 /* }}} */

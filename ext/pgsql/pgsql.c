@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.233 2002/10/13 09:37:27 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.234 2002/10/13 09:41:35 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -511,6 +511,7 @@ static void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	if (ZEND_NUM_ARGS() == 1) { /* new style, using connection string */
 		connstring = Z_STRVAL_PP(args[0]);
 	} else if (ZEND_NUM_ARGS() == 2 ) { /* Safe to add conntype_option, since 2 args was illegal */
+		connstring = Z_STRVAL_PP(args[0]);
 		convert_to_long_ex(args[1]);
 		connect_type = Z_LVAL_PP(args[1]);
 	} else {

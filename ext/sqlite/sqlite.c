@@ -15,7 +15,7 @@
   | Author: Wez Furlong <wez@thebrainroom.com>                           |
   +----------------------------------------------------------------------+
 
-  $Id: sqlite.c,v 1.9 2003/04/17 17:15:36 wez Exp $ 
+  $Id: sqlite.c,v 1.10 2003/04/17 18:54:40 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -181,6 +181,29 @@ static void php_sqlite_function_callback(sqlite_func *func, int argc, const char
 	}
 }
 
+/* Authorization Callback */
+
+static int php_sqlite_authorizer(void *autharg, int access_type, const char *arg3, const char *arg4)
+{
+	switch (access_type) {
+		case SQLITE_COPY:
+			{
+				TSRMLS_FETCH();
+				if (PG(safe_mode) && (!php_checkuid(arg4, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+					return SQLITE_DENY;
+				}
+
+				if (php_check_open_basedir(arg4 TSRMLS_CC)) {
+					return SQLITE_DENY;
+				}
+			}
+			return SQLITE_OK;
+
+		default:
+			/* access allowed */
+			return SQLITE_OK;
+	}
+}
 
 PHP_MINIT_FUNCTION(sqlite)
 {
@@ -198,7 +221,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", "$Id: sqlite.c,v 1.9 2003/04/17 17:15:36 wez Exp $");
+	php_info_print_table_row(2, "PECL Module version", "$Id: sqlite.c,v 1.10 2003/04/17 18:54:40 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -248,6 +271,9 @@ PHP_FUNCTION(sqlite_open)
 	/* set default busy handler; keep retrying up until 1/2 second has passed,
 	 * then fail with a busy status code */
 	sqlite_busy_timeout(db, 500);
+
+	/* authorizer hook so we can enforce safe mode */
+	sqlite_set_authorizer(db, php_sqlite_authorizer, NULL);
 	
 	ZEND_REGISTER_RESOURCE(return_value, db, le_sqlite_db);
 	

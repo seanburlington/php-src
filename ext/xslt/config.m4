@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.29 2002/10/31 21:21:00 msopacua Exp $
+dnl $Id: config.m4,v 1.30 2002/11/10 12:18:02 msopacua Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -58,6 +58,19 @@ if test "$PHP_XSLT" != "no"; then
   fi
 					
   if test "$PHP_XSLT_SABLOT" != "no"; then
+    AC_MSG_CHECKING([for sablot-config])
+    if test -x $XSLT_DIR/bin/sablot-config ; then
+       AC_MSG_RESULT(found)
+       AC_DEFINE(HAVE_SABLOT_CONFIG, 1, [Whether the Sablotron config file is found])
+       dnl Use this script to register this information in phpinfo()
+       SABINF_CFLAGS=`$XSLT_DIR/bin/sablot-config --cflags`
+       SABINF_LIBS=`$XSLT_DIR/bin/sablot-config --libs`
+       SABINF_PREFIX=`$XSLT_DIR/bin/sablot-config --prefix`
+       SABINF_ALL="\"Cflags: $SABINF_CFLAGS\nLibs: $SABINF_LIBS\nPrefix: $SABINF_PREFIX\""
+       PHP_DEFINE(SAB_INFO, "$SABINF_ALL")
+    else
+       AC_MSG_RESULT(not found)
+    fi
     AC_MSG_CHECKING([for Sablotron version])
     old_CPPFLAGS=$CPPFLAGS
     CPPFLAGS="$CPPFLAGS -I$XSLT_DIR/include"

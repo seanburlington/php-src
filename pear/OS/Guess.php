@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Guess.php,v 1.3.6.9 2003/09/29 14:06:40 pajoye Exp $
+// $Id: Guess.php,v 1.3.6.10 2003/10/24 05:34:16 cellog Exp $
 
 // {{{ uname examples
 
@@ -176,7 +176,7 @@ class OS_Guess
         }
         pclose($cpp);
         unlink($tmpfile);
-        if (!($major && $minor) && file_exists('/lib/libc.so.6')) {
+        if (!($major && $minor) && is_link('/lib/libc.so.6')) {
             // Let's try reading the libc.so.6 symlink
             if (ereg('^libc-([.*])\.so$', basename(readlink('/lib/libc.so.6')), $matches)) {
                 list($major, $minor) = explode('.', $matches);

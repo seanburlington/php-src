@@ -19,7 +19,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: pear.in,v 1.58 2002/06/07 08:04:05 cox Exp $
+// $Id: pear.in,v 1.59 2002/06/07 08:05:48 cox Exp $
 
 /**
  * @nodep Gtk
@@ -242,9 +242,13 @@ function cmdHelp($command)
 
     } elseif ($help = PEAR_Command::getHelp($command)) {
         if (is_string($help)) {
-            return "pear $command [options] $help\n";
+            return "$progname $command [options] $help\n";
         }
-        return "pear $command [options] $help[0]\n$help[1]";
+        if ($help[1] === null) {
+            return "$progname $command $help[0]";
+        } else {
+            return "$progname $command [options] $help[0]\n$help[1]";
+        }
     }
     return "No such command";
 }

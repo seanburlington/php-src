@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.72 2003/12/03 22:51:51 iliaa Exp $ */
+/* $Id: url.c,v 1.73 2003/12/04 00:14:39 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -104,7 +104,7 @@ PHPAPI php_url *php_url_parse(char *str)
 			 * correctly parse things like a.com:80
 			 */
 			p = e + 1;
-			while (isdigit(p)) {
+			while (isdigit(*p)) {
 				p++;
 			}
 			
@@ -151,7 +151,7 @@ PHPAPI php_url *php_url_parse(char *str)
 		p = e + 1;
 		pp = p;
 		
-		while (pp-p < 6 && isdigit(pp)) {
+		while (pp-p < 6 && isdigit(*pp)) {
 			pp++;
 		}
 		

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.12 2001/09/30 06:59:12 jason Exp $ */
+/* $Id: pcntl.c,v 1.13 2001/10/03 03:48:27 jason Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -400,7 +400,6 @@ PHP_FUNCTION(pcntl_exec)
 			*current_arg=Z_STRVAL_PP(element);
 		}
 		*(current_arg)=NULL;
-		/* while(*argv != NULL) printf("Arg: %s\n",*argv++); */
 	} else {
 		argv=alloca(2 * sizeof(char *));
 		*argv=path;
@@ -434,18 +433,23 @@ PHP_FUNCTION(pcntl_exec)
 			strlcat(*pair, Z_STRVAL_PP(element), pair_length);
 						
 			/* Cleanup */
-			if (return_val == HASH_KEY_IS_LONG) free_alloca(101);
+			if (return_val == HASH_KEY_IS_LONG) free_alloca(key);
 		}
 		*(pair)=NULL;
-		/* while(*envp != NULL) printf("Env: %s\n",*envp++); */
 	}
    
 	if (execve(path, argv, envp) == -1) {
-		php_error(E_ERROR, "Error has occured in %s: (errno %d) %s", get_active_function_name(TSRMLS_CC),
+		php_error(E_WARNING, "Error has occured in %s: (errno %d) %s", get_active_function_name(TSRMLS_CC),
 			errno, strerror(errno));
  
 	}
    
+	/* Cleanup */
+	for (pair=envp; *pair!=NULL; pair++) efree(*pair);
+   
+	free_alloca(argv);
+	free_alloca(envp);
+       
 	RETURN_FALSE;
 }
 /* }}} */

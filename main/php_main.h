@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: php_main.h,v 1.5 2000/10/27 10:16:54 sas Exp $ */
+/* $Id: php_main.h,v 1.6 2000/10/29 16:00:42 sas Exp $ */
 
 
 #ifndef PHP_MAIN_H
@@ -44,6 +44,7 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 PHPAPI int php_handle_special_queries(SLS_D PLS_DC);
 PHPAPI int php_lint_script(zend_file_handle *file CLS_DC ELS_DC PLS_DC);
 
+PHPAPI void php_handle_aborted_connection(void);
 PHPAPI int php_handle_auth_data(const char *auth SLS_DC);
 
 extern void php_call_shutdown_functions(void);

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.332 2000/10/29 11:54:51 zeev Exp $ */
+/* $Id: main.c,v 1.333 2000/10/29 16:00:42 sas Exp $ */
 
 
 #include <stdio.h>
@@ -1212,6 +1212,17 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 	if (old_cwd[0] != '\0')
 		V_CHDIR(old_cwd);
 	free_alloca(old_cwd);
+}
+
+PHPAPI void php_handle_aborted_connection(void)
+{
+	PLS_FETCH();
+
+	PG(connection_status) = PHP_CONNECTION_ABORTED;
+
+	if (!PG(ignore_user_abort)) {
+		zend_bailout();
+	}
 }
 
 PHPAPI int php_handle_auth_data(const char *auth SLS_DC)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.49 1999/10/15 14:45:54 zeev Exp $ */
+/* $Id: string.c,v 1.50 1999/10/15 14:53:56 andrei Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -307,8 +307,9 @@ PHP_FUNCTION(implode)
 		arr = *arg1;
 		delim = *arg2;
 	} else if ((*arg2)->type == IS_ARRAY) {
-		convert_to_string_ex(arg1);
+		SEPARATE_ZVAL(arg2)
 		arr = *arg2;
+		convert_to_string_ex(arg1);
 		delim = *arg1;
 	} else {
 		php_error(E_WARNING, "Bad arguments to %s()",

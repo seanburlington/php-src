@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.20 2000/01/01 01:31:43 sas Exp $ */
+/* $Id: php_mysql.c,v 1.21 2000/01/01 16:52:14 thies Exp $ */
 
 
 /* TODO:
@@ -1247,6 +1247,8 @@ PHP_FUNCTION(mysql_result)
 		}
 	}
 
+	return_value->type = IS_STRING;
+
 	if (sql_row[field_offset]) {
 		if (PG(magic_quotes_runtime)) {
 			return_value->value.str.val = php_addslashes(sql_row[field_offset],sql_row_lengths[field_offset],&return_value->value.str.len,0);
@@ -1257,8 +1259,6 @@ PHP_FUNCTION(mysql_result)
 	} else {
 		return_value->type = IS_UNSET;
 	}
-	
-	return_value->type = IS_STRING;
 }
 /* }}} */
 

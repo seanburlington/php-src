@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: expat_compat.h,v 1.12 2003/09/22 19:04:49 rrichards Exp $ */
+/* $Id: expat_compat.h,v 1.13 2003/09/29 11:35:39 rrichards Exp $ */
 
 #ifndef PHP_EXPAT_COMPAT_H
 #define PHP_EXPAT_COMPAT_H
@@ -56,7 +56,8 @@ typedef struct _XML_Parser {
 
 	xmlHashTablePtr _ns_map;
 	xmlHashTablePtr _reverse_ns_map;
-	
+	xmlChar *_ns_seperator;
+
 	void *user;
 	xmlParserCtxtPtr parser;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_scandir.h,v 1.8 2004/01/08 17:33:04 sniper Exp $ */
+/* $Id: php_scandir.h,v 1.9 2004/09/30 14:46:03 hyanantha Exp $ */
 
 #ifndef PHP_SCANDIR_H
 #define PHP_SCANDIR_H
@@ -31,6 +31,8 @@
 #ifdef PHP_WIN32
 #include "config.w32.h"
 #include "win32/readdir.h"
+#elif NETWARE
+#include "config.nw.h"
 #else
 #include "php_config.h"
 #endif

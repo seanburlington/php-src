@@ -17,12 +17,13 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.87 2005/03/22 10:19:07 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.88 2005/03/23 15:12:54 dmitry Exp $ */
 
 #include <time.h>
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
+#include <libxml/parserInternals.h>
 #include "zend_strtod.h"
 
 /* zval type decode */
@@ -2579,8 +2580,6 @@ static zval *to_zval_any(encodeTypePtr type, xmlNodePtr data)
 	xmlBufferFree(buf);
 	return ret;
 }
-
-extern const xmlChar xmlStringTextNoenc[];
 
 static xmlNodePtr to_xml_any(encodeTypePtr type, zval *data, int style, xmlNodePtr parent)
 {	

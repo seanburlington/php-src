@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.22 2002/05/09 06:49:12 ssb Exp $
+// $Id: Install.php,v 1.23 2002/05/12 16:31:30 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -72,7 +72,7 @@ class PEAR_Command_Install extends PEAR_Command_Common
                              'Upgrades a PEAR package installed in the system');
                 break;
         }
-        $ret[0] = "[-n] [-f] [-s] [-Z] {$ret[0]}";
+        $ret[0] = "[-f] [-n] [-r] [-s] [-Z] {$ret[0]}";
         $ret[1] = "{$ret[1]}\n" .
                   "   -f    forces the installation of the package\n".
                   "         when it is already installed\n".

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.277 2002/10/29 12:53:58 helly Exp $ */
+/* $Id: file.c,v 1.278 2002/10/29 13:26:44 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -501,7 +501,7 @@ PHP_FUNCTION(file)
  			p++;
  			parse_eol:
  			if (PG(magic_quotes_runtime)) {
- 				// s is in target_buf which is freed at the end of the function
+ 				/* s is in target_buf which is freed at the end of the function */
  				slashed = php_addslashes(s, (p-s), &len, 0 TSRMLS_CC);
  				add_index_stringl(return_value, i++, slashed, len, 0);
  			} else {

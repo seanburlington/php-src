@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.72 2003/10/25 19:28:31 helly Exp $ */
+/* $Id: php_reflection.c,v 1.73 2003/11/08 21:02:21 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -2383,7 +2383,7 @@ ZEND_METHOD(reflection_class, isSubclassOf)
 	METHOD_NOTSTATIC;
 	GET_REFLECTION_OBJECT_PTR(ce);
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O", reflection_class_ptr, &object) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O", &object, reflection_class_ptr) == FAILURE) {
 		return;
 	}
 

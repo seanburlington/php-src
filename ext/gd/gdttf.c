@@ -2,7 +2,7 @@
 /*                                          */
 /* John Ellson   ellson@lucent.com          */
 
-/* $Id: gdttf.c,v 1.17 2002/11/19 19:55:54 iliaa Exp $ */
+/* $Id: gdttf.c,v 1.18 2003/03/08 18:27:12 derick Exp $ */
 
 #include "php.h"
 
@@ -744,11 +744,15 @@ gdttfchar(gdImage *im, int fg, font_t *font,
 			if (tweencolorkey.pixel > 0) {
 				x3 = x2 + col;
 				if (x3 >= im->sx || x3 < 0) continue;
+				if (im->trueColor) {
+					pixel = &im->tpixels[y3][x3];
+				} else {
 #if HAVE_LIBGD13
-				pixel = &im->pixels[y3][x3];
+					pixel = &im->pixels[y3][x3];
 #else
-				pixel = &im->pixels[x3][y3];
+					pixel = &im->pixels[x3][y3];
 #endif
+				}
 				tweencolorkey.bgcolor = *pixel;
 				tweencolor = (tweencolor_t *)gdCacheGet(
 					tweenColorCache, &tweencolorkey);

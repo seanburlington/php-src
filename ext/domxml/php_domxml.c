@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.27 2003/07/25 12:45:05 sniper Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.28 2003/08/07 16:44:11 zeev Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -4716,9 +4716,7 @@ static int node_namespace(zval **attributes, xmlNode *nodep TSRMLS_DC)
 /* }}} */
 #endif
 
-/* We don't have a type zval. **attributes is also very unusual. */
-
-/* {{{ proto int node_attributes(zval **attributes, int node)
+/* {{{ int node_attributes(zval **attributes, int node)
    Returns list of children nodes */
 static int node_attributes(zval **attributes, xmlNode *nodep TSRMLS_DC)
 {

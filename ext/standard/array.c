@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.179 2002/08/01 16:44:47 sniper Exp $ */
+/* $Id: array.c,v 1.180 2002/08/01 17:34:31 rodif_bl Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1663,7 +1663,7 @@ static void _phpi_pop(INTERNAL_FUNCTION_PARAMETERS, int off_the_end)
 	zval	   **stack,			/* Input stack */
 			   **val;			/* Value to be popped */
 	char *key = NULL;
-	int key_len;
+	int key_len = 0;
 	ulong index;
 	
 	/* Get the arguments and do error-checking */
@@ -1696,19 +1696,16 @@ static void _phpi_pop(INTERNAL_FUNCTION_PARAMETERS, int off_the_end)
 	
 	/* If we did a shift... re-index like it did before */
 	if (!off_the_end) {
-		HANDLE_BLOCK_INTERRUPTIONS();
-		{
-			int k = 0;
-			Bucket *p = Z_ARRVAL_PP(stack)->pListHead;
-			while (p != NULL) {
-				if (p->nKeyLength == 0)
-					p->h = k++;
-				p = p->pListNext;
-			}
-			Z_ARRVAL_PP(stack)->nNextFreeElement = k+1;
-			zend_hash_rehash(Z_ARRVAL_PP(stack));
+		int k = 0;
+		Bucket *p = Z_ARRVAL_PP(stack)->pListHead;
+		while (p != NULL) {
+			if (p->nKeyLength == 0)
+				p->h = k++;
+			p = p->pListNext;
 		}
-		HANDLE_UNBLOCK_INTERRUPTIONS();
+		Z_ARRVAL_PP(stack)->nNextFreeElement = k+1;
+	} else if(!key_len) {
+		Z_ARRVAL_PP(stack)->nNextFreeElement = Z_ARRVAL_PP(stack)->nNextFreeElement - 1;
 	}
 }
 /* }}} */

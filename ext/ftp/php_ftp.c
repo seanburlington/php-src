@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.80 2003/01/27 02:54:12 pollita Exp $ */
+/* $Id: php_ftp.c,v 1.81 2003/01/27 19:51:50 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -396,7 +396,7 @@ PHP_FUNCTION(ftp_chmod)
 
 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &z_ftp, -1, le_ftpbuf_name, le_ftpbuf);
 
-	if (!ftp_chmod(ftp, mode, filename)) {
+	if (!ftp_chmod(ftp, mode, filename, filename_len)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", ftp->inbuf);
 		RETURN_FALSE;
 	}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iptc.c,v 1.48 2004/06/22 20:27:46 iliaa Exp $ */
+/* $Id: iptc.c,v 1.49 2004/11/03 22:17:45 iliaa Exp $ */
 
 /*
  * Functions to parse & compse IPTC data.
@@ -227,11 +227,6 @@ PHP_FUNCTION(iptcembed)
 		fstat(fileno(fp), &sb);
 
 		poi = spoolbuf = emalloc(len + sizeof(psheader) + sb.st_size + 1024);
-
-		if (! spoolbuf) {
-			fclose(fp);
-			RETURN_FALSE;
-		}
 	} 
 
 	if (php_iptc_get1(fp, spool, poi?&poi:0 TSRMLS_CC) != 0xFF) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ldap.h,v 1.16 2001/02/26 06:07:01 andi Exp $ */
+/* $Id: php_ldap.h,v 1.17 2001/05/31 21:09:30 sniper Exp $ */
 
 #ifndef PHP_LDAP_H
 #define PHP_LDAP_H
@@ -52,9 +52,6 @@ PHP_FUNCTION(ldap_count_entries);
 PHP_FUNCTION(ldap_first_entry);
 PHP_FUNCTION(ldap_next_entry);
 PHP_FUNCTION(ldap_get_entries);
-#if 0
-PHP_FUNCTION(ldap_free_entry);
-#endif
 PHP_FUNCTION(ldap_first_attribute);
 PHP_FUNCTION(ldap_next_attribute);
 PHP_FUNCTION(ldap_get_attributes);
@@ -98,7 +95,8 @@ PHP_FUNCTION(ldap_8859_to_t61);
 
 ZEND_BEGIN_MODULE_GLOBALS(ldap)
 	long default_link;
-	long num_links, max_links;
+	long num_links;
+	long max_links;
 	char *base_dn;
 ZEND_END_MODULE_GLOBALS(ldap)
 

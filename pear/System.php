@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.12 2002/05/31 17:47:19 cox Exp $
+// $Id: System.php,v 1.13 2002/05/31 18:12:56 cox Exp $
 //
 
 require_once 'PEAR.php';
@@ -43,7 +43,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.12 $
+* @version  $Revision: 1.13 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -147,7 +147,8 @@ class System
     function _multipleToStruct($files)
     {
         $struct = array('dirs' => array(), 'files' => array());
-        foreach($files as $file) {
+        settype($files, 'array');
+        foreach ($files as $file) {
             if (is_dir($file)) {
                 $tmp = System::_dirToStruct($file, 0);
                 $struct = array_merge_recursive($tmp, $struct);

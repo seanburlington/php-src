@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.74 2000/06/25 03:06:38 sterling Exp $ */
+/* $Id: gd.c,v 1.75 2000/06/25 03:12:38 jah Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1783,7 +1783,7 @@ PHP_FUNCTION(imagecopymerge)
 	srcY = Z_LVAL_PP(SY);
 	srcH = Z_LVAL_PP(SH);
 	srcW = Z_LVAL_PP(SW);
-	dstX = Z_LVAL_PP(DX)
+	dstX = Z_LVAL_PP(DX);
 	dstY = Z_LVAL_PP(DY);
 	pct  = Z_LVAL_PP(PCT);
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_virtual_cwd.c,v 1.68 2000/08/20 14:11:50 sas Exp $ */
+/* $Id: php_virtual_cwd.c,v 1.69 2000/08/20 18:12:16 andi Exp $ */
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -180,16 +180,6 @@ CWD_API void virtual_cwd_startup(void)
 #if defined(ZEND_WIN32) && defined(ZTS)
 	cwd_mutex = tsrm_mutex_alloc();
 #endif
-}
-
-CWD_API void virtual_cwd_activate(const char *filename)
-{
-#if VIRTUAL_CWD_DEBUG
-	fprintf(stderr, "Changing dir to %s\n", filename);
-#endif
-	if (filename) {
-		virtual_chdir_file(filename);
-	}
 }
 
 CWD_API void virtual_cwd_shutdown(void)

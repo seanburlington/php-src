@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_virtual_cwd.h,v 1.35 2000/08/20 14:11:50 sas Exp $ */
+/* $Id: php_virtual_cwd.h,v 1.36 2000/08/20 18:12:16 andi Exp $ */
 
 #ifndef VIRTUAL_CWD_H
 #define VIRTUAL_CWD_H
@@ -73,7 +73,6 @@ typedef int (*verify_path_func)(const cwd_state *);
 
 CWD_API void virtual_cwd_startup(void);
 CWD_API void virtual_cwd_shutdown(void);
-CWD_API void virtual_cwd_activate(const char *filename);
 CWD_API char *virtual_getcwd_ex(int *length);
 CWD_API char *virtual_getcwd(char *buf, size_t size);
 CWD_API int virtual_chdir(const char *path);

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.43.2.4 2003/06/17 17:13:18 pajoye Exp $
+// $Id: Packager.php,v 1.43.2.5 2003/06/26 14:38:04 pajoye Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'System.php';
@@ -121,7 +121,7 @@ class PEAR_Packager extends PEAR_Common
             return $this->raiseError("PEAR_Packager: mktemp failed");
         }
         $newpkgfile = $tmpdir . DIRECTORY_SEPARATOR . 'package.xml';
-        $np = @fopen($newpkgfile, "w");
+        $np = @fopen($newpkgfile, "wb");
         if (!$np) {
             chdir($oldcwd);
             return $this->raiseError("PEAR_Packager: unable to rewrite $pkgfile as $newpkgfile");

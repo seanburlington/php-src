@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.35.2.7 2003/06/26 08:45:50 pajoye Exp $
+// $Id: Registry.php,v 1.35.2.8 2003/06/26 14:38:04 pajoye Exp $
 
 /*
 TODO:
@@ -219,7 +219,7 @@ class PEAR_Registry extends PEAR
             }
         }
         $this->_assertStateDir();
-        $fp = @fopen($this->filemap, 'w');
+        $fp = @fopen($this->filemap, 'wb');
         if (!$fp) {
             return false;
         }
@@ -568,7 +568,7 @@ class PEAR_Registry extends PEAR
         if (PEAR::isError($e = $this->_lock(LOCK_EX))) {
             return $e;
         }
-        if (!$fp = fopen($this->depfile, 'w')) {
+        if (!$fp = fopen($this->depfile, 'wb')) {
             $this->_unlock();
             return $this->raiseError("Could not open dependencies file `".$this->depfile."' for writting");
         }

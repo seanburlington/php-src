@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.287 2000/08/01 07:57:19 hholzgra Exp $ */
+/* $Id: main.c,v 1.288 2000/08/04 22:42:11 hholzgra Exp $ */
 
 
 #include <stdio.h>
@@ -191,7 +191,7 @@ static PHP_INI_MH(OnUpdateTimeout)
 #endif
 
 #ifdef PHP_PROG_SENDMAIL
-#	define DEFAULT_SENDMAIL_PATH PHP_PROG_SENDMAIL " -t"
+#	define DEFAULT_SENDMAIL_PATH PHP_PROG_SENDMAIL " -t -i "
 #else
 #	define DEFAULT_SENDMAIL_PATH NULL
 #endif

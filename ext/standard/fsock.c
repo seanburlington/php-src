@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.116 2003/08/28 16:49:57 sas Exp $ */
+/* $Id: fsock.c,v 1.117 2003/11/12 22:01:02 jay Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -100,6 +100,10 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			zval_dtor(zerrstr);
 			ZVAL_STRING(zerrstr, errstr, 0);
 		}
+		else if (!zerrstr && errstr) {
+			efree(errstr);
+		} 
+
 		RETURN_FALSE;
 	}
 

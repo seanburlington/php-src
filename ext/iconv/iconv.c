@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.49 2002/10/11 07:50:47 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.50 2002/10/11 08:01:18 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -122,8 +122,10 @@ PHP_MINIT_FUNCTION(miconv)
 	}
 #endif
 
-	REGISTER_STRING_CONSTANT( "ICONV_IMPL", ICONV_IMPL, CONST_CS | CONST_PERSISTENT );
-	REGISTER_STRING_CONSTANT( "ICONV_VERSION", version, CONST_CS | CONST_PERSISTENT );
+	REGISTER_STRING_CONSTANT( "ICONV_IMPL", ICONV_IMPL, CONST_CS
+	                                                    | CONST_PERSISTENT );
+	REGISTER_STRING_CONSTANT( "ICONV_VERSION", version, CONST_CS
+	                                                    | CONST_PERSISTENT );
 
 	return SUCCESS;
 }

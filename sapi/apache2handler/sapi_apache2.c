@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.32 2004/06/25 12:51:38 edink Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.33 2004/07/20 20:48:01 moriyoshi Exp $ */
 
 #include <fcntl.h>
 
@@ -552,6 +552,8 @@ zend_first_try {
 #endif
 	}
 
+} zend_end_try();
+
 	if (!parent_req) {
 		php_apache_request_dtor(r TSRMLS_CC);
 		ctx->request_processed = 1;
@@ -566,8 +568,6 @@ zend_first_try {
 	} else {
 		ctx->r = parent_req;
 	}
-
-} zend_end_try();
 
 	return OK;
 }

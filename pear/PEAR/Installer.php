@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.115 2003/09/14 20:17:24 cellog Exp $
+// $Id: Installer.php,v 1.116 2003/09/15 03:29:12 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -314,10 +314,8 @@ class PEAR_Installer extends PEAR_Common
             }
         }
         $this->addFileOperation("rename", array($dest_file, $final_dest_file));
-
-        // XXX SHOULD BE DONE ONLY AFTER COMMIT
         // Store the full path where the file was installed for easy unistall
-        $this->pkginfo['filelist'][$file]['installed_as'] = $installed_as;
+        $this->addFileOperation("installed_as", array($file, $installed_as));
 
         //$this->log(2, "installed: $dest_file");
         return PEAR_INSTALLER_OK;
@@ -409,6 +407,9 @@ class PEAR_Installer extends PEAR_Common
                 case 'rmdir':
                     @rmdir($data[0]);
                     $this->log(3, "+ rmdir $data[0]");
+                    break;
+                case 'installed_as':
+                    $this->pkginfo['filelist'][$data[0]]['installed_as'] = $data[1];
                     break;
             }
         }

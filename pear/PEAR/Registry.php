@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.4 2001/10/29 12:17:37 ssb Exp $
+// $Id: Registry.php,v 1.5 2001/10/29 14:15:42 ssb Exp $
 
 require_once "System.php";
 
@@ -156,8 +156,11 @@ class PEAR_Registry
 
     function listPackages()
     {
-        $dp = opendir($this->statedir);
         $pkglist = array();
+        $dp = @opendir($this->statedir);
+        if (!$dp) {
+            return $pkglist;
+        }
         while ($ent = readdir($dp)) {
             if ($ent{0} == "." || substr($ent, -4) != ".inf") {
                 continue;

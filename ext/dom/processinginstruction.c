@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: processinginstruction.c,v 1.9 2004/02/15 10:54:37 rrichards Exp $ */
+/* $Id: processinginstruction.c,v 1.10 2004/02/15 17:07:34 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -113,11 +113,10 @@ int dom_processinginstruction_data_read(dom_object *obj, zval **retval TSRMLS_DC
 	
 	if ((content = xmlNodeGetContent(nodep)) != NULL) {
 		ZVAL_STRING(*retval, content, 1);
+		xmlFree(content);
 	} else {
 		ZVAL_EMPTY_STRING(*retval);
 	}
-
-	xmlFree(content);
 
 	return SUCCESS;
 }

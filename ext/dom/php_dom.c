@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.51 2004/02/04 14:15:16 iliaa Exp $ */
+/* $Id: php_dom.c,v 1.52 2004/02/15 17:07:34 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -758,7 +758,6 @@ void dom_objects_free_storage(void *object TSRMLS_DC)
 
 	if (intern->ptr != NULL && ((php_libxml_node_ptr *)intern->ptr)->node != NULL) {
 		if (((xmlNodePtr) ((php_libxml_node_ptr *)intern->ptr)->node)->type != XML_DOCUMENT_NODE && ((xmlNodePtr) ((php_libxml_node_ptr *)intern->ptr)->node)->type != XML_HTML_DOCUMENT_NODE) {
-			// php_libxml_node_free_resource(dom_object_get_node(intern) TSRMLS_CC);
 			php_libxml_node_decrement_resource((php_libxml_node_object *) intern TSRMLS_CC);
 		} else {
 			php_libxml_decrement_node_ptr((php_libxml_node_object *) intern TSRMLS_CC);
@@ -1070,7 +1069,7 @@ int dom_has_feature(char *feature, char *version)
 	int retval = 0;
 
 	if (!(strcmp (version, "1.0") && strcmp (version,"2.0") && strcmp(version, ""))) {
-		if ((!strcasecmp(feature, "Core") && strcmp (version, "1.0")) || !strcasecmp(feature, "XML"))
+		if ((!strcasecmp(feature, "Core") && !strcmp (version, "1.0")) || !strcasecmp(feature, "XML"))
 			retval = 1;
 	}
 

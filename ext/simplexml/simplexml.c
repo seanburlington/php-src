@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.106 2004/01/14 22:07:28 helly Exp $ */
+/* $Id: simplexml.c,v 1.107 2004/01/15 09:28:01 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,11 +31,7 @@
 #include "ext/standard/php_string.h"
 #include "php_simplexml.h"
 #include "zend_default_classes.h"
-
-#if HAVE_SPL && !defined(COMPILE_DL_SPL)
-#include "ext/spl/spl_iterators.h"
-#endif
-
+#include "zend_interfaces.h"
 
 zend_class_entry *sxe_class_entry;
 
@@ -1483,11 +1479,7 @@ zend_module_entry simplexml_module_entry = {
 	simplexml_functions,
 	PHP_MINIT(simplexml),
 	NULL,
-#if HAVE_SPL && !defined(COMPILE_DL_SPL)
-	PHP_RINIT(simplexml),
-#else
 	NULL,
-#endif
 	NULL,
 	PHP_MINFO(simplexml),
 	"0.1",
@@ -1524,6 +1516,7 @@ PHP_MINIT_FUNCTION(simplexml)
 	sxe.create_object = sxe_object_new;
 	sxe_class_entry = zend_register_internal_class(&sxe TSRMLS_CC);
 	sxe_class_entry->get_iterator = php_sxe_get_iterator;
+	zend_class_implements(sxe_class_entry TSRMLS_CC, 1, zend_ce_traversable);
 	sxe_object_handlers.get_method = zend_get_std_object_handlers()->get_method;
 	sxe_object_handlers.get_constructor = zend_get_std_object_handlers()->get_constructor;
 	sxe_object_handlers.get_class_entry = zend_get_std_object_handlers()->get_class_entry;
@@ -1533,24 +1526,13 @@ PHP_MINIT_FUNCTION(simplexml)
 }
 /* }}} */
 
-#if HAVE_SPL && !defined(COMPILE_DL_SPL)
-/* {{{ PHP_RINIT_FUNCTION(simplexml)
- */
-PHP_RINIT_FUNCTION(simplexml)
-{
-	zend_class_implements(sxe_class_entry TSRMLS_CC, 1, spl_ce_RecursiveIterator);
-	return SUCCESS;
-}
-/* }}} */
-#endif
-
 /* {{{ PHP_MINFO_FUNCTION(simplexml)
  */
 PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.106 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.107 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

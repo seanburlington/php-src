@@ -26,12 +26,14 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.h,v 1.5 1999/06/16 17:06:51 ssb Exp $ */
+/* $Id: fopen_wrappers.h,v 1.6 1999/06/19 13:04:54 zeev Exp $ */
 
 /* Synced with php3 revision 1.25 1999-06-16 [ssb] */
 
 #ifndef _FOPEN_WRAPPERS_H
 #define _FOPEN_WRAPPERS_H
+
+#include "php_globals.h"
 
 #define IGNORE_PATH	0
 #define USE_PATH	1
@@ -84,7 +86,7 @@ extern PHPAPI FILE *php3_fopen_wrapper(char *filename, char *mode, int options, 
 PHPAPI FILE *php3_fopen_for_parser(void);
 
 extern PHPAPI int _php3_check_open_basedir(char *path);
-extern PHPAPI int _php3_check_specific_open_basedir(char *basedir, char *path);
+extern PHPAPI int _php3_check_specific_open_basedir(char *basedir, char *path PLS_DC);
 
 extern PHPAPI FILE *php3_fopen_with_path(char *filename, char *mode, char *path, char **opened_path);
 

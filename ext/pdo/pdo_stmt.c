@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.13 2004/05/18 22:31:13 iliaa Exp $ */
+/* $Id: pdo_stmt.c,v 1.14 2004/05/18 22:45:53 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -534,7 +534,7 @@ static zval *dbstmt_prop_read(zval *object, zval *member, int type TSRMLS_DC)
 
 	convert_to_string(member);
 
-	if(strcmp(Z_STRVAL_P(member), "queryString")) == 0) {
+	if(strcmp(Z_STRVAL_P(member), "queryString") == 0) {
 		MAKE_STD_ZVAL(return_value);
 		ZVAL_STRINGL(return_value, stmt->query_string, stmt->query_stringlen, 1);
 	}

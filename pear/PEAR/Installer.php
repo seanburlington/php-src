@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.81.2.22 2004/01/25 23:19:58 pajoye Exp $
+// $Id: Installer.php,v 1.81.2.23 2004/01/26 01:26:46 pajoye Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';

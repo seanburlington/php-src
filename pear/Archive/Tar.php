@@ -16,7 +16,7 @@
 // | Author: Vincent Blavet <vincent@blavet.net>                          |
 // +----------------------------------------------------------------------+
 //
-// $Id: Tar.php,v 1.13.4.7 2003/09/29 14:06:39 pajoye Exp $
+// $Id: Tar.php,v 1.13.4.8 2004/01/26 01:26:45 pajoye Exp $
 
 require_once 'PEAR.php';
 
@@ -24,7 +24,7 @@ require_once 'PEAR.php';
 * Creates a (compressed) Tar archive
 *
 * @author   Vincent Blavet <vincent@blavet.net>
-* @version  $Revision: 1.13.4.7 $
+* @version  $Revision: 1.13.4.8 $
 * @package  Archive
 */
 class Archive_Tar extends PEAR
@@ -1367,8 +1367,11 @@ class Archive_Tar extends PEAR
 
             // ----- Change the file mode, mtime
             @touch($v_header['filename'], $v_header['mtime']);
-            // To be completed
-            //chmod($v_header[filename], DecOct($v_header[mode]));
+            if ($v_header['mode'] & 0111) {
+                // make file executable, obey umask
+                $mode = fileperms($v_header['filename']) | (~umask() & 0111);
+                @chmod($v_header['filename'], $mode);
+            }
           }
 
           // ----- Check the file size

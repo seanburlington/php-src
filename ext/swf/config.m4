@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 2000/05/18 00:39:00 sterling Exp $
+dnl $Id: config.m4,v 1.6 2000/05/25 00:15:29 sterling Exp $
 dnl config.m4 for extension libswf
 dnl don't forget to call PHP_EXTENSION(swf)
 dnl This file is a modified version of config.m4
@@ -8,7 +8,7 @@ PHP_ARG_WITH(swf, for libswf support,
 [  --with-swf[=DIR]        Include swf support])
 
 if test "$PHP_SWF" != "no"; then
-  for i in /usr/local /usr $PHP_SWF; do
+  for i in /usr/local/lib /usr/lib $PHP_SWF; do
     if test -r $i/libswf.a; then
       SWF_DIR=$i
     fi

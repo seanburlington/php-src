@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.28 2000/02/22 18:00:32 andrei Exp $ */
+/* $Id: exec.c,v 1.29 2000/02/24 08:07:29 eschmid Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -324,7 +324,7 @@ char * php_escape_shell_cmd(char *str) {
 }
 
 /* {{{ proto escapeshellcmd(string command)
-   escape shell metacharacters */
+   Escape shell metacharacters */
 PHP_FUNCTION(escapeshellcmd)
 {
 	pval **arg1;

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.75 2004/02/11 19:00:42 bfrance Exp $ */
+/* $Id: head.c,v 1.76 2004/08/23 16:58:11 iliaa Exp $ */
 
 #include <stdio.h>
 
@@ -244,7 +244,7 @@ static void php_head_apply_header_list_to_hash(void *data, void *arg TSRMLS_DC)
 	}
 }
 
-/* {{{ proto string headers_list(void)
+/* {{{ proto array headers_list(void)
    Return list of headers to be sent / already sent */
 PHP_FUNCTION(headers_list)
 {

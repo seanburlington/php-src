@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hartmut@six.de>                         |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.13.2.2 2002/11/15 16:36:23 moriyoshi Exp $ 
+  $Id: mime_magic.c,v 1.13.2.3 2002/11/18 21:16:24 moriyoshi Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -274,6 +274,14 @@ PHP_MINIT_FUNCTION(mime_magic)
 PHP_MSHUTDOWN_FUNCTION(mime_magic)
 {
 	UNREGISTER_INI_ENTRIES();
+	if (mime_global.magic != NULL && (int)mime_global.magic != -1) {
+		struct magic *iter = mime_global.magic;
+		while (iter != NULL) {
+			struct magic *iter_next = iter->next;	
+			free(iter);
+			iter = iter_next;
+		}
+	}
 	return SUCCESS;
 }
 /* }}} */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.200 2002/06/29 15:54:02 derick Exp $ */
+/* $Id: gd.c,v 1.201 2002/07/26 13:24:45 helly Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -118,6 +118,7 @@ static void _php_image_bw_convert(gdImagePtr im_org, gdIOCtx *out, int threshold
  */
 function_entry gd_functions[] = {
 	PHP_FE(imagearc,								NULL)
+	PHP_FE(imageellipse,							NULL)
 	PHP_FE(imagechar,								NULL)
 	PHP_FE(imagecharup,								NULL)
 	PHP_FE(imagecolorallocate,						NULL)
@@ -148,7 +149,6 @@ function_entry gd_functions[] = {
 	PHP_FE(imagecreatetruecolor,					NULL)
 	PHP_FE(imagetruecolortopalette,					NULL)
 	PHP_FE(imagesetthickness,						NULL)
-	PHP_FE(imageellipse,							NULL)
 	PHP_FE(imagefilledarc,							NULL)
 	PHP_FE(imagefilledellipse,						NULL)
 	PHP_FE(imagealphablending,						NULL)

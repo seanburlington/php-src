@@ -23,11 +23,11 @@
    | If you did not, or have any questions about PHP licensing, please    |
    | contact core@php.net.                                                |
    +----------------------------------------------------------------------+
-   | Authors: Andrey Zmievski <andrey@ispi.net>                           |
+   | Authors: Andrei Zmievski <andrei@ispi.net>                           |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.h,v 1.14 1999/09/14 19:24:37 andrey Exp $ */
+/* $Id: php_pcre.h,v 1.15 1999/10/01 14:54:53 andrei Exp $ */
 
 #ifndef _PHP_PCRE_H
 #define _PHP_PCRE_H

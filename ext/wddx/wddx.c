@@ -23,11 +23,11 @@
    | If you did not, or have any questions about PHP licensing, please    |
    | contact core@php.net.                                                |
    +----------------------------------------------------------------------+
-   | Authors: Andrey Zmievski <andrey@ispi.net>                          |
+   | Authors: Andrei Zmievski <andrei@ispi.net>                          |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.13 1999/09/24 18:43:34 andrey Exp $ */
+/* $Id: wddx.c,v 1.14 1999/10/01 14:54:55 andrei Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"

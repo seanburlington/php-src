@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.6 2001/11/30 18:59:32 sniper Exp $
+dnl $Id: config.m4,v 1.7 2002/03/07 14:59:48 sas Exp $
 dnl
 
 PHP_ARG_WITH(dbplus, for dbplus support,
@@ -27,7 +27,7 @@ if test "$PHP_DBPLUS" != "no"; then
   fi
 
   # --with-dbplus -> add include path
-  AC_ADD_INCLUDE($DBPLUS_DIR/include)
+  PHP_ADD_INCLUDE($DBPLUS_DIR/include)
 
   # --with-dbplus -> chech for lib and symbol presence 
   LIBNAME=Ddb

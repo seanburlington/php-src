@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.10 2004/05/30 20:24:46 abies Exp $ */
+/* $Id: ibase_query.c,v 1.11 2004/05/30 20:40:36 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1081,6 +1081,11 @@ PHP_FUNCTION(ibase_query)
 			if (IBG(default_link) == -1) {
 				isc_db_handle db = NULL;
 				isc_tr_handle trans = NULL;
+
+				if (PG(sql_safe_mode)) {
+					_php_ibase_module_error("CREATE DATABASE not allowed in SQL safe mode" TSRMLS_CC);
+					goto ibase_query_end;
+				}
 
 				if (isc_dsql_execute_immediate(IB_STATUS, &db, &trans, 0, query, 
 						SQL_DIALECT_CURRENT, NULL)) {

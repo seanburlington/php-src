@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.64 2000/06/16 00:56:38 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.65 2000/06/16 01:08:39 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -412,7 +412,7 @@ PHPAPI FILE *php_fopen_with_path(char *filename, char *mode, char *path, char **
 #ifdef PHP_WIN32
 	if (IS_SLASH(*filename) || (filename[1] == ':')) {
 #else
-	if (IS_SLASH(*filename) {
+	if (IS_SLASH(*filename)) {
 #endif
 		if (PG(safe_mode)) {
 			if(PG(doc_root)) {

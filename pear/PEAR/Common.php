@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.58 2002/05/15 11:23:01 cox Exp $
+// $Id: Common.php,v 1.59 2002/05/20 01:17:09 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -721,6 +721,7 @@ class PEAR_Common extends PEAR
         $this->pkginfo = array();
         $this->current_element = false;
         $this->destdir = '';
+        unset($this->dir_install);
         $this->pkginfo['filelist'] = array();
         $this->filelist =& $this->pkginfo['filelist'];
         $this->dir_names = array();

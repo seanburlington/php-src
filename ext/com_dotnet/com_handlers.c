@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.22.2.2 2004/11/20 11:41:24 rrichards Exp $ */
+/* $Id: com_handlers.c,v 1.22.2.3 2004/11/25 20:28:37 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -293,13 +293,12 @@ static PHP_FUNCTION(com_method_handler)
 			INTERNAL_FUNCTION_PARAM_PASSTHRU);
 }
 
-static union _zend_function *com_method_get(zval **object_ptr, char *name, int len TSRMLS_DC)
+static union _zend_function *com_method_get(zval *object, char *name, int len TSRMLS_DC)
 {
 	zend_internal_function f, *fptr = NULL;
 	php_com_dotnet_object *obj;
 	union _zend_function *func;
 	DISPID dummy;
-	zval *object = *object_ptr;
 
 	obj = CDNO_FETCH(object);
 

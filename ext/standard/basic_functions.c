@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.373 2001/08/01 16:55:23 fmk Exp $ */
+/* $Id: basic_functions.c,v 1.374 2001/08/03 08:49:19 sas Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -847,6 +847,7 @@ PHP_MSHUTDOWN_FUNCTION(basic)
 
 PHP_RINIT_FUNCTION(basic)
 {
+	memset(BG(strtok_table), 0, 256);
 	BG(strtok_string) = NULL;
 	BG(locale_string) = NULL;
 	BG(user_compare_func_name) = NULL;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.84 2001/07/31 07:09:44 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.85 2001/08/03 08:49:19 sas Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -143,8 +143,9 @@ typedef struct {
 	HashTable putenv_ht;
 	char *strtok_string;
 	char *locale_string;
-	char *strtok_pos1;
-	char *strtok_pos2;
+	char *strtok_last;
+	char strtok_table[256];
+	ulong strtok_len;
 	char str_ebuf[40];
 	zval **array_walk_func_name;
 	zval **user_compare_func_name;

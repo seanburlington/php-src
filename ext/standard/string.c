@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.260 2002/01/05 20:46:41 jimw Exp $ */
+/* $Id: string.c,v 1.261 2002/01/05 23:49:57 jimw Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -696,8 +696,10 @@ PHP_FUNCTION(wordwrap)
 				lastspace = current;
 			}
 			/* if we are cutting, and we've accumulated enough
-			 * characters, copy and insert a break. */
-			else if (current - laststart >= linelength && docut) {
+			 * characters, and we haven't see a space for this line,
+			 * copy and insert a break. */
+			else if (current - laststart >= linelength
+					&& docut && laststart >= lastspace) {
 				memcpy(newtext+newtextlen, text+laststart, current-laststart);
 				newtextlen += current - laststart;
 				memcpy(newtext+newtextlen, breakchar, breakcharlen);

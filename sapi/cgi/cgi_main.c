@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.36 2003/05/31 02:20:08 helly Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.37 2003/05/31 17:02:01 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1426,7 +1426,7 @@ consult the installation file that came with this distribution, or visit \n\
 				for (i = optind, len = 0; i < argc; i++) {
 					strcat(s, argv[i]);
 					if (i < (argc - 1)) {
-						strcat(s, "&");
+						strcat(s, PG(arg_separator).input);
 					}
 				}
 				SG(request_info).query_string = s;

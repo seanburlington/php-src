@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.43 2002/04/07 10:38:02 ssb Exp $
+// $Id: Installer.php,v 1.44 2002/04/07 21:09:41 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -191,6 +191,9 @@ class PEAR_Installer extends PEAR_Common
                 } else {
                     $pkgfile = "http://" . $config->get('master_server') .
                          "/get/$pkgfile";
+                }
+                if (!extension_loaded("zlib")) {
+                    $pkgfile .= '?uncompress=yes';
                 }
                 $need_download = true;
             } else {

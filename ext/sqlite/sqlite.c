@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.62.2.20 2004/04/22 22:36:14 iliaa Exp $ 
+   $Id: sqlite.c,v 1.62.2.21 2004/04/22 22:52:54 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -257,7 +257,9 @@ static void real_result_dtor(struct php_sqlite_result *res TSRMLS_DC)
 		efree(res->col_names);
 	}
 
-	zend_list_delete(res->db->rsrc_id);
+	if (res->db) {
+		zend_list_delete(res->db->rsrc_id);
+	}
 	efree(res);
 }
 
@@ -675,7 +677,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.20 2004/04/22 22:36:14 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.21 2004/04/22 22:52:54 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

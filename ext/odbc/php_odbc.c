@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.143.2.18 2005/01/17 15:07:46 tony2001 Exp $ */
+/* $Id: php_odbc.c,v 1.143.2.19 2005/01/17 18:12:06 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1231,8 +1231,8 @@ PHP_FUNCTION(odbc_data_source)
 
 	array_init(return_value);
 
-	add_assoc_stringl_ex(return_value, "server", sizeof("server"), server_name, len1, 1);
-	add_assoc_stringl_ex(return_value, "description", sizeof("description"), desc, len2, 1);
+	add_assoc_string_ex(return_value, "server", sizeof("server"), server_name, 1);
+	add_assoc_string_ex(return_value, "description", sizeof("description"), desc, 1);
 
 }
 /* }}} */

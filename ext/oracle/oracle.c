@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.72 2001/09/09 13:29:00 derick Exp $ */
+/* $Id: oracle.c,v 1.73 2001/09/17 13:02:24 hholzgra Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -71,7 +71,7 @@ PHP_ORA_API php_ora_globals ora_globals;
 static oraCursor *ora_get_cursor(HashTable *, pval ** TSRMLS_DC);
 static char *ora_error(Cda_Def *);
 static int ora_describe_define(oraCursor *);
-static int _close_oraconn(zend_rsrc_list_entry *rsrc TSRMLS_DC);
+static void _close_oraconn(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 static int _close_oracur(oraCursor *cur TSRMLS_DC);
 static int _ora_ping(oraConnection *conn);
 int ora_set_param_values(oraCursor *cursor, int isout TSRMLS_DC);
@@ -201,7 +201,7 @@ ZEND_GET_MODULE(oracle)
 
 /* {{{ _close_oraconn
  */
-static int _close_oraconn(zend_rsrc_list_entry *rsrc TSRMLS_DC)
+static void _close_oraconn(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	oraConnection *conn = (oraConnection *)rsrc->ptr;
 	
@@ -218,8 +218,6 @@ static int _close_oraconn(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	} else {
 		efree(conn);
 	}
-
-	return 1;
 }
 /* }}} */
 

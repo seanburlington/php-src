@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.238 2002/07/10 15:23:47 jason Exp $ */
+/* $Id: file.c,v 1.239 2002/07/13 04:45:21 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1496,7 +1496,6 @@ PHPAPI PHP_FUNCTION(fseek)
 /* }}} */
 /* {{{ proto bool mkdir(string pathname[, int mode])
    Create a directory */
-
 PHP_FUNCTION(mkdir)
 {
 	int dir_len, ret;
@@ -1507,7 +1506,7 @@ PHP_FUNCTION(mkdir)
 		return;
 	}
 
-	if (PG(safe_mode) &&(!php_checkuid(dir, NULL, CHECKUID_ALLOW_ONLY_DIR))) {
+	if (PG(safe_mode) && (!php_checkuid(dir, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 		RETURN_FALSE;
 	}
 

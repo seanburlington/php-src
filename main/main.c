@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.319 2000/09/11 14:50:26 stas Exp $ */
+/* $Id: main.c,v 1.320 2000/09/27 19:46:47 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -882,6 +882,7 @@ int php_module_startup(sapi_module_struct *sf)
 		return FAILURE;
 	}
 	php_disable_functions();
+	zend_startup_extensions();
 	module_initialized = 1;
 	sapi_deactivate(SLS_C);
 	return SUCCESS;

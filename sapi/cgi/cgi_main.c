@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.245 2004/02/10 00:02:38 iliaa Exp $ */
+/* $Id: cgi_main.c,v 1.246 2004/02/10 00:29:46 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -271,7 +271,7 @@ static void sapi_cgibin_flush(void *server_context)
 #if PHP_FASTCGI
 	if (!FCGX_IsCGI()) {
 		FCGX_Request *request = (FCGX_Request *)server_context;
-		if(!request || FCGX_FFlush( request->out ) == -1 ) {
+		if (!parent && (!request || FCGX_FFlush(request->out) == -1)) {
 			php_handle_aborted_connection();
 		}
 		return;

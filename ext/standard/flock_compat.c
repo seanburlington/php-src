@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: flock_compat.c,v 1.19 2002/11/11 20:52:09 helly Exp $ */
+/* $Id: flock_compat.c,v 1.20 2002/11/11 23:40:33 helly Exp $ */
 
 #include <php.h>
 #include <errno.h>
@@ -41,7 +41,10 @@
 #endif
 
 #ifndef HAVE_FLOCK
-/* defines flock as php_flock */
+PHPAPI int php_flock(int fd, int operation)
+{
+	return php_flock(fd, operation);
+}
 #endif /* !defined(HAVE_FLOCK) */
 
 PHPAPI int php_flock(int fd, int operation)

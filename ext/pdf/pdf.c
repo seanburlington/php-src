@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.100 2001/09/25 21:58:14 jeroen Exp $ */
+/* $Id: pdf.c,v 1.101 2001/10/08 16:12:11 rjs Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -345,7 +345,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.100 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.101 $" );
 	php_info_print_table_end();
 
 }
@@ -747,6 +747,15 @@ PHP_FUNCTION(pdf_get_value)
 	} else if(0 == (strcmp(Z_STRVAL_PP(argv[1]), "resy"))) {
 		if(argc < 3) WRONG_PARAM_COUNT;
 		value = PDF_get_value(pdf, Z_STRVAL_PP(argv[1]), (float)Z_DVAL_PP(argv[2])-PDFLIB_IMAGE_OFFSET);
+	} else if(0 == (strcmp(Z_STRVAL_PP(argv[1]), "capheight"))) {
+		if(argc < 3) WRONG_PARAM_COUNT;
+		value = PDF_get_value(pdf, Z_STRVAL_PP(argv[1]), (float)Z_DVAL_PP(argv[2])-PDFLIB_FONT_OFFSET);
+	} else if(0 == (strcmp(Z_STRVAL_PP(argv[1]), "ascender"))) {
+		if(argc < 3) WRONG_PARAM_COUNT;
+		value = PDF_get_value(pdf, Z_STRVAL_PP(argv[1]), (float)Z_DVAL_PP(argv[2])-PDFLIB_FONT_OFFSET);
+	} else if(0 == (strcmp(Z_STRVAL_PP(argv[1]), "descender"))) {
+		if(argc < 3) WRONG_PARAM_COUNT;
+		value = PDF_get_value(pdf, Z_STRVAL_PP(argv[1]), (float)Z_DVAL_PP(argv[2])-PDFLIB_FONT_OFFSET);
 	} else if(0 == (strcmp(Z_STRVAL_PP(argv[1]), "font"))) {
 		value = PDF_get_value(pdf, Z_STRVAL_PP(argv[1]), 0.0)+PDFLIB_FONT_OFFSET;
 	} else {

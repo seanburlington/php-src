@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.154.2.10 2001/11/16 12:02:30 rasmus Exp $ */
+/* $Id: gd.c,v 1.154.2.11 2002/04/11 20:40:19 phanto Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -973,7 +973,7 @@ static int _php_image_type (char data[8])
 	}
 	else if (!memcmp(data, php_sig_gif, 3))
 		return PHP_GDIMG_TYPE_GIF;
-#ifdef HAVE_GD_WMBP
+#ifdef HAVE_GD_WBMP
 	else {
 		gdIOCtx *io_ctx;
 		io_ctx = gdNewDynamicCtx (8, data);

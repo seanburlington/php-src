@@ -1,9 +1,9 @@
-dnl $Id: config.m4,v 1.15 2003/06/06 22:44:56 wez Exp $
+dnl $Id: config.m4,v 1.16 2003/06/25 00:18:01 sterling Exp $
 dnl config.m4 for extension sqlite
 dnl vim:et:ts=2:sw=2
 
 PHP_ARG_WITH(sqlite, for sqlite support,
-[  --with-sqlite           Include sqlite support])
+[  --with-sqlite           Include sqlite support], yes)
 
 if test "$PHP_SQLITE" != "no"; then
 

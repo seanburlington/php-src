@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.58 2003/01/06 09:05:03 hyanantha Exp $ */
+/* $Id: php_pgsql.h,v 1.59 2003/01/06 10:28:34 hyanantha Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -42,8 +42,6 @@ extern zend_module_entry pgsql_module_entry;
 #else
 #define PHPAPI __declspec(dllimport)
 #endif
-#elif defined NETWARE
-#include <libpq-fs.h>
 #else
 #include <libpq/libpq-fs.h>
 #endif

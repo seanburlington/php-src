@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.27 2004/02/09 23:28:47 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.28 2004/02/11 16:53:03 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -429,7 +429,7 @@ static void php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 	ap_set_content_type(r, apr_pstrdup(r->pool, content_type));
 	efree(content_type);
 
-	content_length = (char *) apr_table_get(f->r->headers_in, "Content-Length");
+	content_length = (char *) apr_table_get(r->headers_in, "Content-Length");
 	SG(request_info).content_length = (content_length ? atoi(content_length) : 0);
 
 	apr_table_unset(r->headers_out, "Content-Length");

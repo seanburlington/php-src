@@ -1,6 +1,8 @@
 dnl
-dnl $Id: config.m4,v 1.18 2005/02/17 04:23:14 wez Exp $
+dnl $Id: config.m4,v 1.19 2005/02/28 08:18:47 rasmus Exp $
 dnl
+
+if test "$PHP_PDO" != "no"; then
 
 AC_DEFUN([PDO_MYSQL_LIB_CHK], [
   str="$PDO_MYSQL_DIR/$1/libmysqlclient.*"
@@ -80,4 +82,6 @@ Note that the MySQL client library is not bundled anymore.])
   PHP_SUBST_OLD(PDO_MYSQL_MODULE_TYPE)
   PHP_SUBST_OLD(PDO_MYSQL_LIBS)
   PHP_SUBST_OLD(PDO_MYSQL_INCLUDE)
+fi
+
 fi

@@ -1,6 +1,8 @@
 dnl
-dnl $Id: config.m4,v 1.5 2005/02/23 17:44:22 abies Exp $
+dnl $Id: config.m4,v 1.6 2005/02/28 08:18:46 rasmus Exp $
 dnl
+
+if test "$PHP_PDO" != "no"; then
 
 PHP_ARG_WITH(pdo-firebird,for Firebird support for PDO,
 [  --with-pdo-firebird[=DIR]  Include Firebird support for PDO.  DIR is the Firebird base
@@ -56,4 +58,6 @@ if test "$PHP_PDO_FIREBIRD" != "no"; then
   PHP_NEW_EXTENSION(pdo_firebird, pdo_firebird.c firebird_driver.c firebird_statement.c, $ext_shared,,-I$pdo_inc_path)
   PHP_SUBST(PDO_FIREBIRD_SHARED_LIBADD)
   PHP_ADD_EXTENSION_DEP(pdo_firebird, pdo)
+fi
+
 fi

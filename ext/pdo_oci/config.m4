@@ -1,4 +1,6 @@
-dnl $Id: config.m4,v 1.10 2005/02/17 04:23:14 wez Exp $
+dnl $Id: config.m4,v 1.11 2005/02/28 08:18:47 rasmus Exp $
+
+if test "$PHP_PDO" != "no"; then
 
 AC_DEFUN([AC_PDO_OCI_VERSION],[
   AC_MSG_CHECKING([Oracle version])
@@ -179,4 +181,6 @@ You need to tell me where to find your oracle SDK, or set ORACLE_HOME.
   PHP_SUBST_OLD(PDO_OCI_VERSION)
   PHP_ADD_EXTENSION_DEP(pdo_oci, pdo)
   
+fi
+
 fi

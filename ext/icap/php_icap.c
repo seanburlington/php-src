@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_icap.c,v 1.32 2001/12/06 17:11:42 hholzgra Exp $ */
+/* $Id: php_icap.c,v 1.33 2001/12/07 07:19:35 hholzgra Exp $ */
 
 #define ICAP1
 
@@ -688,7 +688,7 @@ icap_delete_calendar(){
 }
 /* }}} */
 
-/* {{{ proto void icap_open(void)
+/* {{{ proto void icap_popen(void)
    For now this is obviously a dummy */
 PHP_FUNCTION(icap_popen)
 {

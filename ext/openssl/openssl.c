@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.37 2001/12/06 17:46:35 hholzgra Exp $ */
+/* $Id: openssl.c,v 1.38 2001/12/07 07:22:15 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1368,7 +1368,7 @@ PHP_FUNCTION(openssl_csr_export)
 }
 /* }}} */
 
-/* {{{ proto openssl_csr_sign(mixed csr, mixed x509, mixed priv_key, long days)
+/* {{{ proto resource openssl_csr_sign(mixed csr, mixed x509, mixed priv_key, long days)
    Signs a cert with another CERT */
 PHP_FUNCTION(openssl_csr_sign)
 {

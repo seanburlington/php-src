@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.49 2001/06/06 13:05:44 rasmus Exp $ */
+/* $Id: fdf.c,v 1.50 2001/07/13 16:58:09 rasmus Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -62,6 +62,7 @@ function_entry fdf_functions[] = {
 	PHP_FE(fdf_set_opt,								NULL)
 	PHP_FE(fdf_set_submit_form_action,				NULL)
 	PHP_FE(fdf_set_javascript_action,				NULL)
+	PHP_FE(fdf_set_encoding,						NULL)
 	{NULL, NULL, NULL}
 };
 /* }}} */
@@ -685,6 +686,38 @@ PHP_FUNCTION(fdf_set_javascript_action)
 }
 /* }}} */
 
+/* {{{ fdf_set_encoding(int fdf_document, string encoding)
+   Sets FDF encoding (either "Shift-JIS" or "Unicode") */  
+PHP_FUNCTION(fdf_set_encoding) {
+	pval **arg1, **arg2;
+	int id, type;
+	FDFDoc fdf;
+	FDFErc err;
+	FDF_TLS_VARS;
+
+	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters_ex(2, &arg1, &arg2) == FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+
+	convert_to_long_ex(arg1);
+	convert_to_string_ex(arg2);
+	id=(*arg1)->value.lval;
+	fdf = zend_list_find(id,&type);
+	if(!fdf || type!=FDF_GLOBAL(le_fdf)) {
+		php_error(E_WARNING,"Unable to find file identifier %d",id);
+		RETURN_FALSE;
+	}
+
+	err = FDFSetEncoding(fdf, (*arg2)->value.str.val);
+    
+	if(err != FDFErcOK) {
+		printf("error setting encoding\n");
+	}
+
+	RETURN_TRUE;
+}
+/* }}} */
+
 /* {{{ SAPI_POST_HANDLER_FUNC
  * SAPI post handler for FDF forms */
 SAPI_POST_HANDLER_FUNC(fdf_post_handler)
@@ -756,6 +789,7 @@ SAPI_POST_HANDLER_FUNC(fdf_post_handler)
 	} 
 }
 /* }}} */
+
 
 #endif
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_fdf.h,v 1.12 2001/04/06 23:17:31 sniper Exp $ */
+/* $Id: php_fdf.h,v 1.13 2001/07/13 16:58:09 rasmus Exp $ */
 
 #ifndef PHP_FDF_H
 #define PHP_FDF_H
@@ -53,6 +53,7 @@ PHP_FUNCTION(fdf_set_flags);
 PHP_FUNCTION(fdf_set_opt);
 PHP_FUNCTION(fdf_set_submit_form_action);
 PHP_FUNCTION(fdf_set_javascript_action);
+PHP_FUNCTION(fdf_set_encoding);
 
 #else
 #define fdf_module_ptr NULL

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.77 2000/10/25 17:43:59 andrei Exp $ */
+/* $Id: pgsql.c,v 1.78 2000/11/02 23:08:05 andi Exp $ */
 
 #include <stdlib.h>
 
@@ -1663,7 +1663,7 @@ PHP_FUNCTION(pg_loimport)
 			break;
 	}
 	
-	if (PG(safe_mode) &&(!php_checkuid(Z_STRVAL_PP(file_in), NULL, 2))) {
+	if (PG(safe_mode) &&(!php_checkuid(Z_STRVAL_PP(file_in), NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 		RETURN_FALSE;
 	}
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.45 2000/10/25 17:43:49 andrei Exp $ */
+/* $Id: db.c,v 1.46 2000/11/02 23:08:04 andi Exp $ */
 #define IS_EXT_MODULE
 
 #if 1
@@ -289,7 +289,7 @@ dbm_info *php_dbm_open(char *filename, char *mode) {
 		return NULL;
 	}
 
-	if (PG(safe_mode) && (!php_checkuid(filename, NULL, 2))) {
+	if (PG(safe_mode) && (!php_checkuid(filename, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 		return NULL;
 	}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.48 2000/10/31 18:05:19 zeev Exp $ */
+/* $Id: filestat.c,v 1.49 2000/11/02 23:08:05 andi Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -252,7 +252,7 @@ PHP_FUNCTION(chgrp)
 		gid = (*group)->value.lval;
 	}
 
-	if (PG(safe_mode) &&(!php_checkuid((*filename)->value.str.val, NULL, 1))) {
+	if (PG(safe_mode) &&(!php_checkuid((*filename)->value.str.val, NULL, CHECKUID_ALLOW_FILE_NOT_EXISTS))) {
 		RETURN_FALSE;
 	}
 
@@ -300,7 +300,7 @@ PHP_FUNCTION(chown)
 		uid = (*user)->value.lval;
 	}
 
-	if (PG(safe_mode) &&(!php_checkuid((*filename)->value.str.val, NULL, 1))) {
+	if (PG(safe_mode) &&(!php_checkuid((*filename)->value.str.val, NULL, CHECKUID_ALLOW_FILE_NOT_EXISTS))) {
 		RETURN_FALSE;
 	}
 
@@ -334,7 +334,7 @@ PHP_FUNCTION(chmod)
 	convert_to_string_ex(filename);
 	convert_to_long_ex(mode);
 
-	if (PG(safe_mode) &&(!php_checkuid((*filename)->value.str.val, NULL, 1))) {
+	if (PG(safe_mode) &&(!php_checkuid((*filename)->value.str.val, NULL, CHECKUID_ALLOW_FILE_NOT_EXISTS))) {
 		RETURN_FALSE;
 	}
 
@@ -397,7 +397,7 @@ PHP_FUNCTION(touch)
 	}
 	convert_to_string_ex(filename);
 
-	if (PG(safe_mode) &&(!php_checkuid((*filename)->value.str.val, NULL, 2))) {
+	if (PG(safe_mode) &&(!php_checkuid((*filename)->value.str.val, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 		if (newtime) efree(newtime);
 		RETURN_FALSE;
 	}

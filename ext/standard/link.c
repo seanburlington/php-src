@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.26 2000/07/02 15:12:34 andi Exp $ */
+/* $Id: link.c,v 1.27 2000/11/02 23:08:06 andi Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -110,7 +110,7 @@ PHP_FUNCTION(symlink)
 	convert_to_string_ex(topath);
 	convert_to_string_ex(frompath);
 
-	if (PG(safe_mode) && !php_checkuid((*topath)->value.str.val, NULL, 2)) {
+	if (PG(safe_mode) && !php_checkuid((*topath)->value.str.val, NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
 		RETURN_FALSE;
 	}
 	if (!strncasecmp((*topath)->value.str.val,"http://",7) || !strncasecmp((*topath)->value.str.val,"ftp://",6)) {
@@ -141,7 +141,7 @@ PHP_FUNCTION(link)
 	convert_to_string_ex(topath);
 	convert_to_string_ex(frompath);
 
-	if (PG(safe_mode) && !php_checkuid((*topath)->value.str.val, NULL, 2)) {
+	if (PG(safe_mode) && !php_checkuid((*topath)->value.str.val, NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
 		RETURN_FALSE;
 	}
 	if (!strncasecmp((*topath)->value.str.val,"http://",7) || !strncasecmp((*topath)->value.str.val,"ftp://",6)) {

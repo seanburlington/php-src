@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.50 2004/03/01 07:02:23 jon Exp $ */
+/* $Id: streams.c,v 1.51 2004/03/07 21:36:55 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1881,7 +1881,10 @@ PHPAPI int _php_stream_scandir(char *dirname, php_stream_dirent **namelist[], in
 			vector = (php_stream_dirent **) erealloc(vector, vector_size * sizeof(php_stream_dirent *));
 		}
 
-		vector[nfiles++] = (php_stream_dirent*)estrndup((const char *)&sdp, sizeof(php_stream_dirent) + ((strlen(sdp.d_name) + 1) * sizeof(char)));
+		vector[nfiles] = emalloc(sizeof(php_stream_dirent));
+		memcpy(vector[nfiles], &sdp, sizeof(sdp));
+
+		nfiles++;
 	}
 	php_stream_closedir(stream);
 

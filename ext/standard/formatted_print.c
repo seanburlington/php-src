@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.63 2003/01/11 23:05:19 moriyoshi Exp $ */
+/* $Id: formatted_print.c,v 1.64 2003/02/13 17:25:31 iliaa Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -359,8 +359,12 @@ php_sprintf_appenddouble(char **buffer, int *pos,
 		numbuf[i++] = fmt;
 		exp_p = php_convert_to_decimal(decpt, 0, &dec2, &sign, 0);
 		numbuf[i++] = sign ? '-' : '+';
-		while (*exp_p) {
-			numbuf[i++] = *(exp_p++);
+		if (*exp_p) { 
+			while (*exp_p) {
+				numbuf[i++] = *(exp_p++);
+			}
+		} else {
+			numbuf[i++] = '0';
 		}
 	} else {
 		numbuf[i++] = cvt[j++];

@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: reg.h,v 1.16 2002/09/25 14:02:34 andrei Exp $ */
+/* $Id: reg.h,v 1.17 2002/09/25 17:48:10 andrei Exp $ */
 
 #ifndef REG_H
 #define REG_H
@@ -42,7 +42,7 @@ PHP_MINFO_FUNCTION(regex);
 
 
 #ifdef ZTS
-#define REG(v) TSRMG(reg_globals_id, php_reg_globals *, v)
+#define REG(v) TSRMG(reg_globals_id, zend_reg_globals *, v)
 #else
 #define REG(v) (reg_globals.v)
 #endif

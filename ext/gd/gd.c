@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.61 2000/05/23 22:28:07 hholzgra Exp $ */
+/* $Id: gd.c,v 1.62 2000/05/24 08:58:40 rasmus Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1894,7 +1894,7 @@ static
 void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode)
 {
 	zval **IM, **PTSIZE, **ANGLE, **X, **Y, **C, **FONTNAME, **COL;
-	gdImagePtr im;
+	gdImagePtr im=NULL;
 	int col, x, y, l=0, i;
 	int brect[8];
 	double ptsize, angle;

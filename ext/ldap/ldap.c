@@ -21,7 +21,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.39 2000/05/23 09:33:39 sas Exp $ */
+/* $Id: ldap.c,v 1.40 2000/05/24 08:58:40 rasmus Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -171,15 +171,15 @@ PHP_MINFO_FUNCTION(ldap)
 #endif
 
 	if (LDAPG(max_links) == -1) {
-		snprintf(maxl, 31, "%d/unlimited", LDAPG(num_links) );
+		snprintf(maxl, 31, "%ld/unlimited", LDAPG(num_links) );
 	} else {
-		snprintf(maxl, 31, "%d/%ld", LDAPG(num_links), LDAPG(max_links));
+		snprintf(maxl, 31, "%ld/%ld", LDAPG(num_links), LDAPG(max_links));
 	}
 	maxl[31] = 0;
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.39 2000/05/23 09:33:39 sas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.40 2000/05/24 08:58:40 rasmus Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #if HAVE_NSLDAP

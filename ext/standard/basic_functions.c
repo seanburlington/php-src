@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.488 2002/07/28 19:18:08 sesser Exp $ */
+/* $Id: basic_functions.c,v 1.489 2002/08/02 10:08:53 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -319,6 +319,10 @@ function_entry basic_functions[] = {
 
 #ifdef HAVE_STRCOLL
 	PHP_FE(strcoll,															NULL)
+#endif
+
+#ifdef HAVE_STRFMON
+	PHP_FE(money_format,                                                    NULL)
 #endif
 
 	PHP_FE(substr,															NULL)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.279 2002/08/02 06:53:48 hirokawa Exp $ */
+/* $Id: string.c,v 1.280 2002/08/02 10:08:53 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3903,6 +3903,28 @@ PHP_FUNCTION(str_rot13)
 }
 /* }}} */
 
+
+#if HAVE_STRFMON
+/* {{{ proto string money_format(string format , float value)
+   Convert monetary value(s) to string */
+
+PHP_FUNCTION(money_format) {
+	int format_len, str_len = 1024;
+	char *format, *str = emalloc(str_len);
+	double value;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sd",
+							  &format, &format_len, &value) == FAILURE) {
+		return;
+	}
+
+	str_len = strfmon(str, str_len, format, value); 	
+
+	RETURN_STRINGL(erealloc(str, strlen), str_len, 0);
+}
+
+/* }}} */
+#endif
 
 /*
  * Local variables:

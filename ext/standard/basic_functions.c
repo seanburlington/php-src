@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.273 2000/10/29 23:34:33 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.274 2000/10/30 23:39:14 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -2402,14 +2402,15 @@ PHP_FUNCTION(parse_ini_file)
 	}
 
 	convert_to_string_ex(filename);
-	fh.handle.fp = V_FOPEN((*filename)->value.str.val, "r");
+	fh.handle.fp = V_FOPEN(Z_STRVAL_PP(filename), "r");
 	if (!fh.handle.fp) {
 		php_error(E_WARNING,"Cannot open '%s' for reading", (*filename)->value.str.val);
 		return;
 	}
 	fh.type = ZEND_HANDLE_FP;
+	fh.filename = Z_STRVAL_PP(filename);
 	array_init(return_value);
-	zend_parse_ini_file(&fh, ini_parser_cb, return_value);
+	zend_parse_ini_file(&fh, 0, ini_parser_cb, return_value);
 }
 /* }}} */
 

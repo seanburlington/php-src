@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: php_main.h,v 1.6 2000/10/29 16:00:42 sas Exp $ */
+/* $Id: php_main.h,v 1.7 2000/10/30 23:39:14 zeev Exp $ */
 
 
 #ifndef PHP_MAIN_H
@@ -48,11 +48,6 @@ PHPAPI void php_handle_aborted_connection(void);
 PHPAPI int php_handle_auth_data(const char *auth SLS_DC);
 
 extern void php_call_shutdown_functions(void);
-
-
-/* configuration module */
-extern int php_init_config(void);
-extern int php_shutdown_config(void);
 
 /* environment module */
 extern int php_init_environ(void);

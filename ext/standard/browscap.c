@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.36 2000/10/29 23:10:22 zeev Exp $ */
+/* $Id: browscap.c,v 1.37 2000/10/30 23:39:14 zeev Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -33,7 +33,7 @@ static zval *current_section;
 
 static void browscap_entry_dtor(zval *pvalue)
 {
-	if (pvalue->type == IS_OBJECT || pvalue->type == IS_ARRAY) {
+	if (pvalue->type == IS_OBJECT) {
 		zend_hash_destroy(pvalue->value.obj.properties);
 		free(pvalue->value.obj.properties);
 	}
@@ -144,7 +144,8 @@ PHP_MINIT_FUNCTION(browscap)
 			php_error(E_WARNING,"Cannot open '%s' for reading", browscap);
 			return FAILURE;
 		}
-		zend_parse_ini_file(&fh, (zend_ini_parser_cb_t) php_browscap_parser_cb, &browser_hash);
+		fh.filename = browscap;
+		zend_parse_ini_file(&fh, 1, (zend_ini_parser_cb_t) php_browscap_parser_cb, &browser_hash);
 	}
 
 	return SUCCESS;

@@ -16,9 +16,10 @@
 // |          Sebastian Bergmann <sb@sebastian-bergmann.de>               |
 // +----------------------------------------------------------------------+
 //
-// $Id: Cache.php,v 1.16 2001/12/11 15:31:06 sebastian Exp $
+// $Id: Cache.php,v 1.17 2001/12/17 11:23:33 uw Exp $
 
-require_once 'Cache/Error.php';
+require_once('PEAR.php');
+require_once('Cache/Error.php');
 
 /**
 * Cache is a base class for cache implementations.
@@ -58,7 +59,7 @@ require_once 'Cache/Error.php';
 *          bad circumstances  (especially with the file container)
 *
 * @author   Ulf Wendel <ulf.wendel@phpdoc.de>
-* @version  $Id: Cache.php,v 1.16 2001/12/11 15:31:06 sebastian Exp $
+* @version  $Id: Cache.php,v 1.17 2001/12/17 11:23:33 uw Exp $
 * @package  Cache
 * @access   public
 */
@@ -270,7 +271,7 @@ class Cache extends PEAR {
     * @param    string  cache group, if empty all groups will be flashed
     * @return   integer number of removed datasets
     */
-    function flush($group = '') {
+    function flush($group = 'default') {
         if (!$this->caching)
             return true;
 

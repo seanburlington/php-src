@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.23 2000/05/02 00:44:27 sas Exp $ */
+/* $Id: sysvshm.c,v 1.24 2000/05/17 19:50:22 hholzgra Exp $ */
 
 /* This has been built and tested on Solaris 2.6.
  * It may not compile or execute correctly on other systems.
@@ -201,7 +201,7 @@ PHP_FUNCTION(shm_remove)
 
 
 
-/* {{{ proto int shm_put(int id, int key, object *variable)
+/* {{{ proto int shm_put_var(int id, int key, object *variable)
    Insert a variable into shared memory */
 PHP_FUNCTION(shm_put_var)
 {

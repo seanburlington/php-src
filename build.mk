@@ -9,13 +9,13 @@
 #
 # Written by Sascha Schumann
 #
-# $Id: build.mk,v 1.11 1999/11/10 13:12:30 ssb Exp $ 
+# $Id: build.mk,v 1.12 1999/11/22 11:00:52 ssb Exp $ 
 
 LT_TARGETS = ltconfig ltmain.sh config.guess config.sub
 
 SUBDIRS = libzend TSRM
 
-makefile_am_files = Makefile.am $(shell find ext sapi regex -name Makefile.am)
+makefile_am_files = Makefile.am $(shell find ext sapi regex pecl -name Makefile.am)
 makefile_in_files = $(makefile_am_files:.am=.in)
 makefile_files    = $(makefile_am_files:e.am=e)
 

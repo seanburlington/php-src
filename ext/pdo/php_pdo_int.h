@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_int.h,v 1.12 2005/01/17 05:28:46 wez Exp $ */
+/* $Id: php_pdo_int.h,v 1.13 2005/02/06 21:05:59 wez Exp $ */
 
 /* Stuff private to the PDO extension and not for consumption by PDO drivers
  * */
@@ -50,6 +50,7 @@ zend_object_iterator *php_pdo_dbstmt_iter_get(zend_class_entry *ce, zval *object
 extern pdo_driver_t *pdo_find_driver(const char *name, int namelen);
 
 extern void pdo_handle_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt TSRMLS_DC);
+extern void pdo_raise_impl_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *sqlstate, const char *supp TSRMLS_DC);
 
 #define PDO_DBH_CLEAR_ERR()		strcpy(dbh->error_code, PDO_ERR_NONE)
 #define PDO_STMT_CLEAR_ERR()	strcpy(stmt->error_code, PDO_ERR_NONE)

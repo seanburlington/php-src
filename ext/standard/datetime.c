@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.96.2.17 2004/12/16 00:10:55 iliaa Exp $ */
+/* $Id: datetime.c,v 1.96.2.18 2005/02/04 13:09:24 sniper Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -579,7 +579,7 @@ static void php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 				break;
 			case 'r':
 #if HAVE_TM_GMTOFF
-				sprintf(tmp_buff, "%3s, %2d %3s %04d %02d:%02d:%02d %c%02d%02d",
+				sprintf(tmp_buff, "%3s, %02d %3s %04d %02d:%02d:%02d %c%02d%02d",
 					day_short_names[ta->tm_wday],
 					ta->tm_mday,
 					mon_short_names[ta->tm_mon],
@@ -592,7 +592,7 @@ static void php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 					abs( (ta->tm_gmtoff % 3600) / 60 )
 				);
 #else
-				sprintf(tmp_buff, "%3s, %2d %3s %04d %02d:%02d:%02d %c%02d%02d",
+				sprintf(tmp_buff, "%3s, %02d %3s %04d %02d:%02d:%02d %c%02d%02d",
 					day_short_names[ta->tm_wday],
 					ta->tm_mday,
 					mon_short_names[ta->tm_mon],

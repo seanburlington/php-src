@@ -1,5 +1,5 @@
 [PHP]
-; $Id: php.ini-dist,v 1.78.2.1 2001/05/31 21:03:23 sniper Exp $
+; $Id: php.ini-dist,v 1.78.2.2 2001/06/01 03:20:49 sniper Exp $
 
 ;;;;;;;;;;;;;;;;;;;
 ; About this file ;
@@ -351,6 +351,8 @@ upload_max_filesize = 2M
 ; Whether to allow the treatment of URLs (like http:// or ftp://) as files.
 allow_url_fopen = On
 
+; Define the anonymous ftp password (your email address)
+;from="john@doe.com"
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ; Dynamic Extensions ;

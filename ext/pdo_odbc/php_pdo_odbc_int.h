@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_odbc_int.h,v 1.4 2004/05/22 14:51:26 wez Exp $ */
+/* $Id: php_pdo_odbc_int.h,v 1.5 2004/05/25 17:44:36 wez Exp $ */
 
 /* {{{ Roll a dice, pick a header at random... */
 #if HAVE_SQLCLI1_H
@@ -148,6 +148,10 @@ void pdo_odbc_fini_error_table(void);
 extern SQLUINTEGER pdo_odbc_pool_on;
 extern SQLUINTEGER pdo_odbc_pool_mode;
 #endif
+
+enum {
+	PDO_ODBC_ATTR_USE_CURSOR_LIBRARY = PDO_ATTR_DRIVER_SPECIFIC,
+};
 
 /*
  * Local variables:

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.30 2005/01/23 14:50:06 edink Exp $ */
+/* $Id: pgsql_driver.c,v 1.31 2005/02/03 22:24:50 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -354,7 +354,7 @@ static int pdo_pgsql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 		spprintf(&conn_str, 0, "%s password=%s", dbh->data_source, dbh->password);
 	}
 
-	H->server = PQconnectdb(dbh->data_source);
+	H->server = PQconnectdb(conn_str);
 	
 	if (conn_str != dbh->data_source) {
 		efree(conn_str);

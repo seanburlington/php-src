@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.386 2004/02/29 00:26:36 moriyoshi Exp $ */
+/* $Id: session.c,v 1.387 2004/03/29 21:44:07 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -137,7 +137,7 @@ static PHP_INI_MH(OnUpdateSerializer)
 PHP_INI_BEGIN()
 	STD_PHP_INI_BOOLEAN("session.bug_compat_42",    "1",         PHP_INI_ALL, OnUpdateBool,   bug_compat,         php_ps_globals,    ps_globals)
 	STD_PHP_INI_BOOLEAN("session.bug_compat_warn",  "1",         PHP_INI_ALL, OnUpdateBool,   bug_compat_warn,    php_ps_globals,    ps_globals)
-	STD_PHP_INI_ENTRY("session.save_path",          "/tmp",      PHP_INI_ALL, OnUpdateString, save_path,          php_ps_globals,    ps_globals)
+	STD_PHP_INI_ENTRY("session.save_path",          "",          PHP_INI_ALL, OnUpdateString, save_path,          php_ps_globals,    ps_globals)
 	STD_PHP_INI_ENTRY("session.name",               "PHPSESSID", PHP_INI_ALL, OnUpdateString, session_name,       php_ps_globals,    ps_globals)
 	PHP_INI_ENTRY("session.save_handler",           "files",     PHP_INI_ALL, OnUpdateSaveHandler)
 	STD_PHP_INI_BOOLEAN("session.auto_start",       "0",         PHP_INI_ALL, OnUpdateBool,   auto_start,         php_ps_globals,    ps_globals)

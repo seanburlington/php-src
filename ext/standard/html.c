@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.97.2.7 2005/03/10 11:40:03 jorton Exp $ */
+/* $Id: html.c,v 1.97.2.8 2005/03/21 08:43:57 hyanantha Exp $ */
 
 /*
  * HTML entity resources:
@@ -34,8 +34,6 @@
 #include "php.h"
 #if PHP_WIN32
 #include "config.w32.h"
-#elif defined NETWARE
-#include "config.nw.h"
 #else
 #include <php_config.h>
 #endif

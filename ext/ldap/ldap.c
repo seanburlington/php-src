@@ -23,7 +23,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.72 2000/11/13 02:02:40 sniper Exp $ */
+/* $Id: ldap.c,v 1.73 2000/12/04 17:07:27 sniper Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -226,7 +226,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.72 2000/11/13 02:02:40 sniper Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.73 2000/12/04 17:07:27 sniper Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 #ifdef LDAP_API_VERSION
 	snprintf(ldapapiversion, 31, "%d", LDAP_API_VERSION);
@@ -851,11 +851,13 @@ PHP_FUNCTION(ldap_get_entries)
 	if (ldap_result == NULL) RETURN_FALSE;
 
 	num_entries = ldap_count_entries(ldap, ldap_result);
-	if (num_entries == 0) RETURN_FALSE;
 
 	array_init(return_value);
-	
+	add_assoc_long(return_value, "count", num_entries);
+
+	if (num_entries == 0) return;
 	num_entries = 0;
+	
 	ldap_result_entry = ldap_first_entry(ldap, ldap_result);
 	if (ldap_result_entry == NULL) RETURN_FALSE;
 

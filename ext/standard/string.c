@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.34 2003/09/20 16:09:41 sas Exp $ */
+/* $Id: string.c,v 1.333.2.35 2003/09/26 17:59:59 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2746,7 +2746,10 @@ PHP_FUNCTION(str_replace)
 				SEPARATE_ZVAL(subject_entry);
 				php_str_replace_in_subject(*search, *replace, subject_entry, result);
 			} else {
-				result = *subject_entry;
+				MAKE_STD_ZVAL(result);
+				SEPARATE_ZVAL(subject_entry);
+				*result = **subject_entry;
+				zval_copy_ctor(result);
 			}
 			/* Add to return array */
 			switch (zend_hash_get_current_key_ex(Z_ARRVAL_PP(subject), &string_key,

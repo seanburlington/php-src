@@ -28,7 +28,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.12 1999/07/15 19:31:29 andi Exp $ */
+/* $Id: mod_php4.c,v 1.13 1999/07/15 19:34:26 andi Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -418,13 +418,13 @@ CONST_PREFIX char *php_apache_value_handler_ex(cmd_parms *cmd, HashTable *conf, 
 }
 
 
-CONST_PREFIX char *php_apache_value_handler(cmd_parms *cmd, php_apache_info_struct *conf, char *arg1, char *arg2)
+CONST_PREFIX char *php_apache_value_handler(cmd_parms *cmd, HashTable *conf, char *arg1, char *arg2)
 {
 	return php_apache_value_handler_ex(cmd, conf, arg1, arg2, PHP_INI_PERDIR);
 }
 
 
-CONST_PREFIX char *php_apache_admin_value_handler(cmd_parms *cmd, php_apache_info_struct *conf, char *arg1, char *arg2)
+CONST_PREFIX char *php_apache_admin_value_handler(cmd_parms *cmd, HashTable *conf, char *arg1, char *arg2)
 {
 	return php_apache_value_handler_ex(cmd, conf, arg1, arg2, PHP_INI_SYSTEM);
 }
@@ -445,13 +445,13 @@ CONST_PREFIX char *php_apache_flag_handler_ex(cmd_parms *cmd, HashTable *conf, c
 }
 
 
-CONST_PREFIX char *php_apache_flag_handler(cmd_parms *cmd, php_apache_info_struct *conf, char *arg1, char *arg2)
+CONST_PREFIX char *php_apache_flag_handler(cmd_parms *cmd, HashTable *conf, char *arg1, char *arg2)
 {
 	return php_apache_flag_handler_ex(cmd, conf, arg1, arg2, PHP_INI_PERDIR);
 }
 
 
-CONST_PREFIX char *php_apache_admin_flag_handler(cmd_parms *cmd, php_apache_info_struct *conf, char *arg1, char *arg2)
+CONST_PREFIX char *php_apache_admin_flag_handler(cmd_parms *cmd, HashTable *conf, char *arg1, char *arg2)
 {
 	return php_apache_flag_handler_ex(cmd, conf, arg1, arg2, PHP_INI_SYSTEM);
 }

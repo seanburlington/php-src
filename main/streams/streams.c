@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.53 2004/03/31 23:48:59 pollita Exp $ */
+/* $Id: streams.c,v 1.54 2004/04/01 01:07:54 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1633,6 +1633,9 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 	}
 
 	if (stream) {
+		if (stream->orig_path) {
+			pefree(stream->orig_path, persistent);
+		}
 		copy_of_path = pestrdup(path, persistent);
 		stream->orig_path = copy_of_path;
 	}

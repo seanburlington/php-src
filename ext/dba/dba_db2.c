@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.20 2002/02/28 08:25:58 sebastian Exp $ */
+/* $Id: dba_db2.c,v 1.21 2002/04/08 06:36:03 derick Exp $ */
 
 #include "php.h"
 
@@ -67,7 +67,7 @@ DBA_OPEN_FUNC(db2)
 		filemode = Z_LVAL_PP(info->argv[0]);
 	}
 
-	if(db_open(info->path, type, gmode, filemode, NULL, NULL, &dbp)) {
+	if(!db_open(info->path, type, gmode, filemode, NULL, NULL, &dbp)) {
 		info->dbf = malloc(sizeof(dba_db2_data));
 		memset(info->dbf, 0, sizeof(dba_db2_data));
 		((dba_db2_data *) info->dbf)->dbp = dbp;

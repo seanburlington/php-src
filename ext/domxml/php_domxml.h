@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.42 2002/02/28 08:26:06 sebastian Exp $ */
+/* $Id: php_domxml.h,v 1.43 2002/03/11 22:37:32 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -141,8 +141,7 @@ PHP_FUNCTION(domxml_elem_set_attribute);
 PHP_FUNCTION(domxml_elem_remove_attribute);
 PHP_FUNCTION(domxml_elem_get_attribute_node);
 PHP_FUNCTION(domxml_elem_set_attribute_node);
-PHP_FUNCTION(domxml_elem_get_element_by_tagname);
-
+PHP_FUNCTION(domxml_elem_get_elements_by_tagname);
 /* Class CData methods */
 PHP_FUNCTION(domxml_cdata_length);
 
@@ -166,6 +165,8 @@ PHP_FUNCTION(xpath_new_context);
 PHP_FUNCTION(xpath_eval);
 PHP_FUNCTION(xpath_eval_expression);
 PHP_FUNCTION(xpath_register_ns);
+PHP_FUNCTION(domxml_doc_get_elements_by_tagname);
+PHP_FUNCTION(domxml_doc_get_element_by_id);
 #endif
 #if defined(LIBXML_XPTR_ENABLED)
 PHP_FUNCTION(xptr_new_context);

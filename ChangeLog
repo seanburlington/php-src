@@ -1,3 +1,19 @@
+2005-04-01  Greg Beaver  <greg@chiaraquartet.net>
+
+    * pear/PEAR/RunTest.php
+      pear/PEAR/RunTest.php:
+      add missing file
+
+2005-04-01  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * run-tests.php:
+      - Fixed bug #32504 (shtool problem on make test)
+
+2005-04-01  Joe Orton  <jorton@redhat.com>
+
+    * ext/mssql/config.m4:
+      Use PHP_LIBDIR.
+
 2005-03-31  Jani Taskinen  <jani.taskinen@sci.fi>
 
     * ext/session/tests/007.phpt
@@ -2866,7 +2882,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1940 2005/04/01 01:39:20 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1941 2005/04/02 01:33:42 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -3347,7 +3363,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1940 2005/04/01 01:39:20 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1941 2005/04/02 01:33:42 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -4821,7 +4837,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1940 2005/04/01 01:39:20 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1941 2005/04/02 01:33:42 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

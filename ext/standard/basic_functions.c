@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.652 2004/01/08 08:17:30 andi Exp $ */
+/* $Id: basic_functions.c,v 1.653 2004/01/19 19:01:17 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -919,6 +919,9 @@ static void php_putenv_destructor(putenv_entry *pe)
 
 static void basic_globals_ctor(php_basic_globals *basic_globals_p TSRMLS_DC)
 {
+	BG(rand_is_seeded) = 0;
+	BG(mt_rand_is_seeded) = 0;
+	
 	BG(next) = NULL;
 	BG(left) = -1;
 	BG(user_tick_functions) = NULL;

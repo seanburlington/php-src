@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sprintf.c,v 1.17.2.2 2004/11/15 23:14:40 fmk Exp $ */
+/* $Id: php_sprintf.c,v 1.17.2.3 2004/12/17 13:08:39 derick Exp $ */
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -33,7 +33,7 @@ PHPAPI int
 php_sprintf (char*s, const char* format, ...)
 {
   va_list args;
-  char *ret;
+  int ret;
 
   va_start (args, format);
   s[0] = '\0';

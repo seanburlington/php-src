@@ -16,11 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.23 2000/06/05 19:47:44 andi Exp $ */
+/* $Id: link.c,v 1.24 2000/06/13 18:07:19 andrei Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
 #include "php_globals.h"
+
+#ifdef HAVE_SYMLINK
 
 #include <stdlib.h>
 #if HAVE_UNISTD_H
@@ -52,7 +54,6 @@
    Return the target of a symbolic link */
 PHP_FUNCTION(readlink)
 {
-#if HAVE_SYMLINK
 	pval **filename;
 	char buff[256];
 	int ret;
@@ -70,7 +71,6 @@ PHP_FUNCTION(readlink)
 	/* Append NULL to the end of the string */
 	buff[ret] = '\0';
 	RETURN_STRING(buff,1);
-#endif
 }
 /* }}} */
 
@@ -78,7 +78,6 @@ PHP_FUNCTION(readlink)
    Returns the st_dev field of the UNIX C stat structure describing the link */
 PHP_FUNCTION(linkinfo)
 {
-#if HAVE_SYMLINK
 	pval **filename;
 	struct stat sb;
 	int ret;
@@ -94,7 +93,6 @@ PHP_FUNCTION(linkinfo)
 		RETURN_LONG(-1L);
 	}
 	RETURN_LONG((long) sb.st_dev);
-#endif
 }
 /* }}} */
 
@@ -102,7 +100,6 @@ PHP_FUNCTION(linkinfo)
    Create a symbolic link */
 PHP_FUNCTION(symlink)
 {
-#if HAVE_SYMLINK
 	pval **topath, **frompath;
 	int ret;
 	PLS_FETCH();
@@ -127,7 +124,6 @@ PHP_FUNCTION(symlink)
 		RETURN_FALSE;
 	}
 	RETURN_TRUE;
-#endif
 }
 /* }}} */
 
@@ -135,7 +131,6 @@ PHP_FUNCTION(symlink)
    Create a hard link */
 PHP_FUNCTION(link)
 {
-#if HAVE_LINK
 	pval **topath, **frompath;
 	int ret;
 	PLS_FETCH();
@@ -160,7 +155,6 @@ PHP_FUNCTION(link)
 		RETURN_FALSE;
 	}
 	RETURN_TRUE;
-#endif
 }
 /* }}} */
 
@@ -191,6 +185,8 @@ PHP_FUNCTION(unlink)
 	RETURN_TRUE;
 }
 /* }}} */
+
+#endif
 
 
 /*

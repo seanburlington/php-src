@@ -28,14 +28,18 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_link.h,v 1.1 1999/12/04 19:16:04 sas Exp $ */
+/* $Id: php_link.h,v 1.2 2000/06/13 18:07:19 andrei Exp $ */
 #ifndef _PHP_LINK_H
 #define _PHP_LINK_H
+
+#ifdef HAVE_SYMLINK
 
 PHP_FUNCTION(link);
 PHP_FUNCTION(unlink);
 PHP_FUNCTION(readlink);
 PHP_FUNCTION(linkinfo);
 PHP_FUNCTION(symlink);
+
+#endif
 
 #endif /* _PHP_LINK_H */

@@ -1,3 +1,46 @@
+2004-06-26  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * NEWS:
+      BFN
+
+2004-06-26  Moriyoshi Koizumi  <moriyoshi@at.wakwak.com>
+
+    * (PHP_4_3)
+      NEWS:
+      - This one should've been here, not in HEAD.
+
+    * NEWS:
+      -** empty log message ***
+
+2004-06-26  Uwe Schindler  <uwe@thetaphi.de>
+
+    * sapi/nsapi/nsapi.c:
+      replace strncpy with strlcpy
+
+2004-06-26  Stefan Esser  <sesser@suspekt.org>
+
+    * main/php_variables.c:
+      As long we pass values by reference this is needed. Ugly!
+
+    * ext/mbstring/mb_gpc.c:
+      Fixed input_filter functions need emalloc()ed values.
+
+    * NEWS:
+      strip_tags() news
+
+    * ext/standard/string.c:
+      IE we love you all...
+
+2004-06-26  Moriyoshi Koizumi  <moriyoshi@at.wakwak.com>
+
+    * NEWS:
+      - WS
+
+    * NEWS
+      ext/mbstring/mbstring.c
+      ext/mbstring/tests/bug26639.phpt:
+      - Fix bug #28466 (mbstring_convert_variables() problem).
+
 2004-06-25  Edin Kadribasic  <edink@emini.dk>
 
     * sapi/apache2handler/sapi_apache2.c:
@@ -5383,7 +5426,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1668 2004/06/26 00:32:21 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1669 2004/06/27 00:32:20 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

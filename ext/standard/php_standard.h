@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_standard.h,v 1.7 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: php_standard.h,v 1.7.6.1 2001/10/11 01:03:27 ssb Exp $ */
 
 #include "basic_functions.h"
 #include "php_math.h"
@@ -56,6 +56,7 @@
 #include "php_output.h"
 #include "php_array.h"
 #include "php_assert.h"
+#include "php_versioning.h"
 
 #define phpext_standard_ptr basic_functions_module_ptr
 

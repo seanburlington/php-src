@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.68 2001/06/24 12:53:17 sniper Exp $
+dnl $Id: config.m4,v 1.69 2001/06/24 15:56:05 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -162,10 +162,10 @@ AC_DEFUN(PHP_GD_T1LIB,[
 ])
 
 AC_DEFUN(PHP_GD_TTSTR,[
-  PHP_ARG_ENABLE(gd-native-tt, whether to enable truetype string function in gd,
+  PHP_ARG_ENABLE(gd-native-ttf, whether to enable truetype string function in gd,
   [  --enable-gd-native-ttf    GD: Enable TrueType string function in gd])
   
-  if test "$PHP_GD_NATIVE_TT" = "yes"; then
+  if test "$PHP_GD_NATIVE_TTF" = "yes"; then
     AC_DEFINE(USE_GD_IMGSTRTTF, 1, [ ])
   fi
 ])

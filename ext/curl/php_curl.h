@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.22 2001/05/14 21:04:23 sterling Exp $ */
+/* $Id: php_curl.h,v 1.23 2001/05/16 23:43:30 sterling Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -57,6 +57,7 @@ typedef struct {
 	FILE         *fp;
 	smart_str     buf;
 	int           method;
+	int           type;
 } php_curl_write;
 
 typedef struct {

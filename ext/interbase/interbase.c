@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.138 2003/08/13 02:19:14 abies Exp $ */
+/* $Id: interbase.c,v 1.139 2003/08/13 10:35:14 sniper Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -82,8 +82,8 @@ A lot... */
 #endif
 
 #ifdef ZEND_DEBUG
-#define IBDEBUG(a) php_printf("::: %s (%d)\n", a, __LINE__);
-/* #define IBDEBUG(a) */
+/* #define IBDEBUG(a) php_printf("::: %s (%d)\n", a, __LINE__); */
+#define IBDEBUG(a)
 #else
 #define IBDEBUG(a)
 #endif
@@ -698,7 +698,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.138 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.139 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "Yes");
 #endif

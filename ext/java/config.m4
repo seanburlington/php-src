@@ -1,4 +1,4 @@
-# $Id: config.m4,v 1.11 2000/01/28 10:53:05 rubys Exp $
+# $Id: config.m4,v 1.12 2000/01/29 17:53:55 rubys Exp $
 # config.m4 for extension java
 
 AC_MSG_CHECKING(for Java support)
@@ -63,7 +63,9 @@ AC_ARG_WITH(java,
     fi
 
     AC_DEFINE(HAVE_JAVA,1,[ ])
-    PHP_EXTENSION(java, shared)
+    if test "$PHP_SAPI" != "servlet"; then
+      PHP_EXTENSION(java, shared)
+    fi
     AC_MSG_RESULT(yes)
   else
     AC_MSG_RESULT(no)

@@ -27,14 +27,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx.h,v 1.1 1999/07/19 20:24:03 andrey Exp $ */
+/* $Id: php_wddx.h,v 1.2 1999/09/17 01:38:10 sas Exp $ */
 
 #ifndef _WDDX_H
 #define _WDDX_H
 
 #if HAVE_WDDX
 
-#include "xml/xmlparse.h"
+#include "xmlparse.h"
 
 extern int php_minit_wddx(INIT_FUNC_ARGS);
 

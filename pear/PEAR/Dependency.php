@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.31 2003/10/31 22:53:20 cellog Exp $
+// $Id: Dependency.php,v 1.32 2003/11/01 03:31:52 cellog Exp $
 
 require_once "PEAR.php";
 
@@ -201,6 +201,9 @@ class PEAR_Dependency
             }
             foreach ($deps as $dep) {
                 if ($dep['type'] == 'pkg' && strcasecmp($dep['name'], $package) == 0) {
+                    if ($dep['rel'] == 'ne') {
+                        continue;
+                    }
                     if (isset($dep['optional']) && $dep['optional'] == 'yes') {
                         $warning .= "\nWarning: Package '$pkg' optionally depends on '$package'";
                     } else {

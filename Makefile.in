@@ -24,7 +24,7 @@
 # +----------------------------------------------------------------------+
 
 #
-# $Id: Makefile.in,v 1.50 1999/07/22 15:55:13 ssb Exp $
+# $Id: Makefile.in,v 1.51 1999/07/24 21:19:54 andrey Exp $
 #
 
 prefix = @prefix@
@@ -135,7 +135,7 @@ distclean: clean distclean-recursive
 	-rm -f *-parser.[ch] *-scanner.c *.output
 	-rm -f config.status config.cache config.log
 	-rm -f Makefile Makefile.depend php_config.h build-defs.h
-	-rm -f libphp4.module stamp-h
+	-rm -f libphp4.module stamp-h buildconf.stamp
 	-rm -f regex/*.o regex/*.a regex/*.ih
 	-rm -f doc/checkdoc doc/funcparse doc/version.ent
 	-rm -f do-conf test/test.log

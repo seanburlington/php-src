@@ -3,7 +3,7 @@ dnl +---------------------------------------------------------------------------
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
 dnl |  backend the user chooses, this script performs the magic                    |
 dnl +------------------------------------------------------------------------------+
-dnl   $Id: config.m4,v 1.8 2001/08/02 11:19:18 thies Exp $
+dnl   $Id: config.m4,v 1.9 2001/08/17 08:33:48 sniper Exp $
 
 PHP_ARG_ENABLE(xslt, whether to enable xslt support,
 [  --enable-xslt           Enable xslt support])
@@ -68,14 +68,12 @@ if test "$PHP_XSLT" != "no"; then
     found_iconv=no
     AC_CHECK_LIB(c, iconv_open, found_iconv=yes)
     if test "$found_iconv" = "no"; then
-      if test "$PHP_ICONV" = "no"; then
-        for i in /usr /usr/local; do
+        for i in /usr /usr/local $ICONV_DIR; do
           if test -f $i/lib/libconv.a -o -f $i/lib/libiconv.so; then
-            PHP_ADD_LIBRARY_WITH_PATH(iconv, $i/lib)
+            PHP_ADD_LIBRARY_WITH_PATH(iconv, $i/lib, XSLT_SHARED_LIBADD)
             found_iconv=yes
           fi
         done
-      fi
     fi
 
     if test "$found_iconv" = "no"; then

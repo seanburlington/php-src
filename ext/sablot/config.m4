@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.20 2001/08/10 09:05:37 rasmus Exp $
+dnl $Id: config.m4,v 1.21 2001/08/17 08:33:48 sniper Exp $
 dnl config.m4 for extension Sablot
 
 PHP_ARG_WITH(sablot, for Sablotron XSL support,
@@ -52,14 +52,12 @@ if test "$PHP_SABLOT" != "no"; then
   found_iconv=no
   AC_CHECK_LIB(c, iconv_open, found_iconv=yes)
   if test "$found_iconv" = "no"; then
-    if test "$PHP_ICONV" = "no"; then
-      for i in /usr /usr/local; do
+      for i in /usr /usr/local $ICONV_DIR; do
         if test -f $i/lib/libconv.a -o -f $i/lib/libiconv.s?; then
-          PHP_ADD_LIBRARY_WITH_PATH(iconv, $i/lib)
+          PHP_ADD_LIBRARY_WITH_PATH(iconv, $i/lib, SABLOT_SHARED_LIBADD)
           found_iconv=yes
         fi
       done
-    fi
   fi
   
   if test "$found_iconv" = "no"; then

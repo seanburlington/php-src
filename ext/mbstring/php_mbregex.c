@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.35 2003/04/01 18:56:26 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.36 2003/04/01 18:56:59 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -234,7 +234,7 @@ php_mbregex_compile_pattern(mb_regex_t *pre, const char *pattern, int patlen, in
 	const char *err_str = NULL;
 	mb_regex_t *rc = NULL;
 
-	if(1 || zend_hash_find(&MBSTRG(ht_rc), (char *)pattern, patlen+1, (void **) &rc) == FAILURE ||
+	if(zend_hash_find(&MBSTRG(ht_rc), (char *)pattern, patlen+1, (void **) &rc) == FAILURE ||
 			rc->options != options || rc->mbctype != mbctype) {
 		memset(pre, 0, sizeof(*pre));
 		pre->fastmap = (char*)emalloc((1 << MBRE_BYTEWIDTH)*sizeof(char));

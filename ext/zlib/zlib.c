@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.134 2002/06/02 21:35:06 sr Exp $ */
+/* $Id: zlib.c,v 1.135 2002/06/18 10:06:54 derick Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -161,7 +161,7 @@ static PHP_INI_MH(OnUpdate_zlib_output_compression_level)
 
 
 PHP_INI_BEGIN()
-    STD_PHP_INI_BOOLEAN("zlib.output_compression", "0", PHP_INI_ALL, OnUpdate_zlib_output_compression, output_compression, zend_zlib_globals, zlib_globals)
+    STD_PHP_INI_BOOLEAN("zlib.output_compression", "0", PHP_INI_USER, OnUpdate_zlib_output_compression, output_compression, zend_zlib_globals, zlib_globals)
 	STD_PHP_INI_ENTRY("zlib.output_compression_level", "-1", PHP_INI_ALL, OnUpdate_zlib_output_compression_level, output_compression_level, zend_zlib_globals, zlib_globals)
 PHP_INI_END()
 

@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.151 2002/10/04 22:16:16 bfrance Exp $ */
+/* $Id: fopen_wrappers.c,v 1.152 2002/11/05 14:50:17 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -536,7 +536,7 @@ PHPAPI char *expand_filepath(const char *filepath, char *real_path TSRMLS_DC)
 	new_state.cwd = strdup(cwd);
 	new_state.cwd_length = strlen(cwd);
 
-	if(virtual_file_ex(&new_state, filepath, NULL)) {
+	if(virtual_file_ex(&new_state, filepath, NULL, 1)) {
 		free(new_state.cwd);
 		return NULL;
 	}

@@ -1,4 +1,4 @@
-/* $Id: php3_icap.h,v 1.5 1999/08/23 17:19:05 musone Exp $ */
+/* $Id: php3_icap.h,v 1.6 1999/08/24 20:56:02 musone Exp $ */
 
 #ifndef _INCLUDED_ICAP_H
 #define _INCLUDED_ICAP_H
@@ -17,16 +17,16 @@
 #include "build-defs.h"
 #endif
 
+extern PHP_MINIT_FUNCTION(icap);
+PHP_MINFO_FUNCTION(icap);
 
 /* Functions accessable to PHP */
 extern php3_module_entry php3_icap_module_entry;
 #define php3_icap_module_ptr &php3_icap_module_entry
 #define phpext_icap_ptr php3_icap_module_ptr
 
-extern int icap_init(INIT_FUNC_ARGS);
 extern int icap_init_request(INIT_FUNC_ARGS);
 extern int icap_end_request(void);
-extern void icap_info(void);
 void php3_icap_open(INTERNAL_FUNCTION_PARAMETERS);
 void php3_icap_popen(INTERNAL_FUNCTION_PARAMETERS);
 void php3_icap_reopen(INTERNAL_FUNCTION_PARAMETERS);

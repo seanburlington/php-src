@@ -6,7 +6,7 @@ Sybase-CT unbuffered query
 <?php
 /* This file is part of PHP test framework for ext/sybase_ct
  *
- * $Id: test_unbuffered_query.phpt,v 1.2 2004/05/21 20:54:39 thekid Exp $ 
+ * $Id: test_unbuffered_query.phpt,v 1.3 2004/05/21 21:01:21 thekid Exp $ 
  */
 
   require('test.inc');
@@ -26,7 +26,7 @@ Sybase-CT unbuffered query
   var_dump($q);
   
   // Test #2: after sybase_free_result, this should be an invalid resource
-  var_dump(sybase_num_rows($q));
+  var_dump(FALSE == sybase_num_rows($q));
   
   // Test #3: Seeking
   $q= sybase_unbuffered_query('select name from master..systypes', $db);
@@ -50,7 +50,7 @@ resource(%d) of type (sybase-ct result)
 resource(%d) of type (Unknown)
 
 Warning: sybase_num_rows(): %d is not a valid Sybase result resource in %s/test_unbuffered_query.php on line %d
-bool(false)
+bool(true)
 resource(%d) of type (sybase-ct result)
 int(%d)
 int(%d)

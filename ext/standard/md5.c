@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.c,v 1.23 2001/12/03 05:14:28 fmk Exp $ */
+/* $Id: md5.c,v 1.24 2001/12/06 17:15:59 hholzgra Exp $ */
 
 /* 
  * md5.c - Copyright 1997 Lachlan Roche 
@@ -63,7 +63,7 @@ PHP_NAMED_FUNCTION(php_if_md5)
 }
 /* }}} */
 
-/* {{{ proto string md5sum(string filename)
+/* {{{ proto string md5_file(string filename)
    Calculate the md5 hash of given filename */
 PHP_NAMED_FUNCTION(php_if_md5_file)
 {

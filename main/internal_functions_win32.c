@@ -17,7 +17,7 @@
 	+----------------------------------------------------------------------+
 */
 
-/* $Id: internal_functions_win32.c,v 1.79 2003/08/14 16:49:56 wez Exp $ */
+/* $Id: internal_functions_win32.c,v 1.80 2003/08/14 17:06:43 wez Exp $ */
 
 /* {{{ includes
  */
@@ -137,14 +137,14 @@ zend_module_entry *php_builtin_extensions[] = {
 #endif
 #if HAVE_LIBXML
 #if HAVE_DOM
-	phpext_dom_ptr
+	,phpext_dom_ptr
 #endif
 #if HAVE_SIMPLEXML
-	phpext_simplexml_ptr
+	,phpext_simplexml_ptr
 #endif
 #endif
 #if HAVE_XML
-	phpext_xml_ptr
+	,phpext_xml_ptr
 #endif
 #if HAVE_XML && HAVE_WDDX
 	,phpext_wddx_ptr

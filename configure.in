@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.267 2001/08/12 21:23:15 zeev Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.268 2001/08/14 08:49:39 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -510,7 +510,7 @@ if test "$PHP_PEAR" != "no"; then
   PEAR_DIR=pear
 fi
 
-if test "$PHP_PEAR" = "DEFAULT"; then
+if test "$PHP_PEAR" = "DEFAULT" -o "x$PHP_PEAR" = "xyes"; then
   case $PHP_LAYOUT in
     GNU) PEAR_INSTALLDIR=$datadir/pear;;
     *)   PEAR_INSTALLDIR=$libdir/php;;

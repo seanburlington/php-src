@@ -19,7 +19,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.39 2001/09/05 20:52:45 sterling Exp $ */
+/* $Id: rand.c,v 1.40 2001/09/05 20:56:15 sterling Exp $ */
 
 #include <stdlib.h>
 
@@ -176,7 +176,7 @@ static php_uint32 reloadMT(TSRMLS_D)
 }
 
 
-static inline php_uint32 randomMT(TSRMLS_D)
+static php_uint32 randomMT(TSRMLS_D)
 {
     php_uint32 y;
 

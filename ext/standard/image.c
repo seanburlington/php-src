@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.85 2003/01/18 20:01:43 iliaa Exp $ */
+/* $Id: image.c,v 1.86 2003/01/25 00:23:03 iliaa Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -579,7 +579,7 @@ static struct gfxinfo *php_handle_jpc(php_stream * stream TSRMLS_DC)
 	unsigned short dummy_short;
 	int dummy_int, highest_bit_depth, bit_depth;
 	unsigned char first_marker_id;
-	int i;
+	unsigned int i;
 
 	/* JPEG 2000 components can be vastly different from one another.
 	   Each component can be sampled at a different resolution, use

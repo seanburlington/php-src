@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.67 2000/08/16 01:03:20 jah Exp $ */
+/* $Id: pgsql.c,v 1.68 2000/09/09 09:40:16 jah Exp $ */
 
 #include <stdlib.h>
 
@@ -940,7 +940,8 @@ static void php_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 		if (PQgetisnull(pgsql_result, Z_LVAL_PP(row), i)) {
 			if (result_type & PGSQL_NUM) {
 				add_index_unset(return_value, i);
-			} else {
+			}
+			if (result_type & PGSQL_ASSOC) {
 				field_name = PQfname(pgsql_result, i);
 				add_assoc_unset(return_value, field_name);
 			}

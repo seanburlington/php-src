@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.41 2002/08/14 16:49:21 kalowsky Exp $
+dnl $Id: config.m4,v 1.42 2002/08/14 16:53:48 kalowsky Exp $
 dnl
 AC_DEFUN(JAVA_FIND_JAR, [
  AC_MSG_CHECKING([Java Jar location])
@@ -21,7 +21,7 @@ AC_DEFUN(JAVA_FIND_JAR, [
   dnl we have a custom path defined so use it
   dnl
     if test -d $PHP_JAVA/bin; then
-      JAVA_JAR="$PHP_JAVA/bin/javac cf"
+      JAVA_JAR="$PHP_JAVA/bin/jar cf"
     else
       AC_MSG_ERROR([Unable to locate $PHP_JAVA/bin])
     fi

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.170 2004/03/16 00:31:22 iliaa Exp $ */
+/* $Id: fopen_wrappers.c,v 1.170.2.1 2005/02/02 23:43:47 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -105,24 +105,11 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 	char resolved_name[MAXPATHLEN];
 	char resolved_basedir[MAXPATHLEN];
 	char local_open_basedir[MAXPATHLEN];
-	int local_open_basedir_pos;
 	int resolved_basedir_len;
 	int resolved_name_len;
 	
 	/* Special case basedir==".": Use script-directory */
-	if ((strcmp(basedir, ".") == 0) && 
-		SG(request_info).path_translated &&
-		*SG(request_info).path_translated
-		) {
-		strlcpy(local_open_basedir, SG(request_info).path_translated, sizeof(local_open_basedir));
-		local_open_basedir_pos = strlen(local_open_basedir) - 1;
-
-		/* Strip filename */
-		while (!IS_SLASH(local_open_basedir[local_open_basedir_pos])
-				&& (local_open_basedir_pos >= 0)) {
-			local_open_basedir[local_open_basedir_pos--] = 0;
-		}
-	} else {
+	if (strcmp(basedir, ".") || !VCWD_GETCWD(local_open_basedir, MAXPATHLEN)) {
 		/* Else use the unmodified path */
 		strlcpy(local_open_basedir, basedir, sizeof(local_open_basedir));
 	}

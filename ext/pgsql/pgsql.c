@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.204 2002/07/17 04:58:58 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.205 2002/07/17 05:01:58 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -2091,6 +2091,14 @@ PHP_FUNCTION(pg_lo_export)
 		RETURN_FALSE;
 	}
 	
+	if (PG(safe_mode) &&(!php_checkuid(file_in, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+		RETURN_FALSE;
+	}
+	
+	if (php_check_open_basedir(file_in TSRMLS_CC)) {
+		RETURN_FALSE;
+	}
+
 	ZEND_FETCH_RESOURCE2(pgsql, PGconn *, &pgsql_link, id, "PostgreSQL link", le_link, le_plink);
 
 	if (lo_export(pgsql, oid, file_out)) {

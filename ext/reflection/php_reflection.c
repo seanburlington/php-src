@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.18 2003/07/23 04:02:26 sebastian Exp $ */
+/* $Id: php_reflection.c,v 1.19 2003/08/02 14:22:18 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -247,7 +247,14 @@ static void _class_string(string *str, zend_class_entry *ce, char *indent TSRMLS
 	if (ce->parent) {
 		string_printf(str, " extends %s", ce->parent->name);
 	}
-	/* TBI: Interfaces */
+
+	if (ce->num_interfaces) {
+		int i;
+		string_printf(str, " implements %s", ce->interfaces[0]->name);
+		for (i = 1; i < ce->num_interfaces; ++i) {
+			string_printf(str, ", %s", ce->interfaces[i]->name);
+		}
+	}
 	string_printf(str, " ] {\n");
 
 	/* The information where a class is declared is only available for user classes */

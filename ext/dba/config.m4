@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.20 2002/09/11 15:05:06 kalowsky Exp $
+dnl $Id: config.m4,v 1.21 2002/09/11 16:17:33 sander Exp $
 dnl
 
 AC_DEFUN(PHP_TEMP_LDFLAGS,[
@@ -164,7 +164,7 @@ AC_ARG_WITH(db3,
       elif test -f "$i/include/db3.h"; then
         THIS_PREFIX=$i
         DB3_EXTRA=db3.h
-      elif test -f "$i/include/db.h" ; 
+      elif test -f "$i/include/db.h"; then
         THIS_PREFIX=$i
         DB3_EXTRA=db.h
       fi

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.24 1999/08/02 19:16:50 zeev Exp $ */
+/* $Id: file.c,v 1.25 1999/08/28 13:53:46 sas Exp $ */
 
 /* Synced with php3 revision 1.218 1999-06-16 [ssb] */
 
@@ -752,7 +752,7 @@ PHPAPI int _php3_set_sock_blocking(int socketd, int block)
 #elif defined(O_NDELAY)
       myflag = O_NDELAY;   /* old non-POSIX version */
 #endif
-      if (block) {
+      if (!block) {
               flags |= myflag;
       } else {
               flags &= ~myflag;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.40 2002/02/28 08:26:45 sebastian Exp $ */
+/* $Id: html.c,v 1.41 2002/03/06 16:15:28 kalowsky Exp $ */
 
 #include "php.h"
 #include "reg.h"
@@ -309,6 +309,10 @@ inline static unsigned short get_next_char(enum entity_charset charset,
 					}
 					
 				}
+				break;
+			}
+		default:
+			{
 				break;
 			}
 	}

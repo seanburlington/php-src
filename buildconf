@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: buildconf,v 1.49 2000/08/24 05:55:19 sas Exp $
+# $Id: buildconf,v 1.50 2000/09/26 11:19:38 sas Exp $
 
 supplied_flag=$1
 
@@ -27,5 +27,10 @@ else
 fi
 
 rm -f generated_lists
+
+case "`uname`" in
+*BSD/OS*)
+    ./build/bsd_makefile;;
+esac
 
 ${MAKE:-make} -s -f build/build.mk AMFLAGS="$automake_flags"

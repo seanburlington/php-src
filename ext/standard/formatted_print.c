@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.26 2000/08/14 15:54:57 stas Exp $ */
+/* $Id: formatted_print.c,v 1.27 2000/08/20 06:08:14 sas Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -253,32 +253,14 @@ php_sprintf_appenddouble(char **buffer, int *pos,
 		precision = MAX_FLOAT_PRECISION;
 	}
 	
-	if(
-#if defined(HAVE_ISNAN)
-	isnan(number)
-#elif defined(NAN)
-	number == NAN
-#else 
-	0
-#endif
-	) {
+	if (zend_isnan(number)) {
 		sign = (number<0);
 		php_sprintf_appendstring(buffer, pos, size, "NaN", 3, 0, padding,
 								 alignment, precision, sign, 0);
 		return;
 	}
 
-	if(
-#if defined(HAVE_ISISINF)
-	isinf(number)
-#elif defined(HAVE_ISFINITE)
-	!isfinite(number)
-#elif defined(HAVE_FINITE)
-	!finite(number)
-#else
-	0
-#endif
-	) {
+	if (zend_isinf(number)) {
 		sign = (number<0);
 		php_sprintf_appendstring(buffer, pos, size, "INF", 3, 0, padding,
 								 alignment, precision, sign, 0);

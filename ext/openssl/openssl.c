@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.76 2003/06/10 20:03:34 imajes Exp $ */
+/* $Id: openssl.c,v 1.77 2003/07/13 09:38:31 sr Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1532,7 +1532,7 @@ PHP_FUNCTION(openssl_csr_sign)
 		goto cleanup;
 	}
 	/* Version 3 cert */
-	if (!X509_set_version(new_cert, 3))
+	if (!X509_set_version(new_cert, 2))
 		goto cleanup;
 
 	/* TODO: Allow specifying */

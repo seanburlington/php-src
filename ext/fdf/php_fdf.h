@@ -26,13 +26,13 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fdf.h,v 1.5 2000/07/06 05:36:54 steinm Exp $ */
+/* $Id: php_fdf.h,v 1.6 2000/07/06 14:47:02 andi Exp $ */
 
 #ifndef PHP_FDF_H
 #define PHP_FDF_H
 
 #if HAVE_FDFLIB
-#if WIN32|WINNT
+#ifdef PHP_WIN32
 #else
 #define UNIX_DEV
 #endif

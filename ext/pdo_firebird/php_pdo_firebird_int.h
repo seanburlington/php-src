@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_firebird_int.h,v 1.3 2004/06/12 16:07:52 abies Exp $ */
+/* $Id: php_pdo_firebird_int.h,v 1.4 2004/06/12 16:58:20 abies Exp $ */
 
 #ifndef PHP_PDO_FIREBIRD_INT_H
 #define PHP_PDO_FIREBIRD_INT_H
@@ -60,6 +60,9 @@ typedef struct {
 	/* the transaction handle */
 	isc_tr_handle tr;
 
+	/* the last error that didn't come from the API */
+	char const *last_app_error;
+	
 } pdo_firebird_db_handle;
 
 

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.46 2004/02/25 14:04:41 dmitry Exp $ */
+/* $Id: php_http.c,v 1.47 2004/04/01 10:47:43 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -573,7 +573,7 @@ int get_http_soap_response(zval *this_ptr, char **buffer, int *buffer_len TSRMLS
 			cmplen = strlen(content_type);
 		}
 		if (strncmp(content_type, "text/xml", cmplen) == 0 ||
-		    strncmp(content_type, "application/soap+xml", cmplen == 0)) {
+		    strncmp(content_type, "application/soap+xml", cmplen) == 0) {
 /*
 			if (strncmp(http_body, "<?xml", 5)) {
 				zval *err;

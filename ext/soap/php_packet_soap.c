@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_packet_soap.c,v 1.33 2004/02/10 13:41:21 dmitry Exp $ */
+/* $Id: php_packet_soap.c,v 1.34 2004/04/01 10:47:43 dmitry Exp $ */
 
 #include "php_soap.h"
 
@@ -332,11 +332,14 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 			zval_dtor(return_value);
 			ZVAL_NULL(return_value);
 		} else if (param_count == 1) {
-			zval *tmp = *(zval**)Z_ARRVAL_P(return_value)->pListHead->pData;
-			tmp->refcount++;
+			zval **tmp;
+
+			zend_hash_internal_pointer_reset(Z_ARRVAL_P(return_value));
+			zend_hash_get_current_data(Z_ARRVAL_P(return_value), (void**)&tmp);
+			(*tmp)->refcount++;
 			zval_dtor(return_value);
-			*return_value = *tmp;
-			FREE_ZVAL(tmp);
+			*return_value = **tmp;
+			FREE_ZVAL(*tmp);
 		}
 	}
 

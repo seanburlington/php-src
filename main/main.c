@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.56 1999/05/12 21:35:16 zeev Exp $ */
+/* $Id: main.c,v 1.57 1999/05/13 15:54:47 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -639,7 +639,7 @@ int php_request_startup(CLS_D ELS_DC PLS_DC SLS_DC)
 
 		zend_hash_update(&EG(symbol_table), "PHP_AUTH_USER", sizeof("PHP_AUTH_USER"), &auth_user, sizeof(zval *), NULL);
 	}
-	if (SG(request_info).auth_user) {
+	if (SG(request_info).auth_password) {
 		zval *auth_password;
 
 		MAKE_STD_ZVAL(auth_password);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.118.2.4 2002/03/08 23:39:26 jtate Exp $ */
+/* $Id: php_domxml.c,v 1.118.2.5 2002/03/13 07:38:14 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -1457,6 +1457,10 @@ PHP_FUNCTION(domxml_node_name)
 
 		case XML_COMMENT_NODE:
 			str = "#comment";
+			break;
+
+		case XML_DOCUMENT_NODE:
+			str = "#document";
 			break;
 
 		case XML_DOCUMENT_FRAG_NODE:

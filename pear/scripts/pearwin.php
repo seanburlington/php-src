@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearwin.php,v 1.4 2002/01/23 19:09:54 vblavet Exp $
+// $Id: pearwin.php,v 1.5 2002/01/24 08:24:24 vblavet Exp $
 
 require_once 'PEAR.php';
 require_once 'Console/Getopt.php';
@@ -90,7 +90,7 @@ switch ($command) {
         break;
     case 'list-installed':
         include_once 'PEAR/Registry.php';
-        $reg = new PEAR_Registry;
+        $reg = new PEAR_Registry($script_dir);
         $installed = $reg->packageInfo();
         $i = $j = 0;
         print("Installed packages:\n");

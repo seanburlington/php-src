@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.34 2002/01/02 17:12:26 ssb Exp $
+// $Id: Installer.php,v 1.35 2002/01/24 08:23:47 vblavet Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -174,7 +174,7 @@ class PEAR_Installer extends PEAR_Common
         // - upgrade       : upgrade existing install
         //
         if (empty($this->registry)) {
-            $this->registry = new PEAR_Registry;
+            $this->registry = new PEAR_Registry($this->phpdir);
         }
         $oldcwd = getcwd();
         $need_download = false;
@@ -327,7 +327,7 @@ class PEAR_Installer extends PEAR_Common
     function uninstall($package)
     {
         if (empty($this->registry)) {
-            $this->registry = new PEAR_Registry;
+            $this->registry = new PEAR_Registry($this->phpdir);
         }
 
         // Delete the files

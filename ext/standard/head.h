@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: head.h,v 1.24 2003/06/10 20:03:37 imajes Exp $ */
+/* $Id: head.h,v 1.25 2003/08/20 20:51:10 bfrance Exp $ */
 
 #ifndef HEAD_H
 #define HEAD_H
@@ -24,9 +24,10 @@
 extern PHP_RINIT_FUNCTION(head);
 PHP_FUNCTION(header);
 PHP_FUNCTION(setcookie);
+PHP_FUNCTION(setrawcookie);
 PHP_FUNCTION(headers_sent);
 
 PHPAPI int php_header(TSRMLS_D);
-PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, time_t expires, char *path, int path_len, char *domain, int domain_len, int secure TSRMLS_DC);
+PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, time_t expires, char *path, int path_len, char *domain, int domain_len, int secure, int url_encode TSRMLS_DC);
 
 #endif

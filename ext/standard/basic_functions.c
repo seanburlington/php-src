@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.622 2003/08/11 00:49:18 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.623 2003/08/20 20:51:10 bfrance Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -607,6 +607,7 @@ function_entry basic_functions[] = {
 	PHP_FE(restore_include_path,											NULL)
 
 	PHP_FE(setcookie,														NULL)
+	PHP_FE(setrawcookie,													NULL)
 	PHP_FE(header,															NULL)
 	PHP_FE(headers_sent,  first_and_second__args_force_ref)
 

@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.25 2004/05/28 13:25:51 wez Exp $ */
+/* $Id: proc_open.c,v 1.26 2004/05/29 00:30:11 wez Exp $ */
 
 #if defined(__linux__) || defined(sun) || defined(__IRIX__)
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -59,9 +59,7 @@
 #if HAVE_PTSNAME && HAVE_GRANTPT && HAVE_UNLOCKPT && HAVE_SYS_IOCTL_H && HAVE_TERMIOS_H
 # include <sys/ioctl.h>
 # include <termios.h>
-# ifdef TIOCNOTTY
-#  define PHP_CAN_DO_PTS	1
-# endif
+# define PHP_CAN_DO_PTS	1
 #endif
 
 #include "proc_open.h"
@@ -754,8 +752,12 @@ PHP_FUNCTION(proc_open)
 		if (dev_ptmx >= 0) {
 			int my_pid = getpid();
 
+#ifdef TIOCNOTTY
 			/* detach from original tty. Might only need this if isatty(0) is true */
 			ioctl(0,TIOCNOTTY,NULL);
+#else
+			setsid();
+#endif
 			/* become process group leader */
 			setpgid(my_pid, my_pid);
 			tcsetpgrp(0, my_pid);

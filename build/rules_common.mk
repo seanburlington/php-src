@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules_common.mk,v 1.1 2000/08/20 05:36:07 sas Exp $ 
+# $Id: rules_common.mk,v 1.2 2000/08/20 08:58:19 sas Exp $ 
 #
 
 include $(top_builddir)/config_vars.mk
@@ -32,7 +32,7 @@ mkinstalldirs = $(top_srcdir)/build/shtool mkdir -p
 INSTALL = $(top_srcdir)/build/shtool install -c
 INSTALL_DATA = $(INSTALL) -m 644
 
-DEFS = -DHAVE_CONFIG_H -I. -I$(srcdir) -I$(top_builddir) -I$(top_builddir)/main
+DEFS = -I. -I$(srcdir) -I$(top_builddir) -I$(top_builddir)/main
 
 moduledir    = $(EXTENSION_DIR)
 

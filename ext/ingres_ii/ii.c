@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ii.c,v 1.2 2000/07/17 21:50:34 eschmid Exp $ */
+/* $Id: ii.c,v 1.3 2000/07/17 23:21:41 henot Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -57,8 +57,8 @@ function_entry ii_functions[] = {
   {NULL, NULL, NULL}	/* Must be the last line in ii_functions[] */
 };
 
-zend_module_entry ii_module_entry = {
-  "ii",
+zend_module_entry ingres_ii_module_entry = {
+  "ingres_ii",
   ii_functions,
   PHP_MINIT(ii),
   PHP_MSHUTDOWN(ii),

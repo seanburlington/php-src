@@ -16,16 +16,37 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_bcmath.h,v 1.11 2002/06/18 18:51:33 andi Exp $ */
+/* $Id: php_bcmath.h,v 1.12 2002/11/22 09:25:28 sander Exp $ */
 
 #ifndef PHP_BCMATH_H
 #define PHP_BCMATH_H
 
 #if WITH_BCMATH
 
+#include "libbcmath/src/bcmath.h"
+
+ZEND_BEGIN_MODULE_GLOBALS(bcmath)
+	bc_num _zero_;
+	bc_num _one_;
+	bc_num _two_;
+ZEND_END_MODULE_GLOBALS(bcmath)
+	
+#if ZTS
+# define BCG(v) TSRMG(bcmath_globals_id, zend_bcmath_globals *, v)
+extern int bcmath_globals_id;
+#else
+# define BCG(v) (bcmath_globals.v)
+extern zend_bcmath_globals bcmath_globals;
+#endif
+
+#define BC
+
 extern zend_module_entry bcmath_module_entry;
 #define phpext_bcmath_ptr &bcmath_module_entry
 
+#if ZTS
+PHP_MINIT_FUNCTION(bcmath);
+#endif
 PHP_RINIT_FUNCTION(bcmath);
 PHP_RSHUTDOWN_FUNCTION(bcmath);
 PHP_MINFO_FUNCTION(bcmath);

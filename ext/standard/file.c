@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.151 2001/04/15 18:42:50 sasha Exp $ */
+/* $Id: file.c,v 1.152 2001/04/15 19:03:12 sasha Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1816,7 +1816,7 @@ PHP_FUNCTION(fread)
 	
 	if (!issock) {
 #ifdef HAVE_FLUSHIO
-		if (type == le_fopen)
+		if (type == le_fopen) {
 			fseek((FILE*)what, 0, SEEK_CUR);
 		}
 #endif

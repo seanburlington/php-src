@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.26 2000/01/15 13:35:06 thies Exp $ */
+/* $Id: php_odbc.c,v 1.27 2000/01/16 21:03:48 zeev Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -410,7 +410,9 @@ PHP_MINIT_FUNCTION(odbc)
 	return SUCCESS;
 }
 
-void _php_odbc_shutdown(void *data)
+
+#if 0
+static void _php_odbc_shutdown(void *data)
 {
 	ELS_FETCH();
 	
@@ -421,6 +423,8 @@ void _php_odbc_shutdown(void *data)
 
 	zend_hash_apply(&EG(regular_list), (int (*)(void *)) _odbc_stmt_cleanup);
 }
+#endif
+
 
 PHP_RINIT_FUNCTION(odbc)
 {
@@ -429,7 +433,9 @@ PHP_RINIT_FUNCTION(odbc)
 	ODBCG(defConn) = -1;
 	ODBCG(num_links) = ODBCG(num_persistent);
 
-	php_register_pre_request_shutdown(_php_odbc_shutdown, NULL);
+	/* This should no longer be necessary, as hash_apply() is reentrant
+	 * php_register_pre_request_shutdown(_php_odbc_shutdown, NULL);
+	 */
 
 	return SUCCESS;
 }

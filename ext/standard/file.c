@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.311 2003/02/24 21:40:23 wez Exp $ */
+/* $Id: file.c,v 1.312 2003/02/24 22:39:47 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1675,6 +1675,7 @@ PHPAPI PHP_FUNCTION(fgetss)
 {
 	zval **fd, **bytes, **allow=NULL;
 	int len;
+	size_t actual_len, retval_len;
 	char *buf;
 	php_stream *stream;
 	char *allowed_tags=NULL;
@@ -1713,15 +1714,15 @@ PHPAPI PHP_FUNCTION(fgetss)
 	/*needed because recv doesnt set null char at end*/
 	memset(buf, 0, len + 1);
 
-	if (php_stream_gets(stream, buf, len) == NULL)	{
+	if (php_stream_get_line(stream, buf, len, &actual_len) == NULL)	{
 		efree(buf);
 		RETURN_FALSE;
 	}
 
 	/* strlen() can be used here since we are doing it on the return of an fgets() anyway */
-	php_strip_tags(buf, strlen(buf), &stream->fgetss_state, allowed_tags, allowed_tags_len);
+	retval_len = php_strip_tags(buf, actual_len, &stream->fgetss_state, allowed_tags, allowed_tags_len);
 
-	RETURN_STRING(buf, 0);
+	RETURN_STRINGL(buf, retval_len, 0);
 }
 /* }}} */
 

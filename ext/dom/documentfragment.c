@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: documentfragment.c,v 1.13 2004/10/07 10:00:39 rrichards Exp $ */
+/* $Id: documentfragment.c,v 1.14 2005/02/18 11:57:24 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -122,6 +122,11 @@ PHP_METHOD(domdocumentfragment, appendXML) {
 	}
 
 	DOM_GET_OBJ(nodep, id, xmlNodePtr, intern);
+
+	if (dom_node_is_read_only(nodep) == SUCCESS) {
+		php_dom_throw_error(NO_MODIFICATION_ALLOWED_ERR, dom_get_strict_error(intern->document) TSRMLS_CC);
+		RETURN_FALSE;
+	}
 
 	if (data) {
 		err = xmlParseBalancedChunkMemory(nodep->doc, NULL, NULL, 0, data, &lst);

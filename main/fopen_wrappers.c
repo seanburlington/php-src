@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.98 2000/10/13 10:04:17 hholzgra Exp $ */
+/* $Id: fopen_wrappers.c,v 1.99 2000/10/19 15:05:44 joey Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -217,7 +217,7 @@ PHPAPI int php_check_open_basedir(char *path)
 
 			ptr = end;
 		}
-		php_error(E_WARNING, "open_basedir restriction in effect. File is in wrong directory.");
+		php_error(E_WARNING, "open_basedir restriction in effect. File is in wrong directory");
 		efree(pathbuf);
 		errno = EPERM; /* we deny permission to open it */
 		return -1;

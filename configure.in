@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.514.2.39 2005/03/14 09:33:15 hyanantha Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.514.2.40 2005/03/14 21:12:26 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -81,7 +81,11 @@ if test -n "$with_apache" && test -n "$with_apxs"; then
   AC_MSG_ERROR([--with-apache and --with-apxs cannot be used together])
 fi
 
+if test -n "$with_apxs2filter" && test -n "$with_apxs2"; then
+  AC_MSG_ERROR([--with-apxs2filter and --with-apxs2 cannot be used together])
+fi
 
+  
 dnl Settings we want to make before the checks.
 dnl -------------------------------------------------------------------------
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.105 2005/03/09 10:13:05 derick Exp $ */
+/* $Id: html.c,v 1.106 2005/03/10 11:19:32 jorton Exp $ */
 
 /*
  * HTML entity resources:
@@ -118,7 +118,7 @@ static entity_table_t ent_uni_338_402[] = {
 	/* 376 (0x0178)
 	"Yuml", NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, */
 	/* 400 (0x0190)*/
 	NULL, NULL, "fnof"
 };

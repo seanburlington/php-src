@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.8 1999/09/12 00:04:29 andrey Exp $ */
+/* $Id: wddx.c,v 1.9 1999/09/15 13:28:33 andrey Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -64,8 +64,6 @@
 #define EL_VAR_NAME				"name"
 #define	EL_PACKET				"wddxPacket"
 #define EL_VERSION				"version"
-
-#define HASH_OF(p) ((p)->type==IS_ARRAY ? (p)->value.ht : (((p)->type==IS_OBJECT ? (p)->value.obj.properties : NULL)))
 
 static int le_wddx;
 

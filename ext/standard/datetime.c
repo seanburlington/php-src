@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.66 2001/02/09 15:28:23 rasmus Exp $ */
+/* $Id: datetime.c,v 1.67 2001/02/24 21:18:28 sas Exp $ */
 
 
 #include "php.h"
@@ -260,7 +260,7 @@ php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 			case 'T':		/* timezone name */
 #if HAVE_TM_ZONE
 				size += strlen(ta->tm_zone);
-#else
+#elif HAVE_TZNAME
 				size += strlen(tzname[0]);
 #endif
 				break;
@@ -452,7 +452,7 @@ php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 			case 'T':		/* timezone name */
 #if HAVE_TM_ZONE
 				strcat(return_value->value.str.val, ta->tm_zone);
-#else
+#elif HAVE_TZNAME
 				strcat(return_value->value.str.val, tzname[0]);
 #endif
 				break;

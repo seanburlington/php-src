@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.25 2003/04/28 21:00:41 sniper Exp $ */
+/* $Id: main.c,v 1.512.2.26 2003/05/06 13:06:53 sas Exp $ */
 
 /* {{{ includes
  */
@@ -1551,6 +1551,12 @@ PHPAPI int php_handle_special_queries(TSRMLS_D)
 	return 0;
 }
 /* }}} */
+
+#ifdef HAVE_BROKEN_GETCWD
+# ifdef HAVE_UNISTD_H
+#  include <unistd.h>
+# endif
+#endif
 
 /* {{{ php_execute_script
  */

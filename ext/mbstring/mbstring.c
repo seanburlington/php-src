@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.196 2003/09/23 02:43:04 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.197 2003/09/23 13:21:01 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -931,8 +931,6 @@ PHP_RSHUTDOWN_FUNCTION(mbstring)
 /* {{{ PHP_MINFO_FUNCTION(mbstring) */
 PHP_MINFO_FUNCTION(mbstring)
 {
-	char buf[32];
-
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Multibyte Support", "enabled");
 	php_info_print_table_row(2, "Multibyte string engine", "libmbfl");

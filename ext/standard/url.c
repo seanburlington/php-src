@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.58.2.10 2003/12/03 20:59:12 moriyoshi Exp $ */
+/* $Id: url.c,v 1.58.2.11 2003/12/03 22:51:54 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -104,7 +104,7 @@ PHPAPI php_url *php_url_parse(char *str)
 			 * correctly parse things like a.com:80
 			 */
 			p = e + 1;
-			while (isdigit((int)*(unsigned char *)p)) {
+			while (isdigit(p)) {
 				p++;
 			}
 			
@@ -145,7 +145,7 @@ PHPAPI php_url *php_url_parse(char *str)
 		p = e + 1;
 		pp = p;
 		
-		while (pp-p < 6 && isdigit((int)*(unsigned char *)pp)) {
+		while (pp-p < 6 && isdigit(pp)) {
 			pp++;
 		}
 		
@@ -443,7 +443,7 @@ PHPAPI int php_url_decode(char *str, int len)
 	while (len--) {
 		if (*data == '+')
 			*dest = ' ';
-		else if (*data == '%' && len >= 2 && isxdigit((int) *(unsigned char *)(data + 1)) && isxdigit((int) *(unsigned char *)(data + 2))) {
+		else if (*data == '%' && len >= 2 && isxdigit((int) *(data + 1)) && isxdigit((int) *(data + 2))) {
 #ifndef CHARSET_EBCDIC
 			*dest = (char) php_htoi(data + 1);
 #else

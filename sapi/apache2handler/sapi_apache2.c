@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.45 2004/10/20 09:28:47 jorton Exp $ */
+/* $Id: sapi_apache2.c,v 1.46 2004/10/23 12:56:19 jorton Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -277,13 +277,9 @@ static void php_apache_sapi_log_message_ex(char *msg, request_rec *r)
 	}
 }
 
-static time_t php_apache_sapi_get_request_time(void) {
-	php_struct *ctx;
-	TSRMLS_FETCH();
-	
-	ctx = SG(server_context);
-
-	return ctx->r->request_time;
+static time_t php_apache_sapi_get_request_time(TSRMLS_D) {
+	php_struct *ctx = SG(server_context);
+	return apr_time_sec(ctx->r->request_time);
 }
 
 extern zend_module_entry php_apache_module;

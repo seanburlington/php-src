@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.37 2002/10/10 01:02:42 ssb Exp $
+// $Id: Install.php,v 1.38 2002/11/13 14:17:25 dickmann Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -246,7 +246,11 @@ specified at once.
             if (is_array($info)) {
                 if ($this->config->get('verbose') > 0) {
                     $label = "$info[package] $info[version]";
-                    $this->ui->outputData("$command ok: $label", $command);
+                    $out = array('data' => "$command ok: $label");
+                    if (isset($info['release_warnings'])) {
+                        $out['release_warnings'] = $info['release_warnings'];
+                    }
+                    $this->ui->outputData($out, $command);
                 }
             } else {
                 return $this->raiseError("$command failed");

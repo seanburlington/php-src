@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.80 2002/10/12 00:39:49 ssb Exp $
+// $Id: Common.php,v 1.81 2002/11/13 14:17:23 dickmann Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -546,6 +546,13 @@ class PEAR_Common extends PEAR
                     $this->pkginfo['release_notes'] = $data;
                 }
                 break;
+            case 'warnings':
+                if ($this->in_changelog) {
+                    $this->current_release['release_warnings'] = $data;
+                } else {
+                    $this->pkginfo['release_warnings'] = $data;
+                }
+                break;
             case 'state':
                 if ($this->in_changelog) {
                     $this->current_release['release_state'] = $data;
@@ -881,6 +888,9 @@ class PEAR_Common extends PEAR
         }
         if (!empty($pkginfo['release_notes'])) {
             $ret .= "$indent    <notes>".htmlspecialchars($pkginfo['release_notes'])."</notes>\n";
+        }
+        if (!empty($pkginfo['release_warnings'])) {
+            $ret .= "$indent    <warnings>".htmlspecialchars($pkginfo['release_warnings'])."</warnings>\n";
         }
         if (isset($pkginfo['release_deps']) && sizeof($pkginfo['release_deps']) > 0) {
             $ret .= "$indent    <deps>\n";

@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.h,v $ */
-/* $Id: php_mnogo.h,v 1.8 2001/03/01 13:38:38 gluke Exp $ */
+/* $Id: php_mnogo.h,v 1.9 2001/04/30 11:11:18 gluke Exp $ */
 
 /* 
    +----------------------------------------------------------------------+
@@ -66,6 +66,9 @@ DLEXPORT PHP_FUNCTION(udm_errno);
 DLEXPORT PHP_FUNCTION(udm_find);
 DLEXPORT PHP_FUNCTION(udm_get_res_field);
 DLEXPORT PHP_FUNCTION(udm_get_res_param);
+
+DLEXPORT PHP_FUNCTION(udm_cat_list);
+DLEXPORT PHP_FUNCTION(udm_cat_path);
 
 DLEXPORT PHP_FUNCTION(udm_free_res);
 DLEXPORT PHP_FUNCTION(udm_free_agent);

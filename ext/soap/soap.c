@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.121 2004/09/15 10:43:07 dmitry Exp $ */
+/* $Id: soap.c,v 1.122 2004/09/16 08:12:27 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1756,6 +1756,7 @@ static void soap_server_fault_ex(sdlFunctionPtr function, zval* fault, soapHeade
 
 	xmlFreeDoc(doc_return);
 	xmlFree(buf);
+	zend_clear_exception(TSRMLS_C);
 	zend_bailout();
 }
 

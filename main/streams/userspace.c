@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.8 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: userspace.c,v 1.9 2003/06/16 19:13:39 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -185,6 +185,7 @@ static php_stream *user_wrapper_opener(php_stream_wrapper *wrapper, char *filena
 	zval **args[4];	
 	int call_result;
 	php_stream *stream = NULL;
+	zval *zcontext = NULL;
 
 	/* Try to catch bad usage without preventing flexibility */
 	if (FG(user_stream_current_filename) != NULL && strcmp(filename, FG(user_stream_current_filename)) == 0) {
@@ -201,6 +202,17 @@ static php_stream *user_wrapper_opener(php_stream_wrapper *wrapper, char *filena
 	object_init_ex(us->object, uwrap->ce);
 	ZVAL_REFCOUNT(us->object) = 1;
 	PZVAL_IS_REF(us->object) = 1;
+
+	if (context) {
+		MAKE_STD_ZVAL(zcontext);
+		php_stream_context_to_zval(context, zcontext);
+		add_property_zval(us->object, "context", zcontext);
+		/* The object property should be the only reference,
+		   'get rid' of our local reference. */
+		zval_ptr_dtor(&zcontext);
+	} else {
+		add_property_null(us->object, "context");
+	}
 	
 	/* call it's stream_open method - set up params first */
 	MAKE_STD_ZVAL(zfilename);

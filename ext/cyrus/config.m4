@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.4 2002/03/12 16:12:57 sas Exp $
+dnl $Id: config.m4,v 1.5 2002/09/04 14:41:29 martin Exp $
 dnl
 
 PHP_ARG_WITH(cyrus, for cyrus imap support,
@@ -18,6 +18,11 @@ if test "$PHP_CYRUS" != "no"; then
 		fi
 		if test -r $i/include/sasl.h && test "$found_sasl" = "no"; then
 			PHP_ADD_INCLUDE($i/include)
+			PHP_SUBST(SASL_SHARED_LIBADD)
+			PHP_ADD_LIBRARY_WITH_PATH(sasl, $i/lib, SASL_SHARED_LIBADD)
+			found_sasl=yes
+		elif test -r $i/include/sasl/sasl.h && test "$found_sasl" = "no"; then
+			PHP_ADD_INCLUDE($i/include/sasl)
 			PHP_SUBST(SASL_SHARED_LIBADD)
 			PHP_ADD_LIBRARY_WITH_PATH(sasl, $i/lib, SASL_SHARED_LIBADD)
 			found_sasl=yes

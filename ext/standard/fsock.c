@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.102 2002/09/05 14:21:55 hyanantha Exp $ */
+/* $Id: fsock.c,v 1.103 2002/09/12 21:52:09 sesser Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -227,10 +227,10 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			int ssl_ret = FAILURE;
 			switch(ssl_flags)	{
 				case php_ssl_v23:
-					ssl_ret = php_stream_sock_ssl_activate_with_method(stream, 1, SSLv23_client_method() TSRMLS_CC);
+					ssl_ret = php_stream_sock_ssl_activate_with_method(stream, 1, SSLv23_client_method(), NULL TSRMLS_CC);
 					break;
 				case php_ssl_tls:
-					ssl_ret = php_stream_sock_ssl_activate_with_method(stream, 1, TLSv1_client_method() TSRMLS_CC);
+					ssl_ret = php_stream_sock_ssl_activate_with_method(stream, 1, TLSv1_client_method(), NULL TSRMLS_CC);
 					break;
 				default:
 					/* unknown ?? */

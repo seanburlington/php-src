@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.92 2002/05/13 17:28:37 andrei Exp $ */
+/* $Id: wddx.c,v 1.93 2002/07/17 19:27:36 andrei Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -107,6 +107,12 @@ function_entry wddx_functions[] = {
 
 PHP_MINIT_FUNCTION(wddx);
 PHP_MINFO_FUNCTION(wddx);
+
+/* {{{ dynamically loadable module stuff */
+#ifdef COMPILE_DL_WDDX
+ZEND_GET_MODULE(wddx)
+#endif /* COMPILE_DL_WDDX */
+/* }}} */
 
 /* {{{ wddx_module_entry
  */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.564 2003/08/11 05:24:42 fujimoto Exp $ */
+/* $Id: main.c,v 1.565 2003/08/18 22:31:29 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -867,10 +867,10 @@ static void php_message_handler_for_zend(long message, void *data)
 			break;
 		case ZMSG_MEMORY_LEAK_DETECTED:
 		case ZMSG_MEMORY_LEAK_REPEATED: {
+#if ZEND_DEBUG
 				TSRMLS_FETCH();
 
 				if ((EG(error_reporting)&E_WARNING) && PG(report_memleaks)) {
-#if ZEND_DEBUG
 					char memory_leak_buf[512];
 
 					if (message==ZMSG_MEMORY_LEAK_DETECTED) {
@@ -894,9 +894,26 @@ static void php_message_handler_for_zend(long message, void *data)
 #	else
 					fprintf(stderr, "%s", memory_leak_buf);
 #	endif
-#endif
 				}
 			}
+#endif
+			break;
+		case ZMSG_MEMORY_LEAKS_GRAND_TOTAL: {
+#if ZEND_DEBUG
+				TSRMLS_FETCH();
+
+				if ((EG(error_reporting)&E_WARNING) && PG(report_memleaks)) {
+					char memory_leak_buf[512];
+
+					snprintf(memory_leak_buf, 512, "=== Total %d memory leaks detected ===\n", *((zend_uint *) data));
+#	if defined(PHP_WIN32)
+					OutputDebugString(memory_leak_buf);
+#	else
+					fprintf(stderr, "%s", memory_leak_buf);
+#	endif
+				}
+			}
+#endif
 			break;
 		case ZMSG_LOG_SCRIPT_NAME: {
 				struct tm *ta, tmbuf;

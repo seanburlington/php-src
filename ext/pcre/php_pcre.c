@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.13 1999/08/19 16:52:52 andi Exp $ */
+/* $Id: php_pcre.c,v 1.14 1999/08/19 20:31:57 eschmid Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -869,7 +869,8 @@ PHP_FUNCTION(preg_replace)
 /* }}} */
 
 
-/* {{{ proto preg_split(string pattern, string subject [, int limit ]) */
+/* {{{ proto array preg_split(string pattern, string subject [, int limit ]) 
+    split string into an array using a perl-style regular expression as a delimiter */
 PHP_FUNCTION(preg_split)
 {
 	zval			*regex,				/* Regular expression to split by */

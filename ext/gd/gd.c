@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.60 2000/05/23 09:33:36 sas Exp $ */
+/* $Id: gd.c,v 1.61 2000/05/23 22:28:07 hholzgra Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1051,6 +1051,8 @@ PHP_FUNCTION(imagecolorsforindex)
 }
 /* }}} */
 
+/* {{{ proto int imagegammacorrect(int im, double inputgamma, double outputgamma)
+   Apply a gamma correction to a GD image */
 PHP_FUNCTION(imagegammacorrect)
 {
 	zval **IM, **inputgamma, **outputgamma;
@@ -1076,6 +1078,7 @@ PHP_FUNCTION(imagegammacorrect)
 
 	RETURN_TRUE;
 }
+/* }}} */
 
 /* {{{ proto int imagesetpixel(int im, int x, int y, int col)
    Set a single pixel */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.680 2004/08/07 04:50:23 pollita Exp $ */
+/* $Id: basic_functions.c,v 1.681 2004/08/07 05:11:26 pollita Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1345,7 +1345,7 @@ PHP_FUNCTION(inet_pton)
 		RETURN_FALSE;
 	}
 
-	RETURN_STRING(buffer, 1);
+	RETURN_STRINGL(buffer, af == AF_INET ? 4 : 16, 1);
 }
 /* }}} */
 #endif /* HAVE_INET_PTON */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.26 2000/06/05 19:47:44 andi Exp $ */
+/* $Id: mail.c,v 1.27 2000/06/29 14:07:10 kk Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -37,6 +37,37 @@
 #ifdef COMPILE_DL_STANDARD
 ZEND_GET_MODULE(odbc)
 #endif
+
+/* {{{ proto int ezmlm_hash(string addr)
+   Calculate EZMLM list hash value. */
+PHP_FUNCTION(ezmlm_hash)
+{
+	pval **pstr = NULL;
+	char *str=NULL;
+	unsigned long h = 5381L;
+	int j, l;
+	
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &pstr) == FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+
+	convert_to_string_ex(pstr);
+	if ((*pstr)->value.str.val) {
+		str = (*pstr)->value.str.val;
+	} else {
+		php_error(E_WARNING, "Must give string parameter to ezmlm_hash()");
+		RETURN_FALSE;
+	}
+	
+	l = strlen(str);
+	for (j=0; j<l; j++) {
+		h = (h + (h<<5)) ^ (unsigned long) (unsigned char) tolower(str[j]);
+	}
+	
+	h = (h%53);
+	
+	RETURN_LONG((int) h);
+}
 
 /* {{{ proto int mail(string to, string subject, string message [, string additional_headers])
    Send an email message */

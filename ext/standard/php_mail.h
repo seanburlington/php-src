@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php_mail.h,v 1.4 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: php_mail.h,v 1.5 2000/06/29 14:07:10 kk Exp $ */
 
 #ifndef _MAIL_H
 #define _MAIL_H
@@ -36,6 +36,7 @@
 #if HAVE_SENDMAIL
 
 PHP_FUNCTION(mail);
+PHP_FUNCTION(ezmlm_hash);
 PHP_MINFO_FUNCTION(mail);
 extern int php_mail(char *to, char *subject, char *message, char *headers);
 

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_gd.h,v 1.14 2000/07/02 23:46:41 sas Exp $ */
+/* $Id: php_gd.h,v 1.15 2000/07/14 21:51:31 rasmus Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -94,6 +94,7 @@ PHP_FUNCTION(imagecolortransparent);
 PHP_FUNCTION(imagecopy);
 PHP_FUNCTION(imagecopymerge);
 PHP_FUNCTION(imagecopyresized);
+PHP_FUNCTION(imagetypes);
 PHP_FUNCTION(imagecreate);
 PHP_FUNCTION(imagecreatefromgif);
 PHP_FUNCTION(imagecreatefromjpeg);

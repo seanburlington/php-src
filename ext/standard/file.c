@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.90 2000/06/12 19:39:04 andi Exp $ */
+/* $Id: file.c,v 1.91 2000/06/13 15:48:38 thies Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1685,7 +1685,7 @@ PHP_FUNCTION(copy)
 #ifdef PHP_WIN32
 	if ((fd_t=V_OPEN((Z_STRVAL_PP(target),_O_WRONLY|_O_CREAT|_O_TRUNC|_O_BINARY,_S_IREAD|_S_IWRITE)))==-1){
 #else
-	if ((fd_t=V_CREAT(Z_STRVAL_PP(target),0700))==-1) {
+	if ((fd_t=V_CREAT(Z_STRVAL_PP(target),0777))==-1) {
 #endif
 		php_error(E_WARNING,"Unable to create '%s':  %s", Z_STRVAL_PP(target), strerror(errno));
 		close(fd_s);

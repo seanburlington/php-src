@@ -16,7 +16,7 @@
    |         Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.22 2002/03/28 00:48:59 wez Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.23 2002/04/06 17:29:39 wez Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 
@@ -102,6 +102,8 @@ php_stream *php_stream_gzopen(php_stream_wrapper *wrapper, char *path, char *mod
 
 	if (strncasecmp("zlib://", path, 7) == 0)
 		path += 7;
+	else if (strncasecmp("zlib:", path, 5) == 0)
+		path += 5;
 	
 	self->stream = php_stream_open_wrapper(path, mode, STREAM_MUST_SEEK|options, opened_path);
 	

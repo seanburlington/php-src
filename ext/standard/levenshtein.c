@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.11 2000/08/01 07:57:19 hholzgra Exp $ */
+/* $Id: levenshtein.c,v 1.12 2000/08/21 09:50:52 sas Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -24,7 +24,7 @@
 #include "php_string.h"
 
 /* faster, but obfuscated, all operations have a cost of 1 */
-int fastest_levdist(const char *s1, const char *s2) 
+static int fastest_levdist(const char *s1, const char *s2) 
 {
 	register char *p1,*p2; 
 	register int i,j,n;
@@ -179,7 +179,7 @@ static int weighted_levdist( const char *s1
 	return n-=cost_del;
 }
 
-int custom_levdist(char *str1,char *str2,char *callback_name) 
+static int custom_levdist(char *str1,char *str2,char *callback_name) 
 {
 		php_error(E_WARNING,"the general Levenshtein support is not there yet");
 		/* not there yet */

@@ -16,9 +16,10 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: crc32.c,v 1.2 2000/07/24 01:39:49 david Exp $ */
+/* $Id: crc32.c,v 1.3 2000/08/21 09:50:52 sas Exp $ */
 
 #include "php.h"
+#include "basic_functions.h"
 
 /*
  * This code implements the AUTODIN II polynomial

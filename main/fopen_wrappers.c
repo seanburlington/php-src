@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.81 2000/08/21 04:30:25 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.82 2000/08/21 09:50:52 sas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -244,7 +244,7 @@ PHPAPI int php_check_open_basedir(char *path)
 	return 0;
 }
 
-FILE *php_fopen_and_set_opened_path(const char *path, char *mode, char **opened_path)
+static FILE *php_fopen_and_set_opened_path(const char *path, char *mode, char **opened_path)
 {
 		FILE *fp;
 

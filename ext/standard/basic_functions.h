@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.58 2000/08/01 07:45:14 hholzgra Exp $ */
+/* $Id: basic_functions.h,v 1.59 2000/08/21 09:50:52 sas Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -116,6 +116,8 @@ typedef unsigned int php_stat_len;
 #else
 typedef int php_stat_len;
 #endif
+
+PHPAPI int _php_error_log(int opt_err,char *message,char *opt,char *headers);
 
 #if SIZEOF_INT == 4
 /* Most 32-bit and 64-bit systems have 32-bit ints */

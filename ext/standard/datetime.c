@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.52 2000/08/01 11:16:20 hholzgra Exp $ */
+/* $Id: datetime.c,v 1.53 2000/08/21 09:50:52 sas Exp $ */
 
 
 #include "php.h"
@@ -32,6 +32,8 @@
 # include <sys/time.h>
 #endif
 #include <stdio.h>
+
+#include "php_parsedate.h"
 
 char *mon_full_names[] =
 {
@@ -64,8 +66,6 @@ static int phpday_tab[2][12] =
 };
 
 #define isleap(year) (((year%4) == 0 && (year%100)!=0) || (year%400)==0)
-
-extern PHPAPI time_t parse_date (const char *p, const time_t *now);
 
 /* {{{ proto int time(void)
    Return current UNIX timestamp */

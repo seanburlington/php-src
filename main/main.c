@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.296 2000/08/20 19:56:24 andi Exp $ */
+/* $Id: main.c,v 1.297 2000/08/21 09:50:53 sas Exp $ */
 
 
 #include <stdio.h>
@@ -304,7 +304,7 @@ void php_log_err(char *log_message)
 #define PRINTF_BUFFER_SIZE 1024*4
 
 /* wrapper for modules to use PHPWRITE */
-PHPAPI int php_write(void *buf, int size)
+PHPAPI int php_write(void *buf, uint size)
 {
 	return PHPWRITE(buf, size);
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ticks.c,v 1.2 2000/07/24 05:41:00 david Exp $ */
+/* $Id: php_ticks.c,v 1.3 2000/08/21 09:50:53 sas Exp $ */
 
 #include "php.h"
 #include "php_ticks.h"
@@ -55,7 +55,7 @@ PHPAPI int php_remove_tick_function(void (*func)(int))
 	return SUCCESS;
 }
 
-void php_tick_iterator(void *data, void *arg)
+static void php_tick_iterator(void *data, void *arg)
 {
 	void (*func)(int);
 	func = (void(*)(int))data;

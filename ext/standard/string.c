@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.233 2001/09/04 09:35:53 sterling Exp $ */
+/* $Id: string.c,v 1.234 2001/09/04 10:13:55 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1627,7 +1627,7 @@ PHP_FUNCTION(substr)
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(str);
-	convert_to_string_ex(from);
+	convert_to_long_ex(from);
 
 	if (argc > 2) {
 		convert_to_long_ex(len);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.11.4.13 2005/01/30 16:39:55 iliaa Exp $ */
+/* $Id: var_unserializer.re,v 1.11.4.14 2005/02/15 08:08:55 helly Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -485,7 +485,7 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 }
 
 "O:" uiv ":" ["]	{
-	size_t len, len2, maxlen;
+	size_t len, len2, len3, maxlen;
 	int elements;
 	char *class_name;
 	zend_class_entry *ce;
@@ -520,6 +520,14 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 	class_name = str_tolower_copy((char *)emalloc(len+1), class_name, len);
 	class_name[len] = '\0';
 	
+	len3 = strspn(class_name, "0123456789_abcdefghijklmnopqrstuvwxyz");
+	if (len3 != len)
+	{
+		*p = YYCURSOR + len3 - len;
+		efree(class_name);
+		return 0;
+	}
+
 	if (zend_hash_find(CG(class_table), class_name, len + 1, (void **) &ce) != SUCCESS) {
 		if ((PG(unserialize_callback_func) == NULL) || (PG(unserialize_callback_func)[0] == '\0')) {
 			incomplete_class = 1;

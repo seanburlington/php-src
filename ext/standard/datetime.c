@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.96.2.14 2004/03/28 14:57:32 rasmus Exp $ */
+/* $Id: datetime.c,v 1.96.2.15 2004/03/31 17:59:28 hholzgra Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -845,9 +845,11 @@ void _php_strftime(INTERNAL_FUNCTION_PARAMETERS, int gm)
 	if (Z_STRLEN_PP(format_arg)==0) {
 		RETURN_FALSE;
 	}
+#ifdef PHP_WIN32
 	if (timestamp < 0) {
 		RETURN_FALSE;
 	}
+#endif
 	format = Z_STRVAL_PP(format_arg);
 	if (gm) {
 		ta = php_gmtime_r(&timestamp, &tmbuf);

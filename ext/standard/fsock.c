@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.81 2001/09/21 21:59:23 hholzgra Exp $ */
+/* $Id: fsock.c,v 1.82 2001/11/04 12:40:45 alexwaugh Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -52,7 +52,7 @@
 #include <arpa/inet.h>
 #endif
 #endif
-#ifdef PHP_WIN32
+#if defined(PHP_WIN32) || defined(__riscos__)
 #undef AF_UNIX
 #endif
 #if defined(AF_UNIX)

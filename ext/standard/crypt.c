@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.27 2000/05/27 19:27:20 hholzgra Exp $ */
+/* $Id: crypt.c,v 1.28 2000/06/05 19:47:44 andi Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -128,7 +128,7 @@ PHP_FUNCTION(crypt)
 	   available (passing always 2-character salt). At least for glibc6.1 */
 	memset(&salt[1], '$', PHP_MAX_SALT_LEN-1);
 
-	switch (ARG_COUNT(ht)) {
+	switch (ZEND_NUM_ARGS()) {
 		case 1:
 			if (zend_get_parameters_ex(1, &arg1)==FAILURE) {
 				RETURN_FALSE;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.19 2000/05/31 22:44:29 jah Exp $ */
+/* $Id: formatted_print.c,v 1.20 2000/06/05 19:47:44 andi Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -371,7 +371,7 @@ php_formatted_print(int ht, int *len)
 	int alignment, width, precision, currarg, adjusting;
 	char *format, *result, padding;
 
-	argc = ARG_COUNT(ht);
+	argc = ZEND_NUM_ARGS();
 
 	if (argc < 1) {
 		WRONG_PARAM_COUNT_WITH_RETVAL(NULL);

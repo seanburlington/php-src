@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.21 2000/05/18 15:34:34 zeev Exp $ */
+/* $Id: assert.c,v 1.22 2000/06/05 19:47:44 andi Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -145,7 +145,7 @@ PHP_FUNCTION(assert)
 		RETURN_TRUE;
 	}
 
-	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &assertion) == FAILURE) {
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &assertion) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 
@@ -250,7 +250,7 @@ PHP_FUNCTION(assert_options)
 	pval **what,**value;
 	int oldint;
 	char *oldstr;
-	int ac = ARG_COUNT(ht);
+	int ac = ZEND_NUM_ARGS();
 	ASSERTLS_FETCH();
 	
 	if (ac < 1 || ac > 2 || zend_get_parameters_ex(ac, &what, &value) == FAILURE) {

@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.24 2000/05/18 15:34:36 zeev Exp $ */
+/* $Id: url.c,v 1.25 2000/06/05 19:47:44 andi Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -163,7 +163,7 @@ PHP_FUNCTION(parse_url)
 	pval **str;
 	url *resource;
 
-	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &str) == FAILURE) {
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &str) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(str);
@@ -271,7 +271,7 @@ PHP_FUNCTION(urlencode)
 	pval **arg;
 	char *str;
 
-	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(arg);
@@ -293,7 +293,7 @@ PHP_FUNCTION(urldecode)
 	pval **arg;
 	int len;
 
-	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(arg);
@@ -371,7 +371,7 @@ PHP_FUNCTION(rawurlencode)
 	pval **arg;
 	char *str;
 
-	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(arg);
@@ -392,7 +392,7 @@ PHP_FUNCTION(rawurldecode)
 	pval **arg;
 	int len;
 
-	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(arg);

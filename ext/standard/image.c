@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.19 2000/06/04 18:29:15 rasmus Exp $ */
+/* $Id: image.c,v 1.20 2000/06/05 19:47:44 andi Exp $ */
 /* 
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -339,7 +339,7 @@ PHP_FUNCTION(getimagesize)
 	char temp[64];
 	struct gfxinfo *result = NULL;
 	
-	switch(ARG_COUNT(ht)){
+	switch(ZEND_NUM_ARGS()){
 	case 1:
 		if (zend_get_parameters_ex(1, &arg1) == FAILURE) {
 			WRONG_PARAM_COUNT;

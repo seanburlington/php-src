@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyr_convert.c,v 1.9 2000/05/18 15:34:35 zeev Exp $ */
+/* $Id: cyr_convert.c,v 1.10 2000/06/05 19:47:44 andi Exp $ */
 
 #include <stdlib.h>
 
@@ -274,7 +274,7 @@ PHP_FUNCTION(convert_cyr_string)
     pval **str_arg, **fr_cs, **to_cs;
 	unsigned char *str;
 
-    if (ARG_COUNT(ht) != 3 || zend_get_parameters_ex(3,&str_arg,&fr_cs, &to_cs)==FAILURE)
+    if (ZEND_NUM_ARGS() != 3 || zend_get_parameters_ex(3,&str_arg,&fr_cs, &to_cs)==FAILURE)
     {
         WRONG_PARAM_COUNT;
     }

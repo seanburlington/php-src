@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.32 2000/05/23 09:33:46 sas Exp $ */
+/* $Id: snmp.c,v 1.33 2000/06/05 19:47:44 andi Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -139,7 +139,7 @@ void php_snmp(INTERNAL_FUNCTION_PARAMETERS, int st) {
 	int keepwalking=1;
 	long timeout=SNMP_DEFAULT_TIMEOUT;
 	long retries=SNMP_DEFAULT_RETRIES;
-	int myargc = ARG_COUNT(ht);
+	int myargc = ZEND_NUM_ARGS();
     char type = (char) 0;
     char *value = (char *) 0;
 	
@@ -362,7 +362,7 @@ PHP_FUNCTION(snmp_get_quick_print) {
    Return all objects including their respective object id withing the specified one */
 PHP_FUNCTION(snmp_set_quick_print) {
 	zval **a1;
-	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &a1) == FAILURE) {
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &a1) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_long_ex(a1);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dav.c,v 1.19 2000/05/23 09:33:34 sas Exp $ */
+/* $Id: dav.c,v 1.20 2000/06/05 19:47:40 andi Exp $ */
 
 #define IS_EXT_MODULE
 #ifdef COMPILE_DL_DAV
@@ -252,7 +252,7 @@ PHP_FUNCTION(dav_set_mkcol_handlers)
     pval *test, *create;
     DAV_TLS_VARS;
 
-    if (ARG_COUNT(ht) != 2 || getParameters(ht, 2, &test, &create) == FAILURE) {
+    if (ZEND_NUM_ARGS() != 2 || getParameters(ht, 2, &test, &create) == FAILURE) {
 		WRONG_PARAM_COUNT;
     }
     DAV_SET_HANDLER(mkcol_test, test);

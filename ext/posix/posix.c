@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.15 2000/05/23 09:33:45 sas Exp $ */
+/* $Id: posix.c,v 1.16 2000/06/05 19:47:43 andi Exp $ */
 
 
 #include "php.h"
@@ -136,7 +136,7 @@ ZEND_GET_MODULE(posix)
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.15 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.16 $");
 	php_info_print_table_end();
 }
 
@@ -149,7 +149,7 @@ PHP_FUNCTION(posix_kill)
 	pval   *sig;
 	int     result;
 
-	if (ARG_COUNT(ht) != 2 || zend_get_parameters(ht, 2, &pid, &sig)==FAILURE) {
+	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters(ht, 2, &pid, &sig)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 
@@ -242,7 +242,7 @@ PHP_FUNCTION(posix_setuid)
 	pval *uid;
 	int   result;
 
-	if (ARG_COUNT(ht) != 1 || zend_get_parameters(ht, 1, &uid)==FAILURE) {
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters(ht, 1, &uid)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 
@@ -267,7 +267,7 @@ PHP_FUNCTION(posix_setgid)
 	pval *gid;
 	int   result;
 
-	if (ARG_COUNT(ht) != 1 || zend_get_parameters(ht, 1, &gid)==FAILURE) {
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters(ht, 1, &gid)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 
@@ -360,7 +360,7 @@ PHP_FUNCTION(posix_setpgid)
 	pval   *pgid;
 	int     result;
 
-	if (ARG_COUNT(ht) != 2 || zend_get_parameters(ht, 2, &pid, &pgid)==FAILURE) {
+	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters(ht, 2, &pid, &pgid)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 
@@ -388,7 +388,7 @@ PHP_FUNCTION(posix_getpgid)
 	pid_t  pgid;
 	pval  *pid;
 
-	if (ARG_COUNT(ht) != 1 || zend_get_parameters(ht, 1, &pid)==FAILURE) {
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters(ht, 1, &pid)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 
@@ -417,7 +417,7 @@ PHP_FUNCTION(posix_getsid)
 	pid_t  sid;
 	pval  *pid;
 
-	if (ARG_COUNT(ht) != 1 || zend_get_parameters(ht, 1, &pid)==FAILURE) {
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters(ht, 1, &pid)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 
@@ -518,7 +518,7 @@ PHP_FUNCTION(posix_ttyname)
 	pval *fd;
 	char *p;
 
-    if (ARG_COUNT(ht) != 1 || zend_get_parameters(ht, 1, &fd)==FAILURE) {
+    if (ZEND_NUM_ARGS() != 1 || zend_get_parameters(ht, 1, &fd)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_long(fd);
@@ -542,7 +542,7 @@ PHP_FUNCTION(posix_isatty)
 	pval *fd;
 	int   result;
 	
-    if (ARG_COUNT(ht) != 1 || zend_get_parameters(ht, 1, &fd)==FAILURE) {
+    if (ZEND_NUM_ARGS() != 1 || zend_get_parameters(ht, 1, &fd)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_long(fd);
@@ -597,7 +597,7 @@ PHP_FUNCTION(posix_mkfifo)
 	pval   *mode;
 	int     result;
 	
-	if (ARG_COUNT(ht) != 2 || zend_get_parameters(ht, 2, &path, &mode) == FAILURE) {
+	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters(ht, 2, &path, &mode) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string(path);
@@ -644,7 +644,7 @@ PHP_FUNCTION(posix_getgrnam)
 	char         **p;
 	int            count;
 	
-    if (ARG_COUNT(ht) != 1 || zend_get_parameters(ht, 1, &name)==FAILURE) {
+    if (ZEND_NUM_ARGS() != 1 || zend_get_parameters(ht, 1, &name)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string(name);
@@ -680,7 +680,7 @@ PHP_FUNCTION(posix_getgrgid)
 	char         **p;
 	int            count;
 	
-    if (ARG_COUNT(ht) != 1 || zend_get_parameters(ht, 1, &gid)==FAILURE) {
+    if (ZEND_NUM_ARGS() != 1 || zend_get_parameters(ht, 1, &gid)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_long(gid);
@@ -712,7 +712,7 @@ PHP_FUNCTION(posix_getpwnam)
 	pval          *name;
 	struct passwd *pw;
 	
-    if (ARG_COUNT(ht) != 1 || zend_get_parameters(ht, 1, &name)==FAILURE) {
+    if (ZEND_NUM_ARGS() != 1 || zend_get_parameters(ht, 1, &name)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string(name);
@@ -744,7 +744,7 @@ PHP_FUNCTION(posix_getpwuid)
 	pval          *uid;
 	struct passwd *pw;
 	
-    if (ARG_COUNT(ht) != 1 || zend_get_parameters(ht, 1, &uid)==FAILURE) {
+    if (ZEND_NUM_ARGS() != 1 || zend_get_parameters(ht, 1, &uid)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_long(uid);

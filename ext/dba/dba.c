@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.16 2000/05/02 03:38:26 sas Exp $ */
+/* $Id: dba.c,v 1.17 2000/06/05 19:47:40 andi Exp $ */
 
 #include "php.h"
 
@@ -95,7 +95,7 @@ typedef struct dba_handler {
 #define DBA_ID_PARS 											\
 	pval **id; 													\
 	dba_info *info = NULL; 										\
-	int type, ac = ARG_COUNT(ht)
+	int type, ac = ZEND_NUM_ARGS()
 
 /* these are used to get the standard arguments */
 
@@ -206,7 +206,7 @@ static PHP_MINFO_FUNCTION(dba)
 	dba_handler *hptr;
 	
 	php_info_print_box_start(0);
-	PUTS("V1 ($Id: dba.c,v 1.16 2000/05/02 03:38:26 sas Exp $)");
+	PUTS("V1 ($Id: dba.c,v 1.17 2000/06/05 19:47:40 andi Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);
@@ -238,7 +238,7 @@ static void php_dba_update(INTERNAL_FUNCTION_PARAMETERS, int mode)
 static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 {
 	pval ***args = (pval ***) NULL;
-	int ac = ARG_COUNT(ht);
+	int ac = ZEND_NUM_ARGS();
 	dba_mode_t modenr;
 	dba_info *info;
 	dba_handler *hptr;

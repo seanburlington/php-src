@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.33 2000/05/23 23:13:01 hholzgra Exp $ */
+/* $Id: exec.c,v 1.34 2000/06/05 19:47:44 andi Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -200,7 +200,7 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 PHP_FUNCTION(exec)
 {
 	pval **arg1, **arg2, **arg3;
-	int arg_count = ARG_COUNT(ht);
+	int arg_count = ZEND_NUM_ARGS();
 	int ret;
 
 	if (arg_count > 3 || zend_get_parameters_ex(arg_count, &arg1,&arg2, &arg3) == FAILURE) {
@@ -237,7 +237,7 @@ PHP_FUNCTION(exec)
 PHP_FUNCTION(system)
 {
 	pval **arg1, **arg2;
-	int arg_count = ARG_COUNT(ht);
+	int arg_count = ZEND_NUM_ARGS();
 	int ret;
 
 	if (arg_count > 2 || zend_get_parameters_ex(arg_count, &arg1,&arg2) == FAILURE) {
@@ -264,7 +264,7 @@ PHP_FUNCTION(system)
 PHP_FUNCTION(passthru)
 {
 	pval **arg1, **arg2;
-	int arg_count = ARG_COUNT(ht);
+	int arg_count = ZEND_NUM_ARGS();
 	int ret;
 
 	if (arg_count > 2 || zend_get_parameters_ex(arg_count, &arg1,&arg2) == FAILURE) {
@@ -353,7 +353,7 @@ PHP_FUNCTION(shell_exec)
 	pval **cmd;
 	PLS_FETCH();
 
-	if (ARG_COUNT(ht)!=1 || zend_get_parameters_ex(1,&cmd)==FAILURE) {
+	if (ZEND_NUM_ARGS()!=1 || zend_get_parameters_ex(1,&cmd)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	

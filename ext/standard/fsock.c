@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.49 2000/05/18 15:34:35 zeev Exp $ */
+/* $Id: fsock.c,v 1.50 2000/06/05 19:47:44 andi Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -211,7 +211,7 @@ static void php_fsockopen(INTERNAL_FUNCTION_PARAMETERS, int persistent) {
 	pval **args[5];
 	int *sock=emalloc(sizeof(int));
 	int *sockp;
-	int arg_count=ARG_COUNT(ht);
+	int arg_count=ZEND_NUM_ARGS();
 	int socketd = -1;
 	unsigned char udp = 0;
 	struct timeval timeout = { 60, 0 };

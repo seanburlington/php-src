@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.25 2000/05/23 09:33:47 sas Exp $ */
+/* $Id: mail.c,v 1.26 2000/06/05 19:47:44 andi Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -46,7 +46,7 @@ PHP_FUNCTION(mail)
 	char *to=NULL, *message=NULL, *headers=NULL, *subject=NULL;
 	int argc;
 	
-	argc = ARG_COUNT(ht);
+	argc = ZEND_NUM_ARGS();
 	if (argc < 3 || argc > 4 || zend_get_parameters_array_ex(argc, argv) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}

@@ -16,7 +16,7 @@
 // |          Sebastian Bergmann <sb@sebastian-bergmann.de>               |
 // +----------------------------------------------------------------------+
 //
-// $Id: Cache.php,v 1.6 2001/03/08 20:39:15 uw Exp $
+// $Id: Cache.php,v 1.7 2001/03/08 20:41:39 uw Exp $
 
 require_once "Cache/Error.php";
 
@@ -26,7 +26,7 @@ require_once "Cache/Error.php";
 * TODO: Simple usage example goes here.
 *
 * @author   Ulf Wendel <ulf.wendel@phpdoc.de>
-* @version  $Id: Cache.php,v 1.6 2001/03/08 20:39:15 uw Exp $
+* @version  $Id: Cache.php,v 1.7 2001/03/08 20:41:39 uw Exp $
 * @package  Cache
 * @access   public 
 */
@@ -281,5 +281,6 @@ class Cache {
             $last_run = time();
         }
     } // end func garbageCollection
+    
 } // end class cache 
 ?>

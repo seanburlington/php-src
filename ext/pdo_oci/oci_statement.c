@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_statement.c,v 1.8 2005/01/12 05:47:03 wez Exp $ */
+/* $Id: oci_statement.c,v 1.9 2005/01/20 03:33:17 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -186,7 +186,7 @@ static sb4 oci_bind_output_cb(dvoid *ctx, OCIBind *bindp, ub4 iter, ub4 index, d
 	Z_STRLEN_P(param->parameter) = param->max_value_len;
 	Z_STRVAL_P(param->parameter) = emalloc(Z_STRLEN_P(param->parameter)+1);
 
-	
+	P->actual_len = Z_STRLEN_P(param->parameter);	
 	*alenpp = &P->actual_len;
 	*bufpp = Z_STRVAL_P(param->parameter);
 	*piecep = OCI_ONE_PIECE;

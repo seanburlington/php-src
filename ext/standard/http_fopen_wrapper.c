@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.11 2001/07/14 15:08:36 rasmus Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.12 2001/07/14 16:41:58 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -120,7 +120,7 @@ FILE *php_fopen_url_wrap_http(char *path, char *mode, int options, int *issock, 
 	strcpy(hdr_line, "GET ");
 	
 	/* tell remote http which file to get */
-	if (resource->path != NULL && strlen(resource->path)) {
+	if (resource->path != NULL && *resource->path) {
 		strlcat(hdr_line, resource->path, sizeof(hdr_line));
 	} else {
 		strlcat(hdr_line, "/", sizeof(hdr_line));

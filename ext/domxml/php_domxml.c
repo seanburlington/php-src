@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.64 2001/08/14 07:37:14 joey Exp $ */
+/* $Id: php_domxml.c,v 1.65 2001/08/14 07:44:21 joey Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -588,9 +588,9 @@ static zval *php_xpathcontext_new(xmlXPathContextPtr obj, int *found TSRMLS_DC)
 	zval *wrapper;
 	int rsrc_type;
 
-    if (! found) {
-        *found = 0;
-    }
+	if (! found) {
+	    *found = 0;
+	}
 
 	if (!obj) {
 		MAKE_STD_ZVAL(wrapper);
@@ -666,9 +666,9 @@ static zval *php_domobject_new(xmlNodePtr obj, int *found TSRMLS_DC)
 	char *content;
 	int rsrc_type;
 
-    if (! found) {
-        *found = 0;
-    }
+	if (! found) {
+	    *found = 0;
+	}
 
 	if (!obj) {
 		MAKE_STD_ZVAL(wrapper);

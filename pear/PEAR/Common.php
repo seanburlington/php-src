@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.38 2002/03/29 00:05:55 ssb Exp $
+// $Id: Common.php,v 1.39 2002/03/31 03:16:02 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -504,7 +504,9 @@ class PEAR_Common extends PEAR
      */
     function _pkginfo_cdata_1_0($xp, $data)
     {
-        $this->cdata .= $data;
+        if (isset($this->cdata)) {
+            $this->cdata .= $data;
+        }
     }
 
     // }}}

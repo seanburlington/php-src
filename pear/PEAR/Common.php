@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.41 2002/04/02 09:21:08 ssb Exp $
+// $Id: Common.php,v 1.42 2002/04/06 00:58:22 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -716,6 +716,7 @@ class PEAR_Common extends PEAR
      */
     function _makeReleaseXml($pkginfo, $changelog = false)
     {
+        // XXX QUOTE ENTITIES IN PCDATA, OR EMBED IN CDATA BLOCKS!!
         $indent = $changelog ? "  " : "";
         $ret = "$indent  <release>\n";
         if (!empty($pkginfo['version'])) {
@@ -731,7 +732,7 @@ class PEAR_Common extends PEAR
             $ret .= "$indent    <state>$pkginfo[release_state]</state>\n";
         }
         if (!empty($pkginfo['release_notes'])) {
-            $ret .= "$indent    <notes>$pkginfo[release_notes]</notes>\n";
+            $ret .= "$indent    <notes>".htmlspecialchars($pkginfo['release_notes'])."</notes>\n";
         }
         if (isset($pkginfo['release_deps']) && sizeof($pkginfo['release_deps']) > 0) {
             $ret .= "$indent    <deps>\n";

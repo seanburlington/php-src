@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.443 2002/02/21 03:32:41 andrei Exp $ */
+/* $Id: basic_functions.c,v 1.444 2002/02/21 11:44:39 yohgaki Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -475,6 +475,7 @@ function_entry basic_functions[] = {
 	PHP_FE(dechex,															NULL)
 	PHP_FE(base_convert,													NULL)
 	PHP_FE(number_format,													NULL)
+	PHP_FE(fmod,															NULL)
 	PHP_FE(ip2long,															NULL)
 	PHP_FE(long2ip,															NULL)
 

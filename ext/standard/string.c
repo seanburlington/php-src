@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.409 2004/02/23 20:06:01 pollita Exp $ */
+/* $Id: string.c,v 1.410 2004/02/23 20:13:14 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3008,7 +3008,16 @@ PHPAPI char *php_str_to_str_ex(char *haystack, int length,
 					o += needle_len;
 					count++;
 				}
-				new_str = safe_emalloc(count, str_len - needle_len, length + 1);
+				if (count == 0) {
+					/* Needle doesn't occur, shortcircuit the actual replacement. */
+					new_str = estrndup(haystack, length);
+					if (_new_length) {
+						*_new_length = length;
+					}
+					return new_str;
+				} else {
+					new_str = safe_emalloc(count, str_len - needle_len, length + 1);
+				}
 			}
 
 			e = s = new_str;

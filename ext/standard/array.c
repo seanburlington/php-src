@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.209 2002/12/06 17:35:52 iliaa Exp $ */
+/* $Id: array.c,v 1.210 2002/12/09 15:54:38 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1054,11 +1054,13 @@ static void php_search_array(INTERNAL_FUNCTION_PARAMETERS, int behavior)
 		zend_get_parameters_ex(ZEND_NUM_ARGS(), &value, &array, &strict) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
-	
+
+#ifndef ZEND_ENGINE_2	
 	if (Z_TYPE_PP(value) == IS_OBJECT) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Wrong datatype for first argument");
 		RETURN_FALSE;
 	}
+#endif
 	
 	if (Z_TYPE_PP(array) != IS_ARRAY) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Wrong datatype for second argument");

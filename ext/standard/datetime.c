@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.94 2002/09/19 18:22:51 iliaa Exp $ */
+/* $Id: datetime.c,v 1.95 2002/09/21 15:41:20 iliaa Exp $ */
 
 
 #include "php.h"
@@ -646,7 +646,7 @@ PHP_FUNCTION(localtime)
 			assoc_array = Z_LVAL_PP(assoc_array_arg);
 			break;
 	}
-	if (NULL == (ta = php_localtime_r(&timestamp, &tmbuf))) {
+	if (timestamp < 0 || NULL == (ta = php_localtime_r(&timestamp, &tmbuf))) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid local time");
 		RETURN_FALSE;
 	}

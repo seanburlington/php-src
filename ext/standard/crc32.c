@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: crc32.c,v 1.8 2001/09/25 21:58:22 jeroen Exp $ */
+/* $Id: crc32.c,v 1.9 2001/10/26 21:07:59 andrei Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -106,19 +106,15 @@ static const unsigned int crc32tab[256] = {
    Calculate the crc32 polynomial of a string */
 PHP_NAMED_FUNCTION(php_if_crc32)
 {
-	pval **arg;
 	unsigned int crc = ~0;
-	char *p ;
-	int len, nr ;
+	char *p;
+	int len, nr;
 	
-	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &p, &nr) == FAILURE) {
+		return;
 	}
-	convert_to_string_ex(arg);
 
 	len = 0 ;
-	nr=Z_STRLEN_PP(arg);
-	p = Z_STRVAL_PP(arg);
 	for (len += nr; nr--; ++p) {
 	    CRC32(crc, *p);
 	}

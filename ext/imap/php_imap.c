@@ -25,7 +25,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.40 2000/08/10 17:38:14 joey Exp $ */
+/* $Id: php_imap.c,v 1.41 2000/08/17 16:01:14 chagenbu Exp $ */
 
 #define IMAP41
 
@@ -3411,7 +3411,7 @@ PHP_FUNCTION(imap_search)
 	}
 	
 	IMAPG(imap_messages) = NIL;
-	mail_search_full(imap_le_struct->imap_stream, NIL, mail_criteria(Z_STRVAL_PP(criteria)), flags);
+	mail_search_full(imap_le_struct->imap_stream, NIL, mail_criteria(cpystr(Z_STRVAL_PP(criteria))), flags);
 	if (IMAPG(imap_messages) == NIL) {
 		RETURN_FALSE;
 	}

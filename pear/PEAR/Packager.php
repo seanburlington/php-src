@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.48 2003/06/27 10:46:53 pajoye Exp $
+// $Id: Packager.php,v 1.49 2003/08/03 19:32:07 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'System.php';
@@ -116,7 +116,7 @@ class PEAR_Packager extends PEAR_Common
             chdir($oldcwd);
             return $this->raiseError($new_xml);
         }
-        if (!($tmpdir = System::mktemp('-t '.getcwd().' -d'))) {
+        if (!($tmpdir = System::mktemp(array('-t', getcwd(), '-d')))) {
             chdir($oldcwd);
             return $this->raiseError("PEAR_Packager: mktemp failed");
         }
@@ -135,7 +135,7 @@ class PEAR_Packager extends PEAR_Common
         $tar =& new Archive_Tar($dest_package, $compress);
         $tar->setErrorHandling(PEAR_ERROR_RETURN); // XXX Don't print errors
         // ----- Creates with the package.xml file
-        $ok = $tar->createModify($newpkgfile, '', $tmpdir);
+        $ok = $tar->createModify(array($newpkgfile), '', $tmpdir);
         if (PEAR::isError($ok)) {
             chdir($oldcwd);
             return $this->raiseError($ok);

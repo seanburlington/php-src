@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.46 2003/07/07 15:42:58 cox Exp $
+// $Id: Registry.php,v 1.47 2003/08/03 19:32:07 cox Exp $
 
 /*
 TODO:
@@ -146,7 +146,7 @@ class PEAR_Registry extends PEAR
     function _assertStateDir()
     {
         if (!@is_dir($this->statedir)) {
-            if (!System::mkdir("-p {$this->statedir}")) {
+            if (!System::mkdir(array('-p', $this->statedir))) {
                 return $this->raiseError("could not create directory '{$this->statedir}'");
             }
         }

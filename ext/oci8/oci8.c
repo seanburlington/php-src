@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.179 2002/10/19 16:11:16 maxim Exp $ */
+/* $Id: oci8.c,v 1.180 2002/10/20 02:20:13 maxim Exp $ */
 
 /* TODO list:
  *
@@ -631,7 +631,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.179 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.180 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -3866,7 +3866,7 @@ PHP_FUNCTION(ociinternaldebug)
 
 /* }}} */
 
-/* {{{ proto int ociexecute(int stmt [, int mode])
+/* {{{ proto bool ociexecute(int stmt [, int mode])
    Execute a parsed statement */
 
 PHP_FUNCTION(ociexecute)

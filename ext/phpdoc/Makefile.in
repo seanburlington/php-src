@@ -1,8 +1,0 @@
-# $Id: Makefile.in,v 1.1 2001/12/12 09:46:27 ostborn Exp $
-
-LTLIBRARY_NAME        = libphpdoc.la
-LTLIBRARY_SOURCES     = phpdoc.c
-LTLIBRARY_SHARED_NAME = phpdoc.la
-LTLIBRARY_SHARED_LIBADD  = $(PHPDOC_SHARED_LIBADD)
-
-include $(top_srcdir)/build/dynlib.mk

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.28 2003/05/31 22:03:57 helly Exp $ 
+  $Id: mysqli_api.c,v 1.29 2003/06/02 11:42:39 sniper Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1436,7 +1436,7 @@ PHP_FUNCTION(mysqli_real_connect)
 	MYSQLI_FETCH_RESOURCE(mysql, MYSQL *, prmysql, PR_MYSQL *, &mysql_link, "mysqli_link");
 
 	/* remove some insecure options */
-	flags ^= CLIENT_MULTI_QUERIES;   // don't allow multi_queries via connect parameter
+	flags ^= CLIENT_MULTI_QUERIES;   /* don't allow multi_queries via connect parameter */
 	if (PG(open_basedir) && strlen(PG(open_basedir))) {
 		flags ^= CLIENT_LOCAL_FILES;
 	}
@@ -1710,7 +1710,8 @@ PHP_FUNCTION(mysqli_select_db)
 	int   		dbname_len;
 	PR_MYSQL	*prmysql;
 
-//	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC,  "Os", &mysql_link, mysqli_link_class_entry, &dbname, &dbname_len) == FAILURE) {
+/*	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC,  "Os", &mysql_link, mysqli_link_class_entry, &dbname, &dbname_len) == FAILURE) { 
+*/
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os", &mysql_link, mysqli_link_class_entry, &dbname, &dbname_len) == FAILURE) {
 		return;
 	} 

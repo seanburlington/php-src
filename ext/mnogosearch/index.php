@@ -1,11 +1,11 @@
 <!-- 
     $Source: /repository/php-src/ext/mnogosearch/Attic/index.php,v $
-    $Id: index.php,v 1.1 2001/09/15 12:20:35 gluke Exp $ 
+    $Id: index.php,v 1.2 2001/09/29 09:25:21 gluke Exp $ 
 -->
 
 <?
 
-/*   mnoGoSearch-php0lite v.1.0
+/*   mnoGoSearch-php-lite v.1.0
  *   for mnoGoSearch ( formely known as UdmSearch ) free web search engine
  *   (C) 2001 by Sergey Kartashoff <gluke@mail.ru>,
  *               mnoGoSearch Developers Team <devel@mnogosearch.org>

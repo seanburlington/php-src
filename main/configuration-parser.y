@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.40 2000/03/29 19:45:15 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.41 2000/04/03 17:40:44 andi Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -243,7 +243,7 @@ PHP_MINIT_FUNCTION(browscap)
 			return FAILURE;
 		}
 
-		cfgin = fopen(browscap, "r");
+		cfgin = PHP_FOPEN(browscap, "r");
 		if (!cfgin) {
 			php_error(E_WARNING,"Cannot open '%s' for reading", browscap);
 			return FAILURE;
@@ -262,7 +262,7 @@ PHP_MINIT_FUNCTION(browscap)
 
 PHP_FUNCTION(parse_ini_file)
 {
-#if ZTS
+#ifdef ZTS
 	php_error(E_WARNING, "parse_ini_file() is not supported in multithreaded PHP");
 	RETURN_FALSE;
 #else
@@ -272,7 +272,7 @@ PHP_FUNCTION(parse_ini_file)
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_string_ex(filename);
-	cfgin = fopen((*filename)->value.str.val, "r");
+	cfgin = PHP_FOPEN((*filename)->value.str.val, "r");
 	if (!cfgin) {
 		php_error(E_WARNING,"Cannot open '%s' for reading", (*filename)->value.str.val);
 		return;

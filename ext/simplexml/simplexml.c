@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.138 2004/03/29 19:58:01 helly Exp $ */
+/* $Id: simplexml.c,v 1.139 2004/05/04 15:03:48 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1077,7 +1077,8 @@ static zend_object_handlers sxe_object_handlers = {
 	NULL, /* zend_get_std_object_handlers()->get_class_entry,*/
 	NULL, /* zend_get_std_object_handlers()->get_class_name,*/
 	sxe_objects_compare,
-	sxe_object_cast
+	sxe_object_cast,
+	NULL
 };
 
 /* {{{ sxe_object_clone()
@@ -1650,7 +1651,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.138 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.139 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

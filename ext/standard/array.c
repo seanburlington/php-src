@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.260 2004/04/01 22:07:42 iliaa Exp $ */
+/* $Id: array.c,v 1.261 2004/05/04 15:03:48 wez Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -290,6 +290,13 @@ PHP_FUNCTION(count)
 		case IS_ARRAY:
 			RETURN_LONG (php_count_recursive (array, mode TSRMLS_CC));
 			break;
+		case IS_OBJECT:
+			if (Z_OBJ_HT(*array)->count_elements) {
+				RETVAL_LONG(1);
+				if (SUCCESS == Z_OBJ_HT(*array)->count_elements(array, &Z_LVAL_P(return_value) TSRMLS_CC)) {
+					return;
+				}
+			}
 		default:
 			RETURN_LONG(1);
 			break;

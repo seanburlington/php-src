@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.19 2003/04/13 20:12:54 helly Exp $ */
+/* $Id: streams.c,v 1.20 2003/04/13 20:30:57 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -238,7 +238,7 @@ fprintf(stderr, "stream_alloc: %s:%p persistent=%s\n", ops->label, ret, persiste
 }
 /* }}} */
 
-int _php_stream_free_persistent(list_entry *le, void *pStream TSRMLS_DC)
+static int _php_stream_free_persistent(list_entry *le, void *pStream TSRMLS_DC)
 {
 	return le->ptr == pStream;
 }

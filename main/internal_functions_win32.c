@@ -16,7 +16,7 @@
 	|          Zeev Suraski <zeev@zend.com>                                |
 	+----------------------------------------------------------------------+
 
-	$Id: internal_functions_win32.c,v 1.64 2002/04/28 17:50:09 sebastian Exp $
+	$Id: internal_functions_win32.c,v 1.65 2002/09/04 13:55:52 sebastian Exp $
 */
 
 /* {{{ includes
@@ -82,8 +82,10 @@
 #if HAVE_MBSTRING
 #include "ext/mbstring/mbstring.h"
 #endif
+#ifndef ZEND_ENGINE_2
 #if HAVE_OVERLOAD
 #include "ext/overload/php_overload.h"
+#endif
 #endif
 #if HAVE_TOKENIZER
 #include "ext/tokenizer/php_tokenizer.h"
@@ -118,8 +120,10 @@ zend_module_entry *php_builtin_extensions[] = {
 #if HAVE_UODBC
 	,phpext_odbc_ptr
 #endif
+#ifndef ZEND_ENGINE_2
 #if HAVE_OVERLOAD
   ,phpext_overload_ptr
+#endif
 #endif
 #if HAVE_PCRE || HAVE_BUNDLED_PCRE
 	,phpext_pcre_ptr

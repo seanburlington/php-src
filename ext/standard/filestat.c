@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.112.2.6 2003/04/23 02:37:29 iliaa Exp $ */
+/* $Id: filestat.c,v 1.112.2.7 2003/06/24 13:44:57 iliaa Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -572,7 +572,7 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 		RETURN_FALSE;
 	}
 
-	if (php_check_open_basedir(filename TSRMLS_CC)) {
+	if (php_check_open_basedir_ex(filename, IS_EXISTS_CHECK(type) ? 0 : 1 TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 

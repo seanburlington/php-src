@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.623 2003/08/20 20:51:10 bfrance Exp $ */
+/* $Id: basic_functions.c,v 1.624 2003/08/28 12:18:51 andrey Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2521,7 +2521,7 @@ PHP_FUNCTION(restore_include_path)
 
 /* }}} */
 
-/* {{{ proto bool print_r(mixed var [, bool return])
+/* {{{ proto mixed print_r(mixed var [, bool return])
    Prints out or returns information about the specified variable */
 PHP_FUNCTION(print_r)
 {

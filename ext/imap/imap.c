@@ -22,7 +22,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.51 2000/03/11 20:57:34 andi Exp $ */
+/* $Id: imap.c,v 1.52 2000/03/12 17:49:08 andi Exp $ */
 
 #define IMAP41
 
@@ -459,7 +459,7 @@ PHP_MINIT_FUNCTION(imap)
 
 	/* Open Options */
 
-	REGISTER_MAIN_LONG_CONSTANT("OP_PHP_DEBUG", OP_PHP_DEBUG, CONST_PERSISTENT | CONST_CS);
+	REGISTER_MAIN_LONG_CONSTANT("OP_DEBUG", OP_DEBUG, CONST_PERSISTENT | CONST_CS);
 	/* debug protocol negotiations */
 
 	REGISTER_MAIN_LONG_CONSTANT("OP_READONLY", OP_READONLY, CONST_PERSISTENT | CONST_CS);

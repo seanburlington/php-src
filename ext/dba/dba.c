@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.104 2003/12/13 14:50:06 helly Exp $ */
+/* $Id: dba.c,v 1.105 2003/12/13 15:00:04 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -654,7 +654,7 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 				/* the create/append check will be done on the lock
 				 * when the lib opens the file it is already created
 				 */
-				file_mode = "a+b";
+				file_mode = "w+b";
 				lock_file_mode = "a+b";
 			}
 			break;

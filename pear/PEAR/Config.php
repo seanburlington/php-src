@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.40 2003/01/02 23:48:32 ssb Exp $
+// $Id: Config.php,v 1.41 2003/01/07 23:12:06 dickmann Exp $
 
 require_once 'PEAR.php';
 require_once 'System.php';
@@ -142,7 +142,7 @@ if (isset($_ENV['PHP_PEAR_PREFERRED_STATE'])) {
 if (isset($_ENV['PHP_PEAR_UMASK'])) {
     define('PEAR_CONFIG_DEFAULT_UMASK', $_ENV['PHP_PEAR_UMASK']);
 } else {
-    define('PEAR_CONFIG_DEFAULT_UMASK', umask());
+    define('PEAR_CONFIG_DEFAULT_UMASK', decoct(umask()));
 }
 
 // Default for cache_ttl

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_context.h,v 1.6 2003/06/27 16:23:58 pollita Exp $ */
+/* $Id: php_stream_context.h,v 1.7 2003/07/02 22:18:59 pollita Exp $ */
 
 /* Stream context and status notification related definitions */
 
@@ -53,6 +53,7 @@ struct _php_stream_notifier {
 struct _php_stream_context {
 	php_stream_notifier *notifier;
 	zval *options;	/* hash keyed by wrapper family or specific wrapper */
+	zval *links;	/* hash keyed by hostent for connection pooling */
 	int rsrc_id;	/* used for auto-cleanup */
 };
 
@@ -62,6 +63,13 @@ PHPAPI int php_stream_context_get_option(php_stream_context *context,
 		const char *wrappername, const char *optionname, zval ***optionvalue);
 PHPAPI int php_stream_context_set_option(php_stream_context *context,
 		const char *wrappername, const char *optionname, zval *optionvalue);
+
+PHPAPI int php_stream_context_get_link(php_stream_context *context,
+		const char *hostent, php_stream **stream);
+PHPAPI int php_stream_context_set_link(php_stream_context *context,
+		const char *hostent, php_stream *stream);
+PHPAPI int php_stream_context_del_link(php_stream_context *context,
+		php_stream *stream);
 
 PHPAPI php_stream_notifier *php_stream_notification_alloc(void);
 PHPAPI void php_stream_notification_free(php_stream_notifier *notifier);

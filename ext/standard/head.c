@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.42 2001/07/21 00:14:14 rasmus Exp $ */
+/* $Id: head.c,v 1.43 2001/07/21 01:15:18 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -132,7 +132,7 @@ PHP_FUNCTION(setcookie)
 		len += Z_STRLEN_PP(z_domain);
 	}
 	cookie = emalloc(len + 100);
-	if (z_value && (!Z_STRVAL_PP(z_value) || (Z_STRVAL_PP(z_value) && !Z_STRVAL_PP(z_value)[0]))) {
+	if (z_value && Z_STRLEN_PP(z_value)==0) {
 		/* 
 		 * MSIE doesn't delete a cookie when you set it to a null value
 		 * so in order to force cookies to be deleted, even on MSIE, we

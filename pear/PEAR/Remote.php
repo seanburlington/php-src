@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.20 2002/05/20 22:29:52 ssb Exp $
+// $Id: Remote.php,v 1.21 2002/05/21 01:20:24 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -104,7 +104,7 @@ class PEAR_Remote extends PEAR
             if (extension_loaded("xmlrpc")) {
                 break;
             }
-            return $this->raiseError("xmlrpc extension not loaded");
+            return $this->raiseError("unable to load xmlrpc extension");
         } while (false);
         $params = func_get_args();
         array_shift($params);

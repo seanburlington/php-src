@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.43 2003/02/01 22:19:04 helly Exp $
+dnl $Id: config.m4,v 1.44 2003/02/09 19:57:50 sniper Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -84,7 +84,6 @@ AC_ARG_WITH(gdbm,
           AC_DEFINE_UNQUOTED(GDBM_INCLUDE_FILE, "$THIS_INCLUDE", [ ])
           AC_DEFINE(DBA_GDBM, 1, [ ]) 
           THIS_LIBS=gdbm
-          break
         ])
       ])
     fi
@@ -302,6 +301,7 @@ AC_ARG_WITH(dbm,
       elif test -f "$i/include/gdbm/dbm.h"; then
         THIS_PREFIX=$i
         THIS_INCLUDE=$i/include/gdbm/dbm.h
+        break
       fi
     done
 

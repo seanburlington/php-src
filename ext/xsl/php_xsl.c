@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.15 2003/12/09 20:12:39 rrichards Exp $ */
+/* $Id: php_xsl.c,v 1.16 2003/12/10 22:32:36 chregu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -247,6 +247,16 @@ static void xsl_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs, int t
 	fci.function_table = EG(function_table);
 	
 	obj = valuePop(ctxt);
+	if (obj->stringval == NULL) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Handler name must be a string");
+		xmlXPathFreeObject(obj);
+		for (i = 0; i < nargs - 1; i++) {
+			zval_ptr_dtor(&args[i]);
+		}
+		efree(args);
+		efree(fci.params);
+		return; 
+	}
 	INIT_PZVAL(&handler);
 	ZVAL_STRING(&handler, obj->stringval, 1);
 	xmlXPathFreeObject(obj);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.174.2.15 2003/05/30 14:08:38 iliaa Exp $ */
+/* $Id: php_mysql.c,v 1.174.2.16 2003/05/30 19:16:58 georg Exp $ */
 
 /* TODO:
  *
@@ -562,7 +562,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 				break;
 		}
 		/* disable local infile option for open_basedir */
-		if (strlen(PG(open_basedir))) {
+		if (PG(open_basedir)) {
 			client_flags ^= CLIENT_LOCAL_FILES;
 		}
 

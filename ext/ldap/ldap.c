@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.112 2001/12/25 14:36:06 venaas Exp $ */
+/* $Id: ldap.c,v 1.113 2001/12/26 18:40:57 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -263,7 +263,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.112 2001/12/25 14:36:06 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.113 2001/12/26 18:40:57 venaas Exp $" );
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -636,7 +636,7 @@ static void php_ldap_do_search(INTERNAL_FUNCTION_PARAMETERS, int scope)
 	if (Z_TYPE_PP(link) == IS_ARRAY) {
 		int i, nlinks, nbases, nfilters, *rcs;
 		ldap_linkdata **lds;
-		zval **entry;
+		zval **entry, *resource;
 		
 		nlinks = zend_hash_num_elements(Z_ARRVAL_PP(link));
 		if (nlinks == 0) {
@@ -728,15 +728,17 @@ static void php_ldap_do_search(INTERNAL_FUNCTION_PARAMETERS, int scope)
 
 		/* Collect results from the searches */
 		for (i=0; i<nlinks; i++) {
+			MAKE_STD_ZVAL(resource);
 			if (rcs[i] != -1) {
 				rcs[i] = ldap_result(lds[i]->link, LDAP_RES_ANY, 1 /* LDAP_MSG_ALL */, NULL, &ldap_res);
 			}
 			if (rcs[i] != -1) {
-				add_next_index_long(return_value, zend_list_insert(ldap_res, le_result));
+				ZEND_REGISTER_RESOURCE(resource, ldap_res, le_result);
+				add_next_index_zval(return_value, resource);
 			} else {
 				add_next_index_bool(return_value, 0);
 			}
-		};
+		}
 		efree(lds);
 		efree(rcs);
 		return;

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.1 1999/04/07 21:02:38 zeev Exp $ */
+/* $Id: php.h,v 1.2 1999/04/09 19:09:29 zeev Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -474,6 +474,39 @@ extern PHPAPI php3_ini_structure php3_ini;
 extern int yylineno;
 #endif
 extern void phprestart(FILE *input_file);
+
+
+/* Finding offsets of elements within structures.
+ * Taken from the Apache code, which in turn, was taken from X code...
+ */
+
+#if defined(CRAY) || (defined(__arm) && !defined(LINUX))
+#ifdef __STDC__
+#define XtOffset(p_type,field) _Offsetof(p_type,field)
+#else
+#ifdef CRAY2
+#define XtOffset(p_type,field) \
+    (sizeof(int)*((unsigned int)&(((p_type)NULL)->field)))
+
+#else /* !CRAY2 */
+
+#define XtOffset(p_type,field) ((unsigned int)&(((p_type)NULL)->field))
+
+#endif /* !CRAY2 */  
+#endif /* __STDC__ */
+#else /* ! (CRAY || __arm) */
+
+#define XtOffset(p_type,field) \
+    ((long) (((char *) (&(((p_type)NULL)->field))) - ((char *) NULL)))
+
+#endif /* !CRAY */
+
+#ifdef offsetof
+#define XtOffsetOf(s_type,field) offsetof(s_type,field)
+#else
+#define XtOffsetOf(s_type,field) XtOffset(s_type*,field)
+#endif
+
 
 #endif
 

@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.13 2003/07/12 06:50:32 moriyoshi Exp $ */
+/* $Id: proc_open.c,v 1.14 2003/07/12 06:54:03 moriyoshi Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -740,7 +740,6 @@ PHP_FUNCTION(proc_open)
 	if (pipes != NULL) {
 		zval_dtor(pipes);
 	}
-	MAKE_STD_ZVAL(pipes);
 	array_init(pipes);
 
 	/* clean up all the child ends and then open streams on the parent

@@ -1,6 +1,10 @@
 <?php
-/* $Id: ext_skel.php,v 1.1.2.1 2003/01/31 01:01:51 fmk Exp $ */
+/* $Id: ext_skel_win32.php,v 1.1.2.1 2003/01/31 18:50:41 fmk Exp $ */
 
+if (php_sapi_name() != "cli") {
+	echo "Please run this script using the CLI version of PHP\n";
+	exit;
+}
 /*
 	This script can be used on Win32 systems
 	
@@ -21,15 +25,19 @@ array_shift($argv);
 system("sh ext_skel " . implode(" ", $argv));
 
 $extname = "";
+$skel = "skeleton";
 foreach($argv as $arg) {
 	if (strtolower(substr($arg, 0, 9)) == "--extname") {
 		$extname = substr($arg, 10);
 	}
+	if (strtolower(substr($arg, 0, 6)) == "--skel") {
+		$skel = substr($arg, 7);
+	}
 }
 
-$fp = fopen("skeleton/skeleton.dsp", "rb");
+$fp = fopen("$skel/skeleton.dsp", "rb");
 if ($fp) {
-	$dsp_file = fread($fp, filesize("skeleton/skeleton.dsp"));
+	$dsp_file = fread($fp, filesize("$skel/skeleton.dsp"));
 	fclose($fp);
 	
 	$dsp_file = str_replace("extname", $extname, $dsp_file);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.90 2001/12/20 14:40:43 mfischer Exp $ */
+/* $Id: php_domxml.c,v 1.91 2002/01/03 13:20:04 mfischer Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1604,7 +1604,7 @@ PHP_FUNCTION(domxml_node_unlink_node)
 PHP_FUNCTION(domxml_node_add_child)
 {
 	zval *id, *rv, *node;
-	xmlNodePtr child, nodep;
+	xmlNodePtr child, nodep, new_child;
 	int ret;
 
 	DOMXML_GET_THIS_OBJ(nodep, id, le_domxmlnodep);
@@ -1615,7 +1615,12 @@ PHP_FUNCTION(domxml_node_add_child)
 
 	DOMXML_GET_OBJ(child, node, le_domxmlnodep);
 
-	child = xmlAddChild(nodep, child);
+	if (NULL == (new_child = xmlCopyNode(child, 1))) {
+		php_error(E_WARNING, "%s() unable to clone node", get_active_function_name(TSRMLS_C));
+		RETURN_FALSE;
+	}
+
+	child = xmlAddChild(nodep, new_child);
 
 	if (NULL == child) {
 		php_error(E_WARNING, "%s() couldn't add child", get_active_function_name(TSRMLS_C));

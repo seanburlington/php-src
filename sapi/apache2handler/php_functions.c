@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.1.2.9 2003/07/10 22:45:34 sniper Exp $ */
+/* $Id: php_functions.c,v 1.1.2.10 2003/11/11 20:04:19 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_smart_str.h"
@@ -259,8 +259,8 @@ PHP_FUNCTION(apache_setenv)
 
 	ctx = SG(server_context);
 
+	r = ctx->r;
 	if (arg_count == 3 && Z_STRVAL_PP(walk_to_top)) {
-        r = ctx->r;
 		while(r->prev) {
 			r = r->prev;
 		}	

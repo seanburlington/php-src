@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.67 2004/01/08 17:32:40 sniper Exp $ */
+/* $Id: php_pgsql.h,v 1.68 2005/02/14 23:36:16 edink Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -98,6 +98,7 @@ PHP_FUNCTION(pg_field_name);
 PHP_FUNCTION(pg_field_num);
 PHP_FUNCTION(pg_field_size);
 PHP_FUNCTION(pg_field_type);
+PHP_FUNCTION(pg_field_type_oid);
 PHP_FUNCTION(pg_field_prtlen);
 PHP_FUNCTION(pg_field_is_null);
 /* async message functions */

@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.234 2004/01/15 15:06:57 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.235 2004/01/21 12:30:05 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -784,7 +784,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.234 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.235 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -2196,7 +2196,7 @@ static int oci_lobgetlen(oci_connection *connection, oci_descriptor *mydescr, ub
 		}
 	}
 	
-	oci_debug("OCILobGetLen: len=%d",loblen);
+	oci_debug("OCILobGetLen: len=%d",*loblen);
 
 	return 0;
 }
@@ -4221,6 +4221,7 @@ PHP_FUNCTION(oci_lob_write)
 		}
 		
 		if (zend_get_parameters_ex(2, &data, &length) == SUCCESS) {
+			convert_to_string_ex(data);
 			convert_to_long_ex(length);
 			write_length = Z_LVAL_PP(length);
 		} else if (zend_get_parameters_ex(1, &data) == SUCCESS) {
@@ -4389,7 +4390,7 @@ PHP_FUNCTION(oci_lob_truncate)
 			convert_to_long_ex(length);	
 			trim_length = Z_LVAL_PP(length);
 		} else {
-			WRONG_PARAM_COUNT;
+			trim_length = 0;
 		}
 
 		if (trim_length < 0) {

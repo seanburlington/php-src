@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.90 2003/03/10 14:50:14 ddhill Exp $ */
+/* $Id: php_globals.h,v 1.91 2003/05/07 01:02:23 helly Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -140,6 +140,12 @@ struct _php_core_globals {
 	zend_bool allow_url_fopen;
 	zend_bool always_populate_raw_post_data;
 	zend_bool report_zend_debug;
+
+	char *last_error_message;
+	char *last_error_file;
+	int  last_error_lineno;
+	error_handling_t  error_handling;
+	zend_class_entry *exception_class;
 };
 
 

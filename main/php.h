@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.186 2003/04/19 18:35:31 sas Exp $ */
+/* $Id: php.h,v 1.187 2003/05/07 01:02:23 helly Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -272,6 +272,14 @@ int Debug(char *format, ...);
 int cfgparse(void);
 
 #define php_error zend_error
+
+typedef enum {
+	EH_NORMAL = 0,
+	EH_SUPPRESS,
+	EH_THROW
+} error_handling_t;
+
+PHPAPI void php_set_error_handling(error_handling_t error_handling, zend_class_entry *exception_class TSRMLS_DC);
 
 PHPAPI void php_verror(const char *docref, const char *params, int type, const char *format, va_list args TSRMLS_DC) ;
 

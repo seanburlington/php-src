@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.116 2004/07/25 07:06:53 helly Exp $ */
+/* $Id: php_reflection.c,v 1.117 2004/07/25 18:20:33 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -593,6 +593,9 @@ static void _function_string(string *str, zend_function *fptr, char* indent TSRM
 		case ZEND_ACC_PROTECTED:
 			string_printf(str, "protected ");
 			break;
+		default:
+		    string_printf(str, "<visibilty error> ");
+		    break;
 	}
 
 	string_printf(str, fptr->common.scope ? "method " : "function ");

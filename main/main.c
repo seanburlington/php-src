@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.250 2000/05/21 18:05:04 andi Exp $ */
+/* $Id: main.c,v 1.251 2000/05/22 23:24:55 hholzgra Exp $ */
 
 
 #include <stdio.h>
@@ -1089,29 +1089,31 @@ static void php_build_argv(char *s, zval *track_vars_array ELS_DC PLS_DC)
 	INIT_PZVAL(arr);
 
 	/* Prepare argv */
-	ss = s;
-	while (ss) {
-		space = strchr(ss, '+');
-		if (space) {
-			*space = '\0';
-		}
-		/* auto-type */
-		ALLOC_ZVAL(tmp);
-		tmp->type = IS_STRING;
-		tmp->value.str.len = strlen(ss);
-		tmp->value.str.val = estrndup(ss, tmp->value.str.len);
-		INIT_PZVAL(tmp);
-		count++;
-		if (zend_hash_next_index_insert(arr->value.ht, &tmp, sizeof(pval *), NULL)==FAILURE) {
-			if (tmp->type == IS_STRING) {
-				efree(tmp->value.str.val);
+	if(*s) {
+		ss = s;
+		while (ss) {
+			space = strchr(ss, '+');
+			if (space) {
+				*space = '\0';
 			}
-		}
-		if (space) {
-			*space = '+';
-			ss = space + 1;
-		} else {
-			ss = space;
+			/* auto-type */
+			ALLOC_ZVAL(tmp);
+			tmp->type = IS_STRING;
+			tmp->value.str.len = strlen(ss);
+			tmp->value.str.val = estrndup(ss, tmp->value.str.len);
+			INIT_PZVAL(tmp);
+			count++;
+			if (zend_hash_next_index_insert(arr->value.ht, &tmp, sizeof(pval *), NULL)==FAILURE) {
+				if (tmp->type == IS_STRING) {
+					efree(tmp->value.str.val);
+				}
+			}
+			if (space) {
+				*space = '+';
+				ss = space + 1;
+			} else {
+				ss = space;
+			}
 		}
 	}
 

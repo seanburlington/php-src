@@ -24,7 +24,7 @@
 # +----------------------------------------------------------------------+
 
 #
-# $Id: Makefile.in,v 1.12 1999/04/21 21:26:10 ssb Exp $
+# $Id: Makefile.in,v 1.13 1999/04/21 22:05:45 ssb Exp $
 #
 
 prefix = @prefix@
@@ -69,7 +69,7 @@ OBJS = main.o internal_functions.o snprintf.o php3_sprintf.o \
        php_ini.o
 
 FUNCTIONS_SOURCE = functions/apache.c functions/fhttpd.c \
-       functions/crypt.c functions/db.c functions/dl.c functions/filepro.c \
+       functions/crypt.c functions/db.c functions/dl.c \
        functions/head.c functions/imap.c functions/mime.c \
        functions/msql.c \
        functions/oracle.c functions/oci8.c functions/pgsql.c \

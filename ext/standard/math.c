@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.85 2002/06/18 00:14:52 edink Exp $ */
+/* $Id: math.c,v 1.86 2002/08/24 01:19:28 helly Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -772,8 +772,7 @@ _php_math_zvaltobase(zval *arg, int base TSRMLS_DC)
 
 		/* Don't try to convert +/- infinity */
 		if (fvalue == HUGE_VAL || fvalue == -HUGE_VAL) {
-			php_error(E_WARNING, "Number too large in %s() call",
-					  get_active_function_name(TSRMLS_C));
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Number too large");
 			return empty_string;
 		}
 

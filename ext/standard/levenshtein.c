@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.24 2002/07/08 12:52:22 derick Exp $ */
+/* $Id: levenshtein.c,v 1.25 2002/08/24 01:19:28 helly Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -138,7 +138,7 @@ PHP_FUNCTION(levenshtein)
 	}	
 
 	if(distance<0) {
-		php_error(E_WARNING, "%s(): Argument string(s) too long", get_active_function_name(TSRMLS_C));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Argument string(s) too long");
 	}
 	
 	RETURN_LONG(distance);

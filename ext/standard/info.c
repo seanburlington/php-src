@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.192 2002/08/14 23:48:52 helly Exp $ */
+/* $Id: info.c,v 1.193 2002/08/24 01:19:28 helly Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -36,6 +36,11 @@
 #include "zend_highlight.h"
 #ifdef HAVE_SYS_UTSNAME_H
 #include <sys/utsname.h>
+#endif
+
+#if HAVE_MBSTRING
+#include "ext/mbstring/mbstring.h"
+ZEND_EXTERN_MODULE_GLOBALS(mbstring)
 #endif
 
 #if HAVE_ICONV
@@ -225,6 +230,15 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 	if (SG(default_charset)) {
 		charset = SG(default_charset);
 	}
+#if HAVE_MBSTRING
+	if (php_ob_handler_used("mb_output_handler" TSRMLS_CC)) {
+		if (MBSTRG(current_http_output_encoding) == mbfl_no_encoding_pass) {
+			charset = "US-ASCII";
+		} else {
+			charset = mbfl_no2preferred_mime_name(MBSTRG(current_http_output_encoding));
+		}
+	}
+#endif                      
 #if HAVE_ICONV
 	if (php_ob_handler_used("ob_iconv_handler" TSRMLS_CC)) {
 		charset = ICONVG(output_encoding);

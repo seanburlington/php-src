@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.58 2002/07/08 12:52:22 derick Exp $ */
+/* $Id: browscap.c,v 1.59 2002/08/24 01:19:27 helly Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -149,7 +149,7 @@ PHP_MINIT_FUNCTION(browscap)
 
 		fh.handle.fp = VCWD_FOPEN(browscap, "r");
 		if (!fh.handle.fp) {
-			php_error(E_CORE_WARNING, "%s(): Cannot open '%s' for reading", get_active_function_name(TSRMLS_C), browscap);
+			php_error_docref(NULL TSRMLS_CC, E_CORE_WARNING, "Cannot open '%s' for reading", browscap);
 			return FAILURE;
 		}
 		fh.filename = browscap;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.80 2002/09/25 12:38:45 sas Exp $ */
+/* $Id: mod_files.c,v 1.81 2002/09/30 10:18:57 wez Exp $ */
 
 #include "php.h"
 
@@ -38,6 +38,10 @@
 
 #include <fcntl.h>
 #include <errno.h>
+
+#if HAVE_UNISTD_H
+#include <unistd.h>
+#endif
 
 #include "php_session.h"
 #include "mod_files.h"

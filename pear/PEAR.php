@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.59 2003/04/03 23:10:10 ssb Exp $
+// $Id: PEAR.php,v 1.60 2003/05/11 09:33:04 mj Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -63,7 +63,7 @@ ini_set('track_errors', true);
  * destructor, use error_log(), syslog() or something similar.
  *
  * IMPORTANT! To use the emulated destructors you need to create the
- * objects by reference, ej: $obj =& new PEAR_child;
+ * objects by reference: $obj =& new PEAR_child;
  *
  * @since PHP 4.0.2
  * @author Stig Bakken <ssb@php.net>

@@ -1,6 +1,6 @@
 <!-- 
     $Source: /repository/php-src/ext/mnogosearch/Attic/test.php,v $
-    $Id: test.php,v 1.18 2001/03/01 14:51:11 gluke Exp $ 
+    $Id: test.php,v 1.19 2001/03/02 11:41:34 gluke Exp $ 
 -->
 
 <html>
@@ -59,10 +59,14 @@
 
 //	if ((! Udm_Load_Ispell_Data($udm,UDM_ISPELL_TYPE_AFFIX,'en','/opt/udm/ispell/en.aff',0)) ||
 //         (! Udm_Load_Ispell_Data($udm,UDM_ISPELL_TYPE_SPELL,'en','/opt/udm/ispell/en.dict',1))) {
-//		printf("Error #%d: '%s'\n",Udm_Errno($udm),Udm_Error($udm));
+//		printf("Error loading ispell data from files<br>\n");
 //		exit;
 //	}
 
+	if (! Udm_Load_Ispell_Data($udm,UDM_ISPELL_TYPE_SERVER,'','',1)) {
+		printf("Error loading ispell data from server<br>\n");
+		exit;
+	}
 
 // Stage 3: add search limits
 //	Udm_Add_Search_Limit($udm,UDM_LIMIT_URL,"http://www.mydomain.com/%");

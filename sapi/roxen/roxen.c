@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.37 2000/09/08 14:43:57 zeev Exp $ */
+/* $Id: roxen.c,v 1.38 2000/10/29 16:14:27 sas Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -233,8 +233,7 @@ php_roxen_low_ub_write(const char *str, uint str_length) {
   pop_stack();
   if(sent_bytes != str_length) {
     /* This means the connection is closed. Dead. Gone. *sniff*  */
-    PG(connection_status) = PHP_CONNECTION_ABORTED;
-    zend_bailout();
+    php_handle_aborted_connection();
   }
   return sent_bytes;
 }
@@ -447,7 +446,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.37 2000/09/08 14:43:57 zeev Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.38 2000/10/29 16:14:27 sas Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());

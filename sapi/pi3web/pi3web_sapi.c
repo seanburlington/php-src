@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.10 2000/09/08 14:43:56 zeev Exp $ */
+/* $Id: pi3web_sapi.c,v 1.11 2000/10/29 16:14:27 sas Exp $ */
 
 #if WIN32|WINNT
 #  include <windows.h>
@@ -80,7 +80,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=5 width=600>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.10 2000/09/08 14:43:56 zeev Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.11 2000/10/29 16:14:27 sas Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -145,6 +145,9 @@ static int zend_pi3web_ub_write(const char *str, uint str_length)
 
 	if ( !IWasLoaded ) return 0;
 	cb->WriteClient(cb->ConnID, (char *) str, &num_bytes, 0 );
+
+	if (num_bytes != str_length)
+		php_handle_aborted_connection();
 	return num_bytes;
 }
 

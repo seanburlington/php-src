@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.447 2003/06/16 08:32:35 stas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.448 2003/06/23 16:06:37 wez Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1152,7 +1152,7 @@ fi
 
 PHP_ADD_SOURCES_X(Zend, zend_execute.c,,PHP_GLOBAL_OBJS,,$flag)
 
-PHP_ADD_BUILD_DIR(main)
+PHP_ADD_BUILD_DIR(main main/streams)
 PHP_ADD_BUILD_DIR(regex)
 PHP_ADD_BUILD_DIR(sapi/$PHP_SAPI sapi/cli)
 PHP_ADD_BUILD_DIR(TSRM)

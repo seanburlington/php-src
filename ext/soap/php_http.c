@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.39 2004/01/30 16:32:53 dmitry Exp $ */
+/* $Id: php_http.c,v 1.40 2004/02/02 21:27:13 helly Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -59,6 +59,8 @@ static int stream_alive(php_stream *stream  TSRMLS_DC)
 static void proxy_authentication(zval* this_ptr, smart_str* soap_headers)
 {
 	zval **login, **password;
+	TSRMLS_FETCH();
+
 	if (zend_hash_find(Z_OBJPROP_P(this_ptr), "_proxy_login", sizeof("_proxy_login"), (void **)&login) == SUCCESS) {
 		char* buf;
 		int len;

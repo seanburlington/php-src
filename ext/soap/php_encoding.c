@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.44 2004/02/02 17:39:09 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.45 2004/02/02 21:27:13 helly Exp $ */
 
 #include <time.h>
 
@@ -2329,13 +2329,14 @@ static xmlNodePtr check_and_resolve_href(xmlNodePtr data)
 		href = get_attribute_ex(data->properties, "ref", SOAP_1_2_ENC_NAMESPACE);
 		if (href) {
 			char* id;
+            xmlNodePtr ret;
 
 			if (href->children->content[0] == '#') {
 				id = href->children->content+1;
 			} else {
 				id = href->children->content;
 			}
-			xmlNodePtr ret = get_node_with_attribute_recursive_ex(data->doc->children, NULL, NULL, "id", id, SOAP_1_2_ENC_NAMESPACE);
+			ret = get_node_with_attribute_recursive_ex(data->doc->children, NULL, NULL, "id", id, SOAP_1_2_ENC_NAMESPACE);
 			if (!ret) {
 				php_error(E_ERROR,"SOAP-ERROR: Encoding: Unresolved reference '%s'",href->children->content);
 			} else if (ret == data) {

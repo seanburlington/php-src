@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.37 2002/02/28 08:26:46 sebastian Exp $ */
+/* $Id: pack.c,v 1.37.2.1 2002/08/17 16:47:54 iliaa Exp $ */
 
 #include "php.h"
 
@@ -209,6 +209,9 @@ PHP_FUNCTION(pack)
 				break;
 
 			default:
+				efree(argv);
+				efree(formatcodes);
+				efree(formatargs);
 				php_error(E_WARNING, "pack type %c: unknown format code", code);
 				RETURN_FALSE;
 		}
@@ -518,7 +521,7 @@ PHP_FUNCTION(unpack)
 	inputpos = 0;
 
 	if (array_init(return_value) == FAILURE)
-		return;
+		RETURN_FALSE;
 
 	while (formatlen-- > 0) {
 		char type = *(format++);
@@ -809,6 +812,7 @@ PHP_FUNCTION(unpack)
 				break;
 			} else {
 				php_error(E_WARNING, "pack type %c: not enough input, need %d, have %d", type, size, inputlen - inputpos);
+				zval_dtor(return_value);
 				RETURN_FALSE;
 			}
 		}

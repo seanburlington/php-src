@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.26.2.1 2004/10/08 14:53:39 chregu Exp $ */
+/* $Id: userspace.c,v 1.26.2.2 2005/03/11 11:42:10 hyanantha Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -712,7 +712,7 @@ static int statbuf_from_array(zval *array, php_stream_statbuf *ssb TSRMLS_DC)
 	STAT_PROP_ENTRY(rdev);
 #endif
 	STAT_PROP_ENTRY(size);
-#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
+#ifdef NETWARE
 	STAT_PROP_ENTRY_EX(atime, atime.tv_sec);
 	STAT_PROP_ENTRY_EX(mtime, mtime.tv_sec);
 	STAT_PROP_ENTRY_EX(ctime, ctime.tv_sec);

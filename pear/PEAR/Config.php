@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.28.2.2 2002/05/30 09:01:32 ssb Exp $
+// $Id: Config.php,v 1.28.2.3 2002/06/01 18:39:36 dickmann Exp $
 
 require_once 'PEAR.php';
 
@@ -188,7 +188,7 @@ class PEAR_Config extends PEAR
             'group' => 'Advanced',
             ),
         'umask' => array(
-            'type' => 'int',
+            'type' => 'mask',
             'default' => PEAR_DEFAULT_UMASK,
             'doc' => 'umask used when creating files (Unix-like systems only)',
             'prompt' => 'Unix file mask',
@@ -485,6 +485,10 @@ class PEAR_Config extends PEAR
                     $data[$key] = base64_encode($data[$key]);
                     break;
                 }
+                case 'mask': {
+                    $data[$key] = octdec($data[$key]);
+                    break;
+                }
             }
         }
         return true;
@@ -517,6 +521,10 @@ class PEAR_Config extends PEAR
             switch ($type) {
                 case 'password': {
                     $data[$key] = base64_decode($data[$key]);
+                    break;
+                }
+                case 'mask': {
+                    $data[$key] = decoct($data[$key]);
                     break;
                 }
             }
@@ -577,10 +585,9 @@ class PEAR_Config extends PEAR
         }
         extract($this->configuration_info[$key]);
         switch ($type) {
-            case 'integer': {
+            case 'integer': 
                 $value = (int)$value;
                 break;
-            }
             case 'set': {
                 // If a valid_set is specified, require the value to
                 // be in the set.  If there is no valid_set, accept

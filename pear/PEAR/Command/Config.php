@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.15.2.2 2002/05/30 10:14:57 dickmann Exp $
+// $Id: Config.php,v 1.15.2.3 2002/06/01 18:39:36 dickmann Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";
@@ -94,12 +94,8 @@ in.  The default layer is "user".
             $value = $this->config->get($key, @$params[0]);
             if ($type == 'password' && $value) {
                 $value = '********';
-            } elseif ($key == 'umask') {
-                $value = sprintf("%03o", $value);
             }
-            if ($value === null || $value === '') {
-                $value = '<not set>';
-            } elseif ($value === false) {
+            if ($value === false) {
                 $value = 'false';
             } elseif ($value === true) {
                 $value = 'true';
@@ -137,11 +133,11 @@ in.  The default layer is "user".
         $failmsg = '';
         if (sizeof($params) < 2 || sizeof($params) > 3) {
             $failmsg .= "config-set expects 2 or 3 parameters";
-            break;
+            return PEAR::raiseError($failmsg);
         }
         if ($error = $this->_checkLayer(@$params[2])) {
             $failmsg .= $error;
-            break;
+            return PEAR::raiseError($failmsg);
         }
         if (!call_user_func_array(array(&$this->config, 'set'), $params))
         {

@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.12.2.6 2002/05/31 23:09:03 ssb Exp $
+  $Id: CLI.php,v 1.12.2.7 2002/06/01 18:39:36 dickmann Exp $
 */
 
 require_once "PEAR.php";
@@ -385,6 +385,9 @@ class PEAR_Frontend_CLI extends PEAR
                 
                 foreach($data['data'] as $group) {
                     foreach($group as $value) {
+                        if ($value === null || $value === '') {
+                            $value = "<not set>";
+                        };
                         $this->_tableRow($value, null, array(1 => array('wrap' => 55)));
                     }
                 };

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.108 2000/04/26 01:16:57 sterling Exp $ */
+/* $Id: string.c,v 1.109 2000/04/27 14:41:18 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2511,7 +2511,7 @@ PHP_FUNCTION(substr_count)
 		php_error(E_WARNING, "Empty substring");
 		RETURN_FALSE;
 	} else if ((*needle)->value.str.len == 1) {
-		// Special optimized case to avoid calls to php_memnstr
+		/* Special optimized case to avoid calls to php_memnstr(). */
 		for (i = 0, p = (*haystack)->value.str.val, 
 		     length = (*haystack)->value.str.len, cmp = (*needle)->value.str.val[0]; 
 		     i < length; i++) {

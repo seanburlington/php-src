@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.21 2002/09/11 16:17:33 sander Exp $
+dnl $Id: config.m4,v 1.22 2002/09/19 04:18:20 sas Exp $
 dnl
 
 AC_DEFUN(PHP_TEMP_LDFLAGS,[
@@ -222,7 +222,7 @@ AC_ARG_WITH(cdb,
 
     for LIB in cdb c; do
       PHP_TEMP_LDFLAGS(-L$THIS_PREFIX/lib,[
-      AC_CHECK_LIB($LIB, cdb_bread, [AC_DEFINE(DBA_CDB,1,[ ]) THIS_LIBS=$LIB])
+      AC_CHECK_LIB($LIB, cdb_read, [AC_DEFINE(DBA_CDB,1,[ ]) THIS_LIBS=$LIB])
       ])
     done
     

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.8 2002/03/12 16:25:11 sas Exp $
+dnl $Id: config.m4,v 1.9 2003/02/12 18:34:20 mlwmohawk Exp $
 dnl
 
 PHP_ARG_WITH(msession, for msession support,
@@ -29,6 +29,8 @@ if test "$PHP_MSESSION" != "no"; then
 	PHOENIX_INCLUDE="-I$PHOENIX_DIR"
 	PHP_SUBST(PHOENIX_LIB)
 
+  	PHP_REQUIRE_CXX
   	PHP_NEW_EXTENSION(msession, msession.c, $ext_shared)
+  	PHP_ADD_LIBRARY(stdc++)
 fi
 

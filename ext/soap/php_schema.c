@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.c,v 1.35 2004/01/30 15:07:19 dmitry Exp $ */
+/* $Id: php_schema.c,v 1.36 2004/02/02 17:39:09 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -2009,6 +2009,13 @@ static void schema_attribute_fixup(sdlPtr sdl, sdlAttributePtr attr)
 				}
 				attr->encode = (*tmp)->encode;
 			}
+		} 
+		if (attr->name == NULL && attr->ref != NULL) {
+			char *name, *ns;
+			parse_namespace(attr->ref, &name, &ns);
+			attr->name = strdup(name);
+			if (name) {efree(name);}
+			if (ns) {efree(ns);}
 		}
 		efree(attr->ref);
 		attr->ref = NULL;

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_xml.c,v 1.17 2004/01/30 15:07:19 dmitry Exp $ */
+/* $Id: php_xml.c,v 1.18 2004/02/02 17:39:09 dmitry Exp $ */
 
 #include "php_soap.h"
 
@@ -182,7 +182,7 @@ xmlNodePtr get_node_with_attribute_recursive_ex(xmlNodePtr node, char *name, cha
 
 int parse_namespace(const char *inval, char **value, char **namespace)
 {
-	char *found = strchr(inval, ':');
+	char *found = strrchr(inval, ':');
 
 	if (found != NULL && found != inval) {
 		(*namespace) = estrndup(inval, found - inval);

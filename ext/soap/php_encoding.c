@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.43 2004/01/30 15:07:18 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.44 2004/02/02 17:39:09 dmitry Exp $ */
 
 #include <time.h>
 
@@ -2304,7 +2304,14 @@ xmlNodePtr sdl_guess_convert_xml(encodeTypePtr enc, zval *data, int style, xmlNo
 static xmlNodePtr check_and_resolve_href(xmlNodePtr data)
 {
 	if (data && data->properties) {
-		xmlAttrPtr href = get_attribute(data->properties, "href");
+		xmlAttrPtr href;
+		
+		href = data->properties;
+		while (1) {
+			href = get_attribute(href, "href");
+		  if (href == NULL || href->ns == NULL) {break;}
+		  href = href->next;
+		}
 		if (href) {
 			/*  Internal href try and find node */
 			if (href->children->content[0] == '#') {

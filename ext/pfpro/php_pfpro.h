@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pfpro.h,v 1.4 2000/07/24 17:57:03 jdonagher Exp $ */
+/* $Id: php_pfpro.h,v 1.5 2000/08/15 09:37:35 david Exp $ */
 
 #ifndef PHP_PFPRO_H
 #define PHP_PFPRO_H
@@ -48,10 +48,10 @@ typedef struct {
 	int le_pfpro;
 	int initialised;
 	char *defaulthost;
-	char *defaultport;
-	char *defaulttimeout;
+	int defaultport;
+	int defaulttimeout;
 	char *proxyaddress;
-	char *proxyport;
+	int proxyport;
 	char *proxylogon;
 	char *proxypassword;
 } php_pfpro_globals;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.95 2001/08/06 03:50:48 sas Exp $ */
+/* $Id: php_mysql.c,v 1.96 2001/08/11 16:39:03 zeev Exp $ */
 
 
 /* TODO:
@@ -182,7 +182,7 @@ function_entry mysql_functions[] = {
 /* {{{ mysql_module_entry
  */
 zend_module_entry mysql_module_entry = {
-	"mysql", mysql_functions, PHP_MINIT(mysql), PHP_MSHUTDOWN(mysql), PHP_RINIT(mysql), PHP_RSHUTDOWN(mysql), 
+	"mysql", mysql_functions, ZEND_MODULE_STARTUP_N(mysql), PHP_MSHUTDOWN(mysql), PHP_RINIT(mysql), PHP_RSHUTDOWN(mysql), 
 			 PHP_MINFO(mysql), STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
@@ -308,7 +308,7 @@ static void php_mysql_init_globals(zend_mysql_globals *mysql_globals)
 
 /* {{{ PHP_MINIT_FUNCTION
  */
-PHP_MINIT_FUNCTION(mysql)
+ZEND_MODULE_STARTUP_D(mysql)
 {
 	ZEND_INIT_MODULE_GLOBALS(mysql, php_mysql_init_globals, NULL);
 

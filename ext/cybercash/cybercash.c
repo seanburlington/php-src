@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cybercash.c,v 1.13 2001/06/06 13:05:43 rasmus Exp $ */
+/* $Id: cybercash.c,v 1.14 2001/08/11 16:38:21 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -111,8 +111,8 @@ PHP_FUNCTION(cybercash_encr)
 
 	if (!errcode) {
 		add_assoc_stringl(return_value, "outbuff", outbuff, outLth, 0);
-		add_assoc_long(return_value,"outLth",outLth);
-		add_assoc_stringl(return_value,"macbuff",macbuff,20,0);
+		add_assoc_long(return_value,"outLth", outLth);
+		add_assoc_stringl(return_value,"macbuff", macbuff, 20, 0);
 	} else {
 		efree(outbuff);
 		efree(macbuff);
@@ -124,7 +124,7 @@ PHP_FUNCTION(cybercash_encr)
    Cybercash decrypt */
 PHP_FUNCTION(cybercash_decr)
 {
-	zval **wmk,**sk,**inbuff;
+	zval **wmk, **sk, **inbuff;
 	unsigned char *outbuff, *macbuff;
 	unsigned int outAlloc, outLth;
 	long errcode;

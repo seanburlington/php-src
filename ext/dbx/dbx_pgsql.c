@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dbx_pgsql.c,v 1.10 2001/08/07 19:09:58 fmk Exp $ */
+/* $Id: dbx_pgsql.c,v 1.11 2001/08/11 16:38:24 zeev Exp $ */
 
 #include "dbx.h"
 #include "php_dbx.h"
@@ -44,7 +44,7 @@ int dbx_pgsql_connect(zval ** rv, zval ** host, zval ** db, zval ** username, zv
 		len += Z_STRLEN_PP(username)+Z_STRLEN_PP(password)+35;
 		connstring = (char *)emalloc(len+1);
 		sprintf(connstring, "host=%s port=%s dbname=%s user=%s password=%s",
-				Z_STRVAL_PP(host),port, Z_STRVAL_PP(db),
+				Z_STRVAL_PP(host), port, Z_STRVAL_PP(db),
 				Z_STRVAL_PP(username), Z_STRVAL_PP(password));
 		ZVAL_STRING(conn_zval, connstring, 1);
 		args[0] = &conn_zval;
@@ -89,7 +89,7 @@ int dbx_pgsql_pconnect(zval ** rv, zval ** host, zval ** db, zval ** username, z
 		len += Z_STRLEN_PP(username)+Z_STRLEN_PP(password)+35;
 		connstring = (char *)emalloc(len+1);
 		sprintf(connstring, "host=%s port=%s dbname=%s user=%s password=%s",
-				Z_STRVAL_PP(host),port, Z_STRVAL_PP(db),
+				Z_STRVAL_PP(host), port, Z_STRVAL_PP(db),
 				Z_STRVAL_PP(username), Z_STRVAL_PP(password));
 		ZVAL_STRING(conn_zval, connstring, 1);
 		args[0] = &conn_zval;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.35 2001/07/17 16:56:51 jason Exp $ */
+/* $Id: ftp.c,v 1.36 2001/08/11 16:38:27 zeev Exp $ */
 
 #include "php.h"
 
@@ -1045,7 +1045,7 @@ ftp_getdata(ftpbuf_t *ftp)
 	struct sockaddr_in	addr;
 	int			size;
 	union ipbox		ipbox;
-	char			arg[sizeof("255,255,255,255,255,255")];
+	char			arg[sizeof("255, 255, 255, 255, 255, 255")];
 
 
 	/* ask for a passive connection if we need one */

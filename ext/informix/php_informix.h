@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_informix.h,v 1.15 2001/07/30 20:50:53 sniper Exp $ */
+/* $Id: php_informix.h,v 1.16 2001/08/11 16:38:56 zeev Exp $ */
 
 #ifndef PHP_INFORMIX_H
 #define PHP_INFORMIX_H
@@ -101,8 +101,8 @@ PHP_FUNCTION(ifxus_tell_slob);
 
 ZEND_BEGIN_MODULE_GLOBALS(ifx)
 	long default_link;
-	long num_links,num_persistent;
-	long max_links,max_persistent;
+	long num_links, num_persistent;
+	long max_links, max_persistent;
 	long allow_persistent;
 	char *default_host, *default_user, *default_password;
 	int connectionid;

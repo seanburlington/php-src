@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: hg_comm.h,v 1.15 2001/06/06 14:47:59 steinm Exp $ */
+/* $Id: hg_comm.h,v 1.16 2001/08/11 16:38:39 zeev Exp $ */
 
 #ifndef HG_COMM_H
 #define HG_COMM_H
@@ -229,10 +229,10 @@ extern int send_dummy(int sockfd, hw_objectID objectID, int msgid, char **attrib
 extern int send_insertanchors(char **text, int *count, char **anchors, char **destrec, int ancount, char **urlprefix, char **bodytag);
 extern char *get_hw_info(hw_connection *conn);
 
-#define send_mvcpdocscoll(sockfd,objectIDs,count,from,dest,mvcp) \
-		send_mvcpdocscollscoll(sockfd,objectIDs,count,from,dest,mvcp,DOCUMENT)
-#define send_mvcpcollscoll(sockfd,objectIDs,count,from,dest,mvcp) \
-		send_mvcpdocscollscoll(sockfd,objectIDs,count,from,dest,mvcp,COLLECTION)
+#define send_mvcpdocscoll(sockfd, objectIDs, count, from, dest, mvcp) \
+		send_mvcpdocscollscoll(sockfd, objectIDs, count, from, dest, mvcp, DOCUMENT)
+#define send_mvcpcollscoll(sockfd, objectIDs, count, from, dest, mvcp) \
+		send_mvcpdocscollscoll(sockfd, objectIDs, count, from, dest, mvcp, COLLECTION)
 
 #endif
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cybermut.c,v 1.4 2001/06/06 13:05:43 rasmus Exp $ */
+/* $Id: cybermut.c,v 1.5 2001/08/11 16:38:21 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -169,7 +169,7 @@ PHP_FUNCTION(cybermut_creerreponsecm)
 	
 	CreerReponseCM( Z_STRVAL_PP(phrase), buf);
 	
-	RETURN_STRING (buf,1);
+	RETURN_STRING (buf, 1);
 }
 /* }}} */
 

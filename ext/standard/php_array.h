@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_array.h,v 1.37 2002/09/10 22:36:43 edink Exp $ */
+/* $Id: php_array.h,v 1.38 2002/09/11 18:13:48 andrey Exp $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H
@@ -76,6 +76,7 @@ PHP_FUNCTION(array_rand);
 PHP_FUNCTION(array_unique);
 PHP_FUNCTION(array_intersect);
 PHP_FUNCTION(array_diff);
+PHP_FUNCTION(array_diff_assoc);
 PHP_FUNCTION(array_sum);
 PHP_FUNCTION(array_filter);
 PHP_FUNCTION(array_map);

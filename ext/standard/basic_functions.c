@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.503 2002/09/09 10:12:44 hyanantha Exp $ */
+/* $Id: basic_functions.c,v 1.504 2002/09/11 18:13:48 andrey Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -797,6 +797,7 @@ function_entry basic_functions[] = {
 	PHP_FE(array_unique,													NULL)
 	PHP_FE(array_intersect,													NULL)
 	PHP_FE(array_diff,														NULL)
+	PHP_FE(array_diff_assoc,														NULL)
 	PHP_FE(array_sum,														NULL)
 	PHP_FE(array_filter,													NULL)
 	PHP_FE(array_map,														NULL)

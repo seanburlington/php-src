@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.9 1999/09/24 19:35:25 sas Exp $ */
+/* $Id: url.c,v 1.10 1999/09/27 15:17:28 andrey Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -139,6 +139,14 @@ url *url_parse(char *string)
 			ret->port = (unsigned short) strtol(result + subs[7].rm_so, NULL, 10);
 		}
 		efree(result);
+	}
+	else {
+		STR_FREE(ret->scheme);
+		STR_FREE(ret->path);
+		STR_FREE(ret->query);
+		STR_FREE(ret->fragment);
+		efree(ret);
+		return NULL;
 	}
 	regfree(&re);
 	return ret;

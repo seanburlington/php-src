@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.78 2003/06/10 20:03:38 imajes Exp $ */
+/* $Id: php_string.h,v 1.79 2003/07/25 01:03:39 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -130,6 +130,7 @@ PHPAPI char *php_str_to_str(char *haystack, int length, char *needle,
 		int needle_len, char *str, int str_len, int *_new_length);
 PHPAPI char *php_trim(char *c, int len, char *what, int what_len, zval *return_value, int mode TSRMLS_DC);
 PHPAPI size_t php_strip_tags(char *rbuf, int len, int *state, char *allow, int allow_len);
+PHPAPI int php_char_to_str_ex(char *str, uint len, char from, char *to, int to_len, pval *result, int case_sensitivity, int *replace_count);
 PHPAPI int php_char_to_str(char *str, uint len, char from, char *to, int to_len, pval *result);
 PHPAPI void php_implode(zval *delim, zval *arr, zval *return_value);
 PHPAPI void php_explode(zval *delim, zval *str, zval *return_value, int limit);

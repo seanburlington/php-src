@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.123 2000/11/02 23:08:05 andi Exp $ */
+/* $Id: file.c,v 1.124 2000/11/15 09:36:21 stas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -339,6 +339,7 @@ PHP_FUNCTION(get_meta_tags)
 
 				/* get the variable value from the content attribute of the meta tag */
 				tmp = php_memnstr(buf_lcase, "content=\"", sizeof("content=\"")-1, buf_lcase + 8191);
+				val = NULL;
 				if(tmp) {
 					tmp = &buf[tmp - buf_lcase];
 					tmp+=9;

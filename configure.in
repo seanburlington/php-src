@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.138 2004/12/08 01:11:43 iliaa Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.139 2004/12/14 08:35:26 derick Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -351,6 +351,7 @@ stdlib.h \
 string.h \
 syslog.h \
 sysexits.h \
+sys/bitypes.h \
 sys/file.h \
 sys/mman.h \
 sys/mount.h \

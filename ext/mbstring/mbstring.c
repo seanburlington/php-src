@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.181 2003/08/03 18:46:34 helly Exp $ */
+/* $Id: mbstring.c,v 1.182 2003/08/03 18:52:09 helly Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -144,7 +144,7 @@ static const enum mbfl_no_encoding php_mb_default_identify_list[] = {
 static const int php_mb_default_identify_list_size = sizeof(php_mb_default_identify_list)/sizeof(enum mbfl_no_encoding);
 /* }}} */
 
-static const
+static
 	ZEND_BEGIN_ARG_INFO(third_and_rest_force_ref, 1)
 		ZEND_ARG_PASS_INFO(0)
 		ZEND_ARG_PASS_INFO(0)

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.142 2000/06/09 17:21:40 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.143 2000/06/10 10:10:23 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -91,6 +91,8 @@ AC_PROG_CC
 AC_AIX
 
 case "$host_alias" in
+*solaris*)
+    CPPFLAGS="$CPPFLAGS -D_POSIX_PTHREAD_SEMANTICS";;
 *dgux*)
     CPPFLAGS="$CPPFLAGS -D_BSD_TIMEOFDAY_FLAVOR";;
 *rhapsody*)

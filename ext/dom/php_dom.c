@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.55 2004/03/01 12:09:21 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.56 2004/03/21 18:26:07 stas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -200,7 +200,7 @@ static void dom_register_prop_handler(HashTable *prop_handler, char *name, dom_r
 /* }}} */
 
 /* {{{ dom_read_property */
-zval *dom_read_property(zval *object, zval *member, zend_bool silent TSRMLS_DC)
+zval *dom_read_property(zval *object, zval *member, int type TSRMLS_DC)
 {
 	dom_object *obj;
 	zval tmp_member;
@@ -232,7 +232,7 @@ zval *dom_read_property(zval *object, zval *member, zend_bool silent TSRMLS_DC)
 		}
 	} else {
 		std_hnd = zend_get_std_object_handlers();
-		retval = std_hnd->read_property(object, member, silent TSRMLS_CC);
+		retval = std_hnd->read_property(object, member, type TSRMLS_CC);
 	}
 
 	if (member == &tmp_member) {

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.36 2004/03/18 13:03:17 georg Exp $ 
+  $Id: mysqli.c,v 1.37 2004/03/21 18:27:23 stas Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -160,7 +160,7 @@ static int mysqli_write_na(mysqli_object *obj, zval *newval TSRMLS_DC)
 /* }}} */
 
 /* {{{ mysqli_read_property */
-zval *mysqli_read_property(zval *object, zval *member, zend_bool silent TSRMLS_DC)
+zval *mysqli_read_property(zval *object, zval *member, int type TSRMLS_DC)
 {
 	zval tmp_member;
 	zval *retval;
@@ -197,7 +197,7 @@ zval *mysqli_read_property(zval *object, zval *member, zend_bool silent TSRMLS_D
 		}
 	} else {
 		std_hnd = zend_get_std_object_handlers();
-		retval = std_hnd->read_property(object, member, silent TSRMLS_CC);
+		retval = std_hnd->read_property(object, member, type TSRMLS_CC);
 	}
 
 	if (member == &tmp_member) {

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.14 2002/05/21 02:04:03 ssb Exp $
+// $Id: Registry.php,v 1.15 2002/05/21 07:00:45 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Registry.php';
@@ -132,9 +132,11 @@ Tests if a package is installed in the system. Will exit(1) if it is not.
                 }
                 $dest = preg_replace('!/+!', '/', $dest);
                 $file = preg_replace('!/+!', '/', $file);
+/*
                 $opts = array(0 => array('wrap' => 23),
                               1 => array('wrap' => 45)
                     );
+*/
                 if ($installed) {
                     $this->ui->tableRow(array($att['role'], $dest), null, $opts);
                 } else {

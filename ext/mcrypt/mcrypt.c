@@ -16,7 +16,7 @@
    |          Derick Rethans <d.rethans@jdimedia.nl>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.75 2002/02/28 12:10:35 yohgaki Exp $ */
+/* $Id: mcrypt.c,v 1.75.2.1 2002/06/24 08:04:01 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -391,7 +391,7 @@ PHP_MINFO_FUNCTION(mcrypt)
 	php_info_print_table_row(2, "version", "2.2.x");
 #endif
 #if HAVE_LIBMCRYPT24
-	php_info_print_table_row(2, "version", "2.4.x");
+	php_info_print_table_row(2, "version", ">= 2.4.x");
 	php_info_print_table_row(2, "Supported ciphers", tmp1.c);
 	php_info_print_table_row(2, "Supported modes", tmp2.c);
 	smart_str_free (&tmp1);

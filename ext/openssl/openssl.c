@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.53 2002/12/10 22:18:57 wez Exp $ */
+/* $Id: openssl.c,v 1.54 2002/12/11 02:29:59 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -478,6 +478,8 @@ static int php_openssl_load_rand_file(const char * file, int *egdsocket, int *se
 	*egdsocket = 0;
 	*seeded = 0;
 	
+	TSRMLS_FETCH();
+	
 #ifdef WINDOWS
 	RAND_screen();
 #endif
@@ -503,6 +505,9 @@ static int php_openssl_load_rand_file(const char * file, int *egdsocket, int *se
 static int php_openssl_write_rand_file(const char * file, int egdsocket, int seeded)
 {
 	char buffer[MAXPATHLEN];
+	
+	TSRMLS_FETCH();
+	
 	if (egdsocket || !seeded) {
 		/* if we did not manage to read the seed file, we should not write
 		 * a low-entropy seed file back */

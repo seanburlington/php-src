@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.92 2003/02/27 18:06:30 wez Exp $ */
+/* $Id: network.c,v 1.93 2003/02/28 00:08:00 iliaa Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -189,12 +189,10 @@ static int php_network_getaddresses(const char *host, struct sockaddr ***sal, ch
 # endif
 	
 	if ((n = getaddrinfo(host, NULL, &hints, &res)) || res == NULL) {
-		char *str = res == NULL ? "null result pointer" : PHP_GAI_STRERROR(n);
-
 		if (error_string) {
-			spprintf(error_string, 0, "getaddrinfo: %s", str);
+			spprintf(error_string, 0, "getaddrinfo: %s", (res == NULL ? "null result pointer" : PHP_GAI_STRERROR(n)));
 		} else {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: getaddrinfo failed: %s", str);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_network_getaddresses: getaddrinfo failed: %s", (res == NULL ? "null result pointer" : PHP_GAI_STRERROR(n)));
 		}
 		return 0;
 	}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.131 2002/11/09 23:10:02 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.132 2002/11/10 19:05:51 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -81,8 +81,6 @@
 #ifdef ZTS
 MUTEX_T mbregex_locale_mutex = NULL;
 #endif
-
-#define PHP_MB_DEFAULT_ENCODING "ISO-8859-1"
 
 /* {{{ php_mbstr_default_identify_list[] */
 #if defined(HAVE_MBSTR_JA)
@@ -734,7 +732,7 @@ PHP_INI_BEGIN()
 	 PHP_INI_ENTRY("mbstring.detect_order", NULL, PHP_INI_ALL, OnUpdate_mbstring_detect_order)
 	 PHP_INI_ENTRY("mbstring.http_input", NULL, PHP_INI_ALL, OnUpdate_mbstring_http_input)
 	 PHP_INI_ENTRY("mbstring.http_output", NULL, PHP_INI_ALL, OnUpdate_mbstring_http_output)
-	 PHP_INI_ENTRY("mbstring.internal_encoding", PHP_MB_DEFAULT_ENCODING, PHP_INI_ALL, OnUpdate_mbstring_internal_encoding)
+	 PHP_INI_ENTRY("mbstring.internal_encoding", NULL, PHP_INI_ALL, OnUpdate_mbstring_internal_encoding)
 #ifdef ZEND_MULTIBYTE
 	 PHP_INI_ENTRY("mbstring.script_encoding", NULL, PHP_INI_ALL, OnUpdate_mbstring_script_encoding)
 #endif /* ZEND_MULTIBYTE */

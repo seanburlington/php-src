@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.56.2.2 2004/09/26 19:24:20 iliaa Exp $ */
+/* $Id: tidy.c,v 1.56.2.3 2004/11/14 13:35:48 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -497,13 +497,15 @@ static void tidy_object_free_storage(void *object TSRMLS_DC)
 	zend_hash_destroy(intern->std.properties);
 	FREE_HASHTABLE(intern->std.properties);
 
-	intern->ptdoc->ref_count--;
+	if (intern->ptdoc) {
+		intern->ptdoc->ref_count--;
 
-	if (intern->ptdoc->ref_count <= 0) {
-		tidyBufFree(intern->ptdoc->errbuf);
-		efree(intern->ptdoc->errbuf);
-		tidyRelease(intern->ptdoc->doc);
-		efree(intern->ptdoc);
+		if (intern->ptdoc->ref_count <= 0) {
+			tidyBufFree(intern->ptdoc->errbuf);
+			efree(intern->ptdoc->errbuf);
+			tidyRelease(intern->ptdoc->doc);
+			efree(intern->ptdoc);
+		}
 	}
 
 	efree(object);
@@ -952,7 +954,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.56.2.2 2004/09/26 19:24:20 iliaa Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.56.2.3 2004/11/14 13:35:48 tony2001 Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: thttpd.c,v 1.65 2002/07/14 13:10:34 sas Exp $ */
+/* $Id: thttpd.c,v 1.66 2002/07/14 13:48:46 sas Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -613,8 +613,10 @@ static off_t thttpd_real_php_request(httpd_conn *hc TSRMLS_DC)
 	thttpd_module_main(TSRMLS_C);
 
 	if (TG(sbuf).c != 0) {
-		TG(hc)->buf_address = TG(sbuf).c;
-		TG(hc)->buf_len = TG(sbuf).len;
+		free(TG(hc)->response);
+		
+		TG(hc)->response = TG(sbuf).c;
+		TG(hc)->responselen = TG(sbuf).len;
 
 		TG(sbuf).c = 0;
 		TG(sbuf).len = 0;

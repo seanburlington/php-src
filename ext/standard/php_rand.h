@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_rand.h,v 1.8.8.5 2001/09/02 23:39:45 jeroen Exp $ */
+/* $Id: php_rand.h,v 1.8.8.6 2001/09/03 00:29:53 jeroen Exp $ */
 
 /* Layout implementation random functions
  *
@@ -113,9 +113,10 @@ PHP_FUNCTION(mt_srand);
 PHP_FUNCTION(mt_rand);
 PHP_FUNCTION(mt_getrandmax);
 
-PHPAPI long php_rand(void);
-PHPAPI long php_rand_range(long min, long max);
-PHPAPI long php_randmax(void);
+PHPAPI long   php_rand(void);
+PHPAPI long   php_rand_range(long min, long max);
+PHPAPI double php_drand(void);
+PHPAPI long   php_randmax(void);
 
 #endif	/* PHP_RAND_H */
 

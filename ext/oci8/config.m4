@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.19 2000/06/19 09:16:57 thies Exp $
+dnl $Id: config.m4,v 1.20 2000/06/19 09:27:16 thies Exp $
 
 AC_DEFUN(AC_OCI8_VERSION,[
   AC_MSG_CHECKING([Oracle version])
@@ -52,9 +52,9 @@ if test "$PHP_OCI8" != "no"; then
   fi
 
   if test -f "$OCI8_DIR/lib/sysliblist"; then
-  	PHP_EVAL_LIBLINE(`$OCI8_DIR/lib/sysliblist`, OCI8_SYSLIB)
+  	PHP_EVAL_LIBLINE(`cat $OCI8_DIR/lib/sysliblist`, OCI8_SYSLIB)
   elif test -f "$OCI8_DIR/rdbms/lib/sysliblist"; then
-  	PHP_EVAL_LIBLINE(`$OCI8_DIR/rdbms/lib/sysliblist`, OCI8_SYSLIB)
+  	PHP_EVAL_LIBLINE(`cat $OCI8_DIR/rdbms/lib/sysliblist`, OCI8_SYSLIB)
   fi
 
   AC_OCI8_VERSION($OCI8_DIR)

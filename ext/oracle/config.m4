@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.13 2000/06/19 09:16:57 thies Exp $
+dnl $Id: config.m4,v 1.14 2000/06/19 09:27:16 thies Exp $
 
 AC_DEFUN(AC_ORACLE_VERSION,[
   AC_MSG_CHECKING([Oracle version])
@@ -52,9 +52,9 @@ if test "$PHP_ORACLE" != "no"; then
   fi
 
   if test -f "$ORACLE_DIR/lib/sysliblist"; then
-  	PHP_EVAL_LIBLINE(`$ORACLE_DIR/lib/sysliblist`, ORACLE_SHARED_LIBADD)
+  	PHP_EVAL_LIBLINE(`cat $ORACLE_DIR/lib/sysliblist`, ORACLE_SHARED_LIBADD)
   elif test -f "$ORACLE_DIR/rdbms/lib/sysliblist"; then
-  	PHP_EVAL_LIBLINE(`$ORACLE_DIR/rdbms/lib/sysliblist`, ORACLE_SHARED_LIBADD)
+  	PHP_EVAL_LIBLINE(`cat $ORACLE_DIR/rdbms/lib/sysliblist`, ORACLE_SHARED_LIBADD)
   fi
 
   AC_ORACLE_VERSION($ORACLE_DIR)

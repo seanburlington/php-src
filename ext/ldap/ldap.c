@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.148 2003/10/06 23:33:00 sniper Exp $ */
+/* $Id: ldap.c,v 1.149 2003/10/07 00:36:31 iliaa Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -302,7 +302,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.148 2003/10/06 23:33:00 sniper Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.149 2003/10/07 00:36:31 iliaa Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -1665,18 +1665,15 @@ PHP_FUNCTION(ldap_get_option)
 		{
 			char *val = NULL;
 
-			if (ldap_get_option(ld->link, opt, &val)) {
-				RETURN_FALSE;
-			}
-			if (val != NULL) {
-				if (*val != '\0') {
-					zval_dtor(*retval);
-					ZVAL_STRING(*retval, val, 1);
+			if (ldap_get_option(ld->link, opt, &val) || val == NULL || *val == '\0') {
+				if (val) {
+					ldap_memfree(val);
 				}
-				ldap_memfree(val);
-			} else {
 				RETURN_FALSE;
 			}
+			zval_dtor(*retval);
+			ZVAL_STRING(*retval, val, 1);
+			ldap_memfree(val);
 		} break;
 /* options not implemented
 	case LDAP_OPT_SERVER_CONTROLS:

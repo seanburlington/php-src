@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_bcmath.h,v 1.10 2002/02/28 08:25:42 sebastian Exp $ */
+/* $Id: php_bcmath.h,v 1.11 2002/06/18 18:51:33 andi Exp $ */
 
 #ifndef PHP_BCMATH_H
 #define PHP_BCMATH_H
@@ -26,9 +26,8 @@
 extern zend_module_entry bcmath_module_entry;
 #define phpext_bcmath_ptr &bcmath_module_entry
 
-PHP_MINIT_FUNCTION(bcmath);
-PHP_MSHUTDOWN_FUNCTION(bcmath);
 PHP_RINIT_FUNCTION(bcmath);
+PHP_RSHUTDOWN_FUNCTION(bcmath);
 PHP_MINFO_FUNCTION(bcmath);
 
 PHP_FUNCTION(bcadd);

@@ -17,13 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domexception.c,v 1.2 2003/06/10 20:03:27 imajes Exp $ */
+/* $Id: domexception.c,v 1.3 2003/08/22 15:04:10 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+#if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
 
 
@@ -110,3 +111,4 @@ void php_dom_throw_error(int error_code, zval **retval TSRMLS_DC)
 	EG(exception) = dom_exception;
 }
 /* }}} end php_dom_throw_error */
+#endif

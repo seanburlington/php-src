@@ -18,19 +18,18 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.26 2003/08/20 18:58:03 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.27 2003/08/22 15:04:10 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+#if HAVE_LIBXML && HAVE_DOM
 #include "ext/standard/php_rand.h"
 #include "php_dom.h"
 #include "dom_ce.h"
 #include "dom_properties.h"
-
-#if HAVE_DOM
 
 #include "ext/standard/info.h"
 #define PHP_XPATH 1

@@ -17,13 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.9 2003/07/27 17:57:06 rrichards Exp $ */
+/* $Id: node.c,v 1.10 2003/08/22 15:04:10 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+#if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
 
 
@@ -1398,3 +1399,4 @@ PHP_FUNCTION(dom_node_get_user_data)
  DOM_NOT_IMPLEMENTED();
 }
 /* }}} end dom_node_get_user_data */
+#endif

@@ -17,13 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: namelist.c,v 1.2 2003/06/10 20:03:27 imajes Exp $ */
+/* $Id: namelist.c,v 1.3 2003/08/22 15:04:10 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+#if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
 
 
@@ -79,3 +80,4 @@ PHP_FUNCTION(dom_namelist_get_namespace_uri)
  DOM_NOT_IMPLEMENTED();
 }
 /* }}} end dom_namelist_get_namespace_uri */
+#endif

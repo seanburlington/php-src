@@ -17,13 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.1 2003/07/24 13:18:40 rrichards Exp $ */
+/* $Id: xpath.c,v 1.2 2003/08/22 15:04:10 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+#if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
 
 
@@ -165,3 +166,4 @@ PHP_FUNCTION(dom_xpath_query)
 #endif /* LIBXML_XPATH_ENABLED */
 
 /* }}} */
+#endif

@@ -17,13 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.19 2003/08/12 00:55:58 iliaa Exp $ */
+/* $Id: document.c,v 1.20 2003/08/22 15:04:10 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+#if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
 
 typedef struct _idsIterator idsIterator;
@@ -1273,3 +1274,4 @@ PHP_FUNCTION(dom_document_savexml)
 	}
 }
 /* }}} end dom_document_savexml */
+#endif

@@ -17,13 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domimplementation.c,v 1.7 2003/08/10 20:39:58 helly Exp $ */
+/* $Id: domimplementation.c,v 1.8 2003/08/22 15:04:10 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+#if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
 
 /*
@@ -235,3 +236,4 @@ PHP_FUNCTION(dom_domimplementation_get_feature)
  DOM_NOT_IMPLEMENTED();
 }
 /* }}} end dom_domimplementation_get_feature */
+#endif

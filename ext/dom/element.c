@@ -17,13 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.11 2003/08/12 00:55:58 iliaa Exp $ */
+/* $Id: element.c,v 1.12 2003/08/22 15:04:10 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+#if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
 
 
@@ -834,3 +835,5 @@ PHP_FUNCTION(dom_element_set_id_attribute_node)
  DOM_NOT_IMPLEMENTED();
 }
 /* }}} end dom_element_set_id_attribute_node */
+
+#endif

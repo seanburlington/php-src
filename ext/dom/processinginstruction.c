@@ -17,13 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: processinginstruction.c,v 1.4 2003/07/07 19:37:32 rrichards Exp $ */
+/* $Id: processinginstruction.c,v 1.5 2003/08/22 15:04:10 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+#if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
 
 
@@ -135,4 +136,4 @@ int dom_processinginstruction_data_write(dom_object *obj, zval *newval TSRMLS_DC
 
 /* }}} */
 
-
+#endif

@@ -17,13 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: entity.c,v 1.3 2003/07/07 19:37:32 rrichards Exp $ */
+/* $Id: entity.c,v 1.4 2003/08/22 15:04:10 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+#if HAVE_LIBXML && HAVE_DOM
 #include "php_dom.h"
 
 
@@ -179,4 +180,4 @@ int dom_entity_version_write(dom_object *obj, zval *newval TSRMLS_DC)
 
 /* }}} */
 
-
+#endif

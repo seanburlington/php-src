@@ -16,13 +16,15 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.58 2003/08/19 01:30:27 wez Exp $ */
+/* $Id: simplexml.c,v 1.59 2003/08/22 15:04:22 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+#if HAVE_LIBXML && HAVE_SIMPLEXML
+
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "php_simplexml.h"
@@ -1066,10 +1068,12 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.58 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.59 $");
 	php_info_print_table_end();
 }
 /* }}} */
+
+#endif
 
 /**
  * Local Variables:

@@ -1,5 +1,5 @@
-dnl $Id: config.m4,v 1.1 2001/01/30 12:53:50 gluke Exp $
-
+dnl $Source: /repository/php-src/ext/mnogosearch/Attic/config.m4,v $
+dnl $Id: config.m4,v 1.2 2001/01/31 14:04:29 gluke Exp $
 
 PHP_ARG_WITH(mnogosearch,for mnoGoSearch support,
 [  --with-mnogosearch[=DIR]       Include mnoGoSearch support.  DIR is the mnoGoSearch base

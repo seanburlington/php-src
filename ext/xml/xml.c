@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.15 1999/08/08 11:37:50 thies Exp $ */
+/* $Id: xml.c,v 1.16 1999/08/18 15:40:54 thies Exp $ */
 #define IS_EXT_MODULE
 
 /* boldly assume that if PIC is defined, we are being compiled dynamically */
@@ -228,6 +228,9 @@ xml_encoding xml_encodings[] = {
 
 int php3_minit_xml(INIT_FUNC_ARGS)
 {
+
+	ELS_FETCH();
+
 #if defined(THREAD_SAFE)
 	xml_global_struct *xml_globals;
 	PHP3_MUTEX_ALLOC(xml_mutex);

@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.6 2002/12/27 22:47:06 iliaa Exp $ */
+/* $Id: php_apache.c,v 1.7 2002/12/27 23:05:15 iliaa Exp $ */
 
 #include "php_apache_http.h"
 
@@ -1916,7 +1916,13 @@ PHP_FUNCTION(apache_exec_uri)
    Fetch Apache version */
 PHP_FUNCTION(apache_get_version)
 {
-	RETURN_STRING(SERVER_VERSION, 1);
+	char *apv = (char *) ap_get_server_version();
+
+	if (apv && *apv) {
+		RETURN_STRING(apv, 1);
+	} else {
+		RETURN_FALSE;
+	}
 }
 /* }}} */
 

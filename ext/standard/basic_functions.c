@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.293 2001/01/08 02:39:52 hirokawa Exp $ */
+/* $Id: basic_functions.c,v 1.294 2001/01/09 09:02:21 sniper Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1059,6 +1059,9 @@ PHP_FUNCTION(putenv)
 
 		if ((ret=putenv(pe.putenv_string))==0) { /* success */
 			zend_hash_add(&BG(putenv_ht),pe.key,pe.key_len+1,(void **) &pe,sizeof(putenv_entry),NULL);
+#ifdef HAVE_TZSET
+			if(!strncmp(pe.key,"TZ",2)) tzset();
+#endif
 			RETURN_TRUE;
 		} else {
 			efree(pe.putenv_string);

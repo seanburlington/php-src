@@ -1,4 +1,4 @@
-/* $Id: php3_oracle.h,v 1.6 1999/08/17 14:40:27 thies Exp $ */
+/* $Id: php3_oracle.h,v 1.7 1999/08/18 16:48:59 thies Exp $ */
 
 /* synced with oracle.h,v 1.40 1999/06/01 08:11:04 thies Exp $ */
 
@@ -124,7 +124,6 @@ typedef struct {
 	long max_links;
 	long num_persistent;
 	long num_links;
-	int le_conn, le_pconn, le_cursor;
 	HashTable *conns;
 } php_ora_globals;
 

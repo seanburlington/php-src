@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.90 2001/08/26 01:09:20 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.91 2001/08/30 17:47:04 sniper Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -90,6 +90,7 @@ PHP_FUNCTION(highlight_string);
 ZEND_API void php_get_highlight_struct(zend_syntax_highlighter_ini *syntax_highlighter_ini);
 
 PHP_FUNCTION(ini_get);
+PHP_FUNCTION(ini_get_all);
 PHP_FUNCTION(ini_set);
 PHP_FUNCTION(ini_restore);
 

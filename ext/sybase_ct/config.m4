@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 1999/12/30 04:52:13 sas Exp $
+dnl $Id: config.m4,v 1.4 2000/06/24 09:01:51 joey Exp $
 
 AC_MSG_CHECKING(for Sybase-CT support)
 AC_ARG_WITH(sybase-ct,
@@ -32,6 +32,8 @@ AC_ARG_WITH(sybase-ct,
               [ AC_ADD_LIBRARY(sybtcl) ],
               [ $SYBASE_CT_LIBS ])
     AC_CHECK_LIB(insck, insck__getVdate,
+              [ AC_ADD_LIBRARY(insck) ])
+    AC_CHECK_LIB(insck, bsd_tcp,
               [ AC_ADD_LIBRARY(insck) ])
       LDFLAGS=$old_LDFLAGS
   else

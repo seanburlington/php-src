@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Mirror.php,v 1.3 2004/01/08 17:33:13 sniper Exp $
+// $Id: Mirror.php,v 1.4 2004/03/18 12:21:28 mj Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Command.php";
@@ -34,13 +34,13 @@ class PEAR_Command_Mirror extends PEAR_Command_Common
 
     var $commands = array(
         'download-all' => array(
-            'summary' => 'Downloads each avaible Package from master_server',
+            'summary' => 'Downloads each available package from master_server',
             'function' => 'doDownloadAll',
             'shortcut' => 'da',
             'options' => array(),
             'doc' => '
-	    Request a list of avaible Packages from the Package-Server
-	    (master_server) and downloads them to current working dir'
+	    Requests a list of available packages from the package server
+	    (master_server) and downloads them to current working directory'
             ),
         );
 

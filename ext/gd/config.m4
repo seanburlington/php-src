@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.136 2003/04/21 19:07:21 moriyoshi Exp $
+dnl $Id: config.m4,v 1.137 2003/06/09 08:11:53 moriyoshi Exp $
 dnl
 
 dnl
@@ -41,7 +41,7 @@ PHP_ARG_ENABLE(gd-native-ttf, whether to enable truetype string function in GD,
 [  --enable-gd-native-ttf    GD: Enable TrueType string function.], no, no)
 
 PHP_ARG_ENABLE(gd-jis-conv, whether to enable JIS-mapped Japanese font support in GD,
-[  --enable-gd-jis-conv      GD: Enable JIS-mapped Japanese font suppert.], no, no)
+[  --enable-gd-jis-conv      GD: Enable JIS-mapped Japanese font support.], no, no)
 
 dnl  
 dnl Checks for the configure options 

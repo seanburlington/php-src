@@ -1,3 +1,8 @@
+2004-04-24  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * tests/strings/002.phpt:
+      Fixed test.
+
 2004-04-23  Andi Gutmans  <andi@zend.com>
 
     * ZendEngine2/zend_compile.c:
@@ -2449,7 +2454,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1608 2004/04/24 00:34:06 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1609 2004/04/25 00:34:28 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

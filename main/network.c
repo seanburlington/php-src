@@ -15,7 +15,7 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.6 2000/09/05 17:37:44 venaas Exp $ */
+/* $Id: network.c,v 1.7 2000/09/05 19:06:29 zeev Exp $ */
 
 #include "php.h"
 
@@ -37,7 +37,11 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#else
+int		 inet_aton(const char *, struct in_addr *);
 #endif
+
+#include "php_network.h"
 
 #ifdef PHP_WIN32
 #undef AF_UNIX
@@ -150,7 +154,7 @@ static int php_network_getaddresses(const char *host, struct sockaddr ***sal)
  * port, returns the created socket on success, else returns -1.
  * timeout gives timeout in seconds, 0 means blocking mode.
  */
-int php_hostconnect(char *host, int port, int socktype, int timeout)
+int php_hostconnect(char *host, unsigned short port, int socktype, int timeout)
 {	
 	int s;
 	struct sockaddr **sal, **psal;

@@ -15,9 +15,14 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.3 2000/09/05 16:36:56 venaas Exp $ */
+/* $Id: php_network.h,v 1.4 2000/09/05 19:06:29 zeev Exp $ */
 
-int php_hostconnect(char *host, int port, int socktype, int timeout);
+#ifndef _PHP_NETWORK_H
+#define _PHP_NETWORK_H
+
+int php_hostconnect(char *host, unsigned short port, int socktype, int timeout);
+
+#endif /* _PHP_NETWORK_H */
 
 /*
  * Local variables:

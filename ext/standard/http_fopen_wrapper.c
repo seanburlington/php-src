@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.35 2002/05/04 17:16:28 sas Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.36 2002/07/11 02:35:45 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -148,6 +148,10 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 
 	/* authz header if it was specified */
 	if (resource->user && resource->pass)	{
+		/* decode the strings first */
+		php_url_decode(resource->user, strlen(resource->user));
+		php_url_decode(resource->pass, strlen(resource->pass));
+
 		/* scratch is large enough, since it was made large enough for the whole URL */
 		strcpy(scratch, resource->user);
 		strcat(scratch, ":");

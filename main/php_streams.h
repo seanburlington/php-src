@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.61.2.10 2003/03/18 23:39:31 wez Exp $ */
+/* $Id: php_streams.h,v 1.61.2.11 2003/05/13 00:18:27 wez Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -462,6 +462,8 @@ PHPAPI php_stream *_php_stream_fopen_temporary_file(const char *dir, const char 
 #define PHP_STREAM_AS_FD		1
 /* cast as a socketd */
 #define PHP_STREAM_AS_SOCKETD	2
+/* cast as fd/socket for select purposes */
+#define PHP_STREAM_AS_FD_FOR_SELECT 3
 
 /* try really, really hard to make sure the cast happens (avoid using this flag if possible) */
 #define PHP_STREAM_CAST_TRY_HARD	0x80000000

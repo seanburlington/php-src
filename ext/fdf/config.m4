@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/09/22 05:27:55 steinm Exp $
+dnl $Id: config.m4,v 1.3 1999/10/06 05:23:28 steinm Exp $
 
 AC_MSG_CHECKING(whether to include fdftk support)
 AC_ARG_WITH(fdftk,
@@ -18,7 +18,7 @@ AC_ARG_WITH(fdftk,
       ],[AC_MSG_ERROR(fdftk module requires fdftk 2.0)])
       ;;
     *)
-      test -f $withval/include/Fdftk.h && FDFLIB_INCLUDE="-I$withval/include"
+      test -f $withval/include/FdfTk.h && FDFLIB_INCLUDE="-I$withval/include"
       if test -n "$FDFLIB_INCLUDE" ; then
         AC_MSG_RESULT(yes)
         PHP_EXTENSION(fdf)

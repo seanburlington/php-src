@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.8 1999/08/06 06:52:06 steinm Exp $ */
+/* $Id: fdf.c,v 1.9 1999/10/06 05:23:28 steinm Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -217,6 +217,13 @@ PHP_FUNCTION(fdf_get_value) {
 	err = FDFGetValue(fdf, arg2->value.str.val, NULL, 0, &nr);
 	if(err != FDFErcOK)
 		printf("Aiii, error\n");
+  /* In the inofficial version of FdfTK 4.0 (as FDFGetVersion says. The
+     library has a name with version 3.0, don't know what adobe has in
+     mind) the number of bytes of the value doesn't include the trailing
+     '\0'. This was not the case in 2.0
+  */
+	if(strcmp(FDFGetVersion(), "2.0"))
+		nr++;
 	buffer = emalloc(nr);
 	err = FDFGetValue(fdf, arg2->value.str.val, buffer, nr, &nr);
 	if(err != FDFErcOK)

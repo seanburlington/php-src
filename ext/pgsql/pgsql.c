@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Zeev Suraski <zeev@zend.com>                                |
-   |          Jouni Ahto <jah@mork.net> (large object interface)          |
+   |          Jouni Ahto <jouni.ahto@exdec.fi> (large object interface)   |
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.81 2000/12/13 12:26:25 sas Exp $ */
+/* $Id: pgsql.c,v 1.82 2001/01/04 11:15:35 jah Exp $ */
 
 #include <stdlib.h>
 

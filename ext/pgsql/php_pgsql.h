@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Zeev Suraski <zeev@zend.com>                                |
-   |          Jouni Ahto <jah@mork.net>                                   |
+   |          Jouni Ahto <jouni.ahto@exdec.fi>                            |
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.22 2000/09/13 04:13:36 andi Exp $ */
+/* $Id: php_pgsql.h,v 1.23 2001/01/04 11:15:35 jah Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H

@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Jouni Ahto <jah@mork.net>                                   |
+   | Authors: Jouni Ahto <jouni.ahto@exdec.fi>                            |
    |          Andrew Avdeev <andy@rsc.mv.ru>                              |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.48 2000/10/25 17:43:52 andrei Exp $ */
+/* $Id: interbase.c,v 1.49 2001/01/04 11:15:35 jah Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -596,7 +596,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.48 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.49 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

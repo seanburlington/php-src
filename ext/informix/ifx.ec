@@ -15,12 +15,12 @@
    | Authors: Danny Heijl  <Danny.Heijl@cevi.be> : initial cut (ODS 7.2x) |
    |                                               PHP4 port              |
    |          Christian Cartus <chc@idgruppe.de> : blobs, and IUS 9       |
-   |          Jouni Ahto <jah@mork.net>   : configuration stuff           |
+   |          Jouni Ahto <jouni.ahto@exdec.fi>   : configuration stuff    |
    | Based on the MySQL code by:  Zeev Suraski <zeev@php.net>             |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ifx.ec,v 1.50 2000/11/09 19:34:30 danny Exp $ */
+/* $Id: ifx.ec,v 1.51 2001/01/04 11:15:35 jah Exp $ */
 
 /* -------------------------------------------------------------------
  * if you want a function reference : "grep '^\*\*' ifx.ec" will give

@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Jouni Ahto <jah@mork.net>					                  |
-   |		  Andrew Avdeev <andy@simgts.mv.ru>							  |
+   | Authors: Jouni Ahto <jouni.ahto@exdec.fi>                            |
+   |          Andrew Avdeev <andy@simgts.mv.ru>                           |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.18 2000/10/05 12:47:39 jah Exp $ */
+/* $Id: php_interbase.h,v 1.19 2001/01/04 11:15:35 jah Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H

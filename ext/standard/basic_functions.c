@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.595 2003/03/09 23:12:31 pollita Exp $ */
+/* $Id: basic_functions.c,v 1.596 2003/03/12 06:47:34 sterling Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -672,6 +672,7 @@ function_entry basic_functions[] = {
 	PHP_STATIC_FE("tmpfile",		php_if_tmpfile,							NULL)
 	PHP_FE(file,															NULL)
 	PHP_FE(file_get_contents,												NULL)
+	PHP_FE(file_set_contents,												NULL)
 	PHP_FE(stream_select,					  first_through_third_args_force_ref)
 	PHP_FE(stream_context_create,											NULL)
 	PHP_FE(stream_context_set_params,										NULL)

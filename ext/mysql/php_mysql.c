@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.210 2004/07/19 07:19:39 andi Exp $ */
+/* $Id: php_mysql.c,v 1.211 2005/02/22 14:58:49 iliaa Exp $ */
 
 /* TODO:
  *
@@ -2298,7 +2298,7 @@ static void php_mysql_field_info(INTERNAL_FUNCTION_PARAMETERS, int entry_type)
 {
 	zval **result, **field;
 	MYSQL_RES *mysql_result;
-	MYSQL_FIELD *mysql_field;
+	MYSQL_FIELD *mysql_field = {0};
 	char buf[512];
 	int  len;
 

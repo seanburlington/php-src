@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.556 2003/01/07 11:37:09 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.557 2003/01/09 17:29:31 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -387,6 +387,8 @@ function_entry basic_functions[] = {
 	PHP_NAMED_FE(printf,			PHP_FN(user_printf),					NULL)
 	PHP_FE(vprintf,															NULL)
 	PHP_FE(vsprintf,														NULL)
+	PHP_FE(fprintf,															NULL)
+	PHP_FE(vfprintf,														NULL)
 	PHP_FE(sscanf,					third_and_rest_force_ref)
 	PHP_FE(fscanf,					third_and_rest_force_ref)
 	PHP_FE(parse_url,														NULL)

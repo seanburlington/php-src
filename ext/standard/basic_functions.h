@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.112 2003/01/05 03:24:38 pollita Exp $ */
+/* $Id: basic_functions.h,v 1.113 2003/01/09 17:29:31 wez Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -83,6 +83,8 @@ PHP_FUNCTION(set_include_path);
 PHP_FUNCTION(restore_include_path);
 
 PHP_FUNCTION(print_r);
+PHP_FUNCTION(fprintf);
+PHP_FUNCTION(vfprintf);
 
 PHP_FUNCTION(connection_aborted);
 PHP_FUNCTION(connection_status);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.112 2003/01/27 20:39:30 iliaa Exp $ */
+/* $Id: php_ini.c,v 1.113 2003/02/03 12:25:28 sniper Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -428,7 +428,7 @@ int php_init_config()
 
 	/* If the config_file_scan_dir is set at compile-time, go and scan this directory and
 	 * parse any .ini files found in this directory. */
-	if (strlen(PHP_CONFIG_FILE_SCAN_DIR)) {
+	if (!sapi_module.php_ini_ignore && strlen(PHP_CONFIG_FILE_SCAN_DIR)) {
 		struct dirent **namelist;
 		int ndir, i;
 

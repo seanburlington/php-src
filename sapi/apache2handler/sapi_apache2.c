@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.21 2003/08/06 22:34:20 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.22 2003/09/19 00:44:58 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -492,6 +492,8 @@ static int php_handler(request_rec *r)
 		ap_add_cgi_vars(r);
 	}
 
+zend_first_try {
+
 	ctx = SG(server_context);
 	if (ctx == NULL) {
 		ctx = SG(server_context) = apr_pcalloc(r->pool, sizeof(*ctx));
@@ -560,6 +562,8 @@ static int php_handler(request_rec *r)
 	} else {
 		ctx->r = parent_req;
 	}
+
+} zend_end_try();
 
 	return OK;
 }

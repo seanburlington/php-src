@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.439 2002/01/25 11:27:47 derick Exp $ */
+/* $Id: basic_functions.c,v 1.440 2002/01/25 15:43:58 derick Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1859,6 +1859,7 @@ PHP_FUNCTION(highlight_file)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z|l", &filename, &i) == FAILURE) {
 		return;
 	}
+	convert_to_string(filename);
 
 	if (i) {
 		php_start_ob_buffer (NULL, 0 TSRMLS_CC);
@@ -1891,6 +1892,7 @@ PHP_FUNCTION(highlight_string)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z|l", &expr, &i) == FAILURE) {
 		return;
 	}
+	convert_to_string(expr);
 
 	if (i) {
 		php_start_ob_buffer (NULL, 0 TSRMLS_CC);

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.101 2004/04/25 11:22:56 helly Exp $ */
+/* $Id: php_reflection.c,v 1.102 2004/04/26 18:54:18 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -2405,7 +2405,7 @@ ZEND_METHOD(reflection_class, isInstance)
 }
 /* }}} */
 
-/* {{{ proto public stdclass Reflection_Class::newInstance(mixed* args)
+/* {{{ proto public stdclass Reflection_Class::newInstance(mixed* args, ...)
    Returns an instance of this class */
 ZEND_METHOD(reflection_class, newInstance)
 {

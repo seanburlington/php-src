@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.h,v 1.12 1999/12/30 17:11:47 kara Exp $ */
+/* $Id: php_odbc.h,v 1.13 1999/12/31 00:38:22 sas Exp $ */
 
 #ifndef _PHP_ODBC_H
 #define _PHP_ODBC_H
@@ -83,6 +83,7 @@ PHP_FUNCTION(solid_fetch_prev);
 #define SQL_SO_DYNAMIC          0x00000004L
 #define SQL_LEN_DATA_AT_EXEC_OFFSET  (-100)
 #define SQL_LEN_DATA_AT_EXEC(length) (-(length)+SQL_LEN_DATA_AT_EXEC_OFFSET)
+#define SQL_SUCCEEDED(rc) (((rc)&(~1))==0)
 
 #elif defined(HAVE_UNIXODBC) /* unixODBC library */
 

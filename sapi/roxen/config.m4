@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.6 2000/02/29 01:10:37 neotron Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.7 2000/03/06 19:26:39 neotron Exp $ -*- sh -*-
 
 RESULT=no
 AC_MSG_CHECKING(for Roxen/Pike support)
@@ -29,7 +29,7 @@ AC_ARG_WITH(roxen,
 	AC_DEFINE(HAVE_ROXEN,1,[Whether you use Roxen])
 	PHP_SAPI=roxen
 	PHP_BUILD_SHARED
-	INSTALL_IT="\$(SHELL) \$(srcdir)/install-sh -m 0755 $SAPI_SHARED $PIKE_MODULE_DIR/PHP4.so"
+	INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_SHARED $PIKE_MODULE_DIR/PHP4.so"
 	RESULT="yes
 	Pike binary used:      $PIKE
 	Pike include dir:      $PIKE_INCLUDE_DIR

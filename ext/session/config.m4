@@ -1,31 +1,13 @@
-dnl $Id: config.m4,v 1.6 2000/03/26 02:47:00 sas Exp $
+dnl $Id: config.m4,v 1.7 2000/03/27 23:33:37 sas Exp $
 
-AC_MSG_CHECKING(for mm support)
-AC_ARG_WITH(mm,
-[  --with-mm[=DIR]         Include mm support for session storage],[
-  PHP_MM=$withval
-],[
-  PHP_MM=no
-])
-AC_MSG_RESULT($PHP_MM)
+PHP_ARG_WITH(mm,for mm support,
+[  --with-mm[=DIR]         Include mm support for session storage])
 
-AC_MSG_CHECKING(whether to enable session support)
-AC_ARG_ENABLE(session,
-[  --disable-session       Disable session support],[
-  PHP_SESSION=$enableval
-],[
-  PHP_SESSION=yes
-])
-AC_MSG_RESULT($PHP_SESSION)
+PHP_ARG_ENABLE(session, whether to enable session support,
+[  --disable-session       Disable session support], yes)
 
-AC_MSG_CHECKING(whether to enable transparent session id propagation)
-AC_ARG_ENABLE(trans-sid,
-[  --enable-trans-sid      Enable transparent session id propagation],[
-  PHP_TRANS_SID=$enableval
-],[
-  PHP_TRANS_SID=no
-])
-AC_MSG_RESULT($PHP_TRANS_SID)
+PHP_ARG_ENABLE(trans-sid,whether to enable transparent session id propagation,
+[  --enable-trans-sid      Enable transparent session id propagation])
 
 if test "$PHP_MM" != "no"; then
   for i in /usr/local /usr $PHP_MM; do

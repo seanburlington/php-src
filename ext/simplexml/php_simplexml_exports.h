@@ -18,10 +18,10 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.h,v 1.1 2004/01/18 15:16:26 helly Exp $ */
+/* $Id: php_simplexml_exports.h,v 1.1 2004/01/18 23:35:12 helly Exp $ */
 
-#ifndef _SIMPLEXML_H_
-#define _SIMPLEXML_H_
+#ifndef PHP_SIMPLEXML_EXPORTS_H
+#define PHP_SIMPLEXML_EXPORTS_H
 
 #include "php_simplexml.h"
 
@@ -52,7 +52,7 @@ php_sxe_fetch_object(zval *object TSRMLS_DC)
 ZEND_API void php_sxe_reset_iterator(php_sxe_object *sxe TSRMLS_DC);
 ZEND_API void php_sxe_move_forward_iterator(php_sxe_object *sxe TSRMLS_DC);
 
-#endif /* _SIMPLEXML_H_ */
+#endif /* PHP_SIMPLEXML_EXPORTS_H */
 
 /**
  * Local Variables:

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.2 2002/11/16 11:39:36 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.3 2002/11/16 11:40:07 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -50,8 +50,6 @@
 #define STREAM_DEBUG 0
 
 #define STREAM_WRAPPER_PLAIN_FILES	((php_stream_wrapper*)-1)
-
-#undef HAVE_FOPENCOOKIE
 
 /* {{{ some macros to help track leaks */
 #if ZEND_DEBUG

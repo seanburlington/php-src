@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.7 1999/08/02 19:16:34 zeev Exp $ */
+/* $Id: rfc1867.c,v 1.8 1999/09/11 13:44:23 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -159,7 +159,7 @@ void php_mime_split(char *buf, int cnt, char *boundary)
 				*(loc - 4) = '\0';
 
 				/* Magic function that figures everything out */
-				_php3_parse_gpc_data(ptr,namebuf,http_post_vars);
+				php_parse_gpc_data(ptr,namebuf,http_post_vars);
 
 				/* And a little kludge to pick out special MAX_FILE_SIZE */
 				itype = php3_check_ident_type(namebuf);

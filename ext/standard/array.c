@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.168 2002/06/18 19:37:59 venaas Exp $ */
+/* $Id: array.c,v 1.169 2002/06/29 15:39:41 derick Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1979,7 +1979,7 @@ static void php_array_merge_wrapper(INTERNAL_FUNCTION_PARAMETERS, int recursive)
 
 	/* Get the argument count and check it */	
 	argc = ZEND_NUM_ARGS();
-	if (argc < 2) {
+	if (argc < 1) {
 		WRONG_PARAM_COUNT;
 	}
 	

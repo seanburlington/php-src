@@ -17,7 +17,7 @@
  */
 
 #ifndef lint
-static const char rcsid[] = "$Id: os_unix.c,v 1.2 2002/10/13 08:34:27 shane Exp $";
+static const char rcsid[] = "$Id: os_unix.c,v 1.2.2.1 2002/12/01 23:11:14 shane Exp $";
 #endif /* not lint */
 
 #include "fcgi_config.h"
@@ -498,7 +498,7 @@ int OS_Write(int fd, char * buf, size_t len)
  *
  *----------------------------------------------------------------------
  */
-int OS_SpawnChild(char *appPath, int listenFd, PROCESS_INFORMATION *pInfo, char *env)
+int OS_SpawnChild(char *appPath, int listenFd)
 {
     int forkResult;
 

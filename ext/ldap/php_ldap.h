@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ldap.h,v 1.9 2000/07/26 11:01:44 sniper Exp $ */
+/* $Id: php_ldap.h,v 1.10 2000/08/02 13:11:46 sniper Exp $ */
 
 #ifndef PHP_LDAP_H
 #define PHP_LDAP_H
@@ -78,6 +78,11 @@ PHP_FUNCTION(ldap_err2str);
 PHP_FUNCTION(ldap_error);
 
 PHP_FUNCTION(ldap_compare);
+
+#ifdef STR_TRANSLATION
+PHP_FUNCTION(ldap_t61_to_8859);
+PHP_FUNCTION(ldap_8859_to_t61);
+#endif
 
 ZEND_BEGIN_MODULE_GLOBALS(ldap)
 	long default_link;

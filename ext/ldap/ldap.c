@@ -22,7 +22,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.56 2000/07/28 22:39:22 sniper Exp $ */
+/* $Id: ldap.c,v 1.57 2000/08/02 13:11:46 sniper Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -91,6 +91,12 @@ function_entry ldap_functions[] = {
 	PHP_FE(ldap_err2str,							NULL)
 	PHP_FE(ldap_error,								NULL)
 	PHP_FE(ldap_compare,							NULL)
+
+#ifdef STR_TRANSLATION
+	PHP_FE(ldap_t61_to_8859,						NULL)
+	PHP_FE(ldap_8859_to_t61,						NULL)
+#endif
+
 	{NULL, NULL, NULL}
 };
 
@@ -186,7 +192,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.56 2000/07/28 22:39:22 sniper Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.57 2000/08/02 13:11:46 sniper Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #if HAVE_NSLDAP
@@ -1419,3 +1425,56 @@ PHP_FUNCTION(ldap_compare) {
 }
 /* }}} */
   
+
+#ifdef STR_TRANSLATION
+static void php_ldap_do_translate(INTERNAL_FUNCTION_PARAMETERS, int way) {
+	zval **value;
+	char *ldap_buf;
+	unsigned long ldap_len;
+	int result;
+		
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &value) == FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+
+	convert_to_string_ex(value);
+	ldap_buf = (*value)->value.str.val;
+	ldap_len = (*value)->value.str.len;
+
+	if(ldap_len == 0) {
+		RETURN_FALSE;
+	}
+
+	if(way == 1) {
+		result = ldap_8859_to_t61(&ldap_buf, &ldap_len, 0);
+	} else {
+		result = ldap_t61_to_8859(&ldap_buf, &ldap_len, 0);
+	}
+
+	if (result == LDAP_SUCCESS) {
+		RETVAL_STRINGL(ldap_buf,ldap_len,1);
+		free(ldap_buf);
+	} else {
+		php_error(E_ERROR, "LDAP: Conversion from iso-8859-1 to t61 failed.");
+		RETVAL_FALSE;
+	}
+
+	return;
+}
+
+
+/* {{{ proto string ldap_t61_to_8859(string value)
+   Translate t61 characters to 8859 characters */
+PHP_FUNCTION(ldap_t61_to_8859) {
+	php_ldap_do_translate(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+}
+/* }}} */
+
+
+/* {{{ proto string ldap_8859_to_t61(string value)
+   Translate 8859 characters to t61 characters */
+PHP_FUNCTION(ldap_8859_to_t61) {
+	php_ldap_do_translate(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
+}
+/* }}} */
+#endif

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.6 2004/12/25 04:01:30 wez Exp $ */
+/* $Id: sqlite_driver.c,v 1.7 2004/12/26 18:13:52 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -127,8 +127,9 @@ static int sqlite_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len,
 	stmt->methods = &sqlite_stmt_methods;
 
 	i = sqlite3_prepare(H->db, sql, sql_len, &S->stmt, &tail);
-	if (i == SQLITE_OK)
+	if (i == SQLITE_OK) {
 		return 1;
+	}
 
 	pdo_sqlite_error(dbh);
 

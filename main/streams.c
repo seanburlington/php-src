@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.68 2003/05/31 01:37:44 sniper Exp $ */
+/* $Id: streams.c,v 1.125.2.69 2003/06/27 01:46:30 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2819,7 +2819,10 @@ PHPAPI void php_stream_notification_notify(php_stream_context *context, int noti
 
 PHPAPI void php_stream_context_free(php_stream_context *context)
 {
-	zval_ptr_dtor(&context->options);
+	if (context->options) {
+		zval_ptr_dtor(&context->options);
+		context->options = NULL;
+	}
 	efree(context);
 }
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.91 2004/06/29 21:51:28 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.92 2004/07/10 10:54:27 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -54,6 +54,8 @@
 #define STREAM_WRAPPER_PLAIN_FILES	((php_stream_wrapper*)-1)
 
 #define PHP_STDIOP_GET_FD(anfd, data)   anfd = (data)->file ? fileno((data)->file) : (data)->fd
+
+static php_stream_wrapper php_plain_files_wrapper;
 
 /* {{{ some macros to help track leaks */
 #if ZEND_DEBUG
@@ -648,7 +650,8 @@ PHPAPI size_t _php_stream_read(php_stream *stream, char *buf, size_t size TSRMLS
 		}
 
 		/* just break anyway, to avoid greedy read */
-		break;
+		if (stream->wrapper != &php_plain_files_wrapper)
+			break;
 	}
 
 	if (didread > 0)

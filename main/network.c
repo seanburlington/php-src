@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.71 2002/10/04 18:21:40 sas Exp $ */
+/* $Id: network.c,v 1.72 2002/10/04 18:59:34 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -542,6 +542,7 @@ PHPAPI php_stream *_php_stream_sock_open_from_socket(int socket, const char *per
 	sock->socket = socket;
 
 	stream = php_stream_alloc_rel(&php_stream_socket_ops, sock, persistent_id, "r+");
+	stream->flags |= PHP_STREAM_FLAG_AVOID_BLOCKING;
 
 	if (stream == NULL)	
 		pefree(sock, persistent_id ? 1 : 0);
@@ -924,7 +925,6 @@ php_stream_ops php_stream_socket_ops = {
 	php_sockop_cast,
 	php_sockop_stat,
 	php_sockop_set_option,
-	1
 };
 
 

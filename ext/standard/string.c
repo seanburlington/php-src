@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.72 1999/12/13 23:40:36 andrei Exp $ */
+/* $Id: string.c,v 1.73 1999/12/14 03:25:04 andrei Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -103,7 +103,7 @@ PHP_FUNCTION(strspn)
    Find length of initial segment consisting entirely of characters not found in mask */
 PHP_FUNCTION(strcspn)
 {
-	pval **s1,**s2;
+	zval **s1,**s2;
 	
 	if (ARG_COUNT(ht)!=2 || getParametersEx(2, &s1, &s2) == FAILURE) {
 		WRONG_PARAM_COUNT;

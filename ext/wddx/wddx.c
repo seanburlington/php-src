@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.1 1999/07/19 20:24:03 andrey Exp $ */
+/* $Id: wddx.c,v 1.2 1999/07/23 21:21:33 andrey Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -696,6 +696,7 @@ PHP_FUNCTION(wddx_serialize_vars)
 	_php_wddx_add_chunk(packet, WDDX_STRUCT_S);
 	
 	for (i=0; i<argc; i++) {
+		convert_to_string(args[i]);
 		_php_wddx_add_var(packet, args[i]);
 	}	
 	
@@ -815,6 +816,7 @@ PHP_FUNCTION(wddx_add_vars)
 	}
 		
 	for (i=1; i<argc; i++) {
+		convert_to_string(args[i]);
 		_php_wddx_add_var(packet, args[i]);
 	}
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.1 2003/05/18 20:33:26 sterling Exp $ */
+/* $Id: php_simplexml.h,v 1.2 2003/05/26 03:57:41 sterling Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H
@@ -53,6 +53,7 @@ PHP_MINFO_FUNCTION(simplexml);
 typedef struct {
 	zend_object zo;
 	xmlDocPtr document;
+	xmlXPathContextPtr xpath;
 	xmlNodePtr node;
 } php_sxe_object;
 

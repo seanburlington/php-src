@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.18 2002/11/02 13:38:32 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.19 2002/11/13 23:11:14 edink Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1027,7 +1027,7 @@ PHP_FUNCTION(mb_ereg_search_setpos)
 /* }}} */
 
 /* {{{ php_mb_regex_set_options */
-PHPAPI int php_mb_regex_set_options( int options TSRMLS_DC) 
+int php_mb_regex_set_options( int options TSRMLS_DC) 
 {
 	int prev_opt = MBSTRG(regex_default_options);
 	MBSTRG(regex_default_options) = options;
@@ -1036,7 +1036,7 @@ PHPAPI int php_mb_regex_set_options( int options TSRMLS_DC)
 /* }}} */
 
 /* {{{ php_mb_regex_set_options_by_string */
-PHPAPI int php_mb_regex_set_options_by_string( const char *opt_str, int len TSRMLS_DC)
+int php_mb_regex_set_options_by_string( const char *opt_str, int len TSRMLS_DC)
 {
 	int new_opt = 0;
 	_php_mb_regex_init_options( opt_str, len, &new_opt, NULL);

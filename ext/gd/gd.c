@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.179.2.3 2002/09/03 13:09:29 sniper Exp $ */
+/* $Id: gd.c,v 1.179.2.4 2002/09/20 01:01:24 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -3142,6 +3142,9 @@ PHP_FUNCTION(imagepstext)
 	default:
 		ZEND_WRONG_PARAM_COUNT();
 	}
+
+	convert_to_string_ex(str);
+	convert_to_long_ex(sz);
 
 	ZEND_FETCH_RESOURCE(bg_img, gdImagePtr, img, -1, "Image", le_gd);
 	ZEND_FETCH_RESOURCE(f_ind, int *, fnt, -1, "Type 1 font", le_ps_font);

@@ -17,14 +17,16 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.68 2002/06/02 13:07:18 ssb Exp $
+// $Id: Common.php,v 1.69 2002/06/06 10:16:42 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
 require_once 'System.php';
 require_once 'PEAR/Config.php';
 
-// {{{ globals
+// {{{ constants and globals
+
+define('PEAR_COMMON_PACKAGE_NAME_PREG', '/^([A-Z][a-zA-Z0-9_]+|[a-z][a-z0-9_]+)$/');
 
 /**
  * List of temporary files and directories registered by
@@ -481,6 +483,7 @@ class PEAR_Common extends PEAR
             case 'name':
                 switch ($this->prev_element) {
                     case 'package':
+                        // XXX should we check the package name here?
                         $this->pkginfo['package'] = ereg_replace('[^a-zA-Z0-9._]', '_', $data);
                         break;
                     case 'maintainer':
@@ -1355,7 +1358,7 @@ class PEAR_Common extends PEAR
      */
     function validPackageName($name)
     {
-        return (bool)preg_match('/^[A-Z][A-Za-z0-9_]+$/', $name);
+        return (bool)preg_match(PEAR_COMMON_PACKAGE_NAME_PREG, $name);
     }
 
 

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.87 1999/07/24 16:52:00 zeev Exp $ */
+/* $Id: main.c,v 1.88 1999/07/24 20:36:31 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -359,6 +359,9 @@ PHPAPI void php3_error(int type, const char *format,...)
 
 				error_filename = zend_get_compiled_filename();
 				error_lineno = CG(zend_lineno);
+				if (!error_filename) {
+					error_filename = zend_get_executed_filename(ELS_C);
+				}
 			}
 			break;
 		case E_ERROR:
@@ -371,6 +374,10 @@ PHPAPI void php3_error(int type, const char *format,...)
 			error_filename = NULL;
 			error_lineno = 0;
 			break;
+	}
+
+	if (!error_filename) {
+		error_filename = "Unknown";
 	}
 		
 	if (EG(error_reporting) & type || (type & E_CORE)) {

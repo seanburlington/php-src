@@ -3,12 +3,10 @@ Copyright (c) 1998, 1999 Thai Open Source Software Center Ltd
 See the file COPYING for copying permission.
 */
 
-#if 0
-static char RCSId[]
-  = "$Header: /repository/php-src/ext/xml/expat/Attic/xmlrole.c,v 1.2 2001/05/19 09:56:42 sas Exp $";
-#endif
-  
 #include "php_compat.h"
+
+static char RCSId[]
+  = "$Header: /repository/php-src/ext/xml/expat/Attic/xmlrole.c,v 1.3 2001/07/30 15:10:53 thies Exp $";
 
 #ifdef COMPILED_FROM_DSP
 #  include "winconfig.h"

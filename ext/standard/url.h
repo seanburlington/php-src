@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.h,v 1.18 2004/01/25 00:30:49 abies Exp $ */
+/* $Id: url.h,v 1.19 2004/09/20 05:13:35 iliaa Exp $ */
 
 #ifndef URL_H
 #define URL_H
@@ -33,6 +33,7 @@ typedef struct php_url {
 
 PHPAPI void php_url_free(php_url *theurl);
 PHPAPI php_url *php_url_parse(char const *str);
+PHPAPI php_url *php_url_parse_ex(char const *str, int length);
 PHPAPI int php_url_decode(char *str, int len); /* return value: length of decoded string */
 PHPAPI int php_raw_url_decode(char *str, int len); /* return value: length of decoded string */
 PHPAPI char *php_url_encode(char const *s, int len, int *new_length);

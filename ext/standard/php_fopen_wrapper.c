@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.7 2001/07/31 07:09:45 zeev Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.8 2001/08/01 00:13:02 sniper Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,7 +33,7 @@
 
 /* {{{ php_fopen_url_wrap_php
  */
-FILE *php_fopen_url_wrap_php(char *path, char *mode, int options, int *issock, int *socketd, char **opened_path TSRMLS_DC)
+FILE *php_fopen_url_wrap_php(const char *path, char *mode, int options, int *issock, int *socketd, char **opened_path TSRMLS_DC)
 {
 	const char *res = path + 6;
 

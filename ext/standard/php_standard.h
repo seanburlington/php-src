@@ -16,10 +16,11 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_standard.h,v 1.7 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: php_standard.h,v 1.8 2001/09/03 01:06:23 jeroen Exp $ */
 
 #include "basic_functions.h"
 #include "php_math.h"
+#include "php_rand.h"
 #include "php_string.h"
 #include "base64.h"
 #include "php_dir.h"

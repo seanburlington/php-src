@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.127 2001/08/31 04:52:10 andrei Exp $ */
+/* $Id: array.c,v 1.128 2001/09/03 01:06:23 jeroen Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2726,6 +2726,8 @@ PHP_FUNCTION(array_rand)
 	ulong num_key;
 	HashPosition pos;
 
+	php_error(E_ERROR, "Function array_rand temporarily disabled");
+
 	if (ZEND_NUM_ARGS() < 1 || ZEND_NUM_ARGS() > 2 ||
 		zend_get_parameters_ex(ZEND_NUM_ARGS(), &input, &num_req) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -2767,6 +2769,9 @@ PHP_FUNCTION(array_rand)
 		randval = rand();
 #endif
 #endif
+	
+		/* TEMPORARY HACK TO GET IT COMPILE */
+#define PHP_RAND_MAX 1
 
 		if ((double)(randval/(PHP_RAND_MAX+1.0)) < (double)num_req_val/(double)num_avail) {
 			/* If we are returning a single result, just do it. */

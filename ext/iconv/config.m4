@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.21 2003/07/06 21:08:49 moriyoshi Exp $
+dnl $Id: config.m4,v 1.22 2003/07/06 21:10:02 moriyoshi Exp $
 dnl
 
 PHP_ARG_WITH(iconv, for iconv support,
@@ -88,7 +88,6 @@ if test "$PHP_ICONV" != "no"; then
 
     AC_MSG_CHECKING([if iconv supports errno])
     AC_TRY_RUN([
-#define LIBICONV_PLUG
 #include <$PHP_ICONV_H_PATH>
 #include <errno.h>
 

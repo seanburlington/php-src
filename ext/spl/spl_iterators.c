@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.24 2004/03/08 18:05:41 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.25 2004/03/09 16:38:37 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1204,7 +1204,7 @@ PHP_MINIT_FUNCTION(spl_iterators)
 
 	REGISTER_SPL_STD_CLASS_EX(FilterIterator, spl_dual_it_new, spl_funcs_FilterIterator);
 	REGISTER_SPL_ITERATOR(FilterIterator);
-	spl_ce_FilterIterator->ce_flags |= ZEND_ACC_ABSTRACT_CLASS;
+	spl_ce_FilterIterator->ce_flags |= ZEND_ACC_EXPLICIT_ABSTRACT_CLASS;
 
 	REGISTER_SPL_SUB_CLASS_EX(ParentIterator, FilterIterator, spl_dual_it_new, spl_funcs_ParentIterator);
 	REGISTER_SPL_IMPLEMENTS(ParentIterator, RecursiveIterator);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.c,v 1.24 2004/02/06 03:14:06 iliaa Exp $ */
+/* $Id: spl_functions.c,v 1.25 2004/03/09 16:38:37 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -45,7 +45,7 @@ void spl_register_interface(zend_class_entry ** ppce, char * class_name, zend_fu
 	*ppce = zend_register_internal_class(&ce TSRMLS_CC);
 
 	/* entries changed by initialize */
-	(*ppce)->ce_flags = ZEND_ACC_ABSTRACT | ZEND_ACC_INTERFACE;
+	(*ppce)->ce_flags = ZEND_ACC_INTERFACE;
 }
 /* }}} */
 

@@ -14,7 +14,7 @@
 ** other files are for internal use by SQLite and should not be
 ** accessed by users of the library.
 **
-** $Id: main.c,v 1.3 2003/06/06 22:44:56 wez Exp $
+** $Id: main.c,v 1.4 2003/08/17 13:57:53 sas Exp $
 */
 #include "sqliteInt.h"
 #include "os.h"
@@ -764,7 +764,8 @@ static int sqliteDefaultBusyCallback(
 #if SQLITE_MIN_SLEEP_MS==1
   int delay = 10;
   int prior_delay = 0;
-  int timeout = (int)Timeout;
+  /* We seem to be called by a generic cb mechanism which passes void ptrs */
+  int timeout = (int)(long)Timeout;
   int i;
 
   for(i=1; i<count; i++){ 
@@ -783,7 +784,7 @@ static int sqliteDefaultBusyCallback(
   sqliteOsSleep(delay);
   return 1;
 #else
-  int timeout = (int)Timeout;
+  int timeout = (int)(long)Timeout;
   if( (count+1)*1000 > timeout ){
     return 0;
   }

@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.53.2.10 2003/04/26 21:34:48 wez Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.53.2.11 2003/04/28 14:41:54 wez Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -267,14 +267,21 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 
 	location[0] = '\0';
 
+	if (!header_init && FAILURE == zend_hash_find(EG(active_symbol_table),
+				"http_response_header", sizeof("http_response_header"), (void **) &response_header)) {
+		header_init = 1;
+	}
+
 	if (header_init) {
 		zval *tmp;
 		MAKE_STD_ZVAL(tmp);
 		array_init(tmp);
 		ZEND_SET_SYMBOL(EG(active_symbol_table), "http_response_header", tmp);
+	
+		zend_hash_find(EG(active_symbol_table),
+				"http_response_header", sizeof("http_response_header"), (void **) &response_header);
 	}
 
-	zend_hash_find(EG(active_symbol_table), "http_response_header", sizeof("http_response_header"), (void **) &response_header);
 
 	if (!php_stream_eof(stream))	{
 		/* get response header */
@@ -284,6 +291,8 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 			int response_code;
 
 			MAKE_STD_ZVAL(http_response);
+			ZVAL_NULL(http_response);
+
 			response_code = atoi(tmp_line + 9);
 			switch(response_code) {
 				case 200:
@@ -327,6 +336,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 			int http_header_line_length;
 			
 			http_header_line[HTTP_HEADER_BLOCK_SIZE-1] = '\0';
+
 			p = http_header_line;
 			while(*p) {
 				while(*p == '\n' || *p == '\r')	{
@@ -440,6 +450,7 @@ out:
 	if (stream) {
 		if (header_init) {
 			stream->wrapperdata = *response_header;
+			zval_add_ref(response_header);
 		}
 		php_stream_notify_progress_init(context, 0, file_size);
 		/* Restore original chunk size now that we're done with headers (if applicable) */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.117 2002/07/31 22:10:58 sterling Exp $ */
+/* $Id: curl.c,v 1.118 2002/08/12 15:56:13 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -260,6 +260,13 @@ PHP_MINIT_FUNCTION(curl)
 		return FAILURE;
 	}
 
+#ifdef PHP_CURL_URL_WRAPPERS
+	php_register_url_stream_wrapper("http", &php_curl_wrapper TSRMLS_CC);
+	php_register_url_stream_wrapper("https", &php_curl_wrapper TSRMLS_CC);
+	php_register_url_stream_wrapper("ftp", &php_curl_wrapper TSRMLS_CC);
+	php_register_url_stream_wrapper("ldap", &php_curl_wrapper TSRMLS_CC);
+#endif
+	
 	return SUCCESS;
 }
 /* }}} */
@@ -268,6 +275,12 @@ PHP_MINIT_FUNCTION(curl)
  */
 PHP_MSHUTDOWN_FUNCTION(curl)
 {
+#ifdef PHP_CURL_URL_WRAPPERS
+	php_unregister_url_stream_wrapper("http" TSRMLS_CC);
+	php_unregister_url_stream_wrapper("https" TSRMLS_CC);
+	php_unregister_url_stream_wrapper("ftp" TSRMLS_CC);
+	php_unregister_url_stream_wrapper("ldap" TSRMLS_CC);
+#endif
 	curl_global_cleanup();
 
 	return SUCCESS;

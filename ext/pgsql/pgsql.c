@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.13 1999/08/09 20:06:15 eschmid Exp $ */
+/* $Id: pgsql.c,v 1.14 1999/08/29 15:00:18 eschmid Exp $ */
 
 #include <stdlib.h>
 
@@ -767,7 +767,7 @@ PHP_FUNCTION(pgsql_field_name)
 }
 /* }}} */
 
-/* {{{ proto pg_fieldsize(int result, int field_number)
+/* {{{ int proto pg_fieldsize(int result, int field_number)
    Returns the internal size of the field */ 
 PHP_FUNCTION(pgsql_field_size)
 {

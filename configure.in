@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.61 1999/12/06 15:32:00 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.62 1999/12/07 15:22:49 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -737,11 +737,12 @@ phptempdir="`pwd`/libs"
 AC_SUBST(phplibdir)
 AC_SUBST(phptempdir)
 EXTRA_LIBS="$EXTRA_LIBS $LIBS"
-EXTRA_LDFLAGS="$EXTRA_LDFLAGS $PHP_LDFLAGS"
 LIBS=""
 LDFLAGS=""
 
 AC_BUILD_RPATH
+
+EXTRA_LDFLAGS="$EXTRA_LDFLAGS $PHP_LDFLAGS"
 
 AC_SUBST(CFLAGS)
 AC_SUBST(PROG_SENDMAIL)

@@ -1,5 +1,5 @@
-# $Id: Makefile.am,v 1.3 1999/11/13 12:40:39 sas Exp $
+# $Id: Makefile.am,v 1.4 1999/12/18 11:46:12 zeev Exp $
 
 noinst_LTLIBRARIES=libphpext_mcal.la
-libphpext_mcal_la_SOURCES=php3_mcal.c
+libphpext_mcal_la_SOURCES=php_mcal.c
 

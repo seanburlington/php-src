@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_ldap.h,v 1.2 1999/12/17 20:55:08 zeev Exp $ */
+/* $Id: php_ldap.h,v 1.3 1999/12/18 11:49:31 zeev Exp $ */
 
 #ifndef _PHP_LDAP_H
 #define _PHP_LDAP_H
@@ -113,7 +113,7 @@ typedef struct {
 } ldap_module;
 
 #ifndef THREAD_SAFE
-extern ldap_module php3_ldap_module;
+extern ldap_module php_ldap_module;
 #endif
 
 #else

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_packet_soap.c,v 1.38 2004/08/27 07:07:46 dmitry Exp $ */
+/* $Id: php_packet_soap.c,v 1.39 2004/10/05 16:00:40 dmitry Exp $ */
 
 #include "php_soap.h"
 
@@ -270,6 +270,9 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 					if (!cur) {
 						cur = get_node(resp, name);
 						/* TODO: produce warning invalid ns */
+					}
+					if (!cur && fnb->style == SOAP_RPC) {
+					  cur = resp;
 					}
 					if (cur) {
 						if (fnb->style == SOAP_DOCUMENT) {

@@ -2,14 +2,14 @@
 /*                                          */
 /* John Ellson   ellson@lucent.com          */
 
-/* $Id: gdttf.c,v 1.2 1999/05/11 00:01:42 zeev Exp $ */
+/* $Id: gdttf.c,v 1.3 1999/07/23 15:18:37 zeev Exp $ */
 
 #if WIN32|WINNT
 #include "config.w32.h"
 #else
 #include "php_config.h"
 #endif
-#if HAVE_LIBTTF
+#ifdef ENABLE_GD_TTF
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -852,7 +852,7 @@ gdttf(gdImage *im, int *brect, int fg, char *fontname,
     return (char *)NULL;
 }
    
-#endif /* HAVE_LIBTTF */
+#endif /* ENABLE_GD_TTF */
 
 /*
  * Local variables:

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.109 2004/04/09 19:18:59 pollita Exp $ */
+/* $Id: network.c,v 1.110 2004/07/28 23:15:25 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -495,12 +495,15 @@ PHPAPI int php_network_parse_network_address_with_port(const char *addr, long ad
 	if (*addr == '[') {
 		colon = memchr(addr + 1, ']', addrlen-1);
 		if (!colon || colon[1] != ':') {
-			return 0;
+			return FAILURE;
 		}
 		port = atoi(colon + 2);
 		addr++;
 	} else {
 		colon = memchr(addr, ':', addrlen);
+		if (!colon || colon[1] != ':') {
+			return FAILURE;
+		}
 		port = atoi(colon + 1);
 	}
 

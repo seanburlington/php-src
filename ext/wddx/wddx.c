@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.29 2000/03/06 18:41:18 ssb Exp $ */
+/* $Id: wddx.c,v 1.30 2000/04/04 11:35:01 thies Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -299,7 +299,7 @@ static void php_wddx_serialize_string(wddx_packet *packet, zval *var)
 
 	if (var->value.str.len > 0) {
 		i = 0;
-		buf = (char *)emalloc(var->value.str.len);
+		buf = (char *)emalloc(var->value.str.len+1);
 		for(c=var->value.str.val; *c!='\0'; c++)
 		{
 			if (iscntrl((int)*c))

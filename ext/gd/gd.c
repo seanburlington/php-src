@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.41 2000/02/29 18:45:47 jah Exp $ */
+/* $Id: gd.c,v 1.42 2000/03/03 14:15:05 jah Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1103,7 +1103,7 @@ PHP_FUNCTION(imagearc)
 	GDLS_FETCH();
 
 	if (ARG_COUNT(ht) != 8 ||
-		zend_get_parameters_ex(ht, 8, &IM, &CX, &CY, &W, &H, &ST, &E, &COL) == FAILURE)
+		zend_get_parameters_ex(8, &IM, &CX, &CY, &W, &H, &ST, &E, &COL) == FAILURE)
 	{
 		WRONG_PARAM_COUNT;
 	}

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.51 2004/01/02 00:58:15 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.52 2004/01/03 00:50:01 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1375,7 +1375,7 @@ PHPAPI PHP_FUNCTION(fgets)
 		len = Z_LVAL_PP(arg2);
 
 		if (len <= 0) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length parameter must be greater then 0.");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length parameter must be greater than 0.");
 			RETURN_FALSE;
 		}
 
@@ -1472,7 +1472,7 @@ PHPAPI PHP_FUNCTION(fgetss)
 	convert_to_long_ex(bytes);
 	len = Z_LVAL_PP(bytes);
 	if (len <= 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length parameter must be greater then 0.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length parameter must be greater than 0.");
 		RETURN_FALSE;
 	}
 
@@ -2137,7 +2137,7 @@ PHPAPI PHP_FUNCTION(fread)
 	convert_to_long_ex(arg2);
 	len = Z_LVAL_PP(arg2);
 	if (len <= 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length parameter must be greater then 0.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length parameter must be greater than 0.");
 		RETURN_FALSE;
 	}
 

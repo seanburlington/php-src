@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.32 2003/01/23 20:38:44 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.33 2003/03/04 17:10:29 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -694,9 +694,8 @@ PHP_FUNCTION(mb_split)
 	mb_regex_t re;
 	struct mbre_registers regs = {0, 0, 0, 0};
 	char *string;
-	int n, err, count, string_len, pos;
-
-	count = -1;
+	int n, err, string_len, pos;
+	long count = -1;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zs|l", &arg_pat,
 	                        &string, &string_len, &count) == FAILURE) {

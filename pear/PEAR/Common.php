@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.49 2002/04/09 22:30:44 ssb Exp $
+// $Id: Common.php,v 1.50 2002/04/13 00:20:40 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -983,11 +983,11 @@ class PEAR_Common extends PEAR
         } else {
             foreach ($info['filelist'] as $file => $fa) {
                 if (empty($fa['role'])) {
-                    $errors[] = "$file: missing role";
+                    $errors[] = "file $file: missing role";
                 } elseif (!in_array($fa['role'], $this->file_roles)) {
-                    $errors[] = "$file: invalid role, should be one of: ".implode(' ', $this->file_roles);
+                    $errors[] = "file $file: invalid role, should be one of: ".implode(' ', $this->file_roles);
                 } elseif ($fa['role'] == 'extsrc' && empty($fa['sources'])) {
-                    $errors[] = "$file: no source files";
+                    $errors[] = "file $file: no source files";
                 }
                 // (ssb) Any checks we can do for baseinstalldir?
                 // (cox) Perhaps checks that either the target dir and baseInstall

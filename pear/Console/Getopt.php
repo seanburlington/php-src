@@ -16,7 +16,7 @@
 // | Author: Andrei Zmievski <andrei@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Getopt.php,v 1.16 2002/07/09 10:52:25 ssb Exp $
+// $Id: Getopt.php,v 1.17 2002/07/26 10:01:28 cox Exp $
 
 require_once 'PEAR.php';
 
@@ -210,7 +210,7 @@ class Console_Getopt {
         global $argv;
         if (!is_array($argv)) {
             if (!@is_array($_SERVER['argv'])) {
-                if (!is_array($HTTP_SERVER_VARS['argv'])) {
+                if (!@is_array($HTTP_SERVER_VARS['argv'])) {
                     return PEAR::raiseError("Console_Getopt: Could not read cmd args (register_argc_argv=Off?)");
                 }
                 return $HTTP_SERVER_VARS['argv'];

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.181 2003/09/12 21:02:43 abies Exp $ */
+/* $Id: interbase.c,v 1.182 2003/09/16 19:44:56 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,7 @@
 
 #include "php.h"
 
-#define FILE_REVISION "$Revision: 1.181 $"
+#define FILE_REVISION "$Revision: 1.182 $"
 
 #if HAVE_IBASE && !defined(VERSION_INFO_ONLY)
 
@@ -2505,7 +2505,8 @@ PHP_FUNCTION(ibase_affected_rows)
 }
 /* }}} */
 
-/* {{{ ibase_num_rows( resource result_identifier ) */
+/* {{{ proto ibase_num_rows( resource result_identifier ) 
+ */
 #if abies_0
 PHP_FUNCTION(ibase_num_rows) 
 {

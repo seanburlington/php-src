@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.44 2003/09/06 19:34:48 helly Exp $ 
+  $Id: mysqli_api.c,v 1.45 2003/09/16 19:45:22 hholzgra Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1852,7 +1852,7 @@ PHP_FUNCTION(mysqli_stmt_store_result)
 }
 /* }}} */
 
-/* {{{ proto string mysqli_stmt_error(object stmt)
+/* {{{ proto string mysqli_stmt_sqlstate(object stmt)
 */
 #if MYSQL_VERSION_ID >= 40101
 PHP_FUNCTION(mysqli_stmt_sqlstate) 

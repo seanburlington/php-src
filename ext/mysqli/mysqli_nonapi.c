@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.16 2003/09/06 19:34:48 helly Exp $ 
+  $Id: mysqli_nonapi.c,v 1.17 2003/09/16 19:45:22 hholzgra Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -100,7 +100,7 @@ PHP_FUNCTION(mysqli_connect)
 }
 /* }}} */
 
-/* {{{ proto int mysqli_connct_errno()
+/* {{{ proto int mysqli_connect_errno()
    Returns the numerical value of the error message from last connect command */
 PHP_FUNCTION(mysqli_connect_errno)
 {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.25 2002/03/21 22:35:00 mfischer Exp $ */
+/* $Id: recode.c,v 1.26 2002/04/20 18:33:54 derick Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -75,8 +75,15 @@ extern void timeout(int sig);
 ZEND_GET_MODULE(recode)
 #endif
 
+static void php_recode_init_globals (zend_recode_globals *rg)
+{
+	rg->outer = NULL;
+}
+
 PHP_MINIT_FUNCTION(recode)
 {
+	ZEND_INIT_MODULE_GLOBALS(recode, php_recode_init_globals, NULL);
+
 	ReSG(outer)	  = recode_new_outer(true);
 	if (ReSG(outer) == NULL)
 		return FAILURE;
@@ -98,7 +105,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.25 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.26 $");
 	php_info_print_table_end();
 
 }

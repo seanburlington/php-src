@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.16 2001/05/04 14:53:45 thies Exp $ */
+/* $Id: php_oci8.h,v 1.16.2.1 2001/05/28 00:16:43 sniper Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -41,6 +41,13 @@
 #else
 #define PHP_OCI_API
 #endif                                   
+
+#if defined(min)
+#undef min
+#endif
+#if defined(max)
+#undef max
+#endif
 
 #include <oci.h>
 

@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build2.mk,v 1.24 2002/02/28 08:25:30 sebastian Exp $ 
+# $Id: build2.mk,v 1.25 2002/03/04 08:28:57 sas Exp $ 
 #
 
 include generated_lists
@@ -60,7 +60,7 @@ $(makefile_in_files): $(makefile_am_files) aclocal.m4 configure.in $(config_m4_f
 aclocal.m4: configure.in acinclude.m4 dynlib.m4
 	aclocal 2>&1 | $(SUPPRESS_WARNINGS)
 
-SUPPRESS_WARNINGS = (egrep -v '(AC_TRY_RUN called without default to allow cross compiling|AC_PROG_CXXCPP was called before AC_PROG_CXX|.*AM_PROG_LEX.*|defined in acinclude.m4 but never used|AC_PROG_LEX invoked multiple times)'||true)
+SUPPRESS_WARNINGS = (egrep -v '(AC_TRY_RUN called without default to allow cross compiling|AC_PROG_CXXCPP was called before AC_PROG_CXX|.*AM_PROG_LEX.*|defined in acinclude.m4 but never used|AC_PROG_LEX invoked multiple times|AC_PROG_CPP called before)'||true)
 
 $(config_h_in): configure acconfig.h
 # explicitly remove target since autoheader does not seem to work 

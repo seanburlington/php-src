@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.59 2002/08/24 11:37:50 sesser Exp $ */
+/* $Id: mail.c,v 1.60 2002/08/26 09:44:31 derick Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -111,8 +111,9 @@ PHP_FUNCTION(mail)
 		}
 	}
 
-	if(extra_cmd)
-		extra_cmd = php_escape_shell_arg(extra_cmd);
+	if (extra_cmd) {
+		extra_cmd = php_escape_shell_cmd(extra_cmd);
+	}
 	
 	if (php_mail(to, subject, message, headers, extra_cmd TSRMLS_CC)) {
 		RETVAL_TRUE;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.63.2.14 2003/05/05 19:51:16 moriyoshi Exp $ */
+/* $Id: html.c,v 1.63.2.15 2003/05/08 15:44:32 moriyoshi Exp $ */
 
 /*
  * HTML entity resources:
@@ -161,6 +161,10 @@ static entity_table_t ent_uni_punct[] = {
 	"prime", "Prime", NULL, NULL, NULL, NULL, NULL, "lsaquo", "rsaquo",
 	NULL, NULL, NULL, "oline", NULL, NULL, NULL, NULL, NULL,
 	"frasl"
+};
+
+static entity_table_t ent_uni_euro[] = {
+	"euro"
 };
 
 static entity_table_t ent_uni_8465_8501[] = {
@@ -352,6 +356,7 @@ static const struct html_entity_map entity_map[] = {
 	{ cs_utf_8, 		710,  732,  ent_uni_spacing },
 	{ cs_utf_8, 		913,  982,  ent_uni_greek },
 	{ cs_utf_8, 		8194, 8260, ent_uni_punct },
+	{ cs_utf_8, 		8364, 8364, ent_uni_euro }, 
 	{ cs_utf_8, 		8465, 8501, ent_uni_8465_8501 },
 	{ cs_utf_8, 		8592, 9002, ent_uni_8592_9002 },
 	{ cs_utf_8, 		9674, 9674, ent_uni_9674 },

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dbx.h,v 1.10 2001/08/07 19:09:58 fmk Exp $ */
+/* $Id: php_dbx.h,v 1.11 2001/08/17 13:56:29 mboeren Exp $ */
 
 #ifndef ZEND_PHP_DBX_H
 #define ZEND_PHP_DBX_H
@@ -54,8 +54,8 @@ ZEND_FUNCTION(dbx_sort);
 ZEND_FUNCTION(dbx_compare);
 
 /* 
-  	Declare any global variables you may need between the BEGIN
-	and END macros here:     
+   Declare any global variables you may need between the BEGIN
+   and END macros here:     
 */
 
 /*
@@ -76,7 +76,7 @@ ZEND_END_MODULE_GLOBALS(dbx)
 #define DBXG(v) (dbx_globals.v)
 #endif
 
-#endif	/* ZEND_PHP_DBX_H */
+#endif /* ZEND_PHP_DBX_H */
 
 
 /*

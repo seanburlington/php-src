@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules.mk,v 1.25.2.1 2000/12/03 10:45:57 hholzgra Exp $ 
+# $Id: rules.mk,v 1.25.2.2 2000/12/24 14:31:56 sas Exp $ 
 #
 
 include $(top_srcdir)/build/rules_common.mk
@@ -54,7 +54,7 @@ distclean: distclean-recursive clean-x
 	php_config.h stamp-h Makefile build-defs.h php4.spec libphp4.module
 
 test: $(top_builddir)/php
-	@$(top_builddir)/php -q $(top_srcdir)/run-tests.php `pwd`
+	@TOP_BUILDDIR=$(top_builddir) TOP_SRCDIR=$(top_srcdir) $(top_builddir)/php -q $(top_srcdir)/run-tests.php $(srcdir)
 
 include $(builddir)/.deps
 

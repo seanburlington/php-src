@@ -18,7 +18,7 @@
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: calendar.c,v 1.27 2002/10/31 09:16:23 derick Exp $ */
+/* $Id: calendar.c,v 1.28 2002/11/07 14:42:20 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -112,7 +112,7 @@ enum	{ CAL_MONTH_GREGORIAN_SHORT, CAL_MONTH_GREGORIAN_LONG,
 	CAL_MONTH_FRENCH };
 
 /* for heb_number_to_chars */
-char alef_bet[25] = "0אבגדהוזחטיכלמנסעפצקרשת";
+static char alef_bet[25] = "0אבגדהוזחטיכלמנסעפצקרשת";
 	
 PHP_MINIT_FUNCTION(calendar)
 {

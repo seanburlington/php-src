@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pfpro.c,v 1.27 2003/01/19 00:45:45 iliaa Exp $ */
+/* $Id: pfpro.c,v 1.28 2003/03/07 05:15:20 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -74,10 +74,10 @@ ZEND_GET_MODULE(pfpro)
 /* {{{ initialization defaults */
 PHP_INI_BEGIN()
 	STD_PHP_INI_ENTRY("pfpro.defaulthost",    "test-payflow.verisign.com", PHP_INI_ALL, OnUpdateString,	defaulthost, zend_pfpro_globals, pfpro_globals)
-	STD_PHP_INI_ENTRY("pfpro.defaultport",    "443", PHP_INI_ALL, OnUpdateInt,    defaultport,    zend_pfpro_globals, pfpro_globals)
-	STD_PHP_INI_ENTRY("pfpro.defaulttimeout", "30",  PHP_INI_ALL, OnUpdateInt,    defaulttimeout, zend_pfpro_globals, pfpro_globals)
+	STD_PHP_INI_ENTRY("pfpro.defaultport",    "443", PHP_INI_ALL, OnUpdateLong,    defaultport,    zend_pfpro_globals, pfpro_globals)
+	STD_PHP_INI_ENTRY("pfpro.defaulttimeout", "30",  PHP_INI_ALL, OnUpdateLong,    defaulttimeout, zend_pfpro_globals, pfpro_globals)
 	STD_PHP_INI_ENTRY("pfpro.proxyaddress",   "",    PHP_INI_ALL, OnUpdateString, proxyaddress,   zend_pfpro_globals, pfpro_globals)
-	STD_PHP_INI_ENTRY("pfpro.proxyport",      "",    PHP_INI_ALL, OnUpdateInt,    proxyport,      zend_pfpro_globals, pfpro_globals)
+	STD_PHP_INI_ENTRY("pfpro.proxyport",      "",    PHP_INI_ALL, OnUpdateLong,    proxyport,      zend_pfpro_globals, pfpro_globals)
 	STD_PHP_INI_ENTRY("pfpro.proxylogon",     "",    PHP_INI_ALL, OnUpdateString, proxylogon,     zend_pfpro_globals, pfpro_globals)
 	STD_PHP_INI_ENTRY("pfpro.proxypassword",  "",    PHP_INI_ALL, OnUpdateString, proxypassword,  zend_pfpro_globals, pfpro_globals)
 PHP_INI_END()

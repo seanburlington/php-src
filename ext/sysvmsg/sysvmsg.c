@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.9 2003/03/07 01:03:04 sniper Exp $ */
+/* $Id: sysvmsg.c,v 1.10 2003/03/07 05:15:25 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -82,7 +82,7 @@ ZEND_GET_MODULE(sysvmsg)
  */
 /* Remove comments and fill if you need to have entries in php.ini
 PHP_INI_BEGIN()
-	STD_PHP_INI_ENTRY("sysvmsg.value",  "42",     PHP_INI_ALL, OnUpdateInt,    global_value,  zend_sysvmsg_globals, sysvmsg_globals)
+	STD_PHP_INI_ENTRY("sysvmsg.value",  "42",     PHP_INI_ALL, OnUpdateLong,    global_value,  zend_sysvmsg_globals, sysvmsg_globals)
 	STD_PHP_INI_ENTRY("sysvmsg.string", "foobar", PHP_INI_ALL, OnUpdateString, global_string, zend_sysvmsg_globals, sysvmsg_globals)
 PHP_INI_END()
 */
@@ -120,7 +120,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.9 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.10 $");
 	php_info_print_table_end();
 }
 /* }}} */

@@ -15,7 +15,7 @@
   | Author: Sascha Schumann <sascha@schumann.cx>                         |
   +----------------------------------------------------------------------+
 
-  $Id: fam.c,v 1.2 2002/12/31 16:06:34 sebastian Exp $ 
+  $Id: fam.c,v 1.3 2003/03/07 05:15:09 sniper Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -83,7 +83,7 @@ ZEND_GET_MODULE(fam)
  */
 /* Remove comments and fill if you need to have entries in php.ini
 PHP_INI_BEGIN()
-    STD_PHP_INI_ENTRY("fam.global_value",      "42", PHP_INI_ALL, OnUpdateInt, global_value, zend_fam_globals, fam_globals)
+    STD_PHP_INI_ENTRY("fam.global_value",      "42", PHP_INI_ALL, OnUpdateLong, global_value, zend_fam_globals, fam_globals)
     STD_PHP_INI_ENTRY("fam.global_string", "foobar", PHP_INI_ALL, OnUpdateString, global_string, zend_fam_globals, fam_globals)
 PHP_INI_END()
 */

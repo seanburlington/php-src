@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.66 2003/02/28 07:17:46 sniper Exp $ */
+/* $Id: php_yaz.c,v 1.67 2003/03/07 05:15:25 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1455,7 +1455,7 @@ static void yaz_close_link (zend_rsrc_list_entry *rsrc TSRMLS_DC)
 /* {{{ PHP_INI_BEGIN
  */
 PHP_INI_BEGIN()
-	STD_PHP_INI_ENTRY("yaz.max_links", "100", PHP_INI_ALL, OnUpdateInt, max_links, zend_yaz_globals, yaz_globals)
+	STD_PHP_INI_ENTRY("yaz.max_links", "100", PHP_INI_ALL, OnUpdateLong, max_links, zend_yaz_globals, yaz_globals)
 	STD_PHP_INI_ENTRY("yaz.log_file", NULL, PHP_INI_ALL, OnUpdateString, log_file, zend_yaz_globals, yaz_globals)
 PHP_INI_END()
 /* }}} */

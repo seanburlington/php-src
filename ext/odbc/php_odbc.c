@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.156 2003/03/04 16:34:52 iliaa Exp $ */
+/* $Id: php_odbc.c,v 1.157 2003/03/07 05:15:20 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -375,11 +375,11 @@ static PHP_INI_DISP(display_lrl)
 /* {{{ PHP_INI_BEGIN 
  */
 PHP_INI_BEGIN()
-	STD_PHP_INI_BOOLEAN("odbc.allow_persistent", "1", PHP_INI_SYSTEM, OnUpdateInt,
+	STD_PHP_INI_BOOLEAN("odbc.allow_persistent", "1", PHP_INI_SYSTEM, OnUpdateLong,
 			allow_persistent, php_odbc_globals, odbc_globals)
-	STD_PHP_INI_ENTRY_EX("odbc.max_persistent",  "-1", PHP_INI_SYSTEM, OnUpdateInt,
+	STD_PHP_INI_ENTRY_EX("odbc.max_persistent",  "-1", PHP_INI_SYSTEM, OnUpdateLong,
 			max_persistent, php_odbc_globals, odbc_globals, display_link_nums)
-	STD_PHP_INI_ENTRY_EX("odbc.max_links", "-1", PHP_INI_SYSTEM, OnUpdateInt,
+	STD_PHP_INI_ENTRY_EX("odbc.max_links", "-1", PHP_INI_SYSTEM, OnUpdateLong,
 			max_links, php_odbc_globals, odbc_globals, display_link_nums)
 	STD_PHP_INI_ENTRY("odbc.default_db", NULL, PHP_INI_ALL, OnUpdateString,
 			defDB, php_odbc_globals, odbc_globals)
@@ -387,11 +387,11 @@ PHP_INI_BEGIN()
 			defUser, php_odbc_globals, odbc_globals)
 	STD_PHP_INI_ENTRY_EX("odbc.default_pw", NULL, PHP_INI_ALL, OnUpdateString,
 			defPW, php_odbc_globals, odbc_globals, display_defPW)
-	STD_PHP_INI_ENTRY_EX("odbc.defaultlrl", "4096", PHP_INI_ALL, OnUpdateInt,
+	STD_PHP_INI_ENTRY_EX("odbc.defaultlrl", "4096", PHP_INI_ALL, OnUpdateLong,
 			defaultlrl, php_odbc_globals, odbc_globals, display_lrl)
-	STD_PHP_INI_ENTRY_EX("odbc.defaultbinmode", "1", PHP_INI_ALL, OnUpdateInt,
+	STD_PHP_INI_ENTRY_EX("odbc.defaultbinmode", "1", PHP_INI_ALL, OnUpdateLong,
 			defaultbinmode, php_odbc_globals, odbc_globals, display_binmode)
-	STD_PHP_INI_BOOLEAN("odbc.check_persistent", "1", PHP_INI_SYSTEM, OnUpdateInt,
+	STD_PHP_INI_BOOLEAN("odbc.check_persistent", "1", PHP_INI_SYSTEM, OnUpdateLong,
 			check_persistent, php_odbc_globals, odbc_globals)
 PHP_INI_END()
 /* }}} */

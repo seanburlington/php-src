@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config0.m4,v 1.12 2002/10/07 22:27:50 rasmus Exp $
+dnl $Id: config0.m4,v 1.13 2002/12/09 18:29:07 wez Exp $
 dnl
 
 PHP_ARG_WITH(zlib,for ZLIB support,
@@ -50,5 +50,4 @@ if test "$PHP_ZLIB" != "no" -o "$PHP_ZLIB_DIR" != "no"; then
   PHP_ADD_LIBRARY(z,, ZLIB_SHARED_LIBADD)
   PHP_ADD_INCLUDE($ZLIB_INCDIR)
 
-  PHP_FOPENCOOKIE
 fi

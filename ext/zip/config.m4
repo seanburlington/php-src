@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.5 2002/10/17 05:06:53 sniper Exp $
+dnl $Id: config.m4,v 1.6 2002/12/09 18:29:07 wez Exp $
 dnl 
 
 PHP_ARG_WITH(zip,for ZIP support, 
@@ -33,8 +33,6 @@ if test "$PHP_ZIP" != "no"; then
 
   PHP_ADD_LIBRARY_WITH_PATH(zzip, $ZZIPLIB_LIBDIR, ZIP_SHARED_LIBADD)
   PHP_ADD_INCLUDE($ZZIPLIB_INCDIR)
-
-  PHP_FOPENCOOKIE
 
   PHP_NEW_EXTENSION(zip, zip.c, $ext_shared)
   PHP_SUBST(ZIP_SHARED_LIBADD)

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.36 2000/02/25 21:27:03 ssb Exp $ */
+/* $Id: mod_php4.c,v 1.37 2000/02/26 05:03:41 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -411,7 +411,7 @@ static char *php_apache_get_default_mimetype(request_rec *r SLS_DC)
 		mimetype = pstrdup(r->pool, tmpmimetype);
 		efree(tmpmimetype);
 	} else {
-		mimetype = SAPI_DEFAULT_CONTENT_TYPE;
+		mimetype = SAPI_DEFAULT_MIMETYPE "; charset=" SAPI_DEFAULT_CHARSET;
 	}
 	return mimetype;
 }

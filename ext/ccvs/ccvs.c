@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */ 
 /* 
-*	cvvs.c $Revision: 1.4 $ - PHP4 Interface to the RedHat CCVS API
+*	cvvs.c $Revision: 1.5 $ - PHP4 Interface to the RedHat CCVS API
 *	 -------
 *	 Interfaces RedHat's CCVS [Credit Card Verification System] <http://www.redhat.com/products/ccvs/>
 *	 This code is ported from an original php3 interface written by RedHat's Doug DeJulio <ddj@redhat.com>
@@ -27,10 +27,10 @@
 
 /* 
 *	Code started on 2000.07.24@09.04.EST by Brendan W. McAdams <brendan@plexmedia.com>
-*	$Revision: 1.4 $
+*	$Revision: 1.5 $
 */
 
-static char const cvsid[] = "$Id: ccvs.c,v 1.4 2000/08/09 17:43:04 bmcadams Exp $";
+static char const cvsid[] = "$Id: ccvs.c,v 1.5 2000/08/09 17:53:55 bmcadams Exp $";
 
 #include <php.h>
 #include <stdlib.h>
@@ -523,8 +523,9 @@ PHP_MINFO_FUNCTION(ccvs)
 {
     php_info_print_table_start();
     php_info_print_table_header(2, "RedHat CCVS support", "enabled");
-    php_info_print_table_row(2,"CCVS Support by","Brendan W. McAdams &lt;brendan@plexmedia.com&gt;");
+    php_info_print_table_row(2,"CCVS Support by","Brendan W. McAdams &lt;brendan@plexmedia.com&gt;<br>&amp; Doug DeJulio &lt;ddj@redhat.com&gt;");
     php_info_print_table_row(2,"Release ID",cvsid);
+    php_info_print_table_row(2,"This Release Certified For CCVS Versions","3.3");
     php_info_print_table_end();  
     
     /*  DISPLAY_INI_ENTRIES(); */

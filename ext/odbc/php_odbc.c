@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.143.2.7 2003/04/30 10:46:43 wez Exp $ */
+/* $Id: php_odbc.c,v 1.143.2.8 2003/04/30 11:12:03 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1393,10 +1393,6 @@ static void php_odbc_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 
 	if (result->numcols == 0) {
 		php_error(E_WARNING, "No tuples available at this result index");
-		RETURN_FALSE;
-	}
-
-	if (array_init(return_value)==FAILURE) {
 		RETURN_FALSE;
 	}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.45 2002/05/11 15:58:55 sterling Exp $ */
+/* $Id: swf.c,v 1.46 2002/09/11 22:43:58 sterling Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -192,7 +192,7 @@ PHP_FUNCTION(swf_openfile)
 {
 	zval **name, **sizeX, **sizeY, **frameRate, **r, **g, **b;
 	char *na, *tmpna;
-	zend_bool free_na;
+	zend_bool free_na = 0;
 	
 	if (ZEND_NUM_ARGS() != 7 ||
 	    zend_get_parameters_ex(7, &name, &sizeX, &sizeY, &frameRate, &r, &g, &b) == FAILURE) {

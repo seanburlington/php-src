@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.147 2004/01/08 17:33:12 sniper Exp $
+// $Id: Installer.php,v 1.148 2004/02/29 15:58:17 avsm Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -537,21 +537,6 @@ class PEAR_Installer extends PEAR_Downloader
     {
         $this->addFileOperation('mkdir', array($dir));
         return parent::mkDirHier($dir);
-    }
-
-    // }}}
-    // {{{ _prependPath($path, $prepend)
-
-    function _prependPath($path, $prepend)
-    {
-        if (strlen($prepend) > 0) {
-            if (OS_WINDOWS && preg_match('/^[a-z]:/i', $path)) {
-                $path = $prepend . substr($path, 2);
-            } else {
-                $path = $prepend . $path;
-            }
-        }
-        return $path;
     }
 
     // }}}

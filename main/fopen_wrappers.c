@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.84 2000/08/30 20:32:29 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.85 2000/08/31 19:49:36 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -328,12 +328,7 @@ PHPAPI FILE *php_fopen_primary_script(void)
 #endif
 	if (PG(doc_root) && path_info) {
 		length = strlen(PG(doc_root));
-#ifdef PHP_WIN32
-		/* Check for absolute path. This should really use virtual cwd macros */
-		if (IS_SLASH(*PG(doc_root)) || (length >= 3 && PG(doc_root)[1] == ':' && IS_SLASH(PG(doc_root)[2]))) {
-#else
-		if (IS_SLASH(*PG(doc_root))) {
-#endif
+		if (IS_ABSOLUTE_PATH(PG(doc_root), length)) {
 			filename = emalloc(length + strlen(path_info) + 2);
 			if (filename) {
 				memcpy(filename, PG(doc_root), length);

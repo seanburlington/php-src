@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.47 2000/07/24 01:39:49 david Exp $ */
+/* $Id: dl.c,v 1.48 2000/08/31 19:49:36 andi Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -86,9 +86,6 @@ PHP_FUNCTION(dl)
 #else
 #define USING_ZTS 0
 #endif
-
-#define IS_SLASH(c)	\
-	(((c)=='/') || ((c)=='\\'))
 
 void php_dl(pval *file, int type, pval *return_value)
 {

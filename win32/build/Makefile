@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.1 2003/12/02 23:17:04 wez Exp $
+# $Id: Makefile,v 1.2 2003/12/03 14:55:03 wez Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -43,7 +43,7 @@ Zend\zend_language_scanner.c: Zend\flex.skl Zend\zend_language_scanner.l
 	flex -i -SZend/flex.skl -Pzend -oZend/zend_language_scanner.c Zend/zend_language_scanner.l
 
 $(BUILD_DIR)\$(PHPDLL): $(PHPDEF) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS)
-	$(LD) /out:$(BUILD_DIR)\$(PHPDLL) $(PHP_LDFLAGS) $(LDFLAGS) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS) $(STATIC_EXT_LIBS) $(LIBS)
+	$(LD) /out:$(BUILD_DIR)\$(PHPDLL) $(PHP_LDFLAGS) $(LDFLAGS) $(STATIC_EXT_LDFLAGS) $(PHP_GLOBAL_OBJS) $(STATIC_EXT_OBJS) $(STATIC_EXT_LIBS) $(LIBS)
 	
 $(BUILD_DIR)\$(PHPLIB): $(BUILD_DIR)\$(PHPDLL)
 	

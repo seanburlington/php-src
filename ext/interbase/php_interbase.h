@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.25 2002/01/27 15:31:15 aeschbacher Exp $ */
+/* $Id: php_interbase.h,v 1.26 2002/03/15 15:26:01 daniela Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -45,6 +45,7 @@ PHP_FUNCTION(ibase_pconnect);
 PHP_FUNCTION(ibase_close);
 PHP_FUNCTION(ibase_query);
 PHP_FUNCTION(ibase_fetch_row);
+PHP_FUNCTION(ibase_fetch_assoc);
 PHP_FUNCTION(ibase_fetch_object);
 PHP_FUNCTION(ibase_free_result);
 PHP_FUNCTION(ibase_prepare);

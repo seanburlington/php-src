@@ -17,10 +17,26 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_openssl.h,v 1.10.8.2 2003/04/26 21:34:47 wez Exp $ */
+/* $Id: php_openssl.h,v 1.10.8.3 2003/04/29 13:48:05 wez Exp $ */
 
 #ifndef PHP_OPENSSL_H
 #define PHP_OPENSSL_H
+
+#ifdef PHP_WIN32
+# undef PHP_OPENSSL_API
+# ifdef OPENSSL_EXPORTS
+#  define PHP_OPENSSL_API __declspec(dllexport)
+# else
+#  define PHP_OPENSSL_API __declspec(dllimport)
+# endif
+#else
+# undef PHP_OPENSSL_API
+# define PHP_OPENSSL_API /* nothing special */
+#endif
+
+
+
+
 /* HAVE_OPENSSL would include SSL MySQL stuff */
 #if HAVE_OPENSSL_EXT
 extern zend_module_entry openssl_module_entry;
@@ -66,8 +82,9 @@ PHP_FUNCTION(openssl_csr_export_to_file);
 PHP_FUNCTION(openssl_csr_sign);
 
 #include <openssl/ssl.h>
-PHPAPI int php_openssl_apply_verification_policy(SSL *ssl, X509 *peer, php_stream *stream TSRMLS_DC);
-PHPAPI SSL *php_SSL_new_from_context(SSL_CTX *ctx, php_stream *stream TSRMLS_DC);
+PHP_OPENSSL_API int php_openssl_apply_verification_policy(SSL *ssl, X509 *peer, php_stream *stream TSRMLS_DC);
+PHP_OPENSSL_API SSL *php_SSL_new_from_context(SSL_CTX *ctx, php_stream *stream TSRMLS_DC);
+
 
 #else
 

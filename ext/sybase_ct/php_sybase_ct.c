@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.46 2001/06/26 20:56:03 joey Exp $ */
+/* $Id: php_sybase_ct.c,v 1.47 2001/06/26 21:00:13 joey Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1667,7 +1667,7 @@ PHP_MINFO_FUNCTION(sybase)
 	SybCtLS_FETCH();
 	
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Sybase_CT Support", "enabled" );
+	php_info_print_table_header(2, "Sybase_CT Support", "enabled" );
 	sprintf(buf, "%ld", SybCtG(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Links", buf);
 	sprintf(buf, "%ld", SybCtG(num_links));

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bz2_filter.c,v 1.1 2004/07/20 05:26:33 pollita Exp $ */
+/* $Id: bz2_filter.c,v 1.2 2004/07/21 02:38:40 pollita Exp $ */
 
 #include "php.h"
 #include "php_bz2.h"
@@ -38,7 +38,7 @@ typedef struct _php_bz2_filter_data {
 
 static void *php_bz2_alloc(void *opaque, int items, int size)
 {
-	return (void *)pemalloc(items * size, ((php_bz2_filter_data*)opaque)->persistent);
+	return (void *)safe_pemalloc(items, size, 0, ((php_bz2_filter_data*)opaque)->persistent);
 }
 
 static void php_bz2_free(void *opaque, void *address)
@@ -269,6 +269,10 @@ static php_stream_filter *php_bz2_filter_create(const char *filtername, zval *fi
 
 	/* Create this filter */
 	data = pecalloc(1, sizeof(php_bz2_filter_data), persistent);
+	if (!data) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed allocating %d bytes.", sizeof(php_bz2_filter_data));
+		return NULL;
+	}
 
 	/* Circular reference */
 	data->strm.opaque = (void *) data;
@@ -278,8 +282,19 @@ static php_stream_filter *php_bz2_filter_create(const char *filtername, zval *fi
 	data->persistent = persistent;
 	data->strm.avail_out = data->outbuf_len = data->inbuf_len = 2048;
 	data->strm.next_in = data->inbuf = (char *) pemalloc(data->inbuf_len, persistent);
+	if (!data->inbuf) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed allocating %d bytes.", data->inbuf_len);
+		pefree(data, persistent);
+		return NULL;
+	}
 	data->strm.avail_in = 0;
 	data->strm.next_out = data->outbuf = (char *) pemalloc(data->outbuf_len, persistent);
+	if (!data->outbuf) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed allocating %d bytes.", data->outbuf_len);
+		pefree(data->inbuf, persistent);
+		pefree(data, persistent);
+		return NULL;
+	}
 
 	if (strcasecmp(filtername, "bzip2.decompress") == 0) {
 		int smallFootprint = 0;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.9 2000/07/24 01:39:51 david Exp $ */
+/* $Id: php_zlib.h,v 1.10 2000/11/08 21:40:34 marcpohl Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -50,6 +50,8 @@ PHP_FUNCTION(readgzfile);
 PHP_FUNCTION(gzfile);
 PHP_FUNCTION(gzcompress);
 PHP_FUNCTION(gzuncompress);
+PHP_FUNCTION(gzdeflate);
+PHP_FUNCTION(gzinflate);
 
 #ifdef ZTS
 #define ZLIBLS_D php_zlib_globals *zlib_globals

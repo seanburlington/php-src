@@ -1,3 +1,30 @@
+2003-03-21  Sterling Hughes  <sterling@bumblebury.com>
+
+    * ext/standard/file.c:
+      fix segfault in file_set_contents() when the file could not successfully
+      be opened.
+
+2003-03-21  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ext/mysqli/mysqli.c:
+      Add missing initialization
+
+2003-03-21  James Cox  <james@imajes.info>
+
+    * run-tests.php:
+      updating for new list
+
+2003-03-21  Stig Bakken  <ssb@fast.no>
+
+    * pear/PEAR/Builder.php:
+      - abort install when an extension fails to build (patch by ja at
+        morrdusk dot net)
+
+2003-03-21  Sterling Hughes  <sterling@bumblebury.com>
+
+    * ext/xml/xml.c:
+      This broke the xml extension, and pres2, commented out for now
+
 2003-03-20  Hartmut Holzgraefe  <hartmut@six.de>
 
     * scripts/ext_skel_ng/extension_parser.php:
@@ -2367,7 +2394,7 @@
 
     * sapi/apache/libpre.c
       sapi/apache/php_apache_http.h:
-      Added missing headers and $Id: ChangeLog,v 1.1301 2003/03/21 01:36:23 changelog Exp $ tags.
+      Added missing headers and $Id: ChangeLog,v 1.1302 2003/03/22 01:31:23 changelog Exp $ tags.
 
     * sapi/cgi/config9.m4:
       MFB: Fixed bug #22356 (Do not add empty -I flags).
@@ -2926,7 +2953,7 @@
       main/streams/plain_wrapper.c
       main/streams/streams.c
       main/streams/userspace.c:
-      ws fixes + missing $Id: ChangeLog,v 1.1301 2003/03/21 01:36:23 changelog Exp $ tags, headers added
+      ws fixes + missing $Id: ChangeLog,v 1.1302 2003/03/22 01:31:23 changelog Exp $ tags, headers added
 
 2003-02-19  Corne' Cornelius  <cornec@reach.co.za>
 
@@ -3844,7 +3871,7 @@
 
     * (PHP_4_3)
       sapi/cgi/cgi_main.c:
-      Added missing $Id: ChangeLog,v 1.1301 2003/03/21 01:36:23 changelog Exp $ tag
+      Added missing $Id: ChangeLog,v 1.1302 2003/03/22 01:31:23 changelog Exp $ tag
 
 2003-02-14  Thies C. Arntzen  <thies@thieso.net>
 

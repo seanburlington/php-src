@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.19 1999/09/21 17:50:51 rasmus Exp $ */
+/* $Id: zlib.c,v 1.20 1999/09/22 07:43:36 sr Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -476,7 +476,7 @@ PHP_FUNCTION(gzgetc) {
 /* }}} */
 
 /* Strip any HTML tags while reading */
-/* {{{ proto string gzgetss(int zp, int length)
+/* {{{ proto string gzgetss(int zp, int length [, string allowable_tags])
 Get a line from file pointer and strip HTML tags */
 PHP_FUNCTION(gzgetss)
 {
@@ -519,7 +519,7 @@ PHP_FUNCTION(gzgetss)
 	}
 
 	/* strlen() can be used here since we are doing it on the return of an fgets() anyway */
-	_php3_strip_tags(buf, strlen, ZLIBG(gzgetss_state), allow?allow->value.str.val:NULL);
+	_php3_strip_tags(buf, strlen(buf), ZLIBG(gzgetss_state), allow?allow->value.str.val:NULL);
 	RETURN_STRING(buf, 0);
 	
 }

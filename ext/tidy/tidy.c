@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.42 2004/04/12 03:14:19 john Exp $ */
+/* $Id: tidy.c,v 1.43 2004/04/14 19:01:45 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -55,8 +55,8 @@
     object = TG(inst)
    
 #define TIDY_FETCH_OBJECT	\
-	TIDY_SET_CONTEXT; \
 	PHPTidyObj *obj;	\
+	TIDY_SET_CONTEXT; \
 	if (object) {	\
 		if (ZEND_NUM_ARGS()) {	\
 			WRONG_PARAM_COUNT;	\
@@ -69,8 +69,8 @@
 	obj = (PHPTidyObj *) zend_object_store_get_object(object TSRMLS_CC);	\
 
 #define TIDY_FETCH_ONLY_OBJECT	\
-	TIDY_SET_CONTEXT; \
 	PHPTidyObj *obj;	\
+	TIDY_SET_CONTEXT; \
 	if (ZEND_NUM_ARGS()) {	\
 		WRONG_PARAM_COUNT;	\
 	}	\
@@ -951,7 +951,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.42 2004/04/12 03:14:19 john Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.43 2004/04/14 19:01:45 fmk Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1274,15 +1274,14 @@ PHP_FUNCTION(tidy_config_count)
 /* {{{ proto mixed tidy_getopt(string option)
    Returns the value of the specified configuration option for the tidy document. */
 PHP_FUNCTION(tidy_getopt)
-{
-	TIDY_SET_CONTEXT;
-    
+{  
 	PHPTidyObj *obj;
 	char *optname;
 	void *optval;
 	int optname_len;
 	TidyOption opt;
 	TidyOptionType optt;
+	TIDY_SET_CONTEXT;
 
 	if (object) {
 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &optname, &optname_len) == FAILURE) {
@@ -1337,9 +1336,8 @@ TIDY_DOC_METHOD(__construct)
 	char *contents;
 	zval *options = NULL;
 	
-    TIDY_SET_CONTEXT;
-	
 	PHPTidyObj *obj;
+    TIDY_SET_CONTEXT;	
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|szsb", &inputfile, &input_len,
 							  &options, &enc, &enc_len, &use_include_path) == FAILURE) {

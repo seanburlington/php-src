@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.264 2001/11/24 02:41:58 zeev Exp $ */
+/* $Id: session.c,v 1.265 2001/12/04 22:57:16 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1449,6 +1449,8 @@ static void php_session_flush(TSRMLS_D)
 	}
 }
 
+/* {{{ proto void session_write_close(void)
+   Write session data and end session */
 PHP_FUNCTION(session_write_close)
 {
 	php_session_flush(TSRMLS_C);
@@ -1463,7 +1465,7 @@ PHP_RSHUTDOWN_FUNCTION(session)
 	php_rshutdown_session_globals(TSRMLS_C);
 	return SUCCESS;
 }
-
+/* }}} */
 
 
 PHP_MINIT_FUNCTION(session)

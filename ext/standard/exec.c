@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.46 2001/01/13 13:59:22 zeev Exp $ */
+/* $Id: exec.c,v 1.47 2001/01/13 21:52:09 derick Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -199,7 +199,7 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 
 #if HAVE_SYS_WAIT_H
 	if (WIFEXITED(FG(pclose_ret))) {
-		ret = WEXITSTATUS(FG(pclose_ret));
+		FG(pclose_ret) = WEXITSTATUS(FG(pclose_ret));
 	}
 #endif
 

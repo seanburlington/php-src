@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.103 2001/11/23 02:53:16 hirokawa Exp $ */
+/* $Id: zlib.c,v 1.104 2001/11/26 22:56:36 sniper Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -247,6 +247,8 @@ PHP_MINFO_FUNCTION(zlib)
 	php_info_print_table_row(2, "Compiled Version", ZLIB_VERSION );
 	php_info_print_table_row(2, "Linked Version", (char *)zlibVersion() );
 	php_info_print_table_end();
+
+	DISPLAY_INI_ENTRIES();
 }
 /* }}} */
 

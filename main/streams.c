@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.126 2002/11/14 10:56:35 derick Exp $ */
+/* $Id: streams.c,v 1.127 2002/11/17 00:06:50 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1579,6 +1579,32 @@ PHPAPI php_stream *_php_stream_fopen_with_path(char *filename, char *mode, char 
 
 		return php_stream_fopen_rel(filename, mode, opened_path, options);
 	}
+	
+#ifdef PHP_WIN32
+	if (IS_SLASH(filename[0])) {
+		int cwd_len;
+		char *cwd;
+		cwd = virtual_getcwd_ex(&cwd_len TSRMLS_CC);
+		/* getcwd() will return always return [DRIVE_LETTER]:/) on windows. */
+		*(cwd+3) = '\0';
+	
+		snprintf(trypath, MAXPATHLEN, "%s%s", cwd, filename);
+		
+		free(cwd);
+		
+		if (php_check_open_basedir(trypath TSRMLS_CC)) {
+			return NULL;
+		}
+		if ((php_check_safe_mode_include_dir(trypath TSRMLS_CC)) == 0) {
+			return php_stream_fopen_rel(trypath, mode, opened_path, options);
+		}	
+		if (PG(safe_mode) && (!php_checkuid(trypath, mode, CHECKUID_CHECK_MODE_PARAM))) {
+			return NULL;
+		}
+		
+		return php_stream_fopen_rel(trypath, mode, opened_path, options);
+	}
+#endif
 
 	if (!path || (path && !*path)) {
 

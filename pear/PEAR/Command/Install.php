@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.9 2002/03/23 10:20:41 ssb Exp $
+// $Id: Install.php,v 1.10 2002/03/23 15:56:14 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -70,10 +70,10 @@ class PEAR_Command_Install extends PEAR_Command_Common
         $failmsg = '';
         $opts = array();
         switch ($command) {
-            case 'upgrade': {
+            case 'upgrade':
                 $opts['upgrade'] = true;
                 // fall through
-            case 'install':
+            case 'install': {
                 if (isset($options['f'])) {
                     $opts['force'] = true;
                 }

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.86 2004/07/13 16:12:28 georg Exp $ 
+  $Id: mysqli_api.c,v 1.87 2004/07/13 17:04:16 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1241,7 +1241,7 @@ PHP_FUNCTION(mysqli_prepare)
 
 	stmt = (MY_STMT *)ecalloc(1,sizeof(MY_STMT));
 
-    if ((stmt->stmt = mysql_stmt_init(mysql->mysql))) {
+	if ((stmt->stmt = mysql_stmt_init(mysql->mysql))) {
 		if (mysql_stmt_prepare(stmt->stmt, query, query_len)) {
 			mysql_stmt_close(stmt->stmt);
 			stmt->stmt = NULL;
@@ -1781,7 +1781,7 @@ PHP_FUNCTION(mysqli_stmt_error)
 }
 /* }}} */
 
-/* {{{ proto object mysqli_stmt_init(object link)
+/* {{{ proto mixed mysqli_stmt_init(object link)
    Initialize statement object
 */
 PHP_FUNCTION(mysqli_stmt_init)
@@ -1809,7 +1809,7 @@ PHP_FUNCTION(mysqli_stmt_init)
 }
 /* }}} */
 
-/* {{{ proto bool mysqli_stmt_prepare(object link, string query)
+/* {{{ proto bool mysqli_stmt_prepare(object stmt, string query)
    prepare server side statement with query
 */
 PHP_FUNCTION(mysqli_stmt_prepare)

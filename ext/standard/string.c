@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.331 2002/11/01 00:53:27 iliaa Exp $ */
+/* $Id: string.c,v 1.332 2002/11/02 18:54:31 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1148,7 +1148,7 @@ PHPAPI void php_dirname(char *path, int len)
 	}
 	if (end < path) {
 		/* The path only contained slashes */
-		path[0] = '/';
+		path[0] = DEFAULT_SLASH;
 		path[1] = '\0';
 		return;
 	}
@@ -1169,7 +1169,7 @@ PHPAPI void php_dirname(char *path, int len)
 		end--;
 	}
 	if (end < path) {
-		path[0] = '/';
+		path[0] = DEFAULT_SLASH;
 		path[1] = '\0';
 		return;
 	}

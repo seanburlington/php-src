@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.271 2000/06/16 02:27:47 zeev Exp $ */
+/* $Id: main.c,v 1.272 2000/06/23 00:53:33 sas Exp $ */
 
 
 #include <stdio.h>
@@ -335,7 +335,6 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 	char buffer[1024];
 	int size = 0;
 	va_list args;
-	CLS_FETCH();
 	ELS_FETCH();
 	PLS_FETCH();
 

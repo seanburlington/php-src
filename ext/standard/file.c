@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.91 2000/06/13 15:48:38 thies Exp $ */
+/* $Id: file.c,v 1.92 2000/06/23 00:53:33 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1078,7 +1078,6 @@ PHP_FUNCTION(fscanf)
     
     zval ***args;
     int argCount;   
-    PLS_FETCH();
     
     argCount = ZEND_NUM_ARGS();
     if (argCount < 2) {

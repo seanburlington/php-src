@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.39 2002/08/14 06:38:07 dets Exp $ */
+/* $Id: mbfilter.c,v 1.40 2002/08/20 10:00:28 helly Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -6537,7 +6537,7 @@ mbfl_filt_ident_cp1252(int c, mbfl_identify_filter *filter TSRMLS_DC)
 }
 
 #if defined(HAVE_MBSTR_RU)
-// all of this is so ugly now!
+/* all of this is so ugly now! */
 static int
 mbfl_filt_ident_cp1251(int c, mbfl_identify_filter *filter TSRMLS_DC)
 {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.208 2002/08/27 08:40:44 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.209 2002/08/28 09:28:06 derick Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2531,7 +2531,7 @@ PHP_FUNCTION(domxml_node_replace_child)
 	/* if the child to replace is existent and the new child isn't already
 	 * a child, then do the replacement
 	 */
-	if(foundoldchild ) {
+	if (foundoldchild) {
 		zval *rv = NULL;
 		xmlNodePtr node;
 		node = xmlReplaceNode(oldchild, newchild);

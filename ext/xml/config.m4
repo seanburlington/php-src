@@ -1,5 +1,5 @@
 # $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.5 1999/07/23 15:20:48 ssb Exp $
+# $Id: config.m4,v 1.6 1999/07/24 00:52:15 sas Exp $
 
 AC_MSG_CHECKING(for XML support)
 AC_ARG_WITH(xml,
@@ -34,12 +34,13 @@ AC_ARG_WITH(xml,
     else
       XML_LIBS="-L$withval/lib -lexpat"
       if test -d $withval/include/xml; then
-	XML_INCLUDE="-I$withval/include/xml"
+	XML_INCLUDE="$withval/include/xml"
       else
-	XML_INCLUDE="-I$withval/include"
+	XML_INCLUDE="$withval/include"
       fi
     fi
     AC_DEFINE(HAVE_LIBEXPAT, 1)
+    AC_ADD_INCLUDE($XML_INCLUDE)
     PHP_EXTENSION(xml, $shared)
     if test "$shared" != "yes"; then
       EXTRA_LIBS="$EXTRA_LIBS $XML_LIBS"
@@ -51,4 +52,3 @@ AC_ARG_WITH(xml,
   AC_MSG_RESULT(no)
 ]) 
 AC_SUBST(XML_LIBS)
-AC_SUBST(XML_INCLUDE)

@@ -30,7 +30,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.11 1999/04/26 19:02:59 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.12 1999/04/27 10:00:54 zeev Exp $ */
 
 #define DEBUG_CFG_PARSER 1
 #include "php.h"
@@ -348,6 +348,8 @@ static void convert_browscap_pattern(pval *pattern)
 %token EXTENSION
 %token T_ZEND_EXTENSION
 %token T_ZEND_EXTENSION_TS
+%token T_ZEND_EXTENSION_DEBUG
+%token T_ZEND_EXTENSION_DEBUG_TS
 
 %%
 
@@ -380,13 +382,25 @@ statement:
 			php3_dl(&$3,MODULE_PERSISTENT,&dummy);
 		}
 	|	T_ZEND_EXTENSION '=' string {
-#ifndef ZTS
+#if !defined(ZTS) && !defined(ZEND_DEBUG)
 			zend_load_extension($3.value.str.val);
 #endif
 			free($3.value.str.val);
 		}
 	|	T_ZEND_EXTENSION_TS '=' string { 
-#ifdef ZTS
+#if defined(ZTS) && !defined(ZEND_DEBUG)
+			zend_load_extension($3.value.str.val);
+#endif
+			free($3.value.str.val);
+		}
+	|	T_ZEND_EXTENSION_DEBUG '=' string { 
+#if !defined(ZTS) && defined(ZEND_DEBUG)
+			zend_load_extension($3.value.str.val);
+#endif
+			free($3.value.str.val);
+		}
+	|	T_ZEND_EXTENSION_DEBUG_TS '=' string { 
+#if defined(ZTS) && defined(ZEND_DEBUG)
 			zend_load_extension($3.value.str.val);
 #endif
 			free($3.value.str.val);

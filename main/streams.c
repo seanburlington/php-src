@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.79 2003/09/02 10:33:18 stas Exp $ */
+/* $Id: streams.c,v 1.125.2.80 2003/09/10 00:59:46 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1263,6 +1263,9 @@ PHPAPI size_t _php_stream_copy_to_stream(php_stream *src, php_stream *dest, size
 		if (ssbuf.sb.st_size == 0
 #ifdef S_ISFIFO
 		 && !S_ISFIFO(ssbuf.sb.st_mode)
+#endif
+#ifdef S_ISCHR
+		 && !S_ISCHR(ssbuf.sb.st_mode)
 #endif
 		) {
 			return 1;

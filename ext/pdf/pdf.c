@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.81 2001/05/21 22:35:55 derick Exp $ */
+/* $Id: pdf.c,v 1.82 2001/05/21 22:37:46 derick Exp $ */
 /* Id: pdf.c,v 1.73 2001/02/26 06:07:11 andi Exp  */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
@@ -316,7 +316,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.81 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.82 $" );
 	php_info_print_table_end();
 
 }
@@ -1889,7 +1889,7 @@ PHP_FUNCTION(pdf_open_memory_image)
 {
 	zval **arg1, **arg2;
 	int i, j, color, count;
-	int pdf_image, *img;
+	int pdf_image;
 	gdImagePtr im;
 	unsigned char *buffer, *ptr;
 	PDF *pdf;

@@ -1,9 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.7 2002/03/12 16:33:00 sas Exp $
+dnl $Id: config.m4,v 1.8 2002/10/09 19:25:17 jan Exp $
 dnl
 
 PHP_ARG_WITH(pspell,for PSPELL support,
-[  --with-pspell[=DIR]     Include PSPELL support.])
+[  --with-pspell[=DIR]     Include PSPELL support.
+                          This replaces the old ASPELL extension.])
 
 if test "$PHP_PSPELL" != "no"; then
 	PHP_NEW_EXTENSION(pspell, pspell.c, $ext_shared)

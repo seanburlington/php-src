@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.43 2001/09/25 22:48:43 jeroen Exp $ */
+/* $Id: formatted_print.c,v 1.44 2001/12/06 18:59:22 hholzgra Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"
@@ -687,7 +687,7 @@ PHP_FUNCTION(user_printf)
 }
 /* }}} */
 
-/* {{{ proto int printf(string format, array args)
+/* {{{ proto int vprintf(string format, array args)
    Output a formatted string */
 PHP_FUNCTION(vprintf)
 {

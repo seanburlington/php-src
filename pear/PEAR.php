@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.60 2003/05/11 09:33:04 mj Exp $
+// $Id: PEAR.php,v 1.61 2003/05/18 19:40:04 mj Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -224,7 +224,9 @@ class PEAR
      *
      * @param   mixed $data   the value to test
      * @param   int   $code   if $data is an error object, return true
-     *                        only if $obj->getCode() == $code
+     *                        only if $code is a string and
+     *                        $obj->getMessage() == $code or 
+     *                        $code is an integer and $obj->getCode() == $code
      * @access  public
      * @return  bool    true if parameter is an error
      */

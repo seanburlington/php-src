@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.86.2.12 2005/01/27 20:22:27 fmk Exp $ */
+/* $Id: php_fbsql.c,v 1.86.2.13 2005/02/09 18:50:49 fmk Exp $ */
 
 /* TODO:
  *
@@ -1807,10 +1807,27 @@ int mdOk(PHPFBLink* link, FBCMetaData* md, char* sql)
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "No message");
 		}
 		link->errorText = strdup(emg);
-		link->errorNo = fbcemdErrorCodeAtIndex(emd, 0);;
+		link->errorNo = fbcemdErrorCodeAtIndex(emd, 0);
 		free(emg);
 		fbcemdRelease(emd);
 		result = 0;
+	}
+	else if (fbcmdWarningsFound(md))
+	{
+		FBCErrorMetaData* emd = fbcdcErrorMetaData(c, md);
+		char*             emg = fbcemdAllErrorMessages(emd);
+		if (FB_SQL_G(generateWarnings))
+		{
+			if (emg)
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Warning in statement: '%s' %s", sql, emg);
+			else
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "No message");
+		}
+		link->errorText = strdup(emg);
+		link->errorNo = fbcemdErrorCodeAtIndex(emd, 0);
+		free(emg);
+		fbcemdRelease(emd);
+		result = 1;
 	}
 	return result;
 }

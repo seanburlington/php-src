@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.132.2.11 2003/12/15 19:35:34 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.132.2.12 2003/12/16 21:52:12 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -106,6 +106,15 @@ static PHP_MINIT_FUNCTION(pcre)
 	REGISTER_LONG_CONSTANT("PREG_SPLIT_DELIM_CAPTURE", PREG_SPLIT_DELIM_CAPTURE, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PREG_SPLIT_OFFSET_CAPTURE", PREG_SPLIT_OFFSET_CAPTURE, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PREG_GREP_INVERT", PREG_GREP_INVERT, CONST_CS | CONST_PERSISTENT);
+
+	pcre_malloc = php_pcre_malloc;
+	pcre_free = php_pcre_free;
+
+#ifdef NO_RECURSE
+	pcre_stack_malloc = php_pcre_malloc;
+	pcre_stack_free = php_pcre_stack_free;
+#endif
+	
 	return SUCCESS;
 }
 /* }}} */
@@ -117,16 +126,6 @@ static PHP_MSHUTDOWN_FUNCTION(pcre)
 	php_pcre_shutdown_globals(&pcre_globals TSRMLS_CC);
 #endif
 
-	return SUCCESS;
-}
-/* }}} */
-
-/* {{{ PHP_RINIT_FUNCTION(pcre) */
-static PHP_RINIT_FUNCTION(pcre)
-{
-	pcre_malloc = php_pcre_malloc;
-	pcre_free = php_pcre_free;
-	
 	return SUCCESS;
 }
 /* }}} */
@@ -1523,7 +1522,7 @@ zend_module_entry pcre_module_entry = {
 	pcre_functions,
 	PHP_MINIT(pcre),
 	PHP_MSHUTDOWN(pcre),
-	PHP_RINIT(pcre),
+	NULL,
 	NULL,
 	PHP_MINFO(pcre),
 	NO_VERSION_YET,

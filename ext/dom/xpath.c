@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.8 2003/10/20 15:50:34 rrichards Exp $ */
+/* $Id: xpath.c,v 1.9 2003/10/26 15:57:02 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -66,12 +66,12 @@ PHP_FUNCTION(dom_xpath_xpath)
 	if (intern != NULL) {
 		oldctx = (xmlXPathContextPtr)intern->ptr;
 		if (oldctx != NULL) {
-			decrement_document_reference(intern TSRMLS_CC);
+			php_libxml_decrement_doc_ref((php_libxml_node_object *)intern TSRMLS_CC);
 			xmlXPathFreeContext(oldctx);
 		}
 		intern->ptr = ctx;
 		intern->document = docobj->document;
-		increment_document_reference(intern, docp TSRMLS_CC);
+		php_libxml_increment_doc_ref((php_libxml_node_object *)intern, docp TSRMLS_CC);
 	}
 }
 /* }}} end dom_xpath_xpath */

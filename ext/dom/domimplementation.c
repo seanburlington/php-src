@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domimplementation.c,v 1.9 2003/08/24 10:23:43 rrichards Exp $ */
+/* $Id: domimplementation.c,v 1.10 2003/10/26 15:57:01 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -217,8 +217,8 @@ PHP_FUNCTION(dom_domimplementation_create_document)
 	DOM_RET_OBJ(rv, (xmlNodePtr) docp, &ret, NULL);
 
 	if (doctobj != NULL) {
-		doctobj->document = ((dom_object *)((node_ptr *)docp->_private)->_private)->document;
-		increment_document_reference(doctobj, docp TSRMLS_CC);
+		doctobj->document = ((dom_object *)((php_libxml_node_ptr *)docp->_private)->_private)->document;
+		php_libxml_increment_doc_ref((php_libxml_node_object *)doctobj, docp TSRMLS_CC);
 	}
 }
 /* }}} end dom_domimplementation_create_document */

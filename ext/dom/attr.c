@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: attr.c,v 1.7 2003/08/24 10:23:43 rrichards Exp $ */
+/* $Id: attr.c,v 1.8 2003/10/26 15:57:01 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -74,9 +74,9 @@ PHP_FUNCTION(dom_attr_attr)
 	if (intern != NULL) {
 		oldnode = (xmlNodePtr)intern->ptr;
 		if (oldnode != NULL) {
-			node_free_resource(oldnode  TSRMLS_CC);
+			php_libxml_node_free_resource(oldnode  TSRMLS_CC);
 		}
-		php_dom_set_object(intern, (xmlNodePtr) nodep TSRMLS_CC);
+		php_libxml_increment_node_ptr((php_libxml_node_object *)intern, (xmlNodePtr)nodep, (void *)intern TSRMLS_CC);
 	}
 }
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.180 2003/08/03 17:44:36 zeev Exp $ */
+/* $Id: mbstring.c,v 1.181 2003/08/03 18:46:34 helly Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -197,7 +197,7 @@ function_entry mbstring_functions[] = {
 	PHP_FE(mb_http_output,			NULL)
 	PHP_FE(mb_detect_order,			NULL)
 	PHP_FE(mb_substitute_character,	NULL)
-	PHP_FE(mb_parse_str,			(unsigned char *)second_arg_force_ref)
+	PHP_FE(mb_parse_str,			second_arg_force_ref)
 	PHP_FE(mb_output_handler,		NULL)
 	PHP_FE(mb_preferred_mime_name,	NULL)
 	PHP_FE(mb_strlen,				NULL)
@@ -213,7 +213,7 @@ function_entry mbstring_functions[] = {
 	PHP_FE(mb_convert_kana,			NULL)
 	PHP_FE(mb_encode_mimeheader,	NULL)
 	PHP_FE(mb_decode_mimeheader,	NULL)
-	PHP_FE(mb_convert_variables,	(unsigned char *)third_and_rest_force_ref)
+	PHP_FE(mb_convert_variables,	third_and_rest_force_ref)
 	PHP_FE(mb_encode_numericentity,	NULL)
 	PHP_FE(mb_decode_numericentity,	NULL)
 	PHP_FE(mb_send_mail,			NULL)

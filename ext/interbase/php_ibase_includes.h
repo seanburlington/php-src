@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ibase_includes.h,v 1.9 2004/05/12 14:29:42 abies Exp $ */
+/* $Id: php_ibase_includes.h,v 1.10 2004/05/21 13:14:56 abies Exp $ */
 
 #ifndef PHP_IBASE_INCLUDES_H
 #define PHP_IBASE_INCLUDES_H
@@ -27,6 +27,10 @@
 
 #ifndef SQLDA_CURRENT_VERSION
 #define SQLDA_CURRENT_VERSION SQLDA_VERSION1
+#endif
+
+#ifndef METADATALENGTH
+#define METADATALENGTH 32
 #endif
 
 #define RESET_ERRMSG do { IBG(errmsg)[0] = '\0'; IBG(sql_code) = 0; } while (0)

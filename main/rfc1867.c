@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.103 2002/06/07 08:00:12 sesser Exp $ */
+/* $Id: rfc1867.c,v 1.104 2002/07/03 13:36:18 hirokawa Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -32,6 +32,9 @@
 #include "php_variables.h"
 #include "rfc1867.h"
 
+#if HAVE_MBSTRING
+#include "ext/mbstring/mbstring.h"
+#endif
 
 #undef DEBUG_FILE_UPLOAD
 
@@ -823,7 +826,11 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 				sprintf(lbuf, "%s_name", param);
 			}
 
+#if HAVE_MBSTRING
+			s = mbstr_strrchr(filename, '\\');
+#else
 			s = strrchr(filename, '\\');
+#endif
 			if (s && s > filename) {
 				safe_php_register_variable(lbuf, s+1, NULL, 0 TSRMLS_CC);
 			} else {

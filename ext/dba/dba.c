@@ -27,13 +27,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.13 2000/03/06 18:41:05 ssb Exp $ */
+/* $Id: dba.c,v 1.14 2000/04/05 22:30:17 cmv Exp $ */
 
 #include "php.h"
 
 #if HAVE_DBA
 
 #include "php_dba.h"
+#include "ext/standard/info.h"
 
 #include "php_gdbm.h"
 #include "php_ndbm.h"
@@ -197,13 +198,16 @@ static PHP_MSHUTDOWN_FUNCTION(dba)
 
 static PHP_MINFO_FUNCTION(dba)
 {
+	/* could be prettier (cmv) */
+	php_info_print_box_start();
 	dba_handler *hptr;
 	
-	PUTS("V1 ($Id: dba.c,v 1.13 2000/03/06 18:41:05 ssb Exp $)");
+	PUTS("V1 ($Id: dba.c,v 1.14 2000/04/05 22:30:17 cmv Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);
 	}
+	php_info_print_box_end();
 }
 
 static void php_dba_update(INTERNAL_FUNCTION_PARAMETERS, int mode)

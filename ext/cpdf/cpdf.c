@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.11 2000/03/09 14:59:05 steinm Exp $ */
+/* $Id: cpdf.c,v 1.12 2000/04/05 22:30:16 cmv Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -42,7 +42,6 @@
 #include "php_globals.h"
 #include "ext/standard/php_standard.h"
 #include "ext/standard/head.h"
-#include "ext/standard/info.h"
 #include <math.h>
 #if HAVE_LIBGD13
 #include <gd.h>
@@ -58,6 +57,7 @@
 
 #if HAVE_CPDFLIB
 #include "php_cpdf.h"
+#include "ext/standard/info.h"
 
 #ifdef THREAD_SAFE
 DWORD CPDFlibTls;
@@ -187,7 +187,11 @@ PHP_RINIT_FUNCTION(cpdf)
 
 PHP_MINFO_FUNCTION(cpdf) {
 	/* need to use a PHPAPI function here because it is external module in windows */
-	php_printf("Version %s", cpdf_version());
+	/* (don't knwo if that still applies (cmv) */
+	php_info_print_table_start();
+	php_info_print_table_row(2, "CPDF Support", "enabled");
+	php_info_print_table_row(2, "Version", cpdf_version() );
+	php_info_print_table_end();
 }
 
 PHP_MSHUTDOWN_FUNCTION(cpdf){

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.27 2000/03/30 22:56:31 andi Exp $ */
+/* $Id: db.c,v 1.28 2000/04/05 22:30:16 cmv Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 # include "dl/phpdl.h"
@@ -30,6 +30,7 @@
 #include "safe_mode.h"
 #include "fopen-wrappers.h"
 #include "ext/standard/flock_compat.h" 
+#include "ext/standard/info.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -230,7 +231,10 @@ static char *php_get_info_db(void)
 
 PHP_MINFO_FUNCTION(db)
 {
+	/* this isn't pretty ... should break out the info a bit more (cmv) */
+	php_info_print_box_start(0);
 	php_printf(php_get_info_db());
+	php_info_print_box_end();
 }
 
 PHP_FUNCTION(dblist)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dav.c,v 1.14 2000/03/06 18:41:04 ssb Exp $ */
+/* $Id: dav.c,v 1.15 2000/04/05 22:30:16 cmv Exp $ */
 
 #define IS_EXT_MODULE
 #if COMPILE_DL
@@ -36,6 +36,7 @@
 #if HAVE_MOD_DAV
 
 # include "mod_dav.h"
+#include "ext/standard/info.h"
 
 /* {{{ thread safety stuff */
 
@@ -158,6 +159,9 @@ PHP_RSHUTDOWN_FUNCTION(phpdav)
 
 PHP_MINFO_FUNCTION(phpdav);
 {
+	php_info_print_table_start();
+	php_info_print_table_row(2, "DAV Support", "enabled");
+	php_info_print_table_end();
 }
 
 /* {{{ extension-internal functions */

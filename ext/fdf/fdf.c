@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.19 2000/02/19 23:21:28 zeev Exp $ */
+/* $Id: fdf.c,v 1.20 2000/04/05 22:30:18 cmv Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -60,6 +60,8 @@
 #endif
 
 #if HAVE_FDFLIB
+
+#include "ext/standard/info.h"
 
 #ifdef THREAD_SAFE
 DWORD FDFlibTls;
@@ -123,7 +125,10 @@ PHP_MINIT_FUNCTION(fdf)
 PHP_MINFO_FUNCTION(fdf)
 {
 	/* need to use a PHPAPI function here because it is external module in windows */
-	php_printf("FdfTk Version %s", FDFGetVersion());
+	php_info_print_table_start();
+	php_info_print_table_row(2, "FDF Support", "enabled");
+	php_info_print_table_row(2, "FdfTk Version", FDFGetVersion() );
+	php_info_print_table_end();
 }
 
 PHP_MSHUTDOWN_FUNCTION(fdf)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.1 2003/01/01 11:04:44 wez Exp $ */
+/* $Id: filters.c,v 1.2 2003/01/01 11:21:40 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -97,9 +97,11 @@ static const struct {
 	php_stream_filter_factory *factory;
 } standard_filters[] = {
 	{ &strfilter_rot13_ops, &strfilter_rot13_factory },
+	/* additional filters to go here */
 	{ NULL, NULL }
 };
 
+/* {{{ filter MINIT and MSHUTDOWN */
 PHP_MINIT_FUNCTION(standard_filters)
 {
 	int i;
@@ -112,7 +114,6 @@ PHP_MINIT_FUNCTION(standard_filters)
 			return FAILURE;
 		}
 	}
-
 	return SUCCESS;
 }
 
@@ -125,6 +126,7 @@ PHP_MSHUTDOWN_FUNCTION(standard_filters)
 	}
 	return SUCCESS;
 }
+/* }}} */
 
 /*
  * Local variables:

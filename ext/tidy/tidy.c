@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.25 2003/12/18 19:59:58 sniper Exp $ */
+/* $Id: tidy.c,v 1.26 2003/12/19 14:24:59 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -739,7 +739,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Library Version", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.25 2003/12/18 19:59:58 sniper Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.26 2003/12/19 14:24:59 iliaa Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -911,8 +911,6 @@ PHP_FUNCTION(tidy_repair_file)
 PHP_FUNCTION(tidy_diagnose)
 {
 	TIDY_FETCH_OBJECT;
-
-	TIDY_PARSED_REPAIR_CHECK(obj);
 
 	if (tidyRunDiagnostics(obj->ptdoc->doc) >= 0) {
 		tidy_doc_update_properties(obj TSRMLS_CC);
@@ -1329,7 +1327,7 @@ PHP_FUNCTION(tidy_getopt)
 	optval = php_tidy_get_opt_val(obj->ptdoc, opt, &optt TSRMLS_CC);
 	switch (optt) {
 		case TidyString:
-			RETVAL_STRING((char *)optval, 0);
+			RETURN_STRING((char *)optval, 0);
 			break;
 
 		case TidyInteger:

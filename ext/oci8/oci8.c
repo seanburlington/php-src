@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.58 2000/02/23 15:54:23 eschmid Exp $ */
+/* $Id: oci8.c,v 1.59 2000/02/27 14:31:04 thies Exp $ */
 
 /* TODO list:
  *
@@ -41,6 +41,8 @@
  * - change all the lob stuff to work without classes (optional)! 
  * - make sure that the callbacks terminate the strings with \0
  * - cleanup the ociexecute semantics for refcursors
+ * - make $lob->savefile use O_BINARY
+ * - line 2728: ub4 length = -1; needs fixing
  */
 
 /* {{{ includes & stuff */

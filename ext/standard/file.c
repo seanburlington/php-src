@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.153 2001/04/17 17:06:06 wez Exp $ */
+/* $Id: file.c,v 1.154 2001/04/17 17:08:03 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -576,9 +576,9 @@ PHP_NAMED_FUNCTION(php_if_tmpfile)
 }
 /* }}} */
 
+#if HAVE_PHP_STREAM
 PHP_FUNCTION(fopenstream)
 {
-#if HAVE_PHP_STREAM
 	zval ** zfilename, ** zmode;
 	php_stream * stream;
 
@@ -595,11 +595,8 @@ PHP_FUNCTION(fopenstream)
 		RETURN_FALSE;
 	}
 	ZEND_REGISTER_RESOURCE(return_value, stream, le_stream);
-#else
-	zend_error(E_ERROR, "%s(): no stream support in this PHP build", get_active_function_name());
-	RETURN_FALSE;
-#endif
 }
+#endif
 
 /* {{{ proto int fopen(string filename, string mode [, int use_include_path])
    Open a file or a URL and return a file pointer */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.42 2000/01/01 01:31:56 sas Exp $ */
+/* $Id: xml.c,v 1.43 2000/02/02 18:42:03 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -476,7 +476,7 @@ xml_utf8_encode(const char *s, int len, int *newlen, const XML_Char *encoding)
 	while (pos > 0) {
 		c = encoder ? encoder((unsigned char)(*s)) : (unsigned short)(*s);
 		if (c < 0x80) {
-			newbuf[(*newlen)++] = c;
+			newbuf[(*newlen)++] = (char) c;
 		} else if (c < 0x800) {
 			newbuf[(*newlen)++] = (0xc0 | (c >> 6));
 			newbuf[(*newlen)++] = (0x80 | (c & 0x3f));

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.16 2004/02/01 16:13:05 abies Exp $
+dnl $Id: config.m4,v 1.17 2004/02/01 17:42:26 abies Exp $
 dnl
 
 PHP_ARG_WITH(interbase,for InterBase support,
@@ -37,6 +37,16 @@ if test "$PHP_INTERBASE" != "no"; then
   ], [
     -L$IBASE_LIBDIR
   ])
+  
+  if test " $IBASE_LIBNAME" != " "; then
+    PHP_CHECK_LIBRARY($IBASE_LIBNAME, isc_service_attach,
+    [
+      AC_DEFINE(HAVE_IBASE6_API,1,[ ])
+      AC_MSG_RESULT([Interbase version 6 API has been enabled.])
+    ], [
+      AC_MSG_RESULT([Interbase version 6 API has NOT been enabled.])
+    ], [ ])
+  fi
 
   PHP_ADD_LIBRARY_WITH_PATH($IBASE_LIBNAME, $IBASE_LIBDIR, INTERBASE_SHARED_LIBADD)
   PHP_ADD_INCLUDE($IBASE_INCDIR)

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.51 2000/06/05 23:21:57 sas Exp $ */
+/* $Id: mod_php4.c,v 1.52 2000/06/26 18:05:50 andrei Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -332,7 +332,8 @@ static char *php_apache_getenv(char *name, int name_len SLS_DC)
 
 
 static sapi_module_struct sapi_module = {
-	"Apache",						/* name */
+	"apache",						/* name */
+	"Apache",						/* pretty name */
 									
 	php_apache_startup,				/* startup */
 	php_module_shutdown_wrapper,	/* shutdown */

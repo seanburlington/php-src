@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.115 2003/03/18 12:06:04 ssb Exp $ */
+/* $Id: xml.c,v 1.116 2003/03/21 05:26:56 sterling Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -287,11 +287,11 @@ static void xml_parser_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	xml_parser *parser = (xml_parser *)rsrc->ptr;
 
 	/* please leave this commented - or ask thies@thieso.net before doing it (again) */
-#ifdef ZEND_ENGINE_2
+/*#ifdef ZEND_ENGINE_2
 	if (parser->object) {
 		zval_ptr_dtor(&parser->object);
 	}
-#endif
+#endif */
 	
 	if (parser->parser) {
 		XML_ParserFree(parser->parser);

@@ -1,5 +1,5 @@
 /*
-  +----------------------------------------------------------------------+
+   +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997-2001 The PHP Group                                |
@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Frank M. Kromann <fmk@swwwing.com>                          |
+   | Authors: Frank M. Kromann frank@frontbase.com>                       |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.39 2001/03/09 23:37:56 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.40 2001/03/13 16:33:39 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.61 2002/08/16 09:50:24 wez Exp $ */
+/* $Id: streams.c,v 1.62 2002/08/16 12:02:42 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1366,6 +1366,7 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 	if (stream == NULL && (options & REPORT_ERRORS)) {
 		char *tmp = estrdup(path);
 		char *msg;
+		int free_msg = 0;
 
 		if (wrapper) {
 			if (wrapper->err_count) {
@@ -1395,6 +1396,7 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 						strcat(msg, br);
 				}
 				
+				free_msg = 1;
 			} else {
 				msg = strerror(errno);
 			}
@@ -1405,6 +1407,8 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 		php_strip_url_passwd(tmp);
 		php_error_docref1(NULL TSRMLS_CC, tmp, E_WARNING, "failed to create stream: %s", msg);
 		efree(tmp);
+		if (free_msg)
+			efree(msg);
 	}
 	if (wrapper) {
 		/* tidy up the error stack */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.487 2002/09/18 21:57:29 zeev Exp $ */
+/* $Id: main.c,v 1.488 2002/09/19 15:54:23 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -793,6 +793,12 @@ static void php_message_handler_for_zend(long message, void *data)
 }
 /* }}} */
 
+
+void php_on_timeout(int seconds TSRMLS_DC)
+{
+	PG(connection_status) |= PHP_CONNECTION_TIMEOUT;
+}
+
 #if PHP_SIGCHILD
 /* {{{ sigchld_handler
  */
@@ -1024,6 +1030,7 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	zuf.unblock_interruptions = sapi_module.unblock_interruptions;
 	zuf.get_configuration_directive = php_get_configuration_directive_for_zend;
 	zuf.ticks_function = php_run_ticks;
+	zuf.on_timeout = php_on_timeout;
 	zend_startup(&zuf, NULL, 1);
 
 #ifdef ZTS

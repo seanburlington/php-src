@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.13 2000/12/28 08:31:42 holger Exp $ */
+/* $Id: pi3web_sapi.c,v 1.14 2001/01/02 22:49:30 zeev Exp $ */
 
 #if WIN32|WINNT
 #  include <windows.h>
@@ -80,7 +80,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.13 2000/12/28 08:31:42 holger Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.14 2001/01/02 22:49:30 zeev Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -280,7 +280,7 @@ static char *sapi_pi3web_read_cookies(SLS_D)
 }
 
 
-static sapi_module_struct sapi_module = {
+static sapi_module_struct pi3web_sapi_module = {
 	"pi3web",				/* name */
 	"PI3WEB",				/* pretty name */
 
@@ -428,17 +428,17 @@ DWORD fnWrapperProc(LPCONTROL_BLOCK lpCB)
 
 BOOL PHP4_startup() {
 	tsrm_startup(1, 1, 0, NULL);
-	sapi_startup(&sapi_module);
-	if (sapi_module.startup) {
-		sapi_module.startup(&sapi_module);
+	sapi_startup(&pi3web_sapi_module);
+	if (pi3web_sapi_module.startup) {
+		pi3web_sapi_module.startup(&pi3web_sapi_module);
 	};
 	IWasLoaded = 1;
 	return IWasLoaded;
 };
 
 BOOL PHP4_shutdown() {
-	if (sapi_module.shutdown) {
-		sapi_module.shutdown(&sapi_module);
+	if (pi3web_sapi_module.shutdown) {
+		pi3web_sapi_module.shutdown(&pi3web_sapi_module);
 	};
 	sapi_shutdown();
 	tsrm_shutdown();

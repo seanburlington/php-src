@@ -17,9 +17,13 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.15 1999/08/29 15:07:54 eschmid Exp $ */
+/* $Id: pgsql.c,v 1.16 1999/09/03 14:58:51 gorgo Exp $ */
 
 #include <stdlib.h>
+
+#ifdef PIC
+# define COMPILE_DL 1
+#endif
 
 #include "php.h"
 #include "php3_pgsql.h"

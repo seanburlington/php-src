@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.72 2002/09/05 14:32:47 derick Exp $ */
+/* $Id: dl.c,v 1.73 2002/09/05 21:12:55 sniper Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -26,7 +26,6 @@
 #include "ext/standard/info.h"
 #include "SAPI.h"
 
-/*#ifndef PHP_WIN32*/
 #if !defined(PHP_WIN32) && !defined(NETWARE)
 #include "build-defs.h"
 #endif
@@ -35,7 +34,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-/*#if HAVE_STRING_H*/
 #ifdef HAVE_STRING_H
 #include <string.h>
 #else

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.179.2.2 2005/01/17 18:11:36 tony2001 Exp $ */
+/* $Id: php_odbc.c,v 1.179.2.3 2005/01/18 15:07:10 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2423,10 +2423,7 @@ PHP_FUNCTION(odbc_next_result)
 
 	result->fetched = 0;
 	rc = SQLMoreResults(result->stmt);
-	if (rc == SQL_SUCCESS) {
-		RETURN_TRUE;
-	}
-	else if (rc == SQL_SUCCESS_WITH_INFO) {
+	if (rc == SQL_SUCCESS_WITH_INFO || rc == SQL_SUCCESS) {
 		rc = SQLFreeStmt(result->stmt, SQL_UNBIND);
 		SQLNumParams(result->stmt, &(result->numparams));
 		SQLNumResultCols(result->stmt, &(result->numcols));
@@ -2767,7 +2764,7 @@ PHP_FUNCTION(odbc_setoption)
  * metadata functions
  */
 
-/* {{{ proto resource odbc_tables(resource connection_id [, string qualifier, string owner, string name, string table_types])
+/* {{{ proto resource odbc_tables(resource connection_id [, string qualifier [, string owner [, string name [, string table_types]]]])
    Call the SQLTables function */
 PHP_FUNCTION(odbc_tables)
 {
@@ -2846,7 +2843,7 @@ PHP_FUNCTION(odbc_tables)
 }
 /* }}} */
 
-/* {{{ proto resource odbc_columns(resource connection_id, string qualifier, string owner, string table_name, string column_name)
+/* {{{ proto resource odbc_columns(resource connection_id [, string qualifier [, string owner [, string table_name [, string column_name]]]])
    Returns a result identifier that can be used to fetch a list of column names in specified tables */
 PHP_FUNCTION(odbc_columns)
 {

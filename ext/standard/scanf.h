@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.h,v 1.9 2002/02/28 08:26:49 sebastian Exp $ */
+/* $Id: scanf.h,v 1.10 2002/11/27 20:06:01 sterling Exp $ */
 
 #ifndef  SCANF_H
 #define  SCANF_H
@@ -27,7 +27,6 @@
                                 /* upper limit to keep resources in check and   */
                                 /* minimize the possibility of exploits         */
 
-#define SCAN_MAX_FSCANF_BUFSIZE		512  /* Max input buffer allocated for fscanf */
 #define SCAN_SUCCESS			SUCCESS	
 #define SCAN_ERROR_EOF			-1	/* indicates premature termination of scan 	*/
 									/* can be caused by bad parameters or format*/

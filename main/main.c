@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.285 2000/07/29 10:48:57 zeev Exp $ */
+/* $Id: main.c,v 1.286 2000/07/29 14:46:08 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -630,7 +630,7 @@ int php_request_startup(CLS_D ELS_DC PLS_DC SLS_DC)
 	}
 
 	if (PG(output_buffering)) {
-		php_start_ob_buffering();
+		php_start_ob_buffer();
 	} else if (PG(implicit_flush)) {
 		php_start_implicit_flush();
 	}
@@ -659,7 +659,7 @@ void php_request_shutdown(void *dummy)
 	}
 
 	sapi_send_headers();
-	php_end_ob_buffering(SG(request_info).headers_only?0:1);
+	php_end_ob_buffers(SG(request_info).headers_only?0:1);
 
 	php_call_shutdown_functions();
 	

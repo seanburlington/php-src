@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.2 2004/05/19 17:35:39 iliaa Exp $ */
+/* $Id: mysql_statement.c,v 1.3 2004/05/19 20:34:01 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -139,7 +139,9 @@ static int mysql_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr, unsigned 
 		pdo_mysql_error(S->H);
 		return 0;
 	}
-	*ptr = estrndup(S->current_data[colno], S->current_lengths[colno] +1);
+	if (S->current_data[colno]) {
+		*ptr = estrndup(S->current_data[colno], S->current_lengths[colno] +1);
+	}
 	*len = S->current_lengths[colno];
 	return 1;
 }

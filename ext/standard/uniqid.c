@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.8 1999/08/31 15:20:21 ssb Exp $ */
+/* $Id: uniqid.c,v 1.9 1999/08/31 15:57:30 ssb Exp $ */
 
 #include "php.h"
 
@@ -56,8 +56,6 @@ PHP_FUNCTION(uniqid)
 	if (argc == 2) {
 		convert_to_boolean(flags);
 	}
-
-	printf("flags->value.lval = %d\n", flags->value.lval);
 
 	/* Do some bounds checking since we are using a char array. */
 	if (prefix->value.str.len > 114) {

@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.14 2001/08/10 18:32:56 chagenbu Exp $ */
+/* $Id: php_imap.h,v 1.15 2001/08/16 20:13:27 chagenbu Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H
@@ -190,6 +190,7 @@ ZEND_BEGIN_MODULE_GLOBALS(imap)
 	STRINGLIST *imap_alertstack;
 	ERRORLIST *imap_errorstack;
 	MESSAGELIST *imap_messages;
+	MESSAGELIST *imap_messages_tail;
 	FOBJECTLIST *imap_folder_objects;
 	FOBJECTLIST *imap_sfolder_objects;
 	folderlist_style_t folderlist_style;

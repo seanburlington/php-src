@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: scriptengine.cpp,v 1.3 2002/05/20 22:22:57 wez Exp $ */
+/* $Id: scriptengine.cpp,v 1.4 2002/05/22 00:02:35 wez Exp $ */
 
 /* Implementation Notes:
  *
@@ -116,7 +116,12 @@ class TWideString {
 			return ret;
 		}
 
-		int ansi_len(void) { return m_ansi_strlen; }
+		int ansi_len(void) {
+			/* force conversion if it has not already occurred */
+			if (m_ansi == NULL)
+				ansi_string();
+			return m_ansi_strlen;
+		}
 
 		static BSTR bstr_from_ansi(char *ansi) {
 			OLECHAR *ole = NULL;

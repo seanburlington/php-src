@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Command.php,v 1.23 2004/02/27 02:24:06 cellog Exp $
+// $Id: Command.php,v 1.24 2004/05/16 15:43:30 pajoye Exp $
 
 
 require_once "PEAR.php";
@@ -280,6 +280,7 @@ class PEAR_Command
                 $GLOBALS['_PEAR_Command_shortcuts'][$shortcut] = $command;
             }
         }
+        @closedir($dp);
         return true;
     }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.76 2001/12/17 20:06:29 hholzgra Exp $ */
+/* $Id: php_mssql.c,v 1.77 2002/01/03 23:08:21 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -306,9 +306,6 @@ PHP_MINIT_FUNCTION(mssql)
 	REGISTER_LONG_CONSTANT("SQLFLT8",SQLFLT8, CONST_CS | CONST_PERSISTENT);
 	/* END MSSQL data types for mssql_sp_bind */
 
-	dberrhandle((DBERRHANDLE_PROC) php_mssql_error_handler);
-	dbmsghandle((DBMSGHANDLE_PROC) php_mssql_message_handler);
-
 	return SUCCESS;
 }
 
@@ -441,6 +438,9 @@ static void php_mssql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		RETURN_FALSE;
 	}
 	
+	dbprocerrhandle(mssql.login, (DBERRHANDLE_PROC) php_mssql_error_handler);
+	dbprocmsghandle(mssql.login, (DBMSGHANDLE_PROC) php_mssql_message_handler);
+
 	if (user) {
 		DBSETLUSER(mssql.login,user);
 	}

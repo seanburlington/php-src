@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.100 1999/08/25 16:24:13 andi Exp $ */
+/* $Id: main.c,v 1.101 1999/08/27 04:31:53 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -627,9 +627,13 @@ static void php_message_handler_for_zend(long message, void *data)
 			}
 			break;
 		case ZMSG_LOG_SCRIPT_NAME: {
+				struct tm *ta;
+				time_t curtime;
 				SLS_FETCH();
 
-				fprintf(stderr, "Script:  '%s'\n", SAFE_FILENAME(SG(request_info).path_translated));
+				time(&curtime);
+				ta = localtime(&curtime);
+				fprintf(stderr, "[%s]  Script:  '%s'\n", asctime(ta), SAFE_FILENAME(SG(request_info).path_translated));
 			}
 			break;
 	}

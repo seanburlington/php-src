@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hholzgra@php.net>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.40 2002/12/31 16:07:56 sebastian Exp $ */
+/* $Id: url_scanner.c,v 1.41 2003/03/10 20:30:33 ddhill Exp $ */
 
 #include "php.h"
 
@@ -88,7 +88,7 @@ static char *url_attr_addon(const char *tag,const char *attr,const char *val,con
 
 /* {{{ url_adapt_ext
  */
-char *url_adapt_ext(const char *src, size_t srclen, const char *name, const char *val, size_t *newlen)
+char *url_adapt_ext(const char *src, uint srclen, const char *name, const char *val, size_t *newlen)
 {
 	char buf[1024];
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.52 2004/11/14 20:00:16 iliaa Exp $ */
+/* $Id: interface.c,v 1.53 2004/11/18 16:35:04 rrichards Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -934,7 +934,7 @@ PHP_FUNCTION(curl_setopt)
 
 #ifdef CURLOPT_FTPSSLAUTH
 		case CURLOPT_FTPSSLAUTH:
-#edif
+#endif
 		case CURLOPT_UNRESTRICTED_AUTH:
 		case CURLOPT_PORT:
 			convert_to_long_ex(zvalue);

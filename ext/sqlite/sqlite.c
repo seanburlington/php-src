@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.139 2004/04/03 14:40:34 helly Exp $ 
+   $Id: sqlite.c,v 1.140 2004/04/11 18:53:32 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -685,7 +685,7 @@ static int php_sqlite_authorizer(void *autharg, int access_type, const char *arg
 {
 	switch (access_type) {
 		case SQLITE_COPY:
-			{
+			if (strncmp(arg4, ":memory:", sizeof(":memory:") - 1)) {
 				TSRMLS_FETCH();
 				if (PG(safe_mode) && (!php_checkuid(arg4, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 					return SQLITE_DENY;
@@ -698,7 +698,7 @@ static int php_sqlite_authorizer(void *autharg, int access_type, const char *arg
 			return SQLITE_OK;
 #ifdef SQLITE_ATTACH
 		case SQLITE_ATTACH:
-			{
+			if (strncmp(arg3, ":memory:", sizeof(":memory:") - 1)) {
 				TSRMLS_FETCH();
 				if (PG(safe_mode) && (!php_checkuid(arg3, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 					return SQLITE_DENY;
@@ -1055,7 +1055,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.139 2004/04/03 14:40:34 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.140 2004/04/11 18:53:32 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

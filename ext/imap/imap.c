@@ -18,10 +18,11 @@
    |          Kaj-Michael Lang    <milang@tal.org>                        |
    |          Antoni Pamies Olive <toni@readysoft.net>                    |
    |          Rasmus Lerdorf      <rasmus@lerdorf.on.ca>                  |
+   |          Chuck Hagenbuch     <chuck@horde.org>                       |
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.40 2000/02/19 23:21:31 zeev Exp $ */
+/* $Id: imap.c,v 1.41 2000/02/21 14:50:40 chagenbu Exp $ */
 
 #define IMAP41
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.162 2003/08/28 00:11:16 abies Exp $ */
+/* $Id: interbase.c,v 1.163 2003/08/28 16:48:22 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -704,7 +704,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.162 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.163 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "Yes");
 #endif
@@ -887,12 +887,12 @@ static void _php_ibase_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			list_entry new_le;
 			
 			if ((IBG(max_links) != -1) && (IBG(num_links) >= IBG(max_links))) {
-				_php_ibase_module_error("Too many open links (%d)" TSRMLS_CC, IBG(num_links));
+				_php_ibase_module_error("Too many open links (%ld)" TSRMLS_CC, IBG(num_links));
 				efree(hashed_details);
 				RETURN_FALSE;
 			}
 			if ((IBG(max_persistent) != -1) && (IBG(num_persistent) >= IBG(max_persistent))) {
-				_php_ibase_module_error("Too many open persistent links (%d)" TSRMLS_CC, IBG(num_persistent));
+				_php_ibase_module_error("Too many open persistent links (%ld)" TSRMLS_CC, IBG(num_persistent));
 				efree(hashed_details);
 				RETURN_FALSE;
 			}
@@ -953,7 +953,7 @@ static void _php_ibase_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			}
 		}
 		if ((IBG(max_links) != -1) && (IBG(num_links) >= IBG(max_links))) {
-			_php_ibase_module_error("Too many open links (%d)" TSRMLS_CC, IBG(num_links));
+			_php_ibase_module_error("Too many open links (%ld)" TSRMLS_CC, IBG(num_links));
 			efree(hashed_details);
 			RETURN_FALSE;
 		}

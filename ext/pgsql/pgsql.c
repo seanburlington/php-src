@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.60 2000/06/25 17:02:44 zeev Exp $ */
+/* $Id: pgsql.c,v 1.61 2000/06/27 13:26:04 jah Exp $ */
 
 #include <stdlib.h>
 
@@ -1487,7 +1487,7 @@ PHP_FUNCTION(pg_loreadall)
 
 	switch(ZEND_NUM_ARGS()) {
 		case 1:
-			if (zend_get_parameters(ht, 1, &pgsql_id)==FAILURE) {
+			if (zend_get_parameters_ex(1, &pgsql_id)==FAILURE) {
 				RETURN_FALSE;
 			}
 			break;

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_packet_soap.c,v 1.36.2.3 2004/10/05 15:58:28 dmitry Exp $ */
+/* $Id: php_packet_soap.c,v 1.36.2.4 2005/03/22 10:18:47 dmitry Exp $ */
 
 #include "php_soap.h"
 
@@ -222,6 +222,11 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 			}
 		}
 		add_soap_fault(this_ptr, faultcode, faultstring, faultactor, details TSRMLS_CC);
+#ifdef ZEND_ENGINE_2
+		if (details) {
+			details->refcount--;
+		}
+#endif
 		xmlFreeDoc(response);
 		return FALSE;
 	}

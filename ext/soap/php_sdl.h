@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.h,v 1.31.2.3 2005/03/21 15:57:16 dmitry Exp $ */
+/* $Id: php_sdl.h,v 1.31.2.4 2005/03/22 10:18:48 dmitry Exp $ */
 
 #ifndef PHP_SDL_H
 #define PHP_SDL_H
@@ -152,7 +152,8 @@ typedef enum _sdlContentKind {
 	XSD_CONTENT_ALL,
 	XSD_CONTENT_CHOICE,
 	XSD_CONTENT_GROUP_REF,
-	XSD_CONTENT_GROUP
+	XSD_CONTENT_GROUP,
+	XSD_CONTENT_ANY
 } sdlContentKind;
 
 

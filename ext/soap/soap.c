@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.110.2.26 2005/03/20 09:55:33 dmitry Exp $ */
+/* $Id: soap.c,v 1.110.2.27 2005/03/22 10:18:48 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3946,10 +3946,18 @@ static void function_to_string(sdlFunctionPtr function, smart_str *buf)
 
 static void model_to_string(sdlContentModelPtr model, smart_str *buf, int level)
 {
+	int i;
+
 	switch (model->kind) {
 		case XSD_CONTENT_ELEMENT:
 			type_to_string(model->u.element, buf, level);
 			smart_str_appendl(buf, ";\n", 2);
+			break;
+		case XSD_CONTENT_ANY:
+			for (i = 0;i < level;i++) {
+				smart_str_appendc(buf, ' ');
+			}
+			smart_str_appendl(buf, "<anyXML> any;\n", sizeof("<anyXML> any;\n")-1);
 			break;
 		case XSD_CONTENT_SEQUENCE:
 		case XSD_CONTENT_ALL:

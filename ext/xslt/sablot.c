@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.11 2001/06/11 14:53:30 dbeu Exp $ */
+/* $Id: sablot.c,v 1.12 2001/06/26 18:20:27 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -173,9 +173,9 @@ PHP_FUNCTION(xslt_create)
 	int           error;       /* The error container */
 
 	/* Allocate the php-sablotron handle */
-	handle                   = emalloc(sizeof(php_xslt));
-	handle->handlers         = emalloc(sizeof(struct xslt_handlers));
-	handle->err              = emalloc(sizeof(struct xslt_error));
+	handle                   = ecalloc(1, sizeof(php_xslt));
+	handle->handlers         = ecalloc(1, sizeof(struct xslt_handlers));
+	handle->err              = ecalloc(1, sizeof(struct xslt_error));
 
 	XSLT_LOG(handle).path = NULL;
 

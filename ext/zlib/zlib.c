@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.154 2002/11/18 11:39:41 wez Exp $ */
+/* $Id: zlib.c,v 1.155 2002/12/01 18:48:51 sr Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -488,7 +488,7 @@ PHP_FUNCTION(gzuncompress)
 	/*
 	 zlib::uncompress() wants to know the output data length
 	 if none was given as a parameter
-	 we try from input length * 2 up to input length * 2^8
+	 we try from input length * 2 up to input length * 2^15
 	 doubling it whenever it wasn't big enough
 	 that should be eneugh for all real life cases	
 	*/
@@ -616,7 +616,7 @@ PHP_FUNCTION(gzinflate)
 	/*
 	  stream.avail_out wants to know the output data length
 	  if none was given as a parameter
-	  we try from input length * 2 up to input length * 2^16
+	  we try from input length * 2 up to input length * 2^15
 	  doubling it whenever it wasn't big enough
 	  that should be enaugh for all real life cases	
 	*/

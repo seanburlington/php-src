@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.91.2.15 2003/08/13 13:27:36 abies Exp $ */
+/* $Id: interbase.c,v 1.91.2.16 2003/08/16 17:11:25 abies Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -624,7 +624,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.15 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.16 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -2667,6 +2667,8 @@ PHP_FUNCTION(ibase_blob_add)
 {
 	zval **blob_arg, **string_arg;
 	ibase_blob_handle *ib_blob;
+	unsigned long put_cnt = 0, rem_cnt;
+	unsigned short chunk_size;
 
 	RESET_ERRMSG;
 
@@ -2678,9 +2680,15 @@ PHP_FUNCTION(ibase_blob_add)
 	
 	convert_to_string_ex(string_arg);
 
-	if (isc_put_segment(IB_STATUS, &ib_blob->bl_handle, (unsigned short) Z_STRLEN_PP(string_arg), Z_STRVAL_PP(string_arg))) {
-		_php_ibase_error(TSRMLS_C);
-		RETURN_FALSE;
+	for (rem_cnt = Z_STRLEN_PP(string_arg); rem_cnt > 0; rem_cnt -= chunk_size)  {
+		
+		chunk_size = rem_cnt > USHRT_MAX ? USHRT_MAX : rem_cnt;
+
+		if (isc_put_segment(IB_STATUS, &ib_blob->bl_handle, chunk_size, &Z_STRVAL_PP(string_arg)[put_cnt] )) {
+			_php_ibase_error(TSRMLS_C);
+			RETURN_FALSE;
+		}
+		put_cnt += chunk_size;
 	}
 	RETURN_TRUE;
 }

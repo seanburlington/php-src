@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.1 2003/06/05 17:06:52 rrichards Exp $ */
+/* $Id: document.c,v 1.2 2003/06/05 18:29:55 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -941,7 +941,7 @@ PHP_FUNCTION(dom_document_document)
 	xmlDoc *docp = NULL, *olddoc;
 	dom_object *intern;
 	char *encoding, *version = NULL;
-	int encoding_len, version_len;
+	int encoding_len = 0, version_len;
 
 	id = getThis();
 	

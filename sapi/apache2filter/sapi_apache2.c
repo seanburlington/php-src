@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.127 2004/08/10 17:40:00 rasmus Exp $ */
+/* $Id: sapi_apache2.c,v 1.128 2004/09/23 15:08:31 hyanantha Exp $ */
 
 #include <fcntl.h>
 
@@ -302,8 +302,8 @@ php_apache_disable_caching(ap_filter_t *f)
 static time_t
 php_apache_sapi_get_request_time(void)
 {
-	php_struct *ctx = SG(server_context);
 	TSRMLS_FETCH();
+	php_struct *ctx = SG(server_context);
 
 	return ctx->r->request_time;
 }

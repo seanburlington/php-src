@@ -2,21 +2,22 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h.in,v 1.12 2002/09/03 05:18:20 hirokawa Exp $
+	$Id: config.w32.h.in,v 1.13 2002/10/04 05:22:13 sebastian Exp $
 */
 
 /* Default PHP / PEAR directories */
 #define CONFIGURATION_FILE_PATH "php.ini"
+#define PEAR_INSTALLDIR "c:\\php4\\pear"
 #define PHP_BINDIR "c:\\php4"
-#define PHP_PREFIX "c:\\php4"
 #define PHP_CONFIG_FILE_PATH (getenv("SystemRoot"))?getenv("SystemRoot"):""
+#define PHP_CONFIG_FILE_SCAN_DIR ""
 #define PHP_DATADIR "c:\\php4"
 #define PHP_EXTENSION_DIR "c:\\php4"
 #define PHP_INCLUDE_PATH	".;c:\\php4\\pear"
 #define PHP_LIBDIR "c:\\php4"
 #define PHP_LOCALSTATEDIR "c:\\php4"
+#define PHP_PREFIX "c:\\php4"
 #define PHP_SYSCONFDIR "c:\\php4"
-#define PEAR_INSTALLDIR "c:\\php4\\pear"
 
 /* Enable / Disable BCMATH extension (default: enabled) */
 #define WITH_BCMATH 1

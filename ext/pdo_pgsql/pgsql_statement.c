@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.11 2005/01/23 14:50:06 edink Exp $ */
+/* $Id: pgsql_statement.c,v 1.12 2005/02/04 01:48:01 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -106,6 +106,7 @@ static int pgsql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 
 	if (status == PGRES_COMMAND_OK) {
 		stmt->row_count = (long)atoi(PQcmdTuples(S->result));
+		H->pgoid = PQoidValue(S->result);
 	} else {
 		stmt->row_count = (long)PQntuples(S->result);
 	}

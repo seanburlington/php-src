@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.63 2000/07/20 15:27:16 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.64 2000/08/17 16:09:00 andrei Exp $ */
 
 /*
 	TODO:
@@ -52,13 +52,13 @@ php_pcre_globals pcre_globals;
 
 static void *php_pcre_malloc(size_t size)
 {
-	return pemalloc(size, 1);
+	return emalloc(size);
 }
 
 
 static void php_pcre_free(void *ptr)
 {
-	pefree(ptr, 1);
+	efree(ptr);
 }
 
 

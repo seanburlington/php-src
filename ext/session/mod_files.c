@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.65 2001/12/11 15:30:20 sebastian Exp $ */
+/* $Id: mod_files.c,v 1.66 2002/02/03 03:17:35 yohgaki Exp $ */
 
 #include "php.h"
 
@@ -123,7 +123,7 @@ static void ps_files_close(ps_files *data)
 	}
 }
 
-static void ps_files_open(ps_files *data, const char *key)
+static int ps_files_open(ps_files *data, const char *key)
 {
 	char buf[MAXPATHLEN];
 	TSRMLS_FETCH();
@@ -138,7 +138,7 @@ static void ps_files_open(ps_files *data, const char *key)
 		
 		if (!ps_files_valid_key(key) || 
 				!ps_files_path_create(buf, sizeof(buf), data, key))
-			return;
+			return FAILURE;
 		
 		data->lastkey = estrdup(key);
 		
@@ -153,10 +153,13 @@ static void ps_files_open(ps_files *data, const char *key)
 		if (data->fd != -1) 
 			flock(data->fd, LOCK_EX);
 
-		if (data->fd == -1)
+		if (data->fd == -1) {
 			php_error(E_WARNING, "open(%s, O_RDWR) failed: %s (%d)", buf, 
 					strerror(errno), errno);
+			return FAILURE;
+		}
 	}
+	return SUCCESS;
 }
 
 static int ps_files_cleanup_dir(const char *dirname, int maxlifetime)
@@ -254,7 +257,9 @@ PS_READ_FUNC(files)
 	struct stat sbuf;
 	PS_FILES_DATA;
 
-	ps_files_open(data, key);
+	if (ps_files_open(data, key) == FAILURE)
+		return FAILURE;
+	
 	if (data->fd < 0)
 		return FAILURE;
 	
@@ -283,7 +288,9 @@ PS_WRITE_FUNC(files)
 	long n;
 	PS_FILES_DATA;
 
-	ps_files_open(data, key);
+	if (ps_files_open(data, key) == FAILURE)
+		return FAILURE;
+
 	if (data->fd < 0)
 		return FAILURE;
 

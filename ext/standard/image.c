@@ -16,7 +16,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.50 2002/03/16 20:12:58 helly Exp $ */
+/* $Id: image.c,v 1.51 2002/03/17 22:50:57 wez Exp $ */
 /*
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -717,7 +717,7 @@ PHP_FUNCTION(getimagesize)
 		break;
 	}
 
-	stream = php_stream_open_wrapper(Z_STRVAL_PP(arg1), "rb", REPORT_ERRORS|IGNORE_PATH|ENFORCE_SAFE_MODE, NULL TSRMLS_CC);
+	stream = php_stream_open_wrapper(Z_STRVAL_PP(arg1), "rb", REPORT_ERRORS|IGNORE_PATH|ENFORCE_SAFE_MODE, NULL);
 
 	if (!stream) {
 		RETURN_FALSE;

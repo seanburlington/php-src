@@ -17,7 +17,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mailparse.c,v 1.21 2002/03/16 22:19:09 mfischer Exp $ */
+/* $Id: mailparse.c,v 1.22 2002/03/17 22:50:55 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -193,7 +193,7 @@ PHP_FUNCTION(mailparse_uudecode_all)
 	instream = (php_stream*)zend_fetch_resource(&file TSRMLS_CC, -1, "File-Handle", &type, 1, php_file_le_stream());
 	ZEND_VERIFY_RESOURCE(instream);
 
-	outstream = php_stream_fopen_temporary_file(NULL, "mailparse", &outpath TSRMLS_CC);
+	outstream = php_stream_fopen_temporary_file(NULL, "mailparse", &outpath);
 	if (outstream == NULL)	{
 		zend_error(E_WARNING, "%s(): unable to open temp file", get_active_function_name(TSRMLS_C));
 		RETURN_FALSE;
@@ -232,7 +232,7 @@ PHP_FUNCTION(mailparse_uudecode_all)
 			add_assoc_string(item, "origfilename", origfilename, 1);
 
 			/* create a temp file for the data */
-			partstream = php_stream_fopen_temporary_file(NULL, "mailparse", &outpath TSRMLS_CC);
+			partstream = php_stream_fopen_temporary_file(NULL, "mailparse", &outpath);
 			if (partstream)	{
 				nparts++;
 				add_assoc_string(item, "filename", outpath, 0);

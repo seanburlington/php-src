@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.56 2002/03/16 02:48:35 wez Exp $ */
+/* $Id: php_ftp.c,v 1.57 2002/03/17 22:50:55 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -480,7 +480,7 @@ PHP_FUNCTION(ftp_get)
 		RETURN_FALSE;
 	}
 
-	outstream = php_stream_fopen(local, "wb", NULL TSRMLS_CC);
+	outstream = php_stream_fopen(local, "wb", NULL);
 
 	if (outstream == NULL)	{
 		php_stream_close(tmpstream);
@@ -547,7 +547,7 @@ PHP_FUNCTION(ftp_put)
 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &z_ftp, -1, le_ftpbuf_name, le_ftpbuf);
 	XTYPE(xtype, mode);
 
-	instream = php_stream_fopen(local, "rb", NULL TSRMLS_CC);
+	instream = php_stream_fopen(local, "rb", NULL);
 
 	if (instream == NULL)	{
 		RETURN_FALSE;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.157 2002/03/16 01:27:45 wez Exp $ */
+/* $Id: pgsql.c,v 1.158 2002/03/17 22:50:56 wez Exp $ */
 
 #include <stdlib.h>
 
@@ -1468,7 +1468,7 @@ PHP_FUNCTION(pg_trace)
     ZEND_FETCH_RESOURCE2(pgsql, PGconn *, z_pgsql_link, id, "PostgreSQL link", le_link, le_plink);
 	convert_to_string_ex(z_filename);
 
-	stream = php_stream_open_wrapper(Z_STRVAL_PP(z_filename), mode, ENFORCE_SAFE_MODE|REPORT_ERRORS, NULL TSRMLS_CC);
+	stream = php_stream_open_wrapper(Z_STRVAL_PP(z_filename), mode, ENFORCE_SAFE_MODE|REPORT_ERRORS, NULL);
 
 	if (!stream) {
 		RETURN_FALSE;

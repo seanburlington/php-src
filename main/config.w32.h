@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.80 2003/11/13 10:32:04 edink Exp $
+	$Id: config.w32.h,v 1.81 2003/11/29 22:48:41 wez Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -103,7 +103,10 @@
 #undef HAVE_SOLID
 #undef HAVE_LINK
 #undef HAVE_SYMLINK
-#undef HAVE_USLEEP
+
+/* its in win32/time.c */
+#define HAVE_USLEEP 1
+
 #define HAVE_GETCWD 1
 #define HAVE_POSIX_READDIR_R 1
 #define NEED_ISBLANK 1

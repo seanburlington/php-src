@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.119 2004/01/21 01:09:41 sniper Exp $ */
+/* $Id: simplexml.c,v 1.120 2004/01/21 11:32:29 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -191,21 +191,17 @@ static zval * sxe_prop_dim_read(zval *object, zval *member, zend_bool elements, 
 					node = NULL;
 				}
 
-				if (node) {
-					node = node->next;
-				}
-
 				prefix = sxe->iter.nsprefix;
 
-				while (node && nodendx < Z_TYPE_P(member)) {
+				while (node && nodendx <= Z_LVAL_P(member)) {
 					SKIP_TEXT(node)
 					if (node->type == XML_ELEMENT_NODE) {
 						if (match_ns(sxe, node, prefix)) {
 							if (sxe->iter.type == SXE_ITER_ELEMENT && !xmlStrcmp(node->name, sxe->iter.name)) {
-								nodendx++;
-								if (nodendx == Z_TYPE_P(member)) {
+								if (nodendx == Z_LVAL_P(member)) {
 									break;
 								}
+								nodendx++;
 							}
 						} else {
 							break;
@@ -246,9 +242,6 @@ static zval * sxe_property_read(zval *object, zval *member, zend_bool silent TSR
  */
 static zval * sxe_dimension_read(zval *object, zval *offset TSRMLS_DC)
 {
-	if (Z_TYPE_P(offset) == IS_LONG && Z_LVAL_P(offset) == 0) {
-		return object;
-	}
 	return sxe_prop_dim_read(object, offset, 0, 1, 0 TSRMLS_CC);
 }
 /* }}} */
@@ -1529,7 +1522,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.119 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.120 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

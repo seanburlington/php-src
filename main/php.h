@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.136 2001/04/27 16:41:53 dbeu Exp $ */
+/* $Id: php.h,v 1.137 2001/04/30 14:23:41 dbeu Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -241,7 +241,7 @@ extern char **environ;
 void phperror(char *error);
 PHPAPI int php_write(void *buf, uint size);
 PHPAPI int php_printf(const char *format, ...);
-void php_log_err(char *log_message);
+PHPAPI void php_log_err(char *log_message);
 int Debug(char *format, ...);
 int cfgparse(void);
 

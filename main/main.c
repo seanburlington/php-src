@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.362 2001/04/30 12:43:40 andi Exp $ */
+/* $Id: main.c,v 1.363 2001/04/30 14:23:41 dbeu Exp $ */
 
 
 #include <stdio.h>
@@ -251,7 +251,7 @@ PHP_INI_END()
 /* True global (no need for thread safety */
 static int module_initialized = 0;
 
-void php_log_err(char *log_message)
+PHPAPI void php_log_err(char *log_message)
 {
 	FILE *log_file;
 	char error_time_str[128];

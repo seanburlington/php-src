@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.119 2003/08/07 00:00:19 abies Exp $ */
+/* $Id: interbase.c,v 1.120 2003/08/07 01:00:22 abies Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -34,6 +34,8 @@ A lot... */
 			  emalloc() with do_alloca()
 			- Changes to ibase_query() to enable the use of CREATE DATABASE ...
 			- Added ibase_drop_db()
+			- Added ibase_commit_ret() and ibase_rollback_ret()
+			- Added ibase_name_result()
 		2001-05-31: Jeremy Bettis <jeremy@deadbeef.com>
 			- If a blob handle was expected and something else was
 			  received create a blob and add the value to it.
@@ -575,7 +577,6 @@ static void php_ibase_init_globals(zend_ibase_globals *ibase_globals)
 	ibase_globals->timestampformat = NULL;
 	ibase_globals->dateformat = NULL;
 	ibase_globals->timeformat = NULL;
-	ibase_globals->errmsg = NULL;
 	ibase_globals->num_persistent = 0;
 }
 
@@ -632,10 +633,7 @@ PHP_RINIT_FUNCTION(ibase)
 	}
 	IBG(timeformat) = DL_STRDUP(IBG(cfg_timeformat));
 
-	if (IBG(errmsg)) {
-		DL_FREE(IBG(errmsg));
-	}
-	IBG(errmsg) = DL_MALLOC(sizeof(char)*MAX_ERRMSG+1);
+	RESET_ERRMSG;
 
 	return SUCCESS;
 }
@@ -663,11 +661,6 @@ PHP_RSHUTDOWN_FUNCTION(ibase)
 	}
 	IBG(timeformat) = NULL;
 
-	if (IBG(errmsg)) {
-		DL_FREE(IBG(errmsg));
-	}
-	IBG(errmsg) = NULL;
-
 	return SUCCESS;
 } 
  
@@ -677,7 +670,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.119 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.120 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "Yes");
 #endif

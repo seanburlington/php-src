@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: text.c,v 1.7 2003/06/11 19:55:52 rrichards Exp $ */
+/* $Id: text.c,v 1.8 2003/06/11 20:06:03 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -141,7 +141,7 @@ PHP_FUNCTION(dom_text_split_text)
 	xmlFree(cur);
 
 	xmlNodeSetContentLen(node, first, offset);
-	nnode = xmlNewText(second);
+	nnode = xmlNewDocText(node->doc, second);
 	
 	xmlFree(first);
 	xmlFree(second);

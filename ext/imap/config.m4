@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.57 2003/05/10 17:14:47 rasmus Exp $
+dnl $Id: config.m4,v 1.58 2003/09/30 22:36:35 iliaa Exp $
 dnl
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
@@ -137,7 +137,7 @@ if test "$PHP_IMAP" != "no"; then
     PHP_NEW_EXTENSION(imap, php_imap.c, $ext_shared)
     AC_DEFINE(HAVE_IMAP,1,[ ])
 
-    for i in /usr/local /usr $PHP_IMAP; do
+    for i in $PHP_IMAP /usr/local /usr; do
       IMAP_INC_CHK()
       el[]IMAP_INC_CHK(/include/c-client)
       el[]IMAP_INC_CHK(/include/imap)

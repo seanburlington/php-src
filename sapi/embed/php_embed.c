@@ -15,7 +15,7 @@
    | Author: Edin Kadribasic <edink@php.net>                              |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_embed.c,v 1.1.2.2 2003/01/28 10:54:17 edink Exp $ */
+/* $Id: php_embed.c,v 1.1.2.3 2003/01/28 14:19:12 edink Exp $ */
 
 #include "php_embed.h"
 
@@ -177,7 +177,7 @@ int php_embed_init(int argc, char **argv PTSRMLS_DC)
 
   sapi_startup(&php_embed_module);
 
-  if (php_module_startup(&php_embed_module, NULL, 0)==FAILURE) {
+  if (php_embed_module.startup(&php_embed_module)==FAILURE) {
 	  return FAILURE;
   }
  

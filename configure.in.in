@@ -1,4 +1,4 @@
-dnl $Id: configure.in.in,v 1.27 1999/05/11 00:01:41 zeev Exp $ -*- sh -*-
+dnl $Id: configure.in.in,v 1.28 1999/05/16 11:55:33 sas Exp $ -*- sh -*-
 dnl Process this file with autoconf to produce a configure script.
 
 
@@ -242,6 +242,9 @@ if test "$php_struct_flock" = "yes" ; then
 else
     AC_DEFINE(HAVE_STRUCT_FLOCK, 0)
 fi
+
+AC_CHECK_SIZEOF(long, 8)
+AC_CHECK_SIZEOF(int, 4)
 
 dnl Check for members of the stat structure
 AC_STRUCT_ST_BLKSIZE

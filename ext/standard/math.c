@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.111 2004/03/10 15:57:49 abies Exp $ */
+/* $Id: math.c,v 1.112 2004/03/10 15:59:50 abies Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -438,8 +438,6 @@ PHP_FUNCTION(is_nan)
 PHP_FUNCTION(pow)
 {
 	zval *zbase, *zexp;
-	double dval;
-	zend_bool wantlong;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z/z/", &zbase, &zexp) == FAILURE) {
 		return;

@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.16.2.2 2001/10/19 15:57:17 edink Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.16.2.3 2001/10/19 18:09:21 edink Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -278,7 +278,7 @@ FILE *php_fopen_url_wrap_http(const char *path, char *mode, int options, int *is
 			*new_path='\0';
 			if (strlen(location)<8 || strncasecmp(location, "http://", 7)) {
 				strcpy(new_path, "http://");
-				strlcat(new_path, resource->host, sizeof(new_path)-strlen(new_path)-1);
+				strlcat(new_path, resource->host, sizeof(new_path));
 				if (resource->port != 80) {
 					snprintf(new_path+strlen(new_path), sizeof(new_path)-strlen(new_path)-1, ":%d", resource->port);
 				}
@@ -286,7 +286,7 @@ FILE *php_fopen_url_wrap_http(const char *path, char *mode, int options, int *is
 					php_dirname(resource->path, strlen(resource->path));
 					snprintf (new_path+strlen(new_path), sizeof(new_path)-strlen(new_path)-1, "%s/", resource->path);
 				}
-				strlcat(new_path, location, sizeof(new_path)-strlen(new_path)-1);
+				strlcat(new_path, location, sizeof(new_path));
 			}
 			else {
 				strlcpy(new_path, location, sizeof(new_path));

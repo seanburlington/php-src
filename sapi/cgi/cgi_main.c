@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.52 2004/01/13 09:13:37 derick Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.53 2004/01/19 19:57:17 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1439,6 +1439,9 @@ consult the installation file that came with this distribution, or visit \n\
 
 			if (script_file) {
 				/* override path_translated if -f on command line */
+				if (SG(request_info).path_translated) {
+					STR_FREE(SG(request_info).path_translated);
+				}
 				SG(request_info).path_translated = script_file;
 			}
 

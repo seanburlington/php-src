@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.21 2000/02/08 18:03:19 andrei Exp $ */
+/* $Id: mod_php4.c,v 1.22 2000/02/10 15:55:09 zeev Exp $ */
 
 #include "zend.h"
 #include "php.h"
@@ -267,6 +267,23 @@ php_apache_startup(sapi_module_struct *sapi_module)
 }
 
 
+static void php_apache_log_message(char *message)
+{
+	SLS_FETCH();
+
+	if (SG(server_context)) {
+#if MODULE_MAGIC_NUMBER >= 19970831
+		aplog_error(NULL, 0, APLOG_ERR | APLOG_NOERRNO, ((request_rec *) SG(server_context))->server, message);
+#else
+		log_error(message, ((requset_rec *) SG(server_context))->server);
+#endif
+	} else {
+		fprintf(stderr, message);
+		fprintf(stderr, "\n");
+	}
+}
+
+
 static sapi_module_struct sapi_module = {
 	"Apache",						/* name */
 									
@@ -287,6 +304,7 @@ static sapi_module_struct sapi_module = {
 	sapi_apache_read_cookies,		/* read Cookies */
 
 	sapi_apache_register_server_variables,		/* register server variables */
+	php_apache_log_message,			/* Log message */
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };

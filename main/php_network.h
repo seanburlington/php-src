@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.33 2002/10/13 23:43:21 wez Exp $ */
+/* $Id: php_network.h,v 1.34 2002/10/14 05:54:15 sebastian Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -27,9 +27,6 @@
 # undef FD_SETSIZE
 # include "arpa/inet.h"
 # define socklen_t unsigned int
-# define SHUT_RD	SD_RECEIVE
-# define SHUT_WR	SD_SEND
-# define SHUT_RDWR	SD_BOTH
 #else
 # undef closesocket
 # define closesocket close

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.68.2.12 2004/01/13 18:59:08 sniper Exp $ */
+/* $Id: ftp.c,v 1.68.2.13 2004/02/20 21:09:07 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -638,7 +638,7 @@ ftp_pasv(ftpbuf_t *ftp, int pasv)
 
 	sin = (struct sockaddr_in *) sa;
 	sin->sin_family = AF_INET;
-	sin->sin_addr.s_addr = ipbox.l[0];
+	memcpy(&(sin->sin_addr.s_addr), &(ipbox.c[0]), 4);
 	sin->sin_port = ipbox.s[2];
 
 	ftp->pasv = 2;
@@ -1328,7 +1328,7 @@ ftp_getdata(ftpbuf_t *ftp TSRMLS_DC)
 #endif
 
 	/* send the PORT */
-	ipbox.l[0] = ((struct sockaddr_in*) sa)->sin_addr.s_addr;
+	memcpy(&(ipbox.c[0]), &(((struct sockaddr_in*) sa)->sin_addr.s_addr), 4);
 	ipbox.s[2] = ((struct sockaddr_in*) &addr)->sin_port;
 	sprintf(arg, "%u,%u,%u,%u,%u,%u",
 		ipbox.c[0], ipbox.c[1], ipbox.c[2], ipbox.c[3],

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php3_ldap.h,v 1.3 1999/05/21 10:06:01 sas Exp $ */
+/* $Id: php3_ldap.h,v 1.4 1999/05/22 16:12:07 sas Exp $ */
 
 #ifndef _PHP3_LDAP_H
 #define _PHP3_LDAP_H
@@ -84,6 +84,10 @@ PHP_FUNCTION(ldap_dn2ufn);
 PHP_FUNCTION(ldap_add);
 PHP_FUNCTION(ldap_delete);
 PHP_FUNCTION(ldap_modify);
+
+PHP_FUNCTION(ldap_mod_add);
+PHP_FUNCTION(ldap_mod_replace);
+PHP_FUNCTION(ldap_mod_del);
 
 typedef struct {
 	long default_link;

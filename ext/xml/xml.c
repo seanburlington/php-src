@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.3 1999/05/21 10:06:24 sas Exp $ */
+/* $Id: xml.c,v 1.4 1999/05/22 16:12:09 sas Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 # if PHP_31
@@ -51,7 +51,6 @@
 # endif
 # include "snprintf.h"
 # include "ext/standard/head.h"
-# include "php3_string.h"
 
 /* Short-term TODO list:
  * - Implement XML_ExternalEntityParserCreate()

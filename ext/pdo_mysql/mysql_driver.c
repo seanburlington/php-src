@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.20 2004/07/28 00:40:01 helly Exp $ */
+/* $Id: mysql_driver.c,v 1.21 2004/09/23 20:20:23 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -249,7 +249,8 @@ static struct pdo_dbh_methods mysql_methods = {
 	NULL,
 	pdo_mysql_last_insert_id,
 	pdo_mysql_fetch_error_func,
-	pdo_mysql_get_attribute
+	pdo_mysql_get_attribute,
+	NULL /* check_liveness: TODO: ping */
 };
 
 #ifndef PDO_MYSQL_UNIX_ADDR

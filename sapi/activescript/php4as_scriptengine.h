@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php4as_scriptengine.h,v 1.1 2002/05/20 01:35:29 wez Exp $ */
+/* $Id: php4as_scriptengine.h,v 1.2 2002/05/20 22:22:57 wez Exp $ */
 
 #include <activscp.h>
 #include "zend.h"
@@ -38,12 +38,13 @@ enum {
 	PHPSE_SET_SITE,
 	PHPSE_ADD_TYPELIB,
 	PHPSE_TRIGGER_ERROR,
-	PHPSE_GET_DISPATCH
+	PHPSE_GET_DISPATCH,
+	PHPSE_DUMMY_TICK,
 };
 
 struct php_active_script_get_dispatch_info {
 	LPCOLESTR pstrItemName;
-	LPSTREAM dispatch;
+	DWORD dispatch;
 };
 
 struct php_active_script_add_named_item_info {
@@ -52,7 +53,7 @@ struct php_active_script_add_named_item_info {
 	IUnknown *punk;
 	ITypeInfo *ptyp;
 	IDispatch *pdisp;
-	LPSTREAM marshal;
+	DWORD marshal;
 };
 
 struct php_active_script_add_scriptlet_info {
@@ -91,7 +92,7 @@ struct php_active_script_parse_proc_info {
 	/* [in] */ DWORD dwSourceContextCookie;
 	/* [in] */ ULONG ulStartingLineNumber;
 	/* [in] */ DWORD dwFlags;
-	/* [out] */ IDispatch **ppdisp; 
+	DWORD dispcookie;
 };
 
 struct php_active_script_add_tlb_info {

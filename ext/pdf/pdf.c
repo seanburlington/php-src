@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.112.2.7 2003/05/21 00:57:43 iliaa Exp $ */
+/* $Id: pdf.c,v 1.112.2.8 2004/02/28 21:00:39 iliaa Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -331,7 +331,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.112.2.7 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.112.2.8 $" );
 	php_info_print_table_end();
 
 }
@@ -1971,7 +1971,7 @@ PHP_FUNCTION(pdf_open_memory_image)
 	ZEND_FETCH_RESOURCE(im, gdImagePtr, arg2, -1, "Image", le_gd);
 
 	count = 3 * im->sx * im->sy;
-	buffer = (unsigned char *) emalloc(count);
+	buffer = (unsigned char *) safe_emalloc(3 * im->sx, im->sy, 0);
 
 	ptr = buffer;
 	for(i=0; i<im->sy; i++) {

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.41 2002/03/03 20:49:04 jflemer Exp $ */
+/* $Id: safe_mode.c,v 1.42 2002/03/03 21:12:49 jflemer Exp $ */
 
 #include "php.h"
 
@@ -98,7 +98,10 @@ PHPAPI int php_checkuid(const char *filename, char *fopen_mode, int mode)
 
 		/* Trim off filename */
 		if ((s = strrchr(path, DEFAULT_SLASH))) {
-			*s = '\0';
+			if (s == path)
+				path[1] = '\0';
+			else
+				*s = '\0';
 		}
 	} else { /* CHECKUID_ALLOW_ONLY_DIR */
 		s = strrchr(filename, DEFAULT_SLASH);

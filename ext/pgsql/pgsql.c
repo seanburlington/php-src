@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.257 2003/01/18 19:28:08 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.258 2003/02/04 18:34:00 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -1437,23 +1437,18 @@ PHP_FUNCTION(pg_result_seek)
 	int row;
 	pgsql_result_handle *pg_result;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|l",
-							  &result, &row) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rl", &result, &row) == FAILURE) {
 		return;
 	}
 
 	ZEND_FETCH_RESOURCE(pg_result, pgsql_result_handle *, &result, -1, "PostgreSQL result", le_result);
 
-	/* Let see if we are better to have another function for this */
-	/* if offset is omitted, return current position */
-/* 	if (ZEND_NUM_ARGS() == 1) */
-/* 		RETURN_LONG(pg_result->row); */
-
-	if (row < 0 || row >= PQntuples(pg_result->result))
+	if (row < 0 || row >= PQntuples(pg_result->result)) {
 		RETURN_FALSE;
+	}
 	
 	/* seek to offset */
-	pg_result->row = row;
+	pg_result->row = row - 1;
 	RETURN_TRUE;
 }
 /* }}} */

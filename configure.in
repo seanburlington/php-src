@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.175 2000/09/02 15:26:13 andi Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.176 2000/09/05 15:35:52 venaas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -338,6 +338,7 @@ ctime_r \
 cuserid \
 flock \
 gcvt \
+getaddrinfo \
 getlogin \
 gethostbyaddr \
 getrusage \

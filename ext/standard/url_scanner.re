@@ -15,7 +15,7 @@
    | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.re,v 1.6 1999/10/21 20:22:12 sas Exp $ */
+/* $Id: url_scanner.re,v 1.7 1999/11/02 18:35:59 sas Exp $ */
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -129,9 +129,13 @@ C = [cC];
 E = [eE];
 F = [fF];
 H = [hH];
+I = [iI];
 M = [mM];
+N = [nN];
+O = [oO];
 R = [rR];
 S = [sS];
+T = [tT];
 */
 
 static void url_scanner(lexdata *state)
@@ -143,6 +147,7 @@ static void url_scanner(lexdata *state)
 /*!re2c
   	"<" F R A M E ws+ S R C ws* "=" ws*		{ BEGIN(REF); }
   	"<" A ws+ H R E F ws* "="	ws*			{ BEGIN(REF); }
+	"<" F O R M ws+ A C T I O N ws* "=" ws*	{ BEGIN(REF); }
 	"<" A R E A ws+ H R E F ws* "=" ws*		{ BEGIN(REF); }
 	(all\[<])+							{ BEGIN(INITIAL); }
 	eof									{ FINISH; }
@@ -150,9 +155,9 @@ static void url_scanner(lexdata *state)
 			break;
 		case REF: 
 /*!re2c
-    ["]? ws* (all\[> \t\v\f":#])+ ws* ["]? { BEGIN(INITIAL); }
-    ["]? ws* (all\[> \t\v\f":#])+/[#]  { BEGIN(INITIAL); }
-    ["]? ws* (all\[> \t\v\f"#])+ ws* ["]? { 
+    ["]? ws* (all\[> \t\v\f":#])* ws* ["]? { BEGIN(INITIAL); }
+    ["]? ws* (all\[> \t\v\f":#])* /[#]  { BEGIN(INITIAL); }
+    ["]? ws* (all\[> \t\v\f"#])* ws* ["]? { 
 			/* don't modify absolute links */
 			state->state = INITIAL; BEGIN(INITIAL); 
 	}

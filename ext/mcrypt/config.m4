@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.19 2001/09/05 13:18:06 sniper Exp $
+dnl $Id: config.m4,v 1.20 2001/09/22 17:51:07 sniper Exp $
 dnl 
 
 PHP_ARG_WITH(mcrypt, for mcrypt support,
@@ -30,6 +30,14 @@ if test "$PHP_MCRYPT" != "no"; then
     ],[
       -L$MCRYPT_DIR/lib
     ])
+
+    PHP_CHECK_LIBRARY(mcrypt, mcrypt_generic_deinit, 
+    [
+      AC_DEFINE(HAVE_MCRYPT_GENERIC_DEINIT,1,[ ])
+    ],[],[
+      -L$MCRYPT_DIR/lib
+    ])
+
   ],[
     -L$MCRYPT_DIR/lib -lltdl
   ])

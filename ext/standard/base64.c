@@ -26,7 +26,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.4 1999/05/16 11:19:25 sas Exp $ */
+/* $Id: base64.c,v 1.5 1999/06/27 21:45:06 sas Exp $ */
 
 #include <string.h>
 
@@ -92,10 +92,7 @@ unsigned char *_php3_base64_decode(const unsigned char *string, int length, int 
 	while ((ch = *current++) != '\0') {
 		if (ch == base64_pad) break;
 		ch = (int)strchr(base64_table, ch);
-		if (ch == 0) {
-			efree(result);
-			return NULL;
-		}
+		if (ch == 0) continue;
 		ch -= (int)base64_table;
 
 		switch(i % 4) {

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.18 1999/06/16 17:06:51 ssb Exp $ */
+/* $Id: file.c,v 1.19 1999/06/27 21:45:06 sas Exp $ */
 
 /* Synced with php3 revision 1.218 1999-06-16 [ssb] */
 
@@ -535,6 +535,9 @@ PHP_FUNCTION(tempnam)
 
 	t = tempnam(d,p);
 	efree(d);
+	if(!t) {
+		RETURN_FALSE;
+	}
 	RETURN_STRING(t,1);
 }
 /* }}} */

@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: snmp.c,v 1.3 1999/05/21 10:06:18 sas Exp $ */
+/* $Id: snmp.c,v 1.4 1999/06/27 21:45:06 sas Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)
@@ -175,7 +175,11 @@ void _php3_snmp(INTERNAL_FUNCTION_PARAMETERS, int st) {
 	 * in (at least) ucd-snmp 3.6.1 which frees
 	 * memory it did not allocate
 	 */
+#ifdef UCD_SNMP_HACK
 	session.community = (u_char *) strdup(a2->value.str.val);
+#else
+	session.community = (u_char *) a2->value.str.val;
+#endif
 	session.community_len = a2->value.str.len;
 	session.retries = retries;
 	session.timeout = timeout;

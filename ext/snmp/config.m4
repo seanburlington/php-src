@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 1999/06/20 18:52:46 sas Exp $
+dnl $Id: config.m4,v 1.4 1999/06/27 21:45:06 sas Exp $
 
 AC_MSG_CHECKING(for SNMP support)
 AC_ARG_WITH(snmp,
@@ -23,6 +23,20 @@ AC_ARG_WITH(snmp,
     PHP_EXTENSION(snmp)
     AC_ADD_LIBRARY_WITH_PATH(snmp, $SNMP_LIBDIR)
     AC_ADD_INCLUDE($SNMP_INCDIR)
+	AC_CHECK_LIB(kstat, kstat_read, [AC_ADD_LIBRARY(kstat)])
+  else
+    AC_MSG_RESULT(no)
+  fi
+],[
+  AC_MSG_RESULT(no)
+])
+
+AC_MSG_CHECKING(whether to enable UCD SNMP hack)
+AC_ARG_ENABLE(ucd-snmp-hack,
+[  --enable-ucd-snmp-hack  Enable UCD SNMP hack],[
+  if test "$enableval" = "yes" ; then
+    AC_DEFINE(UCD_SNMP_HACK, 1)
+    AC_MSG_RESULT(yes)
   else
     AC_MSG_RESULT(no)
   fi

@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.48 2003/09/28 05:07:26 cellog Exp $
+// $Id: Registry.php,v 1.49 2003/12/07 00:29:46 cellog Exp $
 
 /*
 TODO:
@@ -239,7 +239,10 @@ class PEAR_Registry extends PEAR
             return $this->raiseError('PEAR_Registry: could not open filemap', PEAR_REGISTRY_ERROR_FILE, null, null, $php_errormsg);
         }
         $fsize = filesize($this->filemap);
+        $rt = get_magic_quotes_runtime();
+        set_magic_quotes_runtime(0);
         $data = fread($fp, $fsize);
+        set_magic_quotes_runtime($rt);
         fclose($fp);
         $tmp = unserialize($data);
         if (!$tmp && $fsize > 7) {
@@ -334,7 +337,10 @@ class PEAR_Registry extends PEAR
         if ($fp === null) {
             return null;
         }
+        $rt = get_magic_quotes_runtime();
+        set_magic_quotes_runtime(0);
         $data = fread($fp, filesize($this->_packageFileName($package)));
+        set_magic_quotes_runtime($rt);
         $this->_closePackageFile($fp);
         $data = unserialize($data);
         if ($key === null) {

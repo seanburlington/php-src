@@ -16,7 +16,7 @@
 // | Authors: Sterling Hughes <sterling@php.net>                          |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR_Error.php,v 1.1 2000/07/21 18:34:37 sterling Exp $
+// $Id: PEAR_Error.php,v 1.2 2000/07/23 17:10:06 sterling Exp $
 //
 // Commonly needed functions searching directory trees
 //
@@ -39,17 +39,13 @@ class PEAR_Error
 	var $trigger_error = false;
 	
 	var $message = '';
-	var $file    = '';
-	var $line    = 0;
 	
 	/*
 	 * constructor, set the basics...
 	 */
-	function PEAR_Error ($message, $file = __FILE__, $line = __LINE__)
+	function PEAR_Error ($message)
 	{
 		$this->message = $message;
-		$this->file    = $file;
-		$this->line    = $line;
 	}
 	
 	/*

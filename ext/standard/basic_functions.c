@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.569 2003/01/30 05:00:40 pollita Exp $ */
+/* $Id: basic_functions.c,v 1.570 2003/02/03 21:48:36 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1402,6 +1402,9 @@ PHP_FUNCTION(putenv)
 			RETURN_FALSE;
 		}
 	}
+
+	php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid parameter syntax.");
+	RETURN_FALSE;
 }
 /* }}} */
 #endif

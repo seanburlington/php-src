@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.16 2003/04/23 02:37:29 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.17 2003/04/26 21:34:47 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -123,6 +123,11 @@ php_file_globals file_globals;
 
 /* sharing globals is *evil* */
 static int le_stream_context = FAILURE;
+
+PHPAPI int php_le_stream_context(void)
+{
+	return le_stream_context;
+}
 
 /* }}} */
 /* {{{ Module-Stuff */
@@ -493,7 +498,7 @@ PHP_FUNCTION(file)
  	
  		do {
  			p++;
- 			parse_eol:
+parse_eol:
  			if (PG(magic_quotes_runtime)) {
  				/* s is in target_buf which is freed at the end of the function */
  				slashed = php_addslashes(s, (p-s), &len, 0 TSRMLS_CC);

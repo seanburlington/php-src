@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.70.2.2 2002/12/31 16:35:27 sebastian Exp $ */
+/* $Id: file.h,v 1.70.2.3 2003/04/26 21:34:48 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -126,6 +126,7 @@ extern int file_globals_id;
 extern php_file_globals file_globals;
 #endif
 
+PHPAPI int php_le_stream_context(void);
 
 #endif /* FILE_H */
 

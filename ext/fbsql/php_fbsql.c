@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.36 2001/07/12 22:43:25 fmk Exp $ */
+/* $Id: php_fbsql.c,v 1.37 2001/07/24 18:24:10 fmk Exp $ */
 
 /* TODO:
  *
@@ -1582,7 +1582,7 @@ static void phpfbQuery(INTERNAL_FUNCTION_PARAMETERS, char* sql, PHPFBLink* link)
 			if (sR == 1 && md) fbcmdRelease(md);
 			ZVAL_BOOL(return_value, 1)
 		}
-		else if(tp[0] == 'A') 
+		else if(tp[0] == 'A' || tp[0] == 'D') 
 		{
 			if (sR == 1 && md) fbcmdRelease(md);
 			ZVAL_BOOL(return_value, 1)

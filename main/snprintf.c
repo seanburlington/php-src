@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.35 2004/11/15 13:42:22 derick Exp $ */
+/* $Id: snprintf.c,v 1.36 2004/11/15 21:04:09 fmk Exp $ */
 
 /* ====================================================================
  * Copyright (c) 1995-1998 The Apache Group.  All rights reserved.
@@ -1135,7 +1135,7 @@ static void strx_printv(int *ccp, char *buf, size_t len, const char *format,
 }
 
 
-int ap_php_snprintf(char *buf, size_t len, const char *format,...)
+PHPAPI int ap_php_snprintf(char *buf, size_t len, const char *format,...)
 {
 	int cc;
 	va_list ap;
@@ -1147,7 +1147,7 @@ int ap_php_snprintf(char *buf, size_t len, const char *format,...)
 }
 
 
-int ap_php_vsnprintf(char *buf, size_t len, const char *format, va_list ap)
+PHPAPI int ap_php_vsnprintf(char *buf, size_t len, const char *format, va_list ap)
 {
 	int cc;
 

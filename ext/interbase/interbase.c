@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.176 2003/09/05 14:21:25 abies Exp $ */
+/* $Id: interbase.c,v 1.177 2003/09/07 19:59:55 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,9 @@
 
 #include "php.h"
 
-#if HAVE_IBASE
+#define FILE_REVISION "$Revision: 1.177 $"
+
+#if HAVE_IBASE && !defined(VERSION_INFO_ONLY)
 
 #include "php_ini.h"
 #include "ext/standard/php_standard.h"
@@ -716,7 +718,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.176 $");
+	php_info_print_table_row(2, "Revision", FILE_REVISION);
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "Yes");
 #endif

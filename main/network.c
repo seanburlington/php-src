@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.83.2.4 2003/03/05 01:28:45 wez Exp $ */
+/* $Id: network.c,v 1.83.2.5 2003/03/15 13:25:36 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -1081,7 +1081,7 @@ static int php_sockop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)
 				return FAILURE;
 #endif
 			if (ret)	{
-				*ret = fdopen(sock->socket, stream->mode);
+				*(FILE**)ret = fdopen(sock->socket, stream->mode);
 				if (*ret)
 					return SUCCESS;
 				return FAILURE;
@@ -1094,7 +1094,7 @@ static int php_sockop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)
 				return FAILURE;
 #endif
 			if (ret)
-				*ret = (void*)sock->socket;
+				*(int*)ret = sock->socket;
 			return SUCCESS;
 		default:
 			return FAILURE;

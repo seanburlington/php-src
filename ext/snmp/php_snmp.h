@@ -19,7 +19,7 @@
 +----------------------------------------------------------------------+
 */
 
-/* $Id: php_snmp.h,v 1.14 2002/11/11 21:37:19 harrie Exp $ */
+/* $Id: php_snmp.h,v 1.15 2002/12/05 19:33:03 derick Exp $ */
 #ifndef PHP_SNMP_H
 #define PHP_SNMP_H
 
@@ -40,12 +40,12 @@ PHP_FUNCTION(snmp_set_quick_print);
 PHP_FUNCTION(snmp_set_enum_print);
 PHP_FUNCTION(snmp_set_oid_numeric_print);
 PHP_FUNCTION(snmpset);
-PHP_FUNCTION(snmpv3get);
-PHP_FUNCTION(snmpv3getnext);
-PHP_FUNCTION(snmpv3walk);
-PHP_FUNCTION(snmpv3realwalk);
-PHP_FUNCTION(snmpv3set);
-PHP_FUNCTION(snmpv3getbulk);
+
+PHP_FUNCTION(snmp3_get);
+PHP_FUNCTION(snmp3_walk);
+PHP_FUNCTION(snmp3_real_walk);
+PHP_FUNCTION(snmp3_set);
+//PHP_FUNCTION(snmp3_getbulk);
 PHP_MINFO_FUNCTION(snmp);
 #else
 

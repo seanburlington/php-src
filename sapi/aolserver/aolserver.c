@@ -20,10 +20,9 @@
  * TODO:
  * - write documentation
  * - CGI/1.1 conformance
- * - HTTP basic auth
  */
 
-/* $Id: aolserver.c,v 1.11 1999/10/20 19:30:37 sas Exp $ */
+/* $Id: aolserver.c,v 1.12 1999/11/07 13:16:14 sas Exp $ */
 
 /* conflict between PHP and AOLserver */
 #define Debug php_Debug
@@ -193,7 +192,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	int uptime = Ns_InfoUptime();
 	
 	PUTS("<table border=5 width=600>\n");
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.11 1999/10/20 19:30:37 sas Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.12 1999/11/07 13:16:14 sas Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -321,6 +320,9 @@ php_ns_hash_environment(NSLS_D CLS_DC ELS_DC PLS_DC SLS_DC)
 	strncpy(buf, Ns_ConnPeer(NSG(conn)), 511);
 	ADD_STRING("REMOTE_ADDR");
 
+	strncpy(buf, SG(request_info).path_translated, 511);
+	ADD_STRING("PATH_TRANSLATED");
+
 	MAKE_STD_ZVAL(pval);
 	pval->type = IS_LONG;
 	pval->value.lval = Ns_InfoBootTime();
@@ -365,6 +367,7 @@ php_ns_request_ctor(NSLS_D SLS_DC)
 	Ns_DString ds;
 	char *root;
 	int index;
+	char *tmp;
 	
 	server = Ns_ConnServer(NSG(conn));
 	
@@ -383,8 +386,18 @@ php_ns_request_ctor(NSLS_D SLS_DC)
 	index = Ns_SetIFind(NSG(conn)->headers, "content-type");
 	SG(request_info).content_type = index == -1 ? NULL : 
 		Ns_SetValue(NSG(conn)->headers, index);
-	SG(request_info).auth_user = NULL;
-	SG(request_info).auth_password = NULL;
+
+	tmp = Ns_ConnAuthUser(NSG(conn));
+	if(tmp) {
+		tmp = estrdup(tmp);
+	}
+	SG(request_info).auth_user = tmp;
+
+	tmp = Ns_ConnAuthPasswd(NSG(conn));
+	if(tmp) {
+		tmp = estrdup(tmp);
+	}
+	SG(request_info).auth_password = tmp;
 
 	NSG(data_avail) = SG(request_info).content_length;
 }

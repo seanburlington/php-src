@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.21 2003/05/05 12:55:23 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.22 2003/05/05 14:46:49 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -1699,7 +1699,7 @@ PHP_MINIT_FUNCTION(domxml)
 	exsltRegisterAll();
 #endif
 #endif
-
+	xmlInitParser();
 	return SUCCESS;
 }
 /* }}} */

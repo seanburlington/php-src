@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.74 2002/03/21 20:16:22 helly Exp $ */
+/* $Id: exif.c,v 1.75 2002/03/25 01:08:39 hholzgra Exp $ */
 
 /*	ToDos
  *
@@ -100,7 +100,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.3 $Id: exif.c,v 1.74 2002/03/21 20:16:22 helly Exp $"
+#define EXIF_VERSION "1.3 $Id: exif.c,v 1.75 2002/03/25 01:08:39 hholzgra Exp $"
 
 PHP_MINFO_FUNCTION(exif);
 
@@ -3234,7 +3234,7 @@ PHP_FUNCTION(exif_thumbnail)
 }
 /* }}} */
 
-/* {{{ proto long getimagesize(string imagefile)
+/* {{{ proto long exif_imagetype(string imagefile)
    Get the type of an image */
 PHP_FUNCTION(exif_imagetype)
 {

@@ -27,10 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: msql.c,v 1.1 1999/04/21 22:49:15 ssb Exp $ */
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
+/* $Id: msql.c,v 1.2 1999/04/23 20:05:58 zeev Exp $ */
 
 #include "php.h"
 #if COMPILE_DL

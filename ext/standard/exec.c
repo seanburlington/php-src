@@ -26,11 +26,8 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.4 1999/04/22 00:25:56 ssb Exp $ */
+/* $Id: exec.c,v 1.5 1999/04/23 20:05:59 zeev Exp $ */
 
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
 #include <stdio.h>
 #include "php.h"
 #include <ctype.h>

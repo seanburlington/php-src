@@ -26,10 +26,8 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: pageinfo.c,v 1.1 1999/04/17 00:37:07 ssb Exp $ */
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
+/* $Id: pageinfo.c,v 1.2 1999/04/23 20:05:59 zeev Exp $ */
+
 #include "php.h"
 #include "pageinfo.h"
 

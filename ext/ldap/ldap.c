@@ -30,17 +30,8 @@
  */
  
 
-/* $Id: ldap.c,v 1.3 1999/04/23 19:50:29 zeev Exp $ */
+/* $Id: ldap.c,v 1.4 1999/04/23 20:05:58 zeev Exp $ */
 #define IS_EXT_MODULE
-#if !PHP_31 && defined(THREAD_SAFE)
-#undef THREAD_SAFE
-#endif
-#ifdef THREAD_SAFE
-#include "tls.h"
-DWORD ldapTLS;
-static int numthreads=0;
-void *ldap_mutex;
-#endif
 
 #include "php.h"
 
@@ -289,7 +280,7 @@ void php3_info_ldap(void)
 
 	php3_printf("<table>"
 				"<tr><td>Total links:</td><td>%d/%s</td></tr>\n"
-		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.3 1999/04/23 19:50:29 zeev Exp $</td></tr>\n"
+		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.4 1999/04/23 20:05:58 zeev Exp $</td></tr>\n"
 #if HAVE_NSLDAP
 				"<tr><td>SDK Version:</td><td>%f</td></tr>"
 				"<tr><td>Highest LDAP Protocol Supported:</td><td>%f</td></tr>"

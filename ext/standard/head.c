@@ -26,10 +26,8 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.1 1999/04/22 00:25:57 ssb Exp $ */
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
+/* $Id: head.c,v 1.2 1999/04/23 20:05:59 zeev Exp $ */
+
 #include <stdio.h>
 #include "php.h"
 #include "ext/standard/php3_standard.h"

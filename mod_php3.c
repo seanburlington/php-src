@@ -28,12 +28,8 @@
    | PHP4 patches by Zeev Suraski <zeev@zend.com>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php3.c,v 1.8 1999/04/10 17:39:07 zeev Exp $ */
+/* $Id: mod_php3.c,v 1.9 1999/04/23 20:05:52 zeev Exp $ */
 
-#ifdef THREAD_SAFE
-#include "tls.h"
-#include "php.h"
-#else
 #include "httpd.h"
 #include "http_config.h"
 #if MODULE_MAGIC_NUMBER > 19980712
@@ -48,7 +44,6 @@
 #include "http_protocol.h"
 #include "http_request.h"
 #include "http_log.h"
-#endif
 
 
 /* These are taken out of php_ini.h

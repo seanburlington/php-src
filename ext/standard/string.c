@@ -30,10 +30,8 @@
  */
 
 
-/* $Id: string.c,v 1.6 1999/04/22 02:48:25 ssb Exp $ */
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
+/* $Id: string.c,v 1.7 1999/04/23 20:06:00 zeev Exp $ */
+
 #include <stdio.h>
 #include "php.h"
 #include "reg.h"

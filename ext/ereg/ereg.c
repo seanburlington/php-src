@@ -28,10 +28,8 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.2 1999/04/21 17:11:01 sas Exp $ */
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
+/* $Id: ereg.c,v 1.3 1999/04/23 20:05:59 zeev Exp $ */
+
 #include <stdio.h>
 #include "php.h"
 #include "php3_string.h"

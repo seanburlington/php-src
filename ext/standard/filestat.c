@@ -27,10 +27,8 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.2 1999/04/21 04:02:11 zeev Exp $ */
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
+/* $Id: filestat.c,v 1.3 1999/04/23 20:05:59 zeev Exp $ */
+
 #include "php.h"
 #include "safe_mode.h"
 #include "fopen-wrappers.h"

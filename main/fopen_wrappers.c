@@ -27,11 +27,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.8 1999/04/22 00:25:51 ssb Exp $ */
-
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
+/* $Id: fopen_wrappers.c,v 1.9 1999/04/23 20:05:52 zeev Exp $ */
 
 #include "php.h"
 #include "php_globals.h"

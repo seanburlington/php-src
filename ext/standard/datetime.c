@@ -30,12 +30,9 @@
  */
 
 
-/* $Id: datetime.c,v 1.2 1999/04/21 17:11:01 sas Exp $ */
+/* $Id: datetime.c,v 1.3 1999/04/23 20:05:59 zeev Exp $ */
 
 
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
 #include "php.h"
 #include "zend_operators.h"
 #include "datetime.h"

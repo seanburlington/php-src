@@ -26,10 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: file.c,v 1.7 1999/04/22 00:25:56 ssb Exp $ */
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
+/* $Id: file.c,v 1.8 1999/04/23 20:05:59 zeev Exp $ */
 #include "php.h"
 #include "php_globals.h"
 #include "ext/standard/flock_compat.h"

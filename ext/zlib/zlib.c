@@ -22,15 +22,12 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.2 1999/04/23 04:12:13 rasmus Exp $ */
+/* $Id: zlib.c,v 1.3 1999/04/23 20:06:00 zeev Exp $ */
 #if !PHP_31 && defined(THREAD_SAFE)
 #undef THREAD_SAFE
 #endif
 #define IS_EXT_MODULE
 
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
 #include "php.h"
 
 #include <stdio.h>

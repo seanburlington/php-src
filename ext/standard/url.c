@@ -26,7 +26,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.1 1999/04/17 00:37:07 ssb Exp $ */
+/* $Id: url.c,v 1.2 1999/04/23 20:06:00 zeev Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -34,9 +34,6 @@
 #include <sys/types.h>
 
 /* php.h includes the correct regex.h */
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
 #include "php.h"
 
 #include "url.h"

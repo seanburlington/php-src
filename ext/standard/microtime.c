@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.1 1999/04/17 00:37:07 ssb Exp $ */
+/* $Id: microtime.c,v 1.2 1999/04/23 20:05:59 zeev Exp $ */
 
 #include <stdlib.h>
 #ifdef HAVE_UNISTD_H
@@ -36,9 +36,6 @@
 #include <string.h>
 #include <errno.h>
 
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
 #include "php.h"
 #include "microtime.h"
 #include "snprintf.h"

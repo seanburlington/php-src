@@ -26,11 +26,8 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: base64.c,v 1.2 1999/04/23 20:05:59 zeev Exp $ */
 
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
 #include <string.h>
 
 #include "php.h"

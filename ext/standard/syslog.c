@@ -27,10 +27,8 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.2 1999/04/21 17:28:54 zeev Exp $ */
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
+/* $Id: syslog.c,v 1.3 1999/04/23 20:06:00 zeev Exp $ */
+
 #include "php.h"
 #include "php_ini.h"
 #include "zend_globals.h"

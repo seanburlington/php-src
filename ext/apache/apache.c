@@ -29,10 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache.c,v 1.2 1999/04/22 00:25:52 ssb Exp $ */
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
+/* $Id: apache.c,v 1.3 1999/04/23 20:05:53 zeev Exp $ */
 #include "php.h"
 #include "ext/standard/head.h"
 #include "php_globals.h"

@@ -29,16 +29,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.25 1999/04/23 10:26:49 zeev Exp $ */
+/* $Id: main.c,v 1.26 1999/04/23 20:05:52 zeev Exp $ */
 
 
 #define SHUTDOWN_DEBUG(resource) fprintf(stderr, "*** Shutting down " resource "\n" )
 #undef SHUTDOWN_DEBUG
 #define SHUTDOWN_DEBUG(resource)
 
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
 #include <stdio.h>
 #include "php.h"
 #ifdef MSVC5

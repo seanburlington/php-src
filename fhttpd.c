@@ -27,10 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fhttpd.c,v 1.1 1999/04/22 02:48:22 ssb Exp $ */
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
+/* $Id: fhttpd.c,v 1.2 1999/04/23 20:05:52 zeev Exp $ */
 #include "php.h"
 
 #include <stdlib.h>

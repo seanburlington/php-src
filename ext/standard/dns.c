@@ -28,11 +28,8 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: dns.c,v 1.2 1999/04/23 20:05:59 zeev Exp $ */
 
-#ifdef THREAD_SAFE
-#include "tls.h"
-#endif
 #include "php.h"
 #if HAVE_SYS_SOCKET_H
 #include <sys/socket.h>

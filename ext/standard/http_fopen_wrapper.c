@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.57 2003/01/03 17:05:16 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.58 2003/01/03 17:12:35 iliaa Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -311,9 +311,9 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 					php_stream_notify_file_size(context, file_size, http_header_line, 0);
 				}
 
-				if (http_header_line[0] == '\0')
+				if (http_header_line[0] == '\0') {
 					body = 1;
-				else	{
+				} else {
 					zval *http_header;
 
 					MAKE_STD_ZVAL(http_header);
@@ -322,9 +322,9 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 				
 					zend_hash_next_index_insert(Z_ARRVAL_P(response_header), &http_header, sizeof(zval *), NULL);
 				}
-			}
-			else
+			} else {
 				break;
+			}
 		}
 	} 
 	
@@ -379,9 +379,11 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 				}
 				zval_dtor(stream->wrapperdata);
 				FREE_ZVAL(stream->wrapperdata);
+			} else {
+				zval_dtor(response_header);
+				FREE_ZVAL(response_header);
 			}
 		} else {
-
 			zval_dtor(response_header);
 			FREE_ZVAL(response_header);
 

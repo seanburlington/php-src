@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.174.2.6 2003/01/05 21:11:39 derick Exp $ */
+/* $Id: php_mysql.c,v 1.174.2.7 2003/01/06 14:12:40 georg Exp $ */
 
 /* TODO:
  *
@@ -1001,7 +1001,7 @@ PHP_FUNCTION(mysql_info)
 		CHECK_LINK(id);
 	}
 
-	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, mysql_link, id, "MySQL-Link", le_link, le_plink);
+	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, &mysql_link, id, "MySQL-Link", le_link, le_plink);
 
 	if ((str = (char *)mysql_info(&mysql->conn))) {
 		RETURN_STRING(str,1);

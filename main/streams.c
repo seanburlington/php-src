@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.3 2002/11/16 11:40:07 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.4 2002/11/16 16:13:25 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1845,7 +1845,7 @@ PHPAPI int _php_stream_cast(php_stream *stream, int castas, void **ret, int show
 			if (copied == 0) {
 				php_stream_close(newstream);
 			} else {
-				int retcode = php_stream_cast(newstream, castas | flags, ret, show_err TSRMLS_CC);
+				int retcode = php_stream_cast(newstream, castas | flags, ret, show_err);
 
 				if (retcode == SUCCESS)
 					rewind((FILE*)*ret);

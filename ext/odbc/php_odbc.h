@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.35 2001/04/10 16:26:28 kevin Exp $ */
+/* $Id: php_odbc.h,v 1.36 2001/05/09 15:35:31 zhang Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -246,7 +246,7 @@ PHP_FUNCTION(odbc_statistics);
 #define ODBC_SQL_ENV_T SQLHANDLE
 #define ODBC_SQL_CONN_T SQLHANDLE
 #define ODBC_SQL_STMT_T SQLHANDLE
-#elif defined( HAVE_SOLID_35 ) || defined( HAVE_SAPDB )
+#elif defined( HAVE_SOLID_35 ) || defined( HAVE_SAPDB ) || defined ( HAVE_EMPRESS )
 #define ODBC_SQL_ENV_T SQLHENV
 #define ODBC_SQL_CONN_T SQLHDBC
 #define ODBC_SQL_STMT_T SQLHSTMT

@@ -1,6 +1,6 @@
 An Overview of the PHP Streams abstraction
 ==========================================
-$Id: README.STREAMS,v 1.9 2002/11/06 01:56:51 helly Exp $
+$Id: README.STREAMS,v 1.10 2002/11/11 18:05:22 helly Exp $
 
 WARNING: some prototypes in this file are out of date.
 The information contained here is being integrated into
@@ -39,7 +39,7 @@ PHPAPI int php_stream_seek(php_stream * stream, off_t offset, int whence);
 PHPAPI off_t php_stream_tell(php_stream * stream);
 
 These (should) behave in the same way as the ANSI stdio functions with similar
-names: fread, fwrite, feof, fgetc, fgets, fclose, fflush, fseek, ftell.
+names: fread, fwrite, fprintf, feof, fgetc, fgets, fclose, fflush, fseek, ftell.
 
 Opening Streams
 ===============

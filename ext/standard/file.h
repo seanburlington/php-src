@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.52 2002/03/19 03:51:01 wez Exp $ */
+/* $Id: file.h,v 1.53 2002/03/19 13:33:07 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -70,7 +70,7 @@ PHP_FUNCTION(realpath);
 PHP_NAMED_FUNCTION(php_if_ftruncate);
 PHP_NAMED_FUNCTION(php_if_fstat);
 
-PHP_FUNCTION(fgetwrapperdata);
+PHP_FUNCTION(file_get_wrapper_data);
 PHP_FUNCTION(file_register_wrapper);
 
 PHPAPI int php_set_sock_blocking(int socketd, int block);

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.214 2002/03/18 18:54:26 wez Exp $ */
+/* $Id: file.c,v 1.215 2002/03/19 13:33:07 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -535,9 +535,9 @@ PHP_NAMED_FUNCTION(php_if_tmpfile)
 }
 /* }}} */
 
-/* {{{ proto resource fgetwrapperdata(resource fp)
+/* {{{ proto resource file_get_wrapper_data(resource fp)
  */
-PHP_FUNCTION(fgetwrapperdata)
+PHP_FUNCTION(file_get_wrapper_data)
 {
 	zval **arg1;
 	php_stream *stream;

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.64.2.5 2002/06/02 11:47:04 ssb Exp $
+// $Id: Installer.php,v 1.64.2.6 2002/06/02 12:59:19 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -223,10 +223,12 @@ class PEAR_Installer extends PEAR_Common
                     }
                 } elseif ($a['type'] == 'pear-config') {
                     $to = $this->config->get($a['to']);
+                } elseif ($a['type'] == 'package-info') {
+                    $to = $this->pkginfo[$a['to']];
                 }
                 if ($to) {
-                    $subst_from = $a['from'];
-                    $subst_to = $to;
+                    $subst_from[] = $a['from'];
+                    $subst_to[] = $to;
                 }
             }
             $this->log(2, "doing ".sizeof($subst_from)." substitution(s) for $dest_file");

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.67.2.3 2002/05/29 12:59:10 dickmann Exp $
+// $Id: Common.php,v 1.67.2.4 2002/06/02 12:59:19 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -67,7 +67,7 @@ $GLOBALS['_PEAR_Common_file_roles'] = array('php','ext','test','doc','data','src
  * Valid replacement types
  * @var array
  */
-$GLOBALS['_PEAR_Common_replacement_types'] = array('php-const', 'pear-config');
+$GLOBALS['_PEAR_Common_replacement_types'] = array('php-const', 'pear-config', 'package-info');
 
 /**
  * Valid "provide" types

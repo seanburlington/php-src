@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.52.2.9 2002/08/23 19:59:00 helly Exp $ */
+/* $Id: exif.c,v 1.52.2.10 2002/08/29 08:35:47 helly Exp $ */
 
 /*	ToDos
  *
@@ -120,7 +120,7 @@ PHP_MINFO_FUNCTION(exif)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "EXIF Support", "enabled" );
 	php_info_print_table_row(2, "EXIF Version", EXIF_VERSION );
-	php_info_print_table_row(2, "Supported EXIF Version", "02100");
+	php_info_print_table_row(2, "Supported EXIF Version", "0210");
 	php_info_print_table_row(2, "Supported filetypes", "JPEG,TIFF");
 	php_info_print_table_end();
 }

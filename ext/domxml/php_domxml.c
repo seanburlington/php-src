@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.33 2001/03/22 06:58:13 steinm Exp $ */
+/* $Id: php_domxml.c,v 1.34 2001/03/26 21:42:01 sniper Exp $ */
 
 
 #include "php.h"
@@ -667,12 +667,12 @@ static zval *php_domobject_new(xmlNodePtr obj, int *found) {
 	return(wrapper);
 }
 
-PHP_MINIT_FUNCTION(domxml)
+PHP_RINIT_FUNCTION(domxml)
 {
 	return SUCCESS;
 }
 
-PHP_RINIT_FUNCTION(domxml)
+PHP_MINIT_FUNCTION(domxml)
 {
 	zend_class_entry ce;
 	le_domxmldocp = zend_register_list_destructors_ex(php_free_xml_doc, NULL, "domdocument", module_number);

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.13 2003/04/17 02:53:32 sniper Exp $ */
+/* $Id: var_unserializer.re,v 1.14 2003/05/18 12:08:51 helly Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -111,7 +111,7 @@ PHPAPI void var_destroy(php_unserialize_data_t *var_hashx)
 
 /*!re2c
 iv = [+-]? [0-9]+;
-nv = [+-]? ([0-9]* "." [0-9]+|[0-9]+ "." [0-9]+);
+nv = [+-]? ([0-9]* "." [0-9]+|[0-9]+ "." [0-9]*);
 nvexp = (iv | nv) [eE] [+-]? iv;
 any = [\000-\277];
 */

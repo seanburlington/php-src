@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.79 2001/10/23 09:19:11 sniper Exp $
+dnl $Id: config.m4,v 1.80 2001/11/10 09:51:47 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -47,7 +47,7 @@ AC_DEFUN(PHP_GD_PNG,[
       AC_MSG_ERROR([PNG support requires ZLIB. Use --with-zlib-dir=<DIR>])
     fi
     
-    PHP_CHECK_LIBRARY(png,png_info_init,
+    PHP_CHECK_LIBRARY(png,png_write_image,
     [
       PHP_ADD_LIBRARY_WITH_PATH(z, $PHP_ZLIB_DIR/lib, GD_SHARED_LIBADD)
       PHP_ADD_LIBRARY_WITH_PATH(png, $GD_PNG_DIR/lib, GD_SHARED_LIBADD)

@@ -1,8 +1,5 @@
-dnl $Id: config.m4,v 1.7 2000/05/26 09:34:13 steinm Exp $
+dnl $Id: config.m4,v 1.8 2000/07/25 00:29:52 sterling Exp $
 dnl config.m4 for extension libswf
-dnl don't forget to call PHP_EXTENSION(swf)
-dnl This file is a modified version of config.m4
-dnl in php4/ext/mcrypt
 
 PHP_ARG_WITH(swf, for libswf support,
 [  --with-swf[=DIR]        Include swf support])

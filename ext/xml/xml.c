@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.128 2003/05/27 00:50:00 iliaa Exp $ */
+/* $Id: xml.c,v 1.129 2003/06/05 17:48:51 sterling Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -34,6 +34,8 @@
 #include "ext/standard/info.h"
 
 #if HAVE_XML
+
+int xml_parser_inited = 0;
 
 #include "php_xml.h"
 # include "ext/standard/head.h"
@@ -250,7 +252,10 @@ PHP_MSHUTDOWN_FUNCTION(xml)
 PHP_RSHUTDOWN_FUNCTION(xml)
 {
 #ifdef LIBXML_EXPAT_COMPAT
-	xmlCleanupParser();
+	if (xml_parser_inited) {
+		xmlCleanupParser();
+		xml_parser_inited = 0;
+	}
 #endif	
 	return SUCCESS;
 }

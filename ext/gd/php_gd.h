@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.47 2002/12/06 02:16:06 pajoye Exp $ */
+/* $Id: php_gd.h,v 1.48 2002/12/11 20:45:47 pajoye Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -99,10 +99,10 @@ PHP_FUNCTION(imagecopyresampled);
 
 #ifdef HAVE_GD_BUNDLED
 PHP_FUNCTION(imagerotate);
+PHP_FUNCTION(imageantialias);
 #endif
 
 PHP_FUNCTION(imagesetthickness);
-PHP_FUNCTION(imagesettile);
 PHP_FUNCTION(imagecopymergegray);
 PHP_FUNCTION(imagesetbrush);
 PHP_FUNCTION(imagesettile);

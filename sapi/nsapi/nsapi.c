@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nsapi.c,v 1.42 2003/05/30 23:39:15 thetaphi Exp $ */
+/* $Id: nsapi.c,v 1.43 2003/05/31 15:32:50 thetaphi Exp $ */
 
 /*
  * PHP includes
@@ -697,7 +697,7 @@ static void nsapi_php_ini_entries(NSLS_D TSRMLS_DC)
 				/* change the ini entry */
 				if (zend_alter_ini_entry(entry->param->name, strlen(entry->param->name)+1,
 				 entry->param->value, strlen(entry->param->value),
-				 PHP_INI_SYSTEM, PHP_INI_STAGE_RUNTIME)==FAILURE) {
+				 PHP_INI_USER, PHP_INI_STAGE_RUNTIME)==FAILURE) {
 					log_error(LOG_WARN, "php4_execute", NSG(sn), NSG(rq), "Cannot change php.ini key \"%s\" to \"%s\"", entry->param->name, entry->param->value);
 				}
 			}

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.141 2000/06/08 06:14:58 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.142 2000/06/09 17:21:40 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -361,6 +361,7 @@ srand48 \
 srandom \
 statfs \
 statvfs \
+std_syslog \
 strcasecmp \
 strdup \
 strerror \

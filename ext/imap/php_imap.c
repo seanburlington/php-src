@@ -25,7 +25,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.77.2.2 2001/05/27 18:39:18 sniper Exp $ */
+/* $Id: php_imap.c,v 1.77.2.3 2001/05/30 17:27:49 chagenbu Exp $ */
 
 #define IMAP41
 
@@ -3135,6 +3135,12 @@ PHP_FUNCTION(imap_fetch_overview)
 					address[0] = '\0';
 					rfc822_write_address(address, env->from);
 					add_property_string(myoverview, "from", address, 1);
+				}
+			        if (env->to) {
+					env->to->next = NULL;
+				    	address[0] = '\0';
+					rfc822_write_address(address, env->to);
+					add_property_string(myoverview, "to", address, 1);
 				}
 				if (env->date) {
 					add_property_string(myoverview, "date", env->date, 1);

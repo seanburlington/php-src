@@ -17,7 +17,9 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.30 2000/02/10 19:41:20 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.31 2000/02/16 17:46:14 zeev Exp $ */
+
+#define _PHP_REGEX_H 1
 
 #include "zend.h"
 #include "php.h"

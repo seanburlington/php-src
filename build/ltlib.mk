@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: ltlib.mk,v 1.1 1999/12/30 02:58:32 sas Exp $ 
+# $Id: ltlib.mk,v 1.2 2000/02/16 17:46:13 zeev Exp $ 
 #
 
 targets = $(LTLIBRARY_NAME)
@@ -29,3 +29,5 @@ targets = $(LTLIBRARY_NAME)
 include $(topsrcdir)/build/rules.mk
 include $(topsrcdir)/build/library.mk
 
+# CC = insure
+CC = gcc

@@ -1,10 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.8 2002/08/13 05:12:29 kalowsky Exp $
+dnl $Id: config.m4,v 1.9 2002/09/15 01:39:29 jon Exp $
 dnl
 
 AC_MSG_CHECKING(whether to include QDOM support)
 AC_ARG_WITH(qtdom,
-[  --with-qtdom            Include QtDOM support (requires Qt >= 2.2.0).],
+[  --with-qtdom          Include QtDOM support (requires Qt >= 2.2.0).],
 [
 case $withval in
     no)

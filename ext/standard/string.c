@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.7 2003/01/03 18:57:37 derick Exp $ */
+/* $Id: string.c,v 1.333.2.8 2003/01/05 04:29:35 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3199,6 +3199,7 @@ PHP_FUNCTION(setlocale)
 			cat = LC_TIME;
 		else {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid locale category name %s, must be one of LC_ALL, LC_COLLATE, LC_CTYPE, LC_MONETARY, LC_NUMERIC, or LC_TIME.", category);
+			efree(args);
 			RETURN_FALSE;
 		}
 	}
@@ -3742,13 +3743,13 @@ PHP_FUNCTION(localeconv)
 	zval *grouping, *mon_grouping;
 	int len, i;
 
-	MAKE_STD_ZVAL(grouping);
-	MAKE_STD_ZVAL(mon_grouping);
-
 	/* We don't need no stinkin' parameters... */
 	if (ZEND_NUM_ARGS() > 0) {
 		WRONG_PARAM_COUNT;
 	}
+
+	MAKE_STD_ZVAL(grouping);
+	MAKE_STD_ZVAL(mon_grouping);
 
 	array_init(return_value);
 	array_init(grouping);

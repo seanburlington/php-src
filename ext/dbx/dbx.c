@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx.c,v 1.25 2001/08/17 13:56:29 mboeren Exp $ */
+/* $Id: dbx.c,v 1.26 2001/08/22 00:09:27 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -623,7 +623,7 @@ ZEND_FUNCTION(dbx_compare)
 	if (comparison_direction==DBX_CMP_DESC) RETURN_LONG(-result);
 	RETURN_LONG(result);
 }
-
+/* }}} */
 
 /* {{{ proto long dbx_sort(dbx_result_object dbx_result, string compare_function_name)
    returns 0 on failure, 1 on success
@@ -657,6 +657,7 @@ ZEND_FUNCTION(dbx_sort)
 	
 	RETURN_LONG(1);
 }
+/* }}} */
 
 /***********************************/
 

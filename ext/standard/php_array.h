@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_array.h,v 1.8 2000/05/09 19:27:00 andrei Exp $ */
+/* $Id: php_array.h,v 1.9 2000/05/18 00:47:57 andrei Exp $ */
 
 #ifndef _PHP_ARRAY_H
 #define _PHP_ARRAY_H
@@ -69,11 +69,12 @@ PHP_FUNCTION(array_pad);
 PHP_FUNCTION(array_flip);
 PHP_FUNCTION(array_rand);
 
-HashTable* _phpi_splice(HashTable *, int, int, zval ***, int, HashTable **);
+HashTable* php_splice(HashTable *, int, int, zval ***, int, HashTable **);
 int multisort_compare(const void *a, const void *b);
 
 typedef struct {
 	int *multisort_flags;
+	int (*compare_func)(zval *result, zval *op1, zval *op2);
 } php_array_globals;
 
 #ifdef ZTS

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.305 2002/03/07 15:40:39 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.306 2002/03/07 19:21:02 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -807,7 +807,7 @@ program|static)
 shared)
     enable_static=no
     standard_libtool_flag=-prefer-pic
-    EXTRA_LDFLAGS="$EXTRA_LDFLAGS -avoid-version"
+    EXTRA_LDFLAGS="$EXTRA_LDFLAGS -avoid-version -module"
 ;;
 esac
 

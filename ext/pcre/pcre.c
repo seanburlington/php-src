@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcre.c,v 1.13 1999/05/30 14:48:39 andrey Exp $ */
+/* $Id: pcre.c,v 1.14 1999/06/04 13:37:44 andrey Exp $ */
 
 #include "php.h"
 
@@ -694,6 +694,7 @@ static char *_php_replace_in_subject(zval *regex, zval *replace, zval *subject)
 	}
 	else {
 		/* Make sure we're dealing with strings and do the replacement */
+		convert_to_string(regex);
 		convert_to_string(replace);
 		result = _php_pcre_replace(regex->value.str.val,
 									subject->value.str.val,

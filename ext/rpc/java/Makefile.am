@@ -1,4 +1,4 @@
-# $Id: Makefile.am,v 1.1 1999/11/09 12:02:19 rubys Exp $
+# $Id: Makefile.am,v 1.2 1999/11/29 15:36:22 rubys Exp $
 
 SRC=java.c
 
@@ -16,9 +16,10 @@ php_java.jar : reflect.java
 	@test -e net || mkdir net
 	@test -e net/php || mkdir net/php
 	@cp reflect.java net/php
+	@echo library=php4>net/php/reflect.properties
 	javac net/php/reflect.java
 	@test ! -f reflect.class || mv reflect.class net/php # bug in KJC javac
-	zip -q0 php_java.jar net/php/*.class
+	zip -q0 php_java.jar net/php/*.class net/php/*.properties
 	@rm net/php/reflect.*
 	@rmdir net/php
 	@rmdir net

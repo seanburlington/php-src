@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.410 2001/10/06 20:13:38 derick Exp $ */
+/* $Id: main.c,v 1.411 2001/11/19 14:59:38 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -506,9 +506,8 @@ PHP_FUNCTION(set_time_limit)
 		WRONG_PARAM_COUNT;
 	}
 
-	convert_to_long_ex(new_timeout);
-	zend_unset_timeout(TSRMLS_C);
-	zend_set_timeout(Z_LVAL_PP(new_timeout));
+	convert_to_string_ex(new_timeout);
+	zend_alter_ini_entry("max_execution_time", sizeof("max_execution_time"), Z_STRVAL_PP(new_timeout), Z_STRLEN_PP(new_timeout), PHP_INI_USER, PHP_INI_STAGE_RUNTIME);
 }
 /* }}} */
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.8 2003/07/02 01:08:26 sas Exp $
+dnl $Id: config9.m4,v 1.9 2003/07/02 02:38:47 sniper Exp $
 dnl
 
 AC_ARG_ENABLE(cgi,
@@ -147,7 +147,7 @@ if test "$PHP_SAPI" = "default"; then
     AC_DEFINE_UNQUOTED(PHP_FCGI_STATIC, $PHP_FCGI_STATIC, [ ])
     AC_MSG_RESULT($PHP_ENABLE_FASTCGI)
 
-    INSTALL_IT="\$(INSTALL) -m 0755 \$(SAPI_CGI_PATH) \$(INSTALL_ROOT)\$(bindir)/php"
+    INSTALL_IT="@echo \"Installing PHP CGI into: \$(INSTALL_ROOT)\$(bindir)/\"; \$(INSTALL) -m 0755 \$(SAPI_CGI_PATH) \$(INSTALL_ROOT)\$(bindir)/php"
     PHP_SELECT_SAPI(cgi, program, $PHP_FCGI_FILES cgi_main.c getopt.c, $PHP_FCGI_INCLUDE, '$(SAPI_CGI_PATH)')
 
     case $host_alias in

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.31 2001/07/09 17:36:04 rasmus Exp $ */
+/* $Id: safe_mode.c,v 1.32 2001/07/09 18:57:19 rasmus Exp $ */
 
 #include "php.h"
 
@@ -49,6 +49,7 @@ PHPAPI int php_checkuid(const char *filename, char *fopen_mode, int mode)
 	int ret;
 	long uid=0L, gid=0L, duid=0L, dgid=0L;
 	char *s;
+	PLS_FETCH();
 
 	if (!filename) {
 		return 0; /* path must be provided */

@@ -17,15 +17,11 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.59 2002/05/21 07:16:35 ssb Exp $
+// $Id: Installer.php,v 1.60 2002/05/21 09:19:46 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
 require_once 'PEAR/Dependency.php';
-
-// TODO:
-// * files that are not installed should be removed from the
-//   registered file list.
 
 /**
  * Administration class used to install PEAR packages and maintain the
@@ -427,7 +423,7 @@ class PEAR_Installer extends PEAR_Common
         // Copy files to dest dir ---------------------------------------
 
         // info from the package it self we want to access from _installFile
-        $this->pkginfo = $pkginfo;
+        $this->pkginfo = &$pkginfo;
         if (empty($options['register-only'])) {
             if (!is_dir($this->config->get('php_dir'))) {
                 return $this->raiseError("no script destination directory\n",
@@ -450,8 +446,13 @@ class PEAR_Installer extends PEAR_Common
 
             foreach ($pkginfo['filelist'] as $file => $atts) {
                 $res = $this->_installFile($file, $atts, $tmp_path);
-                if (!$res && empty($options['force'])) {
-                    return null;
+                if (!$res) {
+                    // If file can't be installed and 'force' is not set, abort
+                    if (empty($options['force'])) {
+                        return null;
+                    }
+                    // Do not register not installed files
+                    unset($pkginfo['filelist'][$file]);
                 }
             }
         }
@@ -462,9 +463,9 @@ class PEAR_Installer extends PEAR_Common
             if (!empty($options['force']) && $this->registry->packageExists($pkgname)) {
                 $this->registry->deletePackage($pkgname);
             }
-            $ret = $this->registry->addPackage($pkgname, $this->pkginfo);
+            $ret = $this->registry->addPackage($pkgname, $pkginfo);
         } else {
-            $ret = $this->registry->updatePackage($pkgname, $this->pkginfo, false);
+            $ret = $this->registry->updatePackage($pkgname, $pkginfo, false);
         }
         if (!$ret) {
             return null;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.62 2004/08/31 11:37:02 tony2001 Exp $ */
+/* $Id: streams.c,v 1.63 2004/09/08 18:42:15 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1209,6 +1209,17 @@ PHPAPI size_t _php_stream_copy_to_mem(php_stream *src, char **buf, size_t maxlen
 
 			return mapped;
 		}
+	}
+
+	if (maxlen > 0) {
+		ptr = *buf = pemalloc_rel_orig(maxlen + 1, persistent);
+		while ((len < maxlen) & !php_stream_eof(src)) {
+			ret = php_stream_read(src, ptr, maxlen - len);
+			len += ret;
+			ptr += ret;
+		}
+		*ptr = '\0';
+		return len;
 	}
 
 	/* avoid many reallocs by allocating a good sized chunk to begin with, if

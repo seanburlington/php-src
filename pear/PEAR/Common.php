@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.92 2003/06/10 20:03:43 imajes Exp $
+// $Id: Common.php,v 1.93 2003/07/12 15:15:38 mj Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -839,7 +839,7 @@ class PEAR_Common extends PEAR
             "role" => "role",
             );
         $ret = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n";
-        //$ret .= "<!DOCTYPE package SYSTEM \"http://pear.php.net/package10.dtd\">\n";
+        $ret .= "<!DOCTYPE package SYSTEM \"http://pear.php.net/dtd/package-1.0\">\n";
         $ret .= "<package version=\"1.0\">
   <name>$pkginfo[package]</name>
   <summary>".htmlspecialchars($pkginfo['summary'])."</summary>

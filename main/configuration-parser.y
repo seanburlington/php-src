@@ -30,7 +30,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.13 1999/05/20 12:06:43 andi Exp $ */
+/* $Id: configuration-parser.y,v 1.14 1999/06/19 13:18:46 zeev Exp $ */
 
 #define DEBUG_CFG_PARSER 1
 #include "php.h"
@@ -211,7 +211,7 @@ int php3_init_config(void)
 		}
 		PG(safe_mode) = 0;
 		PG(open_basedir) = NULL;
-		cfgin = php3_fopen_with_path("php3.ini","r",php_ini_path,&opened_path);
+		cfgin = php3_fopen_with_path("php.ini","r",php_ini_path,&opened_path);
 		free(php_ini_path);
 		if (free_default_location) {
 			free(default_location);
@@ -242,7 +242,7 @@ int php3_init_config(void)
 		init_cfg_scanner();
 		active__php3_hash_table = &configuration_hash;
 		parsing_mode = PARSING_MODE_CFG;
-		currently_parsed_filename = "php3.ini";
+		currently_parsed_filename = "php.ini";
 		yyparse();
 		fclose(cfgin);
 	}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.42 2002/03/06 16:14:00 kalowsky Exp $ */
+/* $Id: posix.c,v 1.43 2002/04/10 06:22:12 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -63,12 +63,12 @@ function_entry posix_functions[] = {
 #ifdef HAVE_SETEUID
 	PHP_FE(posix_seteuid,	NULL)
 #endif
-#ifdef HAVE_SETEGID
 	PHP_FE(posix_getgid,	NULL)
-#endif
 	PHP_FE(posix_setgid,	NULL)
 	PHP_FE(posix_getegid,	NULL)
+#ifdef HAVE_SETEGID
 	PHP_FE(posix_setegid,	NULL)
+#endif
 	PHP_FE(posix_getgroups,	NULL)
 	PHP_FE(posix_getlogin,	NULL)
 
@@ -130,7 +130,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.42 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.43 $");
 	php_info_print_table_end();
 }
 /* }}} */

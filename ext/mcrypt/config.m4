@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.22 2001/11/30 18:59:43 sniper Exp $
+dnl $Id: config.m4,v 1.23 2002/01/04 14:13:53 hholzgra Exp $
 dnl 
 
 PHP_ARG_WITH(mcrypt, for mcrypt support,
@@ -33,7 +33,7 @@ if test "$PHP_MCRYPT" != "no"; then
     [
       AC_DEFINE(HAVE_LIBMCRYPT22,1,[ ])
     ],[
-      AC_MSG_ERROR(Sorry, I was not able to diagnose which libmcrypt version you have installed.)
+      AC_MSG_ERROR([Sorry, I was not able to diagnose which libmcrypt version you have installed.])
     ],[
       -L$MCRYPT_DIR/lib
     ])

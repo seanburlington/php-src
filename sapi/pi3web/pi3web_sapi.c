@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.8 2000/08/20 22:18:19 zeev Exp $ */
+/* $Id: pi3web_sapi.c,v 1.9 2000/08/22 05:43:31 sas Exp $ */
 
 #if WIN32|WINNT
 #  include <windows.h>
@@ -80,7 +80,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=5 width=600>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.8 2000/08/20 22:18:19 zeev Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.9 2000/08/22 05:43:31 sas Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -391,6 +391,7 @@ DWORD fnWrapperProc(LPCONTROL_BLOCK lpCB)
 	file_handle.filename = lpCB->lpszFileName;
 	file_handle.free_filename = 0;
 	file_handle.type = ZEND_HANDLE_FILENAME;
+	file_handle.opened_path = NULL;
 
 	CG(extended_info) = 0;
 	init_request_info(sapi_globals, lpCB);

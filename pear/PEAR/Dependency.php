@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.29 2003/10/31 17:01:39 cellog Exp $
+// $Id: Dependency.php,v 1.30 2003/10/31 17:22:15 cellog Exp $
 
 require_once "PEAR.php";
 
@@ -141,7 +141,7 @@ class PEAR_Dependency
                 }
                 return false;
             case 'not':
-                if (!$this->registry->packageExists($name)) {
+                if ($this->registry->packageExists($name)) {
                     $errmsg = "conflicts with package `$name'";
                     return PEAR_DEPENDENCY_CONFLICT;
                 }

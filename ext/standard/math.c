@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.83 2002/04/01 09:19:57 derick Exp $ */
+/* $Id: math.c,v 1.84 2002/06/18 00:04:33 edink Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -769,6 +769,13 @@ _php_math_zvaltobase(zval *arg, int base)
 		double fvalue = floor(Z_DVAL_P(arg)); /* floor it just in case */
 		char *ptr, *end;
 		char buf[(sizeof(double) << 3) + 1];
+
+		/* Don't try to convert +/- infinity */
+		if (fvalue == HUGE_VAL || fvalue == -HUGE_VAL) {
+			php_error(E_WARNING, "Number too large in %s() call",
+					  get_active_function_name(TSRMLS_C));
+			return empty_string;
+		}
 
 		end = ptr = buf + sizeof(buf) - 1;
 		*ptr = '\0';

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.179 2002/12/31 15:58:53 sebastian Exp $ */
+/* $Id: php.h,v 1.180 2003/01/03 12:48:14 hyanantha Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -244,18 +244,17 @@ extern pval *data;
 #if !defined(PHP_WIN32)
 #ifdef NETWARE
 #ifdef NEW_LIBC
-/*#undef environ*/  /* For now, so that our 'environ' implementation is used */
 #define php_sleep sleep
-#else
+#else	/* NEW_LIBC */
 #define php_sleep   delay   /* sleep() and usleep() are not available */
 #define usleep      delay
-#endif
+#endif	/* NEW_LIBC */
 extern char **environ;
-#else
+#else	/* NETWARE */
 extern char **environ;
 #define php_sleep sleep
-#endif
-#endif
+#endif	/*  NETWARE */
+#endif	/* !defined(PHP_WIN32) */
 
 #ifdef PHP_PWRITE_64
 ssize_t pwrite(int, void *, size_t, off64_t);

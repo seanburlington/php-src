@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.133 2000/05/23 07:49:23 thies Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.134 2000/05/23 15:13:15 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -379,6 +379,7 @@ AC_FUNC_ALLOCA
 AC_BROKEN_SPRINTF
 PHP_DECLARED_TIMEZONE
 PHP_TIME_R_TYPE
+PHP_POSIX_READDIR_R
 
 dnl AIX keeps in_addr_t in /usr/include/netinet/in.h
 dnl AC_MSG_CHECKING(for in_addr_t)

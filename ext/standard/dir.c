@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.33 2000/05/18 15:34:35 zeev Exp $ */
+/* $Id: dir.c,v 1.34 2000/05/23 15:13:16 sas Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -273,14 +273,14 @@ PHP_FUNCTION(readdir)
 {
 	pval **id, **tmp, *myself;
 	php_dir *dirp;
-	struct dirent *direntp;
+	struct dirent entry;
+	struct dirent *result;
 	DIRLS_FETCH();
 
 	FETCH_DIRP();
-	
-	direntp = readdir(dirp->dir);
-	if (direntp) {
-		RETURN_STRINGL(direntp->d_name, strlen(direntp->d_name), 1);
+
+	if (php_readdir_r(dirp->dir, &entry, &result) == 0 && result) {
+		RETURN_STRINGL(result->d_name, strlen(result->d_name), 1);
 	}
 	RETURN_FALSE;
 }

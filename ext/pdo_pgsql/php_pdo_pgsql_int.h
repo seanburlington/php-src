@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_pgsql_int.h,v 1.5 2005/01/23 10:57:11 edink Exp $ */
+/* $Id: php_pdo_pgsql_int.h,v 1.6 2005/02/05 22:55:23 edink Exp $ */
 
 #ifndef PHP_PDO_PGSQL_INT_H
 #define PHP_PDO_PGSQL_INT_H
@@ -46,6 +46,8 @@ typedef struct {
 	Oid          pgsql_type;
 	long         intval;
 	zend_bool    boolval;
+	char         *lobval;
+	size_t       loblen;
 } pdo_pgsql_column;
 
 typedef struct {

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.11 2000/02/29 13:12:48 sas Exp $
+dnl $Id: config.m4,v 1.12 2000/02/29 13:21:51 sas Exp $
 
 RESULT=no
 AC_MSG_CHECKING(for IMAP support)
@@ -24,6 +24,10 @@ AC_ARG_WITH(imap,
 
     if test -z "$IMAP_DIR"; then
       AC_MSG_ERROR(Cannot find rfc822.h. Please check your IMAP installation)
+    fi
+
+    if test -r "$IMAP_DIR/c-client/c-client.a"; then
+      ln -s "$IMAP_DIR/c-client/c-client.a" "$IMAP_DIR/c-client/libc-client.a" >/dev/null 2>&1
     fi
 
     for lib in imap c-client c-client4; do

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.109.2.1 2002/12/31 16:35:25 sebastian Exp $ */
+/* $Id: basic_functions.h,v 1.109.2.2 2004/03/27 01:17:06 helly Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -210,5 +210,8 @@ typedef struct {
  */
 #define SAFE_MODE_PROTECTED_ENV_VARS	"LD_LIBRARY_PATH"
 #define SAFE_MODE_ALLOWED_ENV_VARS		"PHP_"
+
+PHPAPI double php_get_nan();
+PHPAPI double php_get_inf();
 
 #endif /* BASIC_FUNCTIONS_H */

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.100 2000/03/09 17:30:08 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.101 2000/03/11 11:20:09 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -772,7 +772,7 @@ PHP_FAST_GENERATE
 
 #libphp4.module 
 AC_OUTPUT([php4.spec Zend/Makefile 
-           scripts/mkextlib build-defs.h
+           build-defs.h
 		   $PHP_OUTPUT_FILES
 		   ], [], [
 

@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.86 2004/01/08 08:18:03 andi Exp $ */
+/* $Id: php_apache.c,v 1.86.2.1 2004/10/06 00:12:04 iliaa Exp $ */
 
 #include "php_apache_http.h"
 
@@ -524,9 +524,17 @@ PHP_FUNCTION(apache_get_modules)
 	char *p;
 	
 	array_init(return_value);
+
+	if (!ap_loaded_modules) {
+		return;
+	}
 	
 	for (n = 0; ap_loaded_modules[n]; ++n) {
 		char *s = (char *) ap_loaded_modules[n]->name;
+		if (!s) {
+			continue;
+		}
+		
 		if ((p = strchr(s, '.'))) {
 			add_next_index_stringl(return_value, s, (p - s), 1);
 		} else {

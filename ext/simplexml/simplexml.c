@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.78 2003/10/29 18:04:24 moriyoshi Exp $ */
+/* $Id: simplexml.c,v 1.79 2003/11/03 13:36:23 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -227,7 +227,7 @@ next_iter:
 static zval *
 sxe_property_read(zval *object, zval *member, zend_bool silent TSRMLS_DC)
 {
-	return sxe_prop_dim_read(object, member, 1, 1, silent TSRMLS_CC);
+	return sxe_prop_dim_read(object, member, 1, 0, silent TSRMLS_CC);
 }
 /* }}} */
 
@@ -634,6 +634,7 @@ simplexml_ce_xpath_search(INTERNAL_FUNCTION_PARAMETERS)
 	char              *query;
 	int                query_len;
 	int                i;
+	xmlXPathObjectPtr  retval;
 	xmlNodeSetPtr      result;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &query, &query_len) == FAILURE) {
@@ -650,7 +651,13 @@ simplexml_ce_xpath_search(INTERNAL_FUNCTION_PARAMETERS)
 
 	sxe->xpath->node = sxe->node->node;
 
-	result = xmlXPathEval(query, sxe->xpath)->nodesetval;
+	retval = xmlXPathEval(query, sxe->xpath);
+	if (!retval) {
+		RETURN_FALSE;
+	}
+
+	
+	result = retval->nodesetval;
 	if (!result) {
 		RETURN_FALSE;
 	}
@@ -1393,7 +1400,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.78 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.79 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

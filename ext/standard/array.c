@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.288 2004/12/23 16:35:48 tony2001 Exp $ */
+/* $Id: array.c,v 1.289 2005/02/02 10:37:50 stas Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1093,7 +1093,10 @@ static int php_array_walk(HashTable *target_hash, zval **userdata, int recursive
 				} else {
 					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call %s() - function does not exist", func_name);
 				}
-
+				if (key) {
+					zval_ptr_dtor(&key);
+					key = NULL;
+				}
 				efree(func_name);
 				break;
 			}

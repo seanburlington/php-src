@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.94 2004/03/09 16:38:34 helly Exp $ */
+/* $Id: php_reflection.c,v 1.95 2004/03/28 13:55:06 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -2701,8 +2701,6 @@ ZEND_METHOD(reflection_property, getModifiers)
 
 	METHOD_NOTSTATIC_NUMPARAMS(0);
 	GET_REFLECTION_OBJECT_PTR(ref);
-
-	array_init(return_value);
 
 	RETURN_LONG(ref->prop->flags);
 }

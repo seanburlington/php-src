@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.h,v 1.3 1999/09/22 16:07:41 askalski Exp $ */
+/* $Id: php_ftp.h,v 1.4 1999/09/23 17:54:26 askalski Exp $ */
 
 #ifndef	_INCLUDED_FTP_H
 #define	_INCLUDED_FTP_H
@@ -46,7 +46,7 @@ extern php3_module_entry php3_ftp_module_entry;
 #ifdef ZEND_VERSION
 PHP_MINIT_FUNCTION(ftp);
 #else
-int PHP_MINIT_FUNCTION(INIT_FUNC_ARGS);
+int php3_minit_ftp(INIT_FUNC_ARGS);
 #endif
 
 PHP_FUNCTION(ftp_connect);

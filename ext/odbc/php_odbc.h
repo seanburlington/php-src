@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.h,v 1.15 2000/02/23 16:34:08 kara Exp $ */
+/* $Id: php_odbc.h,v 1.16 2000/02/23 19:16:34 sas Exp $ */
 
 #ifndef _PHP_ODBC_H
 #define _PHP_ODBC_H
@@ -54,6 +54,7 @@
 PHP_FUNCTION(solid_fetch_prev);
 #define SQLSMALLINT SWORD
 #define SQLUSMALLINT UWORD
+#define SQL_SUCCEEDED(rc) (((rc)&(~1))==0)
 
 #elif defined(HAVE_EMPRESS) /* Empress */
 

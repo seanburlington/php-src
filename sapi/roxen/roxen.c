@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.52 2002/01/31 10:15:07 yohgaki Exp $ */
+/* $Id: roxen.c,v 1.53 2002/09/18 21:57:35 zeev Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -438,7 +438,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.52 2002/01/31 10:15:07 yohgaki Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.53 2002/09/18 21:57:35 zeev Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -473,8 +473,7 @@ static zend_module_entry php_roxen_module = {
 
 static int php_roxen_startup(sapi_module_struct *sapi_module)
 {
-  if(php_module_startup(sapi_module) == FAILURE
-     || zend_startup_module(&php_roxen_module) == FAILURE) {
+  if(php_module_startup(sapi_module, &php_roxen_module) == FAILURE) {
     return FAILURE;
   } else {
     return SUCCESS;
@@ -486,7 +485,7 @@ static int php_roxen_startup(sapi_module_struct *sapi_module)
 static sapi_module_struct roxen_sapi_module = {
   "roxen",
   "Roxen",
-  php_module_startup,			/* startup */
+  php_roxen_startup,			/* startup */
   php_module_shutdown_wrapper,		/* shutdown */
   NULL,					/* activate */
   NULL,					/* deactivate */
@@ -698,7 +697,7 @@ void pike_module_init( void )
 #endif	 
 #endif
     sapi_startup(&roxen_sapi_module);
-    php_roxen_startup(&roxen_sapi_module);
+    /*php_roxen_startup(&roxen_sapi_module); removed - should be called from SAPI activation*/
     roxen_php_initialized = 1;
     PHP_INIT_LOCK();
   }

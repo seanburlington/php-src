@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php4activescript.c,v 1.1 2002/05/20 01:35:29 wez Exp $ */
+/* $Id: php4activescript.c,v 1.2 2002/09/18 21:57:29 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -30,8 +30,7 @@
 
 static int php_activescript_startup(sapi_module_struct *sapi_module)
 {
-	if (php_module_startup(sapi_module) == FAILURE ||
-			zend_startup_module(&php_activescript_module) == FAILURE) {
+	if (php_module_startup(sapi_module, &php_activescript_module, 1) == FAILURE) {
 		return FAILURE;
 	} else {
 		return SUCCESS;

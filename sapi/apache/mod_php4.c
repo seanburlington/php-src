@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.141 2002/08/22 07:48:23 chregu Exp $ */
+/* $Id: mod_php4.c,v 1.142 2002/09/18 21:57:30 zeev Exp $ */
 
 #include "php_apache_http.h"
 
@@ -256,8 +256,7 @@ static void sapi_apache_register_server_variables(zval *track_vars_array TSRMLS_
  */
 static int php_apache_startup(sapi_module_struct *sapi_module)
 {
-	if (php_module_startup(sapi_module) == FAILURE
-		|| zend_startup_module(&apache_module_entry) == FAILURE) {
+	if (php_module_startup(sapi_module, &apache_module_entry, 1) == FAILURE) {
 		return FAILURE;
 	} else {
 		return SUCCESS;

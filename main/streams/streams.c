@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.48 2004/01/28 22:21:54 pollita Exp $ */
+/* $Id: streams.c,v 1.49 2004/02/04 22:46:44 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -602,9 +602,10 @@ PHPAPI int _php_stream_eof(php_stream *stream TSRMLS_DC)
 		return 0;
 	}
 
+	/* use the configured timeout when checking eof */
 	if (!stream->eof && PHP_STREAM_OPTION_RETURN_ERR ==
 		   	php_stream_set_option(stream, PHP_STREAM_OPTION_CHECK_LIVENESS,
-		   	0, NULL)) {
+		   	-1, NULL)) {
 		stream->eof = 1;
 	}
 

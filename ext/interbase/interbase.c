@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.53 2001/05/02 22:31:19 andi Exp $ */
+/* $Id: interbase.c,v 1.54 2001/05/02 22:41:09 andi Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -596,7 +596,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.53 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.54 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1727,7 +1727,7 @@ static int _php_ibase_var_pval(pval *val, void *data, int type, int len, int sca
 			/* fallout */
 		case SQL_TEXT:
 			val->value.str.val = (char *)emalloc(sizeof(char)*(len+1));
-            memcpy(val->value.str.val, data, len);
+			memcpy(val->value.str.val, data, len);
 			val->value.str.val[len] = '\0';
 			if (PG(magic_quotes_runtime)) {
 				val->value.str.val = php_addslashes(val->value.str.val, len, &len, 1);

@@ -14,11 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
    |          Andreas Karajannis <Andreas.Karajannis@gmd.de>              |
-   |	        Kevin N. Shallow <kshallow@tampabay.rr.com> Velocis Support |
+   |	        Kevin N. Shallow <kshallow@tampabay.rr.com> Birdstep Support |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.44 2002/02/28 08:26:30 sebastian Exp $ */
+/* $Id: php_odbc.h,v 1.45 2002/03/04 09:10:31 imajes Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -139,12 +139,12 @@ PHP_FUNCTION(solid_fetch_prev);
 #define SQLSMALLINT SWORD
 #define SQLUSMALLINT UWORD
 
-#elif defined(HAVE_VELOCIS) /* Raima Velocis */
+#elif defined(HAVE_BIRDSTEP) /* Raima Birdstep */
 
-#define ODBC_TYPE "Velocis"
+#define ODBC_TYPE "Birdstep"
 #define UNIX
 /*
- * Extended Fetch in the Velocis ODBC API is incapable of returning long varchar (memo) fields.
+ * Extended Fetch in the Birdstep ODBC API is incapable of returning long varchar (memo) fields.
  * So the following line has been commented-out to accomadate. - KNS
  *
  * #define HAVE_SQL_EXTENDED_FETCH 1

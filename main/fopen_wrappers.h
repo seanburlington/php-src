@@ -15,7 +15,7 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.h,v 1.18 2000/05/18 15:34:21 zeev Exp $ */
+/* $Id: fopen_wrappers.h,v 1.19 2000/06/08 09:43:12 hholzgra Exp $ */
 
 #ifndef _FOPEN_WRAPPERS_H
 #define _FOPEN_WRAPPERS_H
@@ -77,6 +77,11 @@ PHPAPI int php_is_url(char *path);
 PHPAPI char *php_strip_url_passwd(char *path);
 
 PHPAPI char *expand_filepath(char *filepath);
+
+int php_init_fopen_wrappers(void); 
+int php_shutdown_fopen_wrappers(void); 
+PHPAPI int php_register_url_wrapper(char *protocol, FILE * (*wrapper)(const char *path, char *mode, int options, int *issock, int *socketd, char **opened_path));
+PHPAPI int php_unregister_url_wrapper(char *protocol);
 
 #endif
 /*

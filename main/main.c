@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.263 2000/06/06 19:16:57 zeev Exp $ */
+/* $Id: main.c,v 1.264 2000/06/08 09:43:12 hholzgra Exp $ */
 
 
 #include <stdio.h>
@@ -716,7 +716,7 @@ static int php_config_ini_startup(void)
 	}
 	return SUCCESS;
 }
-
+ 
 static void php_config_ini_shutdown(void)
 {
 	php_shutdown_config();
@@ -877,6 +877,11 @@ int php_module_startup(sapi_module_struct *sf)
 
 	php_ini_mstartup();
 
+	if (php_init_fopen_wrappers() == FAILURE) {
+		php_printf("PHP:  Unable to initialize fopen url wrappers.\n");
+		return FAILURE;
+	}
+
 	if (php_config_ini_startup() == FAILURE) {
 		return FAILURE;
 	}
@@ -927,6 +932,8 @@ void php_module_shutdown()
 	if (!module_initialized) {
 		return;
 	}
+
+	php_shutdown_fopen_wrappers();
 
 	/* close down the ini config */
 	php_config_ini_shutdown();

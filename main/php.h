@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.45 1999/11/17 22:58:29 sas Exp $ */
+/* $Id: php.h,v 1.46 1999/11/26 17:07:41 sas Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -343,6 +343,7 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #define PHP_CONNECTION_ABORTED 1
 #define PHP_CONNECTION_TIMEOUT 2
 
+#include "php_reentrancy.h"
 
 /* Finding offsets of elements within structures.
  * Taken from the Apache code, which in turn, was taken from X code...

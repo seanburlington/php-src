@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.15 1999/11/24 17:36:23 sas Exp $ */
+/* $Id: aolserver.c,v 1.16 1999/11/26 17:07:41 sas Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -196,7 +196,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	int uptime = Ns_InfoUptime();
 	
 	PUTS("<table border=5 width=600>\n");
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.15 1999/11/24 17:36:23 sas Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.16 1999/11/26 17:07:41 sas Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -288,6 +288,7 @@ static sapi_module_struct sapi_module = {
  * with a number of variables. HTTP_* variables are created for
  * the HTTP header data, so that a script can access these.
  */
+
 #define ADD_STRING(name)										\
 	MAKE_STD_ZVAL(pval);										\
 	pval->type = IS_STRING;										\
@@ -541,6 +542,7 @@ php_ns_server_shutdown(void *context)
 	
 	ctx->sapi_module->shutdown(ctx->sapi_module);
 	sapi_shutdown();
+	reentrancy_shutdown();
 	tsrm_shutdown();
 
 	free(ctx->ns_module);
@@ -560,6 +562,7 @@ int Ns_ModuleInit(char *server, char *module)
 	php_ns_context *ctx;
 	
 	tsrm_startup(1, 1, 0);
+	reentrancy_startup();
 	sapi_startup(&sapi_module);
 	sapi_module.startup(&sapi_module);
 	

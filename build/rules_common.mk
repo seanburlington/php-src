@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules_common.mk,v 1.2 2000/08/20 08:58:19 sas Exp $ 
+# $Id: rules_common.mk,v 1.3 2000/08/29 09:12:44 ssb Exp $ 
 #
 
 include $(top_builddir)/config_vars.mk
@@ -37,7 +37,7 @@ DEFS = -I. -I$(srcdir) -I$(top_builddir) -I$(top_builddir)/main
 moduledir    = $(EXTENSION_DIR)
 
 CXX_SUFFIX = .cpp
-	
+
 .SUFFIXES:
 .SUFFIXES: .slo .c $(CXX_SUFFIX) .lo .o .s .y .l
 

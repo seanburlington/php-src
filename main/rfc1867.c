@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.159.2.10 2005/02/01 02:33:17 iliaa Exp $ */
+/* $Id: rfc1867.c,v 1.159.2.11 2005/02/15 00:26:35 iliaa Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -1077,11 +1077,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 					str_len = strlen(filename);
 					php_mb_gpc_encoding_converter(&filename, &str_len, 1, NULL, NULL TSRMLS_CC);
 				}
-#ifdef PHP_WIN32
 				s = php_mb_strrchr(filename, '\\' TSRMLS_CC);
-#else
-				s = filename;
-#endif
 				if ((tmp = php_mb_strrchr(filename, '/' TSRMLS_CC)) > s) {
 					s = tmp;
 				}
@@ -1090,11 +1086,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 			}
 #endif
 
-#ifdef PHP_WIN32
 			s = strrchr(filename, '\\');
-#else
-			s = filename;
-#endif
 			if ((tmp = strrchr(filename, '/')) > s) {
 				s = tmp;
 			}

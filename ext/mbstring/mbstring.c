@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.34 2003/10/30 01:05:25 thetaphi Exp $ */
+/* $Id: mbstring.c,v 1.142.2.35 2003/11/05 04:24:54 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -1108,21 +1108,12 @@ PHP_MINFO_FUNCTION(mbstring)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Multibyte Support", "enabled");
-#if defined(HAVE_MBSTR_JA)
 	php_info_print_table_row(2, "Japanese support", "enabled");	
-#endif
-#if defined(HAVE_MBSTR_CN)
 	php_info_print_table_row(2, "Simplified chinese support", "enabled");	
-#endif
-#if defined(HAVE_MBSTR_TW)
 	php_info_print_table_row(2, "Traditional chinese support", "enabled");	
-#endif
-#if defined(HAVE_MBSTR_KR)
 	php_info_print_table_row(2, "Korean support", "enabled");	
-#endif
-#if defined(HAVE_MBSTR_RU)
 	php_info_print_table_row(2, "Russian support", "enabled");	
-#endif
+
 	if (MBSTRG(encoding_translation)) {
 		php_info_print_table_row(2, "HTTP input encoding translation", "enabled");	
 	}

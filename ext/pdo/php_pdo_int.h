@@ -18,15 +18,17 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_int.h,v 1.6 2004/05/21 13:26:58 wez Exp $ */
+/* $Id: php_pdo_int.h,v 1.7 2004/09/23 20:07:02 wez Exp $ */
 
 /* Stuff private to the PDO extension and not for consumption by PDO drivers
  * */
 extern zend_class_entry *pdo_exception_ce;
+int php_pdo_list_entry(void);
 
 extern zend_object_value pdo_dbh_new(zend_class_entry *ce TSRMLS_DC);
 extern function_entry pdo_dbh_functions[];
 extern zend_class_entry *pdo_dbh_ce;
+extern ZEND_RSRC_DTOR_FUNC(php_pdo_pdbh_dtor);
 
 extern zend_object_value pdo_dbstmt_new(zend_class_entry *ce TSRMLS_DC);
 extern function_entry pdo_dbstmt_functions[];

@@ -21,7 +21,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.43 2000/06/13 19:35:56 venaas Exp $ */
+/* $Id: ldap.c,v 1.44 2000/06/13 19:50:05 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -179,7 +179,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.43 2000/06/13 19:35:56 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.44 2000/06/13 19:50:05 venaas Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #if HAVE_NSLDAP
@@ -1157,6 +1157,7 @@ static void php_ldap_do_modify(INTERNAL_FUNCTION_PARAMETERS, int oper)
 				zend_hash_index_find((*value)->value.ht,j, (void **) &ivalue);
 				convert_to_string_ex(ivalue);
 				ldap_mods[i]->mod_values[j] = (*ivalue)->value.str.val;
+				ldap_mods[i]->mod_values[j][(*value)->value.str.len] = '\0';
 			}
 		}
 		ldap_mods[i]->mod_values[num_values] = NULL;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.c,v 1.25 2002/03/13 03:51:21 bbonev Exp $ */
+/* $Id: php_vpopmail.c,v 1.26 2002/03/19 22:47:36 mfischer Exp $ */
 
 /* TODO: move to config.m4 when support for old versions is ready or just
  * don't support rather old vpopmail. current version must bail out if
@@ -285,7 +285,11 @@ PHP_FUNCTION(vpopmail_add_alias_domain)
 		RETURN_FALSE;
 	}
 
+#if (!defined(HAVE_VPOPMAIL_API) || HAVE_VPOPMAIL_API == 1)
 	if (add_domain_assign(Z_STRVAL_PP(aliasdomain), Dir, uid, gid) != 1) {
+#else
+	if (add_domain_assign(Z_STRVAL_PP(aliasdomain), Z_STRVAL_PP(domain), Dir, uid, gid) != 1) {
+#endif
 		php_error(E_WARNING, "vpopmail_addaliasdomain could not add domain to control files");
 		VPOPMAILG(vpopmail_errno) = 1;
 		RETURN_FALSE;
@@ -922,7 +926,7 @@ PHP_FUNCTION(vpopmail_error)
 }
 /* }}} */
 
-#endif HAVE_VPOPMAIL
+#endif /* HAVE_VPOPMAIL */
 
 /*
  * Local variables:

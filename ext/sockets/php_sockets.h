@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.26.2.1 2002/12/31 16:35:22 sebastian Exp $ */
+/* $Id: php_sockets.h,v 1.26.2.2 2003/04/05 17:34:04 sniper Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -70,7 +70,9 @@ PHP_FUNCTION(socket_recv);
 PHP_FUNCTION(socket_send);
 PHP_FUNCTION(socket_recvfrom);
 PHP_FUNCTION(socket_sendto);
+#ifdef HAVE_CMSGHDR
 PHP_FUNCTION(socket_recvmsg);
+#endif
 PHP_FUNCTION(socket_sendmsg);
 PHP_FUNCTION(socket_readv);
 PHP_FUNCTION(socket_writev);

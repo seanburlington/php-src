@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.98 2001/03/12 03:06:53 andrei Exp $ */
+/* $Id: array.c,v 1.99 2001/03/12 03:10:15 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2816,7 +2816,7 @@ PHP_FUNCTION(array_sum)
 /* }}} */
 
 /* {{{ proto mixed array_reduce(array input, mixed callback [, int initial])
-   Reduce the array by calling the callback */
+   Iteratively reduce the array to a single value via the callback. */
 PHP_FUNCTION(array_reduce)
 {
 	zval **input, **callback, **initial;

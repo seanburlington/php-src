@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.45 2005/02/27 11:30:41 stas Exp $ */
+/* $Id: var_unserializer.re,v 1.46 2005/02/28 16:22:39 sesser Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -476,6 +476,10 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 
 "a:" uiv ":" "{" {
 	int elements = parse_iv(start + 2);
+
+	if (elements < 0) {
+		return 0;
+	}
 
 	*p = YYCURSOR;
 

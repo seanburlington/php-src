@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_exceptions.h,v 1.1 2004/11/01 15:50:25 helly Exp $ */
+/* $Id: spl_exceptions.h,v 1.2 2004/11/01 17:39:59 helly Exp $ */
 
 #ifndef SPL_EXCEPTIONS_H
 #define SPL_EXCEPTIONS_H
@@ -25,6 +25,8 @@
 #include "php_spl.h"
 
 extern zend_class_entry *spl_ce_LogicException;
+extern zend_class_entry *spl_ce_BadFunctionCallException;
+extern zend_class_entry *spl_ce_BadMethodCallException;
 extern zend_class_entry *spl_ce_DomainException;
 extern zend_class_entry *spl_ce_InvalidArgumentException;
 extern zend_class_entry *spl_ce_LengthException;

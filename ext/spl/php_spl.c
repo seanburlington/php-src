@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.36 2004/11/01 15:50:25 helly Exp $ */
+/* $Id: php_spl.c,v 1.37 2004/11/01 17:39:59 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -166,6 +166,7 @@ PHP_FUNCTION(class_implements)
 	SPL_ADD_CLASS(AppendIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(ArrayObject, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(ArrayIterator, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(BadFunctionCallException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(CachingIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(CachingRecursiveIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(Countable, z_list, sub, allow, ce_flags); \

@@ -17,7 +17,7 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.46 2002/07/02 23:44:06 fmk Exp $ */
+/* $Id: sendmail.c,v 1.47 2002/09/21 15:03:24 mfischer Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
@@ -265,7 +265,7 @@ int TSendMail(char *host, int *error, char **error_message,
 			return FAILURE;
 		}
 		snprintf(*error_message, HOST_NAME_LEN + 128,
-			"Failed to connect to mailserver at \"%s\" port %d, verify your \"SMTP\""
+			"Failed to connect to mailserver at \"%s\" port %d, verify your \"SMTP\" "
 			"and \"smtp_port\" setting in php.ini or use ini_set()",
 			MailHost, !INI_INT("smtp_port") ? 25 : INI_INT("smtp_port"));
 		return FAILURE;

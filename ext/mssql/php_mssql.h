@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.28 2003/01/08 23:19:54 fmk Exp $ */
+/* $Id: php_mssql.h,v 1.29 2003/01/09 08:00:07 fmk Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -124,6 +124,7 @@ PHP_FUNCTION(mssql_min_message_severity);
 PHP_FUNCTION(mssql_init);
 PHP_FUNCTION(mssql_bind);
 PHP_FUNCTION(mssql_execute);
+PHP_FUNCTION(mssql_free_statement);
 PHP_FUNCTION(mssql_guid_string);
 
 typedef struct mssql_link {

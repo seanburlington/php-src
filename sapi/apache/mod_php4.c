@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.116 2001/08/05 01:42:45 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.117 2001/08/05 15:29:40 sas Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -124,10 +124,9 @@ void php_save_umask(void)
 
 /* {{{ sapi_apache_ub_write
  */
-static int sapi_apache_ub_write(const char *str, uint str_length)
+static int sapi_apache_ub_write(const char *str, uint str_length TSRMLS_DC)
 {
 	int ret=0;
-	TSRMLS_FETCH();
 		
 	if (SG(server_context)) {
 		ret = rwrite(str, str_length, (request_rec *) SG(server_context));
@@ -311,7 +310,7 @@ static void php_apache_request_shutdown(void *dummy)
 {
 	TSRMLS_FETCH();
 
-	php_output_set_status(0);
+	php_output_set_status(0 TSRMLS_CC);
 	SG(server_context) = NULL; /* The server context (request) is invalid by the time run_cleanups() is called */
 	if (AP(in_request)) {
 		AP(in_request) = 0;

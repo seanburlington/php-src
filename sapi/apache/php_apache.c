@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.41 2001/08/05 01:42:45 zeev Exp $ */
+/* $Id: php_apache.c,v 1.42 2001/08/05 15:29:41 sas Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -302,7 +302,6 @@ PHP_FUNCTION(virtual)
 {
 	pval **filename;
 	request_rec *rr = NULL;
-	TSRMLS_FETCH();
 
 	if (ARG_COUNT(ht) != 1 || zend_get_parameters_ex(1, &filename) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -321,7 +320,7 @@ PHP_FUNCTION(virtual)
 		RETURN_FALSE;
 	}
 
-	php_end_ob_buffers(1);
+	php_end_ob_buffers(1 TSRMLS_CC);
 	php_header();
 
 	if (run_sub_req(rr)) {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: caudium.c,v 1.21 2001/08/05 14:27:38 sas Exp $ */
+/* $Id: caudium.c,v 1.22 2001/08/05 15:29:42 sas Exp $ */
 
 #include "php.h"
 #ifdef HAVE_CAUDIUM
@@ -204,10 +204,9 @@ INLINE static int lookup_integer_header(char *headername, int default_value)
  */
 
 INLINE static int
-php_caudium_low_ub_write(const char *str, uint str_length) {
+php_caudium_low_ub_write(const char *str, uint str_length TSRMLS_DC) {
   int sent_bytes = 0;
   struct pike_string *to_write = NULL;
-  TSRMLS_FETCH();
   GET_THIS();
   if(!MY_FD_OBJ->prog) {
     PG(connection_status) = PHP_CONNECTION_ABORTED;
@@ -235,9 +234,8 @@ php_caudium_low_ub_write(const char *str, uint str_length) {
  */
 
 static int
-php_caudium_sapi_ub_write(const char *str, uint str_length)
+php_caudium_sapi_ub_write(const char *str, uint str_length TSRMLS_DC)
 {
-  TSRMLS_FETCH();
   GET_THIS();
   int sent_bytes = 0, fd = MY_FD;
   if(fd)
@@ -266,7 +264,7 @@ php_caudium_sapi_ub_write(const char *str, uint str_length)
     }
     THIS->written += sent_bytes;
   } else {
-    THREAD_SAFE_RUN(sent_bytes = php_caudium_low_ub_write(str, str_length),
+    THREAD_SAFE_RUN(sent_bytes = php_caudium_low_ub_write(str, str_length TSRMLS_CC),
 		    "write");
   }
   return sent_bytes;
@@ -441,7 +439,7 @@ static void php_info_caudium(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.21 2001/08/05 14:27:38 sas Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.22 2001/08/05 15:29:42 sas Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());

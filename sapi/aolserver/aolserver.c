@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.60 2001/08/05 14:27:38 sas Exp $ */
+/* $Id: aolserver.c,v 1.61 2001/08/05 15:29:40 sas Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -86,11 +86,10 @@ static void php_ns_config(php_ns_context *ctx, char global);
  */
 
 static int
-php_ns_sapi_ub_write(const char *str, uint str_length)
+php_ns_sapi_ub_write(const char *str, uint str_length TSRMLS_DC)
 {
 	int n;
 	uint sent = 0;
-	TSRMLS_FETCH();
 
 	while (str_length > 0) {
 		n = Ns_ConnWrite(NSG(conn), (void *) str, str_length);
@@ -213,7 +212,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	TSRMLS_FETCH();
 	
 	php_info_print_table_start();
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.60 2001/08/05 14:27:38 sas Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.61 2001/08/05 15:29:40 sas Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());

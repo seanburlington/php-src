@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.14 2001/04/13 14:43:39 thies Exp $ */
+/* $Id: php_oci8.h,v 1.15 2001/04/25 17:44:07 asautins Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -83,18 +83,13 @@ typedef struct {
 
 typedef struct {
     int id;
-    int open;
     oci_connection *conn;
-    oci_session *session;
-    OCISvcCtx   *pServiceContext;
     OCIType     *tdo;
     OCITypeCode coll_typecode;
     OCIRef      *elem_ref;
     OCIType     *element_type;
     OCITypeCode element_typecode;
     OCIColl     *coll;
-    sword       error;
-    OCIError    *pError;
 } oci_collection;
 
 typedef struct {

@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.65 2001/01/18 14:36:43 andrei Exp $ */
+/* $Id: datetime.c,v 1.66 2001/02/09 15:28:23 rasmus Exp $ */
 
 
 #include "php.h"
@@ -521,7 +521,7 @@ PHP_FUNCTION(date)
 /* }}} */
 
 /* {{{ proto string gmdate(string format [, int timestamp])
-   Format a GMT/CUT date/time */
+   Format a GMT/UTC date/time */
 PHP_FUNCTION(gmdate)
 {
 	php_date(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
@@ -762,7 +762,7 @@ PHP_FUNCTION(strftime)
 /* }}} */
 
 /* {{{ proto string gmstrftime(string format [, int timestamp])
-   Format a GMT/CUT time/date according to locale settings */
+   Format a GMT/UCT time/date according to locale settings */
 PHP_FUNCTION(gmstrftime)
 {
 	_php_strftime(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.179 2003/09/13 15:27:04 abies Exp $ */
+/* $Id: SAPI.c,v 1.180 2003/11/22 21:10:47 sesser Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -160,6 +160,7 @@ static void sapi_read_post_data(TSRMLS_D)
 		SG(request_info).post_entry = NULL;
 		if (!sapi_module.default_post_reader) {
 			/* no default reader ? */
+			SG(request_info).content_type_dup = NULL;
 			sapi_module.sapi_error(E_WARNING, "Unsupported content type:  '%s'", content_type);
 			return;
 		}

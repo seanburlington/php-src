@@ -17,7 +17,7 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.38 2002/06/02 23:39:59 mfischer Exp $ */
+/* $Id: sendmail.c,v 1.39 2002/06/03 14:39:30 mfischer Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
@@ -564,26 +564,25 @@ int PostHeader(char *RPath, char *Subject, char *mailTo, char *xheaders, char *m
 		}
 	}
 
+	if (headers_lc) {
+		efree(headers_lc);
+	}
 	if ((res = Post(header_buffer)) != SUCCESS) {
 		efree(header_buffer);
-		if (headers_lc) {
-			efree(headers_lc);
-		}
 		return (res);
 	}
 	efree(header_buffer);
 
 	if ((res = Post("\r\n")) != SUCCESS) {
-		if (headers_lc) {
-			efree(headers_lc);
-		}
 		return (res);
 	}
 
 	return (SUCCESS);
 
 PostHeader_outofmem:
-	efree(headers_lc);
+	if (headers_lc) {
+		efree(headers_lc);
+	}
 	return OUT_OF_MEMORY;
 }
 

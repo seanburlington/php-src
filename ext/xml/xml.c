@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.121 2003/05/08 15:07:26 moriyoshi Exp $ */
+/* $Id: xml.c,v 1.122 2003/05/08 15:12:04 moriyoshi Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -248,7 +248,7 @@ PHP_RSHUTDOWN_FUNCTION(xml)
 #ifdef LIBXML_EXPAT_COMPAT
 	xmlCleanupParser();
 #endif	
-   	return SUCCESS;
+	return SUCCESS;
 }
 
 

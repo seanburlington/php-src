@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.35 2001/12/11 15:31:05 sebastian Exp $ */
+/* $Id: php_variables.c,v 1.35.2.1 2002/07/24 11:25:55 sesser Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -197,6 +197,10 @@ SAPI_API SAPI_POST_HANDLER_FUNC(php_std_post_handler)
 	char *var, *val;
 	char *strtok_buf = NULL;
 	zval *array_ptr = (zval *) arg;
+
+	if (SG(request_info).post_data==NULL) {
+		return;
+	}	
 
 	var = php_strtok_r(SG(request_info).post_data, "&", &strtok_buf);
 

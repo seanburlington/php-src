@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.187 2002/11/15 17:59:19 maxim Exp $ */
+/* $Id: oci8.c,v 1.188 2002/11/15 18:20:59 maxim Exp $ */
 
 /* TODO list:
  *
@@ -628,7 +628,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.187 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.188 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -5004,7 +5004,7 @@ PHP_FUNCTION(ocicollassignelem)
 		ndx = Z_LVAL_PP(index);
 
 		connection = coll->conn;
-											  
+
 		if (connection->error) {
 			oci_error(connection->pError, "OCICollAssignElem", connection->error);
 			RETURN_FALSE;

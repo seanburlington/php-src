@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.408 2002/12/13 10:32:03 helly Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.409 2002/12/19 17:02:39 edink Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1081,7 +1081,11 @@ INLINE_CFLAGS="$INLINE_CFLAGS $standard_libtool_flag"
 CXXFLAGS="$CXXFLAGS $standard_libtool_flag"
 
 all_targets='$(OVERALL_TARGET) $(PHP_MODULES) $(PHP_CLI_TARGET)'
-install_targets="install-sapi install-modules $PHP_INSTALL_CLI_TARGET $install_pear"
+install_targets="install-sapi install-modules $install_pear"
+if test "$PHP_SAPI" != "cgi"; then
+  install_targets="$PHP_INSTALL_CLI_TARGET $install_targets"
+fi
+
 PHP_SUBST(all_targets)
 PHP_SUBST(install_targets)
 

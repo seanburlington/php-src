@@ -15,12 +15,32 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.5 2001/02/26 06:07:31 andi Exp $ */
+/* $Id: php_network.h,v 1.6 2001/05/05 18:36:20 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
 
+#ifdef PHP_WIN32
+# ifndef WINNT
+#  define WINNT 1
+# endif
+# undef FD_SETSIZE
+# include "arpa/inet.h"
+# define socklen_t unsigned int
+#endif
+
+#ifdef HAVE_NETINET_IN_H
+# include <netinet/in.h>
+#endif
+
+#ifdef HAVE_SYS_SOCKET_H
+#include <sys/socket.h>
+#endif
+
+
+
 int php_hostconnect(char *host, unsigned short port, int socktype, int timeout);
+PHPAPI int php_connect_nonb(int sockfd, struct sockaddr *addr, socklen_t addrlen, struct timeval *timeout);
 
 #endif /* _PHP_NETWORK_H */
 

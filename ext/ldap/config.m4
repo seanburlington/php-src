@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 1999/12/30 04:52:05 sas Exp $
+dnl $Id: config.m4,v 1.7 1999/12/30 14:49:17 sas Exp $
 
 AC_MSG_CHECKING(for LDAP support)
 AC_ARG_WITH(ldap,
@@ -46,7 +46,7 @@ dnl these here if necessary.   -RL
 	if test -f $LDAP_LIBDIR/liblber.a; then
 		LDAP_LIBS="-lldap -llber"
         AC_ADD_LIBRARY(ldap)
-        AC_ADD_LIBRARY(lber)
+        AC_ADD_LIBRARY(lber,1)
 	elif test -f $LDAP_LIBDIR/libldapssl30.so; then
         AC_ADD_LIBRARY(ldapssl30)
         AC_ADD_LIBRARY($LDAP_PTHREAD)
@@ -63,7 +63,7 @@ dnl these here if necessary.   -RL
 		AC_DEFINE(HAVE_NSLDAP,1,[ ])
 	elif test -f $LDAP_LIBDIR/libumich_ldap.so; then
         AC_ADD_LIBRARY(umich_ldap)
-        AC_ADD_LIBRARY(umich_lber)
+        AC_ADD_LIBRARY(umich_lber,1)
 	fi  
 
     AC_ADD_INCLUDE($LDAP_INCDIR)

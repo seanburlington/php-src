@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.355 2003/02/20 06:18:16 sas Exp $ */
+/* $Id: session.c,v 1.356 2003/03/02 10:19:13 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1714,7 +1714,7 @@ PHP_MINIT_FUNCTION(session)
 	ps_globals = ts_resource(ps_globals_id);
 #endif
 
-	zend_register_auto_global("_SESSION", sizeof("_SESSION")-1 TSRMLS_CC);
+	zend_register_auto_global("_SESSION", sizeof("_SESSION")-1, NULL TSRMLS_CC);
 
 	PS(module_number) = module_number; /* if we really need this var we need to init it in zts mode as well! */
 

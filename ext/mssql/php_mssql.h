@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.17 2001/10/23 16:34:52 fmk Exp $ */
+/* $Id: php_mssql.h,v 1.18 2001/12/02 21:10:15 phanto Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -70,6 +70,7 @@ PHP_FUNCTION(mssql_num_fields);
 PHP_FUNCTION(mssql_fetch_field);
 PHP_FUNCTION(mssql_fetch_row);
 PHP_FUNCTION(mssql_fetch_array);
+PHP_FUNCTION(mssql_fetch_assoc);
 PHP_FUNCTION(mssql_fetch_object);
 PHP_FUNCTION(mssql_field_length);
 PHP_FUNCTION(mssql_field_name);

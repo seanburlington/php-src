@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.433 2002/03/16 01:58:13 wez Exp $ */
+/* $Id: main.c,v 1.434 2002/03/16 13:50:17 wez Exp $ */
 
 /* {{{ includes
  */
@@ -573,7 +573,8 @@ static FILE *php_fopen_wrapper_for_zend(const char *filename, char **opened_path
 		php_stream_sock_set_chunk_size(stream, 1);
 
 		if (php_stream_cast(stream, PHP_STREAM_AS_STDIO | PHP_STREAM_CAST_TRY_HARD, (void**)&retval, 1) == SUCCESS)	{
-			ZEND_REGISTER_RESOURCE(NULL, stream, php_file_le_stream());
+			/* The leak here prevents a segfault */
+			/*	ZEND_REGISTER_RESOURCE(NULL, stream, php_file_le_stream()); */
 		}
 		else	{
 			php_stream_close(stream);

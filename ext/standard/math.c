@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.53.2.3 2001/09/04 14:12:11 stas Exp $ */
+/* $Id: math.c,v 1.53.2.4 2001/11/13 11:27:42 jmoore Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -733,7 +733,7 @@ _php_math_basetozval(zval *arg, int base, zval *ret) {
 		if(!f_mode && (!mult || digit > LONG_MAX/mult || num > LONG_MAX-mult*digit)) {
 			f_mode = 1;
 			if(!mult) {
-				fmult = ULONG_MAX + 1;
+				fmult = ((double) ULONG_MAX) + 1;
 			} else {
 				fmult = (unsigned long)mult;
 			}

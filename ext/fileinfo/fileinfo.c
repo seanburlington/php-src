@@ -16,15 +16,17 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.3 2004/04/21 22:49:35 hholzgra Exp $ */
+/* $Id: fileinfo.c,v 1.4 2004/04/21 23:06:26 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include <magic.h>
-// HOWMANY specifies the maximum offset libmagic will look at
-// this is currently hardcoded in the libmagic source but not exported
+/* 
+ * HOWMANY specifies the maximum offset libmagic will look at
+ * this is currently hardcoded in the libmagic source but not exported
+ */
 #ifndef HOWMANY
 #define HOWMANY 65536
 #endif

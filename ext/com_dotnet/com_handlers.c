@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.1 2003/08/14 16:49:55 wez Exp $ */
+/* $Id: com_handlers.c,v 1.2 2003/08/18 04:41:48 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -353,7 +353,7 @@ static int com_call_method(char *method, INTERNAL_FUNCTION_PARAMETERS)
 	nargs = ZEND_NUM_ARGS();
 
 	if (nargs) {
-		args = (zval **)emalloc(sizeof(zval *) * nargs);
+		args = (zval **)safe_emalloc(sizeof(zval *), nargs, 0);
 		zend_get_parameters_array(ht, nargs, args);
 	}
 

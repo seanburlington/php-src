@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.h,v 1.8 1999/11/29 00:45:28 ssb Exp $ */
+/* $Id: php_odbc.h,v 1.9 1999/11/30 12:41:36 lurcher Exp $ */
 
 #ifndef _PHP_ODBC_H
 #define _PHP_ODBC_H
@@ -241,6 +241,7 @@ typedef struct {
 	char *defUser;
 	char *defPW;
 	long allow_persistent;
+	long check_persistent;
 	long max_persistent;
 	long max_links;
 	long num_persistent;

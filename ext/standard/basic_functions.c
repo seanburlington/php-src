@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.476 2002/05/04 18:33:13 sas Exp $ */
+/* $Id: basic_functions.c,v 1.477 2002/05/11 18:35:59 rasmus Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1865,6 +1865,14 @@ PHP_FUNCTION(highlight_file)
 		return;
 	}
 	convert_to_string(filename);
+
+	if (PG(safe_mode) && (!php_checkuid(Z_STRVAL_P(filename), NULL, CHECKUID_ALLOW_ONLY_FILE))) {
+		RETURN_FALSE;
+	}
+
+	if (php_check_open_basedir(Z_STRVAL_P(filename) TSRMLS_CC)) {
+		RETURN_FALSE;
+	}
 
 	if (i) {
 		php_start_ob_buffer (NULL, 0, 1 TSRMLS_CC);

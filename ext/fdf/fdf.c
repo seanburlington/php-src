@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.16 2000/01/01 01:31:32 sas Exp $ */
+/* $Id: fdf.c,v 1.17 2000/02/02 11:18:01 steinm Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -123,7 +123,7 @@ PHP_MSHUTDOWN_FUNCTION(fdf)
    Opens a new fdf document */
 PHP_FUNCTION(fdf_open) {
 	pval **file;
-	int id, type;
+	int id;
 	FDFDoc fdf;
 	FDFErc err;
 	FDF_TLS_VARS;
@@ -174,7 +174,7 @@ PHP_FUNCTION(fdf_close) {
 /* {{{ proto void fdf_create(void)
    Creates a new fdf document */
 PHP_FUNCTION(fdf_create) {
-	int id, type;
+	int id;
 	FDFDoc fdf;
 	FDFErc err;
 	FDF_TLS_VARS;
@@ -367,7 +367,6 @@ PHP_FUNCTION(fdf_set_ap) {
 PHP_FUNCTION(fdf_set_status) {
 	pval **arg1, **arg2;
 	int id, type;
-	ASInt32 nr;
 	FDFDoc fdf;
 	FDFErc err;
 	FDF_TLS_VARS;

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.9 2000/01/10 12:42:05 steinm Exp $ */
+/* $Id: cpdf.c,v 1.10 2000/02/02 11:18:00 steinm Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -40,6 +40,9 @@
 
 #include "php.h"
 #include "php_globals.h"
+#include "ext/standard/php_standard.h"
+#include "ext/standard/head.h"
+#include "ext/standard/info.h"
 #include <math.h>
 #if HAVE_LIBGD13
 #include <gd.h>
@@ -2531,7 +2534,7 @@ PHP_FUNCTION(cpdf_set_action_url) {
    Add outline */
 PHP_FUNCTION(cpdf_add_outline) {
 	pval *argv[11];
-	int id, oid, type, argc, mode=0;
+	int id, oid, type, argc;
 	CPDFdoc *pdf;
 	CPDFoutlineEntry *lastoutline;
 	CPDF_TLS_VARS;

@@ -86,7 +86,7 @@
  *
  */
 
-/* $Id: mbfilter.h,v 1.15 2002/08/14 06:38:07 dets Exp $ */
+/* $Id: mbfilter.h,v 1.16 2002/11/09 17:05:47 moriyoshi Exp $ */
 
 
 #ifndef MBFL_MBFILTER_H
@@ -486,6 +486,13 @@ mbfl_oddlen(mbfl_string *string);
  */
 int
 mbfl_strpos(mbfl_string *haystack, mbfl_string *needle, int offset, int reverse TSRMLS_DC);
+
+
+/*
+ * substr_count
+ */
+int
+mbfl_substr_count(mbfl_string *haystack, mbfl_string *needle TSRMLS_DC);
 
 /*
  * substr

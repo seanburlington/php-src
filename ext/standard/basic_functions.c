@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.444 2002/02/21 11:44:39 yohgaki Exp $ */
+/* $Id: basic_functions.c,v 1.445 2002/02/27 14:05:39 derick Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1869,7 +1869,7 @@ ZEND_API void php_get_highlight_struct(zend_syntax_highlighter_ini *syntax_highl
 	syntax_highlighter_ini->highlight_string  = INI_STR("highlight.string");
 }
 
-/* {{{ proto bool highlight_file(string file_name)
+/* {{{ proto bool highlight_file(string file_name [, int return] )
    Syntax highlight a source file */
 PHP_FUNCTION(highlight_file)
 {

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.59 2003/03/11 03:11:36 sniper Exp $
+dnl $Id: config.m4,v 1.60 2003/05/02 00:40:20 sniper Exp $
 dnl
 
 dnl
@@ -539,6 +539,7 @@ if test -n "$ODBC_TYPE"; then
   if test "$ODBC_TYPE" != "dbmaker"; then
     ext_shared=$shared
     PHP_EVAL_LIBLINE([$ODBC_LFLAGS $ODBC_LIBS], ODBC_SHARED_LIBADD)
+    AC_DEFINE(HAVE_SQLDATASOURCES,1,[ ])
   fi
 
   AC_DEFINE(HAVE_UODBC,1,[ ])

@@ -16,8 +16,13 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.78 2001/10/29 18:58:15 sniper Exp $ */
+/* $Id: rfc1867.c,v 1.79 2001/10/29 19:12:43 sniper Exp $ */
 
+/*
+ *  This product includes software developed by the Apache Group
+ *  for use in the Apache HTTP server project (http://www.apache.org/).
+ *
+ */   
 
 #include <stdio.h>
 #include "php.h"

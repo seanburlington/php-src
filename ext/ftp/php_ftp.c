@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.17 2000/04/15 14:19:59 andi Exp $ */
+/* $Id: php_ftp.c,v 1.18 2000/05/02 02:02:18 sas Exp $ */
 
 #include "php.h"
 
@@ -77,6 +77,10 @@ zend_module_entry php_ftp_module_entry = {
 	NULL,
 	STANDARD_MODULE_PROPERTIES
 };
+
+#ifdef COMPILE_DL_FTP
+ZEND_GET_MODULE(php_ftp)
+#endif
 
 static void ftp_destructor_ftpbuf(ftpbuf_t *ftp)
 {

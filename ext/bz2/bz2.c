@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.6 2004/01/08 08:14:18 andi Exp $ */
+/* $Id: bz2.c,v 1.6.2.1 2005/02/23 18:48:57 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -185,7 +185,7 @@ PHP_BZ2_API php_stream *_php_stream_bz2open(php_stream_wrapper *wrapper,
 	
 	if (bz_file == NULL) {
 		/* that didn't work, so try and get something from the network/wrapper */
-		stream = php_stream_open_wrapper(path, mode, options, opened_path);
+		stream = php_stream_open_wrapper(path, mode, options | STREAM_WILL_CAST, opened_path);
 	
 		if (stream) {
 			int fd;

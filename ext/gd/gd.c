@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.135 2001/06/11 13:57:47 sniper Exp $ */
+/* $Id: gd.c,v 1.136 2001/06/11 14:39:13 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -484,7 +484,7 @@ PHP_FUNCTION(imageloadfont)
 /* }}} */
 
 /* {{{ proto void imagesetstyle(resource im, array styles)
-	Set the line drawing styles for use with imageline and IMG_COLOR_STYLED. */
+   Set the line drawing styles for use with imageline and IMG_COLOR_STYLED. */
 PHP_FUNCTION(imagesetstyle)
 {
 	zval **IM, **styles;

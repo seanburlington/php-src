@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.590 2004/02/10 17:55:32 zeev Exp $ */
+/* $Id: main.c,v 1.591 2004/02/10 18:46:53 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -923,7 +923,7 @@ static void php_message_handler_for_zend(long message, void *data)
 		case ZMSG_MEMORY_LEAK_DETECTED:
 		case ZMSG_MEMORY_LEAK_REPEATED:
 #if ZEND_DEBUG
-			if ((EG(error_reporting) & E_WARNING) && PG(report_memleaks)) {
+			if (EG(error_reporting) & E_WARNING) {
 				char memory_leak_buf[512];
 
 				if (message==ZMSG_MEMORY_LEAK_DETECTED) {
@@ -952,7 +952,7 @@ static void php_message_handler_for_zend(long message, void *data)
 			break;
 		case ZMSG_MEMORY_LEAKS_GRAND_TOTAL:
 #if ZEND_DEBUG
-			if ((EG(error_reporting) & E_WARNING) && PG(report_memleaks)) {
+			if (EG(error_reporting) & E_WARNING) {
 				char memory_leak_buf[512];
 
 				snprintf(memory_leak_buf, 512, "=== Total %d memory leaks detected ===\n", *((zend_uint *) data));

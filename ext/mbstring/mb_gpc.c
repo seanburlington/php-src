@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mb_gpc.c,v 1.4 2003/02/19 19:41:07 rasmus Exp $ */
+/* $Id: mb_gpc.c,v 1.5 2003/02/19 20:56:47 rasmus Exp $ */
 
 /* {{{ includes */
 #ifdef HAVE_CONFIG_H
@@ -379,7 +379,7 @@ SAPI_POST_HANDLER_FUNC(php_mb_post_handler)
 {
 	MBSTRG(http_input_identify_post) = mbfl_no_encoding_invalid;
 
-	_php_mb_encoding_handler_ex(arg, SG(request_info).post_data, "&", 0, 0 TSRMLS_CC);
+	_php_mb_encoding_handler_ex(PARSE_POST, arg, SG(request_info).post_data, "&", 0, 0 TSRMLS_CC);
 
 	if (MBSTRG(http_input_identify) != mbfl_no_encoding_invalid) {
 		MBSTRG(http_input_identify_post) = MBSTRG(http_input_identify);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mb_gpc.h,v 1.1 2002/11/23 20:08:44 moriyoshi Exp $ */
+/* $Id: mb_gpc.h,v 1.2 2003/02/19 20:56:47 rasmus Exp $ */
 
 /* {{{ includes */
 #ifdef HAVE_CONFIG_H
@@ -33,7 +33,7 @@ SAPI_POST_HANDLER_FUNC(php_mb_post_handler);
 MBSTRING_API SAPI_TREAT_DATA_FUNC(mbstr_treat_data);
 
 int _php_mb_enable_encoding_translation(int flag);
-int _php_mb_encoding_handler_ex(zval *arg, char *res, char *separator, int force_register_globals, int report_errors TSRMLS_DC);
+int _php_mb_encoding_handler_ex(int data_type, zval *arg, char *res, char *separator, int force_register_globals, int report_errors TSRMLS_DC);
 /* }}} */
 #endif /* HAVE_MBSTRING */
 

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.102 2003/08/28 03:42:19 cellog Exp $
+// $Id: Common.php,v 1.103 2003/08/29 14:02:20 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -1370,7 +1370,7 @@ class PEAR_Common extends PEAR
      */
     function betterStates($state, $include = false)
     {
-        static $states = array('devel', 'snapshot', 'alpha', 'beta', 'stable');
+        static $states = array('snapshot', 'devel', 'alpha', 'beta', 'stable');
         $i = array_search($state, $states);
         if ($i === false) {
             return false;
@@ -1751,7 +1751,7 @@ class PEAR_Common extends PEAR
                 $newret[] = $p;
             }
         }
-        
+
         $func = $uninstall ? '_sortPkgDepsRev' : '_sortPkgDeps';
         usort($newret, array('PEAR_Common', $func));
         $packages = $newret;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.161 2002/09/11 21:06:52 derick Exp $ */
+/* $Id: php_mysql.c,v 1.162 2002/10/03 02:32:09 yohgaki Exp $ */
 
 /* TODO:
  *
@@ -193,6 +193,7 @@ function_entry mysql_functions[] = {
 	PHP_FALIAS(mysql_dbname,		mysql_result,		NULL)
 	PHP_FALIAS(mysql_tablename,		mysql_result,		NULL)
 	PHP_FALIAS(mysql_table_name,	mysql_result,		NULL)
+	PHP_FALIAS(mysql_result_seek,	mysql_data_seek,	NULL)
 	{NULL, NULL, NULL}
 };
 /* }}} */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.51 2002/10/02 03:16:35 yohgaki Exp $ */
+/* $Id: php_pgsql.h,v 1.52 2002/10/03 02:32:09 yohgaki Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -83,9 +83,9 @@ PHP_FUNCTION(pg_fetch_object);
 PHP_FUNCTION(pg_fetch_result);
 PHP_FUNCTION(pg_fetch_row);
 PHP_FUNCTION(pg_fetch_all);
-PHP_FUNCTION(pg_data_seek);
 PHP_FUNCTION(pg_affected_rows);
 PHP_FUNCTION(pg_get_result);
+PHP_FUNCTION(pg_result_seek);
 PHP_FUNCTION(pg_result_status);
 PHP_FUNCTION(pg_free_result);
 PHP_FUNCTION(pg_last_oid);

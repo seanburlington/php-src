@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.c,v 1.18.2.3 2003/01/21 22:04:28 moriyoshi Exp $ */
+/* $Id: php_mbregex.c,v 1.18.2.4 2003/01/21 22:09:55 moriyoshi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -574,7 +574,7 @@ _php_mb_regex_ereg_replace_exec(INTERNAL_FUNCTION_PARAMETERS, int option)
    Replace regular expression for multibyte string */
 PHP_FUNCTION(mb_ereg_replace)
 {
-	_php_mb_regex_ereg_replace_exec(INTERNAL_FUNCTION_PARAM_PASSTHRU, MBSTRG(regex_default_options));
+	_php_mb_regex_ereg_replace_exec(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 }
 /* }}} */
 
@@ -582,7 +582,7 @@ PHP_FUNCTION(mb_ereg_replace)
    Case insensitive replace regular expression for multibyte string */
 PHP_FUNCTION(mb_eregi_replace)
 {
-	_php_mb_regex_ereg_replace_exec(INTERNAL_FUNCTION_PARAM_PASSTHRU, MBRE_OPTION_IGNORECASE | MBSTRG(regex_default_options));
+	_php_mb_regex_ereg_replace_exec(INTERNAL_FUNCTION_PARAM_PASSTHRU, MBRE_OPTION_IGNORECASE);
 }
 /* }}} */
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.54 2002/11/06 09:17:50 helly Exp $ */
+/* $Id: dba.c,v 1.55 2002/11/06 17:59:03 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -369,12 +369,12 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			RETURN_FALSE;
 	}
 			
-	info = ecalloc(sizeof(dba_info), 1);
+	info = emalloc(sizeof(dba_info));
+	memset(info, 0, sizeof(dba_info));
 	info->path = estrdup(Z_STRVAL_PP(args[0]));
 	info->mode = modenr;
 	info->argc = ac - 3;
 	info->argv = args + 3;
-	/* info->hnd is NULL here */
 
 	if (hptr->open(info, &error TSRMLS_CC) != SUCCESS) {
 		dba_close(info TSRMLS_CC);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db3.c,v 1.20 2002/11/05 14:46:36 helly Exp $ */
+/* $Id: dba_db3.c,v 1.21 2002/11/06 17:59:03 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -78,10 +78,6 @@ DBA_OPEN_FUNC(db3)
 		dba_db3_data *data;
 
 		data = emalloc(sizeof(*data));
-		if (!data) {
-			*error = "Out of memory";
-			return FAILURE;
-		}
 		data->dbp = dbp;
 		data->cursor = NULL;
 		info->dbf = data;

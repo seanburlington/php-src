@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_ndbm.c,v 1.13 2002/11/05 14:46:36 helly Exp $ */
+/* $Id: dba_ndbm.c,v 1.14 2002/11/06 17:59:03 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -65,12 +65,8 @@ DBA_OPEN_FUNC(ndbm)
 
 	dbf = dbm_open(info->path, gmode, filemode);
 	
-	if(dbf) {
-		pinfo->dbf = dbf;
-		return SUCCESS;
-	}
-	*error = "Out of memory";
-	return FAILURE;
+	pinfo->dbf = dbf;
+	return SUCCESS;
 }
 
 DBA_CLOSE_FUNC(ndbm)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_flatfile.c,v 1.2 2002/11/06 10:43:41 helly Exp $ */
+/* $Id: dba_flatfile.c,v 1.3 2002/11/06 17:59:03 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -68,11 +68,8 @@ DBA_OPEN_FUNC(flatfile)
 	int retries = 0;
 #endif
 
-	info->dbf = ecalloc(sizeof(flatfile), 1);
-	if (!info->dbf) {
-		*error = "Out of memory";
-		return FAILURE;
-	}
+	info->dbf = emalloc(sizeof(flatfile));
+	memset(info->dbf, 0, sizeof(flatfile));
 
 	switch(info->mode) {
 		case DBA_READER:

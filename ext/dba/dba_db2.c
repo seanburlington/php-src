@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.29 2002/11/05 14:46:35 helly Exp $ */
+/* $Id: dba_db2.c,v 1.30 2002/11/06 17:59:03 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -76,11 +76,8 @@ DBA_OPEN_FUNC(db2)
 		return FAILURE;
 	}
 
-	info->dbf = ecalloc(sizeof(dba_db2_data), 1);
-	if (!info->dbf) {
-		*error = "Out of memory";
-		return FAILURE;
-	}
+	info->dbf = emalloc(sizeof(dba_db2_data));
+	memset(info->dbf, 0, sizeof(dba_db2_data));
 	((dba_db2_data *) info->dbf)->dbp = dbp;
 	return SUCCESS;
 }

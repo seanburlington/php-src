@@ -80,7 +80,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.55 2003/04/04 09:06:23 moriyoshi Exp $ */
+/* $Id: mbfilter.c,v 1.56 2003/05/30 13:20:01 iliaa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -107,7 +107,7 @@
 #if defined(HAVE_MBSTR_KR)
 #include "mbfilter_kr.h"
 #endif
-#if defined(HAVE_MBSTR_KR)
+#if defined(HAVE_MBSTR_RU)
 #include "mbfilter_ru.h"
 #endif
 

@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.29 2002/09/25 15:25:12 wez Exp $ */
+/* $Id: php_network.h,v 1.30 2002/09/28 22:12:23 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -137,10 +137,6 @@ PHPAPI php_stream *_php_stream_sock_open_unix(const char *path, int pathlen, con
 #define php_stream_sock_open_unix_rel(path, pathlen, persistent, timeval)	_php_stream_sock_open_unix((path), (pathlen), (persistent), (timeval) STREAMS_REL_CC TSRMLS_CC)
 
 /* }}} */
-
-PHPAPI void php_stream_sock_set_timeout(php_stream *stream, struct timeval *timeout TSRMLS_DC);
-/* set the chunk size for the stream; return the old chunk size */
-PHPAPI size_t php_stream_sock_set_chunk_size(php_stream *stream, size_t size TSRMLS_DC);
 
 #if HAVE_OPENSSL_EXT
 PHPAPI int php_stream_sock_ssl_activate_with_method(php_stream *stream, int activate, SSL_METHOD *method, php_stream *session_stream TSRMLS_DC);

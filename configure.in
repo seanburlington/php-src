@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.9 1999/09/30 12:56:24 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.10 1999/10/03 14:06:06 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -192,7 +192,7 @@ if test -d /usr/pkg/include -a -d /usr/pkg/lib ; then
 fi
 
 INCLUDES="-I\$(top_builddir)/libzend -I\$(top_builddir)/TSRM"
-EXTRA_LIBS="$EXTRA_LIBS \`\$(SHELL) ./libzend/zend_config --libs\`"
+EXTRA_LIBS="$EXTRA_LIBS \`\$(SHELL) $cwd/libzend/zend_config --libs\`"
 AC_SUBST(INCLUDES)
 
 AC_CHECK_LIB(nsl, gethostname, [

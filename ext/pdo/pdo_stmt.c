@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.63 2005/02/05 22:46:26 edink Exp $ */
+/* $Id: pdo_stmt.c,v 1.64 2005/02/06 16:46:18 wez Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -322,7 +322,7 @@ static PHP_METHOD(PDOStatement, execute)
 		if (ret == 0) {
 			/* no changes were made */
 			stmt->active_query_string = stmt->query_string;
-			stmt->active_query_stringlen = stmt->active_query_stringlen;
+			stmt->active_query_stringlen = stmt->query_stringlen;
 		} else if (ret == -1) {
 			/* something broke */
 			PDO_HANDLE_STMT_ERR();

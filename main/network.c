@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.57 2002/08/11 11:25:24 wez Exp $ */
+/* $Id: network.c,v 1.58 2002/08/13 14:39:03 kalowsky Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 #define MAX_CHUNKS_PER_READ 10
@@ -515,7 +515,7 @@ PHPAPI php_stream *_php_stream_sock_open_from_socket(int socket, int persistent 
 
 	sock->is_blocked = 1;
 	sock->chunk_size = FG(def_chunk_size);
-	sock->timeout.tv_sec = -1;
+	sock->timeout.tv_sec = 60;
 	sock->socket = socket;
 
 	stream = php_stream_alloc_rel(&php_stream_socket_ops, sock, persistent, "r+");

@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.42 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: crypt.c,v 1.43 2001/08/04 23:58:56 sniper Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -93,11 +93,7 @@ static int php_crypt_rand_seeded=0;
 
 PHP_MINIT_FUNCTION(crypt)
 {
-#if PHP_STD_DES_CRYPT
-	REGISTER_LONG_CONSTANT("CRYPT_SALT_LENGTH", 2, CONST_CS | CONST_PERSISTENT);
-#elif PHP_MD5_CRYPT
-	REGISTER_LONG_CONSTANT("CRYPT_SALT_LENGTH", 12, CONST_CS | CONST_PERSISTENT);
-#endif
+	REGISTER_LONG_CONSTANT("CRYPT_SALT_LENGTH", PHP_MAX_SALT_LEN, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("CRYPT_STD_DES", PHP_STD_DES_CRYPT, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("CRYPT_EXT_DES", PHP_EXT_DES_CRYPT, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("CRYPT_MD5", PHP_MD5_CRYPT, CONST_CS | CONST_PERSISTENT);
@@ -159,14 +155,14 @@ PHP_FUNCTION(crypt)
 
 	/* The automatic salt generation only covers standard DES and md5-crypt */
 	if(!*salt) {
-#if PHP_STD_DES_CRYPT
-		php_to64(&salt[0], PHP_CRYPT_RAND, 2);
-		salt[2] = '\0';
-#elif PHP_MD5_CRYPT
+#if PHP_MD5_CRYPT
 		strcpy(salt, "$1$");
 		php_to64(&salt[3], PHP_CRYPT_RAND, 4);
 		php_to64(&salt[7], PHP_CRYPT_RAND, 4);
 		strcpy(&salt[11], "$");
+#elif PHP_STD_DES_CRYPT
+		php_to64(&salt[0], PHP_CRYPT_RAND, 2);
+		salt[2] = '\0';
 #endif
 	}
 

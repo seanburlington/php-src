@@ -16,11 +16,15 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: Gtk.php,v 1.1 2002/05/09 02:31:36 ssb Exp $
+  $Id: Gtk.php,v 1.2 2002/05/26 12:53:26 ssb Exp $
 */
 
 require_once "PEAR.php";
 
+/**
+ * @nodep GtkWindow
+ * @nodep gdk
+ */
 class PEAR_Frontend_Gtk extends PEAR
 {
     // {{{ properties

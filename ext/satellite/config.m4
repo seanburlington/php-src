@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 2000/09/01 22:10:14 eriksson Exp $
+dnl $Id: config.m4,v 1.2 2000/11/30 22:03:17 eriksson Exp $
 
 dnl My first config.m4 - be nice to me... :-)
 
@@ -17,7 +17,7 @@ if test "$PHP_SATELLITE" != "no"; then
 
 	dnl check for symbol giop_skip_atexit in libIIOP
 	AC_CHECK_LIB(IIOP, giop_skip_atexit, [true], [
-		AC_MSG_ERROR([Your version of ORBit is out of date! You need a version newer than August 5, 2000.])
+		AC_MSG_ERROR([You need a CVS version of ORBit, please read ext/satallite/README])
 		], `$orbit_config --libs client`)
 
 	dnl ORBIT_CFLAGS=`$orbit_config --cflags client`

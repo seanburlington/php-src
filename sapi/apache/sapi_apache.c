@@ -19,9 +19,14 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.12 2000/02/19 23:41:24 zeev Exp $ */
+/* $Id: sapi_apache.c,v 1.13 2000/04/30 04:15:26 shane Exp $ */
 
 #define NO_REGEX_EXTRA_H
+#ifdef WIN32
+#include <winsock2.h>
+#define PHP_EXPORTS
+#include <stddef.h>
+#endif
 
 #include "php.h"
 
@@ -53,6 +58,7 @@
 #include "util_script.h"
 #include "php_version.h"
 /*#include "mod_php4.h"*/
+
 
 PHPAPI int apache_php_module_main(request_rec *r, int fd, int display_source_mode SLS_DC)
 {

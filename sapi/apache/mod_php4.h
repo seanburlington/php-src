@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.h,v 1.4 2000/02/19 23:41:24 zeev Exp $ */
+/* $Id: mod_php4.h,v 1.5 2000/04/30 04:15:26 shane Exp $ */
 
 #ifndef _MOD_PHP4_H
 #define _MOD_PHP4_H
@@ -36,7 +36,7 @@ typedef struct {
 extern zend_module_entry apache_module_entry;
 extern php_apache_info_struct php_apache_info;
 
-#if MSVC5
+#ifdef WIN32
 #define S_IXUSR _S_IEXEC
 #endif
 

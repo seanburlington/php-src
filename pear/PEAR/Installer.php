@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.77 2002/10/14 19:57:40 tal Exp $
+// $Id: Installer.php,v 1.78 2002/10/22 23:08:09 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -85,6 +85,11 @@ class PEAR_Installer extends PEAR_Common
      * @var object
      */
     var $registry;
+
+    /** List of file transactions queued for an install/upgrade/uninstall.
+     * @var array
+     */
+    var $transactions = array();
 
     // }}}
 

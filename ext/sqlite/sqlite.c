@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.149 2004/09/25 23:13:49 wez Exp $ 
+   $Id: sqlite.c,v 1.150 2004/10/14 23:19:38 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1071,7 +1071,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.149 2004/09/25 23:13:49 wez Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.150 2004/10/14 23:19:38 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1569,7 +1569,7 @@ PHP_FUNCTION(sqlite_unbuffered_query)
 }
 /* }}} */
 
-/* {{{ proto resource sqlite_fetch_column_types(string table_name, resource db)
+/* {{{ proto resource sqlite_fetch_column_types(string table_name, [, int result_type] resource db)
    Return an array of column types from a particular table. */
 PHP_FUNCTION(sqlite_fetch_column_types)
 {
@@ -1581,10 +1581,10 @@ PHP_FUNCTION(sqlite_fetch_column_types)
 	zval *object = getThis();
 	struct php_sqlite_result res;
 	const char **rowdata, **colnames, *tail;
-	int i, ncols;
+	int i, ncols, result_type = PHPSQLITE_ASSOC;
 
 	if (object) {
-		if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &tbl, &tbl_len)) {
+		if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &tbl, &tbl_len, &result_type)) {
 			return;
 		}
 		DB_FROM_OBJECT(db, object);
@@ -1627,7 +1627,12 @@ PHP_FUNCTION(sqlite_fetch_column_types)
 			php_sqlite_strtolower(colname);
 		}
 
-		add_assoc_string(return_value, colname, colnames[ncols + i] ? (char *)colnames[ncols + i] : "", 1);
+		if (result_type == PHPSQLITE_ASSOC) {
+			add_assoc_string(return_value, colname, colnames[ncols + i] ? (char *)colnames[ncols + i] : "", 1);
+		}
+		if (result_type == PHPSQLITE_NUM) {
+			add_index_string(return_value, i, colnames[ncols + i] ? (char *)colnames[ncols + i] : "", 1);
+		}
 	}
 
 done:

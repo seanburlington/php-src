@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.24 2004/02/12 10:53:08 edink Exp $
+// $Id: config.w32,v 1.25 2004/02/12 11:55:16 wez Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -175,7 +175,7 @@ STDOUT.WriteLine("PHP Core:  " + get_define('PHPDLL') + " and " + get_define('PH
 
 ADD_SOURCES("Zend", "zend_language_parser.c zend_language_scanner.c \
 	zend_ini_parser.c zend_ini_scanner.c zend_alloc.c zend_compile.c \
-	zend_constants.c zend_dynamic_array.c zend_exceptions.c \ 
+	zend_constants.c zend_dynamic_array.c zend_exceptions.c \
 	zend_execute_API.c zend_highlight.c \
 	zend_llist.c zend_opcode.c zend_operators.c zend_ptr_stack.c \
 	zend_stack.c zend_variables.c zend.c zend_API.c zend_extensions.c \

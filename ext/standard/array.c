@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.100 2001/03/12 08:07:00 stas Exp $ */
+/* $Id: array.c,v 1.101 2001/03/12 10:14:00 stas Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2209,7 +2209,7 @@ PHP_FUNCTION(array_flip)
 		} else if (Z_TYPE_PP(entry) == IS_STRING) {
 			zend_hash_update(Z_ARRVAL_P(return_value),Z_STRVAL_PP(entry),Z_STRLEN_PP(entry) + 1, &data, sizeof(data), NULL);
 		} else {
-			zval_dtor(data);
+			zval_ptr_dtor(&data); /* will free also zval structure */
 			php_error(E_WARNING, "Can only flip STRING and INTEGER values!");
 		}
 	

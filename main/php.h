@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.125 2000/09/07 15:20:29 andi Exp $ */
+/* $Id: php.h,v 1.126 2000/11/02 15:32:52 sas Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -272,7 +272,7 @@ int php_startup_internal_extensions(void);
 int php_global_startup_internal_extensions(void);
 int php_global_shutdown_internal_extensions(void);
 
-int mergesort(void *base, size_t nmemb, register size_t size, int (*cmp) (const void *, const void *));
+int php_mergesort(void *base, size_t nmemb, register size_t size, int (*cmp) (const void *, const void *));
 
 PHPAPI void php_register_pre_request_shutdown(void (*func)(void *), void *userdata);
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.52 2005/02/22 19:27:34 helly Exp $ */
+/* $Id: php_pdo_driver.h,v 1.53 2005/02/22 20:25:55 helly Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -111,6 +111,7 @@ enum pdo_attribute_type {
 	PDO_ATTR_CURSOR,			/* cursor type */
 	PDO_ATTR_ORACLE_NULLS,		/* convert empty strings to NULL */
 	PDO_ATTR_PERSISTENT,		/* pconnect style connection */
+	PDO_ATTR_STATEMENT_CLASS,	/* array(classname, array(ctor_args)) to specify the class of the constructed statement */
 
 	/* this defines the start of the range for driver specific options.
 	 * Drivers should define their own attribute constants beginning with this

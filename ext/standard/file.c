@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.5 2002/12/31 16:35:27 sebastian Exp $ */
+/* $Id: file.c,v 1.279.2.6 2003/01/09 23:09:41 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2242,7 +2242,7 @@ PHP_FUNCTION(fgetcsv)
 							efree(lineEnd); 
 							efree(temp); 
 							efree(buf);
-							zval_ptr_dtor(&return_value);
+							zval_dtor(return_value);
 							RETURN_FALSE;
 						}
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ifx.ec,v 1.58 2001/09/07 13:20:32 dbeu Exp $ */
+/* $Id: ifx.ec,v 1.59 2001/09/07 13:29:48 dbeu Exp $ */
 
 /* -------------------------------------------------------------------
  * if you want a function reference : "grep '^\*\*' ifx.ec" will give
@@ -335,7 +335,7 @@ PHP_MINIT_FUNCTION(ifx)
 	REGISTER_INI_ENTRIES();
 
 	le_result   = zend_register_list_destructors_ex(ifx_free_result,NULL, "informix result",    module_number);
-	le_idresult = zend_register_list_destructors_ex(ifx_free_result,NULL, "informix id result", module_number);
+	le_idresult = zend_register_list_destructors_ex(NULL, NULL, "informix id result", module_number);
 	le_link     = zend_register_list_destructors_ex(_close_ifx_link,NULL, "informix link",      module_number);
 	le_plink    = zend_register_list_destructors_ex(NULL,_close_ifx_plink,"informix persistent link", module_number);
 	ifx_module_entry.type = type;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.52 2003/03/18 12:06:01 ssb Exp $ */
+/* $Id: php_odbc.h,v 1.53 2003/04/30 10:45:45 wez Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -32,6 +32,10 @@
 
 extern zend_module_entry odbc_module_entry;
 #define odbc_module_ptr &odbc_module_entry
+
+#if defined(HAVE_DBMAKER) || defined(PHP_WIN32) || defined(HAVE_IBMDB2)
+# define PHP_ODBC_HAVE_FETCH_HASH 1
+#endif
 
 /* user functions */
 PHP_MINIT_FUNCTION(odbc);
@@ -54,7 +58,7 @@ PHP_FUNCTION(odbc_data_source);
 PHP_FUNCTION(odbc_do);
 PHP_FUNCTION(odbc_exec);
 PHP_FUNCTION(odbc_execute);
-#if defined(HAVE_DBMAKER) || defined(PHP_WIN32)
+#ifdef PHP_ODBC_HAVE_FETCH_HASH
 PHP_FUNCTION(odbc_fetch_array);
 PHP_FUNCTION(odbc_fetch_object);
 #endif

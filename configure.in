@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.23 2003/01/09 16:38:28 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.24 2003/01/23 06:42:51 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1316,11 +1316,10 @@ cat <<X
 | about the implications of having register_globals set to on, and   |
 | avoid using it if possible.                                        |
 +--------------------------------------------------------------------+
-X
 
-PHP_CONFIGURE_PART(
 Thank you for using PHP.
-)
+
+X
 
 fi
 ])

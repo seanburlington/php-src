@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.51 2003/01/15 16:29:00 wez Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.52 2003/01/22 20:41:28 avsm Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -6,7 +6,7 @@ dnl
 dnl Check if flush should be called explicitly after buffered io
 dnl
 AC_DEFUN(AC_FLUSH_IO,[
-  AC_CACHE_CHECK([whether flush should be called explicitly after a bufferered io], ac_cv_flush_io,[
+  AC_CACHE_CHECK([whether flush should be called explicitly after a buffered io], ac_cv_flush_io,[
   AC_TRY_RUN( [
 #include <stdio.h>
 #include <stdlib.h>

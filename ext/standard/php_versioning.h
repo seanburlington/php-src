@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_versioning.h,v 1.1 2001/10/05 23:56:19 ssb Exp $ */
+/* $Id: php_versioning.h,v 1.2 2001/10/10 10:14:51 ssb Exp $ */
 
 #ifndef PHP_VERSIONING_H
 #define PHP_VERSIONING_H
@@ -27,5 +27,10 @@
 PHPAPI char *php_canonicalize_version(const char *);
 PHPAPI int php_version_compare(const char *, const char *);
 PHP_FUNCTION(version_compare);
+PHP_FUNCTION(version_gt);
+PHP_FUNCTION(version_ge);
+PHP_FUNCTION(version_lt);
+PHP_FUNCTION(version_le);
+PHP_FUNCTION(version_eq);
 
 #endif

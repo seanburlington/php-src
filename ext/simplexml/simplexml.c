@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.48 2003/07/04 21:58:09 sterling Exp $ */
+/* $Id: simplexml.c,v 1.49 2003/07/04 22:21:23 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -719,10 +719,7 @@ static void
 cast_object(zval *object, int type, char *contents TSRMLS_DC)
 {
 	if (contents) {
-		int len = strlen(contents);
-		ZVAL_STRINGL(object, contents, len, 1);
-	} else {
-		ZVAL_NULL(object);
+		ZVAL_STRINGL(object, contents, strlen(contents), 1);
 	}
 
 	switch (type) {
@@ -751,7 +748,6 @@ sxe_object_cast(zval *readobj, zval *writeobj, int type, int should_free TSRMLS_
 	char           *contents = NULL;
 
     sxe = php_sxe_fetch_object(readobj TSRMLS_CC);
-	
 	if (should_free) {
 		zval_dtor(writeobj);
 	}
@@ -1059,7 +1055,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.48 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.49 $");
 	php_info_print_table_end();
 
 }

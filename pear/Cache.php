@@ -16,7 +16,7 @@
 // |          Sebastian Bergmann <sb@sebastian-bergmann.de>               |
 // +----------------------------------------------------------------------+
 //
-// $Id: Cache.php,v 1.9 2001/03/28 18:32:20 uw Exp $
+// $Id: Cache.php,v 1.10 2001/04/19 11:04:01 uw Exp $
 
 require_once "Cache/Error.php";
 
@@ -58,7 +58,7 @@ require_once "Cache/Error.php";
 *          bad circumstances  (especially with the file container)
 *
 * @author   Ulf Wendel <ulf.wendel@phpdoc.de>
-* @version  $Id: Cache.php,v 1.9 2001/03/28 18:32:20 uw Exp $
+* @version  $Id: Cache.php,v 1.10 2001/04/19 11:04:01 uw Exp $
 * @package  Cache
 * @access   public
 */
@@ -82,7 +82,7 @@ class Cache extends PEAR {
     * of seconds.
     *
     * @var      integer
-    * @see      $gc_probability
+    * @see      $gc_probability, $gc_maxlifetime
     * @access   public
     */
     var $gc_time  = 1;
@@ -93,10 +93,20 @@ class Cache extends PEAR {
     * TODO: Add an explanation.
     *
     * @var      integer     0 => never
-    * @see      $gc_time
+    * @see      $gc_time, $gc_maxlifetime
     * @access   public
     */
     var $gc_probability = 1;
+    
+    /**
+    * Garbage collection: delete all entries not use for n seconds.
+    *
+    * Default is one day, 60 * 60 * 24 = 86400 seconds.
+    *
+    * @var  integer
+    * @see  $gc_probability, $gc_time
+    */
+    var $gc_maxlifetime = 86400;
 
     /**
     * Storage container object.
@@ -314,7 +324,7 @@ class Cache extends PEAR {
 
         // time and probability based
         if (($force) || ($last_run && $last_run < time() + $this->gc_time) || (rand(1, 100) < $this->gc_probability)) {
-            $this->container->garbageCollection();
+            $this->container->garbageCollection($this->gc_maxlifetime);
             $last_run = time();
         }
     } // end func garbageCollection

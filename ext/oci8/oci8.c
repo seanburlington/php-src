@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.96 2000/08/16 15:23:05 thies Exp $ */
+/* $Id: oci8.c,v 1.97 2000/10/07 09:10:54 thies Exp $ */
 
 /* TODO list:
  *
@@ -490,7 +490,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.96 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.97 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -1555,7 +1555,7 @@ static int
 oci_loadlob(oci_connection *connection, oci_descriptor *mydescr, char **buffer,ub4 *loblen)
 {
 	ub4 siz = 0;
-	ub4 readlen;
+	ub4 readlen = 0;
 	char *buf;
 
 	*loblen = 0;
@@ -1572,7 +1572,6 @@ oci_loadlob(oci_connection *connection, oci_descriptor *mydescr, char **buffer,u
 		}
 	}
 
-
 	connection->error =
 		OCILobGetLength(connection->pServiceContext,
 						connection->pError,
@@ -1586,7 +1585,7 @@ oci_loadlob(oci_connection *connection, oci_descriptor *mydescr, char **buffer,u
 
 	buf = emalloc(readlen + 1);
 
-	do {
+	while (readlen > 0) { /* thies loop should not be entered on readlen == 0 */
 		connection->error = 
 			OCILobRead(connection->pServiceContext, 
 					   connection->pError,
@@ -1609,7 +1608,7 @@ oci_loadlob(oci_connection *connection, oci_descriptor *mydescr, char **buffer,u
 		} else {
 			break;
 		}
-	} while (1);
+	}
 
 	if (connection->error) {
 		oci_error(connection->pError, "OCILobRead", connection->error);

@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.142.2.29 2004/12/21 15:47:38 iliaa Exp $ */
+/* $Id: php_imap.c,v 1.142.2.30 2004/12/22 17:29:14 iliaa Exp $ */
 
 #define IMAP41
 
@@ -3140,29 +3140,22 @@ PHP_FUNCTION(imap_mail_compose)
 				bod=&part->body;
 
 				tempstring=emalloc(strlen(bod->contents.text.data)+strlen(CRLF)+strlen(mystring)+1);
-				strcpy(tempstring, mystring);
+				sprintf(tempstring, "%s%s%s", mystring, bod->contents.text.data, CRLF);
 				efree(mystring);
 				mystring=tempstring;
-				sprintf(mystring, "%s%s%s", mystring, bod->contents.text.data, CRLF);
-
 			} while ((part = part->next)); /* until done */
 
 			/* output trailing cookie */
 			sprintf(tmp, "--%s--", cookie);
 			tempstring=emalloc(strlen(tmp)+strlen(CRLF)+strlen(mystring)+1);
-			strcpy(tempstring, mystring);
+			sprintf(tempstring, "%s%s%s", mystring, tmp, CRLF);
 			efree(mystring);
 			mystring=tempstring;
-			sprintf(mystring, "%s%s%s", mystring, tmp, CRLF);
-
 	} else if (bod) {
-
-			tempstring=emalloc(strlen(bod->contents.text.data)+strlen(CRLF)+strlen(mystring)+1);
-			strcpy(tempstring, mystring);
+			tempstring = emalloc(strlen(bod->contents.text.data)+strlen(CRLF)+strlen(mystring)+1);
+			sprintf(tempstring, "%s%s%s", mystring, bod->contents.text.data, CRLF);
 			efree(mystring);
 			mystring=tempstring;
-			sprintf(mystring, "%s%s%s", mystring, bod->contents.text.data, CRLF);
-
 	} else {
 		efree(mystring);
 		RETURN_FALSE;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.44 2002/02/28 08:26:09 sebastian Exp $ */
+/* $Id: ftp.c,v 1.44.2.1 2002/03/07 20:41:50 jon Exp $ */
 
 #include "php.h"
 
@@ -34,9 +34,12 @@
 #ifdef PHP_WIN32
 #include <winsock.h>
 #else
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
 #include <sys/socket.h>
-#include <arpa/inet.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <netdb.h>
 #endif
 #include <errno.h>

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.38 2003/05/31 01:37:43 sniper Exp $ */
+/* $Id: main.c,v 1.512.2.39 2003/06/12 08:33:45 derick Exp $ */
 
 /* {{{ includes
  */
@@ -1407,7 +1407,7 @@ static int php_hash_environment(TSRMLS_D)
 		switch(*p) {
 			case 'p':
 			case 'P':
-				if (!_gpc_flags[0] && !SG(headers_sent) && SG(request_info).request_method && !strcasecmp(SG(request_info).request_method, "POST")) {
+				if (!_gpc_flags[0] && !SG(headers_sent) && SG(request_info).request_method && !strcmp(SG(request_info).request_method, "POST")) {
 					sapi_module.treat_data(PARSE_POST, NULL, NULL TSRMLS_CC);	/* POST Data */
 					_gpc_flags[0]=1;
 				}

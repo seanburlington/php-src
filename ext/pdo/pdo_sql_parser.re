@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.11 2004/05/21 22:20:25 gschlossnagle Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.12 2004/05/21 22:24:20 gschlossnagle Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -111,7 +111,6 @@ int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len, char **ou
 			*outquery_len += (s.cur - s.tok);
 		}
 		else if(t == PDO_PARSER_BIND) {
-			char crutch;
 			if(!params) { 
 				/* error */
 				efree(*outquery);
@@ -120,16 +119,13 @@ int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len, char **ou
 			}
 			/* lookup bind first via hash and then index */
 			/* stupid keys need to be null-terminated, even though we know their length */
-			crutch  = s.tok[s.cur-s.tok];
-			s.tok[s.cur-s.tok] = '\0';
-			if((SUCCESS == zend_hash_find(params, s.tok, s.cur-s.tok + 1,(void **)&param))  
+			if((SUCCESS == zend_hash_find(params, s.tok, s.cur-s.tok,(void **)&param))  
 			    ||
 			   (SUCCESS == zend_hash_index_find(params, bindno, (void **)&param))) 
 			{
 				char *quotedstr;
 				int quotedstrlen;
 				/* restore the in-string key, doesn't need null-termination here */
-				s.tok[s.cur-s.tok] = crutch;
 				/* currently everything is a string here */
 				
 				/* quote the bind value if necessary */

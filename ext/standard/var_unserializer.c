@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.c,v 1.38.2.6 2005/01/16 22:02:50 sesser Exp $ */
+/* $Id: var_unserializer.c,v 1.38.2.7 2005/01/17 12:13:32 sesser Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -152,10 +152,10 @@ PHPAPI void var_destroy(php_unserialize_data_t *var_hashx)
 
 
 
-static inline int parse_iv2(const unsigned char *p, const unsigned char **q)
+static inline long parse_iv2(const unsigned char *p, const unsigned char **q)
 {
 	char cursor;
-	int result = 0;
+	long result = 0;
 	int neg = 0;
 
 	switch (*p) {
@@ -180,7 +180,7 @@ static inline int parse_iv2(const unsigned char *p, const unsigned char **q)
 	return result;
 }
 
-static inline int parse_iv(const unsigned char *p)
+static inline long parse_iv(const unsigned char *p)
 {
 	return parse_iv2(p, NULL);
 }
@@ -213,7 +213,7 @@ static inline size_t parse_uiv(const unsigned char *p)
 static inline int process_nested_data(UNSERIALIZE_PARAMETER, HashTable *ht, int elements)
 {
 	while (elements-- > 0) {
-		zval *key, *data, *old_data;
+		zval *key, *data, **old_data;
 
 		ALLOC_INIT_ZVAL(key);
 

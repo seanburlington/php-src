@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.107 2002/09/11 22:40:56 sterling Exp $ */
+/* $Id: filestat.c,v 1.108 2002/09/11 23:10:58 edink Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -570,7 +570,7 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 	}
 
 #ifndef PHP_WIN32
-#if VIRTUAL_DIR
+#ifdef VIRTUAL_DIR
 	do {
 		char *tmpname;
 

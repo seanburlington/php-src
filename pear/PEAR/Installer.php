@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.53 2002/04/29 06:20:42 ssb Exp $
+// $Id: Installer.php,v 1.54 2002/05/03 00:01:54 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -229,10 +229,10 @@ class PEAR_Installer extends PEAR_Common
         }
         if (!OS_WINDOWS) {
             if ($atts['role'] == 'script') {
-                $mode = 0755;
+                $mode = 0777 & ~$this->config->get('umask');
                 $this->log(2, "+ chmod +x $dest_file");
             } else {
-                $mode = 0644;
+                $mode = 0666 & ~$this->config->get('umask');
             }
             if (!@chmod($dest_file, $mode)) {
                 $this->log(0, "failed to change mode of $dest_file");

@@ -16,13 +16,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_browscap.h,v 1.6 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: php_browscap.h,v 1.7 2001/07/30 01:56:37 zeev Exp $ */
 
 #ifndef PHP_BROWSCAP_H
 #define PHP_BROWSCAP_H
 
-extern PHP_MINIT_FUNCTION(browscap);
-extern PHP_MSHUTDOWN_FUNCTION(browscap);
+PHP_MINIT_FUNCTION(browscap);
+PHP_MSHUTDOWN_FUNCTION(browscap);
 
 PHP_FUNCTION(get_browser);
 

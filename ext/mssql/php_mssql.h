@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.15 2001/07/28 11:36:00 zeev Exp $ */
+/* $Id: php_mssql.h,v 1.16 2001/07/30 01:56:30 zeev Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -50,10 +50,10 @@
 extern zend_module_entry mssql_module_entry;
 #define mssql_module_ptr &mssql_module_entry
 
-extern PHP_MINIT_FUNCTION(mssql);
-extern PHP_MSHUTDOWN_FUNCTION(mssql);
-extern PHP_RINIT_FUNCTION(mssql);
-extern PHP_RSHUTDOWN_FUNCTION(mssql);
+PHP_MINIT_FUNCTION(mssql);
+PHP_MSHUTDOWN_FUNCTION(mssql);
+PHP_RINIT_FUNCTION(mssql);
+PHP_RSHUTDOWN_FUNCTION(mssql);
 PHP_MINFO_FUNCTION(mssql);
 
 PHP_FUNCTION(mssql_connect);

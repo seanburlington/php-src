@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.54 2001/07/28 11:36:21 zeev Exp $ */
+/* $Id: php_sybase_ct.c,v 1.55 2001/07/30 01:56:39 zeev Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -149,7 +149,7 @@ static void _close_sybase_link(zend_rsrc_list_entry *rsrc)
 
 	sybase_ptr->valid = 0;
 
-	zend_hash_apply(&EG(regular_list),(int (*)(void *))_clean_invalid_results);
+	zend_hash_apply(&EG(regular_list), (apply_func_t) _clean_invalid_results);
 
 	/* Non-persistent connections will always be connected or we wouldn't
 	 * get here, but since we want to check the death status anyway

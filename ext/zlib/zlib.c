@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.85 2001/07/28 11:36:26 zeev Exp $ */
+/* $Id: zlib.c,v 1.86 2001/07/30 01:56:41 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -158,8 +158,6 @@ static void php_zlib_init_globals(php_zlib_globals *zlib_globals_p TSRMLS_DC)
  */
 PHP_MINIT_FUNCTION(zlib)
 {
-	TSRMLS_FETCH();
-
 #ifdef ZTS
 	ts_allocate_id(&zlib_globals_id, sizeof(php_zlib_globals), (ts_allocate_ctor) php_zlib_init_globals, NULL);
 #else

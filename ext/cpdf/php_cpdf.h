@@ -15,7 +15,7 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_cpdf.h,v 1.9 2001/06/19 21:25:52 sbergmann Exp $ */
+/* $Id: php_cpdf.h,v 1.10 2001/07/30 01:56:21 zeev Exp $ */
 
 #ifndef PHP_CPDF_H
 #define PHP_CPDF_H
@@ -34,10 +34,10 @@
 extern zend_module_entry cpdf_module_entry;
 #define cpdf_module_ptr &cpdf_module_entry
 
-extern PHP_MINFO_FUNCTION(cpdf);
-extern PHP_MINIT_FUNCTION(cpdf);
-extern PHP_RINIT_FUNCTION(cpdf);
-extern PHP_MSHUTDOWN_FUNCTION(cpdf);
+PHP_MINFO_FUNCTION(cpdf);
+PHP_MINIT_FUNCTION(cpdf);
+PHP_RINIT_FUNCTION(cpdf);
+PHP_MSHUTDOWN_FUNCTION(cpdf);
 PHP_FUNCTION(cpdf_global_set_document_limits);
 PHP_FUNCTION(cpdf_set_creator);
 PHP_FUNCTION(cpdf_set_title);

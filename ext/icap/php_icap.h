@@ -1,4 +1,4 @@
-/* $Id: php_icap.h,v 1.5 2000/07/03 00:41:15 sas Exp $ */
+/* $Id: php_icap.h,v 1.6 2001/07/30 01:56:27 zeev Exp $ */
 
 #ifndef PHP_ICAP_H
 #define PHP_ICAP_H
@@ -9,7 +9,7 @@
 #include "build-defs.h"
 #endif
 
-extern PHP_MINIT_FUNCTION(icap);
+PHP_MINIT_FUNCTION(icap);
 PHP_MINFO_FUNCTION(icap);
 
 /* Functions accessable to PHP */

@@ -16,12 +16,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pack.h,v 1.9 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: pack.h,v 1.10 2001/07/30 01:56:37 zeev Exp $ */
 
 #ifndef PACK_H
 #define PACK_H
 
-extern PHP_MINIT_FUNCTION(pack);
+PHP_MINIT_FUNCTION(pack);
 PHP_FUNCTION(pack);
 PHP_FUNCTION(unpack);
 

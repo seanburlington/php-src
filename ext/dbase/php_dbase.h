@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dbase.h,v 1.7 2001/02/26 06:06:53 andi Exp $ */
+/* $Id: php_dbase.h,v 1.8 2001/07/30 01:56:21 zeev Exp $ */
 
 #ifndef PHP_DBASE_H
 #define PHP_DBASE_H
@@ -24,7 +24,7 @@
 extern zend_module_entry dbase_module_entry;
 #define dbase_module_ptr &dbase_module_entry
 
-extern PHP_MINIT_FUNCTION(dbase);
+PHP_MINIT_FUNCTION(dbase);
 PHP_FUNCTION(dbase_open);
 PHP_FUNCTION(dbase_create);
 PHP_FUNCTION(dbase_close);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_icap.c,v 1.24 2001/06/06 14:32:23 rasmus Exp $ */
+/* $Id: php_icap.c,v 1.25 2001/07/30 01:56:26 zeev Exp $ */
 
 #define ICAP1
 
@@ -130,9 +130,7 @@ PHP_MINFO_FUNCTION(icap)
 
 PHP_MINIT_FUNCTION(icap)
 {
-
     le_icap = zend_register_list_destructors_ex(cal_close_it, NULL, "icap", module_number);
-
     return SUCCESS;
 }
 

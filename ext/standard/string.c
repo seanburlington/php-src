@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.208 2001/07/28 11:36:18 zeev Exp $ */
+/* $Id: string.c,v 1.209 2001/07/30 01:56:37 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -151,7 +151,6 @@ struct lconv *localeconv_r(struct lconv *out)
 PHP_MINIT_FUNCTION(localeconv)
 {
 	locale_mutex = tsrm_mutex_alloc();
-
 	return SUCCESS;
 }
 /* }}} */

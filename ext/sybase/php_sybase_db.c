@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.22 2001/07/28 11:36:20 zeev Exp $ */
+/* $Id: php_sybase_db.c,v 1.23 2001/07/30 01:56:38 zeev Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -177,7 +177,7 @@ static void _close_sybase_link(zend_rsrc_list_entry *rsrc)
       will *not* be in a consistent state. thies@thieso.net
     */
 
-	zend_hash_apply(&EG(regular_list),(int (*)(void *))_clean_invalid_results);
+	zend_hash_apply(&EG(regular_list), (apply_func_t) _clean_invalid_results);
 	dbclose(sybase_ptr->link);
 	dbloginfree(sybase_ptr->login);
 	efree(sybase_ptr);

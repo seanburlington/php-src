@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdf.h,v 1.17 2001/07/28 11:36:07 zeev Exp $ */
+/* $Id: php_pdf.h,v 1.18 2001/07/30 01:56:35 zeev Exp $ */
 
 #ifndef PHP_PDF_H
 #define PHP_PDF_H
@@ -32,9 +32,9 @@
 extern zend_module_entry pdf_module_entry;
 #define pdf_module_ptr &pdf_module_entry
 
-extern PHP_MINFO_FUNCTION(pdf);
-extern PHP_MINIT_FUNCTION(pdf);
-extern PHP_MSHUTDOWN_FUNCTION(pdf);
+PHP_MINFO_FUNCTION(pdf);
+PHP_MINIT_FUNCTION(pdf);
+PHP_MSHUTDOWN_FUNCTION(pdf);
 PHP_FUNCTION(pdf_new);		/* new function */
 PHP_FUNCTION(pdf_delete);	/* new function */
 PHP_FUNCTION(pdf_open_file);

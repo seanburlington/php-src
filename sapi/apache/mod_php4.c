@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.110 2001/07/28 11:36:30 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.111 2001/07/30 01:56:43 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -521,7 +521,7 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 
 		per_dir_conf = (HashTable *) get_module_config(r->per_dir_config, &php4_module);
 		if (per_dir_conf) {
-			zend_hash_apply((HashTable *) per_dir_conf, (int (*)(void *)) php_apache_alter_ini_entries);
+			zend_hash_apply((HashTable *) per_dir_conf, (apply_func_t) php_apache_alter_ini_entries);
 		}
 
 		/* If PHP parser engine has been turned off with an "engine off"

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: velocis.c,v 1.25 2001/05/24 10:07:15 ssb Exp $ */
+/* $Id: velocis.c,v 1.26 2001/07/30 01:56:33 zeev Exp $ */
 
 /*
  * TODO:
@@ -104,6 +104,7 @@ static void _free_velocis_result(zend_rsrc_list_entry *rsrc)
 PHP_MINIT_FUNCTION(velocis)
 {
 	SQLAllocEnv(&henv);
+
 	if ( cfg_get_long("velocis.max_links",&php_velocis_module.max_links) == FAILURE ) {
 		php_velocis_module.max_links = -1;
 	}

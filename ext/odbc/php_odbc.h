@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.39 2001/07/28 11:36:04 zeev Exp $ */
+/* $Id: php_odbc.h,v 1.40 2001/07/30 01:56:33 zeev Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -186,10 +186,10 @@ extern zend_module_entry odbc_module_entry;
 
 
 /* user functions */
-extern PHP_MINIT_FUNCTION(odbc);
-extern PHP_MSHUTDOWN_FUNCTION(odbc);
-extern PHP_RINIT_FUNCTION(odbc);
-extern PHP_RSHUTDOWN_FUNCTION(odbc);
+PHP_MINIT_FUNCTION(odbc);
+PHP_MSHUTDOWN_FUNCTION(odbc);
+PHP_RINIT_FUNCTION(odbc);
+PHP_RSHUTDOWN_FUNCTION(odbc);
 PHP_MINFO_FUNCTION(odbc);
 
 PHP_FUNCTION(odbc_error);

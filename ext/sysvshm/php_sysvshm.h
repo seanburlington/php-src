@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sysvshm.h,v 1.8 2001/02/26 06:07:25 andi Exp $ */
+/* $Id: php_sysvshm.h,v 1.9 2001/07/30 01:56:40 zeev Exp $ */
 
 #ifndef PHP_SYSVSHM_H
 #define PHP_SYSVSHM_H
@@ -68,9 +68,9 @@ PHP_FUNCTION(shm_remove);
 PHP_FUNCTION(shm_put_var);
 PHP_FUNCTION(shm_get_var);
 PHP_FUNCTION(shm_remove_var);
-extern int php_put_shm_data(sysvshm_chunk_head *ptr,long key,char *data, long len);
-extern long php_check_shm_data(sysvshm_chunk_head *ptr, long key);
-extern int php_remove_shm_data(sysvshm_chunk_head *ptr, long shm_varpos);
+int php_put_shm_data(sysvshm_chunk_head *ptr,long key,char *data, long len);
+long php_check_shm_data(sysvshm_chunk_head *ptr, long key);
+int php_remove_shm_data(sysvshm_chunk_head *ptr, long shm_varpos);
 
 extern sysvshm_module php_sysvshm;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.31 2001/07/05 21:23:28 wez Exp $ */
+/* $Id: php_gd.h,v 1.32 2001/07/30 01:56:24 zeev Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -62,8 +62,8 @@ extern zend_module_entry gd_module_entry;
 
 /* gd.c functions */
 PHP_MINFO_FUNCTION(gd);
-extern PHP_MINIT_FUNCTION(gd);
-extern PHP_MSHUTDOWN_FUNCTION(gd);
+PHP_MINIT_FUNCTION(gd);
+PHP_MSHUTDOWN_FUNCTION(gd);
 
 #ifndef HAVE_GDIMAGECOLORRESOLVE
 static int gdImageColorResolve(gdImagePtr, int, int, int);

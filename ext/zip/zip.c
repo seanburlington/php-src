@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zip.c,v 1.8 2001/06/06 20:30:58 sterling Exp $ */
+/* $Id: zip.c,v 1.9 2001/07/30 01:56:41 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -100,7 +100,6 @@ PHP_MINIT_FUNCTION(zip)
 {
 	le_zip_dir   = zend_register_list_destructors_ex(php_zip_free_dir, NULL, le_zip_dir_name, module_number);
 	le_zip_entry = zend_register_list_destructors_ex(php_zip_free_entry, NULL, le_zip_entry_name, module_number);
-
 	return(SUCCESS);
 }
 /* }}} */

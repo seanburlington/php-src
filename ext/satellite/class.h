@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: class.h,v 1.4 2001/02/26 06:07:15 andi Exp $
+ * $Id: class.h,v 1.5 2001/07/30 01:56:36 zeev Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -168,7 +168,7 @@ zend_bool name##_Init(int module_number)	\
 		putproperty		\
 		);	\
 \
-	zend_register_internal_class(&name##_class_entry);\
+	zend_register_internal_class(&name##_class_entry TSRMLS_CC);\
 	return TRUE;\
 }
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.66 2001/07/28 11:36:05 zeev Exp $ */
+/* $Id: oracle.c,v 1.67 2001/07/30 01:56:34 zeev Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -317,7 +317,6 @@ static void php_ora_init_globals(php_ora_globals *ora_globals_p TSRMLS_DC)
  */
 PHP_MINIT_FUNCTION(oracle)
 {
-
 #ifdef ZTS
 	ts_allocate_id(&ora_globals_id, sizeof(php_ora_globals), (ts_allocate_ctor) php_ora_init_globals, NULL);
 #else

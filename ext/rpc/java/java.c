@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.49 2001/07/28 11:35:57 zeev Exp $ */
+/* $Id: java.c,v 1.50 2001/07/30 01:56:28 zeev Exp $ */
 
 /*
  * This module implements Zend OO syntax overloading support for Java
@@ -604,13 +604,14 @@ static void alloc_java_globals_ctor(php_java_globals *java_globals TSRMLS_DC) {
 }
 #endif
 
-PHP_MINIT_FUNCTION(java) {
+PHP_MINIT_FUNCTION(java)
+{
   INIT_OVERLOADED_CLASS_ENTRY(java_class_entry, "java", NULL,
     java_call_function_handler,
     java_get_property_handler,
     java_set_property_handler);
 
-  zend_register_internal_class(&java_class_entry);
+  zend_register_internal_class(&java_class_entry TSRMLS_CC);
 
   le_jobject = zend_register_list_destructors_ex(_php_java_destructor, NULL, "java", module_number);
 

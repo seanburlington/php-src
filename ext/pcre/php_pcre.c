@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.103 2001/07/28 11:36:06 zeev Exp $ */
+/* $Id: php_pcre.c,v 1.104 2001/07/30 01:56:34 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -661,7 +661,7 @@ static int preg_do_eval(char *eval_str, int eval_str_len, char *subject,
 	smart_str_appendl(&code, segment, walk - segment);
 	smart_str_0(&code);
 
-	compiled_string_description = zend_make_compiled_string_description("regexp code");
+	compiled_string_description = zend_make_compiled_string_description("regexp code" TSRMLS_CC);
 	/* Run the code */
 	if (zend_eval_string(code.c, &retval, compiled_string_description TSRMLS_CC) == FAILURE) {
 		efree(compiled_string_description);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hyperwave.h,v 1.15 2001/07/28 11:35:52 zeev Exp $ */
+/* $Id: php_hyperwave.h,v 1.16 2001/07/30 01:56:26 zeev Exp $ */
 
 #ifndef PHP_HYPERWAVE_H
 #define PHP_HYPERWAVE_H
@@ -65,8 +65,8 @@ typedef struct {
         char *bodytag;
 } hw_document;
 
-extern PHP_MINIT_FUNCTION(hw);
-extern PHP_MSHUTDOWN_FUNCTION(hw);
+PHP_MINIT_FUNCTION(hw);
+PHP_MSHUTDOWN_FUNCTION(hw);
 PHP_MINFO_FUNCTION(hw);
 
 PHP_FUNCTION(hw_connect);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.21 2001/07/28 11:35:56 zeev Exp $ */
+/* $Id: php_interbase.h,v 1.22 2001/07/30 01:56:28 zeev Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -34,10 +34,10 @@ extern zend_module_entry ibase_module_entry;
 #define PHP_IBASE_API
 #endif
 
-extern PHP_MINIT_FUNCTION(ibase);
-extern PHP_RINIT_FUNCTION(ibase);
-extern PHP_MSHUTDOWN_FUNCTION(ibase);
-extern PHP_RSHUTDOWN_FUNCTION(ibase);
+PHP_MINIT_FUNCTION(ibase);
+PHP_RINIT_FUNCTION(ibase);
+PHP_MSHUTDOWN_FUNCTION(ibase);
+PHP_RSHUTDOWN_FUNCTION(ibase);
 PHP_MINFO_FUNCTION(ibase);
 
 PHP_FUNCTION(ibase_connect);

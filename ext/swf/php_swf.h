@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_swf.h,v 1.14 2001/07/28 11:36:19 zeev Exp $ */
+/* $Id: php_swf.h,v 1.15 2001/07/30 01:56:38 zeev Exp $ */
 
 #ifndef PHP_SWF_H
 #define PHP_SWF_H
@@ -29,9 +29,9 @@ extern zend_module_entry swf_module_entry;
 PHP_MINIT_FUNCTION(swf);
 PHP_MINFO_FUNCTION(swf);
 PHP_RINIT_FUNCTION(swf);
-extern void php_swf_define(INTERNAL_FUNCTION_PARAMETERS, int opt);
-extern void php_swf_fill_bitmap(INTERNAL_FUNCTION_PARAMETERS, int opt);
-extern void php_swf_geo_same(INTERNAL_FUNCTION_PARAMETERS, int opt);
+void php_swf_define(INTERNAL_FUNCTION_PARAMETERS, int opt);
+void php_swf_fill_bitmap(INTERNAL_FUNCTION_PARAMETERS, int opt);
+void php_swf_geo_same(INTERNAL_FUNCTION_PARAMETERS, int opt);
 PHP_FUNCTION(swf_openfile);
 PHP_FUNCTION(swf_closefile);
 PHP_FUNCTION(swf_labelframe);

@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_recode.h,v 1.8 2001/07/28 11:36:11 zeev Exp $ */
+/* $Id: php_recode.h,v 1.9 2001/07/30 01:56:35 zeev Exp $ */
 
 #ifndef PHP_RECODE_H
 #define PHP_RECODE_H
@@ -54,12 +54,12 @@
 extern zend_module_entry recode_module_entry;
 #define phpext_recode_ptr &recode_module_entry
 
-extern PHP_MINIT_FUNCTION(recode);
-extern PHP_MSHUTDOWN_FUNCTION(recode);
-extern PHP_MINFO_FUNCTION(recode);
+PHP_MINIT_FUNCTION(recode);
+PHP_MSHUTDOWN_FUNCTION(recode);
+PHP_MINFO_FUNCTION(recode);
 
-extern PHP_FUNCTION(recode_string);
-extern PHP_FUNCTION(recode_file);
+PHP_FUNCTION(recode_string);
+PHP_FUNCTION(recode_file);
 
 typedef struct {
 	RECODE_OUTER   outer;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.14 2001/07/03 12:16:02 sterling Exp $ */
+/* $Id: sablot.c,v 1.15 2001/07/30 01:56:40 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -149,7 +149,6 @@ static SchemeHandler scheme_handler = {
 PHP_MINIT_FUNCTION(xslt)
 {
 	le_xslt = zend_register_list_destructors_ex(free_processor, NULL, le_xslt_name, module_number);
-
 	return SUCCESS;
 }
 /* }}} */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.387 2001/07/28 11:36:27 zeev Exp $ */
+/* $Id: main.c,v 1.388 2001/07/30 01:56:42 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -700,7 +700,7 @@ void php_request_shutdown(void *dummy)
 	} zend_end_try();
 	
 	if (PG(modules_activated)) {
-		zend_deactivate_modules();
+		zend_deactivate_modules(TSRMLS_C);
 	}
 		
 	zend_deactivate(TSRMLS_C);

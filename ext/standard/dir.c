@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.73 2001/07/29 08:14:00 andi Exp $ */
+/* $Id: dir.c,v 1.74 2001/07/30 01:56:37 zeev Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -122,7 +122,7 @@ PHP_MINIT_FUNCTION(dir)
 	le_dirp = zend_register_list_destructors_ex(_dir_dtor, NULL, "dir", module_number);
 
 	INIT_CLASS_ENTRY(dir_class_entry, "Directory", php_dir_class_functions);
-	dir_class_entry_ptr = zend_register_internal_class(&dir_class_entry);
+	dir_class_entry_ptr = zend_register_internal_class(&dir_class_entry TSRMLS_CC);
 
 #ifdef ZTS
 	ts_allocate_id(&dir_globals_id, sizeof(php_dir_globals), NULL, NULL);

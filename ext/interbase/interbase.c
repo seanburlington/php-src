@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.59 2001/07/28 11:35:56 zeev Exp $ */
+/* $Id: interbase.c,v 1.60 2001/07/30 01:56:28 zeev Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -494,8 +494,6 @@ static void php_ibase_init_globals(TSRMLS_D)
 
 PHP_MINIT_FUNCTION(ibase)
 {
-	TSRMLS_FETCH();
-
 	ZEND_INIT_MODULE_GLOBALS(ibase, php_ibase_init_globals, NULL);
 
 	REGISTER_INI_ENTRIES();
@@ -585,7 +583,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.59 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.60 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

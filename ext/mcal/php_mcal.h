@@ -1,4 +1,4 @@
-/* $Id: php_mcal.h,v 1.9 2000/07/03 00:41:16 sas Exp $ */
+/* $Id: php_mcal.h,v 1.10 2001/07/30 01:56:29 zeev Exp $ */
 
 #ifndef PHP_MCAL_H
 #define PHP_MCAL_H
@@ -16,11 +16,11 @@ extern zend_module_entry php_mcal_module_entry;
 #define phpext_mcal_ptr php_mcal_module_ptr
 
 #ifdef ZEND_VERSION
-extern PHP_MINIT_FUNCTION(mcal);
+PHP_MINIT_FUNCTION(mcal);
 PHP_MINFO_FUNCTION(mcal);
 #else
-extern int PHP_MINIT_FUNCTION(INIT_FUNC_ARGS);
-extern void PHP_MINFO_FUNCTION(void);
+int PHP_MINIT_FUNCTION(INIT_FUNC_ARGS);
+void PHP_MINFO_FUNCTION(void);
 #endif
 
 

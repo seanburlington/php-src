@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.14 2001/07/28 11:36:11 zeev Exp $ */
+/* $Id: recode.c,v 1.15 2001/07/30 01:56:35 zeev Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -74,8 +74,6 @@ ZEND_GET_MODULE(recode)
 
 PHP_MINIT_FUNCTION(recode)
 {
-	TSRMLS_FETCH();
-
 	ReSG(outer)	  = recode_new_outer(true);
 	if (ReSG(outer) == NULL)
 		return FAILURE;
@@ -101,7 +99,7 @@ PHP_MINFO_FUNCTION(recode)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.14 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.15 $");
 	php_info_print_table_end();
 
 }

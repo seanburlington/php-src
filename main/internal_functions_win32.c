@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.44 2001/07/29 22:15:41 hirokawa Exp $ */
+/* $Id: internal_functions_win32.c,v 1.45 2001/07/30 01:56:42 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -60,7 +60,7 @@
 #include "ext/xml/php_xml.h"
 #include "ext/wddx/php_wddx.h"
 #include "ext/mysql/php_mysql.h"
-#include "ext/mysql/mbstring.h"
+#include "ext/mbstring/mbstring.h"
 /* }}} */
 
 /* {{{ php_builtin_extensions[]

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.56 2001/04/16 21:24:38 ssb Exp $
+// $Id: DB.php,v 1.57 2001/04/16 22:16:38 ssb Exp $
 //
 // Database independent query interface.
 //
@@ -283,8 +283,9 @@ class DB
     }
 
     /**
-     * Tell whether a query is a data manipulation query (insert, update
-     * or delete).
+     * Tell whether a query is a data manipulation query (insert,
+     * update or delete) or a data definition query (create, drop,
+     * alter, grant, revoke).
      *
      * @access public
      *
@@ -294,7 +295,7 @@ class DB
      */
     function isManip($query)
     {
-        if (preg_match('/^\s*(INSERT|UPDATE|DELETE|REPLACE)\s+/i', $query)) {
+        if (preg_match('/^\s*"?(INSERT|UPDATE|DELETE|REPLACE|CREATE|DROP|ALTER|GRANT|REVOKE)\s+/i', $query)) {
             return true;
         }
         return false;

@@ -22,7 +22,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.41 2000/02/21 14:50:40 chagenbu Exp $ */
+/* $Id: imap.c,v 1.42 2000/02/22 16:46:40 eschmid Exp $ */
 
 #define IMAP41
 
@@ -1495,7 +1495,6 @@ PHP_FUNCTION(imap_listscan)
 /* }}} */
 
 /* {{{ proto object imap_check(int stream_id)
-
    Get mailbox properties */
 PHP_FUNCTION(imap_check)
 {
@@ -1536,7 +1535,7 @@ PHP_FUNCTION(imap_check)
 
 /* }}} */
 
-/* {{{ proto int imap_delete(int stream_id, int msg_no [, int flags ])
+/* {{{ proto int imap_delete(int stream_id, int msg_no [, int flags])
    Mark a message for deletion */
 PHP_FUNCTION(imap_delete)
 {

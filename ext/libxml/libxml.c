@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.30 2005/02/28 08:13:35 pajoye Exp $ */
+/* $Id: libxml.c,v 1.31 2005/02/28 08:16:47 pajoye Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -530,6 +530,7 @@ PHP_MINIT_FUNCTION(libxml)
 	LIBXML(error_buffer).c = NULL;
 	LIBXML(error_list) = NULL;
 #endif
+
 	REGISTER_LONG_CONSTANT("LIBXML_VERSION",			LIBXML_VERSION,			CONST_CS | CONST_PERSISTENT);
 	REGISTER_STRING_CONSTANT("LIBXML_DOTTED_VERSION",	LIBXML_DOTTED_VERSION,	CONST_CS | CONST_PERSISTENT);
 

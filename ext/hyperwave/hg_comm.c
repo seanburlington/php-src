@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hg_comm.c,v 1.48 2001/10/24 08:31:53 steinm Exp $ */
+/* $Id: hg_comm.c,v 1.49 2001/10/24 09:06:31 sniper Exp $ */
 
 /* #define HW_DEBUG */
 
@@ -803,7 +803,7 @@ char *fnInsAnchorsIntoText(char *text, DLIST *pAnchorList, char **bodytag, char 
 	}
 	snprintf(istr, BUFFERLEN, "<BODY %s>", bgstr);
 	*bodytag = estrdup(istr);
-//	if(scriptname != urlprefix) efree(scriptname);
+/*	if(scriptname != urlprefix) efree(scriptname); */
 	if(scriptname != NULL) efree(scriptname);
 	return(newtext);
 }

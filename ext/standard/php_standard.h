@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_standard.h,v 1.12 2001/12/11 15:30:35 sebastian Exp $ */
+/* $Id: php_standard.h,v 1.13 2002/01/09 23:47:41 jimw Exp $ */
 
 #include "basic_functions.h"
 #include "php_math.h"
@@ -47,7 +47,6 @@
 #include "uniqid.h"
 #include "php_var.h"
 #include "quot_print.h"
-#include "type.h"
 #include "dl.h"
 #include "php_crypt.h"
 #include "head.h"
@@ -58,6 +57,7 @@
 #include "php_assert.h"
 #include "php_versioning.h"
 #include "php_ftok.h"
+#include "php_type.h"
 
 #define phpext_standard_ptr basic_functions_module_ptr
 

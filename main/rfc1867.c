@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.93 2002/01/04 22:57:36 jon Exp $ */
+/* $Id: rfc1867.c,v 1.94 2002/01/09 23:47:18 jimw Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -31,7 +31,6 @@
 #include "php_globals.h"
 #include "php_variables.h"
 #include "rfc1867.h"
-#include "ext/standard/type.h"
 
 
 #define SAFE_RETURN { \

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.411 2003/01/02 19:20:55 iliaa Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.412 2003/01/09 10:03:26 zeev Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -41,8 +41,8 @@ done
 AC_CANONICAL_HOST
 AC_CONFIG_HEADER(main/php_config.h)
 
-MAJOR_VERSION=4
-MINOR_VERSION=4
+MAJOR_VERSION=5
+MINOR_VERSION=0
 RELEASE_VERSION=0
 EXTRA_VERSION="-dev"
 VERSION="$MAJOR_VERSION.$MINOR_VERSION.$RELEASE_VERSION$EXTRA_VERSION"

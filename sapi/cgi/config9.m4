@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.1.2.2 2002/12/09 17:25:01 msopacua Exp $
+dnl $Id: config9.m4,v 1.1.2.3 2002/12/19 16:55:57 edink Exp $
 dnl
 
 AC_ARG_ENABLE(cgi,
@@ -88,10 +88,10 @@ if test "$PHP_SAPI" = "default"; then
     PHP_ADD_MAKEFILE_FRAGMENT($abs_srcdir/sapi/cgi/Makefile.frag)
     case $host_alias in
       *cygwin* )
-        SAPI_CGI_PATH=sapi/cgi/php-cgi.exe
+        SAPI_CGI_PATH=sapi/cgi/php.exe
         ;;
       * )
-        SAPI_CGI_PATH=sapi/cgi/php-cgi
+        SAPI_CGI_PATH=sapi/cgi/php
         ;;
     esac
     PHP_SUBST(SAPI_CGI_PATH)
@@ -147,7 +147,7 @@ if test "$PHP_SAPI" = "default"; then
     AC_DEFINE_UNQUOTED(PHP_FCGI_STATIC, $PHP_FCGI_STATIC, [ ])
     AC_MSG_RESULT($PHP_ENABLE_FASTCGI)
 
-    INSTALL_IT="\$(INSTALL) -m 0755 \$(SAPI_CGI_PATH) \$(INSTALL_ROOT)\$(bindir)/php-cgi"
+    INSTALL_IT="\$(INSTALL) -m 0755 \$(SAPI_CGI_PATH) \$(INSTALL_ROOT)\$(bindir)/php"
     PHP_SELECT_SAPI(cgi, program, $PHP_FCGI_FILES cgi_main.c getopt.c, -I$PHP_FCGI_INCLUDE,'$(SAPI_CGI_PATH)')
 
     case $host_alias in

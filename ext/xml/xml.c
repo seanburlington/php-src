@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.145 2004/01/08 08:17:45 andi Exp $ */
+/* $Id: xml.c,v 1.146 2004/01/16 19:11:33 sniper Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -511,7 +511,7 @@ static XML_Char *xml_utf8_encode(const char *s, int len, int *newlen, const XML_
 {
 	int pos = len;
 	char *newbuf;
-	unsigned short c;
+	unsigned int c;
 	unsigned short (*encoder)(unsigned char) = NULL;
 	xml_encoding *enc = xml_get_encoding(encoding);
 

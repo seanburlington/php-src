@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.85 2002/02/01 16:36:32 cox Exp $
+// $Id: DB.php,v 1.86 2002/02/12 18:29:27 jan Exp $
 //
 // Database independent query interface.
 //
@@ -58,6 +58,8 @@ define("DB_ERROR_VALUE_COUNT_ON_ROW", -22);
 define("DB_ERROR_INVALID_DSN",        -23);
 define("DB_ERROR_CONNECT_FAILED",     -24);
 define("DB_ERROR_EXTENSION_NOT_FOUND",-25);
+define("DB_ERROR_NOSUCHDB",           -25);
+define("DB_ERROR_ACCESS_VIOLATION",   -26);
 
 /*
  * Warnings are not detected as errors by DB::isError(), and are not
@@ -385,7 +387,9 @@ class DB
                 DB_WARNING                  => 'unknown warning',
                 DB_WARNING_READ_ONLY        => 'read only',
                 DB_ERROR_NEED_MORE_DATA     => 'insufficient data supplied',
-                DB_ERROR_EXTENSION_NOT_FOUND=> 'extension not found'
+                DB_ERROR_EXTENSION_NOT_FOUND=> 'extension not found',
+                DB_ERROR_NOSUCHDB           => 'no such database',                
+                DB_ERROR_ACCESS_VIOLATION   => 'insufficient permissions'                
             );
         }
 

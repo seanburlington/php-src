@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_tidy.h,v 1.3 2003/08/06 00:01:22 john Exp $ */
+/* $Id: php_tidy.h,v 1.4 2003/09/14 00:45:51 john Exp $ */
 
 #ifndef PHP_TIDY_H
 #define PHP_TIDY_H
@@ -113,6 +113,8 @@ PHP_FUNCTION(tidy_load_config_enc);
 PHP_FUNCTION(tidy_set_encoding);
 PHP_FUNCTION(tidy_save_config);
 
+#ifdef ZEND_ENGINE_2
+
 PHP_FUNCTION(tidy_get_root);
 PHP_FUNCTION(tidy_get_html);
 PHP_FUNCTION(tidy_get_head);
@@ -154,6 +156,8 @@ zval *tidy_read_dim(zval *object, zval *offset TSRMLS_DC);
 zend_bool _php_tidy_attr_call_method(char *method, INTERNAL_FUNCTION_PARAMETERS);
 zend_bool _php_tidy_node_call_method(char *method, INTERNAL_FUNCTION_PARAMETERS);
 void _php_tidy_init_prop_hashtables();
+
+#endif
 
 /* resource dtor */
 void dtor_TidyDoc(zend_rsrc_list_entry * TSRMLS_DC);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_image.h,v 1.18 2002/06/24 19:19:08 helly Exp $ */
+/* $Id: php_image.h,v 1.19 2002/06/24 19:36:26 helly Exp $ */
 
 #ifndef PHP_IMAGE_H
 #define PHP_IMAGE_H
@@ -46,9 +46,11 @@ typedef enum
   IMAGE_FILETYPE_JB2,
   IMAGE_FILETYPE_SWC,
   IMAGE_FILETYPE_IFF,
-/* WHEN EXTENDING: PLEASE ALSO REGISTER IN ext/exif/exif.c:PHP_MINIT_FUNCTION(exif) */
+/* WHEN EXTENDING: PLEASE ALSO REGISTER IN image.c:PHP_MINIT_FUNCTION(imagetypes) */
 } image_filetype;
 /* }}} */
+
+PHP_MINIT_FUNCTION(imagetypes);
 
 PHPAPI int php_getimagetype(php_stream *stream, char *filetype TSRMLS_DC);
 

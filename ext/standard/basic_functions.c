@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.481 2002/06/23 00:43:11 helly Exp $ */
+/* $Id: basic_functions.c,v 1.482 2002/06/24 19:36:25 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -993,6 +993,7 @@ PHP_MINIT_FUNCTION(basic)
 	PHP_MINIT(proc_open) (INIT_FUNC_ARGS_PASSTHRU);
 
 	PHP_MINIT(user_streams) (INIT_FUNC_ARGS_PASSTHRU);
+	PHP_MINIT(imagetypes) (INIT_FUNC_ARGS_PASSTHRU);
 
 	php_register_url_stream_wrapper("http", &php_stream_http_wrapper TSRMLS_CC);
 	php_register_url_stream_wrapper("php", &php_stream_php_wrapper TSRMLS_CC);

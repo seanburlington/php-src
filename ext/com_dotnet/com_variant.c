@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_variant.c,v 1.9 2004/06/16 23:57:25 abies Exp $ */
+/* $Id: com_variant.c,v 1.10 2004/07/19 13:39:57 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -799,7 +799,8 @@ PHP_FUNCTION(variant_date_from_timestamp)
 	}
 
 	VariantInit(&res);
-	tmv = gmtime(&timestamp);
+	tzset();
+	tmv = localtime(&timestamp);
 	memset(&systime, 0, sizeof(systime));
 
 	systime.wDay = tmv->tm_mday;

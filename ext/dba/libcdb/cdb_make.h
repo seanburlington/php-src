@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cdb_make.h,v 1.1 2002/11/04 17:53:04 helly Exp $ */
+/* $Id: cdb_make.h,v 1.2 2002/11/19 01:06:41 edink Exp $ */
 
 /* incorporated from D.J.Bernstein's cdb-0.75 (http://cr.yp.to/cdb.html)*/
 
@@ -54,10 +54,10 @@ struct cdb_make {
 	php_stream * fp;
 };
 
-PHPAPI int cdb_make_start(struct cdb_make *, php_stream * TSRMLS_DC);
-PHPAPI int cdb_make_addbegin(struct cdb_make *, unsigned int, unsigned int TSRMLS_DC);
-PHPAPI int cdb_make_addend(struct cdb_make *, unsigned int, unsigned int, uint32 TSRMLS_DC);
-PHPAPI int cdb_make_add(struct cdb_make *, char *, unsigned int, char *, unsigned int TSRMLS_DC);
-PHPAPI int cdb_make_finish(struct cdb_make * TSRMLS_DC);
+int cdb_make_start(struct cdb_make *, php_stream * TSRMLS_DC);
+int cdb_make_addbegin(struct cdb_make *, unsigned int, unsigned int TSRMLS_DC);
+int cdb_make_addend(struct cdb_make *, unsigned int, unsigned int, uint32 TSRMLS_DC);
+int cdb_make_add(struct cdb_make *, char *, unsigned int, char *, unsigned int TSRMLS_DC);
+int cdb_make_finish(struct cdb_make * TSRMLS_DC);
 
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uint32.c,v 1.1 2002/11/04 17:53:04 helly Exp $ */
+/* $Id: uint32.c,v 1.2 2002/11/19 01:06:41 edink Exp $ */
 
 /* incorporated from D.J.Bernstein's cdb-0.75 (http://cr.yp.to/cdb.html)*/
 
@@ -29,7 +29,7 @@
 #include "uint32.h"
 
 /* {{{ uint32_pack */
-PHPAPI void uint32_pack(char *out, uint32 in)
+void uint32_pack(char *out, uint32 in)
 {
 	out[0] = in&0xff; in>>=8;
 	out[1] = in&0xff; in>>=8;
@@ -39,7 +39,7 @@ PHPAPI void uint32_pack(char *out, uint32 in)
 /* }}} */
 
 /* {{{ uint32_unpack */
-PHPAPI void uint32_unpack(const char *in, uint32 *out)
+void uint32_unpack(const char *in, uint32 *out)
 {
 	*out = (((uint32)(unsigned char)in[3])<<24) |
 	       (((uint32)(unsigned char)in[2])<<16) |

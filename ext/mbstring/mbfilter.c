@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.13 2001/08/25 09:21:43 wez Exp $ */
+/* $Id: mbfilter.c,v 1.14 2001/08/28 18:26:46 wez Exp $ */
 
 
 #include <stdlib.h>
@@ -4159,15 +4159,8 @@ mbfl_filt_conv_cp1252_wchar(int c, mbfl_convert_filter *filter)
 
 	if (c >= 0x80 && c < 0xa0) {
 		s = cp1252_ucs_table[c - 0x80];
-		if (s <= 0) {
-			s = c;
-			s &= MBFL_WCSPLANE_MASK;
-			s |= MBFL_WCSPLANE_8859_1;
-		}
 	} else {
 		s = c;
-		s &= MBFL_WCSGROUP_MASK;
-		s |= MBFL_WCSGROUP_THROUGH;
 	}
 
 	CK((*filter->output_function)(s, filter->data));

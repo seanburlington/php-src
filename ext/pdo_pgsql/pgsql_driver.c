@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.13 2004/05/25 14:07:26 iliaa Exp $ */
+/* $Id: pgsql_driver.c,v 1.14 2004/05/25 16:24:29 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -136,12 +136,18 @@ static long pgsql_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRM
 
 static int pgsql_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen  TSRMLS_DC)
 {
-	*quoted = emalloc(2*unquotedlen + 3);
+	unsigned char *escaped;
+
+	/* escapedlen returned by PQescapeBytea() accounts for trailing 0 */
+	escaped = PQescapeBytea(unquoted, unquotedlen, quotedlen);
+	*quotedlen += 1;
+	*quoted = emalloc(*quotedlen + 1);
+	memcpy((*quoted)+1, escaped, *quotedlen-2);
 	(*quoted)[0] = '\'';
-	*quotedlen = PQescapeString(*quoted + 1, unquoted, unquotedlen);
-	(*quoted)[*quotedlen + 1] = '\'';
-	(*quoted)[*quotedlen + 2] = '\0';
-	*quotedlen += 2;
+	(*quoted)[*quotedlen-1] = '\'';
+	(*quoted)[*quotedlen] = '\0';
+	PQfreemem(escaped);
+
 	return 1;
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.26 2003/08/05 10:29:02 zeev Exp $ */
+/* $Id: interface.c,v 1.27 2003/08/05 23:50:59 sniper Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -562,7 +562,7 @@ static size_t curl_write_header(char *data, size_t size, size_t nmemb, void *ctx
 			fci.params = argv;
 			fci.no_separation = 0;
 
-			error = zend_call_user_function(&fci, &t->fci_cache TSRMLS_CC);
+			error = zend_call_function(&fci, &t->fci_cache TSRMLS_CC);
 			if (error == FAILURE) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not call the CURLOPT_HEADERFUNCTION");
 				length = -1;

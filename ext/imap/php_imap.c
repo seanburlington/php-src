@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.142.2.20 2003/09/04 07:48:30 jon Exp $ */
+/* $Id: php_imap.c,v 1.142.2.21 2004/01/08 01:02:03 sniper Exp $ */
 
 #define IMAP41
 
@@ -553,6 +553,17 @@ PHP_MINIT_FUNCTION(imap)
 	REGISTER_LONG_CONSTANT("LATT_MARKED", LATT_MARKED, CONST_PERSISTENT | CONST_CS);
 	REGISTER_LONG_CONSTANT("LATT_UNMARKED", LATT_UNMARKED , CONST_PERSISTENT | CONST_CS);
 
+#ifdef LATT_REFERRAL
+	REGISTER_LONG_CONSTANT("LATT_REFERRAL", LATT_REFERRAL, CONST_PERSISTENT | CONST_CS);
+#endif
+
+#ifdef LATT_HASCHILDREN
+	REGISTER_LONG_CONSTANT("LATT_HASCHILDREN", LATT_HASCHILDREN, CONST_PERSISTENT | CONST_CS);
+#endif
+
+#ifdef LATT_HASNOCHILDREN
+	REGISTER_LONG_CONSTANT("LATT_HASNOCHILDREN", LATT_HASNOCHILDREN, CONST_PERSISTENT | CONST_CS);
+#endif
 
 	/* Sort functions */
 

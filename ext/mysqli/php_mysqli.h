@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.8 2003/02/16 15:56:57 iliaa Exp $ 
+  $Id: php_mysqli.h,v 1.9 2003/02/18 08:49:00 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -231,6 +231,7 @@ PHP_FUNCTION(mysqli_stmt_affected_rows);
 PHP_FUNCTION(mysqli_stmt_close);
 PHP_FUNCTION(mysqli_stmt_errno);
 PHP_FUNCTION(mysqli_stmt_error);
+PHP_FUNCTION(mysqli_stmt_store_result);
 PHP_FUNCTION(mysqli_store_result);
 PHP_FUNCTION(mysqli_thread_id);
 PHP_FUNCTION(mysqli_thread_safe);

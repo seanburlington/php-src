@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.6 2003/02/17 09:38:32 georg Exp $ 
+  $Id: mysqli_fe.c,v 1.7 2003/02/18 08:49:00 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -110,6 +110,7 @@ function_entry mysqli_functions[] = {
 	PHP_FE(mysqli_stmt_errno,							NULL)
 	PHP_FE(mysqli_stmt_error,							NULL)
 	PHP_FE(mysqli_store_result,							NULL)
+	PHP_FE(mysqli_stmt_store_result,					NULL)
 	PHP_FE(mysqli_thread_id,							NULL)
 	PHP_FE(mysqli_thread_safe,							NULL)
 	PHP_FE(mysqli_use_result,							NULL)
@@ -207,13 +208,14 @@ function_entry mysqli_result_methods[] = {
  * Every user visible function must have an entry in mysqli_stmt_functions[].
  */
 function_entry mysqli_stmt_methods[] = {
+	PHP_FALIAS(affected_rows,mysqli_stmt_affected_rows,NULL)
 	PHP_FALIAS(bind_param,mysqli_bind_param,NULL)
 	PHP_FALIAS(bind_result,mysqli_bind_result,NULL)
 	PHP_FALIAS(execute,mysqli_execute,NULL)
 	PHP_FALIAS(fetch,mysqli_fetch,NULL)
 	PHP_FALIAS(param_count,mysqli_param_count,NULL)
 	PHP_FALIAS(send_long_data,mysqli_send_long_data,NULL)
-	PHP_FALIAS(affected_rows,mysqli_stmt_affected_rows,NULL)
+	PHP_FALIAS(store_result,mysqli_stmt_store_result,NULL)
 	PHP_FALIAS(close,mysqli_stmt_close,NULL)
 	PHP_FALIAS(errno,mysqli_stmt_errno,NULL)
 	PHP_FALIAS(error,mysqli_stmt_error,NULL)

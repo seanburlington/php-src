@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.38 2001/12/15 14:22:59 hholzgra Exp $ */
+/* $Id: gettext.c,v 1.39 2002/08/07 11:50:49 yohgaki Exp $ */
 
 #include <stdio.h>
 #ifdef HAVE_CONFIG_H
@@ -291,8 +291,11 @@ PHP_FUNCTION(bind_textdomain_codeset)
 		
 		retval = bind_textdomain_codeset(Z_STRVAL_PP(domain), Z_STRVAL_PP(codeset));
 
+		if (!retval) {
+			RETURN_FALSE;
+		}
 		RETURN_STRING(retval, 1);
-	}	
+	}
 }
 /* }}} */
 #endif

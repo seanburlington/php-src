@@ -5,7 +5,7 @@ InterBase: BLOB test
 --POST--
 --GET--
 --FILE--
-<?php /* $Id: 004.phpt,v 1.11 2004/02/17 12:24:42 abies Exp $ */
+<?php /* $Id: 004.phpt,v 1.12 2004/02/17 12:53:54 abies Exp $ */
 
     require("interbase.inc");
     
@@ -30,7 +30,7 @@ InterBase: BLOB test
     $bl_s = ibase_blob_import($ftmp);
     ibase_query("INSERT INTO test4 (v_integer, v_blob) VALUES (1, ?)", $bl_s);
 
-    $bl_s = ibase_blob_import($ftmp,$link);
+    $bl_s = ibase_blob_import($link,$ftmp);
     ibase_query($link, "INSERT INTO test4 (v_integer, v_blob) VALUES (1, ?)", $bl_s);
 
     echo "test blob 1\n";
@@ -46,7 +46,7 @@ InterBase: BLOB test
 		echo " BLOB 1 fail (1)\n";
     ibase_blob_close($bl_h);
 
-    $bl_h = ibase_blob_open($row->V_BLOB,$link);
+    $bl_h = ibase_blob_open($link,$row->V_BLOB);
 
 	$blob = '';    
     while($piece = ibase_blob_get($bl_h, 100 * 1024))
@@ -111,7 +111,7 @@ InterBase: BLOB test
 	ibase_close();
 	    
     ibase_connect($test_base);
-    ibase_blob_echo($row->V_BLOB, $link);
+    ibase_blob_echo($link, $row->V_BLOB);
     ibase_free_result($q);
 
     echo "fetch blob 3\n";

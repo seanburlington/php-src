@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.64 2004/01/26 20:08:16 georg Exp $ 
+  $Id: mysqli_api.c,v 1.65 2004/01/27 13:23:54 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1229,7 +1229,7 @@ PHP_FUNCTION(mysqli_ping)
 }
 /* }}} */
 
-/* {{{ proto resource mysqli_prepare(object link, string query)
+/* {{{ proto mixed mysqli_prepare(object link, string query)
    Prepare a SQL statement for execution */
 PHP_FUNCTION(mysqli_prepare)
 {
@@ -1261,7 +1261,7 @@ PHP_FUNCTION(mysqli_prepare)
 }
 /* }}} */
 
-/* {{{ proto resource mysqli_get_metadata(object stmt)
+/* {{{ proto mixed mysqli_get_metadata(object stmt)
    return result set from statement */
 PHP_FUNCTION(mysqli_get_metadata)
 {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.28 2003/06/10 20:03:37 imajes Exp $ */
+/* $Id: credits.c,v 1.29 2003/07/28 10:44:19 sniper Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -107,7 +107,7 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 	}
 
 	if (flag & PHP_CREDITS_FULLPAGE) {
-		PUTS("</center></body></html>\n");
+		PUTS("</div></body></html>\n");
 	}
 }
 /* }}} */

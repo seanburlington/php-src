@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.19 2000/11/28 08:06:30 sniper Exp $ */
+/* $Id: php_gd.h,v 1.20 2000/12/10 00:37:43 sniper Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -138,6 +138,11 @@ static void _php_image_output_wbmp(gdImagePtr im, FILE *fp);
 static int _php_image_type ( char data[8] );
 
 PHPAPI int phpi_get_le_gd(void);
+
+/* This is missing from gd.h */
+#if HAVE_COLORCLOSESTHWB
+int gdImageColorClosestHWB(gdImagePtr im, int r, int g, int b);
+#endif
 
 #ifdef ZTS
 #define GDLS_D php_gd_globals *gd_globals

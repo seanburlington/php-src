@@ -17,12 +17,16 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_scandir.h,v 1.6 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: php_scandir.h,v 1.7 2003/09/08 13:14:41 sniper Exp $ */
 
 #ifndef PHP_SCANDIR_H
 #define PHP_SCANDIR_H
 
 #include <sys/types.h>
+
+#ifdef HAVE_SYS_DIR_H
+#include <sys/dir.h>
+#endif
 
 #ifdef PHP_WIN32
 #include "config.w32.h"

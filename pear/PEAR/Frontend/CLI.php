@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@php.net>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.33 2003/06/10 20:03:43 imajes Exp $
+  $Id: CLI.php,v 1.34 2003/06/30 13:12:50 cox Exp $
 */
 
 require_once "PEAR.php";
@@ -449,6 +449,8 @@ class PEAR_Frontend_CLI extends PEAR
                                       1 => array('wrap' => 20),
                                       2 => array('wrap' => 35)
                         );
+                    } else {
+                        $opts = null;
                     }
                     if (isset($data['headline']) && is_array($data['headline'])) {
                         $this->_tableRow($data['headline'],

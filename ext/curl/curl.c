@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.120 2002/10/21 22:35:59 sterling Exp $ */
+/* $Id: curl.c,v 1.121 2002/10/22 18:54:09 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -304,6 +304,7 @@ static size_t curl_write(char *data, size_t size, size_t nmemb, void *ctx)
 	php_curl       *ch     = (php_curl *) ctx;
 	php_curl_write *t      = ch->handlers->write;
 	size_t          length = size * nmemb;
+	TSRMLS_FETCH();
 
 	switch (t->method) {
 	case PHP_CURL_STDOUT:

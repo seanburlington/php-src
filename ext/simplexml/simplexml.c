@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.24 2003/05/26 02:18:38 shane Exp $ */
+/* $Id: simplexml.c,v 1.25 2003/05/26 02:19:14 shane Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,8 +26,6 @@
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "php_simplexml.h"
-//#include "zend.h"
-//#include "zend_fast_cache.h"
 
 zend_class_entry *sxe_class_entry;
 
@@ -715,7 +713,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.24 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.25 $");
 	php_info_print_table_end();
 
 }

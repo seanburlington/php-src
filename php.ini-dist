@@ -1,5 +1,5 @@
 [PHP]
-; $Id: php.ini-dist,v 1.88 2001/07/13 18:21:21 jflemer Exp $
+; $Id: php.ini-dist,v 1.89 2001/08/07 13:33:27 dbeu Exp $
 
 ;;;;;;;;;;;;;;;;;;;
 ; About this file ;
@@ -439,7 +439,9 @@ allow_url_fopen = On
 ;extension=php_pgsql.dll
 ;extension=php_printer.dll
 ;extension=php_sablot.dll
+;extension=php_shmop.dll
 ;extension=php_snmp.dll
+;extension=php_sockets.dll
 ;extension=php_sybase_ct.dll
 ;extension=php_xslt.dll
 ;extension=php_yaz.dll

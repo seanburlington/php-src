@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky (iliaa@home.com)                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.15 2001/07/31 05:44:04 zeev Exp $ */
+/* $Id: shmop.c,v 1.16 2001/08/07 13:33:27 dbeu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -25,8 +25,13 @@
 #include "php.h"
 #include "php_ini.h"
 #include "php_shmop.h"
-#include <sys/ipc.h>
-#include <sys/shm.h>
+# ifndef PHP_WIN32
+# include <sys/ipc.h>
+# include <sys/shm.h>
+#else
+#include "tsrm_win32.h"
+#endif
+
 
 #if HAVE_SHMOP
 
@@ -170,7 +175,7 @@ PHP_FUNCTION(shmop_open)
 	}
 
 	shmop->size = shm.shm_segsz;
-	
+
 	rsid = zend_list_insert(shmop, shm_type);
 	RETURN_LONG(rsid);
 }
@@ -246,8 +251,6 @@ PHP_FUNCTION(shmop_close)
 		RETURN_FALSE;
 	}
 	zend_list_delete((*shmid)->value.lval);
-
-	RETURN_LONG(0);
 }
 /* }}} */
 

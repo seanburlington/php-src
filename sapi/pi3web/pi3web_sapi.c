@@ -21,11 +21,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.54 2003/06/10 20:03:45 imajes Exp $ */
+/* $Id: pi3web_sapi.c,v 1.55 2003/06/15 23:47:18 edink Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
-#include "pi3web_sapi.h"
 #include "php.h"
 #include "php_main.h"
 #include "php_variables.h"
@@ -39,6 +38,8 @@
 #include "TSRM/TSRM.h"
 #include "PiAPI.h"
 #include "Pi3API.h"
+
+#include "pi3web_sapi.h"
 
 #define PI3WEB_SERVER_VAR_BUF_SIZE 1024
 
@@ -78,7 +79,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.54 2003/06/10 20:03:45 imajes Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.55 2003/06/15 23:47:18 edink Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);

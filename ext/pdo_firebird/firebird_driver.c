@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.11 2005/01/07 05:23:48 wez Exp $ */
+/* $Id: firebird_driver.c,v 1.12 2005/01/13 18:02:13 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -84,7 +84,7 @@ void _firebird_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, char const *file, long li
 			break;
 	}
 #else
-	strcpy(*pdo_err, "HY000");
+	strcpy(*error_code, "HY000");
 #endif
 }
 /* }}} */

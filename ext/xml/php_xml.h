@@ -14,10 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Stig Sæther Bakken <ssb@php.net>                            |
    |          Thies C. Arntzen <thies@thieso.net>                         |
+   |          Sterling Hughes <sterling@php.net>                          |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xml.h,v 1.23 2003/05/06 19:38:49 sterling Exp $ */
+/* $Id: php_xml.h,v 1.24 2003/05/22 03:04:11 sterling Exp $ */
 
 #ifndef PHP_XML_H
 #define PHP_XML_H
@@ -53,6 +54,7 @@ typedef struct {
 	int case_folding;
 	XML_Parser parser;
 	XML_Char *target_encoding;
+
 	zval *startElementHandler;
 	zval *endElementHandler;
 	zval *characterDataHandler;
@@ -61,9 +63,22 @@ typedef struct {
 	zval *unparsedEntityDeclHandler;
 	zval *notationDeclHandler;
 	zval *externalEntityRefHandler;
-	zval *unknownEncodingHandler;
+	zval *unknownEncodingHandler;	
 	zval *startNamespaceDeclHandler;
 	zval *endNamespaceDeclHandler;
+
+	zend_function *startElementPtr;
+	zend_function *endElementPtr;
+	zend_function *characterDataPtr;
+	zend_function *processingInstructionPtr;
+	zend_function *defaultPtr;
+	zend_function *unparsedEntityDeclPtr;
+	zend_function *notationDeclPtr;
+	zend_function *externalEntityRefPtr;
+	zend_function *unknownEncodingPtr;
+	zend_function *startNamespaceDeclPtr;
+	zend_function *endNamespaceDeclPtr;
+
 	zval *object;
 
 	zval *data;

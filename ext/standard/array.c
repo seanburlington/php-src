@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.151 2001/12/29 20:59:59 derick Exp $ */
+/* $Id: array.c,v 1.152 2002/01/09 16:03:34 derick Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -260,11 +260,16 @@ PHP_FUNCTION(count)
 	if (zend_parse_parameters (ZEND_NUM_ARGS() TSRMLS_CC, "z|l", &array, &mode) == FAILURE)
 		return;
 	
-	if (Z_TYPE_P(array) == IS_ARRAY) {
-		RETURN_LONG (php_count_recursive (array, mode));
-	} else {
-		/* return 1 for non-array arguments */
-		RETURN_LONG(1);
+	switch (Z_TYPE_P(array)) {
+		case IS_NULL:
+			RETURN_LONG(0);
+			break;
+		case IS_ARRAY:
+			RETURN_LONG (php_count_recursive (array, mode));
+			break;
+		default:
+			RETURN_LONG(1);
+			break;
 	}
 }
 /* }}} */

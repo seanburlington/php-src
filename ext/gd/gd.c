@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.51 2000/04/15 14:20:00 andi Exp $ */
+/* $Id: gd.c,v 1.52 2000/04/21 02:23:16 rasmus Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -460,6 +460,10 @@ PHP_FUNCTION(imagecreatefrompng)
 	fflush(fp);
 	fclose(fp);
 
+	if (!im) {
+		php_error(E_WARNING,"ImageCreateFromPng: %s is not a valid PNG file", fn);
+		RETURN_FALSE;
+	}
 	ZEND_REGISTER_RESOURCE(return_value, im, GDG(le_gd));
 }
 /* }}} */
@@ -570,6 +574,10 @@ PHP_FUNCTION(imagecreatefromgif )
 	fflush(fp);
 	fclose(fp);
 
+	if (!im) {
+		php_error(E_WARNING,"ImageCreateFromGif: %s is not a recognized GIF file", fn);
+		RETURN_FALSE;
+	}
 	ZEND_REGISTER_RESOURCE(return_value, im, GDG(le_gd));
 }
 /* }}} */
@@ -683,6 +691,10 @@ PHP_FUNCTION(imagecreatefromjpeg)
 	fflush(fp);
 	fclose(fp);
 
+	if (!im) {
+		php_error(E_WARNING,"ImageCreateFromJPEG: %s is not a recognized JPEG file", fn);
+		RETURN_FALSE;
+	}
 	ZEND_REGISTER_RESOURCE(return_value, im, GDG(le_gd));
 }
 /* }}} */

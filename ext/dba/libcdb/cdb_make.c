@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cdb_make.c,v 1.2.2.2 2002/12/31 16:34:19 sebastian Exp $ */
+/* $Id: cdb_make.c,v 1.2.2.3 2003/01/31 20:10:11 helly Exp $ */
 
 /* incorporated from D.J.Bernstein's cdb-0.75 (http://cr.yp.to/cdb.html)*/
 
@@ -238,3 +238,9 @@ int cdb_make_finish(struct cdb_make *c TSRMLS_DC)
 	return php_stream_flush(c->fp);
 }
 /* }}} */
+
+/* {{{ cdb_make_version */
+char *cdb_make_version() 
+{
+	return "0.75, $Revision: 1.2.2.3 $";
+}

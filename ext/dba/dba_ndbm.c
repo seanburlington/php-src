@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_ndbm.c,v 1.14.2.1 2002/12/31 16:34:19 sebastian Exp $ */
+/* $Id: dba_ndbm.c,v 1.14.2.2 2003/01/31 20:10:11 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -153,6 +153,12 @@ DBA_SYNC_FUNC(ndbm)
 {
 	return SUCCESS;
 }
+
+DBA_INFO_FUNC(ndbm)
+{
+	return estrdup("NDBM" );
+}
+
 #endif
 
 /*

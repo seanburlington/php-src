@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db3.c,v 1.21.2.4 2002/12/31 16:34:18 sebastian Exp $ */
+/* $Id: dba_db3.c,v 1.21.2.5 2003/01/31 20:10:11 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -215,6 +215,11 @@ DBA_SYNC_FUNC(db3)
 	DB3_DATA;
 
 	return dba->dbp->sync(dba->dbp, 0) ? FAILURE : SUCCESS;
+}
+
+DBA_INFO_FUNC(db3)
+{
+	return estrdup(DB_VERSION_STRING);
 }
 
 #endif

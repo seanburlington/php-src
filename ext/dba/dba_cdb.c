@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_cdb.c,v 1.23.2.2 2002/12/31 16:34:18 sebastian Exp $ */
+/* $Id: dba_cdb.c,v 1.23.2.3 2003/01/31 20:10:11 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -322,6 +322,19 @@ DBA_SYNC_FUNC(cdb)
 {
 	/* this is read-only */
 	return SUCCESS;
+}
+
+DBA_INFO_FUNC(cdb)
+{
+#if DBA_CDB_BUILTIN
+	if (!strcmp(hnd->name, "cdb")) {
+		return estrdup(cdb_version());
+	} else {
+		return estrdup(cdb_make_version());
+	}
+#else
+	return estrdup("External");
+#endif
 }
 
 #endif

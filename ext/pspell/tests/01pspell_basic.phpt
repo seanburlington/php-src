@@ -10,7 +10,7 @@ pspell basic tests
 --POST--
 --GET--
 --FILE--
-<?php // $Id: 01pspell_basic.phpt,v 1.2 2002/11/08 01:09:47 iliaa Exp $
+<?php // $Id: 01pspell_basic.phpt,v 1.3 2003/08/09 15:46:36 sniper Exp $
 
 error_reporting(E_ALL);
 $string = "";
@@ -40,7 +40,7 @@ for($i=0,$u=count($array);$i<$u;++$i) {
         echo "true\n";
     }
 }
-
+?>
 --EXPECT--
 I : true
 will : true

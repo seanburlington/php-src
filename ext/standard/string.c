@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.322 2002/10/11 03:19:38 iliaa Exp $ */
+/* $Id: string.c,v 1.323 2002/10/11 12:42:01 sander Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3061,10 +3061,10 @@ PHP_FUNCTION(nl2br)
 	}
 	
 	if (repl_cnt == 0) {
-		RETURN_STRINGL(str, Z_STRLEN_PP(zstr), 1);
+		RETURN_STRINGL(Z_STRVAL_PP(zstr), Z_STRLEN_PP(zstr), 1);
 	}
 
-	new_length = Z_STRLEN_PP(zstr) + repl_cnt * 6;
+	new_length = Z_STRLEN_PP(zstr) + repl_cnt * (sizeof("<br />") - 1);
 	tmp = target = emalloc(new_length + 1);
 
 	str = Z_STRVAL_PP(zstr);
@@ -3091,7 +3091,7 @@ PHP_FUNCTION(nl2br)
 		str++;
 	}
 	
-	*target = 0;
+	*target = '\0';
 
 	RETURN_STRINGL(tmp, new_length, 0);
 }

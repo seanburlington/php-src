@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.27 2002/11/04 12:27:13 helly Exp $ */
+/* $Id: dba_db2.c,v 1.28 2002/11/04 13:39:17 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -75,7 +75,7 @@ DBA_OPEN_FUNC(db2)
 		return FAILURE;
 	}
 
-	info->dbf = calloc(sizeof(dba_db2_data), 1);
+	info->dbf = ecalloc(sizeof(dba_db2_data), 1);
 	((dba_db2_data *) info->dbf)->dbp = dbp;
 	return SUCCESS;
 }
@@ -87,7 +87,7 @@ DBA_CLOSE_FUNC(db2)
 	if (dba->cursor) 
 		dba->cursor->c_close(dba->cursor);
 	dba->dbp->close(dba->dbp, 0);
-	free(dba);
+	efree(dba);
 }
 
 DBA_FETCH_FUNC(db2)

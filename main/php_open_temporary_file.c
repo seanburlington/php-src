@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_open_temporary_file.c,v 1.19 2002/11/18 11:49:06 wez Exp $ */
+/* $Id: php_open_temporary_file.c,v 1.20 2002/11/18 12:40:12 wez Exp $ */
 
 #include "php.h"
 
@@ -149,7 +149,7 @@ static FILE *php_do_open_temporary_file(const char *path, const char *pfx, char 
 	if (fd==-1) {
 		fp = NULL;
 	} else {
-		fp = fdopen(fd, "wb");
+		fp = fdopen(fd, "r+b");
 	}
 #else
 	if (mktemp(opened_path)) {

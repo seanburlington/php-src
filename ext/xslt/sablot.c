@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.66 2002/11/02 10:58:01 helly Exp $ */
+/* $Id: sablot.c,v 1.67 2002/11/02 15:01:42 msopacua Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -554,8 +554,7 @@ PHP_FUNCTION(xslt_process)
 			/* Since we have args passed, we need to set the base uri, so pull in executor
 				globals and set the base, using the current filename, specifally for the
 				'arg' scheme */
-			baseuri = (char *)emalloc(strlen(zend_get_executed_filename(TSRMLS_C))+7+1);
-			sprintf(baseuri, "file://%s", zend_get_executed_filename(TSRMLS_C));
+				spprintf(&baseuri, 0, "file://%s", zend_get_executed_filename(TSRMLS_C));
 
 			SablotSetBaseForScheme(XSLT_PROCESSOR(handle), "arg", baseuri);
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.63 2001/01/14 09:30:17 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.64 2001/01/31 00:55:28 elixer Exp $ */
 
 
 /* TODO:
@@ -75,6 +75,10 @@ static int le_result, le_link, le_plink;
 
 #if MYSQL_VERSION_ID > 32133 || defined(FIELD_TYPE_TINY)
 #define MYSQL_HAS_TINY
+#endif
+
+#if MYSQL_VERSION_ID > 32200
+#define MYSQL_HAS_YEAR
 #endif
 
 #define MYSQL_ASSOC		1<<0
@@ -1549,6 +1553,11 @@ static char *php_mysql_get_field_name(int field_type)
 		case FIELD_TYPE_TIMESTAMP:
 			return "timestamp";
 			break;
+#ifdef MYSQL_HAS_YEAR
+		case FIELD_TYPE_YEAR:
+			return "year";
+			break;
+#endif
 		case FIELD_TYPE_DATE:
 			return "date";
 			break;

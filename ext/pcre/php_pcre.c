@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.95 2001/05/14 12:58:48 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.96 2001/05/15 18:00:35 andrei Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -989,7 +989,8 @@ static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_callabl
 		zval_copy_ctor(return_value);
 		return;
 	}
-	efree(callback_name);
+	if (callback_name)
+		efree(callback_name);
 
 	SEPARATE_ZVAL(regex);
 	SEPARATE_ZVAL(subject);

@@ -18,10 +18,11 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.13 2001/09/29 00:38:24 cox Exp $
+// $Id: Common.php,v 1.14 2001/10/07 20:14:11 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
+require_once 'Experimental/System.php';
 
 /**
 * TODO:
@@ -78,7 +79,7 @@ class PEAR_Common extends PEAR
                $file = array_shift($this->_tempfiles))
         {
             if (@is_dir($file)) {
-                system("rm -rf $file"); // XXX FIXME Windows
+                System::rm("-rf $file"); // XXX FIXME Windows
             } elseif (file_exists($file)) {
                 unlink($file);
             }

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.601 2003/04/02 16:51:39 cmv Exp $ */
+/* $Id: basic_functions.c,v 1.602 2003/04/02 23:11:31 rasmus Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2733,9 +2733,11 @@ PHP_FUNCTION(unregister_tick_function)
 	zval **function;
 	user_tick_function_entry tick_fe;
 
-	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(ZEND_NUM_ARGS(), &function)) {
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &function)) {
 		WRONG_PARAM_COUNT;
 	}
+
+	if(!BG(user_tick_functions)) return;
 
 	if (Z_TYPE_PP(function) != IS_ARRAY) {
 		convert_to_string_ex(function);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.107 2002/08/10 16:12:36 helly Exp $ */
+/* $Id: output.c,v 1.108 2002/08/13 04:31:59 rasmus Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -811,7 +811,7 @@ PHP_FUNCTION(ob_get_contents)
 }
 /* }}} */
 
-/* {{{ proto integer ob_get_level(void)
+/* {{{ proto int ob_get_level(void)
    Return the nesting level of the output buffer */
 PHP_FUNCTION(ob_get_level)
 {

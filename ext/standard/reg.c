@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.20 1999/08/02 19:16:51 zeev Exp $ */
+/* $Id: reg.c,v 1.21 1999/10/04 13:04:32 thies Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -261,6 +261,8 @@ static void _php3_ereg(INTERNAL_FUNCTION_PARAMETERS, int icase)
 			end = subs[i].rm_eo;
 			if (start != -1 && end > 0 && start < string_len && end < string_len && start < end) {
 				add_index_stringl(array, i, string+start, end-start, 1);
+			} else {
+				add_index_bool(array, i, 0);
 			}
 		}
 		efree(buf);

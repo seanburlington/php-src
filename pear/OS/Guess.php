@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Guess.php,v 1.10 2003/06/10 20:03:43 imajes Exp $
+// $Id: Guess.php,v 1.11 2003/08/18 16:43:46 cellog Exp $
 
 // {{{ uname examples
 
@@ -167,7 +167,7 @@ class OS_Guess
         $cpp = popen("/usr/bin/cpp $tmpfile", "r");
         $major = $minor = 0;
         while ($line = fgets($cpp, 1024)) {
-            if ($line{0} == '#') {
+            if ($line{0} == '#' || trim($line) == '') {
                 continue;
             }
             if (list($major, $minor) = explode(' ', trim($line))) {

@@ -16,13 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.13 2000/02/10 21:53:55 andi Exp $ */
+/* $Id: dns.c,v 1.14 2000/02/11 15:59:29 zeev Exp $ */
 
 #include "php.h"
 #if HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
 #endif
-#if PHP_WIN32
+#ifdef PHP_WIN32
 #if HAVE_BINDLIB
 #ifndef WINNT
 #define WINNT 1
@@ -158,7 +158,7 @@ char *php_gethostbyname(char *name)
 	return estrdup(inet_ntoa(in));
 }
 
-#if !(PHP_WIN32)||HAVE_BINDLIB
+#if !defined(PHP_WIN32)||HAVE_BINDLIB
 
 /* {{{ proto int checkdnsrr(string host [, string type])
    Check DNS records corresponding to a given Internet host name or IP address */

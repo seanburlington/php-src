@@ -1,5 +1,5 @@
 %{
-/* $Revision: 1.16 $
+/* $Revision: 1.17 $
 **
 **  Originally written by Steven M. Bellovin <smb@research.att.com> while
 **  at the University of North Carolina at Chapel Hill.  Later tweaked by
@@ -21,7 +21,7 @@
 
 #include "php.h"
 
-#if PHP_WIN32
+#ifdef PHP_WIN32
 #include <malloc.h>
 #endif
 
@@ -36,7 +36,7 @@
 #ifdef HAVE_SYS_TIME_H
 # include <sys/time.h>
 #endif
-#if PHP_WIN32
+#ifdef PHP_WIN32
 # include "win32/time.h"
 #endif
 

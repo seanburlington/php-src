@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.45 2000/02/10 21:53:55 andi Exp $ */
+/* $Id: basic_functions.h,v 1.46 2000/02/11 15:59:28 zeev Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -107,7 +107,7 @@ PHP_FUNCTION(get_loaded_extensions);
 PHP_FUNCTION(extension_loaded);
 PHP_FUNCTION(get_extension_funcs);
 
-#if PHP_WIN32
+#ifdef PHP_WIN32
 typedef unsigned int php_stat_len;
 #else
 typedef int php_stat_len;

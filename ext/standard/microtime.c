@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.13 2000/02/10 21:53:56 andi Exp $ */
+/* $Id: microtime.c,v 1.14 2000/02/11 15:59:29 zeev Exp $ */
 
 #include <stdlib.h>
 #ifdef HAVE_UNISTD_H
@@ -31,7 +31,7 @@
 
 #include <stdio.h>
 #ifdef HAVE_GETTIMEOFDAY
-#if PHP_WIN32
+#ifdef PHP_WIN32
 #include "win32/time.h"
 #else
 #include <sys/time.h>

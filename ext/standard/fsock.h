@@ -27,14 +27,14 @@
    |          Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
 */
-/* $Id: fsock.h,v 1.25 2000/02/10 21:53:56 andi Exp $ */
+/* $Id: fsock.h,v 1.26 2000/02/11 15:59:29 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.24 1999-06-18 [ssb] */
 
 #ifndef _FSOCK_H
 #define _FSOCK_H
 
-#if PHP_WIN32
+#ifdef PHP_WIN32
 # ifndef WINNT
 #  define WINNT 1
 # endif

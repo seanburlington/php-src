@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.95 2000/02/10 21:53:56 andi Exp $ */
+/* $Id: string.c,v 1.96 2000/02/11 15:59:29 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -471,14 +471,14 @@ PHP_FUNCTION(basename)
 	ret = estrdup((*str)->value.str.val);
 	c = ret + (*str)->value.str.len -1;	
 	while (*c == '/'
-#if PHP_WIN32
+#ifdef PHP_WIN32
 		   || *c == '\\'
 #endif
 		)
 		c--;
 	*(c + 1) = '\0';	
 	if ((c = strrchr(ret, '/'))
-#if PHP_WIN32
+#ifdef PHP_WIN32
 		|| (c = strrchr(ret, '\\'))
 #endif
 		) {
@@ -495,14 +495,14 @@ PHPAPI void php_dirname(char *str, int len) {
 
 	c = str + len - 1;
 	while (*c == '/'
-#if PHP_WIN32
+#ifdef PHP_WIN32
 		   || *c == '\\'
 #endif
 		)
 		c--; /* strip trailing slashes */
 	*(c + 1) = '\0';
 	if ((c = strrchr(str, '/'))
-#if PHP_WIN32
+#ifdef PHP_WIN32
 		|| (c = strrchr(str, '\\'))
 #endif
 		)

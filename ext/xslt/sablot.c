@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.62 2002/11/01 02:05:35 msopacua Exp $ */
+/* $Id: sablot.c,v 1.63 2002/11/01 14:44:05 flex Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -853,6 +853,7 @@ static int scheme_getall(void *user_data, SablotHandle proc, const char *scheme,
 {
 	zval       *argv[3];                           /* Arguments to the scheme getall function */
 	zval       *retval;                            /* Return value from the scheme getall function */
+	int        result;
 	php_xslt   *handle = (php_xslt *) user_data;   /* A PHP-XSLT processor */
     TSRMLS_FETCH();
     
@@ -883,16 +884,24 @@ static int scheme_getall(void *user_data, SablotHandle proc, const char *scheme,
 		/* return failure */
 		return 1;
 	}
-	
-	/* Save the return value in the buffer (copying it) */
-	*buffer     = estrndup(Z_STRVAL_P(retval), Z_STRLEN_P(retval));
-	*byte_count = Z_STRLEN_P(retval);
+
+	if ((Z_TYPE_P(retval) == IS_BOOL && Z_LVAL_P(retval) == 0) || (Z_TYPE_P(retval) == IS_NULL)) {
+		result = 1;
+	} else {
+		/* Convert the return value to string if needed */
+		if (Z_TYPE_P(retval) != IS_STRING)
+			convert_to_string_ex(&retval);
+
+		/* Save the return value in the buffer (copying it) */
+		*buffer     = estrndup(Z_STRVAL_P(retval), Z_STRLEN_P(retval));
+		*byte_count = Z_STRLEN_P(retval);
+		result = 0;
+	}
 
 	/* Free return value */
 	zval_ptr_dtor(&retval);
 		
-	/* return success */
-	return 0;
+	return result;
 }
 /* }}} */
 

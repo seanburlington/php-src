@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.165 2001/07/01 14:07:44 elixer Exp $ */
+/* $Id: file.c,v 1.166 2001/07/05 23:29:11 elixer Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -426,6 +426,8 @@ PHP_FUNCTION(get_meta_tags)
 			in_tag = 1;
 		} else if (tok == TOK_CLOSETAG) {
 			if (have_name) {
+				/* For BC */
+				php_strtolower(name, strlen(name));
 				if (have_content) {
 					add_assoc_string(return_value, name, value, 0); 
 				} else {

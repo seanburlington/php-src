@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.92 2000/09/17 05:52:26 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.93 2000/10/01 18:13:41 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -76,15 +76,6 @@
 #if defined(AF_UNIX)
 #include <sys/un.h>
 #endif
-
-/* The following macros are borrowed from virtual_cwd.c and should be put in
- * a joint header file when we move virtual_cwd to TSRM */
-#ifdef ZEND_WIN32
-#define IS_SLASH(c)	((c) == '/' || (c) == '\\')
-#else
-#define IS_SLASH(c)	((c) == '/')
-#endif
-
 
 typedef FILE * (*php_fopen_url_wrapper_t) (const char *, char *, int, int *, int *, char **) ;
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.89.2.4 2002/07/28 18:39:48 sesser Exp $ */
+/* $Id: filestat.c,v 1.89.2.5 2002/07/28 18:41:48 sesser Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -560,6 +560,19 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 	if (php_check_open_basedir(filename TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
+
+#ifndef PHP_WIN32
+    switch (type) {
+        case FS_IS_W:
+            RETURN_BOOL (!access (filename, W_OK));
+        case FS_IS_R:
+            RETURN_BOOL (!access (filename, R_OK));
+        case FS_IS_X:
+            RETURN_BOOL (!access (filename, X_OK));
+        case FS_EXISTS:
+            RETURN_BOOL (!access (filename, F_OK));
+    }
+#endif
 
 	stat_sb = &BG(sb);
 

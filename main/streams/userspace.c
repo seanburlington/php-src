@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.15 2003/12/13 04:07:14 pollita Exp $ */
+/* $Id: userspace.c,v 1.16 2003/12/13 23:13:51 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -80,6 +80,7 @@ PHP_MINIT_FUNCTION(user_streams)
 
 	REGISTER_LONG_CONSTANT("STREAM_URL_STAT_LINK", 		PHP_STREAM_URL_STAT_LINK,		CONST_CS|CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("STREAM_URL_STAT_QUIET", 	PHP_STREAM_URL_STAT_QUIET,		CONST_CS|CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("STREAM_MKDIR_RECURSIVE",	PHP_STREAM_MKDIR_RECURSIVE,		CONST_CS|CONST_PERSISTENT);
 
 	return SUCCESS;
 }

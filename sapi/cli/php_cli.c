@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.98 2003/08/13 01:29:51 iliaa Exp $ */
+/* $Id: php_cli.c,v 1.99 2003/08/17 19:14:30 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -418,7 +418,6 @@ static void php_register_command_line_global_vars(char **arg TSRMLS_DC)
 	efree(*arg);
 }
 
-static php_stream_context *sc_in_process = NULL;
 static php_stream *s_in_process = NULL;
 
 static void cli_register_file_handles(TSRMLS_D)
@@ -440,7 +439,6 @@ static void cli_register_file_handles(TSRMLS_D)
 		return;
 	}
 	
-	sc_in_process = sc_in;
 	s_in_process = s_in;
 
 	php_stream_to_zval(s_in,  zin);
@@ -525,7 +523,6 @@ int main(int argc, char *argv[])
 	int lineno = 0;
 	char *exec_direct=NULL, *exec_run=NULL, *exec_begin=NULL, *exec_end=NULL;
 	const char *param_error=NULL;
-	int scan_input = 0;
 	int hide_argv = 0;
 /* end of temporary locals */
 #ifdef ZTS
@@ -801,7 +798,6 @@ int main(int argc, char *argv[])
 					param_error = param_mode_conflict;
 					break;
 				}
-				scan_input = 1;
 				behavior=PHP_MODE_PROCESS_STDIN;
 				exec_end=optarg;
 				break;

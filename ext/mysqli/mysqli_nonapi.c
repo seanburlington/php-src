@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.22 2003/12/13 10:15:45 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.23 2003/12/13 13:44:56 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -230,7 +230,7 @@ PHP_FUNCTION(mysqli_query)
 
 	if (!mysql_field_count(mysql)) {
 		if (MyG(report_mode) & MYSQLI_REPORT_INDEX) {
-			php_mysqli_report_index(query, mysql->server_status);
+			php_mysqli_report_index(query, mysql->server_status TSRMLS_CC);
 		}
 		RETURN_TRUE;
 	}
@@ -242,7 +242,7 @@ PHP_FUNCTION(mysqli_query)
 	}
 
 	if (MyG(report_mode) & MYSQLI_REPORT_INDEX) {
-		php_mysqli_report_index(query, mysql->server_status);
+		php_mysqli_report_index(query, mysql->server_status TSRMLS_CC);
 	}
 
 	mysqli_resource = (MYSQLI_RESOURCE *)ecalloc (1, sizeof(MYSQLI_RESOURCE));

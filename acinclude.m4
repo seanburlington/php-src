@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.174 2002/03/21 20:22:05 sniper Exp $
+dnl $Id: acinclude.m4,v 1.175 2002/03/22 10:22:02 sas Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -1162,7 +1162,6 @@ dnl ---------------------------------------------- CLI static module
       EXT_STATIC="$EXT_STATIC $1"
     else
       PHP_ADD_SOURCES($ext_builddir,$2,$ac_extra,cli)
-      EXT_CLI_STATIC="$EXT_CLI_STATIC $1"
     fi
     EXT_CLI_LTLIBS="$EXT_CLI_LTLIBS $abs_builddir/$ext_builddir/lib$1.la"
     EXT_CLI_STATIC="$EXT_CLI_STATIC $1"

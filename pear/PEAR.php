@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.5 2001/05/23 12:37:43 ssb Exp $
+// $Id: PEAR.php,v 1.6 2001/07/07 12:45:20 mj Exp $
 //
 
 define('PEAR_ERROR_RETURN', 1);
@@ -25,6 +25,7 @@ define('PEAR_ERROR_PRINT', 2);
 define('PEAR_ERROR_TRIGGER', 4);
 define('PEAR_ERROR_DIE', 8);
 define('PEAR_ERROR_CALLBACK', 16);
+define('DIRECTORY_SEPARATOR', '/');
 
 if (substr(PHP_OS, 0, 3) == 'WIN') {
     define('OS_WINDOWS', true);

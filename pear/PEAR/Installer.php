@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.81.2.14 2003/09/30 02:57:28 cellog Exp $
+// $Id: Installer.php,v 1.81.2.15 2003/10/04 03:58:53 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -504,7 +504,8 @@ class PEAR_Installer extends PEAR_Common
                             $data[3] = dirname($data[3]);
                         }
                     }
-                    if (!count($this->pkginfo['filelist']['dirtree'])) {
+                    if (isset($this->pkginfo['filelist']['dirtree'])
+                          && !count($this->pkginfo['filelist']['dirtree'])) {
                         unset($this->pkginfo['filelist']['dirtree']);
                     }
                     break;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_exceptions.h,v 1.3 2004/11/01 20:57:23 helly Exp $ */
+/* $Id: spl_exceptions.h,v 1.4 2005/03/12 23:03:31 helly Exp $ */
 
 #ifndef SPL_EXCEPTIONS_H
 #define SPL_EXCEPTIONS_H
@@ -37,6 +37,7 @@ extern PHPAPI zend_class_entry *spl_ce_OutOfBoundsException;
 extern PHPAPI zend_class_entry *spl_ce_OverflowException;
 extern PHPAPI zend_class_entry *spl_ce_RangeException;
 extern PHPAPI zend_class_entry *spl_ce_UnderflowException;
+extern PHPAPI zend_class_entry *spl_ce_UnexpectedValueException;
 
 PHP_MINIT_FUNCTION(spl_exceptions);
 

@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.153.2.15 2003/08/28 20:01:34 iliaa Exp $ */
+/* $Id: zlib.c,v 1.153.2.16 2003/09/10 01:23:38 sniper Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -986,7 +986,7 @@ PHP_FUNCTION(ob_gzhandler)
 					if (sapi_add_header("Content-Encoding: deflate", sizeof("Content-Encoding: deflate") - 1, 1)==FAILURE) {
 						return_original = 1;
 					}
-					if (sapi_add_header_ex("Vary: Accept-Encoding", sizeof("Vary: Accept-Encoding") - 1, 0, 0 TSRMLS_CC)==FAILURE) {
+					if (sapi_add_header_ex("Vary: Accept-Encoding", sizeof("Vary: Accept-Encoding") - 1, 1, 0 TSRMLS_CC)==FAILURE) {
 						return_original = 1;
 					}
 					break;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.16 2005/02/07 00:04:20 wez Exp $ */
+/* $Id: pgsql_statement.c,v 1.17 2005/02/13 01:02:18 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

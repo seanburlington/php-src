@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.34 2005/02/12 20:55:28 iliaa Exp $ */
+/* $Id: pgsql_driver.c,v 1.35 2005/02/13 01:02:18 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

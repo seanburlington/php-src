@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.26 2003/05/04 03:15:02 zak Exp $ 
+  $Id: mysqli_api.c,v 1.27 2003/05/31 07:05:34 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1434,6 +1434,12 @@ PHP_FUNCTION(mysqli_real_connect)
 	}	
 
 	MYSQLI_FETCH_RESOURCE(mysql, MYSQL *, prmysql, PR_MYSQL *, &mysql_link, "mysqli_link");
+
+	/* remove some insecure options */
+	$flags ^= CLIENT_MULTI_QUERIES;   // don't allow multi_queries via connect parameter
+	if (PG(open_basedir) && strlen(PG(open_basedir))) {
+		flags ^= CLIENT_LOCAL_FILES;
+	}
 
 	if (mysql_real_connect(mysql,hostname,username,passwd,dbname,port,socket,flags) == NULL) {
 		/* Save error messages */

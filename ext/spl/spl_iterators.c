@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.54 2004/11/01 23:16:43 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.55 2004/11/03 01:16:10 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1557,6 +1557,7 @@ SPL_METHOD(InfiniteIterator, next)
 static zend_function_entry spl_funcs_InfiniteIterator[] = {
 	SPL_ME(InfiniteIterator, __construct,      arginfo_norewind_it___construct, ZEND_ACC_PUBLIC)
 	SPL_ME(InfiniteIterator, next,             NULL, ZEND_ACC_PUBLIC)
+	{NULL, NULL, NULL}
 };
 
 /* {{{ proto EmptyIterator::rewind()

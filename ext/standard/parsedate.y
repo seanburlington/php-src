@@ -8,7 +8,7 @@
 **  This code is in the public domain and has no copyright.
 */
 
-/* $Id: parsedate.y,v 1.56 2004/04/08 19:21:05 derick Exp $ */
+/* $Id: parsedate.y,v 1.56.2.1 2004/11/15 16:30:46 derick Exp $ */
 
 #include "php.h"
 
@@ -1079,7 +1079,7 @@ time_t php_parse_date(char *p, time_t *now)
   tm.tm_year = ToYear (date.yyYear) - TM_YEAR_ORIGIN + date.yyRelYear;
   tm.tm_mon = date.yyMonth - 1 + date.yyRelMonth;
   tm.tm_mday = date.yyDay + date.yyRelDay;
-  if (date.yyHaveTime /*|| (date.yyHaveRel && !date.yyHaveDate && !date.yyHaveDay) */)
+  if (date.yyHaveTime || (date.yyHaveRel && !date.yyHaveDate && !date.yyHaveDay))
     {
       tm.tm_hour = ToHour (date.yyHour, date.yyMeridian);
       if (tm.tm_hour < 0)

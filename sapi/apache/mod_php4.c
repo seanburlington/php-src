@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.91 2001/03/06 15:10:53 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.92 2001/03/13 18:39:38 stas Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -415,7 +415,7 @@ static void init_request_info(SLS_D)
 
 static int php_apache_alter_ini_entries(php_per_dir_entry *per_dir_entry)
 {
-	zend_alter_ini_entry(per_dir_entry->key, per_dir_entry->key_length+1, per_dir_entry->value, per_dir_entry->value_length+1, per_dir_entry->type, PHP_INI_STAGE_ACTIVATE);
+	zend_alter_ini_entry(per_dir_entry->key, per_dir_entry->key_length+1, per_dir_entry->value, per_dir_entry->value_length, per_dir_entry->type, PHP_INI_STAGE_ACTIVATE);
 	return 0;
 }
 

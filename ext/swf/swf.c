@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.3 2000/05/01 02:42:26 sas Exp $ */
+/* $Id: swf.c,v 1.4 2000/05/02 00:24:18 sterling Exp $ */
 
 
 #include "php.h"
@@ -140,6 +140,7 @@ PHP_MINIT_FUNCTION(swf)
 	REGISTER_LONG_CONSTANT("MenuExit", MenuExit, CONST_CS | CONST_PERSISTENT);
 	return SUCCESS;
 }
+
 
          
 /* {{{ proto void swf_openfile(string name, double xsize, double ysize, double framerate, double r, double g, double b)
@@ -300,7 +301,7 @@ PHP_FUNCTION(swf_removeobject)
    Returns a free objid */
 PHP_FUNCTION(swf_nextid)
 {
-	swf_nextid();
+	RETURN_LONG(swf_nextid());
 }
 /* }}} */
 

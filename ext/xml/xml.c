@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.150 2004/02/23 16:19:39 chregu Exp $ */
+/* $Id: xml.c,v 1.151 2004/04/07 16:24:17 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -379,6 +379,9 @@ static void xml_parser_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	}
 	if (parser->baseURI) {
 		efree(parser->baseURI);
+	}
+	if (parser->object) {
+		zval_ptr_dtor(&parser->object);
 	}
 
 	efree(parser);
@@ -1141,13 +1144,16 @@ PHP_FUNCTION(xml_set_object)
 	if (parser->object) {
 		zval_ptr_dtor(&parser->object);
 	}
-	
-	parser->object = *mythis;
 
 	/* please leave this commented - or ask thies@thieso.net before doing it (again) */
 /* #ifdef ZEND_ENGINE_2
 	zval_add_ref(&parser->object); 
 #endif */
+
+	ALLOC_ZVAL(parser->object);
+	*parser->object = **mythis;
+	zval_copy_ctor(parser->object);
+	INIT_PZVAL(parser->object);
 
 	RETVAL_TRUE;
 }

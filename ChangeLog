@@ -1,3 +1,11 @@
+2001-09-04  Richard Heyes  <richard.heyes@heyes-computing.net>
+
+    * pear/Mail/mimeDecode.php:
+    Added more properties to the output, (mostly taken from the return of
+    imap_fetchstructure), converted tabs to spaces, changed style of headers
+    returned, added notice @ top of file about php extensions and changed
+    private functions to have leading underscore.
+
 2001-09-04  Jason Greene  <jason@inetgurus.net>
 
     * ext/sockets/php_sockets.h
@@ -11,6 +19,22 @@
     * ext/fbsql/php_fbsql.c
       ext/fbsql/php_fbsql.h:
     Adding function to set transaction locking and isolation.
+
+2001-09-04  Rasmus Lerdorf  <rasmus@php.net>
+
+    * ext/interbase/interbase.dsp: ok, hand-patched this one in
+
+    * ext/interbase/interbase.c
+      ext/interbase/php_interbase.h:
+    Interbase extension fixes by Jeremy Bettis
+    (.dsp patch looked funky, but these ones look ok)
+
+2001-09-04  Egon Schmid  <eschmid@s.netic.de>
+
+    * ext/ctype/ctype.c
+      ext/com/COM.c
+      ext/calendar/calendar.c
+      ext/bz2/bz2.c: Fixed some protos.
 
 2001-09-04  Stanislav Malyshev  <stas@zend.com>
 

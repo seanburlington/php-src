@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.66 2002/08/06 22:08:22 kalowsky Exp $ */
+/* $Id: java.c,v 1.67 2002/08/14 16:22:19 kalowsky Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -34,12 +34,21 @@
 #include "php_ini.h"
 #include "php_globals.h"
 
-#ifdef PHP_WIN32
-  #include "win32/winutil.h"
-  #define DL_ERROR php_win_err()
+/* #if defined(__MacOSX__) */
+#if HAVE_JAVAVM_JAVAVM_H
+#include <JavaVM/JavaVM.h>
+#define JAVALIB "libjvm.dylib"
+#define JNI_12
+#else
+#include <jni.h>
 #endif
 
-#include <jni.h>
+
+#ifdef PHP_WIN32
+#include "win32/winutil.h"
+#define DL_ERROR php_win_err()
+#endif
+
 
 #include <stdio.h>
 

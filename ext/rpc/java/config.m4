@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.39 2002/08/14 16:11:48 kalowsky Exp $
+dnl $Id: config.m4,v 1.40 2002/08/14 16:22:19 kalowsky Exp $
 dnl
 AC_DEFUN(JAVA_FIND_JAR, [
  AC_MSG_CHECKING([Java Jar location])
@@ -126,6 +126,7 @@ dnl
    fi
 
    JAVA_CFLAGS="$JAVA_CFLAGS -D_REENTRANT"
+   AC_MSG_RESULT([$JAVA_LIBPATH])
  fi
 ])
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.26 1999/12/04 19:15:49 sas Exp $ */
+/* $Id: hw.c,v 1.27 1999/12/07 10:49:18 steinm Exp $ */
 #if COMPILE_DL
 #include "dl/phpdl.h"
 #endif
@@ -1317,7 +1317,7 @@ PHP_FUNCTION(hw_getobject) {
 	link=argv[0]->value.lval;
 	ptr = php3_list_find(link,&type);
 	if(!ptr || (type!=HwSG(le_socketp) && type!=HwSG(le_psocketp))) {
-		php_error(E_WARNING,"Unable to find file identifier %d",id);
+		php_error(E_WARNING,"Unable to find file identifier %d", link);
 		RETURN_FALSE;
 	}
 

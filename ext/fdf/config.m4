@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 1999/10/06 05:23:28 steinm Exp $
+dnl $Id: config.m4,v 1.4 1999/12/07 10:49:17 steinm Exp $
 
 AC_MSG_CHECKING(whether to include fdftk support)
 AC_ARG_WITH(fdftk,
@@ -27,7 +27,7 @@ AC_ARG_WITH(fdftk,
         AC_CHECK_LIB(FdfTk, FDFOpen, [
           AC_DEFINE(HAVE_FDFLIB)
           EXTRA_LIBS="$EXTRA_LIBS -L$withval/lib -lFdfTk"
-        ],[AC_MSG_ERROR(fdftk module requires ftftk lib 2.0.)])
+        ],[AC_MSG_ERROR(fdftk module requires fdftk lib 2.0.)])
         LIBS=$old_LIBS
         INCLUDES="$INCLUDES $FDFLIB_INCLUDE"
       else

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hg_comm.c,v 1.14 1999/10/21 15:15:23 steinm Exp $ */
+/* $Id: hg_comm.c,v 1.15 1999/12/07 10:49:18 steinm Exp $ */
 
 /* #define HW_DEBUG */
 
@@ -226,7 +226,7 @@ int fnCmpAnchors(ANCHOR *a1, ANCHOR *a2)
 *            int ancount: number of anchors                            *
 * Return: List of Anchors, NULL if error                               *
 ***********************************************************************/
-DLIST *fnCreateAnchorList(hw_objectID objectID, char **anchors, char **docofanchorrec, char **reldestrec, int ancount, int anchormode)
+DLIST *fnCreateAnchorList(hw_objectID objID, char **anchors, char **docofanchorrec, char **reldestrec, int ancount, int anchormode)
 {
 	int start, end, i, destid, anchordestid, objectID;
 	ANCHOR *cur_ptr = NULL;
@@ -299,7 +299,7 @@ DLIST *fnCreateAnchorList(hw_objectID objectID, char **anchors, char **docofanch
 							/* This is basically for NAME tags. There is no need
 							   to add the destname if it is the document itself.
 							*/
-/*							if(destid == objectID) {
+/*							if(destid == objID) {
 								cur_ptr->destdocname = NULL;
 							} else { */
 								/* It's always nice to deal with names, so let's first check

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.147 2005/02/13 23:04:48 helly Exp $ */
+/* $Id: php_reflection.c,v 1.148 2005/02/23 12:20:04 derick Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -2190,7 +2190,7 @@ ZEND_METHOD(reflection_method, isDestructor)
 
 	METHOD_NOTSTATIC_NUMPARAMS(0);
 	GET_REFLECTION_OBJECT_PTR(mptr);
-	RETURN_BOOL(mptr->common.fn_flags && ZEND_ACC_DTOR);
+	RETURN_BOOL(mptr->common.fn_flags & ZEND_ACC_DTOR);
 }
 /* }}} */
 

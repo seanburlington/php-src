@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.39 2001/07/30 06:18:11 zeev Exp $ */
+/* $Id: php_apache.c,v 1.40 2001/08/04 17:07:16 sebastian Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -342,7 +342,6 @@ PHP_FUNCTION(getallheaders)
     array_header *env_arr;
     table_entry *tenv;
     int i;
-    TSRMLS_FETCH();
     TSRMLS_FETCH();
 	
     if (array_init(return_value) == FAILURE) {

@@ -1,0 +1,9 @@
+// $Id: config.w32,v 1.1 2003/12/03 00:30:54 fmk Exp $
+// vim:ft=javascript
+
+ARG_WITH("fbsql", "FrontBase support", "no");
+
+if (PHP_FBSQL == "yes") {
+	EXTENSION("fbsql", "php_fbsql.c");
+	AC_DEFINE('HAVE_FBSQL', 1, 'Have FrontBase support');
+}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hg_comm.c,v 1.49 2001/10/24 09:06:31 sniper Exp $ */
+/* $Id: hg_comm.c,v 1.50 2001/11/13 19:20:25 fmk Exp $ */
 
 /* #define HW_DEBUG */
 
@@ -683,7 +683,7 @@ char *fnInsAnchorsIntoText(char *text, DLIST *pAnchorList, char **bodytag, char 
 	newtext = text;
 	bgstr[0] = '\0';
 #ifdef newlist
-	zend_llist_sort(pAnchorList, fnCmpAnchors);
+	zend_llist_sort(pAnchorList, fnCmpAnchors TSRMLS_CC);
 	ptr = (ANCHOR **) zend_llist_get_last(pAnchorList);
 	if(ptr)
 		cur_ptr = *ptr;

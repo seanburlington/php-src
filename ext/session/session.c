@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.218 2001/07/13 10:32:37 thies Exp $ */
+/* $Id: session.c,v 1.219 2001/07/18 22:56:56 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -911,9 +911,8 @@ static void php_session_start(PSLS_D)
 	if (PS(mod_data) && PS(gc_probability) > 0) {
 		int nrdels = -1;
 
-		srand(time(NULL));
-		nrand = (int) (100.0*rand()/RAND_MAX);
-		if (nrand < PS(gc_probability)) {
+		nrand = (int) (100.0*php_combined_lcg());
+		if (nrand <= PS(gc_probability)) {
 			PS(mod)->gc(&PS(mod_data), PS(gc_maxlifetime), &nrdels);
 #if 0
 			if (nrdels != -1)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.70 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: fsock.c,v 1.71 2001/07/25 21:06:01 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -89,8 +89,10 @@ extern int le_fp;
 		efree(key);				\
 	}
 
-#define SEARCHCR() \
-	p = memchr(READPTR(sock), '\n', MIN(TOREAD(sock), maxlen));
+#define SEARCHCR() do {											\
+	for (p = READPTR(sock), pe = p + MIN(TOREAD(sock), maxlen); \
+			*p != '\n'; ) if (++p >= pe) { p = NULL; break; }	\
+} while (0)
 
 #ifdef PHP_WIN32
 #define EWOULDBLOCK WSAEWOULDBLOCK
@@ -540,7 +542,7 @@ PHPAPI void php_sockset_timeout(int socket, struct timeval *timeout)
  */
 static char * php_sock_fgets_internal(char * buf, size_t maxlen, php_sockbuf * sock)
 {
-	char *p = NULL;
+	char *p = NULL, *pe;
 	char *ret = NULL;
 	size_t amount = 0;
 

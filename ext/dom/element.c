@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.15 2003/10/05 20:45:26 shane Exp $ */
+/* $Id: element.c,v 1.16 2003/10/05 21:49:47 shane Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -116,10 +116,12 @@ int dom_element_tag_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 	if (ns != NULL && ns->prefix) {
 		qname = xmlStrdup(ns->prefix);
 		qname = xmlStrcat(qname, ":");
+		qname = xmlStrcat(qname, nodep->name);
+		ZVAL_STRING(*retval, qname, 1);
+		xmlFree(qname);
+	} else {
+		ZVAL_STRING(*retval, nodep->name, 1);
 	}
-	qname = xmlStrcat(qname, nodep->name);
-	ZVAL_STRING(*retval, qname, 1);
-	xmlFree(qname);
 
 	return SUCCESS;
 }

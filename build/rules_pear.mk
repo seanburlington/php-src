@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: rules_pear.mk,v 1.6 2000/05/02 20:10:46 sas Exp $ 
+# $Id: rules_pear.mk,v 1.7 2000/05/04 17:50:32 sas Exp $ 
 #
 
 include $(top_builddir)/config_vars.mk
@@ -79,7 +79,6 @@ distclean-recursive depend-recursive clean-recursive all-recursive install-recur
 			ok=yes; \
 			target="$$target-p"; \
 		fi; \
-		if test ! -f $$i/.deps; then touch $$i/.deps; fi; \
 		(cd $$i && $(MAKE) $$target) || exit 1; \
 	done; \
 	if test "$$otarget" = "all" && test -z '$(targets)'; then ok=yes; fi; \

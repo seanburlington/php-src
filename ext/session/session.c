@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.292 2002/03/06 12:34:47 sas Exp $ */
+/* $Id: session.c,v 1.293 2002/03/09 00:24:42 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -846,7 +846,7 @@ PHPAPI void php_session_start(TSRMLS_D)
 	
 
 	/*
-     * Cookies are preferred, because initially
+	 * Cookies are preferred, because initially
 	 * cookie and get variables will be available. 
 	 */
 

@@ -199,6 +199,12 @@
 								."  }\n";
 						}
 						break;
+					case "stream":
+						$arg_string .= "r";
+						$code .= "  zval * _z$name = NULL; \n";
+						$code .= "  php_stream * $name = NULL:\n";
+						$res_fetch.= "  php_stream_from_zval($name, &_z$name);\n"; 
+						break;
 					case "mixed":
 					case "callback":
 						$arg_string.="z";
@@ -256,6 +262,10 @@
 						$code .= "  /* RETURN_RESOURCE(...); /*\n";
 					}
 					break;
+
+				case "stream":
+					$code .= "  /* php_stream_to_zval(stream, return_value); */\n";
+					break;
 				
 				case "mixed":
 					$code .= "  /* RETURN_...(...); /*\n";				
@@ -288,7 +298,7 @@
 		function docbook_xml() {
 			$xml = 
 '<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- $Revision: 1.9 $ -->
+<!-- $Revision: 1.10 $ -->
   <refentry id="function.'.strtolower(str_replace("_","-",$this->name)).'">
    <refnamediv>
     <refname>'.$this->name.'</refname>

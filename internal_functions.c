@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: internal_functions.c,v 1.10 1999/04/21 22:49:13 ssb Exp $ */
+/* $Id: internal_functions.c,v 1.11 1999/04/21 23:27:59 ssb Exp $ */
 
 
 #include "php.h"
@@ -50,7 +50,7 @@
 #include "functions/php3_crypt.h"
 #include "functions/php3_ldap.h"
 #include "ext/mysql/php3_mysql.h"
-#include "functions/php3_bcmath.h"
+#include "ext/bcmath/php3_bcmath.h"
 #include "ext/msql/php3_msql.h"
 #include "ext/oracle/php3_oci8.h"
 #include "ext/oracle/oracle.h"
@@ -61,12 +61,12 @@
 #include "functions/dl.h"
 #include "functions/head.h"
 #include "functions/post.h"
-#include "functions/hw.h"
+#include "ext/hyperwave/hw.h"
 #include "ext/filepro/filepro.h"
 #include "functions/db.h"
 #include "dl/snmp/php3_snmp.h"
 #include "functions/php3_zlib.h"
-#include "functions/php3_COM.h"
+#include "ext/com/php3_COM.h"
 #include "functions/php3_interbase.h"
 #include "functions/php3_xml.h"
 #include "functions/php3_pdf.h"

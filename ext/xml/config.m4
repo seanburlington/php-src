@@ -1,13 +1,13 @@
 dnl
-dnl $Id: config.m4,v 1.38 2002/11/07 19:31:08 bfrance Exp $
+dnl $Id: config.m4,v 1.39 2002/11/17 18:37:48 iliaa Exp $
 dnl
 
 AC_C_BIGENDIAN
 
 if test "$ac_cv_c_bigendian" = "yes"; then
-  order=21
+  order=4321
 else
-  order=12
+  order=1234
 fi
 
 PHP_ARG_ENABLE(xml,whether to enable XML support,
@@ -21,7 +21,7 @@ if test "$PHP_XML" = "yes"; then
 
   if test "$PHP_EXPAT_DIR" = "no"; then
     AC_DEFINE(HAVE_LIBEXPAT_BUNDLED, 1, [ ])
-    PHP_NEW_EXTENSION(xml, xml.c expat/xmlparse.c expat/xmlrole.c expat/xmltok.c, $ext_shared,,-DXML_BYTE_ORDER=$order)
+    PHP_NEW_EXTENSION(xml, xml.c expat/xmlparse.c expat/xmlrole.c expat/xmltok.c, $ext_shared,,-DBYTEORDER=$order)
     PHP_ADD_INCLUDE($ext_srcdir/expat)
     PHP_ADD_BUILD_DIR($ext_builddir/expat)
   else

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.152 2003/01/18 21:31:07 iliaa Exp $ */
+/* $Id: php_odbc.c,v 1.153 2003/01/24 22:40:38 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2878,6 +2878,11 @@ PHP_FUNCTION(odbc_columns)
 		efree(result);
 		RETURN_FALSE;
 	}
+
+	/* 
+	 * Needed to make MS Access happy
+	 */
+	if (table && strlen(table) && schema && !strlen(schema)) schema = NULL;
 
 	rc = SQLColumns(result->stmt, 
 			cat, cat_len,

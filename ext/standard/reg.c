@@ -28,7 +28,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.14 1999/06/09 15:02:57 andrey Exp $ */
+/* $Id: reg.c,v 1.15 1999/06/21 23:07:46 andrey Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -561,7 +561,7 @@ PHP_FUNCTION(split)
 	}
 
 	/* churn through str, generating array entries as we go */
-	while ((count == -1 || count > 0) && !(err = regexec(&re, strp, 1, subs, 0))) {
+	while ((count == -1 || count > 1) && !(err = regexec(&re, strp, 1, subs, 0))) {
 		if (subs[0].rm_so == 0 && subs[0].rm_eo) {
 			/* match is at start of string, return empty string */
 			add_next_index_stringl(return_value, empty_string, 0, 1);
@@ -604,11 +604,9 @@ PHP_FUNCTION(split)
 	}
 
 	/* otherwise we just have one last element to add to the array */
-	if (count == -1 || err==REG_NOMATCH) {
-		size = endp - strp;
+	size = endp - strp;
 	
-		add_next_index_stringl(return_value, strp, size, 1);
-	}
+	add_next_index_stringl(return_value, strp, size, 1);
 
 	regfree(&re);
 

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Uwe Steinmann <Uwe.Steinmann@fernuni-hagen.de>              |
+   | Author: Uwe Steinmann <Uwe.Steinmann@fernuni-hagen.de>               |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.40 2001/12/15 14:12:33 hholzgra Exp $ */
+/* $Id: cpdf.c,v 1.41 2002/02/28 08:25:46 sebastian Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */

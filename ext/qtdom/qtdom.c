@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
+   | Author: Jan Borsodi                                                  |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: qtdom.c,v 1.15 2001/12/11 15:30:14 sebastian Exp $ */
+/* $Id: qtdom.c,v 1.16 2002/02/28 08:26:37 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

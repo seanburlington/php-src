@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Brendan W. McAdams <bmcadams@php.net>             |
-   |              Doug DeJulio <ddj@redhat.com>                           |
+   | Authors: Brendan W. McAdams <bmcadams@php.net>                       |
+   |          Doug DeJulio <ddj@redhat.com>                               |
    +----------------------------------------------------------------------+
  */
 /*
-*	cvvs.c $Revision: 1.23 $ - PHP4 Interface to the RedHat CCVS API
+*	cvvs.c $Revision: 1.24 $ - PHP4 Interface to the RedHat CCVS API
 *	 -------
 *	 Interfaces RedHat's CCVS [Credit Card Verification System] <http://www.redhat.com/products/ccvs/>
 *	 This code is ported from an original php3 interface written by RedHat's Doug DeJulio <ddj@redhat.com>
@@ -27,10 +27,10 @@
 
 /*
 *	Code started on 2000.07.24@09.04.EST by Brendan W. McAdams <bmcadams@php.net>
-*	$Revision: 1.23 $
+*	$Revision: 1.24 $
 */
 
-static char const cvsid[] = "$Id: ccvs.c,v 1.23 2001/12/17 10:59:52 hholzgra Exp $";
+static char const cvsid[] = "$Id: ccvs.c,v 1.24 2002/02/28 08:25:45 sebastian Exp $";
 
 #include <php.h>
 #include <stdlib.h>

@@ -12,13 +12,13 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Stig Sæther Bakken <ssb@guardian.no>                        |
+   | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
    |          Andreas Karajannis <Andreas.Karajannis@gmd.de>              |
-   |	      Kevin N. Shallow <kshallow@tampabay.rr.com> Velocis Support |
+   |	        Kevin N. Shallow <kshallow@tampabay.rr.com> Velocis Support |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.43 2001/12/11 15:30:00 sebastian Exp $ */
+/* $Id: php_odbc.h,v 1.44 2002/02/28 08:26:30 sebastian Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H

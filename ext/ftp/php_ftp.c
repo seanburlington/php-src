@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Andrew Skalski      <askalski@chek.com>                     |
+   | Authors: Andrew Skalski <askalski@chek.com>                          |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.52 2002/01/03 14:32:36 mfischer Exp $ */
+/* $Id: php_ftp.c,v 1.53 2002/02/28 08:26:10 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

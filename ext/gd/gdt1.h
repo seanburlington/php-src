@@ -12,12 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Jouni Ahto <jah@mork.net>                                   |
-   |                                                                      |
+   | Author: Jouni Ahto <jah@mork.net>                                    |
    +----------------------------------------------------------------------+
  */
 
-/* 	$Id: gdt1.h,v 1.10 2001/12/11 15:29:22 sebastian Exp $	 */
+/* 	$Id: gdt1.h,v 1.11 2002/02/28 08:26:12 sebastian Exp $	 */
 
 #if HAVE_LIBT1
 

@@ -12,13 +12,13 @@
 | obtain it through the world-wide-web, please send a note to          |
 | license@php.net so we can mail you a copy immediately.               |
 +----------------------------------------------------------------------+
-| Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+| Authors: Rasmus Lerdorf <rasmus@php.net>                             |
 |          Mike Jackson <mhjack@tscnet.com>                            |
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
 
-/* $Id: php_snmp.h,v 1.11 2001/12/11 15:30:23 sebastian Exp $ */
+/* $Id: php_snmp.h,v 1.12 2002/02/28 08:26:42 sebastian Exp $ */
 #ifndef PHP_SNMP_H
 #define PHP_SNMP_H
 

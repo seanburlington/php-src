@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Andi Gutmans <andi@zend.com>                                |
+   | Author: Andi Gutmans <andi@zend.com>                                 |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_bcmath.h,v 1.9 2001/12/11 15:28:54 sebastian Exp $ */
+/* $Id: php_bcmath.h,v 1.10 2002/02/28 08:25:42 sebastian Exp $ */
 
 #ifndef PHP_BCMATH_H
 #define PHP_BCMATH_H

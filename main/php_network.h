@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Stig Venaas <venaas@uninett.no>                             |
+   | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.11 2002/02/10 12:35:29 venaas Exp $ */
+/* $Id: php_network.h,v 1.12 2002/02/28 08:27:03 sebastian Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H

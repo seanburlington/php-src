@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Jaakko Hyvätti <jaakko.hyvatti@iki.fi>                      |
+   | Author: Jaakko Hyvätti <jaakko.hyvatti@iki.fi>                       |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sprintf.c,v 1.11 2001/12/11 15:31:05 sebastian Exp $ */
+/* $Id: php_sprintf.c,v 1.12 2002/02/28 08:27:04 sebastian Exp $ */
 
 #include <stdio.h>
 #include <stdarg.h>

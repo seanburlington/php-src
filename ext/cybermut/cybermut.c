@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Sylvain PAGES <spages@free.fr>                              |
+   | Author: Sylvain PAGES <spages@free.fr>                               |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cybermut.c,v 1.9 2001/12/30 06:46:53 eschmid Exp $ */
+/* $Id: cybermut.c,v 1.10 2002/02/28 08:25:52 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

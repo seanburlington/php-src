@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf                                              |
+   | Author: Rasmus Lerdorf <rasmus@php.net>                              |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_image.h,v 1.7 2001/12/11 15:30:35 sebastian Exp $ */
+/* $Id: php_image.h,v 1.8 2002/02/28 08:26:47 sebastian Exp $ */
 
 #ifndef PHP_IMAGE_H
 #define PHP_IMAGE_H

@@ -12,13 +12,13 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
-   |          Stig Bakken <ssb@guardian.no>                               |
+   | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
+   |          Stig Bakken <ssb@fast.no>                                   |
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.176 2002/02/01 08:53:47 derick Exp $ */
+/* $Id: gd.c,v 1.177 2002/02/28 08:26:10 sebastian Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Uwe Steinmann (Uwe.Steinmann@fernuni-hagen.de               |
+   | Author: Uwe Steinmann (Uwe.Steinmann@fernuni-hagen.de                |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.41 2002/01/21 23:21:32 jarkol Exp $ */
+/* $Id: php_domxml.h,v 1.42 2002/02/28 08:26:06 sebastian Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.88 2002/01/10 07:25:00 sas Exp $ */
+/* $Id: filestat.c,v 1.89 2002/02/28 08:26:45 sebastian Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -184,7 +184,7 @@ PHP_FUNCTION(disk_total_space)
 				&TotalNumberOfBytes,
 				&TotalNumberOfFreeBytes) == 0) RETURN_FALSE;
 
-			/* i know - this is ugly, but i works (thies@thieso.net) */
+			/* i know - this is ugly, but i works <thies@thieso.net> */
 			bytestotal  = TotalNumberOfBytes.HighPart *
 				(double) (((unsigned long)1) << 31) * 2.0 +
 				TotalNumberOfBytes.LowPart;
@@ -287,7 +287,7 @@ PHP_FUNCTION(disk_free_space)
 				&TotalNumberOfBytes,
 				&TotalNumberOfFreeBytes) == 0) RETURN_FALSE;
 
-			/* i know - this is ugly, but i works (thies@thieso.net) */
+			/* i know - this is ugly, but i works <thies@thieso.net> */
 			bytesfree  = FreeBytesAvailableToCaller.HighPart *
 				(double) (((unsigned long)1) << 31) * 2.0 +
 				FreeBytesAvailableToCaller.LowPart;

@@ -15,10 +15,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // |          Stig Bakken <ssb@fast.no>                                   |
-// |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.4 2001/12/17 21:08:58 cox Exp $
+// $Id: Dependency.php,v 1.5 2002/02/28 08:27:16 sebastian Exp $
 
 /**
 * Methods for dependencies check. Based on Stig's dependencies RFC

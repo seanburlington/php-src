@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Brad Atkins <brad@youreshop.com>                            |
+   | Author: Brad Atkins <brad@youreshop.com>                             |
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_notes.c,v 1.14 2001/12/31 05:37:18 eschmid Exp $ */
+/* $Id: php_notes.c,v 1.15 2002/02/28 08:26:27 sebastian Exp $ */
 
 #ifdef COMPILE_DL_NOTES
 #define HAVE_NOTES 1

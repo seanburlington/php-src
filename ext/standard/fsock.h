@@ -13,12 +13,12 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Paul Panotzki - Bunyip Information Systems                  |
-   |          Jim Winstead (jimw@php.net)                                 |
+   |          Jim Winstead <jimw@php.net>                                 |
    |          Wez Furlong                                                 |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.h,v 1.40 2001/12/11 15:30:31 sebastian Exp $ */
+/* $Id: fsock.h,v 1.41 2002/02/28 08:26:45 sebastian Exp $ */
 
 /* Synced with php 3.0 revision 1.24 1999-06-18 [ssb] */
 

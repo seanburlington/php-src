@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Vlad Krupin <phpdevel@echospace.com>                        |
+   | Author: Vlad Krupin <phpdevel@echospace.com>                         |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pspell.h,v 1.9 2001/12/11 15:30:13 sebastian Exp $ */
+/* $Id: php_pspell.h,v 1.10 2002/02/28 08:26:37 sebastian Exp $ */
 
 #ifndef _PSPELL_H
 #define _PSPELL_H

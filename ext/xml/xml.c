@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
-   |		  Thies C. Arntzen <thies@thieso.net>						  | 
+   |          Thies C. Arntzen <thies@thieso.net>                         | 
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.103 2002/01/27 07:19:30 jon Exp $ */
+/* $Id: xml.c,v 1.104 2002/02/28 08:26:57 sebastian Exp $ */
 
 #define IS_EXT_MODULE
 

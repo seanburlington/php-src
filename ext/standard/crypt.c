@@ -14,10 +14,10 @@
    +----------------------------------------------------------------------+
    | Authors: Stig Bakken <ssb@gaurdian.no>                               |
    |          Zeev Suraski <zeev@zend.com>                                |
-   |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   |          Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.54 2001/12/11 15:30:28 sebastian Exp $ */
+/* $Id: crypt.c,v 1.55 2002/02/28 08:26:44 sebastian Exp $ */
 #include <stdlib.h>
 
 #include "php.h"

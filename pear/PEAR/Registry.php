@@ -13,11 +13,10 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Stig Bakken <ssb@fast.no>                                   |
-// |                                                                      |
+// | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.13 2002/01/24 08:22:46 vblavet Exp $
+// $Id: Registry.php,v 1.14 2002/02/28 08:27:16 sebastian Exp $
 
 require_once "System.php";
 

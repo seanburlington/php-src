@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Sascha Schumann <sascha@schumann.cx>                        |
+   | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: flock_compat.c,v 1.15 2001/12/11 15:30:31 sebastian Exp $ */
+/* $Id: flock_compat.c,v 1.16 2002/02/28 08:26:45 sebastian Exp $ */
 
 #include <php.h>
 #include <errno.h>

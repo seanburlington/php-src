@@ -15,12 +15,12 @@
    | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
    |          Andreas Karajannis <Andreas.Karajannis@gmd.de>              |
    |          Frank M. Kromann <frank@frontbase.com> Support for DB/2 CLI |
-   |	      Kevin N. Shallow <kshallow@tampabay.rr.com> Velocis Support |
-   |		  Daniel R. Kalowsky <kalowsky@php.net>						  |
+   |          Kevin N. Shallow <kshallow@tampabay.rr.com> Velocis Support |
+   |          Daniel R. Kalowsky <kalowsky@php.net>                       |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.117 2002/02/26 15:33:54 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.118 2002/02/28 08:26:29 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

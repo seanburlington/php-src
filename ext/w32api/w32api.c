@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: James Moore <jmoore@php.net>                                |
+   | Author: James Moore <jmoore@php.net>                                 |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: w32api.c,v 1.2 2001/12/11 15:30:45 sebastian Exp $ */
+/* $Id: w32api.c,v 1.3 2002/02/28 08:26:55 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Chris Schneider <cschneid@relog.ch>                         |
+   | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.36 2002/01/27 06:18:05 sterling Exp $ */
+/* $Id: pack.c,v 1.37 2002/02/28 08:26:46 sebastian Exp $ */
 
 #include "php.h"
 

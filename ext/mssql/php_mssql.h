@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Frank M. Kromann <frank@frontbase.com>                      |
+   | Author: Frank M. Kromann <frank@frontbase.com>                       |
    +----------------------------------------------------------------------+
  */
 
 
-/* $Id: php_mssql.h,v 1.19 2001/12/11 15:29:56 sebastian Exp $ */
+/* $Id: php_mssql.h,v 1.20 2002/02/28 08:26:25 sebastian Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H

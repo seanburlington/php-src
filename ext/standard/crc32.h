@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
+   | Author: Rasmus Lerdorf <rasmus@php.net>                              |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: crc32.h,v 1.1 2002/02/20 18:18:39 rasmus Exp $ */
+/* $Id: crc32.h,v 1.2 2002/02/28 08:26:44 sebastian Exp $ */
 
 /*
  * This code implements the AUTODIN II polynomial

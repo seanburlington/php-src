@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Stig Sæther Bakken <ssb@guardian.no>                        |
+   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: formatted_print.c,v 1.45 2001/12/11 15:30:31 sebastian Exp $ */
+/* $Id: formatted_print.c,v 1.46 2002/02/28 08:26:45 sebastian Exp $ */
 
 #include <math.h>				/* modf() */
 #include "php.h"

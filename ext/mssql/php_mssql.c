@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Frank M. Kromann <frank@frontbase.com>                      |
+   | Author: Frank M. Kromann <frank@frontbase.com>                       |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.77 2002/01/03 23:08:21 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.78 2002/02/28 08:26:25 sebastian Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1

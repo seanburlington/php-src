@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Uwe Steinmann <steinm@php.net>                              |
+   | Author: Uwe Steinmann <steinm@php.net>                               |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.117 2002/02/20 23:35:20 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.118 2002/02/28 08:26:05 sebastian Exp $ */
 
 /* TODO
  * - Support Notation Nodes

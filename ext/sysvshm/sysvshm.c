@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Christian Cartus <cartus@atrior.de>                         |
+   | Author: Christian Cartus <cartus@atrior.de>                          |
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.54 2001/12/11 15:30:44 sebastian Exp $ */
+/* $Id: sysvshm.c,v 1.55 2002/02/28 08:26:53 sebastian Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *

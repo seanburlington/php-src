@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Uwe Steinmann                                               |
+   | Author: Uwe Steinmann <Uwe.Steinmann@fernuni-hagen.de>               |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.102 2001/12/11 15:29:28 sebastian Exp $ */
+/* $Id: hw.c,v 1.103 2002/02/28 08:26:15 sebastian Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>

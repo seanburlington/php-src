@@ -12,14 +12,14 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Jim Winstead (jimw@php.net)                                 |
-   |          Stig Sæther Bakken <ssb@guardian.no>                        |
+   | Authors: Jim Winstead <jimw@php.net>                                 |
+   |          Stig Sæther Bakken <ssb@fast.no>                            |
    |          Zeev Suraski <zeev@zend.com>                                |
-   | PHP 4.0 patches by Thies C. Arntzen (thies@thieso.net)               |
+   | PHP 4.0 patches by Thies C. Arntzen <thies@thieso.net>               |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.78 2002/02/21 11:44:41 yohgaki Exp $ */
+/* $Id: math.c,v 1.79 2002/02/28 08:26:46 sebastian Exp $ */
 
 #include "php.h"
 #include "php_math.h"

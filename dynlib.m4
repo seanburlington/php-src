@@ -11,10 +11,10 @@
 #  | obtain it through the world-wide-web, please send a note to          |
 #  | license@php.net so we can mail you a copy immediately.               |
 #  +----------------------------------------------------------------------+
-#  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
+#  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: dynlib.m4,v 1.8 2001/12/11 15:28:53 sebastian Exp $ 
+# $Id: dynlib.m4,v 1.9 2002/02/28 08:25:27 sebastian Exp $ 
 #
 
 

@@ -15,10 +15,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Stig Bakken <ssb@fast.no>                                   |
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
-// |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.37 2002/02/22 21:57:04 vblavet Exp $
+// $Id: Installer.php,v 1.38 2002/02/28 08:27:16 sebastian Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';

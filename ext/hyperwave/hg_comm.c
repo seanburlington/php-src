@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Uwe Steinmann                                               |
+   | Author: Uwe Steinmann <Uwe.Steinmann@fernuni-hagen.de>               |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hg_comm.c,v 1.51 2001/12/11 15:29:25 sebastian Exp $ */
+/* $Id: hg_comm.c,v 1.52 2002/02/28 08:26:14 sebastian Exp $ */
 
 /* #define HW_DEBUG */
 

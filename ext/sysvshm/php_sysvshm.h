@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Christian Cartus <cartus@atrior.de>                         |
+   | Author: Christian Cartus <cartus@atrior.de>                          |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sysvshm.h,v 1.10 2001/12/11 15:30:43 sebastian Exp $ */
+/* $Id: php_sysvshm.h,v 1.11 2002/02/28 08:26:52 sebastian Exp $ */
 
 #ifndef PHP_SYSVSHM_H
 #define PHP_SYSVSHM_H

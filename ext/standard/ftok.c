@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Andrew Sitnikov <sitnikov@infonet.ee                        |
+   | Author: Andrew Sitnikov <sitnikov@infonet.ee>                        |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ftok.c,v 1.3 2001/12/16 10:18:45 hholzgra Exp $ */
+/* $Id: ftok.c,v 1.4 2002/02/28 08:26:45 sebastian Exp $ */
 
 #include "php.h"
 

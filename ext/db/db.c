@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.69 2002/01/20 05:02:52 elixer Exp $ */
+/* $Id: db.c,v 1.70 2002/02/28 08:25:55 sebastian Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H

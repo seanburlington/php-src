@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
+   | Author:                                                              |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_content_types.c,v 1.19 2001/12/11 15:31:03 sebastian Exp $ */
+/* $Id: php_content_types.c,v 1.20 2002/02/28 08:27:03 sebastian Exp $ */
 
 #include "php.h"
 #include "SAPI.h"

@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Jim Winstead (jimw@php.net)                                  |
+   | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.28 2001/12/11 15:30:28 sebastian Exp $ */
+/* $Id: base64.c,v 1.29 2002/02/28 08:26:44 sebastian Exp $ */
 
 #include <string.h>
 

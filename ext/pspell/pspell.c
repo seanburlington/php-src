@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Vlad Krupin <phpdevel@echospace.com>                        |
+   | Author: Vlad Krupin <phpdevel@echospace.com>                         |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.27 2002/02/22 11:39:23 yohgaki Exp $ */
+/* $Id: pspell.c,v 1.28 2002/02/28 08:26:37 sebastian Exp $ */
 
 #define IS_EXT_MODULE
 

@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
-   |          Stig Bakken <ssb@guardian.no>                               |
+   | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
+   |          Stig Bakken <ssb@fast.no>                                   |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.37 2001/12/11 15:29:22 sebastian Exp $ */
+/* $Id: php_gd.h,v 1.38 2002/02/28 08:26:12 sebastian Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
+   | Author: Rasmus Lerdorf <rasmus@php.net>                              |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.47 2002/01/27 07:15:07 jon Exp $ */
+/* $Id: mail.c,v 1.48 2002/02/28 08:26:46 sebastian Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>

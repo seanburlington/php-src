@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Jim Winstead (jimw@php.net)                                  |
+   | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.50 2001/12/11 15:30:37 sebastian Exp $ */
+/* $Id: url.c,v 1.51 2002/02/28 08:26:49 sebastian Exp $ */
 
 #include <stdlib.h>
 #include <string.h>

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
+   | Author:                                                              |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.37 2001/12/27 15:42:05 kalowsky Exp $ */
+/* $Id: dns.c,v 1.38 2002/02/28 08:26:44 sebastian Exp $ */
 
 /* {{{ includes
  */

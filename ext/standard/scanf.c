@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: clayton collie <clcollie@mindspring.com>                    |
+   | Author: Clayton Collie <clcollie@mindspring.com>                     |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.14 2001/12/11 15:30:36 sebastian Exp $ */
+/* $Id: scanf.c,v 1.15 2002/02/28 08:26:49 sebastian Exp $ */
 
 /*
    scanf.c --

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Jim Winstead <jimw@php.net>                                 |
+   | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pageinfo.c,v 1.29 2001/12/11 15:30:34 sebastian Exp $ */
+/* $Id: pageinfo.c,v 1.30 2002/02/28 08:26:46 sebastian Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"

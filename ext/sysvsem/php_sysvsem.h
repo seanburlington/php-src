@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Tom May <tom@go2net.com>                                    |
+   | Author: Tom May <tom@go2net.com>                                     |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sysvsem.h,v 1.10 2001/12/11 15:30:43 sebastian Exp $ */
+/* $Id: php_sysvsem.h,v 1.11 2002/02/28 08:26:51 sebastian Exp $ */
 
 #ifndef PHP_SYSVSEM_H
 #define PHP_SYSVSEM_H

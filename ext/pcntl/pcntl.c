@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997, 1998, 1999, 2000, 2001 The PHP Group             |
+   | Copyright (c) 1997-2002 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Jason Greene <jason@inetgurus.net>                          |
+   | Author: Jason Greene <jason@inetgurus.net>                           |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.18 2002/01/04 14:08:25 hholzgra Exp $ */
+/* $Id: pcntl.c,v 1.19 2002/02/28 08:26:34 sebastian Exp $ */
 
 #define PCNTL_DEBUG 0
 

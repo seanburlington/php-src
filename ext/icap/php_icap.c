@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Mark Musone <musone@chek.com>                               |
+   | Author: Mark Musone <musone@chek.com>                                |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_icap.c,v 1.34 2001/12/11 15:29:30 sebastian Exp $ */
+/* $Id: php_icap.c,v 1.35 2002/02/28 08:26:15 sebastian Exp $ */
 
 #define ICAP1
 

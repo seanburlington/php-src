@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
 */
 
 
-/* $Id: php_ereg.h,v 1.14 2001/12/11 15:30:36 sebastian Exp $ */
+/* $Id: php_ereg.h,v 1.15 2002/02/28 08:26:49 sebastian Exp $ */
 
 #ifndef REG_H
 #define REG_H

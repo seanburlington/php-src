@@ -13,11 +13,10 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Stig Bakken <ssb@fast.no>                                   |
-// |                                                                      |
+// | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: HTTP.php,v 1.14 2002/02/11 13:07:42 mj Exp $
+// $Id: HTTP.php,v 1.15 2002/02/28 08:27:05 sebastian Exp $
 //
 // HTTP utility functions.
 //

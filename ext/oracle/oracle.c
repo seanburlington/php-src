@@ -14,13 +14,13 @@
    +----------------------------------------------------------------------+
    | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
    |          Mitch Golden <mgolden@interport.net>                        |
-   |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   |          Rasmus Lerdorf <rasmus@php.net>                             |
    |          Andreas Karajannis <Andreas.Karajannis@gmd.de>              |
    |          Thies C. Arntzen <thies@thieso.net>                         |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.77 2001/12/11 15:30:03 sebastian Exp $ */
+/* $Id: oracle.c,v 1.78 2002/02/28 08:26:31 sebastian Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */

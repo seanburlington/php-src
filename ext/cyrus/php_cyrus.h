@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Sterling Hughes <sterling@php.net>                          |
+   | Author: Sterling Hughes <sterling@php.net>                           |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_cyrus.h,v 1.2 2001/12/11 15:28:59 sebastian Exp $ */
+/* $Id: php_cyrus.h,v 1.3 2002/02/28 08:25:54 sebastian Exp $ */
 
 #ifndef PHP_CYRUS_H
 #define PHP_CYRUS_H

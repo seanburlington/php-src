@@ -15,10 +15,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Stig Bakken <ssb@fast.no>                                   |
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
-// |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.32 2002/02/10 17:23:04 cox Exp $
+// $Id: Common.php,v 1.33 2002/02/28 08:27:15 sebastian Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';

@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Zeev Suraski <zeev@zend.com>                                |
+   | Author: Zeev Suraski <zeev@zend.com>                                 |
    +----------------------------------------------------------------------+
 */
 
 
-/* $Id: php_mysql.h,v 1.25 2001/12/11 15:29:57 sebastian Exp $ */
+/* $Id: php_mysql.h,v 1.26 2002/02/28 08:26:26 sebastian Exp $ */
 
 #ifndef PHP_MYSQL_H
 #define PHP_MYSQL_H

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Lachlan Roche                                               |
+   | Author: Lachlan Roche                                                |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.c,v 1.25 2001/12/11 15:30:34 sebastian Exp $ */
+/* $Id: md5.c,v 1.26 2002/02/28 08:26:46 sebastian Exp $ */
 
 /* 
  * md5.c - Copyright 1997 Lachlan Roche 

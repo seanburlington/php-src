@@ -13,12 +13,12 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Stig Venaas <venaas@php.net>                                |
-   | Wez Furlong <wez@thebrainroom.com>                                   |
-   | Assymetric en/decryption code by Sascha Kettler <kettler@gmx.net>    |
+   |          Wez Furlong <wez@thebrainroom.com>                          |
+   |          Sascha Kettler <kettler@gmx.net>                            |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.40 2002/01/31 09:57:27 derick Exp $ */
+/* $Id: openssl.c,v 1.41 2002/02/28 08:26:30 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

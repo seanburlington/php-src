@@ -12,16 +12,16 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    |          Stig Bakken <ssb@fast.no>                                   |
    |          Andi Gutmans <andi@zend.com>                                |
    |          Zeev Suraski <zeev@zend.com>                                |
-   | PHP 4.0 patches by Thies C. Arntzen (thies@thieso.net)               |
+   | PHP 4.0 patches by Thies C. Arntzen <thies@thieso.net>               |
    | PHP 4.1 streams by Wez Furlong (wez@thebrainroom.com)                |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.204 2002/01/11 10:44:24 mfischer Exp $ */
+/* $Id: file.c,v 1.205 2002/02/28 08:26:44 sebastian Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 

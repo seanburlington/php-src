@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Zeev Suraski <zeev@zend.com>                                |
+   | Author: Zeev Suraski <zeev@zend.com>                                 |
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.115 2001/12/30 10:00:26 zak Exp $ */
+/* $Id: php_mysql.c,v 1.116 2002/02/28 08:26:25 sebastian Exp $ */
 
 
 /* TODO:

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Kristian Koehntopp <kris@koehntopp.de>                      |
+   | Author: Kristian Koehntopp <kris@koehntopp.de>                       |
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.38 2001/12/11 15:30:12 sebastian Exp $ */
+/* $Id: posix.c,v 1.39 2002/02/28 08:26:37 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -132,7 +132,7 @@ ZEND_GET_MODULE(posix)
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.38 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.39 $");
 	php_info_print_table_end();
 }
 /* }}} */

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Sascha Schumann <sascha@schumann.cx>                        |
+   | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_user.c,v 1.20 2001/12/11 15:30:21 sebastian Exp $ */
+/* $Id: mod_user.c,v 1.21 2002/02/28 08:26:40 sebastian Exp $ */
 
 #include "php.h"
 #include "php_session.h"

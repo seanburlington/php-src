@@ -13,11 +13,10 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Stig Bakken <ssb@fast.no>                                   |
-// |                                                                      |
+// | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.5 2001/12/11 15:31:41 sebastian Exp $
+// $Id: Config.php,v 1.6 2002/02/28 08:27:15 sebastian Exp $
 
 require_once 'PEAR.php';
 

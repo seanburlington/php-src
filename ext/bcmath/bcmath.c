@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Andi Gutmans <andi@zend.com>                                |
+   | Author: Andi Gutmans <andi@zend.com>                                 |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.35 2001/12/11 15:28:53 sebastian Exp $ */
+/* $Id: bcmath.c,v 1.36 2002/02/28 08:25:41 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -13,11 +13,10 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors:   Tomas V.V.Cox <cox@idecnet.com>                           |
-// |                                                                      |
+// | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.10 2002/02/10 17:03:22 cox Exp $
+// $Id: System.php,v 1.11 2002/02/28 08:27:05 sebastian Exp $
 //
 
 require_once 'PEAR.php';
@@ -42,7 +41,7 @@ require_once 'Console/Getopt.php';
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.10 $
+* @version  $Revision: 1.11 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */

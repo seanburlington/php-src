@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_type.h,v 1.1 2002/01/09 23:47:43 jimw Exp $ */
+/* $Id: php_type.h,v 1.2 2002/02/28 08:26:48 sebastian Exp $ */
 
 #ifndef PHP_TYPE_H
 #define PHP_TYPE_H

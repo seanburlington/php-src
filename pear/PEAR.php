@@ -16,10 +16,9 @@
 // | Authors: Sterling Hughes <sterling@php.net>                          |
 // |          Stig Bakken <ssb@fast.no>                                   |
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
-// |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.30 2002/02/18 10:27:36 mj Exp $
+// $Id: PEAR.php,v 1.31 2002/02/28 08:27:05 sebastian Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Jim Winstead (jimw@php.net)                                  |
+   | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: base64.h,v 1.8 2001/12/11 15:30:28 sebastian Exp $ */
+/* $Id: base64.h,v 1.9 2002/02/28 08:26:44 sebastian Exp $ */
 
 #ifndef BASE64_H
 #define BASE64_H

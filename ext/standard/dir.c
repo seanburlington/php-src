@@ -12,12 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
-   | PHP 4.0 patches by Thies C. Arntzen (thies@thieso.net)               |
+   | Author: Thies C. Arntzen <thies@thieso.net>                          |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.84 2002/01/03 06:57:22 thies Exp $ */
+/* $Id: dir.c,v 1.85 2002/02/28 08:26:44 sebastian Exp $ */
 
 /* {{{ includes/startup/misc */
 

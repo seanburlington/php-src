@@ -13,11 +13,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: James Moore <jmoore@php.net>                                |
+   | Author: James Moore <jmoore@php.net>                                 |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: uptime.php,v 1.2 2001/12/11 15:30:46 sebastian Exp $ */
+/* $Id: uptime.php,v 1.3 2002/02/28 08:26:55 sebastian Exp $ */
 
 /**
  * A little example that registers MessageBoxA and GetTickCount then using

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Thies C. Arntzen <thies@thieso.net>  			  |
+   | Author: Thies C. Arntzen <thies@thieso.net>                          |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_iptc.h,v 1.6 2001/12/11 15:30:35 sebastian Exp $ */
+/* $Id: php_iptc.h,v 1.7 2002/02/28 08:26:47 sebastian Exp $ */
 
 #ifndef PHP_IPTC_H
 #define PHP_IPTC_H

@@ -14,11 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Stig Bakken <ssb@gaurdian.no>                               |
    |          Zeev Suraski <zeev@zend.com>                                |
-   |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   |          Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_crypt.h,v 1.12 2001/12/11 15:30:35 sebastian Exp $ */
+/* $Id: php_crypt.h,v 1.13 2002/02/28 08:26:46 sebastian Exp $ */
 
 #ifndef PHP_CRYPT_H
 #define PHP_CRYPT_H

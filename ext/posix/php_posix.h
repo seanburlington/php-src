@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Kristian Koehntopp <kris@koehntopp.de>                      |
+   | Author: Kristian Koehntopp <kris@koehntopp.de>                       |
    +----------------------------------------------------------------------+
  */
 
 
-/* $Id: php_posix.h,v 1.9 2001/12/11 15:30:12 sebastian Exp $ */
+/* $Id: php_posix.h,v 1.10 2002/02/28 08:26:36 sebastian Exp $ */
 
 #ifndef PHP_POSIX_H
 #define PHP_POSIX_H

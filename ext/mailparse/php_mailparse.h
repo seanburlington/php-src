@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Wez Furlong <wez@thebrainroom.com>                          |
+   | Author: Wez Furlong <wez@thebrainroom.com>                           |
    | Credit also given to Double Precision Inc. who wrote the code that   |
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_mailparse.h,v 1.5 2001/12/11 15:29:49 sebastian Exp $ */
+/* $Id: php_mailparse.h,v 1.6 2002/02/28 08:26:20 sebastian Exp $ */
 
 #ifndef PHP_MAILPARSE_H
 #define PHP_MAILPARSE_H

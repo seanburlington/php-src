@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   | Author: Rasmus Lerdorf <rasmus@php.net>                              |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_aspell.h,v 1.8 2001/12/11 15:28:53 sebastian Exp $ */
+/* $Id: php_aspell.h,v 1.9 2002/02/28 08:25:39 sebastian Exp $ */
 
 #ifndef PHP_ASPELL_H
 #define PHP_ASPELL_H

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Kirill Maximov (kir@rus.net)				  |
+   | Author: Kirill Maximov <kir@rus.net>                                 |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cyr_convert.h,v 1.6 2001/12/11 15:30:28 sebastian Exp $ */
+/* $Id: cyr_convert.h,v 1.7 2002/02/28 08:26:44 sebastian Exp $ */
 
 #ifndef CYR_CONVERT_H
 #define CYR_CONVERT_H

@@ -12,12 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
-   |                                                                      |
+   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_versioning.h,v 1.4 2001/12/11 15:30:36 sebastian Exp $ */
+/* $Id: php_versioning.h,v 1.5 2002/02/28 08:26:48 sebastian Exp $ */
 
 #ifndef PHP_VERSIONING_H
 #define PHP_VERSIONING_H

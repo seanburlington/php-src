@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.h,v 1.12 2001/12/11 15:30:34 sebastian Exp $ */
+/* $Id: md5.h,v 1.13 2002/02/28 08:26:46 sebastian Exp $ */
 
 #ifndef MD5_H
 #define MD5_H

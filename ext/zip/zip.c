@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Sterling Hughes <sterling@php.net>                          |
+   | Author: Sterling Hughes <sterling@php.net>                           |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zip.c,v 1.28 2001/12/23 01:59:10 derick Exp $ */
+/* $Id: zip.c,v 1.29 2002/02/28 08:27:01 sebastian Exp $ */
 
 #include "php.h"
 #include "php_ini.h"

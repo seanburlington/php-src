@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Andrei Zmievski <andrei@php.net>                            |
+   | Author: Andrei Zmievski <andrei@php.net>                             |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: aggregation.c,v 1.1 2002/02/21 03:32:41 andrei Exp $ */
+/* $Id: aggregation.c,v 1.2 2002/02/28 08:26:43 sebastian Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"

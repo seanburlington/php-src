@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
    | Authors: Amitay Isaacs  <amitay@w-o-i.com>                           |
    |          Eric Warnke    <ericw@albany.edu>                           |
-   |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   |          Rasmus Lerdorf <rasmus@php.net>                             |
    |          Gerrit Thomson <334647@swin.edu.au>                         |
    |          Jani Taskinen  <sniper@iki.fi>                              |
    |          Stig Venaas    <venaas@uninett.no>                          |
@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.115 2002/02/11 02:48:49 mfischer Exp $ */
+/* $Id: ldap.c,v 1.116 2002/02/28 08:26:18 sebastian Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -263,7 +263,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.115 2002/02/11 02:48:49 mfischer Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.116 2002/02/28 08:26:18 sebastian Exp $" );
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));

@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Hartmut Holzgraefe <hartmut@six.de>                         |
+   | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.8 2001/12/11 15:31:00 sebastian Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.9 2002/02/28 08:27:02 sebastian Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 

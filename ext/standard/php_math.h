@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Jim Winstead (jimw@php.net)                                 |
-   |          Stig Sæther Bakken <ssb@guardian.no>                        |
+   | Authors: Jim Winstead <jimw@php.net>                                 |
+   |          Stig Sæther Bakken <ssb@fast.no>                            |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.15 2002/02/21 11:44:41 yohgaki Exp $ */
+/* $Id: php_math.h,v 1.16 2002/02/28 08:26:47 sebastian Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H

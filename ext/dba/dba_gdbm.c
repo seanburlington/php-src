@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Sascha Schumann <sascha@schumann.cx>                        |
+   | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_gdbm.c,v 1.9 2001/12/11 15:29:03 sebastian Exp $ */
+/* $Id: dba_gdbm.c,v 1.10 2002/02/28 08:25:59 sebastian Exp $ */
 
 #include "php.h"
 

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Andrew Skalski      <askalski@chek.com>                     |
+   | Author: Andrew Skalski <askalski@chek.com>                           |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.43 2002/02/10 12:35:29 venaas Exp $ */
+/* $Id: ftp.c,v 1.44 2002/02/28 08:26:09 sebastian Exp $ */
 
 #include "php.h"
 

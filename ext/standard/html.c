@@ -12,13 +12,13 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    |          Jaakko Hyvätti <jaakko.hyvatti@iki.fi>                      |
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.39 2001/12/11 15:30:31 sebastian Exp $ */
+/* $Id: html.c,v 1.40 2002/02/28 08:26:45 sebastian Exp $ */
 
 #include "php.h"
 #include "reg.h"

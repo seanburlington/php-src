@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Uwe Steinmann                                               |
+   | Authors: Uwe Steinmann <Uwe.Steinmann@fernuni-hagen.de>              |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_fdf.h,v 1.14 2001/12/11 15:29:16 sebastian Exp $ */
+/* $Id: php_fdf.h,v 1.15 2002/02/28 08:26:07 sebastian Exp $ */
 
 #ifndef PHP_FDF_H
 #define PHP_FDF_H

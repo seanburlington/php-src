@@ -15,10 +15,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Stig Bakken <ssb@fast.no>                                   |
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
-// |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.25 2002/02/23 15:32:33 ssb Exp $
+// $Id: Packager.php,v 1.26 2002/02/28 08:27:16 sebastian Exp $
 
 require_once 'PEAR/Common.php';
 

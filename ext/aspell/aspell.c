@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
+   | Author: Rasmus Lerdorf <rasmus@php.net>                              |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: aspell.c,v 1.36 2001/12/11 15:28:53 sebastian Exp $ */
+/* $Id: aspell.c,v 1.37 2002/02/28 08:25:38 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

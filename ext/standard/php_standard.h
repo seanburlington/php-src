@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
+   | Author:                                                              |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_standard.h,v 1.14 2002/02/21 03:32:42 andrei Exp $ */
+/* $Id: php_standard.h,v 1.15 2002/02/28 08:26:48 sebastian Exp $ */
 
 #include "basic_functions.h"
 #include "php_math.h"

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Paul Panotzki - Bunyip Information Systems                  |
+   | Author: Paul Panotzki - Bunyip Information Systems                   |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: microtime.h,v 1.8 2001/12/11 15:30:34 sebastian Exp $ */
+/* $Id: microtime.h,v 1.9 2002/02/28 08:26:46 sebastian Exp $ */
 
 #ifndef MICROTIME_H
 #define MICROTIME_H

@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
+   | Authors: Alexander Feldman                                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: crack.c,v 1.17 2002/02/04 14:28:02 yohgaki Exp $ */
+/* $Id: crack.c,v 1.18 2002/02/28 08:25:48 sebastian Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Jim Winstead <jimw@php.net>                                 |
+   | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.h,v 1.32 2002/02/01 20:04:14 jflemer Exp $ */
+/* $Id: fopen_wrappers.h,v 1.33 2002/02/28 08:27:03 sebastian Exp $ */
 
 #ifndef FOPEN_WRAPPERS_H
 #define FOPEN_WRAPPERS_H

@@ -11,10 +11,10 @@
 #  | obtain it through the world-wide-web, please send a note to          |
 #  | license@php.net so we can mail you a copy immediately.               |
 #  +----------------------------------------------------------------------+
-#  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
+#  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: dynlib.mk,v 1.3 2001/12/11 15:28:53 sebastian Exp $ 
+# $Id: dynlib.mk,v 1.4 2002/02/28 08:25:30 sebastian Exp $ 
 #
 
 all: all-recursive

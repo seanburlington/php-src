@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
+   | Author: Rasmus Lerdorf <rasmus@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.h,v 1.16 2001/12/11 15:31:54 sebastian Exp $ */
+/* $Id: mod_php4.h,v 1.17 2002/02/28 08:27:19 sebastian Exp $ */
 
 #ifndef MOD_PHP4_H
 #define MOD_PHP4_H

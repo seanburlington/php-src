@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: James Moore <jmoore@php.net>		                          |
+   | Author: James Moore <jmoore@php.net>                                 |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: test_dll.c,v 1.2 2001/12/11 15:30:47 sebastian Exp $ */
+/* $Id: test_dll.c,v 1.3 2002/02/28 08:26:56 sebastian Exp $ */
 
 #include <stdio.h>
 #include "dll_test.h"

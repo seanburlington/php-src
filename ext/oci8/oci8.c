@@ -13,14 +13,14 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
-   |          Thies C. Arntzen <thies@thieso.net>						  |
-   |																	  |
+   |          Thies C. Arntzen <thies@thieso.net>                         |
+   |                                                                      |
    | Collection support by Andy Sautins <asautins@veripost.net>           |
-   | Temporary LOB support by David Benson <dbenson@mancala.com>		  |
+   | Temporary LOB support by David Benson <dbenson@mancala.com>          |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.168 2002/02/10 12:41:52 thies Exp $ */
+/* $Id: oci8.c,v 1.169 2002/02/28 08:26:28 sebastian Exp $ */
 
 /* TODO list:
  *
@@ -631,7 +631,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.168 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.169 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );

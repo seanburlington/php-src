@@ -11,10 +11,10 @@
 #  | obtain it through the world-wide-web, please send a note to          |
 #  | license@php.net so we can mail you a copy immediately.               |
 #  +----------------------------------------------------------------------+
-#  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
+#  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules_pear.mk,v 1.15 2001/12/11 15:28:53 sebastian Exp $ 
+# $Id: rules_pear.mk,v 1.16 2002/02/28 08:25:37 sebastian Exp $ 
 #
 
 include $(top_srcdir)/build/rules_common.mk

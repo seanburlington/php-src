@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Zeev Suraski <zeev@zend.com>                                |
+   | Author: Zeev Suraski <zeev@zend.com>                                 |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sybase_ct.h,v 1.12 2001/12/11 15:30:42 sebastian Exp $ */
+/* $Id: php_sybase_ct.h,v 1.13 2002/02/28 08:26:51 sebastian Exp $ */
 
 #ifndef PHP_SYBASE_CT_H
 #define PHP_SYBASE_CT_H

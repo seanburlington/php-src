@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Chad Robinson <chadr@brttech.com>                           |
+   | Author: Chad Robinson <chadr@brttech.com>                            |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filepro.c,v 1.42 2001/12/11 15:29:17 sebastian Exp $ */
+/* $Id: filepro.c,v 1.43 2002/02/28 08:26:07 sebastian Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com

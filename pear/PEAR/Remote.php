@@ -13,11 +13,10 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Stig Bakken <ssb@fast.no>                                   |
-// |                                                                      |
+// | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.9 2002/02/13 01:09:55 ssb Exp $
+// $Id: Remote.php,v 1.10 2002/02/28 08:27:16 sebastian Exp $
 
 require_once 'PEAR.php';
 

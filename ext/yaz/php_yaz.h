@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Adam Dickmeiss <adam@indexdata.dk>                          |
+   | Author: Adam Dickmeiss <adam@indexdata.dk>                           |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.h,v 1.10 2002/02/27 12:58:32 dickmeiss Exp $ */
+/* $Id: php_yaz.h,v 1.11 2002/02/28 08:27:01 sebastian Exp $ */
 
 #ifndef PHP_YAZ_H
 #define PHP_YAZ_H

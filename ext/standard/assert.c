@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Thies C. Arntzen (thies@thieso.net)                          |
+   | Author: Thies C. Arntzen <thies@thieso.net>                          |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.46 2001/12/11 15:30:28 sebastian Exp $ */
+/* $Id: assert.c,v 1.47 2002/02/28 08:26:44 sebastian Exp $ */
 
 /* {{{ includes/startup/misc */
 

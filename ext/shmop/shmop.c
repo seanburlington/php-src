@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Slava Poliakov (hackie@prohost.org)                    	  |
-   |          Ilia Alshanetsky (ilia@prohost.org)                         |
+   | Authors: Slava Poliakov <hackie@prohost.org>                         |
+   |          Ilia Alshanetsky <ilia@prohost.org>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.22 2002/01/17 19:58:53 iliaa Exp $ */
+/* $Id: shmop.c,v 1.23 2002/02/28 08:26:41 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

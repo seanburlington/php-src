@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Nikolay P. Romanyuk <mag@redcom.ru>                         |
+   | Author: Nikolay P. Romanyuk <mag@redcom.ru>                          |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: velocis.c,v 1.33 2002/01/04 13:51:03 hholzgra Exp $ */
+/* $Id: velocis.c,v 1.34 2002/02/28 08:26:30 sebastian Exp $ */
 
 /*
  * TODO:

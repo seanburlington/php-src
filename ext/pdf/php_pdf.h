@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Uwe Steinmann <Uwe.Steinmann@fernuni-hagen.de>              |
+   | Author: Uwe Steinmann <Uwe.Steinmann@fernuni-hagen.de>               |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdf.h,v 1.23 2001/12/11 15:30:09 sebastian Exp $ */
+/* $Id: php_pdf.h,v 1.24 2002/02/28 08:26:35 sebastian Exp $ */
 
 #ifndef PHP_PDF_H
 #define PHP_PDF_H

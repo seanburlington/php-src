@@ -12,12 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_db.h,v 1.15 2002/01/20 04:55:40 elixer Exp $ */
+/* $Id: php_db.h,v 1.16 2002/02/28 08:25:55 sebastian Exp $ */
 
 
 #ifndef PHP_DB_H

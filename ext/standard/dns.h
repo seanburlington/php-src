@@ -12,12 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
-   |                                                                      |
+   | Author:                                                              |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dns.h,v 1.10 2001/12/11 15:30:29 sebastian Exp $ */
+/* $Id: dns.h,v 1.11 2002/02/28 08:26:44 sebastian Exp $ */
 
 #ifndef DNS_H
 #define DNS_H

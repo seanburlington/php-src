@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Andrei Zmievski <andrei@ispi.net>                           |
+   | Author: Andrei Zmievski <andrei@ispi.net>                            |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.90 2002/02/24 07:54:04 sebastian Exp $ */
+/* $Id: wddx.c,v 1.91 2002/02/28 08:26:57 sebastian Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"

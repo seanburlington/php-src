@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997, 1998, 1999, 2000, 2001 The PHP Group             |
+   | Copyright (c) 1997-2002 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -12,11 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
-   | Wez Furlong (wez@thebrainroom.com)                                   |
+   | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc2045appendurl.c,v 1.4 2001/12/11 15:29:49 sebastian Exp $ */
+/* $Id: rfc2045appendurl.c,v 1.5 2002/02/28 08:26:20 sebastian Exp $ */
 
 /*
 ** Copyright 2000 Double Precision, Inc.  See COPYING for

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   | Author: Rasmus Lerdorf <rasmus@php.net>                              |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: hg_comm.h,v 1.18 2001/12/11 15:29:28 sebastian Exp $ */
+/* $Id: hg_comm.h,v 1.19 2002/02/28 08:26:15 sebastian Exp $ */
 
 #ifndef HG_COMM_H
 #define HG_COMM_H

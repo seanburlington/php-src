@@ -12,12 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
-   |          Andrew Skalski      <askalski@chek.com>                     |
+   | Authors: Andrew Skalski <askalski@chek.com>                          |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.20 2002/01/06 23:10:54 venaas Exp $ */
+/* $Id: ftp.h,v 1.21 2002/02/28 08:26:10 sebastian Exp $ */
 
 #ifndef	FTP_H
 #define	FTP_H

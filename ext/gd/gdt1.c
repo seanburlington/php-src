@@ -12,12 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Jouni Ahto <jah@mork.net>                                   |
-   |                                                                      |
+   | Author: Jouni Ahto <jah@mork.net>                                    |
    +----------------------------------------------------------------------+
  */
 
-/* 	$Id: gdt1.c,v 1.15 2001/12/11 15:29:22 sebastian Exp $	 */
+/* 	$Id: gdt1.c,v 1.16 2002/02/28 08:26:12 sebastian Exp $	 */
 
 #if 0	/* Moved currently back to gd.c */
 

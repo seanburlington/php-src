@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.54 2001/12/11 15:30:31 sebastian Exp $ */
+/* $Id: head.c,v 1.55 2002/02/28 08:26:45 sebastian Exp $ */
 
 #include <stdio.h>
 #include "php.h"

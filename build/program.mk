@@ -11,10 +11,10 @@
 #  | obtain it through the world-wide-web, please send a note to          |
 #  | license@php.net so we can mail you a copy immediately.               |
 #  +----------------------------------------------------------------------+
-#  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
+#  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: program.mk,v 1.5 2001/12/11 15:28:53 sebastian Exp $ 
+# $Id: program.mk,v 1.6 2002/02/28 08:25:35 sebastian Exp $ 
 #
 
 PROGRAM_OBJECTS = $(PROGRAM_SOURCES:.c=.lo)

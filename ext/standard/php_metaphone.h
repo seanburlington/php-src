@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Thies C. Arntzen <thies@thieso.net>                         |
+   | Author: Thies C. Arntzen <thies@thieso.net>                          |
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_metaphone.h,v 1.11 2001/12/11 15:30:35 sebastian Exp $ */
+/* $Id: php_metaphone.h,v 1.12 2002/02/28 08:26:48 sebastian Exp $ */
 
 #ifndef PHP_METAPHONE_H
 #define PHP_METAPHONE_H

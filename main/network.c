@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Stig Venaas <venaas@uninett.no>                             |
+   | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.29 2002/02/12 11:00:15 sas Exp $ */
+/* $Id: network.c,v 1.30 2002/02/28 08:27:03 sebastian Exp $ */
 
 #include "php.h"
 

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
+   | Author: Rasmus Lerdorf <rasmus@php.net>                              |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: crc32.c,v 1.11 2002/02/20 18:18:39 rasmus Exp $ */
+/* $Id: crc32.c,v 1.12 2002/02/28 08:26:44 sebastian Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.h,v 1.11 2001/12/11 15:30:31 sebastian Exp $ */
+/* $Id: html.h,v 1.12 2002/02/28 08:26:45 sebastian Exp $ */
 
 #ifndef HTML_H
 #define HTML_H

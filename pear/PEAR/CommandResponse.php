@@ -13,11 +13,10 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Stig Bakken <ssb@fast.no>                                   |
-// |                                                                      |
+// | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: CommandResponse.php,v 1.1 2002/02/23 15:32:33 ssb Exp $
+// $Id: CommandResponse.php,v 1.2 2002/02/28 08:27:15 sebastian Exp $
 
 require_once "PEAR.php";
 

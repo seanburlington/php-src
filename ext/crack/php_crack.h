@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
+   | Authors: Alexander Feldman                                           |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_crack.h,v 1.4 2001/12/11 15:28:56 sebastian Exp $ */
+/* $Id: php_crack.h,v 1.5 2002/02/28 08:25:48 sebastian Exp $ */
 
 #ifndef ZEND_CRACK_H
 #define ZEND_CRACK_H

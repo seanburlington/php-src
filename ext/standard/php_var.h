@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Jani Lehtimäki <jkl@njet.net>                               |
+   | Author: Jani Lehtimäki <jkl@njet.net>                                |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_var.h,v 1.19 2002/02/10 17:38:15 jason Exp $ */
+/* $Id: php_var.h,v 1.20 2002/02/28 08:26:48 sebastian Exp $ */
 
 #ifndef PHP_VAR_H
 #define PHP_VAR_H

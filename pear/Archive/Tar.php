@@ -13,10 +13,10 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Vincent Blavet <vincent@blavet.net>                         |
+// | Author: Vincent Blavet <vincent@blavet.net>                          |
 // +----------------------------------------------------------------------+
 //
-// $Id: Tar.php,v 1.4 2002/02/20 22:15:28 vblavet Exp $
+// $Id: Tar.php,v 1.5 2002/02/28 08:27:05 sebastian Exp $
 
 require_once 'PEAR.php';
 
@@ -24,7 +24,7 @@ require_once 'PEAR.php';
 * Creates a (compressed) Tar archive
 *
 * @author   Vincent Blavet <vincent@blavet.net>
-* @version  $Revision: 1.4 $
+* @version  $Revision: 1.5 $
 * @package  Archive
 */
 class Archive_Tar extends PEAR

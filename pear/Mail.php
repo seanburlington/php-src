@@ -13,10 +13,10 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Chuck Hagenbuch <chuck@horde.org>                           |
+// | Author: Chuck Hagenbuch <chuck@horde.org>                            |
 // +----------------------------------------------------------------------+
 //
-// $Id: Mail.php,v 1.16 2001/12/17 15:33:34 cox Exp $
+// $Id: Mail.php,v 1.17 2002/02/28 08:27:05 sebastian Exp $
 
 require_once 'PEAR.php';
 
@@ -26,7 +26,7 @@ require_once 'PEAR.php';
  * useful in multiple mailer backends.
  *
  * @access public
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  * @package Mail
  */
 class Mail extends PEAR

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Kirill Maximov (kir@rus.net)				  |
+   | Author: Kirill Maximov (kir@rus.net)                                 |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: quot_print.h,v 1.6 2001/12/11 15:30:36 sebastian Exp $ */
+/* $Id: quot_print.h,v 1.7 2002/02/28 08:26:48 sebastian Exp $ */
 
 #ifndef QUOT_PRINT_H
 #define QUOT_PRINT_H

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Thies C. Arntzen <thies@thieso.net>						  |
+   | Author: Thies C. Arntzen <thies@thieso.net>                          |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: metaphone.c,v 1.19 2001/12/11 15:30:34 sebastian Exp $ */
+/* $Id: metaphone.c,v 1.20 2002/02/28 08:26:46 sebastian Exp $ */
 
 /*
 	Based on CPANs "Text-Metaphone-1.96" by Michael G Schwern <schwern@pobox.com> 

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Sterling Hughes <sterling@php.net>                          |
+   | Author: Sterling Hughes <sterling@php.net>                           |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyrus.c,v 1.8 2001/12/11 15:28:59 sebastian Exp $ */
+/* $Id: cyrus.c,v 1.9 2002/02/28 08:25:54 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -12,12 +12,12 @@
 | obtain it through the world-wide-web, please send a note to          |
 | license@php.net so we can mail you a copy immediately.               |
 +----------------------------------------------------------------------+
-| Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+| Authors: Rasmus Lerdorf <rasmus@php.net>                             |
 |          Mike Jackson <mhjack@tscnet.com>                            |
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.54 2001/12/11 15:30:24 sebastian Exp $ */
+/* $Id: snmp.c,v 1.55 2002/02/28 08:26:43 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Frank M. Kromann    <frank@kromann.info>                    |
+   | Authors: Frank M. Kromann <frank@kromann.info>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap_sendmail.c,v 1.2 2001/12/11 15:32:15 sebastian Exp $ */
+/* $Id: imap_sendmail.c,v 1.3 2002/02/28 08:27:22 sebastian Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>

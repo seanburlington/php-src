@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.97 2002/04/01 23:02:16 sniper Exp $ */
+/* $Id: rfc1867.c,v 1.98 2002/04/23 00:14:08 sniper Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -371,11 +371,12 @@ static char *php_mime_get_hdr_value(zend_llist header, char *key)
 	}
 	
 	entry = zend_llist_get_first(&header);
-	do {
+	while (entry) {
 		if (!strcasecmp(entry->key, key)) {
 			return entry->value;
 		}
-	} while ((entry = zend_llist_get_next(&header)));
+		entry = zend_llist_get_next(&header);
+	}
 	
 	return NULL;
 }
@@ -726,7 +727,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 			cancel_upload = 0;
 
 			if(strlen(filename) == 0) {
-				sapi_module.sapi_error(E_WARNING, "No file uploaded");
+				sapi_module.sapi_error(E_NOTICE, "No file uploaded");
 				cancel_upload = UPLOAD_ERROR_D;
 			}
 

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/08/09 22:02:42 musone Exp $
+dnl $Id: config.m4,v 1.3 1999/08/17 14:31:39 musone Exp $
 
 AC_MSG_CHECKING(for ICAP support)
 AC_ARG_WITH(icap,
@@ -11,9 +11,10 @@ AC_ARG_WITH(icap,
       ICAP_DIR=$withval
     fi
     
-    AC_ADD_INCLUDE($ICAP_DIR/)
-    AC_ADD_LIBRARY_WITH_PATH(icap, $ICAP_DIR/)
+    AC_ADD_INCLUDE($ICAP_DIR)
+    AC_ADD_LIBRARY_WITH_PATH(icap, $ICAP_DIR)
     AC_DEFINE(HAVE_ICAP)
+    PHP_EXTENSION(icap)
     AC_MSG_RESULT(yes)
   else
     AC_MSG_ERROR(no)

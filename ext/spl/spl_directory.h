@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: spl_directory.h,v 1.6 2004/01/20 20:59:45 helly Exp $ */
+
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
 

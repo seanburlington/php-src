@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: spl_functions.h,v 1.15 2004/01/20 20:59:45 helly Exp $ */
+
 #ifndef PHP_FUNCTIONS_H
 #define PHP_FUNCTIONS_H
 

@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: spl_iterators.c,v 1.15 2004/01/20 20:59:45 helly Exp $ */
+
 #ifdef HAVE_CONFIG_H
 # include "config.h"
 #endif

@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: spl_iterators.h,v 1.7 2004/01/20 20:59:45 helly Exp $ */
+
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
 

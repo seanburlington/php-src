@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.4 2004/09/19 18:13:09 wez Exp $ */
+/* $Id: sqlite_driver.c,v 1.5 2004/09/23 20:09:00 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -238,7 +238,8 @@ static struct pdo_dbh_methods sqlite_methods = {
 	NULL, /* set_attribute */
 	pdo_sqlite_last_insert_id,
 	pdo_sqlite_fetch_error_func,
-	pdo_sqlite_get_attribute
+	pdo_sqlite_get_attribute,
+	NULL	/* check_liveness: not needed */
 };
 
 static char *make_filename_safe(const char *filename TSRMLS_DC)

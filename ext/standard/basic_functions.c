@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.587 2003/02/24 00:09:18 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.588 2003/02/24 21:56:18 pollita Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -889,6 +889,11 @@ function_entry basic_functions[] = {
 	PHP_FE(str_rot13, NULL)
 	PHP_FE(stream_get_filters, NULL)
 	PHP_FE(stream_register_filter, NULL)
+	PHP_FE(stream_bucket_make_writeable,		NULL)
+	PHP_FE(stream_bucket_prepend,				NULL)
+	PHP_FE(stream_bucket_append,				NULL)
+	PHP_FE(stream_bucket_new,					NULL)
+	PHP_FE(stream_bucket,						NULL)
 
 	/* functions from aggregate.c */
 	PHP_FE(aggregate,						first_arg_force_ref)

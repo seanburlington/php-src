@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.113 2003/01/09 17:29:31 wez Exp $ */
+/* $Id: basic_functions.h,v 1.114 2003/02/24 21:56:19 pollita Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -109,6 +109,11 @@ PHP_FUNCTION(parse_ini_file);
 PHP_FUNCTION(str_rot13);
 PHP_FUNCTION(stream_get_filters);
 PHP_FUNCTION(stream_register_filter);
+PHP_FUNCTION(stream_bucket_make_writeable);
+PHP_FUNCTION(stream_bucket_prepend);
+PHP_FUNCTION(stream_bucket_append);
+PHP_FUNCTION(stream_bucket_new);
+PHP_FUNCTION(stream_bucket);
 PHP_MINIT_FUNCTION(user_filters);
 
 #ifdef PHP_WIN32

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.25 2005/02/09 04:54:56 wez Exp $ */
+/* $Id: pdo.c,v 1.26 2005/02/09 15:12:41 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -335,7 +335,9 @@ PHP_MINFO_FUNCTION(pdo)
 	php_info_print_table_header(2, "pdo support", "enabled");
 	php_info_print_table_end();
 
+#if 0
 	DISPLAY_INI_ENTRIES();
+#endif
 }
 /* }}} */
 

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.52 2005/02/09 06:43:15 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.53 2005/02/09 15:12:41 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -71,7 +71,7 @@ void pdo_raise_impl_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *sqlstate
 	add_next_index_long(info, 0);
 		
 	if (supp) {
-		spprintf(&message, 0, "SQLSTATE[%s]: %s: 0 %s", *pdo_err, msg, supp);
+		spprintf(&message, 0, "SQLSTATE[%s]: %s: %s", *pdo_err, msg, supp);
 	} else {
 		spprintf(&message, 0, "SQLSTATE[%s]: %s", *pdo_err, msg);
 	}

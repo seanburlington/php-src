@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.106.2.14 2004/07/01 15:43:40 zeev Exp $ */
+/* $Id: php_ini.c,v 1.106.2.15 2004/09/17 02:49:48 iliaa Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -484,9 +484,11 @@ int php_shutdown_config(void)
 	zend_hash_destroy(&configuration_hash);
 	if (php_ini_opened_path) {
 		free(php_ini_opened_path);
+		php_ini_opened_path = NULL;
 	}
 	if (php_ini_scanned_files) {
 		free(php_ini_scanned_files);
+		php_ini_scanned_files = NULL;
 	}
 	return SUCCESS;
 }

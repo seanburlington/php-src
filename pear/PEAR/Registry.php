@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.22 2002/04/01 16:10:39 cox Exp $
+// $Id: Registry.php,v 1.23 2002/04/02 09:18:07 ssb Exp $
 
 require_once "System.php";
 require_once "PEAR.php";
@@ -57,7 +57,7 @@ class PEAR_Registry extends PEAR
 
     // }}}
 
-    // {{{ PEAR_Registry
+    // {{{ constructor
 
     /**
      * PEAR_Registry constructor.
@@ -79,7 +79,7 @@ class PEAR_Registry extends PEAR
     }
 
     // }}}
-    // {{{ _PEAR_Registry
+    // {{{ destructor
 
     /**
      * PEAR_Registry destructor.  Makes sure no locks are forgotten.

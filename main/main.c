@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.562 2003/07/30 16:15:03 zeev Exp $ */
+/* $Id: main.c,v 1.563 2003/08/09 23:15:40 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -923,6 +923,7 @@ static void php_message_handler_for_zend(long message, void *data)
 void php_on_timeout(int seconds TSRMLS_DC)
 {
 	PG(connection_status) |= PHP_CONNECTION_TIMEOUT;
+	zend_set_timeout(EG(timeout_seconds));
 }
 
 #if PHP_SIGCHILD

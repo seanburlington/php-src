@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.4 1999/12/04 19:16:12 sas Exp $ */
+/* $Id: sapi_apache.c,v 1.5 1999/12/09 17:13:20 zeev Exp $ */
 
 #include "php.h"
 
@@ -79,7 +79,6 @@ PHPAPI int apache_php_module_main(request_rec *r, int fd, int display_source_mod
 		if (open_file_for_scanning(&file_handle CLS_CC)==SUCCESS) {
 			php_get_highlight_struct(&syntax_highlighter_ini);
 			zend_highlight(&syntax_highlighter_ini);
-			fclose(file_handle.handle.fp);
 			return OK;
 		} else {
 			return NOT_FOUND;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.79 2000/11/06 18:19:05 stas Exp $ */
+/* $Id: var.c,v 1.80 2000/11/07 15:06:43 stas Exp $ */
 
 
 /* {{{ includes 
@@ -392,8 +392,7 @@ int php_var_unserialize(pval **rval, const char **p, const char *max, HashTable 
 			if(zend_hash_index_find(var_hash, id, (void *)&rval_ref) != SUCCESS) {
 				return 0;
 			}
-			zval_dtor(*rval);
-			FREE_ZVAL(*rval);
+			zval_ptr_dtor(rval);
 			*rval = *rval_ref;
 			(*rval)->refcount++;
 			(*rval)->is_ref = 1;

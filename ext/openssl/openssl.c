@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.52.2.12 2003/05/01 10:44:17 wez Exp $ */
+/* $Id: openssl.c,v 1.52.2.13 2003/05/05 16:29:57 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2967,7 +2967,7 @@ PHP_FUNCTION(openssl_open)
 
 /* SSL verification functions */
 
-#define GET_VER_OPT(name)				SUCCESS == php_stream_context_get_option(stream->context, "ssl", name, &val)
+#define GET_VER_OPT(name)				(stream->context && SUCCESS == php_stream_context_get_option(stream->context, "ssl", name, &val))
 #define GET_VER_OPT_STRING(name, str)	if (GET_VER_OPT(name)) { convert_to_string_ex(val); str = Z_STRVAL_PP(val); }
 
 static int verify_callback(int preverify_ok, X509_STORE_CTX *ctx)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.86 2003/03/04 23:45:48 helly Exp $ */
+/* $Id: dba.c,v 1.87 2003/03/20 19:54:22 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -315,11 +315,21 @@ PHPAPI dba_handler *dba_get_handler(const char* handler_name)
  */ 
 static void dba_close(dba_info *info TSRMLS_DC)
 {
-	if (info->hnd) info->hnd->close(info TSRMLS_CC);
-	if (info->path) pefree(info->path, info->flags&DBA_PERSISTENT);
-	if (info->fp && info->fp!=info->lock.fp) php_stream_close(info->fp);
-	if (info->lock.fp) php_stream_close(info->lock.fp);
-	if (info->lock.name) pefree(info->lock.name, info->flags&DBA_PERSISTENT);
+	if (info->hnd) {
+		info->hnd->close(info TSRMLS_CC);
+	}
+	if (info->path) {
+		pefree(info->path, info->flags&DBA_PERSISTENT);
+	}
+	if (info->fp && info->fp!=info->lock.fp) {
+		php_stream_close(info->fp);
+	}
+	if (info->lock.fp) {
+		php_stream_close(info->lock.fp);
+	}
+	if (info->lock.name) {
+		pefree(info->lock.name, info->flags&DBA_PERSISTENT);
+	}
 	pefree(info, info->flags&DBA_PERSISTENT);
 }
 /* }}} */

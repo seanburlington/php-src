@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.343 2003/01/03 14:24:07 hyanantha Exp $ */
+/* $Id: session.c,v 1.344 2003/01/08 13:28:16 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1604,6 +1604,7 @@ PHP_MINIT_FUNCTION(session)
 
 	PS(module_number) = module_number; /* if we really need this var we need to init it in zts mode as well! */
 
+	PS(session_status) = php_session_none;
 	REGISTER_INI_ENTRIES();
 
 #ifdef HAVE_LIBMM

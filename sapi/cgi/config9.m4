@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.2 2002/11/26 05:51:15 shane Exp $
+dnl $Id: config9.m4,v 1.3 2002/12/01 21:50:35 shane Exp $
 dnl
 
 AC_ARG_ENABLE(cgi,
@@ -39,6 +39,15 @@ AC_ARG_ENABLE(fastcgi,
   PHP_ENABLE_FASTCGI=$enableval
 ],[
   PHP_ENABLE_FASTCGI=no
+])
+
+AC_ARG_ENABLE(path-info-check,
+[  --disable-path-info-check  If this is disabled, paths such as
+                          /info.php/test?a=b will fail to work.],
+[
+  PHP_ENABLE_PATHINFO_CHECK=$enableval
+],[
+  PHP_ENABLE_PATHINFO_CHECK=yes
 ])
 
 AC_DEFUN(PHP_TEST_WRITE_STDOUT,[
@@ -100,6 +109,15 @@ if test "$PHP_SAPI" = "default"; then
     fi
     AC_DEFINE_UNQUOTED(DISCARD_PATH, $DISCARD_PATH, [ ])
     AC_MSG_RESULT($PHP_DISCARD_PATH)
+
+    AC_MSG_CHECKING(whether to enable path info checking)
+    if test "$PHP_ENABLE_PATHINFO_CHECK" = "yes"; then
+      ENABLE_PATHINFO_CHECK=1
+    else
+      ENABLE_PATHINFO_CHECK=0
+    fi
+    AC_DEFINE_UNQUOTED(ENABLE_PATHINFO_CHECK, $ENABLE_PATHINFO_CHECK, [ ])
+    AC_MSG_RESULT($PHP_ENABLE_PATHINFO_CHECK)
 
     AC_MSG_CHECKING(whether to enable fastcgi support)
     PHP_LIBFCGI_DIR="$abs_srcdir/sapi/cgi/libfcgi"

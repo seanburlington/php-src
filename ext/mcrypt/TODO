@@ -1,6 +1,6 @@
-/* $Id: TODO,v 1.1 2001/12/15 13:18:51 derick Exp $ */
+/* $Id: TODO,v 1.2 2003/01/03 19:50:41 derick Exp $ */
 
 TODO:
 - Convert to zend_parse_parameters
 - Unify error handling
-- Get rid of libmcrypt 2.2.x compability
+- Implement encryption streams

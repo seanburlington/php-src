@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.79 2004/04/27 19:28:11 pollita Exp $ */
+/* $Id: url.c,v 1.80 2004/05/28 11:33:23 sesser Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -86,7 +86,7 @@ PHPAPI char *php_replace_controlchars(char *str)
 PHPAPI php_url *php_url_parse(char const *str)
 {
 	int length = strlen(str);
-	char port_buf[5];
+	char port_buf[6];
 	php_url *ret = ecalloc(1, sizeof(php_url));
 	char const *s, *e, *p, *pp, *ue;
 		

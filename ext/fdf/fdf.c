@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.26 2000/06/24 15:31:07 sas Exp $ */
+/* $Id: fdf.c,v 1.27 2000/07/06 05:30:05 steinm Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -115,6 +115,9 @@ PHP_MINIT_FUNCTION(fdf)
 {
 	FDFErc err;
 	FDF_GLOBAL(le_fdf) = register_list_destructors(phpi_FDFClose, NULL);
+#ifdef WIN32
+	return SUCCESS;
+#endif
 	err = FDFInitialize();
 	if(err == FDFErcOK)
 		return SUCCESS;
@@ -133,6 +136,9 @@ PHP_MINFO_FUNCTION(fdf)
 PHP_MSHUTDOWN_FUNCTION(fdf)
 {
 	FDFErc err;
+#ifdef WIN32
+	return SUCCESS;
+#endif
 	err = FDFFinalize();
 	if(err == FDFErcOK)
 		return SUCCESS;

@@ -26,7 +26,7 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fdf.h,v 1.3 2000/07/02 23:46:40 sas Exp $ */
+/* $Id: php_fdf.h,v 1.4 2000/07/06 05:30:06 steinm Exp $ */
 
 #ifndef PHP_FDF_H
 #define PHP_FDF_H
@@ -62,4 +62,5 @@ PHP_FUNCTION(fdf_add_template);
 #else
 #define phpext_fdf_ptr NULL
 #endif
+#define phpext_fdf_ptr fdf_module_ptr
 #endif /* PHP_FDF_H */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.16 2005/02/07 00:26:22 wez Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.17 2005/02/09 16:14:50 iliaa Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -83,7 +83,6 @@ PDO_API int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len,
 	int bindno = 0;
 	int ret = 0;
 	int newbuffer_len;
-	int padding;
 	HashTable *params;
 	struct pdo_bound_param_data *param;
 	int query_type = PDO_PLACEHOLDER_NONE;

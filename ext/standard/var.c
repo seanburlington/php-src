@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.60 2000/06/16 18:36:30 andrei Exp $ */
+/* $Id: var.c,v 1.61 2000/06/16 19:53:06 andrei Exp $ */
 
 
 /* {{{ includes 
@@ -521,6 +521,10 @@ int php_var_unserialize(pval **rval, const char **p, const char *max)
 
 				zval_dtor(fname);
 				FREE_ZVAL(fname);
+				if (retval_ptr) {
+					zval_dtor(retval_ptr);
+					FREE_ZVAL(retval_ptr);
+				}
 			}
 
 			return *((*p)++) == '}';

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.482 2002/08/22 07:48:22 chregu Exp $ */
+/* $Id: main.c,v 1.483 2002/08/23 17:39:20 wez Exp $ */
 
 /* {{{ includes
  */
@@ -711,7 +711,7 @@ static FILE *php_fopen_wrapper_for_zend(const char *filename, char **opened_path
 {
 	TSRMLS_FETCH();
 
-	return php_stream_open_wrapper_as_file((char *)filename, "rb", USE_PATH|IGNORE_URL_WIN|REPORT_ERRORS, opened_path);
+	return php_stream_open_wrapper_as_file((char *)filename, "rb", ENFORCE_SAFE_MODE|USE_PATH|IGNORE_URL_WIN|REPORT_ERRORS, opened_path);
 }
 /* }}} */
 

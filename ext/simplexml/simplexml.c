@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.45 2003/06/30 03:08:48 sterling Exp $ */
+/* $Id: simplexml.c,v 1.46 2003/06/30 03:11:03 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -147,10 +147,10 @@ sxe_property_read(zval *object, zval *member TSRMLS_DC)
 	while (node) {
 		SKIP_TEXT(node);
 		
-		if (node->ns) {
+		do if (node->ns) {
 			if (node->parent->ns) {
 				if (!xmlStrcmp(node->ns->href, node->parent->ns->href)) {
-					goto this_iter;
+					break;
 				}
 			}
 			
@@ -160,8 +160,7 @@ sxe_property_read(zval *object, zval *member TSRMLS_DC)
 				APPEND_CUR_ELEMENT(counter, value);
 				goto next_iter;
 			}
-		}
-this_iter:
+		} while (0);
 
 		if (!xmlStrcmp(node->name, name)) {
 			APPEND_PREV_ELEMENT(counter, value);
@@ -1060,7 +1059,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.45 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.46 $");
 	php_info_print_table_end();
 
 }

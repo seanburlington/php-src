@@ -16,13 +16,19 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.16 2004/11/01 20:57:23 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.17 2005/03/06 22:57:45 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
 
 #include "php.h"
 #include "php_spl.h"
+
+#define spl_ce_Traversable   zend_ce_traversable
+#define spl_ce_Iterator      zend_ce_iterator
+#define spl_ce_Aggregate     zend_ce_aggregate
+#define spl_ce_ArrayAccess   zend_ce_arrayaccess
+#define spl_ce_Serializeable zend_ce_serializeable
 
 extern PHPAPI zend_class_entry *spl_ce_RecursiveIterator;
 extern PHPAPI zend_class_entry *spl_ce_RecursiveIteratorIterator;

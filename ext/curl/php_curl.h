@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.28 2002/08/12 15:56:13 wez Exp $ */
+/* $Id: php_curl.h,v 1.29 2002/11/08 17:58:43 sterling Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -92,6 +92,7 @@ typedef struct {
 	struct _php_curl_error   err;
 	struct _php_curl_free    to_free;
 	long                     id;
+	unsigned int             uses;
 } php_curl;
 
 /* streams support */

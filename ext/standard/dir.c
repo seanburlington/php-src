@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.110 2002/11/14 22:50:01 ssb Exp $ */
+/* $Id: dir.c,v 1.111 2002/11/15 07:21:33 sniper Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -131,8 +131,8 @@ PHP_MINIT_FUNCTION(dir)
 	dirsep_str[0] = DEFAULT_SLASH;
 	dirsep_str[1] = '\0';
 	REGISTER_STRING_CONSTANT("DIRECTORY_SEPARATOR", dirsep_str, CONST_CS|CONST_PERSISTENT);
-    pathsep_str[0] = ZEND_PATHS_SEPARATOR;
-    pathsep_str[1] = '\0';
+	pathsep_str[0] = ZEND_PATHS_SEPARATOR;
+	pathsep_str[1] = '\0';
 	REGISTER_STRING_CONSTANT("PATH_SEPARATOR", pathsep_str, CONST_CS|CONST_PERSISTENT);
 
 #ifdef HAVE_GLOB

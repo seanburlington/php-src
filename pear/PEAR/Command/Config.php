@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.15.2.1 2002/05/28 02:14:10 ssb Exp $
+// $Id: Config.php,v 1.15.2.2 2002/05/30 10:14:57 dickmann Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";
@@ -104,7 +104,7 @@ in.  The default layer is "user".
             } elseif ($value === true) {
                 $value = 'true';
             }
-            $data['data'][] = array($key, $value);
+            $data['data'][$this->config->getGroup($key)][] = array($this->config->getPrompt($key) , $key, $value);
         }
         $this->ui->outputData($data, $command);
         return true;

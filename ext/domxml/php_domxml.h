@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.72.4.5 2003/09/26 16:33:58 moriyoshi Exp $ */
+/* $Id: php_domxml.h,v 1.72.4.6 2004/08/13 11:38:03 rrichards Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -75,6 +75,8 @@ PHPAPI zval *php_domobject_new(xmlNodePtr obj, int *found, zval* in TSRMLS_DC);
 /* directory functions */
 PHP_MINIT_FUNCTION(domxml);
 PHP_MSHUTDOWN_FUNCTION(domxml);
+PHP_RINIT_FUNCTION(domxml);
+PHP_RSHUTDOWN_FUNCTION(domxml);
 PHP_MINFO_FUNCTION(domxml);
 PHP_FUNCTION(domxml_version);
 PHP_FUNCTION(xmldoc);

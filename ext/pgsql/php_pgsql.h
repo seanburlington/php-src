@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.46 2002/05/10 02:39:37 edink Exp $ */
+/* $Id: php_pgsql.h,v 1.47 2002/07/21 07:25:10 yohgaki Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -80,6 +80,7 @@ PHP_FUNCTION(pg_fetch_array);
 PHP_FUNCTION(pg_fetch_object);
 PHP_FUNCTION(pg_fetch_result);
 PHP_FUNCTION(pg_fetch_row);
+PHP_FUNCTION(pg_fetch_all);
 PHP_FUNCTION(pg_affected_rows);
 PHP_FUNCTION(pg_get_result);
 PHP_FUNCTION(pg_result_status);
@@ -153,6 +154,7 @@ PHPAPI int php_pgsql_insert(PGconn *pg_link, const char *table, zval *values, ul
 PHPAPI int php_pgsql_update(PGconn *pg_link, const char *table, zval *values, zval *ids, ulong opt , char **sql TSRMLS_DC);
 PHPAPI int php_pgsql_delete(PGconn *pg_link, const char *table, zval *ids, ulong opt, char **sql TSRMLS_DC);
 PHPAPI int php_pgsql_select(PGconn *pg_link, const char *table, zval *ids, zval *ret_array, ulong opt, char **sql  TSRMLS_DC);
+PHPAPI int php_pgsql_result2array(PGresult *pg_result, zval *ret_array TSRMLS_DC);
 
 /* internal functions */
 static void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent);

@@ -14,11 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Shane Caraveo             <shane@caraveo.com>               | 
    |          Colin Viebrock            <colin@easydns.com>               |
-   |          Hartmut Holzgraefe        <hartmut@six.de>                  |
+   |          Hartmut Holzgraefe        <hholzgra@php.net>                |
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: calendar.c,v 1.30 2002/11/07 14:52:02 wez Exp $ */
+/* $Id: calendar.c,v 1.31 2002/11/25 12:30:22 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

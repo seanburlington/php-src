@@ -12,10 +12,10 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Hartmut Holzgraefe  <hartmut@six.de>                         |
+  | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.18 2002/11/18 21:20:45 moriyoshi Exp $ 
+  $Id: mime_magic.c,v 1.19 2002/11/25 12:30:24 hholzgra Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:

@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
+   | Author: Hartmut Holzgraefe <hholzgra@php.net>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.25 2002/08/24 01:19:28 helly Exp $ */
+/* $Id: levenshtein.c,v 1.26 2002/11/25 12:30:26 hholzgra Exp $ */
 
 #include "php.h"
 #include <stdlib.h>

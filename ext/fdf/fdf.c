@@ -13,11 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Uwe Steinmann <Uwe.Steinmann@fernuni-hagen.de>              |
-   |          Hartmut Holzgraefe <hartmut@six.de>                         |
+   |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.66 2002/10/23 01:11:06 hholzgra Exp $ */
+/* $Id: fdf.c,v 1.67 2002/11/25 12:30:22 hholzgra Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */

@@ -20,14 +20,14 @@
    |          Rasmus Lerdorf      <rasmus@php.net>                        |
    |          Chuck Hagenbuch     <chuck@horde.org>                       |
    |          Andrew Skalski      <askalski@chekinc.com>                  |
-   |          Hartmut Holzgraefe  <hartmut@six.de>                        |
+   |          Hartmut Holzgraefe  <hholzgra@php.net>                      |
    |          Jani Taskinen       <sniper@iki.fi>                         |
    |          Daniel R. Kalowsky  <kalowsky@php.net>                      |
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.24 2002/10/24 13:14:37 sas Exp $ */
+/* $Id: php_imap.h,v 1.25 2002/11/25 12:30:23 hholzgra Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H

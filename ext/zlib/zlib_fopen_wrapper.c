@@ -13,10 +13,10 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Author: Wez Furlong <wez@thebrainroom.com>, based on work by:        |
-   |         Hartmut Holzgraefe <hartmut@six.de>                          |
+   |         Hartmut Holzgraefe <hholzgra@php.net>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.33 2002/10/15 16:01:00 wez Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.34 2002/11/25 12:30:27 hholzgra Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 

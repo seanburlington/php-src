@@ -1,17 +1,19 @@
 dnl
-dnl $Id: config.m4,v 1.4 2002/12/01 13:36:53 phanto Exp $
+dnl $Id: config.m4,v 1.5 2002/12/01 13:44:22 phanto Exp $
 dnl
 
 AC_MSG_CHECKING(for Milter support)
 AC_ARG_WITH(milter,
 [  --with-milter=DIR       Build PHP as Milter application],[
   if test "$withval" = "yes"; then
-    if test -f /usr/lib/libmilter.a; then
+    if test -f /usr/lib/libmilter.a ; then
       MILTERPATH=/usr/lib
-    else if test -f /usr/lib/libmilter/libmilter.a; then
-      MILTERPATH=/usr/lib/libmilter
     else
-      AC_MSG_ERROR(Unable to find libmilter.a)
+      if test -f /usr/lib/libmilter/libmilter.a ; then
+        MILTERPATH=/usr/lib/libmilter
+      else
+        AC_MSG_ERROR(Unable to find libmilter.a)
+      fi
     fi
   else
     MILTERPATH=$withval

@@ -15,7 +15,7 @@
    | Author: Jim Winstead (jimw@php.net)                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.48 2001/10/19 17:16:12 andrei Exp $ */
+/* $Id: url.c,v 1.49 2001/10/20 10:58:33 derick Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -245,7 +245,7 @@ PHPAPI char *php_url_encode(char *s, int len, int *new_length)
 	register int x, y;
 	unsigned char *str;
 
-	str = (unsigned char *) emalloc(3 * strlen(s) + 1);
+	str = (unsigned char *) emalloc(3 * len + 1);
 	for (x = 0, y = 0; len--; x++, y++) {
 		str[y] = (unsigned char) s[x];
 		if (str[y] == ' ') {

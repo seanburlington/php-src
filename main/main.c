@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.467 2002/07/17 08:06:43 derick Exp $ */
+/* $Id: main.c,v 1.468 2002/07/25 09:33:26 sesser Exp $ */
 
 /* {{{ includes
  */
@@ -776,7 +776,9 @@ void php_request_shutdown(void *dummy)
 		int i;
 
 		for (i=0; i<NUM_TRACK_VARS; i++) {
-			zval_ptr_dtor(&PG(http_globals)[i]);
+			if (PG(http_globals)[i]) {
+				zval_ptr_dtor(&PG(http_globals)[i]);
+			}
 		}
 	} zend_end_try();
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.71 2000/03/12 19:42:29 kk Exp $ */
+/* $Id: file.c,v 1.72 2000/03/17 00:44:55 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1477,7 +1477,7 @@ PHP_FUNCTION(ftruncate)
 	convert_to_long_ex(size);
 
 	ret = ftruncate(fileno((FILE *)what), (*size)->value.lval);
-	RETURN_LONG(ret);
+	RETURN_LONG(ret + 1);
 }
 /* }}} */
 

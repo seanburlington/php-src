@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.117 2002/10/24 13:14:47 sas Exp $ */
+/* $Id: streams.c,v 1.118 2002/10/27 23:01:45 shane Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1260,9 +1260,9 @@ static size_t php_stdiop_write(php_stream *stream, const char *buf, size_t count
 	assert(data != NULL);
 
 	if (data->fd >= 0) {
-		
-		return write(data->fd, buf, count);
-
+		int bytes_written = write(data->fd, buf, count);
+		if (bytes_written < 0) return 0;
+		return (size_t) bytes_written;
 	} else {
 
 #if HAVE_FLUSHIO

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.30 2001/05/03 21:28:26 derick Exp $ */
+/* $Id: image.c,v 1.31 2001/05/04 06:25:10 sbergmann Exp $ */
 /*
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -116,7 +116,6 @@ static struct gfxinfo *php_handle_bmp (int socketd, FILE *fp, int issock)
 {
 	struct gfxinfo *result = NULL;
 	char temp[15];
-	unsigned long in_width, in_height;
 
 	struct {
 		unsigned long in_width, in_height;

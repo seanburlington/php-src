@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.17 2004/06/12 02:49:47 abies Exp $ */
+/* $Id: ibase_query.c,v 1.18 2004/06/12 20:52:07 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1279,7 +1279,7 @@ PHP_FUNCTION(ibase_num_rows)
 #endif
 /* }}} */
 
-FB_API int _php_ibase_var_zval(zval *val, void *data, int type, int len, /* {{{ */
+static int _php_ibase_var_zval(zval *val, void *data, int type, int len, /* {{{ */
 	int scale, int flag TSRMLS_DC)
 {
 	static ISC_INT64 const scales[] = { 1, 10, 100, 1000, 10000, 100000, 1000000, 100000000, 1000000000, 

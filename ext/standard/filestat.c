@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.56 2001/02/26 06:07:17 andi Exp $ */
+/* $Id: filestat.c,v 1.57 2001/04/03 10:51:16 sniper Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -551,7 +551,7 @@ static void php_stat(const char *filename, int type, pval *return_value)
 		case S_IFDIR: RETURN_STRING("dir",1);
 		case S_IFBLK: RETURN_STRING("block",1);
 		case S_IFREG: RETURN_STRING("file",1);
-#if !defined(ZEND_WIN32)&&!defined(__BEOS__)
+#if defined(S_IFSOCK) && !defined(ZEND_WIN32)&&!defined(__BEOS__)
 		case S_IFSOCK: RETURN_STRING("socket",1);
 #endif
 		}

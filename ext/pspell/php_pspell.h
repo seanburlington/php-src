@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pspell.h,v 1.4 2000/07/25 22:09:52 vlad Exp $ */
+/* $Id: php_pspell.h,v 1.5 2000/07/26 21:24:17 vlad Exp $ */
 
 #ifndef _PSPELL_H
 #define _PSPELL_H
@@ -27,8 +27,6 @@ extern zend_module_entry pspell_module_entry;
 PHP_MINIT_FUNCTION(pspell);
 PHP_MINFO_FUNCTION(pspell);
 PHP_FUNCTION(pspell_new);
-PHP_FUNCTION(pspell_mode);
-PHP_FUNCTION(pspell_runtogether);
 PHP_FUNCTION(pspell_check);
 PHP_FUNCTION(pspell_suggest);
 PHP_FUNCTION(pspell_store_replacement);

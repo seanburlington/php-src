@@ -1,8 +1,17 @@
-dnl $Id: acinclude.m4,v 1.142 2001/09/06 20:55:22 sniper Exp $
+dnl $Id: acinclude.m4,v 1.143 2001/12/01 00:59:43 sniper Exp $
 dnl
 dnl This file contains local autoconf functions.
 
 sinclude(dynlib.m4)
+
+dnl
+dnl Separator into the configure --help display.
+dnl 
+AC_DEFUN(PHP_HELP_SEPARATOR,[
+AC_ARG_ENABLE([],[
+$1
+],[])
+])
 
 dnl
 dnl PHP_TARGET_RDYNAMIC

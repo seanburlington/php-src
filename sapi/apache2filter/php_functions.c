@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.35 2003/01/11 22:36:38 moriyoshi Exp $ */
+/* $Id: php_functions.c,v 1.36 2003/01/18 20:27:04 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_smart_str.h"
@@ -158,9 +158,7 @@ PHP_FUNCTION(apache_request_headers)
 	const apr_array_header_t *arr;
 	char *key, *val;
 
-	if (array_init(return_value) == FAILURE) {
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 	
 	ctx = SG(server_context);
 	arr = apr_table_elts(ctx->f->r->headers_in);
@@ -180,9 +178,7 @@ PHP_FUNCTION(apache_response_headers)
 	const apr_array_header_t *arr;
 	char *key, *val;
 
-	if (array_init(return_value) == FAILURE) {
-		RETURN_FALSE;
-	}
+	array_init(return_value);
 	
 	ctx = SG(server_context);
 	arr = apr_table_elts(ctx->f->r->headers_out);

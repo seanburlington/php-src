@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.8 2002/12/31 15:59:05 sebastian Exp $ */
+/* $Id: php_apache.c,v 1.9 2003/01/18 20:27:05 iliaa Exp $ */
 
 #include "php_apache_http.h"
 
@@ -1754,9 +1754,7 @@ static void apache_table_to_zval(table *t, int safe_mode, zval *return_value)
     table_entry *tenv;
     int i;
 	
-    if (array_init(return_value) == FAILURE) {
-		RETURN_FALSE;
-    }
+    array_init(return_value);
     env_arr = table_elts(t);
     tenv = (table_entry *)env_arr->elts;
     for (i = 0; i < env_arr->nelts; ++i) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.46.2.3 2004/08/20 13:52:47 iliaa Exp $ */
+/* $Id: interface.c,v 1.46.2.4 2004/10/18 22:42:16 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -431,6 +431,7 @@ static size_t curl_write(char *data, size_t size, size_t nmemb, void *ctx)
 			PHPWRITE(data, length);
 			break;
 		case PHP_CURL_FILE:
+			fflush(t->fp);
 			return fwrite(data, size, nmemb, t->fp);
 		case PHP_CURL_RETURN:
 			smart_str_appendl(&t->buf, data, (int) length);
@@ -1336,10 +1337,13 @@ PHP_FUNCTION(curl_getinfo)
 		switch (option) {
 			case CURLINFO_EFFECTIVE_URL: 
 			case CURLINFO_CONTENT_TYPE: {
-				char *s_code;
+ 				char *s_code = NULL;
 
-				curl_easy_getinfo(ch->cp, option, &s_code);
-				RETURN_STRING(s_code, 1);
+ 				if (curl_easy_getinfo(ch->cp, option, &s_code) == CURLE_OK && s_code) {
+ 					RETURN_STRING(s_code, 1);
+ 				} else {
+ 					RETURN_FALSE;
+ 				}
 				break;
 			}
 			case CURLINFO_HTTP_CODE: 
@@ -1348,10 +1352,13 @@ PHP_FUNCTION(curl_getinfo)
 			case CURLINFO_FILETIME: 
 			case CURLINFO_SSL_VERIFYRESULT: 
 			case CURLINFO_REDIRECT_COUNT: {
-				long code;
+				long code = 0;
 
-				curl_easy_getinfo(ch->cp, option, &code);
-				RETURN_LONG(code);
+				if (curl_easy_getinfo(ch->cp, option, &code) == CURLE_OK) {
+					RETURN_LONG(code);
+				} else {
+					RETURN_FALSE;
+				}
 				break;
 			}
 			case CURLINFO_TOTAL_TIME: 
@@ -1366,10 +1373,13 @@ PHP_FUNCTION(curl_getinfo)
 			case CURLINFO_CONTENT_LENGTH_UPLOAD: 
 			case CURLINFO_STARTTRANSFER_TIME:
 			case CURLINFO_REDIRECT_TIME: {
-				double code;
+				double code = 0.0;
 
-				curl_easy_getinfo(ch->cp, option, &code);
-				RETURN_DOUBLE(code);
+				if (curl_easy_getinfo(ch->cp, option, &code) == CURLE_OK) {
+					RETURN_DOUBLE(code);
+				} else {
+					RETURN_FALSE;
+				}
 				break;
 			}
 		}

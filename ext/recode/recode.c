@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.30 2002/12/31 16:07:21 sebastian Exp $ */
+/* $Id: recode.c,v 1.31 2003/01/19 00:45:47 iliaa Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -119,7 +119,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.30 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.31 $");
 	php_info_print_table_end();
 }
 
@@ -143,19 +143,19 @@ PHP_FUNCTION(recode_string)
 	request = recode_new_request(ReSG(outer));
 
 	if (request == NULL) {
-		php_error(E_WARNING, "Cannot allocate request structure");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot allocate request structure");
 		RETURN_FALSE;
 	}
 	
 	success = recode_scan_request(request, Z_STRVAL_PP(req));
 	if (!success) {
-		php_error(E_WARNING, "Illegal recode request '%s'", Z_STRVAL_PP(req));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Illegal recode request '%s'", Z_STRVAL_PP(req));
 		goto error_exit;
 	}
 	
 	recode_buffer_to_buffer(request, Z_STRVAL_PP(str), Z_STRLEN_PP(str), &r, &r_len, &r_alen);
 	if (!r) {
-		php_error(E_WARNING, "Recoding failed.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Recoding failed.");
 		goto error_exit;
 	}
 	
@@ -204,19 +204,19 @@ PHP_FUNCTION(recode_file)
 
 	request = recode_new_request(ReSG(outer));
 	if (request == NULL) {
-		php_error(E_WARNING, "Cannot allocate request structure");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot allocate request structure");
 		RETURN_FALSE;
 	}
 
 	success = recode_scan_request(request, Z_STRVAL_PP(req));
 	if (!success) {
-		php_error(E_WARNING, "Illegal recode request '%s'", Z_STRVAL_PP(req));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Illegal recode request '%s'", Z_STRVAL_PP(req));
 		goto error_exit;
 	}
 	
 	success = recode_file_to_file(request, in_fp, out_fp);
 	if (!success) {
-		php_error(E_WARNING, "Recoding failed.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Recoding failed.");
 		goto error_exit;
 	}
 

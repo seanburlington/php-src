@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.347 2003/01/18 19:28:07 iliaa Exp $ */
+/* $Id: session.c,v 1.348 2003/01/19 00:45:49 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -631,7 +631,7 @@ char *php_session_create_id(PS_CREATE_SID_ARGS)
 		digest_len = 20;
 		break;
 	default:
-		php_error(E_ERROR, "Invalid session hash function");
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Invalid session hash function");
 		efree(buf);
 		return NULL;
 	}
@@ -676,7 +676,7 @@ char *php_session_create_id(PS_CREATE_SID_ARGS)
 			|| PS(hash_bits_per_character) > 6) {
 		PS(hash_bits_per_character) = 4;
 
-		php_error(E_WARNING, "The ini setting hash_bits_per_character is out of range (should be 4, 5, or 6) - using 4 for now");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The ini setting hash_bits_per_character is out of range (should be 4, 5, or 6) - using 4 for now");
 	}
 	j = bin_to_readable(digest, digest_len, buf, PS(hash_bits_per_character)) - buf;
 	

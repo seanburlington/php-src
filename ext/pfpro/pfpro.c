@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pfpro.c,v 1.26 2002/12/31 16:07:15 sebastian Exp $ */
+/* $Id: pfpro.c,v 1.27 2003/01/19 00:45:45 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -211,7 +211,7 @@ PHP_FUNCTION(pfpro_process_raw)
 	args = (zval ***) emalloc(sizeof(zval **) * ZEND_NUM_ARGS());
 
 	if (zend_get_parameters_array_ex(ZEND_NUM_ARGS(), args) == FAILURE) {
-		php_error(E_WARNING, "Unable to read parameters in pfpro_process_raw()");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to read parameters in pfpro_process_raw()");
 		efree(args);
 		RETURN_FALSE;
 	}
@@ -328,13 +328,13 @@ PHP_FUNCTION(pfpro_process)
 	args = (zval ***) emalloc(sizeof(zval **) * ZEND_NUM_ARGS());
 
 	if (zend_get_parameters_array_ex(ZEND_NUM_ARGS(), args) == FAILURE) {
-		php_error(E_ERROR, "Unable to read parameters in pfpro_process()");
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Unable to read parameters in pfpro_process()");
  		efree(args);
 		RETURN_FALSE;
 	}
 
 	if (Z_TYPE_PP(args[0]) != IS_ARRAY) {
-		php_error(E_ERROR, "First parameter to pfpro_process() must be an array");
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "First parameter to pfpro_process() must be an array");
  		efree(args);
 		RETURN_FALSE;
 	}
@@ -418,7 +418,7 @@ PHP_FUNCTION(pfpro_process)
 					break;
 
 				default:
-					php_error(E_ERROR, "pfpro_process() array keys must be strings or integers");
+					php_error_docref(NULL TSRMLS_CC, E_ERROR, "pfpro_process() array keys must be strings or integers");
 					if (parmlist) {
 						efree(parmlist);
 					}
@@ -464,7 +464,7 @@ PHP_FUNCTION(pfpro_process)
 					break;
 
 				default:
-					php_error(E_ERROR, "pfpro_process() array values must be strings, ints or floats");
+					php_error_docref(NULL TSRMLS_CC, E_ERROR, "pfpro_process() array values must be strings, ints or floats");
 					if (parmlist) {
 						efree(parmlist);
 					}

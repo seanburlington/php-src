@@ -18,7 +18,7 @@
    |         Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: com_wrapper.c,v 1.84 2002/12/31 16:07:22 sebastian Exp $ */
+/* $Id: com_wrapper.c,v 1.85 2003/01/19 00:45:47 iliaa Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -876,7 +876,7 @@ ZEND_API int php_COM_load_typelib(ITypeLib *TypeLib, int mode)
 					/* Oops, it already exists. No problem if it is defined as the same value */
 					/* Check to see if they are the same */
 					if (!compare_function(&results, &c.value, &exists TSRMLS_CC) && INI_INT("com.autoregister_verbose")) {
-						php_error(E_WARNING,"Type library value %s is already defined and has a different value", c.name);
+						php_error_docref(NULL TSRMLS_CC, E_WARNING, "Type library value %s is already defined and has a different value", c.name);
 					}
 					free(c.name);
 					j++;

@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.10 2002/05/22 01:23:12 cox Exp $
+// $Id: Dependency.php,v 1.11 2002/05/23 20:37:58 cox Exp $
 
 /**
 * Methods for dependencies check. Based on Stig's dependencies RFC
@@ -117,6 +117,7 @@ class PEAR_Dependency
                     return "requires package `$name' " .
                            $this->signOperator($relation) . " $req";
                 }
+                return false;
         }
         return "Relation '$relation' with requirement '$req' is not supported (name=$name)";
     }

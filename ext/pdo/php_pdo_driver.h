@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.24 2004/06/12 02:35:34 abies Exp $ */
+/* $Id: php_pdo_driver.h,v 1.25 2004/06/15 10:06:41 abies Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -43,7 +43,7 @@ enum pdo_param_type {
 	PDO_PARAM_STR,
 	PDO_PARAM_LOB,
 	PDO_PARAM_STMT, /* hierarchical result set */
-	PDO_PARAM_DBL,
+
 };
 
 enum pdo_fetch_type {
@@ -331,8 +331,6 @@ struct pdo_bound_param_data {
 	pdo_stmt_t *stmt;	/* for convenience in dtor */
 	int is_param;		/* parameter or column ? */
 };
-
-#define PDO_BOUND_PARAM_INIT { -1, NULL, 0 }
 
 /* represents a prepared statement */
 struct _pdo_stmt_t {

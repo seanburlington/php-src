@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Bjørn Borud - Guardian Networks AS <borud@guardian.no>       |
+   | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.5 2000/05/23 20:07:32 hholzgra Exp $ */
+/* $Id: levenshtein.c,v 1.6 2000/05/23 20:13:10 hholzgra Exp $ */
 
 #include "php.h"
 #include <stdlib.h>

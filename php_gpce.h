@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_gpce.h,v 1.1 2000/01/28 13:31:11 zeev Exp $ */
+/* $Id: php_gpce.h,v 1.2 2000/01/28 14:57:19 zeev Exp $ */
 
 #ifndef _POST_H
 #define _POST_H
@@ -39,6 +39,6 @@
 #define PARSE_STRING 3
 
 void php_treat_data(int arg, char *str ELS_DC PLS_DC SLS_DC);
-void php_parse_gpc_data(char *val, char *var, pval *track_vars_array ELS_DC PLS_DC);
+void php_register_variable(char *val, char *var, pval *track_vars_array ELS_DC PLS_DC);
 
 #endif

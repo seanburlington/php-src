@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.110 2004/02/11 21:00:46 helly Exp $ */
+/* $Id: php_cli.c,v 1.111 2004/03/04 22:49:54 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -714,9 +714,11 @@ int main(int argc, char *argv[])
 			switch (c) {
 
 			case 'a':	/* interactive mode */
-				printf("Interactive mode enabled\n\n");
-				fflush(stdout);
-				interactive=1;
+				if (interactive) {
+					printf("Interactive mode enabled\n\n");
+					fflush(stdout);
+					interactive=1;
+				}
 				break;
 
 			case 'C': /* don't chdir to the script directory */

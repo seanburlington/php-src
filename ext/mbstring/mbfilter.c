@@ -77,7 +77,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.7 2001/05/10 13:12:03 hirokawa Exp $ */
+/* $Id: mbfilter.c,v 1.7.2.1 2001/06/20 13:01:49 hirokawa Exp $ */
 
 
 #include <stdlib.h>
@@ -6854,6 +6854,9 @@ mbfl_strimwidth(
 				}
 				mbfl_convert_filter_flush(encoder);
 			}
+ 		} else if (pc.status != 0) {
+ 			pc.device.pos = pc.endpos;
+ 			mbfl_convert_filter_copy(pc.decoder_backup, pc.decoder);
 		}
 		mbfl_convert_filter_flush(pc.decoder);
 	}

@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                           |
 // +--------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.81 2004/06/15 16:33:46 pajoye Exp $
+// $Id: PEAR.php,v 1.82 2004/06/16 16:26:12 ssb Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -159,7 +159,7 @@ class PEAR
         if ($error_class !== null) {
             $this->_error_class = $error_class;
         }
-        while ($classname) {
+        while ($classname && strcasecmp($classname, "pear")) {
             $destructor = "_$classname";
             if (method_exists($this, $destructor)) {
                 global $_PEAR_destructor_object_list;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_saproxy.c,v 1.9 2004/04/28 08:23:22 wez Exp $ */
+/* $Id: com_saproxy.c,v 1.10 2004/05/03 18:19:07 wez Exp $ */
 
 /* This module implements a SafeArray proxy which is used internally
  * by the engine when resolving multi-dimensional array accesses on
@@ -244,6 +244,7 @@ static void saproxy_write_dimension(zval *object, zval *offset, zval *value TSRM
 	}
 }
 
+#if 0
 static void saproxy_object_set(zval **property, zval *value TSRMLS_DC)
 {
 }
@@ -253,6 +254,7 @@ static zval *saproxy_object_get(zval *property TSRMLS_DC)
 	/* Not yet implemented in the engine */
 	return NULL;
 }
+#endif
 
 static int saproxy_property_exists(zval *object, zval *member, int check_empty TSRMLS_DC)
 {
@@ -295,7 +297,7 @@ static int saproxy_call_method(char *method, INTERNAL_FUNCTION_PARAMETERS)
 
 static union _zend_function *saproxy_constructor_get(zval *object TSRMLS_DC)
 {
-	/* user cannot instanciate */
+	/* user cannot instantiate */
 	return NULL;
 }
 
@@ -328,8 +330,8 @@ zend_object_handlers php_com_saproxy_handlers = {
 	saproxy_read_dimension,
 	saproxy_write_dimension,
 	NULL,
-	saproxy_object_get,
-	saproxy_object_set,
+	NULL, //saproxy_object_get,
+	NULL, //saproxy_object_set,
 	saproxy_property_exists,
 	saproxy_property_delete,
 	saproxy_dimension_exists,

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.96.2.16 2004/06/28 14:35:41 derick Exp $ */
+/* $Id: datetime.c,v 1.96.2.17 2004/12/16 00:10:55 iliaa Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -773,7 +773,7 @@ char *php_std_date(time_t t TSRMLS_DC)
 	tm1 = php_gmtime_r(&t, &tmbuf);
 	str = emalloc(81);
 	if (PG(y2k_compliance)) {
-		snprintf(str, 80, "%s, %02d-%s-%04d %02d:%02d:%02d GMT",
+		snprintf(str, 80, "%s, %02d %s %04d %02d:%02d:%02d GMT",
 				day_short_names[tm1->tm_wday],
 				tm1->tm_mday,
 				mon_short_names[tm1->tm_mon],

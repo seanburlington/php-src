@@ -1,10 +1,10 @@
-dnl $Id: config.m4,v 1.2 2002/03/12 16:37:13 sas Exp $
+dnl $Id: config.m4,v 1.3 2002/04/02 12:54:21 derick Exp $
 dnl config.m4 for extension tokenizer
 
 dnl Otherwise use enable:
 
 PHP_ARG_ENABLE(tokenizer, whether to enable tokenizer support,
-[  --enable-tokenizer           Enable tokenizer support])
+[  --enable-tokenizer      Enable tokenizer support])
 
 if test "$PHP_TOKENIZER" != "no"; then
   dnl Write more examples of tests here...

@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.58 2002/02/28 08:26:49 sebastian Exp $ */
+/* $Id: ereg.c,v 1.59 2002/03/11 07:11:54 yohgaki Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -220,6 +220,7 @@ static void php_ereg(INTERNAL_FUNCTION_PARAMETERS, int icase)
 		buf = emalloc(string_len);
 		if (!buf) {
 			php_error(E_WARNING, "Unable to allocate memory in php_ereg");
+			regfree(&re);
 			efree(subs);
 			RETURN_FALSE;
 		}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.32 2000/07/24 01:39:49 david Exp $ */
+/* $Id: browscap.c,v 1.33 2000/07/25 08:09:00 stas Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -27,7 +27,7 @@
 
 HashTable browser_hash;
 
-#define DEFAULT_SECTION_NAME "default browser capability settings"
+#define DEFAULT_SECTION_NAME "Default Browser Capability Settings"
 
 static int browser_reg_compare(zval **browser,int num_args, va_list args, zend_hash_key *key)
 {

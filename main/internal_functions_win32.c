@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.11 1999/09/01 19:28:07 andi Exp $ */
+/* $Id: internal_functions_win32.c,v 1.12 1999/09/03 18:33:30 sas Exp $ */
 
 
 #include "php.h"
@@ -91,6 +91,38 @@ int module_startup_modules(void)
 	while (ptr < end) {
 		if (*ptr) {
 			if (zend_startup_module(*ptr)==FAILURE) {
+				return FAILURE;
+			}
+		}
+		ptr++;
+	}
+	return SUCCESS;
+}
+
+int module_global_startup_modules(void)
+{
+	zend_module_entry **ptr = php3_builtin_modules, **end = ptr+(sizeof(php3_builtin_modules)/sizeof(zend_module_entry *));
+
+	while (ptr < end) {
+		if (*ptr) {
+			if ((*ptr)->global_startup_func && 
+					(*ptr)->global_startup_func()==FAILURE) {
+				return FAILURE;
+			}
+		}
+		ptr++;
+	}
+	return SUCCESS;
+}
+
+int module_global_shutdown_modules(void)
+{
+	zend_module_entry **ptr = php3_builtin_modules, **end = ptr+(sizeof(php3_builtin_modules)/sizeof(zend_module_entry *));
+
+	while (ptr < end) {
+		if (*ptr) {
+			if ((*ptr)->global_shutdown_func && 
+					(*ptr)->global_shutdown_func()==FAILURE) {
 				return FAILURE;
 			}
 		}

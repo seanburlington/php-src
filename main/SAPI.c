@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.147.4.3 2002/10/08 02:16:25 gschlossnagle Exp $ */
+/* $Id: SAPI.c,v 1.147.4.4 2002/10/08 06:42:54 gschlossnagle Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -291,7 +291,6 @@ SAPI_API void sapi_activate_headers_only(TSRMLS_D)
 	SG(sapi_headers).http_response_code = 200;
 	*/
 	SG(sapi_headers).http_status_line = NULL;
-	SG(headers_sent) = 0;
 	SG(request_info).current_user = NULL;
 	SG(request_info).current_user_length = 0;
 	SG(request_info).no_headers = 0;
@@ -315,7 +314,6 @@ SAPI_API void sapi_activate_headers_only(TSRMLS_D)
 SAPI_API void sapi_activate(TSRMLS_D)
 {
 	void (*post_reader_func)(TSRMLS_D);
-	SG(headers_sent) = 0;
 	SG(read_post_bytes) = 0;
 	SG(request_info).post_data = NULL;
 	/* It's possible to override this general case in the activate() callback, if
@@ -399,6 +397,7 @@ SAPI_API void sapi_deactivate(TSRMLS_D)
 	}
 	sapi_send_headers_free(TSRMLS_C);
     SG(sapi_started) = 0;
+    SG(headers_sent) = 0;
     SG(request_info).headers_read = 0;
 }
 

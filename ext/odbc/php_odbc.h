@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.45 2002/03/04 09:10:31 imajes Exp $ */
+/* $Id: php_odbc.h,v 1.46 2002/03/12 02:27:03 sniper Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -39,21 +39,21 @@
 
 #define ODBC_TYPE "Solid"
 #if defined(HAVE_SOLID)
- #include <cli0core.h>
- #include <cli0ext1.h>
- #include <cli0env.h>
+# include <cli0core.h>
+# include <cli0ext1.h>
+# include <cli0env.h>
 #elif defined(HAVE_SOLID_30)
- #include <cli0cli.h>
- #include <cli0defs.h>
- #include <cli0env.h>
+# include <cli0cli.h>
+# include <cli0defs.h>
+# include <cli0env.h>
 #elif defined(HAVE_SOLID_35)
- #if !defined(PHP_WIN32)
-  #include <sqlunix.h>
- #endif		/* end: #if !defined(PHP_WIN32) */
- #include <sqltypes.h>
- #include <sqlucode.h>
- #include <sqlext.h>
- #include <sql.h>
+# if !defined(PHP_WIN32)
+#  include <sqlunix.h>
+# endif		/* end: #if !defined(PHP_WIN32) */
+# include <sqltypes.h>
+# include <sqlucode.h>
+# include <sqlext.h>
+# include <sql.h>
 #endif	/* end: #if defined(HAVE_SOLID) */
 #undef HAVE_SQL_EXTENDED_FETCH
 PHP_FUNCTION(solid_fetch_prev);

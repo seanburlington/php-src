@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.216 2002/10/29 16:57:52 helly Exp $ */
+/* $Id: php_domxml.c,v 1.217 2002/10/31 19:52:45 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2035,7 +2035,7 @@ PHP_FUNCTION(domxml_node_type)
 }
 /* }}} */
 
-/* {{{ proto bool domxml_clone_node(void)
+/* {{{ proto object domxml_clone_node([bool deep])
    Clones a node */
 PHP_FUNCTION(domxml_clone_node)
 {

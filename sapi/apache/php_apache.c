@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.21 2000/12/07 13:07:18 sas Exp $ */
+/* $Id: php_apache.c,v 1.22 2000/12/10 22:06:07 dbeu Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -44,6 +44,8 @@
 
 #include "php_apache_http.h"
 #include "http_request.h"
+
+static int php_apache_info_id;
 
 #ifdef PHP_WIN32
 #include "zend.h"

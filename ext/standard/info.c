@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.110 2000/08/21 09:50:52 sas Exp $ */
+/* $Id: info.c,v 1.111 2000/08/26 12:53:13 rubys Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -396,6 +396,7 @@ void php_print_credits(int flag)
 		CREDIT_LINE("DBA", "Sascha Schumann");
 		CREDIT_LINE("DBM", "Rasmus Lerdorf, Jim Winstead");
 		CREDIT_LINE("dBase", "Jim Winstead");
+		CREDIT_LINE("dotnet", "Sam Ruby");
 		CREDIT_LINE("FDF", "Uwe Steinmann");
 		CREDIT_LINE("FilePro", "Chad Robinson");
 		CREDIT_LINE("FTP", "Andrew Skalski");

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.401 2004/12/07 18:02:25 dmitry Exp $ */
+/* $Id: session.c,v 1.402 2004/12/09 14:14:21 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1337,11 +1337,21 @@ PHP_FUNCTION(session_module_name)
 		}
 		PS(mod_data) = NULL;
 
-		RETVAL_STRING(safe_estrdup(PS(mod)->s_name), 0);
-
+		if (PS(mod) && PS(mod)->s_name) {
+			RETVAL_STRING(safe_estrdup(PS(mod)->s_name), 0);
+		}
+		else {
+			RETVAL_EMPTY_STRING();
+		}
+		
 		zend_alter_ini_entry("session.save_handler", sizeof("session.save_handler"), Z_STRVAL_PP(p_name), Z_STRLEN_PP(p_name), PHP_INI_USER, PHP_INI_STAGE_RUNTIME);
 	} else {
-		RETURN_STRING(safe_estrdup(PS(mod)->s_name), 0);
+		if (PS(mod) && PS(mod)->s_name) {
+			RETURN_STRING(safe_estrdup(PS(mod)->s_name), 0);
+		}
+		else {
+			RETURN_EMPTY_STRING();
+		}
 	}
 }
 /* }}} */

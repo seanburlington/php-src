@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.11 2000/11/13 18:54:37 zeev Exp $ */
+/* $Id: php_zlib.h,v 1.12 2000/11/21 00:40:12 hholzgra Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H
@@ -60,6 +60,9 @@ PHP_FUNCTION(gzdeflate);
 PHP_FUNCTION(gzinflate);
 PHP_FUNCTION(gzencode);
 PHP_FUNCTION(ob_gzhandler);
+
+FILE *zlib_fopen_wrapper(char *path, char *mode, int options, int *issock, int *socketd, char **opened_path);
+
 
 #ifdef ZTS
 #define ZLIBLS_D php_zlib_globals *zlib_globals

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: velocis.c,v 1.6 1999/08/02 19:16:48 zeev Exp $ */
+/* $Id: velocis.c,v 1.7 1999/09/05 13:01:42 kara Exp $ */
 
 /*
  * TODO:
@@ -25,9 +25,23 @@
  */
 
 #include "php.h"
-#include "php3_velocis.h"
 
-#if HAVE_VELOCIS && !HAVE_UODBC
+#if WIN32
+# include "config.w32.h"
+# include "win95nt.h"
+# ifdef PHP_EXPORTS
+#  define PHPAPI __declspec(dllexport) 
+# else
+#  define PHPAPI __declspec(dllimport) 
+# endif
+#else
+# include "php_config.h"
+# define PHPAPI
+# define THREAD_LS
+#endif
+
+#if HAVE_VELOCIS
+#include "php3_velocis.h"
 
 function_entry velocis_functions[] = {
 	PHP_FE(velocis_connect,								NULL)

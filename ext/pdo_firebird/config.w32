@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.4 2004/06/12 14:59:45 abies Exp $
+// $Id: config.w32,v 1.5 2004/06/12 16:05:49 abies Exp $
 // vim:ft=javascript
 
 ARG_WITH("pdo-firebird", "Firebird support for PDO", "no");
@@ -15,5 +15,4 @@ if (PHP_PDO_FIREBIRD != "no") {
 		WARNING("pdo_firebird not enabled; libraries and headers not found");
 	}
 	ADD_EXTENSION_DEP('pdo_firebird', 'pdo');
-	ADD_EXTENSION_DEP('pdo_firebird', 'interbase');
 }

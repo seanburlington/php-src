@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.68 2005/01/13 02:06:39 wez Exp $
+dnl $Id: config.m4,v 1.69 2005/01/18 21:16:32 tony2001 Exp $
 dnl
 
 dnl
@@ -194,6 +194,15 @@ AC_ARG_WITH(ibm-db2,
       ODBC_INCDIR=$withval/include
       ODBC_LIBDIR=$withval/$PHP_LIBDIR
     fi
+
+    if ! test -f "$ODBC_INCDIR/sqlcli1.h"; then
+      AC_MSG_ERROR([IBM DB2 header files not found])
+    fi
+
+    if ! test -f "$ODBC_LIBDIR/libdb2.so"; then
+      AC_MSG_ERROR([IBM DB2 required libraries not found])
+    fi
+	
     ODBC_INCLUDE=-I$ODBC_INCDIR
     ODBC_LFLAGS=-L$ODBC_LIBDIR
     ODBC_TYPE=db2

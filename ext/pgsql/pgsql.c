@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.53 2000/06/04 20:24:07 jah Exp $ */
+/* $Id: pgsql.c,v 1.54 2000/06/04 23:06:11 jah Exp $ */
 
 #include <stdlib.h>
 
@@ -406,6 +406,7 @@ void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 	}
 	efree(hashed_details);
 	PGG(default_link)=return_value->value.lval;
+	zend_list_addref(return_value->value.lval);
 }
 
 

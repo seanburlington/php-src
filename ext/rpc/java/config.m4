@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.48 2003/01/12 08:01:42 sebastian Exp $
+dnl $Id: config.m4,v 1.49 2003/04/04 17:42:45 sniper Exp $
 dnl
 AC_DEFUN(JAVA_FIND_JAR, [
  AC_MSG_CHECKING([Java Jar location])
@@ -173,8 +173,12 @@ if test "$PHP_JAVA" != "no"; then
       fi
     fi
 
-    INSTALL_IT="$INSTALL_IT; \$(srcdir)/build/shtool mkdir -p -f -m 0755 \$(INSTALL_ROOT)\$(libdir)"
-    INSTALL_IT="$INSTALL_IT; \$(INSTALL) -m 0755 \$(srcdir)/ext/java/php_java.jar \$(INSTALL_ROOT)\$(libdir)"
+    if test -n "$INSTALL_IT"; then
+      INSTALL_IT="$INSTALL_IT ;"
+    fi
+
+    INSTALL_IT="$INSTALL_IT \$(srcdir)/build/shtool mkdir -p -f -m 0755 \$(INSTALL_ROOT)\$(libdir)"
+    INSTALL_IT="$INSTALL_IT ; \$(INSTALL) -m 0755 \$(srcdir)/ext/java/php_java.jar \$(INSTALL_ROOT)\$(libdir)"
   fi
 
   PHP_SUBST(JAVA_CLASSPATH)

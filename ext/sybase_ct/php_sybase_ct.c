@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.84 2003/08/12 00:55:55 iliaa Exp $ */
+/* $Id: php_sybase_ct.c,v 1.85 2003/08/28 16:19:08 sniper Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1384,8 +1384,21 @@ static void php_sybase_query (INTERNAL_FUNCTION_PARAMETERS, int buffered)
 					case CS_CURSOR_RESULT:
 					case CS_PARAM_RESULT:
 					case CS_ROW_RESULT:
-						/* Unexpected results, cancel them. */
+						if (status != Q_RESULT) {
+							result = php_sybase_fetch_result_set(sybase_ptr, buffered, store);
+							if (result == NULL) {
+								ct_cancel(NULL, sybase_ptr->cmd, CS_CANCEL_ALL);
+								sybase_ptr->dead = 1;
+								RETURN_FALSE;
+							}
+							status = Q_RESULT;
+						} else {
+							/* Unexpected results, cancel them. */
+							ct_cancel(NULL, sybase_ptr->cmd, CS_CANCEL_CURRENT);
+						}
+						break;
 					case CS_STATUS_RESULT:
+						/* Unexpected results, cancel them. */
 						ct_cancel(NULL, sybase_ptr->cmd, CS_CANCEL_CURRENT);
 						break;
 

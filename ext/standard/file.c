@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.341 2003/05/21 04:04:50 pollita Exp $ */
+/* $Id: file.c,v 1.342 2003/05/21 13:33:55 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -693,7 +693,9 @@ PHP_NAMED_FUNCTION(php_if_fopen)
 
 	php_stream_to_zval(stream, return_value);
 
-	return;
+	if (zcontext) {
+		zend_list_addref(Z_RESVAL_P(zcontext));
+	}
 }
 /* }}} */
 

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.12 2003/04/20 01:18:58 pollita Exp $ */
+/* $Id: streamsfuncs.c,v 1.13 2003/05/21 13:33:55 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -123,6 +123,10 @@ PHP_FUNCTION(stream_socket_client)
 	}
 	
 	php_stream_to_zval(stream, return_value);
+
+	if (zcontext) {
+		zend_list_addref(Z_RESVAL_P(zcontext));
+	}
 }
 /* }}} */
 
@@ -185,6 +189,9 @@ PHP_FUNCTION(stream_socket_server)
 	
 	php_stream_to_zval(stream, return_value);
 
+	if (zcontext) {
+		zend_list_addref(Z_RESVAL_P(zcontext));
+	}
 }
 /* }}} */
 
@@ -752,7 +759,6 @@ PHP_FUNCTION(stream_context_set_option)
 		/* handle the array syntax */
 		RETVAL_BOOL(parse_context_options(context, options) == SUCCESS);
 	} else {
-		ZVAL_ADDREF(zvalue);
 		php_stream_context_set_option(context, wrappername, optionname, zvalue);
 		RETVAL_TRUE;
 	}

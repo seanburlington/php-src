@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.16 2003/05/19 18:48:15 helly Exp $ */
+/* $Id: plain_wrapper.c,v 1.17 2003/05/21 13:33:55 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -74,7 +74,11 @@ PHPAPI int php_stream_parse_fopen_modes(const char *mode, int *open_flags)
 		flags |= O_BINARY;
 	}
 #endif
-	
+#ifdef _O_TEXT
+	if (strchr(mode, 't')) {
+		flags |= _O_TEXT;
+	}
+#endif
 	*open_flags = flags;
 	return SUCCESS;
 }

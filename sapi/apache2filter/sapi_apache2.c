@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.99 2002/12/30 23:45:18 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.100 2002/12/31 00:10:57 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -498,7 +498,7 @@ static int php_output_filter(ap_filter_t *f, apr_bucket_brigade *bb)
 				zfd.opened_path = NULL;
 
 				php_execute_script(&zfd TSRMLS_CC);
-#ifdef MEMORY_LIMIT
+#if MEMORY_LIMIT
 				{
 					char *mem_usage;
  

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.19 2000/02/10 18:44:33 zeev Exp $ */
+/* $Id: roxen.c,v 1.20 2000/02/14 08:11:48 neotron Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -254,7 +254,7 @@ php_roxen_low_ub_write(const char *str, uint str_length) {
     PG(connection_status) = PHP_CONNECTION_ABORTED;
     zend_bailout();
   }
-  fprintf(stderr, "low_write done.\n");
+  /*  fprintf(stderr, "low_write done.\n");*/
   return sent_bytes;
 }
 
@@ -301,7 +301,7 @@ php_roxen_sapi_ub_write(const char *str, uint str_length)
     THREAD_SAFE_RUN(sent_bytes = php_roxen_low_ub_write(str, str_length),
 		    "write");
   }
-  fprintf(stderr, "write done.\n");
+  /*  fprintf(stderr, "write done.\n"); */
   return sent_bytes;
 }
 
@@ -361,8 +361,8 @@ php_roxen_sapi_header_handler(sapi_header_struct *sapi_header,
     header_content++;
   } while(*header_content == ' ');
   THREAD_SAFE_RUN(php_roxen_set_header(header_name, header_content, p), "header handler");
-  efree(sapi_header->header);
-  return 1;
+  sapi_free_header(sapi_header);
+  return 0;
 }
 
 /*
@@ -470,7 +470,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
   /*  char buf[512]; */
 	
   PUTS("<table border=5 width=600>\n");
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.19 2000/02/10 18:44:33 zeev Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.20 2000/02/14 08:11:48 neotron Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.95 2004/05/25 13:51:00 iliaa Exp $ */
+/* $Id: dl.c,v 1.96 2004/07/06 18:48:39 helly Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -250,6 +250,8 @@ void php_dl(pval *file, int type, pval *return_value TSRMLS_DC)
 		}
 	}
 	
+	module_entry->handle = handle;
+
 	RETURN_TRUE;
 }
 /* }}} */

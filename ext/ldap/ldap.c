@@ -20,7 +20,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.25 2000/02/19 23:21:32 zeev Exp $ */
+/* $Id: ldap.c,v 1.26 2000/02/23 15:04:36 eschmid Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -277,7 +277,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_printf("<table>"
 				"<tr><td>Total links:</td><td>%d/%s</td></tr>\n"
-		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.25 2000/02/19 23:21:32 zeev Exp $</td></tr>\n"
+		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.26 2000/02/23 15:04:36 eschmid Exp $</td></tr>\n"
 #if HAVE_NSLDAP
 				"<tr><td>SDK Version:</td><td>%f</td></tr>"
 				"<tr><td>Highest LDAP Protocol Supported:</td><td>%f</td></tr>"
@@ -1258,7 +1258,7 @@ PHP_FUNCTION(ldap_mod_replace)
 /* }}} */
 
 /* {{{ proto int ldap_mod_add(int link, string dn, array entry)
-        Add attribute values to current */
+   Add attribute values to current */
 PHP_FUNCTION(ldap_mod_add)
 {
         php_ldap_do_modify(INTERNAL_FUNCTION_PARAM_PASSTHRU, LDAP_MOD_ADD);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: caudium.c,v 1.3 2000/11/03 00:29:05 neotron Exp $ */
+/* $Id: caudium.c,v 1.4 2000/11/06 22:11:10 neotron Exp $ */
 
 #include "php.h"
 #ifdef HAVE_CAUDIUM
@@ -290,6 +290,7 @@ php_caudium_set_header(char *header_name, char *value, char *p)
   struct pike_string *hval, *ind, *hind;
   struct mapping *headermap;
   struct svalue *s_headermap, *soldval;
+  int vallen;
   GET_THIS();
   //  hval = make_shared_string(value);
   ind = make_shared_string(" _headers");
@@ -308,16 +309,20 @@ php_caudium_set_header(char *header_name, char *value, char *p)
     hval = make_shared_string(value);
   } else {
     headermap = s_headermap->u.mapping;
-#if 0
-    soldval = low_mapping_string_lookup(s_headermap, hind);
+    soldval = low_mapping_string_lookup(headermap, hind);
+    vallen = strlen(value);
     if(soldval != NULL && 
-       soldval->u.type == PIKE_T_STRING &&
+       soldval->type == PIKE_T_STRING &&
        soldval->u.string->size_shift == 0) {
       /* Existing, valid header. Prepend.*/
+      hval = begin_shared_string(soldval->u.string->len + 1 + vallen);
+      MEMCPY(hval->str, soldval->u.string->str, soldval->u.string->len);
+      STR0(hval)[soldval->u.string->len] = '\0';
+      MEMCPY(hval->str+soldval->u.string->len+1, value, vallen);
+      hval = end_shared_string(hval);
+    } else { 
       hval = make_shared_string(value);
     }
-#endif
-      hval = make_shared_string(value);
   }
   hsval.type = PIKE_T_STRING;
   hsval.u.string = hval;
@@ -445,7 +450,7 @@ static void php_info_caudium(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.3 2000/11/03 00:29:05 neotron Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: caudium.c,v 1.4 2000/11/06 22:11:10 neotron Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());

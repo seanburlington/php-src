@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sybase.c,v 1.23 2000/02/26 21:35:14 zeev Exp $ */
+/* $Id: sybase.c,v 1.24 2000/02/27 17:11:02 zeev Exp $ */
 
 
 #include "php.h"
@@ -901,7 +901,7 @@ PHP_FUNCTION(sybase_fetch_row)
 }
 
 
-static PHP_FUNCTION(sybase_fetch_hash)
+static void php_sybase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS)
 {
 	pval *sybase_result_index;
 	sybase_result *result;

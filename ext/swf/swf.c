@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.27 2000/10/27 19:10:21 sterling Exp $ */
+/* $Id: swf.c,v 1.28 2000/12/01 09:50:01 andi Exp $ */
 
 
 #include "php.h"
@@ -28,12 +28,7 @@
 #include "php_open_temporary_file.h"
 #include "php_swf.h"
 
-#ifdef ZTS
-int swf_globals_id;
-#else
-php_swf_globals swf_globals;
-#endif
-
+ZEND_DECLARE_MODULE_GLOBALS(swf)
 
 function_entry swf_functions[] = {
 	PHP_FE(swf_openfile,		NULL)

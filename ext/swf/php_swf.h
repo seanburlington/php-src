@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_swf.h,v 1.10 2000/10/27 19:10:21 sterling Exp $ */
+/* $Id: php_swf.h,v 1.11 2000/12/01 09:50:01 andi Exp $ */
 
 #ifndef PHP_SWF_H
 #define PHP_SWF_H
@@ -100,15 +100,18 @@ PHP_FUNCTION(swf_translate);
 PHP_FUNCTION(swf_rotate);
 PHP_FUNCTION(swf_posround);
 
-typedef struct {
+
+ZEND_BEGIN_MODULE_GLOBALS(swf)
 	int use_file;
 	char *tmpfile_name;
-} php_swf_globals;
+ZEND_END_MODULE_GLOBALS(swf)
 
 #ifdef ZTS
+#define SWFLS_D zend_swf_globals *swf_globals
 #define SWFG(v) (swf_globals->v)
-#define SWFLS_FETCH() php_swf_globals *swf_globals = ts_resource(gd_swf_id)
+#define SWFLS_FETCH() zend_swf_globals *swf_globals = ts_resource(swf_globals_id)
 #else
+#define SWFLS_D
 #define SWFG(v) (swf_globals.v)
 #define SWFLS_FETCH()
 #endif

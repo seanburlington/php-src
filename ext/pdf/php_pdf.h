@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdf.h,v 1.19 2001/08/07 17:26:32 phanto Exp $ */
+/* $Id: php_pdf.h,v 1.20 2001/08/21 13:33:15 uw Exp $ */
 
 #ifndef PHP_PDF_H
 #define PHP_PDF_H
@@ -42,6 +42,8 @@ PHP_FUNCTION(pdf_get_buffer);	/* new function */
 PHP_FUNCTION(pdf_close);
 PHP_FUNCTION(pdf_begin_page);
 PHP_FUNCTION(pdf_end_page);
+PHP_FUNCTION(pdf_get_majorversion);
+PHP_FUNCTION(pdf_get_minorversion);
 PHP_FUNCTION(pdf_get_value);
 PHP_FUNCTION(pdf_set_value);
 PHP_FUNCTION(pdf_get_parameter);

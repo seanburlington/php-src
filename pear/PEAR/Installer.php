@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.134 2003/10/05 16:42:18 mj Exp $
+// $Id: Installer.php,v 1.135 2003/10/05 19:10:56 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -957,11 +957,7 @@ class PEAR_Installer extends PEAR_Common
             // {{{ Decompress pack in tmp dir -------------------------------------
 
             // To allow relative package file names
-            $oldcwd = getcwd();
-            if (@chdir(dirname($pkgfile))) {
-                $pkgfile = getcwd() . DIRECTORY_SEPARATOR . basename($pkgfile);
-                chdir($oldcwd);
-            }
+            $pkgfile = realpath($pkgfile);
 
             if (PEAR::isError($tmpdir = System::mktemp('-d'))) {
                 return $tmpdir;

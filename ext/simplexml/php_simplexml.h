@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.13 2004/01/17 19:41:31 helly Exp $ */
+/* $Id: php_simplexml.h,v 1.14 2004/01/17 21:22:26 sterling Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H
@@ -53,16 +53,10 @@ PHP_RINIT_FUNCTION(simplexml);
 PHP_MINFO_FUNCTION(simplexml);
 
 typedef struct {
-	xmlHashTablePtr nsmap;
-	int refcount;
-} simplexml_nsmap;
-
-typedef struct {
 	zend_object zo;
 	php_libxml_node_ptr *node;
 	php_libxml_ref_obj *document;
 	HashTable *properties;
-	simplexml_nsmap *nsmapptr;
 	xmlXPathContextPtr xpath;
 	struct {
 		php_libxml_node_ptr   *node;

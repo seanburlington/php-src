@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.183.2.9 2004/01/20 11:37:17 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.183.2.10 2004/01/26 14:04:22 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -641,7 +641,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.9 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.10 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -3834,7 +3834,7 @@ PHP_FUNCTION(ocicolumnprecision)
 
 /* }}} */
 
-/* {{{ proto mixed ocicolumntype(int stmt, int col)
+/* {{{ proto int ocicolumntype(int stmt, int col)
    Tell the data type of a column */
 
 PHP_FUNCTION(ocicolumntype)
@@ -4998,7 +4998,7 @@ PHP_FUNCTION(ocicollgetelem)
 
 		/* Return null if the value is null */
 		if(*elemind == OCI_IND_NULL) {
-			RETURN_FALSE;
+			RETURN_NULL();
 		} 
 
 		switch (coll->element_typecode) {

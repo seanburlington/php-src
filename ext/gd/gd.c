@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.126 2001/05/18 20:52:40 sterling Exp $ */
+/* $Id: gd.c,v 1.127 2001/05/19 17:45:36 sterling Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -50,11 +50,6 @@ static int le_gd, le_gd_font;
 static int le_ps_font, le_ps_enc;
 #endif
 
-#ifdef ZTS
-int gd_globals_id;
-#else
-static php_gd_globals gd_globals;
-#endif
 
 #include <gd.h>
 #include <gdfontt.h>  /* 1 Tiny font */

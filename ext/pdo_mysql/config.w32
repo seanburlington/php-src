@@ -1,10 +1,10 @@
-// $Id: config.w32,v 1.1 2004/05/18 19:03:27 wez Exp $
+// $Id: config.w32,v 1.2 2004/05/18 19:25:23 wez Exp $
 // vim:ft=javascript
 
 ARG_WITH("pdo-mysql", "MySQL support for PDO", "no");
 
 if (PHP_PDO_MYSQL != "no") {
-	if (CHECK_LIB("libmysql.lib", "mysql", PHP_PDO_MYSQL) &&
+	if (CHECK_LIB("libmysql.lib", "pdo_mysql", PHP_PDO_MYSQL) &&
 			CHECK_HEADER_ADD_INCLUDE("mysql.h", "CFLAGS_PDO_MYSQL", PHP_PHP_BUILD + "\\include\\mysql;" + PHP_PDO_MYSQL)) {
 		EXTENSION("pdo_mysql", "pdo_mysql.c mysql_driver.c mysql_statement.c");
 		ADD_FLAG('CFLAGS_PDO_MYSQL', "/I ..\\pecl");

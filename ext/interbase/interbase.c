@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.91.2.10 2003/06/16 10:47:35 daniela Exp $ */
+/* $Id: interbase.c,v 1.91.2.11 2003/07/10 00:17:40 sniper Exp $ */
   
 
 /* TODO: Arrays, roles?
@@ -628,7 +628,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.10 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.11 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1434,6 +1434,10 @@ static int _php_ibase_exec(ibase_result **ib_resultp, ibase_query *ib_query, int
 	TSRMLS_FETCH();
 	
 	IB_RESULT = NULL;
+
+	if (argc > 0 && args != NULL) {
+		SEPARATE_ZVAL(args);
+	}
 	
 	/* allocate sqlda and output buffers */
 	if (ib_query->out_sqlda) { /* output variables in select, select for update */

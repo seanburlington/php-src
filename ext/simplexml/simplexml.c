@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.84 2003/11/13 20:32:37 helly Exp $ */
+/* $Id: simplexml.c,v 1.85 2003/11/14 07:41:05 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -955,7 +955,7 @@ sxe_object_cast(zval *readobj, zval *writeobj, int type, int should_free TSRMLS_
 		xmlFree(contents);
 	}
 	if (should_free) {
-		/*zval_dtor(&free_obj);*/
+		zval_dtor(&free_obj);
 	}
 	return rv;
 }
@@ -1429,7 +1429,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.84 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.85 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

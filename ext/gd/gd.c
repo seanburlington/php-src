@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.11 2003/01/22 19:53:40 iliaa Exp $ */
+/* $Id: gd.c,v 1.221.2.12 2003/01/24 19:24:01 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -2849,7 +2849,7 @@ static void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode, int 
 	int col, x, y, l=0, i, brect[8];
 	double ptsize, angle;
 	unsigned char *str = NULL, *fontname = NULL;
-	char *error;
+	char *error = NULL;
 	int argc;
 #if HAVE_GD_STRINGFTEX
 	gdFTStringExtra strex;

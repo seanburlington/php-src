@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.230 2003/03/10 14:32:47 sniper Exp $
+dnl $Id: acinclude.m4,v 1.231 2003/03/12 02:26:46 sniper Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -28,7 +28,7 @@ AC_DEFUN([PHP_DEFINE],[
 dnl PHP_INIT_BUILD_SYSTEM
 dnl
 AC_DEFUN([PHP_INIT_BUILD_SYSTEM],[
-$php_shtool mkdir include
+test -d include || $php_shtool mkdir include
 > Makefile.objects
 > Makefile.fragments
 dnl We need to play tricks here to avoid matching the grep line itself

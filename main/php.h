@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.58 2000/02/10 17:14:05 andi Exp $ */
+/* $Id: php.h,v 1.59 2000/02/10 17:22:25 andi Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -82,7 +82,7 @@ extern unsigned char second_arg_allow_ref[];
 #define DEBUG ZEND_DEBUG
 
 
-#if DEBUG || !(defined(__GNUC__)||PHP_WIN32
+#if DEBUG || !(defined(__GNUC__)||PHP_WIN32)
 #ifdef inline
 #undef inline
 #endif

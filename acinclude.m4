@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.218.2.25 2003/08/27 17:57:28 sniper Exp $
+dnl $Id: acinclude.m4,v 1.218.2.26 2003/09/02 19:42:02 sas Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -16,6 +16,9 @@ AC_DEFUN([PHP_ADD_MAKEFILE_FRAGMENT],[
   sed -e "s#\$(srcdir)#$ac_srcdir#g" -e "s#\$(builddir)#$ac_builddir#g" $src  >> Makefile.fragments
 ])
 
+AC_DEFUN(PHP_PROG_RE2C,[
+  AC_CHECK_PROG(RE2C, re2c, re2c, [exit 0;])
+])
 
 dnl PHP_DEFINE(WHAT[, value])
 dnl

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.196 2001/04/29 13:16:05 elixer Exp $ */
+/* $Id: string.c,v 1.197 2001/04/29 13:30:56 elixer Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3003,8 +3003,7 @@ PHP_FUNCTION(strnatcmp)
 /* }}} */
 
 /* {{{ proto array localeconv( void )
-   Returns all the information stored in the lconv struct defined
-   in locale.h based on the currently selected locale */
+   Returns numeric formatting information based on the current locale */
 PHP_FUNCTION(localeconv)
 {
 	zval *grouping, *mon_grouping;

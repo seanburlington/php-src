@@ -9,7 +9,7 @@
 #
 # Written by Sascha Schumann
 #
-# $Id: build.mk,v 1.6 1999/10/10 18:08:31 sas Exp $ 
+# $Id: build.mk,v 1.7 1999/11/06 13:05:14 sas Exp $ 
 
 
 LT_TARGETS = ltmain.sh ltconfig
@@ -17,7 +17,7 @@ LT_PATCHES = patch-aa patch-ab
 
 SUBDIRS = libzend TSRM
 
-makefile_am_files = $(shell find . -name Makefile.am)
+makefile_am_files = Makefile.am $(shell find ext sapi regex -name Makefile.am)
 makefile_in_files = $(makefile_am_files:.am=.in)
 makefile_files    = $(makefile_am_files:e.am=e)
 
@@ -68,6 +68,10 @@ $(LT_TARGETS): $(LT_PATCHES)
 	libtoolize --automake -c -f
 	patch ltconfig < patch-aa
 	patch ltmain.sh < patch-ab
+	@grep compile_rpath ltconfig >/dev/null 2>&1 || (\
+			echo "patching libtool components failed."; \
+			exit 1)
+			
 
 $(makefile_in_files): $(makefile_am_files) aclocal.m4
 	@echo rebuilding Makefile.in\'s

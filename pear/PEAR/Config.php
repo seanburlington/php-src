@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.25 2002/05/27 22:28:26 ssb Exp $
+// $Id: Config.php,v 1.26 2002/05/28 00:01:19 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -112,6 +112,16 @@ class PEAR_Config extends PEAR
             'type' => 'directory',
             'default' => PEAR_CONFIG_DEFAULT_DOCDIR,
             'doc' => 'directory where documentation is installed',
+            ),
+        'data_dir' => array(
+            'type' => 'directory',
+            'default' => PEAR_CONFIG_DEFAULT_DATADIR,
+            'doc' => 'directory where data files are installed',
+            ),
+        'test_dir' => array(
+            'type' => 'directory',
+            'default' => PEAR_CONFIG_DEFAULT_TESTDIR,
+            'doc' => 'directory where regression tests are installed',
             ),
         'bin_dir' => array(
             'type' => 'directory',

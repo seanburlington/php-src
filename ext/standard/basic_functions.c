@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.703 2005/01/09 16:30:08 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.704 2005/01/18 10:38:03 dmitry Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2085,8 +2085,10 @@ PHP_FUNCTION(call_user_func_array)
 		func_params = NULL;
 	}
 
-	if (call_user_function_ex(EG(function_table), NULL, *func, &retval_ptr, count, func_params, 0, NULL TSRMLS_CC) == SUCCESS && retval_ptr) {
-		COPY_PZVAL_TO_ZVAL(*return_value, retval_ptr);
+	if (call_user_function_ex(EG(function_table), NULL, *func, &retval_ptr, count, func_params, 0, NULL TSRMLS_CC) == SUCCESS) {
+		if (retval_ptr) {
+			COPY_PZVAL_TO_ZVAL(*return_value, retval_ptr);
+		}
 	} else {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call %s()", name);
 	}

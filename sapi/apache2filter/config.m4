@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.21 2002/06/29 00:33:02 sniper Exp $
+dnl $Id: config.m4,v 1.22 2002/07/07 15:43:45 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 2.0 module support via DSO through APXS)
@@ -43,7 +43,7 @@ AC_ARG_WITH(apxs2,
   done
 
   # Test that we're trying to configure with apache 2.x
-  APACHE_VERSION=`$APXS_HTTPD -v | head -1 | awk 'BEGIN { RS=" "; } /Apache/ { print $0; }' | cut -f2 -d'/' | cut -f1 -d'-' | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+  APACHE_VERSION=`$APXS_HTTPD -v | head -1 | awk 'BEGIN { RS=" "; } /Apache/ { print $1; }' | cut -f2 -d'/' | cut -f1 -d'-' | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
   if test "$APACHE_VERSION" -le 2000000; then
     AC_MSG_ERROR([You have enabled Apache 2 support while your server is Apache 1.3.  Please use the appropiate switch --with-apxs (without the 2)])
   elif test "$APACHE_VERSION" -lt 2000040; then

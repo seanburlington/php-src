@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.34 2002/04/30 00:30:00 wez Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.35 2002/05/04 17:16:28 sas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -85,7 +85,6 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 	char *http_header_line = NULL;
 	char tmp_line[128];
 	size_t chunk_size = 0, file_size = 0;
-	int redirected = 0;
 
 	resource = php_url_parse(path);
 	if (resource == NULL)
@@ -304,7 +303,6 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 			else {
 				strlcpy(new_path, location, sizeof(new_path));
 			}
-			redirected = 1;
 			stream = php_stream_url_wrap_http(NULL, new_path, mode, options, opened_path, context STREAMS_CC TSRMLS_CC);
 			if (stream && stream->wrapperdata)	{
 				entryp = &entry;

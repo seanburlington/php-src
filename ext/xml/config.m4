@@ -1,14 +1,6 @@
 dnl
-dnl $Id: config.m4,v 1.42 2003/05/19 15:33:19 sniper Exp $
+dnl $Id: config.m4,v 1.43 2003/05/19 21:45:49 sniper Exp $
 dnl
-
-AC_C_BIGENDIAN
-
-if test "$ac_cv_c_bigendian" = "yes"; then
-  order=4321
-else
-  order=1234
-fi
 
 PHP_ARG_WITH(xml,whether to enable XML support,
 [  --without-xml           Disable XML support. Requires libxml2.], yes)

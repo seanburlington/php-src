@@ -6,7 +6,7 @@
    +----------------------------------------------------------------------+
    | dbx module version 1.0                                               |
    +----------------------------------------------------------------------+
-   | Copyright (c) 2001 Guidance Rotterdam BV                             |
+   | Copyright (c) 2001-2003 Guidance Rotterdam BV                        |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx.c,v 1.51 2003/07/09 16:31:40 mboeren Exp $ */
+/* $Id: dbx.c,v 1.52 2003/07/10 08:25:58 mboeren Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

@@ -6,7 +6,7 @@
    +----------------------------------------------------------------------+
    | dbx module version 1.0                                               |
    +----------------------------------------------------------------------+
-   | Copyright (c) 2001 Guidance Rotterdam BV                             |
+   | Copyright (c) 2001-2003 Guidance Rotterdam BV                        |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx_sqlite.h,v 1.1 2003/07/09 16:31:40 mboeren Exp $ */
+/* $Id: dbx_sqlite.h,v 1.2 2003/07/10 08:25:58 mboeren Exp $ */
 
 #ifndef ZEND_DBX_SQLITE_H
 #define ZEND_DBX_SQLITE_H

@@ -6,7 +6,7 @@
    +----------------------------------------------------------------------+
    | dbx module version 1.0                                               |
    +----------------------------------------------------------------------+
-   | Copyright (c) 2001 Guidance Rotterdam BV                             |
+   | Copyright (c) 2001-2003 Guidance Rotterdam BV                        |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx_fbsql.h,v 1.9 2003/06/14 03:33:38 fmk Exp $ */
+/* $Id: dbx_fbsql.h,v 1.10 2003/07/10 08:25:58 mboeren Exp $ */
 
 #ifndef ZEND_DBX_FBSQL_H
 #define ZEND_DBX_FBSQL_H

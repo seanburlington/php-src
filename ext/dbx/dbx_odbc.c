@@ -6,7 +6,7 @@
    +----------------------------------------------------------------------+
    | dbx module version 1.0                                               |
    +----------------------------------------------------------------------+
-   | Copyright (c) 2001 Guidance Rotterdam BV                             |
+   | Copyright (c) 2001-2003 Guidance Rotterdam BV                        |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx_odbc.c,v 1.22 2003/06/10 20:03:27 imajes Exp $ */
+/* $Id: dbx_odbc.c,v 1.23 2003/07/10 08:25:58 mboeren Exp $ */
 
 #include "dbx.h"
 #include "dbx_odbc.h"

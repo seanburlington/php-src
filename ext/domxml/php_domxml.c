@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.114 2002/01/25 07:40:38 derick Exp $ */
+/* $Id: php_domxml.c,v 1.115 2002/02/04 11:39:15 yohgaki Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -3468,6 +3468,9 @@ PHP_FUNCTION(domxml_xslt_stylesheet_file)
 static char *php_domxslt_string_to_xpathexpr(const char *str)
 {
 	const xmlChar *string = (const xmlChar *)str;
+
+	TSRMLS_FETCH();
+	
 	xmlChar *value;
 
         if (xmlStrchr(string, '"')) {
@@ -3500,6 +3503,8 @@ static char **php_domxslt_make_params(zval *idvars, int xpath_params)
 	ulong num_key;
 	char **params = NULL;
 	int i = 0;
+
+	TSRMLS_FETCH();
 
 	parht = HASH_OF(idvars);
 	parsize = (2 * zend_hash_num_elements(parht) + 1) * sizeof(char *);

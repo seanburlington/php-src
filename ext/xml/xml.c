@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.91 2001/08/12 18:44:42 thies Exp $ */
+/* $Id: xml.c,v 1.92 2001/08/12 18:57:35 sebastian Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -647,7 +647,7 @@ void _xml_startElementHandler(void *userData, const char *name, const char **att
 	const char **attrs = attributes;
 	char *tag_name;
 	char *att, *val;
-	int att_len, val_len;
+	int val_len;
 	zval *retval, *args[3];
 
 	if (parser) {

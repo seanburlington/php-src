@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.38 2001/02/26 18:14:30 andi Exp $ */
+/* $Id: internal_functions_win32.c,v 1.39 2001/05/13 16:51:59 phanto Exp $ */
 
 
 #include "php.h"
@@ -51,7 +51,7 @@
 #include "ext/standard/php_assert.h"
 #include "ext/calendar/php_calendar.h"
 #include "ext/com/php_COM.h"
-#include "ext/com/php_typedef_VARIANT.h"
+#include "ext/com/php_VARIANT.h"
 #include "ext/ftp/php_ftp.h"
 #include "ext/standard/reg.h"
 #include "ext/pcre/php_pcre.h"

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.154.2.8 2001/11/11 00:08:33 rasmus Exp $ */
+/* $Id: gd.c,v 1.154.2.9 2001/11/13 13:54:20 rasmus Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -3534,8 +3534,8 @@ static void _php_image_convert(INTERNAL_FUNCTION_PARAMETERS, int image_type )
 			else {
 				y_ratio = x_ratio;
 			}
-			dest_width = org_width / x_ratio;
-			dest_height = org_height / y_ratio;
+			dest_width = (int)(org_width / x_ratio);
+			dest_height = (int)(org_height / y_ratio);
 		}
 		else {
 			x_ratio = (float) dest_width / (float) org_width;
@@ -3547,8 +3547,8 @@ static void _php_image_convert(INTERNAL_FUNCTION_PARAMETERS, int image_type )
 			else {
 				y_ratio = x_ratio;
 			}
-			dest_width = org_width * x_ratio;
-			dest_height = org_height * y_ratio;
+			dest_width = (int)(org_width * x_ratio);
+			dest_height = (int)(org_height * y_ratio);
 		}
 
 		im_tmp = gdImageCreate (dest_width, dest_height);

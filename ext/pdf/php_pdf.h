@@ -26,7 +26,7 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_pdf.h,v 1.6 2000/02/26 11:58:48 steinm Exp $ */
+/* $Id: php_pdf.h,v 1.7 2000/03/28 16:45:04 steinm Exp $ */
 
 #ifndef _PHP_PDF_H
 #define _PHP_PDF_H
@@ -115,10 +115,12 @@ PHP_FUNCTION(pdf_set_transition);
 PHP_FUNCTION(pdf_set_duration);
 PHP_FUNCTION(pdf_open_jpeg);
 PHP_FUNCTION(pdf_open_tiff);
+PHP_FUNCTION(pdf_open_png);
 #if HAVE_LIBGD13
 PHP_FUNCTION(pdf_open_memory_image);
 #endif
 PHP_FUNCTION(pdf_open_gif);
+PHP_FUNCTION(pdf_open_image_file);
 PHP_FUNCTION(pdf_close_image);
 PHP_FUNCTION(pdf_place_image);
 PHP_FUNCTION(pdf_put_image);

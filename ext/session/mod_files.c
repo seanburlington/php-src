@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.83.2.6 2003/09/24 23:39:22 iliaa Exp $ */
+/* $Id: mod_files.c,v 1.83.2.7 2003/09/25 14:53:58 sniper Exp $ */
 
 #include "php.h"
 
@@ -124,7 +124,11 @@ static char *ps_files_path_create(char *buf, size_t buflen, ps_files *data, cons
 static void ps_files_close(ps_files *data)
 {
 	if (data->fd != -1) {
+#ifdef PHP_WIN32 
+		/* On Win32 locked files that are closed without being explicitly unlocked
+		   will be unlocked only when "system resources become available". */
 		flock(data->fd, LOCK_UN);
+#endif
 		close(data->fd);
 		data->fd = -1;
 	}

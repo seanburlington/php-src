@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.38.2.2 2002/12/10 20:19:11 sesser Exp $ */
+/* $Id: php_sybase_db.c,v 1.38.2.3 2002/12/12 21:31:56 sesser Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -747,7 +747,7 @@ static void php_sybase_get_column_content(sybase_link *sybase_ptr,int offset,pva
 		
 				/* get rid of trailing spaces */
 				p = res_buf + res_length;
-				while (p >= res_buf && *p == ' ') {
+				while (p >= res_buf && (*p == ' ' || *p == '\0')) {
 					p--;
 				}
 				*(++p) = 0; /* put a trailing NULL */

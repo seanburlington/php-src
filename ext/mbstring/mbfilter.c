@@ -79,13 +79,17 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.11 2001/06/05 14:25:23 hirokawa Exp $ */
+/* $Id: mbfilter.c,v 1.12 2001/06/11 15:31:58 dbeu Exp $ */
 
 
 #include <stdlib.h>
 #include "mbfilter.h"
 #include "mbfilter_ja.h"
 #include "zend.h"
+
+#ifdef PHP_WIN32
+#include "win95nt.h"
+#endif
 
 #define	mbfl_malloc		emalloc
 #define	mbfl_realloc	erealloc

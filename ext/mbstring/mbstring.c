@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.17 2001/06/07 15:11:11 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.18 2001/06/11 15:31:58 dbeu Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -49,7 +49,6 @@
 
 #include "php.h"
 #include "php_ini.h"
-#include "php_config.h"
 #include "php_variables.h"
 #include "mbstring.h"
 #include "ext/standard/php_string.h"

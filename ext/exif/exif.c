@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.52.2.3 2002/03/30 18:31:08 helly Exp $ */
+/* $Id: exif.c,v 1.52.2.4 2002/04/03 19:51:26 derick Exp $ */
 
 /*	ToDos
  *
@@ -75,6 +75,11 @@ typedef unsigned char uchar;
 #ifndef TRUE
 	#define TRUE 1
 	#define FALSE 0
+#endif
+
+#ifndef MB_CUR_MAX
+	#define MB_CUR_MAX 8
+	/* Should be a library constant */
 #endif
 
 #define EXIT_FAILURE  1

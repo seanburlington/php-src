@@ -1,4 +1,4 @@
-/* 
+/*
    +----------------------------------------------------------------------+
    | PHP version 4.0                                                      |
    +----------------------------------------------------------------------+
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.70 2000/12/08 14:37:49 sterling Exp $ */
+/* $Id: basic_functions.h,v 1.71 2000/12/18 19:23:50 zak Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -76,6 +76,7 @@ PHP_FUNCTION(is_numeric);
 PHP_FUNCTION(is_string);
 PHP_FUNCTION(is_array);
 PHP_FUNCTION(is_object);
+PHP_FUNCTION(is_scalar);
 
 PHP_FUNCTION(error_log);
 
@@ -153,7 +154,7 @@ typedef struct {
 	zend_llist *user_tick_functions;
 
 	zval *active_ini_file_section;
-	
+
 	HashTable sm_protected_env_vars;
 	char *sm_allowed_env_vars;
 
@@ -183,9 +184,9 @@ typedef struct {
 
 #ifdef TRANS_SID
 	/* url_scanner.c */
-	url_adapt_state_t url_adapt_state; 
+	url_adapt_state_t url_adapt_state;
 	/* url_scanner_ex.re */
-	url_adapt_state_ex_t url_adapt_state_ex; 
+	url_adapt_state_ex_t url_adapt_state_ex;
 #endif
 } php_basic_globals;
 

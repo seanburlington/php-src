@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.h,v $ */
-/* $Id: php_mnogo.h,v 1.6 2001/02/23 10:34:49 gluke Exp $ */
+/* $Id: php_mnogo.h,v 1.7 2001/03/01 13:26:25 gluke Exp $ */
 
 /* 
    +----------------------------------------------------------------------+
@@ -26,6 +26,9 @@
 #define _PHP_MNOGO_H
 
 #if HAVE_MNOGOSEARCH
+
+#include <udm_config.h>
+#include <udmsearch.h>
 
 extern zend_module_entry mnogosearch_module_entry;
 #define mnogosearch_module_ptr &mnogosearch_module_entry
@@ -64,6 +67,10 @@ DLEXPORT PHP_FUNCTION(udm_get_res_param);
 
 DLEXPORT PHP_FUNCTION(udm_free_res);
 DLEXPORT PHP_FUNCTION(udm_free_agent);
+
+#if UDM_VERSION_ID > 30110
+DLEXPORT PHP_FUNCTION(udm_get_doc_count);
+#endif
 
 #else
 

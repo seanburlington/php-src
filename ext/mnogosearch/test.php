@@ -1,6 +1,6 @@
 <!-- 
     $Source: /repository/php-src/ext/mnogosearch/Attic/test.php,v $
-    $Id: test.php,v 1.14 2001/02/23 10:53:06 gluke Exp $ 
+    $Id: test.php,v 1.15 2001/03/01 13:26:25 gluke Exp $ 
 -->
 
 <html>
@@ -23,6 +23,8 @@
 // DBMode is optional, "single" by default
 
 	$udm=Udm_Alloc_Agent("mysql://udm:udm@localhost/udm/",'single');	
+	
+	print  "Total number of urls in database: ".Udm_Get_Doc_Count($udm)."<br>\n";
 	
 // Stage 2: set search parameters
 

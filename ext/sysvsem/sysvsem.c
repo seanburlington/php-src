@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.38 2002/02/28 08:26:52 sebastian Exp $ */
+/* $Id: sysvsem.c,v 1.39 2002/03/28 07:36:02 derick Exp $ */
 
 /* Latest update build anc tested on Linux 2.2.14
  *
@@ -411,7 +411,11 @@ PHP_FUNCTION(sem_remove)
                 RETURN_FALSE;
         }
 
-	if(semctl(sem_ptr->semid,NULL,IPC_RMID,NULL)<0) {
+#if HAVE_SEMUN
+		if(semctl(sem_ptr->semid,NULL,IPC_RMID,un)<0) {
+#else
+		if(semctl(sem_ptr->semid,NULL,IPC_RMID,NULL)<0) {
+#endif
                 php_error(E_WARNING, "sem_remove() failed for id %d: %s", id, strerror(errno));
                 RETURN_FALSE;
         }

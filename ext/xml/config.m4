@@ -1,5 +1,5 @@
 # $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.25.2.1 2001/06/01 06:38:32 sniper Exp $
+# $Id: config.m4,v 1.25.2.2 2001/06/01 21:09:52 sas Exp $
 
 dnl Fallback for --with-xml[=DIR]
 AC_ARG_WITH(xml,[],enable_xml=$withval)
@@ -18,7 +18,8 @@ PHP_ARG_ENABLE(xml,for XML support,
 PHP_ARG_WITH(expat-dir, external libexpat install dir,
 [  --with-expat-dir=DIR    XML: external libexpat install dir])
 
-if test "$PHP_XML" = "yes" -a "$PHP_EXPAT_DIR" = "no"; then
+if test "$PHP_XML" = "yes"; then
+if test "$PHP_EXPAT_DIR" = "no"; then
 
   PHP_EXTENSION(xml, $ext_shared)
   PHP_SUBST(EXPAT_SHARED_LIBADD)
@@ -55,4 +56,5 @@ else
 
   PHP_ADD_INCLUDE($EXPAT_DIR/include)
   PHP_ADD_LIBRARY_WITH_PATH(expat, $EXPAT_DIR/lib, EXPAT_SHARED_LIBADD)
+fi
 fi

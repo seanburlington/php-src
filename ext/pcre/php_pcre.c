@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.42 2000/02/23 16:38:38 eschmid Exp $ */
+/* $Id: php_pcre.c,v 1.43 2000/02/24 14:37:05 andrei Exp $ */
 
 /*
 	TODO:
@@ -328,7 +328,7 @@ static void _pcre_match(INTERNAL_FUNCTION_PARAMETERS, int global)
 	/* Get function parameters and do error-checking. */
 	switch(ARG_COUNT(ht)) {
 		case 2:
-			if (zend_get_parameters_ex(2, &regex, &subject) == FAILURE) {
+			if (global || zend_get_parameters_ex(2, &regex, &subject) == FAILURE) {
 				WRONG_PARAM_COUNT;
 			}
 			break;

@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.35 2000/07/01 21:34:45 sterling Exp $ */
+/* $Id: snmp.c,v 1.36 2000/07/01 22:39:27 sterling Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -217,7 +217,7 @@ void php_snmp(INTERNAL_FUNCTION_PARAMETERS, int st) {
 	* memory it did not allocate
 	*/
 #ifdef UCD_SNMP_HACK
-	session.community = (u_char *)estrdup((*a2)->value.str.val);
+	session.community = (u_char *)strdup((*a2)->value.str.val); /* memory freed by SNMP library, strdup NOT estrdup */
 #else
 	session.community = (u_char *)(*a2)->value.str.val;
 #endif

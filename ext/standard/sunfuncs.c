@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sunfuncs.c,v 1.6.2.1 2004/07/21 00:14:50 iliaa Exp $ */
+/* $Id: sunfuncs.c,v 1.6.2.2 2004/08/04 00:28:05 iliaa Exp $ */
 
 /*
 	The sun position algorithm taken from the 'US Naval Observatory's
@@ -192,6 +192,7 @@ static void php_do_date_sunrise_sunset(INTERNAL_FUNCTION_PARAMETERS, int calc_su
 			}
 		case 5:
 			gmt_offset = php_idate('Z', time, 0) / 3600;
+		case 6:
 			break;
 		default:
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid format");

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.356 2001/07/08 23:28:48 sas Exp $ */
+/* $Id: basic_functions.c,v 1.357 2001/07/09 10:20:40 thies Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -821,7 +821,6 @@ PHP_MSHUTDOWN_FUNCTION(basic)
 	PHP_MSHUTDOWN(regex)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_MSHUTDOWN(browscap)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_MSHUTDOWN(array)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
-	PHP_MSHUTDOWN(assert)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #ifdef TRANS_SID
 	PHP_MSHUTDOWN(url_scanner_ex)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 #endif
@@ -866,7 +865,6 @@ PHP_RINIT_FUNCTION(basic)
 
 	PHP_RINIT(filestat)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(syslog)(INIT_FUNC_ARGS_PASSTHRU);
-	PHP_RINIT(assert)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(dir)(INIT_FUNC_ARGS_PASSTHRU);
 
 #ifdef TRANS_SID

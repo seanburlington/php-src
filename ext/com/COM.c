@@ -18,7 +18,7 @@
    |         Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: COM.c,v 1.77 2002/05/21 22:41:44 wez Exp $ */
+/* $Id: COM.c,v 1.78 2002/05/21 22:44:09 wez Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -1182,6 +1182,14 @@ static int process_typeinfo(ITypeInfo *typeinfo, HashTable *id_to_name, int prin
 					}
 
 					if (isprop) {
+
+						typeinfo->lpVtbl->GetDocumentation(typeinfo, func->memid, NULL, &olename, NULL, NULL);
+						if (olename) {
+							funcdesc = php_OLECHAR_to_char(olename, &funcdesclen, codepage TSRMLS_CC);
+							SysFreeString(olename);
+							php_printf("\t/* %s */\n", funcdesc);
+							efree(funcdesc);
+						}
 
 						php_printf("\tvar $%s;\n\n", ansiname);
 

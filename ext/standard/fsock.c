@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.55 2000/10/28 01:31:56 zeev Exp $ */
+/* $Id: fsock.c,v 1.56 2000/12/19 11:23:27 stas Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -259,12 +259,13 @@ static void php_fsockopen(INTERNAL_FUNCTION_PARAMETERS, int persistent) {
 		struct sockaddr_in server;
 
 		memset(&server, 0, sizeof(server));
-		if((*args[0])->value.str.val[0] == 'u' &&
-			(*args[0])->value.str.val[1] == 'd' &&
-			(*args[0])->value.str.val[2] == 'p' &&
-			(*args[0])->value.str.val[3] == ':' &&
-			(*args[0])->value.str.val[4] == '/' &&
-			(*args[0])->value.str.val[5] == '/') {
+		if(Z_STRLEN_PP(args[0]) >= 6 &&
+		   (*args[0])->value.str.val[0] == 'u' &&
+		   (*args[0])->value.str.val[1] == 'd' &&
+		   (*args[0])->value.str.val[2] == 'p' &&
+		   (*args[0])->value.str.val[3] == ':' &&
+		   (*args[0])->value.str.val[4] == '/' &&
+		   (*args[0])->value.str.val[5] == '/') {
 			udp = 1;
 		}
 		

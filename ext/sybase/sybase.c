@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sybase.c,v 1.8 1999/07/16 22:00:51 zeev Exp $ */
+/* $Id: sybase.c,v 1.9 1999/07/22 23:54:54 zeev Exp $ */
 
 
 #ifndef MSVC5
@@ -473,8 +473,7 @@ static void php3_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 static int php3_sybase_get_default_link(INTERNAL_FUNCTION_PARAMETERS)
 {
 	if (php3_sybase_module.default_link==-1) { /* no link opened yet, implicitly open one */
-		int ht;
-
+		ht = 0;
 		php3_sybase_do_connect(INTERNAL_FUNCTION_PARAM_PASSTHRU,0);
 	}
 	return php3_sybase_module.default_link;

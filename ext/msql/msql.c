@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: msql.c,v 1.11 1999/07/19 19:10:11 eschmid Exp $ */
+/* $Id: msql.c,v 1.12 1999/07/22 23:54:54 zeev Exp $ */
 
 #include "php.h"
 #if COMPILE_DL
@@ -450,7 +450,8 @@ static int php3_msql_get_default_link(INTERNAL_FUNCTION_PARAMETERS)
 {
 	MSQL_TLS_VARS;
 	if (MSQL_GLOBAL(php3_msql_module).default_link==-1) { /* no link opened yet, implicitly open one */
-		php3_msql_do_connect(0, return_value, list, plist, this_ptr,0);
+		ht = 0;
+		php3_msql_do_connect(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 	}
 	return MSQL_GLOBAL(php3_msql_module).default_link;
 }

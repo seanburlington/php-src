@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.10 1999/07/19 20:37:17 eschmid Exp $ */
+/* $Id: pgsql.c,v 1.11 1999/07/22 23:54:54 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -351,14 +351,12 @@ void php3_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 int php3_pgsql_get_default_link(INTERNAL_FUNCTION_PARAMETERS)
 {
 	if (php3_pgsql_module.default_link==-1) { /* no link opened yet, implicitly open one */
-		HashTable tmp;
-		
-		_php3_hash_init(&tmp,0,NULL,NULL,0);
+		ht = 0;
 		php3_pgsql_do_connect(INTERNAL_FUNCTION_PARAM_PASSTHRU,0);
-		_php3_hash_destroy(&tmp);
 	}
 	return php3_pgsql_module.default_link;
 }
+
 
 /* {{{ proto int pg_connect([string connection_string] | [string host, string port, [string options, [string tty,]] string database)
    Open a PostgreSQL connection */

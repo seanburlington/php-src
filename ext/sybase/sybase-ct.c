@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sybase-ct.c,v 1.7 1999/07/21 08:55:19 sas Exp $ */
+/* $Id: sybase-ct.c,v 1.8 1999/07/22 23:54:54 zeev Exp $ */
 
 
 #include "php.h"
@@ -602,7 +602,8 @@ static void php3_sybct_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 static int php3_sybct_get_default_link(INTERNAL_FUNCTION_PARAMETERS)
 {
 	if (php3_sybct_module.default_link==-1) { /* no link opened yet, implicitly open one */
-		php3_sybct_do_connect(0,return_value,list,plist,0);
+		ht = 0;
+		php3_sybct_do_connect(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 	}
 	return php3_sybct_module.default_link;
 }

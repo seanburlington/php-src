@@ -17,6 +17,8 @@
    +----------------------------------------------------------------------+
 */
 
+/* $Id: mcve.c,v 1.19 2003/06/16 14:20:05 andrey Exp $ */
+
 /* standard php include(s) */
 #include "php.h"
 #include "ext/standard/head.h"

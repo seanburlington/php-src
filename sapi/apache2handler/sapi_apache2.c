@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.17 2003/07/11 04:24:11 sniper Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.18 2003/08/01 20:21:21 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -86,7 +86,7 @@ php_apache_sapi_ub_write(const char *str, uint str_length TSRMLS_DC)
 						 
 	APR_BRIGADE_INSERT_TAIL(brigade, bucket);
 
-	if (ap_pass_brigade(r->output_filters, brigade) != APR_SUCCESS) {
+	if (ap_pass_brigade(r->output_filters, brigade) != APR_SUCCESS || r->connection->aborted) {
 		php_handle_aborted_connection();
 	}
 	/* Ensure this brigade is empty for the next usage. */
@@ -263,7 +263,7 @@ php_apache_sapi_flush(void *server_context)
 	/* Send a flush bucket down the filter chain. */
 	bucket = apr_bucket_flush_create(r->connection->bucket_alloc);
 	APR_BRIGADE_INSERT_TAIL(brigade, bucket);
-	if (ap_pass_brigade(r->output_filters, brigade) != APR_SUCCESS) {
+	if (ap_pass_brigade(r->output_filters, brigade) != APR_SUCCESS || r->connection->aborted) {
 		php_handle_aborted_connection();
 	}
 	apr_brigade_cleanup(brigade);
@@ -550,7 +550,7 @@ static int php_handler(request_rec *r)
 		APR_BRIGADE_INSERT_TAIL(brigade, bucket);
 
 		rv = ap_pass_brigade(r->output_filters, brigade);
-		if (rv != APR_SUCCESS) {
+		if (rv != APR_SUCCESS || r->connection->aborted) {
 			php_handle_aborted_connection();
 		}
 		apr_brigade_cleanup(brigade);

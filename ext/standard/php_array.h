@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_array.h,v 1.10 2000/05/18 15:34:35 zeev Exp $ */
+/* $Id: php_array.h,v 1.11 2000/05/30 17:03:56 andrei Exp $ */
 
 #ifndef _PHP_ARRAY_H
 #define _PHP_ARRAY_H
@@ -61,6 +61,7 @@ PHP_FUNCTION(array_unshift);
 PHP_FUNCTION(array_splice);
 PHP_FUNCTION(array_slice);
 PHP_FUNCTION(array_merge);
+PHP_FUNCTION(array_merge_recursive);
 PHP_FUNCTION(array_keys);
 PHP_FUNCTION(array_values);
 PHP_FUNCTION(array_count_values);

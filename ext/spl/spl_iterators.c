@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.57 2004/11/08 13:44:34 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.58 2004/11/11 19:31:27 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -323,7 +323,6 @@ SPL_METHOD(RecursiveIteratorIterator, __construct)
 		iterator = NULL;
 	}
 	if (!iterator || !instanceof_function(Z_OBJCE_P(iterator), spl_ce_RecursiveIterator TSRMLS_CC)) {
-fprintf(stderr, "### %s\n", iterator ? Z_OBJCE_P(iterator)->name : "non object");
 		php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
 		zend_throw_exception(spl_ce_InvalidArgumentException, "An instance of RecursiveIterator or IteratorAggregate creating it is required", 0 TSRMLS_CC);
 		return;

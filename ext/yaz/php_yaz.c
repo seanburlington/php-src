@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_yaz.c,v 1.32 2001/10/11 23:33:55 ssb Exp $ */
+/* $Id: php_yaz.c,v 1.33 2001/10/13 07:38:31 dickmeiss Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2609,7 +2609,7 @@ void yaz_close_session(Yaz_Association *as)
 	}
 }
 
-static void yaz_close_link (zend_rsrc_list_entry *rsrc TSRMLS_DC)
+static void yaz_close_link (zend_rsrc_list_entry *rsrc)
 {
 	Yaz_Association *as = (Yaz_Association *) rsrc->ptr;
 	yaz_close_session (as);
@@ -2678,7 +2678,9 @@ PHP_RINIT_FUNCTION(yaz)
 }
 
 zend_module_entry yaz_module_entry = {
+#if ZEND_MODULE_API_NO >= 20010901
     STANDARD_MODULE_HEADER,
+#endif
 	"yaz",
 	yaz_functions,
 	PHP_MINIT(yaz),
@@ -2686,7 +2688,9 @@ zend_module_entry yaz_module_entry = {
 	PHP_RINIT(yaz),
 	PHP_RSHUTDOWN(yaz),
 	PHP_MINFO(yaz),
+#if ZEND_MODULE_API_NO >= 20010901
     NO_VERSION_YET,
+#endif
 	STANDARD_MODULE_PROPERTIES
 };
 

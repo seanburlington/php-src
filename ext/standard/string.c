@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.158 2000/09/17 09:15:48 stas Exp $ */
+/* $Id: string.c,v 1.159 2000/09/27 15:18:00 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2029,20 +2029,6 @@ PHPAPI void php_char_to_str(char *str,uint len,char from,char *to,int to_len,zva
 	*target = 0;
 }
 
-
-PHPAPI inline char *
-php_memnstr(char *haystack, char *needle, int needle_len, char *end)
-{
-	char *p = haystack;
-	char *s = NULL;
-
-	for(; p <= end - needle_len && 
-			(s = memchr(p, *needle, end - p - needle_len + 1)); p = s + 1) {
-		if(memcmp(s, needle, needle_len) == 0)
-			return s;
-	}
-	return NULL;
-}
 
 PHPAPI char *php_str_to_str(char *haystack, int length, 
 	char *needle, int needle_len, char *str, int str_len, int *_new_length)

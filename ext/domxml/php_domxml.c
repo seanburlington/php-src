@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.109 2002/01/20 14:40:59 hholzgra Exp $ */
+/* $Id: php_domxml.c,v 1.110 2002/01/21 19:12:00 zenderx Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -3285,20 +3285,25 @@ PHP_FUNCTION(xpath_register_ns)
 {
 	/*
 	TODO:
-	- make the namespace registration persistent - now it dissapears each time xpath_eval is called
 	- automagically register all namespaces when creating a new context
 	*/
 
 	int prefix_len, uri_len, result;
 	xmlXPathContextPtr ctxp;
-	char *prefix, *uri;
+	char *prefix, *uri, *uri_static;
 	zval *id;
 
 	DOMXML_PARAM_FOUR(ctxp, id, le_xpathctxp, "ss", &prefix, &prefix_len, &uri, &uri_len);
 
 	/* set the context node to NULL - what is a context node anyway? */
 	ctxp->node = NULL;
-	result = xmlXPathRegisterNs(ctxp, prefix, uri);
+
+	/*
+		this is a hack - libxml2 doesn't copy the URI, it simply uses the string
+		given in the parameter - which is normally deallocated after the function
+	*/
+    uri_static = estrndup(uri, uri_len);
+	result = xmlXPathRegisterNs(ctxp, prefix, uri_static);
 
 	if (0 == result) {
 		RETURN_TRUE;

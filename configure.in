@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.136 2000/05/24 17:31:16 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.137 2000/05/28 17:36:40 andi Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -432,7 +432,7 @@ else
 fi
 
 PHP_ARG_ENABLE(debug, whether to include debugging symbols,
-[  --disable-debug         Compile without debugging symbols.], yes)
+[  --enable-debug         Compile with debugging symbols.], no)
 
 if test "$PHP_DEBUG" = "yes"; then
   PHP_DEBUG=1

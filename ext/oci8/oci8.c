@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.94 2000/08/07 12:01:52 thies Exp $ */
+/* $Id: oci8.c,v 1.95 2000/08/11 13:13:11 hholzgra Exp $ */
 
 /* TODO list:
  *
@@ -490,7 +490,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.94 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.95 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -3595,7 +3595,7 @@ PHP_FUNCTION(ociplogon)
 
 /* }}} */
 
-/* {{{ proto int ocierror([int stmt|conn|global])
+/* {{{ proto array ocierror([int stmt|conn|global])
    Return the last error of stmt|conn|global. If no error happened returns false. */
 
 PHP_FUNCTION(ocierror)

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.21 2004/08/24 12:06:37 wez Exp $
+dnl $Id: config.m4,v 1.22 2004/08/24 12:28:46 derick Exp $
 dnl
 
 PHP_ARG_WITH(libedit,for libedit readline replacement, 
@@ -23,12 +23,12 @@ if test "$PHP_READLINE" != "no"; then
   AC_CHECK_LIB(ncurses, tgetent,
   [
     PHP_ADD_LIBRARY(ncurses,,READLINE_SHARED_LIBADD)
-	 PHP_READLINE_LIBS="$PHP_READLINE_LIBS -lncurses"
+    PHP_READLINE_LIBS="$PHP_READLINE_LIBS -lncurses"
   ],[
     AC_CHECK_LIB(termcap, tgetent,
     [
       PHP_ADD_LIBRARY(termcap,,READLINE_SHARED_LIBADD)
-	 	PHP_READLINE_LIBS="$PHP_READLINE_LIBS -ltermcap"
+      PHP_READLINE_LIBS="$PHP_READLINE_LIBS -ltermcap"
     ])
   ])
 

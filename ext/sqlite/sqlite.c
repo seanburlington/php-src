@@ -16,14 +16,14 @@
   |          Tal Peer <tal@php.net>                                      |
   +----------------------------------------------------------------------+
 
-  $Id: sqlite.c,v 1.25 2003/04/22 00:08:48 edink Exp $ 
+  $Id: sqlite.c,v 1.26 2003/04/22 00:19:48 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
-#define PHP_SQLITE_MODULE_VERSION	"0.7"
+#define PHP_SQLITE_MODULE_VERSION	"0.9a"
 
 #include "php.h"
 #include "php_ini.h"
@@ -604,7 +604,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.25 2003/04/22 00:08:48 edink Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.26 2003/04/22 00:19:48 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -858,7 +858,9 @@ PHP_FUNCTION(sqlite_query)
 	const char *tail;
 	const char **rowdata, **colnames;
 
-	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sr", &sql, &sql_len, &zdb)) {
+	if (FAILURE == zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET,
+				ZEND_NUM_ARGS() TSRMLS_CC, "sr", &sql, &sql_len, &zdb) && 
+			FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs", &sql, &sql_len, &zdb)) {
 		return;
 	}
 

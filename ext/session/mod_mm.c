@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_mm.c,v 1.28 2002/01/10 07:37:10 sas Exp $ */
+/* $Id: mod_mm.c,v 1.29 2002/01/10 12:08:39 yohgaki Exp $ */
 
 #include "php.h"
 
@@ -259,8 +259,10 @@ PHP_MINIT_FUNCTION(ps_mm)
 
 	memcpy(ps_mm_path, PS(save_path), len + 1);
 
-	if (len > 0 && ps_mm_path[len - 1] != DEFAULT_DIR_SEPARATOR)
-		strcat(ps_mm_path, DEFAULT_DIR_SEPARATOR);
+	if (len > 0 && ps_mm_path[len - 1] != DEFAULT_SLASH) {
+		ps_mm_path[len] = DEFAULT_SLASH;
+		ps_mm_path[len+1] = '\0';
+	}
 
 	strcat(ps_mm_path, PS_MM_FILE);
 

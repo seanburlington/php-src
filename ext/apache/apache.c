@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache.c,v 1.14 1999/07/16 13:12:42 zeev Exp $ */
+/* $Id: apache.c,v 1.15 1999/07/17 20:03:10 andrey Exp $ */
 #include "php.h"
 #include "ext/standard/head.h"
 #include "php_globals.h"
@@ -362,10 +362,10 @@ PHP_FUNCTION(apache_lookup_uri)
 		add_property_string(return_value,"the_request",rr->the_request,1);
 	}
 	if (rr->status_line) {
-		add_property_string(return_value,"status_line",rr->status_line,1);		
+		add_property_string(return_value,"status_line",(char *)rr->status_line,1);		
 	}
 	if (rr->method) {
-		add_property_string(return_value,"method",rr->method,1);		
+		add_property_string(return_value,"method",(char *)rr->method,1);		
 	}
 	if (rr->content_type) {
 		add_property_string(return_value,"content_type",(char *)rr->content_type,1);

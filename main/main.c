@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.375 2001/07/13 18:21:21 jflemer Exp $ */
+/* $Id: main.c,v 1.376 2001/07/15 11:53:18 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -622,6 +622,10 @@ int php_request_startup(CLS_D ELS_DC PLS_DC SLS_DC)
 #if PHP_SIGCHILD
 	signal(SIGCHLD,sigchld_handler);
 #endif
+
+	if (setjmp(&EG(bailout))==0) {
+		return FAILURE;
+	}
 
 	PG(during_request_startup) = 1;
 	

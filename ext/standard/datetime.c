@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.27 2000/01/01 02:22:01 sas Exp $ */
+/* $Id: datetime.c,v 1.28 2000/01/01 20:50:37 sas Exp $ */
 
 
 #include "php.h"
@@ -509,7 +509,6 @@ char *php_std_date(time_t t)
  *  returns True(1) if it is valid date
  *
  */
-#define isleap(year) (((year%4) == 0 && (year%100)!=0) || (year%400)==0)
 PHP_FUNCTION(checkdate)
 {
 	pval **month, **day, **year;

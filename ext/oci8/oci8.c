@@ -22,7 +22,7 @@
 
 #define OCI_USE_EMALLOC 0		/* set this to 1 if you want to use the php memory manager! */
 
-/* $Id: oci8.c,v 1.32 1999/10/05 16:06:54 thies Exp $ */
+/* $Id: oci8.c,v 1.33 1999/10/12 14:53:09 thies Exp $ */
 
 /* TODO list:
  *
@@ -727,7 +727,7 @@ static oci_connection *oci_get_conn(zval **conn)
 {
 	oci_connection *connection;
 
-	connection = (oci_connection *) zend_fetch_resource_ex(conn, -1, "OCI8-Connection", 1, le_conn);
+	connection = (oci_connection *) zend_fetch_resource(conn, -1, "OCI8-Connection", NULL, 1, le_conn);
 
 	if (connection && connection->open) {
 		return connection;
@@ -743,7 +743,7 @@ static oci_statement *oci_get_stmt(zval **stmt)
 {
 	oci_statement *statement;
 
-	statement = (oci_statement *) zend_fetch_resource_ex(stmt, -1, "OCI8-Connection", 1, le_stmt);
+	statement = (oci_statement *) zend_fetch_resource(stmt, -1, "OCI8-Connection", NULL, 1, le_stmt);
 
 	if (statement && statement->conn->open) {
 		return statement;
@@ -3233,12 +3233,12 @@ PHP_FUNCTION(ocierror)
 	OCILS_FETCH();
 
 	if (getParametersEx(1, &arg) == SUCCESS) {
-		statement = (oci_statement *) zend_fetch_resource_ex(arg, -1, NULL, 1, le_stmt);
+		statement = (oci_statement *) zend_fetch_resource(arg, -1, NULL, NULL, 1, le_stmt);
 		if (statement) {
 			errh = statement->pError;
 			error = statement->error;
 		} else {
-			connection = (oci_connection *) zend_fetch_resource_ex(arg, -1, NULL, 1, le_conn);
+			connection = (oci_connection *) zend_fetch_resource(arg, -1, NULL, NULL, 1, le_conn);
 			if (connection) {
 				errh = connection->pError;
 				error = connection->error;

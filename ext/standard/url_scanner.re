@@ -15,7 +15,7 @@
    | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.re,v 1.10 2000/01/01 01:31:53 sas Exp $ */
+/* $Id: url_scanner.re,v 1.11 2000/06/23 05:42:41 hholzgra Exp $ */
 
 #include "php.h"
 #include "snprintf.h"
@@ -88,7 +88,8 @@ static void screw_url(lexdata *state)
 
 	/* search outer limits for URI */
 	for(p = state->start; p < state->crs && (c = *p); p++)
-		if(c != '"' && c != ' ') break;
+		if(!isspace(c)) break;
+	if(c=='"') p++;
 
 	/*  
 	 *  we look at q-1, because q points to the character behind the last
@@ -97,7 +98,10 @@ static void screw_url(lexdata *state)
 	 */
 
 	for(q = state->crs; q > state->start && (c = *(q-1)); q--)
-		if(c != '"' && c != ' ') break;
+		if(!isspace(c)) break;
+	if(c=='"') q--;
+
+	if(q<p) { p=state->start; q=state->crs; }
 
 	/* attach beginning */
 	

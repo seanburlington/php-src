@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.16 2000/11/09 08:42:20 steinm Exp $ */
+/* $Id: php_domxml.h,v 1.17 2000/11/10 06:09:41 steinm Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -65,6 +65,7 @@ PHP_FUNCTION(xpath_eval);
 PHP_FUNCTION(xpath_eval_expression);
 #if defined(LIBXML_XPTR_ENABLED)
 PHP_FUNCTION(xptr_new_context);
+PHP_FUNCTION(xptr_eval);
 #endif
 
 PHP_FUNCTION(domxml_test);

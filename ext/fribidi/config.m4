@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.8 2002/03/12 16:18:13 sas Exp $
+dnl $Id: config.m4,v 1.9 2002/09/15 09:32:29 tal Exp $
 dnl
 
 PHP_ARG_WITH(fribidi, for FriBidi support,
@@ -36,10 +36,10 @@ dnl $PHP_FRIBIDI will be "yes"
 
   dnl check for glib header files
 
-  AC_MSG_CHECKING([for glibconfig.h in "usr/lib/glib/include/"])
-  if test -f  /usr/lib/glib/include/glibconfig.h ; then
+  AC_MSG_CHECKING([for glib header files])
+  if test -f `which glib-config` ; then
     AC_MSG_RESULT([found])
-    GLIB_INCDIR=/usr/lib/glib/include/
+    GLIB_INCDIR=`glib-config --cflags`
   else
     AC_MSG_RESULT([missing])
   fi
@@ -67,7 +67,7 @@ dnl $PHP_FRIBIDI will be "yes"
     AC_MSG_RESULT([yes])
 
     PHP_ADD_INCLUDE("$FRIBIDI_INCDIR")
-    PHP_ADD_INCLUDE("$GLIB_INCDIR")
+    PHP_EVAL_INCLINE("$GLIB_INCDIR")
     PHP_ADD_LIBRARY_WITH_PATH(fribidi,"$FRIBIDI_LIBDIR", FRIBIDI_SHARED_LIBADD)
 
     AC_DEFINE(HAVE_FRIBIDI, 1, [ ])

@@ -17,10 +17,11 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.1 2000/10/13 00:09:31 hholzgra Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.2 2000/10/13 09:13:00 dbeu Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
+#include "php_network.h"
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -20,12 +20,9 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sybase.c,v 1.9 1999/07/22 23:54:54 zeev Exp $ */
+/* $Id: sybase.c,v 1.10 1999/07/31 19:23:21 zeev Exp $ */
 
 
-#ifndef MSVC5
-#include "php_config.h"
-#endif
 #include "php.h"
 #include "php3_sybase.h"
 #include "ext/standard/php3_standard.h"

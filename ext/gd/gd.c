@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.127 2001/05/19 17:45:36 sterling Exp $ */
+/* $Id: gd.c,v 1.128 2001/05/21 18:50:05 jmoore Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -458,7 +458,7 @@ PHP_FUNCTION(imageloadfont)
 	Set the line drawing styles for use with imageline and IMG_COLOR_STYLED. */
 PHP_FUNCTION(imagesetstyle)
 {
-	zval **IM, **dither, **styles;
+	zval **IM, **styles;
 	gdImagePtr im;
 	int * stylearr;
 	int index;
@@ -470,7 +470,6 @@ PHP_FUNCTION(imagesetstyle)
 	}
 
 	ZEND_FETCH_RESOURCE(im, gdImagePtr, IM, -1, "Image", le_gd);
-	convert_to_array_ex(dither);
 
 	/* copy the style values in the stylearr */
 	stylearr = emalloc(sizeof(int) * zend_hash_num_elements(HASH_OF(*styles)));

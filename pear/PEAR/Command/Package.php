@@ -17,7 +17,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.42.2.16 2004/02/19 15:55:37 cellog Exp $
+// $Id: Package.php,v 1.42.2.17 2004/06/08 18:26:32 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';
@@ -639,6 +639,9 @@ Wrote: /usr/src/redhat/RPMS/i386/PEAR::Net_Socket-1.0-1.i386.rpm
         $srcfiles = 0;
         foreach ($info['filelist'] as $name => $attr) {
 
+            if (!isset($attr['role'])) {
+                continue;
+            }
             if ($attr['role'] == 'doc') {
                 $info['doc_files'] .= " $name";
 
@@ -677,6 +680,7 @@ Wrote: /usr/src/redhat/RPMS/i386/PEAR::Net_Socket-1.0-1.i386.rpm
 
                 }
 
+                $name = str_replace('\\', '/', $name);
                 $info['files'] .= "$prefix/$name\n";
 
             }

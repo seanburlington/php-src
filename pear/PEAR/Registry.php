@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.33 2002/07/09 10:51:41 ssb Exp $
+// $Id: Registry.php,v 1.34 2002/08/06 16:35:19 cox Exp $
 
 /*
 TODO:
@@ -254,7 +254,7 @@ class PEAR_Registry extends PEAR
      */
     function _lock($mode = LOCK_EX)
     {
-        if (!strstr(php_uname(), 'Windows 95/98')) {
+        if (!eregi('Windows 9', php_uname())) {
             if ($mode != LOCK_UN && is_resource($this->lock_fp)) {
                 // XXX does not check type of lock (LOCK_SH/LOCK_EX)
                 return true;

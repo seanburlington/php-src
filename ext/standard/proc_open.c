@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.4 2003/02/15 17:18:57 wez Exp $ */
+/* $Id: proc_open.c,v 1.5 2003/02/15 17:33:11 wez Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -175,14 +175,15 @@ PHP_MINIT_FUNCTION(proc_open)
 }
 
 
-/* {{{ proto int proc_terminate(resource process)
+/* {{{ proto int proc_terminate(resource process [, long signal])
    kill a process opened by proc_open */
 PHP_FUNCTION(proc_terminate)
 {
 	zval *zproc;
 	struct php_process_handle *proc;
+	long sig_no = SIGTERM;
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &zproc) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|l", &zproc, &sig_no) == FAILURE) {
 		RETURN_FALSE;
 	}
 
@@ -191,7 +192,7 @@ PHP_FUNCTION(proc_terminate)
 #ifdef PHP_WIN32
 	TerminateProcess(proc->child, 255);
 #else
-	kill(proc->child, SIGTERM);
+	kill(proc->child, sig_no);
 #endif
 	
 	zend_list_delete(Z_LVAL_P(zproc));

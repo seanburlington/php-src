@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.52 2004/02/06 16:52:14 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.53 2004/02/06 16:54:34 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -295,7 +295,7 @@ static void wsdl_soap_binding_body(sdlCtx* ctx, xmlNodePtr node, char* wsdl_soap
 	FOREACHNODEEX(trav, "header", wsdl_soap_namespace, header) {
 		xmlAttrPtr tmp;
 		xmlNodePtr *message, part;
-		char *ctype, *ns;
+		char *ctype;
 		sdlSoapBindingFunctionHeaderPtr h;
 		smart_str key = {0};
 
@@ -389,7 +389,7 @@ static HashTable* wsdl_message(sdlCtx *ctx, char* message_name)
 {
 	xmlNodePtr trav, part, message = NULL, *tmp;
 	HashTable* parameters = NULL;
-	char *ns, *ctype;
+	char *ctype;
 
 	ctype = strrchr(message_name,':');
 	if (ctype == NULL) {
@@ -475,7 +475,7 @@ static sdlPtr load_wsdl(char *struri)
 				xmlAttrPtr type, name, bindingAttr, location;
 				xmlNodePtr portType, operation;
 				xmlNodePtr address, binding, trav2;
-				char *ns, *ctype;
+				char *ctype;
 				sdlBindingPtr tmpbinding;
 				char *wsdl_soap_namespace = NULL;
 

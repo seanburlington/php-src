@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: aspell.c,v 1.9 1999/12/17 20:54:44 zeev Exp $ */
+/* $Id: aspell.c,v 1.10 1999/12/17 21:13:13 zeev Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)
@@ -55,15 +55,17 @@ zend_module_entry aspell_module_entry = {
 DLEXPORT zend_module_entry *get_module(void) { return &aspell_module_entry; }
 #endif
 
-PHP_MINIT_FUNCTION(aspell)
-{
-    le_aspell = register_list_destructors(php3_aspell_close,NULL);
-	return SUCCESS;
-
-}
-void php3_aspell_close(aspell *sc)
+static void php_aspell_close(aspell *sc)
 {
 	aspell_free(sc);
+}
+
+
+PHP_MINIT_FUNCTION(aspell)
+{
+    le_aspell = register_list_destructors(php_aspell_close,NULL);
+	return SUCCESS;
+
 }
 
 /* {{{ proto int aspell_new(string master[, string personal])

@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.58.2.7 2003/04/28 16:18:34 sas Exp $ */
+/* $Id: url.c,v 1.58.2.8 2003/07/21 13:37:10 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -125,7 +125,9 @@ PHPAPI php_url *php_url_parse(char *str)
 			if (*(e+2) == '/') {
 				s = e + 3;
 				if (!strncasecmp("file", ret->scheme, sizeof("file"))) {
-					goto nohost;
+					if (*(e + 3) == '/') {
+						goto nohost;
+					}
 				}
 			} else {
 				s = e + 1;

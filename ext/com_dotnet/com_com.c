@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_com.c,v 1.12 2004/04/28 08:23:22 wez Exp $ */
+/* $Id: com_com.c,v 1.13 2004/05/09 15:21:29 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -278,6 +278,58 @@ PHP_FUNCTION(com_create_instance)
 		}
 	}
 
+}
+/* }}} */
+
+/* {{{ proto object com_get_active_object(string progid [, int code_page ])
+   Returns a handle to an already running instance of a COM object */
+PHP_FUNCTION(com_get_active_object)
+{
+	CLSID clsid;
+	char *module_name;
+	long module_name_len;
+	long code_page = COMG(code_page);
+	IUnknown *unk = NULL;
+	IDispatch *obj = NULL;
+	HRESULT res;
+	OLECHAR *module = NULL;
+
+	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l",
+				&module_name, &module_name_len, &code_page)) {
+		php_com_throw_exception(E_INVALIDARG, "Invalid arguments!" TSRMLS_CC);
+		return;
+	}
+
+	module = php_com_string_to_olestring(module_name, module_name_len, code_page TSRMLS_CC);
+
+	res = CLSIDFromString(module, &clsid);
+
+	if (FAILED(res)) {
+		php_com_throw_exception(res, NULL TSRMLS_CC);
+	} else {
+		res = GetActiveObject(&clsid, NULL, &unk);
+
+		if (FAILED(res)) {
+			php_com_throw_exception(res, NULL TSRMLS_CC);
+		} else {
+			res = IUnknown_QueryInterface(unk, &IID_IDispatch, &obj);
+
+			if (FAILED(res)) {
+				php_com_throw_exception(res, NULL TSRMLS_CC);
+			} else if (obj) {
+				/* we got our dispatchable object */
+				php_com_wrap_dispatch(return_value, obj, code_page TSRMLS_CC);
+			}
+		}
+	}
+
+	if (obj) {
+		IDispatch_Release(obj);
+	}
+	if (unk) {
+		IUnknown_Release(obj);
+	}
+	efree(module);
 }
 /* }}} */
 

@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.29 2001/07/28 11:36:28 zeev Exp $ */
+/* $Id: php_variables.c,v 1.30 2001/08/06 03:50:52 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -42,7 +42,7 @@ PHPAPI void php_register_variable_safe(char *var, char *strval, int str_len, zva
 	/* Prepare value */
 	new_entry.value.str.len = str_len;
 	if (PG(magic_quotes_gpc)) {
-		new_entry.value.str.val = php_addslashes(strval, new_entry.value.str.len, &new_entry.value.str.len, 0);
+		new_entry.value.str.val = php_addslashes(strval, new_entry.value.str.len, &new_entry.value.str.len, 0 TSRMLS_CC);
 	} else {
 		new_entry.value.str.val = estrndup(strval, new_entry.value.str.len);
 	}
@@ -124,7 +124,7 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 			} else {
 				if (PG(magic_quotes_gpc) && (index!=var)) {
 					/* no need to addslashes() the index if it's the main variable name */
-					escaped_index = php_addslashes(index, index_len, &index_len, 0);
+					escaped_index = php_addslashes(index, index_len, &index_len, 0 TSRMLS_CC);
 				} else {
 					escaped_index = index;
 				}

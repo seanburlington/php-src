@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.124 2001/08/05 16:21:30 sas Exp $ */
+/* $Id: pgsql.c,v 1.125 2001/08/06 03:50:50 sas Exp $ */
 
 #include <stdlib.h>
 
@@ -1208,7 +1208,7 @@ static void php_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 				int should_copy=0;
 
 				if (PG(magic_quotes_runtime)) {
-					data = php_addslashes(element, element_len, &data_len, 0);
+					data = php_addslashes(element, element_len, &data_len, 0 TSRMLS_CC);
 				} else {
 					data = safe_estrndup(element, element_len);
 					data_len = element_len;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.65 2001/08/05 15:55:41 sas Exp $ */
+/* $Id: php_mssql.c,v 1.66 2001/08/06 03:50:47 sas Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -1166,7 +1166,7 @@ static void php_mssql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 
 			if (Z_TYPE(result->data[result->cur_row][i]) == IS_STRING) {
 				if (PG(magic_quotes_runtime)) {
-					data = php_addslashes(Z_STRVAL(result->data[result->cur_row][i]), Z_STRLEN(result->data[result->cur_row][i]), &result->data[result->cur_row][i].value.str.len, 1);
+					data = php_addslashes(Z_STRVAL(result->data[result->cur_row][i]), Z_STRLEN(result->data[result->cur_row][i]), &result->data[result->cur_row][i].value.str.len, 1 TSRMLS_CC);
 					should_copy = 0;
 				}
 				else

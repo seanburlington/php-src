@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.23 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: uniqid.c,v 1.24 2001/08/06 03:50:51 sas Exp $ */
 
 #include "php.h"
 
@@ -77,7 +77,7 @@ PHP_FUNCTION(uniqid)
 	 * digits for usecs.
 	 */
 	if (MORE_ENTROPY) {
-		sprintf(uniqid, "%s%08x%05x%.8f", (*prefix)->value.str.val, sec, usec, php_combined_lcg() * 10);
+		sprintf(uniqid, "%s%08x%05x%.8f", (*prefix)->value.str.val, sec, usec, php_combined_lcg(TSRMLS_C) * 10);
 	} else {
 		sprintf(uniqid, "%s%08x%05x", (*prefix)->value.str.val, sec, usec);
 	}

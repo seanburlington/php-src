@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.26 2001/07/31 05:44:07 zeev Exp $ */
+/* $Id: php_sybase_db.c,v 1.27 2001/08/06 03:50:51 sas Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -785,7 +785,7 @@ PHP_FUNCTION(sybase_query)
 
 				convert_to_string(cur_value);
 				if (PG(magic_quotes_runtime)) {
-					cur_value->value.str.val = php_addslashes(cur_value->value.str.val, cur_value->value.str.len, &cur_value->value.str.len,0);
+					cur_value->value.str.val = php_addslashes(cur_value->value.str.val, cur_value->value.str.len, &cur_value->value.str.len,0 TSRMLS_CC);
 				}
 			}
 		}

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.61 2001/07/31 06:28:03 zeev Exp $ */
+/* $Id: exec.c,v 1.62 2001/08/06 03:50:51 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -201,7 +201,7 @@ int php_Exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 		if (PG(magic_quotes_runtime)) {
 			int len;
 
-			tmp = php_addslashes(buf, 0, &len, 0);
+			tmp = php_addslashes(buf, 0, &len, 0 TSRMLS_CC);
 			RETVAL_STRINGL(tmp,len,0);
 		} else {
 			RETVAL_STRINGL(buf,l,1);

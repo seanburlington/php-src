@@ -8,7 +8,7 @@
 **  This code is in the public domain and has no copyright.
 */
 
-/* $Id: parsedate.y,v 1.36 2003/07/28 04:01:32 iliaa Exp $ */
+/* $Id: parsedate.y,v 1.37 2003/08/16 20:55:27 derick Exp $ */
 
 #include "php.h"
 
@@ -228,6 +228,27 @@ time	: tUNUMBER tMERIDIAN {
 			((struct date_yy *)parm)->yyTimezone =  -$6 * 60;
 		}
 	}
+	| tUNUMBER ':' tUNUMBER ':' tUNUMBER '.' tUNUMBER pgsqlzonepart {
+	    ((struct date_yy *)parm)->yyHour = $1;
+	    ((struct date_yy *)parm)->yyMinutes = $3;
+	    ((struct date_yy *)parm)->yySeconds = $5;
+	    ((struct date_yy *)parm)->yyMeridian = MER24;
+	}
+	;
+
+pgsqlzonepart : tSNUMBER {
+	    ((struct date_yy *)parm)->yyHaveZone++;
+		if ($1 <= -100 || $1 >= 100) {
+			((struct date_yy *)parm)->yyTimezone =  
+				-$1 % 100 + (-$1 / 100) * 60;
+		} else {
+			((struct date_yy *)parm)->yyTimezone =  -$1 * 60;
+		}
+	}
+	| zone {
+	    ((struct date_yy *)parm)->yyHaveZone++;
+	}
+	| /* empty */
 	;
 
 zone	: tZONE {

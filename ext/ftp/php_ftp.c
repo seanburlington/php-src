@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.87 2003/04/03 00:55:56 iliaa Exp $ */
+/* $Id: php_ftp.c,v 1.88 2003/05/17 04:21:57 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -649,9 +649,9 @@ PHP_FUNCTION(ftp_get)
 	}
 
 	if (ftp->autoseek && resumepos) {
-		outstream = php_stream_fopen(local, "rb+", NULL);
+		outstream = php_stream_open_wrapper(local, "rb+", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
 		if (outstream == NULL) {
-			outstream = php_stream_fopen(local, "wb", NULL);
+			outstream = php_stream_open_wrapper(local, "wb", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
 		}
 		if (outstream != NULL) {
 			/* if autoresume is wanted seek to end */
@@ -663,7 +663,7 @@ PHP_FUNCTION(ftp_get)
 			}
 		}
 	} else {
-		outstream = php_stream_fopen(local, "wb", NULL);
+		outstream = php_stream_open_wrapper(local, "wb", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
 	}
 
 	if (outstream == NULL)	{
@@ -707,9 +707,9 @@ PHP_FUNCTION(ftp_nb_get)
 	}
 
 	if (ftp->autoseek && resumepos) {
-		outstream = php_stream_fopen(local, "rb+", NULL);
+		outstream = php_stream_open_wrapper(local, "rb+", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
 		if (outstream == NULL) {
-			outstream = php_stream_fopen(local, "wb", NULL);
+			outstream = php_stream_open_wrapper(local, "wb", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
 		}
 		if (outstream != NULL) {
 			/* if autoresume is wanted seek to end */
@@ -721,7 +721,7 @@ PHP_FUNCTION(ftp_nb_get)
 			}
 		}
 	} else {
-		outstream = php_stream_fopen(local, "wb", NULL);
+		outstream = php_stream_open_wrapper(local, "wb", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
 	}
 
 	if (outstream == NULL)	{
@@ -902,7 +902,7 @@ PHP_FUNCTION(ftp_put)
 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &z_ftp, -1, le_ftpbuf_name, le_ftpbuf);
 	XTYPE(xtype, mode);
 
-	if (!(instream = php_stream_fopen(local, "rb", NULL))) {
+	if (!(instream = php_stream_open_wrapper(local, "rb", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL))) {
 		RETURN_FALSE;
 	}
 
@@ -955,7 +955,7 @@ PHP_FUNCTION(ftp_nb_put)
 	ZEND_FETCH_RESOURCE(ftp, ftpbuf_t*, &z_ftp, -1, le_ftpbuf_name, le_ftpbuf);
 	XTYPE(xtype, mode);
 
-	if (!(instream = php_stream_fopen(local, "rb", NULL))) {
+	if (!(instream = php_stream_open_wrapper(local, "rb", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL))) {
 		RETURN_FALSE;
 	}
 

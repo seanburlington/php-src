@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.75 2002/01/27 15:31:13 aeschbacher Exp $ */
+/* $Id: interbase.c,v 1.76 2002/03/01 14:03:10 derick Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -594,7 +594,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.75 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.76 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -2106,7 +2106,7 @@ static void _php_ibase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int fetch_type)
 				switch (Z_TYPE_P(tmp)) {
 				case IS_STRING:
 					add_property_stringl(return_value, var->aliasname, Z_STRVAL_P(tmp), Z_STRLEN_P(tmp), 0);
-break;
+					break;
 				case IS_LONG:
 					add_property_long(return_value, var->aliasname, Z_LVAL_P(tmp));
 					break;
@@ -2116,7 +2116,13 @@ break;
 				}
 			}
 			efree(tmp);
-		} /* if not null */
+		} else {
+			if (fetch_type & FETCH_ARRAY) {
+				add_index_null(return_value, i);
+			} else {
+				add_property_null(return_value, var->aliasname);
+			}
+		}
 		if ((var->sqltype & ~1) == SQL_ARRAY) {
 			arr_cnt++;
 		}

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.129 2004/09/26 01:17:42 wez Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.130 2004/10/21 23:47:59 edink Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -196,6 +196,13 @@ case $host_alias in
     LIBS="$LIBS -lbe -lroot";;
 *mips*)
     CPPFLAGS="$CPPFLAGS -D_XPG_IV";;
+*linux*)
+    AC_MSG_CHECKING([for Linux LFS_CFLAGS])
+    LFS_LINUX_CFLAGS=`getconf LFS_CFLAGS`
+    if test "x$LFS_LINUX_CFLAGS" != "x"; then
+        CFLAGS="$CFLAGS $LFS_LINUX_CFLAGS"
+    fi
+    AC_MSG_RESULT([$LFS_LINUX_CFLAGS])
 esac
 
 

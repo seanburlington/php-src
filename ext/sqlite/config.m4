@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 2003/04/18 12:22:43 wez Exp $
+dnl $Id: config.m4,v 1.6 2003/04/19 11:47:17 wez Exp $
 dnl config.m4 for extension sqlite
 
 PHP_ARG_WITH(sqlite, for sqlite support,
@@ -79,6 +79,12 @@ if test "$PHP_SQLITE" != "no"; then
 	sed -e s/--VERS--/`cat $ext_srcdir/libsqlite/VERSION`/ -e s/--ENCODING--/$SQLITE_ENCODING/ $ext_srcdir/libsqlite/src/sqlite.h.in >$ext_srcdir/libsqlite/src/sqlite.h
 
 	PHP_ADD_MAKEFILE_FRAGMENT
+
+	dnl if not building a shared extension, we need to generate a config.h file for
+	dnl the library
+	if test "$ext_shared" = "no"; then
+	  echo '#include "php_config.h"' > $ext_srcdir/libsqlite/src/config.h
+	fi
   fi
 
   AC_CHECK_FUNCS(usleep nanosleep)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.20 2004/07/25 10:37:27 chregu Exp $ */
+/* $Id: libxml.c,v 1.21 2004/07/25 12:00:28 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -377,7 +377,7 @@ void php_libxml_ctx_warning(void *ctx, const char *msg, ...)
 	va_end(args);
 }
 
-void php_libxml_error_handler(void *ctx, const char *msg, ...)
+PHP_LIBXML_API void php_libxml_error_handler(void *ctx, const char *msg, ...)
 {
 	va_list args;
 	va_start(args, msg);

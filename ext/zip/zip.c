@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zip.c,v 1.14 2001/08/13 22:01:39 sterling Exp $ */
+/* $Id: zip.c,v 1.15 2001/08/14 13:01:11 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -252,7 +252,7 @@ PHP_FUNCTION(zip_entry_open)
     php_zzip_dirent  *entry = NULL;
     int               mode;
 
-    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rr|s", &zzip_dp, &zzip_ent, &mode) == FAILURE)
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rr|l", &zzip_dp, &zzip_ent, &mode) == FAILURE)
     return;
 
     ZEND_FETCH_RESOURCE(archive_p, ZZIP_DIR *,        zzip_dp,  -1, le_zip_dir_name,   le_zip_dir);

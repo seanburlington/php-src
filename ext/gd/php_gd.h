@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.44.2.2 2002/12/31 16:34:37 sebastian Exp $ */
+/* $Id: php_gd.h,v 1.44.2.3 2003/03/01 01:15:47 pajoye Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -84,12 +84,14 @@ PHP_FUNCTION(imageftbbox);
 PHP_FUNCTION(imagefttext);
 
 PHP_FUNCTION(imagecreatetruecolor);
+PHP_FUNCTION(imageistruecolor);
 PHP_FUNCTION(imagetruecolortopalette);
 PHP_FUNCTION(imagesetthickness);
 PHP_FUNCTION(imageellipse);
 PHP_FUNCTION(imagefilledellipse);
 PHP_FUNCTION(imagefilledarc);
 PHP_FUNCTION(imagealphablending);
+PHP_FUNCTION(imagesavealpha);
 PHP_FUNCTION(imagecolorresolvealpha);
 PHP_FUNCTION(imagecolorclosestalpha);
 PHP_FUNCTION(imagecolorexactalpha);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.581 2003/02/18 01:07:55 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.582 2003/02/18 01:23:51 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -425,7 +425,7 @@ function_entry basic_functions[] = {
 #endif
 
 #ifdef HAVE_NICE
-	PHP_FE(nice,														NULL)	
+	PHP_FE(proc_nice,														NULL)	
 #endif
 
 	PHP_FE(rand,															NULL)

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.93 2003/02/18 01:07:57 iliaa Exp $ */
+/* $Id: exec.c,v 1.94 2003/02/18 01:23:51 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -492,9 +492,9 @@ PHP_FUNCTION(shell_exec)
 /* }}} */
 
 #ifdef HAVE_NICE
-/* {{{ proto bool nice(int priority)
+/* {{{ proto bool proc_nice(int priority)
    Change the priority of the current process */
-PHP_FUNCTION(nice)
+PHP_FUNCTION(proc_nice)
 {
 	long pri;
 
@@ -505,7 +505,7 @@ PHP_FUNCTION(nice)
 	errno = 0;
 	nice(pri);
 	if (errno) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Only a super user may attempt to increase the process priority.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Only a super user may attempt to increase the priority of a process.");
 		RETURN_FALSE;
 	}
 	

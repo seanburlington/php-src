@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.155 2003/01/21 14:53:16 iliaa Exp $ */
+/* $Id: mbstring.c,v 1.156 2003/01/31 14:15:49 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -2830,11 +2830,21 @@ PHP_FUNCTION(mb_send_mail)
 		    || orig_str.no_encoding == mbfl_no_encoding_pass) {
 			orig_str.no_encoding = mbfl_identify_encoding_no(&orig_str, MBSTRG(current_detect_order_list), MBSTRG(current_detect_order_list_size) TSRMLS_CC);
 		}
-		pstr = mbfl_convert_encoding(&orig_str, &conv_str, tran_cs TSRMLS_CC);
+
+		pstr = NULL;
+		{
+			mbfl_string tmpstr;
+
+			if (mbfl_convert_encoding(&orig_str, &tmpstr, tran_cs TSRMLS_CC) != NULL) {
+				tmpstr.no_encoding=mbfl_no_encoding_8bit;
+				pstr = mbfl_convert_encoding(&tmpstr, &conv_str, body_enc TSRMLS_CC);
+				efree(tmpstr.val);
+			}
+		}
 		if (pstr != NULL) {
 			message_buf = message = (char *)pstr->val;
 		} else {
-			message = Z_STRVAL_PP(argv[2]);
+			message = estrndup(Z_STRVAL_PP(argv[2]), Z_STRLEN_PP(argv[2]));
 		}
 	} else {
 		/* this is not really an error, so it is allowed. */

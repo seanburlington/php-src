@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xpath.c,v 1.19 2004/03/31 17:18:59 rrichards Exp $ */
+/* $Id: xpath.c,v 1.20 2004/04/06 18:26:19 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,7 +36,7 @@
 
 zend_function_entry php_dom_xpath_class_functions[] = {
 	PHP_ME(domxpath, __construct, NULL, ZEND_ACC_PUBLIC)
-	PHP_FALIAS(register_namespace, dom_xpath_register_ns, NULL)
+	PHP_FALIAS(registerNamespace, dom_xpath_register_ns, NULL)
 	PHP_FALIAS(query, dom_xpath_query, NULL)
 	{NULL, NULL, NULL}
 };

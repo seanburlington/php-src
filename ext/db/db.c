@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.68 2002/01/20 04:55:40 elixer Exp $ */
+/* $Id: db.c,v 1.69 2002/01/20 05:02:52 elixer Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -463,8 +463,6 @@ void php_dbm_close(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	if (info->filename) efree(info->filename);
 	if (info->lockfn) efree(info->lockfn);
 	efree(info);
-
-	return(ret);
 }
 /* }}} */
 

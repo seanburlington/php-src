@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pageinfo.c,v 1.33 2002/09/06 07:44:30 hyanantha Exp $ */
+/* $Id: pageinfo.c,v 1.34 2002/09/06 07:47:49 derick Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"
@@ -78,7 +78,7 @@ PHPAPI void php_statpage(TSRMLS_D)
 			BG(page_gid)   = pstat->st_gid;
 			BG(page_inode) = pstat->st_ino;
 #if defined(NETWARE) && defined(NEW_LIBC)
-            BG(page_mtime) = (pstat->st_mtime).tv_nsec;
+			BG(page_mtime) = (pstat->st_mtime).tv_nsec;
 #else
 			BG(page_mtime) = pstat->st_mtime;
 #endif

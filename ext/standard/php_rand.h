@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_rand.h,v 1.26 2004/01/08 17:32:51 sniper Exp $ */
+/* $Id: php_rand.h,v 1.27 2004/01/19 02:30:54 sniper Exp $ */
 
 #ifndef PHP_RAND_H
 #define	PHP_RAND_H
@@ -33,7 +33,8 @@
 #define RAND_MAX (1<<15)
 #endif
 
-#if defined(HAVE_LRAND48) || defined(HAVE_RANDOM)
+/* In ZTS mode we rely on rand_r() so we must use RAND_MAX. */
+#if !defined(ZTS) && (defined(HAVE_LRAND48) || defined(HAVE_RANDOM))
 #define PHP_RAND_MAX 2147483647
 #else
 #define PHP_RAND_MAX RAND_MAX

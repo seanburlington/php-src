@@ -20,7 +20,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.13 1999/08/20 13:03:22 andrey Exp $ */
+/* $Id: ldap.c,v 1.14 1999/10/19 14:42:54 andrei Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -277,7 +277,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_printf("<table>"
 				"<tr><td>Total links:</td><td>%d/%s</td></tr>\n"
-		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.13 1999/08/20 13:03:22 andrey Exp $</td></tr>\n"
+		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.14 1999/10/19 14:42:54 andrei Exp $</td></tr>\n"
 #if HAVE_NSLDAP
 				"<tr><td>SDK Version:</td><td>%f</td></tr>"
 				"<tr><td>Highest LDAP Protocol Supported:</td><td>%f</td></tr>"
@@ -823,7 +823,7 @@ PHP_FUNCTION(ldap_get_entries)
 			}	
 			ldap_value_free(ldap_value);
 
-			zend_hash_update(tmp1->value.ht, _php3_strtolower(attribute), strlen(attribute)+1, (void *) &tmp2, sizeof(pval *), NULL);
+			zend_hash_update(tmp1->value.ht, php_strtolower(attribute), strlen(attribute)+1, (void *) &tmp2, sizeof(pval *), NULL);
 			add_index_string(tmp1, attr_count, attribute, 1);
 
 			attr_count++;

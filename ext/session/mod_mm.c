@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_mm.c,v 1.23 2001/09/09 13:29:09 derick Exp $ */
+/* $Id: mod_mm.c,v 1.24 2001/10/11 23:33:45 ssb Exp $ */
 
 #include "php.h"
 
@@ -394,11 +394,13 @@ PS_GC_FUNC(mm)
 }
 
 zend_module_entry php_session_mm_module = {
+	STANDARD_MODULE_HEADER,
 	"session mm",
 	NULL,
 	PHP_MINIT(ps_mm), PHP_MSHUTDOWN(ps_mm),
 	NULL, NULL,
 	NULL,
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

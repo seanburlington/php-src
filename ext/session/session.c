@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.253 2001/09/21 13:38:44 sas Exp $ */
+/* $Id: session.c,v 1.254 2001/10/11 23:33:45 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -222,11 +222,13 @@ static void php_rshutdown_session_globals(TSRMLS_D);
 static zend_bool php_session_destroy(TSRMLS_D);
 
 zend_module_entry session_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"session",
 	session_functions,
 	PHP_MINIT(session), PHP_MSHUTDOWN(session),
 	PHP_RINIT(session), PHP_RSHUTDOWN(session),
 	PHP_MINFO(session),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filepro.c,v 1.40 2001/09/25 21:57:55 jeroen Exp $ */
+/* $Id: filepro.c,v 1.41 2001/10/11 23:32:47 ssb Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com
@@ -144,7 +144,8 @@ function_entry filepro_functions[] = {
 };
 
 zend_module_entry filepro_module_entry = {
-	"filepro", filepro_functions, PHP_MINIT(filepro), PHP_MSHUTDOWN(filepro), NULL, NULL, NULL, STANDARD_MODULE_PROPERTIES
+	STANDARD_MODULE_HEADER,
+	"filepro", filepro_functions, PHP_MINIT(filepro), PHP_MSHUTDOWN(filepro), NULL, NULL, NULL, NO_VERSION_YET, STANDARD_MODULE_PROPERTIES
 };
 
 

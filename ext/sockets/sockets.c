@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.70 2001/10/05 07:12:27 sterling Exp $ */
+/* $Id: sockets.c,v 1.71 2001/10/11 23:33:47 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -152,6 +152,7 @@ function_entry sockets_functions[] = {
 /* }}} */
 
 zend_module_entry sockets_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"sockets",
 	sockets_functions,
 	PHP_MINIT(sockets),
@@ -159,6 +160,7 @@ zend_module_entry sockets_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(sockets),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.72 2001/09/25 22:48:37 jeroen Exp $ */
+/* $Id: interbase.c,v 1.73 2001/10/11 23:32:57 ssb Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -108,6 +108,7 @@ function_entry ibase_functions[] = {
 
 zend_module_entry ibase_module_entry =
 {
+	STANDARD_MODULE_HEADER,
 	"interbase",
 	ibase_functions,
 	PHP_MINIT(ibase),
@@ -115,6 +116,7 @@ zend_module_entry ibase_module_entry =
 	PHP_RINIT(ibase),
 	PHP_RSHUTDOWN(ibase),
 	PHP_MINFO(ibase),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 
@@ -587,7 +589,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.72 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.73 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

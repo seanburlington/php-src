@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.33 2001/09/25 21:57:48 jeroen Exp $ */
+/* $Id: bcmath.c,v 1.34 2001/10/11 23:32:28 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -44,13 +44,15 @@ function_entry bcmath_functions[] = {
 };
 
 zend_module_entry bcmath_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"bcmath",
-    bcmath_functions,
+	bcmath_functions,
 	PHP_MINIT(bcmath),
 	PHP_MSHUTDOWN(bcmath),
 	PHP_RINIT(bcmath),
 	NULL,
 	PHP_MINFO(bcmath),
+	NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

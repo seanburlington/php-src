@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.51 2001/09/25 22:48:42 jeroen Exp $ */
+/* $Id: snmp.c,v 1.52 2001/10/11 23:33:46 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -96,6 +96,7 @@ function_entry snmp_functions[] = {
 /* {{{ snmp_module_entry
  */
 zend_module_entry snmp_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"snmp",
 	snmp_functions,
 	PHP_MINIT(snmp),
@@ -103,6 +104,7 @@ zend_module_entry snmp_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(snmp),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.34 2001/09/09 13:28:50 derick Exp $ */
+/* $Id: gettext.c,v 1.35 2001/10/11 23:32:50 ssb Exp $ */
 
 #include <stdio.h>
 #ifdef HAVE_CONFIG_H
@@ -54,6 +54,7 @@ function_entry php_gettext_functions[] = {
 /* }}} */
 
 zend_module_entry php_gettext_module_entry = {
+    STANDARD_MODULE_HEADER,
 	"gettext",
 	php_gettext_functions,
 	NULL,
@@ -61,6 +62,7 @@ zend_module_entry php_gettext_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(gettext),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.129 2001/09/26 21:44:48 zeev Exp $ */
+/* $Id: pgsql.c,v 1.130 2001/10/11 23:33:40 ssb Exp $ */
 
 #include <stdlib.h>
 
@@ -101,6 +101,7 @@ function_entry pgsql_functions[] = {
 /* {{{ pgsql_module_entry
  */
 zend_module_entry pgsql_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"pgsql",
 	pgsql_functions,
 	PHP_MINIT(pgsql),
@@ -108,6 +109,7 @@ zend_module_entry pgsql_module_entry = {
 	PHP_RINIT(pgsql),
 	PHP_RSHUTDOWN(pgsql),
 	PHP_MINFO(pgsql),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

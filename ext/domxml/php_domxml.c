@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.76 2001/09/25 21:57:54 jeroen Exp $ */
+/* $Id: php_domxml.c,v 1.77 2001/10/11 23:32:43 ssb Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -267,6 +267,7 @@ static zend_function_entry php_domxmlns_class_functions[] = {
 };
 
 zend_module_entry domxml_module_entry = {
+    STANDARD_MODULE_HEADER,
 	"domxml",
 	domxml_functions,
 	PHP_MINIT(domxml),
@@ -274,6 +275,7 @@ zend_module_entry domxml_module_entry = {
 	PHP_RINIT(domxml),
 	NULL,
 	PHP_MINFO(domxml),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

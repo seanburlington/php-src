@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.69 2001/09/26 03:43:34 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.70 2001/10/11 23:33:16 ssb Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -82,6 +82,7 @@ function_entry mssql_functions[] = {
 
 zend_module_entry mssql_module_entry = 
 {
+	STANDARD_MODULE_HEADER,
 	"mssql", 
 	mssql_functions, 
 	PHP_MINIT(mssql), 
@@ -89,6 +90,7 @@ zend_module_entry mssql_module_entry =
 	PHP_RINIT(mssql), 
 	PHP_RSHUTDOWN(mssql), 
 	PHP_MINFO(mssql), 
+        NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

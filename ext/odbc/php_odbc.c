@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.110 2001/09/25 21:58:08 jeroen Exp $ */
+/* $Id: php_odbc.c,v 1.111 2001/10/11 23:33:24 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -135,6 +135,7 @@ function_entry odbc_functions[] = {
 /* {{{ odbc_module_entry
  */
 zend_module_entry odbc_module_entry = {
+	STANDARD_MODULE_HEADER,
     "odbc", 
 	odbc_functions, 
 	PHP_MINIT(odbc), 
@@ -142,6 +143,7 @@ zend_module_entry odbc_module_entry = {
     PHP_RINIT(odbc), 
 	PHP_RSHUTDOWN(odbc), 
 	PHP_MINFO(odbc), 
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

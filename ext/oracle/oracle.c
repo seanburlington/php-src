@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.75 2001/09/25 22:48:41 jeroen Exp $ */
+/* $Id: oracle.c,v 1.76 2001/10/11 23:33:35 ssb Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -146,6 +146,7 @@ function_entry oracle_functions[] = {
 /* {{{ oracle_module_entry
  */
 zend_module_entry oracle_module_entry = {
+    STANDARD_MODULE_HEADER,
 	"oracle",
 	oracle_functions,
 	PHP_MINIT(oracle),       /* extension-wide startup function */
@@ -153,6 +154,7 @@ zend_module_entry oracle_module_entry = {
     PHP_RINIT(oracle),       /* per-request startup function */
     PHP_RSHUTDOWN(oracle),   /* per-request shutdown function */
     PHP_MINFO(oracle),
+    NO_VERSION_YET,
     STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

@@ -18,7 +18,7 @@
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: calendar.c,v 1.22 2001/09/25 21:57:48 jeroen Exp $ */
+/* $Id: calendar.c,v 1.23 2001/10/11 23:32:30 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -57,6 +57,7 @@ function_entry calendar_functions[] = {
 
 
 zend_module_entry calendar_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"calendar", 
 	calendar_functions, 
 	PHP_MINIT(calendar),
@@ -64,6 +65,7 @@ zend_module_entry calendar_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(calendar),
+	NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES,
 };
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.161 2001/10/06 20:13:36 derick Exp $ */
+/* $Id: oci8.c,v 1.162 2001/10/11 23:33:21 ssb Exp $ */
 
 /* TODO list:
  *
@@ -386,6 +386,7 @@ static zend_function_entry php_oci_coll_class_functions[] = {
 #endif
 
 zend_module_entry oci8_module_entry = {
+	STANDARD_MODULE_HEADER,
     "oci8",        /* extension name */
     php_oci_functions,    /* extension function list */
     PHP_MINIT(oci),       /* extension-wide startup function */
@@ -393,6 +394,7 @@ zend_module_entry oci8_module_entry = {
     PHP_RINIT(oci),       /* per-request startup function */
     PHP_RSHUTDOWN(oci),   /* per-request shutdown function */
     PHP_MINFO(oci),       /* information function */
+    NO_VERSION_YET,
     STANDARD_MODULE_PROPERTIES
 };
 
@@ -620,7 +622,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.161 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.162 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.48 2001/09/25 21:58:28 jeroen Exp $ */
+/* $Id: sysvshm.c,v 1.49 2001/10/11 23:33:52 ssb Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -54,10 +54,12 @@ function_entry sysvshm_functions[] = {
 /* {{{ sysvshm_module_entry
  */
 zend_module_entry sysvshm_module_entry = {
+    STANDARD_MODULE_HEADER,
 	"sysvshm", sysvshm_functions, 
 	PHP_MINIT(sysvshm), NULL,
 	NULL, NULL,
 	NULL,
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

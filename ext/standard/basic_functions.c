@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.407 2001/10/11 10:35:59 ssb Exp $ */
+/* $Id: basic_functions.c,v 1.408 2001/10/11 23:33:48 ssb Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -833,6 +833,7 @@ PHP_INI_END()
 
 
 zend_module_entry basic_functions_module = {
+    STANDARD_MODULE_HEADER,
 	"standard",					/* extension name */
 	basic_functions,			/* function list */
 	PHP_MINIT(basic),			/* process startup */
@@ -840,6 +841,7 @@ zend_module_entry basic_functions_module = {
 	PHP_RINIT(basic),			/* request startup */
 	PHP_RSHUTDOWN(basic),		/* request shutdown */
 	PHP_MINFO(basic),			/* extension info */
+    PHP_VERSION,				/* extension version */
 	STANDARD_MODULE_PROPERTIES
 };
 

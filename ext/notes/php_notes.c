@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_notes.c,v 1.8 2001/10/06 20:13:36 derick Exp $ */
+/* $Id: php_notes.c,v 1.9 2001/10/11 23:33:21 ssb Exp $ */
 
 #ifdef COMPILE_DL_NOTES
 #define HAVE_NOTES 1
@@ -97,6 +97,7 @@ function_entry notes_functions[] = {
 };
 
 zend_module_entry notes_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"notes", 
 	notes_functions, 
 	PHP_MINIT(notes), 
@@ -104,6 +105,7 @@ zend_module_entry notes_module_entry = {
 	PHP_RINIT(notes), 
 	PHP_RSHUTDOWN(notes), 
 	PHP_MINFO(notes), 
+        NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

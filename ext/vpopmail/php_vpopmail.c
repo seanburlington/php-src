@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.c,v 1.20 2001/09/09 13:29:22 derick Exp $ */
+/* $Id: php_vpopmail.c,v 1.21 2001/10/11 23:33:52 ssb Exp $ */
 
 /* TODO: move to config.m4 when support for old versions is ready or just
  * don't support rather old vpopmail. current version must bail out if
@@ -91,6 +91,7 @@ function_entry vpopmail_functions[] = {
 };
 
 zend_module_entry vpopmail_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"vpopmail",
 	vpopmail_functions,
 	PHP_MINIT(vpopmail),
@@ -98,6 +99,7 @@ zend_module_entry vpopmail_module_entry = {
 	PHP_RINIT(vpopmail),
 	PHP_RSHUTDOWN(vpopmail),
 	PHP_MINFO(vpopmail),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

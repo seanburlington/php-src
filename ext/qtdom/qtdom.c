@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: qtdom.c,v 1.13 2001/09/25 21:58:17 jeroen Exp $ */
+/* $Id: qtdom.c,v 1.14 2001/10/11 23:33:43 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -53,6 +53,7 @@ function_entry qtdom_functions[] = {
 };
 
 zend_module_entry qtdom_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"qtdom",
 	qtdom_functions,
 	PHP_MINIT(qtdom),
@@ -60,6 +61,7 @@ zend_module_entry qtdom_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(qtdom),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cybercash.c,v 1.15 2001/09/09 13:28:42 derick Exp $ */
+/* $Id: cybercash.c,v 1.16 2001/10/11 23:32:38 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -45,6 +45,7 @@ function_entry cybercash_functions[] = {
 /* {{{ cybercash_module_entry
  */
 zend_module_entry cybercash_module_entry = {
+    STANDARD_MODULE_HEADER,
 	"cybercash",
 	cybercash_functions,
 	NULL,
@@ -52,6 +53,7 @@ zend_module_entry cybercash_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(cybercash),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES,
 };
 /* }}} */

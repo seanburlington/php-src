@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.99 2001/10/09 21:14:14 venaas Exp $ */
+/* $Id: ldap.c,v 1.100 2001/10/11 23:33:01 ssb Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -124,6 +124,7 @@ function_entry ldap_functions[] = {
 /* }}} */
 
 zend_module_entry ldap_module_entry = {
+	STANDARD_MODULE_HEADER,
 	"ldap", 
 	ldap_functions, 
 	PHP_MINIT(ldap), 
@@ -131,6 +132,7 @@ zend_module_entry ldap_module_entry = {
 	NULL, 
 	NULL,
 	PHP_MINFO(ldap), 
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 
@@ -255,7 +257,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.99 2001/10/09 21:14:14 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.100 2001/10/11 23:33:01 ssb Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #ifdef LDAP_API_VERSION

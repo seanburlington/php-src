@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fribidi.c,v 1.10 2001/10/09 19:19:18 derick Exp $ */
+/* $Id: fribidi.c,v 1.11 2001/10/11 23:32:48 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -47,6 +47,7 @@ function_entry fribidi_functions[] = {
 };
 
 zend_module_entry fribidi_module_entry = {
+    STANDARD_MODULE_HEADER,
 	"fribidi",
 	fribidi_functions,
 	PHP_MINIT(fribidi),
@@ -54,6 +55,7 @@ zend_module_entry fribidi_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(fribidi),
+    NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
 };
 

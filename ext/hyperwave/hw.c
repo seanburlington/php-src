@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.98 2001/09/26 09:00:28 jeroen Exp $ */
+/* $Id: hw.c,v 1.99 2001/10/11 23:32:51 ssb Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -129,7 +129,8 @@ function_entry hw_functions[] = {
 };
 
 zend_module_entry hw_module_entry = {
-	"hyperwave", hw_functions, PHP_MINIT(hw), PHP_MSHUTDOWN(hw), NULL, NULL, PHP_MINFO(hw), STANDARD_MODULE_PROPERTIES
+	STANDARD_MODULE_HEADER,
+	"hyperwave", hw_functions, PHP_MINIT(hw), PHP_MSHUTDOWN(hw), NULL, NULL, PHP_MINFO(hw), NO_VERSION_YET, STANDARD_MODULE_PROPERTIES
 };
 
 /*

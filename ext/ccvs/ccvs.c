@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 /*
-*	cvvs.c $Revision: 1.20 $ - PHP4 Interface to the RedHat CCVS API
+*	cvvs.c $Revision: 1.21 $ - PHP4 Interface to the RedHat CCVS API
 *	 -------
 *	 Interfaces RedHat's CCVS [Credit Card Verification System] <http://www.redhat.com/products/ccvs/>
 *	 This code is ported from an original php3 interface written by RedHat's Doug DeJulio <ddj@redhat.com>
@@ -27,10 +27,10 @@
 
 /*
 *	Code started on 2000.07.24@09.04.EST by Brendan W. McAdams <bmcadams@php.net>
-*	$Revision: 1.20 $
+*	$Revision: 1.21 $
 */
 
-static char const cvsid[] = "$Id: ccvs.c,v 1.20 2001/10/06 20:13:36 derick Exp $";
+static char const cvsid[] = "$Id: ccvs.c,v 1.21 2001/10/11 23:32:32 ssb Exp $";
 
 #include <php.h>
 #include <stdlib.h>
@@ -97,15 +97,17 @@ static char const cvsid[] = "$Id: ccvs.c,v 1.20 2001/10/06 20:13:36 derick Exp $
 
 	/* Declare our module to the Zend engine */
 	zend_module_entry ccvs_module_entry = {
+        STANDARD_MODULE_HEADER,
 		"CCVS",
 		ccvs_functions,
 		NULL, NULL, NULL, NULL,
 		PHP_MINFO(ccvs),
+        NO_VERSION_YET,
 		STANDARD_MODULE_PROPERTIES
 	};
 
-#ifdef COMPILE_DL_LDAP
-ZEND_GET_MODULE(ldap)
+#ifdef COMPILE_DL_CCVS
+ZEND_GET_MODULE(ccvs)
 #endif
 
 /* Full Functions (The actual CCVS functions and any internal php hooked functions such as MINFO) */

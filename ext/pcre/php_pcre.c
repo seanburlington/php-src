@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.109 2001/09/09 13:29:03 derick Exp $ */
+/* $Id: php_pcre.c,v 1.110 2001/10/11 23:33:38 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1364,13 +1364,16 @@ function_entry pcre_functions[] = {
 };
 
 zend_module_entry pcre_module_entry = {
-   "pcre", pcre_functions,
-		   PHP_MINIT(pcre),
-		   PHP_MSHUTDOWN(pcre),
-		   PHP_RINIT(pcre),
-		   NULL,
-		   PHP_MINFO(pcre),
-		   STANDARD_MODULE_PROPERTIES
+	STANDARD_MODULE_HEADER,
+   "pcre",
+	pcre_functions,
+	PHP_MINIT(pcre),
+	PHP_MSHUTDOWN(pcre),
+	PHP_RINIT(pcre),
+	NULL,
+	PHP_MINFO(pcre),
+	NO_VERSION_YET,
+	STANDARD_MODULE_PROPERTIES
 };
 
 #ifdef COMPILE_DL_PCRE

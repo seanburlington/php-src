@@ -1,0 +1,9 @@
+// vim:ft=javascript
+// $Id: config.w32,v 1.1 2003/12/02 23:17:03 wez Exp $
+
+ARG_ENABLE('cli', 'Build CLI version of PHP', 'yes');
+
+if (PHP_CLI == "yes") {
+	SAPI('cli', 'getopt.c php_cli.c', 'php.exe');
+}
+

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.95 2001/11/13 01:01:47 zeev Exp $ */
+/* $Id: curl.c,v 1.96 2001/11/13 10:59:15 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -254,7 +254,7 @@ PHP_MINIT_FUNCTION(curl)
 	REGISTER_CURL_CONSTANT(CURLE_OBSOLETE);
 	REGISTER_CURL_CONSTANT(CURLE_SSL_PEER_CERTIFICATE);
 	
-	if (curl_global_init(CURL_GLOBAL_ALL) != CURLE_OK) {
+	if (curl_global_init(CURL_GLOBAL_NOTHING) != CURLE_OK) {
 		return FAILURE;
 	}
 

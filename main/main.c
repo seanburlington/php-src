@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.148 1999/12/04 17:02:04 andrei Exp $ */
+/* $Id: main.c,v 1.149 1999/12/04 18:06:15 sas Exp $ */
 
 
 #include <stdio.h>
@@ -65,15 +65,6 @@
 #include "zend_indent.h"
 
 #include "php_content_types.h"
-
-#if USE_SAPI
-#include "serverapi/sapi.h"
-void *gLock;
-#ifndef THREAD_SAFE
-struct sapi_request_info *sapi_rqst;
-#endif
-#endif
-
 
 #include "SAPI.h"
 

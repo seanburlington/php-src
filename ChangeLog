@@ -1,3 +1,21 @@
+2004-10-19  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/standard/file.c:
+      Simplify code.
+
+2004-10-19  Anantha Kesari H Y  <hyanantha@novell.com>
+
+    * ext/standard/filestat.c:
+      As NetWare LibC don't have the implementation of chown and chgrp there is
+      no point in exposing this function to PHP
+
+2004-10-19  Georg Richter  <georg@mysql.com>
+
+    * ext/mysqli/mysqli_nonapi.c
+      ext/mysqli/mysqli_nonapi.c:
+      Minor fix for mysqli_connect: checking socket_len for NULL Values
+      (Thx to Paul DuBois)
+
 2004-10-18  Ilia Alshanetsky  <ilia@prohost.org>
 
     * (PHP_4_3)
@@ -11638,7 +11656,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1779 2004/10/19 00:36:25 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1780 2004/10/20 00:37:11 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

@@ -17,7 +17,7 @@
  */
 
 #ifndef lint
-static const char rcsid[] = "$Id: os_unix.c,v 1.2.2.2 2003/09/21 22:08:16 sas Exp $";
+static const char rcsid[] = "$Id: os_unix.c,v 1.2.2.3 2003/12/07 12:57:26 stas Exp $";
 #endif /* not lint */
 
 #include "fcgi_config.h"
@@ -102,6 +102,11 @@ static int volatile maxFd = -1;
 
 static int shutdownPending = FALSE;
 static int shutdownNow = FALSE;
+
+#ifndef HAVE_STRLCPY
+#define strlcpy php_strlcpy
+#endif
+size_t strlcpy(char *dst, const char *src, size_t siz);
 
 void OS_ShutdownPending()
 {
@@ -293,7 +298,7 @@ int OS_CreateLocalIpcFd(const char *bindPath, int backlog)
     short   port = 0;
     char    host[MAXPATHLEN];
 
-    strcpy(host, bindPath);
+    strlcpy(host, bindPath, MAXPATHLEN-1);
     if((tp = strchr(host, ':')) != 0) {
 	*tp++ = 0;
 	if((port = atoi(tp)) == 0) {
@@ -396,7 +401,7 @@ int OS_FcgiConnect(char *bindPath)
     short   port = 0;
     int	    tcp = FALSE;
 
-    strcpy(host, bindPath);
+    strlcpy(host, bindPath, MAXPATHLEN-1);
     if((tp = strchr(host, ':')) != 0) {
 	*tp++ = 0;
 	if((port = atoi(tp)) == 0) {

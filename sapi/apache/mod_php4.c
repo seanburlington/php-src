@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.146.2.11 2003/05/31 01:37:44 sniper Exp $ */
+/* $Id: mod_php4.c,v 1.146.2.12 2003/06/03 05:41:49 rasmus Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -380,6 +380,7 @@ static int sapi_apache_force_http_10(TSRMLS_D)
 	
 	return SUCCESS;
 }
+/* }}} */
 
 /* {{{ sapi_apache_get_target_uid
  */
@@ -388,6 +389,7 @@ static int sapi_apache_get_target_uid(uid_t *obj TSRMLS_DC)
 	*obj = ap_user_id;
 	return SUCCESS;
 }
+/* }}} */
 
 /* {{{ sapi_apache_get_target_gid
  */
@@ -396,6 +398,7 @@ static int sapi_apache_get_target_gid(gid_t *obj TSRMLS_DC)
 	*obj = ap_group_id;
 	return SUCCESS;
 }
+/* }}} */
 
 /* {{{ sapi_module_struct apache_sapi_module
  */

@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.30 2002/05/21 01:38:50 ssb Exp $
+// $Id: Install.php,v 1.31 2002/05/26 17:37:52 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -148,6 +148,9 @@ specified at once.
 
     function doInstall($command, $options, $params)
     {
+        if (sizeof($params) < 1) {
+            return $this->raiseError('Missing package to install. Try "help install"');
+        }
         if (empty($this->installer)) {
             $this->installer = &new PEAR_Installer($ui);
         }

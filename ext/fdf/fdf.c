@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.67 2002/11/25 12:30:22 hholzgra Exp $ */
+/* $Id: fdf.c,v 1.68 2002/12/11 15:32:35 iliaa Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -1416,7 +1416,8 @@ PHP_FUNCTION(fdf_remove_item) {
 	FDFErc err;
 	
 	if(zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rsl", &r_fdf, 
-							 &fieldname, &fieldname_len
+							 &fieldname, &fieldname_len,
+							 item
 							 )
 	   == FAILURE) {
 		return;

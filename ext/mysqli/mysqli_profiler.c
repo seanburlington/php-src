@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_profiler.c,v 1.8 2003/08/12 00:55:56 iliaa Exp $ 
+  $Id: mysqli_profiler.c,v 1.9 2003/08/28 20:51:18 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -447,7 +447,7 @@ PHP_FUNCTION(mysqli_profiler)
 				RETURN_FALSE;
 			}
 			if (!(connection = php_mysqli_create_socket(name, port))) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "unable to connect to host %s on port %d, name, port");
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "unable to connect to host %s on port %d", name, port);
 				RETURN_FALSE;
 			}	
 			prmain = ecalloc(1, sizeof(PR_MAIN));

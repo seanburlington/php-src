@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.92 2004/07/10 10:54:27 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.93 2004/08/31 15:32:09 stas Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -59,6 +59,7 @@ static php_stream_wrapper php_plain_files_wrapper;
 
 /* {{{ some macros to help track leaks */
 #if ZEND_DEBUG
+#if USE_ZEND_ALLOC
 #define emalloc_rel_orig(size)	\
 		( __php_stream_call_depth == 0 \
 		? _emalloc((size) ZEND_FILE_LINE_CC ZEND_FILE_LINE_RELAY_CC) \
@@ -68,7 +69,10 @@ static php_stream_wrapper php_plain_files_wrapper;
 		( __php_stream_call_depth == 0 \
 		? _erealloc((ptr), (size), 0 ZEND_FILE_LINE_CC ZEND_FILE_LINE_RELAY_CC) \
 		: _erealloc((ptr), (size), 0 ZEND_FILE_LINE_CC ZEND_FILE_LINE_ORIG_RELAY_CC) )
-
+#else
+#define emalloc_rel_orig(size) emalloc(size)
+#define erealloc_rel_orig(ptr, size) erealloc(ptr, size)
+#endif
 
 #define pemalloc_rel_orig(size, persistent)	((persistent) ? malloc((size)) : emalloc_rel_orig((size)))
 #define perealloc_rel_orig(ptr, size, persistent)	((persistent) ? realloc((ptr), (size)) : erealloc_rel_orig((ptr), (size)))

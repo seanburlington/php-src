@@ -3,9 +3,11 @@ Copyright (c) 1998, 1999 Thai Open Source Software Center Ltd
 See the file COPYING for copying permission.
 */
 
+#if 0
 static char RCSId[]
-  = "$Header: /repository/php-src/ext/xml/expat/Attic/xmltok.c,v 1.1 2001/05/11 17:57:35 thies Exp $";
-
+  = "$Header: /repository/php-src/ext/xml/expat/Attic/xmltok.c,v 1.2 2001/05/19 09:56:42 sas Exp $";
+#endif
+  
 #include "php_compat.h"
 
 #ifdef COMPILED_FROM_DSP

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.21 2003/11/22 21:20:07 georg Exp $ 
+  $Id: mysqli_fe.c,v 1.22 2003/12/13 00:28:20 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -104,7 +104,7 @@ function_entry mysqli_functions[] = {
 	PHP_FE(mysqli_param_count,							NULL)
 	PHP_FE(mysqli_ping,									NULL)
 	PHP_FE(mysqli_prepare,								NULL)
-	PHP_FE(mysqli_profiler,								NULL)
+	PHP_FE(mysqli_report,								NULL)
 	PHP_FE(mysqli_query,								NULL)
 	PHP_FE(mysqli_read_query_result,					NULL)
 	PHP_FE(mysqli_real_connect,							NULL)
@@ -112,7 +112,6 @@ function_entry mysqli_functions[] = {
 	PHP_FALIAS(mysqli_escape_string, 
 				mysqli_real_escape_string,				NULL)
 	PHP_FE(mysqli_real_query,							NULL)
-	PHP_FE(mysqli_reload,								NULL)
 	PHP_FE(mysqli_rollback,								NULL)
 	PHP_FE(mysqli_rpl_parse_enabled,					NULL)
 	PHP_FE(mysqli_rpl_probe,							NULL)
@@ -189,7 +188,6 @@ function_entry mysqli_link_methods[] = {
 	PHP_FALIAS(real_escape_string,mysqli_real_escape_string,NULL)
 	PHP_FALIAS(escape_string, mysqli_real_escape_string,NULL)
 	PHP_FALIAS(real_query,mysqli_real_query,NULL)
-	PHP_FALIAS(reload,mysqli_reload,NULL)
 	PHP_FALIAS(rollback,mysqli_rollback,NULL)
 	PHP_FALIAS(rpl_parse_enabled,mysqli_rpl_parse_enabled,NULL)
 	PHP_FALIAS(rpl_probe,mysqli_rpl_probe,NULL)

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.12 2003/12/08 18:57:09 sniper Exp $
+dnl $Id: config.m4,v 1.13 2003/12/13 00:28:21 georg Exp $
 dnl config.m4 for extension mysqli
 
 PHP_ARG_WITH(mysqli, for MySQLi support,
@@ -50,6 +50,6 @@ if test "$PHP_MYSQLI" != "no"; then
     $MYSQLI_LIBLINE
   ])
 
-  PHP_NEW_EXTENSION(mysqli, mysqli.c mysqli_api.c mysqli_prop.c mysqli_nonapi.c mysqli_fe.c mysqli_profiler.c mysqli_profiler_com.c, $ext_shared)
+  PHP_NEW_EXTENSION(mysqli, mysqli.c mysqli_api.c mysqli_prop.c mysqli_nonapi.c mysqli_fe.c mysqli_report.c, $ext_shared)
   PHP_SUBST(MYSQLI_SHARED_LIBADD)
 fi

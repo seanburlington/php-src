@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.26 2004/01/08 08:16:25 andi Exp $ 
+  $Id: mysqli_nonapi.c,v 1.27 2004/01/12 00:34:37 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -179,7 +179,7 @@ PHP_FUNCTION(mysqli_fetch_assoc)
 }
 /* }}} */
 
-/* {{{ proto array mysqli_fetch_object (object result [, string class_name [, NULL|array ctor_params]])
+/* {{{ proto object mysqli_fetch_object (object result [, string class_name [, NULL|array ctor_params]])
    Fetch a result row as an object */
 PHP_FUNCTION(mysqli_fetch_object) 
 {

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.11 1999/11/13 16:51:31 sas Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.12 1999/12/04 13:16:04 sas Exp $ -*- sh -*-
 
 divert(1)
 
@@ -109,10 +109,6 @@ AC_CHECK_LIB(c, dlopen, [
 AC_CHECK_LIB(pam, pam_start, [
   EXTRA_LIBS="$EXTRA_LIBS -lpam"
   AC_DEFINE(HAVE_LIBPAM) ], []) 
-
-AC_CHECK_LIB(bind, inet_aton, [
-  EXTRA_LIBS="$EXTRA_LIBS -lbind"
-  AC_DEFINE(HAVE_LIBBIND) ], []) 
 
 AC_CHECK_LIB(crypt, crypt, [
  AC_ADD_LIBRARY(crypt)

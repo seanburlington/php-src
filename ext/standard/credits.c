@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.6 2001/03/14 21:28:58 jmoore Exp $ */
+/* $Id: credits.c,v 1.7 2001/05/10 14:25:48 zeev Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -39,8 +39,7 @@ PHPAPI void php_print_credits(int flag)
 
 		php_info_print_table_start();
 		php_info_print_table_header(1, "PHP Group");
-		php_info_print_table_row(1, "Thies C. Arntzen, Stig Bakken, Andi Gutmans, Rasmus Lerdorf, Sam Ruby,\
-					Sascha Schumann, Zeev Suraski, Jim Winstead, Andrei Zmievski");
+		php_info_print_table_row(1, "Thies C. Arntzen, Stig Bakken, Andi Gutmans, Rasmus Lerdorf, Sam Ruby, Sascha Schumann, Zeev Suraski, Jim Winstead, Andrei Zmievski");
 		php_info_print_table_end();
 	}
 

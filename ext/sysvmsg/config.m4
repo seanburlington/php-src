@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 2002/09/19 20:14:58 iliaa Exp $
+dnl $Id: config.m4,v 1.4 2002/10/08 16:20:20 msopacua Exp $
 
 PHP_ARG_ENABLE(sysvmsg,whether to enable System V IPC support,
 [  --enable-sysvmsg        Enable sysvmsg support])
@@ -9,9 +9,9 @@ if test "$PHP_SYSVMSG" != "no"; then
    [#include <sys/types.h>
     #include <sys/ipc.h>
     #include <sys/msg.h>],
-   [struct msgbuf *foo;
+   [size_t i;
 
-    foo = (struct msgbuf *) malloc(sizeof(struct msgbuf*) +1);
+     i = sizeof(struct msgbuf);
     return 1;],
    [AC_MSG_RESULT(msgbuf)],
    [AC_TRY_COMPILE(
@@ -19,9 +19,9 @@ if test "$PHP_SYSVMSG" != "no"; then
       #include <sys/ipc.h>
       #include <sys/msg.h>
      ],
-     [struct mymsg *foo;
+     [size_t i;
 
-      foo = (struct mymsg *) malloc(sizeof(struct mymsg*) +1);
+     i = sizeof(struct mymsg);
       return 1;
      ],
      [AC_DEFINE(msgbuf, mymsg, [msgbuf is called mymsg])

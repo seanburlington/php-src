@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_gd.h,v 1.2 1999/12/17 20:54:58 zeev Exp $ */
+/* $Id: php_gd.h,v 1.3 1999/12/17 21:50:02 zeev Exp $ */
 
 #ifndef _PHP_GD_H
 #define _PHP_GD_H
@@ -97,8 +97,7 @@ PHP_FUNCTION(imagesx);
 PHP_FUNCTION(imagesy);
 PHP_FUNCTION(imagecreatefrompng);
 PHP_FUNCTION(imagepng);
-void php3_free_gd_font(gdFontPtr);
-void _php3_gdimagecharup(gdImagePtr, gdFontPtr, int, int, int, int);
+void php_gdimagecharup(gdImagePtr, gdFontPtr, int, int, int, int);
 PHP_FUNCTION(imagedashedline);
 #ifdef ENABLE_GD_TTF
 PHP_FUNCTION(imagettfbbox);

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_gettext.h,v 1.2 1999/12/17 20:55:00 zeev Exp $ */
+/* $Id: php_gettext.h,v 1.3 1999/12/17 21:50:03 zeev Exp $ */
 
 #ifndef _GETTEXT_H
 #define _GETTEXT_H
@@ -37,8 +37,8 @@
 #include "modules.h"
 #endif
 
-extern zend_module_entry php3_gettext_module_entry;
-#define gettext_module_ptr &php3_gettext_module_entry
+extern zend_module_entry php_gettext_module_entry;
+#define gettext_module_ptr &php_gettext_module_entry
 
 PHP_MINFO_FUNCTION(gettext);
 

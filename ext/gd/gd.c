@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.192 2002/06/25 22:23:41 helly Exp $ */
+/* $Id: gd.c,v 1.193 2002/06/26 18:32:27 derick Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -61,7 +61,7 @@ static int le_ps_font, le_ps_enc;
 #include <gdfontl.h>  /* 4 Large font */
 #include <gdfontg.h>  /* 5 Giant font */
 #ifdef HAVE_GD_WBMP
-#include <wbmp.h>
+#include "libgd/wbmp.h"
 #endif
 #ifdef ENABLE_GD_TTF
 # include "gdttf.h"

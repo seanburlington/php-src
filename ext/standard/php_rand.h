@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_rand.h,v 1.18 2002/02/28 08:26:48 sebastian Exp $ */
+/* $Id: php_rand.h,v 1.19 2002/06/09 04:26:36 andrei Exp $ */
 
 #ifndef PHP_RAND_H
 #define	PHP_RAND_H
@@ -38,6 +38,9 @@
 #else
 #define PHP_RAND_MAX RAND_MAX
 #endif
+
+#define RAND_RANGE(__n, __min, __max, __tmax) \
+    (__n) = (__min) + (long) ((double) ((__max) - (__min) + 1.0) * ((__n) / ((__tmax) + 1.0)))
 
 /* MT Rand */
 #define PHP_MT_RAND_MAX ((long) (0x7FFFFFFF)) /* (1<<31) - 1 */ 

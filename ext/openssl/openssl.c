@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.87 2004/01/08 08:16:39 andi Exp $ */
+/* $Id: openssl.c,v 1.88 2004/03/29 19:57:48 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3082,7 +3082,6 @@ static int verify_callback(int preverify_ok, X509_STORE_CTX *ctx)
 	X509 *err_cert;
 	int err, depth, ret;
 	zval **val;
-	TSRMLS_FETCH();
 
 	ret = preverify_ok;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nodelist.c,v 1.11 2004/02/17 11:13:47 rrichards Exp $ */
+/* $Id: nodelist.c,v 1.12 2004/03/29 19:57:48 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -157,13 +157,13 @@ PHP_FUNCTION(dom_nodelist_item)
 				}
 			}
 		}
+
+		if (itemnode) {
+			DOM_RET_OBJ(rv, itemnode, &ret, objmap->baseobj);
+		}
 	}
 
-	if (itemnode) {
-		DOM_RET_OBJ(rv, itemnode, &ret, objmap->baseobj);
-	} else {
-		RETVAL_NULL();
-	}
+	RETVAL_NULL();
 }
 /* }}} end dom_nodelist_item */
 #endif

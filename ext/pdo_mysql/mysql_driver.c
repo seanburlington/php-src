@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.12 2004/05/20 19:17:32 iliaa Exp $ */
+/* $Id: mysql_driver.c,v 1.13 2004/05/21 14:15:02 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -299,9 +299,7 @@ static int pdo_mysql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 
 	dbh->methods = &mysql_methods;
 	dbh->alloc_own_columns = 1;
-	dbh->supports_placeholders = 1;
-	dbh->emulate_prepare = 1;
-	dbh->placeholders_can_be_strings = 1;
+	dbh->supports_placeholders = 0;
 	dbh->max_escaped_char_length = 2;
 
 	ret = 1;

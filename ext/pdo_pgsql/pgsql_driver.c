@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.11 2004/05/20 22:24:30 iliaa Exp $ */
+/* $Id: pgsql_driver.c,v 1.12 2004/05/21 14:15:03 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -277,9 +277,7 @@ static int pdo_pgsql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 
 	dbh->methods = &pgsql_methods;
 	dbh->alloc_own_columns = 1;
-	dbh->supports_placeholders = 1;
-	dbh->emulate_prepare = 1;
-	dbh->placeholders_can_be_strings = 1;
+	dbh->supports_placeholders = PDO_PLACEHOLDER_NONE;
 	dbh->max_escaped_char_length = 2;
 
 	ret = 1;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.25 2003/04/19 07:45:45 moriyoshi Exp $ */
+/* $Id: gd.c,v 1.221.2.26 2003/04/25 00:50:31 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -692,7 +692,7 @@ PHP_FUNCTION(imagesetstyle)
 	convert_to_array_ex(styles);
 
 	/* copy the style values in the stylearr */
-	stylearr = emalloc(sizeof(int) * zend_hash_num_elements(HASH_OF(*styles)));
+	stylearr = safe_emalloc(sizeof(int), zend_hash_num_elements(HASH_OF(*styles)), 0);
 
 	zend_hash_internal_pointer_reset_ex(HASH_OF(*styles), &pos);
 
@@ -2472,7 +2472,7 @@ static void php_imagepolygon(INTERNAL_FUNCTION_PARAMETERS, int filled)
 		RETURN_FALSE;
 	}
 
-	points = (gdPointPtr) emalloc(npoints * sizeof(gdPoint));
+	points = (gdPointPtr) safe_emalloc(npoints, sizeof(gdPoint), 0);
 
 	for (i = 0; i < npoints; i++) {
 		if (zend_hash_index_find(Z_ARRVAL_PP(POINTS), (i * 2), (void **) &var) == SUCCESS) {

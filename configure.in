@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.371 2002/09/04 18:47:21 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.372 2002/09/06 17:18:16 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1145,7 +1145,7 @@ dnl  else
 dnl      rm -f main/internal_functions.c.old
 dnl  fi
 
-  if test $UNAME = "FreeBSD" && test $PHP_SAPI = "apache2filter" && test $TSRM_PTH != "pth-config" ; then
+  if test "$UNAME" = "FreeBSD" && test "$PHP_SAPI" = "apache2filter" && test "$TSRM_PTH" != "pth-config" ; then
     echo "+--------------------------------------------------------------------+"
     echo "|                        *** WARNING ***                             |"
     echo "|                                                                    |"

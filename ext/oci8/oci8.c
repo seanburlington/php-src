@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.201 2003/01/19 08:32:22 iliaa Exp $ */
+/* $Id: oci8.c,v 1.202 2003/01/27 19:52:11 maxim Exp $ */
 
 /* TODO list:
  *
@@ -640,7 +640,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.201 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.202 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -974,7 +974,16 @@ oci_error(OCIError *err_p, char *what, sword status)
 	case OCI_SUCCESS:
 		break;
 	case OCI_SUCCESS_WITH_INFO:
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s: OCI_SUCCESS_WITH_INFO", what);
+		CALL_OCI(OCIErrorGet(
+				err_p, 
+				(ub4)1, 
+				NULL, 
+				&errcode, 
+				errbuf,
+				(ub4)sizeof(errbuf), 
+				(ub4)OCI_HTYPE_ERROR));
+
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s: OCI_SUCCESS_WITH_INFO: %s", what, errbuf);
 		break;
 	case OCI_NEED_DATA:
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s: OCI_NEED_DATA", what);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.22 2004/09/06 10:16:34 rrichards Exp $ */
+/* $Id: libxml.c,v 1.23 2004/09/08 10:15:41 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -505,6 +505,32 @@ PHP_FUNCTION(libxml_set_streams_context)
 
 
 /* {{{ Common functions shared by extensions */
+int php_libxml_xmlCheckUTF8(const unsigned char *s)
+{
+	int i;
+	unsigned char c;
+
+	for (i = 0; (c = s[i++]);) {
+		if ((c & 0x80) == 0) {
+		} else if ((c & 0xe0) == 0xc0) {
+			if ((s[i++] & 0xc0) != 0x80) {
+				return 0;
+			}
+		} else if ((c & 0xf0) == 0xe0) {
+			if ((s[i++] & 0xc0) != 0x80 || (s[i++] & 0xc0) != 0x80) {
+				return 0;
+			}
+		} else if ((c & 0xf8) == 0xf0) {
+			if ((s[i++] & 0xc0) != 0x80 || (s[i++] & 0xc0) != 0x80 || (s[i++] & 0xc0) != 0x80) {
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+	}
+	return 1;
+}
+
 int php_libxml_register_export(zend_class_entry *ce, php_libxml_export_node export_function)
 {
 	php_libxml_func_handler export_hnd;

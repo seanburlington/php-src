@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.138 2003/10/10 17:13:37 cox Exp $
+// $Id: Installer.php,v 1.139 2003/10/31 04:52:00 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -886,6 +886,11 @@ class PEAR_Installer extends PEAR_Common
                         continue;
                     }
                     if (!isset($installed[strtolower($info['name'])])) {
+                        // check to see if we can install the specific version required
+                        if ($info['rel'] == 'eq') {
+                            $deppackages[] = $info['name'] . '-' . $info['version'];
+                            continue;
+                        }
                         // skip upgrade check for packages we don't have installed
                         $deppackages[] = $info['name'];
                         continue;

@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.24 1999/12/04 19:16:11 sas Exp $ */
+/* $Id: zlib.c,v 1.25 1999/12/12 11:02:24 sas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -127,7 +127,7 @@ static void php_zlib_init_globals(ZLIBLS_D)
 PHP_MINIT_FUNCTION(zlib)
 {
 #ifdef ZTS
-        zlib_globals_id = ts_allocate_id(sizeof(php_zlib_globals), php_zlib_init_globals, NULL);
+        zlib_globals_id = ts_allocate_id(sizeof(php_zlib_globals), (ts_allocate_ctor) php_zlib_init_globals, NULL);
 #else
         ZLIBG(gzgetss_state)=0;
 #endif

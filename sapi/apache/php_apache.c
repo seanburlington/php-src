@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_apache.c,v 1.2 2000/02/10 19:41:20 zeev Exp $ */
+/* $Id: php_apache.c,v 1.3 2000/02/10 20:24:28 zeev Exp $ */
 #include "php.h"
 #include "ext/standard/head.h"
 #include "php_globals.h"
@@ -35,7 +35,7 @@
 #include <errno.h>
 #include <ctype.h>
 
-#include "remains.h"
+#include "php_apache_http.h"
 #include "http_request.h"
 #include "build-defs.h"
 

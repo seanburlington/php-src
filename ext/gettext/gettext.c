@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.21 2000/11/27 18:21:48 dbeu Exp $ */
+/* $Id: gettext.c,v 1.22 2000/12/08 09:20:42 zak Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -38,7 +38,7 @@ function_entry php_gettext_functions[] = {
 };
 
 zend_module_entry php_gettext_module_entry = {
-	"gettext", php_gettext_functions, NULL, NULL, NULL, NULL, PHP_MINFO(gettext), STANDARD_MODULE_PROPERTIES
+	"gettext", php_gettext_functions, PHP_MINIT(gettext), NULL, NULL, NULL, PHP_MINFO(gettext), STANDARD_MODULE_PROPERTIES
 };
 
 #ifdef COMPILE_DL_GETTEXT
@@ -50,6 +50,19 @@ PHP_MINFO_FUNCTION(gettext)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "GNU GetText Support", "enabled");
 	php_info_print_table_end();
+}
+
+
+PHP_MINIT_FUNCTION(gettext)
+{
+	REGISTER_LONG_CONSTANT("LC_CTYPE", LC_CTYPE, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("LC_NUMERIC", LC_NUMERIC, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("LC_TIME", LC_TIME, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("LC_COLLATE", LC_COLLATE, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("LC_MONETARY", LC_MONETARY, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("LC_MESSAGES", LC_MESSAGES, CONST_CS | CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("LC_ALL", LC_ALL, CONST_CS | CONST_PERSISTENT);
+	return SUCCESS;
 }
 
 /* {{{ proto string textdomain(string domain)

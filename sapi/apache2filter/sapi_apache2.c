@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.91.2.15 2003/05/23 02:42:22 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.91.2.16 2003/05/31 01:37:44 sniper Exp $ */
 
 #include <fcntl.h>
 
@@ -452,7 +452,7 @@ static int php_output_filter(ap_filter_t *f, apr_bucket_brigade *bb)
 	}
 
 	for (b = APR_BRIGADE_FIRST(bb); b != APR_BRIGADE_SENTINEL(bb); b = APR_BUCKET_NEXT(b)) {
-		zend_file_handle zfd;
+		zend_file_handle zfd = {0};
 
 		if (!ctx->request_processed && APR_BUCKET_IS_FILE(b)) {
 			const char *path;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: thttpd.c,v 1.77.2.11 2003/05/21 09:34:16 zeev Exp $ */
+/* $Id: thttpd.c,v 1.77.2.12 2003/05/31 01:37:45 sniper Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -388,7 +388,7 @@ static sapi_module_struct thttpd_sapi_module = {
 
 static void thttpd_module_main(int show_source TSRMLS_DC)
 {
-	zend_file_handle file_handle;
+	zend_file_handle file_handle = {0};
 
 	if (php_request_startup(TSRMLS_C) == FAILURE) {
 		return;

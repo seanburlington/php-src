@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.1.2.5 2003/05/29 14:55:07 sas Exp $
+dnl $Id: config9.m4,v 1.1.2.6 2003/05/31 01:37:44 sniper Exp $
 dnl
 
 AC_ARG_ENABLE(cgi,

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.106.2.11 2003/05/21 09:34:13 zeev Exp $ */
+/* $Id: php_ini.c,v 1.106.2.12 2003/05/31 01:37:44 sniper Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -236,7 +236,7 @@ int php_init_config()
 	int safe_mode_state;
 	char *open_basedir;
 	int free_ini_search_path=0;
-	zend_file_handle fh;
+	zend_file_handle fh = {0};
 	struct stat sb;
 	char ini_file[MAXPATHLEN];
 	char *p;
@@ -347,7 +347,6 @@ int php_init_config()
 	PG(safe_mode) = 0;
 	PG(open_basedir) = NULL;
 
-	memset(&fh, 0, sizeof(fh));
 	/* Check if php_ini_path_override is a file */
 	if (!sapi_module.php_ini_ignore) {
 		if (sapi_module.php_ini_path_override && sapi_module.php_ini_path_override[0]) {

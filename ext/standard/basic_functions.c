@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.17 2003/05/21 09:34:12 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.18 2003/05/31 01:37:43 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2840,7 +2840,7 @@ static void php_ini_parser_cb_with_sections(zval *arg1, zval *arg2, int callback
 PHP_FUNCTION(parse_ini_file)
 {
 	zval **filename, **process_sections;
-	zend_file_handle fh;
+	zend_file_handle fh = {0};
 	zend_ini_parser_cb_t ini_parser_cb;
 
 	switch (ARG_COUNT(ht)) {

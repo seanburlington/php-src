@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.h,v 1.23 2001/06/19 15:21:28 sbergmann Exp $ */
+/* $Id: info.h,v 1.24 2001/07/30 09:16:46 zeev Exp $ */
 
 #ifndef INFO_H
 #define INFO_H
@@ -63,7 +63,7 @@ PHP_FUNCTION(zend_logo_guid);
 PHP_FUNCTION(php_egg_logo_guid);
 PHP_FUNCTION(php_sapi_name);
 PHP_FUNCTION(php_uname);
-PHPAPI void php_print_info(int flag);
+PHPAPI void php_print_info(int flag TSRMLS_DC);
 PHPAPI void php_print_style(void);
 PHPAPI void php_info_print_style(void);
 PHPAPI void php_info_print_table_colspan_header(int num_cols, char *header);

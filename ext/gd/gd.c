@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.18 2003/03/30 18:05:40 rasmus Exp $ */
+/* $Id: gd.c,v 1.221.2.19 2003/03/31 08:49:30 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -376,13 +376,13 @@ PHP_MINIT_FUNCTION(gd)
 
 /* {{{ PHP_RSHUTDOWN_FUNCTION
  */
+#if HAVE_LIBGD20 && HAVE_GD_STRINGFT
 PHP_RSHUTDOWN_FUNCTION(gd)
 {
-#if HAVE_LIBGD20 && HAVE_GD_STRINGFT
 	gdFreeFontCache();
-#endif
 	return SUCCESS;
 }
+#endif
 /* }}} */
 
 /* {{{ PHP_MINFO_FUNCTION

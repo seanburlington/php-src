@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.44.2.4 2003/03/05 16:04:20 iliaa Exp $ */
+/* $Id: php_gd.h,v 1.44.2.5 2003/03/31 08:49:30 sniper Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -58,7 +58,9 @@ extern zend_module_entry gd_module_entry;
 PHP_MINFO_FUNCTION(gd);
 PHP_MINIT_FUNCTION(gd);
 PHP_MSHUTDOWN_FUNCTION(gd);
+#if HAVE_LIBGD20 && HAVE_GD_STRINGFT
 PHP_RSHUTDOWN_FUNCTION(gd);
+#endif
 
 PHP_FUNCTION(gd_info);
 PHP_FUNCTION(imagearc);

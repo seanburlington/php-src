@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Command.php,v 1.16.4.1 2002/12/31 16:27:33 sebastian Exp $
+// $Id: Command.php,v 1.16.4.2 2003/02/15 20:28:50 ssb Exp $
 
 
 require_once "PEAR.php";

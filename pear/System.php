@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.21.2.3 2002/12/31 16:27:27 sebastian Exp $
+// $Id: System.php,v 1.21.2.4 2003/02/15 20:28:49 ssb Exp $
 //
 
 require_once 'PEAR.php';
@@ -43,7 +43,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.21.2.3 $
+* @version  $Revision: 1.21.2.4 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -433,12 +433,14 @@ class System
 
         // XXX FIXME honor safe mode
         $path_delim = OS_WINDOWS ? ';' : ':';
-        $exe_suffix = OS_WINDOWS ? '.exe' : '';
+        $exe_suffixes = OS_WINDOWS ? array('.exe','.bat','.cmd','.com') : array('');
         $path_elements = explode($path_delim, getenv('PATH'));
-        foreach ($path_elements as $dir) {
-            $file = $dir . DIRECTORY_SEPARATOR . $program . $exe_suffix;
-            if (@is_file($file) && @$pear_is_executable($file)) {
-                return $file;
+        foreach ($exe_suffixes as $suff) {
+            foreach ($path_elements as $dir) {
+                $file = $dir . DIRECTORY_SEPARATOR . $program . $suff;
+                if (@is_file($file) && @$pear_is_executable($file)) {
+                    return $file;
+                }
             }
         }
         return $fallback;

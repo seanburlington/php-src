@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.18.4.5 2002/12/31 16:27:38 sebastian Exp $
+// $Id: Config.php,v 1.18.4.6 2003/02/15 20:28:51 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";

@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.14.4.3 2002/12/31 16:27:34 sebastian Exp $
+// $Id: Dependency.php,v 1.14.4.4 2003/02/15 20:28:51 ssb Exp $
 
 /**
 * Methods for dependencies check. Based on Stig's dependencies RFC

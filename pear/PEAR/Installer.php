@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.81.2.4 2002/12/31 16:27:35 sebastian Exp $
+// $Id: Installer.php,v 1.81.2.5 2003/02/15 20:28:51 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.37 2000/06/26 17:12:38 stas Exp $ */
+/* $Id: exec.c,v 1.38 2000/08/01 07:22:59 stas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -172,8 +172,9 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 
 			tmp = php_addslashes(buf, 0, &len, 0);
 			RETVAL_STRINGL(tmp,len,0);
-		} else
-			RETVAL_STRINGL(buf,l+1,1);
+		} else {
+			RETVAL_STRINGL(buf,l?l+1:0,1);
+		}
 	} else {
 		int b, i;
 

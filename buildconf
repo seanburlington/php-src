@@ -1,10 +1,14 @@
 #!/bin/sh
-# $Id: buildconf,v 1.50 2000/09/26 11:19:38 sas Exp $
+# $Id: buildconf,v 1.51 2002/06/23 15:47:39 imajes Exp $
 
 supplied_flag=$1
 
 if test "$supplied_flag" = "--copy"; then
     automake_flags=--copy
+fi
+
+if test -d "ZendEngine2"; then
+    mv ZendEngine2 Zend
 fi
 
 ## build.mk does not check aclocal exit status yet

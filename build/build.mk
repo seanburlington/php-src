@@ -14,13 +14,13 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build.mk,v 1.14 2002/06/20 08:42:08 imajes Exp $ 
+# $Id: build.mk,v 1.15 2002/06/23 15:47:40 imajes Exp $ 
 #
 #
 # Makefile to generate build tools
 #
 
-ZENDDIR = $(shell if test -d "ZendEngine2"; then echo ZendEngine2; else echo Zend; fi)
+ZENDDIR = Zend
 
 SUBDIRS = $(ZENDDIR) TSRM
 

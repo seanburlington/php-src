@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.45 2004/07/09 17:49:08 iliaa Exp $ */
+/* $Id: pdo_stmt.c,v 1.46 2004/07/12 20:12:39 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -438,6 +438,11 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value, enum pdo_
 
 	if (!do_fetch_common(stmt, do_bind TSRMLS_CC)) {
 		return 0;
+	}
+
+	if (how == PDO_FETCH_BOUND) {
+		RETVAL_TRUE;
+		return 1;
 	}
 
 	if (return_value) {

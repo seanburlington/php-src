@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.65.2.6 2003/07/06 21:11:51 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.65.2.7 2003/07/06 21:12:59 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -202,7 +202,7 @@ php_iconv_err_t php_iconv_string(const char *in_p, size_t in_len,
 
 	in_size = in_len;
 
-	cd = icov_open(out_charset, in_charset);
+	cd = iconv_open(out_charset, in_charset);
 	
 	if (cd == (iconv_t)(-1)) {
 		return PHP_ICONV_ERR_UNKNOWN;

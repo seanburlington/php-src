@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.116 2002/01/15 15:40:31 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.117 2002/02/12 03:00:04 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -124,7 +124,7 @@ static PHP_RINIT_FUNCTION(pcre)
 
 /* {{{ pcre_get_compiled_regex
  */
-static pcre* pcre_get_compiled_regex(char *regex, pcre_extra *extra, int *preg_options) {
+PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra *extra, int *preg_options) {
 	pcre				*re = NULL;
 	int				 	 coptions = 0;
 	int				 	 soptions = 0;
@@ -675,10 +675,10 @@ static int preg_do_eval(char *eval_str, int eval_str_len, char *subject,
 
 /* {{{ php_pcre_replace
  */
-char *php_pcre_replace(char *regex,   int regex_len,
-					   char *subject, int subject_len,
-					   zval *replace_val, int is_callable_replace,
-					   int *result_len, int limit TSRMLS_DC)
+PHPAPI char *php_pcre_replace(char *regex,   int regex_len,
+							  char *subject, int subject_len,
+							  zval *replace_val, int is_callable_replace,
+							  int *result_len, int limit TSRMLS_DC)
 {
 	pcre			*re = NULL;			/* Compiled regular expression */
 	pcre_extra		*extra = NULL;		/* Holds results of studying */

@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.16 2002/03/17 13:19:27 wez Exp $ */
+/* $Id: php_network.h,v 1.17 2002/03/17 13:29:44 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -61,6 +61,16 @@
 
 #ifdef HAVE_STDDEF_H
 #include <stddef.h>
+#endif
+
+#ifdef PHP_WIN32
+# define SOCK_ERR INVALID_SOCKET
+# define SOCK_CONN_ERR SOCKET_ERROR
+# define SOCK_RECV_ERR SOCKET_ERROR
+#else
+# define SOCK_ERR -1
+# define SOCK_CONN_ERR -1
+# define SOCK_RECV_ERR -1
 #endif
 
 #ifdef HAVE_SOCKADDR_STORAGE

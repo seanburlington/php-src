@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: documenttype.c,v 1.7 2003/11/29 20:40:17 rrichards Exp $ */
+/* $Id: documenttype.c,v 1.8 2003/12/03 21:27:01 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -100,6 +100,10 @@ int dom_documenttype_notations_read(dom_object *obj, zval **retval TSRMLS_DC)
 	dom_object *intern;
 
 	doctypep = (xmlDtdPtr) dom_object_get_node(obj);
+
+	MAKE_STD_ZVAL(*retval);
+	php_dom_create_interator(*retval, DOM_NAMEDNODEMAP TSRMLS_CC);
+
 	notationht = (xmlHashTable *) doctypep->notations;
 
 	intern = (dom_object *)zend_objects_get_address(*retval TSRMLS_CC);

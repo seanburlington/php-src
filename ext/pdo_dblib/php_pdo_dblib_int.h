@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_dblib_int.h,v 1.1 2005/01/17 01:15:14 wez Exp $ */
+/* $Id: php_pdo_dblib_int.h,v 1.2 2005/01/18 02:42:52 wez Exp $ */
 
 #ifndef PHP_PDO_DBLIB_INT_H
 #define PHP_PDO_DBLIB_INT_H
@@ -87,6 +87,8 @@ typedef struct {
 	int dberr;
 	char *oserrstr;
 	char *dberrstr;
+	char *sqlstate;
+	char *lastmsg;
 } pdo_dblib_err;
 
 typedef struct {
@@ -118,7 +120,22 @@ typedef struct {
 	int nrows;
 
 	int current;
+	
+	pdo_dblib_err err;
 } pdo_dblib_stmt;
+
+ZEND_BEGIN_MODULE_GLOBALS(dblib)
+	pdo_dblib_err err;
+	char sqlstate[6];
+ZEND_END_MODULE_GLOBALS(dblib)
+
+#ifdef ZTS
+# define DBLIB_G(v) TSRMG(dblib_globals_id, zend_dblib_globals *, v)
+#else
+# define DBLIB_G(v) (dblib_globals.v)
+#endif
+
+ZEND_EXTERN_MODULE_GLOBALS(dblib);
 
 #endif
 

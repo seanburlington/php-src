@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_dblib.h,v 1.1 2005/01/17 01:15:14 wez Exp $ */
+/* $Id: php_pdo_dblib.h,v 1.2 2005/01/18 02:42:52 wez Exp $ */
 
 #ifndef PHP_PDO_DBLIB_H
 #define PHP_PDO_DBLIB_H
@@ -39,6 +39,7 @@ extern zend_module_entry pdo_dblib_module_entry;
 PHP_MINIT_FUNCTION(pdo_dblib);
 PHP_MSHUTDOWN_FUNCTION(pdo_dblib);
 PHP_MINFO_FUNCTION(pdo_dblib);
+PHP_RSHUTDOWN_FUNCTION(pdo_dblib);
 
 #endif
 

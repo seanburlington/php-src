@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Sascha Schumann <sas@schell.de>                             |
+   | Authors: Sascha Schumann <sascha@schumann.cx>                        |
    +----------------------------------------------------------------------+
 
-   $Id: flock_compat.c,v 1.8 2000/05/18 15:34:35 zeev Exp $
+   $Id: flock_compat.c,v 1.9 2000/07/10 10:09:14 sas Exp $
  */
 
 

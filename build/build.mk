@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build.mk,v 1.17 2002/07/21 13:09:07 sas Exp $ 
+# $Id: build.mk,v 1.18 2002/10/21 15:11:19 hholzgra Exp $ 
 #
 #
 # Makefile to generate build tools
@@ -67,7 +67,7 @@ snapshot:
 
 cvsclean:
 	@for i in `find . -name .cvsignore`; do \
-		(cd `dirname $$i` 2>/dev/null && rm -rf `cat .cvsignore` *.o *.a .libs || true); \
+		(cd `dirname $$i` 2>/dev/null && rm -rf `cat .cvsignore | grep -v config.nice` *.o *.a .libs || true); \
 	done
 
 .PHONY: $(ALWAYS) snapshot cvsclean

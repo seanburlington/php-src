@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.64 2001/01/03 16:05:44 sniper Exp $ */
+/* $Id: pdf.c,v 1.65 2001/01/03 16:52:59 sniper Exp $ */
 
 /* pdflib 2.02 is subject to the ALADDIN FREE PUBLIC LICENSE. 
    Copyright (C) 1997 Thomas Merz. */
@@ -600,12 +600,11 @@ PHP_FUNCTION(pdf_get_value)
 	convert_to_string_ex(argv[1]);
 
 	if(0 == (strncmp(Z_STRVAL_PP(argv[1]), "image", 5))) {
-		int pdf_image;
-		if(argc < 3)
-			WRONG_PARAM_COUNT;
+		int *pdf_image;
+		if(argc < 3) WRONG_PARAM_COUNT;
 
-		ZEND_FETCH_RESOURCE(pdf_image, int, argv[0], -1, "pdf image", le_pdf_image);
-		value = PDF_get_value(pdf, Z_STRVAL_PP(argv[1]), pdf_image);
+		ZEND_FETCH_RESOURCE(pdf_image, int *, argv[2], -1, "pdf image", le_pdf_image);
+		value = PDF_get_value(pdf, Z_STRVAL_PP(argv[1]), *pdf_image);
 
 	} else {
 

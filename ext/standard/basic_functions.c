@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.662 2004/04/03 09:51:57 helly Exp $ */
+/* $Id: basic_functions.c,v 1.663 2004/04/12 12:21:24 andi Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2405,7 +2405,7 @@ static int php_ini_get_option(zend_ini_entry *ini_entry, int num_args, va_list a
 			add_assoc_null(option, "local_value");
 		}
 
-		add_assoc_long(option, "access", ini_entry->modifyable);
+		add_assoc_long(option, "access", ini_entry->modifiable);
 
 		add_assoc_zval_ex(ini_array, ini_entry->name, ini_entry->name_length, option);
 	}

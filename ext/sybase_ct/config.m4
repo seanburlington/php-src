@@ -1,10 +1,14 @@
 dnl
-dnl $Id: config.m4,v 1.11 2002/03/12 16:36:30 sas Exp $
+dnl $Id: config.m4,v 1.12 2003/03/13 17:27:28 sniper Exp $
 dnl
 
 PHP_ARG_WITH(sybase-ct, for Sybase-CT support,
 [  --with-sybase-ct[=DIR]  Include Sybase-CT support.  DIR is the Sybase home
                           directory. Defaults to /home/sybase.])
+
+if test "$PHP_SYBASE" != "no"; then
+  AC_MSG_ERROR([You can not use both --with-sybase and --with-sybase-ct in same build!])
+fi
 
 if test "$PHP_SYBASE_CT" != "no"; then
   AC_DEFINE(HAVE_SYBASE_CT,1,[ ])

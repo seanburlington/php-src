@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.6 2004/05/19 17:35:39 iliaa Exp $ */
+/* $Id: mysql_driver.c,v 1.7 2004/05/19 19:31:33 gschlossnagle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -75,24 +75,16 @@ static int mysql_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, 
 	return 1;
 }
 
-static int mysql_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRMLS_DC)
+static long mysql_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRMLS_DC)
 {
 	pdo_mysql_db_handle *H = (pdo_mysql_db_handle *)dbh->driver_data;
 
 	if (mysql_real_query(H->server, sql, sql_len)) {
 		pdo_mysql_error(H);
-		return 0;
+		return -1;
 	} else {
-		return 1;
+		return mysql_affected_rows(H->server);
 	}
-}
-
-static long pdo_mysql_affected_rows(pdo_dbh_t *dbh TSRMLS_DC)
-{
-	pdo_mysql_db_handle *H = (pdo_mysql_db_handle *)dbh->driver_data;
-	my_ulonglong afr = mysql_affected_rows(H->server);
-
-	return afr == (my_ulonglong) - 1 ? 0 : (long) afr;
 }
 
 static long pdo_mysql_last_insert_id(pdo_dbh_t *dbh TSRMLS_DC)
@@ -124,7 +116,6 @@ static struct pdo_dbh_methods mysql_methods = {
 	NULL,
 	NULL,
 	NULL,
-	pdo_mysql_affected_rows,
 	pdo_mysql_last_insert_id
 };
 

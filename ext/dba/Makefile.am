@@ -1,6 +1,6 @@
-# $Id: Makefile.am,v 1.3 1999/11/13 12:40:30 sas Exp $
+# $Id: Makefile.am,v 1.4 1999/11/20 22:50:41 sas Exp $
 
 noinst_LTLIBRARIES=libphpext_dba.la
 libphpext_dba_la_SOURCES=dba.c dba_cdb.c dba_db2.c dba_dbm.c dba_gdbm.c \
-		dba_ndbm.c
+		dba_ndbm.c dba_db3.c
 

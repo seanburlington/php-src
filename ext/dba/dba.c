@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.5 1999/09/17 09:56:29 sas Exp $ */
+/* $Id: dba.c,v 1.6 1999/11/20 22:50:42 sas Exp $ */
 
 #include "php.h"
 
@@ -40,6 +40,7 @@
 #include "php3_dbm.h"
 #include "php3_cdb.h"
 #include "php3_db2.h"
+#include "php3_db3.h"
 
 function_entry dba_functions[] = {
 	PHP_FE(dba_open, NULL)
@@ -158,6 +159,9 @@ static dba_handler handler[] = {
 #if DBA_DB2
 	DBA_HND(db2)
 #endif
+#if DBA_DB3
+	DBA_HND(db3)
+#endif
 	{ NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL }
 };
 
@@ -200,7 +204,7 @@ static PHP_MINFO_FUNCTION(dba)
 {
 	dba_handler *hptr;
 	
-	PUTS("V1 ($Id: dba.c,v 1.5 1999/09/17 09:56:29 sas Exp $)");
+	PUTS("V1 ($Id: dba.c,v 1.6 1999/11/20 22:50:42 sas Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.52 1999/12/18 22:35:27 zeev Exp $ */
+/* $Id: file.c,v 1.53 1999/12/20 17:34:55 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -882,7 +882,7 @@ PHP_FUNCTION(set_socket_timeout)
 	int type, *sock;
 	struct timeval t;
 
-	if (ARG_COUNT(ht)!=2 || getParameters(ht, 2, &socket, &timeout)==FAILURE) {
+	if (ARG_COUNT(ht)!=2 || zend_get_parameters(ht, 2, &socket, &timeout)==FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 	convert_to_long(socket);

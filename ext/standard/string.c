@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.336 2002/12/12 13:38:18 iliaa Exp $ */
+/* $Id: string.c,v 1.337 2002/12/26 19:56:44 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1372,6 +1372,8 @@ PHP_FUNCTION(stristr)
 		RETVAL_FALSE;
 	}
 
+	zval_ptr_dtor(haystack);
+	zval_ptr_dtor(needle);
 	efree(haystack_orig);
 }
 /* }}} */

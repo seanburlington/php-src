@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.80 2001/05/04 01:14:26 jason Exp $ */
+/* $Id: php_mysql.c,v 1.81 2001/05/04 18:27:15 jason Exp $ */
 
 
 /* TODO:
@@ -322,6 +322,12 @@ PHP_RINIT_FUNCTION(mysql)
 	
 	MySG(default_link)=-1;
 	MySG(num_links) = MySG(num_persistent);
+	/* Reset connect error/errno on every request */
+	if (MySG(connect_error)!=NULL) {
+		efree(MySG(connect_error));
+		MySG(connect_error)=NULL;
+	}
+	MySG(connect_errno)=0;
 	return SUCCESS;
 }
 

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.420 2003/02/11 23:46:39 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.421 2003/02/14 01:27:14 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -734,13 +734,6 @@ if test "$PHP_OPENSSL" != "no"; then
   PHP_SETUP_OPENSSL
 fi
 
-
-AC_CHECK_LIB(crypt, crypt, [
-  PHP_ADD_LIBRARY(crypt)
-  PHP_ADD_LIBRARY(crypt, 1)
-  AC_DEFINE(HAVE_CRYPT,1,[ ]) 
-])
-
 divert(5)
 
 dnl ## In diversion 5 we check which extensions should be compiled.
@@ -821,6 +814,13 @@ esac
 PHP_REGEX
 
 EXTRA_LIBS="$EXTRA_LIBS $DLIBS $LIBS"
+
+dnl this has to be here to prevent the openssl crypt() from
+dnl overriding the system provided crypt().
+if test "$ac_cv_lib_crypt_crypt" = "yes"; then
+  EXTRA_LIBS="-lcrypt $EXTRA_LIBS -lcrypt"
+fi
+
 unset LIBS LDFLAGS
 
 dnl Configuring Zend and TSRM.

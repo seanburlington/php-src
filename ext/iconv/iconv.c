@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.113 2003/12/24 02:36:21 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.114 2003/12/27 23:05:23 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2099,6 +2099,10 @@ PHP_FUNCTION(iconv_mime_decode_headers)
 
 		if (PHP_ICONV_ERR_SUCCESS != (err = _php_iconv_mime_decode(&decoded_header, encoded_str, encoded_str_len, charset, &next_pos, mode))) {
 			smart_str_free(&decoded_header);
+			break;
+		}
+
+		if (decoded_header.c != NULL) {
 			break;
 		}
 

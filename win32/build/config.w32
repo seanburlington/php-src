@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.29 2004/08/01 00:29:50 wez Exp $
+// $Id: config.w32,v 1.30 2004/08/03 01:03:32 wez Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -16,7 +16,7 @@ PATH_PROG('flex');
 PATH_PROG('re2c');
 PATH_PROG('zip');
 PATH_PROG('lemon');
-PATH_PROG('mc');
+PATH_PROG('mc', WshShell.Environment("Process").Item("PATH"));
 
 ARG_ENABLE('debug', 'Compile with debugging symbols', "no");
 ARG_ENABLE('zts', 'Thread safety', 'yes');

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.300 2002/05/03 08:00:36 thies Exp $ */
+/* $Id: session.c,v 1.301 2002/05/03 08:10:43 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -928,7 +928,7 @@ PHPAPI void php_session_start(TSRMLS_D)
 
 	PS(session_status) = php_session_active;
 	if (PS(apply_trans_sid)) {
-		php_url_scanner_add_var(PS(session_name), strlen(PS(session_name)), PS(id), strlen(PS(id)), 0);
+		php_url_scanner_add_var(PS(session_name), strlen(PS(session_name)), PS(id), strlen(PS(id)), 0 TSRMLS_CC);
 	}
 
 	php_session_cache_limiter(TSRMLS_C);
@@ -1379,7 +1379,7 @@ PHP_FUNCTION(session_unset)
 static void php_rinit_session_globals(TSRMLS_D)
 {		
 	zend_hash_init(&PS(vars), 0, NULL, NULL, 0);
-	php_url_scanner_remove_var(PS(session_name), strlen(PS(session_name))); /* save even if we haven't registered */
+	php_url_scanner_remove_var(PS(session_name), strlen(PS(session_name)) TSRMLS_CC); /* save even if we haven't registered */
 	PS(id) = NULL;
 	PS(session_status) = php_session_none;
 	PS(mod_data) = NULL;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.89 2002/02/05 20:43:49 andi Exp $ */
+/* $Id: wddx.c,v 1.90 2002/02/24 07:54:04 sebastian Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -314,9 +314,11 @@ PHP_MINIT_FUNCTION(wddx)
 PHP_MINFO_FUNCTION(wddx)
 {
 	php_info_print_table_start();
-	php_info_print_table_header(2, "WDDX Support", "enabled" );
 #if HAVE_PHP_SESSION
+	php_info_print_table_header(2, "WDDX Support", "enabled" );
 	php_info_print_table_row(2, "WDDX Session Serializer", "enabled" );
+#else
+	php_info_print_table_row(2, "WDDX Support", "enabled" );
 #endif
 	php_info_print_table_end();
 }

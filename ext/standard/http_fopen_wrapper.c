@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.56 2002/12/31 16:07:42 sebastian Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.57 2003/01/03 17:05:16 iliaa Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -346,7 +346,11 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 				if (*location != '/') {
 					if (*(location+1) != '\0') {				
 						php_dirname(resource->path, strlen(resource->path));
-						snprintf(loc_path, sizeof(loc_path) - 1, "%s%s", resource->path, location);
+						if (resource->path && *(resource->path) == '/' && *(resource->path + 1) == '\0') {
+							snprintf(loc_path, sizeof(loc_path) - 1, "%s%s", resource->path, location);
+						} else {
+							snprintf(loc_path, sizeof(loc_path) - 1, "%s/%s", resource->path, location);
+						}
 					} else {
 						snprintf(loc_path, sizeof(loc_path) - 1, "/%s", location);
 					}
@@ -358,8 +362,7 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 				} else {
 					snprintf(new_path, sizeof(new_path) - 1, "%s://%s%s", resource->scheme, resource->host, loc_path);
 				}
-			}
-			else {
+			} else {
 				strlcpy(new_path, location, sizeof(new_path));
 			}
 			stream = php_stream_url_wrap_http(NULL, new_path, mode, options, opened_path, context STREAMS_CC TSRMLS_CC);

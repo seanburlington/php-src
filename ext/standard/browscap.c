@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.64 2003/01/01 13:26:17 zeev Exp $ */
+/* $Id: browscap.c,v 1.65 2003/01/06 21:43:28 iliaa Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -198,10 +198,6 @@ static int browser_reg_compare(zval **browser, int num_args, va_list args, zend_
 		return 0;
 	}
 	if(zend_hash_find(Z_OBJPROP_PP(browser), "browser_name_pattern", sizeof("browser_name_pattern"), (void **) &browser_name) == FAILURE) {
-		return 0;
-	}
-
-	if (!strchr(Z_STRVAL_PP(browser_name),'*')) {
 		return 0;
 	}
 	if (regcomp(&r, Z_STRVAL_PP(browser_name), REG_NOSUB)!=0) {

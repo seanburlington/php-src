@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.7 1999/07/16 13:12:42 zeev Exp $ */
+/* $Id: safe_mode.c,v 1.8 1999/08/02 19:16:34 zeev Exp $ */
 
 #include "php.h"
 
@@ -59,7 +59,7 @@ PHPAPI int _php3_checkuid(const char *fn, int mode) {
 	if (mode<3) {
 		ret = stat(fn,&sb);
 		if (ret<0 && mode < 2) {
-			php3_error(E_WARNING,"Unable to access %s",fn);
+			php_error(E_WARNING,"Unable to access %s",fn);
 			return(mode);
 		}
 		if (ret>-1) {
@@ -82,27 +82,27 @@ PHPAPI int _php3_checkuid(const char *fn, int mode) {
 		ret = stat(fn,&sb);
 		*s='/';
 		if (ret<0) {
-			php3_error(E_WARNING, "Unable to access %s",fn);
+			php_error(E_WARNING, "Unable to access %s",fn);
 			return(0);
 		}
 		duid = sb.st_uid;
 	} else {
 		s = emalloc(MAXPATHLEN+1);
 		if (!getcwd(s,MAXPATHLEN)) {
-			php3_error(E_WARNING, "Unable to access current working directory");
+			php_error(E_WARNING, "Unable to access current working directory");
 			return(0);
 		}
 		ret = stat(s,&sb);
 		efree(s);
 		if (ret<0) {
-			php3_error(E_WARNING, "Unable to access %s",s);
+			php_error(E_WARNING, "Unable to access %s",s);
 			return(0);
 		}
 		duid = sb.st_uid;
 	}
 	if (duid == (uid=_php3_getuid())) return(1);
 	else {
-		php3_error(E_WARNING, "SAFE MODE Restriction in effect.  The script whose uid is %ld is not allowed to access %s owned by uid %ld",uid,fn,duid);
+		php_error(E_WARNING, "SAFE MODE Restriction in effect.  The script whose uid is %ld is not allowed to access %s owned by uid %ld",uid,fn,duid);
 		return(0);
 	}
 }

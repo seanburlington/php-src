@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.17 1999/07/26 20:09:08 andrey Exp $ */
+/* $Id: head.c,v 1.18 1999/08/02 19:16:50 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -77,7 +77,7 @@ void php4i_add_header_information(char *header_information, uint header_length)
 
 	if (php3_HeaderPrinted == 1) {
 #if DEBUG
-		php3_error(E_WARNING, "Cannot add more header information - the header was already sent "
+		php_error(E_WARNING, "Cannot add more header information - the header was already sent "
 							  "(header information may be added only before any output is generated from the script - "
 							  "check for text or whitespace outside PHP tags, or calls to functions that output text)");
 #endif
@@ -436,7 +436,7 @@ PHP_FUNCTION(setcookie)
 		WRONG_PARAM_COUNT;
 	}
 	if (php3_HeaderPrinted == 1) {
-		php3_error(E_WARNING, "Oops, php3_SetCookie called after header has been sent\n");
+		php_error(E_WARNING, "Oops, php3_SetCookie called after header has been sent\n");
 		return;
 	}
 	switch (arg_count) {

@@ -15,7 +15,7 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: pageinfo.c,v 1.8 1999/07/16 13:12:57 zeev Exp $ */
+/* $Id: pageinfo.c,v 1.9 1999/08/02 19:16:50 zeev Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"
@@ -72,7 +72,7 @@ static void _php3_statpage(void)
 		path = SG(request_info).path_translated;
 		if (path != NULL) {
 			if (stat(path, &sb) == -1) {
-				php3_error(E_WARNING, "Unable to find file:  '%s'", path);
+				php_error(E_WARNING, "Unable to find file:  '%s'", path);
 				return;
 			}
 			page_uid   = sb.st_uid;

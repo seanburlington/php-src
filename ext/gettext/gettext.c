@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.6 1999/07/27 19:44:45 andrey Exp $ */
+/* $Id: gettext.c,v 1.7 1999/08/02 19:16:41 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -42,7 +42,7 @@ php3_module_entry php3_gettext_module_entry = {
 
 PHP_MINFO_FUNCTION(gettext)
 {
-	php3_printf("GNU gettext support active.");
+	php_printf("GNU gettext support active.");
 }
 
 PHP_FUNCTION(textdomain)

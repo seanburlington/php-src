@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.5 1999/07/16 13:12:57 zeev Exp $ */
+/* $Id: uniqid.c,v 1.6 1999/08/02 19:16:51 zeev Exp $ */
 
 #include "php.h"
 
@@ -54,7 +54,7 @@ PHP_FUNCTION(uniqid)
 
 	/* Do some bounds checking since we are using a char array. */
 	if (strlen(prefix->value.str.val) > 114) {
-		php3_error(E_WARNING, "The prefix to uniqid should not be more than 114 characters.");
+		php_error(E_WARNING, "The prefix to uniqid should not be more than 114 characters.");
 		return;
 	}
 	/* dont need this on windows so lets not do it*/

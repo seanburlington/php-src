@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyr_convert.c,v 1.3 1999/07/16 13:12:55 zeev Exp $ */
+/* $Id: cyr_convert.c,v 1.4 1999/08/02 19:16:50 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -229,7 +229,7 @@ static char * _php3_convert_cyr_string(unsigned char *str, char from, char to)
 		case 'K':
 			break;
 		default:
-			php3_error(E_WARNING, "Unknown source charset: %c", from);
+			php_error(E_WARNING, "Unknown source charset: %c", from);
 			break;
 	}
 
@@ -251,7 +251,7 @@ static char * _php3_convert_cyr_string(unsigned char *str, char from, char to)
 		case 'K':
 			break;
 		default:
-			php3_error(E_WARNING, "Unknown destination charset: %c", to);
+			php_error(E_WARNING, "Unknown destination charset: %c", to);
 			break;
 	}
 

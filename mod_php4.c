@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.16 1999/07/24 14:40:08 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.17 1999/08/02 19:16:34 zeev Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -179,7 +179,7 @@ sapi_module_struct sapi_module = {
 
 	zend_apache_ub_write,			/* unbuffered write */
 
-	php3_error,						/* error handler */
+	php_error,						/* error handler */
 
 	sapi_apache_header_handler,		/* header handler */
 	sapi_apache_send_headers,		/* send headers handler */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_sprintf.c,v 1.3 1999/07/16 13:12:42 zeev Exp $ */
+/* $Id: php3_sprintf.c,v 1.4 1999/08/02 19:16:34 zeev Exp $ */
 
 #include "php_config.h"
 #include <stdio.h>
@@ -25,7 +25,7 @@
 #if BROKEN_SPRINTF
 
 int
-_php3_sprintf (char*s, const char* format, ...)
+php_sprintf (char*s, const char* format, ...)
 {
   va_list args;
   char *ret;

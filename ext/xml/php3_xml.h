@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_xml.h,v 1.5 1999/07/21 14:43:12 ssb Exp $ */
+/* $Id: php3_xml.h,v 1.6 1999/08/02 19:16:53 zeev Exp $ */
 
 #ifndef _PHP_XML_H
 # define _PHP_XML_H
@@ -93,7 +93,7 @@ enum php3_xml_option {
 };
 
 # define RETURN_OUT_OF_MEMORY \
-	php3_error(E_WARNING, "Out of memory");\
+	php_error(E_WARNING, "Out of memory");\
 	RETURN_FALSE
 
 /* for xml_parse_into_struct */

@@ -1,4 +1,4 @@
-# $Id: config.m4,v 1.16 2000/03/26 04:31:52 rubys Exp $
+# $Id: config.m4,v 1.17 2000/04/01 16:21:54 rubys Exp $
 # config.m4 for extension java
 
 AC_MSG_CHECKING(for Java support)
@@ -88,9 +88,9 @@ AC_ARG_WITH(java,
       if test "$PHP_SAPI" = "cgi"; then
         AC_ADD_LIBRARY($JAVA_LIB)
       fi
-    fi
 
-    INSTALL_IT="$INSTALL_IT; \$(INSTALL) -m 0755 \$(srcdir)/ext/java/php_java.jar \$(libdir)"
+      INSTALL_IT="$INSTALL_IT; \$(INSTALL) -m 0755 \$(srcdir)/ext/java/php_java.jar \$(libdir)"
+    fi
 
     AC_MSG_RESULT(yes)
   else

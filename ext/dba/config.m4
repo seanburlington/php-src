@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.29.2.27 2004/12/30 07:02:16 sniper Exp $
+dnl $Id: config.m4,v 1.29.2.28 2005/01/22 01:37:12 sniper Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -81,7 +81,6 @@ AC_ARG_WITH(gdbm,
     done
 
     if test -n "$THIS_INCLUDE"; then
-      unset ac_cv_lib_gdbm_gdbm_open
       PHP_CHECK_LIBRARY(gdbm, gdbm_open, [
         AC_DEFINE_UNQUOTED(GDBM_INCLUDE_FILE, "$THIS_INCLUDE", [ ])
         AC_DEFINE(DBA_GDBM, 1, [ ]) 

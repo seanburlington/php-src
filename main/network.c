@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.72 2002/10/04 18:59:34 wez Exp $ */
+/* $Id: network.c,v 1.73 2002/10/04 19:08:43 sas Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -800,6 +800,7 @@ DUMP_SOCK_STATE("check for EOF", sock);
 	}
 
 #if HAVE_OPENSSL_EXT
+	/* XXX: Where is the complex OpenSSL error handling? */
 	if (sock->ssl_active)
 		nr_bytes = SSL_read(sock->ssl_handle, buf, count);
 	else

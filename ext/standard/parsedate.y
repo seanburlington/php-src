@@ -8,7 +8,7 @@
 **  This code is in the public domain and has no copyright.
 */
 
-/* $Id: parsedate.y,v 1.50 2003/12/10 14:08:06 sniper Exp $ */
+/* $Id: parsedate.y,v 1.51 2003/12/19 12:43:39 wez Exp $ */
 
 #include "php.h"
 
@@ -148,6 +148,7 @@ typedef union _date_ll {
 #define YYSTYPE date_ll
 #define YYLTYPE void
 
+static int yylex (YYSTYPE *lvalp, void *parm);
 %}
 
 /* This grammar has 22 shift/reduce conflicts. */

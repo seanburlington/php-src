@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.31.8.2 2002/12/20 16:37:44 helly Exp $ */
+/* $Id: uniqid.c,v 1.31.8.3 2002/12/20 17:03:37 helly Exp $ */
 
 #include "php.h"
 
@@ -69,8 +69,9 @@ PHP_FUNCTION(uniqid)
 #if defined(__CYGWIN__)
 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "You must use 'more entropy' under CYGWIN.");
 		return;
-#endif
+#else
 		usleep(1);
+#endif
 	}
 #endif
 	gettimeofday((struct timeval *) &tv, (struct timezone *) NULL);

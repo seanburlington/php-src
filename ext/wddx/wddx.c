@@ -27,13 +27,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.24 2000/02/17 23:07:47 andrei Exp $ */
+/* $Id: wddx.c,v 1.25 2000/02/17 23:08:33 andrei Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
 
 #if HAVE_WDDX
-#include "dlist.h"
 
 #include "php_wddx_api.h"
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.24 2001/03/02 00:15:49 sniper Exp $ */
+/* $Id: html.c,v 1.25 2001/04/25 20:14:27 andrei Exp $ */
 
 #include "php.h"
 #include "reg.h"
@@ -44,10 +44,6 @@ static char EntTable[][7] =
 	"ouml","divide","oslash","ugrave","uacute","ucirc",
 	"uuml","yacute","thorn","yuml"
 };
-
-#define ENT_COMPAT    1
-#define ENT_QUOTES    2
-#define ENT_NOQUOTES  4
 
 PHPAPI char *php_escape_html_entities(unsigned char *old, int oldlen, int *newlen, int all, int quote_style)
 {

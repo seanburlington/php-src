@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.53.2.6 2003/02/13 13:42:31 wez Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.53.2.7 2003/02/19 00:49:38 iliaa Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -352,8 +352,13 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 			*new_path='\0';
 			if (strlen(location)<8 || (strncasecmp(location, "http://", sizeof("http://")-1) && strncasecmp(location, "https://", sizeof("https://")-1))) {
 				if (*location != '/') {
-					if (*(location+1) != '\0') {				
-						php_dirname(resource->path, strlen(resource->path));
+					if (*(location+1) != '\0' && resource->path) {		
+						char *s = strrchr(resource->path, '/');
+						if (!s) {
+							s = resource->path;
+							*s = '/';
+						}
+						s[1] = '\0'; 
 						if (resource->path && *(resource->path) == '/' && *(resource->path + 1) == '\0') {
 							snprintf(loc_path, sizeof(loc_path) - 1, "%s%s", resource->path, location);
 						} else {

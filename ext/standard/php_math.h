@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.9 2001/09/03 01:06:23 jeroen Exp $ */
+/* $Id: php_math.h,v 1.10 2001/09/05 19:47:55 sniper Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H
@@ -34,6 +34,12 @@ PHP_FUNCTION(log);
 PHP_FUNCTION(log10);
 PHP_FUNCTION(pow);
 PHP_FUNCTION(sqrt);
+PHP_FUNCTION(srand);
+PHP_FUNCTION(rand);
+PHP_FUNCTION(getrandmax);
+PHP_FUNCTION(mt_srand);
+PHP_FUNCTION(mt_rand);
+PHP_FUNCTION(mt_getrandmax);
 PHP_FUNCTION(abs);
 PHP_FUNCTION(ceil);
 PHP_FUNCTION(floor);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.619 2003/08/03 17:44:38 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.620 2003/08/05 10:29:03 zeev Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1024,8 +1024,8 @@ static void basic_globals_ctor(php_basic_globals *basic_globals_p TSRMLS_DC)
 	BG(left) = -1;
 	BG(user_tick_functions) = NULL;
 	BG(user_filter_map) = NULL;
-	BG(user_compare_func_ptr) = NULL;
-	BG(array_walk_func_ptr) = NULL;
+	BG(user_compare_fci_cache) = empty_fcall_info_cache;
+	/*BG(array_walk_fci_cache) = empty_fcall_info_cache;*/
 	zend_hash_init(&BG(sm_protected_env_vars), 5, NULL, NULL, 1);
 	BG(sm_allowed_env_vars) = NULL;
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.137 2003/08/03 17:44:38 zeev Exp $ */
+/* $Id: xml.c,v 1.138 2003/08/05 10:29:03 zeev Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -406,13 +406,25 @@ static zval *xml_call_handler(xml_parser *parser, zval *handler, zend_function *
 		zval *retval;
 		int i;	
 		int result;
+		zend_fcall_info fci;
 
 		args = emalloc(sizeof(zval **) * argc);
 		for (i = 0; i < argc; i++) {
 			args[i] = &argv[i];
 		}
 		
-		result = fast_call_user_function(EG(function_table), &parser->object, handler, &retval, argc, args, 0, NULL, &function_ptr TSRMLS_CC);
+		fci.size = sizeof(fci);
+		fci.function_table = EG(function_table);
+		fci.function_name = handler;
+		fci.symbol_table = NULL;
+		fci.object_pp = &parser->object;
+		fci.retval_ptr_ptr = &retval;
+		fci.param_count = argc;
+		fci.params = args;
+		fci.no_separation = 0;
+		/*fci.function_handler_cache = &function_ptr;*/
+
+		result = zend_call_function(&fci, NULL TSRMLS_CC);
 		if (result == FAILURE) {
 			zval **method;
 			zval **obj;

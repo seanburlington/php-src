@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.36 2003/06/19 23:13:28 edink Exp $ */
+/* $Id: php_curl.h,v 1.37 2003/08/05 10:29:03 zeev Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -78,20 +78,20 @@ PHP_FUNCTION(curl_multi_close);
 void _php_curl_multi_close(zend_rsrc_list_entry * TSRMLS_DC);
 
 typedef struct {
-	zval          *func_name;
-	zend_function *func_ptr;
-	FILE          *fp;
-	smart_str      buf;
-	int            method;
-	int            type;
+	zval            *func_name;
+	zend_fcall_info fci_cache;
+	FILE            *fp;
+	smart_str       buf;
+	int             method;
+	int             type;
 } php_curl_write;
 
 typedef struct {
-	zval          *func_name;
-	zend_function *func_ptr;
-	FILE          *fp;
-	long           fd;
-	int            method;
+	zval            *func_name;
+	zend_fcall_info fci_cache;
+	FILE            *fp;
+	long            fd;
+	int             method;
 } php_curl_read;
 
 typedef struct {

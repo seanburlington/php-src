@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.121 2003/06/28 05:38:52 sebastian Exp $ */
+/* $Id: basic_functions.h,v 1.122 2003/08/05 10:29:03 zeev Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -137,7 +137,7 @@ typedef signed int php_int32;
 
 #define MT_N (624)
 
-typedef struct {
+typedef struct _php_basic_globals {
 	HashTable *user_shutdown_function_names;
 	HashTable putenv_ht;
 	zval *strtok_zval;
@@ -148,9 +148,9 @@ typedef struct {
 	ulong strtok_len;
 	char str_ebuf[40];
 	zval **array_walk_func_name;
-	zend_function *array_walk_func_ptr;
+	zend_fcall_info_cache array_walk_fci_cache;
 	zval **user_compare_func_name;
-	zend_function *user_compare_func_ptr;
+	zend_fcall_info_cache user_compare_fci_cache;
 	zend_llist *user_tick_functions;
 
 	zval *active_ini_file_section;

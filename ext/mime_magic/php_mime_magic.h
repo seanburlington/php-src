@@ -15,7 +15,7 @@
   | Author:                                                              |
   +----------------------------------------------------------------------+
 
-  $Id: php_mime_magic.h,v 1.5 2002/12/31 16:06:57 sebastian Exp $ 
+  $Id: php_mime_magic.h,v 1.6 2003/01/25 13:33:29 hholzgra Exp $ 
 */
 
 #ifndef PHP_MIME_MAGIC_H
@@ -393,6 +393,8 @@ PHP_FUNCTION(mime_content_type);
 ZEND_BEGIN_MODULE_GLOBALS(mime_magic)
 	char *magicfile;
 	magic_req_rec *req_dat;
+	int    debug;           /* shall magic file parser errors be shown? */
+	char *status;           /* status message for phpinfo() */
 ZEND_END_MODULE_GLOBALS(mime_magic)
 
 /* In every utility function you add that needs to use variables 

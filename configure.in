@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.98 2000/03/07 13:27:37 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.99 2000/03/07 18:05:16 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -23,8 +23,9 @@ fi
 
 cwd=`pwd`
 
-CONFIGURE_COMMAND=$0
-for arg in "$@"; do
+PHP_CONFIG_NICE(config.nice)
+
+for arg in $0 "$@"; do
     CONFIGURE_COMMAND="$CONFIGURE_COMMAND '$arg'"
 done
 

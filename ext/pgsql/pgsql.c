@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.16 1999/09/03 14:58:51 gorgo Exp $ */
+/* $Id: pgsql.c,v 1.17 1999/09/04 13:18:55 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -923,7 +923,7 @@ static void php3_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 			int should_copy;
 
 			if (PG(magic_quotes_runtime)) {
-				data = _php3_addslashes(element,element_len,&data_len,0);
+				data = php_addslashes(element,element_len,&data_len,0);
 				should_copy = 0;
 			} else {
 				data = element;

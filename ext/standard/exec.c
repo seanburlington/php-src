@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.13 1999/08/18 17:23:01 andrey Exp $ */
+/* $Id: exec.c,v 1.14 1999/09/04 13:18:55 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -196,7 +196,7 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 	if (PG(magic_quotes_runtime) && type!=3) {
 		int len;
 		
-		tmp = _php3_addslashes(buf, 0, &len, 0);
+		tmp = php_addslashes(buf, 0, &len, 0);
 		RETVAL_STRINGL(tmp,len,0);
 	} else {
 		RETVAL_STRING(buf,1);

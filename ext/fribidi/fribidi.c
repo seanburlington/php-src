@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fribidi.c,v 1.24 2002/09/26 10:43:42 tal Exp $ */
+/* $Id: fribidi.c,v 1.25 2002/09/26 12:58:31 tal Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -159,12 +159,13 @@ PHP_FUNCTION(fribidi_log2vis)
 	}
 
 	/* allocate space and prepare all local variables */
+	len = Z_STRLEN_PP(logical_str);
 	in_string = estrndup(Z_STRVAL_PP(logical_str), len);
 	alloc_len = len+1;
 
 	u_logical_str = (FriBidiChar*) emalloc(sizeof(FriBidiChar)*alloc_len);
 	u_visual_str = (FriBidiChar*) emalloc(sizeof(FriBidiChar)*alloc_len);
-	
+
 	position_L_to_V_list =  (FriBidiStrIndex *) emalloc(sizeof(FriBidiStrIndex)*alloc_len);
 	position_V_to_L_list =  (FriBidiStrIndex *) emalloc(sizeof(FriBidiStrIndex)*alloc_len);
 	embedding_level_list = (FriBidiLevel *) emalloc(sizeof(FriBidiLevel)*alloc_len);

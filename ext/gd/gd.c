@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.2 2002/11/23 11:26:13 moriyoshi Exp $ */
+/* $Id: gd.c,v 1.221.2.3 2002/12/04 17:28:55 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1525,6 +1525,12 @@ static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char
 				}
 				(*func_p)(im, i, fp);
 				break;
+			case PHP_GDIMG_TYPE_GD:
+				if(im->trueColor){
+					gdImageTrueColorToPalette(im,1,256);
+				}
+				(*func_p)(im, fp);
+				break;
 			default:
 				(*func_p)(im, fp);
 				break;
@@ -1555,6 +1561,12 @@ static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char
 					if(gdImageRed(im, i) == 0) break;
 				}
 				(*func_p)(im, q, tmp);
+				break;
+			case PHP_GDIMG_TYPE_GD:
+				if (im->trueColor) {
+					gdImageTrueColorToPalette(im,1,256);
+				}
+				(*func_p)(im, tmp);
 				break;
 			default:
 				(*func_p)(im, tmp);

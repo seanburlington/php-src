@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.129.2.4 2002/09/09 00:32:40 yohgaki Exp $ */
+/* $Id: SAPI.c,v 1.129.2.5 2002/10/24 11:30:26 hyanantha Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -683,10 +683,20 @@ SAPI_API int sapi_flush(TSRMLS_D)
 	}
 }
 
+#if (defined(NETWARE) && defined(CLIB_STAT_PATCH))
+SAPI_API struct stat_libc *sapi_get_stat(TSRMLS_D)
+#else
 SAPI_API struct stat *sapi_get_stat(TSRMLS_D)
+#endif
 {
 	if (sapi_module.get_stat) {
+#if (defined(NETWARE) && defined(CLIB_STAT_PATCH))
+        /*  This kind of type-casting is actually wrong;
+			but doing it for now since global_stat doesn't seem to be used anywhere particularly */
+        return ((struct stat_libc*)sapi_module.get_stat(TSRMLS_C));
+#else
 		return sapi_module.get_stat(TSRMLS_C);
+#endif
 	} else {
 		if (!SG(request_info).path_translated || (VCWD_STAT(SG(request_info).path_translated, &SG(global_stat))==-1)) {
 			return NULL;

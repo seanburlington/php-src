@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.347 2001/01/13 13:10:50 zeev Exp $ */
+/* $Id: main.c,v 1.348 2001/01/13 13:14:49 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -100,8 +100,6 @@ static MUTEX_T global_lock;
  
 
 static void php_build_argv(char *s, zval *track_vars_array ELS_DC PLS_DC);
-
-void *gLock;					/*mutex variable */
 
 #define SAFE_FILENAME(f) ((f)?(f):"-")
 
@@ -841,9 +839,7 @@ int php_module_startup(sapi_module_struct *sf)
 	}
 #endif
 
-	SET_MUTEX(gLock);
 	le_index_ptr = zend_register_list_destructors_ex(NULL, NULL, "index pointer", 0);
-	FREE_MUTEX(gLock);
 
 	if (php_init_config(sf->php_ini_path_override) == FAILURE) {
 		return FAILURE;

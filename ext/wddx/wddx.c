@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.87 2001/12/11 15:30:51 sebastian Exp $ */
+/* $Id: wddx.c,v 1.88 2002/01/24 16:18:50 andrei Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -389,7 +389,7 @@ static void php_wddx_serialize_string(wddx_packet *packet, zval *var)
 					break;
 
 				default:
-					if (iscntrl((int)*p) && *p != '\n') {
+					if (iscntrl((int)*p)) {
 						FLUSH_BUF();
 						sprintf(control_buf, WDDX_CHAR, *p);
 						php_wddx_add_chunk(packet, control_buf);

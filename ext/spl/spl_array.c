@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.46 2004/05/06 08:57:20 helly Exp $ */
+/* $Id: spl_array.c,v 1.47 2004/05/07 06:13:21 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -721,8 +721,6 @@ SPL_METHOD(Array, seek)
 
 int spl_array_object_count_elements(zval *object, long *count TSRMLS_DC) /* {{{ */
 {
-	*count = 0;
-
 	spl_array_object *intern = (spl_array_object*)zend_object_store_get_object(object TSRMLS_CC);
 	HashTable *aht = HASH_OF(intern->array);
 	HashPosition pos;

@@ -1,6 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP version 4.0													  |
+   | PHP Version 4  													  |
    +----------------------------------------------------------------------+
    | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group					  |
    +----------------------------------------------------------------------+
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.19 2001/10/11 23:33:44 ssb Exp $ */
+/* $Id: recode.c,v 1.20 2001/12/11 15:30:18 sebastian Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -97,7 +97,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.19 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.20 $");
 	php_info_print_table_end();
 
 }

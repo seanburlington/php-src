@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP version 4.0                                                      |
+   | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2001 The PHP Group                                |
+   | Copyright (c) 1997-2002 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: hashtable.h,v 1.3 2001/02/26 06:07:15 andi Exp $
+ * $Id: hashtable.h,v 1.4 2001/12/11 15:30:19 sebastian Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 

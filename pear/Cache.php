@@ -1,6 +1,6 @@
 <?php
 // +----------------------------------------------------------------------+
-// | PHP version 4.0                                                      |
+// | PHP Version 4                                                        |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 1997, 1998, 1999, 2000, 2001 The PHP Group             |
 // +----------------------------------------------------------------------+
@@ -16,7 +16,7 @@
 // |          Sebastian Bergmann <sb@sebastian-bergmann.de>               |
 // +----------------------------------------------------------------------+
 //
-// $Id: Cache.php,v 1.15 2001/08/11 08:08:05 sebastian Exp $
+// $Id: Cache.php,v 1.16 2001/12/11 15:31:06 sebastian Exp $
 
 require_once 'Cache/Error.php';
 
@@ -58,7 +58,7 @@ require_once 'Cache/Error.php';
 *          bad circumstances  (especially with the file container)
 *
 * @author   Ulf Wendel <ulf.wendel@phpdoc.de>
-* @version  $Id: Cache.php,v 1.15 2001/08/11 08:08:05 sebastian Exp $
+* @version  $Id: Cache.php,v 1.16 2001/12/11 15:31:06 sebastian Exp $
 * @package  Cache
 * @access   public
 */

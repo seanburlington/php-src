@@ -1,9 +1,9 @@
 <?php 
 //
 // +----------------------------------------------------------------------+
-// | PHP version 4.0                                                      |
+// | PHP Version 4                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2001 The PHP Group                                |
+// | Copyright (c) 1997-2002 The PHP Group                                |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 2.02 of the PHP license,      |
 // | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearwin.php,v 1.2 2001/10/26 10:07:43 ssb Exp $
+// $Id: pearwin.php,v 1.3 2001/12/11 15:31:50 sebastian Exp $
 
 require_once 'PEAR.php';
 require_once 'Console/Getopt.php';

@@ -1,8 +1,8 @@
 /*
 +----------------------------------------------------------------------+
-| PHP version 4.0                                                      |
+| PHP Version 4                                                        |
 +----------------------------------------------------------------------+
-| Copyright (c) 1997-2001 The PHP Group                                |
+| Copyright (c) 1997-2002 The PHP Group                                |
 +----------------------------------------------------------------------+
 | This source file is subject to version 2.02 of the PHP license,      |
 | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.53 2001/10/15 18:36:43 ssb Exp $ */
+/* $Id: snmp.c,v 1.54 2001/12/11 15:30:24 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

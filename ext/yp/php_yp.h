@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP version 4.0                                                      |
+   | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2001 The PHP Group                                |
+   | Copyright (c) 1997-2002 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_yp.h,v 1.11 2001/07/31 23:47:33 sniper Exp $ */ 
+/* $Id: php_yp.h,v 1.12 2001/12/11 15:30:56 sebastian Exp $ */ 
 
 #ifndef PHP_YP_H
 #define PHP_YP_H

@@ -1,8 +1,8 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP version 4.0                                                      |
+   | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group                   |
+   | Copyright (c) 1997-2002 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -12,13 +12,12 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors:                                                             |
-   | Wez Furlong <wez@thebrainroom.com>                                   |
+   | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    | Credit also given to Double Precision Inc. who wrote the code that   |
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_mailparse.h,v 1.4 2001/09/09 13:28:55 derick Exp $ */
+/* $Id: php_mailparse.h,v 1.5 2001/12/11 15:29:49 sebastian Exp $ */
 
 #ifndef PHP_MAILPARSE_H
 #define PHP_MAILPARSE_H

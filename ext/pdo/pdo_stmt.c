@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.54 2005/01/12 04:49:12 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.55 2005/01/17 23:59:16 wez Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1060,12 +1060,14 @@ static union _zend_function *dbstmt_method_get(
 		/* not a pre-defined method, nor a user-defined method; check
 		 * the driver specific methods */
 		if (!stmt->dbh->cls_methods[PDO_DBH_DRIVER_METHOD_KIND_STMT]) {
-			if (!pdo_hash_methods(stmt->dbh, PDO_DBH_DRIVER_METHOD_KIND_STMT TSRMLS_CC)) {
+			if (!pdo_hash_methods(stmt->dbh, 
+				PDO_DBH_DRIVER_METHOD_KIND_STMT TSRMLS_CC)
+				|| !stmt->dbh->cls_methods[PDO_DBH_DRIVER_METHOD_KIND_STMT]) {
 				goto out;
 			}
 		}
 
-		if (zend_hash_find(stmt->dbh->cls_methods[PDO_DBH_DRIVER_METHOD_KIND_DBH],
+		if (zend_hash_find(stmt->dbh->cls_methods[PDO_DBH_DRIVER_METHOD_KIND_STMT],
 				lc_method_name, method_len+1, (void**)&fbc) == FAILURE) {
 			fbc = NULL;
 			goto out;

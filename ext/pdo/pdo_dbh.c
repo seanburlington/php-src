@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.44 2005/01/12 04:49:12 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.45 2005/01/17 23:59:16 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -839,7 +839,9 @@ static union _zend_function *dbh_method_get(
 		/* not a pre-defined method, nor a user-defined method; check
 		 * the driver specific methods */
 		if (!dbh->cls_methods[PDO_DBH_DRIVER_METHOD_KIND_DBH]) {
-			if (!pdo_hash_methods(dbh, PDO_DBH_DRIVER_METHOD_KIND_DBH TSRMLS_CC)) {
+			if (!pdo_hash_methods(dbh,
+				PDO_DBH_DRIVER_METHOD_KIND_DBH TSRMLS_CC)
+				|| !dbh->cls_methods[PDO_DBH_DRIVER_METHOD_KIND_DBH]) {
 				goto out;
 			}
 		}

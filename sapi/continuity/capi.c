@@ -12,7 +12,7 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Alex Leigh <aleigh@tessier.com>                              |
+  | Author: Alex Leigh <php (at) postfin (dot) com>                      |
   +----------------------------------------------------------------------+
 */
 
@@ -110,7 +110,7 @@ PHP_MSHUTDOWN_FUNCTION(continuity)
 PHP_MINFO_FUNCTION(continuity)
 {
         php_info_print_table_start();
-        php_info_print_table_row(2, "Continuity Module Revision", "$Revision: 1.8 $");
+        php_info_print_table_row(2, "Continuity Module Revision", "$Revision: 1.9 $");
         php_info_print_table_row(2, "Server Version", conFget_build());
 #ifdef CONTINUITY_CDPEXT
 	php_info_print_table_row(2,"CDP Extensions", "enabled");

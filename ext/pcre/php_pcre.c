@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.132.2.2 2002/12/31 16:35:08 sebastian Exp $ */
+/* $Id: php_pcre.c,v 1.132.2.3 2003/01/18 20:49:02 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1043,6 +1043,10 @@ static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_callabl
 	if (ZEND_NUM_ARGS() < 3 || ZEND_NUM_ARGS() > 4 ||
 		zend_get_parameters_ex(ZEND_NUM_ARGS(), &regex, &replace, &subject, &limit) == FAILURE) {
 		WRONG_PARAM_COUNT;
+	}
+	if (Z_TYPE_PP(replace) == IS_ARRAY && Z_TYPE_PP(regex) != IS_ARRAY) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Parameter mismatch, pattern is a string while replacement in an array.");
+		RETURN_FALSE;
 	}
 
 	SEPARATE_ZVAL(replace);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.31 2004/04/14 23:26:56 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.32 2004/04/25 11:14:11 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -699,8 +699,8 @@ SPL_METHOD(dual_it, key)
 	intern = (spl_dual_it_object*)zend_object_store_get_object(getThis() TSRMLS_CC);
 
 	if (intern->current.data) {
-		if (intern->current.key_type == IS_STRING) {
-			RETURN_STRINGL(intern->current.str_key, intern->current.str_key_len, 1);
+		if (intern->current.key_type == HASH_KEY_IS_STRING) {
+			RETURN_STRINGL(intern->current.str_key, intern->current.str_key_len-1, 1);
 		} else {
 			RETURN_LONG(intern->current.int_key);
 		}

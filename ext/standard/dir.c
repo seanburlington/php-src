@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.122 2003/07/03 14:34:02 hholzgra Exp $ */
+/* $Id: dir.c,v 1.123 2003/07/03 14:54:03 hholzgra Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -433,11 +433,11 @@ PHP_FUNCTION(glob)
 		if (flags & GLOB_ONLYDIR) {
 			struct stat s;
 
-			if (0 != stat(globbuf.gl_pathv[n], &s)) {
+			if (0 != VCWD_STAT(globbuf.gl_pathv[n], &s)) {
 				continue;
 			}
 
-			if (!S_ISDIR(s.st_mode)) {
+			if (S_IFDIR != s.st_mode & S_IFMT) {
 				continue;
 			}
 		}

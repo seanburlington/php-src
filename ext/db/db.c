@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.10 1999/10/07 12:49:25 thies Exp $ */
+/* $Id: db.c,v 1.11 1999/10/07 14:00:18 andrei Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 # include "dl/phpdl.h"
@@ -273,7 +273,6 @@ dbm_info *_php3_dbmopen(char *filename, char *mode) {
 	int ret, lock=0;
 	char *lockfn = NULL;
 	int lockfd = 0;
-	PLS_FETCH();
 
 #if NFS_HACK
 	int last_try = 0;
@@ -283,6 +282,7 @@ dbm_info *_php3_dbmopen(char *filename, char *mode) {
 
 	DBM_TYPE dbf=NULL;
 	DBM_MODE_TYPE imode;
+	PLS_FETCH();
 
 	if (filename == NULL) {
 		php_error(E_WARNING, "NULL filename passed to _php3_dbmopen()");

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.119 2001/08/14 08:33:21 thies Exp $ */
+/* $Id: mod_php4.c,v 1.119.2.1 2001/09/01 01:45:51 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -498,7 +498,7 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 		fh.opened_path = NULL;
 		fh.free_filename = 0;
 		fh.type = ZEND_HANDLE_FILENAME;
-		zend_execute_scripts(ZEND_INCLUDE TSRMLS_CC, 1, &fh);
+		zend_execute_scripts(ZEND_INCLUDE TSRMLS_CC, NULL, 1, &fh);
 		return OK;
 	}
 

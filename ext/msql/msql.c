@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: msql.c,v 1.5 1999/07/16 13:12:51 zeev Exp $ */
+/* $Id: msql.c,v 1.6 1999/07/16 16:50:48 zeev Exp $ */
 
 #include "php.h"
 #if COMPILE_DL
@@ -1093,6 +1093,8 @@ DLEXPORT PHP_FUNCTION(msql_fetch_object)
 	php3_msql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU);
 	if (return_value->type==IS_ARRAY) {
 		return_value->type=IS_OBJECT;
+		return_value->value.obj.properties = return_value->value.ht;
+		return_value->value.obj.ce = &zend_standard_class_def;
 	}
 }
 /* }}} */

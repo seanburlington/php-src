@@ -1,0 +1,6 @@
+# $Source: /repository/php-src/ext/wddx/Attic/setup.stub,v $
+# $Id: setup.stub,v 1.1 1999/07/19 20:24:03 andrey Exp $
+
+define_option with-wddx 'wddx support?' yesnodir no \
+'    Whether to build the wddx extension.'
+	

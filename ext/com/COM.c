@@ -18,7 +18,7 @@
    |         Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: COM.c,v 1.88 2002/10/17 16:21:00 phanto Exp $ */
+/* $Id: COM.c,v 1.89 2002/10/31 08:23:55 wez Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -1710,7 +1710,7 @@ PHP_FUNCTION(com_propget)
 	int arg_count = ZEND_NUM_ARGS();
 	VARIANT *var_result;
 
-	if (arg_count<3) {
+	if (arg_count < 2) {
 		ZEND_WRONG_PARAM_COUNT();
 	}
 	arguments = (zval **) emalloc(sizeof(pval *)*arg_count);

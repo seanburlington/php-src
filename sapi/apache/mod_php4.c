@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.130 2002/05/08 12:33:44 hirokawa Exp $ */
+/* $Id: mod_php4.c,v 1.131 2002/05/11 03:33:29 zeev Exp $ */
 
 #include "php_apache_http.h"
 
@@ -356,7 +356,7 @@ static sapi_module_struct apache_sapi_module = {
 	sapi_apache_register_server_variables,		/* register server variables */
 	php_apache_log_message,			/* Log message */
 
-	NULL,					/* php.ini path override */
+	NULL,							/* php.ini path override */
 
 #ifdef PHP_WIN32
 	NULL,

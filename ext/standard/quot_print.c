@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: quot_print.c,v 1.21 2002/04/02 06:41:23 derick Exp $ */
+/* $Id: quot_print.c,v 1.22 2002/10/07 21:58:56 kalowsky Exp $ */
 
 #include <stdlib.h>
 
@@ -80,7 +80,7 @@ PHP_FUNCTION(quoted_printable_decode)
 		case '=':
 			if (str_in[i + 1] && str_in[i + 2] && 
 				isxdigit((int) str_in[i + 1]) && 
-				isxdigit((int) str_in[i + 1]))
+				isxdigit((int) str_in[i + 2]))
 			{
 				str_out[j++] = (php_hex2int((int) str_in[i + 1]) << 4) 
 						+ php_hex2int((int) str_in[i + 2]);

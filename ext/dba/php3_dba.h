@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_dba.h,v 1.1 1999/07/21 15:12:32 sas Exp $ */
+/* $Id: php3_dba.h,v 1.2 1999/09/17 09:56:30 sas Exp $ */
 
 #ifndef _DBA_H
 #define _DBA_H
@@ -48,7 +48,7 @@ typedef struct dba_info {
 	dba_mode_t mode;
 	/* arg[cv] are only available when the dba_open handler is called! */
 	int argc;
-	pval **argv;
+	pval ***argv;
 	/* private */
 	struct dba_handler *hnd;
 } dba_info;
@@ -91,7 +91,7 @@ extern php3_module_entry dba_module_entry;
 	DBA_OPTIMIZE_FUNC(x); \
 	DBA_SYNC_FUNC(x)
 
-#define VALLEN(p) (p)->value.str.val, (p)->value.str.len
+#define VALLEN(p) (*p)->value.str.val, (*p)->value.str.len
 	
 PHP_FUNCTION(dba_open);
 PHP_FUNCTION(dba_popen);

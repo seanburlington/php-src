@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_ndbm.c,v 1.1 1999/07/21 15:12:31 sas Exp $ */
+/* $Id: dba_ndbm.c,v 1.2 1999/09/17 09:56:30 sas Exp $ */
 
 #include "php.h"
 
@@ -69,8 +69,8 @@ DBA_OPEN_FUNC(ndbm)
 	}
 
 	if(info->argc > 0) {
-		convert_to_long(info->argv[0]);
-		filemode = info->argv[0]->value.lval;
+		convert_to_long_ex(info->argv[0]);
+		filemode = (*info->argv[0])->value.lval;
 	}
 
 	dbf = dbm_open(info->path, gmode, filemode);

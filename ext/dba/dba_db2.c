@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.2 1999/08/17 14:18:27 sas Exp $ */
+/* $Id: dba_db2.c,v 1.3 1999/09/17 09:56:30 sas Exp $ */
 
 #include "php.h"
 
@@ -78,8 +78,8 @@ DBA_OPEN_FUNC(db2)
 		return FAILURE;
 
 	if(info->argc > 0) {
-		convert_to_long(info->argv[0]);
-		filemode = info->argv[0]->value.lval;
+		convert_to_long_ex(info->argv[0]);
+		filemode = (*info->argv[0])->value.lval;
 	}
 
 	if(!db_open(info->path, type, gmode, filemode, NULL, NULL, &dbp)) {

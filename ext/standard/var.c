@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.92 2001/07/09 09:03:05 thies Exp $ */
+/* $Id: var.c,v 1.93 2001/07/11 05:57:18 shane Exp $ */
 
 
 /* {{{ includes 
@@ -342,6 +342,7 @@ PHPAPI void php_var_serialize(zval *buf, zval **struc, HashTable *var_hash)
 							FREE_ZVAL(d);
 							break;
 					}
+					if (data == struc) return;
 					php_var_serialize(buf, data, var_hash);
 				}
 			}

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.28 2000/12/01 12:29:29 sas Exp $ */
+/* $Id: dba.c,v 1.29 2000/12/04 10:22:46 sas Exp $ */
 
 #include "php.h"
 
@@ -220,9 +220,14 @@ static PHP_MINFO_FUNCTION(dba)
 
 	php_info_print_table_start();
  	php_info_print_table_row(2, "DBA support", "enabled");
-	php_info_print_table_row(2, "Supported handlers", handlers.c);
+	if (handlers.c) {
+		smart_str_0(&handlers);
+		php_info_print_table_row(2, "Supported handlers", handlers.c);
+		smart_str_free(&handlers);
+	} else {
+		php_info_print_table_row(2, "Supported handlers", "none");
+	}
 	php_info_print_table_end();
-	smart_str_free(&handlers);
 }
                                 
 

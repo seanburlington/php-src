@@ -1,5 +1,5 @@
 [PHP]
-; $Id: php.ini-dist,v 1.79 2001/05/22 19:16:51 sbergmann Exp $
+; $Id: php.ini-dist,v 1.80 2001/05/31 21:03:11 sniper Exp $
 
 ;;;;;;;;;;;;;;;;;;;
 ; About this file ;
@@ -307,8 +307,11 @@ default_mimetype = "text/html"
 ; Paths and Directories ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; UNIX: "/path1:/path2"  Windows: "\path1;\path2"
-;include_path =
+; UNIX: "/path1:/path2"  
+;include_path = ".:/php/includes"
+;
+; Windows: "\path1;\path2"
+;include_path = ".;c:\php\includes"
 
 ; The root of the PHP pages, used only if nonempty.
 doc_root =

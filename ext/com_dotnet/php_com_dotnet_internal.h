@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_com_dotnet_internal.h,v 1.2 2003/10/13 01:29:39 wez Exp $ */
+/* $Id: php_com_dotnet_internal.h,v 1.3 2003/10/17 20:52:17 wez Exp $ */
 
 #ifndef PHP_COM_DOTNET_INTERNAL_H
 #define PHP_COM_DOTNET_INTERNAL_H
@@ -140,6 +140,9 @@ PHPAPI ITypeLib *php_com_load_typelib(char *search_string, int mode,
 PHPAPI int php_com_import_typelib(ITypeLib *TL, int mode,
 		int codepage TSRMLS_DC);
 void php_com_typelibrary_dtor(void *pDest);
+
+/* com_iterator.c */
+zend_object_iterator *php_com_iter_get(zend_class_entry *ce, zval *object TSRMLS_DC);
 
 
 #endif

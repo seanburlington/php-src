@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.47.2.3 2003/06/05 04:15:03 sniper Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.47.2.4 2003/08/09 16:13:47 iliaa Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -225,6 +225,27 @@ AC_ARG_WITH(regex,
 ],[
   REGEX_TYPE=php
 ])
+
+dnl
+dnl round fuzz
+dnl
+AC_MSG_CHECKING([whether rounding works as expected])
+AC_TRY_RUN([
+#include <math.h>
+  int main() {
+    return floor(0.045*pow(10,2) + 0.5)/10.0 != 0.5;
+  }
+],[
+  PHP_ROUND_FUZZ=0.5
+  AC_MSG_RESULT(yes)
+],[
+  PHP_ROUND_FUZZ=0.50000000001
+  AC_MSG_RESULT(no)
+],[
+  PHP_ROUND_FUZZ=0.50000000001
+  AC_MSG_RESULT(cross compile)
+])
+AC_DEFINE_UNQUOTED(PHP_ROUND_FUZZ, $PHP_ROUND_FUZZ, [ see #24142 ])
 
 AC_FUNC_FNMATCH	
 

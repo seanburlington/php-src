@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.26 2000/08/22 21:27:49 kalowsky Exp $ */
+/* $Id: php_odbc.h,v 1.27 2000/09/29 19:03:23 kalowsky Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -41,7 +41,6 @@
  #include <cli0core.h>
  #include <cli0ext1.h>
  /*the following help for SOLID 3.0 */
- #include <cli0cli.h>
  #include <cli0env.h>
 #elif defined(HAVE_SOLID_35)
  #if !defined(PHP_WIN32)

@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.16 2002/06/06 08:50:31 cox Exp $
+  $Id: CLI.php,v 1.17 2002/06/06 10:16:01 ssb Exp $
 */
 
 require_once "PEAR.php";
@@ -102,7 +102,7 @@ class PEAR_Frontend_CLI extends PEAR
 
     function displayFatalError($eobj)
     {
-        $this->_displayError($eobj);
+        $this->displayError($eobj);
         exit(1);
     }
 

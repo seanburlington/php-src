@@ -19,7 +19,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.24 2001/10/11 22:11:34 ssb Exp $
+// $Id: PEAR.php,v 1.25 2001/10/31 05:44:19 ssb Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -533,7 +533,7 @@ class PEAR_Error
     var $level                = E_USER_NOTICE;
     var $code                 = -1;
     var $message              = '';
-    var $debuginfo            = '';
+    var $userinfo             = '';
 
     // Wait until we have a stack-groping function in PHP.
     //var $file    = '';

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.125.2.8 2003/03/25 19:26:18 rasmus Exp $ */
+/* $Id: sockets.c,v 1.125.2.9 2003/04/01 18:12:24 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1113,19 +1113,23 @@ PHP_FUNCTION(socket_iovec_alloc)
 	convert_to_long_ex(args[0]);
 	num_vectors = Z_LVAL_PP(args[0]);
 
-	if((argc-1)	< num_vectors) {
+	if(num_vectors < 0 || (argc-1) < num_vectors) {
 		efree(args);
 		WRONG_PARAM_COUNT;
 	}
+
 	vector_array = emalloc(sizeof(struct iovec)*(num_vectors+1));
 
 	for (i = 0, j = 1; i < num_vectors; i++, j++) {
 		convert_to_long_ex(args[j]);
-	
-		if(Z_LVAL_PP(args[j])>0) {
-			vector_array[i].iov_base	= (char*)emalloc(Z_LVAL_PP(args[j]));
-			vector_array[i].iov_len		= Z_LVAL_PP(args[j]);
+		if(Z_LVAL_PP(args[j])<=0 || Z_LVAL_PP(args[j])>1048576) {
+	        php_error(E_WARNING, "%s() vector %d is invalid", get_active_function_name(TSRMLS_C), j);
+			efree(args);
+			efree(vector_array);
+			RETURN_FALSE;
 		}
+		vector_array[i].iov_base	= (char*)emalloc(Z_LVAL_PP(args[j]));
+		vector_array[i].iov_len		= Z_LVAL_PP(args[j]);
 	}
 	
 	efree(args);

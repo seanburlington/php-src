@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.143 2002/03/15 21:03:07 wez Exp $ */
+/* $Id: fopen_wrappers.c,v 1.144 2002/05/11 19:58:40 rasmus Exp $ */
 
 /* {{{ includes
  */
@@ -219,7 +219,7 @@ PHPAPI int php_check_safe_mode_include_dir(char *path TSRMLS_DC)
 	}
 
 	/* Nothing to check... */
-	return 0;
+	return -1;
 }
 /* }}} */
 

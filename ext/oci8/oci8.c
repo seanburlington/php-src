@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.134 2001/07/11 12:42:22 thies Exp $ */
+/* $Id: oci8.c,v 1.135 2001/07/14 12:45:42 thies Exp $ */
 
 /* TODO list:
  *
@@ -581,7 +581,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.134 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.135 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -4077,8 +4077,8 @@ PHP_FUNCTION(ociparse)
 
 /* }}} */
 
-/* {{{ proto int ocisetprefetch(int conn, string query)
-   Set a prefetch query??? */
+/* {{{ proto int ocisetprefetch(int stmt, int prefetch_rows)
+  sets the number of rows to be prefetched on execute to prefetch_rows for stmt */
 
 PHP_FUNCTION(ocisetprefetch)
 {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.54 2003/04/19 15:01:22 helly Exp $ */
+/* $Id: assert.c,v 1.55 2003/04/19 19:06:52 helly Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -77,7 +77,7 @@ PHP_INI_END()
 
 static void php_assert_init_globals(zend_assert_globals *assert_globals_p TSRMLS_DC)
 {
-	ASSERTG(callback) = NULL;
+	assert_globals_p->callback = NULL;
 }
 
 PHP_MINIT_FUNCTION(assert)

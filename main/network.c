@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.83.2.22 2003/11/29 12:02:40 wez Exp $ */
+/* $Id: network.c,v 1.83.2.23 2004/01/14 14:54:14 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -628,6 +628,22 @@ PHPAPI php_stream *_php_stream_sock_open_from_socket(int socket, const char *per
 	memset(sock, 0, sizeof(php_netstream_data_t));
 
 	sock->is_blocked = 1;
+
+#if !defined(PHP_WIN32) && (defined(O_NONBLOCK) || defined(O_NDELAY))
+	if (socket >= 0 && socket < 3) {
+		/* mini-hack: if we are opening stdin, stdout or stderr,
+		 * we need to check to see if they are currently in
+		 * blocking or non-blocking mode. */
+		int flags = fcntl(socket, F_GETFL);
+
+#ifdef O_NONBLOCK
+		sock->is_blocked = !(flags & O_NONBLOCK);
+#else
+		sock->is_blocked = !(flags & O_NDELAY);
+#endif
+	}
+#endif
+	
 	sock->timeout.tv_sec = FG(default_socket_timeout);
 	sock->timeout.tv_usec = 0;
 	sock->socket = socket;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.9 2004/05/20 18:44:12 gschlossnagle Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.10 2004/05/21 22:19:33 gschlossnagle Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -75,7 +75,6 @@ int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len, char **ou
 	int padding;
 	HashTable *params = stmt->bound_params;
 	struct pdo_bound_param_data *param;
-
 	/* allocate buffer for query with expanded binds, ptr is our writing pointer */
 	newbuffer_len = inquery_len;
 
@@ -123,6 +122,7 @@ int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len, char **ou
 			/* stupid keys need to be null-terminated, even though we know their length */
 			crutch  = s.tok[s.cur-s.tok];
 			s.tok[s.cur-s.tok] = '\0';
+			fprintf(stderr, "%d %s\n", s.cur-s.tok + 1, s.tok);
 			if((SUCCESS == zend_hash_find(params, s.tok, s.cur-s.tok + 1,(void **)&param))  
 			    ||
 			   (SUCCESS == zend_hash_index_find(params, bindno, (void **)&param))) 

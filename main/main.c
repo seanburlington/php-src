@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.543 2003/03/19 08:22:12 sniper Exp $ */
+/* $Id: main.c,v 1.544 2003/03/26 07:44:10 sebastian Exp $ */
 
 /* {{{ includes
  */
@@ -1697,7 +1697,7 @@ PHPAPI int php_lint_script(zend_file_handle *file TSRMLS_DC)
 		zend_destroy_file_handle(file TSRMLS_CC);
 
 		if (op_array) {
-			destroy_op_array(op_array);
+			destroy_op_array(op_array TSRMLS_CC);
 			efree(op_array);
 			return SUCCESS;
 		} else {

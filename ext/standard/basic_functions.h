@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.28 1999/11/01 20:51:04 andrei Exp $ */
+/* $Id: basic_functions.h,v 1.29 1999/11/02 03:47:09 evan Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -137,6 +137,8 @@ PHP_FUNCTION(array_pad);
 
 PHP_FUNCTION(getservbyname);
 PHP_FUNCTION(getservbyport);
+PHP_FUNCTION(getprotobyname);
+PHP_FUNCTION(getprotobynumber);
 
 #if HAVE_PUTENV
 typedef struct {

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.111.2.17 2005/01/22 12:29:13 helly Exp $ */
+/* $Id: php_reflection.c,v 1.111.2.18 2005/02/23 12:33:33 derick Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -2018,7 +2018,7 @@ ZEND_METHOD(reflection_method, isDestructor)
 
 	METHOD_NOTSTATIC_NUMPARAMS(0);
 	GET_REFLECTION_OBJECT_PTR(mptr);
-	RETURN_BOOL(mptr->common.fn_flags && ZEND_ACC_DTOR);
+	RETURN_BOOL(mptr->common.fn_flags & ZEND_ACC_DTOR);
 }
 /* }}} */
 

@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.85 2002/03/09 11:23:48 sander Exp $ */
+/* $Id: datetime.c,v 1.86 2002/05/06 21:44:43 mfischer Exp $ */
 
 
 #include "php.h"

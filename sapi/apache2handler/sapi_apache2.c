@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.14 2003/05/21 09:34:14 zeev Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.15 2003/05/23 02:42:22 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -412,7 +412,7 @@ static void php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 	char *content_type;
 	const char *auth;
 
-	SG(sapi_headers).http_response_code = 200;
+	SG(sapi_headers).http_response_code = !r->status ? HTTP_OK : r->status;
 	SG(request_info).content_type = apr_table_get(r->headers_in, "Content-Type");
 	SG(request_info).query_string = apr_pstrdup(r->pool, r->args);
 	SG(request_info).request_method = r->method;

@@ -1,16 +1,13 @@
 --TEST--
 InterBase: binding (may take a while)
 --SKIPIF--
-<?php if (!extension_loaded("interbase")) print "skip"; ?>
+<?php include("skipif.inc"); ?>
 --POST--
 --GET--
 --FILE--
-<?
-/* $Id: 006.phpt,v 1.2 2002/03/19 16:52:41 ludoo Exp $ */
+<?php
 
-    require(dirname(__FILE__)."/interbase.inc");
-    
-	$test_base = dirname(__FILE__)."/ibase_test.tmp";
+    require("interbase.inc");
     
     ibase_connect($test_base);
 

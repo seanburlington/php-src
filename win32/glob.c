@@ -34,7 +34,7 @@
  * SUCH DAMAGE.
  */
 
-/* $Id: glob.c,v 1.1 2002/05/19 14:32:24 edink Exp $ */
+/* $Id: glob.c,v 1.2 2002/06/04 21:15:35 edink Exp $ */
 
 /*
  * glob(3) -- a superset of the one defined in POSIX 1003.2.
@@ -392,10 +392,8 @@ globtilde(pattern, patbuf, patbuf_len, pglob)
 		/*
 		 * Expand a ~user
 		 */
-		if ((pwd = getpwnam((char*) patbuf)) == NULL) {
-			fprintf (stderr, "here (%s)\n", patbuf);
+		if ((pwd = getpwnam((char*) patbuf)) == NULL)
 			return pattern;
-		}
 		else
 			h = pwd->pw_dir;
 	}

@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.109 2000/12/16 20:52:43 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.110 2001/01/21 17:26:44 rasmus Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -66,7 +66,9 @@
 #else
 #include <netinet/in.h>
 #include <netdb.h>
+#if HAVE_ARPA_INET_H
 #include <arpa/inet.h>
+#endif
 #endif
 
 #ifdef PHP_WIN32

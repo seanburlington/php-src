@@ -15,7 +15,7 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.13 2001/01/17 06:40:48 rasmus Exp $ */
+/* $Id: network.c,v 1.14 2001/01/21 17:26:44 rasmus Exp $ */
 
 #include "php.h"
 
@@ -36,7 +36,9 @@
 #ifndef PHP_WIN32
 #include <netinet/in.h>
 #include <netdb.h>
+#if HAVE_ARPA_INET_H
 #include <arpa/inet.h>
+#endif
 #else
 int		 inet_aton(const char *, struct in_addr *);
 #endif

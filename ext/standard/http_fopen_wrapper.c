@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.5 2001/01/13 13:02:19 zeev Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.6 2001/01/21 17:26:43 rasmus Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -51,7 +51,9 @@
 #else
 #include <netinet/in.h>
 #include <netdb.h>
+#if HAVE_ARPA_INET_H
 #include <arpa/inet.h>
+#endif
 #endif
 
 #ifdef PHP_WIN32

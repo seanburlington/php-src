@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.28 2000/08/03 19:26:19 hholzgra Exp $ */
+/* $Id: mail.c,v 1.29 2001/01/21 17:26:43 rasmus Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -25,7 +25,12 @@
 #include "ext/standard/info.h"
 #if !defined(PHP_WIN32)
 #include "build-defs.h"
+#if HAVE_SYSEXITS_H
 #include <sysexits.h>
+#endif
+#if HAVE_SYS_SYSEXITS_H
+#include <sys/sysexits.h>
+#endif
 #endif
 #include "php_mail.h"
 #include "php_ini.h"

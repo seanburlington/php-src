@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.60 2001/01/13 23:49:44 zeev Exp $ */
+/* $Id: fsock.c,v 1.61 2001/01/21 17:26:43 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -48,7 +48,9 @@
 #else
 #include <netinet/in.h>
 #include <netdb.h>
+#if HAVE_ARPA_INET_H
 #include <arpa/inet.h>
+#endif
 #endif
 #ifdef PHP_WIN32
 #undef AF_UNIX
@@ -136,7 +138,8 @@ PHPAPI int connect_nonb(int sockfd,
 						struct timeval *timeout)
 {
 /* probably won't work on Win32, someone else might try it (read: fix it ;) */
-#if !defined(PHP_WIN32) && (defined(O_NONBLOCK) || defined(O_NDELAY))
+
+#if (!defined(__BEOS__) && !defined(PHP_WIN32)) && (defined(O_NONBLOCK) || defined(O_NDELAY))
 
 #ifndef O_NONBLOCK
 #define O_NONBLOCK O_NDELAY

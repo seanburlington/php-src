@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.135 2001/01/14 14:11:38 thies Exp $ */
+/* $Id: file.c,v 1.136 2001/01/21 17:26:43 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -50,7 +50,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#if HAVE_ARPA_INET_H
 #include <arpa/inet.h>
+#endif
 #endif
 #include "ext/standard/head.h"
 #include "safe_mode.h"
@@ -1947,7 +1949,7 @@ PHP_FUNCTION(fgetcsv) {
 /* }}} */
 
 
-#if !defined(PHP_WIN32) || defined(ZTS)
+#if (!defined(PHP_WIN32) && !defined(__BEOS__)) || defined(ZTS)
 /* {{{ proto string realpath(string path)
    Return the resolved path */
 PHP_FUNCTION(realpath)

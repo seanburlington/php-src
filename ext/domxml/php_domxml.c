@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.46 2004/04/06 17:56:11 rrichards Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.47 2004/06/19 15:09:46 sesser Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -5360,7 +5360,8 @@ PHP_FUNCTION(domxml_xslt_process)
 	xmlDocPtr xmldocp;
 	xmlDocPtr docp;
 	char **params = NULL;
-	int ret, clone = -1;
+	int ret;
+	long clone = -1;
 	char *filename;
 	int filename_len = 0;
 	FILE *f;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.111 2002/05/02 16:45:22 jason Exp $ */
+/* $Id: sockets.c,v 1.112 2002/05/07 18:47:17 jason Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1031,7 +1031,7 @@ PHP_FUNCTION(socket_bind)
 					RETURN_FALSE;
 				}
 				
-				retval = bind(php_sock->bsd_socket, (struct sockaddr *)sa, sizeof(sa_storage));
+				retval = bind(php_sock->bsd_socket, (struct sockaddr *)sa, sizeof(struct sockaddr_in));
 				break;
 			}
 		

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.49 2002/10/02 02:11:27 yohgaki Exp $ */
+/* $Id: php_pgsql.h,v 1.50 2002/10/02 02:41:21 yohgaki Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -71,6 +71,7 @@ PHP_FUNCTION(pg_dbname);
 PHP_FUNCTION(pg_port);
 PHP_FUNCTION(pg_tty);
 PHP_FUNCTION(pg_options);
+PHP_FUNCTION(pg_ping);
 /* query functions */
 PHP_FUNCTION(pg_query);
 PHP_FUNCTION(pg_send_query);

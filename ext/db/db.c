@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.23 2000/02/19 23:21:26 zeev Exp $ */
+/* $Id: db.c,v 1.24 2000/02/26 03:20:49 zeev Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 # include "dl/phpdl.h"
@@ -1071,19 +1071,19 @@ PHP_MINIT_FUNCTION(db)
 {
 #if defined(THREAD_SAFE)
 	dbm_global_struct *dbm_globals;
-	PHP3_MUTEX_ALLOC(dbm_mutex);
-	PHP3_MUTEX_LOCK(dbm_mutex);
+	PHP_MUTEX_ALLOC(dbm_mutex);
+	PHP_MUTEX_LOCK(dbm_mutex);
 	numthreads++;
 	if (numthreads==1){
 		if (!PHP3_TLS_PROC_STARTUP(DbmTls)){
-			PHP3_MUTEX_UNLOCK(dbm_mutex);
-			PHP3_MUTEX_FREE(dbm_mutex);
+			PHP_MUTEX_UNLOCK(dbm_mutex);
+			PHP_MUTEX_FREE(dbm_mutex);
 			return FAILURE;
 		}
 	}
-	PHP3_MUTEX_UNLOCK(dbm_mutex);
+	PHP_MUTEX_UNLOCK(dbm_mutex);
 	if(!PHP3_TLS_THREAD_INIT(DbmTls,dbm_globals,dbm_global_struct)){
-		PHP3_MUTEX_FREE(dbm_mutex);
+		PHP_MUTEX_FREE(dbm_mutex);
 		return FAILURE;
 	}
 #endif
@@ -1096,15 +1096,15 @@ static PHP_MSHUTDOWN_FUNCTION(db)
 {
 #ifdef THREAD_SAFE
 	PHP3_TLS_THREAD_FREE(dbm_globals);
-	PHP3_MUTEX_LOCK(dbm_mutex);
+	PHP_MUTEX_LOCK(dbm_mutex);
 	numthreads--;
 	if (numthreads<1) {
 		PHP3_TLS_PROC_SHUTDOWN(DbmTls);
-		PHP3_MUTEX_UNLOCK(dbm_mutex);
-		PHP3_MUTEX_FREE(dbm_mutex);
+		PHP_MUTEX_UNLOCK(dbm_mutex);
+		PHP_MUTEX_FREE(dbm_mutex);
 		return SUCCESS;
 	}
-	PHP3_MUTEX_UNLOCK(dbm_mutex);
+	PHP_MUTEX_UNLOCK(dbm_mutex);
 #endif
 	return SUCCESS;
 }

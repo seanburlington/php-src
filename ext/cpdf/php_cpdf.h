@@ -26,7 +26,7 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_cpdf.h,v 1.4 2000/01/10 12:42:05 steinm Exp $ */
+/* $Id: php_cpdf.h,v 1.5 2000/02/26 03:20:48 zeev Exp $ */
 
 #ifndef _PHP_CPDF_H
 #define _PHP_CPDF_H
@@ -120,4 +120,4 @@ PHP_FUNCTION(cpdf_set_action_url);
 #define cpdf_module_ptr NULL
 #endif
 #define phpext_cpdf_ptr cpdf_module_ptr
-#endif /* _PHP3_PDF_H */
+#endif /* _PHP_PDF_H */

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.17 2000/02/23 14:13:34 sas Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.18 2000/02/26 03:20:54 zeev Exp $ -*- sh -*-
 
 divert(2)dnl
 
@@ -24,10 +24,11 @@ main() {
   ])
   ])
   if test "$ac_cv_crypt_des" = "yes"; then
-    AC_DEFINE(PHP3_STD_DES_CRYPT, 1, [ ])
+    ac_result=1
   else
-    AC_DEFINE(PHP3_STD_DES_CRYPT, 0, [ ])
+    ac_result=0
   fi
+  AC_DEFINE_UNQUOTED(PHP_STD_DES_CRYPT, $ac_result, [Whether the system supports standard DES salt])
 
   AC_CACHE_CHECK(for extended DES crypt, ac_cv_crypt_ext_des,[
   AC_TRY_RUN([
@@ -46,10 +47,11 @@ main() {
   ])
   ])
   if test "$ac_cv_crypt_ext_des" = "yes"; then
-    AC_DEFINE(PHP3_EXT_DES_CRYPT,1, [ ])
+    ac_result=1
   else
-    AC_DEFINE(PHP3_EXT_DES_CRYPT,0, [ ])
+    ac_result=0
   fi
+  AC_DEFINE_UNQUOTED(PHP_EXT_DES_CRYPT, $ac_result, [Whether the system supports extended DES salt])
 
   AC_CACHE_CHECK(for MD5 crypt, ac_cv_crypt_md5,[
   AC_TRY_RUN([
@@ -77,10 +79,11 @@ main() {
   ])
   ])
   if test "$ac_cv_crypt_md5" = "yes"; then
-    AC_DEFINE(PHP3_MD5_CRYPT,1,[ ])
+    ac_result=1
   else
-    AC_DEFINE(PHP3_MD5_CRYPT,0,[ ])
+    ac_result=0
   fi
+  AC_DEFINE_UNQUOTED(PHP_MD5_CRYPT, $ac_result, [Whether the system supports MD5 salt])
 
   AC_CACHE_CHECK(for Blowfish crypt, ac_cv_crypt_blowfish,[
   AC_TRY_RUN([
@@ -105,10 +108,11 @@ main() {
   ])
   ])
   if test "$ac_cv_crypt_blowfish" = "yes"; then
-    AC_DEFINE(PHP3_BLOWFISH_CRYPT,1,[ ])
+    ac_result=1
   else
-    AC_DEFINE(PHP3_BLOWFISH_CRYPT,0,[ ])
+    ac_result=0
   fi
+  AC_DEFINE_UNQUOTED(PHP_BLOWFISH_CRYPT, $ac_result, [Whether the system supports BlowFish salt])
 ])
 
 AC_CHECK_LIB(c, dlopen, [

@@ -1,8 +1,8 @@
-/* $Id: gdttf.h,v 1.2 2000/02/08 22:21:43 zeev Exp $ */
+/* $Id: gdttf.h,v 1.3 2000/02/26 03:20:50 zeev Exp $ */
 
 #ifdef _OSD_POSIX
 #ifndef APACHE
-#error On this EBCDIC platform, PHP3 is only supported as an Apache module.
+#error On this EBCDIC platform, PHP is only supported as an Apache module.
 #else /*APACHE*/
 #ifndef CHARSET_EBCDIC
 #define CHARSET_EBCDIC /* this machine uses EBCDIC, not ASCII! */

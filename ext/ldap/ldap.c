@@ -20,7 +20,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.26 2000/02/23 15:04:36 eschmid Exp $ */
+/* $Id: ldap.c,v 1.27 2000/02/26 03:20:51 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -175,17 +175,17 @@ PHP_MINIT_FUNCTION(ldap)
 {
 #if defined(THREAD_SAFE)
 	ldap_module	*php_ldap_module;
-	PHP3_MUTEX_ALLOC(ldap_mutex);
-	PHP3_MUTEX_LOCK(ldap_mutex);
+	PHP_MUTEX_ALLOC(ldap_mutex);
+	PHP_MUTEX_LOCK(ldap_mutex);
 	numthreads++;
 	if (numthreads==1){
 		if (!PHP3_TLS_PROC_STARTUP(ldapTLS)){
-			PHP3_MUTEX_UNLOCK(ldap_mutex);
-			PHP3_MUTEX_FREE(ldap_mutex);
+			PHP_MUTEX_UNLOCK(ldap_mutex);
+			PHP_MUTEX_FREE(ldap_mutex);
 			return 0;
 		}
 	}
-	PHP3_MUTEX_UNLOCK(ldap_mutex);
+	PHP_MUTEX_UNLOCK(ldap_mutex);
 	if(!PHP3_TLS_THREAD_INIT(ldapTLS,php_ldap_module,ldap_module))
 		return 0;
 #if 0 /*HAVE_NSLDAP*/
@@ -246,13 +246,13 @@ PHP_MSHUTDOWN_FUNCTION(ldap)
 #ifdef THREAD_SAFE
 	LDAP_TLS_VARS;
 	PHP3_TLS_THREAD_FREE(php_ldap_module);
-	PHP3_MUTEX_LOCK(ldap_mutex);
+	PHP_MUTEX_LOCK(ldap_mutex);
 	numthreads--;
 	if (!numthreads) {
 		PHP3_TLS_PROC_SHUTDOWN(ldapTLS);
 	}
-	PHP3_MUTEX_UNLOCK(ldap_mutex);
-	PHP3_MUTEX_FREE(ldap_mutex);
+	PHP_MUTEX_UNLOCK(ldap_mutex);
+	PHP_MUTEX_FREE(ldap_mutex);
 #endif
 	return SUCCESS;
 }
@@ -277,7 +277,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_printf("<table>"
 				"<tr><td>Total links:</td><td>%d/%s</td></tr>\n"
-		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.26 2000/02/23 15:04:36 eschmid Exp $</td></tr>\n"
+		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.27 2000/02/26 03:20:51 zeev Exp $</td></tr>\n"
 #if HAVE_NSLDAP
 				"<tr><td>SDK Version:</td><td>%f</td></tr>"
 				"<tr><td>Highest LDAP Protocol Supported:</td><td>%f</td></tr>"

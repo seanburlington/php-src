@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.38 2000/02/25 06:43:51 jah Exp $ */
+/* $Id: gd.c,v 1.39 2000/02/26 03:20:50 zeev Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -181,19 +181,19 @@ PHP_MINIT_FUNCTION(gd)
 {
 #if defined(THREAD_SAFE)
 	gdlib_global_struct *gdlib_globals;
-	PHP3_MUTEX_ALLOC(gdlib_mutex);
-	PHP3_MUTEX_LOCK(gdlib_mutex);
+	PHP_MUTEX_ALLOC(gdlib_mutex);
+	PHP_MUTEX_LOCK(gdlib_mutex);
 	numthreads++;
 	if (numthreads==1){
 		if (!PHP3_TLS_PROC_STARTUP(GDlibTls)){
-			PHP3_MUTEX_UNLOCK(gdlib_mutex);
-			PHP3_MUTEX_FREE(gdlib_mutex);
+			PHP_MUTEX_UNLOCK(gdlib_mutex);
+			PHP_MUTEX_FREE(gdlib_mutex);
 			return FAILURE;
 		}
 	}
-	PHP3_MUTEX_UNLOCK(gdlib_mutex);
+	PHP_MUTEX_UNLOCK(gdlib_mutex);
 	if(!PHP3_TLS_THREAD_INIT(GDlibTls,gdlib_globals,gdlib_global_struct)){
-		PHP3_MUTEX_FREE(gdlib_mutex);
+		PHP_MUTEX_FREE(gdlib_mutex);
 		return FAILURE;
 	}
 #endif
@@ -246,15 +246,15 @@ PHP_MSHUTDOWN_FUNCTION(gd)
 	GD_TLS_VARS;
 #ifdef THREAD_SAFE
 	PHP3_TLS_THREAD_FREE(gdlib_globals);
-	PHP3_MUTEX_LOCK(gdlib_mutex);
+	PHP_MUTEX_LOCK(gdlib_mutex);
 	numthreads--;
 	if (numthreads<1) {
 		PHP3_TLS_PROC_SHUTDOWN(GDlibTls);
-		PHP3_MUTEX_UNLOCK(gdlib_mutex);
-		PHP3_MUTEX_FREE(gdlib_mutex);
+		PHP_MUTEX_UNLOCK(gdlib_mutex);
+		PHP_MUTEX_FREE(gdlib_mutex);
 		return SUCCESS;
 	}
-	PHP3_MUTEX_UNLOCK(gdlib_mutex);
+	PHP_MUTEX_UNLOCK(gdlib_mutex);
 #endif
 	return SUCCESS;
 }

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.6 2000/02/10 19:41:19 zeev Exp $ */
+/* $Id: posix.c,v 1.7 2000/02/26 03:20:53 zeev Exp $ */
 
 
 #include "php.h"
@@ -134,7 +134,7 @@ DLEXPORT zend_module_entry *get_module(void) { return &posix__module_entry; }
 
 static PHP_MINFO_FUNCTION(posix)
 {
-    PUTS("$Revision: 1.6 $\n");
+    PUTS("$Revision: 1.7 $\n");
 }
 
 /* {{{ proto int posix_kill(int pid, int sig)
@@ -455,7 +455,7 @@ PHP_FUNCTION(posix_uname)
 /* }}} */
 
 /* POSIX.1, 4.5.1 time() - Get System Time
-							already covered by PHP3
+							already covered by PHP
  */
 
 /* {{{ proto array posix_times(void) 
@@ -483,7 +483,7 @@ PHP_FUNCTION(posix_times)
 /* }}} */
 
 /* POSIX.1, 4.6.1 getenv() - Environment Access
-							already covered by PHP3
+							already covered by PHP
 */
 
 /* {{{ proto string posix_ctermid(void) 

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.13 2000/01/01 01:20:58 sas Exp $
+dnl $Id: config.m4,v 1.14 2000/02/26 03:20:50 zeev Exp $
 
 PHPIFXLIB=ext/informix/libphp_ifx.a
 	
@@ -12,7 +12,7 @@ AC_ARG_WITH(informix,
       INFORMIX_WARNING="
 WARNING: You asked for Informix support, but don't have \\\$INFORMIXDIR
    environment value set up. Configuring and compiling Informix
-   support to PHP3 is impossible and has been turned off. Please
+   support to PHP is impossible and has been turned off. Please
    try again after setting up your environment."
       AC_MSG_RESULT(no)
     else

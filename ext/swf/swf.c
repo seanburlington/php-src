@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.46.2.1 2002/12/31 16:35:36 sebastian Exp $ */
+/* $Id: swf.c,v 1.46.2.2 2003/09/12 04:53:39 iliaa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -228,7 +228,7 @@ PHP_FUNCTION(swf_openfile)
 	}
 
 #ifdef VIRTUAL_DIR
-	if (virtual_filepath(na, &tmpna TSRMLS_CC)) {
+	if (virtual_filepath_ex(na, &tmpna, NULL TSRMLS_CC)) {
 		if (free_na) {
 			efree(na);
 		}

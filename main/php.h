@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.178.2.3 2003/04/19 18:35:51 sas Exp $ */
+/* $Id: php.h,v 1.178.2.4 2003/06/27 07:43:05 sas Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -123,11 +123,13 @@
 
 #ifndef HAVE_STRLCPY
 PHPAPI size_t php_strlcpy(char *dst, const char *src, size_t siz);
+#undef strlcpy
 #define strlcpy php_strlcpy
 #endif
 
 #ifndef HAVE_STRLCAT
 PHPAPI size_t php_strlcat(char *dst, const char *src, size_t siz);
+#undef strlcat
 #define strlcat php_strlcat
 #endif
 

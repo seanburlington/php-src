@@ -1,4 +1,3 @@
-
 /* 
  *    PHP Sendmail for Windows.
  *
@@ -18,7 +17,7 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.30 2002/05/15 10:11:33 mfischer Exp $ */
+/* $Id: sendmail.c,v 1.31 2002/05/15 17:40:28 fmk Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>

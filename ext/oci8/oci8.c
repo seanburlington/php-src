@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.183.2.4 2003/04/30 10:20:14 sniper Exp $ */
+/* $Id: oci8.c,v 1.183.2.5 2003/05/02 08:43:25 thies Exp $ */
 
 /* TODO list:
  *
@@ -641,7 +641,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.4 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.5 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -3616,6 +3616,10 @@ PHP_FUNCTION(ocinewdescriptor)
 	OCI_GET_CONN(connection,conn);
 
 	descr = oci_new_desc(dtype,connection);
+
+	if (! descr) {
+		RETURN_NULL();
+	}
 
 	object_init_ex(return_value, oci_lob_class_entry_ptr);
 	add_property_resource(return_value, "descriptor", descr->id);

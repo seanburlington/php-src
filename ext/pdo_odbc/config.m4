@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 2005/01/12 02:19:30 wez Exp $
+dnl $Id: config.m4,v 1.6 2005/01/17 01:31:14 wez Exp $
 dnl config.m4 for extension pdo_odbc
 dnl vim:et:sw=2:ts=2:
 
@@ -41,7 +41,7 @@ if test "$PHP_PDO_ODBC" != "no" && test "$PHP_PDO_ODBC" != "yes" ; then
 
   case $pdo_odbc_flavour in
     ibm-db2)
-        pdo_odbc_def_libdir=/home/db2inst/sqllib/lib
+        pdo_odbc_def_libdir=/home/db2inst1/sqllib/lib
         pdo_odbc_def_incdir=/home/db2inst1/sqllib/include
         pdo_odbc_def_lib=-ldb2
         ;;

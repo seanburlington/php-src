@@ -1,3 +1,15 @@
+2004-07-02  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * (PHP_4_3)
+      main/network.c:
+      Fix #28996: unix sockets leak when connection fails
+
+2004-07-02  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      Zend/zend_constants.c:
+      MFH: alloca() elimination in constant creation (missed in previous patch).
+
 2004-07-01  Ilia Alshanetsky  <ilia@prohost.org>
 
     * (PHP_4_3)
@@ -5558,7 +5570,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1674 2004/07/02 00:32:14 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1675 2004/07/03 00:32:18 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

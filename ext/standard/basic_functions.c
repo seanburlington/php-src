@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.667 2004/05/24 17:02:12 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.668 2004/05/26 18:00:27 andi Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2153,7 +2153,7 @@ void php_call_shutdown_functions(void)
 			zend_hash_apply(BG(user_shutdown_function_names), (apply_func_t) user_shutdown_function_call TSRMLS_CC);
 			memcpy(&EG(bailout), &orig_bailout, sizeof(jmp_buf));
 			zend_hash_destroy(BG(user_shutdown_function_names));
-			efree(BG(user_shutdown_function_names));
+			FREE_HASHTABLE(BG(user_shutdown_function_names));
 		}
 		zend_end_try();
 }

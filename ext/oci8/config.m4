@@ -1,10 +1,12 @@
-dnl $Id: config.m4,v 1.3 1999/09/10 18:53:55 andrey Exp $
+dnl $Id: config.m4,v 1.4 1999/09/13 14:15:22 andrey Exp $
 
 AC_DEFUN(AC_ORACLE_VERSION,[
   AC_MSG_CHECKING([Oracle version])
   if test -f "$ORACLEINST_TOP/orainst/unix.rgs"
   then
-	ORACLE_VERSION=`grep '"ocommon"' $ORACLEINST_TOP/orainst/unix.rgs | sed 's/[[ ]][[ ]]*/:/g' | cut -d: -f 6 | cut -c 2-4`
+	changequote({,})
+	ORACLE_VERSION=`grep '"ocommon"' $ORACLEINST_TOP/orainst/unix.rgs | sed 's/[ ][ ]*/:/g' | cut -d: -f 6 | cut -c 2-4`
+	changequote([,])
     test -z "$ORACLE_VERSION" && ORACLE_VERSION=7.3
   else
     if test -f "$ORACLEINST_TOP/lib/libclntsh.so.8.0"

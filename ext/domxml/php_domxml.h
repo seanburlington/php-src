@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.74 2002/12/31 16:06:32 sebastian Exp $ */
+/* $Id: php_domxml.h,v 1.75 2003/01/06 09:59:53 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -153,6 +153,7 @@ PHP_FUNCTION(domxml_node_set_content);
 PHP_FUNCTION(domxml_node_get_content);
 PHP_FUNCTION(domxml_node_text_concat);
 PHP_FUNCTION(domxml_node_set_name);
+PHP_FUNCTION(domxml_node_get_path);
 PHP_FUNCTION(domxml_node_name);
 PHP_FUNCTION(domxml_node_type);
 PHP_FUNCTION(domxml_node_value);

@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.45.2.7 2004/09/09 16:07:53 rasmus Exp $ */
+/* $Id: php_variables.c,v 1.45.2.8 2004/10/18 15:08:46 tony2001 Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -129,7 +129,11 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 				if (!ip) {
 					/* PHP variables cannot contain '[' in their names, so we replace the character with a '_' */
 					*(index_s - 1) = '_';
-					index_len = var_len = strlen(index);
+					
+					index_len = var_len = 0;
+					if (index) {
+						index_len = var_len = strlen(index);
+					}
 					goto plain_var;
 					return;
 				}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.17 2003/07/27 17:57:06 rrichards Exp $ */
+/* $Id: document.c,v 1.18 2003/08/10 20:39:58 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -790,7 +790,7 @@ PHP_FUNCTION(dom_document_create_element_ns)
 	zval *id, *rv = NULL;
 	xmlDocPtr docp;
 	xmlNodePtr nodep = NULL;
-	xmlNsPtr nsptr;
+	xmlNsPtr nsptr = NULL;
 	int ret, uri_len = 0, name_len = 0;
 	char *uri, *name;
 	char *localname = NULL, *prefix = NULL;

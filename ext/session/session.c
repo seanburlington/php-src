@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.340 2002/12/05 20:41:55 helly Exp $ */
+/* $Id: session.c,v 1.341 2002/12/29 18:50:55 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1433,15 +1433,19 @@ PHP_FUNCTION(session_decode)
 {
 	zval **str;
 
-	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &str) == FAILURE)
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &str) == FAILURE) {
 		WRONG_PARAM_COUNT;
+	}
 
-	if (PS(session_status) == php_session_none)
+	if (PS(session_status) == php_session_none) {
 		RETURN_FALSE;
+	}
 
 	convert_to_string_ex(str);
 
 	php_session_decode(Z_STRVAL_PP(str), Z_STRLEN_PP(str) TSRMLS_CC);
+	
+	RETURN_TRUE;
 }
 /* }}} */
 

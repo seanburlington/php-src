@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: struct.c,v 1.6 2001/08/09 21:57:56 eriksson Exp $
+ * $Id: struct.c,v 1.7 2001/08/12 09:48:02 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -209,20 +209,7 @@ zend_bool OrbitStruct_Create(const char * pId, zval * pDestination)
 	if (!OrbitStruct_Initialize(pId, p_struct))
 		goto error;
 
-	/* set zval members */
-	pDestination->type = IS_OBJECT;
-	pDestination->is_ref = 1;
-	pDestination->refcount = 1;
-
-	pDestination->value.obj.ce = &OrbitStruct_class_entry;
-	pDestination->value.obj.properties = orbit_new(HashTable);
-
-	zend_hash_init(
-			pDestination->value.obj.properties,	/* hash table */
-			0, 																	/* size */
-			NULL, 															/* hash function */
-			ZVAL_PTR_DTOR, 											/* destructor */
-			0);																	/* persistent */
+	object_init_ex(pDestination, &OrbitStruct_class_entry);
 
 	/* save orbit data */
 	OrbitStruct_SaveData(pDestination, p_struct);

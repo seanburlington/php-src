@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.71 2002/06/26 07:51:42 derick Exp $ */
+/* $Id: db.c,v 1.72 2002/06/28 15:08:20 derick Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -737,14 +737,14 @@ PHP_FUNCTION(dbmdelete)
 		RETURN_FALSE;
 	}
 
-	ret = php_dbm_delete(info, Z_STRVAL_P(key));
+	ret = php_dbm_delete(info, Z_STRVAL_P(key) TSRMLS_CC);
 	RETURN_LONG(ret);
 }
 /* }}} */
 
 /* {{{ php_dbm_delete
  */
-int php_dbm_delete(dbm_info *info, char *key) {
+int php_dbm_delete(dbm_info *info, char *key TSRMLS_DC) {
 	datum key_datum;
 	int ret;
 	DBM_TYPE dbf;

@@ -22,7 +22,7 @@
 
 #define OCI_USE_EMALLOC 0		/* set this to 1 if you want to use the php memory manager! */
 
-/* $Id: oci8.c,v 1.37 1999/11/12 14:34:50 thies Exp $ */
+/* $Id: oci8.c,v 1.38 1999/11/12 17:05:57 thies Exp $ */
 
 /* TODO list:
  *
@@ -243,6 +243,9 @@ static zend_function_entry php_oci_functions[] = {
     PHP_FE(ocirollback,      NULL)
     PHP_FE(ocinewdescriptor, NULL)
     PHP_FE(ocisetprefetch,   NULL)
+
+    PHP_FALIAS(ocifreecursor,ocifreestatement,NULL)
+
     {NULL,NULL,NULL}
 };
 

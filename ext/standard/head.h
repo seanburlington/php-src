@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: head.h,v 1.25 2003/08/20 20:51:10 bfrance Exp $ */
+/* $Id: head.h,v 1.26 2003/11/19 21:10:29 pollita Exp $ */
 
 #ifndef HEAD_H
 #define HEAD_H
@@ -26,6 +26,7 @@ PHP_FUNCTION(header);
 PHP_FUNCTION(setcookie);
 PHP_FUNCTION(setrawcookie);
 PHP_FUNCTION(headers_sent);
+PHP_FUNCTION(headers_list);
 
 PHPAPI int php_header(TSRMLS_D);
 PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, time_t expires, char *path, int path_len, char *domain, int domain_len, int secure, int url_encode TSRMLS_DC);

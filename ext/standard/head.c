@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.71 2003/08/20 20:51:10 bfrance Exp $ */
+/* $Id: head.c,v 1.72 2003/11/19 21:10:29 pollita Exp $ */
 
 #include <stdio.h>
 
@@ -220,6 +220,33 @@ PHP_FUNCTION(headers_sent)
 	} else {
 		RETURN_FALSE;
 	}
+}
+/* }}} */
+
+/* {{{ php_head_apply_header_list_to_hash
+   Turn an llist of sapi_header_struct headers into a numerically indexed zval hash */
+static void php_head_apply_header_list_to_hash(void *data, void *arg TSRMLS_DC)
+{
+	sapi_header_struct *sapi_header = (sapi_header_struct *)data;
+
+	if (arg && sapi_header) {
+		add_next_index_string((zval *)arg, (char *)(sapi_header->header), 1);
+	}
+}
+
+/* {{{ proto string headers_list(void)
+   Return list of headers to be sent / already sent */
+PHP_FUNCTION(headers_list)
+{
+	if (ZEND_NUM_ARGS() > 0) {
+		WRONG_PARAM_COUNT;
+	}
+
+	if (!&SG(sapi_headers).headers) {
+		RETURN_FALSE;
+	}
+	array_init(return_value);
+	zend_llist_apply_with_argument(&SG(sapi_headers).headers, php_head_apply_header_list_to_hash, return_value);
 }
 /* }}} */
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_stmt.c,v 1.17 2005/02/07 04:13:32 wez Exp $ */
+/* $Id: odbc_stmt.c,v 1.18 2005/02/13 06:27:03 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -170,7 +170,6 @@ static int odbc_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *p
 
 			case PDO_PARAM_EVT_ALLOC:
 			{
-
 				/* figure out what we're doing */
 				switch (PDO_PARAM_TYPE(param->param_type)) {
 					case PDO_PARAM_LOB:
@@ -208,7 +207,7 @@ static int odbc_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *p
 				}
 
 				if (PDO_PARAM_TYPE(param->param_type) == PDO_PARAM_LOB && P->paramtype != SQL_PARAM_INPUT) {
-					pdo_odbc_stmt_error("Can bind a lob for output");
+					pdo_odbc_stmt_error("Can't bind a lob for output");
 					return 0;
 				}
 

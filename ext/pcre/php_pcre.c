@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.132 2002/11/10 21:24:45 derick Exp $ */
+/* $Id: php_pcre.c,v 1.133 2002/11/21 23:51:52 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1269,9 +1269,7 @@ PHP_FUNCTION(preg_split)
 			add_offset_pair(return_value, &Z_STRVAL_PP(subject)[start_offset], Z_STRLEN_PP(subject) - start_offset, start_offset);
 		} else {
 			/* Add the last piece to the return value */
-			add_next_index_stringl(return_value,
-								   &Z_STRVAL_PP(subject)[start_offset],
-								   Z_STRLEN_PP(subject) - start_offset, 1);
+			add_next_index_stringl(return_value, last_match, Z_STRVAL_PP(subject) + Z_STRLEN_PP(subject) - last_match, 1);
 		}
 	}
 

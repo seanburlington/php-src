@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.68 2001/06/20 14:47:26 rasmus Exp $ */
+/* $Id: dir.c,v 1.69 2001/06/20 15:46:47 thies Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -275,6 +275,7 @@ PHP_FUNCTION(chdir)
 {
 	pval **arg;
 	int ret;
+	PLS_FETCH();
 	
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
 		WRONG_PARAM_COUNT;

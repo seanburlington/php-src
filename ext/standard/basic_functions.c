@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.281 2000/12/07 12:09:37 sas Exp $ */
+/* $Id: basic_functions.c,v 1.282 2000/12/07 14:14:00 kk Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1569,6 +1569,8 @@ PHP_FUNCTION(call_user_func_array)
     convert_to_string_ex(func_name);
     
     params_ar = HASH_OF(*params);
+    if (!params_ar)
+      php_error(E_ERROR, "Second argument is empty or not an array.");
     num_elems = zend_hash_num_elements(params_ar);
     
     func_args = (zval ***)emalloc(sizeof(zval **) * num_elems);

@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.22 1999/09/25 11:23:02 sr Exp $ */
+/* $Id: zlib.c,v 1.23 1999/10/17 00:20:17 andrei Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -519,7 +519,7 @@ PHP_FUNCTION(gzgetss)
 	}
 
 	/* strlen() can be used here since we are doing it on the return of an fgets() anyway */
-	_php3_strip_tags(buf, strlen(buf), ZLIBG(gzgetss_state), allow?(*allow)->value.str.val:NULL);
+	php_strip_tags(buf, strlen(buf), ZLIBG(gzgetss_state), allow?(*allow)->value.str.val:NULL);
 	RETURN_STRING(buf, 0);
 	
 }

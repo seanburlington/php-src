@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.290 2002/01/20 02:30:17 edink Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.291 2002/01/24 12:55:08 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -844,6 +844,13 @@ AC_DEFINE_UNQUOTED(PHP_UNAME,"$PHP_UNAME",[uname -a output])
 PHP_OS=`uname`
 AC_DEFINE_UNQUOTED(PHP_OS,"$PHP_OS",[uname output])
 
+if test "$disable_cgi" = "1"; then
+  CLI_DIR=
+else
+  CLI_DIR=sapi/cli
+fi
+
+PHP_SUBST(CLI_DIR)
 
 PHP_SUBST(EXT_SUBDIRS)
 PHP_SUBST(EXT_STATIC)

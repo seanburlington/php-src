@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.262 2003/02/20 07:10:07 sniper Exp $ */
+/* $Id: pgsql.c,v 1.263 2003/02/20 21:48:58 jerenkrantz Exp $ */
 
 #include <stdlib.h>
 
@@ -606,7 +606,7 @@ static void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			pgsql = (PGconn *) le->ptr;
 		}
 		ZEND_REGISTER_RESOURCE(return_value, pgsql, le_plink);
-	} else { // Non persistent connection
+	} else { /* Non persistent connection */
 		list_entry *index_ptr,new_index_ptr;
 		
 		/* first we check the hash for the hashed_details key.  if it exists,

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.54 2002/10/13 09:37:27 yohgaki Exp $ */
+/* $Id: php_pgsql.h,v 1.55 2002/10/17 07:58:46 yohgaki Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -97,6 +97,8 @@ PHP_FUNCTION(pg_field_size);
 PHP_FUNCTION(pg_field_type);
 PHP_FUNCTION(pg_field_prtlen);
 PHP_FUNCTION(pg_field_is_null);
+/* async message functions */
+PHP_FUNCTION(pg_get_notify);
 /* error message functions */
 PHP_FUNCTION(pg_result_error);
 PHP_FUNCTION(pg_last_error);

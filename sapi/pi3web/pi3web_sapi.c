@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.40 2002/02/23 15:16:59 holger Exp $ */
+/* $Id: pi3web_sapi.c,v 1.41 2002/06/21 09:31:21 derick Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -77,7 +77,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.40 2002/02/23 15:16:59 holger Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.41 2002/06/21 09:31:21 derick Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -424,7 +424,7 @@ DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 				break;
 			case PHP_MODE_INDENT:
 				header_line = (char *)estrdup("Content-Type: text/plain");
-				sapi_add_header_ex(header_line, strlen(header_line), 1, 1 TSRMLS_CC);
+				sapi_add_header_ex(header_line, strlen(header_line), 1, 1, 0 TSRMLS_CC);
 				if ( open_file_for_scanning( &file_handle TSRMLS_CC ) == SUCCESS )
 					{
 					zend_indent();

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.63 2004/01/26 13:38:13 georg Exp $ 
+  $Id: mysqli_api.c,v 1.64 2004/01/26 20:08:16 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1725,7 +1725,7 @@ PHP_FUNCTION(mysqli_stat)
 	}
 	MYSQLI_FETCH_RESOURCE(mysql, MYSQL *, &mysql_link, "mysqli_link");
 
-	if (stat = (char *)mysql_stat(mysql)) {
+	if ((stat = (char *)mysql_stat(mysql))) {
 		RETURN_STRING(stat, 1);
 	}
 	RETURN_FALSE;

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.142 2002/09/18 21:57:30 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.143 2002/09/21 15:42:33 iliaa Exp $ */
 
 #include "php_apache_http.h"
 
@@ -186,8 +186,10 @@ static int sapi_apache_header_handler(sapi_header_struct *sapi_header, sapi_head
 		r->content_type = pstrdup(r->pool, header_content);
 	} else if (!strcasecmp(header_name, "Set-Cookie")) {
 		table_add(r->headers_out, header_name, header_content);
-	} else {
+	} else if (sapi_header->replace) {
 		table_set(r->headers_out, header_name, header_content);
+	} else {
+		table_add(r->headers_out, header_name, header_content);
 	}
 
 	*p = ':';  /* a well behaved header handler shouldn't change its original arguments */

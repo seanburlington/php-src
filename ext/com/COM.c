@@ -18,7 +18,7 @@
    |         Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: COM.c,v 1.87 2002/10/02 12:53:51 phanto Exp $ */
+/* $Id: COM.c,v 1.88 2002/10/17 16:21:00 phanto Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -1870,7 +1870,6 @@ PHPAPI pval php_COM_get_property_handler(zend_property_reference *property_refer
 		switch (Z_TYPE_P(overloaded_property)) {
 			case OE_IS_ARRAY:
 				if (do_COM_offget(var_result, obj, &overloaded_property->element, FALSE TSRMLS_CC) == FAILURE) {
-					pval_destructor(&overloaded_property->element);
 					FREE_VARIANT(var_result);
 					FREE_COM(obj_prop);
 
@@ -1880,7 +1879,6 @@ PHPAPI pval php_COM_get_property_handler(zend_property_reference *property_refer
 
 			case OE_IS_OBJECT:
 				if (do_COM_propget(var_result, obj, &overloaded_property->element, FALSE TSRMLS_CC) == FAILURE) {
-					pval_destructor(&overloaded_property->element);
 					FREE_VARIANT(var_result);
 					FREE_COM(obj_prop);
 
@@ -1889,7 +1887,6 @@ PHPAPI pval php_COM_get_property_handler(zend_property_reference *property_refer
 				break;
 
 			case OE_IS_METHOD:
-				pval_destructor(&overloaded_property->element);
 				FREE_VARIANT(var_result);
 
 				if (obj != obj_prop) {
@@ -1904,7 +1901,10 @@ PHPAPI pval php_COM_get_property_handler(zend_property_reference *property_refer
 				return return_value;
 		}
 
-		pval_destructor(&overloaded_property->element);
+		if (obj == obj_prop) {
+			// not head
+			pval_destructor(&overloaded_property->element);
+		}
 
 		if (V_VT(var_result) == VT_DISPATCH) {
 			if (V_DISPATCH(var_result) == NULL) {

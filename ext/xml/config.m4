@@ -1,5 +1,5 @@
 # $Source: /repository/php-src/ext/xml/config.m4,v $
-# $Id: config.m4,v 1.30 2001/06/03 13:59:21 sas Exp $
+# $Id: config.m4,v 1.31 2001/06/03 17:11:05 sas Exp $
 
 dnl Fallback for --with-xml[=DIR]
 AC_ARG_WITH(xml,[],enable_xml=$withval)
@@ -33,7 +33,7 @@ if test "$PHP_EXPAT_DIR" = "no"; then
     PHP_EXTENSION(xml, $ext_shared)
     LIB_BUILD($ext_builddir/expat,$ext_shared,yes)
     PHP_ADD_INCLUDE($ext_srcdir/expat)
-    PHP_FAST_OUTPUT($ext_builddir/expat/Makefile $ext_builddir/expat/xmlparse/Makefile $ext_builddir/expat/xmltok/Makefile)
+    PHP_FAST_OUTPUT($ext_builddir/expat/Makefile)
 
 else
   

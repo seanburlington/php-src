@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.64.2.3 2002/06/02 07:52:16 ssb Exp $
+// $Id: Installer.php,v 1.64.2.4 2002/06/02 09:54:06 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -576,19 +576,6 @@ class PEAR_Installer extends PEAR_Common
             ($what == 'output' && $this->verbose > 0)) {
             $this->ui->outputData(rtrim($data), 'build');
         }
-    }
-    function _buildCallback($what, $params = null)
-    {
-        switch ($what) {
-            case 'saveas':
-                $this->log(1, "downloading $params ...");
-                break;
-            case 'done':
-                $this->log(1, '...done: ' . number_format($params, 0, '', ',') . ' bytes');
-                break;
-        }
-        if (method_exists($this->ui, '_downloadCallback'))
-            $this->ui->_downloadCallback($what, $params);
     }
 
     // }}}

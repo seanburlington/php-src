@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.60 2002/05/21 09:19:46 cox Exp $
+// $Id: Installer.php,v 1.61 2002/05/23 20:42:33 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -26,6 +26,9 @@ require_once 'PEAR/Dependency.php';
 /**
  * Administration class used to install PEAR packages and maintain the
  * installed package database.
+ *
+ * TODO:
+ *   - Check dependencies break on package uninstall (when no force given)
  *
  * @since PHP 4.0.2
  * @author Stig Bakken <ssb@fast.no>

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.86 2002/09/28 22:10:46 wez Exp $ */
+/* $Id: streams.c,v 1.87 2002/10/02 13:18:01 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -615,7 +615,7 @@ PHPAPI int _php_stream_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_D
 
 PHPAPI char *_php_stream_gets(php_stream *stream, char *buf, size_t maxlen TSRMLS_DC)
 {
-	char *cr, *lf, *eol;
+	char *cr, *lf, *eol = NULL;
 	size_t toread = 0, didread = 0, justread = 0, avail = 0;
 	char *readptr;
 	

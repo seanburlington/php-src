@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.11 2005/02/09 05:12:41 wez Exp $
+dnl $Id: config.m4,v 1.12 2005/02/13 06:26:48 wez Exp $
 dnl config.m4 for extension pdo_odbc
 dnl vim:et:sw=2:ts=2:
 
@@ -132,12 +132,12 @@ functions required for PDO support.
   PHP_SUBST(PDO_ODBC_SHARED_LIBADD)
 
   AC_MSG_CHECKING([for PDO includes])
-  if test -f $prefix/include/php/ext/pdo/php_pdo_driver.h; then
-    pdo_inc_path=$prefix/include/php/ext
-  elif test -f $abs_srcdir/include/php/ext/pdo/php_pdo_driver.h; then
+  if test -f $abs_srcdir/include/php/ext/pdo/php_pdo_driver.h; then
     pdo_inc_path=$abs_srcdir/ext
   elif test -f ext/pdo/php_pdo_driver.h; then
     pdo_inc_path=ext
+  elif test -f $prefix/include/php/ext/pdo/php_pdo_driver.h; then
+    pdo_inc_path=$prefix/include/php/ext
   else
     AC_MSG_ERROR([Cannot find php_pdo_driver.h.])
   fi

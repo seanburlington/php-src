@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.107 2000/04/26 00:29:59 andrei Exp $ */
+/* $Id: string.c,v 1.108 2000/04/26 01:16:57 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2492,7 +2492,7 @@ PHP_FUNCTION(strnatcasecmp)
 /* }}} */
 
 
-/* {{{ proto int str_count(string haystack, string needle)
+/* {{{ proto int substr_count(string haystack, string needle)
    Returns the number of times a substring occurs in the string. */
 PHP_FUNCTION(substr_count)
 {

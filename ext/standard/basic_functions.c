@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.559 2003/01/13 18:12:23 andrey Exp $ */
+/* $Id: basic_functions.c,v 1.560 2003/01/14 18:26:47 andrey Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -544,6 +544,9 @@ function_entry basic_functions[] = {
 	PHP_FE(var_export,														NULL)
 	PHP_FE(debug_zval_dump,														NULL)
 	PHP_FE(print_r,															NULL)
+#if MEMORY_LIMIT 
+	PHP_FE(get_memory_usage,												NULL)
+#endif
 
 	PHP_FE(register_shutdown_function,										NULL)
 	PHP_FE(register_tick_function,											NULL)

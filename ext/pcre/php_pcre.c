@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.145 2003/08/31 12:41:46 zeev Exp $ */
+/* $Id: php_pcre.c,v 1.146 2003/09/12 01:31:54 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -371,7 +371,7 @@ static void php_pcre_match(INTERNAL_FUNCTION_PARAMETERS, int global)
 	char 		   **subpat_names = NULL;/* Array for named subpatterns */
 	int				 i;
 	
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss|zll", &regex, &regex_len,
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, ((global) ? "ssz|ll" : "ss|zll"), &regex, &regex_len,
 							  &subject, &subject_len, &subpats, &flags, &start_offset) == FAILURE) {
 		RETURN_FALSE;
 	}

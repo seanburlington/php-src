@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.54 2002/10/21 02:46:12 sniper Exp $
+dnl $Id: config.m4,v 1.54.2.1 2003/07/14 10:43:51 wez Exp $
 dnl
 
 sinclude(ext/mysql/libmysql/acinclude.m4)
@@ -108,7 +108,7 @@ elif test "$PHP_MYSQL" != "no"; then
   done
 
   if test -z "$MYSQL_DIR"; then
-    AC_MSG_ERROR(Cannot find header files under $PHP_MYSQL)
+    AC_MSG_ERROR(Cannot find MySQL header files under $PHP_MYSQL)
   fi
 
   MYSQL_MODULE_TYPE=external

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.266.2.8 2004/12/02 16:36:00 tony2001 Exp $ */
+/* $Id: array.c,v 1.266.2.9 2004/12/03 17:51:17 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1125,6 +1125,8 @@ PHP_FUNCTION(array_walk_recursive)
 
 	argc = ZEND_NUM_ARGS();
 	old_walk_func_name = BG(array_walk_func_name);
+	BG(array_walk_fci_cache) = empty_fcall_info_cache;
+	
 	if (argc < 2 || argc > 3 ||
 		zend_get_parameters_ex(argc, &array, &BG(array_walk_func_name), &userdata) == FAILURE) {
 		BG(array_walk_func_name) = old_walk_func_name;

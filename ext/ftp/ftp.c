@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.68.2.16 2004/03/18 17:15:47 iliaa Exp $ */
+/* $Id: ftp.c,v 1.68.2.17 2004/03/31 20:44:04 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -362,6 +362,9 @@ ftp_syst(ftpbuf_t *ftp)
 		return NULL;
 
 	syst = ftp->inbuf;
+	while (*syst == ' ') {
+ 		syst++;
+ 	}
 	if ((end = strchr(syst, ' ')))
 		*end = 0;
 	ftp->syst = estrdup(syst);

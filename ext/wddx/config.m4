@@ -1,12 +1,12 @@
-dnl $Id: config.m4,v 1.2 1999/12/30 04:07:44 sas Exp $
+dnl $Id: config.m4,v 1.3 2000/02/15 14:24:59 andrei Exp $
 dnl config.m4 for extension wddx
 
 AC_MSG_CHECKING(whether to include WDDX support)
 AC_ARG_WITH(wddx,
 [  --with-wddx             Include WDDX support],[
   if test "$withval" = "yes"; then
-    if test "${with_xml+set}" != "set" -o "$with_xml" = "no"; then
-	AC_MSG_ERROR(WDDX requires --with-xml)
+    if test "${enable_xml+set}" != "set" -o "$enable_xml" = "no"; then
+	AC_MSG_ERROR(WDDX requires --enable-xml)
     else
         AC_DEFINE(HAVE_WDDX, 1, [ ])
         AC_MSG_RESULT(yes)

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.194 2000/11/27 13:27:51 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.195 2000/11/28 01:20:21 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -669,7 +669,7 @@ else
 fi
 
 if test "$abs_srcdir" != "$abs_builddir"; then
-  INCLUDES="$INCLUDES -I\$(top_srcdir)/main -I\$(top_srcdir)/Zend -I\$(top_srcdir)"
+  INCLUDES="$INCLUDES -I\$(top_srcdir)/main -I\$(top_srcdir)/Zend"
   INCLUDES="$INCLUDES -I\$(top_srcdir)/TSRM"
 fi
 

@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules_common.mk,v 1.4 2000/11/27 13:27:51 sas Exp $ 
+# $Id: rules_common.mk,v 1.5 2000/11/28 01:20:21 sas Exp $ 
 #
 
 include $(top_builddir)/config_vars.mk
@@ -32,7 +32,7 @@ mkinstalldirs = $(top_srcdir)/build/shtool mkdir -p
 INSTALL = $(top_srcdir)/build/shtool install -c
 INSTALL_DATA = $(INSTALL) -m 644
 
-DEFS = -I. -I$(srcdir) -I$(top_builddir)/main
+DEFS = -I. -I$(srcdir) -I$(top_builddir)/main -I$(top_srcdir)
 
 moduledir    = $(EXTENSION_DIR)
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.155 2003/08/20 12:40:05 abies Exp $ */
+/* $Id: interbase.c,v 1.156 2003/08/20 12:40:59 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -491,7 +491,7 @@ static void php_ibase_free_query_rsrc(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	if (rsrc->ptr != NULL) {
 		IBDEBUG("Preparing to free query by dtor...");
-		_php_ibase_free_query((ibase_query *)rsrc->ptr);
+		_php_ibase_free_query((ibase_query *)rsrc->ptr TSRMLS_CC);
 		efree(rsrc->ptr);
 	}
 }
@@ -684,7 +684,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.155 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.156 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "Yes");
 #endif

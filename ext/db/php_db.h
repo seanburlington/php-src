@@ -14,10 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    |          Jim Winstead <jimw@php.net>                                 |
+   |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_db.h,v 1.20 2003/06/10 20:03:26 imajes Exp $ */
+/* $Id: php_db.h,v 1.21 2003/06/14 16:54:18 helly Exp $ */
 
 
 #ifndef PHP_DB_H
@@ -76,5 +77,6 @@ PHP_FUNCTION(dbmexists);
 PHP_FUNCTION(dbmdelete);
 PHP_FUNCTION(dbmfirstkey);
 PHP_FUNCTION(dbmnextkey);
+PHP_FUNCTION(db_id_list);
 
 #endif /* PHP_DB_H */

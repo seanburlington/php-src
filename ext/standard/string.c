@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.121 2000/06/01 14:40:41 jah Exp $ */
+/* $Id: string.c,v 1.122 2000/06/01 14:56:28 jah Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1154,11 +1154,8 @@ PHP_FUNCTION(ucwords)
 	r=return_value->value.str.val;
 	*r=toupper((unsigned char)*r);
 	for(r_end = r + return_value->value.str.len - 1 ; r < r_end ; ) {
-		if(isspace((int)*r)) {
-			r++;
+		if(isspace((int)*r++)) {
 			*r=toupper((unsigned char)*r);
-		} else {
-			r++;
 		}
 	}
 }

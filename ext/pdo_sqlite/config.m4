@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.10 2005/02/27 05:20:18 wez Exp $
+dnl $Id: config.m4,v 1.11 2005/02/28 03:21:52 wez Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
@@ -92,7 +92,7 @@ if test "$PHP_PDO_SQLITE" != "no"; then
 	      cat $ext_srcdir/sqlite/src/parse.h $ext_srcdir/sqlite/src/vdbe.c | awk -f $ext_srcdir/sqlite/mkopcodeh.awk > $ext_srcdir/sqlite/src/opcodes.h
         sort -n +2 $ext_srcdir/sqlite/src/opcodes.h | awk -f $ext_srcdir/sqlite/mkopcodec.awk > $ext_srcdir/sqlite/src/opcodes.c
         $CC -o $ext_srcdir/sqlite/tool/mkkeywordhash $ext_srcdir/sqlite/tool/mkkeywordhash.c
-        $ext_srcdir/sqlite/tool/mkkeywordhash > $ext_srcdir/keywordhash.h
+        $ext_srcdir/sqlite/tool/mkkeywordhash > $ext_srcdir/sqlite/src/keywordhash.h
       fi
 
       if test "$ext_shared" = "no" -o "$ext_srcdir" != "$abs_srcdir"; then

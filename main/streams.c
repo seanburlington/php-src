@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.50 2003/04/13 20:31:16 helly Exp $ */
+/* $Id: streams.c,v 1.125.2.51 2003/04/15 01:30:59 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1626,6 +1626,10 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 #endif
 			
 		case PHP_STREAM_OPTION_WRITE_BUFFER:
+			if (data->file == NULL) {
+				return -1;
+			}
+
 			if (ptrparam)
 				size = *(size_t *)ptrparam;
 			else

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.4 1999/12/07 13:33:37 thies Exp $ */
+/* $Id: assert.c,v 1.5 1999/12/07 16:28:27 rubys Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -82,10 +82,15 @@ PHP_INI_BEGIN()
 	 PHP_INI_ENTRY("assert.callback",	         NULL,	PHP_INI_ALL,		NULL)
 PHP_INI_END()
 
+static void php_assert_init_globals(php_assert_globals *assert_globals)
+{
+}
+
 PHP_MINIT_FUNCTION(assert)
 {
 
 #ifdef ZTS
+	ELS_FETCH();
 	assert_globals_id = ts_allocate_id(sizeof(php_assert_globals), (ts_allocate_ctor) php_assert_init_globals, NULL);
 #endif
 

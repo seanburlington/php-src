@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.246 2003/04/08 14:29:15 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.247 2003/04/08 17:22:19 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -4416,8 +4416,8 @@ PHP_FUNCTION(domxml_doc_free_doc)
 
 	DOMXML_GET_THIS_OBJ(docp, doc, le_domxmldocp);
 
-	if (docp->type != XML_DOCUMENT_NODE) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "DOM Document is required");
+	if (! (docp->type == XML_DOCUMENT_NODE || docp->type == XML_HTML_DOCUMENT_NODE) ) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "DomDocument is required");
 		RETURN_FALSE;
 	}
 

@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.25 2002/05/05 02:22:36 hirokawa Exp $ */
+/* $Id: mbfilter.c,v 1.26 2002/05/05 11:42:18 hirokawa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1684,8 +1684,8 @@ static struct mbfl_convert_vtbl vtbl_cp1252_wchar = {
 	mbfl_filt_conv_common_flush };
 
 static struct mbfl_convert_vtbl vtbl_wchar_cp1252 = {
-	mbfl_no_encoding_cp1252,
 	mbfl_no_encoding_wchar,
+	mbfl_no_encoding_cp1252,
 	mbfl_filt_conv_common_ctor,
 	mbfl_filt_conv_common_dtor,
 	mbfl_filt_conv_wchar_cp1252,
@@ -4537,9 +4537,9 @@ mbfl_filt_conv_wchar_cp1252(int c, mbfl_convert_filter *filter TSRMLS_DC)
 	if (c >= 0x100)	{
 		/* look it up from the cp1252 table */
 		s = -1;
-		n = 30;
+		n = 31;
 		while (n >= 0) {
-			if (c == cp1252_ucs_table[n]) {
+			if (c == cp1252_ucs_table[n] && c != 0xfffe) {
 				s = 0x80 + n;
 				break;
 			}

@@ -22,7 +22,7 @@
 #ifndef PHP_SOCKETS_H
 #define PHP_SOCKETS_H
 
-/* $Id: php_sockets.h,v 1.20 2002/01/06 11:54:19 venaas Exp $ */
+/* $Id: php_sockets.h,v 1.21 2002/03/06 05:21:56 jason Exp $ */
 
 #if HAVE_SOCKETS
 
@@ -59,6 +59,7 @@ PHP_FUNCTION(socket_create_listen);
 PHP_FUNCTION(socket_create_pair);
 PHP_FUNCTION(socket_accept);
 PHP_FUNCTION(socket_set_nonblock);
+PHP_FUNCTION(socket_set_block);
 PHP_FUNCTION(socket_listen);
 PHP_FUNCTION(socket_close);
 PHP_FUNCTION(socket_write);
@@ -81,6 +82,7 @@ PHP_FUNCTION(socket_getopt);
 PHP_FUNCTION(socket_setopt);
 PHP_FUNCTION(socket_shutdown);
 PHP_FUNCTION(socket_last_error);
+PHP_FUNCTION(socket_clear_error);
 
 typedef struct php_iovec {
 	struct iovec	*iov_array;

@@ -16,14 +16,23 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: expat_compat.h,v 1.16 2004/02/22 17:51:01 chregu Exp $ */
+/* $Id: expat_compat.h,v 1.17 2005/03/26 03:13:57 sniper Exp $ */
 
 #ifndef PHP_EXPAT_COMPAT_H
 #define PHP_EXPAT_COMPAT_H
 
+#ifdef PHP_WIN32
+#include "config.w32.h"
+#elif defined(NETWARE)
+#include "config.nw.h"
+#else
+#include <php_config.h>
+#endif
+
 #if !defined(HAVE_LIBEXPAT) && defined(HAVE_LIBXML)
 #define LIBXML_EXPAT_COMPAT 1
 
+#include "php.h"
 #include "php_compat.h"
 
 #include <libxml/parser.h>

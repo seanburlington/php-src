@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_compat.h,v 1.23 2005/02/23 10:31:44 hyanantha Exp $ */
+/* $Id: php_compat.h,v 1.24 2005/03/26 03:13:58 sniper Exp $ */
 
 #ifndef PHP_COMPAT_H
 #define PHP_COMPAT_H
@@ -46,7 +46,7 @@
 #define hashTableIterInit	php_hashTableIterInit
 #define hashTableIterNext	php_hashTableIterNext
 
-#if defined(HAVE_LIBXML) && defined(HAVE_XML) && !defined(HAVE_LIBEXPAT)
+#if defined(HAVE_LIBXML) && (defined(HAVE_XML) || defined(HAVE_XMLRPC)) && !defined(HAVE_LIBEXPAT)
 #define XML_DefaultCurrent php_XML_DefaultCurrent
 #define XML_ErrorString php_XML_ErrorString
 #define XML_ExpatVersion php_XML_ExpatVersion

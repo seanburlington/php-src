@@ -17,7 +17,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.47 2003/01/10 01:15:40 ssb Exp $
+// $Id: Package.php,v 1.48 2003/02/16 01:31:46 avsm Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';
@@ -453,7 +453,7 @@ Wrote: /usr/src/redhat/RPMS/i386/PEAR::Net_Socket-1.0-1.i386.rpm
         if (!file_exists($run_tests)) {
             $run_tests = PEAR_INSTALL_DIR . DIRECTORY_SEPARATOR . 'run-tests.php';
             if (!file_exists($run_tests)) {
-                return $this->raiseError("No `run-test.php' file found");
+                return $this->raiseError("No `run-tests.php' file found");
             }
         }
         $plist = implode(" ", $params);

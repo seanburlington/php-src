@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.32 2001/12/11 15:30:54 sebastian Exp $ */
+/* $Id: sablot.c,v 1.33 2002/02/23 22:46:18 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -161,7 +161,7 @@ PHP_MINIT_FUNCTION(xslt)
 PHP_MINFO_FUNCTION(xslt)
 {
 	php_info_print_table_start();
-	php_info_print_table_header(2, "XSLT support", "enabled");
+	php_info_print_table_row(2, "XSLT support", "enabled");
 	php_info_print_table_end();
 }
 /* }}} */

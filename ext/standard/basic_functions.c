@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.527 2002/10/06 17:00:33 sander Exp $ */
+/* $Id: basic_functions.c,v 1.528 2002/10/06 17:04:10 rasmus Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -309,6 +309,7 @@ function_entry basic_functions[] = {
 	PHP_FE(zend_logo_guid,													NULL)
 	PHP_FE(php_sapi_name,													NULL)
 	PHP_FE(php_uname,														NULL)
+	PHP_FE(php_ini_scanned_files,											NULL)
 
 	PHP_FE(strnatcmp,														NULL)
 	PHP_FE(strnatcasecmp,													NULL)

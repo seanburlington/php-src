@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.213 2002/10/05 10:58:55 wez Exp $ */
+/* $Id: info.c,v 1.214 2002/10/06 17:04:10 rasmus Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -909,6 +909,15 @@ PHP_FUNCTION(php_uname)
 	RETURN_STRING(php_get_uname(*mode), 0);
 }
 
+/* }}} */
+
+/* {{{ proto string php_ini_scanned_files(void)
+   Return comma-separated string of .ini files parsed from the additional ini dir */
+PHP_FUNCTION(php_ini_scanned_files) {
+	if(strlen(PHP_CONFIG_FILE_SCAN_DIR)) {
+		RETURN_STRING(php_ini_scanned_files,1);
+	} else RETURN_FALSE;
+}
 /* }}} */
 
 /*

@@ -15,7 +15,7 @@
    | Authors: Chris Schneider <cschneid@relog.ch>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.26 2000/09/10 13:47:51 stas Exp $ */
+/* $Id: pack.c,v 1.27 2000/10/30 12:26:26 stas Exp $ */
 
 #include "php.h"
 
@@ -558,7 +558,7 @@ PHP_FUNCTION(unpack)
 			}
 
 			case 'h': case 'H': {
-				size = arg/2;
+				size = (arg>0)?arg/2:arg;
 				arg = 1;
 				break;
 			}

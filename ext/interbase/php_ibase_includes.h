@@ -14,11 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Jouni Ahto <jouni.ahto@exdec.fi>                            |
    |          Andrew Avdeev <andy@simgts.mv.ru>                           |
-   |          Ard Biesheuvel <a.k.biesheuvel@its.tudelft.nl>              |
+   |          Ard Biesheuvel <a.k.biesheuvel@ewi.tudelft.nl>              |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ibase_includes.h,v 1.3 2004/02/20 10:59:24 abies Exp $ */
+/* $Id: php_ibase_includes.h,v 1.4 2004/03/08 10:32:26 abies Exp $ */
 
 #ifndef INTERBASE_H
 #define INTERBASE_H
@@ -118,6 +118,7 @@ typedef struct {
 	isc_stmt_handle stmt;
 	XSQLDA *in_sqlda, *out_sqlda;
 	ibase_array *in_array, *out_array;
+	unsigned short in_array_cnt, out_array_cnt;
 	unsigned short dialect;
 	char statement_type;
 	char *query;
@@ -182,9 +183,11 @@ enum php_interbase_option {
 #ifdef PHP_WIN32
 #define LL_MASK "I64"
 #define LL_LIT(lit) lit ## I64
+typedef void (__stdcall *info_func_t)(char*);
 #else
 #define LL_MASK "ll"
 #define LL_LIT(lit) lit ## ll
+typedef void (*info_func_t)(char*);
 #endif
 
 int _php_ibase_string_to_quad(char const *id, ISC_QUAD *qd);
@@ -211,6 +214,10 @@ void _php_ibase_get_link_trans(INTERNAL_FUNCTION_PARAMETERS, zval **link_id,
 	ibase_db_link **ib_link, ibase_trans **trans);
 
 void _php_ibase_event_free(char *event_buf, char *result_buf);
+
+#ifndef max
+#define max(a,b) ((a)>(b)?(a):(b))
+#endif
 
 #endif /* INTERBASE_H */
 

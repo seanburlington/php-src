@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.60 2001/06/06 13:05:42 rasmus Exp $ */
+/* $Id: curl.c,v 1.61 2001/06/12 20:23:14 ssb Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -750,7 +750,8 @@ PHP_FUNCTION(curl_setopt)
 			SEPARATE_ZVAL(current);
 			convert_to_string_ex(current);
 
-			indiv = estrndup(Z_STRVAL_PP(current), Z_STRLEN_PP(current));
+			indiv = estrndup(Z_STRVAL_PP(current), Z_STRLEN_PP(current) + 1);
+			indiv[Z_STRLEN_PP(current)] = '\0';
 			slist = curl_slist_append(slist, indiv);
 			if (! slist) {
 				efree(indiv);

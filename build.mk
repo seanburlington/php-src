@@ -9,7 +9,7 @@
 #
 # Written by Sascha Schumann
 #
-# $Id: build.mk,v 1.4 1999/10/10 17:24:26 thies Exp $ 
+# $Id: build.mk,v 1.5 1999/10/10 17:34:13 thies Exp $ 
 
 
 LT_TARGETS = ltmain.sh ltconfig
@@ -57,7 +57,7 @@ cvsclean:
 	@for i in $(shell find . -follow -name .cvsignore); do \
 		(cd `dirname $$i` && rm -rf `cat .cvsignore`); \
 	done
-	@rm -f $(SUBDIRS) 
+	@rm -f $(SUBDIRS) 2>/dev/null || true
 
 acconfig.h: $(acconfig_h_SOURCES)
 	@echo rebuilding $@

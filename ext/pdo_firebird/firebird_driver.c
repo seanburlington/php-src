@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.10 2004/09/23 20:43:10 wez Exp $ */
+/* $Id: firebird_driver.c,v 1.11 2005/01/07 05:23:48 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -40,8 +40,9 @@ void _firebird_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, char const *file, long li
 {
 	pdo_firebird_db_handle *H = stmt ? ((pdo_firebird_stmt *)stmt->driver_data)->H 
 		: (pdo_firebird_db_handle *)dbh->driver_data;
-	enum pdo_error_type *const error_code = stmt ? &stmt->error_code : &dbh->error_code;
+	pdo_error_type *const error_code = stmt ? &stmt->error_code : &dbh->error_code;
 	
+#if 0
 	switch (isc_sqlcode(H->isc_status)) {
 
 		case 0:
@@ -82,6 +83,9 @@ void _firebird_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, char const *file, long li
 			*error_code = PDO_ERR_DISCONNECTED;
 			break;
 	}
+#else
+	strcpy(*pdo_err, "HY000");
+#endif
 }
 /* }}} */
 

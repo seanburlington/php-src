@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_odbc_int.h,v 1.5 2004/05/25 17:44:36 wez Exp $ */
+/* $Id: php_pdo_odbc_int.h,v 1.6 2005/01/12 02:19:30 wez Exp $ */
 
 /* {{{ Roll a dice, pick a header at random... */
 #if HAVE_SQLCLI1_H
@@ -84,6 +84,10 @@
 
 #if HAVE_CLI0ENV_H
 # include <cli0env.h>
+#endif
+
+#if HAVE_ODBCSDK_H
+# include <odbcsdk.h>
 #endif
 
 /* }}} */

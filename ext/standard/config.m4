@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.40 2002/09/19 21:57:24 cmv Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.41 2002/09/30 23:31:13 dreid Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -224,8 +224,9 @@ AC_ARG_WITH(regex,
 ],[
   REGEX_TYPE=php
 ])
-	
-AC_CHECK_FUNCS(fnmatch glob)
+
+AC_FUNC_FNMATCH	
+AC_CHECK_FUNCS(glob)
 
 AC_CHECK_FUNCS(strfmon)
 

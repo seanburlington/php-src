@@ -1,3 +1,13 @@
+2004-11-08  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      ext/fdf/fdf.c
+      ext/fdf/fdf.c:
+      MFH: Fixed possible crash on fstat() failure.
+
+    * ext/fdf/fdf.c:
+      Fixed possible crash on fstat() failure.
+
 2004-11-05  Derick Rethans  <php@derickrethans.nl>
 
     * (PHP_5_0)
@@ -12407,7 +12417,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1797 2004/11/06 01:50:36 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1798 2004/11/09 01:47:08 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.32 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: url_scanner.c,v 1.33 2001/07/28 11:36:19 zeev Exp $ */
 
 #include "php.h"
 
@@ -52,7 +52,7 @@ PHP_RSHUTDOWN_FUNCTION(url_scanner)
 static char *url_attr_addon(const char *tag,const char *attr,const char *val,const char *buf)
 {
 	int flag = 0;
-	PLS_FETCH();
+	TSRMLS_FETCH();
 
 	if(!strcasecmp(tag,"a") && !strcasecmp(attr,"href")) {
 		flag = 1;
@@ -106,7 +106,7 @@ char *url_adapt(const char *src, size_t srclen, const char *data, size_t *newlen
 {
 	char *out,*outp;
 	int maxl,n;
-	BLS_FETCH();
+	TSRMLS_FETCH();
 
 	if(src==NULL) {
 		US.state=STATE_NORMAL;

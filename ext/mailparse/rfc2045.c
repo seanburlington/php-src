@@ -1,4 +1,4 @@
-/* $Id: rfc2045.c,v 1.2 2001/06/06 13:05:46 rasmus Exp $ */
+/* $Id: rfc2045.c,v 1.3 2001/07/28 11:35:58 zeev Exp $ */
 /*
  ** Copyright 1998 - 1999 Double Precision, Inc.  See COPYING for
  ** distribution information.
@@ -1076,7 +1076,7 @@ void rfc2045_mimeinfo(const struct rfc2045 *p,
 		const char **charset_s)
 {
 	const char *c;
-	MAILPARSELS_FETCH();
+	TSRMLS_FETCH();
 
 	*content_type_s=GETINFO(p->content_type, "text/plain");
 	*content_transfer_encoding_s=GETINFO(p->content_transfer_encoding,

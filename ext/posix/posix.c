@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: posix.c,v 1.31 2001/06/06 13:05:48 rasmus Exp $ */
+/* $Id: posix.c,v 1.32 2001/07/28 11:36:10 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -138,7 +138,7 @@ ZEND_GET_MODULE(posix)
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.31 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.32 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -657,7 +657,6 @@ PHP_FUNCTION(posix_mkfifo)
 	pval   *path;
 	pval   *mode;
 	int     result;
-	PLS_FETCH();
 	
 	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters(ht, 2, &path, &mode) == FAILURE) {
 		WRONG_PARAM_COUNT;

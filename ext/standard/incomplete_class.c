@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: incomplete_class.c,v 1.7 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: incomplete_class.c,v 1.8 2001/07/28 11:36:17 zeev Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -88,7 +88,7 @@ static zval incomplete_class_get_property(zend_property_reference *property_refe
 
 /* {{{ php_create_incomplete_class
  */
-zend_class_entry *php_create_incomplete_class(BLS_D)
+zend_class_entry *php_create_incomplete_class(TSRMLS_D)
 {
 	zend_class_entry incomplete_class;
 

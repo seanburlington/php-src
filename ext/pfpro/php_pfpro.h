@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pfpro.h,v 1.8 2001/05/01 05:04:42 jdonagher Exp $ */
+/* $Id: php_pfpro.h,v 1.9 2001/07/28 11:36:07 zeev Exp $ */
 
 #ifndef PHP_PFPRO_H
 #define PHP_PFPRO_H
@@ -64,11 +64,9 @@ typedef struct {
 } php_pfpro_globals;
 
 #ifdef ZTS
-#define PFPROG(v) (pfpro_globals->v)
-#define PFPROLS_FETCH() php_pfpro_globals *pfpro_globals = ts_resource(gd_pfpro_id)
+#define PFPROG(v) TSRMG(gd_pfpro_id, php_pfpro_globals *, v)
 #else
 #define PFPROG(v) (pfpro_globals.v)
-#define PFPROLS_FETCH()
 #endif
 
 #else

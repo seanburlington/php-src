@@ -18,7 +18,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_mailparse.h,v 1.1 2001/05/20 11:11:24 wez Exp $ */
+/* $Id: php_mailparse.h,v 1.2 2001/07/28 11:35:58 zeev Exp $ */
 
 #ifndef PHP_MAILPARSE_H
 #define PHP_MAILPARSE_H
@@ -71,11 +71,9 @@ extern ZEND_DECLARE_MODULE_GLOBALS(mailparse);
 
 
 #ifdef ZTS
-#define MAILPARSEG(v) (mailparse_globals->v)
-#define MAILPARSELS_FETCH() zend_mailparse_globals *mailparse_globals = ts_resource(mailparse_globals_id)
+#define MAILPARSEG(v) TSRMG(mailparse_globals_id, zend_mailparse_globals *, v)
 #else
 #define MAILPARSEG(v) (mailparse_globals.v)
-#define MAILPARSELS_FETCH()
 #endif
 
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.39 2001/07/08 22:30:11 shane Exp $ */
+/* $Id: mail.c,v 1.40 2001/07/28 11:36:17 zeev Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -81,7 +81,6 @@ PHP_FUNCTION(mail)
 	pval **argv[5];
 	char *to=NULL, *message=NULL, *headers=NULL, *subject=NULL, *extra_cmd=NULL;
 	int argc;
-	PLS_FETCH();
 	
 	argc = ZEND_NUM_ARGS();
 	if (argc < 3 || argc > 5 || zend_get_parameters_array_ex(argc, argv) == FAILURE) {

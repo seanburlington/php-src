@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.48 2001/07/27 10:16:21 zeev Exp $ */
+/* $Id: java.c,v 1.49 2001/07/28 11:35:57 zeev Exp $ */
 
 /*
  * This module implements Zend OO syntax overloading support for Java
@@ -619,7 +619,7 @@ PHP_MINIT_FUNCTION(java) {
   if (!classpath) classpath = getenv("CLASSPATH");
 
   if (!libpath) {
-    PLS_FETCH();
+    TSRMLS_FETCH();
     libpath=PG(extension_dir);
   }
 

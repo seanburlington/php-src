@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.31 2001/06/19 18:10:08 jon Exp $ */
+/* $Id: php_pgsql.h,v 1.32 2001/07/28 11:36:09 zeev Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -127,21 +127,12 @@ typedef struct {
 
 
 #ifdef ZTS
-# define PGLS_D	php_pgsql_globals *pgsql_globals
-# define PGLS_DC	, PGLS_D
-# define PGLS_C	pgsql_globals
-# define PGLS_CC , PGLS_C
-# define PGG(v) (pgsql_globals->v)
-# define PGLS_FETCH()	php_pgsql_globals *pgsql_globals = ts_resource(pgsql_globals_id)
+# define PGG(v) TSRMG(pgsql_globals_id, php_pgsql_globals *, v)
 #else
-# define PGLS_D
-# define PGLS_DC
-# define PGLS_C
-# define PGLS_CC
 # define PGG(v) (pgsql_globals.v)
-# define PGLS_FETCH()
 extern PHP_PGSQL_API php_pgsql_globals pgsql_globals;
 #endif
+
 #endif
 
 #else

@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.44 2001/07/27 10:16:31 zeev Exp $ */
+/* $Id: ereg.c,v 1.45 2001/07/28 11:36:18 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -53,7 +53,7 @@ static int _php_regcomp(regex_t *preg, const char *pattern, int cflags)
 	int r = 0;
 	int patlen = strlen(pattern);
 	reg_cache *rc = NULL;
-	REGLS_FETCH();
+	TSRMLS_FETCH();
 	
 	if(zend_hash_find(&REG(ht_rc), (char *) pattern, patlen+1, (void **) &rc) == FAILURE ||
 			rc->cflags != cflags) {
@@ -102,7 +102,7 @@ PHP_MINIT_FUNCTION(regex)
 
 PHP_MSHUTDOWN_FUNCTION(regex)
 {
-	REGLS_FETCH();
+	TSRMLS_FETCH();
 
 	zend_hash_destroy(&REG(ht_rc));
 	return SUCCESS;

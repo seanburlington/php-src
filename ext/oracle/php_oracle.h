@@ -1,4 +1,4 @@
-/* $Id: php_oracle.h,v 1.7 2000/07/15 14:15:07 thies Exp $ */
+/* $Id: php_oracle.h,v 1.8 2001/07/28 11:36:05 zeev Exp $ */
 
 /* synced with oracle.h,v 1.40 1999/06/01 08:11:04 thies Exp $ */
 
@@ -27,19 +27,9 @@ extern zend_module_entry oracle_module_entry;
 #define phpext_oracle_ptr &oracle_module_entry
 
 #ifdef ZTS
-#define ORALS_D php_ora_globals *ora_globals
-#define ORALS_DC , ORACLE_D
-#define ORALS_C ora_globals
-#define ORALS_CC , ORALS_C
-#define ORA(v) (ora_globals->v)
-#define ORALS_FETCH() php_ora_globals *ora_globals = ts_resource(ora_globals_id)
+#define ORA(v) TSRMG(ora_globals_id, php_ora_globals *, v)
 #else
-#define ORALS_D
-#define ORALS_DC
-#define ORALS_C
-#define ORALS_CC
 #define ORA(v) (ora_globals.v)
-#define ORALS_FETCH()
 #endif
 
 /* oparse flags */

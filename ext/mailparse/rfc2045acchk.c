@@ -1,4 +1,4 @@
-/* $Id: rfc2045acchk.c,v 1.1 2001/05/20 11:11:24 wez Exp $ */
+/* $Id: rfc2045acchk.c,v 1.2 2001/07/28 11:35:58 zeev Exp $ */
 /*
 ** Copyright 1998 - 1999 Double Precision, Inc.  See COPYING for
 ** distribution information.
@@ -15,7 +15,7 @@ int rfc2045_ac_check(struct rfc2045 *p, int rwmode)
 			/* hasnon7bit: 8bit chars in this section or subsections */
 	const char *te;
 	int	is8bitte;
-	MAILPARSELS_FETCH();
+	TSRMLS_FETCH();
 
 	for (c=p->firstpart; c; c=c->next)
 		if (!c->isdummy)

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.h,v 1.12 2001/05/13 09:03:46 zeev Exp $ */
+/* $Id: mod_php4.h,v 1.13 2001/07/28 11:36:30 zeev Exp $ */
 
 #ifndef MOD_PHP4_H
 #define MOD_PHP4_H
@@ -38,14 +38,10 @@ extern zend_module_entry apache_module_entry;
 
 #ifdef ZTS
 extern int php_apache_info_id;
-#define APLS_D php_apache_info_struct *apache_globals
-#define AP(v) (apache_globals->v)
-#define APLS_FETCH() APLS_D = ts_resource(php_apache_info_id)
+#define AP(v) TSRMG(alloc_globals_id, php_apache_info_struct *, v)
 #else
 extern php_apache_info_struct php_apache_info;
-#define APLS_D
 #define AP(v) (php_apache_info.v)
-#define APLS_FETCH()
 #endif
 
 

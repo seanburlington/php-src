@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.20 2001/05/24 10:07:22 ssb Exp $ */
+/* $Id: readline.c,v 1.21 2001/07/28 11:36:10 zeev Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -387,7 +387,7 @@ static char **_readline_completion_cb(char *text, int start, int end)
 	zval *params[4];
 	int i;
 	char **matches = NULL;
-	CLS_FETCH();
+	TSRMLS_FETCH();
 
 	params[0]=_readline_string_zval(_readline_completion);
 	params[1]=_readline_string_zval(text);

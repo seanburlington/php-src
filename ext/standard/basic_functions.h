@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.82 2001/07/18 22:54:55 sas Exp $ */
+/* $Id: basic_functions.h,v 1.83 2001/07/28 11:36:14 zeev Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -194,20 +194,10 @@ typedef struct {
 } php_basic_globals;
 
 #ifdef ZTS
-#define BLS_D php_basic_globals *basic_globals
-#define BLS_DC , BLS_D
-#define BLS_C basic_globals
-#define BLS_CC , BLS_C
-#define BG(v) (basic_globals->v)
-#define BLS_FETCH() php_basic_globals *basic_globals = ts_resource(basic_globals_id)
+#define BG(v) TSRMG(basic_globals_id, php_basic_globals *, v)
 extern int basic_globals_id;
 #else
-#define BLS_D
-#define BLS_DC
-#define BLS_C
-#define BLS_CC
 #define BG(v) (basic_globals.v)
-#define BLS_FETCH()
 extern php_basic_globals basic_globals;
 #endif
 

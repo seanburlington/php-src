@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_yp.h,v 1.9 2001/03/18 22:16:46 ohrn Exp $ */ 
+/* $Id: php_yp.h,v 1.10 2001/07/28 11:36:25 zeev Exp $ */ 
 
 #ifndef PHP_YP_H
 #define PHP_YP_H
@@ -53,19 +53,9 @@ typedef struct {
 } php_yp_globals;
 
 #ifdef ZTS
-#define YPLS_D php_yp_globals *yp_globals
-#define YPLS_DC , YPLS_D
-#define YPLS_C yp_globals
-#define YPLS_CC , YPLS_C
-#define YP(v) (yp_globals->v)
-#define YPLS_FETCH() php_yp_globals *yp_globals = ts_resource(yp_globals_id)
+#define YG(v) TSRMG(yp_globals_id, php_yp_globals *, v)
 #else
-#define YPLS_D
-#define YPLS_DC
-#define YPLS_C
-#define YPLS_CC
 #define YP(v) (yp_globals.v)
-#define YPLS_FETCH()
 #endif
 
 #else

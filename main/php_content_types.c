@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_content_types.c,v 1.13 2001/07/27 10:16:36 zeev Exp $ */
+/* $Id: php_content_types.c,v 1.14 2001/07/28 11:36:28 zeev Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -38,9 +38,8 @@ static sapi_post_entry php_post_entries[] = {
 SAPI_POST_READER_FUNC(php_default_post_reader)
 {
 	char *data;
-	TSRMLS_FETCH();
 
-	if(!SG(request_info).post_data) sapi_read_standard_form_data(SLS_C);
+	if(!SG(request_info).post_data) sapi_read_standard_form_data(TSRMLS_C);
 	data = estrndup(SG(request_info).post_data,SG(request_info).post_data_length);
 	SET_VAR_STRINGL("HTTP_RAW_POST_DATA", data, SG(request_info).post_data_length);
 }

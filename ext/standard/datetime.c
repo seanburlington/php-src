@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.72 2001/06/20 18:07:53 cmv Exp $ */
+/* $Id: datetime.c,v 1.73 2001/07/28 11:36:15 zeev Exp $ */
 
 
 #include "php.h"
@@ -652,7 +652,7 @@ char *php_std_date(time_t t)
 {
 	struct tm *tm1, tmbuf;
 	char *str;
-	PLS_FETCH();
+	TSRMLS_FETCH();
 
 	tm1 = php_gmtime_r(&t, &tmbuf);
 	str = emalloc(81);

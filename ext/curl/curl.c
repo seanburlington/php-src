@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.72 2001/07/27 10:16:18 zeev Exp $ */
+/* $Id: curl.c,v 1.73 2001/07/28 11:35:44 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -274,7 +274,6 @@ static size_t curl_write(char *data, size_t size, size_t nmemb, void *ctx)
 		zval *argv[2];
 		zval *retval;
 		int   error;
-		TSRMLS_FETCH();
 
 		MAKE_STD_ZVAL(argv[0]);
 		MAKE_STD_ZVAL(argv[1]);

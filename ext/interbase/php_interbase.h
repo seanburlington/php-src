@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.20 2001/02/26 06:07:00 andi Exp $ */
+/* $Id: php_interbase.h,v 1.21 2001/07/28 11:35:56 zeev Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -159,15 +159,10 @@ enum php_interbase_option {
 };
 
 #ifdef ZTS
-#define IBLS_D zend_ibase_globals *ibase_globals
-#define IBLS_C ibase_globals
 #define IBG(v) (ibase_globals->v)
-#define IBLS_FETCH() zend_ibase_globals *ibase_globals = ts_resource(ibase_globals_id)
+#define IBG(v) TSRMG(ibase_globals_id, zend_ibase_globals *, v)
 #else
-#define IBLS_D
-#define IBLS_C
 #define IBG(v) (ibase_globals.v)
-#define IBLS_FETCH()
 #endif
 
 #else

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: swf.c,v 1.35 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: swf.c,v 1.36 2001/07/28 11:36:20 zeev Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -168,9 +168,7 @@ PHP_MINIT_FUNCTION(swf)
  */
 PHP_RINIT_FUNCTION(swf)
 {
-	SWFLS_FETCH();
 	SWFG(use_file) = 0;
-
 	return SUCCESS;
 }
 /* }}} */
@@ -182,7 +180,6 @@ PHP_FUNCTION(swf_openfile)
 	zval **name, **sizeX, **sizeY, **frameRate, **r, **g, **b;
 	char *na, *tmpna;
 	zend_bool free_na;
-	SWFLS_FETCH();
 	
 	if (ZEND_NUM_ARGS() != 7 ||
 	    zend_get_parameters_ex(7, &name, &sizeX, &sizeY, &frameRate, &r, &g, &b) == FAILURE) {
@@ -245,8 +242,6 @@ PHP_FUNCTION(swf_openfile)
    Close a Shockwave flash file that was opened with swf_openfile */
 PHP_FUNCTION(swf_closefile)
 {
-	SWFLS_FETCH();
-	
 	swf_closefile();
 	
 	if (!SWFG(use_file)) {

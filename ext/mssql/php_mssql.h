@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.14 2001/06/28 16:59:16 fmk Exp $ */
+/* $Id: php_mssql.h,v 1.15 2001/07/28 11:36:00 zeev Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -141,19 +141,9 @@ typedef struct mssql_result {
 
 
 #ifdef ZTS
-# define MSSQLLS_D		zend_mssql_globals *mssql_globals
-# define MSSQLLS_DC		, MSSQLLS_D
-# define MSSQLLS_C		mssql_globals
-# define MSSQLLS_CC		, MSSQLLS_C
-# define MS_SQL_G(v)	(mssql_globals->v)
-# define MSSQLLS_FETCH()	zend_mssql_globals *mssql_globals = ts_resource(mssql_globals_id)
+# define MS_SQL_G(v) TSRMG(mssql_globals_id, zend_mssql_globals *, v)
 #else
-# define MSSQLLS_D
-# define MSSQLLS_DC
-# define MSSQLLS_C
-# define MSSQLLS_CC
 # define MS_SQL_G(v)	(mssql_globals.v)
-# define MSSQLLS_FETCH()
 #endif
 
 #else

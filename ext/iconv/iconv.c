@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.17 2001/07/20 19:42:26 sas Exp $ */
+/* $Id: iconv.c,v 1.18 2001/07/28 11:35:52 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -189,8 +189,6 @@ PHP_FUNCTION(ob_iconv_handler)
 {
 	char *out_buffer;
 	zval **zv_string, **zv_status;
-	SLS_FETCH();
-	ICONVLS_FETCH();
 
 	if (ZEND_NUM_ARGS()!=2 || zend_get_parameters_ex(2, &zv_string, &zv_status)==FAILURE) {
 		ZEND_WRONG_PARAM_COUNT();
@@ -219,7 +217,6 @@ PHP_FUNCTION(iconv_set_encoding)
 {
 	zval **type, **charset;
 	int argc = ZEND_NUM_ARGS();
-	ICONVLS_FETCH();
 
 	if (argc != 2 || zend_get_parameters_ex(2, &type, &charset) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -257,7 +254,6 @@ PHP_FUNCTION(iconv_get_encoding)
 {
 	zval **type;
 	int argc = ZEND_NUM_ARGS();
-	ICONVLS_FETCH();
 
 	if (argc < 0 || argc > 1 || zend_get_parameters_ex(1, &type) == FAILURE) {
 		WRONG_PARAM_COUNT;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_lcg.h,v 1.12 2001/07/18 22:55:52 sas Exp $ */
+/* $Id: php_lcg.h,v 1.13 2001/07/28 11:36:18 zeev Exp $ */
 
 #ifndef PHP_LCG_H
 #define PHP_LCG_H
@@ -33,14 +33,10 @@ PHP_FUNCTION(lcg_value);
 
 #ifdef ZTS
 PHP_MINIT_FUNCTION(lcg);
-#define LCGLS_D php_lcg_globals *lcg_globals
-#define LCG(v) (lcg_globals->v)
-#define LCGLS_FETCH() php_lcg_globals *lcg_globals = ts_resource(lcg_globals_id)
+#define LCG(v) TSRMG(lcg_globals_id, php_lcg_globals *, v)
 #else
 PHP_RINIT_FUNCTION(lcg);
-#define LCGLS_D void
 #define LCG(v) (lcg_globals.v)
-#define LCGLS_FETCH()
 #endif
 
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.30 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: link.c,v 1.31 2001/07/28 11:36:17 zeev Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -102,7 +102,6 @@ PHP_FUNCTION(symlink)
 {
 	pval **topath, **frompath;
 	int ret;
-	PLS_FETCH();
 
 	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters_ex(2, &topath, &frompath) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -133,7 +132,6 @@ PHP_FUNCTION(link)
 {
 	pval **topath, **frompath;
 	int ret;
-	PLS_FETCH();
 
 	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters_ex(2, &topath, &frompath) == FAILURE) {
 		WRONG_PARAM_COUNT;

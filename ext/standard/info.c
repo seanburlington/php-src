@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.143 2001/07/27 10:16:30 zeev Exp $ */
+/* $Id: info.c,v 1.144 2001/07/28 11:36:17 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -153,7 +153,6 @@ PHPAPI void php_print_info(int flag)
 	time_t the_time;
 	struct tm *ta, tmbuf;
 	TSRMLS_FETCH();
-	SLS_FETCH();
 
 	the_time = time(NULL);
 	ta = php_localtime_r(&the_time, &tmbuf);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.13 2001/05/24 10:07:22 ssb Exp $ */
+/* $Id: recode.c,v 1.14 2001/07/28 11:36:11 zeev Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -74,7 +74,8 @@ ZEND_GET_MODULE(recode)
 
 PHP_MINIT_FUNCTION(recode)
 {
-	ReSLS_FETCH();
+	TSRMLS_FETCH();
+
 	ReSG(outer)	  = recode_new_outer(true);
 	if (ReSG(outer) == NULL)
 		return FAILURE;
@@ -85,7 +86,7 @@ PHP_MINIT_FUNCTION(recode)
 
 PHP_MSHUTDOWN_FUNCTION(recode)
 {
-	ReSLS_FETCH();
+	TSRMLS_FETCH();
 
 	if (ReSG(outer))
 		recode_delete_outer(ReSG(outer));
@@ -96,11 +97,11 @@ PHP_MSHUTDOWN_FUNCTION(recode)
 
 PHP_MINFO_FUNCTION(recode)
 {
-	ReSLS_FETCH();
+	TSRMLS_FETCH();
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.13 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.14 $");
 	php_info_print_table_end();
 
 }
@@ -116,8 +117,7 @@ PHP_FUNCTION(recode_string)
 	pval **req;
 	bool success;
 	int r_len=0, r_alen =0;
-	
-	ReSLS_FETCH();
+
 	if (ZEND_NUM_ARGS() != 2
 	 || zend_get_parameters_ex(2, &req, &str) == FAILURE) {
 	 	WRONG_PARAM_COUNT;
@@ -169,7 +169,6 @@ PHP_FUNCTION(recode_file)
 	FILE  *in_fp,  *out_fp;
 	int    in_type, out_type;
 
-	ReSLS_FETCH();
 	if (ZEND_NUM_ARGS() != 3
 	 || zend_get_parameters_ex(3, &req, &input, &output) == FAILURE) {
 	 	WRONG_PARAM_COUNT;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.37 2001/06/30 20:07:12 elixer Exp $ */
+/* $Id: file.h,v 1.38 2001/07/28 11:36:16 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -114,20 +114,10 @@ typedef struct {
 } php_file_globals;
 
 #ifdef ZTS
-#define FLS_D php_file_globals *file_globals
-#define FLS_DC , FLS_D
-#define FLS_C file_globals
-#define FLS_CC , FLS_C
-#define FG(v) (file_globals->v)
-#define FLS_FETCH() php_file_globals *file_globals = ts_resource(file_globals_id)
+#define FG(v) TSRMG(file_globals_id, php_file_globals *, v)
 extern int file_globals_id;
 #else
-#define FLS_D	void
-#define FLS_DC
-#define FLS_C
-#define FLS_CC
 #define FG(v) (file_globals.v)
-#define FLS_FETCH()
 extern php_file_globals file_globals;
 #endif
 

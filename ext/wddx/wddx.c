@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.71 2001/07/27 10:16:33 zeev Exp $ */
+/* $Id: wddx.c,v 1.72 2001/07/28 11:36:23 zeev Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -271,7 +271,7 @@ PS_SERIALIZER_DECODE_FUNC(wddx)
 					key = tmp;
 					/* fallthru */
 				case HASH_KEY_IS_STRING:
-					php_set_session_var(key, key_length-1, *ent, NULL PSLS_CC);
+					php_set_session_var(key, key_length-1, *ent, NULL TSRMLS_CC);
 					PS_ADD_VAR(key);
 			}
 		}
@@ -436,8 +436,7 @@ static void php_wddx_serialize_object(wddx_packet *packet, zval *obj)
 	char *key;
 	ulong idx;
 	char tmp_buf[WDDX_BUF_LEN];
-	CLS_FETCH();
-	BLS_FETCH();
+	TSRMLS_FETCH();
 
 	MAKE_STD_ZVAL(fname);
 	ZVAL_STRING(fname, "__sleep", 1);
@@ -833,8 +832,6 @@ static void php_wddx_pop_element(void *user_data, const char *name)
 						zend_str_tolower(Z_STRVAL_P(ent1->data), Z_STRLEN_P(ent1->data));
 						if (zend_hash_find(EG(class_table), Z_STRVAL_P(ent1->data),
 										   Z_STRLEN_P(ent1->data)+1, (void **) &ce)==FAILURE) {
-							BLS_FETCH();
-
 							incomplete_class = 1;
 							ce = PHP_IC_ENTRY_READ;
 						}

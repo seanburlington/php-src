@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.84 2001/06/06 13:05:45 rasmus Exp $ */
+/* $Id: hw.c,v 1.85 2001/07/28 11:35:52 zeev Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -151,7 +151,7 @@ void print_msg(hg_msg *msg, char *str, int txt);
 void _close_hw_link(zend_rsrc_list_entry *rsrc)
 {
 	hw_connection *conn = (hw_connection *)rsrc->ptr;
-	HwSLS_FETCH();
+	TSRMLS_FETCH();
 
 	if(conn->hostname)
 		free(conn->hostname);
@@ -165,7 +165,7 @@ void _close_hw_link(zend_rsrc_list_entry *rsrc)
 void _close_hw_plink(zend_rsrc_list_entry *rsrc)
 {
 	hw_connection *conn = (hw_connection *)rsrc->ptr;
-	HwSLS_FETCH();
+	TSRMLS_FETCH();
 
 	if(conn->hostname)
 		free(conn->hostname);
@@ -194,8 +194,10 @@ static void php_hw_init_globals(zend_hw_globals *hw_globals)
 	hw_globals->num_persistent = 0;
 }
 
-static PHP_INI_MH(OnHyperwavePort) {
-	HwSLS_FETCH();
+static PHP_INI_MH(OnHyperwavePort)
+{
+	TSRMLS_FETCH();
+
 	if (new_value==NULL) {
 		HwSG(default_port) = HG_SERVER_PORT;
 	} else {
@@ -711,7 +713,6 @@ static void php_hw_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	hw_connection *ptr;
 	int do_swap;
 	int version = 0;
-	HwSLS_FETCH();
 	
 	argc = ZEND_NUM_ARGS();
 	switch(argc) {

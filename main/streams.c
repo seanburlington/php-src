@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.52 2003/04/16 12:55:21 sas Exp $ */
+/* $Id: streams.c,v 1.125.2.53 2003/05/06 11:53:33 sas Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2553,8 +2553,8 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 	php_stream *stream = NULL;
 	php_stream_wrapper *wrapper = NULL;
 	char *path_to_open;
-	int persistent = options & STREAM_OPEN_PERSISTENT;
 #if ZEND_DEBUG
+	int persistent = options & STREAM_OPEN_PERSISTENT;
 	char *copy_of_path = NULL;
 #endif
 	

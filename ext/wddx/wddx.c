@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.11 1999/09/21 21:38:51 andrey Exp $ */
+/* $Id: wddx.c,v 1.12 1999/09/24 14:14:47 zeev Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -823,7 +823,7 @@ PHP_FUNCTION(wddx_packet_end)
 		WRONG_PARAM_COUNT;
 	}
 
-	ZEND_FETCH_RESOURCE(packet, wddx_packet *, packet_id, -1, "WDDX packet ID", le_wddx);
+	ZEND_FETCH_RESOURCE(packet, wddx_packet *, &packet_id, -1, "WDDX packet ID", le_wddx);
 			
 	_php_wddx_add_chunk(packet, WDDX_STRUCT_E);	
 	
@@ -861,7 +861,7 @@ PHP_FUNCTION(wddx_add_vars)
 	
 	packet_id = args[0];
 
-	packet = (wddx_packet *)zend_fetch_resource(packet_id, -1, "WDDX packet ID", le_wddx);
+	packet = (wddx_packet *)zend_fetch_resource(&packet_id, -1, "WDDX packet ID", le_wddx);
 	if (!packet)
 	{
 		efree(args);

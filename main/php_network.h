@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_network.h,v 1.46 2003/11/29 21:46:49 wez Exp $ */
+/* $Id: php_network.h,v 1.47 2003/12/02 23:13:43 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -153,8 +153,8 @@ PHPAPI int php_network_get_peer_name(php_socket_t sock,
 		socklen_t *addrlen
 		TSRMLS_DC);
 
-void php_any_addr(int family, php_sockaddr_storage *addr, unsigned short port);
-int php_sockaddr_size(php_sockaddr_storage *addr);
+PHPAPI void php_any_addr(int family, php_sockaddr_storage *addr, unsigned short port);
+PHPAPI int php_sockaddr_size(php_sockaddr_storage *addr);
 
 
 struct _php_netstream_data_t	{

@@ -1,5 +1,5 @@
 [PHP]
-; $Id: php.ini-dist,v 1.83 2001/06/11 15:43:50 dbeu Exp $
+; $Id: php.ini-dist,v 1.84 2001/06/19 20:50:03 jon Exp $
 
 ;;;;;;;;;;;;;;;;;;;
 ; About this file ;
@@ -219,6 +219,9 @@ log_errors = Off
 ; Store the last error/warning message in $php_errormsg (boolean).
 track_errors = Off
 
+; Disable the inclusion of HTML tags in error messages.
+;html_errors = Off
+  
 ; String to output before an error message.
 ;error_prepend_string = "<font color=ff0000>"
 

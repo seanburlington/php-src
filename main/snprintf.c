@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.23 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: snprintf.c,v 1.24 2003/06/30 01:03:21 iliaa Exp $ */
 
 /* ====================================================================
  * Copyright (c) 1995-1998 The Apache Group.  All rights reserved.
@@ -404,6 +404,9 @@ ap_php_gcvt(double number, int ndigit, char *buf, boolean_e altform)
 		*p2++ = '.';
 		for (i = 1; i < ndigit; i++)
 			*p2++ = *p1++;
+		if (*(p2 - 1) == '.') {
+			*p2++ = '0';
+		}	
 		*p2++ = 'e';
 		if (decpt < 0) {
 			decpt = -decpt;

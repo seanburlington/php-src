@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.h,v $ */
-/* $Id: php_mnogo.h,v 1.9 2001/04/30 11:11:18 gluke Exp $ */
+/* $Id: php_mnogo.h,v 1.10 2001/08/20 08:31:29 gluke Exp $ */
 
 /* 
    +----------------------------------------------------------------------+
@@ -18,7 +18,7 @@
    | Authors: 								  |
    |  Initial version     by  Alex Barkov <bar@izhcom.ru>                 |
    |                      and Ramil Kalimullin <ram@izhcom.ru>            |
-   |  Further development by  Sergey Kartashoff <gluke@biosys.net>        |
+   |  Further development by  Sergey Kartashoff <gluke@mail.ru>           |
    +----------------------------------------------------------------------+
  */
 

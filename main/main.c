@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.73 1999/06/11 11:59:35 zeev Exp $ */
+/* $Id: main.c,v 1.74 1999/06/16 17:06:51 ssb Exp $ */
 
 
 #include <stdio.h>
@@ -465,7 +465,7 @@ PHPAPI void php3_error(int type, const char *format,...)
 
 
 
-#if HAVE_SETITIMER
+#ifdef HAVE_SETITIMER
 static void php3_timeout(int dummy)
 {
 	PLS_FETCH();
@@ -483,7 +483,7 @@ static void php3_set_timeout(long seconds)
 {
 #if WIN32|WINNT
 #else
-#	if HAVE_SETITIMER
+#	ifdef HAVE_SETITIMER
 	struct itimerval t_r;		/* timeout requested */
 
 	t_r.it_value.tv_sec = seconds;
@@ -500,7 +500,7 @@ static void php3_unset_timeout()
 {
 #if WIN32|WINNT
 #else
-#	if HAVE_SETITIMER
+#	ifdef HAVE_SETITIMER
 	struct itimerval no_timeout;
 
 	no_timeout.it_value.tv_sec = no_timeout.it_value.tv_usec = no_timeout.it_interval.tv_sec = no_timeout.it_interval.tv_usec = 0;

@@ -1,4 +1,4 @@
-dnl $Id: configure.in.in,v 1.35 1999/06/11 12:22:53 ssb Exp $ -*- sh -*-
+dnl $Id: configure.in.in,v 1.36 1999/06/16 17:06:51 ssb Exp $ -*- sh -*-
 dnl Process this file with autoconf to produce a configure script.
 
 
@@ -211,7 +211,7 @@ else
 fi
 AC_MISSING_FCLOSE_DECL
 dnl QNX requires unix.h to allow functions in libunix to work properly
-AC_CHECK_HEADERS(fcntl.h unistd.h crypt.h sys/file.h memory.h pwd.h grp.h sys/socket.h sys/wait.h syslog.h string.h sys/varargs.h stdarg.h sys/time.h signal.h netinet/in.h dlfcn.h limits.h sys/types.h unix.h arpa/inet.h)
+AC_CHECK_HEADERS(fcntl.h unistd.h crypt.h sys/file.h memory.h pwd.h grp.h sys/socket.h sys/wait.h syslog.h string.h sys/varargs.h stdarg.h sys/time.h signal.h netinet/in.h dlfcn.h limits.h sys/types.h unix.h arpa/inet.h locale.h)
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_STRUCT_TM

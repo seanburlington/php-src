@@ -27,15 +27,15 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.5 1999/05/28 11:09:39 zeev Exp $ */
+/* $Id: dir.c,v 1.6 1999/06/16 17:06:51 ssb Exp $ */
 
 #include "php.h"
 #include "fopen-wrappers.h"
 
 #include "php3_dir.h"
 
-#if HAVE_DIRENT_H
-#include <dirent.h>
+#ifdef HAVE_DIRENT_H
+# include <dirent.h>
 #endif
 
 #if HAVE_UNISTD_H

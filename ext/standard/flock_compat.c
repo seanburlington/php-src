@@ -26,7 +26,7 @@
    | Authors: Sascha Schumann <sas@schell.de>                             |
    +----------------------------------------------------------------------+
 
-   $Id: flock_compat.c,v 1.1 1999/04/21 19:01:38 zeev Exp $
+   $Id: flock_compat.c,v 1.2 1999/06/16 17:06:52 ssb Exp $
  */
 
 
@@ -44,7 +44,7 @@
 #include <io.h>
 #endif
 
-#if !HAVE_FLOCK
+#ifndef HAVE_FLOCK
 int flock(int fd, int operation)
 #if HAVE_STRUCT_FLOCK
 {
@@ -161,7 +161,7 @@ int flock(int fd, int operation)
 	return 0;
 }
 #endif
-#endif /* !HAVE_FLOCK */
+#endif /* !defined(HAVE_FLOCK) */
 
 #if !(HAVE_INET_ATON)
 

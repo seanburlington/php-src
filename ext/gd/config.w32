@@ -1,7 +1,7 @@
-// $Id: config.w32,v 1.4 2003/12/31 19:28:31 fmk Exp $
+// $Id: config.w32,v 1.5 2004/01/07 23:36:34 wez Exp $
 // vim:ft=javascript
 
-ARG_WITH("gd", "Bundled GD support", "yes");
+ARG_WITH("gd", "Bundled GD support", "yes,shared");
 
 if (PHP_GD != "no") {
 	if (CHECK_LIB("libjpeg.lib", "gd", PHP_GD) &&

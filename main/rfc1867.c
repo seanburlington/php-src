@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.122.2.2 2002/11/22 19:35:43 sesser Exp $ */
+/* $Id: rfc1867.c,v 1.122.2.3 2002/11/22 22:30:38 iliaa Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -72,7 +72,7 @@ void php_rfc1867_register_constants(TSRMLS_D)
 
 static void normalize_protected_variable(char *varname TSRMLS_DC)
 {
-	char *s=varname, *index=NULL, *indexend=NULL;
+	char *s=varname, *index=NULL, *indexend=NULL, *p;
 	
 	/* overjump leading space */
 	while (*s == ' ') {

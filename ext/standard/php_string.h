@@ -29,14 +29,12 @@
  */
 
 
-/* $Id: php_string.h,v 1.6 1999/12/18 04:01:14 zeev Exp $ */
+/* $Id: php_string.h,v 1.7 1999/12/28 18:47:59 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
 #ifndef _PHPSTRING_H
 #define _PHPSTRING_H
-
-#include "basic_functions.h"
 
 PHP_FUNCTION(strspn);
 PHP_FUNCTION(strcspn);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.82 1999/12/25 09:06:55 andi Exp $ */
+/* $Id: string.c,v 1.83 1999/12/28 18:47:59 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -32,6 +32,7 @@
 #endif
 #include "zend_execute.h"
 #include "php_globals.h"
+#include "basic_functions.h"
 
 int php_tag_find(char *tag, int len, char *set);
 

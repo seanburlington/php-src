@@ -16,11 +16,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_open_temporary_file.h,v 1.7 2003/02/19 08:40:19 sniper Exp $ */
+/* $Id: php_open_temporary_file.h,v 1.8 2003/03/18 16:40:29 wez Exp $ */
 
 #ifndef PHP_OPEN_TEMPORARY_FILE_H
 #define PHP_OPEN_TEMPORARY_FILE_H
 
 PHPAPI FILE *php_open_temporary_file(const char *dir, const char *pfx, char **opened_path_p TSRMLS_DC);
+PHPAPI int php_open_temporary_fd(const char *dir, const char *pfx, char **opened_path_p TSRMLS_DC);
 
 #endif /* PHP_OPEN_TEMPORARY_FILE_H */

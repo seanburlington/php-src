@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.79 2003/10/20 14:22:01 iliaa Exp $ */
+/* $Id: mail.c,v 1.80 2003/11/30 19:56:30 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -141,6 +141,8 @@ PHP_FUNCTION(mail)
 				subject_r[i] = ' ';
 			}
 		}
+	} else {
+		subject_r = subject;
 	}
 
 	if (force_extra_parameters) {

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.92 2003/01/18 20:01:40 iliaa Exp $ */
+/* $Id: exec.c,v 1.93 2003/02/18 01:07:57 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -43,6 +43,10 @@
 #endif
 #if HAVE_FCNTL_H
 #include <fcntl.h>
+#endif
+
+#if HAVE_NICE && HAVE_UNISTD_H
+#include <unistd.h>
 #endif
 
 /* {{{ php_Exec
@@ -486,6 +490,29 @@ PHP_FUNCTION(shell_exec)
 	Z_STRVAL_P(return_value)[total_readbytes] = '\0';	
 }
 /* }}} */
+
+#ifdef HAVE_NICE
+/* {{{ proto bool nice(int priority)
+   Change the priority of the current process */
+PHP_FUNCTION(nice)
+{
+	long pri;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &pri) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	errno = 0;
+	nice(pri);
+	if (errno) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Only a super user may attempt to increase the process priority.");
+		RETURN_FALSE;
+	}
+	
+	RETURN_TRUE;
+}
+/* }}} */
+#endif
 
 /*
  * Local variables:

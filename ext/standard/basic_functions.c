@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.580 2003/02/17 06:28:06 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.581 2003/02/18 01:07:55 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -422,6 +422,10 @@ function_entry basic_functions[] = {
 	PHP_FE(proc_close,														NULL)
 	PHP_FE(proc_terminate,													NULL)
 	PHP_FE(proc_get_status,													NULL)
+#endif
+
+#ifdef HAVE_NICE
+	PHP_FE(nice,														NULL)	
 #endif
 
 	PHP_FE(rand,															NULL)

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.h,v 1.3 2003/06/10 20:03:40 imajes Exp $ */
+/* $Id: php_xsl.h,v 1.4 2003/08/24 10:18:08 rrichards Exp $ */
 
 #ifndef PHP_XSL_H
 #define PHP_XSL_H
@@ -45,7 +45,6 @@ extern zend_module_entry xsl_module_entry;
 typedef struct _xsl_object {
 	zend_object  std;
 	void *ptr;
-	dom_ref_obj *document;
 	HashTable *prop_handler;
 	zend_object_handle handle;
     HashTable *parameter;

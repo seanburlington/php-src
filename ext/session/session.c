@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.40 2004/06/23 16:29:16 sas Exp $ */
+/* $Id: session.c,v 1.336.2.39.2.1 2004/07/13 13:15:29 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -503,13 +503,16 @@ break_outer_loop:
 
 static void php_session_track_init(TSRMLS_D)
 {
+	zval *session_vars = NULL;
+	
 	/* Unconditionally destroy existing arrays -- possible dirty data */
 	zend_hash_del(&EG(symbol_table), "HTTP_SESSION_VARS", 
 			sizeof("HTTP_SESSION_VARS"));
 	zend_hash_del(&EG(symbol_table), "_SESSION", sizeof("_SESSION"));
 
-	MAKE_STD_ZVAL(PS(http_session_vars));
-	array_init(PS(http_session_vars));
+	MAKE_STD_ZVAL(session_vars);
+	array_init(session_vars);
+	PS(http_session_vars) = session_vars;
 
 	ZEND_SET_GLOBAL_VAR_WITH_LENGTH("HTTP_SESSION_VARS", sizeof("HTTP_SESSION_VARS"), PS(http_session_vars), 2, 1);
 	ZEND_SET_GLOBAL_VAR_WITH_LENGTH("_SESSION", sizeof("_SESSION"), PS(http_session_vars), 2, 1);
@@ -930,9 +933,8 @@ static void php_session_reset_id(TSRMLS_D)
 {
 	int module_number = PS(module_number);
 	
-	if (PS(use_cookies) && PS(send_cookie)) {
+	if (PS(use_cookies)) {
 		php_session_send_cookie(TSRMLS_C);
-		PS(send_cookie) = 0;
 	}
 
 	/* if the SID constant exists, destroy it. */
@@ -1284,7 +1286,6 @@ PHP_FUNCTION(session_regenerate_id)
 	
 		PS(id) = PS(mod)->s_create_sid(&PS(mod_data), NULL TSRMLS_CC);
 
-		PS(send_cookie) = 1;
 		php_session_reset_id(TSRMLS_C);
 		
 		RETURN_TRUE;

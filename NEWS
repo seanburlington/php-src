@@ -1,48 +1,13 @@
 PHP 4                                                                      NEWS
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-?? ??? 2004, Version 4.3.8
-- Updated PCRE to provide better error handling in certain cases. (Andrei)
-- NSAPI: added "bucket" parameter to list of non-php.ini-keys of php4_execute
-  for doing performance stats without warnings in server-log. (Uwe Schindler)
-- Fixed bug #29049 (array sorting via user function/method does not validate 
-  it). (Ilia)
-- Fixed bug #29038 (extract() with EXTR_PREFIX_SAME prefixes empty strings).
-  (Andrey)
-- Fixed bug #29034 (wordwrap() returns a boolean when passed empty string).
-  (Ilia)
-- Fixed bug #28974 (overflow in array_slice(), array_splice(), substr,
-  substr_replace(), strspn(), strcspn()). (Andrey)
-- Fixed bug #28963 (Missing space for \0 in address allocation). (Ilia)
-- Fixed bug #28897 (ibase: -1 returned as -0.000 for 64-bit scaled int). (Ard)
-- Fixed bug #28879 (Implicit/Explicit array creation inconsistency when using
-  Resources, Arrays, or Objects as indices). (Sara)
-- Fixed bug #28878 (Setting of inikey's in obj.conf fails). (Uwe Schindler)
-- Fixed bug #28868 (Internal wrapper registry not thread safe). (Sara)
-- Fixed bug #28818 (Apache 2 sapis do not export st_dev).
-  (xuefer at 21cn dot com, Ilia).
-- Fixed bug #28723 (Fixed mbstring config.m4 to work on OSes where test
-  command does not support -e parameter). (Ilia)
-- Fixed bug #28692 (\0 in Authenticate header passed via safe_mode). (Ilia)
-- Fixed bug #28670 (WWW-Authentication header mangling with PCRE in safe_mode
-  adds extra spaces). (Ilia)
-- Fixed bug #28668 (glob() does not work with relative paths on Windows).
-  (Ilia)
-- Fixed bug #28649 (Proper glob() return value on Linux when there are no
-  matches). (Ilia)
+14 Jul 2004, Version 4.3.8
+- Fixed strip_tags() to correctly handle '\0' characters. (Stefan)
+- Fixed memory_limit during request startup. (Stefan)
+- Replace alloca() with emalloc() for better stack protection. (Ilia)
+- Added missing safe_mode checks inside ftok and itpc. (Ilia)
+- Fixed bug #28963 (Missing space for \0 in address allocation in IMAP). (Ilia)
 - Fixed bug #28632 (Prevent open_basedir bypass via MySQL's LOAD DATA LOCAL).
   (Ilia)
-- Fixed bug #28627 (When multiple MySQL links are used default link is leaked).
-  (gavin at ipalsoftware dot com, Ilia)
-- Fixed bug #28525 (gmp_powm() does not work with hexadecimal string modulo
-  represented as a string). (pickett at sumu dot org, Ilia)
-- Fixed bug #28512 (Allocate enough space to store MSSQL data). (Frank)
-- Fixed bug #28466 (mbstring_convert_variables() array separation problem).
-  (Moriyoshi)
-- Fixed bug #28175 (Allow bundled GD to compile against freetype 2.1.2).
-  (Elf, Ilia)
-- Fixed leap year checking with idate(). (Christian Schneider, Derick)
-- Fixed strip_tags() to correctly handle '\0' characters. (Stefan)
-- Fixed funny forking effect in FastCGI when PHP_FCGI_CHILDREN was not set.
 
 03 Jun 2004, Version 4.3.7
 - Upgraded bundled GD library to 2.0.23. (Ilia)

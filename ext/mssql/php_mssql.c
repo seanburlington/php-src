@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.86.2.34 2004/06/30 19:47:18 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.86.2.32.2.1 2004/07/13 13:15:29 iliaa Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -336,7 +336,7 @@ PHP_RINIT_FUNCTION(mssql)
 	dbsetlogintime(MS_SQL_G(connect_timeout));
 	if (MS_SQL_G(timeout) < 0) MS_SQL_G(timeout) = 60;
 	dbsettime(MS_SQL_G(timeout));
-	dbsetmaxprocs((TDS_SHORT)MS_SQL_G(max_procs));
+	dbsetmaxprocs((SHORT)MS_SQL_G(max_procs));
 
 	return SUCCESS;
 }
@@ -344,6 +344,7 @@ PHP_RINIT_FUNCTION(mssql)
 PHP_RSHUTDOWN_FUNCTION(mssql)
 {
 	STR_FREE(MS_SQL_G(appname));
+	MS_SQL_G(appname) = NULL;
 	if (MS_SQL_G(server_message)) {
 		STR_FREE(MS_SQL_G(server_message));
 		MS_SQL_G(server_message) = NULL;
@@ -847,21 +848,8 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 
 				if ((column_type != SQLDATETIME && column_type != SQLDATETIM4) || MS_SQL_G(datetimeconvert)) {
 
-					switch (column_type) {
-						case SQLDATETIM4 :
-							res_length += 14;
-							break;
-						case SQLDATETIME :
-							res_length += 10;
-							break;
-						case SQLMONEY :
-						case SQLMONEY4 :
-						case SQLMONEYN :
-						case SQLDECIMAL :
-						case SQLNUMERIC :
-							res_length += 5;
-							break;
-					}
+					if (column_type == SQLDATETIM4) res_length += 14;
+					if (column_type == SQLDATETIME) res_length += 10;
 			
 					res_buf = (unsigned char *) emalloc(res_length+1);
 					res_length = dbconvert(NULL,coltype(offset),dbdata(mssql_ptr->link,offset), res_length, SQLCHAR,res_buf,-1);
@@ -930,8 +918,6 @@ static void php_mssql_get_column_content_without_type(mssql_link *mssql_ptr,int 
 				case SQLMONEY :
 				case SQLMONEY4 :
 				case SQLMONEYN :
-				case SQLDECIMAL :
-				case SQLNUMERIC :
 					res_length += 5;
 					break;
 			}

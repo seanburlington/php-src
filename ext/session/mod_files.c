@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.83.2.3 2003/01/15 15:53:34 sniper Exp $ */
+/* $Id: mod_files.c,v 1.83.2.4 2003/05/20 12:38:04 sas Exp $ */
 
 #include "php.h"
 
@@ -142,7 +142,7 @@ static void ps_files_open(ps_files *data, const char *key TSRMLS_DC)
 		ps_files_close(data);
 		
 		if (!ps_files_valid_key(key)) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "The session id contains illegal characters, valid characters are only a-z, A-Z and 0-9");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "The session id contains invalid characters, valid characters are only a-z, A-Z and 0-9");
 			return;
 		}
 		if (!ps_files_path_create(buf, sizeof(buf), data, key))

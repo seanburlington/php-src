@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlstate.c,v 1.2 2005/01/12 04:49:12 wez Exp $ */
+/* $Id: pdo_sqlstate.c,v 1.3 2005/01/21 03:59:41 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -140,9 +140,9 @@ static struct pdo_sqlstate_info err_initializer[] = {
 	{ "IM001",	"Driver does not support this function" },
 	{ "IM002",	"Data source name not found and no default driver specified" },
 	{ "IM003",	"Specified driver could not be loaded" },
-	{ "IM004",	"Driver’s SQLAllocHandle on SQL_HANDLE_ENV failed" },
-	{ "IM005",	"Driver’s SQLAllocHandle on SQL_HANDLE_DBC failed" },
-	{ "IM006",	"Driver’s SQLSetConnectAttr failed" },
+	{ "IM004",	"Driver's SQLAllocHandle on SQL_HANDLE_ENV failed" },
+	{ "IM005",	"Driver's SQLAllocHandle on SQL_HANDLE_DBC failed" },
+	{ "IM006",	"Driver's SQLSetConnectAttr failed" },
 	{ "IM007",	"No data source or driver specified; dialog prohibited" },
 	{ "IM008",	"Dialog failed" },
 	{ "IM009",	"Unable to load translation DLL" },

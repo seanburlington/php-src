@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.10 2000/06/12 23:41:34 neotron Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.11 2000/11/19 09:06:17 neotron Exp $ -*- sh -*-
 
 RESULT=no
 AC_MSG_CHECKING(for Roxen/Pike support)
@@ -17,7 +17,7 @@ AC_ARG_WITH(roxen,
 		AC_MSG_ERROR(Couldn't find a pike in $withval/bin/)
 	fi
     if $PIKE -e 'float v; catch(v = __VERSION__ + (__BUILD__/10000.0)); if(v < 0.7079) exit(1); exit(0);'; then
-		PIKE_MODULE_DIR="`$PIKE --show-paths 2>&1| grep lib/modules | sed -e 's/.*: //'`"
+		PIKE_MODULE_DIR="`$PIKE --show-paths 2>&1| grep '^Module' | sed -e 's/.*: //'`"
 	    PIKE_INCLUDE_DIR="`echo $PIKE_MODULE_DIR | sed -e 's,lib/pike/modules,include/pike,' -e 's,lib/modules,include/pike,'`"
 		if test -z "$PIKE_INCLUDE_DIR" -o -z "$PIKE_MODULE_DIR"; then
 			AC_MSG_ERROR(Failed to figure out Pike module and include directories)

@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.2 2000/11/03 16:30:55 sniper Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.3 2000/11/19 09:10:16 neotron Exp $ -*- sh -*-
 
 RESULT=no
 AC_MSG_CHECKING(for Caudium support)
@@ -18,7 +18,7 @@ AC_ARG_WITH(caudium,
 		AC_MSG_ERROR(Couldn't find a pike in $withval/bin/)
 	fi
     if $PIKE -e 'float v; int rel;sscanf(version(), "Pike v%f release %d", v, rel);v += rel/10000.0; if(v < 7.0) exit(1); exit(0);'; then
-		PIKE_MODULE_DIR="`$PIKE --show-paths 2>&1| grep lib/modules | sed -e 's/.*: //'`"
+		PIKE_MODULE_DIR="`$PIKE --show-paths 2>&1| grep '^Module' | sed -e 's/.*: //'`"
 	    PIKE_INCLUDE_DIR="`echo $PIKE_MODULE_DIR | sed -e 's,lib/pike/modules,include/pike,' -e 's,lib/modules,include/pike,'`"
 		if test -z "$PIKE_INCLUDE_DIR" -o -z "$PIKE_MODULE_DIR"; then
 			AC_MSG_ERROR(Failed to figure out Pike module and include directories)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.47 2001/08/06 03:50:51 sas Exp $ */
+/* $Id: php_string.h,v 1.48 2001/08/07 19:44:45 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -57,6 +57,8 @@ PHP_FUNCTION(hebrev);
 PHP_FUNCTION(hebrevc);
 PHP_FUNCTION(user_sprintf);
 PHP_FUNCTION(user_printf);
+PHP_FUNCTION(vprintf);
+PHP_FUNCTION(vsprintf);
 PHP_FUNCTION(addcslashes);
 PHP_FUNCTION(addslashes);
 PHP_FUNCTION(stripcslashes);

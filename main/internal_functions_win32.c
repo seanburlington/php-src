@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.46 2001/09/09 13:29:28 derick Exp $ */
+/* $Id: internal_functions_win32.c,v 1.47 2001/09/25 17:08:02 dbeu Exp $ */
 
 /* {{{ includes
  */
@@ -72,7 +72,6 @@ zend_module_entry *php_builtin_extensions[] = {
 #endif
 	phpext_calendar_ptr,
 	COM_module_ptr,
-	VARIANT_module_ptr,
 	phpext_ftp_ptr,
 #if defined(MBSTR_ENC_TRANS)
 	phpext_mbstring_ptr,

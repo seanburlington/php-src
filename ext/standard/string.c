@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.387 2003/05/27 00:42:39 msopacua Exp $ */
+/* $Id: string.c,v 1.388 2003/06/09 18:12:36 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1268,7 +1268,6 @@ PHP_FUNCTION(pathinfo)
 	if ((opt & PHP_PATHINFO_EXTENSION) == PHP_PATHINFO_EXTENSION) {
 		char *p;
 		int idx;
-		int ret_len;
 		int have_basename = ((opt & PHP_PATHINFO_BASENAME) == PHP_PATHINFO_BASENAME);
 
 		/* Have we alrady looked up the basename? */

@@ -17,7 +17,7 @@
    |          Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: crypt.c,v 1.21 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: crypt.c,v 1.22 2000/05/05 10:36:00 sas Exp $ */
 #include <stdlib.h>
 
 #include "php.h"
@@ -68,6 +68,17 @@ extern char *crypt(char *__key,char *__salt);
 #if PHP_BLOWFISH_CRYPT
 #undef PHP_MAX_SALT_LEN
 #define PHP_MAX_SALT_LEN 17
+#endif
+
+ /*
+  * If the configure-time checks fail, we provide DES.
+  * XXX: This is a hack. Fix the real problem
+  */
+
+#ifndef PHP_MAX_SALT_LEN
+#define PHP_MAX_SALT_LEN 2
+#undef PHP_STD_DES_CRYPT
+#define PHP_STD_DES_CRYPT 1
 #endif
 
 #if HAVE_LRAND48

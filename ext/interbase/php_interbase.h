@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.9 2000/05/12 03:02:14 jah Exp $ */
+/* $Id: php_interbase.h,v 1.10 2000/05/12 08:37:03 jah Exp $ */
 
 #ifndef _PHP_IBASE_H
 #define _PHP_IBASE_H
@@ -122,6 +122,7 @@ typedef struct {
 	isc_db_handle link; /* db link for this result */
 	isc_tr_handle trans;
 	isc_stmt_handle stmt;
+	int drop_stmt;
 	XSQLDA *in_sqlda, *out_sqlda;
 	ibase_array *in_array, *out_array;
 	int in_array_cnt, out_array_cnt;

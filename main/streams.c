@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.153 2003/02/13 17:20:20 wez Exp $ */
+/* $Id: streams.c,v 1.154 2003/02/13 21:08:04 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -869,14 +869,17 @@ PHPAPI size_t _php_stream_write(php_stream *stream, const char *buf, size_t coun
 			justwrote = stream->ops->write(stream, buf, towrite TSRMLS_CC);
 		}
 		if (justwrote > 0) {
-			stream->position += justwrote;
 			buf += justwrote;
 			count -= justwrote;
 			didwrite += justwrote;
 			
-			/* FIXME: invalidate the whole readbuffer */
-			stream->writepos = 0;
-			stream->readpos = 0;
+			/* Only screw with the buffer if we can seek, otherwise we lose data
+			 * buffered from fifos and sockets */
+			if (stream->ops->seek && (stream->flags & PHP_STREAM_FLAG_NO_SEEK) == 0) {
+				stream->position += justwrote;
+				stream->writepos = 0;
+				stream->readpos = 0;
+			}
 		} else {
 			break;
 		}

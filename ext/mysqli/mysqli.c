@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.61 2005/01/27 14:41:48 tony2001 Exp $ 
+  $Id: mysqli.c,v 1.62 2005/03/06 21:40:01 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -349,7 +349,7 @@ PHP_MYSQLI_EXPORT(zend_object_value) mysqli_objects_new(zend_class_entry *class_
 	zend_hash_copy(intern->zo.properties, &class_type->default_properties, (copy_ctor_func_t) zval_add_ref,
 					(void *) &tmp, sizeof(zval *));
 
-	retval.handle = zend_objects_store_put(intern, NULL, mysqli_objects_free_storage, NULL TSRMLS_CC);
+	retval.handle = zend_objects_store_put(intern, (zend_objects_store_dtor_t) zend_objects_destroy_object, (zend_objects_free_object_storage_t) mysqli_objects_free_storage, NULL TSRMLS_CC);
 	retval.handlers = &mysqli_object_handlers;
 
 	return retval;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.3 2002/12/31 16:34:15 sebastian Exp $ */
+/* $Id: curl.c,v 1.124.2.4 2003/02/03 20:56:28 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -335,7 +335,7 @@ static size_t curl_write(char *data, size_t size, size_t nmemb, void *ctx)
 
 	switch (t->method) {
 	case PHP_CURL_STDOUT:
-		PUTS(data);
+		PHPWRITE(data, size);
 		break;
 	case PHP_CURL_FILE:
 		return fwrite(data, size, nmemb, t->fp);
@@ -453,7 +453,7 @@ static size_t curl_write_header(char *data, size_t size, size_t nmemb, void *ctx
 			if (ch->handlers->write->method == PHP_CURL_RETURN)
 				smart_str_appendl(&ch->handlers->write->buf, data, (int) length);
 			else
-				PUTS(data);
+				PHPWRITE(data, size);
 			break;
 		case PHP_CURL_FILE:
 			return fwrite(data, size, nmemb, t->fp);

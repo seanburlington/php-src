@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.104 2003/12/22 13:08:04 wez Exp $ */
+/* $Id: php_cli.c,v 1.105 2004/01/02 22:31:32 edink Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -686,6 +686,7 @@ int main(int argc, char *argv[])
 		INI_HARDCODED("register_argc_argv", "1");
 		INI_HARDCODED("html_errors", "0");
 		INI_HARDCODED("implicit_flush", "1");
+		INI_HARDCODED("output_buffering", "0");
 		INI_HARDCODED("max_execution_time", "0");
 
 		optind = orig_optind;

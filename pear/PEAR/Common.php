@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.25 2001/12/16 16:21:35 cox Exp $
+// $Id: Common.php,v 1.26 2001/12/17 21:10:11 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -262,7 +262,7 @@ class PEAR_Common extends PEAR
             case 'name':
                 switch ($this->prev_element) {
                     case 'package':
-                        $this->pkginfo['package'] = $data;
+                        $this->pkginfo['package'] = ereg_replace('[^a-zA-Z0-9._]', '_', trim($data));
                         break;
                     case 'maintainer':
                         $this->current_maintainer['name'] = $data;
@@ -286,6 +286,7 @@ class PEAR_Common extends PEAR
                 }
                 break;
             case 'version':
+                $data = ereg_replace ('[^a-zA-Z0-9._\-]', '_', trim($data));
                 if ($this->in_changelog) {
                     $this->current_release['version'] = $data;
                 } else {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.257 2001/10/18 09:12:39 sterling Exp $ */
+/* $Id: session.c,v 1.258 2001/10/22 15:18:06 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -67,6 +67,7 @@ function_entry session_functions[] = {
 	PHP_FE(session_unset, NULL)
 	PHP_FE(session_set_save_handler, NULL)
 	PHP_FE(session_cache_limiter, NULL)
+	PHP_FE(session_cache_expire, NULL)
 	PHP_FE(session_set_cookie_params, NULL)
 	PHP_FE(session_get_cookie_params, NULL)
 	PHP_FE(session_write_close, NULL)
@@ -1171,6 +1172,29 @@ PHP_FUNCTION(session_cache_limiter)
 	}
 	
 	RETVAL_STRING(old, 0);
+}
+/* }}} */
+
+/* {{{ proto int session_cache_expire([int new_cache_expire])
+   Return the current cache expire. If new_cache_expire is given, the current cache_expire is replaced with new_cache_expire */
+PHP_FUNCTION(session_cache_expire)
+{
+	zval **p_cache_expire;
+	int ac = ZEND_NUM_ARGS();
+	long old;
+	PSLS_FETCH();
+
+	old = PS(cache_expire);
+
+	if (ac < 0 || ac > 1 || zend_get_parameters_ex(ac, &p_cache_expire) == FAILURE)
+		WRONG_PARAM_COUNT;
+
+	if (ac == 1) {
+		convert_to_long_ex(p_cache_expire);
+		PS(cache_expire) = Z_LVAL_PP(p_cache_expire);
+	}
+
+	RETVAL_LONG(old);
 }
 /* }}} */
 

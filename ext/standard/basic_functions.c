@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.653 2004/01/19 19:01:17 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.654 2004/03/10 19:12:49 rasmus Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1405,8 +1405,8 @@ PHP_FUNCTION(getopt)
 	 * in order to be on the safe side, even though it is also available
 	 * from the symbol table.
 	 */
-	if (zend_hash_find(HASH_OF(PG(http_globals)[TRACK_VARS_SERVER]), "argv", sizeof("argv"),
-					   (void **) &args) != FAILURE) {
+	if (zend_hash_find(HASH_OF(PG(http_globals)[TRACK_VARS_SERVER]), "argv", sizeof("argv"), (void **) &args) != FAILURE ||
+		zend_hash_find(&EG(symbol_table), "argv", sizeof("argv"), (void **) &args) != FAILURE) {
 		int pos = 0;
 		zval **arg;
 

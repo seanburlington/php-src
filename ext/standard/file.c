@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.66 2004/12/06 23:31:58 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.67 2004/12/08 21:15:02 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2335,7 +2335,7 @@ PHP_FUNCTION(fgetcsv)
 
 	convert_to_long_ex(bytes);
 	len = Z_LVAL_PP(bytes);
-	if (len < 0) {
+	if (Z_LVAL_PP(bytes) < 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length parameter may not be negative");
 		RETURN_FALSE;
 	}

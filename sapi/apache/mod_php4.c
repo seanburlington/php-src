@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.82 2001/01/03 11:39:09 sniper Exp $ */
+/* $Id: mod_php4.c,v 1.83 2001/01/03 11:56:00 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -346,6 +346,8 @@ static sapi_module_struct apache_sapi_module = {
 
 	sapi_apache_register_server_variables,		/* register server variables */
 	php_apache_log_message,			/* Log message */
+
+	NULL,					/* php.ini path override */
 
 #ifdef PHP_WIN32
 	NULL,

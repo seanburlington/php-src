@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.309 2002/10/04 16:53:14 sterling Exp $ */
+/* $Id: string.c,v 1.310 2002/10/04 16:54:56 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -899,6 +899,10 @@ PHP_FUNCTION(implode)
 	}
 
 	php_implode(delim, arr, return_value);
+	zval_ptr_dtor(arg1);
+	if (arg2) {
+		zval_ptr_dtor(arg2);
+	}
 }
 /* }}} */
 

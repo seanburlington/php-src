@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.105 2002/03/21 16:10:08 hholzgra Exp $ */
+/* $Id: xml.c,v 1.106 2002/04/09 17:32:39 ssb Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -994,7 +994,6 @@ void _xml_endNamespaceDeclHandler(void *userData, const XML_Char *prefix)
 		}
 	}
 }
-/* }}} */
 /* }}} */
 
 /************************* EXTENSION FUNCTIONS *************************/

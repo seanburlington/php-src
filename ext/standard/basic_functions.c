@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.548 2002/12/12 18:50:26 msopacua Exp $ */
+/* $Id: basic_functions.c,v 1.549 2002/12/20 16:34:41 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -515,7 +515,10 @@ function_entry basic_functions[] = {
 	PHP_FE(getrusage,														NULL)
 #endif
 
+#ifdef HAVE_GETTIMEOFDAY
 	PHP_FE(uniqid,															NULL)
+#endif
+
 	PHP_FE(quoted_printable_decode,											NULL)
 	PHP_FE(convert_cyr_string,												NULL)
 	PHP_FE(get_current_user,												NULL)

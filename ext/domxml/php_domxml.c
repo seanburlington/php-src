@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.144 2002/04/24 05:49:57 sniper Exp $ */
+/* $Id: php_domxml.c,v 1.145 2002/04/30 05:18:12 steinm Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -299,6 +299,7 @@ static function_entry php_domxmldoc_class_functions[] = {
 static function_entry php_domxmlparser_class_functions[] = {
 	PHP_FALIAS(add_chunk,				domxml_parser_add_chunk,		NULL)
 	PHP_FALIAS(end,						domxml_parser_end,				NULL)
+	PHP_FALIAS(set_keep_blanks,			domxml_parser_set_keep_blanks,	NULL)
 	{NULL, NULL, NULL}
 };
 
@@ -3652,6 +3653,21 @@ PHP_FUNCTION(domxml_parser_end)
 	else {
 		RETVAL_FALSE
 	}
+}
+/* }}} */
+
+/* {{{ proto bool domxml_parser_set_keep_blanks(bool mode)
+   Determines how to handle blanks */
+PHP_FUNCTION(domxml_parser_set_keep_blanks)
+{
+	zval *id;
+	xmlParserCtxtPtr parserp;
+	zend_bool mode;
+
+	DOMXML_PARAM_ONE(parserp, id, le_domxmlparserp, "b", &mode);
+	parserp->keepBlanks = mode;
+
+	RETURN_TRUE;
 }
 /* }}} */
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.50 2002/04/23 06:26:46 steinm Exp $ */
+/* $Id: php_domxml.h,v 1.51 2002/04/30 05:18:12 steinm Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -167,6 +167,7 @@ PHP_FUNCTION(domxml_pi_data);
 PHP_FUNCTION(domxml_parser);
 PHP_FUNCTION(domxml_parser_add_chunk);
 PHP_FUNCTION(domxml_parser_end);
+PHP_FUNCTION(domxml_parser_set_keep_blanks);
 
 /* Class XPathContext methods */
 #if defined(LIBXML_XPATH_ENABLED)

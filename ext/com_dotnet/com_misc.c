@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_misc.c,v 1.5 2004/02/12 10:43:19 zeev Exp $ */
+/* $Id: com_misc.c,v 1.6 2004/05/03 20:10:57 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -118,7 +118,7 @@ PHPAPI int php_com_safearray_get_elem(VARIANT *array, VARIANT *dest, LONG dim1 T
 	
 	/* check bounds */
 	if (dim1 < lbound || dim1 > ubound) {
-		php_com_throw_exception(E_INVALIDARG, "index out of bounds" TSRMLS_CC);
+		php_com_throw_exception(DISP_E_BADINDEX, "index out of bounds" TSRMLS_CC);
 		return 0;
 	}
 	

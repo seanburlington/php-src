@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_variant.c,v 1.7 2004/05/03 15:51:41 wez Exp $ */
+/* $Id: com_variant.c,v 1.8 2004/05/03 20:10:57 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -444,10 +444,7 @@ static void variant_binary_operation(enum variant_binary_opcode op, INTERNAL_FUN
 	if (SUCCEEDED(result)) {
 		php_com_wrap_variant(return_value, &vres, codepage TSRMLS_CC);
 	} else {
-		char *werr;
-		werr = php_win_err(result);
-		php_com_throw_exception(result, werr TSRMLS_CC);
-		LocalFree(werr);
+		php_com_throw_exception(result, NULL TSRMLS_CC);
 	}
 
 	VariantClear(&vres);
@@ -606,10 +603,7 @@ static void variant_unary_operation(enum variant_unary_opcode op, INTERNAL_FUNCT
 	if (SUCCEEDED(result)) {
 		php_com_wrap_variant(return_value, &vres, codepage TSRMLS_CC);
 	} else {
-		char *werr;
-		werr = php_win_err(result);
-		php_com_throw_exception(result, werr TSRMLS_CC);
-		LocalFree(werr);
+		php_com_throw_exception(result, NULL TSRMLS_CC);
 	}
 
 	VariantClear(&vres);

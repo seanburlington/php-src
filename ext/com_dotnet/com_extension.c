@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_extension.c,v 1.12 2004/05/03 15:51:41 wez Exp $ */
+/* $Id: com_extension.c,v 1.13 2004/05/03 20:10:57 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -281,6 +281,7 @@ PHP_MINIT_FUNCTION(com_dotnet)
 #endif
 	COM_CONST(DISP_E_DIVBYZERO);
 	COM_CONST(DISP_E_OVERFLOW);
+	COM_CONST(DISP_E_BADINDEX);
 
 	return SUCCESS;
 }

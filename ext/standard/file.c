@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.400 2005/03/07 00:16:18 helly Exp $ */
+/* $Id: file.c,v 1.401 2005/03/07 21:28:38 helly Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1052,7 +1052,7 @@ exit_failed:
 PHPAPI PHP_FUNCTION(fgetc)
 {
 	zval **arg1;
-	char *buf;
+	char buf[2];
 	int result;
 	php_stream *stream;
 
@@ -1062,18 +1062,15 @@ PHPAPI PHP_FUNCTION(fgetc)
 
 	PHP_STREAM_TO_ZVAL(stream, arg1);
 
-	buf = safe_emalloc(2, sizeof(char), 0);
-
 	result = php_stream_getc(stream);
 
 	if (result == EOF) {
-		efree(buf);
 		RETVAL_FALSE;
 	} else {
 		buf[0] = result;
 		buf[1] = '\0';
 
-		RETURN_STRINGL(buf, 1, 0);
+		RETURN_STRINGL(buf, 1, 1);
 	}
 }
 /* }}} */

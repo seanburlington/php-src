@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_notes.c,v 1.9 2001/10/11 23:33:21 ssb Exp $ */
+/* $Id: php_notes.c,v 1.10 2001/12/05 23:04:28 hholzgra Exp $ */
 
 #ifdef COMPILE_DL_NOTES
 #define HAVE_NOTES 1
@@ -2225,6 +2225,8 @@ char    ItemText[MAX_ITEM_LEN];     /* Text rendering of item value */
 char    ItemName[MAX_ITEM_NAME_LEN];/* Zero terminated item name */
 
 
+/* {{{ proto bool notes_list_msgs(string db)
+ */
 PHP_FUNCTION(notes_list_msgs)
 {
 

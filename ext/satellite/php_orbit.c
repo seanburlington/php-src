@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: php_orbit.c,v 1.10 2001/10/11 23:33:44 ssb Exp $
+ * $Id: php_orbit.c,v 1.11 2001/12/05 23:07:13 hholzgra Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -166,6 +166,8 @@ PHP_FUNCTION(satellite_get_repository_id)
 {
 }
 
+/* {{{ proto bool satellite_caught_exception(void)
+	 See if an exception was caught from the previous function */
 PHP_FUNCTION(satellite_caught_exception)
 {
 	RETURN_BOOL(orbit_caught_exception());
@@ -177,6 +179,7 @@ PHP_FUNCTION(satellite_exception_id)
 	
 	RETURN_STRING(p_id, TRUE);
 }
+/* }}} */
 
 /* real name: php_if_orbit_exception_value */
 PHP_FUNCTION(satellite_exception_value)

@@ -16,7 +16,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.61 2002/06/24 19:36:26 helly Exp $ */
+/* $Id: image.c,v 1.62 2002/06/24 22:00:22 helly Exp $ */
 /*
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -97,6 +97,7 @@ PHP_MINIT_FUNCTION(imagetypes)
 	REGISTER_LONG_CONSTANT("IMAGETYPE_JB2",     IMAGE_FILETYPE_JB2,     CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IMAGETYPE_SWC",     IMAGE_FILETYPE_SWC,     CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IMAGETYPE_IFF",     IMAGE_FILETYPE_IFF,     CONST_CS | CONST_PERSISTENT);
+	return SUCCESS;
 }
 /* }}} */
 

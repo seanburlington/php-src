@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.h,v 1.12 2004/09/08 16:54:17 rrichards Exp $ */
+/* $Id: php_xsl.h,v 1.13 2005/03/02 18:27:25 rrichards Exp $ */
 
 #ifndef PHP_XSL_H
 #define PHP_XSL_H
@@ -58,6 +58,7 @@ typedef struct _xsl_object {
 	int hasKeys;
 	int registerPhpFunctions;
 	HashTable *node_list;
+	php_libxml_node_object *doc;
 } xsl_object;
 
 void php_xsl_set_object(zval *wrapper, void *obj TSRMLS_DC);

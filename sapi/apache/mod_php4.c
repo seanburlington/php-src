@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.146 2002/11/10 19:34:09 iliaa Exp $ */
+/* $Id: mod_php4.c,v 1.146.2.1 2002/12/21 20:09:09 andrei Exp $ */
 
 #include "php_apache_http.h"
 
@@ -415,7 +415,7 @@ static void init_request_info(TSRMLS_D)
 		authorization = table_get(r->headers_in, "Authorization");
 	}
 	if (authorization
-		&& !auth_type(r)
+		&& (!PG(safe_mode) || (PG(safe_mode) && !auth_type(r)))
 		&& !strcasecmp(getword(r->pool, &authorization, ' '), "Basic")) {
 		tmp = uudecode(r->pool, authorization);
 		SG(request_info).auth_user = getword_nulls_nc(r->pool, &tmp, ':');

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.189 2004/08/11 06:18:25 rasmus Exp $ */
+/* $Id: SAPI.c,v 1.190 2004/08/19 20:26:39 bfrance Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -296,6 +296,7 @@ SAPI_API void sapi_activate_headers_only(TSRMLS_D)
 	SG(request_info).current_user = NULL;
 	SG(request_info).current_user_length = 0;
 	SG(request_info).no_headers = 0;
+	SG(request_info).post_entry = NULL;
 
 	/*
 	 * It's possible to override this general case in the activate() callback, 

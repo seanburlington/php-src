@@ -17,12 +17,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.29 1999/11/19 14:11:15 thies Exp $ */
+/* $Id: xml.c,v 1.30 1999/12/04 14:45:38 ssb Exp $ */
 #define IS_EXT_MODULE
 
-#if COMPILE_DL
-# include "dl/phpdl.h"
-#endif
 #include "php.h"
 #include "php3_xml.h"
 #include "zend_variables.h"
@@ -59,9 +56,10 @@ PHP_XML_API php_xml_globals xml_globals;
 
 /* {{{ dynamically loadable module stuff */
 
-# if COMPILE_DL
+#ifdef COMPILE_DL_XML
+# include "dl/phpdl.h"
 DLEXPORT zend_module_entry *get_module(void) { return &xml_module_entry; }
-# endif /* COMPILE_DL */
+#endif /* COMPILE_DL_XML */
 
 /* }}} */
 /* {{{ function prototypes */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.25 1999/12/01 23:14:53 ssb Exp $ */
+/* $Id: gd.c,v 1.26 1999/12/04 14:45:37 ssb Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -135,7 +135,7 @@ php3_module_entry gd_module_entry = {
 	"gd", gd_functions, PHP_MINIT(gd), PHP_MSHUTDOWN(gd), NULL, NULL, PHP_MINFO(gd), STANDARD_MODULE_PROPERTIES
 };
 
-#if COMPILE_DL
+#ifdef COMPILE_DL_GD
 # include "dl/phpdl.h"
 DLEXPORT php3_module_entry *get_module(void) { return &gd_module_entry; }
 #endif

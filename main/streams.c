@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.76 2002/09/23 13:22:10 wez Exp $ */
+/* $Id: streams.c,v 1.77 2002/09/23 14:50:21 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -512,7 +512,7 @@ PHPAPI char *_php_stream_gets(php_stream *stream, char *buf, size_t maxlen TSRML
 			eol = memchr(readptr, '\n', avail);
 		}
 
-		if (eol && (eol + 1 - readptr) <= maxlen - 1) {
+		if (eol && ((ptrdiff_t)eol + 1 - (ptrdiff_t)readptr) <= maxlen - 1) {
 			justread = eol + 1 - readptr;
 		} else {
 			eol = NULL;

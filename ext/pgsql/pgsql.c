@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.98 2001/04/14 10:32:14 hirokawa Exp $ */
+/* $Id: pgsql.c,v 1.99 2001/04/29 17:33:11 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -376,6 +376,9 @@ void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 				pgsql=PQsetdb(host,port,options,tty,dbname);
 			}
 			if (pgsql==NULL || PQstatus(pgsql)==CONNECTION_BAD) {
+				if (pgsql) {
+					PQfinish(pgsql);
+				}
 				php_error(E_WARNING,"Unable to connect to PostgreSQL server:  %s",PQerrorMessage(pgsql));
 				efree(hashed_details);
 				RETURN_FALSE;

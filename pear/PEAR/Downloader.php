@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Downloader.php,v 1.8 2003/12/06 05:59:25 cellog Exp $
+// $Id: Downloader.php,v 1.9 2003/12/06 06:06:50 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -495,6 +495,8 @@ class PEAR_Downloader extends PEAR_Common
      * @param array packages that will be installed in this iteration
      * @return false|string|PEAR_Error
      * @access private
+     * @todo Add test for relation 'lt'/'le' -> make sure that the dependency requested is
+     *       in fact lower than the required value.  This will be very important for BC dependencies
      */
     function _processDependency($package, $info, $mywillinstall)
     {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.124 2002/10/01 02:43:33 yohgaki Exp $ */
+/* $Id: output.c,v 1.125 2002/10/01 10:01:56 yohgaki Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -231,7 +231,6 @@ PHPAPI void php_end_ob_buffer(zend_bool send_buffer, zend_bool just_flush TSRMLS
 			FREE_ZVAL(orig_buffer);
 		}
 		zval_ptr_dtor(&z_status);
-		zval_ptr_dtor(&OG(active_ob_buffer).output_handler);
 	}
 
 	if (!final_buffer) {

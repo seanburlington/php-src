@@ -84,7 +84,7 @@
  *
  */
 
-/* $Id: mbfilter.h,v 1.4 2001/05/09 11:18:11 hirokawa Exp $ */
+/* $Id: mbfilter.h,v 1.5 2001/05/12 23:42:09 wez Exp $ */
 
 
 #ifndef MBFL_MBFILTER_H
@@ -123,6 +123,7 @@ enum mbfl_no_encoding {
 	mbfl_no_encoding_byte4be,
 	mbfl_no_encoding_byte4le,
 	mbfl_no_encoding_base64,
+	mbfl_no_encoding_uuencode,
 	mbfl_no_encoding_qprint,
 	mbfl_no_encoding_7bit,
 	mbfl_no_encoding_8bit,

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.59 2001/04/25 05:43:30 andi Exp $ */
+/* $Id: filestat.c,v 1.60 2001/04/25 05:53:45 andi Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -488,8 +488,8 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 		/* do lstat if the buffer is empty */
 
 		if (!BG(lsb).st_mode) {
-			if (V_LSTAT(BG(CurrentStatFile), &BG(lsb)) == -1) {
-				php_error(E_NOTICE, "lstat failed for %s (errno=%d - %s)", BG(CurrentStatFile), errno, strerror(errno));
+			if (V_LSTAT(filename, &BG(lsb)) == -1) {
+				php_error(E_NOTICE, "lstat failed for %s (errno=%d - %s)", filename, errno, strerror(errno));
 				RETURN_FALSE;
 			}
 		}

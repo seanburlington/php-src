@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.125 2002/10/25 18:35:25 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.126 2002/10/26 02:08:05 yohgaki Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -1795,7 +1795,7 @@ PHP_FUNCTION(mb_parse_str)
 		}
 		n++;
 		/* add variable to symbol table */
-		php_register_variable_safe(var, val ? val : "", val_len, track_vars_array TSRMLS_CC);
+		php_register_variable_safe(var, val, val_len, track_vars_array TSRMLS_CC);
 		mbfl_string_clear(&resvar);
 		mbfl_string_clear(&resval);
 	}

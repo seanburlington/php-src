@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.9 2002/05/19 16:32:18 ssb Exp $
+// $Id: Dependency.php,v 1.10 2002/05/22 01:23:12 cox Exp $
 
 /**
 * Methods for dependencies check. Based on Stig's dependencies RFC
@@ -111,9 +111,11 @@ class PEAR_Dependency
             case 'ge':
             case 'gt':
                 $version = $this->registry->packageInfo($name, 'version');
-                if (!version_compare($version, $req, $relation)) {
+                if (!$this->registry->packageExists($name)
+                    || !version_compare($version, $req, $relation))
+                {
                     return "requires package `$name' " .
-                        $this->signOperator($relation) . " $req";
+                           $this->signOperator($relation) . " $req";
                 }
         }
         return "Relation '$relation' with requirement '$req' is not supported (name=$name)";

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.10 1999/12/04 19:16:08 sas Exp $ */
+/* $Id: php_sybase_ct.c,v 1.11 1999/12/24 17:39:27 andi Exp $ */
 
 
 #include "php.h"
@@ -1224,7 +1224,7 @@ PHP_FUNCTION(sybase_fetch_row)
 	
 	array_init(return_value);
 	for (i=0; i<result->num_fields; i++) {
-		field_content = (pval *) emalloc(sizeof(pval));
+		field_content = ALLOC_ZVAL();
 		*field_content = result->data[result->cur_row][i];
 		INIT_PZVAL(field_content);
 		pval_copy_constructor(field_content);
@@ -1257,7 +1257,7 @@ static void php_sybase_fetch_hash(INTERNAL_FUNCTION_PARAMETERS)
 	}
 	
 	for (i=0; i<result->num_fields; i++) {
-		tmp = (pval *) emalloc(sizeof(pval));
+		tmp = ALLOC_ZVAL();
 		*tmp = result->data[result->cur_row][i];
 		INIT_PZVAL(tmp);
 		if (PG(magic_quotes_runtime) && tmp->type == IS_STRING) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.40 1999/09/20 20:05:26 eschmid Exp $ */
+/* $Id: string.c,v 1.41 1999/09/21 17:06:30 andrey Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -1889,7 +1889,7 @@ int php_tag_find(char *tag, int len, char *set) {
 			done =1;
 			break;
 		default:
-			if(!isspace(c)) {
+			if(!isspace((int)c)) {
 				if(state==0) {
 					state=1;
 					if(c!='/') *(n++) = c;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.29 2001/04/04 21:40:41 thies Exp $ */
+/* $Id: php_pgsql.h,v 1.30 2001/05/06 01:34:56 rasmus Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -64,6 +64,7 @@ PHP_FUNCTION(pg_exec);
 PHP_FUNCTION(pg_numrows);
 PHP_FUNCTION(pg_numfields);
 PHP_FUNCTION(pg_cmdtuples);
+PHP_FUNCTION(pg_last_notice);
 PHP_FUNCTION(pg_fieldname);
 PHP_FUNCTION(pg_fieldsize);
 PHP_FUNCTION(pg_fieldtype);
@@ -120,6 +121,7 @@ typedef struct {
 	long allow_persistent;
 	int le_lofp,le_string;
 	int ignore_notices;
+	char *last_notice;
 } php_pgsql_globals;
 
 

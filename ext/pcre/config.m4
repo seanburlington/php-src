@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.31 2003/06/27 16:31:23 andrei Exp $
+dnl $Id: config.m4,v 1.32 2003/06/28 04:30:51 sterling Exp $
 dnl
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -13,7 +13,7 @@ PHP_ARG_WITH(pcre-regex,for PCRE support,
 
 if test "$PHP_PCRE_REGEX" != "no"; then
   if test "$PHP_PCRE_REGEX" = "yes"; then
-    PHP_NEW_EXTENSION(pcre, pcrelib/maketables.c pcrelib/get.c pcrelib/study.c pcrelib/pcre.c php_pcre.c, $ext_shared,,-DSUPPORT_UTF8 -DLINK_SIZE=2 -I@ext_srcdir@/pcrelib)
+    PHP_NEW_EXTENSION(pcre, pcrelib/maketables.c pcrelib/get.c pcrelib/study.c pcrelib/pcre.c php_pcre.c, $ext_shared,,-DSUPPORT_UTF8 -DLINK_SIZE=2 -DPOSIX_MALLOC_THRESHOLD=10 -I@ext_srcdir@/pcrelib)
     PHP_ADD_BUILD_DIR($ext_builddir/pcrelib)
     AC_DEFINE(HAVE_BUNDLED_PCRE, 1, [ ])
   else

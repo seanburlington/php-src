@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.68 2000/12/28 19:23:09 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.69 2001/01/05 22:01:22 fmk Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -2505,6 +2505,9 @@ PHP_FUNCTION(odbc_tables)
 		efree(result);
 		RETURN_FALSE;
 	}
+
+	/* This hack is needed to access table information in Access databases (fmk) */
+	if (table && strlen(table) && schema && !strlen(schema)) schema = NULL;
 
 	rc = SQLTables(result->stmt, 
             cat, SAFE_SQL_NTS(cat), 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.106.2.9 2003/08/28 15:15:35 sas Exp $ */
+/* $Id: fsock.c,v 1.106.2.10 2003/08/28 16:01:49 sas Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -229,7 +229,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		err = php_socket_errno();
 
 		if (stream == NULL) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "unable to connect to %s:%d", host, port);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "unable to connect to %s:%ld", host, port);
 		} else if (context) {
 			php_stream_context_set(stream, context);
 		}

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.74 2003/08/27 01:10:25 iliaa Exp $ */
+/* $Id: streams.c,v 1.125.2.75 2003/08/28 16:04:18 sas Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2653,7 +2653,7 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 					char *tmp = estrdup(path);
 					php_strip_url_passwd(tmp);
 					php_error_docref1(NULL TSRMLS_CC, tmp, E_WARNING, "could not make seekable - %s",
-							tmp, strerror(errno));
+							tmp);
 					efree(tmp);
 
 					options ^= REPORT_ERRORS;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.136 2000/07/17 10:22:30 stas Exp $ */
+/* $Id: string.c,v 1.137 2000/07/18 20:40:23 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2602,7 +2602,7 @@ PHP_FUNCTION(str_pad)
 	char  *pad_str_val = " ";	/* Pointer to padding string */
 	int    pad_str_len = 1;		/* Length of the padding string */
 	int	   pad_type_val = STR_PAD_RIGHT; /* The padding type value */
-	int	   i, left_pad, right_pad;
+	int	   i, left_pad=0, right_pad=0;
 
 
 	if (ZEND_NUM_ARGS() < 2 || ZEND_NUM_ARGS() > 4 ||

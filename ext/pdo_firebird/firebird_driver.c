@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.14 2005/01/19 00:33:56 wez Exp $ */
+/* $Id: firebird_driver.c,v 1.15 2005/01/21 00:39:03 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -120,7 +120,7 @@ static int firebird_handle_closer(pdo_dbh_t *dbh TSRMLS_DC) /* {{{ */
 
 /* called by PDO to prepare an SQL query */
 static int firebird_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, /* {{{ */
-	pdo_stmt_t *stmt, long options, zval *driver_options TSRMLS_DC)
+	pdo_stmt_t *stmt, zval *driver_options TSRMLS_DC)
 {
 	pdo_firebird_db_handle *H = (pdo_firebird_db_handle *)dbh->driver_data;
 	pdo_firebird_stmt *S = NULL;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.25 2005/01/18 04:58:50 wez Exp $ */
+/* $Id: mysql_driver.c,v 1.26 2005/01/21 00:39:03 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -135,7 +135,7 @@ static int mysql_handle_closer(pdo_dbh_t *dbh TSRMLS_DC) /* {{{ */
 }
 /* }}} */
 
-static int mysql_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pdo_stmt_t *stmt, long options, zval *driver_options TSRMLS_DC)
+static int mysql_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pdo_stmt_t *stmt, zval *driver_options TSRMLS_DC)
 {
 	pdo_mysql_db_handle *H = (pdo_mysql_db_handle *)dbh->driver_data;
 	pdo_mysql_stmt *S = ecalloc(1, sizeof(pdo_mysql_stmt));

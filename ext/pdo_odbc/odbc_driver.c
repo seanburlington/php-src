@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_driver.c,v 1.17 2005/01/19 03:45:21 wez Exp $ */
+/* $Id: odbc_driver.c,v 1.18 2005/01/21 00:39:03 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -107,7 +107,7 @@ static int odbc_handle_closer(pdo_dbh_t *dbh TSRMLS_DC)
 	return 0;
 }
 
-static int odbc_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pdo_stmt_t *stmt, long options, zval *driver_options TSRMLS_DC)
+static int odbc_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pdo_stmt_t *stmt, zval *driver_options TSRMLS_DC)
 {
 	RETCODE rc;
 	pdo_odbc_db_handle *H = (pdo_odbc_db_handle *)dbh->driver_data;

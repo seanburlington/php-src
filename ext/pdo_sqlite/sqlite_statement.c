@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.6 2005/01/12 06:08:59 wez Exp $ */
+/* $Id: sqlite_statement.c,v 1.7 2005/01/21 00:39:03 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -101,10 +101,10 @@ static int pdo_sqlite_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_d
 					case PDO_PARAM_STR:
 					default:
 						if (param->paramno == -1) {
-							param->paramno = sqlite3_bind_parameter_index(S->stmt, param->name);
+							param->paramno = sqlite3_bind_parameter_index(S->stmt, param->name) - 1;
 						}
 						convert_to_string(param->parameter);
-						i = sqlite3_bind_text(S->stmt, param->paramno,
+						i = sqlite3_bind_text(S->stmt, param->paramno + 1,
 							Z_STRVAL_P(param->parameter),
 							Z_STRLEN_P(param->parameter),
 							SQLITE_STATIC);

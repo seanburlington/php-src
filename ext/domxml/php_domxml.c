@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.180 2002/07/13 05:53:06 sniper Exp $ */
+/* $Id: php_domxml.c,v 1.181 2002/07/17 08:57:29 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -1382,7 +1382,9 @@ static void domxml_error_ext(void *ctx, const char *msg, ...)
 		} 
 		add_assoc_string(errormessages,"errormessage",buf,1);				
 		input = ctxt->input;
-		add_assoc_string(errormessages,"nodename",ctxt->name,1); 
+		if (ctxt->name) {
+			add_assoc_string(errormessages,"nodename",ctxt->name,1); 
+		}
 		if (input != NULL) {
 			add_assoc_long(errormessages,"line",input->line);
 			add_assoc_long(errormessages,"col",input->col);

@@ -16,7 +16,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.54 2002/04/11 07:26:53 helly Exp $ */
+/* $Id: image.c,v 1.55 2002/05/04 17:24:08 sas Exp $ */
 /*
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -568,7 +568,7 @@ static struct gfxinfo *php_handle_tiff (php_stream * stream, pval *info, int mot
 	struct gfxinfo *result = NULL;
 	int i, num_entries;
 	unsigned char *dir_entry;
-	size_t ifd_size, dir_size, entry_value, entry_length, width=0, height=0, ifd_addr;
+	size_t ifd_size, dir_size, entry_value, width=0, height=0, ifd_addr;
 	int entry_tag , entry_type;
 	char *ifd_data, ifd_ptr[4];
 
@@ -589,7 +589,6 @@ static struct gfxinfo *php_handle_tiff (php_stream * stream, pval *info, int mot
 		dir_entry 	 = ifd_data+2+i*12;
 		entry_tag    = php_ifd_get16u(dir_entry+0, motorola_intel);
 		entry_type   = php_ifd_get16u(dir_entry+2, motorola_intel);
-		entry_length = php_ifd_get32u(dir_entry+4, motorola_intel) * php_tiff_bytes_per_format[entry_type];
 		switch(entry_type) {
 			case TAG_FMT_BYTE:
 			case TAG_FMT_SBYTE:

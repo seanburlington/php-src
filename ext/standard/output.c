@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.30 2000/09/03 15:58:50 zeev Exp $ */
+/* $Id: output.c,v 1.31 2000/09/03 19:57:06 andi Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -95,7 +95,7 @@ PHPAPI int php_start_ob_buffer(zval *output_handler)
 	if (OG(lock)) {
 		return FAILURE;
 	}
-	php_ob_init(4096, 1024, output_handler);
+	php_ob_init(40*1024, 10*1024, output_handler);
 	OG(php_body_write) = php_b_body_write;
 	return SUCCESS;
 }

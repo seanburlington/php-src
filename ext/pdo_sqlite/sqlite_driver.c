@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.5 2004/09/23 20:09:00 wez Exp $ */
+/* $Id: sqlite_driver.c,v 1.6 2004/12/25 04:01:30 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -327,7 +327,7 @@ static int pdo_sqlite_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS
 	if (driver_options) {
 		timeout = pdo_attr_lval(driver_options, PDO_ATTR_TIMEOUT, timeout TSRMLS_CC);
 	}
-	sqlite_busy_timeout(H->db, timeout * 1000);
+	sqlite3_busy_timeout(H->db, timeout * 1000);
 
 	dbh->alloc_own_columns = 1;
 	dbh->supports_placeholders = PDO_PLACEHOLDER_POSITIONAL;

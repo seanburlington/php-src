@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.131 2004/03/19 18:45:07 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.132 2004/03/29 18:32:27 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -797,12 +797,17 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 			ZVAL_STRINGL(result, data, length, 1); 
 			break;
 		}
-		case SQLMONEY4:
 		case SQLFLT4:
 			ZVAL_DOUBLE(result, (double) floatcol4(offset));
 			break;
 		case SQLMONEY:
-		case SQLMONEYN:
+		case SQLMONEY4:
+		case SQLMONEYN: {
+			DBFLT8 res_buf;
+			dbconvert(NULL, column_type, dbdata(mssql_ptr->link,offset), 8, SQLFLT8, (LPBYTE)&res_buf, -1);
+			ZVAL_DOUBLE(result, res_buf);
+			}
+			break;
 		case SQLFLT8:
 			ZVAL_DOUBLE(result, (double) floatcol8(offset));
 			break;

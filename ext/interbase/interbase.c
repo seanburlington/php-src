@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.197 2004/02/02 13:49:48 abies Exp $ */
+/* $Id: interbase.c,v 1.198 2004/02/02 14:57:20 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,7 +26,7 @@
 
 #include "php.h"
 
-#define FILE_REVISION "$Revision: 1.197 $"
+#define FILE_REVISION "$Revision: 1.198 $"
 
 #if HAVE_IBASE
 
@@ -624,12 +624,13 @@ PHP_MINIT_FUNCTION(ibase)
 	REGISTER_LONG_CONSTANT("IBASE_PRP_SET_SQL_DIALECT", isc_spb_prp_set_sql_dialect, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IBASE_PRP_ACTIVATE", isc_spb_prp_activate, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IBASE_PRP_DB_ONLINE", isc_spb_prp_db_online, CONST_PERSISTENT);
+	/* repair options */
 	REGISTER_LONG_CONSTANT("IBASE_RPR_CHECK_DB", isc_spb_rpr_check_db, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IBASE_RPR_IGNORE_CHECKSUM", isc_spb_rpr_ignore_checksum, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IBASE_RPR_KILL_SHADOWS", isc_spb_rpr_kill_shadows, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IBASE_RPR_MEND_DB", isc_spb_rpr_mend_db, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IBASE_RPR_VALIDATE_DB", isc_spb_rpr_validate_db, CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("IBASE_RPR_FULL", isc_spb_rpr_full, CONST_PERSISTENT);
+	  REGISTER_LONG_CONSTANT("IBASE_RPR_FULL", isc_spb_rpr_full, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IBASE_RPR_SWEEP_DB", isc_spb_rpr_sweep_db, CONST_PERSISTENT);
 	/* db info arguments */
 	REGISTER_LONG_CONSTANT("IBASE_STS_DATA_PAGES", isc_spb_sts_data_pages, CONST_PERSISTENT);

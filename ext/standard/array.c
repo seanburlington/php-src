@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.266.2.12 2005/02/02 10:24:50 stas Exp $ */
+/* $Id: array.c,v 1.266.2.13 2005/02/10 23:00:53 rrichards Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1052,7 +1052,9 @@ static int php_array_walk(HashTable *target_hash, zval **userdata, int recursive
 
 			/* Call the userland function */
 			if (zend_call_function(&fci, &BG(array_walk_fci_cache) TSRMLS_CC) == SUCCESS) {
-				zval_ptr_dtor(&retval_ptr);
+				if (retval_ptr) {
+					zval_ptr_dtor(&retval_ptr);
+				}
 			} else {
 				char *func_name;
 

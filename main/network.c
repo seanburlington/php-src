@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.59 2002/08/13 14:56:50 kalowsky Exp $ */
+/* $Id: network.c,v 1.60 2002/08/17 13:56:39 venaas Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 #define MAX_CHUNKS_PER_READ 10
@@ -157,7 +157,11 @@ static int php_network_getaddresses(const char *host, struct sockaddr ***sal)
 		struct addrinfo hints, *res, *sai;
 
 		memset(&hints, '\0', sizeof(hints));
+#  ifdef HAVE_IPV6
 		hints.ai_family = AF_UNSPEC;
+#  else
+		hints.ai_family = AF_INET;
+#  endif
 		if ((n = getaddrinfo(host, NULL, &hints, &res))) {
 			php_error(E_WARNING, "php_network_getaddresses: getaddrinfo failed: %s", PHP_GAI_STRERROR(n));
 			return 0;

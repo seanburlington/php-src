@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.26 2003/06/14 19:30:42 helly Exp $ */
+/* $Id: streams.c,v 1.27 2003/06/16 18:19:14 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1676,7 +1676,6 @@ PHPAPI int php_stream_context_set_option(php_stream_context *context,
 			return FAILURE;
 		}
 
-		ZVAL_ADDREF(optionvalue);
 		wrapperhash = &category;
 	}
 	return zend_hash_update(Z_ARRVAL_PP(wrapperhash), (char*)optionname, strlen(optionname)+1, (void**)&copied_val, sizeof(zval *), NULL);

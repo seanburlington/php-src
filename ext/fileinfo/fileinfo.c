@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.5 2004/04/21 23:16:34 iliaa Exp $ */
+/* $Id: fileinfo.c,v 1.6 2004/05/08 17:34:07 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -216,7 +216,7 @@ zend_module_entry fileinfo_module_entry = {
 };
 /* }}} */
 
-#ifdef COMPILE_DL_FILENINFO
+#ifdef COMPILE_DL_FILEINFO
 ZEND_GET_MODULE(fileinfo)
 #endif
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.15 2000/02/19 23:41:20 zeev Exp $ */
+/* $Id: assert.c,v 1.16 2000/02/24 14:26:51 eschmid Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -157,7 +157,7 @@ PHP_MINFO_FUNCTION(assert)
 /* {{{ internal functions */
 /* }}} */
 /* {{{ proto int assert(string|bool assertion)
-   checks if assertion is false */
+   Checks if assertion is false */
 
 PHP_FUNCTION(assert)
 {
@@ -266,8 +266,8 @@ PHP_FUNCTION(assert)
 }
 
 /* }}} */
-/* {{{ proto mixed assert_options(int what,mixed value)
-   set/get the various assert flags. */
+/* {{{ proto mixed assert_options(int what, mixed value)
+   Set/get the various assert flags */
 
 PHP_FUNCTION(assert_options)
 {

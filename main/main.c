@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.216 2000/02/25 21:27:02 ssb Exp $ */
+/* $Id: main.c,v 1.217 2000/02/25 23:31:42 rubys Exp $ */
 
 
 #include <stdio.h>
@@ -617,7 +617,7 @@ int php_request_startup(CLS_D ELS_DC PLS_DC SLS_DC)
 	PG(header_is_being_sent) = 0;
 	
 	zend_activate(CLS_C ELS_CC);
-	sapi_activate(SLS_C PLS_CC);	
+	sapi_activate(SLS_C);	
 
 	php_set_timeout(PG(max_execution_time));
 	

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.3 2003/06/11 19:27:01 rrichards Exp $
+dnl $Id: config.m4,v 1.4 2003/06/26 18:51:52 helly Exp $
 dnl
 
 AC_DEFUN(PHP_XSL_CHECK_VERSION,[
@@ -22,6 +22,10 @@ AC_DEFUN(PHP_XSL_CHECK_VERSION,[
 PHP_ARG_WITH(xsl, for XSL support,
 [  --with-xsl[=DIR]        Include new XSL support (requires libxslt >= 1.0.18).
                           DIR is the libxslt install directory.])
+
+if test "$PHP_XSL" != "no" -a "$PHP_DOM" == "no"; then
+    AC_MSG_ERROR([XSL extension requires DOM extension, add --with-dom.])
+fi
 
 if test "$PHP_XSL" != "no"; then
 

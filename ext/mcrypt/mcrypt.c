@@ -16,7 +16,7 @@
    |          Derick Rethans <d.rethans@jdimedia.nl>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.74 2001/12/26 10:01:50 derick Exp $ */
+/* $Id: mcrypt.c,v 1.75 2002/02/28 12:10:35 yohgaki Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -84,7 +84,7 @@ function_entry mcrypt_functions[] = {
 
 	PHP_FE(mcrypt_module_close, NULL)
 #endif
-	{0},
+	{NULL, NULL, NULL}
 };
 
 static PHP_MINFO_FUNCTION(mcrypt);

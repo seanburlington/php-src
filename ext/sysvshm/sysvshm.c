@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.55 2002/02/28 08:26:53 sebastian Exp $ */
+/* $Id: sysvshm.c,v 1.56 2002/02/28 12:10:36 yohgaki Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -47,7 +47,7 @@ function_entry sysvshm_functions[] = {
 	PHP_FE(shm_put_var, NULL)
 	PHP_FE(shm_get_var, NULL)
 	PHP_FE(shm_remove_var, NULL)
-	{0}
+	{NULL, NULL, NULL}	
 };
 /* }}} */
 

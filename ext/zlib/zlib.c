@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.70 2001/02/01 17:14:18 thies Exp $ */
+/* $Id: zlib.c,v 1.71 2001/02/01 17:16:35 thies Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -1119,7 +1119,7 @@ PHP_FUNCTION(ob_gzhandler)
 		if (return_original) {
 			zval_dtor(return_value);
 		} else {
-			char lenbuf[ 64 ];
+			char lenbuf[64];
 			
 			sprintf(lenbuf,"Content-Length: %d",Z_STRLEN_P(return_value));
 			sapi_add_header(lenbuf,strlen(lenbuf), 1);

@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: post.h,v 1.1 1999/04/22 02:48:25 ssb Exp $ */
+/* $Id: post.h,v 1.2 1999/04/26 14:00:49 zeev Exp $ */
 
 #ifndef _POST_H
 #define _POST_H
@@ -36,8 +36,8 @@
 #define PARSE_COOKIE 2
 #define PARSE_STRING 3
 
-extern void php3_treat_data(int arg, char *str);
-extern void php3_TreatHeaders(void);
-extern void _php3_parse_gpc_data(char *, char *, pval *track_vars_array);
+void php3_treat_data(int arg, char *str);
+void _php3_parse_gpc_data(char *, char *, pval *track_vars_array);
+PHPAPI void php3_TreatHeaders(void);
 
 #endif

@@ -26,7 +26,7 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.h,v 1.1 1999/04/07 21:02:07 zeev Exp $ */
+/* $Id: fopen_wrappers.h,v 1.2 1999/04/26 14:00:46 zeev Exp $ */
 
 #ifndef _FOPEN_WRAPPERS_H
 #define _FOPEN_WRAPPERS_H
@@ -69,7 +69,7 @@ extern int wsa_fp; /* a list for open sockets */
 
 extern PHPAPI FILE *php3_fopen_wrapper(char *filename, char *mode, int options, int *issock, int *socketd);
 
-extern FILE *php3_fopen_for_parser(void);
+PHPAPI FILE *php3_fopen_for_parser(void);
 
 extern PHPAPI int _php3_check_open_basedir(char *path);
 

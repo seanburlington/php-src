@@ -27,7 +27,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: info.h,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: info.h,v 1.2 1999/04/26 14:00:49 zeev Exp $ */
 
 #ifndef _INFO_H
 #define _INFO_H
@@ -35,6 +35,6 @@
 extern void php3_version(INTERNAL_FUNCTION_PARAMETERS);
 extern void php3_info(INTERNAL_FUNCTION_PARAMETERS);
 
-extern void _php3_info(void);
+PHPAPI void _php3_info(void);
 
 #endif /* _INFO_H */

@@ -27,7 +27,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.10 1999/04/24 00:11:48 zeev Exp $ */
+/* $Id: fopen_wrappers.c,v 1.11 1999/04/26 14:00:46 zeev Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -198,7 +198,7 @@ PHPAPI FILE *php3_fopen_wrapper(char *path, char *mode, int options, int *issock
 
 #if CGI_BINARY || FHTTPD || USE_SAPI
 
-FILE *php3_fopen_for_parser(void)
+PHPAPI FILE *php3_fopen_for_parser(void)
 {
 	FILE *fp;
 	struct stat st;

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: main.h,v 1.5 1999/04/24 00:11:49 zeev Exp $ */
+/* $Id: main.h,v 1.6 1999/04/26 14:00:46 zeev Exp $ */
 
 
 #ifndef _MAIN_H
@@ -37,13 +37,16 @@
 
 #include "zend_globals.h"
 #include "php_globals.h"
+#include "SAPI.h"
 
-int php3_request_startup(CLS_D ELS_DC PLS_DC);
-extern void php3_request_shutdown(void *dummy);
-extern void php3_request_shutdown_for_exec(void *dummy);
-extern int php3_module_startup();
-extern void php3_module_shutdown();
-extern void php3_module_shutdown_for_exec(void);
+PHPAPI int php_request_startup(CLS_D ELS_DC PLS_DC);
+PHPAPI void php_request_shutdown(void *dummy);
+PHPAPI void php_request_shutdown_for_exec(void *dummy);
+PHPAPI int php_module_startup(sapi_functions_struct *sf);
+PHPAPI void php_module_shutdown();
+PHPAPI void php_module_shutdown_for_exec(void);
+
+PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_DC);
 
 extern void php3_call_shutdown_functions(void);
 

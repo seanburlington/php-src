@@ -30,7 +30,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.9 1999/04/24 00:11:48 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.10 1999/04/26 14:00:46 zeev Exp $ */
 
 #define DEBUG_CFG_PARSER 1
 #include "php.h"
@@ -60,7 +60,7 @@
 static HashTable configuration_hash;
 #ifndef THREAD_SAFE
 extern HashTable browser_hash;
-extern char *php3_ini_path;
+PHPAPI extern char *php3_ini_path;
 #endif
 static HashTable *active__php3_hash_table;
 static pval *current_section;

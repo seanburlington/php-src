@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.1 1999/04/17 00:37:06 ssb Exp $ */
+/* $Id: basic_functions.h,v 1.2 1999/04/26 14:00:48 zeev Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -102,7 +102,7 @@ extern void php3_call_user_method(INTERNAL_FUNCTION_PARAMETERS);
 PHP_FUNCTION(register_shutdown_function);
 PHP_FUNCTION(highlight_file);
 PHP_FUNCTION(highlight_string);
-void php_get_highlight_struct(zend_syntax_highlighter_ini *syntax_highlighter_ini);
+ZEND_API void php_get_highlight_struct(zend_syntax_highlighter_ini *syntax_highlighter_ini);
 
 PHP_FUNCTION(ob_start);
 PHP_FUNCTION(ob_end_flush);

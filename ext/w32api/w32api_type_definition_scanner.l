@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: w32api_type_definition_scanner.l,v 1.1 2002/11/12 14:31:34 jmoore Exp $ */
+/* $Id: w32api_type_definition_scanner.l,v 1.2 2002/11/27 00:49:23 fmk Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>

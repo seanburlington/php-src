@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.106 2001/07/21 14:27:55 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.107 2001/07/23 01:03:22 sas Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -312,9 +312,11 @@ static void php_apache_request_shutdown(void *dummy)
 	SLS_FETCH();
 	APLS_FETCH();
 
-	AP(in_request)=0;
 	SG(server_context) = NULL; /* The server context (request) is invalid by the time run_cleanups() is called */
-	php_request_shutdown(dummy);
+	if (AP(in_request)) {
+		AP(in_request) = 0;
+		php_request_shutdown(dummy);
+	}
 }
 /* }}} */
 

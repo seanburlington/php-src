@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.28 2001/10/19 18:26:30 andrei Exp $ */
+/* $Id: uniqid.c,v 1.29 2001/10/19 18:42:25 eschmid Exp $ */
 
 #include "php.h"
 
@@ -38,8 +38,8 @@
 #include "php_lcg.h"
 #include "uniqid.h"
 
-/* {{{ proto string uniqid(string prefix, [bool more_entropy])
-   Generate a unique id */
+/* {{{ proto string uniqid(string prefix [, bool more_entropy])
+   Generates a unique ID */
 PHP_FUNCTION(uniqid)
 {
 #ifdef HAVE_GETTIMEOFDAY

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.125 2001/05/30 17:43:32 sterling Exp $ */
+/* $Id: oci8.c,v 1.126 2001/05/30 17:49:33 sterling Exp $ */
 
 /* TODO list:
  *
@@ -581,7 +581,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.125 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.126 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2840,7 +2840,7 @@ PHP_FUNCTION(ocisavelob)
 
 			if (offparam == -1) {
 				offset = curloblen;
-			} else if (offparam >= curloblen) {
+			} else if ((ub4) offparam >= curloblen) {
 				php_error(E_WARNING, "Offset smaller than current LOB-Size - appending");
 				offset = curloblen;
 			} else {
@@ -3131,7 +3131,7 @@ PHP_FUNCTION(ociwritelobtofile)
 			}
 
 			if (fp != -1) {
-				if (write(fp,buffer,toread) != toread) {
+				if ((ub4) write(fp,buffer,toread) != toread) {
 					php_error(E_WARNING, "cannot write file!");
 					goto bail;
 				}

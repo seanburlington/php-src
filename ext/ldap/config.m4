@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.11 2000/08/31 16:46:33 venaas Exp $
+dnl $Id: config.m4,v 1.12 2000/09/22 00:59:16 sniper Exp $
 
 PHP_ARG_WITH(ldap,whether to include LDAP support,
 [  --with-ldap[=DIR]       Include LDAP support.  DIR is the LDAP base
@@ -44,18 +44,24 @@ if test "$PHP_LDAP" != "no"; then
 		AC_ADD_LIBRARY_WITH_PATH(lber, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 		AC_ADD_LIBRARY_WITH_PATH(ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 	elif test -f $LDAP_LIBDIR/libldapssl41.so; then
-		AC_ADD_LIBRARY($LDAP_PTHREAD)
+		if test -n "$LDAP_PTHREAD"; then 
+			AC_ADD_LIBRARY($LDAP_PTHREAD)
+		fi
 		AC_ADD_LIBRARY_WITH_PATH(ldapssl41, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 		AC_DEFINE(HAVE_NSLDAP,1,[ ])
 	elif test -f $LDAP_LIBDIR/libldapssl30.so; then
-		AC_ADD_LIBRARY($LDAP_PTHREAD)
+		if test -n "$LDAP_PTHREAD"; then 
+			AC_ADD_LIBRARY($LDAP_PTHREAD)
+		fi
 		AC_ADD_LIBRARY_WITH_PATH(ldapssl30, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 		AC_DEFINE(HAVE_NSLDAP,1,[ ])
 	elif test -f $LDAP_LIBDIR/libldapssl30.sl; then
 		AC_ADD_LIBRARY_WITH_PATH(ldapssl30, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 		AC_DEFINE(HAVE_NSLDAP,1,[ ])
 	elif test -f $LDAP_LIBDIR/libldap30.so; then
-		AC_ADD_LIBRARY($LDAP_PTHREAD)
+		if test -n "$LDAP_PTHREAD"; then 
+			AC_ADD_LIBRARY($LDAP_PTHREAD)
+		fi
 		AC_ADD_LIBRARY_WITH_PATH(ldap30, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 		AC_DEFINE(HAVE_NSLDAP,1,[ ])
 	elif test -f $LDAP_LIBDIR/libldap30.sl; then

@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.34 2000/10/08 11:45:18 dbeu Exp $ */
+/* $Id: internal_functions_win32.c,v 1.35 2001/01/28 03:40:15 phanto Exp $ */
 
 
 #include "php.h"
@@ -51,6 +51,7 @@
 #include "ext/standard/php_assert.h"
 #include "ext/calendar/php_calendar.h"
 #include "ext/com/php_COM.h"
+#include "ext/com/php_typedef_VARIANT.h"
 #include "ext/ftp/php_ftp.h"
 #include "ext/standard/reg.h"
 #include "ext/pcre/php_pcre.h"
@@ -70,6 +71,7 @@ zend_module_entry *php_builtin_extensions[] = {
 #endif
 	phpext_calendar_ptr,
 	COM_module_ptr,
+	VARIANT_module_ptr,
 	phpext_ftp_ptr,
 	phpext_mysql_ptr,
 	phpext_odbc_ptr,

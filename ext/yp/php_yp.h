@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_yp.h,v 1.10 2001/07/28 11:36:25 zeev Exp $ */ 
+/* $Id: php_yp.h,v 1.11 2001/07/31 23:47:33 sniper Exp $ */ 
 
 #ifndef PHP_YP_H
 #define PHP_YP_H
@@ -53,7 +53,7 @@ typedef struct {
 } php_yp_globals;
 
 #ifdef ZTS
-#define YG(v) TSRMG(yp_globals_id, php_yp_globals *, v)
+#define YP(v) TSRMG(yp_globals_id, php_yp_globals *, v)
 #else
 #define YP(v) (yp_globals.v)
 #endif

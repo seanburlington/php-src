@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.122 2001/07/31 07:09:42 zeev Exp $ */
+/* $Id: pgsql.c,v 1.123 2001/07/31 23:47:32 sniper Exp $ */
 
 #include <stdlib.h>
 
@@ -1140,7 +1140,6 @@ static void php_pgsql_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 	int i, num_fields, pgsql_row;
 	char *element, *field_name;
 	uint element_len;
-	TSRMLS_FETCH();
 
 	switch (ZEND_NUM_ARGS()) {
 		case 1:
@@ -1808,7 +1807,6 @@ PHP_FUNCTION(pg_loimport)
 	int id = -1;
 	PGconn *pgsql;
 	Oid oid;
-	TSRMLS_FETCH();
 	
 	switch (ZEND_NUM_ARGS()) {
 		case 1:

@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_rand.h,v 1.8.8.3 2001/08/26 22:47:55 jeroen Exp $ */
+/* $Id: php_rand.h,v 1.8.8.4 2001/09/02 19:42:29 jeroen Exp $ */
 
 /* Layout implementation random functions
  *
@@ -83,12 +83,13 @@ typedef struct _php_randgen_entry {
 	char *ini_str;
 } php_randgen_entry;
 
-php_randgen_entry *php_randgen_entries;
+extern php_randgen_entry (*php_randgen_entries)[];
 
-#define PHP_SRAND(which,seed)	(php_randgen_entry[which]->srand(seed))
-#define PHP_RAND(which)			(php_randgen_entry[which]->rand())
-#define PHP_RANDMAX(which)		(php_randgen_entry[which].randmax)
-#define PHP_RAND_INISTR(which)	(php_randgen_entry[which].ini_str)
+#define PHP_HAS_SRAND(which)	(php_randgen_entries[which]->srand)
+#define PHP_SRAND(which,seed)	((*(php_randgen_entries[which]->srand))(seed))
+#define PHP_RAND(which)			((*(php_randgen_entries[which]->rand))())
+#define PHP_RANDMAX(which)		(php_randgen_entries[which]->randmax)
+#define PHP_RAND_INISTR(which)	(php_randgen_entries[which]->ini_str)
 
 /* Define random generator constants */
 #define PHP_RAND_SYS		0

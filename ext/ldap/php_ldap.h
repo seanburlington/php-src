@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ldap.h,v 1.19 2001/10/09 21:14:14 venaas Exp $ */
+/* $Id: php_ldap.h,v 1.20 2001/11/13 17:10:08 venaas Exp $ */
 
 #ifndef PHP_LDAP_H
 #define PHP_LDAP_H
@@ -98,10 +98,8 @@ PHP_FUNCTION(ldap_8859_to_t61);
 #endif
 
 ZEND_BEGIN_MODULE_GLOBALS(ldap)
-	long default_link;
 	long num_links;
 	long max_links;
-	char *base_dn;
 ZEND_END_MODULE_GLOBALS(ldap)
 
 #ifdef ZTS

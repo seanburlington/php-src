@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.62.2.4 2003/06/26 21:10:10 helly Exp $ 
+   $Id: sqlite.c,v 1.62.2.5 2003/06/26 21:30:17 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -668,7 +668,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.4 2003/06/26 21:10:10 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.5 2003/06/26 21:30:17 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1310,9 +1310,8 @@ PHP_FUNCTION(sqlite_array_query)
 /* {{{ php_sqlite_fetch_single */
 static void php_sqlite_fetch_single(struct php_sqlite_result *res, zend_bool decode_binary, zval *return_value TSRMLS_DC)
 {
-	int j, buffered = res->buffered;
-	const char **rowdata, **colnames;
-	char *decoded = NULL;
+	const char **rowdata;
+	char *decoded;
 	int decoded_len;
 	
 	/* check range of the row */
@@ -1342,6 +1341,9 @@ static void php_sqlite_fetch_single(struct php_sqlite_result *res, zend_bool dec
 			decoded = (char*)rowdata[0];
 			rowdata[0] = NULL;
 		}
+	} else {
+		decoded = NULL;
+		decoded_len = 0;
 	}
 
 	if (!res->buffered) {
@@ -1433,9 +1435,6 @@ PHP_FUNCTION(sqlite_fetch_single)
 	zval *zres;
 	zend_bool decode_binary = 1;
 	struct php_sqlite_result *res;
-	char *decoded = NULL;
-	int decoded_len;
-	const char **rowdata;
 
 	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r|b", &zres, &decode_binary)) {
 		return;

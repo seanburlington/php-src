@@ -15,7 +15,7 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.h,v 1.28 2001/07/31 07:09:47 zeev Exp $ */
+/* $Id: fopen_wrappers.h,v 1.29 2001/08/01 00:31:19 sniper Exp $ */
 
 #ifndef FOPEN_WRAPPERS_H
 #define FOPEN_WRAPPERS_H
@@ -82,7 +82,7 @@ PHPAPI char *php_strip_url_passwd(char *path);
 
 int php_init_fopen_wrappers(TSRMLS_D);
 int php_shutdown_fopen_wrappers(TSRMLS_D);
-PHPAPI int php_register_url_wrapper(char *protocol, php_fopen_url_wrapper_t wrapper TSRMLS_DC);
+PHPAPI int php_register_url_wrapper(const char *protocol, php_fopen_url_wrapper_t wrapper TSRMLS_DC);
 PHPAPI int php_unregister_url_wrapper(char *protocol TSRMLS_DC);
 
 #endif

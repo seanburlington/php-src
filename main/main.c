@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.131 1999/10/15 20:27:38 andrei Exp $ */
+/* $Id: main.c,v 1.132 1999/10/15 20:32:47 andrei Exp $ */
 
 
 #include <stdio.h>
@@ -84,7 +84,7 @@ struct sapi_request_info *sapi_rqst;
 #if CGI_BINARY
 #define PHP_ERROR_FORMAT	"PHP %s:  %s in %s on line %d"
 #else
-#define PHP_ERROR_FORMAT	"<br>\n<b>%s</b>:  %s in <b>%s</b> on line <b>%d</b><br>"
+#define PHP_ERROR_FORMAT	"<br>\n<b>PHP %s</b>:  %s in <b>%s</b> on line <b>%d</b><br>"
 #endif
 
 #ifndef ZTS

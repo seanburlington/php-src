@@ -29,13 +29,13 @@
  */
 
 
-/* $Id: php_domxml.h,v 1.11 2000/03/02 16:39:50 steinm Exp $ */
+/* $Id: php_domxml.h,v 1.12 2000/06/05 15:39:29 steinm Exp $ */
 
 #ifndef _PHP_DOMXML_H
 #define _PHP_DOMXML_H
 
 #if HAVE_DOMXML
-#include <gnome-xml/parser.h>
+#include <libxml/parser.h>
 
 extern zend_module_entry php_domxml_module_entry;
 #define php_domxml_module_ptr &php_domxml_module_entry

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_pgsql_int.h,v 1.3 2004/05/20 18:00:24 iliaa Exp $ */
+/* $Id: php_pdo_pgsql_int.h,v 1.4 2005/01/13 01:59:39 wez Exp $ */
 
 #ifndef PHP_PDO_PGSQL_INT_H
 #define PHP_PDO_PGSQL_INT_H
@@ -50,6 +50,7 @@ typedef struct {
 	PGresult                *result;
 	int                     current_row;
 	pdo_pgsql_column        *cols;
+	char *cursor_name;
 } pdo_pgsql_stmt;
 
 typedef struct {

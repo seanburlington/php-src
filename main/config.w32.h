@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.69 2003/06/09 01:00:23 edink Exp $
+	$Id: config.w32.h,v 1.70 2003/06/25 04:54:23 sebastian Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -31,12 +31,6 @@
 
 /* Enable / Disable CALENDAR extension (default: enabled) */
 #define HAVE_CALENDAR 1
-
-/* Enable / Disable RPC extension (default: enabled) */
-#define HAVE_RPC 1
-
-/* Enable / Disable COM extension (default: enabled) */
-#define HAVE_COM 1
 
 /* Enable / Disable CTYPE extension (default: enabled) */
 #define HAVE_CTYPE 1

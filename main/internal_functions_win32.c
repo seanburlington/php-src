@@ -17,7 +17,7 @@
 	+----------------------------------------------------------------------+
 */
 
-/* $Id: internal_functions_win32.c,v 1.74 2003/06/10 20:03:41 imajes Exp $ */
+/* $Id: internal_functions_win32.c,v 1.75 2003/06/25 04:54:23 sebastian Exp $ */
 
 /* {{{ includes
  */
@@ -57,12 +57,6 @@
 #endif
 #if HAVE_CTYPE
 #include "ext/ctype/php_ctype.h"
-#endif
-#if HAVE_RPC
-#include "ext/rpc/php_rpc.h"
-#if HAVE_COM
-#include "ext/rpc/com/php_com.h"
-#endif
 #endif
 #if HAVE_FTP
 #include "ext/ftp/php_ftp.h"
@@ -109,12 +103,6 @@ zend_module_entry *php_builtin_extensions[] = {
 #endif
 #if HAVE_CTYPE
 	,phpext_ctype_ptr
-#endif
-#if HAVE_RPC
-	,phpext_rpc_ptr
-#if HAVE_COM
-	,phpext_com_ptr
-#endif
 #endif
 #if HAVE_FTP
 	,phpext_ftp_ptr

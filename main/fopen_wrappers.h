@@ -15,10 +15,10 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.h,v 1.19 2000/06/08 09:43:12 hholzgra Exp $ */
+/* $Id: fopen_wrappers.h,v 1.20 2000/07/03 00:45:20 sas Exp $ */
 
-#ifndef _FOPEN_WRAPPERS_H
-#define _FOPEN_WRAPPERS_H
+#ifndef FOPEN_WRAPPERS_H
+#define FOPEN_WRAPPERS_H
 
 #include "php_globals.h"
 

@@ -18,11 +18,11 @@
  */
 
 
-/* $Id: php_main.h,v 1.1 2000/06/05 23:21:57 sas Exp $ */
+/* $Id: php_main.h,v 1.2 2000/07/03 00:45:20 sas Exp $ */
 
 
-#ifndef _MAIN_H
-#define _MAIN_H
+#ifndef PHP_MAIN_H
+#define PHP_MAIN_H
 
 #include "zend_globals.h"
 #include "php_globals.h"

@@ -12,11 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Sascha Schumann    <sascha@schumann.cx>                      |
-   |         Hartmut Holzgraefe <hartmut@six.de>                          |
+   | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.27 2000/09/19 17:37:34 zeev Exp $ */
+/* $Id: url_scanner.c,v 1.28 2000/09/19 17:45:44 sas Exp $ */
 
 #include "php.h"
 

@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.50 2000/06/26 18:19:35 andi Exp $ */
+/* $Id: zlib.c,v 1.51 2000/07/06 11:25:24 thies Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -153,8 +153,9 @@ PHP_MINFO_FUNCTION(zlib)
 static gzFile php_gzopen_wrapper(char *path, char *mode, int options)
 {
 	FILE *f;
+	int issock=0, socketd=0;
 
-	f = php_fopen_wrapper(path, mode, options, NULL, NULL, NULL);
+	f = php_fopen_wrapper(path, mode, options, &issock, &socketd, NULL);
 
 	if (!f) {
 		return NULL;

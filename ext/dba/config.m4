@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.29.2.13 2003/02/09 19:58:18 sniper Exp $
+dnl $Id: config.m4,v 1.29.2.14 2003/04/01 10:16:50 sas Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -407,6 +407,8 @@ if test "$HAVE_DBA" = "1"; then
   AC_MSG_RESULT(yes)
   AC_DEFINE(HAVE_DBA, 1, [ ])
   PHP_NEW_EXTENSION(dba, dba.c dba_cdb.c dba_db2.c dba_dbm.c dba_gdbm.c dba_ndbm.c dba_db3.c dba_db4.c dba_flatfile.c $cdb_sources $flat_sources, $ext_shared)
+  PHP_ADD_BUILD_DIR($ext_builddir/libcdb)
+  PHP_ADD_BUILD_DIR($ext_builddir/libflatfile)
   PHP_SUBST(DBA_SHARED_LIBADD)
 else
   AC_MSG_RESULT(no)

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.19 1999/07/03 03:34:47 sas Exp $ */
+/* $Id: php.h,v 1.20 1999/07/08 19:18:42 zeev Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -251,6 +251,7 @@ extern int ap_vsnprintf(char *, size_t, const char *, va_list);
 #define MIN(a,b)  (((a)<(b))?(a):(b))
 #define STR_FREE(ptr) if (ptr && ptr!=empty_string && ptr!=undefined_variable_string) { efree(ptr); }
 #define COPY_STRING(yy)   (yy).value.str.val = (char *) estrndup((yy).value.str.val,(yy).value.str.len)
+#define STR_PRINT(str)	((str)?(str):"")
 
 #ifndef MAXPATHLEN
 #define MAXPATHLEN 256    /* Should be safe for any weird systems that do not define it */

@@ -3,7 +3,7 @@
  * that will be used to create the PEAR folder
  * in the windows snapshot.
  * See win32/build/mkdist.php for more details
- * $Id: go-pear-list.php,v 1.9 2004/06/06 22:49:46 pajoye Exp $
+ * $Id: go-pear-list.php,v 1.10 2004/07/31 18:52:04 wez Exp $
  */
 $packages  = array(
 // required packages for the installer
@@ -13,7 +13,7 @@ $packages  = array(
 "Archive_Tar"           =>    "1.2",
 
 // required packages for the web frontend
-"PEAR_Frontend_Web"     =>    "0.4"
+"PEAR_Frontend_Web"     =>    "0.4",
 "HTML_Template_IT"      =>    "1.1",
 "Net_UserAgent_Detect"  =>    "1.0",
 );

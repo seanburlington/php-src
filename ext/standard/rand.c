@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.60.2.2 2003/08/11 00:43:32 sniper Exp $ */
+/* $Id: rand.c,v 1.60.2.3 2004/01/19 03:16:04 sniper Exp $ */
 
 #include <stdlib.h>
 
@@ -71,6 +71,10 @@ PHPAPI void php_srand(long seed TSRMLS_DC)
 PHPAPI long php_rand(TSRMLS_D)
 {
 	long ret;
+
+	if (!BG(rand_is_seeded)) {
+		php_srand(GENERATE_SEED() TSRMLS_CC);
+	}
 
 #ifdef ZTS
 	ret = php_rand_r(&BG(rand_seed));
@@ -329,10 +333,6 @@ PHP_FUNCTION(rand)
 
 	if (argc != 0 && zend_parse_parameters(argc TSRMLS_CC, "ll", &min, &max) == FAILURE)
 		return;
-
-	if (!BG(rand_is_seeded)) {
-		php_srand(GENERATE_SEED() TSRMLS_CC);
-	}
 
 	number = php_rand(TSRMLS_C);
 	if (argc == 2) {

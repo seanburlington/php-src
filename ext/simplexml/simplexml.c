@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.131 2004/02/13 15:05:18 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.132 2004/03/01 12:09:23 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1490,6 +1490,16 @@ static void php_sxe_iterator_rewind(zend_object_iterator *iter TSRMLS_DC)
 }
 
 
+void *simplexml_export_node(zval *object TSRMLS_DC)
+{
+	php_sxe_object *sxe;
+	xmlNodePtr node;
+
+	sxe = php_sxe_fetch_object(object TSRMLS_CC);
+	GET_NODE(sxe, node);
+	return php_sxe_get_first_node(sxe, node TSRMLS_CC);	
+}
+
 #ifdef HAVE_DOM
 /* {{{ proto simplemxml_element simplexml_import_dom(domNode node [, string class_name])
    Get a simplexml_element object from dom to allow for processing */
@@ -1509,8 +1519,9 @@ PHP_FUNCTION(simplexml_import_dom)
 
 	object = (php_libxml_node_object *)zend_object_store_get_object(node TSRMLS_CC);
 
-	if (object->node && object->node->node) {
-		nodep = object->node->node;
+	nodep = php_libxml_import_node(node TSRMLS_CC);
+
+	if (nodep) {
 		if (nodep->doc == NULL) {
 			php_error(E_WARNING, "Imported Node must have associated Document");
 			RETURN_NULL();
@@ -1603,6 +1614,8 @@ PHP_MINIT_FUNCTION(simplexml)
 	}
 #endif /* HAVE_SPL */
 
+	php_libxml_register_export(sxe_class_entry, simplexml_export_node);
+
 	return SUCCESS;
 }
 /* }}} */
@@ -1621,7 +1634,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.131 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.132 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.203 2001/07/05 10:49:58 wez Exp $ */
+/* $Id: string.c,v 1.204 2001/07/05 10:53:15 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -346,11 +346,21 @@ PHP_MINIT_FUNCTION(nl_langinfo)
 #ifdef THOUSEP
 	REGISTER_NL_LANGINFO_CONSTANT(THOUSEP);
 #endif
+#ifdef GROUPING
 	REGISTER_NL_LANGINFO_CONSTANT(GROUPING);
+#endif
+#ifdef YESEXPR
 	REGISTER_NL_LANGINFO_CONSTANT(YESEXPR);
+#endif
+#ifdef NOEXPR
 	REGISTER_NL_LANGINFO_CONSTANT(NOEXPR);
+#endif
+#ifdef YESSTR
 	REGISTER_NL_LANGINFO_CONSTANT(YESSTR);
+#endif
+#ifdef NOSTR
 	REGISTER_NL_LANGINFO_CONSTANT(NOSTR);
+#endif
 #ifdef CODESET
 	REGISTER_NL_LANGINFO_CONSTANT(CODESET);
 #endif

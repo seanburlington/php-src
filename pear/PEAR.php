@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.71 2003/11/26 15:08:42 cellog Exp $
+// $Id: PEAR.php,v 1.72 2003/12/06 02:00:33 cellog Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -538,7 +538,7 @@ class PEAR
      * @param string $message
      *
      */
-    function &throwError($message = null,
+    function throwError($message = null,
                          $code = null,
                          $userinfo = null)
     {

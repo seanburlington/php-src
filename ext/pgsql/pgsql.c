@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.244 2002/11/12 09:07:36 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.245 2002/11/24 07:45:26 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -2730,7 +2730,8 @@ static unsigned char * php_pgsql_unescape_bytea(unsigned char *strtext, size_t *
 				break;
 		}
 	}
-	buffer = erealloc(buffer, buflen);
+	buffer[buflen] = '\0';
+	buffer = erealloc(buffer, buflen+1);
 	if (buffer == NULL)
 		return NULL;
 

@@ -17,7 +17,7 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.37 2002/06/02 22:54:48 mfischer Exp $ */
+/* $Id: sendmail.c,v 1.38 2002/06/02 23:39:59 mfischer Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
@@ -545,9 +545,14 @@ int PostHeader(char *RPath, char *Subject, char *mailTo, char *xheaders, char *m
 	if (!addToHeader(&header_buffer, "Subject: %s\r\n", Subject)) {
 		goto PostHeader_outofmem;
 	}
-	if (!addToHeader(&header_buffer, "To: %s\r\n", mailTo)) {
-		goto PostHeader_outofmem;
+
+	/* Only add the To: field from the $to parameter if isn't in the custom headers */
+	if ((headers_lc && (!strstr(headers_lc, "\r\nto:") && (strncmp(headers_lc, "to:", 3) != 0))) || !headers_lc) {
+		if (!addToHeader(&header_buffer, "To: %s\r\n", mailTo)) {
+			goto PostHeader_outofmem;
+		}
 	}
+
 	if (mailCc && *mailCc) {
 		if (!addToHeader(&header_buffer, "Cc: %s\r\n", mailCc)) {
 		goto PostHeader_outofmem;

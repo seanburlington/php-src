@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.63.2.18 2004/04/17 23:07:27 derick Exp $ */
+/* $Id: html.c,v 1.63.2.19 2004/07/13 17:15:13 wez Exp $ */
 
 /*
  * HTML entity resources:
@@ -505,6 +505,7 @@ inline static unsigned short get_next_char(enum entity_charset charset,
 							case 0x50:	/* 6, 2nd */
 								utf |= ((this_char & 0x3f) << 24);
 								stat++;
+								break;
 							default:
 								/* invalid */
 								more = 0;

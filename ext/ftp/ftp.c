@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.95 2003/12/06 16:12:10 wez Exp $ */
+/* $Id: ftp.c,v 1.96 2003/12/16 19:41:26 pollita Exp $ */
 
 #include "php.h"
 
@@ -1615,6 +1615,7 @@ ftp_genlist(ftpbuf_t *ftp, const char *cmd, const char *path TSRMLS_DC)
 
 
 	if ((tmpfp = tmpfile()) == NULL) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to create temporary file.  Check permissions in temporary files directory.");
 		return NULL;
 	}
 

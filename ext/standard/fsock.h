@@ -27,7 +27,7 @@
    |          Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
 */
-/* $Id: fsock.h,v 1.12 1999/07/26 20:09:08 andrey Exp $ */
+/* $Id: fsock.h,v 1.13 1999/08/25 16:24:14 andi Exp $ */
 
 /* Synced with php3 revision 1.24 1999-06-18 [ssb] */
 
@@ -59,16 +59,17 @@ extern php3_module_entry fsock_module_entry;
 
 PHP_FUNCTION(fsockopen);
 PHP_FUNCTION(pfsockopen);
-extern int lookup_hostname(const char *addr, struct in_addr *in);
-extern char *_php3_sock_fgets(char *buf, size_t maxlen, int socket);
-extern size_t _php3_sock_fread(char *buf, size_t maxlen, int socket);
-extern int _php3_sock_feof(int socket);
-extern int _php3_sock_fgetc(int socket);
-extern int _php3_is_persistent_sock(int);
-extern int _php3_sock_set_blocking(int socket, int mode);
-extern int _php3_sock_destroy(int socket);
-extern int _php3_sock_close(int socket);
+int lookup_hostname(const char *addr, struct in_addr *in);
+char *_php3_sock_fgets(char *buf, size_t maxlen, int socket);
+size_t _php3_sock_fread(char *buf, size_t maxlen, int socket);
+int _php3_sock_feof(int socket);
+int _php3_sock_fgetc(int socket);
+int _php3_is_persistent_sock(int);
+int _php3_sock_set_blocking(int socket, int mode);
+int _php3_sock_destroy(int socket);
+int _php3_sock_close(int socket);
 size_t _php3_sock_set_def_chunk_size(size_t size);
+int php_msock_destroy(int *data);
 
 PHPAPI int connect_nonb(int sockfd, struct sockaddr *addr, int addrlen, struct timeval *timeout);
 

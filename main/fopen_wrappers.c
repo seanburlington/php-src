@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.26 1999/08/02 19:16:34 zeev Exp $ */
+/* $Id: fopen_wrappers.c,v 1.27 1999/08/25 16:24:13 andi Exp $ */
 
 /* Synced with php3 revision 1.66 1999-06-18 [ssb] */
 
@@ -561,7 +561,7 @@ static FILE *php3_fopen_url_wrapper(const char *path, char *mode, int options, i
 		location[0] = '\0';
 		if (!SOCK_FEOF(*socketd)) {
 			/* get response header */
-			if (SOCK_FGETS(tmp_line, sizeof(tmp_line), *socketd) != NULL) {
+			if (SOCK_FGETS(tmp_line, sizeof(tmp_line)-1, *socketd) != NULL) {
 				if (strncmp(tmp_line + 8, " 200 ", 5) == 0) {
 					reqok = 1;
 				}
@@ -569,7 +569,7 @@ static FILE *php3_fopen_url_wrapper(const char *path, char *mode, int options, i
 		}
 		/* Read past HTTP headers */
 		while (!body && !SOCK_FEOF(*socketd)) {
-			if (SOCK_FGETS(tmp_line, sizeof(tmp_line), *socketd) != NULL) {
+			if (SOCK_FGETS(tmp_line, sizeof(tmp_line)-1, *socketd) != NULL) {
 				char *p = tmp_line;
 
 				tmp_line[sizeof(tmp_line)-1] = '\0';
@@ -760,7 +760,7 @@ static FILE *php3_fopen_url_wrapper(const char *path, char *mode, int options, i
 
 		/* set up the passive connection */
 		SOCK_WRITE("PASV\n", *socketd);
-		while (SOCK_FGETS(tmp_line, sizeof(tmp_line), *socketd) &&
+		while (SOCK_FGETS(tmp_line, sizeof(tmp_line)-1, *socketd) &&
 			!(isdigit((int) tmp_line[0]) && isdigit((int) tmp_line[1]) &&
 			  isdigit((int) tmp_line[2]) && tmp_line[3] == ' '));
 
@@ -923,7 +923,7 @@ int _php3_getftpresult(int socketd)
 {
 	char tmp_line[513];
 
-	while (SOCK_FGETS(tmp_line, sizeof(tmp_line), socketd) &&
+	while (SOCK_FGETS(tmp_line, sizeof(tmp_line)-1, socketd) &&
 		   !(isdigit((int) tmp_line[0]) && isdigit((int) tmp_line[1]) &&
 			 isdigit((int) tmp_line[2]) && tmp_line[3] == ' '));
 

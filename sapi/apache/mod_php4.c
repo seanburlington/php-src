@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.90 2001/03/06 15:00:08 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.91 2001/03/06 15:10:53 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -119,7 +119,7 @@ void php_save_umask(void)
 
 static int sapi_apache_ub_write(const char *str, uint str_length)
 {
-	int ret;
+	int ret=0;
 	SLS_FETCH();
 		
 	if (SG(server_context)) {

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.15 2004/05/20 19:09:35 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.16 2004/05/20 19:14:44 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -332,7 +332,7 @@ static PHP_METHOD(PDO, getAttribute)
 		RETURN_FALSE;
 	}
 
-	if (!dbh->methods->set_attribute) {
+	if (!dbh->methods->get_attribute) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "This driver doesn't support fetching attributes");
 		RETURN_FALSE;
 	}

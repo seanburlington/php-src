@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.22 2003/01/18 19:26:01 moriyoshi Exp $ */
+/* $Id: scanf.c,v 1.23 2003/01/19 17:23:48 moriyoshi Exp $ */
 
 /*
    scanf.c --
@@ -762,9 +762,14 @@ PHPAPI int php_sscanf_internal(	char *string, char *format,
 			case 'n':
 				if (!(flags & SCAN_SUPPRESS)) {
 					if (numVars) {
+						zend_uint refcount;
+
 						current = args[objIndex++];
+						refcount = (*current)->refcount;
 						zval_dtor( *current );
 						ZVAL_LONG( *current, (long)(string - baseString) );
+						(*current)->refcount = refcount;
+						(*current)->is_ref = 1;
 					} else {
 						add_index_long(*return_value, objIndex++, string - baseString);
 					}
@@ -882,9 +887,14 @@ PHPAPI int php_sscanf_internal(	char *string, char *format,
 				}
 				if (!(flags & SCAN_SUPPRESS)) {
 					if (numVars) {
+						zend_uint refcount;
+
 						current = args[objIndex++];
+						refcount = (*current)->refcount;
 						zval_dtor( *current );
 						ZVAL_STRINGL( *current, string, end-string, 1);
+						(*current)->refcount = refcount;
+						(*current)->is_ref = 1;
 					} else {
 						add_index_stringl( *return_value, objIndex++, string, end-string, 1);
 					}

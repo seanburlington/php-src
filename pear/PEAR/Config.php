@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.16 2002/04/09 08:10:11 ssb Exp $
+// $Id: Config.php,v 1.17 2002/04/19 14:01:51 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -130,6 +130,11 @@ class PEAR_Config extends PEAR
 when installing packages without a version or state specified',
             'valid_set' => array(
                 'stable', 'beta', 'alpha', 'devel', 'snapshot', 'any'),
+            ),
+        'http_proxy' => array(
+            'type' => 'string',
+            'default' => '',
+            'doc' => 'HTTP proxy (host:port) to use when downloading packages',
             ),
 /*
         'testset1' => array(

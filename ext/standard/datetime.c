@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.96.2.15 2004/03/31 17:59:28 hholzgra Exp $ */
+/* $Id: datetime.c,v 1.96.2.16 2004/06/28 14:35:41 derick Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -64,7 +64,7 @@ static int phpday_tab[2][12] = {
 	{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
 };
 
-#define isleap(year) (((year % 4) == 0 && (year % 100) != 0) || (year % 400)==0)
+#define isleap(year) ((((year) % 4) == 0 && ((year) % 100) != 0) || ((year) % 400)==0)
 #define YEAR_BASE 1900
 
 /* {{{ proto int time(void)

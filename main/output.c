@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.48.2.1 2001/03/17 03:05:07 zeev Exp $ */
+/* $Id: output.c,v 1.48.2.2 2001/03/31 22:54:07 zeev Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -447,6 +447,7 @@ static int php_ub_body_write(const char *str, uint str_length)
 	OLS_FETCH();
 
 	if (SG(request_info).headers_only) {
+		php_header();
 		zend_bailout();
 	}
 	if (php_header()) {

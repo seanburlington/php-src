@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: file.c,v 1.13 1999/05/20 13:56:19 sas Exp $ */
+/* $Id: file.c,v 1.14 1999/06/11 09:23:00 zeev Exp $ */
 #include "php.h"
 #include "php_globals.h"
 #include "ext/standard/flock_compat.h"
@@ -1526,8 +1526,8 @@ PHP_FUNCTION(fgetcsv) {
 
 	pval *fd, *bytes;
 	FILE *fp;
-	int id, len, br, type;
-	char *buf, *p, *rbuf, *rp, c, lc;
+	int id, len, type;
+	char *buf;
 	int issock=0;
 	int *sock,socketd=0;
 

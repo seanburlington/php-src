@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218 2002/11/01 10:06:10 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.219 2002/11/15 11:06:13 helly Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -572,7 +572,7 @@ static inline void node_wrapper_dtor(xmlNodePtr node)
 	zval *wrapper;
 	int refcount = 0;
 	/* FIXME: type check probably unnecessary here? */
-	if (!node || Z_TYPE_P(node) == XML_DTD_NODE)
+	if (!node) /* || Z_TYPE_P(node) == XML_DTD_NODE)*/
 		return;
 
 	wrapper = dom_object_get_data(node);

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.61.2.3 2004/10/11 18:32:59 iliaa Exp $ */
+/* $Id: streams.c,v 1.61.2.4 2004/11/11 13:09:03 rrichards Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1467,7 +1467,7 @@ PHPAPI php_stream_wrapper *php_stream_locate_url_wrapper(const char *path, char 
 	/* TODO: curl based streams probably support file:// properly */
 	if (!protocol || !strncasecmp(protocol, "file", n))	{
 #ifdef PHP_WIN32
-		if (protocol && path[n+1] == '/' && path[n+2] == '/' && path[n+4] != ':')	{
+		if (protocol && path[n+1] == '/' && path[n+2] == '/' && path[n+3] != '\0' && path[n+3] != '/' && path[n+4] != ':')	{
 #else
 		if (protocol && path[n+1] == '/' && path[n+2] == '/' && path[n+3] != '/')	{
 #endif

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.31 1999/09/05 00:55:48 riffraff Exp $ */
+/* $Id: string.c,v 1.32 1999/09/05 00:58:59 riffraff Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -1374,8 +1374,8 @@ PHPAPI char *php_addslashes(char *str, int length, int *new_length, int should_f
 	for (source=str,end=source+length,target=new_str; (c = *source) || source<end; source++) {
 		switch(c) {
 			case '\0':
-				*target++ = '\\'; // what if somebody escapes "foo\0"."12bar"?
-				*target++ = '0';  // we have to add \000 instead of just \0.
+				*target++ = '\\'; /* what if somebody escapes "foo\0"."12bar"? */
+				*target++ = '0';  /* we have to add \000 instead of just \0. */
 				*target++ = '0';
 				*target++ = '0';
 				break;

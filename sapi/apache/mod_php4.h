@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.h,v 1.14 2001/08/31 22:03:24 sniper Exp $ */
+/* $Id: mod_php4.h,v 1.14.2.1 2001/09/06 09:53:34 rasmus Exp $ */
 
 #ifndef MOD_PHP4_H
 #define MOD_PHP4_H
@@ -32,6 +32,8 @@ typedef struct {
 	long xbithack;
 	long terminate_child;
 	zend_bool in_request;
+	zend_bool apache_config_loaded;
+	char *uri_handler;
 } php_apache_info_struct;
 
 extern zend_module_entry apache_module_entry;

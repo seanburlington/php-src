@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.45 2001/08/14 17:05:53 dbeu Exp $ */
+/* $Id: php_apache.c,v 1.45.4.1 2001/09/06 09:53:34 rasmus Exp $ */
 
 #define NO_REGEX_EXTRA_H
 
@@ -86,6 +86,7 @@ PHP_INI_BEGIN()
 	STD_PHP_INI_ENTRY("engine",				"1",				PHP_INI_ALL,		OnUpdateInt,		engine, php_apache_info_struct, php_apache_info)
 	STD_PHP_INI_ENTRY("last_modified",		"0",				PHP_INI_ALL,		OnUpdateInt,		last_modified, php_apache_info_struct, php_apache_info)
 	STD_PHP_INI_ENTRY("child_terminate",	"0",				PHP_INI_ALL,		OnUpdateInt,		terminate_child, php_apache_info_struct, php_apache_info)
+	STD_PHP_INI_ENTRY("uri_handler",	NULL,				PHP_INI_ALL,		OnUpdateString,		uri_handler, php_apache_info_struct, php_apache_info)
 PHP_INI_END()
 
 
@@ -93,6 +94,7 @@ PHP_INI_END()
 static void php_apache_globals_ctor(php_apache_info_struct *apache_globals TSRMLS_DC)
 {
 	apache_globals->in_request = 0;
+	apache_globals->apache_config_loaded = 0;
 }
 
 

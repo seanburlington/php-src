@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.13 2002/03/07 14:20:00 sas Exp $
+dnl $Id: config.m4,v 1.14 2003/01/12 08:01:41 sebastian Exp $
 dnl
 
 AC_MSG_CHECKING(for Servlet support)
@@ -34,13 +34,15 @@ AC_ARG_WITH(servlet,
     AC_DEFINE(SAPI_SERVLET, 1, [Whether you use Servlet])
 
     INSTALL_IT="\$(mkinstalldirs) \$(libdir)"
-    INSTALL_IT="$INSTALL_IT; \$(INSTALL) -m 0755 \$(srcdir)/sapi/servlet/phpsrvlt.jar \$(libdir)"
+    INSTALL_IT="$INSTALL_IT; \$(INSTALL) -m 0755 \$(top_srcdir)/sapi/servlet/phpsrvlt.jar \$(libdir)"
     INSTALL_IT="$INSTALL_IT; \$(INSTALL) -m 0755 $SAPI_SHARED \$(libdir)"
     PHP_SAPI=servlet
     PHP_BUILD_THREAD_SAFE
+    EXTRA_INCLUDES="$EXTRA_INCLUDES \$(JAVA_INCLUDE)"
     PHP_SELECT_SAPI(servlet, shared, servlet.c)
-    PHP_ADD_SOURCES(/sapi/servlet, java.c,,sapi)
+    PHP_ADD_SOURCES(/sapi/servlet, java.c,, sapi)
     PHP_ADD_MAKEFILE_FRAGMENT(sapi/servlet/Makefile.frag)
+
     AC_MSG_RESULT(yes)
   else
     AC_MSG_RESULT(no)

@@ -1,4 +1,4 @@
-# $Id: config.m4,v 1.23 2001/03/27 20:34:30 sniper Exp $
+# $Id: config.m4,v 1.24 2001/04/03 20:59:45 wsanchez Exp $
 # config.m4 for extension java
 
 AC_MSG_CHECKING(for Java support)
@@ -99,8 +99,8 @@ AC_ARG_WITH(java,
         PHP_ADD_LIBRARY($JAVA_LIB)
       fi
 
-      INSTALL_IT="$INSTALL_IT; \$(srcdir)/build/shtool mkdir -p -f -m 0755 \$(libdir)"
-      INSTALL_IT="$INSTALL_IT; \$(INSTALL) -m 0755 \$(srcdir)/ext/java/php_java.jar \$(libdir)"
+      INSTALL_IT="$INSTALL_IT; \$(srcdir)/build/shtool mkdir -p -f -m 0755 \$(INSTALL_ROOT)\$(libdir)"
+      INSTALL_IT="$INSTALL_IT; \$(INSTALL) -m 0755 \$(srcdir)/ext/java/php_java.jar \$(INSTALL_ROOT)\$(libdir)"
     fi
 
     AC_MSG_RESULT(yes)

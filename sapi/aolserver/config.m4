@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.11 2001/03/27 20:34:44 sniper Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.12 2001/04/03 20:59:46 wsanchez Exp $ -*- sh -*-
 
 AC_MSG_CHECKING(for AOLserver support)
 AC_ARG_WITH(aolserver,
@@ -24,7 +24,7 @@ if test "$PHP_AOLSERVER" != "no"; then
   AC_DEFINE(HAVE_AOLSERVER,1,[Whether you have AOLserver])
   PHP_SAPI=aolserver
   PHP_BUILD_SHARED
-  INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_SHARED $PHP_AOLSERVER/bin/"
+  INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_SHARED \$(INSTALL_ROOT)$PHP_AOLSERVER/bin/"
 fi
 
 dnl ## Local Variables:

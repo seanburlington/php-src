@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.8 2001/03/27 20:34:46 sniper Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.9 2001/04/03 20:59:49 wsanchez Exp $ -*- sh -*-
 
 AC_MSG_CHECKING(for NSAPI support)
 AC_ARG_WITH(nsapi,
@@ -28,7 +28,7 @@ if test "$PHP_NSAPI" != "no"; then
   AC_DEFINE(HAVE_NSAPI,1,[Whether you have a Netscape Server])
   PHP_SAPI=nsapi
   PHP_BUILD_SHARED
-  INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_SHARED $PHP_NSAPI/bin/"
+  INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_SHARED \$(INSTALL_ROOT)$PHP_NSAPI/bin/"
 fi
 
 

@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.10 2001/03/27 20:34:46 sniper Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.11 2001/04/03 20:59:47 wsanchez Exp $ -*- sh -*-
 
 RESULT=no
 AC_MSG_CHECKING(for Zeus ISAPI support)
@@ -16,7 +16,7 @@ AC_ARG_WITH(isapi,
 	PHP_ADD_INCLUDE($ZEUSPATH/web/include)
 	PHP_SAPI=isapi
 	PHP_BUILD_SHARED
-	INSTALL_IT="\$(SHELL) \$(srcdir)/install-sh -m 0755 $SAPI_SHARED $ZEUSPATH/web/bin/"
+	INSTALL_IT="\$(SHELL) \$(srcdir)/install-sh -m 0755 $SAPI_SHARED \$(INSTALL_ROOT)$ZEUSPATH/web/bin/"
 	RESULT=yes
 ])
 AC_MSG_RESULT($RESULT)

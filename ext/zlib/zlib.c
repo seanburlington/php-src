@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.109 2002/03/15 21:03:05 wez Exp $ */
+/* $Id: zlib.c,v 1.110 2002/03/16 01:37:24 wez Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -252,7 +252,7 @@ PHP_MINFO_FUNCTION(zlib)
  */
 static gzFile php_gzopen_wrapper(char *path, char *mode, int options TSRMLS_DC)
 {
-	php_stream * stream = NULL;
+	php_stream *stream = NULL;
 	int fd;
 
 	stream = php_stream_open_wrapper(path, mode, options | REPORT_ERRORS, NULL TSRMLS_CC);
@@ -280,7 +280,7 @@ PHP_FUNCTION(gzfile)
 	char *slashed, buf[8192];
 	register int i=0;
 	int use_include_path = 0;
-	php_stream * stream;
+	php_stream *stream;
 
 	/* check args */
 	switch (ZEND_NUM_ARGS()) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dba.h,v 1.25 2003/06/10 20:03:26 imajes Exp $ */
+/* $Id: php_dba.h,v 1.26 2003/11/12 21:43:03 helly Exp $ */
 
 #ifndef PHP_DBA_H
 #define PHP_DBA_H
@@ -138,6 +138,7 @@ PHP_FUNCTION(dba_optimize);
 PHP_FUNCTION(dba_sync);
 PHP_FUNCTION(dba_handlers);
 PHP_FUNCTION(dba_list);
+PHP_FUNCTION(dba_key_split);
 
 #else
 #define dba_module_ptr NULL

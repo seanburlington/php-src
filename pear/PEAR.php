@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.36 2002/04/06 17:01:14 richard Exp $
+// $Id: PEAR.php,v 1.37 2002/04/08 21:03:41 richard Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -171,6 +171,27 @@ class PEAR
         if ($this->_debug) {
             printf("PEAR destructor called, class=%s\n", get_class($this));
         }
+    }
+
+    // }}}
+    // {{{ getStaticProperty()
+
+    /**
+    * If you have a class that's mostly/entirely static, and you need static
+    * properties, you can use this method to simulate them. Eg. in your method(s)
+    * do this: $myVar = &PEAR::getStaticProperty('myVar');
+    * You MUST use a reference, or they will not persist!
+    *
+    * @access public
+    * @param  string $class The calling classname, to prevent clashes
+    * @param  string $var   The variable to retrieve.
+    * @return mixed         A reference to the variable. If not set it will be 
+    *                       auto initialised to NULL.
+    */
+    function &getStaticProperty($class, $var)
+    {
+        static $properties;
+        return $properties[$class][$var];
     }
 
     // }}}

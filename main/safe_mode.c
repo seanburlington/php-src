@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.11 2000/01/01 01:31:27 sas Exp $ */
+/* $Id: safe_mode.c,v 1.12 2000/01/08 14:36:12 rasmus Exp $ */
 
 #include "php.h"
 
@@ -73,7 +73,7 @@ PHPAPI int php_checkuid(const char *fn, int mode) {
 	 * used to confuse the function.
 	 */
 	while(s && *(s+1)=='\0' && s>fn) {
-		s='\0';
+		*s='\0';
 		s = strrchr(fn,'/');
 	}
 

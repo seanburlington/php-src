@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: base64.c,v 1.31 2002/05/01 20:11:09 derick Exp $ */
+/* $Id: base64.c,v 1.32 2002/08/20 20:43:45 wez Exp $ */
 
 #include <string.h>
 
@@ -241,5 +241,5 @@ PHP_FUNCTION(base64_decode)
  * c-basic-offset: 4
  * End:
  * vim600: sw=4 ts=4 fdm=marker
- * vimo<600: sw=4 ts=4
+ * vim<600: sw=4 ts=4
  */

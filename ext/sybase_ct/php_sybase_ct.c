@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.42 2001/02/26 06:07:24 andi Exp $ */
+/* $Id: php_sybase_ct.c,v 1.43 2001/03/11 04:13:53 sniper Exp $ */
 
 
 #include "php.h"
@@ -67,6 +67,7 @@ function_entry sybase_functions[] = {
 	PHP_FALIAS(mssql_fetch_object,		sybase_fetch_object,	NULL)
 	PHP_FALIAS(mssql_data_seek,			sybase_data_seek,		NULL)
 	PHP_FALIAS(mssql_fetch_field,		sybase_fetch_field,		NULL)
+	PHP_FALIAS(mssql_field_seek,		sybase_field_seek,		NULL)
 	PHP_FALIAS(mssql_result,			sybase_result,			NULL)
 	PHP_FALIAS(mssql_affected_rows,		sybase_affected_rows,	NULL)
 	PHP_FALIAS(mssql_min_client_severity,	sybase_min_client_severity,	NULL)

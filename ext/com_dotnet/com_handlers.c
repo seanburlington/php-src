@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.16 2004/02/12 10:43:19 zeev Exp $ */
+/* $Id: com_handlers.c,v 1.17 2004/02/12 12:11:21 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -392,10 +392,10 @@ static union _zend_function *com_constructor_get(zval *object TSRMLS_DC)
 #endif
 		
 		case 'c':
-			POPULATE_CTOR(d, com_create_instance);
+			POPULATE_CTOR(c, com_create_instance);
 		
 		case 'v':
-			POPULATE_CTOR(d, com_variant_create_instance);
+			POPULATE_CTOR(v, com_variant_create_instance);
 			
 		default:
 			return NULL;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fribidi.c,v 1.22 2002/09/23 20:24:29 tal Exp $ */
+/* $Id: fribidi.c,v 1.23 2002/09/25 13:49:55 tal Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -118,7 +118,7 @@ PHP_MINFO_FUNCTION(fribidi)
 +------------------------------------------------------------+
 */           
 
-/* {{{ proto string fribidi_log2vis(string str, long direction, int charset)
+/* {{{ proto string fribidi_log2vis(string v_str, long direction, long charset)
    Convert a logical string to a visual one */
 PHP_FUNCTION(fribidi_log2vis)
 {

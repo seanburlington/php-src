@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.101 2003/08/05 20:15:53 iliaa Exp $ */
+/* $Id: exec.c,v 1.102 2003/08/07 15:51:05 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -382,7 +382,7 @@ PHP_FUNCTION(escapeshellarg)
 /* }}} */
 
 /* {{{ proto string shell_exec(string cmd)
-   Use pclose() for FILE* that has been opened via popen() */
+   Execute command via shell and return complete output as string */
 PHP_FUNCTION(shell_exec)
 {
 	FILE *in;

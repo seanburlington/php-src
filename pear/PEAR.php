@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.67 2003/09/11 13:16:13 cellog Exp $
+// $Id: PEAR.php,v 1.68 2003/09/11 13:21:07 cellog Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -311,11 +311,12 @@ class PEAR
 
             case PEAR_ERROR_CALLBACK:
                 $setmode = $mode;
+/*
                 $doSet = false;
                 // function callback
                 if (is_string($options) && function_exists($options)) {
                     $doSet = true;
-                }
+                } */
                 // class/object method callback
                 if (is_callable($options)) {
                     $setoptions = $options;

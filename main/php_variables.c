@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.41 2002/08/08 03:08:54 yohgaki Exp $ */
+/* $Id: php_variables.c,v 1.42 2002/08/25 18:45:02 helly Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -155,7 +155,7 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 			} else {
 				ip = strchr(ip, ']');
 				if (!ip) {
-					php_error(E_WARNING, "Missing ] in %s variable", var);
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Missing ] in %s variable", var);
 					return;
 				}
 				*ip = 0;

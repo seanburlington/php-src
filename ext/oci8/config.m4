@@ -1,18 +1,21 @@
-dnl $Id: config.m4,v 1.14 2000/05/08 09:06:48 thies Exp $
+dnl $Id: config.m4,v 1.15 2000/05/08 09:41:37 thies Exp $
 
 AC_DEFUN(AC_OCI8_VERSION,[
   AC_MSG_CHECKING([Oracle version])
-  if test -f "$OCI8_DIR/lib/libclntsh.so.8.0"; then
-    OCI8_VERSION=8.1
+  if test -f "$OCI8_DIR/orainst/unix.rgs"; then
+	OCI8_VERSION=`grep '"ocommon"' $OCI8_DIR/orainst/unix.rgs | sed 's/[ ][ ]*/:/g' | cut -d: -f 6 | cut -c 2-4`
+	test -z "$OCI8_VERSION" && OCI8_VERSION=7.3
+  elif test -f "$OCI8_DIR/lib/libclntsh.so.8.0"; then
+	OCI8_VERSION=8.1
   elif test -f "$OCI8_DIR/lib/libclntsh.so.1.0"; then
-    OCI8_VERSION=8.0
+	OCI8_VERSION=8.0
   elif test -f "$OCI8_DIR/lib/libclntsh.a"; then # AIX - XXX is this check still right for 8.1?
-    OCI8_VERSION=8.0
+	OCI8_VERSION=8.0
   else
-  	AC_MSG_ERROR(Oracle-OCI8 needed libraries not found)
+    AC_MSG_ERROR(Oracle-OCI8 needed libraries not found)
   fi
   AC_MSG_RESULT($OCI8_VERSION)
-])
+])                                                                                                                                                                
 
 PHP_ARG_WITH(oci8, for Oracle-OCI8 support,
 [  --with-oci8[=DIR]     Include oci8 support. DIR is the ORACLE_HOME.])

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.24 2002/03/18 11:46:00 wez Exp $ */
+/* $Id: recode.c,v 1.25 2002/03/21 22:35:00 mfischer Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -98,7 +98,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.24 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.25 $");
 	php_info_print_table_end();
 
 }
@@ -181,7 +181,7 @@ PHP_FUNCTION(recode_file)
 		RETURN_FALSE;
 	}
 
-	if (!php_stream_cast(instream, PHP_STREAM_AS_STDIO, (void**)&in_fp, REPORT_ERRORS))	{
+	if (FAILURE == php_stream_cast(instream, PHP_STREAM_AS_STDIO, (void**)&in_fp, REPORT_ERRORS))	{
 		RETURN_FALSE;
 	}
 	
@@ -191,7 +191,7 @@ PHP_FUNCTION(recode_file)
 		php_error(E_WARNING,"Unable to find output file identifier");
 		RETURN_FALSE;
 	}
-	if (!php_stream_cast(outstream, PHP_STREAM_AS_STDIO, (void**)&out_fp, REPORT_ERRORS))	{
+	if (FAILURE == php_stream_cast(outstream, PHP_STREAM_AS_STDIO, (void**)&out_fp, REPORT_ERRORS))	{
 		RETURN_FALSE;
 	}
 	

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.108 2002/03/16 01:27:13 wez Exp $ */
+/* $Id: pdf.c,v 1.109 2002/03/21 22:34:56 mfischer Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -348,7 +348,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.108 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.109 $" );
 	php_info_print_table_end();
 
 }
@@ -479,7 +479,7 @@ PHP_FUNCTION(pdf_open)
 		what = zend_fetch_resource(file TSRMLS_CC, -1, "File-Handle", &type, 1, php_file_le_stream());
 		ZEND_VERIFY_RESOURCE(what);
 		
-		if (!php_stream_cast((php_stream*)what, PHP_STREAM_AS_STDIO, (void*)&fp, 1) == FAILURE)	{
+		if (php_stream_cast((php_stream*)what, PHP_STREAM_AS_STDIO, (void*)&fp, 1) == FAILURE)	{
 			RETURN_FALSE;
 		}
 		/* XXX should do a zend_list_addref for <fp> here! */

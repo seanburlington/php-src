@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.160 2002/03/21 00:06:45 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.161 2002/03/21 22:34:57 mfischer Exp $ */
 
 #include <stdlib.h>
 
@@ -1478,7 +1478,7 @@ PHP_FUNCTION(pg_trace)
 		RETURN_FALSE;
 	}
 
-	if (!php_stream_cast(stream, PHP_STREAM_AS_STDIO, (void**)fp, REPORT_ERRORS))	{
+	if (FAILURE == php_stream_cast(stream, PHP_STREAM_AS_STDIO, (void**)fp, REPORT_ERRORS))	{
 		php_stream_close(stream);
 		RETURN_FALSE;
 	}

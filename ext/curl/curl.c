@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.107 2002/03/18 18:00:24 hholzgra Exp $ */
+/* $Id: curl.c,v 1.108 2002/03/21 22:34:54 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -705,7 +705,7 @@ PHP_FUNCTION(curl_setopt)
 		what = zend_fetch_resource(zvalue TSRMLS_CC, -1, "File-Handle", &type, 1, php_file_le_stream());
 		ZEND_VERIFY_RESOURCE(what);
 
-		if (!php_stream_cast((php_stream*)what, PHP_STREAM_AS_STDIO, (void*)&fp, REPORT_ERRORS))
+		if (FAILURE == php_stream_cast((php_stream*)what, PHP_STREAM_AS_STDIO, (void*)&fp, REPORT_ERRORS))
 			RETURN_FALSE;
 		if (!fp) {
 			RETURN_FALSE;

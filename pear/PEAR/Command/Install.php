@@ -16,11 +16,10 @@
 // | Author: Stig Sæther Bakken <ssb@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.49 2003/08/29 18:23:31 cox Exp $
+// $Id: Install.php,v 1.50 2003/09/11 14:47:02 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
-require_once "Console/Getopt.php";
 
 /**
  * PEAR commands for installation or deinstallation/upgrading of

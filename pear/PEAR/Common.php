@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.106 2003/09/02 03:15:27 cellog Exp $
+// $Id: Common.php,v 1.107 2003/09/11 14:47:01 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -217,11 +217,11 @@ class PEAR_Common extends PEAR
      *
      * @access public
      */
-    function log($level, $msg)
+    function log($level, $msg, $append_crlf = true)
     {
         if ($this->debug >= $level) {
             if (is_object($this->ui)) {
-                $this->ui->log($msg);
+                $this->ui->log($msg, $append_crlf);
             } else {
                 print "$msg\n";
             }
@@ -1699,7 +1699,7 @@ class PEAR_Common extends PEAR
         }
         $bytes = 0;
         if ($callback) {
-            call_user_func($callback, 'start', $length);
+            call_user_func($callback, 'start', array(basename($dest_file), $length));
         }
         while ($data = @fread($fp, 1024)) {
             $bytes += strlen($data);

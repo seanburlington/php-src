@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@php.net>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.34 2003/06/30 13:12:50 cox Exp $
+  $Id: CLI.php,v 1.35 2003/09/11 14:47:03 cox Exp $
 */
 
 require_once "PEAR.php";
@@ -472,9 +472,12 @@ class PEAR_Frontend_CLI extends PEAR
     // {{{ log(text)
 
 
-    function log($text)
+    function log($text, $append_crlf = true)
     {
-        return $this->_displayLine($text);
+        if ($append_crlf) {
+            return $this->_displayLine($text);
+        }
+        return $this->_display($text);
     }
 
 

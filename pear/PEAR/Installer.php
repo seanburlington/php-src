@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.112 2003/09/11 13:36:59 cox Exp $
+// $Id: Installer.php,v 1.113 2003/09/11 14:47:01 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -1188,6 +1188,19 @@ class PEAR_Installer extends PEAR_Common
                 break;
             case 'done':
                 $this->log(1, '...done: ' . number_format($params, 0, '', ',') . ' bytes');
+                break;
+            case 'bytesread':
+                static $bytes;
+                if (empty($bytes)) {
+                    $bytes = 0;
+                }
+                if (!($bytes % 10240)) {
+                    $this->log(1, '.', false);
+                }
+                $bytes += $params;
+                break;
+            case 'start':
+                $this->log(1, "Starting to download {$params[0]} (".number_format($params[1], 0, '', ',')." bytes)");
                 break;
         }
         if (method_exists($this->ui, '_downloadCallback'))

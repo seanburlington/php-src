@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.13 2003/06/04 22:39:59 wez Exp $
+dnl $Id: config.m4,v 1.14 2003/06/05 13:03:15 wez Exp $
 dnl config.m4 for extension sqlite
 dnl vim:et:ts=2:sw=2
 
@@ -104,6 +104,5 @@ EOF
   fi
 
   AC_CHECK_FUNCS(usleep nanosleep)
-
   AC_CHECK_HEADERS(time.h)
 fi

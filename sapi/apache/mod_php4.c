@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.137 2002/08/18 13:05:44 sesser Exp $ */
+/* $Id: mod_php4.c,v 1.138 2002/08/19 15:52:21 rasmus Exp $ */
 
 #include "php_apache_http.h"
 
@@ -758,13 +758,17 @@ CONST_PREFIX char *php_apache_admin_flag_handler(cmd_parms *cmd, HashTable *conf
 int php_xbithack_handler(request_rec * r)
 {
 	php_apache_info_struct *conf;
+	HashTable *per_dir_conf;
 
-	conf = (php_apache_info_struct *) get_module_config(r->per_dir_config, &php4_module);
 	if (!(r->finfo.st_mode & S_IXUSR)) {
 		r->allowed |= (1 << METHODS) - 1;
 		return DECLINED;
 	}
-	if (conf->xbithack == 0) {
+	per_dir_conf = (HashTable *) get_module_config(r->per_dir_config, &php4_module);
+	if (per_dir_conf) {
+		zend_hash_apply((HashTable *) per_dir_conf, (apply_func_t) php_apache_alter_ini_entries TSRMLS_CC);
+	}
+	if(!AP(xbithack)) {
 		r->allowed |= (1 << METHODS) - 1;
 		return DECLINED;
 	}

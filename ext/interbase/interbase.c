@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.79 2002/03/15 21:02:59 wez Exp $ */
+/* $Id: interbase.c,v 1.80 2002/03/16 18:43:41 wez Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -595,7 +595,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.79 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.80 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -2870,7 +2870,6 @@ PHP_FUNCTION(ibase_blob_import)
 	ibase_blob_handle ib_blob;
 	ibase_db_link *ib_link;
 	char bl_data[IBASE_BLOB_SEG]; /* FIXME? blob_seg_size parameter?	 */
-	void * what;
 	int type;
 	php_stream * stream;
 
@@ -2916,7 +2915,7 @@ PHP_FUNCTION(ibase_blob_import)
 
 	size = 0;
 
-	while(b = php_stream_read((php_stream*)what, bl_data, 1, sizeof(bl_data)) > 0)	{
+	while(b = php_stream_read(stream, bl_data, sizeof(bl_data)) > 0)	{
 		if (isc_put_segment(IB_STATUS, &ib_blob.bl_handle, b, bl_data)) {
 			_php_ibase_error();
 			RETURN_FALSE;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.36.2.1 2001/06/19 16:49:31 sniper Exp $ */
+/* $Id: php_odbc.h,v 1.36.2.2 2001/06/19 17:55:01 kalowsky Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -217,7 +217,9 @@ PHP_FUNCTION(odbc_field_name);
 PHP_FUNCTION(odbc_field_type);
 PHP_FUNCTION(odbc_field_num);
 PHP_FUNCTION(odbc_free_result);
+#if !defined(HAVE_SOLID) && !defined(HAVE_SOLID_30)
 PHP_FUNCTION(odbc_next_result);
+#endif
 PHP_FUNCTION(odbc_num_fields);
 PHP_FUNCTION(odbc_num_rows);
 PHP_FUNCTION(odbc_prepare);

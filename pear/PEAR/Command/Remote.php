@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.38 2004/04/03 06:04:31 cellog Exp $
+// $Id: Remote.php,v 1.39 2004/04/03 15:56:00 cellog Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -278,6 +278,9 @@ parameter.
             if ($info['unstable']) {
                 $unstable = '/(' . $info['unstable'] . $info['state'] . ')';
             }
+            if (!isset($info['stable']) || !$info['stable']) {
+                $info['stable'] = 'none';
+            }
             $data['data'][$info['category']][] = array(
                 $name,
                 $info['stable'] . $unstable,
@@ -287,7 +290,7 @@ parameter.
         }
         if (!isset($data['data'])) {
             return $this->raiseError('no packages found');
-        };
+        }
         $this->ui->outputData($data, $command);
         return true;
     }

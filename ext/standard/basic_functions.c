@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.571 2003/02/05 17:56:08 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.572 2003/02/07 21:33:35 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -682,6 +682,7 @@ function_entry basic_functions[] = {
 	PHP_FE(stream_get_meta_data,											NULL)
 	PHP_FE(stream_register_wrapper,											NULL)
 	PHP_FE(stream_get_wrappers,												NULL)
+	PHP_FE(get_headers,													NULL)
 
 #if HAVE_SYS_TIME_H || defined(PHP_WIN32)
 	PHP_FE(stream_set_timeout,												NULL)

@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.16 1999/11/19 15:06:57 andi Exp $ */
+/* $Id: internal_functions_win32.c,v 1.17 1999/11/19 16:42:19 andi Exp $ */
 
 
 #include "php.h"
@@ -84,7 +84,7 @@ zend_module_entry *php3_builtin_modules[] = {
 	phpext_lcg_ptr,
 	phpext_session_ptr,
 	phpext_output_ptr,
-	array_module_ptr
+	phpext_array_ptr
 };
 
 	

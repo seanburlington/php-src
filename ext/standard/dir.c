@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.109.2.6 2003/06/03 11:07:40 hholzgra Exp $ */
+/* $Id: dir.c,v 1.109.2.7 2003/06/04 05:46:18 sniper Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -399,10 +399,10 @@ PHP_FUNCTION(glob)
 	}
 
 #ifndef GLOB_NOMATCH
-	// now catch the FreeBSD style of "no matches"
+	/* now catch the FreeBSD style of "no matches" */
 	if (!globbuf.gl_pathc) {
-			array_init(return_value);
-			return;
+		array_init(return_value);
+		return;
 	}
 #endif
 

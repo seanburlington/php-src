@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.24 2001/03/21 05:45:40 steinm Exp $ */
+/* $Id: php_domxml.h,v 1.25 2001/04/09 11:53:06 steinm Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -37,6 +37,7 @@ extern zend_module_entry domxml_module_entry;
 extern PHP_MINIT_FUNCTION(domxml);
 extern PHP_RINIT_FUNCTION(domxml);
 extern PHP_MINFO_FUNCTION(domxml);
+PHP_FUNCTION(domxml_version);
 PHP_FUNCTION(xmldoc);
 PHP_FUNCTION(xmldocfile);
 PHP_FUNCTION(xmltree);

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.71 2002/06/07 10:22:00 cox Exp $
+// $Id: Common.php,v 1.72 2002/06/12 21:23:22 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -1320,7 +1320,7 @@ class PEAR_Common extends PEAR
     }
 
     // }}}
-    // {{{ getReplacementTypes()
+    // {{{ getProvideTypes()
 
     /**
      * Get the implemented file replacement types in
@@ -1334,7 +1334,7 @@ class PEAR_Common extends PEAR
     }
 
     // }}}
-    // {{{ getReplacementTypes()
+    // {{{ getScriptPhases()
 
     /**
      * Get the implemented file replacement types in

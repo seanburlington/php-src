@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.15 1999/09/20 10:09:57 thies Exp $ */
+/* $Id: basic_functions.h,v 1.16 1999/09/20 16:56:02 andi Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -64,7 +64,6 @@ PHP_FUNCTION(flush);
 PHP_FUNCTION(end);
 PHP_FUNCTION(prev);
 PHP_FUNCTION(next);
-PHP_FUNCTION(each);
 PHP_FUNCTION(reset);
 PHP_FUNCTION(current);
 PHP_FUNCTION(key);
@@ -76,7 +75,6 @@ PHP_FUNCTION(max);
 /* system functions */
 PHP_FUNCTION(getenv);
 PHP_FUNCTION(putenv);
-PHP_FUNCTION(error_reporting);
 
 PHP_FUNCTION(get_current_user);
 PHP_FUNCTION(set_time_limit);

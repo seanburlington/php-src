@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.38 1999/09/20 15:50:56 rasmus Exp $ */
+/* $Id: string.c,v 1.39 1999/09/20 16:56:02 andi Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -78,49 +78,6 @@ PHP_FUNCTION(bin2hex)
 	RETURN_STRINGL(new, newlen, 0);
 }
 
-/* {{{ proto int strlen(string str)
-   Get string length */
-PHP_FUNCTION(strlen)
-{
-	pval **str;
-	
-	if (ARG_COUNT(ht) != 1 || getParametersEx(1, &str) == FAILURE) {
-		WRONG_PARAM_COUNT;
-	}
-	convert_to_string_ex(str);
-	RETVAL_LONG((*str)->value.str.len);
-}
-/* }}} */
-
-/* {{{ proto int strcmp(string str1, string str2)
-   Binary safe string comparison */
-PHP_FUNCTION(strcmp)
-{
-	pval *s1,*s2;
-	
-	if (ARG_COUNT(ht) != 2 || getParameters(ht, 2, &s1, &s2) == FAILURE) {
-		WRONG_PARAM_COUNT;
-	}
-	convert_to_string(s1);
-	convert_to_string(s2);
-	RETURN_LONG(php3_binary_strcmp(s1,s2));
-}
-/* }}} */
-
-/* {{{ proto int strcasecmp(string str1, string str2)
-   Binary safe case-insensitive string comparison */
-PHP_FUNCTION(strcasecmp)
-{
-	pval *s1,*s2;
-	
-	if (ARG_COUNT(ht)!=2 || getParameters(ht, 2, &s1, &s2) == FAILURE) {
-		WRONG_PARAM_COUNT;
-	}
-	convert_to_string(s1);
-	convert_to_string(s2);
-	RETURN_LONG(zend_binary_strcasecmp(s1, s2));
-}
-/* }}} */
 
 /* {{{ proto int strspn(string str, string mask)
    Find length of initial segment consisting entirely of characters found in mask */

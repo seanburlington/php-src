@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php3_string.h,v 1.14 1999/09/20 15:50:55 rasmus Exp $ */
+/* $Id: php3_string.h,v 1.15 1999/09/20 16:56:02 andi Exp $ */
 
 /* Synced with php3 revision 1.43 1999-06-16 [ssb] */
 
@@ -40,11 +40,8 @@
 extern char *strtok_string;
 #endif
 
-PHP_FUNCTION(strlen);
-PHP_FUNCTION(strcmp);
 PHP_FUNCTION(strspn);
 PHP_FUNCTION(strcspn);
-PHP_FUNCTION(strcasecmp);
 PHP_FUNCTION(str_replace);
 PHP_FUNCTION(chop);
 PHP_FUNCTION(trim);

@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.6 2000/05/23 20:13:10 hholzgra Exp $ */
+/* $Id: levenshtein.c,v 1.7 2000/05/24 19:07:17 andrei Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -97,7 +97,8 @@ static int calc_levdist(const char *s1, const char *s2) /* faster, but obfuscate
 
 /* {{{ proto int levenshtein(string str1, string str2)
    Calculate Levenshtein distance between two strings */
-PHP_FUNCTION(levenshtein){
+PHP_FUNCTION(levenshtein)
+{
 	zval **str1, **str2;
 	int l;
 

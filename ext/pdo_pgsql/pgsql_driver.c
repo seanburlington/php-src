@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.16 2004/05/25 17:38:58 edink Exp $ */
+/* $Id: pgsql_driver.c,v 1.17 2004/05/26 17:45:03 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -146,7 +146,7 @@ static int pgsql_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquote
 	(*quoted)[0] = '\'';
 	(*quoted)[*quotedlen-1] = '\'';
 	(*quoted)[*quotedlen] = '\0';
-	PQfreemem(escaped);
+	free(escaped);
 
 	return 1;
 }

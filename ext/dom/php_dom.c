@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.10 2003/06/12 20:02:05 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.11 2003/06/14 15:27:15 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,7 +37,7 @@
 #define PHP_XPATH 1
 #define PHP_XPTR 2
 
-extern int xml_parser_inited;
+DOM_IMPORT int xml_parser_inited;
 
 zend_object_handlers dom_object_handlers;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.691 2004/09/29 04:57:18 sterling Exp $ */
+/* $Id: basic_functions.c,v 1.692 2004/10/04 19:54:35 andi Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -3210,7 +3210,7 @@ static int copy_request_variable(void *pDest, int num_args, va_list args, zend_h
 	memcpy(new_key, prefix, prefix_len);
 	memcpy(new_key+prefix_len, hash_key->arKey, hash_key->nKeyLength);
 
-	zend_hash_del(&EG(symbol_table), new_key, new_key_len);
+	delete_global_variable(new_key, new_key_len-1 TSRMLS_CC);
 	ZEND_SET_SYMBOL_WITH_LENGTH(&EG(symbol_table), new_key, new_key_len, *var, (*var)->refcount+1, 0);
 
 	efree(new_key);

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.49 1999/12/01 22:59:42 ssb Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.50 1999/12/03 13:31:40 ssb Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -15,6 +15,12 @@ fi
 
 cwd=`pwd`
 passthru="$@"
+
+CONFIGURE_COMMAND=$0
+for arg in "$@"; do
+    CONFIGURE_COMMAND="$CONFIGURE_COMMAND '$arg'"
+done
+AC_SUBST(CONFIGURE_COMMAND)
 
 dnl ## Diversion 1 is the initial checking of OS features, programs,
 dnl ## libraries and so on.

@@ -17,7 +17,7 @@
   |          Marcus Boerger <helly@php.net>                              |
   +----------------------------------------------------------------------+
 
-  $Id: php_sqlite.h,v 1.16 2003/06/04 21:11:45 wez Exp $ 
+  $Id: php_sqlite.h,v 1.17 2003/06/04 22:39:59 wez Exp $ 
 */
 
 #ifndef PHP_SQLITE_H
@@ -77,7 +77,7 @@ PHP_FUNCTION(sqlite_create_aggregate);
 PHP_FUNCTION(sqlite_create_function);
 
 ZEND_BEGIN_MODULE_GLOBALS(sqlite)
-	 int assoc_case;
+	 long assoc_case;
 ZEND_END_MODULE_GLOBALS(sqlite)
 
 #ifdef ZTS

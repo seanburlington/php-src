@@ -22,7 +22,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.54 2000/07/28 21:31:02 sniper Exp $ */
+/* $Id: ldap.c,v 1.55 2000/07/28 21:48:16 sniper Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -186,7 +186,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.54 2000/07/28 21:31:02 sniper Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.55 2000/07/28 21:48:16 sniper Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #if HAVE_NSLDAP
@@ -1006,7 +1006,7 @@ PHP_FUNCTION(ldap_get_values_len)
 	}
 	
 	for (i=0; i<num_values; i++) {
-//		add_next_index_stringl(return_value, ldap_value_len[i]->bv_val, ldap_value_len[i]->bv_len, 1);
+		add_next_index_stringl(return_value, ldap_value_len[i]->bv_val, ldap_value_len[i]->bv_len, 1);
 	}
 	
 	add_assoc_long(return_value, "count", num_values);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.677 2004/07/29 02:59:43 wez Exp $ */
+/* $Id: basic_functions.c,v 1.678 2004/07/29 11:54:12 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1227,7 +1227,9 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 	PHP_RSHUTDOWN(assert)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_RSHUTDOWN(url_scanner_ex)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_RSHUTDOWN(streams)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#ifdef PHP_WIN32
 	PHP_RSHUTDOWN(win32_core_globals)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#endif
 
 	if (BG(user_tick_functions)) {
 		zend_llist_destroy(BG(user_tick_functions));

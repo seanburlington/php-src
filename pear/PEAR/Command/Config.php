@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.15.2.3 2002/06/01 18:39:36 dickmann Exp $
+// $Id: Config.php,v 1.15.2.4 2002/06/02 09:59:21 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";
@@ -83,8 +83,7 @@ in.  The default layer is "user".
     {
         // $params[0] -> the layer
         if ($error = $this->_checkLayer(@$params[0])) {
-            $failmsg .= $error;
-            break;
+            return $this->raiseError($error);
         }
         $keys = $this->config->getKeys();
         sort($keys);
@@ -111,11 +110,10 @@ in.  The default layer is "user".
         // $params[0] -> the parameter
         // $params[1] -> the layer
         if ($error = $this->_checkLayer(@$params[1])) {
-            $failmsg .= $error;
-            break;
+            return $this->raiseError($error);
         }
         if (sizeof($params) < 1 || sizeof($params) > 2) {
-            $failmsg .= "config-get expects 1 or 2 parameters";
+            return $this->raiseError("config-get expects 1 or 2 parameters");
         } elseif (sizeof($params) == 1) {
             $this->ui->outputData("$params[0] = " . $this->config->get($params[0]), $command);
         } else {

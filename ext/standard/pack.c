@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.52.2.1 2004/11/28 12:44:42 sesser Exp $ */
+/* $Id: pack.c,v 1.52.2.2 2005/03/10 12:23:12 hyanantha Exp $ */
 
 #include "php.h"
 
@@ -50,8 +50,6 @@
 #if HAVE_PWD_H
 #ifdef PHP_WIN32
 #include "win32/pwd.h"
-#elif defined(NETWARE)
-#include "netware/pwd.h"
 #else
 #include <pwd.h>
 #endif

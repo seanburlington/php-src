@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.18 2002/03/11 23:11:04 derick Exp $ */
+/* $Id: php_imap.h,v 1.19 2002/05/12 20:53:25 jon Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H
@@ -185,14 +185,21 @@ PHP_FUNCTION(imap_setacl);
 ZEND_BEGIN_MODULE_GLOBALS(imap)
 	char *imap_user;
 	char *imap_password;
-	STRINGLIST *imap_folders;
-	STRINGLIST *imap_sfolders;
+
 	STRINGLIST *imap_alertstack;
 	ERRORLIST *imap_errorstack;
+
+	STRINGLIST *imap_folders;
+	STRINGLIST *imap_folders_tail;
+	STRINGLIST *imap_sfolders;
+	STRINGLIST *imap_sfolders_tail;
 	MESSAGELIST *imap_messages;
 	MESSAGELIST *imap_messages_tail;
 	FOBJECTLIST *imap_folder_objects;
+	FOBJECTLIST *imap_folder_objects_tail;
 	FOBJECTLIST *imap_sfolder_objects;
+	FOBJECTLIST *imap_sfolder_objects_tail;
+
 	folderlist_style_t folderlist_style;
 	long status_flags;
 	unsigned long status_messages;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.34 2000/06/05 19:47:41 andi Exp $ */
+/* $Id: interbase.c,v 1.35 2000/06/11 16:24:00 eschmid Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -525,7 +525,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.34 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.35 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -2796,7 +2796,7 @@ extern int wsa_fp;
 */
 /*to handle reading and writing to windows sockets*/
 
-/* {{{ proto string ibase_blob_import([link_identifier,] file_id)
+/* {{{ proto string ibase_blob_import([link_identifier,] int file_id)
    Create blob, copy file in it, and close it */
 
 PHP_FUNCTION(ibase_blob_import)

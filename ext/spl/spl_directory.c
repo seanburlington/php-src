@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.14 2003/11/22 20:46:46 helly Exp $ */
+/* $Id: spl_directory.c,v 1.15 2003/11/29 18:31:24 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -296,7 +296,7 @@ SPL_METHOD(DirectoryIterator, key)
    Return this (needed for Iterator interface) */
 SPL_METHOD(DirectoryIterator, current)
 {
-	REPLACE_ZVAL_VALUE(&return_value, getThis(), 1);
+	RETURN_ZVAL(getThis(), 1, 0);
 }
 /* }}} */
 

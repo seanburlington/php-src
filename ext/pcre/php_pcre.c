@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.57 2000/06/05 19:47:43 andi Exp $ */
+/* $Id: php_pcre.c,v 1.58 2000/06/10 19:43:20 andrei Exp $ */
 
 /*
 	TODO:
@@ -713,6 +713,7 @@ char *php_pcre_replace(char *regex,   int regex_len,
 					} else {
 						*walkbuf++ = *walk++;
 					}
+				*walkbuf = '\0';
 				/* increment the result length by how much we've added to the string */
 				*result_len += walkbuf - (result + *result_len);
 			}

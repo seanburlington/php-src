@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.15 1999/09/15 05:42:35 andi Exp $ */
+/* $Id: zlib.c,v 1.16 1999/09/18 19:03:35 sr Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -274,7 +274,7 @@ static gzFile *php3_gzopen_with_path(char *filename, char *mode, char *path, cha
 	return NULL;
 }
 
-/* {{{ proto array gzfile(string filename)
+/* {{{ proto array gzfile(string filename [, int use_include_path])
 Read und uncompress entire .gz-file into an array */
 PHP_FUNCTION(gzfile) {
 	pval *filename, *arg2;

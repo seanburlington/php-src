@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: msql.c,v 1.8 1999/07/16 17:10:01 zeev Exp $ */
+/* $Id: msql.c,v 1.9 1999/07/16 17:16:30 zeev Exp $ */
 
 #include "php.h"
 #if COMPILE_DL
@@ -1121,7 +1121,7 @@ DLEXPORT PHP_FUNCTION(msql_fetch_object)
    Fetch a result row as an associative array */
 DLEXPORT PHP_FUNCTION(msql_fetch_array)
 {
-	php3_msql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU);
+	php3_msql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
 }
 /* }}} */
 

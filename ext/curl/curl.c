@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.80 2001/08/24 01:12:37 sterling Exp $ */
+/* $Id: curl.c,v 1.81 2001/09/08 00:42:25 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -291,7 +291,7 @@ static size_t curl_write(char *data, size_t size, size_t nmemb, void *ctx)
 		                           t->func,
 		                           retval, 2, argv TSRMLS_CC);
 		if (error == FAILURE) {
-			php_error(E_WARNING, "Cannot call the CURLOPT_WRITEFUNCTION");
+			php_error(E_WARNING, "Couldn't call the CURLOPT_WRITEFUNCTION");
 			length = -1;
 		}
 		else {

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.12 1999/06/19 13:13:28 zeev Exp $ */
+/* $Id: fsock.c,v 1.13 1999/07/09 17:44:40 zeev Exp $ */
 
 /* Synced with php3 revision 1.121 1999-06-18 [ssb] */
 
@@ -715,9 +715,10 @@ size_t _php3_sock_fread(char *ptr, size_t size, int socket)
 
 	/* {{{ _php3_sock_destroy */
 #ifndef ZTS
-static void _php3_msock_destroy(int *data)
+static int _php3_msock_destroy(int *data)
 {
 	close(*data);
+	return 1;
 }
 #endif
 /* }}} */
@@ -727,7 +728,7 @@ int php3_minit_fsock(INIT_FUNC_ARGS)
 {
 #ifndef ZTS
 	_php3_hash_init(&PG(ht_fsock_keys), 0, NULL, NULL, 1);
-	_php3_hash_init(&PG(ht_fsock_socks), 0, NULL, (void (*)(void *))_php3_msock_destroy, 1);
+	_php3_hash_init(&PG(ht_fsock_socks), 0, NULL, (int (*)(void *))_php3_msock_destroy, 1);
 #endif
 	return SUCCESS;
 }

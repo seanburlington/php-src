@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.67 2003/01/11 23:05:19 moriyoshi Exp $ */
+/* $Id: browscap.c,v 1.68 2003/01/24 16:29:40 iliaa Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -228,7 +228,7 @@ PHP_FUNCTION(get_browser)
 		case 0:
 			if (!PG(http_globals)[TRACK_VARS_SERVER]
 				|| zend_hash_find(PG(http_globals)[TRACK_VARS_SERVER]->value.ht, "HTTP_USER_AGENT", sizeof("HTTP_USER_AGENT"), (void **) &agent_name)==FAILURE) {
-				zend_error(E_WARNING, "HTTP_USER_AGENT variable is not set, cannot determine user agent name");
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "HTTP_USER_AGENT variable is not set, cannot determine user agent name");
 				RETURN_FALSE;
 			}
 			break;

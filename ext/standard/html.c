@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.70 2003/01/03 14:37:42 hyanantha Exp $ */
+/* $Id: html.c,v 1.71 2003/01/24 16:29:40 iliaa Exp $ */
 
 #include "php.h"
 #if PHP_WIN32
@@ -703,7 +703,7 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 
 				/* When we have MBCS entities in the tables above, this will need to handle it */
 				if (k > 0xff) {
-					zend_error(E_WARNING, "cannot yet handle MBCS in html_entity_decode()!");
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "cannot yet handle MBCS!");
 				}
 				replacement[0] = k;
 				replacement[1] = '\0';

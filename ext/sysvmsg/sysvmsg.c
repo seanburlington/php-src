@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: sysvmsg.c,v 1.7 2003/01/18 21:31:08 iliaa Exp $ */
+/* $Id: sysvmsg.c,v 1.8 2003/01/24 16:24:45 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -120,7 +120,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.7 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.8 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -223,8 +223,7 @@ PHP_FUNCTION(msg_get_queue)
 		/* doesn't already exist; create it */
 		mq->id = msgget(key, IPC_CREAT|IPC_EXCL|perms);
 		if (mq->id < 0)	{
-			zend_error(E_WARNING, "%s: msgget() failed for key 0x%x: %s",
-					get_active_function_name(TSRMLS_C), key, strerror(errno));
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "failed for key 0x%x: %s", key, strerror(errno));
 			efree(mq);
 			RETURN_FALSE;
 		}
@@ -381,8 +380,7 @@ PHP_FUNCTION(msg_send)
 	efree(messagebuffer);
 
 	if (result == -1) {
-		zend_error(E_WARNING, "%s(): msgsnd failed: %s",
-				get_active_function_name(TSRMLS_C), strerror(errno));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "msgsnd failed: %s", strerror(errno));
 		if (zerror) {
 			ZVAL_LONG(zerror, errno);
 		}

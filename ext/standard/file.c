@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.45 2003/12/13 01:44:24 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.46 2003/12/15 18:53:25 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2266,16 +2266,17 @@ PHP_FUNCTION(fgetcsv)
 
 	array_init(return_value);
 
-#define CSV_ADD_ENTRY(s, es, st)	{	\
-	int len = es - st;	\
-	if (len) {	\
-		while (isspace((int)*(unsigned char *)s)) {	\
-			s++;	\
-			len--;	\
+#define CSV_ADD_ENTRY(os, es, st)	{	\
+	int tmp_sl = es - st;	\
+	char *tmp_s=os;	\
+	if (tmp_sl) {	\
+		while (isspace((int)*(unsigned char *)tmp_s)) {	\
+			tmp_s++;	\
+			tmp_sl--;	\
 		}	\
 	}	\
-	if (len) {	\
-		add_next_index_stringl(return_value, s, len, 1);	\
+	if (tmp_sl) {	\
+		add_next_index_stringl(return_value, tmp_s, tmp_sl, 1);	\
 	} else {	\
 		add_next_index_string(return_value, "", 1);	\
 	}	\

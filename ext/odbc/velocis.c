@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: velocis.c,v 1.32 2001/12/11 15:30:00 sebastian Exp $ */
+/* $Id: velocis.c,v 1.33 2002/01/04 13:51:03 hholzgra Exp $ */
 
 /*
  * TODO:
@@ -204,7 +204,7 @@ velocis_del_result(HashTable *list,int ind)
 
 /* Users functions */
 
-/* {{{ proto long velocis_connect(string server, string user, sting pass)
+/* {{{ proto int velocis_connect(string server, string user, sting pass)
  */
 PHP_FUNCTION(velocis_connect)
 {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.75 2001/12/11 15:29:56 sebastian Exp $ */
+/* $Id: php_mssql.c,v 1.76 2001/12/17 20:06:29 hholzgra Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -1768,7 +1768,7 @@ PHP_FUNCTION(mssql_init)
 /* }}} */
 
 /* {{{ proto int mssql_bind(int stmt, string param_name, mixed var, int type 
-		[, int is_output[, int is_null[, int maxlen]])
+		[, int is_output[, int is_null[, int maxlen]]])
    Adds a parameter to a stored procedure or a remote stored procedure  */
 PHP_FUNCTION(mssql_bind)
 {

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.7 2001/03/27 20:34:43 sniper Exp $
+dnl $Id: config.m4,v 1.8 2001/05/02 18:38:14 andi Exp $
 
 PHP_ARG_WITH(sybase,for Sybase support,
 [  --with-sybase[=DIR]     Include Sybase-DB support.  DIR is the Sybase home
@@ -21,4 +21,8 @@ if test "$PHP_SYBASE" != "no"; then
         AC_DEFINE(HAVE_LIBDNET_STUB,1,[ ])
      ])
   AC_DEFINE(HAVE_SYBASE,1,[ ])
+  AC_CHECK_LIB(sybdb, tdsdbopen, 
+     [ AC_DEFINE(PHP_SYBASE_DBOPEN,tdsdbopen,[ ])
+       AC_DEFINE(DBMFIX,1,[ ]) ],
+     [ AC_DEFINE(PHP_SYBASE_DBOPEN,dbopen,[ ]) ])
 fi

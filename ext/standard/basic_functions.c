@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.283 2000/12/07 14:54:52 andrei Exp $ */
+/* $Id: basic_functions.c,v 1.284 2000/12/07 15:33:30 sas Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -452,7 +452,7 @@ function_entry basic_functions[] = {
 	PHP_FE(chdir,				NULL)
 	PHP_FE(getcwd,				NULL)
 	PHP_FE(rewinddir,			NULL)
-	PHP_FE(readdir,				NULL)
+	PHP_STATIC_FE("readdir", php_if_readdir, NULL)
 	PHP_FALIAS(dir,		getdir,	NULL)
 
 	/* functions from filestat.c */

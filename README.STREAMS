@@ -1,6 +1,6 @@
 An Overview of the PHP Streams abstraction
 ==========================================
-$Id: README.STREAMS,v 1.2 2002/03/16 13:48:56 wez Exp $
+$Id: README.STREAMS,v 1.3 2002/03/16 13:54:03 wez Exp $
 
 Please send comments to: Wez Furlong <wez@thebrainroom.com>
 
@@ -164,7 +164,7 @@ if (php_stream_can_cast(stream, PHP_STREAM_AS_SOCKETD) == SUCCESS)  {
 Please note the difference between php_stream_is and php_stream_can_cast;
 stream_is tells you if the stream is a particular type of stream, whereas
 can_cast tells you if the stream can be forced into the form you request.
-The format doesn't change anything, while the later *might* change some
+The former doesn't change anything, while the later *might* change some
 state in the stream.
 
 Stream Internals

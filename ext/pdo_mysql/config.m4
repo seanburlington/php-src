@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.1 2004/05/18 18:01:52 gschlossnagle Exp $
+dnl $Id: config.m4,v 1.2 2004/05/18 18:42:36 iliaa Exp $
 dnl
 
 AC_DEFUN(MYSQL_LIB_CHK, [
@@ -29,7 +29,7 @@ if test "$PHP_PDO_MYSQL" != "no"; then
     AC_MSG_RESULT([no])
   fi
 
-  for i in $PHP_MYSQL /usr/local /usr; do
+  for i in $PHP_PDO_MYSQL /usr/local /usr; do
     if test -r $i/include/mysql/mysql.h; then
       MYSQL_DIR=$i
       MYSQL_INC_DIR=$i/include/mysql

@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: typecode.c,v 1.2 2000/09/01 22:29:00 eriksson Exp $
+ * $Id: typecode.c,v 1.3 2001/01/30 06:43:35 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -132,8 +132,7 @@ static CORBA_StructMemberSeq * orbit_create_member_sequence(IDL_tree member_list
 
 		if (type_code == NULL)
 		{
-/*			printf("unknown type for member %s\n", 
-					IDL_IDENT(IDL_LIST(declaration).data).str);*/
+			zend_error(E_WARNING, "(Satellite) unknown type for member %s", IDL_IDENT(IDL_LIST(declaration).data).str);
 			goto error;
 		}
 		

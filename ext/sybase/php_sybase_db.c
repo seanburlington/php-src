@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.38.2.11 2003/08/28 20:27:53 andrey Exp $ */
+/* $Id: php_sybase_db.c,v 1.38.2.12 2003/10/03 13:03:46 iliaa Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -144,6 +144,7 @@ static int php_sybase_error_handler(DBPROCESS *dbproc,int severity,int dberr,
 										int oserr,char *dberrstr,char *oserrstr)
 {
 	if (severity >= php_sybase_module.min_error_severity) {
+		TSRMLS_FETCH();
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Sybase error:  %s (severity %d)",dberrstr,severity);
 	}
 	return INT_CANCEL;  
@@ -155,6 +156,7 @@ static int php_sybase_message_handler(DBPROCESS *dbproc,DBINT msgno,int msgstate
 										char *procname,DBUSMALLINT line)
 {
 	if (severity >= php_sybase_module.min_message_severity) {
+		TSRMLS_FETCH();
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Sybase message:  %s (severity %d)",msgtext,severity);
 	}
 	STR_FREE(php_sybase_module.server_message);

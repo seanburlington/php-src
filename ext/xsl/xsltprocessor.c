@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.9 2003/08/07 18:38:39 rrichards Exp $ */
+/* $Id: xsltprocessor.c,v 1.10 2003/08/12 00:55:55 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -62,10 +62,10 @@ static char *php_xsl_xslt_string_to_xpathexpr(const char *str TSRMLS_DC)
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create XPath expression (string contains both quote and double-quotes)");
 			return NULL;
 		}
-		value = (xmlChar*) emalloc (str_len * sizeof(xmlChar) );
+		value = (xmlChar*) safe_emalloc (str_len, sizeof(xmlChar), 0);
 		snprintf(value, str_len, "'%s'", string);
 	} else {
-		value = (xmlChar*) emalloc (str_len * sizeof(xmlChar) );
+		value = (xmlChar*) safe_emalloc (str_len, sizeof(xmlChar), 0);
 		snprintf(value, str_len, "\"%s\"", string);
 	}
 	return (char *) value;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.88 2003/06/27 16:41:40 sniper Exp $ */
+/* $Id: ftp.c,v 1.89 2003/08/12 00:55:58 iliaa Exp $ */
 
 #include "php.h"
 
@@ -1635,7 +1635,7 @@ ftp_genlist(ftpbuf_t *ftp, const char *cmd, const char *path TSRMLS_DC)
 
 	rewind(tmpfp);
 
-	ret = emalloc((lines + 1) * sizeof(char**) + size * sizeof(char*));
+	ret = safe_emalloc((lines + 1), sizeof(char**), size * sizeof(char*));
 
 	entry = ret;
 	text = (char*) (ret + lines + 1);

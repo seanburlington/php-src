@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ovrimos.c,v 1.24 2003/06/22 14:33:03 andrey Exp $ */
+/* $Id: ovrimos.c,v 1.25 2003/08/12 00:55:56 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -212,7 +212,7 @@ PCON_STATE state = statement->con_state;
 		return 1;
 	}
 	
-	new_statements = emalloc( (state->nstatements-1) * sizeof(STATEMENT));
+	new_statements = safe_emalloc( (state->nstatements-1), sizeof(STATEMENT), 0);
 	
 	for (i=j=0;i<state->nstatements;i++) {
 		if (state->statements->statement != stmt) {

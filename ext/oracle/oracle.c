@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.91 2003/08/03 17:44:37 zeev Exp $ */
+/* $Id: oracle.c,v 1.92 2003/08/12 00:55:56 iliaa Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -1650,7 +1650,7 @@ ora_describe_define(oraCursor * cursor)
 	}
 
 	if (cursor->ncols > 0){
-		cursor->columns = (oraColumn *) emalloc(sizeof(oraColumn) * cursor->ncols);
+		cursor->columns = (oraColumn *) safe_emalloc(sizeof(oraColumn), cursor->ncols, 0);
 		memset(cursor->columns,0,sizeof(oraColumn) * cursor->ncols);
 	}
 

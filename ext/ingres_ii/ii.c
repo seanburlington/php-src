@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ii.c,v 1.38 2003/06/10 20:03:30 imajes Exp $ */
+/* $Id: ii.c,v 1.39 2003/08/12 00:55:57 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1167,7 +1167,7 @@ static void php_ii_fetch(INTERNAL_FUNCTION_PARAMETERS, II_LINK *ii_link, int res
 		}
 
 		/* allocate memory for j fields */
-		columnData = (IIAPI_DATAVALUE *) emalloc(j * sizeof(IIAPI_DATAVALUE));
+		columnData = (IIAPI_DATAVALUE *) safe_emalloc(j, sizeof(IIAPI_DATAVALUE), 0);
 		for (k = 1; k <= j; k++) {
 			columnData[k - 1].dv_value = (II_PTR) emalloc((ii_link->descriptor[i + k - 2]).ds_length);
 		}

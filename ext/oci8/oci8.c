@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.213 2003/08/03 17:44:37 zeev Exp $ */
+/* $Id: oci8.c,v 1.214 2003/08/12 00:55:57 iliaa Exp $ */
 
 /* TODO list:
  *
@@ -644,7 +644,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.213 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.214 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -4139,7 +4139,7 @@ PHP_FUNCTION(ocifetchstatement)
 	}
 
 	if (flags & OCI_FETCHSTATEMENT_BY_ROW) {
-		columns = emalloc(statement->ncolumns * sizeof(oci_out_column *));
+		columns = safe_emalloc(statement->ncolumns, sizeof(oci_out_column *), 0);
 
 		for (i = 0; i < statement->ncolumns; i++) {
 			columns[ i ] = oci_get_col(statement, i + 1, 0);
@@ -4177,8 +4177,8 @@ PHP_FUNCTION(ocifetchstatement)
 
 		efree(columns);
 	} else { /* default to BY_COLUMN */
-		columns = emalloc(statement->ncolumns * sizeof(oci_out_column *));
-		outarrs = emalloc(statement->ncolumns * sizeof(zval*));
+		columns = safe_emalloc(statement->ncolumns, sizeof(oci_out_column *), 0);
+		outarrs = safe_emalloc(statement->ncolumns, sizeof(zval*), 0);
 		
 		if (flags & OCI_NUM) {
 			for (i = 0; i < statement->ncolumns; i++) {

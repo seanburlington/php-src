@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.10 2003/07/27 17:57:06 rrichards Exp $ */
+/* $Id: element.c,v 1.11 2003/08/12 00:55:58 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -407,7 +407,7 @@ PHP_FUNCTION(dom_element_get_elements_by_tag_name)
 	ctxp = xmlXPathNewContext(docp);
 
 	ctxp->node = nodep;
-	str = (char*) emalloc((name_len+13) * sizeof(char)) ;
+	str = (char*) safe_emalloc((name_len+13), sizeof(char), 0) ;
 	sprintf(str ,"descendant::%s",name);
 
 	xpathobjp = xmlXPathEval(str, ctxp);

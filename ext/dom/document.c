@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.18 2003/08/10 20:39:58 helly Exp $ */
+/* $Id: document.c,v 1.19 2003/08/12 00:55:58 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -700,7 +700,7 @@ PHP_FUNCTION(dom_document_get_elements_by_tag_name)
 	ctxp = xmlXPathNewContext(docp);
 
 	ctxp->node = NULL;
-	str = (char*) emalloc((name_len+3) * sizeof(char)) ;
+	str = (char*) safe_emalloc((name_len+3), sizeof(char), 0) ;
 	sprintf(str ,"//%s",name);
 
 	xpathobjp = xmlXPathEval(str, ctxp);

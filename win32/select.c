@@ -19,7 +19,7 @@
 #include "php.h"
 #include "php_network.h"
 
-/* $Id: select.c,v 1.4 2003/06/10 20:03:46 imajes Exp $ */
+/* $Id: select.c,v 1.5 2003/08/12 00:58:52 iliaa Exp $ */
 
 /* Win32 select() will only work with sockets, so we roll our own implementation that will
  * get the OS file handle from regular fd's and sockets and then use WaitForMultipleObjects().
@@ -50,7 +50,7 @@ PHPAPI int php_select(php_socket_t max_fd, fd_set *rfds, fd_set *wfds, fd_set *e
 		return 0;
 	}
 
-	handles = (HANDLE*)emalloc((fd_count + sock_count) * sizeof(HANDLE));
+	handles = (HANDLE*)safe_emalloc((fd_count + sock_count), sizeof(HANDLE), 0);
 
 	/* populate the events and handles arrays */
 	f = 0;

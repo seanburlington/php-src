@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.102 2003/08/10 21:30:36 helly Exp $ */
+/* $Id: network.c,v 1.103 2003/08/12 00:58:52 iliaa Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -240,7 +240,7 @@ static int php_network_getaddresses(const char *host, int socktype, struct socka
 		in = *((struct in_addr *) host_info->h_addr);
 	}
 
-	*sal = emalloc(2 * sizeof(*sal));
+	*sal = safe_emalloc(2, sizeof(*sal), 0);
 	sap = *sal;
 	*sap = emalloc(sizeof(struct sockaddr_in));
 	(*sap)->sa_family = AF_INET;

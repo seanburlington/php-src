@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.97 2004/09/14 03:48:16 pollita Exp $ */
+/* $Id: php_streams.h,v 1.98 2004/09/29 10:54:56 hyanantha Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -104,11 +104,7 @@ typedef struct _php_stream_filter php_stream_filter;
 #include "streams/php_stream_filter_api.h"
 
 typedef struct _php_stream_statbuf {
-#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
-	struct stat_libc sb; /* regular info */
-#else
 	struct stat sb; /* regular info */
-#endif
 	/* extended info to go here some day: content-type etc. etc. */
 } php_stream_statbuf;
 

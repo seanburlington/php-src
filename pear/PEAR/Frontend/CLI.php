@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.11 2002/04/10 15:09:36 cox Exp $
+  $Id: CLI.php,v 1.12 2002/04/14 13:34:52 mfischer Exp $
 */
 
 require_once "PEAR.php";
@@ -222,6 +222,9 @@ class PEAR_Frontend_CLI extends PEAR
         extract($this->params);
         if (!empty($caption)) {
             $this->displayHeading($caption);
+        }
+        if (count($table_data) == 0) {
+            return;
         }
         if (!isset($width)) {
             $width = $widest;

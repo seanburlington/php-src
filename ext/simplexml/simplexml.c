@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.33 2003/06/09 03:29:33 sterling Exp $ */
+/* $Id: simplexml.c,v 1.34 2003/06/09 04:01:11 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -783,13 +783,14 @@ sxe_object_dtor(void *object, zend_object_handle handle TSRMLS_DC)
 
 	sxe = (php_sxe_object *) object;
 
+	FREE_HASHTABLE(sxe->zo.properties);
+
 	if (--sxe->document->refcount > 0) {
 		return;
 	}
-	
 	xmlFreeDoc(sxe->document->ptr);
-	FREE_HASHTABLE(sxe->zo.properties);
-
+	efree(sxe->document);
+		
 	if (sxe->xpath) {
 		xmlXPathFreeContext(sxe->xpath);
 	}
@@ -858,8 +859,8 @@ PHP_FUNCTION(simplexml_load_file)
 
 	sxe = php_sxe_object_new(TSRMLS_C);
 	sxe->document = emalloc(sizeof(simplexml_ref_obj));
-	sxe->document->refcount = 1;
 	sxe->document->ptr = (void *) xmlParseFile(filename);
+	sxe->document->refcount = 1;
 	if (sxe->document->ptr == NULL) {
 		efree(sxe->document);
 		RETURN_FALSE;
@@ -893,7 +894,7 @@ PHP_FUNCTION(simplexml_load_string)
 		RETURN_FALSE;
 	}
 	sxe->nsmap = xmlHashCreate(10);
-		
+
 	return_value->type = IS_OBJECT;
 	return_value->value.obj = php_sxe_register_object(sxe TSRMLS_CC);
 }
@@ -1015,7 +1016,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.33 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.34 $");
 	php_info_print_table_end();
 
 }

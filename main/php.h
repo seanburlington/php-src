@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.66 2000/03/04 14:44:00 sas Exp $ */
+/* $Id: php.h,v 1.67 2000/03/04 19:58:59 andi Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -59,7 +59,6 @@ extern unsigned char second_arg_allow_ref[];
 
 
 #ifdef PHP_WIN32
-#include "config.w32.h"
 #include "win95nt.h"
 #	ifdef PHP_EXPORTS
 #	define PHPAPI __declspec(dllexport) 
@@ -67,7 +66,6 @@ extern unsigned char second_arg_allow_ref[];
 #	define PHPAPI __declspec(dllimport) 
 #	endif
 #else
-#include "php_config.h"
 #define PHPAPI
 #define THREAD_LS
 #endif

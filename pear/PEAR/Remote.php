@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.12 2002/03/19 19:30:06 ssb Exp $
+// $Id: Remote.php,v 1.13 2002/03/21 20:52:26 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -74,7 +74,7 @@ class PEAR_Remote extends PEAR
         fwrite($fp, ("POST /xmlrpc.php HTTP/1.0\r\n$req_headers\r\n$request"));
         $response = '';
         $line1 = fgets($fp, 2048);
-        if (!preg_match('!^HTTP/[0-9\.]+ (\d+) (.*)!', $line1, &$matches)) {
+        if (!preg_match('!^HTTP/[0-9\.]+ (\d+) (.*)!', $line1, $matches)) {
             return $this->raiseError("PEAR_Remote: invalid HTTP response from XML-RPC server");
         }
         switch ($matches[1]) {

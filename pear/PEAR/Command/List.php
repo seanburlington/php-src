@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: List.php,v 1.1 2002/03/21 11:33:54 cox Exp $
+// $Id: List.php,v 1.2 2002/03/21 20:52:26 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Registry.php";
@@ -59,7 +59,7 @@ class PEAR_Command_List extends PEAR_Command_Common
     // }}}
     // {{{ run()
 
-    function run($command, $params)
+    function run($command, $options, $params)
     {
         $reg = new PEAR_Registry(); // XXX Use config here
         $installed = $reg->packageInfo();

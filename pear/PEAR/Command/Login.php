@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Login.php,v 1.3 2002/03/21 11:16:15 cox Exp $
+// $Id: Login.php,v 1.4 2002/03/21 20:52:26 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Remote.php";
@@ -70,7 +70,7 @@ class PEAR_Command_Login extends PEAR_Command_Common
      *
      * @access public
      */
-    function run($command, $params)
+    function run($command, $options, $params)
     {
         $cf = $this->config;
         $failmsg = '';

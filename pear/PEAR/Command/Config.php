@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.2 2002/03/21 11:16:15 cox Exp $
+// $Id: Config.php,v 1.3 2002/03/21 20:52:26 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";
@@ -59,7 +59,7 @@ class PEAR_Command_Config extends PEAR_Command_Common
     // }}}
     // {{{ run()
 
-    function run($command, $params)
+    function run($command, $options, $params)
     {
         $cf =& $this->config;
         $failmsg = '';

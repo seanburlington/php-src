@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.11 2002/03/18 17:39:44 ssb Exp $
+// $Id: Config.php,v 1.12 2002/03/21 20:52:26 cox Exp $
 
 require_once 'PEAR.php';
 
@@ -355,7 +355,7 @@ class PEAR_Config extends PEAR
         $size = filesize($file);
         $contents = fread($fp, $size);
         $version = '0.1';
-        if (preg_match('/^#PEAR_Config\s+(\S+)\s+/si', $contents, &$matches)) {
+        if (preg_match('/^#PEAR_Config\s+(\S+)\s+/si', $contents, $matches)) {
             $version = $matches[1];
             $contents = substr($contents, strlen($matches[0]));
         }

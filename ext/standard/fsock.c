@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.89 2002/03/16 22:08:23 phanto Exp $ */
+/* $Id: fsock.c,v 1.90 2002/03/17 01:58:41 wez Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -161,7 +161,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 
 	if (port > 0)	{ /* connect to a host */
 		enum php_sslflags_t { php_ssl_none, php_ssl_v23, php_ssl_tls };
-		enum php_sslflags_t ssl_flags;
+		enum php_sslflags_t ssl_flags = php_ssl_none;
 		struct {
 			char *proto;
 			int protolen;
@@ -193,7 +193,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		}
 		else
 #endif
-		stream = php_stream_sock_open_host(host, port, socktype, (int)timeout, persistent);
+		stream = php_stream_sock_open_host(host, (unsigned short)port, socktype, (int)timeout, persistent);
 
 		if (stream == NULL) {
 			zend_error(E_WARNING, "%s(): unable to connect to %s:%d", 

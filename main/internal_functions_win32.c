@@ -17,7 +17,7 @@
 	+----------------------------------------------------------------------+
 */
 
-/* $Id: internal_functions_win32.c,v 1.78 2003/06/27 14:32:59 edink Exp $ */
+/* $Id: internal_functions_win32.c,v 1.79 2003/08/14 16:49:56 wez Exp $ */
 
 /* {{{ includes
  */
@@ -97,6 +97,7 @@
 #ifdef HAVE_SQLITE
 #include "ext/sqlite/php_sqlite.h"
 #endif
+#include "ext/com_dotnet/php_com_dotnet.h"
 /* }}} */
 
 /* {{{ php_builtin_extensions[]
@@ -109,6 +110,7 @@ zend_module_entry *php_builtin_extensions[] = {
 #if HAVE_CALENDAR
 	,phpext_calendar_ptr
 #endif
+	,phpext_com_dotnet_ptr
 #if HAVE_CTYPE
 	,phpext_ctype_ptr
 #endif
@@ -135,14 +137,14 @@ zend_module_entry *php_builtin_extensions[] = {
 #endif
 #if HAVE_LIBXML
 #if HAVE_DOM
-	,phpext_dom_ptr
+	phpext_dom_ptr
 #endif
 #if HAVE_SIMPLEXML
-	,phpext_simplexml_ptr
+	phpext_simplexml_ptr
 #endif
 #endif
 #if HAVE_XML
-	,phpext_xml_ptr
+	phpext_xml_ptr
 #endif
 #if HAVE_XML && HAVE_WDDX
 	,phpext_wddx_ptr

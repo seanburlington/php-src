@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.75 2003/06/27 16:43:05 sebastian Exp $
+	$Id: config.w32.h,v 1.76 2003/08/14 16:49:56 wez Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -46,6 +46,10 @@
 /* #define HAVE_MBSTR_KR 0 */
 /* #define HAVE_MBSTR_RU 0 */
 /* #define HAVE_MBSTR_TW 0 */ 
+
+/* If you have the .Net SDK in your include path, define this
+ * to compile .Net support into your COM extension. */
+#define HAVE_MSCOREE_H 0
 
 /* Enable / Disable ODBC extension (default: enabled) */
 #define HAVE_UODBC 1

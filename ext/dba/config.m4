@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.16 2001/11/30 18:59:31 sniper Exp $
+dnl $Id: config.m4,v 1.16.2.1 2002/04/18 12:31:19 derick Exp $
 dnl
 
 AC_DEFUN(PHP_TEMP_LDFLAGS,[
@@ -230,6 +230,5 @@ if test "$HAVE_DBA" = "1"; then
   PHP_SUBST(DBA_SHARED_LIBADD)
 else
   AC_MSG_RESULT(no)
-  AC_DEFINE(HAVE_DBA, 0, [ ])
 fi
 

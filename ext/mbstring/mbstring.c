@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.219 2005/02/21 15:14:01 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.220 2005/02/21 15:14:32 moriyoshi Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -2282,7 +2282,6 @@ PHP_FUNCTION(mb_list_encodings)
 	}
 }
 /* }}} */
-
 
 /* {{{ proto string mb_encode_mimeheader(string str [, string charset [, string transfer-encoding [, string linefeed]]])
    Converts the string to MIME "encoded-word" in the format of =?charset?(B|Q)?encoded_string?= */

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.42.2.12 2003/11/08 00:33:57 fmk Exp $ */
+/* $Id: ming.c,v 1.42.2.13 2004/10/01 19:18:39 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1444,17 +1444,22 @@ PHP_FUNCTION(swfmovie_output)
 #ifdef HAVE_MING_ZLIB
 	zval **zlimit = NULL;
 	int limit = -1;
+	int argc = ZEND_NUM_ARGS();
 
-	if (zend_get_parameters_ex(1, &zlimit) == FAILURE) {
-		WRONG_PARAM_COUNT;
-	}
+	if(argc==0) {
+		limit = 6;
+	} else {
+		if (zend_get_parameters_ex(1, &zlimit) == FAILURE) {
+			WRONG_PARAM_COUNT;
+		}
 
-	convert_to_long_ex(zlimit);
-	limit = Z_LVAL_PP(zlimit);
+		convert_to_long_ex(zlimit);
+		limit = Z_LVAL_PP(zlimit);
 
-	if ((limit < 0) || (limit > 9)) {
-		php_error(E_WARNING,"compression level must be within 0..9");
-		RETURN_FALSE;
+		if ((limit < 0) || (limit > 9)) {
+			php_error(E_WARNING,"compression level must be within 0..9");
+			RETURN_FALSE;
+		}
 	}
 #endif
 

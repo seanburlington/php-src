@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.84.2.1 2002/03/18 21:40:55 derick Exp $ */
+/* $Id: fsock.c,v 1.84.2.2 2002/03/18 22:12:57 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -478,6 +478,14 @@ static size_t php_sockread_internal(php_sockbuf *sock)
 	/* read at a maximum sock->chunk_size */
 	nr_bytes = recv(sock->socket, buf, sock->chunk_size, 0);
 	if(nr_bytes > 0) {
+
+		/* try to avoid ever expanding buffer */
+		if (sock->readpos > 0) {
+			memmove(sock->readbuf, READPTR(sock), sock->readbuflen - sock->readpos);
+			sock->writepos -= sock->readpos;
+			sock->readpos = 0;
+		}
+
 		if(sock->writepos + nr_bytes > sock->readbuflen) {
 			sock->readbuflen += sock->chunk_size;
 			sock->readbuf = perealloc(sock->readbuf, sock->readbuflen,

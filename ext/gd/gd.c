@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.66 2000/06/07 23:04:39 jah Exp $ */
+/* $Id: gd.c,v 1.67 2000/06/14 05:11:16 jah Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -513,7 +513,7 @@ PHP_FUNCTION(imagecreatefromxbm)
 }
 /* }}} */
 
-/* {{{ proto int imagecreatefromxpm(string filename)
+/* {{{ droto int imagecreatefromxpm(string filename)
    Create a new image from XPM file or URL */
 PHP_FUNCTION(imagecreatefromxpm)
 {

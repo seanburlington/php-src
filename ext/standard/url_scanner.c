@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.34 2001/08/25 16:09:22 zeev Exp $ */
+/* $Id: url_scanner.c,v 1.35 2001/08/26 11:49:43 zeev Exp $ */
 
 #include "php.h"
 
@@ -32,14 +32,14 @@
 #define BUFSIZE 256
 #endif
 
-PHP_RINIT_FUNCTION(url_scanner)
+int php_url_scanner_activate(TSRMLS_D)
 {
 	url_adapt(NULL,0,NULL,NULL);
 	return SUCCESS;
 }
 
 
-PHP_RSHUTDOWN_FUNCTION(url_scanner)
+int php_url_scanner_deactivate(TSRMLS_D)
 {
 	url_adapt(NULL,0,NULL,NULL);
 	return SUCCESS;

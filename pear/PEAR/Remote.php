@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.14 2002/03/22 09:22:26 ssb Exp $
+// $Id: Remote.php,v 1.15 2002/03/29 02:17:55 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -114,6 +114,13 @@ class PEAR_Remote extends PEAR
                                              null, null, $ret['userinfo']);
                 }
             }
+        } elseif (is_array($ret) && sizeof($ret) == 1 &&
+                  isset($ret[0]['faultString']) &&
+                  isset($ret[0]['faultCode'])) {
+            extract($ret[0]);
+            $faultString = "XML-RPC Server Fault: " .
+                 str_replace("\n", " ", $faultString);
+            return $this->raiseError($faultString, $faultCode);
         }
         return $ret;
     }

@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.94.2.8 2002/07/05 15:02:39 hirokawa Exp $ */
+/* $Id: rfc1867.c,v 1.94.2.9 2002/07/05 18:33:03 sniper Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -452,7 +452,7 @@ static char *substring_conf(char *start, int len, char quote  TSRMLS_DC)
 		} else {
 			*resp++ = start[i];
 #if HAVE_MBSTRING
-			if (mbstr_is_mb_leadbyte(start+i) TSRMLS_CC){
+			if (mbstr_is_mb_leadbyte(start+i TSRMLS_CC)) {
 				*resp++ = start[++i];
 			}
 #endif

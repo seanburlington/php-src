@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
 */
 
+/* $Id: php_signal.h,v 1.2 2001/07/30 20:51:57 jason Exp $ */
+
 #include <signal.h>
 #ifndef PHP_SIGNAL_H
 #define PHP_SIGNAL_H

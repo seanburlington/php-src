@@ -17,6 +17,8 @@
    +----------------------------------------------------------------------+
 */
 
+/* $Id: php_signal.c,v 1.2 2001/07/30 20:51:57 jason Exp $ */
+
 #include "php_signal.h"
 
 /* php_signal using sigaction is taken verbatim from Advanced Programing

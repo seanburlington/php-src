@@ -16,6 +16,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: pcntl.c,v 1.11 2001/07/30 20:51:57 jason Exp $ */
+
 #define PCNTL_DEBUG 0
 
 #if PCNTL_DEBUG
@@ -495,7 +497,7 @@ void pcntl_zend_extension_deactivate(void)
 void pcntl_zend_extension_statement_handler(zend_op_array *op_array)
 {
 	zend_llist_element *element;
-    zval *param, *call_name, *retval;
+	zval *param, *call_name, *retval;
 	char *func_name;
 	TSRMLS_FETCH();
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.45 2003/03/19 00:18:12 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.46 2003/03/19 01:34:38 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1150,8 +1150,6 @@ PHPAPI size_t _php_stream_copy_to_mem(php_stream *src, char **buf, size_t maxlen
  
 	ptr = *buf = pemalloc_rel_orig(max_len, persistent);
  
-	max_len = step;
-
 	while((ret = php_stream_read(src, ptr, max_len - len)))	{
 		len += ret;
 		if (len + min_room >= max_len) {

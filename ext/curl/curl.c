@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.115 2002/07/11 02:31:38 sniper Exp $ */
+/* $Id: curl.c,v 1.116 2002/07/26 22:57:14 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -614,9 +614,9 @@ PHP_FUNCTION(curl_setopt)
 	           **zoption, 
 	           **zvalue;
 	php_curl    *ch;
-	CURLcode     error;
+	CURLcode     error=CURLE_OK;
 	int          option;
-	
+
 	if (ZEND_NUM_ARGS() != 3 ||
 	    zend_get_parameters_ex(3, &zid, &zoption, &zvalue) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -744,7 +744,10 @@ PHP_FUNCTION(curl_setopt)
 		break;
 	case CURLOPT_BINARYTRANSFER:
 		convert_to_long_ex(zvalue);	
-		ch->handlers->write->type = PHP_CURL_BINARY;
+
+		if (Z_LVAL_PP(zvalue)) {
+			ch->handlers->write->type = PHP_CURL_BINARY;
+		}
 		break;
 	case CURLOPT_WRITEFUNCTION:
 		zval_add_ref(zvalue);

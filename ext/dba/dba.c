@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.61.2.14 2003/04/16 19:14:29 helly Exp $ */
+/* $Id: dba.c,v 1.61.2.15 2003/05/19 22:53:35 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -781,7 +781,7 @@ PHP_FUNCTION(dba_sync)
 /* }}} */
 
 /* {{{ proto array dba_handlers([bool full_info])
-   List configured databases */
+   List configured database handlers */
 PHP_FUNCTION(dba_handlers)
 {
 	dba_handler *hptr;
@@ -805,7 +805,7 @@ PHP_FUNCTION(dba_handlers)
 /* }}} */
 
 /* {{{ proto array dba_list()
-   List configured databases */
+   List opened databases */
 PHP_FUNCTION(dba_list)
 {
 	ulong numitems, i;

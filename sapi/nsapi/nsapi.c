@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nsapi.c,v 1.28.2.16 2003/07/15 17:31:03 thetaphi Exp $ */
+/* $Id: nsapi.c,v 1.28.2.17 2003/07/15 22:19:23 thetaphi Exp $ */
 
 /*
  * PHP includes
@@ -204,7 +204,7 @@ zend_module_entry nsapi_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(nsapi),
-	"$Revision: 1.28.2.16 $",
+	"$Revision: 1.28.2.17 $",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
@@ -407,7 +407,7 @@ PHP_FUNCTION(nsapi_request_headers)
 	for (i=0; i < rc->rq->headers->hsize; i++) {
 		entry=rc->rq->headers->ht[i];
 		while (entry) {
-			if (!PG(safe_mode) || strcasecmp(entry->param->name, "authorization")) {
+			if (!PG(safe_mode) || strncasecmp(entry->param->name, "authorization", 13)) {
 				add_assoc_string(return_value, entry->param->name, entry->param->value, 1);
 			}
 			entry=entry->next;
@@ -607,7 +607,7 @@ static void sapi_nsapi_register_server_variables(zval *track_vars_array TSRMLS_D
 	for (i=0; i < rc->rq->headers->hsize; i++) {
 		entry=rc->rq->headers->ht[i];
 		while (entry) {
-			if (!PG(safe_mode) || strcasecmp(entry->param->name, "authorization")) {
+			if (!PG(safe_mode) || strncasecmp(entry->param->name, "authorization", 13)) {
 				snprintf(buf, NS_BUF_SIZE, "HTTP_%s", entry->param->name);
 				for(p = buf + 5; *p; p++) {
 					*p = toupper(*p);

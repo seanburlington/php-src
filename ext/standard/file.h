@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.64 2002/09/23 18:13:31 wez Exp $ */
+/* $Id: file.h,v 1.65 2002/09/25 15:25:11 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -82,7 +82,6 @@ PHP_FUNCTION(stream_filter_append);
 PHP_MINIT_FUNCTION(user_streams);
 
 PHPAPI int php_set_sock_blocking(int socketd, int block TSRMLS_DC);
-PHPAPI int php_file_le_stream(void);
 PHPAPI int php_copy_file(char *src, char *dest TSRMLS_DC);
 
 #define META_DEF_BUFSIZE 8192
@@ -113,7 +112,6 @@ php_meta_tags_token php_next_meta_token(php_meta_tags_data * TSRMLS_DC);
 
 typedef struct {
   	int pclose_ret;
-	HashTable ht_persistent_socks;
 	size_t def_chunk_size;
 	int auto_detect_line_endings;
 	int default_socket_timeout;

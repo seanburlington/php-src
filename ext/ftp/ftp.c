@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.69 2002/12/31 16:06:37 sebastian Exp $ */
+/* $Id: ftp.c,v 1.70 2003/01/03 14:21:17 hyanantha Exp $ */
 
 #include "php.h"
 
@@ -67,6 +67,11 @@
 
 #include "ftp.h"
 #include "ext/standard/fsock.h"
+
+/* Additional headers for NetWare */
+#if defined(NETWARE) && defined(NEW_LIBC) && !defined(USE_WINSOCK)
+#include <sys/select.h>
+#endif
 
 /* sends an ftp command, returns true on success, false on error.
  * it sends the string "cmd args\r\n" if args is non-null, or

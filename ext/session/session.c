@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.342 2002/12/31 16:07:26 sebastian Exp $ */
+/* $Id: session.c,v 1.343 2003/01/03 14:24:07 hyanantha Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -729,7 +729,11 @@ static void strcpy_gmt(char *ubuf, time_t *when)
 static void last_modified(TSRMLS_D)
 {
 	const char *path;
+#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
+	struct stat_libc sb;
+#else
 	struct stat sb;
+#endif
 	char buf[MAX_STR + 1];
 	
 	path = SG(request_info).path_translated;
@@ -740,7 +744,11 @@ static void last_modified(TSRMLS_D)
 
 #define LAST_MODIFIED "Last-Modified: "
 		memcpy(buf, LAST_MODIFIED, sizeof(LAST_MODIFIED) - 1);
+#ifdef NETWARE
+		strcpy_gmt(buf + sizeof(LAST_MODIFIED) - 1, &((sb.st_mtime).tv_sec));
+#else
 		strcpy_gmt(buf + sizeof(LAST_MODIFIED) - 1, &sb.st_mtime);
+#endif
 		ADD_COOKIE(buf);
 	}
 }

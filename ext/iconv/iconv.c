@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.74 2003/01/03 05:38:50 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.75 2003/01/03 14:29:49 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1590,6 +1590,11 @@ PHP_FUNCTION(iconv_strpos)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss|ls",
 		&haystk, &haystk_len, &ndl, &ndl_len,
 		&offset, &charset, &charset_len) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	if (offset < 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset not contained in string.");
 		RETURN_FALSE;
 	}
 

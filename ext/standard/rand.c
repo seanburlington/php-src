@@ -19,7 +19,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand.c,v 1.41 2001/09/05 20:59:24 sterling Exp $ */
+/* $Id: rand.c,v 1.42 2001/09/05 21:04:30 sterling Exp $ */
 
 #include <stdlib.h>
 
@@ -202,7 +202,7 @@ PHP_FUNCTION(srand)
 	}
 	convert_to_long_ex(seed);
 
-    php_srand(Z_LVAL_PP(seed));
+	php_srand(Z_LVAL_PP(seed));
 }
 /* }}} */
 
@@ -263,7 +263,7 @@ PHP_FUNCTION(rand)
 	if (argc != 0 && argc != 2 ||
 	    zend_get_parameters_ex(argc, &min, &max) == FAILURE) {
 		WRONG_PARAM_COUNT;
-    }
+	}
 
 	number = php_rand();
 	if (argc == 2) {

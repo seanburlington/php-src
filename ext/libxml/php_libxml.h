@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.4 2003/12/09 21:55:02 rrichards Exp $ */
+/* $Id: php_libxml.h,v 1.5 2003/12/12 13:54:06 rrichards Exp $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -73,6 +73,9 @@ int php_libxml_decrement_doc_ref(php_libxml_node_object *object TSRMLS_DC);
 void php_libxml_node_free_resource(xmlNodePtr node TSRMLS_DC);
 /* When object dtor is called as node may still be referenced */
 void php_libxml_node_decrement_resource(php_libxml_node_object *object TSRMLS_DC);
+void php_libxml_error_handler(void *ctx, const char *msg, ...);
+void php_libxml_ctx_warning(void *ctx, const char *msg, ...);
+void php_libxml_ctx_error(void *ctx, const char *msg, ...);
 
 #endif /* HAVE_LIBXML */
 

@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.3 2004/05/18 10:00:01 wez Exp $
+// $Id: config.w32,v 1.4 2005/01/12 05:47:03 wez Exp $
 // vim:ft=javascript
 
 ARG_WITH("pdo-oci", "Oracle OCI support for PDO", "no");
@@ -32,6 +32,7 @@ if (PHP_PDO_OCI != "no") {
 		/* probe for some functions not present in older versions */
 		pdo_oci_inc_dir = FSO.GetFolder(pdo_oci_header);
 		CHECK_FUNC_IN_HEADER('oci.h', 'OCIEnvCreate', pdo_oci_inc_dir);
+		CHECK_FUNC_IN_HEADER('oci.h', 'OCIStmtFetch2', pdo_oci_inc_dir);
 		CHECK_FUNC_IN_HEADER('ociap.h', 'OCIEnvNlsCreate', pdo_oci_inc_dir);
 
 	} else {

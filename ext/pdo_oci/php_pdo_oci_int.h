@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_oci_int.h,v 1.2 2004/05/20 00:06:30 wez Exp $ */
+/* $Id: php_pdo_oci_int.h,v 1.3 2005/01/12 05:47:03 wez Exp $ */
 
 #include <oci.h>
 
@@ -60,8 +60,8 @@ typedef struct {
 	OCIStmt		*stmt;
 	OCIError	*err;
 	sword		last_err;
-	ub2			stmt_type;
-
+	ub2		stmt_type;
+	ub4		exec_type;
 	pdo_oci_column *cols;
 	pdo_oci_error_info einfo;
 } pdo_oci_stmt;

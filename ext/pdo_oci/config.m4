@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.5 2004/06/14 19:58:35 tony2001 Exp $
+dnl $Id: config.m4,v 1.6 2005/01/12 05:47:03 wez Exp $
 
 AC_DEFUN(AC_PDO_OCI_VERSION,[
   AC_MSG_CHECKING([Oracle version])
@@ -131,7 +131,13 @@ if test "$PHP_PDO_OCI" != "no"; then
     -L$PDO_OCI_DIR/lib $PDO_OCI_SHARED_LIBADD
   ])
 
-
+  dnl Scrollable cursors?
+  PHP_CHECK_LIBRARY(clntsh, OCIStmtFetch2,
+  [
+  	 AC_DEFINE(HAVE_OCISTMTFETCH2,1,[ ])
+  ], [], [
+    -L$PDO_OCI_DIR/lib $PDO_OCI_SHARED_LIBADD
+  ])
 
   PHP_NEW_EXTENSION(pdo_oci, pdo_oci.c oci_driver.c oci_statement.c, $ext_shared,,-I\$prefix/include/php/ext)
 

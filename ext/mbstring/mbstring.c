@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.214.2.1 2005/01/16 15:55:41 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.214.2.2 2005/01/28 01:58:26 tony2001 Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -3229,7 +3229,7 @@ PHP_FUNCTION(mb_get_info)
 		RETURN_FALSE;
 	}
 
-	if (!strcasecmp("all", typ)) {
+	if (!typ || !strcasecmp("all", typ)) {
 		array_init(return_value);
 		if ((name = (char *)mbfl_no_encoding2name(MBSTRG(current_internal_encoding))) != NULL) {
 			add_assoc_string(return_value, "internal_encoding", name, 1);

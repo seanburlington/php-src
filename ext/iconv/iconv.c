@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.54 2002/10/25 08:51:59 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.55 2002/10/25 11:50:35 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -146,8 +146,8 @@ PHP_MINFO_FUNCTION(miconv)
 {
 	zval iconv_impl, iconv_ver;
 
-	zend_get_constant("ICONV_IMPL", sizeof("ICONV_IMPL")-1, &iconv_impl);
-	zend_get_constant("ICONV_VERSION", sizeof("ICONV_VERSION")-1, &iconv_ver);
+	zend_get_constant("ICONV_IMPL", sizeof("ICONV_IMPL")-1, &iconv_impl TSRMLS_CC);
+	zend_get_constant("ICONV_VERSION", sizeof("ICONV_VERSION")-1, &iconv_ver TSRMLS_CC);
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "iconv support", "enabled");

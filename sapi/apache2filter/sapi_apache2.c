@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.91.2.4 2003/01/07 15:23:45 edink Exp $ */
+/* $Id: sapi_apache2.c,v 1.91.2.5 2003/01/28 16:34:41 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -484,7 +484,9 @@ static int php_output_filter(ap_filter_t *f, apr_bucket_brigade *bb)
 			
 			php_apache_request_dtor(f TSRMLS_CC);
 			
-			ctx->request_processed = 1;
+			if (!f->r->main) {
+				ctx->request_processed = 1;
+			}
 
 			/* Delete the FILE bucket from the brigade. */
 			apr_bucket_delete(b);

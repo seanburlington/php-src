@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.58 2000/11/01 19:55:12 andi Exp $ */
+/* $Id: pdf.c,v 1.59 2000/11/03 20:11:37 joey Exp $ */
 
 /* pdflib 2.02 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -42,6 +42,7 @@
 #include "php_globals.h"
 #include "ext/standard/head.h"
 #include "ext/standard/info.h"
+#include "ext/standard/file.h"
 
 #include <math.h>
 

@@ -17,9 +17,14 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.24 1999/11/20 00:30:08 andi Exp $ */
+/* $Id: pgsql.c,v 1.25 1999/11/20 00:45:44 andi Exp $ */
 
 #include <stdlib.h>
+
+
+#if COMPILE_DL
+#include "dl/phpdl.h"
+#endif
 
 #include "php.h"
 #include "php3_pgsql.h"

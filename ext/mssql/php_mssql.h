@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.29 2003/01/09 08:00:07 fmk Exp $ */
+/* $Id: php_mssql.h,v 1.30 2003/02/09 07:18:02 fmk Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -80,7 +80,7 @@ typedef unsigned char *LPBYTE;
 #define tinyintcol(i) ((int) *(DBTINYINT *) dbdata(mssql_ptr->link,i))
 #define anyintcol(j) (coltype(j)==SQLINT4?intcol(j):(coltype(j)==SQLINT2?smallintcol(j):tinyintcol(j)))
 #define charcol(i) ((DBCHAR *) dbdata(mssql_ptr->link,i))
-#define floatcol4(i) (*(DBFLT8 *) dbdata(mssql_ptr->link,i))
+#define floatcol4(i) (*(DBFLT4 *) dbdata(mssql_ptr->link,i))
 #define floatcol8(i) (*(DBFLT8 *) dbdata(mssql_ptr->link,i))
 
 #ifdef ZTS

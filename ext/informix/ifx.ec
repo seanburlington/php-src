@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ifx.ec,v 1.69.2.16 2003/06/12 10:24:40 andrey Exp $ */
+/* $Id: ifx.ec,v 1.69.2.17 2003/07/01 10:56:16 nobbie Exp $ */
 
 /* -------------------------------------------------------------------
  * if you want a function reference : "grep '^\*\*' ifx.ec" will give
@@ -3102,6 +3102,8 @@ static long php_intifx_init_blob_inmem(loc_t *blob, long new TSRMLS_DC)
 static long php_intifx_init_blob_infile(loc_t *blob, long new TSRMLS_DC)
 {
 	char *filename;
+
+	blob->loc_loctype = LOCFNAME;
 
 	if (new) {
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.42 2003/12/17 22:03:33 andrey Exp $ */
+/* $Id: microtime.c,v 1.43 2003/12/17 22:21:05 andrey Exp $ */
 
 #include "php.h"
 
@@ -52,7 +52,7 @@
 #define SEC_IN_MIN 60
 
 #ifdef HAVE_GETTIMEOFDAY
-/* {{{ proto string microtime([bool get_as_float])
+/* {{{ proto mixed microtime([bool get_as_float])
    Returns either a string or a float containing the current time in seconds and microseconds */
 PHP_FUNCTION(microtime)
 {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.52 2001/01/21 17:26:43 rasmus Exp $ */
+/* $Id: filestat.c,v 1.53 2001/02/15 20:33:09 eschmid Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -650,7 +650,7 @@ FileFunction(PHP_FN(filesize), 2)
 FileFunction(PHP_FN(fileowner),3)
 /* }}} */
 
-/* {{{ proto nt filegroup(string filename)
+/* {{{ proto int filegroup(string filename)
    Get file group */
 FileFunction(PHP_FN(filegroup),4)
 /* }}} */

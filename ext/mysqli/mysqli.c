@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.5 2003/02/18 00:00:51 georg Exp $ 
+  $Id: mysqli.c,v 1.6 2003/02/18 00:32:47 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -81,13 +81,6 @@ static void mysqli_objects_dtor(void *object, zend_object_handle handle TSRMLS_D
 	if (intern->zo.ce == mysqli_link_class_entry) {
 		MYSQL	*mysql = (MYSQL *)intern->ptr;
 		if (mysql) {
-			/*
-			 * Don't free mysql if there exist
-			 * non closed statements
-			 */
-			if (mysql->stmts) {
-				mysql->free_me = 0;
-			}
 			mysql_close(mysql);
 		}
 	} else if (intern->zo.ce == mysqli_stmt_class_entry) { /* stmt object */

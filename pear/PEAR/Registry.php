@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.11 2001/12/11 15:31:42 sebastian Exp $
+// $Id: Registry.php,v 1.12 2001/12/12 01:29:27 ssb Exp $
 
 require_once "System.php";
 
@@ -143,7 +143,7 @@ class PEAR_Registry
     // }}}
     // {{{ updatePackage()
 
-    function updatePackage($package, $info)
+    function updatePackage($package, $info, $merge = true)
     {
         $oldinfo = $this->packageInfo($package);
         if (empty($oldinfo)) {
@@ -153,7 +153,11 @@ class PEAR_Registry
         if ($fp === null) {
             return false;
         }
-        fwrite($fp, serialize(array_merge($oldinfo, $info)));
+        if ($merge) {
+            fwrite($fp, serialize(array_merge($oldinfo, $info)));
+        } else {
+            fwrite($fp, serialize($info));
+        }
         $this->_closePackageFile($fp);
         return true;
     }

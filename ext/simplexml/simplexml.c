@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.65 2003/10/19 23:17:56 shane Exp $ */
+/* $Id: simplexml.c,v 1.66 2003/10/25 20:28:39 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -551,7 +551,6 @@ simplexml_ce_schema_validate(INTERNAL_FUNCTION_PARAMETERS, int type)
 	xmlSchemaParserCtxtPtr  parser;
 	xmlSchemaPtr            sptr;
 	xmlSchemaValidCtxtPtr   vptr;
-	int                     is_valid;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &source) == FAILURE) {
 		return;
@@ -1076,7 +1075,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.65 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.66 $");
 	php_info_print_table_end();
 }
 /* }}} */

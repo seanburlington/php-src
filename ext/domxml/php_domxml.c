@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.45 2004/02/24 14:26:27 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.46 2004/04/06 17:56:11 rrichards Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -4803,15 +4803,17 @@ PHP_FUNCTION(domxml_xmltree)
 		RETURN_FALSE;
 	}
 
-	DOMXML_RET_OBJ(rv, (xmlNodePtr) docp, &ret);
+	DOMXML_DOMOBJ_NEW(rv, (xmlNodePtr) docp, &ret);
 
 	/* The root itself maybe an array. Though you may not have two Elements
 	   as root, you may have a comment, pi and and element as root.
 	   Thanks to Paul DuBois for pointing me at this.
 	 */
 	if (node_children(&children, root TSRMLS_CC) >= 0) {
-		zend_hash_update(Z_OBJPROP_P(return_value), "children",sizeof("children"), (void *) &children, sizeof(zval *), NULL);
+		zend_hash_update(Z_OBJPROP_P(rv), "children",sizeof("children"), (void *) &children, sizeof(zval *), NULL);
 	}
+
+	DOMXML_RET_ZVAL(rv);
 /*	xmlFreeDoc(docp); */
 }
 /* }}} */

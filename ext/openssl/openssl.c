@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.23 2001/07/31 23:47:32 sniper Exp $ */
+/* $Id: openssl.c,v 1.23.2.1 2001/08/21 18:14:34 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1284,7 +1284,8 @@ PHP_FUNCTION(openssl_pkcs7_encrypt)
 	X509 * cert;
 	int argc;
 	EVP_CIPHER *cipher = NULL;
-	ulong strindexlen, intindex;
+	uint strindexlen;
+	ulong intindex;
 	char * strindex;
 
 	argc = ZEND_NUM_ARGS();
@@ -1419,7 +1420,8 @@ PHP_FUNCTION(openssl_pkcs7_sign)
 	BIO * infile = NULL, * outfile = NULL;
 	STACK_OF(X509) *others = NULL;
 	long certresource = -1, keyresource = -1;
-	ulong strindexlen, intindex;
+	ulong intindex;
+	uint strindexlen;
 	HashPosition hpos;
 	char * strindex;
 

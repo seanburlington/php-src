@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.43 2001/07/24 20:30:33 zeev Exp $ */
+/* $Id: internal_functions_win32.c,v 1.44 2001/07/29 22:15:41 hirokawa Exp $ */
 
 /* {{{ includes
  */
@@ -60,6 +60,7 @@
 #include "ext/xml/php_xml.h"
 #include "ext/wddx/php_wddx.h"
 #include "ext/mysql/php_mysql.h"
+#include "ext/mysql/mbstring.h"
 /* }}} */
 
 /* {{{ php_builtin_extensions[]
@@ -73,6 +74,9 @@ zend_module_entry *php_builtin_extensions[] = {
 	COM_module_ptr,
 	VARIANT_module_ptr,
 	phpext_ftp_ptr,
+#if defined(MBSTR_ENC_TRANS)
+	phpext_mbstring_ptr,
+#endif
 	phpext_mysql_ptr,
 	phpext_odbc_ptr,
 	phpext_pcre_ptr,

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dbase.h,v 1.12 2003/06/10 20:03:27 imajes Exp $ */
+/* $Id: php_dbase.h,v 1.13 2003/07/15 18:19:51 zak Exp $ */
 
 #ifndef PHP_DBASE_H
 #define PHP_DBASE_H
@@ -35,6 +35,7 @@ PHP_FUNCTION(dbase_get_record);
 PHP_FUNCTION(dbase_delete_record);
 PHP_FUNCTION(dbase_pack);
 PHP_FUNCTION(dbase_get_record_with_names);
+PHP_FUNCTION(dbase_get_header_info);
 #else
 #define dbase_module_ptr NULL
 #endif

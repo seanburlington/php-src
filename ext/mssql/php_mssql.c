@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.53 2001/07/11 09:39:07 zeev Exp $ */
+/* $Id: php_mssql.c,v 1.54 2001/07/11 11:39:08 zeev Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -829,7 +829,7 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 				result->type = IS_STRING;
 			} else {
 				php_error(E_WARNING,"MS SQL:  column %d has unknown data type (%d)", offset, coltype(offset));
-				ZVAL_RESET(result);
+				ZVAL_BOOL(result, 0);
 			}
 		}
 	}
@@ -871,7 +871,7 @@ static void php_mssql_get_column_content_without_type(mssql_link *mssql_ptr,int 
 		result->type = IS_STRING;
 	} else {
 		php_error(E_WARNING,"MS SQL:  column %d has unknown data type (%d)", offset, coltype(offset));
-		ZVAL_RESET(result);
+		ZVAL_BOOL(result, 0);
 	}
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.61.2.14 2003/05/31 01:37:44 sniper Exp $ */
+/* $Id: php_streams.h,v 1.61.2.15 2003/06/27 16:16:46 pollita Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -96,6 +96,7 @@ typedef struct _php_stream php_stream;
 typedef struct _php_stream_wrapper php_stream_wrapper;
 typedef struct _php_stream_context php_stream_context;
 typedef struct _php_stream_filter php_stream_filter;
+typedef struct _php_stream_notifier php_stream_notifier;
 
 /* callback for status notifications */
 typedef void (*php_stream_notification_func)(php_stream_context *context,
@@ -119,12 +120,13 @@ typedef struct _php_stream_dirent {
 
 #define PHP_STREAM_NOTIFIER_PROGRESS	1
 
-typedef struct _php_stream_notifier {
+struct _php_stream_notifier {
 	php_stream_notification_func func;
+	void (*dtor)(php_stream_notifier *notifier);
 	void *ptr;
 	int mask;
 	size_t progress, progress_max; /* position for progress notification */
-} php_stream_notifier;
+};
 
 struct _php_stream_context {
 	php_stream_notifier *notifier;

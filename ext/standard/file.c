@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.29 2003/06/27 01:46:30 pollita Exp $ */
+/* $Id: file.c,v 1.279.2.30 2003/06/27 16:16:46 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -875,6 +875,14 @@ static void user_space_stream_notifier(php_stream_context *context, int notifyco
 		zval_ptr_dtor(&retval);
 }
 
+static void user_space_stream_notifier_dtor(php_stream_notifier *notifier)
+{
+	if (notifier && notifier->ptr) {
+		zval_ptr_dtor((zval **)&(notifier->ptr));
+		notifier->ptr = NULL;
+	}
+}
+
 static int parse_context_options(php_stream_context *context, zval *options)
 {
 	HashPosition pos, opos;
@@ -923,6 +931,7 @@ static int parse_context_params(php_stream_context *context, zval *params)
 		context->notifier->func = user_space_stream_notifier;
 		context->notifier->ptr = *tmp;
 		ZVAL_ADDREF(*tmp);
+		context->notifier->dtor = user_space_stream_notifier_dtor;
 	}
 	if ((ret = zend_hash_find(Z_ARRVAL_P(params), "options", sizeof("options"), (void**)&tmp)) == SUCCESS) {
 		parse_context_options(context, *tmp);

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.70 2003/06/27 03:40:55 pollita Exp $ */
+/* $Id: streams.c,v 1.125.2.71 2003/06/27 16:16:46 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2849,6 +2849,9 @@ PHPAPI php_stream_notifier *php_stream_notification_alloc(void)
 
 PHPAPI void php_stream_notification_free(php_stream_notifier *notifier)
 {
+	if (notifier->dtor) {
+		notifier->dtor(notifier);
+	}
 	efree(notifier);
 }
 

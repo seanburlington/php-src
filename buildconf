@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: buildconf,v 1.48 1999/12/30 02:58:26 sas Exp $
+# $Id: buildconf,v 1.49 2000/08/24 05:55:19 sas Exp $
 
 supplied_flag=$1
 
@@ -25,5 +25,7 @@ if test "$supplied_flag" = "--local"; then
 else
   subdirs=''
 fi
+
+rm -f generated_lists
 
 ${MAKE:-make} -s -f build/build.mk AMFLAGS="$automake_flags"

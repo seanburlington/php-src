@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.12 2003/06/10 20:03:38 imajes Exp $ */
+/* $Id: proc_open.c,v 1.13 2003/07/12 06:50:32 moriyoshi Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -470,7 +470,7 @@ PHP_FUNCTION(proc_open)
 	struct php_process_handle *proc;
 	int is_persistent = 0; /* TODO: ensure that persistent procs will work */
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "saz/|s!a!", &command,
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "saz|s!a!", &command,
 				&command_len, &descriptorspec, &pipes, &cwd, &cwd_len, &environment) == FAILURE) {
 		RETURN_FALSE;
 	}
@@ -737,6 +737,10 @@ PHP_FUNCTION(proc_open)
 	proc->child = child;
 	proc->env = env;
 
+	if (pipes != NULL) {
+		zval_dtor(pipes);
+	}
+	MAKE_STD_ZVAL(pipes);
 	array_init(pipes);
 
 	/* clean up all the child ends and then open streams on the parent

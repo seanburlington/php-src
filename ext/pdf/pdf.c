@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pdf.c,v 1.56 2000/10/20 18:25:10 andrei Exp $ */
+/* $Id: pdf.c,v 1.57 2000/10/25 17:43:58 andrei Exp $ */
 
 /* pdflib 2.02 is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997 Thomas Merz. */
@@ -237,9 +237,9 @@ static size_t pdf_flushwrite(PDF *p, void *data, size_t size){
 
 PHP_MINIT_FUNCTION(pdf)
 {
-	PDF_GLOBAL(le_pdf_image) = register_list_destructors(_free_pdf_image, NULL, "pdf image");
-	PDF_GLOBAL(le_outline) = register_list_destructors(_free_outline, NULL, "pdf outline");
-	PDF_GLOBAL(le_pdf) = register_list_destructors(_free_pdf_doc, NULL, "pdf document");
+	PDF_GLOBAL(le_pdf_image) = zend_register_list_destructors_ex(_free_pdf_image, NULL, "pdf image", module_number);
+	PDF_GLOBAL(le_outline) = zend_register_list_destructors_ex(_free_outline, NULL, "pdf outline", module_number);
+	PDF_GLOBAL(le_pdf) = zend_register_list_destructors_ex(_free_pdf_doc, NULL, "pdf document", module_number);
 	return SUCCESS;
 }
 

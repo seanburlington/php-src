@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.11 2000/10/20 18:25:10 andrei Exp $ */
+/* $Id: pspell.c,v 1.12 2000/10/25 17:43:59 andrei Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -85,8 +85,8 @@ PHP_MINIT_FUNCTION(pspell){
 	REGISTER_MAIN_LONG_CONSTANT("PSPELL_NORMAL", PSPELL_NORMAL, CONST_PERSISTENT | CONST_CS);
 	REGISTER_MAIN_LONG_CONSTANT("PSPELL_BAD_SPELLERS", PSPELL_BAD_SPELLERS, CONST_PERSISTENT | CONST_CS);
 	REGISTER_MAIN_LONG_CONSTANT("PSPELL_RUN_TOGETHER", PSPELL_RUN_TOGETHER, CONST_PERSISTENT | CONST_CS);
-	le_pspell = register_list_destructors(php_pspell_close,NULL,"pspell");
-	le_pspell_config = register_list_destructors(php_pspell_close_config,NULL,"pspell config");
+	le_pspell = zend_register_list_destructors_ex(php_pspell_close, NULL, "pspell", module_number);
+	le_pspell_config = zend_register_list_destructors_ex(php_pspell_close_config, NULL, "pspell config", module_number);
 	return SUCCESS;
 }
 

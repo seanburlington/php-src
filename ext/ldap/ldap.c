@@ -23,7 +23,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.68 2000/10/22 11:25:47 venaas Exp $ */
+/* $Id: ldap.c,v 1.69 2000/10/25 17:43:56 andrei Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -181,8 +181,8 @@ PHP_MINIT_FUNCTION(ldap)
 	REGISTER_MAIN_LONG_CONSTANT("GSLC_SSL_TWOWAY_AUTH", GSLC_SSL_TWOWAY_AUTH, CONST_PERSISTENT | CONST_CS);
 #endif
 
-	le_result = register_list_destructors(_free_ldap_result, NULL, "ldap result");
-	le_link = register_list_destructors(_close_ldap_link, NULL, "ldap link");
+	le_result = zend_register_list_destructors_ex(_free_ldap_result, NULL, "ldap result", module_number);
+	le_link = zend_register_list_destructors_ex(_close_ldap_link, NULL, "ldap link", module_number);
 
 	ldap_module_entry.type = type;
 
@@ -224,7 +224,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.68 2000/10/22 11:25:47 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.69 2000/10/25 17:43:56 andrei Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 #ifdef LDAP_API_VERSION
 	snprintf(ldapapiversion, 31, "%ld", LDAP_API_VERSION);

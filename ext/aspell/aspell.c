@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: aspell.c,v 1.23 2000/10/20 18:24:55 andrei Exp $ */
+/* $Id: aspell.c,v 1.24 2000/10/25 17:43:48 andrei Exp $ */
 
 #include "php.h"
 
@@ -61,7 +61,7 @@ static void php_aspell_close(zend_rsrc_list_entry *rsrc)
 
 PHP_MINIT_FUNCTION(aspell)
 {
-    le_aspell = register_list_destructors(php_aspell_close,NULL,"aspell");
+    le_aspell = zend_register_list_destructors_ex(php_aspell_close, NULL, "aspell", module_number);
 	return SUCCESS;
 
 }

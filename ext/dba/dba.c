@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.23 2000/10/21 12:03:09 rasmus Exp $ */
+/* $Id: dba.c,v 1.24 2000/10/25 17:43:49 andrei Exp $ */
 
 #include "php.h"
 
@@ -190,8 +190,8 @@ static void dba_close(zend_rsrc_list_entry *rsrc)
 static PHP_MINIT_FUNCTION(dba)
 {
 	zend_hash_init(&ht_keys, 0, NULL, NULL, 1);
-	GLOBAL(le_db) = register_list_destructors(dba_close, NULL,"dba");
-	GLOBAL(le_pdb) = register_list_destructors(NULL, dba_close,"dba persistent");
+	GLOBAL(le_db) = zend_register_list_destructors_ex(dba_close, NULL, "dba", module_number);
+	GLOBAL(le_pdb) = zend_register_list_destructors_ex(NULL, dba_close, "dba persistent", module_number);
 	return SUCCESS;
 }
 
@@ -207,7 +207,7 @@ static PHP_MINFO_FUNCTION(dba)
 	dba_handler *hptr;
 	
 	php_info_print_box_start(0);
-	PUTS("V1 ($Id: dba.c,v 1.23 2000/10/21 12:03:09 rasmus Exp $)");
+	PUTS("V1 ($Id: dba.c,v 1.24 2000/10/25 17:43:49 andrei Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);

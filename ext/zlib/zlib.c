@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.61 2000/10/23 14:04:54 sas Exp $ */
+/* $Id: zlib.c,v 1.62 2000/10/25 17:44:02 andrei Exp $ */
 #define IS_EXT_MODULE
 
 #ifndef PHP_WIN32
@@ -147,7 +147,7 @@ PHP_MINIT_FUNCTION(zlib)
 #else
         ZLIBG(gzgetss_state)=0;
 #endif
-	le_zp = register_list_destructors(phpi_destructor_gzclose,NULL,"zlib");
+	le_zp = zend_register_list_destructors_ex(phpi_destructor_gzclose, NULL, "zlib", module_number);
 
 #if HAVE_FOPENCOOKIE
 

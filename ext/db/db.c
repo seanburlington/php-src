@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.44 2000/10/20 18:24:58 andrei Exp $ */
+/* $Id: db.c,v 1.45 2000/10/25 17:43:49 andrei Exp $ */
 #define IS_EXT_MODULE
 
 #if 1
@@ -1122,7 +1122,7 @@ PHP_MINIT_FUNCTION(db)
 	}
 #endif
 
-	le_db = register_list_destructors(php_dbm_close,NULL,"dbm");
+	le_db = zend_register_list_destructors_ex(php_dbm_close, NULL, "dbm", module_number);
 	return SUCCESS;
 }
 

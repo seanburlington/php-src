@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.47 2000/10/21 17:38:08 dbeu Exp $ */
+/* $Id: interbase.c,v 1.48 2000/10/25 17:43:52 andrei Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -509,12 +509,12 @@ PHP_MINIT_FUNCTION(ibase)
 
 	REGISTER_INI_ENTRIES();
 
-	le_result = register_list_destructors(_php_ibase_free_result, NULL, "interbase result");
-	le_query = register_list_destructors(php_ibase_free_query_rsrc, NULL, "interbase query");
-	le_blob = register_list_destructors(_php_ibase_free_blob, NULL, "interbase blob");
-	le_link = register_list_destructors(_php_ibase_close_link, NULL, "interbase link");
-	le_plink = register_list_destructors(php_ibase_commit_link_rsrc, _php_ibase_close_plink, "interbase link persistent");
-	le_trans = register_list_destructors(_php_ibase_free_trans, NULL, "interbase transaction");
+	le_result = zend_register_list_destructors_ex(_php_ibase_free_result, NULL, "interbase result", module_number);
+	le_query = zend_register_list_destructors_ex(php_ibase_free_query_rsrc, NULL, "interbase query", module_number);
+	le_blob = zend_register_list_destructors_ex(_php_ibase_free_blob, NULL, "interbase blob", module_number);
+	le_link = zend_register_list_destructors_ex(_php_ibase_close_link, NULL, "interbase link", module_number);
+	le_plink = zend_register_list_destructors_ex(php_ibase_commit_link_rsrc, _php_ibase_close_plink, "interbase link persistent", module_number);
+	le_trans = zend_register_list_destructors_ex(_php_ibase_free_trans, NULL, "interbase transaction", module_number);
 
 	REGISTER_LONG_CONSTANT("IBASE_DEFAULT", PHP_IBASE_DEFAULT, CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("IBASE_TEXT", PHP_IBASE_TEXT, CONST_PERSISTENT);
@@ -596,7 +596,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.47 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.48 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: velocis.c,v 1.22 2000/10/20 18:25:09 andrei Exp $ */
+/* $Id: velocis.c,v 1.23 2000/10/25 17:43:58 andrei Exp $ */
 
 /*
  * TODO:
@@ -104,8 +104,8 @@ PHP_MINIT_FUNCTION(velocis)
 		php_velocis_module.max_links = -1;
 	}
 	php_velocis_module.num_links = 0;
-	php_velocis_module.le_link   = register_list_destructors(_close_velocis_link,NULL,"velocis link");
-	php_velocis_module.le_result = register_list_destructors(_free_velocis_result,NULL,"velocis result");
+	php_velocis_module.le_link   = zend_register_list_destructors_ex(_close_velocis_link, NULL, "velocis link", module_number);
+	php_velocis_module.le_result = zend_register_list_destructors_ex(_free_velocis_result, NULL, "velocis result", module_number);
 
 	return SUCCESS;
 }

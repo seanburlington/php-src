@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.29 2000/10/20 18:25:00 andrei Exp $ */
+/* $Id: php_ftp.c,v 1.30 2000/10/25 17:43:50 andrei Exp $ */
 
 #include "php.h"
 
@@ -92,7 +92,7 @@ static void ftp_destructor_ftpbuf(zend_rsrc_list_entry *rsrc)
 
 PHP_MINIT_FUNCTION(ftp)
 {
-	le_ftpbuf = register_list_destructors(ftp_destructor_ftpbuf, NULL, "ftp");
+	le_ftpbuf = zend_register_list_destructors_ex(ftp_destructor_ftpbuf, NULL, "ftp", module_number);
 	REGISTER_MAIN_LONG_CONSTANT("FTP_ASCII", FTPTYPE_ASCII,
 		CONST_PERSISTENT | CONST_CS);
 	REGISTER_MAIN_LONG_CONSTANT("FTP_BINARY", FTPTYPE_IMAGE,

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.62 2000/10/20 18:25:08 andrei Exp $ */
+/* $Id: php_odbc.c,v 1.63 2000/10/25 17:43:58 andrei Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -331,9 +331,9 @@ PHP_MINIT_FUNCTION(odbc)
 #endif
 
 	REGISTER_INI_ENTRIES();
-	le_result = register_list_destructors(_free_odbc_result, NULL, "odbc result");
-	le_conn = register_list_destructors(_close_odbc_conn, NULL, "odbc link");
-	le_pconn = register_list_destructors(NULL, _close_odbc_pconn, "odbc link persistent");
+	le_result = zend_register_list_destructors_ex(_free_odbc_result, NULL, "odbc result", module_number);
+	le_conn = zend_register_list_destructors_ex(_close_odbc_conn, NULL, "odbc link", module_number);
+	le_pconn = zend_register_list_destructors_ex(NULL, _close_odbc_pconn, "odbc link persistent", module_number);
 	odbc_module_entry.type = type;
 	
 	REGISTER_LONG_CONSTANT("ODBC_BINMODE_PASSTHRU", 0, CONST_CS | CONST_PERSISTENT);

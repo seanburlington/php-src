@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.57 2000/10/20 18:25:14 andrei Exp $ */
+/* $Id: wddx.c,v 1.58 2000/10/25 17:44:02 andrei Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -242,7 +242,7 @@ void php_wddx_destructor(wddx_packet *packet)
 /* {{{ php_minit_wddx */
 PHP_MINIT_FUNCTION(wddx)
 {
-	le_wddx = register_list_destructors(php_free_wddx_packet, NULL, "wddx");
+	le_wddx = zend_register_list_destructors_ex(php_free_wddx_packet, NULL, "wddx", module_number);
 	
 	return SUCCESS;
 }

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.20 2000/10/20 18:24:58 andrei Exp $ */
+/* $Id: cpdf.c,v 1.21 2000/10/25 17:43:49 andrei Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -174,8 +174,8 @@ static void _free_doc(zend_rsrc_list_entry *rsrc)
 
 PHP_MINIT_FUNCTION(cpdf)
 {
-	CPDF_GLOBAL(le_outline) = register_list_destructors(_free_outline, NULL,"cpdf outline");
-	CPDF_GLOBAL(le_cpdf) = register_list_destructors(_free_doc, NULL,"cpdf");
+	CPDF_GLOBAL(le_outline) = zend_register_list_destructors_ex(_free_outline, NULL, "cpdf outline", module_number);
+	CPDF_GLOBAL(le_cpdf) = zend_register_list_destructors_ex(_free_doc, NULL, "cpdf", module_number);
 	return SUCCESS;
 }
 

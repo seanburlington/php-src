@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.25 2000/10/20 18:25:13 andrei Exp $ */
+/* $Id: sysvsem.c,v 1.26 2000/10/25 17:44:01 andrei Exp $ */
 
 /* This has been built and tested on Solaris 2.6 and Linux 2.1.122.
  * It may not compile or execute correctly on other systems.
@@ -117,7 +117,7 @@ static void release_sysvsem_sem(zend_rsrc_list_entry *rsrc)
 
 PHP_MINIT_FUNCTION(sysvsem)
 {
-	php_sysvsem_module.le_sem = register_list_destructors(release_sysvsem_sem, NULL, "sysvsem");
+	php_sysvsem_module.le_sem = zend_register_list_destructors_ex(release_sysvsem_sem, NULL, "sysvsem", module_number);
 
 	return SUCCESS;
 }

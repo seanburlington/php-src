@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ii.c,v 1.11 2000/10/20 18:25:03 andrei Exp $ */
+/* $Id: ii.c,v 1.12 2000/10/25 17:43:52 andrei Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -256,8 +256,8 @@ PHP_MINIT_FUNCTION(ii)
   
   REGISTER_INI_ENTRIES();
   
-  le_ii_link = register_list_destructors(php_close_ii_link,NULL,"ingres");
-  le_ii_plink = register_list_destructors(_clean_ii_plink,php_close_ii_plink,"ingres persistent");
+  le_ii_link = zend_register_list_destructors_ex(php_close_ii_link, NULL, "ingres", module_number);
+  le_ii_plink = zend_register_list_destructors_ex(_clean_ii_plink, php_close_ii_plink, "ingres persistent", module_number);
 
   IIG(num_persistent) = 0;
 

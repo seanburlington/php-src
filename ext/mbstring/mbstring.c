@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.16 2003/05/12 13:31:16 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.142.2.17 2003/05/16 19:28:17 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -929,7 +929,9 @@ PHP_RINIT_FUNCTION(mbstring)
 #if HAVE_MBREGEX
 	MBSTRG(regex_default_options) = MBRE_OPTION_POSIXLINE;
 #endif
-
+#if defined(ZEND_MULTIBYTE) && defined(HAVE_MBSTRING)
+	php_mb_set_zend_encoding(TSRMLS_C);
+#endif /* ZEND_MULTIBYTE && HAVE_MBSTRING */
 	return SUCCESS;
 }
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.102 2002/09/23 12:10:07 zeev Exp $ */
+/* $Id: php_ini.c,v 1.103 2002/09/26 17:54:53 cmv Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -101,11 +101,11 @@ static int php_ini_displayer(zend_ini_entry *ini_entry, int module_number TSRMLS
 	}
 	if (PG(html_errors)) {
 		PUTS("<tr>");
-		PUTS("<td class=\"entry\">");
+		PUTS("<td class=\"e\">");
 		PHPWRITE(ini_entry->name, ini_entry->name_length-1);
-		PUTS("</td><td class=\"value\">");
+		PUTS("</td><td class=\"v\">");
 		php_ini_displayer_cb(ini_entry, ZEND_INI_DISPLAY_ACTIVE);
-		PUTS("</td><td class=\"value\">");
+		PUTS("</td><td class=\"v\">");
 		php_ini_displayer_cb(ini_entry, ZEND_INI_DISPLAY_ORIG);
 		PUTS("</td></tr>\n");
 	} else {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_exif.h,v 1.9 2002/03/06 09:31:32 helly Exp $ */
+/* $Id: php_exif.h,v 1.10 2002/03/12 06:14:45 helly Exp $ */
 
 #if HAVE_EXIF
 extern zend_module_entry exif_module_entry;
@@ -26,4 +26,5 @@ extern zend_module_entry exif_module_entry;
 PHP_FUNCTION(exif_read_data);
 PHP_FUNCTION(exif_tagname);
 PHP_FUNCTION(exif_thumbnail);
+PHP_FUNCTION(exif_imagetype);
 #endif

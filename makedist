@@ -24,7 +24,7 @@
 #
 # Written by Stig Bakken <ssb@guardian.no> 1997-05-28.
 #
-# $Id: makedist,v 1.15 2000/05/04 17:49:10 sas Exp $
+# $Id: makedist,v 1.16 2000/05/04 17:52:14 andrei Exp $
 #
 
 PHPROOT=:pserver:cvsread@cvs.php.net:/repository
@@ -99,7 +99,7 @@ echo ""
 # remove CVS stuff...
 find . \( \( -name CVS -type d \) -o -name .cvsignore \) -exec rm -rf {} \;
 
-# The full ChangeLog is available seperately from lxr.php.net
+# The full ChangeLog is available separately from lxr.php.net
 rm ChangeLog
 
 # hide away our own versions of libtool-generated files

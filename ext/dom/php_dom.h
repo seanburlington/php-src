@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.17 2003/10/26 15:57:02 rrichards Exp $ */
+/* $Id: php_dom.h,v 1.18 2003/11/28 21:55:59 chregu Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -36,6 +36,7 @@ extern zend_module_entry dom_module_entry;
 #include <libxml/uri.h>
 #include <libxml/xmlerror.h>
 #include <libxml/xinclude.h>
+#include <libxml/hash.h>
 #if defined(LIBXML_HTML_ENABLED)
 #include <libxml/HTMLparser.h>
 #include <libxml/HTMLtree.h>

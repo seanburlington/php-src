@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.39.4.1 2002/12/31 16:34:37 sebastian Exp $ */
+/* $Id: gettext.c,v 1.39.4.2 2003/02/08 18:59:38 sas Exp $ */
 
 #include <stdio.h>
 #ifdef HAVE_CONFIG_H
@@ -178,7 +178,12 @@ PHP_FUNCTION(bindtextdomain)
 	convert_to_string_ex(domain_name);
 	convert_to_string_ex(dir);
 
-	if (strcmp(Z_STRVAL_PP(dir), "") && strcmp(Z_STRVAL_PP(dir), "0")) {
+	if (Z_STRVAL_PP(domain_name)[0] == '\0') {
+		php_error(E_WARNING, "The first parameter of bindtextdomain must not be empty");
+		RETURN_FALSE;
+	}
+	
+	if (Z_STRVAL_PP(dir)[0] != '\0' && strcmp(Z_STRVAL_PP(dir), "0")) {
 		VCWD_REALPATH(Z_STRVAL_PP(dir), dir_name);
 	} else {
 		VCWD_GETCWD(dir_name, MAXPATHLEN);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.67 2003/02/27 18:16:34 wez Exp $ */
+/* $Id: openssl.c,v 1.68 2003/02/28 17:23:45 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1922,7 +1922,7 @@ PHP_FUNCTION(openssl_pkey_export_to_file)
 	long key_resource = -1;
 	EVP_PKEY * key;
 	BIO * bio_out = NULL;
-	EVP_CIPHER * cipher;
+	const EVP_CIPHER * cipher;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zs|s!a!", &zpkey, &filename, &filename_len, &passphrase, &passphrase_len, &args) == FAILURE) {
 		return;
@@ -1977,7 +1977,7 @@ PHP_FUNCTION(openssl_pkey_export)
 	long key_resource = -1;
 	EVP_PKEY * key;
 	BIO * bio_out = NULL;
-	EVP_CIPHER * cipher;
+	const EVP_CIPHER * cipher;
 	
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zz|s!a!", &zpkey, &out, &passphrase, &passphrase_len, &args) == FAILURE) {
 		return;
@@ -2191,7 +2191,7 @@ PHP_FUNCTION(openssl_pkcs7_encrypt)
 	HashPosition hpos;
 	zval ** zcertval;
 	X509 * cert;
-	EVP_CIPHER *cipher = NULL;
+	const EVP_CIPHER *cipher = NULL;
 	long cipherid = PHP_OPENSSL_CIPHER_DEFAULT;
 	uint strindexlen;
 	ulong intindex;

@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build.mk,v 1.22 2004/01/08 17:31:49 sniper Exp $ 
+# $Id: build.mk,v 1.23 2004/01/21 07:47:11 sniper Exp $ 
 #
 #
 # Makefile to generate build tools
@@ -45,7 +45,7 @@ $(STAMP): build/buildcheck.sh
 snapshot:
 	distname='$(DISTNAME)'; \
 	if test -z "$$distname"; then \
-		distname='php4-snapshot'; \
+		distname='php5-snapshot'; \
 	fi; \
 	myname=`basename \`pwd\`` ; \
 	cd .. && cp -rp $$myname $$distname; \

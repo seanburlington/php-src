@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.30 2000/11/17 15:09:46 kalowsky Exp $ */
+/* $Id: php_odbc.h,v 1.30.2.1 2001/01/03 15:04:50 kalowsky Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -34,7 +34,7 @@
 
 /* checking in the same order as in configure.in */
 
-#if defined(HAVE_SOLID) || defined(HAVE_SOLID_35) /* Solid Server */
+#if defined(HAVE_SOLID) || defined(HAVE_SOLID_30) || defined(HAVE_SOLID_35) /* Solid Server */
 
 #define ODBC_TYPE "Solid"
 #if defined(HAVE_SOLID)

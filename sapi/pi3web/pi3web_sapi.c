@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.41 2002/06/21 09:31:21 derick Exp $ */
+/* $Id: pi3web_sapi.c,v 1.42 2002/07/03 10:42:31 sas Exp $ */
 
 #include "pi3web_sapi.h"
 #include "php.h"
@@ -77,7 +77,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.41 2002/06/21 09:31:21 derick Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.42 2002/07/03 10:42:31 sas Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -422,9 +422,14 @@ DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 					};
 				};
 				break;
-			case PHP_MODE_INDENT:
-				header_line = (char *)estrdup("Content-Type: text/plain");
-				sapi_add_header_ex(header_line, strlen(header_line), 1, 1, 0 TSRMLS_CC);
+			case PHP_MODE_INDENT: {
+				sapi_header_line ctr = {0};
+
+				ctr.line = "Content-Type: text/plain";
+				ctr.line_len = strlen(ctr.line);
+				
+				sapi_header_op(SAPI_HEADER_REPLACE, &ctr TSRMLS_CC);
+			  }
 				if ( open_file_for_scanning( &file_handle TSRMLS_CC ) == SUCCESS )
 					{
 					zend_indent();
@@ -433,7 +438,6 @@ DWORD PHP4_wrapper(LPCONTROL_BLOCK lpCB)
 					{
 					iRet = PIAPI_ERROR;
 					};
-				efree(header_line);
 				break;
 			case PHP_MODE_LINT:
 				iRet = (php_lint_script(&file_handle TSRMLS_CC) == SUCCESS) ?

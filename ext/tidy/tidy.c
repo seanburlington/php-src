@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.63 2005/02/08 05:25:48 rasmus Exp $ */
+/* $Id: tidy.c,v 1.64 2005/03/21 03:54:29 john Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -142,6 +142,14 @@
 		ZVAL_NULL(tmp); \
 		zend_hash_update(_table, #_key, sizeof(#_key), (void *)&tmp, sizeof(zval *), NULL); \
 	}
+
+#define ADD_PROPERTY_BOOL(_table, _key, _bool) \
+    { \
+       zval *tmp; \
+       MAKE_STD_ZVAL(tmp); \
+       ZVAL_BOOL(tmp, _bool); \
+       zend_hash_update(_table, #_key, sizeof(#_key), (void *)&tmp, sizeof(zval *), NULL); \
+   }
 
 #define TIDY_SAFE_MODE_CHECK(filename) \
 if ((PG(safe_mode) && (!php_checkuid(filename, NULL, CHECKUID_CHECK_FILE_AND_DIR))) || php_check_open_basedir(filename TSRMLS_CC)) { \
@@ -720,6 +728,9 @@ static void tidy_add_default_properties(PHPTidyObj *obj, tidy_obj_type type TSRM
 
 			ADD_PROPERTY_STRING(obj->std.properties, name, tidyNodeGetName(obj->node));
 			ADD_PROPERTY_LONG(obj->std.properties, type, tidyNodeGetType(obj->node));
+			ADD_PROPERTY_LONG(obj->std.properties, line, tidyNodeLine(obj->node));
+            ADD_PROPERTY_LONG(obj->std.properties, column, tidyNodeColumn(obj->node));
+            ADD_PROPERTY_BOOL(obj->std.properties, proprietary, tidyNodeIsProp(obj->ptdoc->doc, obj->node));
 
 			switch(tidyNodeGetType(obj->node)) {
 				case TidyNode_Root:
@@ -945,7 +956,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.63 2005/02/08 05:25:48 rasmus Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.64 2005/03/21 03:54:29 john Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.47.2.2 2002/04/14 15:00:40 sniper Exp $
+dnl $Id: config.m4,v 1.47.2.3 2002/04/26 03:12:59 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 1.x module support via DSO through APXS)
@@ -33,17 +33,20 @@ AC_ARG_WITH(apxs,
   APXS_LDFLAGS="@SYBASE_LFLAGS@ @SYBASE_LIBS@ @SYBASE_CT_LFLAGS@ @SYBASE_CT_LIBS@"
   APXS_INCLUDEDIR=`$APXS -q INCLUDEDIR`
   APXS_CFLAGS=`$APXS -q CFLAGS`
+  APXS_HTTPD=`$APXS -q SBINDIR`/`$APXS -q TARGET`
+
+  # Test that we're trying to configure with apache 1.x
+  APACHE_VERSION=`$APXS_HTTPD -v | head -1 | cut -f3 -d' ' | cut -f2 -d'/' | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+  if test "$APACHE_VERSION" -ge 2000000; then
+    AC_MSG_ERROR([Use --with-apxs2 with Apache 2.x!]) 
+  fi
+
   for flag in $APXS_CFLAGS; do
     case $flag in
     -D*) CPPFLAGS="$CPPFLAGS $flag";;
     esac
   done
   PHP_ADD_INCLUDE($APXS_INCLUDEDIR)
-
-  # Test that we're trying to configure with apache 1.x
-  if test -f "$APXS_INCLUDEDIR/ap_mpm.h"; then
-    AC_MSG_ERROR([Use --with-apxs2 with Apache 2.x!]) 
-  fi
 
   PHP_SAPI=apache
 

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.236 2001/04/22 01:16:25 ssb Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.237 2001/04/23 06:00:43 rasmus Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -252,7 +252,7 @@ AC_CHECK_LIB(m, sin)
 
 dnl Only include libbind if inet_aton is not found in 
 dnl libresolv.
-AC_CHECK_LIB(resolv, inet_aton. [], [
+AC_CHECK_LIB(resolv, inet_aton, [], [
   AC_CHECK_LIB(bind, inet_aton, [], [
     AC_CHECK_LIB(bind, __inet_aton)
   ])

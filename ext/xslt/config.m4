@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.18 2002/03/17 21:09:21 sniper Exp $
+dnl $Id: config.m4,v 1.19 2002/03/21 15:49:54 sniper Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -56,7 +56,7 @@ if test "$PHP_XSLT" != "no"; then
   if test "$PHP_XSLT_SABLOT" != "no"; then
     found_expat=no
     for i in $PHP_EXPAT_DIR $XSLT_DIR; do
-      if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.so; then
+      if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.$SHLIB_SUFFIX_NAME; then
         AC_DEFINE(HAVE_LIBEXPAT2, 1, [ ])
         PHP_ADD_INCLUDE($i/include)
         PHP_ADD_LIBRARY_WITH_PATH(expat, $i/lib, XSLT_SHARED_LIBADD)

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Command.php,v 1.3.2.1 2002/04/09 18:04:30 ssb Exp $
+// $Id: Command.php,v 1.3.2.2 2002/04/09 19:04:22 ssb Exp $
 
 
 require_once "PEAR.php";
@@ -32,6 +32,12 @@ $GLOBALS['_PEAR_Command_commandlist'] = array();
  * @var string class name
  */
 $GLOBALS['_PEAR_Command_uiclass'] = 'PEAR_Frontend_CLI';
+
+/**
+ * Instance of $_PEAR_Command_uiclass.
+ * @var object
+ */
+$GLOBALS['_PEAR_Command_uiobject'] = null;
 
 /**
 * The options accepted by the commands
@@ -204,6 +210,15 @@ class PEAR_Command
             PEAR_Command::registerCommands();
         }
         return $GLOBALS['_PEAR_Command_commandopts'];
+    }
+
+    function getHelp($command)
+    {
+        $cmds = PEAR_Command::getCommands();
+        if (isset($cmds[$command])) {
+            return call_user_func(array($cmds[$command], 'getHelp'), $command);
+        }
+        return false;
     }
 }
 

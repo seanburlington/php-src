@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_virtual_cwd.h,v 1.30 2000/08/06 17:42:54 sas Exp $ */
+/* $Id: php_virtual_cwd.h,v 1.31 2000/08/06 17:53:04 stas Exp $ */
 
 #ifndef VIRTUAL_CWD_H
 #define VIRTUAL_CWD_H
@@ -42,6 +42,14 @@
 #ifdef HAVE_DIRENT_H
 #include <dirent.h>
 #endif
+#endif
+
+#if HAVE_UTIME
+# ifdef PHP_WIN32
+#  include <sys/utime.h>
+# else
+#  include <utime.h>
+# endif
 #endif
 
 #ifdef PHP_EXPORTS

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.34 2000/05/23 15:13:16 sas Exp $ */
+/* $Id: dir.c,v 1.35 2000/06/04 07:57:40 stas Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -212,7 +212,7 @@ PHP_FUNCTION(chdir)
 
 	ret = V_CHDIR((*arg)->value.str.val);
 	
-	if (ret < 0) {
+	if (ret != 0) {
 		php_error(E_WARNING, "ChDir: %s (errno %d)", strerror(errno), errno);
 		RETURN_FALSE;
 	}

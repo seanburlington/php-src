@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.35 2001/12/11 15:31:05 sebastian Exp $ */
+/* $Id: php_variables.c,v 1.36 2002/05/04 17:34:41 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -61,7 +61,6 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 	int var_len, index_len;
 	zval *gpc_element, **gpc_element_p, **top_gpc_p=NULL;
 	zend_bool is_array;
-	zend_bool free_index;
 	HashTable *symtable1=NULL;
 	HashTable *symtable2=NULL;
 
@@ -112,7 +111,6 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 
 	index = var;
 	index_len = var_len;
-	free_index = 0;
 
 	while (1) {
 		if (is_array) {

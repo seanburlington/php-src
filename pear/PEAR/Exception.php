@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Exception.php,v 1.3 2004/06/21 04:06:18 cox Exp $
+// $Id: Exception.php,v 1.4 2004/06/21 04:36:17 cox Exp $
 
 define('PEAR_OBSERVER_PRINT',      -2);
 define('PEAR_OBSERVER_TRIGGER',    -4);
@@ -85,7 +85,7 @@ define('PEAR_OBSERVER_DIE',        -8);
  *
  * @since PHP 5
  * @package PEAR
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @author Tomas V.V.Cox <cox@idecnet.com>
  * @author Hans Lellelid <hans@velum.net>
  *
@@ -176,9 +176,10 @@ class PEAR_Exception extends Exception
 
     private function _getCauseMessage()
     {
-        $msg = '     ' . $this->_method . " at {$this->file} ({$this->line})\n";
+        $msg = "    #{$this->_method} at {$this->file} ({$this->line})\n" .
+               "     {$this->message}\n";
         if ($this->cause instanceof Exception) {
-            return $msg . $this->cause->_getCauseMessage();
+            return $this->cause->_getCauseMessage() . $msg;
         }
         return $msg;
     }

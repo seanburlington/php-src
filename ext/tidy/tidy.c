@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.45 2004/04/16 18:55:19 derick Exp $ */
+/* $Id: tidy.c,v 1.46 2004/04/16 21:51:59 john Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -330,6 +330,7 @@ void php_tidy_free(void *buf)
 
 void php_tidy_panic(ctmbstr msg)
 {
+    TSRMLS_FETCH();
 	php_error_docref(NULL TSRMLS_CC, E_ERROR, "Could not allocate memory for tidy! (Reason: %s)", (char *)msg);
 }
 
@@ -955,7 +956,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.45 2004/04/16 18:55:19 derick Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.46 2004/04/16 21:51:59 john Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1360,17 +1361,20 @@ TIDY_DOC_METHOD(__construct)
 	
 	obj = (PHPTidyObj *)zend_object_store_get_object(object TSRMLS_CC);
 	
-	if (!(contents = php_tidy_file_to_mem(inputfile, use_include_path TSRMLS_CC))) {
-		TIDY_THROW("Cannot Load '%s' into memory %s", inputfile, (use_include_path) ? "(Using include path)" : "");
-		return;
-	}
+    if(inputfile) {
+        
+        if (!(contents = php_tidy_file_to_mem(inputfile, use_include_path TSRMLS_CC))) {
+            TIDY_THROW("Cannot Load '%s' into memory %s", inputfile, (use_include_path) ? "(Using include path)" : "");
+            return;
+        }
+        
+        TIDY_APPLY_CONFIG_ZVAL(obj->ptdoc->doc, options);
 
-	TIDY_APPLY_CONFIG_ZVAL(obj->ptdoc->doc, options);
-
-	php_tidy_parse_string(obj, contents, enc TSRMLS_CC);
+    	php_tidy_parse_string(obj, contents, enc TSRMLS_CC);
 	
-	efree(contents);
-
+    	efree(contents);
+    }
+	
 }
 
 TIDY_DOC_METHOD(parseFile)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db2.c,v 1.26 2002/04/18 12:30:18 derick Exp $ */
+/* $Id: dba_db2.c,v 1.27 2002/11/04 12:27:13 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -158,7 +158,7 @@ DBA_FIRSTKEY_FUNC(db2)
 	}
 
 	/* we should introduce something like PARAM_PASSTHRU... */
-	return dba_nextkey_db2(info, newlen);
+	return dba_nextkey_db2(info, newlen TSRMLS_CC);
 }
 
 DBA_NEXTKEY_FUNC(db2)

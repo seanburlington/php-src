@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db3.c,v 1.17 2002/04/18 12:30:18 derick Exp $ */
+/* $Id: dba_db3.c,v 1.18 2002/11/04 12:27:13 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -166,7 +166,7 @@ DBA_FIRSTKEY_FUNC(db3)
 	}
 
 	/* we should introduce something like PARAM_PASSTHRU... */
-	return dba_nextkey_db3(info, newlen);
+	return dba_nextkey_db3(info, newlen TSRMLS_CC);
 }
 
 DBA_NEXTKEY_FUNC(db3)

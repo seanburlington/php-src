@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.45 2003/08/02 14:57:59 cox Exp $
+// $Id: Install.php,v 1.46 2003/08/02 14:59:44 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -259,6 +259,7 @@ package if needed.
             $installed = array_flip($reg->listPackages());
             $params = array();
             foreach ($latest as $package => $info) {
+                $package = strtolower($package);
                 if (!isset($installed[$package])) {
                     // skip packages we don't have installed
                     continue;
@@ -269,7 +270,7 @@ package if needed.
                     continue;
                 }
                 $params[] = $package;
-                $this->ui->outputData("will upgrade $package", $command);
+                $this->ui->outputData(array('data' => "Will upgrade $package"), $command);
             }
         }
         foreach ($params as $pkg) {

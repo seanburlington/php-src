@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.89 2004/07/19 07:19:40 andi Exp $ 
+  $Id: mysqli_api.c,v 1.90 2004/07/22 03:23:33 pollita Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -629,7 +629,7 @@ PHP_FUNCTION(mysqli_stmt_fetch)
 								ZVAL_LONG(stmt->result.vars[i], llval);
 							}
 						} else {
-							ZVAL_STRING(stmt->result.vars[i], stmt->result.buf[i].val, 1); 
+							ZVAL_STRINGL(stmt->result.vars[i], stmt->result.buf[i].val, stmt->result.buf[i].buflen, 1); 
 						}
 						break;
 					default:

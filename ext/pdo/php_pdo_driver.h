@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.12 2004/05/19 17:35:39 iliaa Exp $ */
+/* $Id: php_pdo_driver.h,v 1.13 2004/05/19 18:04:47 fmk Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H

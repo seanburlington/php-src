@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.7 2004/05/19 17:35:39 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.8 2004/05/19 18:04:47 fmk Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -290,7 +290,7 @@ static PHP_METHOD(PDO, affectedRows)
 	if (!dbh->methods->affected) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "This driver affected rows retrieval.");
 	} else {
-		RETURN_LONG(dbh->methods->affected(dbh));
+		RETURN_LONG(dbh->methods->affected(dbh TSRMLS_CC));
 	}
 }
 /* }}} */
@@ -308,7 +308,7 @@ static PHP_METHOD(PDO, lastInsertId)
 	if (!dbh->methods->last_id) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "This driver last inserted id retrieval.");
 	} else {
-		RETURN_LONG(dbh->methods->last_id(dbh));
+		RETURN_LONG(dbh->methods->last_id(dbh TSRMLS_CC));
 	}
 }
 /* }}} */

@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.271.2.8 2004/12/30 14:52:28 sniper Exp $ -*- autoconf -*-
+dnl $Id: acinclude.m4,v 1.271.2.9 2004/12/30 14:56:23 sniper Exp $ -*- autoconf -*-
 dnl
 dnl This file contains local autoconf functions.
 
@@ -2004,7 +2004,7 @@ dnl PHP_C_BIGENDIAN
 dnl Replacement macro for AC_C_BIGENDIAN
 dnl
 AC_DEFUN([PHP_C_BIGENDIAN],
-[AC_CACHE_CHECK(whether byte ordering is bigendian, ac_cv_c_bigendian_php,
+[AC_CACHE_CHECK([whether byte ordering is bigendian], ac_cv_c_bigendian_php,
  [
   ac_cv_c_bigendian_php=unknown
   AC_TRY_RUN(
@@ -2021,9 +2021,9 @@ int main(void)
 	}
 }
   ], [ac_cv_c_bigendian_php=yes], [ac_cv_c_bigendian_php=no], [ac_cv_c_bigendian_php=unknown])
-  if test $ac_cv_c_bigendian_php = yes; then
-    AC_DEFINE(WORDS_BIGENDIAN, [], [Define if processor uses big-endian word])
-  fi
  ])
+ if test $ac_cv_c_bigendian_php = yes; then
+   AC_DEFINE(WORDS_BIGENDIAN, [], [Define if processor uses big-endian word])
+ fi
 ])
 

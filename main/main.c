@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.302 2000/08/27 19:56:22 andi Exp $ */
+/* $Id: main.c,v 1.303 2000/08/27 20:51:30 sas Exp $ */
 
 
 #include <stdio.h>
@@ -1132,8 +1132,8 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 			return;
 		}
 	}
-
-	old_cwd = do_alloca(4096);
+#define OLD_CWD_SIZE 4096
+	old_cwd = do_alloca(OLD_CWD_SIZE);
 	old_cwd[0] = '\0';
 
 	if (setjmp(EG(bailout))!=0) {
@@ -1149,7 +1149,7 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 
 	if (primary_file->type == ZEND_HANDLE_FILENAME 
 			&& primary_file->filename) {
-		V_GETCWD(old_cwd, sizeof(old_cwd)-1);
+		V_GETCWD(old_cwd, OLD_CWD_SIZE-1);
 		V_CHDIR_FILE(primary_file->filename);
 	}
 

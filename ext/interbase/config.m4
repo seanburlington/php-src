@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11 2003/03/14 08:27:29 daniela Exp $
+dnl $Id: config.m4,v 1.12 2003/04/25 08:57:49 sniper Exp $
 dnl
 
 PHP_ARG_WITH(interbase,for InterBase support,
@@ -17,13 +17,21 @@ if test "$PHP_INTERBASE" != "no"; then
 
   PHP_CHECK_LIBRARY(gds, isc_detach_database,
   [
-    PHP_ADD_LIBRARY_WITH_PATH(gds, $IBASE_LIBDIR, INTERBASE_SHARED_LIBADD)
+    IBASE_LIBNAME=gds
   ], [
-    AC_MSG_ERROR([libgds not found! Check config.log for more information.])
+    PHP_CHECK_LIBRARY(ib_util, isc_detach_database,
+    [
+      IBASE_LIBNAME=ib_util
+    ], [
+      AC_MSG_ERROR([libgds or libib_util not found! Check config.log for more information.])
+    ], [
+      -L$IBASE_LIBDIR
+    ])
   ], [
-    -L$IBASE_LIBDIR -lgds
+    -L$IBASE_LIBDIR
   ])
 
+  PHP_ADD_LIBRARY_WITH_PATH($IBASE_LIBNAME, $IBASE_LIBDIR, INTERBASE_SHARED_LIBADD)
   PHP_ADD_INCLUDE($IBASE_INCDIR)
   AC_DEFINE(HAVE_IBASE,1,[ ])
   PHP_NEW_EXTENSION(interbase, interbase.c, $ext_shared)

@@ -1,4 +1,4 @@
-# $Id: config.m4,v 1.17 2000/04/01 16:21:54 rubys Exp $
+# $Id: config.m4,v 1.18 2000/07/11 17:33:13 rubys Exp $
 # config.m4 for extension java
 
 AC_MSG_CHECKING(for Java support)
@@ -18,7 +18,7 @@ AC_ARG_WITH(java,
     fi
 
     if test "$withval" = "yes"; then
-      withval=`cd \`which javac\`/../..;pwd`
+      withval=`cd \`dirname \\\`which javac\\\`\`/..;pwd`
     fi
 
     if test -d $withval/lib/kaffe; then

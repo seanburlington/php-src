@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.135 2004/03/01 05:40:14 pollita Exp $ */
+/* $Id: dir.c,v 1.136 2004/03/16 23:23:17 iliaa Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -283,7 +283,7 @@ PHP_FUNCTION(chdir)
 		RETURN_FALSE;
 	}
 
-	if (PG(safe_mode) && !php_checkuid(str, NULL, CHECKUID_ALLOW_ONLY_FILE)) {
+	if (PG(safe_mode) && !php_checkuid(str, NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
 		RETURN_FALSE;
 	}
 	ret = VCWD_CHDIR(str);

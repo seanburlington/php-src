@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.34 2004/01/21 02:28:50 iliaa Exp $ */
+/* $Id: plain_wrapper.c,v 1.35 2004/03/16 23:23:16 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -856,7 +856,7 @@ static php_stream *php_plain_files_dir_opener(php_stream_wrapper *wrapper, char 
 		return NULL;
 	}
 	
-	if (PG(safe_mode) &&(!php_checkuid(path, NULL, CHECKUID_ALLOW_ONLY_FILE))) {
+	if (PG(safe_mode) &&(!php_checkuid(path, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 		return NULL;
 	}
 	

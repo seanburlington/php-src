@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.100 2002/04/29 15:06:48 mfischer Exp $ */
+/* $Id: sockets.c,v 1.101 2002/04/30 22:01:06 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1939,18 +1939,21 @@ PHP_FUNCTION(socket_last_error)
 /* }}} */
 
 /* {{{ proto void socket_clear_error(resource socket)
-   Clears the error on the socket */
+   Clears the error on the socket or the last error code. */
 PHP_FUNCTION(socket_clear_error)
 {
-	zval		*arg1;
+	zval		*arg1 = NULL;
 	php_socket	*php_sock;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &arg1) == FAILURE)
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|r", &arg1) == FAILURE)
 		return;
 
-	ZEND_FETCH_RESOURCE(php_sock, php_socket*, &arg1, -1, le_socket_name, le_socket);
-
-	php_sock->error = 0;
+	if (arg1) {
+		ZEND_FETCH_RESOURCE(php_sock, php_socket*, &arg1, -1, le_socket_name, le_socket);
+		php_sock->error = 0;
+	} else {
+		SOCKETS_G(last_error) = 0;
+	}
 
 	return;
 }  

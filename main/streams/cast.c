@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cast.c,v 1.8 2003/06/28 11:24:47 wez Exp $ */
+/* $Id: cast.c,v 1.9 2003/08/28 19:17:31 iliaa Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -266,7 +266,7 @@ exit_success:
 		 * know that they should try something else */
 		
 		php_error_docref(NULL TSRMLS_CC, E_WARNING,
-				"%d bytes of buffered data lost during stream conversion!",
+				"%ld bytes of buffered data lost during stream conversion!",
 				stream->writepos - stream->readpos);
 	}
 	

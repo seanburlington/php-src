@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.93 2003/08/07 16:03:17 zeev Exp $ */
+/* $Id: php_ftp.c,v 1.94 2003/08/28 19:17:32 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1167,7 +1167,7 @@ PHP_FUNCTION(ftp_set_option)
 			RETURN_TRUE;
 			break;
 		default:
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown option '%d'", option);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown option '%ld'", option);
 			RETURN_FALSE;
 			break;
 	}
@@ -1196,7 +1196,7 @@ PHP_FUNCTION(ftp_get_option)
 			RETURN_BOOL(ftp->autoseek);
 			break;
 		default:
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown option '%d'", option);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown option '%ld'", option);
 			RETURN_FALSE;
 			break;
 	}

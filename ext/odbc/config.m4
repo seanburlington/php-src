@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.52 2002/06/14 00:07:13 sniper Exp $
+dnl $Id: config.m4,v 1.53 2002/06/26 21:44:58 sniper Exp $
 dnl
 
 dnl
@@ -537,7 +537,8 @@ fi
 if test -n "$ODBC_TYPE"; then
   if test "$ODBC_TYPE" != "dbmaker"; then
     if test "$shared" != "yes"; then
-      EXTRA_LIBS="$EXTRA_LIBS $ODBC_LFLAGS $ODBC_LIBS"
+      EXTRA_LDFLAGS="$EXTRA_LDFLAGS $ODBC_LFLAGS"
+      EXTRA_LIBS="$EXTRA_LIBS $ODBC_LIBS"
     fi
   fi
   AC_DEFINE(HAVE_UODBC,1,[ ])

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.62.2.6 2003/07/08 18:58:59 helly Exp $ 
+   $Id: sqlite.c,v 1.62.2.7 2003/07/13 08:49:07 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -204,7 +204,14 @@ static void php_sqlite_callback_dtor(void *pDest)
 		php_sqlite_callback_invalidator(funcs TSRMLS_CC);
 	}
 }
+
+static ZEND_RSRC_DTOR_FUNC(php_sqlite_pdb_invalidator)
+{
+	struct php_sqlite_db *db = (struct php_sqlite_db*)rsrc->ptr;
 	
+	db->rsrc_id = FAILURE;
+}
+
 static ZEND_RSRC_DTOR_FUNC(php_sqlite_db_dtor)
 {
 	if (rsrc->ptr) {
@@ -624,7 +631,7 @@ PHP_MINIT_FUNCTION(sqlite)
 	REGISTER_INI_ENTRIES();
 
 	le_sqlite_db = zend_register_list_destructors_ex(php_sqlite_db_dtor, NULL, "sqlite database", module_number);
-	le_sqlite_pdb = zend_register_list_destructors_ex(NULL, php_sqlite_db_dtor, "sqlite database (persistent)", module_number);
+	le_sqlite_pdb = zend_register_list_destructors_ex(php_sqlite_pdb_invalidator, php_sqlite_db_dtor, "sqlite database (persistent)", module_number);
 	le_sqlite_result = zend_register_list_destructors_ex(php_sqlite_result_dtor, NULL, "sqlite result", module_number);
 
 	REGISTER_LONG_CONSTANT("SQLITE_BOTH",	PHPSQLITE_BOTH, CONST_CS|CONST_PERSISTENT);
@@ -668,7 +675,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.6 2003/07/08 18:58:59 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62.2.7 2003/07/13 08:49:07 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

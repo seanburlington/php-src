@@ -1,4 +1,4 @@
-dnl $Id: configure.in.in,v 1.24 1999/05/03 19:59:55 zeev Exp $ -*- sh -*-
+dnl $Id: configure.in.in,v 1.25 1999/05/04 03:42:19 zeev Exp $ -*- sh -*-
 dnl Process this file with autoconf to produce a configure script.
 
 
@@ -868,9 +868,9 @@ AC_DEFINE_UNQUOTED(PHP_OS,"$PHP_OS")
 AC_OUTPUT(Makefile libphp3.module
           scripts/mkextlib regex/Makefile ext/Makefile
           @@EXT_MAKEFILES@@ build-defs.h, [
-chmod +x scripts/mkextlib
 ], [
 
+chmod +x scripts/mkextlib
 # Hacking while airborne considered harmful.
 #
 echo "creating internal_functions.c"

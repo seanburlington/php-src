@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_flatfile.c,v 1.4 2002/11/07 23:03:15 helly Exp $ */
+/* $Id: dba_flatfile.c,v 1.5 2002/11/07 23:09:41 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -46,14 +46,6 @@
 
 #define FLATFILE_DATA flatfile *dba = info->dbf
 #define FLATFILE_GKEY datum gkey; gkey.dptr = (char *) key; gkey.dsize = keylen
-
-#define TRUNC_IT(extension, mode) \
-	snprintf(buf, MAXPATHLEN, "%s" extension, info->path); \
-	buf[MAXPATHLEN-1] = '\0'; \
-	if((fd = VCWD_OPEN_MODE(buf, O_CREAT | mode | O_WRONLY, filemode)) == -1) \
-		return FAILURE; \
-	close(fd);
-
 
 DBA_OPEN_FUNC(flatfile)
 {

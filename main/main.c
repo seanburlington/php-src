@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.1 2002/11/17 13:32:43 zeev Exp $ */
+/* $Id: main.c,v 1.512.2.2 2002/11/17 22:53:35 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -79,6 +79,7 @@
 #include "zend_highlight.h"
 #include "zend_indent.h"
 #include "zend_extensions.h"
+#include "zend_ini.h"
 
 #include "php_content_types.h"
 #include "php_ticks.h"
@@ -1544,7 +1545,7 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 		php_mb_set_zend_encoding(TSRMLS_C);
 #endif /* ZEND_MULTIBYTE && HAVE_MBSTRING */
 		zend_unset_timeout(TSRMLS_C);
-		zend_set_timeout(EG(timeout_seconds));
+		zend_set_timeout(INI_INT("max_execution_time"));
 		retval = (zend_execute_scripts(ZEND_REQUIRE TSRMLS_CC, NULL, 3, prepend_file_p, primary_file, append_file_p) == SUCCESS);
 		
 		if (old_primary_file_path) {

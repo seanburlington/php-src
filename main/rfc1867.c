@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.113 2002/08/08 12:40:51 sesser Exp $ */
+/* $Id: rfc1867.c,v 1.114 2002/08/16 19:34:43 kalowsky Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -617,7 +617,7 @@ static char *multipart_buffer_read_body(multipart_buffer *self TSRMLS_DC)
 
 SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 {
-	char *boundary, *s=NULL, *start_arr=NULL, *array_index=NULL;
+	char *boundary, *s=NULL, *boundary_end = NULL, *start_arr=NULL, *array_index=NULL;
 	char *temp_filename=NULL, *lbuf=NULL, *abuf=NULL;
 	int boundary_len=0, total_bytes=0, cancel_upload=0, is_arr_upload=0, array_len=0, max_file_size=0;
 	zval *http_post_files=NULL;
@@ -638,6 +638,11 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 		sapi_module.sapi_error(E_WARNING, "Missing boundary in multipart/form-data POST data");
 		return;
 	}
+
+	/* search for the end of the boundary */
+	boundary_end = strchr(boundary, ',');
+	if (boundary_end ) *boundary_end = 0;
+
 	boundary++;
 	boundary_len = strlen(boundary);
 

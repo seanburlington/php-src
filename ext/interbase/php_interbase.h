@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.28.2.2 2003/05/14 08:26:34 daniela Exp $ */
+/* $Id: php_interbase.h,v 1.28.2.3 2003/06/14 17:46:33 daniela Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -160,16 +160,22 @@ typedef struct _php_ibase_varchar {
 /* extern ibase_module php_ibase_module; */
 
 enum php_interbase_option {
-	PHP_IBASE_DEFAULT = 0,
-	PHP_IBASE_TEXT = 1,
-	PHP_IBASE_UNIXTIME = 2,
-	PHP_IBASE_READ = 4,
-	PHP_IBASE_COMMITTED = 8,
-	PHP_IBASE_CONSISTENCY = 16,
-	PHP_IBASE_NOWAIT = 32,
-	PHP_IBASE_TIMESTAMP = 64,
-	PHP_IBASE_DATE = 128,
-	PHP_IBASE_TIME = 256
+	PHP_IBASE_DEFAULT 			= 0,
+	PHP_IBASE_TEXT 				= 1,
+	PHP_IBASE_UNIXTIME 			= 2,
+	PHP_IBASE_TIMESTAMP 			= 4,
+	PHP_IBASE_DATE 				= 8,
+	PHP_IBASE_TIME 				= 16,
+	/* transactions  */	
+	PHP_IBASE_WRITE 				= 2,
+	PHP_IBASE_READ 				= 4,
+	PHP_IBASE_COMMITTED 			= 8,
+	PHP_IBASE_CONSISTENCY 		= 16,
+	PHP_IBASE_CONCURRENCY 		= 32,
+	PHP_IBASE_REC_VERSION 		= 64,
+	PHP_IBASE_REC_NO_VERSION 	= 128,
+	PHP_IBASE_NOWAIT 				= 256,
+	PHP_IBASE_WAIT 				= 512
 };
 
 #ifdef ZTS

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php3_string.h,v 1.8 1999/06/22 19:37:26 andrey Exp $ */
+/* $Id: php3_string.h,v 1.9 1999/07/23 22:35:14 andrey Exp $ */
 
 /* Synced with php3 revision 1.43 1999-06-16 [ssb] */
 
@@ -83,6 +83,7 @@ PHP_FUNCTION(chunk_split);
 PHP_FUNCTION(parsestr);
 PHP_FUNCTION(bin2hex);
 PHP_FUNCTION(similar_text);
+PHP_FUNCTION(strip_tags);
 
 extern PHPAPI char *_php3_strtoupper(char *s);
 extern PHPAPI char *_php3_strtolower(char *s);

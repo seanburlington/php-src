@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcre.c,v 1.17 1999/06/09 21:13:05 andrey Exp $ */
+/* $Id: pcre.c,v 1.18 1999/06/09 21:21:27 andrey Exp $ */
 
 #include "php.h"
 
@@ -831,7 +831,7 @@ PHP_FUNCTION(preg_split)
 		else { /* if no match */
 			/* Add the last piece to the return value, if there is
 			   something left */
-			if (limit != 0)
+			if (limit_val != 0)
 				add_next_index_stringl(return_value,
 									   piece,
 									   subject_end-piece, 1);

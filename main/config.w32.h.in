@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h.in,v 1.5 2002/06/07 12:20:28 ssb Exp $
+	$Id: config.w32.h.in,v 1.6 2002/06/07 15:24:03 sebastian Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -162,4 +162,4 @@
 #define HAVE_STRFTIME 1
 #define SIZEOF_INT 4
 #define HAVE_GLOB
-#define SHLIB_SUFFIX_NAME "dll"
+#define PHP_SHLIB_SUFFIX "dll"

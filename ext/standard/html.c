@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.56 2002/10/23 23:09:08 helly Exp $ */
+/* $Id: html.c,v 1.57 2002/10/24 19:52:30 moriyoshi Exp $ */
 
 #include "php.h"
 #include "reg.h"
@@ -43,7 +43,7 @@ typedef const char *entity_table_t;
 
 /* codepage 1252 is a Windows extension to iso-8859-1. */
 static entity_table_t ent_cp_1252[] = {
-	NULL, NULL, "sbquo", "fnof", "bdquo", "hellip", "dagger",
+	"euro", NULL, "sbquo", "fnof", "bdquo", "hellip", "dagger",
 	"Dagger", "circ", "permil", "Scaron", "lsaquo", "OElig",
 	NULL, NULL, NULL, NULL, "lsquo", "rsquo", "ldquo", "rdquo",
 	"bull", "ndash", "mdash", "tilde", "trade", "scaron", "rsaquo",

@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.29 2000/01/28 17:24:50 zeev Exp $ */
+/* $Id: aolserver.c,v 1.30 2000/02/02 17:19:35 andrei Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -206,7 +206,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	NSLS_FETCH();
 	
 	PUTS("<table border=5 width=600>\n");
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.29 2000/01/28 17:24:50 zeev Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.30 2000/02/02 17:19:35 andrei Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -281,7 +281,7 @@ static int
 php_ns_startup(sapi_module_struct *sapi_module)
 {
 	if(php_module_startup(sapi_module) == FAILURE
-			|| zend_register_module(&php_aolserver_module) == FAILURE) {
+			|| zend_startup_module(&php_aolserver_module) == FAILURE) {
 		return FAILURE;
 	} else {
 		return SUCCESS;

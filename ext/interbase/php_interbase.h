@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.33 2003/07/10 01:17:34 sniper Exp $ */
+/* $Id: php_interbase.h,v 1.34 2003/07/10 01:40:01 sniper Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -90,7 +90,7 @@ PHP_FUNCTION(ibase_errmsg);
 #define IBASE_BLOB_SEG 4096
 
 ZEND_BEGIN_MODULE_GLOBALS(ibase)
-	ISC_STATUS *status;
+	ISC_STATUS status[20];
 	long default_link;
 	long num_links, num_persistent;
 	long max_links, max_persistent;

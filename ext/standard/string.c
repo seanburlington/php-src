@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.97 2000/02/13 14:56:35 thies Exp $ */
+/* $Id: string.c,v 1.98 2000/02/13 15:35:51 zeev Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2265,8 +2265,8 @@ PHPAPI void php_strip_tags(char *rbuf, int len, int state, char *allow, int allo
 					if(allow) {
 						*(tp++) = '>';
 						*tp='\0';
-						if(php_tag_find(tbuf, tp-tbuf, allow)) {
-							memcpy(rp,tbuf,tp-tbuf);
+						if(php_tag_find(tbuf, tp-tbuf+1, allow)) {
+							memcpy(rp,tbuf,tp-tbuf+1);
 							rp += tp-tbuf;
 						}
 						tp = tbuf;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.38 2000/04/01 16:23:39 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.39 2000/04/05 20:18:58 cmv Exp $ */
 
 
 /* TODO:
@@ -293,7 +293,7 @@ PHP_MINFO_FUNCTION(mysql)
 
 	DISPLAY_INI_ENTRIES();
 
-	php_printf("<table border=5 width=\"600\">");
+	php_info_print_table_start();
 	php_info_print_table_header(2, "Key", "Value");
 	sprintf(buf, "%ld", MySG(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -305,7 +305,7 @@ PHP_MINFO_FUNCTION(mysql)
 	php_info_print_table_row(2, "MYSQL_LFLAGS", PHP_MYSQL_LFLAGS);
 	php_info_print_table_row(2, "MYSQL_LIBS", PHP_MYSQL_LIBS);
 #endif
-	php_printf("</table>\n");
+	php_info_print_table_end();
 }
 
 

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.6 2002/04/28 07:35:30 ssb Exp $
+// $Id: Remote.php,v 1.7 2002/04/29 06:23:51 ssb Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -125,7 +125,7 @@ class PEAR_Command_Remote extends PEAR_Command_Common
                     $pkgfile = $params[0];
                 }
                 $this->bytes_downloaded = 0;
-                $saved = PEAR_Common::downloadHttp($pkgfile, $this->ui, $this->config, '.',
+                $saved = PEAR_Common::downloadHttp($pkgfile, $this->ui, '.',
                                                    array(&$this, 'downloadCallback'));
                 if (PEAR::isError($saved)) {
                     return $this->raiseError($saved);

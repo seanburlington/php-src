@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.104 2001/05/27 01:10:36 sterling Exp $ */
+/* $Id: pgsql.c,v 1.105 2001/05/27 01:21:30 eschmid Exp $ */
 
 #include <stdlib.h>
 
@@ -1613,7 +1613,7 @@ PHP_FUNCTION(pg_loclose)
 }
 /* }}} */
 
-/* {{{ proto string pg_loread(int fd[, int len])
+/* {{{ proto string pg_loread(int fd [, int len])
    Read a large object */
 PHP_FUNCTION(pg_loread)
 {
@@ -1645,7 +1645,7 @@ PHP_FUNCTION(pg_loread)
 }
 /* }}} */
 
-/* {{{ proto int pg_lowrite(int fd, string buf[, int len])
+/* {{{ proto int pg_lowrite(int fd, string buf [, int len])
    Write a large object */
 PHP_FUNCTION(pg_lowrite)
 {

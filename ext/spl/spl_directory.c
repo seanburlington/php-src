@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.26.2.1 2004/09/03 18:41:10 helly Exp $ */
+/* $Id: spl_directory.c,v 1.26.2.2 2004/10/30 14:35:01 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -120,9 +120,15 @@ static zend_object_value spl_ce_dir_object_new(zend_class_entry *class_type TSRM
 /* open a directory resource */
 static void spl_ce_dir_open(spl_ce_dir_object* intern, char *path TSRMLS_DC)
 {
+	int path_len = strlen(path);
+
 	intern->dirp = php_stream_opendir(path, ENFORCE_SAFE_MODE|REPORT_ERRORS, NULL);
 
-	intern->path = estrdup(path);
+	if (path_len && (path[path_len-1] == '/' || path[path_len-1] == '\\')) {
+		intern->path = estrndup(path, --path_len);
+	} else {
+		intern->path = estrndup(path, path_len);
+	}
 	intern->index = 0;
 
 	if (intern->dirp == NULL) {

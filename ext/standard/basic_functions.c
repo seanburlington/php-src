@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.289 2000/12/18 19:23:50 zak Exp $ */
+/* $Id: basic_functions.c,v 1.290 2000/12/20 11:07:20 zak Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -1413,7 +1413,6 @@ PHP_FUNCTION(is_numeric)
 PHP_FUNCTION(is_scalar)
 {
 	zval **arg;
-	int result;
 
 	if (ZEND_NUM_ARGS() !=1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
 		WRONG_PARAM_COUNT;

@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.54 2003/01/26 23:54:19 ssb Exp $
+// $Id: PEAR.php,v 1.55 2003/02/10 14:26:19 ssb Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -226,10 +226,13 @@ class PEAR
      * @access  public
      * @return  bool    true if parameter is an error
      */
-    function isError($data) {
-        return (bool)(is_object($data) &&
-                      (get_class($data) == 'pear_error' ||
-                      is_subclass_of($data, 'pear_error')));
+    function isError($data, $code = null)
+    {
+        if (is_object($data) && (get_class($data) == 'pear_error' ||
+                                 is_subclass_of($data, 'pear_error'))) {
+            return $code === null ? true : $data->getCode() == $code;
+        }
+        return false;
     }
 
     // }}}

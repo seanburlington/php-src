@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.33 2002/06/06 10:51:26 ssb Exp $
+// $Id: Install.php,v 1.34 2002/06/19 23:38:48 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -182,13 +182,16 @@ specified at once.
         if (empty($this->installer)) {
             $this->installer = &new PEAR_Installer($this->ui);
         }
+        if (sizeof($params) < 1) {
+            return $this->raiseError("Please supply the package(s) you want to uninstall");
+        }
         foreach ($params as $pkg) {
             if ($this->installer->uninstall($pkg, $options)) {
                 if ($this->config->get('verbose') > 0) {
-                    $this->ui->outputData("uninstall ok", $command);
+                    $this->ui->outputData("uninstall $pkg ok", $command);
                 }
             } else {
-                return $this->raiseError("uninstall failed");
+                return $this->raiseError("uninstall $pkg failed");
             }
         }
         return true;

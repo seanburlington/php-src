@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.23 2002/06/07 10:20:41 cox Exp $
+// $Id: Registry.php,v 1.24 2002/06/19 23:38:49 cox Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Registry.php';
@@ -189,13 +189,13 @@ installed package.'
             // "pear shell-test Foo 1.0"
         } elseif (sizeof($params) == 2) {
             $v = $reg->packageInfo($params[0], 'version');
-            if (!$v || !version_compare($v, $params[1], "ge")) {
+            if (!$v || !version_compare("$v", "{$params[1]}", "ge")) {
                 exit(1);
             }
             // "pear shell-test Foo ge 1.0"
         } elseif (sizeof($params) == 3) {
             $v = $reg->packageInfo($params[0], 'version');
-            if (!$v || !version_compare($v, $params[2], $params[1])) {
+            if (!$v || !version_compare("$v", "{$params[2]}", $params[1])) {
                 exit(1);
             }
         } else {

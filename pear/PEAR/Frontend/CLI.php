@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.21 2002/06/09 18:12:59 cox Exp $
+  $Id: CLI.php,v 1.22 2002/06/19 23:38:59 cox Exp $
 */
 
 require_once "PEAR.php";
@@ -422,7 +422,7 @@ class PEAR_Frontend_CLI extends PEAR
                     $count = count($data['data'][0]);
                     if ($count == 2) {
                         $opts = array(0 => array('wrap' => 25),
-                                      1 => array('wrap' => 50)
+                                      1 => array('wrap' => 48)
                         );
                     } elseif ($count == 3) {
                         $opts = array(0 => array('wrap' => 20),

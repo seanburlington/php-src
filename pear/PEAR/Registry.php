@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.30 2002/06/13 15:10:42 cox Exp $
+// $Id: Registry.php,v 1.31 2002/06/19 23:38:47 cox Exp $
 
 /*
 TODO:
@@ -561,7 +561,7 @@ class PEAR_Registry extends PEAR
                 // XXX (cox) Possible problem with changes in the way
                 // PEAR_Dependency::checkPackage() works
                 if ($relation != 'has') {
-                    if (!version_compare($new_version, $require, $relation)) {
+                    if (!version_compare("$new_version", "$require", $relation)) {
                         $fails[] = $dep;
                     }
                 }

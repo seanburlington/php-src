@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.69 2002/06/19 22:51:29 cox Exp $
+// $Id: Installer.php,v 1.70 2002/06/19 23:38:46 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -427,8 +427,8 @@ class PEAR_Installer extends PEAR_Common
             }
             $v1 = $this->registry->packageInfo($pkgname, 'version');
             $v2 = $pkginfo['version'];
-            $cmp = version_compare($v1, $v2, 'gt');
-            if (empty($options['force']) && !version_compare($v2, $v1, 'gt')) {
+            $cmp = version_compare("$v1", "$v2", 'gt');
+            if (empty($options['force']) && !version_compare("$v2", "$v1", 'gt')) {
                 return $this->raiseError("upgrade to a newer version ($v2 is not newer than $v1)");
             }
             if (empty($options['register-only'])) {

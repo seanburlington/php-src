@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.74 2002/06/17 10:52:21 alan_k Exp $
+// $Id: Common.php,v 1.75 2002/06/19 23:38:45 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -974,11 +974,11 @@ class PEAR_Common extends PEAR
     function validatePackageInfo($info, &$errors, &$warnings)
     {
         global $_PEAR_Common_maintainer_roles,
-            $_PEAR_Common_release_states,
-            $_PEAR_Common_dependency_types,
-            $_PEAR_Common_dependency_relations,
-            $_PEAR_Common_file_roles,
-            $_PEAR_Common_replacement_types;
+               $_PEAR_Common_release_states,
+               $_PEAR_Common_dependency_types,
+               $_PEAR_Common_dependency_relations,
+               $_PEAR_Common_file_roles,
+               $_PEAR_Common_replacement_types;
         if (PEAR::isError($info = $this->infoFromAny($info))) {
             return $this->raiseError($info);
         }

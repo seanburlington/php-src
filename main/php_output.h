@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.40 2002/08/09 22:29:57 helly Exp $ */
+/* $Id: php_output.h,v 1.41 2002/08/20 19:49:37 helly Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -41,6 +41,7 @@ PHPAPI char *php_get_output_start_filename(TSRMLS_D);
 PHPAPI int php_get_output_start_lineno(TSRMLS_D);
 PHPAPI void php_ob_set_internal_handler(php_output_handler_func_t internal_output_handler, uint buffer_size, char *handler_name, zend_bool erase TSRMLS_DC);
 PHPAPI int php_ob_handler_used(char *handler_name TSRMLS_DC);
+PHPAPI int php_ob_default_buffer_size(TSRMLS_D);
 
 PHP_FUNCTION(ob_start);
 PHP_FUNCTION(ob_flush);

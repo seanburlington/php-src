@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.17 1999/09/20 21:29:41 andi Exp $ */
+/* $Id: basic_functions.h,v 1.18 1999/09/21 14:36:41 thies Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -51,6 +51,7 @@ PHP_FUNCTION(toggle_short_open_tag);
 PHP_FUNCTION(sleep);
 PHP_FUNCTION(usleep);
 PHP_FUNCTION(ksort);
+PHP_FUNCTION(krsort);
 PHP_FUNCTION(asort);
 PHP_FUNCTION(arsort);
 PHP_FUNCTION(sort);

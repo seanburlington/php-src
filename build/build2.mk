@@ -14,14 +14,14 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build2.mk,v 1.19 2001/04/23 23:50:56 zeev Exp $ 
+# $Id: build2.mk,v 1.20 2001/05/12 11:19:46 sas Exp $ 
 #
 
 include generated_lists
 
 TOUCH_FILES = mkinstalldirs install-sh missing
 
-LT_TARGETS = ltconfig ltmain.sh config.guess config.sub
+LT_TARGETS = ltmain.sh config.guess config.sub
 
 makefile_in_files = $(makefile_am_files:.am=.in)
 makefile_files    = $(makefile_am_files:e.am=e)

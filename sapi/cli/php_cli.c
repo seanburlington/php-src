@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.97 2003/08/01 16:52:49 iliaa Exp $ */
+/* $Id: php_cli.c,v 1.98 2003/08/13 01:29:51 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -921,7 +921,6 @@ int main(int argc, char *argv[])
 		case PHP_MODE_STRIP:
 			if (open_file_for_scanning(&file_handle TSRMLS_CC)==SUCCESS) {
 				zend_strip(TSRMLS_C);
-				fclose(file_handle.handle.fp);
 			}
 			goto out;
 			break;
@@ -932,7 +931,6 @@ int main(int argc, char *argv[])
 				if (open_file_for_scanning(&file_handle TSRMLS_CC)==SUCCESS) {
 					php_get_highlight_struct(&syntax_highlighter_ini);
 					zend_highlight(&syntax_highlighter_ini TSRMLS_CC);
-					fclose(file_handle.handle.fp);
 				}
 				goto out;
 			}

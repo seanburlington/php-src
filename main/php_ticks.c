@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ticks.c,v 1.14 2002/02/28 08:27:04 sebastian Exp $ */
+/* $Id: php_ticks.c,v 1.15 2002/03/04 20:57:36 jon Exp $ */
 
 #include "php.h"
 #include "php_ticks.h"
@@ -52,7 +52,7 @@ PHPAPI void php_remove_tick_function(void (*func)(int))
 {
 	TSRMLS_FETCH();
 
-	zend_llist_del_element(&PG(tick_functions), func,
+	zend_llist_del_element(&PG(tick_functions), (void *)func,
 						   (int(*)(void*, void*))php_compare_tick_functions);
 }
 

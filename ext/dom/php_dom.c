@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.60.2.2 2004/08/30 15:09:07 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.60.2.3 2004/12/04 11:41:12 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -234,6 +234,7 @@ zval *dom_read_property(zval *object, zval *member, int type TSRMLS_DC)
 	} else {
 		std_hnd = zend_get_std_object_handlers();
 		retval = std_hnd->read_property(object, member, type TSRMLS_CC);
+		retval->refcount = 1;
 	}
 
 	if (member == &tmp_member) {

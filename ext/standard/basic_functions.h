@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.133 2004/03/27 00:50:39 helly Exp $ */
+/* $Id: basic_functions.h,v 1.134 2004/08/07 04:50:24 pollita Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -52,6 +52,12 @@ PHP_FUNCTION(usleep);
 PHP_FUNCTION(time_nanosleep);
 #endif
 PHP_FUNCTION(flush);
+#ifdef HAVE_INET_NTOP
+PHP_FUNCTION(inet_ntop);
+#endif
+#ifdef HAVE_INET_PTON
+PHP_FUNCTION(inet_pton);
+#endif
 PHP_FUNCTION(ip2long);
 PHP_FUNCTION(long2ip);
 

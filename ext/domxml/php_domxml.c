@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.7 2003/01/06 10:00:34 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.8 2003/01/10 18:05:02 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -3685,6 +3685,11 @@ PHP_FUNCTION(domxml_dump_node)
 
 	if (Z_TYPE_P(elementp) == XML_DOCUMENT_NODE || Z_TYPE_P(elementp) == XML_HTML_DOCUMENT_NODE ) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot dump element with a document node");
+		RETURN_FALSE;
+	}
+
+	if (docp->type != XML_DOCUMENT_NODE && docp->type != XML_HTML_DOCUMENT_NODE) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Object has to be a DomDocument Node");
 		RETURN_FALSE;
 	}
 

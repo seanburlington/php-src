@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.36 2003/01/18 20:27:04 iliaa Exp $ */
+/* $Id: php_functions.c,v 1.37 2003/01/28 01:25:34 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_smart_str.h"
@@ -39,8 +39,6 @@
 #include "http_core.h"
 
 #include "php_apache.h"
-
-extern module **ap_loaded_modules;
 
 static request_rec *php_apache_lookup_uri(char *filename TSRMLS_DC)
 {
@@ -341,6 +339,9 @@ PHP_MINFO_FUNCTION(apache)
 			smart_str_appends(&tmp1, s);
 		}
 		smart_str_appendc(&tmp1, ' ');
+	}
+	if ((tmp1.len - 1) >= 0) {
+		tmp1.c[tmp1.len - 1] = '\0';
 	}
             
 	php_info_print_table_start();

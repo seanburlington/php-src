@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.316 2003/02/27 17:43:37 wez Exp $ */
+/* $Id: file.c,v 1.317 2003/02/27 18:16:34 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2246,8 +2246,6 @@ PHP_FUNCTION(unlink)
 PHP_NAMED_FUNCTION(php_if_ftruncate)
 {
 	zval **fp , **size;
-	short int ret;
-	int fd;
 	php_stream *stream;
 
 	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters_ex(2, &fp, &size) == FAILURE) {

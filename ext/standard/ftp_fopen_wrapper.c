@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.46 2003/02/27 17:43:37 wez Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.47 2003/02/27 18:16:34 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -123,7 +123,7 @@ static php_stream_wrapper_ops ftp_stream_wops = {
 	"FTP"
 };
 
-php_stream_wrapper php_stream_ftp_wrapper =	{
+PHPAPI php_stream_wrapper php_stream_ftp_wrapper =	{
 	&ftp_stream_wops,
 	NULL,
 	1 /* is_url */

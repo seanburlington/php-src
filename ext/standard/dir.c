@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.87 2002/03/06 18:31:33 jflemer Exp $ */
+/* $Id: dir.c,v 1.87.2.1 2002/08/20 07:10:22 edink Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -180,7 +180,6 @@ static void _php_do_opendir(INTERNAL_FUNCTION_PARAMETERS, int createobject)
 		object_init_ex(return_value, dir_class_entry_ptr);
 		add_property_stringl(return_value, "path", Z_STRVAL_PP(arg), Z_STRLEN_PP(arg), 1);
 		add_property_resource(return_value, "handle", dirp->id);
-		zend_list_addref(dirp->id);
 	} else {
 		RETURN_RESOURCE(dirp->id);
 	}

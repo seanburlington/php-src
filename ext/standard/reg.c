@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.39 2000/08/04 11:57:21 eschmid Exp $ */
+/* $Id: reg.c,v 1.40 2001/02/09 16:42:55 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -484,7 +484,7 @@ PHP_FUNCTION(ereg_replace)
 }
 /* }}} */
 
-/* {{{ proto string eregi_replace(string pattern, string replacement, string string])
+/* {{{ proto string eregi_replace(string pattern, string replacement, string string)
    Case insensitive replace regular expression */
 PHP_FUNCTION(eregi_replace)
 {

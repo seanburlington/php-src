@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336 2002/10/24 10:40:48 sas Exp $ */
+/* $Id: session.c,v 1.337 2002/11/20 16:06:29 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -85,6 +85,8 @@ static const ps_serializer *_php_find_ps_serializer(char *name TSRMLS_DC);
 
 static PHP_INI_MH(OnUpdateSaveHandler)
 {
+	if (PS(session_status) == php_session_active)
+		return;
 	PS(mod) = _php_find_ps_module(new_value TSRMLS_CC);
 /*
  * Following lines are commented out to prevent bogus error message at
@@ -102,6 +104,8 @@ static PHP_INI_MH(OnUpdateSaveHandler)
 
 static PHP_INI_MH(OnUpdateSerializer)
 {
+	if (PS(session_status) == php_session_active)
+		return;
 	PS(serializer) = _php_find_ps_serializer(new_value TSRMLS_CC);
 /*
  * Following lines are commented out to prevent bogus error message at

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.104 2002/08/05 03:09:42 helly Exp $ */
+/* $Id: output.c,v 1.105 2002/08/05 18:54:53 helly Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -400,6 +400,40 @@ PHP_FUNCTION(ob_list_handlers)
 		}
 		php_ob_list_each(&OG(active_ob_buffer), return_value);
 	}
+}
+/* }}} */
+
+/* {{{ php_ob_used_each
+   Sets handler_name to NULL is found
+ */
+static int php_ob_handler_used_each(php_ob_buffer *ob_buffer, char **handler_name) 
+{
+	if ((!strcmp(ob_buffer->handler_name, "zlib output compression") && ob_buffer->internal_output_handler && !strcmp("ob_gzhandler", *handler_name))
+	  || !strcmp(ob_buffer->handler_name, *handler_name))
+	{
+		*handler_name = NULL;
+		return 1;
+	}
+	return 0;
+}
+/* }}} */
+
+/* {{{ php_ob_used
+   returns 1 if given handler_name is used as output_handler
+ */
+PHPAPI int php_ob_handler_used(char *handler_name TSRMLS_DC)
+{
+	char *tmp = handler_name;
+
+	if (OG(ob_nesting_level)) {
+		if (!strcmp(OG(active_ob_buffer).handler_name, handler_name)) {
+			return 1;
+		}
+		if (OG(ob_nesting_level)>1) {
+			zend_stack_apply_with_argument(&OG(ob_buffers), ZEND_STACK_APPLY_BOTTOMUP, (int (*)(void *element, void *)) php_ob_handler_used_each, &tmp);
+		}
+	}
+	return tmp ? 0 : 1;
 }
 /* }}} */
 

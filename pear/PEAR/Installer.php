@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.57 2002/05/20 10:44:53 ssb Exp $
+// $Id: Installer.php,v 1.58 2002/05/21 02:11:42 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -445,7 +445,10 @@ class PEAR_Installer extends PEAR_Common
             // <== XXX This part should be removed later on
 
             foreach ($pkginfo['filelist'] as $file => $atts) {
-                $this->_installFile($file, $atts, $tmp_path);
+                $res = $this->_installFile($file, $atts, $tmp_path);
+                if (!$res && empty($options['force'])) {
+                    return null;
+                }
             }
         }
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.284 2002/08/24 01:19:28 helly Exp $ */
+/* $Id: string.c,v 1.285 2002/08/25 10:26:58 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3964,9 +3964,9 @@ static size_t strfilter_rot13_read(php_stream *stream, php_stream_filter *thisfi
 	return read;
 }
 
-static int strfilter_rot13_flush(php_stream *stream, php_stream_filter *thisfilter TSRMLS_DC)
+static int strfilter_rot13_flush(php_stream *stream, php_stream_filter *thisfilter, int closing TSRMLS_DC)
 {
-	return php_stream_filter_flush_next(stream, thisfilter);
+	return php_stream_filter_flush_next(stream, thisfilter, closing);
 }
 
 static int strfilter_rot13_eof(php_stream *stream, php_stream_filter *thisfilter TSRMLS_DC)

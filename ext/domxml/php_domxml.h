@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.54 2002/05/31 05:58:40 rodif_bl Exp $ */
+/* $Id: php_domxml.h,v 1.55 2002/05/31 13:38:58 rodif_bl Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -55,6 +55,17 @@
 
 extern zend_module_entry domxml_module_entry;
 #define domxml_module_ptr &domxml_module_entry
+
+#ifdef PHP_WIN32
+#ifdef PHPAPI
+#undef PHPAPI
+#endif
+#ifdef DOMXML_EXPORTS
+#define PHPAPI __declspec(dllexport)
+#else
+#define PHPAPI __declspec(dllimport)
+#endif /* DOMXML_EXPORTS */
+#endif /* PHP_WIN32 */
 
 PHPAPI zval *php_domobject_new(xmlNodePtr obj, int *found, zval* in TSRMLS_DC);
 

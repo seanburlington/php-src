@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.40 2000/04/06 21:07:40 cmv Exp $ */
+/* $Id: php_odbc.c,v 1.41 2000/04/16 16:16:59 lurcher Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -847,10 +847,10 @@ PHP_FUNCTION(odbc_execute)
 		char buf[4096];
 		int fp, nbytes;
 		while(rc == SQL_NEED_DATA) {
-			rc = SQLParamData(result->stmt, (PTR FAR *)&fp);
+			rc = SQLParamData(result->stmt, (void*)&fp);
 			if (rc == SQL_NEED_DATA) {
 				while((nbytes = read(fp, &buf, 4096)) > 0)
-					SQLPutData(result->stmt,(UCHAR FAR*) &buf, nbytes);
+					SQLPutData(result->stmt, (void*)&buf, nbytes);
 			}
 		}
 	} else {

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.41 1999/11/24 03:47:58 evan Exp $ */
+/* $Id: file.c,v 1.42 1999/11/24 06:16:37 evan Exp $ */
 
 /* Synced with php3 revision 1.218 1999-06-16 [ssb] */
 
@@ -1713,6 +1713,7 @@ PHP_FUNCTION(fd_set)
                 FD_SET(fd, &readfd);
                 if(fd > max_fd) max_fd = fd;
 		}
+	efree(args);
 	}
 	RETURN_LONG(1);
 }

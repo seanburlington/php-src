@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.90 2000/10/20 18:25:00 andrei Exp $ */
+/* $Id: gd.c,v 1.91 2000/10/20 23:39:16 sas Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -2055,7 +2055,7 @@ void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode)
 #endif
 
 	if (error) {
-		php_error(E_WARNING, error);
+		php_error(E_WARNING, "%s", error);
 		RETURN_FALSE;
 	}
 

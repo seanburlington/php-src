@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.154 2001/09/11 23:16:32 asautins Exp $ */
+/* $Id: oci8.c,v 1.155 2001/09/16 21:53:58 asautins Exp $ */
 
 /* TODO list:
  *
@@ -620,7 +620,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.154 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.155 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -4604,7 +4604,7 @@ PHP_FUNCTION(ocicollgetelem)
 	ub4  ndx;
 	int inx;
 	dvoid *elem;
-	dvoid *elemind;
+	OCIInd elemind;
 	boolean exists;
 	OCIString *ocistr = (OCIString *)0;
 	text *str;
@@ -4632,17 +4632,23 @@ PHP_FUNCTION(ocicollgetelem)
 					ndx, 
 					&exists, 
 					&elem, 
-					&elemind));
+					(dvoid **)&elemind));
 
 		if (connection->error) {
 			oci_error(connection->pError, "OCICollGetElem", connection->error);
-			RETURN_FALSE;
+			RETURN_NULL();
 		}
 		
 		/* Return false if value does not exist at that location */
 		if(exists == 0) {
+			php_error(E_WARNING, "OCICollGetElem - Invalid index %d", ndx);
 			RETURN_FALSE;
 		}
+
+		/* Return null if the value is null */
+		if(elemind == OCI_IND_NULL) {
+			RETURN_FALSE;
+		} 
 
 		switch (coll->element_typecode) {
 		   case OCI_TYPECODE_DATE:

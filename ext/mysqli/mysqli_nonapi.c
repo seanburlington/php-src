@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.36 2004/10/19 05:14:09 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.37 2004/11/01 07:19:24 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -222,8 +222,23 @@ PHP_FUNCTION(mysqli_multi_query)
 
 	MYSQLI_ENABLE_MQ;	
 	if (mysql_real_query(mysql->mysql, query, query_len)) {
-		MYSQLI_DISABLE_MQ;
+		char s_error[MYSQL_ERRMSG_SIZE], s_sqlstate[SQLSTATE_LENGTH+1];
+		unsigned int s_errno;
 		MYSQLI_REPORT_MYSQL_ERROR(mysql->mysql);
+
+		/* we have to save error information, cause 
+		MYSQLI_DISABLE_MQ will reset error information */
+		strcpy(s_error, mysql_error(mysql->mysql));
+		strcpy(s_sqlstate, mysql_sqlstate(mysql->mysql));
+		s_errno = mysql_errno(mysql->mysql);
+
+		MYSQLI_DISABLE_MQ;
+
+		/* restore error information */
+		strcpy(mysql->mysql->net.last_error, s_error);
+		strcpy(mysql->mysql->net.sqlstate, s_sqlstate);
+		mysql->mysql->net.last_errno = s_errno;	
+
 		RETURN_FALSE;
 	}	
 	RETURN_TRUE;

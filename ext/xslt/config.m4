@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.30.2.7 2004/03/29 00:09:34 iliaa Exp $
+dnl $Id: config.m4,v 1.30.2.8 2004/08/18 05:14:16 tony2001 Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -134,7 +134,7 @@ int main ()
       PHP_CHECK_LIBRARY(js, JS_GetRuntime,
       [
         PHP_ADD_LIBRARY_WITH_PATH(js, $PHP_SABLOT_JS_DIR/lib, XSLT_SHARED_LIBADD)
-        PHP_SABLOT_JS_LIBS=-L$PHP_SABLOT_JS_DIR/lib -ljs
+        PHP_SABLOT_JS_LIBS="-L$PHP_SABLOT_JS_DIR/lib -ljs"
       ], [
         AC_MSG_ERROR([libjs not found. Please check config.log for more information.])
       ], [

@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.38 2002/08/11 10:53:10 wez Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.39 2002/08/11 14:29:01 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -87,7 +87,7 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 	size_t chunk_size = 0, file_size = 0;
 
 	if (strchr(mode, 'a') || strchr(mode, '+') || strchr(mode, 'w')) {
-		php_stream_wrapper_log_error(wrapper, options, "HTTP wrapper does not writeable connections.");
+		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "HTTP wrapper does not writeable connections.");
 		return NULL;
 	}
 
@@ -118,7 +118,7 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 #if HAVE_OPENSSL_EXT
 	if (use_ssl)	{
 		if (php_stream_sock_ssl_activate(stream, 1) == FAILURE)	{
-			php_stream_wrapper_log_error(wrapper, options, "Unable to activate SSL mode");
+			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Unable to activate SSL mode");
 			php_stream_close(stream);
 			stream = NULL;
 			goto out;
@@ -326,7 +326,7 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 				FREE_ZVAL(stream->wrapperdata);
 			}
 		} else {
-			php_stream_wrapper_log_error(wrapper, options, "HTTP request failed! %s", tmp_line);
+			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "HTTP request failed! %s", tmp_line);
 		}
 	}
 out:
@@ -367,9 +367,10 @@ static int php_stream_http_stream_stat(php_stream_wrapper *wrapper,
 
 static php_stream_wrapper_ops http_stream_wops = {
 	php_stream_url_wrap_http,
-	NULL,
+	NULL, /* stream_close */
 	php_stream_http_stream_stat,
-	NULL
+	NULL, /* stat_url */
+	NULL  /* opendir */
 };
 
 php_stream_wrapper php_stream_http_wrapper =	{

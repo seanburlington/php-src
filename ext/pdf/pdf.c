@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.118 2003/01/19 00:45:44 iliaa Exp $ */
+/* $Id: pdf.c,v 1.119 2003/02/04 10:23:11 steinm Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -332,7 +332,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.118 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.119 $" );
 	php_info_print_table_end();
 
 }
@@ -2342,7 +2342,7 @@ PHP_FUNCTION(pdf_open_file)
 
 /* }}} */
 
-/* {{{ proto int pdf_get_buffer(int pdfdoc)
+/* {{{ proto string pdf_get_buffer(int pdfdoc)
    Fetches the full buffer containig the generated PDF data */
 PHP_FUNCTION(pdf_get_buffer)
 {

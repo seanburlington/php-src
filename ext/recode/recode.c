@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.6 2000/05/18 15:34:33 zeev Exp $ */
+/* $Id: recode.c,v 1.7 2000/05/23 23:30:38 sas Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -64,6 +64,10 @@ zend_module_entry recode_module_entry = {
 extern void timeout(int sig);
 #endif
 
+#ifdef COMPILE_DL_RECODE
+ZEND_GET_MODULE(recode)
+#endif
+
 PHP_MINIT_FUNCTION(recode)
 {
 	ReSLS_FETCH();
@@ -92,7 +96,7 @@ PHP_MINFO_FUNCTION(recode)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.6 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.7 $");
 	php_info_print_table_end();
 
 }

@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.78 2004/04/27 19:13:13 pollita Exp $ */
+/* $Id: url.c,v 1.79 2004/04/27 19:28:11 pollita Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -231,11 +231,6 @@ PHPAPI php_url *php_url_parse(char const *str)
 		p = e;
 	}
 	
-	if (*s == '[' && *(p-1) == ']') {
-		s++;
-		p--;
-	}
-
 	/* check if we have a valid host, if we don't reject the string as url */
 	if ((p-s) < 1) {
 		STR_FREE(ret->scheme);

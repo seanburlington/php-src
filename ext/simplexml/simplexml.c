@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.122 2004/01/22 21:30:14 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.123 2004/02/02 08:10:31 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1445,11 +1445,11 @@ static void php_sxe_iterator_rewind(zend_object_iterator *iter TSRMLS_DC)
 }
 
 
+#ifdef HAVE_DOM
 /* {{{ proto simplemxml_element simplexml_import_dom(domNode node [, string class_name])
    Get a simplexml_element object from dom to allow for processing */
 PHP_FUNCTION(simplexml_import_dom)
 {
-#ifdef HAVE_DOM
 	php_sxe_object *sxe;
 	zval *node;
 	php_libxml_node_object *object;
@@ -1495,17 +1495,16 @@ PHP_FUNCTION(simplexml_import_dom)
 		php_error(E_WARNING, "Invalid Nodetype to import");
 		RETVAL_NULL();
 	}
-#else
-	php_error(E_WARNING, "DOM support is not enabled");
-	return;
-#endif
 }
 /* }}} */
+#endif
 
 function_entry simplexml_functions[] = {
 	PHP_FE(simplexml_load_file, NULL)
 	PHP_FE(simplexml_load_string, NULL)
+#ifdef HAVE_DOM
 	PHP_FE(simplexml_import_dom, NULL)
+#endif
 	{NULL, NULL, NULL}
 };
 
@@ -1569,7 +1568,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.122 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.123 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

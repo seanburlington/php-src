@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf                                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.7 1999/12/14 03:48:06 thies Exp $ */
+/* $Id: image.c,v 1.8 1999/12/14 04:32:54 thies Exp $ */
 /* 
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -347,7 +347,11 @@ PHP_FUNCTION(getimagesize)
 		result = php3_handle_gif (fp);
 		itype = 1;
 	} else if (!memcmp(filetype, php3_sig_jpg, 3)) {
-		result = php3_handle_jpeg(fp,*info);
+		if (info) {
+			result = php3_handle_jpeg(fp,*info);
+		} else {
+			result = php3_handle_jpeg(fp,NULL);
+		}
 		itype = 2;
 	} else if (!memcmp(filetype, php3_sig_png, 3)) {
 		fseek(fp, 0L, SEEK_SET);

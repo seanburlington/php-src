@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.28 2002/09/09 18:17:11 sniper Exp $
+dnl $Id: config.m4,v 1.29 2002/10/31 21:21:00 msopacua Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -131,6 +131,12 @@ int main ()
       AC_DEFINE(HAVE_SABLOT_SET_ENCODING, 1, [ ])
     ], [], [
       -L$XSLT_DIR/lib
+    ])
+
+    dnl SablotSetOptions implemented in Sablotron CVS > 2002/10/31
+    AC_CHECK_LIB(sablot, SablotGetOptions,
+    [
+      AC_DEFINE(HAVE_SABLOT_GET_OPTIONS, 1, [Whether Sablotron supports SablotGetOptions])
     ])
 
     AC_DEFINE(HAVE_SABLOT_BACKEND, 1, [ ])

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2003 The PHP Group                                |
+   | Copyright (c) 1997-2002 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.153.2.2 2002/12/31 16:25:01 sebastian Exp $ */
+/* $Id: fopen_wrappers.c,v 1.153.2.1.4.1 2003/02/15 22:51:43 sniper Exp $ */
 
 /* {{{ includes
  */
@@ -348,8 +348,8 @@ PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC)
 		fp = NULL;
 	}
 	if (!fp) {
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Unable to open %s", filename); 
 		STR_FREE(SG(request_info).path_translated);	/* for same reason as above */
-		SG(request_info).path_translated = NULL;
 		return FAILURE;
 	}
 

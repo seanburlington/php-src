@@ -17,7 +17,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.42.2.12 2003/09/29 14:06:43 pajoye Exp $
+// $Id: Package.php,v 1.42.2.13 2003/10/20 15:51:45 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';

@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.19.2.10 2003/09/29 14:06:42 pajoye Exp $
+// $Id: Common.php,v 1.19.2.11 2003/10/20 15:51:44 cox Exp $
 
 require_once "PEAR.php";
 

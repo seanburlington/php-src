@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Mirror.php,v 1.2.2.2 2003/09/29 14:06:43 pajoye Exp $
+// $Id: Mirror.php,v 1.2.2.3 2003/10/20 15:51:45 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Command.php";

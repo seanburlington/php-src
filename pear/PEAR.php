@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.50.2.9 2003/09/29 14:06:38 pajoye Exp $
+// $Id: PEAR.php,v 1.50.2.10 2003/10/20 15:51:43 cox Exp $
 //
 
 define('PEAR_ERROR_RETURN',     1);
@@ -490,6 +490,7 @@ class PEAR
             $code        = $message->getCode();
             $userinfo    = $message->getUserInfo();
             $error_class = $message->getType();
+            $message->error_message_prefix = '';
             $message     = $message->getMessage();
         }
 

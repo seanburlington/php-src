@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.129.2.3 2002/07/27 13:15:42 hirokawa Exp $ */
+/* $Id: SAPI.c,v 1.129.2.4 2002/09/09 00:32:40 yohgaki Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -261,6 +261,7 @@ SAPI_API size_t sapi_apply_default_charset(char **mimetype, size_t len TSRMLS_DC
 		newtype = emalloc(newlen + 1);
  		PHP_STRLCPY(newtype, *mimetype, newlen + 1, len);
 		strlcat(newtype, ";charset=", newlen + 1);
+		strlcat(newtype, charset, newlen + 1);
 		if (*mimetype != NULL) {
 			efree(*mimetype);
 		}
@@ -460,8 +461,6 @@ SAPI_API int sapi_add_header_ex(char *header_line, uint header_line_len, zend_bo
 					strlcat(newheader, mimetype, newlen);
 					sapi_header.header = newheader;
 					sapi_header.header_len = newlen - 1;
-					colon_offset = strchr(newheader, ':');
-					*colon_offset = '\0';
 					efree(header_line);
 				}
 				

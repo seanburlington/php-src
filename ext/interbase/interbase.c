@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.91.2.30 2004/02/15 18:43:46 abies Exp $ */
+/* $Id: interbase.c,v 1.91.2.31 2004/02/17 20:57:26 abies Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -643,7 +643,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.30 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.31 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -945,7 +945,7 @@ PHP_FUNCTION(ibase_connect)
    Open a persistent connection to an InterBase database */
 PHP_FUNCTION(ibase_pconnect)
 {
-	_php_ibase_connect(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
+	_php_ibase_connect(INTERNAL_FUNCTION_PARAM_PASSTHRU, IBG(allow_persistent));
 }
 /* }}} */
 

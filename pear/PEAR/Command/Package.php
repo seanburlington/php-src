@@ -17,7 +17,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.42 2002/10/22 23:08:55 ssb Exp $
+// $Id: Package.php,v 1.42.2.1 2002/11/25 23:49:46 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';
@@ -107,7 +107,7 @@ List all depencies the package has.'
 Signs a package distribution (.tar or .tgz) file with GnuPG.',
             ),
         'makerpm' => array(
-            'summary' => 'Builds an RPM package from a PEAR package',
+            'summary' => 'Builds an RPM spec file from a PEAR package',
             'function' => 'doMakeRPM',
             'shortcut' => 'rpm',
             'options' => array(

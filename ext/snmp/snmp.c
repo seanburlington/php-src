@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.16 2000/01/01 01:31:48 sas Exp $ */
+/* $Id: snmp.c,v 1.17 2000/02/10 22:00:52 andi Exp $ */
 
 #include "php.h"
 #if defined(COMPILE_DL)
@@ -25,7 +25,7 @@
 #endif
 #include "php_snmp.h"
 #include <sys/types.h>
-#if MSVC5
+#if PHP_WIN32
 #include <winsock.h>
 #include <errno.h>
 #include <process.h>

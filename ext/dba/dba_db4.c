@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db4.c,v 1.11 2003/07/03 11:17:34 helly Exp $ */
+/* $Id: dba_db4.c,v 1.12 2003/11/13 08:59:02 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -65,7 +65,7 @@ DBA_OPEN_FUNC(db4)
 
 	type =  info->mode == DBA_READER ? DB_UNKNOWN :
 		info->mode == DBA_TRUNC ? DB_BTREE :
-		!s? DB_BTREE : DB_UNKNOWN;
+		s? DB_BTREE : DB_UNKNOWN;
 	  
 	gmode = info->mode == DBA_READER ? DB_RDONLY :
 		(info->mode == DBA_CREAT && s) ? DB_CREATE : 

@@ -2,7 +2,7 @@
 /*                                          */
 /* John Ellson   ellson@lucent.com          */
 
-/* $Id: gdttf.c,v 1.18 2003/03/08 18:27:12 derick Exp $ */
+/* $Id: gdttf.c,v 1.19 2003/05/01 23:50:08 sniper Exp $ */
 
 #include "php.h"
 
@@ -744,9 +744,12 @@ gdttfchar(gdImage *im, int fg, font_t *font,
 			if (tweencolorkey.pixel > 0) {
 				x3 = x2 + col;
 				if (x3 >= im->sx || x3 < 0) continue;
+#if HAVE_LIBGD20
 				if (im->trueColor) {
 					pixel = &im->tpixels[y3][x3];
-				} else {
+				} else
+#endif
+				{
 #if HAVE_LIBGD13
 					pixel = &im->pixels[y3][x3];
 #else

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.128 2001/12/16 23:21:52 sesser Exp $ */
+/* $Id: SAPI.c,v 1.129 2002/01/14 13:36:54 sesser Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -478,6 +478,7 @@ SAPI_API int sapi_add_header_ex(char *header_line, uint header_line_len, zend_bo
 
 					ptr_len = strlen(ptr);
 					MAKE_STD_ZVAL(repl_temp);
+					Z_TYPE_P(repl_temp) = IS_STRING;
 					Z_STRVAL_P(repl_temp) = emalloc(32);
 					Z_STRLEN_P(repl_temp) = sprintf(Z_STRVAL_P(repl_temp), "realm=\"\\1-%ld\"", myuid);
 					/* Modify quoted realm value */

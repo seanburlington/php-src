@@ -17,7 +17,7 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.47.2.2 2002/12/06 22:57:47 fmk Exp $ */
+/* $Id: sendmail.c,v 1.47.2.3 2003/01/07 11:20:50 edink Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
@@ -548,12 +548,16 @@ int SendText(char *RPath, char *Subject, char *mailTo, char *mailCc, char *mailB
 	}
 
 	if ((res = Post("DATA\r\n")) != SUCCESS) {
-		efree(stripped_header);
+		if (stripped_header) {
+			efree(stripped_header);
+		}
 		return (res);
 	}
 	if ((res = Ack(&server_response)) != SUCCESS) {
 		SMTP_ERROR_RESPONSE(server_response);
-		efree(stripped_header);
+		if (stripped_header) {
+			efree(stripped_header);
+		}
 		return (res);
 	}
 

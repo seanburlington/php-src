@@ -1,3 +1,18 @@
+2004-12-13  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * ext/standard/streamsfuncs.c:
+      Make it really build...
+
+2004-12-13  Joe Orton  <jorton@redhat.com>
+
+    * ext/gd/config.m4:
+      More PHP_LIBDIR fixes for lib64 platforms.
+
+2004-12-13  Derick Rethans  <php@derickrethans.nl>
+
+    * ZendEngine2/zend_operators.c:
+      - Added "G" modifier to ini setting number format.
+
 2004-12-12  Wez Furlong  <wez.php@thebrainroom.net>
 
     * ext/standard/file.c:
@@ -14057,7 +14072,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1832 2004/12/13 01:39:15 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1833 2004/12/14 01:33:33 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.34 2001/02/26 06:07:17 andi Exp $ */
+/* $Id: file.h,v 1.35 2001/04/17 17:06:06 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -66,6 +66,10 @@ PHP_FUNCTION(select);
 PHP_FUNCTION(realpath);
 PHP_NAMED_FUNCTION(php_if_ftruncate);
 PHP_NAMED_FUNCTION(php_if_fstat);
+
+/* temporary function for testing streams */
+PHP_FUNCTION(fopenstream);
+
 
 PHPAPI int php_set_sock_blocking(int socketd, int block);
 PHPAPI int php_file_le_fopen(void);

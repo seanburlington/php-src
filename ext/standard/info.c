@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.132 2001/03/04 22:03:23 zeev Exp $ */
+/* $Id: info.c,v 1.133 2001/04/17 17:06:06 wez Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -203,6 +203,11 @@ PHPAPI void php_print_info(int flag)
 #else
 		php_info_print_table_row(2, "Thread Safety", "disabled" );
 #endif
+
+#if HAVE_PHP_STREAM
+		php_info_print_table_row(2, "Experimental PHP Streams", "enabled");
+#endif
+		
 		php_info_print_table_end();
 
 		/* Zend Engine */

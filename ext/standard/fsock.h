@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.h,v 1.34 2001/02/26 06:07:17 andi Exp $ */
+/* $Id: fsock.h,v 1.35 2001/04/17 17:06:06 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.24 1999-06-18 [ssb] */
 
@@ -48,6 +48,10 @@
 #endif
 
 #define PHP_FSOCK_CHUNK_SIZE 8192
+
+#if HAVE_PHP_STREAM
+extern php_stream_ops php_stream_socket_ops;
+#endif
 
 struct php_sockbuf {
 	int socket;

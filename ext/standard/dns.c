@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.45 2002/11/19 02:34:13 helly Exp $ */
+/* $Id: dns.c,v 1.46 2002/11/23 01:09:07 pollita Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -331,8 +331,9 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int 
 	GETLONG(ttl, cp);
 	GETSHORT(dlen, cp);
 	if (type_to_fetch != T_ANY && type != type_to_fetch) {
-		/* Should never actually occour */
-		return NULL;
+		*subarray = NULL;
+		cp += dlen;
+		return cp;
 	}
 
 	if (!store) {
@@ -576,6 +577,7 @@ PHP_FUNCTION(dns_get_record)
 					zend_hash_next_index_insert(HASH_OF(return_value), (void *)&subarray[current_subarray], sizeof(zval *), NULL);
 				current_subarray++;
 			}
+			res_nclose(&res);
 		}
 	}
 

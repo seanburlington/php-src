@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.1 2004/05/20 02:27:49 edink Exp $
+dnl $Id: config.m4,v 1.2 2004/08/11 21:04:36 helly Exp $
 dnl
 
 AC_DEFUN(PHP_PGSQL_CHECK_FUNCTIONS,[
@@ -98,4 +98,5 @@ dnl find PDO sources
   fi
 
   PHP_NEW_EXTENSION(pdo_pgsql, pdo_pgsql.c pgsql_driver.c pgsql_statement.c, $ext_shared,,-I$pdo_inc_path)
+  PHP_ADD_EXTENSION_DEP(pdo_pgsql, pdo) 
 fi

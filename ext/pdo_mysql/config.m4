@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.8 2004/05/19 20:56:06 helly Exp $
+dnl $Id: config.m4,v 1.9 2004/08/11 21:04:36 helly Exp $
 dnl
 
 AC_DEFUN(MYSQL_LIB_CHK, [
@@ -60,6 +60,7 @@ Note that the MySQL client library is not bundled anymore.])
   fi
 
   PHP_NEW_EXTENSION(pdo_mysql, pdo_mysql.c mysql_driver.c mysql_statement.c, $ext_shared,,-I$pdo_inc_path)
+  PHP_ADD_EXTENSION_DEP(pdo_mysql, pdo)
   PDO_MYSQL_MODULE_TYPE=external
   PDO_MYSQL_INCLUDE=-I$MYSQL_INC_DIR
  

@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.74 2004/05/17 20:31:59 pollita Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.74.2.1 2004/08/16 01:41:17 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -126,8 +126,12 @@ static php_stream *php_ftp_fopen_connect(php_stream_wrapper *wrapper, char *path
 	char tmp_line[512];
 
 	resource = php_url_parse(path);
-	if (resource == NULL || resource->path == NULL)
+	if (resource == NULL || resource->path == NULL) {
+		if (resource && presource) {
+			*presource = resource;
+		}
 		return NULL;
+	}
 
 	use_ssl = resource->scheme && (strlen(resource->scheme) > 3) && resource->scheme[3] == 's';
 
@@ -647,6 +651,9 @@ php_stream * php_stream_ftp_opendir(php_stream_wrapper *wrapper, char *path, cha
 	unsigned short portno;
 
 	stream = php_ftp_fopen_connect(wrapper, path, mode, options, opened_path, context, &reuseid, &resource, &use_ssl, &use_ssl_on_data TSRMLS_CC);
+	if (!stream) {
+		goto opendir_errexit;	
+	}
 
 	/* set the connection to be ascii */
 	php_stream_write_string(stream, "TYPE A\r\n");

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.1.2.6 2003/05/31 01:37:44 sniper Exp $
+dnl $Id: config9.m4,v 1.1.2.7 2003/07/01 17:03:55 sniper Exp $
 dnl
 
 AC_ARG_ENABLE(cgi,
@@ -148,7 +148,6 @@ if test "$PHP_SAPI" = "default"; then
     AC_DEFINE_UNQUOTED(PHP_FCGI_STATIC, $PHP_FCGI_STATIC, [ ])
     AC_MSG_RESULT($PHP_ENABLE_FASTCGI)
 
-    INSTALL_IT="\$(INSTALL) -m 0755 \$(SAPI_CGI_PATH) \$(INSTALL_ROOT)\$(bindir)/php"
     PHP_SELECT_SAPI(cgi, program, $PHP_FCGI_FILES cgi_main.c getopt.c, $PHP_FCGI_INCLUDE, '$(SAPI_CGI_PATH)')
 
     case $host_alias in
@@ -159,8 +158,10 @@ if test "$PHP_SAPI" = "default"; then
         BUILD_CGI="\$(LIBTOOL) --mode=link \$(CC) -export-dynamic \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS) \$(LDFLAGS) \$(PHP_RPATHS) \$(PHP_GLOBAL_OBJS) \$(PHP_SAPI_OBJS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CGI_PATH)"
       ;;
     esac
+    INSTALL_CGI="\$(mkinstalldirs) \$(INSTALL_ROOT)\$(bindir); \$(INSTALL) -m 0755 \$(SAPI_CGI_PATH) \$(INSTALL_ROOT)\$(bindir)/php"
 
     PHP_SUBST(BUILD_CGI)
+    PHP_SUBST(INSTALL_CGI)
 
   elif test "$PHP_SAPI_CLI" != "no"; then
     AC_MSG_RESULT(no)

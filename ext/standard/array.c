@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.294 2005/03/12 10:11:46 andrey Exp $ */
+/* $Id: array.c,v 1.295 2005/03/19 14:24:17 helly Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1038,7 +1038,7 @@ static int php_array_walk(HashTable *target_hash, zval **userdata, int recursive
 	zend_hash_internal_pointer_reset_ex(target_hash, &pos);
 
 	/* Iterate through hash */
-	while (zend_hash_get_current_data_ex(target_hash, (void **)&args[0], &pos) == SUCCESS) {
+	while (!EG(exception) && zend_hash_get_current_data_ex(target_hash, (void **)&args[0], &pos) == SUCCESS) {
 		if (recursive && Z_TYPE_PP(args[0]) == IS_ARRAY) {
 			HashTable *thash;
 			

@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.153 2004/06/01 21:04:33 iliaa Exp $ */
+/* $Id: ldap.c,v 1.154 2004/06/28 22:31:28 iliaa Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -303,7 +303,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.153 2004/06/01 21:04:33 iliaa Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.154 2004/06/28 22:31:28 iliaa Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -616,10 +616,7 @@ static void php_ldap_do_search(INTERNAL_FUNCTION_PARAMETERS, int scope)
 			}
 
 			num_attribs = zend_hash_num_elements(Z_ARRVAL_PP(attrs));
-			if ((ldap_attrs = safe_emalloc((num_attribs+1), sizeof(char *), 0)) == NULL) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not allocate memory");
-				RETURN_FALSE;
-			}
+			ldap_attrs = safe_emalloc((num_attribs+1), sizeof(char *), 0);
 
 			for (i = 0; i<num_attribs; i++) {
 				if (zend_hash_index_find(Z_ARRVAL_PP(attrs), i, (void **) &attr) == FAILURE) {

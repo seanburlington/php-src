@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nsapi.c,v 1.28.2.14 2003/06/01 21:15:52 thetaphi Exp $ */
+/* $Id: nsapi.c,v 1.28.2.15 2003/07/02 13:37:39 thetaphi Exp $ */
 
 /*
  * PHP includes
@@ -203,7 +203,7 @@ zend_module_entry nsapi_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(nsapi),
-	"$Id: nsapi.c,v 1.28.2.14 2003/06/01 21:15:52 thetaphi Exp $",
+	"$Revision: 1.28.2.15 $",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
@@ -827,6 +827,15 @@ int NSAPI_PUBLIC php4_execute(pblock *pb, Session *sn, Request *rq)
 
 	TSRMLS_FETCH();
 
+	/* check if this uri was included in an other PHP script with virtual()
+	   by looking for a request context in the current thread */
+	if (SG(server_context)) {
+		/* send 500 internal server error */
+		log_error(LOG_WARN, "php4_execute", sn, rq, "Cannot make nesting PHP requests with virtual()");
+		protocol_status(sn, rq, 500, NULL);
+		return REQ_ABORTED;
+	}
+
 	request_context = (nsapi_request_context *)MALLOC(sizeof(nsapi_request_context));
 	request_context->pb = pb;
 	request_context->sn = sn;
@@ -874,6 +883,7 @@ int NSAPI_PUBLIC php4_execute(pblock *pb, Session *sn, Request *rq)
 	nsapi_free((void*)(SG(request_info).content_type));
 
 	FREE(request_context);
+	SG(server_context) = NULL;
 
 	return retval;
 }

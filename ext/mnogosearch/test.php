@@ -1,6 +1,6 @@
 <!-- 
     $Source: /repository/php-src/ext/mnogosearch/Attic/test.php,v $
-    $Id: test.php,v 1.12 2001/02/20 11:29:15 gluke Exp $ 
+    $Id: test.php,v 1.13 2001/02/22 10:40:43 gluke Exp $ 
 -->
 
 <html>
@@ -42,6 +42,11 @@
 	Udm_Set_Agent_Param($udm,UDM_PARAM_PHRASE_MODE,UDM_PHRASE_DISABLED);
 	Udm_Set_Agent_Param($udm,UDM_PARAM_MIN_WORD_LEN,2);
 	Udm_Set_Agent_Param($udm,UDM_PARAM_MAX_WORD_LEN,5);
+	
+	if (!Udm_Set_Agent_Param($udm,UDM_PARAM_ISPELL_MODE,UDM_ISPELL_MODE_DB)) {
+		printf("Error #%d: '%s'\n",$errno,Udm_Error($udm));
+		exit;
+	}
 
 // Stage 3: add search limits
 //	Udm_Add_Search_Limit($udm,UDM_LIMIT_URL,"http://www.mydomain.com/%");

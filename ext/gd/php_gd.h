@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_gd.h,v 1.6 2000/03/13 05:58:50 rasmus Exp $ */
+/* $Id: php_gd.h,v 1.7 2000/05/02 14:10:51 hholzgra Exp $ */
 
 #ifndef _PHP_GD_H
 #define _PHP_GD_H
@@ -114,10 +114,18 @@ PHP_FUNCTION(imagecreatefrompng);
 PHP_FUNCTION(imagepng);
 void php_gdimagecharup(gdImagePtr, gdFontPtr, int, int, int, int);
 PHP_FUNCTION(imagedashedline);
-#ifdef ENABLE_GD_TTF
 PHP_FUNCTION(imagettfbbox);
 PHP_FUNCTION(imagettftext);
-#endif
+PHP_FUNCTION(imagepsloadfont);
+/*
+PHP_FUNCTION(imagepscopyfont);
+*/
+PHP_FUNCTION(imagepsfreefont);
+PHP_FUNCTION(imagepsencodefont);
+PHP_FUNCTION(imagepsextendfont);
+PHP_FUNCTION(imagepsslantfont);
+PHP_FUNCTION(imagepstext);
+PHP_FUNCTION(imagepsbbox);
 PHPAPI int phpi_get_le_gd(void);
 
 

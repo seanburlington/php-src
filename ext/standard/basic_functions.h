@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.128 2003/11/14 22:55:54 iliaa Exp $ */
+/* $Id: basic_functions.h,v 1.129 2003/11/24 01:17:27 iliaa Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -81,6 +81,8 @@ PHP_FUNCTION(call_user_method_array);
 PHP_FUNCTION(register_shutdown_function);
 PHP_FUNCTION(highlight_file);
 PHP_FUNCTION(highlight_string);
+PHP_FUNCTION(php_strip_whitespace);
+PHP_FUNCTION(php_check_syntax);
 ZEND_API void php_get_highlight_struct(zend_syntax_highlighter_ini *syntax_highlighter_ini);
 
 PHP_FUNCTION(ini_get);

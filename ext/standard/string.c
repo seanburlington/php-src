@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.29 2003/05/26 20:56:01 msopacua Exp $ */
+/* $Id: string.c,v 1.333.2.30 2003/06/11 02:16:49 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4024,7 +4024,7 @@ PHP_FUNCTION(str_shuffle)
 }
 /* }}} */
 
-/* {{{ proto void str_word_count(string str, [int format])
+/* {{{ proto mixed str_word_count(string str, [int format])
    	Counts the number of words inside a string. If format of 1 is specified,
    	then the function will return an array containing all the words
    	found inside the string. If format of 2 is specified, then the function

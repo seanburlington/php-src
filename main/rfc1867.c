@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.139 2003/07/03 00:55:20 iliaa Exp $ */
+/* $Id: rfc1867.c,v 1.140 2003/07/03 02:59:04 sniper Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -696,7 +696,9 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 {
 	char *boundary, *s=NULL, *boundary_end = NULL, *start_arr=NULL, *array_index=NULL;
 	char *temp_filename=NULL, *lbuf=NULL, *abuf=NULL;
-	int boundary_len=0, total_bytes=0, cancel_upload=0, is_arr_upload=0, array_len=0, max_file_size=0, skip_upload=0, anonindex=0, is_anonymous;	zval *http_post_files=NULL;
+	int boundary_len=0, total_bytes=0, cancel_upload=0, is_arr_upload=0, array_len=0;
+	int max_file_size=0, skip_upload=0, anonindex=0, is_anonymous;
+	zval *http_post_files=NULL;
 #if HAVE_MBSTRING && !defined(COMPILE_DL_MBSTRING)
 	int str_len=0
 #endif

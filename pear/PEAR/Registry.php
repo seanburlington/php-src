@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.32 2002/07/07 20:48:54 ssb Exp $
+// $Id: Registry.php,v 1.33 2002/07/09 10:51:41 ssb Exp $
 
 /*
 TODO:
@@ -233,7 +233,7 @@ class PEAR_Registry extends PEAR
         if (!$tmp && $fsize > 7) {
             return $this->raiseError('PEAR_Registry: invalid filemap data', PEAR_REGISTRY_ERROR_FORMAT, null, null, $data);
         }
-        $this->filemap = $tmp;
+        $this->filemap_cache = $tmp;
         return true;
     }
 

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.81 2003/11/03 13:55:19 sterling Exp $ */
+/* $Id: simplexml.c,v 1.82 2003/11/05 23:44:09 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -360,7 +360,6 @@ sxe_property_exists(zval *object, zval *member, int check_empty TSRMLS_DC)
 	php_sxe_object *sxe;
 	char           *name;
 	xmlNodePtr      node;
-	xmlAttrPtr      attr;
 	
 	sxe = php_sxe_fetch_object(object TSRMLS_CC);
 	name = Z_STRVAL_P(member);
@@ -1391,7 +1390,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.81 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.82 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

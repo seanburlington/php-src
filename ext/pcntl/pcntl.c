@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.40 2003/10/28 17:08:18 gschlossnagle Exp $ */
+/* $Id: pcntl.c,v 1.41 2003/11/05 23:44:09 iliaa Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -254,7 +254,7 @@ PHP_FUNCTION(pcntl_waitpid)
    Waits on or returns the status of a forked child as defined by the waitpid() system call */
 PHP_FUNCTION(pcntl_wait)
 {
-	long pid, options = 0;
+	long options = 0;
 	zval *z_status = NULL;
 	int status;
 	pid_t child_id;

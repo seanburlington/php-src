@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: build.mk,v 1.3 2000/01/01 20:48:42 sas Exp $ 
+# $Id: build.mk,v 1.4 2000/01/12 16:52:57 sas Exp $ 
 #
 # Makefile to generate build tools
 #
@@ -69,7 +69,7 @@ snapshot:
 	bzip2 -t $$distname.tar.bz2
 
 cvsclean:
-	@for i in `find . -follow -name .cvsignore`; do \
+	@for i in `find . -name .cvsignore`; do \
 		(cd `dirname $$i` 2>/dev/null && rm -rf `cat .cvsignore` *.o *.a || true); \
 	done
 	@rm -f $(SUBDIRS) 2>/dev/null || true

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.369 2001/06/21 09:24:53 zeev Exp $ */
+/* $Id: main.c,v 1.370 2001/06/21 13:47:26 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -1330,11 +1330,11 @@ PHPAPI int php_lint_script(zend_file_handle *file CLS_DC ELS_DC PLS_DC)
 	}
 
 	op_array = zend_compile_file(file, ZEND_INCLUDE CLS_CC);
+	zend_destroy_file_handle(file CLS_CC);
 
 	if (op_array) {
 		destroy_op_array(op_array);
 		efree(op_array);
-		zend_destroy_file_handle(file CLS_CC);
 		return SUCCESS;
 	} else {
 		return FAILURE;

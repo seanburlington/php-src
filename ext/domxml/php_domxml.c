@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.35 2003/11/22 14:43:08 rrichards Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.36 2003/11/25 02:19:47 iliaa Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -729,7 +729,6 @@ static void php_free_xml_doc(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	xmlDoc *doc = (xmlDoc *) rsrc->ptr;
 
 	if (doc) {
-		node_list_wrapper_dtor(doc->children, 1 TSRMLS_CC);
 		node_wrapper_dtor((xmlNodePtr) doc);
 		xmlFreeDoc(doc);
 	}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.61 2003/03/07 00:52:04 sniper Exp $ */
+/* $Id: sysvshm.c,v 1.62 2003/05/28 22:21:13 iliaa Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -74,6 +74,10 @@ ZEND_GET_MODULE(sysvshm)
 #undef shm_ptr					/* undefine AIX-specific macro */
 
 THREAD_LS sysvshm_module php_sysvshm;
+
+static int php_put_shm_data(sysvshm_chunk_head *ptr, long key, char *data, long len);
+static long php_check_shm_data(sysvshm_chunk_head *ptr, long key);
+static int php_remove_shm_data(sysvshm_chunk_head *ptr, long shm_varpos);
 
 /* {{{ php_release_sysvshm
  */

@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.14 2000/02/14 15:12:20 ssb Exp $
+// $Id: DB.php,v 1.15 2000/02/17 20:21:01 ssb Exp $
 //
 // Database independent query interface.
 //
@@ -139,7 +139,7 @@ if (!defined('DB_GETMODE_DEFAULT')) {
  *              well as common utility functions for other DB classes.
  * 
  * DB_common    The base for each DB implementation.  Provides default
- * |            implementations (some would say virtual methods) for
+ * |            implementations (in OO lingo virtual methods) for
  * |            the actual DB implementations as well as a bunch of
  * |            query utility functions.
  * |

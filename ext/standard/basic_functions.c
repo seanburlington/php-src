@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.538 2002/10/25 19:33:09 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.539 2002/10/29 23:35:49 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -508,8 +508,10 @@ function_entry basic_functions[] = {
 	PHP_FE(getopt,															NULL)
 #endif
 
+#ifdef HAVE_GETTIMEOFDAY
 	PHP_FE(microtime,														NULL)
 	PHP_FE(gettimeofday,													NULL)
+#endif
 
 #ifdef HAVE_GETRUSAGE
 	PHP_FE(getrusage,														NULL)

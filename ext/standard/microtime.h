@@ -16,13 +16,17 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: microtime.h,v 1.9 2002/02/28 08:26:46 sebastian Exp $ */
+/* $Id: microtime.h,v 1.10 2002/10/29 23:35:49 helly Exp $ */
 
 #ifndef MICROTIME_H
 #define MICROTIME_H
 
+#ifdef HAVE_GETTIMEOFDAY
 PHP_FUNCTION(microtime);
 PHP_FUNCTION(gettimeofday);
+#endif
+#ifdef HAVE_GETRUSAGE
 PHP_FUNCTION(getrusage);
+#endif
 
 #endif /* MICROTIME_H */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.166 2002/06/10 14:48:28 jtate Exp $ */
+/* $Id: php_domxml.c,v 1.167 2002/06/12 11:13:11 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2720,14 +2720,14 @@ PHP_FUNCTION(domxml_doc_get_element_by_id)
 	xmlDocPtr docp;
 	idsIterator iter;
 	xmlHashTable *ids = NULL;
-	int retnode;
-
-	id = getThis();
-	DOMXML_GET_OBJ(docp, id, le_domxmldocp);
+	int retnode,idname_len;
+	char *idname;
+	
+	DOMXML_PARAM_TWO(docp, id, le_domxmldocp, "s", &idname, &idname_len);
 
 	ids = (xmlHashTable *) docp->ids;
 	if(ids) {
-		iter.elementId = (xmlChar *)
+		iter.elementId = (xmlChar *) idname;
 		iter.element = NULL;
 		xmlHashScan(ids, (void *)idsHashScanner, &iter);
 		rv = php_domobject_new(iter.element, &retnode, NULL TSRMLS_CC);

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.102 2002/07/13 04:06:26 sniper Exp $
+dnl $Id: config.m4,v 1.103 2002/07/13 05:01:55 sniper Exp $
 dnl
 
 dnl
@@ -287,6 +287,10 @@ dnl enable the support in bundled GD library
     AC_DEFINE(HAVE_GD_STRINGFT,   1, [ ])
     AC_DEFINE(HAVE_GD_STRINGFTEX, 1, [ ])
     GDLIB_CFLAGS="$GDLIB_CFLAGS -DHAVE_LIBFREETYPE"
+  fi
+
+  if test -n "$TTF_DIR"; then
+    GDLIB_CFLAGS="$GDLIB_CFLAGS -DHAVE_LIBTTF"
   fi
 
   PHP_SUBST(GDLIB_CFLAGS)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.17 2000/11/10 06:09:41 steinm Exp $ */
+/* $Id: php_domxml.h,v 1.18 2000/11/10 11:40:03 steinm Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -54,6 +54,7 @@ PHP_FUNCTION(domxml_lastchild);
 PHP_FUNCTION(domxml_parent);
 PHP_FUNCTION(domxml_node);
 PHP_FUNCTION(domxml_new_child);
+PHP_FUNCTION(domxml_set_content);
 
 /* Class Attribute methods */
 PHP_FUNCTION(domxml_attrname);

@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.81 2003/06/10 20:03:44 imajes Exp $ */
+/* $Id: php_apache.c,v 1.82 2003/08/28 17:48:58 iliaa Exp $ */
 
 #include "php_apache_http.h"
 
@@ -416,7 +416,7 @@ PHP_FUNCTION(apache_lookup_uri)
 	convert_to_string_ex(filename);
 
 	if(!(rr = sub_req_lookup_uri((*filename)->value.str.val, ((request_rec *) SG(server_context))))) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "URI lookup failed", (*filename)->value.str.val);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "URI lookup failed '%s'", (*filename)->value.str.val);
 		RETURN_FALSE;
 	}
 	object_init(return_value);

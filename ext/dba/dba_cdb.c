@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_cdb.c,v 1.18 2002/11/04 17:53:04 helly Exp $ */
+/* $Id: dba_cdb.c,v 1.19 2002/11/05 11:22:48 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -103,9 +103,9 @@ DBA_OPEN_FUNC(cdb)
 	cdb = ecalloc(sizeof(dba_cdb), 1);
 	if (!cdb) {
 #if DBA_CDB_BUILTIN
-		php_stream_close(cdb->file);
+		php_stream_close(file);
 #else
-		close(cdb->file);
+		close(file);
 #endif
 		return FAILURE;
 	}

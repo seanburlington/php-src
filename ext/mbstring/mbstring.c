@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.178 2003/07/13 08:20:01 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.179 2003/07/14 23:09:46 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -3430,7 +3430,7 @@ char* php_mb_encoding_detector(const char *arg_string, int arg_length, char *arg
 	string.no_language = MBSTRG(current_language);
 	string.val = (char*)arg_string;
 	string.len = arg_length;
-	ret = mbfl_identify_encoding_name(&string, elist, size TSRMLS_CC);
+	ret = mbfl_identify_encoding_name(&string, elist, size, 0 TSRMLS_CC);
 	if (list != NULL) {
 		efree((void *)list);
 	}

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.99 2004/01/08 19:30:37 helly Exp $ */
+/* $Id: simplexml.c,v 1.100 2004/01/08 20:27:35 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1613,9 +1613,6 @@ PHP_MINIT_FUNCTION(simplexml)
 	INIT_CLASS_ENTRY(sxe, "simplexml_element", sxe_functions);
 	sxe.create_object = sxe_object_new;
 	sxe_class_entry = zend_register_internal_class(&sxe TSRMLS_CC);
-#if HAVE_SPL && !defined(COMPILE_DL_SPL)
-	zend_class_implements(sxe_class_entry TSRMLS_CC, 1, spl_ce_RecursiveIterator);
-#endif
 	sxe_class_entry->get_iterator = php_sxe_get_iterator;
 	sxe_object_handlers.get_method = zend_get_std_object_handlers()->get_method;
 	sxe_object_handlers.get_class_entry = zend_get_std_object_handlers()->get_class_entry;
@@ -1637,6 +1634,9 @@ PHP_MSHUTDOWN_FUNCTION(simplexml)
  */
 PHP_RINIT_FUNCTION(simplexml)
 {
+#if HAVE_SPL && !defined(COMPILE_DL_SPL)
+	zend_class_implements(sxe_class_entry TSRMLS_CC, 1, spl_ce_RecursiveIterator);
+#endif
 	return SUCCESS;
 }
 /* }}} */
@@ -1655,7 +1655,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.99 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.100 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

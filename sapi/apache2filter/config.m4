@@ -1,10 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.7 2002/03/07 14:19:50 sas Exp $
+dnl $Id: config.m4,v 1.8 2002/04/10 09:42:38 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 2.0 module support via DSO through APXS)
 AC_ARG_WITH(apxs2,
-[  --with-apxs2[=FILE]     Build shared Apache 2.0 module. FILE is the optional
+[  --with-apxs2[=FILE]     EXPERIMENTAL: Build shared Apache 2.0 module. FILE is the optional
                           pathname to the Apache apxs tool; defaults to "apxs".],[
   if test "$withval" = "yes"; then
     APXS=apxs

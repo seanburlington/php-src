@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db4.c,v 1.9 2003/06/19 11:10:14 helly Exp $ */
+/* $Id: dba_db4.c,v 1.10 2003/06/21 18:16:38 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -72,6 +72,10 @@ DBA_OPEN_FUNC(db4)
 		(info->mode == DBA_CREAT && !s) ? 0 :
 		info->mode == DBA_WRITER ? 0         : 
 		info->mode == DBA_TRUNC ? DB_CREATE | DB_TRUNCATE : -1;
+
+	if (info->flags & DBA_PERSISTENT) {
+		gmode |= DB_THREAD;
+	}
 
 	if (gmode == -1) {
 		return FAILURE; /* not possible */

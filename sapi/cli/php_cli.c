@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.94 2003/06/10 20:03:45 imajes Exp $ */
+/* $Id: php_cli.c,v 1.95 2003/06/16 16:14:38 stas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -680,6 +680,7 @@ int main(int argc, char *argv[])
 
 			case 'a':	/* interactive mode */
 				printf("Interactive mode enabled\n\n");
+				fflush(stdout);
 				interactive=1;
 				break;
 

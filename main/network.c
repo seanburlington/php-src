@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.83.2.12 2003/05/19 23:27:49 wez Exp $ */
+/* $Id: network.c,v 1.83.2.13 2003/05/20 12:45:35 sas Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -410,7 +410,7 @@ int php_hostconnect(const char *host, unsigned short port, int socktype, struct 
 	struct sockaddr **sal, **psal;
 	struct timeval individual_timeout;
 	int set_timeout = 0;
-	int err;
+	int err = 0;
 	
 	n = php_network_getaddresses(host, &sal TSRMLS_CC);
 

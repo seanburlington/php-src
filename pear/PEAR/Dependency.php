@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.11 2002/05/23 20:37:58 cox Exp $
+// $Id: Dependency.php,v 1.12 2002/06/17 13:50:33 cox Exp $
 
 /**
 * Methods for dependencies check. Based on Stig's dependencies RFC
@@ -134,11 +134,8 @@ class PEAR_Dependency
     function checkExtension($name, $req = null, $relation = 'has')
     {
         // XXX (ssb): could we avoid loading the extension here?
-        if (!extension_loaded($name)) {
-            $dlext = OS_WINDOWS ? '.dll' : '.so';
-            if (!@dl($name . $dlext)) {
-                return "'$name' PHP extension is not installed";
-            }
+        if (!PEAR::loadExtension($name)) {
+            return "'$name' PHP extension is not installed";
         }
         if ($relation == 'has') {
             return false;

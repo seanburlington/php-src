@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333 2002/11/05 13:52:11 moriyoshi Exp $ */
+/* $Id: string.c,v 1.333.2.1 2002/11/27 06:20:37 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3496,6 +3496,8 @@ PHPAPI void php_strip_tags(char *rbuf, int len, int *stateptr, char *allow, int 
 				/* JavaScript & Other HTML scripting languages */
 				if (state == 1 && *(p-1) == '<') { 
 					state = 3;
+				} else {
+					*(rp++) = c;
 				}	
 				break;
 			

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.340 2002/04/26 10:17:40 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.341 2002/05/01 13:34:05 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1288,6 +1288,12 @@ cat<<X
 | If you do not agree with the terms of this license, you must abort |
 | the installation process at this point.                            |
 +--------------------------------------------------------------------+
+|                              *** WARNING ***                       |
+|                                                                    |
+| Remember to enable register_globals in your PHP.INI file, if your  |
+| software depends on it.                                            |
++--------------------------------------------------------------------+
+
 
 Thank you for using PHP.
 

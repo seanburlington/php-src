@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.25 2001/04/01 05:42:07 sniper Exp $ */
+/* $Id: php_gd.h,v 1.26 2001/04/06 18:01:52 sniper Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -142,13 +142,6 @@ PHP_FUNCTION(imagepsbbox);
 PHP_FUNCTION(jpeg2wbmp);
 PHP_FUNCTION(png2wbmp);
 PHP_FUNCTION(image2wbmp);
-
-
-gdImagePtr _php_image_create_from_string ( zval **Data, char *tn, gdImagePtr (*ioctx_func_p)() );
-static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type, char *tn, gdImagePtr (*func_p)(), gdImagePtr (*ioctx_func_p)());
-static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char *tn, void (*func_p)());
-static int _php_image_type ( char data[8] );
-static void _php_image_convert(INTERNAL_FUNCTION_PARAMETERS, int image_type);
 
 PHPAPI int phpi_get_le_gd(void);
 

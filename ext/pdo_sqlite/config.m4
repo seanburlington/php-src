@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 2004/12/25 04:01:30 wez Exp $
+dnl $Id: config.m4,v 1.3 2004/12/31 17:45:08 wez Exp $
 dnl config.m4 for extension pdo_sqlite
 
 PHP_ARG_WITH(pdo-sqlite, for sqlite 3 driver for PDO,
@@ -52,4 +52,5 @@ if test "$PHP_PDO_SQLITE" != "no"; then
   AC_MSG_RESULT($pdo_inc_path)
 
   PHP_NEW_EXTENSION(pdo_sqlite, pdo_sqlite.c sqlite_driver.c sqlite_statement.c, $ext_shared,,-I$pdo_inc_path)
+  PHP_ADD_EXTENSION_DEP(pdo_sqlite, pdo)
 fi

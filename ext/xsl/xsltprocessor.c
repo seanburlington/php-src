@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.25 2004/03/01 12:43:34 rrichards Exp $ */
+/* $Id: xsltprocessor.c,v 1.26 2004/03/28 15:35:01 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -337,7 +337,7 @@ PHP_FUNCTION(xsl_xsltprocessor_import_stylesheet)
 	std_hnd = zend_get_std_object_handlers();
 	MAKE_STD_ZVAL(member);
 	ZVAL_STRING(member, "cloneDocument", 0);
-	cloneDocu = std_hnd->read_property(id, member, 1 TSRMLS_CC);
+	cloneDocu = std_hnd->read_property(id, member, BP_VAR_IS TSRMLS_CC);
 	if (Z_TYPE_P(cloneDocu) != IS_NULL) {
 		convert_to_long(cloneDocu);
 		clone_docu = Z_LVAL_P(cloneDocu);

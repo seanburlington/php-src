@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: msql.c,v 1.14 1999/08/02 19:16:46 zeev Exp $ */
+/* $Id: msql.c,v 1.15 1999/08/05 13:41:15 andrey Exp $ */
 
 #include "php.h"
 #if COMPILE_DL
@@ -252,6 +252,7 @@ DLEXPORT PHP_MINIT_FUNCTION(msql)
 }
 
 DLEXPORT PHP_MSHUTDOWN_FUNCTION(msql)
+{
 #ifdef THREAD_SAFE
 	msql_global_struct *msql_globals;
 	msql_globals = TlsGetValue(MSQLTls); 

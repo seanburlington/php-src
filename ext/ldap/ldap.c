@@ -23,7 +23,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.67 2000/10/20 20:22:59 venaas Exp $ */
+/* $Id: ldap.c,v 1.68 2000/10/22 11:25:47 venaas Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -224,7 +224,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.67 2000/10/20 20:22:59 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.68 2000/10/22 11:25:47 venaas Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 #ifdef LDAP_API_VERSION
 	snprintf(ldapapiversion, 31, "%ld", LDAP_API_VERSION);
@@ -1507,7 +1507,7 @@ PHP_FUNCTION(ldap_compare) {
 
 
 #if LDAP_API_VERSION > 2000
-/* {{{ proto int ldap_get_option(int link, int option, int retval)
+/* {{{ proto boolean ldap_get_option(int link, int option, mixed retval)
    Get the current value of various session-wide parameters */
 PHP_FUNCTION(ldap_get_option) {
 	LDAP *ldap;
@@ -1572,7 +1572,7 @@ PHP_FUNCTION(ldap_get_option) {
 /* }}} */
 
 
-/* {{{ proto int ldap_set_option(int link, int option, int newval)
+/* {{{ proto boolean ldap_set_option(int link, int option, mixed newval)
    Set the value of various session-wide parameters */
 PHP_FUNCTION(ldap_set_option) {
 	LDAP *ldap;

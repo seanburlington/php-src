@@ -24,7 +24,7 @@
 #
 # Written by Stig Bakken <ssb@guardian.no> 1997-05-28.
 #
-# $Id: makedist,v 1.1 1999/04/07 21:02:34 zeev Exp $
+# $Id: makedist,v 1.1.1.1 1999/04/07 21:02:34 zeev Exp $
 #
 
 CVSROOT=:pserver:cvsread@cvs.php.net:/repository

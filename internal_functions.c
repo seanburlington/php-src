@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: internal_functions.c,v 1.1 1999/04/07 21:02:09 zeev Exp $ */
+/* $Id: internal_functions.c,v 1.1.1.1 1999/04/07 21:02:09 zeev Exp $ */
 
 
 #include "php.h"

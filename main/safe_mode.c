@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.1 1999/04/07 21:02:43 zeev Exp $ */
+/* $Id: safe_mode.c,v 1.1.1.1 1999/04/07 21:02:43 zeev Exp $ */
 #ifdef THREAD_SAFE
 #include "tls.h"
 #endif

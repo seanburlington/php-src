@@ -1,4 +1,4 @@
-dnl $Id: configure.in,v 1.1 1999/04/07 21:01:57 zeev Exp $
+dnl $Id: configure.in,v 1.1.1.1 1999/04/07 21:01:57 zeev Exp $
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(main.c)

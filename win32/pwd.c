@@ -15,7 +15,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Header: /repository/php-src/win32/Attic/pwd.c,v 1.1 1999/04/07 21:05:12 zeev Exp $
+   $Header: /repository/php-src/win32/Attic/pwd.c,v 1.1.1.1 1999/04/07 21:05:12 zeev Exp $
  */
 
 /* This 'implementation' is conjectured from the use of this functions in

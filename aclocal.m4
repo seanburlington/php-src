@@ -1,4 +1,4 @@
-dnl $Id: aclocal.m4,v 1.1 1999/04/07 21:00:33 zeev Exp $
+dnl $Id: aclocal.m4,v 1.1.1.1 1999/04/07 21:00:33 zeev Exp $
 dnl
 dnl This file contains local autoconf functions.
 

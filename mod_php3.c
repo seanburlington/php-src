@@ -27,7 +27,7 @@
    | (with helpful hints from Dean Gaudet <dgaudet@arctic.org>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php3.c,v 1.1 1999/04/07 21:02:36 zeev Exp $ */
+/* $Id: mod_php3.c,v 1.1.1.1 1999/04/07 21:02:36 zeev Exp $ */
 
 #ifdef THREAD_SAFE
 #include "tls.h"

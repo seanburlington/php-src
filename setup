@@ -29,7 +29,7 @@
 # |             Ariel Shkedi <ars@ziplink.net> or <as@altavista.net>     |
 # +----------------------------------------------------------------------+
 # 
-# $Id: setup,v 1.1 1999/04/07 21:02:44 zeev Exp $
+# $Id: setup,v 1.1.1.1 1999/04/07 21:02:44 zeev Exp $
 
 if [ "$1" = "-q" ]; then
     quiet_mode=on

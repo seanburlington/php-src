@@ -26,7 +26,7 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.h,v 1.1 1999/04/07 21:02:07 zeev Exp $ */
+/* $Id: fopen_wrappers.h,v 1.1.1.1 1999/04/07 21:02:07 zeev Exp $ */
 
 #ifndef _FOPEN_WRAPPERS_H
 #define _FOPEN_WRAPPERS_H

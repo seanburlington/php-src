@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: internal_functions_registry.h,v 1.1 1999/04/07 21:02:10 zeev Exp $ */
+/* $Id: internal_functions_registry.h,v 1.1.1.1 1999/04/07 21:02:10 zeev Exp $ */
 
 #ifndef _INTERNAL_FUNCTIONS_REGISTRY_H
 #define _INTERNAL_FUNCTIONS_REGISTRY_H

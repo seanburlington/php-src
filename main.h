@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: main.h,v 1.1 1999/04/07 21:02:34 zeev Exp $ */
+/* $Id: main.h,v 1.1.1.1 1999/04/07 21:02:34 zeev Exp $ */
 
 
 #ifndef _MAIN_H

@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.49 2000/06/26 18:15:49 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.50 2000/06/30 12:16:57 zeev Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -127,7 +127,7 @@ static void yyerror(char *str)
 	
 	sprintf(error_buf, "Error parsing %s on line %d\n", currently_parsed_filename, cfglineno);
 #ifdef PHP_WIN32
-	MessageBox(NULL, error_buf, "PHP Error", MB_OK);
+	MessageBox(NULL, error_buf, "PHP Error", MB_OK|MB_SERVICE_NOTIFICATION|MB_TOPMOST);
 #else
 	fprintf(stderr, "PHP:  %s", error_buf);
 #endif

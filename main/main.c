@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.274 2000/06/26 17:11:28 zeev Exp $ */
+/* $Id: main.c,v 1.275 2000/06/30 12:16:57 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -377,7 +377,7 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 
 #ifdef PHP_WIN32
 				if (type==E_CORE_ERROR || type==E_CORE_WARNING) {
-					MessageBox(NULL, buffer, error_type_str, MB_OK);
+					MessageBox(NULL, buffer, error_type_str, MB_OK|MB_SERVICE_NOTIFICATION|MB_TOPMOST);
 				}
 #endif
 				snprintf(log_buffer, 1024, "PHP %s:  %s in %s on line %d", error_type_str, buffer, error_filename, error_lineno);

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Command.php,v 1.12 2002/05/12 21:09:03 ssb Exp $
+// $Id: Command.php,v 1.13 2002/05/21 01:27:51 ssb Exp $
 
 
 require_once "PEAR.php";
@@ -26,6 +26,12 @@ require_once "PEAR.php";
  * @var array command => implementing class
  */
 $GLOBALS['_PEAR_Command_commandlist'] = array();
+
+/**
+ * List of shortcuts to common commands.
+ * @var array shortcut => command
+ */
+$GLOBALS['_PEAR_Command_shortcuts'] = array();
 
 /**
  * Array of command objects
@@ -104,6 +110,9 @@ class PEAR_Command
     {
         if (empty($GLOBALS['_PEAR_Command_commandlist'])) {
             PEAR_Command::registerCommands();
+        }
+        if (isset($GLOBALS['_PEAR_Command_shortcuts'][$command])) {
+            $command = $GLOBALS['_PEAR_Command_shortcuts'][$command];
         }
         $class = @$GLOBALS['_PEAR_Command_commandlist'][$command];
         if (empty($class)) {
@@ -211,6 +220,10 @@ class PEAR_Command
                 $GLOBALS['_PEAR_Command_commandlist'][$command] = $class;
                 $GLOBALS['_PEAR_Command_commanddesc'][$command] = $desc;
             }
+            $shortcuts = $GLOBALS['_PEAR_Command_objects'][$class]->getShortcuts();
+            foreach ($shortcuts as $shortcut => $command) {
+                $GLOBALS['_PEAR_Command_shortcuts'][$shortcut] = $command;
+            }
         }
         return true;
     }
@@ -229,6 +242,21 @@ class PEAR_Command
             PEAR_Command::registerCommands();
         }
         return $GLOBALS['_PEAR_Command_commandlist'];
+    }
+
+    /**
+     * Get the list of command shortcuts.
+     *
+     * @return array shortcut => command
+     *
+     * @access public
+     */
+    function getShortcuts()
+    {
+        if (empty($GLOBALS['_PEAR_Command_shortcuts'])) {
+            PEAR_Command::registerCommands();
+        }
+        return $GLOBALS['_PEAR_Command_shortcuts'];
     }
 
     /**

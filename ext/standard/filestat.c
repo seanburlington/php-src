@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.108 2002/09/11 23:10:58 edink Exp $ */
+/* $Id: filestat.c,v 1.109 2002/09/14 06:38:48 andi Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -571,7 +571,7 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 
 #ifndef PHP_WIN32
 #ifdef VIRTUAL_DIR
-	do {
+	{
 		char *tmpname;
 
 		if (virtual_filepath(filename, &tmpname TSRMLS_CC)) {
@@ -580,7 +580,7 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 		}
 
 		filename = tmpname;
-	} while (0);
+	}
 #endif
 
 	switch (type) {

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.124 2004/05/16 21:00:24 pajoye Exp $
+// $Id: Common.php,v 1.125 2004/05/21 16:36:37 wez Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -1076,7 +1076,7 @@ class PEAR_Common extends PEAR
         if (!isset($info['version'])) {
             $errors[] = 'missing version';
         } elseif (!$this->validPackageVersion($info['version'])) {
-            $errors[] = 'invalid package version';
+            $errors[] = 'invalid package release version';
         }
         if (empty($info['release_state'])) {
             $errors[] = 'missing release state';

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.72.2.1 2002/04/23 18:10:49 sas Exp $ */
+/* $Id: mod_files.c,v 1.72.2.2 2002/09/04 13:49:58 kalowsky Exp $ */
 
 #include "php.h"
 
@@ -255,12 +255,8 @@ PS_READ_FUNC(files)
 	data->st_size = *vallen = sbuf.st_size;
 	*val = emalloc(sbuf.st_size);
 
-#ifdef HAVE_PREAD
-	n = pread(data->fd, *val, sbuf.st_size, 0);
-#else
 	lseek(data->fd, 0, SEEK_SET);
 	n = read(data->fd, *val, sbuf.st_size);
-#endif
 	if (n != sbuf.st_size) {
 		efree(*val);
 		return FAILURE;

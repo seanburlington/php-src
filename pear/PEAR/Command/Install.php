@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.38.2.1 2002/11/26 01:33:38 ssb Exp $
+// $Id: Install.php,v 1.38.2.2 2002/11/26 21:53:43 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -29,7 +29,7 @@ require_once "Console/Getopt.php";
  */
 class PEAR_Command_Install extends PEAR_Command_Common
 {
-    // {{{ command definitions
+    // {{{ properties
 
     var $commands = array(
         'install' => array(
@@ -214,6 +214,8 @@ specified at once.
 
     // }}}
 
+    // {{{ doInstall()
+
     function doInstall($command, $options, $params)
     {
         if (empty($this->installer)) {
@@ -271,6 +273,9 @@ specified at once.
         return true;
     }
 
+    // }}}
+    // {{{ doUninstall()
+
     function doUninstall($command, $options, $params)
     {
         if (empty($this->installer)) {
@@ -291,6 +296,7 @@ specified at once.
         return true;
     }
 
+    // }}}
 }
 
 ?>

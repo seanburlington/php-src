@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Auth.php,v 1.10 2002/06/02 13:07:18 ssb Exp $
+// $Id: Auth.php,v 1.10.4.1 2002/11/26 21:53:43 ssb Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Remote.php";
@@ -28,6 +28,8 @@ require_once "PEAR/Config.php";
  */
 class PEAR_Command_Auth extends PEAR_Command_Common
 {
+    // {{{ properties
+
     var $commands = array(
         'login' => array(
             'summary' => 'Connects and authenticates to remote server',
@@ -55,6 +57,10 @@ password from your user configuration.',
 
         );
 
+    // }}}
+
+    // {{{ constructor
+
     /**
      * PEAR_Command_Auth constructor.
      *
@@ -64,6 +70,10 @@ password from your user configuration.',
     {
         parent::PEAR_Command_Common($ui, $config);
     }
+
+    // }}}
+
+    // {{{ doLogin()
 
     /**
      * Execute the 'login' command.
@@ -113,6 +123,9 @@ password from your user configuration.',
 
     }
 
+    // }}}
+    // {{{ doLogout()
+
     /**
      * Execute the 'logout' command.
      *
@@ -136,6 +149,7 @@ password from your user configuration.',
         $this->config->store();
     }
 
+    // }}}
 }
 
 ?>

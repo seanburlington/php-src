@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.39 2002/09/06 07:27:27 hyanantha Exp $ */
+/* $Id: link.c,v 1.40 2002/09/06 07:30:51 derick Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -82,7 +82,7 @@ PHP_FUNCTION(linkinfo)
 {
 	zval **filename;
 #if defined(NETWARE) && defined(CLIB_STAT_PATCH)
-    struct stat_libc sb;
+	struct stat_libc sb;
 #else
 	struct stat sb;
 #endif

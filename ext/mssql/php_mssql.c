@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.136 2004/06/30 19:46:57 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.137 2004/07/10 07:46:08 andi Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -348,6 +348,7 @@ PHP_RINIT_FUNCTION(mssql)
 PHP_RSHUTDOWN_FUNCTION(mssql)
 {
 	STR_FREE(MS_SQL_G(appname));
+	MS_SQL_G(appname) = NULL;
 	if (MS_SQL_G(server_message)) {
 		STR_FREE(MS_SQL_G(server_message));
 		MS_SQL_G(server_message) = NULL;

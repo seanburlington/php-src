@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.78 2004/06/26 08:09:28 sesser Exp $ */
+/* $Id: php_variables.c,v 1.79 2004/07/10 07:46:09 andi Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -694,9 +694,12 @@ static zend_bool php_auto_globals_create_server(char *name, uint name_len TSRMLS
 
 static zend_bool php_auto_globals_create_env(char *name, uint name_len TSRMLS_DC)
 {
-	ALLOC_ZVAL(PG(http_globals)[TRACK_VARS_ENV]);
-	array_init(PG(http_globals)[TRACK_VARS_ENV]);
-	INIT_PZVAL(PG(http_globals)[TRACK_VARS_ENV]);
+	zval *env_vars=NULL;
+	ALLOC_ZVAL(env_vars);
+	array_init(env_vars);
+	INIT_PZVAL(env_vars);
+	PG(http_globals)[TRACK_VARS_ENV] = env_vars;
+	
 	php_import_environment_variables(PG(http_globals)[TRACK_VARS_ENV] TSRMLS_CC);
 
 	zend_hash_update(&EG(symbol_table), name, name_len+1, &PG(http_globals)[TRACK_VARS_ENV], sizeof(zval *), NULL);

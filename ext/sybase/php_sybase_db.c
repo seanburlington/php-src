@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.61 2004/04/16 16:27:13 thetaphi Exp $ */
+/* $Id: php_sybase_db.c,v 1.62 2004/07/10 07:46:08 andi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -297,7 +297,9 @@ PHP_MSHUTDOWN_FUNCTION(sybase)
 PHP_RSHUTDOWN_FUNCTION(sybase)
 {
 	efree(php_sybase_module.appname);
+	php_sybase_module.appname = NULL;
 	STR_FREE(php_sybase_module.server_message);
+	php_sybase_module.server_message = NULL;
 	return SUCCESS;
 }
 

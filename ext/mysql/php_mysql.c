@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.145 2002/07/16 19:26:23 sniper Exp $ */
+/* $Id: php_mysql.c,v 1.146 2002/07/21 20:16:03 georg Exp $ */
 
 /* TODO:
  *
@@ -1625,7 +1625,7 @@ PHP_FUNCTION(mysql_real_escape_string)
 
 	new_str = emalloc(str_len * 2 + 1);
 	new_str_len = mysql_real_escape_string(&mysql->conn, new_str, str, str_len);
-	new_str = erealloc(new_str, new_str_len);
+	new_str = erealloc(new_str, new_str_len + 1);
 
 	RETURN_STRINGL(new_str, new_str_len, 0);
 }

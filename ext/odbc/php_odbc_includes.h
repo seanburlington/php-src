@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc_includes.h,v 1.7 2003/08/27 18:21:52 kalowsky Exp $ */
+/* $Id: php_odbc_includes.h,v 1.8 2003/08/28 16:35:32 sniper Exp $ */
 
 #ifndef PHP_ODBC_INCLUDES_H
 #define PHP_ODBC_INCLUDES_H
@@ -266,8 +266,8 @@ int odbc_bindcols(odbc_result *result TSRMLS_DC);
 
 void odbc_sql_error(ODBC_SQL_ERROR_PARAMS);
 
-#define IS_SQL_LONG(x) (x == SQL_LONGVARBINARY || x == SQL_LONGVARCHAR || x == SQL_BLOB)
-#define IS_SQL_BINARY(x) (x == SQL_BINARY || x == SQL_VARBINARY || x == SQL_LONGVARBINARY || x == SQL_BLOB)
+#define IS_SQL_LONG(x) (x == SQL_LONGVARBINARY || x == SQL_LONGVARCHAR)
+#define IS_SQL_BINARY(x) (x == SQL_BINARY || x == SQL_VARBINARY || x == SQL_LONGVARBINARY)
 
 #ifdef ZTS
 # define ODBCG(v) TSRMG(odbc_globals_id, php_odbc_globals *, v)

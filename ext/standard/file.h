@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.49 2002/03/16 16:14:56 wez Exp $ */
+/* $Id: file.h,v 1.50 2002/03/16 16:52:24 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -53,7 +53,7 @@ PHP_FUNCTION(rename);
 PHP_FUNCTION(unlink);
 PHP_FUNCTION(copy);
 PHP_FUNCTION(file);
-PHP_FUNCTION(get_file_contents);
+PHP_FUNCTION(file_get_contents);
 PHP_FUNCTION(set_socket_blocking); /* deprecated */
 PHP_FUNCTION(socket_set_blocking);
 PHP_FUNCTION(socket_set_timeout);

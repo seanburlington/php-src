@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.211 2002/03/16 16:14:56 wez Exp $ */
+/* $Id: file.c,v 1.212 2002/03/16 16:52:24 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -366,9 +366,9 @@ PHP_FUNCTION(get_meta_tags)
 
 /* }}} */
 
-/* {{{ proto string get_file_contents(string filename [, bool use_include_path])
+/* {{{ proto string file_get_contents(string filename [, bool use_include_path])
    Read the entire file into a string */
-PHP_FUNCTION(get_file_contents)
+PHP_FUNCTION(file_get_contents)
 {
 	char *filename;
 	int filename_len;

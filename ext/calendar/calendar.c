@@ -18,10 +18,14 @@
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: calendar.c,v 1.15 2001/07/05 09:55:13 wez Exp $ */
+/* $Id: calendar.c,v 1.16 2001/07/06 09:51:03 dbeu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
+#endif
+
+#ifdef PHP_WIN32
+#define _WINNLS_
 #endif
 
 #include "php.h"

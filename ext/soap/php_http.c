@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.58 2004/12/01 16:59:48 dmitry Exp $ */
+/* $Id: php_http.c,v 1.59 2004/12/01 17:33:32 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -380,7 +380,7 @@ try_again:
 		smart_str_append_const(&soap_headers, " HTTP/1.1\r\n"
 			"Host: ");
 		smart_str_appends(&soap_headers, phpurl->host);
-		if (phpurl->port != 80) {
+		if (phpurl->port != (use_ssl?443:80)) {
 			smart_str_appendc(&soap_headers, ':');
 			smart_str_append_unsigned(&soap_headers, phpurl->port);
 		}

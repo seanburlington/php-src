@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.77 2001/08/17 06:53:26 sterling Exp $ */
+/* $Id: fsock.c,v 1.78 2001/08/17 07:07:34 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -277,8 +277,8 @@ static void php_fsockopen(INTERNAL_FUNCTION_PARAMETERS, int persistent) {
 				key, strlen(key) + 1, NULL);
 	}
     
-	if(key) 
-        efree(key);
+	if (key) 
+		efree(key);
 
 	ZEND_REGISTER_RESOURCE(return_value, sock, php_file_le_socket());
 }

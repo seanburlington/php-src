@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_scandir.h,v 1.2.2.3 2003/02/19 09:28:37 sniper Exp $ */
+/* $Id: php_scandir.h,v 1.2.2.4 2003/02/19 18:45:03 sniper Exp $ */
 
 #ifndef PHP_SCANDIR_H
 #define PHP_SCANDIR_H
@@ -31,10 +31,11 @@
 #include "php_config.h"
 #endif
 
-#ifdef HAVE_SCANDIR
 #ifdef HAVE_DIRENT_H
 #include <dirent.h>
 #endif
+
+#ifdef HAVE_SCANDIR
 #define php_scandir		scandir
 #else
 int php_scandir(const char *dirname, struct dirent **namelist[], int (*selector) (const struct dirent *entry), int (*compare) (const struct dirent **a, const struct dirent **b));

@@ -3,7 +3,7 @@
 // +----------------------------------------------------------------------+
 // | PHP Version 4                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2003 The PHP Group                                |
+// | Copyright (c) 1997-2004 The PHP Group                                |
 // +----------------------------------------------------------------------+
 // | This source file is subject to version 3.0 of the PHP license,       |
 // | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.42.2.14 2003/12/11 23:54:39 cellog Exp $
+// $Id: Package.php,v 1.42.2.15 2004/01/25 23:19:59 pajoye Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.37 2005/02/18 15:11:27 wez Exp $ */
+/* $Id: mysql_driver.c,v 1.38 2005/02/21 16:10:03 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -197,9 +197,9 @@ static int mysql_handle_rollback(pdo_dbh_t *dbh TSRMLS_DC)
 static int mysql_handle_autocommit(pdo_dbh_t *dbh TSRMLS_DC)
 {
 	if (dbh->auto_commit) {
-		return 0 <= mysql_handle_doer(dbh, ZEND_STRL("SET SESSION AUTOCOMMIT=1") TSRMLS_CC);
+		return 0 <= mysql_handle_doer(dbh, ZEND_STRL("SET AUTOCOMMIT=1") TSRMLS_CC);
 	} else {
-		return 0 <= mysql_handle_doer(dbh, ZEND_STRL("SET SESSION AUTOCOMMIT=0") TSRMLS_CC);
+		return 0 <= mysql_handle_doer(dbh, ZEND_STRL("SET AUTOCOMMIT=0") TSRMLS_CC);
 	}
 }
 

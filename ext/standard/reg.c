@@ -28,7 +28,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.10 1999/05/26 18:45:53 andrey Exp $ */
+/* $Id: reg.c,v 1.11 1999/06/05 13:56:18 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -564,6 +564,7 @@ PHP_FUNCTION(split)
 
 	/* churn through str, generating array entries as we go */
 	while ((count == -1 || count > 0) && !(err = regexec(&re, strp, 1, subs, 0))) {
+		printf("In the loop...\n");
 		if (subs[0].rm_so == 0 && subs[0].rm_eo) {
 			/* match is at start of string, return empty string */
 			add_next_index_stringl(return_value, empty_string, 0, 1);
@@ -591,7 +592,9 @@ PHP_FUNCTION(split)
 
 		/* if we're only looking for a certain number of points,
 		   stop looking once we hit it */
-		if (count != -1) count--;
+		if (count != -1) {
+			count--;
+		}
 	}
 
 	/* see if we encountered an error */
@@ -604,7 +607,7 @@ PHP_FUNCTION(split)
 	}
 
 	/* otherwise we just have one last element to add to the array */
-	if (count == -1) {
+	if (count == -1 || err==REG_NOMATCH) {
 		size = endp - strp;
 	
 		add_next_index_stringl(return_value, strp, size, 1);

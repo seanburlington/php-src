@@ -1,4 +1,4 @@
-<?php # $Id: mkdist.php,v 1.11 2004/07/31 18:59:50 wez Exp $
+<?php # $Id: mkdist.php,v 1.12 2005/02/26 00:37:10 edink Exp $
 /* piece together a windows binary distro */
 
 $build_dir = $argv[1];
@@ -222,6 +222,8 @@ $text_files = array(
 	"php.ini-dist" => 	"php.ini-dist",
 	"php.ini-recommended" => "php.ini-recommended",
 	"win32/install.txt" => 	"install.txt",
+	"win32/pws-php5cgi.reg" => "pws-php5cgi.reg",
+	"win32/pws-php5isapi.reg" => "pws-php5isapi.reg",
 );
 
 foreach ($text_files as $src => $dest) {

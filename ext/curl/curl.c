@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.10 2003/05/19 14:19:33 sniper Exp $ */
+/* $Id: curl.c,v 1.124.2.11 2003/06/12 12:28:30 andrey Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -574,7 +574,7 @@ static void curl_free_slist(void **slist)
 /* }}} */
 
 
-/* {{{ proto array curl_version(void)
+/* {{{ proto string curl_version(void)
    Return cURL version information. */
 PHP_FUNCTION(curl_version)
 {
@@ -1023,7 +1023,7 @@ PHP_FUNCTION(curl_exec)
 }
 /* }}} */
 
-/* {{{ proto string curl_getinfo(resource ch, int opt)
+/* {{{ proto mixed curl_getinfo(resource ch, int opt)
    Get information regarding a specific transfer */
 PHP_FUNCTION(curl_getinfo)
 {

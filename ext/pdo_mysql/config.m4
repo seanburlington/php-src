@@ -1,8 +1,8 @@
 dnl
-dnl $Id: config.m4,v 1.15 2005/02/13 07:15:02 hholzgra Exp $
+dnl $Id: config.m4,v 1.16 2005/02/13 07:17:06 hholzgra Exp $
 dnl
 
-AC_DEFUN(PDO_MYSQL_LIB_CHK, [
+AC_DEFUN([PDO_MYSQL_LIB_CHK], [
   str="$PDO_MYSQL_DIR/$1/libmysqlclient.*"
   for j in `echo $str`; do
     if test -r $j; then

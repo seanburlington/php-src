@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_odbc.c,v 1.8 2005/01/07 05:25:35 wez Exp $ */
+/* $Id: pdo_odbc.c,v 1.9 2005/01/11 14:28:37 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -121,7 +121,6 @@ PHP_MINIT_FUNCTION(pdo_odbc)
 PHP_MSHUTDOWN_FUNCTION(pdo_odbc)
 {
 	php_pdo_unregister_driver(&pdo_odbc_driver);
-	pdo_odbc_fini_error_table();
 	return SUCCESS;
 }
 /* }}} */

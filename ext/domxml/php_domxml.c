@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.24 2001/01/05 14:34:15 andi Exp $ */
+/* $Id: php_domxml.c,v 1.25 2001/01/12 16:49:06 sniper Exp $ */
 
 
 #include "php.h"
@@ -1406,8 +1406,10 @@ static int node_children(zval **children, xmlNode *nodep)
 		zend_hash_next_index_insert((*children)->value.ht, &child, sizeof(zval *), NULL);
 
 		/* Add name, content and type as properties */
-		add_property_stringl(child, "name", (char *) last->name, strlen(last->name), 1);
-		add_property_long(child, "type", last->type);
+		if(last->name)
+			add_property_stringl(child, "name", (char *) last->name, strlen(last->name), 1);
+		if(last->type)
+			add_property_long(child, "type", last->type);
 		content = xmlNodeGetContent(last);
 		if(content)
 			add_property_stringl(child, "content", (char *) content, strlen(content), 1);

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.25 2000/02/11 19:16:36 andrei Exp $ */
+/* $Id: exec.c,v 1.26 2000/02/11 19:19:06 andrei Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -258,7 +258,7 @@ PHP_FUNCTION(system)
 }
 /* }}} */
 
-/* {{{ proto int passthru(string command [, int return_value])
+/* {{{ proto void passthru(string command [, int return_value])
    Execute an external program and display raw output */
 PHP_FUNCTION(passthru)
 {

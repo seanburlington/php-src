@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.60 2002/11/11 12:04:12 helly Exp $ */
+/* $Id: dba.c,v 1.61 2002/11/11 20:53:41 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -213,7 +213,7 @@ static void dba_close(dba_info *info TSRMLS_DC)
 	if (info->path) efree(info->path);
 	if (info->fp && info->fp!=info->lock.fp) php_stream_close(info->fp);
 	if (info->lock.fd) {
-		flock(info->lock.fd, LOCK_UN);
+		php_flock(info->lock.fd, LOCK_UN);
 		close(info->lock.fd);
 		info->lock.fd = 0;
 	}
@@ -473,7 +473,7 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			FREENOW;
 			RETURN_FALSE;
 		}
-		if (flock(info->lock.fd, lock_mode)) {
+		if (php_flock(info->lock.fd, lock_mode)) {
 			error = "Unable to establish lock"; /* force failure exit */
 		}
 	}

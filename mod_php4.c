@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.23 1999/09/12 03:08:29 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.24 1999/09/12 20:36:48 zeev Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -488,7 +488,7 @@ void php_init_handler(server_rec *s, pool *p)
 		apache_php_initialized = 1;
 	}
 #if MODULE_MAGIC_NUMBER >= 19980527
-	if (INI_INT("expose_php")) {
+	if (INI_INT(PG(expose_php)) {
 		ap_add_version_component("PHP/" PHP_VERSION);
 	}
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.28 1999/09/11 18:38:34 sas Exp $ */
+/* $Id: file.c,v 1.29 1999/09/12 20:36:48 zeev Exp $ */
 
 /* Synced with php3 revision 1.218 1999-06-16 [ssb] */
 
@@ -77,6 +77,10 @@ extern int fclose();
 
 #ifdef HAVE_SYS_MMAN_H
 #include <sys/mman.h>
+#endif
+
+#ifndef MAP_FAILED
+#define MAP_FAILED ((void *) -1)
 #endif
 
 static void _php3_closesocket(int *);

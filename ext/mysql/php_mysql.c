@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.61 2000/12/02 17:27:11 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.62 2001/01/12 08:03:24 rasmus Exp $ */
 
 
 /* TODO:
@@ -71,6 +71,10 @@ static int le_result, le_link, le_plink;
 #	ifdef mysql_errno
 #	define HAVE_MYSQL_ERRNO
 #	endif
+#endif
+
+#if MYSQL_VERSION_ID > 32133 || defined(FIELD_TYPE_TINY)
+#define MYSQL_HAS_TINY
 #endif
 
 #define MYSQL_ASSOC		1<<0
@@ -1528,7 +1532,7 @@ static char *php_mysql_get_field_name(int field_type)
 		case FIELD_TYPE_VAR_STRING:
 			return "string";
 			break;
-#ifdef FIELD_TYPE_TINY
+#ifdef MYSQL_HAS_TINY
 		case FIELD_TYPE_TINY:
 #endif
 		case FIELD_TYPE_SHORT:

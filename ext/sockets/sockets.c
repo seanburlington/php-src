@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.35.2.1 2001/05/24 12:42:07 ssb Exp $ */
+/* $Id: sockets.c,v 1.35.2.2 2001/05/29 15:57:54 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1169,7 +1169,7 @@ PHP_FUNCTION(bind)
 			sa->sin_addr.s_addr = addr_buf.s_addr;
 		}
 
-		ret = bind(Z_LVAL_PP(arg0), (struct sockaddr *) sa, sizeof(sa_storage));
+		ret = bind(Z_LVAL_PP(arg0), (struct sockaddr *) sa, length);
 	} else {
 		RETURN_LONG(-EPROTONOSUPPORT);
 	}

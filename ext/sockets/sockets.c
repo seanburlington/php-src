@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.127 2002/12/09 13:35:57 edink Exp $ */
+/* $Id: sockets.c,v 1.128 2002/12/20 15:44:51 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -747,7 +747,7 @@ PHP_FUNCTION(socket_write)
 
 	ZEND_FETCH_RESOURCE(php_sock, php_socket *, &arg1, -1, le_socket_name, le_socket);
 
-	if (ZEND_NUM_ARGS() < 4) {
+	if (ZEND_NUM_ARGS() < 3) {
 		length = str_len;
 	}
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.108 2003/04/06 22:37:45 sniper Exp $ */
+/* $Id: datetime.c,v 1.109 2003/05/04 11:19:57 moriyoshi Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -314,7 +314,11 @@ static void php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 #else
 		tzone = timezone;
 #endif
-		tname[0] = tzname[0];
+		if (tzname[0] != NULL) {
+			tname[0] = tzname[0];
+		} else {
+			tname[0] = "???";
+		}
 #endif
 	}
 

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.234 2003/06/16 17:35:16 iliaa Exp $ */
+/* $Id: array.c,v 1.235 2003/07/22 16:08:49 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3643,11 +3643,7 @@ PHP_FUNCTION(array_key_exists)
 
 	switch (Z_TYPE_PP(key)) {
 		case IS_STRING:
-			if (zend_is_numeric_key(*key, &lvalue)) {
-				if (zend_hash_index_exists(HASH_OF(*array), lvalue)) {
-					RETURN_TRUE;
-				}
-			} else if (zend_hash_exists(HASH_OF(*array), Z_STRVAL_PP(key), Z_STRLEN_PP(key)+1)) {
+			if (zend_symtable_exists(HASH_OF(*array), Z_STRVAL_PP(key), Z_STRLEN_PP(key)+1)) {
 				RETURN_TRUE;
 			}
 			RETURN_FALSE;

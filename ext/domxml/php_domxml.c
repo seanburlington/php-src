@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.18 2003/04/10 12:46:11 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.19 2003/04/10 13:11:00 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -1544,7 +1544,7 @@ PHP_MSHUTDOWN_FUNCTION(domxml)
 /*	If you want do find memleaks in this module, compile libxml2 with --with-mem-debug and
 	uncomment the following line, this will tell you the amount of not freed memory
 	and the total used memory into apaches error_log  */
-	xmlMemoryDump(); 
+/*	xmlMemoryDump(); */
 
 	return SUCCESS;
 }

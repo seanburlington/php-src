@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.103 2003/12/10 18:56:04 iliaa Exp $ 
+   $Id: sqlite.c,v 1.104 2003/12/14 18:45:36 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1071,7 +1071,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.103 2003/12/10 18:56:04 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.104 2003/12/14 18:45:36 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1376,10 +1376,8 @@ next_row:
 		/* first row - lets copy the column names */
 		rres->col_names = safe_emalloc(rres->ncolumns, sizeof(char *), 0);
 		for (i = 0; i < rres->ncolumns; i++) {
-			colname = strchr(colnames[i], '.');
-			if (!colname++) {
-				colname = (char*)colnames[i];
-			}
+			colname = (char*)colnames[i];
+
 			if (SQLITE_G(assoc_case) == 1) {
 				php_sqlite_strtoupper(colname);
 			} else if (SQLITE_G(assoc_case) == 2) {

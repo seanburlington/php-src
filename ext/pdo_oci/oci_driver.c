@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.2 2004/05/18 05:01:16 gschlossnagle Exp $ */
+/* $Id: oci_driver.c,v 1.3 2004/05/19 12:40:31 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -132,7 +132,7 @@ static int oci_handle_closer(pdo_dbh_t *dbh TSRMLS_DC) /* {{{ */
 }
 /* }}} */
 
-static int oci_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pdo_stmt_t *stmt TSRMLS_DC)
+static int oci_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pdo_stmt_t *stmt, long options, zval *driver_options TSRMLS_DC)
 {
 	pdo_oci_db_handle *H = (pdo_oci_db_handle *)dbh->driver_data;
 	pdo_oci_stmt *S = ecalloc(1, sizeof(*S));

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pdf.c,v 1.125 2003/06/22 14:33:04 andrey Exp $ */
+/* $Id: pdf.c,v 1.126 2003/08/11 02:32:16 sniper Exp $ */
 
 /* pdflib 2.02 ... 3.0x is subject to the ALADDIN FREE PUBLIC LICENSE.
    Copyright (C) 1997-1999 Thomas Merz. 2000-2001 PDFlib GmbH */
@@ -254,31 +254,21 @@ static void _free_pdf_doc(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 static void custom_errorhandler(PDF *p, int type, const char *shortmsg)
 {
 	TSRMLS_FETCH();
-	switch (type){
-		case PDF_NonfatalError:
-			/*
-			 * PDFlib warnings should be visible to the user.
-			 * If he decides to live with PDFlib warnings
-			 * he may use the PDFlib function
-			 * pdf_set_parameter($p, "warning" 0) to switch off
-			 * the warnings inside PDFlib.
-			 */
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Internal PDFlib warning: %s", shortmsg);
-			return;
-		case PDF_MemoryError: /* give up in all other cases */
-		case PDF_IOError:
-		case PDF_RuntimeError:
-		case PDF_IndexError:
-		case PDF_TypeError:
-		case PDF_DivisionByZero:
-		case PDF_OverflowError:
-		case PDF_SyntaxError:
-		case PDF_ValueError:
-		case PDF_SystemError:
-		case PDF_UnknownError:
-		default:
-			php_error_docref(NULL TSRMLS_CC, E_ERROR,"PDFlib error: %s", shortmsg);
-		}
+
+	if (type == PDF_NonfatalError) {
+		/*
+		 * PDFlib warnings should be visible to the user.
+		 * If he decides to live with PDFlib warnings
+		 * he may use the PDFlib function
+		 * pdf_set_parameter($p, "warning" 0) to switch off
+		 * the warnings inside PDFlib.
+		 */
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Internal PDFlib warning: %s", shortmsg);
+		return;
+	} else {
+		/* give up in all other cases */
+		php_error_docref(NULL TSRMLS_CC, E_ERROR,"PDFlib error: %s", shortmsg);
+	}
 }
 /* }}} */
 
@@ -332,7 +322,7 @@ PHP_MINFO_FUNCTION(pdf)
 #else
 	php_info_print_table_row(2, "PDFlib GmbH Version", tmp );
 #endif
-	php_info_print_table_row(2, "Revision", "$Revision: 1.125 $" );
+	php_info_print_table_row(2, "Revision", "$Revision: 1.126 $" );
 	php_info_print_table_end();
 
 }

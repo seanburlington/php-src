@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.49 2005/02/25 22:13:08 rrichards Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.50 2005/03/17 13:11:47 rrichards Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2612,10 +2612,7 @@ PHP_FUNCTION(domxml_node_insert_before)
 		if (new_child == NULL)
 			new_child = xmlAddPrevSibling(refp, child);
 	} else {
-		/* first unlink node, if child is already a child of parent
-			for some strange reason, this is needed
-		 */
-		if (child->parent == parent){
+		if (child->parent != NULL){
 			xmlUnlinkNode(child);
 		}
 		new_child = xmlAddChild(parent, child);

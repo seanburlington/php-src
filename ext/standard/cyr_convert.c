@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyr_convert.c,v 1.5 1999/12/18 04:01:14 zeev Exp $ */
+/* $Id: cyr_convert.c,v 1.6 1999/12/20 02:09:58 evan Exp $ */
 
 #include <stdlib.h>
 
@@ -271,20 +271,20 @@ static char * php_convert_cyr_string(unsigned char *str, char from, char to)
    Convert from one Cyrillic character set to another */
 PHP_FUNCTION(convert_cyr_string)
 {
-    pval *str_arg, *fr_cs, *to_cs;
+    pval **str_arg, **fr_cs, **to_cs;
 	unsigned char *str;
 
-    if (ARG_COUNT(ht) != 3 || getParameters(ht,3,&str_arg, &fr_cs, &to_cs)==FAILURE)
+    if (ARG_COUNT(ht) != 3 || zend_get_parameters_ex(3,&str_arg,&fr_cs, &to_cs)==FAILURE)
     {
         WRONG_PARAM_COUNT;
     }
-    convert_to_string(str_arg);
-    convert_to_string(fr_cs);
-    convert_to_string(to_cs);
+    convert_to_string_ex(str_arg);
+    convert_to_string_ex(fr_cs);
+    convert_to_string_ex(to_cs);
 
-	str = (unsigned char*) str_arg->value.str.val;
+	str = (unsigned char*) (*str_arg)->value.str.val;
 	
-	php_convert_cyr_string(str, fr_cs->value.str.val[0], to_cs->value.str.val[0]);
+	php_convert_cyr_string(str, (*fr_cs)->value.str.val[0],(*to_cs)->value.str.val[0]);
 	RETVAL_STRING((char *)str, 1)
 }
 /* }}} */

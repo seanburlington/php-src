@@ -16,13 +16,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_signal.h,v 1.4 2002/02/28 08:26:35 sebastian Exp $ */
+/* $Id: php_signal.h,v 1.5 2002/08/22 04:20:10 jason Exp $ */
 
 #include <signal.h>
 #ifndef PHP_SIGNAL_H
 #define PHP_SIGNAL_H
 
 typedef void Sigfunc(int);
-Sigfunc *php_signal(int signo, Sigfunc *func);
+Sigfunc *php_signal(int signo, Sigfunc *func, int restart);
 
 #endif

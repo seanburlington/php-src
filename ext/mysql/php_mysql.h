@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.15 2000/09/20 21:43:57 brianlmoon Exp $ */
+/* $Id: php_mysql.h,v 1.16 2000/10/11 18:27:21 zeev Exp $ */
 
 #ifndef PHP_MYSQL_H
 #define PHP_MYSQL_H
@@ -75,6 +75,7 @@ PHP_FUNCTION(mysql_field_table);
 PHP_FUNCTION(mysql_field_len);
 PHP_FUNCTION(mysql_field_type);
 PHP_FUNCTION(mysql_field_flags);
+PHP_FUNCTION(mysql_escape_string);
 
 ZEND_BEGIN_MODULE_GLOBALS(mysql)
 	long default_link;

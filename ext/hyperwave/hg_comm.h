@@ -23,7 +23,7 @@
  */
 
 
-/* $Id: hg_comm.h,v 1.6 2000/03/23 19:00:19 steinm Exp $ */
+/* $Id: hg_comm.h,v 1.7 2000/06/15 23:45:04 andi Exp $ */
 
 #ifndef _HG_COMM_H
 #define _HG_COMM_H
@@ -97,7 +97,7 @@
 #define COLLECTION                    1
 
 
-#if WIN32|WINNT
+#ifdef PHP_WIN32
 # define SOCK_ERR INVALID_SOCKET
 # define SOCK_CONN_ERR SOCKET_ERROR
 # define HWSOCK_FCLOSE(s) closesocket(s)

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.40 2000/06/13 14:37:34 jimjag Exp $ */
+/* $Id: db.c,v 1.41 2000/06/15 23:45:03 andi Exp $ */
 #define IS_EXT_MODULE
 #ifdef COMPILE_DL_DB
 # include "dl/phpdl.h"
@@ -42,7 +42,7 @@
 #ifdef PHP_31
 #include "os/nt/flock.h"
 #else
-#if WIN32|WINNT
+#ifdef PHP_WIN32
 #include "win32/flock.h"
 #else
 #include <sys/file.h>

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.56 2000/06/05 19:47:45 andi Exp $ */
+/* $Id: xml.c,v 1.57 2000/06/15 23:45:04 andi Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -29,7 +29,7 @@
 
 #if HAVE_LIBEXPAT
 
-# if !(WIN32|WINNT)
+#ifndef PHP_WIN32
 #  include "build-defs.h"
 # endif
 # include "ext/standard/head.h"

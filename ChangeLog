@@ -1,3 +1,13 @@
+2004-12-11  Derick Rethans  <php@derickrethans.nl>
+
+    * (PHP_4_3)
+      acinclude.m4
+      acinclude.m4:
+      - MFH: Generate all iconv headers by default
+
+    * acinclude.m4:
+      - Generate all iconv headers by default
+
 2004-12-10  Andi Gutmans  <andi@zend.com>
 
     * main/main.c:
@@ -14006,7 +14016,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1830 2004/12/11 01:33:16 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1831 2004/12/12 01:41:02 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.283 2000/07/18 11:02:28 ssb Exp $ */
+/* $Id: main.c,v 1.284 2000/07/28 15:21:19 hholzgra Exp $ */
 
 
 #include <stdio.h>
@@ -1168,6 +1168,28 @@ PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_
 		EG(active_op_array) = EG(main_op_array);
 		zend_execute(EG(main_op_array) ELS_CC);
 	}
+}
+
+PHPAPI int php_lint_script(zend_file_handle *file CLS_DC ELS_DC PLS_DC)
+{
+	SLS_FETCH();
+
+	php_hash_environment(ELS_C SLS_CC PLS_CC);
+
+	zend_activate_modules();
+	PG(modules_activated)=1;
+
+	if (setjmp(EG(bailout))!=0) {
+		return FAILURE;
+	}
+
+#ifdef PHP_WIN32
+	UpdateIniFromRegistry(primary_file->filename);
+#endif
+
+	EG(main_op_array) = zend_compile_files(ZEND_REQUIRE CLS_CC, 1, file);
+
+	return (EG(main_op_array)) ? SUCCESS : FAILURE;
 }
 
 #ifdef PHP_WIN32

@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.15 2002/03/19 03:51:01 wez Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.16 2002/03/21 17:02:47 wez Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,6 +34,9 @@ php_stream * php_stream_url_wrap_php(char * path, char * mode, int options, char
 {
 	FILE * fp = NULL;
 	php_stream * stream = NULL;
+
+	if (!strncasecmp(path, "php://", 6))
+		path += 6;
 	
 	if (!strcasecmp(path, "stdin")) {
 		fp = fdopen(dup(STDIN_FILENO), mode);

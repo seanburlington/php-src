@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.165.2.1 2004/09/28 09:30:20 wez Exp $ */
+/* $Id: sockets.c,v 1.165.2.2 2005/02/12 18:15:03 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -50,7 +50,6 @@
 # include <sys/uio.h>
 # define IS_INVALID_SOCKET(a)	(a->bsd_socket < 0)
 # define set_errno(a) (errno = a)
-# define set_h_errno(a) (h_errno = a)
 #else /* windows */
 # include "php_sockets.h"
 # include "php_sockets_win.h"

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sockets_win.h,v 1.10 2004/01/08 17:32:48 sniper Exp $ */
+/* $Id: php_sockets_win.h,v 1.10.2.1 2005/02/12 18:15:03 sniper Exp $ */
 
 
 #ifdef PHP_WIN32
@@ -41,7 +41,6 @@
 #define errno WSAGetLastError()
 #define h_errno WSAGetLastError()
 #define set_errno(a) WSASetLastError(a)
-#define set_h_errno(a) WSASetLastError(a)
 #define close(a) closesocket(a)
 
 struct	sockaddr_un {

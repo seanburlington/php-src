@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ticks.h,v 1.12 2004/01/08 17:33:04 sniper Exp $ */
+/* $Id: php_ticks.h,v 1.13 2004/02/20 08:04:30 hholzgra Exp $ */
 
 #ifndef PHP_TICKS_H
 #define PHP_TICKS_H
@@ -24,8 +24,11 @@
 int php_startup_ticks(TSRMLS_D);
 void php_shutdown_ticks(TSRMLS_D);
 void php_run_ticks(int count);
+
+BEGIN_EXTERN_C()
 PHPAPI void php_add_tick_function(void (*func)(int));
 PHPAPI void php_remove_tick_function(void (*func)(int));
+END_EXTERN_C()
 
 #endif
 

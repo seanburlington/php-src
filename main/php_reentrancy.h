@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_reentrancy.h,v 1.21 2004/01/08 17:33:04 sniper Exp $ */
+/* $Id: php_reentrancy.h,v 1.22 2004/02/20 08:04:30 hholzgra Exp $ */
 
 #ifndef PHP_REENTRANCY_H
 #define PHP_REENTRANCY_H
@@ -48,6 +48,8 @@
 #undef HAVE_CTIME_R
 #undef HAVE_GMTIME_R
 #endif
+
+BEGIN_EXTERN_C()
 
 #if defined(HAVE_POSIX_READDIR_R)
 #define php_readdir_r readdir_r
@@ -113,6 +115,8 @@ PHPAPI int php_rand_r(unsigned int *seed);
 #else
 #define php_rand_r rand_r
 #endif
+
+END_EXTERN_C()
 
 #if !defined(ZTS)
 #undef PHP_NEED_REENTRANCY

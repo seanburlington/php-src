@@ -16,13 +16,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.50 2004/01/08 17:33:04 sniper Exp $ */
+/* $Id: php_output.h,v 1.51 2004/02/20 08:04:30 hholzgra Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
 
 typedef void (*php_output_handler_func_t)(char *output, uint output_len, char **handled_output, uint *handled_output_len, int mode TSRMLS_DC);
 
+BEGIN_EXTERN_C()
 PHPAPI void php_output_startup(void);
 PHPAPI void php_output_activate(TSRMLS_D);
 PHPAPI void php_output_set_status(zend_bool status TSRMLS_DC);
@@ -44,6 +45,7 @@ PHPAPI int php_ob_handler_used(char *handler_name TSRMLS_DC);
 PHPAPI int php_ob_init_conflict(char *handler_new, char *handler_set TSRMLS_DC);
 PHPAPI int php_ob_get_buffer(zval *p TSRMLS_DC);
 PHPAPI int php_ob_get_length(zval *p TSRMLS_DC);
+END_EXTERN_C()
 
 PHP_FUNCTION(ob_start);
 PHP_FUNCTION(ob_flush);

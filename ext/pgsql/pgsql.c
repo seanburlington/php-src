@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.150.2.4 2002/04/04 15:29:34 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.150.2.5 2002/04/05 06:45:25 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -975,7 +975,7 @@ PHP_FUNCTION(pg_affected_rows)
 PHP_FUNCTION(pg_last_notice) 
 {
 	if (PGG(last_notice)) {
-		RETURN_STRINGL(PGG(last_notice), PGG(last_notice_len), 0);
+		RETURN_STRINGL(PGG(last_notice), PGG(last_notice_len), 1);
 	} else {       
 		RETURN_FALSE;
 	}

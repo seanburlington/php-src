@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.26 2002/05/20 00:17:43 ssb Exp $
+// $Id: Install.php,v 1.27 2002/05/20 01:22:00 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -94,7 +94,7 @@ four ways of specifying packages.
                     ),
                 'nocompress' => array(
                     'shortopt' => 'Z',
-                    'request uncompressed files when downloading',
+                    'doc' => 'request uncompressed files when downloading',
                     ),
                 ),
             'doc' => 'Upgrades one or more PEAR packages.  See documentation for the

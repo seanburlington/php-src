@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.10 2000/06/16 18:46:57 hholzgra Exp $ */
+/* $Id: levenshtein.c,v 1.11 2000/08/01 07:57:19 hholzgra Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -24,7 +24,7 @@
 #include "php_string.h"
 
 /* faster, but obfuscated, all operations have a cost of 1 */
-static int fastest_levdist(const char *s1, const char *s2) 
+int fastest_levdist(const char *s1, const char *s2) 
 {
 	register char *p1,*p2; 
 	register int i,j,n;

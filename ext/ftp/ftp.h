@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.26 2002/07/26 22:00:25 sesser Exp $ */
+/* $Id: ftp.h,v 1.27 2002/08/25 22:17:55 sebastian Exp $ */
 
 #ifndef	FTP_H
 #define	FTP_H
@@ -81,7 +81,7 @@ typedef struct ftpbuf
 /* open a FTP connection, returns ftpbuf (NULL on error)
  * port is the ftp port in network byte order, or 0 for the default
  */
-ftpbuf_t*	ftp_open(const char *host, short port, long timeout_sec);
+ftpbuf_t*	ftp_open(const char *host, short port, long timeout_sec TSRMLS_DC);
 
 /* quits from the ftp session (it still needs to be closed)
  * return true on success, false on error

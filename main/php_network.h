@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_network.h,v 1.24 2002/08/19 22:59:10 wez Exp $ */
+/* $Id: php_network.h,v 1.25 2002/08/25 22:17:56 sebastian Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -91,7 +91,7 @@ typedef struct {
 #endif
 
 
-int php_hostconnect(const char *host, unsigned short port, int socktype, struct timeval *timeout);
+int php_hostconnect(const char *host, unsigned short port, int socktype, struct timeval *timeout TSRMLS_DC);
 PHPAPI int php_connect_nonb(int sockfd, const struct sockaddr *addr, socklen_t addrlen, struct timeval *timeout);
 
 #ifdef PHP_WIN32

@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.317 2000/09/09 15:02:15 zeev Exp $ */
+/* $Id: main.c,v 1.318 2000/09/09 23:21:44 derick Exp $ */
 
 
 #include <stdio.h>
@@ -122,7 +122,7 @@ static PHP_INI_MH(OnChangeMemoryLimit)
 	int new_limit;
 
 	if (new_value) {
-		new_limit = php_atoi(new_value);
+		new_limit = php_atoi(new_value, new_value_length);
 	} else {
 		new_limit = 1<<30;		/* effectively, no limit */
 	}

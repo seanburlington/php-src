@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.43 2004/02/13 02:20:20 iliaa Exp $ */
+/* $Id: pspell.c,v 1.44 2004/05/18 12:32:05 edink Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -623,19 +623,19 @@ PHP_FUNCTION(pspell_config_create)
 	int ind;
 
 	PspellConfig *config;
+
+#ifdef PHP_WIN32
+	TCHAR aspell_dir[200];
+	TCHAR data_dir[220];
+	TCHAR dict_dir[220];
+	HKEY hkey;
+	DWORD dwType,dwLen;
+#endif
 	
 	argc = ZEND_NUM_ARGS();
 	if (argc < 1 || argc > 4 || zend_get_parameters_ex(argc,&language,&spelling,&jargon,&encoding) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
-
-#ifdef PHP_WIN32
-        TCHAR aspell_dir[200];
-        TCHAR data_dir[220];
-        TCHAR dict_dir[220];
-        HKEY hkey;
-        DWORD dwType,dwLen;
-#endif
 
 	config = new_pspell_config();
 

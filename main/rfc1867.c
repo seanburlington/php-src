@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.121 2002/10/24 02:56:28 moriyoshi Exp $ */
+/* $Id: rfc1867.c,v 1.122 2002/10/24 02:59:01 moriyoshi Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -520,6 +520,8 @@ static char *substring_conf(char *start, int len, char quote TSRMLS_DC)
 			} else {
 				*resp++ = start[i];
 			}
+#else
+			*resp++ = start[i];
 #endif
 		}
 	}

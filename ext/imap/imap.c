@@ -22,7 +22,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: imap.c,v 1.50 2000/03/11 20:48:46 andi Exp $ */
+/* $Id: imap.c,v 1.51 2000/03/11 20:57:34 andi Exp $ */
 
 #define IMAP41
 
@@ -46,7 +46,7 @@
 #include "imap.h"
 #include "mail.h"
 #include "rfc822.h"
-#include "zend_modules.h"
+#include "modules.h"
 #if (WIN32|WINNT)
 #include "winsock.h"
 MAILSTREAM DEFAULTPROTO;

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.153 2001/09/11 23:15:18 asautins Exp $ */
+/* $Id: oci8.c,v 1.154 2001/09/11 23:16:32 asautins Exp $ */
 
 /* TODO list:
  *
@@ -620,7 +620,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.153 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.154 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -4639,7 +4639,7 @@ PHP_FUNCTION(ocicollgetelem)
 			RETURN_FALSE;
 		}
 		
-		// Return false if value does not exist at that location
+		/* Return false if value does not exist at that location */
 		if(exists == 0) {
 			RETURN_FALSE;
 		}

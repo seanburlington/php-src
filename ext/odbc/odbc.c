@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: odbc.c,v 1.1 1999/04/19 15:04:11 ssb Exp $ */
+/* $Id: odbc.c,v 1.2 1999/04/19 17:24:25 ssb Exp $ */
 
 /* This file is based on the Adabas D extension.
  * Adabas D will no longer be supported as separate module.
@@ -50,8 +50,8 @@
 #include "php.h"
 #include "dl/phpdl.h"
 #include "ext/standard/php3_standard.h"
-#include "php3_unified_odbc.h"
-#include "head.h"
+#include "php3_odbc.h"
+#include "functions/head.h"
 #include "snprintf.h"
 
 #if HAVE_UODBC

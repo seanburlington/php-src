@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.90 2002/04/20 17:24:37 jimw Exp $
+dnl $Id: config.m4,v 1.91 2002/04/20 18:02:14 jimw Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -217,6 +217,16 @@ if test "$PHP_GD" = "php"; then
 		libgd/wbmp.c libgd/gd_wbmp.c libgd/gdhelpers.c libgd/gd_topal.c"
   PHP_NEW_EXTENSION(gd, gd.c gdcache.c gdttf.c gdt1.c $sources, $ext_shared,,-I@ext_srcdir@/libgd)
   PHP_ADD_BUILD_DIR($ext_builddir/libgd)
+
+dnl Various checks for GD features
+  PHP_GD_TTSTR
+  PHP_GD_JPEG
+  PHP_GD_PNG
+  PHP_GD_XPM
+  PHP_GD_FREETYPE2
+  PHP_GD_FREETYPE1
+  PHP_GD_T1LIB
+
 else
  if test "$PHP_GD" != "no"; then
 

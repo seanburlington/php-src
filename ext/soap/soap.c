@@ -12,10 +12,12 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Dmitry Stogov <dmitry@php.net>                               |
+  | Authors: Brad Lafountain <rodif_bl@yahoo.com>                        |
+  |          Shane Caraveo <shane@caraveo.com>                           |
+  |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.59 2004/01/29 11:26:52 dmitry Exp $ */
+/* $Id: soap.c,v 1.60 2004/01/29 11:51:11 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

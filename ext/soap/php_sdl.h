@@ -12,10 +12,12 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Dmitry Stogov <dmitry@php.net>                               |
+  | Authors: Brad Lafountain <rodif_bl@yahoo.com>                        |
+  |          Shane Caraveo <shane@caraveo.com>                           |
+  |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.h,v 1.21 2004/01/29 09:27:06 derick Exp $ */
+/* $Id: php_sdl.h,v 1.22 2004/01/29 11:51:11 dmitry Exp $ */
 
 #ifndef PHP_SDL_H
 #define PHP_SDL_H

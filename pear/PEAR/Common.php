@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.120 2004/03/12 18:05:08 mj Exp $
+// $Id: Common.php,v 1.121 2004/03/12 18:22:48 pajoye Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -51,7 +51,7 @@ $GLOBALS['_PEAR_Common_tempfiles'] = array();
  * Valid maintainer roles
  * @var array
  */
-$GLOBALS['_PEAR_Common_maintainer_roles'] = array('lead','developer','contributor','helper', 'emeritus');
+$GLOBALS['_PEAR_Common_maintainer_roles'] = array('lead','developer','contributor','helper');
 
 /**
  * Valid release states

@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.47 2000/03/30 22:38:49 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.48 2000/03/30 22:39:29 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -298,7 +298,7 @@ PHPAPI FILE *php_fopen_primary_script(void)
 	temp = estrdup(fn);
 	php_dirname(temp, strlen(temp));
 	if (*temp) {
-		chdir(temp);
+		PHP_CHDIR(temp);
 	}
 	efree(temp);
 	SG(request_info).path_translated = fn;

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.101 2000/03/11 11:20:09 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.102 2000/03/11 11:36:46 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -800,7 +800,6 @@ FEO
 
 # run this only when generating all the files?
 if true; then
-  chmod +x scripts/mkextlib
   # Hacking while airborne considered harmful.
   #
   echo "creating internal_functions.c"

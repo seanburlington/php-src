@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.39 2001/12/11 15:30:00 sebastian Exp $ */
+/* $Id: openssl.c,v 1.40 2002/01/31 09:57:27 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2151,7 +2151,7 @@ PHP_FUNCTION(openssl_pkcs7_sign)
 	char * extracertsfilename = NULL; long extracertsfilename_len;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sszza!|ls",
-				&infilename, &infilename_len, *outfilename, &outfilename_len,
+				&infilename, &infilename_len, &outfilename, &outfilename_len,
 				&zcert, &zprivkey, &zheaders, &flags, &extracertsfilename,
 				&extracertsfilename_len) == FAILURE)
 		return;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.258 2001/10/22 15:18:06 andrei Exp $ */
+/* $Id: session.c,v 1.259 2001/10/22 16:07:34 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1182,7 +1182,6 @@ PHP_FUNCTION(session_cache_expire)
 	zval **p_cache_expire;
 	int ac = ZEND_NUM_ARGS();
 	long old;
-	PSLS_FETCH();
 
 	old = PS(cache_expire);
 

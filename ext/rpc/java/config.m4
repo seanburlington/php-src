@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.31 2002/04/21 02:50:37 sniper Exp $
+dnl $Id: config.m4,v 1.32 2002/05/11 03:11:45 mfischer Exp $
 dnl
 
 PHP_ARG_WITH(java, for JAVA support,
@@ -20,6 +20,12 @@ if test "$PHP_JAVA" != "no"; then
       JAVA_JAR="$JAVA_JAR cf"
     else
       JAVA_JAR=
+    fi
+    PHP_JAVAC=`which javac`
+    if test -z "$PHP_JAVAC"; then
+        AC_MSG_ERROR([Unable to locate the javac binary in your system path
+Either adjust your Java installation or provide the Java installation path,
+e.g. --with-java=/java expecting /java/bin/ to contain the binaries])
     fi
     PHP_JAVA=`cd \`dirname \\\`which javac\\\`\`/..;pwd`
   else

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sybase.c,v 1.14 1999/11/05 08:48:05 thies Exp $ */
+/* $Id: sybase.c,v 1.15 1999/11/19 13:06:11 zeev Exp $ */
 
 
 #include "php.h"
@@ -927,9 +927,10 @@ static PHP_FUNCTION(sybase_fetch_hash)
 	for (i=0; i<result->num_fields; i++) {
 		MAKE_STD_ZVAL(tmp);
 		*tmp = result->data[result->cur_row][i];
-		pval_copy_constructor(tmp);
 		if (PG(magic_quotes_runtime) && tmp->type == IS_STRING) {
-			tmp->value.str.val = php_addslashes(tmp->value.str.val,tmp->value.str.len,&tmp->value.str.len,1);
+			tmp->value.str.val = php_addslashes(tmp->value.str.val,tmp->value.str.len,&tmp->value.str.len,0);
+		} else {
+			pval_copy_constructor(tmp);
 		}
 		zend_hash_index_update(return_value->value.ht, i, (void *) &tmp, sizeof(pval *), NULL);
 		tmp->refcount++;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.560 2003/01/14 18:26:47 andrey Exp $ */
+/* $Id: basic_functions.c,v 1.561 2003/01/15 16:29:00 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -411,8 +411,10 @@ function_entry basic_functions[] = {
 	PHP_FE(escapeshellarg,													NULL)
 	PHP_FE(passthru,				second_arg_force_ref)
 	PHP_FE(shell_exec,														NULL)
+#ifdef PHP_CAN_SUPPORT_PROC_OPEN
 	PHP_FE(proc_open,				third_arg_force_ref)
 	PHP_FE(proc_close,														NULL)
+#endif
 
 	PHP_FE(rand,															NULL)
 	PHP_FE(srand,															NULL)
@@ -1063,7 +1065,9 @@ PHP_MINIT_FUNCTION(basic)
 	PHP_MINIT(array)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(assert)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(url_scanner_ex)(INIT_FUNC_ARGS_PASSTHRU);
+#ifdef PHP_CAN_SUPPORT_PROC_OPEN
 	PHP_MINIT(proc_open)(INIT_FUNC_ARGS_PASSTHRU);
+#endif
 
 	PHP_MINIT(user_streams)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_MINIT(imagetypes)(INIT_FUNC_ARGS_PASSTHRU);

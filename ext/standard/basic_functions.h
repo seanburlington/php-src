@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.52 2000/05/28 16:19:45 sas Exp $ */
+/* $Id: basic_functions.h,v 1.53 2000/05/29 16:13:38 zeev Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -111,6 +111,8 @@ PHP_FUNCTION(getprotobynumber);
 PHP_FUNCTION(get_loaded_extensions);
 PHP_FUNCTION(extension_loaded);
 PHP_FUNCTION(get_extension_funcs);
+
+PHP_FUNCTION(warn_not_available);
 
 /* From the INI parser */
 PHP_FUNCTION(parse_ini_file);

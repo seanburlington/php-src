@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.63 2003/07/22 23:05:17 helly Exp $ */
+/* $Id: php_pgsql.h,v 1.64 2003/07/27 16:47:36 helly Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -73,6 +73,9 @@ PHP_FUNCTION(pg_tty);
 PHP_FUNCTION(pg_options);
 PHP_FUNCTION(pg_version);
 PHP_FUNCTION(pg_ping);
+#if HAVE_PQPARAMETERSTATUS
+PHP_FUNCTION(pg_parameter_status);
+#endif
 /* query functions */
 PHP_FUNCTION(pg_query);
 PHP_FUNCTION(pg_send_query);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.26 2003/08/19 14:32:10 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.142.2.27 2003/08/19 14:49:39 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -2485,7 +2485,7 @@ MBSTRING_API char * php_mb_convert_encoding(char *input, size_t length, char *_t
 	if (output_len) {
 		*output_len = 0;
 	}
-	if ( !input || !length) {
+	if (!input) {
 		return NULL;
 	}
 	/* new encoding */

@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.48 2000/06/09 02:18:50 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.49 2000/06/26 18:15:49 zeev Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -384,6 +384,9 @@ void do_cfg_op(char type, zval *result, zval *op1, zval *op2)
 		case '~':
 			i_result = ~i_op1;
 			break;
+		case '!':
+			i_result = !i_op1;
+			break;
 		default:
 			i_result = 0;
 			break;
@@ -429,7 +432,7 @@ void do_cfg_get_constant(zval *result, zval *name)
 %token T_ZEND_EXTENSION_DEBUG
 %token T_ZEND_EXTENSION_DEBUG_TS
 %left '|' '&'
-%right '~'
+%right '~' '!'
 
 %%
 
@@ -568,6 +571,7 @@ expr:
 	|	expr '|' expr			{ do_cfg_op('|', &$$, &$1, &$3); }
 	|	expr '&' expr			{ do_cfg_op('&', &$$, &$1, &$3); }
 	|	'~' expr				{ do_cfg_op('~', &$$, &$2, NULL); }
+	|	'!'	expr				{ do_cfg_op('!', &$$, &$2, NULL); }
 	|	'(' expr ')'			{ $$ = $2; }
 ;
 

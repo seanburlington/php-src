@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.279 2000/07/04 09:15:06 ssb Exp $ */
+/* $Id: main.c,v 1.280 2000/07/09 13:20:27 sas Exp $ */
 
 
 #include <stdio.h>
@@ -664,11 +664,12 @@ void php_request_shutdown(void *dummy)
 
 	php_call_shutdown_functions();
 	
-	php_ini_rshutdown();
-
 	if (PG(modules_activated)) {
 		zend_deactivate_modules();
 	}
+	
+	php_ini_rshutdown();
+	
 	zend_deactivate(CLS_C ELS_CC);
 	sapi_deactivate(SLS_C);
 

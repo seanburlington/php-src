@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.13.2.8 2003/01/26 09:20:12 sander Exp $ 
+  $Id: mime_magic.c,v 1.13.2.9 2003/02/09 19:10:32 sniper Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -194,7 +194,7 @@ static long from_oct(int, char *);
 static int fsmagic(char *fn TSRMLS_DC);
 
 
-#if HAVE_ZLIB
+#if HAVE_ZLIB && !defined(COMPILE_DL_ZLIB)
 static int zmagic(unsigned char *, int);
 #endif
 
@@ -1020,7 +1020,7 @@ static void tryit(unsigned char *buf, int nb, int checkzmagic)
     /*
      * Try compression stuff
      */
-#if HAVE_ZLIB
+#if HAVE_ZLIB && !defined(COMPILE_DL_ZLIB)
 	if (checkzmagic == 1) {  
 		if (zmagic(buf, nb) == 1)
 			return;
@@ -1569,7 +1569,7 @@ static int mcheck(union VALUETYPE *p, struct magic *m)
     return matched;
 }
 
-#if HAVE_ZLIB 
+#if HAVE_ZLIB && !defined(COMPILE_DL_ZLIB)
 /*
  * compress routines: zmagic() - returns 0 if not recognized, uncompresses
  * and prints information if recognized uncompress(s, method, old, n, newch)

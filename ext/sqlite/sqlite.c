@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.62 2003/06/25 23:21:10 helly Exp $ 
+   $Id: sqlite.c,v 1.63 2003/06/26 19:07:17 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -935,7 +935,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.62 2003/06/25 23:21:10 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.63 2003/06/26 19:07:17 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1030,6 +1030,9 @@ PHP_FUNCTION(sqlite_popen)
 				&filename, &filename_len, &mode, &errmsg)) {
 		return;
 	}
+	if (errmsg) {
+		zval_dtor(errmsg);
+	}
 
 	if (strncmp(filename, ":memory:", sizeof(":memory:") - 1)) {
 		/* resolve the fully-qualified path name to use as the hash key */
@@ -1095,6 +1098,9 @@ PHP_FUNCTION(sqlite_open)
 		php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
 		return;
 	}
+	if (errmsg) {
+		zval_dtor(errmsg);
+	}
 
 	if (strncmp(filename, ":memory:", sizeof(":memory:") - 1)) {
 		if (PG(safe_mode) && (!php_checkuid(filename, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
@@ -1136,6 +1142,9 @@ PHP_FUNCTION(sqlite_factory)
 				&filename, &filename_len, &mode, &errmsg)) {
 		php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC);
 		RETURN_NULL();
+	}
+	if (errmsg) {
+		zval_dtor(errmsg);
 	}
 
 	if (PG(safe_mode) && (!php_checkuid(filename, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {

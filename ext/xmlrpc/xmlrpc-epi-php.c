@@ -51,6 +51,8 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: xmlrpc-epi-php.c,v 1.24.2.3 2003/07/24 02:53:46 sniper Exp $ */
+
 /**********************************************************************
 * BUGS:                                                               *
 *  - when calling a php user function, there appears to be no way to  *
@@ -828,7 +830,7 @@ PHP_FUNCTION(xmlrpc_server_create)
    }
 }
 
-/* {{{ proto void xmlrpc_server_destroy(handle server)
+/* {{{ proto int xmlrpc_server_destroy(handle server)
    Destroys server resources */
 PHP_FUNCTION(xmlrpc_server_destroy)
 {
@@ -1478,7 +1480,7 @@ PHP_FUNCTION(xmlrpc_get_type)
    RETURN_STRING((char*) xmlrpc_type_as_str(type, vtype), 1);
 }
 
-/* {{{ proto string xmlrpc_is_fault(array)
+/* {{{ proto bool xmlrpc_is_fault(array)
    Determines if an array value represents an XMLRPC fault. */
 PHP_FUNCTION(xmlrpc_is_fault)
 {

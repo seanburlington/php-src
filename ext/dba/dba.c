@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.20 2000/07/10 10:09:14 sas Exp $ */
+/* $Id: dba.c,v 1.21 2000/07/13 18:44:57 eschmid Exp $ */
 
 #include "php.h"
 
@@ -206,7 +206,7 @@ static PHP_MINFO_FUNCTION(dba)
 	dba_handler *hptr;
 	
 	php_info_print_box_start(0);
-	PUTS("V1 ($Id: dba.c,v 1.20 2000/07/10 10:09:14 sas Exp $)");
+	PUTS("V1 ($Id: dba.c,v 1.21 2000/07/13 18:44:57 eschmid Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);
@@ -338,7 +338,7 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 /* }}} */
 /* }}} */
 
-/* {{{ proto int dba_popen(string path, string mode, string handlername [, ...])
+/* {{{ proto int dba_popen(string path, string mode, string handlername [, string ...])
    Opens path using the specified handler in mode persistently */
 PHP_FUNCTION(dba_popen)
 {
@@ -346,7 +346,7 @@ PHP_FUNCTION(dba_popen)
 }
 /* }}} */
 
-/* {{{ proto int dba_open(string path, string mode, string handlername [, ...])
+/* {{{ proto int dba_open(string path, string mode, string handlername [, string ...])
    Opens path using the specified handler in mode*/
 PHP_FUNCTION(dba_open)
 {

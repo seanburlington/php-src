@@ -15,7 +15,7 @@
    | Author: Stig Venaas <venaas@uninett.no>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.33 2002/03/16 03:37:11 yohgaki Exp $ */
+/* $Id: network.c,v 1.34 2002/03/16 11:58:38 wez Exp $ */
 
 #define PHP_SOCK_CHUNK_SIZE	8192
 #define MAX_CHUNKS_PER_READ 10
@@ -778,9 +778,7 @@ static char *php_sockop_gets(php_stream *stream, char *buf, size_t maxlen)
 	}
 
 	if(p) {
-/*              FIXME: ptrdiff_t is better, but just not all system support this type */
-/* 		amount = (ptrdiff_t) p - (ptrdiff_t) READPTR(sock) + 1; */
-		amount = (long) p - (long) READPTR(sock) + 1;
+ 		amount = (ptrdiff_t) p - (ptrdiff_t) READPTR(sock) + 1;
 	} else {
 		amount = TOREAD(sock);
 	}

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.241 2003/09/03 08:15:09 sas Exp $ */
+/* $Id: cgi_main.c,v 1.242 2003/10/17 02:21:26 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -923,7 +923,7 @@ int main(int argc, char *argv[])
 	char *script_file=NULL;
 	zend_llist global_vars;
 #if FORCE_CGI_REDIRECT
-	int force_redirect = 1;
+	long force_redirect = 1;
 	char *redirect_status_env = NULL;
 #endif
 

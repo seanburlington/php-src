@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.75 2003/01/03 14:29:49 moriyoshi Exp $ */
+/* $Id: iconv.c,v 1.76 2003/01/03 20:01:13 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -910,6 +910,9 @@ static php_iconv_err_t _php_iconv_strpos(unsigned int *pretval,
 				ndl_buf_left -= GENERIC_SUPERSET_NBYTES;
 				if (ndl_buf_left == 0) {
 					*pretval = match_ofs;
+					ndl_buf_p = ndl_buf;
+					ndl_buf_left = ndl_buf_len;
+					match_ofs = -1;
 				}
 			} else {
 				unsigned int i, j, lim;

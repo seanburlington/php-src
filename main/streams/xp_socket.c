@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.6 2003/03/01 15:22:21 wez Exp $ */
+/* $Id: xp_socket.c,v 1.7 2003/03/03 19:57:18 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -410,7 +410,7 @@ static inline int php_tcp_sockop_bind(php_stream *stream, php_netstream_data_t *
 
 		parse_unix_address(xparam, &unix_addr TSRMLS_CC);
 
-		return bind(sock->socket, &unix_addr, sizeof(unix_addr));
+		return bind(sock->socket, (struct sockaddr *)&unix_addr, sizeof(unix_addr));
 	}
 #endif
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.158 2002/11/26 05:15:55 sas Exp $ */
+/* $Id: SAPI.c,v 1.159 2002/12/01 03:28:21 sas Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -855,6 +855,15 @@ SAPI_API int sapi_get_fd(int *fd TSRMLS_DC)
 {
 	if (sapi_module.get_fd) {
 		return sapi_module.get_fd(fd TSRMLS_CC);
+	} else {
+		return -1;
+	}
+}
+
+SAPI_API int sapi_force_http_10(TSRMLS_D)
+{
+	if (sapi_module.force_http_10) {
+		return sapi_module.force_http_10(TSRMLS_C);
 	} else {
 		return -1;
 	}

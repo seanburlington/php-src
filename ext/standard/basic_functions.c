@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.700 2004/12/27 18:22:50 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.701 2004/12/30 15:18:24 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -43,7 +43,7 @@ typedef struct yy_buffer_state *YY_BUFFER_STATE;
 
 #include "zend.h"
 #include "zend_language_scanner.h"
-#include "zend_language_parser.h"
+#include <zend_language_parser.h>
 
 #include <stdarg.h>
 #include <stdlib.h>

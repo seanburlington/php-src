@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.61.2.5 2004/03/27 01:53:18 helly Exp $
+	$Id: config.w32.h,v 1.61.2.6 2004/03/29 19:03:59 helly Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -177,3 +177,4 @@
 
 #undef HAVE_ATOF_ACCEPTS_NAN
 #undef HAVE_ATOF_ACCEPTS_INF
+#define HAVE_HUGE_VAL_NAN 1

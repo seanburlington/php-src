@@ -1,4 +1,4 @@
-# $Id: config.m4,v 1.20 2000/12/19 00:12:57 sniper Exp $
+# $Id: config.m4,v 1.21 2000/12/19 00:14:57 sniper Exp $
 # config.m4 for extension java
 
 AC_MSG_CHECKING(for Java support)
@@ -35,7 +35,7 @@ AC_ARG_WITH(java,
 
       # accomodate old versions of kaffe which don't support jar
       if kaffe -version 2>&1 | grep 1.0b > /dev/null; then
-	JAVA_JAR='zip -q0'
+        JAVA_JAR='zip -q0'
       fi
 
     elif test -f $withval/lib/libjava.so; then
@@ -53,26 +53,27 @@ AC_ARG_WITH(java,
     else
 
       for i in `find $withval/include -type d`; do
-	test -f $i/jni.h && JAVA_INCLUDE="-I$i"
-	test -f $i/jni_md.h && JAVA_INCLUDE="$JAVA_INCLUDE -I$i"
+        test -f $i/jni.h && JAVA_INCLUDE="-I$i"
+        test -f $i/jni_md.h && JAVA_INCLUDE="$JAVA_INCLUDE -I$i"
       done
 
       for i in `find $withval -type d`; do
-	test -f $i/classes.zip	&& JAVA_CFLAGS="-DJNI_11"
-	test -f $i/rt.jar	&& JAVA_CFLAGS="-DJNI_12"
-	test -f $i/classes.zip	&& JAVA_CLASSPATH="$i/classes.zip"
-	test -f $i/rt.jar	&& JAVA_CLASSPATH="$i/rt.jar"
-	if test -f $i/libjava.so; then 
+        test -f $i/classes.zip && JAVA_CFLAGS="-DJNI_11"
+        test -f $i/rt.jar      && JAVA_CFLAGS="-DJNI_12"
+        test -f $i/classes.zip && JAVA_CLASSPATH="$i/classes.zip"
+        test -f $i/rt.jar      && JAVA_CLASSPATH="$i/rt.jar"
+
+		if test -f $i/libjava.so; then 
           JAVA_LIB=java
           JAVA_LIBPATH=$i
-	  test -d $i/classic && AC_ADD_LIBPATH($i/classic)
-	  test -d $i/native_threads && AC_ADD_LIBPATH($i/native_threads)
-	fi
+          test -d $i/classic && AC_ADD_LIBPATH($i/classic)
+          test -d $i/native_threads && AC_ADD_LIBPATH($i/native_threads)
+        fi
       done
 
       if test -z "$JAVA_INCLUDE"; then
-	AC_MSG_RESULT(no)
-	AC_MSG_ERROR(unable to find Java VM libraries)
+        AC_MSG_RESULT(no)
+        AC_MSG_ERROR(unable to find Java VM libraries)
       fi
 
       JAVA_CFLAGS="$JAVA_CFLAGS -D_REENTRANT"
@@ -106,4 +107,3 @@ PHP_SUBST(JAVA_CLASSPATH)
 PHP_SUBST(JAVA_INCLUDE)
 PHP_SUBST(JAVA_SHARED)
 PHP_SUBST(JAVA_JAR)
-

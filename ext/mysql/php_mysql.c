@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.133 2002/04/18 16:48:03 sebastian Exp $ */
+/* $Id: php_mysql.c,v 1.134 2002/04/28 05:36:05 sniper Exp $ */
 
 
 /* TODO:
@@ -933,7 +933,7 @@ PHP_FUNCTION(mysql_info)
 
 	ZEND_FETCH_RESOURCE2(mysql, php_mysql_conn *, mysql_link, id, "MySQL-Link", le_link, le_plink);
 
-	if (str = mysql_info(&mysql->conn)) {
+	if ((str = mysql_info(&mysql->conn))) {
 		RETURN_STRING(str,1);
 	} else {
 		RETURN_FALSE;

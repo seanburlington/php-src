@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.148 2003/11/29 15:24:35 derick Exp $ */
+/* $Id: rfc1867.c,v 1.149 2003/12/07 14:47:35 derick Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -881,7 +881,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 			if (!filename && param) {
 
 				char *value = multipart_buffer_read_body(mbuff TSRMLS_CC);
-				unsigned int new_val_len;
+				unsigned int new_val_len; /* Dummy variable */
 
 				if (!value) {
 					value = estrdup("");

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.24 2003/12/13 16:08:13 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.25 2003/12/31 08:34:02 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -33,12 +33,13 @@
    Open a connection to a mysql server */ 
 PHP_FUNCTION(mysqli_connect)
 {
-	MYSQL 				*mysql;
+	MYSQL 				*mysql = NULL;
 	MYSQLI_RESOURCE 	*mysqli_resource;
 	zval  				*object = getThis();
 	char 				*hostname = NULL, *username=NULL, *passwd=NULL, *dbname=NULL, *socket=NULL;
 	unsigned int 		hostname_len, username_len, passwd_len, dbname_len, socket_len;
 	unsigned int 		port=0;
+
 
 	if (getThis() && !ZEND_NUM_ARGS()) {
 		RETURN_NULL();
@@ -89,6 +90,7 @@ PHP_FUNCTION(mysqli_connect)
 		MYSQLI_RETURN_RESOURCE(mysqli_resource, mysqli_link_class_entry);	
 	} else {
 		((mysqli_object *) zend_object_store_get_object(object TSRMLS_CC))->ptr = mysqli_resource;
+		((mysqli_object *) zend_object_store_get_object(object TSRMLS_CC))->valid = 1;
 	}
 }
 /* }}} */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.263.2.1 2002/03/18 02:05:06 jimw Exp $ */
+/* $Id: string.c,v 1.263.2.2 2002/03/26 08:57:18 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2836,6 +2836,30 @@ static void php_hebrev(INTERNAL_FUNCTION_PARAMETERS, int convert_newlines)
 						break;
 					case ')':
 						*target = '(';
+						break;
+					case '[':
+						*target = ']';
+						break;
+					case ']':
+						*target = '[';
+						break;
+					case '{':
+						*target = '}';
+						break;
+					case '}':
+						*target = '{';
+						break;
+					case '<':
+						*target = '>';
+						break;
+					case '>':
+						*target = '<';
+						break;
+					case '\\':
+						*target = '/';
+						break;
+					case '/':
+						*target = '\\';
 						break;
 					default:
 						break;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_win32_globals.h,v 1.1.4.1 2004/07/30 14:37:17 wez Exp $ */
+/* $Id: php_win32_globals.h,v 1.1.4.2 2004/07/30 16:49:38 fmk Exp $ */
 
 #ifndef PHP_WIN32_GLOBALS_H
 #define PHP_WIN32_GLOBALS_H

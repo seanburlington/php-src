@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.311 2002/10/04 16:55:46 derick Exp $ */
+/* $Id: string.c,v 1.312 2002/10/04 17:10:51 sander Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3582,8 +3582,8 @@ PHP_FUNCTION(str_repeat)
 	result_len = Z_STRLEN_PP(input_str) * Z_LVAL_PP(mult);
 	result = (char *)emalloc(result_len + 1);
 	
-	/* Heavy optimization for situations where multiplier is 1 byte long */
-	if (Z_LVAL_PP(mult) == 1) {
+	/* Heavy optimization for situations where input string is 1 byte long */
+	if (Z_STRLEN_PP(input_str) == 1) {
 		memset(result, *(Z_STRVAL_PP(input_str)), Z_LVAL_PP(mult)); 
 	} else {
 		char *s, *e, *ee;

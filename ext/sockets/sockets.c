@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.76 2001/11/12 00:58:16 mfischer Exp $ */
+/* $Id: sockets.c,v 1.77 2001/11/12 01:07:17 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -900,7 +900,7 @@ PHP_FUNCTION(socket_create)
 	php_socket	*php_sock = (php_socket*)emalloc(sizeof(php_socket));
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lll", &arg1, &arg2, &arg3) == FAILURE) {
-        efree(php_sock);
+		efree(php_sock);
 		return;
     }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: aggregation.c,v 1.11.4.6 2003/07/09 23:16:21 sniper Exp $ */
+/* $Id: aggregation.c,v 1.11.4.7 2003/08/01 02:17:31 iliaa Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"
@@ -114,7 +114,7 @@ static void aggregate_methods(zend_class_entry *ce, zend_class_entry *from_ce, i
 
 			/* We do not aggregate:
 			 * 1. constructors */
-			if (!strncmp(func_name, from_ce->name, MIN(func_name_len-1, from_ce->name_length)) ||
+			if (!strncmp(func_name, from_ce->name, MAX(func_name_len-1, from_ce->name_length)) ||
 			/* 2. private methods (heh, like we really have them) */
 				func_name[0] == '_' ||
 			/* 3. explicitly excluded methods */

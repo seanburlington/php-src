@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.124 2004/09/29 04:57:19 sterling Exp $ */
+/* $Id: datetime.c,v 1.125 2004/12/12 15:50:06 iliaa Exp $ */
 
 #if HAVE_STRPTIME
 #define _XOPEN_SOURCE
@@ -949,7 +949,7 @@ char *php_std_date(time_t t TSRMLS_DC)
 	tm1 = php_gmtime_r(&t, &tmbuf);
 	str = emalloc(81);
 	if (PG(y2k_compliance)) {
-		snprintf(str, 80, "%s, %02d-%s-%04d %02d:%02d:%02d GMT",
+		snprintf(str, 80, "%s, %02d %s %04d %02d:%02d:%02d GMT",
 				day_short_names[tm1->tm_wday],
 				tm1->tm_mday,
 				mon_short_names[tm1->tm_mon],

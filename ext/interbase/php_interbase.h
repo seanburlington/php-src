@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.28.2.5 2003/07/10 01:40:10 sniper Exp $ */
+/* $Id: php_interbase.h,v 1.28.2.6 2003/07/24 02:47:10 sniper Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -39,7 +39,6 @@ extern zend_module_entry ibase_module_entry;
  #define ISC_INT64_FORMAT "ll"
 #endif
 #endif
-
 
 PHP_MINIT_FUNCTION(ibase);
 PHP_RINIT_FUNCTION(ibase);

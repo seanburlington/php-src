@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.179 2001/01/08 02:39:52 hirokawa Exp $ */
+/* $Id: string.c,v 1.180 2001/01/08 23:13:57 sas Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3078,6 +3078,7 @@ PHP_FUNCTION(ob_iconv_handler)
 	int coding;
 	char *out_buffer;
 	zval **zv_string;
+	BLS_FETCH();
 
 	if (ZEND_NUM_ARGS()!=1 || zend_get_parameters_ex(1, &zv_string)==FAILURE) {
 		ZEND_WRONG_PARAM_COUNT();
@@ -3101,6 +3102,7 @@ PHP_FUNCTION(ob_iconv_handler)
 PHP_FUNCTION(iconv_set_encoding)
 {
     zval **int_charset, **out_charset;
+	BLS_FETCH();
 
     if (ZEND_NUM_ARGS() != 2 || zend_get_parameters_ex(2, &int_charset, &out_charset) == FAILURE) {
         WRONG_PARAM_COUNT;

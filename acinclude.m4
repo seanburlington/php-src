@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.218.2.6 2003/02/10 17:12:16 sniper Exp $
+dnl $Id: acinclude.m4,v 1.218.2.7 2003/02/24 04:37:15 sniper Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -1107,7 +1107,11 @@ dnl
 dnl Set libtool variable
 dnl
 AC_DEFUN([PHP_SET_LIBTOOL_VARIABLE],[
-  LIBTOOL='$(SHELL) libtool $1'
+  if test -z $LIBTOOL; then
+    LIBTOOL='$(SHELL) $(top_builddir)/libtool $1'
+  else
+    LIBTOOL="$LIBTOOL $1"
+  fi
 ])
 
 dnl

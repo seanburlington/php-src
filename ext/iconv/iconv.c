@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.44 2002/08/05 18:42:41 helly Exp $ */
+/* $Id: iconv.c,v 1.45 2002/08/06 19:39:12 markonen Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -94,7 +94,7 @@ ZEND_DECLARE_MODULE_GLOBALS(iconv)
 ZEND_GET_MODULE(iconv)
 #endif
 
-static int php_iconv_string(const char * in_str, unsigned int in_len, char ** out_str, unsigned int * out_len, const char * in_encoding, const char * out_encoding, int *err TSRMLS_DC);
+static int php_iconv_string(const char * in_p, size_t in_len, char **out, size_t *out_len, const char *in_charset, const char *out_charset, int *err TSRMLS_DC);
 
 /* {{{ PHP_INI
  */

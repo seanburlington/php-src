@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.61.2.6 2003/01/02 13:31:30 derick Exp $ */
+/* $Id: php_streams.h,v 1.61.2.7 2003/02/22 02:43:58 wez Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -501,6 +501,11 @@ PHPAPI int _php_stream_cast(php_stream *stream, int castas, void **ret, int show
 
 /* this flag is only used by include/require functions */
 #define STREAM_OPEN_FOR_INCLUDE		128
+
+/* 512 skipped for PHP 5 compat */
+
+/* if set, skip open_basedir checks */
+#define STREAM_DISABLE_OPEN_BASEDIR	1024
 
 /* Antique - no longer has meaning */
 #define IGNORE_URL_WIN 0

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.173 2003/05/01 21:08:31 iliaa Exp $ */
+/* $Id: mbstring.c,v 1.174 2003/05/04 13:11:30 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -576,6 +576,9 @@ static PHP_INI_MH(OnUpdate_mbstring_internal_encoding)
 			p++;
 		}
 #endif
+#ifdef ZEND_MULTIBYTE
+		zend_multibyte_set_internal_encoding(new_value, new_value_length TSRMLS_CC);
+#endif /* ZEND_MULTIBYTE */
 	} else {
 		if (new_value != NULL && new_value_length > 0) {
 			return FAILURE;

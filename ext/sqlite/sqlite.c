@@ -17,7 +17,7 @@
   |          Marcus Boerger <helly@php.net>                              |
   +----------------------------------------------------------------------+
 
-  $Id: sqlite.c,v 1.37 2003/05/02 22:09:54 helly Exp $ 
+  $Id: sqlite.c,v 1.38 2003/05/02 22:17:01 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -218,15 +218,14 @@ static void real_result_dtor(struct php_sqlite_result *res TSRMLS_DC)
 	if (res->table) {
 		if (!res->buffered && res->nrows) {
 		res->nrows = 1; /* only one row is stored */
-	}
-	for (i = 0; i < res->nrows; i++) {
-		base = i * res->ncolumns;
-		for (j = 0; j < res->ncolumns; j++) {
-			if (res->table[base + j] != NULL) {
-				efree(res->table[base + j]);
+		for (i = 0; i < res->nrows; i++) {
+			base = i * res->ncolumns;
+			for (j = 0; j < res->ncolumns; j++) {
+				if (res->table[base + j] != NULL) {
+					efree(res->table[base + j]);
+				}
 			}
 		}
-	}
 		efree(res->table);
 	}
 	if (res->col_names) {
@@ -628,7 +627,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.37 2003/05/02 22:09:54 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.38 2003/05/02 22:17:01 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

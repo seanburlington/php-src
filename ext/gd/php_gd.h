@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.16 2000/07/24 01:39:46 david Exp $ */
+/* $Id: php_gd.h,v 1.17 2000/09/26 09:08:02 stas Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -128,7 +128,7 @@ PHP_FUNCTION(imagepstext);
 PHP_FUNCTION(imagepsbbox);
 PHPAPI int phpi_get_le_gd(void);
 
-static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type, char *tn, gdImagePtr (*func_p)());
+static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type, char *tn, gdImagePtr (*func_p)(), gdImagePtr (*ioctx_func_p)());
 static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char *tn, void (*func_p)());
 static void _php_image_output_wbmp(gdImagePtr im, FILE *fp);
 

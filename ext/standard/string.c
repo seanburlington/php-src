@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.19 1999/06/16 17:06:52 ssb Exp $ */
+/* $Id: string.c,v 1.20 1999/06/21 15:57:20 thies Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -309,15 +309,15 @@ PHP_FUNCTION(explode)
 
 void _php3_implode(pval *delim, pval *arr, pval *return_value) 
 {
-	pval *tmp;
+	pval **tmp;
 	int len = 0, count = 0;
 
 	/* convert everything to strings, and calculate length */
 	_php3_hash_internal_pointer_reset(arr->value.ht);
 	while (_php3_hash_get_current_data(arr->value.ht, (void **) &tmp) == SUCCESS) {
-		convert_to_string(tmp);
-		if (tmp->type == IS_STRING && tmp->value.str.val != undefined_variable_string) {
-			len += tmp->value.str.len;
+		convert_to_string(*tmp);
+		if ((*tmp)->type == IS_STRING && (*tmp)->value.str.val != undefined_variable_string) {
+			len += (*tmp)->value.str.len;
 			if (count>0) {
 				len += delim->value.str.len;
 			}
@@ -332,9 +332,9 @@ void _php3_implode(pval *delim, pval *arr, pval *return_value)
 	return_value->value.str.val[len] = '\0';
 	_php3_hash_internal_pointer_reset(arr->value.ht);
 	while (_php3_hash_get_current_data(arr->value.ht, (void **) &tmp) == SUCCESS) {
-		if (tmp->type == IS_STRING && tmp->value.str.val != undefined_variable_string) {
+		if ((*tmp)->type == IS_STRING && (*tmp)->value.str.val != undefined_variable_string) {
 			count--;
-			strcat(return_value->value.str.val, tmp->value.str.val);
+			strcat(return_value->value.str.val, (*tmp)->value.str.val);
 			if (count > 0) {
 				strcat(return_value->value.str.val, delim->value.str.val);
 			}

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.91 2000/02/21 16:34:50 zeev Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.92 2000/02/23 13:57:06 sas Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -291,6 +291,7 @@ flock \
 gcvt \
 getlogin \
 gethostbyaddr \
+getrusage \
 gettimeofday \
 gmtime_r \
 inet_aton \

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.47 2002/06/14 00:07:15 sniper Exp $ */
+/* $Id: php_odbc.h,v 1.48 2002/08/11 23:39:03 kalowsky Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -50,8 +50,9 @@ PHP_FUNCTION(odbc_commit);
 PHP_FUNCTION(odbc_connect);
 PHP_FUNCTION(odbc_pconnect);
 PHP_FUNCTION(odbc_cursor);
-PHP_FUNCTION(odbc_exec);
+PHP_FUNCTION(odbc_data_source);
 PHP_FUNCTION(odbc_do);
+PHP_FUNCTION(odbc_exec);
 PHP_FUNCTION(odbc_execute);
 #ifdef HAVE_DBMAKER
 PHP_FUNCTION(odbc_fetch_array);

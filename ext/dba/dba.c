@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.14 2000/04/05 22:30:17 cmv Exp $ */
+/* $Id: dba.c,v 1.15 2000/04/06 12:26:16 riffraff Exp $ */
 
 #include "php.h"
 
@@ -199,10 +199,10 @@ static PHP_MSHUTDOWN_FUNCTION(dba)
 static PHP_MINFO_FUNCTION(dba)
 {
 	/* could be prettier (cmv) */
-	php_info_print_box_start();
 	dba_handler *hptr;
 	
-	PUTS("V1 ($Id: dba.c,v 1.14 2000/04/05 22:30:17 cmv Exp $)");
+	php_info_print_box_start(0);
+	PUTS("V1 ($Id: dba.c,v 1.15 2000/04/06 12:26:16 riffraff Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);

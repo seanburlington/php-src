@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.2 2003/02/19 08:40:19 sniper Exp $ */
+/* $Id: userspace.c,v 1.3 2003/05/14 06:10:04 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -42,7 +42,8 @@ static php_stream_wrapper_ops user_stream_wops = {
 	NULL, /* stat - the streams themselves know how */
 	user_wrapper_stat_url,
 	user_wrapper_opendir,
-	"user-space"
+	"user-space",
+	NULL /* unlink */
 };
 
 

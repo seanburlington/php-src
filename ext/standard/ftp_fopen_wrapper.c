@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.53 2003/05/05 13:46:14 hholzgra Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.54 2003/05/14 06:10:04 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -756,7 +756,8 @@ static php_stream_wrapper_ops ftp_stream_wops = {
 	php_stream_ftp_stream_stat,
 	php_stream_ftp_url_stat, /* stat_url */
 	php_stream_ftp_opendir, /* opendir */
-	"FTP"
+	"FTP",
+	NULL /* unlink */
 };
 
 PHPAPI php_stream_wrapper php_stream_ftp_wrapper =	{

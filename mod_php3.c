@@ -28,7 +28,7 @@
    | PHP4 patches by Zeev Suraski <zeev@zend.com>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php3.c,v 1.13 1999/05/02 18:07:40 andi Exp $ */
+/* $Id: mod_php3.c,v 1.14 1999/05/02 19:16:21 zeev Exp $ */
 
 #include "httpd.h"
 #include "http_config.h"
@@ -53,6 +53,16 @@
 #define PHP_INI_USER    (1<<0)
 #define PHP_INI_PERDIR  (1<<1)
 #define PHP_INI_SYSTEM  (1<<2)
+
+/* These are taken out of main.h
+ * they must be updated if main.h changes!
+ */
+
+int apache_php3_module_main(request_rec * r, int fd, int display_source_mode);
+int php_module_startup(sapi_module_struct *sf);
+void php_module_shutdown();
+void php_module_shutdown_for_exec();
+int php_module_shutdown_wrapper(sapi_module_struct *sapi_globals);
 
 #include "util_script.h"
 
@@ -87,10 +97,6 @@ int saved_umask;
 
 php_apache_info_struct php_apache_info;		/* active config */
 
-int apache_php3_module_main(request_rec * r, int fd, int display_source_mode);
-int php_module_startup(sapi_module_struct *sf);
-void php_module_shutdown();
-void php_module_shutdown_for_exec();
 
 
 void php3_save_umask()
@@ -113,7 +119,12 @@ static int zend_apache_ub_write(const char *str, uint str_length)
 
 
 sapi_module_struct sapi_module = {
-	zend_apache_ub_write
+	"PHP Language",					/* name */
+									
+	php_module_startup,				/* startup */
+	php_module_shutdown_wrapper,	/* shutdown */
+
+	zend_apache_ub_write,			/* unbuffered write */
 };
 
 

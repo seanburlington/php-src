@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.58 2000/06/18 17:36:31 jah Exp $ */
+/* $Id: pgsql.c,v 1.59 2000/06/23 17:09:54 eschmid Exp $ */
 
 #include <stdlib.h>
 
@@ -1106,7 +1106,7 @@ PHP_FUNCTION(pg_getlastoid)
 
 
 /* {{{ proto bool pg_trace(string filename [, string mode [, resource connection]])
-   Enable tracing a PostgresSQL connection */
+   Enable tracing a PostgreSQL connection */
 PHP_FUNCTION(pg_trace)
 {
 	zval **z_filename, **z_mode, **z_pgsql_link;
@@ -1510,7 +1510,7 @@ PHP_FUNCTION(pg_loreadall)
 }
 /* }}} */
 
-/* {{{ proto int pg_loimport(string filename[, resource connection])
+/* {{{ proto int pg_loimport(string filename [, resource connection])
    Import large object direct from filesystem */
 PHP_FUNCTION(pg_loimport)
 {

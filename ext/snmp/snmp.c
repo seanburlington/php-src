@@ -20,7 +20,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snmp.c,v 1.70.2.6 2003/06/21 21:50:01 harrie Exp $ */
+/* $Id: snmp.c,v 1.70.2.7 2003/07/16 04:54:55 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -344,7 +344,7 @@ static void php_snmp_internal(INTERNAL_FUNCTION_PARAMETERS,
 	if (st >= 2) { /* walk */
 		rootlen = MAX_NAME_LEN;
 		if (strlen(objid)) { /* on a walk, an empty string means top of tree - no error */
-			if (read_objid(objid, root, &rootlen)) {
+			if (snmp_parse_oid(objid, root, &rootlen)) {
 				gotroot = 1;
 			} else {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid object identifier: %s", objid);

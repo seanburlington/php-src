@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.34 2002/03/21 19:12:49 cox Exp $
+// $Id: Common.php,v 1.35 2002/03/23 10:17:39 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -409,7 +409,9 @@ class PEAR_Common extends PEAR
         $xml = null;
         foreach ($content as $file) {
             $name = $file['filename'];
-            if (ereg('^.*/package.xml$', $name, $match)) {
+            if ($name == 'package.xml') {
+                $xml = $name;
+            } elseif (ereg('^.*/package.xml$', $name, $match)) {
                 $xml = $match[0];
             }
         }

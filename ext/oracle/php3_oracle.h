@@ -1,4 +1,4 @@
-/* $Id: php3_oracle.h,v 1.7 1999/08/18 16:48:59 thies Exp $ */
+/* $Id: php3_oracle.h,v 1.8 1999/09/23 09:15:38 thies Exp $ */
 
 /* synced with oracle.h,v 1.40 1999/06/01 08:11:04 thies Exp $ */
 
@@ -77,6 +77,7 @@ extern php3_module_entry oracle_module_entry;
 
 typedef struct {
 	int open;
+	int persistent;
 	Lda_Def lda;
 	ub1 hda[HDA_SIZE];
 } oraConnection;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.46 2004/07/01 06:50:46 sterling Exp $ */
+/* $Id: interface.c,v 1.46.2.1 2004/08/18 21:27:27 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -231,7 +231,11 @@ PHP_MINIT_FUNCTION(curl)
  	REGISTER_CURL_CONSTANT(CURLAUTH_ANY);
  	REGISTER_CURL_CONSTANT(CURLAUTH_ANYSAFE);
 #endif
-	
+
+#if LIBCURL_VERSION_NUM > 0x070a06 /* CURLOPT_PROXYAUTH is available since curl 7.10.7 */
+	REGISTER_CURL_CONSTANT(CURLOPT_PROXYAUTH);
+#endif
+
 	/* Constants effecting the way CURLOPT_CLOSEPOLICY works */
 	REGISTER_CURL_CONSTANT(CURLCLOSEPOLICY_LEAST_RECENTLY_USED);
 	REGISTER_CURL_CONSTANT(CURLCLOSEPOLICY_LEAST_TRAFFIC);
@@ -912,6 +916,9 @@ PHP_FUNCTION(curl_setopt)
 		case CURLOPT_FTP_USE_EPRT:
 #if LIBCURL_VERSION_NUM > 0x070a05 /* CURLOPT_HTTPAUTH is available since curl 7.10.6 */
 		case CURLOPT_HTTPAUTH:
+#endif
+#if LIBCURL_VERSION_NUM > 0x070a06 /* CURLOPT_PROXYAUTH is available since curl 7.10.7 */
+		case CURLOPT_PROXYAUTH:
 #endif
 		case CURLOPT_UNRESTRICTED_AUTH:
 		case CURLOPT_PORT:

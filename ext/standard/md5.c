@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.c,v 1.32 2003/02/20 10:32:35 derick Exp $ */
+/* $Id: md5.c,v 1.33 2003/02/20 10:33:55 derick Exp $ */
 
 /* 
  * md5.c - Copyright 1997 Lachlan Roche 
@@ -116,7 +116,7 @@ PHP_NAMED_FUNCTION(php_if_md5_file)
 	fclose(fp);
 
 	if (raw_output) {
-		RETURN_STRINGL(digest, 20, 1);
+		RETURN_STRINGL(digest, 16, 1);
 	} else {
 		make_digest(md5str, digest);
 		RETVAL_STRING(md5str, 1);

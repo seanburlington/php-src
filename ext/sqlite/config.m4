@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.16.2.4 2004/07/10 12:25:33 wez Exp $
+dnl $Id: config.m4,v 1.16.2.5 2004/07/10 12:50:18 wez Exp $
 dnl config.m4 for extension sqlite
 dnl vim:et:ts=2:sw=2
 
@@ -39,7 +39,7 @@ if test "$PHP_SQLITE" != "no"; then
     ],[
         AC_MSG_ERROR([wrong sqlite lib version or lib not found])
     ],[
-        -L$SQLITE_DIR/lib -lm -ldl
+        -L$SQLITE_DIR/lib -lm
     ])
  
     PHP_SUBST(SQLITE_SHARED_LIBADD)

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 2003/04/17 12:38:42 wez Exp $
+dnl $Id: config.m4,v 1.4 2003/04/17 12:49:44 wez Exp $
 dnl config.m4 for extension sqlite
 
 PHP_ARG_WITH(sqlite, for sqlite support,
@@ -74,10 +74,10 @@ if test "$PHP_SQLITE" != "no"; then
 	AC_PATH_PROG(LEMON,lemon,no)
 	AC_SUBST(LEMON)
 
-	SQLITE_VERSION=`cat $ext_builddir/libsqlite/VERSION`
+	SQLITE_VERSION=`cat $ext_srcdir/libsqlite/VERSION`
 	AC_SUBST(SQLITE_VERSION)
 
-	sed -e s/--VERS--/`cat libsqlite/VERSION`/ -e s/--ENCODING--/$SQLITE_ENCODING/ libsqlite/src/sqlite.h.in >libsqlite/src/sqlite.h
+	sed -e s/--VERS--/`cat $ext_srcdir/libsqlite/VERSION`/ -e s/--ENCODING--/$SQLITE_ENCODING/ $ext_srcdir/libsqlite/src/sqlite.h.in >$ext_srcdir/libsqlite/src/sqlite.h
 
 	PHP_ADD_MAKEFILE_FRAGMENT
   fi

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.20 2001/08/23 21:22:37 sterling Exp $ */
+/* $Id: sablot.c,v 1.21 2001/08/23 21:56:28 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -128,9 +128,9 @@ static SAXHandler sax_handlers =
 
 /* Error handlers, automatically registered */
 static MessageHandler message_handler = {
-    error_makecode,
-    error_log,
-    error_print
+	error_makecode,
+	error_log,
+	error_print
 };
 
 /* Scheme handlers automatically registered */
@@ -1323,7 +1323,6 @@ static MH_ERROR error_log(void *user_data, SablotHandle proc, MH_ERROR code, MH_
 			fields++;
 		}
 	}
-
 	
 	/* If no error line is given, then place none in the 
 	   file */
@@ -1560,6 +1559,6 @@ static MH_ERROR error_print(void *user_data, SablotHandle proc, MH_ERROR code, M
  * tab-width: 4
  * c-basic-offset: 4
  * End:
- * vim600: sw=4 ts=4 tw=78 fdm=marker
- * vim<600: sw=4 ts=4 tw=78
+ * vim600: noet sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: noet sw=4 ts=4 tw=78
  */

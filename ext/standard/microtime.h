@@ -27,12 +27,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.h,v 1.3 1999/07/24 22:16:54 andrey Exp $ */
+/* $Id: microtime.h,v 1.4 1999/09/15 05:08:45 andi Exp $ */
 
 #ifndef _MICROTIME_H
 #define _MICROTIME_H
 
 PHP_FUNCTION(microtime);
+PHP_FUNCTION(gettimeofday);
 PHP_FUNCTION(getrusage);
 
 #endif /* _MICROTIME_H */

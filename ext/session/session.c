@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.237.2.7 2002/02/25 00:21:14 yohgaki Exp $ */
+/* $Id: session.c,v 1.237.2.8 2002/02/26 19:32:52 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -86,9 +86,9 @@ static const ps_serializer *_php_find_ps_serializer(char *name TSRMLS_DC);
 static PHP_INI_MH(OnUpdateSaveHandler)
 {
 	PS(mod) = _php_find_ps_module(new_value TSRMLS_CC);
-/*  	if(!PS(mod)) { */
-/*  	  php_error(E_ERROR,"Cannot find save handler %s",new_value); */
-/*  	} */
+	if(!PS(mod)) {
+		php_error(E_ERROR,"Cannot find save handler %s",new_value);
+	}
 	return SUCCESS;
 }
 

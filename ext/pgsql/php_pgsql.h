@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.69 2005/03/19 08:46:55 chriskl Exp $ */
+/* $Id: php_pgsql.h,v 1.70 2005/03/22 08:51:22 chriskl Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H
@@ -157,6 +157,9 @@ PHP_FUNCTION(pg_untrace);
 /* utility functions */
 PHP_FUNCTION(pg_client_encoding);
 PHP_FUNCTION(pg_set_client_encoding);
+#if HAVE_PQSETERRORVERBOSITY
+PHP_FUNCTION(pg_set_error_verbosity);
+#endif
 #if HAVE_PQESCAPE
 PHP_FUNCTION(pg_escape_string);
 PHP_FUNCTION(pg_escape_bytea);

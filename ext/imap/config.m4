@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.28 2001/05/06 05:39:16 sniper Exp $
+dnl $Id: config.m4,v 1.29 2001/05/06 06:14:12 sniper Exp $
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
 		AC_DEFINE(HAVE_IMAP2000, 1, [ ])
@@ -90,6 +90,7 @@ if test "$PHP_IMAP" != "no"; then
     fi
 
     if test "$PHP_KERBEROS" != "no"; then
+      AC_DEFINE(HAVE_IMAP_KRB,1,[ ])
       PHP_ADD_LIBPATH($PHP_KERBEROS_LIBDIR, IMAP_SHARED_LIBADD)
       PHP_ADD_LIBRARY(com_err,, IMAP_SHARED_LIBADD)
       PHP_ADD_LIBRARY(k5crypto,, IMAP_SHARED_LIBADD)

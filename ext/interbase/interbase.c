@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.44 2000/10/05 12:47:39 jah Exp $ */
+/* $Id: interbase.c,v 1.45 2000/10/17 17:46:14 jah Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -581,7 +581,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.44 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.45 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif
@@ -1411,8 +1411,9 @@ static int _php_ibase_exec(ibase_result **ib_resultp, ibase_query *ib_query, int
 	
 _php_ibase_exec_error:		 /* I'm a bad boy... */
 	
-	if (in_sqlda)
-		_php_ibase_free_xsqlda(in_sqlda);
+	if (in_sqlda){
+		efree(in_sqlda);
+	}
 	if (bind_buf)
 		efree(bind_buf);
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.9 2003/07/03 14:00:17 gschlossnagle Exp $ */
+/* $Id: php_reflection.c,v 1.10 2003/07/03 14:11:31 gschlossnagle Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -822,6 +822,7 @@ static int _addmethod(zend_function *mptr, int num_args, va_list args, zend_hash
 	long filter = va_arg(args, long);
 
 	if (mptr->common.fn_flags & filter) {
+	    TSRMLS_FETCH();
 		ALLOC_ZVAL(method);
 		reflection_method_factory(ce, mptr, method TSRMLS_CC);
 		add_next_index_zval(retval, method);
@@ -888,6 +889,7 @@ static int _addproperty(zend_property_info *pptr, int num_args, va_list args, ze
 	long filter = va_arg(args, long);
 
 	if (pptr->flags	& filter) {
+	    TSRMLS_FETCH();
 		ALLOC_ZVAL(property);
 		reflection_property_factory(ce, pptr, property TSRMLS_CC);
 		add_next_index_zval(retval, property);

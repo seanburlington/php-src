@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.5 2005/01/07 05:27:26 wez Exp $ */
+/* $Id: sqlite_statement.c,v 1.6 2005/01/12 06:08:59 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -122,7 +122,8 @@ static int pdo_sqlite_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_d
 	return 1;
 }
 
-static int pdo_sqlite_stmt_fetch(pdo_stmt_t *stmt TSRMLS_DC)
+static int pdo_sqlite_stmt_fetch(pdo_stmt_t *stmt,
+	enum pdo_fetch_orientation ori, long offset TSRMLS_DC)
 {
 	pdo_sqlite_stmt *S = (pdo_sqlite_stmt*)stmt->driver_data;
 	int i;

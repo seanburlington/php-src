@@ -1,4 +1,4 @@
-dnl ## $Id: config.m4,v 1.6 1999/11/29 21:32:11 thies Exp $ -*- sh -*-
+dnl ## $Id: config.m4,v 1.7 2000/05/22 14:39:33 joosters Exp $ -*- sh -*-
 
 RESULT=no
 AC_MSG_CHECKING(for Zeus ISAPI support)
@@ -10,9 +10,7 @@ AC_ARG_WITH(zeus,
 	else
 		ZEUSPATH=$withval
 	fi
-	if ! test -f "$ZEUSPATH/web/include/httpext.h"; then
-		AC_MSG_ERROR(Unable to find httpext.h in $ZEUSPATH/web/include)
-	fi
+	test -f "$ZEUSPATH/web/include/httpext.h" || AC_MSG_ERROR(Unable to find httpext.h in $ZEUSPATH/web/include)
 	PHP_BUILD_THREAD_SAFE
 	AC_DEFINE(WITH_ZEUS)
 	AC_ADD_INCLUDE($ZEUSPATH/web/include)

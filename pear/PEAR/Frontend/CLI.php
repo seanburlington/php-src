@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.25 2002/11/13 14:17:26 dickmann Exp $
+  $Id: CLI.php,v 1.26 2002/11/22 07:03:46 ssb Exp $
 */
 
 require_once "PEAR.php";
@@ -397,7 +397,7 @@ class PEAR_Frontend_CLI extends PEAR
                 break;
             case 'config-show':
                 $data['border'] = true;
-                $opts = array(0 => array('wrap' => 20),
+                $opts = array(0 => array('wrap' => 30),
                               1 => array('wrap' => 20),
                               2 => array('wrap' => 35));
                 $this->_startTable($data);

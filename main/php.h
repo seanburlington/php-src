@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.36 1999/09/20 16:56:01 andi Exp $ */
+/* $Id: php.h,v 1.37 1999/10/15 15:22:19 thies Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -306,9 +306,6 @@ extern void html_putc(char c);
 int module_startup_modules(void);
 int module_global_startup_modules(void);
 int module_global_shutdown_modules(void);
-
-/* needed for modules only */
-extern PHPAPI int php3i_get_le_fp(void);
 
 /*from basic functions*/
 extern PHPAPI int _php_error_log(int opt_err,char *message,char *opt,char *headers);

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.h,v 1.10 1999/10/12 18:50:05 thies Exp $ */
+/* $Id: file.h,v 1.11 1999/10/15 15:22:23 thies Exp $ */
 
 /* Synced with php3 revision 1.30 1999-06-16 [ssb] */
 
@@ -69,6 +69,9 @@ PHP_FUNCTION(get_meta_tags);
 PHP_FUNCTION(flock);
 
 PHPAPI int _php3_set_sock_blocking(int socketd, int block);
+PHPAPI int php_file_le_fopen(void);
+PHPAPI int php_file_le_socket(void);
+PHPAPI int php_file_le_uploads(void);
 
 #define phpext_file_ptr file_module_ptr
 #endif /* _FILE_H */

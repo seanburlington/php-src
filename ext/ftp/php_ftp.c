@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.7 1999/10/04 18:30:37 askalski Exp $ */
+/* $Id: php_ftp.c,v 1.8 1999/10/15 15:22:20 thies Exp $ */
 
 #include "php.h"
 
@@ -132,16 +132,7 @@ PHP_MINIT_FUNCTION(ftp)
 	}
 
 #define	FILEP(fp, pval) { \
-	int	id, type; \
-	int	le_fp; \
-	le_fp = php3i_get_le_fp(); \
-	convert_to_long(pval); \
-	id = (pval)->value.lval; \
-	(fp) = php3_list_find(id, &type); \
-	if (!(fp) || type != le_fp) { \
-		php_error(E_WARNING, "Unable to find fp %d", id); \
-		RETURN_FALSE; \
-	} \
+	ZEND_FETCH_RESOURCE(fp, FILE *, &pval, -1, "File-Handle", php_file_le_fopen()); \
 	}
 
 /* {{{ proto int ftp_connect(string host [, int port])

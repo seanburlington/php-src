@@ -15,7 +15,7 @@
    | Authors: Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.h,v 1.8 1999/10/12 18:50:04 thies Exp $ */
+/* $Id: fopen_wrappers.h,v 1.9 1999/10/15 15:22:19 thies Exp $ */
 
 /* Synced with php3 revision 1.25 1999-06-16 [ssb] */
 
@@ -65,8 +65,6 @@
 #define IS_NOT_SOCKET	0
 #define IS_SOCKET		1
 #define BAD_URL			2
-
-extern int le_socket; /* a list for open sockets */
 
 extern PHPAPI FILE *php3_fopen_wrapper(char *filename, char *mode, int options, int *issock, int *socketd);
 

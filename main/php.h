@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.43 1999/11/13 16:51:30 sas Exp $ */
+/* $Id: php.h,v 1.44 1999/11/14 11:05:36 ssb Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -166,10 +166,6 @@ typedef zval pval;
 
 #ifndef HAVE_STRERROR
 extern char *strerror(int);
-#endif
-
-#ifdef HAVE_MKSTEMP
-# define mktemp mkstemp
 #endif
 
 #include "fopen-wrappers.h"

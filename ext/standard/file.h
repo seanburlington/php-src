@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.h,v 1.11 1999/10/15 15:22:23 thies Exp $ */
+/* $Id: file.h,v 1.12 1999/11/14 11:05:37 ssb Exp $ */
 
 /* Synced with php3 revision 1.30 1999-06-16 [ssb] */
 
@@ -40,6 +40,7 @@ extern zend_module_entry file_module_entry;
 extern PHP_MINIT_FUNCTION(file);
 
 PHP_FUNCTION(tempnam);
+PHP_FUNCTION(tmpfile);
 PHP_FUNCTION(fopen);
 PHP_FUNCTION(fclose);
 PHP_FUNCTION(popen);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_content_types.c,v 1.24 2002/11/12 18:29:11 hholzgra Exp $ */
+/* $Id: php_content_types.c,v 1.24.2.1 2002/11/29 14:07:28 martin Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -40,7 +40,7 @@ SAPI_API SAPI_POST_READER_FUNC(php_default_post_reader)
 	char *data = NULL;
 	int length = 0;
 
-	// $HTTP_RAW_POST_DATA registration
+	/* $HTTP_RAW_POST_DATA registration */
 	if(!strcmp(SG(request_info).request_method, "POST")) {
 		if(NULL == SG(request_info).post_entry) {
 			/* no post handler registered, so we just swallow the data */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.25 2004/01/17 17:44:27 andrey Exp $ */
+/* $Id: tokenizer.c,v 1.26 2004/02/10 14:40:39 jan Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -345,6 +345,7 @@ static void tokenize(zval *return_value TSRMLS_DC)
 			case T_OPEN_TAG_WITH_ECHO:
 			case T_WHITESPACE:
 			case T_COMMENT:
+			case T_DOC_COMMENT:
 			case T_CLOSE_TAG:
 				destroy = 0;
 				break;

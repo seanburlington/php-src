@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: file.c,v 1.16 1999/06/15 21:50:59 ssb Exp $ */
+/* $Id: file.c,v 1.17 1999/06/15 21:56:11 ssb Exp $ */
 #include "php.h"
 #include "php_globals.h"
 #include "ext/standard/flock_compat.h"
@@ -720,7 +720,7 @@ PHP_FUNCTION(feof)
 		/* we're at the eof if the file doesn't exist */
 		RETURN_TRUE;
 	}
-	if ((issock?(SOCK_FEOF(socketd)):feof(fp))) {
+	if ((issock?(_php3_sock_eof(socketd)):feof(fp))) {
 		RETURN_TRUE;
 	} else {
 		RETURN_FALSE;
@@ -896,7 +896,7 @@ PHP_FUNCTION(fgetc) {
 		RETURN_FALSE;
 	}
 	buf = emalloc(sizeof(char) * 2);
-	if (!(issock?(*buf=SOCK_FGETC(socketd)):(*buf=fgetc(fp)))) {
+	if (!(issock?(SOCK_FGETC(buf,socketd)):(*buf=fgetc(fp)))) {
 		efree(buf);
 		RETVAL_FALSE;
 	} else {

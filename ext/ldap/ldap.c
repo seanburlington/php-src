@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.122 2002/06/26 06:49:25 derick Exp $ */
+/* $Id: ldap.c,v 1.123 2002/06/27 06:24:26 derick Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -276,7 +276,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.122 2002/06/26 06:49:25 derick Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.123 2002/06/27 06:24:26 derick Exp $" );
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -1482,7 +1482,7 @@ PHP_FUNCTION(ldap_delete)
 	ldap_dn = Z_STRVAL_PP(dn);
 
 	if ((rc = ldap_delete_s(ld->link, ldap_dn)) != LDAP_SUCCESS) {
-		php_error(E_WARNING, "%s(): Delete: %s\n", get_active_function_name(TSRMLS_C), ldap_err2string(rc));
+		php_error(E_WARNING, "%s(): Delete: %s", get_active_function_name(TSRMLS_C), ldap_err2string(rc));
 		RETURN_FALSE;
 	}
 

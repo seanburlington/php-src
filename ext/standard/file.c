@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.149 2001/03/23 09:30:51 romolo Exp $ */
+/* $Id: file.c,v 1.150 2001/04/07 21:46:43 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -906,15 +906,17 @@ PHP_FUNCTION(fgets)
 
 	convert_to_long_ex(arg2);
 	len = (*arg2)->value.lval;
-    if (len < 0) {
+
+	if (len < 0) {
 		php_error(E_WARNING, "length parameter to fgets() may not be negative");
 		RETURN_FALSE;
-    }
+	}
 
 	if (type == le_socket) {
 		issock=1;
 		socketd=*(int*)what;
 	}
+
 	buf = emalloc(sizeof(char) * (len + 1));
 	/* needed because recv doesnt put a null at the end*/
 	memset(buf,0,len+1);

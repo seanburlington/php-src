@@ -16,13 +16,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_uuencode.h,v 1.1 2003/10/27 05:35:41 iliaa Exp $ */
+/* $Id: php_uuencode.h,v 1.2 2003/10/28 04:02:11 iliaa Exp $ */
 
 #ifndef PHP_UUENCODE_H
 #define PHP_UUENCODE_H
 
-PHP_FUNCTION(uudecode);
-PHP_FUNCTION(uuencode);
+PHP_FUNCTION(convert_uudecode);
+PHP_FUNCTION(convert_uuencode);
 
 PHPAPI int php_uudecode(char *src, int src_len, char **dest);
 PHPAPI int php_uuencode(char *src, int src_len, char **dest);

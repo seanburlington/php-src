@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.635 2003/10/27 05:35:41 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.636 2003/10/28 04:02:11 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -490,8 +490,8 @@ function_entry basic_functions[] = {
 	PHP_FE(base64_decode,													NULL)
 	PHP_FE(base64_encode,													NULL)
 
-	PHP_FE(uuencode,														NULL)
-	PHP_FE(uudecode,														NULL)
+	PHP_FE(convert_uuencode,														NULL)
+	PHP_FE(convert_uudecode,														NULL)
 
 	PHP_FE(abs,																NULL)
 	PHP_FE(ceil,															NULL)

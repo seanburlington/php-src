@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uuencode.c,v 1.1 2003/10/27 05:35:41 iliaa Exp $ */
+/* $Id: uuencode.c,v 1.2 2003/10/28 04:02:11 iliaa Exp $ */
 
 /*
  * Portions of this code are based on Berkeley's uuencode/uudecode
@@ -172,7 +172,7 @@ PHPAPI int php_uudecode(char *src, int src_len, char **dest)
 
 /* {{{ proto string uuencode(string data) 
    uuencode a string */
-PHP_FUNCTION(uuencode)
+PHP_FUNCTION(convert_uuencode)
 {
 	char *src, *dst;
 	int src_len, dst_len;
@@ -189,7 +189,7 @@ PHP_FUNCTION(uuencode)
 
 /* {{{ proto string uudecode(string data)
    decode a uuencoded string */
-PHP_FUNCTION(uudecode)
+PHP_FUNCTION(convert_uudecode)
 {
 	char *src, *dst;
 	int src_len, dst_len;

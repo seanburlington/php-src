@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.257 2004/07/15 11:00:14 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.257.2.1 2004/09/29 06:43:29 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -786,7 +786,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.257 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.257.2.1 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -3008,6 +3008,16 @@ static void _oci_close_session(oci_session *session)
 			num_persistent--;
 		}
 	mutex_unlock(mx_lock);
+
+#ifdef HAVE_OCI_9_2
+	/* free environment handle (and fix bug #29652 with growing .msb FD number under weirdie Solarises) */
+	CALL_OCI(
+		OCIHandleFree(
+				(dvoid *) session->pEnv, 
+				OCI_HTYPE_ENV
+		)
+	);
+#endif
 
 	if (session->exclusive) {
 		efree(session);

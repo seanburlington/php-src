@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: typemanager.c,v 1.4 2001/02/26 06:07:15 andi Exp $
+ * $Id: typemanager.c,v 1.5 2001/09/27 12:28:09 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -91,6 +91,8 @@ struct _EnumMemberType
 
 CORBA_boolean TypeManager_Init(const char * pIdlDirectory)
 {
+	gTypeManager.mRoot = NULL;
+
 	if (pIdlDirectory != NULL)
 	{
 		glob_t result;

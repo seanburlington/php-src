@@ -14,7 +14,7 @@
 #  | Authors: Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: dynlib.m4,v 1.4 2000/08/20 05:36:06 sas Exp $ 
+# $Id: dynlib.m4,v 1.5 2000/10/30 14:29:51 sas Exp $ 
 #
 
 
@@ -54,7 +54,13 @@ AC_DEFUN(LIB_BUILD,[
   lib_target=""
   
   $php_shtool mkdir -p $1
+  if test "$BSD_MAKEFILE" = "yes"; then
+    lib_include_conf=".include \"\$(top_builddir)/config_vars.mk\""
+  else
+    lib_include_conf="include \$(top_builddir)/config_vars.mk"
+  fi
   cat >$lib_makefile<<EOF
+$lib_include_conf
 LTLIBRARY_OBJECTS = \$(LTLIBRARY_SOURCES:.c=.lo) \$(LTLIBRARY_OBJECTS_X)
 LTLIBRARY_SHARED_OBJECTS = \$(LTLIBRARY_OBJECTS:.lo=.slo)
 EOF

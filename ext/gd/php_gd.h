@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.39 2002/03/17 17:01:18 sander Exp $ */
+/* $Id: php_gd.h,v 1.40 2002/06/28 12:25:57 sniper Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -29,12 +29,6 @@
 #endif
 
 #if HAVE_LIBGD
-
-#include <gd.h>
-
-#if HAVE_LIBT1
-#include "gdt1.h"
-#endif
 
 #define PHP_GDIMG_TYPE_GIF      1
 #define PHP_GDIMG_TYPE_PNG      2

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sybase.c,v 1.20 2000/01/01 01:31:53 sas Exp $ */
+/* $Id: sybase.c,v 1.21 2000/01/15 13:39:15 thies Exp $ */
 
 
 #include "php.h"
@@ -160,6 +160,13 @@ static void _free_sybase_result(sybase_result *result)
 static void _close_sybase_link(sybase_link *sybase_ptr)
 {
 	sybase_ptr->valid = 0;
+
+    /* 
+	  this can cause crashes in the current model.
+      if the resource gets destroyed via destroy_resource_list() resource_list
+      will *not* be in a consistent state. thies@digicol.de
+    */
+
 	zend_hash_apply(resource_list,(int (*)(void *))_clean_invalid_results);
 	dbclose(sybase_ptr->link);
 	dbloginfree(sybase_ptr->login);

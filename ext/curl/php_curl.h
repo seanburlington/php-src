@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.1 2000/07/16 19:37:33 sterling Exp $ */
+/* $Id: php_curl.h,v 1.2 2000/07/24 20:00:00 sterling Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -37,6 +37,20 @@ PHP_FUNCTION (curl_init);
 PHP_FUNCTION (curl_setopt);
 PHP_FUNCTION (curl_exec);
 PHP_FUNCTION (curl_close);
+
+
+typedef struct {
+	int le_curl;
+} php_curl_globals;
+
+#ifdef ZTS
+#define CURLG(v) (curl_globals->v)
+#define CURLLS_FETCH() php_curl_globals *curl_globals = ts_resource(gd_curl_id)
+#else
+#define CURLG(v) (curl_globals.v)
+#define CURLLS_FETCH()
+#endif
+
 
 #else
 #define curl_module_ptr NULL

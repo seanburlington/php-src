@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.26 2000/02/24 15:55:10 eschmid Exp $ */
+/* $Id: wddx.c,v 1.27 2000/02/24 16:03:27 eschmid Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -899,7 +899,7 @@ PHP_FUNCTION(wddx_packet_end)
 /* }}} */
 
 
-/* {{{ proto int wddx_add_vars(int packet_id [, ...])
+/* {{{ proto int wddx_add_vars(int packet_id [, mixed var_names [, ...]])
    Serializes given variables and adds them to packet given by packet_id */
 PHP_FUNCTION(wddx_add_vars)
 {

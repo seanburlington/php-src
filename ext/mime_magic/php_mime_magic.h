@@ -15,7 +15,7 @@
   | Author:                                                              |
   +----------------------------------------------------------------------+
 
-  $Id: php_mime_magic.h,v 1.2 2002/03/26 19:57:32 hholzgra Exp $ 
+  $Id: php_mime_magic.h,v 1.3 2002/03/27 11:56:42 hholzgra Exp $ 
 */
 
 #ifndef PHP_MIME_MAGIC_H
@@ -159,10 +159,8 @@ static long from_oct(int, char *);
 static int fsmagic(const char *fn);
 
 
-#if 0 /* TODO */
+#if HAVE_ZLIB
 static int zmagic(unsigned char *, int);
-static int uncompress(int, unsigned char **, int);
-static int uncompress_child(void *, child_info *);
 #endif
 
 /*

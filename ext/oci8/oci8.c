@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.245 2004/02/02 08:09:53 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.246 2004/02/02 08:26:15 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -442,7 +442,8 @@ static zend_function_entry php_oci_functions[] = {
 	PHP_FE(oci_collection_trim,         NULL)
 	PHP_FE(oci_new_collection,          NULL)
 #endif
-
+	
+	PHP_FALIAS(oci_free_cursor,     oci_free_statement,       NULL)
 	PHP_FALIAS(ocifreecursor,       oci_free_statement,       NULL)
 	PHP_FALIAS(ocibindbyname,       oci_bind_by_name,       third_arg_force_ref)
 	PHP_FALIAS(ocidefinebyname,     oci_define_by_name,     third_arg_force_ref)
@@ -785,7 +786,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.245 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.246 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.69 2001/07/11 23:03:24 sterling Exp $ */
+/* $Id: curl.c,v 1.70 2001/07/13 16:44:44 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -319,6 +319,7 @@ static size_t curl_read(char *data, size_t size, size_t nmemb, void *ctx)
 	switch (t->method) {
 	case PHP_CURL_DIRECT:
 		length = fread(data, size, nmemb, t->fp);
+		break;
 	case PHP_CURL_USER: {
 		zval *argv[3];
 		zval *retval;
@@ -688,9 +689,9 @@ PHP_FUNCTION(curl_setopt)
 		}
 		break;
 	case CURLOPT_BINARYTRANSFER:
-		convert_to_long_ex(zvalue);
-		
+		convert_to_long_ex(zvalue);	
 		ch->handlers->write->type = PHP_CURL_BINARY;
+		break;
 	case CURLOPT_WRITEFUNCTION:
 		zval_add_ref(zvalue);
 		ch->handlers->write->func   = *zvalue;

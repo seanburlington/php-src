@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.145 2003/11/05 23:27:41 hirokawa Exp $ */
+/* $Id: rfc1867.c,v 1.146 2003/11/12 22:34:58 sesser Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -73,6 +73,10 @@ void php_mb_flush_gpc_variables(int num_vars, char **val_list, int *len_list, zv
 
 void php_mb_gpc_realloc_buffer(char ***pval_list, int **plen_list, int *num_vars_max, int inc  TSRMLS_DC)
 {
+	/* allow only even increments */
+	if (inc & 1) {
+		inc++;
+	}
 	(*num_vars_max) += inc;
 	*pval_list = (char **)erealloc(*pval_list, (*num_vars_max+2)*sizeof(char *));
 	*plen_list = (int *)erealloc(*plen_list, (*num_vars_max+2)*sizeof(int));

@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.h,v 1.18 2000/03/12 01:03:23 codelion Exp $ */
+/* $Id: php_odbc.h,v 1.19 2000/03/13 15:22:47 kara Exp $ */
 
 #ifndef _PHP_ODBC_H
 #define _PHP_ODBC_H
@@ -215,7 +215,6 @@ typedef struct odbc_connection {
 	HENV henv;
 	HDBC hdbc;
 #endif
-/*	int open;*/
 	int id;
 	int persistent;
 } odbc_connection;

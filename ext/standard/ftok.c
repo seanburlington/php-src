@@ -16,11 +16,9 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ftok.c,v 1.6 2002/08/24 01:19:28 helly Exp $ */
+/* $Id: ftok.c,v 1.7 2002/10/20 10:18:20 derick Exp $ */
 
 #include "php.h"
-
-#if HAVE_SYSVSEM || HAVE_SYSVSHM  || HAVE_SHMOP
 
 #include <sys/types.h>                                                                                                        
 #include <sys/ipc.h>
@@ -55,8 +53,6 @@ PHP_FUNCTION(ftok)
     RETURN_LONG(k);
 }
 /* }}} */
-
-#endif
 
 /*
  * Local variables:

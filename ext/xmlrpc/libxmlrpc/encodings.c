@@ -41,7 +41,7 @@
 #include <stdlib.h>
 #endif
 
-static const char rcsid[] = "#(@) $Id: encodings.c,v 1.5 2002/11/26 23:02:08 fmk Exp $";
+static const char rcsid[] = "#(@) $Id: encodings.c,v 1.6 2004/03/08 19:08:25 abies Exp $";
 
 #include <errno.h>
 
@@ -57,11 +57,10 @@ static char* convert(const char* src, int src_len, int *new_len, const char* fro
    char* outbuf = 0;
 
    if(src && src_len && from_enc && to_enc) {
-      int outlenleft = src_len;
+      size_t outlenleft = src_len;
+      size_t inlenleft = src_len;
       int outlen = src_len;
-      int inlenleft = src_len;
       iconv_t ic = iconv_open(to_enc, from_enc);
-      char* src_ptr = (char*)src;
       char* out_ptr = 0;
 
       if(ic != (iconv_t)-1) {
@@ -71,7 +70,7 @@ static char* convert(const char* src, int src_len, int *new_len, const char* fro
          if(outbuf) {
             out_ptr = (char*)outbuf;
             while(inlenleft) {
-               st = iconv(ic, &src_ptr, &inlenleft, &out_ptr, &outlenleft);
+               st = iconv(ic, &src, &inlenleft, &out_ptr, &outlenleft);
                if(st == -1) {
                   if(errno == E2BIG) {
                      int diff = out_ptr - outbuf;

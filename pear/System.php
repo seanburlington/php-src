@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.14 2002/05/31 18:49:47 cox Exp $
+// $Id: System.php,v 1.15 2002/06/02 14:27:15 dickmann Exp $
 //
 
 require_once 'PEAR.php';
@@ -43,7 +43,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.14 $
+* @version  $Revision: 1.15 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -182,19 +182,19 @@ class System
         if (isset($do_recursive)) {
             $struct = System::_multipleToStruct($opts[1]);
             foreach($struct['files'] as $file) {
-                if (!unlink($file)) {
+                if (!@unlink($file)) {
                     $ret = false;
                 }
             }
             foreach($struct['dirs'] as $dir) {
-                if (!rmdir($dir)) {
+                if (!@rmdir($dir)) {
                     $ret = false;
                 }
             }
         } else {
             foreach ($opts[1] as $file) {
                 $delete = (is_dir($file)) ? 'rmdir' : 'unlink';
-                if (!$delete($file)) {
+                if (!@$delete($file)) {
                     $ret = false;
                 }
             }

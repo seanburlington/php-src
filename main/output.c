@@ -17,11 +17,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.31 2000/09/03 19:57:06 andi Exp $ */
+/* $Id: output.c,v 1.32 2000/09/04 22:21:10 sterling Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
 #include "ext/session/php_session.h"
+#include "basic_functions.h"
 #include "SAPI.h"
 
 /* output functions */
@@ -332,8 +333,11 @@ static int php_ub_body_write_no_header(const char *str, uint str_length)
 	uint new_length=0;
 	int result;
 	OLS_FETCH();
+	BLS_FETCH();
 
-	session_adapt_uris(str, str_length, &newstr, &new_length);
+	if (BG(use_trans_sid)) {
+		session_adapt_uris(str, str_length, &newstr, &new_length);
+	}
 		
 	if (newstr) {
 		str = newstr;

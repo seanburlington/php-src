@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.245 2000/09/02 15:54:18 rubys Exp $ */
+/* $Id: basic_functions.c,v 1.246 2000/09/04 22:21:09 sterling Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -588,6 +588,7 @@ static PHP_INI_MH(OnUpdateSafeModeAllowedEnvVars)
 PHP_INI_BEGIN()
 	PHP_INI_ENTRY_EX("safe_mode_protected_env_vars",	SAFE_MODE_PROTECTED_ENV_VARS,	PHP_INI_SYSTEM,		OnUpdateSafeModeProtectedEnvVars,		NULL)
 	PHP_INI_ENTRY_EX("safe_mode_allowed_env_vars",		SAFE_MODE_ALLOWED_ENV_VARS,		PHP_INI_SYSTEM,		OnUpdateSafeModeAllowedEnvVars,			NULL)
+	STD_PHP_INI_ENTRY("session.use_trans_sid",          "1",							PHP_INI_ALL,			OnUpdateBool,			use_trans_sid,			php_basic_globals,			basic_globals)
 PHP_INI_END()
 
 
@@ -755,7 +756,9 @@ PHP_RINIT_FUNCTION(basic)
 	PHP_RINIT(dir)(INIT_FUNC_ARGS_PASSTHRU);
 
 #ifdef TRANS_SID
-	PHP_RINIT(url_scanner)(INIT_FUNC_ARGS_PASSTHRU);
+	if (BG(use_trans_sid)) {
+		PHP_RINIT(url_scanner)(INIT_FUNC_ARGS_PASSTHRU);
+	}
 #endif
 	
 	return SUCCESS;

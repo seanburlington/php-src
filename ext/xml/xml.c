@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.126 2003/05/22 03:08:48 sterling Exp $ */
+/* $Id: xml.c,v 1.127 2003/05/25 07:23:41 sebastian Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -261,7 +261,11 @@ PHP_MINFO_FUNCTION(xml)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "XML Support", "active");
 	php_info_print_table_row(2, "XML Namespace Support", "active");
-	php_info_print_table_row(2, "EXPAT Version",XML_ExpatVersion());
+#ifdef LIBXML_DOTTED_VERSION
+	php_info_print_table_row(2, "libxml2 Version", LIBXML_DOTTED_VERSION);
+#else
+	php_info_print_table_row(2, "EXPAT Version", XML_ExpatVersion());
+#endif
 	php_info_print_table_end();
 }
 /* }}} */

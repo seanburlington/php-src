@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.91.2.24 2004/03/08 03:16:11 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.91.2.25 2004/06/18 00:37:02 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -166,6 +166,7 @@ php_apache_sapi_get_stat(TSRMLS_D)
 
 	ctx->finfo.st_uid = ctx->r->finfo.user;
 	ctx->finfo.st_gid = ctx->r->finfo.group;
+	ctx->finfo.st_dev = ctx->r->finfo.device;
 	ctx->finfo.st_ino = ctx->r->finfo.inode;
 	ctx->finfo.st_atime = ctx->r->finfo.atime/1000000;
 	ctx->finfo.st_mtime = ctx->r->finfo.mtime/1000000;

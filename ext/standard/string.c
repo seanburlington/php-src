@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.43 2004/07/06 22:16:47 iliaa Exp $ */
+/* $Id: string.c,v 1.333.2.44 2004/07/11 21:24:47 andrey Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -234,7 +234,7 @@ static void php_spn_common_handler(INTERNAL_FUNCTION_PARAMETERS, int behavior)
 		}
 	}
 	
-	if ((start + len) > len1) {
+	if (((unsigned) start + (unsigned) len) > len1) {
 		len = len1 - start;
 	}
 
@@ -1636,7 +1636,7 @@ PHP_FUNCTION(substr)
 		RETURN_FALSE;
 	}
 
-	if ((f + l) > Z_STRLEN_PP(str)) {
+	if (((unsigned) f + (unsigned) l) > Z_STRLEN_PP(str)) {
 		l = Z_STRLEN_PP(str) - f;
 	}
 
@@ -1698,7 +1698,7 @@ PHP_FUNCTION(substr_replace)
 		}
 	}
 
-	if ((f + l) > Z_STRLEN_PP(str)) {
+	if (((unsigned) f + (unsigned) l) > Z_STRLEN_PP(str)) {
 		l = Z_STRLEN_PP(str) - f;
 	}
 

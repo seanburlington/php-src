@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.112 2001/02/27 20:16:34 andi Exp $ */
+/* $Id: oci8.c,v 1.113 2001/03/02 09:12:55 thies Exp $ */
 
 /* TODO list:
  *
@@ -489,7 +489,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.112 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.113 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2494,6 +2494,7 @@ PHP_FUNCTION(ocibindbyname)
 		case SQLT_CFILEE:
 		case SQLT_CLOB:
 		case SQLT_BLOB:
+		case SQLT_RDD:
 			if ((*var)->type != IS_OBJECT) {
 				php_error(E_WARNING,"Variable must be allocated using OCINewDescriptor()");
 				RETURN_FALSE;

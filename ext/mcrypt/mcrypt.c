@@ -16,7 +16,7 @@
    |          Derick Rethans <d.rethans@jdimedia.nl>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.77.4.1 2002/11/29 15:57:39 derick Exp $ */
+/* $Id: mcrypt.c,v 1.77.4.2 2002/12/16 09:03:09 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -179,6 +179,13 @@ ZEND_GET_MODULE(mcrypt)
 
 #define MCRYPT_CHECK_PARAM_COUNT(a,b)							\
 	if (argc < (a) || argc > (b)) {								\
+		WRONG_PARAM_COUNT;										\
+	}
+
+#define MCRYPT_CHECK_PARAM_COUNT_EX(a,b)						\
+	if (argc < (a) || argc > (b)) {								\
+		zend_get_parameters_ex(1, &mcryptind);					\
+		zend_list_delete (Z_LVAL_PP(mcryptind));                \
 		WRONG_PARAM_COUNT;										\
 	}
 
@@ -455,7 +462,7 @@ PHP_FUNCTION(mcrypt_generic_init)
 	int result = 0;
 	
 	argc = ZEND_NUM_ARGS();
-	MCRYPT_CHECK_PARAM_COUNT (3,3)
+	MCRYPT_CHECK_PARAM_COUNT_EX (3,3)
 	
 	zend_get_parameters_ex(3, &mcryptind, &key, &iv);
 	ZEND_FETCH_RESOURCE (td, MCRYPT, mcryptind, -1, "MCrypt", le_mcrypt);				
@@ -530,7 +537,7 @@ PHP_FUNCTION(mcrypt_generic)
 	int block_size, data_size;
 	
 	argc = ZEND_NUM_ARGS();
-	MCRYPT_CHECK_PARAM_COUNT (2,2)
+	MCRYPT_CHECK_PARAM_COUNT_EX (2,2)
 	
 	zend_get_parameters_ex(2, &mcryptind, &data);
 	ZEND_FETCH_RESOURCE (td, MCRYPT, mcryptind, -1, "MCrypt", le_mcrypt);
@@ -571,7 +578,7 @@ PHP_FUNCTION(mdecrypt_generic)
 	int block_size, data_size;
 	
 	argc = ZEND_NUM_ARGS();
-	MCRYPT_CHECK_PARAM_COUNT (2,2)
+	MCRYPT_CHECK_PARAM_COUNT_EX (2,2)
 	
 	zend_get_parameters_ex(2, &mcryptind, &data);
 	ZEND_FETCH_RESOURCE (td, MCRYPT, mcryptind, -1, "MCrypt", le_mcrypt);				

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.478 2002/05/11 19:19:49 rasmus Exp $ */
+/* $Id: basic_functions.c,v 1.479 2002/06/12 17:25:48 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1067,6 +1067,9 @@ PHP_RINIT_FUNCTION(basic)
 	PHP_RINIT(syslog) (INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(dir) (INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(url_scanner_ex) (INIT_FUNC_ARGS_PASSTHRU);
+
+	/* Reset magic_quotes_runtime */
+	PG(magic_quotes_runtime) = INI_BOOL("magic_quotes_runtime");
 
 	return SUCCESS;
 }

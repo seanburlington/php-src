@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.140 2003/07/03 02:59:04 sniper Exp $ */
+/* $Id: rfc1867.c,v 1.141 2003/07/03 15:26:12 moriyoshi Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -700,7 +700,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 	int max_file_size=0, skip_upload=0, anonindex=0, is_anonymous;
 	zval *http_post_files=NULL;
 #if HAVE_MBSTRING && !defined(COMPILE_DL_MBSTRING)
-	int str_len=0
+	int str_len = 0;
 #endif
 	zend_bool magic_quotes_gpc;
 	multipart_buffer *mbuff;

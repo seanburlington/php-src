@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.21.2.11 2003/12/06 22:08:58 cellog Exp $
+// $Id: System.php,v 1.21.2.12 2003/12/11 16:08:19 cellog Exp $
 //
 
 require_once 'PEAR.php';
@@ -48,7 +48,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.21.2.11 $
+* @version  $Revision: 1.21.2.12 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -289,7 +289,8 @@ class System
         }
         if (isset($mode)) {
             if (!$outputfd = fopen($outputfile, $mode)) {
-                return System::raiseError("Could not open $outputfile");
+                $err = System::raiseError("Could not open $outputfile");
+                return $err;
             }
             $ret = true;
         }

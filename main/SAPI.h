@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.h,v 1.101 2003/03/18 15:53:33 helly Exp $ */
+/* $Id: SAPI.h,v 1.102 2003/03/18 20:52:51 helly Exp $ */
 
 #ifndef SAPI_H
 #define SAPI_H
@@ -243,6 +243,7 @@ struct _sapi_module_struct {
 	unsigned int (*input_filter)(int arg, char *var, char **val, unsigned int val_len TSRMLS_DC);
 	
 	void (*ini_defaults)(HashTable *configuration_hash);
+	int phpinfo_as_text;
 };
 
 

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.29 2003/06/10 20:03:30 imajes Exp $ */
+/* $Id: php_imap.h,v 1.30 2003/06/13 14:39:22 iliaa Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H
@@ -165,6 +165,7 @@ PHP_FUNCTION(imap_utf7_decode);
 PHP_FUNCTION(imap_utf7_encode);
 PHP_FUNCTION(imap_mime_header_decode);
 PHP_FUNCTION(imap_thread);
+PHP_FUNCTION(imap_timeout);
 
 #if defined(HAVE_IMAP2000) || defined(HAVE_IMAP2001)
 PHP_FUNCTION(imap_get_quota);

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.55 2002/04/23 23:36:54 ssb Exp $
+// $Id: Common.php,v 1.56 2002/04/28 07:52:00 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -67,6 +67,18 @@ $GLOBALS['_PEAR_Common_file_roles'] = array('php','ext','test','doc','data','ext
  * @var array
  */
 $GLOBALS['_PEAR_Common_replacement_types'] = array('php-const', 'pear-config');
+
+/**
+ * Valid "provide" types
+ * @var array
+ */
+$GLOBALS['_PEAR_Common_provide_types'] = array('ext', 'prog', 'class', 'function', 'feature', 'api');
+
+/**
+ * Valid "provide" types
+ * @var array
+ */
+$GLOBALS['_PEAR_Common_script_phases'] = array('pre-install', 'post-install', 'pre-uninstall', 'post-uninstall', 'pre-build', 'post-build', 'pre-configure', 'post-configure', 'pre-setup', 'post-setup');
 
 // }}}
 
@@ -1224,6 +1236,34 @@ class PEAR_Common extends PEAR
     function getReplacementTypes()
     {
         return $GLOBALS['_PEAR_Common_replacement_types'];
+    }
+
+    // }}}
+    // {{{ getReplacementTypes()
+
+    /**
+     * Get the implemented file replacement types in
+     *
+     * @return array
+     * @static
+     */
+    function getProvideTypes()
+    {
+        return $GLOBALS['_PEAR_Common_provide_types'];
+    }
+
+    // }}}
+    // {{{ getReplacementTypes()
+
+    /**
+     * Get the implemented file replacement types in
+     *
+     * @return array
+     * @static
+     */
+    function getScriptPhases()
+    {
+        return $GLOBALS['_PEAR_Common_script_phases'];
     }
 
     // }}}

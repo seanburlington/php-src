@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.3 2003/02/13 00:11:17 georg Exp $ 
+  $Id: mysqli_api.c,v 1.4 2003/02/13 17:15:22 edink Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -633,8 +633,8 @@ PHP_FUNCTION(mysqli_fetch)
 				case IS_STRING:
 					if (stmt->stmt->bind[i].buffer_type == MYSQL_TYPE_LONGLONG) {
 						char tmp[50];
-						unsigned long long lval;
-						memcpy (&lval, stmt->bind[i].buffer, sizeof(long long));
+						my_ulonglong lval;
+						memcpy (&lval, stmt->bind[i].buffer, sizeof(my_ulonglong));
 						if (lval != (long)lval) {
 							sprintf((char *)&tmp, "%lld", lval);
 							ZVAL_STRING(stmt->vars[i], tmp, 1);
@@ -1001,7 +1001,7 @@ PHP_FUNCTION(mysqli_init)
 PHP_FUNCTION(mysqli_insert_id)
 {
 	MYSQL *mysql;
-	unsigned long long rc;
+	my_ulonglong rc;
 	char  ret[50];
 	zval  *mysql_link;
 

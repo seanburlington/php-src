@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_virtual_cwd.h,v 1.29 2000/08/06 16:22:07 andi Exp $ */
+/* $Id: php_virtual_cwd.h,v 1.30 2000/08/06 17:42:54 sas Exp $ */
 
 #ifndef VIRTUAL_CWD_H
 #define VIRTUAL_CWD_H
@@ -27,6 +27,10 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+
+#ifdef HAVE_UTIME_H
+#include <utime.h>
+#endif
 
 #ifndef ZEND_WIN32
 #include <unistd.h>

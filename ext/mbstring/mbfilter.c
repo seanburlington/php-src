@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.12.2.1 2001/08/28 22:19:52 wez Exp $ */
+/* $Id: mbfilter.c,v 1.12.2.2 2001/08/29 11:33:06 wez Exp $ */
 
 
 #include <stdlib.h>
@@ -7061,10 +7061,10 @@ mbfl_strimwidth(
 	n = string->len;
 	if (p != NULL) {
 		while (n > 0) {
+			n--;
 			if ((*encoder->filter_function)(*p++, encoder) < 0) {
 				break;
 			}
-			n--;
 		}
 		mbfl_convert_filter_flush(encoder);
 		if (pc.status != 0 && mkwidth > 0) {

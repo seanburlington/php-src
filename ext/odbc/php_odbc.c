@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.92 2001/06/11 01:00:43 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.93 2001/06/14 15:02:17 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -778,6 +778,7 @@ PHP_FUNCTION(odbc_prepare)
 #ifdef HAVE_SQL_EXTENDED_FETCH
 	UDWORD      scrollopts;
 #endif
+	ODBCLS_FETCH();
 
 	if (zend_get_parameters_ex(2, &pv_conn, &pv_query) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -882,20 +883,25 @@ PHP_FUNCTION(odbc_execute)
    	odbc_result   *result;
 	int numArgs, i, ne;
 	RETCODE rc;
+	ODBCLS_FETCH();
 	
 	numArgs = ZEND_NUM_ARGS();
-	if (numArgs == 1) {
-		if (zend_get_parameters_ex(1, &pv_res) == FAILURE)
+	switch(numArgs) {
+		case 1:
+			if (zend_get_parameters_ex(1, &pv_res) == FAILURE)
+				WRONG_PARAM_COUNT;
+			break;
+		case 2:
+			if (zend_get_parameters_ex(2, &pv_res, &pv_param_arr) == FAILURE)
+				WRONG_PARAM_COUNT;
+			if ((*pv_param_arr)->type != IS_ARRAY) {
+				php_error(E_WARNING, "No array passed to odbc_execute()");
+				return;
+			}
+			break;
+		default:
 			WRONG_PARAM_COUNT;
-	} else {
-		if (zend_get_parameters_ex(2, &pv_res, &pv_param_arr) == FAILURE)
-			WRONG_PARAM_COUNT;
-
-        if ((*pv_param_arr)->type != IS_ARRAY) {
-            php_error(E_WARNING, "No array passed to odbc_execute()");
-            return;
-        }
-    }
+	}
 
 	ZEND_FETCH_RESOURCE(result, odbc_result *, pv_res, -1, "ODBC result", le_result);
 	

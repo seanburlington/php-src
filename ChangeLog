@@ -1,3 +1,27 @@
+2005-01-05  Joe Orton  <jorton@redhat.com>
+
+    * ext/curl/interface.c:
+      Fix #31413: curl POSTFIELDS usage on 64-bit platforms.
+
+2005-01-05  Anantha Kesari H Y  <hyanantha@novell.com>
+
+    * (PHP_5_0)
+      ext/session/mod_files.c:
+      passing FD_CLOEXEC would be a standard way to pass argument to fcntl's last
+      argument than 1
+
+    * (PHP_5_0)
+      ext/ldap/ldap.c:
+      Removed redundant NEW_LIBC checks for NETWARE
+
+    * (PHP_5_0)
+      ext/ftp/php_ftp.c:
+      Removed redundant NEW_LIBC checks for NetWare
+
+    * (PHP_5_0)
+      ext/ftp/ftp.c:
+      Removed redundant NEW_LIBC checks
+
 2005-01-04  Frank M. Kromann  <frank@kromann.info>
 
     * ext/gmp/config.w32:
@@ -15253,7 +15277,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1854 2005/01/05 01:35:56 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1855 2005/01/06 01:35:51 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

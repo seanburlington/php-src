@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.234 2002/06/18 12:16:27 hholzgra Exp $ */
+/* $Id: file.c,v 1.235 2002/07/02 06:16:35 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -525,6 +525,11 @@ PHP_FUNCTION(tempnam)
 	}
 	convert_to_string_ex(arg1);
 	convert_to_string_ex(arg2);
+
+	if (php_check_open_basedir(Z_STRVAL_PP(arg1) TSRMLS_CC)) {
+		RETURN_FALSE;
+	}
+	
 	d = estrndup(Z_STRVAL_PP(arg1), Z_STRLEN_PP(arg1));
 	strlcpy(p, Z_STRVAL_PP(arg2), sizeof(p));
 

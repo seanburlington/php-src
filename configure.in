@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.111 2000/04/01 14:39:14 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.112 2000/04/13 12:24:28 martin Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -152,6 +152,9 @@ AC_PATH_PROG(PROG_SENDMAIL, sendmail, /usr/lib/sendmail, $PATH /usr/bin /usr/sbi
 if test -n "$PROG_SENDMAIL"; then
   AC_DEFINE(HAVE_SENDMAIL)
 fi
+
+dnl Check whether the system uses EBCDIC (not ASCII) as its native codeset
+PHP_EBCDIC
 
 dnl
 dnl Check for /usr/pkg/{lib,include} which is where NetBSD puts binary

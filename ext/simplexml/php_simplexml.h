@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.12 2004/01/09 06:12:29 sterling Exp $ */
+/* $Id: php_simplexml.h,v 1.13 2004/01/17 19:41:31 helly Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H
@@ -65,14 +65,20 @@ typedef struct {
 	simplexml_nsmap *nsmapptr;
 	xmlXPathContextPtr xpath;
 	struct {
-		xmlNodePtr            node;
+		php_libxml_node_ptr   *node;
+		int                   itertype;
 		char                  *name;
-		int                   namelen;
+		char                  *nsprefix;
+		int                   type;
 		zval                  *data;
 	} iter;
 } php_sxe_object;
 
-
+#define SXE_ITER_NONE 0
+#define SXE_ITER_ELEMENT 1
+#define SXE_ITER_ATTR 2
+#define SXE_ITER_CHILD 3
+#define SXE_ITER_ATTRLIST 4
 
 #ifdef ZTS
 #define SIMPLEXML_G(v) TSRMG(simplexml_globals_id, zend_simplexml_globals *, v)

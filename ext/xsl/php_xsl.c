@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.19 2004/02/04 11:14:47 zeev Exp $ */
+/* $Id: php_xsl.c,v 1.20 2004/02/04 21:04:39 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -119,7 +119,7 @@ zend_object_value xsl_objects_new(zend_class_entry *class_type TSRMLS_DC)
 	zend_hash_copy(intern->std.properties, &class_type->default_properties, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
 	ALLOC_HASHTABLE(intern->parameter);
 	zend_hash_init(intern->parameter, 0, NULL, ZVAL_PTR_DTOR, 0);
-	retval.handle = zend_objects_store_put(intern, NULL, xsl_objects_free_storage, xsl_objects_clone TSRMLS_CC);
+	retval.handle = zend_objects_store_put(intern, NULL, (zend_objects_free_object_storage_t) xsl_objects_free_storage, xsl_objects_clone TSRMLS_CC);
 	intern->handle = retval.handle;
 	retval.handlers = &xsl_object_handlers;
 	return retval;

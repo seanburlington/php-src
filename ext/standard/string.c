@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.58 1999/11/20 22:09:27 andrei Exp $ */
+/* $Id: string.c,v 1.59 1999/11/21 12:05:39 thies Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -1120,9 +1120,9 @@ static void php_strtr_array(zval *return_value,char *str,int slen,HashTable *has
 		}
 			
 		found = 0;
+		memcpy(key,str+pos,maxlen);
 
 		for (len = maxlen; len >= minlen; len--) {
-			memcpy(key,str+pos,len);
 			key[ len ]=0;
 			
 			if (zend_hash_find(hash,key,len+1,(void**)&trans) == SUCCESS) {

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.158 2005/03/11 23:57:01 wez Exp $ 
+   $Id: sqlite.c,v 1.159 2005/03/15 15:57:49 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -44,7 +44,7 @@
 #include "zend_exceptions.h"
 #include "zend_interfaces.h"
 
-#ifdef HAVE_SPL
+#if defined(HAVE_SPL) && ((PHP_MAJOR_VERSION > 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1))
 extern PHPAPI zend_class_entry *spl_ce_RuntimeException;
 extern PHPAPI zend_class_entry *spl_ce_Countable;
 #endif
@@ -1008,7 +1008,7 @@ PHP_MINIT_FUNCTION(sqlite)
 	REGISTER_SQLITE_CLASS(Database,   db,        NULL);
 	REGISTER_SQLITE_CLASS(Result,     query,     NULL);
 	REGISTER_SQLITE_CLASS(Unbuffered, ub_query,  NULL);
-#ifdef HAVE_SPL
+#if defined(HAVE_SPL) && ((PHP_MAJOR_VERSION > 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1))
 	REGISTER_SQLITE_CLASS(Exception,  exception, spl_ce_RuntimeException);
 #else
 	REGISTER_SQLITE_CLASS(Exception,  exception, zend_exception_get_default());
@@ -1020,7 +1020,7 @@ PHP_MINIT_FUNCTION(sqlite)
 	sqlite_ce_ub_query->get_iterator = sqlite_get_iterator;
 	sqlite_ce_ub_query->iterator_funcs.funcs = &sqlite_ub_query_iterator_funcs;
 
-#ifdef HAVE_SPL
+#if defined(HAVE_SPL) && ((PHP_MAJOR_VERSION > 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1))
 	zend_class_implements(sqlite_ce_query TSRMLS_CC, 2, zend_ce_iterator, spl_ce_Countable);
 #else
 	zend_class_implements(sqlite_ce_query TSRMLS_CC, 1, zend_ce_iterator);	
@@ -1103,7 +1103,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.158 2005/03/11 23:57:01 wez Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.159 2005/03/15 15:57:49 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.187 2001/02/02 13:47:02 rasmus Exp $ */
+/* $Id: string.c,v 1.188 2001/02/15 14:01:18 thies Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2937,7 +2937,7 @@ PHP_FUNCTION(count_chars)
 		array_init(return_value);
 	}
 
-	for (inx=0; inx < 255; inx++) {
+	for (inx=0; inx < 256; inx++) {
 		switch (mymode) {
  		case 0:
 			add_index_long(return_value,inx,chars[inx]);

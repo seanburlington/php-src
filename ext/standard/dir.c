@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.63 2001/04/29 17:57:23 andi Exp $ */
+/* $Id: dir.c,v 1.64 2001/04/29 18:06:56 andi Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -170,6 +170,9 @@ static void _php_do_opendir(INTERNAL_FUNCTION_PARAMETERS, int createobject)
 
 #ifdef PHP_WIN32
 	if (!dirp->dir || dirp->dir->finished) {
+		if (dirp->dir) {
+			closedir(dirp->dir);
+		}
 #else
 	if (!dirp->dir) {
 #endif

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.228 2001/09/03 04:49:36 sterling Exp $ */
+/* $Id: string.c,v 1.229 2001/09/03 06:10:45 sterling Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3742,9 +3742,9 @@ PHP_FUNCTION(sscanf)
 	convert_to_string_ex(args[1]);
 	
 	result = php_sscanf_internal(Z_STRVAL_PP(args[0]),
-								 Z_STRVAL_PP(args[1]),
-								 argc, args,
-								 2, &return_value TSRMLS_CC);
+	                             Z_STRVAL_PP(args[1]),
+	                             argc, args,
+	                             2, &return_value TSRMLS_CC);
 	efree(args);
 
 	if (SCAN_ERROR_WRONG_PARAM_COUNT == result) {

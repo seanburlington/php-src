@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.86 2000/09/26 09:08:02 stas Exp $ */
+/* $Id: gd.c,v 1.87 2000/09/30 13:32:25 dbeu Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -41,6 +41,7 @@
 #ifdef PHP_WIN32
 # include <io.h>
 # include <fcntl.h>
+#define PHPAPI __declspec(dllexport)
 #endif
 
 #if HAVE_LIBGD

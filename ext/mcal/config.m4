@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.7 2000/06/13 00:57:57 chagenbu Exp $
+dnl $Id: config.m4,v 1.8 2000/11/19 02:42:05 chagenbu Exp $
 
 PHP_ARG_WITH(mcal,for MCAL support,
 [  --with-mcal[=DIR]       Include MCAL support.])
@@ -25,6 +25,14 @@ if test "$PHP_MCAL" != "no"; then
 
   if test ! -f "$MCAL_INCLUDE/mcal.h"; then
     AC_MSG_ERROR(Unable to locate your libmcal header files - mcal.h should be in the directory you specify or in the include/ subdirectory below it - default search location is $MCAL_DEFAULT_SEARCH)
+  fi
+
+  if test ! -f "$MCAL_INCLUDE/cal_misc.h"; then
+    AC_MSG_ERROR(Unable to locate your libmcal header files - cal_misc.h should be in the directory you specify or in the include/ subdirectory below it - default search location is $MCAL_DEFAULT_SEARCH)
+  fi
+
+  if test ! -f "$MCAL_INCLUDE/icalroutines.h"; then
+    AC_MSG_ERROR(Unable to locate your libmcal header files - icalroutines.h should be in the directory you specify or in the include/ subdirectory below it - default search location is $MCAL_DEFAULT_SEARCH)
   fi
 
   if test ! -f "$MCAL_LIBRARY/libmcal.a"; then

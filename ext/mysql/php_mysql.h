@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.23 2001/07/30 01:56:30 zeev Exp $ */
+/* $Id: php_mysql.h,v 1.24 2001/11/02 06:42:12 sniper Exp $ */
 
 #ifndef PHP_MYSQL_H
 #define PHP_MYSQL_H
@@ -48,8 +48,10 @@ PHP_FUNCTION(mysql_connect);
 PHP_FUNCTION(mysql_pconnect);
 PHP_FUNCTION(mysql_close);
 PHP_FUNCTION(mysql_select_db);
+#if MYSQL_VERSION_ID < 40000
 PHP_FUNCTION(mysql_create_db);
 PHP_FUNCTION(mysql_drop_db);
+#endif
 PHP_FUNCTION(mysql_query);
 PHP_FUNCTION(mysql_unbuffered_query);
 PHP_FUNCTION(mysql_db_query);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.277 2002/07/13 04:13:43 sniper Exp $ */
+/* $Id: string.c,v 1.278 2002/07/30 10:51:33 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3887,24 +3887,21 @@ PHP_FUNCTION(sscanf)
    Perform the rot13 transform on a string */
 PHP_FUNCTION(str_rot13)
 {
-	char *str;
-	int str_len;
-    static char xfrom[] = "abcdefghijklmnopqrstuvwxyz"
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    static char xto[] = "nopqrstuvwxyzabcdefghijklm"
-        "NOPQRSTUVWXYZABCDEFGHIJKLM";
+	zval **arg;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s",
-							  &str, &str_len) == FAILURE) {
-		return;
+    static char xfrom[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    static char xto[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+
+	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg)) {
+		WRONG_PARAM_COUNT;
 	}
+	convert_to_string_ex(arg);
+	*return_value = **arg;
+	zval_copy_ctor(return_value);
 
-    php_strtr(str, str_len, xfrom, xto, 52);
-	RETURN_STRINGL(str, str_len, 1);
+    php_strtr(Z_STRVAL_P(return_value), Z_STRLEN_P(return_value), xfrom, xto, 52);
 }
 /* }}} */
-
-
 
 
 /*

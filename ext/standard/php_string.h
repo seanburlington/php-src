@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.76 2003/04/13 22:59:19 pollita Exp $ */
+/* $Id: php_string.h,v 1.77 2003/05/05 13:46:14 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -121,7 +121,7 @@ PHPAPI char *php_addslashes(char *str, int length, int *new_length, int freeit T
 PHPAPI char *php_addcslashes(char *str, int length, int *new_length, int freeit, char *what, int wlength TSRMLS_DC);
 PHPAPI void php_stripslashes(char *str, int *len TSRMLS_DC);
 PHPAPI void php_stripcslashes(char *str, int *len);
-PHPAPI char *php_basename(char *str, size_t  len , char *suffix, size_t sufflen);
+PHPAPI void php_basename(char *str, size_t  len , char *suffix, size_t sufflen, char **p_ret, int *p_len);
 PHPAPI size_t php_dirname(char *str, size_t len);
 PHPAPI char *php_stristr(unsigned char *s, unsigned char *t, size_t s_len, size_t t_len);
 PHPAPI char *php_str_to_str_ex(char *haystack, int length, char *needle,

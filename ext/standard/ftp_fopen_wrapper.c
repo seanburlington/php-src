@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.52 2003/04/26 01:55:31 pollita Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.53 2003/05/05 13:46:14 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -552,6 +552,7 @@ static size_t php_ftp_dirstream_read(php_stream *stream, char *buf, size_t count
 	php_stream *innerstream = (php_stream *)stream->abstract;
 	size_t tmp_len;
 	char *basename;
+	int basename_len;
 
 	if (count != sizeof(php_stream_dirent)) {
 		return 0;
@@ -564,15 +565,19 @@ static size_t php_ftp_dirstream_read(php_stream *stream, char *buf, size_t count
 	if (!php_stream_get_line(innerstream, ent->d_name, sizeof(ent->d_name), &tmp_len)) {
 		return 0;
 	}
-	if (!(basename = php_basename(ent->d_name, tmp_len, NULL, 0))) {
+
+	php_basename(ent->d_name, tmp_len, NULL, 0, &basename, &basename_len);
+	if (!basename) {
 		return 0;
 	}
 
-	if (strlen(basename) == 0) {
+	if (!basename_len) {
 		efree(basename);
 		return 0;
 	}
-	strcpy(ent->d_name, basename);
+
+	memcpy(ent->d_name, basename, MIN(sizeof(ent->d_name), basename_len)-1);
+	ent->d_name[sizeof(ent->d_name)-1] = '\0';
 	efree(basename);
 
 	return sizeof(php_stream_dirent);

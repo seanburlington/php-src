@@ -1,4 +1,4 @@
-dnl $Id: configure.in.in,v 1.56 1999/07/21 08:37:59 sas Exp $ -*- sh -*-
+dnl $Id: configure.in.in,v 1.57 1999/07/21 14:42:22 ssb Exp $ -*- sh -*-
 dnl Process this file with autoconf to produce a configure script.
 
 
@@ -49,7 +49,7 @@ dnl ## Diversion 4 is the last one.  Here we generate files and clean up.
 divert(1)
 
 dnl ## This is where the version number is changed from now on!
-AM_INIT_AUTOMAKE(php, 4.0B1)
+AM_INIT_AUTOMAKE(php, 4.0b2-dev)
 
 
 

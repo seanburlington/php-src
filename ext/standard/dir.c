@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.93 2002/07/29 13:13:50 edink Exp $ */
+/* $Id: dir.c,v 1.94 2002/08/13 04:24:15 rasmus Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -174,7 +174,7 @@ PHP_FUNCTION(opendir)
 }
 
 /* }}} */
-/* {{{ proto class dir(string directory)
+/* {{{ proto object dir(string directory)
    Directory class with properties, handle and class and methods read, rewind and close */
 
 PHP_FUNCTION(getdir)

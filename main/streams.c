@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.104 2002/10/14 02:28:35 wez Exp $ */
+/* $Id: streams.c,v 1.105 2002/10/14 05:38:50 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -760,8 +760,9 @@ PHPAPI char *_php_stream_gets(php_stream *stream, char *buf, size_t maxlen TSRML
 	}
 	
 	if (total_copied == 0) {
-		if (grow_mode)
-			assert(bufstart != NULL);
+		if (grow_mode) {
+			assert(bufstart == NULL);
+		}
 		return NULL;
 	}
 	

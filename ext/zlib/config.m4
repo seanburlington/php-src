@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.7 2000/06/26 08:53:36 sr Exp $
+dnl $Id: config.m4,v 1.8 2000/10/11 22:40:22 hholzgra Exp $
 
 
 
@@ -41,4 +41,6 @@ if test "$PHP_ZLIB" != "no"; then
   AC_ADD_LIBRARY_WITH_PATH(z, $ZLIB_LIBDIR, ZLIB_SHARED_LIBADD)
   
   AC_ADD_INCLUDE($ZLIB_INCDIR)
+
+	AC_CHECK_FUNC(fopencookie, [AC_DEFINE(HAVE_FOPENCOOKIE,1,[ ])])
 fi

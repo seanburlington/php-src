@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.77.2.2 2002/04/04 20:13:41 daniela Exp $ */
+/* $Id: interbase.c,v 1.77.2.3 2002/05/12 13:01:28 daniela Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -434,7 +434,7 @@ static void _php_ibase_free_query(ibase_query *ib_query)
 		}
 		isc_transaction_info(IB_STATUS, &ib_query->trans,sizeof(tr_items), tr_items, sizeof(tmp), tmp );
 		/* we have the trans still open and a statement to drop? */
-		if ( !(IB_STATUS[0] && IB_STATUS[0])  &&  ib_query->stmt) {
+		if ( !(IB_STATUS[0] && IB_STATUS[1])  &&  ib_query->stmt) {
 			IBDEBUG("Dropping statement handle (free_query)...");
 			if (isc_dsql_free_statement(IB_STATUS, &ib_query->stmt, DSQL_drop)){
 				_php_ibase_error();
@@ -465,7 +465,7 @@ static void _php_ibase_free_blob(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 
 	if (ib_blob->bl_handle != NULL) { /* blob open*/
 		if (isc_cancel_blob(IB_STATUS, &ib_blob->bl_handle)) {
-			_php_ibase_error();
+			php_error(E_ERROR, "You can lose data. Close any blob after reading of writing it. Use ibase_blob_close() before calling ibase_close()");
 		}
 	}
 	efree(ib_blob);
@@ -603,7 +603,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");    
-	php_info_print_table_row(2, "Revision", "$Revision: 1.77.2.2 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.77.2.3 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.72 2003/03/30 22:29:21 derick Exp $ */
+/* $Id: openssl.c,v 1.73 2003/03/31 17:58:28 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2302,7 +2302,7 @@ PHP_FUNCTION(openssl_pkcs7_encrypt)
 		goto clean_exit;
 	}
 
-	p7 = PKCS7_encrypt(recipcerts, infile, cipher, flags);
+	p7 = PKCS7_encrypt(recipcerts, infile, (EVP_CIPHER*)cipher, flags);
 
 	if (p7 == NULL) {
 		goto clean_exit;

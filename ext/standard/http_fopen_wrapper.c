@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.53.2.11 2003/04/28 14:41:54 wez Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.53.2.12 2003/05/06 11:04:42 sas Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -135,12 +135,6 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 	stream = php_stream_sock_open_host(resource->host, resource->port, SOCK_STREAM, NULL, 0);
 	if (stream == NULL)	
 		goto out;
-
-	/* Ordinarily we'd always reduce chunk_size to 1 to avoid filter problems.
-	   However, since 4.3 filter support is extremely limited and will be completely rewritten in 5.0
-	   we'll accept the unexpected behavior of filtered http streams in favor of improved performance. */
-	if (options & STREAM_WILL_CAST)
-		chunk_size = php_stream_set_chunk_size(stream, 1);
 
 	/* avoid problems with auto-detecting when reading the headers -> the headers
 	 * are always in canonical \r\n format */
@@ -266,6 +260,15 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 	php_stream_write(stream, "\r\n", sizeof("\r\n")-1);
 
 	location[0] = '\0';
+
+	/* 
+	 * We need to read the HTTP response header one-by-one, because
+	 * the original author did not know about MSG_PEEK.
+	 * The chunk_size will be reset later, once we have read the
+	 * header completely.
+	 */
+	if (options & STREAM_WILL_CAST)
+		chunk_size = php_stream_set_chunk_size(stream, 1);
 
 	if (!header_init && FAILURE == zend_hash_find(EG(active_symbol_table),
 				"http_response_header", sizeof("http_response_header"), (void **) &response_header)) {

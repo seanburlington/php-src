@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.386.2.1 2001/08/24 23:47:27 jeroen Exp $ */
+/* $Id: basic_functions.c,v 1.386.2.2 2001/09/02 23:39:44 jeroen Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -784,6 +784,7 @@ PHP_MINIT_FUNCTION(basic)
 	PHP_MINIT(crypt)(INIT_FUNC_ARGS_PASSTHRU);
 #endif
 
+	PHP_MINIT(rand)(INIT_FUNC_ARGS_PASSTHRU);
 #ifdef ZTS
 	PHP_MINIT(lcg)(INIT_FUNC_ARGS_PASSTHRU);
 #endif

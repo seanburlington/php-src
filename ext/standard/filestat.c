@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.33 2000/05/17 18:14:05 hholzgra Exp $ */
+/* $Id: filestat.c,v 1.34 2000/05/17 19:27:08 hholzgra Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -221,8 +221,8 @@ PHP_FUNCTION(diskfreespace)
 	RETURN_DOUBLE(bytesfree);
 }
 
-/* {{{ bool chgrp(string filename, mixed group)
-   Change file group */
+/* {{{ bool bool chown(string filename, mixed user)
+   Change file owner */
 PHP_FUNCTION(chgrp)
 {
 #ifndef WINDOWS

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.162 2002/03/15 10:49:31 andi Exp $ */
+/* $Id: php.h,v 1.163 2002/03/15 17:10:38 jimw Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -67,7 +67,9 @@
 #if PHP_DEBUG
 #undef NDEBUG
 #else
+#ifndef NDEBUG
 #define NDEBUG
+#endif
 #endif
 #include <assert.h>
 #else /* HAVE_ASSERT_H */

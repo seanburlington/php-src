@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.27 2003/06/16 18:19:14 pollita Exp $ */
+/* $Id: streams.c,v 1.28 2003/06/27 04:27:18 pollita Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1622,6 +1622,10 @@ PHPAPI void php_stream_context_free(php_stream_context *context)
 		zval_ptr_dtor(&context->options);
 		context->options = NULL;
 	}
+	if (context->notifier) {
+		php_stream_notification_free(context->notifier);
+		context->notifier = NULL;
+	}
 	efree(context);
 }
 
@@ -1630,6 +1634,7 @@ PHPAPI php_stream_context *php_stream_context_alloc(void)
 	php_stream_context *context;
 
 	context = ecalloc(1, sizeof(php_stream_context));
+	context->notifier = NULL;
 	MAKE_STD_ZVAL(context->options);
 	array_init(context->options);
 

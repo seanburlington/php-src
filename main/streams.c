@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.142 2003/01/06 23:27:03 wez Exp $ */
+/* $Id: streams.c,v 1.143 2003/01/30 21:06:34 sas Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -521,8 +521,7 @@ static void php_stream_fill_read_buffer(php_stream *stream, size_t size TSRMLS_D
 	if (stream->writepos - stream->readpos < (off_t)size) {
 		size_t justread = 0;
 	
-		if (stream->eof)
-			return;
+		/* ignore eof here; the underlying state might have changed */
 		
 		/* no; so lets fetch more data */
 		
@@ -581,7 +580,8 @@ PHPAPI size_t _php_stream_read(php_stream *stream, char *buf, size_t size TSRMLS
 			didread += toread;
 		}
 
-		if (size == 0 || stream->eof) {
+		/* ignore eof here; the underlying state might have changed */
+		if (size == 0) {
 			break;
 		}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.93 2002/05/20 17:18:18 mfischer Exp $ */
+/* $Id: filestat.c,v 1.94 2002/05/20 17:41:35 mfischer Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -553,7 +553,7 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 	char *stat_sb_names[13]={"dev", "ino", "mode", "nlink", "uid", "gid", "rdev",
 			      "size", "atime", "mtime", "ctime", "blksize", "blocks"};
 
-	if (php_check_open_basedir(filename)) {
+	if (php_check_open_basedir(filename TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 

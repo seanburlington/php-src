@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.49.2.8 2003/10/01 02:53:59 sniper Exp $
+dnl $Id: config.m4,v 1.49.2.9 2003/10/03 01:13:56 moriyoshi Exp $
 dnl
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
@@ -103,7 +103,7 @@ AC_DEFUN(PHP_IMAP_KRB_CHK, [
 
 AC_DEFUN(PHP_IMAP_SSL_CHK, [
   AC_ARG_WITH(imap-ssl,
-  [  --with-imap-ssl=<DIR>     IMAP: Include SSL support. DIR is the OpenSSL install dir.],[
+  [  --with-imap-ssl=<DIR>   IMAP: Include SSL support. DIR is the OpenSSL install dir.],[
     PHP_IMAP_SSL=$withval
   ],[
     PHP_IMAP_SSL=no

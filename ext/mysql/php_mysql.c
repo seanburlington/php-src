@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.174.2.10 2003/04/11 09:54:39 derick Exp $ */
+/* $Id: php_mysql.c,v 1.174.2.11 2003/04/24 01:39:44 iliaa Exp $ */
 
 /* TODO:
  *
@@ -1627,7 +1627,7 @@ PHP_FUNCTION(mysql_escape_string)
 	 * be worth it
 	 */
 
-	Z_STRVAL_P(return_value) = (char *) emalloc(Z_STRLEN_PP(str)*2+1);
+	Z_STRVAL_P(return_value) = (char *) safe_emalloc(Z_STRLEN_PP(str), 2, 1);
 	Z_STRLEN_P(return_value) = mysql_escape_string(Z_STRVAL_P(return_value), Z_STRVAL_PP(str), Z_STRLEN_PP(str));
 	Z_TYPE_P(return_value) = IS_STRING;
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.62 2000/06/16 19:55:51 andrei Exp $ */
+/* $Id: var.c,v 1.63 2000/06/17 15:53:32 andrei Exp $ */
 
 
 /* {{{ includes 
@@ -255,10 +255,8 @@ void php_var_serialize(pval *buf, pval **struc)
 				zval_dtor(fname);
 				FREE_ZVAL(fname);
 
-				if (retval_ptr) {
-					zval_dtor(retval_ptr);
-					FREE_ZVAL(retval_ptr);
-				}
+				if (retval_ptr)
+					zval_ptr_dtor(&retval_ptr);
 				return;	
 			}
 
@@ -521,10 +519,8 @@ int php_var_unserialize(pval **rval, const char **p, const char *max)
 
 				zval_dtor(fname);
 				FREE_ZVAL(fname);
-				if (retval_ptr) {
-					zval_dtor(retval_ptr);
-					FREE_ZVAL(retval_ptr);
-				}
+				if (retval_ptr)
+					zval_ptr_dtor(&retval_ptr);
 			}
 
 			return *((*p)++) == '}';

@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.42 2000/06/17 14:48:03 andi Exp $ */
+/* $Id: wddx.c,v 1.43 2000/06/17 15:53:33 andrei Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -449,10 +449,8 @@ static void php_wddx_serialize_object(wddx_packet *packet, zval *obj)
 	zval_dtor(fname);
 	FREE_ZVAL(fname);
 
-	if (retval) {
-		zval_dtor(retval);
-		FREE_ZVAL(retval);
-	}
+	if (retval)
+		zval_ptr_dtor(&retval);
 }
 
 static void php_wddx_serialize_array(wddx_packet *packet, zval *arr)
@@ -756,10 +754,8 @@ static void php_wddx_pop_element(void *user_data, const char *name)
 
 						zval_dtor(fname);
 						FREE_ZVAL(fname);
-						if (retval) {
-							zval_dtor(retval);
-							FREE_ZVAL(retval);
-						}
+						if (retval)
+							zval_ptr_dtor(&retval);
 					}
 					else
 						zend_hash_update(target_hash,

@@ -23,11 +23,11 @@
    | If you did not, or have any questions about PHP licensing, please    |
    | contact core@php.net.                                                |
    +----------------------------------------------------------------------+
-   | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
+   | Authors: Vlad Krupin <phpdevel@echospace.com>                        |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pspell.h,v 1.1 2000/07/10 21:29:19 vlad Exp $ */
+/* $Id: php_pspell.h,v 1.2 2000/07/13 20:39:14 vlad Exp $ */
 
 
 #ifndef _PSPELL_H
@@ -36,9 +36,8 @@
 extern zend_module_entry pspell_module_entry;
 #define pspell_module_ptr &pspell_module_entry
 
-extern PHP_MINIT_FUNCTION(pspell);
-extern PHP_MINFO_FUNCTION(pspell);
-
+PHP_MINIT_FUNCTION(pspell);
+PHP_MINFO_FUNCTION(pspell);
 PHP_FUNCTION(pspell_new);
 PHP_FUNCTION(pspell_mode);
 PHP_FUNCTION(pspell_runtogether);

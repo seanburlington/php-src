@@ -16,13 +16,12 @@
 	+----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.2 2000/07/10 23:18:27 vlad Exp $ */
+/* $Id: pspell.c,v 1.3 2000/07/13 20:39:14 vlad Exp $ */
+
+#define IS_EXT_MODULE
 
 #include "php.h"
 
-#ifdef COMPILE_DL_PSPELL
-#include "phpdl.h"
-#endif
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>

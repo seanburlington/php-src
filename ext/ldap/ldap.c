@@ -21,7 +21,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.29 2000/04/01 16:23:39 zeev Exp $ */
+/* $Id: ldap.c,v 1.30 2000/04/03 22:00:18 andi Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -156,10 +156,14 @@ PHP_MINFO_FUNCTION(ldap)
 #if HAVE_NSLDAP
 	LDAPVersion ver;
 	double SDKVersion;
-	/* Print version information */
+#endif
+
+	LDAPLS_FETCH();
+
+#if HAVE_NSLDAP
+/* Print version information */
 	SDKVersion = ldap_version( &ver );
 #endif
-	LDAPLS_FETCH();
 
 	if (LDAPG(max_links) == -1) {
 		strcpy(maxl, "Unlimited");
@@ -170,7 +174,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_printf("<table>"
 				"<tr><td>Total links:</td><td>%d/%s</td></tr>\n"
-		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.29 2000/04/01 16:23:39 zeev Exp $</td></tr>\n"
+		        "<tr><td>RCS Version:</td><td>$Id: ldap.c,v 1.30 2000/04/03 22:00:18 andi Exp $</td></tr>\n"
 #if HAVE_NSLDAP
 				"<tr><td>SDK Version:</td><td>%f</td></tr>"
 				"<tr><td>Highest LDAP Protocol Supported:</td><td>%f</td></tr>"

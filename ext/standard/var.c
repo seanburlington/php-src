@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.50 2000/03/16 02:15:41 thies Exp $ */
+/* $Id: var.c,v 1.51 2000/03/16 18:24:43 rubys Exp $ */
 
 
 /* {{{ includes 
@@ -560,6 +560,7 @@ int php_var_unserialize(pval **rval, const char **p, const char *max)
 			if ((*rval)->type == IS_OBJECT) {
 				zval *retval_ptr;
 				zval *fname;
+				CLS_FETCH();
 
 				MAKE_STD_ZVAL(fname);
 				ZVAL_STRING(fname,"_wakeup_",1);

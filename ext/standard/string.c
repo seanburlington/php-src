@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.225 2001/08/21 12:57:52 zeev Exp $ */
+/* $Id: string.c,v 1.226 2001/08/22 02:03:14 swm Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3190,6 +3190,9 @@ int php_tag_find(char *tag, int len, char *set) {
 	When an allow string is passed in we keep track of the string
 	in state 1 and when the tag is closed check it against the
 	allow string to see if we should allow it.
+
+	swm: Added ability to strip <?xml tags without assuming it PHP
+	code.
 */
 PHPAPI void php_strip_tags(char *rbuf, int len, int state, char *allow, int allow_len)
 {
@@ -3286,13 +3289,18 @@ PHPAPI void php_strip_tags(char *rbuf, int len, int state, char *allow, int allo
 				break;
 
 			case '?':
-				if (state==1 && *(p-1)=='<') {
+				if (state==1 && *(p-1)=='<' && *(p+1) != 'x' 
+				  && *(p+2) != 'm' && *(p+3) != 'l') {
+
 					br=0;
 					state=2;
 					break;
 				}
-				/* fall-through */
+					/* else, it is xml, since state == 1, lets just fall through
+					 * to '>'
+					 */
 
+				/* fall-through */
 			default:
 				if (state == 0) {
 					*(rp++) = c;
@@ -3301,7 +3309,7 @@ PHPAPI void php_strip_tags(char *rbuf, int len, int state, char *allow, int allo
 					if( (tp-tbuf)>=PHP_TAG_BUF_SIZE ) { /* no buffer overflows */
 						tp = tbuf;
 					}
-				}
+				} 
 				break;
 		}
 		c = *(++p);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.349 2003/01/21 14:53:17 iliaa Exp $ */
+/* $Id: string.c,v 1.350 2003/01/24 12:19:59 andrey Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4190,7 +4190,7 @@ PHP_FUNCTION(str_shuffle)
 	*return_value = **arg;
 	zval_copy_ctor(return_value);
 	if (Z_STRLEN_P(return_value) > 1) { 
-		php_string_shuffle(Z_STRVAL_P(return_value), Z_STRLEN_P(return_value) TSRMLS_CC);
+		php_string_shuffle(Z_STRVAL_P(return_value), (long) Z_STRLEN_P(return_value) TSRMLS_CC);
 	}
 }
 /* }}} */

@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.146 2002/01/04 12:26:27 hholzgra Exp $
+dnl $Id: acinclude.m4,v 1.147 2002/01/09 03:40:51 sniper Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -749,7 +749,7 @@ AC_DEFUN(PHP_ADD_LIBRARY,[
  c|c_r|pthread*) ;;
  *)
 ifelse($3,,[
-   PHP_X_ADD_LIBRARY($1,$2,PHP_EXTENSION_LIBS)
+   PHP_X_ADD_LIBRARY($1,$2,LIBS)
 ],[
    if test "$ext_shared" = "yes"; then
      PHP_X_ADD_LIBRARY($1,$2,$3)

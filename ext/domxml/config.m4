@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.13 2000/10/18 22:17:41 hirokawa Exp $
+dnl $Id: config.m4,v 1.14 2000/10/19 12:10:59 hirokawa Exp $
 dnl config.m4 for extension domxml
 
 PHP_ARG_WITH(dom, for DOM support,
@@ -7,10 +7,10 @@ Make sure that the comment is aligned:
                           DIR is the libxml install directory,
                           defaults to /usr.])
 
-if test "$PHP_DOMXML" != "no"; then
+if test "$PHP_DOM" != "no"; then
 
-  if test -r $PHP_DOMXML/include/libxml/tree.h; then
-    DOMXML_DIR=$PHP_DOMXML
+  if test -r $PHP_DOM/include/libxml/tree.h; then
+    DOMXML_DIR=$PHP_DOM
   else
     AC_MSG_CHECKING(for DOM in default path)
     for i in /usr/local /usr; do

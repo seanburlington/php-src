@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.15 2003/07/12 07:01:30 moriyoshi Exp $ */
+/* $Id: proc_open.c,v 1.16 2003/08/28 16:49:57 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -535,7 +535,7 @@ PHP_FUNCTION(proc_open)
 #else
 			descriptors[ndesc].childend = dup(fd);
 			if (descriptors[ndesc].childend < 0) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "unable to dup File-Handle for descriptor %d - %s", nindex, strerror(errno));
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "unable to dup File-Handle for descriptor %ld - %s", nindex, strerror(errno));
 				goto exit_fail;
 			}
 #endif
@@ -560,7 +560,7 @@ PHP_FUNCTION(proc_open)
 				if (zend_hash_index_find(Z_ARRVAL_PP(descitem), 1, (void **)&zmode) == SUCCESS) {
 					convert_to_string_ex(zmode);
 				} else {
-					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Missing mode parameter for 'pipe'", Z_STRVAL_PP(ztype));
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Missing mode parameter for 'pipe'");
 					goto exit_fail;
 				}
 
@@ -601,14 +601,14 @@ PHP_FUNCTION(proc_open)
 				if (zend_hash_index_find(Z_ARRVAL_PP(descitem), 1, (void **)&zfile) == SUCCESS) {
 					convert_to_string_ex(zfile);
 				} else {
-					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Missing file name parameter for 'file'", Z_STRVAL_PP(ztype));
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Missing file name parameter for 'file'");
 					goto exit_fail;
 				}
 
 				if (zend_hash_index_find(Z_ARRVAL_PP(descitem), 2, (void **)&zmode) == SUCCESS) {
 					convert_to_string_ex(zmode);
 				} else {
-					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Missing mode parameter for 'file'", Z_STRVAL_PP(ztype));
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Missing mode parameter for 'file'");
 					goto exit_fail;
 				}
 

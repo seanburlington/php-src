@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.57 2003/08/14 00:37:42 iliaa Exp $ */
+/* $Id: assert.c,v 1.58 2003/08/28 16:49:57 sas Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -276,7 +276,7 @@ PHP_FUNCTION(assert_options)
 		break;
 
 	default:
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown value %d", Z_LVAL_PP(what));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown value %ld", Z_LVAL_PP(what));
 		break;
 	}
 

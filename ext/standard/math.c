@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.106 2003/08/09 01:12:41 helly Exp $ */
+/* $Id: math.c,v 1.107 2003/08/28 16:49:57 sas Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -968,11 +968,11 @@ PHP_FUNCTION(base_convert)
 	convert_to_long_ex(frombase);
 	convert_to_long_ex(tobase);
 	if (Z_LVAL_PP(frombase) < 2 || Z_LVAL_PP(frombase) > 36) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid `from base' (%d)", Z_LVAL_PP(frombase));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid `from base' (%ld)", Z_LVAL_PP(frombase));
 		RETURN_FALSE;
 	}
 	if (Z_LVAL_PP(tobase) < 2 || Z_LVAL_PP(tobase) > 36) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid `to base' (%d)", Z_LVAL_PP(tobase));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid `to base' (%ld)", Z_LVAL_PP(tobase));
 		RETURN_FALSE;
 	}
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.115 2003/08/28 16:28:33 sas Exp $ */
+/* $Id: fsock.c,v 1.116 2003/08/28 16:49:57 sas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -83,7 +83,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		efree(hostname);
 	}
 	if (stream == NULL) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "unable to connect to %s:%d (%s)", host, port, errstr == NULL ? "Unknown error" : errstr);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "unable to connect to %s:%ld (%s)", host, port, errstr == NULL ? "Unknown error" : errstr);
 	}
 
 	if (hashkey) {

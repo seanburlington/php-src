@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.16.2.3 2001/10/19 18:09:21 edink Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.16.2.4 2002/03/21 21:58:11 rasmus Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -66,7 +66,7 @@
 
 #include "php_fopen_wrappers.h"
 
-#define HTTP_HEADER_BLOCK_SIZE		128
+#define HTTP_HEADER_BLOCK_SIZE		256
 
 /* {{{ php_fopen_url_wrap_http
  */
@@ -74,7 +74,7 @@ FILE *php_fopen_url_wrap_http(const char *path, char *mode, int options, int *is
 {
 	FILE *fp=NULL;
 	php_url *resource=NULL;
-	char tmp_line[128];
+	char tmp_line[256];
 	char location[512];
 	char hdr_line[8192];
 	int body = 0;

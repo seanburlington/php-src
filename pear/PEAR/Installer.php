@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.139 2003/10/31 04:52:00 cellog Exp $
+// $Id: Installer.php,v 1.140 2003/10/31 22:22:17 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -1314,11 +1314,6 @@ class PEAR_Installer extends PEAR_Common
                 $code = $depchecker->callCheckMethod($error, $dep);
                 if ($code) {
                     if (isset($dep['optional']) && $dep['optional'] == 'yes') {
-/* die ugly hack die
-                        // Ugly hack to adjust the error messages
-                        $error = str_replace('requires ', '', $error);
-                        $error = ucfirst($error);
-                        $error = $error . ' is recommended to utilize some features.';*/
                         $optional_deps[] = array($dep, $code, $error);
                     } else {
                         $failed_deps[] = array($dep, $code, $error);

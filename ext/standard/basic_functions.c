@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.542 2002/11/05 06:05:48 ssb Exp $ */
+/* $Id: basic_functions.c,v 1.543 2002/11/08 15:49:32 sterling Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -467,11 +467,17 @@ function_entry basic_functions[] = {
 	PHP_FE(cosh,															NULL)
 	PHP_FE(tanh,															NULL)
 
-#if !defined(PHP_WIN32) && !defined(NETWARE)
+#ifdef HAVE_ASINH 
 	PHP_FE(asinh,															NULL)
+#endif
+#ifdef HAVE_ACOSH
 	PHP_FE(acosh,															NULL)
+#endif
+#ifdef HAVE_ATANH
 	PHP_FE(atanh,															NULL)
-	PHP_FE(expm1,															NULL)															
+#endif
+#if !defined(PHP_WIN32) && !defined(NETWARE)
+	PHP_FE(expm1,															NULL)
 	PHP_FE(log1p,															NULL)
 #endif
 

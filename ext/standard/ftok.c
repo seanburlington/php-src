@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ftok.c,v 1.13 2004/06/24 00:48:58 iliaa Exp $ */
+/* $Id: ftok.c,v 1.13.2.1 2005/01/28 16:33:09 tony2001 Exp $ */
 
 #include "php.h"
 
@@ -57,6 +57,9 @@ PHP_FUNCTION(ftok)
 	}
 
     k = ftok(Z_STRVAL_PP(pathname),Z_STRVAL_PP(proj)[0]);
+	if (k == -1) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "ftok() failed - %s", strerror(errno));
+	}
 
     RETURN_LONG(k);
 }

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.138 2004/11/03 21:18:44 helly Exp $ */
+/* $Id: php_reflection.c,v 1.139 2004/11/14 18:01:44 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -1331,7 +1331,7 @@ ZEND_METHOD(reflection_function, getStaticVariables)
 
 	/* Return an empty array in case no static variables exist */
 	array_init(return_value);
-	if (fptr->op_array.static_variables != NULL) {
+	if (fptr->type == ZEND_USER_FUNCTION && fptr->op_array.static_variables != NULL) {
 		zend_hash_copy(Z_ARRVAL_P(return_value), fptr->op_array.static_variables, (copy_ctor_func_t) zval_add_ref, (void *) &tmp_copy, sizeof(zval *));
 	}
 }

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.47 2002/04/09 08:17:49 ssb Exp $
+// $Id: Common.php,v 1.48 2002/04/09 21:48:19 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -331,6 +331,9 @@ class PEAR_Common extends PEAR
                 }
                 break;
             case 'file':
+                if ($this->in_changelog) {
+                    break;
+                }
                 if (isset($attribs['name'])) {
                     $path = '';
                     if (count($this->dir_names)) {
@@ -488,6 +491,9 @@ class PEAR_Common extends PEAR
                 array_pop($this->dir_names);
                 break;
             case 'file':
+                if ($this->in_changelog) {
+                    break;
+                }
                 if ($data) {
                     $path = '';
                     if (count($this->dir_names)) {

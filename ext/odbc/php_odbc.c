@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.25 2000/01/02 15:59:01 kara Exp $ */
+/* $Id: php_odbc.c,v 1.26 2000/01/15 13:35:06 thies Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -410,6 +410,17 @@ PHP_MINIT_FUNCTION(odbc)
 	return SUCCESS;
 }
 
+void _php_odbc_shutdown(void *data)
+{
+	ELS_FETCH();
+	
+	/* Close all statements before connection */
+	
+	/* this is not the nice way of doing it - we should use reference counting
+	   of the parent handles */
+
+	zend_hash_apply(&EG(regular_list), (int (*)(void *)) _odbc_stmt_cleanup);
+}
 
 PHP_RINIT_FUNCTION(odbc)
 {
@@ -417,15 +428,14 @@ PHP_RINIT_FUNCTION(odbc)
 	
 	ODBCG(defConn) = -1;
 	ODBCG(num_links) = ODBCG(num_persistent);
+
+	php_register_pre_request_shutdown(_php_odbc_shutdown, NULL);
+
 	return SUCCESS;
 }
 
 PHP_RSHUTDOWN_FUNCTION(odbc)
 {
-	ELS_FETCH();
-	
-	/* Close all statements before connection */
-	zend_hash_apply(&EG(regular_list), (int (*)(void *)) _odbc_stmt_cleanup);
 	return SUCCESS;
 }
 

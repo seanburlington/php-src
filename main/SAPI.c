@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.134 2002/07/03 10:42:31 sas Exp $ */
+/* $Id: SAPI.c,v 1.135 2002/07/03 10:47:16 sas Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -386,7 +386,7 @@ static int sapi_extract_response_code(const char *header_line)
 }
 
 
-static void sapi_update_response_code(int ncode TSRMLS_CC)
+static void sapi_update_response_code(int ncode TSRMLS_DC)
 {
 	if (SG(sapi_headers).http_status_line) {
 		efree(SG(sapi_headers).http_status_line);

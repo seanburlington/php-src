@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.90 2004/06/21 21:08:05 pollita Exp $ */
+/* $Id: file.h,v 1.91 2004/07/30 22:49:02 fmk Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -122,7 +122,7 @@ typedef struct {
 extern PHPAPI int file_globals_id;
 #else
 #define FG(v) (file_globals.v)
-extern php_file_globals file_globals;
+extern PHPAPI php_file_globals file_globals;
 #endif
 
 

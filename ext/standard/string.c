@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.297 2002/09/23 14:20:02 sebastian Exp $ */
+/* $Id: string.c,v 1.298 2002/09/25 18:06:05 andrey Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3929,6 +3929,39 @@ PHP_FUNCTION(str_rot13)
 	zval_copy_ctor(return_value);
 
 	php_strtr(Z_STRVAL_P(return_value), Z_STRLEN_P(return_value), rot13_from, rot13_to, 52);
+}
+/* }}} */
+
+
+static int php_string_shuffle(const void *a, const void *b TSRMLS_DC)
+{
+	long rnd;
+	rnd = php_rand(TSRMLS_C);
+	if (rnd % 3)
+		return 1;
+	else if (rnd % 5)
+		return 0;
+	else 
+		return -1;
+}
+
+/* {{{ proto string str_shuffle(string str)
+   Shuffles string. One permutation of all possible is created */
+PHP_FUNCTION(str_shuffle)
+{
+	/* Note : by using current php_string_shuffle for string  */
+	/* with 6 chars (6! permutations) about 2/3 of them are   */
+	/* computed for 6! calls for the function. So it isn't so */
+	/* unique. The ratio is the same for other lengths.       */
+	char *str;
+	int i, str_len;
+	
+	i = 0;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &str, &str_len) == FAILURE) {
+		RETURN_FALSE;
+	}
+	zend_qsort((void *)str, str_len, sizeof(char), php_string_shuffle TSRMLS_CC);
+	RETURN_STRINGL(str, str_len, 1);
 }
 /* }}} */
 

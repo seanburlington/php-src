@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.60 2002/08/20 20:47:47 wez Exp $ */
+/* $Id: php_string.h,v 1.61 2002/09/25 18:06:05 andrey Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -82,6 +82,7 @@ PHP_FUNCTION(strnatcasecmp);
 PHP_FUNCTION(substr_count);
 PHP_FUNCTION(str_pad);
 PHP_FUNCTION(sscanf);
+PHP_FUNCTION(str_shuffle);
 #ifdef HAVE_STRCOLL
 PHP_FUNCTION(strcoll);
 #endif

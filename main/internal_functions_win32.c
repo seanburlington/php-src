@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.27 2000/03/12 18:13:01 zeev Exp $ */
+/* $Id: internal_functions_win32.c,v 1.28 2000/04/07 10:21:17 andi Exp $ */
 
 
 #include "php.h"
@@ -55,6 +55,7 @@
 #include "ext/odbc/php_odbc.h"
 #include "ext/session/php_session.h"
 #include "ext/xml/php_xml.h"
+#include "ext/wddx/php_wddx.h"
 #include "ext/mysql/php_mysql.h"
 
 /* SNMP has to be moved to ext */
@@ -70,6 +71,7 @@ zend_module_entry *php_builtin_extensions[] = {
 	phpext_odbc_ptr,
 	phpext_session_ptr,
 	phpext_xml_ptr,
+	phpext_wddx_ptr,
 	phpext_mysql_ptr
 };
 

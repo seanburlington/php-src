@@ -23,7 +23,7 @@
  */
 
 
-/* $Id: php3_hyperwave.h,v 1.2 1999/08/06 10:41:58 steinm Exp $ */
+/* $Id: php3_hyperwave.h,v 1.3 1999/10/21 15:15:23 steinm Exp $ */
 
 #ifndef _HW_H
 #define _HW_H
@@ -156,6 +156,7 @@ PHP_FUNCTION(hw_getrellink);
 PHP_FUNCTION(hw_dummy);
 PHP_FUNCTION(hw_who);
 PHP_FUNCTION(hw_stat);
+PHP_FUNCTION(hw_mapid);
 
 #else
 #define hw_module_ptr NULL

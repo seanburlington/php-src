@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.36 1999/12/14 22:15:55 andrei Exp $ */
+/* $Id: basic_functions.h,v 1.37 1999/12/16 23:47:10 andrei Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -102,6 +102,10 @@ PHP_FUNCTION(getservbyname);
 PHP_FUNCTION(getservbyport);
 PHP_FUNCTION(getprotobyname);
 PHP_FUNCTION(getprotobynumber);
+
+PHP_FUNCTION(get_loaded_extensions);
+PHP_FUNCTION(extension_loaded);
+PHP_FUNCTION(get_extension_funcs);
 
 #if MSVC5
 typedef unsigned int php_stat_len;

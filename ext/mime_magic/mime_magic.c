@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.36 2004/01/15 06:09:16 sniper Exp $ 
+  $Id: mime_magic.c,v 1.37 2004/01/16 11:15:13 sniper Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -253,7 +253,7 @@ ZEND_GET_MODULE(mime_magic)
  */
 PHP_INI_BEGIN()
 STD_PHP_INI_ENTRY("mime_magic.magicfile", PHP_MIME_MAGIC_FILE_PATH, PHP_INI_SYSTEM, OnUpdateString, magicfile, zend_mime_magic_globals, mime_magic_globals)
-STD_PHP_INI_ENTRY("mime_magic.debug", "0", PHP_INI_SYSTEM, OnUpdateBool, debug, zend_mime_magic_globals, mime_magic_globals)
+STD_PHP_INI_BOOLEAN("mime_magic.debug", "0", PHP_INI_SYSTEM, OnUpdateBool, debug, zend_mime_magic_globals, mime_magic_globals)
 PHP_INI_END()
 /* }}} */
 

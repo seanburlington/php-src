@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.238 2003/06/19 16:10:54 iliaa Exp $ */
+/* $Id: info.c,v 1.239 2003/09/22 04:18:24 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -81,7 +81,7 @@ static int _display_module_info(zend_module_entry *module, void *arg TSRMLS_DC)
 			php_printf("%s", module->name);
 			php_printf("</td></tr>\n");
 		} else {
-			php_printf(module->name);
+			php_printf("%s", module->name);
 			php_printf("\n");
 		}	
 	}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.131 2002/03/15 19:04:22 derick Exp $ */
+/* $Id: php_domxml.c,v 1.132 2002/03/27 21:45:45 jtate Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -2382,7 +2382,7 @@ PHP_FUNCTION(domxml_doc_get_elements_by_tagname)
    Returns element for given id or false if not found */
 PHP_FUNCTION(domxml_doc_get_element_by_id)
 {
-	zval *id, *rv, *contextnode = NULL, *ctxpin = NULL;
+	zval *id, *rv = NULL, *contextnode = NULL, *ctxpin = NULL;
 	xmlXPathContextPtr ctxp ;
 	xmlDocPtr docp;
 

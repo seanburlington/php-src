@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.266 2000/10/16 17:25:36 sas Exp $ */
+/* $Id: basic_functions.c,v 1.267 2000/10/16 22:12:28 rasmus Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -762,7 +762,9 @@ PHP_MSHUTDOWN_FUNCTION(basic)
 	PHP_MSHUTDOWN(browscap)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_MSHUTDOWN(array)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_MSHUTDOWN(assert)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#ifdef TRANS_SID
 	PHP_MSHUTDOWN(url_scanner_ex)(SHUTDOWN_FUNC_ARGS_PASSTHRU);
+#endif
 
 	return SUCCESS;	
 }

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.95 2003/08/12 04:19:06 iliaa Exp $ */
+/* $Id: iconv.c,v 1.96 2003/08/13 18:21:06 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -41,11 +41,11 @@
 
 #ifdef HAVE_ICONV
 
-#ifndef PHP_ICONV_H_PATH
-#define PHP_ICONV_H_PATH <iconv.h>
-#endif
-
+#ifdef PHP_ICONV_H_PATH
 #include PHP_ICONV_H_PATH
+#else
+#include <iconv.h>
+#endif
 
 #ifdef HAVE_GLIBC_ICONV
 #include <gnu/libc-version.h>

@@ -1,14 +1,14 @@
 dnl
-dnl $Id: config.m4,v 1.6 2002/04/19 06:32:26 yohgaki Exp $
+dnl $Id: config.m4,v 1.7 2002/04/19 07:08:26 yohgaki Exp $
 dnl
 
-PHP_ARG_ENABLE(mbstring, whether to disable multibyte string support,
+PHP_ARG_ENABLE(mbstring, whether to enable multibyte string support,
 [  --disable-mbstring       Disable multibyte string support], yes)
 
-PHP_ARG_ENABLE(mbstr_enc_trans, whether to disable encoding translation,
+PHP_ARG_ENABLE(mbstr_enc_trans, whether to enable encoding translation,
 [  --enable-mbstr-enc-trans Enable encoding translation], yes)
 
-PHP_ARG_ENABLE(mbregex, whether to disable multibyte regex support,
+PHP_ARG_ENABLE(mbregex, whether to enable multibyte regex support,
 [  --enable-mbregex         Enable multibyte regex support], yes)
 
 if test "$PHP_MBSTRING" != "no"; then
@@ -21,5 +21,5 @@ if test "$PHP_MBSTR_ENC_TRANS" != "no" ; then
 fi
 
 if test "$MBREGEX" != "no" ; then
-  AC_DEFINE(HAVE_MBREGEX, 1, [whether to havee multibyte regex support])
+  AC_DEFINE(HAVE_MBREGEX, 1, [whether to have multibyte regex support])
 fi

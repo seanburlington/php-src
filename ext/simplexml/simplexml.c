@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.91 2003/12/09 16:29:51 sniper Exp $ */
+/* $Id: simplexml.c,v 1.92 2003/12/16 17:14:05 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1533,8 +1533,6 @@ PHP_MINIT_FUNCTION(simplexml)
 	sxe_object_handlers.get_class_entry = zend_get_std_object_handlers()->get_class_entry;
 	sxe_object_handlers.get_class_name = zend_get_std_object_handlers()->get_class_name;
 
-	php_libxml_initialize();
-
 	return SUCCESS;
 }
 /* }}} */
@@ -1543,8 +1541,6 @@ PHP_MINIT_FUNCTION(simplexml)
  */
 PHP_MSHUTDOWN_FUNCTION(simplexml)
 {
-	php_libxml_shutdown();
-
 	return SUCCESS;
 }
 /* }}} */
@@ -1571,7 +1567,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.92 $");
 	php_info_print_table_row(2, "Schema support", 
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

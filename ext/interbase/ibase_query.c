@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.9 2004/05/30 17:51:19 abies Exp $ */
+/* $Id: ibase_query.c,v 1.10 2004/05/30 20:24:46 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1001,8 +1001,8 @@ static int _php_ibase_exec(INTERNAL_FUNCTION_PARAMETERS, ibase_result **ib_resul
 					/* this return value evaluates to bool(true) and to int(0) */
 					RETVAL_STRINGL("0 ",2,1);
 				}
+				break;
 			}
-			
 		default:
 			RETVAL_TRUE;
 	}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.219 2004/05/30 16:41:28 abies Exp $ */
+/* $Id: interbase.c,v 1.220 2004/05/30 20:24:46 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -27,8 +27,6 @@
 #define _GNU_SOURCE
 
 #include "php.h"
-
-#define FILE_REVISION "$Revision: 1.219 $"
 
 #if HAVE_IBASE
 
@@ -424,6 +422,8 @@ static void _php_ibase_free_trans(zend_rsrc_list_entry *rsrc TSRMLS_DC) /* {{{ *
 /* TODO this function should be part of either Zend or PHP API */
 static PHP_INI_DISP(php_ibase_password_displayer_cb)
 {
+	TSRMLS_FETCH();
+
 	if ((type == PHP_INI_DISPLAY_ORIG && ini_entry->orig_value) 
 			|| (type == PHP_INI_DISPLAY_ACTIVE && ini_entry->value)) {
 		PUTS("********");

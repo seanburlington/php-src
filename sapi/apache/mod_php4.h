@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.h,v 1.8 2000/12/07 13:07:18 sas Exp $ */
+/* $Id: mod_php4.h,v 1.9 2000/12/10 23:22:20 sas Exp $ */
 
 #ifndef MOD_PHP4_H
 #define MOD_PHP4_H
@@ -33,7 +33,19 @@ typedef struct {
 } php_apache_info_struct;
 
 extern zend_module_entry apache_module_entry;
+
+#ifdef ZTS
+extern int php_apache_info_id;
+#define APLS_D php_apache_info_struct *apache_globals
+#define AP(v) (apache_globals->v)
+#define APLS_FETCH() APLS_D = ts_resource(php_apache_info_id)
+#else
 extern php_apache_info_struct php_apache_info;
+#define APLS_D
+#define AP(v) (php_apache_info.v)
+#define APLS_FETCH()
+#endif
+
 
 #ifdef WIN32
 #define S_IXUSR _S_IEXEC

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.7 2002/12/11 23:30:23 iliaa Exp $ */
+/* $Id: gd.c,v 1.221.2.8 2002/12/12 21:17:55 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -3297,6 +3297,13 @@ PHP_FUNCTION(imagepstext)
 	{
 		extend = T1_GetExtend(*f_ind);
 		str_path = T1_GetCharOutline(*f_ind, _str[0], Z_LVAL_PP(sz), transform);
+
+		if (!str_path) {
+			if (T1_errno) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "libt1 returned error %d", T1_errno);
+			}	
+			RETURN_FALSE;
+		}
 
 		for (i = 1; i < Z_STRLEN_PP(str); i++) {
 			amount_kern = (int) T1_GetKerning(*f_ind, _str[i-1], _str[i]);

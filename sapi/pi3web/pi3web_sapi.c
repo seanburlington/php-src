@@ -14,13 +14,14 @@
    +----------------------------------------------------------------------+
    | Pi3Web version 2.0                                                   |
    +----------------------------------------------------------------------+
-   | This file is commited by the Pi3 development group. (www.pi3.org)    |
+   | This file is committed by the Pi3 development group.                 |
+   | (pi3web.sourceforge.net)                                             |
    |                                                                      |
-   | Author: Holger Zimmermann (zimpel@t-online.de, zimpel@pi3.org)       |
+   | Author: Holger Zimmermann (zimpel@users.sourceforge.net)             |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.15 2001/02/26 06:07:37 andi Exp $ */
+/* $Id: pi3web_sapi.c,v 1.16 2001/04/08 08:25:20 holger Exp $ */
 
 #if WIN32|WINNT
 #  include <windows.h>
@@ -80,7 +81,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=0 cellpadding=3 cellspacing=1 width=600 align=center>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.15 2001/02/26 06:07:37 andi Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.16 2001/04/08 08:25:20 holger Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);

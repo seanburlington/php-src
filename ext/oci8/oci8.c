@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.178 2002/10/19 15:51:04 maxim Exp $ */
+/* $Id: oci8.c,v 1.179 2002/10/19 16:11:16 maxim Exp $ */
 
 /* TODO list:
  *
@@ -631,7 +631,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.178 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.179 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -1767,7 +1767,7 @@ oci_fetch(oci_statement *statement, ub4 nrows, char *func TSRMLS_DC)
 
 	if ((statement->error == OCI_NO_DATA) || (nrows == 0)) {
 		if (statement->last_query == 0) {
-			/* reset define-list for refcursosrs */
+			/* reset define-list for refcursors */
 			if (statement->columns) {
 				zend_hash_destroy(statement->columns);
 				efree(statement->columns);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.126 2000/11/02 15:32:52 sas Exp $ */
+/* $Id: php.h,v 1.127 2000/11/17 16:02:08 sas Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -70,13 +70,6 @@ extern unsigned char second_arg_allow_ref[];
 #undef PHP_DEBUG
 #define PHP_DEBUG ZEND_DEBUG
 
-
-#if PHP_DEBUG || !(defined(__GNUC__)||defined(PHP_WIN32))
-#ifdef inline
-#undef inline
-#endif
-#define inline
-#endif
 
 #define APACHE 0
 #define CGI_BINARY 0

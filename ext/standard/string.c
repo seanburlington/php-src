@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.310 2002/10/04 16:54:56 sterling Exp $ */
+/* $Id: string.c,v 1.311 2002/10/04 16:55:46 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -875,7 +875,7 @@ PHP_FUNCTION(implode)
 		ZVAL_STRINGL(delim, _IMPL_EMPTY, sizeof(_IMPL_EMPTY) - 1, 0);
 
 		if (Z_TYPE_PP(arg1) != IS_ARRAY) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Argument to implode must be an array");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Argument to implode must be an array.");
 			return;
 		}
 

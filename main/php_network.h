@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_network.h,v 1.49 2003/12/06 10:32:35 wez Exp $ */
+/* $Id: php_network.h,v 1.50 2003/12/18 11:26:00 wez Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -27,6 +27,9 @@
 # endif
 # undef FD_SETSIZE
 # include "arpa/inet.h"
+  /* Apache folks decided that strtoul was evil and redefined
+   * it to something that breaks the windows headers */
+# undef strtoul
 /* defines socklen_t and some IPV6 stuff */
 # include <ws2tcpip.h>
 # if HAVE_WSPIAPI_H

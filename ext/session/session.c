@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.337 2002/11/20 16:06:29 sas Exp $ */
+/* $Id: session.c,v 1.338 2002/11/20 17:15:00 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -85,8 +85,10 @@ static const ps_serializer *_php_find_ps_serializer(char *name TSRMLS_DC);
 
 static PHP_INI_MH(OnUpdateSaveHandler)
 {
-	if (PS(session_status) == php_session_active)
-		return;
+	if (PS(session_status) == php_session_active) {
+		php_error(E_WARNING, "A session is active. You cannot change the session module's ini settings at this time.");
+		return FAILURE;
+	}
 	PS(mod) = _php_find_ps_module(new_value TSRMLS_CC);
 /*
  * Following lines are commented out to prevent bogus error message at
@@ -104,8 +106,10 @@ static PHP_INI_MH(OnUpdateSaveHandler)
 
 static PHP_INI_MH(OnUpdateSerializer)
 {
-	if (PS(session_status) == php_session_active)
-		return;
+	if (PS(session_status) == php_session_active) {
+		php_error(E_WARNING, "A session is active. You cannot change the session module's ini settings at this time.");
+		return FAILURE;
+	}
 	PS(serializer) = _php_find_ps_serializer(new_value TSRMLS_CC);
 /*
  * Following lines are commented out to prevent bogus error message at

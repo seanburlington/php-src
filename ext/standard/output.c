@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.37 2000/11/23 18:43:18 zeev Exp $ */
+/* $Id: output.c,v 1.38 2001/01/09 16:45:18 sas Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -360,10 +360,6 @@ static int php_ub_body_write_no_header(const char *str, uint str_length)
 	}
 
 	result = OG(php_header_write)(str, str_length);
-
-	if (newstr) {
-		free(newstr);
-	}
 
 	if (OG(implicit_flush)) {
 		sapi_flush();

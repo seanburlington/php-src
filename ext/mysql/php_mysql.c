@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.32 2000/02/20 05:32:51 evan Exp $ */
+/* $Id: php_mysql.c,v 1.33 2000/02/20 07:27:46 zeev Exp $ */
 
 
 /* TODO:
@@ -36,15 +36,15 @@
 #define signal(a,b) NULL
 #else
 #include "build-defs.h"
+#if HAVE_SIGNAL_H
+#include <signal.h>
+#endif
 
 #if HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
 #include <netdb.h>
 #include <netinet/in.h>
-#endif
-#if HAVE_SIGNAL_H
-#include <signal.h>
 #endif
 
 /* True globals, no need for thread safety */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.23 2003/08/26 02:05:53 sniper Exp $ */
+/* $Id: session.c,v 1.336.2.24 2003/08/26 02:15:19 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1645,8 +1645,8 @@ PHP_MINFO_FUNCTION(session)
 	
 	for (i = 0, mod = ps_modules; i < MAX_MODULES; i++, mod++) {
 		if (*mod && (*mod)->s_name) {
-			smart_str_appends(&save_handlers, (*mod)->s_name);
-			smart_str_appendc(&save_handlers, ' ');
+			smart_str_appends(&handlers, (*mod)->s_name);
+			smart_str_appendc(&handlers, ' ');
 		}
 	}
 

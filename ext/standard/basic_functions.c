@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.237 2000/08/15 10:32:55 stas Exp $ */
+/* $Id: basic_functions.c,v 1.238 2000/08/19 18:01:04 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -395,10 +395,14 @@ function_entry basic_functions[] = {
 #if HAVE_SYS_TIME_H
 	PHP_FE(socket_set_timeout,	NULL)
 #else
-	PHP_FALIAS(socket_set_timeout  , warn_not_available,      NULL)                             
+	PHP_FALIAS(socket_set_timeout, warn_not_available,      NULL)                             
 #endif
 	PHP_FE(socket_get_status,	NULL)
+#if !PHP_WIN32 || defined(ZTS)
 	PHP_FE(realpath,			NULL)
+#else
+	PHP_FALIAS(realpath,		warn_not_available,		NULL)
+#endif
 
 	/* functions from fsock.c */
 	PHP_FE(fsockopen, 			third_and_fourth_args_force_ref)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.15 2002/02/28 08:26:49 sebastian Exp $ */
+/* $Id: type.c,v 1.16 2002/07/08 11:50:01 derick Exp $ */
 
 #include "php.h"
 
@@ -195,6 +195,7 @@ static void php_is_type(INTERNAL_FUNCTION_PARAMETERS, int type)
 	pval **arg;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &arg) == FAILURE) {
+		php_error (E_WARNING, "%s(): Only one argument expected", get_active_function_name (TSRMLS_CC));
 		RETURN_FALSE;
 	}
 

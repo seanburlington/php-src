@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.396 2004/09/30 12:19:59 tony2001 Exp $ */
+/* $Id: session.c,v 1.397 2004/09/30 14:20:02 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -544,7 +544,7 @@ static char *php_session_encode(int *newlen TSRMLS_DC)
 
 	IF_SESSION_VARS() {
 		if (!PS(serializer)) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown session.save_handler. Failed to encode session object.");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown session.serialize_handler. Failed to encode session object.");
 			ret = NULL;
 		}
 		else if (PS(serializer)->encode(&ret, newlen TSRMLS_CC) == FAILURE)
@@ -559,7 +559,7 @@ static char *php_session_encode(int *newlen TSRMLS_DC)
 static void php_session_decode(const char *val, int vallen TSRMLS_DC)
 {
 	if (!PS(serializer)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown session.save_handler. Failed to decode session object.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown session.serialize_handler. Failed to decode session object.");
 		return;
 	}
 	if (PS(serializer)->decode(val, vallen TSRMLS_CC) == FAILURE) {

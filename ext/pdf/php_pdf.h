@@ -26,13 +26,17 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_pdf.h,v 1.3 2000/02/10 10:20:29 steinm Exp $ */
+/* $Id: php_pdf.h,v 1.4 2000/02/15 08:10:32 steinm Exp $ */
 
 #ifndef _PHP_PDF_H
 #define _PHP_PDF_H
 
 #if HAVE_PDFLIB
 
+/* with version 2.20 of pdflib PDF_open_mem isn't available unless
+   the following define isn't there.
+   #define PDF_OPEN_MEM_SUPPORTED
+*/
 #include <pdflib.h>
 
 extern int le_fp;

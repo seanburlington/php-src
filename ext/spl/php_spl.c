@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.27 2004/01/25 17:30:19 helly Exp $ */
+/* $Id: php_spl.c,v 1.28 2004/04/29 23:02:11 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -53,7 +53,7 @@ function_entry spl_functions[] = {
  */
 zend_module_entry spl_module_entry = {
 	STANDARD_MODULE_HEADER,
-	"spl",
+	"SPL",
 	spl_functions,
 	PHP_MINIT(spl),
 	PHP_MSHUTDOWN(spl),

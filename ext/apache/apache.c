@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache.c,v 1.12 1999/07/14 16:02:10 andi Exp $ */
+/* $Id: apache.c,v 1.13 1999/07/14 21:49:35 rasmus Exp $ */
 #include "php.h"
 #include "ext/standard/head.h"
 #include "php_globals.h"
@@ -49,6 +49,8 @@
 #if APACHE
 #include "http_request.h"
 #include "build-defs.h"
+
+#define SECTION(name)  PUTS("<hr><h2>" name "</h2>\n")
 
 extern module *top_module;
 

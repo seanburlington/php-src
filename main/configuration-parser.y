@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.46 2000/05/23 23:13:00 hholzgra Exp $ */
+/* $Id: configuration-parser.y,v 1.47 2000/06/07 05:47:24 hholzgra Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -548,6 +548,7 @@ string_or_value:
 	|	CFG_TRUE { $$ = $1; }
 	|	CFG_FALSE { $$ = $1; }
 	|	'\n' { $$.value.str.val = strdup(""); $$.value.str.len=0; $$.type = IS_STRING; }
+	|	'\0' { $$.value.str.val = strdup(""); $$.value.str.len=0; $$.type = IS_STRING; }
 ;
 
 expr:

@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.16 1999/11/26 17:07:41 sas Exp $ */
+/* $Id: aolserver.c,v 1.17 1999/11/26 19:01:26 sas Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -196,7 +196,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	int uptime = Ns_InfoUptime();
 	
 	PUTS("<table border=5 width=600>\n");
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.16 1999/11/26 17:07:41 sas Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.17 1999/11/26 19:01:26 sas Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -383,19 +383,27 @@ static int
 php_ns_module_main(NSLS_D SLS_DC)
 {
 	zend_file_handle file_handle;
+	int fd;
 	CLS_FETCH();
 	ELS_FETCH();
 	PLS_FETCH();
 
-	file_handle.type = ZEND_HANDLE_FILENAME;
+	file_handle.type = ZEND_HANDLE_FD;
 	file_handle.filename = SG(request_info).path_translated;
+	file_handle.handle.fd = fd = open(SG(request_info).path_translated, O_RDONLY);
+	if (fd == -1) {
+		return NS_ERROR;
+	}
 	
-	if(php_request_startup(CLS_C ELS_CC PLS_CC SLS_CC) == FAILURE) {
+	if (php_request_startup(CLS_C ELS_CC PLS_CC SLS_CC) == FAILURE) {
+		close(fd);
 		return NS_ERROR;
 	}
 	php_ns_hash_environment(NSLS_C CLS_CC ELS_CC PLS_CC SLS_CC);
 	php_execute_script(&file_handle CLS_CC ELS_CC PLS_CC);
 	php_request_shutdown(NULL);
+
+	close(fd);
 
 	return NS_OK;
 }

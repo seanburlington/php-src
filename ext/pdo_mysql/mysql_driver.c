@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.33 2005/02/13 06:37:29 wez Exp $ */
+/* $Id: mysql_driver.c,v 1.34 2005/02/13 06:41:46 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -213,7 +213,7 @@ static int pdo_mysql_set_attribute(pdo_dbh_t *dbh, long attr, zval *val TSRMLS_D
 		/* ignore if the new value equals the old one */			
 		if (dbh->auto_commit ^ Z_BVAL_P(val)) {
 			dbh->auto_commit = Z_BVAL_P(val);
-			mysql_handle_autocommit(dbh);
+			mysql_handle_autocommit(dbh TSRMLS_CC);
 		}
 		return 1;
 		
@@ -320,7 +320,7 @@ static int pdo_mysql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 		}
 	}
 	
-	mysql_handle_autocommit(dbh);
+	mysql_handle_autocommit(dbh TSRMLS_CC);
 
 #ifndef PHP_WIN32
 	if (vars[2].optval && !strcmp("localhost", vars[2].optval)) {

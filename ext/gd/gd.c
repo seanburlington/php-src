@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.186 2002/06/04 02:33:10 sniper Exp $ */
+/* $Id: gd.c,v 1.187 2002/06/09 12:44:33 sander Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -319,7 +319,9 @@ PHP_MINFO_FUNCTION(gd)
 
 	/* need to use a PHPAPI function here because it is external module in windows */
 
-#if HAVE_LIBGD20
+#if HAVE_GD_BUNDLED
+	php_info_print_table_row(2, "GD Version", "bundled (2.0 compatible)");
+#elif HAVE_LIBGD20
 	php_info_print_table_row(2, "GD Version", "2.0 or higher");
 #elif HAVE_GDIMAGECOLORRESOLVE
 	php_info_print_table_row(2, "GD Version", "1.6.2 or higher");

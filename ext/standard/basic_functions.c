@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.315.2.2 2001/03/28 09:05:50 romolo Exp $ */
+/* $Id: basic_functions.c,v 1.315.2.3 2001/03/28 22:51:34 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -2471,6 +2471,7 @@ PHP_FUNCTION(move_uploaded_file)
 	zval **path, **new_path;
 	zend_bool successful=0;
 	SLS_FETCH();
+	PLS_FETCH();
 
 	if (!SG(rfc1867_uploaded_files)) {
 		RETURN_FALSE;

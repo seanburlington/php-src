@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.h,v 1.41 2003/06/10 20:03:41 imajes Exp $ */
+/* $Id: fopen_wrappers.h,v 1.42 2003/06/24 13:56:25 iliaa Exp $ */
 
 #ifndef FOPEN_WRAPPERS_H
 #define FOPEN_WRAPPERS_H
@@ -28,6 +28,7 @@ PHPAPI int php_fopen_primary_script(zend_file_handle *file_handle TSRMLS_DC);
 PHPAPI char *expand_filepath(const char *filepath, char *real_path TSRMLS_DC);
 
 PHPAPI int php_check_open_basedir(const char *path TSRMLS_DC);
+PHPAPI int php_check_open_basedir_ex(const char *path, int warn TSRMLS_DC);
 PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path TSRMLS_DC);
 
 PHPAPI int php_check_safe_mode_include_dir(char *path TSRMLS_DC);

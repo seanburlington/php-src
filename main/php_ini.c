@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.83 2002/04/16 19:08:02 helly Exp $ */
+/* $Id: php_ini.c,v 1.84 2002/04/17 17:25:18 sebastian Exp $ */
 
 #include "php.h"
 #ifndef PHP_WIN32
@@ -30,6 +30,10 @@
 #include "zend_highlight.h"
 #include "SAPI.h"
 #include "php_main.h"
+
+#ifndef S_ISDIR
+#define S_ISDIR( m )    (((m) & S_IFMT) == S_IFDIR)
+#endif
 
 typedef struct _php_extension_lists {
 	zend_llist engine;

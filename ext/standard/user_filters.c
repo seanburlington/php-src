@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.14 2003/04/21 18:43:36 moriyoshi Exp $ */
+/* $Id: user_filters.c,v 1.15 2003/05/19 15:35:06 derick Exp $ */
 
 /*
  * TODO: Rewrite for buckets.
@@ -469,9 +469,9 @@ PHP_FUNCTION(stream_get_filters)
 }
 /* }}} */	
 
-/* {{{ proto bool stream_register_filter(string filtername, string classname)
+/* {{{ proto bool stream_filter_register(string filtername, string classname)
    Registers a custom filter handler class */
-PHP_FUNCTION(stream_register_filter)
+PHP_FUNCTION(stream_filter_register)
 {
 	char *filtername, *classname;
 	int filtername_len, classname_len;

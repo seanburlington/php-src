@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.4 2003/05/14 18:30:49 pollita Exp $ */
+/* $Id: userspace.c,v 1.5 2003/05/19 15:35:06 derick Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -342,9 +342,9 @@ static php_stream *user_wrapper_opendir(php_stream_wrapper *wrapper, char *filen
 }
 
 
-/* {{{ proto bool stream_register_wrapper(string protocol, string classname)
+/* {{{ proto bool stream_wrapper_register(string protocol, string classname)
    Registers a custom URL protocol handler class */
-PHP_FUNCTION(stream_register_wrapper)
+PHP_FUNCTION(stream_wrapper_register)
 {
 	char *protocol, *classname;
 	int protocol_len, classname_len;

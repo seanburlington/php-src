@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.11 2002/05/21 01:38:50 ssb Exp $
+// $Id: Remote.php,v 1.12 2002/05/21 02:28:08 cox Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Common.php';
@@ -96,7 +96,7 @@ version of DB is 1.2, the downloaded file will be DB-1.2.tgz.',
     // }}}
     // {{{ list-remote
 
-    function doListRemote($command, $options, $params)
+    function doRemoteList($command, $options, $params)
     {
         $r = new PEAR_Remote($this->config);
         $available = $r->call('package.listAll', true);

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.1.2.1 2003/08/20 08:15:42 sniper Exp $
+dnl $Id: config.m4,v 1.1.2.2 2004/01/21 05:04:50 sniper Exp $
 dnl
 
 PHP_ARG_WITH(bz2, for BZip2 support,
@@ -14,6 +14,7 @@ if test "$PHP_BZ2" != "no"; then
       if test -r $i/include/bzlib.h; then
         BZIP_DIR=$i
         AC_MSG_RESULT(found in $i)
+        break
       fi
     done
   fi

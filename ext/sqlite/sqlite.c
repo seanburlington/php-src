@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.138 2004/03/29 19:49:16 helly Exp $ 
+   $Id: sqlite.c,v 1.139 2004/04/03 14:40:34 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1055,7 +1055,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.138 2004/03/29 19:49:16 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.139 2004/04/03 14:40:34 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1810,7 +1810,7 @@ PHP_FUNCTION(sqlite_fetch_all)
 
 	if (res->curr_row >= res->nrows && res->nrows) {
 		if (!res->buffered) {
-			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "One or more rowsets were already returned");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "One or more rowsets were already returned; returning NULL this time");
 		} else {
 			res->curr_row = 0;
 		}

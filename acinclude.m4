@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.184 2002/04/23 02:47:34 sniper Exp $
+dnl $Id: acinclude.m4,v 1.185 2002/04/23 05:06:51 sas Exp $
 dnl
 dnl This file contains local autoconf functions.
 
@@ -1110,9 +1110,7 @@ AC_DEFUN(PHP_SELECT_SAPI,[
   program) PHP_BUILD_PROGRAM;;
   esac
     
-  ifelse($,,ac_extra=,[ac_extra=$4])
-  
-  ifelse($3,,,[PHP_ADD_SOURCES(sapi/$1, $3, $ac_extra, sapi)])
+  ifelse($3,,,[PHP_ADD_SOURCES([sapi/$1],[$3],[$4],[sapi])])
 ])
 
 dnl deprecated

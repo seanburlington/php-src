@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.47 2002/03/04 17:46:19 derick Exp $
+dnl $Id: config.m4,v 1.47.2.1 2002/04/13 00:18:54 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 1.x module support via DSO through APXS)
@@ -39,6 +39,12 @@ AC_ARG_WITH(apxs,
     esac
   done
   PHP_ADD_INCLUDE($APXS_INCLUDEDIR)
+
+  # Test that we're trying to configure with apache 1.x
+  if test -f "$APXS_INCLUDEDIR/ap_mpm.h"; then
+    AC_MSG_ERROR([Use --with-apxs2 with Apache 2.x!]) 
+  fi
+
   PHP_SAPI=apache
 
   # Test whether apxs support -S option

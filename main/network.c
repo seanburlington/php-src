@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.101 2003/06/28 11:12:48 wez Exp $ */
+/* $Id: network.c,v 1.102 2003/08/10 21:30:36 helly Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -606,7 +606,7 @@ PHPAPI php_socket_t php_network_accept_incoming(php_socket_t srvsock,
 {
 	php_socket_t clisock = -1;
 	fd_set rset;
-	int error, n;
+	int error = 0, n;
 	php_sockaddr_storage sa;
 	socklen_t sl;
 

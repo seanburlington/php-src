@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.150 2004/06/12 05:48:10 cellog Exp $
+// $Id: Installer.php,v 1.150.2.1 2004/10/25 17:14:33 cellog Exp $
 
 require_once 'PEAR/Downloader.php';
 
@@ -165,7 +165,14 @@ class PEAR_Installer extends PEAR_Downloader
                 include_once "OS/Guess.php";
                 $os = new OS_Guess();
             }
-            if (!$os->matchSignature($atts['platform'])) {
+            if (strlen($atts['platform']) && $atts['platform']{0} == '!') {
+                $negate = true;
+                $platform = substr($atts['platform'], 1);
+            } else {
+                $negate = false;
+                $platform = $atts['platform'];
+            }
+            if ((bool) $os->matchSignature($platform) === $negate) {
                 $this->log(3, "skipped $file (meant for $atts[platform], we are ".$os->getSignature().")");
                 return PEAR_INSTALLER_SKIPPED;
             }

@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.53 2004/05/16 15:39:07 pajoye Exp $
+// $Id: Install.php,v 1.53.2.1 2004/10/25 17:14:34 cellog Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -303,7 +303,13 @@ package if needed.
         $downloaded = $this->downloader->getDownloadedPackages();
         $this->installer->sortPkgDeps($downloaded);
         foreach ($downloaded as $pkg) {
+            PEAR::pushErrorHandling(PEAR_ERROR_RETURN);
             $info = $this->installer->install($pkg['file'], $options, $this->config);
+            PEAR::popErrorHandling();
+            if (PEAR::isError($info)) {
+                $this->ui->outputData('ERROR: ' .$info->getMessage());
+                continue;
+            }
             if (is_array($info)) {
                 if ($this->config->get('verbose') > 0) {
                     $label = "$info[package] $info[version]";

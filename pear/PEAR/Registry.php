@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.50 2004/01/08 17:33:12 sniper Exp $
+// $Id: Registry.php,v 1.50.4.1 2004/10/25 17:14:33 cellog Exp $
 
 /*
 TODO:
@@ -286,7 +286,9 @@ class PEAR_Registry extends PEAR
                 $open_mode = 'r';
             }
 
-            $this->lock_fp = @fopen($this->lockfile, $open_mode);
+            if (!is_resource($this->lock_fp)) {
+                $this->lock_fp = @fopen($this->lockfile, $open_mode);
+            }
 
             if (!is_resource($this->lock_fp)) {
                 return $this->raiseError("could not create lock file" .
@@ -312,6 +314,7 @@ class PEAR_Registry extends PEAR
     function _unlock()
     {
         $ret = $this->_lock(LOCK_UN);
+        fclose($this->lock_fp);
         $this->lock_fp = null;
         return $ret;
     }

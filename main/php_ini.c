@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.93 2002/05/11 13:49:44 zeev Exp $ */
+/* $Id: php_ini.c,v 1.94 2002/05/12 14:48:20 sas Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -74,7 +74,7 @@ static void php_ini_displayer_cb(zend_ini_entry *ini_entry, int type)
 			display_string_length = sizeof("<i>no value</i>")-1;
 		}
 		if(esc_html) {
-			zend_html_puts(display_string, display_string_length);
+			php_html_puts(display_string, display_string_length TSRMLS_CC);
 		} else {
 			PHPWRITE(display_string, display_string_length);
 		}

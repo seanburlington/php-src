@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_packet_soap.c,v 1.35 2004/04/01 14:05:55 dmitry Exp $ */
+/* $Id: php_packet_soap.c,v 1.36 2004/05/21 14:50:19 dmitry Exp $ */
 
 #include "php_soap.h"
 
@@ -268,11 +268,16 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 							val = cur;
 						} else {
 							val = get_node(cur->children, param->paramName);
-							if (val == NULL && res_count == 1) {
-								val = get_node(cur->children, "return");
-							}
-							if (val == NULL && res_count == 1) {
-								val = get_node(cur->children, "result");
+							if (res_count == 1) {
+								if (val == NULL) {
+									val = get_node(cur->children, "return");
+								}
+								if (val == NULL) {
+									val = get_node(cur->children, "result");
+								}
+								if (val == NULL && cur->children && cur->children->next == NULL) {
+									val = cur->children;								  
+								}
 							}
 						}
 					}

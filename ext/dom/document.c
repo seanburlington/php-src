@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.24 2003/09/08 18:28:35 rrichards Exp $ */
+/* $Id: document.c,v 1.25 2003/09/15 12:29:52 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -250,15 +250,17 @@ int dom_document_encoding_read(dom_object *obj, zval **retval TSRMLS_DC)
 int dom_document_encoding_write(dom_object *obj, zval *newval TSRMLS_DC)
 {
 	xmlDoc *docp;
-	int charset;
+	xmlCharEncodingHandlerPtr handler;
 
 	docp = (xmlDocPtr) dom_object_get_node(obj);
-	if (docp->encoding != NULL) {
-		xmlFree((xmlChar *)docp->encoding);
-	}
 
-    charset = (int)xmlParseCharEncoding((const xmlChar *) Z_STRVAL_P(newval));
-    if (charset > 0) {
+	handler = xmlFindCharEncodingHandler(Z_STRVAL_P(newval));
+
+    if (handler != NULL) {
+		xmlCharEncCloseFunc(handler);
+		if (docp->encoding != NULL) {
+			xmlFree((xmlChar *)docp->encoding);
+		}
 		docp->encoding = xmlStrdup((const xmlChar *) Z_STRVAL_P(newval));
 		return SUCCESS;
     } else {

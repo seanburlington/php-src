@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.12 2001/04/02 23:14:00 wez Exp $ */
+/* $Id: openssl.c,v 1.13 2001/04/05 08:40:26 wez Exp $ */
 
 #include "php.h"
 #include "php_openssl.h"
@@ -456,7 +456,7 @@ static time_t asn1_time_to_time_t(ASN1_UTCTIME * timestr)
 	** the value of timezone - 3600 seconds. Otherwise, we need to overcorrect and
 	** set the adjustment to the main timezone + 3600 seconds.
 	*/
-	gmadjust = -(is_dst ? timezone - 3600 : timezone + 3600);
+	gmadjust = -(thetime.tm_isdst ? timezone - 3600 : timezone + 3600);
 #endif
 	ret += gmadjust;
 

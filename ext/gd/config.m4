@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.71 2001/07/03 21:09:16 sniper Exp $
+dnl $Id: config.m4,v 1.71.2.1 2001/08/24 20:07:07 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -172,7 +172,8 @@ AC_DEFUN(PHP_GD_CHECK_VERSION,[
   AC_CHECK_LIB(gd, gdImageString16,        [AC_DEFINE(HAVE_LIBGD13, 1, [ ])])
   AC_CHECK_LIB(gd, gdImagePaletteCopy,     [AC_DEFINE(HAVE_LIBGD15, 1, [ ])])
   AC_CHECK_LIB(gd, gdImageCreateFromPng,   [AC_DEFINE(HAVE_GD_PNG,  1, [ ])])
-  AC_CHECK_LIB(gd, gdImageCreateFromGif,   [AC_DEFINE(HAVE_GD_GIF,  1, [ ])])
+  AC_CHECK_LIB(gd, gdImageCreateFromGif,   [AC_DEFINE(HAVE_GD_GIF_READ,   1, [ ])])
+  AC_CHECK_LIB(gd, gdImageGif,             [AC_DEFINE(HAVE_GD_GIF_CREATE, 1, [ ])])
   AC_CHECK_LIB(gd, gdImageWBMP,            [AC_DEFINE(HAVE_GD_WBMP, 1, [ ])])
   AC_CHECK_LIB(gd, gdImageCreateFromJpeg,  [AC_DEFINE(HAVE_GD_JPG,  1, [ ])])
   AC_CHECK_LIB(gd, gdImageCreateFromXpm,   [AC_DEFINE(HAVE_GD_XPM,  1, [ ])])

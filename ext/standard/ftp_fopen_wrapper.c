@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.71 2004/01/08 08:17:32 andi Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.72 2004/01/25 00:30:50 abies Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -125,7 +125,7 @@ static php_stream *php_ftp_fopen_connect(php_stream_wrapper *wrapper, char *path
 	char *scratch;
 	char tmp_line[512];
 
-	resource = php_url_parse((char *) path);
+	resource = php_url_parse(path);
 	if (resource == NULL || resource->path == NULL)
 		return NULL;
 

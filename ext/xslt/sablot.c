@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.27 2001/11/22 07:48:58 derick Exp $ */
+/* $Id: sablot.c,v 1.28 2001/12/07 17:29:52 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -581,7 +581,11 @@ PHP_FUNCTION(xslt_error)
 	}
 	ZEND_FETCH_RESOURCE(handle, php_xslt *, processor_p, -1, le_xslt_name, le_xslt);
 
-	RETURN_STRING(XSLT_ERRSTR(handle), 1);	
+	if(XSLT_ERRSTR(handle)) {
+		RETURN_STRING(XSLT_ERRSTR(handle), 1);	
+	} else {
+		RETURN_FALSE;
+	}
 }
 /* }}} */
 

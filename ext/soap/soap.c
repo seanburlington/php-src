@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.70 2004/02/05 20:26:02 dmitry Exp $ */
+/* $Id: soap.c,v 1.71 2004/02/06 08:01:35 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -356,10 +356,12 @@ PHP_MINIT_FUNCTION(soap)
 	/* TODO: add ini entry for always use soap errors */
 	ZEND_INIT_MODULE_GLOBALS(soap, php_soap_init_globals, NULL);
 
+#ifndef ZEND_ENGINE_2
 	/* Enable php stream/wrapper support for libxml */
 	xmlRegisterDefaultInputCallbacks();
 	xmlRegisterInputCallbacks(php_stream_xmlIO_match_wrapper, php_stream_xmlIO_open_wrapper,
 			php_stream_xmlIO_read, php_stream_xmlIO_close);
+#endif
 
 	/* Register SoapClient class */
 	/* BIG NOTE : THIS EMITS AN COMPILATION WARNING UNDER ZE2 - handle_function_call deprecated.
@@ -495,9 +497,6 @@ PHP_MINFO_FUNCTION(soap)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Soap Client", "enabled");
 	php_info_print_table_row(2, "Soap Server", "enabled");
-#if HAVE_PHP_SESSION
-	php_info_print_table_row(2, "Soap Serializer", "enabled");
-#endif
 	php_info_print_table_end();
 }
 

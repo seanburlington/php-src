@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.60 2004/05/14 16:12:06 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.61 2004/08/17 14:10:03 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -2410,10 +2410,6 @@ enclosure:
 				goto enclosure;
 			}
 		} else {
-			while (e < re && e > s && *(e - 1) == enclosure) {
-				e--;
-			}
-
 			buf2 = erealloc(buf2, buf2_len + (e - s) + 1);
 			memcpy(buf2 + buf2_len, s, (e - s));
 			buf2_len += e - s;

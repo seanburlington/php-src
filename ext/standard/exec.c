@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.27 2000/02/19 23:41:20 zeev Exp $ */
+/* $Id: exec.c,v 1.28 2000/02/22 18:00:32 andrei Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -166,6 +166,14 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 		while (l && isspace((int)buf[--l]));
 		if (l < t) buf[l + 1] = '\0';
 
+		/* Return last line from the shell command */
+		if (PG(magic_quotes_runtime)) {
+			int len;
+
+			tmp = php_addslashes(buf, 0, &len, 0);
+			RETVAL_STRINGL(tmp,len,0);
+		} else
+			RETVAL_STRINGL(buf,l,1);
 	} else {
 		int b, i;
 
@@ -173,14 +181,6 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 			for (i = 0; i < b; i++)
 				if (output) (void)PUTC(buf[i]);
 		}
-	}
-
-	/* Return last line from the shell command */
-	if (PG(magic_quotes_runtime) && type!=3) {
-		int len;
-		
-		tmp = php_addslashes(buf, 0, &len, 0);
-		RETVAL_STRINGL(tmp,len,0);
 	}
 	
 	ret = pclose(fp);

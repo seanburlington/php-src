@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.45 2001/01/30 08:34:55 ssb Exp $
+// $Id: DB.php,v 1.46 2001/02/02 05:24:31 chagenbu Exp $
 //
 // Database independent query interface.
 //
@@ -208,7 +208,8 @@ class DB
             $dsninfo = DB::parseDSN($dsn);
         }
         $type = $dsninfo["phptype"];
-
+	
+	@include_once "DB/${type}.php";
         $classname = "DB_${type}";
         @$obj =& new $classname;
 

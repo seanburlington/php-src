@@ -16,7 +16,7 @@
   |          Tal Peer <tal@php.net>                                      |
   +----------------------------------------------------------------------+
 
-  $Id: sqlite.c,v 1.30 2003/04/27 13:25:10 helly Exp $ 
+  $Id: sqlite.c,v 1.31 2003/04/27 13:32:43 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -48,18 +48,18 @@ static int le_sqlite_db, le_sqlite_result, le_sqlite_pdb;
 
 static inline void php_sqlite_strtoupper(char *s)
 {
-  while (*s!='\0') {
-    *s = toupper(*s);
-    s++;
-  }
+	while (*s!='\0') {
+		*s = toupper(*s);
+		s++;
+	}
 }
 
 static inline void php_sqlite_strtolower(char *s)
 {
-  while (*s!='\0') {
-    *s = tolower(*s);
-    s++;
-  }
+	while (*s!='\0') {
+		*s = tolower(*s);
+		s++;
+	}
 }
 
 /* {{{ PHP_INI
@@ -616,7 +616,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.30 2003/04/27 13:25:10 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.31 2003/04/27 13:32:43 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -804,7 +804,7 @@ PHP_FUNCTION(sqlite_close)
 }
 /* }}} */
 
-/* {{{ */
+/* {{{ php_sqlite_fetch */
 int php_sqlite_fetch(struct php_sqlite_result *rres TSRMLS_DC)
 {
 	const char **rowdata, **colnames;
@@ -863,13 +863,6 @@ next_row:
 			ret = SQLITE_OK;
 			break;
 
-		case SQLITE_BUSY:
-		case SQLITE_ERROR:
-		case SQLITE_MISUSE:
-		default:
-			/* fall through to finalize */
-			;
-
 		case SQLITE_DONE:
 			if (rres->vm) {
 				ret = sqlite_finalize(rres->vm, &errtext);
@@ -880,6 +873,14 @@ next_row:
 				sqlite_freemem(errtext);
 			}
 			break;
+
+		case SQLITE_BUSY:
+		case SQLITE_ERROR:
+		case SQLITE_MISUSE:
+		default:
+			/* fall through to finalize */
+			;
+
 	}
 	return ret;
 }

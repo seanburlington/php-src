@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.99 2002/07/22 18:46:26 jason Exp $ */
+/* $Id: fsock.c,v 1.100 2002/08/20 11:18:18 derick Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -218,6 +218,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 					break;
 				default:
 					/* unknown ?? */
+					break;
 			}
 			if (ssl_ret == FAILURE)
 				zend_error(E_WARNING, "%s(): failed to activate SSL mode %d", get_active_function_name(TSRMLS_C), ssl_flags);

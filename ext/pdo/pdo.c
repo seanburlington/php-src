@@ -18,12 +18,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.2 2004/05/18 19:30:22 wez Exp $ */
+/* $Id: pdo.c,v 1.3 2004/05/19 17:09:48 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
+#include <ctype.h>
 #include "php.h"
 #include "php_ini.h"
 #include "ext/standard/info.h"
@@ -174,6 +175,10 @@ PDO_API int php_pdo_parse_data_source(const char *data_source,
 				++n_matches;
 				break;
 			}
+		}
+
+		while (i < data_source_len && isspace(data_source[i])) {
+			i++;
 		}
 
 		optstart = i;

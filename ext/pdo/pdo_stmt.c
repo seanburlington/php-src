@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.5 2004/05/18 05:34:52 gschlossnagle Exp $ */
+/* $Id: pdo_stmt.c,v 1.6 2004/05/18 08:45:28 wez Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -265,6 +265,7 @@ static PHP_METHOD(PDOStatement, execute)
 			}
 
 			param.param_type = PDO_PARAM_STR;
+#if 0
 			if(stmt->dbh->methods->quoter(stmt->dbh, Z_STRVAL_PP(tmp), Z_STRLEN_PP(tmp), 
 			   &quotedstr, &quotedstrlen TSRMLS_DC)) {
 				int refcount = (*tmp)->refcount;
@@ -272,6 +273,7 @@ static PHP_METHOD(PDOStatement, execute)
 				ZVAL_STRINGL(*tmp, quotedstr, quotedstrlen, 0);
 				(*tmp)->refcount = refcount;
 			}
+#endif
 			param.parameter = *tmp;
 
 			if (!really_register_bound_param(&param, stmt, 1 TSRMLS_CC)) {

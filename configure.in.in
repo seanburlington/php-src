@@ -1,4 +1,4 @@
-dnl $Id: configure.in.in,v 1.5 1999/04/19 15:04:09 ssb Exp $ -*- sh -*-
+dnl $Id: configure.in.in,v 1.6 1999/04/21 17:48:10 sas Exp $ -*- sh -*-
 dnl Process this file with autoconf to produce a configure script.
 
 
@@ -209,7 +209,7 @@ else
 fi
 AC_MISSING_FCLOSE_DECL
 dnl QNX requires unix.h to allow functions in libunix to work properly
-AC_CHECK_HEADERS(fcntl.h unistd.h crypt.h sys/file.h memory.h pwd.h grp.h sys/socket.h sys/wait.h syslog.h string.h sys/varargs.h stdarg.h sys/time.h signal.h netinet/in.h dlfcn.h limits.h sys/types.h unix.h)
+AC_CHECK_HEADERS(fcntl.h unistd.h crypt.h sys/file.h memory.h pwd.h grp.h sys/socket.h sys/wait.h syslog.h string.h sys/varargs.h stdarg.h sys/time.h signal.h netinet/in.h dlfcn.h limits.h sys/types.h unix.h arpa/inet.h)
 if test "$DBM_LIB" = "-lgdbm"; then
 	AC_CHECK_HEADER(gdbm.h, [ GDBM_INCLUDE="" ], [ 
 		AC_MSG_RESULT("Try /usr/local/include/gdbm.h"); 

@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions.c.in,v 1.19 2001/02/26 18:14:30 andi Exp $ */
+/* $Id: internal_functions.c.in,v 1.20 2001/07/24 23:50:43 andrei Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -41,16 +41,6 @@ zend_module_entry *php_builtin_extensions[] = {
 int php_startup_internal_extensions(void)
 {
 	return php_startup_extensions(php_builtin_extensions, EXTCOUNT);
-}
-
-int php_global_startup_internal_extensions(void)
-{
-	return php_global_startup_extensions(php_builtin_extensions, EXTCOUNT);
-}
-
-int php_global_shutdown_internal_extensions(void)
-{
-	return php_global_shutdown_extensions(php_builtin_extensions, EXTCOUNT);
 }
 
 /*

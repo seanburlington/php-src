@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.351 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: basic_functions.c,v 1.352 2001/06/13 17:04:36 zeev Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -372,7 +372,7 @@ function_entry basic_functions[] = {
 	PHP_FE(print_r,					NULL)
 
 	PHP_FE(setcookie,								NULL)
-	PHP_NAMED_FE(header,		PHP_FN(Header),							NULL)
+	PHP_FE(header,					NULL)
 	PHP_FE(headers_sent,							NULL)
 
 	PHP_FE(connection_aborted,			NULL)
@@ -857,7 +857,6 @@ PHP_RINIT_FUNCTION(basic)
 	PHP_RINIT(lcg)(INIT_FUNC_ARGS_PASSTHRU);
 #endif
 
-	PHP_RINIT(head)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(filestat)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(syslog)(INIT_FUNC_ARGS_PASSTHRU);
 	PHP_RINIT(assert)(INIT_FUNC_ARGS_PASSTHRU);

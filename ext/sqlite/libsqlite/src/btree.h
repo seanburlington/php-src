@@ -13,7 +13,7 @@
 ** subsystem.  See comments in the source code for a detailed description
 ** of what each interface routine does.
 **
-** @(#) $Id: btree.h,v 1.2 2003/06/04 22:40:00 wez Exp $
+** @(#) $Id: btree.h,v 1.3 2003/06/06 22:44:56 wez Exp $
 */
 #ifndef _BTREE_H_
 #define _BTREE_H_
@@ -95,7 +95,7 @@ struct BtCursorOps {
 #define SQLITE_N_BTREE_META 10
 
 int sqliteBtreeOpen(const char *zFilename, int mode, int nPg, Btree **ppBtree);
-int sqliteRBtreeOpen(const char *zFilename, int mode, int nPg, Btree **ppBtree);
+int sqliteRbtreeOpen(const char *zFilename, int mode, int nPg, Btree **ppBtree);
 
 #define btOps(pBt) (*((BtOps **)(pBt)))
 #define btCOps(pCur) (*((BtCursorOps **)(pCur)))

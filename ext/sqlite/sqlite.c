@@ -17,7 +17,7 @@
   |          Marcus Boerger <helly@php.net>                              |
   +----------------------------------------------------------------------+
 
-  $Id: sqlite.c,v 1.46 2003/06/06 19:00:16 helly Exp $ 
+  $Id: sqlite.c,v 1.47 2003/06/06 22:44:56 wez Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -574,6 +574,20 @@ static int php_sqlite_authorizer(void *autharg, int access_type, const char *arg
 				}
 			}
 			return SQLITE_OK;
+#ifdef SQLITE_ATTACH
+		case SQLITE_ATTACH:
+			{
+				TSRMLS_FETCH();
+				if (PG(safe_mode) && (!php_checkuid(arg3, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+					return SQLITE_DENY;
+				}
+
+				if (php_check_open_basedir(arg3 TSRMLS_CC)) {
+					return SQLITE_DENY;
+				}
+			}
+			return SQLITE_OK;
+#endif
 
 		default:
 			/* access allowed */
@@ -636,7 +650,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.46 2003/06/06 19:00:16 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.47 2003/06/06 22:44:56 wez Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

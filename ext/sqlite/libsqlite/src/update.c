@@ -12,7 +12,7 @@
 ** This file contains C code routines that are called by the parser
 ** to handle UPDATE statements.
 **
-** $Id: update.c,v 1.2 2003/06/04 22:40:00 wez Exp $
+** $Id: update.c,v 1.3 2003/06/06 22:44:57 wez Exp $
 */
 #include "sqliteInt.h"
 
@@ -128,8 +128,13 @@ void sqliteUpdate(
       }
     }
     if( j>=pTab->nCol ){
-      sqliteErrorMsg(pParse, "no such column: %s", pChanges->a[i].zName);
-      goto update_cleanup;
+      if( sqliteIsRowid(pChanges->a[i].zName) ){
+        chngRecno = 1;
+        pRecnoExpr = pChanges->a[i].pExpr;
+      }else{
+        sqliteErrorMsg(pParse, "no such column: %s", pChanges->a[i].zName);
+        goto update_cleanup;
+      }
     }
 #ifndef SQLITE_OMIT_AUTHORIZATION
     {

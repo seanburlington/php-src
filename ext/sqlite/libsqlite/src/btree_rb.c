@@ -9,7 +9,7 @@
 **    May you share freely, never taking more than you give.
 **
 *************************************************************************
-** $Id: btree_rb.c,v 1.1 2003/06/04 22:40:00 wez Exp $
+** $Id: btree_rb.c,v 1.2 2003/06/06 22:44:56 wez Exp $
 **
 ** This file implements an in-core database using Red-Black balanced
 ** binary trees.
@@ -580,8 +580,9 @@ int sqliteRbtreeOpen(
   const char *zFilename,
   int mode,
   int nPg,
-  Rbtree **ppRbtree
+  Btree **ppBtree
 ){
+  Rbtree **ppRbtree = (Rbtree**)ppBtree;
   *ppRbtree = (Rbtree *)sqliteMalloc(sizeof(Rbtree));
   sqliteHashInit(&(*ppRbtree)->tblHash, SQLITE_HASH_INT, 0);
 

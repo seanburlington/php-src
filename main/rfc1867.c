@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.122.2.11 2003/06/28 08:51:05 hirokawa Exp $ */
+/* $Id: rfc1867.c,v 1.122.2.12 2003/08/05 01:01:40 iliaa Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -692,13 +692,16 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 {
 	char *boundary, *s=NULL, *boundary_end = NULL, *start_arr=NULL, *array_index=NULL;
 	char *temp_filename=NULL, *lbuf=NULL, *abuf=NULL;
-	int boundary_len=0, total_bytes=0, cancel_upload=0, is_arr_upload=0, array_len=0, max_file_size=0, skip_upload=0, str_len=0;
+	int boundary_len=0, total_bytes=0, cancel_upload=0, is_arr_upload=0, array_len=0, max_file_size=0, skip_upload=0;
 	zval *http_post_files=NULL;
 	zend_bool magic_quotes_gpc;
 	multipart_buffer *mbuff;
 	zval *array_ptr = (zval *) arg;
 	FILE *fp;
 	zend_llist header;
+#if HAVE_MBSTRING && !defined(COMPILE_DL_MBSTRING)
+	int str_len=0;
+#endif
 
 	if (SG(request_info).content_length > SG(post_max_size)) {
 		sapi_module.sapi_error(E_WARNING, "POST Content-Length of %d bytes exceeds the limit of %d bytes", SG(request_info).content_length, SG(post_max_size));

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.12 2003/07/12 17:23:05 rrichards Exp $ */
+/* $Id: document.c,v 1.13 2003/07/14 21:51:28 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -266,9 +266,8 @@ int dom_document_encoding_write(dom_object *obj, zval *newval TSRMLS_DC)
 	}
 
 	docp->encoding = xmlStrdup((const xmlChar *) Z_STRVAL_P(newval));
-    charset = (int)xmlParseCharEncoding( (const char*)docp->encoding );
-    if ( charset > 0 ) {
-        docp->charset = charset;
+    charset = (int)xmlParseCharEncoding((const char*) docp->encoding);
+    if (charset > 0) {
 		return SUCCESS;
     } else {
         /* TODO: ERROR XML_CHAR_ENCODING_ERROR */

@@ -5,7 +5,7 @@
 // +----------------------------------------------------------------------+
 // | Copyright (c) 1997-2004 The PHP Group                                |
 // +----------------------------------------------------------------------+
-// | This source file is subject to version 2.0 of the PHP license,       |
+// | This source file is subject to version 3.0 of the PHP license,       |
 // | that is bundled with this package in the file LICENSE, and is        |
 // | available through the world-wide-web at the following url:           |
 // | http://www.php.net/license/3_0.txt.                                  |
@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.35 2004/01/19 03:32:12 cellog Exp $
+// $Id: System.php,v 1.36 2004/06/15 16:33:46 pajoye Exp $
 //
 
 require_once 'PEAR.php';
@@ -48,7 +48,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.35 $
+* @version  $Revision: 1.36 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */

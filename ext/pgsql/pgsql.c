@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.153 2002/03/11 07:23:07 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.154 2002/03/11 14:53:59 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -1029,7 +1029,8 @@ static void php_pgsql_get_field_info(INTERNAL_FUNCTION_PARAMETERS, int entry_typ
 	convert_to_long_ex(field);
 	
 	if (Z_LVAL_PP(field) < 0 || Z_LVAL_PP(field) >= PQnfields(pgsql_result)) {
-		php_error(E_WARNING,"Bad field offset specified");
+		php_error(E_WARNING,"%s() bad field offset specified",
+				  get_active_function_name(TSRMLS_C));
 		RETURN_FALSE;
 	}
 	

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.47 2001/06/26 21:00:13 joey Exp $ */
+/* $Id: php_sybase_ct.c,v 1.48 2001/07/06 01:21:55 joey Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -459,9 +459,9 @@ static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	switch(ZEND_NUM_ARGS()) {
 		case 0: /* defaults */
 			host=user=passwd=charset=NULL;
-			hashed_details_length=6+3;
+			hashed_details_length=6+4;
 			hashed_details = (char *) emalloc(hashed_details_length+1);
-			strcpy(hashed_details, "sybase___");
+			strcpy(hashed_details, "sybase____");
 			break;
 		case 1: {
 				pval *yyhost;

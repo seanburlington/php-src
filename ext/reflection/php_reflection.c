@@ -14,10 +14,11 @@
    +----------------------------------------------------------------------+
    | Authors: Timm Friebe <thekid@thekid.de>                              |
    |          George Schlossnagle <george@omniti.com>                     |
+   |          Andrei Zmievski <andrei@gravitonic.com>                     |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.8 2003/07/03 05:33:23 gschlossnagle Exp $ */
+/* $Id: php_reflection.c,v 1.9 2003/07/03 14:00:17 gschlossnagle Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.64 2002/05/28 00:11:41 ssb Exp $
+// $Id: Installer.php,v 1.64.2.1 2002/05/29 12:59:12 dickmann Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -531,6 +531,8 @@ class PEAR_Installer extends PEAR_Common
                 $this->log(1, '...done: ' . number_format($params, 0, '', ',') . ' bytes');
                 break;
         }
+        if (method_exists($this->ui, '_downloadCallback'))
+            $this->ui->_downloadCallback($msg, $params);
     }
 
     // }}}

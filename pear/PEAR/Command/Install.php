@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@fast.no>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install.php,v 1.31.2.1 2002/05/28 02:14:10 ssb Exp $
+// $Id: Install.php,v 1.31.2.2 2002/05/29 12:59:13 dickmann Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -149,7 +149,7 @@ specified at once.
     function doInstall($command, $options, $params)
     {
         if (empty($this->installer)) {
-            $this->installer = &new PEAR_Installer($ui);
+            $this->installer = &new PEAR_Installer($this->ui);
         }
         if ($command == 'upgrade') {
             $options[$command] = true;
@@ -166,12 +166,13 @@ specified at once.
                 return $this->raiseError("$command failed");
             }
         }
+        return true;
     }
 
     function doUninstall($command, $options, $params)
     {
         if (empty($this->installer)) {
-            $this->installer = &new PEAR_Installer($ui);
+            $this->installer = &new PEAR_Installer($this->ui);
         }
         foreach ($params as $pkg) {
             if ($this->installer->uninstall($pkg, $options)) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.33 2003/12/25 22:33:02 iliaa Exp $ */
+/* $Id: gd.c,v 1.221.2.34 2004/01/28 01:38:15 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -967,7 +967,7 @@ PHP_FUNCTION(imagelayereffect)
 PHP_FUNCTION(imagecolorallocatealpha)
 {
 	zval *IM;
-	int red, green, blue, alpha;
+	long red, green, blue, alpha;
 	gdImagePtr im;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zllll", &IM, &red, &green, &blue, &alpha) == FAILURE) {
@@ -3306,7 +3306,7 @@ PHP_FUNCTION(imagepstext)
 {
 	zval *img, *fnt;
 	int i, j;
-	int _fg, _bg, x, y, size, space = 0, aa_steps = 4, width = 0;
+	long _fg, _bg, x, y, size, space = 0, aa_steps = 4, width = 0;
 	int *f_ind;
 	int h_lines, v_lines, c_ind;
 	int rd, gr, bl, fg_rd, fg_gr, fg_bl, bg_rd, bg_gr, bg_bl;

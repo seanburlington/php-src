@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.177 2003/08/24 13:59:34 sr Exp $ */
+/* $Id: zlib.c,v 1.178 2003/08/29 07:34:47 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -830,7 +830,7 @@ PHP_FUNCTION(gzencode)
 	}
 
 	if ((level < -1) || (level > 9)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "compression level(%d) must be within -1..9", level);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "compression level(%ld) must be within -1..9", level);
 		RETURN_FALSE;
 	}
 

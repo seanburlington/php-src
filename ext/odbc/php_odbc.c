@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.149 2003/01/08 00:38:36 iliaa Exp $ */
+/* $Id: php_odbc.c,v 1.150 2003/01/16 16:27:30 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -84,7 +84,7 @@ function_entry odbc_functions[] = {
 	PHP_FE(odbc_error, NULL)
 	PHP_FE(odbc_errormsg, NULL)
 	PHP_FE(odbc_exec, NULL)
-#ifdef HAVE_DBMAKER
+#if defined(HAVE_DBMAKER) || defined(PHP_WIN32)
 	PHP_FE(odbc_fetch_array, NULL)
 	PHP_FE(odbc_fetch_object, NULL)
 #endif
@@ -1346,7 +1346,7 @@ PHP_FUNCTION(odbc_exec)
 }
 /* }}} */
 
-#ifdef HAVE_DBMAKER
+#if defined(HAVE_DBMAKER) || defined(PHP_WIN32)
 #define ODBC_NUM  1
 #define ODBC_OBJECT  2
 

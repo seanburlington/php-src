@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.90 2001/06/06 13:05:51 rasmus Exp $ */
+/* $Id: var.c,v 1.91 2001/07/01 20:18:51 dbeu Exp $ */
 
 
 /* {{{ includes 
@@ -176,7 +176,7 @@ inline int php_add_var_hash(HashTable *var_hash, zval *var, void *var_old) {
 	return SUCCESS;
 }
 
-void php_var_serialize(pval *buf, pval **struc, HashTable *var_hash)
+PHPAPI void php_var_serialize(pval *buf, pval **struc, HashTable *var_hash)
 {
 	char s[256];
 	ulong slen;
@@ -358,7 +358,7 @@ void php_var_serialize(pval *buf, pval **struc, HashTable *var_hash)
 /* }}} */
 /* {{{ php_var_dump */
 
-int php_var_unserialize(pval **rval, const char **p, const char *max, HashTable *var_hash)
+PHPAPI int php_var_unserialize(pval **rval, const char **p, const char *max, HashTable *var_hash)
 {
 	const char *q;
 	char *str;

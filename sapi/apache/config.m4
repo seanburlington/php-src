@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.62.4.9 2004/08/18 07:16:46 tony2001 Exp $
+dnl $Id: config.m4,v 1.62.4.10 2005/01/26 18:03:30 derick Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 1.x module support via DSO through APXS)
@@ -132,7 +132,7 @@ AC_ARG_WITH(apache,
     # For Apache 2.0.x
     elif test -f $withval/include/httpd.h &&
          test -f $withval/srclib/apr/include/apr_general.h ; then
-      AC_MSG_ERROR([Use --with-apache2 with Apache 2.x!])
+      AC_MSG_ERROR([Use --with-apxs2 with Apache 2.x!])
     # For Apache 1.3.x
     elif test -f $withval/src/main/httpd.h; then
       APACHE_HAS_REGEX=1

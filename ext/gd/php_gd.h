@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_gd.h,v 1.4 2000/02/25 06:43:51 jah Exp $ */
+/* $Id: php_gd.h,v 1.5 2000/02/28 16:52:03 jah Exp $ */
 
 #ifndef _PHP_GD_H
 #define _PHP_GD_H
@@ -55,6 +55,15 @@
 
 extern zend_module_entry gd_module_entry;
 #define phpext_gd_ptr &gd_module_entry
+
+typedef struct {
+	int le_gd;
+	int le_gd_font;
+#if HAVE_LIBT1
+	int le_ps_font;
+	int le_ps_enc;
+#endif
+} php_gd_globals;
 
 /* gd.c functions */
 PHP_MINFO_FUNCTION(gd);
@@ -108,6 +117,18 @@ PHP_FUNCTION(imagettfbbox);
 PHP_FUNCTION(imagettftext);
 #endif
 PHPAPI int phpi_get_le_gd(void);
+
+
+#ifdef ZTS
+#define GDLS_D php_gd_globals *gd_globals
+#define GDG(v) (gd_globals->v)
+#define GDLS_FETCH() php_gd_globals *gd_globals = ts_resource(gd_globals_id)
+#else
+#define GDLS_D
+#define GDG(v) (gd_globals.v)
+#define GDLS_FETCH()
+#endif
+
 #else
 
 #define phpext_gd_ptr NULL

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.109.2.12 2003/10/29 18:46:40 moriyoshi Exp $ */
+/* $Id: dir.c,v 1.109.2.13 2003/10/29 21:51:22 moriyoshi Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -396,13 +396,11 @@ PHP_FUNCTION(glob)
 		RETURN_FALSE;
 	}
 
-#ifndef GLOB_NOMATCH
 	/* now catch the FreeBSD style of "no matches" */
 	if (!globbuf.gl_pathc || !globbuf.gl_pathv) {
 		array_init(return_value);
 		return;
 	}
-#endif
 
 	/* we assume that any glob pattern will match files from one directory only
 	   so checking the dirname of the first match should be sufficient */

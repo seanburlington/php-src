@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.1 2003/12/02 23:17:01 wez Exp $
+// $Id: config.w32,v 1.2 2003/12/03 02:47:44 wez Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("zlib", "ZLIB support", "yes");
@@ -6,7 +6,8 @@ ARG_ENABLE("zlib", "ZLIB support", "yes");
 if (PHP_ZLIB == "yes") {
 	EXTENSION("zlib", "zlib.c zlib_fopen_wrapper.c", null, "/D ZLIB_EXPORTS");
 	AC_DEFINE("HAVE_ZLIB", 1, "Tokenizer support");
-	ADD_FLAG("LIBS_ZLIB", "zlib.lib");
+	CHECK_LIB("zlib.lib", "zlib", "..\\zlib;" + php_usual_lib_suspects);
+	CHECK_HEADER_ADD_INCLUDE("zlib.h", "CFLAGS", "..\\zlib;" + php_usual_include_suspects);
 }
 
 

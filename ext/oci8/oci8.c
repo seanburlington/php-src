@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.200 2003/01/19 00:45:41 iliaa Exp $ */
+/* $Id: oci8.c,v 1.201 2003/01/19 08:32:22 iliaa Exp $ */
 
 /* TODO list:
  *
@@ -640,7 +640,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.200 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.201 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -1113,6 +1113,7 @@ oci_get_col(oci_statement *statement, int col, zval **value)
 {
 	oci_out_column *outcol = NULL;
 	int i;
+	TSRMLS_FETCH();
 
 	if (statement->columns == 0) { /* we release the columns at the end of a fetch */
 		return NULL;

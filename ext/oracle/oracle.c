@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.84 2003/01/19 00:45:42 iliaa Exp $ */
+/* $Id: oracle.c,v 1.85 2003/01/19 08:32:22 iliaa Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -619,7 +619,7 @@ PHP_FUNCTION(ora_open)
 	}
 	ZEND_FETCH_RESOURCE2(conn, oraConnection *, arg, -1, "Oracle-Connection", le_conn, le_pconn);
 
-	cursor = (oraCursor *)emalloc(sizeof(oraCursor);
+	cursor = (oraCursor *)emalloc(sizeof(oraCursor));
 	memset(cursor, 0, sizeof(oraCursor));
 	if (oopen(&cursor->cda, &conn->lda, (text *) 0, -1, -1, (text *) 0, -1)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to open new cursor (%s)",

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.368 2003/07/22 01:11:07 sas Exp $ */
+/* $Id: session.c,v 1.369 2003/08/11 19:20:44 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -326,7 +326,7 @@ void php_set_session_var(char *name, size_t namelen, zval *state_val, php_unseri
 			zend_set_hash_symbol(state_val, name, namelen, 1, 2, Z_ARRVAL_P(PS(http_session_vars)), &EG(symbol_table));
 		}
 	} else IF_SESSION_VARS() {
-		zend_set_hash_symbol(state_val, name, namelen, 0, 1, Z_ARRVAL_P(PS(http_session_vars)));
+		zend_set_hash_symbol(state_val, name, namelen, PZVAL_IS_REF(state_val), 1, Z_ARRVAL_P(PS(http_session_vars)));
 	}
 }
 

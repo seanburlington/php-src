@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.508 2002/09/21 14:50:04 andrey Exp $ */
+/* $Id: basic_functions.c,v 1.509 2002/09/23 17:27:37 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1051,6 +1051,7 @@ PHP_MSHUTDOWN_FUNCTION(basic)
 	php_unregister_url_stream_wrapper("ftp" TSRMLS_CC);
 # if HAVE_OPENSSL_EXT
 	php_unregister_url_stream_wrapper("https" TSRMLS_CC);
+	php_unregister_url_stream_wrapper("ftps" TSRMLS_CC);
 # endif
 #endif
 

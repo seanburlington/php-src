@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.28 2000/11/23 15:57:24 sniper Exp $ */
+/* $Id: curl.c,v 1.29 2000/11/23 16:31:58 sniper Exp $ */
 
 
 #include "php.h"
@@ -268,8 +268,8 @@ PHP_MSHUTDOWN_FUNCTION(curl)
 	return SUCCESS;
 }
 
-static void curl_free_string(void *string) {
-	free(string);
+static void curl_free_string(void **string) {
+	efree(*string);
 }
 
 /* {{{ proto string curl_version(void)

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ifx.ec,v 1.69.2.21 2003/10/07 09:36:38 nobbie Exp $ */
+/* $Id: ifx.ec,v 1.69.2.22 2003/11/02 23:14:06 edink Exp $ */
 
 /* -------------------------------------------------------------------
  * if you want a function reference : "grep '^\*\*' ifx.ec" will give
@@ -283,6 +283,7 @@ EXEC SQL BEGIN DECLARE SECTION;
 	PARAMETER char *link;
 EXEC SQL END DECLARE SECTION;
 {
+	TSRMLS_FETCH();
 
 	EXEC SQL SET CONNECTION :link;
                 

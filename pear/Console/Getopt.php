@@ -16,7 +16,7 @@
 // | Author: Andrei Zmievski <andrei@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Getopt.php,v 1.21.4.8 2003/12/11 19:28:25 andrei Exp $
+// $Id: Getopt.php,v 1.21.4.9 2005/03/01 18:19:48 andrei Exp $
 
 require_once 'PEAR.php';
 
@@ -184,7 +184,7 @@ class Console_Getopt {
      */
     function _parseLongOption($arg, $long_options, &$opts, &$args)
     {
-        @list($opt, $opt_arg) = explode('=', $arg);
+        @list($opt, $opt_arg) = explode('=', $arg, 2);
         $opt_len = strlen($opt);
 
         for ($i = 0; $i < count($long_options); $i++) {

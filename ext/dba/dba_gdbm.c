@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_gdbm.c,v 1.13 2002/11/05 14:46:36 helly Exp $ */
+/* $Id: dba_gdbm.c,v 1.14 2002/11/05 19:38:06 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -60,10 +60,15 @@ DBA_OPEN_FUNC(gdbm)
 	
 	if(dbf) {
 		info->dbf = ecalloc(sizeof(dba_gdbm_data), 1);
+		if (!info->dbf) {
+			*error = "Out of memory";
+			gdbm_close(dbf);
+			return FAILURE;
+		}
 		((dba_gdbm_data *) info->dbf)->dbf = dbf;
 		return SUCCESS;
 	}
-	*error = "Out of memory";
+	*error = gdbm_strerror(gdbm_errno);
 	return FAILURE;
 }
 

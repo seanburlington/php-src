@@ -19,10 +19,10 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.86 2004/02/11 12:35:24 zeev Exp $ */
+/* $Id: php_reflection.c,v 1.87 2004/02/12 10:38:14 zeev Exp $ */
 #include "zend.h"
 #include "zend_API.h"
-#include "zend_default_classes.h"
+#include "zend_exceptions.h"
 #include "zend_operators.h"
 #include "zend_constants.h"
 #include "zend_ini.h"

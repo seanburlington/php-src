@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.5 2003/02/28 21:03:36 wez Exp $ */
+/* $Id: xp_socket.c,v 1.6 2003/03/01 15:22:21 wez Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -29,6 +29,14 @@
 
 #if defined(AF_UNIX)
 #include <sys/un.h>
+#endif
+
+php_stream_ops php_stream_generic_socket_ops;
+php_stream_ops php_stream_socket_ops;
+php_stream_ops php_stream_udp_socket_ops;
+#ifdef AF_UNIX
+php_stream_ops php_stream_unix_socket_ops;
+php_stream_ops php_stream_unixdg_socket_ops;
 #endif
 
 
@@ -134,7 +142,14 @@ static int php_sockop_close(php_stream *stream, int close_handle TSRMLS_DC)
 
 		if (sock->socket != -1) {
 			/* prevent more data from coming in */
-			shutdown(sock->socket, SHUT_RD);
+
+#ifdef AF_UNIX
+			if (stream->ops != &php_stream_unix_socket_ops && stream->ops != &php_stream_unixdg_socket_ops) {
+#endif
+				shutdown(sock->socket, SHUT_RD);
+#ifdef AF_UNIX
+			}
+#endif
 
 			/* try to make sure that the OS sends all data before we close the connection.
 			 * Essentially, we are waiting for the socket to become writeable, which means

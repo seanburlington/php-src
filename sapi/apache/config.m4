@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.46 2002/02/25 18:27:13 jimw Exp $
+dnl $Id: config.m4,v 1.47 2002/03/04 17:46:19 derick Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 1.x module support via DSO through APXS)
@@ -42,7 +42,7 @@ AC_ARG_WITH(apxs,
   PHP_SAPI=apache
 
   # Test whether apxs support -S option
-  $APXS -q -S CFLAGS=$APXS_CFLAGS CFLAGS >/dev/null 2>&1
+  $APXS -q -S CFLAGS="$APXS_CFLAGS" CFLAGS >/dev/null 2>&1
 
   if test "$?" != "0"; then
     APACHE_INSTALL="$APXS -i -a -n php4 $SAPI_SHARED" # Old apxs does not have -S option

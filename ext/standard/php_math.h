@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.22 2004/05/24 17:02:12 iliaa Exp $ */
+/* $Id: php_math.h,v 1.23 2004/09/21 18:09:29 fmk Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H
@@ -66,9 +66,7 @@ PHP_FUNCTION(rad2deg);
    WARNING: these functions are expermental: they could change their names or 
    disappear in the next version of PHP!
    */
-#ifdef HAVE_HYPOT
 PHP_FUNCTION(hypot);
-#endif
 PHP_FUNCTION(expm1);
 PHP_FUNCTION(log1p);
 

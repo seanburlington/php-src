@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.16 2004/03/01 12:09:22 rrichards Exp $ */
+/* $Id: libxml.c,v 1.17 2004/04/23 17:31:44 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -400,9 +400,6 @@ PHP_LIBXML_API void php_libxml_initialize() {
 			php_libxml_streams_IO_write, 
 			php_libxml_streams_IO_close);
 
-		/* report errors via handler rather than stderr */
-		xmlSetGenericErrorFunc(NULL, php_libxml_error_handler);
-
 		zend_hash_init(&php_libxml_exports, 0, NULL, NULL, 1);
 
 		_php_libxml_initialized = 1;
@@ -411,8 +408,6 @@ PHP_LIBXML_API void php_libxml_initialize() {
 
 PHP_LIBXML_API void php_libxml_shutdown() {
 	if (_php_libxml_initialized) {
-		/* reset libxml generic error handling */
-		xmlSetGenericErrorFunc(NULL, NULL);
 		xmlCleanupParser();
 		zend_hash_destroy(&php_libxml_exports);
 		_php_libxml_initialized = 0;
@@ -436,6 +431,9 @@ PHP_MINIT_FUNCTION(libxml)
 
 PHP_RINIT_FUNCTION(libxml)
 {
+	/* report errors via handler rather than stderr */
+	xmlSetGenericErrorFunc(NULL, php_libxml_error_handler);
+
     return SUCCESS;
 }
 
@@ -450,6 +448,9 @@ PHP_MSHUTDOWN_FUNCTION(libxml)
 
 PHP_RSHUTDOWN_FUNCTION(libxml)
 {
+	/* reset libxml generic error handling */
+	xmlSetGenericErrorFunc(NULL, NULL);
+
 	smart_str_free(&LIBXML(error_buffer));
 	return SUCCESS;
 }

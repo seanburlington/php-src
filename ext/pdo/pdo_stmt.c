@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.52 2005/01/07 05:23:10 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.53 2005/01/12 03:26:46 wez Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -377,6 +377,22 @@ static inline void fetch_value(pdo_stmt_t *stmt, zval *dest, int colno TSRMLS_DC
 	stmt->methods->get_col(stmt, colno, &value, &value_len TSRMLS_CC);
 
 	switch (col->param_type) {
+		case PDO_PARAM_INT:
+			if (value && value_len == sizeof(long)) {
+				ZVAL_LONG(dest, *(long*)value);
+				break;
+			}
+			ZVAL_NULL(dest);
+			break;
+
+		case PDO_PARAM_BOOL:
+			if (value && value_len == sizeof(zend_bool)) {
+				ZVAL_BOOL(dest, *(zend_bool*)value);
+				break;
+			}
+			ZVAL_NULL(dest);
+			break;
+
 		case PDO_PARAM_STR:
 			if (value && !(value_len == 0 && stmt->dbh->oracle_nulls)) {
 				ZVAL_STRINGL(dest, value, value_len, 1);

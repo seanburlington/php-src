@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.44 2004/08/11 20:51:41 helly Exp $ */
+/* $Id: sapi_apache2.c,v 1.45 2004/10/20 09:28:47 jorton Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -567,7 +567,9 @@ zend_first_try {
 
 		rv = ap_pass_brigade(r->output_filters, brigade);
 		if (rv != APR_SUCCESS || r->connection->aborted) {
+zend_first_try {
 			php_handle_aborted_connection();
+} zend_end_try();
 		}
 		apr_brigade_cleanup(brigade);
 	} else {

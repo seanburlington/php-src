@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curlstreams.c,v 1.2 2002/09/23 01:47:00 wez Exp $ */
+/* $Id: streams.c,v 1.1 2002/11/13 22:25:33 sterling Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to

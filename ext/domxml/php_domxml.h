@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.77 2003/04/05 19:56:41 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.78 2003/04/08 13:19:49 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -53,7 +53,7 @@
     therefore it's easier for the script-programmers to check, what's working how
    Can be checked with phpversion("domxml");
 */
-#define DOMXML_API_VERSION "20030405"
+#define DOMXML_API_VERSION "20030407"
 
 extern zend_module_entry domxml_module_entry;
 #define domxml_module_ptr &domxml_module_entry
@@ -73,7 +73,7 @@ PHPAPI zval *php_domobject_new(xmlNodePtr obj, int *found, zval* in TSRMLS_DC);
 
 /* directory functions */
 PHP_MINIT_FUNCTION(domxml);
-PHP_RINIT_FUNCTION(domxml);
+PHP_MSHUTDOWN_FUNCTION(domxml);
 PHP_MINFO_FUNCTION(domxml);
 PHP_FUNCTION(domxml_version);
 PHP_FUNCTION(xmldoc);
@@ -109,6 +109,7 @@ PHP_FUNCTION(domxml_dump_mem_file);
 PHP_FUNCTION(domxml_dump_node);
 PHP_FUNCTION(domxml_doc_validate);
 PHP_FUNCTION(domxml_doc_xinclude);
+PHP_FUNCTION(domxml_doc_free_doc);
 #if defined(LIBXML_HTML_ENABLED)
 PHP_FUNCTION(domxml_html_dump_mem);
 #endif

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.151 2002/11/25 17:20:19 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.152 2002/11/25 17:21:50 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -721,7 +721,7 @@ static void _php_mb_globals_ctor(zend_mbstring_globals *pglobals TSRMLS_DC)
 }
 /* }}} */
 
-/* {{{ static void mbstring_globals_dtor() */
+/* {{{ static void _php_mb_globals_dtor() */
 static void _php_mb_globals_dtor(zend_mbstring_globals *pglobals TSRMLS_DC)
 {
 #if HAVE_MBREGEX

@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.32 1999/04/25 19:35:43 andi Exp $ */
+/* $Id: main.c,v 1.33 1999/04/26 03:03:36 andi Exp $ */
 
 
 #include <stdio.h>
@@ -111,7 +111,7 @@ void *gLock;					/*mutex variable */
 HashTable configuration_hash;
 char *php3_ini_path = NULL;
 #ifdef ZTS
-php_core_globals *main_core_globals;
+php_core_globals *main_core_globals=NULL;
 #endif
 
 
@@ -784,7 +784,9 @@ static void php3_config_ini_shutdown()
 #ifdef ZTS
 static core_globals_ctor(php_core_globals *core_globals)
 {
+	if (main_core_globals) {
 		*core_globals = *main_core_globals;
+	}
 }
 #endif
 

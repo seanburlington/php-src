@@ -16,10 +16,10 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pfpro.h,v 1.2 2000/07/15 05:08:21 david Exp $ */
+/* $Id: php_pfpro.h,v 1.3 2000/07/19 18:51:54 david Exp $ */
 
-#ifndef _PHP_PFPRO_H
-#define _PHP_PFPRO_H
+#ifndef PHP_PFPRO_H
+#define PHP_PFPRO_H
 
 #if HAVE_PFPRO
 
@@ -63,7 +63,7 @@ typedef struct {
 
 #endif
 
-#endif	/* _PHP_PFPRO_H */
+#endif	/* PHP_PFPRO_H */
 
 
 /*

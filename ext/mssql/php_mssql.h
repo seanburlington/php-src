@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.23 2002/06/10 19:31:29 fmk Exp $ */
+/* $Id: php_mssql.h,v 1.24 2002/12/03 18:57:04 fmk Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -137,6 +137,7 @@ typedef struct mssql_result {
 	pval **data;
 	mssql_field *fields;
 	mssql_link *mssql_ptr;
+	mssql_statement * statement;
 	int batchsize;
 	int lastresult;
 	int blocks_initialized;

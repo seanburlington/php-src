@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.55 2002/10/25 11:50:35 helly Exp $ */
+/* $Id: iconv.c,v 1.56 2002/10/26 07:49:46 moriyoshi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -160,7 +160,7 @@ PHP_MINFO_FUNCTION(miconv)
 	zval_dtor(&iconv_impl);
 	zval_dtor(&iconv_ver);
 }
-#
+
 #define PHP_ICONV_CONVERTER			1
 #define PHP_ICONV_WRONG_CHARSET		2
 #define PHP_ICONV_TOO_BIG			3

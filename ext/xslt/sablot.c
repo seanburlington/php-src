@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.61 2002/10/31 21:21:00 msopacua Exp $ */
+/* $Id: sablot.c,v 1.62 2002/11/01 02:05:35 msopacua Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -170,7 +170,9 @@ PHP_MINIT_FUNCTION(xslt)
 	REGISTER_LONG_CONSTANT("XSLT_SABOPT_DISABLE_ADDING_META", SAB_DISABLE_ADDING_META, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("XSLT_SABOPT_DISABLE_STRIPPING", SAB_DISABLE_STRIPPING, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("XSLT_SABOPT_IGNORE_DOC_NOT_FOUND", SAB_IGNORE_DOC_NOT_FOUND, CONST_CS | CONST_PERSISTENT);
-#ifdef SAB_FILES_TO_HANDLER
+/* hack: implemented at the same time, so should work.
+   Otherwise we need to check the enum type of SablotFlag in <sablot.h> */
+#ifdef HAVE_SABLOT_GET_OPTIONS
 	REGISTER_LONG_CONSTANT("XSLT_SABOPT_FILES_TO_HANDLER", SAB_FILES_TO_HANDLER, CONST_CS | CONST_PERSISTENT);
 #endif
 

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.148 2002/02/06 07:25:51 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.149 2002/02/12 10:01:08 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -302,6 +302,7 @@ static void php_pgsql_init_globals(php_pgsql_globals *pgsql_globals_p TSRMLS_DC)
 {
 	PGG(num_persistent) = 0;
 	PGG(ignore_notices) = 0;
+	PGG(auto_reset_persistent) = 0;
 }
 /* }}} */
 

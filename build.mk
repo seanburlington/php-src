@@ -9,11 +9,7 @@
 #
 # Written by Sascha Schumann
 #
-# $Id: build.mk,v 1.7 1999/11/06 13:05:14 sas Exp $ 
-
-
-LT_TARGETS = ltmain.sh ltconfig
-LT_PATCHES = patch-aa patch-ab
+# $Id: build.mk,v 1.8 1999/11/08 11:04:14 sas Exp $ 
 
 SUBDIRS = libzend TSRM
 
@@ -31,7 +27,7 @@ config_m4_files = \
 
 acconfig_h_SOURCES = acconfig.h.in $(config_h_files)
 
-targets = $(makefile_in_files) $(LT_TARGETS) configure $(config_h_in)
+targets = $(makefile_in_files) configure $(config_h_in)
 
 all: $(targets)
 	@for i in $(SUBDIRS); do \
@@ -62,16 +58,6 @@ cvsclean:
 acconfig.h: $(acconfig_h_SOURCES)
 	@echo rebuilding $@
 	@cat $(acconfig_h_SOURCES) > $@
-
-$(LT_TARGETS): $(LT_PATCHES)
-	rm -f $(LT_TARGETS)
-	libtoolize --automake -c -f
-	patch ltconfig < patch-aa
-	patch ltmain.sh < patch-ab
-	@grep compile_rpath ltconfig >/dev/null 2>&1 || (\
-			echo "patching libtool components failed."; \
-			exit 1)
-			
 
 $(makefile_in_files): $(makefile_am_files) aclocal.m4
 	@echo rebuilding Makefile.in\'s

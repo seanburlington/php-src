@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.184 2003/04/04 15:38:20 andrei Exp $ */
+/* $Id: php.h,v 1.185 2003/04/08 15:04:26 andrei Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -288,6 +288,8 @@ PHPAPI void php_error_docref2(const char *docref TSRMLS_DC, const char *param1, 
 #define phpparse zendparse
 #define phprestart zendrestart
 #define phpin zendin
+
+#define php_memnstr zend_memnstr
 
 /* functions */
 int php_startup_internal_extensions(void);

@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.42 2002/08/27 15:32:03 helly Exp $ */
+/* $Id: mbfilter.c,v 1.43 2002/10/06 09:36:26 sebastian Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -88,6 +88,8 @@
 
 #include "php.h"
 #include "php_globals.h"
+
+#ifdef HAVE_MBSTRING
 
 #include <stdlib.h>
 #include "mbfilter.h"
@@ -9556,6 +9558,8 @@ mbfl_html_numeric_entity(
 
 	return result;
 }
+
+#endif	/* HAVE_MBSTRING */
 
 /*
  * Local variables:

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.14 2004/05/20 18:05:44 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.15 2004/05/20 19:09:35 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -323,6 +323,38 @@ fail:
 }
 /* }}} */
 
+static PHP_METHOD(PDO, getAttribute)
+{
+	pdo_dbh_t *dbh = zend_object_store_get_object(getThis() TSRMLS_CC);
+	long attr;
+
+	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &attr)) {
+		RETURN_FALSE;
+	}
+
+	if (!dbh->methods->set_attribute) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "This driver doesn't support fetching attributes");
+		RETURN_FALSE;
+	}
+
+	PDO_DBH_CLEAR_ERR();
+	switch (dbh->methods->get_attribute(dbh, attr, return_value TSRMLS_CC)) {
+		case -1:
+			PDO_HANDLE_DBH_ERR();
+			RETURN_FALSE;
+			break;
+
+		case 0:
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "This driver doesn't support fetching %ld attribute", attr);
+			break;
+
+		default:
+			return;
+			break;
+	}
+}
+/* }}} */
+
 /* {{{ proto long PDO::exec(string query)
    Execute a query that does not return a row set, returning the number of affected rows */
 static PHP_METHOD(PDO, exec)
@@ -414,6 +446,7 @@ function_entry pdo_dbh_functions[] = {
 	PHP_ME(PDO, lastInsertId,	NULL,					ZEND_ACC_PUBLIC)
 	PHP_ME(PDO, errorCode,		NULL,					ZEND_ACC_PUBLIC)
 	PHP_ME(PDO, errorInfo,		NULL,					ZEND_ACC_PUBLIC)
+	PHP_ME(PDO, getAttribute,	NULL,					ZEND_ACC_PUBLIC)
 
 	{NULL, NULL, NULL}
 };

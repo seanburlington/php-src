@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.33 2003/07/07 13:21:10 derick Exp $ */
+/* $Id: recode.c,v 1.34 2004/01/01 19:25:02 helly Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -119,7 +119,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.33 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.34 $");
 	php_info_print_table_end();
 }
 
@@ -134,7 +134,7 @@ PHP_FUNCTION(recode_string)
 	int req_len, str_len;
 	char *req, *str;
 
-	if (zend_parse_parameters(TSRMLS_CC ZEND_NUM_ARGS(), "ss", &req, &req_len, &str, &str_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &req, &req_len, &str, &str_len) == FAILURE) {
 		return;
 	}
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.143.2.14 2003/08/11 02:08:32 sniper Exp $ */
+/* $Id: php_odbc.c,v 1.143.2.15 2003/08/14 14:37:33 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1459,8 +1459,13 @@ static void php_odbc_fetch_hash(INTERNAL_FUNCTION_PARAMETERS, int result_type)
 		if (result_type & ODBC_NUM) {
 			zend_hash_index_update(Z_ARRVAL_P(return_value), i, &tmp, sizeof(pval *), NULL);
 		} else {
-			zend_hash_update(Z_ARRVAL_P(return_value), result->values[i].name, 
+			if (!*(result->values[i].name)) {
+				zend_hash_update(Z_ARRVAL_P(return_value), Z_STRVAL_P(tmp),
+					Z_STRLEN_P(tmp)+1, &tmp, sizeof(pval *), NULL);
+			} else {
+				zend_hash_update(Z_ARRVAL_P(return_value), result->values[i].name, 
 					strlen(result->values[i].name)+1, &tmp, sizeof(pval *), NULL);
+			}
 		}
 	}
 	if (buf) efree(buf);

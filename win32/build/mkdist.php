@@ -1,4 +1,4 @@
-<?php # $Id: mkdist.php,v 1.7 2004/01/09 13:17:58 wez Exp $
+<?php # $Id: mkdist.php,v 1.8 2004/02/12 17:58:52 wez Exp $
 /* piece together a windows binary distro */
 
 $build_dir = $argv[1];
@@ -13,7 +13,7 @@ $is_debug = preg_match("/^debug/i", $build_dir);
 echo "Making dist for $build_dir\n";
 
 $dist_dir = $build_dir . "/php-" . phpversion();
-$pecl_dir = $dist_dir . "-pecl";
+$pecl_dir = $build_dir . "/pecl-" . phpversion();
 
 @mkdir($dist_dir);
 @mkdir("$dist_dir/ext");

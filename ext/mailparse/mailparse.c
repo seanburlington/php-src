@@ -18,7 +18,7 @@
    | the support routines for this extension were based upon.             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mailparse.c,v 1.4 2001/06/06 13:05:46 rasmus Exp $ */
+/* $Id: mailparse.c,v 1.5 2001/07/20 19:36:35 thies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -30,7 +30,7 @@
 #include "php_mailparse.h"
 #include "mailparse_rfc822.h"
 #include "ext/standard/info.h"
-#include "ext/standard/php_output.h"
+#include "main/php_output.h"
 
 /* just in case the config check doesn't enable mbstring automatically */
 #if !HAVE_MBSTRING

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_domxml.h,v 1.8 2000/02/10 15:24:13 steinm Exp $ */
+/* $Id: php_domxml.h,v 1.9 2000/02/17 15:05:22 steinm Exp $ */
 
 #ifndef _PHP_DOMXML_H
 #define _PHP_DOMXML_H
@@ -46,11 +46,11 @@ extern PHP_MINFO_FUNCTION(domxml);
 PHP_FUNCTION(xmldoc);
 PHP_FUNCTION(xmldocfile);
 PHP_FUNCTION(xmltree);
-PHP_FUNCTION(domxml_newxmldoc);
+PHP_FUNCTION(domxml_new_xmldoc);
 
 /* Class Document methods */
 PHP_FUNCTION(domxml_root);
-PHP_FUNCTION(domxml_addroot);
+PHP_FUNCTION(domxml_add_root);
 PHP_FUNCTION(domxml_intdtd);
 PHP_FUNCTION(domxml_dumpmem);
 
@@ -62,7 +62,7 @@ PHP_FUNCTION(domxml_children);
 PHP_FUNCTION(domxml_lastchild);
 PHP_FUNCTION(domxml_parent);
 PHP_FUNCTION(domxml_node);
-PHP_FUNCTION(domxml_newchild);
+PHP_FUNCTION(domxml_new_child);
 
 /* Class Attribute methods */
 PHP_FUNCTION(domxml_attrname);

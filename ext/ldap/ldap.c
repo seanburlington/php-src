@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.151 2004/04/06 23:14:06 iliaa Exp $ */
+/* $Id: ldap.c,v 1.152 2004/05/12 10:15:48 helly Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -286,6 +286,7 @@ PHP_MINIT_FUNCTION(ldap)
  */
 PHP_MSHUTDOWN_FUNCTION(ldap)
 {
+	UNREGISTER_INI_ENTRIES();
 	return SUCCESS;
 }
 /* }}} */
@@ -302,7 +303,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.151 2004/04/06 23:14:06 iliaa Exp $");
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.152 2004/05/12 10:15:48 helly Exp $");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));

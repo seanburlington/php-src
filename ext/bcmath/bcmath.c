@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.59 2004/02/25 20:16:15 abies Exp $ */
+/* $Id: bcmath.c,v 1.60 2004/05/12 10:15:45 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -99,6 +99,8 @@ PHP_MSHUTDOWN_FUNCTION(bcmath)
 	_bc_free_num_ex(&BCG(_zero_), 1);
 	_bc_free_num_ex(&BCG(_one_), 1);
 	_bc_free_num_ex(&BCG(_two_), 1);
+
+	UNREGISTER_INI_ENTRIES();
 
 	return SUCCESS;
 }

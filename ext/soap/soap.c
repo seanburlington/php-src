@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.102 2004/05/05 10:52:33 dmitry Exp $ */
+/* $Id: soap.c,v 1.103 2004/05/12 10:15:47 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -409,6 +409,7 @@ PHP_MSHUTDOWN_FUNCTION(soap)
 	zend_hash_destroy(&SOAP_GLOBAL(defEnc));
 	zend_hash_destroy(&SOAP_GLOBAL(defEncIndex));
 	zend_hash_destroy(&SOAP_GLOBAL(defEncNs));
+	UNREGISTER_INI_ENTRIES();
 	return SUCCESS;
 }
 

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.142 2004/04/22 22:34:29 iliaa Exp $ 
+   $Id: sqlite.c,v 1.143 2004/05/12 10:15:46 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -261,7 +261,7 @@ zend_module_entry sqlite_module_entry = {
 	"SQLite",
 	sqlite_functions,
 	PHP_MINIT(sqlite),
-	NULL,
+	PHP_MSHUTDOWN(sqlite),
 	PHP_RINIT(sqlite),
 	PHP_RSHUTDOWN(sqlite),
 	PHP_MINFO(sqlite),
@@ -1054,6 +1054,12 @@ PHP_MINIT_FUNCTION(sqlite)
 	return SUCCESS;
 }
 
+PHP_MSHUTDOWN_FUNCTION(sqlite)
+{
+	UNREGISTER_INI_ENTRIES();
+	return SUCCESS;
+}
+
 PHP_RINIT_FUNCTION(sqlite)
 {
 	return SUCCESS;
@@ -1063,7 +1069,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.142 2004/04/22 22:34:29 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.143 2004/05/12 10:15:46 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

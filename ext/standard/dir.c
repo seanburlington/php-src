@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.85 2002/02/28 08:26:44 sebastian Exp $ */
+/* $Id: dir.c,v 1.86 2002/03/03 20:46:57 jflemer Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -148,6 +148,10 @@ static void _php_do_opendir(INTERNAL_FUNCTION_PARAMETERS, int createobject)
 	convert_to_string_ex(arg);
 
 	if (php_check_open_basedir(Z_STRVAL_PP(arg) TSRMLS_CC)) {
+		RETURN_FALSE;
+	}
+	
+	if (PG(safe_mode) &&(!php_checkuid(Z_STRVAL_PP(arg), NULL, CHECKUID_ALLOW_ONLY_DIR))) {
 		RETURN_FALSE;
 	}
 	

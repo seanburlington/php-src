@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.16 2003/05/29 16:19:56 sas Exp $ */
+/* $Id: session.c,v 1.336.2.17 2003/05/29 17:39:00 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1270,7 +1270,7 @@ PHP_FUNCTION(session_id)
 }
 /* }}} */
 
-/* {{{ proto string session_regenerate_id()
+/* {{{ proto bool session_regenerate_id()
    Update the current session id with a newly generated one. */
 PHP_FUNCTION(session_regenerate_id)
 {

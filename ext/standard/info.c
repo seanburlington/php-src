@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.106 2000/07/24 01:39:49 david Exp $ */
+/* $Id: info.c,v 1.107 2000/07/25 10:54:07 stas Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -39,7 +39,7 @@
 #define SECTION(name)  PUTS("<H2>" name "</H2>\n")
 
 #define CREDIT_LINE(module, authors) php_info_print_table_row(2, module, authors)
-
+PHPAPI extern char *php_ini_path;
 
 static int _display_module_info(zend_module_entry *module, void *arg)
 {
@@ -191,7 +191,7 @@ PHPAPI void php_print_info(int flag)
 		php_info_print_table_row(2, "Virtual Directory Support", "disabled" );
 #endif
 
-		php_info_print_table_row(2, "Configuration File (php.ini) Path", CONFIGURATION_FILE_PATH );
+		php_info_print_table_row(2, "Configuration File (php.ini) Path", php_ini_path?php_ini_path:CONFIGURATION_FILE_PATH );
 
 #if ZEND_DEBUG
 		php_info_print_table_row(2, "ZEND_DEBUG", "enabled" );

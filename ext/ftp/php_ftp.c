@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.74 2002/10/03 11:33:05 sesser Exp $ */
+/* $Id: php_ftp.c,v 1.75 2002/12/06 06:07:40 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -624,6 +624,7 @@ PHP_FUNCTION(ftp_get)
 	}
 
 	php_stream_close(outstream);
+	RETURN_TRUE;
 }
 /* }}} */
 

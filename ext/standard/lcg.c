@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lcg.c,v 1.22 2001/08/06 03:50:51 sas Exp $ */
+/* $Id: lcg.c,v 1.23 2001/08/07 19:21:19 sniper Exp $ */
 
 #include "php.h"
 #include "php_lcg.h"
@@ -29,9 +29,9 @@
 int lcg_globals_id;
 #else
 static php_lcg_globals lcg_globals;
-#endif
-
 static int php_lcg_initialized = 0;
+#endif
+ 
 
 #ifdef PHP_WIN32
 #include <process.h>

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: flatfile.c,v 1.3 2002/11/07 23:03:16 helly Exp $ */
+/* $Id: flatfile.c,v 1.4 2002/11/11 11:57:25 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -71,6 +71,7 @@ PHPAPI int flatfile_store(flatfile *dba, datum key_datum, datum value_datum, int
 			return -1;
 	}
 
+	php_stream_flush(dba->fp);
 	return 0;
 }
 /* }}} */

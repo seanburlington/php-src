@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.42 2001/06/06 13:05:50 rasmus Exp $ */
+/* $Id: snmp.c,v 1.43 2001/07/13 05:09:40 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -164,7 +164,10 @@ void php_snmp(INTERNAL_FUNCTION_PARAMETERS, int st) {
 	int myargc = ZEND_NUM_ARGS();
     char type = (char) 0;
     char *value = (char *) 0;
-	
+	char hostname[MAX_NAME_LEN];
+	int remote_port = 161;
+	char *pptr;
+
 	if (myargc < 3 || myargc > 7 ||
 		zend_get_parameters_ex(myargc, &a1, &a2, &a3, &a4, &a5, &a6, &a7) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -226,7 +229,14 @@ void php_snmp(INTERNAL_FUNCTION_PARAMETERS, int st) {
 	
 	memset(&session, 0, sizeof(struct snmp_session));
 
-	session.peername = (*a1)->value.str.val;
+	strcpy (hostname, (*a1)->value.str.val);
+	if ((pptr = strchr (hostname, ':'))) {
+		remote_port = strtol (pptr + 1, NULL, 0);
+		*pptr = 0;
+	}
+
+	session.peername = hostname;
+	session.remote_port = remote_port;
 	session.version = SNMP_VERSION_1;
 	/*
 	* FIXME: potential memory leak

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx_oci8.c,v 1.9 2002/10/28 09:41:15 mboeren Exp $ */
+/* $Id: dbx_oci8.c,v 1.10 2002/10/29 14:08:39 mboeren Exp $ */
 
 #include "dbx.h"
 #include "dbx_oci8.h"
@@ -264,6 +264,27 @@ int dbx_oci8_error(zval **rv, zval **dbx_handle, INTERNAL_FUNCTION_PARAMETERS)
 	}
 	MOVE_RETURNED_TO_RV(rv, returned_message_zval);
 	zval_ptr_dtor(&returned_zval);
+	return 1;
+}
+
+int dbx_oci8_esc(zval **rv, zval **dbx_handle, zval **string, INTERNAL_FUNCTION_PARAMETERS)
+{
+	/* returns escaped string */
+	/* replace ' with '' */
+	char * str;
+	int len;
+	char * tmpstr;
+	int tmplen;
+
+	tmpstr = estrdup(Z_STRVAL_PP(string));
+	tmplen = Z_STRLEN_PP(string);
+	/* php_str_to_str uses a smart_str that allocates memory */
+	/* this memory must be freed or passed on to rv */
+	str = php_str_to_str(tmpstr, tmplen, "'", 1, "''", 2, &len);
+	efree(tmpstr);
+
+	ZVAL_STRINGL(*rv, str, len, 0);
+
 	return 1;
 }
 

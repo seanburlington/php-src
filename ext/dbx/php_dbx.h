@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dbx.h,v 1.12 2001/12/11 15:29:05 sebastian Exp $ */
+/* $Id: php_dbx.h,v 1.13 2002/10/29 14:08:40 mboeren Exp $ */
 
 #ifndef ZEND_PHP_DBX_H
 #define ZEND_PHP_DBX_H
@@ -49,6 +49,7 @@ ZEND_FUNCTION(dbx_connect);
 ZEND_FUNCTION(dbx_close);
 ZEND_FUNCTION(dbx_query);
 ZEND_FUNCTION(dbx_error);
+ZEND_FUNCTION(dbx_escape_string);
 
 ZEND_FUNCTION(dbx_sort);
 ZEND_FUNCTION(dbx_compare);

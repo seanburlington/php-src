@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dbx_pgsql.h,v 1.10 2001/12/11 15:29:05 sebastian Exp $ */
+/* $Id: dbx_pgsql.h,v 1.11 2002/10/29 14:08:40 mboeren Exp $ */
 
 #ifndef ZEND_DBX_PGSQL_H
 #define ZEND_DBX_PGSQL_H
@@ -45,6 +45,8 @@ int dbx_pgsql_getrow(zval **rv, zval **result_handle, long row_number, INTERNAL_
 	/* returns array[0..columncount-1] as strings on success or 0 as long on failure */
 int dbx_pgsql_error(zval **rv, zval **dbx_handle, INTERNAL_FUNCTION_PARAMETERS);
 	/* returns string */
+int dbx_pgsql_esc(zval **rv, zval **dbx_handle, zval **string, INTERNAL_FUNCTION_PARAMETERS);
+	/* returns escaped string */
 
 #endif /* ZEND_DBX_PGSQL_H */
 

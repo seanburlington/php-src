@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dbx_pgsql.c,v 1.17 2002/02/13 13:11:36 yohgaki Exp $ */
+/* $Id: dbx_pgsql.c,v 1.18 2002/10/29 14:08:40 mboeren Exp $ */
 
 #include "dbx.h"
 #include "php_dbx.h"
@@ -272,6 +272,30 @@ int dbx_pgsql_error(zval **rv, zval **dbx_handle, INTERNAL_FUNCTION_PARAMETERS)
 		return 0;
 	}
 	MOVE_RETURNED_TO_RV(rv, returned_zval);
+	return 1;
+}
+
+int dbx_pgsql_esc(zval **rv, zval **dbx_handle, zval **string, INTERNAL_FUNCTION_PARAMETERS)
+{
+	/* returns escaped string */
+	/* replace \ with \\ */
+	/*         ' with '' */
+	char * str;
+	int len;
+	char * tmpstr;
+	int tmplen;
+
+	tmpstr = estrdup(Z_STRVAL_PP(string));
+	tmplen = Z_STRLEN_PP(string);
+	/* php_str_to_str uses a smart_str that allocates memory */
+	/* this memory must be freed or passed on to rv */
+	str = php_str_to_str(tmpstr, tmplen, "\\", 1, "\\\\", 2, &len);
+	efree(tmpstr);
+	tmpstr=str; tmplen=len;
+	str = php_str_to_str(tmpstr, tmplen, "'", 1, "''", 2, &len);
+	efree(tmpstr);
+
+	ZVAL_STRINGL(*rv, str, len, 0);
 	return 1;
 }
 

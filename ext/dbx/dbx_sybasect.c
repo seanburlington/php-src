@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx_sybasect.c,v 1.3 2002/06/18 07:48:41 mfischer Exp $ */
+/* $Id: dbx_sybasect.c,v 1.4 2002/10/29 14:08:40 mboeren Exp $ */
 
 #include "dbx.h"
 #include "dbx_sybasect.h"
@@ -271,6 +271,27 @@ int dbx_sybasect_error(zval **rv, zval **dbx_handle, INTERNAL_FUNCTION_PARAMETER
 		return 0;
 	}
 	MOVE_RETURNED_TO_RV(rv, returned_zval);
+	return 1;
+}
+
+int dbx_sybasect_esc(zval **rv, zval **dbx_handle, zval **string, INTERNAL_FUNCTION_PARAMETERS)
+{
+	/* returns escaped string */
+	/* replace ' with '' */
+	char * str;
+	int len;
+	char * tmpstr;
+	int tmplen;
+
+	tmpstr = estrdup(Z_STRVAL_PP(string));
+	tmplen = Z_STRLEN_PP(string);
+	/* php_str_to_str uses a smart_str that allocates memory */
+	/* this memory must be freed or passed on to rv */
+	str = php_str_to_str(tmpstr, tmplen, "'", 1, "''", 2, &len);
+	efree(tmpstr);
+
+	ZVAL_STRINGL(*rv, str, len, 0);
+
 	return 1;
 }
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dbx_mssql.h,v 1.7 2001/12/11 15:29:05 sebastian Exp $ */
+/* $Id: dbx_mssql.h,v 1.8 2002/10/29 14:08:39 mboeren Exp $ */
 
 #ifndef ZEND_DBX_MSSQL_H
 #define ZEND_DBX_MSSQL_H
@@ -49,6 +49,8 @@ int dbx_mssql_getrow(zval **rv, zval **result_handle, long row_number, INTERNAL_
 	/* returns array[0..columncount-1] as strings on success or 0 as long on failure */
 int dbx_mssql_error(zval **rv, zval **dbx_handle, INTERNAL_FUNCTION_PARAMETERS);
 	/* returns string */
+int dbx_mssql_esc(zval **rv, zval **dbx_handle, zval **string, INTERNAL_FUNCTION_PARAMETERS);
+	/* returns escaped string */
 
 #endif /* ZEND_DBX_MSSQL_H */
 

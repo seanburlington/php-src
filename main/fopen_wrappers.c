@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.71 2000/07/29 10:48:57 zeev Exp $ */
+/* $Id: fopen_wrappers.c,v 1.72 2000/07/29 22:32:21 rasmus Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -512,7 +512,7 @@ PHPAPI FILE *php_fopen_with_path(char *filename, char *mode, char *path, char **
 static FILE *php_fopen_url_wrap_http(const char *path, char *mode, int options, int *issock, int *socketd, char **opened_path)
 {
 	FILE *fp=NULL;
-	url *resource=NULL;
+	php_url *resource=NULL;
 	struct sockaddr_in server;
 	char tmp_line[512];
 	char location[512];
@@ -679,7 +679,7 @@ static FILE *php_fopen_url_wrap_http(const char *path, char *mode, int options, 
  static FILE *php_fopen_url_wrap_ftp(const char *path, char *mode, int options, int *issock, int *socketd, char **opened_path)
 {
 	FILE *fp=NULL;
-	url *resource=NULL;
+	php_url *resource=NULL;
 	struct sockaddr_in server;
 	char tmp_line[512];
 	unsigned short portno;

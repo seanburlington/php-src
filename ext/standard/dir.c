@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.107 2002/10/04 18:03:29 rasmus Exp $ */
+/* $Id: dir.c,v 1.108 2002/10/07 16:46:38 rasmus Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -85,7 +85,9 @@ static zend_class_entry *dir_class_entry_ptr;
 	} else if ((ZEND_NUM_ARGS() != 1) || zend_get_parameters_ex(1, &id) == FAILURE) { \
 		WRONG_PARAM_COUNT; \
 	} else { \
-		ZEND_FETCH_RESOURCE(dirp, php_stream *, id,-1, "Directory", php_file_le_stream()); \
+		dirp = (php_stream *) zend_fetch_resource(id TSRMLS_CC, -1, "Directory", NULL, 1, php_file_le_stream()); \
+		if(!dirp) \
+			RETURN_FALSE; \
 	} 
 
 static zend_function_entry php_dir_class_functions[] = {

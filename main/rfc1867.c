@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.157 2004/05/21 08:16:13 derick Exp $ */
+/* $Id: rfc1867.c,v 1.158 2004/05/23 10:00:59 sesser Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -1044,19 +1044,19 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 					php_mb_gpc_encoding_converter(&filename, &str_len, 1, NULL, NULL TSRMLS_CC);
 				}
 				s = php_mb_strrchr(filename, '\\' TSRMLS_CC);
-				if (tmp = php_mb_strrchr(filename, '/' TSRMLS_CC)) {
+				if ((tmp = php_mb_strrchr(filename, '/' TSRMLS_CC)) > s) {
 					s = tmp;
 				}
 				num_vars--;
 			} else {
 				s = strrchr(filename, '\\');
-				if (tmp = strrchr(filename, '/')) {
+				if ((tmp = strrchr(filename, '/')) > s) {
 					s = tmp;
 				}
 			}
 #else
 			s = strrchr(filename, '\\');
-			if (tmp = strrchr(filename, '/')) {
+			if ((tmp = strrchr(filename, '/')) > s) {
 				s = tmp;
 			}
 #endif

@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.83 2000/08/30 20:31:17 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.84 2000/08/30 20:32:29 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -413,7 +413,7 @@ PHPAPI FILE *php_fopen_with_path(char *filename, char *mode, char *path, char **
 #else
 	if (IS_SLASH(*filename)) {
 #endif
-		if (PG(safe_mode)&& PG(doc_root)) {
+		if (PG(safe_mode) && PG(doc_root)) {
 			snprintf(trypath, MAXPATHLEN, "%s%s", PG(doc_root), filename);
 			if (!php_checkuid(trypath, mode, 0)) {
 				return NULL;

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.21 2003/05/19 23:27:48 wez Exp $ */
+/* $Id: file.c,v 1.279.2.22 2003/05/20 00:21:57 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -992,7 +992,6 @@ PHP_FUNCTION(stream_context_set_option)
 		/* handle the array syntax */
 		RETVAL_BOOL(parse_context_options(context, options) == SUCCESS);
 	} else {
-		ZVAL_ADDREF(zvalue);
 		php_stream_context_set_option(context, wrappername, optionname, zvalue);
 		RETVAL_TRUE;
 	}
@@ -1111,7 +1110,7 @@ PHP_NAMED_FUNCTION(php_if_fopen)
 
 	php_stream_to_zval(stream, return_value);
 	if (zcontext) {
-		ZVAL_ADDREF(zcontext);
+		zend_list_addref(Z_RESVAL_P(zcontext));
 	}
 }
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_var.h,v 1.21.4.2 2003/02/06 14:34:07 andrey Exp $ */
+/* $Id: php_var.h,v 1.21.4.3 2003/04/28 18:47:57 derick Exp $ */
 
 #ifndef PHP_VAR_H
 #define PHP_VAR_H
@@ -32,9 +32,9 @@ PHP_FUNCTION(unserialize);
 PHP_FUNCTION(memory_get_usage);
 #endif
 
-void php_var_dump(zval **struc, int level TSRMLS_DC);
-void php_var_export(zval **struc, int level TSRMLS_DC);
-void php_debug_zval_dump(zval **struc, int level TSRMLS_DC);
+PHPAPI void php_var_dump(zval **struc, int level TSRMLS_DC);
+PHPAPI void php_var_export(zval **struc, int level TSRMLS_DC);
+PHPAPI void php_debug_zval_dump(zval **struc, int level TSRMLS_DC);
 
 /* typdef HashTable php_serialize_data_t; */
 #define php_serialize_data_t HashTable

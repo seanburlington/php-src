@@ -18,7 +18,7 @@
 // |          Martin Jansen <mj@php.net>                                  |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.101 2003/08/29 20:50:35 cellog Exp $
+// $Id: Installer.php,v 1.102 2003/08/31 06:08:38 cellog Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -284,7 +284,8 @@ class PEAR_Installer extends PEAR_Common
             if (strtolower($md5sum) == strtolower($atts['md5sum'])) {
                 $this->log(3, "md5sum ok: $final_dest_file");
             } else {
-                $this->log(0, "warning : bad md5sum for file $final_dest_file");
+                return $this->raiseError("bad md5sum for file $final_dest_file",
+                                         PEAR_INSTALLER_FAILED);
             }
         }
         if (!OS_WINDOWS) {

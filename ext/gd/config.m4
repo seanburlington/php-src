@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.125 2002/12/10 20:11:41 helly Exp $
+dnl $Id: config.m4,v 1.126 2002/12/14 09:33:37 sniper Exp $
 dnl
 
 dnl
@@ -243,22 +243,6 @@ AC_DEFUN(PHP_GD_CHECK_VERSION,[
 ])
 
 dnl
-dnl Check for gd 2.0.4 greater availability
-dnl
-
-AC_TRY_COMPILE(
-[
-#include <gd.h>
-#include <stdlib.h>
-], [
-gdIOCtx *ctx;
-ctx = malloc(sizeof(gdIOCtx));
-ctx->gd_free = 1;
-], [
-  AC_DEFINE(HAVE_LIBGD204, 1, [ ])
-])
-
-dnl
 dnl Main GD configure
 dnl 
 
@@ -363,6 +347,24 @@ dnl Library path
   fi 
 
   PHP_EXPAND_PATH($GD_INCLUDE, GD_INCLUDE)
+
+  dnl
+  dnl Check for gd 2.0.4 greater availability
+  dnl
+  old_CPPFLAGS=$CPPFLAGS
+  CPPFLAGS=-I$GD_INCLUDE
+  AC_TRY_COMPILE([
+#include <gd.h>
+#include <stdlib.h>
+  ], [
+gdIOCtx *ctx;
+ctx = malloc(sizeof(gdIOCtx));
+ctx->gd_free = 1;
+  ], [
+    AC_DEFINE(HAVE_LIBGD204, 1, [ ])
+  ])
+  CPPFLAGS=$old_CPPFLAGS
+
  fi
 fi
 

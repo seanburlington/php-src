@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.89 2004/02/19 08:21:13 dmitry Exp $ */
+/* $Id: soap.c,v 1.90 2004/02/19 16:45:25 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3171,6 +3171,10 @@ static sdlParamPtr get_param(sdlFunctionPtr function, char *param_name, int inde
 		ht = function->requestParameters;
 	} else {
 		ht = function->responseParameters;
+	}
+	
+	if (ht == NULL) {
+	  return NULL;
 	}
 
 	if (param_name != NULL) {

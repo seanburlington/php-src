@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: syslog.c,v 1.45 2004/01/08 08:17:34 andi Exp $ */
+/* $Id: syslog.c,v 1.46 2004/06/13 17:04:36 iliaa Exp $ */
 
 #include "php.h"
 
@@ -192,8 +192,7 @@ static void start_syslog(TSRMLS_D)
 PHP_FUNCTION(define_syslog_variables)
 {
 	if (ZEND_NUM_ARGS() != 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "expects no parameters, %d given", ZEND_NUM_ARGS());
-		return;
+		WRONG_PARAM_COUNT;
 	}
 
 	if (!BG(syslog_started)) {
@@ -233,8 +232,7 @@ PHP_FUNCTION(openlog)
 PHP_FUNCTION(closelog)
 {
 	if (ZEND_NUM_ARGS() != 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "expects no parameters, %d given", ZEND_NUM_ARGS());
-		return;
+		WRONG_PARAM_COUNT;
 	}
 
 	closelog();

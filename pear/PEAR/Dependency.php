@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.14.4.15 2003/11/01 05:16:04 cellog Exp $
+// $Id: Dependency.php,v 1.14.4.16 2003/11/01 05:17:40 cellog Exp $
 
 require_once "PEAR.php";
 
@@ -317,6 +317,10 @@ class PEAR_Dependency
         // this would be a bit stupid, but oh well :)
         if ($relation == 'has') {
             return false;
+        }
+        if ($relation == 'not') {
+            $errmsg = "Invalid dependency - 'not' is allowed when specifying PHP, you must run PHP in PHP"
+            return PEAR_DEPENDENCY_BAD_DEPENDENCY;
         }
         if (substr($req, 0, 2) == 'v.') {
             $req = substr($req,2, strlen($req) - 2);

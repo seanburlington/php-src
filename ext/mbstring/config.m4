@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.36 2003/08/30 21:57:29 sniper Exp $
+dnl $Id: config.m4,v 1.37 2003/08/30 22:09:27 sniper Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -206,7 +206,7 @@ PHP_ARG_ENABLE([mbregex], [whether to enable multibyte regex support],
 
 PHP_ARG_WITH(libmbfl, [for external libmbfl],
 [  --with-libmbfl[=DIR]      MBSTRING: Use external libmbfl. DIR is the libmbfl install prefix.
-                            If DIR is not set, the bundled libmbfl will be used.], yes, no)
+                            If DIR is not set, the bundled libmbfl will be used.], no, no)
 
 if test "$PHP_MBSTRING" != "no"; then  
   AC_DEFINE([HAVE_MBSTRING],1,[whether to have multibyte string support])

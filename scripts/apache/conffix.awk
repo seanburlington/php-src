@@ -1,0 +1,23 @@
+# $Id: conffix.awk,v 1.1 1999/07/15 18:33:41 andi Exp $
+
+/php3_*/ {
+	phpcommand=substr($1,6)
+	phpvalue=tolower($2)
+	print "<IfModule mod_php3.c>"
+	print $1 $2
+	print "</IfModule>"
+	print "<IfModule mod_php4.c>"
+	if (phpvalue=="on") {
+		print "php_admin_flag " phpcommand " on"
+	} else  if (phpvalue=="off") {
+		print "php_admin_flag " phpcommand " off"
+	} else {
+		print "php_admin_value " phpcommand " " substr($0,index($0,$1)+length($1)+1)
+	}
+	print "</IfModule>"
+}
+
+! /php3_*/ {
+	print $0
+}
+

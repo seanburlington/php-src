@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.286 2002/08/25 19:08:07 iliaa Exp $ */
+/* $Id: string.c,v 1.287 2002/09/05 11:12:01 hholzgra Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1290,11 +1290,6 @@ PHP_FUNCTION(stristr)
 	SEPARATE_ZVAL(needle);
 	
 	convert_to_string_ex(haystack);
-
-	if (!Z_STRLEN_PP(needle)) {
-		php_error(E_WARNING, "Empty Delimiter");
-		RETURN_FALSE;
-	}
 
 	haystack_orig = estrndup(Z_STRVAL_PP(haystack), Z_STRLEN_PP(haystack));
 

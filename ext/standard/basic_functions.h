@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.89 2001/08/25 16:09:22 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.90 2001/08/26 01:09:20 zeev Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -179,7 +179,6 @@ typedef struct {
 
 	/* var.c */
 	zend_class_entry *incomplete_class;
-	zend_bool use_trans_sid;
 
 	/* url_scanner.c */
 	url_adapt_state_t url_adapt_state;

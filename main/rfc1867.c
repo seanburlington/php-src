@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.159.2.3 2004/09/12 10:46:27 sesser Exp $ */
+/* $Id: rfc1867.c,v 1.159.2.4 2004/09/13 16:00:37 sesser Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -950,6 +950,10 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 						c++;
 					} else if (*tmp == ']') {
 						c--;
+						if (tmp[1] && tmp[1] != '[') {
+							skip_upload = 1;
+							break;
+						}
 					}
 					if (c < 0) {
 						skip_upload = 1;

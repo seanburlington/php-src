@@ -16,9 +16,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: multi.c,v 1.9 2003/04/04 16:00:33 sterling Exp $ */
+/* $Id: multi.c,v 1.10 2003/04/05 08:14:56 bfrance Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: enum.c,v 1.4 2001/02/26 06:07:15 andi Exp $
+ * $Id: enum.c,v 1.5 2001/08/09 21:56:24 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -91,7 +91,7 @@ zend_bool OrbitEnum_Constructor(OrbitEnum ** ppEnum, int parameterCount,
 	/* check parameter count */
 	if (parameterCount != 1)
 	{
-		wrong_param_count();
+		zend_wrong_param_count(TSRMLS_C);
 		goto error;
 	}
 

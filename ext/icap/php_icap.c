@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_icap.c,v 1.27 2001/08/11 16:38:45 zeev Exp $ */
+/* $Id: php_icap.c,v 1.28 2001/08/13 18:47:51 andi Exp $ */
 
 #define ICAP1
 
@@ -141,7 +141,7 @@ static int add_assoc_object(pval *arg, char *key, pval *tmp)
         HashTable *symtable;
         
         if (arg->type == IS_OBJECT) {
-                symtable = arg->value.obj.properties;
+                symtable = Z_OBJPROP_P(arg);
         } else {
                 symtable = arg->value.ht;
         }

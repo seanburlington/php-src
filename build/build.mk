@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build.mk,v 1.12 2002/06/20 08:21:20 imajes Exp $ 
+# $Id: build.mk,v 1.13 2002/06/20 08:36:48 imajes Exp $ 
 #
 #
 # Makefile to generate build tools
@@ -22,11 +22,15 @@
 
 ZENDDIR = $(shell if test -d "ZendEngine2"; then echo ZendEngine2; else echo Zend; fi)
 
+SUBDIRS = $(ZENDDIR) TSRM
+
 STAMP = buildmk.stamp
 
 ALWAYS = generated_lists
 
+
 all: $(STAMP) $(ALWAYS)
+	echo $(SUBDIRS)
 	@$(MAKE) AMFLAGS=$(AMFLAGS) -s -f build/build2.mk
 
 generated_lists:

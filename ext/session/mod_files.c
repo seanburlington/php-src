@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.86 2003/01/03 14:24:07 hyanantha Exp $ */
+/* $Id: mod_files.c,v 1.87 2003/01/12 13:05:32 sas Exp $ */
 
 #include "php.h"
 
@@ -239,7 +239,12 @@ PS_OPEN_FUNC(files)
 
 	data->fd = -1;
 	if ((p = strchr(save_path, ';'))) {
+		errno = 0;
 		data->dirdepth = (size_t) strtol(save_path, NULL, 10);
+		if (errno == ERANGE) {
+			efree(data);
+			return FAILURE;
+		}
 		save_path = p + 1;
 	}
 	data->basedir_len = strlen(save_path);

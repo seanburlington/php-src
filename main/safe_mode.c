@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.1 1999/04/07 21:02:43 zeev Exp $ */
+/* $Id: safe_mode.c,v 1.2 1999/04/17 00:37:05 ssb Exp $ */
 #ifdef THREAD_SAFE
 #include "tls.h"
 #endif
@@ -39,7 +39,7 @@
 #include <unistd.h>
 #endif
 #include <sys/stat.h>
-#include "functions/pageinfo.h"
+#include "ext/standard/pageinfo.h"
 #include "safe_mode.h"
 
 /*

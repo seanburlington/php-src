@@ -27,7 +27,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.4 1999/04/10 16:25:23 zeev Exp $ */
+/* $Id: fopen_wrappers.c,v 1.5 1999/04/17 00:37:05 ssb Exp $ */
 
 #ifdef THREAD_SAFE
 #include "tls.h"
@@ -55,10 +55,7 @@
 #include "safe_mode.h"
 #include "php3_realpath.h"
 #include "functions/head.h"
-#include "functions/url.h"
-#include "functions/base64.h"
-#include "functions/fsock.h"
-#include "functions/php3_string.h"
+#include "ext/standard/php3_standard.h"
 #include "zend_compile.h"
 
 #if HAVE_PWD_H

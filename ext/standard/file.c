@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.201 2001/12/21 03:10:11 elixer Exp $ */
+/* $Id: file.c,v 1.202 2001/12/21 03:50:07 elixer Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -296,7 +296,10 @@ PHP_FUNCTION(get_meta_tags)
 	int saw_name = 0, saw_content = 0;
 	char *name = NULL, *value = NULL, *temp = NULL;
 	php_meta_tags_token tok, tok_last;
-	php_meta_tags_data md = {NULL, 0, 0, 0, 0, NULL, NULL, 0, 0};
+	php_meta_tags_data md;
+
+	/* Initiailize our structure */
+	memset(&md, 0, sizeof(md));
 
 	/* Parse arguments */
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|b",

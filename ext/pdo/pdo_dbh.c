@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.61 2005/02/22 21:22:23 helly Exp $ */
+/* $Id: pdo_dbh.c,v 1.62 2005/02/23 00:29:44 helly Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -494,6 +494,8 @@ static PHP_METHOD(PDO, prepare)
 				RETURN_FALSE;
 			}
 			ctor_args = *item;
+		} else {
+			ctor_args = NULL;
 		}
 	} else {
 		dbstmt_ce = pdo_dbstmt_ce;

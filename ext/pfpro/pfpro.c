@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pfpro.c,v 1.17 2001/07/30 06:18:01 zeev Exp $ */
+/* $Id: pfpro.c,v 1.18 2001/08/14 20:28:03 jdonagher Exp $ */
 
 /* {{{ includes */
 
@@ -76,7 +76,13 @@ ZEND_GET_MODULE(pfpro)
 
 /* {{{ initialization defaults */
 PHP_INI_BEGIN()
-	STD_PHP_INI_ENTRY("pfpro.defaulthost",		"test.signio.com",	PHP_INI_ALL, OnUpdateString,	defaulthost,			php_pfpro_globals,	pfpro_globals)
+#if PFPRO_VERSION < 3
+	STD_PHP_INI_ENTRY("pfpro.defaulthost",		"test.signio.com",
+	PHP_INI_ALL, OnUpdateString,	defaulthost, php_pfpro_globals,	pfpro_globals) 
+#else
+	STD_PHP_INI_ENTRY("pfpro.defaulthost",		"test-payflow.verisign.com",
+	PHP_INI_ALL, OnUpdateString,	defaulthost, php_pfpro_globals,	pfpro_globals)
+#endif
 	STD_PHP_INI_ENTRY("pfpro.defaultport",			"443",			PHP_INI_ALL, OnUpdateInt,		defaultport,			php_pfpro_globals,	pfpro_globals)
 	STD_PHP_INI_ENTRY("pfpro.defaulttimeout",		"30",			PHP_INI_ALL, OnUpdateInt,		defaulttimeout,			php_pfpro_globals,	pfpro_globals)
 	STD_PHP_INI_ENTRY("pfpro.proxyaddress",			"",				PHP_INI_ALL, OnUpdateString,	proxyaddress,			php_pfpro_globals,	pfpro_globals)

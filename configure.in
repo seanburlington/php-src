@@ -1,4 +1,4 @@
-dnl $Id: configure.in,v 1.1 1999/04/07 21:01:57 zeev Exp $
+dnl $Id: configure.in,v 1.2 1999/04/07 23:59:51 ssb Exp $
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(main.c)
@@ -1937,9 +1937,9 @@ AC_DEFINE_UNQUOTED(PHP_UNAME,"$PHP_UNAME")
 PHP_OS=`uname`
 AC_DEFINE_UNQUOTED(PHP_OS,"$PHP_OS")
 
-AC_OUTPUT(Makefile build-defs.h stamp-h libphp3.module doc/Makefile
-          doc/version.ent doc/checkdoc extra/gd/bdf2gdfont regex/Makefile
-          dbase/Makefile, [
+AC_OUTPUT(Makefile build-defs.h stamp-h libphp3.module
+dnl doc/Makefile doc/version.ent doc/checkdoc extra/gd/bdf2gdfont
+	  regex/Makefile dbase/Makefile, [
   chmod +x doc/checkdoc extra/gd/bdf2gdfont
 ], [
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.24 2001/12/11 15:29:44 sebastian Exp $ */
+/* $Id: php_interbase.h,v 1.25 2002/01/27 15:31:15 aeschbacher Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -68,6 +68,10 @@ PHP_FUNCTION(ibase_blob_close);
 PHP_FUNCTION(ibase_blob_echo);
 PHP_FUNCTION(ibase_blob_info);
 PHP_FUNCTION(ibase_blob_import);
+
+PHP_FUNCTION(ibase_add_user);
+PHP_FUNCTION(ibase_modify_user);
+PHP_FUNCTION(ibase_delete_user);
 
 PHP_FUNCTION(ibase_errmsg);
 

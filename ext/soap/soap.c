@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.125 2004/11/16 12:07:29 dmitry Exp $ */
+/* $Id: soap.c,v 1.126 2004/11/16 21:04:10 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1266,7 +1266,7 @@ PHP_METHOD(SoapServer, handle)
 	int soap_version, old_soap_version;
 	sdlPtr old_sdl = NULL;
 	soapServicePtr service;
-	xmlDocPtr doc_request, doc_return;
+	xmlDocPtr doc_request=NULL, doc_return;
 	zval function_name, **params, **raw_post, *soap_obj, retval, **server_vars;
 	char *fn_name, cont_len[30];
 	int num_params = 0, size, i, call_status = 0;

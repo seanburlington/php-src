@@ -14,7 +14,7 @@
 ./"    | Author: Marcus Boerger <helly@php.net>                               |
 ./"    +----------------------------------------------------------------------+
 ./" 
-./" $Id: php.1,v 1.5 2003/02/08 15:29:35 helly Exp $
+./" $Id: php.1,v 1.6 2003/02/11 20:31:34 helly Exp $
 ./" 
 .TH PHP 1 "Feb 2003" "The PHP Group" "Scripting Language"
 .SH NAME
@@ -127,6 +127,11 @@ Parse and execute
 .TP
 .B \-h
 This help
+.TP
+.B \-H
+Hide script name (\fIfile\fP) and parameters (\fIargs\.\.\.\fP) from external 
+tools. For example you may want to use this when a php script is started as 
+a daemon and the command line contains sensitive data such as passwords.
 .TP
 .B \-i
 PHP information and configuration

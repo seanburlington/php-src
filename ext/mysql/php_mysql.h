@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.20 2001/05/04 01:14:26 jason Exp $ */
+/* $Id: php_mysql.h,v 1.21 2001/05/05 01:42:15 zeev Exp $ */
 
 #ifndef PHP_MYSQL_H
 #define PHP_MYSQL_H
@@ -41,6 +41,7 @@ extern zend_module_entry mysql_module_entry;
 extern PHP_MINIT_FUNCTION(mysql);
 extern PHP_RINIT_FUNCTION(mysql);
 extern PHP_MSHUTDOWN_FUNCTION(mysql);
+extern PHP_RSHUTDOWN_FUNCTION(mysql);
 PHP_MINFO_FUNCTION(mysql);
 
 PHP_FUNCTION(mysql_connect);

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config0.m4,v 1.12.2.1 2002/12/09 18:28:03 wez Exp $
+dnl $Id: config0.m4,v 1.12.2.2 2003/06/27 00:37:53 sas Exp $
 dnl
 
 PHP_ARG_WITH(zlib,for ZLIB support,
@@ -36,12 +36,17 @@ if test "$PHP_ZLIB" != "no" -o "$PHP_ZLIB_DIR" != "no"; then
     AC_MSG_ERROR(Cannot find libz)
   fi
 
+  case $ZLIB_DIR in
+  /usr) ac_extra= ;; 
+  *) ac_extra=-L$ZLIB_DIR/lib ;;
+  esac
+
   PHP_CHECK_LIBRARY(z, gzgets, [
     AC_DEFINE(HAVE_ZLIB,1,[ ]) 
   ],[
     AC_MSG_ERROR(ZLIB extension requires zlib >= 1.0.9)
   ],[
-    -L$ZLIB_DIR/lib
+    $ac_extra
   ])
 
   PHP_ADD_LIBPATH($ZLIB_DIR/lib, ZLIB_SHARED_LIBADD)

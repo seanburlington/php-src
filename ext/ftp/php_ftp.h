@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.h,v 1.25 2003/06/10 20:03:29 imajes Exp $ */
+/* $Id: php_ftp.h,v 1.26 2003/06/27 16:41:41 sniper Exp $ */
 
 #ifndef	_INCLUDED_FTP_H
 #define	_INCLUDED_FTP_H
@@ -35,7 +35,7 @@ PHP_MINIT_FUNCTION(ftp);
 PHP_MINFO_FUNCTION(ftp);
 
 PHP_FUNCTION(ftp_connect);
-#if HAVE_OPENSSL_EXT
+#ifdef HAVE_OPENSSL_EXT
 PHP_FUNCTION(ftp_ssl_connect);
 #endif
 PHP_FUNCTION(ftp_login);

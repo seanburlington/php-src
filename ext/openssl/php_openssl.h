@@ -17,12 +17,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_openssl.h,v 1.13 2003/06/10 20:03:34 imajes Exp $ */
+/* $Id: php_openssl.h,v 1.14 2003/06/27 16:41:41 sniper Exp $ */
 
 #ifndef PHP_OPENSSL_H
 #define PHP_OPENSSL_H
 /* HAVE_OPENSSL would include SSL MySQL stuff */
-#if HAVE_OPENSSL_EXT
+#ifdef HAVE_OPENSSL_EXT
 extern zend_module_entry openssl_module_entry;
 #define phpext_openssl_ptr &openssl_module_entry
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.70 2002/08/22 15:02:41 chregu Exp $ */
+/* $Id: php_domxml.h,v 1.71 2002/08/22 15:54:23 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -230,6 +230,7 @@ PHP_FUNCTION(domxml_xslt_stylesheet_doc);
 PHP_FUNCTION(domxml_xslt_stylesheet_file);
 PHP_FUNCTION(domxml_xslt_process);
 PHP_FUNCTION(domxml_xslt_dump_mem);
+PHP_FUNCTION(domxml_xslt_dump_file);
 PHP_FUNCTION(domxml_xslt_version);
 #endif
 typedef struct {

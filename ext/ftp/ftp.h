@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.27 2002/08/25 22:17:55 sebastian Exp $ */
+/* $Id: ftp.h,v 1.28 2002/10/03 09:10:24 sesser Exp $ */
 
 #ifndef	FTP_H
 #define	FTP_H
@@ -68,9 +68,9 @@ typedef struct ftpbuf
 	long	timeout_sec;	/* User configureable timeout (seconds) */
 	int			autoseek;	/* User configureable autoseek flag */
 
-	int				async;	/* asyncronous transfer in progress */
-	databuf_t		*data;	/* Data connection for asyncrounous transfers */
-	php_stream		*stream; /* output stream for asyncrounous transfers */
+	int				nb;		/* "nonblocking" transfer in progress */
+	databuf_t		*data;	/* Data connection for "nonblocking" transfers */
+	php_stream		*stream; /* output stream for "nonblocking" transfers */
 	int				lastch;		/* last char of previous call */
 	int				direction;	/* recv = 0 / send = 1 */
 	int				closestream;/* close or not close stream */
@@ -170,21 +170,21 @@ int		ftp_site(ftpbuf_t *ftp, const char *cmd);
 /* retrieves part of a file and saves its contents to outfp
  * returns true on success, false on error
  */
-int		ftp_async_get(ftpbuf_t *ftp, php_stream *outstream, const char *path,
+int		ftp_nb_get(ftpbuf_t *ftp, php_stream *outstream, const char *path,
 			ftptype_t type, int resumepos);
 
 /* stores the data from a file, socket, or process as a file on the remote server
  * returns true on success, false on error
  */
-int		ftp_async_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type, int startpos);
+int		ftp_nb_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type, int startpos);
 
-/* continues a previous async_(f)get command
+/* continues a previous nb_(f)get command
  */
-int		ftp_async_continue_read(ftpbuf_t *ftp);
+int		ftp_nb_continue_read(ftpbuf_t *ftp);
 
-/* continues a previous async_(f)put command
+/* continues a previous nb_(f)put command
  */
-int		ftp_async_continue_write(ftpbuf_t *ftp);
+int		ftp_nb_continue_write(ftpbuf_t *ftp);
 
 
 #endif

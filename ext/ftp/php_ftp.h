@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.h,v 1.19 2002/07/26 22:00:25 sesser Exp $ */
+/* $Id: php_ftp.h,v 1.20 2002/10/03 09:10:24 sesser Exp $ */
 
 #ifndef	_INCLUDED_FTP_H
 #define	_INCLUDED_FTP_H
@@ -58,11 +58,11 @@ PHP_FUNCTION(ftp_site);
 PHP_FUNCTION(ftp_close);
 PHP_FUNCTION(ftp_set_option);
 PHP_FUNCTION(ftp_get_option);
-PHP_FUNCTION(ftp_async_get);
-PHP_FUNCTION(ftp_async_fget);
-PHP_FUNCTION(ftp_async_put);
-PHP_FUNCTION(ftp_async_fput);
-PHP_FUNCTION(ftp_async_continue);
+PHP_FUNCTION(ftp_nb_get);
+PHP_FUNCTION(ftp_nb_fget);
+PHP_FUNCTION(ftp_nb_put);
+PHP_FUNCTION(ftp_nb_fput);
+PHP_FUNCTION(ftp_nb_continue);
 
 #define phpext_ftp_ptr php_ftp_module_ptr
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.207 2001/06/06 14:32:23 rasmus Exp $ */
+/* $Id: session.c,v 1.208 2001/06/08 11:45:53 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -270,8 +270,10 @@ int php_get_session_var(char *name, size_t namelen, zval ***state_var PLS_DC PSL
 	HashTable *ht = &EG(symbol_table);
 
 	if (!PG(register_globals))
-		ht = Z_ARRVAL_P(PS(http_session_vars));
+		ht = PS(http_session_vars) ? Z_ARRVAL_P(PS(http_session_vars)) : NULL;
 
+	if (!ht) return NULL;
+	
 	return zend_hash_find(ht, name, namelen + 1, (void **)state_var);
 }
 

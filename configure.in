@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.216 2001/01/28 00:16:55 jdonagher Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.217 2001/02/06 00:03:44 svanegmond Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -283,6 +283,7 @@ dnl QNX requires unix.h to allow functions in libunix to work properly
 AC_CHECK_HEADERS(
 alloca.h \
 arpa/inet.h \
+arpa/nameser.h \
 crypt.h \
 fcntl.h \
 grp.h \
@@ -291,6 +292,7 @@ limits.h \
 locale.h \
 netinet/in.h \
 pwd.h \
+resolv.h \
 signal.h \
 stdarg.h \
 stdlib.h \

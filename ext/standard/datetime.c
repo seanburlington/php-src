@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.62 2001/01/10 06:48:06 david Exp $ */
+/* $Id: datetime.c,v 1.63 2001/01/14 05:37:33 david Exp $ */
 
 
 #include "php.h"
@@ -300,6 +300,7 @@ php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 				if(i < (*format)->value.str.len-1) {
 					i++;
 				}
+				size ++;
 				break;
 			case 'L':		/* boolean for leap year */
 			case 'w':		/* day of the week, numeric */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: transports.c,v 1.12.2.2 2004/10/11 01:34:26 wez Exp $ */
+/* $Id: transports.c,v 1.12.2.3 2004/10/11 01:41:23 wez Exp $ */
 
 #include "php.h"
 #include "php_streams_int.h"
@@ -137,7 +137,7 @@ PHPAPI php_stream *_php_stream_xport_create(const char *name, long namelen, int 
 			/* client */
 
 			if (flags & STREAM_XPORT_CONNECT) {
-				if (0 != php_stream_xport_connect(stream, name, namelen,
+				if (-1 == php_stream_xport_connect(stream, name, namelen,
 							flags & STREAM_XPORT_CONNECT_ASYNC ? 1 : 0,
 							timeout, &error_text, error_code TSRMLS_CC)) {
 

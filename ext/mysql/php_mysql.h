@@ -17,7 +17,7 @@
 */
 
 
-/* $Id: php_mysql.h,v 1.14 2000/07/02 23:46:43 sas Exp $ */
+/* $Id: php_mysql.h,v 1.15 2000/09/20 21:43:57 brianlmoon Exp $ */
 
 #ifndef PHP_MYSQL_H
 #define PHP_MYSQL_H
@@ -63,6 +63,7 @@ PHP_FUNCTION(mysql_num_rows);
 PHP_FUNCTION(mysql_num_fields);
 PHP_FUNCTION(mysql_fetch_row);
 PHP_FUNCTION(mysql_fetch_array);
+PHP_FUNCTION(mysql_fetch_assoc);
 PHP_FUNCTION(mysql_fetch_object);
 PHP_FUNCTION(mysql_data_seek);
 PHP_FUNCTION(mysql_fetch_lengths);

@@ -8,7 +8,7 @@
 **  This code is in the public domain and has no copyright.
 */
 
-/* $Id: parsedate.y,v 1.34.2.6 2004/04/01 20:35:41 derick Exp $ */
+/* $Id: parsedate.y,v 1.34.2.7 2004/04/08 19:21:46 derick Exp $ */
 
 #include "php.h"
 
@@ -604,6 +604,7 @@ static TABLE const TimezoneTable[] = {
     { "nt",	tZONE,     HOUR (11) },	/* Nome */
     { "idlw",	tZONE,     HOUR (12) },	/* International Date Line West */
     { "cet",	tZONE,     -HOUR (1) },	/* Central European */
+    { "cest",	tDAYZONE,  -HOUR (1) },	/* Central European Summer */
     { "met",	tZONE,     -HOUR (1) },	/* Middle European */
     { "mewt",	tZONE,     -HOUR (1) },	/* Middle European Winter */
     { "mest",	tDAYZONE,  -HOUR (1) },	/* Middle European Summer */

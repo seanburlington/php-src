@@ -16,7 +16,7 @@
 // | Author: Stig Sæther Bakken <ssb@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Install-using-downloader.php,v 1.1 2003/11/30 05:39:00 cellog Exp $
+// $Id: Install-using-downloader.php,v 1.2 2003/11/30 22:01:22 cellog Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Installer.php";
@@ -317,11 +317,6 @@ fail if any packages depend on the newer version.'),
         $errors = array();
         $downloaded = array();
         $this->downloader->download($params);
-        if ($command != 'upgrade-all') {
-            for ($i = 0; $i < count($params); $i++) {
-                $params[$i] = $this->downloader->extractDownloadFileName($params[$i], $_tmp);
-            }
-        }
         $errors = $this->downloader->getErrorMsgs();
         if (count($errors)) {
             $err['data'] = array($errors);

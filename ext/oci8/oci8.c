@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.86 2000/06/05 19:47:43 andi Exp $ */
+/* $Id: oci8.c,v 1.87 2000/06/08 09:49:31 thies Exp $ */
 
 /* TODO list:
  *
@@ -1477,6 +1477,7 @@ oci_fetch(oci_statement *statement, ub4 nrows, char *func)
 			zend_hash_destroy(statement->columns);
 			efree(statement->columns);
 			statement->columns = 0;
+			statement->ncolumns = 0;
 		}
 		statement->executed = 0;
 

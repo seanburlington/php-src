@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.22 1999/08/25 16:24:13 andi Exp $ */
+/* $Id: fsock.c,v 1.23 1999/09/07 18:46:25 ssb Exp $ */
 
 /* Synced with php3 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php3 revision 1.133 1999-07-21 [sas] */
@@ -131,6 +131,7 @@ int lookup_hostname(const char *addr, struct in_addr *in)
 	struct hostent *host_info;
 
 	if (!inet_aton(addr, in)) {
+		/* XXX NOT THREAD SAFE */
 		host_info = gethostbyname(addr);
 		if (host_info == 0) {
 			/* Error: unknown host */

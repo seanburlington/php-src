@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.30 1999/09/04 22:13:41 zeev Exp $ */
+/* $Id: php.h,v 1.31 1999/09/04 22:18:43 rasmus Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -317,7 +317,7 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #define PUTC(c)						(zend_body_write(&(c), 1), (c))
 #define PHPWRITE_H(str, str_len)	zend_header_write((str), (str_len))
 #define PUTS_H(str)					zend_header_write((str), strlen((str)))
-#define PUTC_H(c)					zend_header_write(&(c), 1)
+#define PUTC_H(c)					(zend_header_write(&(c), 1), (c))
 
 
 #include "zend_operators.h"

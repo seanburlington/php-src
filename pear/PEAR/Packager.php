@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Packager.php,v 1.9 2001/07/31 13:36:54 cox Exp $
+// $Id: Packager.php,v 1.10 2001/08/19 12:30:24 cox Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -154,19 +154,24 @@ class PEAR_Packager extends PEAR_Common
                     return $this->raiseError("could not mkdir $dir");
                 }
             }
+            //Maintain original file perms
+            $orig_perms = fileperms($fname);
             if (!@copy($fname, $file)) {
                 $this->log(0, "could not copy $fname to $file");
             } else {
                 $this->log(2, "+ copying from $fname to $file");
             }
+            chmod($file, $orig_perms);
         }
         // XXX TODO: Rebuild the package file as the old method did?
 
         // This allows build packages from different pear pack def files
-        if (!@copy($pkgfile, $this->tmpdir . DIRECTORY_SEPARATOR . 'package.xml')) {
-            return $this->raiseError("could not copy $pkgfile to " . $this->tmpdir);
+        $dest_pkgfile = $this->tmpdir . DIRECTORY_SEPARATOR . 'package.xml';
+        $this->log(2, "+ copying package $pkgfile to $dest_pkgfile");
+        if (!@copy($pkgfile, $dest_pkgfile)) {
+            return $this->raiseError("could not copy $pkgfile to $dest_pkgfile");
         }
-        $this->log(2, "+ copying package $pkgfile to " . $this->tmpdir);
+        chmod($dest_pkgfile, 0644);
 
         // TAR the Package -------------------------------------------
         chdir(dirname($this->tmpdir));

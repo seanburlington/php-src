@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.36 2000/08/04 18:55:47 rubys Exp $ */
+/* $Id: java.c,v 1.37 2000/08/17 10:14:47 rubys Exp $ */
 
 /*
  * This module implements Zend OO syntax overloading support for Java
@@ -28,6 +28,13 @@
 #include "zend_compile.h"
 #include "php_ini.h"
 #include "php_globals.h"
+
+#ifdef PHP_WIN32
+  #include "win32/winutil.h"
+  #define DL_ERROR php_win_err()
+#else
+  #define DL_ERROR dlerror()
+#endif
 
 #include <jni.h>
 
@@ -185,7 +192,8 @@ static int jvm_create() {
     dl_handle = DL_LOAD(javalib);
 
     if (!dl_handle) {
-      php_error(E_ERROR, "Unable to load Java Library %s", javalib);
+      php_error(E_ERROR, "Unable to load Java Library %s, error: %s", 
+        javalib, DL_ERROR);
       return -1;
     }
   }

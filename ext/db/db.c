@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.79 2002/10/22 18:47:41 helly Exp $ */
+/* $Id: db.c,v 1.80 2002/11/12 12:01:57 helly Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -38,14 +38,8 @@
 #include <unistd.h>
 #endif
 
-#ifdef PHP_31
-#include "os/nt/flock.h"
-#else
-#ifdef PHP_WIN32
-#include "win32/flock.h"
-#else
+#ifdef HAVE_SYS_FILE_H
 #include <sys/file.h>
-#endif
 #endif
 
 #if HAVE_FCNTL_H
@@ -954,7 +948,7 @@ datum flatfile_fetch(FILE *dbf, datum key_datum) {
 			num = atoi(buf);
 			if (num > buf_size) {
 				buf_size+=num;
-				buf = emalloc((buf_size+1)*sizeof(char));
+				buf = erealloc(buf, (buf_size+1)*sizeof(char));
 			}
 			read(fileno(dbf), buf, num);
 			value_datum.dptr = buf;
@@ -985,8 +979,7 @@ int flatfile_delete(FILE *dbf, datum key_datum) {
 		num = atoi(buf);
 		if (num > buf_size) {
 			buf_size += num;
-			if (buf) efree(buf);
-			buf = emalloc((buf_size+1)*sizeof(char));
+			buf = erealloc(buf, (buf_size+1)*sizeof(char));
 		}
 		pos = ftell(dbf);
 

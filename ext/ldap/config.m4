@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.25 2002/06/24 09:25:51 sniper Exp $
+dnl $Id: config.m4,v 1.26 2002/09/27 10:38:08 derick Exp $
 dnl
 
 AC_DEFUN(PHP_LDAP_CHECKS, [
@@ -8,11 +8,11 @@ AC_DEFUN(PHP_LDAP_CHECKS, [
     LDAP_INCDIR=$1/include
     LDAP_LIBDIR=$1/lib
   elif test -f $1/include/umich-ldap/ldap.h; then
-    LDAP_DIR=$i
+    LDAP_DIR=$1
     LDAP_INCDIR=$1/include/umich-ldap
     LDAP_LIBDIR=$1/lib
   elif test -f $1/ldap/public/ldap.h; then
-    LDAP_DIR=$i
+    LDAP_DIR=$1
     LDAP_INCDIR=$1/ldap/public
     LDAP_LIBDIR=$1/lib
   fi

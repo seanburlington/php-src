@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.43 2001/05/28 18:29:07 wez Exp $ */
+/* $Id: sockets.c,v 1.44 2001/05/28 19:38:30 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -688,8 +688,7 @@ PHP_FUNCTION(socket_read)
 	}
 
 	tmpbuf[retval] = '\0';
-	RETVAL_STRING(tmpbuf, 1);
-	efree(tmpbuf);
+	RETURN_STRING(tmpbuf, 0);
 }
 /* }}} */
 

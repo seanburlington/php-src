@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.8.2.3 2002/03/19 01:08:17 ssb Exp $
+dnl $Id: config.m4,v 1.8.2.4 2002/03/26 00:15:29 sniper Exp $
 dnl
 
 sinclude(ext/xmlrpc/libxmlrpc/acinclude.m4)
@@ -33,6 +33,9 @@ if test "$PHP_XMLRPC" != "no"; then
     AC_MSG_ERROR(XML-RPC support requires libexpat. Use --with-expat-dir=<DIR>)
   fi
 
+  if test "$PHP_ICONV" = "no"; then
+    PHP_ICONV=yes
+  fi
   PHP_SETUP_ICONV(XMLRPC_SHARED_LIBADD, [], [
     AC_MSG_ERROR([iconv not found, in order to build xmlrpc you need the iconv library])
   ])

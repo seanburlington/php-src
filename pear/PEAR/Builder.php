@@ -16,7 +16,7 @@
 // | Authors: Stig Sæther Bakken <ssb@fast.no>                            |
 // +----------------------------------------------------------------------+
 //
-// $Id: Builder.php,v 1.6 2002/08/25 18:29:32 pajoye Exp $
+// $Id: Builder.php,v 1.7 2002/08/26 00:37:25 pajoye Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -225,7 +225,9 @@ class PEAR_Builder extends PEAR_Common
         // end of interactive part
 
         // make configurable
-        $user = getenv('USER')?getenv('USER'):'defaultuser';
+        if(!$user=getenv('USER')){
+            $user='defaultuser';
+        }
         $build_basedir = "/var/tmp/pear-build-$user";
         $build_dir = "$build_basedir/$info[package]-$info[version]";
         $this->log(1, "building in $build_dir");

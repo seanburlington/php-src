@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.4 2002/03/22 12:45:41 ssb Exp $
+// $Id: Config.php,v 1.5 2002/03/26 16:31:13 cox Exp $
 
 require_once "PEAR/Command/Common.php";
 require_once "PEAR/Config.php";
@@ -63,6 +63,8 @@ class PEAR_Command_Config extends PEAR_Command_Common
     {
         $cf =& $this->config;
         $failmsg = '';
+        $params[0] = (isset($params[0])) ? $params[0] : null;
+        $params[1] = (isset($params[1])) ? $params[1] : null;
         switch ($command) {
             case 'config-show': {
                 $keys = $cf->getKeys();

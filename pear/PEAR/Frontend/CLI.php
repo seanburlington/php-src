@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.6 2002/03/23 16:50:43 cox Exp $
+  $Id: CLI.php,v 1.7 2002/03/26 16:31:13 cox Exp $
 */
 
 require_once "PEAR.php";
@@ -250,7 +250,7 @@ class PEAR_Frontend_CLI extends PEAR
                     } else {
                         $attribs = $rowparams;
                     }
-                    $w = $width[$c];
+                    $w = isset($width[$c]) ? $width[$c] : 0;
                     //$cell = $data[$c];
                     $cell = $rowlines[$c][$r];
                     $l = strlen($cell);

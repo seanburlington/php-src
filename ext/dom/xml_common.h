@@ -17,15 +17,26 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xml_common.h,v 1.13 2003/08/24 10:24:22 rrichards Exp $ */
+/* $Id: xml_common.h,v 1.14 2003/09/08 18:28:35 rrichards Exp $ */
 
 #ifndef PHP_XML_COMMON_H
 #define PHP_XML_COMMON_H
 
+typedef struct _dom_doc_props {
+	int formatoutput;
+	int validateonparse;
+	int resolveexternals;
+	int preservewhitespace;
+	int substituteentities;
+	int stricterror;
+} dom_doc_props;
+
+typedef dom_doc_props *dom_doc_propsptr;
+
 typedef struct _dom_ref_obj {
 	void *ptr;
 	int   refcount;
-	int stricterror;
+	dom_doc_props *doc_props;
 } dom_ref_obj;
 
 typedef struct _node_ptr {

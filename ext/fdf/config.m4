@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.17 2002/03/12 16:17:02 sas Exp $
+dnl $Id: config.m4,v 1.18 2002/03/20 00:39:28 sniper Exp $
 dnl
 
 PHP_ARG_WITH(fdftk, for FDF support,
@@ -8,7 +8,10 @@ PHP_ARG_WITH(fdftk, for FDF support,
 if test "$PHP_FDFTK" != "no"; then
 
   for i in /usr /usr/local $PHP_FDFTK; do
-    if test -r $i/include/FdfTk.h -o -r $i/include/fdftk.h; then
+    if test -r $i/include/FdfTk.h; then
+      FDFTK_DIR=$i
+    elif test -r $i/include/fdftk.h; then
+      AC_DEFINE(HAVE_FDFTK_H_LOWER,1,[ ])
       FDFTK_DIR=$i
     fi
   done

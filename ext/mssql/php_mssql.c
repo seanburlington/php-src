@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.135 2004/06/04 01:03:38 pollita Exp $ */
+/* $Id: php_mssql.c,v 1.136 2004/06/30 19:46:57 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -843,9 +843,22 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 
 				if ((column_type != SQLDATETIME && column_type != SQLDATETIM4) || MS_SQL_G(datetimeconvert)) {
 
-					if (column_type == SQLDATETIM4) res_length += 14;
-					if (column_type == SQLDATETIME) res_length += 10;
-			
+					switch (column_type) {
+						case SQLDATETIM4 :
+							res_length += 14;
+							break;
+						case SQLDATETIME :
+							res_length += 10;
+							break;
+						case SQLMONEY :
+						case SQLMONEY4 :
+						case SQLMONEYN :
+						case SQLDECIMAL :
+						case SQLNUMERIC :
+							res_length += 5;
+							break;
+					}
+
 					res_buf = (unsigned char *) emalloc(res_length+1);
 					res_length = dbconvert(NULL,coltype(offset),dbdata(mssql_ptr->link,offset), res_length, SQLCHAR,res_buf,-1);
 				} else {
@@ -909,6 +922,8 @@ static void php_mssql_get_column_content_without_type(mssql_link *mssql_ptr,int 
 				case SQLMONEY :
 				case SQLMONEY4 :
 				case SQLMONEYN :
+				case SQLDECIMAL :
+				case SQLNUMERIC :
 					res_length += 5;
 					break;
 			}

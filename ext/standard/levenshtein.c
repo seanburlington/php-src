@@ -15,7 +15,7 @@
    | Author: Bjørn Borud - Guardian Networks AS <borud@guardian.no>       |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.2 2000/05/23 14:37:39 hholzgra Exp $ */
+/* $Id: levenshtein.c,v 1.3 2000/05/23 14:42:22 andi Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -108,7 +108,7 @@ PHP_FUNCTION(levenshtein){
 	l = calc_levdist((*str1)->value.str.val, (*str2)->value.str.val);
 
 	if(l<0) {
-		php_error(E_WARNING,"levenshtein(): argument string(s) to long");
+		php_error(E_WARNING,"levenshtein(): argument string(s) too long");
 	}
 
 	RETURN_LONG(l);

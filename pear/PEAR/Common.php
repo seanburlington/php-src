@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.44 2002/04/07 15:49:23 ssb Exp $
+// $Id: Common.php,v 1.45 2002/04/07 20:47:04 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -910,12 +910,24 @@ class PEAR_Common extends PEAR
                 } elseif ($fa['role'] == 'extsrc' && empty($fa['sources'])) {
                     $errors[] = "$file: no source files";
                 }
-                // Any checks we can do for baseinstalldir?
+                // (ssb) Any checks we can do for baseinstalldir?
+                // (cox) Perhaps checks that either the target dir and baseInstall
+                //       doesn't cointain "../../"
             }
         }
         return true;
     }
 
     // }}}
+    /**
+    * Get the valid roles for a PEAR package maintainer
+    *
+    * @static
+    */
+    function getUserRoles()
+    {
+        $common = &new PEAR_Common;
+        return $common->maintainer_roles;
+    }
 }
 ?>

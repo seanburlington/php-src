@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.h,v 1.28 2000/10/17 15:23:18 kara Exp $ */
+/* $Id: php_odbc.h,v 1.29 2000/10/30 18:00:58 derick Exp $ */
 
 #ifndef PHP_ODBC_H
 #define PHP_ODBC_H
@@ -74,6 +74,8 @@ PHP_FUNCTION(solid_fetch_prev);
 #include <sqlext.h>
 #define HAVE_SQL_EXTENDED_FETCH 1
 #define SQL_SUCCEEDED(rc) (((rc)&(~1))==0)
+#define SQLINTEGER ULONG
+#define SQLUMSALLINT USHORT
 
 #elif defined(HAVE_SAPDB) /* SAP DB */
 

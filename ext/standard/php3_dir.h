@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_dir.h,v 1.5 1999/10/05 14:36:00 thies Exp $ */
+/* $Id: php3_dir.h,v 1.6 1999/10/20 16:17:30 thies Exp $ */
 
 #ifndef _PHP3_DIR_H
 #define _PHP3_DIR_H
@@ -29,6 +29,7 @@ extern PHP_MINIT_FUNCTION(dir);
 PHP_FUNCTION(opendir);
 PHP_FUNCTION(closedir);
 PHP_FUNCTION(chdir);
+PHP_FUNCTION(getcwd);
 PHP_FUNCTION(rewinddir);
 PHP_FUNCTION(readdir);
 PHP_FUNCTION(getdir);

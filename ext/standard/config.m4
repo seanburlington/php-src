@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.7 1999/09/21 20:10:53 rasmus Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.8 1999/10/20 16:17:30 thies Exp $ -*- sh -*-
 
 divert(1)
 
@@ -118,6 +118,8 @@ AC_CHECK_LIB(crypt, crypt, [
  AC_ADD_LIBRARY(crypt)
  AC_DEFINE(HAVE_LIBCRYPT) ], [])
 
+AC_CHECK_FUNCS(getcwd)
+AC_CHECK_FUNCS(getwd)
 
 divert(3)
 

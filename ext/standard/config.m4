@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.41 2002/09/30 23:31:13 dreid Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.42 2002/10/01 01:47:09 sniper Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -184,8 +184,6 @@ main() {
   fi
   AC_DEFINE_UNQUOTED(PHP_BLOWFISH_CRYPT, $ac_result, [Whether the system supports BlowFish salt])
 ])
-
-AC_CHECK_FUNC(dlopen, [AC_DEFINE(HAVE_LIBDL,1,[ ])])
 
 dnl AC_CHECK_LIB(pam, pam_start, [
 dnl   EXTRA_LIBS="$EXTRA_LIBS -lpam"

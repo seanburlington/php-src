@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.65 2003/01/16 22:09:58 phanto Exp $
+	$Id: config.w32.h,v 1.66 2003/05/17 22:15:39 fmk Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -74,6 +74,7 @@
 
 /* Enable / Disable XML extension (default: enabled) */
 #define HAVE_LIBEXPAT 1
+#define HAVE_XML 1
 
 /* Enable / Disable ZLIB extension (default: enabled) */
 #define HAVE_ZLIB 1

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.16 2000/10/22 06:45:03 chrisv Exp $ */
+/* $Id: sockets.c,v 1.17 2000/10/22 06:46:43 chrisv Exp $ */
 
 #include "php.h"
 
@@ -1402,11 +1402,6 @@ PHP_FUNCTION(recvfrom)
 		RETURN_LONG(-errno);
 	}
 
-	if (Z_LVAL_PP(flags) & 0xf0000000) {
-		Z_LVAL_PP(flags) &= ~0xf0000000;
-		php_error(E_WARNING, "This platform does not support the MSG_WAITALL flag..");
-	}
-	
 	switch (sa.sa_family)
 	{
 		case AF_UNIX:
@@ -1629,12 +1624,6 @@ PHP_FUNCTION(recvmsg)
 	if (ZEND_NUM_ARGS() == 7) {
 		convert_to_long_ex(port);
 	}
-
-	if (Z_LVAL_PP(flags) & 0xf0000000) {
-		Z_LVAL_PP(flags) &= ~0xf0000000;
-		php_error(E_WARNING, "This platform does not support the MSG_WAITALL flag..");
-	}
-
 
 	ZEND_FETCH_RESOURCE(iov, php_iovec_t *, iovec, -1, "IO vector table", SOCKETSG(le_iov));
 

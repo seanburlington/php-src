@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.139 2002/07/31 17:55:15 helly Exp $ */
+/* $Id: SAPI.c,v 1.140 2002/08/01 07:49:53 rasmus Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -220,7 +220,7 @@ SAPI_API char *sapi_get_default_content_type(TSRMLS_D)
 	charset = SG(default_charset) ? SG(default_charset) : SAPI_DEFAULT_CHARSET;
 
 	if (strncasecmp(mimetype, "text/", 5) == 0 && *charset) {
-		int len = strlen(mimetype) + sizeof("; charset=") + strlen(charset);
+		int len = strlen(mimetype) + sizeof("; charset=") + strlen(charset)+1;
 		content_type = emalloc(len);
 		snprintf(content_type, len, "%s; charset=%s", mimetype, charset);
 	} else {

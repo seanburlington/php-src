@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 2001/11/18 22:54:18 sniper Exp $
+dnl $Id: config.m4,v 1.7 2001/11/18 23:08:47 sniper Exp $
 dnl config.m4 for extension ncurses
 
 PHP_ARG_WITH(ncurses, for ncurses support,
@@ -39,7 +39,7 @@ if test "$PHP_NCURSES" != "no"; then
    ], [
      AC_MSG_ERROR(Wrong ncurses lib version or lib not found)
    ], [
-     -L$NCURSES_DIR/lib -lm"
+     -L$NCURSES_DIR/lib -lm
    ])
   
    AC_CHECK_LIB(ncurses, color_set,   [AC_DEFINE(HAVE_NCURSES_COLOR_SET,  1, [ ])])

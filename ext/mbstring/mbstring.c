@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.216 2005/01/28 02:00:39 tony2001 Exp $ */
+/* $Id: mbstring.c,v 1.217 2005/02/10 14:11:06 iliaa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -1339,7 +1339,7 @@ PHP_FUNCTION(mb_preferred_mime_name)
 PHP_FUNCTION(mb_parse_str)
 {
 	zval *track_vars_array;
-	char *encstr = NULL, *separator = NULL;
+	char *encstr = NULL;
 	int encstr_len;
 	php_mb_encoding_handler_info_t info;
 	enum mbfl_no_encoding detected;

@@ -17,7 +17,7 @@
  *
  */
 
-/* $Id: sendmail.c,v 1.62 2005/02/25 05:57:41 hyanantha Exp $ */
+/* $Id: sendmail.c,v 1.63 2005/03/12 12:03:50 andrey Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>
@@ -182,7 +182,8 @@ static char *php_win32_mail_trim_header(char *header TSRMLS_DC)
 							  replace,
 							  0,
 							  &result_len,
-							  -1 TSRMLS_CC);
+							  -1,
+							  NULL TSRMLS_CC);
 	if (NULL == result) {
 		FREE_ZVAL(replace);
 		return NULL;
@@ -195,7 +196,8 @@ static char *php_win32_mail_trim_header(char *header TSRMLS_DC)
 							   replace,
 							   0,
 							   &result_len,
-							   -1 TSRMLS_CC);
+							   -1,
+							   NULL TSRMLS_CC);
 	efree(result);
 	FREE_ZVAL(replace);
 	return result2;

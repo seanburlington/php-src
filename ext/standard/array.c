@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.72 2000/09/12 19:03:59 andrei Exp $ */
+/* $Id: array.c,v 1.73 2000/09/12 19:04:50 andrei Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1993,7 +1993,7 @@ PHP_FUNCTION(array_count_values)
 /* }}} */
 
 
-/* {{{ proto array array_reverse(array input)
+/* {{{ proto array array_reverse(array input [, bool preserve keys])
    Return input as a new array with the order of the entries reversed */
 PHP_FUNCTION(array_reverse)
 {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.7 2003/06/22 12:50:28 helly Exp $ */
+/* $Id: php_dom.h,v 1.8 2003/06/26 10:40:26 rrichards Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -46,6 +46,12 @@ extern zend_module_entry dom_module_entry;
 #endif
 #if defined(LIBXML_XPTR_ENABLED)
 #include <libxml/xpointer.h>
+#endif
+
+#ifdef PHP_WIN32
+#ifndef DOM_EXPORTS
+#define DOM_EXPORTS
+#endif
 #endif
 
 #include "xml_common.h"
@@ -102,4 +108,4 @@ PHP_MINIT_FUNCTION(dom);
 PHP_MSHUTDOWN_FUNCTION(dom);
 PHP_MINFO_FUNCTION(dom);
 
-#endif /* _PHP_DIR_H */
+#endif /* PHP_DOM_H */

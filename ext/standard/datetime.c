@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.107 2003/03/25 08:07:12 sebastian Exp $ */
+/* $Id: datetime.c,v 1.108 2003/04/06 22:37:45 sniper Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -535,7 +535,7 @@ static void php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 #if HAVE_TM_ZONE
 				strcat(Z_STRVAL_P(return_value), ta->tm_zone);
 #elif HAVE_TZNAME
-				strcat(Z_STRVAL_P(return_value), tname[0]);
+				strcat(Z_STRVAL_P(return_value), ta->tm_isdst ? tname[1] : tname[0]);
 #endif
 				break;
 			case 'B':	/* Swatch Beat a.k.a. Internet Time */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.140 2001/07/14 12:59:46 wez Exp $ */
+/* $Id: gd.c,v 1.141 2001/07/20 11:25:13 dbeu Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -2754,9 +2754,15 @@ void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode, int extende
 
 	str = (unsigned char *) Z_STRVAL_PP(C);
 	l = strlen(str);
-	fontname = (unsigned char *) Z_STRVAL_PP(FONTNAME);
 
-	
+#ifdef VIRTUAL_DIR
+	if(virtual_filepath(Z_STRVAL_PP(FONTNAME), &fontname)) {
+		fontname = (unsigned char*)Z_STRVAL_PP(FONTNAME);
+	}
+#else
+	fontname = (unsigned char*)Z_STRVAL_PP(FONTNAME);
+#endif
+
 #ifdef USE_GD_IMGSTRTTF
 # if HAVE_LIBFREETYPE
 

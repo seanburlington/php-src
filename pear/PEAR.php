@@ -18,7 +18,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: PEAR.php,v 1.47 2002/07/21 07:04:45 ssb Exp $
+// $Id: PEAR.php,v 1.48 2002/09/25 17:36:24 mj Exp $
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -583,6 +583,7 @@ class PEAR
         $stack = &$GLOBALS['_PEAR_error_handler_stack'];
         array_pop($stack);
         list($mode, $options) = $stack[sizeof($stack) - 1];
+        array_pop($stack);
         if (isset($this)) {
             $this->setErrorHandling($mode, $options);
         } else {

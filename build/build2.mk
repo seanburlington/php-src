@@ -21,7 +21,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-# $Id: build2.mk,v 1.5 1999/12/30 14:47:32 sas Exp $
+# $Id: build2.mk,v 1.6 1999/12/30 15:05:04 sas Exp $
 
 include generated_lists
 
@@ -43,9 +43,10 @@ all: .deps Zend/Makefile.am TSRM/Makefile.am $(targets)
 
 .deps:
 	@echo creating empty dependencies
-	find ext sapi regex -type d \! -name \*CVS -exec touch {}/.deps \;
-	touch pear/.deps
-	touch $@
+	for i in `find ext sapi regex -type d \! -name \*CVS`; do \
+		list="$$list $$i/.deps"; \
+	done; \
+	touch $$list pear/.deps $@
 	
 Zend/Makefile.am:
 	test -d Zend || (test -d ../Zend && ln -s ../Zend Zend)

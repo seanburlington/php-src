@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_open_temporary_file.c,v 1.18.2.4 2002/12/31 16:26:19 sebastian Exp $ */
+/* $Id: php_open_temporary_file.c,v 1.18.2.5 2003/02/13 17:37:17 wez Exp $ */
 
 #include "php.h"
 
@@ -122,7 +122,7 @@ static FILE *php_do_open_temporary_file(const char *path, const char *pfx, char 
 		return NULL;
 	}
 
-	if (path[strlen(path)-1] == '/') {
+	if (IS_SLASH(path[strlen(path)-1])) {
 		trailing_slash = "";
 	} else {
 		trailing_slash = "/";

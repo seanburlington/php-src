@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.286 2000/12/13 22:50:10 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.287 2000/12/15 01:01:13 ssb Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -183,7 +183,7 @@ function_entry basic_functions[] = {
 	PHP_FE(implode,									NULL)
 	PHP_FE(setlocale,								NULL)
 	PHP_FE(soundex,									NULL)
-	PHP_FE(levenshtein,									NULL)
+	PHP_FE(levenshtein,								NULL)
 	PHP_FE(chr,										NULL)
 	PHP_FE(ord,										NULL)
 	PHP_FE(parse_str,								second_arg_force_ref)
@@ -194,6 +194,7 @@ function_entry basic_functions[] = {
 	PHP_NAMED_FE(printf,		PHP_FN(user_printf),	NULL)
     PHP_FE(sscanf,                                  third_and_rest_force_ref)
     PHP_FE(fscanf,                                  third_and_rest_force_ref)
+    PHP_FE(iconv,									NULL)
 
 	PHP_FE(parse_url,								NULL)
 	PHP_FE(urlencode,								NULL)

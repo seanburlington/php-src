@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.105 2000/03/30 14:34:46 andrei Exp $ */
+/* $Id: string.c,v 1.106 2000/04/12 19:39:02 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2456,3 +2456,29 @@ PHP_FUNCTION(count_chars)
 	}
 }
 /* }}} */
+
+static void php_strnatcmp(INTERNAL_FUNCTION_PARAMETERS, int fold_case)
+{
+	zval **s1, **s2;
+
+	if (ARG_COUNT(ht)!=2 || zend_get_parameters_ex(2, &s1, &s2) == FAILURE) {
+		WRONG_PARAM_COUNT;
+	}
+
+	convert_to_string_ex(s1);
+	convert_to_string_ex(s2);
+
+	RETURN_LONG(strnatcmp_ex((*s1)->value.str.val, (*s1)->value.str.len,
+							 (*s2)->value.str.val, (*s2)->value.str.len,
+							 fold_case));
+}
+
+PHP_FUNCTION(strnatcmp)
+{
+	php_strnatcmp(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+}
+
+PHP_FUNCTION(strnatcasecmp)
+{
+	php_strnatcmp(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
+}

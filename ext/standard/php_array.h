@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_array.h,v 1.6 2000/03/06 20:37:11 ssb Exp $ */
+/* $Id: php_array.h,v 1.7 2000/04/12 19:39:02 andrei Exp $ */
 
 #ifndef _PHP_ARRAY_H
 #define _PHP_ARRAY_H
@@ -29,6 +29,8 @@ PHP_MSHUTDOWN_FUNCTION(array);
 
 PHP_FUNCTION(ksort);
 PHP_FUNCTION(krsort);
+PHP_FUNCTION(natsort);
+PHP_FUNCTION(natcasesort);
 PHP_FUNCTION(asort);
 PHP_FUNCTION(arsort);
 PHP_FUNCTION(sort);

@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_string.h,v 1.10 2000/02/10 19:41:19 zeev Exp $ */
+/* $Id: php_string.h,v 1.11 2000/04/12 19:39:02 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -82,6 +82,14 @@ PHP_FUNCTION(similar_text);
 PHP_FUNCTION(strip_tags);
 PHP_FUNCTION(str_repeat);
 PHP_FUNCTION(substr_replace);
+PHP_FUNCTION(strnatcmp);
+PHP_FUNCTION(strnatcasecmp);
+
+#define strnatcmp(a, b) \
+	strnatcmp_ex(a, strlen(a), b, strlen(b), 0)
+#define strnatcasecmp(a, b) \
+	strnatcmp_ex(a, strlen(a), b, strlen(b), 1)
+PHPAPI int strnatcmp_ex(char const *a, size_t a_len, char const *b, size_t b_len, int fold_case);
 
 PHPAPI char *php_strtoupper(char *s, size_t len);
 PHPAPI char *php_strtolower(char *s, size_t len);

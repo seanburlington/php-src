@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.81 2000/11/02 15:32:52 sas Exp $ */
+/* $Id: array.c,v 1.82 2000/11/03 07:20:35 venaas Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2288,7 +2288,6 @@ PHP_FUNCTION(array_intersect)
 		efree(args);
 		WRONG_PARAM_COUNT;
 	}
-	array_init(return_value);
 	/* for each argument, create and sort list with pointers to the hash buckets */
 	lists = (Bucket ***)emalloc(argc * sizeof(Bucket **));
 	ptrs = (Bucket ***)emalloc(argc * sizeof(Bucket **));
@@ -2394,7 +2393,6 @@ PHP_FUNCTION(array_diff)
 		efree(args);
 		WRONG_PARAM_COUNT;
 	}
-	array_init(return_value);
 	/* for each argument, create and sort list with pointers to the hash buckets */
 	lists = (Bucket ***)emalloc(argc * sizeof(Bucket **));
 	ptrs = (Bucket ***)emalloc(argc * sizeof(Bucket **));

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.130 2001/06/19 16:03:33 andi Exp $ */
+/* $Id: oci8.c,v 1.131 2001/07/08 12:37:07 thies Exp $ */
 
 /* TODO list:
  *
@@ -563,7 +563,7 @@ PHP_RSHUTDOWN_FUNCTION(oci)
 {
     oci_debug("START php_rshutdown_oci");
 
-#if 0 
+#if 0
 	/* XXX free all statements, rollback all outstanding transactions */
 
 	zend_hash_apply(OCI(user),(int (*)(void *))_session_cleanup);
@@ -581,7 +581,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.130 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.131 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -649,7 +649,11 @@ _oci_bind_post_exec(void *data)
 		zval *val = bind->zval;
 		zval_dtor(val);
 		ZVAL_NULL(val);
+	} else if (bind->zval->type == IS_STRING) {
+		bind->zval->value.str.val = realloc(bind->zval->value.str.val, bind->zval->value.str.len+1);
+		bind->zval->value.str.val[ bind->zval->value.str.len ] = '\0';
 	}
+
 
 	return 0;
 }

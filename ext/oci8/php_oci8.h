@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.17 2001/05/28 00:16:28 sniper Exp $ */
+/* $Id: php_oci8.h,v 1.18 2001/07/08 12:37:08 thies Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H
@@ -181,6 +181,8 @@ typedef struct {
 	HashTable *user;
 
     OCIEnv *pEnv;
+
+	int in_call;
 } php_oci_globals;
 
 extern zend_module_entry oci8_module_entry;

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.66 2002/05/27 01:20:08 ssb Exp $
+// $Id: Common.php,v 1.67 2002/05/27 21:36:28 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -672,12 +672,7 @@ class PEAR_Common extends PEAR
         if (!@is_file($file)) {
             return $this->raiseError("tgz :: could not open file \"$file\"");
         }
-        if (substr($file, -4) == '.tar') {
-            $compress = false;
-        } else {
-            $compress = true;
-        }
-        $tar = new Archive_Tar($file, $compress);
+        $tar = new Archive_Tar($file);
         $content = $tar->listContent();
         if (!is_array($content)) {
             return $this->raiseError("tgz :: could not get contents of package \"$file\"");
@@ -1519,7 +1514,6 @@ class PEAR_Common extends PEAR
         if ($callback) {
             call_user_func($callback, 'done', $bytes);
         }
-        // callback: done!
         return $dest_file;
     }
 

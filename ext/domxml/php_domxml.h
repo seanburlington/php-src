@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_domxml.h,v 1.6 2000/02/09 14:07:44 steinm Exp $ */
+/* $Id: php_domxml.h,v 1.7 2000/02/09 20:06:23 steinm Exp $ */
 
 #ifndef _PHP_DOMXML_H
 #define _PHP_DOMXML_H
@@ -45,6 +45,7 @@ extern PHP_MINIT_FUNCTION(domxml);
 extern PHP_MINFO_FUNCTION(domxml);
 PHP_FUNCTION(getdom);
 PHP_FUNCTION(getdomfile);
+PHP_FUNCTION(xmltree);
 PHP_FUNCTION(domxml_newxmldoc);
 
 /* Class Document methods */

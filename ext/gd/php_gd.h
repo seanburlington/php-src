@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.38 2002/02/28 08:26:12 sebastian Exp $ */
+/* $Id: php_gd.h,v 1.39 2002/03/17 17:01:18 sander Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -66,7 +66,7 @@ PHP_MINIT_FUNCTION(gd);
 PHP_MSHUTDOWN_FUNCTION(gd);
 
 #ifndef HAVE_GDIMAGECOLORRESOLVE
-static int gdImageColorResolve(gdImagePtr, int, int, int);
+extern int gdImageColorResolve(gdImagePtr, int, int, int);
 #endif
 PHP_FUNCTION(imagearc);
 PHP_FUNCTION(imagechar);

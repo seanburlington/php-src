@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.142.2.5 2003/03/07 13:42:22 ddhill Exp $ */
+/* $Id: output.c,v 1.142.2.6 2003/04/01 19:13:40 sas Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -453,7 +453,7 @@ static zval* php_ob_handler_from_string(const char *handler_name TSRMLS_DC)
  */
 static int php_ob_init(uint initial_size, uint block_size, zval *output_handler, uint chunk_size, zend_bool erase TSRMLS_DC)
 {
-	int result, len;
+	int result = 0, len;
 	char *handler_name, *next_handler_name;
 	HashPosition pos;
 	zval **tmp;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.280 2003/07/21 20:49:47 helly Exp $ */
+/* $Id: pgsql.c,v 1.281 2003/07/21 20:53:00 helly Exp $ */
 
 #include <stdlib.h>
 
@@ -623,6 +623,11 @@ static void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 					zend_hash_del(&EG(persistent_list),str.c,str.len+1);
 					goto err;
 				}
+			}
+			if (atof(PG_VERSION) >= 7.2) {
+				PGresult *pg_result;
+				pg_result = PQexec(le->ptr, "RESET ALL");
+				PQclear(pg_result);
 			}
 			pgsql = (PGconn *) le->ptr;
 		}

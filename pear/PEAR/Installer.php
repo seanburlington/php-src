@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.64.2.4 2002/06/02 09:54:06 ssb Exp $
+// $Id: Installer.php,v 1.64.2.5 2002/06/02 11:47:04 ssb Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Registry.php';
@@ -572,8 +572,8 @@ class PEAR_Installer extends PEAR_Common
         switch ($what) {
             
         }
-        if (($what == 'cmdoutput' && $this->verbose > 1) ||
-            ($what == 'output' && $this->verbose > 0)) {
+        if (($what == 'cmdoutput' && $this->debug > 1) ||
+            ($what == 'output' && $this->debug > 0)) {
             $this->ui->outputData(rtrim($data), 'build');
         }
     }

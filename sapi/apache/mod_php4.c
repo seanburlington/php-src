@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.8 1999/12/20 23:09:50 sas Exp $ */
+/* $Id: mod_php4.c,v 1.9 1999/12/21 20:02:26 andrei Exp $ */
 
 #include "zend.h"
 #include "php.h"
@@ -110,7 +110,7 @@ typedef struct _php_per_dir_entry {
 # endif
 # define pclosef(p,f) close(f)
 #else
-# define php3i_popenf(p,n,f,m) popenf((p),(n),(f),(m))
+# define php_popenf(p,n,f,m) popenf((p),(n),(f),(m))
 #endif
 
 php_apache_info_struct php_apache_info;		/* active config */

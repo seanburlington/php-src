@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.6 1999/12/17 20:54:47 zeev Exp $ */
+/* $Id: cpdf.c,v 1.7 1999/12/21 20:02:25 andrei Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -377,7 +377,7 @@ PHP_FUNCTION(cpdf_open) {
 		convert_to_string(arg2);
 #if APACHE
 		if(strcmp(arg2->value.str.val, "-") == 0)
-			php_error(E_WARNING,"Writing to stdout as described in the ClibPDF manual is not possible if php3 is used as an Apache module. Write to a memory stream and use cpdf_output_buffer() instead.");
+			php_error(E_WARNING,"Writing to stdout as described in the ClibPDF manual is not possible if php is used as an Apache module. Write to a memory stream and use cpdf_output_buffer() instead.");
 #endif
 		cpdf_setOutputFilename(cpdf, arg2->value.str.val);
 	}
@@ -2225,7 +2225,7 @@ PHP_FUNCTION(cpdf_save_to_file) {
 
 #if APACHE
 	if(strcmp(arg2->value.str.val, "-") == 0)
-		php_error(E_WARNING,"Writing to stdout as described in the ClibPDF manual is not possible if php3 is used as an Apache module. Use cpdf_output_buffer() instead.");
+		php_error(E_WARNING,"Writing to stdout as described in the ClibPDF manual is not possible if php is used as an Apache module. Use cpdf_output_buffer() instead.");
 #endif
 
 	cpdf_savePDFmemoryStreamToFile(pdf, arg2->value.str.val);

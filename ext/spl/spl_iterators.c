@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.63 2005/02/23 01:03:16 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.64 2005/03/01 10:05:12 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -689,6 +689,7 @@ static INLINE spl_dual_it_object* spl_dual_it_construct(INTERNAL_FUNCTION_PARAME
 				if (instanceof_function(ce, zend_ce_aggregate TSRMLS_CC)) {
 					zval *retval;
 					zobject = zend_call_method_with_0_params(&zobject, ce, &ce->iterator_funcs.zf_new_iterator, "getiterator", &retval);
+					ce = Z_OBJCE_P(zobject);
 				}
 			}
 			break;

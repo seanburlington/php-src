@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.383 2004/02/15 12:58:19 zeev Exp $ */
+/* $Id: session.c,v 1.384 2004/02/19 01:54:21 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -705,13 +705,13 @@ static void php_session_initialize(TSRMLS_D)
 	int vallen;
 
 	if (!PS(mod)) {
-		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Failed to initialize session module.");
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "No storage module chosen - failed to initialize session.");
 		return;
 	}
 
 	/* Open session handler first */
 	if (PS(mod)->s_open(&PS(mod_data), PS(save_path), PS(session_name) TSRMLS_CC) == FAILURE) {
-		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Failed to initialize session module");
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Failed to initialize storage module: %s (path: %s)", PS(mod)->s_name, PS(save_path));
 		return;
 	}
 	

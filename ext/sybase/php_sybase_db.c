@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.36 2002/03/06 15:59:42 derick Exp $ */
+/* $Id: php_sybase_db.c,v 1.37 2002/03/12 20:18:00 andi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1074,7 +1074,7 @@ PHP_FUNCTION(sybase_fetch_object)
 	if (Z_TYPE_P(return_value)==IS_ARRAY) {
 		Z_TYPE_P(return_value)=IS_OBJECT;
 		Z_OBJPROP_P(return_value) = Z_ARRVAL_P(return_value);
-		Z_OBJCE_P(return_value) = &zend_standard_class_def;
+		Z_OBJCE_P(return_value) = ZEND_STANDARD_CLASS_DEF_PTR;
 	}
 }
 /* }}} */

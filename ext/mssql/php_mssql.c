@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.78 2002/02/28 08:26:25 sebastian Exp $ */
+/* $Id: php_mssql.c,v 1.79 2002/03/12 20:17:49 andi Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -1271,7 +1271,7 @@ PHP_FUNCTION(mssql_fetch_object)
 {
 	php_mssql_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU, MSSQL_ASSOC);
 	if (Z_TYPE_P(return_value)==IS_ARRAY) {
-		object_and_properties_init(return_value, &zend_standard_class_def, Z_ARRVAL_P(return_value));
+		object_and_properties_init(return_value, ZEND_STANDARD_CLASS_DEF_PTR, Z_ARRVAL_P(return_value));
 	}
 }
 

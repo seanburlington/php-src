@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.69 2002/03/06 15:59:44 derick Exp $ */
+/* $Id: php_sybase_ct.c,v 1.70 2002/03/12 20:18:01 andi Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1411,7 +1411,7 @@ PHP_FUNCTION(sybase_fetch_object)
 {
 	php_sybase_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU);
 	if (Z_TYPE_P(return_value)==IS_ARRAY) {
-		object_and_properties_init(return_value, &zend_standard_class_def, Z_ARRVAL_P(return_value));
+		object_and_properties_init(return_value, ZEND_STANDARD_CLASS_DEF_PTR, Z_ARRVAL_P(return_value));
 	}
 }
 /* }}} */

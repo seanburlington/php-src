@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.55 2002/02/28 08:26:44 sebastian Exp $ */
+/* $Id: browscap.c,v 1.56 2002/03/12 20:17:56 andi Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -116,7 +116,7 @@ static void php_browscap_parser_cb(zval *arg1, zval *arg2, int callback_type, vo
 				INIT_PZVAL(processed);
 
 				/* OBJECTS_FIXME */
-				Z_OBJCE_P(current_section) = &zend_standard_class_def;
+				Z_OBJCE_P(current_section) = ZEND_STANDARD_CLASS_DEF_PTR;
 				Z_OBJPROP_P(current_section) = (HashTable *) malloc(sizeof(HashTable));
 				Z_TYPE_P(current_section) = IS_OBJECT;
 				zend_hash_init(Z_OBJPROP_P(current_section), 0, NULL, (dtor_func_t) browscap_entry_dtor, 1);

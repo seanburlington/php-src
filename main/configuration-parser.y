@@ -19,7 +19,7 @@
 
 
 
-/* $Id: configuration-parser.y,v 1.34 2000/02/19 23:21:25 zeev Exp $ */
+/* $Id: configuration-parser.y,v 1.35 2000/02/24 13:39:36 thies Exp $ */
 
 #define DEBUG_CFG_PARSER 0
 #include "php.h"
@@ -124,12 +124,11 @@ static void yyerror(char *str)
 }
 
 
-static void pvalue_config_destructor(zval **pvalue)
+static void pvalue_config_destructor(zval *pvalue)
 {
-	if ((*pvalue)->type == IS_STRING && (*pvalue)->value.str.val != empty_string) {
-		free((*pvalue)->value.str.val);
+	if (pvalue->type == IS_STRING && pvalue->value.str.val != empty_string) {
+		free(pvalue->value.str.val);
 	}
-	free(*pvalue);
 }
 
 

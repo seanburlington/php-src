@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.83 2001/02/01 15:24:17 sas Exp $ */
+/* $Id: php_pcre.c,v 1.84 2001/02/01 15:25:53 andrei Exp $ */
 
 /*
 	TODO:
@@ -568,7 +568,6 @@ static int preg_do_repl_func(zval *function, char *subject, int *offsets, int co
 	zval		*subpats;			/* Captured subpatterns */ 
 	int			 result_len;		/* Return value length */
 	int			 i;
-	CLS_FETCH();
 	ELS_FETCH();
 
 	MAKE_STD_ZVAL(subpats);

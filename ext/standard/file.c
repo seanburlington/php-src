@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.86 2000/06/05 17:56:01 rasmus Exp $ */
+/* $Id: file.c,v 1.87 2000/06/05 19:35:15 rasmus Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -289,10 +289,10 @@ PHP_MINIT_FUNCTION(file)
 	REGISTER_LONG_CONSTANT("SEEK_SET", SEEK_SET, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SEEK_CUR", SEEK_CUR, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SEEK_END", SEEK_END, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("LOCK_SH", LOCK_SH, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("LOCK_EX", LOCK_EX, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("LOCK_UN", LOCK_UN, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("LOCK_NB", LOCK_NB, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("LOCK_SH", 1, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("LOCK_EX", 2, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("LOCK_UN", 3, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("LOCK_NB", 4, CONST_CS | CONST_PERSISTENT);
 
 	return SUCCESS;
 }
@@ -324,15 +324,15 @@ PHP_FUNCTION(flock)
 	
     convert_to_long_ex(arg2);
 
-    act = (*arg2)->value.lval & (LOCK_SH | LOCK_EX | LOCK_NB | LOCK_UN);
-    if (act < 1) {
+    act = (*arg2)->value.lval & 3;
+    if (act < 1 || act > 3) {
 		php_error(E_WARNING, "Illegal operation argument");
 		RETURN_FALSE;
     }
 
     /* flock_values contains all possible actions
        if (arg2 & 4) we won't block on the lock */
-    act = flock_values[act - 1] | ((*arg2)->value.lval & LOCK_NB ? LOCK_NB : 0);
+    act = flock_values[act - 1] | ((*arg2)->value.lval & 4 ? LOCK_NB : 0);
     if ((ret=flock(fd, act)) == -1) {
         RETURN_FALSE;
     }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.122 2003/10/19 10:39:27 stas Exp $ */
+/* $Id: php_ini.c,v 1.123 2003/10/20 02:21:25 iliaa Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -300,7 +300,9 @@ int php_init_config()
 	} else {
 		char *default_location;
 		static const char paths_separator[] = { ZEND_PATHS_SEPARATOR, 0 };
+#ifdef PHP_WIN32
 		char *reg_location;
+#endif
 
 		php_ini_search_path = (char *) emalloc(MAXPATHLEN * 4 + strlen(env_location) + 3 + 1);
 		free_ini_search_path = 1;

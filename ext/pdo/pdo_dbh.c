@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.49 2005/02/06 17:25:09 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.50 2005/02/06 17:33:12 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -527,6 +527,10 @@ static PHP_METHOD(PDO, getAttribute)
 
 		case PDO_ATTR_ORACLE_NULLS:
 			RETURN_BOOL(dbh->oracle_nulls);
+
+		case PDO_ATTR_ERRMODE:
+			RETURN_LONG(dbh->error_mode);
+
 	}
 	
 	if (!dbh->methods->get_attribute) {

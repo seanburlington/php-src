@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.73 2002/06/29 00:40:34 sniper Exp $ */
+/* $Id: db.c,v 1.74 2002/08/13 04:10:31 kalowsky Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -38,14 +38,10 @@
 #include <unistd.h>
 #endif
 
-#ifdef PHP_31
-#include "os/nt/flock.h"
-#else
 #ifdef PHP_WIN32
 #include "win32/flock.h"
 #else
 #include <sys/file.h>
-#endif
 #endif
 
 #if HAVE_FCNTL_H
@@ -630,7 +626,12 @@ char *php_dbm_fetch(dbm_info *info, char *key TSRMLS_DC)
 	DBM_TYPE dbf;
 
 	key_datum.dptr = key;
+#ifdef PHP_WIN32
+	key_datum.dsize = strlen(key+1);
+#else
 	key_datum.dsize = strlen(key);
+#endif
+
 #if GDBM_FIX
 	key_datum.dsize++;
 #endif

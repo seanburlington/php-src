@@ -17,7 +17,7 @@
   |          Marcus Boerger <helly@php.net>                              |
   +----------------------------------------------------------------------+
 
-  $Id: php_sqlite.h,v 1.17 2003/06/04 22:39:59 wez Exp $ 
+  $Id: php_sqlite.h,v 1.18 2003/06/06 19:01:38 helly Exp $ 
 */
 
 #ifndef PHP_SQLITE_H
@@ -49,6 +49,7 @@ PHP_FUNCTION(sqlite_query);
 PHP_FUNCTION(sqlite_unbuffered_query);
 PHP_FUNCTION(sqlite_fetch_array);
 PHP_FUNCTION(sqlite_fetch_string);
+PHP_FUNCTION(sqlite_fetch_all);
 PHP_FUNCTION(sqlite_current);
 PHP_FUNCTION(sqlite_column);
 

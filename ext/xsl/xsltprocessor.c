@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.21 2004/01/19 15:07:08 chregu Exp $ */
+/* $Id: xsltprocessor.c,v 1.22 2004/01/19 17:27:21 chregu Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -46,7 +46,7 @@ zend_function_entry php_xsl_xsltprocessor_class_functions[] = {
 	PHP_FALIAS(getParameter, xsl_xsltprocessor_get_parameter, NULL)
 	PHP_FALIAS(removeParameter, xsl_xsltprocessor_remove_parameter, NULL)
 	PHP_FALIAS(hasExsltSupport, xsl_xsltprocessor_has_exslt_support, NULL)
-	PHP_FALIAS(registerPhpFunctions, xsl_xsltprocessor_register_php_functions, NULL)
+	PHP_FALIAS(registerPHPFunctions, xsl_xsltprocessor_register_php_functions, NULL)
 	{NULL, NULL, NULL}
 };
 

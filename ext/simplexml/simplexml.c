@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.17 2003/05/25 21:50:30 sterling Exp $ */
+/* $Id: simplexml.c,v 1.18 2003/05/25 21:58:09 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -277,7 +277,7 @@ sxe_property_delete(zval *object, zval *member TSRMLS_DC)
 static HashTable *
 sxe_properties_get(zval *object TSRMLS_DC)
 {
-	HashTable      *return_value;
+	HashTable      *rv;
 	zval           *value;
 	php_sxe_object *sxe;
 	char           *name;
@@ -286,9 +286,9 @@ sxe_properties_get(zval *object TSRMLS_DC)
 	xmlAttrPtr      attr;
 	int             counter = 0;
 
-	MAKE_STD_ZVAL(return_value);
-	array_init(return_value);
-
+	ALLOC_HASHTABLE_REL(rv);
+	zend_hash_init(rv, 0, NULL, ZVAL_PTR_DTOR, 0);
+	
 	sxe = php_sxe_fetch_object(object TSRMLS_CC);
 
 	GET_NODE(sxe, node);
@@ -302,12 +302,12 @@ sxe_properties_get(zval *object TSRMLS_DC)
 		MAKE_STD_ZVAL(value);
 		_node_as_zval(sxe, node, value);
 
-		add_next_index_zval(return_value, value);
+		zend_hash_next_index_insert(rv, &value, sizeof(zval *), NULL);
 
 		node = node->next;
 	}
 
-	return return_value;
+	return rv;
 }
 /* }}} */
 
@@ -647,7 +647,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.17 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.18 $");
 	php_info_print_table_end();
 
 }

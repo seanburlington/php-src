@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.96 2002/06/09 12:44:33 sander Exp $
+dnl $Id: config.m4,v 1.97 2002/06/19 01:11:20 sniper Exp $
 dnl
 
 dnl
@@ -128,6 +128,10 @@ AC_DEFUN(PHP_GD_FREETYPE1,[
           if test -f "$i/include/freetype/freetype.h"; then
             TTF_DIR=$i
             TTF_INC_DIR=$i/include/freetype
+          fi
+          if test -f "$i/include/freetype1/freetype/freetype.h"; then
+            TTF_DIR=$i
+            TTF_INC_DIR=$i/include/freetype1/freetype
           fi
         done
       fi

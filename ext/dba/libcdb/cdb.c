@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cdb.c,v 1.1 2002/11/04 17:53:04 helly Exp $ */
+/* $Id: cdb.c,v 1.2 2002/11/13 12:12:44 edink Exp $ */
 
 /* incorporated from D.J.Bernstein's cdb-0.75 (http://cr.yp.to/cdb.html)*/
 
@@ -28,8 +28,12 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifndef PHP_WIN32
 #include <sys/mman.h>
+#endif
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>
+#endif
 #include <string.h>
 #include <errno.h>
 #include "cdb.h"

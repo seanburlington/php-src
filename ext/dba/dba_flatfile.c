@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_flatfile.c,v 1.7 2002/11/10 17:58:46 helly Exp $ */
+/* $Id: dba_flatfile.c,v 1.8 2002/11/13 12:12:44 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,7 +29,9 @@
 
 #include "libflatfile/flatfile.h"
 
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>
+#endif
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 1999/07/21 15:12:31 sas Exp $
+dnl $Id: config.m4,v 1.2 1999/11/04 20:47:19 rasmus Exp $
 dnl config.m4 for extension dba
 dnl don't forget to call PHP_EXTENSION(dba)
 
@@ -108,7 +108,7 @@ AC_MSG_CHECKING(for NDBM support)
 AC_DBA_STD_RESULT
 
 AC_ARG_WITH(db2,
-[  --with-db2[=DIR]        Include DB2 support],[
+[  --with-db2[=DIR]        Include Berkeley DB2 support],[
   if test "$withval" != "no"; then
     for i in /usr/local /usr /usr/BerkeleyDB $withval; do
       if test -f "$i/db2/db.h"; then
@@ -149,7 +149,7 @@ AC_ARG_WITH(db2,
     AC_DBA_STD_ATTACH
   fi
 ])
-AC_MSG_CHECKING(for DB2 support)
+AC_MSG_CHECKING(for Berkeley DB2 support)
 AC_DBA_STD_RESULT
 
 AC_ARG_WITH(dbm,

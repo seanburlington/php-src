@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.369 2003/04/02 21:33:02 rasmus Exp $ */
+/* $Id: string.c,v 1.370 2003/04/03 06:21:59 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3377,7 +3377,9 @@ PHP_FUNCTION(setlocale)
 	}
 	while (1) {
 		if (Z_TYPE_PP(args[1]) == IS_ARRAY) {
-			if(!zend_hash_num_elements(Z_ARRVAL_PP(args[1]))) break;
+			if (!zend_hash_num_elements(Z_ARRVAL_PP(args[1]))) {
+				break;
+			}
 			zend_hash_get_current_data(Z_ARRVAL_PP(args[1]),(void **)&plocale);
 		} else {
 			plocale = args[i];

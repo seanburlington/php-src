@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.84 2000/04/20 17:23:59 zeev Exp $ */
+/* $Id: php.h,v 1.85 2000/04/20 17:40:03 andi Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -96,11 +96,11 @@ extern unsigned char second_arg_allow_ref[];
 #endif
 
 #ifndef HAVE_STRLCPY
-size_t strlcpy(char *dst, const char *src, size_t siz);
+PHPAPI size_t strlcpy(char *dst, const char *src, size_t siz);
 #endif
 
 #ifndef HAVE_STRLCAT
-size_t strlcat(char *dst, const char *src, size_t siz);
+PHPAPI size_t strlcat(char *dst, const char *src, size_t siz);
 #endif
 
 #ifndef HAVE_STRTOK_R

@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@php.net>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.28 2003/10/31 16:50:56 cellog Exp $
+// $Id: Dependency.php,v 1.29 2003/10/31 17:01:39 cellog Exp $
 
 require_once "PEAR.php";
 
@@ -126,8 +126,8 @@ class PEAR_Dependency
     function checkPackage(&$errmsg, $name, $req = null, $relation = 'has',
                           $opt = false)
     {
-        if (substr($relation, 0, 2) == 'v.') {
-            $relation = substr($relation, 2);
+        if (is_string($req) && substr($req, 0, 2) == 'v.') {
+            $req = substr($req, 2);
         }
         switch ($relation) {
             case 'has':

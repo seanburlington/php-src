@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pfpro.c,v 1.5 2000/08/15 09:37:35 david Exp $ */
+/* $Id: pfpro.c,v 1.6 2000/10/03 18:52:44 sas Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -26,6 +26,8 @@
 #include "pfpro.h"
 
 #if HAVE_PFPRO
+
+#include "ext/standard/php_string.h"
 
 #ifdef ZTS
 int pfpro_globals_id;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: var.c,v 1.33 1999/10/22 06:59:05 thies Exp $ */
+/* $Id: var.c,v 1.34 1999/11/06 08:16:25 thies Exp $ */
 
 
 /* {{{ includes 
@@ -53,9 +53,11 @@ void php_var_dump(pval **struc, int level)
 			PHPWRITE(&buf[1], i - 1);
 			break;
 
-		case IS_DOUBLE:
-			i = sprintf(buf, "%*cfloat(%g)\n", level, ' ', (*struc)->value.dval);
-			PHPWRITE(&buf[1], i - 1);
+		case IS_DOUBLE: {
+				ELS_FETCH();
+				i = sprintf(buf, "%*cfloat(%.*G)\n", level, ' ', (int) EG(precision), (*struc)->value.dval);
+				PHPWRITE(&buf[1], i - 1);
+			}
 			break;
 
 		case IS_STRING:
@@ -199,9 +201,11 @@ void php_var_serialize(pval *buf, pval **struc)
 			STR_CAT(buf, s, slen);
 			return;
 
-		case IS_DOUBLE:
-			slen = sprintf(s, "d:%g;", (*struc)->value.dval);
-			STR_CAT(buf, s, slen);
+		case IS_DOUBLE: {
+				ELS_FETCH();
+				slen = sprintf(s, "d:%.*G;",(int) EG(precision), (*struc)->value.dval);
+				STR_CAT(buf, s, slen);
+			}
 			return;
 
 		case IS_STRING:{

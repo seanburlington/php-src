@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.204 2004/09/29 14:42:16 hyanantha Exp $ */
+/* $Id: php.h,v 1.205 2004/09/30 08:03:38 helly Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -337,6 +337,7 @@ END_EXTERN_C()
 #define PHP_FE			ZEND_FE
 #define PHP_FALIAS		ZEND_FALIAS
 #define PHP_ME          ZEND_ME
+#define PHP_MALIAS      ZEND_MALIAS
 #define PHP_ME_MAPPING  ZEND_ME_MAPPING
 
 #define PHP_MODULE_STARTUP_N	ZEND_MODULE_STARTUP_N

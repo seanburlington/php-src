@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.65 2001/05/14 18:30:07 derick Exp $ */
+/* $Id: filestat.c,v 1.66 2001/05/15 23:28:17 jon Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -124,9 +124,9 @@ PHP_RSHUTDOWN_FUNCTION(filestat)
 	return SUCCESS;
 }
 
-/* {{{ proto double diskfreespace(string path)
-   Get free diskspace for filesystem that path is on */
-PHP_FUNCTION(diskfreespace)
+/* {{{ proto double disk_free_space(string path)
+   Get free disk space for filesystem that path is on */
+PHP_FUNCTION(disk_free_space)
 {
 	pval **path;
 #ifdef WINDOWS

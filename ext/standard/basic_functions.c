@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.337 2001/05/14 20:56:05 andrei Exp $ */
+/* $Id: basic_functions.c,v 1.338 2001/05/15 23:28:17 jon Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -505,7 +505,8 @@ function_entry basic_functions[] = {
 	PHP_FE(chmod,					NULL)
 	PHP_FE(touch,					NULL)
 	PHP_FE(clearstatcache,			NULL)
-	PHP_FE(diskfreespace,			NULL)
+	PHP_FE(disk_free_space,			NULL)
+	PHP_FALIAS(diskfreespace,	disk_free_space,	NULL)
 
 	/* functions from mail.c */
 #ifdef HAVE_SENDMAIL

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.190.2.31 2003/05/25 19:22:25 shane Exp $ */
+/* $Id: cgi_main.c,v 1.190.2.32 2003/05/26 23:21:08 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -444,10 +444,7 @@ static void sapi_cgi_register_variables(zval *track_vars_array TSRMLS_DC)
 
 static void sapi_cgi_log_message(char *message)
 {
-	if (php_header()) {
-		fprintf(stderr, "%s", message);
-		fprintf(stderr, "\n");
-	}
+	fprintf(stderr, "%s\n", message);
 }
 
 static int sapi_cgi_deactivate(TSRMLS_D)

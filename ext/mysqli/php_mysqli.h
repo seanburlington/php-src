@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.29 2004/01/23 03:28:56 sniper Exp $ 
+  $Id: php_mysqli.h,v 1.30 2004/01/28 22:51:54 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -229,6 +229,7 @@ PHP_MYSQLI_EXPORT(zend_object_value) mysqli_objects_new(zend_class_entry * TSRML
 #define FETCH_RESULT		2
 
 /*** REPORT MODES ***/
+#define MYSQLI_REPORT_OFF           0
 #define MYSQLI_REPORT_INDEX			1
 #define MYSQLI_REPORT_ERROR			2
 #define MYSQLI_REPORT_CLOSE			4
@@ -294,6 +295,7 @@ PHP_FUNCTION(mysqli_field_seek);
 PHP_FUNCTION(mysqli_field_tell);
 PHP_FUNCTION(mysqli_free_result);
 PHP_FUNCTION(mysqli_get_client_info);
+PHP_FUNCTION(mysqli_get_client_version);
 PHP_FUNCTION(mysqli_get_host_info);
 PHP_FUNCTION(mysqli_get_proto_info);
 PHP_FUNCTION(mysqli_get_server_info);

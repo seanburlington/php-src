@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.27 2004/01/27 13:23:54 georg Exp $ 
+  $Id: mysqli_fe.c,v 1.28 2004/01/28 22:51:54 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -86,6 +86,7 @@ function_entry mysqli_functions[] = {
 	PHP_FE(mysqli_field_tell,							NULL)
 	PHP_FE(mysqli_free_result,							NULL)
 	PHP_FE(mysqli_get_client_info,						NULL)
+	PHP_FE(mysqli_get_client_version,					NULL)
 	PHP_FE(mysqli_get_host_info,						NULL)
 	PHP_FE(mysqli_get_metadata,							NULL)
 	PHP_FE(mysqli_get_proto_info,						NULL)
@@ -167,10 +168,8 @@ function_entry mysqli_link_methods[] = {
 	PHP_FALIAS(enable_reads_from_master,mysqli_enable_reads_from_master,NULL)
 	PHP_FALIAS(enable_rpl_parse,mysqli_enable_rpl_parse,NULL)
 	PHP_FALIAS(get_client_info,mysqli_get_client_info,NULL)
-	PHP_FALIAS(get_host_info,mysqli_get_host_info,NULL)
 	PHP_FALIAS(get_server_info,mysqli_get_server_info,NULL)
 	PHP_FALIAS(init,mysqli_init,NULL)
-	PHP_FALIAS(info,mysqli_info,NULL)
 	PHP_FALIAS(kill,mysqli_kill,NULL)
 	PHP_FALIAS(master_query,mysqli_master_query,NULL)
 	PHP_FALIAS(mysqli, mysqli_connect, NULL)

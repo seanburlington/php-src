@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.28 2004/01/26 07:39:57 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.29 2004/01/28 22:51:54 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -210,7 +210,7 @@ PHP_FUNCTION(mysqli_multi_query)
 }
 /* }}} */
 
-/* {{{ proto resource mysqli_query(object link, string query [,int resultmode]) */
+/* {{{ proto mixed mysqli_query(object link, string query [,int resultmode]) */
 PHP_FUNCTION(mysqli_query)
 {
 	MYSQL				*mysql;

@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.66 2000/09/08 14:43:55 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.67 2000/09/08 15:39:42 jon Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -294,6 +294,8 @@ static void php_apache_request_shutdown(void *dummy)
 
 static int php_apache_sapi_activate(SLS_D)
 {
+	request_rec *r = ((request_rec *) SG(server_context));
+
 	/*
 	 * For the Apache module version, this bit of code registers a cleanup
 	 * function that gets triggered when our request pool is destroyed.

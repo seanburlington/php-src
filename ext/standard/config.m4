@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.45 2002/10/24 12:21:06 sas Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.46 2002/10/24 20:04:16 hholzgra Exp $ -*- sh -*-
 
 divert(3)dnl
 
@@ -224,6 +224,8 @@ AC_ARG_WITH(regex,
 ])
 
 AC_FUNC_FNMATCH	
+
+AC_CHECK_HEADERS(getopt.h)
 
 AC_CHECK_FUNCS(glob strfmon getopt_long getopt_long_only)
 

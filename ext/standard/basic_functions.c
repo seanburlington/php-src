@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.535 2002/10/21 19:24:48 hholzgra Exp $ */
+/* $Id: basic_functions.c,v 1.536 2002/10/24 20:04:16 hholzgra Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -73,7 +73,7 @@
 # include <sys/mman.h>
 #endif
 
-#ifdef HAVE_GETOPT_LONG
+#ifdef HAVE_GETOPT_H
 #include <getopt.h>
 #endif
 

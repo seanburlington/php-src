@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_streams.c,v 1.28 2002/10/15 01:57:19 wez Exp $ */
+/* $Id: user_streams.c,v 1.29 2002/10/15 02:05:27 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -586,6 +586,10 @@ static int php_userstreamop_seek(php_stream *stream, off_t offset, int whence, o
 		/* stream_seek is not implemented, so disable seeks for this stream */
 		stream->flags |= PHP_STREAM_FLAG_NO_SEEK;
 		/* there should be no retval to clean up */
+		
+		if (retval) 
+			zval_ptr_dtor(&retval);
+		
 		return -1;
 	} else if (call_result == SUCCESS && retval != NULL && zval_is_true(retval)) {
 		ret = 0;
@@ -681,6 +685,10 @@ static int php_userstreamop_stat(php_stream *stream, php_stream_statbuf *ssb TSR
 					us->wrapper->classname);
 		}
 	}
+	
+	if (retval) 
+		zval_ptr_dtor(&retval);
+	
 	return ret;
 }
 

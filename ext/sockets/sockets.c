@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.115 2002/06/15 15:58:16 phanto Exp $ */
+/* $Id: sockets.c,v 1.116 2002/06/25 06:24:45 mfischer Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1943,8 +1943,8 @@ PHP_FUNCTION(socket_shutdown)
 }
 /* }}} */
 
-/* {{{ proto int socket_last_error(resource socket)
-   Returns the last error on the socket */
+/* {{{ proto int socket_last_error([resource socket])
+   Returns the last socket error (either the last used or the provided socket resource) */
 PHP_FUNCTION(socket_last_error)
 {
 	zval		*arg1 = NULL;

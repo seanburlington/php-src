@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.154 2002/05/18 14:21:46 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.155 2002/05/18 14:23:31 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -3408,7 +3408,7 @@ PHP_FUNCTION(domxml_html_dump_mem)
 			xmlFree(mem);
 		RETURN_FALSE;
 	}
-	RETURN_STRINGL(mem, size, 1);
+	RETVAL_STRINGL(mem, size, 1);
 	xmlFree(mem);
 }
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mbregex.h,v 1.1 2002/10/07 17:59:49 moriyoshi Exp $ */
+/* $Id: php_mbregex.h,v 1.2 2002/10/08 05:08:39 sebastian Exp $ */
  
 #ifndef _PHP_MBREGEX_H
 #define _PHP_MBREGEX_H
@@ -43,8 +43,8 @@
 #define PHP_MBREGEX_MAXCACHE 50
 
 PHPAPI int php_mb_regex_name2mbctype(const char *pname);
-PHPAPI int php_mb_regex_set_options(int options);
-PHPAPI int php_mb_regex_set_options_by_string(const char *optstr, int len);
+PHPAPI int php_mb_regex_set_options(int options TSRMLS_DC);
+PHPAPI int php_mb_regex_set_options_by_string(const char *optstr, int len TSRMLS_DC);
 
 PHP_FUNCTION(mb_regex_encoding);
 PHP_FUNCTION(mb_ereg);

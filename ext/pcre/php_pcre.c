@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.87 2001/02/26 06:07:11 andi Exp $ */
+/* $Id: php_pcre.c,v 1.88 2001/03/12 03:06:52 andrei Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -726,8 +726,11 @@ char *php_pcre_replace(char *regex,   int regex_len,
 
 	/* Verify and use the replacement value. */
 	if (use_func) {
-		if (!zend_is_callable(replace_val)) {
-			php_error(E_WARNING, "Replacement function is invalid or undefined");
+		char *callable_name;
+
+		if (!zend_is_callable(replace_val, 0, &callable_name)) {
+			php_error(E_WARNING, "Replacement callback '%s' is invalid or undefined", callable_name);
+			efree(callable_name);
 			result = estrndup(subject, subject_len);
 			*result_len = subject_len;
 			return result;
@@ -1009,7 +1012,7 @@ PHP_FUNCTION(preg_replace)
 	if (Z_TYPE_PP(replace) != IS_ARRAY) {
 		convert_to_string_ex(replace);
 	} else
-		is_callable_replace = zend_is_callable(*replace);
+		is_callable_replace = zend_is_callable(*replace, 1, NULL);
 	
 	/* if subject is an array */
 	if (Z_TYPE_PP(subject) == IS_ARRAY) {

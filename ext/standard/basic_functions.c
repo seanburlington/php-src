@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.314 2001/03/11 03:49:21 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.315 2001/03/12 03:06:53 andrei Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -573,6 +573,7 @@ function_entry basic_functions[] = {
 	PHP_FE(array_values,							NULL)
 	PHP_FE(array_count_values,		 			  	NULL)
 	PHP_FE(array_reverse,							NULL)
+	PHP_FE(array_reduce,							NULL)
 	PHP_FE(array_pad,								NULL)
 	PHP_FE(array_flip,								NULL)
 	PHP_FE(array_rand,								NULL)

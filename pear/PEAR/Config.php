@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Config.php,v 1.22 2002/05/27 00:20:03 ssb Exp $
+// $Id: Config.php,v 1.23 2002/05/27 19:37:17 ssb Exp $
 
 require_once 'PEAR.php';
 
@@ -538,7 +538,7 @@ class PEAR_Config extends PEAR
                 if ($valid_set) {
                     reset($valid_set);
                     if ((key($valid_set) === 0 && !in_array($value, $valid_set)) ||
-                        empty($valid_set[$value]))
+                        (key($valid_set) !== 0 && empty($valid_set[$value])))
                     {
                         return false;
                     }

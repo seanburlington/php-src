@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php3_odbc.h,v 1.4 1999/05/21 10:06:13 sas Exp $ */
+/* $Id: php3_odbc.h,v 1.5 1999/08/02 16:06:13 andrey Exp $ */
 
 #ifndef _PHP_ODBC_H
 # define _PHP_ODBC_H
@@ -117,10 +117,11 @@ extern php3_module_entry odbc_module_entry;
 
 
 /* user functions */
-extern int php3_minit_odbc(INIT_FUNC_ARGS);
-extern int php3_mshutdown_odbc(SHUTDOWN_FUNC_ARGS);
-extern int php3_rinit_odbc(INIT_FUNC_ARGS);
-void php3_info_odbc(ZEND_MODULE_INFO_FUNC_ARGS);
+extern PHP_MINIT_FUNCTION(odbc);
+extern PHP_MSHUTDOWN_FUNCTION(odbc);
+extern PHP_RINIT_FUNCTION(odbc);
+PHP_MINFO_FUNCTION(odbc);
+
 PHP_FUNCTION(odbc_setoption);
 PHP_FUNCTION(odbc_autocommit);
 PHP_FUNCTION(odbc_close);

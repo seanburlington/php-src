@@ -28,7 +28,7 @@
  */
 
 
-/* $Id: php3_mysql.h,v 1.7 1999/06/04 12:51:41 zeev Exp $ */
+/* $Id: php3_mysql.h,v 1.8 1999/08/02 16:06:11 andrey Exp $ */
 
 #ifndef _PHP3_MYSQL_H
 #define _PHP3_MYSQL_H
@@ -56,10 +56,11 @@
 extern php3_module_entry mysql_module_entry;
 #define mysql_module_ptr &mysql_module_entry
 
-extern int php3_minit_mysql(INIT_FUNC_ARGS);
-extern int php3_rinit_mysql(INIT_FUNC_ARGS);
-extern int php3_mshutdown_mysql(SHUTDOWN_FUNC_ARGS);
-void php3_info_mysql(ZEND_MODULE_INFO_FUNC_ARGS);
+extern PHP_MINIT_FUNCTION(mysql);
+extern PHP_RINIT_FUNCTION(mysql);
+extern PHP_MSHUTDOWN_FUNCTION(mysql);
+PHP_MINFO_FUNCTION(mysql);
+
 PHP_FUNCTION(mysql_connect);
 PHP_FUNCTION(mysql_pconnect);
 PHP_FUNCTION(mysql_close);

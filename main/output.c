@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.142.2.2 2002/12/31 00:05:19 iliaa Exp $ */
+/* $Id: output.c,v 1.142.2.3 2002/12/31 16:26:12 sebastian Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"

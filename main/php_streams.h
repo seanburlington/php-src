@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 4                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2002 The PHP Group                                |
+   | Copyright (c) 1997-2003 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.61.2.4 2002/11/17 23:16:45 wez Exp $ */
+/* $Id: php_streams.h,v 1.61.2.5 2002/12/31 16:26:21 sebastian Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H

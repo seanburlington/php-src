@@ -2,7 +2,7 @@
 	+----------------------------------------------------------------------+
 	| PHP Version 4                                                        |
 	+----------------------------------------------------------------------+
-	| Copyright (c) 1997-2002 The PHP Group                                |
+	| Copyright (c) 1997-2003 The PHP Group                                |
 	+----------------------------------------------------------------------+
 	| This source file is subject to version 2.02 of the PHP license,      |
 	| that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
 	|          Zeev Suraski <zeev@zend.com>                                |
 	+----------------------------------------------------------------------+
 
-	$Id: internal_functions_win32.c,v 1.65.2.1 2002/12/26 13:27:08 edink Exp $
+	$Id: internal_functions_win32.c,v 1.65.2.2 2002/12/31 16:25:14 sebastian Exp $
 */
 
 /* {{{ includes

@@ -4,10 +4,10 @@
    +----------------------------------------------------------------------+
    | Copyright (c) 1997, 1998, 1999, 2000 The PHP Group                   |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.0 of the PHP license,       |
+   | This source file is subject to version 2.02 of the PHP license,      |
    | that is bundled with this package in the file LICENSE, and is        |
    | available at through the world-wide-web at                           |
-   | http://www.php.net/license/2_0.txt.                                  |
+   | http://www.php.net/license/2_02.txt.                                 |
    | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
@@ -20,9 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/*
-** $Id: pi3web_sapi.c,v 1.4 2000/06/26 18:05:53 andrei Exp $
-*/
+/* $Id: pi3web_sapi.c,v 1.5 2000/07/24 05:41:01 david Exp $ */
 
 #if WIN32|WINNT
 #  include <windows.h>
@@ -85,7 +83,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=5 width=600>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.4 2000/06/26 18:05:53 andrei Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.5 2000/07/24 05:41:01 david Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.6 2003/11/27 17:58:58 wez Exp $ */
+/* $Id: com_handlers.c,v 1.7 2003/11/28 15:41:45 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -275,7 +275,7 @@ static union _zend_function *com_method_get(zval *object, char *name, int len TS
 	}
 
 	f = emalloc(sizeof(zend_internal_function));
-	f->type = ZEND_OVERLOADED_FUNCTION;
+	f->type = ZEND_OVERLOADED_FUNCTION_TEMPORARY;
 	f->num_args = 0;
 	f->arg_info = NULL;
 	f->scope = obj->ce;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.154 2003/10/24 18:24:28 helly Exp $ */
+/* $Id: sockets.c,v 1.155 2003/10/24 18:44:40 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -107,6 +107,17 @@ static
 		ZEND_ARG_PASS_INFO(1)
 		ZEND_ARG_PASS_INFO(0)
 		ZEND_ARG_PASS_INFO(0)
+		ZEND_ARG_PASS_INFO(1)
+		ZEND_ARG_PASS_INFO(1)
+	ZEND_END_ARG_INFO();
+
+static 
+	ZEND_BEGIN_ARG_INFO(third_through_seventh_args_force_ref, 0)
+		ZEND_ARG_PASS_INFO(0)
+		ZEND_ARG_PASS_INFO(0)
+		ZEND_ARG_PASS_INFO(1)
+		ZEND_ARG_PASS_INFO(1)
+		ZEND_ARG_PASS_INFO(1)
 		ZEND_ARG_PASS_INFO(1)
 		ZEND_ARG_PASS_INFO(1)
 	ZEND_END_ARG_INFO();

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.14 2002/11/18 12:43:00 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.15 2002/11/23 01:17:39 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2315,7 +2315,7 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 				return stream;
 			case PHP_STREAM_RELEASED:
 #if ZEND_DEBUG
-				newstream->__orig_path = copy_of_path;
+				newstream->__orig_path = estrdup(path);
 #endif
 				return newstream;
 			default:
@@ -2337,8 +2337,9 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 	}
 	tidy_wrapper_error_log(wrapper TSRMLS_CC);
 #if ZEND_DEBUG
-	if (stream == NULL && copy_of_path != NULL)
+	if (stream == NULL && copy_of_path != NULL) {
 		efree(copy_of_path);
+	}
 #endif
 	return stream;
 }

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.35 2000/03/06 18:41:13 ssb Exp $ */
+/* $Id: php_mysql.c,v 1.36 2000/03/20 07:40:56 rasmus Exp $ */
 
 
 /* TODO:
@@ -400,6 +400,11 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 		tmp++;
 		if (tmp[0] != '/') {
 			port = atoi(tmp);
+			if(tmp=strchr(tmp,':')) {
+				*tmp=0;
+				tmp++;
+				socket=tmp;
+			} 
 		} else {
 			socket = tmp;
 		}

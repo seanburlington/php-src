@@ -17,7 +17,7 @@
 // |          Stig Bakken <ssb@fast.no>                                   |
 // +----------------------------------------------------------------------+
 //
-// $Id: Dependency.php,v 1.8 2002/05/12 14:53:54 ssb Exp $
+// $Id: Dependency.php,v 1.9 2002/05/19 16:32:18 ssb Exp $
 
 /**
 * Methods for dependencies check. Based on Stig's dependencies RFC
@@ -90,6 +90,9 @@ class PEAR_Dependency
      */
     function checkPackage($name, $req = null, $relation = 'has')
     {
+        if (substr($relation, 0, 2) == "v.") {
+            $relation = substr($relation, 2);
+        }
         switch ($relation) {
             case 'has':
                 if (!$this->registry->packageExists($name)) {

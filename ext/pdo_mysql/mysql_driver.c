@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.29 2005/02/12 20:58:29 iliaa Exp $ */
+/* $Id: mysql_driver.c,v 1.30 2005/02/13 00:48:00 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

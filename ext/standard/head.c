@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.44 2001/07/21 12:43:23 zeev Exp $ */
+/* $Id: head.c,v 1.45 2001/07/21 15:51:40 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -143,7 +143,6 @@ PHP_FUNCTION(setcookie)
 		sprintf(cookie, "Set-Cookie: %s=deleted; expires=%s", Z_STRVAL_PP(z_name), dt);
 		efree(dt);
 	} else {
-		/* FIXME: XXX: this is not binary data safe */
 		sprintf(cookie, "Set-Cookie: %s=%s", Z_STRVAL_PP(z_name), (z_value && Z_STRVAL_PP(z_value)) ? encoded_value : "");
 		if (expires > 0) {
 			strcat(cookie, "; expires=");

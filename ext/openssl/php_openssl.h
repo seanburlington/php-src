@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_openssl.h,v 1.10.8.3 2003/04/29 13:48:05 wez Exp $ */
+/* $Id: php_openssl.h,v 1.10.8.4 2003/05/01 10:44:17 wez Exp $ */
 
 #ifndef PHP_OPENSSL_H
 #define PHP_OPENSSL_H
@@ -82,8 +82,8 @@ PHP_FUNCTION(openssl_csr_export_to_file);
 PHP_FUNCTION(openssl_csr_sign);
 
 #include <openssl/ssl.h>
-PHP_OPENSSL_API int php_openssl_apply_verification_policy(SSL *ssl, X509 *peer, php_stream *stream TSRMLS_DC);
-PHP_OPENSSL_API SSL *php_SSL_new_from_context(SSL_CTX *ctx, php_stream *stream TSRMLS_DC);
+int php_openssl_apply_verification_policy(SSL *ssl, X509 *peer, php_stream *stream TSRMLS_DC);
+SSL *php_SSL_new_from_context(SSL_CTX *ctx, php_stream *stream TSRMLS_DC);
 
 
 #else

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: transports.c,v 1.4 2003/06/10 20:03:42 imajes Exp $ */
+/* $Id: transports.c,v 1.5 2003/06/28 11:06:11 wez Exp $ */
 
 #include "php.h"
 #include "php_streams_int.h"
@@ -62,7 +62,9 @@ PHPAPI php_stream *_php_stream_xport_create(const char *name, long namelen, int 
 	const char *p, *protocol = NULL;
 	int n = 0, failed = 0;
 	char *error_text = NULL;
-	struct timeval default_timeout = { FG(default_socket_timeout), 0 };
+	struct timeval default_timeout = { 0, 0 };
+	
+	default_timeout.tv_sec = FG(default_socket_timeout);
 
 	if (timeout == NULL) {
 		timeout = &default_timeout;

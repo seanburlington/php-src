@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.19 2003/06/10 20:03:26 imajes Exp $ */
+/* $Id: interface.c,v 1.20 2003/06/12 12:32:22 andrey Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1070,7 +1070,7 @@ PHP_FUNCTION(curl_exec)
 }
 /* }}} */
 
-/* {{{ proto string curl_getinfo(resource ch, int opt)
+/* {{{ proto mixed curl_getinfo(resource ch, int opt)
    Get information regarding a specific transfer */
 PHP_FUNCTION(curl_getinfo)
 {

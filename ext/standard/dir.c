@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.15 1999/10/20 16:17:30 thies Exp $ */
+/* $Id: dir.c,v 1.16 1999/10/20 18:09:44 andi Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -243,7 +243,7 @@ PHP_FUNCTION(chdir)
 PHP_FUNCTION(getcwd)
 {
 	char path[MAXPATHLEN];
-	char *ret;
+	char *ret=NULL;
 	
 	if (ARG_COUNT(ht) != 0) {
 		WRONG_PARAM_COUNT;
@@ -253,8 +253,11 @@ PHP_FUNCTION(getcwd)
 	ret = getcwd(path,MAXPATHLEN-1);
 #elif HAVE_GETWD
 	ret = getwd(path);
-#elif
-#warning no proper getcwd support for your site
+/*
+ * #warning is not ANSI C
+ * #else
+ * #warning no proper getcwd support for your site
+ */
 #endif
 
 	if (ret) {

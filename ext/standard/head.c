@@ -26,7 +26,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.8 1999/05/05 18:25:20 andi Exp $ */
+/* $Id: head.c,v 1.9 1999/05/05 21:05:44 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -76,7 +76,7 @@ PHPAPI void php3_noheader(void)
 }
 
 
-#ifndef ZTS
+#ifdef APACHE
 /* Adds header information */
 void php4i_add_header_information(char *header_information, uint header_length)
 {
@@ -227,7 +227,7 @@ void php3_Header(INTERNAL_FUNCTION_PARAMETERS)
 
 
 
-#ifndef ZTS
+#ifdef APACHE
 /*
  * php3_header() flushes the header info built up using calls to
  * the Header() function.  If type is 1, a redirect to str is done.

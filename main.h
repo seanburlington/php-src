@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: main.h,v 1.7 1999/05/02 18:07:40 andi Exp $ */
+/* $Id: main.h,v 1.8 1999/05/05 21:05:43 zeev Exp $ */
 
 
 #ifndef _MAIN_H
@@ -39,7 +39,7 @@
 #include "php_globals.h"
 #include "SAPI.h"
 
-PHPAPI int php_request_startup(CLS_D ELS_DC PLS_DC);
+PHPAPI int php_request_startup(CLS_D ELS_DC PLS_DC SLS_DC);
 PHPAPI void php_request_shutdown(void *dummy);
 PHPAPI void php_request_shutdown_for_exec(void *dummy);
 PHPAPI int php_module_startup(sapi_module_struct *sf);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.31 2003/06/20 15:44:48 pollita Exp $ */
+/* $Id: string.c,v 1.333.2.32 2003/06/29 15:36:10 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1102,11 +1102,17 @@ PHPAPI char *php_basename(char *s, size_t len, char *suffix, size_t sufflen)
 		p = c + 1;       /* Save pointer to overwritten char */
 	}
 
-	if ((c = strrchr(s, '/'))
 #ifdef PHP_WIN32
-		|| ((c = strrchr(s, '\\')) && !IsDBCSLeadByte(*(c-1)))
+	if ((c = strrchr(s, '/')) || ((c = strrchr(s, '\\')) && !IsDBCSLeadByte(*(c-1)))) {
+		if (*c == '/') {
+			char *c2 = strrchr(s, '\\');
+			if (c2 && !IsDBCSLeadByte(*(c2-1)) && c2 > c) {
+				c = c2;
+			}
+		}
+#else 
+	if ((c = strrchr(s, '/'))) {
 #endif
-		) {
 		ret = estrdup(c + 1);
 	} else {
 		ret = estrdup(s);

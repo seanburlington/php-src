@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.14 2003/05/14 15:12:07 pollita Exp $ */
+/* $Id: plain_wrapper.c,v 1.15 2003/05/19 18:46:59 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -921,7 +921,7 @@ static int php_plain_files_unlink(php_stream_wrapper *wrapper, char *url, int op
 	ZVAL_STRINGL(&funcname, "clearstatcache", sizeof("clearstatcache")-1, 0);
 	call_user_function_ex(CG(function_table), NULL, &funcname, &retval, 0, NULL, 0, NULL TSRMLS_CC);
 	if (retval) {
-		zval_dtor(retval);
+		zval_ptr_dtor(&retval);
 	}
 	return 1;
 }

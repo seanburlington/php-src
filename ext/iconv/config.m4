@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.18 2002/10/29 16:18:12 moriyoshi Exp $
+dnl $Id: config.m4,v 1.19 2002/10/31 20:23:53 moriyoshi Exp $
 dnl
 
 PHP_ARG_WITH(iconv, for iconv support,
@@ -14,7 +14,8 @@ if test "$PHP_ICONV" != "no"; then
   ])
 
   if test "$iconv_avail" != "no"; then
-
+    iconv_cflags_save="$CFLAGS"
+    CFLAGS="$CFLAGS $INCLUDES"
     AC_MSG_CHECKING([if iconv supports errno])
     AC_TRY_RUN([
 #define LIBICONV_PLUG
@@ -106,6 +107,8 @@ int main() {
         AC_DEFINE([PHP_ICONV_IMPL],["glibc"],[Which iconv implementation to use])
         ;;
     esac
+
+    CFLAGS="$iconv_cflags_save"
 
     PHP_NEW_EXTENSION(iconv, iconv.c, $ext_shared)
     PHP_SUBST(ICONV_SHARED_LIBADD)

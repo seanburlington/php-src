@@ -16,9 +16,16 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_odbc_int.h,v 1.1 2004/05/17 15:43:01 wez Exp $ */
+/* $Id: php_pdo_odbc_int.h,v 1.2 2004/05/17 22:20:11 wez Exp $ */
 
 /* {{{ Roll a dice, pick a header at random... */
+#if HAVE_SQLCLI1_H
+# include <sqlcli1.h>
+# if defined(DB268K) && HAVE_LIBRARYMANAGER_H
+#  include <LibraryManager.h>
+# endif
+#endif
+
 #if HAVE_ODBC_H
 # include <odbc.h>
 #endif
@@ -59,13 +66,6 @@
 # include <udbcext.h>
 #endif
 
-#if HAVE_SQLCLI1_H
-# include <sqlcli1.h>
-# if defined(DB268K) && HAVE_LIBRARYMANAGER_H
-#  include <LibraryManager.h>
-# endif
-#endif
-
 #if HAVE_CLI0CORE_H
 # include <cli0core.h>
 #endif
@@ -93,7 +93,7 @@
 # define PDO_ODBC_HENV		SQLHANDLE
 # define PDO_ODBC_HDBC		SQLHANDLE
 # define PDO_ODBC_HSTMT		SQLHANDLE
-#elif !defined(HENV) && defined(SQLHENV)
+#elif !defined(HENV) && (defined(SQLHENV) || defined(DB2CLI_VER))
 # define PDO_ODBC_HENV		SQLHENV
 # define PDO_ODBC_HDBC		SQLHDBC
 # define PDO_ODBC_HSTMT		SQLHSTMT

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_stmt.c,v 1.1 2004/05/17 15:43:01 wez Exp $ */
+/* $Id: odbc_stmt.c,v 1.2 2004/05/17 22:20:11 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -130,7 +130,9 @@ static int odbc_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *p
 
 				rc = SQLBindParameter(S->stmt, param->paramno+1,
 						SQL_PARAM_INPUT, ctype, sqltype, precision, scale,
-						Z_STRVAL_P(param->parameter), 0, &Z_STRLEN_P(param->parameter)
+						Z_STRVAL_P(param->parameter), 0, 
+						/* XXX: this has the wrong type for DB2 */
+						&Z_STRLEN_P(param->parameter)
 						);
 				
 				return 1;

@@ -22,7 +22,7 @@
 
 #define OCI_USE_EMALLOC 0		/* set this to 1 if you want to use the php memory manager! */
 
-/* $Id: oci8.c,v 1.20 1999/08/18 16:48:56 thies Exp $ */
+/* $Id: oci8.c,v 1.21 1999/08/19 04:13:56 andi Exp $ */
 
 /* TODO list:
  *
@@ -2059,7 +2059,7 @@ _oci_close_server(oci_server *server)
 			}
 		}
 	} else {
-		oci_debug("_oci_close_server: closind DEAD server");
+		oci_debug("_oci_close_server: closing DEAD server");
 	}
 
 	if (server->pServer) {

@@ -5,7 +5,7 @@ See the file COPYING for copying permission.
 
 #if 0
 static char RCSId[]
-  = "$Header: /repository/php-src/ext/xml/expat/Attic/xmlparse.c,v 1.2 2001/05/19 09:56:42 sas Exp $";
+  = "$Header: /repository/php-src/ext/xml/expat/Attic/xmlparse.c,v 1.3 2001/05/19 10:10:49 sas Exp $";
 #endif
   
 #include "php_compat.h"
@@ -245,11 +245,9 @@ static enum XML_Error
 processXmlDecl(XML_Parser parser, int isGeneralTextEntity, const char *, const char *);
 static enum XML_Error
 initializeEncoding(XML_Parser parser);
-#if 0
 static enum XML_Error
 doProlog(XML_Parser parser, const ENCODING *enc, const char *s,
 	 const char *end, int tok, const char *next, const char **nextPtr);
-#endif
 static enum XML_Error
 processInternalParamEntity(XML_Parser parser, ENTITY *entity);
 static enum XML_Error

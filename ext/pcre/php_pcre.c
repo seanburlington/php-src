@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.163 2004/12/10 00:36:51 iliaa Exp $ */
+/* $Id: php_pcre.c,v 1.164 2004/12/24 19:45:54 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1416,7 +1416,7 @@ PHP_FUNCTION(preg_quote)
 
 	/* Nothing to do if we got an empty string */
 	if (in_str == in_str_end) {
-		RETVAL_EMPTY_STRING();
+		RETURN_EMPTY_STRING();
 	}
 
 	if (ZEND_NUM_ARGS() == 2) {

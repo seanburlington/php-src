@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@fast.no>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.20 2000/08/13 18:08:01 stas Exp $ */
+/* $Id: sapi_apache.c,v 1.21 2000/10/14 05:06:16 rasmus Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -69,23 +69,23 @@ int apache_php_module_main(request_rec *r, int display_source_mode CLS_DC ELS_DC
 	/* sending a file handle to another dll is not working
 	// so let zend open it. 
 	*/
-	file_handle.type = ZEND_HANDLE_FILENAME;
-	file_handle.handle.fd = 0;
-	file_handle.filename = SG(request_info).path_translated;
-	file_handle.opened_path = NULL;
-	file_handle.free_filename = 0;
-
+	
 	if (display_source_mode) {
 		zend_syntax_highlighter_ini syntax_highlighter_ini;
 
-		if (open_file_for_scanning(&file_handle CLS_CC)==SUCCESS) {
-			php_get_highlight_struct(&syntax_highlighter_ini);
-			zend_highlight(&syntax_highlighter_ini);
+		php_get_highlight_struct(&syntax_highlighter_ini);
+		if (highlight_file(SG(request_info).path_translated,&syntax_highlighter_ini)){
 			return OK;
 		} else {
 			return NOT_FOUND;
 		}
 	} else {
+		file_handle.type = ZEND_HANDLE_FILENAME;
+		file_handle.handle.fd = 0;
+		file_handle.filename = SG(request_info).path_translated;
+		file_handle.opened_path = NULL;
+		file_handle.free_filename = 0;
+
 		(void) php_execute_script(&file_handle CLS_CC ELS_CC PLS_CC);
 	}
 	

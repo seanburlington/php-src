@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: apache_config.c,v 1.27 2002/11/02 23:08:20 iliaa Exp $ */
+/* $Id: apache_config.c,v 1.28 2002/11/10 19:34:09 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -90,7 +90,7 @@ static const char *real_flag_hnd(cmd_parms *cmd, void *dummy, const char *arg1,
 {
 	char bool_val[2];
 
-	if (!strcasecmp(arg2, "On")) {
+	if (!strcasecmp(arg2, "On") || (arg2[0] == '1' && arg2[1] == '\0')) {
 		bool_val[0] = '1';
 	} else {
 		bool_val[0] = '0';

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.26 1999/09/03 17:46:39 sas Exp $ */
+/* $Id: php.h,v 1.27 1999/09/03 18:32:34 sas Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -295,7 +295,9 @@ extern void html_putc(char c);
 #define phpin zendin
 
 /* functions */
-extern int module_startup_modules(void);
+int module_startup_modules(void);
+int module_global_startup_modules(void);
+int module_global_shutdown_modules(void);
 
 /* needed for modules only */
 extern PHPAPI int php3i_get_le_fp(void);

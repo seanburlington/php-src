@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.91.2.12 2003/07/24 02:47:10 sniper Exp $ */
+/* $Id: interbase.c,v 1.91.2.13 2003/07/24 09:15:05 sniper Exp $ */
 
 
 /* TODO: Arrays, roles?
@@ -511,9 +511,9 @@ static void _php_ibase_free_trans(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 
 /* {{{ startup, shutdown and info functions */
 PHP_INI_BEGIN()
-	STD_PHP_INI_BOOLEAN("ibase.allow_persistent", "1", PHP_INI_SYSTEM, OnUpdateLong, allow_persistent, zend_ibase_globals, ibase_globals)
-	STD_PHP_INI_ENTRY_EX("ibase.max_persistent", "-1", PHP_INI_SYSTEM, OnUpdateLong, max_persistent, zend_ibase_globals, ibase_globals, display_link_numbers)
-	STD_PHP_INI_ENTRY_EX("ibase.max_links", "-1", PHP_INI_SYSTEM, OnUpdateLong, max_links, zend_ibase_globals, ibase_globals, display_link_numbers)
+	STD_PHP_INI_BOOLEAN("ibase.allow_persistent", "1", PHP_INI_SYSTEM, OnUpdateInt, allow_persistent, zend_ibase_globals, ibase_globals)
+	STD_PHP_INI_ENTRY_EX("ibase.max_persistent", "-1", PHP_INI_SYSTEM, OnUpdateInt, max_persistent, zend_ibase_globals, ibase_globals, display_link_numbers)
+	STD_PHP_INI_ENTRY_EX("ibase.max_links", "-1", PHP_INI_SYSTEM, OnUpdateInt, max_links, zend_ibase_globals, ibase_globals, display_link_numbers)
 	STD_PHP_INI_ENTRY("ibase.default_user", NULL, PHP_INI_ALL, OnUpdateString, default_user, zend_ibase_globals, ibase_globals)
 	STD_PHP_INI_ENTRY("ibase.default_password", NULL, PHP_INI_ALL, OnUpdateString, default_password, zend_ibase_globals, ibase_globals)
 	STD_PHP_INI_ENTRY("ibase.timestampformat", "%m/%d/%Y %H:%M:%S", PHP_INI_ALL, OnUpdateString, cfg_timestampformat, zend_ibase_globals, ibase_globals)
@@ -628,7 +628,7 @@ PHP_MINFO_FUNCTION(ibase)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Interbase Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.12 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.91.2.13 $");
 #ifdef COMPILE_DL_INTERBASE
 	php_info_print_table_row(2, "Dynamic Module", "yes");
 #endif

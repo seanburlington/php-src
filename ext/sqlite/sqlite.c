@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.102 2003/12/10 01:02:19 iliaa Exp $ 
+   $Id: sqlite.c,v 1.103 2003/12/10 18:56:04 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -206,6 +206,7 @@ function_entry sqlite_funcs_db[] = {
 	PHP_ME_MAPPING(single_query, sqlite_single_query, NULL)
 	PHP_ME_MAPPING(unbuffered_query, sqlite_unbuffered_query, NULL)
 	PHP_ME_MAPPING(last_insert_rowid, sqlite_last_insert_rowid, NULL)
+	PHP_ME_MAPPING(changes, sqlite_changes, NULL)
 	PHP_ME_MAPPING(create_aggregate, sqlite_create_aggregate, NULL)
 	PHP_ME_MAPPING(create_function, sqlite_create_function, NULL)
 	PHP_ME_MAPPING(busy_timeout, sqlite_busy_timeout, NULL)
@@ -221,7 +222,6 @@ function_entry sqlite_funcs_query[] = {
 	PHP_ME_MAPPING(fetch_single, sqlite_fetch_single, NULL)
 	PHP_ME_MAPPING(fetch_all, sqlite_fetch_all, NULL)
 	PHP_ME_MAPPING(column, sqlite_column, NULL)
-	PHP_ME_MAPPING(changes, sqlite_changes, NULL)
 	PHP_ME_MAPPING(num_fields, sqlite_num_fields, NULL)
 	PHP_ME_MAPPING(field_name, sqlite_field_name, NULL)
 	/* spl_forward */
@@ -244,7 +244,6 @@ function_entry sqlite_funcs_ub_query[] = {
 	PHP_ME_MAPPING(fetch_single, sqlite_fetch_single, NULL)
 	PHP_ME_MAPPING(fetch_all, sqlite_fetch_all, NULL)
 	PHP_ME_MAPPING(column, sqlite_column, NULL)
-	PHP_ME_MAPPING(changes, sqlite_changes, NULL)
 	PHP_ME_MAPPING(num_fields, sqlite_num_fields, NULL)
 	PHP_ME_MAPPING(field_name, sqlite_field_name, NULL)
 	/* spl_forward */
@@ -1072,7 +1071,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.102 2003/12/10 01:02:19 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.103 2003/12/10 18:56:04 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

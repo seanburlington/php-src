@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.66 2005/02/25 23:51:51 helly Exp $
+dnl $Id: config.m4,v 1.67 2005/02/26 02:15:00 helly Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -384,9 +384,18 @@ AC_ARG_WITH(db1,
     AC_MSG_CHECKING(for DB1 in header)
     AC_MSG_RESULT($THIS_INCLUDE)
     if test -n "$THIS_INCLUDE"; then
-      PHP_CHECK_LIBRARY($THIS_LIBS, dbopen, [
-        AC_DEFINE_UNQUOTED(DB1_INCLUDE_FILE, "$THIS_INCLUDE", [ ])
-        AC_DEFINE(DBA_DB1, 1, [ ]) 
+      PHP_TEMP_LDFLAGS(-L$THIS_PREFIX/$PHP_LIBDIR, -l$THIS_LIBS,[
+        AC_TRY_LINK([
+#include "$THIS_INCLUDE"
+        ],[
+          DB * dbp = dbopen("", 0, 0, DB_HASH, 0);
+        ],[
+          AC_DEFINE_UNQUOTED(DB1_INCLUDE_FILE, "$THIS_INCLUDE", [ ])
+          AC_DEFINE(DBA_DB1, 1, [ ])
+          THIS_RESULT=yes
+        ],[
+          THIS_RESULT=no
+        ])
       ])
     fi
     PHP_DBA_STD_ASSIGN

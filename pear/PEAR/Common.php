@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.104 2003/08/29 18:23:30 cox Exp $
+// $Id: Common.php,v 1.105 2003/08/31 18:54:38 cellog Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -1087,7 +1087,7 @@ class PEAR_Common extends PEAR
             $i = 1;
             foreach ($info['deps'] as $d) {
                 if (empty($d['type'])) {
-                    $errors[] = "depenency $i: missing type";
+                    $errors[] = "dependency $i: missing type";
                 } elseif (!in_array($d['type'], $_PEAR_Common_dependency_types)) {
                     $errors[] = "dependency $i: invalid type, should be one of: ".implode(' ', $_PEAR_Common_depenency_types);
                 }

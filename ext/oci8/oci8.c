@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.122 2001/05/04 14:53:45 thies Exp $ */
+/* $Id: oci8.c,v 1.123 2001/05/22 23:16:03 asautins Exp $ */
 
 /* TODO list:
  *
@@ -577,7 +577,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.122 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.123 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -4305,6 +4305,15 @@ PHP_FUNCTION(ocifreecoll)
 			 */
 			connection = coll->conn;
             oci_debug("OCIfreecoll: coll=%d",inx);
+			connection->error = OCIObjectFree(OCI(pEnv),
+											  connection->pError,
+											  (dvoid *)coll->coll,
+											  (ub2)(OCI_OBJECTFREE_FORCE));
+			if (connection->error) {
+				oci_error(connection->pError, "OCIObjectFree", connection->error);
+				RETURN_FALSE;
+			}
+
             zend_list_delete(inx);
             RETURN_TRUE;
         }
@@ -4747,7 +4756,7 @@ PHP_FUNCTION(ocicolltrim)
 }
 /* }}} */
 
-/* {{{ proto string ocinewcollection(int connection, string tdo)
+/* {{{ proto string ocinewcollection(int connection, string tdo,[string schema])
    Initialize a new collection */
 
 PHP_FUNCTION(ocinewcollection)
@@ -4755,16 +4764,24 @@ PHP_FUNCTION(ocinewcollection)
     dvoid *dschp1;
     dvoid *parmp1;
     dvoid *parmp2;
-    zval **conn, **tdo;
+    zval **conn, **tdo, **schema;
     oci_connection *connection;
     oci_collection *coll;
+	int ac = ZEND_NUM_ARGS();
 
 	OCILS_FETCH();
 
-    if (zend_get_parameters_ex(2, &conn, &tdo) != SUCCESS) {
+
+
+    if (ac < 2 || ac > 3 || zend_get_parameters_ex(ac, &conn, &tdo, &schema) == FAILURE) {
         WRONG_PARAM_COUNT;
     }
+
     convert_to_string_ex(tdo);
+
+	if(ac == 3) {
+		convert_to_string_ex(schema);
+	}
 
 	coll = emalloc(sizeof(oci_collection));
 
@@ -4777,8 +4794,8 @@ PHP_FUNCTION(ocinewcollection)
 	connection->error = OCITypeByName(OCI(pEnv),
 									  connection->pError,
 									  connection->pServiceContext,
-									  (text *) 0,
-									  (ub4) 0,
+									  ac==3?(text *)(*schema)->value.str.val:(text *)0,
+									  ac==3?(ub4)(*schema)->value.str.len: (ub4)0,
 									  (text *) (*tdo)->value.str.val,
 									  (ub4)    (*tdo)->value.str.len,
 									  (CONST text *) 0, (ub4) 0,
@@ -4826,6 +4843,7 @@ PHP_FUNCTION(ocinewcollection)
 
 	switch(coll->coll_typecode) {
 	   case OCI_TYPECODE_VARRAY:
+	   case OCI_TYPECODE_TABLE:
 		   connection->error = OCIAttrGet((dvoid*) parmp1,
 										  (ub4) OCI_DTYPE_PARAM,
 										  (dvoid*) &parmp2, (ub4 *) 0,

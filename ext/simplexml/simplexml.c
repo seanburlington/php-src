@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.18 2003/05/25 21:58:09 sterling Exp $ */
+/* $Id: simplexml.c,v 1.19 2003/05/25 22:03:47 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -293,20 +293,13 @@ sxe_properties_get(zval *object TSRMLS_DC)
 
 	GET_NODE(sxe, node);
 
-	node = node->xmlChildrenNode;
-	if (!sxe->node) {
-		sxe->node = node;
-	}
-
-	while (node) {
-		MAKE_STD_ZVAL(value);
-		_node_as_zval(sxe, node, value);
-
-		zend_hash_next_index_insert(rv, &value, sizeof(zval *), NULL);
-
-		node = node->next;
-	}
-
+	/* 
+	 * XXX: TODO
+	 * Recurse from the current node through the XML document
+	 * and build an array return value.  Expensive? sure.  But
+	 * if you ask for it, you get it :)
+	 */
+	
 	return rv;
 }
 /* }}} */
@@ -647,7 +640,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.18 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.19 $");
 	php_info_print_table_end();
 
 }

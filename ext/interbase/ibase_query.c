@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_query.c,v 1.12 2004/05/31 13:40:24 abies Exp $ */
+/* $Id: ibase_query.c,v 1.13 2004/05/31 13:43:06 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1137,7 +1137,7 @@ PHP_FUNCTION(ibase_query)
 		    expected_n = ib_query.in_sqlda ? ib_query.in_sqlda->sqld : 0;
 		
 		if (bind_n != expected_n) {
-			_php_ibase_module_error("Statements expect %d arguments, %d given" TSRMLS_CC,
+			_php_ibase_module_error("Statement expects %d arguments, %d given" TSRMLS_CC,
 			    expected_n, bind_n);
 			break;
 		
@@ -1810,7 +1810,7 @@ PHP_FUNCTION(ibase_execute)
 			expected_n = ib_query->in_sqlda ? ib_query->in_sqlda->sqld : 0;
 
 		if (bind_n != expected_n) {
-			_php_ibase_module_error("Statements expect %d arguments, %d given" TSRMLS_CC,
+			_php_ibase_module_error("Statement expects %d arguments, %d given" TSRMLS_CC,
 				expected_n, bind_n);
 			break;
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.358 2003/02/14 18:59:50 moriyoshi Exp $ */
+/* $Id: string.c,v 1.359 2003/02/18 18:11:34 moriyoshi Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2019,7 +2019,7 @@ PHP_FUNCTION(ucwords)
 
 	*r = toupper((unsigned char) *r);
 	for (r_end = r + Z_STRLEN_P(return_value) - 1; r < r_end; ) {
-		if (isspace((int) *r++)) {
+		if (isspace((int) *(unsigned char *)r++)) {
 			*r = toupper((unsigned char) *r);
 		}
 	}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.10 1999/09/24 19:35:25 sas Exp $ */
+/* $Id: link.c,v 1.11 1999/11/28 16:23:30 rasmus Exp $ */
 
 #include "php.h"
 #include "php3_filestat.h"
@@ -114,6 +114,10 @@ PHP_FUNCTION(symlink)
 	convert_to_string_ex(frompath);
 
 	if (PG(safe_mode) && !_php3_checkuid((*topath)->value.str.val, 2)) {
+		RETURN_FALSE;
+	}
+	if (!strncasecmp((*topath)->value.str.val,"http://",7) || !strncasecmp((*topath)->value.str.val,"ftp://",6)) {
+		php_error(E_WARNING, "Unable to symlink to a URL");
 		RETURN_FALSE;
 	}
 

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.154 2000/06/22 18:35:08 zeev Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.155 2000/06/26 17:11:28 zeev Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -482,15 +482,6 @@ if test "$PHP_SIGCHILD" = "yes"; then
   AC_DEFINE(PHP_SIGCHILD, 1, [ ])
 else
   AC_DEFINE(PHP_SIGCHILD, 0, [ ])
-fi
-
-PHP_ARG_ENABLE(track-vars,whether to enable track_vars variables by default,
-[  --enable-track-vars     Enable GET/POST/Cookie track variables by default.],yes)
-
-if test "$PHP_TRACK_VARS" = "yes"; then
-  AC_DEFINE(PHP_TRACK_VARS, 1, [ ])
-else
-  AC_DEFINE(PHP_TRACK_VARS, 0, [ ])
 fi
 
 PHP_ARG_ENABLE(magic-quotes,whether to enable magic quotes by default,

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.47 2002/03/15 21:03:04 wez Exp $ */
+/* $Id: file.h,v 1.48 2002/03/16 01:34:52 wez Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -90,7 +90,7 @@ typedef enum _php_meta_tags_token {
 } php_meta_tags_token;
 
 typedef struct _php_meta_tags_data {
-  php_stream * stream;
+  php_stream *stream;
   int ulc;
   int lc;
   char *input_buffer;

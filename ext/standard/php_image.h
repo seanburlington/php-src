@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_image.h,v 1.11 2002/03/15 21:03:05 wez Exp $ */
+/* $Id: php_image.h,v 1.12 2002/03/16 01:34:52 wez Exp $ */
 
 #ifndef PHP_IMAGE_H
 #define PHP_IMAGE_H
@@ -45,6 +45,6 @@ typedef enum
 } image_filetype;
 /* }}} */
 
-extern int php_getimagetype(php_stream * stream, char *filetype);
+extern int php_getimagetype(php_stream *stream, char *filetype);
 
 #endif /* PHP_IMAGE_H */

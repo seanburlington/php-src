@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.196 2003/08/28 16:49:43 sas Exp $ */
+/* $Id: php.h,v 1.197 2003/08/29 00:22:36 helly Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -296,6 +296,7 @@ typedef enum {
 
 BEGIN_EXTERN_C();
 PHPAPI void php_set_error_handling(error_handling_t error_handling, zend_class_entry *exception_class TSRMLS_DC);
+#define php_std_error_handling() php_set_error_handling(EH_NORMAL, NULL TSRMLS_CC)
 
 PHPAPI void php_verror(const char *docref, const char *params, int type, const char *format, va_list args TSRMLS_DC) PHP_ATTRIBUTE_FORMAT(printf, 4, 0);
 

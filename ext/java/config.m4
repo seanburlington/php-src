@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.38 2002/08/14 16:01:12 kalowsky Exp $
+dnl $Id: config.m4,v 1.39 2002/08/14 16:11:48 kalowsky Exp $
 dnl
 AC_DEFUN(JAVA_FIND_JAR, [
  AC_MSG_CHECKING([Java Jar location])
@@ -91,7 +91,7 @@ AC_DEFUN(JAVA_CHECK_LIB, [
      test -f $i/jni_md.h && JAVA_INCLUDE="$JAVA_INCLUDE $i"
    done
 dnl
-dnl sample JDK v 1.3 path
+dnl sample JDK v 1.4 path
 dnl /usr/java/j2sdk1.4.0_01/jre/lib/i386/libjava.so
 dnl
  else

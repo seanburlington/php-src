@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.252 2003/04/18 00:20:22 iliaa Exp $ */
+/* $Id: php_domxml.c,v 1.253 2003/05/05 12:56:33 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -744,6 +744,7 @@ static void php_free_xml_node(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	if (node->parent == NULL) {
 		/* Attribute Nodes ccontain accessible children 
 		attr_list_wrapper_dtor(node->properties); */
+		xmlSetTreeDoc(node, NULL);
 		node_list_wrapper_dtor((xmlNodePtr) node->properties, 0 TSRMLS_CC);
 		node_list_wrapper_dtor(node->children, 0 TSRMLS_CC);
 		node_wrapper_dtor(node);

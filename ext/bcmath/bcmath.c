@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.44 2002/12/10 19:04:27 pollita Exp $ */
+/* $Id: bcmath.c,v 1.45 2002/12/10 19:28:04 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -339,7 +339,7 @@ PHP_FUNCTION(bc_powmod)
 	bc_num first, second, mod, result;
 	int scale=bc_precision;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_C, "sss|l", &left, &left_len, &right, &right_len, &modulous, &modulous_len, &scale) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sss|l", &left, &left_len, &right, &right_len, &modulous, &modulous_len, &scale) == FAILURE) {
         	WRONG_PARAM_COUNT;
 	}
 

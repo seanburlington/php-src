@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.59 2001/08/11 17:03:36 zeev Exp $ */
+/* $Id: dl.c,v 1.59.2.1 2001/10/23 01:19:59 zeev Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -76,6 +76,7 @@ PHP_FUNCTION(dl)
 		php_error(E_ERROR, "Dynamically loaded extensions aren't allowed when running in SAFE MODE.");
 	} else {
 		php_dl(*file, MODULE_TEMPORARY, return_value TSRMLS_CC);
+		EG(full_tables_cleanup) = 1;
 	}
 }
 

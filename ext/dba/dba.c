@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.99 2003/08/17 17:14:11 helly Exp $ */
+/* $Id: dba.c,v 1.100 2003/08/28 17:56:41 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -676,7 +676,7 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	if (*pmode=='t') {
 		pmode++;
 		if (!lock_flag) {
-			php_error_docref2(NULL TSRMLS_CC, Z_STRVAL_PP(args[0]), Z_STRVAL_PP(args[1]), E_WARNING, "You cannot combine modifiers - (no lock) and t (test lock)", hptr->name);
+			php_error_docref2(NULL TSRMLS_CC, Z_STRVAL_PP(args[0]), Z_STRVAL_PP(args[1]), E_WARNING, "You cannot combine modifiers - (no lock) and t (test lock)");
 			FREENOW;
 			RETURN_FALSE;
 		}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.48 2002/03/18 18:54:24 wez Exp $ */
+/* $Id: ftp.c,v 1.49 2002/03/18 22:26:32 vlad Exp $ */
 
 #include "php.h"
 
@@ -685,6 +685,8 @@ ftp_size(ftpbuf_t *ftp, const char *path)
 	if (ftp == NULL)
 		return -1;
 
+	if (!ftp_type(ftp, FTPTYPE_IMAGE))
+		return -1;
 	if (!ftp_putcmd(ftp, "SIZE", path))
 		return -1;
 	if (!ftp_getresp(ftp) || ftp->resp != 213)

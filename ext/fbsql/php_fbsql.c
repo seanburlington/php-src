@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.91 2003/01/30 02:33:15 iliaa Exp $ */
+/* $Id: php_fbsql.c,v 1.92 2003/02/12 20:44:00 iliaa Exp $ */
 
 /* TODO:
  *
@@ -2275,7 +2275,7 @@ void phpfbColumnAsString(PHPFBResult* result, int column, void* data , int* leng
 			phpfbestrdup(b, length, value);
 		}
 		break;
-
+#ifdef FB_TinyInteger
 		case FB_TinyInteger:
 		{ 
 			short int   v = *((short int*)data);
@@ -2284,7 +2284,8 @@ void phpfbColumnAsString(PHPFBResult* result, int column, void* data , int* leng
 			phpfbestrdup(b, length, value);
 		}
 		break;
-
+#endif
+#ifdef FB_LongInteger
 		case FB_LongInteger:
 		{ 
 			FBLongInteger v = *((FBLongInteger*)data);
@@ -2297,7 +2298,7 @@ void phpfbColumnAsString(PHPFBResult* result, int column, void* data , int* leng
 			phpfbestrdup(b, length, value);
 		}
 		break;
-
+#endif
 		case FB_SmallInteger:
 		{
 			short v = *((short*)data);

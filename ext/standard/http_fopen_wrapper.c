@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.50 2002/09/26 10:14:41 wez Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.51 2002/09/26 10:17:41 wez Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -283,7 +283,7 @@ php_stream *php_stream_url_wrap_http(php_stream_wrapper *wrapper, char *path, ch
 		while (!body && !php_stream_eof(stream))	{
 		
 			if (php_stream_gets(stream, http_header_line, HTTP_HEADER_BLOCK_SIZE-1) != NULL)	{
-				char *p, *ws;
+				char *p;
 				int found_eol = 0;
 				int http_header_line_length;
 			

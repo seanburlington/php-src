@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.33 2002/01/18 07:58:47 chregu Exp $
+dnl $Id: config.m4,v 1.34 2002/03/07 14:18:30 sas Exp $
 dnl
 
 AC_DEFUN(PHP_DOM_CHECK_VERSION,[
@@ -104,7 +104,7 @@ PHP_ARG_WITH(dom-xslt, for DOM XSLT support,
                           DIR is the libxslt install directory.])
 
 PHP_ARG_WITH(dom-exslt, for DOM EXSLT support,
-[  --with-dom-exslt[=DIR]   Include DOM EXSLT support (requires libxslt >= 1.0.3).
+[  --with-dom-exslt[=DIR]  Include DOM EXSLT support (requires libxslt >= 1.0.3).
                           DIR is the libexslt install directory.])
 
 if test "$PHP_DOM_XSLT" != "no"; then

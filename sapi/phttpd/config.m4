@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.6 2001/11/30 19:01:31 sniper Exp $
+dnl $Id: config.m4,v 1.7 2002/03/07 14:19:53 sas Exp $
 dnl 
 
 RESULT=no
@@ -14,8 +14,7 @@ AC_ARG_WITH(phttpd,
 	PHTTPD_DIR=$withval
 	PHP_ADD_INCLUDE($PHTTPD_DIR/include)
 	AC_DEFINE(HAVE_PHTTPD,1,[Whether you have phttpd])
-	PHP_SAPI=phttpd
-	PHP_BUILD_SHARED
+	PHP_SELECT_SAPI(phttpd, shared, phttpd.c)
 	INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_SHARED \$(INSTALL_ROOT)$PHTTPD_DIR/modules/"
 	RESULT=yes
 ])

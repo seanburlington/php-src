@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.5 2001/11/30 19:01:31 sniper Exp $
+dnl $Id: config.m4,v 1.6 2002/03/07 14:19:54 sas Exp $
 dnl
 
 PHP_ARG_WITH(pi3web,for Pi3Web Support,
@@ -18,8 +18,7 @@ if test "$PHP_PI3WEB" != "no"; then
 	PHP_ADD_INCLUDE($PI3PATH/Pi2API)
 	PHP_ADD_INCLUDE($PI3PATH/Pi3API)
 	PHP_ADD_INCLUDE($PI3PATH/PHP4)
-	PHP_SAPI=pi3web
-	PHP_BUILD_SHARED
+	PHP_SELECT_SAPI(pi3web, shared, pi3web_sapi.c)
 	INSTALL_IT="\$(SHELL) \$(srcdir)/install-sh -m 0755 $SAPI_SHARED \$(INSTALL_ROOT)$PI3PATH/bin/"
 fi
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.12 2002/02/28 11:48:39 edink Exp $
+dnl $Id: config.m4,v 1.13 2002/03/07 14:19:51 sas Exp $
 dnl
 
 AC_DEFUN(PHP_TEST_WRITE_STDOUT,[
@@ -31,7 +31,7 @@ main()
   fi
 ])
 
-if test "$PHP_SAPI" = "cgi"; then
+if test "$PHP_SAPI" = "default"; then
 
   PHP_TEST_WRITE_STDOUT
 
@@ -61,9 +61,6 @@ if test "$PHP_SAPI" = "cgi"; then
   fi
   AC_DEFINE_UNQUOTED(DISCARD_PATH, $DISCARD_PATH, [ ])
 
-fi
-
-if test "$PHP_SAPI" = "cgi" ; then
   INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_PROGRAM \$(INSTALL_ROOT)\$(bindir)/php-cgi"
 fi
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.3 2002/01/24 17:55:13 edink Exp $
+dnl $Id: config.m4,v 1.4 2002/03/07 14:19:51 sas Exp $
 dnl
 
 AC_MSG_CHECKING(for CLI build)
@@ -17,7 +17,8 @@ AC_ARG_ENABLE(cli,
 )
 
 if test "$PHP_SAPI_CLI" != "no"; then
-  INSTALL_IT="$INSTALL_IT; \$(INSTALL) -m 0755 sapi/cli/php \$(INSTALL_ROOT)\$(bindir)/php"
+  INSTALL_CLI="\$(INSTALL) -m 0755 sapi/cli/php \$(INSTALL_ROOT)\$(bindir)/php"
+  PHP_SUBST(INSTALL_CLI)
 else
   PHP_DISABLE_CLI
 fi

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.10 2001/11/30 19:01:31 sniper Exp $
+dnl $Id: config.m4,v 1.11 2002/03/07 14:19:53 sas Exp $
 dnl
 
 AC_MSG_CHECKING(for NSAPI support)
@@ -28,8 +28,7 @@ if test "$PHP_NSAPI" != "no"; then
   PHP_ADD_INCLUDE($NSAPI_INCLUDE)
   PHP_BUILD_THREAD_SAFE
   AC_DEFINE(HAVE_NSAPI,1,[Whether you have a Netscape Server])
-  PHP_SAPI=nsapi
-  PHP_BUILD_SHARED
+  PHP_SELECT_SAPI(nsapi, shared, nsapi.c)
   INSTALL_IT="\$(INSTALL) -m 0755 $SAPI_SHARED \$(INSTALL_ROOT)$PHP_NSAPI/bin/"
 fi
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.14 2001/11/30 19:01:32 sniper Exp $
+dnl $Id: config.m4,v 1.15 2002/03/07 14:20:01 sas Exp $
 dnl
 
 AC_ARG_WITH(thttpd,
@@ -18,8 +18,7 @@ AC_ARG_WITH(thttpd,
     (cd $THTTPD && patch < $abs_srcdir/sapi/thttpd/thttpd_patch && touch php_patched)"
   PHP_THTTPD="yes, using $THTTPD"
   PHP_ADD_INCLUDE($THTTPD)
-  PHP_BUILD_STATIC
-  PHP_SAPI=thttpd
+  PHP_SELECT_SAPI(thttpd, static)
 ],[
   PHP_THTTPD=no
 ])

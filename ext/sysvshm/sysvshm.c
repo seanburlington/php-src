@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.56.8.5 2005/01/20 10:08:45 tony2001 Exp $ */
+/* $Id: sysvshm.c,v 1.56.8.6 2005/01/23 20:17:27 iliaa Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -313,7 +313,7 @@ PHP_FUNCTION(shm_get_var)
 	shm_data=&shm_var->mem;
 	
 	PHP_VAR_UNSERIALIZE_INIT(var_hash);
-	if(php_var_unserialize(&return_value, (const char **) &shm_data, shm_data+shm_var->length,&var_hash TSRMLS_CC)!=1) {
+	if(php_var_unserialize(&return_value, (const unsigned char **) &shm_data, shm_data+shm_var->length,&var_hash TSRMLS_CC)!=1) {
 		PHP_VAR_UNSERIALIZE_DESTROY(var_hash);
 		php_error(E_WARNING, "variable data in shared memory is corrupted");
 		RETURN_FALSE;

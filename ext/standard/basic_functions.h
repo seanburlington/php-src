@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.111 2002/12/31 18:39:34 wez Exp $ */
+/* $Id: basic_functions.h,v 1.112 2003/01/05 03:24:38 pollita Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -105,6 +105,7 @@ PHP_FUNCTION(move_uploaded_file);
 PHP_FUNCTION(parse_ini_file);
 
 PHP_FUNCTION(str_rot13);
+PHP_FUNCTION(stream_get_filters);
 PHP_FUNCTION(stream_register_filter);
 PHP_MINIT_FUNCTION(user_filters);
 

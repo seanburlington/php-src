@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.3 2003/01/01 12:36:06 sebastian Exp $ */
+/* $Id: user_filters.c,v 1.4 2003/01/05 03:24:38 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -410,6 +410,24 @@ static php_stream_filter_factory user_filter_factory = {
 static void filter_item_dtor(struct php_user_filter_data *fdat)
 {
 }
+
+/* {{{ proto array stream_get_filters()
+   Returns a list of registered filters */
+PHP_FUNCTION(stream_get_filters)
+{
+	char *filter_name;
+	int filter_name_len = 0;
+
+	array_init(return_value);
+
+	if (BG(user_filter_map)) {
+		for(zend_hash_internal_pointer_reset(BG(user_filter_map));
+			zend_hash_get_current_key_ex(BG(user_filter_map), &filter_name, &filter_name_len, NULL, 0, NULL) == HASH_KEY_IS_STRING;
+			zend_hash_move_forward(BG(user_filter_map)))
+				add_next_index_string(return_value, filter_name, 1);
+	}
+}
+/* }}} */	
 
 /* {{{ proto bool stream_register_filter(string filtername, string classname)
    Registers a custom filter handler class */

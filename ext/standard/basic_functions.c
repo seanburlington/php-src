@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.553 2003/01/03 08:02:36 pollita Exp $ */
+/* $Id: basic_functions.c,v 1.554 2003/01/05 03:24:38 pollita Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -863,6 +863,7 @@ function_entry basic_functions[] = {
 #endif
 
 	PHP_FE(str_rot13, NULL)
+	PHP_FE(stream_get_filters, NULL)
 	PHP_FE(stream_register_filter, NULL)
 
 	/* functions from aggregate.c */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.38 2000/11/03 02:46:49 zeev Exp $ */
+/* $Id: php_sybase_ct.c,v 1.39 2000/12/07 02:50:46 joey Exp $ */
 
 
 #include "php.h"
@@ -46,6 +46,7 @@ function_entry sybase_functions[] = {
 	PHP_FE(sybase_fetch_object,			NULL)
 	PHP_FE(sybase_data_seek,			NULL)
 	PHP_FE(sybase_fetch_field,			NULL)
+	PHP_FE(sybase_field_seek,           NULL)
 	PHP_FE(sybase_result,				NULL)
 	PHP_FE(sybase_affected_rows,		NULL)
 	PHP_FE(sybase_min_client_severity,	NULL)

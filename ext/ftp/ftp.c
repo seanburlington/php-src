@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.67 2002/10/04 22:20:08 sesser Exp $ */
+/* $Id: ftp.c,v 1.68 2002/10/13 01:40:46 iliaa Exp $ */
 
 #include "php.h"
 
@@ -226,6 +226,8 @@ ftp_login(ftpbuf_t *ftp, const char *user, const char *pass)
 {
 #if HAVE_OPENSSL_EXT
 	SSL_CTX	*ctx = NULL;
+	
+	TSRMLS_FETCH();
 #endif
 	if (ftp == NULL)
 		return 0;
@@ -1346,11 +1348,13 @@ bail:
 databuf_t*
 data_accept(databuf_t *data, ftpbuf_t *ftp)
 {
-#if HAVE_OPENSSL_EXT
-	SSL_CTX		*ctx;
-#endif
 	php_sockaddr_storage addr;
 	int			size;
+
+#if HAVE_OPENSSL_EXT
+	SSL_CTX		*ctx;
+	TSRMLS_FETCH();	
+#endif
 
 	if (data->fd != -1)
 		goto data_accepted;
@@ -1549,7 +1553,6 @@ ftp_nb_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t typ
 {
 	databuf_t		*data = NULL;
 	char			arg[11];
-	TSRMLS_FETCH();
 
 	if (ftp == NULL)
 		goto bail;
@@ -1666,7 +1669,6 @@ ftp_nb_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type
 {
 	databuf_t		*data = NULL;
 	char			arg[11];
-	TSRMLS_FETCH();
 
 	if (ftp == NULL)
 		return 0;

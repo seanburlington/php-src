@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.41 2004/06/23 16:47:25 georg Exp $ 
+  $Id: mysqli.c,v 1.42 2004/07/05 19:36:10 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -132,7 +132,7 @@ static void mysqli_objects_free_storage(zend_object *object TSRMLS_DC)
 	FREE_HASHTABLE(intern->zo.properties);
 
 	/* link object */
-	if (intern->zo.ce == mysqli_link_class_entry) {
+	if (instanceof_function(intern->zo.ce, mysqli_link_class_entry TSRMLS_CC)) {
 		if (my_res && my_res->ptr) {
 			MY_MYSQL *mysql = (MY_MYSQL *)my_res->ptr;
 		

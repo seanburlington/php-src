@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.83.2.16 2003/06/19 22:11:39 wez Exp $ */
+/* $Id: network.c,v 1.83.2.17 2003/06/22 10:07:20 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -512,7 +512,6 @@ int php_hostconnect(const char *host, unsigned short port, int socktype, struct 
 		
 	}
 	php_network_freeaddresses(psal);
-	php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_hostconnect: connect failed");
 
 #ifdef PHP_WIN32
 	/* Restore the last error */

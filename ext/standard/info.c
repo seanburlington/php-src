@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.167 2002/03/04 20:14:52 sas Exp $ */
+/* $Id: info.c,v 1.168 2002/03/14 13:35:19 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -200,9 +200,9 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		php_info_print_table_row(2, "Configuration File (php.ini) Path", php_ini_opened_path?php_ini_opened_path:PHP_CONFIG_FILE_PATH);
 
 #if ZEND_DEBUG
-		php_info_print_table_row(2, "ZEND_DEBUG", "enabled" );
+		php_info_print_table_row(2, "Debug Build", "Yes" );
 #else
-		php_info_print_table_row(2, "ZEND_DEBUG", "disabled" );
+		php_info_print_table_row(2, "Debug Build", "No" );
 #endif
 
 #ifdef ZTS

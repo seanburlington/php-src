@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: rules.mk,v 1.34 2002/03/01 08:57:07 ssb Exp $ 
+# $Id: rules.mk,v 1.35 2002/03/02 09:29:45 yohgaki Exp $ 
 #
 
 include $(top_srcdir)/build/rules_common.mk
@@ -55,9 +55,9 @@ distclean: distclean-recursive clean-x
 
 test: $(top_builddir)/sapi/cli/php
 	@if test "$(TESTS)" = ""; then \
-		TOP_BUILDDIR=$(top_builddir) TOP_SRCDIR=$(top_srcdir) $(top_builddir)/sapi/cli/php $(top_srcdir)/run-tests.php $(srcdir); \
+		TOP_BUILDDIR=$(top_builddir) TOP_SRCDIR=$(top_srcdir) $(top_builddir)/sapi/cli/php -c $(top_srcdir)/php.ini-dist $(top_srcdir)/run-tests.php $(srcdir); \
 	else \
-		TOP_BUILDDIR=$(top_builddir) TOP_SRCDIR=$(top_srcdir) $(top_builddir)/sapi/cli/php $(top_srcdir)/run-tests.php $(TESTS); \
+		TOP_BUILDDIR=$(top_builddir) TOP_SRCDIR=$(top_srcdir) $(top_builddir)/sapi/cli/php -c $(top_srcdir)/php.ini-dist $(top_srcdir)/run-tests.php $(TESTS); \
 	fi
 
 include $(builddir)/.deps

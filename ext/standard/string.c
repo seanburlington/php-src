@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.30 2003/06/11 02:16:49 iliaa Exp $ */
+/* $Id: string.c,v 1.333.2.31 2003/06/20 15:44:48 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2629,6 +2629,9 @@ static void php_str_replace_in_subject(zval *search, zval *replace, zval **subje
 			convert_to_string(*search_entry);
 			if (Z_STRLEN_PP(search_entry) == 0) {
 				zend_hash_move_forward(Z_ARRVAL_P(search));
+				if (Z_TYPE_P(replace) == IS_ARRAY) {
+					zend_hash_move_forward(Z_ARRVAL_P(replace));
+				}
 				continue;
 			}
 

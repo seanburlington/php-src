@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.6 1999/05/21 07:52:12 sas Exp $
+dnl $Id: config.m4,v 1.7 1999/06/20 18:52:45 sas Exp $
 
 AC_MSG_CHECKING(for MySQL support)
 AC_ARG_WITH(mysql,
@@ -50,8 +50,8 @@ AC_ARG_WITH(mysql,
 		AC_DEFINE(HAVE_MYSQL)
 		AC_MSG_RESULT(yes)
 
-		EXTRA_LIBS="$EXTRA_LIBS $MYSQL_LFLAGS $MYSQL_LIBS"
-		INCLUDES="$INCLUDES $MYSQL_INCLUDE"
+		AC_ADD_LIBRARY_WITH_PATH(mysqlclient, $MYSQL_LIBDIR)
+        AC_ADD_INCLUDE($MYSQL_INCDIR)
 		PHP_EXTENSION(mysql)
 
 		dnl check for errmsg.h, which isn't installed by some versions of 3.21

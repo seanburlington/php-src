@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 1999/05/21 20:09:22 sas Exp $
+dnl $Id: config.m4,v 1.3 1999/06/20 18:52:41 sas Exp $
 dnl config.m4 for extension mhash
 dnl don't forget to call PHP_EXTENSION(mhash)
 
@@ -16,8 +16,8 @@ AC_ARG_WITH(mhash,
     if test "$MHASH_DIR" = ""; then
       AC_MSG_ERROR(Please reinstall libmhash - I cannot find mhash.h)
     fi
-    INCLUDES="$INCLUDES -I$MHASH_DIR/include"
-    EXTRA_LIBS="$EXTRA_LIBS -L$MHASH_DIR/lib -lmhash"
+    AC_ADD_INCLUDE($MHASH_DIR/include)
+    AC_ADD_LIBRARY_WITH_PATH(mhash, $MHASH_DIR/lib)
 
     AC_DEFINE(HAVE_LIBMHASH)
 

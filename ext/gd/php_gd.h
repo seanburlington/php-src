@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: php_gd.h,v 1.12 2000/06/25 01:44:15 jah Exp $ */
+/* $Id: php_gd.h,v 1.13 2000/06/25 02:55:31 sterling Exp $ */
 
 #ifndef _PHP_GD_H
 #define _PHP_GD_H
@@ -80,8 +80,10 @@ PHP_FUNCTION(imagearc);
 PHP_FUNCTION(imagechar);
 PHP_FUNCTION(imagecharup);
 PHP_FUNCTION(imagecolorallocate);
+PHP_FUNCTION(imagepalettecopy);
 PHP_FUNCTION(imagecolorat);
 PHP_FUNCTION(imagecolorclosest);
+PHP_FUNCTION(imagecolorclosesthwb);
 PHP_FUNCTION(imagecolordeallocate);
 PHP_FUNCTION(imagecolorresolve);
 PHP_FUNCTION(imagecolorexact);
@@ -90,6 +92,7 @@ PHP_FUNCTION(imagecolorstotal);
 PHP_FUNCTION(imagecolorsforindex);
 PHP_FUNCTION(imagecolortransparent);
 PHP_FUNCTION(imagecopy);
+PHP_FUNCTION(imagecopymerge);
 PHP_FUNCTION(imagecopyresized);
 PHP_FUNCTION(imagecreate);
 PHP_FUNCTION(imagecreatefromgif);

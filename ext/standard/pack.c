@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.48 2003/06/10 20:03:38 imajes Exp $ */
+/* $Id: pack.c,v 1.49 2003/08/11 23:16:53 iliaa Exp $ */
 
 #include "php.h"
 
@@ -120,7 +120,7 @@ PHP_FUNCTION(pack)
 		WRONG_PARAM_COUNT;
 	}
 
-	argv = emalloc(argc * sizeof(zval **));
+	argv = safe_emalloc(argc, sizeof(zval **), 0);
 
 	if (zend_get_parameters_array_ex(argc, argv) == FAILURE) {
 		efree(argv);
@@ -132,8 +132,8 @@ PHP_FUNCTION(pack)
 	formatlen = Z_STRLEN_PP(argv[0]);
 
 	/* We have a maximum of <formatlen> format codes to deal with */
-	formatcodes = emalloc(formatlen * sizeof(*formatcodes));
-	formatargs = emalloc(formatlen * sizeof(*formatargs));
+	formatcodes = safe_emalloc(formatlen, sizeof(*formatcodes), 0);
+	formatargs = safe_emalloc(formatlen, sizeof(*formatargs), 0);
 	currentarg = 1;
 
 	/* Preprocess format into formatcodes and formatargs */

@@ -15,7 +15,7 @@
    | Author: Hartmut Holzgraefe <hholzgra@php.net>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: levenshtein.c,v 1.30 2003/06/10 20:03:38 imajes Exp $ */
+/* $Id: levenshtein.c,v 1.31 2003/08/11 23:16:53 iliaa Exp $ */
 
 #include "php.h"
 #include <stdlib.h>
@@ -40,10 +40,10 @@ static int reference_levdist(const char *s1, int l1,
 	if((l1>LEVENSHTEIN_MAX_LENTH)||(l2>LEVENSHTEIN_MAX_LENTH))
 		return -1;
 
-	if(!(p1=emalloc((l2+1)*sizeof(int)))) {
+	if(!(p1=safe_emalloc((l2+1), sizeof(int), 0))) {
 		return -2;
 	}
-	if(!(p2=emalloc((l2+1)*sizeof(int)))) {
+	if(!(p2=safe_emalloc((l2+1), sizeof(int), 0))) {
 		free(p1);
 		return -2;
 	}

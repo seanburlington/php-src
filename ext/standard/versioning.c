@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: versioning.c,v 1.16 2003/08/05 12:34:31 sniper Exp $ */
+/* $Id: versioning.c,v 1.17 2003/08/11 23:16:54 iliaa Exp $ */
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -34,7 +34,7 @@ PHPAPI char *
 php_canonicalize_version(const char *version)
 {
     int len = strlen(version);
-    char *buf = emalloc(len * 2 + 1), *q, lp, lq;
+    char *buf = safe_emalloc(len, 2, 1), *q, lp, lq;
     const char *p;
 
     if (len == 0) {

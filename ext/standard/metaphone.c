@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: metaphone.c,v 1.25 2003/06/10 20:03:38 imajes Exp $ */
+/* $Id: metaphone.c,v 1.26 2003/08/11 23:16:53 iliaa Exp $ */
 
 /*
 	Based on CPANs "Text-Metaphone-1.96" by Michael G Schwern <schwern@pobox.com> 
@@ -183,10 +183,10 @@ static int metaphone(char *word, int word_len, int max_phonemes, char **phoned_w
 /*-- Allocate memory for our phoned_phrase --*/
 	if (max_phonemes == 0) {	/* Assume largest possible */
 		max_buffer_len = word_len;
-		*phoned_word = emalloc(sizeof(char) * word_len + 1);
+		*phoned_word = safe_emalloc(sizeof(char), word_len, 1);
 	} else {
 		max_buffer_len = max_phonemes;
-		*phoned_word = emalloc(sizeof(char) * max_phonemes + 1);
+		*phoned_word = safe_emalloc(sizeof(char), max_phonemes, 1);
 	}
 
 

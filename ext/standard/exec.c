@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.102 2003/08/07 15:51:05 zeev Exp $ */
+/* $Id: exec.c,v 1.103 2003/08/11 23:16:53 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -263,7 +263,7 @@ char *php_escape_shell_cmd(char *str) {
 	char *p = NULL;
 
 	l = strlen(str);
-	cmd = emalloc(2 * l + 1);
+	cmd = safe_emalloc(2, l, 1);
 	
 	for (x = 0, y = 0; x < l; x++) {
 		switch (str[x]) {
@@ -320,7 +320,7 @@ char *php_escape_shell_arg(char *str) {
 	y = 0;
 	l = strlen(str);
 	
-	cmd = emalloc(4 * l + 3); /* worst case */
+	cmd = safe_emalloc(4, l, 3); /* worst case */
 	
 	cmd[y++] = '\'';
 	

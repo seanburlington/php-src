@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.64 2003/05/21 12:02:55 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.65 2003/05/23 11:10:34 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -545,10 +545,10 @@ PHPAPI php_stream_filter *php_stream_filter_remove(php_stream *stream, php_strea
 static void php_stream_fill_read_buffer(php_stream *stream, size_t size TSRMLS_DC)
 {
 	/* allocate/fill the buffer */
-	
+	size_t justread = 0;
+
 	/* is there enough data in the buffer ? */
 	if (stream->writepos - stream->readpos < (off_t)size) {
-		size_t justread = 0;
 	
 		/* ignore eof here; the underlying state might have changed */
 		
@@ -583,13 +583,12 @@ static void php_stream_fill_read_buffer(php_stream *stream, size_t size TSRMLS_D
 			stream->writepos += justread;
 		}
 	}
-
 }
 
 PHPAPI size_t _php_stream_read(php_stream *stream, char *buf, size_t size TSRMLS_DC)
 {
 	size_t toread = 0, didread = 0;
-	
+
 	while (size > 0) {
 
 		/* take from the read buffer first.
@@ -1185,13 +1184,15 @@ PHPAPI size_t _php_stream_copy_to_mem(php_stream *src, char **buf, size_t maxlen
 	}
  
 	ptr = *buf = pemalloc_rel_orig(max_len, persistent);
- 
+
 	while((ret = php_stream_read(src, ptr, max_len - len)))	{
 		len += ret;
 		if (len + min_room >= max_len) {
 			*buf = perealloc_rel_orig(*buf, max_len + step, persistent);
 			max_len += step;
 			ptr = *buf + len;
+		} else {
+			ptr += ret;
 		}
 	}
 	if (len) {

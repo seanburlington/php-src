@@ -17,19 +17,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.45 2002/08/06 19:39:12 markonen Exp $ */
+/* $Id: iconv.c,v 1.46 2002/08/08 01:50:23 yohgaki Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
-
-#ifdef PHP_ATOM_INC
-#include "php_have_iconv.h"
-#include "php_have_libiconv.h"
-#include "php_iconv_supports_errno.h"
-#endif
 
 #if HAVE_ICONV
 

@@ -16,7 +16,7 @@
 // | Authors: Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.28 2003/09/15 20:17:34 cox Exp $
+// $Id: System.php,v 1.29 2003/09/16 16:49:26 cox Exp $
 //
 
 require_once 'PEAR.php';
@@ -48,7 +48,7 @@ $GLOBALS['_System_temp_files'] = array();
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.28 $
+* @version  $Revision: 1.29 $
 * @access   public
 * @see      http://pear.php.net/manual/
 */
@@ -131,7 +131,6 @@ class System
         if ($aktinst < $maxinst || $maxinst == 0) {
             foreach($list as $val) {
                 $path = $sPath . DIRECTORY_SEPARATOR . $val;
-                echo "p: $path\n";
                 if (is_dir($path)) {
                     $tmp = System::_dirToStruct($path, $maxinst, $aktinst+1);
                     $struct = array_merge_recursive($tmp, $struct);

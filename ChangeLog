@@ -1,3 +1,14 @@
+2005-01-12  Dmitry Stogov  <dmitry@zend.com>
+
+    * ZendEngine2/zend_execute.c
+      ZendEngine2/zend_execute.c
+      ZendEngine2/zend_vm_def.h
+      ZendEngine2/zend_vm_execute.h
+      ZendEngine2/zend_vm_opcodes.h
+      ZendEngine2/tests/bug31098.phpt
+      ZendEngine2/tests/bug31098.phpt:
+      Fixed bug #31098 (isset false positive)
+
 2005-01-11  Rasmus Lerdorf  <rasmus@lerdorf.com>
 
     * (PHP_4_3)
@@ -150,7 +161,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1862 2005/01/12 01:35:44 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1863 2005/01/13 01:35:36 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

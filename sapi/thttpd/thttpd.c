@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: thttpd.c,v 1.69 2002/09/23 00:49:12 sas Exp $ */
+/* $Id: thttpd.c,v 1.70 2002/10/25 01:10:50 sas Exp $ */
 
 #include "php.h"
 #include "SAPI.h"
@@ -449,7 +449,8 @@ static void thttpd_request_ctor(TSRMLS_D)
 	SG(request_info).request_method = httpd_method_str(TG(hc)->method);
 	SG(sapi_headers).http_response_code = 200;
 	SG(request_info).content_type = TG(hc)->contenttype;
-	SG(request_info).content_length = TG(hc)->contentlength;
+	SG(request_info).content_length = TG(hc)->contentlength == -1 ? 0
+		: TG(hc)->contentlength;
 	
 	php_handle_auth_data(TG(hc)->authorization TSRMLS_CC);
 }

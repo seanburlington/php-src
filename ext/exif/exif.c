@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.118.2.36 2005/03/17 17:21:02 iliaa Exp $ */
+/* $Id: exif.c,v 1.118.2.37 2005/03/22 22:07:03 edink Exp $ */
 
 /*  ToDos
  *
@@ -70,6 +70,9 @@
 
 /* needed for ssize_t definition */
 #include <sys/types.h>
+#if defined(PHP_WIN32) && !defined(ssize_t)
+typedef SSIZE_T ssize_t;
+#endif
 
 typedef unsigned char uchar;
 
@@ -104,7 +107,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.36 2005/03/17 17:21:02 iliaa Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.37 2005/03/22 22:07:03 edink Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */

@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php5as_scriptengine.h,v 1.4 2004/07/27 03:57:31 wez Exp $ */
+/* $Id: php5as_scriptengine.h,v 1.5 2004/07/27 22:36:56 wez Exp $ */
 
 #include <activscp.h>
 #include <objsafe.h>
@@ -26,8 +26,6 @@
 #else
 #define ACTIVEPHP_THREADING_MODE	COINIT_APARTMENTTHREADED
 #endif
-
-#define ACTIVEPHP_HAS_OWN_THREAD	1
 
 #define WM_ACTIVEPHP_SERIALIZE	WM_USER + 200
 
@@ -40,6 +38,7 @@ enum activephp_engine_func { /* if you change the order, change marshal.cpp too 
 	APHP_Close,
 	APHP_AddTypeLib,
 	APHP_AddScriptlet,
+	APHP_ParseProcedureText,
 	APHP__Max
 };
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.63 2001/05/20 23:00:44 sniper Exp $
+dnl $Id: config.m4,v 1.64 2001/05/21 19:28:22 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -180,6 +180,7 @@ AC_DEFUN(PHP_GD_CHECK_VERSION,[
   AC_CHECK_LIB(gd, gdImageStringFTEx,      [AC_DEFINE(HAVE_GD_STRINGFTEX,    1, [ ])])
   AC_CHECK_LIB(gd, gdImageColorClosestHWB, [AC_DEFINE(HAVE_COLORCLOSESTHWB,     1, [ ])])
   AC_CHECK_LIB(gd, gdImageColorResolve,    [AC_DEFINE(HAVE_GDIMAGECOLORRESOLVE, 1, [ ])])
+  AC_CHECK_LIB(gd, gdImageGifCtx,          [AC_DEFINE(HAVE_GD_GIF_CTX,  1, [ ])])
 ])
 
 

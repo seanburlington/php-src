@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.28 2002/11/06 10:08:38 helly Exp $
+dnl $Id: config.m4,v 1.29 2002/11/13 13:12:26 edink Exp $
 dnl
 
 AC_DEFUN(PHP_TEMP_LDFLAGS,[
@@ -174,7 +174,7 @@ AC_ARG_WITH(db3,
       AC_DEFINE_UNQUOTED(DB3_INCLUDE_FILE, "$DB3_EXTRA", [ ])
     fi
 
-    for LIB in db-3 db3 db; do
+    for LIB in db-3.1 db-3 db3 db; do
       PHP_TEMP_LDFLAGS(-L$THIS_PREFIX/lib,[
       AC_CHECK_LIB($LIB, db_create, [AC_DEFINE(DBA_DB3,1,[ ]) THIS_LIBS=$LIB])
       ])

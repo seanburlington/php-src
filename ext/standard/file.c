@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.378 2004/01/19 18:40:39 iliaa Exp $ */
+/* $Id: file.c,v 1.379 2004/01/25 06:09:36 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -52,8 +52,12 @@
 #include <sys/socket.h>
 #include "netware/param.h"
 #else
+#if HAVE_SYS_PARAM_H
 #include <sys/param.h>
+#endif
+#if HAVE_SYS_SELECT_H
 #include <sys/select.h>
+#endif
 #if defined(NETWARE) && defined(USE_WINSOCK)
 #include <novsock2.h>
 #else

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.78 2000/05/18 15:34:35 zeev Exp $ */
+/* $Id: file.c,v 1.79 2000/05/23 14:36:27 andi Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -231,7 +231,7 @@ static void _file_socket_dtor(int *sock)
 
 static void _file_upload_dtor(char *file)
 {
-	unlink(file);
+	V_UNLINK(file);
 }
 
 

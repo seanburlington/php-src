@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.21 2000/05/18 15:34:35 zeev Exp $ */
+/* $Id: link.c,v 1.22 2000/05/23 14:36:27 andi Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -181,7 +181,7 @@ PHP_FUNCTION(unlink)
 		RETURN_FALSE;
 	}
 
-	ret = unlink((*filename)->value.str.val);
+	ret = V_UNLINK((*filename)->value.str.val);
 	if (ret == -1) {
 		php_error(E_WARNING, "Unlink failed (%s)", strerror(errno));
 		RETURN_FALSE;

@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.68 2000/06/16 01:25:02 andi Exp $ */
+/* $Id: fopen_wrappers.c,v 1.69 2000/06/16 08:02:33 andi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -329,7 +329,7 @@ PHPAPI FILE *php_fopen_primary_script(void)
 		length = strlen(PG(doc_root));
 #ifdef PHP_WIN32
 		/* Check for absolute path. This should really use virtual cwd macros */
-		if (IS_SLASH(*PG(doc_root) || (length >= 3 && PG(doc_root)[1] == ':' && IS_SLASH(PG(doc_root)[2]))) {
+		if (IS_SLASH(*PG(doc_root)) || (length >= 3 && PG(doc_root)[1] == ':' && IS_SLASH(PG(doc_root)[2]))) {
 #else
 		if (IS_SLASH(*PG(doc_root))) {
 #endif

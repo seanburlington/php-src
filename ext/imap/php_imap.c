@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.142.2.14 2003/06/13 14:45:36 iliaa Exp $ */
+/* $Id: php_imap.c,v 1.142.2.15 2003/06/13 14:56:23 iliaa Exp $ */
 
 #define IMAP41
 
@@ -3998,6 +3998,8 @@ PHP_FUNCTION (imap_thread)
 }
 /* }}} */
 
+/* {{{ proto mixed imap_timeout(int timeout_type [, int timeout])
+   Set or fetch imap timeout */
 PHP_FUNCTION (imap_timeout)
 {
 	long ttype, timeout=-1;
@@ -4053,6 +4055,7 @@ PHP_FUNCTION (imap_timeout)
 		RETURN_FALSE;
 	}
 }
+/* }}} */
 
 /* {{{ Interfaces to C-client 
  */

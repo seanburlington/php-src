@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.28 2003/02/24 22:41:55 moriyoshi Exp $ */
+/* $Id: filters.c,v 1.29 2003/03/02 08:39:01 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1445,7 +1445,7 @@ static php_stream_filter_status_t strfilter_convert_filter(
 	char *pd;
 	size_t ocnt;
 
-	if (buckets_in->head == NULL && buckets_in->tail == NULL) {
+	if (flags != PSFS_FLAG_NORMAL) {
 		/* flush operation */
 
 		out_buf_size = 64;

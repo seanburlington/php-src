@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.385.2.1 2001/08/15 23:21:05 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.385.2.2 2001/10/10 22:23:16 ssb Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -623,8 +623,16 @@ function_entry basic_functions[] = {
 	PHP_FALIAS(sizeof,			count,				NULL)
 
 	/* functions from assert.c */
-	PHP_FE(assert,          NULL)
-	PHP_FE(assert_options,	NULL)
+	PHP_FE(assert,									NULL)
+	PHP_FE(assert_options,							NULL)
+
+    /* functions from versioning.c */
+    PHP_FE(version_compare,							NULL)
+    PHP_FE(version_lt,								NULL)
+    PHP_FE(version_le,								NULL)
+    PHP_FE(version_gt,								NULL)
+    PHP_FE(version_ge,								NULL)
+    PHP_FE(version_eq,								NULL)
 
 	{NULL, NULL, NULL}
 };

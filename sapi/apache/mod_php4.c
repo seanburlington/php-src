@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.157 2003/02/24 01:19:08 gschlossnagle Exp $ */
+/* $Id: mod_php4.c,v 1.158 2003/02/24 01:25:30 gschlossnagle Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -302,10 +302,10 @@ static void php_apache_request_shutdown(void *dummy)
 		php_request_shutdown(dummy);
 	}
 	SG(server_context) = NULL; 
-    /* 
-     * The server context (request) is NOT invalid by the time 
-     * run_cleanups() is called 
-     */
+	/* 
+	* The server context (request) is NOT invalid by the time 
+	* run_cleanups() is called 
+	*/
 }
 /* }}} */
 

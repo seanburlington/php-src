@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.153.2.12 2003/08/09 11:22:40 derick Exp $ */
+/* $Id: zlib.c,v 1.153.2.13 2003/08/11 01:57:10 sniper Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -330,7 +330,6 @@ PHP_FUNCTION(gzopen)
 {
 	pval **arg1, **arg2, **arg3;
 	php_stream *stream;
-	char *p;
 	int use_include_path = 0;
 	
 	switch(ZEND_NUM_ARGS()) {

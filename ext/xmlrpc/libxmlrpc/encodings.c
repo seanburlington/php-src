@@ -34,9 +34,13 @@
 #include "config.h"
 #endif
 
+#ifndef PHP_WIN32
 #include <php_config.h>
+#else
+#include <config.w32.h>
+#endif
 
-static const char rcsid[] = "#(@) $Id: encodings.c,v 1.3 2002/06/30 05:10:39 sniper Exp $";
+static const char rcsid[] = "#(@) $Id: encodings.c,v 1.4 2002/07/03 10:54:41 edink Exp $";
 
 #include <errno.h>
 

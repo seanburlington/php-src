@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config0.m4,v 1.2.4.1 2004/12/30 14:52:29 sniper Exp $
+dnl $Id: config0.m4,v 1.2.4.2 2005/01/01 14:35:29 wez Exp $
 dnl
 
 PHP_ARG_WITH(openssl, for OpenSSL support,
@@ -9,7 +9,7 @@ PHP_ARG_WITH(kerberos, for Kerberos support,
 [  --with-kerberos[=DIR]     OPENSSL: Include Kerberos support], no, no)
 
 if test "$PHP_OPENSSL" != "no"; then
-  PHP_NEW_EXTENSION(openssl, openssl.c, $ext_shared)
+  PHP_NEW_EXTENSION(openssl, openssl.c xp_ssl.c, $ext_shared)
   PHP_SUBST(OPENSSL_SHARED_LIBADD)
 
   if test "$PHP_KERBEROS" != "no"; then

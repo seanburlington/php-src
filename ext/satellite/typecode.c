@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: typecode.c,v 1.6 2001/09/26 08:35:43 jeroen Exp $
+ * $Id: typecode.c,v 1.7 2001/09/26 11:09:09 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -141,9 +141,9 @@ static CORBA_StructMemberSeq * orbit_create_member_sequence(IDL_tree member_list
 			char * p_name = IDL_IDENT(IDL_LIST(declaration).data).str;
 
 			p_members->_buffer[i].name = CORBA_string_dup(p_name);
-			Z_TYPE(p_members->_buffer[i]) = (CORBA_TypeCode)
+			p_members->_buffer[i].type = (CORBA_TypeCode)
 				CORBA_Object_duplicate((CORBA_Object)type_code, orbit_get_environment());
-			Z_TYPE(p_members->_buffer[i])_def = NULL; /* XXX */
+			p_members->_buffer[i].type_def = NULL; /* XXX */
 
 			i++;
 		} while ((declaration = IDL_LIST(declaration).next));

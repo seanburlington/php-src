@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: namedvalue_to_zval.c,v 1.6 2001/09/25 21:58:18 jeroen Exp $
+ * $Id: namedvalue_to_zval.c,v 1.7 2001/09/26 11:09:09 eriksson Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -153,7 +153,7 @@ static zend_bool satellite_any_to_zval_sequence(
 		/* add to hashtable */
 		INIT_PZVAL(p_destination_item);	/* testing! */
 		zend_hash_next_index_insert(
-			pDZ_ARRVAL_P(estination),
+			Z_ARRVAL_P(pDestination),
 			&p_destination_item,
 			sizeof(zval *),
 			NULL);

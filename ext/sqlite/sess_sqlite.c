@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sess_sqlite.c,v 1.6 2003/07/02 00:43:00 sterling Exp $ */
+/* $Id: sess_sqlite.c,v 1.7 2003/07/02 00:45:15 sterling Exp $ */
 
 #include "php.h"
 
@@ -88,7 +88,7 @@ PS_OPEN_FUNC(sqlite)
 	   unclear as to how to check for a table's existence in SQLite -- that would be better here. */
 	sqlite_exec(db, 
 	    "CREATE TABLE session_data ("
-		"	sess_id TEXT PRIMARY KEY," 
+	    "    sess_id TEXT PRIMARY KEY," 
 	    "    value TEXT, updated INTEGER "
 	    ")", NULL, NULL, NULL);
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: roxen.c,v 1.30 2000/05/18 15:34:43 zeev Exp $ */
+/* $Id: roxen.c,v 1.31 2000/06/05 19:51:22 neotron Exp $ */
 
 #include "php.h"
 #ifdef HAVE_ROXEN
@@ -25,7 +25,8 @@
 #include "php_ini.h"
 #include "php_globals.h"
 #include "SAPI.h"
-#include "main.h"
+/* Was using Pike's main.h */
+#include "../../main.h" 
 #include "ext/standard/info.h"
 
 #include "php_version.h"
@@ -447,7 +448,7 @@ static void php_info_roxen(ZEND_MODULE_INFO_FUNC_ARGS)
 {
   /*  char buf[512]; */
   php_info_print_table_start();
-  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.30 2000/05/18 15:34:43 zeev Exp $");
+  php_info_print_table_row(2, "SAPI module version", "$Id: roxen.c,v 1.31 2000/06/05 19:51:22 neotron Exp $");
   /*  php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
       php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
       php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -592,17 +593,16 @@ static int php_roxen_module_main(SLS_D)
 #endif
 #endif
 
-  /* Change virtual directory, if the feature is enabled */
 #ifdef VIRTUAL_DIR
+  /* Change virtual directory, if the feature is enabled */
   dir = malloc(len = strlen(THIS->filename));
   strcpy(dir, THIS->filename);
   while(--len >= 0 && dir[len] != '/')
     ;
-  /* VERY BAD, but should work */
   if(len > 0) {
     dir[len] = '\0';
-    V_CHDIR(dir);
   }
+  V_CHDIR(dir);
   free(dir);
 #endif
 

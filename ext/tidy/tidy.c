@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.18 2003/11/13 17:50:39 john Exp $ */
+/* $Id: tidy.c,v 1.19 2003/12/01 22:10:46 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -984,8 +984,9 @@ static void tidy_add_default_properities(PHPTidyObj *obj, tidy_obj_type type TSR
 			tidyNodeGetText(TG(tdoc)->doc, obj->node, &buf);
 			ADD_PROPERITY_STRING(obj->std.properties, value, buf.bp);
 			tidyBufFree(&buf);
-			
-			fprintf(stderr, "type: %d\n",tidyNodeGetType(obj->node)); 
+
+/* fprintf(stderr, "type: %d\n",tidyNodeGetType(obj->node)); */
+
 			ADD_PROPERITY_STRING(obj->std.properties, name, tidyNodeGetName(obj->node));
 			ADD_PROPERITY_LONG(obj->std.properties, type, tidyNodeGetType(obj->node));
 			switch(tidyNodeGetType(obj->node)) {

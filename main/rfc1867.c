@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.122.2.8 2002/12/31 16:26:24 sebastian Exp $ */
+/* $Id: rfc1867.c,v 1.122.2.9 2003/03/05 17:00:24 iliaa Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -857,7 +857,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler)
 
 			while (!cancel_upload && (blen = multipart_buffer_read(mbuff, buff, sizeof(buff) TSRMLS_CC)))
 			{
-				if (total_bytes > PG(upload_max_filesize)) {
+				if (PG(upload_max_filesize) > 0 && total_bytes > PG(upload_max_filesize)) {
 					sapi_module.sapi_error(E_WARNING, "upload_max_filesize of %ld bytes exceeded - file [%s=%s] not saved", PG(upload_max_filesize), param, filename);
 					cancel_upload = UPLOAD_ERROR_A;
 				} else if (max_file_size && (total_bytes > max_file_size)) {

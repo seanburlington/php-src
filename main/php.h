@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.121 2000/08/27 18:18:34 andi Exp $ */
+/* $Id: php.h,v 1.122 2000/08/27 18:27:37 andi Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -49,14 +49,6 @@ extern unsigned char first_arg_force_ref[];
 extern unsigned char first_arg_allow_ref[];
 extern unsigned char second_arg_force_ref[];
 extern unsigned char second_arg_allow_ref[];
-
-
-/* somebody stealing BOOL from windows.  pick something else!
-#ifndef BOOL
-#define BOOL MYBOOL
-#endif
-*/
-
 
 #ifdef PHP_WIN32
 #include "win95nt.h"
@@ -214,15 +206,9 @@ char *strerror(int);
 
 #define EXEC_INPUT_BUF 4096
 
-
-#define DONT_FREE 0
-#define DO_FREE 1
-
 #define PHP_MIME_TYPE "application/x-httpd-php"
 
 /* macros */
-#undef COPY_STRING
-#define COPY_STRING(yy)   (yy).value.str.val = (char *) estrndup((yy).value.str.val,(yy).value.str.len)
 #define STR_PRINT(str)	((str)?(str):"")
 
 #ifndef MAXPATHLEN
@@ -269,7 +255,6 @@ int Debug(char *format, ...);
 int cfgparse(void);
 
 #define php_error zend_error
-
 
 #define zenderror phperror
 #define zendlex phplex

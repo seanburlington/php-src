@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.3 2003/03/07 13:45:33 iliaa Exp $ */
+/* $Id: php_functions.c,v 1.4 2003/03/07 13:52:06 iliaa Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_smart_str.h"
@@ -469,9 +469,9 @@ static function_entry apache_functions[] = {
 };
 
 PHP_INI_BEGIN()
-	STD_PHP_INI_ENTRY("xbithack",		"0",	PHP_INI_ALL,	OnUpdateInt,	xbithack,	php_apache2_info_struct, php_apache2_info)
-	STD_PHP_INI_ENTRY("engine",		"1",	PHP_INI_ALL,	OnUpdateInt,	engine, 	php_apache2_info_struct, php_apache2_info)
-	STD_PHP_INI_ENTRY("last_modified",	"0",	PHP_INI_ALL,	OnUpdateInt,	last_modified,	php_apache2_info_struct, php_apache2_info)
+	STD_PHP_INI_ENTRY("xbithack",		"0",	PHP_INI_ALL,	OnUpdateLong,	xbithack,	php_apache2_info_struct, php_apache2_info)
+	STD_PHP_INI_ENTRY("engine",		"1",	PHP_INI_ALL,	OnUpdateLong,	engine, 	php_apache2_info_struct, php_apache2_info)
+	STD_PHP_INI_ENTRY("last_modified",	"0",	PHP_INI_ALL,	OnUpdateLong,	last_modified,	php_apache2_info_struct, php_apache2_info)
 PHP_INI_END()
 
 static PHP_MINIT_FUNCTION(apache)

@@ -17,7 +17,7 @@
    |          Jeroen van Wolffelaar <jeroen@php.net>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: rand_sys.c,v 1.1.2.2 2001/09/02 19:42:29 jeroen Exp $ */
+/* $Id: rand_sys.c,v 1.1.2.3 2001/09/02 19:43:49 jeroen Exp $ */
 
 #include <stdlib.h>
 

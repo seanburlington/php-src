@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.218.2.44 2003/12/13 11:36:14 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.218.2.45 2004/02/24 14:26:27 chregu Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -3981,6 +3981,9 @@ static xmlDocPtr domxml_document_parser(int mode, int loadtype, char *source, vo
 
 	ctxt->sax->error = domxml_error_ext;
 	ctxt->sax->warning = domxml_error_ext;
+#if LIBXML_VERSION >= 20600
+	ctxt->sax->cdataBlock = NULL;
+#endif
 	ctxt->vctxt.userData= (void *) &errorCtxt;
 	ctxt->vctxt.error    = (xmlValidityErrorFunc) domxml_error_validate;
 	ctxt->vctxt.warning  = (xmlValidityWarningFunc) domxml_error_validate;

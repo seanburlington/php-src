@@ -16,13 +16,19 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.2 2004/02/13 01:19:57 iliaa Exp $ */
+/* $Id: fileinfo.c,v 1.3 2004/04/21 22:49:35 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include <magic.h>
+// HOWMANY specifies the maximum offset libmagic will look at
+// this is currently hardcoded in the libmagic source but not exported
+#ifndef HOWMANY
+#define HOWMANY 65536
+#endif
+
 
 #include "php.h"
 #include "php_ini.h"
@@ -361,7 +367,7 @@ static void _php_finfo_get_type(INTERNAL_FUNCTION_PARAMETERS, int mode)
 			if (!stream) {
 				RETURN_FALSE;
 			}
-			buffer_len = php_stream_copy_to_mem(stream, &tmp, PHP_STREAM_COPY_ALL, 0);
+			buffer_len = php_stream_copy_to_mem(stream, &tmp, HOWMANY, 0); // 
 			php_stream_close(stream);
 
 			if (buffer_len == 0) {

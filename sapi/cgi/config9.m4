@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.3 2002/12/01 21:50:35 shane Exp $
+dnl $Id: config9.m4,v 1.4 2002/12/09 17:02:38 msopacua Exp $
 dnl
 
 AC_ARG_ENABLE(cgi,
@@ -86,7 +86,14 @@ if test "$PHP_SAPI" = "default"; then
     AC_MSG_RESULT(yes)
 
     PHP_ADD_MAKEFILE_FRAGMENT($abs_srcdir/sapi/cgi/Makefile.frag)
-    SAPI_CGI_PATH=sapi/cgi/php-cgi
+    case $host_alias in
+      *cygwin* )
+        SAPI_CGI_PATH=sapi/cgi/php-cgi.exe
+        ;;
+      * )
+        SAPI_CGI_PATH=sapi/cgi/php-cgi
+        ;;
+    esac
     PHP_SUBST(SAPI_CGI_PATH)
 
     PHP_TEST_WRITE_STDOUT

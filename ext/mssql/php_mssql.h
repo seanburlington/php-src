@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.23.4.8 2003/06/14 03:36:46 fmk Exp $ */
+/* $Id: php_mssql.h,v 1.23.4.9 2003/07/23 16:53:38 iliaa Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -59,6 +59,9 @@
 #define SQLIMAGE SYBIMAGE
 #define SQLBINARY SYBBINARY
 #define SQLVARBINARY SYBVARBINARY
+#ifdef SQLUNIQUE /* FreeTSD 0.61+ */
+#define SQLUNIQUE SYBUNIQUE
+#endif
 #define DBERRHANDLE(a, b) dberrhandle(b)
 #define DBMSGHANDLE(a, b) dbmsghandle(b)
 #define DBSETOPT(a, b, c) dbsetopt(a, b, c, -1)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.86.2.21 2003/07/03 16:47:10 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.86.2.22 2003/07/23 16:53:37 iliaa Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -800,6 +800,15 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 			Z_DVAL_P(result) = (double) floatcol8(offset);
 			Z_TYPE_P(result) = IS_DOUBLE;
 			break;
+#ifdef SQLUNIQUE
+		case SQLUNIQUE: {
+			char *data = charcol(offset);
+
+			/* uniqueidentifier is a 16-byte binary number */
+			ZVAL_STRINGL(result, data, 16, 1);
+			}
+			break;
+#endif
 		case SQLVARBINARY:
 		case SQLBINARY:
 		case SQLIMAGE: {
@@ -1470,6 +1479,11 @@ static char *php_mssql_get_field_name(int type)
 		case SQLIMAGE:
 			return "image";
 			break;
+#ifdef SQLUNIQUE
+		case SQLUNIQUE:
+			return "uniqueidentifier";
+			break;
+#endif
 		default:
 			return "unknown";
 			break;

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.115 2004/08/10 16:11:41 dmitry Exp $ */
+/* $Id: soap.c,v 1.116 2004/08/26 12:24:54 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1126,7 +1126,9 @@ PHP_METHOD(SoapServer, getFunctions)
 		HashPosition pos;
 		zend_hash_internal_pointer_reset_ex(ft, &pos);
 		while (zend_hash_get_current_data_ex(ft, (void **)&f, &pos) != FAILURE) {
-			add_next_index_string(return_value, f->common.function_name, 1);
+			if ((service->type != SOAP_CLASS) || (f->common.fn_flags & ZEND_ACC_PUBLIC)) {
+				add_next_index_string(return_value, f->common.function_name, 1);
+			}
 			zend_hash_move_forward_ex(ft, &pos);
 		}
 	}

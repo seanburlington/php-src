@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_packet_soap.c,v 1.36 2004/05/21 14:50:19 dmitry Exp $ */
+/* $Id: php_packet_soap.c,v 1.37 2004/08/26 12:24:54 dmitry Exp $ */
 
 #include "php_soap.h"
 
@@ -250,8 +250,12 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 				while (zend_hash_get_current_data(fn->responseParameters, (void **)&h_param) == SUCCESS) {
 					param = (*h_param);
 					if (fnb->style == SOAP_DOCUMENT) {
-						name = param->encode->details.type_str;
-						ns = param->encode->details.ns;
+						if (param->element) {
+							name = param->encode->details.type_str;
+							ns = param->encode->details.ns;
+						} else {
+							name = param->paramName;
+						}
 					} else {
 						name = fn->responseName;
 						/* ns = ? */

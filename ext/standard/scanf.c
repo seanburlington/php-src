@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.4 2000/10/30 16:44:01 stas Exp $ */
+/* $Id: scanf.c,v 1.5 2001/01/31 21:53:30 andi Exp $ */
 
 /*
    scanf.c --
@@ -663,7 +663,7 @@ PHPAPI int php_sscanf_internal(	char *string,char *format,
             return FAILURE;
         }
         for (i = 0; i < totalVars; i++) {
-           	if (add_next_index_unset(*return_value) == FAILURE) {
+           	if (add_next_index_null(*return_value) == FAILURE) {
 				scan_set_error_return(0, return_value);
 				return FAILURE;
 	   	}

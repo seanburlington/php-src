@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.22 2002/06/07 08:45:00 cox Exp $
+// $Id: Registry.php,v 1.23 2002/06/07 10:20:41 cox Exp $
 
 require_once 'PEAR/Command/Common.php';
 require_once 'PEAR/Registry.php';
@@ -263,18 +263,18 @@ installed package.'
                             } else {
                                 $rel = $d['rel'];
                             }
-
                             if (isset($this->_deps_type_trans[$d['type']])) {
                                 $type = ucfirst($this->_deps_type_trans[$d['type']]);
                             } else {
                                 $type = $d['type'];
                             }
-
                             if (isset($d['name'])) {
                                 $name = $d['name'] . ' ';
+                            } else {
+                                $name = '';
                             }
                             if (isset($d['version'])) {
-                                $version = $d['version'];
+                                $version = $d['version'] . ' ';
                             } else {
                                 $version = '';
                             }

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.4 2003/06/25 00:17:41 sterling Exp $
+dnl $Id: config.m4,v 1.5 2003/06/25 15:31:59 sterling Exp $
 dnl
 
 AC_DEFUN(PHP_DOM_CHECK_VERSION,[
@@ -28,14 +28,14 @@ if test -z "$PHP_ZLIB_DIR"; then
   [  --with-zlib-dir[=DIR]     DOM: Set the path to libz install prefix.], no, no)
 fi
 
-if test "$PHP_DOM5" != "no"; then
+if test "$PHP_DOM" != "no"; then
 
   DOM_DIR_ADD=""
-  if test -r $PHP_DOM5/include/libxml2/libxml/tree.h; then
-    DOM_DIR=$PHP_DOM5
+  if test -r $PHP_DOM/include/libxml2/libxml/tree.h; then
+    DOM_DIR=$PHP_DOM
     DOM_DIR_ADD="/libxml2"
-  elif test -r $PHP_DOM5/include/libxml/tree.h; then
-    DOM_DIR=$PHP_DOM5
+  elif test -r $PHP_DOM/include/libxml/tree.h; then
+    DOM_DIR=$PHP_DOM
   else
     for i in /usr/local /usr; do
       test -r $i/include/libxml/tree.h && DOM_DIR=$i

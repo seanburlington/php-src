@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.h,v 1.25 2003/09/14 09:12:54 helly Exp $ */
+/* $Id: snprintf.h,v 1.26 2003/09/14 09:50:35 helly Exp $ */
 
 /*
 
@@ -95,7 +95,8 @@ typedef enum {
 	LM_LONG_LONG,
 #endif
 	LM_SIZE_T,
-	LM_LONG
+	LM_LONG,
+	LM_LONG_DOUBLE
 } length_modifier_e;
 
 extern char * ap_php_cvt(double arg, int ndigits, int *decpt, int *sign, int eflag, char *buf);

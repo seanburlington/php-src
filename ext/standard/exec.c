@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.84.2.8 2003/04/16 22:57:15 moriyoshi Exp $ */
+/* $Id: exec.c,v 1.84.2.9 2003/07/13 19:46:39 moriyoshi Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -690,7 +690,7 @@ PHP_FUNCTION(proc_open)
 	pid_t child;
 #endif
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "saz/", &command,
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "saz", &command,
 				&command_len, &descriptorspec, &pipes) == FAILURE) {
 		RETURN_FALSE;
 	}
@@ -941,6 +941,10 @@ PHP_FUNCTION(proc_open)
 	/* we forked/spawned and this is the parent */
 
 	efree(command);
+
+	if (pipes != NULL) {
+		zval_dtor(pipes);
+	}
 	array_init(pipes);
 
 	/* clean up all the child ends and then open streams on the parent

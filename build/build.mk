@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build.mk,v 1.18 2002/10/21 15:11:19 hholzgra Exp $ 
+# $Id: build.mk,v 1.19 2003/05/02 03:14:00 sterling Exp $ 
 #
 #
 # Makefile to generate build tools
@@ -36,7 +36,7 @@ generated_lists:
 	@echo makefile_am_files = $(ZENDDIR)/Makefile.am \
 		TSRM/Makefile.am > $@
 	@echo config_h_files = $(ZENDDIR)/acconfig.h TSRM/acconfig.h >> $@
-	@echo config_m4_files = $(ZENDDIR)/Zend.m4 TSRM/tsrm.m4 TSRM/threads.m4 \
+	@echo config_m4_files = $(ZENDDIR)/Zend.m4 TSRM/tsrm.m4 TSRM/threads.m4 bundle/*/config*.m4 \
 		$(ZENDDIR)/acinclude.m4 ext/*/config*.m4 sapi/*/config.m4 >> $@
 
 $(STAMP): build/buildcheck.sh

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.443 2003/04/13 20:09:32 sas Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.444 2003/05/02 03:14:00 sterling Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -777,8 +777,15 @@ AC_ARG_ENABLE(all,
   PHP_ENABLE_ALL=$enableval
 ])
 
+AC_ARG_ENABLE(bundle-all,
+[  --disable-bundle-all    Disable all bundled libraries by default.
+], [
+  PHP_BUNDLE_ALL=$enableval
+])
+
 # reading config stubs
 esyscmd(./build/config-stubs ext)
+esyscmd(./build/config-stubs bundle)
 
 
 dnl Other settings.

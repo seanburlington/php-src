@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_ct.c,v 1.27 2000/07/24 19:12:32 joey Exp $ */
+/* $Id: php_sybase_ct.c,v 1.28 2000/09/10 05:13:56 joey Exp $ */
 
 
 #include "php.h"
@@ -71,12 +71,12 @@ zend_module_entry sybase_module_entry = {
 	"sybase_ct", sybase_functions, PHP_MINIT(sybase), PHP_MSHUTDOWN(sybase), PHP_RINIT(sybase), PHP_RSHUTDOWN(sybase), PHP_MINFO(sybase), STANDARD_MODULE_PROPERTIES
 };
 
+ZEND_DECLARE_MODULE_GLOBALS(sybase)
+static CS_CONTEXT *context;
+
 #ifdef COMPILE_DL_SYBASE_CT
 ZEND_GET_MODULE(sybase)
 #endif
-
-php_sybase_globals sybase_globals;
-static CS_CONTEXT *context;
 
 #define CHECK_LINK(link) { if (link==-1) { php_error(E_WARNING,"Sybase:  A link to the server could not be established"); RETURN_FALSE; } }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sybase_ct.h,v 1.6 2000/07/24 01:39:50 david Exp $ */
+/* $Id: php_sybase_ct.h,v 1.7 2000/09/10 05:13:56 joey Exp $ */
 
 #ifndef PHP_SYBASE_CT_H
 #define PHP_SYBASE_CT_H
@@ -57,7 +57,7 @@ PHP_FUNCTION(sybase_fetch_field);
 
 #include <ctpublic.h>
 
-typedef struct {
+ZEND_BEGIN_MODULE_GLOBALS(sybase)
 	long default_link;
 	long num_links,num_persistent;
 	long max_links,max_persistent;
@@ -68,7 +68,7 @@ typedef struct {
 	int le_link,le_plink,le_result;
 	long min_server_severity, min_client_severity;
 	long cfg_min_server_severity, cfg_min_client_severity;
-} php_sybase_globals;
+ZEND_END_MODULE_GLOBALS(sybase)
 
 typedef struct {
 	CS_CONNECTION *connection;

@@ -16,14 +16,14 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql_int.h,v 1.1 2004/05/18 18:01:52 gschlossnagle Exp $ */
+/* $Id: php_pdo_mysql_int.h,v 1.2 2004/05/18 19:06:47 wez Exp $ */
 
 #ifndef PHP_PDO_MYSQL_INT_H
 #define PHP_PDO_MYSQL_INT_H
 
 #include <mysql.h>
 
-/* stuff we use in an OCI database handle */
+/* stuff we use in a mySQL database handle */
 typedef struct {
 	MYSQL 		*server;
 	unsigned int	last_err;

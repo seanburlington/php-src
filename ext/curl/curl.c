@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.33 2000/12/22 12:57:05 zeev Exp $ */
+/* $Id: curl.c,v 1.34 2001/01/03 16:07:55 sniper Exp $ */
 
 
 #include "php.h"
@@ -649,7 +649,7 @@ PHP_FUNCTION(curl_exec)
 			memcpy(ret_data + pos, buf, b);
 			pos += b;
 		}
-		ret_data[stat_sb.st_size - 1] = '\0';
+		ret_data[stat_sb.st_size] = '\0';
 		
 		if (is_temp_file)
 			fclose(fp);

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.12 2003/01/15 07:57:51 dickmeiss Exp $
+dnl $Id: config.m4,v 1.13 2003/02/12 03:05:27 sniper Exp $
 dnl
 
 PHP_ARG_WITH(yaz,for YAZ support,
@@ -40,12 +40,13 @@ if test "$PHP_YAZ" != "no"; then
         ;;
        -l*)
          lib=`echo $c|cut -c 3-`
-	 PHP_ADD_LIBRARY($lib,YAZ_SHARED_LIBADD)
+         PHP_ADD_LIBRARY($lib,,YAZ_SHARED_LIBADD)
         ;;
       esac
     done
     PHP_EVAL_INCLINE($YAZINC)
     PHP_NEW_EXTENSION(yaz, php_yaz.c, $ext_shared)
+    PHP_SUBST(YAZ_SHARED_LIBADD)
   else
     AC_MSG_ERROR([YAZ not found (missing $yazconfig)])
   fi

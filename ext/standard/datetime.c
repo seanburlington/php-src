@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.122 2004/07/28 01:44:39 iliaa Exp $ */
+/* $Id: datetime.c,v 1.123 2004/09/25 15:26:55 hyanantha Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -52,7 +52,7 @@ char *day_short_names[] = {
 };
 
 #if !defined(HAVE_TM_ZONE) && !defined(_TIMEZONE) && !defined(HAVE_DECLARED_TIMEZONE)
-#if defined(NETWARE) && defined(NEW_LIBC)
+#ifdef NETWARE
 #define timezone    _timezone   /* timezone is called '_timezone' in new version of LibC */
 #endif
 extern time_t timezone;

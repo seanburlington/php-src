@@ -1,9 +1,9 @@
-dnl $Id: config.m4,v 1.7 2000/11/12 05:59:34 hirokawa Exp $
+dnl $Id: config.m4,v 1.8 2000/11/12 12:01:05 sas Exp $
 
 PHP_ARG_WITH(fdftk, for fdftk support,
 [  --with-fdftk[=DIR]      Include fdftk support])
 
-if test "PHP_FDFTK" != "no"; then
+if test "$PHP_FDFTK" != "no"; then
   if test -r $PHP_FDFTK/include/FdfTk.h; then
     FDFTK_DIR=$PHP_FDFTK
   else

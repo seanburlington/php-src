@@ -3,7 +3,7 @@ dnl +---------------------------------------------------------------------------
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
 dnl |  backend the user chooses, this script performs the magic                    |
 dnl +------------------------------------------------------------------------------+
-dnl   $Id: config.m4,v 1.1 2001/04/26 00:13:25 sterling Exp $
+dnl   $Id: config.m4,v 1.2 2001/05/01 03:26:03 sterling Exp $
 
 PHP_ARG_ENABLE(xslt, whether to enable xslt support,
 [  --enable-xslt           Enable xslt support])
@@ -72,6 +72,23 @@ if test "$PHP_XSLT" != "no"; then
 			PHP_ADD_LIBRARY(xmltok)
 		fi
 
+		found_iconv=no
+		AC_CHECK_LIB(c, iconv_open, found_iconv=yes)
+		if test "$found_iconv" = "no"; then
+			if test "$PHP_ICONV" = "no"; then
+				for i in /usr /usr/local; do
+					if test -f $i/lib/libconv.a -o -f $i/lib/libiconv.so; then
+						PHP_ADD_LIBRARY_WITH_PATH(iconv, $i/lib)
+						found_iconv=yes
+					fi
+				done
+			fi
+		fi
+
+		if test "$found_iconv" = "no"; then
+			AC_MSG_ERROR(iconv not found, in order to build sablotron you need the iconv library)
+		fi
+ 
 		AC_DEFINE(HAVE_SABLOT, 1, [ ])
 		AC_CHECK_LIB(sablot, SablotSetEncoding, AC_DEFINE(HAVE_SABLOT_SET_ENCODING, 1, [ ]))
 	fi

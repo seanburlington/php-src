@@ -32,10 +32,12 @@
 
 #if defined(__GNUC__)
 #  define UNUSED __attribute__((__unused__))
+#else
+#  define UNUSED
 #endif
 
 static char const *version UNUSED =
-    "$Id: strnatcmp.c,v 1.2 2000/04/13 13:04:02 thies Exp $";
+    "$Id: strnatcmp.c,v 1.3 2000/04/13 16:08:49 zeev Exp $";
 
 PHPAPI int strnatcmp_ex(char const *a, size_t a_len, char const *b, size_t b_len, int fold_case)
 {

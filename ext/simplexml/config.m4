@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.4 2003/06/25 21:46:31 sniper Exp $
+dnl $Id: config.m4,v 1.5 2003/06/25 21:54:01 sterling Exp $
 dnl config.m4 for extension simplexml
 
 PHP_ARG_WITH(simplexml, for simplexml support,
-[  --with-simplexml       Include simplexml support])
+[  --with-simplexml       Include simplexml support], yes)
 
 if test "$PHP_SIMPLEXML" != "no"; then
 

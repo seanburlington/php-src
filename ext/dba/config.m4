@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.29.2.14 2003/04/01 10:16:50 sas Exp $
+dnl $Id: config.m4,v 1.29.2.15 2003/04/13 20:16:14 helly Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -320,8 +320,10 @@ AC_ARG_WITH(dbm,
             fi
             AC_DEFINE(DBA_DBM,1,[ ]) 
             THIS_LIBS=$LIB
-            break
           ])
+          if test -n "$THIS_LIBS"; then
+            break
+          fi
         ])
       done
     fi

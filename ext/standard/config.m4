@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.8 1999/10/20 16:17:30 thies Exp $ -*- sh -*-
+dnl $Id: config.m4,v 1.9 1999/11/12 20:56:29 sas Exp $ -*- sh -*-
 
 divert(1)
 
@@ -123,6 +123,18 @@ AC_CHECK_FUNCS(getwd)
 
 divert(3)
 
+AC_ARG_WITH(system-regex,
+[  --with-system-regex     Do not use the bundled regex library],
+[
+    if test "$withval" = "no"; then
+      HSREGEX=yes
+    else
+	  HSREGEX=no
+	fi
+],[
+    HSREGEX=yes
+])
+	
 AC_CRYPT_CAP
 
 PHP_EXTENSION(standard)

@@ -31,10 +31,16 @@
 */
 
 
-static const char rcsid[] = "#(@) $Id: encodings.c,v 1.1 2001/09/06 04:13:29 danda Exp $";
+static const char rcsid[] = "#(@) $Id: encodings.c,v 1.2 2002/03/26 00:14:26 sniper Exp $";
 
 #include <errno.h>
+
+#ifdef HAVE_GICONV_H
+#include <giconv.h>
+#else
 #include <iconv.h>
+#endif
+
 #include "encodings.h"
 
 static char* convert(const char* src, int src_len, int *new_len, const char* from_enc, const char* to_enc) {

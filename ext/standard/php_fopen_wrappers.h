@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_fopen_wrappers.h,v 1.18 2003/06/10 20:03:38 imajes Exp $ */
+/* $Id: php_fopen_wrappers.h,v 1.19 2003/10/19 20:04:32 shane Exp $ */
 
 #ifndef PHP_FOPEN_WRAPPERS_H
 #define PHP_FOPEN_WRAPPERS_H
@@ -28,5 +28,6 @@ php_stream *php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, cha
 extern PHPAPI php_stream_wrapper php_stream_http_wrapper;
 extern PHPAPI php_stream_wrapper php_stream_ftp_wrapper;
 extern php_stream_wrapper php_stream_php_wrapper;
+extern php_stream_wrapper php_plain_files_wrapper;
 
 #endif

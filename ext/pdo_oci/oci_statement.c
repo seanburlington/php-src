@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_statement.c,v 1.12 2005/02/07 01:17:24 wez Exp $ */
+/* $Id: oci_statement.c,v 1.13 2005/02/14 13:31:34 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -79,6 +79,11 @@ static int oci_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
 		zend_hash_destroy(BP);
 		FREE_HASHTABLE(stmt->bound_params);
 		stmt->bound_params = NULL;
+	}
+	
+	if (S->einfo.errmsg) {
+		efree(S->einfo.errmsg);
+		S->einfo.errmsg = NULL;
 	}
 	
 	if (S->cols) {

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.19 2005/02/13 00:57:48 tony2001 Exp $ */
+/* $Id: oci_driver.c,v 1.20 2005/02/14 13:31:34 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -62,6 +62,11 @@ ub4 _oci_error(OCIError *err, pdo_dbh_t *dbh, pdo_stmt_t *stmt, char *what, swor
 	pdo_error_type *pdo_err = &dbh->error_code;
 	
 	einfo = &H->einfo;
+
+	if (einfo->errmsg) {
+		pefree(einfo->errmsg, dbh->is_persistent);
+		einfo->errmsg = NULL;
+	}
 
 	if (stmt) {
 		S = (pdo_oci_stmt*)stmt->driver_data;
@@ -184,7 +189,12 @@ static int oci_handle_closer(pdo_dbh_t *dbh TSRMLS_DC) /* {{{ */
 		OCIHandleFree(H->env, OCI_HTYPE_ENV);
 		H->env = NULL;
 	}
-
+	
+	if (H->einfo.errmsg) {
+		pefree(H->einfo.errmsg, dbh->is_persistent);
+		H->einfo.errmsg = NULL;
+	}
+ 
 	pefree(H, dbh->is_persistent);
 
 	return 0;

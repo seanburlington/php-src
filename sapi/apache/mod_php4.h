@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.h,v 1.13 2001/07/28 11:36:30 zeev Exp $ */
+/* $Id: mod_php4.h,v 1.14 2001/08/31 22:03:24 sniper Exp $ */
 
 #ifndef MOD_PHP4_H
 #define MOD_PHP4_H
@@ -27,8 +27,8 @@
 #endif
 
 typedef struct {
-    long engine;
-    long last_modified;
+	long engine;
+	long last_modified;
 	long xbithack;
 	long terminate_child;
 	zend_bool in_request;

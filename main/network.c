@@ -15,7 +15,7 @@
    | Authors: Stig Venaas <venaas@uninett.no>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.27 2002/01/21 07:54:56 derick Exp $ */
+/* $Id: network.c,v 1.28 2002/02/10 12:35:29 venaas Exp $ */
 
 #include "php.h"
 
@@ -382,6 +382,28 @@ void php_any_addr(int family, php_sockaddr_storage *addr, unsigned short port)
 		sin->sin_addr.s_addr = INADDR_ANY;
 		break;
 	}
+	}
+}
+/* }}} */
+
+/* {{{ php_sockaddr_size
+ * Returns the size of struct sockaddr_xx for the family
+ */
+int php_sockaddr_size(php_sockaddr_storage *addr)
+{
+	switch (((struct sockaddr *)addr)->sa_family) {
+	case AF_INET:
+		return sizeof(struct sockaddr_in);
+#ifdef AF_INET6
+	case AF_INET6:
+		return sizeof(struct sockaddr_in6);
+#endif
+#ifdef AF_UNIX
+	case AF_UNIX:
+		return sizeof(struct sockaddr_un);
+#endif
+	default:
+		return 0;
 	}
 }
 /* }}} */

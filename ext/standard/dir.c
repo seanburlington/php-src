@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.51 2000/12/07 12:09:37 sas Exp $ */
+/* $Id: dir.c,v 1.52 2000/12/16 20:52:43 andi Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -259,7 +259,7 @@ PHP_FUNCTION(getcwd)
 	}
 
 #if HAVE_GETCWD
-	ret = V_GETCWD(path,MAXPATHLEN-1);
+	ret = V_GETCWD(path, MAXPATHLEN);
 #elif HAVE_GETWD
 	ret = V_GETWD(path);
 /*

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.19 2003/11/22 21:20:07 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.20 2003/11/23 07:50:04 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -41,6 +41,10 @@ PHP_FUNCTION(mysqli_connect)
 	unsigned int 		hostname_len, username_len, passwd_len, dbname_len, socket_len;
 	unsigned int 		port=0;
 	struct timeval		starttime;
+
+	if (getThis() && !ZEND_NUM_ARGS()) {
+		RETURN_NULL();
+	}
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|ssssls", &hostname, &hostname_len, &username, &username_len, 
 		&passwd, &passwd_len, &dbname, &dbname_len, &port, &socket, &socket_len) == FAILURE) {

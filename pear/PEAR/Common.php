@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.95 2003/08/04 10:32:11 cox Exp $
+// $Id: Common.php,v 1.96 2003/08/04 13:31:35 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -693,6 +693,9 @@ class PEAR_Common extends PEAR
         }
         $tmpdir = System::mkTemp('-d pear');
         $this->addTempFile($tmpdir);
+        if (!is_array($xml)) {
+            $xml = array($xml);
+        }
         if (!$xml || !$tar->extractList($xml, $tmpdir)) {
             return $this->raiseError('could not extract the package.xml file');
         }

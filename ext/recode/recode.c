@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.27 2002/04/24 12:45:55 sniper Exp $ */
+/* $Id: recode.c,v 1.28 2002/04/29 15:40:16 sniper Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -30,8 +30,10 @@
 #if HAVE_LIBRECODE
 
 /* For recode 3.5 */
+#if HAVE_BROKEN_RECODE
 extern char *program_name;
 char *program_name = "php";
+#endif
 
 #ifdef HAVE_STDBOOL_H
 # include <stdbool.h>
@@ -117,7 +119,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.27 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.28 $");
 	php_info_print_table_end();
 }
 

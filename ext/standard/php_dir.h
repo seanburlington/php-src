@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_dir.h,v 1.12 2001/02/14 10:48:48 derick Exp $ */
+/* $Id: php_dir.h,v 1.13 2001/02/15 00:43:44 derick Exp $ */
 
 #ifndef PHP_DIR_H
 #define PHP_DIR_H
@@ -28,7 +28,9 @@ PHP_RINIT_FUNCTION(dir);
 PHP_FUNCTION(opendir);
 PHP_FUNCTION(closedir);
 PHP_FUNCTION(chdir);
+#if !defined(ZEND_WIN32)&&!defined(ZTS)
 PHP_FUNCTION(chroot);
+#endif
 PHP_FUNCTION(getcwd);
 PHP_FUNCTION(rewinddir);
 PHP_NAMED_FUNCTION(php_if_readdir);

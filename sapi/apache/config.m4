@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.70 2003/03/30 18:36:04 sas Exp $
+dnl $Id: config.m4,v 1.71 2003/05/28 14:11:21 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 1.x module support via DSO through APXS)
@@ -26,7 +26,7 @@ AC_ARG_WITH(apxs,
     AC_MSG_RESULT([2.  Apache was not compiled with DSO support (--enable-module=so);])
     AC_MSG_RESULT([3.  'apxs' is not in your path.  Try to use --with-apxs=/path/to/apxs])
     AC_MSG_RESULT([The output of $APXS follows])
-    $APXS
+    $APXS -q CFLAGS
     AC_MSG_ERROR([Aborting]) 
   fi 
 

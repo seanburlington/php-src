@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: safe_mode.c,v 1.25 2001/01/09 11:58:57 thies Exp $ */
+/* $Id: safe_mode.c,v 1.26 2001/02/12 15:47:38 andi Exp $ */
 
 #include "php.h"
 
@@ -124,7 +124,7 @@ PHPAPI int php_checkuid(const char *filename, char *fopen_mode, int mode)
 		SLS_FETCH();
 
 		if (SG(rfc1867_uploaded_files)) {
-			if (zend_hash_exists(SG(rfc1867_uploaded_files),filename,strlen(filename)+1)) {
+			if (zend_hash_exists(SG(rfc1867_uploaded_files), (char *) filename, strlen(filename)+1)) {
 				return 1;
 			}
 		}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.65 2000/09/09 11:41:14 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.66 2000/09/19 17:32:27 sas Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -28,6 +28,7 @@
 
 #ifdef TRANS_SID
 #  include "url_scanner.h"
+#  include "url_scanner_ex.h"
 #endif
 
 extern zend_module_entry basic_functions_module;
@@ -177,6 +178,8 @@ typedef struct {
 #ifdef TRANS_SID
 	/* url_scanner.c */
 	url_adapt_state_t url_adapt_state; 
+	/* url_scanner_ex.re */
+	url_adapt_state_ex_t url_adapt_state_ex; 
 #endif
 } php_basic_globals;
 

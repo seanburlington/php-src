@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.203 2002/07/15 10:04:01 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.204 2002/07/17 04:58:58 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -1991,6 +1991,10 @@ PHP_FUNCTION(pg_lo_import)
 	}
 	
 	if (PG(safe_mode) &&(!php_checkuid(file_in, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+		RETURN_FALSE;
+	}
+	
+	if (php_check_open_basedir(file_in TSRMLS_CC)) {
 		RETURN_FALSE;
 	}
 

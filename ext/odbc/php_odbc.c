@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.143.2.9 2003/05/02 00:40:35 sniper Exp $ */
+/* $Id: php_odbc.c,v 1.143.2.10 2003/05/29 12:34:38 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2113,7 +2113,7 @@ int odbc_sqlconnect(odbc_connection **conn, char *db, char *uid, char *pwd, int 
  * #ifdef HAVE_EMPRESS */
 	{
 		int     direct = 0;
-		char    dsnbuf[300];
+		char    dsnbuf[1024];
 		short   dsnbuflen;
 		char    *ldb = 0;
 		int		ldb_len = 0;
@@ -2131,7 +2131,7 @@ int odbc_sqlconnect(odbc_connection **conn, char *db, char *uid, char *pwd, int 
 		}
 
 		if (direct)
-			rc = SQLDriverConnect((*conn)->hdbc, NULL, ldb, strlen(ldb), dsnbuf, 300,
+			rc = SQLDriverConnect((*conn)->hdbc, NULL, ldb, strlen(ldb), dsnbuf, sizeof(dsnbuf),
 									&dsnbuflen, SQL_DRIVER_NOPROMPT);
 		else
 			rc = SQLConnect((*conn)->hdbc, db, SQL_NTS, uid, SQL_NTS, pwd, SQL_NTS);

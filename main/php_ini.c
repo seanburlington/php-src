@@ -16,6 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
+/* $Id: php_ini.c,v 1.80 2002/03/05 00:21:28 fmk Exp $ */
 
 #include "php.h"
 #ifndef PHP_WIN32
@@ -28,6 +29,7 @@
 #include "zend_extensions.h"
 #include "zend_highlight.h"
 #include "SAPI.h"
+#include "php_main.h"
 
 typedef struct _php_extension_lists {
 	zend_llist engine;

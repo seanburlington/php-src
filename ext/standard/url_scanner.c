@@ -12,10 +12,10 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Hartmut Holzgraefe <hartmut@six.de>                          |
+   | Author: Hartmut Holzgraefe <hholzgra@php.net>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.c,v 1.38.2.1 2002/12/31 16:35:35 sebastian Exp $ */
+/* $Id: url_scanner.c,v 1.38.2.2 2003/03/10 23:09:38 sniper Exp $ */
 
 #include "php.h"
 
@@ -88,7 +88,7 @@ static char *url_attr_addon(const char *tag,const char *attr,const char *val,con
 
 /* {{{ url_adapt_ext
  */
-char *url_adapt_ext(const char *src, size_t srclen, const char *name, const char *val, size_t *newlen)
+char *url_adapt_ext(const char *src, uint srclen, const char *name, const char *val, size_t *newlen)
 {
 	char buf[1024];
 

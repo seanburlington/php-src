@@ -1,3 +1,20 @@
+2004-08-06  Sara Golemon  <php@alphaweb.net>
+
+    * ext/standard/dns.c:
+      Add A6 support, fix IPv6 address parsing, and improve define compatability
+
+    * ext/simplexml/simplexml.c:
+      ZTS Fix
+
+2004-08-06  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * (PHP_5_0)
+      ext/standard/streamsfuncs.c:
+      MFH: avoid possible segfault with stream_socket_client and bogus flags.
+
+    * ext/standard/streamsfuncs.c:
+      Avoid possible segfault when using stream_socket_client with bogus flags.
+
 2004-08-05  Ilia Alshanetsky  <ilia@prohost.org>
 
     * ext/simplexml/php_simplexml_exports.h
@@ -7847,7 +7864,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1708 2004/08/06 00:33:54 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1709 2004/08/07 00:35:48 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

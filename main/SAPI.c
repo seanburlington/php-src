@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.156 2002/11/18 00:59:23 gschlossnagle Exp $ */
+/* $Id: SAPI.c,v 1.157 2002/11/21 10:29:11 hholzgra Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -390,8 +390,10 @@ SAPI_API void sapi_deactivate(TSRMLS_D)
 		if(sapi_module.read_post) { 
 			/* make sure we've consumed all request input data */
 			char dummy[SAPI_POST_BLOCK_SIZE];
-			while(sapi_module.read_post(dummy, sizeof(dummy)-1 TSRMLS_CC) > 0) {
-				/* empty loop body */
+			int read_bytes;
+
+			while((read_bytes = sapi_module.read_post(dummy, sizeof(dummy)-1 TSRMLS_CC)) > 0) {
+				SG(read_post_bytes) += read_bytes;
 			}
 		}
 	}

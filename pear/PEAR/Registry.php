@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Registry.php,v 1.35.2.6.2.3 2003/06/25 16:27:01 pajoye Exp $
+// $Id: Registry.php,v 1.35.2.6.2.4 2003/06/26 08:32:54 pajoye Exp $
 
 /*
 TODO:
@@ -167,7 +167,7 @@ class PEAR_Registry extends PEAR
      */
     function _packageFileName($package)
     {
-        return "{$this->statedir}/{$package}.reg";
+        return $this->statedir . DIRECTORY_SEPARATOR . strtolower($package) . '.reg';        
     }
 
     // }}}

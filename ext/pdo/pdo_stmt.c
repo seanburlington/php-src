@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.69 2005/02/13 06:29:35 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.70 2005/02/13 06:42:19 wez Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -82,7 +82,7 @@ static inline int rewrite_name_to_position(pdo_stmt_t *stmt, struct pdo_bound_pa
 		 * we will raise an error, as we can't be sure that it is safe
 		 * to bind multiple parameters onto the same zval in the underlying
 		 * driver */
-		char **name;
+		char *name;
 		int position = 0;
 		zend_hash_internal_pointer_reset(stmt->bound_param_map);
 		while (SUCCESS == zend_hash_get_current_data(stmt->bound_param_map, (void**)&name)) {

@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.71.2.1 2001/09/24 17:48:22 andi Exp $ */
+/* $Id: rfc1867.c,v 1.71.2.2 2002/02/21 18:46:45 sesser Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -195,7 +195,13 @@ static void php_mime_split(char *buf, int cnt, char *boundary, zval *array_ptr T
 						SAFE_RETURN;
 					}
 				}
+				rem -= loc - ptr;
+				if (rem <= 0) {
+					php_error(E_WARNING, "File Upload Mime headers garbled ptr: [%c%c%c%c%c]", *ptr, *(ptr + 1), *(ptr + 2), *(ptr + 3), *(ptr + 4));
+					SAFE_RETURN;
+				}
 				name = strstr(ptr, " name=");
+				ptr = loc;
 				if (name && name < loc) {
 					name += 6;
 					if ( *name == '\"' ) { 

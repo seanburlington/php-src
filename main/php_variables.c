@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.60 2003/03/30 01:06:54 shane Exp $ */
+/* $Id: php_variables.c,v 1.61 2003/06/08 15:30:33 zeev Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -725,6 +725,7 @@ void php_startup_auto_globals(TSRMLS_D)
 	zend_register_auto_global("_SERVER", sizeof("_SERVER")-1, cb?php_auto_globals_create_server:NULL TSRMLS_CC);
 	zend_register_auto_global("_ENV", sizeof("_ENV")-1, cb?php_auto_globals_create_env:NULL TSRMLS_CC);
 	zend_register_auto_global("_REQUEST", sizeof("_REQUEST")-1, cb?php_auto_globals_create_request:NULL TSRMLS_CC);
+	zend_register_auto_global("_FILES", sizeof("_FILES")-1, NULL TSRMLS_CC);
 }
 
 /*

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.13 2003/09/22 19:07:52 rrichards Exp $ */
+/* $Id: xsltprocessor.c,v 1.14 2003/10/26 15:57:31 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -25,7 +25,7 @@
 
 #include "php.h"
 #include "php_xsl.h"
-
+#include "ext/libxml/php_libxml.h"
 
 /*
 * class xsl_xsltprocessor 
@@ -127,7 +127,7 @@ PHP_FUNCTION(xsl_xsltprocessor_import_stylesheet)
 	xmlDoc *doc = NULL, *newdoc = NULL;
 	xsltStylesheetPtr sheetp, oldsheetp;
 	xsl_object *intern;
-	node_object *docobj;
+	php_libxml_node_object *docobj;
 	int prevSubstValue, prevExtDtdValue;
 	
 	DOM_GET_THIS(id);
@@ -183,7 +183,7 @@ PHP_FUNCTION(xsl_xsltprocessor_transform_to_doc)
 	int ret, clone = 0;
 	char **params = NULL;
 	xsl_object *intern;
-	node_object *docobj;
+	php_libxml_node_object *docobj;
 	
 	id = getThis();
 	intern = (xsl_object *)zend_object_store_get_object(id TSRMLS_CC);
@@ -231,7 +231,7 @@ PHP_FUNCTION(xsl_xsltprocessor_transform_to_uri)
 	int ret, uri_len, clone = 0;
 	char **params = NULL, *uri;
 	xsl_object *intern;
-	node_object *docobj;
+	php_libxml_node_object *docobj;
 	
 	id = getThis();
 	intern = (xsl_object *)zend_object_store_get_object(id TSRMLS_CC);
@@ -285,7 +285,7 @@ PHP_FUNCTION(xsl_xsltprocessor_transform_to_xml)
 	int doc_txt_len;
 	char **params = NULL;
 	xsl_object *intern;
-	node_object *docobj;
+	php_libxml_node_object *docobj;
 	
 	id = getThis();
 	intern = (xsl_object *)zend_object_store_get_object(id TSRMLS_CC);

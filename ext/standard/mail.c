@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.66.2.11 2003/10/20 14:22:10 iliaa Exp $ */
+/* $Id: mail.c,v 1.66.2.12 2004/01/09 01:35:58 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -157,10 +157,10 @@ PHP_FUNCTION(mail)
 	if (extra_cmd) {
 		efree (extra_cmd);
 	}
-	if (to_len > 0) {
+	if (to_r != to) {
 		efree(to_r);
 	}
-	if (subject_len > 0) {
+	if (subject_r != subject) {
 		efree(subject_r);
 	}
 }

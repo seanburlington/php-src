@@ -9,11 +9,13 @@
 #
 # Written by Sascha Schumann
 #
-# $Id: build.mk,v 1.12 1999/11/22 11:00:52 ssb Exp $ 
+# $Id: build.mk,v 1.13 1999/11/28 13:45:17 sas Exp $ 
 
 LT_TARGETS = ltconfig ltmain.sh config.guess config.sub
 
 SUBDIRS = libzend TSRM
+
+STAMP = buildmk.stamp
 
 makefile_am_files = Makefile.am $(shell find ext sapi regex pecl -name Makefile.am)
 makefile_in_files = $(makefile_am_files:.am=.in)
@@ -36,6 +38,11 @@ all: $(targets)
 		test -d $$i || (test -d ../$$i && ln -s ../$$i $$i); \
 		(cd $$i && $(MAKE) -f build.mk AMFLAGS=$(AMFLAGS)); \
 	done
+
+all: $(STAMP)
+
+$(STAMP): buildcheck.sh
+	@./buildcheck.sh && touch $(STAMP)
 
 dist:
 	@rm -f $(SUBDIRS) 2>/dev/null || true

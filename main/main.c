@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.310 2000/09/01 12:06:52 zeev Exp $ */
+/* $Id: main.c,v 1.311 2000/09/02 18:03:58 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -607,7 +607,7 @@ int php_request_startup(CLS_D ELS_DC PLS_DC SLS_DC)
 	}
 
 	if (PG(output_buffering)) {
-		php_start_ob_buffer();
+		php_start_ob_buffer(NULL);
 	} else if (PG(implicit_flush)) {
 		php_start_implicit_flush();
 	}

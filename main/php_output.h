@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_output.h,v 1.14 2000/08/25 03:10:42 ssb Exp $ */
+/* $Id: php_output.h,v 1.15 2000/09/02 18:03:58 zeev Exp $ */
 
 #ifndef PHP_OUTPUT_H
 #define PHP_OUTPUT_H
@@ -26,7 +26,7 @@
 PHPAPI void php_output_startup(void);
 PHPAPI int  php_body_write(const char *str, uint str_length);
 PHPAPI int  php_header_write(const char *str, uint str_length);
-PHPAPI void php_start_ob_buffer(void);
+PHPAPI int php_start_ob_buffer(zval *output_handler);
 PHPAPI void php_end_ob_buffer(int send_buffer);
 PHPAPI void php_end_ob_buffers(int send_buffer);
 PHPAPI int php_ob_get_buffer(pval *p);
@@ -50,6 +50,7 @@ typedef struct _php_ob_buffer {
 	uint size;
 	uint text_length;
 	int block_size;
+	zval *output_handler;
 } php_ob_buffer;
 
 typedef struct _php_output_globals {
@@ -61,6 +62,7 @@ typedef struct _php_output_globals {
 	int output_start_lineno;
 	zend_stack ob_buffers;
 	int nesting_level;
+	zend_bool lock;
 } php_output_globals;
 
 

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_packet_soap.c,v 1.28 2004/01/30 15:07:19 dmitry Exp $ */
+/* $Id: php_packet_soap.c,v 1.29 2004/02/02 16:19:37 dmitry Exp $ */
 
 #include "php_soap.h"
 
@@ -86,10 +86,16 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 			add_soap_fault(this_ptr, "Client", "A SOAP Envelope element cannot have non Namespace qualified attributes", NULL, NULL TSRMLS_CC);
 			xmlFreeDoc(response);
 			return FALSE;
-		} else if (soap_version == SOAP_1_2 && attr_is_equal_ex(attr,"encodingStyle",SOAP_1_2_ENV_NAMESPACE)) {
-			add_soap_fault(this_ptr, "Client", "encodingStyle cannot be specified on the Envelope", NULL, NULL TSRMLS_CC);
-			xmlFreeDoc(response);
-			return FALSE;
+		} else if (attr_is_equal_ex(attr,"encodingStyle",SOAP_1_2_ENV_NAMESPACE)) {
+			if (soap_version == SOAP_1_2) {
+				add_soap_fault(this_ptr, "Client", "encodingStyle cannot be specified on the Envelope", NULL, NULL TSRMLS_CC);
+				xmlFreeDoc(response);
+				return FALSE;
+			} else if (strcmp(attr->children->content,SOAP_1_1_ENC_NAMESPACE) != 0) {
+				add_soap_fault(this_ptr, "Client", "Unknown data encoding style", NULL, NULL TSRMLS_CC);
+				xmlFreeDoc(response);
+				return FALSE;
+			}
 		}
 		attr = attr->next;
 	}
@@ -122,16 +128,53 @@ int parse_packet_soap(zval *this_ptr, char *buffer, int buffer_size, sdlFunction
 		xmlFreeDoc(response);
 		return FALSE;
 	}
-	attr = get_attribute_ex(body->properties,"encodingStyle",SOAP_1_2_ENV_NAMESPACE);
-	if (attr && soap_version == SOAP_1_2) {
-		add_soap_fault(this_ptr, "Client", "encodingStyle cannot be specified on the Body", NULL, NULL TSRMLS_CC);
-		xmlFreeDoc(response);
-		return FALSE;
+	attr = body->properties;
+	while (attr != NULL) {
+		if (attr->ns == NULL) {
+			if (soap_version == SOAP_1_2) {
+				add_soap_fault(this_ptr, "Client", "A SOAP Body element cannot have non Namespace qualified attributes", NULL, NULL TSRMLS_CC);
+				xmlFreeDoc(response);
+				return FALSE;
+			}
+		} else if (attr_is_equal_ex(attr,"encodingStyle",SOAP_1_2_ENV_NAMESPACE)) {
+			if (soap_version == SOAP_1_2) {
+				add_soap_fault(this_ptr, "Client", "encodingStyle cannot be specified on the Body", NULL, NULL TSRMLS_CC);
+				xmlFreeDoc(response);
+				return FALSE;
+			} else if (strcmp(attr->children->content,SOAP_1_1_ENC_NAMESPACE) != 0) {
+				add_soap_fault(this_ptr, "Client", "Unknown data encoding style", NULL, NULL TSRMLS_CC);
+				xmlFreeDoc(response);
+				return FALSE;
+			}
+		}
+		attr = attr->next;
 	}
 	if (trav != NULL && soap_version == SOAP_1_2) {
 		add_soap_fault(this_ptr, "Client", "A SOAP 1.2 envelope can contain only Header and Body", NULL, NULL TSRMLS_CC);
 		xmlFreeDoc(response);
 		return FALSE;
+	}
+
+	if (head != NULL) {
+		attr = head->properties;
+		while (attr != NULL) {
+			if (attr->ns == NULL) {
+				add_soap_fault(this_ptr, "Client", "A SOAP Header element cannot have non Namespace qualified attributes", NULL, NULL TSRMLS_CC);
+				xmlFreeDoc(response);
+				return FALSE;
+			} else if (attr_is_equal_ex(attr,"encodingStyle",SOAP_1_2_ENV_NAMESPACE)) {
+				if (soap_version == SOAP_1_2) {
+					add_soap_fault(this_ptr, "Client", "encodingStyle cannot be specified on the Header", NULL, NULL TSRMLS_CC);
+					xmlFreeDoc(response);
+					return FALSE;
+				} else if (strcmp(attr->children->content,SOAP_1_1_ENC_NAMESPACE) != 0) {
+					add_soap_fault(this_ptr, "Client", "Unknown data encoding style", NULL, NULL TSRMLS_CC);
+					xmlFreeDoc(response);
+					return FALSE;
+				}
+			}
+			attr = attr->next;
+		}
 	}
 
 	/* Check if <Body> contains <Fault> element */

@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.26 2001/12/17 21:10:11 cox Exp $
+// $Id: Common.php,v 1.27 2001/12/22 04:42:12 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -388,14 +388,17 @@ class PEAR_Common extends PEAR
     * Returns info from a tgz pear package
     * (experimental)
     */
-    function infoFromTgzFile($file)
+    function infoFromTgzFile($file, $pedantic = true)
     {
-        $file = basename($file); // XXX Fixme: Only allows file in the current dir
+        if ($pedantic) {
+            // XXX Fixme: Only allows file in the current dir
+            $file = basename($file);
+        }
         if (!@is_file($file)) {
             return $this->raiseError('no tar file supplied');
         }
         // Assume the decompressed dir name
-        if (($pos = strrpos($file, '.')) === false) {
+        if ($pedantic && ($pos = strrpos($file, '.')) === false) {
             return $this->raiseError('file doesn\'t follow the package name convention');
         }
         $pkgdir = substr($file, 0, $pos);

@@ -1,3 +1,19 @@
+2004-10-09  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * ext/com_dotnet/com_typeinfo.c:
+      Fix crash bug.
+
+2004-10-09  Moriyoshi Koizumi  <moriyoshi@at.wakwak.com>
+
+    * ext/mbstring/tests/htmlent.phpt:
+      - Fix test. I have no idea why the test was left this way.
+
+2004-10-09  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * ext/com_dotnet/com_dotnet.c:
+      Improve .Net support; this should reduce "failed to init .net" errors.
+      Improve error reporting while we're at it too.
+
 2004-10-08  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * ext/standard/basic_functions.c:
@@ -10902,7 +10918,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1770 2004/10/09 00:35:54 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1771 2004/10/10 00:39:53 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

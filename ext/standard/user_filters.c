@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.7 2003/01/07 01:02:29 pollita Exp $ */
+/* $Id: user_filters.c,v 1.8 2003/01/07 08:57:27 moriyoshi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -184,6 +184,9 @@ static size_t userfilter_write(php_stream *stream, php_stream_filter *thisfilter
 
 	if (retval)
 		zval_ptr_dtor(&retval);
+
+	if (zbuf)
+		zval_ptr_dtor(&zbuf);
 	
 	return wrote;
 }

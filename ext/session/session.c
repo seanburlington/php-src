@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.237.2.9 2002/03/02 14:20:17 zeev Exp $ */
+/* $Id: session.c,v 1.237.2.10 2002/03/02 16:00:55 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1338,6 +1338,7 @@ static void php_rinit_session_globals(TSRMLS_D)
 	PS(id) = NULL;
 	PS(session_status) = php_session_none;
 	PS(mod_data) = NULL;
+	PS(http_session_vars) = NULL;
 }
 
 static void php_rshutdown_session_globals(TSRMLS_D)

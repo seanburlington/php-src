@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.98 2001/05/16 09:01:20 dbeu Exp $ */
+/* $Id: mod_php4.c,v 1.99 2001/05/16 15:01:13 zeev Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -546,12 +546,12 @@ static int send_parsed_php(request_rec * r)
 {
 	int result =  send_php(r, 0, NULL);
 
-#if MEMORY_USAGE_INFO
+#if MEMORY_LIMIT
     {
         char mem_usage[ 32 ];
         ALS_FETCH()
  
-        sprintf(mem_usage,"%u", (int) AG(max_allocated_memory));
+        sprintf(mem_usage,"%u", (int) AG(allocated_memory_peak));
         ap_table_setn(r->notes, "mod_php_memory_usage", ap_pstrdup(r->pool,mem_usage));
     }
 #endif

@@ -19,13 +19,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.84 2001/12/14 05:58:28 jason Exp $ */
+/* $Id: sockets.c,v 1.85 2002/01/06 11:54:19 venaas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php.h"
+#include "php_network.h"
 
 #if HAVE_SOCKETS
 

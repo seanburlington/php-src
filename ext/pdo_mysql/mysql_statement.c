@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.21 2005/02/27 12:43:23 hholzgra Exp $ */
+/* $Id: mysql_statement.c,v 1.22 2005/02/27 20:34:36 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -39,6 +39,10 @@ static int pdo_mysql_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
 		/* free the resource */
 		mysql_free_result(S->result);
 		S->result = NULL;
+	}
+	if (S->einfo.errmsg) {
+		efree(S->einfo.errmsg);
+		S->einfo.errmsg = NULL;
 	}
 	efree(S);
 	return 1;

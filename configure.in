@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.448 2003/06/23 16:06:37 wez Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.449 2003/06/24 14:05:24 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -731,18 +731,6 @@ PHP_ARG_ENABLE(ipv6,whether to enable IPv6 support,
 
 if test "$PHP_IPV6" != "no" && test "$ac_cv_ipv6_support" = yes; then
   AC_DEFINE(HAVE_IPV6,1,[Whether to enable IPv6 support])
-fi
-
-
-dnl
-dnl OpenSSL configure
-dnl
-PHP_ARG_WITH(openssl,for OpenSSL support,
-[  --with-openssl[=DIR]    Include OpenSSL support (requires OpenSSL >= 0.9.6) ])
-
-if test "$PHP_OPENSSL" != "no"; then
-  ext_openssl_shared=$ext_shared
-  PHP_SETUP_OPENSSL
 fi
 
 divert(5)

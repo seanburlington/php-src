@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.31 2002/04/10 22:42:23 wez Exp $ */
+/* $Id: http_fopen_wrapper.c,v 1.32 2002/04/16 22:14:23 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -367,7 +367,8 @@ static php_stream_wrapper_ops http_stream_wops = {
 
 php_stream_wrapper php_stream_http_wrapper =	{
 	&http_stream_wops,
-	NULL
+	NULL,
+	1 /* is_url */
 };
 
 /*

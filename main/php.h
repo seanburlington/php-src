@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.168 2002/04/10 01:13:18 helly Exp $ */
+/* $Id: php.h,v 1.169 2002/04/16 22:14:26 wez Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -171,10 +171,6 @@ typedef unsigned int socklen_t;
 char *strerror(int);
 #endif
 
-#include "php_streams.h"
-#include "php_memory_streams.h"
-#include "fopen_wrappers.h"
-
 #if (REGEX == 1 || REGEX == 0) && !defined(NO_REGEX_EXTRA_H)
 #include "regex/regex_extra.h"
 #endif
@@ -220,6 +216,11 @@ char *strerror(int);
 #  define MAXPATHLEN 256    /* Should be safe for any weird systems that do not define it */
 # endif
 #endif
+
+#include "php_streams.h"
+#include "php_memory_streams.h"
+#include "fopen_wrappers.h"
+
 
 /* global variables */
 extern pval *data;

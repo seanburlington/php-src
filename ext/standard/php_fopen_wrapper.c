@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.20 2002/04/11 12:13:15 wez Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.21 2002/04/16 22:14:24 wez Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -64,7 +64,8 @@ static php_stream_wrapper_ops php_stdio_wops = {
 
 php_stream_wrapper php_stream_php_wrapper =	{
 	&php_stdio_wops,
-	NULL
+	NULL,
+	0, /* is_url */
 };
 
 

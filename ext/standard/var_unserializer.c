@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.c,v 1.38.2.1 2004/09/24 22:05:36 helly Exp $ */
+/* $Id: var_unserializer.c,v 1.38.2.2 2004/12/01 22:42:14 sesser Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -83,7 +83,7 @@ static int var_access(php_unserialize_data_t *var_hashx, int id, zval ***store)
 
 	if (!var_hash) return !SUCCESS;
 
-	if (id >= var_hash->used_slots) return !SUCCESS;
+	if (id < 0 || id >= var_hash->used_slots) return !SUCCESS;
 
 	*store = &var_hash->data[id];
 

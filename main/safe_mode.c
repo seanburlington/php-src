@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: safe_mode.c,v 1.58 2004/01/08 08:17:54 andi Exp $ */
+/* $Id: safe_mode.c,v 1.58.2.1 2004/12/01 22:37:47 sesser Exp $ */
 
 #include "php.h"
 
@@ -55,12 +55,15 @@ PHPAPI int php_checkuid_ex(const char *filename, char *fopen_mode, int mode, int
 	php_stream_wrapper *wrapper = NULL;
 	TSRMLS_FETCH();
 
-	strlcpy(filenamecopy, filename, MAXPATHLEN);
-	filename=(char *)&filenamecopy;
-
 	if (!filename) {
 		return 0; /* path must be provided */
 	}
+
+	if (strlcpy(filenamecopy, filename, MAXPATHLEN)>=MAXPATHLEN) {
+		return 0;
+	}
+	filename=(char *)&filenamecopy;
+
 
 	if (fopen_mode) {
 		if (fopen_mode[0] == 'r') {

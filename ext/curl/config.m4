@@ -1,13 +1,13 @@
 dnl
-dnl $Id: config.m4,v 1.16 2002/09/04 18:47:22 sniper Exp $
+dnl $Id: config.m4,v 1.17 2002/11/06 10:24:48 wez Exp $
 dnl
 
 PHP_ARG_WITH(curl, for CURL support,
 [  --with-curl[=DIR]       Include CURL support])
 
 dnl Temporary option while we develop this aspect of the extension
-PHP_ARG_WITH(curlwrappers, if we should use CURL for url streams,
-[  --with-curlwrappers     Use CURL for url streams], no, no)
+dnl PHP_ARG_WITH(curlwrappers, if we should use CURL for url streams,
+dnl [  --with-curlwrappers     Use CURL for url streams], no, no)
 
 if test "$PHP_CURL" != "no"; then
   if test -r $PHP_CURL/include/curl/easy.h; then
@@ -58,6 +58,13 @@ if test "$PHP_CURL" != "no"; then
   ],[
     AC_MSG_ERROR(There is something wrong. Please check config.log for more information.)
   ],[
+    $CURL_LIBS -L$CURL_DIR/lib
+  ])
+
+  PHP_CHECK_LIBRARY(curl,curl_version_info,
+  [
+    AC_DEFINE(HAVE_CURL_VERSION_INFO,1,[ ])
+  ],[],[
     $CURL_LIBS -L$CURL_DIR/lib
   ])
 

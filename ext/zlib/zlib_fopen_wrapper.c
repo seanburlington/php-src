@@ -16,7 +16,7 @@
    |         Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib_fopen_wrapper.c,v 1.33.2.1 2002/11/19 18:34:55 wez Exp $ */
+/* $Id: zlib_fopen_wrapper.c,v 1.33.2.2 2002/11/19 20:04:15 wez Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 
@@ -33,7 +33,6 @@ static size_t php_gziop_read(php_stream *stream, char *buf, size_t count TSRMLS_
 	struct php_gz_stream_data_t *self = (struct php_gz_stream_data_t *)stream->abstract;
 	int read;
 	
-	memset(buf, 0, count);
 	read = gzread(self->gz_file, buf, count);
 	
 	if (gzeof(self->gz_file))

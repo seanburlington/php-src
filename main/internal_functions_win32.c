@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.18 1999/12/04 19:15:41 sas Exp $ */
+/* $Id: internal_functions_win32.c,v 1.19 1999/12/07 11:37:29 thies Exp $ */
 
 
 #include "php.h"
@@ -47,6 +47,7 @@
 #include "ext/standard/php_lcg.h"
 #include "ext/standard/php_output.h"
 #include "ext/standard/php_array.h"
+#include "ext/standard/php_assert.h"
 #include "ext/COM/php_COM.h"
 #include "ext/standard/reg.h"
 #include "ext/pcre/php_pcre.h"
@@ -84,7 +85,8 @@ zend_module_entry *php3_builtin_modules[] = {
 	phpext_lcg_ptr,
 	phpext_session_ptr,
 	phpext_output_ptr,
-	phpext_array_ptr
+	phpext_array_ptr,
+	phpext_assert_ptr
 };
 
 	

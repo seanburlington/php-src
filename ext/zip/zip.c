@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zip.c,v 1.7 2001/06/06 13:05:53 rasmus Exp $ */
+/* $Id: zip.c,v 1.8 2001/06/06 20:30:58 sterling Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -154,7 +154,7 @@ PHP_FUNCTION(zip_read)
 
 	ZEND_FETCH_RESOURCE(archive_p, ZZIP_DIR *, zzip_dp, -1, le_zip_dir_name, le_zip_dir);
 
-	entry = (php_zzip_dirent *) emalloc(sizeof(php_zzip_dirent));
+	entry = emalloc(sizeof(php_zzip_dirent));
 
 	ret = zzip_dir_read(archive_p, &entry->dirent);
 	if (ret == 0) {

@@ -1,4 +1,4 @@
-/* $Id: php_oracle.h,v 1.1 1999/12/04 19:15:58 sas Exp $ */
+/* $Id: php_oracle.h,v 1.2 1999/12/09 11:02:41 thies Exp $ */
 
 /* synced with oracle.h,v 1.40 1999/06/01 08:11:04 thies Exp $ */
 
@@ -30,7 +30,7 @@ extern php3_module_entry oracle_module_entry;
 
 #ifdef ZTS
 #define ORALS_D php_ora_globals *ora_globals
-#define ORALS_DC , PSLS_D
+#define ORALS_DC , ORACLE_D
 #define ORALS_C ora_globals
 #define ORALS_CC , ORALS_C
 #define ORA(v) (ora_globals->v)

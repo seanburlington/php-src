@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.48 2005/01/21 04:41:52 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.49 2005/02/06 17:25:09 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -515,12 +515,25 @@ static PHP_METHOD(PDO, getAttribute)
 		RETURN_FALSE;
 	}
 
+	PDO_DBH_CLEAR_ERR();
+
+	/* handle generic PDO-level atributes */
+	switch (attr) {
+		case PDO_ATTR_PERSISTENT:
+			RETURN_BOOL(dbh->is_persistent);
+			
+		case PDO_ATTR_CASE:
+			RETURN_LONG(dbh->desired_case);
+
+		case PDO_ATTR_ORACLE_NULLS:
+			RETURN_BOOL(dbh->oracle_nulls);
+	}
+	
 	if (!dbh->methods->get_attribute) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "This driver doesn't support fetching attributes");
 		RETURN_FALSE;
 	}
 
-	PDO_DBH_CLEAR_ERR();
 	switch (dbh->methods->get_attribute(dbh, attr, return_value TSRMLS_CC)) {
 		case -1:
 			PDO_HANDLE_DBH_ERR();

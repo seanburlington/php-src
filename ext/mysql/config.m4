@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.61 2003/12/31 11:27:52 derick Exp $
+dnl $Id: config.m4,v 1.62 2004/11/03 14:32:50 jorton Exp $
 dnl
 
 AC_DEFUN(MYSQL_LIB_CHK, [
@@ -83,7 +83,7 @@ if test "$PHP_MYSQL" != "no"; then
 Note that the MySQL client library is not bundled anymore.])
   fi
 
-  for i in lib lib/mysql; do
+  for i in $PHP_LIBDIR $PHP_LIBDIR/mysql; do
     MYSQL_LIB_CHK($i)
   done
 
@@ -99,9 +99,9 @@ Note that the MySQL client library is not bundled anymore.])
       PHP_CHECK_LIBRARY(mysqlclient, mysql_error, [], [
         AC_MSG_ERROR([mysql configure failed. Please check config.log for more information.])
       ], [
-        -L$PHP_ZLIB_DIR/lib -L$MYSQL_LIB_DIR 
+        -L$PHP_ZLIB_DIR/$PHP_LIBDIR -L$MYSQL_LIB_DIR 
       ])  
-      MYSQL_LIBS="-L$PHP_ZLIB_DIR/lib -lz"
+      MYSQL_LIBS="-L$PHP_ZLIB_DIR/$PHP_LIBDIR -lz"
     else
       PHP_ADD_LIBRARY(z,, MYSQL_SHARED_LIBADD)
       PHP_CHECK_LIBRARY(mysqlclient, mysql_errno, [], [

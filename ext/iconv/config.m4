@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.27 2004/07/14 09:54:02 derick Exp $
+dnl $Id: config.m4,v 1.28 2004/11/03 14:32:50 jorton Exp $
 dnl
 
 PHP_ARG_WITH(iconv, for iconv support,
@@ -24,7 +24,7 @@ if test "$PHP_ICONV" != "no"; then
     fi
 
     CFLAGS="-I$PHP_ICONV_PREFIX/include $CFLAGS"
-    LDFLAGS="-L$PHP_ICONV_PREFIX/lib $LDFLAGS"
+    LDFLAGS="-L$PHP_ICONV_PREFIX/$PHP_LIBDIR $LDFLAGS"
 
     if test -r $PHP_ICONV_PREFIX/include/giconv.h; then
       PHP_ICONV_H_PATH="$PHP_ICONV_PREFIX/include/giconv.h"

@@ -1,10 +1,10 @@
-dnl $Id: config.m4,v 1.20 2003/12/09 20:10:22 sniper Exp $
+dnl $Id: config.m4,v 1.21 2004/11/03 14:32:49 jorton Exp $
 
 AC_DEFUN(CPDF_JPEG_TEST,[
   AC_ARG_WITH(jpeg-dir,
   [  --with-jpeg-dir[=DIR]     CPDF: Set the path to libjpeg install prefix.],[
     for i in $withval /usr/local /usr; do
-      if test -f "$i/lib/libjpeg.$SHLIB_SUFFIX_NAME" -o -f "$i/lib/libjpeg.a"; then
+      if test -f "$i/$PHP_LIBDIR/libjpeg.$SHLIB_SUFFIX_NAME" -o -f "$i/$PHP_LIBDIR/libjpeg.a"; then
         CPDF_JPEG_DIR=$i
         break;
       fi
@@ -26,7 +26,7 @@ AC_DEFUN(CPDF_TIFF_TEST,[
   AC_ARG_WITH(tiff-dir,
   [  --with-tiff-dir[=DIR]     CPDF: Set the path to libtiff install prefix.],[
     for i in $withval /usr/local /usr; do
-      if test -f "$i/lib/libtiff.$SHLIB_SUFFIX_NAME" -o -f "$i/lib/libtiff.a"; then
+      if test -f "$i/$PHP_LIBDIR/libtiff.$SHLIB_SUFFIX_NAME" -o -f "$i/$PHP_LIBDIR/libtiff.a"; then
         CPDF_TIFF_DIR=$i
         break;
       fi
@@ -64,7 +64,7 @@ if test "$PHP_CPDFLIB" != "no"; then
       ], [
         AC_MSG_ERROR([Cpdflib module requires cpdflib >= 2.])
       ], [
-        -L$i/lib $CPDF_SHARED_LIBADD
+        -L$i/$PHP_LIBDIR $CPDF_SHARED_LIBADD
       ])
       break
     fi

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9 2003/08/09 18:43:45 sniper Exp $
+dnl $Id: config.m4,v 1.10 2004/11/03 14:32:51 jorton Exp $
 dnl
 
 PHP_ARG_WITH(pspell,for PSPELL support,
@@ -27,7 +27,7 @@ if test "$PHP_PSPELL" != "no"; then
 		AC_MSG_ERROR(Cannot find pspell)
 	fi
 
-	PSPELL_LIBDIR=$PSPELL_DIR/lib
+	PSPELL_LIBDIR=$PSPELL_DIR/$PHP_LIBDIR
 
 	AC_DEFINE(HAVE_PSPELL,1,[ ])
 	PHP_SUBST(PSPELL_SHARED_LIBADD)

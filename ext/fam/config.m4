@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 2002/12/10 20:09:35 helly Exp $
+dnl $Id: config.m4,v 1.3 2004/11/03 14:32:49 jorton Exp $
 dnl config.m4 for extension fam
 
 dnl Comments in this file start with the string 'dnl'.
@@ -42,12 +42,12 @@ LIBSYMBOL=FAMOpen # you most likely want to change this
 
 PHP_CHECK_LIBRARY($LIBNAME,$LIBSYMBOL,
 [
-  PHP_ADD_LIBRARY_WITH_PATH($LIBNAME, $FAM_DIR/lib, FAM_SHARED_LIBADD)
+  PHP_ADD_LIBRARY_WITH_PATH($LIBNAME, $FAM_DIR/$PHP_LIBDIR, FAM_SHARED_LIBADD)
   AC_DEFINE(HAVE_FAMLIB,1,[ ])
 ],[
   AC_MSG_ERROR([wrong fam lib version or lib not found])
 ],[
-  -L$FAM_DIR/lib -lm -ldl
+  -L$FAM_DIR/$PHP_LIBDIR -lm -ldl
 ])
 
 PHP_SUBST(FAM_SHARED_LIBADD)

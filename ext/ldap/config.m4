@@ -1,20 +1,20 @@
 dnl
-dnl $Id: config.m4,v 1.34 2003/07/01 00:02:13 sniper Exp $
+dnl $Id: config.m4,v 1.35 2004/11/03 14:32:50 jorton Exp $
 dnl
 
 AC_DEFUN(PHP_LDAP_CHECKS, [
   if test -f $1/include/ldap.h; then
     LDAP_DIR=$1
     LDAP_INCDIR=$1/include
-    LDAP_LIBDIR=$1/lib
+    LDAP_LIBDIR=$1/$PHP_LIBDIR
   elif test -f $1/include/umich-ldap/ldap.h; then
     LDAP_DIR=$1
     LDAP_INCDIR=$1/include/umich-ldap
-    LDAP_LIBDIR=$1/lib
+    LDAP_LIBDIR=$1/$PHP_LIBDIR
   elif test -f $1/ldap/public/ldap.h; then
     LDAP_DIR=$1
     LDAP_INCDIR=$1/ldap/public
-    LDAP_LIBDIR=$1/lib
+    LDAP_LIBDIR=$1/$PHP_LIBDIR
   fi
 ])
 
@@ -39,7 +39,7 @@ AC_DEFUN(PHP_LDAP_SASL_CHECKS, [
   
   if test "$LDAP_SASL_DIR"; then
     LDAP_SASL_INCDIR=$LDAP_SASL_DIR/include
-    LDAP_SASL_LIBDIR=$LDAP_SASL_DIR/lib
+    LDAP_SASL_LIBDIR=$LDAP_SASL_DIR/$PHP_LIBDIR
   else
     AC_MSG_ERROR([sasl.h not found!])
   fi

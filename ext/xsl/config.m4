@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.8 2004/07/18 12:03:51 wez Exp $
+dnl $Id: config.m4,v 1.9 2004/11/03 14:32:52 jorton Exp $
 dnl
 
 PHP_ARG_WITH(xsl, for XSL support,
@@ -45,7 +45,7 @@ if test "$PHP_XSL" != "no"; then
         AC_MSG_RESULT(not found)
       else 
         AC_MSG_RESULT(found)
-        PHP_ADD_LIBRARY_WITH_PATH(exslt, $PHP_XSL_EXSL_DIR/lib, XSL_SHARED_LIBADD)
+        PHP_ADD_LIBRARY_WITH_PATH(exslt, $PHP_XSL_EXSL_DIR/$PHP_LIBDIR, XSL_SHARED_LIBADD)
         PHP_ADD_INCLUDE($PHP_XSL_EXSL_DIR/include)
         AC_DEFINE(HAVE_XSL_EXSLT,1,[ ])
       fi

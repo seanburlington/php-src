@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.25 2003/05/22 13:08:49 derick Exp $ 
+dnl $Id: config.m4,v 1.26 2004/11/03 14:32:49 jorton Exp $ 
 dnl
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -51,7 +51,7 @@ if test "$PHP_CURL" != "no"; then
 
   PHP_ADD_INCLUDE($CURL_DIR/include)
   PHP_EVAL_LIBLINE($CURL_LIBS, CURL_SHARED_LIBADD)
-  PHP_ADD_LIBRARY_WITH_PATH(curl, $CURL_DIR/lib, CURL_SHARED_LIBADD)
+  PHP_ADD_LIBRARY_WITH_PATH(curl, $CURL_DIR/$PHP_LIBDIR, CURL_SHARED_LIBADD)
 
   PHP_CHECK_LIBRARY(curl,curl_easy_perform, 
   [ 
@@ -59,14 +59,14 @@ if test "$PHP_CURL" != "no"; then
   ],[
     AC_MSG_ERROR(There is something wrong. Please check config.log for more information.)
   ],[
-    $CURL_LIBS -L$CURL_DIR/lib
+    $CURL_LIBS -L$CURL_DIR/$PHP_LIBDIR
   ])
 
   PHP_CHECK_LIBRARY(curl,curl_version_info,
   [
     AC_DEFINE(HAVE_CURL_VERSION_INFO,1,[ ])
   ],[],[
-    $CURL_LIBS -L$CURL_DIR/lib
+    $CURL_LIBS -L$CURL_DIR/$PHP_LIBDIR
   ])
 
   if test "$PHP_CURLWRAPPERS" != "no" ; then

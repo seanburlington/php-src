@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11 2003/10/01 02:53:14 sniper Exp $
+dnl $Id: config.m4,v 1.12 2004/11/03 14:32:51 jorton Exp $
 dnl
 
 PHP_ARG_WITH(recode,for recode support,
@@ -12,17 +12,17 @@ if test "$PHP_RECODE" != "no"; then
     if test -f $i/include/recode.h; then
       RECODE_DIR=$i
       RECODE_INC=include
-      RECODE_LIB=lib
+      RECODE_LIB=$PHP_LIBDIR
     fi
     if test -f $i/include/recode/recode.h; then
       RECODE_DIR=$i
       RECODE_INC=include/recode
-      RECODE_LIB=lib/recode
+      RECODE_LIB=$PHP_LIBDIR/recode
     fi
     if test -f $i/recode/include/recode.h; then
       RECODE_DIR=$i/recode
       RECODE_INC=include
-      RECODE_LIB=lib
+      RECODE_LIB=$PHP_LIBDIR
     fi
     test -n "$RECODE_DIR" && break
   done

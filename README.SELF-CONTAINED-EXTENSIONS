@@ -1,4 +1,4 @@
-$Id: README.SELF-CONTAINED-EXTENSIONS,v 1.8 2000/06/10 08:59:43 jah Exp $
+$Id: README.SELF-CONTAINED-EXTENSIONS,v 1.9 2000/07/31 13:44:06 sas Exp $
 =============================================================================
 
 HOW TO CREATE A SELF-CONTAINED PHP EXTENSION
@@ -14,6 +14,19 @@ HOW TO CREATE A SELF-CONTAINED PHP EXTENSION
   We will describe now how to create these and how to put things
   together.
 
+PREPARING YOUR SYSTEM
+
+  While the result will run on any system, a developer's setup needs these
+  tools:
+
+    GNU autoconf
+    GNU automake
+    GNU libtool
+    GNU m4
+
+  All of these are available from 
+
+    ftp://ftp.gnu.org/pub/gnu/
 
 CONVERTING AN EXISTING EXTENSION
 

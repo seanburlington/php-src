@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.23 2004/05/25 14:30:07 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.24 2004/05/25 16:38:28 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -97,6 +97,7 @@ void pdo_handle_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt TSRMLS_DC)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", message);
 
 		if (info) {
+			zval_dtor(info);
 			FREE_ZVAL(info);
 		}
 	} else {

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.24 2001/02/26 15:17:12 kalowsky Exp $
+dnl $Id: config.m4,v 1.25 2001/03/01 07:06:54 chagenbu Exp $
 
 AC_DEFUN(IMAP_INC_CHK,[if test -r "$i$1/c-client.h"; then
 		AC_DEFINE(HAVE_IMAP2000, 1, [ ])
@@ -97,6 +97,7 @@ PHP_ARG_WITH(imap,for IMAP support,
     fi
 
     if test "$PHP_IMAP_SSL" != "no"; then
+      AC_DEFINE(HAVE_IMAP_SSL,1,[ ])
       AC_ADD_LIBPATH($PHP_SSL_LIBDIR, IMAP_SHARED_LIBADD)
       AC_ADD_LIBRARY(ssl,, IMAP_SHARED_LIBADD)
       AC_ADD_LIBRARY(crypto,, IMAP_SHARED_LIBADD)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.38 2002/06/26 07:12:21 derick Exp $ */
+/* $Id: bcmath.c,v 1.39 2002/08/18 04:33:10 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,7 +28,7 @@
 
 #include "ext/standard/info.h"
 #include "php_bcmath.h"
-#include "ext/bcmath/libbcmath/src/bcmath.h"
+#include "libbcmath/src/bcmath.h"
 
 function_entry bcmath_functions[] = {
 	PHP_FE(bcadd,									NULL)

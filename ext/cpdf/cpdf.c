@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.57 2004/05/10 22:13:08 iliaa Exp $ */
+/* $Id: cpdf.c,v 1.58 2004/07/01 04:43:29 pollita Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -726,7 +726,7 @@ PHP_FUNCTION(cpdf_set_font)
 	int id, type;
 	CPDFdoc *pdf;
 
-	if (ZEND_NUM_ARGS() != 4 || zend_get_parameters_ex(ht, 4, &arg1, &arg2, &arg3, &arg4) == FAILURE) {
+	if (ZEND_NUM_ARGS() != 4 || zend_get_parameters_ex(4, &arg1, &arg2, &arg3, &arg4) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 

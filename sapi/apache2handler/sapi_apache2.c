@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.11 2003/03/27 05:31:49 ianh Exp $ */
+/* $Id: sapi_apache2.c,v 1.12 2003/03/27 13:16:18 sniper Exp $ */
 
 #include <fcntl.h>
 
@@ -83,7 +83,7 @@ php_apache_sapi_ub_write(const char *str, uint str_length TSRMLS_DC)
 	r = ctx->r;
 	brigade = ctx->brigade;
 	
-	copy_str = apr_pmemdup( r->pool, str, str_length+1);
+	copy_str = apr_pmemdup(r->pool, str, str_length + 1);
 	bucket = apr_bucket_pool_create(copy_str, str_length, r->pool, r->connection->bucket_alloc);
 						 
 	APR_BRIGADE_INSERT_TAIL(brigade, bucket);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.25 1999/07/24 22:16:54 andrey Exp $ */
+/* $Id: string.c,v 1.26 1999/07/30 22:16:38 zeev Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -304,6 +304,7 @@ void _php3_implode(pval *delim, pval *arr, pval *return_value)
 	/* convert everything to strings, and calculate length */
 	_php3_hash_internal_pointer_reset(arr->value.ht);
 	while (_php3_hash_get_current_data(arr->value.ht, (void **) &tmp) == SUCCESS) {
+		SEPARATE_ZVAL(tmp);
 		convert_to_string(*tmp);
 		if ((*tmp)->type == IS_STRING && (*tmp)->value.str.val != undefined_variable_string) {
 			len += (*tmp)->value.str.len;

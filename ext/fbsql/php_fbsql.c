@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.73 2002/02/06 19:41:00 fmk Exp $ */
+/* $Id: php_fbsql.c,v 1.74 2002/02/06 22:31:23 fmk Exp $ */
 
 /* TODO:
  *
@@ -1849,6 +1849,7 @@ static void phpfbQuery(INTERNAL_FUNCTION_PARAMETERS, char* sql, PHPFBLink* link)
 			else 
 			{
 				char* r = fbcmdMessage(result->metaData);
+				fbcrhConvertToOutputCharSet(fbcdcOutputCharacterSet(link->connection), (unsigned char *)r);
 				if ((result->list = fbcplParse(r)))
 				{
 					result->rowCount    = fbcplCount(result->list);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.c,v 1.7 2001/02/07 17:47:59 bbonev Exp $ */
+/* $Id: php_vpopmail.c,v 1.8 2001/02/08 23:31:00 bbonev Exp $ */
 
 /* TODO: move to config.m4 when support for old versions is ready or just
  * don't support rather old vpopmail. current version must bail out if
@@ -694,12 +694,13 @@ PHP_FUNCTION(vpopmail_auth_user)
 	zval **password;
 	zval **apop;
 	struct passwd *retval;
+	int argc=ZEND_NUM_ARGS();
 
-	if (ZEND_NUM_ARGS() < 3 || ZEND_NUM_ARGS() > 4
+	if (argc < 3 || argc > 4
 			|| zend_get_parameters_ex(ZEND_NUM_ARGS(), &user, &domain, &password, &apop) == FAILURE)
 		WRONG_PARAM_COUNT;
 
-	if (ZEND_NUM_ARGS() > 3)
+	if (argc > 3)
 		convert_to_string_ex(apop);
 
 	convert_to_string_ex(user);
@@ -713,7 +714,7 @@ PHP_FUNCTION(vpopmail_auth_user)
 	retval = vauth_user(Z_STRVAL_PP(user),
 						Z_STRVAL_PP(domain),
 						Z_STRVAL_PP(password),
-						Z_STRVAL_PP(apop));
+						(argc>3)?Z_STRVAL_PP(apop):"");
 
 	/* 
 	 * we do not set vpopmail_errno here - it is considered auth_user cannot fail; insted it does not auth

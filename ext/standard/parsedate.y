@@ -1,5 +1,5 @@
 %{
-/* $Revision: 1.9 $
+/* $Revision: 1.10 $
 **
 **  Originally written by Steven M. Bellovin <smb@research.att.com> while
 **  at the University of North Carolina at Chapel Hill.  Later tweaked by
@@ -860,7 +860,6 @@ time_t parsedate(char *p, TIMEINFO *now)
     struct tm		*tm, tmbuf;
     TIMEINFO		ti;
     time_t		Start;
-	CLS_FETCH();
 
     yyInput = p;
     if (now == NULL) {

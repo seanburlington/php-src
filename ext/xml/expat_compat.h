@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: expat_compat.h,v 1.9 2003/06/10 20:03:40 imajes Exp $ */
+/* $Id: expat_compat.h,v 1.10 2003/06/15 20:40:45 moriyoshi Exp $ */
 
 #ifndef PHP_EXPAT_COMPAT_H
 #define PHP_EXPAT_COMPAT_H
@@ -57,8 +57,6 @@ typedef struct _XML_Parser {
 	
 	void *user;
 	xmlParserCtxtPtr parser;
-
-	XML_Memory_Handling_Suite        mem_hdlrs;
 
 	XML_StartElementHandler          h_start_element;
 	XML_EndElementHandler            h_end_element;

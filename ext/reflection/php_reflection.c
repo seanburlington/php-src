@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.28 2003/08/24 11:11:55 helly Exp $ */
+/* $Id: php_reflection.c,v 1.29 2003/08/24 11:28:53 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -480,16 +480,6 @@ static void _function_check_flag(INTERNAL_FUNCTION_PARAMETERS, int mask)
 	METHOD_NOTSTATIC_NUMPARAMS(0);
 	GET_REFLECTION_OBJECT_PTR(mptr);
 	RETURN_BOOL(mptr->common.fn_flags & mask);
-}
-
-/* {{{ proto public string Reflector::toString()
-   Returns a string representation */
-ZEND_METHOD(reflector, tostring)
-{
-	/* FIXME(?): I guess this is needed due to the fact that internal methods
-	 * are not subject to any modifier checks...
-	 */
-	zend_error(E_ERROR, "Cannot call abstract method reflector::tostring()");
 }
 
 /* {{{ proto public static mixed Reflection::export(Reflector r [, bool return])

@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.223 2003/12/16 15:58:10 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.224 2003/12/23 09:21:14 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -715,7 +715,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.223 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.224 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -888,8 +888,6 @@ _oci_stmt_list_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 		efree(statement->defines);
 	}
 
-	zend_list_delete(statement->conn->id);
-
 	oci_debug("END   _oci_stmt_list_dtor: id=%d",statement->id);
 
 	efree(statement);
@@ -967,7 +965,6 @@ _oci_coll_list_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	oci_collection *coll = (oci_collection *)rsrc->ptr;
 	oci_debug("START _oci_coll_list_dtor: %d",coll->id);
 
-	zend_list_delete(coll->conn->id);
 	/* Note sure if we need to free the object.  Have an
 	   oracle TAR out on this one.
 	   OCIDescriptorFree(descr->ocidescr, Z_TYPE_P(descr)); */

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.16 2003/02/22 07:31:01 georg Exp $ 
+  $Id: mysqli_api.c,v 1.17 2003/02/22 07:47:46 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -148,8 +148,8 @@ PHP_FUNCTION(mysqli_bind_param)
 
 			case MYSQLI_BIND_STRING:
 				bind[ofs].buffer_type = MYSQL_TYPE_VAR_STRING;
-				bind[ofs].buffer = NULL; // Z_STRVAL_PP(args[i]);
-				bind[ofs].buffer_length = 0; // strlen(Z_STRVAL_PP(args[i]));
+				bind[ofs].buffer = NULL; 
+				bind[ofs].buffer_length = 0;
 				bind[ofs].is_null = &stmt->is_null[ofs];
 				break;
 
@@ -283,8 +283,6 @@ PHP_FUNCTION(mysqli_bind_result)
 
 			case MYSQL_TYPE_LONGLONG:
 				stmt->bind[ofs].type = IS_STRING; 
-
-				/* TODO: change and check buflen when bug #74 is fixed */
 				stmt->bind[ofs].buflen = sizeof(my_ulonglong); 
 				stmt->bind[ofs].buffer = (char *)emalloc(stmt->bind[ofs].buflen);
 				bind[ofs].buffer_type = MYSQL_TYPE_LONGLONG;
@@ -659,9 +657,6 @@ PHP_FUNCTION(mysqli_fetch)
 								efree(stmt->vars[i]->value.str.val);
 							} 
 							ZVAL_STRING(stmt->vars[i], stmt->bind[i].buffer, 1); 
-							/*	
-							stmt->vars[i]->value.str.len = strlen(stmt->bind[i].buffer);
-							stmt->vars[i]->value.str.val = stmt->bind[i].buffer; */
 						}
 						break;
 					default:

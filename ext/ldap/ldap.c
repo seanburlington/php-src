@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.118 2002/05/04 14:27:48 venaas Exp $ */
+/* $Id: ldap.c,v 1.119 2002/06/21 22:22:46 mfischer Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -275,7 +275,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.118 2002/05/04 14:27:48 venaas Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.119 2002/06/21 22:22:46 mfischer Exp $" );
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));
@@ -2057,6 +2057,7 @@ int _ldap_rebind_proc(LDAP *ldap, const char *url, ber_tag_t req, ber_int_t msgi
 	zval **cb_args[2];
 	zval *cb_retval;
 	zval *cb_link = (zval *) params;
+	TSRMLS_FETCH();
 
 	ld = (ldap_linkdata *) zend_fetch_resource(&cb_link TSRMLS_CC, -1, "ldap link", NULL, 1, le_link);
 

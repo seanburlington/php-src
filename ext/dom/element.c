@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.1 2003/06/05 17:06:52 rrichards Exp $ */
+/* $Id: element.c,v 1.2 2003/06/05 18:54:25 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -65,7 +65,7 @@ PHP_FUNCTION(dom_element_element)
 	xmlNodePtr nodep = NULL, oldnode = NULL;
 	dom_object *intern;
 	char *name, *value = NULL;
-	int name_len, value_len;
+	int name_len, value_len = 0;
 
 	id = getThis();
 	

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.2 2003/06/05 17:48:25 sterling Exp $ */
+/* $Id: php_dom.c,v 1.3 2003/06/05 18:54:25 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -698,9 +698,11 @@ void node_free_resource(xmlNodePtr node TSRMLS_DC)
 {
 	xmlDtdPtr extSubset, intSubset;
 	xmlDocPtr docp;
+
 	if (!node) {
 		return;
 	}
+
 	switch (node->type) {
 		case XML_DOCUMENT_NODE:
 		case XML_HTML_DOCUMENT_NODE:

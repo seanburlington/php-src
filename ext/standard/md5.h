@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.h,v 1.9 2001/02/26 06:07:23 andi Exp $ */
+/* $Id: md5.h,v 1.10 2001/11/18 18:48:17 derick Exp $ */
 
 #ifndef MD5_H
 #define MD5_H
@@ -59,5 +59,6 @@ void PHP_MD5Update(PHP_MD5_CTX *, const unsigned char *, unsigned int);
 void PHP_MD5Final(unsigned char[16], PHP_MD5_CTX *);
 
 PHP_NAMED_FUNCTION(php_if_md5);
+PHP_NAMED_FUNCTION(php_if_md5_file);
 
 #endif

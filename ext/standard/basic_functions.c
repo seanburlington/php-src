@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.421 2001/11/15 09:53:40 stas Exp $ */
+/* $Id: basic_functions.c,v 1.422 2001/11/18 18:48:17 derick Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -282,6 +282,7 @@ function_entry basic_functions[] = {
 	PHP_FE(htmlentities,													NULL)
 	PHP_FE(get_html_translation_table,										NULL)
 	PHP_NAMED_FE(md5,php_if_md5,											NULL)
+	PHP_NAMED_FE(md5_file,php_if_md5_file,									NULL)
 	PHP_NAMED_FE(crc32,php_if_crc32,										NULL)
 
 	PHP_FE(iptcparse,														NULL)															

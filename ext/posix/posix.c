@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.41 2002/03/06 11:26:05 derick Exp $ */
+/* $Id: posix.c,v 1.42 2002/03/06 16:14:00 kalowsky Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -81,8 +81,10 @@ function_entry posix_functions[] = {
 	/* Non-Posix functions which are common */
 #ifdef HAVE_GETPGID
 	PHP_FE(posix_getpgid,	NULL)
-#endif
+#endif /* HAVE_GETPGID */
+#ifdef HAVE_GETSID
 	PHP_FE(posix_getsid,	NULL)
+#endif /* HAVE_GETSID */
 
 	/* POSIX.1, 4.4 */
 	PHP_FE(posix_uname,		NULL)
@@ -128,7 +130,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.41 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.42 $");
 	php_info_print_table_end();
 }
 /* }}} */

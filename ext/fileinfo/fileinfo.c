@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.6 2004/05/08 17:34:07 derick Exp $ */
+/* $Id: fileinfo.c,v 1.7 2005/01/24 23:53:00 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -357,7 +357,7 @@ static void _php_finfo_get_type(INTERNAL_FUNCTION_PARAMETERS, int mode)
 	if (mode) { /* file */
 		/* determine if the file is a local file or remote URL */
 		char *tmp2;
-		php_stream_wrapper *wrap = php_stream_locate_url_wrapper(buffer, &tmp2, 0 TSRMLS_DC);
+		php_stream_wrapper *wrap = php_stream_locate_url_wrapper(buffer, &tmp2, 0 TSRMLS_CC);
 		if (wrap && wrap->is_url) {
 #ifdef ZEND_ENGINE_2
 			php_stream_context *context = php_stream_context_from_zval(zcontext, 0);

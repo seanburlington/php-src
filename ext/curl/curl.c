@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.14 2003/10/16 09:08:42 sniper Exp $ */
+/* $Id: curl.c,v 1.124.2.15 2004/01/26 00:18:25 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -886,7 +886,7 @@ PHP_FUNCTION(curl_setopt)
 						error = curl_formadd(&first, &last, 
 											 CURLFORM_COPYNAME, string_key,
 											 CURLFORM_NAMELENGTH, string_key_len - 1,
-											 CURLFORM_PTRCONTENTS, postval, 
+											 (ZVAL_REFCOUNT(*zvalue) > 1 ? CURLFORM_PTRCONTENTS : CURLFORM_COPYCONTENTS), postval, 
 											 CURLFORM_CONTENTSLENGTH, Z_STRLEN_PP(current),
 											 CURLFORM_END);
 					}

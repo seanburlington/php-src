@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.48 2005/02/19 23:48:30 helly Exp $ */
+/* $Id: php_pdo_driver.h,v 1.49 2005/02/20 14:31:44 helly Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -543,6 +543,9 @@ struct _pdo_stmt_t {
 		struct {
 			zend_class_entry *ce;	
 			zval *ctor_args;
+			zval *retval_ptr; 
+			zend_fcall_info fci;
+			zend_fcall_info_cache fcc;
 		} cls;
 		zval *into;
 	} fetch;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.158 2002/03/17 22:50:56 wez Exp $ */
+/* $Id: pgsql.c,v 1.159 2002/03/20 14:21:28 wez Exp $ */
 
 #include <stdlib.h>
 
@@ -1478,7 +1478,7 @@ PHP_FUNCTION(pg_trace)
 		php_stream_close(stream);
 		RETURN_FALSE;
 	}
-	ZEND_REGISTER_RESOURCE(NULL, stream, php_file_le_stream());
+	php_stream_auto_cleanup(stream);
 	PQtrace(pgsql, fp);
 	RETURN_TRUE;
 }

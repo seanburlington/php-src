@@ -16,7 +16,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: image.c,v 1.52 2002/03/18 18:54:28 wez Exp $ */
+/* $Id: image.c,v 1.53 2002/03/20 14:21:28 wez Exp $ */
 /*
  * Based on Daniel Schmitt's imageinfo.c which carried the following
  * Copyright notice.
@@ -684,7 +684,6 @@ PHPAPI int php_getimagetype(php_stream * stream, char *filetype TSRMLS_DC)
 PHP_FUNCTION(getimagesize)
 {
 	zval **arg1, **info = NULL;
-	int rsrc_id;
  	int itype = 0;
 	char temp[64];
 	struct gfxinfo *result = NULL;
@@ -722,8 +721,6 @@ PHP_FUNCTION(getimagesize)
 	if (!stream) {
 		RETURN_FALSE;
 	}
-
-	rsrc_id = ZEND_REGISTER_RESOURCE(NULL, stream, php_file_le_stream());
 
 	itype = php_getimagetype(stream, NULL TSRMLS_CC);
 	switch( itype) {
@@ -763,7 +760,7 @@ PHP_FUNCTION(getimagesize)
 	        break;
 	}
 
-	zend_list_delete(rsrc_id);
+	php_stream_close(stream);
 
 	if (result) {
 		if (array_init(return_value) == FAILURE) {

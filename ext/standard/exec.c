@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.68 2002/03/16 01:28:57 wez Exp $ */
+/* $Id: exec.c,v 1.69 2002/03/20 14:21:28 wez Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -49,7 +49,6 @@ int php_Exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 	int buflen = 0;
 	int t, l, output=1;
 	int overflow_limit, lcmd, ldir;
-	int rsrc_id;
 	char *b, *c, *d=NULL;
 	php_stream *stream = NULL;
 #if PHP_SIGCHILD
@@ -143,8 +142,6 @@ int php_Exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 	 */
 
 	stream = php_stream_fopen_from_pipe(fp, "rb");
-	if (stream)
-		rsrc_id = ZEND_REGISTER_RESOURCE(NULL, stream, php_file_le_stream());
 
 	if (type != 3) {
 		l=0;
@@ -219,8 +216,7 @@ int php_Exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 		}
 	}
 
-	/* the zend_list_delete will pclose our popen'ed process */
-	zend_list_delete(rsrc_id); 
+	php_stream_close(stream); 
 
 #if HAVE_SYS_WAIT_H
 	if (WIFEXITED(FG(pclose_ret))) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.93 2002/03/18 20:44:15 wez Exp $ */
+/* $Id: fsock.c,v 1.94 2002/03/20 14:21:28 wez Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 
@@ -141,7 +141,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 				(void *) &stream) == SUCCESS)
 	{
 		efree(hashkey);
-		ZEND_REGISTER_RESOURCE(return_value, stream, php_file_le_stream());
+		php_stream_to_zval(stream, return_value);
 		return;
 	}
 
@@ -241,7 +241,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		RETURN_FALSE;
 	}
 		
-	ZEND_REGISTER_RESOURCE(return_value, stream, php_file_le_stream());
+	php_stream_to_zval(stream, return_value);
 }
 
 /* }}} */

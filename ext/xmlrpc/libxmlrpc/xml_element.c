@@ -31,7 +31,7 @@
 */
 
 
-static const char rcsid[] = "#(@) $Id: xml_element.c,v 1.3.4.2 2003/12/16 21:00:35 sniper Exp $";
+static const char rcsid[] = "#(@) $Id: xml_element.c,v 1.3.4.3 2004/06/01 20:16:18 iliaa Exp $";
 
 
 
@@ -44,6 +44,10 @@ static const char rcsid[] = "#(@) $Id: xml_element.c,v 1.3.4.2 2003/12/16 21:00:
  *   06/2000
  * HISTORY
  *   $Log: xml_element.c,v $
+ *   Revision 1.3.4.3  2004/06/01 20:16:18  iliaa
+ *   MFH: Fixed bug #28597 (xmlrpc_encode_request() incorrectly encodes chars in
+ *   200-210 range).
+ *
  *   Revision 1.3.4.2  2003/12/16 21:00:35  sniper
  *   MFH: fix compile warnings
  *
@@ -268,10 +272,9 @@ static int create_xml_escape(char *pString, unsigned char c)
     pString[counter++] = c / 100 + '0';
     c = c % 100;
   }
-  if(c >= 10) {
-    pString[counter++] = c / 10 + '0';
-    c = c % 10;
-  }
+  pString[counter++] = c / 10 + '0';
+  c = c % 10;
+
   pString[counter++] = c + '0';
   pString[counter++] = ';';
   return counter; 

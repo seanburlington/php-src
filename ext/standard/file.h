@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.32 2001/01/13 23:49:44 zeev Exp $ */
+/* $Id: file.h,v 1.33 2001/02/11 02:38:40 elixer Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -72,6 +72,22 @@ PHPAPI int php_file_le_fopen(void);
 PHPAPI int php_file_le_popen(void);
 PHPAPI int php_file_le_socket(void);
 PHPAPI int php_copy_file(char *src, char *dest);
+
+#define META_DEF_BUFSIZE 8192
+
+typedef enum _php_meta_tags_token {
+	TOK_EOF = 0,
+	TOK_OPENTAG,
+	TOK_CLOSETAG,
+	TOK_SLASH,
+	TOK_EQUAL,
+	TOK_SPACE,
+	TOK_ID,
+	TOK_STRING,
+	TOK_OTHER
+} php_meta_tags_token;
+
+php_meta_tags_token php_next_meta_token(FILE *, int, int, int *, int *, char **, int *);
 
 typedef struct {
 	int fgetss_state;

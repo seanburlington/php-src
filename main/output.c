@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.137 2002/10/03 11:56:10 jmoore Exp $ */
+/* $Id: output.c,v 1.138 2002/10/03 13:32:01 yohgaki Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -591,10 +591,12 @@ static inline void php_ob_append(const char *text, uint text_length TSRMLS_DC)
 	memcpy(target, text, text_length);
 	target[text_length]=0;
 
-	if (OG(active_ob_buffer).chunk_size
-			&& OG(active_ob_buffer).text_length >= OG(active_ob_buffer).chunk_size) {
+ 	/* If implicit_flush is On, send contents to next buffer and return. */
+	if (OG(implicit_flush) || OG(active_ob_buffer).chunk_size
+		&& OG(active_ob_buffer).text_length >= OG(active_ob_buffer).chunk_size)
+	{
 		zval *output_handler = OG(active_ob_buffer).output_handler;
-
+		
 		if (output_handler) {
 			output_handler->refcount++;
 		}

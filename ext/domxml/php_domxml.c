@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.118.2.12 2002/06/12 11:13:35 chregu Exp $ */
+/* $Id: php_domxml.c,v 1.118.2.8.2.1 2002/08/07 17:21:49 jtate Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -493,21 +493,15 @@ static zval *dom_object_get_data(void *obj)
 static inline void node_wrapper_dtor(xmlNodePtr node)
 {
 	zval *wrapper;
-	int refcount = 0;
+
 	/* FIXME: type check probably unnecessary here? */
 	if (!node || Z_TYPE_P(node) == XML_DTD_NODE)
 		return;
 
 	wrapper = dom_object_get_data(node);
 
-	if (wrapper != NULL) {
-		refcount = wrapper->refcount;
+	if (wrapper)
 		zval_ptr_dtor(&wrapper);
-		/*only set it to null, if refcount was 1 before, otherwise it has still needed references */
-		if (refcount == 1) {
-			dom_object_set_data(node, NULL);
-		}
-	}
 
 }
 
@@ -567,6 +561,7 @@ static void php_free_xml_doc(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 
 	if (doc) {
 		node_list_wrapper_dtor(doc->children);
+
 		node_wrapper_dtor((xmlNodePtr) doc);
 		xmlFreeDoc(doc);
 	}
@@ -577,16 +572,11 @@ static void php_free_xml_node(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	xmlNodePtr node = (xmlNodePtr) rsrc->ptr;
 
-	/* if node has no parent, it will not be freed by php_free_xml_doc, so do it here 
-	and for all children as well. */
-	if (node->parent == NULL) {
-		node_list_wrapper_dtor(node->children);
-		node_wrapper_dtor(node);        
-		xmlFreeNode(node);
-	} else {
-		node_wrapper_dtor(node);
+	if (node) {
+		zval *wrapper = dom_object_get_data(node);
+		if (wrapper)
+			zval_ptr_dtor(&wrapper);
 	}
-
 }
 
 
@@ -2044,7 +2034,7 @@ PHP_FUNCTION(domxml_node_append_child)
 	 * Uwe: must have been a temporary problem. It works for me with both
 	 * xmlAddChildList and xmlAddChild
 	 */
-
+	/*child = xmlAddSibling(nodep, new_child);*/
 	child = xmlAddChild(nodep, new_child);
 
 	if (NULL == child) {
@@ -2673,10 +2663,10 @@ PHP_FUNCTION(domxml_doc_get_element_by_id)
 	xmlDocPtr docp;
 	idsIterator iter;
 	xmlHashTable *ids = NULL;
-	int retnode,idname_len;
-	char *idname;
-	
-	DOMXML_PARAM_TWO(docp, id, le_domxmldocp, "s", &idname, &idname_len);
+	int retnode;
+
+	id = getThis();
+	DOMXML_GET_OBJ(docp, id, le_domxmldocp);
 
 	ids = (xmlHashTable *) docp->ids;
 	if(ids) {
@@ -3193,8 +3183,7 @@ PHP_FUNCTION(domxml_dump_mem)
 	if (!size) {
 		RETURN_FALSE;
 	}
-	RETVAL_STRINGL(mem, size, 1);
-	xmlFree(mem);
+	RETURN_STRINGL(mem, size, 1);
 }
 /* }}} */
 
@@ -3418,7 +3407,7 @@ PHP_FUNCTION(domxml_html_dump_mem)
 			xmlFree(mem);
 		RETURN_FALSE;
 	}
-	RETVAL_STRINGL(mem, size, 1);
+	RETURN_STRINGL(mem, size, 1);
 	xmlFree(mem);
 }
 /* }}} */

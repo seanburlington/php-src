@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 2001/06/26 11:35:34 sniper Exp $
+dnl $Id: config.m4,v 1.4.2.1 2001/08/17 06:55:38 sniper Exp $
 dnl config.m4 for extension iconv
 
 PHP_ARG_WITH(iconv, for iconv support,
@@ -16,7 +16,10 @@ if test "$PHP_ICONV" != "no"; then
   
   if test -f $ICONV_DIR/lib/libconv.a -o -f $ICONV_DIR/lib/libiconv.s? ; then
     PHP_ADD_LIBRARY_WITH_PATH(iconv, $ICONV_DIR/lib, ICONV_SHARED_LIBADD)
-    AC_CHECK_LIB(iconv, libiconv_open, AC_DEFINE(HAVE_ICONV, 1, [ ]))
+    AC_CHECK_LIB(iconv, libiconv_open, [
+    	AC_DEFINE(HAVE_ICONV, 1, [ ])
+    	AC_DEFINE(HAVE_LIBICONV, 1, [ ])
+    ])
   else
     AC_CHECK_LIB(c, iconv_open, AC_DEFINE(HAVE_ICONV, 1, [ ]))
   fi

@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.42 2001/07/20 14:40:30 zeev Exp $ */
+/* $Id: internal_functions_win32.c,v 1.43 2001/07/24 20:30:33 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -88,16 +88,6 @@ zend_module_entry *php_builtin_extensions[] = {
 int php_startup_internal_extensions(void)
 {
 	return php_startup_extensions(php_builtin_extensions, EXTCOUNT);
-}
-
-int php_global_startup_internal_extensions(void)
-{
-	return php_global_startup_extensions(php_builtin_extensions, EXTCOUNT);
-}
-
-int php_global_shutdown_internal_extensions(void)
-{
-	return php_global_shutdown_extensions(php_builtin_extensions, EXTCOUNT);
 }
 
 

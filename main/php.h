@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.143 2001/07/20 14:40:30 zeev Exp $ */
+/* $Id: php.h,v 1.144 2001/07/24 20:30:34 zeev Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -266,8 +266,6 @@ int cfgparse(void);
 
 /* functions */
 int php_startup_internal_extensions(void);
-int php_global_startup_internal_extensions(void);
-int php_global_shutdown_internal_extensions(void);
 
 int php_mergesort(void *base, size_t nmemb, register size_t size, int (*cmp) (const void *, const void *));
 

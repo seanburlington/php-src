@@ -27,7 +27,7 @@
    |          Jim Winstead (jimw@php.net)                                 |
    +----------------------------------------------------------------------+
 */
-/* $Id: fsock.h,v 1.21 1999/12/18 04:01:14 zeev Exp $ */
+/* $Id: fsock.h,v 1.22 2000/01/15 19:41:17 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.24 1999-06-18 [ssb] */
 
@@ -67,6 +67,7 @@ int php_sock_feof(int socket);
 int php_sock_fgetc(int socket);
 int php_is_persistent_sock(int);
 int php_sockset_blocking(int socket, int mode);
+void php_sockset_timeout(int socket, struct timeval *timeout);
 int php_sockdestroy(int socket);
 int php_sock_close(int socket);
 size_t php_sock_set_def_chunk_size(size_t size);

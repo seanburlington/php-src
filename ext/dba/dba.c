@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.18 2000/06/27 21:36:25 jah Exp $ */
+/* $Id: dba.c,v 1.19 2000/06/27 22:25:27 jah Exp $ */
 
 #include "php.h"
 
@@ -191,9 +191,6 @@ static PHP_MINIT_FUNCTION(dba)
 	zend_hash_init(&ht_keys, 0, NULL, NULL, 1);
 	GLOBAL(le_db) = register_list_destructors(dba_close, NULL);
 	GLOBAL(le_pdb) = register_list_destructors(NULL, dba_close);
-	REGISTER_LONG_CONSTANT("DBA_BTREE", DBA_BTREE, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("DBA_HASH", DBA_HASH, CONST_CS | CONST_PERSISTENT);
-	REGISTER_LONG_CONSTANT("DBA_RECNO", DBA_RECNO, CONST_CS | CONST_PERSISTENT);
 	return SUCCESS;
 }
 
@@ -209,7 +206,7 @@ static PHP_MINFO_FUNCTION(dba)
 	dba_handler *hptr;
 	
 	php_info_print_box_start(0);
-	PUTS("V1 ($Id: dba.c,v 1.18 2000/06/27 21:36:25 jah Exp $)");
+	PUTS("V1 ($Id: dba.c,v 1.19 2000/06/27 22:25:27 jah Exp $)");
 	for(hptr = handler; hptr->name; hptr++) {
 		PUTS(" ");
 		PUTS(hptr->name);

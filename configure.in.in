@@ -1,4 +1,4 @@
-dnl $Id: configure.in.in,v 1.15 1999/04/22 02:48:22 ssb Exp $ -*- sh -*-
+dnl $Id: configure.in.in,v 1.16 1999/04/24 20:43:58 sas Exp $ -*- sh -*-
 dnl Process this file with autoconf to produce a configure script.
 
 
@@ -205,6 +205,33 @@ AC_CHECK_HEADERS(fcntl.h unistd.h crypt.h sys/file.h memory.h pwd.h grp.h sys/so
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_STRUCT_TM
 AC_STRUCT_TIMEZONE
+
+AC_CACHE_CHECK([for tm_gmtoff in struct tm], ac_cv_struct_tm_gmtoff,
+[AC_TRY_COMPILE([#include <sys/types.h>
+#include <$ac_cv_struct_tm>], [struct tm tm; tm.tm_gmtoff;],
+  ac_cv_struct_tm_gmtoff=yes, ac_cv_struct_tm_gmtoff=no)])
+
+if test "$ac_cv_struct_tm_gmtoff" = yes; then
+  AC_DEFINE(HAVE_TM_GMTOFF)
+fi
+
+AC_CACHE_CHECK(for struct flock,php_struct_flock,
+    AC_TRY_COMPILE([
+#include <unistd.h>
+#include <fcntl.h>
+        ],
+        [struct flock x;],
+        [
+          php_struct_flock=yes
+        ],[
+          php_struct_flock=no
+        ])
+)
+if test "$php_struct_flock" = "yes" ; then
+    AC_DEFINE(HAVE_STRUCT_FLOCK, 1)
+else
+    AC_DEFINE(HAVE_STRUCT_FLOCK, 0)
+fi
 
 dnl Check for members of the stat structure
 AC_STRUCT_ST_BLKSIZE

@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.100 2000/10/22 14:42:55 sas Exp $ */
+/* $Id: fopen_wrappers.c,v 1.101 2000/10/27 16:16:55 fmk Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -440,7 +440,7 @@ static FILE *php_fopen_url_wrapper(const char *path, char *mode, int options, in
 	if(protocol) {
 		php_fopen_url_wrapper_t *wrapper=NULL;
 
-		if(FAILURE==zend_hash_find(&fopen_url_wrappers_hash, protocol, n, (void **)&wrapper)) {
+		if(FAILURE==zend_hash_find(&fopen_url_wrappers_hash, (char *)protocol, n, (void **)&wrapper)) {
 			wrapper=NULL;
 			protocol=NULL;
 		}

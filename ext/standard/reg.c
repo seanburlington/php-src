@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.31 2000/02/19 23:41:21 zeev Exp $ */
+/* $Id: reg.c,v 1.32 2000/02/24 10:11:42 eschmid Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -510,7 +510,7 @@ PHP_FUNCTION(eregi_replace)
 /* ("root", "passwd", "uid", "gid", "other:stuff:like:/bin/sh")
    = split(":", $passwd_file, 5); */
 /* {{{ proto array split(string pattern, string string [, int limit])
-   split string into array by regular expression */
+   Split string into array by regular expression */
 PHP_FUNCTION(split)
 {
 	pval **spliton, **str, **arg_count = NULL;

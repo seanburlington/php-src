@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.42 2005/03/25 06:26:30 chriskl Exp $
+dnl $Id: config.m4,v 1.43 2005/04/03 13:06:08 tony2001 Exp $
 dnl
 
 AC_DEFUN([PHP_PGSQL_CHECK_FUNCTIONS],[
@@ -88,7 +88,7 @@ if test "$PHP_PGSQL" != "no"; then
   AC_CHECK_LIB(pq, PQputCopyEnd,AC_DEFINE(HAVE_PQPUTCOPYEND,1,[PostgreSQL 7.4 or later]))
   AC_CHECK_LIB(pq, PQgetCopyData,AC_DEFINE(HAVE_PQGETCOPYDATA,1,[PostgreSQL 7.4 or later]))
   AC_CHECK_LIB(pq, PQsetErrorVerbosity,AC_DEFINE(HAVE_PQSETERRORVERBOSITY,1,[PostgreSQL 7.4 or later]))
-  AC_CHECK_LIB(pq, pg_encoding_to_char,AC_DEFINE(HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT,1,[Whether libpq is compiled with --enable-multibye]))
+  AC_CHECK_LIB(pq, pg_encoding_to_char,AC_DEFINE(HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT,1,[Whether libpq is compiled with --enable-multibyte]))
   LIBS=$old_LIBS
   LDFLAGS=$old_LDFLAGS
 

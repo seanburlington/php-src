@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: expat_compat.h,v 1.11 2003/07/09 03:14:41 sterling Exp $ */
+/* $Id: expat_compat.h,v 1.12 2003/09/22 19:04:49 rrichards Exp $ */
 
 #ifndef PHP_EXPAT_COMPAT_H
 #define PHP_EXPAT_COMPAT_H
@@ -26,10 +26,10 @@
 
 #include "php_compat.h"
 
-#include <libxml/hash.h>
 #include <libxml/parser.h>
 #include <libxml/parserInternals.h>
 #include <libxml/tree.h>
+#include <libxml/hash.h>
 
 typedef xmlChar XML_Char;
 

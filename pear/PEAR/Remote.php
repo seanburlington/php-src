@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.35 2002/11/24 10:13:57 dickmann Exp $
+// $Id: Remote.php,v 1.36 2002/11/24 10:15:25 dickmann Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -108,7 +108,7 @@ class PEAR_Remote extends PEAR
         $this->cache = $this->getCache($args);
         $cachettl = $this->config->get('cache_ttl');
         // If cache is newer than $cachettl seconds, we use the cache!
-        if ($this->cache !== null && $this->cache['age'] < $cachettl && is_array($this->cache['content'])) {
+        if ($this->cache !== null && $this->cache['age'] < $cachettl) {
             return $this->cache['content'];
         };
         

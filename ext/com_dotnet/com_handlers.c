@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.11 2004/01/13 13:38:11 wez Exp $ */
+/* $Id: com_handlers.c,v 1.12 2004/01/13 16:02:56 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,6 +37,8 @@ static zval *com_property_read(zval *object, zval *member, zend_bool silent TSRM
 
 	MAKE_STD_ZVAL(return_value);
 	ZVAL_NULL(return_value);
+	return_value->refcount = 0;
+	return_value->is_ref = 0;
 
 	obj = CDNO_FETCH(object);
 
@@ -110,6 +112,8 @@ static zval *com_read_dimension(zval *object, zval *offset TSRMLS_DC)
 
 	MAKE_STD_ZVAL(return_value);
 	ZVAL_NULL(return_value);
+	return_value->refcount = 0;
+	return_value->is_ref = 0;
 
 	obj = CDNO_FETCH(object);
 

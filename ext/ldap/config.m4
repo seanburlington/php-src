@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.12 2000/09/22 00:59:16 sniper Exp $
+dnl $Id: config.m4,v 1.13 2000/10/15 22:53:43 sniper Exp $
 
 PHP_ARG_WITH(ldap,whether to include LDAP support,
 [  --with-ldap[=DIR]       Include LDAP support.  DIR is the LDAP base
@@ -40,7 +40,7 @@ if test "$PHP_LDAP" != "no"; then
 
 	PHP_SUBST(LDAP_SHARED_LIBADD)
 
-	if test -f $LDAP_LIBDIR/liblber.a; then
+	if test -f $LDAP_LIBDIR/liblber.a -o -f $LDAP_LIBDIR/liblber.so ; then
 		AC_ADD_LIBRARY_WITH_PATH(lber, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 		AC_ADD_LIBRARY_WITH_PATH(ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 	elif test -f $LDAP_LIBDIR/libldapssl41.so; then

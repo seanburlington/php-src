@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.19.2.2 2001/11/13 09:53:17 derick Exp $ */
+/* $Id: sablot.c,v 1.19.2.3 2001/11/22 07:49:43 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -89,6 +89,7 @@ function_entry xslt_functions[] = {
 	PHP_FE(xslt_error,               NULL)
 	PHP_FE(xslt_errno,               NULL)
 	PHP_FE(xslt_free,                NULL)
+	{NULL, NULL, NULL}
 };
 /* }}} */
 

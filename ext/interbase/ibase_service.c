@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_service.c,v 1.9 2004/04/09 18:45:30 abies Exp $ */
+/* $Id: ibase_service.c,v 1.10 2004/05/12 14:29:42 abies Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -24,7 +24,7 @@
 
 #include "php.h"
 
-#if HAVE_IBASE6_API
+#if HAVE_IBASE
 
 #include "php_interbase.h"
 #include "php_ibase_includes.h"
@@ -617,7 +617,7 @@ PHP_FUNCTION(ibase_server_info)
 
 void php_ibase_register_service_constants(INIT_FUNC_ARGS) { /* nop */ }
 
-#endif /* HAVE_IBASE6_API */
+#endif /* HAVE_IBASE */
 
 /*
  * Local variables:

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.74.2.10 2003/08/07 16:02:04 zeev Exp $ */
+/* $Id: php_ftp.c,v 1.74.2.11 2003/08/07 16:03:05 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -176,7 +176,7 @@ PHP_FUNCTION(ftp_connect)
 /* }}} */
 
 #ifdef HAVE_OPENSSL_EXT
-/* {{{ proto resource ftp_ssl_connect(string host [, int port [, int timeout)]])
+/* {{{ proto resource ftp_ssl_connect(string host [, int port [, int timeout]])
    Opens a FTP-SSL stream */
 PHP_FUNCTION(ftp_ssl_connect)
 {

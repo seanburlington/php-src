@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.48 2002/04/09 21:48:19 ssb Exp $
+// $Id: Common.php,v 1.49 2002/04/09 22:30:44 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -320,6 +320,9 @@ class PEAR_Common extends PEAR
         $this->cdata = '';
         switch ($name) {
             case 'dir':
+                if ($this->in_changelog) {
+                    break;
+                }
                 if ($attribs['name'] != '/') {
                     $this->dir_names[] = $attribs['name'];
                 }
@@ -358,12 +361,16 @@ class PEAR_Common extends PEAR
                 }
                 break;
             case 'replace':
-                $this->filelist[$this->current_path]['replacements'][] = $attribs;
+                if (!$this->in_changelog) {
+                    $this->filelist[$this->current_path]['replacements'][] = $attribs;
+                }
                 break;
 
             case 'libfile':
-                $this->lib_atts = $attribs;
-                $this->lib_atts['role'] = 'extsrc';
+                if (!$this->in_changelog) {
+                    $this->lib_atts = $attribs;
+                    $this->lib_atts['role'] = 'extsrc';
+                }
                 break;
             case 'maintainers':
                 $this->pkginfo['maintainers'] = array();
@@ -386,7 +393,9 @@ class PEAR_Common extends PEAR
             case 'release':
                 if ($this->in_changelog) {
                     $this->pkginfo['changelog'][$this->c_i] = array();
-                    $this->current_release =& $this->pkginfo['changelog'][$this->c_i];
+                    $this->current_release = &$this->pkginfo['changelog'][$this->c_i];
+                } else {
+                    $this->current_release = &$this->pkginfo;
                 }
                 break;
             case 'deps':
@@ -488,6 +497,9 @@ class PEAR_Common extends PEAR
                 }
                 break;
             case 'dir':
+                if ($this->in_changelog) {
+                    break;
+                }
                 array_pop($this->dir_names);
                 break;
             case 'file':
@@ -516,6 +528,9 @@ class PEAR_Common extends PEAR
                 }
                 break;
             case 'libfile':
+                if ($this->in_changelog) {
+                    break;
+                }
                 $path = '';
                 if (!empty($this->dir_names)) {
                     foreach ($this->dir_names as $dir) {
@@ -538,6 +553,9 @@ class PEAR_Common extends PEAR
                 unset($this->lib_name);
                 break;
             case 'libname':
+                if ($this->in_changelog) {
+                    break;
+                }
                 $this->lib_name = $data;
                 break;
             case 'maintainer':

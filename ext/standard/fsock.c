@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.43 2000/02/01 20:02:44 andrei Exp $ */
+/* $Id: fsock.c,v 1.44 2000/02/02 18:00:44 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php 3.0 revision 1.133 1999-07-21 [sas] */
@@ -648,7 +648,7 @@ char *php_sock_fgets(char *buf, size_t maxlen, int socket)
 
 	if(!p) {
 		if(sock->is_blocked) {
-			while(!p && !sock->eof && TOREAD(sock) < maxlen) {
+			while(!p && !sock->eof && !sock->timeout_event && TOREAD(sock) < maxlen) {
 				php_sockread_internal(sock);
 				SEARCHCR();
 			}

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.65 2002/01/31 10:21:24 derick Exp $ */
+/* $Id: dl.c,v 1.66 2002/02/26 11:00:20 edink Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -58,7 +58,7 @@ PHP_FUNCTION(dl)
 	pval **file;
 
 #ifdef ZTS
-	if (strcmp(sapi_module.name, "cgi")!=0) {
+	if ((strcmp(sapi_module.name, "cgi")!=0) && (strcmp(sapi_module.name, "cli")!=0)) {
 		php_error(E_ERROR, "dl() is not supported in multithreaded Web servers - use extension statements in your php.ini");
 	}
 #endif

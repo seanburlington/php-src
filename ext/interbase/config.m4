@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9 2003/02/03 11:45:44 sniper Exp $
+dnl $Id: config.m4,v 1.10 2003/03/13 23:15:43 daniela Exp $
 dnl
 
 PHP_ARG_WITH(interbase,for InterBase support,
@@ -21,7 +21,7 @@ if test "$PHP_INTERBASE" != "no"; then
   ], [
     AC_MSG_ERROR([libgds not found! Check config.log for more information.])
   ], [
-    -L$IBASE_LIBDIR -lgds
+    -L$IBASE_LIBDIR -lgds -lcrypt
   ])
 
   PHP_ADD_INCLUDE($IBASE_INCDIR)

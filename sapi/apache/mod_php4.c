@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php4.c,v 1.114 2001/08/01 22:53:26 zeev Exp $ */
+/* $Id: mod_php4.c,v 1.115 2001/08/04 17:02:43 sebastian Exp $ */
 
 #define NO_REGEX_EXTRA_H
 #ifdef WIN32
@@ -309,7 +309,6 @@ static void php_apache_log_message(char *message)
  */
 static void php_apache_request_shutdown(void *dummy)
 {
-	TSRMLS_FETCH();
 	TSRMLS_FETCH();
 
 	php_output_set_status(0);

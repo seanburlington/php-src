@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.92 2000/05/18 15:34:21 zeev Exp $ */
+/* $Id: php.h,v 1.93 2000/05/19 08:28:53 zeev Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -255,8 +255,6 @@ extern PHPAPI void php_error_cb(int type, const char *format, ...);
 #define php_error php_error_cb
 #endif
 
-
-extern void html_putc(char c);
 
 #define zenderror phperror
 #define zendlex phplex

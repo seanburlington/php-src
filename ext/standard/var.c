@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.95 2001/07/15 14:08:58 zeev Exp $ */
+/* $Id: var.c,v 1.96 2001/07/15 22:49:25 zeev Exp $ */
 
 
 /* {{{ includes 
@@ -90,7 +90,7 @@ void php_var_dump(zval **struc, int level)
 			myht = HASH_OF(*struc);
 			php_printf("%sobject(%s)(%d) {\n", COMMON, (*struc)->value.obj.ce->name, zend_hash_num_elements(myht));
 head_done:
-			zend_hash_apply_with_arguments(myht, (ZEND_STD_HASH_APPLIER) php_array_element_dump, 1, level);
+			zend_hash_apply_with_arguments(myht, (apply_func_args_t) php_array_element_dump, 1, level);
 			if (level>1) {
 				php_printf("%*c", level-1, ' ');
 			}

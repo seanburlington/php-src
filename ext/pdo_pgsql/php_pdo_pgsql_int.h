@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_pgsql_int.h,v 1.2 2004/05/20 17:43:56 iliaa Exp $ */
+/* $Id: php_pdo_pgsql_int.h,v 1.3 2004/05/20 18:00:24 iliaa Exp $ */
 
 #ifndef PHP_PDO_PGSQL_INT_H
 #define PHP_PDO_PGSQL_INT_H
@@ -38,6 +38,7 @@ typedef struct {
 	unsigned 	attached:1;
 	unsigned 	_reserved:31;
 	pdo_pgsql_error_info	einfo;
+	Oid 		pgoid;
 } pdo_pgsql_db_handle;
 
 typedef struct {

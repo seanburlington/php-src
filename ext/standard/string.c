@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.62 1999/12/04 19:16:06 sas Exp $ */
+/* $Id: string.c,v 1.63 1999/12/05 14:16:36 rasmus Exp $ */
 
 /* Synced with php3 revision 1.193 1999-06-16 [ssb] */
 
@@ -32,6 +32,8 @@
 #endif
 #include "zend_execute.h"
 #include "php_globals.h"
+
+int php_tag_find(char *tag, int len, char *set);
 
 /* this is read-only, so it's ok */
 static char hexconvtab[] = "0123456789abcdef";

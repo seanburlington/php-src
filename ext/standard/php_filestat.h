@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_filestat.h,v 1.1 1999/12/04 19:16:04 sas Exp $ */
+/* $Id: php_filestat.h,v 1.2 1999/12/05 14:16:36 rasmus Exp $ */
 
 #ifndef _FILESTAT_H
 #define _FILESTAT_H
@@ -54,6 +54,7 @@ PHP_FUNCTION(is_link);
 PHP_FUNCTION(file_exists);
 PHP_FUNCTION(stat);
 PHP_FUNCTION(lstat);
+PHP_FUNCTION(diskfreespace);
 PHP_FUNCTION(chown);
 PHP_FUNCTION(chgrp);
 PHP_FUNCTION(chmod);

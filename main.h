@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: main.h,v 1.11 1999/12/05 10:29:03 ssb Exp $ */
+/* $Id: main.h,v 1.12 1999/12/05 14:16:35 rasmus Exp $ */
 
 
 #ifndef _MAIN_H
@@ -38,7 +38,7 @@ PHPAPI int php_module_shutdown_wrapper(sapi_module_struct *sapi_globals);
 
 PHPAPI void php_execute_script(zend_file_handle *primary_file CLS_DC ELS_DC PLS_DC);
 
-extern void php3_call_shutdown_functions(void);
+extern void php_call_shutdown_functions(void);
 
 
 /* configuration module */

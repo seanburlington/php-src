@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.24 2004/01/29 17:21:16 iliaa Exp $
+dnl $Id: config.m4,v 1.25 2004/02/03 08:38:22 ssb Exp $
 dnl config.m4 for extension sqlite
 dnl vim:et:ts=2:sw=2
 
@@ -78,7 +78,7 @@ if test "$PHP_SQLITE" != "no"; then
     dnl in funcs.c uses assert(), which is a bit silly and something 
     dnl we want to avoid. This assert() was removed in SQLite 2.8.9.
     if test "$PHP_SQLITE_UTF8" = "yes"; then
-        SQLITE_ENCODING="UTF-8"
+        SQLITE_ENCODING="UTF8"
         AC_DEFINE(SQLITE_UTF8, 1, [ ])
     else
         SQLITE_ENCODING="ISO8859"

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.140 2005/03/23 07:11:55 dmitry Exp $ */
+/* $Id: soap.c,v 1.141 2005/03/23 08:08:54 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2093,6 +2093,11 @@ PHP_METHOD(SoapClient, SoapClient)
 			class_map->refcount--;
 #endif
 			add_property_zval(this_ptr, "_classmap", class_map);
+		}
+
+		if (zend_hash_find(ht, "connection_timeout", sizeof("connection_timeout"), (void**)&tmp) == SUCCESS &&
+		    Z_TYPE_PP(tmp) == IS_LONG && Z_LVAL_PP(tmp) > 0) {
+			add_property_long(this_ptr, "_connection_timeout", Z_LVAL_PP(tmp));
 		}
 	} else if (wsdl == NULL) {
 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "'location' and 'uri' options are requred in nonWSDL mode");

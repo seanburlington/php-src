@@ -16,7 +16,7 @@
   | Author: Stig Sæther Bakken <ssb@fast.no>                             |
   +----------------------------------------------------------------------+
 
-  $Id: CLI.php,v 1.7 2002/03/26 16:31:13 cox Exp $
+  $Id: CLI.php,v 1.8 2002/04/02 09:15:51 ssb Exp $
 */
 
 require_once "PEAR.php";
@@ -24,6 +24,13 @@ require_once "PEAR.php";
 class PEAR_Frontend_CLI extends PEAR
 {
     // {{{ properties
+
+    /**
+     * What type of user interface this frontend is for.
+     * @var string
+     * @access public
+     */
+    var $type = 'CLI';
 
     var $omode = 'plain';
     var $params = array();

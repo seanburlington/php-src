@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.57 2002/04/11 13:40:19 yohgaki Exp $ */
+/* $Id: mbstring.c,v 1.58 2002/04/11 22:27:00 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -1492,14 +1492,16 @@ PHP_FUNCTION(mb_output_handler)
  		if (SG(sapi_headers).send_default_content_type ) {
 			mimetype = SG(default_mimetype) ? SG(default_mimetype) : SAPI_DEFAULT_MIMETYPE;
 			charset = mbfl_no2preferred_mime_name(encoding);
-			len = (sizeof ("Content-Type:")-1) + strlen(mimetype) + (sizeof (";charset=")-1) + strlen(charset) + 1;
-			p = emalloc(len);
-			strcpy(p, "Content-Type:");
-			strcat(p, mimetype);
-			strcat(p, ";charset=");
-			strcat(p, charset);
-			if (sapi_add_header(p, len, 0) != FAILURE)
-				SG(sapi_headers).send_default_content_type = 0;
+			if (charset) {
+				len = (sizeof ("Content-Type:")-1) + strlen(mimetype) + (sizeof (";charset=")-1) + strlen(charset) + 1;
+				p = emalloc(len);
+				strcpy(p, "Content-Type:");
+				strcat(p, mimetype);
+				strcat(p, ";charset=");
+				strcat(p, charset);
+				if (sapi_add_header(p, len, 0) != FAILURE)
+					SG(sapi_headers).send_default_content_type = 0;
+			}
  			/* activate the converter */
  			MBSTRG(outconv) = mbfl_buffer_converter_new(MBSTRG(current_internal_encoding), encoding, 0 TSRMLS_CC);
  		}

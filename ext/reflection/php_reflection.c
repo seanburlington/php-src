@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.17 2003/07/20 20:16:07 gschlossnagle Exp $ */
+/* $Id: php_reflection.c,v 1.18 2003/07/23 04:02:26 sebastian Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_default_classes.h"
@@ -945,7 +945,7 @@ ZEND_FUNCTION(reflection_method_invoke)
 	METHOD_NOTSTATIC;
 
 	if (argc < 1) {
-		zend_error(E_WARNING, "First parameter is expected to be an instance of %s", mptr->common.scope->name);
+		zend_error(E_WARNING, "%s expects at least one parameter, none given", get_active_function_name(TSRMLS_C));
 		RETURN_FALSE;
 	}
 	

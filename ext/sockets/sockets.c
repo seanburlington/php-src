@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.118 2002/08/16 14:23:27 jason Exp $ */
+/* $Id: sockets.c,v 1.119 2002/08/25 23:28:42 jason Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -446,6 +446,10 @@ PHP_MINIT_FUNCTION(sockets)
 	REGISTER_LONG_CONSTANT("SOMAXCONN",		SOMAXCONN,		CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PHP_NORMAL_READ", PHP_NORMAL_READ, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("PHP_BINARY_READ", PHP_BINARY_READ, CONST_CS | CONST_PERSISTENT);
+
+#ifndef WIN32
+# include "unix_socket_constants.h"
+#endif
 
 	if ((pe = getprotobyname("tcp"))) {
 		REGISTER_LONG_CONSTANT("SOL_TCP", pe->p_proto, CONST_CS | CONST_PERSISTENT);

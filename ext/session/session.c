@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.273 2002/02/03 05:40:19 yohgaki Exp $ */
+/* $Id: session.c,v 1.274 2002/02/05 01:28:55 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -825,7 +825,7 @@ static const ps_serializer *_php_find_ps_serializer(char *name TSRMLS_DC)
 		convert_to_string((*ppid)); \
 		PS(id) = estrndup(Z_STRVAL_PP(ppid), Z_STRLEN_PP(ppid))
 
-static void php_session_start(TSRMLS_D)
+PHPAPI void php_session_start(TSRMLS_D)
 {
 	pval **ppid;
 	pval **data;

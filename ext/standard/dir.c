@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.17 1999/12/04 19:16:03 sas Exp $ */
+/* $Id: dir.c,v 1.18 1999/12/05 16:25:31 sas Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -129,7 +129,7 @@ PHP_MINIT_FUNCTION(dir)
 	dir_class_entry_ptr = register_internal_class(&dir_class_entry);
 
 #ifdef ZTS
-	dir_globals_id = ts_allocate_id(sizeof(php_dir_globals), php_dir_init_globals, NULL);
+	dir_globals_id = ts_allocate_id(sizeof(php_dir_globals), (ts_allocate_ctor) php_dir_init_globals, NULL);
 #else
 	DIR(default_dir) = 0;
 #endif

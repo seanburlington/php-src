@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.29 1999/12/03 14:57:28 sas Exp $ */
+/* $Id: fsock.c,v 1.30 1999/12/05 16:25:31 sas Exp $ */
 
 /* Synced with php3 revision 1.121 1999-06-18 [ssb] */
 /* Synced with php3 revision 1.133 1999-07-21 [sas] */
@@ -731,7 +731,7 @@ static void fsock_globals_dtor(FLS_D)
 PHP_MINIT_FUNCTION(fsock)
 {
 #ifdef ZTS
-	fsock_globals_id = ts_allocate_id(sizeof(php_fsock_globals), fsock_globals_ctor, fsock_globals_dtor);
+	fsock_globals_id = ts_allocate_id(sizeof(php_fsock_globals), (ts_allocate_ctor) fsock_globals_ctor, (ts_allocate_dtor) fsock_globals_dtor);
 #else
 	fsock_globals_ctor(FLS_C);
 #endif

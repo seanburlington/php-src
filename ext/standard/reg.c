@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.24 1999/12/04 19:16:06 sas Exp $ */
+/* $Id: reg.c,v 1.25 1999/12/05 16:25:31 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -105,7 +105,7 @@ static void php_reg_init_globals(php_reg_globals *reg_globals)
 static PHP_MINIT_FUNCTION(regex)
 {
 #ifdef ZTS
-	reg_globals_id = ts_allocate_id(sizeof(php_reg_globals), php_reg_init_globals, NULL);
+	reg_globals_id = ts_allocate_id(sizeof(php_reg_globals), (ts_allocate_ctor) php_reg_init_globals, NULL);
 #else
 	php_reg_init_globals(&reg_globals);
 #endif

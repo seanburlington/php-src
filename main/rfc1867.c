@@ -15,7 +15,7 @@
    | Authors: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: rfc1867.c,v 1.14 1999/12/04 19:15:41 sas Exp $ */
+/* $Id: rfc1867.c,v 1.15 1999/12/05 16:25:28 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -32,7 +32,7 @@
 /*
  * Split raw mime stream up into appropriate components
  */
-void php_mime_split(char *buf, int cnt, char *boundary)
+static void php_mime_split(char *buf, int cnt, char *boundary)
 {
 	char *ptr, *loc, *loc2, *s, *name, *filename, *u, *fn;
 	int len, state = 0, Done = 0, rem, urem;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.29 1999/12/04 19:15:59 sas Exp $ */
+/* $Id: php_pcre.c,v 1.30 1999/12/05 16:25:28 sas Exp $ */
 
 /*
 	TODO:
@@ -102,8 +102,8 @@ static PHP_MINIT_FUNCTION(pcre)
 #ifdef ZTS
 	pcre_globals_id = ts_allocate_id(
 							sizeof(php_pcre_globals),
-							_php_pcre_init_globals,
-							_php_pcre_shutdown_globals);
+							(ts_allocate_ctor) _php_pcre_init_globals,
+							(ts_allocate_dtor) _php_pcre_shutdown_globals);
 #else
 	zend_hash_init(&PCRE_G(pcre_cache), 0, NULL, _php_free_pcre_cache, 1);
 #endif

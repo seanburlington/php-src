@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: System.php,v 1.8 2002/01/23 18:53:08 cox Exp $
+// $Id: System.php,v 1.9 2002/02/06 08:32:00 cox Exp $
 //
 
 // TODO:
@@ -41,7 +41,7 @@ require_once 'Console/Getopt.php';
 *
 * @package  System
 * @author   Tomas V.V.Cox <cox@idecnet.com>
-* @version  $Revision: 1.8 $
+* @version  $Revision: 1.9 $
 * @access   public
 */
 class System extends PEAR
@@ -315,7 +315,6 @@ class System extends PEAR
                 $tmpdir = $opt[1];
             }
         }
-        //print_r($opts);
         $prefix = (isset($opts[1][0])) ? $opts[1][0] : 'tmp';
         if (!isset($tmpdir)) {
             $tmpdir = System::tmpdir();
@@ -349,6 +348,32 @@ class System extends PEAR
             return $_ENV['TMPDIR'];
         }
         return '/tmp';
+    }
+
+    /**
+    * The "type" command (show the full path of a command)
+    *
+    * @param string $program The command to search for
+    * @return mixed A string with the full path or false if not found
+    * @author Stig Bakken <ssb@fast.no>
+    */
+    function type($program)
+    {
+        // full path given
+        if (basename($program) != $program) {
+            return (@is_executable($program)) ? $program : false;
+        }
+        // XXX FIXME honor safe mode
+        $path_delim = OS_WINDOWS ? ';' : ':';
+        $exe_suffix = OS_WINDOWS ? '.exe' : '';
+        $path_elements = explode($path_delim, getenv('PATH'));
+        foreach ($path_elements as $dir) {
+            $file = $dir . DIRECTORY_SEPARATOR . $program . $exe_suffix;
+            if (@is_file($file) && @is_executable($file)) {
+                return $file;
+            }
+        }
+        return false;
     }
 }
 ?>

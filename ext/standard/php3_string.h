@@ -29,17 +29,14 @@
  */
 
 
-/* $Id: php3_string.h,v 1.20 1999/11/16 22:44:13 andrei Exp $ */
+/* $Id: php3_string.h,v 1.21 1999/11/28 00:31:02 sas Exp $ */
 
 /* Synced with php3 revision 1.43 1999-06-16 [ssb] */
 
 #ifndef _PHPSTRING_H
 #define _PHPSTRING_H
 
-#ifndef THREAD_SAFE
-extern char *strtok_string;
-extern char *locale_string;
-#endif
+#include "basic_functions.h"
 
 PHP_FUNCTION(strspn);
 PHP_FUNCTION(strcspn);

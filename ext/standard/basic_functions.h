@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.30 1999/11/13 20:31:54 andrei Exp $ */
+/* $Id: basic_functions.h,v 1.31 1999/11/28 00:31:02 sas Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -102,6 +102,32 @@ PHP_FUNCTION(getservbyname);
 PHP_FUNCTION(getservbyport);
 PHP_FUNCTION(getprotobyname);
 PHP_FUNCTION(getprotobynumber);
+
+typedef struct {
+	HashTable *user_shutdown_function_names;
+	HashTable putenv_ht;
+	char *strtok_string;
+	char *locale_string;
+	char *strtok_pos1;
+	char *strtok_pos2;
+	char str_ebuf[40];
+} php_basic_globals;
+
+#ifdef ZTS
+#define BLS_D php_basic_globals *basic_globals
+#define BLS_DC , BLS_D
+#define BLS_C basic_globals
+#define BLS_CC , BLS_C
+#define BG(v) (basic_globals->v)
+#define BLS_FETCH() php_basic_globals *basic_globals = ts_resource(basic_globals_id)
+#else
+#define BLS_D
+#define BLS_DC
+#define BLS_C
+#define BLS_CC
+#define BG(v) (basic_globals.v)
+#define BLS_FETCH()
+#endif
 
 #if HAVE_PUTENV
 typedef struct {

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.110 2002/10/18 20:39:49 iliaa Exp $ */
+/* $Id: streams.c,v 1.111 2002/10/19 10:34:10 wez Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -495,7 +495,7 @@ static void php_stream_fill_read_buffer(php_stream *stream, size_t size TSRMLS_D
 					TSRMLS_CC);
 		}
 
-		if (justread > 0) {
+		if (justread != (size_t)-1) {
 			stream->writepos += justread;
 		}
 	}

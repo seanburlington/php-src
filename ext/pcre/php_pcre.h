@@ -27,14 +27,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.h,v 1.4 1999/05/26 18:59:04 andrey Exp $ */
+/* $Id: php_pcre.h,v 1.5 1999/05/27 01:19:00 zeev Exp $ */
 
 #ifndef _PHP_PCRE_H
 #define _PHP_PCRE_H
 
 #if HAVE_LIBPCRE
 
-#include "pcre.h"
+#include "pcrelib/pcre.h"
 
 extern void php_info_pcre(ZEND_MODULE_INFO_FUNC_ARGS);
 extern int php_minit_pcre(INIT_FUNC_ARGS);

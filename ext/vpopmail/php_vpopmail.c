@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_vpopmail.c,v 1.13 2001/05/28 19:56:09 bbonev Exp $ */
+/* $Id: php_vpopmail.c,v 1.14 2001/06/06 14:32:23 rasmus Exp $ */
 
 /* TODO: move to config.m4 when support for old versions is ready or just
  * don't support rather old vpopmail. current version must bail out if
@@ -942,4 +942,6 @@ PHP_FUNCTION(vpopmail_error)
  * tab-width: 4
  * c-basic-offset: 4
  * End:
+ * vim600: sw=4 ts=4 tw=78 fdm=marker
+ * vim<600: sw=4 ts=4 tw=78
  */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.49 2003/02/04 21:01:54 helly Exp $ */
+/* $Id: bcmath.c,v 1.50 2003/02/04 21:07:40 andi Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -113,7 +113,8 @@ PHP_MINFO_FUNCTION(bcmath)
 
 /* {{{ php_str2num
    Convert to bc_num detecting scale */
-static void php_str2num(bc_num *num, char *str TSRMLS_DC) {
+static void php_str2num(bc_num *num, char *str TSRMLS_DC)
+{
 	char *p;
 
 	if (!(p = strchr(str, '.'))) {

@@ -15,7 +15,7 @@
    | Author: Sascha Schumann <sascha@schumann.cx>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: url_scanner.h,v 1.6 2000/08/01 07:45:14 hholzgra Exp $ */
+/* $Id: url_scanner.h,v 1.7 2000/08/04 15:23:19 hholzgra Exp $ */
 
 #ifndef URI_SCANNER_H
 #define URI_SCANNER_H
@@ -45,6 +45,7 @@ typedef struct url_adapt_struct {
 	char delim;
 	char *p;
 	int l,ml;
+	int attr_done;
 } url_adapt_state_t;
 
 #endif

@@ -79,7 +79,7 @@
  *
  */
 
-/* $Id: mbfilter.c,v 1.31 2002/05/24 22:28:42 hirokawa Exp $ */
+/* $Id: mbfilter.c,v 1.32 2002/05/29 09:15:28 dets Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -721,7 +721,7 @@ static mbfl_encoding mbfl_encoding_2022jp = {
 
 
 #if defined(HAVE_MBSTR_CN)
-static const char *mbfl_encoding_euc_cn_aliases[] = {"CN-GB", "EUC_CN", "eucCN", "x-euc-cn", NULL};
+static const char *mbfl_encoding_euc_cn_aliases[] = {"CN-GB", "EUC_CN", "eucCN", "x-euc-cn", "gb2312", NULL};
 
 static mbfl_encoding mbfl_encoding_euc_cn = {
 	mbfl_no_encoding_euc_cn,

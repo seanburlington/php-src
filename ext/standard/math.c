@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.70 2002/01/05 03:45:10 jimw Exp $ */
+/* $Id: math.c,v 1.71 2002/01/05 03:56:38 jimw Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -432,10 +432,11 @@ PHP_FUNCTION(pow)
 	double dval;
 	zend_bool wantlong;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zz", &zbase, &zexp) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z/z/", &zbase, &zexp) == FAILURE) {
 		return;
 	}
 
+	/* TODO: handle numeric strings. */
 	if ((Z_TYPE_P(zbase) != IS_LONG && Z_TYPE_P(zbase) != IS_DOUBLE) ||
 		(Z_TYPE_P(zexp ) != IS_LONG && Z_TYPE_P(zexp ) != IS_DOUBLE)) {
 		php_error(E_WARNING, "Invalid argument(s) passed to %s()", get_active_function_name(TSRMLS_C));
@@ -446,8 +447,8 @@ PHP_FUNCTION(pow)
 	wantlong = Z_TYPE_P(zbase) == IS_LONG 
 	        && Z_TYPE_P(zexp ) == IS_LONG && Z_LVAL_P(zexp) >= 0;
 
-	/* need to SEPERATE_ZVAL? */
-	multi_convert_to_double_ex(2,&zbase,&zexp);
+	convert_to_double(zbase);
+	convert_to_double(zexp);
 	
 	/* go ahead and calculate things. */
 	dval = pow(Z_DVAL_P(zbase),Z_DVAL_P(zexp));

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.43 2000/12/13 23:40:44 zeev Exp $ */
+/* $Id: exec.c,v 1.44 2001/01/08 16:39:39 stas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -70,7 +70,7 @@ static int _Exec(int type, char *cmd, pval *array, pval *return_value)
 		d = emalloc(l);
 		strcpy(d, PG(safe_mode_exec_dir));
 		overflow_limit -= ldir;
-		b = strrchr(cmd, '/');
+		b = strrchr(cmd, PHP_DIR_SEPARATOR);
 		if (b) {
 			strcat(d, b);
 			overflow_limit -= strlen(b);

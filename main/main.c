@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.404 2001/08/11 22:55:00 zeev Exp $ */
+/* $Id: main.c,v 1.404.2.1 2001/08/16 09:41:25 thies Exp $ */
 
 /* {{{ includes
  */
@@ -985,9 +985,6 @@ void php_module_shutdown(TSRMLS_D)
 		return;
 	}
 
-	/* close down the ini config */
-	php_shutdown_config();
-
 #ifdef PHP_WIN32
 	/*close winsock */
 	WSACleanup();
@@ -1000,12 +997,17 @@ void php_module_shutdown(TSRMLS_D)
 	php_shutdown_fopen_wrappers(TSRMLS_C);
 	php_shutdown_info_logos();
 	UNREGISTER_INI_ENTRIES();
+
+	/* close down the ini config */
+	php_shutdown_config();
+
 #ifdef ZTS
 	ts_free_thread();
 #else
 	zend_ini_shutdown(TSRMLS_C);
 	shutdown_memory_manager(0, 1);
 #endif
+
 	module_initialized = 0;
 }
 /* }}} */

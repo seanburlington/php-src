@@ -29,7 +29,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: main.c,v 1.66 1999/05/28 11:09:36 zeev Exp $ */
+/* $Id: main.c,v 1.67 1999/05/29 13:53:59 sas Exp $ */
 
 
 #include <stdio.h>
@@ -86,7 +86,7 @@ struct sapi_request_info *sapi_rqst;
 #include "SAPI.h"
 
 #if MSVC5 || !defined(HAVE_GETOPT)
-#include "getopt.h"
+#include "php_getopt.h"
 #endif
 
 

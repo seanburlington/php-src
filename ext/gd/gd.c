@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.193 2002/06/26 18:32:27 derick Exp $ */
+/* $Id: gd.c,v 1.194 2002/06/27 23:05:11 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -113,6 +113,7 @@ function_entry gd_functions[] = {
 	PHP_FE(imagecolorallocate,						NULL)
 #if HAVE_LIBGD15
 	PHP_FE(imagepalettecopy,						NULL)
+	PHP_FE(imagecreatefromstring,					NULL)
 #endif
 	PHP_FE(imagecolorat,							NULL)
 	PHP_FE(imagecolorclosest,						NULL)
@@ -156,7 +157,6 @@ function_entry gd_functions[] = {
 
 	PHP_FE(imagesetstyle,							NULL)
 
-	PHP_FE(imagecreatefromstring,					NULL)
 #ifdef HAVE_GD_PNG
 	PHP_FE(imagecreatefrompng,						NULL)
 #endif
@@ -994,11 +994,11 @@ static int _php_image_type (char data[8])
 }
 /* }}} */
 
+#ifdef HAVE_LIBGD15 
 /* {{{ _php_image_create_from_string
  */
 gdImagePtr _php_image_create_from_string(zval **data, char *tn, gdImagePtr (*ioctx_func_p)() TSRMLS_DC)
 {
-#ifdef HAVE_LIBGD15 
 	gdImagePtr im;
 	gdIOCtx *io_ctx;
         
@@ -1015,9 +1015,6 @@ gdImagePtr _php_image_create_from_string(zval **data, char *tn, gdImagePtr (*ioc
 	}
 
 	return im;
-#else
-	return NULL;
-#endif
 }
 /* }}} */
 
@@ -1025,7 +1022,6 @@ gdImagePtr _php_image_create_from_string(zval **data, char *tn, gdImagePtr (*ioc
    Create a new image from the image stream in the string */
 PHP_FUNCTION(imagecreatefromstring)
 {
-#ifdef HAVE_LIBGD15
 	zval **data;
 	gdImagePtr im;
 	int imtype;
@@ -1097,11 +1093,9 @@ PHP_FUNCTION(imagecreatefromstring)
 	}
 
 	ZEND_REGISTER_RESOURCE(return_value, im, le_gd);
-#else
-	php_error(E_WARNING, "ImageCreateFromString: Only available with GD 1.5+");
-#endif
 }
 /* }}} */
+#endif
 
 /* {{{ _php_image_create_from
  */

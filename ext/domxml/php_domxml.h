@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_domxml.h,v 1.37 2002/01/17 01:13:39 jarkol Exp $ */
+/* $Id: php_domxml.h,v 1.38 2002/01/18 07:58:47 chregu Exp $ */
 
 #ifndef PHP_DOMXML_H
 #define PHP_DOMXML_H
@@ -41,6 +41,10 @@
 #include <libxslt/xsltInternals.h>
 #include <libxslt/xsltutils.h>
 #include <libxslt/transform.h>
+#if HAVE_DOMEXSLT
+#include <libexslt/exslt.h>
+#include <libexslt/exsltconfig.h>
+#endif
 #endif
 
 extern zend_module_entry domxml_module_entry;
@@ -74,7 +78,9 @@ PHP_FUNCTION(domxml_doc_create_entity_reference);
 PHP_FUNCTION(domxml_doc_imported_node);
 PHP_FUNCTION(domxml_add_root);
 PHP_FUNCTION(domxml_intdtd);
-PHP_FUNCTION(domxml_dumpmem);
+PHP_FUNCTION(domxml_dump_mem);
+PHP_FUNCTION(domxml_dump_mem_file);
+
 #if defined(LIBXML_HTML_ENABLED)
 PHP_FUNCTION(domxml_html_dump_mem);
 #endif

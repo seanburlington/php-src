@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.108 2001/02/15 14:48:57 thies Exp $ */
+/* $Id: oci8.c,v 1.109 2001/02/17 15:54:40 thies Exp $ */
 
 /* TODO list:
  *
@@ -489,7 +489,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.108 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.109 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -735,22 +735,17 @@ _oci_session_list_dtor(zend_rsrc_list_entry *rsrc)
 static ub4
 oci_handle_error(oci_connection *connection, ub4 errcode)
 {
-   switch (errcode) {
-       case 0:
-           return 0;
-           break;
-       case 22:   /* ORA-00022 Invalid session id */
-       case 1012: /* ORA-01012: */
-       case 3113: /* ORA-03113: end-of-file on communication channel */
-           connection->open = 0;
-           connection->session->open = 0;
-           connection->session->server->open = 0;
-           return 0;
-           break;
-       default:
-           return 0;
-           break;
-   }
+	switch (errcode) {
+    	case 22:   /* ORA-00022 Invalid session id */
+       	case 1012: /* ORA-01012: */
+       	case 3113: /* ORA-03113: end-of-file on communication channel */
+        	connection->open = 0;
+           	connection->session->open = 0;
+           	connection->session->server->open = 0;
+			return 1; /* fatal error */
+   	}
+
+	return 0; /* no fatal error */
 }
 
 /* {{{ oci_error() */
@@ -1224,8 +1219,12 @@ oci_execute(oci_statement *statement, char *func,ub4 mode)
 		if (statement->binds) {
 			zend_hash_apply(statement->binds, (int (*)(void *)) _oci_bind_post_exec);
 		}
+
 		oci_handle_error(statement->conn, statement->error);
-		return 0;
+
+		if (statement->error) {
+			return 0;
+		}
 	}
 
 	if (stmttype == OCI_STMT_SELECT && (statement->executed == 0)) {

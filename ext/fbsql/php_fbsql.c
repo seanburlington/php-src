@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.2 2001/03/20 19:21:45 fmk Exp $ */
+/* $Id: php_fbsql.c,v 1.3 2001/03/20 20:25:55 fmk Exp $ */
 
 /* TODO:
  *
@@ -2555,6 +2555,9 @@ PHP_FUNCTION(fbsql_fetch_row)
 	if (result->fetchHandle == NULL) {
 		RETURN_FALSE;
 	}
+	if (result->rowCount == 0) {
+		RETURN_FALSE;
+	}
 	if (result->rowCount == 0x7fffffff) {
 		if (!phpfbFetchRow(result,rowIndex)) {
 			RETURN_FALSE;
@@ -2627,9 +2630,14 @@ PHP_FUNCTION(fbsql_fetch_array)
 	{
 		RETURN_FALSE;
 	}
+	if (result->rowCount == 0) {
+		RETURN_FALSE;
+	}
 	if (result->rowCount == 0x7fffffff)
 	{
-		phpfbFetchRow(result,result->rowIndex);
+		if (!phpfbFetchRow(result,result->rowIndex)) {
+			RETURN_FALSE;
+		}
 	}
 	row = fbcrhRowAtIndex(result->rowHandler,rowIndex);
 	if (row == NULL)

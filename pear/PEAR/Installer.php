@@ -18,7 +18,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Installer.php,v 1.20 2001/10/08 06:12:13 cox Exp $
+// $Id: Installer.php,v 1.21 2001/10/08 16:52:33 cox Exp $
 
 require_once 'PEAR/Common.php';
 
@@ -81,10 +81,6 @@ class PEAR_Installer extends PEAR_Common
     function _PEAR_Installer()
     {
         chdir($this->pwd);
-        if ($this->tmpdir && is_dir($this->tmpdir)) {
-            System::rm("-rf $this->tmpdir");
-        }
-        $this->tmpdir = null;
         $this->_PEAR_Common();
     }
 

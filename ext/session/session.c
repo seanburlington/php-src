@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.290 2002/03/06 11:49:51 sas Exp $ */
+/* $Id: session.c,v 1.291 2002/03/06 12:12:39 sas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -930,7 +930,8 @@ PHPAPI void php_session_start(TSRMLS_D)
 	}
 
 
-	if (PS(apply_trans_sid)) {
+	/* define SID always, if the client did not send a cookie */
+	if (send_cookie) {
 		smart_str var = {0};
 
 		smart_str_appends(&var, PS(session_name));

@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.78 2002/10/14 01:27:43 wez Exp $ */
+/* $Id: network.c,v 1.79 2002/10/18 12:15:04 wez Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -940,7 +940,7 @@ static size_t php_sockop_read(php_stream *stream, char *buf, size_t count TSRMLS
 
 		nr_bytes = recv(sock->socket, buf, count, 0);
 
-		if (nr_bytes == 0 || (nr_bytes < 0 && php_socket_errno() != EWOULDBLOCK)) {
+		if (nr_bytes == 0 || (nr_bytes < count && php_socket_errno() != EWOULDBLOCK)) {
 			stream->eof = 1;
 		}
 	}

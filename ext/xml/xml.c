@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.142 2003/11/04 16:15:52 moriyoshi Exp $ */
+/* $Id: xml.c,v 1.143 2003/12/08 07:15:32 moriyoshi Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -192,7 +192,9 @@ static void *php_xml_realloc_wrapper(void *ptr, size_t sz)
 
 static void php_xml_free_wrapper(void *ptr)
 {
-	efree(ptr);
+	if (ptr != NULL) {
+		efree(ptr);
+	}
 }
 
 PHP_MINIT_FUNCTION(xml)

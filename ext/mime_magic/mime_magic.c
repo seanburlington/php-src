@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.13.2.11 2003/11/04 05:15:55 sniper Exp $ 
+  $Id: mime_magic.c,v 1.13.2.12 2004/01/15 06:09:43 sniper Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -926,7 +926,7 @@ static char *rsl_strdup(int start_frag, int start_pos, int len)
     req_dat =  MIME_MAGIC_G(req_dat);
 
     /* allocate the result string */
-    result = (char *) emalloc(len + 1);
+    result = (char *) emalloc(len + 2);
 
     /* loop through and collect the string */
     res_pos = 0;

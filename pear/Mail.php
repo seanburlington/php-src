@@ -16,7 +16,7 @@
 // | Authors: Chuck Hagenbuch <chuck@horde.org>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: Mail.php,v 1.12 2001/08/09 07:52:29 cox Exp $
+// $Id: Mail.php,v 1.13 2001/08/09 07:56:33 cox Exp $
 
 require_once 'PEAR.php';
 
@@ -26,7 +26,7 @@ require_once 'PEAR.php';
  * useful in multiple mailer backends.
  *
  * @access public
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  * @package Mail
  */
 class Mail extends PEAR {
@@ -37,7 +37,7 @@ class Mail extends PEAR {
      *
      * @param string $driver The kind of Mail:: object to instantiate.
      * @param array  $params The parameters to pass to the Mail:: object.
-     @ @return object Mail a instance of the driver class or if fails a PEAR Error
+     * @return object Mail a instance of the driver class or if fails a PEAR Error
      * @access public
      */
     function factory($driver, $params = array())

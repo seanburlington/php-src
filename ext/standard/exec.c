@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.103 2003/08/11 23:16:53 iliaa Exp $ */
+/* $Id: exec.c,v 1.104 2003/08/28 16:28:33 sas Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -79,7 +79,7 @@ int php_exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 			goto err;
 		}
 		b = strrchr(cmd, PHP_DIR_SEPARATOR);
-		spprintf(&d, 0, "%s%s%s%s", PG(safe_mode_exec_dir), (b ? "" : "/"), (b ? b : cmd), (c ? " " : ""), (c ? c : ""));
+		spprintf(&d, 0, "%s%s%s%s%s", PG(safe_mode_exec_dir), (b ? "" : "/"), (b ? b : cmd), (c ? " " : ""), (c ? c : ""));
 		if (c) {
 			*(c - 1) = ' ';
 		}

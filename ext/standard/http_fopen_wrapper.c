@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.75 2003/06/13 19:27:26 pollita Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.76 2003/08/28 16:28:33 sas Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -103,7 +103,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 	char *http_header_line = NULL;
 	char tmp_line[128];
 	size_t chunk_size = 0, file_size = 0;
-	int eol_detect;
+	int eol_detect = 0;
 	char *transport_string, *errstr = NULL;
 	int transport_len, have_header = 0;
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fsock.c,v 1.114 2003/08/28 15:16:20 sas Exp $ */
+/* $Id: fsock.c,v 1.115 2003/08/28 16:28:33 sas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -56,7 +56,7 @@ static void php_fsockopen_stream(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	}
 
 	if (port > 0) {
-		hostname_len = spprintf(&hostname, 0, "%s:%d", host, port);
+		hostname_len = spprintf(&hostname, 0, "%s:%ld", host, port);
 	} else {
 		hostname_len = host_len;
 		hostname = host;

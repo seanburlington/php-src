@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.170 2003/08/11 23:16:53 iliaa Exp $ */
+/* $Id: var.c,v 1.171 2003/08/28 16:28:33 sas Exp $ */
 
 
 /* {{{ includes 
@@ -535,7 +535,7 @@ static void php_var_serialize_intern(smart_str *buf, zval **struc, HashTable *va
 				char *s;
 				ulong slen;
 
-				slen = spprintf(&s, 0, "d:%.*G;", PG(serialize_precision), Z_DVAL_PP(struc));
+				slen = spprintf(&s, 0, "d:%.*G;", (int) PG(serialize_precision), Z_DVAL_PP(struc));
 				smart_str_appendl(buf, s, slen);
 				efree(s);
 				return;

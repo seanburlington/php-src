@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.61 2003/08/25 22:25:33 pollita Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.62 2003/08/28 16:28:33 sas Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -477,7 +477,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 			php_stream_context_get_option(context, "ftp", "resume_pos", &tmpzval) == SUCCESS &&
 			Z_TYPE_PP(tmpzval) == IS_LONG &&
 			Z_LVAL_PP(tmpzval) > 0) {
-			snprintf(tmp_line, 511, "REST %u\r\n", Z_LVAL_PP(tmpzval));
+			snprintf(tmp_line, 511, "REST %ld\r\n", Z_LVAL_PP(tmpzval));
 			php_stream_write_string(stream, tmp_line);
 			result = GET_FTP_RESULT(stream);
 			if (result < 300 || result > 399) {			

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.315.2.1 2001/03/20 01:49:56 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.315.2.2 2001/03/28 09:05:50 romolo Exp $ */
 
 #include "php.h"
 #include "php_main.h"
@@ -2485,7 +2485,11 @@ PHP_FUNCTION(move_uploaded_file)
 	if (!zend_hash_exists(SG(rfc1867_uploaded_files), Z_STRVAL_PP(path), Z_STRLEN_PP(path)+1)) {
 		RETURN_FALSE;
 	}
-
+	
+	if (PG(safe_mode) && (!php_checkuid(Z_STRVAL_PP(new_path), NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+		RETURN_FALSE;
+	}
+	
 	V_UNLINK(Z_STRVAL_PP(new_path));
 	if (rename(Z_STRVAL_PP(path), Z_STRVAL_PP(new_path))==0) {
 		successful=1;

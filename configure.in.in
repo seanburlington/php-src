@@ -1,4 +1,4 @@
-dnl $Id: configure.in.in,v 1.80 1999/09/16 08:42:25 sas Exp $ -*- sh -*-
+dnl $Id: configure.in.in,v 1.81 1999/09/16 14:07:56 sas Exp $ -*- sh -*-
 dnl Process this file with autoconf to produce a configure script.
 
 divert(0)
@@ -890,11 +890,6 @@ divert(4)
 
 dnl If we're using gcc and the user hasn't specified CFLAGS, add -O2.
 test -n "$auto_cflags" && test -n "$GCC" && CFLAGS="$CFLAGS -O2"
-
-dnl If we're using cc on HP-UX, add the -Ae to CFLAGS
-if test -n "$auto_cflags" && test "`uname -s 2>/dev/null`" = "HP-UX"; then
-   test -n "$GCC" || CFLAGS="-Ae $CFLAGS"
-fi
 
 dnl *** Commented out - generates slow code and consumes a lot of 
 dnl *** resources during compilation - we need to figure out how

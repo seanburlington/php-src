@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.18 2002/07/23 23:46:54 jimw Exp $ */
+/* $Id: credits.c,v 1.19 2002/09/26 19:33:21 cmv Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -31,12 +31,10 @@ PHPAPI void php_print_credits(int flag)
 	TSRMLS_FETCH();
 
 	if (flag & PHP_CREDITS_FULLPAGE) {
-		PUTS("<html><head><title>PHP Credits</title></head><body>\n");
+		php_print_info_htmlhead();
 	}
 
-	php_info_print_style();
-
-	PUTS("<h1 align=\"center\">PHP 4 Credits</h1>\n");
+	PUTS("<h1>PHP Credits</h1>\n");
 
 	if (flag & PHP_CREDITS_GROUP) {
 		/* Group */
@@ -110,7 +108,7 @@ PHPAPI void php_print_credits(int flag)
 	}
 
 	if (flag & PHP_CREDITS_FULLPAGE) {
-		PUTS("</body></html>\n");
+		PUTS("</center></body></html>\n");
 	}
 }
 /* }}} */

@@ -6,11 +6,11 @@ InterBase: BLOB test
 --GET--
 --FILE--
 <?
-/* $Id: 004.phpt,v 1.1 2000/08/27 19:45:58 ssb Exp $ */
+/* $Id: 004.phpt,v 1.1.10.1 2002/03/21 14:51:45 ludoo Exp $ */
 
-    require("interbase/interbase.inc");
+    require(dirname(__FILE__)."/interbase.inc");
     
-	$test_base = "ibase_test.tmp";
+	$test_base = dirname(__FILE__)."/ibase_test.tmp";
     
     ibase_connect($test_base);
 

@@ -1,5 +1,7 @@
 <?php
 
+/* $Id: install-pear.php,v 1.6 2002/11/13 00:49:37 sniper Exp $ */
+
 $pear_dir = dirname(__FILE__);
 ini_set('include_path', $pear_dir);
 ##//include_once 'PEAR/Config.php';

@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@fast.no>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Package.php,v 1.29 2002/05/21 01:44:06 ssb Exp $
+// $Id: Package.php,v 1.30 2002/05/22 12:44:21 cox Exp $
 
 require_once 'PEAR/Common.php';
 require_once 'PEAR/Command/Common.php';
@@ -331,9 +331,12 @@ Run regression tests with PHP\'s regression testing script (run-tests.php).',
         $run_tests = $this->config->get('php_dir') . DIRECTORY_SEPARATOR . 'run-tests.php';
         if (!file_exists($run_tests)) {
             $run_tests = PEAR_INSTALL_DIR . DIRECTORY_SEPARATOR . 'run-tests.php';
+            if (!file_exists($run_tests)) {
+                return $this->raiseError("No `run-test.php' file found");
+            }
         }
         $plist = implode(" ", $params);
-        $cmd = "$php -d include_path=$cwd$ps$ip $run_tests $plist";
+        $cmd = "$php -C -d include_path=$cwd$ps$ip -f $run_tests -- $plist";
         system($cmd);
         return true;
     }

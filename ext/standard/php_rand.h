@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_rand.h,v 1.10 2001/09/03 11:57:15 jeroen Exp $ */
+/* $Id: php_rand.h,v 1.11 2001/09/03 12:01:50 jeroen Exp $ */
 
 /* Layout implementation random functions
  *
@@ -34,25 +34,6 @@
  * give the user the possibility to control all randomness by means of
  * srand()/php.ini in a portable and consistent way.
  *
- * rand.c: (the only rand*.c file with PHP_API and PHP_FUNCTION functions)
- *
- * - PHP_FUNCTION([mt_]srand)
- *   +-> void php_srand(void)
- *   +-> void php_srand2(long seed, int alg)
- *       +-> (rand_sys.c) long php_rand_sys()
- *       +-> (rand_mt.c ) long php_rand_mt()
- *
- * - PHP_FUNCTION([mt_]rand)
- *   +-> long php_rand()
- *       +-> (rand_sys.c) long php_rand_sys()
- *       +-> (rand_mt.c ) long php_rand_mt()
- *   +-> long php_rand_range(long min, long max)
- *       +-> calls php_rand()
- *       
- * - PHP_FUNCTION([mt_]getrandmax)
- *   +-> PHPAPI long php_randmax(void)
- *       +-> (rand_sys.c) long php_randmax_sys()
- *       +-> (rand_mt.c ) long php_randmax_mt()
  *   
  *   --Jeroen
  */

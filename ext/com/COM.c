@@ -18,7 +18,7 @@
    |         Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: COM.c,v 1.89 2002/10/31 08:23:55 wez Exp $ */
+/* $Id: COM.c,v 1.90 2002/11/10 21:24:44 derick Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -1339,7 +1339,7 @@ static int process_typeinfo(ITypeInfo *typeinfo, HashTable *id_to_name, int prin
 
 		ret = 1;
 	} else {
-		zend_error(E_WARNING, "Thats not a dispatchable interface!! type kind = %08x\n", attr->typekind);
+		zend_error(E_WARNING, "Thats not a dispatchable interface!! type kind = %08x", attr->typekind);
 	}
 
 	typeinfo->lpVtbl->ReleaseTypeAttr(typeinfo, attr);

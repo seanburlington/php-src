@@ -18,7 +18,7 @@
    |         Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: com_wrapper.c,v 1.82 2002/07/19 16:18:59 phanto Exp $ */
+/* $Id: com_wrapper.c,v 1.83 2002/11/10 21:24:45 derick Exp $ */
 /*
  * This module implements support for COM components that support the IDispatch
  * interface.  Both local (COM) and remote (DCOM) components can be accessed.
@@ -555,7 +555,7 @@ ZEND_API int php_COM_process_typeinfo(ITypeInfo *typeinfo, HashTable *id_to_name
 
 		ret = 1;
 	} else {
-		zend_error(E_WARNING, "Thats not a dispatchable interface!! type kind = %08x\n", attr->typekind);
+		zend_error(E_WARNING, "Thats not a dispatchable interface!! type kind = %08x", attr->typekind);
 	}
 
 	typeinfo->lpVtbl->ReleaseTypeAttr(typeinfo, attr);

@@ -16,11 +16,10 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo.h,v 1.2 2004/05/18 15:19:31 gschlossnagle Exp $ */
+/* $Id: php_pdo.h,v 1.3 2004/05/18 15:57:46 wez Exp $ */
 
 #ifndef PHP_PDO_H
 #define PHP_PDO_H
-#include "php.h"
 
 extern zend_module_entry pdo_module_entry;
 #define phpext_pdo_ptr &pdo_module_entry

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.10 2001/03/27 20:34:41 sniper Exp $
+dnl $Id: config.m4,v 1.10.4.1 2001/08/22 10:26:56 sniper Exp $
 dnl config.m4 for extension readline
 dnl don't forget to call PHP_EXTENSION(readline)
 
@@ -8,6 +8,12 @@ PHP_ARG_WITH(libedit,for libedit readline replacement,
 PHP_ARG_WITH(readline,for readline support,
 [  --with-readline[=DIR]   Include readline support.  DIR is the readline
                           install directory.])
+
+if test "$PHP_READLINE" != "no" -o "$PHP_LIBEDIT" != "no"; then
+  if test "$PHP_SAPI" != "cgi"; then
+    AC_MSG_ERROR([readline extension can only be used with CGI build!])
+  fi
+fi
 
 if test "$PHP_READLINE" != "no"; then
   for i in /usr/local /usr $PHP_READLINE; do

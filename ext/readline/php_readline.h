@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_readline.h,v 1.10 2001/02/26 06:07:14 andi Exp $ */
+/* $Id: php_readline.h,v 1.10.6.1 2001/08/22 10:26:56 sniper Exp $ */
 
 #ifndef PHP_READLINE_H
 #define PHP_READLINE_H
@@ -24,10 +24,6 @@
 #if HAVE_LIBREADLINE || HAVE_LIBEDIT
 #ifdef ZTS 
 #warning Readline module will *NEVER* be thread-safe
-#endif
-
-#ifndef CGI_BINARY
-#error Readline module only useable in standalone-binary
 #endif
 
 extern zend_module_entry readline_module_entry;

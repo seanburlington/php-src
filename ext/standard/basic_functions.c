@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.519 2002/10/03 09:19:31 yohgaki Exp $ */
+/* $Id: basic_functions.c,v 1.520 2002/10/03 10:35:33 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2077,7 +2077,6 @@ PHP_FUNCTION(highlight_string)
 	convert_to_string(expr);
 
 	if (i) {
-		php_output_set_status(0 TSRMLS_CC);
 		php_start_ob_buffer (NULL, 0, 1 TSRMLS_CC);
 	}
 
@@ -2094,7 +2093,6 @@ PHP_FUNCTION(highlight_string)
 	if (i) {
 		php_ob_get_buffer (return_value TSRMLS_CC);
 		php_end_ob_buffer (0, 0 TSRMLS_CC);
-		php_output_set_status(1 TSRMLS_CC);
 	} else {
 		RETURN_TRUE;
 	}

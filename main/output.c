@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.134 2002/10/03 08:54:13 yohgaki Exp $ */
+/* $Id: output.c,v 1.135 2002/10/03 10:35:32 derick Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -596,11 +596,8 @@ static inline void php_ob_append(const char *text, uint text_length TSRMLS_DC)
 	/* If implicit_flush is On, send contents to next buffer and return.
 	   Both PG() and OG() should be used since we should flush implicitly
 	   always when implicit_flush is enabled in php.ini */
-	if (PG(implicit_flush) || OG(implicit_flush)
-		/* Also flush after each chunk if output is chunked */
-		|| (OG(active_ob_buffer).chunk_size
-			&& OG(active_ob_buffer).text_length >= OG(active_ob_buffer).chunk_size)
-	) {
+	if (OG(active_ob_buffer).chunk_size
+			&& OG(active_ob_buffer).text_length >= OG(active_ob_buffer).chunk_size) {
 		zval *output_handler = OG(active_ob_buffer).output_handler;
 
 		if (output_handler) {

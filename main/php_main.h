@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_main.h,v 1.31 2004/01/08 17:33:04 sniper Exp $ */
+/* $Id: php_main.h,v 1.31.2.1 2005/01/09 16:30:15 sniper Exp $ */
 
 #ifndef PHP_MAIN_H
 #define PHP_MAIN_H
@@ -48,7 +48,8 @@ PHPAPI int php_handle_auth_data(const char *auth TSRMLS_DC);
 
 PHPAPI void php_html_puts(const char *str, uint siz TSRMLS_DC);
 
-extern void php_call_shutdown_functions(void);
+extern void php_call_shutdown_functions(TSRMLS_D);
+extern void php_free_shutdown_functions(TSRMLS_D);
 
 /* environment module */
 extern int php_init_environ(void);

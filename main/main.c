@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.604.2.6 2004/12/10 23:06:06 andi Exp $ */
+/* $Id: main.c,v 1.604.2.7 2005/01/09 16:30:15 sniper Exp $ */
 
 /* {{{ includes
  */
@@ -1135,11 +1135,12 @@ void php_request_shutdown_for_hook(void *dummy)
 {
 	TSRMLS_FETCH();
 	if (PG(modules_activated)) zend_try {
-		php_call_shutdown_functions();
+		php_call_shutdown_functions(TSRMLS_C);
 	} zend_end_try();
 
 	if (PG(modules_activated)) {
 		zend_deactivate_modules(TSRMLS_C);
+		php_free_shutdown_functions(TSRMLS_C);
 	}
 
 	zend_try {
@@ -1191,11 +1192,12 @@ void php_request_shutdown(void *dummy)
 	} zend_end_try();
 
 	if (PG(modules_activated)) zend_try {
-		php_call_shutdown_functions();
+		php_call_shutdown_functions(TSRMLS_C);
 	} zend_end_try();
 	
 	if (PG(modules_activated)) {
 		zend_deactivate_modules(TSRMLS_C);
+		php_free_shutdown_functions(TSRMLS_C);
 	}
 
 	zend_try {

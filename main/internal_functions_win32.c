@@ -18,7 +18,7 @@
  */
 
 
-/* $Id: internal_functions_win32.c,v 1.58 2002/04/17 18:10:35 sebastian Exp $ */
+/* $Id: internal_functions_win32.c,v 1.59 2002/04/17 18:11:53 sebastian Exp $ */
 
 /* {{{ includes
  */
@@ -31,7 +31,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#if WITH_BCMATH
 #include "ext/bcmath/php_bcmath.h"
+#endif
 #include "ext/standard/dl.h"
 #include "ext/standard/file.h"
 #include "ext/standard/fsock.h"

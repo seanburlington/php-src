@@ -1,8 +1,10 @@
-dnl $Id: config.m4,v 1.3 1999/04/22 03:03:35 ssb Exp $
+dnl $Id: config.m4,v 1.4 1999/11/14 23:03:45 sas Exp $
 dnl config.m4 for extension db
 dnl don't forget to call PHP_EXTENSION(db)
 
 divert(1)
+
+AC_CHECK_HEADERS(db1/ndbm.h)
 
 # Checks for libraries.
 # Prefer gdbm, Berkeley DB and ndbm/dbm, in that order

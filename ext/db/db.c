@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.11 1999/10/07 14:00:18 andrei Exp $ */
+/* $Id: db.c,v 1.12 1999/11/14 23:03:45 sas Exp $ */
 #define IS_EXT_MODULE
 #if COMPILE_DL
 # include "dl/phpdl.h"
@@ -79,7 +79,11 @@
 #define DB_DBM_HSEARCH 1
 #include <db.h>
 #else
+#ifdef HAVE_DB1_NDBM_H
+#include <db1/ndbm.h>
+#else
 #include <ndbm.h>
+#endif
 #endif
 
 #define DBM_TYPE DBM *

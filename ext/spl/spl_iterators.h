@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.13 2004/10/31 19:49:15 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.14 2004/10/31 20:59:37 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -36,6 +36,7 @@ extern zend_class_entry *spl_ce_OuterIterator;
 extern zend_class_entry *spl_ce_IteratorIterator;
 extern zend_class_entry *spl_ce_NoRewindIterator;
 extern zend_class_entry *spl_ce_InfiniteIterator;
+extern zend_class_entry *spl_ce_EmptyIterator;
 
 PHP_MINIT_FUNCTION(spl_iterators);
 

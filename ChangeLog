@@ -1,3 +1,30 @@
+2004-12-05  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      EXTENSIONS:
+      As per discussion on internals and pecl, domxml is no longer experimental.
+
+2004-12-05  Rob Richards  <rrichards@ctindustries.net>
+
+    * ext/dom/document.c
+      ext/simplexml/simplexml.c:
+      add optional parameter to pass libxml document load options
+
+2004-12-05  Holger Zimmermann  <zimpel@t-online.de>
+
+    * (PHP_4_3)
+      sapi/pi3web/php4pi3web.dsp
+      sapi/pi3web/php5pi3web.dsp
+      sapi/pi3web/php5pi3web.dsp
+      sapi/pi3web/pi3web_sapi.c
+      sapi/pi3web/pi3web_sapi.c
+      sapi/pi3web/pi3web_sapi.c
+      sapi/pi3web/pi3web_sapi.h
+      sapi/pi3web/pi3web_sapi.h
+      sapi/pi3web/pi3web_sapi.h:
+      Replaced static server variables by function call and configurable list at
+      the Pi3Web server side.
+
 2004-12-04  Rasmus Lerdorf  <rasmus@lerdorf.com>
 
     * sapi/apache/php_apache.c:
@@ -13653,7 +13680,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1824 2004/12/05 01:32:43 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1825 2004/12/06 01:35:04 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

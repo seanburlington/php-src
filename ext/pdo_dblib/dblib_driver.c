@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_driver.c,v 1.2 2005/01/18 02:42:52 wez Exp $ */
+/* $Id: dblib_driver.c,v 1.3 2005/01/18 04:35:47 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -48,7 +48,7 @@ static int dblib_fetch_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, zval *info TSRMLS
 	if (einfo->dberr == SYBESMSG && einfo->lastmsg) {
 		msg = einfo->lastmsg;
 	} else {
-		msg = einfo->dberr;
+		msg = einfo->dberrstr;
 	}
 
 	spprintf(&message, 0, "%s [%d] (severity %d)",

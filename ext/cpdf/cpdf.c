@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.43.4.1 2002/12/31 16:34:13 sebastian Exp $ */
+/* $Id: cpdf.c,v 1.43.4.2 2003/01/15 00:52:19 iliaa Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -40,6 +40,8 @@
 #if HAVE_LIBGD13
 #include <gd.h>
 #endif
+
+#include <cpdflib.h>
 
 #ifdef HAVE_UNISTD_H
 # include <unistd.h>

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.112 2004/07/19 07:19:47 andi Exp $ */
+/* $Id: wddx.c,v 1.113 2005/03/12 01:44:04 helly Exp $ */
 
 #include "php.h"
 
@@ -1014,6 +1014,7 @@ static void php_wddx_process_data(void *user_data, const XML_Char *s, int len)
 				decoded = xml_utf8_decode(s, len, &decoded_len, "ISO-8859-1");
 
 				if (Z_STRLEN_P(ent->data) == 0) {
+					STR_FREE(Z_STRVAL_P(ent->data));
 					Z_STRVAL_P(ent->data) = estrndup(decoded, decoded_len);
 					Z_STRLEN_P(ent->data) = decoded_len;
 				} else {

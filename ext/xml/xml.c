@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.85 2001/07/28 11:36:24 zeev Exp $ */
+/* $Id: xml.c,v 1.86 2001/07/28 18:38:36 andi Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -389,7 +389,7 @@ xml_call_handler(xml_parser *parser, zval *handler, int argc, zval **argv)
 					   zend_hash_index_find(handler->value.ht, 1, (void **) &method) == SUCCESS &&
 					   Z_TYPE_PP(obj) == IS_OBJECT &&
 					   Z_TYPE_PP(method) == IS_STRING) {
-				php_error(E_WARNING, "Unable to call handler %s::%s()", (*obj)->value.obj.ce->name, Z_STRVAL_PP(method));
+				php_error(E_WARNING, "Unable to call handler %s::%s()", Z_OBJCE_PP(obj)->name, Z_STRVAL_PP(method));
 			} else
 				php_error(E_WARNING, "Unable to call handler");
 

@@ -1,4 +1,4 @@
-/* $Id: php_mcal.h,v 1.5 2000/03/05 05:36:33 chagenbu Exp $ */
+/* $Id: php_mcal.h,v 1.6 2000/03/11 02:15:13 chagenbu Exp $ */
 
 #ifndef _INCLUDED_MCAL_H
 #define _INCLUDED_MCAL_H
@@ -65,6 +65,7 @@ PHP_FUNCTION(mcal_date_valid);
 PHP_FUNCTION(mcal_time_valid);
 PHP_FUNCTION(mcal_day_of_week);
 PHP_FUNCTION(mcal_day_of_year);
+PHP_FUNCTION(mcal_week_of_year);
 PHP_FUNCTION(mcal_date_compare);
 PHP_FUNCTION(mcal_event_init);
 PHP_FUNCTION(mcal_next_recurrence);

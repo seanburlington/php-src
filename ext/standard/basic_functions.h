@@ -29,7 +29,7 @@
  */
 
 
-/* $Id: basic_functions.h,v 1.53 2000/05/29 16:13:38 zeev Exp $ */
+/* $Id: basic_functions.h,v 1.54 2000/06/21 22:51:29 rasmus Exp $ */
 
 #ifndef _BASIC_FUNCTIONS_H
 #define _BASIC_FUNCTIONS_H
@@ -107,6 +107,8 @@ PHP_FUNCTION(getservbyname);
 PHP_FUNCTION(getservbyport);
 PHP_FUNCTION(getprotobyname);
 PHP_FUNCTION(getprotobynumber);
+
+PHP_NAMED_FUNCTION(php_if_crc32);
 
 PHP_FUNCTION(get_loaded_extensions);
 PHP_FUNCTION(extension_loaded);

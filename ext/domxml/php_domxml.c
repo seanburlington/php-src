@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_domxml.c,v 1.162 2002/06/04 14:20:54 jtate Exp $ */
+/* $Id: php_domxml.c,v 1.163 2002/06/04 14:30:12 jtate Exp $ */
 
 /* TODO
  * - Support Notation Nodes
@@ -3251,7 +3251,7 @@ PHP_FUNCTION(domxml_dump_mem)
 		} else {
 			xmlDocDumpFormatMemory(docp, &mem, &size, format);
 		}
-        xmlKeepBlanksDefault(keepblanks);
+		xmlKeepBlanksDefault(keepblanks);
 	} else {
 		if (encoding_len) {
 			xmlDocDumpMemoryEnc(docp, &mem, &size, encoding);

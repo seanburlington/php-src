@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.33 2004/02/19 02:13:39 sniper Exp $ */
+/* $Id: session.c,v 1.336.2.34 2004/02/24 08:49:41 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1612,14 +1612,26 @@ PHP_RSHUTDOWN_FUNCTION(session)
 }
 /* }}} */
 
+static void php_minit_session_globals(php_ps_globals *ps_globals)
+{
+	ps_globals->save_path = NULL;
+	ps_globals->session_name = NULL;
+	ps_globals->id = NULL;
+	ps_globals->mod = NULL;
+	ps_globals->mod_data = NULL;
+	ps_globals->session_status = php_session_none;
+	ps_globals->http_session_vars = NULL;
+}
 
 PHP_MINIT_FUNCTION(session)
 {
 #ifdef ZTS
 	php_ps_globals *ps_globals;
 
-	ts_allocate_id(&ps_globals_id, sizeof(php_ps_globals), NULL, NULL);
+	ts_allocate_id(&ps_globals_id, sizeof(php_ps_globals), (ts_allocate_ctor) php_minit_session_globals, NULL);
 	ps_globals = ts_resource(ps_globals_id);
+#else 
+	php_minit_session_globals(&ps_globals);
 #endif
 
 	zend_register_auto_global("_SESSION", sizeof("_SESSION")-1 TSRMLS_CC);

@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: Common.php,v 1.57 2002/04/29 06:23:05 ssb Exp $
+// $Id: Common.php,v 1.58 2002/05/15 11:23:01 cox Exp $
 
 require_once 'PEAR.php';
 require_once 'Archive/Tar.php';
@@ -1395,6 +1395,10 @@ class PEAR_Common extends PEAR
         while (trim($line = fgets($fp, 1024))) {
             if (preg_match('/^([^:]+):\s+(.*)\s*$/', $line, $matches)) {
                 $headers[strtolower($matches[1])] = trim($matches[2]);
+            } elseif (preg_match('|^HTTP/1.[01] ([0-9]{3}) |', $line, $matches)) {
+                if ($matches[1] != 200) {
+                    return PEAR::raiseError("File http://$host:$port$path not valid (received: $line)");
+                }
             }
         }
         if (isset($headers['content-disposition']) &&

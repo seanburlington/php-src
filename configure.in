@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.410 2003/01/01 09:58:16 wez Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.411 2003/01/02 19:20:55 iliaa Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -728,7 +728,7 @@ dnl
 dnl OpenSSL configure
 dnl
 PHP_ARG_WITH(openssl,for OpenSSL support,
-[  --with-openssl[=DIR]    Include OpenSSL support (requires OpenSSL >= 0.9.5) ])
+[  --with-openssl[=DIR]    Include OpenSSL support (requires OpenSSL >= 0.9.6) ])
 
 if test "$PHP_OPENSSL" != "no"; then
   ext_openssl_shared=$ext_shared

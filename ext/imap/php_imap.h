@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_imap.h,v 1.22 2002/07/31 01:03:31 kalowsky Exp $ */
+/* $Id: php_imap.h,v 1.23 2002/08/05 21:53:09 kalowsky Exp $ */
 
 #ifndef PHP_IMAP_H
 #define PHP_IMAP_H
@@ -79,12 +79,6 @@ typedef enum {
 typedef struct php_imap_le_struct {
 	MAILSTREAM *imap_stream;
 	long flags;
-#ifdef OP_RELOGIN
-	/* AJS: busy flag for persistent connections, pointers for chaining */
-	struct php_imap_le_struct *next;
-	struct php_imap_le_struct **prev;
-	char busy;
-#endif
 } pils;
 
 typedef struct php_imap_mailbox_struct {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.155 2000/09/12 10:56:25 stas Exp $ */
+/* $Id: string.c,v 1.156 2000/09/12 15:54:10 danbeck Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -173,6 +173,10 @@ PHPAPI void php_trim(zval *str, zval * return_value, int mode)
 }
 
 /* {{{ proto string rtrim(string str)
+   An alias for chop */
+/* }}} */
+
+/* {{{ proto string chomp(string str)
    An alias for chop */
 /* }}} */
 

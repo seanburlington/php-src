@@ -26,12 +26,19 @@
    | Authors: Uwe Steinmann                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_cpdf.h,v 1.6 2000/07/02 23:46:38 sas Exp $ */
+/* $Id: php_cpdf.h,v 1.7 2001/03/18 18:32:58 ohrn Exp $ */
 
 #ifndef PHP_CPDF_H
 #define PHP_CPDF_H
 
 #if HAVE_CPDFLIB
+
+/* The macro T is defined in the IMAP headers and clashes with a function
+   declaration here. Get rid of it. */
+
+#ifdef T
+#undef T
+#endif
 
 #include <cpdflib.h>
 

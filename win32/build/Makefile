@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.2 2003/12/03 14:55:03 wez Exp $
+# $Id: Makefile,v 1.3 2003/12/03 14:58:05 wez Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -31,7 +31,7 @@ win32\phpts.def: $(PHP_DLL_DEF_SOURCES)
 	type $(PHP_DLL_DEF_SOURCES) > win32\phpts.def
 
 Zend\zend_ini_parser.c Zend\zend_ini_parser.h: Zend\zend_ini_parser.y
-	bison --output=Zend/zend_ini_parser.\ -v -d -p ini_ Zend/zend_ini_parser.y
+	bison --output=Zend/zend_ini_parser.c -v -d -p ini_ Zend/zend_ini_parser.y
 
 Zend\zend_language_parser.c Zend\zend_language_parser.h: Zend\zend_language_parser.y
 	bison --output=Zend/zend_language_parser.c -v -d -p zend Zend/zend_language_parser.y

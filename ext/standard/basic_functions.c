@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.20 2003/07/24 08:04:20 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.21 2003/08/11 00:53:26 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1123,10 +1123,6 @@ PHP_RINIT_FUNCTION(basic)
 	}
 #endif
 	BG(user_shutdown_function_names) = NULL;
-
-#if HAVE_CRYPT
-	PHP_RINIT(crypt) (INIT_FUNC_ARGS_PASSTHRU);
-#endif
 
 	PHP_RINIT(lcg) (INIT_FUNC_ARGS_PASSTHRU);
 

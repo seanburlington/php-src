@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.30 2001/06/25 11:36:40 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.31 2001/07/31 05:43:58 zeev Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -160,13 +160,15 @@ zend_module_entry mnogosearch_module_entry = {
 ZEND_GET_MODULE(mnogosearch)
 #endif
 
-static void _free_udm_agent(zend_rsrc_list_entry *rsrc){
+static void _free_udm_agent(zend_rsrc_list_entry *rsrc TSRMLS_DC)
+{
 	UDM_AGENT * Agent = (UDM_AGENT *)rsrc->ptr;
 	UdmFreeEnv(Agent->Conf);
 	UdmFreeAgent(Agent);
 }
 
-static void _free_udm_res(zend_rsrc_list_entry *rsrc){
+static void _free_udm_res(zend_rsrc_list_entry *rsrc TSRMLS_DC)
+{
 	UDM_RESULT * Res = (UDM_RESULT *)rsrc->ptr;
 	UdmFreeResult(Res);	
 }

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.142 2001/07/31 04:53:48 zeev Exp $ */
+/* $Id: oci8.c,v 1.143 2001/07/31 05:44:01 zeev Exp $ */
 
 /* TODO list:
  *
@@ -131,14 +131,14 @@ static int oci_ping(oci_server *server);
 static void oci_debug(const char *format, ...);
 
 static void _oci_conn_list_dtor(oci_connection *connection);
-static void _oci_stmt_list_dtor(zend_rsrc_list_entry *rsrc);
-static void _oci_descriptor_list_dtor(zend_rsrc_list_entry *rsrc);
+static void _oci_stmt_list_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC);
+static void _oci_descriptor_list_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 #ifdef WITH_COLLECTIONS
-static void _oci_coll_list_dtor(zend_rsrc_list_entry *rsrc);
+static void _oci_coll_list_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 #endif
-static void _oci_server_list_dtor(zend_rsrc_list_entry *rsrc);
-static void _oci_session_list_dtor(zend_rsrc_list_entry *rsrc);
-static void php_oci_free_conn_list(zend_rsrc_list_entry *rsrc);
+static void _oci_server_list_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC);
+static void _oci_session_list_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC);
+static void php_oci_free_conn_list(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 
 static void _oci_column_hash_dtor(void *data);
 static void _oci_define_hash_dtor(void *data);
@@ -577,7 +577,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.142 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.143 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -687,7 +687,7 @@ _oci_column_hash_dtor(void *data)
 /* {{{ _oci_stmt_list_dtor() */
  
 static void
-_oci_stmt_list_dtor(zend_rsrc_list_entry *rsrc)
+_oci_stmt_list_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	oci_statement *statement = (oci_statement *)rsrc->ptr;
 	oci_debug("START _oci_stmt_list_dtor: id=%d last_query=\"%s\"",statement->id,SAFE_STRING(statement->last_query));
@@ -772,7 +772,7 @@ _oci_conn_list_dtor(oci_connection *connection)
 
 /* {{{ php_oci_free_conn_list
  */
-static void php_oci_free_conn_list(zend_rsrc_list_entry *rsrc)
+static void php_oci_free_conn_list(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	oci_connection *conn = (oci_connection *)rsrc->ptr;
 	_oci_conn_list_dtor(conn);
@@ -785,7 +785,7 @@ static void php_oci_free_conn_list(zend_rsrc_list_entry *rsrc)
  */
 
 static void 
-_oci_coll_list_dtor(zend_rsrc_list_entry *rsrc)
+_oci_coll_list_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	oci_collection *coll = (oci_collection *)rsrc->ptr;
 	oci_debug("START _oci_coll_list_dtor: %d",coll->id);
@@ -806,7 +806,7 @@ _oci_coll_list_dtor(zend_rsrc_list_entry *rsrc)
  */
 
 static void 
-_oci_descriptor_list_dtor(zend_rsrc_list_entry *rsrc)
+_oci_descriptor_list_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	oci_descriptor *descr = (oci_descriptor *)rsrc->ptr;
     oci_debug("START _oci_descriptor_list_dtor: %d",descr->id);
@@ -825,7 +825,7 @@ _oci_descriptor_list_dtor(zend_rsrc_list_entry *rsrc)
  */
 
 static void 
-_oci_server_list_dtor(zend_rsrc_list_entry *rsrc)
+_oci_server_list_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	oci_server *server = (oci_server *)rsrc->ptr;
 	if (server->persistent)
@@ -839,7 +839,7 @@ _oci_server_list_dtor(zend_rsrc_list_entry *rsrc)
  */
 
 static void 
-_oci_session_list_dtor(zend_rsrc_list_entry *rsrc)
+_oci_session_list_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	oci_session *session = (oci_session *)rsrc->ptr;
    	if (session->persistent)

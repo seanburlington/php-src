@@ -17,14 +17,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* 	$Id: gdt1.h,v 1.8 2001/02/26 06:06:56 andi Exp $	 */
+/* 	$Id: gdt1.h,v 1.9 2001/07/31 05:43:54 zeev Exp $	 */
 
 #if HAVE_LIBT1
 
 #include <t1lib.h>
 
-extern void php_free_ps_font(zend_rsrc_list_entry *rsrc);
-extern void php_free_ps_enc(zend_rsrc_list_entry *rsrc);
+extern void php_free_ps_font(zend_rsrc_list_entry *rsrc TSRMLS_DC);
+extern void php_free_ps_enc(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 
 #endif
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.34 2001/06/06 13:05:43 rasmus Exp $ */
+/* $Id: dba.c,v 1.35 2001/07/31 05:43:51 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -183,9 +183,10 @@ static void dba_close(dba_info *info)
 
 /* {{{ dba_close_rsrc
  */
-static void dba_close_rsrc(zend_rsrc_list_entry *rsrc)
+static void dba_close_rsrc(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	dba_info *info = (dba_info *)rsrc->ptr;
+
 	dba_close(info);
 }
 /* }}} */

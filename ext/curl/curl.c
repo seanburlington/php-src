@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.74 2001/07/30 08:24:24 zeev Exp $ */
+/* $Id: curl.c,v 1.75 2001/07/31 05:43:50 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -44,7 +44,7 @@
 static int  le_curl;
 #define le_curl_name "cURL handle"
 
-static void _php_curl_close(zend_rsrc_list_entry *rsrc);
+static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 
 #define SAVE_CURL_ERROR(__handle, __err) (__handle)->err.no = (int) __err;
 
@@ -995,7 +995,7 @@ PHP_FUNCTION(curl_close)
 
 /* {{{ _php_curl_close()
    List destructor for curl handles */
-static void _php_curl_close(zend_rsrc_list_entry *rsrc)
+static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	php_curl *ch = (php_curl *) rsrc->ptr;
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cpdf.c,v 1.29 2001/07/30 06:17:49 zeev Exp $ */
+/* $Id: cpdf.c,v 1.30 2001/07/31 05:43:48 zeev Exp $ */
 /* cpdflib.h -- C language API definitions for ClibPDF library
  * Copyright (C) 1998 FastIO Systems, All Rights Reserved.
 */
@@ -162,13 +162,14 @@ zend_module_entry cpdf_module_entry = {
 ZEND_GET_MODULE(cpdf)
 #endif
 
-static void _free_outline(zend_rsrc_list_entry *rsrc)
+static void _free_outline(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 }
 
-static void _free_doc(zend_rsrc_list_entry *rsrc)
+static void _free_doc(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	CPDFdoc *pdf = (CPDFdoc *)rsrc->ptr;
+
 	cpdf_close(pdf);
 }
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.74 2001/07/30 01:56:37 zeev Exp $ */
+/* $Id: dir.c,v 1.75 2001/07/31 05:44:06 zeev Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -101,9 +101,10 @@ static void php_set_default_dir(int id TSRMLS_DC)
 }
 
 
-static void _dir_dtor(zend_rsrc_list_entry *rsrc)
+static void _dir_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	php_dir *dirp = (php_dir *)rsrc->ptr;
+
 	closedir(dirp->dir);
 	efree(dirp);
 }

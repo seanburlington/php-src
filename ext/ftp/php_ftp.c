@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.37 2001/07/30 06:17:52 zeev Exp $ */
+/* $Id: php_ftp.c,v 1.38 2001/07/31 05:43:53 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -76,9 +76,10 @@ zend_module_entry php_ftp_module_entry = {
 ZEND_GET_MODULE(php_ftp)
 #endif
 
-static void ftp_destructor_ftpbuf(zend_rsrc_list_entry *rsrc)
+static void ftp_destructor_ftpbuf(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	ftpbuf_t *ftp = (ftpbuf_t *)rsrc->ptr;
+
 	ftp_close(ftp);
 }
 

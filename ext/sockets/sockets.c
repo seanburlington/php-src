@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.58 2001/07/30 08:24:34 zeev Exp $ */
+/* $Id: sockets.c,v 1.59 2001/07/31 05:44:05 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -173,13 +173,14 @@ ZEND_GET_MODULE(sockets)
 /* inet_ntop should be used instead of inet_ntoa */
 int inet_ntoa_lock = 0;
 
-static void destroy_fd_sets(zend_rsrc_list_entry *rsrc)
+static void destroy_fd_sets(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	php_fd_set *php_fd = (php_fd_set*)rsrc->ptr;
+
 	efree(php_fd);
 }
 
-static void destroy_iovec(zend_rsrc_list_entry *rsrc)
+static void destroy_iovec(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	unsigned int i;
 	php_iovec_t *iov = (php_iovec_t *) rsrc->ptr;
@@ -194,7 +195,7 @@ static void destroy_iovec(zend_rsrc_list_entry *rsrc)
 	}
 }
 
-static void destroy_socket(zend_rsrc_list_entry *rsrc) 
+static void destroy_socket(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	php_socket *php_sock = (php_socket *) rsrc->ptr;
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zip.c,v 1.9 2001/07/30 01:56:41 zeev Exp $ */
+/* $Id: zip.c,v 1.10 2001/07/31 05:44:10 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -73,16 +73,17 @@ ZEND_GET_MODULE(zip)
 
 /* {{{ php_zip_free_dir
  */
-static void php_zip_free_dir(zend_rsrc_list_entry *rsrc)
+static void php_zip_free_dir(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	ZZIP_DIR *z_dir = (ZZIP_DIR *) rsrc->ptr;
+
 	zzip_closedir(z_dir);
 }
 /* }}} */
 
 /* {{{ php_zip_free_entry
  */
-static void php_zip_free_entry(zend_rsrc_list_entry *rsrc)
+static void php_zip_free_entry(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	php_zzip_dirent *entry = (php_zzip_dirent *) rsrc->ptr;
 

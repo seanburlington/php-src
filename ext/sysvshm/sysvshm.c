@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.40 2001/06/06 13:05:52 rasmus Exp $ */
+/* $Id: sysvshm.c,v 1.41 2001/07/31 05:44:08 zeev Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -71,7 +71,7 @@ THREAD_LS sysvshm_module php_sysvshm;
 
 /* {{{ php_release_sysvshm
  */
-static void php_release_sysvshm(zend_rsrc_list_entry *rsrc) 
+static void php_release_sysvshm(zend_rsrc_list_entry *rsrc)
 {
 	sysvshm_shm *shm_ptr = (sysvshm_shm *)rsrc->ptr;
 	shmdt((void*)shm_ptr->ptr);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.54 2001/07/31 04:53:47 zeev Exp $ */
+/* $Id: fdf.c,v 1.55 2001/07/31 05:43:52 zeev Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -83,9 +83,10 @@ ZEND_GET_MODULE(fdf)
 #endif
 
 
-static void phpi_FDFClose(zend_rsrc_list_entry *rsrc)
+static void phpi_FDFClose(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	FDFDoc fdf = (FDFDoc)rsrc->ptr;
+
 	(void) FDFClose(fdf);
 }
 

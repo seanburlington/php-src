@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: ldap.c,v 1.91 2001/07/28 11:35:57 zeev Exp $ */
+/* $Id: ldap.c,v 1.92 2001/07/31 05:43:57 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -136,17 +136,16 @@ ZEND_GET_MODULE(ldap)
 #endif
 
 
-static void _close_ldap_link(zend_rsrc_list_entry *rsrc)
+static void _close_ldap_link(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	LDAP *ld = (LDAP *)rsrc->ptr;
-	TSRMLS_FETCH();
 
 	ldap_unbind_s(ld);
 	LDAPG(num_links)--;
 }
 
 
-static void _free_ldap_result(zend_rsrc_list_entry *rsrc)
+static void _free_ldap_result(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	LDAPMessage *result = (LDAPMessage *)rsrc->ptr;
 	ldap_msgfree(result);
@@ -252,7 +251,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.91 2001/07/28 11:35:57 zeev Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.92 2001/07/31 05:43:57 zeev Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 
 #ifdef LDAP_API_VERSION

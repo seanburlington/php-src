@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.56 2001/07/30 08:24:24 zeev Exp $ */
+/* $Id: db.c,v 1.57 2001/07/31 05:43:51 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #if 1
@@ -440,7 +440,8 @@ PHP_FUNCTION(dbmclose) {
 
 /* {{{ php_dbm_close
  */
-int php_dbm_close(zend_rsrc_list_entry *rsrc) {
+int php_dbm_close(zend_rsrc_list_entry *rsrc TSRMLS_DC)
+{
 	int ret = 0;
 	dbm_info *info = (dbm_info *)rsrc->ptr;
 	DBM_TYPE dbf;

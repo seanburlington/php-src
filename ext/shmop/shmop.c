@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky (iliaa@home.com)                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.14 2001/07/30 01:56:36 zeev Exp $ */
+/* $Id: shmop.c,v 1.15 2001/07/31 05:44:04 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -73,7 +73,7 @@ ZEND_GET_MODULE(shmop)
 
 /* {{{ rsclean
  */
-static void rsclean(zend_rsrc_list_entry *rsrc)
+static void rsclean(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	struct php_shmop *shmop = (struct php_shmop *)rsrc->ptr;
 

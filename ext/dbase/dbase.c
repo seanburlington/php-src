@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dbase.c,v 1.41 2001/07/28 11:35:46 zeev Exp $ */
+/* $Id: dbase.c,v 1.42 2001/07/31 05:43:51 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -61,9 +61,10 @@ static int le_dbhead;
 #include <errno.h>
 
 
-static void _close_dbase(zend_rsrc_list_entry *rsrc)
+static void _close_dbase(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	dbhead_t *dbhead = (dbhead_t *)rsrc->ptr;
+
 	close(dbhead->db_fd);
 	free_dbf_head(dbhead);
 }

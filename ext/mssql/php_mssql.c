@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.63 2001/07/31 04:53:47 zeev Exp $ */
+/* $Id: php_mssql.c,v 1.64 2001/07/31 05:43:59 zeev Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -206,9 +206,10 @@ static void _free_mssql_statement(mssql_statement *statement)
 	efree(statement);
 }
 
-static void _free_mssql_result(zend_rsrc_list_entry *rsrc)
+static void _free_mssql_result(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	mssql_result *result = (mssql_result *)rsrc->ptr;
+
 	_free_result(result, 1);
 	efree(result);
 }
@@ -222,10 +223,9 @@ static void php_mssql_set_default_link(int id TSRMLS_DC)
 	zend_list_addref(id);
 }
 
-static void _close_mssql_link(zend_rsrc_list_entry *rsrc)
+static void _close_mssql_link(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	mssql_link *mssql_ptr = (mssql_link *)rsrc->ptr;
-	TSRMLS_FETCH();
 
 	mssql_ptr->valid = 0;
 	zend_hash_apply(&EG(regular_list),(apply_func_t) _clean_invalid_results TSRMLS_CC);
@@ -236,10 +236,9 @@ static void _close_mssql_link(zend_rsrc_list_entry *rsrc)
 }
 
 
-static void _close_mssql_plink(zend_rsrc_list_entry *rsrc)
+static void _close_mssql_plink(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	mssql_link *mssql_ptr = (mssql_link *)rsrc->ptr;
-	TSRMLS_FETCH();
 
 	dbclose(mssql_ptr->link);
 	dbfreelogin(mssql_ptr->login);

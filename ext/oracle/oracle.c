@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.69 2001/07/30 06:18:00 zeev Exp $ */
+/* $Id: oracle.c,v 1.70 2001/07/31 05:44:02 zeev Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -71,7 +71,7 @@ PHP_ORA_API php_ora_globals ora_globals;
 static oraCursor *ora_get_cursor(HashTable *, pval **);
 static char *ora_error(Cda_Def *);
 static int ora_describe_define(oraCursor *);
-static int _close_oraconn(zend_rsrc_list_entry *rsrc);
+static int _close_oraconn(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 static int _close_oracur(oraCursor *cur);
 static int _ora_ping(oraConnection *conn);
 int ora_set_param_values(oraCursor *cursor, int isout);
@@ -201,10 +201,9 @@ ZEND_GET_MODULE(oracle)
 
 /* {{{ _close_oraconn
  */
-static int _close_oraconn(zend_rsrc_list_entry *rsrc)
+static int _close_oraconn(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	oraConnection *conn = (oraConnection *)rsrc->ptr;
-	TSRMLS_FETCH();
 	
 	conn->open = 0;
 
@@ -277,7 +276,7 @@ static int _close_oracur(oraCursor *cur)
 
 /* {{{ php_close_ora_cursor
  */
-static void php_close_ora_cursor(zend_rsrc_list_entry *rsrc)
+static void php_close_ora_cursor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	oraCursor *cur = (oraCursor *)rsrc->ptr;
 	_close_oracur(cur);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ticks.c,v 1.9 2001/07/31 04:53:52 zeev Exp $ */
+/* $Id: php_ticks.c,v 1.10 2001/07/31 05:44:11 zeev Exp $ */
 
 #include "php.h"
 #include "php_ticks.h"
@@ -62,7 +62,6 @@ static void php_tick_iterator(void *data, void *arg TSRMLS_DC)
 
 	memcpy(&func, data, sizeof(void(*)(int)));
 	func(*((int *)arg));
-	return SUCCESS;
 }
 
 void php_run_ticks(int count)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: java.c,v 1.51 2001/07/30 06:17:56 zeev Exp $ */
+/* $Id: java.c,v 1.52 2001/07/31 05:43:56 zeev Exp $ */
 
 /*
  * This module implements Zend OO syntax overloading support for Java
@@ -592,15 +592,17 @@ int java_set_property_handler
 
 /***************************************************************************/
 
-static void _php_java_destructor(zend_rsrc_list_entry *rsrc)
+static void _php_java_destructor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	void *jobject = (void *)rsrc->ptr;
-  JG_FETCH();
-  if (JG(jenv)) (*JG(jenv))->DeleteGlobalRef(JG(jenv), jobject);
+
+	JG_FETCH();
+	if (JG(jenv)) (*JG(jenv))->DeleteGlobalRef(JG(jenv), jobject);
 }
 
 #ifdef ZTS
-static void alloc_java_globals_ctor(php_java_globals *java_globals TSRMLS_DC) {
+static void alloc_java_globals_ctor(php_java_globals *java_globals TSRMLS_DC)
+{
   memset(java_globals, 0, sizeof(php_java_globals));
 }
 #endif

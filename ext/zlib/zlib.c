@@ -16,7 +16,7 @@
    |          Stefan Röhrich <sr@linux.de>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.88 2001/07/30 19:39:26 sniper Exp $ */
+/* $Id: zlib.c,v 1.89 2001/07/31 05:44:10 zeev Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -133,9 +133,10 @@ PHP_INI_END()
 
 /* {{{ phpi_destructor_gzclose
  */
-static void phpi_destructor_gzclose(zend_rsrc_list_entry *rsrc)
+static void phpi_destructor_gzclose(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	gzFile *zp = (gzFile *)rsrc->ptr;
+
 	(void)gzclose(zp);
 }
 /* }}} */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: aspell.c,v 1.28 2001/06/06 13:05:41 rasmus Exp $ */
+/* $Id: aspell.c,v 1.29 2001/07/31 05:43:47 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -60,9 +60,10 @@ ZEND_GET_MODULE(aspell)
 
 /* {{{ php_aspell_close
  */
-static void php_aspell_close(zend_rsrc_list_entry *rsrc)
+static void php_aspell_close(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	aspell *sc = (aspell *)rsrc->ptr;
+
 	aspell_free(sc);
 }
 /* }}} */

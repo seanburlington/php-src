@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.4 2004/05/18 05:00:52 gschlossnagle Exp $ */
+/* $Id: php_pdo_driver.h,v 1.5 2004/05/18 08:59:27 wez Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -278,6 +278,9 @@ struct _pdo_stmt_t {
 
 	/* not always meaningful */
 	long row_count;
+
+	/* used only when PDO is emulating prepare for the driver */
+	char *query_string;
 };
 
 /* call this in MINIT to register your PDO driver */

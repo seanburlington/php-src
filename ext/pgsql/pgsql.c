@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.254 2002/12/31 16:07:17 sebastian Exp $ */
+/* $Id: pgsql.c,v 1.255 2003/01/04 12:33:46 derick Exp $ */
 
 #include <stdlib.h>
 
@@ -2833,7 +2833,7 @@ static int php_pgsql_flush_query(PGconn *pgsql TSRMLS_DC)
 	PGresult *res;
 	int leftover = 0;
 	
-	if (PQsetnonblocking(pgsql, 1)) {
+	if (PQ_SETNONBLOCKING(pgsql, 1)) {
 		php_error_docref(NULL TSRMLS_CC, E_NOTICE,"Cannot set connection to nonblocking mode.");
 		return -1;
 	}
@@ -2841,7 +2841,7 @@ static int php_pgsql_flush_query(PGconn *pgsql TSRMLS_DC)
 		PQclear(res);
 		leftover++;
 	}
-	PQsetnonblocking(pgsql, 0);
+	PQ_SETNONBLOCKING(pgsql, 0);
 	return leftover;
 }
 /* }}} */

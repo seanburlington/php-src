@@ -1,6 +1,6 @@
 /*
 	Build Configuration Template for Win32.
-	$Id: config.w32.h.in,v 1.4 2004/03/29 18:58:28 helly Exp $
+	$Id: config.w32.h.in,v 1.5 2004/04/29 00:17:09 wez Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -29,7 +29,6 @@
 #define MAGIC_QUOTES 0
 #define USE_CONFIG_FILE 1
 #define DEFAULT_SHORT_OPEN_TAG "1"
-#define ENABLE_PATHINFO_CHECK 1
 
 /* Platform-Specific Configuration. Should not be changed. */
 #define PHP_SIGCHILD 0

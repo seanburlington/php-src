@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.79 2000/04/08 15:01:11 andi Exp $ */
+/* $Id: php.h,v 1.80 2000/04/09 19:54:50 andi Exp $ */
 
 #ifndef _PHP_H
 #define _PHP_H
@@ -285,10 +285,10 @@ PHPAPI int cfg_get_string(char *varname, char **result);
 #define PUTC_H(c)					(php_header_write(&(c), 1), (c))
 
 #define VIRTUAL_DIR
+#include "php_virtual_cwd.h"
 
 /* Virtual current directory support */
 #ifdef VIRTUAL_DIR
-#include "php_virtual_cwd.h"
 #define PHP_GETCWD(buff, size) virtual_getcwd(buff,size)
 #define PHP_FOPEN(path, mode) virtual_fopen(path, mode)
 #define PHP_CHDIR(path) virtual_chdir(path)

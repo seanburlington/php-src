@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.135 2001/05/06 15:20:56 sniper Exp $ */
+/* $Id: info.c,v 1.136 2001/05/11 13:32:10 sbergmann Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -321,6 +321,8 @@ PHPAPI void php_print_info(int flag)
 		PUTS("</P>\n");
 		php_info_print_box_end();
 	}
+
+  PUTS("</BODY></HTML>");
 }
 
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.23 2004/01/22 21:16:05 rrichards Exp $ */
+/* $Id: php_dom.h,v 1.24 2004/02/12 10:43:20 zeev Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -56,7 +56,7 @@ extern zend_module_entry dom_module_entry;
 
 #include "xml_common.h"
 #include "ext/libxml/php_libxml.h"
-#include "zend_default_classes.h"
+#include "zend_exceptions.h"
 #include "dom_ce.h"
 /* DOM API_VERSION, please bump it up, if you change anything in the API
     therefore it's easier for the script-programmers to check, what's working how

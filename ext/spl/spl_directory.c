@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.22 2004/02/04 12:45:47 zeev Exp $ */
+/* $Id: spl_directory.c,v 1.23 2004/02/12 10:43:25 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -26,7 +26,7 @@
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "zend_compile.h"
-#include "zend_default_classes.h"
+#include "zend_exceptions.h"
 #include "zend_interfaces.h"
 
 #include "php_spl.h"

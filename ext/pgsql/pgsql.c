@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.304 2004/01/29 02:54:30 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.305 2004/02/12 10:43:22 zeev Exp $ */
 
 #include <stdlib.h>
 
@@ -37,7 +37,7 @@
 #include "ext/standard/php_smart_str.h"
 #include "php_pgsql.h"
 #include "php_globals.h"
-#include "zend_default_classes.h"
+#include "zend_exceptions.h"
 
 #if HAVE_PGSQL
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_iterator.c,v 1.5 2004/01/08 08:14:20 andi Exp $ */
+/* $Id: com_iterator.c,v 1.6 2004/02/12 10:43:19 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -27,7 +27,7 @@
 #include "ext/standard/info.h"
 #include "php_com_dotnet.h"
 #include "php_com_dotnet_internal.h"
-#include "Zend/zend_default_classes.h"
+#include "Zend/zend_exceptions.h"
 
 struct php_com_iterator {
 	zend_object_iterator iter;

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.79 2004/02/12 10:39:20 dmitry Exp $ */
+/* $Id: soap.c,v 1.80 2004/02/12 10:43:24 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -25,7 +25,7 @@
 #include "php_soap.h"
 #include "ext/session/php_session.h"
 #ifdef ZEND_ENGINE_2
-#  include "zend_default_classes.h"
+#  include "zend_exceptions.h"
 #endif
 
 static int le_sdl = 0;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_com.c,v 1.10 2004/01/13 13:38:11 wez Exp $ */
+/* $Id: com_com.c,v 1.11 2004/02/12 10:43:19 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -27,7 +27,7 @@
 #include "ext/standard/info.h"
 #include "php_com_dotnet.h"
 #include "php_com_dotnet_internal.h"
-#include "Zend/zend_default_classes.h"
+#include "Zend/zend_exceptions.h"
 
 /* {{{ com_create_instance - ctor for COM class */
 PHP_FUNCTION(com_create_instance)

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.30 2004/02/11 08:34:08 georg Exp $ 
+  $Id: mysqli.c,v 1.31 2004/02/12 10:43:22 zeev Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -29,7 +29,7 @@
 #include "ext/standard/info.h"
 #include "ext/standard/php_string.h"
 #include "php_mysqli.h"
-#include "zend_default_classes.h"
+#include "zend_exceptions.h"
 
 #define MYSQLI_STORE_RESULT 0
 #define MYSQLI_USE_RESULT 1

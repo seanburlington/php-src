@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.591 2004/02/10 18:46:53 zeev Exp $ */
+/* $Id: main.c,v 1.592 2004/02/12 10:43:27 zeev Exp $ */
 
 /* {{{ includes
  */
@@ -71,7 +71,7 @@
 #include "win32/php_registry.h"
 #endif
 #include "php_syslog.h"
-#include "Zend/zend_default_classes.h"
+#include "Zend/zend_exceptions.h"
 
 #if PHP_SIGCHILD
 #include <sys/types.h>

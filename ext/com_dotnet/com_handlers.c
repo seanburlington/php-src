@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.15 2004/02/08 17:25:53 zeev Exp $ */
+/* $Id: com_handlers.c,v 1.16 2004/02/12 10:43:19 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -27,7 +27,7 @@
 #include "ext/standard/info.h"
 #include "php_com_dotnet.h"
 #include "php_com_dotnet_internal.h"
-#include "Zend/zend_default_classes.h"
+#include "Zend/zend_exceptions.h"
 
 static zval *com_property_read(zval *object, zval *member, zend_bool silent TSRMLS_DC)
 {

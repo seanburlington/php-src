@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.16 2003/12/02 07:13:53 helly Exp $ */
+/* $Id: spl_directory.c,v 1.17 2003/12/04 20:56:31 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -59,7 +59,6 @@ SPL_METHOD(RecursiveDirectoryIterator, next);
 SPL_METHOD(RecursiveDirectoryIterator, key);
 SPL_METHOD(RecursiveDirectoryIterator, hasChildren);
 SPL_METHOD(RecursiveDirectoryIterator, getChildren);
-SPL_METHOD(RecursiveDirectoryIterator, __toString);
 
 
 /* declare method parameters */
@@ -94,7 +93,6 @@ static zend_function_entry spl_ce_dir_tree_class_functions[] = {
 	SPL_ME(RecursiveDirectoryIterator, key,           NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(RecursiveDirectoryIterator, hasChildren,   NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(RecursiveDirectoryIterator, getChildren,   NULL, ZEND_ACC_PUBLIC)
-	SPL_MA(RecursiveDirectoryIterator, __toString, DirectoryIterator, getPathname, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 

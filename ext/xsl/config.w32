@@ -1,9 +1,9 @@
-// $Id: config.w32,v 1.1 2003/12/04 12:37:04 rrichards Exp $
+// $Id: config.w32,v 1.2 2003/12/04 12:46:20 rrichards Exp $
 // vim: ft=javascript
 
 ARG_WITH("xsl", "xsl support", "no");
 
-if (PHP_XSL == "yes") {
+if (PHP_XSL != "no") {
 	if (CHECK_LIB("libxslt.lib", "xsl", PHP_XSL) && 
 			CHECK_LIB("libxml2.lib", "xsl") &&
 			CHECK_HEADER_ADD_INCLUDE("libxslt\\xslt.h", "CFLAGS_XSL")) {

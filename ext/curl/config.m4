@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 2000/10/02 17:35:57 rasmus Exp $
+dnl $Id: config.m4,v 1.4 2001/03/11 00:49:16 sniper Exp $
 dnl config.m4 for extension CURL
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -28,7 +28,12 @@ if test "$PHP_CURL" != "no"; then
   PHP_SUBST(CURL_SHARED_LIBADD)
   AC_ADD_LIBRARY_WITH_PATH(curl, $CURL_DIR/lib, CURL_SHARED_LIBADD)
 
-  AC_DEFINE(HAVE_CURL,1,[ ])
+  AC_CHECK_LIB(curl,curl_easy_perform, 
+  [ 
+    AC_DEFINE(HAVE_CURL,1,[ ])
+  ],[
+    AC_MSG_ERROR(Try adding --with-openssl[=DIR] into your configure line.)
+  ])
 
   PHP_EXTENSION(curl, $ext_shared)
 fi

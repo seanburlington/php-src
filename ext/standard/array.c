@@ -22,7 +22,7 @@
 */
 
 
-/* $Id: array.c,v 1.199.2.40 2004/12/02 16:36:41 tony2001 Exp $ */
+/* $Id: array.c,v 1.199.2.41 2004/12/16 19:23:59 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1391,13 +1391,13 @@ PHP_FUNCTION(array_fill)
 		WRONG_PARAM_COUNT;
 	}
 
-	/* allocate an array for return */
-	array_init(return_value);
-
 	switch (Z_TYPE_PP(start_key)) {
 		case IS_STRING:
 		case IS_LONG:
 		case IS_DOUBLE:
+			/* allocate an array for return */
+			array_init(return_value);
+	
 			if (PZVAL_IS_REF(*val)) {
 				SEPARATE_ZVAL(val);
 			}

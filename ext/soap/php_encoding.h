@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.h,v 1.35 2004/02/24 10:12:45 dmitry Exp $ */
+/* $Id: php_encoding.h,v 1.36 2004/08/26 18:40:10 dmitry Exp $ */
 
 #ifndef PHP_ENCODING_H
 #define PHP_ENCODING_H
@@ -43,6 +43,8 @@
 #define XSD_NS_PREFIX "xsd"
 #define XSI_NAMESPACE "http://www.w3.org/2001/XMLSchema-instance"
 #define XSI_NS_PREFIX "xsi"
+#define XML_NAMESPACE "http://www.w3.org/XML/1998/namespace"
+#define XML_NS_PREFIX "xml"
 
 #define XSD_STRING 101
 #define XSD_STRING_STRING "string"

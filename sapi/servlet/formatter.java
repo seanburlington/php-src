@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: formatter.java,v 1.3 2001/02/26 06:07:37 andi Exp $ */
+/* $Id: formatter.java,v 1.4 2001/10/28 23:49:02 sebastian Exp $ */
 
 package net.php;
 
@@ -24,13 +24,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class formatter extends servlet {
-
-    public void service(HttpServletRequest request,
-                        HttpServletResponse response) 
-       throws ServletException
-    {
-       display_source_mode = true;
-       super.service(request, response);
-    }
-
+  public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    display_source_mode = true;
+    super.service(request, response);
+  }
 }

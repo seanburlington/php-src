@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.180 2002/03/15 21:02:58 wez Exp $ */
+/* $Id: gd.c,v 1.181 2002/03/16 01:22:33 wez Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -441,7 +441,7 @@ PHP_FUNCTION(imageloadfont)
 	int hdr_size = sizeof(gdFont) - sizeof(char *);
 	int ind, body_size, n=0, b, i, body_size_check;
 	gdFontPtr font;
-	php_stream * stream;
+	php_stream *stream;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &file) == FAILURE) {
 		ZEND_WRONG_PARAM_COUNT();
@@ -1133,7 +1133,7 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 	zval **file, **srcx, **srcy, **width, **height;
 	gdImagePtr im = NULL;
 	char *fn=NULL;
-	php_stream * stream;
+	php_stream *stream;
 	FILE * fp = NULL;
 	int argc=ZEND_NUM_ARGS();
 	

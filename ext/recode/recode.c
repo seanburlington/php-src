@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: recode.c,v 1.22 2002/03/15 21:03:02 wez Exp $ */
+/* $Id: recode.c,v 1.23 2002/03/16 01:28:08 wez Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -98,7 +98,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.22 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.23 $");
 	php_info_print_table_end();
 
 }
@@ -163,7 +163,7 @@ PHP_FUNCTION(recode_file)
 	int success;
 	pval **req;
 	pval **input, **output;
-	php_stream * instream, *outstream;
+	php_stream *instream, *outstream;
 	FILE  *in_fp,  *out_fp;
 	int    in_type, out_type;
 

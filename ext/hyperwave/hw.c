@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: hw.c,v 1.104 2002/03/15 21:02:59 wez Exp $ */
+/* $Id: hw.c,v 1.105 2002/03/16 01:23:12 wez Exp $ */
 
 #include <stdlib.h>
 #include <errno.h>
@@ -2868,7 +2868,7 @@ PHP_FUNCTION(hw_new_document_from_file)
 	int issock=0;
 	int socketd=0;
 	FILE *fp;
-	php_stream * stream;
+	php_stream *stream;
 	int ready=0;
 	int bcount=0;
 	int use_include_path=0;

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.67 2002/03/15 21:03:04 wez Exp $ */
+/* $Id: exec.c,v 1.68 2002/03/16 01:28:57 wez Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -51,7 +51,7 @@ int php_Exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 	int overflow_limit, lcmd, ldir;
 	int rsrc_id;
 	char *b, *c, *d=NULL;
-	php_stream * stream = NULL;
+	php_stream *stream = NULL;
 #if PHP_SIGCHILD
 	void (*sig_handler)();
 #endif

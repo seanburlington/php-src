@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.46 2002/03/15 21:02:58 wez Exp $ */
+/* $Id: ftp.c,v 1.47 2002/03/16 01:20:57 wez Exp $ */
 
 #include "php.h"
 
@@ -613,7 +613,7 @@ bail:
 /* {{{ ftp_put
  */
 int
-ftp_put(ftpbuf_t *ftp, const char *path, php_stream * instream, ftptype_t type)
+ftp_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type)
 {
 	databuf_t		*data = NULL;
 	int			size;

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.156 2002/03/15 21:03:02 wez Exp $ */
+/* $Id: pgsql.c,v 1.157 2002/03/16 01:27:45 wez Exp $ */
 
 #include <stdlib.h>
 
@@ -1435,7 +1435,7 @@ PHP_FUNCTION(pg_trace)
 	PGconn *pgsql;
 	char *mode = "w";
 	FILE *fp;
-	php_stream * stream;
+	php_stream *stream;
 	id = PGG(default_link);
 
 	switch (ZEND_NUM_ARGS()) {

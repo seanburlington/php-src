@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.448 2002/03/15 21:03:03 wez Exp $ */
+/* $Id: basic_functions.c,v 1.449 2002/03/16 01:28:38 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1508,7 +1508,7 @@ PHP_FUNCTION(error_log)
 
 PHPAPI int _php_error_log(int opt_err, char *message, char *opt, char *headers TSRMLS_DC)
 {
-	php_stream * stream = NULL;
+	php_stream *stream = NULL;
 
 	switch (opt_err) {
 

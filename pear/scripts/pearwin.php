@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: pearwin.php,v 1.1 2001/10/12 19:43:58 alexmerz Exp $
+// $Id: pearwin.php,v 1.2 2001/10/26 10:07:43 ssb Exp $
 
 require_once 'PEAR.php';
 require_once 'Console/Getopt.php';
@@ -38,19 +38,19 @@ foreach ($opts as $opt) {
             break;
         case 'e':
             if ($param{0} != getenv('DIRECTORY_SEPARATOR')) {
-                usage (new PEAR_Error("no absolute path (ej. /usr/lib/php)\n"));
+                usage (new PEAR_Error("no absolute path (eg. /usr/lib/php)\n"));
             }
             $ext_dir = $param;
             break;
         case 'p':
             if ($param{0} != getenv('DIRECTORY_SEPARATOR')) {
-                usage (new PEAR_Error("no absolute path (ej. /usr/lib/php)\n"));
+                usage (new PEAR_Error("no absolute path (eg. /usr/lib/php)\n"));
             }
             $script_dir = $param;
             break;
         case 'd':
             if ($param{0} != getenv('DIRECTORY_SEPARATOR')) {
-                usage (new PEAR_Error("no absolute path (ej. /usr/lib/php)\n"));
+                usage (new PEAR_Error("no absolute path (eg. /usr/lib/php)\n"));
             }
             $doc_dir = $param;
             break;

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.9 2002/03/12 16:52:54 sas Exp $
+dnl $Id: config.m4,v 1.10 2002/03/13 09:18:53 sas Exp $
 
 AC_MSG_CHECKING(for cpdflib support)
 AC_ARG_WITH(cpdflib,
@@ -20,7 +20,7 @@ AC_ARG_WITH(cpdflib,
       test -f $withval/include/cpdflib.h && CPDFLIB_INCLUDE=$withval/include
       if test -n "$CPDFLIB_INCLUDE" ; then
         AC_MSG_RESULT(yes)
-        PHP_EXTENSION(cpdf, cpdf.c)
+        PHP_NEW_EXTENSION(cpdf, cpdf.c)
         old_LIBS=$LIBS
         old_withval=$withval
 

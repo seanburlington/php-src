@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.10 2002/03/12 16:45:58 sas Exp $
+dnl $Id: config.m4,v 1.11 2002/03/13 09:18:50 sas Exp $
 dnl
 
 AC_MSG_CHECKING(for CyberCash support)
@@ -12,7 +12,7 @@ AC_ARG_WITH(cybercash,
       test -f $withval/c-api/mckcrypt.h && MCK_DIR=$withval/c-api
       if test -n "$MCK_DIR"; then
 	AC_MSG_RESULT(yes)
-	PHP_EXTENSION(cybercash, cybercash.c)
+	PHP_NEW_EXTENSION(cybercash, cybercash.c)
 	old_LIBS=$LIBS
 	LIBS="$LIBS -L$MCK_DIR/lib"
 	AC_CHECK_LIB(mckcrypto,base64_encode,[AC_DEFINE(HAVE_MCK,1,[ ])],

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.111 2005/03/06 17:03:43 iliaa Exp $ */
+/* $Id: image.c,v 1.112 2005/03/06 22:18:09 helly Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -625,8 +625,8 @@ static struct gfxinfo *php_handle_jpc(php_stream * stream TSRMLS_DC)
 
 	dummy_short = php_read2(stream TSRMLS_CC); /* Lsiz */
 	dummy_short = php_read2(stream TSRMLS_CC); /* Rsiz */
-	result->width = php_read4(stream TSRMLS_CC); /* Ysiz */
-	result->height = php_read4(stream TSRMLS_CC); /* Xsiz */
+	result->width = php_read4(stream TSRMLS_CC); /* Xsiz */
+	result->height = php_read4(stream TSRMLS_CC); /* Ysiz */
 
 #if MBO_0
 	php_read4(stream TSRMLS_CC); /* XOsiz */

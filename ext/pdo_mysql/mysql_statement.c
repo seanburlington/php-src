@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.17 2005/02/27 11:42:18 hholzgra Exp $ */
+/* $Id: mysql_statement.c,v 1.18 2005/02/27 11:46:38 hholzgra Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -39,10 +39,6 @@ static int pdo_mysql_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
 		/* free the resource */
 		mysql_free_result(S->result);
 		S->result = NULL;
-	}
-	if (S->cols) {
-		efree(S->cols);
-		S->cols = NULL;
 	}
 	efree(S);
 	return 1;
@@ -74,7 +70,6 @@ static int pdo_mysql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 	}
 	if (!stmt->executed) { 
 		stmt->column_count = (int) mysql_num_fields(S->result);
-		S->cols = ecalloc(stmt->column_count, sizeof(pdo_mysql_column));
 	}
 	return 1;
 }

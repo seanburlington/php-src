@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql_int.h,v 1.10 2005/02/13 00:48:00 hholzgra Exp $ */
+/* $Id: php_pdo_mysql_int.h,v 1.11 2005/02/27 11:46:38 hholzgra Exp $ */
 
 #ifndef PHP_PDO_MYSQL_INT_H
 #define PHP_PDO_MYSQL_INT_H
@@ -49,7 +49,6 @@ typedef struct {
 	MYSQL_RES		*result;
 	MYSQL_ROW		current_data;
 	long			*current_lengths;
-	pdo_mysql_column 	*cols;
 } pdo_mysql_stmt;
 
 typedef struct {

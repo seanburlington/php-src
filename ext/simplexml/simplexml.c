@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.51 2003/07/07 11:43:34 sniper Exp $ */
+/* $Id: simplexml.c,v 1.52 2003/07/07 12:07:02 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -799,6 +799,8 @@ static zend_object_handlers sxe_object_handlers = {
 	ZEND_OBJECTS_STORE_HANDLERS,
 	sxe_property_read,
 	sxe_property_write,
+	NULL,
+	NULL,
 	sxe_property_get_ptr,
 	sxe_property_get_ptr,
 	sxe_object_get,
@@ -1053,7 +1055,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.51 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.52 $");
 	php_info_print_table_end();
 }
 /* }}} */

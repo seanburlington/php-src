@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: http.h,v 1.1 2003/09/06 00:35:21 pollita Exp $ */
+/* $Id: http.h,v 1.2 2003/09/06 05:41:48 pollita Exp $ */
 
 #ifndef PHP_HTTP_H
 #define PHP_HTTP_H
@@ -33,3 +33,13 @@ PHPAPI int php_url_encode_hash_ex(HashTable *ht, smart_str *formstr,
 PHP_FUNCTION(http_build_query);
 
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
+ */
+

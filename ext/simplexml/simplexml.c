@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.50 2003/07/05 00:33:13 sterling Exp $ */
+/* $Id: simplexml.c,v 1.51 2003/07/07 11:43:34 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -207,7 +207,6 @@ change_node_zval(xmlNodePtr node, zval *value)
 	}
 }
 /* }}} */
-
 
 /* {{{ sxe_property_write()
  */
@@ -746,7 +745,7 @@ sxe_object_cast(zval *readobj, zval *writeobj, int type, int should_free TSRMLS_
 	php_sxe_object *sxe;
 	char           *contents = NULL;
 
-    sxe = php_sxe_fetch_object(readobj TSRMLS_CC);
+	sxe = php_sxe_fetch_object(readobj TSRMLS_CC);
 	if (should_free) {
 		zval_dtor(writeobj);
 	}
@@ -794,7 +793,7 @@ sxe_object_get(zval *property TSRMLS_DC)
 	 */
 	return NULL;
 }
-
+/* }}} */
 
 static zend_object_handlers sxe_object_handlers = {
 	ZEND_OBJECTS_STORE_HANDLERS,
@@ -1054,9 +1053,8 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.50 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.51 $");
 	php_info_print_table_end();
-
 }
 /* }}} */
 

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.92 2004/03/01 17:43:57 andi Exp $ */
+/* $Id: php_reflection.c,v 1.93 2004/03/08 00:19:43 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -1317,6 +1317,7 @@ ZEND_METHOD(reflection_parameter, __construct)
 				if (Z_TYPE_PP(classref) == IS_OBJECT) {
 					ce = Z_OBJCE_PP(classref);
 				} else {
+					convert_to_string_ex(classref);
 					if (zend_lookup_class(Z_STRVAL_PP(classref), Z_STRLEN_PP(classref), &pce TSRMLS_CC) == FAILURE) {
 						zend_throw_exception_ex(reflection_exception_ptr, 0 TSRMLS_CC,
 								"Class %s does not exist", Z_STRVAL_PP(classref));

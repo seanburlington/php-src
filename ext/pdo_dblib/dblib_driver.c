@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_driver.c,v 1.4 2005/01/18 04:58:49 wez Exp $ */
+/* $Id: dblib_driver.c,v 1.5 2005/01/18 07:17:01 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -205,10 +205,19 @@ static int pdo_dblib_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 	if (dbh->password) {
 		DBSETLPWD(H->login, dbh->password);
 	}
+	
+#if !PHP_DBLIB_IS_MSSQL
 	if (vars[0].optval) {
 		DBSETLCHARSET(H->login, vars[0].optval);
 	}
+#endif
+
 	DBSETLAPP(H->login, vars[1].optval);
+
+#if PHP_DBLIB_IS_MSSQL
+	dbprocerrhandle(H->login, (EHANDLEFUNC) error_handler);
+	dbprocmsghandle(H->login, (MHANDLEFUNC) msg_handler);
+#endif
 
 	H->link = dbopen(H->login, vars[2].optval);
 

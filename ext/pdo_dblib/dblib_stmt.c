@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_stmt.c,v 1.2 2005/01/18 02:42:52 wez Exp $ */
+/* $Id: dblib_stmt.c,v 1.3 2005/01/18 07:17:01 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -148,7 +148,7 @@ static int pdo_dblib_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 					break;
 
 				default:
-					if (dbwillconvert(S->cols[i].coltype, SYBCHAR)) {
+					if (dbwillconvert(S->cols[i].coltype, SQLCHAR)) {
 						val->len = 32 + (2 * dbdatlen(H->link, i+1));
 						val->data = emalloc(val->len);
 

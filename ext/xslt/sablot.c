@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sablot.c,v 1.16 2001/07/31 05:44:09 zeev Exp $ */
+/* $Id: sablot.c,v 1.17 2001/07/31 19:43:10 sterling Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -499,7 +499,7 @@ PHP_FUNCTION(xslt_process)
 
 	/* Translate a PHP array into a Sablotron array */
 	if (argc > 4) {
-		xslt_make_array(args_p,   &args);
+		xslt_make_array(args_p, &args);
 	}
 	
 	if (argc > 5) {

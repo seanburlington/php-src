@@ -17,7 +17,7 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php,v 1.84 2002/02/01 15:03:17 cox Exp $
+// $Id: DB.php,v 1.85 2002/02/01 16:36:32 cox Exp $
 //
 // Database independent query interface.
 //
@@ -534,7 +534,9 @@ class DB
                 }
                 foreach ($opts as $opt) {
                     list($key, $value) = explode('=', $opt);
-                    $parsed[$key] = urldecode($value);
+                    if (!isset($parsed[$key])) { // don't allow params overwrite
+                        $parsed[$key] = urldecode($value);
+                    }
                 }
             }
         }

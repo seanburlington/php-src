@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.12 2003/04/25 08:57:49 sniper Exp $
+dnl $Id: config.m4,v 1.13 2003/08/05 13:17:15 abies Exp $
 dnl
 
 PHP_ARG_WITH(interbase,for InterBase support,
@@ -25,10 +25,10 @@ if test "$PHP_INTERBASE" != "no"; then
     ], [
       AC_MSG_ERROR([libgds or libib_util not found! Check config.log for more information.])
     ], [
-      -L$IBASE_LIBDIR
+      -L$IBASE_LIBDIR -lcrypt
     ])
   ], [
-    -L$IBASE_LIBDIR
+    -L$IBASE_LIBDIR -lcrypt 
   ])
 
   PHP_ADD_LIBRARY_WITH_PATH($IBASE_LIBNAME, $IBASE_LIBDIR, INTERBASE_SHARED_LIBADD)

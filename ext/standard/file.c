@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.339 2003/05/14 08:27:48 sas Exp $ */
+/* $Id: file.c,v 1.340 2003/05/14 15:12:06 pollita Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1434,7 +1434,7 @@ PHP_FUNCTION(unlink)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s does not allow unlinking", wrapper->wops->label ? wrapper->wops->label : "Wrapper");
 		RETURN_FALSE;
 	}
-	RETURN_BOOL(wrapper->wops->unlink(wrapper, filename, context TSRMLS_CC));
+	RETURN_BOOL(wrapper->wops->unlink(wrapper, filename, ENFORCE_SAFE_MODE | REPORT_ERRORS, context TSRMLS_CC));
 }
 /* }}} */
 

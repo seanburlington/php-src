@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.79 2003/05/14 06:10:04 pollita Exp $ */
+/* $Id: php_streams.h,v 1.80 2003/05/14 15:12:07 pollita Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -147,7 +147,7 @@ typedef struct _php_stream_wrapper_ops {
 	const char *label;
 
 	/* delete a file */
-	int (*unlink)(php_stream_wrapper *wrapper, char *url, php_stream_context *context TSRMLS_DC);
+	int (*unlink)(php_stream_wrapper *wrapper, char *url, int options, php_stream_context *context TSRMLS_DC);
 } php_stream_wrapper_ops;
 
 struct _php_stream_wrapper	{

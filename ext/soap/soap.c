@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.110.2.21 2005/01/31 14:03:51 dmitry Exp $ */
+/* $Id: soap.c,v 1.110.2.22 2005/01/31 14:26:24 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1865,7 +1865,6 @@ static void soap_error_handler(int error_num, const char *error_filename, const 
 			zval *outbuf = NULL;
 			zval outbuflen;
 
-			ALLOC_INIT_ZVAL(outbuf);
 			INIT_ZVAL(outbuflen);
 
 			buffer_len = vsnprintf(buffer, sizeof(buffer)-1, format, args);

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.h,v 1.28 2004/02/13 11:03:58 dmitry Exp $ */
+/* $Id: php_sdl.h,v 1.29 2004/02/13 15:19:09 dmitry Exp $ */
 
 #ifndef PHP_SDL_H
 #define PHP_SDL_H
@@ -228,12 +228,11 @@ sdlPtr get_sdl(char *uri TSRMLS_DC);
 
 encodePtr get_encoder_from_prefix(sdlPtr sdl, xmlNodePtr data, const char *type);
 encodePtr get_encoder(sdlPtr sdl, const char *ns, const char *type);
-encodePtr get_encoder_ex(sdlPtr sdl, const char *nscat);
+encodePtr get_encoder_ex(sdlPtr sdl, const char *nscat, int len);
 
 sdlBindingPtr get_binding_from_type(sdlPtr sdl, int type);
 sdlBindingPtr get_binding_from_name(sdlPtr sdl, char *name, char *ns);
 
 void delete_sdl(void *handle);
-void delete_sdl_ptr(void *handle);
 
 #endif

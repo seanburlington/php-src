@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.86 1999/07/21 15:10:04 andrey Exp $ */
+/* $Id: main.c,v 1.87 1999/07/24 16:52:00 zeev Exp $ */
 
 
 #include <stdio.h>
@@ -768,11 +768,10 @@ int php_module_startup(sapi_module_struct *sf)
 	sapi_globals_struct *sapi_globals = ts_resource(sapi_globals_id);
 #endif
 #if (WIN32|WINNT) && !(USE_SAPI)
-	WORD wVersionRequested;
+	WORD wVersionRequested = MAKEWORD(2, 0);
 	WSADATA wsaData;
-
-	wVersionRequested = MAKEWORD(2, 0);
 #endif
+	ELS_FETCH();
 
 	SG(server_context) = NULL;
 	SG(request_info).request_method = NULL;
@@ -782,6 +781,8 @@ int php_module_startup(sapi_module_struct *sf)
 		return SUCCESS;
 	}
 
+	EG(error_reporting) = E_ALL & ~E_NOTICE;
+	
 	sapi_module = *sf;
 
 	zend_output_startup();

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.198 2002/04/25 07:09:45 yohgaki Exp $ */
+/* $Id: pgsql.c,v 1.199 2002/05/11 03:01:08 yohgaki Exp $ */
 
 #include <stdlib.h>
 
@@ -28,6 +28,8 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+
+#define SMART_STR_PREALLOC 512
 
 #include "php.h"
 #include "php_ini.h"

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.599 2003/04/01 05:30:32 sebastian Exp $ */
+/* $Id: basic_functions.c,v 1.600 2003/04/01 10:02:29 sas Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -2171,6 +2171,7 @@ PHP_FUNCTION(register_shutdown_function)
 	if (zend_get_parameters_array(ht, shutdown_function_entry.arg_count, shutdown_function_entry.arguments) == FAILURE) {
 		RETURN_FALSE;
 	}
+	convert_to_string(shutdown_function_entry.arguments[0]);
 	if (!BG(user_shutdown_function_names)) {
 		ALLOC_HASHTABLE(BG(user_shutdown_function_names));
 		zend_hash_init(BG(user_shutdown_function_names), 0, NULL, (void (*)(void *)) user_shutdown_function_dtor, 0);

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.21.2.5 2003/08/07 15:41:43 iliaa Exp $ */
+/* $Id: credits.c,v 1.21.2.6 2004/08/09 21:52:45 andi Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -87,9 +87,11 @@ PHPAPI void php_print_credits(int flag)
 
 	if (flag & PHP_CREDITS_DOCS) {
 		php_info_print_table_start();
-		php_info_print_table_header(1, "PHP Documentation Team");
-		php_info_print_table_row(1, "Jouni Ahto, Alexander Aulbach, Stig Bakken, Rasmus Lerdorf, Egon Schmid, Lars Torben Wilson, Jim Winstead");
-		php_info_print_table_row(1, "Edited by:  Stig Bakken and Egon Schmid");
+		php_info_print_table_colspan_header(2, "PHP Documentation");
+		CREDIT_LINE("Authors", "Mehdi Achour, Friedhelm Betz, Antony Dovgal, Nuno Lopes, Philip Olson, Georg Richter, Damien Seguy, Jakub Vrana");
+		CREDIT_LINE("Editor", "Gabor Hojtsy");
+		CREDIT_LINE("User Note Maintainers", "Mehdi Achour, Friedhelm Betz, Vincent Gevers, Aidan Lister, Nuno Lopes, Tom Sommer");
+		CREDIT_LINE("Other Contributors", "Previously active authors, editors and other contributors are listed in the manual.");
 		php_info_print_table_end();
 	}
 

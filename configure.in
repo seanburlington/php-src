@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.427 2003/02/27 17:43:36 wez Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.428 2003/02/28 19:53:19 wez Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -461,6 +461,8 @@ getservbyport \
 getrusage \
 gettimeofday \
 gmtime_r \
+inet_ntoa \
+inet_ntop \
 isascii \
 link \
 localtime_r \

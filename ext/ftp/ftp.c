@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.81 2003/02/28 07:25:14 sniper Exp $ */
+/* $Id: ftp.c,v 1.82 2003/02/28 19:53:19 wez Exp $ */
 
 #include "php.h"
 
@@ -135,7 +135,9 @@ ftp_open(const char *host, short port, long timeout_sec TSRMLS_DC)
 	tv.tv_sec = timeout_sec;
 	tv.tv_usec = 0;
 
-	ftp->fd = php_hostconnect(host, (unsigned short) (port ? port : 21), SOCK_STREAM, &tv TSRMLS_CC);
+	ftp->fd = php_network_connect_socket_to_host(host,
+			(unsigned short) (port ? port : 21), SOCK_STREAM,
+			0, &tv, NULL, NULL TSRMLS_CC);
 	if (ftp->fd == -1) {
 		goto bail;
 	}

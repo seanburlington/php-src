@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.25 2000/02/05 15:44:17 zeev Exp $ */
+/* $Id: php_mysql.c,v 1.26 2000/02/05 17:26:35 zeev Exp $ */
 
 
 /* TODO:
@@ -252,28 +252,6 @@ static PHP_INI_MH(OnMySQLPort)
 		MySG(default_port) = atoi(new_value);
 	}
 	return SUCCESS;
-}
-
-
-static PHP_INI_DISP(display_link_numbers)
-{
-	char *value;
-
-	if (type==PHP_INI_DISPLAY_ORIG && ini_entry->modified) {
-		value = ini_entry->orig_value;
-	} else if (ini_entry->value) {
-		value = ini_entry->value;
-	} else {
-		value = NULL;
-	}
-
-	if (value) {
-		if (atoi(value)==-1) {
-			PUTS("Unlimited");
-		} else {
-			php_printf("%s", value);
-		}
-	}
 }
 
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.7 2000/01/17 22:41:59 zeev Exp $ */
+/* $Id: php_mssql.c,v 1.8 2000/02/05 17:26:35 zeev Exp $ */
 
 #if COMPILE_DL
 #include "dl/phpdl.h"
@@ -83,26 +83,6 @@ DLEXPORT zend_module_entry *get_module(void) { return &mssql_module_entry; };
 
 #define CHECK_LINK(link) { if (link==-1) { php_error(E_WARNING,"MS SQL:  A link to the server could not be established"); RETURN_FALSE; } }
 
-static PHP_INI_DISP(display_link_numbers)
-{
-	char *value;
-
-	if (type==PHP_INI_DISPLAY_ORIG && ini_entry->modified) {
-		value = ini_entry->orig_value;
-	} else if (ini_entry->value) {
-		value = ini_entry->value;
-	} else {
-		value = NULL;
-	}
-
-	if (value) {
-		if (atoi(value)==-1) {
-			PUTS("Unlimited");
-		} else {
-			php_printf("%s", value);
-		}
-	}
-}
 
 PHP_INI_BEGIN()
 	STD_PHP_INI_BOOLEAN("mssql.allow_persistent",		"1",	PHP_INI_SYSTEM,	OnUpdateBool,	allow_persistent,			php_mssql_globals,		mssql_globals)

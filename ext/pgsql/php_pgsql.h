@@ -27,7 +27,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.5 1999/12/21 05:22:43 zeev Exp $ */
+/* $Id: php_pgsql.h,v 1.6 2000/02/05 17:26:35 zeev Exp $ */
 
 #ifndef _PHP_PGSQL_H
 #define _PHP_PGSQL_H
@@ -59,6 +59,7 @@ extern zend_module_entry pgsql_module_entry;
 #endif
 
 PHP_MINIT_FUNCTION(pgsql);
+PHP_MSHUTDOWN_FUNCTION(pgsql);
 PHP_RINIT_FUNCTION(pgsql);
 PHP_FUNCTION(pg_connect);
 PHP_FUNCTION(pg_pconnect);

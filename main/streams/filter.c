@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filter.c,v 1.15 2004/09/14 03:48:16 pollita Exp $ */
+/* $Id: filter.c,v 1.16 2005/03/29 04:02:02 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -499,6 +499,11 @@ PHPAPI php_stream_filter *php_stream_filter_remove(php_stream_filter *filter, in
 	} else {
 		filter->chain->tail = filter->prev;
 	}
+
+	if (filter->rsrc_id > 0) {
+		zend_list_delete(filter->rsrc_id);
+	}
+
 	if (call_dtor) {
 		php_stream_filter_free(filter TSRMLS_CC);
 		return NULL;

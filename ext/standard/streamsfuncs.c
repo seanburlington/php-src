@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.54 2005/03/13 17:03:55 iliaa Exp $ */
+/* $Id: streamsfuncs.c,v 1.55 2005/03/29 04:02:03 pollita Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1097,7 +1097,7 @@ static void apply_filter_to_stream(int append, INTERNAL_FUNCTION_PARAMETERS)
 	}
 
 	if (filter) {
-		RETURN_RESOURCE(ZEND_REGISTER_RESOURCE(NULL, filter, php_file_le_stream_filter()));
+		RETURN_RESOURCE(filter->rsrc_id = ZEND_REGISTER_RESOURCE(NULL, filter, php_file_le_stream_filter()));
 	} else {
 		RETURN_FALSE;
 	}

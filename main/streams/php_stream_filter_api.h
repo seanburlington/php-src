@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_filter_api.h,v 1.11 2004/09/14 03:48:16 pollita Exp $ */
+/* $Id: php_stream_filter_api.h,v 1.12 2005/03/29 04:02:02 pollita Exp $ */
 
 /* The filter API works on the principle of "Bucket-Brigades".  This is
  * partially inspired by the Apache 2 method of doing things, although
@@ -117,6 +117,9 @@ struct _php_stream_filter {
 
 	/* buffered buckets */
 	php_stream_bucket_brigade buffer;
+
+	/* filters are auto_registered when they're applied */
+	int rsrc_id;
 };
 
 /* stack filter onto a stream */

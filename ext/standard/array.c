@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.156 2002/02/05 20:43:48 andi Exp $ */
+/* $Id: array.c,v 1.157 2002/03/01 12:00:05 zeev Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1529,7 +1529,17 @@ HashTable* php_splice(HashTable *in_hash, int offset, int length,
 		   and copy it into the output hash */
 		for (i=0; i<list_count; i++) {
 			entry = *list[i];
-			entry->refcount++;
+			if (entry->refcount>=1000) {
+				zval *tmp = (zval *) emalloc(sizeof(zval));
+
+				*tmp = *entry;
+				zval_copy_ctor(tmp);
+				tmp->refcount = 1;
+				tmp->is_ref = 0;
+				entry = tmp;
+			} else {
+				entry->refcount++;
+			}
 			zend_hash_next_index_insert(out_hash, &entry, sizeof(zval *), NULL);
 		}
 	}

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.34.2.3 2004/11/01 07:57:45 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.34.2.4 2004/11/01 09:52:04 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -74,7 +74,7 @@ PHP_FUNCTION(mysqli_connect)
 		RETURN_FALSE;
 	}
 
-	if (mysql_real_connect(mysql->mysql,hostname,username,passwd,dbname,port,socket,0) == NULL) {
+	if (mysql_real_connect(mysql->mysql,hostname,username,passwd,dbname,port,socket,CLIENT_MULTI_RESULTS) == NULL) {
 		/* Save error messages */
 
 		MYSQLI_REPORT_MYSQL_ERROR(mysql->mysql);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_sybase_db.h,v 1.4 2001/02/26 06:07:24 andi Exp $ */
+/* $Id: php_sybase_db.h,v 1.5 2001/03/16 01:21:31 camber Exp $ */
 
 #ifndef PHP_SYBASE_DB_H
 #define PHP_SYBASE_DB_H
@@ -44,6 +44,7 @@ PHP_FUNCTION(sybase_fetch_row);
 PHP_FUNCTION(sybase_fetch_array);
 PHP_FUNCTION(sybase_fetch_object);
 PHP_FUNCTION(sybase_data_seek);
+PHP_FUNCTION(sybase_affected_rows);
 PHP_FUNCTION(sybase_result);
 PHP_FUNCTION(sybase_field_seek);
 PHP_FUNCTION(sybase_min_error_severity);

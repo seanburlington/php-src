@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.293 2005/03/11 00:14:02 helly Exp $ */
+/* $Id: array.c,v 1.294 2005/03/12 10:11:46 andrey Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -4367,7 +4367,7 @@ PHP_FUNCTION(array_combine)
 	}
 
 	if (zend_hash_num_elements(Z_ARRVAL_P(keys)) == 0 || zend_hash_num_elements(Z_ARRVAL_P(values)) == 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Both parameters should have number of elements at least 0");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Both parameters should have at least 1 element");
 		RETURN_FALSE;
 	}
 

@@ -1,6 +1,6 @@
 # Workhorse for build.mk
 #
-# $Id: build2.mk,v 1.3 1999/12/24 22:55:33 sas Exp $
+# $Id: build2.mk,v 1.4 1999/12/24 23:29:39 sas Exp $
 
 include generated_lists
 
@@ -47,8 +47,10 @@ aclocal.m4: configure.in acinclude.m4
 $(config_h_in): configure.in acconfig.h
 # explicitly remove target since autoheader does not seem to work 
 # correctly otherwise (timestamps are not updated)
+	@echo rebuilding $@
 	@rm -f $@
 	autoheader
 
 configure: aclocal.m4 configure.in $(config_m4_files)
+	@echo rebuilding $@
 	autoconf

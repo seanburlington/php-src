@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db3.c,v 1.21.2.3 2002/12/30 19:13:44 helly Exp $ */
+/* $Id: dba_db4.c,v 1.6.2.1 2002/12/30 19:13:44 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -24,26 +24,26 @@
 
 #include "php.h"
 
-#if DBA_DB3
-#include "php_db3.h"
+#if DBA_DB4
+#include "php_db4.h"
 #include <sys/stat.h>
 
 #include <string.h>
-#ifdef DB3_INCLUDE_FILE
-#include DB3_INCLUDE_FILE
+#ifdef DB4_INCLUDE_FILE
+#include DB4_INCLUDE_FILE
 #else
 #include <db.h>
 #endif
 
-static void php_dba_db3_errcall_fcn(const char *errpfx, char *msg)
+static void php_dba_db4_errcall_fcn(const char *errpfx, char *msg)
 {
 	TSRMLS_FETCH();
 	
 	php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s%s", errpfx?errpfx:"", msg);
 }
 
-#define DB3_DATA dba_db3_data *dba = info->dbf
-#define DB3_GKEY \
+#define DB4_DATA dba_db4_data *dba = info->dbf
+#define DB4_GKEY \
 	DBT gkey; \
 	memset(&gkey, 0, sizeof(gkey)); \
 	gkey.data = (char *) key; gkey.size = keylen
@@ -51,9 +51,9 @@ static void php_dba_db3_errcall_fcn(const char *errpfx, char *msg)
 typedef struct {
 	DB *dbp;
 	DBC *cursor;
-} dba_db3_data;
+} dba_db4_data;
 
-DBA_OPEN_FUNC(db3)
+DBA_OPEN_FUNC(db4)
 {
 	DB *dbp = NULL;
 	DBTYPE type;
@@ -86,9 +86,14 @@ DBA_OPEN_FUNC(db3)
 #endif
 
 	if ((err=db_create(&dbp, NULL, 0)) == 0) {
-	    dbp->set_errcall(dbp, php_dba_db3_errcall_fcn);
-	    if ((err=dbp->open(dbp, info->path, NULL, type, gmode, filemode)) == 0) {
-			dba_db3_data *data;
+	    dbp->set_errcall(dbp, php_dba_db4_errcall_fcn);
+	    if (
+#if (DB_VERSION_MAJOR == 4 && DB_VERSION_MINOR >= 1)
+			(err=dbp->open(dbp, 0, info->path, NULL, type, gmode, filemode)) == 0) {
+#else
+			(err=dbp->open(dbp, info->path, NULL, type, gmode, filemode)) == 0) {
+#endif
+			dba_db4_data *data;
 
 			data = pemalloc(sizeof(*data), info->flags&DBA_PERSISTENT);
 			data->dbp = dbp;
@@ -107,21 +112,21 @@ DBA_OPEN_FUNC(db3)
 	return FAILURE;
 }
 
-DBA_CLOSE_FUNC(db3)
+DBA_CLOSE_FUNC(db4)
 {
-	DB3_DATA;
+	DB4_DATA;
 	
 	if (dba->cursor) dba->cursor->c_close(dba->cursor);
 	dba->dbp->close(dba->dbp, 0);
 	pefree(dba, info->flags&DBA_PERSISTENT);
 }
 
-DBA_FETCH_FUNC(db3)
+DBA_FETCH_FUNC(db4)
 {
 	DBT gval;
 	char *new = NULL;
-	DB3_DATA;
-	DB3_GKEY;
+	DB4_DATA;
+	DB4_GKEY;
 	
 	memset(&gval, 0, sizeof(gval));
 	if (!dba->dbp->get(dba->dbp, NULL, &gkey, &gval, 0)) {
@@ -131,11 +136,11 @@ DBA_FETCH_FUNC(db3)
 	return new;
 }
 
-DBA_UPDATE_FUNC(db3)
+DBA_UPDATE_FUNC(db4)
 {
 	DBT gval;
-	DB3_DATA;
-	DB3_GKEY;
+	DB4_DATA;
+	DB4_GKEY;
 	
 	memset(&gval, 0, sizeof(gval));
 	gval.data = (char *) val;
@@ -148,11 +153,11 @@ DBA_UPDATE_FUNC(db3)
 	return FAILURE;
 }
 
-DBA_EXISTS_FUNC(db3)
+DBA_EXISTS_FUNC(db4)
 {
 	DBT gval;
-	DB3_DATA;
-	DB3_GKEY;
+	DB4_DATA;
+	DB4_GKEY;
 	
 	memset(&gval, 0, sizeof(gval));
 	if (!dba->dbp->get(dba->dbp, NULL, &gkey, &gval, 0)) {
@@ -161,17 +166,17 @@ DBA_EXISTS_FUNC(db3)
 	return FAILURE;
 }
 
-DBA_DELETE_FUNC(db3)
+DBA_DELETE_FUNC(db4)
 {
-	DB3_DATA;
-	DB3_GKEY;
+	DB4_DATA;
+	DB4_GKEY;
 
 	return dba->dbp->del(dba->dbp, NULL, &gkey, 0) ? FAILURE : SUCCESS;
 }
 
-DBA_FIRSTKEY_FUNC(db3)
+DBA_FIRSTKEY_FUNC(db4)
 {
-	DB3_DATA;
+	DB4_DATA;
 
 	if (dba->cursor) {
 		dba->cursor->c_close(dba->cursor);
@@ -183,12 +188,12 @@ DBA_FIRSTKEY_FUNC(db3)
 	}
 
 	/* we should introduce something like PARAM_PASSTHRU... */
-	return dba_nextkey_db3(info, newlen TSRMLS_CC);
+	return dba_nextkey_db4(info, newlen TSRMLS_CC);
 }
 
-DBA_NEXTKEY_FUNC(db3)
+DBA_NEXTKEY_FUNC(db4)
 {
-	DB3_DATA;
+	DB4_DATA;
 	DBT gkey, gval;
 	char *nkey = NULL;
 	
@@ -205,14 +210,14 @@ DBA_NEXTKEY_FUNC(db3)
 	return nkey;
 }
 
-DBA_OPTIMIZE_FUNC(db3)
+DBA_OPTIMIZE_FUNC(db4)
 {
 	return SUCCESS;
 }
 
-DBA_SYNC_FUNC(db3)
+DBA_SYNC_FUNC(db4)
 {
-	DB3_DATA;
+	DB4_DATA;
 
 	return dba->dbp->sync(dba->dbp, 0) ? FAILURE : SUCCESS;
 }

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.1 1999/05/16 12:01:25 sas Exp $
+dnl $Id: config.m4,v 1.2 1999/05/21 20:09:22 sas Exp $
 dnl config.m4 for extension mhash
 dnl don't forget to call PHP_EXTENSION(mhash)
 
@@ -8,7 +8,7 @@ AC_ARG_WITH(mhash,
                           install directory.],
 [
   if test "$withval" != "no"; then
-    for i in /usr/local /usr $withval; do
+    for i in /usr/local /usr /opt/mhash $withval; do
       if test -f $i/include/mhash.h; then
         MHASH_DIR=$i
       fi

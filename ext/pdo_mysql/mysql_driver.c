@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.4 2004/05/19 15:14:55 iliaa Exp $ */
+/* $Id: mysql_driver.c,v 1.5 2004/05/19 15:17:52 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -32,12 +32,12 @@
 
 int _pdo_mysql_error(char *what, int mysql_errno, const char *file, int line TSRMLS_DC) /* {{{ */
 {
-	switch (errno) {
+	switch (mysql_errno) {
 		default:
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "(%s:%d) %s: %d", file, line, what, mysql_errno);
 			break;
 	}
-	return errno;
+	return mysql_errno;
 }
 /* }}} */
 

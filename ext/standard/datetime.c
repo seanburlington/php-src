@@ -19,7 +19,7 @@
  */
 
 
-/* $Id: datetime.c,v 1.93 2002/09/18 21:34:30 iliaa Exp $ */
+/* $Id: datetime.c,v 1.94 2002/09/19 18:22:51 iliaa Exp $ */
 
 
 #include "php.h"
@@ -194,9 +194,11 @@ void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gm)
 	} 
 	
 	t = mktime(ta); 
+	if (t == -1) {
+		RETURN_LONG(-1);
+	}
+
 	seconds = t - chgsecs;
-
-
 
 	if (is_dst == -1) {
 		struct tm t1, t2;

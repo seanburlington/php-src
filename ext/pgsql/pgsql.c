@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.26 1999/11/20 01:04:45 andi Exp $ */
+/* $Id: pgsql.c,v 1.27 1999/11/20 01:14:36 andi Exp $ */
 
 #include <stdlib.h>
 
@@ -79,7 +79,7 @@ php3_module_entry pgsql_module_entry = {
 };
 
 #if COMPILE_DL
-php3_module_entry *get_module() { return &pgsql_module_entry; }
+PHP_PGSQL_API php3_module_entry *get_module() { return &pgsql_module_entry; }
 #endif
 
 static int le_link,le_plink,le_result,le_lofp,le_string;

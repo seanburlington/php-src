@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.22 2001/12/25 14:36:06 venaas Exp $
+dnl $Id: config.m4,v 1.23 2002/03/12 16:22:40 sas Exp $
 dnl
 
 AC_DEFUN(PHP_LDAP_CHECKS, [
@@ -23,7 +23,7 @@ PHP_ARG_WITH(ldap,for LDAP support,
 
 if test "$PHP_LDAP" != "no"; then
 
-  PHP_EXTENSION(ldap,$ext_shared)
+  PHP_NEW_EXTENSION(ldap, ldap.c, $ext_shared)
 
   if test "$PHP_LDAP" = "yes"; then
     for i in /usr/local /usr; do

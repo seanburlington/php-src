@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.7 2001/11/30 18:59:51 sniper Exp $
+dnl $Id: config.m4,v 1.8 2002/03/12 16:31:23 sas Exp $
 dnl
 
 PHP_ARG_WITH(pfpro, for Verisign Payflow Pro support,
@@ -60,5 +60,5 @@ if test "$PHP_PFPRO" != "no"; then
 
   AC_DEFINE(HAVE_PFPRO, 1, [ ])
 
-  PHP_EXTENSION(pfpro, $ext_shared)
+  PHP_NEW_EXTENSION(pfpro, pfpro.c, $ext_shared)
 fi

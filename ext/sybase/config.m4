@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9 2001/11/30 18:59:59 sniper Exp $
+dnl $Id: config.m4,v 1.10 2002/03/12 16:36:10 sas Exp $
 dnl
 
 PHP_ARG_WITH(sybase,for Sybase support,
@@ -17,7 +17,7 @@ if test "$PHP_SYBASE" != "no"; then
   fi
   PHP_ADD_INCLUDE($SYBASE_INCDIR)
   PHP_ADD_LIBRARY_WITH_PATH(sybdb, $SYBASE_LIBDIR, SYBASE_SHARED_LIBADD)
-  PHP_EXTENSION(sybase, $ext_shared)
+  PHP_NEW_EXTENSION(sybase, php_sybase_db.c, $ext_shared)
   AC_CHECK_LIB(dnet_stub, dnet_addr,
      [ PHP_ADD_LIBRARY_WITH_PATH(dnet_stub,,SYBASE_SHARED_LIBADD)
         AC_DEFINE(HAVE_LIBDNET_STUB,1,[ ])

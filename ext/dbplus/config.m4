@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.7 2002/03/07 14:59:48 sas Exp $
+dnl $Id: config.m4,v 1.8 2002/03/12 16:14:05 sas Exp $
 dnl
 
 PHP_ARG_WITH(dbplus, for dbplus support,
@@ -43,5 +43,5 @@ if test "$PHP_DBPLUS" != "no"; then
   PHP_ADD_LIBRARY_WITH_PATH(Dmacc, $DBPLUS_DIR/lib, DBPLUS_SHARED_LIBADD)
   PHP_ADD_LIBRARY_WITH_PATH(Dracc, $DBPLUS_DIR/lib, DBPLUS_SHARED_LIBADD)
 
-  PHP_EXTENSION(dbplus, $ext_shared)
+  PHP_NEW_EXTENSION(dbplus, dbplus.c php_dbplus.c , $ext_shared)
 fi

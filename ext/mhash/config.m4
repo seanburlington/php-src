@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11 2001/11/30 18:59:43 sniper Exp $
+dnl $Id: config.m4,v 1.12 2002/03/12 16:24:28 sas Exp $
 dnl
 
 PHP_ARG_WITH(mhash, for mhash support,
@@ -21,5 +21,5 @@ if test "$PHP_MHASH" != "no"; then
 
   AC_DEFINE(HAVE_LIBMHASH,1,[ ])
 
-  PHP_EXTENSION(mhash, $ext_shared)
+  PHP_NEW_EXTENSION(mhash, mhash.c, $ext_shared)
 fi

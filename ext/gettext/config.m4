@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.10 2001/11/30 18:59:36 sniper Exp $
+dnl $Id: config.m4,v 1.11 2002/03/12 16:19:14 sas Exp $
 dnl
 
 PHP_ARG_WITH(gettext,for GNU gettext support,
@@ -35,7 +35,7 @@ if test "$PHP_GETTEXT" != "no"; then
   LDFLAGS=$O_LDFLAGS
 
   AC_DEFINE(HAVE_LIBINTL,1,[ ])
-  PHP_EXTENSION(gettext, $ext_shared)
+  PHP_NEW_EXTENSION(gettext, gettext.c, $ext_shared)
   PHP_SUBST(GETTEXT_SHARED_LIBADD)
 
   if test -n "$GETTEXT_LIBS"; then

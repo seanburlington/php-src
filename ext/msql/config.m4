@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11 2001/11/30 18:59:44 sniper Exp $
+dnl $Id: config.m4,v 1.12 2002/03/12 16:25:28 sas Exp $
 dnl
 
 dnl
@@ -37,6 +37,6 @@ PHP_ARG_WITH(msql,for mSQL support,
     PHP_ADD_INCLUDE($MSQL_INCDIR)
     AC_DEFINE(HAVE_MSQL,1,[ ])
     PHP_SUBST(MSQL_SHARED_LIBADD)
-    PHP_EXTENSION(msql,$ext_shared)
+    PHP_NEW_EXTENSION(msql, php_msql.c, $ext_shared)
     PHP_MSQL_VERSION
   fi

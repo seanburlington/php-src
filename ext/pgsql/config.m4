@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.27 2002/02/15 03:30:15 yohgaki Exp $
+dnl $Id: config.m4,v 1.28 2002/03/12 16:31:48 sas Exp $
 dnl
 
 AC_DEFUN(PHP_PGSQL_CHECK_FUNCTIONS,[
@@ -62,7 +62,7 @@ if test "$PHP_PGSQL" != "no"; then
 
   PHP_ADD_INCLUDE($PGSQL_INCLUDE)
 
-  PHP_EXTENSION(pgsql,$ext_shared)
+  PHP_NEW_EXTENSION(pgsql, pgsql.c, $ext_shared)
 fi
 
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.6 2001/11/30 19:00:10 sniper Exp $
+dnl $Id: config.m4,v 1.7 2002/03/12 16:38:47 sas Exp $
 dnl
 
 PHP_ARG_WITH(yaz,for YAZ support,
@@ -36,6 +36,6 @@ if test "$PHP_YAZ" != "no"; then
     PHP_ADD_LIBRARY_DEFER(yaz,1,YAZ_SHARED_LIBADD)
     PHP_EVAL_INCLINE($YAZINC)
     PHP_SUBST(YAZ_SHARED_LIBADD)
-    PHP_EXTENSION(yaz, $ext_shared)
+    PHP_NEW_EXTENSION(yaz, php_yaz.c, $ext_shared)
   fi
 fi

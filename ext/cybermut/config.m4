@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.3 2001/11/30 18:59:29 sniper Exp $
+dnl $Id: config.m4,v 1.4 2002/03/12 16:12:23 sas Exp $
 dnl
 
 PHP_ARG_WITH(cybermut, for cybermut support,
@@ -44,5 +44,5 @@ if test "$PHP_CYBERMUT" != "no"; then
   AC_DEFINE(HAVE_CYBERMUT, 1, [ ])                                                 
 
 
-  PHP_EXTENSION(cybermut, $ext_shared)
+  PHP_NEW_EXTENSION(cybermut, cybermut.c, $ext_shared)
 fi

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.7 2002/02/28 23:25:18 sniper Exp $
+dnl $Id: config.m4,v 1.8 2002/03/12 16:11:33 sas Exp $
 dnl
 
 PHP_ARG_WITH(crack, for CRACKlib support,
@@ -26,7 +26,7 @@ if test "$PHP_CRACK" != "no"; then
 	PHP_ADD_INCLUDE($CRACK_INCLUDEDIR)
 	PHP_ADD_LIBRARY_WITH_PATH(crack, $CRACK_LIBDIR, CRACK_SHARED_LIBADD)
 
-	PHP_EXTENSION(crack, $ext_shared)
+	PHP_NEW_EXTENSION(crack, crack.c, $ext_shared)
 	PHP_SUBST(CRACK_SHARED_LIBADD)
 	AC_DEFINE(HAVE_CRACK, 1, [ ])
 fi

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.33 2001/11/30 18:59:46 sniper Exp $
+dnl $Id: config.m4,v 1.34 2002/03/12 16:26:00 sas Exp $
 dnl
 
 AC_DEFUN(AC_OCI8_VERSION,[
@@ -77,7 +77,7 @@ if test "$PHP_OCI8" != "no"; then
 	  ;;
   esac
 
-  PHP_EXTENSION(oci8, $ext_shared)
+  PHP_NEW_EXTENSION(oci8, oci8.c, $ext_shared)
   AC_DEFINE(HAVE_OCI8,1,[ ])
 
   PHP_SUBST_OLD(OCI8_SHARED_LIBADD)

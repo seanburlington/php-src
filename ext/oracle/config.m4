@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.28 2002/02/04 12:08:39 thies Exp $
+dnl $Id: config.m4,v 1.29 2002/03/12 16:26:43 sas Exp $
 dnl
 
 AC_DEFUN(AC_ORACLE_VERSION,[
@@ -151,7 +151,7 @@ if test "$PHP_ORACLE" != "no"; then
 	  ;;
   esac
 
-  PHP_EXTENSION(oracle, $ext_shared)
+  PHP_NEW_EXTENSION(oracle, oracle.c, $ext_shared)
   AC_DEFINE(HAVE_ORACLE,1,[ ])
 
   PHP_SUBST_OLD(ORACLE_SHARED_LIBADD)

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.84 2002/03/07 15:07:12 hirokawa Exp $
+dnl $Id: config.m4,v 1.85 2002/03/12 16:18:51 sas Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -210,7 +210,7 @@ PHP_ARG_WITH(gd, for GD support,
 
 if test "$PHP_GD" != "no"; then
 
-  PHP_EXTENSION(gd, $ext_shared)
+  PHP_NEW_EXTENSION(gd, gd.c gdcache.c gdttf.c gdt1.c, $ext_shared)
   PHP_SUBST(GD_SHARED_LIBADD)
 
 dnl Various checks for GD features

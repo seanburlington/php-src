@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9 2001/11/30 19:00:04 sniper Exp $
+dnl $Id: config.m4,v 1.10 2002/03/12 16:37:42 sas Exp $
 dnl
 
 PHP_ARG_ENABLE(wddx,whether to enable WDDX support,
@@ -11,5 +11,5 @@ if test "$PHP_WDDX" != "no"; then
     enable_xml=yes
   fi
   AC_DEFINE(HAVE_WDDX, 1, [ ])
-  PHP_EXTENSION(wddx, $ext_shared)
+  PHP_NEW_EXTENSION(wddx, wddx.c, $ext_shared)
 fi

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.12 2001/11/30 18:59:29 sniper Exp $
+dnl $Id: config.m4,v 1.13 2002/03/12 16:11:50 sas Exp $
 dnl
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -57,6 +57,6 @@ if test "$PHP_CURL" != "no"; then
     $CURL_LIBS -L$CURL_DIR/lib
   ])
 
-  PHP_EXTENSION(curl, $ext_shared)
+  PHP_NEW_EXTENSION(curl, curl.c, $ext_shared)
   PHP_SUBST(CURL_SHARED_LIBADD)
 fi

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.7 2001/11/30 18:59:33 sniper Exp $
+dnl $Id: config.m4,v 1.8 2002/03/12 16:16:37 sas Exp $
 dnl
 
 PHP_ARG_WITH(fbsql, for FrontBase SQL92 (fbsql) support,
@@ -8,7 +8,7 @@ PHP_ARG_WITH(fbsql, for FrontBase SQL92 (fbsql) support,
 if test "$PHP_FBSQL" != "no"; then
 
   AC_DEFINE(HAVE_FBSQL, 1, [Whether you have FrontBase])
-  PHP_EXTENSION(fbsql,$ext_shared)
+  PHP_NEW_EXTENSION(fbsql, php_fbsql.c, $ext_shared)
 
   FBSQL_INSTALLATION_DIR=""
   if test "$PHP_FBSQL" = "yes"; then

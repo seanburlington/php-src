@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9 2001/11/30 19:00:01 sniper Exp $
+dnl $Id: config.m4,v 1.10 2002/03/12 16:37:28 sas Exp $
 dnl
 
 PHP_ARG_WITH(vpopmail, for vpopmail support,
@@ -58,5 +58,5 @@ if test "$PHP_VPOPMAIL" != "no"; then
 	AC_DEFINE(HAVE_VPOPMAIL,1,[Whether you have vpopmail])
 	AC_DEFINE_UNQUOTED(VPOPMAIL_BIN_DIR,"$VPOPMAIL_BIN_DIR",[vpopmail bin path])
 
-	PHP_EXTENSION(vpopmail, $ext_shared)
+	PHP_NEW_EXTENSION(vpopmail, php_vpopmail.c, $ext_shared)
 fi

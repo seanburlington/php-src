@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.24 2002/01/16 22:32:40 rasmus Exp $
+dnl $Id: config.m4,v 1.25 2002/03/12 16:35:28 sas Exp $
 dnl
 
 PHP_ARG_WITH(snmp,for SNMP support,
@@ -65,7 +65,7 @@ PHP_ARG_WITH(snmp,for SNMP support,
     PHP_ADD_INCLUDE($SNMP_INCDIR)
     PHP_ADD_LIBRARY_WITH_PATH(snmp, $SNMP_LIBDIR, SNMP_SHARED_LIBADD)
 
-    PHP_EXTENSION(snmp, $ext_shared)
+    PHP_NEW_EXTENSION(snmp, snmp.c, $ext_shared)
     PHP_SUBST(SNMP_SHARED_LIBADD)
   fi
 

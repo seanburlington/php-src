@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.24 2001/11/30 18:59:40 sniper Exp $
+dnl $Id: config.m4,v 1.25 2002/03/12 16:21:19 sas Exp $
 dnl
 
 PHP_ARG_WITH(informix,for Informix support,
@@ -8,7 +8,7 @@ PHP_ARG_WITH(informix,for Informix support,
 
 if test "$PHP_INFORMIX" != "no"; then
 
-  PHP_EXTENSION(informix, $ext_shared)
+  PHP_NEW_EXTENSION(informix, ifx.c, $ext_shared)
   PHP_SUBST(INFORMIX_SHARED_LIBADD)
 
   if test "$INFORMIXDIR" = ""; then

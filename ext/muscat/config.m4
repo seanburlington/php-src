@@ -1,12 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.4 2001/11/30 18:59:45 sniper Exp $
+dnl $Id: config.m4,v 1.5 2002/03/12 16:25:45 sas Exp $
 dnl
 
 PHP_ARG_WITH(muscat, for Muscat support,
 [  --with-muscat[=DIR]     Include Muscat support.])
 
 if test "$PHP_MUSCAT" != "no"; then
-  PHP_EXTENSION(muscat, $ext_shared)
+  PHP_NEW_EXTENSION(muscat, muscat.c muscat_net.c, $ext_shared)
   for i in $PHP_MUSCAT /usr/local /usr /usr/local/empower /usr/local/empower/developer; do
     if test -f $i/include/Muscat.h; then
       MUSCAT_INCDIR=$i/include

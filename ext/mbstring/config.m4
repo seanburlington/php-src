@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.4 2002/01/11 13:21:09 hirokawa Exp $
+dnl $Id: config.m4,v 1.5 2002/03/12 16:23:31 sas Exp $
 dnl
 
 PHP_ARG_ENABLE(mbstring, whether to enable multibyte string support,
@@ -7,7 +7,7 @@ PHP_ARG_ENABLE(mbstring, whether to enable multibyte string support,
 
 if test "$PHP_MBSTRING" != "no"; then
   AC_DEFINE(HAVE_MBSTRING,1,[ ])
-  PHP_EXTENSION(mbstring, $ext_shared)
+  PHP_NEW_EXTENSION(mbstring, mbfilter_ja.c mbfilter.c mbstring.c mbregex.c php_mbregex.c, $ext_shared)
 fi
 
 AC_MSG_CHECKING(whether to enable japanese encoding translation)

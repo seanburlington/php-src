@@ -1,12 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.4 2001/11/30 19:00:00 sniper Exp $
+dnl $Id: config.m4,v 1.5 2002/03/12 16:36:40 sas Exp $
 dnl
 
 PHP_ARG_ENABLE(sysvsem,whether to enable System V semaphore support,
 [  --enable-sysvsem        Enable System V semaphore support.])
 
 if test "$PHP_SYSVSEM" != "no"; then
- PHP_EXTENSION(sysvsem, $ext_shared)
+ PHP_NEW_EXTENSION(sysvsem, sysvsem.c, $ext_shared)
  AC_DEFINE(HAVE_SYSVSEM, 1, [ ])
  AC_CACHE_CHECK(for union semun,php_cv_semun,
    AC_TRY_COMPILE([

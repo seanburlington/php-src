@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.7 2001/11/30 18:59:34 sniper Exp $
+dnl $Id: config.m4,v 1.8 2002/03/12 16:18:13 sas Exp $
 dnl
 
 PHP_ARG_WITH(fribidi, for FriBidi support,
@@ -71,7 +71,7 @@ dnl $PHP_FRIBIDI will be "yes"
     PHP_ADD_LIBRARY_WITH_PATH(fribidi,"$FRIBIDI_LIBDIR", FRIBIDI_SHARED_LIBADD)
 
     AC_DEFINE(HAVE_FRIBIDI, 1, [ ])
-    PHP_EXTENSION(fribidi, $ext_shared)
+    PHP_NEW_EXTENSION(fribidi, fribidi.c, $ext_shared)
     PHP_SUBST(FRIBIDI_SHARED_LIBADD)
   else
     AC_MSG_RESULT([no])

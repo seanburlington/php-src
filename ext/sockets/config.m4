@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.7 2001/11/30 18:59:58 sniper Exp $
+dnl $Id: config.m4,v 1.8 2002/03/12 16:35:45 sas Exp $
 dnl
 
 PHP_ARG_ENABLE(sockets, whether to enable sockets support,
@@ -11,5 +11,5 @@ if test "$PHP_SOCKETS" != "no"; then
   AC_CHECK_HEADERS(netdb.h netinet/tcp.h sys/un.h errno.h)
   AC_DEFINE(HAVE_SOCKETS, 1, [ ])
 
-  PHP_EXTENSION(sockets, $ext_shared)
+  PHP_NEW_EXTENSION(sockets, sockets.c, $ext_shared)
 fi

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.14 2002/02/15 03:08:40 elixer Exp $
+dnl $Id: config.m4,v 1.15 2002/03/12 16:37:59 sas Exp $
 dnl
 dnl +------------------------------------------------------------------------------+
 dnl |  This is where the magic of the extension reallly is.  Depending on what     |
@@ -20,7 +20,7 @@ PHP_ARG_WITH(sablot-js, enable JavaScript for Sablotron,
 
 if test "$PHP_XSLT" != "no"; then
 
-  PHP_EXTENSION(xslt, $ext_shared)
+  PHP_NEW_EXTENSION(xslt, xslt.c sablot.c, $ext_shared)
   PHP_SUBST(XSLT_SHARED_LIBADD)
 
   if test "$PHP_XSLT_SABLOT" != "no"; then

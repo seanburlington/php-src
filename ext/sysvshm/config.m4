@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.4 2001/11/30 19:00:00 sniper Exp $
+dnl $Id: config.m4,v 1.5 2002/03/12 16:37:01 sas Exp $
 dnl
 
 PHP_ARG_ENABLE(sysvshm,whether to enable System V shared memory support,
@@ -7,5 +7,5 @@ PHP_ARG_ENABLE(sysvshm,whether to enable System V shared memory support,
 
 if test "$PHP_SYSVSHM" != "no"; then
   AC_DEFINE(HAVE_SYSVSHM, 1, [ ])
-  PHP_EXTENSION(sysvshm, $ext_shared)
+  PHP_NEW_EXTENSION(sysvshm, sysvshm.c, $ext_shared)
 fi

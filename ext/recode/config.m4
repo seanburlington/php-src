@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.7 2001/11/30 18:59:54 sniper Exp $
+dnl $Id: config.m4,v 1.8 2002/03/12 16:34:45 sas Exp $
 dnl
 
 PHP_ARG_WITH(recode,for recode support,
@@ -59,5 +59,5 @@ recode_format_table();
 
 		AC_CHECK_HEADERS(stdbool.h)
 
-		PHP_EXTENSION(recode,$ext_shared)
+		PHP_NEW_EXTENSION(recode, recode.c, $ext_shared)
 	fi

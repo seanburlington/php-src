@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.3 2001/11/30 18:59:50 sniper Exp $
+dnl $Id: config.m4,v 1.4 2002/03/12 16:28:38 sas Exp $
 dnl
 
 PHP_ARG_WITH(ovrimos, for Ovrimos SQL Server support,
@@ -24,5 +24,5 @@ if test "$PHP_OVRIMOS" != "no"; then
   PHP_ADD_LIBRARY_WITH_PATH(sqlcli, $OVRIMOS_DIR/lib, OVRIMOS_SHARED_LIBADD)
   AC_DEFINE(HAVE_LIBSQLCLI,1,[ ])
 
-  PHP_EXTENSION(ovrimos, $ext_shared)
+  PHP_NEW_EXTENSION(ovrimos, ovrimos.c, $ext_shared)
 fi

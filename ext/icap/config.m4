@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.10 2001/11/30 18:59:38 sniper Exp $
+dnl $Id: config.m4,v 1.11 2002/03/12 16:19:49 sas Exp $
 dnl
 
 PHP_ARG_WITH(icap,for ICAP support,
@@ -13,5 +13,5 @@ if test "$PHP_ICAP" != "no"; then
   PHP_SUBST(ICAP_SHARED_LIBADD)
   PHP_ADD_LIBRARY_WITH_PATH(icap, $ICAP_DIR, ICAP_SHARED_LIBADD)
   AC_DEFINE(HAVE_ICAP,1,[ ])
-  PHP_EXTENSION(icap, $ext_shared)
+  PHP_NEW_EXTENSION(icap, php_icap.c, $ext_shared)
 fi

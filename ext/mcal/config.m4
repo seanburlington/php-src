@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11 2001/11/30 18:59:42 sniper Exp $
+dnl $Id: config.m4,v 1.12 2002/03/12 16:23:51 sas Exp $
 dnl
 
 PHP_ARG_WITH(mcal,for MCAL support,
@@ -45,6 +45,6 @@ if test "$PHP_MCAL" != "no"; then
   PHP_ADD_LIBRARY_WITH_PATH(mcal, $MCAL_LIBRARY, MCAL_SHARED_LIBADD)
   PHP_SUBST(MCAL_SHARED_LIBADD)
   AC_DEFINE(HAVE_MCAL,1,[ ])
-  PHP_EXTENSION(mcal,$ext_shared)
+  PHP_NEW_EXTENSION(mcal, php_mcal.c, $ext_shared)
 fi
 

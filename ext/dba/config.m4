@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.16 2001/11/30 18:59:31 sniper Exp $
+dnl $Id: config.m4,v 1.17 2002/03/12 16:13:26 sas Exp $
 dnl
 
 AC_DEFUN(PHP_TEMP_LDFLAGS,[
@@ -226,7 +226,7 @@ AC_MSG_CHECKING(whether to enable DBA interface)
 if test "$HAVE_DBA" = "1"; then
   AC_MSG_RESULT(yes)
   AC_DEFINE(HAVE_DBA, 1, [ ])
-  PHP_EXTENSION(dba,$ext_shared)
+  PHP_NEW_EXTENSION(dba, dba.c dba_cdb.c dba_db2.c dba_dbm.c dba_gdbm.c 		dba_ndbm.c dba_db3.c, $ext_shared)
   PHP_SUBST(DBA_SHARED_LIBADD)
 else
   AC_MSG_RESULT(no)

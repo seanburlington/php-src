@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.12 2002/03/09 18:17:05 sniper Exp $
+dnl $Id: config.m4,v 1.13 2002/03/12 16:24:39 sas Exp $
 dnl
 
 PHP_ARG_WITH(ming, for MING support,
@@ -27,6 +27,6 @@ if test "$PHP_MING" != "no"; then
   PHP_ADD_INCLUDE($MING_DIR/include)
   PHP_ADD_LIBRARY_WITH_PATH(ming, $MING_DIR/lib, MING_SHARED_LIBADD)
 
-  PHP_EXTENSION(ming, $ext_shared)
+  PHP_NEW_EXTENSION(ming, ming.c, $ext_shared)
   PHP_SUBST(MING_SHARED_LIBADD)
 fi

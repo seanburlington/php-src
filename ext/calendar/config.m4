@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.5 2001/11/30 18:59:27 sniper Exp $
+dnl $Id: config.m4,v 1.6 2002/03/12 16:10:56 sas Exp $
 dnl
 
 PHP_ARG_ENABLE(calendar,whether to enable calendar conversion support,
@@ -7,5 +7,5 @@ PHP_ARG_ENABLE(calendar,whether to enable calendar conversion support,
 
 if test "$PHP_CALENDAR" = "yes"; then
   AC_DEFINE(HAVE_CALENDAR,1,[ ])
-  PHP_EXTENSION(calendar, $ext_shared)
+  PHP_NEW_EXTENSION(calendar, calendar.c dow.c french.c gregor.c jewish.c julian.c easter.c cal_unix.c, $ext_shared)
 fi

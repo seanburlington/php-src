@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.28 2002/03/07 14:19:33 sas Exp $
+dnl $Id: config.m4,v 1.29 2002/03/12 16:28:51 sas Exp $
 dnl
 
 PHP_ARG_WITH(pdflib,for PDFlib support,
@@ -7,7 +7,7 @@ PHP_ARG_WITH(pdflib,for PDFlib support,
 
 if test "$PHP_PDFLIB" != "no"; then
 
-  PHP_EXTENSION(pdf, $ext_shared)
+  PHP_NEW_EXTENSION(pdf, pdf.c, $ext_shared)
   PHP_SUBST(PDFLIB_SHARED_LIBADD)
 
   dnl #

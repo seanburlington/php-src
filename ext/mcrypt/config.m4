@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.23 2002/01/04 14:13:53 hholzgra Exp $
+dnl $Id: config.m4,v 1.24 2002/03/12 16:24:05 sas Exp $
 dnl 
 
 PHP_ARG_WITH(mcrypt, for mcrypt support,
@@ -47,5 +47,5 @@ if test "$PHP_MCRYPT" != "no"; then
   AC_DEFINE(HAVE_LIBMCRYPT,1,[ ])
 
   PHP_SUBST(MCRYPT_SHARED_LIBADD)
-  PHP_EXTENSION(mcrypt, $ext_shared)
+  PHP_NEW_EXTENSION(mcrypt, mcrypt.c, $ext_shared)
 fi

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.36 2002/03/09 21:30:12 sniper Exp $
+dnl $Id: config.m4,v 1.37 2002/03/12 16:16:16 sas Exp $
 dnl
 
 AC_DEFUN(PHP_DOM_CHECK_VERSION,[
@@ -69,7 +69,7 @@ if test "$PHP_DOM" != "no"; then
   fi
   
   AC_DEFINE(HAVE_DOMXML,1,[ ])
-  PHP_EXTENSION(domxml, $ext_shared)
+  PHP_NEW_EXTENSION(domxml, php_domxml.c, $ext_shared)
   PHP_SUBST(DOMXML_SHARED_LIBADD)
 fi
 

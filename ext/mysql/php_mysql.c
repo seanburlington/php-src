@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.200 2003/09/22 23:27:51 iliaa Exp $ */
+/* $Id: php_mysql.c,v 1.201 2003/10/03 01:07:35 iliaa Exp $ */
 
 /* TODO:
  *
@@ -1260,7 +1260,7 @@ static void php_mysql_do_query_general(zval **query, zval **mysql_link, int link
 		/* check possible error */
 		if (MySG(trace_mode)){
 			if (mysql_errno(&mysql->conn)){
-				php_error_docref("http://www.mysql.com/doc" TSRMLS_CC, E_WARNING, mysql_error(&mysql->conn)); 
+				php_error_docref("http://www.mysql.com/doc" TSRMLS_CC, E_WARNING, "%s", mysql_error(&mysql->conn)); 
 			}
 		}
 		RETURN_FALSE;

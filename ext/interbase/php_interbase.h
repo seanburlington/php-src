@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_interbase.h,v 1.47 2003/08/13 02:19:14 abies Exp $ */
+/* $Id: php_interbase.h,v 1.48 2003/08/14 10:55:02 abies Exp $ */
 
 #ifndef PHP_INTERBASE_H
 #define PHP_INTERBASE_H
@@ -89,6 +89,8 @@ PHP_FUNCTION(ibase_delete_user);
 #endif
 PHP_FUNCTION(ibase_errmsg);
 PHP_FUNCTION(ibase_errcode);
+
+PHP_FUNCTION(ibase_wait_event);
 
 #define IBASE_MSGSIZE 256
 #define MAX_ERRMSG (IBASE_MSGSIZE*2)

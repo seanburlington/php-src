@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.114 2002/10/23 18:32:54 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.115 2002/10/23 19:20:27 moriyoshi Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -958,22 +958,22 @@ PHP_MINFO_FUNCTION(mbstring)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Multibyte Support", "enabled");
 #if defined(HAVE_MBSTR_JA)
-	php_info_print_table_row(2, "japanese support", "enabled");	
+	php_info_print_table_row(2, "Japanese support", "enabled");	
 #endif
 #if defined(HAVE_MBSTR_CN)
-	php_info_print_table_row(2, "simplified chinese support", "enabled");	
+	php_info_print_table_row(2, "Simplified chinese support", "enabled");	
 #endif
 #if defined(HAVE_MBSTR_TW)
-	php_info_print_table_row(2, "traditional chinese support", "enabled");	
+	php_info_print_table_row(2, "Traditional chinese support", "enabled");	
 #endif
 #if defined(HAVE_MBSTR_KR)
-	php_info_print_table_row(2, "korean support", "enabled");	
+	php_info_print_table_row(2, "Korean support", "enabled");	
 #endif
 	if(MBSTRG(encoding_translation)) {
-		php_info_print_table_row(2, "http input encoding translation", "enabled");	
+		php_info_print_table_row(2, "HTTP input encoding translation", "enabled");	
 	}
 #if defined(HAVE_MBREGEX)
-	php_info_print_table_row(2, "multibyte (japanese) regex support", "enabled");	
+	php_info_print_table_row(2, "Multibyte (japanese) regex support", "enabled");	
 #endif
 	php_info_print_table_end();
 

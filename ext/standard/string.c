@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.47 2005/01/18 15:51:24 iliaa Exp $ */
+/* $Id: string.c,v 1.333.2.48 2005/01/20 17:57:41 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1085,7 +1085,7 @@ PHPAPI char *php_basename(char *s, size_t len, char *suffix, size_t sufflen)
 #endif
 		)
 		c--;
-	if (c < s+len-1) {
+	if (c+1 >= s && c < s+len-1) {
 		buf = *(c + 1);  /* Save overwritten char */
 		*(c + 1) = '\0'; /* overwrite char */
 		p = c + 1;       /* Save pointer to overwritten char */

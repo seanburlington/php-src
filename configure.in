@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.296 2002/01/30 23:46:44 edink Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.297 2002/02/02 06:21:58 jon Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -392,15 +392,7 @@ sys/wait.h \
 unistd.h \
 unix.h \
 utime.h \
-,,,[
-$ac_includes_default
-#if HAVE_NETINET_IN_H
-#include <netinet/in.h>
-#endif
-#if HAVE_ARPA_NAMESER_H
-#include <arpa/nameser.h>
-#endif
-])
+)
 
 
 

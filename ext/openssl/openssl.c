@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.45 2002/04/19 07:56:40 yohgaki Exp $ */
+/* $Id: openssl.c,v 1.46 2002/05/01 07:50:12 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2404,7 +2404,8 @@ PHP_FUNCTION(openssl_private_decrypt)
 			}
 			break;
 		default:
-			zend_error(E_WARNING, "%s(): key type not supported in this PHP build!");
+			zend_error(E_WARNING, "%s(): key type not supported in this PHP build!",
+					get_active_function_name(TSRMLS_C));
 	}
 
 	efree(crypttemp);
@@ -2462,7 +2463,8 @@ PHP_FUNCTION(openssl_public_encrypt)
 						padding) == cryptedlen);
 			break;
 		default:
-			zend_error(E_WARNING, "%s(): key type not supported in this PHP build!");
+			zend_error(E_WARNING, "%s(): key type not supported in this PHP build!",
+					get_active_function_name(TSRMLS_C));
 
 	}
 
@@ -2525,7 +2527,8 @@ PHP_FUNCTION(openssl_public_decrypt)
 			break;
 			
 		default:
-			zend_error(E_WARNING, "%s(): key type not supported in this PHP build!");
+			zend_error(E_WARNING, "%s(): key type not supported in this PHP build!",
+					get_active_function_name(TSRMLS_C));
 		 
 	}
 

@@ -16,7 +16,11 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_stream_transport.h,v 1.4 2003/07/01 19:51:06 wez Exp $ */
+/* $Id: php_stream_transport.h,v 1.5 2003/07/02 01:35:39 wez Exp $ */
+
+#if HAVE_SYS_SOCKET_H
+# include <sys/socket.h>
+#endif
 
 typedef php_stream *(php_stream_transport_factory_func)(const char *proto, long protolen,
 		char *resourcename, long resourcenamelen,

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.52 2000/09/20 21:43:57 brianlmoon Exp $ */
+/* $Id: php_mysql.c,v 1.53 2000/09/30 16:14:54 andi Exp $ */
 
 
 /* TODO:
@@ -437,7 +437,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 #else
 		if (mysql_connect(mysql,host,user,passwd)==NULL) {
 #endif
-				php_error(E_WARNING,mysql_error(mysql));
+				php_error(E_WARNING, "%s", mysql_error(mysql));
 				free(mysql);
 				efree(hashed_details);
 				RETURN_FALSE;

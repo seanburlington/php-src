@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.h,v 1.6 1999/09/27 14:07:09 askalski Exp $ */
+/* $Id: ftp.h,v 1.7 1999/10/04 18:30:37 askalski Exp $ */
 
 #ifndef	_FTP_H
 #define	_FTP_H
@@ -140,7 +140,13 @@ int		ftp_put(ftpbuf_t *ftp, const char *path, FILE *infp,
 /* returns the size of the given file, or -1 on error */
 int		ftp_size(ftpbuf_t *ftp, const char *path);
 
-/* returns the last modified time  of the given file, or -1 on error */
+/* returns the last modified time of the given file, or -1 on error */
 time_t		ftp_mdtm(ftpbuf_t *ftp, const char *path);
+
+/* renames a file on the server */
+int		ftp_rename(ftpbuf_t *ftp, const char *src, const char *dest);
+
+/* deletes the file from the server */
+int		ftp_delete(ftpbuf_t *ftp, const char *path);
 
 #endif

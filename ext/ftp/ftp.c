@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.8 1999/09/27 14:07:09 askalski Exp $ */
+/* $Id: ftp.c,v 1.9 1999/10/04 18:30:37 askalski Exp $ */
 
 #include "php.h"
 
@@ -629,6 +629,38 @@ ftp_mdtm(ftpbuf_t *ftp, const char *path)
 	stamp = mktime(&tm);
 
 	return stamp;
+}
+
+
+int
+ftp_delete(ftpbuf_t *ftp, const char *path)
+{
+	if (ftp == NULL)
+		return 0;
+
+	fprintf(ftp->fp, "DELE %s\r\n", path);
+	if (!ftp_getresp(ftp) || ftp->resp != 250)
+		return 0;
+
+	return 1;
+}
+
+
+int
+ftp_rename(ftpbuf_t *ftp, const char *src, const char *dest)
+{
+	if (ftp == NULL)
+		return 0;
+
+	fprintf(ftp->fp, "RNFR %s\r\n", src);
+	if (!ftp_getresp(ftp) || ftp->resp != 350)
+		return 0;
+
+	fprintf(ftp->fp, "RNTO %s\r\n", dest);
+	if (!ftp_getresp(ftp) || ftp->resp != 250)
+		return 0;
+
+	return 1;
 }
 
 

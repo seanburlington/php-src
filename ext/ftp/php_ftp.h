@@ -28,7 +28,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.h,v 1.5 1999/09/27 14:07:09 askalski Exp $ */
+/* $Id: php_ftp.h,v 1.6 1999/10/04 18:30:37 askalski Exp $ */
 
 #ifndef	_INCLUDED_FTP_H
 #define	_INCLUDED_FTP_H
@@ -66,6 +66,8 @@ PHP_FUNCTION(ftp_put);
 PHP_FUNCTION(ftp_fput);
 PHP_FUNCTION(ftp_size);
 PHP_FUNCTION(ftp_mdtm);
+PHP_FUNCTION(ftp_rename);
+PHP_FUNCTION(ftp_delete);
 PHP_FUNCTION(ftp_quit);
 
 #define phpext_ftp_ptr php3_ftp_module_ptr

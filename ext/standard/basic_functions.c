@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.617 2003/07/24 08:02:08 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.618 2003/08/02 13:44:50 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -657,10 +657,10 @@ function_entry basic_functions[] = {
 	PHP_FE(fgets,															NULL)
 	PHP_FE(fgetss,															NULL)
 	PHP_FE(fread,															NULL)
-	PHP_STATIC_FE("fopen",			php_if_fopen,							NULL)
+	PHP_NAMED_FE(fopen,				php_if_fopen,							NULL)
 	PHP_FE(fpassthru,														NULL)
-	PHP_STATIC_FE("ftruncate",		php_if_ftruncate,						NULL)
-	PHP_STATIC_FE("fstat",			php_if_fstat,							NULL)
+	PHP_NAMED_FE(ftruncate,			php_if_ftruncate,						NULL)
+	PHP_NAMED_FE(fstat,				php_if_fstat,							NULL)
 	PHP_FE(fseek,															NULL)
 	PHP_FE(ftell,															NULL)
 	PHP_FE(fflush,															NULL)
@@ -670,7 +670,7 @@ function_entry basic_functions[] = {
 	PHP_FE(rename,															NULL)
 	PHP_FE(copy,															NULL)
 	PHP_FE(tempnam,															NULL)
-	PHP_STATIC_FE("tmpfile",		php_if_tmpfile,							NULL)
+	PHP_NAMED_FE(tmpfile,			php_if_tmpfile,							NULL)
 	PHP_FE(file,															NULL)
 	PHP_FE(file_get_contents,												NULL)
 	PHP_FE(file_put_contents,												NULL)
@@ -746,7 +746,7 @@ function_entry basic_functions[] = {
 
 	PHP_FE(getcwd,															NULL)
 	PHP_FE(rewinddir,														NULL)
-	PHP_STATIC_FE("readdir",		php_if_readdir,							NULL)
+	PHP_NAMED_FE(readdir,			php_if_readdir,							NULL)
 	PHP_FALIAS(dir,					getdir,									NULL)
 	PHP_FE(scandir,															NULL)
 #ifdef HAVE_GLOB
@@ -770,8 +770,8 @@ function_entry basic_functions[] = {
 	PHP_FE(is_file,															NULL)
 	PHP_FE(is_dir,															NULL)
 	PHP_FE(is_link,															NULL)
-	PHP_STATIC_FE("stat",			php_if_stat,							NULL)
-	PHP_STATIC_FE("lstat",			php_if_lstat,							NULL)
+	PHP_NAMED_FE(stat,				php_if_stat,							NULL)
+	PHP_NAMED_FE(lstat,				php_if_lstat,							NULL)
 	PHP_FE(chown,															NULL)
 	PHP_FE(chgrp,															NULL)
 	PHP_FE(chmod,															NULL)

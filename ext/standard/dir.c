@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.126 2003/07/23 21:41:44 iliaa Exp $ */
+/* $Id: dir.c,v 1.127 2003/08/02 13:49:12 helly Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -95,7 +95,7 @@ static zend_class_entry *dir_class_entry_ptr;
 static zend_function_entry php_dir_class_functions[] = {
 	PHP_FALIAS(close,	closedir,	NULL)
 	PHP_FALIAS(rewind,	rewinddir,	NULL)
-	PHP_STATIC_FE("read", php_if_readdir, NULL)
+	PHP_NAMED_FE(read,  php_if_readdir, NULL)
 	{NULL, NULL, NULL}
 };
 

@@ -23,7 +23,7 @@
  */
  
 
-/* $Id: ldap.c,v 1.70 2000/10/28 19:22:46 sniper Exp $ */
+/* $Id: ldap.c,v 1.71 2000/11/03 22:53:49 sniper Exp $ */
 #define IS_EXT_MODULE
 
 #include "php.h"
@@ -172,7 +172,9 @@ PHP_MINIT_FUNCTION(ldap)
 	REGISTER_MAIN_LONG_CONSTANT("LDAP_OPT_RESTART", LDAP_OPT_RESTART, CONST_PERSISTENT | CONST_CS);
 	REGISTER_MAIN_LONG_CONSTANT("LDAP_OPT_HOST_NAME", LDAP_OPT_HOST_NAME, CONST_PERSISTENT | CONST_CS);
 	REGISTER_MAIN_LONG_CONSTANT("LDAP_OPT_ERROR_STRING", LDAP_OPT_ERROR_STRING, CONST_PERSISTENT | CONST_CS);
+#ifndef HAVE_NSLDAP
 	REGISTER_MAIN_LONG_CONSTANT("LDAP_OPT_MATCHED_DN", LDAP_OPT_MATCHED_DN, CONST_PERSISTENT | CONST_CS);
+#endif
 #endif
 
 #ifdef ORALDAP
@@ -224,7 +226,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled" );
-	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.70 2000/10/28 19:22:46 sniper Exp $" );
+	php_info_print_table_row(2, "RCS Version", "$Id: ldap.c,v 1.71 2000/11/03 22:53:49 sniper Exp $" );
 	php_info_print_table_row(2, "Total Links", maxl );
 #ifdef LDAP_API_VERSION
 	snprintf(ldapapiversion, 31, "%d", LDAP_API_VERSION);
@@ -649,28 +651,28 @@ static void php_ldap_do_search(INTERNAL_FUNCTION_PARAMETERS, int scope)
 
 	/* sizelimit */
 	if(ldap_sizelimit > -1) {
-#if ( LDAP_API_VERSION < 2004 ) || HAVE_NSLDAP
-		ldap->ld_sizelimit = ldap_sizelimit; 
-#else
+#if ( LDAP_API_VERSION >= 2004 ) || HAVE_NSLDAP
 		ldap_set_option(ldap, LDAP_OPT_SIZELIMIT, &ldap_sizelimit);
+#else
+		ldap->ld_sizelimit = ldap_sizelimit; 
 #endif
 	}
 
 	/* timelimit */
 	if(ldap_timelimit > -1) {
-#if ( LDAP_API_VERSION < 2004 ) || HAVE_NSLDAP
-		ldap->ld_timelimit = ldap_timelimit; 
-#else
+#if ( LDAP_API_VERSION >= 2004 ) || HAVE_NSLDAP
 		ldap_set_option(ldap, LDAP_OPT_TIMELIMIT, &ldap_timelimit);
+#else
+		ldap->ld_timelimit = ldap_timelimit; 
 #endif
 	}
 
 	/* deref */
 	if(ldap_deref > -1) {
-#if ( LDAP_API_VERSION < 2004 ) || HAVE_NSLDAP
-		ldap->ld_deref = ldap_deref; 
-#else
+#if ( LDAP_API_VERSION >= 2004 ) || HAVE_NSLDAP
 		ldap_set_option(ldap, LDAP_OPT_DEREF, &ldap_deref);
+#else
+		ldap->ld_deref = ldap_deref; 
 #endif
 	}
 
@@ -1547,7 +1549,9 @@ PHP_FUNCTION(ldap_get_option) {
 		/* options with string value */
 	case LDAP_OPT_HOST_NAME:
 	case LDAP_OPT_ERROR_STRING:
+#ifndef HAVE_NSLDAP
 	case LDAP_OPT_MATCHED_DN:
+#endif
 	        {
 			char *val;
 			if (ldap_get_option(ldap, opt, &val)) {
@@ -1608,7 +1612,9 @@ PHP_FUNCTION(ldap_set_option) {
 		/* options with string value */
 	case LDAP_OPT_HOST_NAME:
 	case LDAP_OPT_ERROR_STRING:
+#ifndef HAVE_NSLDAP
 	case LDAP_OPT_MATCHED_DN:
+#endif
 		{
 			char *val;
 			convert_to_string_ex(newval);

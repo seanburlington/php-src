@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.178.2.7 2003/08/28 15:52:15 sas Exp $ */
+/* $Id: php.h,v 1.178.2.8 2003/09/24 23:22:32 iliaa Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -55,10 +55,16 @@
 #	define PHPAPI __declspec(dllimport)
 #	endif
 #define PHP_DIR_SEPARATOR '\\'
+#define PHP_EOL "\r\n"
 #else
 #define PHPAPI
 #define THREAD_LS
 #define PHP_DIR_SEPARATOR '/'
+#if defined(__MacOSX__)
+#define PHP_EOL "\r"
+#else 
+#define PHP_EOL "\n"
+#endif
 #endif
 
 #ifdef NETWARE

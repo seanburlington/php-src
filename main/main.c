@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.46 2003/08/22 20:02:11 iliaa Exp $ */
+/* $Id: main.c,v 1.512.2.47 2003/09/24 23:22:32 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -394,7 +394,7 @@ PHPAPI void php_log_err(char *log_message TSRMLS_DC)
 			strftime(error_time_str, sizeof(error_time_str), "%d-%b-%Y %H:%M:%S", php_localtime_r(&error_time, &tmbuf)); 
 			fprintf(log_file, "[%s] ", error_time_str);
 			fprintf(log_file, "%s", log_message);
-			fprintf(log_file, "\n");
+			fprintf(log_file, "%s", PHP_EOL);
 			fclose(log_file);
 			return;
 		}

@@ -1,6 +1,6 @@
 <!-- 
     $Source: /repository/php-src/ext/mnogosearch/Attic/test.php,v $
-    $Id: test.php,v 1.7 2001/02/06 14:30:54 gluke Exp $ 
+    $Id: test.php,v 1.8 2001/02/06 15:40:32 gluke Exp $ 
 -->
 
 <html>
@@ -70,6 +70,7 @@
 		// Fetch all rows
 		for($i=0;$i<$rows;$i++){
 			printf("%3d. %s\n",$first+$i,Udm_Get_Res_Field($res,$i,UDM_FIELD_URL));
+			printf("     ORDER : %d\n",Udm_Get_Res_Field($res,$i,UDM_FIELD_ORDER));
 			printf("     CONT : %s\n",htmlspecialchars(Udm_Get_Res_Field($res,$i,UDM_FIELD_CONTENT)));
 			printf("     TITLE: %s\n",htmlspecialchars(Udm_Get_Res_Field($res,$i,UDM_FIELD_TITLE)));
 			printf("     KEYWORDS: %s\n",htmlspecialchars(Udm_Get_Res_Field($res,$i,UDM_FIELD_KEYWORDS)));
@@ -79,6 +80,7 @@
 			printf("     MODIFIED : %s\n",Udm_Get_Res_Field($res,$i,UDM_FIELD_MODIFIED));
 			printf("     URLID : %d\n",Udm_Get_Res_Field($res,$i,UDM_FIELD_URLID));
 			printf("     SCORE : %d\n",Udm_Get_Res_Field($res,$i,UDM_FIELD_SCORE));
+			printf("     CRC : %d\n",Udm_Get_Res_Field($res,$i,UDM_FIELD_CRC));
 			printf("---------\n");
 		}
 				

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.84.2.2 2002/12/12 17:44:48 wez Exp $ */
+/* $Id: exec.c,v 1.84.2.3 2002/12/19 20:34:33 wez Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -976,7 +976,7 @@ PHP_FUNCTION(proc_open)
 				fp = fdopen(descriptors[i].parentend, mode_string);
 #endif
 				if (fp) {
-					stream = php_stream_fopen_from_pipe(fp, mode_string);
+					stream = php_stream_fopen_from_file(fp, mode_string);
 					if (stream) {
 						zval *retfp;
 

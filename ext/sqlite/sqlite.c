@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.92 2003/09/04 14:54:52 helly Exp $ 
+   $Id: sqlite.c,v 1.93 2003/09/05 20:05:08 helly Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -944,7 +944,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.92 2003/09/04 14:54:52 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.93 2003/09/05 20:05:08 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1756,17 +1756,12 @@ PHP_FUNCTION(sqlite_fetch_object)
 			fci.params = NULL;
 		}
 		fci.no_separation = 1;
-	
 
 		fcc.initialized = 1;
-
 		fcc.function_handler = ce->constructor;
-
 		fcc.calling_scope = EG(scope);
-
 		fcc.object_pp = &return_value;
 
-	
 		if (zend_call_function(&fci, &fcc TSRMLS_CC) == FAILURE) {
 			zend_throw_exception_ex(sqlite_ce_exception, 0 TSRMLS_CC, "Could not execute %s::%s()", class_name, ce->constructor->common.function_name);
 		} else {

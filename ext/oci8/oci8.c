@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.109 2001/02/17 15:54:40 thies Exp $ */
+/* $Id: oci8.c,v 1.110 2001/02/18 11:10:30 thies Exp $ */
 
 /* TODO list:
  *
@@ -489,7 +489,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.109 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.110 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -1023,14 +1023,11 @@ _oci_make_zval(zval *value,oci_statement *statement,oci_out_column *column, char
             	return -1;
         	}
 			
-			oci_loadlob(statement->conn,descr,&buffer,&loblen);
-			
-			if (loblen >= 0)	{
-				ZVAL_STRINGL(value,buffer,loblen,0);
-			} else {
-				/* XXX is this an error? */
+			if (oci_loadlob(statement->conn,descr,&buffer,&loblen)) {
 				ZVAL_BOOL(value,0); 
-			}
+			} else {
+				ZVAL_STRINGL(value,buffer,loblen,0);
+			} 
 		} else { 
 			/* return the locator */
 			object_init_ex(value, oci_lob_class_entry_ptr);
@@ -1607,7 +1604,7 @@ oci_loadlob(oci_connection *connection, oci_descriptor *mydescr, char **buffer,u
 						&readlen);
 
 	if (connection->error) {
-		oci_error(connection->pError, "OCILobFileOpen",connection->error);
+		oci_error(connection->pError, "OCILobGetLength",connection->error);
 		oci_handle_error(connection, connection->error);
 		return -1;
 	}
@@ -2791,7 +2788,6 @@ PHP_FUNCTION(ocisavelobfile)
 PHP_FUNCTION(ociloadlob)
 {
 	zval *id;
-	oci_connection *connection;
 	oci_descriptor *descr;
 	char *buffer;
 	int inx;
@@ -2802,11 +2798,7 @@ PHP_FUNCTION(ociloadlob)
 			RETURN_FALSE;
 		}
 
-		connection = descr->conn;
-
-		oci_loadlob(connection,descr,&buffer,&loblen);
-
-		if (loblen >= 0) {
+		if (!oci_loadlob(descr->conn,descr,&buffer,&loblen)) {
 	 		RETURN_STRINGL(buffer,loblen,0);
 		}
 	}

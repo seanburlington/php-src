@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.91 2002/04/20 18:02:14 jimw Exp $
+dnl $Id: config.m4,v 1.92 2002/04/23 23:17:41 sniper Exp $
 dnl
 
 AC_DEFUN(PHP_GD_JPEG,[
@@ -263,7 +263,7 @@ dnl Various checks for GD features
     AC_DEFINE(HAVE_LIBGD,1,[ ])
     PHP_GD_CHECK_VERSION
   else
-    AC_MSG_ERROR([Unable to find libgd.(a|so) anywhere under $withval])
+    AC_MSG_ERROR([Unable to find libgd.(a|so) anywhere under $GD_SEARCH_PATHS])
   fi 
 
 dnl NetBSD package structure

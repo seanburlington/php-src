@@ -19,7 +19,7 @@
 */
 
 
-/* $Id: main.c,v 1.173 2000/01/15 13:30:32 sas Exp $ */
+/* $Id: main.c,v 1.174 2000/01/16 10:51:55 thies Exp $ */
 
 
 #include <stdio.h>
@@ -666,6 +666,7 @@ static void php_execute_pre_request_shutdown(PLS_D)
 	if (PG(pre_request_shutdown_ok)) {
 		zend_llist_apply(&PG(ll_pre_request_shutdown), php_start_request_hook);
 		zend_llist_destroy(&PG(ll_pre_request_shutdown));
+		PG(pre_request_shutdown_ok) = 0;
 	}
 }
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.47 2004/05/07 06:13:21 helly Exp $ */
+/* $Id: spl_array.c,v 1.48 2004/06/20 16:46:27 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -350,7 +350,7 @@ SPL_METHOD(Array, offsetGet)
 		return;
 	}
 	value = spl_array_read_dimension(getThis(), index, BP_VAR_R TSRMLS_CC);
-	RETURN_ZVAL(value, 0, 1);
+	RETURN_ZVAL(value, 1, 0);
 } /* }}} */
 
 /* {{{ proto void ArrayObject::offsetSet(mixed $index, mixed $newval)

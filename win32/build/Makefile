@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.16 2004/01/09 13:17:58 wez Exp $
+# $Id: Makefile,v 1.17 2004/01/09 13:32:20 wez Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -65,7 +65,9 @@ $(BUILD_DIR) $(BUILD_DIRS_SUB):
 
 clean-sapi:
 	@echo Cleaning SAPI
-	@for %D in ($(EXT_TARGETS) $(SAPI_TARGETS)) do @del /F /Q $(BUILD_DIR)\%D > NUL
+	@for %D in ($(EXT_TARGETS)) do @del /F /Q $(BUILD_DIR)\%D > NUL
+	@for %D in ($(PECL_TARGETS)) do @del /F /Q $(BUILD_DIR)\%D > NUL
+	@for %D in ($(SAPI_TARGETS)) do @del /F /Q $(BUILD_DIR)\%D > NUL
 	@del /F /Q $(BUILD_DIR)\$(PHPDLL)
 
 clean: clean-sapi

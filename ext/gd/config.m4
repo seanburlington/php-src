@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.137 2003/06/09 08:11:53 moriyoshi Exp $
+dnl $Id: config.m4,v 1.138 2003/06/15 19:54:40 helly Exp $
 dnl
 
 dnl
@@ -169,6 +169,7 @@ AC_DEFUN(PHP_GD_FREETYPE1,[
       fi
       PHP_ADD_INCLUDE($TTF_INC_DIR)
     else
+      AC_MSG_CHECKING(for FreeType 1 support)
       AC_MSG_RESULT([no - FreeType 2.x is to be used instead])
     fi
   fi

@@ -20,8 +20,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_odbc.c,v 1.84 2001/05/08 19:47:20 kalowsky Exp $ */
+/* $Id: php_odbc.c,v 1.84.2.1 2001/05/24 12:42:01 ssb Exp $ */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+ 
 #include "php.h"
 #include "php_globals.h"
 

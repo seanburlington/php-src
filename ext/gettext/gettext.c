@@ -16,9 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.26 2001/04/30 12:43:37 andi Exp $ */
+/* $Id: gettext.c,v 1.26.2.1 2001/05/24 12:41:51 ssb Exp $ */
 
 #include <stdio.h>
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "php.h"
 #include "php_gettext.h"
 

@@ -16,13 +16,17 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.85 2001/05/09 22:28:16 wez Exp $ */
+/* $Id: php_mysql.c,v 1.85.2.1 2001/05/24 12:41:58 ssb Exp $ */
 
 
 /* TODO:
  *
  * ? Safe mode implementation
  */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_globals.h"

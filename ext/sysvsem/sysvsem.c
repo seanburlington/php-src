@@ -16,13 +16,17 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.27 2001/02/26 06:07:24 andi Exp $ */
+/* $Id: sysvsem.c,v 1.27.4.1 2001/05/24 12:42:09 ssb Exp $ */
 
 /* This has been built and tested on Solaris 2.6 and Linux 2.1.122.
  * It may not compile or execute correctly on other systems.
  *
  * sas: Works for me on Linux 2.0.36 and FreeBSD 3.0-current
  */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

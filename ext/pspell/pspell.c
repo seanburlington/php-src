@@ -16,9 +16,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pspell.c,v 1.15 2001/02/26 06:07:13 andi Exp $ */
+/* $Id: pspell.c,v 1.15.4.1 2001/05/24 12:42:04 ssb Exp $ */
 
 #define IS_EXT_MODULE
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

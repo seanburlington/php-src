@@ -17,10 +17,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: db.c,v 1.50 2001/04/30 12:43:30 andi Exp $ */
+/* $Id: db.c,v 1.50.2.1 2001/05/24 12:41:44 ssb Exp $ */
 #define IS_EXT_MODULE
 
 #if 1
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_globals.h"

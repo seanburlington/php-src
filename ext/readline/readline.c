@@ -16,9 +16,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.19 2001/02/27 20:16:35 andi Exp $ */
+/* $Id: readline.c,v 1.19.4.1 2001/05/24 12:42:05 ssb Exp $ */
 
 /* {{{ includes & prototypes */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_readline.h"

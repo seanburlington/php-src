@@ -1,5 +1,5 @@
 /* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
-/* $Id: php_mnogo.c,v 1.26 2001/05/03 08:59:47 gluke Exp $ */
+/* $Id: php_mnogo.c,v 1.26.2.1 2001/05/24 12:41:57 ssb Exp $ */
 
 /*
    +----------------------------------------------------------------------+
@@ -21,6 +21,10 @@
    |  Further development by  Sergey Kartashoff <gluke@biosys.net>        |
    +----------------------------------------------------------------------+
  */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_mnogo.h"

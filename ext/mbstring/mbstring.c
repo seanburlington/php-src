@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.13 2001/05/10 13:12:03 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.13.2.1 2001/05/24 12:41:55 ssb Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -42,6 +42,10 @@
  *    Tsukada Takuya <tsukada@fminn.nagano.nagano.jp>
  */
 
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_ini.h"

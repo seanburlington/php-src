@@ -17,7 +17,11 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.39 2001/02/26 06:07:16 andi Exp $ */
+/* $Id: snmp.c,v 1.39.4.1 2001/05/24 12:42:07 ssb Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "ext/standard/info.h"

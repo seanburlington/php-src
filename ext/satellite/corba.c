@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id: corba.c,v 1.3 2001/02/26 06:07:15 andi Exp $
+ * $Id: corba.c,v 1.3.4.1 2001/05/24 12:42:06 ssb Exp $
  * vim: syntax=c tabstop=2 shiftwidth=2
  */
 
@@ -28,6 +28,11 @@
  *
  * -----------------------------------------------------------------------
  */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "corba.h"
 
 #ifdef HAVE_CONFIG_H

@@ -19,7 +19,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ii.c,v 1.15 2001/02/26 06:06:59 andi Exp $ */
+/* $Id: ii.c,v 1.15.4.1 2001/05/24 12:41:54 ssb Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_globals.h"

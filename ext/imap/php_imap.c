@@ -25,12 +25,16 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.77 2001/05/06 10:33:21 sas Exp $ */
+/* $Id: php_imap.c,v 1.77.2.1 2001/05/24 12:41:54 ssb Exp $ */
 
 #define IMAP41
 
 #undef OP_RELOGIN
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+ 
 #include "php.h"
 #include "php_ini.h"
 #include "ext/standard/php_string.h"

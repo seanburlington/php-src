@@ -16,10 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.46 2001/05/09 19:18:04 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.46.2.1 2001/05/24 12:41:57 ssb Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
+#endif
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
 #endif
 
 #include "php.h"

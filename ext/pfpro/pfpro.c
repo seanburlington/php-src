@@ -17,9 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pfpro.c,v 1.12 2001/05/02 01:08:44 jdonagher Exp $ */
+/* $Id: pfpro.c,v 1.12.2.1 2001/05/24 12:42:03 ssb Exp $ */
 
 /* {{{ includes */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "php.h"
 #include "php_ini.h"
 #include "php_pfpro.h"

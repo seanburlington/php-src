@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.20 2001/05/10 16:35:05 fmk Exp $ */
+/* $Id: php_fbsql.c,v 1.20.2.1 2001/05/24 12:41:47 ssb Exp $ */
 
 /* TODO:
  *
@@ -37,6 +37,10 @@
 	- Select db with no arguments
 	 - Query with everything defaulted
 */
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include "php.h"
 #include "php_globals.h"
 #include "php_globals.h"

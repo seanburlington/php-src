@@ -17,11 +17,15 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.102 2001/05/06 06:33:48 eschmid Exp $ */
+/* $Id: pgsql.c,v 1.102.2.1 2001/05/24 12:42:03 ssb Exp $ */
 
 #include <stdlib.h>
 
 #define PHP_PGSQL_PRIVATE 1
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_ini.h"

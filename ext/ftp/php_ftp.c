@@ -28,7 +28,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.32 2001/04/30 12:43:36 andi Exp $ */
+/* $Id: php_ftp.c,v 1.32.2.1 2001/05/24 12:41:51 ssb Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

@@ -17,12 +17,16 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.46 2001/04/30 12:43:35 andi Exp $ */
+/* $Id: fdf.c,v 1.46.2.1 2001/05/24 12:41:47 ssb Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
 
 /* Note that there is no code from the FdfTk lib in this file */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 

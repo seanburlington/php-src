@@ -18,7 +18,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.15 2001/05/04 23:42:10 wez Exp $ */
+/* $Id: openssl.c,v 1.15.2.1 2001/05/24 12:42:02 ssb Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_openssl.h"

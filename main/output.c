@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.125 2002/10/01 10:01:56 yohgaki Exp $ */
+/* $Id: output.c,v 1.126 2002/10/02 15:02:15 helly Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -130,10 +130,10 @@ PHPAPI int php_start_ob_buffer(zval *output_handler, uint chunk_size, zend_bool 
 		return FAILURE;
 	}
 	if (chunk_size) {
+		if (chunk_size==1)
+			chunk_size = 4096;
 		initial_size = (chunk_size*3/2);
 		block_size = chunk_size/2;
-		if (block_size == 0)
-			block_size = 1;
 	} else {
 		initial_size = 40*1024;
 		block_size = 10*1024;

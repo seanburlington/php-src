@@ -18,7 +18,7 @@
    |          Jade Nicoletti <nicoletti@nns.ch>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: zlib.c,v 1.150 2002/09/30 10:18:06 wez Exp $ */
+/* $Id: zlib.c,v 1.151 2002/10/02 15:02:16 helly Exp $ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -230,8 +230,10 @@ PHP_RINIT_FUNCTION(zlib)
 	ZLIBG(ob_gzhandler_status) = 0;
 	ZLIBG(ob_gzip_coding) = 0;
 	if (chunk_size) {
-		if (chunk_size == 1)
-			chunk_size = 0; /* use the default size */
+		if (chunk_size == 1) {
+			chunk_size = 4096; /* use the default size */
+			ZLIBG(output_compression) = chunk_size;
+		}
 		php_enable_output_compression(chunk_size TSRMLS_CC);
 	}
 	return SUCCESS;

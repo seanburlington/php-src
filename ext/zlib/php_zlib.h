@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_zlib.h,v 1.4 2000/05/25 16:14:05 fmk Exp $ */
+/* $Id: php_zlib.h,v 1.5 2000/05/25 16:35:49 hholzgra Exp $ */
 
 #ifndef _PHP_ZLIB_H
 #define _PHP_ZLIB_H
@@ -59,6 +59,8 @@ PHP_FUNCTION(gzseek);
 PHP_FUNCTION(gzpassthru);
 PHP_FUNCTION(readgzfile);
 PHP_FUNCTION(gzfile);
+PHP_FUNCTION(gzcompress);
+PHP_FUNCTION(gzuncompress);
 
 #ifdef ZTS
 #define ZLIBLS_D php_zlib_globals *zlib_globals

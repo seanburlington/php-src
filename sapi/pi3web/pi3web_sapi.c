@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pi3web_sapi.c,v 1.5 2000/07/24 05:41:01 david Exp $ */
+/* $Id: pi3web_sapi.c,v 1.6 2000/08/02 22:48:44 rasmus Exp $ */
 
 #if WIN32|WINNT
 #  include <windows.h>
@@ -83,7 +83,7 @@ static void php_info_pi3web(ZEND_MODULE_INFO_FUNC_ARGS)
 	PUTS("<table border=5 width=600>\n");
 	PUTS("<tr><th colspan=2 bgcolor=\"" PHP_HEADER_COLOR "\">Pi3Web Server Information</th></tr>\n");
 	php_info_print_table_header(2, "Information Field", "Value");
-	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.5 2000/07/24 05:41:01 david Exp $");
+	php_info_print_table_row(2, "Pi3Web SAPI module version", "$Id: pi3web_sapi.c,v 1.6 2000/08/02 22:48:44 rasmus Exp $");
 	php_info_print_table_row(2, "Server Name Stamp", HTTPCore_getServerStamp());
 	snprintf(variable_buf, 511, "%d", HTTPCore_debugEnabled());
 	php_info_print_table_row(2, "Debug Enabled", variable_buf);
@@ -321,6 +321,12 @@ static void init_request_info(sapi_globals_struct *sapi_globals, LPCONTROL_BLOCK
 	SG(request_info).content_length  = lpCB->cbTotalBytes;
 	SG(request_info).auth_user       = lpCB->lpszUser;
 	SG(request_info).auth_password   = lpCB->lpszPassword;
+	SG(sapi_headers).http_response_code = 200;
+	if (!strcmp(lpCB->lpszMethod, "HEAD")) {
+		SG(request_info).headers_only = 1;
+	} else {
+		SG(request_info).headers_only = 0;
+	}
 }
 
 static void hash_pi3web_variables(ELS_D SLS_DC)

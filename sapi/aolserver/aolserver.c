@@ -22,7 +22,7 @@
  * - CGI/1.1 conformance
  */
 
-/* $Id: aolserver.c,v 1.43 2000/07/05 11:27:24 sas Exp $ */
+/* $Id: aolserver.c,v 1.44 2000/08/02 22:48:41 rasmus Exp $ */
 
 /* conflict between PHP and AOLserver headers */
 #define Debug php_Debug
@@ -207,7 +207,7 @@ static void php_info_aolserver(ZEND_MODULE_INFO_FUNC_ARGS)
 	NSLS_FETCH();
 	
 	php_info_print_table_start();
-	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.43 2000/07/05 11:27:24 sas Exp $");
+	php_info_print_table_row(2, "SAPI module version", "$Id: aolserver.c,v 1.44 2000/08/02 22:48:41 rasmus Exp $");
 	php_info_print_table_row(2, "Build date", Ns_InfoBuildDate());
 	php_info_print_table_row(2, "Config file path", Ns_InfoConfigFile());
 	php_info_print_table_row(2, "Error Log path", Ns_InfoErrorLog());
@@ -473,6 +473,12 @@ php_ns_request_ctor(NSLS_D SLS_DC)
 	index = Ns_SetIFind(NSG(conn)->headers, "content-type");
 	SG(request_info).content_type = index == -1 ? NULL : 
 		Ns_SetValue(NSG(conn)->headers, index);
+	if (!strcmp(NSG(conn)->request->method, "HEAD")) {
+		SG(request_info).headers_only = 1;
+	} else {
+		SG(request_info).headers_only = 0;
+	}
+	SG(sapi_headers).http_response_code = 200;
 
 	tmp = Ns_ConnAuthUser(NSG(conn));
 	if(tmp) {

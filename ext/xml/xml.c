@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.93 2001/08/18 23:07:10 sniper Exp $ */
+/* $Id: xml.c,v 1.94 2001/08/18 23:43:04 sniper Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -462,9 +462,10 @@ static XML_Char *xml_utf8_encode(const char *s, int len, int *newlen, const XML_
 	if (encoder == NULL) {
 		/* If no encoder function was specified, return the data as-is.
 		 */
-		newbuf = emalloc(len);
+		newbuf = emalloc(len + 1);
 		memcpy(newbuf, s, len);
 		*newlen = len;
+		newbuf[*newlen] = '\0';
 		return newbuf;
 	}
 	/* This is the theoretical max (will never get beyond len * 2 as long

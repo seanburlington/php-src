@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.76 2002/12/30 11:32:37 helly Exp $ */
+/* $Id: dba.c,v 1.77 2002/12/30 11:43:18 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -161,9 +161,9 @@ typedef struct dba_handler {
 
 #define DBA_NAMED_HND(alias, name, flags) \
 {\
-	#name, flags, dba_open_##x, dba_close_##x, dba_fetch_##x, dba_update_##x, \
-	dba_exists_##x, dba_delete_##x, dba_firstkey_##x, dba_nextkey_##x, \
-	dba_optimize_##x, dba_sync_##x \
+	#alias, flags, dba_open_##name, dba_close_##name, dba_fetch_##name, dba_update_##name, \
+	dba_exists_##name, dba_delete_##name, dba_firstkey_##name, dba_nextkey_##name, \
+	dba_optimize_##name, dba_sync_##name \
 },
 
 #define DBA_HND(name, flags) DBA_NAMED_HND(name, name, flags)

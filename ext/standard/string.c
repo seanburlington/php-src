@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.305 2002/10/03 04:54:01 yohgaki Exp $ */
+/* $Id: string.c,v 1.306 2002/10/03 04:56:54 yohgaki Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2468,7 +2468,7 @@ PHPAPI char *php_addslashes(char *str, int length, int *new_length, int should_f
 	if (should_free) {
 		STR_FREE(str);
 	}
-	new_str = (char *) erealloc(new_str, *new_length);
+	new_str = (char *) erealloc(new_str, *new_length+1);
 	return new_str;
 }
 /* }}} */

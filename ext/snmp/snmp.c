@@ -17,7 +17,7 @@
 |          Steven Lawrance <slawrance@technologist.com>                |
 +----------------------------------------------------------------------+
 */
-/* $Id: snmp.c,v 1.58 2002/05/11 17:41:16 sterling Exp $ */
+/* $Id: snmp.c,v 1.59 2002/07/13 05:42:01 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -73,8 +73,6 @@
 #define SNMP_MSG_GET GET_REQ_MSG
 #define SNMP_MSG_GETNEXT GETNEXT_REQ_MSG
 #endif
-
-void php_snmp(INTERNAL_FUNCTION_PARAMETERS, int st);
 
 /* constant - can be shared among threads */
 static oid objid_mib[] = {1, 3, 6, 1, 2, 1};

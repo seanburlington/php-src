@@ -1,3 +1,10 @@
+2004-10-24  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * NEWS
+      main/php_variables.c:
+      Make request start time be available via $_SERVER['REQUEST_TIME'].
+      
+
 2004-10-23  Hartmut Holzgraefe  <hartmut@php-groupies.de>
 
     * ext/ldap/config.w32:
@@ -11821,7 +11828,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1784 2004/10/24 00:36:08 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1785 2004/10/25 00:36:45 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.33 2002/09/12 21:52:09 sesser Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.34 2002/09/21 18:25:04 derick Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -415,7 +415,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 	php_stream_notify_progress_init(context, 0, file_size);
 
 #if HAVE_OPENSSL_EXT
-	if (use_ssl_on_data && php_stream_sock_ssl_activate_with_method(datastream, 1, SSLv23_method(), reuseid) == FAILURE)	{
+	if (use_ssl_on_data && php_stream_sock_ssl_activate_with_method(datastream, 1, SSLv23_method(), reuseid TSRMLS_CC) == FAILURE)	{
 		php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Unable to activate SSL mode");
 		php_stream_close(datastream);
 		datastream = NULL;

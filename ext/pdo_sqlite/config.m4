@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.17 2005/03/14 09:47:31 sniper Exp $
+dnl $Id: config.m4,v 1.18 2005/03/21 01:24:36 wez Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
@@ -96,7 +96,7 @@ if test "$PHP_PDO_SQLITE" != "no"; then
         $CC -o $ext_srcdir/sqlite/tool/mkkeywordhash $ext_srcdir/sqlite/tool/mkkeywordhash.c
         $ext_srcdir/sqlite/tool/mkkeywordhash > $ext_srcdir/sqlite/src/keywordhash.h
       else
-        touch $ext_srcdir/sqlite/src/parse.c $ext_srcdir/sqlite/src/parse.y
+        touch $ext_srcdir/sqlite/src/parse.c $ext_srcdir/sqlite/src/parse.h
       fi
 
       if test "$ext_shared" = "no" -o "$ext_srcdir" != "$abs_srcdir"; then

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.41.2.1 2002/03/26 07:39:58 derick Exp $ */
+/* $Id: openssl.c,v 1.41.2.2 2002/03/26 08:47:39 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -140,8 +140,6 @@ static int le_csr;
 static void php_pkey_free(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 {
 	EVP_PKEY *pkey = (EVP_PKEY *)rsrc->ptr;
-
-	assert(pkey != NULL);
 	
 	EVP_PKEY_free(pkey);
 }

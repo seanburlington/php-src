@@ -1,3 +1,34 @@
+2004-08-08  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * pear/tests/pear_config.phpt
+      pear/tests/pear_config_1.1.phpt
+      pear/tests/pear_registry_1.1.phpt:
+      When skip condition is met, stop.
+
+    * ext/standard/math.c:
+      MFB: removed \r characters.
+
+    * (PHP_5_0)
+      ext/standard/math.c:
+      Remove \r characters from file.
+
+2004-08-08  Christian Stocker  <chregu@phant.ch>
+
+    * (PHP_5_0)
+      NEWS:
+      Fixed bug #29573.
+
+    * (PHP_5_0)
+      ext/xsl/xsltprocessor.c:
+      MFH (fix for Bug #29573 : Segmentation fault when php function(called from
+      XSLT templat) throw exception
+      and Zero Byte Memory Leaks)
+
+    * ext/xsl/xsltprocessor.c:
+      - Fix bug #29573: Segmentation fault when php function(called from XSLT
+      templat) throw exception
+      - Fix some 0 Byte Memory Leaks
+
 2004-08-07  Wez Furlong  <wez.php@thebrainroom.net>
 
     * (PHP_5_0)
@@ -7900,7 +7931,7 @@
 2004-03-18  Pierre-Alain Joye  <paj@pearfr.org>
 
     * ext/gd/tests/bug27582_2.phpt:
-      - Fix the test description and $Id: ChangeLog,v 1.1710 2004/08/08 00:34:29 changelog Exp $
+      - Fix the test description and $Id: ChangeLog,v 1.1711 2004/08/09 00:34:17 changelog Exp $
 
 2004-03-18  Derick Rethans  <php@derickrethans.nl>
 

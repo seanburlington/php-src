@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.35 2001/12/16 22:58:24 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.36 2001/12/17 01:03:52 yohgaki Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring" (currently only for Japanese)
@@ -444,6 +444,7 @@ PHP_MSHUTDOWN_FUNCTION(mbstring)
 PHP_RINIT_FUNCTION(mbstring)
 {
 	int n, *list, *entry;
+	zend_function *func;
 
 	MBSTRG(current_language) = MBSTRG(language);
 	MBSTRG(current_internal_encoding) = MBSTRG(internal_encoding);

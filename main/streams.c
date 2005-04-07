@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.94 2005/04/04 20:26:49 pollita Exp $ */
+/* $Id: streams.c,v 1.125.2.95 2005/04/07 07:28:08 thetaphi Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1595,6 +1595,9 @@ static int php_stdiop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)
 			if (ret) {
 				if (data->file == NULL) {
 					data->file = fdopen(data->fd, stream->mode);
+					if (data->file == NULL) {
+						return FAILURE;
+					}
 				}
 				*(FILE**)ret = data->file;
 				data->fd = -1;

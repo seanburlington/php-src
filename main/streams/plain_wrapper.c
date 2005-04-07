@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.43 2005/04/06 13:57:30 iliaa Exp $ */
+/* $Id: plain_wrapper.c,v 1.44 2005/04/07 07:29:14 thetaphi Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -461,6 +461,9 @@ static int php_stdiop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)
 					/* we were opened as a plain file descriptor, so we
 					 * need fdopen now */
 					data->file = fdopen(data->fd, stream->mode);
+					if (data->file == NULL) {
+						return FAILURE;
+					}
 				}
 				
 				*(FILE**)ret = data->file;

@@ -18,7 +18,7 @@
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: calendar.c,v 1.41 2004/10/11 06:39:41 iliaa Exp $ */
+/* $Id: calendar.c,v 1.42 2005/04/07 16:12:27 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -245,6 +245,11 @@ PHP_FUNCTION(cal_days_in_month)
 	calendar = &cal_conversion_table[cal];
 
 	sdn_start = calendar->to_jd(year, month, 1);
+
+	if (sdn_start == 0) {
+        php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid date.");
+        RETURN_FALSE;
+	}
 
 	sdn_next = calendar->to_jd(year, 1 + month, 1);
 

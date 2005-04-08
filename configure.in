@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.514.2.47 2005/03/30 22:24:52 derick Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.514.2.48 2005/04/08 13:37:23 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -402,8 +402,7 @@ unix.h \
 utime.h \
 sys/utsname.h \
 sys/ipc.h \
-dlfcn.h \
-inttypes.h
+dlfcn.h
 ],[],[],[
 #ifdef HAVE_SYS_PARAM_H
 #include <sys/param.h>

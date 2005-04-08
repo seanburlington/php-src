@@ -26,7 +26,7 @@
    | PHP 4.0 updates:  Zeev Suraski <zeev@zend.com>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_imap.c,v 1.142.2.43 2005/04/05 14:49:10 iliaa Exp $ */
+/* $Id: php_imap.c,v 1.142.2.44 2005/04/08 15:04:52 iliaa Exp $ */
 
 #define IMAP41
 
@@ -3016,7 +3016,7 @@ PHP_FUNCTION(imap_mail_compose)
 				convert_to_string_ex(pvalue);
 				tmp_param = mail_newbody_parameter();
 				tmp_param->value = (char *) fs_get(Z_STRLEN_PP(pvalue) + 1);
-				memcpy(disp_param->value, Z_STRVAL_PP(pvalue), Z_STRLEN_PP(pvalue) + 1);
+				memcpy(tmp_param->value, Z_STRVAL_PP(pvalue), Z_STRLEN_PP(pvalue) + 1);
 				tmp_param->attribute = "CHARSET";
 				tmp_param->next = bod->parameter;
 				bod->parameter = tmp_param;

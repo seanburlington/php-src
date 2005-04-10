@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.71 2005/04/10 19:18:37 sniper Exp $
+dnl $Id: config.m4,v 1.72 2005/04/10 19:23:59 sniper Exp $
 dnl
 
 dnl
@@ -212,7 +212,7 @@ AC_ARG_WITH(ibm-db2,
       AC_MSG_ERROR([
 build test failed. Please check the config.log for details.
 You need to source your DB2 environment before running PHP configure:
-# . $IBM_DB2/db2profile
+# . \$IBM_DB2/db2profile
 ])
     ], [
       $ODBC_LFLAGS $ODBC_LIBS

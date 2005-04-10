@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.136 2005/04/06 14:19:14 iliaa Exp $ */
+/* $Id: basic_functions.h,v 1.137 2005/04/10 16:25:11 iliaa Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -50,6 +50,7 @@ PHP_FUNCTION(sleep);
 PHP_FUNCTION(usleep);
 #if HAVE_NANOSLEEP
 PHP_FUNCTION(time_nanosleep);
+PHP_FUNCTION(time_sleep_until);
 #endif
 PHP_FUNCTION(flush);
 #ifdef HAVE_INET_NTOP

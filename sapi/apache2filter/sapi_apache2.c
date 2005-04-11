@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.125.2.2 2005/04/08 20:34:03 sniper Exp $ */
+/* $Id: sapi_apache2.c,v 1.125.2.3 2005/04/11 15:39:21 sniper Exp $ */
 
 #include <fcntl.h>
 
@@ -628,7 +628,7 @@ static void php_add_filter(request_rec *r, ap_filter_t *f)
 	/* for those who still have Set*Filter PHP configured */
 	while (f) {
 		if (strcmp(f->frec->name, "PHP") == 0) {
-			ap_log_error(APLOG_MARK, APLOG_WARNING
+			ap_log_error(APLOG_MARK, APLOG_WARNING,
 				     0, r->server,
 				     "\"Set%sFilter PHP\" already configured for %s",
 				     output ? "Output" : "Input", r->uri);

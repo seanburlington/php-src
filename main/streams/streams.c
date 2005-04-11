@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.75 2005/04/09 19:36:49 pollita Exp $ */
+/* $Id: streams.c,v 1.76 2005/04/11 15:19:27 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -846,10 +846,6 @@ PHPAPI char *php_stream_get_record(php_stream *stream, size_t maxlen, size_t *re
 	int skip = 0;
 
 	php_stream_fill_read_buffer(stream, maxlen TSRMLS_CC);
-
-	if ((stream->writepos - stream->readpos)<=0) {
-		return NULL;
-	}
 
 	if (delim_len == 0 || !delim) {
 		toread = maxlen;

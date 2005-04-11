@@ -1,3 +1,45 @@
+2005-04-10  Andrey Hristov  <php@hristov.com>
+
+    * NEWS:
+      news
+
+    * ext/dom/document.c
+      ext/gd/gd.c:
+      fix memory corruption on 64bit in imagefttext(),
+      domdocument::load() and domdocument::loadxml()
+
+    * ext/ncurses/ncurses_functions.c:
+      fix proto. return true instead of null
+
+    * ext/calendar/calendar.c:
+      simplify code (no need of local variable - return directly)
+
+2005-04-10  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * sapi/apache2handler/config.m4:
+      - Say in the help too this is the handler module..
+
+    * sapi/apache2filter/config.m4:
+      Might not be obvious for everyone :)
+
+    * ext/odbc/config.m4:
+      - This was supposed to be escaped with \
+
+    * ext/odbc/config.m4:
+      Add more detailed failure msg. (bug #32649)
+
+    * ext/bz2/bz2.dsp
+      ext/gd/gd.dsp:
+      - Make VC6 happy
+
+2005-04-10  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * NEWS
+      ext/standard/basic_functions.c
+      ext/standard/basic_functions.h:
+      Added time_sleep_until() function, which is a high precision mechanism of
+      making a script sleep until specified timestamp.
+
 2005-04-09  Sara Golemon  <php@alphaweb.net>
 
     * main/streams/streams.c:
@@ -36,7 +78,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1949 2005/04/10 00:39:16 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1950 2005/04/11 00:35:20 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -3437,7 +3479,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1949 2005/04/10 00:39:16 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1950 2005/04/11 00:35:20 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -3918,7 +3960,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1949 2005/04/10 00:39:16 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1950 2005/04/11 00:35:20 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -5392,7 +5434,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1949 2005/04/10 00:39:16 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1950 2005/04/11 00:35:20 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

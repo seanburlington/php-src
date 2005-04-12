@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.92 2005/04/12 01:00:48 iliaa Exp $ */
+/* $Id: php_encoding.c,v 1.93 2005/04/12 16:41:41 iliaa Exp $ */
 
 #include <time.h>
 
@@ -1482,8 +1482,8 @@ static xmlNodePtr to_xml_object(encodeTypePtr type, zval *data, int style, xmlNo
 								/* we need to handle xml: namespace specially, since it is
 								   an implicit schema. Otherwise, use form.
 								*/
-								if (!strncmp((*attr)->namens, XML_NAMESPACE, sizeof(XML_NAMESPACE)) || 
-								    ((*attr)->form == XSD_FORM_QUALIFIED) && (*attr)->namens) {
+								if ((!strncmp((*attr)->namens, XML_NAMESPACE, sizeof(XML_NAMESPACE)) || 
+								    ((*attr)->form == XSD_FORM_QUALIFIED)) && (*attr)->namens) {
 									xmlNsPtr nsp = encode_add_ns(xmlParam, (*attr)->namens);
 
 									xmlSetNsProp(xmlParam, nsp, (*attr)->name, dummy->children->content);

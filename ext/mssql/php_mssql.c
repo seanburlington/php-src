@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.86.2.43 2005/02/25 23:23:54 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.86.2.44 2005/04/12 17:46:45 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -317,7 +317,11 @@ PHP_MINIT_FUNCTION(mssql)
 PHP_MSHUTDOWN_FUNCTION(mssql)
 {
 	UNREGISTER_INI_ENTRIES();
+#ifndef HAVE_FREETDS
+	dbwinexit();
+#else
 	dbexit();
+#endif
 	return SUCCESS;
 }
 

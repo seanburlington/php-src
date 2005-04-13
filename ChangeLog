@@ -1,3 +1,37 @@
+2005-04-12  Frank M. Kromann  <frank@kromann.info>
+
+    * (PHP_4_3)
+      ext/mssql/php_mssql.c
+      ext/mssql/php_mssql.c:
+      MFH: Fix for #32682. Error on module shutdown when called from activescript
+
+    * ext/mssql/php_mssql.c:
+      Fix for #32682. Error on module shutdown when called from activescript
+
+2005-04-12  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/readline/readline.c:
+      Fixed compiler warning.
+
+2005-04-12  Antony Dovgal  <tony2001@phpclub.net>
+
+    * (PHP_5_0)
+      NEWS
+      ext/standard/array.c:
+      MFH: fix #30833 (array_count_values modifying input array)
+
+    * ext/standard/array.c:
+      fix #30833 (array_count_values modifying input array)
+
+2005-04-12  Stanislav Malyshev  <stas@zend.com>
+
+    * ZendEngine2/zend_ini.c:
+      fix memory corruption if one on the on_modify handlers errors out
+
+    * (PHP_5_0)
+      ZendEngine2/zend_ini.c:
+      fi memory corruption if one on the on_modify handlers errors out
+
 2005-04-11  Frank M. Kromann  <frank@kromann.info>
 
     * ext/fbsql/php_fbsql.c:
@@ -120,7 +154,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1951 2005/04/12 00:35:50 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1952 2005/04/13 00:34:26 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -3521,7 +3555,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1951 2005/04/12 00:35:50 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1952 2005/04/13 00:34:26 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -4002,7 +4036,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1951 2005/04/12 00:35:50 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1952 2005/04/13 00:34:26 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -5476,7 +5510,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1951 2005/04/12 00:35:50 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1952 2005/04/13 00:34:26 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

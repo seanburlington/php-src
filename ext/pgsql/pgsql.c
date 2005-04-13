@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.311.2.1 2005/04/13 21:46:31 derick Exp $ */
+/* $Id: pgsql.c,v 1.311.2.2 2005/04/13 22:11:55 tony2001 Exp $ */
 
 #include <stdlib.h>
 
@@ -168,7 +168,9 @@ function_entry pgsql_functions[] = {
 	/* aliases for downwards compatibility */
 	PHP_FALIAS(pg_exec,          pg_query,          NULL)
 	PHP_FALIAS(pg_getlastoid,    pg_last_oid,       NULL)
+#if HAVE_PQCMDTUPLES
 	PHP_FALIAS(pg_cmdtuples,	 pg_affected_rows,  NULL)
+#endif
 	PHP_FALIAS(pg_errormessage,	 pg_last_error,     NULL)
 	PHP_FALIAS(pg_numrows,		 pg_num_rows,       NULL)
 	PHP_FALIAS(pg_numfields,	 pg_num_fields,     NULL)

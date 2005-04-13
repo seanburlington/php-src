@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.244.2.36 2004/05/12 16:49:56 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.244.2.37 2005/04/13 21:27:34 derick Exp $ */
 
 #include <stdlib.h>
 
@@ -100,7 +100,9 @@ function_entry pgsql_functions[] = {
 	PHP_FE(pg_fetch_array,	NULL)
 	PHP_FE(pg_fetch_object,	NULL)
 	PHP_FE(pg_fetch_all,	NULL)
+#if HAVE_PQCMDTUPLES
 	PHP_FE(pg_affected_rows,NULL)
+#endif
 	PHP_FE(pg_get_result,	NULL)
 	PHP_FE(pg_result_seek,	NULL)
 	PHP_FE(pg_result_status,NULL)
@@ -1077,6 +1079,7 @@ PHP_FUNCTION(pg_num_fields)
 }
 /* }}} */
 
+#if HAVE_PQCMDTUPLES
 /* {{{ proto int pg_affected_rows(resource result)
    Returns the number of affected tuples */
 PHP_FUNCTION(pg_affected_rows)
@@ -1084,6 +1087,7 @@ PHP_FUNCTION(pg_affected_rows)
 	php_pgsql_get_result_info(INTERNAL_FUNCTION_PARAM_PASSTHRU,PHP_PG_CMD_TUPLES);
 }
 /* }}} */
+#endif
 
 /* {{{ proto string pg_last_notice(resource connection)
    Returns the last notice set by the backend */

@@ -18,7 +18,7 @@
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: calendar.c,v 1.44 2005/04/10 20:57:31 andrey Exp $ */
+/* $Id: calendar.c,v 1.45 2005/04/13 23:05:23 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -379,7 +379,6 @@ PHP_FUNCTION(jdtojulian)
 PHP_FUNCTION(juliantojd)
 {
 	long year, month, day;
-	int jdate;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lll", &month, &day, &year) == FAILURE) {
 		RETURN_FALSE;
@@ -561,7 +560,6 @@ PHP_FUNCTION(jdtofrench)
 PHP_FUNCTION(frenchtojd)
 {
 	long year, month, day;
-	int jdate;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lll", &month, &day, &year) == FAILURE) {
 		RETURN_FALSE;

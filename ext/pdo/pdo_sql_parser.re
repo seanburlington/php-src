@@ -16,10 +16,11 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.21 2005/02/26 16:03:22 wez Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.22 2005/04/14 14:00:39 iliaa Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
+#include "php_pdo_int.h"
 
 #define PDO_PARSER_TEXT 1
 #define PDO_PARSER_BIND 2

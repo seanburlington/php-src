@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.10 2005/04/05 09:23:50 helly Exp $ */
+/* $Id: spl_directory.h,v 1.11 2005/04/14 21:02:08 helly Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -26,7 +26,7 @@
 
 extern PHPAPI zend_class_entry *spl_ce_DirectoryIterator;
 extern PHPAPI zend_class_entry *spl_ce_RecursiveDirectoryIterator;
-extern PHPAPI zend_class_entry *spl_ce_File;
+extern PHPAPI zend_class_entry *spl_ce_FileObject;
 
 PHP_MINIT_FUNCTION(spl_directory);
 

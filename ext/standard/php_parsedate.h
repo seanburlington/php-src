@@ -16,13 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_parsedate.h,v 1.10 2005/01/10 15:20:53 sniper Exp $ */
+/* $Id: php_parsedate.h,v 1.11 2005/04/14 13:34:05 iliaa Exp $ */
 
 #ifndef PHP_PARSEDATE_H
 #define PHP_PARSEDATE_H
 
 #include <time.h>
 
-time_t php_parse_date(char *p, time_t *now);
+PHPAPI time_t php_parse_date(char *p, time_t *now);
 
 #endif

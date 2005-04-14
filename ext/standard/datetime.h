@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: datetime.h,v 1.17 2004/09/29 04:57:19 sterling Exp $ */
+/* $Id: datetime.h,v 1.18 2005/04/14 13:34:05 iliaa Exp $ */
 
 #ifndef DATETIME_H
 #define DATETIME_H
@@ -40,11 +40,11 @@ PHP_FUNCTION(gmstrftime);
 #endif
 PHP_FUNCTION(strtotime);
 
-int php_idate(char format, int timestamp, int gm);
-extern char *php_std_date(time_t t TSRMLS_DC);
-void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gm);
+PHPAPI int php_idate(char format, int timestamp, int gm);
+PHPAPI char *php_std_date(time_t t TSRMLS_DC);
+PHPAPI void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gm);
 #if HAVE_STRFTIME
-void _php_strftime(INTERNAL_FUNCTION_PARAMETERS, int gm);
+PHPAPI void _php_strftime(INTERNAL_FUNCTION_PARAMETERS, int gm);
 #endif
 
 #endif /* DATETIME_H */

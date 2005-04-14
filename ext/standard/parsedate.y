@@ -8,7 +8,7 @@
 **  This code is in the public domain and has no copyright.
 */
 
-/* $Id: parsedate.y,v 1.57 2004/11/15 16:31:12 derick Exp $ */
+/* $Id: parsedate.y,v 1.58 2005/04/14 13:34:05 iliaa Exp $ */
 
 #include "php.h"
 
@@ -1040,7 +1040,7 @@ difftm (struct tm *a, struct tm *b)
 	  + (a->tm_sec - b->tm_sec));
 }
 
-time_t php_parse_date(char *p, time_t *now)
+PHPAPI time_t php_parse_date(char *p, time_t *now)
 {
   struct tm tm, tm0, *tmp;
   time_t Start;

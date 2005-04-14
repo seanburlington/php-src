@@ -1,3 +1,65 @@
+2005-04-13  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/calendar/calendar.c:
+      Removed unused vars.
+
+2005-04-13  Antony Dovgal  <tony2001@phpclub.net>
+
+    * (PHP_4_3)
+      ext/pgsql/pgsql.c
+      ext/pgsql/pgsql.c:
+      MFH: disable pg_cmdtuples() too, if there is no pg_affected_rows()
+
+    * ext/pgsql/pgsql.c:
+      disable pg_cmdtuples() too, if there is no pg_affected_rows()
+
+2005-04-13  Derick Rethans  <php@derickrethans.nl>
+
+    * ext/pgsql/pgsql.c
+      ext/pgsql/php_pgsql.h:
+      - MFH43: Fixed bug #32699 (pg_affected_rows() was defined when it was not
+        available).
+
+    * (PHP_5_0)
+      NEWS
+      ext/pgsql/pgsql.c
+      ext/pgsql/php_pgsql.h:
+      - MF43: Fixed bug #32699 (pg_affected_rows() was defined when it was not
+        available).
+
+    * (PHP_4_3)
+      NEWS
+      ext/pgsql/pgsql.c
+      ext/pgsql/php_pgsql.h:
+      - Fixed bug #32699 (pg_affected_rows() was defined when it was not
+      available).
+
+2005-04-13  Stanislav Malyshev  <stas@zend.com>
+
+    * (PHP_4_3)
+      Zend/zend_ini.c:
+      MF5: fix memory corruption if one on the on_modify handlers errors out
+
+2005-04-13  Moriyoshi Koizumi  <moriyoshi@at.wakwak.com>
+
+    * (PHP_5_0)
+      NEWS:
+      - Commit the pending patch (bug #32311).
+
+2005-04-13  Antony Dovgal  <tony2001@phpclub.net>
+
+    * ext/standard/tests/array/bug30833.phpt
+      ext/standard/tests/array/bug30833.phpt
+      ext/standard/tests/array/bug30833.phpt:
+        1.1.4;
+      add testcase for bug #30833
+
+2005-04-13  Moriyoshi Koizumi  <moriyoshi@at.wakwak.com>
+
+    * (PHP_4_3)
+      NEWS:
+      - MFH: commit the pending patch (bug #32311).
+
 2005-04-12  Frank M. Kromann  <frank@kromann.info>
 
     * (PHP_4_3)
@@ -154,7 +216,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1952 2005/04/13 00:34:26 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1953 2005/04/14 00:42:29 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -3555,7 +3617,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1952 2005/04/13 00:34:26 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1953 2005/04/14 00:42:29 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -4036,7 +4098,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1952 2005/04/13 00:34:26 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1953 2005/04/14 00:42:29 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -5510,7 +5572,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1952 2005/04/13 00:34:26 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1953 2005/04/14 00:42:29 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

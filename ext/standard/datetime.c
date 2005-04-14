@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.96.2.18 2005/02/04 13:09:24 sniper Exp $ */
+/* $Id: datetime.c,v 1.96.2.19 2005/04/14 13:30:27 iliaa Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -781,7 +781,7 @@ char *php_std_date(time_t t TSRMLS_DC)
 				tm1->tm_hour, tm1->tm_min, tm1->tm_sec);
 	} else {
 		snprintf(str, 80, "%s, %02d-%s-%02d %02d:%02d:%02d GMT",
-				day_short_names[tm1->tm_wday],
+				day_full_names[tm1->tm_wday],
 				tm1->tm_mday,
 				mon_short_names[tm1->tm_mon],
 				((tm1->tm_year) % 100),

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.c,v 1.49.2.3 2005/03/22 10:18:47 dmitry Exp $ */
+/* $Id: php_schema.c,v 1.49.2.4 2005/04/15 06:53:05 gschlossnagle Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -1397,7 +1397,6 @@ static int schema_complexType(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr compType, s
 {
 	xmlNodePtr trav;
 	xmlAttrPtr attrs, name, ns;
-	TSRMLS_FETCH();
 
 	attrs = compType->properties;
 	ns = get_attribute(attrs, "targetNamespace");
@@ -1891,7 +1890,25 @@ static int schema_attribute(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr attrType, sdl
 		}
 		attr = attr->next;
 	}
-
+	if(newAttr->form == XSD_FORM_DEFAULT) {
+  		xmlNodePtr parent = attrType->parent;
+  		while(parent) {
+			if(node_is_equal_ex(parent, "schema", SCHEMA_NAMESPACE)) {
+				xmlAttrPtr def;
+				def = get_attribute(parent->properties, "attributeFormDefault");
+				if(def == NULL || strncmp(def->children->content, "qualified", sizeof("qualified"))) {
+					newAttr->form = XSD_FORM_UNQUALIFIED;
+				} else {
+					newAttr->form = XSD_FORM_QUALIFIED;
+				}
+				break;
+			}
+			parent = parent->parent;
+  		}
+		if(parent == NULL) {
+			newAttr->form = XSD_FORM_UNQUALIFIED;
+		}	
+	}
 	trav = attrType->children;
 	if (trav != NULL && node_is_equal(trav, "annotation")) {
 		/* TODO: <annotation> support */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: md5.c,v 1.28.4.3 2005/04/15 09:24:45 thetaphi Exp $ */
+/* $Id: md5.c,v 1.28.4.4 2005/04/15 09:44:45 thetaphi Exp $ */
 
 /* 
  * md5.c - Copyright 1997 Lachlan Roche 
@@ -108,8 +108,6 @@ PHP_NAMED_FUNCTION(php_if_md5_file)
 	}
 
 	close(fd);
-
-	fclose(fp);
 
 	make_digest(md5str, digest);
 

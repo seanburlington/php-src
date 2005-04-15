@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.100 2005/04/11 14:59:42 harrie Exp $ */
+/* $Id: snmp.c,v 1.101 2005/04/15 22:06:03 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -351,9 +351,9 @@ static void php_snmp_internal(INTERNAL_FUNCTION_PARAMETERS, int st,
 	struct snmp_pdu *pdu=NULL, *response;
 	struct variable_list *vars;
 	oid name[MAX_NAME_LEN];
-	int name_length;
+	size_t name_length;
 	oid root[MAX_NAME_LEN];
-	int rootlen = 0;
+	size_t rootlen = 0;
 	int gotroot = 0;
 	int status, count;
 	char buf[2048];

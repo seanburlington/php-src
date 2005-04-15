@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.26 2005/03/11 02:11:44 helly Exp $ */
+/* $Id: type.c,v 1.27 2005/04/15 22:46:37 sniper Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -177,7 +177,7 @@ PHP_FUNCTION(floatval)
    Get the string value of a variable */
 PHP_FUNCTION(strval)
 {
-	pval **num, *tmp;
+	zval **num, *tmp;
 	zval expr_copy;
 	int use_copy;
 
@@ -190,7 +190,7 @@ PHP_FUNCTION(strval)
 		tmp = &expr_copy;
 		RETVAL_ZVAL(tmp, 0, 0);
 	} else {
-		RETVAL_ZVAL(*num, 0, 0);
+		RETVAL_ZVAL(*num, 1, 0);
 	}
 }
 /* }}} */

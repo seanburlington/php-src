@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sha1.c,v 1.3.4.2 2005/04/15 09:15:03 thetaphi Exp $ */
+/* $Id: sha1.c,v 1.3.4.3 2005/04/15 09:24:45 thetaphi Exp $ */
 
 #include "php.h"
 #include <sys/types.h>
@@ -88,7 +88,7 @@ PHP_FUNCTION(sha1_file)
 		RETURN_FALSE;
 	}
 
-	if ((fd = VCWD_OPEN(arg, O_RDONLY)) == -1) {
+	if ((fd = VCWD_OPEN(Z_STRVAL_PP(arg), O_RDONLY)) == -1) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to open file");
 		RETURN_FALSE;
 	}

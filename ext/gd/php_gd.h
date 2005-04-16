@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.57 2004/01/08 17:32:08 sniper Exp $ */
+/* $Id: php_gd.h,v 1.58 2005/04/16 12:12:24 pajoye Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -175,6 +175,7 @@ PHP_FUNCTION(image2wbmp);
 PHP_FUNCTION(imagelayereffect);
 PHP_FUNCTION(imagecolormatch);
 PHP_FUNCTION(imagefilter);
+PHP_FUNCTION(imageconvolution);
 PHP_FUNCTION(imagexbm);
 #endif
 

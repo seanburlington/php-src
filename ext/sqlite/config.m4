@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.32 2005/03/11 23:57:01 wez Exp $
+dnl $Id: config.m4,v 1.33 2005/04/16 00:04:27 rasmus Exp $
 dnl config.m4 for extension sqlite
 dnl vim:et:ts=2:sw=2
 
@@ -12,6 +12,7 @@ PHP_ARG_WITH(sqlite, for sqlite support,
                           if not using bundled library.], yes)
 
 if test "$PHP_SQLITE" != "no"; then
+ if test "$PHP_PDO" != "no"; then
   AC_MSG_CHECKING([for PDO includes])
   if test -f $abs_srcdir/include/php/ext/pdo/php_pdo_driver.h; then
     pdo_inc_path=$abs_srcdir/ext
@@ -27,8 +28,8 @@ if test "$PHP_SQLITE" != "no"; then
     AC_DEFINE([PHP_SQLITE2_HAVE_PDO], [1], [Have PDO])
     pdo_inc_path="-I$pdo_inc_path"
   fi
-  
   AC_MSG_RESULT($pdo_inc_path)
+ fi  
 
   if test "$PHP_SQLITE" != "yes"; then
     SEARCH_PATH="/usr/local /usr"

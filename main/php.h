@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.178.2.13 2005/03/08 21:45:51 sniper Exp $ */
+/* $Id: php.h,v 1.178.2.14 2005/04/17 13:37:29 sniper Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -256,7 +256,6 @@ char *strerror(int);
 
 
 /* global variables */
-extern pval *data;
 #if !defined(PHP_WIN32)
 #ifdef NETWARE
 #ifdef NEW_LIBC

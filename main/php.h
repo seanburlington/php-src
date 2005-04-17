@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.203.2.9 2005/03/14 09:41:39 hyanantha Exp $ */
+/* $Id: php.h,v 1.203.2.10 2005/04/17 13:37:45 sniper Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -247,7 +247,6 @@ END_EXTERN_C()
 
 
 /* global variables */
-extern pval *data;
 #if !defined(PHP_WIN32)
 #ifdef NETWARE
 #ifdef NEW_LIBC

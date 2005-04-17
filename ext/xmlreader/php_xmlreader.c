@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.9 2005/03/10 22:32:47 rrichards Exp $ */
+/* $Id: php_xmlreader.c,v 1.10 2005/04/17 18:05:03 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -228,6 +228,14 @@ char *_xmlreader_get_valid_file_path(char *source, char *resolved_path, int reso
 	}
 
 	xmlFreeURI(uri);
+
+	if (PG(safe_mode) && (!php_checkuid(file_dest, NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
+		return NULL;
+	}
+
+	if (php_check_open_basedir(file_dest TSRMLS_CC)) {
+		return NULL;
+	}
 
 	return file_dest;
 }

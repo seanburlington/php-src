@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.217 2005/03/26 01:29:43 sniper Exp $ */
+/* $Id: php.h,v 1.218 2005/04/17 13:37:20 sniper Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -253,7 +253,6 @@ END_EXTERN_C()
 
 
 /* global variables */
-extern pval *data;
 #if !defined(PHP_WIN32)
 #define PHP_SLEEP_NON_VOID
 #define php_sleep sleep

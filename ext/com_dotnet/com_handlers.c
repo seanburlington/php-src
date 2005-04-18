@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.22.2.3 2004/11/25 20:28:37 zeev Exp $ */
+/* $Id: com_handlers.c,v 1.22.2.4 2005/04/18 16:22:38 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -524,14 +524,15 @@ static int com_object_cast(zval *readobj, zval *writeobj, int type, int should_f
 	php_com_dotnet_object *obj;
 	VARIANT v;
 	VARTYPE vt = VT_EMPTY;
+	zval free_obj;
+	HRESULT res = S_OK;
 
 	if (should_free) {
-		zval_dtor(writeobj);
+		free_obj = *writeobj;
 	}
 
-	ZVAL_NULL(writeobj);
-
 	obj = CDNO_FETCH(readobj);
+	ZVAL_NULL(writeobj);
 	VariantInit(&v);
 
 	if (V_VT(&obj->v) == VT_DISPATCH) {
@@ -564,12 +565,23 @@ static int com_object_cast(zval *readobj, zval *writeobj, int type, int should_f
 	}
 
 	if (vt != VT_EMPTY) {
-		VariantChangeType(&v, &v, 0, vt);
+		res = VariantChangeType(&v, &v, 0, vt);
 	}
 
-	php_com_zval_from_variant(writeobj, &v, obj->code_page TSRMLS_CC);
+	if (SUCCEEDED(res)) {
+		php_com_zval_from_variant(writeobj, &v, obj->code_page TSRMLS_CC);
+	}
+
 	VariantClear(&v);
-	return SUCCESS;
+	if (should_free) {
+		zval_dtor(&free_obj);
+	}
+
+	if (SUCCEEDED(res)) {
+		return SUCCESS;
+	}
+
+	return FAILURE;
 }
 
 static int com_object_count(zval *object, long *count TSRMLS_DC)

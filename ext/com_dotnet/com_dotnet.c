@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_dotnet.c,v 1.12 2004/10/09 04:39:58 wez Exp $ */
+/* $Id: com_dotnet.c,v 1.13 2005/04/18 03:04:15 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -126,7 +126,6 @@ static HRESULT dotnet_init(char **p_where TSRMLS_DC)
 	HRESULT hr;
 	struct dotnet_runtime_stuff *stuff;
 	IUnknown *unk = NULL;
-	OLECHAR *olename, *oletmp;
 	char *where = "";
 
 	stuff = malloc(sizeof(*stuff));
@@ -188,7 +187,7 @@ PHP_FUNCTION(com_dotnet_create_instance)
 	char *assembly_name, *datatype_name;
 	int assembly_name_len, datatype_name_len;
 	struct dotnet_runtime_stuff *stuff;
-	OLECHAR *olestring, *oleassembly, *oletype;
+	OLECHAR *oleassembly, *oletype;
 	HRESULT hr;
 	int ret = FAILURE;
 	char *where = "";

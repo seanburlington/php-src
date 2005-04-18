@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.29.2.4 2005/04/08 15:59:38 rrichards Exp $ */
+/* $Id: node.c,v 1.29.2.5 2005/04/18 23:08:41 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1134,7 +1134,9 @@ PHP_FUNCTION(dom_node_replace_child)
 			xmlUnlinkNode(oldchild);
 
 			newchild = _php_dom_insert_fragment(nodep, prevsib, nextsib, newchild, intern, newchildobj TSRMLS_CC);
-			dom_reconcile_ns(nodep->doc, newchild);
+			if (newchild) {
+				dom_reconcile_ns(nodep->doc, newchild);
+			}
 		} else if (oldchild != newchild) {
 			if (newchild->doc == NULL && nodep->doc != NULL) {
 				xmlSetTreeDoc(newchild, nodep->doc);

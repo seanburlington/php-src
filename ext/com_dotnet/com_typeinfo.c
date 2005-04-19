@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_typeinfo.c,v 1.5 2004/10/09 13:08:16 wez Exp $ */
+/* $Id: com_typeinfo.c,v 1.6 2005/04/19 06:14:56 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -400,6 +400,7 @@ static const struct {
 	{ VT_VOID,		"VT_VOID" },
 	{ VT_PTR,		"VT_PTR" },
 	{ VT_HRESULT,	"VT_HRESULT" },
+	{ VT_SAFEARRAY, "VT_SAFEARRAY" },
 	{ 0, NULL }
 };
 

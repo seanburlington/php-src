@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.146.2.3 2004/09/26 01:41:40 wez Exp $ 
+   $Id: sqlite.c,v 1.146.2.4 2005/04/19 02:59:10 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1047,6 +1047,7 @@ PHP_MINIT_FUNCTION(sqlite)
 	REGISTER_LONG_CONSTANT("SQLITE_MISUSE",			SQLITE_MISUSE, CONST_CS|CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SQLITE_NOLFS",			SQLITE_NOLFS, CONST_CS|CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SQLITE_AUTH",			SQLITE_AUTH, CONST_CS|CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SQLITE_NOTADB",			SQLITE_NOTADB, CONST_CS|CONST_PERSISTENT);
 #ifdef SQLITE_FORMAT
 	REGISTER_LONG_CONSTANT("SQLITE_FORMAT",			SQLITE_FORMAT, CONST_CS|CONST_PERSISTENT);
 #endif
@@ -1071,7 +1072,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.146.2.3 2004/09/26 01:41:40 wez Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.146.2.4 2005/04/19 02:59:10 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

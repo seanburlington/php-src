@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_stmt.c,v 1.19 2005/02/13 07:00:29 wez Exp $ */
+/* $Id: odbc_stmt.c,v 1.20 2005/04/19 20:55:02 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -32,9 +32,9 @@
 
 static void free_cols(pdo_stmt_t *stmt, pdo_odbc_stmt *S TSRMLS_DC)
 {
-	int i;
-
 	if (S->cols) {
+		int i;
+
 		for (i = 0; i < stmt->column_count; i++) {
 			if (S->cols[i].data) {
 				efree(S->cols[i].data);
@@ -48,7 +48,6 @@ static void free_cols(pdo_stmt_t *stmt, pdo_odbc_stmt *S TSRMLS_DC)
 static int odbc_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
 {
 	pdo_odbc_stmt *S = (pdo_odbc_stmt*)stmt->driver_data;
-	int i;
 
 	if (S->stmt != SQL_NULL_HANDLE) {
 		if (stmt->executed) {

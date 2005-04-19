@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlite2.c,v 1.4 2005/03/15 15:58:04 wez Exp $ */
+/* $Id: pdo_sqlite2.c,v 1.5 2005/04/19 11:28:02 sniper Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -390,7 +390,7 @@ static int sqlite2_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquo
 		ret[len + 3] = '\0';
 		*quoted = ret;
 		*quotedlen = len + 3;
-		//fprintf(stderr, "Quoting:%d:%.*s:\n", *quotedlen, *quotedlen, *quoted);
+		/* fprintf(stderr, "Quoting:%d:%.*s:\n", *quotedlen, *quotedlen, *quoted); */
 		return 1;
 	} else if (unquotedlen) {
 		ret = sqlite_mprintf("'%q'", unquoted);

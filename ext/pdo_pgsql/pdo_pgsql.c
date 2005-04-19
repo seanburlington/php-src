@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_pgsql.c,v 1.2 2005/02/09 05:04:40 wez Exp $ */
+/* $Id: pdo_pgsql.c,v 1.3 2005/04/19 11:41:04 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -79,7 +79,7 @@ PHP_MSHUTDOWN_FUNCTION(pdo_pgsql)
  */
 PHP_RINIT_FUNCTION(pdo_pgsql)
 {
-	//	php_pdo_register_driver(&pdo_pgsql_driver);
+	/*	php_pdo_register_driver(&pdo_pgsql_driver); */
 	return SUCCESS;
 }
 /* }}} */
@@ -88,7 +88,7 @@ PHP_RINIT_FUNCTION(pdo_pgsql)
  */
 PHP_RSHUTDOWN_FUNCTION(pdo_pgsql)
 {
-	//	php_pdo_unregister_driver(&pdo_pgsql_driver);
+	/*	php_pdo_unregister_driver(&pdo_pgsql_driver); */
 	return SUCCESS;
 }
 /* }}} */

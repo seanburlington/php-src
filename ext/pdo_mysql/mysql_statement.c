@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.22 2005/02/27 20:34:36 hholzgra Exp $ */
+/* $Id: mysql_statement.c,v 1.23 2005/04/19 11:41:04 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -67,8 +67,8 @@ static int pdo_mysql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 
 	row_count = mysql_affected_rows(H->server);
 	if (row_count == (my_ulonglong)-1) {
-		// we either have a query that returned a result set or an error occured
-		// lets see if we have access to a result set
+		/* we either have a query that returned a result set or an error occured
+		   lets see if we have access to a result set */
 		S->result = mysql_use_result(H->server);
 		if (NULL == S->result) {
 			pdo_mysql_error_stmt(stmt);
@@ -82,7 +82,7 @@ static int pdo_mysql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 			S->fields = mysql_fetch_fields(S->result);
 		}
 	} else {
-		// this was a DML or DDL query (INSERT, UPDATE, DELETE, ...
+		/* this was a DML or DDL query (INSERT, UPDATE, DELETE, ... */
 		stmt->row_count = row_count;
 	}
 

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_statement.c,v 1.16 2005/02/07 01:21:56 wez Exp $ */
+/* $Id: firebird_statement.c,v 1.17 2005/04/19 11:41:04 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -351,7 +351,7 @@ static int firebird_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr,  /* {{
 					*ptr = var->sqldata;
 					*len = var->sqllen;
 					break;
-// --- cut here ---
+/* --- cut here --- */
 				case SQL_SHORT:
 				    *ptr = FETCH_BUF(S->fetch_buf[colno], char, 24, NULL);
 					*len = sprintf(*ptr, "%d", *(short*)var->sqldata);
@@ -372,7 +372,7 @@ static int firebird_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr,  /* {{
 					*ptr = FETCH_BUF(S->fetch_buf[colno], char, 24, NULL);
 					*len = sprintf(*ptr, "%f" , *(double*)var->sqldata);
 					break;
-// --- cut here ---
+/* --- cut here --- */
 #if abies_0
 				case SQL_SHORT:
 					*ptr = FETCH_BUF(S->fetch_buf[colno], long, 0, *len);

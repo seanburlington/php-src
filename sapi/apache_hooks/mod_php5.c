@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>					  |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.8 2005/04/04 15:06:36 hirokawa Exp $ */
+/* $Id: mod_php5.c,v 1.9 2005/04/19 11:41:04 sniper Exp $ */
 
 #include "php_apache_http.h"
 
@@ -95,7 +95,7 @@ static CONST_PREFIX char *php_apache_admin_flag_handler(cmd_parms *cmd, php_per_
 module MODULE_VAR_EXPORT php5_module;
 
 int saved_umask;
-//static int setup_env = 0;
+/* static int setup_env = 0; */
 static unsigned char apache_php_initialized;
 
 typedef struct _php_per_dir_entry {

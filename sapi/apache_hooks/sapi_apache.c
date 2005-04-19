@@ -19,7 +19,7 @@
    | Stig Bakken <ssb@php.net>                                            |
    +----------------------------------------------------------------------+
  */
-/* $Id: sapi_apache.c,v 1.7 2004/01/08 08:18:06 andi Exp $ */
+/* $Id: sapi_apache.c,v 1.8 2005/04/19 11:41:04 sniper Exp $ */
 
 #include "php_apache_http.h"
 
@@ -33,8 +33,7 @@ int apache_php_module_main(request_rec *r, int display_source_mode TSRMLS_DC)
 		return FAILURE;
 	}
 	/* sending a file handle to another dll is not working
-	// so let zend open it. 
-	*/
+	   so let zend open it. */
 	
 	if (display_source_mode) {
 		zend_syntax_highlighter_ini syntax_highlighter_ini;

@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.271.2.14 2005/01/25 13:02:45 sniper Exp $ -*- autoconf -*-
+dnl $Id: acinclude.m4,v 1.271.2.15 2005/04/20 20:50:12 bfrance Exp $ -*- autoconf -*-
 dnl
 dnl This file contains local autoconf functions.
 
@@ -146,7 +146,7 @@ dnl choose the right compiler/flags/etc. for the source-file
 	  *.c[)] ac_comp="$b_c_pre $3 $ac_inc $b_c_meta -c $ac_srcdir$ac_src -o $ac_bdir$ac_obj.$b_lo $6$b_c_post" ;;
 	  *.s[)] ac_comp="$b_c_pre $3 $ac_inc $b_c_meta -c $ac_srcdir$ac_src -o $ac_bdir$ac_obj.$b_lo $6$b_c_post" ;;
 	  *.S[)] ac_comp="$b_c_pre $3 $ac_inc $b_c_meta -c $ac_srcdir$ac_src -o $ac_bdir$ac_obj.$b_lo $6$b_c_post" ;;
-	  *.cpp[)] ac_comp="$b_cxx_pre $3 $ac_inc $b_cxx_meta -c $ac_srcdir$ac_src -o $ac_bdir$ac_obj.$b_lo $6$b_cxx_post" ;;
+	  *.cpp|*.cc[)] ac_comp="$b_cxx_pre $3 $ac_inc $b_cxx_meta -c $ac_srcdir$ac_src -o $ac_bdir$ac_obj.$b_lo $6$b_cxx_post" ;;
       esac
 
 dnl create a rule for the object/source combo

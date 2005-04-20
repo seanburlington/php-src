@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.87 2004/11/08 04:54:27 iliaa Exp $ */
+/* $Id: fdf.c,v 1.88 2005/04/20 22:51:45 iliaa Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -145,7 +145,7 @@ PHP_MINIT_FUNCTION(fdf)
 	le_fdf = zend_register_list_destructors_ex(phpi_FDFClose, NULL, "fdf", module_number);
 
  	/* add handler for Acrobat FDF form post requests */
-	sapi_register_post_entry(&php_fdf_post_entry);
+	sapi_register_post_entry(&php_fdf_post_entry TSRMLS_CC);
 
 
 	/* Constants used by fdf_set_opt() */ 
@@ -215,7 +215,7 @@ PHP_MINFO_FUNCTION(fdf)
 PHP_MSHUTDOWN_FUNCTION(fdf)
 {
 	/* remove handler for Acrobat FDF form post requests */
-	sapi_unregister_post_entry(&php_fdf_post_entry); 
+	sapi_unregister_post_entry(&php_fdf_post_entry TSRMLS_CC); 
 
 #ifdef PHP_WIN32
 	return SUCCESS;

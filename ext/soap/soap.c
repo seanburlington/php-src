@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.110.2.29 2005/03/23 08:08:34 dmitry Exp $ */
+/* $Id: soap.c,v 1.110.2.30 2005/04/20 08:43:53 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3412,7 +3412,7 @@ static xmlDocPtr serialize_response_call(sdlFunctionPtr function, char *function
 		}
 		if (fault && fault->details && zend_hash_num_elements(fault->details) == 1) {
 			xmlNodePtr node;
-		  zval *detail = NULL;
+			zval *detail = NULL;
 			sdlParamPtr sparam;
 			xmlNodePtr x;
 

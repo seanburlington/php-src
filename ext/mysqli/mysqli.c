@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.64 2005/04/18 06:03:29 georg Exp $ 
+  $Id: mysqli.c,v 1.65 2005/04/20 12:50:13 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -561,8 +561,11 @@ PHP_MINIT_FUNCTION(mysqli)
 	REGISTER_LONG_CONSTANT("MYSQLI_RPL_SLAVE", MYSQL_RPL_SLAVE, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("MYSQLI_RPL_ADMIN", MYSQL_RPL_ADMIN, CONST_CS | CONST_PERSISTENT);
 	
-	/* bind blob support */
+	/* bind support */
 	REGISTER_LONG_CONSTANT("MYSQLI_NO_DATA", MYSQL_NO_DATA, CONST_CS | CONST_PERSISTENT);
+#ifdef MYSQL_DATA_TRUNCATION
+	REGISTER_LONG_CONSTANT("MYSQLI_DATA_TRUNCATION", MYSQL_DATA_TRUNCATION, CONST_CS | CONST_PERSISTENT);
+#endif
 
 	/* reporting */
 	REGISTER_LONG_CONSTANT("MYSQLI_REPORT_INDEX", MYSQLI_REPORT_INDEX, CONST_CS | CONST_PERSISTENT);

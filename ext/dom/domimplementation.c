@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: domimplementation.c,v 1.13 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: domimplementation.c,v 1.14 2005/04/21 21:11:23 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -201,7 +201,7 @@ PHP_METHOD(domimplementation, createDocument)
 			xmlFreeDoc(docp);
 			xmlFree(localname);
 			/* Need some type of error here */
-			php_error(E_WARNING, "Unexpected Error");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unexpected Error");
 			RETURN_FALSE;
 		}
 

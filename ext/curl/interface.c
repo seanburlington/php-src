@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.55 2005/03/14 09:02:23 sniper Exp $ */
+/* $Id: interface.c,v 1.56 2005/04/21 21:11:21 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -868,7 +868,7 @@ PHP_FUNCTION(curl_copy_handle)
 
 	cp = curl_easy_duphandle(ch->cp);
 	if (!cp) {
-		php_error(E_WARNING, "Cannot duplicate cURL handle");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot duplicate cURL handle");
 		RETURN_FALSE;
 	}
 

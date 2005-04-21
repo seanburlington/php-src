@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.68 2005/02/09 11:46:43 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.69 2005/04/21 21:11:23 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -346,11 +346,11 @@ PHP_FUNCTION(dom_import_simplexml)
 	if (nodep && nodeobj && (nodep->type == XML_ELEMENT_NODE || nodep->type == XML_ATTRIBUTE_NODE)) {
 		DOM_RET_OBJ(rv, (xmlNodePtr) nodep, &ret, (dom_object *)nodeobj);
 	} else {
-		php_error(E_WARNING, "Invalid Nodetype to import");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid Nodetype to import");
 		RETURN_NULL();
 	}
 #else
-	php_error(E_WARNING, "SimpleXML support is not enabled");
+	php_error_docref(NULL TSRMLS_CC, E_WARNING, "SimpleXML support is not enabled");
 	return;
 #endif
 }

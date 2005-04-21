@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.34 2005/04/18 23:07:49 rrichards Exp $ */
+/* $Id: node.c,v 1.35 2005/04/21 21:11:23 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -317,7 +317,7 @@ int dom_node_parent_node_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(nodeparent, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -389,7 +389,7 @@ int dom_node_first_child_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(first, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -427,7 +427,7 @@ int dom_node_last_child_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(last, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -462,7 +462,7 @@ int dom_node_previous_sibling_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(prevsib, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -497,7 +497,7 @@ int dom_node_next_sibling_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(nextsib, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -573,7 +573,7 @@ int dom_node_owner_document_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object((xmlNodePtr) docp, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -1299,7 +1299,7 @@ PHP_FUNCTION(dom_node_append_child)
 	if (new_child == NULL) {
 		new_child = xmlAddChild(nodep, child);
 		if (new_child == NULL) {
-			php_error(E_WARNING, "Couldn't append node");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't append node");
 			RETURN_FALSE;
 		}
 	}

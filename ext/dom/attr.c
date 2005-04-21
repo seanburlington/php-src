@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: attr.c,v 1.16 2004/11/18 19:54:29 rrichards Exp $ */
+/* $Id: attr.c,v 1.17 2005/04/21 21:11:23 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -225,7 +225,7 @@ int dom_attr_owner_element_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(nodeparent, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING,  "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;

@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.514.2.48 2005/04/08 13:37:23 sniper Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.514.2.49 2005/04/21 15:13:15 sniper Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1142,6 +1142,7 @@ PHP_SUBST(datadir)
 PHP_SUBST(sysconfdir)
 
 PHP_SUBST(AWK)
+PHP_SUBST(EXEEXT)
 PHP_SUBST(CC)
 PHP_SUBST(CFLAGS)
 PHP_SUBST(CFLAGS_CLEAN)

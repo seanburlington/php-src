@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.95 2005/03/24 12:32:06 helly Exp $ */
+/* $Id: pdo_stmt.c,v 1.96 2005/04/22 02:40:48 wez Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1746,7 +1746,7 @@ static int dbstmt_compare(zval *object1, zval *object2 TSRMLS_DC)
 	return -1;
 }
 
-static zend_object_handlers pdo_dbstmt_object_handlers;
+zend_object_handlers pdo_dbstmt_object_handlers;
 
 void pdo_stmt_init(TSRMLS_D)
 {
@@ -2112,7 +2112,7 @@ static int row_compare(zval *object1, zval *object2 TSRMLS_DC)
 	return -1;
 }
 
-static zend_object_handlers pdo_row_object_handlers = {
+zend_object_handlers pdo_row_object_handlers = {
 	ZEND_OBJECTS_STORE_HANDLERS,
 	row_prop_or_dim_read,
 	row_prop_or_dim_write,

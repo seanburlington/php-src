@@ -20,7 +20,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snmp.c,v 1.70.2.19 2005/04/15 22:08:43 sniper Exp $ */
+/* $Id: snmp.c,v 1.70.2.20 2005/04/23 21:15:39 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -442,6 +442,8 @@ retry:
 					if (st == 1) {
 						*return_value = *snmpval;
 						zval_copy_ctor(return_value);
+						zval_dtor(snmpval);
+						efree(snmpval);
 						snmp_close(ss);
 						return;
 					} else if (st == 2) {

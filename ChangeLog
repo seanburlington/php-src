@@ -1,3 +1,35 @@
+2005-04-22  Joe Orton  <jorton@redhat.com>
+
+    * (PHP_4_3)
+      ext/xmlrpc/libxmlrpc/xml_element.c
+      ext/xmlrpc/libxmlrpc/xml_element.c:
+      MFH: Fixed bug #32797 (invalid C code in xmlrpc extension).
+
+    * ext/xmlrpc/libxmlrpc/xml_element.c:
+      Fixed bug #32797 (invalid C code in xmlrpc extension).
+
+2005-04-22  Antony Dovgal  <tony2001@phpclub.net>
+
+    * (PHP_4_3)
+      ext/mysql/.cvsignore:
+      add missing entries in .cvsignore
+
+    * ext/com_dotnet/com_extension.c
+      ext/com_dotnet/com_extension.c
+      sapi/apache_hooks/mod_php5.c
+      sapi/caudium/caudium.c
+      sapi/caudium/caudium.c
+      sapi/caudium/caudium.c
+      sapi/cgi/libfcgi/fcgiapp.c:
+      fix C++ comments
+
+2005-04-22  Andrey Hristov  <php@hristov.com>
+
+    * (PHP_4_3)
+      main/main.c:
+      MFH
+      introduce INT_MAX and INT_SIZE
+
 2005-04-21  Jani Taskinen  <jani.taskinen@sci.fi>
 
     * ext/odbc/config.m4:
@@ -714,7 +746,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1961 2005/04/22 00:45:06 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1962 2005/04/23 00:35:03 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -4115,7 +4147,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1961 2005/04/22 00:45:06 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1962 2005/04/23 00:35:03 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -4596,7 +4628,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1961 2005/04/22 00:45:06 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1962 2005/04/23 00:35:03 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -6070,7 +6102,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1961 2005/04/22 00:45:06 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1962 2005/04/23 00:35:03 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

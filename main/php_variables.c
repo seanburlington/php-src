@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.45.2.8 2004/10/18 15:08:46 tony2001 Exp $ */
+/* $Id: php_variables.c,v 1.45.2.9 2005/04/23 20:34:15 sniper Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -290,7 +290,7 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 			separator = (char *) estrdup(PG(arg_separator).input);
 			break;
 		case PARSE_COOKIE:
-			separator = ";\0";
+			separator = ";,\0"; /* Cookies can be separated with , or ; */
 			break;
 	}
 	

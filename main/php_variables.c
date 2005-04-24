@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.91 2005/04/24 17:52:21 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.92 2005/04/24 18:11:55 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -182,7 +182,7 @@ plain_var:
 			if (!index) {
 				zend_hash_next_index_insert(symtable1, &gpc_element, sizeof(zval *), (void **) &gpc_element_p);
 			} else {
-				zval *tmp;
+				zval **tmp;
 				char *escaped_index = php_addslashes(index, index_len, &index_len, 0 TSRMLS_CC);
 				/* 
 				 * According to rfc2965, more specific paths are listed above the less specific ones.

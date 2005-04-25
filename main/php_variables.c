@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.92 2005/04/24 18:11:55 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.93 2005/04/25 21:18:15 sniper Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -308,7 +308,7 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 			separator = (char *) estrdup(PG(arg_separator).input);
 			break;
 		case PARSE_COOKIE:
-			separator = ";,\0"; /* Cookies can be separated with , or ; */
+			separator = ";\0";
 			break;
 	}
 	

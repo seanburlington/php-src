@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.151 2005/04/19 22:04:59 helly Exp $ */
+/* $Id: php_reflection.c,v 1.152 2005/04/25 05:13:36 sebastian Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -2576,7 +2576,7 @@ ZEND_METHOD(reflection_class, hasMethod)
 /* }}} */
 
 /* {{{ proto public ReflectionMethod ReflectionClass::getMethod(string name) throws ReflectionException
-   Returns the class' method specified by it's name */
+   Returns the class' method specified by its name */
 ZEND_METHOD(reflection_class, getMethod)
 {
 	reflection_object *intern;
@@ -2672,7 +2672,7 @@ ZEND_METHOD(reflection_class, hasProperty)
 /* }}} */
 
 /* {{{ proto public ReflectionProperty ReflectionClass::getProperty(string name) throws ReflectionException
-   Returns the class' property specified by it's name */
+   Returns the class' property specified by its name */
 ZEND_METHOD(reflection_class, getProperty)
 {
 	reflection_object *intern;

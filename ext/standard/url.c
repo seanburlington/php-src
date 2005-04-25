@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.83 2005/01/27 16:37:32 iliaa Exp $ */
+/* $Id: url.c,v 1.84 2005/04/25 23:47:37 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -104,6 +104,12 @@ PHPAPI php_url *php_url_parse_ex(char const *str, int length)
 
 	/* parse scheme */
 	if ((e = memchr(s, ':', length)) && (e - s)) {
+		if (*(e + 1) == '\0') { /* only scheme is available */
+			ret->scheme = estrndup(s, (e - s));
+			php_replace_controlchars_ex(ret->scheme, (e - s));
+			goto end;
+		}
+
 		/* 
 		 * certain schemas like mailto: and zlib: may not have any / after them
 		 * this check ensures we support those.
@@ -303,7 +309,7 @@ PHPAPI php_url *php_url_parse_ex(char const *str, int length)
 		ret->path = estrndup(s, (ue-s));
 		php_replace_controlchars_ex(ret->path, (ue - s));
 	}
-
+end:
 	return ret;
 }
 /* }}} */

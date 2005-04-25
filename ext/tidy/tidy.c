@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.64 2005/03/21 03:54:29 john Exp $ */
+/* $Id: tidy.c,v 1.65 2005/04/25 20:46:16 john Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -245,6 +245,9 @@ function_entry tidy_functions[] = {
 	PHP_FE(tidy_warning_count,	NULL)
 	PHP_FE(tidy_access_count,	NULL)
 	PHP_FE(tidy_config_count,	NULL) 
+#if HAVE_TIDYOPTGETDOC
+	PHP_FE(tidy_get_opt_doc,	NULL)
+#endif
 	PHP_FE(tidy_get_root,		NULL)
 	PHP_FE(tidy_get_head,		NULL)
 	PHP_FE(tidy_get_html,		NULL)
@@ -265,6 +268,9 @@ function_entry tidy_funcs_doc[] = {
 	TIDY_METHOD_MAP(getConfig, tidy_get_config, NULL)
 	TIDY_METHOD_MAP(getStatus, tidy_get_status, NULL)
 	TIDY_METHOD_MAP(getHtmlVer, tidy_get_html_ver, NULL)
+#if HAVE_TIDYOPTGETDOC
+	TIDY_METHOD_MAP(getOptDoc, tidy_get_opt_doc, NULL)
+#endif
 	TIDY_METHOD_MAP(isXhtml, tidy_is_xhtml, NULL)
 	TIDY_METHOD_MAP(isXml, tidy_is_xml, NULL)
 	TIDY_METHOD_MAP(root, tidy_get_root, NULL)
@@ -956,7 +962,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.64 2005/03/21 03:54:29 john Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.65 2005/04/25 20:46:16 john Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1168,6 +1174,47 @@ PHP_FUNCTION(tidy_get_release)
 	RETURN_STRING((char *)tidyReleaseDate(), 1);
 }
 /* }}} */
+
+
+#if HAVE_TIDYOPTGETDOC
+/* {{{ proto string tidy_get_opt_doc(tidy resource, string optname)
+   Returns the documentation for the given option name */
+PHP_FUNCTION(tidy_get_opt_doc)
+{
+	PHPTidyObj *obj;
+	char *optname, *optval;
+	int optname_len;
+	TidyOption opt;
+	
+	TIDY_SET_CONTEXT;
+
+	if (object) {
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &optname, &optname_len) == FAILURE) {
+			RETURN_FALSE;
+		}
+	} else {
+		if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, NULL, "Os", &object, tidy_ce_doc, &optname, &optname_len) == FAILURE) {
+			RETURN_FALSE;
+		}
+	}
+
+	obj = (PHPTidyObj *) zend_object_store_get_object(object TSRMLS_CC);
+
+	opt = tidyGetOptionByName(obj->ptdoc->doc, optname);
+
+	if (!opt) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown Tidy Configuration Option '%s'", optname);
+		RETURN_FALSE;
+	}
+
+	if (optval = (char *) tidyOptGetDoc(obj->ptdoc->doc, opt))
+		RETURN_STRING(optval, 1);
+
+	RETURN_FALSE;
+}
+/* }}} */
+#endif
+
 
 /* {{{ proto array tidy_get_config()
    Get current Tidy configuarion */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_tidy.h,v 1.24 2005/02/08 05:25:48 rasmus Exp $ */
+/* $Id: php_tidy.h,v 1.25 2005/04/25 20:46:16 john Exp $ */
 
 #ifndef PHP_TIDY_H
 #define PHP_TIDY_H
@@ -57,6 +57,9 @@ PHP_FUNCTION(tidy_reset_config);
 PHP_FUNCTION(tidy_get_config);
 PHP_FUNCTION(tidy_get_status);
 PHP_FUNCTION(tidy_get_html_ver);
+#if HAVE_TIDYOPTGETDOC
+PHP_FUNCTION(tidy_get_opt_doc);
+#endif
 PHP_FUNCTION(tidy_is_xhtml);
 PHP_FUNCTION(tidy_is_xml);
 PHP_FUNCTION(tidy_error_count);

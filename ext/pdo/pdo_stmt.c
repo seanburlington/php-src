@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.96 2005/04/22 02:40:48 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.97 2005/04/27 03:12:18 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -745,7 +745,6 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 						break;
 					}
 				}
-				fprintf(stderr, "FAIL\n");
 				return 0;
 
 			case PDO_FETCH_OBJ:

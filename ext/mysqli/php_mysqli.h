@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.43 2005/01/16 19:28:55 zak Exp $ 
+  $Id: php_mysqli.h,v 1.44 2005/04/27 12:12:58 andrey Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -57,6 +57,7 @@ typedef struct {
 	MYSQL		*mysql;
 	zval		*li_read;
 	php_stream	*li_stream;
+	unsigned int multi_query;	
 } MY_MYSQL;
 
 typedef struct {
@@ -149,14 +150,14 @@ extern PHPAPI zend_class_entry *spl_ce_RuntimeException;
 
 PHP_MYSQLI_EXPORT(zend_object_value) mysqli_objects_new(zend_class_entry * TSRMLS_DC);
 
-#define MYSQLI_DISABLE_MQ if (MyG(multi_query)) { \
+#define MYSQLI_DISABLE_MQ if (mysql->multi_query) { \
 	mysql_set_server_option(mysql->mysql, MYSQL_OPTION_MULTI_STATEMENTS_OFF); \
-	MyG(multi_query) = 0; \
+	mysql->multi_query = 0; \
 } 
 
-#define MYSQLI_ENABLE_MQ if (!MyG(multi_query)) { \
+#define MYSQLI_ENABLE_MQ if (!mysql->multi_query) { \
 	mysql_set_server_option(mysql->mysql, MYSQL_OPTION_MULTI_STATEMENTS_ON); \
-	MyG(multi_query) = 1; \
+	mysql->multi_query = 1; \
 } 
 
 #define REGISTER_MYSQLI_CLASS_ENTRY(name, mysqli_entry, class_functions) { \

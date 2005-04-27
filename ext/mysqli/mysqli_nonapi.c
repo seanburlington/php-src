@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.40 2005/02/24 23:58:59 iliaa Exp $ 
+  $Id: mysqli_nonapi.c,v 1.41 2005/04/27 12:12:58 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -67,7 +67,7 @@ PHP_FUNCTION(mysqli_connect)
 		}
 	}
 
-	mysql = (MY_MYSQL *)calloc(1, sizeof(MY_MYSQL));
+	mysql = (MY_MYSQL *) ecalloc(1, sizeof(MY_MYSQL));
 
 	if (!(mysql->mysql = mysql_init(NULL))) {
 		efree(mysql);

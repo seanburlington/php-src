@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.257.2.6 2005/01/20 18:42:40 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.257.2.7 2005/04/28 14:12:23 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -786,7 +786,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.257.2.6 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.257.2.7 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -3694,6 +3694,10 @@ break;
 				RETURN_FALSE;
 			}
 			value_sz = sizeof(void*);
+			break;
+		default:
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown or unsupported datatype given: %u", ocitype);
+			RETURN_FALSE;
 			break;
 	}
 	

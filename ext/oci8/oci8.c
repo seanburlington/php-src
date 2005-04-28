@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.183.2.17 2005/01/20 18:44:10 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.183.2.18 2005/04/28 14:13:08 tony2001 Exp $ */
 
 /* TODO list:
  *
@@ -641,7 +641,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.17 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.183.2.18 $");
 #ifndef PHP_WIN32
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
 	php_info_print_table_row(2, "Compile-time ORACLE_HOME", PHP_OCI8_DIR );
@@ -2974,6 +2974,10 @@ break;
 				RETURN_FALSE;
 			}
 			value_sz = sizeof(void*);
+			break;
+		default:
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown or unsupported datatype given: %u", ocitype);
+			RETURN_FALSE;
 			break;
 	}
 	

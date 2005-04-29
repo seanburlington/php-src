@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.66 2005/04/20 13:03:01 georg Exp $ 
+  $Id: mysqli.c,v 1.67 2005/04/29 10:23:55 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -408,7 +408,6 @@ static void php_mysqli_init_globals(zend_mysqli_globals *mysqli_globals)
 	mysqli_globals->reconnect = 0;
 	mysqli_globals->report_mode = 0;
 	mysqli_globals->report_ht = 0;
-	mysqli_globals->multi_query = 0;
 #ifdef HAVE_EMBEDDED_MYSQLI
 	mysqli_globals->embedded = 1;
 #else

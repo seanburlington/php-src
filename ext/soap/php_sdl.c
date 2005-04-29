@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.82 2005/04/20 08:30:41 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.83 2005/04/29 05:38:54 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -1065,7 +1065,7 @@ static sdlPtr load_wsdl(zval *this_ptr, char *struri TSRMLS_DC)
 	return ctx.sdl;
 }
 
-#define WSDL_CACHE_VERSION 0x0d
+#define WSDL_CACHE_VERSION 0x0e
 
 #define WSDL_CACHE_GET(ret,type,buf)   memcpy(&ret,*buf,sizeof(type)); *buf += sizeof(type);
 #define WSDL_CACHE_GET_INT(ret,buf)    ret = ((unsigned char)(*buf)[0])|((unsigned char)(*buf)[1]<<8)|((unsigned char)(*buf)[2]<<16)|((int)(*buf)[3]<<24); *buf += 4;
@@ -1352,9 +1352,9 @@ static void sdl_deserialize_soap_body(sdlSoapBindingFunctionBodyPtr body, encode
 					tmp2->name = sdl_deserialize_string(in);
 					tmp2->ns = sdl_deserialize_string(in);
 					WSDL_CACHE_GET_INT(n, in);
-					tmp->encode = encoders[n];
+					tmp2->encode = encoders[n];
 					WSDL_CACHE_GET_INT(n, in);
-					tmp->element = types[n];
+					tmp2->element = types[n];
 					--j;
 				}
 			}

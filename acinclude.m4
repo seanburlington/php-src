@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.271.2.16 2005/04/26 08:20:30 sniper Exp $ -*- autoconf -*-
+dnl $Id: acinclude.m4,v 1.271.2.17 2005/04/30 09:29:44 sniper Exp $ -*- autoconf -*-
 dnl
 dnl This file contains local autoconf functions.
 
@@ -1683,6 +1683,10 @@ AC_DEFUN([PHP_SETUP_OPENSSL],[
   found_openssl=no
   unset OPENSSL_INCDIR
   unset OPENSSL_LIBDIR
+
+  dnl Empty variable means 'no'
+  test -z "$PHP_OPENSSL" && PHP_OPENSSL=no
+  test -z "$PHP_IMAP_SSL" && PHP_IMAP_SSL=no
 
   dnl Fallbacks for different configure options
   if test "$PHP_OPENSSL" != "no"; then

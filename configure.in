@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.550 2005/04/21 15:02:34 sniper Exp $ -*- autoconf -*-
+dnl ## $Id: configure.in,v 1.551 2005/04/30 01:52:22 sniper Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -31,9 +31,6 @@ AC_PREREQ(2.13)
 AC_INIT(README.CVS-RULES)
 
 PHP_CONFIG_NICE(config.nice)
-for arg in $0 "$@"; do
-  CONFIGURE_COMMAND="$CONFIGURE_COMMAND '$arg'"
-done
 
 PHP_CANONICAL_HOST_TARGET
 
@@ -1092,7 +1089,6 @@ PHP_SUBST(EXEEXT)
 PHP_SUBST(CC)
 PHP_SUBST(CFLAGS)
 PHP_SUBST(CFLAGS_CLEAN)
-PHP_SUBST_OLD(CONFIGURE_COMMAND)
 PHP_SUBST(CPP)
 PHP_SUBST(CPPFLAGS)
 PHP_SUBST(CXX)

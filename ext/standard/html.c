@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.106 2005/03/10 11:19:32 jorton Exp $ */
+/* $Id: html.c,v 1.107 2005/05/01 19:48:55 iliaa Exp $ */
 
 /*
  * HTML entity resources:
@@ -996,7 +996,11 @@ PHPAPI char *php_unescape_html_entities(unsigned char *old, int oldlen, int *new
 								if ((code >= 0x80 && code < 0xa0) || code > 0xff) {
 									invalid_code = 1;
 								} else {
-									*(q++) = code;
+									if (code == 39 || !quote_style) {
+										invalid_code = 1;
+									} else {
+										*(q++) = code;
+									}
 								}
 								break;
 

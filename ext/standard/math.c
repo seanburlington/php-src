@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.120 2005/05/02 09:17:49 andrey Exp $ */
+/* $Id: math.c,v 1.121 2005/05/02 11:01:13 andrey Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -1194,6 +1194,10 @@ PHP_FUNCTION(math_std_dev)
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "a",  &arr) == FAILURE) {
 		return;
+	}
+	if (zend_hash_num_elements(Z_ARRVAL_P(arr)) == 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The array has zero elements");
+		RETURN_FALSE;
 	}
 	zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(arr), &pos);
 	while (zend_hash_get_current_data_ex(Z_ARRVAL_P(arr), (void **)&entry, &pos) == SUCCESS) {

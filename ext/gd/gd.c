@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.54 2005/01/17 17:07:57 sniper Exp $ */
+/* $Id: gd.c,v 1.221.2.55 2005/05/02 09:39:26 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -3017,7 +3017,8 @@ static void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int mode, int 
 {
 	zval *IM, *EXT = NULL;
 	gdImagePtr im=NULL;
-	int col = -1, x = -1, y = -1, str_len, fontname_len, i, brect[8];
+	long col = -1, x = -1, y = -1;
+	int str_len, fontname_len, i, brect[8];
 	double ptsize, angle;
 	unsigned char *str = NULL, *fontname = NULL;
 	char *error = NULL;

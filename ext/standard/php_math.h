@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_math.h,v 1.23 2004/09/21 18:09:29 fmk Exp $ */
+/* $Id: php_math.h,v 1.24 2005/05/02 09:17:49 andrey Exp $ */
 
 #ifndef PHP_MATH_H
 #define PHP_MATH_H
@@ -59,6 +59,7 @@ PHP_FUNCTION(octdec);
 PHP_FUNCTION(base_convert);
 PHP_FUNCTION(number_format);
 PHP_FUNCTION(fmod);
+PHP_FUNCTION(math_std_dev);
 PHP_FUNCTION(deg2rad);
 PHP_FUNCTION(rad2deg);
 

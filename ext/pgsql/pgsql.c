@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.324 2005/04/13 22:11:35 tony2001 Exp $ */
+/* $Id: pgsql.c,v 1.325 2005/05/03 22:50:00 iliaa Exp $ */
 
 #include <stdlib.h>
 
@@ -356,8 +356,11 @@ static void _php_pgsql_notice_handler(void *resource_id, const char *message)
 static void _php_pgsql_notice_ptr_dtor(void **ptr) 
 {
 	php_pgsql_notice *notice = (php_pgsql_notice *)*ptr;
- 	efree(notice->message);
-  	efree(notice);
+	if (notice) {
+ 		efree(notice->message);
+  		efree(notice);
+  		notice = NULL;
+  	}
 }
 /* }}} */
 

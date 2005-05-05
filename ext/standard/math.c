@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.124 2005/05/02 12:32:21 andrey Exp $ */
+/* $Id: math.c,v 1.125 2005/05/05 23:42:03 sniper Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -1215,7 +1215,7 @@ static long double php_population_variance(zval *arr, zend_bool sample)
 }
 
 /* {{{ proto float math_variance(array a)
-   Returns the standard deviation */
+   Returns the population variance */
 PHP_FUNCTION(math_variance)
 {
 	zval *arr;

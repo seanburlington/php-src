@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.88.2.1 2005/03/21 08:46:50 hyanantha Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.88.2.2 2005/05/06 02:18:22 iliaa Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -517,6 +517,34 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 			} else {
 				strlcpy(new_path, location, sizeof(new_path));
 			}
+
+			php_url_free(resource);
+			/* check for invalid redirection URLs */
+			if ((resource = php_url_parse(new_path)) == NULL) {
+				php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Invalid redirect url! %s", new_path);
+				goto out;
+			}
+
+#define CHECK_FOR_CNTRL_CHARS(val) {	\
+	if (val) {	\
+		unsigned char *s, *e;	\
+		int l;	\
+		l = php_url_decode(val, strlen(val));	\
+		s = val; e = s + l;	\
+		while (s < e) {	\
+			if (iscntrl(*s)) {	\
+				php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Invalid redirect url! %s", new_path);	\
+				goto out;	\
+			}	\
+			s++;	\
+		}	\
+	}	\
+}	\
+			/* check for control characters in login, password & path */
+			CHECK_FOR_CNTRL_CHARS(resource->user)
+			CHECK_FOR_CNTRL_CHARS(resource->pass)
+			CHECK_FOR_CNTRL_CHARS(resource->path)
+
 			stream = php_stream_url_wrap_http_ex(NULL, new_path, mode, options, opened_path, context, --redirect_max, 0 STREAMS_CC TSRMLS_CC);
 			if (stream && stream->wrapperdata)	{
 				entryp = &entry;

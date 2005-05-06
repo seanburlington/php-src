@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.74.2.4 2005/03/21 08:42:34 hyanantha Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.74.2.5 2005/05/06 18:43:13 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -209,7 +209,20 @@ static php_stream *php_ftp_fopen_connect(php_stream_wrapper *wrapper, char *path
 	/* send the user name */
 	php_stream_write_string(stream, "USER ");
 	if (resource->user != NULL) {
-		php_raw_url_decode(resource->user, strlen(resource->user));
+		unsigned char *s, *e;
+		int user_len = php_raw_url_decode(resource->user, strlen(resource->user));
+		
+		s = resource->user;
+		e = s + user_len;
+		/* check for control characters that should not be present in the user name */
+		while (s < e) {
+			if (iscntrl(*s)) {
+				php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Invalid login %s", resource->user);
+				goto connect_errexit;
+			}
+			s++;
+		}
+		
 		php_stream_write_string(stream, resource->user);
 	} else {
 		php_stream_write_string(stream, "anonymous");

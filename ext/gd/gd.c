@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.221.2.55 2005/05/02 09:39:26 pajoye Exp $ */
+/* $Id: gd.c,v 1.221.2.56 2005/05/06 16:51:54 tony2001 Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */
@@ -1699,7 +1699,7 @@ static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char
 		char  buf[4096];
 		char *path;
 
-		tmp = php_open_temporary_file("", "", &path TSRMLS_CC);
+		tmp = php_open_temporary_file(NULL, NULL, &path TSRMLS_CC);
 		if (tmp == NULL) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to open temporary file");
 			RETURN_FALSE;

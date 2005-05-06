@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.88.2.2 2005/05/06 02:18:22 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.88.2.3 2005/05/06 02:19:36 iliaa Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -569,7 +569,9 @@ out:
 		efree(http_header_line);
 	if (scratch)
 		efree(scratch);
-	php_url_free(resource);
+	if (resource) {
+		php_url_free(resource);
+	}
 
 	if (stream) {
 		if (header_init) {

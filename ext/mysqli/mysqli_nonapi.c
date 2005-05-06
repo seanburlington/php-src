@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.34.2.6 2005/04/27 12:03:04 andrey Exp $ 
+  $Id: mysqli_nonapi.c,v 1.34.2.7 2005/05/06 10:15:07 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -37,7 +37,7 @@ PHP_FUNCTION(mysqli_connect)
 	MYSQLI_RESOURCE 	*mysqli_resource;
 	zval  				*object = getThis();
 	char 				*hostname = NULL, *username=NULL, *passwd=NULL, *dbname=NULL, *socket=NULL;
-	unsigned int 		hostname_len, username_len, passwd_len, dbname_len, socket_len;
+	unsigned int 		hostname_len = 0, username_len = 0, passwd_len = 0, dbname_len = 0, socket_len = 0;
 	long				port=0;
 
 	if (getThis() && !ZEND_NUM_ARGS()) {

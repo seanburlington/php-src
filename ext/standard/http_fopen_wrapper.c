@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.94 2005/05/06 02:13:46 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.95 2005/05/06 02:20:00 iliaa Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -611,7 +611,9 @@ out:
 		efree(scratch);
 	}
 
-	php_url_free(resource);
+	if (resource) {
+		php_url_free(resource);
+	}
 
 	if (stream) {
 		if (header_init) {

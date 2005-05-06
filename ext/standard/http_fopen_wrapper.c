@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.95 2005/05/06 02:20:00 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.96 2005/05/06 02:31:07 iliaa Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -104,7 +104,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 	int protocol_version_len = 3; /* Default: "1.0" */
 
 	if (redirect_max < 1) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Circular redirect, aborting.");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Redirection limit reached, aborting.");
 		return NULL;
 	}
 
@@ -181,6 +181,12 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 	php_stream_context_set(stream, context);
 
 	php_stream_notify_info(context, PHP_STREAM_NOTIFY_CONNECT, NULL, 0);
+
+	if (header_init && context && php_stream_context_get_option(context, "http", "max_redirects", &tmpzval) == SUCCESS) {
+		SEPARATE_ZVAL(tmpzval);
+		convert_to_long_ex(tmpzval);
+		redirect_max = Z_LVAL_PP(tmpzval);
+	}
 
 	if (context &&
 		php_stream_context_get_option(context, "http", "method", &tmpzval) == SUCCESS) {

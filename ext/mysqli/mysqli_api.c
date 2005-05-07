@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.111 2005/05/07 08:03:35 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.112 2005/05/07 08:23:39 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -682,6 +682,11 @@ PHP_FUNCTION(mysqli_stmt_fetch)
 		case 1:
 			RETURN_FALSE;
 		break;
+#ifdef MYSQL_DATA_TRUNCATED
+		case MYSQL_DATA_TRUNCATED:
+			RETURN_LONG(MYSQL_DATA_TRUNCATED);
+			break;
+#endif
 		default:
 			RETURN_NULL();
 		break;

@@ -14,7 +14,7 @@
 ./"    | Author: Marcus Boerger <helly@php.net>                               |
 ./"    +----------------------------------------------------------------------+
 ./" 
-./" $Id: php.1.in,v 1.10 2005/05/07 13:54:02 helly Exp $
+./" $Id: php.1.in,v 1.11 2005/05/07 15:43:55 sniper Exp $
 ./" 
 .TH PHP 1 "Feb 2003" "The PHP Group" "Scripting Language"
 .SH NAME
@@ -111,7 +111,7 @@ executed.
 .B \-a
 Run PHP interactively. This lets you enter snippets of PHP code that directly
 get executed. When readline support is enabled you can edit the lines and also
-have hitory support.
+have history support.
 .TP
 .PD 0
 .B \-\-php\-ini \fIpath\fP|\fIfile\fP

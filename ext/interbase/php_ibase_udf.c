@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ibase_udf.c,v 1.7 2004/06/05 10:03:42 abies Exp $ */
+/* $Id: php_ibase_udf.c,v 1.8 2005/05/07 02:51:52 sniper Exp $ */
 
 /**
 * This UDF library adds the ability to call PHP functions from SQL
@@ -124,8 +124,8 @@ pthread_mutex_t mtx_res = PTHREAD_MUTEX_INITIALIZER;
 #endif
 
 #ifdef PHP_EMBED
-#  include "php_main.h"
-#  include "php_embed.h"
+# include "php_main.h"
+# include "sapi/embed/php_embed.h"
 
 static void __attribute__((constructor)) init()
 {

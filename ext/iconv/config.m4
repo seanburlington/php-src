@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.31 2005/02/24 19:27:10 sniper Exp $
+dnl $Id: config.m4,v 1.32 2005/05/07 02:51:52 sniper Exp $
 dnl
 
 PHP_ARG_WITH(iconv, for iconv support,
@@ -138,6 +138,7 @@ int main() {
 
     PHP_NEW_EXTENSION(iconv, iconv.c, $ext_shared,, [-I\"$PHP_ICONV_PREFIX/include\"])
     PHP_SUBST(ICONV_SHARED_LIBADD)
+    PHP_INSTALL_HEADERS([ext/iconv])
   else
     AC_MSG_ERROR(Please reinstall the iconv library.)
   fi

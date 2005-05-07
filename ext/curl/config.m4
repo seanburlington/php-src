@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.27 2005/02/09 16:22:48 rasmus Exp $ 
+dnl $Id: config.m4,v 1.28 2005/05/07 02:51:51 sniper Exp $ 
 dnl
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -41,7 +41,7 @@ if test "$PHP_CURL" != "no"; then
   fi
 
   curl_version_full=`$CURL_CONFIG --version`
-  curl_version=`echo ${curl_version_full} | sed -e 's/libcurl //' | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+  curl_version=`echo ${curl_version_full} | sed -e 's/libcurl //' | $AWK 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
   if test "$curl_version" -ge 7010005; then
     AC_MSG_RESULT($curl_version_full)
     CURL_LIBS=`$CURL_CONFIG --libs`

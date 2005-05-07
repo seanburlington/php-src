@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.18 2005/04/27 13:12:54 sniper Exp $
+dnl $Id: config.m4,v 1.19 2005/05/07 02:51:52 sniper Exp $
 dnl
 
 PHP_ARG_ENABLE(dom, whether to enable DOM support,
@@ -30,6 +30,7 @@ if test "$PHP_DOM" != "no"; then
                             typeinfo.c domerror.c domlocator.c namednodemap.c userdatahandler.c], 
                             $ext_shared)
     PHP_SUBST(DOM_SHARED_LIBADD)
+    PHP_INSTALL_HEADERS([ext/dom/xml_common.h])
     PHP_ADD_EXTENSION_DEP(dom, libxml)
   ], [
     AC_MSG_ERROR([xml2-config not found. Please check your libxml2 installation.])

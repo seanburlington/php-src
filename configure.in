@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.552 2005/04/30 04:27:23 sniper Exp $ -*- autoconf -*-
+dnl ## $Id: configure.in,v 1.553 2005/05/07 02:51:50 sniper Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1122,6 +1122,7 @@ PHP_SUBST(WARNING_LEVEL)
 PHP_SUBST(PHP_FRAMEWORKS)
 PHP_SUBST(PHP_FRAMEWORKPATH)
 PHP_SUBST_OLD(SHLIB_SUFFIX_NAME)
+PHP_SUBST(INSTALL_EXT_HEADERS)
 
 old_CC=$CC
 

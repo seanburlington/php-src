@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config0.m4,v 1.1 2003/11/12 23:42:38 sniper Exp $
+dnl $Id: config0.m4,v 1.2 2005/05/07 02:51:52 sniper Exp $
 dnl
 
 PHP_ARG_ENABLE(libxml, whether to enable LIBXML support,
@@ -18,6 +18,7 @@ if test "$PHP_LIBXML" != "no"; then
   PHP_SETUP_LIBXML(LIBXML_SHARED_LIBADD, [
     AC_DEFINE(HAVE_LIBXML,1,[ ])
     PHP_NEW_EXTENSION(libxml, [libxml.c], $ext_shared)
+    PHP_INSTALL_HEADERS([ext/libxml/php_libxml.h])
   ], [
     AC_MSG_ERROR([xml2-config not found. Please check your libxml2 installation.])
   ])

@@ -1,3 +1,87 @@
+2005-05-06  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * ext/sqlite/config.m4:
+      cleanup
+
+2005-05-06  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      ext/standard/ftp_fopen_wrapper.c
+      ext/standard/ftp_fopen_wrapper.c:
+      MFH: Check ftp user name for control characters.
+
+    * ext/standard/ftp_fopen_wrapper.c:
+      Check ftp user name for control characters.
+
+2005-05-06  Antony Dovgal  <tony2001@phpclub.net>
+
+    * (PHP_4_3)
+      ext/gd/gd.c
+      ext/gd/gd.c
+      main/php_open_temporary_file.c
+      main/php_open_temporary_file.c:
+      MFH: fix off-by-one in _php_image_output()
+      and prevent such errors in php_do_open_temporary_file()
+
+    * ext/gd/gd.c
+      main/php_open_temporary_file.c:
+      fix off-by-one in _php_image_output()
+      and prevent such errors in php_do_open_temporary_file()
+
+2005-05-06  Andrey Hristov  <php@hristov.com>
+
+    * ext/mysqli/mysqli_api.c
+      ext/mysqli/mysqli_nonapi.c:
+      initialize values because the call to zend_parse_parameters may not do it
+
+2005-05-06  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * NEWS
+      ext/standard/http_fopen_wrapper.c:
+      Added max_redirects context option that specifies how many HTTP redirects
+      to follow.
+
+    * ext/standard/http_fopen_wrapper.c:
+      Missing bit from previous patch.
+
+    * (PHP_5_0)
+      ext/standard/http_fopen_wrapper.c:
+      Added missing bit of the previous patch.
+
+    * (PHP_4_3)
+      NEWS
+      NEWS
+      ext/standard/http_fopen_wrapper.c
+      ext/standard/http_fopen_wrapper.c:
+      MFH: Fixed bug #32936 (http redirects URLs are not checked for control
+      chars).
+
+    * ext/standard/http_fopen_wrapper.c:
+      Fixed bug #32936 (http redirects URLs are not checked for control chars).
+
+2005-05-06  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * tests/lang/inc.inc:
+      <? should die..
+
+    * NEWS
+      NEWS:
+      reorder
+
+    * NEWS:
+      - No need to add NEWS entries for bugs that do NOT exist in any released
+      version of PHP
+
+    * (PHP_5_0)
+      NEWS:
+      typo
+
+    * ZendEngine2/zend_object_handlers.h:
+      typofix :)
+
+    * NEWS:
+      verbose,order,etc.
+
 2005-05-05  Jani Taskinen  <jani.taskinen@sci.fi>
 
     * ext/standard/math.c:
@@ -1697,7 +1781,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1975 2005/05/06 00:34:40 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1976 2005/05/07 00:36:00 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -5098,7 +5182,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1975 2005/05/06 00:34:40 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1976 2005/05/07 00:36:00 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -5579,7 +5663,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1975 2005/05/06 00:34:40 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1976 2005/05/07 00:36:00 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -7053,7 +7137,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1975 2005/05/06 00:34:40 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1976 2005/05/07 00:36:00 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

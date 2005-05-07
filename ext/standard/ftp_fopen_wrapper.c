@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.38.2.7 2005/05/06 18:43:31 iliaa Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.38.2.8 2005/05/07 09:25:31 rasmus Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -255,7 +255,7 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 		while (s < e) {
 			if (iscntrl(*s)) {
 				php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "Invalid login %s", resource->user);
-				goto connect_errexit;
+				goto errexit;
 			}
 			s++;
 		}

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.109 2005/05/06 10:09:42 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.110 2005/05/07 07:44:41 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -109,12 +109,13 @@ PHP_FUNCTION(mysqli_stmt_bind_param)
 		start = 1;
 	}
 
-	if (strlen(types) != argc - start) {
+	if (typelen != argc - start) {
 		/* number of bind variables doesn't match number of elements in type definition string */
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Number of elements in type definition string doesn't match number of bind variables");
+		RETURN_FALSE;
 	}
 
-	if (argc - start != stmt->stmt->param_count) {
+	if (typelen != stmt->stmt->param_count) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Number of variables doesn't match number of parameters in prepared statement");
 		RETURN_FALSE;
 	}

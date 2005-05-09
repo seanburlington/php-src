@@ -1,3 +1,72 @@
+2005-05-08  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * (PHP_4_3)
+      ext/standard/basic_functions.c:
+      MFH: - Fixed putenv() under win32 (see bug #32957)
+
+2005-05-08  Rasmus Lerdorf  <rasmus@lerdorf.com>
+
+    * ext/standard/info.c:
+      Fix request_uri XSS on phpinfo() page
+
+    * (PHP_4_3)
+      ext/standard/info.c:
+      Oops, wrong place.  It was in the logo stuff instead.
+
+    * (PHP_4_3)
+      ext/standard/info.c:
+      Let's not XSS ourself at least
+
+2005-05-08  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * (PHP_4_3)
+      NEWS
+      ext/ldap/config.m4
+      ext/ldap/ldap.c
+      ext/ldap/php_ldap.h:
+      MFH: - Fixed bug #32932 (Oracle LDAP: ldap_get_entries invalid pointer)
+
+    * ext/ldap/config.m4:
+      this check was not needed
+
+    * (PHP_5_0)
+      NEWS
+      ext/ldap/config.m4
+      ext/ldap/ldap.c
+      ext/ldap/php_ldap.h:
+      MFH: - Fixed bug #32932 (Oracle LDAP: ldap_get_entries invalid pointer)
+
+    * ext/ldap/config.m4
+      ext/ldap/ldap.c
+      ext/ldap/php_ldap.h:
+      - Fixed bug #32932 (Oracle LDAP: ldap_get_entries invalid pointer)
+
+    * ext/dba/config.m4:
+      no tabs
+
+2005-05-08  Georg Richter  <georg@mysql.com>
+
+    * (PHP_5_0)
+      NEWS
+      ext/mysqli/mysqli_fe.c
+      ext/mysqli/mysqli_nonapi.c
+      ext/mysqli/php_mysqli.h
+      ext/mysqli/tests/065.phpt:
+      added new function mysqli_set_character_set_name
+      This function changes also the mysql->charset structure for
+      mysql_real_escape_string (see MySQL Bugs #8317 and #9637).
+      This bug will probably be fixed in MySQL 5.1
+
+    * ext/mysqli/tests/065.phpt
+      ext/mysqli/tests/065.phpt:
+      
+      Added new function mysqli_set_character_set_name
+
+    * ext/mysqli/mysqli_fe.c
+      ext/mysqli/mysqli_nonapi.c
+      ext/mysqli/php_mysqli.h:
+      Added new function mysqli_set_character_set_name
+
 2005-05-07  Jani Taskinen  <jani.taskinen@sci.fi>
 
     * NEWS:
@@ -1897,7 +1966,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1977 2005/05/08 00:34:53 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1978 2005/05/09 00:36:19 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -5298,7 +5367,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1977 2005/05/08 00:34:53 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1978 2005/05/09 00:36:19 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -5779,7 +5848,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1977 2005/05/08 00:34:53 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1978 2005/05/09 00:36:19 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -7253,7 +7322,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1977 2005/05/08 00:34:53 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1978 2005/05/09 00:36:19 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

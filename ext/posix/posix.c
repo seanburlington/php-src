@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.64 2005/01/28 01:38:56 tony2001 Exp $ */
+/* $Id: posix.c,v 1.65 2005/05/09 12:15:53 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -70,8 +70,12 @@ function_entry posix_functions[] = {
 #ifdef HAVE_SETEGID
 	PHP_FE(posix_setegid,	NULL)
 #endif
+#ifdef HAVE_GETGROUPS
 	PHP_FE(posix_getgroups,	NULL)
+#endif
+#ifdef HAVE_GETLOGIN
 	PHP_FE(posix_getlogin,	NULL)
+#endif
 
 	/* POSIX.1, 4.3 */
 	PHP_FE(posix_getpgrp,	NULL)
@@ -133,7 +137,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.64 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.65 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -299,6 +303,7 @@ PHP_FUNCTION(posix_setegid)
 
 /* {{{ proto array posix_getgroups(void)
    Get supplementary group id's (POSIX.1, 4.2.3) */
+#ifdef HAVE_GETGROUPS
 PHP_FUNCTION(posix_getgroups)
 {
 	gid_t  gidlist[NGROUPS_MAX];
@@ -318,10 +323,12 @@ PHP_FUNCTION(posix_getgroups)
 		add_next_index_long(return_value, gidlist[i]);
 	}
 }
+#endif
 /* }}} */
 
 /* {{{ proto string posix_getlogin(void) 
    Get user name (POSIX.1, 4.2.4) */
+#ifdef HAVE_GETLOGIN
 PHP_FUNCTION(posix_getlogin)
 {
 	char *p;
@@ -335,6 +342,7 @@ PHP_FUNCTION(posix_getlogin)
 	
 	RETURN_STRING(p, 1);
 }
+#endif
 /* }}} */
 
 /* {{{ proto int posix_getpgrp(void)

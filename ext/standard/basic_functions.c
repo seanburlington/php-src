@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.49 2005/05/08 19:50:39 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.50 2005/05/09 07:08:42 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"

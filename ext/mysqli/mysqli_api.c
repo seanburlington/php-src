@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.87.2.18 2005/05/09 21:47:36 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.87.2.19 2005/05/09 22:31:52 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1557,7 +1557,8 @@ PHP_FUNCTION(mysqli_stmt_data_seek)
 		return;
 	}
 	if (offset < 0) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset must be positive");	
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Offset must be positive");
+		RETURN_FALSE;	
 	}
 
 	MYSQLI_FETCH_RESOURCE(stmt, MY_STMT *, &mysql_stmt, "mysqli_stmt");

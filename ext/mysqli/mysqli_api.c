@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.113 2005/05/07 12:46:29 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.114 2005/05/09 21:48:03 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1269,6 +1269,10 @@ PHP_FUNCTION(mysqli_prepare)
 		return;
 	}
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link");
+	if (mysql->mysql->status == MYSQL_STATUS_GET_RESULT) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "All data must be fetched before a new statement prepare takes place");
+		RETURN_FALSE;
+	}
 
 	stmt = (MY_STMT *)ecalloc(1,sizeof(MY_STMT));
 

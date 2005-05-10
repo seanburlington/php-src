@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc_includes.h,v 1.10 2005/01/13 02:06:39 wez Exp $ */
+/* $Id: php_odbc_includes.h,v 1.11 2005/05/10 13:22:22 sniper Exp $ */
 
 #ifndef PHP_ODBC_INCLUDES_H
 #define PHP_ODBC_INCLUDES_H
@@ -230,7 +230,7 @@ typedef struct odbc_connection {
 typedef struct odbc_result_value {
 	char name[32];
 	char *value;
-	long int vallen;
+	SDWORD vallen;
 	SDWORD coltype;
 } odbc_result_value;
 

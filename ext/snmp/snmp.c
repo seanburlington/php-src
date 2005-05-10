@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: snmp.c,v 1.92.2.8 2005/04/27 23:27:44 sniper Exp $ */
+/* $Id: snmp.c,v 1.92.2.9 2005/05/10 12:16:42 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -187,6 +187,11 @@ static void php_snmp_init_globals(zend_snmp_globals *snmp_globals)
 PHP_MINIT_FUNCTION(snmp)
 {
 	init_snmp("snmpapp");
+
+#ifdef NETSNMP_DS_LIB_DONT_PERSIST_STATE
+	/* Prevent update of the snmpapp.conf file */
+    netsnmp_ds_set_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_DONT_PERSIST_STATE, 1);
+#endif
 
 	ZEND_INIT_MODULE_GLOBALS(snmp, php_snmp_init_globals, NULL);
 

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.110.2.33 2005/05/10 10:20:38 dmitry Exp $ */
+/* $Id: soap.c,v 1.110.2.34 2005/05/10 13:57:47 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3498,6 +3498,15 @@ static xmlDocPtr serialize_response_call(sdlFunctionPtr function, char *function
 			zend_hash_internal_pointer_reset(fault->details);
 			zend_hash_get_current_data(fault->details, (void**)&sparam);
 			sparam = *(sdlParamPtr*)sparam;
+
+			if (detail &&
+			    Z_TYPE_P(detail) == IS_OBJECT &&
+			    sparam->element &&
+			    zend_hash_num_elements(Z_OBJPROP_P(detail)) == 1 &&
+			    zend_hash_find(Z_OBJPROP_P(detail), sparam->element->name, strlen(sparam->element->name)+1, (void**)&tmp) == SUCCESS) {
+				detail = *tmp;
+			}
+
 			x = serialize_parameter(sparam, detail, 1, NULL, use, node TSRMLS_CC);
 
 			if (function &&

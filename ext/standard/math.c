@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: math.c,v 1.127 2005/05/07 16:08:03 sniper Exp $ */
+/* $Id: math.c,v 1.128 2005/05/10 12:50:53 andrey Exp $ */
 
 #include "php.h"
 #include "php_math.h"
@@ -1193,9 +1193,9 @@ PHP_FUNCTION(math_variance)
 }
 /* }}} */
 
-/* {{{ proto float math_std_dev(array a [, bool sample])
+/* {{{ proto float math_standard_deviation(array a[, bool sample = false])
    Returns the standard deviation */
-PHP_FUNCTION(math_std_dev)
+PHP_FUNCTION(math_standard_deviation)
 {
 	zval *arr;
 	zend_bool sample = 0;

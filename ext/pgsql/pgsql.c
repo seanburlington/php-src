@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.325 2005/05/03 22:50:00 iliaa Exp $ */
+/* $Id: pgsql.c,v 1.326 2005/05/10 20:13:24 tony2001 Exp $ */
 
 #include <stdlib.h>
 
@@ -4144,11 +4144,11 @@ PHP_FUNCTION(pg_get_notify)
 		RETURN_FALSE;
 	}
 	array_init(return_value);
-	if (result_type & (PGSQL_NUM|PGSQL_BOTH)) {
+	if (result_type == PGSQL_NUM || result_type == PGSQL_BOTH) {
 		add_index_string(return_value, 0, pgsql_notify->relname, 1);
 		add_index_long(return_value, 1, pgsql_notify->be_pid);
 	}
-	if (result_type & (PGSQL_ASSOC|PGSQL_BOTH)) {
+	if (result_type == PGSQL_ASSOC || result_type == PGSQL_BOTH) {
 		add_assoc_string(return_value, "message", pgsql_notify->relname, 1);
 		add_assoc_long(return_value, "pid", pgsql_notify->be_pid);
 	}

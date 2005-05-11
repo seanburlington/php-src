@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.107 2005/05/01 19:48:55 iliaa Exp $ */
+/* $Id: html.c,v 1.108 2005/05/11 12:43:07 jorton Exp $ */
 
 /*
  * HTML entity resources:
@@ -115,11 +115,11 @@ static entity_table_t ent_uni_338_402[] = {
 	"Scaron", "scaron", NULL, NULL, NULL, NULL, NULL, NULL,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	/* 376 (0x0178)
+	/* 376 (0x0178) */
 	"Yuml", NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, */
-	/* 400 (0x0190)*/
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	/* 400 (0x0190) */
 	NULL, NULL, "fnof"
 };
 

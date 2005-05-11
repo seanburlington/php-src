@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: html.c,v 1.108 2005/05/11 12:43:07 jorton Exp $ */
+/* $Id: html.c,v 1.109 2005/05/11 12:54:29 jorton Exp $ */
 
 /*
  * HTML entity resources:
@@ -60,7 +60,7 @@ enum entity_charset { cs_terminator, cs_8859_1, cs_cp1252,
 					  cs_big5hkscs, cs_sjis, cs_eucjp, cs_koi8r,
 					  cs_cp1251, cs_8859_5, cs_cp866, cs_macroman
 					};
-typedef const char *entity_table_t;
+typedef const char *const entity_table_t;
 
 /* codepage 1252 is a Windows extension to iso-8859-1. */
 static entity_table_t ent_cp_1252[] = {

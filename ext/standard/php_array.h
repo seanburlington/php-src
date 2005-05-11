@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_array.h,v 1.48 2004/11/01 12:09:46 helly Exp $ */
+/* $Id: php_array.h,v 1.49 2005/05/11 11:43:11 andrey Exp $ */
 
 #ifndef PHP_ARRAY_H
 #define PHP_ARRAY_H
@@ -92,6 +92,7 @@ PHP_FUNCTION(array_udiff_assoc);
 PHP_FUNCTION(array_diff_uassoc);
 PHP_FUNCTION(array_udiff_uassoc);
 PHP_FUNCTION(array_sum);
+PHP_FUNCTION(array_product);
 PHP_FUNCTION(array_filter);
 PHP_FUNCTION(array_map);
 PHP_FUNCTION(array_key_exists);

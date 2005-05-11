@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.146 2005/05/10 13:58:11 dmitry Exp $ */
+/* $Id: soap.c,v 1.147 2005/05/11 20:04:18 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1842,10 +1842,10 @@ static void soap_server_fault(char* code, char* string, char *actor, zval* detai
 
 static void soap_error_handler(int error_num, const char *error_filename, const uint error_lineno, const char *format, va_list args)
 {
-	TSRMLS_FETCH();
 	zend_bool _old_in_compilation = CG(in_compilation);
 	zend_bool _old_in_execution = EG(in_execution);
 	zend_execute_data *_old_current_execute_data = EG(current_execute_data);
+	TSRMLS_FETCH();
 
 	if (!SOAP_GLOBAL(use_soap_error_handler)) {
 		old_error_handler(error_num, error_filename, error_lineno, format, args);

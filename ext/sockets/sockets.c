@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.169 2005/02/14 23:44:23 sniper Exp $ */
+/* $Id: sockets.c,v 1.170 2005/05/12 16:26:26 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -321,6 +321,10 @@ static char *php_strerror(int error TSRMLS_DC)
 		buf = hstrerror(error);
 #else
 		{
+			if (SOCKETS_G(strerror_buf)) {
+				efree(SOCKETS_G(strerror_buf));
+			}
+
 			spprintf(&(SOCKETS_G(strerror_buf)), 0, "Host lookup error %d", error);
 			buf = SOCKETS_G(strerror_buf);
 		}
@@ -335,6 +339,11 @@ static char *php_strerror(int error TSRMLS_DC)
 
 		if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |	FORMAT_MESSAGE_IGNORE_INSERTS,
 				  NULL, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR) &tmp, 0, NULL)) {
+			
+			if (SOCKETS_G(strerror_buf)) {
+				efree(SOCKETS_G(strerror_buf));
+			}
+
 			SOCKETS_G(strerror_buf) = estrdup(tmp);
 			LocalFree(tmp);
 		

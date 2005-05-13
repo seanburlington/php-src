@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.46 2005/05/13 13:11:40 georg Exp $ 
+  $Id: php_mysqli.h,v 1.47 2005/05/13 13:30:22 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -99,14 +99,12 @@ typedef struct {
 
 #ifdef PHP_WIN32
 #define PHP_MYSQLI_API __declspec(dllexport)
-#if MYSQL_VERSION_ID > 50005
-#define HAVE_MYSQLI_SET_CHARSET
-#elif MYSQL_VERSION_ID > 40112 && MYSQL_VERSION_ID < 50000
-#define HAVE_MYSQLI_SET_CHARSET
-#endif
 #else
-#define HAVE_MYSQLI_SET_CHARSET
 #define PHP_MYSQLI_API
+#endif
+
+#if MYSQL_VERSION_ID > 40112 && MYSQL_VERSION_ID < 50000
+#define HAVE_MYSQLI_SET_CHARSET
 #endif
 
 #ifdef ZTS

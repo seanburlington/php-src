@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.715 2005/05/11 11:43:10 andrey Exp $ */
+/* $Id: basic_functions.c,v 1.716 2005/05/13 10:11:17 andrey Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -415,8 +415,6 @@ function_entry basic_functions[] = {
 	PHP_FE(base_convert,													NULL)
 	PHP_FE(number_format,													NULL)
 	PHP_FE(fmod,															NULL)
-	PHP_FE(math_standard_deviation,													NULL)
-	PHP_FE(math_variance,													NULL)
 #ifdef HAVE_INET_NTOP
 	PHP_NAMED_FE(inet_ntop,		php_inet_ntop,											NULL)
 #endif

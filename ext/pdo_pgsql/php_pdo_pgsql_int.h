@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_pgsql_int.h,v 1.8 2005/02/13 01:02:18 edink Exp $ */
+/* $Id: php_pdo_pgsql_int.h,v 1.9 2005/05/13 18:09:03 wez Exp $ */
 
 #ifndef PHP_PDO_PGSQL_INT_H
 #define PHP_PDO_PGSQL_INT_H
@@ -24,6 +24,8 @@
 #if HAVE_PDO_PGSQL 
 
 #include <libpq-fe.h>
+
+#define PHP_PDO_PGSQL_CONNECTION_FAILURE_SQLSTATE "08006"
 
 typedef struct {
 	const char *file;
@@ -65,9 +67,9 @@ typedef struct {
 
 extern pdo_driver_t pdo_pgsql_driver;
 
-extern int _pdo_pgsql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, int errcode, const char *file, int line TSRMLS_DC);
-#define pdo_pgsql_error(d,e)	_pdo_pgsql_error(d, NULL, e, __FILE__, __LINE__ TSRMLS_CC)
-#define pdo_pgsql_error_stmt(s,e)	_pdo_pgsql_error(s->dbh, s, e, __FILE__, __LINE__ TSRMLS_CC)
+extern int _pdo_pgsql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, int errcode, const char *sqlstate, const char *file, int line TSRMLS_DC);
+#define pdo_pgsql_error(d,e,z)	_pdo_pgsql_error(d, NULL, e, z, __FILE__, __LINE__ TSRMLS_CC)
+#define pdo_pgsql_error_stmt(s,e,z)	_pdo_pgsql_error(s->dbh, s, e, z, __FILE__, __LINE__ TSRMLS_CC)
 
 extern struct pdo_stmt_methods pgsql_stmt_methods;
 

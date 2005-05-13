@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.44 2005/05/13 13:11:40 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.45 2005/05/13 13:56:04 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -28,8 +28,6 @@
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "php_mysqli.h"
-
-extern const char *charsets_dir;
 
 /* {{{ proto object mysqli_connect([string hostname [,string username [,string passwd [,string dbname [,int port [,string socket]]]]]])
    Open a connection to a mysql server */ 

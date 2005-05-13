@@ -1,3 +1,22 @@
+2005-05-12  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ZendEngine2/zend_reflection_api.c:
+      - Make ReflectionObject::hasProperty() recognize dynamically added props
+
+2005-05-12  Antony Dovgal  <tony2001@phpclub.net>
+
+    * (PHP_4_3)
+      NEWS
+      NEWS
+      ext/sockets/sockets.c
+      ext/sockets/sockets.c:
+      MFH: fix #33019 (socket errors cause memory leaks in php_strerror())
+      patch by jwozniak23 at poczta dot onet dot pl
+
+    * ext/sockets/sockets.c:
+      fix #33019 (socket errors cause memory leaks in php_strerror())
+      patch by jwozniak23 at poczta dot onet dot pl
+
 2005-05-11  Joe Orton  <jorton@redhat.com>
 
     * (PHP_5_0)
@@ -2153,7 +2172,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1981 2005/05/12 00:35:46 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1982 2005/05/13 00:34:51 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -5554,7 +5573,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1981 2005/05/12 00:35:46 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1982 2005/05/13 00:34:51 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -6035,7 +6054,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1981 2005/05/12 00:35:46 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1982 2005/05/13 00:34:51 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -7509,7 +7528,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1981 2005/05/12 00:35:46 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1982 2005/05/13 00:34:51 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

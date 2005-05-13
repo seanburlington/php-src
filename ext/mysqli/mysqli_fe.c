@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.43 2005/05/08 08:39:54 georg Exp $ 
+  $Id: mysqli_fe.c,v 1.44 2005/05/13 13:11:40 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -117,7 +117,7 @@ function_entry mysqli_functions[] = {
 	PHP_FE(mysqli_rpl_query_type,						NULL)
 	PHP_FE(mysqli_select_db,							NULL)
 #ifdef HAVE_MYSQLI_SET_CHARSET
-	PHP_FE(mysqli_set_character_set_name,				NULL)
+	PHP_FE(mysqli_set_charset,							NULL)
 #endif
 	PHP_FE(mysqli_stmt_attr_get,						NULL)
 	PHP_FE(mysqli_stmt_attr_set,						NULL)
@@ -181,7 +181,6 @@ function_entry mysqli_functions[] = {
 function_entry mysqli_link_methods[] = {
 	PHP_FALIAS(autocommit,mysqli_autocommit,NULL)
 	PHP_FALIAS(change_user,mysqli_change_user,NULL)
-	PHP_FALIAS(character_set_name,mysqli_character_set_name,NULL)
 	PHP_FALIAS(client_encoding, mysqli_character_set_name,NULL)
 	PHP_FALIAS(close,mysqli_close,NULL)
 	PHP_FALIAS(commit,mysqli_commit,NULL)
@@ -218,8 +217,7 @@ function_entry mysqli_link_methods[] = {
 	PHP_FALIAS(rpl_query_type,mysqli_rpl_query_type,NULL)
 	PHP_FALIAS(select_db,mysqli_select_db,NULL)
 #ifdef HAVE_MYSQLI_SET_CHARSET
-	PHP_FALIAS(set_character_set_name,mysqli_set_character_set_name,NULL)
-	PHP_FALIAS(set_client_encoding,mysqli_set_character_set_name,NULL)
+	PHP_FALIAS(set_charset,mysqli_set_charset,NULL)
 #endif
 	PHP_FALIAS(set_opt, mysqli_options,NULL)
 	PHP_FALIAS(slave_query,mysqli_slave_query,NULL)

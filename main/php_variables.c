@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.45.2.11 2005/04/25 21:22:48 sniper Exp $ */
+/* $Id: php_variables.c,v 1.45.2.12 2005/05/13 05:27:14 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -63,7 +63,7 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 	char *ip;		/* index pointer */
 	char *index;
 	int var_len, index_len;
-	zval *gpc_element, **gpc_element_p, *tmp;
+	zval *gpc_element, **gpc_element_p;
 	zend_bool is_array;
 	HashTable *symtable1=NULL;
 
@@ -184,20 +184,9 @@ plain_var:
 			} else {
 				if (PG(magic_quotes_gpc) && (index!=var)) {
 					char *escaped_index = php_addslashes(index, index_len, &index_len, 0 TSRMLS_CC);
- 					/* 
- 					 * According to rfc2965, more specific paths are listed above the less specific ones.
- 					 * If we encounter a duplicate cookie name, we should skip it, since it is not possible
- 					 * to have the same (plain text) cookie name for the same path and we should not overwrite
- 					 * more specific cookies with the less specific ones.
- 				 	 */
- 					if (PG(http_globals)[TRACK_VARS_COOKIE] && symtable1 == Z_ARRVAL_P(PG(http_globals)[TRACK_VARS_COOKIE]) && 
- 							zend_hash_find(symtable1, escaped_index, index_len+1, (void **) &tmp) != FAILURE) {
-						efree(escaped_index);
- 						break;
-					}
 					zend_hash_update(symtable1, escaped_index, index_len+1, &gpc_element, sizeof(zval *), (void **) &gpc_element_p);
 					efree(escaped_index);
-				} else if (!PG(http_globals)[TRACK_VARS_COOKIE] || symtable1 != Z_ARRVAL_P(PG(http_globals)[TRACK_VARS_COOKIE]) || zend_hash_find(symtable1, index, index_len+1, (void **) tmp) == FAILURE) {
+				} else {
 					zend_hash_update(symtable1, index, index_len+1, &gpc_element, sizeof(zval *), (void **) &gpc_element_p);
 				}
 			}

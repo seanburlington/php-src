@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.68 2005/03/31 21:49:47 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.69 2005/05/14 16:40:56 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -251,12 +251,12 @@ next_step:
 		}
 		/* no more elements */
 		if (object->level > 0) {
-			iterator->funcs->dtor(iterator TSRMLS_CC);
-			zval_ptr_dtor(&object->iterators[object->level].zobject);
-			object->level--;
 			if (object->endChildren) {
 				zend_call_method_with_0_params(&zthis, object->ce, &object->endChildren, "endchildren", NULL);
 			}
+			iterator->funcs->dtor(iterator TSRMLS_CC);
+			zval_ptr_dtor(&object->iterators[object->level].zobject);
+			object->level--;
 		} else {
 			return; /* done completeley */
 		}

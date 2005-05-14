@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.553 2005/05/07 02:51:50 sniper Exp $ -*- autoconf -*-
+dnl ## $Id: configure.in,v 1.554 2005/05/14 19:33:17 helly Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1054,7 +1054,7 @@ AC_DEFINE_UNQUOTED(PHP_OS,"$PHP_OS",[uname output])
 if test "$PHP_SAPI_CLI" != "no"; then
   PHP_CLI_TARGET="\$(SAPI_CLI_PATH)"
   PHP_INSTALL_CLI_TARGET="install-cli"
-  PHP_ADD_SOURCES(sapi/cli, php_cli.c getopt.c,, cli)
+  PHP_ADD_SOURCES(sapi/cli, php_cli.c php_cli_readline.c getopt.c,, cli)
 fi
 
 PHP_SUBST(PHP_CLI_TARGET)

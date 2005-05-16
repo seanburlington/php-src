@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.95 2005/04/07 07:28:08 thetaphi Exp $ */
+/* $Id: streams.c,v 1.125.2.96 2005/05/16 08:55:31 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2328,6 +2328,15 @@ static void stream_resource_persistent_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC
 {
 	php_stream *stream = (php_stream*)rsrc->ptr;
 	FG(pclose_ret) = php_stream_free(stream, PHP_STREAM_FREE_CLOSE | PHP_STREAM_FREE_RSRC_DTOR);
+}
+
+void php_shutdown_stream_hashes(TSRMLS_D)
+{
+	if (FG(stream_wrappers)) {
+		zend_hash_destroy(FG(stream_wrappers));
+		efree(FG(stream_wrappers));
+		FG(stream_wrappers) = NULL;
+	}
 }
 
 int php_init_stream_wrappers(int module_number TSRMLS_DC)

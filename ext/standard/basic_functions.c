@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.543.2.50 2005/05/09 07:08:42 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.543.2.51 2005/05/16 08:55:31 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1239,11 +1239,10 @@ PHP_RSHUTDOWN_FUNCTION(basic)
 	}
 	STR_FREE(BG(locale_string));
 
-	if (FG(stream_wrappers)) {
-		zend_hash_destroy(FG(stream_wrappers));
-		efree(FG(stream_wrappers));
-		FG(stream_wrappers) = NULL;
- 	}
+	/*
+	 FG(stream_wrappers) are destroyed
+	 during php_request_shutdown()
+	 */
 
 	PHP_RSHUTDOWN(fsock) (SHUTDOWN_FUNC_ARGS_PASSTHRU);
 	PHP_RSHUTDOWN(filestat) (SHUTDOWN_FUNC_ARGS_PASSTHRU);

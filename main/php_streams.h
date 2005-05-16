@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.61.2.17 2004/06/21 19:33:48 pollita Exp $ */
+/* $Id: php_streams.h,v 1.61.2.18 2005/05/16 08:55:31 tony2001 Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -526,6 +526,7 @@ PHPAPI int _php_stream_cast(php_stream *stream, int castas, void **ret, int show
 
 int php_init_stream_wrappers(int module_number TSRMLS_DC);
 int php_shutdown_stream_wrappers(int module_number TSRMLS_DC);
+void php_shutdown_stream_hashes(TSRMLS_D);
 PHP_RSHUTDOWN_FUNCTION(streams);
 
 PHPAPI int php_register_url_stream_wrapper(char *protocol, php_stream_wrapper *wrapper TSRMLS_DC);

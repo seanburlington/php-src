@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.62 2005/04/27 21:22:18 andrey Exp $ */
+/* $Id: main.c,v 1.512.2.63 2005/05/16 08:55:31 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -998,6 +998,10 @@ void php_request_shutdown(void *dummy)
 
 	zend_try {
 		sapi_deactivate(TSRMLS_C);
+	} zend_end_try();
+
+	zend_try {
+		php_shutdown_stream_hashes(TSRMLS_C);
 	} zend_end_try();
 
 	zend_try { 

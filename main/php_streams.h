@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_streams.h,v 1.101 2005/02/22 00:24:13 iliaa Exp $ */
+/* $Id: php_streams.h,v 1.102 2005/05/16 08:37:10 tony2001 Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H
@@ -502,6 +502,7 @@ END_EXTERN_C()
 
 int php_init_stream_wrappers(int module_number TSRMLS_DC);
 int php_shutdown_stream_wrappers(int module_number TSRMLS_DC);
+void php_shutdown_stream_hashes(TSRMLS_D);
 PHP_RSHUTDOWN_FUNCTION(streams);
 
 BEGIN_EXTERN_C()

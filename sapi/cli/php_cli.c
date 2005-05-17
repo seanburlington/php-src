@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.124 2005/05/14 19:33:18 helly Exp $ */
+/* $Id: php_cli.c,v 1.125 2005/05/17 14:33:15 johannes Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -978,12 +978,11 @@ int main(int argc, char *argv[])
 
 				history_file = tilde_expand("~/.php_history");
 				rl_attempted_completion_function = cli_code_completion;
-				/*rl_completion_append_character = '(';*/
 				rl_special_prefixes = "$";
 				read_history(history_file);
 
 				EG(exit_status) = 0;
-				while ((line = readline(pos ? prompt : "php > ")) != NULL) {
+				while ((line = readline(prompt)) != NULL) {
 					if (strcmp(line, "exit") == 0 || strcmp(line, "quit") == 0) {
 						free(line);
 						break;

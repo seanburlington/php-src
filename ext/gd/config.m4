@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.152 2005/05/07 03:19:42 sniper Exp $
+dnl $Id: config.m4,v 1.153 2005/05/17 12:22:51 tony2001 Exp $
 dnl
 
 dnl
@@ -312,6 +312,7 @@ dnl These are always available with bundled library
   AC_DEFINE(HAVE_GD_IMAGEELLIPSE,     1, [ ])
   AC_DEFINE(HAVE_GD_FONTCACHESHUTDOWN,1, [ ])
   AC_DEFINE(HAVE_GD_DYNAMIC_CTX_EX,   1, [ ])
+  AC_DEFINE(HAVE_GD_GIF_CTX,          1, [ ])
 
 dnl Make sure the libgd/ is first in the include path
   GDLIB_CFLAGS="-DHAVE_LIBPNG"

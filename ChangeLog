@@ -1,3 +1,35 @@
+2005-05-16  Sara Golemon  <php@alphaweb.net>
+
+    * TSRM/TSRM.c:
+      Unterminated paren group in BETHREADS definition of tsrm_tls_set() macro
+
+2005-05-16  Antony Dovgal  <tony2001@phpclub.net>
+
+    * (PHP_4_3)
+      NEWS
+      ext/standard/basic_functions.c
+      main/main.c
+      main/php_streams.h
+      main/streams.c:
+      MFH: fix bug #32742 (segmentation fault when the stream with a wrapper is
+      not closed)
+
+    * (PHP_5_0)
+      NEWS
+      ext/standard/basic_functions.c
+      main/main.c
+      main/php_streams.h
+      main/streams/streams.c:
+      MFH: fix bugs #32742 (segmentation fault when the stream with a wrapper
+      is not closed), #32171 (Userspace stream wrapper crashes PHP)
+
+    * ext/standard/basic_functions.c
+      main/main.c
+      main/php_streams.h
+      main/streams/streams.c:
+      fix bugs #32742 (segmentation fault when the stream with a wrapper is not
+      closed),
+
 2005-05-14  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * configure.in
@@ -2244,7 +2276,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1984 2005/05/15 00:33:59 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1985 2005/05/17 00:33:24 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -5645,7 +5677,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1984 2005/05/15 00:33:59 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1985 2005/05/17 00:33:24 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -6126,7 +6158,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1984 2005/05/15 00:33:59 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1985 2005/05/17 00:33:24 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -7600,7 +7632,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1984 2005/05/15 00:33:59 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1985 2005/05/17 00:33:24 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

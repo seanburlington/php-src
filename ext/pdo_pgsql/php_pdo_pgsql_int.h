@@ -16,12 +16,10 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_pgsql_int.h,v 1.9 2005/05/13 18:09:03 wez Exp $ */
+/* $Id: php_pdo_pgsql_int.h,v 1.10 2005/05/17 20:08:53 iliaa Exp $ */
 
 #ifndef PHP_PDO_PGSQL_INT_H
 #define PHP_PDO_PGSQL_INT_H
-
-#if HAVE_PDO_PGSQL 
 
 #include <libpq-fe.h>
 
@@ -73,7 +71,6 @@ extern int _pdo_pgsql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, int errcode, const
 
 extern struct pdo_stmt_methods pgsql_stmt_methods;
 
-#endif /* HAVE_PDO_PGSQL */
 #endif /* PHP_PDO_PGSQL_INT_H */
 
 /*

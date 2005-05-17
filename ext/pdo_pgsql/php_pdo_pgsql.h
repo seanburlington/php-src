@@ -16,12 +16,10 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_pgsql.h,v 1.1 2004/05/20 02:27:49 edink Exp $ */
+/* $Id: php_pdo_pgsql.h,v 1.2 2005/05/17 20:08:53 iliaa Exp $ */
 
 #ifndef PHP_PDO_PGSQL_H
 #define PHP_PDO_PGSQL_H
-
-#if HAVE_PDO_PGSQL 
 
 #include <libpq-fe.h>
 
@@ -44,7 +42,6 @@ PHP_RINIT_FUNCTION(pdo_pgsql);
 PHP_RSHUTDOWN_FUNCTION(pdo_pgsql);
 PHP_MINFO_FUNCTION(pdo_pgsql);
 
-#endif  /* HAVE_PDO_PGSQL */
 #endif	/* PHP_PDO_PGSQL_H */
 
 

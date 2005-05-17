@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.44 2005/05/17 19:33:03 iliaa Exp $ */
+/* $Id: mysql_driver.c,v 1.45 2005/05/17 23:23:52 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -272,7 +272,7 @@ static struct pdo_dbh_methods mysql_methods = {
 };
 
 #ifndef PDO_MYSQL_UNIX_ADDR
-# ifndef PHP_WIN32
+# ifdef PHP_WIN32
 #  define PDO_MYSQL_UNIX_ADDR	"MySQL"
 # else
 #  define PDO_MYSQL_UNIX_ADDR	"/tmp/mysql.sock"

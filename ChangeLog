@@ -1,3 +1,26 @@
+2005-05-17  Magnus Määttä  <novell@kiruna.se>
+
+    * ZendEngine2/tests/bug31828.phpt
+      ZendEngine2/tests/bug32080.phpt:
+      Fix tests.
+
+2005-05-17  Johannes Schlüter  <schlueter@phpbar.de>
+
+    * sapi/cli/php_cli.c
+      sapi/cli/php_cli_readline.c:
+      - Fix readline loop-condition
+      - Fix cli_is_valid_code detection
+
+2005-05-17  Antony Dovgal  <tony2001@phpclub.net>
+
+    * (PHP_4_3)
+      ext/gd/config.m4
+      ext/gd/config.m4:
+      MFH: gdImageGifCtx() is always available in bundled lib
+
+    * ext/gd/config.m4:
+      gdImageGifCtx() is always available in bundled lib
+
 2005-05-16  Sara Golemon  <php@alphaweb.net>
 
     * TSRM/TSRM.c:
@@ -2276,7 +2299,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1985 2005/05/17 00:33:24 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1986 2005/05/18 00:33:36 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -5677,7 +5700,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1985 2005/05/17 00:33:24 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1986 2005/05/18 00:33:36 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -6158,7 +6181,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1985 2005/05/17 00:33:24 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1986 2005/05/18 00:33:36 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -7632,7 +7655,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1985 2005/05/17 00:33:24 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1986 2005/05/18 00:33:36 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

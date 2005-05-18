@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.45 2005/05/17 23:23:52 iliaa Exp $ */
+/* $Id: mysql_driver.c,v 1.46 2005/05/18 22:40:56 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -46,7 +46,6 @@ int _pdo_mysql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *file, int lin
 	pdo_mysql_db_handle *H = (pdo_mysql_db_handle *)dbh->driver_data;
 	pdo_error_type *pdo_err; 
 	pdo_mysql_error_info *einfo;
-	char *sqlstate = NULL;
 
 	if (stmt) {
 		pdo_mysql_stmt *S = (pdo_mysql_stmt*)stmt->driver_data;

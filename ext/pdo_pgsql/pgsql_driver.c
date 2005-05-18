@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.38 2005/05/13 18:09:03 wez Exp $ */
+/* $Id: pgsql_driver.c,v 1.39 2005/05/18 22:40:56 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -215,7 +215,7 @@ static char *pdo_pgsql_last_insert_id(pdo_dbh_t *dbh, const char *name, unsigned
 
 	/* TODO: if name != NULL, pull out last value for that sequence/column */
 
-	*len = spprintf(&id, 0, "%ld", H->pgoid);
+	*len = spprintf(&id, 0, "%lld", H->pgoid);
 	return id;
 }
 

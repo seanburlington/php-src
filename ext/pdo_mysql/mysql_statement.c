@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.24 2005/04/19 20:53:54 iliaa Exp $ */
+/* $Id: mysql_statement.c,v 1.25 2005/05/18 22:40:56 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -115,7 +115,6 @@ static int pdo_mysql_stmt_fetch(pdo_stmt_t *stmt,
 static int pdo_mysql_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC)
 {
 	pdo_mysql_stmt *S = (pdo_mysql_stmt*)stmt->driver_data;
-	MYSQL_RES *R = S->result;
 	struct pdo_column_data *cols = stmt->columns;
 	unsigned int i;
 

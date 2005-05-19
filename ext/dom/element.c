@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.32 2004/11/18 19:54:30 rrichards Exp $ */
+/* $Id: element.c,v 1.33 2005/05/19 13:47:21 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -298,7 +298,6 @@ PHP_FUNCTION(dom_element_remove_attribute)
 	if (php_dom_object_get_data((xmlNodePtr) attrp) == NULL) {
 		node_list_unlink(attrp->children TSRMLS_CC);
 		xmlUnlinkNode((xmlNodePtr) attrp);
-		xmlFreeProp(attrp);
 	} else {
 		xmlUnlinkNode((xmlNodePtr) attrp);
 	}

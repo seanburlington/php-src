@@ -1,5 +1,5 @@
 /*
-  $Id: filter.c,v 1.1 2005/02/23 22:41:43 rasmus Exp $
+  $Id: filter.c,v 1.2 2005/05/19 21:08:04 rasmus Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -174,7 +174,7 @@ PHP_MINFO_FUNCTION(filter)
 
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "PHP extension for Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.1 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.2 $");
 	sprintf(tmp, "%d",IF_G(default_filter));
 	php_info_print_table_row( 2, "default_filter", tmp);
 	php_info_print_table_end();
@@ -194,7 +194,14 @@ unsigned int  php_sapi_filter(int arg, char *var, char **val, unsigned int val_l
 
 	assert(*val != NULL);
 
+#if PHP_API_VERSION > 20041224
+	if(IF_G(default_filter)==F_UNSAFE_RAW) {
+		if(new_val_len) *new_val_len = val_len;
+		return 1;
+	}
+#else
 	if(IF_G(default_filter)==F_UNSAFE_RAW) return(val_len);
+#endif
 
 	switch(arg) {
 		case PARSE_GET:
@@ -278,8 +285,10 @@ unsigned int  php_sapi_filter(int arg, char *var, char **val, unsigned int val_l
 	*val = out;
 #if PHP_API_VERSION > 20041224
 	if(new_val_len) *new_val_len = out_len?out_len-1:0;
-#endif
+	return 1;
+#else
 	return(out_len?out_len-1:0);
+#endif
 }
 /* }}} */
 

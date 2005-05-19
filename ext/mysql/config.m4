@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.61.2.1 2004/12/30 07:04:10 sniper Exp $
+dnl $Id: config.m4,v 1.61.2.2 2005/05/19 14:23:07 gschlossnagle Exp $
 dnl
 
 AC_DEFUN([MYSQL_LIB_CHK], [
@@ -83,7 +83,7 @@ if test "$PHP_MYSQL" != "no"; then
 Note that the MySQL client library is not bundled anymore.])
   fi
 
-  for i in lib lib/mysql; do
+  for i in lib lib/mysql lib64 lib64/mysql; do
     MYSQL_LIB_CHK($i)
   done
 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.391.2.11 2005/03/24 00:17:53 tony2001 Exp $ */
+/* $Id: session.c,v 1.391.2.12 2005/05/20 10:28:16 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1134,7 +1134,7 @@ PHPAPI void php_session_start(TSRMLS_D)
 	 */
 
 	if (!PS(id)) {
-		if (zend_hash_find(&EG(symbol_table), "_COOKIE",
+		if (PS(use_cookies) && zend_hash_find(&EG(symbol_table), "_COOKIE",
 					sizeof("_COOKIE"), (void **) &data) == SUCCESS &&
 				Z_TYPE_PP(data) == IS_ARRAY &&
 				zend_hash_find(Z_ARRVAL_PP(data), PS(session_name),

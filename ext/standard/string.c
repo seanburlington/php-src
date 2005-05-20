@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.420.2.7 2005/04/03 18:09:23 iliaa Exp $ */
+/* $Id: string.c,v 1.420.2.8 2005/05/20 14:24:16 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2943,7 +2943,7 @@ PHPAPI int php_char_to_str_ex(char *str, uint len, char from, char *to, int to_l
 	char *source, *target, *tmp, *source_end=str+len, *tmp_end = NULL;
 	
 	for (source = str; source < source_end; source++) {
-		if (*source == from) {
+		if ((case_sensitivity && *source == from) || (!case_sensitivity && tolower(*source) == tolower(from))) {
 			char_count++;
 		}
 	}

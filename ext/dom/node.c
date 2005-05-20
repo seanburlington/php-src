@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.29.2.5 2005/04/18 23:08:41 rrichards Exp $ */
+/* $Id: node.c,v 1.29.2.6 2005/05/20 15:02:48 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -992,7 +992,7 @@ PHP_FUNCTION(dom_node_insert_before)
 				lastattr = xmlHasProp(refp->parent, child->name);
 			else
 				lastattr = xmlHasNsProp(refp->parent, child->name, child->ns->href);
-			if (lastattr != NULL) {
+			if (lastattr != NULL && lastattr->type != XML_ATTRIBUTE_DECL) {
 				if (lastattr != (xmlAttrPtr) child) {
 					xmlUnlinkNode((xmlNodePtr) lastattr);
 					php_libxml_node_free_resource((xmlNodePtr) lastattr TSRMLS_CC);
@@ -1034,7 +1034,7 @@ PHP_FUNCTION(dom_node_insert_before)
 				lastattr = xmlHasProp(parentp, child->name);
 			else
 				lastattr = xmlHasNsProp(parentp, child->name, child->ns->href);
-			if (lastattr != NULL) {
+			if (lastattr != NULL && lastattr->type != XML_ATTRIBUTE_DECL) {
 				if (lastattr != (xmlAttrPtr) child) {
 					xmlUnlinkNode((xmlNodePtr) lastattr);
 					php_libxml_node_free_resource((xmlNodePtr) lastattr TSRMLS_CC);
@@ -1286,7 +1286,7 @@ PHP_FUNCTION(dom_node_append_child)
 			lastattr = xmlHasProp(nodep, child->name);
 		else
 			lastattr = xmlHasNsProp(nodep, child->name, child->ns->href);
-		if (lastattr != NULL) {
+		if (lastattr != NULL && lastattr->type != XML_ATTRIBUTE_DECL) {
 			if (lastattr != (xmlAttrPtr) child) {
 				xmlUnlinkNode((xmlNodePtr) lastattr);
 				php_libxml_node_free_resource((xmlNodePtr) lastattr TSRMLS_CC);

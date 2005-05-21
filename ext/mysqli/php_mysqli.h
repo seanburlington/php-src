@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.38.2.5 2005/05/13 13:53:08 georg Exp $ 
+  $Id: php_mysqli.h,v 1.38.2.6 2005/05/21 08:54:56 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -95,7 +95,7 @@ typedef struct {
 #define PHP_MYSQLI_API
 #endif
 
-#if MYSQL_VERSION_ID > 40112 && MYSQL_VERSION_ID < 50000
+#if (MYSQL_VERSION_ID > 40112 && MYSQL_VERSION_ID < 50000) || MYSQL_VERSION_ID > 50005
 #define HAVE_MYSQLI_SET_CHARSET
 #endif
 

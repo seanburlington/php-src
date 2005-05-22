@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.391.2.13 2005/05/21 18:54:57 rasmus Exp $ */
+/* $Id: session.c,v 1.391.2.14 2005/05/22 12:57:45 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -143,6 +143,7 @@ static PHP_INI_MH(OnUpdateSaveDir) {
 		}
 	}
 	OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);
+	return SUCCESS;
 }
 
 /* {{{ PHP_INI

@@ -1,3 +1,56 @@
+2005-05-21  Rasmus Lerdorf  <rasmus@lerdorf.com>
+
+    * (PHP_4_3)
+      NEWS
+      ext/session/session.c:
+      Fixed bug #33072 - Add a safemode/open_basedir check for runtime save_path
+      change
+
+    * (PHP_5_0)
+      NEWS
+      ext/session/session.c:
+      MFH Fixed bug 33072 - safemode/open_basedir check for runtime save_path
+      change
+
+    * acinclude.m4:
+      Avoid syntax errors on some operating systems
+
+    * (PHP_5_0)
+      main/main.c:
+      Ah, never mind.  Didn't notice a conflict on my last checkout.  Jani's MFH
+      was fine.
+
+    * (PHP_5_0)
+      main/main.c:
+      Roll back Jani's blind MFH here.  zend_call_destructors() is PHP 5.1 only.
+
+    * ext/session/session.c:
+      Fixed bug 33072 - safemode/open_basedir check for runtime save_path change
+
+2005-05-21  Georg Richter  <georg@mysql.com>
+
+    * (PHP_5_0)
+      NEWS
+      ext/mysqli/mysqli_api.c
+      ext/mysqli/php_mysqli.h
+      ext/mysqli/tests/bug33090.phpt:
+      MFH:
+      - fix for bug #33090 (mysqli_prepare doesn't return an error)
+      - mysql_set_charset now works for MySQL >= 5.0.6
+
+    * ext/mysqli/tests/bug33090.phpt
+      ext/mysqli/tests/bug33090.phpt:
+      
+      enabled set_charset for MySQL Versions >= 5.0.6
+      added testcase for bug #33090
+
+    * ext/mysqli/php_mysqli.h:
+      enabled set_charset for MySQL Versions >= 5.0.6
+      added testcase for bug #33090
+
+    * ext/mysqli/mysqli_api.c:
+      fix for bug #33090 (mysql_prepare doesn't return error)
+
 2005-05-20  Grant Croker  <grant.croker@ca.com>
 
     * (PHP_4_3)
@@ -2479,7 +2532,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1989 2005/05/21 00:33:59 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1990 2005/05/22 00:33:30 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -5880,7 +5933,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1989 2005/05/21 00:33:59 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1990 2005/05/22 00:33:30 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -6361,7 +6414,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1989 2005/05/21 00:33:59 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1990 2005/05/22 00:33:30 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -7835,7 +7888,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1989 2005/05/21 00:33:59 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1990 2005/05/22 00:33:30 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

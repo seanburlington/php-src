@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.11 2005/05/23 12:34:33 grantc Exp $
+dnl $Id: config.m4,v 1.12 2005/05/23 15:32:59 grantc Exp $
 dnl
 
 PHP_ARG_WITH(ingres, for Ingres II support,
@@ -8,7 +8,7 @@ PHP_ARG_WITH(ingres, for Ingres II support,
 
 if test "$PHP_INGRES" != "no"; then
   AC_DEFINE(HAVE_II, 1, [Whether you have Ingres II])
-  PHP_NEW_EXTENSION(ingres, ii.c, $ext_shared)
+  PHP_NEW_EXTENSION(ingres_ii, ii.c, $ext_shared)
   PHP_SUBST(II_SHARED_LIBADD)
 
   if test "$PHP_INGRES" = "yes"; then

@@ -1,3 +1,31 @@
+2005-05-22  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      NEWS
+      Zend/zend_highlight.c
+      ZendEngine2/zend_highlight.c
+      tests/strings/004.phpt:
+      MFH: Fixed bug #29338 (unencoded spaces get ignored after certain tags).
+
+    * tests/strings/004.phpt:
+      Adjust highlight test.
+
+    * ZendEngine2/zend_highlight.c:
+      Fixed bug #29338 (unencoded spaces get ignored after certain tags).
+
+2005-05-22  Antony Dovgal  <tony2001@phpclub.net>
+
+    * ext/session/session.c:
+      fix compile warning
+
+2005-05-22  Stanislav Malyshev  <stas@zend.com>
+
+    * (PHP_4_3)
+      Zend/zend.c
+      ZendEngine2/zend.c
+      ZendEngine2/zend.c:
+      fix leak
+
 2005-05-21  Rasmus Lerdorf  <rasmus@lerdorf.com>
 
     * (PHP_4_3)
@@ -2532,7 +2560,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1990 2005/05/22 00:33:30 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1991 2005/05/23 00:34:38 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -5933,7 +5961,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1990 2005/05/22 00:33:30 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1991 2005/05/23 00:34:38 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -6414,7 +6442,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1990 2005/05/22 00:33:30 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1991 2005/05/23 00:34:38 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -7888,7 +7916,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1990 2005/05/22 00:33:30 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1991 2005/05/23 00:34:38 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

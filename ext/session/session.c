@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.412 2005/05/22 12:57:26 tony2001 Exp $ */
+/* $Id: session.c,v 1.413 2005/05/23 06:46:25 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -131,9 +131,10 @@ static PHP_INI_MH(OnUpdateSerializer)
 	return SUCCESS;
 }
 
-static PHP_INI_MH(OnUpdateSaveDir) {
+static PHP_INI_MH(OnUpdateSaveDir)
+{
 	/* Only do the safemode/open_basedir check at runtime */
-	if(stage == PHP_INI_STAGE_RUNTIME) {
+	if (stage == PHP_INI_STAGE_RUNTIME) {
 		if (PG(safe_mode) && (!php_checkuid(new_value, NULL, CHECKUID_ALLOW_ONLY_DIR))) {
 			return FAILURE;
 		}

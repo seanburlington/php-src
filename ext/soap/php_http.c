@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.70 2005/05/10 10:20:58 dmitry Exp $ */
+/* $Id: php_http.c,v 1.71 2005/05/23 06:25:16 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -1129,6 +1129,14 @@ static int get_http_body(php_stream *stream, int close, char *headers,  char **r
 	if (header) {
 		header_length = atoi(header);
 		efree(header);
+		if (!header_length && !header_chunked) {
+			/* Empty response */
+			http_buf = emalloc(1);
+			http_buf[0] = '\0';
+			(*response) = http_buf;
+			(*out_size) = 0;
+			return TRUE;
+		}
 	}
 
 	if (header_chunked) {

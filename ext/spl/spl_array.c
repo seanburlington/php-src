@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.67 2005/05/19 15:52:02 helly Exp $ */
+/* $Id: spl_array.c,v 1.68 2005/05/24 17:59:42 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -607,7 +607,8 @@ static void spl_array_write_property(zval *object, zval *member, zval *value TSR
 
 	if ((intern->ar_flags & SPL_ARRAY_ARRAY_AS_PROPS) != 0
 	&& !std_object_handlers.has_property(object, member, 2 TSRMLS_CC)) {
-		return spl_array_write_dimension(object, member, value TSRMLS_CC);
+		spl_array_write_dimension(object, member, value TSRMLS_CC);
+		return;
 	}
 	std_object_handlers.write_property(object, member, value TSRMLS_CC);
 } /* }}} */

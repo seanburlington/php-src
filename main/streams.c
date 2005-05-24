@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.99 2005/05/23 21:51:00 iliaa Exp $ */
+/* $Id: streams.c,v 1.125.2.100 2005/05/24 10:14:16 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -1371,8 +1371,8 @@ PHPAPI php_stream *_php_stream_fopen_tmpfile(int dummy STREAMS_DC TSRMLS_DC)
 	if (fd != -1)	{
 		php_stream *stream = php_stream_fopen_from_fd_rel(fd, "r+b", NULL);
 		if (stream) {
-			stream->wrapper = &php_plain_files_wrapper;
 			php_stdio_stream_data *self = (php_stdio_stream_data*)stream->abstract;
+			stream->wrapper = &php_plain_files_wrapper;
 
 			self->temp_file_name = opened_path;
 			return stream;

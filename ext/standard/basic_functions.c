@@ -17,14 +17,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.717 2005/05/16 08:37:14 tony2001 Exp $ */
+/* $Id: basic_functions.c,v 1.718 2005/05/24 15:21:18 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
 #include "php_main.h"
 #include "php_globals.h"
 #include "php_ini.h"
-#include "internal_functions_registry.h"
 #include "php_standard.h"
 #include "php_math.h"
 #include "php_http.h"

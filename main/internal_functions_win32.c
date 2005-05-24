@@ -17,14 +17,13 @@
 	+----------------------------------------------------------------------+
 */
 
-/* $Id: internal_functions_win32.c,v 1.84 2004/01/08 08:17:53 andi Exp $ */
+/* $Id: internal_functions_win32.c,v 1.85 2005/05/24 15:24:33 sniper Exp $ */
 
 /* {{{ includes
  */
 #include "php.h"
 #include "php_main.h"
 #include "zend_modules.h"
-#include "internal_functions_registry.h"
 #include "zend_compile.h"
 #include <stdarg.h>
 #include <stdlib.h>

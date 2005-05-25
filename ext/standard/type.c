@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.27 2005/04/15 22:46:37 sniper Exp $ */
+/* $Id: type.c,v 1.28 2005/05/25 10:57:40 stas Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -207,6 +207,10 @@ static void php_is_type(INTERNAL_FUNCTION_PARAMETERS, int type)
 	if (Z_TYPE_PP(arg) == type) {
 		if (type == IS_OBJECT) {
 			zend_class_entry *ce;
+			if(Z_OBJ_HT_PP(arg)->get_class_entry == NULL) {
+			/* if there's no get_class_entry it's not a PHP object, so it can't be INCOMPLETE_CLASS */
+				RETURN_TRUE;
+			}
 			ce = Z_OBJCE_PP(arg);
 			if (!strcmp(ce->name, INCOMPLETE_CLASS)) {
 				RETURN_FALSE;

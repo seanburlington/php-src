@@ -1,3 +1,43 @@
+2005-05-24  Andrei Zmievski  <andrei@gravitonic.com>
+
+    * ext/pcre/php_pcre.c:
+      Flush regexp cache if we detect corruption.
+
+2005-05-24  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * ext/standard/basic_functions.c
+      main/internal_functions.c.in
+      main/internal_functions_nw.c
+      main/internal_functions_win32.c:
+      nuked unused header file
+
+    * win32/php5dll.dsp
+      win32/php5dllts.dsp:
+      nuked file
+
+    * main/internal_functions_registry.h:
+      - Remove unused file
+
+2005-05-24  Antony Dovgal  <antony@zend.com>
+
+    * main/streams/plain_wrapper.c:
+      make it compile on Win32 (thanks to Sebastian for noticing)
+
+2005-05-24  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * NEWS
+      ext/ingres_ii/.cvsignore
+      ext/ingres_ii/CREDITS
+      ext/ingres_ii/EXPERIMENTAL
+      ext/ingres_ii/README
+      ext/ingres_ii/config.m4
+      ext/ingres_ii/config.w32
+      ext/ingres_ii/ii.c
+      ext/ingres_ii/ii.h
+      ext/ingres_ii/ingres.dsp
+      ext/ingres_ii/php_ii.h:
+      - Moved ingres_ii to PECL
+
 2005-05-23  Ilia Alshanetsky  <ilia@prohost.org>
 
     * (PHP_4_3)
@@ -2629,7 +2669,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1992 2005/05/24 00:33:57 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1993 2005/05/25 00:34:12 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -6030,7 +6070,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1992 2005/05/24 00:33:57 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1993 2005/05/25 00:34:12 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -6511,7 +6551,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1992 2005/05/24 00:33:57 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1993 2005/05/25 00:34:12 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -7985,7 +8025,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1992 2005/05/24 00:33:57 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1993 2005/05/25 00:34:12 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.81.2.8 2005/04/25 21:18:41 sniper Exp $ */
+/* $Id: php_variables.c,v 1.81.2.9 2005/05/25 17:41:18 dmitry Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -707,7 +707,15 @@ int php_hash_environment(TSRMLS_D)
 
 static zend_bool php_auto_globals_create_server(char *name, uint name_len TSRMLS_DC)
 {
-	php_register_server_variables(TSRMLS_C);
+	if (strchr(PG(variables_order),'S') || strchr(PG(variables_order),'s')) {
+		php_register_server_variables(TSRMLS_C);
+	} else {
+		zval *server_vars=NULL;
+		ALLOC_ZVAL(server_vars);
+		array_init(server_vars);
+		INIT_PZVAL(server_vars);
+		PG(http_globals)[TRACK_VARS_SERVER] = server_vars;
+	}
 
 	zend_hash_update(&EG(symbol_table), name, name_len+1, &PG(http_globals)[TRACK_VARS_SERVER], sizeof(zval *), NULL);
 	PG(http_globals)[TRACK_VARS_SERVER]->refcount++;
@@ -729,7 +737,9 @@ static zend_bool php_auto_globals_create_env(char *name, uint name_len TSRMLS_DC
 	INIT_PZVAL(env_vars);
 	PG(http_globals)[TRACK_VARS_ENV] = env_vars;
 	
-	php_import_environment_variables(PG(http_globals)[TRACK_VARS_ENV] TSRMLS_CC);
+	if (strchr(PG(variables_order),'E') || strchr(PG(variables_order),'e')) {
+		php_import_environment_variables(PG(http_globals)[TRACK_VARS_ENV] TSRMLS_CC);
+	}
 
 	zend_hash_update(&EG(symbol_table), name, name_len+1, &PG(http_globals)[TRACK_VARS_ENV], sizeof(zval *), NULL);
 	PG(http_globals)[TRACK_VARS_ENV]->refcount++;

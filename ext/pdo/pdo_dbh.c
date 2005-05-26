@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.71 2005/04/28 00:25:25 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.72 2005/05/26 18:36:15 helly Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1075,6 +1075,7 @@ void pdo_dbh_init(TSRMLS_D)
 	INIT_CLASS_ENTRY(ce, "PDO", pdo_dbh_functions);
 	pdo_dbh_ce = zend_register_internal_class(&ce TSRMLS_CC);
 	pdo_dbh_ce->create_object = pdo_dbh_new;
+	pdo_dbh_ce->constructor->common.fn_flags |= ZEND_ACC_FINAL;
 
 	memcpy(&pdo_dbh_object_handlers, &std_object_handlers, sizeof(zend_object_handlers));
 	pdo_dbh_object_handlers.get_method = dbh_method_get;

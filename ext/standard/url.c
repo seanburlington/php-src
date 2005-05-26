@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.81.2.3 2005/04/25 23:48:30 iliaa Exp $ */
+/* $Id: url.c,v 1.81.2.4 2005/05/26 03:56:34 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -104,6 +104,19 @@ PHPAPI php_url *php_url_parse_ex(char const *str, int length)
 
 	/* parse scheme */
 	if ((e = memchr(s, ':', length)) && (e - s)) {
+		/* validate scheme */
+		p = s;
+		while (p < e) {
+			if (!isalnum(*p)) {
+				if (e + 1 < ue) {
+					goto parse_port;
+				} else {
+					goto just_path;
+				}
+			}
+			p++;
+		}
+	
 		if (*(e + 1) == '\0') { /* only scheme is available */
 			ret->scheme = estrndup(s, (e - s));
 			php_replace_controlchars_ex(ret->scheme, (e - s));

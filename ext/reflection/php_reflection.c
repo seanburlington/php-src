@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.153 2005/05/12 21:25:42 helly Exp $ */
+/* $Id: php_reflection.c,v 1.154 2005/05/26 13:46:17 dmitry Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -516,6 +516,11 @@ static void _parameter_string(string *str, zend_function *fptr, struct _zend_arg
 	}
 	if (arg_info->class_name) {
 		string_printf(str, "%s ", arg_info->class_name);
+		if (arg_info->allow_null) {
+			string_printf(str, "or NULL ");
+		}
+	} else if (arg_info->array_type_hint) {
+		string_printf(str, "array ");
 		if (arg_info->allow_null) {
 			string_printf(str, "or NULL ");
 		}
@@ -1713,6 +1718,20 @@ ZEND_METHOD(reflection_parameter, getClass)
 		free_alloca(lcname);
 		zend_reflection_class_factory(*pce, return_value TSRMLS_CC);
 	}
+}
+/* }}} */
+
+/* {{{ proto public bool ReflectionParameter::isArray()
+   Returns whether parameter MUST be an array */
+ZEND_METHOD(reflection_parameter, isArray)
+{
+	reflection_object *intern;
+	parameter_reference *param;
+
+	METHOD_NOTSTATIC_NUMPARAMS(0);
+	GET_REFLECTION_OBJECT_PTR(param);
+
+	RETVAL_BOOL(param->arg_info->array_type_hint);
 }
 /* }}} */
 
@@ -3852,6 +3871,7 @@ static zend_function_entry reflection_parameter_functions[] = {
 	ZEND_ME(reflection_parameter, getName, NULL, 0)
 	ZEND_ME(reflection_parameter, isPassedByReference, NULL, 0)
 	ZEND_ME(reflection_parameter, getClass, NULL, 0)
+	ZEND_ME(reflection_parameter, isArray, NULL, 0)
 	ZEND_ME(reflection_parameter, allowsNull, NULL, 0)
 	ZEND_ME(reflection_parameter, isOptional, NULL, 0)
 	ZEND_ME(reflection_parameter, isDefaultValueAvailable, NULL, 0)

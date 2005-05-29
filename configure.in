@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.554 2005/05/14 19:33:17 helly Exp $ -*- autoconf -*-
+dnl ## $Id: configure.in,v 1.555 2005/05/29 18:04:34 hholzgra Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -23,6 +23,9 @@ dnl ## In diversion 5 we check which extensions should be compiled.
 dnl ## All of these are normally in the extension directories.
 dnl ## Diversion 5 is the last one.  Here we generate files and clean up.
 
+dnl include Zend specific macro definitions first
+dnl -------------------------------------------------------------------------
+sinclude(Zend/acinclude.m4)
 
 dnl Basic autoconf + automake initialization, generation of config.nice.
 dnl -------------------------------------------------------------------------
@@ -192,7 +195,6 @@ esac
 dnl Include Zend and TSRM configurations.
 dnl -------------------------------------------------------------------------
 
-sinclude(Zend/acinclude.m4)
 sinclude(Zend/Zend.m4)
 sinclude(TSRM/tsrm.m4)
 

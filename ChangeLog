@@ -1,3 +1,14 @@
+2005-05-28  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ZendEngine2/zend_compile.c
+      ZendEngine2/zend_compile.h:
+      - Make zend_do_inheritance ZEND_API
+
+2005-05-28  Sebastian Bergmann  <sb@sebastian-bergmann.de>
+
+    * ext/pcre/config.w32:
+      Sync with config.m4 (missing MATCH_LIMIT broke the Win32 build).
+
 2005-05-27  Andrei Zmievski  <andrei@gravitonic.com>
 
     * (PHP_5_0)
@@ -2924,7 +2935,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1996 2005/05/28 00:40:08 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1997 2005/05/29 00:34:15 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -6325,7 +6336,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.1996 2005/05/28 00:40:08 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.1997 2005/05/29 00:34:15 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -6806,7 +6817,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.1996 2005/05/28 00:40:08 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.1997 2005/05/29 00:34:15 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -8280,7 +8291,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.1996 2005/05/28 00:40:08 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.1997 2005/05/29 00:34:15 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

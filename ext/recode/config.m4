@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.12 2004/11/03 14:32:51 jorton Exp $
+dnl $Id: config.m4,v 1.13 2005/05/29 23:16:44 sniper Exp $
 dnl
 
 PHP_ARG_WITH(recode,for recode support,
-[  --with-recode[=DIR]     Include recode support.])
+[  --with-recode[=DIR]     Include recode support])
 
 if test "$PHP_RECODE" != "no"; then
   RECODE_LIST="$PHP_RECODE /usr/local /usr /opt"

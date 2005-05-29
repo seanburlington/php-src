@@ -1,11 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.10 2002/03/12 16:36:10 sas Exp $
+dnl $Id: config.m4,v 1.11 2005/05/29 23:16:44 sniper Exp $
 dnl
 
 PHP_ARG_WITH(sybase,for Sybase support,
 [  --with-sybase[=DIR]     Include Sybase-DB support.  DIR is the Sybase home
-                          directory, defaults to /home/sybase.])
-
+                          directory, defaults to /home/sybase])
 
 if test "$PHP_SYBASE" != "no"; then
   if test "$PHP_SYBASE" = "yes"; then

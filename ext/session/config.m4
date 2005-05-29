@@ -1,12 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.27 2005/05/07 02:51:53 sniper Exp $
+dnl $Id: config.m4,v 1.28 2005/05/29 23:16:44 sniper Exp $
 dnl
 
 PHP_ARG_ENABLE(session, whether to enable PHP sessions,
 [  --disable-session       Disable session support], yes)
 
 PHP_ARG_WITH(mm,for mm support,
-[  --with-mm[=DIR]         Include mm support for session storage], no, no)
+[  --with-mm[=DIR]           SESSION: Include mm support for session storage], no, no)
 
 if test "$PHP_SESSION" != "no"; then
   PHP_PWRITE_TEST

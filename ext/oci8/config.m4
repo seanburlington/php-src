@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.54 2005/02/25 11:31:10 tony2001 Exp $
+dnl $Id: config.m4,v 1.55 2005/05/29 23:16:42 sniper Exp $
 dnl
 
 AC_DEFUN([PHP_OCI_IF_DEFINED],[
@@ -87,7 +87,7 @@ if test "$PHP_OCI8" = "no"; then
                           Oracle Instant Client. DIR is the directory with the
                           Instant Client libraries. On Linux it will default to
                           /usr/lib/oracle/<most_recent_version>/client/lib
-                          Other platforms will need to have it explicitly specified.])
+                          Other platforms will need to have it explicitly specified])
 else 
   PHP_OCI8_INSTANT_CLIENT="no";
 fi

@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.18 2004/11/03 14:32:51 jorton Exp $
+dnl $Id: config.m4,v 1.19 2005/05/29 23:16:42 sniper Exp $
 dnl
 
 PHP_ARG_WITH(ncurses, for ncurses support,
-[  --with-ncurses[=DIR]    Include ncurses support (CLI/CGI only).])
+[  --with-ncurses[=DIR]    Include ncurses support (CLI/CGI only)])
 
 if test "$PHP_NCURSES" != "no"; then
 

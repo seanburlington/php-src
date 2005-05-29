@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.2 2005/04/27 13:12:55 sniper Exp $
+dnl $Id: config.m4,v 1.3 2005/05/29 23:16:45 sniper Exp $
 dnl
 
 PHP_ARG_WITH(xmlreader, for XMLReader support,
-[  --with-xmlreader        Include XMLReader support.])
+[  --with-xmlreader        Include XMLReader support])
 
 if test -z "$PHP_LIBXML_DIR"; then
   PHP_ARG_WITH(libxml-dir, libxml2 install dir,

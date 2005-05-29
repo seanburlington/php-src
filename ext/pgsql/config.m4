@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.43 2005/04/03 13:06:08 tony2001 Exp $
+dnl $Id: config.m4,v 1.44 2005/05/29 23:16:43 sniper Exp $
 dnl
 
 AC_DEFUN([PHP_PGSQL_CHECK_FUNCTIONS],[
@@ -7,7 +7,7 @@ AC_DEFUN([PHP_PGSQL_CHECK_FUNCTIONS],[
 
 PHP_ARG_WITH(pgsql,for PostgreSQL support,
 [  --with-pgsql[=DIR]      Include PostgreSQL support.  DIR is the PostgreSQL
-                          base install directory or the path to pg_config.])
+                          base install directory or the path to pg_config])
 
 if test "$PHP_PGSQL" != "no"; then
   PHP_EXPAND_PATH($PGSQL_INCLUDE, PGSQL_INCLUDE)

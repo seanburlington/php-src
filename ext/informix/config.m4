@@ -1,10 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.30 2003/02/25 05:33:27 nobbie Exp $
+dnl $Id: config.m4,v 1.31 2005/05/29 23:16:41 sniper Exp $
 dnl
 
 PHP_ARG_WITH(informix,for Informix support,
 [  --with-informix[=DIR]   Include Informix support.  DIR is the Informix base
-                          install directory, defaults to ${INFORMIXDIR:-nothing}.])
+                          install directory, defaults to ${INFORMIXDIR:-nothing}])
 
 if test "$PHP_INFORMIX" != "no"; then
 

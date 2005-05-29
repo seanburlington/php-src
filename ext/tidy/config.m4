@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.4 2005/04/25 20:46:16 john Exp $
+dnl $Id: config.m4,v 1.5 2005/05/29 23:16:45 sniper Exp $
 dnl
 
 PHP_ARG_WITH(tidy,for TIDY support,
-[  --with-tidy[=DIR]      Include TIDY support])
+[  --with-tidy[=DIR]       Include TIDY support])
 
 if test "$PHP_TIDY" != "no"; then
 

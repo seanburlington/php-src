@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.13 2005/05/14 20:06:54 wez Exp $
+dnl $Id: config.m4,v 1.14 2005/05/29 23:16:42 sniper Exp $
 dnl config.m4 for extension pdo
 dnl vim:se ts=2 sw=2 et:
 
@@ -28,7 +28,7 @@ Once you've upgraded, please re-try your PDO install.
 ])
 
 PHP_ARG_ENABLE(pdo, whether to enable PDO support,
-[  --enable-pdo=yes         Enable PHP Data Objects support (recommended)], yes)
+[  --disable-pdo           Disable PHP Data Objects support], yes)
 
 if test "$PHP_PDO" != "no"; then
 

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.78 2004/12/30 07:08:37 sniper Exp $ -*- autoconf -*-
+dnl $Id: config.m4,v 1.79 2005/05/29 23:16:44 sniper Exp $ -*- autoconf -*-
 
 divert(3)dnl
 
@@ -216,7 +216,7 @@ AC_FLUSH_IO
 divert(5)dnl
 
 AC_ARG_WITH(regex,
-[  --with-regex=TYPE       regex library type: system, apache, php. Default: php
+[  --with-regex=TYPE       regex library type: system, apache, php. [TYPE=php]
                           WARNING: Do NOT use unless you know what you are doing!],
 [
   case $withval in 

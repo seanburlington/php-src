@@ -1,12 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.19 2005/04/21 14:57:53 sniper Exp $
+dnl $Id: config.m4,v 1.20 2005/05/29 23:16:46 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for CLI build)
 
 AC_ARG_ENABLE(cli,
 [  --disable-cli           Disable building CLI version of PHP
-                          (this forces --without-pear).],
+                          (this forces --without-pear)],
 [
   PHP_SAPI_CLI=$enableval
 ],[

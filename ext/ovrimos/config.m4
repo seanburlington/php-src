@@ -1,10 +1,10 @@
 dnl
-dnl $Id: config.m4,v 1.6 2003/10/01 02:53:11 sniper Exp $
+dnl $Id: config.m4,v 1.7 2005/05/29 23:16:42 sniper Exp $
 dnl
 
 PHP_ARG_WITH(ovrimos, for Ovrimos SQL Server support,
 [  --with-ovrimos[=DIR]    Include Ovrimos SQL Server support. DIR is the
-                          Ovrimos libsqlcli install directory.])
+                          Ovrimos libsqlcli install directory])
 
 if test "$PHP_OVRIMOS" != "no"; then
   for i in $PHP_OVRIMOS /usr/local /usr; do

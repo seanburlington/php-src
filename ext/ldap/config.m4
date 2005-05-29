@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.38 2005/05/08 15:58:50 sniper Exp $
+dnl $Id: config.m4,v 1.39 2005/05/29 23:16:41 sniper Exp $
 dnl
 
 AC_DEFUN([PHP_LDAP_CHECKS], [
@@ -63,10 +63,10 @@ AC_DEFUN([PHP_LDAP_SASL_CHECKS], [
 ])
 
 PHP_ARG_WITH(ldap,for LDAP support,
-[  --with-ldap[=DIR]       Include LDAP support.])
+[  --with-ldap[=DIR]       Include LDAP support])
 
 PHP_ARG_WITH(ldap-sasl,for LDAP Cyrus SASL support,
-[  --with-ldap-sasl[=DIR]    LDAP: Include Cyrus SASL support.], no, no)
+[  --with-ldap-sasl[=DIR]    LDAP: Include Cyrus SASL support], no, no)
 
 if test "$PHP_LDAP" != "no"; then
 

@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.11 2003/10/01 02:53:12 sniper Exp $
+dnl $Id: config.m4,v 1.12 2005/05/29 23:16:43 sniper Exp $
 dnl
 
 PHP_ARG_WITH(pfpro, for Verisign Payflow Pro support,
-[  --with-pfpro[=DIR]      Include Verisign Payflow Pro support.])
+[  --with-pfpro[=DIR]      Include Verisign Payflow Pro support])
 
 if test "$PHP_PFPRO" != "no"; then
   PFPRO_LIB=libpfpro.so

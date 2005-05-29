@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.68 2005/05/08 14:02:19 sniper Exp $
+dnl $Id: config.m4,v 1.69 2005/05/29 23:16:40 sniper Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -505,7 +505,7 @@ AC_DEFUN([PHP_DBA_BUILTIN_INI],[
 ])
 
 AC_ARG_WITH(inifile,
-[  --with-inifile          DBA: Include INI support],[
+[  --with-inifile            DBA: Include INI support],[
   if test "$withval" != "no"; then
     PHP_DBA_BUILTIN_INI
   fi
@@ -526,7 +526,7 @@ dnl
 dnl FlatFile check must be the last one.
 dnl
 AC_ARG_WITH(flatfile,
-[  --with-flatfile         DBA: Include FlatFile support],[
+[  --with-flatfile           DBA: Include FlatFile support],[
   if test "$withval" != "no"; then
     PHP_DBA_BUILTIN_FLATFILE
   fi

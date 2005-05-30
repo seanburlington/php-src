@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.111.2.2 2005/04/11 11:58:36 dmitry Exp $ */
+/* $Id: wddx.c,v 1.111.2.3 2005/05/30 15:13:57 sniper Exp $ */
 
 #include "php.h"
 
@@ -223,7 +223,7 @@ static void release_wddx_packet_rsrc(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 
 #include "ext/session/php_session.h"
 
-#if HAVE_PHP_SESSION
+#if HAVE_PHP_SESSION && !defined(COMPILE_DL_SESSION)
 /* {{{ PS_SERIALIZER_ENCODE_FUNC
  */
 PS_SERIALIZER_ENCODE_FUNC(wddx)
@@ -302,7 +302,7 @@ PHP_MINIT_FUNCTION(wddx)
 {
 	le_wddx = zend_register_list_destructors_ex(release_wddx_packet_rsrc, NULL, "wddx", module_number);
 
-#if HAVE_PHP_SESSION
+#if HAVE_PHP_SESSION && !defined(COMPILE_DL_SESSION)
 	php_session_register_serializer("wddx",
 									PS_SERIALIZER_ENCODE_NAME(wddx),
 									PS_SERIALIZER_DECODE_NAME(wddx));
@@ -317,7 +317,7 @@ PHP_MINIT_FUNCTION(wddx)
 PHP_MINFO_FUNCTION(wddx)
 {
 	php_info_print_table_start();
-#if HAVE_PHP_SESSION
+#if HAVE_PHP_SESSION && !defined(COMPILE_DL_SESSION)
 	php_info_print_table_header(2, "WDDX Support", "enabled" );
 	php_info_print_table_row(2, "WDDX Session Serializer", "enabled" );
 #else

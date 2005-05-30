@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.161 2005/05/26 11:53:16 helly Exp $ 
+   $Id: sqlite.c,v 1.162 2005/05/30 15:14:12 sniper Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -61,7 +61,7 @@ extern pdo_driver_t pdo_sqlite2_driver;
 
 ZEND_DECLARE_MODULE_GLOBALS(sqlite)
 
-#if HAVE_PHP_SESSION
+#if HAVE_PHP_SESSION && !defined(COMPILE_DL_SESSION)
 extern ps_module ps_mod_sqlite;
 #define ps_sqlite_ptr &ps_mod_sqlite
 #endif
@@ -1036,7 +1036,7 @@ PHP_MINIT_FUNCTION(sqlite)
 
 	REGISTER_INI_ENTRIES();
 
-#if HAVE_PHP_SESSION
+#if HAVE_PHP_SESSION && !defined(COMPILE_DL_SESSION)
 	php_session_register_module(ps_sqlite_ptr);
 #endif
 	
@@ -1108,7 +1108,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.161 2005/05/26 11:53:16 helly Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.162 2005/05/30 15:14:12 sniper Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.71 2005/05/23 06:25:16 dmitry Exp $ */
+/* $Id: php_http.c,v 1.72 2005/05/30 23:46:08 iliaa Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -686,7 +686,7 @@ try_again:
 		if (http_version) {
 			char *tmp;
 
-			if (strncmp(http_version,"1.1", 3)) {
+			if (!strncmp(http_version,"1.1", 3)) {
 				http_1_1 = 1;
 			}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.166 2005/05/24 21:07:32 andrei Exp $ */
+/* $Id: php_pcre.c,v 1.167 2005/05/31 12:54:55 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -761,9 +761,9 @@ static int preg_do_eval(char *eval_str, int eval_str_len, char *subject,
 					   in instead of the backref */
 					match = subject + offsets[backref<<1];
 					match_len = offsets[(backref<<1)+1] - offsets[backref<<1];
-					if (match_len)
-						esc_match = php_addslashes(match, match_len, &esc_match_len, 0 TSRMLS_CC);
-					else {
+					if (match_len) {
+						esc_match = php_addslashes_ex(match, match_len, &esc_match_len, 0, 1 TSRMLS_CC);
+					} else {
 						esc_match = match;
 						esc_match_len = 0;
 					}

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.112 2005/03/06 22:18:09 helly Exp $ */
+/* $Id: image.c,v 1.113 2005/06/01 22:28:03 iliaa Exp $ */
 
 #include "php.h"
 #include <stdio.h>
@@ -398,7 +398,7 @@ static unsigned int php_next_marker(php_stream * stream, int last_marker, int co
 				last_marker = M_PSEUDO; /* stop skipping non 0xff for M_COM */
 			}
 		}
-		if (++a > 10)
+		if (++a > 25)
 		{
 			/* who knows the maxim amount of 0xff? though 7 */
 			/* but found other implementations              */

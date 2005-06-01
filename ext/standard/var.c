@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.191.2.5 2004/12/17 14:39:35 derick Exp $ */
+/* $Id: var.c,v 1.191.2.6 2005/06/01 10:53:25 dmitry Exp $ */
 
 
 /* {{{ includes 
@@ -671,7 +671,8 @@ static void php_var_serialize_intern(smart_str *buf, zval **struc, HashTable *va
 				zval fname;
 				int res;
 
-				if(Z_OBJCE_PP(struc) != PHP_IC_ENTRY) {
+				if (Z_OBJCE_PP(struc) != PHP_IC_ENTRY &&
+				    zend_hash_exists(&Z_OBJCE_PP(struc)->function_table, "__sleep", sizeof("__sleep"))) {
 					INIT_PZVAL(&fname);
 					ZVAL_STRINGL(&fname, "__sleep", sizeof("__sleep") - 1, 0);
 					res = call_user_function_ex(CG(function_table), struc, &fname, 

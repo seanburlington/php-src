@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.c,v 1.55 2005/04/20 08:30:40 dmitry Exp $ */
+/* $Id: php_schema.c,v 1.56 2005/06/01 14:43:13 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -88,20 +88,10 @@ static encodePtr create_encoder(sdlPtr sdl, sdlTypePtr cur_type, const char *ns,
 
 static encodePtr get_create_encoder(sdlPtr sdl, sdlTypePtr cur_type, const char *ns, const char *type)
 {
-	encodePtr enc = NULL;
-	smart_str nscat = {0};
-
-	smart_str_appends(&nscat, ns);
-	smart_str_appendc(&nscat, ':');
-	smart_str_appends(&nscat, type);
-	smart_str_0(&nscat);
-
-	enc = get_encoder_ex(sdl, nscat.c, nscat.len);
+	encodePtr enc = get_encoder(sdl, ns, type);
 	if (enc == NULL) {
 		enc = create_encoder(sdl, cur_type, ns, type);
 	}
-
-	smart_str_free(&nscat);
 	return enc;
 }
 

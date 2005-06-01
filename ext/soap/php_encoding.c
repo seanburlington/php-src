@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.71.2.18 2005/04/20 08:31:09 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.71.2.19 2005/06/01 14:42:49 dmitry Exp $ */
 
 #include <time.h>
 
@@ -2297,6 +2297,9 @@ static zval *guess_zval_convert(encodeTypePtr type, xmlNodePtr data)
 		if (tmpattr != NULL) {
 		  type_name = tmpattr->children->content;
 			enc = get_encoder_from_prefix(SOAP_GLOBAL(sdl), data, tmpattr->children->content);
+			if (type == &enc->details) {
+				enc = NULL;
+			}
 			if (enc != NULL) {
 			  encodePtr tmp = enc;
 			  while (tmp &&

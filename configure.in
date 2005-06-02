@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.556 2005/05/29 23:16:39 sniper Exp $ -*- autoconf -*-
+dnl ## $Id: configure.in,v 1.557 2005/06/02 21:29:24 sniper Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -142,6 +142,17 @@ PHP_PROG_LEX
 
 dnl Platform-specific compile settings.
 dnl -------------------------------------------------------------------------
+
+dnl See bug #28605
+case $host_cpu in
+alpha*)
+    if test "$GCC" = "yes"; then
+      CFLAGS="$CFLAGS -mieee"
+    else
+      CFLAGS="$CFLAGS -ieee"
+    fi
+    ;;
+esac
 
 case $host_alias in
 *solaris*)

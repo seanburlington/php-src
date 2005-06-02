@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.179.2.3 2005/01/18 15:07:10 tony2001 Exp $ */
+/* $Id: php_odbc.c,v 1.179.2.4 2005/06/02 15:42:44 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2437,8 +2437,10 @@ PHP_FUNCTION(odbc_next_result)
 			result->values = NULL;
 		}
 		RETURN_TRUE;
-	}
-	else {
+	} else if (rc == SQL_NO_DATA_FOUND) {
+		RETURN_FALSE;
+	} else {
+		odbc_sql_error(result->conn_ptr, result->stmt, "SQLMoreResults");
 		RETURN_FALSE;
 	}
 }

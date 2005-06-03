@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.415 2005/06/01 18:27:50 tony2001 Exp $ */
+/* $Id: session.c,v 1.416 2005/06/03 22:09:22 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1342,9 +1342,17 @@ PHP_FUNCTION(session_module_name)
 	zval **p_name;
 	int ac = ZEND_NUM_ARGS();
 
-	if (ac < 0 || ac > 1 || zend_get_parameters_ex(ac, &p_name) == FAILURE)
+	if (ac < 0 || ac > 1 || zend_get_parameters_ex(ac, &p_name) == FAILURE) {
 		WRONG_PARAM_COUNT;
+	}
 
+	/* Set return_value to current module name */
+	if (PS(mod) && PS(mod)->s_name) {
+		RETVAL_STRING(safe_estrdup(PS(mod)->s_name), 0);
+	} else {
+		RETVAL_EMPTY_STRING();
+	}
+		
 	if (ac == 1) {
 		convert_to_string_ex(p_name);
 		if (!_php_find_ps_module(Z_STRVAL_PP(p_name) TSRMLS_CC)) {
@@ -1357,19 +1365,7 @@ PHP_FUNCTION(session_module_name)
 		}
 		PS(mod_data) = NULL;
 
-		if (PS(mod) && PS(mod)->s_name) {
-			RETVAL_STRING(safe_estrdup(PS(mod)->s_name), 0);
-		} else {
-			RETVAL_EMPTY_STRING();
-		}
-		
 		zend_alter_ini_entry("session.save_handler", sizeof("session.save_handler"), Z_STRVAL_PP(p_name), Z_STRLEN_PP(p_name), PHP_INI_USER, PHP_INI_STAGE_RUNTIME);
-	} else {
-		if (PS(mod) && PS(mod)->s_name) {
-			RETURN_STRING(safe_estrdup(PS(mod)->s_name), 0);
-		} else {
-			RETURN_EMPTY_STRING();
-		}
 	}
 }
 /* }}} */

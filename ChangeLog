@@ -1,3 +1,83 @@
+2005-06-02  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * acinclude.m4
+      build/libtool.m4:
+      - Revert previous change in build/libtool.m4 and make sure
+        the PATH_SEPARATOR check is only done under autoconf 2.13.
+
+    * (PHP_4_3)
+      NEWS
+      NEWS
+      configure.in
+      configure.in:
+      MFH: - Fixed bug #28605 (Need to use -[m]ieee option for Alpha CPUs)
+
+    * configure.in:
+      - Fixed bug #28605 (Need to use -[m]ieee option for Alpha CPUs)
+
+2005-06-02  Antony Dovgal  <antony@zend.com>
+
+    * (PHP_4_3)
+      NEWS
+      ext/curl/curl.c
+      ext/curl/php_curl.h:
+      MFH: fix bug #33222 (segfault when CURL handle is closed in a callback).
+
+    * (PHP_5_0)
+      NEWS
+      ext/curl/interface.c
+      ext/curl/php_curl.h:
+      MFH: fix bug #33222 (segfault when CURL handle is closed in a callback).
+      fix segfaults when CURL callback functions throw exception.
+
+    * ext/curl/interface.c
+      ext/curl/php_curl.h:
+      fix bug #33222 (segfault when CURL handle is closed in a callback).
+      fix segfaults when CURL callback functions throw exception.
+
+2005-06-02  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * ext/sqlite/config.m4:
+      We only need LEMON for bundled stuff
+
+2005-06-02  Antony Dovgal  <antony@zend.com>
+
+    * (PHP_4_3)
+      NEWS
+      NEWS
+      ext/odbc/php_odbc.c
+      ext/odbc/php_odbc.c:
+      MFH: fix bug #33214 (odbc_next_result does not signal SQL errors with
+      2-statement SQL batches).
+      Path by rich at kastle dot com.
+
+    * ext/odbc/php_odbc.c:
+      fix bug #33214 (odbc_next_result does not signal SQL errors with
+      2-statement SQL batches).
+      Path by rich at kastle dot com.
+
+2005-06-02  Derick Rethans  <php@derickrethans.nl>
+
+    * ext/standard/string.c
+      ext/standard/string.c
+      ext/standard/string.c:
+      - That should have been removed, not commented out.
+
+    * (PHP_4_3)
+      NEWS
+      NEWS
+      ext/standard/string.c
+      ext/standard/string.c:
+      - MFH: Fixed memory corruption in stristr().
+
+    * ext/standard/string.c:
+      - Fixed memory corruption in stristr().
+
+2005-06-02  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * ext/standard/var_unserializer.c:
+      touch
+
 2005-06-01  Ilia Alshanetsky  <ilia@prohost.org>
 
     * (PHP_4_3)
@@ -3200,7 +3280,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2001 2005/06/02 00:35:18 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2002 2005/06/03 00:34:04 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -6601,7 +6681,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2001 2005/06/02 00:35:18 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2002 2005/06/03 00:34:04 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -7082,7 +7162,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2001 2005/06/02 00:35:18 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2002 2005/06/03 00:34:04 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -8556,7 +8636,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2001 2005/06/02 00:35:18 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2002 2005/06/03 00:34:04 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

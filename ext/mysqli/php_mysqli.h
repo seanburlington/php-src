@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.48 2005/05/21 08:46:45 georg Exp $ 
+  $Id: php_mysqli.h,v 1.49 2005/06/03 08:49:00 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -94,6 +94,32 @@ typedef struct {
 	char	error_msg[LOCAL_INFILE_ERROR_LEN];
 	void	*userdata;
 } mysqli_local_infile;
+
+typedef struct {
+  uint				number;
+  uint				primary_number;
+  uint				binary_number;
+  uint				state;
+  const char		*csname;
+  const char		*name;
+  const char		*comment;
+  const char		*tailoring;
+  unsigned char		*ctype;
+  unsigned char		*to_lower;
+  unsigned char		*to_upper;
+  unsigned char		*sort_order;
+  unsigned short	*contractions;
+  unsigned short	**sort_order_big;
+  unsigned short	*tab_to_uni;
+  void				*tab_from_uni;
+  unsigned char		*state_map;
+  unsigned char		*ident_map;
+  uint				strxfrm_multiply;
+  uint				mbminlen;
+  uint				mbmaxlen;
+  unsigned short	min_sort_char;
+  unsigned short	max_sort_char; /* For LIKE optimization */
+} CHARSET_INFO;
 
 #define phpext_mysqli_ptr &mysqli_module_entry
 
@@ -326,6 +352,7 @@ PHP_FUNCTION(mysqli_field_count);
 PHP_FUNCTION(mysqli_field_seek);
 PHP_FUNCTION(mysqli_field_tell);
 PHP_FUNCTION(mysqli_free_result);
+PHP_FUNCTION(mysqli_get_charset);
 PHP_FUNCTION(mysqli_get_client_info);
 PHP_FUNCTION(mysqli_get_client_version);
 PHP_FUNCTION(mysqli_get_host_info);

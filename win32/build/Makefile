@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.32 2005/02/26 01:07:48 edink Exp $
+# $Id: Makefile,v 1.33 2005/06/05 02:33:26 wez Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -134,8 +134,11 @@ install: really-install
 
 really-install:
 	@if not exist $(PHP_PREFIX) mkdir $(PHP_PREFIX)
+	@echo Installing files under $(PHP_PREFIX)
 	@copy $(BUILD_DIR)\*.exe $(PHP_PREFIX) /y >nul
 	@copy $(BUILD_DIR)\*.dll $(PHP_PREFIX) /y >nul
-	$(PHP_PREFIX)\php.exe -n -dextension_dir=$(PHP_PREFIX) win32/build/registersyslog.php $(PHP_PREFIX)\$(PHPDLL)
+	@echo Registering event source with syslog (requires admin rights)
+	@echo It's okay for this step to fail:
+	-$(PHP_PREFIX)\php.exe -n -dextension_dir=$(PHP_PREFIX) win32/build/registersyslog.php $(PHP_PREFIX)\$(PHPDLL)
 
 

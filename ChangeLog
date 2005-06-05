@@ -1,3 +1,20 @@
+2005-06-04  Zeev Suraski  <zeev@zend.com>
+
+    * main/main.c:
+      __halt_compiler() patch interface
+
+    * ZendEngine2/zend_compile.h
+      ZendEngine2/zend_language_parser.y
+      ZendEngine2/zend_language_scanner.l
+      ZendEngine2/zend_stream.c
+      ZendEngine2/zend_stream.h
+      ZendEngine2/tests/halt01.phpt
+      ZendEngine2/tests/halt02.phpt
+      ZendEngine2/tests/halt03.phpt:
+      Thought I committed it ages ago...  Anyway, without further delays, the
+      final
+      __halt_compiler() patch
+
 2005-06-03  Jani Taskinen  <jani.taskinen@sci.fi>
 
     * ext/xml/tests/bug32001.phpt:
@@ -3369,7 +3386,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2003 2005/06/04 00:35:22 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2004 2005/06/05 00:35:00 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -6770,7 +6787,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2003 2005/06/04 00:35:22 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2004 2005/06/05 00:35:00 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -7251,7 +7268,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2003 2005/06/04 00:35:22 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2004 2005/06/05 00:35:00 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -8725,7 +8742,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2003 2005/06/04 00:35:22 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2004 2005/06/05 00:35:00 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

@@ -1,3 +1,30 @@
+2005-06-05  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * ext/mysql/config.w32
+      ext/mysqli/config.w32
+      ext/pgsql/config.w32:
+      fixes for #33251
+
+2005-06-05  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_3)
+      NEWS
+      NEWS
+      ext/bz2/bz2.c
+      ext/bz2/bz2.c:
+      MFH: Fixed bug #33070 (Improved performance of bzdecompress() by several
+      orders of magnitude).
+
+    * ext/bz2/bz2.c:
+      Fixed bug #33070 (Improved performance of bzdecompress() by several orders
+      of magnitude).
+
+2005-06-05  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * scripts/phpize.in
+      scripts/phpize.m4:
+      - Proper fix for phpize when dealing with PECL
+
 2005-06-04  Zeev Suraski  <zeev@zend.com>
 
     * main/main.c:
@@ -3386,7 +3413,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2004 2005/06/05 00:35:00 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2005 2005/06/06 00:35:16 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -6787,7 +6814,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2004 2005/06/05 00:35:00 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2005 2005/06/06 00:35:16 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -7268,7 +7295,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2004 2005/06/05 00:35:00 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2005 2005/06/06 00:35:16 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -8742,7 +8769,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2004 2005/06/05 00:35:00 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2005 2005/06/06 00:35:16 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

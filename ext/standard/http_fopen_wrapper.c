@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.88.2.3 2005/05/06 02:19:36 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.88.2.4 2005/06/06 12:41:28 derick Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -100,6 +100,8 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 	int eol_detect = 0;
 	char *transport_string, *errstr = NULL;
 	int transport_len, have_header = 0, request_fulluri = 0;
+
+	tmp_line[0] = '\0';
 
 	if (redirect_max < 1) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Circular redirect, aborting.");

@@ -1,48 +1,293 @@
 PHP 4                                                                      NEWS
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-?? ??? 2004, Version 4.3.9
-- Implemented periodic PCRE compiled regexp cache cleanup, to avoid memory
+?? ??? 2005, Version 4.4.0
+- Added man pages for "phpize" and "php-config" scripts. (Jakub Vrana)
+- Added support for .cc files in extensions. (Brian)
+- Added the sorting flag SORT_LOCALE_STRING to the sort() functions which makes
+  them sort based on the current locale. (Derick)
+- Changed sha1_file() and md5_file() functions to use streams instead of 
+  low level IO. (Uwe)
+- Fixed memory curruptions when using references in a wrong way. (Marcus,
+  Dmitry, Derick)
+- Fixed memory corruption in stristr(). (Derick)
+- Fixed bug #33222 (segfault when CURL handle is closed in a callback). (Tony)
+- Fixed bug #33214 (odbc_next_result does not signal SQL errors with 
+  2-statement SQL batches). (rich at kastle dot com, Tony)
+- Fixed bug #33210 (relax jpeg recursive loop protection). (Ilia)
+- Fixed bug #33200 (preg_replace(): magic_quotes_sybase=On makes 'e' modifier
+  misbehave). (Jani)
+- Fixed bug #33072 (Add a safemode/open_basedir check for runtime save_path 
+  change) (Rasmus)
+- Fixed bug #33057 (Don't send extraneous entity-headers on a 304 as per
+  RFC 2616 section 10.3.5) (Rasmus, Choitel)
+- Fixed bug #33019 (socket errors cause memory leaks in php_strerror()). 
+  (jwozniak23 at poczta dot onet dot pl, Tony).
+- Fixed bug #33017 ("make distclean" gives an error with VPATH build). (Jani)
+- Fixed bug #33013 ("next month" was handled wrong while parsing dates).
+  (Derick)
+- Fixed bug #32974 (pcntl calls malloc() from a signal handler). (Wez)
+- Fixed bug #32944 (Disabling session.use_cookies doesn't prevent reading 
+  session cookies). (Jani, Tony)
+- Fixed bug #32936 (http redirects URLs are not checked for control chars). (Ilia)
+- Fixed bug #32932 (Oracle LDAP: ldap_get_entries invalid pointer). (Jani)
+- Fixed bug #32904 (pg_get_notify() ignores result_type parameter). (Tony)
+- Fixed bug #32813 (parse_url() does not handle scheme-only urls properly). (Ilia)
+- Fixed bug #32810 (temporary files not using plain file wrapper). (Ilia)
+- Fixed bug #32802 (General cookie overrides more specific cookie). (Ilia)
+- Fixed bugs #32800, #32830 (ext/odbc: Problems with 64bit systems). (Jani)
+- Fixed bug #32773 (GMP functions break when second parameter is 0). (Stas)
+- Fixed bug #32742 (segmentation fault when the stream with a wrapper 
+  is not closed). (Tony, Dmitry)
+- Fixed bug #32730 (ext/crack.c fails to compile with cracklib-2.8.3). (Jani)
+- Fixed bug #32670 (foreach() does not issue warning on unset array arg). (Ilia)
+- Fixed bug #32699 (pg_affected_rows() was defined when it was not available).
+  (Derick)
+- Fixed bug #32682 (ext/mssql: Error on module shutdown when called from 
+  activescript). (Frank)
+- Fixed bug #32647 (Using register_shutdown_function() with invalid callback
+  can crash PHP). (Jani)
+- Fixed bug #32591 (ext/mysql: Unsatisfied symbol: ntohs with HP-UX). (Jani)
+- Fixed bug #32589 (Possible crash inside imap_mail_compose, with charsets).
+  (Ilia)
+- Fixed bug #32587 (Apache2: errors sent to error_log do not include
+  timestamps). (Jani)
+- Fixed bug #32567 (ext/gmp fails to compile in threadsafe mode). (Tony)
+- Fixed bug #32538 (ext/swf/swf.c does not compile with gcc-3.4.x or newer).
+  (adam dot greenfield at gmail dot com)
+- Fixed bug #32530 (chunk_split() does not append endstr if chunklen is  
+  longer then the original string). (Ilia)
+- Fixed bug #32491 (File upload error - unable to create a temporary file).
+  (Uwe Schindler)
+- Fixed bug #32311 (mb_encode_mimeheader() does not properly escape characters).
+  (Moriyoshi)
+- Fixed bug #32245 (xml_parser_free() in a function assigned to the xml parser
+  gives a segfault). (Rob)
+- Fixed bug #32116 (mysql compressed connection doesn't work under windows)
+  (Georg)
+- Fixed bug #31887 (ISAPI: Custom 5xx error does not return correct HTTP 
+  response message). (Jani) 
+- Fixed bug #31583 (php_std_date() uses short day names in non-y2k_compliance mode).
+  (mike at php dot net)
+- Fixed bug #29975 (memory leaks when set_error_handler() is used inside error 
+  handler). (Tony)
+- Fixed bug #29944 (Function defined in switch, crashes). (Dmitry)
+- Fixed bug #29338 (unencoded spaces get ignored after certain tags). (Ilia)
+- Fixed bug #28605 (Need to use -[m]ieee option for Alpha CPUs). (Jani)
+
+31 Mar 2005, Version 4.3.11
+- Added Oracle Instant Client support. (cjbj at hotmail dot com, Tony)
+- Added checks for negative values to gmp_sqrt(), gmp_powm(), gmp_sqrtrem()
+  and gmp_fact() to prevent SIGFPE. (Tony)
+- Changed phpize not to require libtool. (Jani)
+- Updated bundled libmbfl library (used for multibyte functions). (Moriyoshi)
+- Fixed several leaks in ext/browscap and sapi/embed. (Andrei)
+- Fixed several leaks in ext/filepro. (Tony)
+- Fixed build system to always use bundled libtool files. (Jani)  
+- Fixed MacOSX shared extensions crashing on Apache startup. (Rasmus)
+- Fixed bug #32373 (segfault in bzopen() if supplied path to non-existent 
+  file). (Tony)
+- Fixed bug #32340 (insert_before($node,NULL) does not return). (Rob) 
+- Fixed bug #32200 (Prevent using both --with-apxs2 and --with-apxs2filter).
+  (Jani)
+- Fixed bug #32114 (DOM crashing when attribute appended to Document). (Rob)
+- Fixed bug #32063 (mb_convert_encoding ignores named entity 'alpha'). 
+  (Moriyoshi)
+- Fixed bug #31960 (msql_fetch_row() and msql_fetch_array() dropping columns
+  with NULL values). (Daniel Convissor)
+- Fixed bug #31936 (set_h_errno() is redefined incompatibly). (Jani)
+- Fixed bug #31911 (mb_decode_mimeheader() is case-sensitive to hex escapes).
+  (Moriyoshi)
+- Fixed bug #31858 (--disable-cli does not force --without-pear). (Jani)
+- Fixed bug #31842 (*date('r') does not return RFC2822 conforming date string).
+  (Jani)
+- Fixed bug #31797 (exif_read_data() uses too low nesting limit). (Ilia)
+- Fixed bug #31796 (readline completion handler does not handle empty return
+  values). (Ilia)
+- Fixed bug #31792 (getrusage() does not provide ru_nswap value). (Ilia)
+- Fixed bug #31754 (dbase_open() fails for mode = 1). (Mehdi, Derick)
+- Fixed bug #31705 (parse_url() does not recognize http://foo.com#bar). (Ilia)
+- Fixed bug #31684 (dio_tcsetattr(): misconfigured termios settings).
+  (elod at itfais dot com)
+- Fixed bug #31699 (unserialize() float problem on non-English locales). (Ilia)
+- Fixed bug #31623 (OCILogin does not support password grace period).
+  (daniel dot beet at accuratesoftware dot com, Tony)
+- Fixed bug #31580 (fgetcsv() problematic with "" escape sequences). (Ilia)
+- Fixed bug #31527 (crash in msg_send() when non-string is stored without
+  being serialized). (Ilia)
+- Fixed bug #31514 (open_basedir uses path_translated rather then cwd for .
+  translation). (Ilia)
+- Fixed bug #31480 (Possible infinite loop in imap_mail_compose()). (Ilia)
+- Fixed bug #31479 (Fixed crash in chunk_split(), when chunklen > strlen). (Ilia)
+- Fixed bug #31465 (False warning in unpack() when working with *). (Ilia)
+- Fixed bug #31454 (session_set_save_handler crashes PHP when supplied
+  non-existent object ref). (Tony)
+- Fixed bug #31444 (Memory leak in zend_language_scanner.c).
+  (hexer at studentcenter dot org)
+- Fixed bug #31442 (unserialize broken on 64-bit systems). (Marcus)
+- Fixed bug #31440 ($GLOBALS can be overwritten via GPC when 
+  register_globals is enabled). (Ilia)
+- Fixed bug #31413 (curl POSTFIELDS crashes on 64-bit platforms). (Joe)
+- Fixed bug #31396 (compile fails with gd 2.0.33 without freetype). (Jani)
+- Fixed bug #31371 (highlight_file() trims new line after heredoc). (Ilia)
+- Fixed bug #31270 (missing safe_mode/open_basedir check in swf_openfile()). (Ilia)
+- Fixed bug #31174 (compile warning in url.c). (Ilia, lukem at NetBSD dot org)
+- Fixed bug #31159 (COM object access is not working). (Wez)
+- Fixed bug #31142 (imap_mail_compose() fails to generate correct output). (Ilia)
+- Fixed bug #31398 (When magic_guotes_gpc are enabled filenames with ' get cutoff).
+  (Ilia)
+- Fixed bug #31288 (Possible crash in mysql_fetch_field(), if mysql_list_fields() 
+  was not called previously). (Ilia)
+- Fixed bug #31120 (mssql_query returns false on successfull inserts and 
+  stored procedures). (Frank)
+- Fixed bugs #31107, #31110, #31111, #31249 (Compile failure of zend_strtod.c). 
+  (Jani)
+- Fixed bug #31106 (Fixed crash in overloaded objects). (Stas)
+- Fixed bug #31103 (Better error message when c-client cannot be found). (Ilia)
+- Fixed bug #31101 (missing kerberos header file path with --with-openssl). (Jani)
+- Fixed bug #31072 (var_export() does not output an array element with an empty
+  string key). (Derick)
+- Fixed bug #31060 (imageftbbox() does not use linespacing parameter). (Jani)
+- Fixed bug #31056 (php_std_date() returns invalid formatted date if 
+  y2k_compliance is On). (Ilia)
+- Fixed bug #31055 (apache2filter: per request leak proportional to the full
+  path of the request URI). (kameshj at fastmail dot fm)
+- Fixed bug #30726 (-.1 like numbers are not being handled correctly). (Ilia)
+- Fixed bug #30609 (cURL functions bypass open_basedir). (Jani)
+- Fixed bug #30573 (compiler warnings in libmbfl due to invalid type cast).
+  (Moriyoshi)
+- Fixed bug #30549 (incorrect character translations for some ISO8859 charsets).
+  (Moriyoshi)
+- Fixed bug #30446 (apache2handler: virtual() includes files out of sequence)
+- Fixed bug #30430 (odbc_next_result() doesn't bind values and that results 
+  in segfault). (pdan-php at esync dot org, Tony)
+- Fixed bug #30120 (imagettftext() and imagettfbbox() accept too many
+  parameters). (Jani)
+- Fixed bug #29733 (printf() handles repeated placeholders wrong).  
+  (bugs dot php dot net at bluetwanger dot de, Ilia)
+- Fixed bug #29424 (width and height inverted for JPEG2000 files). (Ilia)
+- Fixed bug #28976 (mail(): use "From:" from headers if sendmail_from is empty).
+  (Jani)
+- Fixed bug #28930 (PHP sources pick wrong header files generated by bison).
+  (eggert at gnu dot org)
+- Fixed bug #28804 (ini-file section parsing pattern is buggy). 
+  (wendland at scan-plus dot de)
+- Fixed bug #28803 (enabled debug causes bailout errors with CLI on AIX 
+  because of fflush() called on already closed filedescriptor). (Tony)
+- Fixed bug #28451 (corupt EXIF headers have unlimited recursive IFD directory
+  entries). (Andrei)
+- Fixed bug #28220 (mb_strwidth() returns wrong width values for some hangul chars). (Moriyoshi)
+- Fixed bug #28086 (crash inside overload() function). (Tony) 
+- Fixed bug #28074 (FastCGI: stderr should be written in a FCGI stderr stream).
+  (chris at ex-parrot dot com)
+- Fixed bug #28067 (partially incorrect utf8 to htmlentities mapping). (Derick,
+  Benjamin Greiner)
+- Fixed bug #27633 (Double \r problem on ftp_get in ASCII mode on Win32). (Ilia)
+- Fixed bug #18613 (Multiple OUs in x509 certificate not handled properly). (Jani)
+- Fixed bug #7782 (Cannot use PATH_INFO fully with php isapi). (Unknown)
+
+15 Dec 2004, Version 4.3.10
+- Added the %F modifier to *printf to render a non-locale-aware representation
+  of a float with the . as decimal separator. (Derick)
+- Backported Marcus' foreach() speedup patch from PHP 5.x. (Derick)
+- Fixed a bug in addslashes() handling of the '\0' character. (Ilia)
+- Fixed potential problems with unserializing invalid serialize data. (Marcus)
+- Fixed bug #31034 (Problem with non-existing iconv header file). (Derick)
+- Fixed bug #31024 (Crash in fgetcsv() with negative length). (Ilia)
+- Fixed bug #31019 (Logic error mssql library checking). (Frank)
+- Fixed bug #30995 (snmp extension does not build with net-snmp 5.2). (Ilia)
+- Fixed bug #30990 (allow popen() on *NIX to accept 'b' flag). (Ilia)
+- Fixed bug #30826 (Certain reference relations cannot be unserialized
+  properly). (Ilia)
+- Fixed bug #30750 (Meaningful error message when upload directory is not 
+  accessible). (Ilia)
+- Fixed bug #30739 (imagefill does not set back alphablending mode). (Pierre)
+- Fixed bug #30672 (Problem handling exif data in jpeg images at unusual 
+  places). (Marcus)
+- Fixed bug #30658 (Ensure that temporary files created by GD are removed).
+  (Ilia)
+- Fixed bug #30654 (oci8 persistent connection is deleted from hash 
+  if there was exclusive connection with the same credentials). (Tony)
+- Fixed bug #30613 (Prevent infinite recursion in url redirection). (Ilia)
+- Fixed bug #30587 (array_multisort doesn't separate zvals before 
+  changing them). (Tony)
+- Fixed bug #30475 (curl_getinfo() may crash in some situations). (Ilia)
+- Fixed bug #30442 (segfault when parsing ?getvariable[][ ). (Tony)
+- Fixed bug #30388 (rename across filesystems loses ownership and
+  permission info). (Tony)
+- Fixed bug #30282 (segfault when using unknown/unsupported
+  session.save_handler and/or session.serialize_handler). (Tony)
+- Fixed bug #30281 (Prevent non-wbmp images from being detected as such).
+  (Ilia)
+- Fixed bug #30276 (Possible crash in ctype_digit on large numbers). (Ilia)
+- Fixed bug #30229 (imagerectangle and imagefilledrectangle do work well
+  with alpha channel, corners are drawn twice). (Pierre)
+- Fixed bug #30224 (Sybase date strings are sometimes not null terminated).
+  (Ilia)
+- Fixed bug #30133 (get_current_user() crashes on Windows). (Edin)
+- Fixed bug #30057 (did not detect IPV6 on FreeBSD 4.1). (Wez)
+- Fixed bug #30027 (Possible crash inside ftp_get()).
+  (cfield at affinitysolutions dot com)
+- Fixed bug #29805 (HTTP Authentication Issues). (Uwe Schindler)
+- Fixed bug #29418 (double free when openssl_csr_new fails).
+  (Kamesh Jayachandran).
+- Fixed bug #28598 (Lost support for MS Symbol fonts). (Pierre)
+- Fixed bug #28325 (Circular references not properly serialized). (Moriyoshi)
+- Fixed bug #28228 (NULL decimal separator is not being handled correctly).
+  (Ilia)
+- Fixed bug #27469 (serialize() objects of incomplete class). (Dmitry)
+
+22 Sep 2004, Version 4.3.9
+- GPC input processing fixes (Stefano Di Paola, Rasmus, Stefan)
+- Implemented periodic PCRE compiled regexp cache cleanup, to avoid memory 
   exhaustion. (Andrei)
 - Fixed bug with raw_post_data not getting set (Brian)
 - Fixed a file-descriptor leak with phpinfo() and other 'special' URLs (Zeev)
+- Rewritten UNIX and Windows install help files. (Documentation Team)
+- Updated PCRE to provide better error handling in certain cases. (Andrei)
+- NSAPI: added "bucket" parameter to list of non-php.ini-keys of php4_execute 
+  for doing performance stats without warnings in server-log. (Uwe Schindler)
+- Fixed bug preventing from building oci8 as shared. 
+  (stanislav dot voroniy at portavita dot nl, Tony)
+- Fixed leap year checking with idate(). (Christian Schneider, Derick)
+- Fixed strip_tags() to correctly handle '\0' characters. (Stefan)
+- Fixed funny forking effect in FastCGI when PHP_FCGI_CHILDREN was not set.
+- Fixed bug #30050 (Possible crash inside php_shutdown_config()). 
+  (Ilia, nw at softwarekombinat dot de)
+- Fixed bug #29954 (array_reduce segfaults when initial value is array). (Tony)
+- Fixed bug #29882 (isset crashes on arrays). (Marcus)
 - Fixed bug #29753 (mcal_fetch_event() allows 2nd argument to be optional).
   (Ilia, Vrana)
 - Fixed bug #29727 (Added missing CURL authentication directives). (Ilia)
 - Fixed bug #29719 (fgetcsv() has problem parsing strings ending with escaped
   enclosures). (Ilia)
+- Fixed bug #29607 (highlighting code with HEREDOC produces invalid output).
+  (Ilia)
 - Fixed bug #29599 (domxml_error segfaults another apache module). (Rob)
 - Fixed bug #29594 (Use PHP's own tmpfile() implementation). (Ilia)
-
-11 Aug 2004, Version 4.3.9RC1
-- Rewritten UNIX and Windows install help files. (Documentation Team)
-- Updated PCRE to provide better error handling in certain cases. (Andrei)
-- NSAPI: added "bucket" parameter to list of non-php.ini-keys of php4_execute
-  for doing performance stats without warnings in server-log. (Uwe Schindler)
-- Fixed bug #29607 (highlighting code with HEREDOC produces invalid
-  output). (Ilia)
 - Fixed bug #29581 (Typo inside php.ini comments for mysql.trace_mode). (Ilia)
-- Fixed bug #29493 (extract(array, EXTR_REFS) misbehaves with elements
-  referred twice or more times). (Moriyoshi)
+- Fixed bug #29493 (extract(array, EXTR_REFS) misbehaves with elements referred
+  twice or more times). (Moriyoshi)
 - Fixed bug #29443 (Sanity check for wbmp detection). (Ilia)
 - Fixed bug #29369 (Uploaded files with ' or " in their names get their names
   truncated at those characters). (Ilia)
 - Fixed bug #29349 (imagecreatefromstring() crashes with external GD library).
   (Ilia, adconrad at debian dot org)
 - Fixed bug #29333 (output_buffering+trans_sess_id can corrupt output). (Ilia)
-- Fixed bug #29226 (ctype_* functions missing validation of numeric string 
+- Fixed bug #29226 (ctype_* functions missing validation of numeric string
   representations). (Ilia)
-- Fixed bug #29209 (imap_fetchbody() doesn't check message index). (Ilia,
-  tony2001 at phpclub dot net)
-- Fixed bug #29116 (Zend constant warning uses memory after free). (Marcus,
-  jdolecek at NetBSD dot org)
+- Fixed bug #29209 (imap_fetchbody() doesn't check message index).
+  (Ilia, Tony)
+- Fixed bug #29116 (Zend constant warning uses memory after free).
+  (Marcus, jdolecek at NetBSD dot org)
 - Fixed bug #29114 (Potential double free in php_stat). (Sara)
-- Fixed bug #29075 (strnatcmp() incorrectly handles whitespace). (Curt, Ilia)
-- Fixed bug #29049 (array sorting via user function/method does not validate 
-  it). (Ilia)
+- Fixed bug #29075 (strnatcmp() incorrectly handles whitespace).
+  (Curt, Ilia)
+- Fixed bug #29049 (array sorting via user function/method does not 
+  validate it). (Ilia)
 - Fixed bug #29038 (extract() with EXTR_PREFIX_SAME prefixes empty strings).
   (Andrey)
 - Fixed bug #29034 (wordwrap() returns a boolean when passed empty string).
-  (Ilia)
+ (Ilia)
 - Fixed bug #28974 (overflow in array_slice(), array_splice(), substr,
   substr_replace(), strspn(), strcspn()). (Andrey)
 - Fixed bug #28897 (ibase: -1 returned as -0.000 for 64-bit scaled int). (Ard)
@@ -58,8 +303,7 @@ PHP 4                                                                      NEWS
 - Fixed bug #28692 (\0 in Authenticate header passed via safe_mode). (Ilia)
 - Fixed bug #28670 (WWW-Authentication header mangling with PCRE in safe_mode
   adds extra spaces). (Ilia)
-- Fixed bug #28668 (glob() does not work with relative paths on Windows).
-  (Ilia)
+- Fixed bug #28668 (glob() does not work with relative paths on Windows). (Ilia)
 - Fixed bug #28649 (Proper glob() return value on Linux when there are no
   matches). (Ilia)
 - Fixed bug #28633 (sprintf incorrectly adding padding to floats). (Ilia)
@@ -72,9 +316,6 @@ PHP 4                                                                      NEWS
   (Moriyoshi)
 - Fixed bug #28175 (Allow bundled GD to compile against freetype 2.1.2).
   (Elf, Ilia)
-- Fixed leap year checking with idate(). (Christian Schneider, Derick)
-- Fixed strip_tags() to correctly handle '\0' characters. (Stefan)
-- Fixed funny forking effect in FastCGI when PHP_FCGI_CHILDREN was not set.
 
 14 Jul 2004, Version 4.3.8
 - Fixed strip_tags() to correctly handle '\0' characters. (Stefan)

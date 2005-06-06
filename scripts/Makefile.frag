@@ -9,18 +9,25 @@ phpbuilddir = $(prefix)/lib/php/build
 BUILD_FILES = \
 	scripts/phpize.m4 \
 	build/mkdep.awk \
-	build/shtool \
 	build/scan_makefile_in.awk \
+	build/libtool.m4 \
 	Makefile.global \
-	acinclude.m4
+	acinclude.m4 \
+	ltmain.sh
+
+BUILD_FILES_EXEC = \
+	build/shtool \
+	config.guess \
+	config.sub
 
 bin_SCRIPTS = phpize php-config
-bin_src_SCRIPTS = phpextdist
 
 install-build:
 	@echo "Installing build environment:     $(INSTALL_ROOT)$(phpbuilddir)/"
 	@$(mkinstalldirs) $(INSTALL_ROOT)$(phpbuilddir) $(INSTALL_ROOT)$(bindir) && \
-	(cd $(top_srcdir) && $(INSTALL) $(BUILD_FILES) $(INSTALL_ROOT)$(phpbuilddir))
+	(cd $(top_srcdir) && \
+	$(INSTALL) $(BUILD_FILES_EXEC) $(INSTALL_ROOT)$(phpbuilddir) && \
+	$(INSTALL_DATA) $(BUILD_FILES) $(INSTALL_ROOT)$(phpbuilddir))
 
 HEADER_DIRS = \
 	/ \
@@ -55,11 +62,7 @@ install-programs: $(builddir)/phpize $(builddir)/php-config
 		echo "  program: $(program_prefix)$$prog$(program_suffix)"; \
 		$(INSTALL) -m 755 $(builddir)/$$prog $(INSTALL_ROOT)$(bindir)/$(program_prefix)$$prog$(program_suffix); \
 	done
-	@for prog in $(bin_src_SCRIPTS); do \
-		echo "  program: $(program_prefix)$$prog$(program_suffix)"; \
-		$(INSTALL) -m 755 $(top_srcdir)/scripts/$$prog $(INSTALL_ROOT)$(bindir)/$(program_prefix)$$prog$(program_suffix); \
-	done
-
+	
 $(builddir)/phpize: $(srcdir)/phpize.in $(top_builddir)/config.status
 	(CONFIG_FILES=$@ CONFIG_HEADERS= $(top_builddir)/config.status)
 

@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.96 2005/05/06 02:31:07 iliaa Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.97 2005/06/06 12:39:57 derick Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -102,6 +102,8 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 	int transport_len, have_header = 0, request_fulluri = 0;
 	char *protocol_version = NULL;
 	int protocol_version_len = 3; /* Default: "1.0" */
+
+	tmp_line[0] = '\0';
 
 	if (redirect_max < 1) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Redirection limit reached, aborting.");

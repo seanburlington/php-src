@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.60.2.3 2005/05/09 12:16:11 sniper Exp $ */
+/* $Id: posix.c,v 1.60.2.4 2005/06/06 22:06:00 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -44,6 +44,9 @@
 #include <errno.h>
 #include <grp.h>
 #include <pwd.h>
+#if HAVE_SYS_MKDEV_H
+# include <sys/mkdev.h>
+#endif
 
 ZEND_DECLARE_MODULE_GLOBALS(posix)
 
@@ -135,7 +138,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.60.2.3 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.60.2.4 $");
 	php_info_print_table_end();
 }
 /* }}} */

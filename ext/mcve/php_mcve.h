@@ -16,7 +16,7 @@
    |          Chris Faulhaber <jedgar@fxp.org>                            |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_mcve.h,v 1.14 2004/05/30 22:41:13 bradmssw Exp $ */
+/* $Id: php_mcve.h,v 1.14.2.1 2005/06/06 16:43:54 bradmssw Exp $ */
 
 #ifndef _PHP_MCVE_H
 #define _PHP_MCVE_H
@@ -26,7 +26,13 @@ extern zend_module_entry mcve_module_entry;
 #define mcve_module_ptr &mcve_module_entry
 #define phpext_mcve_ptr mcve_module_ptr
 
-#define PHP_MCVE_VERSION	"4.0"
+#define PHP_MCVE_VERSION	"5.0"
+
+#include <mcve.h>
+
+#ifndef LIBMONETRA_VERSION
+#define LIBMONETRA_VERSION 040000
+#endif
 
 #define MCVE_CONST (CONST_CS | CONST_PERSISTENT)
 
@@ -55,6 +61,10 @@ PHP_FUNCTION(m_connectionerror);
 PHP_FUNCTION(m_deletetrans);
 PHP_FUNCTION(m_connect);
 PHP_FUNCTION(m_transnew);
+#if LIBMONETRA_VERSION >= 050000
+PHP_FUNCTION(m_transkeyval);
+PHP_FUNCTION(m_validateidentifier);
+#endif
 PHP_FUNCTION(m_transparam);
 PHP_FUNCTION(m_transsend);
 PHP_FUNCTION(m_ping);

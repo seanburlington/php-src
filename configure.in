@@ -1,4 +1,4 @@
-dnl ## $Id: configure.in,v 1.396.2.164.2.1 2005/06/06 09:23:55 derick Exp $ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.164.2.2 2005/06/07 13:37:33 derick Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -657,6 +657,16 @@ if test "$PHP_DEBUG" = "yes"; then
 else
   PHP_DEBUG=0
   ZEND_DEBUG=no
+fi
+
+PHP_ARG_ENABLE(zend-memory-manager,whether to enable the Zend memory manager,
+[  --disable-zend-memory-manager
+                          Disable the Zend memory manager (DEVELOPERS ONLY)],yes, no)
+
+if test "$PHP_ZEND_MEMORY_MANAGER" = "yes"; then
+  AC_DEFINE(USE_ZEND_ALLOC, 1, [ ])
+else
+  AC_DEFINE(USE_ZEND_ALLOC, 0, [ ])
 fi
 
 PHP_ARG_WITH(layout,[layout of installed files],

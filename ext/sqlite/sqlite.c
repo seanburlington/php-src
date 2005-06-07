@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.162 2005/05/30 15:14:12 sniper Exp $ 
+   $Id: sqlite.c,v 1.163 2005/06/07 15:39:35 dmitry Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1108,7 +1108,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.162 2005/05/30 15:14:12 sniper Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.163 2005/06/07 15:39:35 dmitry Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1205,6 +1205,7 @@ PHP_FUNCTION(sqlite_popen)
 	}
 	if (errmsg) {
 		zval_dtor(errmsg);
+		ZVAL_NULL(errmsg);
 	}
 
 	if (strncmp(filename, ":memory:", sizeof(":memory:") - 1)) {
@@ -1280,6 +1281,7 @@ PHP_FUNCTION(sqlite_open)
 	}
 	if (errmsg) {
 		zval_dtor(errmsg);
+		ZVAL_NULL(errmsg);
 	}
 
 	if (strncmp(filename, ":memory:", sizeof(":memory:") - 1)) {
@@ -1334,6 +1336,7 @@ PHP_FUNCTION(sqlite_factory)
 	}
 	if (errmsg) {
 		zval_dtor(errmsg);
+		ZVAL_NULL(errmsg);
 	}
 
 	if (strncmp(filename, ":memory:", sizeof(":memory:") - 1)) {

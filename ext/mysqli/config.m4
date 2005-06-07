@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.21 2005/05/29 23:16:42 sniper Exp $
+dnl $Id: config.m4,v 1.22 2005/06/07 12:39:02 sniper Exp $
 dnl config.m4 for extension mysqli
 
 PHP_ARG_WITH(mysqli, for MySQLi support,
@@ -11,9 +11,10 @@ PHP_ARG_ENABLE(embedded_mysqli, whether to enable embedded MySQLi support,
 
 if test "$PHP_MYSQLI" != "no"; then
 
-  if test "$PHP_MYSQL" = "yes"; then
-    AC_MSG_ERROR([--with-mysql (using bundled libs) can not be used together with --with-mysqli.])
-  fi
+dnl there are no mysql libs currently bundled with PHP.. --Jani
+dnl  if test "$PHP_MYSQL" = "yes"; then
+dnl    AC_MSG_ERROR([--with-mysql (using bundled libs) can not be used together with --with-mysqli.])
+dnl  fi
 
   if test "$PHP_MYSQLI" = "yes"; then
     MYSQL_CONFIG=`$php_shtool path mysql_config`

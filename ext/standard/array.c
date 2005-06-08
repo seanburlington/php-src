@@ -22,7 +22,7 @@
 */
 
 
-/* $Id: array.c,v 1.199.2.36 2004/08/10 06:04:12 moriyoshi Exp $ */
+/* $Id: array.c,v 1.199.2.44.2.1 2005/06/08 19:55:01 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -66,6 +66,7 @@ php_array_globals array_globals;
 #define SORT_REGULAR			0
 #define SORT_NUMERIC			1
 #define	SORT_STRING				2
+#define	SORT_LOCALE_STRING      5
 
 #define SORT_DESC				3
 #define SORT_ASC				4
@@ -103,6 +104,8 @@ PHP_MINIT_FUNCTION(array)
 	REGISTER_LONG_CONSTANT("SORT_REGULAR", SORT_REGULAR, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SORT_NUMERIC", SORT_NUMERIC, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SORT_STRING", SORT_STRING, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SORT_LOCALE_STRING", SORT_LOCALE_STRING, CONST_CS | CONST_PERSISTENT);
+
 	REGISTER_LONG_CONSTANT("CASE_LOWER", CASE_LOWER, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("CASE_UPPER", CASE_UPPER, CONST_CS | CONST_PERSISTENT);
 
@@ -131,6 +134,12 @@ static void set_compare_func(int sort_type TSRMLS_DC)
 		case SORT_STRING:
 			ARRAYG(compare_func) = string_compare_function;
 			break;
+
+#if HAVE_STRCOLL
+		case SORT_LOCALE_STRING:
+			ARRAYG(compare_func) = string_locale_compare_function;
+			break;
+#endif
 
 		case SORT_REGULAR:
 		default:
@@ -631,7 +640,7 @@ static int array_user_key_compare(const void *a, const void *b TSRMLS_DC)
 	s = *((Bucket **) b);
 
 	if (f->nKeyLength) {
-		Z_STRVAL(key1) = estrndup(f->arKey, f->nKeyLength);
+		Z_STRVAL(key1) = estrndup(f->arKey, f->nKeyLength-1);
 		Z_STRLEN(key1) = f->nKeyLength-1;
 		Z_TYPE(key1) = IS_STRING;
 	} else {
@@ -639,7 +648,7 @@ static int array_user_key_compare(const void *a, const void *b TSRMLS_DC)
 		Z_TYPE(key1) = IS_LONG;
 	}
 	if (s->nKeyLength) {
-		Z_STRVAL(key2) = estrndup(s->arKey, s->nKeyLength);
+		Z_STRVAL(key2) = estrndup(s->arKey, s->nKeyLength-1);
 		Z_STRLEN(key2) = s->nKeyLength-1;
 		Z_TYPE(key2) = IS_STRING;
 	} else {
@@ -1391,13 +1400,13 @@ PHP_FUNCTION(array_fill)
 		WRONG_PARAM_COUNT;
 	}
 
-	/* allocate an array for return */
-	array_init(return_value);
-
 	switch (Z_TYPE_PP(start_key)) {
 		case IS_STRING:
 		case IS_LONG:
 		case IS_DOUBLE:
+			/* allocate an array for return */
+			array_init(return_value);
+	
 			if (PZVAL_IS_REF(*val)) {
 				SEPARATE_ZVAL(val);
 			}
@@ -1414,6 +1423,8 @@ PHP_FUNCTION(array_fill)
 	convert_to_long_ex(num);
 	i = Z_LVAL_PP(num) - 1;	
 	if (i < 0) {
+		zend_hash_destroy(Z_ARRVAL_P(return_value));
+		efree(Z_ARRVAL_P(return_value));
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Number of elements must be positive");
 		RETURN_FALSE;
 	}
@@ -1712,7 +1723,7 @@ static void _phpi_pop(INTERNAL_FUNCTION_PARAMETERS, int off_the_end)
 	zval	   **stack,			/* Input stack */
 			   **val;			/* Value to be popped */
 	char *key = NULL;
-	int key_len = 0;
+	uint key_len = 0;
 	ulong index;
 	
 	/* Get the arguments and do error-checking */
@@ -2481,7 +2492,7 @@ PHP_FUNCTION(array_change_key_case)
 				zend_hash_index_update(Z_ARRVAL_P(return_value), num_key, entry, sizeof(entry), NULL);
 				break;
 			case HASH_KEY_IS_STRING:
-				new_key=estrndup(string_key,str_key_len);
+				new_key=estrndup(string_key,str_key_len - 1);
 				if (change_to_upper)
 					php_strtoupper(new_key, str_key_len - 1);
 				else
@@ -3227,7 +3238,11 @@ PHP_FUNCTION(array_reduce)
 	efree(callback_name);
 
 	if (ZEND_NUM_ARGS() > 2) {
-		result = *initial;
+		ALLOC_ZVAL(result);
+		*result = **initial;
+		zval_copy_ctor(result);
+		convert_to_long(result);
+		INIT_PZVAL(result);
 	} else {
 		MAKE_STD_ZVAL(result);
 		ZVAL_NULL(result);
@@ -3243,6 +3258,7 @@ PHP_FUNCTION(array_reduce)
 		if (result) {
 			*return_value = *result;
 			zval_copy_ctor(return_value);
+			zval_ptr_dtor(&result);
 		}
 		return;
 	}

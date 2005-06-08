@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.98 2005/05/17 01:41:51 iliaa Exp $ */
+/* $Id: pdo_stmt.c,v 1.99 2005/06/08 19:51:56 dmitry Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -728,6 +728,8 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 			get_lazy_object(stmt, return_value TSRMLS_CC);
 			return 1;
 		}
+
+		RETVAL_FALSE;
 
 		switch (how) {
 			case PDO_FETCH_ASSOC:

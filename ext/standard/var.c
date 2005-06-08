@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.191.2.6 2005/06/01 10:53:25 dmitry Exp $ */
+/* $Id: var.c,v 1.191.2.7 2005/06/08 15:48:26 dmitry Exp $ */
 
 
 /* {{{ includes 
@@ -584,18 +584,18 @@ static void php_var_serialize_class(smart_str *buf, zval **struc, zval *retval_p
 					
 					do {
 						zend_mangle_property_name(&priv_name, &prop_name_length, ce->name, ce->name_length, 
-									Z_STRVAL_PP(name), Z_STRLEN_PP(name) + 1, ce->type & ZEND_INTERNAL_CLASS);
-						if (zend_hash_find(Z_OBJPROP_PP(struc), priv_name, prop_name_length, (void *) &d) == SUCCESS) {
-							php_var_serialize_string(buf, priv_name, prop_name_length-1);
+									Z_STRVAL_PP(name), Z_STRLEN_PP(name), ce->type & ZEND_INTERNAL_CLASS);
+						if (zend_hash_find(Z_OBJPROP_PP(struc), priv_name, prop_name_length+1, (void *) &d) == SUCCESS) {
+							php_var_serialize_string(buf, priv_name, prop_name_length);
 							efree(priv_name);
 							php_var_serialize_intern(buf, d, var_hash TSRMLS_CC);
 							break;
 						}
 						efree(priv_name);
 						zend_mangle_property_name(&prot_name, &prop_name_length,  "*", 1, 
-									Z_STRVAL_PP(name), Z_STRLEN_PP(name) + 1, ce->type & ZEND_INTERNAL_CLASS);
-						if (zend_hash_find(Z_OBJPROP_PP(struc), prot_name, prop_name_length, (void *) &d) == SUCCESS) {
-							php_var_serialize_string(buf, prot_name, prop_name_length - 1);
+									Z_STRVAL_PP(name), Z_STRLEN_PP(name), ce->type & ZEND_INTERNAL_CLASS);
+						if (zend_hash_find(Z_OBJPROP_PP(struc), prot_name, prop_name_length+1, (void *) &d) == SUCCESS) {
+							php_var_serialize_string(buf, prot_name, prop_name_length);
 							efree(prot_name);
 							php_var_serialize_intern(buf, d, var_hash TSRMLS_CC);
 							break;

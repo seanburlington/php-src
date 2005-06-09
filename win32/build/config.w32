@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.39 2005/06/05 01:57:03 wez Exp $
+// $Id: config.w32,v 1.40 2005/06/09 13:09:04 wez Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -248,8 +248,10 @@ ARG_ENABLE('fd-setsize', "Set maximum number of sockets for select(2)", "256");
 ADD_FLAG("CFLAGS", "/D FD_SETSIZE=" + parseInt(PHP_FD_SETSIZE));
 
 ARG_ENABLE("memory-limit", "Enable memory limit checking code", "no");
-
 AC_DEFINE('MEMORY_LIMIT', PHP_MEMORY_LIMIT == "yes" ? 1 : 0);
+
+ARG_ENABLE("memory-manager", "Enable Zend memory manager", "yes");
+AC_DEFINE('USE_ZEND_ALLOC', PHP_MEMORY_MANAGER == "yes" ? 1 : 0);
 
 ARG_ENABLE("zend-multibyte", "Enable Zend multibyte encoding support", "no");
 if (PHP_ZEND_MULTIBYTE == "yes") {

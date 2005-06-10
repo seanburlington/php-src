@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.48 2005/03/29 17:23:36 tony2001 Exp $ */
+/* $Id: pdo.c,v 1.49 2005/06/10 06:11:29 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -352,7 +352,7 @@ PHP_MINIT_FUNCTION(pdo)
 #endif
 
 	INIT_CLASS_ENTRY(ce, "PDOException", NULL);
-#if defined(HAVE_SPL) && ((PHP_MAJOR_VERSION > 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1))
+#if can_handle_soft_dependency_on_SPL && defined(HAVE_SPL) && ((PHP_MAJOR_VERSION > 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1))
 	pdo_exception_ce = zend_register_internal_class_ex(&ce, spl_ce_RuntimeException, NULL TSRMLS_CC);
 #else
 	pdo_exception_ce = zend_register_internal_class_ex(&ce, zend_exception_get_default(), NULL TSRMLS_CC);

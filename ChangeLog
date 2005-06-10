@@ -1,3 +1,90 @@
+2005-06-09  Stanislav Malyshev  <stas@zend.com>
+
+    * NEWS
+      NEWS:
+      
+
+    * ZendEngine2/zend_compile.c
+      ZendEngine2/zend_compile.h
+      ZendEngine2/zend_object_handlers.c
+      ZendEngine2/zend_reflection_api.c
+      ZendEngine2/tests/bug29689.phpt:
+      MF50:  fix #29689 and more private property problems
+
+    * ZendEngine2/tests/bug33277.phpt:
+      add test for this TBF bug
+
+    * (PHP_5_0)
+      NEWS:
+      RIP abstrace private
+
+    * ZendEngine2/zend_compile.c:
+      disallow abstrace private methods
+
+    * (PHP_5_0)
+      ZendEngine2/zend_compile.c:
+      Disallow abstract privae methods
+
+    * (PHP_5_0)
+      ZendEngine2/zend_compile.c
+      ZendEngine2/zend_compile.h
+      ZendEngine2/zend_object_handlers.c
+      ZendEngine2/zend_reflection_api.c
+      ZendEngine2/tests/bug29689.phpt:
+      fix #29689 and more private property problems
+
+2005-06-09  Dmitry Stogov  <dmitry@zend.com>
+
+    * ZendEngine2/zend.c
+      ZendEngine2/zend.c
+      ZendEngine2/zend_execute_API.c
+      ZendEngine2/zend_execute_API.c:
+      Fixed double call to php_stream_close() on compiler errors
+
+2005-06-09  Stanislav Malyshev  <stas@zend.com>
+
+    * ZendEngine2/tests/bug33277.phpt
+      ZendEngine2/tests/bug33277.phpt:
+      
+      file bug33277.phpt was initially added on branch PHP_5_0.
+
+2005-06-09  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/bz2/bz2.c:
+      Fixed compiler warning.
+
+2005-06-09  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * main/main.c:
+      hmm, backing out this change, as it seems to cause problems with user-space
+      streams and filters (the ZE needs to close them before it blows away the
+      user-space code.
+      
+      Noticed by Dmitry.  Still need to find out how to avoid double-closing
+      streams.
+
+2005-06-09  Dmitry Stogov  <dmitry@zend.com>
+
+    * (PHP_5_0)
+      NEWS
+      Zend/zend.c
+      ZendEngine2/zend.c
+      ZendEngine2/zend.c
+      tests/lang/bug25922.phpt
+      tests/lang/bug25922.phpt
+      tests/lang/bug25922.phpt:
+      Fixed bug #25922 (In error handler, modifying 5th arg (errcontext) may
+      result in seg fault)
+
+    * ZendEngine2/zend_language_scanner.l
+      ZendEngine2/zend_language_scanner.l:
+      Fixed bug (Crash on Windows and ZTS) that was introduced with fix for bug
+      #26456
+
+    * ext/standard/user_filters.c
+      ext/standard/user_filters.c:
+      Fixed reference counting and probable crash on fclose() or shutdown
+
 2005-06-08  Ilia Alshanetsky  <ilia@prohost.org>
 
     * (PHP_5_0)
@@ -4010,7 +4097,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2009 2005/06/09 05:40:33 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2010 2005/06/10 05:32:43 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -7411,7 +7498,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2009 2005/06/09 05:40:33 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2010 2005/06/10 05:32:43 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -7892,7 +7979,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2009 2005/06/09 05:40:33 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2010 2005/06/10 05:32:43 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -9366,7 +9453,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2009 2005/06/09 05:40:33 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2010 2005/06/10 05:32:43 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

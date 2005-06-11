@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.74 2005/06/10 05:47:55 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.75 2005/06/11 02:50:20 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1116,11 +1116,10 @@ static void dbh_free(pdo_dbh_t *dbh TSRMLS_DC)
 
 static void pdo_dbh_free_storage(pdo_dbh_t *dbh TSRMLS_DC)
 {
-	if (dbh->methods->rollback) {
+	if (dbh->methods && dbh->methods->rollback) {
 		/* roll back transactions, that are possibly nested, even though we don't
 		 * official support them */
-		while (dbh->methods->rollback(dbh TSRMLS_CC))
-			;
+		dbh->methods->rollback(dbh TSRMLS_CC);
 		dbh->in_txn = 0;
 	}
 	

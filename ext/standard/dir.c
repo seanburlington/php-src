@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.145 2005/06/12 01:13:24 hholzgra Exp $ */
+/* $Id: dir.c,v 1.146 2005/06/12 07:53:24 hholzgra Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -154,6 +154,9 @@ PHP_MINIT_FUNCTION(dir)
 #endif
 #ifdef GLOB_NOESCAPE
 	REGISTER_LONG_CONSTANT("GLOB_NOESCAPE", GLOB_NOESCAPE, CONST_CS | CONST_PERSISTENT);
+#endif
+#ifdef GLOB_ERR
+	REGISTER_LONG_CONSTANT("GLOB_ERR", GLOB_ERR, CONST_CS | CONST_PERSISTENT);
 #endif
 
 #ifndef GLOB_ONLYDIR
@@ -395,10 +398,14 @@ PHP_FUNCTION(glob)
 	if (0 != (ret = glob(pattern, flags & GLOB_FLAGMASK, NULL, &globbuf))) {
 #ifdef GLOB_NOMATCH
 		if (GLOB_NOMATCH == ret) {
-			/* Linux handles no matches as an error condition, but FreeBSD
-			 * doesn't. This ensure that if no match is found, an empty array
-			 * is always returned so it can be used without worrying in e.g.
-			 * foreach() */
+			/* Some glob implementation simply return no data if no matches
+			   were found, others return the GLOB_NOMATCH error code.
+			   We don't want to treat GLOB_NOMATCH as an error condition
+			   so that PHP glob() behaves the same on both types of 
+			   implementations and so that 'foreach (glob() as ...'
+			   can be used for simple glob() calls without further error
+			   checking.
+			*/
 			array_init(return_value);
 			return;
 		}
@@ -424,7 +431,7 @@ PHP_FUNCTION(glob)
 
 	array_init(return_value);
 	for (n = 0; n < globbuf.gl_pathc; n++) {
-		/* we need to this everytime since GLOB_ONLYDIR does not guarantee that
+		/* we need to do this everytime since GLOB_ONLYDIR does not guarantee that
 		 * all directories will be filtered. GNU libc documentation states the
 		 * following: 
 		 * If the information about the type of the file is easily available 

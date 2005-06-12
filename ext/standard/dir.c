@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.144 2005/06/12 00:59:04 hholzgra Exp $ */
+/* $Id: dir.c,v 1.145 2005/06/12 01:13:24 hholzgra Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -401,7 +401,6 @@ PHP_FUNCTION(glob)
 			 * foreach() */
 			array_init(return_value);
 			return;
-#endif
 		}
 #endif
 		RETURN_FALSE;

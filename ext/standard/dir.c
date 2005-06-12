@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.143 2005/02/23 18:53:09 iliaa Exp $ */
+/* $Id: dir.c,v 1.144 2005/06/12 00:59:04 hholzgra Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -399,9 +399,6 @@ PHP_FUNCTION(glob)
 			 * doesn't. This ensure that if no match is found, an empty array
 			 * is always returned so it can be used without worrying in e.g.
 			 * foreach() */
-#ifndef __linux__
-			RETURN_FALSE;
-#else
 			array_init(return_value);
 			return;
 #endif

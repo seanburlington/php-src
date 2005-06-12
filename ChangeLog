@@ -1,3 +1,41 @@
+2005-06-11  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * (PHP_4_4)
+      ext/standard/url_scanner_ex.c
+      ext/standard/var_unserializer.c:
+      Revert. re2c 0.9.7 obviously does not work properly (or our .re files are
+      buggy)
+
+    * ext/standard/url_scanner_ex.c
+      ext/standard/var_unserializer.c:
+      revert
+
+    * ext/mysql/config.m4:
+      Another netware fix
+
+    * NEWS:
+      Merge the bug fix entries from PHP_5_0 branch
+
+    * ext/standard/url_scanner_ex.c
+      ext/standard/url_scanner_ex.c
+      ext/standard/var_unserializer.c
+      ext/standard/var_unserializer.c:
+      regenerated with re2c 0.9.7
+
+2005-06-11  Andi Gutmans  <andi@zend.com>
+
+    * configure.in
+      ZendEngine2/zend.h
+      main/php_version.h:
+      - Back to -dev
+
+    * (php_5_1_0b2)
+      NEWS
+      configure.in
+      ZendEngine2/zend.h
+      main/php_version.h:
+      - b2 (will post it to internals@)
+
 2005-06-10  Andi Gutmans  <andi@zend.com>
 
     * configure.in
@@ -4168,7 +4206,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2011 2005/06/11 05:40:03 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2012 2005/06/12 05:40:01 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -7569,7 +7607,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2011 2005/06/11 05:40:03 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2012 2005/06/12 05:40:01 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -8050,7 +8088,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2011 2005/06/11 05:40:03 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2012 2005/06/12 05:40:01 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -9524,7 +9562,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2011 2005/06/11 05:40:03 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2012 2005/06/12 05:40:01 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

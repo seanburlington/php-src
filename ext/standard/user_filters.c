@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: user_filters.c,v 1.29 2005/06/09 08:19:30 dmitry Exp $ */
+/* $Id: user_filters.c,v 1.30 2005/06/12 17:07:20 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -116,7 +116,6 @@ static void userfilter_dtor(php_stream_filter *thisfilter TSRMLS_DC)
 	zval *obj = (zval*)thisfilter->abstract;
 	zval func_name;
 	zval *retval = NULL;
-	zval **tmp; 
 
 	if (obj == NULL) {
 		/* If there's no object associated then there's nothing to dispose of */

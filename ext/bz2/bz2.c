@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: bz2.c,v 1.1.2.4.2.3 2005/06/09 16:13:34 iliaa Exp $ */
+/* $Id: bz2.c,v 1.1.2.4.2.4 2005/06/13 19:32:15 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -434,7 +434,11 @@ PHP_FUNCTION(bzdecompress)
 	char *source, *dest;
 	int source_len, error;
 	long small = 0;
+#if defined(PHP_WIN32) && _MSC_VER < 1300
+	unsigned __int64 size = 0;
+#else	
 	unsigned long long size = 0;
+#endif	
 	bz_stream bzs;
 
 	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &source, &source_len, &small)) {

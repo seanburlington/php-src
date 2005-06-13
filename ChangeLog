@@ -1,3 +1,20 @@
+2005-06-12  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/standard/user_filters.c:
+      Removed unused var.
+
+2005-06-12  Hartmut Holzgraefe  <hartmut@php-groupies.de>
+
+    * ext/standard/dir.c:
+      Support for GLOB_ERR so that glob() reports permission problems (Bug
+      #28355)
+
+    * ext/standard/dir.c:
+      thinko fix (E_COMMIT_AFTER_MIDNIGHT)
+
+    * ext/standard/dir.c:
+      Removed bogus fix for bug #28355 (it was dead code anyway)
+
 2005-06-11  Jani Taskinen  <jani.taskinen@sci.fi>
 
     * (PHP_4_4)
@@ -4206,7 +4223,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2012 2005/06/12 05:40:01 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2013 2005/06/13 05:32:00 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -7607,7 +7624,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2012 2005/06/12 05:40:01 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2013 2005/06/13 05:32:00 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -8088,7 +8105,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2012 2005/06/12 05:40:01 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2013 2005/06/13 05:32:00 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -9562,7 +9579,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2012 2005/06/12 05:40:01 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2013 2005/06/13 05:32:00 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

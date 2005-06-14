@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.28 2005/05/25 10:57:40 stas Exp $ */
+/* $Id: type.c,v 1.29 2005/06/14 21:32:29 derick Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -42,10 +42,6 @@ PHP_FUNCTION(gettype)
 
 		case IS_LONG:
 			RETVAL_STRING("integer", 1);
-			break;
-
-		case IS_RESOURCE:
-			RETVAL_STRING("resource", 1);
 			break;
 
 		case IS_DOUBLE:
@@ -74,6 +70,16 @@ PHP_FUNCTION(gettype)
 		   }
 		 */
 			break;
+
+		case IS_RESOURCE:
+			{
+				char *type_name;
+				type_name = zend_rsrc_list_get_rsrc_type(Z_LVAL_PP(arg) TSRMLS_CC);
+				if (type_name) {
+					RETVAL_STRING("resource", 1);
+					break;
+				}
+			}
 
 		default:
 			RETVAL_STRING("unknown type", 1);

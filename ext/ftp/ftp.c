@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.110 2005/03/17 17:16:43 iliaa Exp $ */
+/* $Id: ftp.c,v 1.111 2005/06/14 02:39:42 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -136,7 +136,7 @@ ftp_open(const char *host, short port, long timeout_sec TSRMLS_DC)
 
 	ftp->fd = php_network_connect_socket_to_host(host,
 			(unsigned short) (port ? port : 21), SOCK_STREAM,
-			0, &tv, NULL, NULL TSRMLS_CC);
+			0, &tv, NULL, NULL, NULL, 0 TSRMLS_CC);
 	if (ftp->fd == -1) {
 		goto bail;
 	}

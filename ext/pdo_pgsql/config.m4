@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9 2005/05/29 23:16:43 sniper Exp $
+dnl $Id: config.m4,v 1.10 2005/06/14 00:00:53 sniper Exp $
 dnl
 
 if test "$PHP_PDO" != "no"; then
@@ -100,17 +100,7 @@ if test "$PHP_PDO_PGSQL" != "no"; then
 
   PHP_ADD_INCLUDE($PGSQL_INCLUDE)
 
-  AC_MSG_CHECKING([for PDO includes])
-  if test -f $abs_srcdir/include/php/ext/pdo/php_pdo_driver.h; then
-    pdo_inc_path=$abs_srcdir/ext
-  elif test -f $abs_srcdir/ext/pdo/php_pdo_driver.h; then
-    pdo_inc_path=$abs_srcdir/ext
-  elif test -f $prefix/include/php/ext/pdo/php_pdo_driver.h; then
-    pdo_inc_path=$prefix/include/php/ext
-  else
-    AC_MSG_ERROR([Cannot find php_pdo_driver.h.])
-  fi
-  AC_MSG_RESULT($pdo_inc_path)
+  PHP_CHECK_PDO_INCLUDES
 
   PHP_NEW_EXTENSION(pdo_pgsql, pdo_pgsql.c pgsql_driver.c pgsql_statement.c, $ext_shared,,-I$pdo_inc_path $PDO_PGSQL_CFLAGS)
   PHP_ADD_EXTENSION_DEP(pdo_pgsql, pdo) 

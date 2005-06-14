@@ -1,5 +1,5 @@
 dnl
-dnl $Id: acinclude.m4,v 1.318 2005/06/14 01:43:53 sniper Exp $
+dnl $Id: acinclude.m4,v 1.319 2005/06/14 02:18:44 sniper Exp $
 dnl
 dnl This file contains local autoconf functions.
 dnl
@@ -38,7 +38,7 @@ dnl PHP_DEF_HAVE(what)
 dnl
 dnl Generates 'AC_DEFINE(HAVE_WHAT, 1, [ ])'
 dnl
-AC_DEFUN([PHP_DEF_HAVE],[AC_DEFINE([HAVE_]translit($1,a-z_-,A-Z__), 1, [ ])])
+AC_DEFUN([PHP_DEF_HAVE],[AC_DEFINE([HAVE_]translit($1,a-z_.-,A-Z___), 1, [ ])])
 
 dnl
 dnl PHP_RUN_ONCE(namespace, variable, code)

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.40 2005/06/07 16:47:33 sniper Exp $
+dnl $Id: config.m4,v 1.41 2005/06/14 01:44:16 sniper Exp $
 dnl config.m4 for extension sqlite
 dnl vim:et:ts=2:sw=2
 
@@ -49,21 +49,11 @@ AC_DEFUN([PHP_PROG_LEMON],[
 
 if test "$PHP_SQLITE" != "no"; then
   if test "$PHP_PDO" != "no"; then
-    AC_MSG_CHECKING([for PDO includes])
-    if test -f $abs_srcdir/include/php/ext/pdo/php_pdo_driver.h; then
-      pdo_inc_path=$abs_srcdir/ext
-    elif test -f $abs_srcdir/ext/pdo/php_pdo_driver.h; then
-      pdo_inc_path=$abs_srcdir/ext
-    elif test -f $prefix/include/php/ext/pdo/php_pdo_driver.h; then
-      pdo_inc_path=$prefix/include/php/ext
-    else
-      AC_MSG_WARN([Cannot find php_pdo_driver.h.])
-    fi
+    PHP_CHECK_PDO_INCLUDES([], [AC_MSG_WARN([Cannot find php_pdo_driver.h.])])
     if test -n "$pdo_inc_path"; then
       AC_DEFINE([PHP_SQLITE2_HAVE_PDO], [1], [Have PDO])
       pdo_inc_path="-I$pdo_inc_path"
     fi
-    AC_MSG_RESULT([$pdo_inc_path])
   fi  
 
   if test "$PHP_SQLITE" != "yes"; then

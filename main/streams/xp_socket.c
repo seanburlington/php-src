@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_socket.c,v 1.31 2005/06/14 02:39:42 iliaa Exp $ */
+/* $Id: xp_socket.c,v 1.32 2005/06/14 05:13:01 sebastian Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -525,7 +525,7 @@ static inline char *parse_ip_address_ex(const char *str, int str_len, int *portn
 
 static inline char *parse_ip_address(php_stream_xport_param *xparam, int *portno TSRMLS_DC)
 {
-	return parse_ip_address_ex(xparam->inputs.name, xparam->inputs.namelen, portno, xparam->want_errortext, &xparam->outputs.error_text);
+	return parse_ip_address_ex(xparam->inputs.name, xparam->inputs.namelen, portno, xparam->want_errortext, &xparam->outputs.error_text TSRMLS_CC);
 }
 
 static inline int php_tcp_sockop_bind(php_stream *stream, php_netstream_data_t *sock,

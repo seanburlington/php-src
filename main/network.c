@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: network.c,v 1.115 2005/06/14 02:39:42 iliaa Exp $ */
+/* $Id: network.c,v 1.116 2005/06/14 13:09:04 iliaa Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -797,7 +797,7 @@ php_socket_t php_network_connect_socket_to_host(const char *host, unsigned short
 					if (!inet_aton(bindto, &in4->sin_addr)) {
 						goto bad_ip;
 					}
-					bzero(&(in4->sin_zero), 8);
+					memset(&(in4->sin_zero), 0, sizeof(in4->sin_zero));
 				}
 #if HAVE_IPV6 && HAVE_INET_PTON
 				 else { /* IPV6 */

@@ -16,12 +16,17 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.1 2005/06/14 21:32:27 derick Exp $ */
+/* $Id: parse_date.re,v 1.2 2005/06/15 00:11:29 edink Exp $ */
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "datetime.h"
+
+#ifdef PHP_WIN32
+#define strcasecmp stricmp
+#define strtoll(s, f, b) _atoi64(s)
+#endif
 
 #define TIMELIB_SECOND  1
 #define TIMELIB_MINUTE  2
@@ -113,14 +118,14 @@ typedef unsigned char uchar;
 #include "timelib_structs.h"
 
 typedef struct timelib_elems {
-	uint c;   /* Number of elements */
+	unsigned int c;   /* Number of elements */
 	char **v; /* Values */
 } timelib_elems;
 
 typedef struct Scanner {
 	int    fd;
 	uchar  *lim, *str, *ptr, *cur, *tok, *pos;
-	uint   line, len;
+	unsigned int   line, len;
 
 	struct timelib_time *time;
 } Scanner;
@@ -365,7 +370,7 @@ static char* timelib_ltrim(char *s)
 #if 0
 uchar *fill(Scanner *s, uchar *cursor){
 	if(!s->eof){
-		uint cnt = s->tok - s->bot;
+		unsigned int cnt = s->tok - s->bot;
 		if(cnt){
 			memcpy(s->bot, s->tok, s->lim - s->tok);
 			s->tok = s->bot;

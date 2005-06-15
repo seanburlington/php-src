@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.2 2005/06/14 23:40:56 iliaa Exp $ */
+/* $Id: php_date.c,v 1.3 2005/06/15 00:11:28 edink Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -126,7 +126,7 @@ PHP_FUNCTION(strtotime)
 	} else if (zend_parse_parameters_ex(ZEND_PARSE_PARAMS_QUIET, ZEND_NUM_ARGS() TSRMLS_CC, "s", &times, &time_len) != FAILURE) {
 		/* We have no initial timestamp */
 		now = timelib_time_ctor();
-		timelib_unixtime2local(now, (signed long long) time(NULL), tzi);
+		timelib_unixtime2local(now, (timelib_sll) time(NULL), tzi);
 	} else {
 		timelib_tzinfo_ctor(tzi);
 		RETURN_FALSE;

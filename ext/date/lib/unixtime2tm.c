@@ -16,11 +16,17 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: unixtime2tm.c,v 1.1 2005/06/14 21:32:27 derick Exp $ */
+/* $Id: unixtime2tm.c,v 1.2 2005/06/15 00:11:29 edink Exp $ */
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
+#if defined(_MSC_VER)
+#define PHP_LL_CONST(n) n ## i64
+#else
+#define PHP_LL_CONST(n) n ## ll
+#endif
 
 #include "datetime.h"
 
@@ -61,7 +67,7 @@ void timelib_unixtime2gmt(timelib_time* tm, timelib_sll ts)
 		/* Guess why this might be for, it has to do with a pope ;-). It's also
 		 * only valid for Great Brittain and it's colonies. It needs fixing for
 		 * other locales. *sigh*, why is this crap so complex! */
-		if (ts <= -6857352000ll) {
+		if (ts <= PHP_LL_CONST(-6857352000)) {
 			tmp_days -= 11;
 		}
 
@@ -160,7 +166,7 @@ void timelib_set_timezone(timelib_time *t, timelib_tzinfo *tz)
 /* Converts the time stored in the struct to localtime if localtime = true,
  * otherwise it converts it to gmttime. This is only done when necessary
  * ofcourse. */
-int timelib_apply_localtime(timelib_time *t, uint localtime)
+int timelib_apply_localtime(timelib_time *t, unsigned int localtime)
 {
 	if (localtime) {
 		/* Converting from GMT time to local time */

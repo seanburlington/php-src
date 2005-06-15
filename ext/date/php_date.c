@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.3 2005/06/15 00:11:28 edink Exp $ */
+/* $Id: php_date.c,v 1.4 2005/06/15 00:23:14 edink Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -33,6 +33,10 @@ function_entry date_functions[] = {
 	PHP_FE(strtotime, NULL)
 	{NULL, NULL, NULL}
 };
+
+#ifdef COMPILE_DL_DATE
+ZEND_GET_MODULE(date)
+#endif
 
 PHP_INI_BEGIN()
 /*	STD_PHP_INI_ENTRY("date.timezone", TIMEZONE_DB_LOCATION, PHP_INI_ALL, OnUpdateString, timezonedb_location, zend_date_globals, date_globals) */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: tm2unixtime.c,v 1.3 2005/06/15 11:01:05 derick Exp $ */
+/* $Id: tm2unixtime.c,v 1.4 2005/06/15 23:42:55 iliaa Exp $ */
 
 #include "datetime.h"
 
@@ -211,16 +211,21 @@ static timelib_sll do_adjust_timezone(timelib_time *tz, timelib_tzinfo *tzi)
 			/* No timezone in struct, fallback to reference if possible */
 			if (tzi) {
 				timelib_time_offset *before, *after;
+				timelib_sll tmp;
 				
 				tz->is_localtime = 1;
 				before = timelib_get_time_zone_info(tz->sse, tzi);
 				after = timelib_get_time_zone_info(tz->sse - before->offset, tzi);
 				timelib_set_timezone(tz, tzi);
 				if (before->is_dst != after->is_dst) {
-					return -tz->z + (before->offset - after->offset);
+					tmp = -tz->z + (before->offset - after->offset);
 				} else {
-					return -tz->z;
+					tmp = -tz->z;
 				}
+				timelib_time_offset_dtor(before);
+				timelib_time_offset_dtor(after);
+				
+				return tmp;
 			}
 	}
 	return 0;

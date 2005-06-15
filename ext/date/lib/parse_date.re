@@ -16,14 +16,14 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.4 2005/06/15 07:58:21 derick Exp $ */
+/* $Id: parse_date.re,v 1.5 2005/06/15 09:02:28 edink Exp $ */
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "datetime.h"
 
-#ifdef PHP_WIN32
+#if defined(_MSC_VER)
 #define strcasecmp stricmp
 #define strtoll(s, f, b) _atoi64(s)
 #endif

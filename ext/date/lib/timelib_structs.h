@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.3 2005/06/15 07:23:27 derick Exp $ */
+/* $Id: timelib_structs.h,v 1.4 2005/06/15 09:02:28 edink Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -24,13 +24,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#ifdef PHP_WIN32
+#ifdef WIN32
 #include <winsock2.h>
 #else
 #include <netinet/in.h>
 #endif
 
-#if defined(PHP_WIN32) && _MSC_VER < 1300
+#if defined(_MSC_VER) && _MSC_VER < 1300
 typedef unsigned __int64 timelib_ull;
 typedef __int64 timelib_sll;
 #else

@@ -16,10 +16,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_tz.c,v 1.2 2005/06/15 00:11:29 edink Exp $ */
+/* $Id: parse_tz.c,v 1.3 2005/06/15 09:02:28 edink Exp $ */
 
 #include <stdio.h>
-#ifdef PHP_WIN32
+#ifdef WIN32
 #include <winsock2.h>
 #else
 #include <netinet/in.h>

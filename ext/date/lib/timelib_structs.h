@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.4 2005/06/15 09:02:28 edink Exp $ */
+/* $Id: timelib_structs.h,v 1.5 2005/06/15 11:01:05 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -95,7 +95,7 @@ typedef struct timelib_time_offset {
 typedef struct timelib_time {
 	timelib_sll      y, m, d;     /* Year, Month, Day */
 	timelib_sll      h, i, s;     /* Hour, mInute, Second */
-	float            f;           /* Fraction */
+	double           f;           /* Fraction */
 	int              z;           /* GMT offset in minutes */
 	char            *tz_abbr;     /* Timezone abbreviation (display only) */
 	timelib_tzinfo  *tz_info;     /* Timezone structure */

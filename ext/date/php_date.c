@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.6 2005/06/15 09:05:00 edink Exp $ */
+/* $Id: php_date.c,v 1.7 2005/06/15 23:30:20 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -140,6 +140,9 @@ PHP_FUNCTION(strtotime)
 	/* if tz_info is not a copy, avoid double free */
 	if (now->tz_info == tzi) {
 		now->tz_info = NULL;
+	}
+	if (t->tz_info == tzi) {
+		t->tz_info = NULL;
 	}
 
 	timelib_time_dtor(now);	

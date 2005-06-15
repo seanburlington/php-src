@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.3 2005/06/15 07:23:27 derick Exp $ */
+/* $Id: parse_date.re,v 1.4 2005/06/15 07:58:21 derick Exp $ */
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -1320,7 +1320,7 @@ relativetext = (reltextnumber space reltextunit)+;
 
 	any
 	{
-		printf("unexpected character: #%d, %c\n", *s->tok, *s->tok);
+/*		printf("unexpected character: #%d, %c\n", *s->tok, *s->tok); */
 		goto std;
 	}
 */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.2 2005/06/15 00:11:29 edink Exp $ */
+/* $Id: parse_date.re,v 1.3 2005/06/15 07:23:27 derick Exp $ */
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -118,14 +118,14 @@ typedef unsigned char uchar;
 #include "timelib_structs.h"
 
 typedef struct timelib_elems {
-	unsigned int c;   /* Number of elements */
-	char **v; /* Values */
+	unsigned int   c; /* Number of elements */
+	char         **v; /* Values */
 } timelib_elems;
 
 typedef struct Scanner {
-	int    fd;
-	uchar  *lim, *str, *ptr, *cur, *tok, *pos;
-	unsigned int   line, len;
+	int           fd;
+	uchar        *lim, *str, *ptr, *cur, *tok, *pos;
+	unsigned int  line, len;
 
 	struct timelib_time *time;
 } Scanner;

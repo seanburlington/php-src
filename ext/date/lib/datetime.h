@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.h,v 1.2 2005/06/15 00:11:29 edink Exp $ */
+/* $Id: datetime.h,v 1.3 2005/06/15 07:23:27 derick Exp $ */
 
 #include "timelib_structs.h"
 
@@ -44,7 +44,7 @@ void timelib_fill_holes(timelib_time *parsed, timelib_time *now, int options);
 void timelib_update_ts(timelib_time* time, timelib_tzinfo* tzi);
 
 /* From unixtime2tm.c */
-int timelib_apply_localtime(timelib_time *t, unsigned int	 localtime);
+int timelib_apply_localtime(timelib_time *t, unsigned int localtime);
 void timelib_unixtime2gmt(timelib_time* tm, timelib_sll ts);
 void timelib_unixtime2local(timelib_time *tm, timelib_sll ts, timelib_tzinfo* tz);
 void timelib_set_timezone(timelib_time *t, timelib_tzinfo *tz);

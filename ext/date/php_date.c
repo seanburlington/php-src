@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.4 2005/06/15 00:23:14 edink Exp $ */
+/* $Id: php_date.c,v 1.5 2005/06/15 07:23:27 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -132,7 +132,7 @@ PHP_FUNCTION(strtotime)
 		now = timelib_time_ctor();
 		timelib_unixtime2local(now, (timelib_sll) time(NULL), tzi);
 	} else {
-		timelib_tzinfo_ctor(tzi);
+		timelib_tzinfo_dtor(tzi);
 		RETURN_FALSE;
 	}
 

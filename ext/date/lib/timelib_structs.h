@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.5 2005/06/15 11:01:05 derick Exp $ */
+/* $Id: timelib_structs.h,v 1.6 2005/06/16 18:34:42 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -27,7 +27,7 @@
 #ifdef WIN32
 #include <winsock2.h>
 #else
-#include <netinet/in.h>
+#include <inttypes.h>
 #endif
 
 #if defined(_MSC_VER) && _MSC_VER < 1300

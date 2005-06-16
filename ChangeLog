@@ -1,3 +1,38 @@
+2005-06-15  Andrei Zmievski  <andrei@gravitonic.com>
+
+    * ext/standard/array.c:
+      WS fix
+
+    * ext/standard/array.c
+      ext/standard/basic_functions.c
+      ext/standard/basic_functions.h:
+      Fix FCI cache for array_walk and user array compare functions. Bug
+
+2005-06-15  Dmitry Stogov  <dmitry@zend.com>
+
+    * ZendEngine2/zend.c
+      ZendEngine2/zend.h:
+      Fixed OS X compatibility
+
+2005-06-15  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * scripts/phpize.in:
+      - This does not have to be egrep here
+
+2005-06-15  Georg Richter  <georg@mysql.com>
+
+    * (PHP_5_0)
+      ext/mysqli/mysqli_api.c:
+      fixed parameter parse string for mysqli_stmt_attr_set
+
+2005-06-15  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * ZendEngine2/tests/bug32428.phpt:
+      typofix
+
+    * run-tests.php:
+      Show borked tests in the summary
+
 2005-06-14  Ilia Alshanetsky  <ilia@prohost.org>
 
     * ZendEngine2/bench.php:
@@ -4397,7 +4432,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2015 2005/06/15 05:32:59 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2016 2005/06/16 05:38:33 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -7798,7 +7833,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2015 2005/06/15 05:32:59 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2016 2005/06/16 05:38:33 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -8279,7 +8314,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2015 2005/06/15 05:32:59 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2016 2005/06/16 05:38:33 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -9753,7 +9788,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2015 2005/06/15 05:32:59 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2016 2005/06/16 05:38:33 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

@@ -16,15 +16,17 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_tz.c,v 1.6 2005/06/16 18:34:42 derick Exp $ */
+/* $Id: parse_tz.c,v 1.7 2005/06/16 23:12:10 sniper Exp $ */
+
+#include <tl_config.h>
 
 #include <stdio.h>
-#ifdef WIN32
-#include <winsock2.h>
-#else
-#include <inttypes.h>
-#endif
+
+#ifdef HAVE_STRING_H
 #include <string.h>
+#else
+#include <strings.h>
+#endif
 
 #include "timelib.h"
 #include "timezonedb.h"

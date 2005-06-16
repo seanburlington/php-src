@@ -16,11 +16,21 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: unixtime2tm.c,v 1.4 2005/06/16 17:12:41 derick Exp $ */
+/* $Id: unixtime2tm.c,v 1.5 2005/06/16 23:12:10 sniper Exp $ */
 
-#include <stdlib.h>
+#include <tl_config.h>
+
 #include <stdio.h>
+
+#ifdef HAVE_STDLIB_H
+#include <stdlib.h>
+#endif
+
+#ifdef HAVE_STRING_H
 #include <string.h>
+#else
+#include <strings.h>
+#endif
 
 #if defined(_MSC_VER)
 #define TIMELIB_LL_CONST(n) n ## i64

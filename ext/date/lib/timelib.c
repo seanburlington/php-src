@@ -16,7 +16,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.c,v 1.1 2005/06/16 17:12:41 derick Exp $ */
+/* $Id: timelib.c,v 1.2 2005/06/16 23:12:10 sniper Exp $ */
+
+#include <tl_config.h>
 
 #include "timelib_structs.h"
 #include "timelib.h"

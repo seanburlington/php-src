@@ -16,11 +16,21 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.8 2005/06/16 17:12:41 derick Exp $ */
+/* $Id: parse_date.re,v 1.9 2005/06/16 23:12:10 sniper Exp $ */
 
-#include <stdlib.h>
+#include <tl_config.h>
+
 #include <stdio.h>
+
+#ifdef HAVE_STDLIB_H
+#include <stdlib.h>
+#endif
+#ifdef HAVE_STRING_H
 #include <string.h>
+#else
+#include <strings.h>
+#endif
+
 #include "timelib.h"
 
 #if defined(_MSC_VER)

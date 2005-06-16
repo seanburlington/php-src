@@ -16,7 +16,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dow.c,v 1.2 2005/06/15 11:01:04 derick Exp $ */
+/* $Id: dow.c,v 1.3 2005/06/16 23:12:09 sniper Exp $ */
+
+#include <tl_config.h>
 
 #include "timelib_structs.h"
 

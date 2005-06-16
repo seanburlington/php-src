@@ -16,8 +16,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: tm2unixtime.c,v 1.5 2005/06/16 17:12:41 derick Exp $ */
+/* $Id: tm2unixtime.c,v 1.6 2005/06/16 23:12:10 sniper Exp $ */
 
+#include <tl_config.h>
 #include "timelib.h"
 
 /*                                    jan  feb  mrt  apr  may  jun  jul  aug  sep  oct  nov  dec */

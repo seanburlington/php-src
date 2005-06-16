@@ -16,7 +16,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.h,v 1.2 2005/06/16 18:34:42 derick Exp $ */
+/* $Id: timelib.h,v 1.3 2005/06/16 23:12:10 sniper Exp $ */
+
+#ifndef __TIMELIB_H__
+#define __TIMELIB_H__
 
 #include "timelib_structs.h"
 
@@ -30,7 +33,6 @@
 #ifndef LONG_MIN
 #define LONG_MIN (- LONG_MAX - 1)
 #endif
-
 
 /* From dow.c */
 timelib_sll timelib_day_of_week(timelib_sll y, timelib_sll m, timelib_sll d);
@@ -71,3 +73,4 @@ void timelib_time_offset_dtor(timelib_time_offset* t);
 signed long timelib_date_to_int(timelib_time *d, int *error);
 void timelib_dump_date(timelib_time *d, int options);
 
+#endif

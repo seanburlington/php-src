@@ -16,9 +16,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: tm2unixtime.c,v 1.4 2005/06/15 23:42:55 iliaa Exp $ */
+/* $Id: tm2unixtime.c,v 1.5 2005/06/16 17:12:41 derick Exp $ */
 
-#include "datetime.h"
+#include "timelib.h"
 
 /*                                    jan  feb  mrt  apr  may  jun  jul  aug  sep  oct  nov  dec */
 static int month_tab_leap[12]     = {  -1,  30,  59,  90, 120, 151, 181, 212, 243, 273, 304, 334 };

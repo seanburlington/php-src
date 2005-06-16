@@ -18,12 +18,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.c,v 1.8 2005/06/16 13:30:25 derick Exp $ */
+/* $Id: parse_date.c,v 1.9 2005/06/16 17:12:41 derick Exp $ */
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "datetime.h"
+#include "timelib.h"
 
 #if defined(_MSC_VER)
 #define strcasecmp stricmp

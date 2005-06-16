@@ -16,10 +16,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.4 2005/06/15 11:01:04 derick Exp $ */
+/* $Id: timelib.c,v 1.1 2005/06/16 17:12:41 derick Exp $ */
 
 #include "timelib_structs.h"
-#include "datetime.h"
+#include "timelib.h"
 #include <ctype.h>
 
 #define TIMELIB_TIME_FREE(m) 	\

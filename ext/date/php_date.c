@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.7 2005/06/15 23:30:20 iliaa Exp $ */
+/* $Id: php_date.c,v 1.8 2005/06/16 17:12:41 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -26,7 +26,7 @@
 #include "ext/standard/info.h"
 #include "php_date.h"
 #include "lib/timelib_structs.h"
-#include "lib/datetime.h"
+#include "lib/timelib.h"
 #include <time.h>
 
 function_entry date_functions[] = {

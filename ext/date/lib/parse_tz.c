@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_tz.c,v 1.4 2005/06/15 11:01:04 derick Exp $ */
+/* $Id: parse_tz.c,v 1.5 2005/06/16 17:12:41 derick Exp $ */
 
 #include <stdio.h>
 #ifdef WIN32
@@ -26,7 +26,7 @@
 #endif
 #include <string.h>
 
-#include "datetime.h"
+#include "timelib.h"
 #include "timezonedb.h"
 
 static void read_header(char **tzf, timelib_tzinfo *tz)

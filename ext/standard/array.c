@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.302 2005/06/15 21:20:26 andrei Exp $ */
+/* $Id: array.c,v 1.303 2005/06/16 15:03:36 wez Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -629,7 +629,7 @@ static int array_user_compare(const void *a, const void *b TSRMLS_DC)
 
 #define PHP_ARRAY_CMP_FUNC_VARS \
     zval **old_compare_func; \
-    zend_fcall_info_cache old_user_compare_fci_cache; \
+    zend_fcall_info_cache old_user_compare_fci_cache \
 
 #define PHP_ARRAY_CMP_FUNC_BACKUP() \
     old_compare_func = BG(user_compare_func_name); \

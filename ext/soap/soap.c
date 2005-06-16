@@ -17,13 +17,15 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.151 2005/06/03 07:34:49 gschlossnagle Exp $ */
+/* $Id: soap.c,v 1.152 2005/06/16 22:35:11 bfrance Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 #include "php_soap.h"
+#if HAVE_PHP_SESSION && !defined(COMPILE_DL_SESSION)
 #include "ext/session/php_session.h"
+#endif
 #ifdef ZEND_ENGINE_2
 #  include "zend_exceptions.h"
 #endif

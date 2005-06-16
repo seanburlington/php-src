@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.1 2005/06/14 21:32:27 derick Exp $ */
+/* $Id: php_date.h,v 1.2 2005/06/16 22:03:04 sniper Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -28,8 +28,6 @@ PHP_FUNCTION(strtotime);
 
 PHP_MINIT_FUNCTION(date);
 PHP_MSHUTDOWN_FUNCTION(date);
-PHP_RINIT_FUNCTION(date);
-PHP_RSHUTDOWN_FUNCTION(date);
 PHP_MINFO_FUNCTION(date);
 
 

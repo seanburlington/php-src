@@ -16,9 +16,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.9 2005/06/16 23:12:10 sniper Exp $ */
+/* $Id: parse_date.re,v 1.10 2005/06/17 12:03:04 derick Exp $ */
 
-#include <tl_config.h>
+#include <timelib_config.h>
 
 #include <stdio.h>
 

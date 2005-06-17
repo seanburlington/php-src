@@ -16,9 +16,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: unixtime2tm.c,v 1.5 2005/06/16 23:12:10 sniper Exp $ */
+/* $Id: unixtime2tm.c,v 1.6 2005/06/17 12:03:03 derick Exp $ */
 
-#include <tl_config.h>
+#include <timelib_config.h>
 
 #include <stdio.h>
 

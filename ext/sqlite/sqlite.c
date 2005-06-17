@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.164 2005/06/17 09:39:20 dmitry Exp $ 
+   $Id: sqlite.c,v 1.165 2005/06/17 16:42:53 sniper Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -275,7 +275,7 @@ static zend_module_dep sqlite_deps[] = {
 #if HAVE_PHP_SESSION && !defined(COMPILE_DL_SESSION)
 	ZEND_MOD_REQUIRED("session")
 #endif
-#if PHP_SQLITE2_HAVE_PDO
+#ifdef PHP_SQLITE2_HAVE_PDO
 	ZEND_MOD_REQUIRED("pdo")
 #endif
 	{NULL, NULL, NULL}
@@ -1096,7 +1096,7 @@ PHP_MINIT_FUNCTION(sqlite)
 	REGISTER_LONG_CONSTANT("SQLITE_ROW",			SQLITE_ROW, CONST_CS|CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SQLITE_DONE",			SQLITE_DONE, CONST_CS|CONST_PERSISTENT);
 
-#if PHP_SQLITE2_HAVE_PDO
+#ifdef PHP_SQLITE2_HAVE_PDO
     if (FAILURE == php_pdo_register_driver(&pdo_sqlite2_driver)) {
         return FAILURE;
     }
@@ -1109,7 +1109,7 @@ PHP_MSHUTDOWN_FUNCTION(sqlite)
 {
 	UNREGISTER_INI_ENTRIES();
 
-#if PHP_SQLITE2_HAVE_PDO
+#ifdef PHP_SQLITE2_HAVE_PDO
     php_pdo_unregister_driver(&pdo_sqlite2_driver);
 #endif
 
@@ -1125,7 +1125,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.164 2005/06/17 09:39:20 dmitry Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.165 2005/06/17 16:42:53 sniper Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

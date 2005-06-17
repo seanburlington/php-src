@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.48 2005/05/12 21:23:56 helly Exp $ */
+/* $Id: php_spl.c,v 1.49 2005/06/17 16:42:53 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -581,10 +581,23 @@ PHP_RSHUTDOWN_FUNCTION(spl) /* {{{ */
 	return SUCCESS;
 } /* }}} */
 
+#ifdef HAVE_SIMPLEXML
+static zend_module_dep spl_deps[] = {
+	ZEND_MOD_REQUIRED("libxml")
+	ZEND_MOD_REQUIRED("simplexml")
+	{NULL, NULL, NULL}
+};
+#endif
+
 /* {{{ spl_module_entry
  */
 zend_module_entry spl_module_entry = {
+#ifdef HAVE_SIMPLEXML
+	STANDARD_MODULE_HEADER_EX, NULL,
+	spl_deps,
+#else
 	STANDARD_MODULE_HEADER,
+#endif
 	"SPL",
 	spl_functions,
 	PHP_MINIT(spl),

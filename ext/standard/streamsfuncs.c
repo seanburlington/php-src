@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.55 2005/03/29 04:02:03 pollita Exp $ */
+/* $Id: streamsfuncs.c,v 1.56 2005/06/17 23:29:20 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -422,20 +422,25 @@ PHP_FUNCTION(stream_get_contents)
 }
 /* }}} */
 
-/* {{{ proto long stream_copy_to_stream(resource source, resource dest [, long maxlen ])
+/* {{{ proto long stream_copy_to_stream(resource source, resource dest [, long maxlen [, long pos]])
    Reads up to maxlen bytes from source stream and writes them to dest stream. */
 PHP_FUNCTION(stream_copy_to_stream)
 {
 	php_stream *src, *dest;
 	zval *zsrc, *zdest;
-	long maxlen = PHP_STREAM_COPY_ALL;
+	long maxlen = PHP_STREAM_COPY_ALL, pos = 0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rr|l", &zsrc, &zdest, &maxlen) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rr|ll", &zsrc, &zdest, &maxlen, &pos) == FAILURE) {
 		RETURN_FALSE;
 	}
 
 	php_stream_from_zval(src, &zsrc);
 	php_stream_from_zval(dest, &zdest);
+
+	if (pos > 0 && php_stream_seek(src, pos, SEEK_SET) < 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Failed to seek to %ld position in the stream.", pos);
+		RETURN_FALSE;
+	}
 
 	RETURN_LONG(php_stream_copy_to_stream(src, dest, maxlen));
 }

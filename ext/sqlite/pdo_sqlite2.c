@@ -16,13 +16,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlite2.c,v 1.5 2005/04/19 11:28:02 sniper Exp $ */
+/* $Id: pdo_sqlite2.c,v 1.6 2005/06/17 13:12:31 sniper Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 #include "php.h"
 
-#if PHP_SQLITE2_HAVE_PDO
+#ifdef PHP_SQLITE2_HAVE_PDO
 #include "sqlite.h"
 #include "pdo/php_pdo.h"
 #include "pdo/php_pdo_driver.h"
@@ -562,7 +562,7 @@ static int authorizer(void *autharg, int access_type, const char *arg3, const ch
 static int pdo_sqlite2_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_DC) /* {{{ */
 {
 	pdo_sqlite2_db_handle *H;
-	int i, ret = 0;
+	int ret = 0;
 	long timeout = 60;
 	char *filename;
 	char *errmsg = NULL;

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.116 2005/05/21 08:38:53 georg Exp $ 
+  $Id: mysqli_api.c,v 1.117 2005/06/17 16:32:40 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1030,7 +1030,13 @@ PHP_FUNCTION(mysqli_init)
 
 	mysqli_resource = (MYSQLI_RESOURCE *)ecalloc (1, sizeof(MYSQLI_RESOURCE));
 	mysqli_resource->ptr = (void *)mysql;
-	MYSQLI_RETURN_RESOURCE(mysqli_resource, mysqli_link_class_entry);	
+
+	if (!getThis()) {
+		MYSQLI_RETURN_RESOURCE(mysqli_resource, mysqli_link_class_entry);	
+	} else {
+		((mysqli_object *) zend_object_store_get_object(getThis() TSRMLS_CC))->ptr = mysqli_resource;
+		((mysqli_object *) zend_object_store_get_object(getThis() TSRMLS_CC))->valid = 1;
+	}
 }
 /* }}} */
 
@@ -1743,7 +1749,7 @@ PHP_FUNCTION(mysqli_stmt_attr_set)
 	ulong	attr;
 	int		rc;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Olb", &mysql_stmt, mysqli_stmt_class_entry, &attr, &mode) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Oll", &mysql_stmt, mysqli_stmt_class_entry, &attr, &mode) == FAILURE) {
 		return;
 	}
 	MYSQLI_FETCH_RESOURCE(stmt, MY_STMT *, &mysql_stmt, "mysqli_stmt"); 

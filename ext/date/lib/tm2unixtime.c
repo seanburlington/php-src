@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: tm2unixtime.c,v 1.7 2005/06/17 12:03:03 derick Exp $ */
+/* $Id: tm2unixtime.c,v 1.8 2005/06/17 14:11:12 derick Exp $ */
 
 #include <timelib_config.h>
 #include "timelib.h"
@@ -202,11 +202,8 @@ static timelib_sll do_adjust_timezone(timelib_time *tz, timelib_tzinfo *tzi)
 			break;
 
 		case TIMELIB_ZONETYPE_ID:
-			tz->is_localtime = 1;
-			timelib_set_timezone(tz, tz->tz_info);
-			return -tz->z;
-
-			break;
+			tzi = tz->tz_info;
+			/* Break intentionally missing */
 
 		default:
 			/* No timezone in struct, fallback to reference if possible */

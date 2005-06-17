@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: unixtime2tm.c,v 1.6 2005/06/17 12:03:03 derick Exp $ */
+/* $Id: unixtime2tm.c,v 1.7 2005/06/17 14:11:12 derick Exp $ */
 
 #include <timelib_config.h>
 
@@ -132,6 +132,7 @@ void timelib_unixtime2local(timelib_time *tm, timelib_sll ts, timelib_tzinfo* tz
 
 	gmt_offset = timelib_get_time_zone_info(ts, tz);
 	timelib_unixtime2gmt(tm, ts + gmt_offset->offset);
+
 	/* we need to reset the sse here as unixtime2gmt modifies it */
 	tm->sse = ts; 
 	tm->dst = gmt_offset->is_dst;

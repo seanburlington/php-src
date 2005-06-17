@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.29 2005/04/06 12:26:29 chregu Exp $ */
+/* $Id: php_xsl.c,v 1.30 2005/06/17 11:44:59 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -43,10 +43,18 @@ function_entry xsl_functions[] = {
 };
 /* }}} */
 
+static zend_module_dep xsl_deps[] = {
+	ZEND_MOD_REQUIRED("libxml")
+	{NULL, NULL, NULL}
+};
+
 /* {{{ xsl_module_entry
  */
 zend_module_entry xsl_module_entry = {
-#if ZEND_MODULE_API_NO >= 20010901
+#if ZEND_MODULE_API_NO >= 20050617
+	STANDARD_MODULE_HEADER_EX, NULL,
+	xsl_deps,
+#elif ZEND_MODULE_API_NO >= 20010901
 	STANDARD_MODULE_HEADER,
 #endif
 	"xsl",

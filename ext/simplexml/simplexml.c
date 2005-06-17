@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.147 2004/12/05 12:02:35 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.148 2005/06/17 11:35:22 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1652,8 +1652,14 @@ function_entry simplexml_functions[] = {
 	{NULL, NULL, NULL}
 };
 
+static zend_module_dep simplexml_deps[] = {
+	ZEND_MOD_REQUIRED("libxml")
+	{NULL, NULL, NULL}
+};
+
 zend_module_entry simplexml_module_entry = {
-	STANDARD_MODULE_HEADER,
+	STANDARD_MODULE_HEADER_EX, NULL,
+	simplexml_deps,
 	"SimpleXML",
 	simplexml_functions,
 	PHP_MINIT(simplexml),
@@ -1729,7 +1735,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.147 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.148 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.70 2005/05/03 22:55:03 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.71 2005/06/17 09:39:20 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -404,8 +404,18 @@ static zend_object_handlers* dom_get_obj_handlers(TSRMLS_D) {
 	}
 }
 
+static zend_module_dep dom_deps[] = {
+	ZEND_MOD_REQUIRED("libxml")
+	ZEND_MOD_CONFLICTS("domxml")
+#ifdef HAVE_SIMPLEXML
+	ZEND_MOD_REQUIRED("simplexml")
+#endif
+	{NULL, NULL, NULL}
+};
+
 zend_module_entry dom_module_entry = {
-	STANDARD_MODULE_HEADER,
+	STANDARD_MODULE_HEADER_EX, NULL,
+	dom_deps,
 	"dom",
 	dom_functions,
 	PHP_MINIT(dom),

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ini.h,v 1.43 2004/01/08 17:33:04 sniper Exp $ */
+/* $Id: php_ini.h,v 1.44 2005/06/17 09:39:23 dmitry Exp $ */
 
 #ifndef PHP_INI_H
 #define PHP_INI_H
@@ -26,7 +26,7 @@
 BEGIN_EXTERN_C()
 int php_init_config();
 int php_shutdown_config(void);
-void php_ini_delayed_modules_startup(TSRMLS_D);
+void php_ini_register_extensions(TSRMLS_D);
 zval *cfg_get_entry(char *name, uint name_length);
 END_EXTERN_C()
 

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.49 2005/06/10 06:11:29 wez Exp $ */
+/* $Id: pdo.c,v 1.50 2005/06/17 09:39:20 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -86,9 +86,20 @@ function_entry pdo_functions[] = {
 };
 /* }}} */
 
+/* {{{ pdo_functions[] */
+static zend_module_dep pdo_deps[] = {
+#ifdef HAVE_SPL
+	ZEND_MOD_REQUIRED("spl")
+#endif
+	{NULL, NULL, NULL}
+};
+
+/* }}} */
+
 /* {{{ pdo_module_entry */
 zend_module_entry pdo_module_entry = {
-	STANDARD_MODULE_HEADER,
+	STANDARD_MODULE_HEADER_EX, NULL,
+	pdo_deps,
 	"PDO",
 	pdo_functions,
 	PHP_MINIT(pdo),

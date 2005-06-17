@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.129 2004/09/17 02:48:41 iliaa Exp $ */
+/* $Id: php_ini.c,v 1.130 2005/06/17 09:39:23 dmitry Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -544,9 +544,9 @@ int php_shutdown_config(void)
 }
 /* }}} */
 
-/* {{{ php_ini_delayed_modules_startup
+/* {{{ php_ini_register_extensions
  */
-void php_ini_delayed_modules_startup(TSRMLS_D)
+void php_ini_register_extensions(TSRMLS_D)
 {
 	zend_llist_apply(&extension_lists.engine, php_load_zend_extension_cb TSRMLS_CC);
 	zend_llist_apply(&extension_lists.functions, php_load_function_extension_cb TSRMLS_CC);

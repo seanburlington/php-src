@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.163 2005/06/07 15:39:35 dmitry Exp $ 
+   $Id: sqlite.c,v 1.164 2005/06/17 09:39:20 dmitry Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -267,8 +267,25 @@ function_entry sqlite_funcs_exception[] = {
 	{NULL, NULL, NULL}
 };
 
+/* Dependancies */
+static zend_module_dep sqlite_deps[] = {
+#if defined(HAVE_SPL) && ((PHP_MAJOR_VERSION > 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1))
+	ZEND_MOD_REQUIRED("spl")
+#endif
+#if HAVE_PHP_SESSION && !defined(COMPILE_DL_SESSION)
+	ZEND_MOD_REQUIRED("session")
+#endif
+#if PHP_SQLITE2_HAVE_PDO
+	ZEND_MOD_REQUIRED("pdo")
+#endif
+	{NULL, NULL, NULL}
+};
+
 zend_module_entry sqlite_module_entry = {
-#if ZEND_MODULE_API_NO >= 20010901
+#if ZEND_MODULE_API_NO >= 20050608
+	STANDARD_MODULE_HEADER_EX, NULL,
+	sqlite_deps,
+#elif ZEND_MODULE_API_NO >= 20010901
 	STANDARD_MODULE_HEADER,
 #endif
 	"SQLite",
@@ -1108,7 +1125,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.163 2005/06/07 15:39:35 dmitry Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.164 2005/06/17 09:39:20 dmitry Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

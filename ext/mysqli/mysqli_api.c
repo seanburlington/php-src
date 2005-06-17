@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.87.2.21 2005/06/15 14:04:23 georg Exp $ 
+  $Id: mysqli_api.c,v 1.87.2.22 2005/06/17 16:37:07 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1032,7 +1032,13 @@ PHP_FUNCTION(mysqli_init)
 
 	mysqli_resource = (MYSQLI_RESOURCE *)ecalloc (1, sizeof(MYSQLI_RESOURCE));
 	mysqli_resource->ptr = (void *)mysql;
-	MYSQLI_RETURN_RESOURCE(mysqli_resource, mysqli_link_class_entry);	
+
+	if (!getThis()) {
+		MYSQLI_RETURN_RESOURCE(mysqli_resource, mysqli_link_class_entry);	
+	} else {
+		((mysqli_object *) zend_object_store_get_object(getThis() TSRMLS_CC))->ptr = mysqli_resource;
+		((mysqli_object *) zend_object_store_get_object(getThis() TSRMLS_CC))->valid = 1;
+	}
 }
 /* }}} */
 

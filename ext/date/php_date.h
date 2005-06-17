@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Derick Rethans <dr@ez.no>                                   |
+   | Authors: Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.2 2005/06/16 22:03:04 sniper Exp $ */
+/* $Id: php_date.h,v 1.3 2005/06/17 14:53:56 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H

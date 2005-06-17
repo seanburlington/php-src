@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Derick Rethans <dr@ez.no>                                   |
+   | Authors: Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.7 2005/06/16 23:12:10 sniper Exp $ */
+/* $Id: timelib_structs.h,v 1.8 2005/06/17 14:54:00 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -128,7 +128,7 @@ typedef struct timelib_time {
 	int              z;           /* GMT offset in minutes */
 	char            *tz_abbr;     /* Timezone abbreviation (display only) */
 	timelib_tzinfo  *tz_info;     /* Timezone structure */
-	unsigned int     dst;         /* Flag if we were parsing a DST zone */
+	signed int       dst;         /* Flag if we were parsing a DST zone */
 	timelib_rel_time relative;
 
 	timelib_sll      sse;         /* Seconds since epoch */

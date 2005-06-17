@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Derick Rethans <dr@ez.no>                                   |
+   | Authors: Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dow.c,v 1.4 2005/06/17 12:03:03 derick Exp $ */
+/* $Id: dow.c,v 1.5 2005/06/17 14:53:59 derick Exp $ */
 
 #include <timelib_config.h>
 

@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Derick Rethans <dr@ez.no>                                   |
+   | Authors: Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.10 2005/06/17 12:03:04 derick Exp $ */
+/* $Id: parse_date.re,v 1.11 2005/06/17 14:54:00 derick Exp $ */
 
 #include <timelib_config.h>
 

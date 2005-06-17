@@ -12,11 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Derick Rethans <dr@ez.no>                                   |
+   | Authors: Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
 
-/* $Id: unixtime2tm.c,v 1.7 2005/06/17 14:11:12 derick Exp $ */
+/* $Id: unixtime2tm.c,v 1.8 2005/06/17 14:54:00 derick Exp $ */
 
 #include <timelib_config.h>
 

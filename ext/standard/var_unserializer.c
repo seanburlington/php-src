@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.c,v 1.18.4.24.2.3 2005/06/13 14:14:39 sniper Exp $ */
+/* $Id: var_unserializer.c,v 1.18.4.24.2.4 2005/06/17 13:52:55 dmitry Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -1017,7 +1017,7 @@ yy86:
 	}
 	*rval = *rval_ref;
 	(*rval)->refcount++;
-	(*rval)->is_ref = 1;
+	(*rval)->is_ref = 0;
 	
 	return 1;
 }

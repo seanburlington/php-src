@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.11.4.16.2.1 2005/06/13 14:13:11 derick Exp $ */
+/* $Id: var_unserializer.re,v 1.11.4.16.2.2 2005/06/17 13:52:55 dmitry Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -382,7 +382,7 @@ PHPAPI int php_var_unserialize(UNSERIALIZE_PARAMETER)
 	}
 	*rval = *rval_ref;
 	(*rval)->refcount++;
-	(*rval)->is_ref = 1;
+	(*rval)->is_ref = 0;
 	
 	return 1;
 }

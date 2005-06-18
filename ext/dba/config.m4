@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.69 2005/05/29 23:16:40 sniper Exp $
+dnl $Id: config.m4,v 1.70 2005/06/18 13:28:30 sniper Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
@@ -66,7 +66,8 @@ AC_DEFUN([AC_DBA_STD_RESULT],[
 ])
 
 PHP_ARG_ENABLE(dba,whether to enable DBA,
-[  --enable-dba            Build DBA with builtin modules])
+[  --enable-dba            Build DBA with builtin modules. To build shared DBA
+                          extension use --enable-dba=shared])
 
 AC_ARG_WITH(qdbm,
 [  --with-qdbm[=DIR]         DBA: Include QDBM support],[

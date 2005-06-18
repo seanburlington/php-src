@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.8 2005/06/17 14:54:00 derick Exp $ */
+/* $Id: timelib_structs.h,v 1.9 2005/06/18 19:23:58 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -119,6 +119,7 @@ typedef struct timelib_time_offset {
 	unsigned int leap_secs;
 	unsigned int is_dst;
 	char        *abbr;
+	timelib_sll  transistion_time;
 } timelib_time_offset;
 
 typedef struct timelib_time {

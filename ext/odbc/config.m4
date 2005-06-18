@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.76 2005/05/29 23:16:42 sniper Exp $
+dnl $Id: config.m4,v 1.77 2005/06/18 13:17:52 sniper Exp $
 dnl
 
 dnl
@@ -400,7 +400,7 @@ AC_ARG_WITH(custom-odbc,
                           run configure script:
                               CPPFLAGS=\"-DODBC_QNX -DSQLANY_BUG\"
                               LDFLAGS=-lunix
-                              CUSTOM_ODBC_LIBS=\"-ldblib -lodbc\".],
+                              CUSTOM_ODBC_LIBS=\"-ldblib -lodbc\"],
 [
   if test "$withval" = "yes"; then
     withval=/usr/local

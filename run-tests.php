@@ -37,7 +37,7 @@
  */
 
 
-/* Sanity check to ensure that pcre extension needed by this script is avaliable.
+/* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
  * not run without it.
  */
@@ -56,6 +56,9 @@ if (!extension_loaded("pcre")) {
 NO_PCRE_ERROR;
 exit;
 }
+
+// store current directory
+$CUR_DIR = getcwd();
 
 // change into the PHP source directory.
 
@@ -407,8 +410,10 @@ if (!getenv('NO_INTERACTION')) {
 		if (substr(PHP_OS, 0, 3) != "WIN") {
 			$automake = shell_exec('automake --version');
 			$autoconf = shell_exec('autoconf --version');
+
 			/* Always use the generated libtool - Mac OSX uses 'glibtool' */
-			$libtool = shell_exec('./libtool --version');
+			$libtool = shell_exec($CUR_DIR . '/libtool --version');
+
 			/* Try the most common flags for 'version' */
 			$flags = array('-v', '-V', '--version');
 			$cc_status=0;
@@ -419,7 +424,7 @@ if (!getenv('NO_INTERACTION')) {
 					break;
 				}
 			}
-			$ldd = shell_exec("ldd $php");
+			$ldd = shell_exec("ldd $php 2>/dev/null");
 		}
 		$failed_tests_data .= "Automake:\n$automake\n";
 		$failed_tests_data .= "Autoconf:\n$autoconf\n";
@@ -439,7 +444,7 @@ if (!getenv('NO_INTERACTION')) {
 		$compression = 0;
 		
 		if ($just_save_results || !mail_qa_team($failed_tests_data, $compression, $status)) {
-			$output_file = 'php_test_results_' . date('Ymd') . ( $compression ? '.txt.gz' : '.txt' );
+			$output_file = $CUR_DIR . '/php_test_results_' . date('Ymd_Hi') . ( $compression ? '.txt.gz' : '.txt' );
 			$fp = fopen($output_file, "w");
 			fwrite($fp, $failed_tests_data);
 			fclose($fp);
@@ -568,7 +573,7 @@ TEST $file
 	}
 	fclose($fp);
 
-	/* For GET/POST tests, check if cgi sapi is avaliable and if it is, use it. */
+	/* For GET/POST tests, check if cgi sapi is available and if it is, use it. */
 	if ((!empty($section_text['GET']) || !empty($section_text['POST']))) {
 		if (file_exists("./sapi/cgi/php")) {
 			$old_php = $php;

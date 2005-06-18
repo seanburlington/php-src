@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_tz.c,v 1.9 2005/06/17 14:54:00 derick Exp $ */
+/* $Id: parse_tz.c,v 1.10 2005/06/18 11:15:29 derick Exp $ */
 
 #include <timelib_config.h>
 
@@ -233,7 +233,7 @@ static ttinfo* fetch_timezone_offset(timelib_tzinfo *tz, timelib_sll ts)
 			return &(tz->type[tz->trans_idx[i - 1]]);
 		}
 	}
-	return NULL;
+	return &(tz->type[tz->trans_idx[tz->timecnt - 1]]);
 }
 
 static tlinfo* fetch_leaptime_offset(timelib_tzinfo *tz, timelib_sll ts)

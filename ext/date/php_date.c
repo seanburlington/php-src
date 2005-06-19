@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.11 2005/06/18 20:23:18 derick Exp $ */
+/* $Id: php_date.c,v 1.12 2005/06/19 05:28:39 sebastian Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -85,7 +85,7 @@ PHP_MINFO_FUNCTION(date)
 	php_info_print_table_end();
 }
 
-static char* guess_timezone(void)
+static char* guess_timezone(TSRMLS_D)
 {
 	char *env;
 
@@ -114,7 +114,7 @@ PHP_FUNCTION(strtotime)
 	timelib_time *t, *now;
 	timelib_tzinfo *tzi;
 
-	tzi = timelib_parse_tzfile(guess_timezone());
+	tzi = timelib_parse_tzfile(guess_timezone(TSRMLS_C));
 	if (! tzi) {
 		tzi = timelib_parse_tzfile("GMT");
 	}

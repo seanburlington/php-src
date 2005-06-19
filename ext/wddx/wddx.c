@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.117 2005/05/30 15:14:12 sniper Exp $ */
+/* $Id: wddx.c,v 1.118 2005/06/19 22:15:26 derick Exp $ */
 
 #include "php.h"
 
@@ -34,7 +34,7 @@
 #include "ext/standard/php_smart_str.h"
 #include "ext/standard/html.h"
 #include "ext/standard/php_string.h"
-#include "ext/standard/php_parsedate.h"
+#include "ext/date/php_date.h"
 
 #define WDDX_BUF_LEN			256
 #define PHP_CLASS_NAME_VAR		"php_class_name"

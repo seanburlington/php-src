@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.12 2005/06/19 05:28:39 sebastian Exp $ */
+/* $Id: php_date.c,v 1.13 2005/06/19 22:15:25 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -83,6 +83,22 @@ PHP_MINFO_FUNCTION(date)
 	php_info_print_table_start();
 	php_info_print_table_row(2, "date/time support", "enabled");
 	php_info_print_table_end();
+}
+
+signed long php_parse_date(char *string, signed long *now)
+{
+	timelib_time *parsed_time;
+	int           error;
+	signed long   retval;
+
+	parsed_time = timelib_strtotime(string);
+	timelib_update_ts(parsed_time, NULL);
+	retval = timelib_date_to_int(parsed_time, &error);
+	timelib_time_dtor(parsed_time);
+	if (error) {
+		return -1;
+	}
+	return retval;
 }
 
 static char* guess_timezone(TSRMLS_D)

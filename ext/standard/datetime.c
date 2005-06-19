@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.128 2005/06/14 21:32:29 derick Exp $ */
+/* $Id: datetime.c,v 1.129 2005/06/19 22:15:26 derick Exp $ */
 
 #if HAVE_STRPTIME
 #define _XOPEN_SOURCE
@@ -34,8 +34,6 @@
 # include <sys/time.h>
 #endif
 #include <stdio.h>
-
-#include "php_parsedate.h"
 
 char *mon_full_names[] = {
 	"January", "February", "March", "April",

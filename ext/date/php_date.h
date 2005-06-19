@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.4 2005/06/18 20:23:18 derick Exp $ */
+/* $Id: php_date.h,v 1.5 2005/06/19 22:15:25 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -39,5 +39,8 @@ ZEND_END_MODULE_GLOBALS(date)
 #else
 #define DATEG(v) (date_globals.v)
 #endif
+
+/* Backwards compability wrapper */
+signed long php_parse_date(char *string, signed long *now);
 
 #endif /* PHP_DATE_H */

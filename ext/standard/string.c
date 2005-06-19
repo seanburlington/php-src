@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.440 2005/06/18 18:23:12 iliaa Exp $ */
+/* $Id: string.c,v 1.441 2005/06/19 16:31:51 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4463,11 +4463,10 @@ PHP_FUNCTION(substr_count)
 	
 	if (Z_STRLEN_PP(needle) == 1) {
 		cmp = Z_STRVAL_PP(needle)[0];
-	
-		while (p < endp) {
-			if (*(p++) == cmp) {
-				count++;	
-			}
+
+		while ((p = memchr(p, cmp, endp - p))) {
+			count++;
+			p++;
 		}
 	} else {
 		while ((p = php_memnstr(p, Z_STRVAL_PP(needle), Z_STRLEN_PP(needle), endp))) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.134 2005/04/08 20:32:13 sniper Exp $ */
+/* $Id: sapi_apache2.c,v 1.135 2005/06/20 12:46:34 tony2001 Exp $ */
 
 #include <fcntl.h>
 
@@ -128,9 +128,7 @@ php_apache_sapi_header_handler(sapi_header_struct *sapi_header, sapi_headers_str
 	else
 		apr_table_add(ctx->r->headers_out, sapi_header->header, val);
 	
-	sapi_free_header(sapi_header);
-
-	return 0;
+	return SAPI_HEADER_ADD;
 }
 
 static int

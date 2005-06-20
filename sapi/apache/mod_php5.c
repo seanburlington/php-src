@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.15 2005/05/19 15:57:45 rasmus Exp $ */
+/* $Id: mod_php5.c,v 1.16 2005/06/20 12:46:34 tony2001 Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -199,9 +199,7 @@ static int sapi_apache_header_handler(sapi_header_struct *sapi_header, sapi_head
 
 	*p = ':';  /* a well behaved header handler shouldn't change its original arguments */
 
-	efree(sapi_header->header);
-	
-	return 0;  /* don't use the default SAPI mechanism, Apache duplicates this functionality */
+	return SAPI_HEADER_ADD;
 }
 /* }}} */
 

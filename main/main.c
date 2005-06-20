@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.632 2005/06/17 09:39:21 dmitry Exp $ */
+/* $Id: main.c,v 1.633 2005/06/20 07:04:07 sniper Exp $ */
 
 /* {{{ includes
  */
@@ -1010,7 +1010,7 @@ static int php_start_sapi(TSRMLS_D)
 
 /* {{{ php_request_startup
  */
- #ifndef APACHE_HOOKS
+#ifndef APACHE_HOOKS
 int php_request_startup(TSRMLS_D)
 {
 	int retval = SUCCESS;

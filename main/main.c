@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.633 2005/06/20 07:04:07 sniper Exp $ */
+/* $Id: main.c,v 1.634 2005/06/20 19:58:51 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -775,8 +775,8 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 				/* restore memory limit */
 				AG(memory_limit) = PG(memory_limit); 
 #endif
-				zend_bailout();
 				efree(buffer);
+				zend_bailout();
 				return;
 			}
 			break;

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.53 2005/05/29 23:16:45 sniper Exp $
+dnl $Id: config.m4,v 1.54 2005/06/20 00:52:59 sniper Exp $
 dnl
 
 PHP_ARG_ENABLE(xml,whether to enable XML support,
@@ -54,6 +54,6 @@ if test "$PHP_XML" != "no"; then
 
   PHP_NEW_EXTENSION(xml, xml.c $xml_extra_sources, $ext_shared)
   PHP_SUBST(XML_SHARED_LIBADD)
-  PHP_INSTALL_HEADERS([ext/xml])
+  PHP_INSTALL_HEADERS([ext/xml/])
   AC_DEFINE(HAVE_XML, 1, [ ])
 fi

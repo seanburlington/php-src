@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.271.2.17 2005/04/30 09:29:44 sniper Exp $ -*- autoconf -*-
+dnl $Id: acinclude.m4,v 1.271.2.18 2005/06/20 11:48:22 sniper Exp $ -*- autoconf -*-
 dnl
 dnl This file contains local autoconf functions.
 
@@ -1274,6 +1274,11 @@ dnl ---------------------------------------------- Static module
     if test "$3" = "shared" || test "$3" = "yes"; then
 dnl ---------------------------------------------- Shared module
       PHP_ADD_SOURCES_X(PHP_EXT_DIR($1),$2,$ac_extra,shared_objects_$1,yes)
+      case $host_alias in
+      *netware*)
+        PHP_ADD_LIBRARY_WITH_PATH(php5lib, netware, translit($1,a-z_-,A-Z__)_SHARED_LIBADD)
+      ;;
+      esac
       PHP_SHARED_MODULE($1,shared_objects_$1, $ext_builddir, $6)
       AC_DEFINE_UNQUOTED([COMPILE_DL_]translit($1,a-z_-,A-Z__), 1, Whether to build $1 as dynamic module)
     fi

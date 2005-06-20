@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.512.2.55 2004/08/16 12:23:06 zeev Exp $ */
+/* $Id: main.c,v 1.512.2.63.2.1 2005/06/20 19:59:43 tony2001 Exp $ */
 
 /* {{{ includes
  */
@@ -541,9 +541,9 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 }
 /* }}} */
 
-/* {{{ php_error_docref */
+/* {{{ php_error_docref0 */
 /* See: CODING_STANDARDS for details. */
-PHPAPI void php_error_docref(const char *docref TSRMLS_DC, int type, const char *format, ...)
+PHPAPI void php_error_docref0(const char *docref TSRMLS_DC, int type, const char *format, ...)
 {
 	va_list args;
 	
@@ -702,8 +702,8 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 				/* restore memory limit */
 				AG(memory_limit) = PG(memory_limit); 
 #endif
-				zend_bailout();
 				efree(buffer);
+				zend_bailout();
 				return;
 			}
 			break;
@@ -975,11 +975,12 @@ void php_request_shutdown(void *dummy)
 	} zend_end_try();
 
 	if (PG(modules_activated)) zend_try {
-		php_call_shutdown_functions();
+		php_call_shutdown_functions(TSRMLS_C);
 	} zend_end_try();
 	
 	if (PG(modules_activated)) {
 		zend_deactivate_modules(TSRMLS_C);
+		php_free_shutdown_functions(TSRMLS_C);
 	}
 
 	zend_try {
@@ -997,6 +998,10 @@ void php_request_shutdown(void *dummy)
 
 	zend_try {
 		sapi_deactivate(TSRMLS_C);
+	} zend_end_try();
+
+	zend_try {
+		php_shutdown_stream_hashes(TSRMLS_C);
 	} zend_end_try();
 
 	zend_try { 
@@ -1204,6 +1209,9 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	REGISTER_MAIN_STRINGL_CONSTANT("PHP_CONFIG_FILE_PATH", PHP_CONFIG_FILE_PATH, sizeof(PHP_CONFIG_FILE_PATH)-1, CONST_PERSISTENT | CONST_CS);
 	REGISTER_MAIN_STRINGL_CONSTANT("PHP_CONFIG_FILE_SCAN_DIR", PHP_CONFIG_FILE_SCAN_DIR, sizeof(PHP_CONFIG_FILE_SCAN_DIR)-1, CONST_PERSISTENT | CONST_CS);
 	REGISTER_MAIN_STRINGL_CONSTANT("PHP_SHLIB_SUFFIX", PHP_SHLIB_SUFFIX, sizeof(PHP_SHLIB_SUFFIX)-1, CONST_PERSISTENT | CONST_CS);
+	REGISTER_MAIN_STRINGL_CONSTANT("PHP_EOL", PHP_EOL, sizeof(PHP_EOL)-1, CONST_PERSISTENT | CONST_CS);
+	REGISTER_MAIN_LONG_CONSTANT("PHP_INT_MAX", LONG_MAX, CONST_PERSISTENT | CONST_CS);
+	REGISTER_MAIN_LONG_CONSTANT("PHP_INT_SIZE", sizeof(long), CONST_PERSISTENT | CONST_CS);
 	php_output_register_constants(TSRMLS_C);
 	php_rfc1867_register_constants(TSRMLS_C);
 
@@ -1296,6 +1304,8 @@ void php_module_shutdown(TSRMLS_D)
 #ifndef ZTS
 	zend_ini_shutdown(TSRMLS_C);
 	shutdown_memory_manager(CG(unclean_shutdown), 1 TSRMLS_CC);
+#else
+	zend_ini_global_shutdown(TSRMLS_C);
 #endif
 
 	module_initialized = 0;
@@ -1338,6 +1348,7 @@ static void php_autoglobal_merge(HashTable *dest, HashTable *src TSRMLS_DC)
 	ulong		  num_key;
 	HashPosition 	  pos;
 	int		  key_type;
+	int 		  globals_check = (PG(register_globals) && (dest == (&EG(symbol_table))));
 
 	zend_hash_internal_pointer_reset_ex(src, &pos);
 	while (zend_hash_get_current_data_ex(src, (void **)&src_entry, &pos) == SUCCESS) {
@@ -1348,7 +1359,12 @@ static void php_autoglobal_merge(HashTable *dest, HashTable *src TSRMLS_DC)
 				|| Z_TYPE_PP(dest_entry) != IS_ARRAY) {
 			(*src_entry)->refcount++;
 			if (key_type == HASH_KEY_IS_STRING) {
-				zend_hash_update(dest, string_key, strlen(string_key)+1, src_entry, sizeof(zval *), NULL);
+				/* if register_globals is on and working with main symbol table, prevent overwriting of GLOBALS */
+				if (!globals_check || string_key_len != sizeof("GLOBALS") || memcmp(string_key, "GLOBALS", sizeof("GLOBALS") - 1)) {
+					zend_hash_update(dest, string_key, string_key_len, src_entry, sizeof(zval *), NULL);
+				} else {
+					(*src_entry)->refcount--;
+				}
 			} else {
 				zend_hash_index_update(dest, num_key, src_entry, sizeof(zval *), NULL);
 			}
@@ -1776,8 +1792,7 @@ PHPAPI int php_handle_auth_data(const char *auth TSRMLS_DC)
 {
 	int ret = -1;
 
-	if (auth && auth[0] != '\0'
-			&& strncmp(auth, "Basic ", 6) == 0) {
+	if (auth && auth[0] != '\0' && strncmp(auth, "Basic ", 6) == 0) {
 		char *pass;
 		char *user;
 
@@ -1795,8 +1810,9 @@ PHPAPI int php_handle_auth_data(const char *auth TSRMLS_DC)
 		}
 	}
 
-	if (ret == -1)
+	if (ret == -1) {
 		SG(request_info).auth_user = SG(request_info).auth_password = NULL;
+	}
 
 	return ret;
 }

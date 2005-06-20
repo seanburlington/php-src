@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.33 2005/04/07 23:07:45 iliaa Exp $ */
+/* $Id: proc_open.c,v 1.34 2005/06/20 11:10:11 sniper Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -697,7 +697,7 @@ PHP_FUNCTION(proc_open)
 				descriptors[ndesc].parentend = dup(dev_ptmx);
 				descriptors[ndesc].mode_flags = O_RDWR;
 #else
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "pty pseudo terminal is not support on this system");
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "pty pseudo terminal not supported on this system");
 				goto exit_fail;
 #endif
 			} else {

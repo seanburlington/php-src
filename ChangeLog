@@ -1,3 +1,60 @@
+2005-06-19  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * tests/classes/array_access_011.phpt:
+      - Add new test
+
+2005-06-19  Derick Rethans  <php@derickrethans.nl>
+
+    * genfiles
+      ext/standard/.cvsignore
+      ext/standard/Makefile.frag
+      ext/standard/config.m4
+      ext/standard/config.w32
+      ext/standard/datetime.c
+      ext/standard/parsedate.y
+      ext/standard/php_parsedate.h
+      ext/wddx/wddx.c
+      netware/BisonExtStandard.bat
+      netware/phplib.mak
+      win32/php5dll.dsp
+      win32/php5dllts.dsp:
+      - Added backward compability wrapper "php_parse_date()".
+      - Changed WDDX extension to use new date parsing code.
+      - Removed all remnants to the old parser.
+
+2005-06-19  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * tests/classes/array_access_010.phpt:
+      - Add new test
+
+2005-06-19  Derick Rethans  <php@derickrethans.nl>
+
+    * ZendEngine2/tests/bug32226.phpt:
+      - Fixed layout of test description.
+
+2005-06-19  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * tests/classes/array_access_009.phpt:
+      - Drop doubled $
+
+    * tests/classes/array_access_009.phpt:
+      - Add new test
+
+    * tests/classes/array_access_003.phpt
+      tests/classes/array_access_005.phpt
+      tests/classes/array_access_008.phpt:
+      - Update tests to reflect current situation
+
+2005-06-19  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/standard/string.c:
+      make substr_count() 30% when counting instances of 1 byte long strings.
+
+2005-06-19  Derick Rethans  <php@derickrethans.nl>
+
+    * NEWS:
+      - Add #20382 to the list, and expand testcase again.
+
 2005-06-18  Jani Taskinen  <jani.taskinen@sci.fi>
 
     * NEWS:
@@ -4742,7 +4799,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2019 2005/06/19 05:32:33 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2020 2005/06/20 05:36:20 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -8143,7 +8200,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2019 2005/06/19 05:32:33 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2020 2005/06/20 05:36:20 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -8624,7 +8681,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2019 2005/06/19 05:32:33 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2020 2005/06/20 05:36:20 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -10098,7 +10155,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2019 2005/06/19 05:32:33 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2020 2005/06/20 05:36:20 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

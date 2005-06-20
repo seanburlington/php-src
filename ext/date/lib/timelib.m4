@@ -1,5 +1,5 @@
 dnl
-dnl $Id: timelib.m4,v 1.1 2005/06/16 23:12:10 sniper Exp $
+dnl $Id: timelib.m4,v 1.2 2005/06/20 11:01:07 sniper Exp $
 dnl
 dnl
 dnl TL_DEF_HAVE(what [, why])
@@ -31,6 +31,34 @@ if (sizeof ($1))
 if test "$ac_cv_int_type_$1" = "yes"; then
   TL_DEF_HAVE($1, [Define if $1 type is present.])
 fi
+])dnl
+
+dnl
+dnl AC_TIMELIB_C_BIGENDIAN
+dnl Replacement macro for AC_C_BIGENDIAN
+dnl
+AC_DEFUN([AC_TIMELIB_C_BIGENDIAN],
+[AC_CACHE_CHECK([whether byte ordering is bigendian], ac_cv_c_bigendian_php,
+ [
+  ac_cv_c_bigendian_php=unknown
+  AC_TRY_RUN(
+  [
+int main(void)
+{
+        short one = 1;
+        char *cp = (char *)&one;
+
+        if (*cp == 0) {
+                return(0);
+        } else {
+                return(1);
+        }
+} 
+  ], [ac_cv_c_bigendian_php=yes], [ac_cv_c_bigendian_php=no], [ac_cv_c_bigendian_php=unknown])
+ ])
+ if test $ac_cv_c_bigendian_php = yes; then
+   AC_DEFINE(WORDS_BIGENDIAN, [], [Define if processor uses big-endian word])
+ fi
 ])dnl
 
 dnl Check for types, sizes, etc. needed by timelib

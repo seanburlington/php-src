@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.159 2005/06/16 23:02:23 helly Exp $ */
+/* $Id: php_reflection.c,v 1.160 2005/06/20 01:08:57 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -563,7 +563,13 @@ static void _parameter_string(string *str, zend_function *fptr, struct _zend_arg
 			zv_copy = precv->op2.u.constant;
 			zv = &zv_copy;
 			zval_update_constant(&zv, (void*)1 TSRMLS_CC);
-			if (Z_TYPE_P(zv) == IS_NULL) {
+			if (Z_TYPE_P(zv) == IS_BOOL) {
+				if (Z_LVAL_P(zv)) {
+					string_write(str, "true", sizeof("true")-1);
+				} else {
+					string_write(str, "false", sizeof("false")-1);
+				}
+			} else if (Z_TYPE_P(zv) == IS_NULL) {
 				string_write(str, "NULL", sizeof("NULL")-1);
 			} else if (Z_TYPE_P(zv) == IS_STRING) {
 				string_write(str, "'", sizeof("'")-1);

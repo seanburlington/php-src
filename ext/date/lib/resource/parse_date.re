@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.12 2005/06/20 08:46:09 derick Exp $ */
+/* $Id: parse_date.re,v 1.13 2005/06/21 17:43:28 derick Exp $ */
 
 #include <timelib_config.h>
 
@@ -816,8 +816,8 @@ pointeddate      = day "." month "." year;
 datefull         = day ([ -.])* monthtext ([ -.])* year;
 datenoday        = monthtext ([ -.])* year4;
 datenodayrev     = year4 ([ -.])* monthtext;
-datetextual      = monthtext space? day [,.stndrh ]* year;
-datenoyear       = monthtext space? day [,.stndrh ]*;
+datetextual      = monthtext ([ -.])+ day [,.stndrh ]* year;
+datenoyear       = monthtext ([ -.])+ day [,.stndrh ]*;
 datenocolon      = year4 monthlz daylz;
 
 /* Special formats */

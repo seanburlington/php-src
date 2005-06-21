@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.126 2005/06/06 07:11:08 helly Exp $ */
+/* $Id: php_cli.c,v 1.127 2005/06/21 00:12:35 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -213,6 +213,9 @@ static int sapi_cli_ub_write(const char *str, uint str_length TSRMLS_DC)
 	size_t ret;
 
 #if HAVE_LIBREADLINE || HAVE_LIBEDIT
+	if (!str_length) {
+		return 0;
+	}
 	php_last_char = str[str_length-1];
 #endif
 

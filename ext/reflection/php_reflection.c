@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.161 2005/06/20 01:37:48 helly Exp $ */
+/* $Id: php_reflection.c,v 1.162 2005/06/21 14:05:15 iliaa Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -583,6 +583,9 @@ static void _parameter_string(string *str, zend_function *fptr, struct _zend_arg
 			} else {
 				zend_make_printable_zval(zv, &zv_copy, &use_copy);
 				string_write(str, Z_STRVAL(zv_copy), Z_STRLEN(zv_copy));
+				if (use_copy) {
+					zval_dtor(&zv_copy);
+				}
 			}
 			zval_ptr_dtor(&zv);
 		}

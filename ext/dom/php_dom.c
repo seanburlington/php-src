@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.71 2005/06/17 09:39:20 dmitry Exp $ */
+/* $Id: php_dom.c,v 1.72 2005/06/22 19:56:30 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -33,6 +33,40 @@
 #include "ext/standard/info.h"
 #define PHP_XPATH 1
 #define PHP_XPTR 2
+
+zend_class_entry *dom_node_class_entry;
+zend_class_entry *dom_domexception_class_entry;
+zend_class_entry *dom_domstringlist_class_entry;
+zend_class_entry *dom_namelist_class_entry;
+zend_class_entry *dom_domimplementationlist_class_entry;
+zend_class_entry *dom_domimplementationsource_class_entry;
+zend_class_entry *dom_domimplementation_class_entry;
+zend_class_entry *dom_documentfragment_class_entry;
+zend_class_entry *dom_document_class_entry;
+zend_class_entry *dom_nodelist_class_entry;
+zend_class_entry *dom_namednodemap_class_entry;
+zend_class_entry *dom_characterdata_class_entry;
+zend_class_entry *dom_attr_class_entry;
+zend_class_entry *dom_element_class_entry;
+zend_class_entry *dom_text_class_entry;
+zend_class_entry *dom_comment_class_entry;
+zend_class_entry *dom_typeinfo_class_entry;
+zend_class_entry *dom_userdatahandler_class_entry;
+zend_class_entry *dom_domerror_class_entry;
+zend_class_entry *dom_domerrorhandler_class_entry;
+zend_class_entry *dom_domlocator_class_entry;
+zend_class_entry *dom_domconfiguration_class_entry;
+zend_class_entry *dom_cdatasection_class_entry;
+zend_class_entry *dom_documenttype_class_entry;
+zend_class_entry *dom_notation_class_entry;
+zend_class_entry *dom_entity_class_entry;
+zend_class_entry *dom_entityreference_class_entry;
+zend_class_entry *dom_processinginstruction_class_entry;
+zend_class_entry *dom_string_extend_class_entry;
+#if defined(LIBXML_XPATH_ENABLED)
+zend_class_entry *dom_xpath_class_entry;
+#endif
+zend_class_entry *dom_namespace_node_class_entry;
 
 zend_object_handlers dom_object_handlers;
 zend_object_handlers dom_ze1_object_handlers;

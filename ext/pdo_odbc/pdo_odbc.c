@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_odbc.c,v 1.11 2005/02/09 05:03:59 wez Exp $ */
+/* $Id: pdo_odbc.c,v 1.12 2005/06/22 08:45:22 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,9 +36,17 @@ function_entry pdo_odbc_functions[] = {
 };
 /* }}} */
 
+/* {{{ pdo_odbc_deps[] */
+static zend_module_dep pdo_odbc_deps[] = {
+	ZEND_MOD_REQUIRED("pdo")
+	{NULL, NULL, NULL}
+};
+/* }}} */
+
 /* {{{ pdo_odbc_module_entry */
 zend_module_entry pdo_odbc_module_entry = {
-	STANDARD_MODULE_HEADER,
+	STANDARD_MODULE_HEADER_EX, NULL,
+	pdo_odbc_deps,
 	"PDO_ODBC",
 	pdo_odbc_functions,
 	PHP_MINIT(pdo_odbc),

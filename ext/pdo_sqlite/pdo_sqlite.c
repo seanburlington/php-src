@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlite.c,v 1.8 2005/06/17 09:39:20 dmitry Exp $ */
+/* $Id: pdo_sqlite.c,v 1.9 2005/06/23 00:19:16 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -41,17 +41,23 @@ function_entry pdo_sqlite_functions[] = {
 
 /* {{{ pdo_sqlite_deps
  */
+#if ZEND_EXTENSION_API_NO >= 220050617
 static zend_module_dep pdo_sqlite_deps[] = {
 	ZEND_MOD_REQUIRED("pdo")
 	{NULL, NULL, NULL}
 };
+#endif
 /* }}} */
 
 /* {{{ pdo_sqlite_module_entry
  */
 zend_module_entry pdo_sqlite_module_entry = {
+#if ZEND_EXTENSION_API_NO >= 220050617
 	STANDARD_MODULE_HEADER_EX, NULL,
 	pdo_sqlite_deps,
+#else
+	STANDARD_MODULE_HEADER,
+#endif
 	"pdo_sqlite",
 	pdo_sqlite_functions,
 	PHP_MINIT(pdo_sqlite),
@@ -94,7 +100,7 @@ PHP_MINFO_FUNCTION(pdo_sqlite)
 	"(bundled) "
 #endif
 		PHP_PDO_SQLITE_MODULE_VERSION 
-		" $Id: pdo_sqlite.c,v 1.8 2005/06/17 09:39:20 dmitry Exp $");
+		" $Id: pdo_sqlite.c,v 1.9 2005/06/23 00:19:16 helly Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite3_libversion());
 	php_info_print_table_end();
 }

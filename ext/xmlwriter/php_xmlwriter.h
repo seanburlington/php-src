@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.h,v 1.7 2005/03/04 15:41:33 rrichards Exp $ */
+/* $Id: php_xmlwriter.h,v 1.8 2005/06/23 11:28:25 pajoye Exp $ */
 
 #ifndef PHP_XMLWRITER_H
 #define PHP_XMLWRITER_H
@@ -38,6 +38,7 @@ extern zend_module_entry xmlwriter_module_entry;
 #include <libxml/xmlwriter.h>
 #include <libxml/uri.h>
 
+/* Resource struct, not the object :) */
 typedef struct _xmlwriter_object {
 	xmlTextWriterPtr ptr;
 	xmlBufferPtr output;
@@ -45,6 +46,18 @@ typedef struct _xmlwriter_object {
 	xmlOutputBufferPtr uri_output;
 #endif
 } xmlwriter_object;
+
+
+/* Extends zend object */
+typedef struct _ze_xmlwriter_object {
+	zend_object zo;
+	xmlwriter_object *xmlwriter_ptr;
+} ze_xmlwriter_object;
+
+static void xmlwriter_free_resource_ptr(xmlwriter_object *intern TSRMLS_DC);
+static void xmlwriter_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC);
+
+zend_class_entry *xmlwriter_class_entry_ce;
 
 #if LIBXML_VERSION >= 20605
 PHP_FUNCTION(xmlwriter_set_indent);

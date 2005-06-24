@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.47 2005/06/20 15:59:12 iliaa Exp $ */
+/* $Id: plain_wrapper.c,v 1.48 2005/06/24 02:04:19 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1079,18 +1079,24 @@ static int php_plain_files_mkdir(php_stream_wrapper *wrapper, char *dir, int mod
 		char *e, *buf;
 		struct stat sb;
 		int dir_len = strlen(dir);
+		int offset = 0;
 
 		buf = estrndup(dir, dir_len);
 		e = buf + dir_len;
 
+		if ((p = memchr(buf, DEFAULT_SLASH, dir_len))) {
+			offset = p - buf + 1;
+		}
+
 		/* find a top level directory we need to create */
-		while ((p = strrchr(buf, DEFAULT_SLASH))) {
+		while ((p = strrchr(buf + offset, DEFAULT_SLASH))) {
 			*p = '\0';
 			if (VCWD_STAT(buf, &sb) == 0) {
 				*p = DEFAULT_SLASH;
 				break;
 			}
 		}
+
 		if (p == buf) {
 			ret = php_mkdir(dir, mode TSRMLS_CC);
 		} else if (!(ret = php_mkdir(buf, mode TSRMLS_CC))) {

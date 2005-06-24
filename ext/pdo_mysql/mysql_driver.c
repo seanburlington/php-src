@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.47 2005/06/24 19:45:57 iliaa Exp $ */
+/* $Id: mysql_driver.c,v 1.48 2005/06/24 23:58:06 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -151,7 +151,8 @@ static long mysql_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRM
 		pdo_mysql_error(dbh);
 		return -1;
 	} else {
-		return mysql_affected_rows(H->server);
+		long c = mysql_affected_rows(H->server);
+		return c >0 ? c : 0;
 	}
 }
 

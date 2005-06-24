@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlstate.c,v 1.3 2005/01/21 03:59:41 wez Exp $ */
+/* $Id: pdo_sqlstate.c,v 1.4 2005/06/24 19:46:37 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -151,7 +151,8 @@ static struct pdo_sqlstate_info err_initializer[] = {
 	{ "IM012",	"DRIVER keyword syntax error" },
 	{ "IM013",	"Trace file error" },
 	{ "IM014",	"Invalid name of File DSN" },
-	{ "IM015",	"Corrupt file data source" }
+	{ "IM015",	"Corrupt file data source" },
+	{ "PDDRV",	"Nested unbuffered query, refer to driver error for details" }
 };
 
 void pdo_sqlstate_fini_error_table(void)

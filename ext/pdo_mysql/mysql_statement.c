@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.25 2005/05/18 22:40:56 iliaa Exp $ */
+/* $Id: mysql_statement.c,v 1.26 2005/06/24 19:45:57 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -69,7 +69,11 @@ static int pdo_mysql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 	if (row_count == (my_ulonglong)-1) {
 		/* we either have a query that returned a result set or an error occured
 		   lets see if we have access to a result set */
-		S->result = mysql_use_result(H->server);
+		if (!H->buffered) {
+			S->result = mysql_use_result(H->server);
+		} else {
+			S->result = mysql_store_result(H->server);
+		}
 		if (NULL == S->result) {
 			pdo_mysql_error_stmt(stmt);
 			return 0;

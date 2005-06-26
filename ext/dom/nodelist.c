@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nodelist.c,v 1.15 2004/11/18 19:54:30 rrichards Exp $ */
+/* $Id: nodelist.c,v 1.16 2005/06/26 22:34:26 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -100,7 +100,8 @@ Since:
 PHP_FUNCTION(dom_nodelist_item)
 {
 	zval *id, *rv = NULL;
-	int index, ret;
+	long index;
+	int ret;
 	dom_object *intern;
 	xmlNodePtr itemnode = NULL;
 

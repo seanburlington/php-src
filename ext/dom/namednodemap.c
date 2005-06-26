@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: namednodemap.c,v 1.13 2004/11/18 19:54:30 rrichards Exp $ */
+/* $Id: namednodemap.c,v 1.14 2005/06/26 22:34:26 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -167,7 +167,8 @@ Since:
 PHP_FUNCTION(dom_namednodemap_item)
 {
 	zval *id, *rv = NULL;
-	int index, ret;
+	long index;
+	int ret;
 	dom_object *intern;
 	xmlNodePtr itemnode = NULL;
 

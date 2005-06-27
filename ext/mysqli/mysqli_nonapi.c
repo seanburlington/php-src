@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.34.2.9 2005/05/13 13:53:08 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.34.2.10 2005/06/27 18:20:25 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -89,6 +89,7 @@ PHP_FUNCTION(mysqli_connect)
 		}
 		/* free mysql structure */
 		mysql_close(mysql->mysql);
+		efree(mysql);
 		RETURN_FALSE;
 	}
 

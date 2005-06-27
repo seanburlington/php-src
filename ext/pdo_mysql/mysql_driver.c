@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.48 2005/06/24 23:58:06 iliaa Exp $ */
+/* $Id: mysql_driver.c,v 1.49 2005/06/27 14:52:44 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,7 +37,6 @@ const char *pdo_mysql_get_sqlstate(unsigned int my_errno) {
 	switch (my_errno) {
 		/* import auto-generated case: code */
 #include "php_pdo_mysql_sqlstate.h"
-	case 2014: return "PDDRV"; /* out of sync */
 	default: return "HY000";
 	}
 }

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.31 2005/05/29 23:16:41 sniper Exp $
+dnl $Id: config.m4,v 1.32 2005/06/27 18:38:03 sniper Exp $
 dnl
 
 PHP_ARG_WITH(informix,for Informix support,
@@ -60,11 +60,6 @@ if test "$PHP_INFORMIX" != "no"; then
 
   for i in $IFX_LIBS; do
     case "$i" in
-      *.o)
-        IFX_LIBOBJS="$IFX_LIBOBJS $i"
-        PHP_ADD_LIBPATH($ext_builddir, INFORMIX_SHARED_LIBADD)
-        PHP_ADD_LIBRARY_DEFER(phpifx, 1, INFORMIX_SHARED_LIBADD)
-        ;;
       -lm)
         ;;
       -lc)
@@ -90,7 +85,14 @@ if test "$PHP_INFORMIX" != "no"; then
 
   PHP_SUBST(INFORMIX_SHARED_LIBADD)
   PHP_SUBST(INFORMIXDIR)
-  PHP_SUBST(IFX_LIBOBJS)
   PHP_SUBST(IFX_ESQL_FLAGS)
   AC_DEFINE(HAVE_IFX,1,[ ])
+
+  if test "$ext_shared" = "yes"; then
+    IFX_CC=$CC
+    with_tags=
+  else
+    IFX_CC='$(INFORMIXDIR)/bin/esql'
+  fi 
+  PHP_SUBST(IFX_CC)
 fi

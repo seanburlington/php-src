@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.14 2005/06/28 17:56:47 derick Exp $ */
+/* $Id: parse_date.re,v 1.15 2005/06/28 18:05:59 derick Exp $ */
 
 #include <timelib_config.h>
 
@@ -34,8 +34,14 @@
 #include "timelib.h"
 
 #if defined(_MSC_VER)
-#define strcasecmp stricmp
-#define strtoll(s, f, b) _atoi64(s)
+# define strcasecmp stricmp
+# define strtoll(s, f, b) _atoi64(s)
+#elif !defined(HAVE_STRTOLL)
+# if defined(HAVE_ATOLL)
+#  define strtoll(s, f, b) atoll(s)
+# else
+#  define strtoll(s, f, b) strtol(s, f, b)
+# endif
 #endif
 
 #define TIMELIB_SECOND  1

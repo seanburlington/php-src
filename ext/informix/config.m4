@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.32 2005/06/27 18:38:03 sniper Exp $
+dnl $Id: config.m4,v 1.33 2005/06/28 21:47:28 sniper Exp $
 dnl
 
 PHP_ARG_WITH(informix,for Informix support,
@@ -60,6 +60,9 @@ if test "$PHP_INFORMIX" != "no"; then
 
   for i in $IFX_LIBS; do
     case "$i" in
+       *.o)
+        DLIBS="$DLIBS $i"
+        ;;
       -lm)
         ;;
       -lc)
@@ -89,10 +92,6 @@ if test "$PHP_INFORMIX" != "no"; then
   AC_DEFINE(HAVE_IFX,1,[ ])
 
   if test "$ext_shared" = "yes"; then
-    IFX_CC=$CC
     with_tags=
-  else
-    IFX_CC='$(INFORMIXDIR)/bin/esql'
   fi 
-  PHP_SUBST(IFX_CC)
 fi

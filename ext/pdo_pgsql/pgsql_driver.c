@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.40 2005/06/28 02:09:53 iliaa Exp $ */
+/* $Id: pgsql_driver.c,v 1.41 2005/06/28 04:03:58 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -163,7 +163,6 @@ static long pgsql_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRM
 #if HAVE_PQRESULTERRORFIELD
 			char * sqlstate = PQresultErrorField(res, PG_DIAG_SQLSTATE);
 			pdo_pgsql_error(dbh, qs, (const char *)sqlstate);
-			PQfreemem(sqlstate);
 #else
 			pdo_pgsql_error(dbh, qs, NULL);
 #endif

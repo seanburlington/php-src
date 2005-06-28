@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.16 2005/06/20 12:46:34 tony2001 Exp $ */
+/* $Id: mod_php5.c,v 1.17 2005/06/28 16:34:18 bfrance Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -352,6 +352,10 @@ static struct stat *php_apache_get_stat(TSRMLS_D)
  */
 static char *php_apache_getenv(char *name, size_t name_len TSRMLS_DC)
 {
+	if (SG(server_context) == NULL) {
+		return NULL;
+	}
+
 	return (char *) table_get(((request_rec *) SG(server_context))->subprocess_env, name);
 }
 /* }}} */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.203.2.10 2005/04/17 13:37:45 sniper Exp $ */
+/* $Id: php.h,v 1.203.2.11 2005/06/29 06:41:15 hyanantha Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -248,19 +248,9 @@ END_EXTERN_C()
 
 /* global variables */
 #if !defined(PHP_WIN32)
-#ifdef NETWARE
-#ifdef NEW_LIBC
-#define php_sleep sleep
-#else	/* NEW_LIBC */
-#define php_sleep   delay   /* sleep() and usleep() are not available */
-#define usleep      delay
-#endif	/* NEW_LIBC */
-extern char **environ;
-#else	/* NETWARE */
 extern char **environ;
 #define php_sleep sleep
 #define PHP_SLEEP_NON_VOID
-#endif	/*  NETWARE */
 #endif	/* !defined(PHP_WIN32) */
 
 #ifdef PHP_PWRITE_64

@@ -16,10 +16,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.9 2005/06/18 19:23:58 derick Exp $ */
+/* $Id: timelib_structs.h,v 1.10 2005/06/29 19:08:26 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
+
+#include <timelib_config.h>
 
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>

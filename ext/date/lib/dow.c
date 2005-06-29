@@ -16,11 +16,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dow.c,v 1.5 2005/06/17 14:53:59 derick Exp $ */
+/* $Id: dow.c,v 1.6 2005/06/29 19:08:26 derick Exp $ */
 
-#include <timelib_config.h>
-
-#include "timelib_structs.h"
+#include "timelib.h"
 
 static int m_table_common[13] = { -1, 0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5 }; /* 1 = jan */
 static int m_table_leap[13] =   { -1, 6, 2, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5 }; /* 1 = jan */

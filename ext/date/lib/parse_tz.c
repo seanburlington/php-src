@@ -16,9 +16,9 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_tz.c,v 1.15 2005/06/28 21:37:36 derick Exp $ */
+/* $Id: parse_tz.c,v 1.16 2005/06/29 19:08:26 derick Exp $ */
 
-#include <timelib_config.h>
+#include "timelib.h"
 
 #include <stdio.h>
 
@@ -27,8 +27,6 @@
 #else
 #include <strings.h>
 #endif
-
-#include "timelib.h"
 #include "timezonedb.h"
 
 #ifdef WORDS_BIGENDIAN

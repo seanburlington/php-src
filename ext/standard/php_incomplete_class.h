@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_incomplete_class.h,v 1.13.2.1 2005/06/28 09:17:19 stas Exp $ */
+/* $Id: php_incomplete_class.h,v 1.13.2.2 2005/06/29 09:29:08 johannes Exp $ */
 
 #ifndef PHP_INCOMPLETE_CLASS_H
 #define PHP_INCOMPLETE_CLASS_H
@@ -34,7 +34,7 @@
 		free_class_name = 1; \
 		incomplete_class = 1; \
 	} else { \
-		free_class_name = !zend_get_object_classname(struc, &class_name, &name_len);\
+		free_class_name = !zend_get_object_classname(struc, &class_name, &name_len TSRMLS_CC);\
 	}
 
 #define PHP_CLEANUP_CLASS_ATTRIBUTES()	\

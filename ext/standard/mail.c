@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.82.2.1 2004/08/03 06:26:59 tony2001 Exp $ */
+/* $Id: mail.c,v 1.82.2.2 2005/06/29 09:22:20 hyanantha Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -42,7 +42,6 @@
 #endif
 
 #ifdef NETWARE
-#include "netware/pipe.h"    /* For popen(), pclose() */
 #include "netware/sysexits.h"   /* For exit status codes like EX_OK */
 #endif
 

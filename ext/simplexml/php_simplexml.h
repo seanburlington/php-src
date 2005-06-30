@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml.h,v 1.18 2004/02/13 00:02:19 fmk Exp $ */
+/* $Id: php_simplexml.h,v 1.19 2005/06/30 11:14:56 sniper Exp $ */
 
 #ifndef PHP_SIMPLEXML_H
 #define PHP_SIMPLEXML_H
@@ -48,7 +48,7 @@ extern zend_module_entry simplexml_module_entry;
 
 PHP_MINIT_FUNCTION(simplexml);
 PHP_MSHUTDOWN_FUNCTION(simplexml);
-#if HAVE_SPL && !defined(COMPILE_DL_SPL)
+#ifdef HAVE_SPL
 PHP_RINIT_FUNCTION(simplexml);
 #endif
 PHP_MINFO_FUNCTION(simplexml);

@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.37 2004/01/08 08:17:47 andi Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.38 2005/06/30 22:29:33 iliaa Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -666,6 +666,10 @@ PHP_FUNCTION(xmlrpc_encode_request)
 			}
 			XMLRPC_RequestFree(xRequest, 1);
 		}
+	}
+	
+	if (out.xmlrpc_out.xml_elem_opts.encoding != ENCODING_DEFAULT) {
+		efree(out.xmlrpc_out.xml_elem_opts.encoding);
 	}
 }
 /* }}} */

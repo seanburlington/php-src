@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.67 2005/06/06 22:04:14 wez Exp $ */
+/* $Id: posix.c,v 1.68 2005/06/30 10:03:36 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -143,7 +143,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.67 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.68 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -698,7 +698,11 @@ PHP_FUNCTION(posix_mknod)
 				"expects argument 4 to be non-zero for POSIX_S_IFCHR and POSIX_S_IFBLK");
 			RETURN_FALSE;
 		} else {
+#ifdef HAVE_MAKEDEV
 			php_dev = makedev(major, minor);
+#else
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Can not create a block or character device, creating a normal file instead");
+#endif
 		}
 	}
 

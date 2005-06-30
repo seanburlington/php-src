@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.c,v 1.17 2005/06/29 19:07:04 derick Exp $ */
+/* $Id: parse_date.c,v 1.18 2005/06/30 23:03:36 fmk Exp $ */
 
 #include "timelib.h"
 
@@ -34,7 +34,6 @@
 #endif
 
 #if defined(_MSC_VER)
-# define strcasecmp stricmp
 # define strtoll(s, f, b) _atoi64(s)
 #elif !defined(HAVE_STRTOLL)
 # if defined(HAVE_ATOLL)

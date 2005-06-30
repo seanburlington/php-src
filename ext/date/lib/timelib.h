@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.h,v 1.5 2005/06/30 21:38:06 derick Exp $ */
+/* $Id: timelib.h,v 1.6 2005/06/30 23:03:36 fmk Exp $ */
 
 #ifndef __TIMELIB_H__
 #define __TIMELIB_H__
@@ -32,6 +32,10 @@
 
 #ifndef LONG_MIN
 #define LONG_MIN (- LONG_MAX - 1)
+#endif
+
+#if defined(_MSC_VER)
+#define strcasecmp stricmp
 #endif
 
 /* From dow.c */

@@ -16,15 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sprintf.c,v 1.21 2005/01/09 21:05:06 sniper Exp $ */
+/* $Id: php_sprintf.c,v 1.22 2005/06/30 14:11:13 sniper Exp $ */
 
 #include <stdio.h>
 #include <stdarg.h>
 #include "php.h"
 #ifdef PHP_WIN32
 #include "config.w32.h"
-#elif defined NETWARE
-#include "config.nw.h"
 #else
 #include <php_config.h>
 #endif

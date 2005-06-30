@@ -16,15 +16,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: expat_compat.h,v 1.17 2005/03/26 03:13:57 sniper Exp $ */
+/* $Id: expat_compat.h,v 1.18 2005/06/30 14:11:13 sniper Exp $ */
 
 #ifndef PHP_EXPAT_COMPAT_H
 #define PHP_EXPAT_COMPAT_H
 
 #ifdef PHP_WIN32
 #include "config.w32.h"
-#elif defined(NETWARE)
-#include "config.nw.h"
 #else
 #include <php_config.h>
 #endif

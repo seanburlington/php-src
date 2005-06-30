@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.17 2005/06/30 22:49:47 fmk Exp $ */
+/* $Id: php_date.c,v 1.18 2005/06/30 23:33:37 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -232,6 +232,10 @@ static char *php_format_date(char *format, int format_len, timelib_time *t, int 
 	}
 
 	smart_str_0(&string);
+
+	if (localtime) {
+		timelib_time_offset_dtor(offset);
+	}
 
 	return string.c;
 }

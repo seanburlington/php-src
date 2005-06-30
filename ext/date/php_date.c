@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.14 2005/06/30 21:38:06 derick Exp $ */
+/* $Id: php_date.c,v 1.15 2005/06/30 22:44:28 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -249,15 +249,16 @@ static void php_date(INTERNAL_FUNCTION_PARAMETERS, int localtime)
 		RETURN_FALSE;
 	}
 
-    t = timelib_time_ctor();
+	t = timelib_time_ctor();
 
 	if (localtime) {
 		tzi = timelib_parse_tzfile(guess_timezone());
 		if (! tzi) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot find any timezone setting");
+			timelib_time_dtor(t);
 			RETURN_FALSE;
 		}
-    	timelib_unixtime2local(t, ts, tzi);
+		timelib_unixtime2local(t, ts, tzi);
 	} else {
 		tzi = NULL;
 		timelib_unixtime2gmt(t, ts);

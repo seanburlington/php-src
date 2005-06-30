@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.720 2005/06/15 20:51:31 andrei Exp $ */
+/* $Id: basic_functions.c,v 1.721 2005/06/30 21:38:06 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -179,9 +179,7 @@ function_entry basic_functions[] = {
 	PHP_FE(gmstrftime,														NULL)
 #endif
 
-	PHP_FE(date,															NULL)
 	PHP_FE(idate,															NULL)
-	PHP_FE(gmdate,															NULL)
 	PHP_FE(getdate,															NULL)
 	PHP_FE(localtime,														NULL)
 	PHP_FE(checkdate,														NULL)

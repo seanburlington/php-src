@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: datetime.h,v 1.19 2005/06/14 21:32:29 derick Exp $ */
+/* $Id: datetime.h,v 1.20 2005/06/30 21:38:06 derick Exp $ */
 
 #ifndef DATETIME_H
 #define DATETIME_H
@@ -25,9 +25,7 @@
 PHP_FUNCTION(time);
 PHP_FUNCTION(mktime);
 PHP_FUNCTION(gmmktime);
-PHP_FUNCTION(date);
 PHP_FUNCTION(idate);
-PHP_FUNCTION(gmdate);
 PHP_FUNCTION(localtime);
 PHP_FUNCTION(getdate);
 PHP_FUNCTION(checkdate);

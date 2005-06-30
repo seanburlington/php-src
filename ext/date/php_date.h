@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.5 2005/06/19 22:15:25 derick Exp $ */
+/* $Id: php_date.h,v 1.6 2005/06/30 21:38:06 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -25,6 +25,8 @@ extern zend_module_entry date_module_entry;
 #define phpext_date_ptr &date_module_entry
 
 PHP_FUNCTION(strtotime);
+PHP_FUNCTION(date);
+PHP_FUNCTION(gmdate);
 
 PHP_MINIT_FUNCTION(date);
 PHP_MSHUTDOWN_FUNCTION(date);

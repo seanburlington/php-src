@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_tz.c,v 1.16 2005/06/29 19:08:26 derick Exp $ */
+/* $Id: parse_tz.c,v 1.17 2005/06/30 21:38:06 derick Exp $ */
 
 #include "timelib.h"
 
@@ -193,7 +193,7 @@ static int tz_search(char *timezone, int left, int right)
  
 	mid = (left + right) / 2;
  
-	cmp = strcmp(timezone, timezonedb_idx[mid].id);
+	cmp = strcasecmp(timezone, timezonedb_idx[mid].id);
 	if (cmp < 0) {
 		return tz_search(timezone, left, mid - 1);
 	} else if (cmp > 0) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.10 2005/06/29 19:08:26 derick Exp $ */
+/* $Id: timelib_structs.h,v 1.11 2005/06/30 21:38:06 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -154,7 +154,7 @@ typedef struct timelib_time {
 #define DAYS_PER_YEAR    365
 #define DAYS_PER_LYEAR   366
 
-#define is_leap(y) ((y) % 4 == 0 && ((y) % 100 != 0 || (y) % 400 == 0))
+#define timelib_is_leap(y) ((y) % 4 == 0 && ((y) % 100 != 0 || (y) % 400 == 0))
 
 #define DEBUG(s)  if (0) { s }
 

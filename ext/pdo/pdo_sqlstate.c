@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlstate.c,v 1.5 2005/06/27 14:52:46 iliaa Exp $ */
+/* $Id: pdo_sqlstate.c,v 1.6 2005/07/01 22:12:00 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -95,6 +95,9 @@ static struct pdo_sqlstate_info err_initializer[] = {
 	{ "42S21",	"Column already exists" },
 	{ "42S22",	"Column not found" },
 	{ "44000",	"WITH CHECK OPTION violation" },
+	{ "55000",	"Object not in prerequisite state" },
+	{ "55006",	"Object in use" },
+	{ "55P02",	"Cannot change runtime param" },
 	{ "HY000",	"General error" },
 	{ "HY001",	"Memory allocation error" },
 	{ "HY003",	"Invalid application buffer type" },

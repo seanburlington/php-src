@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.45 2005/07/01 22:30:55 edink Exp $ */
+/* $Id: pgsql_driver.c,v 1.46 2005/07/01 22:43:16 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -203,11 +203,10 @@ static char *pdo_pgsql_last_insert_id(pdo_dbh_t *dbh, const char *name, unsigned
 	pdo_pgsql_db_handle *H = (pdo_pgsql_db_handle *)dbh->driver_data;
 	char *id = NULL;
 
-	if (H->pgoid == InvalidOid) {
-		return NULL;
-	}
-
 	if (name == NULL) {
+		if (H->pgoid == InvalidOid) {
+			return NULL;
+		}
 		*len = spprintf(&id, 0, "%ld", (long) H->pgoid);
 	} else {
 		PGresult *res;

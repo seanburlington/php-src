@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.22 2005/05/18 22:40:56 iliaa Exp $ */
+/* $Id: pgsql_statement.c,v 1.23 2005/07/01 22:30:55 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -97,13 +97,7 @@ static int pgsql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 	status = PQresultStatus(S->result);
 
 	if (status != PGRES_COMMAND_OK && status != PGRES_TUPLES_OK) {
-#if HAVE_PQRESULTERRORFIELD
-		char * sqlstate = PQresultErrorField(S->result, PG_DIAG_SQLSTATE);
-		pdo_pgsql_error_stmt(stmt, status, (const char *)sqlstate);
-#else
-		pdo_pgsql_error_stmt(stmt, status, NULL);
-#endif
-
+		pdo_pgsql_error_stmt(stmt, status, pdo_pgsql_sqlstate(S->result));
 		return 0;
 	}
 
@@ -151,12 +145,7 @@ static int pgsql_stmt_fetch(pdo_stmt_t *stmt,
 		status = PQresultStatus(S->result);
 
 		if (status != PGRES_COMMAND_OK && status != PGRES_TUPLES_OK) {
-#if HAVE_PQRESULTERRORFIELD
-			char * sqlstate = PQresultErrorField(S->result, PG_DIAG_SQLSTATE);
-			pdo_pgsql_error_stmt(stmt, status, (const char *)sqlstate);
-#else
-			pdo_pgsql_error_stmt(stmt, status, NULL);
-#endif
+			pdo_pgsql_error_stmt(stmt, status, pdo_pgsql_sqlstate(S->result));
 			return 0;
 		}
 

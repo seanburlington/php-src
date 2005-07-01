@@ -15,7 +15,7 @@
    | Author: Wez Furlong <wez@thebrainroom.com>                           |
    +----------------------------------------------------------------------+
  */
-/* $Id: proc_open.c,v 1.34 2005/06/20 11:10:11 sniper Exp $ */
+/* $Id: proc_open.c,v 1.35 2005/07/01 06:49:29 hyanantha Exp $ */
 
 #if 0 && (defined(__linux__) || defined(sun) || defined(__IRIX__))
 # define _BSD_SOURCE 		/* linux wants this when XOPEN mode is on */
@@ -761,6 +761,46 @@ PHP_FUNCTION(proc_open)
 	child = pi.hProcess;
 	CloseHandle(pi.hThread);
 
+#elif defined(NETWARE)
+	if (cwd) {
+		orig_cwd = getcwd(NULL, PATH_MAX);
+		chdir2(cwd);
+	}
+	channel.infd = descriptors[0].childend;
+	channel.outfd = descriptors[1].childend;
+	channel.errfd = -1;
+	/* Duplicate the command as processing downwards will modify it*/
+	command_dup = strdup(command);
+	/* get a number of args */
+	construct_argc_argv(command_dup, NULL, &command_num_args, NULL);
+	child_argv = (char**) malloc((command_num_args + 1) * sizeof(char*));
+	if(!child_argv) {
+		free(command_dup);
+		if (cwd && orig_cwd) {
+			chdir2(orig_cwd);
+			free(orig_cwd);
+		}
+	}
+	/* fill the child arg vector */
+	construct_argc_argv(command_dup, NULL, &command_num_args, child_argv);
+	child_argv[command_num_args] = NULL;
+	child = procve(child_argv[0], PROC_DETACHED|PROC_INHERIT_CWD, NULL, &channel, NULL, NULL, 0, NULL, (const char**)child_argv);
+	free(child_argv);
+	free(command_dup);
+	if (cwd && orig_cwd) {
+		chdir2(orig_cwd);
+		free(orig_cwd);
+	}
+	if (child < 0) {
+		/* failed to fork() */
+		/* clean up all the descriptors */
+		for (i = 0; i < ndesc; i++) {
+			close(descriptors[i].childend);
+			close(descriptors[i].parentend);
+		}
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "procve failed - %s", strerror(errno));
+		goto exit_fail;
+	}
 #elif HAVE_FORK
 	/* the unix way */
 	child = fork();
@@ -830,46 +870,6 @@ PHP_FUNCTION(proc_open)
 
 		goto exit_fail;
 
-	}
-#elif defined(NETWARE)
-	if (cwd) {
-		orig_cwd = getcwd(NULL, PATH_MAX);
-		chdir2(cwd);
-	}
-	channel.infd = descriptors[0].childend;
-	channel.outfd = descriptors[1].childend;
-	channel.errfd = -1;
-	/* Duplicate the command as processing downwards will modify it*/
-	command_dup = strdup(command);
-	/* get a number of args */
-	construct_argc_argv(command_dup, NULL, &command_num_args, NULL);
-	child_argv = (char**) malloc((command_num_args + 1) * sizeof(char*));
-	if(!child_argv) {
-		free(command_dup);
-		if (cwd && orig_cwd) {
-			chdir2(orig_cwd);
-			free(orig_cwd);
-		}
-	}
-	/* fill the child arg vector */
-	construct_argc_argv(command_dup, NULL, &command_num_args, child_argv);
-	child_argv[command_num_args] = NULL;
-	child = procve(child_argv[0], PROC_DETACHED|PROC_INHERIT_CWD, NULL, &channel, NULL, NULL, 0, NULL, (const char**)child_argv);
-	free(child_argv);
-	free(command_dup);
-	if (cwd && orig_cwd) {
-		chdir2(orig_cwd);
-		free(orig_cwd);
-	}
-	if (child < 0) {
-		/* failed to fork() */
-		/* clean up all the descriptors */
-		for (i = 0; i < ndesc; i++) {
-			close(descriptors[i].childend);
-			close(descriptors[i].parentend);
-		}
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "procve failed - %s", strerror(errno));
-		goto exit_fail;
 	}
 #else
 # error You lose (configure should not have let you get here)

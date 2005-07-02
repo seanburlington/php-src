@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.99 2005/06/08 19:51:56 dmitry Exp $ */
+/* $Id: pdo_stmt.c,v 1.100 2005/07/02 17:19:58 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -851,6 +851,7 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 					zend_update_property(NULL, return_value,
 						stmt->columns[i].name, stmt->columns[i].namelen,
 						val TSRMLS_CC);
+					zval_ptr_dtor(&val);
 					break;
 
 				case PDO_FETCH_CLASS:

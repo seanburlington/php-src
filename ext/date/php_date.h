@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.8 2005/07/03 14:27:31 derick Exp $ */
+/* $Id: php_date.h,v 1.9 2005/07/03 19:14:55 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -30,6 +30,13 @@ PHP_FUNCTION(strtotime);
 
 PHP_FUNCTION(mktime);
 PHP_FUNCTION(gmmktime);
+
+PHP_FUNCTION(checkdate);
+
+#if HAVE_STRFTIME
+PHP_FUNCTION(strftime);
+PHP_FUNCTION(gmstrftime);
+#endif
 
 PHP_FUNCTION(date_timezone_set);
 PHP_FUNCTION(date_timezone_get);
@@ -54,5 +61,9 @@ ZEND_END_MODULE_GLOBALS(date)
 /* Backwards compability wrapper */
 signed long php_parse_date(char *string, signed long *now);
 PHPAPI static void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gmt);
+#if HAVE_STRFTIME
+#define _php_strftime php_strftime
+PHPAPI void php_strftime(INTERNAL_FUNCTION_PARAMETERS, int gm);
+#endif
 
 #endif /* PHP_DATE_H */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.21 2005/07/03 14:27:31 derick Exp $ */
+/* $Id: php_date.c,v 1.22 2005/07/03 14:36:59 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -470,6 +470,7 @@ PHPAPI static void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gmt)
 			if (dst == 0 && tmp_offset->is_dst == 1) {
 				adjust_seconds = +3600;
 			}
+			timelib_time_offset_dtor(tmp_offset);
 		}
 	}
 	/* Clean up and return */

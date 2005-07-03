@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.23 2005/07/01 22:30:55 edink Exp $ */
+/* $Id: pgsql_statement.c,v 1.24 2005/07/03 03:04:13 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -88,7 +88,7 @@ static int pgsql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 
 	if (S->cursor_name) {
 		char *q = NULL;
-		spprintf(&q, 0, "DECLARE %s FOR %s", S->cursor_name, stmt->active_query_string);
+		spprintf(&q, 0, "DECLARE %s CURSOR FOR %s", S->cursor_name, stmt->active_query_string);
 		S->result = PQexec(H->server, q);
 		efree(q);
 	} else {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.9 2005/07/03 19:14:55 derick Exp $ */
+/* $Id: php_date.h,v 1.10 2005/07/03 20:45:08 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -37,6 +37,10 @@ PHP_FUNCTION(checkdate);
 PHP_FUNCTION(strftime);
 PHP_FUNCTION(gmstrftime);
 #endif
+
+PHP_FUNCTION(time);
+PHP_FUNCTION(localtime);
+PHP_FUNCTION(getdate);
 
 PHP_FUNCTION(date_timezone_set);
 PHP_FUNCTION(date_timezone_get);

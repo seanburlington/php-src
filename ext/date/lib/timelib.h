@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.h,v 1.6 2005/06/30 23:03:36 fmk Exp $ */
+/* $Id: timelib.h,v 1.7 2005/07/03 15:01:29 derick Exp $ */
 
 #ifndef __TIMELIB_H__
 #define __TIMELIB_H__
@@ -48,6 +48,7 @@ void timelib_isoweek_from_date(timelib_sll y, timelib_sll m, timelib_sll d, time
 /* From parse_date.re */
 timelib_time *timelib_strtotime(char *s);
 void timelib_fill_holes(timelib_time *parsed, timelib_time *now, int options);
+char *timelib_timezone_id_from_abbr(const char *abbr);
 
 /* From tm2unixtime.c */
 void timelib_update_ts(timelib_time* time, timelib_tzinfo* tzi);

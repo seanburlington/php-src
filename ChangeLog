@@ -1,3 +1,40 @@
+2005-07-02  Edin Kadribasic  <edink@emini.dk>
+
+    * (PHP_4_4)
+      NEWS:
+      BFN: now in the correct place :)
+
+    * NEWS
+      NEWS:
+      BFN
+
+    * ext/odbc/php_odbc.c:
+      Don't crash on exit by destroying the same hash twice
+
+2005-07-02  Derick Rethans  <php@derickrethans.nl>
+
+    * NEWS:
+      - Overhauled selecting the correct timezone. The timezone set with
+        "date_timezone_set" override the TZ environment variable, which on its
+      turn
+        overrides the date.timezone setting. If none of the three is set, we
+      fallback
+        to UTC.
+      - Added "date_timezone_set" function to set the timezone that the date
+        functions will use.
+
+2005-07-02  Greg Beaver  <greg@chiaraquartet.net>
+
+    * pear/packages/XML_RPC-1.3.1.tar
+      pear/packages/XML_RPC-1.3.1.tgz:
+      XML_RPC -> 1.3.1 (tar, not tgz)
+
+    * pear/packages/XML_RPC-1.2.2.tar
+      pear/packages/XML_RPC-1.2.2.tar
+      pear/packages/XML_RPC-1.3.1.tar
+      pear/packages/XML_RPC-1.3.1.tgz:
+      XML_RPC -> 1.3.1
+
 2005-07-01  Edin Kadribasic  <edink@emini.dk>
 
     * php.ini-recommended:
@@ -5709,7 +5746,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2030 2005/07/02 05:34:49 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2031 2005/07/03 05:32:08 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -9110,7 +9147,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2030 2005/07/02 05:34:49 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2031 2005/07/03 05:32:08 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -9591,7 +9628,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2030 2005/07/02 05:34:49 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2031 2005/07/03 05:32:08 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -11065,7 +11102,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2030 2005/07/02 05:34:49 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2031 2005/07/03 05:32:08 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

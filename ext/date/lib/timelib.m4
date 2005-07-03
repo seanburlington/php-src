@@ -1,5 +1,5 @@
 dnl
-dnl $Id: timelib.m4,v 1.3 2005/06/28 18:05:58 derick Exp $
+dnl $Id: timelib.m4,v 1.4 2005/07/03 23:30:52 sniper Exp $
 dnl
 dnl
 dnl TL_DEF_HAVE(what [, why])
@@ -77,4 +77,4 @@ stdlib.h
 ])
 
 dnl Check for strtoll, atoll
-AC_CHECK_FUNCS(strtoll atoll)
+AC_CHECK_FUNCS(strtoll atoll strftime)

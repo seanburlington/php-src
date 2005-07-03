@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.27 2005/07/03 21:38:53 derick Exp $ */
+/* $Id: php_date.c,v 1.28 2005/07/03 23:30:51 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -33,12 +33,12 @@ function_entry date_functions[] = {
 	PHP_FE(date, NULL)
 	PHP_FE(gmdate, NULL)
 	PHP_FE(mktime, NULL)
-	PHP_FE(checkdate, NULL)
-	PHP_FE(gmstrftime, NULL)
-
-#if HAVE_STRFTIME
-	PHP_FE(strftime, NULL)
 	PHP_FE(gmmktime, NULL)
+	PHP_FE(checkdate, NULL)
+
+#ifdef HAVE_STRFTIME
+	PHP_FE(strftime, NULL)
+	PHP_FE(gmstrftime, NULL)
 #endif
 
 	PHP_FE(time, NULL)
@@ -548,7 +548,7 @@ PHP_FUNCTION(checkdate)
 }
 /* }}} */
 
-#if HAVE_STRFTIME
+#ifdef HAVE_STRFTIME
 /* {{{ php_strftime
  */
 PHPAPI void php_strftime(INTERNAL_FUNCTION_PARAMETERS, int gmt)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.10 2005/07/03 20:45:08 derick Exp $ */
+/* $Id: php_date.h,v 1.11 2005/07/03 23:30:51 sniper Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -33,7 +33,7 @@ PHP_FUNCTION(gmmktime);
 
 PHP_FUNCTION(checkdate);
 
-#if HAVE_STRFTIME
+#ifdef HAVE_STRFTIME
 PHP_FUNCTION(strftime);
 PHP_FUNCTION(gmstrftime);
 #endif

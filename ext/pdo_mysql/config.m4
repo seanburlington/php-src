@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.23 2005/07/02 21:01:38 wez Exp $
+dnl $Id: config.m4,v 1.24 2005/07/03 02:20:08 wez Exp $
 dnl
 
 if test "$PHP_PDO" != "no"; then
@@ -58,7 +58,7 @@ Note that the MySQL client library is not bundled anymore!])
 
   _SAVE_LDFLAGS=$LDFLAGS
   LDFLAGS="$LDFLAGS $PDO_MYSQL_LIBS"
-  AC_CHECK_FUNCS([mysql_commit mysql_stmt_prepare mysql_next_result]) 
+  AC_CHECK_FUNCS([mysql_commit mysql_stmt_prepare mysql_next_result mysql_sqlstate]) 
   LDFLAGS=$_SAVE_LDFLAGS
 
   PHP_CHECK_PDO_INCLUDES

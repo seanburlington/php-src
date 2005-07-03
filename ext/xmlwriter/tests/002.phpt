@@ -4,7 +4,7 @@ XMLWriter: libxml2 XML Writer, membuffer, flush
 <?php if (!extension_loaded("xmlwriter")) print "skip"; ?>
 --FILE--
 <?php 
-/* $Id: 002.phpt,v 1.1 2005/06/23 11:29:03 pajoye Exp $ */
+/* $Id: 002.phpt,v 1.2 2005/07/03 09:10:41 helly Exp $ */
 
 $doc_dest = '001.xml';
 $xw = xmlwriter_open_memory($doc_dest);
@@ -14,9 +14,9 @@ xmlwriter_end_document($xw);
 
 // Force to write and empty the buffer
 echo xmlwriter_flush($xw, true);
-echo "---Done---\n";
 ?>
+===DONE===
 --EXPECT--
 <?xml version="1.0" encoding="utf8"?>
 <tag1/>
----Done--- 
+===DONE===

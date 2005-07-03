@@ -4,7 +4,7 @@ XMLWriter: libxml2 XML Writer, membuffer, flush, text, attribute
 <?php if (!extension_loaded("xmlwriter")) print "skip"; ?>
 --FILE--
 <?php 
-/* $Id: OO_003.phpt,v 1.1 2005/06/23 11:29:03 pajoye Exp $ */
+/* $Id: OO_003.phpt,v 1.2 2005/07/03 09:10:41 helly Exp $ */
 
 $xw = new XMLWriter();
 $xw->openMemory();
@@ -29,9 +29,9 @@ $xw->endDocument();
 
 // Force to write and empty the buffer
 echo $xw->flush(true);
-echo "---Done---\n";
 ?>
+===DONE===
 --EXPECT--
 <?xml version="1.0" encoding="utf8"?>
 <tag1 attr1="attr1_value" attr2="attr2_value">Test text for tag1<tag2/></tag1>
----Done--- 
+===DONE===

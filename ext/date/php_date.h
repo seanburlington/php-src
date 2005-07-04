@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.11 2005/07/03 23:30:51 sniper Exp $ */
+/* $Id: php_date.h,v 1.12 2005/07/04 13:21:36 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -64,7 +64,7 @@ ZEND_END_MODULE_GLOBALS(date)
 
 /* Backwards compability wrapper */
 signed long php_parse_date(char *string, signed long *now);
-PHPAPI static void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gmt);
+PHPAPI void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gmt);
 #if HAVE_STRFTIME
 #define _php_strftime php_strftime
 PHPAPI void php_strftime(INTERNAL_FUNCTION_PARAMETERS, int gm);

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.28 2005/07/03 23:30:51 sniper Exp $ */
+/* $Id: php_date.c,v 1.29 2005/07/04 07:48:19 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -228,6 +228,7 @@ static char *php_format_date(char *format, int format_len, timelib_time *t, int 
 		offset = timelib_get_time_zone_info(t->sse, t->tz_info);
 	}
 	buffer[32] = '\0';
+	smart_str_appends(&string, "");
 	timelib_isoweek_from_date(t->y, t->m, t->d, &isoweek, &isoyear);
 
 	for (i = 0; i < format_len; i++) {

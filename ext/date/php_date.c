@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.32 2005/07/04 14:32:50 derick Exp $ */
+/* $Id: php_date.c,v 1.33 2005/07/04 18:13:15 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -747,6 +747,7 @@ PHP_FUNCTION(date_timezone_set)
 	}
 	if (DATEG(timezone)) {
 		efree(DATEG(timezone));
+		DATEG(timezone) = NULL;
 	}
 	DATEG(timezone) = estrndup(zone, zone_len);
 	RETURN_TRUE;

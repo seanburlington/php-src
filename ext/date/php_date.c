@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.31 2005/07/04 13:22:27 wez Exp $ */
+/* $Id: php_date.c,v 1.32 2005/07/04 14:32:50 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -620,7 +620,7 @@ PHPAPI void php_strftime(INTERNAL_FUNCTION_PARAMETERS, int gmt)
 	}
 
 	timelib_time_dtor(ts);
-	if (gmt) {
+	if (!gmt) {
 		timelib_time_offset_dtor(offset);
 	}
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.30 2005/07/04 13:21:36 derick Exp $ */
+/* $Id: php_date.c,v 1.31 2005/07/04 13:22:27 wez Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -434,7 +434,7 @@ PHP_FUNCTION(strtotime)
 
 PHPAPI void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gmt)
 {
-	long hou, min, sec, mon, day, yea, dst = -1;;
+	long hou, min, sec, mon, day, yea, dst = -1;
 	timelib_time *now;
 	timelib_tzinfo *tzi;
 	long ts, adjust_seconds = 0;

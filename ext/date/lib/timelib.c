@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.c,v 1.5 2005/06/29 19:08:26 derick Exp $ */
+/* $Id: timelib.c,v 1.6 2005/07/05 18:30:30 derick Exp $ */
 
 #include "timelib.h"
 #include <ctype.h>
@@ -49,10 +49,6 @@ void timelib_time_tz_abbr_update(timelib_time* tm, char* tz_abbr)
 void timelib_time_dtor(timelib_time* t)
 {
 	TIMELIB_TIME_FREE(t->tz_abbr);
-	if (t->tz_info) {
-		timelib_tzinfo_dtor(t->tz_info);
-		t->tz_info = NULL;
-	}
 	TIMELIB_TIME_FREE(t);
 }
 

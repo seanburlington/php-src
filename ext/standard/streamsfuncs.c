@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: streamsfuncs.c,v 1.56 2005/06/17 23:29:20 iliaa Exp $ */
+/* $Id: streamsfuncs.c,v 1.57 2005/07/05 19:24:07 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1175,6 +1175,9 @@ PHP_FUNCTION(stream_get_line)
 	if (max_length < 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The maximum allowed length must be greater then or equal to zero.");
 		RETURN_FALSE;
+	}
+	if (!max_length) {
+		max_length = PHP_SOCK_CHUNK_SIZE;
 	}
 
 	php_stream_from_zval(stream, &zstream);

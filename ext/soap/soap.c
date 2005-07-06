@@ -17,13 +17,15 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.110.2.39 2005/06/03 07:31:59 gschlossnagle Exp $ */
+/* $Id: soap.c,v 1.110.2.40 2005/07/06 06:59:07 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 #include "php_soap.h"
+#if HAVE_PHP_SESSION && !defined(COMPILE_DL_SESSION)
 #include "ext/session/php_session.h"
+#endif
 #ifdef ZEND_ENGINE_2
 #  include "zend_exceptions.h"
 #endif
@@ -1937,6 +1939,7 @@ static void soap_error_handler(int error_num, const char *error_filename, const 
 		int old = PG(display_errors);
 		int fault = 0;
 		zval fault_obj;
+		va_list argcopy;
 
 		if (error_num == E_USER_ERROR || 
 		    error_num == E_COMPILE_ERROR || 
@@ -1952,7 +1955,13 @@ static void soap_error_handler(int error_num, const char *error_filename, const 
 
 			INIT_ZVAL(outbuflen);
 
+#ifdef va_copy
+			va_copy(argcopy, args);
+			buffer_len = vsnprintf(buffer, sizeof(buffer)-1, format, argcopy);
+			va_end(argcopy);
+#else
 			buffer_len = vsnprintf(buffer, sizeof(buffer)-1, format, args);
+#endif
 			buffer[sizeof(buffer)-1]=0;
 			if (buffer_len > sizeof(buffer) - 1 || buffer_len < 0) {
 				buffer_len = sizeof(buffer) - 1;

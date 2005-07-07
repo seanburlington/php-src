@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.14 2005/02/28 01:30:14 wez Exp $ */
+/* $Id: sqlite_statement.c,v 1.15 2005/07/07 15:13:28 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -59,7 +59,7 @@ static int pdo_sqlite_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 			return 1;
 
 		case SQLITE_DONE:
-			stmt->column_count = sqlite3_data_count(S->stmt);
+			stmt->column_count = sqlite3_column_count(S->stmt);
 			sqlite3_reset(S->stmt);
 			S->done = 1;
 			return 1;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_statement.c,v 1.14 2005/02/14 13:38:09 tony2001 Exp $ */
+/* $Id: oci_statement.c,v 1.15 2005/07/07 23:02:22 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -226,6 +226,13 @@ static int oci_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *pa
 		P = (pdo_oci_bound_param*)param->driver_data;
 
 		switch (event_type) {
+			case PDO_PARAM_EVT_FREE:
+				P = param->driver_data;
+				if (P) {
+					efree(P);
+				}
+				break;
+
 			case PDO_PARAM_EVT_ALLOC:
 				P = (pdo_oci_bound_param*)ecalloc(1, sizeof(pdo_oci_bound_param));
 				param->driver_data = P;

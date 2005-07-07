@@ -1,3 +1,17 @@
+2005-07-06  Edin Kadribasic  <edink@emini.dk>
+
+    * ext/zlib/php_zlib.def:
+      Export missing symbol
+
+2005-07-06  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * run-tests.php:
+      Add a new kind of test to the test harness.  REDIRECTTEST sections allow an
+      extension to piggy-back on the tests defined under another dir and run
+      those.
+      
+      Example of its use follows shortly with pdo tests.
+
 2005-07-05  Jani Taskinen  <jani.taskinen@sci.fi>
 
     * ext/standard/incomplete_class.c
@@ -5950,7 +5964,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2034 2005/07/06 05:31:49 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2035 2005/07/07 05:39:05 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -9351,7 +9365,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2034 2005/07/06 05:31:49 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2035 2005/07/07 05:39:05 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -9832,7 +9846,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2034 2005/07/06 05:31:49 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2035 2005/07/07 05:39:05 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -11306,7 +11320,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2034 2005/07/06 05:31:49 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2035 2005/07/07 05:39:05 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

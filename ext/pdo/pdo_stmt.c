@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.103 2005/07/07 12:45:40 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.104 2005/07/07 15:14:10 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1293,8 +1293,7 @@ static PHP_METHOD(PDOStatement, fetchAll)
 		}
 		if (!do_fetch(stmt, TRUE, data, how, PDO_FETCH_ORI_NEXT, 0, return_all TSRMLS_CC)) {
 			FREE_ZVAL(data);
-			zval_dtor(return_value);
-			error = 1;
+			error = 2;
 		}
 	}
 	if (!error) {
@@ -1320,7 +1319,12 @@ static PHP_METHOD(PDOStatement, fetchAll)
 	
 	if (error) {
 		PDO_HANDLE_STMT_ERR();
-		RETURN_FALSE;
+		if (error != 2) {
+			RETURN_FALSE;
+		} else { /* on no results, return an empty array */
+			array_init(return_value);
+			return;
+		}
 	}
 }
 /* }}} */

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.34 2005/05/20 15:01:38 rrichards Exp $ */
+/* $Id: element.c,v 1.35 2005/07/07 10:36:08 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -671,7 +671,7 @@ PHP_FUNCTION(dom_element_get_attribute_node_ns)
 	int uri_len, name_len, ret;
 	char *uri, *name;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Oss", &id, dom_element_class_entry, &uri, &uri_len, &name, &name_len) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os!s", &id, dom_element_class_entry, &uri, &uri_len, &name, &name_len) == FAILURE) {
 		return;
 	}
 

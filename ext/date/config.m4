@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.9 2005/06/30 06:40:57 derick Exp $
+dnl $Id: config.m4,v 1.10 2005/07/07 23:18:22 sniper Exp $
 dnl config.m4 for date extension
 
 sinclude(ext/date/lib/timelib.m4)
@@ -10,10 +10,10 @@ timelib_sources="lib/dow.c lib/parse_date.c lib/parse_tz.c
 
 PHP_NEW_EXTENSION(date, php_date.c $timelib_sources, no,, $PHP_DATE_CFLAGS)
 PHP_ADD_BUILD_DIR([$ext_builddir/lib], 1)
-PHP_INSTALL_HEADERS([ext/date], [php_date.h lib/timelib.h lib/timelib_structs.h])
+PHP_INSTALL_HEADERS([ext/date], [php_date.h lib/timelib.h lib/timelib_structs.h lib/timelib_config.h])
 
-cat >> $ext_builddir/lib/timelib_config.h <<EOF
-#if PHP_WIN32
+cat > $ext_builddir/lib/timelib_config.h <<EOF
+#ifdef PHP_WIN32
 # include "config.w32.h"
 #else
 # include <php_config.h>

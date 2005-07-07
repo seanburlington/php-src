@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.51 2005/07/03 02:20:08 wez Exp $ */
+/* $Id: mysql_driver.c,v 1.52 2005/07/07 16:27:46 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -193,6 +193,9 @@ static int mysql_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, 
 			efree(nsql);
 		}
 		return 0;
+	}
+	if (nsql) {
+		efree(nsql);
 	}
 
 	S->num_params = mysql_stmt_param_count(S->stmt);

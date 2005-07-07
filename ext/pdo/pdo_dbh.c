@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.77 2005/07/07 11:19:56 dmitry Exp $ */
+/* $Id: pdo_dbh.c,v 1.78 2005/07/07 17:08:01 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -390,6 +390,8 @@ static PHP_FUNCTION(dbh_constructor)
 				php_error_docref(NULL TSRMLS_CC, E_ERROR, "Failed to register persistent entry");
 			}
 		}
+
+		dbh->driver = driver;
 		return;	
 	}
 
@@ -744,6 +746,8 @@ static PHP_METHOD(PDO, getAttribute)
 		case PDO_ATTR_ERRMODE:
 			RETURN_LONG(dbh->error_mode);
 
+		case PDO_ATTR_DRIVER_NAME:
+			RETURN_STRINGL(dbh->driver->driver_name, dbh->driver->driver_name_len, 1);
 	}
 	
 	if (!dbh->methods->get_attribute) {

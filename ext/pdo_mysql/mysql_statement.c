@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.28 2005/07/03 02:20:08 wez Exp $ */
+/* $Id: mysql_statement.c,v 1.29 2005/07/07 15:54:00 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -55,7 +55,13 @@ static int pdo_mysql_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
 		efree(S->in_null);
 		efree(S->in_length);
 	}
-	if (S->bound_result) {
+	if (S->bound_result) 
+	{
+		int i;
+		for (i = 0; i < stmt->column_count; i++) {
+			efree(S->bound_result[i].buffer);
+		}
+	
 		efree(S->bound_result);
 		efree(S->out_null);
 		efree(S->out_length);

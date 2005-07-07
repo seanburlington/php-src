@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.162 2005/06/21 14:05:15 iliaa Exp $ */
+/* $Id: php_reflection.c,v 1.163 2005/07/07 16:07:09 dmitry Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -205,6 +205,8 @@ static void reflection_objects_clone(void *object, void **object_clone TSRMLS_DC
 	(*intern_clone)->zo.ce = intern->zo.ce;
 	(*intern_clone)->zo.in_get = 0;
 	(*intern_clone)->zo.in_set = 0;
+	(*intern_clone)->zo.in_unset = 0;
+	(*intern_clone)->zo.in_isset = 0;
 	ALLOC_HASHTABLE((*intern_clone)->zo.properties);
 	(*intern_clone)->ptr = intern->ptr;
 	(*intern_clone)->free_ptr = intern->free_ptr;
@@ -224,6 +226,8 @@ static zend_object_value reflection_objects_new(zend_class_entry *class_type TSR
 	intern->zo.ce = class_type;
 	intern->zo.in_get = 0;
 	intern->zo.in_set = 0;
+	intern->zo.in_unset = 0;
+	intern->zo.in_isset = 0;
 	intern->ptr = NULL;
 	intern->obj = NULL;
 	intern->free_ptr = 0;

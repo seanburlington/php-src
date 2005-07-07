@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.76 2005/06/11 12:36:12 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.77 2005/07/07 11:19:56 dmitry Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -94,6 +94,7 @@ void pdo_raise_impl_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *sqlstate
 		
 		if (info) {
 			zend_update_property(pdo_ex, ex, "errorInfo", sizeof("errorInfo")-1, info TSRMLS_CC);
+			zval_ptr_dtor(&info);
 		}
 
 		zend_throw_exception_object(ex TSRMLS_CC);
@@ -162,7 +163,7 @@ void pdo_handle_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt TSRMLS_DC)
 		if (info) {
 			zval_ptr_dtor(&info);
 		}
-	} else {
+	} else if (EG(exception) == NULL) {
 		zval *ex;
 		zend_class_entry *def_ex = zend_exception_get_default(), *pdo_ex = php_pdo_get_exception();
 
@@ -174,6 +175,7 @@ void pdo_handle_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt TSRMLS_DC)
 		
 		if (info) {
 			zend_update_property(pdo_ex, ex, "errorInfo", sizeof("errorInfo")-1, info TSRMLS_CC);
+			zval_ptr_dtor(&info);
 		}
 
 		zend_throw_exception_object(ex TSRMLS_CC);

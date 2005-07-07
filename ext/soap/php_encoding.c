@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.71.2.22 2005/07/06 14:16:03 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.71.2.23 2005/07/07 17:29:39 dmitry Exp $ */
 
 #include <time.h>
 
@@ -993,9 +993,12 @@ static void model_to_zval_object(zval *ret, sdlContentModelPtr model, xmlNodePtr
 				while (node != NULL) {
 					if (get_zval_property(ret, (char*)node->name TSRMLS_CC) == NULL) {
 						zval* val = master_to_zval(get_conversion(XSD_ANYXML), node);
-						while (node->next != NULL &&
+						while (Z_TYPE_P(val) == IS_STRING && node->next != NULL &&
 						    get_zval_property(ret, (char*)node->next->name TSRMLS_CC) == NULL) {
 							zval* val2 = master_to_zval(get_conversion(XSD_ANYXML), node->next);
+							if (Z_TYPE_P(val2) != IS_STRING) {
+								break;
+							}
 							add_string_to_string(val, val, val2);
 							zval_ptr_dtor(&val2);
 						  node = node->next;

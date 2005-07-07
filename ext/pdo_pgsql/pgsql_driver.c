@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.46 2005/07/01 22:43:16 edink Exp $ */
+/* $Id: pgsql_driver.c,v 1.47 2005/07/07 00:52:19 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -210,15 +210,16 @@ static char *pdo_pgsql_last_insert_id(pdo_dbh_t *dbh, const char *name, unsigned
 		*len = spprintf(&id, 0, "%ld", (long) H->pgoid);
 	} else {
 		PGresult *res;
-		char *name_escaped, *q;
-		size_t l = strlen(name);
+		char *q;
 		ExecStatusType status;
 
-		name_escaped = safe_emalloc(l, 2, 1);
-		PQescapeString(name_escaped, name, l);
-		spprintf(&q, 0, "SELECT CURRVAL('%s')", name_escaped);
+		/* SQL injection protection */
+		if (strchr(name, '\'')) {
+			return NULL;
+		}
+
+		spprintf(&q, sizeof("SELECT CURRVAL('')") + strlen(name), "SELECT CURRVAL('%s')", name);
 		res = PQexec(H->server, q);
-		efree(name_escaped);
 		efree(q);
 		status = PQresultStatus(res);
 

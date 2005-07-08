@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.105 2005/07/08 04:12:58 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.106 2005/07/08 15:25:15 wez Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1838,6 +1838,19 @@ static void free_statement(pdo_stmt_t *stmt TSRMLS_DC)
 		stmt->properties = NULL;
 	}
 
+	if (stmt->bound_params) {
+		zend_hash_destroy(stmt->bound_params);
+		FREE_HASHTABLE(stmt->bound_params);
+	}
+	if (stmt->bound_param_map) {
+		zend_hash_destroy(stmt->bound_param_map);
+		FREE_HASHTABLE(stmt->bound_param_map);
+	}
+	if (stmt->bound_columns) {
+		zend_hash_destroy(stmt->bound_columns);
+		FREE_HASHTABLE(stmt->bound_columns);
+	}
+
 	if (stmt->methods && stmt->methods->dtor) {
 		stmt->methods->dtor(stmt TSRMLS_CC);
 	}
@@ -1855,18 +1868,6 @@ static void free_statement(pdo_stmt_t *stmt TSRMLS_DC)
 		efree(stmt->columns);
 	}
 
-	if (stmt->bound_params) {
-		zend_hash_destroy(stmt->bound_params);
-		FREE_HASHTABLE(stmt->bound_params);
-	}
-	if (stmt->bound_param_map) {
-		zend_hash_destroy(stmt->bound_param_map);
-		FREE_HASHTABLE(stmt->bound_param_map);
-	}
-	if (stmt->bound_columns) {
-		zend_hash_destroy(stmt->bound_columns);
-		FREE_HASHTABLE(stmt->bound_columns);
-	}
 	
 	do_fetch_opt_finish(stmt, 1 TSRMLS_CC);
 

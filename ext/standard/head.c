@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.81 2005/07/08 16:06:05 iliaa Exp $ */
+/* $Id: head.c,v 1.82 2005/07/08 16:17:04 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -110,7 +110,7 @@ PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, t
 		sprintf(cookie, "Set-Cookie: %s=%s", name, value ? encoded_value : "");
 		if (expires > 0) {
 			strcat(cookie, "; expires=");
-			dt = php_format_date("D, d-M-Y H:i:s T", sizeof("D, d-M-Y H:i:s T")-1, t, 0);
+			dt = php_format_date("D, d-M-Y H:i:s T", sizeof("D, d-M-Y H:i:s T")-1, expires, 0);
 			strcat(cookie, dt);
 			efree(dt);
 		}

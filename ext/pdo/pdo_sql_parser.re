@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.23 2005/07/08 15:24:21 wez Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.24 2005/07/08 17:00:28 wez Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -285,6 +285,19 @@ rewrite:
 			plc->qlen = strlen(plc->quoted);
 			plc->freeq = 1;
 			newbuffer_len += plc->qlen;
+
+			if (stmt->named_rewrite_template) {
+				/* create a mapping */
+				char *name = estrndup(plc->pos, plc->len);
+				
+				if (stmt->bound_param_map == NULL) {
+					ALLOC_HASHTABLE(stmt->bound_param_map);
+					zend_hash_init(stmt->bound_param_map, 13, NULL, NULL, 0);
+				}
+
+				zend_hash_update(stmt->bound_param_map, name, plc->len + 1, idxbuf, plc->qlen + 1, NULL);
+				efree(name);
+			}
 		}
 				
 		goto rewrite;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.61 2005/07/08 04:12:58 wez Exp $ */
+/* $Id: php_pdo_driver.h,v 1.62 2005/07/08 15:24:21 wez Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -578,6 +578,10 @@ struct _pdo_stmt_t {
 		} func;
 		zval *into;
 	} fetch;
+
+	/* used by the query parser for driver specific
+	 * parameter naming (see pgsql driver for example) */
+	const char *named_rewrite_template;
 };
 
 /* call this in MINIT to register your PDO driver */

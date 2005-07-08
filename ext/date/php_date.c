@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.35 2005/07/05 18:30:28 derick Exp $ */
+/* $Id: php_date.c,v 1.36 2005/07/08 10:23:33 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -645,6 +645,10 @@ PHPAPI void php_strftime(INTERNAL_FUNCTION_PARAMETERS, int gmt)
 #endif
 	}
 
+	if (!gmt) {
+		timelib_tzinfo_dtor(tzi);
+	}
+	
 	buf = (char *) emalloc(buf_len);
 	while ((real_len=strftime(buf, buf_len, format, &ta))==buf_len || real_len==0) {
 		buf_len *= 2;

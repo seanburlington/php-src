@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.28 2005/07/08 19:05:57 wez Exp $ */
+/* $Id: pgsql_statement.c,v 1.29 2005/07/08 20:45:19 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -70,6 +70,11 @@ static int pgsql_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
 		efree(S->param_values);
 		S->param_values = NULL;
 	}
+	if (S->param_formats) {
+		efree(S->param_formats);
+		S->param_formats = NULL;
+	}
+
 #endif
 
 	if (S->cursor_name) {

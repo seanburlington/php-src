@@ -15,11 +15,12 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.78 2005/01/07 20:55:46 tony2001 Exp $ */
+/* $Id: head.c,v 1.79 2005/07/08 12:30:24 tony2001 Exp $ */
 
 #include <stdio.h>
 #include "php.h"
 #include "ext/standard/php_standard.h"
+#include "ext/date/php_date.h"
 #include "SAPI.h"
 #include "php_main.h"
 #include "head.h"
@@ -103,15 +104,16 @@ PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, t
 		 * pick an expiry date 1 year and 1 second in the past
 		 */
 		t = time(NULL) - 31536001;
-		dt = php_std_date(t TSRMLS_CC);
-		sprintf(cookie, "Set-Cookie: %s=deleted; expires=%s", name, dt);
+		dt = php_format_date("D, d-M-Y H:i:s", sizeof("D, d-M-Y H:i:s")-1, t, 0);
+		sprintf(cookie, "Set-Cookie: %s=deleted; expires=%s GMT", name, dt);
 		efree(dt);
 	} else {
 		sprintf(cookie, "Set-Cookie: %s=%s", name, value ? encoded_value : "");
 		if (expires > 0) {
 			strcat(cookie, "; expires=");
-			dt = php_std_date(expires TSRMLS_CC);
+			dt = php_format_date("D, d-M-Y H:i:s", sizeof("D, d-M-Y H:i:s")-1, t, 0);
 			strcat(cookie, dt);
+			strcat(cookie, " GMT");
 			efree(dt);
 		}
 	}

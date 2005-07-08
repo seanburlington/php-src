@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.24 2005/07/08 17:00:28 wez Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.25 2005/07/08 20:35:41 helly Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -42,8 +42,8 @@ typedef struct Scanner {
 static int scan(Scanner *s) 
 {
 	char *cursor = s->cur;
-	std:
-		s->tok = cursor;
+
+	s->tok = cursor;
 	/*!re2c
 	BINDCHR		= [:][a-zA-Z0-9_]+;
 	QUESTION	= [?];

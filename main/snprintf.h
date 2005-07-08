@@ -13,10 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Author: Stig Sæther Bakken <ssb@php.net>                             |
+   |         Marcus Boerger <helly@php.net>                               |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.h,v 1.30 2005/03/31 07:37:39 sniper Exp $ */
+/* $Id: snprintf.h,v 1.31 2005/07/08 20:19:38 helly Exp $ */
 
 /*
 
@@ -114,7 +115,7 @@ extern char * ap_php_gcvt(double number, int ndigit, char *buf, boolean_e altfor
 # define WIDE_INT		long long int
 #elif SIZEOF_LONG_LONG
 # define WIDE_INT		long long
-#elif _WIN64
+#elif PHP_WIN32
 # define WIDE_INT		__int64
 #else
 # define WIDE_INT		long

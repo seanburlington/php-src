@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.27 2005/07/08 17:01:20 wez Exp $ */
+/* $Id: pgsql_statement.c,v 1.28 2005/07/08 19:05:57 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -221,8 +221,8 @@ static int pgsql_stmt_fetch(pdo_stmt_t *stmt,
 		ExecStatusType status;
 
 		switch (ori) {
-			case PDO_FETCH_ORI_NEXT: 	ori_str = "NEXT"; break;
-			case PDO_FETCH_ORI_PRIOR:	ori_str = "PRIOR"; break;
+			case PDO_FETCH_ORI_NEXT: 	ori_str = "FORWARD"; break;
+			case PDO_FETCH_ORI_PRIOR:	ori_str = "BACKWARD"; break;
 			case PDO_FETCH_ORI_REL:		ori_str = "RELATIVE"; break;
 			default:
 				return 0;

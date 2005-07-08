@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.55.2.18 2005/05/30 23:46:28 iliaa Exp $ */
+/* $Id: php_http.c,v 1.55.2.19 2005/07/08 09:36:42 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -55,7 +55,7 @@ static int stream_alive(php_stream *stream  TSRMLS_DC)
 }
 
 /* Proxy HTTP Authentication */
-static void proxy_authentication(zval* this_ptr, smart_str* soap_headers TSRMLS_DC)
+void proxy_authentication(zval* this_ptr, smart_str* soap_headers TSRMLS_DC)
 {
 	zval **login, **password;
 
@@ -72,6 +72,32 @@ static void proxy_authentication(zval* this_ptr, smart_str* soap_headers TSRMLS_
 		smart_str_0(&auth);
 		buf = php_base64_encode(auth.c, auth.len, &len);
 		smart_str_append_const(soap_headers, "Proxy-Authorization: Basic ");
+		smart_str_appendl(soap_headers, buf, len);
+		smart_str_append_const(soap_headers, "\r\n");
+		efree(buf);
+		smart_str_free(&auth);
+	}
+}
+
+/* HTTP Authentication */
+void basic_authentication(zval* this_ptr, smart_str* soap_headers TSRMLS_DC)
+{
+	zval **login, **password;
+
+	if (zend_hash_find(Z_OBJPROP_P(this_ptr), "_login", sizeof("_login"), (void **)&login) == SUCCESS &&
+			!zend_hash_exists(Z_OBJPROP_P(this_ptr), "_digest", sizeof("_digest"))) {
+		char* buf;
+		int len;
+		smart_str auth = {0};
+
+		smart_str_appendl(&auth, Z_STRVAL_PP(login), Z_STRLEN_PP(login));
+		smart_str_appendc(&auth, ':');
+		if (zend_hash_find(Z_OBJPROP_P(this_ptr), "_password", sizeof("_password"), (void **)&password) == SUCCESS) {
+			smart_str_appendl(&auth, Z_STRVAL_PP(password), Z_STRLEN_PP(password));
+		}
+		smart_str_0(&auth);
+		buf = php_base64_encode(auth.c, auth.len, &len);
+		smart_str_append_const(soap_headers, "Authorization: Basic ");
 		smart_str_appendl(soap_headers, buf, len);
 		smart_str_append_const(soap_headers, "\r\n");
 		efree(buf);

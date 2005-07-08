@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_pgsql_int.h,v 1.11 2005/07/01 22:30:55 edink Exp $ */
+/* $Id: php_pdo_pgsql_int.h,v 1.12 2005/07/08 15:27:34 wez Exp $ */
 
 #ifndef PHP_PDO_PGSQL_INT_H
 #define PHP_PDO_PGSQL_INT_H
@@ -55,6 +55,12 @@ typedef struct {
 	int                     current_row;
 	pdo_pgsql_column        *cols;
 	char *cursor_name;
+#if HAVE_PQPREPARE
+	char *stmt_name;
+	char **param_values;
+	int *param_lengths;
+	int *param_formats;
+#endif
 } pdo_pgsql_stmt;
 
 typedef struct {

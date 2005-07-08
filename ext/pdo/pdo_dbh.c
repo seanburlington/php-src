@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.78 2005/07/07 17:08:01 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.79 2005/07/08 04:12:58 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -692,6 +692,11 @@ static PHP_METHOD(PDO, setAttribute)
 		case PDO_ATTR_ORACLE_NULLS:
 			convert_to_long(value);
 			dbh->oracle_nulls = Z_LVAL_P(value) ? 1 : 0;
+			RETURN_TRUE;
+
+		case PDO_ATTR_STRINGIFY_FETCHES:
+			convert_to_long(value);
+			dbh->stringify = Z_LVAL_P(value) ? 1 : 0;
 			RETURN_TRUE;
 			
 		default:

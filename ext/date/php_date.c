@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.37 2005/07/08 12:26:30 tony2001 Exp $ */
+/* $Id: php_date.c,v 1.38 2005/07/08 18:16:46 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -347,13 +347,13 @@ static void php_date(INTERNAL_FUNCTION_PARAMETERS, int localtime)
 		RETURN_FALSE;
 	}
 
-	string = php_format_date(format, format_len, ts, localtime);
+	string = php_format_date(format, format_len, ts, localtime TSRMLS_CC);
 	
 	RETVAL_STRING(string, 0);
 }
 /* }}} */
 
-PHPAPI char *php_format_date(char *format, int format_len, long ts, int localtime) /* {{{ */
+PHPAPI char *php_format_date(char *format, int format_len, long ts, int localtime TSRMLS_DC) /* {{{ */
 {
 	timelib_time   *t;
 	timelib_tzinfo *tzi;

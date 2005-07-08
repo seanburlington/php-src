@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.14 2005/07/08 12:26:30 tony2001 Exp $ */
+/* $Id: php_date.h,v 1.15 2005/07/08 18:16:46 tony2001 Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -69,6 +69,6 @@ PHPAPI void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gmt);
 #define _php_strftime php_strftime
 PHPAPI void php_strftime(INTERNAL_FUNCTION_PARAMETERS, int gm);
 #endif
-PHPAPI char *php_format_date(char *format, int format_len, long ts, int localtime);
+PHPAPI char *php_format_date(char *format, int format_len, long ts, int localtime TSRMLS_DC);
 
 #endif /* PHP_DATE_H */

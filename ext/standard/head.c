@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id: head.c,v 1.82 2005/07/08 16:17:04 iliaa Exp $ */
+/* $Id: head.c,v 1.83 2005/07/08 18:16:46 tony2001 Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -103,14 +103,14 @@ PHPAPI int php_setcookie(char *name, int name_len, char *value, int value_len, t
 		 * pick an expiry date 1 year and 1 second in the past
 		 */
 		time_t t = time(NULL) - 31536001;
-		dt = php_format_date("D, d-M-Y H:i:s T", sizeof("D, d-M-Y H:i:s T")-1, t, 0);
+		dt = php_format_date("D, d-M-Y H:i:s T", sizeof("D, d-M-Y H:i:s T")-1, t, 0 TSRMLS_CC);
 		sprintf(cookie, "Set-Cookie: %s=deleted; expires=%s", name, dt);
 		efree(dt);
 	} else {
 		sprintf(cookie, "Set-Cookie: %s=%s", name, value ? encoded_value : "");
 		if (expires > 0) {
 			strcat(cookie, "; expires=");
-			dt = php_format_date("D, d-M-Y H:i:s T", sizeof("D, d-M-Y H:i:s T")-1, expires, 0);
+			dt = php_format_date("D, d-M-Y H:i:s T", sizeof("D, d-M-Y H:i:s T")-1, expires, 0 TSRMLS_CC);
 			strcat(cookie, dt);
 			efree(dt);
 		}

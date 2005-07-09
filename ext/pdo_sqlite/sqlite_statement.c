@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.15 2005/07/07 15:13:28 iliaa Exp $ */
+/* $Id: sqlite_statement.c,v 1.16 2005/07/09 04:37:27 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -278,6 +278,11 @@ static int pdo_sqlite_stmt_col_meta(pdo_stmt_t *stmt, long colno, zval *return_v
 	return SUCCESS;
 }
 
+static int pdo_sqlite_stmt_cursor_closer(pdo_stmt_t *stmt TSRMLS_DC)
+{
+	return 1;
+}
+
 struct pdo_stmt_methods sqlite_stmt_methods = {
 	pdo_sqlite_stmt_dtor,
 	pdo_sqlite_stmt_execute,
@@ -287,7 +292,9 @@ struct pdo_stmt_methods sqlite_stmt_methods = {
 	pdo_sqlite_stmt_param_hook,
 	NULL, /* set_attr */
 	NULL, /* get_attr */
-	pdo_sqlite_stmt_col_meta
+	pdo_sqlite_stmt_col_meta,
+	NULL, /* next_rowset */
+	pdo_sqlite_stmt_cursor_closer
 };
 
 /*

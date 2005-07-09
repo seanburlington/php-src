@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.220 2005/07/08 21:46:23 sniper Exp $ */
+/* $Id: run-tests.php,v 1.221 2005/07/09 02:41:19 sniper Exp $ */
 
 /*
  * TODO:
@@ -796,7 +796,7 @@ TEST $file
 	$tmp_post   = $tmp . DIRECTORY_SEPARATOR . uniqid('/phpt.');
 
 	if (is_array($IN_REDIRECT)) {
-		$tested = $IN_REDIRECT['prefix'] . ' ' . trim($section_text['TEST']) . " [$shortname]";
+		$tested = $IN_REDIRECT['prefix'] . ' ' . trim($section_text['TEST']) . " [$tmp_file]";
 		$section_text['FILE'] = "# original source file: $shortname\n" . $section_text['FILE'];
 	}
 

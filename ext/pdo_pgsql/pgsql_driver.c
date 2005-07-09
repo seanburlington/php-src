@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.50 2005/07/08 15:27:34 wez Exp $ */
+/* $Id: pgsql_driver.c,v 1.51 2005/07/09 04:54:04 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -184,6 +184,7 @@ static int pgsql_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, 
 		case PGRES_COMMAND_OK:
 		case PGRES_TUPLES_OK:
 			/* it worked */
+			PQclear(res);
 			return 1;
 
 		case PGRES_BAD_RESPONSE:
@@ -191,6 +192,7 @@ static int pgsql_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, 
 			 * PDO emulate it */
 			efree(S->stmt_name);
 			S->stmt_name = NULL;
+			PQclear(res);
 			break;
 
 		default:

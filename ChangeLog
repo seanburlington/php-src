@@ -1,3 +1,53 @@
+2005-07-08  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * run-tests.php:
+      Sanitazione
+
+2005-07-08  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * main/snprintf.h:
+      - Fix *printf(%lld) under windows
+
+2005-07-08  Antony Dovgal  <antony@zend.com>
+
+    * ext/standard/head.c:
+      fix tsrm build
+
+2005-07-08  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/standard/head.c:
+      Missing bit of the previous patch.
+
+    * ext/standard/head.c:
+      Fixed compiler warning.
+
+2005-07-08  Antony Dovgal  <antony@zend.com>
+
+    * ext/standard/head.c:
+      make use of T token
+
+    * NEWS
+      ext/standard/head.c:
+      fix #33597 (setcookie() "expires" date format doesn't comply with RFC)
+
+2005-07-08  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * ext/mysqli/tests/041.phpt:
+      Make sure we get a WARNING and not an ERROR here :)
+
+    * ZendEngine2/tests/unset_cv05.phpt
+      ZendEngine2/tests/unset_cv06.phpt
+      tests/basic/bug20539.phpt:
+      fix test when session.save_handler is "user"
+
+2005-07-08  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * NEWS
+      ext/pgsql/pgsql.c
+      ext/pgsql/php_pgsql.h:
+      Added pg_fetch_all_columns() function to fetch all values of a column from
+      a result cursor.
+
 2005-07-07  Jani Taskinen  <jani.taskinen@sci.fi>
 
     * acinclude.m4:
@@ -6084,7 +6134,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2036 2005/07/08 05:38:35 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2037 2005/07/09 05:37:01 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -9485,7 +9535,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2036 2005/07/08 05:38:35 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2037 2005/07/09 05:37:01 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -9966,7 +10016,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2036 2005/07/08 05:38:35 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2037 2005/07/09 05:37:01 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -11440,7 +11490,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2036 2005/07/08 05:38:35 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2037 2005/07/09 05:37:01 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

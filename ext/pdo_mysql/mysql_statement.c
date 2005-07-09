@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.30 2005/07/07 17:53:34 iliaa Exp $ */
+/* $Id: mysql_statement.c,v 1.31 2005/07/09 03:54:13 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -91,16 +91,12 @@ static int pdo_mysql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 			return 0;
 		}
 
-		if (!stmt->executed) {
+		if (!S->result) {
 			/* figure out the result set format, if any */
 			S->result = mysql_stmt_result_metadata(S->stmt);
 			if (S->result) {
 				S->fields = mysql_fetch_fields(S->result);
 				stmt->column_count = (int)mysql_num_fields(S->result);
-
-				if (H->buffered) {
-					mysql_stmt_store_result(S->stmt);
-				}
 
 				S->bound_result = ecalloc(stmt->column_count, sizeof(MYSQL_BIND));
 				S->out_null = ecalloc(stmt->column_count, sizeof(my_bool));
@@ -120,6 +116,11 @@ static int pdo_mysql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 					return 0;
 				}
 			}
+		}
+
+		/* if buffered, pre-fetch all the data */
+		if (H->buffered) {
+			mysql_stmt_store_result(S->stmt);
 		}
 		
 		stmt->row_count = mysql_stmt_affected_rows(S->stmt);

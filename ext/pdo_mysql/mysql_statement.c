@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.34 2005/07/09 04:43:16 iliaa Exp $ */
+/* $Id: mysql_statement.c,v 1.35 2005/07/09 05:04:43 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -486,6 +486,8 @@ static int pdo_mysql_stmt_cursor_closer(pdo_stmt_t *stmt TSRMLS_DC)
 #if HAVE_MYSQL_STMT_PREPARE
 	return mysql_stmt_free_result(S->stmt);
 #endif
+	mysql_free_result(S->result);
+	S->result = NULL;
 	return 1;
 }
 

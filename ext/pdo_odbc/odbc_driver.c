@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_driver.c,v 1.24 2005/07/07 12:49:21 wez Exp $ */
+/* $Id: odbc_driver.c,v 1.25 2005/07/09 18:52:36 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -98,7 +98,7 @@ static int odbc_handle_closer(pdo_dbh_t *dbh TSRMLS_DC)
 	pdo_odbc_db_handle *H = (pdo_odbc_db_handle*)dbh->driver_data;
 	if (H->dbc != SQL_NULL_HANDLE) {
 		SQLEndTran(SQL_HANDLE_DBC, H->dbc, SQL_ROLLBACK);
-#ifndef PHP_WIN32 /* avoiding a bug I've found on my XP box */
+#ifndef A_BUG_ON_FOR_WEZ_ON_PHP_WIN32 /* avoiding a bug I've found on my XP box */
 		SQLDisconnect(H->dbc);
 #endif
 		SQLFreeHandle(SQL_HANDLE_DBC, H->dbc);

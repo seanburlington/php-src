@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.22 2005/07/05 21:33:33 derick Exp $ */
+/* $Id: parse_date.re,v 1.23 2005/07/10 14:04:20 helly Exp $ */
 
 #include "timelib.h"
 
@@ -1393,7 +1393,7 @@ relativetext = (reltextnumber space reltextunit)+;
 		goto std;
 	}
 
-	"\0"|"\n"
+	"\000"|"\n"
 	{
 		s->pos = cursor; s->line++;
 		goto std;

@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.40 2005/05/25 03:05:47 iliaa Exp $ 
+  $Id: mime_magic.c,v 1.41 2005/07/11 03:24:28 iliaa Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -1073,6 +1073,8 @@ static int magic_process(zval *what TSRMLS_DC)
 		streampos = php_stream_tell(stream); /* remember stream position for restauration */
 		php_stream_seek(stream, 0, SEEK_SET);
 		break;
+	default:
+		return -1;	
 	}
 
 

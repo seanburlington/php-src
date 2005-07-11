@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.108 2005/07/09 03:52:39 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.109 2005/07/11 14:14:56 andrey Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -91,7 +91,10 @@ static inline int rewrite_name_to_position(pdo_stmt_t *stmt, struct pdo_bound_pa
 			/* this is not an error here */
 			return 1;
 		}
-
+		if (!param->name) {
+			return 1;
+		}
+    
 		zend_hash_internal_pointer_reset(stmt->bound_param_map);
 		while (SUCCESS == zend_hash_get_current_data(stmt->bound_param_map, (void**)&name)) {
 			if (strcmp(name, param->name)) {

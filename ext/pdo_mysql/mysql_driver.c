@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.54 2005/07/11 13:52:13 andrey Exp $ */
+/* $Id: mysql_driver.c,v 1.55 2005/07/11 14:46:01 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -240,10 +240,10 @@ static char *pdo_mysql_last_insert_id(pdo_dbh_t *dbh, const char *name, unsigned
 static int mysql_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen, enum pdo_param_type paramtype  TSRMLS_DC)
 {
 	pdo_mysql_db_handle *H = (pdo_mysql_db_handle *)dbh->driver_data;
-	*quoted = emalloc(2*unquotedlen + 3);
+	*quoted = safe_emalloc(2, unquotedlen, 3);
 	*quotedlen = mysql_real_escape_string(H->server, *quoted + 1, unquoted, unquotedlen);
-	(*quoted)[0] =(*quoted)[*quotedlen + 1] = '"';
-	(*quoted)[*quotedlen+=2] = '\0';
+	(*quoted)[0] =(*quoted)[++*quotedlen] = '"';
+	(*quoted)[++*quotedlen] = '\0';
 	return 1;
 }
 

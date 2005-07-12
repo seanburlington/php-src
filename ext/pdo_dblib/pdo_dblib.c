@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dblib.c,v 1.6 2005/07/12 12:16:02 wez Exp $ */
+/* $Id: pdo_dblib.c,v 1.7 2005/07/12 12:21:53 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -42,10 +42,10 @@ zend_module_entry pdo_dblib_module_entry = {
 	STANDARD_MODULE_HEADER,
 #if PDO_DBLIB_IS_MSSQL
 	"pdo_mssql",
-#elif define (PHP_WIN32)
+#elif defined(PHP_WIN32)
 	"pdo_sybase",
 #else
-	"pdo_dblib"
+	"pdo_dblib",
 #endif
 	pdo_dblib_functions,
 	PHP_MINIT(pdo_dblib),

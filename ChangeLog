@@ -1,3 +1,44 @@
+2005-07-11  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ZendEngine2/zend_vm_def.h
+      ZendEngine2/zend_vm_execute.h:
+      Make references misuse emit E_NOTICE rather E_STRICT to be compatible with
+      PHP 4.4.0
+
+2005-07-11  Dmitry Stogov  <dmitry@zend.com>
+
+    * (PHP_4_4)
+      NEWS
+      ext/standard/array.c:
+      Fixed bug #31158 (array_splice on $GLOBALS crashes)
+
+2005-07-11  Derick Rethans  <php@derickrethans.nl>
+
+    * (PHP_4_4)
+      configure.in
+      main/php_version.h:
+      - Back to -dev.
+
+    * (PHP_4_4)
+      NEWS
+      configure.in
+      main/php_version.h:
+      - Go with 4.4.0.
+
+2005-07-11  Jon Parise  <jon+php@csh.rit.edu>
+
+    * run-tests.php:
+      Removing the automake-related output.  The build no longer uses automake.
+      
+      While I'm here, rewrite the PHP_AUTOCONF-related code to more closely
+      match the conventions used elsewhere in this section.  The result should
+      be functionally the same as before.
+
+2005-07-11  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/mime_magic/mime_magic.c:
+      Compiler warning fix.
+
 2005-07-10  Jani Taskinen  <jani.taskinen@sci.fi>
 
     * NEWS
@@ -6219,7 +6260,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2039 2005/07/11 05:39:30 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2040 2005/07/12 05:38:37 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -9620,7 +9661,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2039 2005/07/11 05:39:30 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2040 2005/07/12 05:38:37 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -10101,7 +10142,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2039 2005/07/11 05:39:30 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2040 2005/07/12 05:38:37 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -11575,7 +11616,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2039 2005/07/11 05:39:30 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2040 2005/07/12 05:38:37 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

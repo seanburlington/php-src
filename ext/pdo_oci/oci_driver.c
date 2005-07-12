@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.23 2005/07/07 23:03:22 tony2001 Exp $ */
+/* $Id: oci_driver.c,v 1.24 2005/07/12 03:18:17 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -228,6 +228,7 @@ static int oci_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pd
 	if (ret == 1) {
 		/* query was re-written */
 		sql = nsql;
+		sql_len = nsql_len;
 	} else if (ret == -1) {
 		/* couldn't grok it */
 		strcpy(dbh->error_code, stmt->error_code);

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.51 2005/07/12 09:35:16 georg Exp $ 
+  $Id: php_mysqli.h,v 1.52 2005/07/12 15:45:07 georg Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -29,6 +29,10 @@
 
 /* character set support */
 #if MYSQL_VERSION_ID > 50009
+#define HAVE_MYSQLI_GET_CHARSET
+#endif
+
+#if (MYSQL_VERSION_ID > 40112 && MYSQL_VERSION_ID < 50000) || MYSQL_VERSION_ID > 50005
 #define HAVE_MYSQLI_SET_CHARSET
 #endif
 

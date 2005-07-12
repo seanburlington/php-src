@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.49 2005/07/12 09:35:16 georg Exp $ 
+  $Id: mysqli_nonapi.c,v 1.50 2005/07/12 15:45:07 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -323,6 +323,7 @@ PHP_FUNCTION(mysqli_set_charset)
 /* }}} */
 #endif
 
+#ifdef HAVE_MYSQLI_GET_CHARSET 
 /* {{{ object mysqli_get_charset(object link) 
    returns a character set object */
 PHP_FUNCTION(mysqli_get_charset)
@@ -350,6 +351,7 @@ PHP_FUNCTION(mysqli_get_charset)
 	add_property_long(return_value, "state", cs.state);
 }
 /* }}} */
+#endif
 
 /*
  * Local variables:

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dblib.c,v 1.4 2005/02/13 23:13:14 wez Exp $ */
+/* $Id: pdo_dblib.c,v 1.5 2005/07/12 11:02:23 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -78,8 +78,16 @@ int error_handler(DBPROCESS *dbproc, int severity, int dberr,
 	if (einfo->dberrstr) {
 		efree(einfo->dberrstr);
 	}
-	einfo->oserrstr = estrdup(oserrstr);
-	einfo->dberrstr = estrdup(dberrstr);
+	if (oserrstr) {
+		einfo->oserrstr = estrdup(oserrstr);
+	} else {
+		einfo->oserrstr = NULL;
+	}
+	if (dberrstr) {
+		einfo->dberrstr = estrdup(dberrstr);
+	} else {
+		einfo->dberrstr = NULL;
+	}
 
 	switch (dberr) {
 		case SYBESEOF:

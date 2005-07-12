@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_oci_int.h,v 1.3 2005/01/12 05:47:03 wez Exp $ */
+/* $Id: php_pdo_oci_int.h,v 1.4 2005/07/12 02:43:39 wez Exp $ */
 
 #include <oci.h>
 
@@ -75,6 +75,8 @@ typedef struct {
 	ub4			actual_len;
 
 	dvoid		*thing;	/* for LOBS, REFCURSORS etc. */
+
+	unsigned used_for_output;
 } pdo_oci_bound_param;
 
 extern const ub4 PDO_OCI_INIT_MODE;

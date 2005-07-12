@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.635 2005/07/05 14:13:46 dmitry Exp $ */
+/* $Id: main.c,v 1.636 2005/07/12 16:53:29 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -1767,11 +1767,17 @@ PHPAPI int php_handle_auth_data(const char *auth TSRMLS_DC)
 
 	if (ret == -1) {
 		SG(request_info).auth_user = SG(request_info).auth_password = NULL;
+	} else {
+		SG(request_info).auth_digest = NULL;
 	}
 	
-	if (auth && auth[0] != '\0' && strncmp(auth, "Digest ", 7) == 0) {
+	if (ret == -1 && auth && auth[0] != '\0' && strncmp(auth, "Digest ", 7) == 0) {
 		SG(request_info).auth_digest = estrdup(auth);
 		ret = 0;
+	}
+
+	if (ret == -1) {
+		SG(request_info).auth_digest = NULL;
 	}
 
 	return ret;

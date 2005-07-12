@@ -17,10 +17,14 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_dblib_int.h,v 1.3 2005/01/18 07:17:01 fmk Exp $ */
+/* $Id: php_pdo_dblib_int.h,v 1.4 2005/07/12 12:16:02 wez Exp $ */
 
 #ifndef PHP_PDO_DBLIB_INT_H
 #define PHP_PDO_DBLIB_INT_H
+
+#ifndef PDO_DBLIB_FLAVOUR
+# define PDO_DBLIB_FLAVOUR "Generic DB-lib"
+#endif
 
 #if PHP_DBLIB_IS_MSSQL
 # include <sqlfront.h>

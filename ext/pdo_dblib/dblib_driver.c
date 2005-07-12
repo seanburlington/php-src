@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_driver.c,v 1.7 2005/02/06 22:28:50 wez Exp $ */
+/* $Id: dblib_driver.c,v 1.8 2005/07/12 12:16:02 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -257,8 +257,10 @@ cleanup:
 pdo_driver_t pdo_dblib_driver = {
 #if PDO_DBLIB_IS_MSSQL
 	PDO_DRIVER_HEADER(mssql),
-#else
+#elif defined(PHP_WIN32)
 	PDO_DRIVER_HEADER(sybase),
+#else
+	PDO_DRIVER_HEADER(dblib),
 #endif
 	pdo_dblib_handle_factory
 };

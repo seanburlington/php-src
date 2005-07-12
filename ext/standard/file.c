@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.407 2005/06/22 16:13:47 iliaa Exp $ */
+/* $Id: file.c,v 1.408 2005/07/12 17:55:38 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -584,6 +584,11 @@ PHP_FUNCTION(file_put_contents)
 	if (stream == NULL) {
 		RETURN_FALSE;
 	}
+
+	if (flags & LOCK_EX && php_stream_lock(stream, LOCK_EX)) {
+		RETURN_FALSE;
+	}
+
 	switch (Z_TYPE_P(data)) {
 		case IS_RESOURCE:
 		{

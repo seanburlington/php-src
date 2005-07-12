@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.52 2005/07/12 15:45:07 georg Exp $ 
+  $Id: php_mysqli.h,v 1.53 2005/07/12 20:38:34 tony2001 Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -334,7 +334,9 @@ PHP_FUNCTION(mysqli_field_count);
 PHP_FUNCTION(mysqli_field_seek);
 PHP_FUNCTION(mysqli_field_tell);
 PHP_FUNCTION(mysqli_free_result);
+#ifdef HAVE_MYSQLI_GET_CHARSET 
 PHP_FUNCTION(mysqli_get_charset);
+#endif
 PHP_FUNCTION(mysqli_get_client_info);
 PHP_FUNCTION(mysqli_get_client_version);
 PHP_FUNCTION(mysqli_get_host_info);

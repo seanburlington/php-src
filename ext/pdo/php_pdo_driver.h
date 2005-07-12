@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.64 2005/07/09 03:52:39 wez Exp $ */
+/* $Id: php_pdo_driver.h,v 1.65 2005/07/12 02:40:59 wez Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -44,7 +44,7 @@ PDO_API char *php_pdo_int64_to_str(pdo_int64_t i64 TSRMLS_DC);
 # define FALSE 0
 #endif
 
-#define PDO_DRIVER_API	20050709
+#define PDO_DRIVER_API	20050711
 
 enum pdo_param_type {
 	PDO_PARAM_NULL,
@@ -172,6 +172,13 @@ enum pdo_case_conversion {
 	PDO_CASE_NATURAL,
 	PDO_CASE_UPPER,
 	PDO_CASE_LOWER
+};
+
+/* oracle interop settings */
+enum pdo_null_handling {
+	PDO_NULL_NATURAL = 0,
+	PDO_NULL_EMPTY_STRING = 1,
+	PDO_NULL_TO_STRING = 2,
 };
 
 /* {{{ utils for reading attributes set as driver_options */
@@ -437,15 +444,15 @@ struct _pdo_dbh_t {
 	/* max length a single character can become after correct quoting */
 	unsigned max_escaped_char_length:3;
 
-	/* when set, convert empty strings to NULL */
-	unsigned oracle_nulls:1;
+	/* oracle compat; see enum pdo_null_handling */
+	unsigned oracle_nulls:2;
 
 	/* when set, convert int/floats to strings */
 	unsigned stringify:1;
 
 	/* the sum of the number of bits here and the bit fields preceeding should
 	 * equal 32 */
-	unsigned _reserved_flags:22;
+	unsigned _reserved_flags:21;
 
 	/* data source string used to open this handle */
 	const char *data_source;

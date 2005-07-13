@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.38 2005/07/08 18:16:46 tony2001 Exp $ */
+/* $Id: php_date.c,v 1.39 2005/07/13 07:04:29 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -169,7 +169,7 @@ static char* guess_timezone(TSRMLS_D)
 			tzid = "UTC";
 		}
 		
-		php_error_docref(NULL TSRMLS_CC, E_STRICT, "It is not safe to rely on the systems timezone settings, please use the date.timezone setting, the TZ environment variable or the date_timezone_set() function. We now use '%s' for '%s'", tzid, ta->tm_zone);
+		php_error_docref(NULL TSRMLS_CC, E_STRICT, "It is not safe to rely on the systems timezone settings, please use the date.timezone setting, the TZ environment variable or the date_default_timezone_set() function. We now use '%s' for '%s'", tzid, ta->tm_zone);
 		return tzid;
 	}
 #endif
@@ -185,7 +185,7 @@ static timelib_tzinfo *get_timezone_info(TSRMLS_D)
 	tz = guess_timezone(TSRMLS_C);
 	tzi = timelib_parse_tzfile(tz);
 	if (! tzi) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Timezone setting (date.timezone) or TZ environment variable contain an unknown timezone.");
+		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Timezone setting (date.timezone) or TZ environment variable contains an unknown timezone.");
 		tzi = timelib_parse_tzfile("UTC");
 
 		if (! tzi) {

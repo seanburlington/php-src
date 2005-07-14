@@ -1,3 +1,33 @@
+2005-07-13  Sara Golemon  <php@alphaweb.net>
+
+    * ext/standard/ftp_fopen_wrapper.c:
+      Route ftp:// wrapper via transports layer.\nFix typo in datastream crypto
+      startup
+
+2005-07-13  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_4)
+      NEWS
+      main/rfc1867.c
+      main/rfc1867.c:
+      MFH: Fixed bug #33673 (Added detection for partially uploaded files).
+
+    * NEWS
+      main/rfc1867.c:
+      Fixed bug #33673 (Added detection for partially uploaded files).
+
+2005-07-13  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * acinclude.m4:
+      typofix
+
+    * acinclude.m4:
+      - Added check whether re_magic exists in struct regex_t
+
+    * php.ini-dist
+      php.ini-recommended:
+      fix typo
+
 2005-07-12  Andi Gutmans  <andi@zend.com>
 
     * (php_5_1_0b3)
@@ -6334,7 +6364,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2041 2005/07/13 05:35:27 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2042 2005/07/14 05:36:27 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -9735,7 +9765,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2041 2005/07/13 05:35:27 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2042 2005/07/14 05:36:27 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -10216,7 +10246,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2041 2005/07/13 05:35:27 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2042 2005/07/14 05:36:27 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -11690,7 +11720,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2041 2005/07/13 05:35:27 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2042 2005/07/14 05:36:27 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

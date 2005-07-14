@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.42 2005/07/14 02:03:54 wez Exp $ */
+/* $Id: mysql_statement.c,v 1.43 2005/07/14 02:20:52 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -155,7 +155,7 @@ static int pdo_mysql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 
 		;
 		row_count = mysql_stmt_affected_rows(S->stmt);
-		if (row_cont != (my_ulonglong)-1) {
+		if (row_count != (my_ulonglong)-1) {
 			stmt->row_count = row_count;
 		}
 		return 1;

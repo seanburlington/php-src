@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.57 2005/07/12 19:32:13 andrey Exp $ */
+/* $Id: mysql_driver.c,v 1.58 2005/07/14 02:09:08 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -100,6 +100,7 @@ int _pdo_mysql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *file, int lin
 		zend_throw_exception_ex(php_pdo_get_exception(), 0 TSRMLS_CC, "SQLSTATE[%s] [%d] %s",
 				*pdo_err, einfo->errcode, einfo->errmsg);
 	}
+/* printf("** [%s:%d] %s %s\n", file, line, *pdo_err, einfo->errmsg); */
 
 	return einfo->errcode;
 }

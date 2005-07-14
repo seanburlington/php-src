@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_network.h,v 1.54 2005/06/14 02:39:42 iliaa Exp $ */
+/* $Id: php_network.h,v 1.55 2005/07/14 00:12:26 sniper Exp $ */
 
 #ifndef _PHP_NETWORK_H
 #define _PHP_NETWORK_H
@@ -210,7 +210,7 @@ PHPAPI void _php_emit_fd_setsize_warning(int max_fd);
 typedef struct sockaddr_storage php_sockaddr_storage;
 #else
 typedef struct {
-#ifdef HAVE_SOCKADDR_LEN
+#ifdef HAVE_SOCKADDR_SA_LEN
 		unsigned char ss_len;
 		unsigned char ss_family;
 #else

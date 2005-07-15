@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.30 2005/06/17 11:44:59 sniper Exp $ */
+/* $Id: php_xsl.c,v 1.31 2005/07/15 16:47:12 gschlossnagle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,7 +31,7 @@
 /* If you declare any globals in php_xsl.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(xsl)
 */
-
+zend_class_entry *xsl_xsltprocessor_class_entry;
 static zend_object_handlers xsl_object_handlers;
 
 /* {{{ xsl_functions[]

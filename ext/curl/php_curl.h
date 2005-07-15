@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_curl.h,v 1.42 2005/06/02 21:04:12 tony2001 Exp $ */
+/* $Id: php_curl.h,v 1.43 2005/07/15 16:47:48 gschlossnagle Exp $ */
 
 #ifndef _PHP_CURL_H
 #define _PHP_CURL_H
@@ -51,9 +51,9 @@ extern zend_module_entry curl_module_entry;
 #define PHP_CURL_BINARY 6
 #define PHP_CURL_IGNORE 7
 
-int  le_curl;
+extern int  le_curl;
 #define le_curl_name "cURL handle"
-int  le_curl_multi_handle;
+extern int  le_curl_multi_handle;
 #define le_curl_multi_handle_name "cURL Multi Handle"
 
 PHP_MINIT_FUNCTION(curl);

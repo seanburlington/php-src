@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.58 2005/06/26 17:31:07 iliaa Exp $ */
+/* $Id: interface.c,v 1.59 2005/07/15 16:47:48 gschlossnagle Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -51,6 +51,9 @@
 #include "ext/standard/file.h"
 #include "ext/standard/url.h"
 #include "php_curl.h"
+
+int  le_curl;
+int  le_curl_multi_handle;
 
 static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 

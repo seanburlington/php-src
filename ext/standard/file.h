@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.92 2004/09/26 21:55:22 helly Exp $ */
+/* $Id: file.h,v 1.93 2005/07/15 12:35:12 hyanantha Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -60,7 +60,7 @@ PHP_FUNCTION(get_meta_tags);
 PHP_FUNCTION(flock);
 PHP_FUNCTION(fd_set);
 PHP_FUNCTION(fd_isset);
-#if (!defined(__BEOS__) && !defined(NETWARE) && HAVE_REALPATH) || defined(ZTS)
+#if (!defined(__BEOS__) && HAVE_REALPATH) || defined(ZTS)
 PHP_FUNCTION(realpath);
 PHP_FUNCTION(fnmatch);
 #endif

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_open_temporary_file.c,v 1.30.2.3 2005/06/28 15:27:49 hyanantha Exp $ */
+/* $Id: php_open_temporary_file.c,v 1.30.2.4 2005/07/16 12:14:45 hyanantha Exp $ */
 
 #include "php.h"
 
@@ -107,10 +107,6 @@ static int php_do_open_temporary_file(const char *path, const char *pfx, char **
 #endif
 		;
 #endif
-#ifdef NETWARE
-    char *file_path = NULL;
-#endif
-
 	if (!path) {
 		return -1;
 	}

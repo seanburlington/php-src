@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.420.2.11 2005/06/02 08:51:10 derick Exp $ */
+/* $Id: string.c,v 1.420.2.12 2005/07/16 11:18:35 hyanantha Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1175,6 +1175,22 @@ PHPAPI size_t php_dirname(char *path, size_t len)
 			return len;
 		}
 	}
+#elif defined(NETWARE)
+	/*
+	 * Find the first occurence of : from the left 
+	 * move the path pointer to the position just after :
+	 * increment the len_adjust to the length of path till colon character(inclusive)
+	 * If there is no character beyond : simple return len
+	 */
+	char *colonpos = NULL;
+	colonpos = strchr(path, ':');
+	if(colonpos != NULL) {
+		len_adjust = ((colonpos - path) + 1);
+		path += len_adjust;
+		if(len_adjust == len) {
+			return len;
+		}
+	}
 #endif
 
 	if (len == 0) {
@@ -1199,9 +1215,21 @@ PHPAPI size_t php_dirname(char *path, size_t len)
 	}
 	if (end < path) {
 		/* No slash found, therefore return '.' */
+#ifdef NETWARE
+		if(len_adjust == 0) {
+			path[0] = '.';
+			path[1] = '\0';
+			return 1; //only one character
+		} 
+		else {
+			path[0] = '\0';
+			return len_adjust;
+		}
+#else
 		path[0] = '.';
 		path[1] = '\0';
 		return 1 + len_adjust;
+#endif
 	}
 
 	/* Strip slashes which came before the file name */

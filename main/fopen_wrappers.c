@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.173 2005/02/23 08:56:47 hyanantha Exp $ */
+/* $Id: fopen_wrappers.c,v 1.174 2005/07/16 12:21:34 hyanantha Exp $ */
 
 /* {{{ includes
  */
@@ -123,7 +123,7 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 		}
 
 		/* Check the path */
-#ifdef PHP_WIN32
+#if defined(PHP_WIN32) || defined(NETWARE)
 		if (strncasecmp(resolved_basedir, resolved_name, resolved_basedir_len) == 0) {
 #else
 		if (strncmp(resolved_basedir, resolved_name, resolved_basedir_len) == 0) {

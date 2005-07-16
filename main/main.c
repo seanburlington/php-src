@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.636 2005/07/12 16:53:29 iliaa Exp $ */
+/* $Id: main.c,v 1.637 2005/07/16 12:21:34 hyanantha Exp $ */
 
 /* {{{ includes
  */
@@ -222,7 +222,7 @@ static PHP_INI_MH(OnUpdateTimeout)
 #	define PHP_SAFE_MODE_EXEC_DIR ""
 #endif
 
-#ifdef PHP_PROG_SENDMAIL
+#if defined(PHP_PROG_SENDMAIL) && !defined(NETWARE)
 #	define DEFAULT_SENDMAIL_PATH PHP_PROG_SENDMAIL " -t -i "
 #else
 #	define DEFAULT_SENDMAIL_PATH NULL

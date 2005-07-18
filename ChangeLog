@@ -1,3 +1,29 @@
+2005-07-17  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ext/ming/config.m4
+      ext/ming/ming.c:
+      - Compatibility with ming 0.2a and 0.3a
+
+    * ZendEngine2/tests/bug33710.phpt:
+      - Add new test
+
+2005-07-17  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ZendEngine2/zend_compile.c:
+      Added missing init.
+
+2005-07-17  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * main/streams/plain_wrapper.c:
+      - Fix problem with debug mode on selective machines
+
+    * ext/xml/tests/bug26614.phpt
+      ext/xml/tests/bug26614_libxml.phpt:
+      - If you ask me both (expat and libxml) are not really accurate about byte
+        positions and columns...however the line number information is now
+        correct for both so for the moment we live with the situation that they
+        return different byte and column information.
+
 2005-07-16  Ilia Alshanetsky  <ilia@prohost.org>
 
     * ext/curl/interface.c:
@@ -6568,7 +6594,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2045 2005/07/17 05:40:10 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2046 2005/07/18 05:36:04 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -9969,7 +9995,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2045 2005/07/17 05:40:10 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2046 2005/07/18 05:36:04 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -10450,7 +10476,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2045 2005/07/17 05:40:10 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2046 2005/07/18 05:36:04 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -11924,7 +11950,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2045 2005/07/17 05:40:10 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2046 2005/07/18 05:36:04 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

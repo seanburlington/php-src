@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.222 2005/07/11 06:32:02 jon Exp $ */
+/* $Id: run-tests.php,v 1.223 2005/07/18 00:19:28 helly Exp $ */
 
 /*
  * TODO:
@@ -886,6 +886,9 @@ TEST $file
 				fwrite($failed_tests_file, "$tested: $name\n");
 			}
 		}
+
+		echo "---> $IN_REDIRECT[TESTS] ($tested) done\n";
+
 		$GLOBALS['test_idx'] = $test_idx;
 
 		$test_files = $saved_test_files;

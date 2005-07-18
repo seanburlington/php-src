@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.60 2005/07/16 18:33:09 iliaa Exp $ */
+/* $Id: interface.c,v 1.61 2005/07/18 13:47:33 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -1255,11 +1255,7 @@ PHP_FUNCTION(curl_setopt)
    Cleanup an execution phase */
 void _php_curl_cleanup_handle(php_curl *ch)
 {
-	if (ch->uses < 1) {
-		return;
-	}
-
-	if (ch->handlers->write->buf.len) {
+	if (ch->handlers->write->buf.len > 0) {
 		memset(&ch->handlers->write->buf, 0, sizeof(smart_str));
 	}
 

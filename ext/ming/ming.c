@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.76 2005/07/17 23:58:39 helly Exp $ */
+/* $Id: ming.c,v 1.77 2005/07/18 00:14:49 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4068,6 +4068,16 @@ PHP_MINIT_FUNCTION(ming)
 
 #define CONSTANT(s,c) REGISTER_LONG_CONSTANT((s), (c), CONST_CS | CONST_PERSISTENT)
 
+#ifdef HAVE_NEW_MING
+	CONSTANT("MING_NEW",                    1);
+#else
+	CONSTANT("MING_NEW",                    0);
+#endif
+#ifdef HAVE_MING_ZLIB
+	CONSTANT("MING_ZLIB",                   1);
+#else
+	CONSTANT("MING_ZLIB",                   0);
+#endif
 	/* flags for SWFButton_addShape */
 	CONSTANT("SWFBUTTON_HIT",               SWFBUTTONRECORD_HITSTATE);
 	CONSTANT("SWFBUTTON_DOWN",              SWFBUTTONRECORD_DOWNSTATE);

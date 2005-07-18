@@ -3,10 +3,10 @@ Ming: Simple SWFAction() test
 --SKIPIF--
 <?php
 if (!extension_loaded("ming")) die("skip"); 
-if (MING_NEW || MING_ZLIB) die("skip new ming");
+if (!MING_NEW && !MING_ZLIB) die("skip old ming");
 ?>
 --FILE--
-<?php /* $Id: swfaction.phpt,v 1.3 2005/07/18 00:14:53 helly Exp $ */
+<?php /* $Id: swfaction-new.phpt,v 1.1 2005/07/18 00:14:53 helly Exp $ */
 
   $s = new SWFShape();
   $f = $s->addFill(0xff, 0, 0);
@@ -48,4 +48,4 @@ if (MING_NEW || MING_ZLIB) die("skip new ming");
   unlink(dirname(__FILE__).'/test.swf');
 ?>
 --EXPECT--
-9e47538692393b9915faf3fc7e686cd5
+d0f09a7b6a14d3fe6d570367deb38633

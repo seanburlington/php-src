@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.45.2.6 2003/10/14 03:48:09 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.45.2.13.2.1 2005/07/18 04:04:43 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -129,7 +129,11 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 				if (!ip) {
 					/* PHP variables cannot contain '[' in their names, so we replace the character with a '_' */
 					*(index_s - 1) = '_';
-					index_len = var_len = strlen(var);
+					
+					index_len = var_len = 0;
+					if (index) {
+						index_len = var_len = strlen(index);
+					}
 					goto plain_var;
 					return;
 				}
@@ -178,11 +182,25 @@ plain_var:
 			if (!index) {
 				zend_hash_next_index_insert(symtable1, &gpc_element, sizeof(zval *), (void **) &gpc_element_p);
 			} else {
+				zval **tmp;
+			
 				if (PG(magic_quotes_gpc) && (index!=var)) {
 					char *escaped_index = php_addslashes(index, index_len, &index_len, 0 TSRMLS_CC);
+					
+					if (PG(http_globals)[TRACK_VARS_COOKIE] && symtable1 == Z_ARRVAL_P(PG(http_globals)[TRACK_VARS_COOKIE]) && 
+							zend_hash_find(symtable1, escaped_index, index_len+1, (void **) &tmp) != FAILURE) {
+						efree(escaped_index);
+						break;
+					}
+					
 					zend_hash_update(symtable1, escaped_index, index_len+1, &gpc_element, sizeof(zval *), (void **) &gpc_element_p);
 					efree(escaped_index);
 				} else {
+					if (PG(http_globals)[TRACK_VARS_COOKIE] && symtable1 == Z_ARRVAL_P(PG(http_globals)[TRACK_VARS_COOKIE]) && 
+							zend_hash_find(symtable1, index, index_len+1, (void **) &tmp) != FAILURE) {
+						break;
+					}
+				
 					zend_hash_update(symtable1, index, index_len+1, &gpc_element, sizeof(zval *), (void **) &gpc_element_p);
 				}
 			}
@@ -286,7 +304,8 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 			separator = (char *) estrdup(PG(arg_separator).input);
 			break;
 		case PARSE_COOKIE:
-			separator = ";\0";
+			/* The , and space are needed for instances when there are multiple Cookie: headers */
+			separator = ";, \0";
 			break;
 	}
 	

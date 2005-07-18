@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.16 2005/07/09 04:37:27 iliaa Exp $ */
+/* $Id: sqlite_statement.c,v 1.17 2005/07/18 14:40:49 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -165,7 +165,7 @@ static int pdo_sqlite_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC)
 {
 	pdo_sqlite_stmt *S = (pdo_sqlite_stmt*)stmt->driver_data;
 
-	if(colno >= sqlite3_data_count(S->stmt)) {
+	if(colno >= sqlite3_column_count(S->stmt)) {
 		/* error invalid column */
 		pdo_sqlite_error_stmt(stmt);
 		return 0;

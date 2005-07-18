@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: ereg.c,v 1.78.2.1 2005/05/26 21:49:32 andrei Exp $ */
+/* $Id: ereg.c,v 1.78.2.2 2005/07/18 23:10:08 sniper Exp $ */
 
 #include <stdio.h>
 #include <ctype.h>
@@ -46,6 +46,7 @@ static int _php_regcomp(regex_t *preg, const char *pattern, int cflags)
 	
 	if(zend_hash_find(&REG(ht_rc), (char *) pattern, patlen+1, (void **) &rc) == SUCCESS
 	   && rc->cflags == cflags) {
+#ifdef HAVE_REGEX_T_RE_MAGIC
 		/*
 		 * We use a saved magic number to see whether cache is corrupted, and if it
 		 * is, we flush it and compile the pattern from scratch.
@@ -73,7 +74,20 @@ static int _php_regcomp(regex_t *preg, const char *pattern, int cflags)
 		zend_hash_update(&REG(ht_rc), (char *) pattern, patlen+1,
 						 (void *) &rcp, sizeof(rcp), NULL);
 	}
-	
+#else
+		memcpy(preg, &rc->preg, sizeof(*preg));
+	} else {
+		r = regcomp(preg, pattern, cflags);
+		if(!r) {
+			reg_cache rcp;
+
+			rcp.cflags = cflags;
+			memcpy(&rcp.preg, preg, sizeof(*preg));
+			zend_hash_update(&REG(ht_rc), (char *) pattern, patlen+1,
+							 (void *) &rcp, sizeof(rcp), NULL);
+		}
+	}
+#endif
 	return r;
 }
 /* }}} */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.102 2005/06/30 13:43:00 dmitry Exp $ */
+/* $Id: dl.c,v 1.103 2005/07/18 16:20:08 dmitry Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -219,7 +219,7 @@ void php_dl(zval *file, int type, zval *return_value TSRMLS_DC)
 	module_entry->module_number = zend_next_free_module();
 	module_entry->handle = handle;
 
-	if (zend_register_module_ex(module_entry TSRMLS_CC) == FAILURE) {
+	if ((module_entry = zend_register_module_ex(module_entry TSRMLS_CC)) == NULL) {
 		DL_UNLOAD(handle);
 		RETURN_FALSE;
 	}

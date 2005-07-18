@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.637 2005/07/16 12:21:34 hyanantha Exp $ */
+/* $Id: main.c,v 1.638 2005/07/18 16:20:07 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -1296,7 +1296,7 @@ int php_register_extensions(zend_module_entry **ptr, int count TSRMLS_DC)
 
 	while (ptr < end) {
 		if (*ptr) {
-			if (zend_register_internal_module(*ptr TSRMLS_CC)==FAILURE) {
+			if (zend_register_internal_module(*ptr TSRMLS_CC)==NULL) {
 				return FAILURE;
 			}
 		}

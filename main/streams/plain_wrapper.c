@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.49 2005/07/17 18:39:24 helly Exp $ */
+/* $Id: plain_wrapper.c,v 1.50 2005/07/18 13:28:24 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -208,6 +208,12 @@ PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode, const cha
 			stream->flags |= PHP_STREAM_FLAG_NO_SEEK;
 		} else {
 			stream->position = lseek(self->fd, 0, SEEK_CUR);
+#ifdef ESPIPE
+			if (stream->position == (off_t)-1 && errno == ESPIPE) {
+				stream->position = 0;
+				stream->is_pipe = 1;
+			}
+#endif
 		}
 	}
 

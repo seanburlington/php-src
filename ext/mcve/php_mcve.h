@@ -16,7 +16,7 @@
    |          Chris Faulhaber <jedgar@fxp.org>                            |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_mcve.h,v 1.16 2005/07/18 20:10:06 bradmssw Exp $ */
+/* $Id: php_mcve.h,v 1.17 2005/07/19 00:34:38 bradmssw Exp $ */
 
 #ifndef _PHP_MCVE_H
 #define _PHP_MCVE_H
@@ -51,9 +51,11 @@ PHP_FUNCTION(m_destroyconn);
 PHP_FUNCTION(m_setdropfile);
 PHP_FUNCTION(m_setip);
 PHP_FUNCTION(m_setssl);
+#if BRAD_0
 #if LIBMONETRA_VERSION >= 050000
 PHP_FUNCTION(m_setssl_cafile);
 PHP_FUNCTION(m_responsekeys);
+#endif
 #endif
 PHP_FUNCTION(m_setssl_files);
 PHP_FUNCTION(m_setblocking);

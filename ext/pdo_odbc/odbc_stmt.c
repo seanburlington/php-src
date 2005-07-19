@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_stmt.c,v 1.23 2005/07/09 05:01:14 wez Exp $ */
+/* $Id: odbc_stmt.c,v 1.24 2005/07/19 03:39:49 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -384,6 +384,12 @@ static int odbc_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC)
 	if (rc != SQL_SUCCESS) {
 		pdo_odbc_stmt_error("SQLBindCol");
 		return 0;
+	}
+
+	/* enforce a practical limitation.
+	 * TODO: make this work more nicely */
+	if (colsize > 65535) {
+		colsize = 65535;
 	}
 
 	col->maxlen = S->cols[colno].datalen = colsize;

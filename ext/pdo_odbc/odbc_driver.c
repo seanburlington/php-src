@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_driver.c,v 1.26 2005/07/10 14:56:36 wez Exp $ */
+/* $Id: odbc_driver.c,v 1.27 2005/07/19 16:54:51 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -206,6 +206,9 @@ static long odbc_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRML
 	if (rc != SQL_SUCCESS && rc != SQL_SUCCESS_WITH_INFO) {
 		pdo_odbc_doer_error("SQLRowCount");
 		goto out;
+	}
+	if (row_count == -1) {
+		row_count = 0;
 	}
 out:
 	SQLFreeHandle(SQL_HANDLE_STMT, stmt);

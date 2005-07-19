@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: odbc_stmt.c,v 1.25 2005/07/19 15:26:15 wez Exp $ */
+/* $Id: odbc_stmt.c,v 1.26 2005/07/19 16:55:22 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -85,6 +85,7 @@ static int odbc_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 
 			if (Z_TYPE_P(param->parameter) != IS_RESOURCE) {
 				/* they passed in a string */
+				convert_to_string(param->parameter);
 				SQLPutData(S->stmt, Z_STRVAL_P(param->parameter), Z_STRLEN_P(param->parameter));
 				continue;
 			}

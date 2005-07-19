@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.153 2005/07/06 06:58:44 dmitry Exp $ */
+/* $Id: soap.c,v 1.154 2005/07/19 19:48:02 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2069,6 +2069,14 @@ PHP_METHOD(SoapClient, SoapClient)
 					Z_TYPE_PP(tmp) == IS_LONG &&
 					(Z_LVAL_PP(tmp) == SOAP_LITERAL || Z_LVAL_PP(tmp) == SOAP_ENCODED)) {
 				add_property_long(this_ptr, "use", Z_LVAL_PP(tmp));
+			}
+		}
+
+		if (zend_hash_find(ht, "stream_context", sizeof("stream_context"), (void**)&tmp) == SUCCESS &&
+				Z_TYPE_PP(tmp) == IS_RESOURCE) {
+			php_stream_context *context = php_stream_context_from_zval(*tmp, 1);
+			if (context) {
+				add_property_resource(this_ptr, "_stream_context", context->rsrc_id);
 			}
 		}
 

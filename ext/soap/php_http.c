@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.74 2005/07/19 19:48:02 wez Exp $ */
+/* $Id: php_http.c,v 1.75 2005/07/20 10:21:49 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -142,23 +142,10 @@ static php_stream* http_connect(zval* this_ptr, php_url *phpurl, int use_ssl, in
 	if (SUCCESS == zend_hash_find(Z_OBJPROP_P(this_ptr),
 			"_stream_context", sizeof("_stream_context"), (void**)&tmp)) {
 		context = php_stream_context_from_zval(*tmp, 0);
-	} else {
-		context = php_stream_context_alloc();
 	}
 
 	namelen = spprintf(&name, 0, "%s://%s:%d", (use_ssl && !*use_proxy)? "ssl" : "tcp", host, port);
-	if (use_ssl) {
-		zval **tmp;
 
-		if (zend_hash_find(Z_OBJPROP_P(this_ptr), "_local_cert", sizeof("_local_cert"), (void **) &tmp) == SUCCESS &&
-		    Z_TYPE_PP(tmp) == IS_STRING) {
-			php_stream_context_set_option(context, "ssl", "local_cert", *tmp);
-			if (zend_hash_find(Z_OBJPROP_P(this_ptr), "_passphrase", sizeof("_passphrase"), (void **) &tmp) == SUCCESS &&
-			    Z_TYPE_PP(tmp) == IS_STRING) {
-				php_stream_context_set_option(context, "ssl", "passphrase", *tmp);
-			}
-		}
-	}
 	stream = php_stream_xport_create(name, namelen,
 		ENFORCE_SAFE_MODE | REPORT_ERRORS,
 		STREAM_XPORT_CLIENT | STREAM_XPORT_CONNECT,

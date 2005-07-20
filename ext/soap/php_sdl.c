@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.85 2005/07/08 09:36:28 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.86 2005/07/20 10:21:49 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -2214,8 +2214,13 @@ sdlPtr get_sdl(zval *this_ptr, char *uri TSRMLS_DC)
 	char* old_error_code = SOAP_GLOBAL(error_code);
 	int uri_len;
 	php_stream_context *context=NULL;
-	zval **proxy_host, **proxy_port, *orig_context, *new_context;
+	zval **tmp, **proxy_host, **proxy_port, *orig_context, *new_context;
 	smart_str headers = {0};
+
+	if (SUCCESS == zend_hash_find(Z_OBJPROP_P(this_ptr),
+			"_stream_context", sizeof("_stream_context"), (void**)&tmp)) {
+		context = php_stream_context_from_zval(*tmp, 0);
+	}
 
 	if (zend_hash_find(Z_OBJPROP_P(this_ptr), "_proxy_host", sizeof("_proxy_host"), (void **) &proxy_host) == SUCCESS &&
 	    Z_TYPE_PP(proxy_host) == IS_STRING &&
@@ -2235,7 +2240,9 @@ sdlPtr get_sdl(zval *this_ptr, char *uri TSRMLS_DC)
 		ZVAL_STRING(str_proxy, proxy.c, 1);
 		smart_str_free(&proxy);
 		
-		context = php_stream_context_alloc();
+		if (!context) {
+			context = php_stream_context_alloc();
+		}
 		php_stream_context_set_option(context, "http", "proxy", str_proxy);
 		zval_ptr_dtor(&str_proxy);
 

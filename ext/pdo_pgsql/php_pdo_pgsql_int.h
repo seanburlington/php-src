@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_pgsql_int.h,v 1.12 2005/07/08 15:27:34 wez Exp $ */
+/* $Id: php_pdo_pgsql_int.h,v 1.13 2005/07/20 02:37:57 wez Exp $ */
 
 #ifndef PHP_PDO_PGSQL_INT_H
 #define PHP_PDO_PGSQL_INT_H
@@ -83,6 +83,10 @@ extern struct pdo_stmt_methods pgsql_stmt_methods;
 #else
 #define pdo_pgsql_sqlstate(r) (const char *)NULL
 #endif
+
+enum {
+	PDO_PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT = PDO_ATTR_DRIVER_SPECIFIC,
+};
 
 #endif /* PHP_PDO_PGSQL_INT_H */
 

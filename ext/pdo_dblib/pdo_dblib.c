@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dblib.c,v 1.7 2005/07/12 12:21:53 wez Exp $ */
+/* $Id: pdo_dblib.c,v 1.8 2005/07/20 05:27:27 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -114,14 +114,18 @@ int msg_handler(DBPROCESS *dbproc, DBINT msgno, int msgstate,
 	pdo_dblib_err *einfo;
 	TSRMLS_FETCH();
 
-	einfo = (pdo_dblib_err*)dbgetuserdata(dbproc);
-	if (!einfo) einfo = &DBLIB_G(err);
+	if (severity) {
+		einfo = (pdo_dblib_err*)dbgetuserdata(dbproc);
+		if (!einfo) {
+			einfo = &DBLIB_G(err);
+		}
 
-	if (einfo->lastmsg) {
-		efree(einfo->lastmsg);
+		if (einfo->lastmsg) {
+			efree(einfo->lastmsg);
+		}
+
+		einfo->lastmsg = estrdup(msgtext);
 	}
-
-	einfo->lastmsg = estrdup(msgtext);
 
 #if 0
 	php_error_docref(NULL TSRMLS_CC, E_WARNING, "dblib message: %s (severity %d)", msgtext, severity);

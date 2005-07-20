@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql_int.h,v 1.15 2005/07/03 02:20:08 wez Exp $ */
+/* $Id: php_pdo_mysql_int.h,v 1.16 2005/07/20 16:22:09 iliaa Exp $ */
 
 #ifndef PHP_PDO_MYSQL_INT_H
 #define PHP_PDO_MYSQL_INT_H
@@ -64,7 +64,7 @@ typedef struct {
 	MYSQL_BIND 		*bound_result;
 	my_bool			*out_null;
 	unsigned long   *out_length;
-
+	unsigned max_length:1;
 #endif
 } pdo_mysql_stmt;
 

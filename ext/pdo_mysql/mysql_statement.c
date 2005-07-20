@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.45 2005/07/20 02:19:20 iliaa Exp $ */
+/* $Id: mysql_statement.c,v 1.46 2005/07/20 02:36:34 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -94,7 +94,7 @@ static int pdo_mysql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 		/* if buffered, pre-fetch all the data */
 		if (H->buffered) {
 			/* if we have bound the buffers don't set the attribute again */
-			if (!S->result) {
+			if (!S->result && stmt->column_count > 0) {
 				my_bool on = 1;
 				mysql_stmt_attr_set(S->stmt, STMT_ATTR_UPDATE_MAX_LENGTH, &on);
 			}

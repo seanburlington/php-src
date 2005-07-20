@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.279.2.61 2004/08/17 14:10:03 iliaa Exp $ */
+/* $Id: file.c,v 1.279.2.70.2.1 2005/07/20 19:26:31 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -909,7 +909,7 @@ static int parse_context_options(php_stream_context *context, zval *options)
 	HashPosition pos, opos;
 	zval **wval, **oval;
 	char *wkey, *okey;
-	int wkey_len, okey_len;
+	uint wkey_len, okey_len;
 	int ret = SUCCESS;
 	ulong num_key;
 
@@ -1189,7 +1189,7 @@ PHP_FUNCTION(popen)
 	zval **arg1, **arg2;
 	FILE *fp;
 	char *p, *tmp = NULL;
-	char *b, buf[1024];
+	char *b, *buf = 0;
 	php_stream *stream;
 
 	if (ZEND_NUM_ARGS() != 2 || zend_get_parameters_ex(2, &arg1, &arg2) == FAILURE) {
@@ -1198,6 +1198,14 @@ PHP_FUNCTION(popen)
 	convert_to_string_ex(arg1);
 	convert_to_string_ex(arg2);
 	p = estrndup(Z_STRVAL_PP(arg2), Z_STRLEN_PP(arg2));
+#ifndef PHP_WIN32
+	{
+		char *z = memchr(p, 'b', Z_STRLEN_PP(arg2));
+		if (z) {
+			memmove(p + (z - p), z + 1, Z_STRLEN_PP(arg2) - (z - p));
+		}
+	}
+#endif
 	if (PG(safe_mode)){
 		b = strchr(Z_STRVAL_PP(arg1), ' ');
 		if (!b) {
@@ -1212,10 +1220,11 @@ PHP_FUNCTION(popen)
 				b = NULL;
 			}
 		}
+		
 		if (b) {
-			snprintf(buf, sizeof(buf), "%s%s", PG(safe_mode_exec_dir), b);
+			spprintf(&buf, 0, "%s%s", PG(safe_mode_exec_dir), b);
 		} else {
-			snprintf(buf, sizeof(buf), "%s/%s", PG(safe_mode_exec_dir), Z_STRVAL_PP(arg1));
+			spprintf(&buf, 0, "%s/%s", PG(safe_mode_exec_dir), Z_STRVAL_PP(arg1));
 		}
 
 		tmp = php_escape_shell_cmd(buf);
@@ -1225,8 +1234,12 @@ PHP_FUNCTION(popen)
 		if (!fp) {
 			php_error_docref2(NULL TSRMLS_CC, buf, p, E_WARNING, "%s", strerror(errno));
 			efree(p);
+			efree(buf);
 			RETURN_FALSE;
 		}
+		
+		efree(buf);
+
 	} else {
 		fp = VCWD_POPEN(Z_STRVAL_PP(arg1), p);
 		if (!fp) {
@@ -1914,9 +1927,32 @@ PHP_FUNCTION(rename)
 	if (ret == -1) {
 #ifdef EXDEV
 		if (errno == EXDEV) {
-			if (php_copy_file(old_name, new_name TSRMLS_CC)	== SUCCESS) {
-				VCWD_UNLINK(old_name);
-				RETURN_TRUE;
+			struct stat sb;
+			if (php_copy_file(old_name, new_name TSRMLS_CC) == SUCCESS) {
+				if (VCWD_STAT(old_name, &sb) == 0) {
+#if !defined(TSRM_WIN32) && !defined(NETWARE)
+					if (VCWD_CHMOD(new_name, sb.st_mode)) {
+						if (errno == EPERM) {
+							php_error_docref2(NULL TSRMLS_CC, old_name, new_name, E_WARNING, "%s", strerror(errno));
+							VCWD_UNLINK(old_name);
+							RETURN_TRUE;
+						}
+						php_error_docref2(NULL TSRMLS_CC, old_name, new_name, E_WARNING, "%s", strerror(errno));
+						RETURN_FALSE;
+					}
+					if (VCWD_CHOWN(new_name, sb.st_uid, sb.st_gid)) {
+						if (errno == EPERM) {
+							php_error_docref2(NULL TSRMLS_CC, old_name, new_name, E_WARNING, "%s", strerror(errno));
+							VCWD_UNLINK(old_name);
+							RETURN_TRUE;
+						}
+						php_error_docref2(NULL TSRMLS_CC, old_name, new_name, E_WARNING, "%s", strerror(errno));
+						RETURN_FALSE;
+					}
+#endif
+					VCWD_UNLINK(old_name);
+					RETURN_TRUE;
+				}
 			}
 		}
 #endif
@@ -2105,6 +2141,56 @@ PHPAPI int php_copy_file(char *src, char *dest TSRMLS_DC)
 {
 	php_stream *srcstream = NULL, *deststream = NULL;
 	int ret = FAILURE;
+	php_stream_statbuf src_s, dest_s;
+
+	switch (php_stream_stat_path(src, &src_s)) {
+		case -1:
+			/* non-statable stream */
+			goto safe_to_copy;
+			break;
+		case 0:
+			break;
+		default: /* failed to stat file, does not exist? */
+			return ret;
+	}
+	if (php_stream_stat_path(dest, &dest_s) != 0) {
+		goto safe_to_copy;
+	}
+	if (!src_s.sb.st_ino || !dest_s.sb.st_ino) {
+		goto no_stat;
+	}
+	if (src_s.sb.st_ino == dest_s.sb.st_ino && src_s.sb.st_dev == dest_s.sb.st_dev) {
+		return ret;
+	} else {
+		goto safe_to_copy;
+	}
+no_stat:
+	{
+		char *sp, *dp;
+		int res;
+		
+		if ((sp = expand_filepath(src, NULL TSRMLS_CC)) == NULL) {
+			return ret;
+		}
+	 	if ((dp = expand_filepath(dest, NULL TSRMLS_CC)) == NULL) {
+	 		efree(sp);
+	 		goto safe_to_copy;
+	 	}
+
+		res = 
+#ifndef PHP_WIN32	 	
+			!strcmp(sp, dp);
+#else
+			!strcasecmp(sp, dp);
+#endif	
+
+		efree(sp);
+		efree(dp);
+		if (res) {
+			return ret;
+		}
+	}
+safe_to_copy:
 
 	srcstream = php_stream_open_wrapper(src, "rb",
 				STREAM_DISABLE_OPEN_BASEDIR | REPORT_ERRORS,
@@ -2299,7 +2385,7 @@ PHP_FUNCTION(fgetcsv)
 
 	convert_to_long_ex(bytes);
 	len = Z_LVAL_PP(bytes);
-	if (len < 0) {
+	if (Z_LVAL_PP(bytes) < 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Length parameter may not be negative");
 		RETURN_FALSE;
 	}
@@ -2391,9 +2477,6 @@ enclosure:
 		if ((p = memchr(p2, delimiter, (e - p2)))) {
 			p2 = s;
 			s = p + 1;
-			if (*p2 == enclosure) {
-				p2++;
-			}
 
 			/* copy data to buffer */
 			buf2 = erealloc(buf2, buf2_len + (p - p2) + 1);

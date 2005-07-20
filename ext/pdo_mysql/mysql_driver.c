@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.58 2005/07/14 02:09:08 wez Exp $ */
+/* $Id: mysql_driver.c,v 1.59 2005/07/20 03:38:32 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -207,6 +207,8 @@ static int mysql_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, 
 	}
 
 	dbh->alloc_own_columns = 1;
+
+	S->max_length = pdo_attr_lval(driver_options, PDO_ATTR_MAX_COLUMN_LEN, 0 TSRMLS_CC);
 
 	return 1;
 

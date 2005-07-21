@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.40 2005/07/20 08:31:00 derick Exp $ */
+/* $Id: php_date.c,v 1.41 2005/07/21 10:09:40 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -623,6 +623,11 @@ PHPAPI void php_mktime(INTERNAL_FUNCTION_PARAMETERS, int gmt)
 		case 7:
 			/* break intentionally missing */
 		case 6:
+			if (yea >= 0 && yea < 70) {
+				yea += 2000;
+			} else if (yea >= 70 && yea <= 100) {
+				yea += 1900;
+			}
 			now->y = yea;
 			/* break intentionally missing again */
 		case 5:

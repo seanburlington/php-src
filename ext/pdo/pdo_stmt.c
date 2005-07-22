@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.113 2005/07/22 01:34:42 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.114 2005/07/22 02:09:19 wez Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -2163,6 +2163,9 @@ static zval *row_prop_or_dim_read(zval *object, zval *member, int type TSRMLS_DC
 			}
 		}
 	}
+
+	return_value->refcount = 0;
+	return_value->is_ref = 0;
 	
 	return return_value;
 }

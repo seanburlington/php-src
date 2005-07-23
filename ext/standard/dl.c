@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.c,v 1.79.2.3 2003/01/29 15:40:24 edink Exp $ */
+/* $Id: dl.c,v 1.79.2.3.8.1 2005/07/23 11:06:52 hyanantha Exp $ */
 
 #include "php.h"
 #include "dl.h"
@@ -40,11 +40,7 @@
 #include "win32/winutil.h"
 #define GET_DL_ERROR()	php_win_err()
 #elif defined(NETWARE)
-#ifdef NEW_LIBC
 #include <sys/param.h>
-#else
-#include "netware/param.h"
-#endif
 #define GET_DL_ERROR()	dlerror()
 #else
 #include <sys/param.h>

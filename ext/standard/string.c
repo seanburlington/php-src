@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.443 2005/07/15 12:35:12 hyanantha Exp $ */
+/* $Id: string.c,v 1.444 2005/07/23 19:44:13 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4739,8 +4739,8 @@ PHP_FUNCTION(str_word_count)
 	}
 	
 	while (p < e) {
-		if (isalpha(*p++)) {
-			s = p - 1;
+		if (isalpha(*p) || (char_list && ch[(unsigned char)*p])) {
+			s = ++p - 1;
 			while (isalpha(*p) || *p == '\'' || (*p == '-' && isalpha(*(p+1))) || (char_list && ch[(unsigned char)*p])) {
 				p++;
 			}
@@ -4761,7 +4761,9 @@ PHP_FUNCTION(str_word_count)
 					word_count++;
 					break;		
 			}
-		}	
+		} else {
+			p++;
+		}
 	}
 	
 	if (!type) {

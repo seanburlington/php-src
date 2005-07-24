@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.34.4.2.2.1 2005/07/01 09:10:14 derick Exp $
+dnl $Id: config.m4,v 1.34.4.2.2.2 2005/07/24 23:11:45 yohgaki Exp $
 dnl
 
 AC_DEFUN([PHP_PGSQL_CHECK_FUNCTIONS],[
@@ -44,7 +44,7 @@ if test "$PHP_PGSQL" != "no"; then
         fi
       done
 
-      for j in $PHP_LIBDIR $PHP_LIBDIR/pgsql $PHP_LIBDIR/postgres $PHP_LIBDIR/postgresql ""; do
+      for j in lib lib/pgsql lib/postgres lib/postgresql ""; do
         if test -f "$i/$j/libpq.so" || test -f "$i/$j/libpq.a"; then 
           PGSQL_LIBDIR=$i/$j
         fi

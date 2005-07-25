@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.33 2004/07/20 20:48:01 moriyoshi Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.40.2.1 2005/07/25 20:36:36 rasmus Exp $ */
 
 #include <fcntl.h>
 
@@ -119,8 +119,16 @@ static int
 php_apache_sapi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 {
 	php_struct *ctx = SG(server_context);
+	const char *sline = SG(sapi_headers).http_status_line;
 
 	ctx->r->status = SG(sapi_headers).http_response_code;
+
+	/* httpd requires that r->status_line is set to the first digit of
+	 * the status-code: */
+	if (sline && strlen(sline) > 12 && strncmp(sline, "HTTP/1.", 7) == 0 
+		&& sline[8] == ' ') {
+		ctx->r->status_line = apr_pstrdup(ctx->r->pool, sline + 9);
+	}
 
 	return SAPI_HEADER_SENT_SUCCESSFULLY;
 }
@@ -140,7 +148,7 @@ php_apache_sapi_read_post(char *buf, uint count_bytes TSRMLS_DC)
 	/*
 	 * This loop is needed because ap_get_brigade() can return us partial data
 	 * which would cause premature termination of request read. Therefor we
-	 * need to make sure that if data is avaliable we fill the buffer completely.
+	 * need to make sure that if data is available we fill the buffer completely.
 	 */
 
 	while (ap_get_brigade(r->input_filters, brigade, AP_MODE_READBYTES, APR_BLOCK_READ, len) == APR_SUCCESS) {
@@ -260,23 +268,18 @@ static void php_apache_sapi_log_message(char *msg)
 	TSRMLS_FETCH();
 
 	ctx = SG(server_context);
-   
-	/* We use APLOG_STARTUP because it keeps us from printing the
-	 * data and time information at the beginning of the error log
-	 * line.  Not sure if this is correct, but it mirrors what happens
-	 * with Apache 1.3 -- rbb
-	 */
+
 	if (ctx == NULL) { /* we haven't initialized our ctx yet, oh well */
 		ap_log_error(APLOG_MARK, APLOG_ERR | APLOG_STARTUP, 0, NULL, "%s", msg);
 	} else {
-		ap_log_rerror(APLOG_MARK, APLOG_ERR | APLOG_STARTUP, 0, ctx->r, "%s", msg);
+		ap_log_rerror(APLOG_MARK, APLOG_ERR, 0, ctx->r, "%s", msg);
 	}
 }
 
 static void php_apache_sapi_log_message_ex(char *msg, request_rec *r)
 {
 	if (r) {
-		ap_log_rerror(APLOG_MARK, APLOG_ERR | APLOG_STARTUP, 0, r, msg, r->filename);
+		ap_log_rerror(APLOG_MARK, APLOG_ERR, 0, r, msg, r->filename);
 	} else {
 		php_apache_sapi_log_message(msg);
 	}
@@ -399,7 +402,7 @@ static apr_status_t php_server_context_cleanup(void *data_)
 	return APR_SUCCESS;
 }
 
-static void php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
+static int php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 {
 	char *content_type;
 	char *content_length;
@@ -432,7 +435,7 @@ static void php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 		SG(request_info).auth_user = NULL;
 		SG(request_info).auth_password = NULL;
 	}
-	php_request_startup(TSRMLS_C);
+	return php_request_startup(TSRMLS_C);
 }
 
 static void php_apache_request_dtor(request_rec *r TSRMLS_DC)
@@ -451,6 +454,21 @@ static int php_handler(request_rec *r)
 	TSRMLS_FETCH();
 
 	conf = ap_get_module_config(r->per_dir_config, &php4_module);
+
+	/* apply_config() needs r in some cases, so allocate server_context early */
+	ctx = SG(server_context);
+	if (ctx == NULL) {
+		ctx = SG(server_context) = apr_pcalloc(r->pool, sizeof(*ctx));
+		/* register a cleanup so we clear out the SG(server_context)
+		 * after each request. Note: We pass in the pointer to the
+		 * server_context in case this is handled by a different thread.
+		 */
+		apr_pool_cleanup_register(r->pool, (void *)&SG(server_context), php_server_context_cleanup, apr_pool_cleanup_null);
+		ctx->r = r;
+		ctx = NULL; /* May look weird to null it here, but it is to catch the right case in the first_try later on */
+	} else {
+		ctx->r = r;
+	}
 	apply_config(conf);
 
 	if (strcmp(r->handler, PHP_MAGIC_TYPE) && strcmp(r->handler, PHP_SOURCE_MAGIC_TYPE) && strcmp(r->handler, PHP_SCRIPT)) {
@@ -461,6 +479,16 @@ static int php_handler(request_rec *r)
 			} zend_end_try();
 			return DECLINED;
 		}
+	}
+
+	/* Give a 404 if PATH_INFO is used but is explicitly disabled in
+	 * the configuration; default behaviour is to accept. */ 
+	if (r->used_path_info == AP_REQ_REJECT_PATH_INFO
+		&& r->path_info && r->path_info[0]) {
+		zend_try {
+			zend_ini_deactivate(TSRMLS_C);
+		} zend_end_try();
+		return HTTP_NOT_FOUND;
 	}
 
 	/* handle situations where user turns the engine off */
@@ -498,20 +526,14 @@ static int php_handler(request_rec *r)
 
 zend_first_try {
 
-	ctx = SG(server_context);
 	if (ctx == NULL) {
-		ctx = SG(server_context) = apr_pcalloc(r->pool, sizeof(*ctx));
-		/* register a cleanup so we clear out the SG(server_context)
-		 * after each request. Note: We pass in the pointer to the
-		 * server_context in case this is handled by a different thread.
-		 */
-		apr_pool_cleanup_register(r->pool, (void *)&SG(server_context), php_server_context_cleanup, apr_pool_cleanup_null);
-
-		ctx->r = r;
 		brigade = apr_brigade_create(r->pool, r->connection->bucket_alloc);
+		ctx = SG(server_context);
 		ctx->brigade = brigade;
 
-		php_apache_request_ctor(r, ctx TSRMLS_CC);
+		if (php_apache_request_ctor(r, ctx TSRMLS_CC)!=SUCCESS) {
+			zend_bailout();
+		}
 	} else {
 		parent_req = ctx->r;
 		ctx->r = r;
@@ -544,9 +566,8 @@ zend_first_try {
 #if MEMORY_LIMIT
 		{
 			char *mem_usage;
-
+			
 			mem_usage = apr_psprintf(ctx->r->pool, "%u", AG(allocated_memory_peak));
-			AG(allocated_memory_peak) = 0;
 			apr_table_set(r->notes, "mod_php_memory_usage", mem_usage);
 		}
 #endif
@@ -562,7 +583,9 @@ zend_first_try {
 
 		rv = ap_pass_brigade(r->output_filters, brigade);
 		if (rv != APR_SUCCESS || r->connection->aborted) {
+zend_first_try {
 			php_handle_aborted_connection();
+} zend_end_try();
 		}
 		apr_brigade_cleanup(brigade);
 	} else {

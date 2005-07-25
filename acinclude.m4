@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.271.2.21 2005/07/18 18:39:37 sniper Exp $ -*- autoconf -*-
+dnl $Id: acinclude.m4,v 1.271.2.22 2005/07/25 22:31:07 helly Exp $ -*- autoconf -*-
 dnl
 dnl This file contains local autoconf functions.
 
@@ -2095,3 +2095,23 @@ int main(void)
  fi
 ])
 
+dnl
+dnl PHP_CHECK_PDO_INCLUDES([found [, not-found]])
+dnl
+AC_DEFUN([PHP_CHECK_PDO_INCLUDES],[
+  AC_CACHE_CHECK([for PDO includes], pdo_inc_path, [
+    AC_MSG_CHECKING([for PDO includes])
+    if test -f $abs_srcdir/include/php/ext/pdo/php_pdo_driver.h; then
+      pdo_inc_path=$abs_srcdir/ext
+    elif test -f $abs_srcdir/ext/pdo/php_pdo_driver.h; then
+      pdo_inc_path=$abs_srcdir/ext
+    elif test -f $prefix/include/php/ext/pdo/php_pdo_driver.h; then
+      pdo_inc_path=$prefix/include/php/ext
+    fi
+  ])
+  if test -n "$pdo_inc_path"; then
+ifelse([$1],[],:,[$1])
+  else
+ifelse([$2],[],[AC_MSG_ERROR([Cannot find php_pdo_driver.h.])],[$2])
+  fi
+])

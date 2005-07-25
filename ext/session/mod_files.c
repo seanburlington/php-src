@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.83.2.8 2004/03/29 21:28:47 wez Exp $ */
+/* $Id: mod_files.c,v 1.83.2.9.2.1 2005/07/25 14:06:17 hyanantha Exp $ */
 
 #include "php.h"
 
@@ -162,8 +162,11 @@ static void ps_files_open(ps_files *data, const char *key TSRMLS_DC)
 			flock(data->fd, LOCK_EX);
 
 #ifdef F_SETFD
-			if (fcntl(data->fd, F_SETFD, 1)) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "fcntl(%d, F_SETFD, 1) failed: %s (%d)", data->fd, strerror(errno), errno);
+#ifndef FD_CLOEXEC
+#define FD_CLOEXEC 1
+#endif
+			if (fcntl(data->fd, F_SETFD, FD_CLOEXEC)) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "fcntl(%d, F_SETFD, FD_CLOEXEC) failed: %s (%d)", data->fd, strerror(errno), errno);
 			}
 #endif
 		} else {
@@ -212,7 +215,11 @@ static int ps_files_cleanup_dir(const char *dirname, int maxlifetime TSRMLS_DC)
 				buf[dirname_len + entry_len + 1] = '\0';
 				/* check whether its last access was more than maxlifet ago */
 				if (VCWD_STAT(buf, &sbuf) == 0 && 
+#ifdef NETWARE
+						(now - sbuf.st_mtime.tv_sec) > maxlifetime) {
+#else
 						(now - sbuf.st_mtime) > maxlifetime) {
+#endif
 					VCWD_UNLINK(buf);
 					nrdels++;
 				}

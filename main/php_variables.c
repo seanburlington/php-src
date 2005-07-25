@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.100 2005/07/19 19:25:33 wez Exp $ */
+/* $Id: php_variables.c,v 1.101 2005/07/25 22:37:35 rasmus Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -236,7 +236,7 @@ SAPI_API SAPI_POST_HANDLER_FUNC(php_std_post_handler)
 SAPI_API SAPI_INPUT_FILTER_FUNC(php_default_input_filter)
 {
 	/* TODO: check .ini setting here and apply user-defined input filter */
-	*new_val_len = val_len;
+	if(new_val_len) *new_val_len = val_len;
 	return 1;
 }
 

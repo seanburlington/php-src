@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: microtime.c,v 1.39.2.1 2002/12/31 16:35:32 sebastian Exp $ */
+/* $Id: microtime.c,v 1.39.2.2.2.1 2005/07/25 13:08:32 hyanantha Exp $ */
 
 #include "php.h"
 
@@ -25,12 +25,6 @@
 #endif
 #ifdef PHP_WIN32
 #include "win32/time.h"
-#elif defined(NETWARE)
-#ifdef NEW_LIBC
-#include <sys/timeval.h>
-#else
-#include "netware/time_nw.h"
-#endif
 #else
 #include <sys/time.h>
 #endif
@@ -141,6 +135,7 @@ PHP_FUNCTION(getrusage)
 	PHP_RUSAGE_PARA(ru_nsignals);
 	PHP_RUSAGE_PARA(ru_nvcsw);
 	PHP_RUSAGE_PARA(ru_nivcsw);
+	PHP_RUSAGE_PARA(ru_nswap);
 #endif /*_OSD_POSIX*/
 	PHP_RUSAGE_PARA(ru_utime.tv_usec);
 	PHP_RUSAGE_PARA(ru_utime.tv_sec);

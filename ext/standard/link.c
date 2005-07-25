@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.42.2.4 2002/12/31 16:35:31 sebastian Exp $ */
+/* $Id: link.c,v 1.42.2.5.2.1 2005/07/25 13:08:32 hyanantha Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -33,8 +33,6 @@
 #if HAVE_PWD_H
 #ifdef PHP_WIN32
 #include "win32/pwd.h"
-#elif defined(NETWARE)
-#include "netware/pwd.h"
 #else
 #include <pwd.h>
 #endif
@@ -65,6 +63,14 @@ PHP_FUNCTION(readlink)
 	}
 	convert_to_string_ex(filename);
 
+	if (PG(safe_mode) && !php_checkuid(Z_STRVAL_PP(filename), NULL, CHECKUID_CHECK_FILE_AND_DIR)) {
+		RETURN_FALSE;
+	}
+
+	if (php_check_open_basedir(Z_STRVAL_PP(filename) TSRMLS_CC)) {
+		RETURN_FALSE;
+	}
+
 	ret = readlink(Z_STRVAL_PP(filename), buff, MAXPATHLEN-1);
 
 	if (ret == -1) {
@@ -83,11 +89,7 @@ PHP_FUNCTION(readlink)
 PHP_FUNCTION(linkinfo)
 {
 	zval **filename;
-#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
-	struct stat_libc sb;
-#else
 	struct stat sb;
-#endif
 	int ret;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &filename) == FAILURE) {

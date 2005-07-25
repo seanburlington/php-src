@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: lcg.c,v 1.38.2.1 2005/06/28 12:48:28 hyanantha Exp $ */
+/* $Id: lcg.c,v 1.38.2.2 2005/07/25 13:10:18 hyanantha Exp $ */
 
 #include "php.h"
 #include "php_lcg.h"
@@ -27,8 +27,6 @@
 
 #ifdef PHP_WIN32
 #include "win32/time.h"
-#elif defined(NETWARE)
-#include <sys/timeval.h>
 #else
 #include <sys/time.h>
 #endif

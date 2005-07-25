@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.178.2.8 2003/09/24 23:22:32 iliaa Exp $ */
+/* $Id: php.h,v 1.178.2.14.2.1 2005/07/25 14:07:16 hyanantha Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -37,10 +37,8 @@
 
 #include "zend_API.h"
 
-#if PHP_BROKEN_SPRINTF
 #undef sprintf
 #define sprintf php_sprintf
-#endif
 
 /* PHP's DEBUG value must match Zend's ZEND_DEBUG value */
 #undef PHP_DEBUG
@@ -103,7 +101,7 @@
 #endif
 
 #if HAVE_BUILD_DEFS_H
-#include "build-defs.h"
+#include <build-defs.h>
 #endif
 
 /*
@@ -201,13 +199,6 @@ char *strerror(int);
 # ifdef PHP_WIN32
 #include "win32/pwd.h"
 #include "win32/param.h"
-#elif defined(NETWARE)
-#ifdef NEW_LIBC
-#include <sys/param.h>
-#else
-#include "NetWare/param.h"
-#endif
-#include "NetWare/pwd.h"
 # else
 #include <pwd.h>
 #include <sys/param.h>
@@ -226,13 +217,19 @@ char *strerror(int);
 #define LONG_MIN (- LONG_MAX - 1)
 #endif
 
+#ifndef INT_MAX
+#define INT_MAX 2147483647
+#endif
+
+#ifndef INT_MIN
+#define INT_MIN (- INT_MAX - 1)
+#endif
+
 #define PHP_GCC_VERSION ZEND_GCC_VERSION
 #define PHP_ATTRIBUTE_MALLOC ZEND_ATTRIBUTE_MALLOC
 #define PHP_ATTRIBUTE_FORMAT ZEND_ATTRIBUTE_FORMAT
 
-#if !defined(HAVE_SNPRINTF) || !defined(HAVE_VSNPRINTF) || PHP_BROKEN_SPRINTF || PHP_BROKEN_SNPRINTF || PHP_BROKEN_VSNPRINTF
 #include "snprintf.h"
-#endif
 #include "spprintf.h"
 
 #define EXEC_INPUT_BUF 4096
@@ -252,7 +249,6 @@ char *strerror(int);
 
 
 /* global variables */
-extern pval *data;
 #if !defined(PHP_WIN32)
 #ifdef NETWARE
 #ifdef NEW_LIBC
@@ -295,7 +291,7 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 #endif
 
 /* PHPAPI void php_error(int type, const char *format, ...); */
-PHPAPI void php_error_docref0(const char *docref TSRMLS_DC, int type, const char *format, ...) 
+PHPAPI void php_error_docref0(const char *docref TSRMLS_DC, int type, const char *format, ...)
 	PHP_ATTRIBUTE_FORMAT(printf, PHP_ATTR_FMT_OFFSET + 3, PHP_ATTR_FMT_OFFSET + 4);
 PHPAPI void php_error_docref1(const char *docref TSRMLS_DC, const char *param1, int type, const char *format, ...) 
 	PHP_ATTRIBUTE_FORMAT(printf, PHP_ATTR_FMT_OFFSET + 4, PHP_ATTR_FMT_OFFSET + 5);

@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.38.2.8.2.1 2005/06/27 08:27:23 sesser Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.38.2.8.2.2 2005/07/26 09:32:58 hyanantha Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -35,14 +35,6 @@
 #include <winsock.h>
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
-#elif defined(NETWARE)
-/*#include <ws2nlm.h>*/
-/*#include <sys/socket.h>*/
-#ifdef NEW_LIBC
-#include <sys/param.h>
-#else
-#include "netware/param.h"
-#endif
 #else
 #include <sys/param.h>
 #endif
@@ -57,7 +49,6 @@
 #ifdef PHP_WIN32
 #include <winsock.h>
 #elif defined(NETWARE) && defined(USE_WINSOCK)
-/*#include <ws2nlm.h>*/
 #include <novsock2.h>
 #else
 #include <netinet/in.h>

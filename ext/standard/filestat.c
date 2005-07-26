@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.112.2.10 2004/07/16 05:08:15 pollita Exp $ */
+/* $Id: filestat.c,v 1.112.2.11.2.1 2005/07/26 09:32:58 hyanantha Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -58,8 +58,6 @@
 #if HAVE_PWD_H
 # ifdef PHP_WIN32
 #  include "win32/pwd.h"
-# elif defined(NETWARE)
-#  include "netware/pwd.h"
 # else
 #  include <pwd.h>
 # endif
@@ -128,6 +126,7 @@ PHP_RSHUTDOWN_FUNCTION(filestat)
 {
 	if (BG(CurrentStatFile)) {
 		efree (BG(CurrentStatFile));
+		BG(CurrentStatFile) = NULL;
 	}
 	return SUCCESS;
 }
@@ -329,7 +328,11 @@ PHP_FUNCTION(disk_free_space)
 	}
 #elif (defined(HAVE_SYS_STATFS_H) || defined(HAVE_SYS_MOUNT_H)) && defined(HAVE_STATFS)
 	if (statfs(Z_STRVAL_PP(path), &buf)) RETURN_FALSE;
+#ifdef NETWARE
+        bytesfree = (((double)buf.f_bsize) * ((double)buf.f_bfree));
+#else
 	bytesfree = (((double)buf.f_bsize) * ((double)buf.f_bavail));
+#endif
 #endif
 #endif /* WINDOWS */
 
@@ -478,11 +481,7 @@ PHP_FUNCTION(touch)
 {
 	pval **filename, **filetime, **fileatime;
 	int ret;
-#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
-	struct stat_libc sb;
-#else
 	struct stat sb;
-#endif
 	FILE *file;
 	struct utimbuf newtimebuf;
 	struct utimbuf *newtime = NULL;
@@ -559,11 +558,7 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 {
 	zval *stat_dev, *stat_ino, *stat_mode, *stat_nlink, *stat_uid, *stat_gid, *stat_rdev,
 	 	*stat_size, *stat_atime, *stat_mtime, *stat_ctime, *stat_blksize, *stat_blocks;
-#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
-	struct stat_libc *stat_sb;
-#else
 	struct stat *stat_sb;
-#endif
 	int rmask=S_IROTH, wmask=S_IWOTH, xmask=S_IXOTH; /* access rights defaults to other */
 	char *stat_sb_names[13]={"dev", "ino", "mode", "nlink", "uid", "gid", "rdev",
 			      "size", "atime", "mtime", "ctime", "blksize", "blocks"};
@@ -682,19 +677,19 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 	case FS_GROUP:
 		RETURN_LONG((long)BG(sb).st_gid);
 	case FS_ATIME:
-#if defined(NETWARE) && defined(NEW_LIBC)
+#ifdef NETWARE
 		RETURN_LONG((long)(BG(sb).st_atime).tv_nsec);
 #else
 		RETURN_LONG((long)BG(sb).st_atime);
 #endif
 	case FS_MTIME:
-#if defined(NETWARE) && defined(NEW_LIBC)
+#ifdef NETWARE
 		RETURN_LONG((long)(BG(sb).st_mtime).tv_nsec);
 #else
 	RETURN_LONG((long)BG(sb).st_mtime);
 #endif
 	case FS_CTIME:
-#if defined(NETWARE) && defined(NEW_LIBC)
+#ifdef NETWARE
 		RETURN_LONG((long)(BG(sb).st_ctime).tv_nsec);
 #else
 		RETURN_LONG((long)BG(sb).st_ctime);
@@ -773,7 +768,7 @@ static void php_stat(const char *filename, php_stat_len filename_length, int typ
 		MAKE_LONG_ZVAL_INCREF(stat_rdev, -1); 
 #endif
 		MAKE_LONG_ZVAL_INCREF(stat_size, stat_sb->st_size);
-#if defined(NETWARE) && defined(NEW_LIBC)
+#ifdef NETWARE
 		MAKE_LONG_ZVAL_INCREF(stat_atime, (stat_sb->st_atime).tv_nsec);
 		MAKE_LONG_ZVAL_INCREF(stat_mtime, (stat_sb->st_mtime).tv_nsec);
 		MAKE_LONG_ZVAL_INCREF(stat_ctime, (stat_sb->st_ctime).tv_nsec);

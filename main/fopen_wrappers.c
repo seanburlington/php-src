@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.153.2.9 2004/03/16 00:32:09 iliaa Exp $ */
+/* $Id: fopen_wrappers.c,v 1.153.2.10.2.1 2005/07/26 13:51:33 hyanantha Exp $ */
 
 /* {{{ includes
  */
@@ -36,14 +36,6 @@
 #include <winsock.h>
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
-#elif defined(NETWARE)
-/*#include <ws2nlm.h>*/
-/*#include <sys/socket.h>*/
-#ifdef NEW_LIBC
-#include <sys/param.h>
-#else
-#include "netware/param.h"
-#endif
 #else
 #include <sys/param.h>
 #endif
@@ -57,8 +49,6 @@
 #if HAVE_PWD_H
 #ifdef PHP_WIN32
 #include "win32/pwd.h"
-#elif defined(NETWARE)
-#include "netware/pwd.h"
 #else
 #include <pwd.h>
 #endif
@@ -106,24 +96,11 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 	char resolved_name[MAXPATHLEN];
 	char resolved_basedir[MAXPATHLEN];
 	char local_open_basedir[MAXPATHLEN];
-	int local_open_basedir_pos;
 	int resolved_basedir_len;
 	int resolved_name_len;
 	
 	/* Special case basedir==".": Use script-directory */
-	if ((strcmp(basedir, ".") == 0) && 
-		SG(request_info).path_translated &&
-		*SG(request_info).path_translated
-		) {
-		strlcpy(local_open_basedir, SG(request_info).path_translated, sizeof(local_open_basedir));
-		local_open_basedir_pos = strlen(local_open_basedir) - 1;
-
-		/* Strip filename */
-		while (!IS_SLASH(local_open_basedir[local_open_basedir_pos])
-				&& (local_open_basedir_pos >= 0)) {
-			local_open_basedir[local_open_basedir_pos--] = 0;
-		}
-	} else {
+	if (strcmp(basedir, ".") || !VCWD_GETCWD(local_open_basedir, MAXPATHLEN)) {
 		/* Else use the unmodified path */
 		strlcpy(local_open_basedir, basedir, sizeof(local_open_basedir));
 	}

@@ -16,7 +16,7 @@
    | Streams work by Wez Furlong <wez@thebrainroom.com>                   |
    +----------------------------------------------------------------------+
  */
-/* $Id: network.c,v 1.83.2.26 2004/07/02 17:23:07 wez Exp $ */
+/* $Id: network.c,v 1.83.2.27.2.1 2005/07/26 13:51:34 hyanantha Exp $ */
 
 /*#define DEBUG_MAIN_NETWORK 1*/
 
@@ -29,13 +29,6 @@
 #include <winsock.h>
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
-#elif defined(NETWARE)
-#ifdef NEW_LIBC
-#include <sys/timeval.h>
-#include <sys/param.h>
-#else
-#include "netware/time_nw.h"
-#endif
 #else
 #include <sys/param.h>
 #endif
@@ -63,15 +56,11 @@
 
 #if defined(NETWARE)
 #ifdef USE_WINSOCK
-/*#include <ws2nlm.h>*/
 #include <novsock2.h>
 #else
-/* New headers for socket stuff */
-#ifdef NEW_LIBC
 #include <netinet/in.h>
 #include <netdb.h>
 #include <sys/select.h>
-#endif
 #include <sys/socket.h>
 #endif
 #elif !defined(PHP_WIN32)
@@ -430,7 +419,7 @@ PHPAPI int php_connect_nonb_win32(SOCKET sockfd,
  * port, returns the created socket on success, else returns -1.
  * timeout gives timeout in seconds, 0 means blocking mode.
  */
-int php_hostconnect(const char *host, unsigned short port, int socktype, struct timeval *timeout TSRMLS_DC)
+PHPAPI int php_hostconnect(const char *host, unsigned short port, int socktype, struct timeval *timeout TSRMLS_DC)
 {	
 	int n, repeatto, s;
 	struct sockaddr **sal, **psal;

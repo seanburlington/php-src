@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: mcve.c,v 1.28.2.4 2005/07/18 20:11:09 bradmssw Exp $ */
+/* $Id: mcve.c,v 1.28.2.5 2005/07/26 08:38:25 hyanantha Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -27,8 +27,6 @@
 
 #if PHP_WIN32
 #include "config.w32.h"
-#elif defined NETWARE
-#include "config.nw.h"
 #else
 #include <php_config.h>
 #endif

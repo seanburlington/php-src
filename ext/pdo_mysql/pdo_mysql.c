@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_mysql.c,v 1.7 2005/07/03 02:20:08 wez Exp $ */
+/* $Id: pdo_mysql.c,v 1.8 2005/07/27 02:39:46 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -60,7 +60,7 @@ zend_module_entry pdo_mysql_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(pdo_mysql),
-	"0.2",
+	"0.9",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

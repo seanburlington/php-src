@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.96.2.16 2004/06/28 14:35:41 derick Exp $ */
+/* $Id: datetime.c,v 1.96.2.19.2.1 2005/07/27 11:22:36 hyanantha Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -52,7 +52,7 @@ char *day_short_names[] = {
 };
 
 #if !defined(HAVE_TM_ZONE) && !defined(_TIMEZONE) && !defined(HAVE_DECLARED_TIMEZONE)
-#if defined(NETWARE) && defined(NEW_LIBC)
+#ifdef NETWARE
 #define timezone    _timezone   /* timezone is called '_timezone' in new version of LibC */
 #endif
 extern time_t timezone;
@@ -579,7 +579,7 @@ static void php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 				break;
 			case 'r':
 #if HAVE_TM_GMTOFF
-				sprintf(tmp_buff, "%3s, %2d %3s %04d %02d:%02d:%02d %c%02d%02d",
+				sprintf(tmp_buff, "%3s, %02d %3s %04d %02d:%02d:%02d %c%02d%02d",
 					day_short_names[ta->tm_wday],
 					ta->tm_mday,
 					mon_short_names[ta->tm_mon],
@@ -592,7 +592,7 @@ static void php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 					abs( (ta->tm_gmtoff % 3600) / 60 )
 				);
 #else
-				sprintf(tmp_buff, "%3s, %2d %3s %04d %02d:%02d:%02d %c%02d%02d",
+				sprintf(tmp_buff, "%3s, %02d %3s %04d %02d:%02d:%02d %c%02d%02d",
 					day_short_names[ta->tm_wday],
 					ta->tm_mday,
 					mon_short_names[ta->tm_mon],
@@ -773,7 +773,7 @@ char *php_std_date(time_t t TSRMLS_DC)
 	tm1 = php_gmtime_r(&t, &tmbuf);
 	str = emalloc(81);
 	if (PG(y2k_compliance)) {
-		snprintf(str, 80, "%s, %02d-%s-%04d %02d:%02d:%02d GMT",
+		snprintf(str, 80, "%s, %02d %s %04d %02d:%02d:%02d GMT",
 				day_short_names[tm1->tm_wday],
 				tm1->tm_mday,
 				mon_short_names[tm1->tm_mon],
@@ -781,7 +781,7 @@ char *php_std_date(time_t t TSRMLS_DC)
 				tm1->tm_hour, tm1->tm_min, tm1->tm_sec);
 	} else {
 		snprintf(str, 80, "%s, %02d-%s-%02d %02d:%02d:%02d GMT",
-				day_short_names[tm1->tm_wday],
+				day_full_names[tm1->tm_wday],
 				tm1->tm_mday,
 				mon_short_names[tm1->tm_mon],
 				((tm1->tm_year) % 100),

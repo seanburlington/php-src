@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.19 2005/06/10 05:49:48 wez Exp $ */
+/* $Id: sqlite_driver.c,v 1.20 2005/07/27 02:35:37 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -706,7 +706,9 @@ static int pdo_sqlite_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS
 		goto cleanup;
 	}
 
-	sqlite3_set_authorizer(H->db, authorizer, NULL);
+	if (PG(safe_mode) || (PG(open_basedir) && *PG(open_basedir))) {
+		sqlite3_set_authorizer(H->db, authorizer, NULL);
+	}
 
 	if (driver_options) {
 		timeout = pdo_attr_lval(driver_options, PDO_ATTR_TIMEOUT, timeout TSRMLS_CC);

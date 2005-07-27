@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.132 2005/07/27 15:13:50 hholzgra Exp $ */
+/* $Id: php_ini.c,v 1.133 2005/07/27 15:16:14 tony2001 Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -354,7 +354,7 @@ int php_init_config()
 			if (!realpath(sapi_module.executable_location, binary_location)) {
 				efree(binary_location);
 				binary_location = NULL;			 
-            }
+			}
 		} else {
 			binary_location = NULL;
 		}

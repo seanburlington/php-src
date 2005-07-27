@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.131 2005/07/27 15:12:18 hholzgra Exp $ */
+/* $Id: php_ini.c,v 1.132 2005/07/27 15:13:50 hholzgra Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -362,7 +362,7 @@ int php_init_config()
 		if (binary_location) {
 			char *separator_location = strrchr(binary_location, DEFAULT_SLASH);
 			
-			if (separator_location) {
+			if (separator_location && separator_location != binary_location) {
 				*(separator_location) = 0;
 			}
 			if (*php_ini_search_path) {

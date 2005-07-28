@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.82.2.2 2005/06/29 09:22:20 hyanantha Exp $ */
+/* $Id: mail.c,v 1.82.2.3 2005/07/28 08:48:31 hyanantha Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -42,7 +42,8 @@
 #endif
 
 #ifdef NETWARE
-#include "netware/sysexits.h"   /* For exit status codes like EX_OK */
+#define EX_OK           0       /* successful termination */
+#define EX_TEMPFAIL     75      /* temp failure; user is invited to retry */
 #endif
 
 #define SKIP_LONG_HEADER_SEP(str, pos)										\

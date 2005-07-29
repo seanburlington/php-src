@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.33 2005/06/28 21:47:28 sniper Exp $
+dnl $Id: config.m4,v 1.34 2005/07/29 19:41:00 sniper Exp $
 dnl
 
 PHP_ARG_WITH(informix,for Informix support,
@@ -44,8 +44,20 @@ if test "$PHP_INFORMIX" != "no"; then
   esac
 
   AC_MSG_CHECKING([Informix version])
+  IFX_IBM_VERSION=[`$INFORMIXDIR/bin/esql -V | grep "IBM Informix-ESQL Version" | sed -ne '1 s/\(.*\)ESQL Version \([0-9]*\)\.\([0-9]*\).*/\2\3/p'`]
   IFX_VERSION=[`$INFORMIXDIR/bin/esql -V | grep "ESQL Version" | sed -ne '1 s/\(.*\)ESQL Version \([0-9]*\)\.\([0-9]*\).*/\2\3/p'`]
-  AC_MSG_RESULT($IFX_VERSION)
+
+  if test "$IFX_IBM_VERSION"; then
+    if test $IFX_IBM_VERSION -ge "290" && test $IFX_IBM_VERSION -lt "300"; then
+      IFX_VERSION=960
+    else
+      IFX_VERSION=$IFX_IBM_VERSION
+    fi
+    AC_MSG_RESULT([IBM: $IFX_VERSION])
+  else
+    AC_MSG_RESULT([$IFX_VERSION])
+  fi
+
   AC_DEFINE_UNQUOTED(IFX_VERSION, $IFX_VERSION, [ ])
 
   if test $IFX_VERSION -ge "900"; then

@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.25 2005/07/29 09:50:15 sniper Exp $
+dnl $Id: config.m4,v 1.26 2005/07/29 20:41:52 iliaa Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
@@ -90,7 +90,7 @@ if test "$PHP_PDO_SQLITE" != "no"; then
       AC_DEFINE(SQLITE_PTR_SZ, SIZEOF_CHAR_P, [Size of a pointer])
       PDO_SQLITE_VERSION=`cat $ext_srcdir/sqlite/VERSION`
       PDO_SQLITE_VERSION_NUMBER=`echo $PDO_SQLITE_VERSION | $AWK -F. '{printf("%d%03d%03d", $1, $2, $3)}'`
-      sed -e s/--VERS--/$PDO_SQLITE_VERSION/ -e s/--VERSION-NUMBER--/$PDO_SQLITE_VERSION_NUMBER/ $abs_srcdir/sqlite/src/sqlite.h.in > $ext_builddir/sqlite/src/sqlite3.h
+      sed -e s/--VERS--/$PDO_SQLITE_VERSION/ -e s/--VERSION-NUMBER--/$PDO_SQLITE_VERSION_NUMBER/ $ext_srcdir/sqlite/src/sqlite.h.in > $ext_builddir/sqlite/src/sqlite3.h
 
       touch $ext_srcdir/sqlite/src/parse.c $ext_srcdir/sqlite/src/parse.h
 

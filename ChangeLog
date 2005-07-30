@@ -1,3 +1,62 @@
+2005-07-29  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * regex/regerror.c:
+      switch to ansi declaration so that vs.net 2005 groks it.
+
+2005-07-29  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * ext/informix/config.m4:
+      - Fixed bug #33837 (Informix ESQL version numbering schema changed)
+
+2005-07-29  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * run-tests.php:
+      - Add ENV support (mike)
+
+2005-07-29  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ZendEngine2/zend_vm_def.h
+      ZendEngine2/zend_vm_execute.h:
+      Fixed warning message generated when isset() or empty() are given invalid
+      offset type.
+
+    * NEWS
+      main/php_variables.c:
+      Fixed bug #33904 (input array keys being escaped when magic quotes is off).
+
+2005-07-29  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * main/php_ini.c:
+      - Fixed few logic errors in php*.ini search path creation as documented
+      here:
+      
+         http://fi.php.net/manual/en/configuration.php#configuration.file
+      
+
+    * NEWS
+      ext/standard/dl.c:
+      - Fixed bug #33899 (CLI: setting extension_dir=some/path
+      extension=foobar.so does not work)
+
+    * NEWS
+      ext/standard/math.c:
+      - Fixed bug #33917 (number_format() output with > 1 char separators)
+
+2005-07-29  Anantha Kesari H Y  <hyanantha@novell.com>
+
+    * (PHP_4_4)
+      Zend/acconfig.h
+      ZendEngine2/acconfig.h
+      ZendEngine2/acconfig.h:
+      In NetWare few of the programs like apache2 and ldap use winsock inclusinf
+      sys/socket.h is not desirable.
+      --Kamesh
+
+2005-07-29  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * ZendEngine2/zend_vm_execute.h:
+      update generated file
+
 2005-07-28  Ilia Alshanetsky  <ilia@prohost.org>
 
     * NEWS:
@@ -7325,7 +7384,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2057 2005/07/29 05:38:04 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2058 2005/07/30 05:37:26 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -10726,7 +10785,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2057 2005/07/29 05:38:04 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2058 2005/07/30 05:37:26 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -11207,7 +11266,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2057 2005/07/29 05:38:04 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2058 2005/07/30 05:37:26 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -12681,7 +12740,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2057 2005/07/29 05:38:04 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2058 2005/07/30 05:37:26 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

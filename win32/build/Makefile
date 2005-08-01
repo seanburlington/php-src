@@ -14,7 +14,7 @@
 #  | Author: Wez Furlong <wez@thebrainroom.com>                           |
 #  +----------------------------------------------------------------------+
 #
-# $Id: Makefile,v 1.23.2.5 2005/07/22 18:09:32 wez Exp $
+# $Id: Makefile,v 1.23.2.6 2005/08/01 20:43:04 edink Exp $
 # This is the makefile template for the win32 build
 
 CC="$(CL)"
@@ -30,6 +30,7 @@ build_dirs: $(BUILD_DIR) $(BUILD_DIRS_SUB)
 generated_files: build_dirs Zend\zend_ini_parser.c \
 	Zend\zend_language_parser.c Zend\zend_ini_scanner.c \
 	Zend\zend_language_scanner.c \
+	ext\standard\parsedate.c \
 	$(PHPDEF) $(MCFILE)
 
 $(BUILD_DIR)\$(PHPDLL).def: $(PHP_DLL_DEF_SOURCES)
@@ -46,6 +47,9 @@ Zend\zend_ini_scanner.c: Zend\flex.skl Zend\zend_ini_scanner.l
 
 Zend\zend_language_scanner.c: Zend\flex.skl Zend\zend_language_scanner.l
 	$(FLEX) -i -SZend/flex.skl -Pzend -oZend/zend_language_scanner.c Zend/zend_language_scanner.l
+
+ext\standard\parsedate.c ext\standard\parsedate.h: ext\standard\parsedate.y
+	$(BISON) --output=ext/standard/parsedate.c -v -d ext/standard/parsedate.y 
 
 PHPDLL_RES=$(BUILD_DIR)\$(PHPDLL).res
 

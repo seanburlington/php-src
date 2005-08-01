@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.17 2005/06/28 16:34:18 bfrance Exp $ */
+/* $Id: mod_php5.c,v 1.18 2005/08/01 07:46:54 dmitry Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -707,11 +707,11 @@ static void copy_per_dir_entry(php_per_dir_entry *per_dir_entry)
 
 /* {{{ should_overwrite_per_dir_entry
  */
-static zend_bool should_overwrite_per_dir_entry(HashTable *target_ht, php_per_dir_entry *orig_per_dir_entry, zend_hash_key *hash_key, void *pData)
+static zend_bool should_overwrite_per_dir_entry(HashTable *target_ht, php_per_dir_entry *new_per_dir_entry, zend_hash_key *hash_key, void *pData)
 {
-	php_per_dir_entry *new_per_dir_entry;
+	php_per_dir_entry *orig_per_dir_entry;
 
-	if (zend_hash_find(target_ht, hash_key->arKey, hash_key->nKeyLength, (void **) &new_per_dir_entry)==FAILURE) {
+	if (zend_hash_find(target_ht, hash_key->arKey, hash_key->nKeyLength, (void **) &orig_per_dir_entry)==FAILURE) {
 		return 1; /* does not exist in dest, copy from source */
 	}
 

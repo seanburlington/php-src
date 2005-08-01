@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_xml.c,v 1.22 2004/02/13 15:19:09 dmitry Exp $ */
+/* $Id: php_xml.c,v 1.23 2005/08/01 11:38:02 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/parser.h"
@@ -80,11 +80,16 @@ xmlDocPtr soap_xmlParseFile(const char *filename)
 {
 	xmlParserCtxtPtr ctxt = NULL;
 	xmlDocPtr ret;
+	zend_bool old_allow_url_fopen;
 
 /*
 	xmlInitParser();
 */
+
+	old_allow_url_fopen = PG(allow_url_fopen);
+	PG(allow_url_fopen) = 1;
 	ctxt = xmlCreateFileParserCtxt(filename);
+	PG(allow_url_fopen) = old_allow_url_fopen;
 	if (ctxt) {
 		ctxt->keepBlanks = 0;
 		ctxt->sax->ignorableWhitespace = soap_ignorableWhitespace;

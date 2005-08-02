@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_xml.c,v 1.23 2005/08/01 11:38:02 dmitry Exp $ */
+/* $Id: php_xml.c,v 1.24 2005/08/02 11:15:41 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/parser.h"
@@ -76,7 +76,7 @@ static void soap_Comment(void *ctx, const xmlChar *value)
 {
 }
 
-xmlDocPtr soap_xmlParseFile(const char *filename)
+xmlDocPtr soap_xmlParseFile(const char *filename TSRMLS_DC)
 {
 	xmlParserCtxtPtr ctxt = NULL;
 	xmlDocPtr ret;

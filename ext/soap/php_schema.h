@@ -17,12 +17,12 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.h,v 1.11 2004/02/10 13:41:21 dmitry Exp $ */
+/* $Id: php_schema.h,v 1.12 2005/08/02 11:15:41 dmitry Exp $ */
 
 #ifndef PHP_SCHEMA_H
 #define PHP_SCHEMA_H
 
-int load_schema(sdlCtx *ctx, xmlNodePtr schema);
+int load_schema(sdlCtx *ctx, xmlNodePtr schema TSRMLS_DC);
 void schema_pass2(sdlCtx *ctx);
 
 void delete_model(void *handle);

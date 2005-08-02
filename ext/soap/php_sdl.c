@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.86 2005/07/20 10:21:49 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.87 2005/08/02 11:15:41 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -211,7 +211,7 @@ static void load_wsdl_ex(zval *this_ptr, char *struri, sdlCtx *ctx, int include 
 		return;
 	}
 	
-	wsdl = soap_xmlParseFile(struri);
+	wsdl = soap_xmlParseFile(struri TSRMLS_CC);
 	
 	if (!wsdl) {
 		soap_error1(E_ERROR, "Parsing WSDL: Couldn't load from '%s'", struri);
@@ -225,7 +225,7 @@ static void load_wsdl_ex(zval *this_ptr, char *struri, sdlCtx *ctx, int include 
 		if (include) {
 			xmlNodePtr schema = get_node_ex(root, "schema", XSD_NAMESPACE);
 			if (schema) {
-				load_schema(ctx, schema);
+				load_schema(ctx, schema TSRMLS_CC);
 				return;
 			}
 		}
@@ -251,7 +251,7 @@ static void load_wsdl_ex(zval *this_ptr, char *struri, sdlCtx *ctx, int include 
 
 			while (trav2 != NULL) {
 				if (node_is_equal_ex(trav2, "schema", XSD_NAMESPACE)) {
-					load_schema(ctx, trav2);
+					load_schema(ctx, trav2 TSRMLS_CC);
 				} else if (is_wsdl_element(trav2) && !node_is_equal(trav2,"documentation")) {
 					soap_error1(E_ERROR, "Parsing WSDL: Unexpected WSDL element <%s>", trav2->name);
 				}

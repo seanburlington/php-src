@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_xml.h,v 1.15 2004/02/06 08:01:35 dmitry Exp $ */
+/* $Id: php_xml.h,v 1.16 2005/08/02 11:15:42 dmitry Exp $ */
 
 #ifndef PHP_SOAP_XML_H
 #define PHP_SOAP_XML_H
@@ -30,7 +30,7 @@
 #define node_is_equal(node, name) node_is_equal_ex(node, name, NULL)
 #define attr_is_equal(node, name) attr_is_equal_ex(node, name, NULL)
 
-xmlDocPtr soap_xmlParseFile(const char *filename);
+xmlDocPtr soap_xmlParseFile(const char *filename TSRMLS_DC);
 xmlDocPtr soap_xmlParseMemory(const void *buf, size_t size);
 
 xmlNsPtr attr_find_ns(xmlAttrPtr node);

@@ -1,3 +1,19 @@
+2005-08-01  Edin Kadribasic  <edink@emini.dk>
+
+    * ext/gd/config.w32:
+      Allow building gd on windows systems without t1lib (M. Sisolak) #33620
+
+    * ext/imap/config.w32:
+      Allow building against the latest cclient
+
+2005-08-01  Dmitry Stogov  <dmitry@zend.com>
+
+    * NEWS
+      NEWS
+      sapi/apache/mod_php5.c
+      sapi/apache/mod_php5.c:
+      Fixed bug #33723 (php_value overrides php_admin_value)
+
 2005-07-31  Jani Taskinen  <jani.taskinen@sci.fi>
 
     * ext/xml/tests/bug27908.phpt:
@@ -7415,7 +7431,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2060 2005/08/01 05:39:34 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2061 2005/08/02 05:39:06 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -10816,7 +10832,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2060 2005/08/01 05:39:34 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2061 2005/08/02 05:39:06 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -11297,7 +11313,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2060 2005/08/01 05:39:34 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2061 2005/08/02 05:39:06 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -12771,7 +12787,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2060 2005/08/01 05:39:34 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2061 2005/08/02 05:39:06 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

@@ -4,7 +4,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.c,v 1.28 2005/07/26 22:29:27 iliaa Exp $ */
+/* $Id: parse_date.c,v 1.29 2005/08/03 14:06:46 sniper Exp $ */
 
 #include "timelib.h"
 

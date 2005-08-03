@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_posix.h,v 1.17 2005/05/13 21:38:17 magnus Exp $ */
+/* $Id: php_posix.h,v 1.18 2005/08/03 14:07:42 sniper Exp $ */
 
 #ifndef PHP_POSIX_H
 #define PHP_POSIX_H

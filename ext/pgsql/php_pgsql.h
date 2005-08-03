@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_pgsql.h,v 1.72 2005/07/08 00:40:32 iliaa Exp $ */
+/* $Id: php_pgsql.h,v 1.73 2005/08/03 14:07:41 sniper Exp $ */
 
 #ifndef PHP_PGSQL_H
 #define PHP_PGSQL_H

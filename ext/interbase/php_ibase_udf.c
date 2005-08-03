@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ibase_udf.c,v 1.8 2005/05/07 02:51:52 sniper Exp $ */
+/* $Id: php_ibase_udf.c,v 1.9 2005/08/03 14:07:22 sniper Exp $ */
 
 /**
 * This UDF library adds the ability to call PHP functions from SQL

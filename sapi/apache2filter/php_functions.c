@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_functions.c,v 1.43 2004/10/23 13:48:04 jorton Exp $ */
+/* $Id: php_functions.c,v 1.44 2005/08/03 14:08:46 sniper Exp $ */
 
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS

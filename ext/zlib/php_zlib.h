@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_zlib.h,v 1.41 2004/07/17 00:05:30 pollita Exp $ */
+/* $Id: php_zlib.h,v 1.42 2005/08/03 14:08:23 sniper Exp $ */
 
 #ifndef PHP_ZLIB_H
 #define PHP_ZLIB_H

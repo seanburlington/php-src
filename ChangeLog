@@ -1,3 +1,40 @@
+2005-08-02  Hartmut Holzgraefe  <hartmut@php-groupies.de>
+
+    * run-tests.php:
+      make skipif test use ini options specified by -d command line options
+
+2005-08-02  Dmitry Stogov  <dmitry@zend.com>
+
+    * ZendEngine2/zend_execute_API.c
+      ZendEngine2/zend_execute_API.c:
+      Fixed bug #33942 (the patch to #33156 crash cygwin except cli)
+
+2005-08-02  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * NEWS
+      main/php_variables.c:
+      Fixed bug #33958 (duplicate cookies and magic_quotes=off may cause a crash)
+
+2005-08-02  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * NEWS
+      ZendEngine2/zend_exceptions.c:
+      - Fixed bug #33967 (misuse of Exception constructor doesn\'t display
+      errorfile)
+
+    * tests/lang/bug32924.phpt:
+      fix test when include_path does NOT have . in it
+
+2005-08-02  Dmitry Stogov  <dmitry@zend.com>
+
+    * ZendEngine2/bench.php:
+      Removed warnings
+
+2005-08-02  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * NEWS:
+      BFN
+
 2005-08-01  Edin Kadribasic  <edink@emini.dk>
 
     * ext/gd/config.w32:
@@ -7431,7 +7468,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2061 2005/08/02 05:39:06 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2062 2005/08/03 05:35:46 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -10832,7 +10869,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2061 2005/08/02 05:39:06 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2062 2005/08/03 05:35:46 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -11313,7 +11350,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2061 2005/08/02 05:39:06 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2062 2005/08/03 05:35:46 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -12787,7 +12824,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2061 2005/08/02 05:39:06 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2062 2005/08/03 05:35:46 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

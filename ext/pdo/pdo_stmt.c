@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.117 2005/07/27 14:18:01 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.118 2005/08/03 18:26:16 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1994,6 +1994,10 @@ static void free_statement(pdo_stmt_t *stmt TSRMLS_DC)
 		stmt->columns = NULL;
 	}
 
+	if (stmt->fetch.into && stmt->default_fetch_type == PDO_FETCH_INTO) {
+		FREE_ZVAL(stmt->fetch.into);
+		stmt->fetch.into = NULL;
+	}
 	
 	do_fetch_opt_finish(stmt, 1 TSRMLS_CC);
 

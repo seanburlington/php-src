@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.307 2005/08/03 14:07:54 sniper Exp $ */
+/* $Id: array.c,v 1.308 2005/08/04 10:34:38 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1442,11 +1442,11 @@ PHP_FUNCTION(extract)
 					zval **orig_var;
 
 					if (zend_hash_find(EG(active_symbol_table), final_name.c, final_name.len+1, (void **) &orig_var) == SUCCESS) {
-						zval_ptr_dtor(orig_var);
-
 						SEPARATE_ZVAL_TO_MAKE_IS_REF(entry);
 						zval_add_ref(entry);
 						
+						zval_ptr_dtor(orig_var);
+
 						*orig_var = *entry;
 					} else {
 						if ((*var_array)->refcount > 1) {

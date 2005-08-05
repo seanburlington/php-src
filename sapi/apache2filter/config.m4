@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.40 2005/05/29 23:16:45 sniper Exp $
+dnl $Id: config.m4,v 1.41 2005/08/05 08:14:52 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 2.0 filter-module support via DSO through APXS)
@@ -76,7 +76,7 @@ AC_ARG_WITH(apxs2filter,
                 \$(mkinstalldirs) '$APXS_SYSCONFDIR' && \
                  $APXS -S LIBEXECDIR='$APXS_LIBEXECDIR' \
                        -S SYSCONFDIR='$APXS_SYSCONFDIR' \
-                       -i -a -n php5"
+                       -i -A -n php5"
   fi
 
   case $host_alias in

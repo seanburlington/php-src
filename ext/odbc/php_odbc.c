@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.188 2005/08/03 14:07:34 sniper Exp $ */
+/* $Id: php_odbc.c,v 1.189 2005/08/05 22:37:48 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -314,7 +314,11 @@ static PHP_INI_DISP(display_defPW)
 		PUTS("********");
 #endif
 	} else {
-		PUTS("<i>no value</i>");
+		if (PG(html_errors)) {
+			PUTS("<i>no value</i>");
+		} else {
+			PUTS("no value");
+		}
 	}
 }
 /* }}} */

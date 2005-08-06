@@ -4,11 +4,11 @@ XMLWriter: libxml2 XML Writer, membuffer, flush, text, attribute
 <?php if (!extension_loaded("xmlwriter")) print "skip"; ?>
 --FILE--
 <?php 
-/* $Id: OO_003.phpt,v 1.2 2005/07/03 09:10:41 helly Exp $ */
+/* $Id: OO_003.phpt,v 1.3 2005/08/06 18:23:40 rrichards Exp $ */
 
 $xw = new XMLWriter();
 $xw->openMemory();
-$xw->startDocument('1.0', 'utf8');
+$xw->startDocument('1.0', 'UTF-8');
 $xw->startElement("tag1");
 
 $res = $xw->startAttribute('attr1');
@@ -32,6 +32,6 @@ echo $xw->flush(true);
 ?>
 ===DONE===
 --EXPECT--
-<?xml version="1.0" encoding="utf8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <tag1 attr1="attr1_value" attr2="attr2_value">Test text for tag1<tag2/></tag1>
 ===DONE===

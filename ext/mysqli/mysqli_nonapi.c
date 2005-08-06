@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.51 2005/08/03 14:07:30 sniper Exp $ 
+  $Id: mysqli_nonapi.c,v 1.52 2005/08/06 16:15:53 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -213,7 +213,7 @@ PHP_FUNCTION(mysqli_query)
 	MYSQL_RES 			*result;
 	char				*query = NULL;
 	unsigned int 		query_len;
-	unsigned int 		resultmode = 0;
+	unsigned long 		resultmode = 0;
 
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os|l", &mysql_link, mysqli_link_class_entry, &query, &query_len, &resultmode) == FAILURE) {
 		return;

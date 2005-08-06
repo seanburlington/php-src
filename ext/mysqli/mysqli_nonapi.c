@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.53 2005/08/06 16:38:48 andrey Exp $ 
+  $Id: mysqli_nonapi.c,v 1.54 2005/08/06 16:56:42 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -238,6 +238,7 @@ PHP_FUNCTION(mysqli_query)
 	}
 
 	if (!mysql_field_count(mysql->mysql)) {
+		/* no result set - not a SELECT */
 		if (MyG(report_mode) & MYSQLI_REPORT_INDEX) {
 			php_mysqli_report_index(query, mysql->mysql->server_status TSRMLS_CC);
 		}

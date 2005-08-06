@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.65 2005/08/03 14:08:17 sniper Exp $ */
+/* $Id: php_sybase_db.c,v 1.66 2005/08/06 05:42:42 fmk Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -100,6 +100,8 @@ function_entry sybase_functions[] = {
 	PHP_FE(sybase_affected_rows,		NULL)
 	PHP_FE(sybase_min_error_severity,	NULL)
 	PHP_FE(sybase_min_message_severity,	NULL)
+
+#if !defined(PHP_WIN32) && !defined(HAVE_MSSQL)
 	PHP_FALIAS(mssql_connect,		sybase_connect,			NULL)
 	PHP_FALIAS(mssql_pconnect,		sybase_pconnect,		NULL)
 	PHP_FALIAS(mssql_close,			sybase_close,			NULL)
@@ -119,6 +121,7 @@ function_entry sybase_functions[] = {
 	PHP_FALIAS(mssql_affected_rows,		sybase_affected_rows,			NULL)
 	PHP_FALIAS(mssql_min_error_severity,	sybase_min_error_severity,		NULL)
 	PHP_FALIAS(mssql_min_message_severity,	sybase_min_message_severity,	NULL)
+#endif
 	{NULL, NULL, NULL}
 };
 

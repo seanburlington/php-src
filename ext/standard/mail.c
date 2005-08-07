@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mail.c,v 1.86 2005/08/03 14:08:08 sniper Exp $ */
+/* $Id: mail.c,v 1.87 2005/08/07 22:06:28 sniper Exp $ */
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -185,7 +185,7 @@ PHPAPI int php_mail(char *to, char *subject, char *message, char *headers, char 
 	if (!sendmail_path) {
 #if (defined PHP_WIN32 || defined NETWARE)
 		/* handle old style win smtp sending */
-		if (TSendMail(INI_STR("SMTP"), &tsm_err, &tsm_errmsg, headers, subject, to, message, NULL, NULL, NULL) == FAILURE) {
+		if (TSendMail(INI_STR("SMTP"), &tsm_err, &tsm_errmsg, headers, subject, to, message, NULL, NULL, NULL TSRMLS_CC) == FAILURE) {
 			if (tsm_errmsg) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s", tsm_errmsg);
 				efree(tsm_errmsg);

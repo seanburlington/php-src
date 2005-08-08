@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.151 2005/08/08 22:55:56 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.152 2005/08/08 23:09:06 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -1859,6 +1859,7 @@ PHP_FUNCTION(mssql_next_result)
 
 		result->num_fields = dbnumcols(mssql_ptr->link);
 		result->fields = (mssql_field *) safe_emalloc(sizeof(mssql_field), result->num_fields, 0);
+		result->have_fields = 0;
 		result->num_rows = _mssql_fetch_batch(mssql_ptr, result, retvalue TSRMLS_CC);
 		RETURN_TRUE;
 	}

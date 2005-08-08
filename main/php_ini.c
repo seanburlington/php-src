@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.135 2005/08/03 14:08:34 sniper Exp $ */
+/* $Id: php_ini.c,v 1.136 2005/08/08 16:49:43 sniper Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -242,7 +242,7 @@ static void php_load_function_extension_cb(void *arg TSRMLS_DC)
 	zval *extension = (zval *) arg;
 	zval zval;
 
-	php_dl(extension, MODULE_PERSISTENT, &zval TSRMLS_CC);
+	php_dl(extension, MODULE_PERSISTENT, &zval, 0 TSRMLS_CC);
 }
 /* }}} */
 

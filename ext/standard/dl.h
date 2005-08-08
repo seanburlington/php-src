@@ -18,12 +18,12 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dl.h,v 1.22 2005/08/03 14:07:58 sniper Exp $ */
+/* $Id: dl.h,v 1.23 2005/08/08 16:49:43 sniper Exp $ */
 
 #ifndef DL_H
 #define DL_H
 
-PHPAPI void php_dl(zval *file,int type, zval *return_value TSRMLS_DC);
+PHPAPI void php_dl(zval *file,int type, zval *return_value, int start_now TSRMLS_DC);
 
 /* dynamic loading functions */
 PHP_FUNCTION(dl);

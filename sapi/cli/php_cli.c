@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.128 2005/08/08 08:45:33 hholzgra Exp $ */
+/* $Id: php_cli.c,v 1.129 2005/08/08 16:49:44 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -438,7 +438,7 @@ static void define_command_line_ini_entry(char *arg TSRMLS_DC)
 	if (!strcasecmp(name, "extension")) { /* load function module */
 		zval extension, zval;
 		ZVAL_STRING(&extension, value, 0);
-		php_dl(&extension, MODULE_TEMPORARY, &zval TSRMLS_CC);
+		php_dl(&extension, MODULE_PERSISTENT, &zval, 1 TSRMLS_CC);
 	} else {
 		zend_alter_ini_entry(name, strlen(name)+1, value, strlen(value), PHP_INI_SYSTEM, PHP_INI_STAGE_ACTIVATE);
 	}

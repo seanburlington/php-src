@@ -1,3 +1,35 @@
+2005-08-07  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * NEWS:
+      BFN
+
+    * ext/imap/php_imap.c
+      ext/standard/mail.c
+      win32/sendmail.c
+      win32/sendmail.h:
+      - Fixed bug #29334 (mail() provides incorrect message time header)
+
+    * ext/gd/config.w32:
+      Missing entry
+
+2005-08-07  Hartmut Holzgraefe  <hartmut@php-groupies.de>
+
+    * configure.in:
+       	configure.in scripts/Makefile.frag scripts/phpize.in
+
+    * main/php.h:
+      typo fix
+
+2005-08-07  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * ext/xml/tests/bug26614_libxml.phpt:
+      This test failed because libxml versions differ..
+
+2005-08-07  Derick Rethans  <php@derickrethans.nl>
+
+    * ext/iconv/tests/bug16069.phpt:
+      - Fix skip-if comment.
+
 2005-08-06  Edin Kadribasic  <edink@emini.dk>
 
     * NEWS:
@@ -8291,7 +8323,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2066 2005/08/07 05:35:13 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2067 2005/08/08 05:39:44 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -11692,7 +11724,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2066 2005/08/07 05:35:13 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2067 2005/08/08 05:39:44 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -12173,7 +12205,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2066 2005/08/07 05:35:13 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2067 2005/08/08 05:39:44 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -13647,7 +13679,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2066 2005/08/07 05:35:13 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2067 2005/08/08 05:39:44 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

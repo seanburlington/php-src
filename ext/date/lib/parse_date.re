@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.26 2005/08/03 14:06:50 sniper Exp $ */
+/* $Id: parse_date.re,v 1.27 2005/08/09 21:07:54 derick Exp $ */
 
 #include "timelib.h"
 
@@ -710,6 +710,7 @@ static long timelib_get_zone(char **ptr, int *dst, timelib_time *t, int *tz_not_
 		t->is_localtime = 1;
 		t->zone_type = TIMELIB_ZONETYPE_OFFSET;
 		*tz_not_found = 0;
+		t->dst = 0;
 
 		return -1 * timelib_parse_tz_cor(ptr);
 	} else if (**ptr == '-') {
@@ -717,6 +718,7 @@ static long timelib_get_zone(char **ptr, int *dst, timelib_time *t, int *tz_not_
 		t->is_localtime = 1;
 		t->zone_type = TIMELIB_ZONETYPE_OFFSET;
 		*tz_not_found = 0;
+		t->dst = 0;
 
 		return timelib_parse_tz_cor(ptr);
 	} else {

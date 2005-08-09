@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.h,v 1.20 2005/08/03 14:08:14 sniper Exp $ */
+/* $Id: url.h,v 1.21 2005/08/09 17:58:02 iliaa Exp $ */
 
 #ifndef URL_H
 #define URL_H
@@ -45,6 +45,15 @@ PHP_FUNCTION(urldecode);
 PHP_FUNCTION(rawurlencode);
 PHP_FUNCTION(rawurldecode);
 PHP_FUNCTION(get_headers);
+
+#define PHP_URL_SCHEME 0
+#define PHP_URL_HOST 1
+#define PHP_URL_PORT 2
+#define PHP_URL_USER 3
+#define PHP_URL_PASS 4
+#define PHP_URL_PATH 5
+#define PHP_URL_QUERY 6
+#define PHP_URL_FRAGMENT 7
 
 #endif /* URL_H */
 

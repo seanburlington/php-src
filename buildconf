@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id: buildconf,v 1.64 2005/02/03 17:42:42 sniper Exp $
+# $Id: buildconf,v 1.65 2005/08/09 09:52:45 derick Exp $
 
 eval `grep '^EXTRA_VERSION=' configure.in`
 case "$EXTRA_VERSION" in
@@ -38,7 +38,7 @@ if test "$dev" = "0" -a "$devok" = "0"; then
 fi
 
 if test -z "$ZENDDIR"; then
-  if grep "PHP_MAJOR_VERSION 5" main/php_version.h >/dev/null; then
+  if grep "PHP_MAJOR_VERSION 6" main/php_version.h >/dev/null; then
     v=5
   else
     v=4

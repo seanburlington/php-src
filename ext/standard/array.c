@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.309 2005/08/10 07:43:15 dmitry Exp $ */
+/* $Id: array.c,v 1.310 2005/08/10 08:23:39 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -4252,6 +4252,7 @@ PHP_FUNCTION(array_map)
 			efree(array_pos);
 			return;
 		}
+		SEPARATE_ZVAL_IF_NOT_REF(pargs[i]);
 		args[i] = *pargs[i];
 		array_len[i] = zend_hash_num_elements(Z_ARRVAL_PP(pargs[i]));
 		if (array_len[i] > maxlen) {

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.59 2005/07/20 03:38:32 iliaa Exp $ */
+/* $Id: mysql_driver.c,v 1.60 2005/08/10 23:48:22 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -188,6 +188,13 @@ static int mysql_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, 
 	
 	if (mysql_stmt_prepare(S->stmt, sql, sql_len)) {
 		/* TODO: might need to pull statement specific info here? */
+		/* if the query isn't supported by the protocol, fallback to emulation */
+		if (mysql_errno(H->server) == 1295) {
+			if (nsql) {
+				efree(nsql);
+			}
+			goto fallback;
+		}
 		pdo_mysql_error(dbh);
 		if (nsql) {
 			efree(nsql);
@@ -212,9 +219,9 @@ static int mysql_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, 
 
 	return 1;
 
-#else
-	stmt->supports_placeholders = PDO_PLACEHOLDER_NONE;
+fallback:
 #endif
+	stmt->supports_placeholders = PDO_PLACEHOLDER_NONE;
 	
 	return 1;
 }

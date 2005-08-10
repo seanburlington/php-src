@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.266.2.21 2005/08/04 10:35:36 dmitry Exp $ */
+/* $Id: array.c,v 1.266.2.22 2005/08/10 07:43:39 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2984,6 +2984,15 @@ static void php_array_intersect(INTERNAL_FUNCTION_PARAMETERS, int behavior, int 
 	/* copy the argument array */
 	*return_value = **args[0];
 	zval_copy_ctor(return_value);
+	if (return_value->value.ht == &EG(symbol_table)) {
+		HashTable *ht;
+		zval *tmp;
+
+		ALLOC_HASHTABLE(ht);
+		zend_hash_init(ht, 0, NULL, ZVAL_PTR_DTOR, 0);
+		zend_hash_copy(ht, return_value->value.ht, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
+		return_value->value.ht = ht;		
+	}
 
 	if (behavior == INTERSECT_NORMAL && data_compare_type == INTERSECT_COMP_DATA_USER) {
 		/* array_uintersect() */
@@ -3338,6 +3347,15 @@ static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior, int data_
 	/* copy the argument array */
 	*return_value = **args[0];
 	zval_copy_ctor(return_value);
+	if (return_value->value.ht == &EG(symbol_table)) {
+		HashTable *ht;
+		zval *tmp;
+
+		ALLOC_HASHTABLE(ht);
+		zend_hash_init(ht, 0, NULL, ZVAL_PTR_DTOR, 0);
+		zend_hash_copy(ht, return_value->value.ht, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
+		return_value->value.ht = ht;		
+	}
 
 	if (behavior == DIFF_NORMAL && data_compare_type == DIFF_COMP_DATA_USER) {
 		/* array_udiff() */

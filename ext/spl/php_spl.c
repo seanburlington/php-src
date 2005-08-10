@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.1 2005/08/09 21:13:04 helly Exp $ */
+/* $Id: php_spl.c,v 1.52.2.2 2005/08/10 08:36:46 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -596,7 +596,7 @@ PHP_MINIT_FUNCTION(spl)
 
 PHP_RINIT_FUNCTION(spl) /* {{{ */
 {
-	SPL_G(autoload_extensions) = estrdup(".inc,.php");
+	SPL_G(autoload_extensions) = estrndup(".inc,.php", sizeof(".inc,.php")-1);
 	return SUCCESS;
 } /* }}} */
 

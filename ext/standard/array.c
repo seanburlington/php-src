@@ -22,7 +22,7 @@
 */
 
 
-/* $Id: array.c,v 1.199.2.44.2.4 2005/08/04 10:37:51 dmitry Exp $ */
+/* $Id: array.c,v 1.199.2.44.2.5 2005/08/10 07:44:09 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2622,6 +2622,15 @@ static void php_array_intersect(INTERNAL_FUNCTION_PARAMETERS, int behavior)
 	/* copy the argument array */
 	*return_value = **args[0];
 	zval_copy_ctor(return_value);
+	if (return_value->value.ht == &EG(symbol_table)) {
+		HashTable *ht;
+		zval *tmp;
+
+		ALLOC_HASHTABLE(ht);
+		zend_hash_init(ht, 0, NULL, ZVAL_PTR_DTOR, 0);
+		zend_hash_copy(ht, return_value->value.ht, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
+		return_value->value.ht = ht;		
+	}
 
 	/* go through the lists and look for common values */
 	while (*ptrs[0]) {
@@ -2772,6 +2781,15 @@ static void php_array_diff(INTERNAL_FUNCTION_PARAMETERS, int behavior)
 	/* copy the argument array */
 	*return_value = **args[0];
 	zval_copy_ctor(return_value);
+	if (return_value->value.ht == &EG(symbol_table)) {
+		HashTable *ht;
+		zval *tmp;
+
+		ALLOC_HASHTABLE(ht);
+		zend_hash_init(ht, 0, NULL, ZVAL_PTR_DTOR, 0);
+		zend_hash_copy(ht, return_value->value.ht, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
+		return_value->value.ht = ht;		
+	}
 
 	/* go through the lists and look for values of ptr[0]
 		   that are not in the others */

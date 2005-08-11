@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164 2005/08/03 13:30:56 sniper Exp $ */
+/* $Id: php_reflection.c,v 1.165 2005/08/11 21:32:57 tony2001 Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -1864,7 +1864,7 @@ ZEND_METHOD(reflection_parameter, getDefaultValue)
 
 	zv_copy = precv->op2.u.constant;
 	zv = &zv_copy;
-	zval_update_constant(&zv, (void*)1 TSRMLS_CC);
+	zval_update_constant(&zv, (void*)0 TSRMLS_CC);
 	RETURN_ZVAL(zv, 1, 1);
 }
 /* }}} */

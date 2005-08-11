@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: credits.c,v 1.32 2004/01/08 08:17:30 andi Exp $ */
+/* $Id: credits.c,v 1.36.2.1 2005/08/11 21:41:30 helly Exp $ */
 
 #include "php.h"
 #include "info.h"
@@ -57,9 +57,10 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 		CREDIT_LINE("Zend Scripting Language Engine", "Andi Gutmans, Zeev Suraski");
 		CREDIT_LINE("Extension Module API", "Andi Gutmans, Zeev Suraski, Andrei Zmievski");
 		CREDIT_LINE("UNIX Build and Modularization", "Stig Bakken, Sascha Schumann");
-		CREDIT_LINE("Win32 Port", "Shane Caraveo, Zeev Suraski");
+		CREDIT_LINE("Win32 Port", "Shane Caraveo, Zeev Suraski, Wez Furlong");
 		CREDIT_LINE("Server API (SAPI) Abstraction Layer", "Andi Gutmans, Shane Caraveo, Zeev Suraski");
-		CREDIT_LINE("Streams Abstraction Layer", "Wez Furlong");
+		CREDIT_LINE("Streams Abstraction Layer", "Wez Furlong, Sara Golemon");
+		CREDIT_LINE("PHP Data Objects Layer", "Wez Furlong, Marcus Boerger, Sterling Hughes, George Schlossnagle");
 		php_info_print_table_end();
 	}
 
@@ -85,15 +86,17 @@ PHPAPI void php_print_credits(int flag TSRMLS_DC)
 
 	if (flag & PHP_CREDITS_DOCS) {
 		php_info_print_table_start();
-		php_info_print_table_header(1, "PHP Documentation Team");
-		php_info_print_table_row(1, "Jouni Ahto, Alexander Aulbach, Stig Bakken, Rasmus Lerdorf, Egon Schmid, Lars Torben Wilson, Jim Winstead");
-		php_info_print_table_row(1, "Edited by:  Stig Bakken and Egon Schmid");
+		php_info_print_table_colspan_header(2, "PHP Documentation");
+		CREDIT_LINE("Authors", "Mehdi Achour, Friedhelm Betz, Antony Dovgal, Nuno Lopes, Philip Olson, Georg Richter, Damien Seguy, Jakub Vrana");
+		CREDIT_LINE("Editor", "Gabor Hojtsy");
+		CREDIT_LINE("User Note Maintainers", "Mehdi Achour, Friedhelm Betz, Vincent Gevers, Aidan Lister, Nuno Lopes, Tom Sommer");
+		CREDIT_LINE("Other Contributors", "Previously active authors, editors and other contributors are listed in the manual.");
 		php_info_print_table_end();
 	}
 
 	if (flag & PHP_CREDITS_QA) {
 		php_info_print_table_start();
-		php_info_print_table_header(1, "PHP 5.0 Quality Assurance Team");
+		php_info_print_table_header(1, "PHP 5.1 Quality Assurance Team");
 		php_info_print_table_row(1, "Ilia Alshanetsky, Joerg Behrens, Stefan Esser, Moriyoshi Koizumi, Magnus Maatta, Sebastian Nohn, Derick Rethans, Melvyn Sopacua, Jani Taskinen");
 		php_info_print_table_end();
 	}

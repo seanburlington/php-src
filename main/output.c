@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: output.c,v 1.167 2005/08/03 14:08:32 sniper Exp $ */
+/* $Id: output.c,v 1.168 2005/08/11 23:36:03 andrei Exp $ */
 
 #include "php.h"
 #include "ext/standard/head.h"
@@ -516,7 +516,7 @@ static int php_ob_init(uint initial_size, uint block_size, zval *output_handler,
 			}
 		}
 	} else if (output_handler && output_handler->type == IS_OBJECT) {
-		php_error_docref(NULL TSRMLS_CC, E_ERROR, "No method name given: use ob_start(array($object,'method')) to specify instance $object and the name of a method of class %s to use as output handler", Z_OBJCE_P(output_handler)->name);
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "No method name given: use ob_start(array($object,'method')) to specify instance $object and the name of a method of class %v to use as output handler", Z_OBJCE_P(output_handler)->name);
 		result = FAILURE;
 	} else {
 		result = php_ob_init_named(initial_size, block_size, OB_DEFAULT_HANDLER_NAME, NULL, chunk_size, erase TSRMLS_CC);

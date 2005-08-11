@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_context.h,v 1.11 2005/08/03 14:08:42 sniper Exp $ */
+/* $Id: php_stream_context.h,v 1.12 2005/08/11 23:36:06 andrei Exp $ */
 
 /* Stream context and status notification related definitions */
 
@@ -52,6 +52,9 @@ struct _php_stream_notifier {
 
 struct _php_stream_context {
 	php_stream_notifier *notifier;
+	char *output_encoding;	/* unicode->string character set */
+	char *input_encoding;	/* string->unicode character set */
+	int default_mode;		/* default fopen mode -- PHP_FILE_BINARY vs. PHP_FILE_TEXT -- potentially support other fpc() flags later */
 	zval *options;	/* hash keyed by wrapper family or specific wrapper */
 	zval *links;	/* hash keyed by hostent for connection pooling */
 	int rsrc_id;	/* used for auto-cleanup */

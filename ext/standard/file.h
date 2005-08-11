@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: file.h,v 1.94 2005/08/03 14:07:59 sniper Exp $ */
+/* $Id: file.h,v 1.95 2005/08/11 23:35:58 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.30 1999-06-16 [ssb] */
 
@@ -81,6 +81,10 @@ PHPAPI int php_mkdir(char *dir, long mode TSRMLS_DC);
 #define PHP_FILE_SKIP_EMPTY_LINES 4
 #define PHP_FILE_APPEND 8
 #define PHP_FILE_NO_DEFAULT_CONTEXT 16
+
+/* Specified as explicit values so that file_put_contents() can override context param default mode */
+#define PHP_FILE_TEXT 32
+#define PHP_FILE_BINARY 64
 
 typedef enum _php_meta_tags_token {
 	TOK_EOF = 0,

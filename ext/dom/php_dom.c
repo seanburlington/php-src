@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.73 2005/08/03 14:07:05 sniper Exp $ */
+/* $Id: php_dom.c,v 1.74 2005/08/11 23:35:53 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -402,7 +402,7 @@ zend_object_value dom_objects_store_clone_obj(zval *zobject TSRMLS_DC)
 	obj = &EG(objects_store).object_buckets[handle].bucket.obj;
 	
 	if (obj->clone == NULL) {
-		php_error(E_ERROR, "Trying to clone an uncloneable object of class %s", Z_OBJCE_P(zobject)->name);
+		php_error(E_ERROR, "Trying to clone an uncloneable object of class %v", Z_OBJCE_P(zobject)->name);
 	}		
 
 	obj->clone(obj->object, &new_object TSRMLS_CC);
@@ -420,7 +420,7 @@ zend_object_value dom_objects_store_clone_obj(zval *zobject TSRMLS_DC)
 
 zend_object_value dom_objects_ze1_clone_obj(zval *zobject TSRMLS_DC)
 {
-	php_error(E_ERROR, "Cannot clone object of class %s due to 'zend.ze1_compatibility_mode'", Z_OBJCE_P(zobject)->name);
+	php_error(E_ERROR, "Cannot clone object of class %v due to 'zend.ze1_compatibility_mode'", Z_OBJCE_P(zobject)->name);
 	/* Return zobject->value.obj just to satisfy compiler */
 	return zobject->value.obj;
 }

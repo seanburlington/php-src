@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.52 2005/08/03 14:08:16 sniper Exp $ */
+/* $Id: var_unserializer.re,v 1.53 2005/08/11 23:36:01 andrei Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -286,7 +286,7 @@ static inline int object_custom(UNSERIALIZE_PARAMETER, zend_class_entry *ce)
 	long datalen;
 
 	if(ce->unserialize == NULL) {
-		zend_error(E_WARNING, "Class %s has no unserializer", ce->name);
+		zend_error(E_WARNING, "Class %v has no unserializer", ce->name);
 		return 0;
 	}
 

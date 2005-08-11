@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.h,v 1.28 2005/08/03 14:07:05 sniper Exp $ */
+/* $Id: php_dom.h,v 1.29 2005/08/11 23:35:53 andrei Exp $ */
 
 #ifndef PHP_DOM_H
 #define PHP_DOM_H
@@ -119,7 +119,7 @@ entry = zend_register_internal_class_ex(&ce, parent_ce, NULL TSRMLS_CC);
 #define DOM_GET_OBJ(__ptr, __id, __prtype, __intern) { \
 	__intern = (dom_object *)zend_object_store_get_object(__id TSRMLS_CC); \
 	if (__intern->ptr == NULL || !(__ptr = (__prtype)((php_libxml_node_ptr *)__intern->ptr)->node)) { \
-  		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't fetch %s", __intern->std.ce->name);\
+  		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't fetch %v", __intern->std.ce->name);\
   		RETURN_NULL();\
   	} \
 }

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.157 2005/08/03 14:08:21 sniper Exp $ */
+/* $Id: xml.c,v 1.158 2005/08/11 23:36:01 andrei Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -436,7 +436,7 @@ static zval *xml_call_handler(xml_parser *parser, zval *handler, zend_function *
 					   zend_hash_index_find(Z_ARRVAL_P(handler), 1, (void **) &method) == SUCCESS &&
 					   Z_TYPE_PP(obj) == IS_OBJECT &&
 					   Z_TYPE_PP(method) == IS_STRING) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call handler %s::%s()", Z_OBJCE_PP(obj)->name, Z_STRVAL_PP(method));
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call handler %v::%R()", Z_OBJCE_PP(obj)->name, Z_TYPE_PP(method), Z_UNIVAL_PP(method));
 			} else 
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call handler");
 		}

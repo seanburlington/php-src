@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151 2005/08/03 14:07:45 sniper Exp $ */
+/* $Id: simplexml.c,v 1.152 2005/08/11 23:35:55 andrei Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1128,7 +1128,7 @@ static zend_object_handlers sxe_ze1_object_handlers = {
 
 static zend_object_value sxe_object_ze1_clone(zval *zobject TSRMLS_DC)
 {
-	php_error(E_ERROR, "Cannot clone object of class %s due to 'zend.ze1_compatibility_mode'", Z_OBJCE_P(zobject)->name);
+	php_error(E_ERROR, "Cannot clone object of class %v due to 'zend.ze1_compatibility_mode'", Z_OBJCE_P(zobject)->name);
 	/* Return zobject->value.obj just to satisfy compiler */
 	return zobject->value.obj;
 }
@@ -1736,7 +1736,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.152 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.56 2005/08/11 01:19:10 helly Exp $ */
+/* $Id: php_spl.c,v 1.57 2005/08/12 11:29:32 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -293,7 +293,7 @@ PHP_FUNCTION(spl_autoload)
 	EG(function_state_ptr) = original_function_state_ptr;
 
 	if (!found) {
-		zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Class %s could not be loaded", class_name);
+		zend_throw_exception_ex(U_CLASS_ENTRY(spl_ce_LogicException), 0 TSRMLS_CC, "Class %s could not be loaded", class_name);
 	}
 } /* }}} */
 
@@ -386,7 +386,7 @@ PHP_FUNCTION(spl_autoload_register)
 		}
 		if (!zend_is_callable_ex(zcallable, 0, &func_name, &func_name_len, &alfi.func_ptr, &obj_ptr TSRMLS_CC)) {
 			if (do_throw) {
-				zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Passed array does not specify a callable static method");
+				zend_throw_exception_ex(U_CLASS_ENTRY(spl_ce_LogicException), 0 TSRMLS_CC, "Passed array does not specify a callable static method");
 			}
 			if (func_name) {
 				efree(func_name);
@@ -394,7 +394,7 @@ PHP_FUNCTION(spl_autoload_register)
 			return;
 		} else if (!obj_ptr && !(alfi.func_ptr->common.fn_flags & ZEND_ACC_STATIC)) {
 			if (do_throw) {
-				zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Passed array specifies a non static method but no object");
+				zend_throw_exception_ex(U_CLASS_ENTRY(spl_ce_LogicException), 0 TSRMLS_CC, "Passed array specifies a non static method but no object");
 			}
 			if (func_name) {
 				efree(func_name);
@@ -420,7 +420,7 @@ PHP_FUNCTION(spl_autoload_register)
 		
 		if (!strcmp(lc_name, "spl_autoload_call")) {
 			if (do_throw) {
-				zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Function spl_autoload_call() cannot be registered", func_name);
+				zend_throw_exception_ex(U_CLASS_ENTRY(spl_ce_LogicException), 0 TSRMLS_CC, "Function spl_autoload_call() cannot be registered", func_name);
 			}
 			free_alloca(lc_name);
 			return;
@@ -428,7 +428,7 @@ PHP_FUNCTION(spl_autoload_register)
 
 		if (zend_hash_find(EG(function_table), lc_name, func_name_len+1, (void **) &alfi.func_ptr) == FAILURE) {
 			if (do_throw) {
-				zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Function '%s' not found", func_name);
+				zend_throw_exception_ex(U_CLASS_ENTRY(spl_ce_LogicException), 0 TSRMLS_CC, "Function '%s' not found", func_name);
 			}
 			free_alloca(lc_name);
 			return;

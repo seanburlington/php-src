@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: processinginstruction.c,v 1.17 2005/08/03 14:07:05 sniper Exp $ */
+/* $Id: processinginstruction.c,v 1.18 2005/08/12 11:29:30 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -50,8 +50,8 @@ PHP_METHOD(domprocessinginstruction, __construct)
 	char *name, *value = NULL;
 	int name_len, value_len, name_valid;
 
-	php_set_error_handling(EH_THROW, dom_domexception_class_entry TSRMLS_CC);
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os|s", &id, dom_processinginstruction_class_entry, &name, &name_len, &value, &value_len) == FAILURE) {
+	php_set_error_handling(EH_THROW, U_CLASS_ENTRY(dom_domexception_class_entry) TSRMLS_CC);
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os|s", &id, U_CLASS_ENTRY(dom_processinginstruction_class_entry), &name, &name_len, &value, &value_len) == FAILURE) {
 		php_std_error_handling();
 		return;
 	}

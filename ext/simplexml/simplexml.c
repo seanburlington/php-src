@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.152 2005/08/11 23:35:55 andrei Exp $ */
+/* $Id: simplexml.c,v 1.153 2005/08/12 11:29:31 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,7 +42,7 @@ zend_class_entry *sxe_class_entry = NULL;
 
 ZEND_API zend_class_entry *sxe_get_element_class_entry()
 {
-	return sxe_class_entry;
+	return U_CLASS_ENTRY(sxe_class_entry);
 }
 
 #define SXE_ME(func, arg_info, flags) PHP_ME(simplexml_element, func, arg_info, flags)
@@ -1271,7 +1271,7 @@ PHP_FUNCTION(simplexml_load_file)
 	xmlDocPtr       docp;
 	char           *classname = "";
 	int             classname_len = 0, options=0;
-	zend_class_entry *ce= sxe_class_entry;
+	zend_class_entry *ce= U_CLASS_ENTRY(sxe_class_entry);
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|sl", &filename, &filename_len, &classname, &classname_len, &options) == FAILURE) {
 		return;
@@ -1314,7 +1314,7 @@ PHP_FUNCTION(simplexml_load_string)
 	xmlDocPtr       docp;
 	char           *classname = "";
 	int             classname_len = 0, options=0;
-	zend_class_entry *ce= sxe_class_entry;
+	zend_class_entry *ce= U_CLASS_ENTRY(sxe_class_entry);
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|sl", &data, &data_len, &classname, &classname_len, &options) == FAILURE) {
 		return;
@@ -1600,7 +1600,7 @@ PHP_FUNCTION(simplexml_import_dom)
 	xmlNodePtr		nodep = NULL;
 	char           *classname = "";
 	int             classname_len = 0;
-	zend_class_entry *ce= sxe_class_entry;
+	zend_class_entry *ce= U_CLASS_ENTRY(sxe_class_entry);
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "o|s", &node, &classname, &classname_len) == FAILURE) {
 		return;
@@ -1736,7 +1736,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.152 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.153 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

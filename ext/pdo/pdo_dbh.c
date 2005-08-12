@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82 2005/07/12 02:40:59 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.83 2005/08/12 11:29:30 dmitry Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -512,7 +512,7 @@ static PHP_METHOD(PDO, prepare)
 			RETURN_FALSE;
 		}
 		dbstmt_ce = *pce;
-		if (!instanceof_function(dbstmt_ce, pdo_dbstmt_ce TSRMLS_CC)) {
+		if (!instanceof_function(dbstmt_ce, U_CLASS_ENTRY(pdo_dbstmt_ce) TSRMLS_CC)) {
 			pdo_raise_impl_error(dbh, NULL, "HY000", 
 				"user-supplied statement class must be derived from PDOStatement" TSRMLS_CC);
 			PDO_HANDLE_DBH_ERR();
@@ -538,7 +538,7 @@ static PHP_METHOD(PDO, prepare)
 			ctor_args = NULL;
 		}
 	} else {
-		dbstmt_ce = pdo_dbstmt_ce;
+		dbstmt_ce = U_CLASS_ENTRY(pdo_dbstmt_ce);
 		ctor_args = NULL;
 	}
 
@@ -880,7 +880,7 @@ static PHP_METHOD(PDO, query)
 	
 	PDO_DBH_CLEAR_ERR();
 
-	if (!pdo_stmt_instantiate(dbh, return_value, pdo_dbstmt_ce, NULL TSRMLS_CC)) {
+	if (!pdo_stmt_instantiate(dbh, return_value, U_CLASS_ENTRY(pdo_dbstmt_ce), NULL TSRMLS_CC)) {
 		pdo_raise_impl_error(dbh, NULL, "HY000", "failed to instantiate user supplied statement class" TSRMLS_CC);
 		return;
 	}
@@ -914,7 +914,7 @@ static PHP_METHOD(PDO, query)
 					stmt->executed = 1;
 				}
 				if (ret) {
-					pdo_stmt_construct(stmt, return_value, pdo_dbstmt_ce, NULL TSRMLS_CC);
+					pdo_stmt_construct(stmt, return_value, U_CLASS_ENTRY(pdo_dbstmt_ce), NULL TSRMLS_CC);
 					return;
 				}
 			}

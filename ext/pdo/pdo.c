@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.57 2005/07/27 02:39:11 wez Exp $ */
+/* $Id: pdo.c,v 1.58 2005/08/12 11:29:30 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -57,7 +57,7 @@ zend_class_entry *pdo_exception_ce;
 
 PDO_API zend_class_entry *php_pdo_get_exception(void)
 {
-	return pdo_exception_ce;
+	return U_CLASS_ENTRY(pdo_exception_ce);
 }
 
 zend_class_entry *pdo_dbh_ce, *pdo_dbstmt_ce, *pdo_row_ce;

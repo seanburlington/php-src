@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.h,v 1.10 2005/08/03 14:06:49 sniper Exp $ */
+/* $Id: timelib.h,v 1.11 2005/08/12 23:46:42 wez Exp $ */
 
 #ifndef __TIMELIB_H__
 #define __TIMELIB_H__
@@ -34,7 +34,7 @@
 #define LONG_MIN (- LONG_MAX - 1)
 #endif
 
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) && !defined(strcasecmp)
 #define strcasecmp stricmp
 #endif
 

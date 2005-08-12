@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.449 2005/08/12 10:10:41 sebastian Exp $ */
+/* $Id: string.c,v 1.450 2005/08/12 13:41:15 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4740,13 +4740,13 @@ PHP_FUNCTION(str_repeat)
 	
 	if ( input_str_type == IS_UNICODE ) {
 		*(((UChar *)result)+result_chars-1) = 0;
-		RETURN_UNICODEL((UChar *)result, result_chars, 0);
+		RETURN_UNICODEL((UChar *)result, result_chars-1, 0);
 	} else {
 		*(((char *)result)+result_chars-1) = '\0';
 		if ( input_str_type == IS_BINARY ) {
-			RETURN_BINARYL((char *)result, result_chars, 0);
+			RETURN_BINARYL((char *)result, result_chars-1, 0);
 		} else {
-			RETURN_STRINGL((char *)result, result_chars, 0);
+			RETURN_STRINGL((char *)result, result_chars-1, 0);
 		}
 	}
 }

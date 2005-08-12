@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.312 2005/08/11 23:35:56 andrei Exp $ */
+/* $Id: array.c,v 1.313 2005/08/12 16:49:20 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -2364,7 +2364,7 @@ ukey:
 				} else {
 					(*src_entry)->refcount++;
 
-					zend_u_hash_update(dest, utype, string_key, string_key_len+1,
+					zend_u_hash_update(dest, utype, string_key, string_key_len,
 									 src_entry, sizeof(zval *), NULL);
 				}
 				break;

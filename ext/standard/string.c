@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.448 2005/08/12 05:58:02 sebastian Exp $ */
+/* $Id: string.c,v 1.449 2005/08/12 10:10:41 sebastian Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -4728,8 +4728,8 @@ PHP_FUNCTION(str_repeat)
 		int l=0;
 		memcpy(result, input_str, input_str_len);
 		s = result;
-		e = result + input_str_len;
-		ee = result + result_len;
+		e = (char *) result + input_str_len;
+		ee = (char *) result + result_len;
 
 		while ( e < ee ) {
 			l = (e-s) < (ee-e) ? (e-s) : (ee-e);

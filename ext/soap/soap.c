@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156 2005/08/03 14:07:48 sniper Exp $ */
+/* $Id: soap.c,v 1.157 2005/08/12 14:08:26 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -525,7 +525,7 @@ PHP_MINIT_FUNCTION(soap)
 	/* Register SoapFault class */
 	INIT_CLASS_ENTRY(ce, PHP_SOAP_FAULT_CLASSNAME, soap_fault_functions);
 #ifdef ZEND_ENGINE_2
-	soap_fault_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(), NULL TSRMLS_CC);
+	soap_fault_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C), NULL TSRMLS_CC);
 #else
 	soap_fault_class_entry = zend_register_internal_class(&ce TSRMLS_CC);
 #endif

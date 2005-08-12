@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_sxe.c,v 1.8 2005/08/03 14:07:53 sniper Exp $ */
+/* $Id: spl_sxe.c,v 1.9 2005/08/12 14:08:27 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -146,7 +146,7 @@ static zend_function_entry spl_funcs_SimpleXMLIterator[] = {
 
 SPL_API PHP_MINIT_FUNCTION(spl_sxe) /* {{{ */
 {
-	zend_class_entry *spl_ce_SimpleXML_Element = sxe_get_element_class_entry();
+	zend_class_entry *spl_ce_SimpleXML_Element = sxe_get_element_class_entry(TSRMLS_C);
 
 	if (!spl_ce_SimpleXML_Element) {
 		return SUCCESS; /* SimpleXML must be initialized before */

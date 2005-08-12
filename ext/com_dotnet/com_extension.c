@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_extension.c,v 1.17 2005/08/03 14:06:41 sniper Exp $ */
+/* $Id: com_extension.c,v 1.18 2005/08/12 14:08:22 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -192,7 +192,7 @@ PHP_MINIT_FUNCTION(com_dotnet)
 	php_com_persist_minit(INIT_FUNC_ARGS_PASSTHRU);
 
 	INIT_CLASS_ENTRY(ce, "com_exception", NULL);
-	php_com_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(), NULL TSRMLS_CC);
+	php_com_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(TSRMLS_C), NULL TSRMLS_CC);
 	php_com_exception_class_entry->ce_flags |= ZEND_ACC_FINAL;
 /*	php_com_exception_class_entry->constructor->common.fn_flags |= ZEND_ACC_PROTECTED; */
 

@@ -1,6 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | PHP Version 5                                                        |
+   | PHP Version 6                                                        |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_filter.c,v 1.1 2005/08/11 23:36:01 andrei Exp $ */
+/* $Id: unicode_filter.c,v 1.2 2005/08/12 09:10:04 sniper Exp $ */
 
 
 #include "php.h"

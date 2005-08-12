@@ -1,5 +1,5 @@
 dnl
-dnl $ Id: $
+dnl $Id: config.m4,v 1.2 2005/08/12 09:10:04 sniper Exp $
 dnl
 
 PHP_ARG_ENABLE(unicode, whether to enable unicode functions,

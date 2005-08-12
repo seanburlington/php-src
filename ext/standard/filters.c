@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filters.c,v 1.45 2005/08/11 23:35:58 andrei Exp $ */
+/* $Id: filters.c,v 1.46 2005/08/12 23:59:59 wez Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -279,12 +279,13 @@ static php_stream_filter_status_t strfilter_strip_tags_filter(
 	php_strip_tags_filter *inst = (php_strip_tags_filter *) thisfilter->abstract;
 
 	while (buckets_in->head) {
+		bucket = php_stream_bucket_make_writeable(buckets_in->head TSRMLS_CC);
+
 		if (bucket->is_unicode) {
 			/* Uh oh! */
 			return PSFS_ERR_FATAL;
 		}
 
-		bucket = php_stream_bucket_make_writeable(buckets_in->head TSRMLS_CC);
 		consumed = bucket->buf.str.len;
 		
 		bucket->buf.str.len = php_strip_tags(bucket->buf.str.val, bucket->buf.str.len, &(inst->state), (char *)inst->allowed_tags, inst->allowed_tags_len);

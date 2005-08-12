@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.74 2005/08/12 11:29:32 dmitry Exp $ */
+/* $Id: spl_array.c,v 1.75 2005/08/12 12:14:31 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -692,7 +692,7 @@ static int spl_array_skip_protected(spl_array_object *intern TSRMLS_DC) /* {{{ *
 
 	if (Z_TYPE_P(intern->array) == IS_OBJECT) {
 		do {
-			if (zend_hash_get_current_key_ex(aht, &string_key, &string_length, &num_key, 0, &intern->pos) == UG(unicode)?HASH_KEY_IS_UNICODE:HASH_KEY_IS_STRING) {
+			if (zend_hash_get_current_key_ex(aht, &string_key, &string_length, &num_key, 0, &intern->pos) == (UG(unicode)?HASH_KEY_IS_UNICODE:HASH_KEY_IS_STRING)) {
 				if (!string_length || 
 				    ((UG(unicode) && ((UChar*)string_key)[0]) ||
 				     (!UG(unicode) && string_key[0]))) {

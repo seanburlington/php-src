@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.78 2005/08/12 14:08:27 sebastian Exp $ */
+/* $Id: spl_iterators.c,v 1.79 2005/08/12 20:58:28 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -952,7 +952,7 @@ SPL_METHOD(dual_it, key)
 		} else if (intern->current.key_type == HASH_KEY_IS_BINARY) {
 			RETURN_BINARYL(intern->current.str_key, intern->current.str_key_len-1, 1);
 		} else if (intern->current.key_type == HASH_KEY_IS_UNICODE) {
-			RETURN_UNICODEL(intern->current.str_key, intern->current.str_key_len-1, 1);
+			RETURN_UNICODEL((UChar *)intern->current.str_key, intern->current.str_key_len-1, 1);
 		} else {
 			RETURN_LONG(intern->current.int_key);
 		}

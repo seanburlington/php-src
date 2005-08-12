@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.106 2005/08/11 23:36:05 andrei Exp $ */
+/* $Id: php_variables.c,v 1.107 2005/08/12 13:27:38 dmitry Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -581,7 +581,6 @@ SAPI_API SAPI_TREAT_DATA_FUNC(php_default_treat_data)
 				int val_len;
 				unsigned int new_val_len;
 
-				*val++ = '\0';
 				val_len = php_url_decode(val, strlen(val));
 				val = estrndup(val, val_len);
 				if (sapi_module.input_filter(arg, var, &val, val_len, &new_val_len TSRMLS_CC)) {

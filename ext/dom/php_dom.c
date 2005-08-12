@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.76 2005/08/12 14:08:22 sebastian Exp $ */
+/* $Id: php_dom.c,v 1.77 2005/08/12 14:57:58 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -244,17 +244,17 @@ static zval **dom_get_property_ptr_ptr(zval *object, zval *member TSRMLS_DC)
 	zend_object_handlers *std_hnd;
 	int ret = FAILURE;
 
- 	if (member->type != IS_STRING) {
+ 	if (member->type != IS_STRING && member->type != IS_UNICODE) {
 		tmp_member = *member;
 		zval_copy_ctor(&tmp_member);
-		convert_to_string(&tmp_member);
+		convert_to_text(&tmp_member);
 		member = &tmp_member;
 	}
 
 	obj = (dom_object *)zend_objects_get_address(object TSRMLS_CC);
 
 	if (obj->prop_handler != NULL) {
-		ret = zend_hash_find(obj->prop_handler, Z_STRVAL_P(member), Z_STRLEN_P(member)+1, (void **) &hnd);
+		ret = zend_u_hash_find(obj->prop_handler, Z_TYPE_P(member), Z_UNIVAL_P(member), Z_UNILEN_P(member)+1, (void **) &hnd);
 	}
 	if (ret == FAILURE) {
 		std_hnd = zend_get_std_object_handlers();
@@ -277,10 +277,10 @@ zval *dom_read_property(zval *object, zval *member, int type TSRMLS_DC)
 	zend_object_handlers *std_hnd;
 	int ret;
 
- 	if (member->type != IS_STRING) {
+ 	if (member->type != IS_STRING && member->type != IS_UNICODE) {
 		tmp_member = *member;
 		zval_copy_ctor(&tmp_member);
-		convert_to_string(&tmp_member);
+		convert_to_text(&tmp_member);
 		member = &tmp_member;
 	}
 
@@ -288,7 +288,7 @@ zval *dom_read_property(zval *object, zval *member, int type TSRMLS_DC)
 	obj = (dom_object *)zend_objects_get_address(object TSRMLS_CC);
 
 	if (obj->prop_handler != NULL) {
-		ret = zend_hash_find(obj->prop_handler, Z_STRVAL_P(member), Z_STRLEN_P(member)+1, (void **) &hnd);
+		ret = zend_u_hash_find(obj->prop_handler, Z_TYPE_P(member), Z_UNIVAL_P(member), Z_UNILEN_P(member)+1, (void **) &hnd);
 	}
 	if (ret == SUCCESS) {
 		ret = hnd->read_func(obj, &retval TSRMLS_CC);
@@ -319,10 +319,10 @@ void dom_write_property(zval *object, zval *member, zval *value TSRMLS_DC)
 	zend_object_handlers *std_hnd;
 	int ret;
 
- 	if (member->type != IS_STRING) {
+ 	if (member->type != IS_STRING && member->type != IS_UNICODE) {
 		tmp_member = *member;
 		zval_copy_ctor(&tmp_member);
-		convert_to_string(&tmp_member);
+		convert_to_text(&tmp_member);
 		member = &tmp_member;
 	}
 
@@ -330,7 +330,7 @@ void dom_write_property(zval *object, zval *member, zval *value TSRMLS_DC)
 	obj = (dom_object *)zend_objects_get_address(object TSRMLS_CC);
 
 	if (obj->prop_handler != NULL) {
-		ret = zend_hash_find((HashTable *)obj->prop_handler, Z_STRVAL_P(member), Z_STRLEN_P(member)+1, (void **) &hnd);
+		ret = zend_u_hash_find((HashTable *)obj->prop_handler, Z_TYPE_P(member), Z_UNIVAL_P(member), Z_UNILEN_P(member)+1, (void **) &hnd);
 	}
 	if (ret == SUCCESS) {
 		hnd->write_func(obj, value TSRMLS_CC);

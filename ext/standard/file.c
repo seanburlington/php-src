@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.410 2005/08/11 23:35:57 andrei Exp $ */
+/* $Id: file.c,v 1.411 2005/08/12 19:27:45 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -1109,13 +1109,13 @@ PHPAPI PHP_FUNCTION(fgetc)
 		RETVAL_FALSE;
 	} else {
 		if (is_unicode) {
-			UChar *ubuf = buf;
+			UChar *ubuf = (UChar *)buf;
 			int32_t num_u16 = num_bytes >> 1;
 			ubuf[num_u16] = 0;
-			RETURN_UNICODEL(ubuf, num_u16, 0);
+			RETURN_UNICODEL(ubuf, num_u16, 1);
 		} else {
 			buf[1] = 0;
-			RETURN_STRINGL(buf, 1, 0);
+			RETURN_STRINGL(buf, 1, 1);
 		}
 	}
 }
@@ -1868,7 +1868,7 @@ PHPAPI PHP_FUNCTION(fread)
 
 		buf[num_bytes] = 0;
 		buf[num_bytes + 1] = 0;
-		RETURN_UNICODEL(buf, num_bytes >> 1, 0);
+		RETURN_UNICODEL((UChar *)buf, num_bytes >> 1, 0);
 	} else {
 		buf[num_bytes] = 0;
 		if (PG(magic_quotes_runtime)) {

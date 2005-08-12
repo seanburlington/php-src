@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.20 2005/07/27 02:35:37 iliaa Exp $ */
+/* $Id: sqlite_driver.c,v 1.21 2005/08/12 23:32:31 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -75,7 +75,7 @@ int _pdo_sqlite_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *file, int li
 	}
 
 	if (!dbh->methods) {
-		zend_throw_exception_ex(php_pdo_get_exception(), 0 TSRMLS_CC, "SQLSTATE[%s] [%d] %s",
+		zend_throw_exception_ex(php_pdo_get_exception(TSRMLS_C), 0 TSRMLS_CC, "SQLSTATE[%s] [%d] %s",
 				*pdo_err, einfo->errcode, einfo->errmsg);
 	}
 	
@@ -692,7 +692,7 @@ static int pdo_sqlite_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS
 	filename = make_filename_safe(dbh->data_source TSRMLS_CC);
 
 	if (!filename) {
-		zend_throw_exception_ex(php_pdo_get_exception(), 0 TSRMLS_CC,
+		zend_throw_exception_ex(php_pdo_get_exception(TSRMLS_C), 0 TSRMLS_CC,
 			"safe_mode/open_basedir prohibits opening %s",
 			dbh->data_source);
 		goto cleanup;

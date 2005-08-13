@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.728 2005/08/11 23:35:57 andrei Exp $ */
+/* $Id: basic_functions.c,v 1.729 2005/08/13 10:16:04 helly Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -531,6 +531,9 @@ function_entry basic_functions[] = {
 	PHP_FALIAS(is_real,				is_float,								NULL)
 	PHP_FE(is_numeric,														NULL)
 	PHP_FE(is_string,														NULL)
+	PHP_FE(is_unicode,													NULL)
+	PHP_FE(is_binary,														NULL)
+	PHP_FE(is_buffer,														NULL)
 	PHP_FE(is_array,														NULL)
 	PHP_FE(is_object,														NULL)
 	PHP_FE(is_scalar,														NULL)

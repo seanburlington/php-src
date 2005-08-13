@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.30 2005/08/03 14:06:41 sniper Exp $ */
+/* $Id: com_handlers.c,v 1.31 2005/08/13 19:03:58 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -522,6 +522,7 @@ static int com_object_cast(zval *readobj, zval *writeobj, int type, int should_f
 			vt = VT_BOOL;
 			break;
 		case IS_STRING:
+		case IS_UNICODE:
 			vt = VT_BSTR;
 			break;
 		default:

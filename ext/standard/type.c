@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.32 2005/08/13 10:16:04 helly Exp $ */
+/* $Id: type.c,v 1.33 2005/08/13 10:19:31 helly Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -309,7 +309,7 @@ PHP_FUNCTION(is_binary)
 /* }}} */
 
 /* {{{ proto bool is_buffer(mixed var)
-   Returns true if variable is a ascii, unicode or binary string */
+   Returns true if variable is a standard, unicode or binary string */
 PHP_FUNCTION(is_buffer)
 {
 	pval **arg;

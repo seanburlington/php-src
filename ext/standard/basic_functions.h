@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.139 2005/08/03 14:07:57 sniper Exp $ */
+/* $Id: basic_functions.h,v 1.140 2005/08/13 02:23:29 wez Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -173,7 +173,7 @@ typedef struct _php_basic_globals {
 	long page_uid;
 	long page_gid;
 	long page_inode;
-	long page_mtime;
+	time_t page_mtime;
 
 	/* filestat.c && main/streams/streams.c */
 	char *CurrentStatFile, *CurrentLStatFile;

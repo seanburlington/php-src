@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: pageinfo.c,v 1.40 2005/08/03 14:08:09 sniper Exp $ */
+/* $Id: pageinfo.c,v 1.41 2005/08/13 02:23:29 wez Exp $ */
 
 #include "php.h"
 #include "pageinfo.h"
@@ -158,7 +158,7 @@ PHP_FUNCTION(getmyinode)
 }
 /* }}} */
 
-PHPAPI long php_getlastmod(TSRMLS_D)
+PHPAPI time_t php_getlastmod(TSRMLS_D)
 {
 	php_statpage(TSRMLS_C);
 	return BG(page_mtime);

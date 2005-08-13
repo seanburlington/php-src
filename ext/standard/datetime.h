@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: datetime.h,v 1.23 2005/08/03 14:07:58 sniper Exp $ */
+/* $Id: datetime.h,v 1.24 2005/08/13 12:33:00 wez Exp $ */
 
 #ifndef DATETIME_H
 #define DATETIME_H
@@ -31,7 +31,7 @@ PHP_FUNCTION(checkdate);
 PHP_FUNCTION(strptime);
 #endif 
 
-PHPAPI int php_idate(char format, int timestamp, int gm);
+PHPAPI int php_idate(char format, time_t timestamp, int gm);
 PHPAPI char *php_std_date(time_t t TSRMLS_DC);
 
 #endif /* DATETIME_H */

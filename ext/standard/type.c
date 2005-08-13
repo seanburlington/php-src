@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: type.c,v 1.33 2005/08/13 10:19:31 helly Exp $ */
+/* $Id: type.c,v 1.34 2005/08/13 21:18:47 helly Exp $ */
 
 #include "php.h"
 #include "php_incomplete_class.h"
@@ -285,7 +285,7 @@ PHP_FUNCTION(is_float)
 /* }}} */
 
 /* {{{ proto bool is_string(mixed var)
-   Returns true if variable is a standard string */
+   Returns true if variable is a native string */
 PHP_FUNCTION(is_string)
 {
 	php_is_type(INTERNAL_FUNCTION_PARAM_PASSTHRU, IS_STRING);
@@ -309,7 +309,7 @@ PHP_FUNCTION(is_binary)
 /* }}} */
 
 /* {{{ proto bool is_buffer(mixed var)
-   Returns true if variable is a standard, unicode or binary string */
+   Returns true if variable is a native, unicode or binary string */
 PHP_FUNCTION(is_buffer)
 {
 	pval **arg;

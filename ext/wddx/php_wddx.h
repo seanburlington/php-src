@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx.h,v 1.18 2005/08/03 14:08:20 sniper Exp $ */
+/* $Id: php_wddx.h,v 1.19 2005/08/14 00:46:51 sniper Exp $ */
 
 #ifndef PHP_WDDX_H
 #define PHP_WDDX_H
@@ -31,7 +31,7 @@ PHP_FUNCTION(wddx_serialize_vars);
 PHP_FUNCTION(wddx_packet_start);
 PHP_FUNCTION(wddx_packet_end);
 PHP_FUNCTION(wddx_add_vars);
-PHP_FUNCTION(wddx_deserialize);
+PHP_FUNCTION(wddx_unserialize);
 
 #else
 

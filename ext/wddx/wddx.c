@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.121 2005/08/14 00:46:51 sniper Exp $ */
+/* $Id: wddx.c,v 1.122 2005/08/14 20:24:34 iliaa Exp $ */
 
 #include "php.h"
 
@@ -106,7 +106,7 @@ function_entry wddx_functions[] = {
 	PHP_FE(wddx_packet_end, NULL)
 	PHP_FE(wddx_add_vars, NULL)
 	PHP_FE(wddx_unserialize, NULL)
-	PHP_FALIAS(wddx_unserialize, wddx_deserialize, NULL)
+	PHP_FALIAS(wddx_deserialize, wddx_unserialize, NULL)
 	{NULL, NULL, NULL}
 };
 /* }}} */

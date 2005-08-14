@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.29 2005/08/14 20:12:51 helly Exp $ */
+/* $Id: spprintf.c,v 1.30 2005/08/14 21:04:52 helly Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -847,6 +847,7 @@ PHPAPI int vuspprintf(char **pbuf, size_t max_len, const char *format, va_list a
 	if (max_len && xbuf.len > max_len) {
 		xbuf.len = max_len;
 	}
+	smart_str_appendc(&xbuf, '\0'); /* we need \0\0 as termination */
 	smart_str_0(&xbuf);
 		
 	*pbuf = xbuf.c;

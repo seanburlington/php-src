@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.28 2005/08/14 20:11:05 helly Exp $ */
+/* $Id: spprintf.c,v 1.29 2005/08/14 20:12:51 helly Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -128,7 +128,7 @@
 
 #define INS_STRING(unicode, s_uni, xbuf, s, slen)	\
 do { 												\
-	if (unicode) {
+	if (unicode) {									\
 		size_t newlen, p, sz = 2*(slen);			\
 		smart_str_alloc(xbuf, (sz), 0); 			\
 		if (s_uni) {								\

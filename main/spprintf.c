@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.30 2005/08/14 21:04:52 helly Exp $ */
+/* $Id: spprintf.c,v 1.31 2005/08/15 07:19:10 dmitry Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -782,7 +782,7 @@ fmt_error:
 				*--s = prefix_char;
 				s_len++;
 			}
-			if (adjust_width && adjust == RIGHT && min_width > u_len) {
+			if (adjust_width && adjust == RIGHT && min_width > s_len) {
 				if (pad_char == '0' && prefix_char != NUL) {
 					INS_CHAR(unicode, xbuf, *s);
 					s++;

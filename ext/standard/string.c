@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.451 2005/08/12 16:46:38 tony2001 Exp $ */
+/* $Id: string.c,v 1.452 2005/08/15 08:11:35 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -713,17 +713,18 @@ static UChar *php_u_trim(UChar *c, int32_t len, UChar *what, int32_t what_len, z
 	if ( start < len ) {
 		if ( return_value ) {
 			RETVAL_UNICODEL(c+start, end-start+1, 1);
+			return NULL;
 		} else {
 			return eustrndup(c+start, end-start+1);
 		}
 	} else { /* Trimmed the whole string */
 		if ( return_value ) {
 			RETVAL_EMPTY_UNICODE();
+			return NULL;
 		} else {
 			return (USTR_MAKE(""));
 		}
 	}
-	return (USTR_MAKE(""));
 }
 /* }}} */
 

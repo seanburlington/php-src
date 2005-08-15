@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.245.2.2 2005/06/07 13:37:13 derick Exp $ */
+/* $Id: info.c,v 1.245.2.3 2005/08/15 16:06:28 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -135,10 +135,25 @@ static void php_print_gpcse_array(char *name, uint name_length TSRMLS_DC)
 				PUTS(" => ");
 			}
 			if (Z_TYPE_PP(tmp) == IS_ARRAY) {
+				zval *tmp3;
+
+				MAKE_STD_ZVAL(tmp3);
+
 				if (!sapi_module.phpinfo_as_text) {
 					PUTS("<pre>");
 				}
+				php_start_ob_buffer(NULL, 0, 1 TSRMLS_CC);
+				
 				zend_print_zval_r(*tmp, 0 TSRMLS_CC);
+				
+				php_ob_get_buffer(tmp3 TSRMLS_CC);
+				php_end_ob_buffer(0, 0 TSRMLS_CC);
+				
+				elem_esc = php_info_html_esc(Z_STRVAL_P(tmp3) TSRMLS_CC);
+				PUTS(elem_esc);
+				efree(elem_esc);
+				zval_ptr_dtor(&tmp3);
+
 				if (!sapi_module.phpinfo_as_text) {
 					PUTS("</pre>");
 				}

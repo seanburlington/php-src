@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.452 2005/08/15 08:11:35 dmitry Exp $ */
+/* $Id: string.c,v 1.453 2005/08/15 19:12:59 johannes Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1097,7 +1097,7 @@ PHP_FUNCTION(explode)
 
 	if ( str_len == 0 ) {
 		if ( str_type == IS_UNICODE ) {
-			add_next_index_unicodel(return_value, USTR_MAKE(""), sizeof("")-1, 1);
+			add_next_index_unicodel(return_value, USTR_MAKE(""), sizeof("")-1, 0);
 		} else if ( str_type == IS_BINARY ) {
 			add_next_index_binaryl(return_value, "", sizeof("")-1, 1);
 		} else {

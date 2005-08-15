@@ -23,12 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.229 2005/08/15 22:30:38 sniper Exp $ */
-
-/*
- * TODO:
- * - do not test PEAR components if base class and/or component class cannot be instanciated
- */
+/* $Id: run-tests.php,v 1.230 2005/08/15 22:34:37 sniper Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will

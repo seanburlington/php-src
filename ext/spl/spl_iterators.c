@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.80 2005/08/15 17:29:04 dmitry Exp $ */
+/* $Id: spl_iterators.c,v 1.81 2005/08/15 19:16:30 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1507,7 +1507,6 @@ SPL_METHOD(CachingIterator, __toString)
 		zval_copy_ctor(return_value);
 		convert_to_text(return_value);
 		INIT_PZVAL(return_value);
-//		RETURN_STRINGL(Z_STRVAL_P(intern->u.caching.zstr), Z_STRLEN_P(intern->u.caching.zstr), 1);
 	} else {
 		RETURN_NULL();
 	}

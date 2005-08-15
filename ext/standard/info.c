@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.245 2004/05/02 13:23:30 helly Exp $ */
+/* $Id: info.c,v 1.249.2.1 2005/08/15 16:01:53 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -135,10 +135,25 @@ static void php_print_gpcse_array(char *name, uint name_length TSRMLS_DC)
 				PUTS(" => ");
 			}
 			if (Z_TYPE_PP(tmp) == IS_ARRAY) {
+				zval *tmp3;
+
+				MAKE_STD_ZVAL(tmp3);
+
 				if (!sapi_module.phpinfo_as_text) {
 					PUTS("<pre>");
 				}
+				php_start_ob_buffer(NULL, 0, 1 TSRMLS_CC);
+				
 				zend_print_zval_r(*tmp, 0 TSRMLS_CC);
+				
+				php_ob_get_buffer(tmp3 TSRMLS_CC);
+				php_end_ob_buffer(0, 0 TSRMLS_CC);
+				
+				elem_esc = php_info_html_esc(Z_STRVAL_P(tmp3) TSRMLS_CC);
+				PUTS(elem_esc);
+				efree(elem_esc);
+				zval_ptr_dtor(&tmp3);
+
 				if (!sapi_module.phpinfo_as_text) {
 					PUTS("</pre>");
 				}
@@ -406,7 +421,9 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		if (expose_php && !sapi_module.phpinfo_as_text) {
 			PUTS("<a href=\"http://www.php.net/\"><img border=\"0\" src=\"");
 			if (SG(request_info).request_uri) {
-				PUTS(SG(request_info).request_uri);
+				char *elem_esc = php_info_html_esc(SG(request_info).request_uri TSRMLS_CC);
+				PUTS(elem_esc);
+				efree(elem_esc);
 			}
 			PUTS("?=");
 			logo_guid = php_logo_guid();
@@ -465,6 +482,12 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		php_info_print_table_row(2, "Thread Safety", "enabled" );
 #else
 		php_info_print_table_row(2, "Thread Safety", "disabled" );
+#endif
+
+#if USE_ZEND_ALLOC
+		php_info_print_table_row(2, "Zend Memory Manager", "enabled" );
+#else
+		php_info_print_table_row(2, "Zend Memory Manager", "disabled" );
 #endif
 
 #if HAVE_IPV6
@@ -543,6 +566,47 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 				php_info_print_table_row(2, "Stream Socket Transports", "disabled"); /* ?? */
 			}
 		}
+
+		{
+			HashTable *stream_filter_hash;
+			char *filter_name, *filter_buf = NULL;
+			int filter_name_len, filter_buf_len = 0, filter_buf_size = 0;
+			ulong num_key;
+
+			if ((stream_filter_hash = php_get_stream_filters_hash())) {
+				for(zend_hash_internal_pointer_reset(stream_filter_hash);
+					zend_hash_get_current_key_ex(stream_filter_hash, &filter_name, &filter_name_len, &num_key, 0, NULL) == HASH_KEY_IS_STRING;
+					zend_hash_move_forward(stream_filter_hash)) {
+					if (filter_buf_len + filter_name_len + 3 > filter_buf_size) {
+						while (filter_buf_len + filter_name_len + 3 > filter_buf_size) {
+							filter_buf_size += 256;
+						}
+						if (filter_buf) {
+							filter_buf = erealloc(filter_buf, filter_buf_size);
+						} else {
+							filter_buf = emalloc(filter_buf_size);
+						}
+					}
+					if (filter_buf_len > 0) {
+						filter_buf[filter_buf_len++] = ',';
+						filter_buf[filter_buf_len++] = ' ';
+					}
+					memcpy(filter_buf + filter_buf_len, filter_name, filter_name_len);
+					filter_buf_len += filter_name_len;
+					filter_buf[filter_buf_len] = '\0';
+				}
+				if (filter_buf) {
+					php_info_print_table_row(2, "Registered Stream Filters", filter_buf);
+					efree(filter_buf);
+				} else {
+					/* Any chances we will ever hit this? */
+					php_info_print_table_row(2, "Registered Stream Filters", "no filters registered");
+				}
+			} else {
+				/* Any chances we will ever hit this? */
+				php_info_print_table_row(2, "Stream Filters", "disabled"); /* ?? */
+			}
+		}
 		
 		php_info_print_table_end();
 
@@ -551,7 +615,9 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		if (expose_php && !sapi_module.phpinfo_as_text) {
 			PUTS("<a href=\"http://www.zend.com/\"><img border=\"0\" src=\"");
 			if (SG(request_info).request_uri) {
-				PUTS(SG(request_info).request_uri);
+				char *elem_esc = php_info_html_esc(SG(request_info).request_uri TSRMLS_CC);
+				PUTS(elem_esc);
+				efree(elem_esc);
 			}
 			PUTS("?="ZEND_LOGO_GUID"\" alt=\"Zend logo\" /></a>\n");
 		}
@@ -570,7 +636,9 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 		php_info_print_hr();
 		PUTS("<h1><a href=\"");
 		if (SG(request_info).request_uri) {
-			PUTS(SG(request_info).request_uri);
+			char *elem_esc = php_info_html_esc(SG(request_info).request_uri TSRMLS_CC);
+			PUTS(elem_esc);
+			efree(elem_esc);
 		}
 		PUTS("?=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000\">");
 		PUTS("PHP Credits");

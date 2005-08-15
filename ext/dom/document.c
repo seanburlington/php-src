@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: document.c,v 1.69 2005/08/12 11:29:29 dmitry Exp $ */
+/* $Id: document.c,v 1.70 2005/08/15 17:13:15 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1503,9 +1503,8 @@ static xmlDocPtr dom_document_parser(zval *id, int mode, char *source, int optio
 	if (keep_blanks == 0 && ! (options & XML_PARSE_NOBLANKS)) {
 		options |= XML_PARSE_NOBLANKS;
 	}
-	if (options > 0) {
-		xmlCtxtUseOptions(ctxt, options);
-	}
+
+	xmlCtxtUseOptions(ctxt, options);
 #else
 	ctxt->validate = validate;
     ctxt->loadsubset = (resolve_externals * XML_COMPLETE_ATTRS);

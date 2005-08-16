@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.579.2.4 2005/08/16 10:59:51 zeev Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.579.2.5 2005/08/16 12:01:40 zeev Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -42,7 +42,7 @@ AC_CONFIG_HEADER(main/php_config.h)
 MAJOR_VERSION=5
 MINOR_VERSION=1
 RELEASE_VERSION=0
-EXTRA_VERSION="RC1"
+EXTRA_VERSION="-dev"
 VERSION="$MAJOR_VERSION.$MINOR_VERSION.$RELEASE_VERSION$EXTRA_VERSION"
 
 dnl Define where extension directories are located in the configure context

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.245.2.4 2005/08/15 23:23:51 iliaa Exp $ */
+/* $Id: info.c,v 1.245.2.5 2005/08/16 00:25:46 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -213,7 +213,7 @@ void php_info_print_style(TSRMLS_D)
 PHPAPI char *php_info_html_esc(char *string TSRMLS_DC)
 {
 	int new_len;
-	return php_escape_html_entities(string, strlen(string), &new_len, 0, ENT_NOQUOTES, NULL TSRMLS_CC);
+	return php_escape_html_entities(string, strlen(string), &new_len, 0, ENT_QUOTES, NULL TSRMLS_CC);
 }
 /* }}} */
 

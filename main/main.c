@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.604.2.21 2005/07/16 12:14:44 hyanantha Exp $ */
+/* $Id: main.c,v 1.604.2.22 2005/08/16 18:11:34 helly Exp $ */
 
 /* {{{ includes
  */
@@ -652,6 +652,9 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 			case E_COMPILE_ERROR:
 			case E_PARSE:
 				/* fatal errors are real errors and cannot be made exceptions */
+				break;
+			case E_STRICT:
+				/* for the sake of BC to old damaged code */
 				break;
 			case E_NOTICE:
 			case E_USER_NOTICE:

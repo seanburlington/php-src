@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.121 2005/08/16 16:29:13 dmitry Exp $ */
+/* $Id: pdo_stmt.c,v 1.122 2005/08/16 19:43:23 andrei Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -800,7 +800,7 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 					fetch_value(stmt, &val, i++ TSRMLS_CC);
 					if (Z_TYPE(val) != IS_NULL) {
 						convert_to_text(&val);
-						if (zend_u_lookup_class(Z_TYPE(val), Z_STRVAL(val), Z_STRLEN(val), &cep TSRMLS_CC) == FAILURE) {
+						if (zend_u_lookup_class(Z_TYPE(val), Z_UNIVAL(val), Z_UNILEN(val), &cep TSRMLS_CC) == FAILURE) {
 							stmt->fetch.cls.ce = ZEND_STANDARD_CLASS_DEF_PTR;
 						} else {
 							stmt->fetch.cls.ce = *cep;

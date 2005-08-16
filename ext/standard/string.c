@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.455 2005/08/16 12:04:13 rolland Exp $ */
+/* $Id: string.c,v 1.456 2005/08/16 16:57:59 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1147,8 +1147,6 @@ PHPAPI void php_implode(zval *delim, zval *arr, zval *retval)
 	int				numelems, i;
 	HashPosition	pos;
 	zval			**tmp;
-	void			*elem;
-	int32_t			elem_chars, elem_len;
 
 	if (Z_TYPE_P(delim) != IS_UNICODE && Z_TYPE_P(delim) != IS_BINARY) {
 		convert_to_string_ex(&delim);

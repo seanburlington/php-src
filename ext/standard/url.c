@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id: url.c,v 1.81.2.4 2005/05/26 03:56:34 iliaa Exp $ */
+/* $Id: url.c,v 1.81.2.5 2005/08/16 14:15:43 iliaa Exp $ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -107,7 +107,8 @@ PHPAPI php_url *php_url_parse_ex(char const *str, int length)
 		/* validate scheme */
 		p = s;
 		while (p < e) {
-			if (!isalnum(*p)) {
+			/* scheme = 1*[ lowalpha | digit | "+" | "-" | "." ] */
+			if (!isalpha(*p) && !isdigit(*p) && *p != '+' && *p != '.' && *p != '-') {
 				if (e + 1 < ue) {
 					goto parse_port;
 				} else {

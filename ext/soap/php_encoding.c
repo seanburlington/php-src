@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103 2005/08/08 09:53:53 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.104 2005/08/16 20:15:21 helly Exp $ */
 
 #include <time.h>
 
@@ -1162,9 +1162,11 @@ static zval *to_zval_object(encodeTypePtr type, xmlNodePtr data)
 	xmlNodePtr trav;
 	sdlPtr sdl;
 	sdlTypePtr sdlType = type->sdl_type;
-	zend_class_entry *ce = ZEND_STANDARD_CLASS_DEF_PTR;
+	zend_class_entry *ce;
 	zend_bool redo_any = 0;
 	TSRMLS_FETCH();
+	
+	ce = ZEND_STANDARD_CLASS_DEF_PTR;
 
 	if (SOAP_GLOBAL(class_map) && type->type_str) {
 		zval             **classname;

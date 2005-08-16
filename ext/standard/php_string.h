@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.88 2005/08/11 23:35:59 andrei Exp $ */
+/* $Id: php_string.h,v 1.89 2005/08/16 06:02:55 rolland Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -132,7 +132,7 @@ PHPAPI char *php_str_to_str_ex(char *haystack, int length, char *needle,
 		int needle_len, char *str, int str_len, int *_new_length, int case_sensitivity, int *replace_count);
 PHPAPI char *php_str_to_str(char *haystack, int length, char *needle,
 		int needle_len, char *str, int str_len, int *_new_length);
-PHPAPI char *php_trim(char *c, int len, char *what, int what_len, zval *return_value, int mode TSRMLS_DC);
+PHPAPI char *php_trim(char *c, int len, char *what, int what_len, zend_uchar str_type, zval *return_value, int mode TSRMLS_DC);
 PHPAPI size_t php_strip_tags(char *rbuf, int len, int *state, char *allow, int allow_len);
 PHPAPI int php_char_to_str_ex(char *str, uint len, char from, char *to, int to_len, pval *result, int case_sensitivity, int *replace_count);
 PHPAPI int php_char_to_str(char *str, uint len, char from, char *to, int to_len, pval *result);

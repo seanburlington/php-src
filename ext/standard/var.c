@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.208 2005/08/14 21:26:01 helly Exp $ */
+/* $Id: var.c,v 1.209 2005/08/16 09:25:03 dmitry Exp $ */
 
 
 
@@ -380,7 +380,7 @@ PHPAPI void php_debug_zval_dump(zval **struc, int level, int verbose TSRMLS_DC)
 		/* temporary, for debugging */
 		php_printf("%sunicode(%d) ", COMMON, u_countChar32((*struc)->value.ustr.val, (*struc)->value.ustr.len));
 		php_var_dump_unicode((*struc)->value.ustr.val, (*struc)->value.ustr.len, verbose TSRMLS_CC);
-		php_printf("\" refcount(%u)\n", Z_REFCOUNT_PP(struc));
+		php_printf(" refcount(%u)\n", Z_REFCOUNT_PP(struc));
 		break;
 	case IS_ARRAY:
 		myht = Z_ARRVAL_PP(struc);

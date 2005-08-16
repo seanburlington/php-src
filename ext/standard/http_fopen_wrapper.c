@@ -19,7 +19,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.99 2005/08/03 14:08:04 sniper Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.100 2005/08/16 06:04:59 rolland Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -265,7 +265,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 		Z_STRLEN_PP(tmpzval)) {
 		/* Remove newlines and spaces from start and end,
 		   php_trim will estrndup() */
-		tmp = php_trim(Z_STRVAL_PP(tmpzval), Z_STRLEN_PP(tmpzval), NULL, 0, NULL, 3 TSRMLS_CC);
+		tmp = php_trim(Z_STRVAL_PP(tmpzval), Z_STRLEN_PP(tmpzval), NULL, 0, IS_STRING, NULL, 3 TSRMLS_CC);
 		if (strlen(tmp) > 0) {
 			if (!header_init) { /* Remove post headers for redirects */
 				int l = strlen(tmp);
@@ -291,7 +291,7 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 					}
 				}
 				efree(tmp_c);
-				tmp_c = php_trim(tmp, strlen(tmp), NULL, 0, NULL, 3 TSRMLS_CC);
+				tmp_c = php_trim(tmp, strlen(tmp), NULL, 0, IS_STRING, NULL, 3 TSRMLS_CC);
 				efree(tmp);
 				tmp = tmp_c;
 			}

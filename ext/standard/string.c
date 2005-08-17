@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.459 2005/08/17 07:59:28 dmitry Exp $ */
+/* $Id: string.c,v 1.460 2005/08/17 10:26:02 rolland Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -610,7 +610,7 @@ static int php_expand_u_trim_range(UChar **range, int32_t *range_len TSRMLS_DC)
 		c = input[0];
 		if ( (input+3 < end) && input[1] == '.' && input[2] == '.' && input[3] >= c ) {
 			tmp_len += (input[3] - c + 1);
-			tmp = (UChar32 *)erealloc(tmp, tmp_len*sizeof(UChar));
+			tmp = (UChar32 *)erealloc(tmp, tmp_len*sizeof(UChar32));
 			for ( ; c <= input[3] ; c++ ) {
 				if ( U_IS_UNICODE_CHAR(c) ) tmp[idx++] = c;
 			}

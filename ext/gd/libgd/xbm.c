@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xbm.c,v 1.7 2005/08/03 14:07:14 sniper Exp $ */
+/* $Id: xbm.c,v 1.8 2005/08/18 12:54:32 sniper Exp $ */
 
 #include <stdio.h>
 #include <math.h>
@@ -147,7 +147,7 @@ gdImagePtr gdImageCreateFromXbm(FILE * fd)
 		}
 	}
 
-	php_gd_error("EOF before image was complete\n");
+	php_gd_error("EOF before image was complete");
 	gdImageDestroy(im);
 	return 0;
 }

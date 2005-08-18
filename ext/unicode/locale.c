@@ -14,7 +14,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: locale.c,v 1.2 2005/08/12 09:10:04 sniper Exp $ */ 
+/* $Id: locale.c,v 1.3 2005/08/18 12:56:36 sniper Exp $ */ 
 
 #include "php_unicode.h"
 
@@ -65,7 +65,7 @@ PHP_FUNCTION(icu_loc_set_default)
 	 * validation.
 	 */
 	if (U_FAILURE(status)) {
-		php_error(E_WARNING, "Invalid locale: %s\n", locale);
+		php_error(E_WARNING, "Invalid locale: %s", locale);
 		RETURN_FALSE;
 	}
 	/* don't bother if locales are identical */

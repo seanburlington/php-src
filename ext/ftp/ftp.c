@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.103 2004/03/31 20:43:40 iliaa Exp $ */
+/* $Id: ftp.c,v 1.112.2.1 2005/08/18 12:37:35 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,13 +42,9 @@
 #ifdef USE_WINSOCK    /* Modified to use Winsock (NOVSOCK2.H), atleast for now */
 #include <novsock2.h>
 #else
-#ifdef NEW_LIBC
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#else
-#include <sys/socket.h>
-#endif
 #endif
 #else
 #ifdef HAVE_SYS_TYPES_H
@@ -77,7 +73,7 @@
 #include "ext/standard/fsock.h"
 
 /* Additional headers for NetWare */
-#if defined(NETWARE) && defined(NEW_LIBC) && !defined(USE_WINSOCK)
+#if defined(NETWARE) && !defined(USE_WINSOCK)
 #include <sys/select.h>
 #endif
 
@@ -140,7 +136,7 @@ ftp_open(const char *host, short port, long timeout_sec TSRMLS_DC)
 
 	ftp->fd = php_network_connect_socket_to_host(host,
 			(unsigned short) (port ? port : 21), SOCK_STREAM,
-			0, &tv, NULL, NULL TSRMLS_CC);
+			0, &tv, NULL, NULL, NULL, 0 TSRMLS_CC);
 	if (ftp->fd == -1) {
 		goto bail;
 	}
@@ -152,7 +148,7 @@ ftp_open(const char *host, short port, long timeout_sec TSRMLS_DC)
 	size = sizeof(ftp->localaddr);
 	memset(&ftp->localaddr, 0, size);
 	if (getsockname(ftp->fd, (struct sockaddr*) &ftp->localaddr, &size) == -1) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "getsockname failed: %s (%d)\n", strerror(errno), errno);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "getsockname failed: %s (%d)", strerror(errno), errno);
 		goto bail;
 	}
 
@@ -812,7 +808,7 @@ ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, 
 
 	if (resumepos > 0) {
 		if (resumepos > 2147483647) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "PHP cannot handle files greater then 2147483647 bytes.\n");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "PHP cannot handle files greater then 2147483647 bytes.");
 			goto bail;
 		}
 		sprintf(arg, "%u", resumepos);
@@ -842,7 +838,9 @@ ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, 
 		}
 
 		if (type == FTPTYPE_ASCII) {
+#ifndef PHP_WIN32
 			char *s;
+#endif
 			char *ptr = data->buf;
 			char *e = ptr + rcvd;
 			/* logic depends on the OS EOL
@@ -850,26 +848,15 @@ ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, 
 			 * Everything Else \n
 			 */
 #ifdef PHP_WIN32
-			while ((s = strpbrk(ptr, "\r\n"))) {
-				if (*s == '\n') {
-					php_stream_putc(outstream, '\r');
-				} else if (*s == '\r' && *(s + 1) == '\n') {
-					s++;
-				}
-				s++;
-				php_stream_write(outstream, ptr, (s - ptr));
-				if (*(s - 1) == '\r') {
-					php_stream_putc(outstream, '\n');
-				}
-				ptr = s;
-			}
+			php_stream_write(outstream, ptr, (e - ptr));
+			ptr = e;
 #else
-			while ((s = memchr(ptr, '\r', (e - ptr)))) {
+			while (e > ptr && (s = memchr(ptr, '\r', (e - ptr)))) {
 				php_stream_write(outstream, ptr, (s - ptr));
 				if (*(s + 1) == '\n') {
 					s++;
+					php_stream_putc(outstream, '\n');
 				}
-				php_stream_putc(outstream, '\n');
 				ptr = s + 1;
 			}
 #endif
@@ -918,7 +905,7 @@ ftp_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type, i
 
 	if (startpos > 0) {
 		if (startpos > 2147483647) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "PHP cannot handle files with a size greater then 2147483647 bytes.\n");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "PHP cannot handle files with a size greater then 2147483647 bytes.");
 			goto bail;
 		}
 		sprintf(arg, "%u", startpos);
@@ -1236,19 +1223,11 @@ ftp_getresp(ftpbuf_t *ftp)
 int
 my_send(ftpbuf_t *ftp, php_socket_t s, void *buf, size_t len)
 {
-	fd_set		write_set;
-	struct timeval	tv;
 	int		n, size, sent;
 
 	size = len;
 	while (size) {
-		tv.tv_sec = ftp->timeout_sec;
-		tv.tv_usec = 0;
-
-		FD_ZERO(&write_set);
-		FD_SET(s, &write_set);
-
-		n = select(s + 1, NULL, &write_set, NULL, &tv);
+		n = php_pollfd_for_ms(s, POLLOUT, ftp->timeout_sec * 1000);
 
 		if (n < 1) {
 
@@ -1288,17 +1267,9 @@ my_send(ftpbuf_t *ftp, php_socket_t s, void *buf, size_t len)
 int
 my_recv(ftpbuf_t *ftp, php_socket_t s, void *buf, size_t len)
 {
-	fd_set		read_set;
-	struct timeval	tv;
 	int		n, nr_bytes;
 
-	tv.tv_sec = ftp->timeout_sec;
-	tv.tv_usec = 0;
-
-	FD_ZERO(&read_set);
-	FD_SET(s, &read_set);
-
-	n = select(s + 1, &read_set, NULL, NULL, &tv);
+	n = php_pollfd_for_ms(s, PHP_POLLREADABLE, ftp->timeout_sec * 1000);
 	if (n < 1) {
 #if !defined(PHP_WIN32) && !(defined(NETWARE) && defined(USE_WINSOCK))
 		if (n == 0) {
@@ -1328,16 +1299,9 @@ my_recv(ftpbuf_t *ftp, php_socket_t s, void *buf, size_t len)
 int
 data_available(ftpbuf_t *ftp, php_socket_t s)
 {
-	fd_set		read_set;
-	struct timeval	tv;
 	int		n;
 
-	tv.tv_sec = 0;
-	tv.tv_usec = 1;
-
-	FD_ZERO(&read_set);
-	FD_SET(s, &read_set);
-	n = select(s + 1, &read_set, NULL, NULL, &tv);
+	n = php_pollfd_for_ms(s, PHP_POLLREADABLE, 1000);
 	if (n < 1) {
 #if !defined(PHP_WIN32) && !(defined(NETWARE) && defined(USE_WINSOCK))
 		if (n == 0) {
@@ -1355,16 +1319,9 @@ data_available(ftpbuf_t *ftp, php_socket_t s)
 int
 data_writeable(ftpbuf_t *ftp, php_socket_t s)
 {
-	fd_set		write_set;
-	struct timeval	tv;
 	int		n;
 
-	tv.tv_sec = 0;
-	tv.tv_usec = 1;
-
-	FD_ZERO(&write_set);
-	FD_SET(s, &write_set);
-	n = select(s + 1, NULL, &write_set, NULL, &tv);
+	n = php_pollfd_for_ms(s, POLLOUT, 1000);
 	if (n < 1) {
 #ifndef PHP_WIN32
 		if (n == 0) {
@@ -1383,16 +1340,9 @@ data_writeable(ftpbuf_t *ftp, php_socket_t s)
 int
 my_accept(ftpbuf_t *ftp, php_socket_t s, struct sockaddr *addr, socklen_t *addrlen)
 {
-	fd_set		accept_set;
-	struct timeval	tv;
 	int		n;
 
-	tv.tv_sec = ftp->timeout_sec;
-	tv.tv_usec = 0;
-	FD_ZERO(&accept_set);
-	FD_SET(s, &accept_set);
-
-	n = select(s + 1, &accept_set, NULL, NULL, &tv);
+	n = php_pollfd_for_ms(s, PHP_POLLREADABLE, ftp->timeout_sec * 1000);
 	if (n < 1) {
 #if !defined(PHP_WIN32) && !(defined(NETWARE) && defined(USE_WINSOCK))
 		if (n == 0) {
@@ -1434,7 +1384,7 @@ ftp_getdata(ftpbuf_t *ftp TSRMLS_DC)
 	sa = (struct sockaddr *) &ftp->localaddr;
 	/* bind/listen */
 	if ((fd = socket(sa->sa_family, SOCK_STREAM, 0)) == -1) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "socket() failed: %s (%d)\n", strerror(errno), errno);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "socket() failed: %s (%d)", strerror(errno), errno);
 		goto bail;
 	}
 
@@ -1449,7 +1399,7 @@ ftp_getdata(ftpbuf_t *ftp TSRMLS_DC)
 		tv.tv_sec = ftp->timeout_sec;
 		tv.tv_usec = 0;
 		if (php_connect_nonb(fd, (struct sockaddr*) &ftp->pasvaddr, size, &tv) == -1) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_connect_nonb() failed: %s (%d)\n", strerror(errno), errno);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "php_connect_nonb() failed: %s (%d)", strerror(errno), errno);
 			goto bail;
 		}
 
@@ -1467,17 +1417,17 @@ ftp_getdata(ftpbuf_t *ftp TSRMLS_DC)
 	size = php_sockaddr_size(&addr);
 
 	if (bind(fd, (struct sockaddr*) &addr, size) == -1) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "bind() failed: %s (%d)\n", strerror(errno), errno);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "bind() failed: %s (%d)", strerror(errno), errno);
 		goto bail;
 	}
 
 	if (getsockname(fd, (struct sockaddr*) &addr, &size) == -1) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "getsockname() failed: %s (%d)\n", strerror(errno), errno);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "getsockname() failed: %s (%d)", strerror(errno), errno);
 		goto bail;
 	}
 
 	if (listen(fd, 5) == -1) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "listen() failed: %s (%d)\n", strerror(errno), errno);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "listen() failed: %s (%d)", strerror(errno), errno);
 		goto bail;
 	}
 
@@ -1752,7 +1702,7 @@ ftp_nb_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t typ
 		 * since php is 32 bit by design, we bail out with warning
 		 */
 		if (resumepos > 2147483647) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "PHP cannot handle files greater then 2147483648 bytes.\n");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "PHP cannot handle files greater then 2147483648 bytes.");
 			goto bail;
 		}
 		sprintf(arg, "%u", resumepos);
@@ -1870,7 +1820,7 @@ ftp_nb_put(ftpbuf_t *ftp, const char *path, php_stream *instream, ftptype_t type
 	}
 	if (startpos > 0) {
 		if (startpos > 2147483647) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "PHP cannot handle files with a size greater then 2147483647 bytes.\n");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "PHP cannot handle files with a size greater then 2147483647 bytes.");
 			goto bail;
 		}
 		sprintf(arg, "%u", startpos);

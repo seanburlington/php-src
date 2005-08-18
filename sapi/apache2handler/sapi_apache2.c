@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.57 2005/08/03 14:08:48 sniper Exp $ */
+/* $Id: sapi_apache2.c,v 1.58 2005/08/18 01:11:13 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -458,6 +458,7 @@ static int php_handler(request_rec *r)
 	/* apply_config() needs r in some cases, so allocate server_context early */
 	ctx = SG(server_context);
 	if (ctx == NULL) {
+normal:
 		ctx = SG(server_context) = apr_pcalloc(r->pool, sizeof(*ctx));
 		/* register a cleanup so we clear out the SG(server_context)
 		 * after each request. Note: We pass in the pointer to the
@@ -536,6 +537,11 @@ zend_first_try {
 		}
 	} else {
 		parent_req = ctx->r;
+		/* check if comming due to ErrorDocument */
+		if (parent_req != HTTP_OK) {
+			parent_req = NULL;
+			goto normal;
+		}
 		ctx->r = r;
 		brigade = ctx->brigade;
 	}

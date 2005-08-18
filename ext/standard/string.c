@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.465 2005/08/18 05:53:46 rolland Exp $ */
+/* $Id: string.c,v 1.466 2005/08/18 22:37:22 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2962,7 +2962,7 @@ static void php_u_ucwords(zval *ustr, zval *retval)
 	codepts[0] = u_toupper(codepts[0]);
 	for (i = 1; i < len ; i++) {
 		if (u_isWhitespace(codepts[i-1]) == TRUE) {
-			codepts[i] = u_toupper(codepts[i]);
+			codepts[i] = u_totitle(codepts[i]);
 		}
 	}
 

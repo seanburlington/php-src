@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.44 2004/04/19 17:41:39 wez Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.45.2.1 2005/08/18 13:34:41 sniper Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -132,14 +132,14 @@ static void php_stream_apply_filter_list(php_stream *stream, char *filterlist, i
 			if ((temp_filter = php_stream_filter_create(p, NULL, php_stream_is_persistent(stream) TSRMLS_CC))) {
 				php_stream_filter_append(&stream->readfilters, temp_filter);
 			} else {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to create filter (%s)\n", p);
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to create filter (%s)", p);
 			}
 		}
 		if (write_chain) {
 			if ((temp_filter = php_stream_filter_create(p, NULL, php_stream_is_persistent(stream) TSRMLS_CC))) {
 				php_stream_filter_append(&stream->writefilters, temp_filter);
 			} else {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to create filter (%s)\n", p);
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to create filter (%s)", p);
 			}
 		}
 		p = php_strtok_r(NULL, "|", &token);

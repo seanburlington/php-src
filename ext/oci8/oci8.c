@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.256 2004/07/12 07:40:05 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.269.2.1 2005/08/18 13:34:36 sniper Exp $ */
 
 /* TODO list:
  *
@@ -126,7 +126,7 @@ MUTEX_T mx_lock;
 #define CALL_OCI(call) \
 { \
 	if (OCI(in_call)) { \
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCI8 Recursive call!\n"); \
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCI8 Recursive call!"); \
 		exit(-1); \
 	} else { \
 		OCI(in_call)=1; \
@@ -139,7 +139,7 @@ MUTEX_T mx_lock;
 { \
 	if (OCI(in_call)) { \
 		retcode=-1; \
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCI8 Recursive call!\n"); \
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCI8 Recursive call!"); \
 		exit(-1); \
 	} else { \
 		OCI(in_call)=1; \
@@ -576,21 +576,21 @@ static void php_oci_init_globals(php_oci_globals *oci_globals_p TSRMLS_DC)
 	);
 }
 
-static int _sessions_pcleanup(zend_llist *session_list TSRMLS_DC)
+static int _sessions_pcleanup(zend_llist *session_list)
 {
 	zend_llist_destroy(session_list);
 
 	return 1;
 }
 
-static int _session_pcleanup(oci_session *session TSRMLS_DC)
+static int _session_pcleanup(oci_session *session)
 {
 	_oci_close_session(session);
 
 	return 1;
 }
 
-static int _server_pcleanup(oci_server *server TSRMLS_DC)
+static int _server_pcleanup(oci_server *server)
 {
 	_oci_close_server(server);
 
@@ -786,7 +786,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.256 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.1 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);
@@ -880,12 +880,12 @@ static int _oci_bind_post_exec(void *data TSRMLS_DC)
 
 	if (bind->indicator == -1) { /* NULL */
 		zval *val = bind->zval;
-		if (Z_TYPE_P(val) == IS_STRING && (Z_STRVAL_P(val) != empty_string)) {
+		if (Z_TYPE_P(val) == IS_STRING) {
 			*Z_STRVAL_P(val) = '\0'; /* XXX avoid warning in debug mode */
 		}
 		zval_dtor(val);
 		ZVAL_NULL(val);
-	} else if (Z_TYPE_P(bind->zval) == IS_STRING && (Z_STRVAL_P(bind->zval) != empty_string)) {
+	} else if (Z_TYPE_P(bind->zval) == IS_STRING) {
 		Z_STRVAL_P(bind->zval) = erealloc(Z_STRVAL_P(bind->zval), Z_STRLEN_P(bind->zval)+1);
 		Z_STRVAL_P(bind->zval)[ Z_STRLEN_P(bind->zval) ] = '\0';
 	}
@@ -1015,17 +1015,7 @@ static void _oci_conn_list_dtor(oci_connection *connection TSRMLS_DC)
 			)
 		);
 	}
-
-	if (connection->session) {
-		/* close associated session when destructed */
-		zend_list_delete(connection->session->num);
-	}
-
-	if (connection->descriptors) {
-		zend_hash_destroy(connection->descriptors);
-		efree(connection->descriptors);
-	}
-
+	
 	if (connection->pError) {
 		CALL_OCI(
 			OCIHandleFree(
@@ -1033,6 +1023,16 @@ static void _oci_conn_list_dtor(oci_connection *connection TSRMLS_DC)
 				(ub4) OCI_HTYPE_ERROR
 			)
 		);
+	}
+
+	if (connection->session && connection->session->exclusive) {
+		/* close associated session when destructed */
+		zend_list_delete(connection->session->num);
+	}
+
+	if (connection->descriptors) {
+		zend_hash_destroy(connection->descriptors);
+		efree(connection->descriptors);
 	}
 
 	oci_debug("END   _oci_conn_list_dtor: id=%d",connection->id);
@@ -2673,13 +2673,13 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 	smart_str_0(&hashed_details);
 
 	if (!exclusive) {
+		mutex_lock(mx_lock);
 		if (zend_ts_hash_find(persistent_sessions, hashed_details.c, hashed_details.len+1, (void **) &session_list) != SUCCESS) {
 			zend_llist tmp;
 			/* first session, set up a session list */
 			zend_llist_init(&tmp, sizeof(oci_session), (llist_dtor_func_t) _session_pcleanup, 1);
 			zend_ts_hash_update(persistent_sessions, hashed_details.c, hashed_details.len+1, &tmp, sizeof(zend_llist), (void **) &session_list);
 		} else {
-			mutex_lock(mx_lock);
 
 			/* session list found, search for an idle session or an already opened session by the current thread */
 			session = zend_llist_get_first(session_list);
@@ -2692,7 +2692,6 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 				session->thread = thread_id();
 			}
 
-			mutex_unlock(mx_lock);
 		}
 
 		if (session) {
@@ -2701,12 +2700,14 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 					session->persistent = 1;
 				}
 				smart_str_free_ex(&hashed_details, 1);
+				mutex_unlock(mx_lock);
 				return session;
 			} else {
 				_oci_close_session(session);
 				/* breakthru to open */
 			}
 		}
+		mutex_unlock(mx_lock);
 	}
 
 	session = ecalloc(1,sizeof(oci_session));
@@ -2862,7 +2863,12 @@ static oci_session *_oci_open_session(oci_server* server,char *username,char *pa
 
 	if (OCI(error) != OCI_SUCCESS) {
 		oci_error(OCI(pError), "OCISessionBegin", OCI(error));
-		goto CLEANUP;
+		/* OCISessionBegin returns OCI_SUCCESS_WITH_INFO when
+		 * user's password has expired, but is still usable.
+		 * */
+		if (OCI(error) != OCI_SUCCESS_WITH_INFO) {
+			goto CLEANUP;
+		}
 	}
 
 	/* Free Temporary Service Context */
@@ -2906,7 +2912,7 @@ static int _session_compare(void *a, void *b)
 	oci_session *sess1 = (oci_session*) a;
 	oci_session *sess2 = (oci_session*) b;
 	
-	return sess1->num = sess2->num;
+	return sess1->num == sess2->num;
 }
 
 static void _oci_close_session(oci_session *session)
@@ -3009,6 +3015,15 @@ static void _oci_close_session(oci_session *session)
 		}
 	mutex_unlock(mx_lock);
 
+#ifdef HAVE_OCI_9_2
+	/* free environment handle (and fix bug #29652 with growing .msb FD number under weirdie Solarises) */
+	CALL_OCI(
+		OCIHandleFree(
+				(dvoid *) session->pEnv, 
+				OCI_HTYPE_ENV
+		)
+	);
+#endif
 	if (session->exclusive) {
 		efree(session);
 	}
@@ -3134,7 +3149,7 @@ static int _oci_session_cleanup(void *data TSRMLS_DC)
 
 	if (le->type == le_session) {
 		oci_server *server = ((oci_session*) le->ptr)->server;
-		if (server->is_open == 2) 
+		if (server && server->is_open == 2) 
 			return 1;
 	}
 	return 0;
@@ -3678,6 +3693,12 @@ break;
 				RETURN_FALSE;
 			}
 			value_sz = sizeof(void*);
+			break;
+		case SQLT_CHR:
+			break;
+		default:
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown or unsupported datatype given: %u", ocitype);
+			RETURN_FALSE;
 			break;
 	}
 	
@@ -5830,7 +5851,7 @@ PHP_FUNCTION(oci_new_connect)
    Connect to an Oracle database and log on. Returns a new session. */
 PHP_FUNCTION(oci_connect)
 {
-	oci_do_connect(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0, 0);
+	oci_do_connect(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0, 1);
 }
 /* }}} */
 

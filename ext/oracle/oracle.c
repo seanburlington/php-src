@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.94 2004/01/08 08:16:41 andi Exp $ */
+/* $Id: oracle.c,v 1.95.2.1 2005/08/18 13:34:37 sniper Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -565,7 +565,7 @@ void ora_do_logon(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 #endif
 			) {
 			ORA(db_err_conn) = *db_conn;
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Oracle: Connection Failed: %s\n",ora_error(&db_conn->lda));
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Oracle: Connection Failed: %s",ora_error(&db_conn->lda));
 			efree(hashed_details);
 			efree(db_conn);
 			RETURN_FALSE;

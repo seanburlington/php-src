@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.95 2004/03/29 21:44:07 wez Exp $ */
+/* $Id: mod_files.c,v 1.100.2.1 2005/08/18 13:34:40 sniper Exp $ */
 
 #include "php.h"
 
@@ -166,8 +166,11 @@ static void ps_files_open(ps_files *data, const char *key TSRMLS_DC)
 			flock(data->fd, LOCK_EX);
 
 #ifdef F_SETFD
-			if (fcntl(data->fd, F_SETFD, 1)) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "fcntl(%d, F_SETFD, 1) failed: %s (%d)", data->fd, strerror(errno), errno);
+#ifndef FD_CLOEXEC
+#define FD_CLOEXEC 1
+#endif
+			if (fcntl(data->fd, F_SETFD, FD_CLOEXEC)) {
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "fcntl(%d, F_SETFD, FD_CLOEXEC) failed: %s (%d)", data->fd, strerror(errno), errno);
 			}
 #endif
 		} else {
@@ -190,7 +193,7 @@ static int ps_files_cleanup_dir(const char *dirname, int maxlifetime TSRMLS_DC)
 
 	dir = opendir(dirname);
 	if (!dir) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "ps_files_cleanup_dir: opendir(%s) failed: %s (%d)\n", dirname, strerror(errno), errno);
+		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "ps_files_cleanup_dir: opendir(%s) failed: %s (%d)", dirname, strerror(errno), errno);
 		return (0);
 	}
 
@@ -216,7 +219,11 @@ static int ps_files_cleanup_dir(const char *dirname, int maxlifetime TSRMLS_DC)
 				buf[dirname_len + entry_len + 1] = '\0';
 				/* check whether its last access was more than maxlifet ago */
 				if (VCWD_STAT(buf, &sbuf) == 0 && 
+#ifdef NETWARE
+						(now - sbuf.st_mtime.tv_sec) > maxlifetime) {
+#else
 						(now - sbuf.st_mtime) > maxlifetime) {
+#endif
 					VCWD_UNLINK(buf);
 					nrdels++;
 				}
@@ -320,6 +327,12 @@ PS_READ_FUNC(files)
 		return FAILURE;
 	
 	data->st_size = *vallen = sbuf.st_size;
+	
+	if (sbuf.st_size == 0) {
+		*val = STR_EMPTY_ALLOC();
+		return SUCCESS;
+	}
+	
 	*val = emalloc(sbuf.st_size);
 
 #if defined(HAVE_PREAD)

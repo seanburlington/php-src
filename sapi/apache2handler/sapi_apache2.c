@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.40 2004/06/25 13:00:48 edink Exp $ */
+/* $Id: sapi_apache2.c,v 1.57.2.1 2005/08/18 01:14:41 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -112,17 +112,23 @@ php_apache_sapi_header_handler(sapi_header_struct *sapi_header,sapi_headers_stru
 		apr_table_add(ctx->r->headers_out, sapi_header->header, val);
 	}
 	
-	sapi_free_header(sapi_header);
-
-	return 0;
+	return SAPI_HEADER_ADD;
 }
 
 static int
 php_apache_sapi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 {
 	php_struct *ctx = SG(server_context);
+	const char *sline = SG(sapi_headers).http_status_line;
 
 	ctx->r->status = SG(sapi_headers).http_response_code;
+
+	/* httpd requires that r->status_line is set to the first digit of
+	 * the status-code: */
+	if (sline && strlen(sline) > 12 && strncmp(sline, "HTTP/1.", 7) == 0 
+		&& sline[8] == ' ') {
+		ctx->r->status_line = apr_pstrdup(ctx->r->pool, sline + 9);
+	}
 
 	return SAPI_HEADER_SENT_SUCCESSFULLY;
 }
@@ -142,7 +148,7 @@ php_apache_sapi_read_post(char *buf, uint count_bytes TSRMLS_DC)
 	/*
 	 * This loop is needed because ap_get_brigade() can return us partial data
 	 * which would cause premature termination of request read. Therefor we
-	 * need to make sure that if data is avaliable we fill the buffer completely.
+	 * need to make sure that if data is available we fill the buffer completely.
 	 */
 
 	while (ap_get_brigade(r->input_filters, brigade, AP_MODE_READBYTES, APR_BLOCK_READ, len) == APR_SUCCESS) {
@@ -169,13 +175,13 @@ php_apache_sapi_get_stat(TSRMLS_D)
 	ctx->finfo.st_dev = ctx->r->finfo.device;
 	ctx->finfo.st_ino = ctx->r->finfo.inode;
 #if defined(NETWARE) && defined(CLIB_STAT_PATCH)
-	ctx->finfo.st_atime.tv_sec = ctx->r->finfo.atime/1000000;
-	ctx->finfo.st_mtime.tv_sec = ctx->r->finfo.mtime/1000000;
-	ctx->finfo.st_ctime.tv_sec = ctx->r->finfo.ctime/1000000;
+	ctx->finfo.st_atime.tv_sec = apr_time_sec(ctx->r->finfo.atime);
+	ctx->finfo.st_mtime.tv_sec = apr_time_sec(ctx->r->finfo.mtime);
+	ctx->finfo.st_ctime.tv_sec = apr_time_sec(ctx->r->finfo.ctime);
 #else
-	ctx->finfo.st_atime = ctx->r->finfo.atime/1000000;
-	ctx->finfo.st_mtime = ctx->r->finfo.mtime/1000000;
-	ctx->finfo.st_ctime = ctx->r->finfo.ctime/1000000;
+	ctx->finfo.st_atime = apr_time_sec(ctx->r->finfo.atime);
+	ctx->finfo.st_mtime = apr_time_sec(ctx->r->finfo.mtime);
+	ctx->finfo.st_ctime = apr_time_sec(ctx->r->finfo.ctime);
 #endif
 
 	ctx->finfo.st_size = ctx->r->finfo.size;
@@ -215,7 +221,7 @@ php_apache_sapi_register_variables(zval *track_vars_array TSRMLS_DC)
 	char *key, *val;
 	
 	APR_ARRAY_FOREACH_OPEN(arr, key, val)
-		if (!val) val = empty_string;
+		if (!val) val = "";
 		php_register_variable(key, val, track_vars_array TSRMLS_CC);
 	APR_ARRAY_FOREACH_CLOSE()
 		
@@ -256,25 +262,25 @@ static void php_apache_sapi_log_message(char *msg)
 
 	ctx = SG(server_context);
 
-	/* We use APLOG_STARTUP because it keeps us from printing the
-	 * data and time information at the beginning of the error log
-	 * line.  Not sure if this is correct, but it mirrors what happens
-	 * with Apache 1.3 -- rbb
-	 */
 	if (ctx == NULL) { /* we haven't initialized our ctx yet, oh well */
 		ap_log_error(APLOG_MARK, APLOG_ERR | APLOG_STARTUP, 0, NULL, "%s", msg);
 	} else {
-		ap_log_rerror(APLOG_MARK, APLOG_ERR | APLOG_STARTUP, 0, ctx->r, "%s", msg);
+		ap_log_rerror(APLOG_MARK, APLOG_ERR, 0, ctx->r, "%s", msg);
 	}
 }
 
 static void php_apache_sapi_log_message_ex(char *msg, request_rec *r)
 {
 	if (r) {
-		ap_log_rerror(APLOG_MARK, APLOG_ERR | APLOG_STARTUP, 0, r, msg, r->filename);
+		ap_log_rerror(APLOG_MARK, APLOG_ERR, 0, r, msg, r->filename);
 	} else {
 		php_apache_sapi_log_message(msg);
 	}
+}
+
+static time_t php_apache_sapi_get_request_time(TSRMLS_D) {
+	php_struct *ctx = SG(server_context);
+	return apr_time_sec(ctx->r->request_time);
 }
 
 extern zend_module_entry php_apache_module;
@@ -313,6 +319,7 @@ static sapi_module_struct apache2_sapi_module = {
 
 	php_apache_sapi_register_variables,
 	php_apache_sapi_log_message,			/* Log message */
+	php_apache_sapi_get_request_time,		/* Request Time */
 
 	STANDARD_SAPI_MODULE_PROPERTIES
 };
@@ -394,7 +401,7 @@ static apr_status_t php_server_context_cleanup(void *data_)
 	return APR_SUCCESS;
 }
 
-static void php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
+static int php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 {
 	char *content_type;
 	char *content_length;
@@ -404,6 +411,7 @@ static void php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 	SG(request_info).content_type = apr_table_get(r->headers_in, "Content-Type");
 	SG(request_info).query_string = apr_pstrdup(r->pool, r->args);
 	SG(request_info).request_method = r->method;
+	SG(request_info).proto_num = r->proto_num;
 	SG(request_info).request_uri = apr_pstrdup(r->pool, r->uri);
 	SG(request_info).path_translated = apr_pstrdup(r->pool, r->filename);
 	r->no_local_copy = 1;
@@ -427,7 +435,7 @@ static void php_apache_request_ctor(request_rec *r, php_struct *ctx TSRMLS_DC)
 		SG(request_info).auth_user = NULL;
 		SG(request_info).auth_password = NULL;
 	}
-	php_request_startup(TSRMLS_C);
+	return php_request_startup(TSRMLS_C);
 }
 
 static void php_apache_request_dtor(request_rec *r TSRMLS_DC)
@@ -446,6 +454,22 @@ static int php_handler(request_rec *r)
 	TSRMLS_FETCH();
 
 	conf = ap_get_module_config(r->per_dir_config, &php5_module);
+
+	/* apply_config() needs r in some cases, so allocate server_context early */
+	ctx = SG(server_context);
+	if (ctx == NULL) {
+normal:
+		ctx = SG(server_context) = apr_pcalloc(r->pool, sizeof(*ctx));
+		/* register a cleanup so we clear out the SG(server_context)
+		 * after each request. Note: We pass in the pointer to the
+		 * server_context in case this is handled by a different thread.
+		 */
+		apr_pool_cleanup_register(r->pool, (void *)&SG(server_context), php_server_context_cleanup, apr_pool_cleanup_null);
+		ctx->r = r;
+		ctx = NULL; /* May look weird to null it here, but it is to catch the right case in the first_try later on */
+	} else {
+		ctx->r = r;
+	}
 	apply_config(conf);
 
 	if (strcmp(r->handler, PHP_MAGIC_TYPE) && strcmp(r->handler, PHP_SOURCE_MAGIC_TYPE) && strcmp(r->handler, PHP_SCRIPT)) {
@@ -456,6 +480,16 @@ static int php_handler(request_rec *r)
 			} zend_end_try();
 			return DECLINED;
 		}
+	}
+
+	/* Give a 404 if PATH_INFO is used but is explicitly disabled in
+	 * the configuration; default behaviour is to accept. */ 
+	if (r->used_path_info == AP_REQ_REJECT_PATH_INFO
+		&& r->path_info && r->path_info[0]) {
+		zend_try {
+			zend_ini_deactivate(TSRMLS_C);
+		} zend_end_try();
+		return HTTP_NOT_FOUND;
 	}
 
 	/* handle situations where user turns the engine off */
@@ -493,22 +527,21 @@ static int php_handler(request_rec *r)
 
 zend_first_try {
 
-	ctx = SG(server_context);
 	if (ctx == NULL) {
-		ctx = SG(server_context) = apr_pcalloc(r->pool, sizeof(*ctx));
-		/* register a cleanup so we clear out the SG(server_context)
-		 * after each request. Note: We pass in the pointer to the
-		 * server_context in case this is handled by a different thread.
-		 */
-		apr_pool_cleanup_register(r->pool, (void *)&SG(server_context), php_server_context_cleanup, apr_pool_cleanup_null);
-
-		ctx->r = r;
 		brigade = apr_brigade_create(r->pool, r->connection->bucket_alloc);
+		ctx = SG(server_context);
 		ctx->brigade = brigade;
 
-		php_apache_request_ctor(r, ctx TSRMLS_CC);
+		if (php_apache_request_ctor(r, ctx TSRMLS_CC)!=SUCCESS) {
+			zend_bailout();
+		}
 	} else {
 		parent_req = ctx->r;
+		/* check if comming due to ErrorDocument */
+		if (parent_req != HTTP_OK) {
+			parent_req = NULL;
+			goto normal;
+		}
 		ctx->r = r;
 		brigade = ctx->brigade;
 	}
@@ -541,11 +574,12 @@ zend_first_try {
 			char *mem_usage;
 
 			mem_usage = apr_psprintf(ctx->r->pool, "%u", AG(allocated_memory_peak));
-			AG(allocated_memory_peak) = 0;
 			apr_table_set(r->notes, "mod_php_memory_usage", mem_usage);
 		}
 #endif
 	}
+
+} zend_end_try();
 
 	if (!parent_req) {
 		php_apache_request_dtor(r TSRMLS_CC);
@@ -555,14 +589,14 @@ zend_first_try {
 
 		rv = ap_pass_brigade(r->output_filters, brigade);
 		if (rv != APR_SUCCESS || r->connection->aborted) {
+zend_first_try {
 			php_handle_aborted_connection();
+} zend_end_try();
 		}
 		apr_brigade_cleanup(brigade);
 	} else {
 		ctx->r = parent_req;
 	}
-
-} zend_end_try();
 
 	return OK;
 }

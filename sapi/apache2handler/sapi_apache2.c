@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.40.2.1 2005/07/25 20:36:36 rasmus Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.40.2.2 2005/08/18 01:15:52 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -527,6 +527,7 @@ static int php_handler(request_rec *r)
 zend_first_try {
 
 	if (ctx == NULL) {
+normal:
 		brigade = apr_brigade_create(r->pool, r->connection->bucket_alloc);
 		ctx = SG(server_context);
 		ctx->brigade = brigade;
@@ -536,6 +537,11 @@ zend_first_try {
 		}
 	} else {
 		parent_req = ctx->r;
+		/* check if comming due to ErrorDocument */
+		if (parent_req != HTTP_OK) {
+			parent_req = NULL;
+			goto normal;
+		}
 		ctx->r = r;
 		brigade = ctx->brigade;
 	}

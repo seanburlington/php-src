@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98 2005/08/03 14:07:35 sniper Exp $ */
+/* $Id: openssl.c,v 1.99 2005/08/18 13:33:58 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -3274,7 +3274,7 @@ SSL *php_SSL_new_from_context(SSL_CTX *ctx, php_stream *stream TSRMLS_DC)
 
 		if (cafile || capath) {
 			if (!SSL_CTX_load_verify_locations(ctx, cafile, capath)) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to set verify locations `%s' `%s'\n", cafile, capath);
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to set verify locations `%s' `%s'", cafile, capath);
 				return NULL;
 			}
 		}

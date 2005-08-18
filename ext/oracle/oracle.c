@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oracle.c,v 1.95 2005/08/03 14:07:36 sniper Exp $ */
+/* $Id: oracle.c,v 1.96 2005/08/18 13:33:59 sniper Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */
@@ -565,7 +565,7 @@ void ora_do_logon(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 #endif
 			) {
 			ORA(db_err_conn) = *db_conn;
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Oracle: Connection Failed: %s\n",ora_error(&db_conn->lda));
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Oracle: Connection Failed: %s",ora_error(&db_conn->lda));
 			efree(hashed_details);
 			efree(db_conn);
 			RETURN_FALSE;

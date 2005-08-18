@@ -22,7 +22,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: oci8.c,v 1.269 2005/08/03 14:07:32 sniper Exp $ */
+/* $Id: oci8.c,v 1.270 2005/08/18 13:33:54 sniper Exp $ */
 
 /* TODO list:
  *
@@ -126,7 +126,7 @@ MUTEX_T mx_lock;
 #define CALL_OCI(call) \
 { \
 	if (OCI(in_call)) { \
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCI8 Recursive call!\n"); \
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCI8 Recursive call!"); \
 		exit(-1); \
 	} else { \
 		OCI(in_call)=1; \
@@ -139,7 +139,7 @@ MUTEX_T mx_lock;
 { \
 	if (OCI(in_call)) { \
 		retcode=-1; \
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCI8 Recursive call!\n"); \
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "OCI8 Recursive call!"); \
 		exit(-1); \
 	} else { \
 		OCI(in_call)=1; \
@@ -786,7 +786,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.270 $");
 
 	sprintf(buf, "%ld", num_persistent);
 	php_info_print_table_row(2, "Active Persistent Links", buf);

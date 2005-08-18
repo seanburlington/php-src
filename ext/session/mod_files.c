@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mod_files.c,v 1.100 2005/08/03 14:07:43 sniper Exp $ */
+/* $Id: mod_files.c,v 1.101 2005/08/18 13:34:01 sniper Exp $ */
 
 #include "php.h"
 
@@ -193,7 +193,7 @@ static int ps_files_cleanup_dir(const char *dirname, int maxlifetime TSRMLS_DC)
 
 	dir = opendir(dirname);
 	if (!dir) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "ps_files_cleanup_dir: opendir(%s) failed: %s (%d)\n", dirname, strerror(errno), errno);
+		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "ps_files_cleanup_dir: opendir(%s) failed: %s (%d)", dirname, strerror(errno), errno);
 		return (0);
 	}
 

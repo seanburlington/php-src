@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168 2005/08/03 14:07:37 sniper Exp $ */
+/* $Id: php_pcre.c,v 1.169 2005/08/18 13:34:00 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -792,7 +792,7 @@ static int preg_do_eval(char *eval_str, int eval_str_len, char *subject,
 	/* Run the code */
 	if (zend_eval_string(code.c, &retval, compiled_string_description TSRMLS_CC) == FAILURE) {
 		efree(compiled_string_description);
-		php_error_docref(NULL TSRMLS_CC,E_ERROR, "Failed evaluating code:\n%s", code.c);
+		php_error_docref(NULL TSRMLS_CC,E_ERROR, "Failed evaluating code: %s%s", PHP_EOL, code.c);
 		/* zend_error() does not return in this case */
 	}
 	efree(compiled_string_description);

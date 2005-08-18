@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.156 2005/08/16 15:09:44 dmitry Exp $ */
+/* $Id: simplexml.c,v 1.157 2005/08/18 13:34:01 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -421,7 +421,7 @@ next_iter:
 			}
 			change_node_zval(newnode, value TSRMLS_CC);
 		} else if (counter > 1) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot assign to an array of nodes (duplicate subnodes or attr detected)\n");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot assign to an array of nodes (duplicate subnodes or attr detected)");
 		} else {
 			if (attribs) {
 				switch (Z_TYPE_P(value)) {
@@ -1763,7 +1763,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.156 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.157 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

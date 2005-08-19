@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: http.c,v 1.14 2005/08/03 14:08:04 sniper Exp $ */
+/* $Id: http.c,v 1.15 2005/08/19 10:55:05 dmitry Exp $ */
 
 #include "php_http.h"
 #include "php_ini.h"
@@ -65,7 +65,7 @@ PHPAPI int php_url_encode_hash_ex(HashTable *ht, smart_str *formstr,
 			char *tmp;
 
 			zend_object *zobj = zend_objects_get_address(type TSRMLS_CC);
-			if (zend_check_property_access(zobj, key TSRMLS_CC) != SUCCESS) {
+			if (zend_check_property_access(zobj, IS_STRING, key TSRMLS_CC) != SUCCESS) {
 				/* private or protected property access outside of the class */
 				continue;
 			}

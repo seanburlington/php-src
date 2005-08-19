@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.318 2005/08/18 22:51:46 andrei Exp $ */
+/* $Id: array.c,v 1.319 2005/08/19 07:26:13 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1772,9 +1772,9 @@ PHP_FUNCTION(range)
 			}
 			for (; *low >= *high; (*low) -= (unsigned int)lstep) {
 				if (Z_TYPE_P(zlow) == IS_STRING) {
-					add_next_index_stringl(return_value, low, 1, 1 TSRMLS_CC);
+					add_next_index_stringl(return_value, low, 1, 1);
 				} else {
-					add_next_index_binaryl(return_value, low, 1, 1 TSRMLS_CC);
+					add_next_index_binaryl(return_value, low, 1, 1);
 				}
 				if (((signed int)*low - lstep) < 0) {
 					break;
@@ -1787,9 +1787,9 @@ PHP_FUNCTION(range)
 			}
 			for (; *low <= *high; (*low) += (unsigned int)lstep) {
 				if (Z_TYPE_P(zlow) == IS_STRING) {
-					add_next_index_stringl(return_value, low, 1, 1 TSRMLS_CC);
+					add_next_index_stringl(return_value, low, 1, 1);
 				} else {
-					add_next_index_binaryl(return_value, low, 1, 1 TSRMLS_CC);
+					add_next_index_binaryl(return_value, low, 1, 1);
 				}
 				if (((signed int)*low + lstep) > 255) {
 					break;
@@ -1797,9 +1797,9 @@ PHP_FUNCTION(range)
 			}
 		} else {
 			if (Z_TYPE_P(zlow) == IS_STRING) {
-				add_next_index_stringl(return_value, low, 1, 1 TSRMLS_CC);
+				add_next_index_stringl(return_value, low, 1, 1);
 			} else {
-				add_next_index_binaryl(return_value, low, 1, 1 TSRMLS_CC);
+				add_next_index_binaryl(return_value, low, 1, 1);
 			}
 		}
 	} else if (Z_TYPE_P(zlow) == IS_UNICODE &&
@@ -1829,7 +1829,7 @@ PHP_FUNCTION(range)
 			for (; low >= high; low -= lstep) {
 				/* no need to check return value of zend_codepoint_to_uchar()
 				   since the range endpoints will always be valid */
-				add_next_index_unicodel(return_value, buf, zend_codepoint_to_uchar(low, buf), 1 TSRMLS_CC);
+				add_next_index_unicodel(return_value, buf, zend_codepoint_to_uchar(low, buf), 1);
 				if (((int32_t)low - lstep) < 0) {
 					break;
 				}
@@ -1840,13 +1840,13 @@ PHP_FUNCTION(range)
 				goto err;
 			}
 			for (; low <= high; low += lstep) {
-				add_next_index_unicodel(return_value, buf, zend_codepoint_to_uchar(low, buf), 1 TSRMLS_CC);
+				add_next_index_unicodel(return_value, buf, zend_codepoint_to_uchar(low, buf), 1);
 				if (((int32_t)low + lstep) > UCHAR_MAX_VALUE) {
 					break;
 				}
 			}
 		} else {
-			add_next_index_unicodel(return_value, buf, zend_codepoint_to_uchar(low, buf), 1 TSRMLS_CC);
+			add_next_index_unicodel(return_value, buf, zend_codepoint_to_uchar(low, buf), 1);
 		}
 	} else if (Z_TYPE_P(zlow) == IS_DOUBLE || Z_TYPE_P(zhigh) == IS_DOUBLE || is_step_double) {
 		double low, high;

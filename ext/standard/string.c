@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.467 2005/08/19 10:59:19 rolland Exp $ */
+/* $Id: string.c,v 1.468 2005/08/19 17:53:03 andrei Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -200,12 +200,9 @@ PHP_FUNCTION(bin2hex)
 		RETURN_FALSE;
 	}
 
+	RETVAL_ASCII_STRINGL(result, newlen, 0);
 	if (UG(unicode)) {
-		UChar *u_temp = zend_ascii_to_unicode(result, newlen+1 ZEND_FILE_LINE_CC);
 		efree(result);
-		RETVAL_UNICODEL(u_temp, newlen, 0);
-	} else {
-		RETURN_STRINGL(result, newlen, 0);
 	}
 }
 /* }}} */

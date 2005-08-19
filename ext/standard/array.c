@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.319 2005/08/19 07:26:13 dmitry Exp $ */
+/* $Id: array.c,v 1.320 2005/08/19 07:49:41 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1732,7 +1732,7 @@ PHP_FUNCTION(range)
 	}	
 
 	/* Unify types */
-	str_type = zend_get_unified_string_type(2, Z_TYPE_P(zlow), Z_TYPE_P(zhigh));
+	str_type = zend_get_unified_string_type(2 TSRMLS_CC, Z_TYPE_P(zlow), Z_TYPE_P(zhigh));
 	if (str_type == (zend_uchar)-1) {
 		zend_error(E_WARNING, "Cannot mix binary and Unicode parameters");
 		return;

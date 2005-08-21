@@ -1,3 +1,10 @@
+2005-08-20  Greg Beaver  <greg@chiaraquartet.net>
+
+    * (PHP_4_4)
+      pear/install-pear.php
+      pear/install-pear.php:
+      add checks for extensions that must be loaded
+
 2005-08-19  Andrei Zmievski  <andrei@gravitonic.com>
 
     * ZendEngine2/zend_builtin_functions.c
@@ -10274,7 +10281,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2079 2005/08/20 05:39:31 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2080 2005/08/21 05:33:38 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -13675,7 +13682,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2079 2005/08/20 05:39:31 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2080 2005/08/21 05:33:38 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -14156,7 +14163,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2079 2005/08/20 05:39:31 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2080 2005/08/21 05:33:38 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -15630,7 +15637,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2079 2005/08/20 05:39:31 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2080 2005/08/21 05:33:38 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118 2005/08/03 14:07:30 sniper Exp $ 
+  $Id: mysqli_api.c,v 1.119 2005/08/22 12:22:09 dmitry Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1105,7 +1105,7 @@ PHP_FUNCTION(mysqli_set_local_infile_handler)
 {
 	MY_MYSQL	*mysql;
 	zval  		*mysql_link;
-	char		*callback_name;
+	zval     callback_name;
 	zval		*callback_func;
 
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Oz", &mysql_link, mysqli_link_class_entry,
@@ -1117,11 +1117,11 @@ PHP_FUNCTION(mysqli_set_local_infile_handler)
 
 	/* check callback function */
 	if (!zend_is_callable(callback_func, 0, &callback_name)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Not a valid callback function %s", callback_name);
-		efree(callback_name);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Not a valid callback function %R", Z_TYPE(callback_name), Z_UNIVAL(callback_name));
+		zval_dtor(&callback_name);
 		RETURN_FALSE;		
 	}
-	efree(callback_name);
+	zval_dtor(&callback_name);
 
 	/* save callback function */
 	ALLOC_ZVAL(mysql->li_read);	

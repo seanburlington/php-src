@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.169 2005/08/18 13:34:00 sniper Exp $ */
+/* $Id: php_pcre.c,v 1.170 2005/08/22 12:22:10 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1128,7 +1128,7 @@ static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_callabl
 	int				 limit_val = -1;
 	char			*string_key;
 	ulong			 num_key;
-	char			*callback_name = NULL;
+	zval			 callback_name;
     int				replace_count=0;
     int             *replace_count_ptr=NULL; 
 	
@@ -1147,13 +1147,13 @@ static void preg_replace_impl(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_callabl
 		convert_to_string_ex(replace);
 	if (is_callable_replace) {
 		if (!zend_is_callable(*replace, 0, &callback_name)) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "requires argument 2, '%s', to be a valid callback", callback_name);
-			efree(callback_name);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "requires argument 2, '%R', to be a valid callback", Z_TYPE(callback_name), Z_UNIVAL(callback_name));
+			zval_dtor(&callback_name);
 			*return_value = **subject;
 			zval_copy_ctor(return_value);
 			return;
 		}
-		efree(callback_name);
+		zval_dtor(&callback_name);
 	}
 
 	SEPARATE_ZVAL(regex);

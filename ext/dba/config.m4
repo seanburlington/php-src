@@ -1,29 +1,32 @@
 dnl
-dnl $Id: config.m4,v 1.29.2.25 2004/03/08 00:01:03 helly Exp $
+dnl $Id: config.m4,v 1.29.2.28.2.1 2005/08/22 19:59:42 iliaa Exp $
 dnl
 
 dnl Suppose we need FlatFile if no support or only CDB is used.
 
-AC_DEFUN(PHP_DBA_STD_BEGIN,[
+AC_DEFUN([PHP_DBA_STD_BEGIN],[
   unset THIS_INCLUDE THIS_LIBS THIS_LFLAGS THIS_PREFIX THIS_RESULT
 ])
 
-AC_DEFUN(PHP_TEMP_LDFLAGS,[
+AC_DEFUN([PHP_TEMP_LDFLAGS],[
   old_LDFLAGS=$LDFLAGS
   LDFLAGS="$1 $LDFLAGS"
-  $2
+  old_LIBS=$LIBS
+  LIBS="$2 $LIBS"
+  $3
   LDFLAGS=$old_LDFLAGS
+  LIBS=$old_LIBS
 ])
 
 dnl Assign INCLUDE/LFLAGS from PREFIX
-AC_DEFUN(PHP_DBA_STD_ASSIGN,[
+AC_DEFUN([PHP_DBA_STD_ASSIGN],[
   if test -n "$THIS_PREFIX" && test "$THIS_PREFIX" != "/usr"; then
     THIS_LFLAGS=$THIS_PREFIX/lib
   fi
 ])
 
 dnl Standard check
-AC_DEFUN(PHP_DBA_STD_CHECK,[
+AC_DEFUN([PHP_DBA_STD_CHECK],[
   THIS_RESULT="yes"
   if test -z "$THIS_INCLUDE"; then
     AC_MSG_ERROR([DBA: Could not find necessary header file(s).])
@@ -34,14 +37,14 @@ AC_DEFUN(PHP_DBA_STD_CHECK,[
 ])
 
 dnl Attach THIS_x to DBA_x
-AC_DEFUN(PHP_DBA_STD_ATTACH,[
+AC_DEFUN([PHP_DBA_STD_ATTACH],[
   PHP_ADD_LIBRARY_WITH_PATH($THIS_LIBS, $THIS_LFLAGS, DBA_SHARED_LIBADD)
   unset THIS_INCLUDE THIS_LIBS THIS_LFLAGS THIS_PREFIX
 ])
 
 dnl Print the result message
 dnl parameters(name [, full name [, empty or error message]])
-AC_DEFUN(AC_DBA_STD_RESULT,[
+AC_DEFUN([AC_DBA_STD_RESULT],[
   THIS_NAME=[]translit($1,a-z0-9-,A-Z0-9_)
   if test -n "$2"; then
     THIS_FULL_NAME="$2"
@@ -78,7 +81,6 @@ AC_ARG_WITH(gdbm,
     done
 
     if test -n "$THIS_INCLUDE"; then
-      unset ac_cv_lib_gdbm_gdbm_open
       PHP_CHECK_LIBRARY(gdbm, gdbm_open, [
         AC_DEFINE_UNQUOTED(GDBM_INCLUDE_FILE, "$THIS_INCLUDE", [ ])
         AC_DEFINE(DBA_GDBM, 1, [ ]) 
@@ -131,10 +133,10 @@ AC_DBA_STD_RESULT(ndbm)
 
 dnl Berkeley specific (library and version test)
 dnl parameters(version, library list, function)
-AC_DEFUN(PHP_DBA_DB_CHECK,[
+AC_DEFUN([PHP_DBA_DB_CHECK],[
   for LIB in $2; do
     if test -f $THIS_PREFIX/lib/lib$LIB.a -o -f $THIS_PREFIX/lib/lib$LIB.$SHLIB_SUFFIX_NAME; then
-      PHP_TEMP_LDFLAGS(-L$THIS_PREFIX/lib -l$LIB,[
+      PHP_TEMP_LDFLAGS(-L$THIS_PREFIX/lib, -l$LIB,[
         AC_TRY_LINK([
 #include "$THIS_INCLUDE"
         ],[
@@ -171,7 +173,7 @@ AC_DEFUN(PHP_DBA_DB_CHECK,[
     ])
   fi
   if test "$ext_shared" = "yes"; then
-    AC_MSG_CHECKING(if db can be used as shared extension)
+    AC_MSG_CHECKING(if dba can be used as shared extension)
     AC_EGREP_CPP(yes,[
 #include "$THIS_INCLUDE"
 #if DB_VERSION_MAJOR > 3 || (DB_VERSION_MAJOR == 3 && DB_VERSION_MINOR > 2)
@@ -221,7 +223,7 @@ AC_ARG_WITH(db4,
         break
       fi
     done
-    PHP_DBA_DB_CHECK(4, db-4.2 db-4.1 db-4.0 db-4 db4 db, [(void)db_create((DB**)0, (DB_ENV*)0, 0)])
+    PHP_DBA_DB_CHECK(4, db-4.3 db-4.2 db-4.1 db-4.0 db-4 db4 db, [(void)db_create((DB**)0, (DB_ENV*)0, 0)])
   fi
 ])
 AC_DBA_STD_RESULT(db4,Berkeley DB4)
@@ -340,7 +342,7 @@ AC_ARG_WITH(dbm,
 ])
 AC_DBA_STD_RESULT(dbm)
 
-AC_DEFUN(PHP_DBA_BUILTIN_CDB,[
+AC_DEFUN([PHP_DBA_BUILTIN_CDB],[
   AC_DEFINE(DBA_CDB_BUILTIN, 1, [ ])
   AC_DEFINE(DBA_CDB_MAKE, 1, [ ])
   AC_DEFINE(DBA_CDB, 1, [ ])
@@ -386,7 +388,7 @@ AC_ARG_WITH(cdb,
 ])
 AC_DBA_STD_RESULT(cdb)
 
-AC_DEFUN(PHP_DBA_BUILTIN_INI,[
+AC_DEFUN([PHP_DBA_BUILTIN_INI],[
   AC_DEFINE(DBA_INIFILE, 1, [ ])
   ini_sources="libinifile/inifile.c"
   THIS_RESULT="builtin"
@@ -404,7 +406,7 @@ AC_ARG_WITH(inifile,
 ])
 AC_DBA_STD_RESULT(inifile,INI File)
 
-AC_DEFUN(PHP_DBA_BUILTIN_FLATFILE,[
+AC_DEFUN([PHP_DBA_BUILTIN_FLATFILE],[
   AC_DEFINE(DBA_FLATFILE, 1, [ ])
   flat_sources="libflatfile/flatfile.c"
   THIS_RESULT="builtin"

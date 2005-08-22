@@ -16,7 +16,7 @@
 // | Author: Stig Bakken <ssb@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: Remote.php,v 1.50.4.3 2005/08/18 21:29:28 pajoye Exp $
+// $Id: Remote.php,v 1.50.4.4 2005/08/22 22:09:54 cellog Exp $
 
 require_once 'PEAR.php';
 require_once 'PEAR/Config.php';
@@ -115,8 +115,8 @@ class PEAR_Remote extends PEAR
                 $this->saveCache($_args, $result);
             };
             return $result;
-        } else {
-            return $this->raiseError("For this remote PEAR operation you need to load the xmlrpc extension or install XML_RPC");
+        } elseif (!@include_once("XML/RPC.php")) {
+            return $this->raiseError("For this remote PEAR operation you need to install the XML_RPC package");
         }
 
         array_shift($args);

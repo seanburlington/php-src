@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: xsltprocessor.c,v 1.40 2005/08/22 12:22:16 dmitry Exp $ */
+/* $Id: xsltprocessor.c,v 1.41 2005/08/22 14:16:07 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -267,7 +267,7 @@ static void xsl_ext_function_php(xmlXPathParserContextPtr ctxt, int nargs, int t
 	if (!zend_make_callable(&handler, &callable TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to call handler %R()", Z_TYPE(callable), Z_UNIVAL(callable));
 		
-	} else if ( intern->registerPhpFunctions == 2 && zend_u_hash_exists(intern->registered_phpfunctions, Z_TYPE(callable), Z_UNIVLA(callable), Z_UNILEN(callable) + 1) == 0) { 
+	} else if ( intern->registerPhpFunctions == 2 && zend_u_hash_exists(intern->registered_phpfunctions, Z_TYPE(callable), Z_UNIVAL(callable), Z_UNILEN(callable) + 1) == 0) { 
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Not allowed to call handler '%R()'.", Z_TYPE(callable), Z_UNILEN(callable));
 		// Push an empty string, so that we at least have an xslt result...
 		valuePush(ctxt, xmlXPathNewString(""));

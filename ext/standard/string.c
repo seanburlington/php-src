@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.469 2005/08/19 22:00:21 andrei Exp $ */
+/* $Id: string.c,v 1.470 2005/08/22 14:14:10 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -715,6 +715,8 @@ static UChar *php_u_trim(UChar *c, int32_t len, UChar *what, int32_t what_len, z
 			}
 		}
 		end = i;
+	} else {
+		--end;
 	}
 
 	if ( start < len ) {

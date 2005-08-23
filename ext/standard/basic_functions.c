@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.730 2005/08/22 12:22:14 dmitry Exp $ */
+/* $Id: basic_functions.c,v 1.731 2005/08/23 09:33:45 dmitry Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1691,7 +1691,7 @@ PHP_FUNCTION(getopt)
 
 		MAKE_STD_ZVAL(val);
 		if (optarg != NULL) {
-			ZVAL_STRING(val, optarg, 1);
+			ZVAL_RT_STRING(val, optarg, 1);
 		} else {
 			ZVAL_FALSE(val);
 		}

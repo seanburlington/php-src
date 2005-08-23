@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.170 2005/08/22 12:22:13 dmitry Exp $ 
+   $Id: sqlite.c,v 1.171 2005/08/23 09:33:45 dmitry Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1126,7 +1126,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.170 2005/08/22 12:22:13 dmitry Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.171 2005/08/23 09:33:45 dmitry Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1917,11 +1917,7 @@ static void php_sqlite_fetch_column(struct php_sqlite_result *res, zval *which, 
 		char *decoded = emalloc(l);
 		l = php_sqlite_decode_binary(rowdata[j]+1, decoded);
 		decoded[l] = '\0';
-		if (UG(unicode)) {
-			RETVAL_BINARYL(decoded, l, 0);
-		} else {
-			RETVAL_STRINGL(decoded, l, 0);
-		}
+		RETVAL_BINARYL(decoded, l, 0);
 		if (!res->buffered) {
 			efree((char*)rowdata[j]);
 			rowdata[j] = NULL;
@@ -2444,13 +2440,7 @@ PHP_FUNCTION(sqlite_libversion)
 	if (ZEND_NUM_ARGS() != 0) {
 		WRONG_PARAM_COUNT;
 	}
-	if (UG(unicode)) {
-		char *temp = (char*)sqlite_libversion();
-		UChar *u_temp = zend_ascii_to_unicode(temp, strlen(temp)+1 ZEND_FILE_LINE_CC);
-		RETURN_UNICODE(u_temp, 0);
-	} else {
-		RETURN_STRING((char*)sqlite_libversion(), 1);
-	}
+	RETURN_ASCII_STRING((char*)sqlite_libversion(), 1);
 }
 /* }}} */
 
@@ -2461,13 +2451,7 @@ PHP_FUNCTION(sqlite_libencoding)
 	if (ZEND_NUM_ARGS() != 0) {
 		WRONG_PARAM_COUNT;
 	}
-	if (UG(unicode)) {
-		char *temp = (char*)sqlite_libencoding();
-		UChar *u_temp = zend_ascii_to_unicode(temp, strlen(temp)+1 ZEND_FILE_LINE_CC);
-		RETURN_UNICODE(u_temp, 0);
-	} else {
-		RETURN_STRING((char*)sqlite_libencoding(), 1);
-	}
+	RETURN_ASCII_STRING((char*)sqlite_libencoding(), 1);
 }
 /* }}} */
 
@@ -2664,16 +2648,7 @@ PHP_FUNCTION(sqlite_field_name)
 		RETURN_FALSE;
 	}
 
-	if (UG(unicode)) {
-		UErrorCode status = U_ZERO_ERROR;
-		UChar *u_str;
-		int32_t u_len;
-
-		zend_convert_to_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &u_str, &u_len, res->col_names[field], strlen(res->col_names[field]), &status);
-		RETURN_UNICODEL(u_str, u_len, 0);
-	} else {
-		RETURN_STRING(res->col_names[field], 1);
-	}
+	RETURN_U_STRING(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), res->col_names[field], 1);
 }
 /* }}} */
 
@@ -2914,16 +2889,7 @@ PHP_FUNCTION(sqlite_error_string)
 	msg = sqlite_error_string(code);
 
 	if (msg) {
-		if (UG(unicode)) {
-			UErrorCode status = U_ZERO_ERROR;
-			UChar *u_str;
-			int32_t u_len;
-
-			zend_convert_to_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &u_str, &u_len, msg, strlen(msg), &status);
-			RETURN_UNICODEL(u_str, u_len, 0);
-		} else {
-			RETURN_STRING((char*)msg, 1);
-		}
+		RETURN_U_STRING(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), (char*)msg, 1);
 	} else {
 		RETURN_NULL();
 	}

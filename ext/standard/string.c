@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.471 2005/08/23 09:33:46 dmitry Exp $ */
+/* $Id: string.c,v 1.472 2005/08/23 12:53:28 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1761,14 +1761,17 @@ PHP_FUNCTION(pathinfo)
 		ret = estrndup(path, path_len);
 		php_dirname(ret, path_len);
 		if (*ret) {
-			add_assoc_string(tmp, "dirname", ret, 1);
+			add_assoc_rt_string(tmp, "dirname", ret, 1);
 		}
 		efree(ret);
 	}
 	
 	if ((opt & PHP_PATHINFO_BASENAME) == PHP_PATHINFO_BASENAME) {
 		php_basename(path, path_len, NULL, 0, &ret, &ret_len TSRMLS_CC);
-		add_assoc_stringl(tmp, "basename", ret, ret_len, 0);
+		add_assoc_rt_stringl(tmp, "basename", ret, ret_len, 0);
+		if (UG(unicode)) {
+			efree(ret);
+		}
 	}			
 	
 	if ((opt & PHP_PATHINFO_EXTENSION) == PHP_PATHINFO_EXTENSION) {
@@ -1785,7 +1788,7 @@ PHP_FUNCTION(pathinfo)
 
 		if (p) {
 			idx = p - ret;
-			add_assoc_stringl(tmp, "extension", ret + idx + 1, ret_len - idx - 1, 1);
+			add_assoc_rt_stringl(tmp, "extension", ret + idx + 1, ret_len - idx - 1, 1);
 		}
 
 		if (!have_basename) {

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: link.c,v 1.52 2005/08/03 14:08:08 sniper Exp $ */
+/* $Id: link.c,v 1.53 2005/08/23 12:53:28 dmitry Exp $ */
 
 #include "php.h"
 #include "php_filestat.h"
@@ -80,7 +80,7 @@ PHP_FUNCTION(readlink)
 	/* Append NULL to the end of the string */
 	buff[ret] = '\0';
 
-	RETURN_STRING(buff, 1);
+	RETURN_RT_STRING(buff, 1);
 }
 /* }}} */
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: spprintf.c,v 1.32 2005/08/16 18:02:41 derick Exp $ */
+/* $Id: spprintf.c,v 1.33 2005/08/23 06:48:55 derick Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:
@@ -133,6 +133,7 @@ do { 												\
 		smart_str_alloc(xbuf, (sz), 0); 			\
 		if (s_unicode) {							\
 			memcpy(xbuf->c + xbuf->len, s, (sz));	\
+			xbuf->len += sz;						\
 		} else {									\
 			p = (s_len);							\
 			while(p--) {                            \

@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode_filter.c,v 1.2 2005/08/12 09:10:04 sniper Exp $ */
+/* $Id: unicode_filter.c,v 1.3 2005/08/25 08:59:24 pollita Exp $ */
 
 
 #include "php.h"
@@ -144,7 +144,7 @@ static php_stream_filter_status_t php_unicode_from_string_filter(
 
 			destp = destbuf = (UChar *)pemalloc(destlen, data->is_persistent);
 
-			ucnv_toUnicode(data->conv, &destp, destbuf + destlen, (const char**)&src, src + remaining, NULL, FALSE, &errCode);
+			ucnv_toUnicode(data->conv, &destp, (UChar*)((char*)destbuf + destlen), (const char**)&src, src + remaining, NULL, FALSE, &errCode);
 
 			new_bucket = php_stream_bucket_new_unicode(stream, destbuf, destp - destbuf, 1, data->is_persistent TSRMLS_CC);
 			php_stream_bucket_append(buckets_out, new_bucket TSRMLS_CC);

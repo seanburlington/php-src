@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: streams.c,v 1.14 2005/08/03 14:06:45 sniper Exp $ */
+/* $Id: streams.c,v 1.15 2005/08/25 12:26:12 sniper Exp $ */
 
 /* This file implements cURL based wrappers.
  * NOTE: If you are implementing your own streams that are intended to
@@ -361,7 +361,7 @@ static php_stream_wrapper_ops php_curl_wrapper_ops = {
 	NULL, /* stream_stat: curl streams know how to stat themselves */
 	NULL, /* stat url */
 	NULL, /* opendir */
-	NULL, /* label */
+	"cURL", /* label */
 	NULL, /* unlink */
 	NULL, /* rename */
 	NULL, /* mkdir */

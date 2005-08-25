@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.33 2005/08/18 07:16:52 dmitry Exp $ */
+/* $Id: libxml.c,v 1.34 2005/08/25 13:53:38 dmitry Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -798,11 +798,14 @@ int php_libxml_register_export(zend_class_entry *ce, php_libxml_export_node expo
 	export_hnd.export_func = export_function;
 
 	if (zend_hash_add(&php_libxml_exports, ce->name, ce->name_length + 1, &export_hnd, sizeof(export_hnd), NULL) == SUCCESS) {
+		int ret;
 		UChar *uname;
 
 		uname = malloc(UBYTES(ce->name_length+1));
 		u_charsToUChars(ce->name, uname, ce->name_length+1);
-    return zend_u_hash_add(&php_libxml_exports, IS_UNICODE, uname, ce->name_length + 1, &export_hnd, sizeof(export_hnd), NULL);
+    ret = zend_u_hash_add(&php_libxml_exports, IS_UNICODE, uname, ce->name_length + 1, &export_hnd, sizeof(export_hnd), NULL);
+    free(uname);
+    return ret;
   }
   return FAILURE;
 }

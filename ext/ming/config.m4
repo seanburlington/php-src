@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.20 2003/07/11 07:48:11 sniper Exp $
+dnl $Id: config.m4,v 1.22.2.1 2005/08/25 22:02:28 helly Exp $
 dnl
 
 PHP_ARG_WITH(ming, for MING support,
@@ -9,8 +9,9 @@ if test "$PHP_MING" != "no"; then
   AC_CHECK_LIB(m, sin)
 
   for i in $PHP_MING /usr/local /usr; do
-    if test -f $i/lib/libming.$SHLIB_SUFFIX_NAME -o -f $i/lib/libming.a; then
+    if test -f $i/$PHP_LIBDIR/libming.$SHLIB_SUFFIX_NAME -o -f $i/lib/libming.a; then
       MING_DIR=$i
+      break
     fi
   done
 
@@ -33,11 +34,11 @@ if test "$PHP_MING" != "no"; then
   ],[
     AC_MSG_ERROR([Ming library 0.2a or greater required.])
   ],[
-    -L$MING_DIR/lib
+    -L$MING_DIR/$PHP_LIBDIR
   ])
   
   PHP_ADD_INCLUDE($MING_INC_DIR)
-  PHP_ADD_LIBRARY_WITH_PATH(ming, $MING_DIR/lib, MING_SHARED_LIBADD)
+  PHP_ADD_LIBRARY_WITH_PATH(ming, $MING_DIR/$PHP_LIBDIR, MING_SHARED_LIBADD)
 
   AC_MSG_CHECKING([for destroySWFBlock])
   AC_TRY_RUN([
@@ -57,7 +58,9 @@ int main() {
     AC_MSG_RESULT([unknown])
   ]) 
 
-  dnl Check Ming version (FIXME: if/when ming has some better way to detect the version..)
+  PHP_CHECK_LIBRARY(ming, SWFPrebuiltClip, [ AC_DEFINE(HAVE_SWFPREBUILTCLIP, 1, [ ]) ], [], []) 
+
+dnl Check Ming version (FIXME: if/when ming has some better way to detect the version..)
   old_CPPFLAGS=$CPPFLAGS
   CPPFLAGS=-I$MING_INC_DIR
   AC_EGREP_CPP(yes, [

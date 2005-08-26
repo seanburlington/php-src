@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.22.2.1 2005/08/25 22:02:28 helly Exp $
+dnl $Id: config.m4,v 1.22.2.2 2005/08/26 15:35:39 helly Exp $
 dnl
 
 PHP_ARG_WITH(ming, for MING support,
@@ -9,7 +9,7 @@ if test "$PHP_MING" != "no"; then
   AC_CHECK_LIB(m, sin)
 
   for i in $PHP_MING /usr/local /usr; do
-    if test -f $i/$PHP_LIBDIR/libming.$SHLIB_SUFFIX_NAME -o -f $i/lib/libming.a; then
+    if test -f $i/$PHP_LIBDIR/libming.$SHLIB_SUFFIX_NAME -o -f $i/$PHP_LIBDIR/libming.a; then
       MING_DIR=$i
       break
     fi

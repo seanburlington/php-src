@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.52 2005/08/03 14:08:42 sniper Exp $ */
+/* $Id: plain_wrapper.c,v 1.53 2005/08/26 12:50:06 derick Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -156,6 +156,7 @@ PHPAPI php_stream *_php_stream_fopen_tmpfile(int dummy STREAMS_DC TSRMLS_DC)
 		if (stream) {
 			php_stdio_stream_data *self = (php_stdio_stream_data*)stream->abstract;
 			stream->wrapper = &php_plain_files_wrapper;
+			stream->orig_path = estrdup(opened_path);
 
 			self->temp_file_name = opened_path;
 			self->lock_flag = LOCK_UN;

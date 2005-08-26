@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.39 2004/05/25 13:23:20 wez Exp $ */
+/* $Id: plain_wrapper.c,v 1.52.2.1 2005/08/26 12:56:07 derick Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -83,93 +83,16 @@ PHPAPI int php_stream_parse_fopen_modes(const char *mode, int *open_flags)
 }
 
 
-/* {{{ php_stream_fopen */
-PHPAPI php_stream *_php_stream_fopen(const char *filename, const char *mode, char **opened_path, int options STREAMS_DC TSRMLS_DC)
-{
-	char *realpath = NULL;
-	struct stat st;
-	int open_flags;
-	int fd;
-	php_stream *ret;
-	int persistent = options & STREAM_OPEN_PERSISTENT;
-	char *persistent_id = NULL;
-
-	if (FAILURE == php_stream_parse_fopen_modes(mode, &open_flags)) {
-		if (options & REPORT_ERRORS) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "`%s' is not a valid mode for fopen", mode);
-		}
-		return NULL;
-	}
-	
-	if ((realpath = expand_filepath(filename, NULL TSRMLS_CC)) == NULL) {
-		return NULL;
-	}
-
-	if (persistent) {
-		spprintf(&persistent_id, 0, "streams_stdio_%d_%s", open_flags, realpath);
-		switch (php_stream_from_persistent_id(persistent_id, &ret TSRMLS_CC)) {
-			case PHP_STREAM_PERSISTENT_SUCCESS:
-				if (opened_path) {
-					*opened_path = realpath;
-					realpath = NULL;
-				}
-				if (realpath) {
-					efree(realpath);
-				}
-				/* fall through */
-
-			case PHP_STREAM_PERSISTENT_FAILURE:
-				efree(persistent_id);;
-				return ret;
-		}
-	}
-	
-	fd = open(realpath, open_flags, 0666);
-
-	if (fd != -1)	{
-		/* sanity checks for include/require */
-		if (options & STREAM_OPEN_FOR_INCLUDE && (fstat(fd, &st) == -1 || !S_ISREG(st.st_mode))) {
-#ifdef PHP_WIN32
-			/* skip the sanity check; fstat doesn't appear to work on
-			 * UNC paths */
-			if (!IS_UNC_PATH(filename, strlen(filename)))
-#endif
-				goto err;
-		} 
-	
-		ret = php_stream_fopen_from_fd_rel(fd, mode, persistent_id);
-
-		if (ret)	{
-			if (opened_path) {
-				*opened_path = realpath;
-				realpath = NULL;
-			}
-			if (realpath) {
-				efree(realpath);
-			}
-			if (persistent_id) {
-				efree(persistent_id);
-			}
-			return ret;
-		}
-err:
-		close(fd);
-	}
-	efree(realpath);
-	if (persistent_id) {
-		efree(persistent_id);
-	}
-	return NULL;
-}
-/* }}} */
-
 /* {{{ ------- STDIO stream implementation -------*/
 
 typedef struct {
 	FILE *file;
 	int fd;					/* underlying file descriptor */
-	int is_process_pipe;	/* use pclose instead of fclose */
-	int is_pipe;			/* don't try and seek */
+	unsigned is_process_pipe:1;	/* use pclose instead of fclose */
+	unsigned is_pipe:1;			/* don't try and seek */
+	unsigned cached_fstat:1;	/* sb is valid */
+	unsigned _reserved:29;
+	
 	int lock_flag;			/* stores the lock state */
 	char *temp_file_name;	/* if non-null, this is the path to a temporary file that
 							 * is to be deleted when the stream is closed */
@@ -185,7 +108,25 @@ typedef struct {
 	char *last_mapped_addr;
 	HANDLE file_mapping;
 #endif
+
+	struct stat sb;
 } php_stdio_stream_data;
+#define PHP_STDIOP_GET_FD(anfd, data)	anfd = (data)->file ? fileno((data)->file) : (data)->fd
+
+static int do_fstat(php_stdio_stream_data *d, int force)
+{
+	if (!d->cached_fstat || force) {
+		int fd;
+		int r;
+	   
+		PHP_STDIOP_GET_FD(fd, d);
+		r = fstat(fd, &d->sb);
+		d->cached_fstat = r == 0;
+
+		return r;
+	}
+	return 0;
+}
 
 PHPAPI php_stream *_php_stream_fopen_temporary_file(const char *dir, const char *pfx, char **opened_path STREAMS_DC TSRMLS_DC)
 {
@@ -214,6 +155,8 @@ PHPAPI php_stream *_php_stream_fopen_tmpfile(int dummy STREAMS_DC TSRMLS_DC)
 		php_stream *stream = php_stream_fopen_from_fd_rel(fd, "r+b", NULL);
 		if (stream) {
 			php_stdio_stream_data *self = (php_stdio_stream_data*)stream->abstract;
+			stream->wrapper = &php_plain_files_wrapper;
+			stream->orig_path = estrdup(opened_path);
 
 			self->temp_file_name = opened_path;
 			self->lock_flag = LOCK_UN;
@@ -246,8 +189,7 @@ PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode, const cha
 #ifdef S_ISFIFO
 	/* detect if this is a pipe */
 	if (self->fd >= 0) {
-		struct stat sb;
-		self->is_pipe = (fstat(self->fd, &sb) == 0 && S_ISFIFO(sb.st_mode)) ? 1 : 0;
+		self->is_pipe = (do_fstat(self, 0) == 0 && S_ISFIFO(self->sb.st_mode)) ? 1 : 0;
 	}
 #elif defined(PHP_WIN32)
 	{
@@ -267,6 +209,12 @@ PHPAPI php_stream *_php_stream_fopen_from_fd(int fd, const char *mode, const cha
 			stream->flags |= PHP_STREAM_FLAG_NO_SEEK;
 		} else {
 			stream->position = lseek(self->fd, 0, SEEK_CUR);
+#ifdef ESPIPE
+			if (stream->position == (off_t)-1 && errno == ESPIPE) {
+				stream->position = 0;
+				self->is_pipe = 1;
+			}
+#endif
 		}
 	}
 
@@ -290,8 +238,7 @@ PHPAPI php_stream *_php_stream_fopen_from_file(FILE *file, const char *mode STRE
 #ifdef S_ISFIFO
 	/* detect if this is a pipe */
 	if (self->fd >= 0) {
-		struct stat sb;
-		self->is_pipe = (fstat(self->fd, &sb) == 0 && S_ISFIFO(sb.st_mode)) ? 1 : 0;
+		self->is_pipe = (do_fstat(self, 0) == 0 && S_ISFIFO(self->sb.st_mode)) ? 1 : 0;
 	}
 #elif defined(PHP_WIN32)
 	{
@@ -335,8 +282,6 @@ PHPAPI php_stream *_php_stream_fopen_from_pipe(FILE *file, const char *mode STRE
 	stream->flags |= PHP_STREAM_FLAG_NO_SEEK;
 	return stream;
 }
-
-#define PHP_STDIOP_GET_FD(anfd, data)	anfd = (data)->file ? fileno((data)->file) : (data)->fd
 
 static size_t php_stdiop_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)
 {
@@ -430,8 +375,8 @@ static int php_stdiop_close(php_stream *stream, int close_handle TSRMLS_DC)
 			}
 		} else if (data->fd != -1) {
 #ifdef PHP_DEBUG
-			if (data->fd == 2 && 0 == strcmp(sapi_module.name, "cli")) {
-				/* don't close stderr in CLI in DEBUG mode, as we want to see any leaks */
+			if ((data->fd == 1 || data->fd == 2) && 0 == strcmp(sapi_module.name, "cli")) {
+				/* don't close stdout or stderr in CLI in DEBUG mode, as we want to see any leaks */
 				ret = 0;
 			} else {
 				ret = close(data->fd);
@@ -524,6 +469,9 @@ static int php_stdiop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)
 					/* we were opened as a plain file descriptor, so we
 					 * need fdopen now */
 					data->file = fdopen(data->fd, stream->mode);
+					if (data->file == NULL) {
+						return FAILURE;
+					}
 				}
 				
 				*(FILE**)ret = data->file;
@@ -561,14 +509,14 @@ static int php_stdiop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)
 
 static int php_stdiop_stat(php_stream *stream, php_stream_statbuf *ssb TSRMLS_DC)
 {
-	int fd;
+	int ret;
 	php_stdio_stream_data *data = (php_stdio_stream_data*) stream->abstract;
 
 	assert(data != NULL);
 
-	PHP_STDIOP_GET_FD(fd, data);
-	
-	return fstat(fd, &ssb->sb);
+	ret = do_fstat(data, 1);
+	memcpy(&ssb->sb, &data->sb, sizeof(ssb->sb));
+	return ret;
 }
 
 static int php_stdiop_set_option(php_stream *stream, int option, int value, void *ptrparam TSRMLS_DC)
@@ -641,7 +589,7 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 				return 0;
 			}
 
-			if (!flock(fd, value) || (errno == EWOULDBLOCK && value & LOCK_NB)) {
+			if (!flock(fd, value)) {
 				data->lock_flag = value;
 				return 0;
 			} else {
@@ -653,7 +601,6 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 #if HAVE_MMAP
 			{
 				php_stream_mmap_range *range = (php_stream_mmap_range*)ptrparam;
-				struct stat sbuf;
 				int prot, flags;
 				
 				switch (value) {
@@ -661,9 +608,9 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 						return fd == -1 ? PHP_STREAM_OPTION_RETURN_ERR : PHP_STREAM_OPTION_RETURN_OK;
 
 					case PHP_STREAM_MMAP_MAP_RANGE:
-						fstat(fd, &sbuf);
-						if (range->length == 0 || range->length > sbuf.st_size) {
-							range->length = sbuf.st_size;
+						do_fstat(data, 1);
+						if (range->length == 0 || range->length > data->sb.st_size) {
+							range->length = data->sb.st_size;
 						}
 						switch (range->mode) {
 							case PHP_STREAM_MAP_MODE_READONLY:
@@ -888,6 +835,94 @@ static php_stream *php_plain_files_dir_opener(php_stream_wrapper *wrapper, char 
 }
 /* }}} */
 
+/* {{{ php_stream_fopen */
+PHPAPI php_stream *_php_stream_fopen(const char *filename, const char *mode, char **opened_path, int options STREAMS_DC TSRMLS_DC)
+{
+	char *realpath = NULL;
+	int open_flags;
+	int fd;
+	php_stream *ret;
+	int persistent = options & STREAM_OPEN_PERSISTENT;
+	char *persistent_id = NULL;
+
+	if (FAILURE == php_stream_parse_fopen_modes(mode, &open_flags)) {
+		if (options & REPORT_ERRORS) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "`%s' is not a valid mode for fopen", mode);
+		}
+		return NULL;
+	}
+	
+	if ((realpath = expand_filepath(filename, NULL TSRMLS_CC)) == NULL) {
+		return NULL;
+	}
+
+	if (persistent) {
+		spprintf(&persistent_id, 0, "streams_stdio_%d_%s", open_flags, realpath);
+		switch (php_stream_from_persistent_id(persistent_id, &ret TSRMLS_CC)) {
+			case PHP_STREAM_PERSISTENT_SUCCESS:
+				if (opened_path) {
+					*opened_path = realpath;
+					realpath = NULL;
+				}
+				if (realpath) {
+					efree(realpath);
+				}
+				/* fall through */
+
+			case PHP_STREAM_PERSISTENT_FAILURE:
+				efree(persistent_id);;
+				return ret;
+		}
+	}
+	
+	fd = open(realpath, open_flags, 0666);
+
+	if (fd != -1)	{
+
+		ret = php_stream_fopen_from_fd_rel(fd, mode, persistent_id);
+
+		if (ret)	{
+			if (opened_path) {
+				*opened_path = realpath;
+				realpath = NULL;
+			}
+			if (realpath) {
+				efree(realpath);
+			}
+			if (persistent_id) {
+				efree(persistent_id);
+			}
+
+			/* sanity checks for include/require.
+			 * We check these after opening the stream, so that we save
+			 * on fstat() syscalls */
+			if (options & STREAM_OPEN_FOR_INCLUDE) {
+				php_stdio_stream_data *self = (php_stdio_stream_data*)ret->abstract;
+				int r;
+
+				r = do_fstat(self, 0);
+				if (
+#ifndef PHP_WIN32
+						(r != 0) || /* it is OK for fstat to fail under win32 */
+#endif
+						(r == 0 && !S_ISREG(self->sb.st_mode))) {
+					php_stream_close(ret);
+					return NULL;
+				}
+			}
+
+			return ret;
+		}
+		close(fd);
+	}
+	efree(realpath);
+	if (persistent_id) {
+		efree(persistent_id);
+	}
+	return NULL;
+}
+/* }}} */
+
 
 static php_stream *php_plain_files_stream_opener(php_stream_wrapper *wrapper, char *path, char *mode,
 		int options, char **opened_path, php_stream_context *context STREAMS_DC TSRMLS_DC)
@@ -997,10 +1032,35 @@ static int php_plain_files_rename(php_stream_wrapper *wrapper, char *url_from, c
 	if (ret == -1) {
 #ifdef EXDEV
 		if (errno == EXDEV) {
+			struct stat sb;
 			if (php_copy_file(url_from, url_to TSRMLS_CC) == SUCCESS) {
-				VCWD_UNLINK(url_from);
-				return 1;
+				if (VCWD_STAT(url_from, &sb) == 0) {
+#if !defined(TSRM_WIN32) && !defined(NETWARE)
+					if (VCWD_CHMOD(url_to, sb.st_mode)) {
+						if (errno == EPERM) {
+							php_error_docref2(NULL TSRMLS_CC, url_from, url_to, E_WARNING, "%s", strerror(errno));
+							VCWD_UNLINK(url_from);
+							return 1;
+						}
+						php_error_docref2(NULL TSRMLS_CC, url_from, url_to, E_WARNING, "%s", strerror(errno));
+						return 0;
+					}
+					if (VCWD_CHOWN(url_to, sb.st_uid, sb.st_gid)) {
+						if (errno == EPERM) {
+							php_error_docref2(NULL TSRMLS_CC, url_from, url_to, E_WARNING, "%s", strerror(errno));
+							VCWD_UNLINK(url_from);
+							return 1;
+						}
+						php_error_docref2(NULL TSRMLS_CC, url_from, url_to, E_WARNING, "%s", strerror(errno));
+						return 0;
+					}
+#endif
+					VCWD_UNLINK(url_from);
+					return 1;
+				}
 			}
+			php_error_docref2(NULL TSRMLS_CC, url_from, url_to, E_WARNING, "%s", strerror(errno));
+			return 0;
 		}
 #endif
 		php_error_docref2(NULL TSRMLS_CC, url_from, url_to, E_WARNING, "%s", strerror(errno));
@@ -1026,18 +1086,24 @@ static int php_plain_files_mkdir(php_stream_wrapper *wrapper, char *dir, int mod
 		char *e, *buf;
 		struct stat sb;
 		int dir_len = strlen(dir);
+		int offset = 0;
 
 		buf = estrndup(dir, dir_len);
 		e = buf + dir_len;
 
+		if ((p = memchr(buf, DEFAULT_SLASH, dir_len))) {
+			offset = p - buf + 1;
+		}
+
 		/* find a top level directory we need to create */
-		while ((p = strrchr(buf, DEFAULT_SLASH))) {
+		while ((p = strrchr(buf + offset, DEFAULT_SLASH))) {
 			*p = '\0';
 			if (VCWD_STAT(buf, &sb) == 0) {
 				*p = DEFAULT_SLASH;
 				break;
 			}
 		}
+
 		if (p == buf) {
 			ret = php_mkdir(dir, mode TSRMLS_CC);
 		} else if (!(ret = php_mkdir(buf, mode TSRMLS_CC))) {
@@ -1244,24 +1310,24 @@ not_relative_path:
 			end++;
 		}
 		snprintf(trypath, MAXPATHLEN, "%s/%s", ptr, filename);
-		
-		if (((options & STREAM_DISABLE_OPEN_BASEDIR) == 0) && php_check_open_basedir(trypath TSRMLS_CC)) {
-			stream = NULL;
-			goto stream_done;
+
+		if (((options & STREAM_DISABLE_OPEN_BASEDIR) == 0) && php_check_open_basedir_ex(trypath, 0 TSRMLS_CC)) {
+			ptr = end;
+			continue;
 		}
 		
 		if (PG(safe_mode)) {
 			if (VCWD_STAT(trypath, &sb) == 0) {
 				/* file exists ... check permission */
 				if ((php_check_safe_mode_include_dir(trypath TSRMLS_CC) == 0) ||
-						php_checkuid(trypath, mode, CHECKUID_CHECK_MODE_PARAM)) {
+						php_checkuid_ex(trypath, mode, CHECKUID_CHECK_MODE_PARAM, CHECKUID_NO_ERRORS)) {
 					/* UID ok, or trypath is in safe_mode_include_dir */
 					stream = php_stream_fopen_rel(trypath, mode, opened_path, options);
-				} else {
-					stream = NULL;
+					goto stream_done;
 				}
-				goto stream_done;
 			}
+			ptr = end;
+			continue;
 		}
 		stream = php_stream_fopen_rel(trypath, mode, opened_path, options);
 		if (stream) {

@@ -1,3 +1,37 @@
+2005-08-26  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ext/ming/config.m4:
+      - Check for static libs, too
+
+2005-08-26  Derick Rethans  <php@derickrethans.nl>
+
+    * (PHP_5_1)
+      NEWS
+      main/streams/plain_wrapper.c:
+      - MFH: Fixed a bug where stream_get_meta_data() did not return the "uri"
+        element for files opened with tmpname().
+
+    * NEWS
+      main/streams/plain_wrapper.c:
+      - Fixed a bug where stream_get_meta_data() did not return the "uri" element
+      for
+        files opened with tmpname().
+
+2005-08-26  Rolland Santimano  <rollandsantimano@yahoo.com>
+
+    * ext/standard/string.c:
+      - Updated strrev() to handle base+combining sequences
+
+2005-08-26  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/standard/base64.c
+      ext/standard/base64.c:
+      MFH: Fixed bug #34214 (base64_decode() does not properly ignore whitespace)
+
+    * (PHP_5_1)
+      ext/standard/base64.c:
+      Fixed bug #34214 (base64_decode() does not properly ignore whitespace)
+
 2005-08-25  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * (PHP_5_1)
@@ -10693,7 +10727,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2085 2005/08/26 05:36:36 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2086 2005/08/27 05:35:34 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -14094,7 +14128,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2085 2005/08/26 05:36:36 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2086 2005/08/27 05:35:34 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -14575,7 +14609,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2085 2005/08/26 05:36:36 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2086 2005/08/27 05:35:34 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -16049,7 +16083,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2085 2005/08/26 05:36:36 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2086 2005/08/27 05:35:34 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

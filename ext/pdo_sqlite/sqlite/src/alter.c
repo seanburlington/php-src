@@ -12,7 +12,7 @@
 ** This file contains C code routines that used to generate VDBE code
 ** that implements the ALTER TABLE command.
 **
-** $Id: alter.c,v 1.2 2005/06/30 20:58:32 iliaa Exp $
+** $Id: alter.c,v 1.3 2005/08/28 16:56:59 iliaa Exp $
 */
 #include "sqliteInt.h"
 #include <ctype.h>
@@ -258,6 +258,7 @@ void sqlite3AlterRenameTable(
   char *zWhere = 0;         /* Where clause to locate temp triggers */
 #endif
   
+  if( sqlite3_malloc_failed ) goto exit_rename_table;
   assert( pSrc->nSrc==1 );
 
   pTab = sqlite3LocateTable(pParse, pSrc->a[0].zName, pSrc->a[0].zDatabase);
@@ -500,8 +501,10 @@ void sqlite3AlterBeginAddColumn(Parse *pParse, SrcList *pSrc){
   int i;
   int nAlloc;
 
+
   /* Look up the table being altered. */
-  assert( !pParse->pNewTable );
+  assert( pParse->pNewTable==0 );
+  if( sqlite3_malloc_failed ) goto exit_begin_add_column;
   pTab = sqlite3LocateTable(pParse, pSrc->a[0].zName, pSrc->a[0].zDatabase);
   if( !pTab ) goto exit_begin_add_column;
 
@@ -520,6 +523,7 @@ void sqlite3AlterBeginAddColumn(Parse *pParse, SrcList *pSrc){
   pNew = (Table *)sqliteMalloc(sizeof(Table));
   if( !pNew ) goto exit_begin_add_column;
   pParse->pNewTable = pNew;
+  pNew->nRef = 1;
   pNew->nCol = pTab->nCol;
   assert( pNew->nCol>0 );
   nAlloc = (((pNew->nCol-1)/8)*8)+8;

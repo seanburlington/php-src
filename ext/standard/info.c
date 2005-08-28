@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.249.2.3 2005/08/16 00:25:39 iliaa Exp $ */
+/* $Id: info.c,v 1.249.2.4 2005/08/28 01:03:41 sniper Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -149,14 +149,16 @@ static void php_print_gpcse_array(char *name, uint name_length TSRMLS_DC)
 				php_ob_get_buffer(tmp3 TSRMLS_CC);
 				php_end_ob_buffer(0, 0 TSRMLS_CC);
 				
-				elem_esc = php_info_html_esc(Z_STRVAL_P(tmp3) TSRMLS_CC);
-				PUTS(elem_esc);
-				efree(elem_esc);
+				if (!sapi_module.phpinfo_as_text) {
+					elem_esc = php_info_html_esc(Z_STRVAL_P(tmp3) TSRMLS_CC);
+					PUTS(elem_esc);
+					efree(elem_esc);
+					PUTS("</pre>");
+				} else {
+					PUTS(Z_STRVAL_P(tmp3));
+				}
 				zval_ptr_dtor(&tmp3);
 
-				if (!sapi_module.phpinfo_as_text) {
-					PUTS("</pre>");
-				}
 			} else if (Z_TYPE_PP(tmp) != IS_STRING) {
 				tmp2 = **tmp;
 				zval_copy_ctor(&tmp2);

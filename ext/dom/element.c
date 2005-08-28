@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.30 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: element.c,v 1.36.2.1 2005/08/28 16:23:25 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -137,7 +137,7 @@ PHP_METHOD(domelement, __construct)
 }
 /* }}} end DOMElement::__construct */
 
-/* {{{ proto tagName	string	
+/* {{{ tagName	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-104682815
 Since: 
@@ -174,7 +174,7 @@ int dom_element_tag_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto schemaTypeInfo	typeinfo	
+/* {{{ schemaTypeInfo	typeinfo	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#Element-schemaTypeInfo
 Since: DOM Level 3
@@ -250,7 +250,7 @@ PHP_FUNCTION(dom_element_set_attribute)
 	}
 
 	attr = xmlHasProp(nodep,name);
-	if (attr != NULL) {
+	if (attr != NULL && attr->type != XML_ATTRIBUTE_DECL) {
 		node_list_unlink(attr->children TSRMLS_CC);
 	}
 	attr = xmlSetProp(nodep, name, value);
@@ -294,13 +294,14 @@ PHP_FUNCTION(dom_element_remove_attribute)
 		RETURN_FALSE;
 	}
 
-	/*	TODO: DTD defined attributes are handled special */
-	if (php_dom_object_get_data((xmlNodePtr) attrp) == NULL) {
-		node_list_unlink(attrp->children TSRMLS_CC);
-		xmlUnlinkNode((xmlNodePtr) attrp);
-		xmlFreeProp(attrp);
-	} else {
-		xmlUnlinkNode((xmlNodePtr) attrp);
+	if (attrp->type != XML_ATTRIBUTE_DECL) {
+		if (php_dom_object_get_data((xmlNodePtr) attrp) == NULL) {
+			node_list_unlink(attrp->children TSRMLS_CC);
+			xmlUnlinkNode((xmlNodePtr) attrp);
+			xmlFreeProp(attrp);
+		} else {
+			xmlUnlinkNode((xmlNodePtr) attrp);
+		}
 	}
 
 	RETURN_TRUE;
@@ -368,7 +369,7 @@ PHP_FUNCTION(dom_element_set_attribute_node)
 	}
 
 	existattrp = xmlHasProp(nodep, attrp->name);
-	if (existattrp != NULL) {
+	if (existattrp != NULL && existattrp->type != XML_ATTRIBUTE_DECL) {
 		if ((oldobj = php_dom_object_get_data((xmlNodePtr) existattrp)) != NULL && 
 			((php_libxml_node_ptr *)oldobj->ptr)->node == (xmlNodePtr) attrp)
 		{
@@ -455,7 +456,7 @@ PHP_FUNCTION(dom_element_get_elements_by_tag_name)
 	php_dom_create_interator(return_value, DOM_NODELIST TSRMLS_CC);
 	namednode = (dom_object *)zend_objects_get_address(return_value TSRMLS_CC);
 	local = xmlCharStrndup(name, name_len);
-	dom_namednode_iter(intern, 0, namednode, NULL, local, NULL);
+	dom_namednode_iter(intern, 0, namednode, NULL, local, NULL TSRMLS_CC);
 }
 /* }}} end dom_element_get_elements_by_tag_name */
 
@@ -500,6 +501,42 @@ PHP_FUNCTION(dom_element_get_attribute_ns)
 }
 /* }}} end dom_element_get_attribute_ns */
 
+static xmlNsPtr _dom_new_reconNs(xmlDocPtr doc, xmlNodePtr tree, xmlNsPtr ns) {
+    xmlNsPtr def;
+    xmlChar prefix[50];
+    int counter = 1;
+
+	if ((tree == NULL) || (ns == NULL) || (ns->type != XML_NAMESPACE_DECL)) {
+		return NULL;
+	}
+
+	/* Code taken from libxml2 (2.6.20) xmlNewReconciliedNs
+	 *
+	 * Find a close prefix which is not already in use.
+	 * Let's strip namespace prefixes longer than 20 chars !
+	 */
+	if (ns->prefix == NULL)
+		snprintf((char *) prefix, sizeof(prefix), "default");
+	else
+		snprintf((char *) prefix, sizeof(prefix), "%.20s", (char *)ns->prefix);
+
+	def = xmlSearchNs(doc, tree, prefix);
+	while (def != NULL) {
+		if (counter > 1000) return(NULL);
+		if (ns->prefix == NULL)
+			snprintf((char *) prefix, sizeof(prefix), "default%d", counter++);
+		else
+			snprintf((char *) prefix, sizeof(prefix), "%.20s%d", 
+			(char *)ns->prefix, counter++);
+		def = xmlSearchNs(doc, tree, prefix);
+	}
+
+	/*
+	 * OK, now we are ready to create a new one.
+	 */
+	def = xmlNewNs(tree, ns->href, prefix);
+	return(def);
+}
 
 /* {{{ proto void dom_element_set_attribute_ns(string namespaceURI, string qualifiedName, string value);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-ElSetAttrNS
@@ -540,7 +577,7 @@ PHP_FUNCTION(dom_element_set_attribute_ns)
 	if (errorcode == 0) {
 		if (uri_len > 0) {
 			nodep = (xmlNodePtr) xmlHasNsProp(elemp, localname, uri);
-			if (nodep != NULL) {
+			if (nodep != NULL && nodep->type != XML_ATTRIBUTE_DECL) {
 				node_list_unlink(nodep->children TSRMLS_CC);
 			}
 
@@ -549,8 +586,21 @@ PHP_FUNCTION(dom_element_set_attribute_ns)
 				nsptr = dom_get_nsdecl(elemp, localname);
 			} else {
 				nsptr = xmlSearchNsByHref(elemp->doc, elemp, uri);
-				while (nsptr && nsptr->prefix == NULL) {
-					nsptr = nsptr->next;
+				if (nsptr && nsptr->prefix == NULL) {
+					xmlNsPtr tmpnsptr;
+
+					tmpnsptr = nsptr->next;
+					while (tmpnsptr) {
+						if ((tmpnsptr->prefix != NULL) && (tmpnsptr->href != NULL) && 
+							(xmlStrEqual(tmpnsptr->href, (xmlChar *) uri))) {
+							nsptr = tmpnsptr;
+							break;
+						}
+						tmpnsptr = tmpnsptr->next;
+					}
+					if (tmpnsptr == NULL) {
+						nsptr = _dom_new_reconNs(elemp->doc, elemp, nsptr);
+					}
 				}
 			}
 
@@ -578,7 +628,7 @@ PHP_FUNCTION(dom_element_set_attribute_ns)
 			}
 		} else {
 			attr = xmlHasProp(elemp, localname);
-			if (attr != NULL) {
+			if (attr != NULL && attr->type != XML_ATTRIBUTE_DECL) {
 				node_list_unlink(attr->children TSRMLS_CC);
 			}
 			attr = xmlSetProp(elemp, localname, value);
@@ -642,7 +692,7 @@ PHP_FUNCTION(dom_element_remove_attribute_ns)
 		}
 	}
 
-	if (attrp) {
+	if (attrp && attrp->type != XML_ATTRIBUTE_DECL) {
 		if (php_dom_object_get_data((xmlNodePtr) attrp) == NULL) {
 			node_list_unlink(attrp->children TSRMLS_CC);
 			xmlUnlinkNode((xmlNodePtr) attrp);
@@ -670,7 +720,7 @@ PHP_FUNCTION(dom_element_get_attribute_node_ns)
 	int uri_len, name_len, ret;
 	char *uri, *name;
 
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Oss", &id, dom_element_class_entry, &uri, &uri_len, &name, &name_len) == FAILURE) {
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Os!s", &id, dom_element_class_entry, &uri, &uri_len, &name, &name_len) == FAILURE) {
 		return;
 	}
 
@@ -726,7 +776,7 @@ PHP_FUNCTION(dom_element_set_attribute_node_ns)
         existattrp = xmlHasProp(nodep, attrp->name);
     }
 
-	if (existattrp != NULL) {
+	if (existattrp != NULL && existattrp->type != XML_ATTRIBUTE_DECL) {
 		if ((oldobj = php_dom_object_get_data((xmlNodePtr) existattrp)) != NULL && 
 			((php_libxml_node_ptr *)oldobj->ptr)->node == (xmlNodePtr) attrp)
 		{
@@ -777,7 +827,7 @@ PHP_FUNCTION(dom_element_get_elements_by_tag_name_ns)
 	namednode = (dom_object *)zend_objects_get_address(return_value TSRMLS_CC);
 	local = xmlCharStrndup(name, name_len);
 	nsuri = xmlCharStrndup(uri, uri_len);
-	dom_namednode_iter(intern, 0, namednode, NULL, local, nsuri);
+	dom_namednode_iter(intern, 0, namednode, NULL, local, nsuri TSRMLS_CC);
 
 }
 /* }}} end dom_element_get_elements_by_tag_name_ns */

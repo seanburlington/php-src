@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.645 2005/08/17 07:52:17 sniper Exp $ */
+/* $Id: main.c,v 1.646 2005/08/29 06:51:51 dmitry Exp $ */
 
 /* {{{ includes
  */
@@ -572,7 +572,7 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 		stage = "PHP Shutdown";
 	} else {
 		function = get_active_function_name(TSRMLS_C);
-		if (function && !USTR_LEN(function)) {
+		if (!function || !USTR_LEN(function)) {
 			stage = "Unknown";
 			function = NULL;
 		}
@@ -582,7 +582,7 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 	if (function) {
 		spprintf(&origin, 0, "%v%s%v(%s)", class_name, space, function, params);	
 	} else {
-		spprintf(&origin, 0, "%v", stage);	
+		spprintf(&origin, 0, "%s", stage);	
 	}
 
 	/* origin and buffer available, so lets come up with the error message */

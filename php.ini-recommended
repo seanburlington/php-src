@@ -1,12 +1,57 @@
 [PHP]
 
 ;;;;;;;;;;;;;;;;;;;
+; About php.ini   ;
+;;;;;;;;;;;;;;;;;;;
+; This file controls many aspects of PHP's behavior.  In order for PHP to
+; read it, it must be named 'php.ini'.  PHP looks for it in the current
+; working directory, in the path designated by the environment variable
+; PHPRC, and in the path that was defined in compile time (in that order).
+; Under Windows, the compile-time path is the Windows directory.  The
+; path in which the php.ini file is looked for can be overridden using
+; the -c argument in command line mode.
+;
+; The syntax of the file is extremely simple.  Whitespace and Lines
+; beginning with a semicolon are silently ignored (as you probably guessed).
+; Section headers (e.g. [Foo]) are also silently ignored, even though
+; they might mean something in the future.
+;
+; Directives are specified using the following syntax:
+; directive = value
+; Directive names are *case sensitive* - foo=bar is different from FOO=bar.
+;
+; The value can be a string, a number, a PHP constant (e.g. E_ALL or M_PI), one
+; of the INI constants (On, Off, True, False, Yes, No and None) or an expression
+; (e.g. E_ALL & ~E_NOTICE), or a quoted string ("foo").
+;
+; Expressions in the INI file are limited to bitwise operators and parentheses:
+; |        bitwise OR
+; &        bitwise AND
+; ~        bitwise NOT
+; !        boolean NOT
+;
+; Boolean flags can be turned on using the values 1, On, True or Yes.
+; They can be turned off using the values 0, Off, False or No.
+;
+; An empty string can be denoted by simply not writing anything after the equal
+; sign, or by using the None keyword:
+;
+;  foo =         ; sets foo to an empty string
+;  foo = none    ; sets foo to an empty string
+;  foo = "none"  ; sets foo to the string 'none'
+;
+; If you use constants in your value, and these constants belong to a
+; dynamically loaded extension (either a PHP extension or a Zend extension),
+; you may only use these constants *after* the line that loads the extension.
+; 
+;
+;;;;;;;;;;;;;;;;;;;
 ; About this file ;
 ;;;;;;;;;;;;;;;;;;;
-;
-; This is the recommended, PHP 4-style version of the php.ini-dist file.  It
+; This is the recommended, PHP 5-style version of the php.ini-dist file.  It
 ; sets some non standard settings, that make PHP more efficient, more secure,
 ; and encourage cleaner coding.
+;
 ; The price is that with these settings, PHP may be incompatible with some
 ; applications, and sometimes, more difficult to develop with.  Using this
 ; file is warmly recommended for production sites.  As all of the changes from
@@ -19,7 +64,7 @@
 ; This file is different from the php.ini-dist file in the fact that it features
 ; different values for several directives, in order to improve performance, while
 ; possibly breaking compatibility with the standard out-of-the-box behavior of
-; PHP 3.  Please make sure you read what's different, and modify your scripts
+; PHP.  Please make sure you read what's different, and modify your scripts
 ; accordingly, if you decide to use this file instead.
 ;
 ; - register_globals = Off         [Security, Performance]
@@ -34,6 +79,10 @@
 ;     default) in the next version of PHP, because it often leads to security bugs.
 ;     Read http://php.net/manual/en/security.registerglobals.php for further
 ;     information.
+; - register_long_arrays = Off     [Performance]
+;     Disables registration of the older (and deprecated) long predefined array
+;     variables ($HTTP_*_VARS).  Instead, use the superglobals that were
+;     introduced in PHP 4.1.0
 ; - display_errors = Off           [Security]
 ;     With this directive set to off, errors that occur during the execution of
 ;     scripts will no longer be displayed as a part of the script output, and thus,
@@ -60,7 +109,7 @@
 ;     SQL databases without further manipulation.  Instead, you should use the
 ;     function addslashes() on each input element you wish to send to a database.
 ; - variables_order = "GPCS"       [Performance]
-;     The environment variables are not hashed into the $HTTP_ENV_VARS[].  To access
+;     The environment variables are not hashed into the $_ENV.  To access
 ;     environment variables, you can use getenv() instead.
 ; - error_reporting = E_ALL        [Code Cleanliness, Security(?)]
 ;     By default, PHP surpresses errors of type E_NOTICE.  These error messages
@@ -89,7 +138,7 @@ zend.ze1_compatibility_mode = Off
 ; servers which are not under your control, because short tags may not
 ; be supported on the target server. For portable, redistributable code,
 ; be sure not to use short tags.
-short_open_tag = On
+short_open_tag = Off
 
 ; Allow ASP-style <% %> tags.
 asp_tags = Off
@@ -119,17 +168,19 @@ output_buffering = 4096
 ;       is doing.
 ; Note: You cannot use both "mb_output_handler" with "ob_iconv_handler"
 ;       and you cannot use both "ob_gzhandler" and "zlib.output_compression".
+; Note: output_handler must be empty if this is set 'On' !!!!
+;       Instead you must use zlib.output_handler.
 ;output_handler =
 
 ; Transparent output compression using the zlib library
 ; Valid values for this option are 'off', 'on', or a specific buffer size
 ; to be used for compression (default is 4KB)
 ; Note: Resulting chunk size may vary due to nature of compression. PHP
-;       outputs chunks that are few handreds bytes each as a result of compression.
-;       If you want larger chunk size for better performence, enable output_buffering
-;       also.
-; Note: output_handler must be empty if this is set 'On' !!!!
-;       Instead you must use zlib.output_handler.
+;       outputs chunks that are few hundreds bytes each as a result of
+;       compression. If you prefer a larger chunk size for better
+;       performance, enable output_buffering in addition.
+; Note: You need to use zlib.output_handler instead of the standard
+;       output_handler, or otherwise the output will be corrupted.
 zlib.output_compression = Off
 
 ; You cannot specify additional output handlers if zlib.output_compression
@@ -144,7 +195,7 @@ zlib.output_compression = Off
 ; implications and is generally recommended for debugging purposes only.
 implicit_flush = Off
 
-; The unserialize callback function will called (with the undefind class'
+; The unserialize callback function will be called (with the undefined class'
 ; name as parameter), if the unserializer finds an undefined class
 ; which should be instanciated.
 ; A warning appears if the specified function is not defined, or if the
@@ -221,7 +272,7 @@ disable_functions =
 disable_classes =
 
 ; Colors for Syntax Highlighting mode.  Anything that's acceptable in
-; <font color="??????"> would work.
+; <span style="color: ???????"> would work.
 ;highlight.string  = #DD0000
 ;highlight.comment = #FF9900
 ;highlight.keyword = #007700
@@ -229,6 +280,10 @@ disable_classes =
 ;highlight.default = #0000BB
 ;highlight.html    = #000000
 
+; If enabled, the request will be allowed to complete even if the user aborts
+; the request. Consider enabling it if executing long request, which may end up
+; being interrupted by the user or a browser timing out.
+; ignore_user_abort = On
 
 ;
 ; Misc
@@ -255,7 +310,7 @@ memory_limit = 8M      ; Maximum amount of memory a script may consume (8MB)
 
 ; error_reporting is a bit-field.  Or each number up to get desired error
 ; reporting level
-; E_ALL             - All errors and warnings
+; E_ALL             - All errors and warnings (doesn't include E_STRICT)
 ; E_ERROR           - fatal run-time errors
 ; E_WARNING         - run-time warnings (non-fatal errors)
 ; E_PARSE           - compile-time parse errors
@@ -266,7 +321,7 @@ memory_limit = 8M      ; Maximum amount of memory a script may consume (8MB)
 ;                     empty string)
 ; E_STRICT          - run-time notices, enable to have PHP suggest changes
 ;                     to your code which will ensure the best interoperability
-;                     and forward compatability of your code
+;                     and forward compatibility of your code
 ; E_CORE_ERROR      - fatal errors that occur during PHP's initial startup
 ; E_CORE_WARNING    - warnings (non-fatal errors) that occur during PHP's
 ;                     initial startup
@@ -290,7 +345,7 @@ memory_limit = 8M      ; Maximum amount of memory a script may consume (8MB)
 ;
 ;error_reporting = E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR
 ;
-;   - Show all errors
+;   - Show all errors, except coding standards warnings
 ;
 error_reporting  =  E_ALL
 
@@ -401,6 +456,13 @@ register_long_arrays = Off
 ; should turn it off for increased performance.
 register_argc_argv = Off
 
+; When enabled, the SERVER and ENV variables are created when they're first
+; used (Just In Time) instead of when the script starts. If these variables
+; are not used within a script, having this directive on will result in a
+; performance gain. The PHP directives register_globals, register_long_arrays,
+; and register_argc_argv must be disabled for this directive to have any affect.
+auto_globals_jit = On
+
 ; Maximum size of POST data that PHP will accept.
 post_max_size = 8M
 
@@ -449,7 +511,7 @@ default_mimetype = "text/html"
 ; cgi.force_redirect configuration below
 doc_root =
 
-; The directory under which PHP opens the script using /~usernamem used only
+; The directory under which PHP opens the script using /~username used only
 ; if nonempty.
 user_dir =
 
@@ -484,6 +546,9 @@ enable_dl = On
 ; Set to 1 if running under IIS.  Default is zero.
 ; fastcgi.impersonate = 1;
 
+; Disable logging through FastCGI connection
+; fastcgi.log = 0
+
 ; cgi.rfc2616_headers configuration option tells PHP what type of headers to
 ; use when sending HTTP response code. If it's set 0 PHP sends Status: header that
 ; is supported by Apache. When this option is set to 1 PHP will send
@@ -517,8 +582,8 @@ allow_url_fopen = On
 ; Define the anonymous ftp password (your email address)
 ;from="john@doe.com"
 
-; Define the user agent for php to send
-;user_agent="PHP"
+; Define the User-Agent string
+; user_agent="PHP"
 
 ; Default timeout for socket based streams (seconds)
 default_socket_timeout = 60
@@ -553,29 +618,26 @@ default_socket_timeout = 60
 ; extension_dir directive above.
 
 
-;Windows Extensions
-;Note that ODBC support is built in, so no dll is needed for it.
-;
+; Windows Extensions
+; Note that ODBC support is built in, so no dll is needed for it.
+; Note that many DLL files are located in the extensions/ (PHP 4) ext/ (PHP 5)
+; extension folders as well as the separate PECL DLL download (PHP 5).
+; Be sure to appropriately set the extension_dir directive.
 
+;extension=php_mbstring.dll
 ;extension=php_bz2.dll
-;extension=php_cpdf.dll
 ;extension=php_curl.dll
 ;extension=php_dba.dll
 ;extension=php_dbase.dll
-;extension=php_dbx.dll
 ;extension=php_exif.dll
 ;extension=php_fdf.dll
 ;extension=php_filepro.dll
 ;extension=php_gd2.dll
 ;extension=php_gettext.dll
-;extension=php_iconv.dll
 ;extension=php_ifx.dll
-;extension=php_iisfunc.dll
 ;extension=php_imap.dll
 ;extension=php_interbase.dll
-;extension=php_java.dll
 ;extension=php_ldap.dll
-;extension=php_mbstring.dll
 ;extension=php_mcrypt.dll
 ;extension=php_mhash.dll
 ;extension=php_mime_magic.dll
@@ -586,23 +648,23 @@ default_socket_timeout = 60
 ;extension=php_oci8.dll
 ;extension=php_openssl.dll
 ;extension=php_oracle.dll
-;extension=php_pdf.dll
 ;extension=php_pgsql.dll
 ;extension=php_shmop.dll
 ;extension=php_snmp.dll
 ;extension=php_sockets.dll
 ;extension=php_sybase_ct.dll
 ;extension=php_tidy.dll
-;extension=php_w32api.dll
 ;extension=php_xmlrpc.dll
 ;extension=php_xsl.dll
-;extension=php_yaz.dll
-;extension=php_zip.dll
 
 
 ;;;;;;;;;;;;;;;;;;;
 ; Module Settings ;
 ;;;;;;;;;;;;;;;;;;;
+
+[Date]
+; Defines the default timezone used by the date functions
+;date.timezone =
 
 [Syslog]
 ; Whether or not to define the various syslog variables (e.g. $LOG_PID,
@@ -624,7 +686,7 @@ smtp_port = 25
 ; Force the addition of the specified parameters to be passed as extra parameters
 ; to the sendmail binary. These parameters will always replace the value of
 ; the 5th parameter to mail(), even in safe mode.
-;mail.force_extra_paramaters =
+;mail.force_extra_parameters =
 
 [SQL]
 sql.safe_mode = Off
@@ -688,14 +750,14 @@ mysql.default_user =
 ; file will be able to reveal the password as well.
 mysql.default_password =
 
-; Maximum time (in secondes) for connect timeout. -1 means no limimt
+; Maximum time (in secondes) for connect timeout. -1 means no limit
 mysql.connect_timeout = 60
 
 ; Trace mode. When trace_mode is active (=On), warnings for table/index scans and
-; SQL-Erros will be displayed.
+; SQL-Errors will be displayed.
 mysql.trace_mode = Off
 
-[MySQLI]
+[MySQLi]
 
 ; Maximum number of links.  -1 means no limit.
 mysqli.max_links = -1
@@ -718,10 +780,10 @@ mysqli.default_user =
 
 ; Default password for mysqli_connect() (doesn't apply in safe mode).
 ; Note that this is generally a *bad* idea to store passwords in this file.
-; *Any* user with PHP access can run 'echo get_cfg_var("mysqli.default_password")
+; *Any* user with PHP access can run 'echo get_cfg_var("mysqli.default_pw")
 ; and reveal this password!  And of course, any users with read access to this
 ; file will be able to reveal the password as well.
-mysqli.default_password =
+mysqli.default_pw =
 
 ; Allow or prevent reconnect
 mysqli.reconnect = Off
@@ -798,16 +860,6 @@ sybct.min_server_severity = 10
 
 ; Minimum client message severity to display.
 sybct.min_client_severity = 10
-
-[dbx]
-; returned column names can be converted for compatibility reasons
-; possible values for dbx.colnames_case are
-; "unchanged" (default, if not set)
-; "lowercase"
-; "uppercase"
-; the recommended default is either upper- or lowercase, but
-; unchanged is currently set for backwards compatibility
-dbx.colnames_case = "lowercase"
 
 [bcmath]
 ; Number of decimal digits for all bcmath functions.
@@ -923,10 +975,18 @@ session.gc_divisor     = 1000
 ; cleaned up by the garbage collection process.
 session.gc_maxlifetime = 1440
 
+; NOTE: If you are using the subdirectory option for storing session files
+;       (see session.save_path above), then garbage collection does *not*
+;       happen automatically.  You will need to do your own garbage
+;       collection through a shell script, cron entry, or some other method.
+;       For example, the following script would is the equivalent of
+;       setting session.gc_maxlifetime to 1440 (1440 seconds = 24 minutes):
+;          cd /path/to/sessions; find -cmin +24 | xargs rm
+
 ; PHP 4.2 and less have an undocumented feature/bug that allows you to
 ; to initialize a session variable in the global scope, albeit register_globals
 ; is disabled.  PHP 4.3 and later will warn you, if this feature is used.
-; You can disable the feature and the warning seperately. At this time,
+; You can disable the feature and the warning separately. At this time,
 ; the warning is only displayed, if bug_compat_42 is enabled.
 
 session.bug_compat_42 = 0
@@ -947,7 +1007,7 @@ session.entropy_file =
 
 ;session.entropy_file = /dev/urandom
 
-; Set to {nocache,private,public,} to determine HTTP caching aspects.
+; Set to {nocache,private,public,} to determine HTTP caching aspects
 ; or leave this empty to avoid sending anti-caching headers.
 session.cache_limiter = nocache
 
@@ -1047,28 +1107,9 @@ mssql.secure_connection = Off
 ; error_reporting(0) around the eval().
 ;assert.quiet_eval = 0
 
-[Ingres II]
-; Allow or prevent persistent links.
-ingres.allow_persistent = On
-
-; Maximum number of persistent links.  -1 means no limit.
-ingres.max_persistent = -1
-
-; Maximum number of links, including persistents.  -1 means no limit.
-ingres.max_links = -1
-
-; Default database (format: [node_id::]dbname[/srv_class]).
-ingres.default_database =
-
-; Default user.
-ingres.default_user =
-
-; Default password.
-ingres.default_password =
-
 [Verisign Payflow Pro]
 ; Default Payflow Pro server.
-pfpro.defaulthost = "test-payflow.verisign.com"
+Apfpro.defaulthost = "test-payflow.verisign.com"
 
 ; Default port to connect to.
 pfpro.defaultport = 443
@@ -1088,11 +1129,7 @@ pfpro.defaulttimeout = 30
 ; Default proxy password.
 ;pfpro.proxypassword =
 
-[Sockets]
-; Use the system read() function instead of the php_read() wrapper.
-sockets.use_system_read = On
-
-[com]
+[COM]
 ; path to a file containing GUIDs, IIDs or filenames of files with TypeLibs
 ;com.typelib_file =
 ; allow Distributed-COM calls

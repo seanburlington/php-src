@@ -12,7 +12,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;
-; About this file ;
+; About php.ini   ;
 ;;;;;;;;;;;;;;;;;;;
 ; This file controls many aspects of PHP's behavior.  In order for PHP to
 ; read it, it must be named 'php.ini'.  PHP looks for it in the current
@@ -55,6 +55,10 @@
 ; dynamically loaded extension (either a PHP extension or a Zend extension),
 ; you may only use these constants *after* the line that loads the extension.
 ;
+;
+;;;;;;;;;;;;;;;;;;;
+; About this file ;
+;;;;;;;;;;;;;;;;;;;
 ; All the values in the php.ini-dist file correspond to the builtin
 ; defaults (that is, if no php.ini is used, or if you delete these lines,
 ; the builtin defaults will be identical).
@@ -106,6 +110,8 @@ output_buffering = Off
 ;       is doing.
 ; Note: You cannot use both "mb_output_handler" with "ob_iconv_handler"
 ;       and you cannot use both "ob_gzhandler" and "zlib.output_compression".
+; Note: output_handler must be empty if this is set 'On' !!!!
+;       Instead you must use zlib.output_handler.
 ;output_handler =
 
 ; Transparent output compression using the zlib library
@@ -131,9 +137,9 @@ zlib.output_compression = Off
 ; implications and is generally recommended for debugging purposes only.
 implicit_flush = Off
 
-; The unserialize callback function will called (with the undefind class'
+; The unserialize callback function will be called (with the undefined class'
 ; name as parameter), if the unserializer finds an undefined class
-; which should be instanciated.
+; which should be instantiated.
 ; A warning appears if the specified function is not defined, or if the
 ; function doesn't include/implement the missing class.
 ; So only set this entry, if you really want to implement such a
@@ -156,6 +162,7 @@ serialize_precision = 100
 ; reference).
 allow_call_time_pass_reference = On
 
+;
 ; Safe Mode
 ;
 safe_mode = Off
@@ -207,7 +214,7 @@ disable_functions =
 disable_classes =
 
 ; Colors for Syntax Highlighting mode.  Anything that's acceptable in
-; <font color="??????"> would work.
+; <span style="color: ???????"> would work.
 ;highlight.string  = #DD0000
 ;highlight.comment = #FF9900
 ;highlight.keyword = #007700
@@ -215,6 +222,10 @@ disable_classes =
 ;highlight.default = #0000BB
 ;highlight.html    = #000000
 
+; If enabled, the request will be allowed to complete even if the user aborts
+; the request. Consider enabling it if executing long request, which may end up
+; being interrupted by the user or a browser timing out.
+; ignore_user_abort = On
 
 ;
 ; Misc
@@ -234,13 +245,14 @@ max_execution_time = 30     ; Maximum execution time of each script, in seconds
 max_input_time = 60	; Maximum amount of time each script may spend parsing request data
 memory_limit = 8M      ; Maximum amount of memory a script may consume (8MB)
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Error handling and logging ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; error_reporting is a bit-field.  Or each number up to get desired error
 ; reporting level
-; E_ALL             - All errors and warnings
+; E_ALL             - All errors and warnings (doesn't include E_STRICT)
 ; E_ERROR           - fatal run-time errors
 ; E_WARNING         - run-time warnings (non-fatal errors)
 ; E_PARSE           - compile-time parse errors
@@ -251,7 +263,7 @@ memory_limit = 8M      ; Maximum amount of memory a script may consume (8MB)
 ;                     empty string)
 ; E_STRICT			- run-time notices, enable to have PHP suggest changes
 ;                     to your code which will ensure the best interoperability
-;                     and forward compatability of your code
+;                     and forward compatibility of your code
 ; E_CORE_ERROR      - fatal errors that occur during PHP's initial startup
 ; E_CORE_WARNING    - warnings (non-fatal errors) that occur during PHP's
 ;                     initial startup
@@ -262,6 +274,10 @@ memory_limit = 8M      ; Maximum amount of memory a script may consume (8MB)
 ; E_USER_NOTICE     - user-generated notice message
 ;
 ; Examples:
+;
+;   - Show all errors, except for notices and coding standards warnings
+;
+;error_reporting = E_ALL & ~E_NOTICE & ~E_STRICT
 ;
 ;   - Show all errors, except for notices
 ;
@@ -382,6 +398,13 @@ register_long_arrays = On
 ; should turn it off for increased performance.
 register_argc_argv = On
 
+; When enabled, the SERVER and ENV variables are created when they're first
+; used (Just In Time) instead of when the script starts. If these variables
+; are not used within a script, having this directive on will result in a
+; performance gain. The PHP directives register_globals, register_long_arrays,
+; and register_argc_argv must be disabled for this directive to have any affect.
+auto_globals_jit = On
+
 ; Maximum size of POST data that PHP will accept.
 post_max_size = 8M
 
@@ -465,6 +488,9 @@ enable_dl = On
 ; Set to 1 if running under IIS.  Default is zero.
 ; fastcgi.impersonate = 1;
 
+; Disable logging through FastCGI connection
+; fastcgi.log = 0
+
 ; cgi.rfc2616_headers configuration option tells PHP what type of headers to
 ; use when sending HTTP response code. If it's set 0 PHP sends Status: header that
 ; is supported by Apache. When this option is set to 1 PHP will send
@@ -534,28 +560,26 @@ default_socket_timeout = 60
 ; extension_dir directive above.
 
 
-;Windows Extensions
-;Note that ODBC support is built in, so no dll is needed for it.
-;
+; Windows Extensions
+; Note that ODBC support is built in, so no dll is needed for it.
+; Note that many DLL files are located in the extensions/ (PHP 4) ext/ (PHP 5)
+; extension folders as well as the separate PECL DLL download (PHP 5).
+; Be sure to appropriately set the extension_dir directive.
 
+;extension=php_mbstring.dll
 ;extension=php_bz2.dll
-;extension=php_cpdf.dll
 ;extension=php_curl.dll
 ;extension=php_dba.dll
 ;extension=php_dbase.dll
-;extension=php_dbx.dll
 ;extension=php_exif.dll
 ;extension=php_fdf.dll
 ;extension=php_filepro.dll
 ;extension=php_gd2.dll
 ;extension=php_gettext.dll
-;extension=php_iconv.dll
 ;extension=php_ifx.dll
-;extension=php_iisfunc.dll
 ;extension=php_imap.dll
 ;extension=php_interbase.dll
 ;extension=php_ldap.dll
-;extension=php_mbstring.dll
 ;extension=php_mcrypt.dll
 ;extension=php_mhash.dll
 ;extension=php_mime_magic.dll
@@ -566,23 +590,23 @@ default_socket_timeout = 60
 ;extension=php_oci8.dll
 ;extension=php_openssl.dll
 ;extension=php_oracle.dll
-;extension=php_pdf.dll
 ;extension=php_pgsql.dll
 ;extension=php_shmop.dll
 ;extension=php_snmp.dll
 ;extension=php_sockets.dll
 ;extension=php_sybase_ct.dll
 ;extension=php_tidy.dll
-;extension=php_w32api.dll
 ;extension=php_xmlrpc.dll
 ;extension=php_xsl.dll
-;extension=php_yaz.dll
-;extension=php_zip.dll
 
 
 ;;;;;;;;;;;;;;;;;;;
 ; Module Settings ;
 ;;;;;;;;;;;;;;;;;;;
+
+[Date]
+; Defines the default timezone used by the date functions
+;date.timezone = 
 
 [Syslog]
 ; Whether or not to define the various syslog variables (e.g. $LOG_PID,
@@ -604,7 +628,7 @@ smtp_port = 25
 ; Force the addition of the specified parameters to be passed as extra parameters
 ; to the sendmail binary. These parameters will always replace the value of
 ; the 5th parameter to mail(), even in safe mode.
-;mail.force_extra_paramaters =
+;mail.force_extra_parameters =
 
 [SQL]
 sql.safe_mode = Off
@@ -668,14 +692,14 @@ mysql.default_user =
 ; file will be able to reveal the password as well.
 mysql.default_password =
 
-; Maximum time (in secondes) for connect timeout. -1 means no limimt
+; Maximum time (in secondes) for connect timeout. -1 means no limit
 mysql.connect_timeout = 60
 
 ; Trace mode. When trace_mode is active (=On), warnings for table/index scans and
-; SQL-Erros will be displayed.
+; SQL-Errors will be displayed.
 mysql.trace_mode = Off
 
-[MySQLI]
+[MySQLi]
 
 ; Maximum number of links.  -1 means no limit.
 mysqli.max_links = -1
@@ -698,10 +722,10 @@ mysqli.default_user =
 
 ; Default password for mysqli_connect() (doesn't apply in safe mode).
 ; Note that this is generally a *bad* idea to store passwords in this file.
-; *Any* user with PHP access can run 'echo get_cfg_var("mysqli.default_password")
+; *Any* user with PHP access can run 'echo get_cfg_var("mysqli.default_pw")
 ; and reveal this password!  And of course, any users with read access to this
 ; file will be able to reveal the password as well.
-mysqli.default_password =
+mysqli.default_pw =
 
 ; Allow or prevent reconnect
 mysqli.reconnect = Off
@@ -720,7 +744,8 @@ msql.max_links = -1
 ; Allow or prevent persistent links.
 pgsql.allow_persistent = On
 
-; Detect broken persistent links always with pg_pconnect(). Need a little overhead.
+; Detect broken persistent links always with pg_pconnect().
+; Auto reset feature requires a little overheads.
 pgsql.auto_reset_persistent = Off
 
 ; Maximum number of persistent links.  -1 means no limit.
@@ -730,6 +755,7 @@ pgsql.max_persistent = -1
 pgsql.max_links = -1
 
 ; Ignore PostgreSQL backends Notice message or not.
+; Notice message logging require a little overheads.
 pgsql.ignore_notice = 0
 
 ; Log PostgreSQL backends Noitce message or not.
@@ -757,7 +783,7 @@ sybase.min_message_severity = 10
 ; Compatability mode with old versions of PHP 3.0.
 ; If on, this will cause PHP to automatically assign types to results according
 ; to their Sybase type, instead of treating them all as strings.  This
-; compatability mode will probably not stay around forever, so try applying
+; compatibility mode will probably not stay around forever, so try applying
 ; whatever necessary changes to your code, and turn it off.
 sybase.compatability_mode = Off
 
@@ -776,16 +802,6 @@ sybct.min_server_severity = 10
 
 ; Minimum client message severity to display.
 sybct.min_client_severity = 10
-
-[dbx]
-; returned column names can be converted for compatibility reasons
-; possible values for dbx.colnames_case are
-; "unchanged" (default, if not set)
-; "lowercase"
-; "uppercase"
-; the recommended default is either upper- or lowercase, but
-; unchanged is currently set for backwards compatibility
-dbx.colnames_case = "unchanged"
 
 [bcmath]
 ; Number of decimal digits for all bcmath functions.
@@ -912,7 +928,7 @@ session.gc_maxlifetime = 1440
 ; PHP 4.2 and less have an undocumented feature/bug that allows you to
 ; to initialize a session variable in the global scope, albeit register_globals
 ; is disabled.  PHP 4.3 and later will warn you, if this feature is used.
-; You can disable the feature and the warning seperately. At this time,
+; You can disable the feature and the warning separately. At this time,
 ; the warning is only displayed, if bug_compat_42 is enabled.
 
 session.bug_compat_42 = 1
@@ -1033,25 +1049,6 @@ mssql.secure_connection = Off
 ; error_reporting(0) around the eval().
 ;assert.quiet_eval = 0
 
-[Ingres II]
-; Allow or prevent persistent links.
-ingres.allow_persistent = On
-
-; Maximum number of persistent links.  -1 means no limit.
-ingres.max_persistent = -1
-
-; Maximum number of links, including persistents.  -1 means no limit.
-ingres.max_links = -1
-
-; Default database (format: [node_id::]dbname[/srv_class]).
-ingres.default_database =
-
-; Default user.
-ingres.default_user =
-
-; Default password.
-ingres.default_password =
-
 [Verisign Payflow Pro]
 ; Default Payflow Pro server.
 pfpro.defaulthost = "test-payflow.verisign.com"
@@ -1074,11 +1071,7 @@ pfpro.defaulttimeout = 30
 ; Default proxy password.
 ;pfpro.proxypassword =
 
-[Sockets]
-; Use the system read() function instead of the php_read() wrapper.
-sockets.use_system_read = On
-
-[com]
+[COM]
 ; path to a file containing GUIDs, IIDs or filenames of files with TypeLibs
 ;com.typelib_file =
 ; allow Distributed-COM calls
@@ -1106,7 +1099,7 @@ sockets.use_system_read = On
 ; registered as output buffer to function
 ;mbstring.http_output = SJIS
 
-; enable automatic encoding translation accoding to
+; enable automatic encoding translation according to
 ; mbstring.internal_encoding setting. Input chars are
 ; converted to internal encoding by setting this to On.
 ; Note: Do _not_ use automatic encoding translation for

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.174 2005/08/30 07:19:59 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.175 2005/08/30 07:27:06 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -2926,7 +2926,7 @@ ZEND_METHOD(reflection_class, isInstantiable)
 
 	METHOD_NOTSTATIC_NUMPARAMS(0);
 	GET_REFLECTION_OBJECT_PTR(ce);
-	if (ce->ce_flags & (ZEND_ACC_INTERFACE | ZEND_ACC_EXPLICIT_ABSTRACTCLASS | ZEND_ACC_IMPLICIT_ABSTRACT_CLASS)) {
+	if (ce->ce_flags & (ZEND_ACC_INTERFACE | ZEND_ACC_EXPLICIT_ABSTRACT_CLASS | ZEND_ACC_IMPLICIT_ABSTRACT_CLASS)) {
 		RETURN_FALSE;
 	}
 

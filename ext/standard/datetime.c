@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: datetime.c,v 1.121.2.5 2005/04/14 13:31:44 iliaa Exp $ */
+/* $Id: datetime.c,v 1.121.2.6 2005/08/30 09:15:58 derick Exp $ */
 
 #include "php.h"
 #include "zend_operators.h"
@@ -657,7 +657,7 @@ static void php_date(INTERNAL_FUNCTION_PARAMETERS, int gm)
 					wk = (yd + 6 - wd + fd) / 7 - (fd > 3);
 				}
 
-				sprintf(tmp_buff, "%d", wk);  /* SAFE */
+				sprintf(tmp_buff, "%02d", wk);  /* SAFE */
 				strcat(Z_STRVAL_P(return_value), tmp_buff);
 				break;
 

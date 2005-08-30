@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.2 2005/08/17 11:54:33 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.3 2005/08/30 07:22:23 dmitry Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -3449,6 +3449,7 @@ ZEND_METHOD(reflection_property, getValue)
 
 	*return_value= **member;
 	zval_copy_ctor(return_value);
+	INIT_PZVAL(return_value);
 }
 /* }}} */
 

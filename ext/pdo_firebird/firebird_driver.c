@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.17 2005/08/03 14:07:39 sniper Exp $ */
+/* $Id: firebird_driver.c,v 1.18 2005/08/30 19:58:38 gschlossnagle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -602,7 +602,7 @@ static int pdo_firebird_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRM
 	int i, ret = 0;
 	pdo_firebird_db_handle *H = dbh->driver_data = pecalloc(1,sizeof(*H),dbh->is_persistent);
 
-	php_pdo_parse_data_source(dbh->data_source, dbh->data_source_len, vars, 2);
+	php_pdo_parse_data_source(dbh->data_source, dbh->data_source_len, vars, 3);
 	
 	do {
 		static char const dpb_flags[] = { 

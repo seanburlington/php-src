@@ -4,47 +4,41 @@
 #
 
 phpincludedir = $(includedir)/php
-phpbuilddir = $(prefix)/lib/php/build
+phpbuilddir = $(libdir)/build
 
 BUILD_FILES = \
 	scripts/phpize.m4 \
 	build/mkdep.awk \
-	build/shtool \
 	build/scan_makefile_in.awk \
+	build/libtool.m4 \
 	Makefile.global \
-	acinclude.m4
+	acinclude.m4 \
+	ltmain.sh \
+	run-tests.php
+
+BUILD_FILES_EXEC = \
+	build/shtool \
+	config.guess \
+	config.sub
 
 bin_SCRIPTS = phpize php-config
-bin_src_SCRIPTS = phpextdist
+man_PAGES = phpize.1 php-config.1
 
 install-build:
 	@echo "Installing build environment:     $(INSTALL_ROOT)$(phpbuilddir)/"
 	@$(mkinstalldirs) $(INSTALL_ROOT)$(phpbuilddir) $(INSTALL_ROOT)$(bindir) && \
-	(cd $(top_srcdir) && $(INSTALL) $(BUILD_FILES) $(INSTALL_ROOT)$(phpbuilddir))
-
-HEADER_DIRS = \
-	/ \
-	Zend/ \
-	TSRM/ \
-	main/ \
-	main/streams/ \
-	regex/ \
-	ext/libxml/ \
-	ext/standard/ \
-	ext/session/ \
-	ext/xml/ \
-	ext/xml/expat/ \
-	ext/mbstring/ \
-	ext/sqlite/libsqlite/src/sqlite.h
+	(cd $(top_srcdir) && \
+	$(INSTALL) $(BUILD_FILES_EXEC) $(INSTALL_ROOT)$(phpbuilddir) && \
+	$(INSTALL_DATA) $(BUILD_FILES) $(INSTALL_ROOT)$(phpbuilddir))
 
 install-headers:
-	-@for i in $(HEADER_DIRS); do \
+	-@for i in $(INSTALL_HEADERS); do \
 		i=`$(top_srcdir)/build/shtool path -d $$i`; \
 		paths="$$paths $(INSTALL_ROOT)$(phpincludedir)/$$i"; \
 	done; \
 	$(mkinstalldirs) $$paths && \
 	echo "Installing header files:          $(INSTALL_ROOT)$(phpincludedir)/" && \
-	for i in $(HEADER_DIRS); do \
+	for i in $(INSTALL_HEADERS); do \
 		if test -f "$(top_srcdir)/$$i"; then \
 			$(INSTALL_DATA) $(top_srcdir)/$$i $(INSTALL_ROOT)$(phpincludedir)/$$i; \
 		elif test -f "$(top_builddir)/$$i"; then \
@@ -62,11 +56,13 @@ install-programs: $(builddir)/phpize $(builddir)/php-config
 		echo "  program: $(program_prefix)$$prog$(program_suffix)"; \
 		$(INSTALL) -m 755 $(builddir)/$$prog $(INSTALL_ROOT)$(bindir)/$(program_prefix)$$prog$(program_suffix); \
 	done
-	@for prog in $(bin_src_SCRIPTS); do \
-		echo "  program: $(program_prefix)$$prog$(program_suffix)"; \
-		$(INSTALL) -m 755 $(top_srcdir)/scripts/$$prog $(INSTALL_ROOT)$(bindir)/$(program_prefix)$$prog$(program_suffix); \
+	@echo "Installing man pages:             $(INSTALL_ROOT)$(mandir)/man1/"
+	@$(mkinstalldirs) $(INSTALL_ROOT)$(mandir)/man1
+	@for page in $(man_PAGES); do \
+		echo "  page: $$page"; \
+		$(INSTALL_DATA) $(builddir)/man1/$$page $(INSTALL_ROOT)$(mandir)/man1/$$page; \
 	done
-
+	
 $(builddir)/phpize: $(srcdir)/phpize.in $(top_builddir)/config.status
 	(CONFIG_FILES=$@ CONFIG_HEADERS= $(top_builddir)/config.status)
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.106.2.14 2004/07/01 15:43:40 zeev Exp $ */
+/* $Id: php_ini.c,v 1.106.2.15.2.1 2005/08/31 14:34:46 sniper Exp $ */
 
 /* Check CWD for php.ini */
 #define INI_CHECK_CWD
@@ -31,7 +31,9 @@
 #include "SAPI.h"
 #include "php_main.h"
 #include "php_scandir.h"
+#ifdef PHP_WIN32
 #include "win32/php_registry.h"
+#endif
 
 #if HAVE_SCANDIR && HAVE_ALPHASORT && HAVE_DIRENT_H
 #include <dirent.h>
@@ -484,9 +486,11 @@ int php_shutdown_config(void)
 	zend_hash_destroy(&configuration_hash);
 	if (php_ini_opened_path) {
 		free(php_ini_opened_path);
+		php_ini_opened_path = NULL;
 	}
 	if (php_ini_scanned_files) {
 		free(php_ini_scanned_files);
+		php_ini_scanned_files = NULL;
 	}
 	return SUCCESS;
 }

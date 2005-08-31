@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dow.c,v 1.8 2005/08/03 14:06:46 sniper Exp $ */
+/* $Id: dow.c,v 1.9 2005/08/31 14:31:45 derick Exp $ */
 
 #include "timelib.h"
 
@@ -91,7 +91,7 @@ void timelib_isoweek_from_date(timelib_sll y, timelib_sll m, timelib_sll d, time
 		int i;
 
 		i = y_leap ? 366 : 365;
-		if ((i - doy) < (4 - weekday)) {
+		if ((i - (doy - y_leap)) < (4 - weekday)) {
 			*iy = y + 1;
 			*iw = 1;
 			return;

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.158 2005/08/23 09:33:44 dmitry Exp $ */
+/* $Id: simplexml.c,v 1.159 2005/08/31 17:00:22 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -642,7 +642,7 @@ static void sxe_dimension_delete(zval *object, zval *offset TSRMLS_DC)
 /* {{{ _get_base_node_value()
  */
 static void
-_get_base_node_value(php_sxe_object *sxe_ref, xmlNodePtr node, zval **value TSRMLS_DC)
+_get_base_node_value(php_sxe_object *sxe_ref, xmlNodePtr node, zval **value, char *prefix TSRMLS_DC)
 {
 	php_sxe_object *subnode;
 	xmlChar        *contents;
@@ -659,6 +659,9 @@ _get_base_node_value(php_sxe_object *sxe_ref, xmlNodePtr node, zval **value TSRM
 		subnode = php_sxe_object_new(sxe_ref->zo.ce TSRMLS_CC);
 		subnode->document = sxe_ref->document;
 		subnode->document->refcount++;
+		if (prefix) {
+			subnode->iter.nsprefix = xmlStrdup(prefix);
+		}
 		php_libxml_increment_node_ptr((php_libxml_node_object *)subnode, node, NULL TSRMLS_CC);
 
 		(*value)->type = IS_OBJECT;
@@ -712,6 +715,10 @@ sxe_properties_get(zval *object TSRMLS_DC)
 				}
 			}
 
+			if (node->type == XML_ELEMENT_NODE && (! match_ns(sxe, node, sxe->iter.nsprefix))) {
+				goto next_iter;
+			}
+
 			name = (char *) node->name;
 			if (!name) {
 				goto next_iter;
@@ -719,7 +726,7 @@ sxe_properties_get(zval *object TSRMLS_DC)
 				namelen = xmlStrlen(node->name) + 1;
 			}
 
-			_get_base_node_value(sxe, node, &value TSRMLS_CC);
+			_get_base_node_value(sxe, node, &value, sxe->iter.nsprefix TSRMLS_CC);
 
 			h = zend_hash_func(name, namelen);
 			if (zend_hash_quick_find(rv, name, namelen, h, (void **) &data_ptr) == SUCCESS) {
@@ -1760,7 +1767,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.158 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.159 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

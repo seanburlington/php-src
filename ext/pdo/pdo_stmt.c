@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.123 2005/08/22 12:22:11 dmitry Exp $ */
+/* $Id: pdo_stmt.c,v 1.124 2005/09/01 14:39:58 gschlossnagle Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1532,6 +1532,10 @@ static PHP_METHOD(PDOStatement, getColumnMeta)
 	struct pdo_column_data *col;
 
 	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &colno)) {
+		RETURN_FALSE;
+	}
+	if(colno < 0) {
+		pdo_raise_impl_error(stmt->dbh, stmt, "42P10", "column number must be non-negative" TSRMLS_CC);
 		RETURN_FALSE;
 	}
 

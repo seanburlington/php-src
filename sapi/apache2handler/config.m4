@@ -1,11 +1,11 @@
 dnl
-dnl $Id: config.m4,v 1.9 2003/10/21 11:48:31 sniper Exp $
+dnl $Id: config.m4,v 1.14.2.1 2005/09/01 14:33:47 sniper Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 2.0 handler-module support via DSO through APXS)
 AC_ARG_WITH(apxs2,
-[  --with-apxs2[=FILE]     EXPERIMENTAL: Build shared Apache 2.0 module. FILE is the optional
-                          pathname to the Apache apxs tool; defaults to "apxs".],[
+[  --with-apxs2[=FILE]     Build shared Apache 2.0 Handler module. FILE is the optional
+                          pathname to the Apache apxs tool [apxs]],[
   if test "$withval" = "yes"; then
     APXS=apxs
     $APXS -q CFLAGS >/dev/null 2>&1
@@ -39,8 +39,14 @@ AC_ARG_WITH(apxs2,
   APU_BINDIR=`$APXS -q APU_BINDIR`
   APR_BINDIR=`$APXS -q APR_BINDIR`
 
-  APU_INCLUDEDIR="`$APU_BINDIR/apu-config --includes`"
-  APR_INCLUDEDIR="`$APR_BINDIR/apr-config --includes`"
+  # Pick up ap[ru]-N-config if using httpd >=2.1
+  APR_CONFIG=`$APXS -q APR_CONFIG 2>/dev/null ||
+    echo $APR_BINDIR/apr-config`
+  APU_CONFIG=`$APXS -q APU_CONFIG 2>/dev/null ||
+    echo $APU_BINDIR/apu-config`
+
+  APR_CFLAGS="`$APR_CONFIG --cppflags --includes`"
+  APU_CFLAGS="`$APU_CONFIG --includes`"
 
   for flag in $APXS_CFLAGS; do
     case $flag in
@@ -48,14 +54,14 @@ AC_ARG_WITH(apxs2,
     esac
   done
 
-  APACHE_CFLAGS="$APACHE_CPPFLAGS -I$APXS_INCLUDEDIR $APU_INCLUDEDIR $APR_INCLUDEDIR"
+  APACHE_CFLAGS="$APACHE_CPPFLAGS -I$APXS_INCLUDEDIR $APR_CFLAGS $APU_CFLAGS"
 
   # Test that we're trying to configure with apache 2.x
   PHP_AP_EXTRACT_VERSION($APXS_HTTPD)
   if test "$APACHE_VERSION" -le 2000000; then
     AC_MSG_ERROR([You have enabled Apache 2 support while your server is Apache 1.3.  Please use the appropiate switch --with-apxs (without the 2)])
   elif test "$APACHE_VERSION" -lt 2000044; then
-    AC_MSG_ERROR([Please note that Apache version >= 2.0.44 is required.])
+    AC_MSG_ERROR([Please note that Apache version >= 2.0.44 is required])
   fi
 
   APXS_LIBEXECDIR='$(INSTALL_ROOT)'`$APXS -q LIBEXECDIR`
@@ -83,11 +89,11 @@ AC_ARG_WITH(apxs2,
     dnl the linker does not recursively look at the bundle loader and
     dnl pull in its dependencies.  Therefore, we must pull in the APR
     dnl and APR-util libraries.
-    if test -x "$APR_BINDIR/apr-config"; then
-        MH_BUNDLE_FLAGS="`$APR_BINDIR/apr-config --ldflags --link-ld --libs`"
+    if test -x "$APR_CONFIG"; then
+        MH_BUNDLE_FLAGS="`$APR_CONFIG --ldflags --link-ld --libs`"
     fi
-    if test -x "$APU_BINDIR/apu-config"; then
-        MH_BUNDLE_FLAGS="`$APU_BINDIR/apu-config --ldflags --link-ld --libs` $MH_BUNDLE_FLAGS"
+    if test -x "$APU_CONFIG"; then
+        MH_BUNDLE_FLAGS="`$APU_CONFIG --ldflags --link-ld --libs` $MH_BUNDLE_FLAGS"
     fi
     MH_BUNDLE_FLAGS="-bundle -bundle_loader $APXS_HTTPD $MH_BUNDLE_FLAGS"
     PHP_SUBST(MH_BUNDLE_FLAGS)

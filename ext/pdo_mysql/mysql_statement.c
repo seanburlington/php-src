@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.49 2005/09/01 01:56:36 iliaa Exp $ */
+/* $Id: mysql_statement.c,v 1.50 2005/09/01 14:31:34 gschlossnagle Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -476,7 +476,7 @@ static int pdo_mysql_stmt_col_meta(pdo_stmt_t *stmt, long colno, zval *return_va
 	if (!S->result) {
 		return FAILURE;
 	}
-	if (colno >= stmt->column_count) {
+	if (colno >= stmt->column_count || colno < 0) {
 		/* error invalid column */
 		return FAILURE;
 	}

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_ini.h,v 1.45 2005/08/03 14:08:34 sniper Exp $ */
+/* $Id: php_ini.h,v 1.46 2005/09/01 14:42:54 sniper Exp $ */
 
 #ifndef PHP_INI_H
 #define PHP_INI_H
@@ -24,7 +24,8 @@
 #include "zend_ini.h"
 
 BEGIN_EXTERN_C()
-int php_init_config();
+int php_init_config_hash(void);
+int php_init_config(TSRMLS_D);
 int php_shutdown_config(void);
 void php_ini_register_extensions(TSRMLS_D);
 zval *cfg_get_entry(char *name, uint name_length);

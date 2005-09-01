@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.3 2005/08/30 07:22:23 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.4 2005/09/01 10:05:32 dmitry Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -3480,6 +3480,7 @@ ZEND_METHOD(reflection_property, setValue)
 				return;
 			}
 		}
+		zend_update_class_constants(intern->ce TSRMLS_CC);
 		prop_table = intern->ce->static_members;
 	} else {
 		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "oz", &object, &value) == FAILURE) {

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.183.2.1 2005/08/21 16:03:21 iliaa Exp $ */
+/* $Id: zlib.c,v 1.183.2.2 2005/09/02 17:25:16 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -644,7 +644,7 @@ static int php_do_deflate(uint str_length, Bytef **p_buffer, uint *p_buffer_len,
 
 	if (do_end) {
 		err = deflate(&ZLIBG(stream), Z_FINISH);
-		buffer[outlen - ZLIBG(stream).avail_out] = '\0';
+		buffer[outlen + start_offset - ZLIBG(stream).avail_out] = '\0';
 	}
 
 	*p_buffer = buffer;

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.40.2.2 2005/08/18 01:15:52 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.40.2.3 2005/09/02 13:52:55 sniper Exp $ */
 
 #include <fcntl.h>
 
@@ -538,7 +538,7 @@ normal:
 	} else {
 		parent_req = ctx->r;
 		/* check if comming due to ErrorDocument */
-		if (parent_req != HTTP_OK) {
+		if (parent_req && parent_req->status != HTTP_OK) {
 			parent_req = NULL;
 			goto normal;
 		}

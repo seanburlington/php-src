@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ini.c,v 1.137 2005/09/01 14:42:53 sniper Exp $ */
+/* $Id: php_ini.c,v 1.138 2005/09/02 08:26:05 sniper Exp $ */
 
 #include "php.h"
 #include "ext/standard/info.h"
@@ -258,9 +258,7 @@ static void pvalue_config_destructor(zval *pvalue)
  */
 int php_init_config_hash(void)
 {
-	if (zend_hash_init(&configuration_hash, 0, NULL, (dtor_func_t) pvalue_config_destructor, 1) == FAILURE) {
-		return FAILURE;
-	}
+	return zend_hash_init(&configuration_hash, 0, NULL, (dtor_func_t) pvalue_config_destructor, 1);
 }
 /* }}} */
 

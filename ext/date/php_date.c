@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.49 2005/08/30 09:17:56 derick Exp $ */
+/* $Id: php_date.c,v 1.50 2005/09/02 09:39:21 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -492,7 +492,7 @@ static char *date_format(char *format, int format_len, int *return_len, timelib_
 			case 'z': length = date_spprintf(&buffer, 32 TSRMLS_CC, "%d", (int) timelib_day_of_year(t->y, t->m, t->d)); break;
 
 			/* week */
-			case 'W': length = date_spprintf(&buffer, 32 TSRMLS_CC, "%0d", (int) isoweek); break; /* iso weeknr */
+			case 'W': length = date_spprintf(&buffer, 32 TSRMLS_CC, "%02d", (int) isoweek); break; /* iso weeknr */
 			case 'o': length = date_spprintf(&buffer, 32 TSRMLS_CC, "%d", (int) isoyear); break; /* iso year */
 
 			/* month */

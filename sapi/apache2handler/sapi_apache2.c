@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.40.2.10 2005/08/18 01:15:23 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.40.2.11 2005/09/02 13:51:26 sniper Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -524,7 +524,7 @@ normal:
 	} else {
 		parent_req = ctx->r;
 		/* check if comming due to ErrorDocument */
-		if (parent_req != HTTP_OK) {
+		if (parent_req && parent_req->status != HTTP_OK) {
 			parent_req = NULL;
 			goto normal;
 		}

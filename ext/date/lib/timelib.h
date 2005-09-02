@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.h,v 1.10.2.1 2005/08/25 09:47:27 derick Exp $ */
+/* $Id: timelib.h,v 1.10.2.2 2005/09/02 09:33:08 derick Exp $ */
 
 #ifndef __TIMELIB_H__
 #define __TIMELIB_H__
@@ -40,6 +40,7 @@
 
 /* From dow.c */
 timelib_sll timelib_day_of_week(timelib_sll y, timelib_sll m, timelib_sll d);
+timelib_sll timelib_iso_day_of_week(timelib_sll y, timelib_sll m, timelib_sll d);
 timelib_sll timelib_day_of_year(timelib_sll y, timelib_sll m, timelib_sll d);
 timelib_sll timelib_daynr_from_weeknr(timelib_sll y, timelib_sll w, timelib_sll d);
 timelib_sll timelib_days_in_month(timelib_sll y, timelib_sll m);

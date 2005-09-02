@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.3 2005/08/30 09:17:09 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.4 2005/09/02 09:33:08 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -389,6 +389,7 @@ static char *date_format(char *format, int format_len, timelib_time *t, int loca
 			case 'l': snprintf(buffer, 32, "%s", day_full_names[timelib_day_of_week(t->y, t->m, t->d)]); break;
 			case 'S': snprintf(buffer, 32, "%s", english_suffix(t->d)); break;
 			case 'w': snprintf(buffer, 32, "%d", (int) timelib_day_of_week(t->y, t->m, t->d)); break;
+			case 'N': snprintf(buffer, 32, "%d", (int) timelib_iso_day_of_week(t->y, t->m, t->d)); break;
 			case 'z': snprintf(buffer, 32, "%d", (int) timelib_day_of_year(t->y, t->m, t->d)); break;
 
 			/* week */

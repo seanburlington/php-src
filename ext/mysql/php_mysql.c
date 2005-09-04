@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.1 2005/09/04 04:51:23 wez Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.2 2005/09/04 17:10:56 wez Exp $ */
 
 /* TODO:
  *
@@ -218,7 +218,7 @@ zend_module_entry mysql_module_entry = {
 	PHP_RINIT(mysql),
 	PHP_RSHUTDOWN(mysql),
 	PHP_MINFO(mysql),
-	NO_VERSION_YET,
+	"1.0",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

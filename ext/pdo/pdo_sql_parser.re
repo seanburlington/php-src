@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.28 2005/08/03 14:07:38 sniper Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.29 2005/09/04 00:58:21 edink Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -56,7 +56,7 @@ static int scan(Scanner *s)
 
 	/*!re2c
 		(["] (ESCQQ|ANYNOEOF\[\\"])* ["])		{ RET(PDO_PARSER_TEXT); }
-		(['] (ESCQ|ANYNOEOF\[\\"])* ['])		{ RET(PDO_PARSER_TEXT); }
+		(['] (ESCQ|ANYNOEOF\[\\'])* ['])		{ RET(PDO_PARSER_TEXT); }
 		SPECIALS{2,}							{ RET(PDO_PARSER_TEXT); }
 		BINDCHR									{ RET(PDO_PARSER_BIND); }
 		QUESTION								{ RET(PDO_PARSER_BIND_POS); }

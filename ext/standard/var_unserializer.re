@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: var_unserializer.re,v 1.53 2005/08/11 23:36:01 andrei Exp $ */
+/* $Id: var_unserializer.re,v 1.54 2005/09/05 16:19:35 sniper Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_var.h"
@@ -150,7 +150,7 @@ uiv = [+]? [0-9]+;
 iv = [+-]? [0-9]+;
 nv = [+-]? ([0-9]* "." [0-9]+|[0-9]+ "." [0-9]*);
 nvexp = (iv | nv) [eE] [+-]? iv;
-any = [\000-\277];
+any = [\000-\377];
 object = [OC];
 */
 

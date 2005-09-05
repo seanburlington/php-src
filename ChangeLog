@@ -1,3 +1,21 @@
+2005-09-04  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * (PHP_5_1)
+      ext/mysql/package.xml
+      ext/mysql/php_mysql.c:
+      assign a version number
+
+    * (PHP_5_1)
+      ext/mysql/config.m4
+      ext/mysql/package.xml
+      ext/mysql/php_mysql.c:
+      Allow ext/mysql to build against PHP 4 again; update package.xml ready for
+      release via PECL.
+
+    * (PHP_4_4)
+      scripts/phpize.in:
+      merge solaris portability fix
+
 2005-09-02  Jani Taskinen  <jani.taskinen@sci.fi>
 
     * (PHP_5_1)
@@ -11293,7 +11311,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2093 2005/09/03 05:38:47 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2094 2005/09/05 05:37:47 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -14694,7 +14712,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2093 2005/09/03 05:38:47 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2094 2005/09/05 05:37:47 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -15175,7 +15193,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2093 2005/09/03 05:38:47 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2094 2005/09/05 05:37:47 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -16649,7 +16667,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2093 2005/09/03 05:38:47 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2094 2005/09/05 05:37:47 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

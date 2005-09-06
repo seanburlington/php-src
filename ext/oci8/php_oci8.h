@@ -14,13 +14,18 @@
    +----------------------------------------------------------------------+
    | Authors: Stig Sæther Bakken <ssb@php.net>                            |
    |          Thies C. Arntzen <thies@thieso.net>                         |
+   |                                                                      |
+   | Collection support by Andy Sautins <asautins@veripost.net>           |
+   | Temporary LOB support by David Benson <dbenson@mancala.com>          |
+   | ZTS per process OCIPLogon by Harald Radi <harald.radi@nme.at>        |
+   |                                                                      |
    | Redesigned by: Antony Dovgal <antony@zend.com>                       |
    |                Andi Gutmans <andi@zend.com>                          |
    |                Wez Furlong <wez@omniti.com>                          |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8.h,v 1.38 2005/09/06 21:30:28 edink Exp $ */
+/* $Id: php_oci8.h,v 1.39 2005/09/06 21:42:26 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_H

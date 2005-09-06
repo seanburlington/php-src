@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.4 2005/09/06 21:42:26 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.5 2005/09/06 21:44:53 tony2001 Exp $ */
 
 #undef HAVE_OCI_STMT_PREPARE2
 
@@ -199,19 +199,11 @@ typedef struct { /* php_oci_out_column {{{ */
 
 /* {{{ macros */
 
-#ifdef PHP_WIN32
 #define PHP_OCI_CALL(func, params) \
 	func params; \
 	if (OCI_G(debug_mode)) { \
 		php_printf ("OCI8 DEBUG: " #func " at (%s:%d) \n", __FILE__, __LINE__); \
 	}
-#else
-#define PHP_OCI_CALL(func, params) \
-	func params; \
-	if (OCI_G(debug_mode)) { \
-		php_printf ("OCI8 DEBUG: " #func " in %s() (%s:%d) \n", __FUNCTION__, __FILE__, __LINE__); \
-	}
-#endif
 
 #define PHP_OCI_HANDLE_ERROR(connection, errcode) \
 { \

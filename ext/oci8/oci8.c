@@ -12,7 +12,7 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Stig SÃ¦ther Bakken <ssb@php.net>                            |
+   | Authors: Stig Sæther Bakken <ssb@php.net>                            |
    |          Thies C. Arntzen <thies@thieso.net>                         |
    | Redesigned by: Antony Dovgal <antony@zend.com>                       |
    |                Andi Gutmans <andi@zend.com>                          |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.271 2005/09/06 19:31:59 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.272 2005/09/06 21:30:25 edink Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -603,7 +603,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.271 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.272 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Links", buf);

@@ -12,7 +12,7 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Authors: Stig SÃ¦ther Bakken <ssb@php.net>                            |
+   | Authors: Stig Sæther Bakken <ssb@php.net>                            |
    |          Thies C. Arntzen <thies@thieso.net>                         |
    | Redesigned by: Antony Dovgal <antony@zend.com>                       |
    |                Andi Gutmans <andi@zend.com>                          |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.2 2005/09/06 21:11:19 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.3 2005/09/06 21:30:28 edink Exp $ */
 
 #undef HAVE_OCI_STMT_PREPARE2
 

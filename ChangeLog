@@ -1,3 +1,43 @@
+2005-09-06  Antony Dovgal  <antony@zend.com>
+
+    * ext/oci8/php_oci8_int.h:
+      removed __FUNCTION__ (by popular demand)
+
+    * ext/oci8/CREDITS
+      ext/oci8/oci8.c
+      ext/oci8/oci8_collection.c
+      ext/oci8/oci8_interface.c
+      ext/oci8/oci8_lob.c
+      ext/oci8/oci8_statement.c
+      ext/oci8/php_oci8.h
+      ext/oci8/php_oci8_int.h:
+      fix credits
+
+2005-09-06  Edin Kadribasic  <edink@emini.dk>
+
+    * ext/oci8/config.w32:
+      Sync windows build and link against instant client libs
+
+    * ext/oci8/oci8.c
+      ext/oci8/oci8_collection.c
+      ext/oci8/oci8_interface.c
+      ext/oci8/oci8_lob.c
+      ext/oci8/oci8_statement.c
+      ext/oci8/php_oci8.h
+      ext/oci8/php_oci8_int.h:
+      Remove utf-8 chars
+
+2005-09-06  Antony Dovgal  <antony@zend.com>
+
+    * ext/oci8/php_oci8_int.h:
+      workaround for some b0rked compilers
+
+2005-09-06  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_1)
+      run-tests.php:
+      Simplify code by making use 5.1+ functions
+
 2005-09-05  Greg Beaver  <greg@chiaraquartet.net>
 
     * pear/install-pear.phar
@@ -11383,7 +11423,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2095 2005/09/06 05:42:57 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2096 2005/09/07 05:33:15 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -14784,7 +14824,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2095 2005/09/06 05:42:57 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2096 2005/09/07 05:33:15 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -15265,7 +15305,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2095 2005/09/06 05:42:57 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2096 2005/09/07 05:33:15 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -16739,7 +16779,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2095 2005/09/06 05:42:57 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2096 2005/09/07 05:33:15 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

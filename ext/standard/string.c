@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.477 2005/09/05 16:37:45 rolland Exp $ */
+/* $Id: string.c,v 1.478 2005/09/07 07:00:03 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -5273,7 +5273,7 @@ PHP_FUNCTION(substr_count)
 	if (haystack_type == IS_UNICODE) {
 		while ((p = zend_u_memnstr((UChar *)p, (UChar *)needle, needle_len, (UChar *)endp)) != NULL) {
 			/*(UChar *)p += needle_len; // GCC 4.0.0 cannot compile this */
-			p = (UChar *)p + UBYTES(needle_len);
+			p = (UChar *)p + needle_len;
 			count++;
 		}
 	} else {

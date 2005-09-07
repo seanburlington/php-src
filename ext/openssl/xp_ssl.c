@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: xp_ssl.c,v 1.22 2005/08/03 14:07:36 sniper Exp $ */
+/* $Id: xp_ssl.c,v 1.23 2005/09/07 15:34:49 dmitry Exp $ */
 
 #include "php.h"
 #include "ext/standard/file.h"
@@ -451,7 +451,7 @@ static inline int php_openssl_tcp_sockop_accept(php_stream *stream, php_openssl_
 	if (clisock >= 0) {
 		php_openssl_netstream_data_t *clisockdata;
 
-		clisockdata = pemalloc(sizeof(*clisockdata), stream->is_persistent);
+		clisockdata = emalloc(sizeof(*clisockdata));
 
 		if (clisockdata == NULL) {
 			closesocket(clisock);

@@ -16,11 +16,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.8 2005/01/31 15:01:47 tony2001 Exp $ */
+/* $Id: fileinfo.c,v 1.9 2005/09/07 11:16:57 edink Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include "php.h"
 
 #include <magic.h>
 /* 
@@ -32,7 +33,6 @@
 #endif
 
 
-#include "php.h"
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "ext/standard/file.h" /* needed for context stuff */

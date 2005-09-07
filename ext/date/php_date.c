@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.52 2005/09/02 14:57:41 derick Exp $ */
+/* $Id: php_date.c,v 1.53 2005/09/07 19:09:27 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -596,8 +596,12 @@ static void php_date(INTERNAL_FUNCTION_PARAMETERS, int localtime)
 	}
 
 	string = php_format_date(format, format_len, ts, localtime TSRMLS_CC);
-	
-	RETVAL_STRING(string, 0);
+
+	if (UG(unicode)) {
+		RETVAL_UNICODE(string, 0);
+	} else {
+		RETVAL_STRING(string, 0);
+	}
 }
 /* }}} */
 

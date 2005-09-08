@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.731 2005/08/23 09:33:45 dmitry Exp $ */
+/* $Id: basic_functions.c,v 1.732 2005/09/08 11:10:34 dmitry Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1273,7 +1273,7 @@ PHP_FUNCTION(constant)
 	}
 	convert_to_string_ex(const_name);
 
-	if (!zend_get_constant(Z_STRVAL_PP(const_name), Z_STRLEN_PP(const_name), return_value TSRMLS_CC)) {
+	if (!zend_u_get_constant(Z_TYPE_PP(const_name), Z_STRVAL_PP(const_name), Z_STRLEN_PP(const_name), return_value TSRMLS_CC)) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't find constant %s", Z_STRVAL_PP(const_name));
 		RETURN_NULL();
 	}

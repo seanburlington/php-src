@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.273 2005/09/06 21:42:26 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.274 2005/09/08 13:16:24 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -609,12 +609,12 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.273 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.274 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
-	php_info_print_table_row(2, "Active Persistent Links", buf);
+	php_info_print_table_row(2, "Active Persistent Connections", buf);
 	sprintf(buf, "%ld", OCI_G(num_links));
-	php_info_print_table_row(2, "Active Links", buf);
+	php_info_print_table_row(2, "Active Connections", buf);
 
 #if !defined(PHP_WIN32) && !defined(HAVE_OCI_INSTANT_CLIENT)
 	php_info_print_table_row(2, "Oracle Version", PHP_OCI8_VERSION );
@@ -1017,7 +1017,7 @@ open:
 			
 			if (OCI_G(max_persistent)!=-1 && OCI_G(num_persistent)>=OCI_G(max_persistent)) {
 				/* all persistent connactions are in use, fallback to non-persistent connection creation */
-				php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Too many open persistent links (%ld)", OCI_G(num_persistent));
+				php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Too many open persistent connections (%ld)", OCI_G(num_persistent));
 				alloc_non_persistent = 1;
 			}
 		}

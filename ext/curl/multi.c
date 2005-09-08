@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: multi.c,v 1.19 2005/08/03 14:06:44 sniper Exp $ */
+/* $Id: multi.c,v 1.20 2005/09/08 14:49:58 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -110,8 +110,6 @@ PHP_FUNCTION(curl_multi_remove_handle)
 
 	ZEND_FETCH_RESOURCE(mh, php_curlm *, &z_mh, -1, le_curl_multi_handle_name, le_curl_multi_handle);
 	ZEND_FETCH_RESOURCE(ch, php_curl *, &z_ch, -1, le_curl_name, le_curl);
-
-	zval_ptr_dtor(&z_ch);
 
 	--ch->uses;
 	

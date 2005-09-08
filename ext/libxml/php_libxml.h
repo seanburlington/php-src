@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_libxml.h,v 1.15 2005/08/03 14:07:23 sniper Exp $ */
+/* $Id: php_libxml.h,v 1.16 2005/09/08 10:33:57 rrichards Exp $ */
 
 #ifndef PHP_LIBXML_H
 #define PHP_LIBXML_H
@@ -34,6 +34,8 @@ extern zend_module_entry libxml_module_entry;
 
 #include "ext/standard/php_smart_str.h"
 #include <libxml/tree.h>
+
+#define LIBXML_SAVE_NOEMPTYTAG 1<<2
 
 typedef struct {
 	zval *stream_context;

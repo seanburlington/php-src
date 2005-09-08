@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_odbc.c,v 1.189 2005/08/05 22:37:48 sniper Exp $ */
+/* $Id: php_odbc.c,v 1.190 2005/09/08 06:18:47 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -506,6 +506,12 @@ PHP_MINIT_FUNCTION(odbc)
 	REGISTER_LONG_CONSTANT("SQL_INDEX_ALL", SQL_INDEX_ALL, CONST_PERSISTENT | CONST_CS);
 	REGISTER_LONG_CONSTANT("SQL_ENSURE", SQL_ENSURE, CONST_PERSISTENT | CONST_CS);
 	REGISTER_LONG_CONSTANT("SQL_QUICK", SQL_QUICK, CONST_PERSISTENT | CONST_CS);
+#endif
+
+#if defined(HAVE_IBMDB2) && defined(_AIX)
+	/* atexit() handler in the DB2/AIX library segfaults in PHP CLI */
+	/* DB2NOEXITLIST env variable prevents DB2 from invoking atexit() */
+	putenv("DB2NOEXITLIST=TRUE");
 #endif
 
 	return SUCCESS;

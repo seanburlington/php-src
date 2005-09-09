@@ -1,3 +1,91 @@
+2005-09-08  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_1)
+      ext/sqlite/sqlite.c:
+      MFH: Allow retrieval of query parse errors from SQLite.
+
+    * ext/sqlite/sqlite.c:
+      Allow retrieval of query parse errors from SQLite.
+      
+
+2005-09-08  Dmitry Stogov  <dmitry@zend.com>
+
+    * ZendEngine2/zend.c:
+      Avoid unnecessary copying/freeing
+
+2005-09-08  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_1)
+      NEWS
+      ext/curl/multi.c:
+      MFH: Fixed bug #34420 (Possible crash inside curl_multi_remove_handle()).
+
+    * ext/curl/multi.c:
+      Fixed bug #34420 (Possible crash inside curl_multi_remove_handle()).
+
+2005-09-08  Derick Rethans  <php@derickrethans.nl>
+
+    * ext/standard/string.c:
+      - Make ord() work on binary strings too.
+
+2005-09-08  Antony Dovgal  <antony@zend.com>
+
+    * ext/oci8/oci8.c:
+      use "connections" instead of "links" everywhere to avoid possible confusion
+
+2005-09-08  Dmitry Stogov  <dmitry@zend.com>
+
+    * ext/standard/string.c
+      ext/standard/tests/strings/substr_replace.phpt:
+      Fixed craches in substr_replace()
+
+2005-09-08  Antony Dovgal  <antony@zend.com>
+
+    * ext/iconv/iconv.c:
+      fix phpinfo() output for iconv extension
+      (convert unicode values to string before outputting them)
+
+2005-09-08  Dmitry Stogov  <dmitry@zend.com>
+
+    * ZendEngine2/zend_builtin_functions.c
+      ZendEngine2/zend_constants.c
+      ZendEngine2/zend_constants.h
+      ZendEngine2/zend_execute_API.c
+      ZendEngine2/zend_vm_def.h
+      ZendEngine2/zend_vm_execute.h
+      ext/standard/basic_functions.c:
+      Unicode support for PHP constants
+
+2005-09-08  Rob Richards  <rrichards@ctindustries.net>
+
+    * ext/dom/document.c:
+      add save options parameter
+
+2005-09-08  Dmitry Stogov  <dmitry@zend.com>
+
+    * NEWS
+      ZendEngine2/zend_compile.c
+      ZendEngine2/tests/catch.phpt:
+      catch operator shouldn't call __autoload () too
+
+2005-09-08  Rasmus Lerdorf  <rasmus@lerdorf.com>
+
+    * (PHP_5_1)
+      pear/Makefile.frag:
+      That line made no sense
+
+2005-09-08  Dmitry Stogov  <dmitry@zend.com>
+
+    * ext/odbc/php_odbc.c
+      ext/odbc/php_odbc.c
+      ext/odbc/php_odbc.c:
+      Fixed crash on AIX
+
+2005-09-08  Rolland Santimano  <rollandsantimano@yahoo.com>
+
+    * ext/standard/string.c:
+      - Unicode impl of substr_replace()
+
 2005-09-07  Greg Beaver  <greg@chiaraquartet.net>
 
     * (PHP_5_1)
@@ -11549,7 +11637,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2097 2005/09/08 05:37:56 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2098 2005/09/09 05:35:40 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -14950,7 +15038,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2097 2005/09/08 05:37:56 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2098 2005/09/09 05:35:40 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -15431,7 +15519,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2097 2005/09/08 05:37:56 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2098 2005/09/09 05:35:40 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -16905,7 +16993,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2097 2005/09/08 05:37:56 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2098 2005/09/09 05:35:40 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

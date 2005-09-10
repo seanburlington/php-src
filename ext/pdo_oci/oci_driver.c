@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.9 2004/06/14 19:58:35 tony2001 Exp $ */
+/* $Id: oci_driver.c,v 1.24.2.1 2005/09/10 21:38:07 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,6 +29,7 @@
 #include "pdo/php_pdo_driver.h"
 #include "php_pdo_oci.h"
 #include "php_pdo_oci_int.h"
+#include "Zend/zend_exceptions.h"
 
 static int pdo_oci_fetch_error_func(pdo_dbh_t *dbh, pdo_stmt_t *stmt, zval *info TSRMLS_DC) /* {{{ */
 {
@@ -45,8 +46,10 @@ static int pdo_oci_fetch_error_func(pdo_dbh_t *dbh, pdo_stmt_t *stmt, zval *info
 		}
 	}
 
-	add_next_index_long(info, einfo->errcode);
-	add_next_index_string(info, einfo->errmsg, 1);
+	if (einfo->errcode) {
+		add_next_index_long(info, einfo->errcode);
+		add_next_index_string(info, einfo->errmsg, 1);
+	}
 
 	return 1;
 }
@@ -58,27 +61,31 @@ ub4 _oci_error(OCIError *err, pdo_dbh_t *dbh, pdo_stmt_t *stmt, char *what, swor
 	pdo_oci_db_handle *H = (pdo_oci_db_handle *)dbh->driver_data;
 	pdo_oci_error_info *einfo;
 	pdo_oci_stmt *S = NULL;
-	enum pdo_error_type *pdo_err = &dbh->error_code;
+	pdo_error_type *pdo_err = &dbh->error_code;
 	
-	einfo = &H->einfo;
-
 	if (stmt) {
 		S = (pdo_oci_stmt*)stmt->driver_data;
 		einfo = &S->einfo;
 		pdo_err = &stmt->error_code;
+		if (einfo->errmsg) {
+			efree(einfo->errmsg);
+		}
 	}
-		
+	else {
+		einfo = &H->einfo;
+		if (einfo->errmsg) {
+			pefree(einfo->errmsg, dbh->is_persistent);
+		}
+	}
+	
+	einfo->errmsg = NULL;
 	einfo->errcode = 0;
 	einfo->file = file;
 	einfo->line = line;
-	if (einfo->errmsg) {
-		efree(einfo->errmsg);
-		einfo->errmsg = NULL;
-	}
 	
 	switch (status) {
 		case OCI_SUCCESS:
-			*pdo_err = PDO_ERR_NONE;
+			strcpy(*pdo_err, "00000");
 			break;
 		case OCI_ERROR:
 			OCIErrorGet(err, (ub4)1, NULL, &einfo->errcode, errbuf, (ub4)sizeof(errbuf), OCI_HTYPE_ERROR);
@@ -105,37 +112,53 @@ ub4 _oci_error(OCIError *err, pdo_dbh_t *dbh, pdo_stmt_t *stmt, char *what, swor
 			break;
 	}
 
-	switch (einfo->errcode) {
-		case 1013:	/* user requested cancel of current operation */
-			zend_bailout();
-			break;
+	if (einfo->errcode) {
+		switch (einfo->errcode) {
+			case 1013:	/* user requested cancel of current operation */
+				zend_bailout();
+				break;
 
-		case 955:	/* ORA-00955: name is already used by an existing object */
-			*pdo_err = PDO_ERR_ALREADY_EXISTS;
-			break;
+#if 0
+			case 955:	/* ORA-00955: name is already used by an existing object */
+				*pdo_err = PDO_ERR_ALREADY_EXISTS;
+				break;
+#endif
 
-		case 12154:	/* ORA-12154: TNS:could not resolve service name */
-			*pdo_err = PDO_ERR_NOT_FOUND;
-			break;
-			
-		case 22:	/* ORA-00022: invalid session id */
-		case 1012:	/* ORA-01012: */
-		case 3113:	/* ORA-03133: end of file on communication channel */
-		case 604:
-		case 1041:
-			/* consider the connection closed */
-			dbh->is_closed = 1;
-			H->attached = 0;
-			*pdo_err = PDO_ERR_DISCONNECTED;
-			break;
+			case 12154:	/* ORA-12154: TNS:could not resolve service name */
+				strcpy(*pdo_err, "42S02");
+				break;
+				
+			case 22:	/* ORA-00022: invalid session id */
+			case 1012:	/* ORA-01012: */
+			case 3113:	/* ORA-03133: end of file on communication channel */
+			case 604:
+			case 1041:
+				/* consider the connection closed */
+				dbh->is_closed = 1;
+				H->attached = 0;
+				strcpy(*pdo_err, "01002"); /* FIXME */
+				break;
 
-		default:
-			*pdo_err = PDO_ERR_CANT_MAP;
+			default:
+				strcpy(*pdo_err, "HY000");
+		}
+	}
+
+	if (stmt) {
+		/* always propogate the error code back up to the dbh,
+		 * so that we can catch the error information when execute
+		 * is called via query.  See Bug #33707 */
+		if (H->einfo.errmsg) {
+			efree(H->einfo.errmsg);
+		}
+		H->einfo = *einfo;
+		H->einfo.errmsg = einfo->errmsg ? estrdup(einfo->errmsg) : NULL;
+		strcpy(dbh->error_code, stmt->error_code);
 	}
 
 	/* little mini hack so that we can use this code from the dbh ctor */
 	if (!dbh->methods) {
-		zend_throw_exception_ex(php_pdo_get_exception(), *pdo_err TSRMLS_CC, einfo->errmsg);
+		zend_throw_exception_ex(php_pdo_get_exception(), 0 TSRMLS_CC, "SQLSTATE[%s]: %s", *pdo_err, einfo->errmsg);
 	}
 
 	return einfo->errcode;
@@ -181,19 +204,49 @@ static int oci_handle_closer(pdo_dbh_t *dbh TSRMLS_DC) /* {{{ */
 		OCIHandleFree(H->env, OCI_HTYPE_ENV);
 		H->env = NULL;
 	}
-
+	
+	if (H->einfo.errmsg) {
+		pefree(H->einfo.errmsg, dbh->is_persistent);
+		H->einfo.errmsg = NULL;
+	}
+ 
 	pefree(H, dbh->is_persistent);
 
 	return 0;
 }
 /* }}} */
 
-static int oci_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pdo_stmt_t *stmt, long options, zval *driver_options TSRMLS_DC) /* {{{ */
+static int oci_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pdo_stmt_t *stmt, zval *driver_options TSRMLS_DC) /* {{{ */
 {
 	pdo_oci_db_handle *H = (pdo_oci_db_handle *)dbh->driver_data;
 	pdo_oci_stmt *S = ecalloc(1, sizeof(*S));
+	ub4 prefetch;
+	char *nsql = NULL;
+	int nsql_len = 0;
+	int ret;
+
+#if HAVE_OCISTMTFETCH2
+	S->exec_type = pdo_attr_lval(driver_options, PDO_ATTR_CURSOR,
+		PDO_CURSOR_FWDONLY TSRMLS_CC) == PDO_CURSOR_SCROLL ?
+		OCI_STMT_SCROLLABLE_READONLY : OCI_DEFAULT;
+#else
+	S->exec_type = OCI_DEFAULT;
+#endif
 
 	S->H = H;
+	stmt->supports_placeholders = PDO_PLACEHOLDER_NAMED;
+	ret = pdo_parse_params(stmt, (char*)sql, sql_len, &nsql, &nsql_len TSRMLS_CC);
+
+	if (ret == 1) {
+		/* query was re-written */
+		sql = nsql;
+		sql_len = nsql_len;
+	} else if (ret == -1) {
+		/* couldn't grok it */
+		strcpy(dbh->error_code, stmt->error_code);
+		efree(S);
+		return 0;
+	}
 	
 	/* create an OCI statement handle */
 	OCIHandleAlloc(H->env, (dvoid*)&S->stmt, OCI_HTYPE_STMT, 0, NULL);
@@ -203,7 +256,10 @@ static int oci_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pd
 
 	if (sql_len) {
 		H->last_err = OCIStmtPrepare(S->stmt, H->err, (text*)sql, sql_len, OCI_NTV_SYNTAX, OCI_DEFAULT);
-
+		if (nsql) {
+			efree(nsql);
+			nsql = NULL;
+		}
 		if (H->last_err) {
 			H->last_err = oci_drv_error("OCIStmtPrepare");
 			OCIHandleFree(S->stmt, OCI_HTYPE_STMT);
@@ -211,10 +267,26 @@ static int oci_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pd
 			efree(S);
 			return 0;
 		}
+
+	}
+
+	prefetch = 1024 * pdo_attr_lval(driver_options, PDO_ATTR_PREFETCH, 100 TSRMLS_CC);
+	if (prefetch) {
+		H->last_err = OCIAttrSet(S->stmt, OCI_HTYPE_STMT, &prefetch, 0,
+			OCI_ATTR_PREFETCH_MEMORY, H->err);
+		if (!H->last_err) {
+			prefetch /= 1024;
+			H->last_err = OCIAttrSet(S->stmt, OCI_HTYPE_STMT, &prefetch, 0,
+				OCI_ATTR_PREFETCH_ROWS, H->err);
+		}
 	}
 
 	stmt->driver_data = S;
 	stmt->methods = &oci_stmt_methods;
+	if (nsql) {
+		efree(nsql);
+		nsql = NULL;
+	}
 	
 	return 1;
 }
@@ -264,7 +336,7 @@ static long oci_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRMLS
 }
 /* }}} */
 
-static int oci_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen  TSRMLS_DC) /* {{{ */
+static int oci_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen, enum pdo_param_type paramtype  TSRMLS_DC) /* {{{ */
 {
 	pdo_oci_db_handle *H = (pdo_oci_db_handle *)dbh->driver_data;
 
@@ -345,6 +417,9 @@ static struct pdo_dbh_methods oci_methods = {
 	oci_handle_set_attribute,
 	NULL,
 	pdo_oci_fetch_error_func,
+	NULL,	/* get_attr */
+	NULL,	/* check_liveness */
+	NULL	/* get_driver_methods */
 };
 
 static int pdo_oci_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_DC) /* {{{ */
@@ -412,21 +487,25 @@ static int pdo_oci_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_DC
 	}
 
 	/* username */
-	H->last_err = OCIAttrSet(H->session, OCI_HTYPE_SESSION,
-		   	dbh->username, strlen(dbh->username),
-			OCI_ATTR_USERNAME, H->err);
-	if (H->last_err) {
-		oci_drv_error("OCIAttrSet: OCI_ATTR_USERNAME");
-		goto cleanup;
+	if (dbh->username) {
+		H->last_err = OCIAttrSet(H->session, OCI_HTYPE_SESSION,
+			   	dbh->username, strlen(dbh->username),
+				OCI_ATTR_USERNAME, H->err);
+		if (H->last_err) {
+			oci_drv_error("OCIAttrSet: OCI_ATTR_USERNAME");
+			goto cleanup;
+		}
 	}
 
 	/* password */
-	H->last_err = OCIAttrSet(H->session, OCI_HTYPE_SESSION,
-		   	dbh->password, strlen(dbh->password),
-			OCI_ATTR_PASSWORD, H->err);
-	if (H->last_err) {
-		oci_drv_error("OCIAttrSet: OCI_ATTR_PASSWORD");
-		goto cleanup;
+	if (dbh->password) {
+		H->last_err = OCIAttrSet(H->session, OCI_HTYPE_SESSION,
+			   	dbh->password, strlen(dbh->password),
+				OCI_ATTR_PASSWORD, H->err);
+		if (H->last_err) {
+			oci_drv_error("OCIAttrSet: OCI_ATTR_PASSWORD");
+			goto cleanup;
+		}
 	}
 
 	/* Now fire up the session */
@@ -445,7 +524,6 @@ static int pdo_oci_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_DC
 	
 	dbh->methods = &oci_methods;
 	dbh->alloc_own_columns = 1;
-	dbh->supports_placeholders = PDO_PLACEHOLDER_NAMED;
 	dbh->native_case = PDO_CASE_UPPER;
 
 	ret = 1;

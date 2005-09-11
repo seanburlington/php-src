@@ -18,7 +18,9 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_int.h,v 1.17 2005/03/21 00:29:06 helly Exp $ */
+/* $Id: php_pdo_int.h,v 1.18 2005/09/11 05:03:59 wez Exp $ */
+
+#include "php_pdo_phpvers_compat.h"
 
 /* Stuff private to the PDO extension and not for consumption by PDO drivers
  * */

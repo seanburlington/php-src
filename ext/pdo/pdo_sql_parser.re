@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sql_parser.re,v 1.29 2005/09/04 00:58:21 edink Exp $ */
+/* $Id: pdo_sql_parser.re,v 1.30 2005/09/11 05:03:58 wez Exp $ */
 
 #include "php.h"
 #include "php_pdo_driver.h"
@@ -210,8 +210,6 @@ PDO_API int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len,
 							plc->freeq = 0;
 							break;
 
-						case IS_BOOL:
-							convert_to_long(param->parameter);
 						case IS_LONG:
 						case IS_DOUBLE:
 							convert_to_string(param->parameter);
@@ -220,6 +218,8 @@ PDO_API int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len,
 							plc->freeq = 0;
 							break;
 
+						case IS_BOOL:
+							convert_to_long(param->parameter);
 						default:
 							convert_to_string(param->parameter);
 							if (!stmt->dbh->methods->quoter(stmt->dbh, Z_STRVAL_P(param->parameter),

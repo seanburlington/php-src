@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.24.2.1 2005/09/10 21:38:07 wez Exp $ */
+/* $Id: oci_driver.c,v 1.24.2.2 2005/09/11 01:42:38 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -431,7 +431,7 @@ static int pdo_oci_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_DC
 		{ "dbname",   "",	0 }
 	};
 
-	php_pdo_parse_data_source(dbh->data_source, dbh->data_source_len, vars, 4);
+	php_pdo_parse_data_source(dbh->data_source, dbh->data_source_len, vars, 2);
 	
 	H = pecalloc(1, sizeof(*H), dbh->is_persistent);
 	dbh->driver_data = H;

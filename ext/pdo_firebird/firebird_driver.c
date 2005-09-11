@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: firebird_driver.c,v 1.9 2004/06/23 13:26:08 abies Exp $ */
+/* $Id: firebird_driver.c,v 1.17.2.1 2005/09/11 01:42:41 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -40,8 +40,9 @@ void _firebird_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, char const *file, long li
 {
 	pdo_firebird_db_handle *H = stmt ? ((pdo_firebird_stmt *)stmt->driver_data)->H 
 		: (pdo_firebird_db_handle *)dbh->driver_data;
-	enum pdo_error_type *const error_code = stmt ? &stmt->error_code : &dbh->error_code;
+	pdo_error_type *const error_code = stmt ? &stmt->error_code : &dbh->error_code;
 	
+#if 0
 	switch (isc_sqlcode(H->isc_status)) {
 
 		case 0:
@@ -82,6 +83,9 @@ void _firebird_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, char const *file, long li
 			*error_code = PDO_ERR_DISCONNECTED;
 			break;
 	}
+#else
+	strcpy(*error_code, "HY000");
+#endif
 }
 /* }}} */
 
@@ -116,7 +120,7 @@ static int firebird_handle_closer(pdo_dbh_t *dbh TSRMLS_DC) /* {{{ */
 
 /* called by PDO to prepare an SQL query */
 static int firebird_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, /* {{{ */
-	pdo_stmt_t *stmt, long options, zval *driver_options TSRMLS_DC)
+	pdo_stmt_t *stmt, zval *driver_options TSRMLS_DC)
 {
 	pdo_firebird_db_handle *H = (pdo_firebird_db_handle *)dbh->driver_data;
 	pdo_firebird_stmt *S = NULL;
@@ -178,6 +182,7 @@ static int firebird_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_le
 	
 		stmt->driver_data = S;
 		stmt->methods = &firebird_stmt_methods;
+		stmt->supports_placeholders = PDO_PLACEHOLDER_POSITIONAL;
 	
 		return 1;
 
@@ -254,7 +259,7 @@ static long firebird_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len T
 
 /* called by the PDO SQL parser to add quotes to values that are copied into SQL */
 static int firebird_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, /* {{{ */
-	char **quoted, int *quotedlen TSRMLS_DC)
+	char **quoted, int *quotedlen, enum pdo_param_type paramtype TSRMLS_DC)
 {
 	int qcount = 0;
 	char const *c;
@@ -381,7 +386,7 @@ static int firebird_alloc_prepare_stmt(pdo_dbh_t *dbh, const char *sql, long sql
 		
 	/* Firebird allows SQL statements up to 64k, so bail if it doesn't fit */
 	if (sql_len > SHORT_MAX) {
-		dbh->error_code = PDO_ERR_TRUNCATED;
+		strcpy(dbh->error_code, "01004");
 		return 0;
 	}
 	
@@ -582,6 +587,7 @@ static struct pdo_dbh_methods firebird_methods = { /* {{{ */
 	NULL, /* last_id not supported */
 	pdo_firebird_fetch_error_func,
 	firebird_handle_get_attribute,
+	NULL /* check_liveness */
 };
 /* }}} */
 
@@ -596,7 +602,7 @@ static int pdo_firebird_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRM
 	int i, ret = 0;
 	pdo_firebird_db_handle *H = dbh->driver_data = pecalloc(1,sizeof(*H),dbh->is_persistent);
 
-	php_pdo_parse_data_source(dbh->data_source, dbh->data_source_len, vars, 2);
+	php_pdo_parse_data_source(dbh->data_source, dbh->data_source_len, vars, 3);
 	
 	do {
 		static char const dpb_flags[] = { 
@@ -621,7 +627,6 @@ static int pdo_firebird_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRM
 		}
 		
 		dbh->methods = &firebird_methods;
-		dbh->supports_placeholders = PDO_PLACEHOLDER_POSITIONAL;
 		dbh->native_case = PDO_CASE_UPPER;
 		dbh->alloc_own_columns = 1;
 

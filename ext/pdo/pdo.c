@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.57.2.1 2005/09/10 20:58:19 wez Exp $ */
+/* $Id: pdo.c,v 1.57.2.2 2005/09/11 05:06:30 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -112,7 +112,7 @@ zend_module_entry pdo_module_entry = {
 	PHP_RINIT(pdo),
 	PHP_RSHUTDOWN(pdo),
 	PHP_MINFO(pdo),
-	"0.9",
+	"1.0",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

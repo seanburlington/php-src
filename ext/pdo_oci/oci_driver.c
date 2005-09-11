@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_driver.c,v 1.26 2005/08/30 19:59:11 gschlossnagle Exp $ */
+/* $Id: oci_driver.c,v 1.27 2005/09/11 05:08:49 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -142,6 +142,18 @@ ub4 _oci_error(OCIError *err, pdo_dbh_t *dbh, pdo_stmt_t *stmt, char *what, swor
 			default:
 				strcpy(*pdo_err, "HY000");
 		}
+	}
+
+	if (stmt) {
+		/* always propogate the error code back up to the dbh,
+		 * so that we can catch the error information when execute
+		 * is called via query.  See Bug #33707 */
+		if (H->einfo.errmsg) {
+			efree(H->einfo.errmsg);
+		}
+		H->einfo = *einfo;
+		H->einfo.errmsg = einfo->errmsg ? estrdup(einfo->errmsg) : NULL;
+		strcpy(dbh->error_code, stmt->error_code);
 	}
 
 	/* little mini hack so that we can use this code from the dbh ctor */

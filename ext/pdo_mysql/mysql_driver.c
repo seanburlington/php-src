@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.63 2005/08/31 03:48:01 gschlossnagle Exp $ */
+/* $Id: mysql_driver.c,v 1.64 2005/09/11 05:08:47 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -424,7 +424,7 @@ static int pdo_mysql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 	}
 
 	dbname = vars[1].optval;
-    host = vars[2].optval;	
+	host = vars[2].optval;	
 	if(vars[3].optval) {
 		port = atoi(vars[3].optval);
 	}

@@ -16,13 +16,14 @@
  </description>
  <license>PHP</license>
  <release>
-  <state>alpha</state>
-  <version>0.1</version>
-  <date>2004-05-21</date>
+  <state>beta</state>
+  <version>1.0RC1</version>
+  <date>2005-09-11</date>
 
   <notes>
    You need to install the PDO core module before you can make use of this one.
-   You also require Oracle OCI 8 or higher client libraries installed on the machine where you intend to build and/or use it.
+   You also require Oracle OCI 8 or higher client libraries installed on the
+   machine where you intend to build and/or use it.
    
    If you are running on windows, you can download the binary from here:
    http://snaps.php.net/win32/PECL_5_0/php_pdo_oci.dll
@@ -40,8 +41,8 @@
    <file role="doc" name="CREDITS"/>
   </filelist>
   <deps>
-   <dep type="php" rel="ge" version="5.0.0RC3dev"/>
-   <dep type="ext" rel="ge" name="pdo" version="0.1"/>
+   <dep type="php" rel="ge" version="5.0.3"/>
+   <dep type="ext" rel="ge" name="pdo" version="1.0RC1"/>
   </deps>
  </release>
 </package>

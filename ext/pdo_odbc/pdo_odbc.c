@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_odbc.c,v 1.7 2004/05/25 17:44:36 wez Exp $ */
+/* $Id: pdo_odbc.c,v 1.14.2.1 2005/09/11 05:27:30 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -30,24 +30,29 @@
 #include "php_pdo_odbc.h"
 #include "php_pdo_odbc_int.h"
 
-#ifdef PHP_WIN32
-# define PDO_ODBC_TYPE	"Win32"
-#endif
-
-#ifndef PDO_ODBC_TYPE
-# warning Please fix configure to give your ODBC libraries a name
-# define PDO_ODBC_TYPE	"Unknown"
-#endif
-
 /* {{{ pdo_odbc_functions[] */
 function_entry pdo_odbc_functions[] = {
 	{NULL, NULL, NULL}
 };
 /* }}} */
 
+/* {{{ pdo_odbc_deps[] */
+#if ZEND_EXTENSION_API_NO >= 220050617
+static zend_module_dep pdo_odbc_deps[] = {
+	ZEND_MOD_REQUIRED("pdo")
+	{NULL, NULL, NULL}
+};
+#endif
+/* }}} */
+
 /* {{{ pdo_odbc_module_entry */
 zend_module_entry pdo_odbc_module_entry = {
+#if ZEND_EXTENSION_API_NO >= 220050617
+	STANDARD_MODULE_HEADER_EX, NULL,
+	pdo_odbc_deps,
+#else
 	STANDARD_MODULE_HEADER,
+#endif
 	"PDO_ODBC",
 	pdo_odbc_functions,
 	PHP_MINIT(pdo_odbc),
@@ -55,7 +60,7 @@ zend_module_entry pdo_odbc_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(pdo_odbc),
-	"0.1.1",
+	"1.0RC1",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
@@ -80,10 +85,8 @@ PHP_MINIT_FUNCTION(pdo_odbc)
 		return FAILURE;
 	}
 
-	pdo_odbc_init_error_table();
-
 #ifdef SQL_ATTR_CONNECTION_POOLING
-	/* ugh, we don't really .ini stuff in PDO, but since ODBC connection
+	/* ugh, we don't really like .ini stuff in PDO, but since ODBC connection
 	 * pooling is process wide, we can't set it from within the scope of a
 	 * request without affecting others, which goes against our isolated request
 	 * policy.  So, we use cfg_get_string here to check it this once.
@@ -123,7 +126,6 @@ PHP_MINIT_FUNCTION(pdo_odbc)
 PHP_MSHUTDOWN_FUNCTION(pdo_odbc)
 {
 	php_pdo_unregister_driver(&pdo_odbc_driver);
-	pdo_odbc_fini_error_table();
 	return SUCCESS;
 }
 /* }}} */

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_firebird.c,v 1.2 2004/06/12 17:09:33 abies Exp $ */
+/* $Id: pdo_firebird.c,v 1.4.2.1 2005/09/11 05:27:30 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -44,7 +44,7 @@ zend_module_entry pdo_firebird_module_entry = { /* {{{ */
 	NULL,
 	NULL,
 	PHP_MINFO(pdo_firebird),
-	"0.1",
+	"0.3",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

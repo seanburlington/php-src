@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_oci.c,v 1.2 2004/05/21 17:33:58 wez Exp $ */
+/* $Id: pdo_oci.c,v 1.5.2.1 2005/09/11 05:27:30 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,8 +37,21 @@ function_entry pdo_oci_functions[] = {
 /* }}} */
 
 /* {{{ pdo_oci_module_entry */
+
+#if ZEND_EXTENSION_API_NO >= 220050617
+static zend_module_dep pdo_oci_deps[] = {
+	ZEND_MOD_REQUIRED("pdo")
+	{NULL, NULL, NULL}
+};
+#endif
+
 zend_module_entry pdo_oci_module_entry = {
+#if ZEND_EXTENSION_API_NO >= 220050617
+	STANDARD_MODULE_HEADER_EX, NULL,
+	pdo_oci_deps,
+#else
 	STANDARD_MODULE_HEADER,
+#endif
 	"PDO_OCI",
 	pdo_oci_functions,
 	PHP_MINIT(pdo_oci),
@@ -46,7 +59,7 @@ zend_module_entry pdo_oci_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(pdo_oci),
-	"0.1",
+	"1.0RC1",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

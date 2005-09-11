@@ -12,11 +12,11 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: George Schlossnagle <george@omniti.com>                      |
+  | Author: Wez Furlong <wez@php.net>                                    |
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_mysql.c,v 1.8.2.1 2005/09/11 05:27:30 wez Exp $ */
+/* $Id: pdo_sqlite.c,v 1.10.2.1 2005/09/11 05:27:30 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -27,75 +27,81 @@
 #include "ext/standard/info.h"
 #include "pdo/php_pdo.h"
 #include "pdo/php_pdo_driver.h"
-#include "php_pdo_mysql.h"
-#include "php_pdo_mysql_int.h"
+#include "php_pdo_sqlite.h"
+#include "php_pdo_sqlite_int.h"
+#include "zend_exceptions.h"
 
-/* {{{ pdo_mysql_functions[] */
-function_entry pdo_mysql_functions[] = {
+#define PHP_PDO_SQLITE_MODULE_VERSION	"1.0RC1"
+
+/* {{{ pdo_sqlite_functions[] */
+function_entry pdo_sqlite_functions[] = {
 	{NULL, NULL, NULL}
 };
 /* }}} */
 
-/* {{{ pdo_mysql_functions[] */
+/* {{{ pdo_sqlite_deps
+ */
 #if ZEND_EXTENSION_API_NO >= 220050617
-static zend_module_dep pdo_mysql_deps[] = {
+static zend_module_dep pdo_sqlite_deps[] = {
 	ZEND_MOD_REQUIRED("pdo")
 	{NULL, NULL, NULL}
 };
 #endif
 /* }}} */
 
-/* {{{ pdo_mysql_module_entry */
-zend_module_entry pdo_mysql_module_entry = {
+/* {{{ pdo_sqlite_module_entry
+ */
+zend_module_entry pdo_sqlite_module_entry = {
 #if ZEND_EXTENSION_API_NO >= 220050617
 	STANDARD_MODULE_HEADER_EX, NULL,
-	pdo_mysql_deps,
+	pdo_sqlite_deps,
 #else
 	STANDARD_MODULE_HEADER,
 #endif
-	"pdo_mysql",
-	pdo_mysql_functions,
-	PHP_MINIT(pdo_mysql),
-	PHP_MSHUTDOWN(pdo_mysql),
+	"pdo_sqlite",
+	pdo_sqlite_functions,
+	PHP_MINIT(pdo_sqlite),
+	PHP_MSHUTDOWN(pdo_sqlite),
 	NULL,
 	NULL,
-	PHP_MINFO(pdo_mysql),
-	"1.0RC1",
+	PHP_MINFO(pdo_sqlite),
+	PHP_PDO_SQLITE_MODULE_VERSION,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
 
-#ifdef COMPILE_DL_PDO_MYSQL
-ZEND_GET_MODULE(pdo_mysql)
+#ifdef COMPILE_DL_PDO_SQLITE
+ZEND_GET_MODULE(pdo_sqlite)
 #endif
 
-/* true global environment */
-
-/* {{{ PHP_MINIT_FUNCTION
- */
-PHP_MINIT_FUNCTION(pdo_mysql)
+/* {{{ PHP_MINIT_FUNCTION */
+PHP_MINIT_FUNCTION(pdo_sqlite)
 {
-	REGISTER_LONG_CONSTANT("PDO_MYSQL_ATTR_USE_BUFFERED_QUERY", (long)PDO_MYSQL_ATTR_USE_BUFFERED_QUERY,	CONST_CS|CONST_PERSISTENT);
-
-	return php_pdo_register_driver(&pdo_mysql_driver);
+	return php_pdo_register_driver(&pdo_sqlite_driver);
 }
 /* }}} */
 
-/* {{{ PHP_MSHUTDOWN_FUNCTION
- */
-PHP_MSHUTDOWN_FUNCTION(pdo_mysql)
+/* {{{ PHP_MSHUTDOWN_FUNCTION */
+PHP_MSHUTDOWN_FUNCTION(pdo_sqlite)
 {
-	php_pdo_unregister_driver(&pdo_mysql_driver);
+	php_pdo_unregister_driver(&pdo_sqlite_driver);
 	return SUCCESS;
 }
 /* }}} */
 
 /* {{{ PHP_MINFO_FUNCTION
  */
-PHP_MINFO_FUNCTION(pdo_mysql)
+PHP_MINFO_FUNCTION(pdo_sqlite)
 {
 	php_info_print_table_start();
-	php_info_print_table_header(2, "PDO Driver for MySQL 3.x Client Libraries", "enabled");
+	php_info_print_table_header(2, "PDO Driver for SQLite 3.x", "enabled");
+	php_info_print_table_row(2, "PECL Module version",
+#if PDO_SQLITE_BUNDLED
+	"(bundled) "
+#endif
+		PHP_PDO_SQLITE_MODULE_VERSION 
+		" $Id: pdo_sqlite.c,v 1.10.2.1 2005/09/11 05:27:30 wez Exp $");
+	php_info_print_table_row(2, "SQLite Library", sqlite3_libversion());
 	php_info_print_table_end();
 }
 /* }}} */

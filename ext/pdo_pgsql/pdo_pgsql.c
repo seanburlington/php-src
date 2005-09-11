@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_pgsql.c,v 1.1 2004/05/20 02:27:49 edink Exp $ */
+/* $Id: pdo_pgsql.c,v 1.7.2.1 2005/09/11 05:27:30 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,9 +36,24 @@ function_entry pdo_pgsql_functions[] = {
 };
 /* }}} */
 
+/* {{{ pdo_sqlite_deps
+ */
+#if ZEND_EXTENSION_API_NO >= 220050617
+static zend_module_dep pdo_pgsql_deps[] = {
+	ZEND_MOD_REQUIRED("pdo")
+	{NULL, NULL, NULL}
+};
+#endif
+/* }}} */
+
 /* {{{ pdo_pgsql_module_entry */
 zend_module_entry pdo_pgsql_module_entry = {
+#if ZEND_EXTENSION_API_NO >= 220050617
+	STANDARD_MODULE_HEADER_EX, NULL,
+	pdo_pgsql_deps,
+#else
 	STANDARD_MODULE_HEADER,
+#endif
 	"pdo_pgsql",
 	pdo_pgsql_functions,
 	PHP_MINIT(pdo_pgsql),
@@ -46,7 +61,7 @@ zend_module_entry pdo_pgsql_module_entry = {
 	PHP_RINIT(pdo_pgsql),
 	PHP_RSHUTDOWN(pdo_pgsql),
 	PHP_MINFO(pdo_pgsql),
-	"0.1",
+	"1.0RC1",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
@@ -62,6 +77,7 @@ ZEND_GET_MODULE(pdo_pgsql)
 PHP_MINIT_FUNCTION(pdo_pgsql)
 {
 	php_pdo_register_driver(&pdo_pgsql_driver);
+	REGISTER_LONG_CONSTANT("PDO_PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT", PDO_PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT, CONST_CS|CONST_PERSISTENT);
 	return SUCCESS;
 }
 /* }}} */
@@ -79,7 +95,7 @@ PHP_MSHUTDOWN_FUNCTION(pdo_pgsql)
  */
 PHP_RINIT_FUNCTION(pdo_pgsql)
 {
-	//	php_pdo_register_driver(&pdo_pgsql_driver);
+	/*	php_pdo_register_driver(&pdo_pgsql_driver); */
 	return SUCCESS;
 }
 /* }}} */
@@ -88,7 +104,7 @@ PHP_RINIT_FUNCTION(pdo_pgsql)
  */
 PHP_RSHUTDOWN_FUNCTION(pdo_pgsql)
 {
-	//	php_pdo_unregister_driver(&pdo_pgsql_driver);
+	/*	php_pdo_unregister_driver(&pdo_pgsql_driver); */
 	return SUCCESS;
 }
 /* }}} */

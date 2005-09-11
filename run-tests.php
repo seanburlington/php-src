@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.1 2005/09/06 00:42:20 iliaa Exp $ */
+/* $Id: run-tests.php,v 1.226.2.2 2005/09/11 17:33:15 iliaa Exp $ */
 
 /*
  * TODO:
@@ -604,9 +604,7 @@ function save_text($filename,$text)
 {
 	global $DETAILED;
 
-	$fp = @fopen($filename,'w') or error("Cannot open file '" . $filename . "' (save_text)");
-	fwrite($fp,$text);
-	fclose($fp);
+	@file_put_contents($filename, $text) or error("Cannot open file '" . $filename . "' (save_text)");
 	if (1 < $DETAILED) echo "
 FILE $filename {{{
 $text

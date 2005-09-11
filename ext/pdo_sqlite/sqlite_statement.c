@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.18 2005/07/23 23:34:04 iliaa Exp $ */
+/* $Id: sqlite_statement.c,v 1.19 2005/09/11 04:59:41 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -281,6 +281,8 @@ static int pdo_sqlite_stmt_col_meta(pdo_stmt_t *stmt, long colno, zval *return_v
 
 static int pdo_sqlite_stmt_cursor_closer(pdo_stmt_t *stmt TSRMLS_DC)
 {
+	pdo_sqlite_stmt *S = (pdo_sqlite_stmt*)stmt->driver_data;
+	sqlite3_reset(S->stmt);
 	return 1;
 }
 

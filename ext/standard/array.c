@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.323 2005/09/01 11:58:39 dmitry Exp $ */
+/* $Id: array.c,v 1.324 2005/09/12 09:53:22 derick Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -163,11 +163,9 @@ static void set_compare_func(int sort_type TSRMLS_DC)
 			ARRAYG(compare_func) = string_compare_function;
 			break;
 
-#if HAVE_STRCOLL
 		case SORT_LOCALE_STRING:
 			ARRAYG(compare_func) = string_locale_compare_function;
 			break;
-#endif
 
 		case SORT_REGULAR:
 		default:

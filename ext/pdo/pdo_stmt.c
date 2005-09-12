@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.125 2005/09/11 05:03:58 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.126 2005/09/12 06:31:54 dmitry Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1865,7 +1865,7 @@ static PHP_METHOD(PDOStatement, debugDumpParams)
    Prevents use of a PDOStatement instance that has been unserialized */
 static PHP_METHOD(PDOStatement, __wakeup)
 {
-   	zend_throw_exception_ex(php_pdo_get_exception(), 0 TSRMLS_CC, "You cannot serialize or unserialize PDOStatement instances");
+   	zend_throw_exception_ex(php_pdo_get_exception(TSRMLS_C), 0 TSRMLS_CC, "You cannot serialize or unserialize PDOStatement instances");
 }
 /* }}} */
 
@@ -1873,7 +1873,7 @@ static PHP_METHOD(PDOStatement, __wakeup)
    Prevents serialization of a PDOStatement instance */
 static PHP_METHOD(PDOStatement, __sleep)
 {
-	zend_throw_exception_ex(php_pdo_get_exception(), 0 TSRMLS_CC, "You cannot serialize or unserialize PDOStatement instances");
+	zend_throw_exception_ex(php_pdo_get_exception(TSRMLS_C), 0 TSRMLS_CC, "You cannot serialize or unserialize PDOStatement instances");
 }
 /* }}} */
 

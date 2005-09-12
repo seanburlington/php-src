@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.26 2005/08/28 00:43:29 sniper Exp $
+dnl $Id: config.m4,v 1.27 2005/09/12 17:14:20 sniper Exp $
 dnl
 
 sinclude(ext/xmlrpc/libxmlrpc/acinclude.m4)
@@ -65,7 +65,7 @@ if test "$PHP_XMLRPC" != "no"; then
     PHP_ICONV=$PHP_ICONV_DIR
   fi
   
-  if test "$PHP_ICONV" = "no"; then
+  if test -z "$PHP_ICONV" || test "$PHP_ICONV" = "no"; then
     PHP_ICONV=yes
   fi
   

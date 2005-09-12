@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: var.c,v 1.213 2005/08/23 17:22:54 andrei Exp $ */
+/* $Id: var.c,v 1.214 2005/09/12 07:14:54 dmitry Exp $ */
 
 
 
@@ -933,7 +933,7 @@ static void php_var_serialize_intern(smart_str *buf, zval **struc, HashTable *va
 					res = call_user_function_ex(CG(function_table), struc, &fname, 
 												&retval_ptr, 0, 0, 1, NULL TSRMLS_CC);
 
-					if (res == SUCCESS) {
+					if (res == SUCCESS && !EG(exception)) {
 						if (retval_ptr) {
 							if (HASH_OF(retval_ptr)) {
 								php_var_serialize_class(buf, struc, retval_ptr, 

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.673.2.18 2005/08/21 18:36:33 zeev Exp $ */
+/* $Id: basic_functions.c,v 1.673.2.19 2005/09/13 13:23:25 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -742,8 +742,8 @@ function_entry basic_functions[] = {
 	PHP_FE(prev,					first_arg_force_ref)
 	PHP_FE(next,					first_arg_force_ref)
 	PHP_FE(reset,					first_arg_force_ref)
-	PHP_FE(current,					first_arg_force_ref)
-	PHP_FE(key,						first_arg_force_ref)
+	PHP_FE(current,					NULL)
+	PHP_FE(key,					NULL)
 	PHP_FE(min,																NULL)
 	PHP_FE(max,																NULL)
 	PHP_FE(in_array,														NULL)

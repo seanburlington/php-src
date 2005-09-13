@@ -1,4 +1,4 @@
- ## $Id: configure.in,v 1.587 2005/09/13 09:50:53 sniper Exp $ -*- autoconf -*-
+ ## $Id: configure.in,v 1.588 2005/09/13 21:40:33 sniper Exp $ -*- autoconf -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)
@@ -1358,7 +1358,7 @@ X
   fi
 
   # Warn about linking Apache with libpthread if oci8 extension is enabled on linux.
-  if test "$PHP_OCI8" != "no" -o "$PHP_ORACLE" != "no"; then
+  if test "$PHP_OCI8" != "no"; then
     if test "$PHP_SAPI" = "apache"; then
       if test `uname` = "Linux"; then
 cat <<X

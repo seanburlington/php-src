@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.59.2.1 2005/08/31 04:06:10 gschlossnagle Exp $ */
+/* $Id: mysql_driver.c,v 1.59.2.2 2005/09/14 15:34:58 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -234,8 +234,13 @@ static long mysql_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRM
 		pdo_mysql_error(dbh);
 		return -1;
 	} else {
-		my_ulonglong c= mysql_affected_rows(H->server);
-		return c != (my_ulonglong)-1 ? c:(pdo_mysql_error(dbh),-1); 
+		my_ulonglong c = mysql_affected_rows(H->server);
+		if (c != (my_ulonglong) -1) {
+			pdo_mysql_error(dbh);
+			return (H->einfo.errcode ? -1 : 0);
+		} else {
+			return c;
+		}
 	}
 }
 

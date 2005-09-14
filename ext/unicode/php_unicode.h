@@ -14,7 +14,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_unicode.h,v 1.2 2005/08/12 09:10:04 sniper Exp $ */ 
+/* $Id: php_unicode.h,v 1.3 2005/09/14 14:56:01 derick Exp $ */ 
 
 #ifndef PHP_UNICODE_H
 #define PHP_UNICODE_H
@@ -55,8 +55,9 @@ PHP_MINFO_FUNCTION(unicode);
 #include "TSRM.h"
 #endif
 
-PHP_FUNCTION(icu_loc_get_default);
-PHP_FUNCTION(icu_loc_set_default);
+PHP_FUNCTION(i18n_loc_get_default);
+PHP_FUNCTION(i18n_loc_set_default);
+PHP_FUNCTION(i18n_strtotitle);
 
 extern php_stream_filter_factory php_unicode_filter_factory;
 

@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id: mcrypt.c,v 1.91 2005/08/03 14:07:24 sniper Exp $ */
+/* $Id: mcrypt.c,v 1.92 2005/09/15 16:19:43 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1075,7 +1075,8 @@ static void php_mcrypt_do_crypt (char* cipher, zval **key, zval **data, char *mo
 	}
 
 	if (mcrypt_generic_init(td, key_s, use_key_length, iv_s) < 0) {
-		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Mcrypt initialisation failed");
+		php_error_docref(NULL TSRMLS_CC, E_RECOVERABLE_ERROR, "Mcrypt initialisation failed");
+		RETURN_FALSE;
 	}
 	if (dencrypt == MCRYPT_ENCRYPT) {
 		mcrypt_generic(td, data_s, data_size);

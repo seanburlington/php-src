@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.230 2005/08/15 22:34:37 sniper Exp $ */
+/* $Id: run-tests.php,v 1.231 2005/09/15 16:19:37 derick Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -143,7 +143,7 @@ $ini_overwrites = array(
 		'safe_mode=0',
 		'disable_functions=',
 		'output_buffering=Off',
-		'error_reporting=4095',
+		'error_reporting=8191',
 		'display_errors=1',
 		'log_errors=0',
 		'html_errors=0',

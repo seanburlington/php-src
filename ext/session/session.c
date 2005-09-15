@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.418 2005/08/22 12:22:12 dmitry Exp $ */
+/* $Id: session.c,v 1.419 2005/09/15 16:19:44 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -100,6 +100,7 @@ static PHP_INI_MH(OnUpdateSaveHandler)
 
 	if (PG(modules_activated) && !PS(mod)) {
 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Cannot find save handler %s", new_value);
+		return FAILURE;
 	}
 
 	return SUCCESS;
@@ -126,6 +127,7 @@ static PHP_INI_MH(OnUpdateSerializer)
 
 	if (PG(modules_activated) && !PS(serializer)) {
 		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Cannot find serialization handler %s", new_value);
+		return FAILURE;
 	}
 
 	return SUCCESS;

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.159 2005/08/31 17:00:22 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.160 2005/09/15 16:19:45 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1093,6 +1093,7 @@ static zval *sxe_get_value(zval *z TSRMLS_DC)
 
 	if (sxe_object_cast(z, retval, IS_STRING, 0 TSRMLS_CC)==FAILURE) {
 		zend_error(E_ERROR, "Unable to cast node to string");
+		/* FIXME: Should not be fatal */
 	}
 
 	retval->refcount = 0;
@@ -1152,6 +1153,7 @@ static zend_object_value sxe_object_ze1_clone(zval *zobject TSRMLS_DC)
 {
 	php_error(E_ERROR, "Cannot clone object of class %v due to 'zend.ze1_compatibility_mode'", Z_OBJCE_P(zobject)->name);
 	/* Return zobject->value.obj just to satisfy compiler */
+	/* FIXME: Should not be a fatal */
 	return zobject->value.obj;
 }
 
@@ -1767,7 +1769,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.159 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.160 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

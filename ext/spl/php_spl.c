@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.61 2005/08/24 10:16:45 johannes Exp $ */
+/* $Id: php_spl.c,v 1.62 2005/09/15 03:31:36 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -168,7 +168,6 @@ PHP_FUNCTION(class_implements)
 	SPL_ADD_CLASS(LimitIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(LogicException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(NoRewindIterator, z_list, sub, allow, ce_flags); \
-	SPL_ADD_CLASS(Observer, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(OuterIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(OutOfBoundsException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(OutOfRangeException, z_list, sub, allow, ce_flags); \
@@ -183,7 +182,8 @@ PHP_FUNCTION(class_implements)
 	SPL_ADD_CLASS(SeekableIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SimpleXMLIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SplObjectStorage, z_list, sub, allow, ce_flags); \
-	SPL_ADD_CLASS(Subject, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(SplObserver, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(SplSubject, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(UnderflowException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(UnexpectedValueException, z_list, sub, allow, ce_flags); \
 

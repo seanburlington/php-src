@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.46 2005/08/12 11:29:32 dmitry Exp $ */
+/* $Id: spl_directory.c,v 1.47 2005/09/15 03:31:36 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1602,7 +1602,7 @@ PHP_MINIT_FUNCTION(spl_directory)
 	REGISTER_SPL_IMPLEMENTS(FileObject, RecursiveIterator);
 	REGISTER_SPL_IMPLEMENTS(FileObject, SeekableIterator);
 
-	REGISTER_LONG_CONSTANT("FO_DROP_NEW_LINE",  (long)SPL_FILE_OBJECT_DROP_NEW_LINE,  CONST_CS | CONST_PERSISTENT); 
+	REGISTER_SPL_CLASS_CONST_LONG(FileObject, "DROP_NEW_LINE", SPL_FILE_OBJECT_DROP_NEW_LINE);
 
 	return SUCCESS;
 }

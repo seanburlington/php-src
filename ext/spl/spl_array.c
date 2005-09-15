@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.76 2005/08/12 12:59:20 dmitry Exp $ */
+/* $Id: spl_array.c,v 1.77 2005/09/15 03:31:36 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1236,6 +1236,11 @@ PHP_MINIT_FUNCTION(spl_array)
 	REGISTER_SPL_IMPLEMENTS(ArrayObject, Countable);
 	REGISTER_SPL_IMPLEMENTS(ArrayIterator, Countable);
 
+	REGISTER_SPL_CLASS_CONST_LONG(ArrayObject,   "STD_PROP_LIST",    SPL_ARRAY_STD_PROP_LIST);
+	REGISTER_SPL_CLASS_CONST_LONG(ArrayObject,   "ARRAY_AS_PROPS",   SPL_ARRAY_ARRAY_AS_PROPS);
+
+	REGISTER_SPL_CLASS_CONST_LONG(ArrayIterator, "STD_PROP_LIST",    SPL_ARRAY_STD_PROP_LIST);
+	REGISTER_SPL_CLASS_CONST_LONG(ArrayIterator, "ARRAY_AS_PROPS",   SPL_ARRAY_ARRAY_AS_PROPS);
 	return SUCCESS;
 }
 /* }}} */

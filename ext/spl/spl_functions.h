@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_functions.h,v 1.20 2005/08/15 17:29:04 dmitry Exp $ */
+/* $Id: spl_functions.h,v 1.21 2005/09/15 03:31:36 helly Exp $ */
 
 #ifndef PHP_FUNCTIONS_H
 #define PHP_FUNCTIONS_H
@@ -51,6 +51,9 @@ typedef zend_object_value (*create_object_func_t)(zend_class_entry *class_type T
 
 #define REGISTER_SPL_PROPERTY(class_name, prop_name) \
 	spl_register_property(spl_ce_ ## class_name, prop_name, prop_val, prop_flags TSRMLS_CC);
+
+#define REGISTER_SPL_CLASS_CONST_LONG(class_name, const_name, value) \
+	zend_declare_class_constant_long(spl_ce_ ## class_name, const_name, sizeof(const_name)-1, (long)value TSRMLS_CC);
 
 void spl_destroy_class(zend_class_entry ** ppce);
 

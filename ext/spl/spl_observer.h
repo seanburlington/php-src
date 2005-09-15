@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_observer.h,v 1.3 2005/08/10 22:01:15 helly Exp $ */
+/* $Id: spl_observer.h,v 1.4 2005/09/15 03:31:36 helly Exp $ */
 
 #ifndef SPL_OBSERVER_H
 #define SPL_OBSERVER_H
@@ -24,8 +24,8 @@
 #include "php.h"
 #include "php_spl.h"
 
-extern PHPAPI zend_class_entry *spl_ce_Observer;
-extern PHPAPI zend_class_entry *spl_ce_Subject;
+extern PHPAPI zend_class_entry *spl_ce_SplObserver;
+extern PHPAPI zend_class_entry *spl_ce_SplSubject;
 extern PHPAPI zend_class_entry *spl_ce_SplObjectStorage;
 
 PHP_MINIT_FUNCTION(spl_observer);

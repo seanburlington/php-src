@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -13,10 +13,11 @@
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Author: Stig Sæther Bakken <ssb@php.net>                             |
+   |         Marcus Boerger <helly@php.net>                               |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.h,v 1.27 2004/01/08 17:33:04 sniper Exp $ */
+/* $Id: snprintf.h,v 1.32.2.1 2005/09/15 19:11:15 derick Exp $ */
 
 /*
 
@@ -64,20 +65,26 @@ Example:
 #ifndef SNPRINTF_H
 #define SNPRINTF_H
 
-#if !defined(HAVE_SNPRINTF) || PHP_BROKEN_SNPRINTF
-int ap_php_snprintf(char *, size_t, const char *, ...) PHP_ATTRIBUTE_FORMAT(printf, 3, 4);
+BEGIN_EXTERN_C()
+PHPAPI int ap_php_snprintf(char *, size_t, const char *, ...) PHP_ATTRIBUTE_FORMAT(printf, 3, 4);
+PHPAPI int ap_php_vsnprintf(char *, size_t, const char *, va_list ap) PHP_ATTRIBUTE_FORMAT(printf, 3, 0);
+PHPAPI int php_sprintf (char* s, const char* format, ...) PHP_ATTRIBUTE_FORMAT(printf, 2, 3);
+END_EXTERN_C()
+
+#ifdef snprintf
+#undef snprintf
+#endif
 #define snprintf ap_php_snprintf
-#endif
 
-#if !defined(HAVE_VSNPRINTF) || PHP_BROKEN_VSNPRINTF
-int ap_php_vsnprintf(char *, size_t, const char *, va_list ap) PHP_ATTRIBUTE_FORMAT(printf, 3, 0);
+#ifdef vsnprintf
+#undef vsnprintf
+#endif
 #define vsnprintf ap_php_vsnprintf
-#endif
 
-#if PHP_BROKEN_SPRINTF
-int php_sprintf (char* s, const char* format, ...) PHP_ATTRIBUTE_FORMAT(printf, 2, 3);
-#define sprintf php_sprintf
+#ifdef sprintf
+#undef sprintf
 #endif
+#define sprintf php_sprintf
 
 typedef enum {
 	NO = 0, YES = 1
@@ -104,12 +111,12 @@ extern char * ap_php_ecvt(double arg, int ndigits, int *decpt, int *sign, char *
 extern char * ap_php_fcvt(double arg, int ndigits, int *decpt, int *sign, char *buf);
 extern char * ap_php_gcvt(double number, int ndigit, char *buf, boolean_e altform);
 
-#if SIZEOF_LONG_LONG_INT
+#if PHP_WIN32
+# define WIDE_INT		__int64
+#elif SIZEOF_LONG_LONG_INT
 # define WIDE_INT		long long int
 #elif SIZEOF_LONG_LONG
 # define WIDE_INT		long long
-#elif _WIN64
-# define WIDE_INT		__int64
 #else
 # define WIDE_INT		long
 #endif

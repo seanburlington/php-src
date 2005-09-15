@@ -2,7 +2,7 @@
 	Build Configuration for Win32.
 	This has only been tested with MS VisualC++ 6 (and later).
 
-	$Id: config.w32.h,v 1.85 2004/02/10 18:50:10 zeev Exp $
+	$Id: config.w32.h,v 1.85.4.1 2005/09/15 19:11:15 derick Exp $
 */
 
 /* Default PHP / PEAR directories */
@@ -175,7 +175,7 @@
 #define SIZEOF_LONG 4
 /* MSVC.6/NET don't allow 'long long' or know 'intmax_t' */
 #define SIZEOF_LONG_LONG_INT 0
-#define SIZEOF_LONG_LONG 0
+#define SIZEOF_LONG_LONG 8 /* defined as __int64 */
 #define SIZEOF_INTMAX_T 0
 #define ssize_t SSIZE_T
 #ifdef _WIN64

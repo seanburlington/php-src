@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.3 2005/09/06 18:46:37 derick Exp $ */
+/* $Id: filter.c,v 1.4 2005/09/15 03:16:09 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -201,6 +201,7 @@ PHP_MINIT_FUNCTION(filter)
 	REGISTER_LONG_CONSTANT("FL_REGEXP", FL_REGEXP, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FS_DEFAULT", FS_DEFAULT, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FS_STRING", FS_STRING, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("FS_STRIPPED", FS_STRING, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FS_ENCODED", FS_ENCODED, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FS_SPECIAL_CHARS", FS_SPECIAL_CHARS, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FS_UNSAFE_RAW", FS_UNSAFE_RAW, CONST_CS | CONST_PERSISTENT);
@@ -265,7 +266,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.3 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.4 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

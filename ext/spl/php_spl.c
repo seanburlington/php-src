@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.62 2005/09/15 03:31:36 helly Exp $ */
+/* $Id: php_spl.c,v 1.63 2005/09/15 14:07:38 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -159,7 +159,6 @@ PHP_FUNCTION(class_implements)
 	SPL_ADD_CLASS(DirectoryIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(DomainException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(EmptyIterator, z_list, sub, allow, ce_flags); \
-	SPL_ADD_CLASS(FileObject, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(FilterIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(InfiniteIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(InvalidArgumentException, z_list, sub, allow, ce_flags); \
@@ -181,6 +180,7 @@ PHP_FUNCTION(class_implements)
 	SPL_ADD_CLASS(RuntimeException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SeekableIterator, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SimpleXMLIterator, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(SplFileObject, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SplObjectStorage, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SplObserver, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SplSubject, z_list, sub, allow, ce_flags); \

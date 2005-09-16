@@ -1,24 +1,24 @@
 dnl
-dnl $Id: config.m4,v 1.34 2003/07/01 00:02:13 sniper Exp $
+dnl $Id: config.m4,v 1.39.2.1 2005/09/16 12:06:41 sniper Exp $
 dnl
 
-AC_DEFUN(PHP_LDAP_CHECKS, [
+AC_DEFUN([PHP_LDAP_CHECKS], [
   if test -f $1/include/ldap.h; then
     LDAP_DIR=$1
     LDAP_INCDIR=$1/include
-    LDAP_LIBDIR=$1/lib
+    LDAP_LIBDIR=$1/$PHP_LIBDIR
   elif test -f $1/include/umich-ldap/ldap.h; then
     LDAP_DIR=$1
     LDAP_INCDIR=$1/include/umich-ldap
-    LDAP_LIBDIR=$1/lib
+    LDAP_LIBDIR=$1/$PHP_LIBDIR
   elif test -f $1/ldap/public/ldap.h; then
     LDAP_DIR=$1
     LDAP_INCDIR=$1/ldap/public
-    LDAP_LIBDIR=$1/lib
+    LDAP_LIBDIR=$1/$PHP_LIBDIR
   fi
 ])
 
-AC_DEFUN(PHP_LDAP_SASL_CHECKS, [
+AC_DEFUN([PHP_LDAP_SASL_CHECKS], [
   if test "$1" = "yes"; then
     SEARCH_DIRS="/usr/local /usr"
   else
@@ -39,7 +39,7 @@ AC_DEFUN(PHP_LDAP_SASL_CHECKS, [
   
   if test "$LDAP_SASL_DIR"; then
     LDAP_SASL_INCDIR=$LDAP_SASL_DIR/include
-    LDAP_SASL_LIBDIR=$LDAP_SASL_DIR/lib
+    LDAP_SASL_LIBDIR=$LDAP_SASL_DIR/$PHP_LIBDIR
   else
     AC_MSG_ERROR([sasl.h not found!])
   fi
@@ -63,10 +63,10 @@ AC_DEFUN(PHP_LDAP_SASL_CHECKS, [
 ])
 
 PHP_ARG_WITH(ldap,for LDAP support,
-[  --with-ldap[=DIR]       Include LDAP support.])
+[  --with-ldap[=DIR]       Include LDAP support])
 
 PHP_ARG_WITH(ldap-sasl,for LDAP Cyrus SASL support,
-[  --with-ldap-sasl[=DIR]    LDAP: Include Cyrus SASL support.], no, no)
+[  --with-ldap-sasl[=DIR]    LDAP: Include Cyrus SASL support], no, no)
 
 if test "$PHP_LDAP" != "no"; then
 
@@ -99,7 +99,7 @@ if test "$PHP_LDAP" != "no"; then
     PHP_ADD_LIBRARY_WITH_PATH(lber, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
     PHP_ADD_LIBRARY_WITH_PATH(ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 
-  elif test -f $LDAP_LIBDIR/libldap.$SHLIB_SUFFIX_NAME.3 -o -f $LDAP_LIBDIR/libldap.3.dylib; then
+  elif test -f $LDAP_LIBDIR/libldap.$SHLIB_SUFFIX_NAME || test -f $LDAP_LIBDIR/libldap.$SHLIB_SUFFIX_NAME.3 || test -f $LDAP_LIBDIR/libldap.3.dylib; then
     PHP_ADD_LIBRARY_WITH_PATH(ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 
   elif test -f $LDAP_LIBDIR/libssldap50.$SHLIB_SUFFIX_NAME; then
@@ -146,7 +146,9 @@ if test "$PHP_LDAP" != "no"; then
   elif test -f $LDAP_LIBDIR/libclntsh.$SHLIB_SUFFIX_NAME; then
     PHP_ADD_LIBRARY_WITH_PATH(clntsh, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
     AC_DEFINE(HAVE_ORALDAP,1,[ ])
-
+    if test -f $LDAP_LIBDIR/libclntsh.$SHLIB_SUFFIX_NAME.10.1; then
+      AC_DEFINE(HAVE_ORALDAP_10,1,[ ])
+    fi
   else
     AC_MSG_ERROR(Cannot find ldap libraries in $LDAP_LIBDIR.)
   fi
@@ -169,7 +171,7 @@ if test "$PHP_LDAP" != "no"; then
 
   dnl Solaris 2.8 claims to be 2004 API, but doesn't have
   dnl ldap_parse_reference() nor ldap_start_tls_s()
-  AC_CHECK_FUNCS([ldap_parse_reference ldap_start_tls_s])
+  AC_CHECK_FUNCS([ldap_parse_result ldap_parse_reference ldap_start_tls_s])
   LDFLAGS=$_SAVE_LDFLAGS
   
   dnl

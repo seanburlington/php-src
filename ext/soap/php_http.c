@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.77 2005/08/03 14:07:47 sniper Exp $ */
+/* $Id: php_http.c,v 1.78 2005/09/16 15:47:42 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -400,6 +400,10 @@ try_again:
 			smart_str_appendc(&soap_headers, '?');
 			smart_str_appends(&soap_headers, phpurl->query);
 		}
+		if (phpurl->fragment) {
+			smart_str_appendc(&soap_headers, '#');
+			smart_str_appends(&soap_headers, phpurl->fragment);
+		}
 		smart_str_append_const(&soap_headers, " HTTP/1.1\r\n"
 			"Host: ");
 		smart_str_appends(&soap_headers, phpurl->host);
@@ -555,6 +559,10 @@ try_again:
 					if (phpurl->query) {
 						smart_str_appendc(&soap_headers, '?');
 						smart_str_appends(&soap_headers, phpurl->query);
+					}
+					if (phpurl->fragment) {
+							smart_str_appendc(&soap_headers, '#');
+							smart_str_appends(&soap_headers, phpurl->fragment);
 					}
 					if (zend_hash_find(Z_ARRVAL_PP(digest), "qop", sizeof("qop"), (void **)&tmp) == SUCCESS &&
 					    Z_TYPE_PP(tmp) == IS_STRING) {

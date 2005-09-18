@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.57.2.5 2005/09/18 14:13:08 wez Exp $ */
+/* $Id: pdo.c,v 1.57.2.6 2005/09/18 18:05:58 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,7 +42,7 @@ ZEND_DECLARE_MODULE_GLOBALS(pdo)
 /* True global resources - no need for thread safety here */
 
 /* the registry of PDO drivers */
-static HashTable pdo_driver_hash;
+HashTable pdo_driver_hash;
 
 /* we use persistent resources for the driver connection stuff */
 static int le_ppdo;

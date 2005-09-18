@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.h,v 1.13 2005/08/03 14:07:53 sniper Exp $ */
+/* $Id: spl_array.h,v 1.14 2005/09/18 11:34:34 helly Exp $ */
 
 #ifndef SPL_ARRAY_H
 #define SPL_ARRAY_H
@@ -26,6 +26,7 @@
 
 extern PHPAPI zend_class_entry *spl_ce_ArrayObject;
 extern PHPAPI zend_class_entry *spl_ce_ArrayIterator;
+extern PHPAPI zend_class_entry *spl_ce_RecursiveArrayIterator;
 extern PHPAPI zend_class_entry *spl_ce_Countable;
 
 PHP_MINIT_FUNCTION(spl_array);

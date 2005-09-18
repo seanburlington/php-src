@@ -1,5 +1,5 @@
 --TEST--
-SPL: RecursiveIteratorIterator and catch getChildren
+SPL: RecursiveIteratorIterator and callHasChildren/callGetChildren
 --FILE--
 <?php
 
@@ -34,7 +34,7 @@ class RecursiveArrayIteratorIterator extends RecursiveIteratorIterator
 	function __construct($it, $max_depth)
 	{
 		$this->max_depth = $max_depth;
-		parent::__construct($it, RecursiveIteratorIterator::LEAVES_ONLY, RecursiveIteratorIterator::CATCH_GET_CHILD);
+		parent::__construct($it);
 	}
 
 	function rewind()
@@ -93,8 +93,8 @@ class RecursiveArrayIteratorIterator extends RecursiveIteratorIterator
 	{
 		if ($this->over == 2)
 		{
-			echo __METHOD__ . "(throw)\n";
-			throw new Exception("Thrown in callGetChildren()");
+			echo __METHOD__ . "(skip)\n";
+			return NULL;
 		}
 		echo __METHOD__ . "(ok:{$this->over})\n";
 		return new MyRecursiveArrayIterator($this->current());
@@ -181,13 +181,6 @@ RecursiveArrayIteratorIterator::endChildren(2)
 MyRecursiveArrayIterator::valid = false
 RecursiveArrayIteratorIterator::endChildren(1)
 RecursiveArrayIteratorIterator::callHasChildren(0) = yes/yes
-RecursiveArrayIteratorIterator::callGetChildren(throw)
-RecursiveArrayIteratorIterator::callHasChildren(0) = no/no
-RecursiveArrayIteratorIterator::current
-RecursiveArrayIteratorIterator::key
-3=>d
-RecursiveArrayIteratorIterator::next
-MyRecursiveArrayIterator::valid = false
-RecursiveArrayIteratorIterator::valid
-MyRecursiveArrayIterator::valid = false
+RecursiveArrayIteratorIterator::callGetChildren(skip)
+Objects returned by RecursiveIterator::getChildren() must implement RecursiveIterator
 ===DONE===

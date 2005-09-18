@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.18.2.1 2005/09/15 03:33:04 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.18.2.2 2005/09/18 17:15:04 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -38,7 +38,7 @@ extern PHPAPI zend_class_entry *spl_ce_ParentIterator;
 extern PHPAPI zend_class_entry *spl_ce_SeekableIterator;
 extern PHPAPI zend_class_entry *spl_ce_LimitIterator;
 extern PHPAPI zend_class_entry *spl_ce_CachingIterator;
-extern PHPAPI zend_class_entry *spl_ce_CachingRecursiveIterator;
+extern PHPAPI zend_class_entry *spl_ce_RecursiveCachingIterator;
 extern PHPAPI zend_class_entry *spl_ce_OuterIterator;
 extern PHPAPI zend_class_entry *spl_ce_IteratorIterator;
 extern PHPAPI zend_class_entry *spl_ce_NoRewindIterator;
@@ -55,7 +55,7 @@ typedef enum {
 	DIT_Default = 0,
 	DIT_LimitIterator,
 	DIT_CachingIterator,
-	DIT_CachingRecursiveIterator,
+	DIT_RecursiveCachingIterator,
 	DIT_IteratorIterator,
 	DIT_NoRewindIterator,
 	DIT_InfiniteIterator,

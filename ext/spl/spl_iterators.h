@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.9 2004/03/08 18:05:41 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.9.2.1 2005/09/19 19:11:18 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -31,7 +31,7 @@ extern zend_class_entry *spl_ce_ParentIterator;
 extern zend_class_entry *spl_ce_SeekableIterator;
 extern zend_class_entry *spl_ce_LimitIterator;
 extern zend_class_entry *spl_ce_CachingIterator;
-extern zend_class_entry *spl_ce_CachingRecursiveIterator;
+extern zend_class_entry *spl_ce_RecursiveCachingIterator;
 
 PHP_MINIT_FUNCTION(spl_iterators);
 
@@ -39,7 +39,7 @@ typedef enum {
 	DIT_Default = 0,
 	DIT_LimitIterator,
 	DIT_CachingIterator,
-	DIT_CachingRecursiveIterator
+	DIT_RecursiveCachingIterator
 } dual_it_type;
 
 enum {

@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.179 2005/09/16 20:20:46 tony2001 Exp $ */
+/* $Id: php_reflection.c,v 1.180 2005/09/19 07:23:45 dmitry Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -43,8 +43,8 @@ zend_class_entry *reflection_extension_ptr;
 /* Method macros */
 
 #define METHOD_NOTSTATIC(ce)                                                                                \
-	if (!this_ptr || !instanceof_function(Z_OBJCE_P(this_ptr), ce TSRMLS_CC)) {                             \
-		zend_error(E_ERROR, "%s() cannot be called statically", get_active_function_name(TSRMLS_C));        \
+	if (!this_ptr || !instanceof_function(Z_OBJCE_P(this_ptr), U_CLASS_ENTRY(ce) TSRMLS_CC)) {                             \
+		zend_error(E_ERROR, "%v() cannot be called statically", get_active_function_name(TSRMLS_C));        \
 		return;                                                                                             \
 	}                                                                                                       \
 

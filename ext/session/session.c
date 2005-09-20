@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.336.2.53.2.1 2005/09/20 14:01:40 stas Exp $ */
+/* $Id: session.c,v 1.336.2.53.2.2 2005/09/20 20:59:25 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1680,8 +1680,11 @@ PHP_FUNCTION(session_write_close)
 
 PHP_RSHUTDOWN_FUNCTION(session)
 {
-	php_session_flush(TSRMLS_C);
-	php_rshutdown_session_globals(TSRMLS_C);
+	zend_try {
+		php_session_flush(TSRMLS_C);
+		php_rshutdown_session_globals(TSRMLS_C);
+	} zend_end_try();
+
 	return SUCCESS;
 }
 /* }}} */

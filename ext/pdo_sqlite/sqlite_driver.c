@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.23 2005/09/11 05:08:49 wez Exp $ */
+/* $Id: sqlite_driver.c,v 1.24 2005/09/20 19:52:05 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -472,6 +472,7 @@ static PHP_METHOD(SQLite, sqliteCreateFunction)
 	}
 	
 	dbh = zend_object_store_get_object(getThis() TSRMLS_CC);
+	PDO_CONSTRUCT_CHECK;
 
 	if (!zend_is_callable(callback, 0, &cbname)) {
 #ifdef IS_UNICODE
@@ -556,6 +557,7 @@ static PHP_METHOD(SQLite, sqliteCreateAggregate)
 	}
 	
 	dbh = zend_object_store_get_object(getThis() TSRMLS_CC);
+	PDO_CONSTRUCT_CHECK;
 
 	if (!zend_is_callable(step_callback, 0, &cbname)) {
 #ifdef IS_UNICODE

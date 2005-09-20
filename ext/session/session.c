@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.391.2.14 2005/05/22 12:57:45 tony2001 Exp $ */
+/* $Id: session.c,v 1.391.2.15 2005/09/20 14:03:56 stas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1846,7 +1846,7 @@ PHP_MSHUTDOWN_FUNCTION(session)
 #endif
 
 	ps_serializers[PREDEFINED_SERIALIZERS].name = NULL;
-	ps_modules[PREDEFINED_MODULES] = NULL;
+	memset(&ps_modules[PREDEFINED_MODULES], 0, (MAX_MODULES-PREDEFINED_MODULES)*sizeof(ps_module *));
 
 	return SUCCESS;
 }

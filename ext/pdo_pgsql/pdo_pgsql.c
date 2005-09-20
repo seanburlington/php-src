@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_pgsql.c,v 1.7.2.2 2005/09/20 00:35:21 iliaa Exp $ */
+/* $Id: pdo_pgsql.c,v 1.7.2.3 2005/09/20 00:44:51 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -77,7 +77,7 @@ ZEND_GET_MODULE(pdo_pgsql)
 PHP_MINIT_FUNCTION(pdo_pgsql)
 {
 	php_pdo_register_driver(&pdo_pgsql_driver);
-	REGISTER_PDO_CONST_LONG("PDO_PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT", PDO_PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT);
+	REGISTER_PDO_CONST_LONG("PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT", PDO_PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT);
 	return SUCCESS;
 }
 /* }}} */

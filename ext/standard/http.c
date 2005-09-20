@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: http.c,v 1.13 2004/06/04 16:54:14 abies Exp $ */
+/* $Id: http.c,v 1.13.2.1 2005/09/20 11:40:32 tony2001 Exp $ */
 
 #include "php_http.h"
 #include "php_ini.h"
@@ -69,7 +69,7 @@ PHPAPI int php_url_encode_hash_ex(HashTable *ht, smart_str *formstr,
 				/* private or protected property access outside of the class */
 				continue;
 			}
-			zend_unmangle_property_name(key, &tmp, &key);
+			zend_unmangle_property_name_ex(key, key_len, &tmp, &key);
 			key_len = strlen(key);		
 		}
 

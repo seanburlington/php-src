@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_mysql.c,v 1.8.2.1 2005/09/11 05:27:30 wez Exp $ */
+/* $Id: pdo_mysql.c,v 1.8.2.2 2005/09/20 00:35:21 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -75,7 +75,7 @@ ZEND_GET_MODULE(pdo_mysql)
  */
 PHP_MINIT_FUNCTION(pdo_mysql)
 {
-	REGISTER_LONG_CONSTANT("PDO_MYSQL_ATTR_USE_BUFFERED_QUERY", (long)PDO_MYSQL_ATTR_USE_BUFFERED_QUERY,	CONST_CS|CONST_PERSISTENT);
+	REGISTER_PDO_CONST_LONG("PDO_MYSQL_ATTR_USE_BUFFERED_QUERY", (long)PDO_MYSQL_ATTR_USE_BUFFERED_QUERY);
 
 	return php_pdo_register_driver(&pdo_mysql_driver);
 }

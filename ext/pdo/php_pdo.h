@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,16 +16,18 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo.h,v 1.3 2004/05/18 15:57:46 wez Exp $ */
+/* $Id: php_pdo.h,v 1.7.2.1 2005/09/20 00:35:20 iliaa Exp $ */
 
 #ifndef PHP_PDO_H
 #define PHP_PDO_H
+
+#include "zend.h"
 
 extern zend_module_entry pdo_module_entry;
 #define phpext_pdo_ptr &pdo_module_entry
 
 #ifdef PHP_WIN32
-# ifdef PDO_EXPORTS
+# if defined(PDO_EXPORTS) || (!defined(COMPILE_DL_PDO))
 #  define PDO_API __declspec(dllexport)
 # elif defined(COMPILE_DL_PDO)
 #  define PDO_API __declspec(dllimport)
@@ -55,6 +57,18 @@ ZEND_END_MODULE_GLOBALS(pdo)
 #else
 # define PDOG(v) (pdo_globals.v)
 #endif
+
+#define REGISTER_PDO_CLASS_CONST_LONG(const_name, value) \
+	zend_declare_class_constant_long(pdo_dbh_ce, const_name, sizeof(const_name)-1, (long)value TSRMLS_CC);
+
+#define REGISTER_PDO_CONST_LONG(const_name, value) { \
+	zend_class_entry **pce;	\
+	if (zend_hash_find(CG(class_table), "pdo", sizeof("pdo"), (void **) &pce) != FAILURE)	\
+		zend_declare_class_constant_long(*pce, const_name, sizeof(const_name)-1, (long)value TSRMLS_CC);	\
+}	\
+
+#define REGISTER_PDO_CLASS_CONST_STRING(const_name, value) \
+	zend_declare_class_constant_stringl(pdo_dbh_ce, const_name, sizeof(const_name)-1, value, sizeof(value)-1 TSRMLS_CC);
 
 #endif	/* PHP_PDO_H */
 

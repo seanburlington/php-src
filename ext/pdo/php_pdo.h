@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo.h,v 1.7.2.1 2005/09/20 00:35:20 iliaa Exp $ */
+/* $Id: php_pdo.h,v 1.7.2.2 2005/09/20 19:52:24 iliaa Exp $ */
 
 #ifndef PHP_PDO_H
 #define PHP_PDO_H
@@ -69,6 +69,13 @@ ZEND_END_MODULE_GLOBALS(pdo)
 
 #define REGISTER_PDO_CLASS_CONST_STRING(const_name, value) \
 	zend_declare_class_constant_stringl(pdo_dbh_ce, const_name, sizeof(const_name)-1, value, sizeof(value)-1 TSRMLS_CC);
+
+#define PDO_CONSTRUCT_CHECK	\
+	if (!dbh->driver) {	\
+		pdo_raise_impl_error(dbh, NULL, "00000", "PDO constructor was not called" TSRMLS_CC);	\
+		return;	\
+	}	\
+
 
 #endif	/* PHP_PDO_H */
 

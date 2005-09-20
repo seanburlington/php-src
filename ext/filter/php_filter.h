@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filter.h,v 1.1 2005/09/06 18:46:37 derick Exp $ */
+/* $Id: php_filter.h,v 1.2 2005/09/20 15:01:42 derick Exp $ */
 
 #ifndef PHP_FILTER_H
 #define PHP_FILTER_H
@@ -73,7 +73,10 @@ ZEND_END_MODULE_GLOBALS(filter)
 void php_filter_int(PHP_INPUT_FILTER_PARAM_DECL);
 void php_filter_boolean(PHP_INPUT_FILTER_PARAM_DECL);
 void php_filter_float(PHP_INPUT_FILTER_PARAM_DECL);
-void php_filter_regexp(PHP_INPUT_FILTER_PARAM_DECL);
+void php_filter_validate_regexp(PHP_INPUT_FILTER_PARAM_DECL);
+void php_filter_validate_url(PHP_INPUT_FILTER_PARAM_DECL);
+void php_filter_validate_email(PHP_INPUT_FILTER_PARAM_DECL);
+void php_filter_validate_ip(PHP_INPUT_FILTER_PARAM_DECL);
 
 void php_filter_string(PHP_INPUT_FILTER_PARAM_DECL);
 void php_filter_encoded(PHP_INPUT_FILTER_PARAM_DECL);

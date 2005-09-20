@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.33 2005/09/11 05:08:49 wez Exp $ */
+/* $Id: pgsql_statement.c,v 1.34 2005/09/20 00:33:42 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -506,7 +506,9 @@ static int pgsql_stmt_get_column_meta(pdo_stmt_t *stmt, long colno, zval *return
 
 static int pdo_pgsql_stmt_cursor_closer(pdo_stmt_t *stmt TSRMLS_DC)
 {
+#if HAVE_PQPREPARE
 	return 1;
+#endif
 }
 
 struct pdo_stmt_methods pgsql_stmt_methods = {

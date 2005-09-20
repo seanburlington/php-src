@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.60.2.8 2005/06/22 19:58:33 rrichards Exp $ */
+/* $Id: php_dom.c,v 1.60.2.9 2005/09/20 06:00:41 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -294,6 +294,7 @@ zval *dom_read_property(zval *object, zval *member, int type TSRMLS_DC)
 		if (ret == SUCCESS) {
 			/* ensure we're creating a temporary variable */
 			retval->refcount = 0;
+			retval->is_ref = 0;
 		} else {
 			retval = EG(uninitialized_zval_ptr);
 		}

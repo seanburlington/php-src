@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.225 2005/09/21 13:15:20 iliaa Exp $ */
+/* $Id: mbstring.c,v 1.226 2005/09/21 13:23:12 iliaa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -55,6 +55,7 @@
 #include "mbstring.h"
 #include "ext/standard/php_string.h"
 #include "ext/standard/php_mail.h"
+#include "ext/standard/exec.h"
 #include "ext/standard/php_smart_str.h"
 #include "ext/standard/url.h"
 #include "main/php_output.h"

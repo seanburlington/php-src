@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.214 2004/06/26 05:39:00 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.224.2.1 2005/09/21 13:16:03 iliaa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -128,18 +128,25 @@ static const enum mbfl_no_encoding php_mb_default_identify_list_ru[] = {
 	mbfl_no_encoding_cp866
 };
 
+static const enum mbfl_no_encoding php_mb_default_identify_list_hy[] = {
+	mbfl_no_encoding_ascii,
+	mbfl_no_encoding_utf8,
+	mbfl_no_encoding_armscii8
+};
+
 static const enum mbfl_no_encoding php_mb_default_identify_list_neut[] = {
 	mbfl_no_encoding_ascii,
 	mbfl_no_encoding_utf8
 };
 
 
-php_mb_nls_ident_list php_mb_default_identify_list[] = {
+static const php_mb_nls_ident_list php_mb_default_identify_list[] = {
 	{ mbfl_no_language_japanese, php_mb_default_identify_list_ja, sizeof(php_mb_default_identify_list_ja) / sizeof(php_mb_default_identify_list_ja[0]) },
 	{ mbfl_no_language_korean, php_mb_default_identify_list_kr, sizeof(php_mb_default_identify_list_kr) / sizeof(php_mb_default_identify_list_kr[0]) },
 	{ mbfl_no_language_traditional_chinese, php_mb_default_identify_list_tw_hk, sizeof(php_mb_default_identify_list_tw_hk) / sizeof(php_mb_default_identify_list_tw_hk[0]) },
 	{ mbfl_no_language_simplified_chinese, php_mb_default_identify_list_cn, sizeof(php_mb_default_identify_list_cn) / sizeof(php_mb_default_identify_list_cn[0]) },
 	{ mbfl_no_language_russian, php_mb_default_identify_list_ru, sizeof(php_mb_default_identify_list_ru) / sizeof(php_mb_default_identify_list_ru[0]) },
+	{ mbfl_no_language_armenian, php_mb_default_identify_list_hy, sizeof(php_mb_default_identify_list_hy) / sizeof(php_mb_default_identify_list_hy[0]) },
 	{ mbfl_no_language_neutral, php_mb_default_identify_list_neut, sizeof(php_mb_default_identify_list_neut) / sizeof(php_mb_default_identify_list_neut[0]) }
 };
 
@@ -227,6 +234,14 @@ zend_module_entry mbstring_module_entry = {
 };
 /* }}} */
 
+/* {{{ static sapi_post_entry php_post_entries[] */
+static sapi_post_entry php_post_entries[] = {
+	{ DEFAULT_POST_CONTENT_TYPE, sizeof(DEFAULT_POST_CONTENT_TYPE)-1, sapi_read_standard_form_data,	php_std_post_handler },
+	{ MULTIPART_CONTENT_TYPE,    sizeof(MULTIPART_CONTENT_TYPE)-1,    NULL,                         rfc1867_post_handler },
+	{ NULL, 0, NULL, NULL }
+};
+/* }}} */
+
 ZEND_DECLARE_MODULE_GLOBALS(mbstring)
 
 #ifdef COMPILE_DL_MBSTRING
@@ -280,6 +295,14 @@ static mbfl_allocators _php_mb_allocators = {
 	_php_mb_allocators_pmalloc,
 	_php_mb_allocators_prealloc,
 	_php_mb_allocators_pfree
+};
+/* }}} */
+
+/* {{{ static sapi_post_entry mbstr_post_entries[] */
+static sapi_post_entry mbstr_post_entries[] = {
+	{ DEFAULT_POST_CONTENT_TYPE, sizeof(DEFAULT_POST_CONTENT_TYPE)-1, sapi_read_standard_form_data, php_mb_post_handler },
+	{ MULTIPART_CONTENT_TYPE,    sizeof(MULTIPART_CONTENT_TYPE)-1,    NULL,                         rfc1867_post_handler },
+	{ NULL, 0, NULL, NULL }
 };
 /* }}} */
 
@@ -680,10 +703,13 @@ static PHP_INI_MH(OnUpdate_mbstring_encoding_translation)
 
 	OnUpdateBool(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);
 
-	if (MBSTRG(encoding_translation)){
-		_php_mb_enable_encoding_translation(1);
+	if (MBSTRG(encoding_translation)) {
+		sapi_unregister_post_entry(php_post_entries TSRMLS_CC);
+		sapi_register_post_entries(mbstr_post_entries TSRMLS_CC);
+		sapi_register_treat_data(mbstr_treat_data);
 	} else {
-		_php_mb_enable_encoding_translation(0);
+		sapi_unregister_post_entry(mbstr_post_entries TSRMLS_CC);
+		sapi_register_post_entries(php_post_entries TSRMLS_CC);
 	}
 
 	return SUCCESS;
@@ -774,7 +800,8 @@ PHP_MINIT_FUNCTION(mbstring)
 	REGISTER_INI_ENTRIES();
 
 	if (MBSTRG(encoding_translation)) {
-		_php_mb_enable_encoding_translation(1);
+		sapi_register_post_entries(mbstr_post_entries TSRMLS_CC);
+		sapi_register_treat_data(mbstr_treat_data);
 	}
 
 	REGISTER_LONG_CONSTANT("MB_OVERLOAD_MAIL", MB_OVERLOAD_MAIL, CONST_CS | CONST_PERSISTENT);
@@ -807,10 +834,6 @@ PHP_MSHUTDOWN_FUNCTION(mbstring)
 #endif /* ZEND_MULTIBYTE */
 	if (MBSTRG(detect_order_list)) {
 		free(MBSTRG(detect_order_list));
-	}
-
-	if (MBSTRG(encoding_translation)) {
-		_php_mb_enable_encoding_translation(0);
 	}
 
 #if HAVE_MBREGEX
@@ -860,6 +883,9 @@ PHP_RINIT_FUNCTION(mbstring)
 				break;
 			case mbfl_no_language_german:
 				default_enc = "ISO-8859-15";
+				break;
+			case mbfl_no_language_armenian:
+				default_enc = "ArmSCII-8";
 				break;
 			case mbfl_no_language_english:
 			default:
@@ -1339,15 +1365,15 @@ PHP_FUNCTION(mb_preferred_mime_name)
 PHP_FUNCTION(mb_parse_str)
 {
 	zval *track_vars_array;
-	char *encstr = NULL, *separator = NULL;
+	char *encstr = NULL;
 	int encstr_len;
+	php_mb_encoding_handler_info_t info;
+	enum mbfl_no_encoding detected;
 
 	track_vars_array = NULL;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|z", &encstr, &encstr_len, &track_vars_array) == FAILURE) {
 		return;
 	}
-
-	separator = (char *)estrdup(PG(arg_separator).input);
 
 	/* Clear out the array */
 	if (track_vars_array != NULL) {
@@ -1357,10 +1383,23 @@ PHP_FUNCTION(mb_parse_str)
 
 	encstr = estrndup(encstr, encstr_len);
 
-	RETVAL_BOOL(_php_mb_encoding_handler_ex(PARSE_STRING, track_vars_array, encstr, separator, (track_vars_array == NULL), 1 TSRMLS_CC));
+	info.data_type              = PARSE_STRING;
+	info.separator              = PG(arg_separator).input; 
+	info.force_register_globals = (track_vars_array == NULL);
+	info.report_errors          = 1;
+	info.to_encoding            = MBSTRG(current_internal_encoding);
+	info.to_language            = MBSTRG(current_language);
+	info.from_encodings         = MBSTRG(http_input_list);
+	info.num_from_encodings     = MBSTRG(http_input_list_size); 
+	info.from_language          = MBSTRG(current_language);
+
+	detected = _php_mb_encoding_handler_ex(&info, track_vars_array, encstr TSRMLS_CC);
+
+	MBSTRG(http_input_identify) = detected;
+
+	RETVAL_BOOL(detected != mbfl_no_encoding_invalid);
 
 	if (encstr != NULL) efree(encstr);
-	if (separator != NULL) efree(separator);
 }
 /* }}} */
 
@@ -2254,7 +2293,6 @@ PHP_FUNCTION(mb_list_encodings)
 }
 /* }}} */
 
-
 /* {{{ proto string mb_encode_mimeheader(string str [, string charset [, string transfer-encoding [, string linefeed]]])
    Converts the string to MIME "encoded-word" in the format of =?charset?(B|Q)?encoded_string?= */
 PHP_FUNCTION(mb_encode_mimeheader)
@@ -2969,6 +3007,7 @@ PHP_FUNCTION(mb_send_mail)
 	int subject_len;
 	char *extra_cmd=NULL;
 	int extra_cmd_len;
+	char *force_extra_parameters = INI_STR("mail.force_extra_parameters");
 	struct {
 		int cnt_type:1;
 		int cnt_trans_enc:1;
@@ -3170,12 +3209,21 @@ PHP_FUNCTION(mb_send_mail)
 	mbfl_memory_device_output('\0', &device);
 	headers = (char *)device.buffer;
 
+	if (force_extra_parameters) {
+		extra_cmd = estrdup(force_extra_parameters);
+	} else if (extra_cmd) {
+		extra_cmd = php_escape_shell_cmd(extra_cmd);
+	} 
+
 	if (!err && php_mail(to, subject, message, headers, extra_cmd TSRMLS_CC)) {
 		RETVAL_TRUE;
 	} else {
 		RETVAL_FALSE;
 	}
 
+	if (extra_cmd) {
+		efree(extra_cmd);
+	}
 	if (subject_buf) {
 		efree((void *)subject_buf);
 	}
@@ -3216,7 +3264,7 @@ PHP_FUNCTION(mb_get_info)
 		RETURN_FALSE;
 	}
 
-	if (!strcasecmp("all", typ)) {
+	if (!typ || !strcasecmp("all", typ)) {
 		array_init(return_value);
 		if ((name = (char *)mbfl_no_encoding2name(MBSTRG(current_internal_encoding))) != NULL) {
 			add_assoc_string(return_value, "internal_encoding", name, 1);

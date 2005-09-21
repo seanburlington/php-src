@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: http_fopen_wrapper.c,v 1.88.2.4 2005/06/06 12:41:28 derick Exp $ */ 
+/* $Id: http_fopen_wrapper.c,v 1.88.2.5 2005/09/21 15:55:31 dmitry Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"
@@ -188,11 +188,12 @@ php_stream *php_stream_url_wrap_http_ex(php_stream_wrapper *wrapper, char *path,
 	/* Should we send the entire path in the request line, default to no. */
 	if (context &&
 		php_stream_context_get_option(context, "http", "request_fulluri", &tmpzval) == SUCCESS) {
-		(*tmpzval)->refcount++;
-		SEPARATE_ZVAL(tmpzval);
-		convert_to_boolean_ex(tmpzval);
-		request_fulluri = Z_BVAL_PP(tmpzval) ? 1 : 0;
-		zval_ptr_dtor(tmpzval);
+		zval tmp = **tmpzval;
+
+		zval_copy_ctor(&tmp);
+		convert_to_boolean(&tmp);
+		request_fulluri = Z_BVAL(tmp) ? 1 : 0;
+		zval_dtor(&tmp);
 	}
 
 	if (request_fulluri) {

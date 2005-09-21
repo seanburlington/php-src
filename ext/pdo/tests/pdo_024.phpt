@@ -1,5 +1,5 @@
 --TEST--
-PDO Common: PDO::FETCH_LAZY
+PDO Common: assert that bindParam does not modify parameter
 --SKIPIF--
 <?php # vim:ft=php
 if (!extension_loaded('pdo')) die('skip');
@@ -15,15 +15,21 @@ require getenv('REDIR_TEST_DIR') . 'pdo_test.inc';
 $db = PDOTest::factory();
 
 $db->exec('create table test (id int, name varchar(10) NULL)');
-$db->exec("INSERT INTO test (id,name) VALUES(1,'test1')");
-$db->exec("INSERT INTO test (id,name) VALUES(2,'test2')");
 
-foreach ($db->query("SELECT * FROM test", PDO::FETCH_LAZY) as $v) {
-	echo "lazy: " . $v->id.$v->name."\n";
+$stmt = $db->prepare('insert into test (id, name) values(0, :name)');
+$name = NULL;
+$before_bind = $name;
+$stmt->bindParam(':name', $name);
+if ($name !== $before_bind) {
+	echo "bind: fail\n";
+} else {
+	echo "bind: success\n";
 }
-echo "End\n";
+var_dump($stmt->execute());
+var_dump($db->query('select name from test where id=0')->fetchColumn());
+
 ?>
 --EXPECT--
-lazy: 1test1
-lazy: 2test2
-End
+bind: success
+bool(true)
+NULL

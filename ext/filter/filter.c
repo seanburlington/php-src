@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.5 2005/09/20 15:01:42 derick Exp $ */
+/* $Id: filter.c,v 1.6 2005/09/22 10:06:57 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -195,9 +195,9 @@ PHP_MINIT_FUNCTION(filter)
 	REGISTER_LONG_CONSTANT("FILTER_FLAG_NO_ENCODE_QUOTES", FILTER_FLAG_NO_ENCODE_QUOTES, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FILTER_FLAG_EMPTY_STRING_NULL", FILTER_FLAG_EMPTY_STRING_NULL, CONST_CS | CONST_PERSISTENT);
 
-	REGISTER_LONG_CONSTANT("FILTER_FLAG_ALLOW_SIGN", FILTER_FLAG_ALLOW_SIGN, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FILTER_FLAG_ALLOW_FRACTION", FILTER_FLAG_ALLOW_FRACTION, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FILTER_FLAG_ALLOW_THOUSAND", FILTER_FLAG_ALLOW_THOUSAND, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("FILTER_FLAG_ALLOW_SCIENTIFIC", FILTER_FLAG_ALLOW_SCIENTIFIC, CONST_CS | CONST_PERSISTENT);
 
 	sapi_register_input_filter(php_sapi_filter);
 	return SUCCESS;
@@ -239,7 +239,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.5 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.6 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

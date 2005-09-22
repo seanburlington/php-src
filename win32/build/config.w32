@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.1 2005/08/12 20:08:14 wez Exp $
+// $Id: config.w32,v 1.40.2.2 2005/09/22 13:16:30 edink Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -73,7 +73,7 @@ if (PHP_PREFIX == '') {
 }
 DEFINE('PHP_PREFIX', PHP_PREFIX);
 
-DEFINE("BASE_INCLUDES", "/I . /I main /I regex /I Zend /I TSRM ");
+DEFINE("BASE_INCLUDES", "/I . /I main /I regex /I Zend /I TSRM /I ext ");
 
 // CFLAGS for building the PHP dll
 DEFINE("CFLAGS_PHP", "/D _USRDLL /D PHP5DLLTS_EXPORTS /D PHP_EXPORTS \

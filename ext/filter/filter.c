@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.6 2005/09/22 10:06:57 derick Exp $ */
+/* $Id: filter.c,v 1.7 2005/09/22 14:32:28 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -239,7 +239,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.6 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.7 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -290,13 +290,6 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 
 	assert(*val != NULL);
 
-	if (IF_G(default_filter) == FS_UNSAFE_RAW) {
-		if (new_val_len) {
-			*new_val_len = val_len;
-		}
-		return 1;
-	}
-
 #define PARSE_CASE(s,a,t)                    \
 		case s:                              \
 			if (!IF_G(a)) {                  \
@@ -337,7 +330,9 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 	Z_STRLEN(new_var) = val_len;
 	Z_STRVAL(new_var) = estrndup(*val, val_len + 1);
 	Z_TYPE(new_var) = IS_STRING;
-	php_zval_filter(&new_var, IF_G(default_filter), 0, NULL, NULL/*charset*/ TSRMLS_DC);
+	if (! (IF_G(default_filter) == FS_UNSAFE_RAW)) {
+		php_zval_filter(&new_var, IF_G(default_filter), 0, NULL, NULL/*charset*/ TSRMLS_DC);
+	}
 
 	php_register_variable_ex(orig_var, &new_var, orig_array_ptr TSRMLS_DC);
 
@@ -403,12 +398,8 @@ PHP_FUNCTION(input_get)
 		}
 	}
 
-#define FIND_SOURCE(a,t)                                  \
-		if (IF_G(default_filter) != FS_UNSAFE_RAW) {      \
-			array_ptr = IF_G(a);                          \
-		} else {                                          \
-			array_ptr = PG(http_globals)[t];              \
-		}                                                 \
+#define FIND_SOURCE(a,t)                              \
+		array_ptr = IF_G(a);                          \
 		break;
 
 	switch(arg) {
@@ -499,9 +490,7 @@ PHP_FUNCTION(input_get)
 
 	if (found) {
 		zval_copy_ctor(return_value);  /* Watch out for empty strings */
-		if (filter != FS_UNSAFE_RAW) {
-			php_zval_filter_recursive(return_value, filter, filter_flags, options, charset);
-		}
+		php_zval_filter_recursive(return_value, filter, filter_flags, options, charset);
 	} else {
 		RETVAL_FALSE;
 	}

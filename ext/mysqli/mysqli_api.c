@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.119 2005/08/22 12:22:09 dmitry Exp $ 
+  $Id: mysqli_api.c,v 1.120 2005/09/22 20:14:15 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1358,6 +1358,10 @@ PHP_FUNCTION(mysqli_real_connect)
 	flags ^= CLIENT_MULTI_STATEMENTS;   /* don't allow multi_queries via connect parameter */
 	if (PG(open_basedir) && strlen(PG(open_basedir))) {
 		flags ^= CLIENT_LOCAL_FILES;
+	}
+
+	if (!socket) {
+		socket = MyG(default_socket);
 	}
 
 	if (mysql_real_connect(mysql->mysql,hostname,username,passwd,dbname,port,socket,flags) == NULL) {

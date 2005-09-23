@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.181 2005/09/19 20:29:33 helly Exp $ */
+/* $Id: php_reflection.c,v 1.182 2005/09/23 23:02:29 helly Exp $ */
 #include "zend.h"
 #include "zend_API.h"
 #include "zend_exceptions.h"
@@ -843,7 +843,6 @@ static void _extension_string(string *str, zend_module_entry *module, char *inde
 
 	{
 		string str_constants;
-		string sub_indent;
 		int num_constants = 0;
 		
 		string_init(&str_constants);

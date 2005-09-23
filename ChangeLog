@@ -1,3 +1,67 @@
+2005-09-22  Antony Dovgal  <antony@zend.com>
+
+    * (PHP_5_0)
+      ext/mysqli/mysqli_api.c
+      ext/mysqli/mysqli_api.c:
+      MFH: fix #32081 (mysqli_real_connect(): mysqli.default_socket in php.ini
+      has no effect) for real
+
+    * ext/mysqli/mysqli_api.c:
+      fix #32081 (mysqli_real_connect(): mysqli.default_socket in php.ini has no
+      effect) for real
+
+    * ZendEngine2/zend_modules.h
+      ZendEngine2/zend_modules.h:
+      bump API number
+
+    * (PHP_5_1)
+      NEWS:
+      BFN
+
+    * (PHP_5_1)
+      ZendEngine2/zend_compile.h
+      ZendEngine2/zend_vm_def.h
+      ZendEngine2/zend_vm_execute.h
+      ZendEngine2/zend_vm_execute.skl
+      ZendEngine2/zend_vm_opcodes.h
+      ZendEngine2/tests/bug33771.phpt:
+      MFH: fix #33771 (error_reporting falls to 0 when @ was used inside
+      try/catch block)
+
+    * ZendEngine2/tests/bug33771.phpt
+      ZendEngine2/tests/bug33771.phpt:
+      
+      fix #33771 (error_reporting falls to 0 when @ was used inside try/catch
+      block)
+
+    * ZendEngine2/zend_compile.h
+      ZendEngine2/zend_vm_def.h
+      ZendEngine2/zend_vm_execute.h
+      ZendEngine2/zend_vm_execute.skl
+      ZendEngine2/zend_vm_opcodes.h:
+      fix #33771 (error_reporting falls to 0 when @ was used inside try/catch
+      block)
+
+    * ext/oci8/oci8.c:
+      .. and the fix
+
+    * ext/oci8/oci8.c:
+      fix Win32 builds for PHP_4_4
+      (patch by Edin)
+
+2005-09-22  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * (PHP_5_1)
+      configure.in
+      pear/Makefile.frag:
+      - Fixed bug #34583 ("make install" prematurely fails because of PEAR)
+
+2005-09-22  Antony Dovgal  <antony@zend.com>
+
+    * (RELEASE_1_1_1)
+      ext/oci8/package.xml:
+      prepare to release 1.1.1
+
 2005-09-21  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * (PHP_5_1)
@@ -12305,7 +12369,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2110 2005/09/22 05:44:27 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2111 2005/09/23 05:33:16 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -15706,7 +15770,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2110 2005/09/22 05:44:27 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2111 2005/09/23 05:33:16 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -16187,7 +16251,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2110 2005/09/22 05:44:27 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2111 2005/09/23 05:33:16 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -17661,7 +17725,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2110 2005/09/22 05:44:27 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2111 2005/09/23 05:33:16 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

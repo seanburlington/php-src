@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.165 2004/06/07 05:00:37 pollita Exp $ */
+/* $Id: sockets.c,v 1.171.2.1 2005/09/23 09:54:31 hyanantha Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -50,7 +50,6 @@
 # include <sys/uio.h>
 # define IS_INVALID_SOCKET(a)	(a->bsd_socket < 0)
 # define set_errno(a) (errno = a)
-# define set_h_errno(a) (h_errno = a)
 #else /* windows */
 # include "php_sockets.h"
 # include "php_sockets_win.h"
@@ -117,7 +116,9 @@ function_entry sockets_functions[] = {
 	PHP_FE(socket_select,			first_through_third_args_force_ref)
 	PHP_FE(socket_create,			NULL)
 	PHP_FE(socket_create_listen,	NULL)
+#ifdef HAVE_SOCKETPAIR
 	PHP_FE(socket_create_pair,		fourth_arg_force_ref)
+#endif
 	PHP_FE(socket_accept,			NULL)
 	PHP_FE(socket_set_nonblock,		NULL)
 	PHP_FE(socket_set_block,		NULL)
@@ -322,6 +323,10 @@ static char *php_strerror(int error TSRMLS_DC)
 		buf = hstrerror(error);
 #else
 		{
+			if (SOCKETS_G(strerror_buf)) {
+				efree(SOCKETS_G(strerror_buf));
+			}
+
 			spprintf(&(SOCKETS_G(strerror_buf)), 0, "Host lookup error %d", error);
 			buf = SOCKETS_G(strerror_buf);
 		}
@@ -336,6 +341,11 @@ static char *php_strerror(int error TSRMLS_DC)
 
 		if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |	FORMAT_MESSAGE_IGNORE_INSERTS,
 				  NULL, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR) &tmp, 0, NULL)) {
+			
+			if (SOCKETS_G(strerror_buf)) {
+				efree(SOCKETS_G(strerror_buf));
+			}
+
 			SOCKETS_G(strerror_buf) = estrdup(tmp);
 			LocalFree(tmp);
 		
@@ -533,7 +543,7 @@ static int php_sock_array_to_fd_set(zval *sock_array, fd_set *fds, PHP_SOCKET *m
 		php_sock = (php_socket*) zend_fetch_resource(element TSRMLS_CC, -1, le_socket_name, NULL, 1, le_socket);
 		if (!php_sock) continue; /* If element is not a resource, skip it */
 
-		FD_SET(php_sock->bsd_socket, fds);
+		PHP_SAFE_FD_SET(php_sock->bsd_socket, fds);
 		if (php_sock->bsd_socket > *max_fd) {
 			*max_fd = php_sock->bsd_socket;
 		}
@@ -560,7 +570,7 @@ static int php_sock_array_from_fd_set(zval *sock_array, fd_set *fds TSRMLS_DC)
 		php_sock = (php_socket*) zend_fetch_resource(element TSRMLS_CC, -1, le_socket_name, NULL, 1, le_socket);
 		if (!php_sock) continue; /* If element is not a resource, skip it */
 
-		if (FD_ISSET(php_sock->bsd_socket, fds)) {
+		if (PHP_SAFE_FD_ISSET(php_sock->bsd_socket, fds)) {
 			/* Add fd to new array */
 			zend_hash_next_index_insert(new_hash, (void *)element, sizeof(zval *), (void **)&dest_element);
 			if (dest_element) zval_add_ref(dest_element);
@@ -604,6 +614,8 @@ PHP_FUNCTION(socket_select)
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "no resource arrays were passed to select");
 		RETURN_FALSE;
 	}
+
+	PHP_SAFE_MAX_FD(max_fd, 0); /* someone needs to make this look more like stream_socket_select */
 
 	/* If seconds is not set to null, build the timeval, else we wait indefinitely */
 	if (sec != NULL) {
@@ -662,6 +674,8 @@ PHP_FUNCTION(socket_create_listen)
 		RETURN_FALSE;
 	}
 
+	php_sock->error = 0;
+
 	ZEND_REGISTER_RESOURCE(return_value, php_sock, le_socket);
 }
 /* }}} */
@@ -680,9 +694,10 @@ PHP_FUNCTION(socket_accept)
 	ZEND_FETCH_RESOURCE(php_sock, php_socket *, &arg1, -1, le_socket_name, le_socket);
 	
 	if (!php_accept_connect(php_sock, &new_sock, (struct sockaddr *) &sa TSRMLS_CC)) {
-		PHP_SOCKET_ERROR(new_sock, "unable to accept socket connection", errno);
 		RETURN_FALSE;
 	}
+
+	new_sock->error = 0;
 	
 	ZEND_REGISTER_RESOURCE(return_value, new_sock, le_socket);
 }
@@ -1047,6 +1062,8 @@ PHP_FUNCTION(socket_create)
 		efree(php_sock);
 		RETURN_FALSE;
 	}
+
+	php_sock->error = 0;
 
 	ZEND_REGISTER_RESOURCE(return_value, php_sock, le_socket);
 }
@@ -1637,6 +1654,7 @@ PHP_FUNCTION(socket_set_option)
 }
 /* }}} */
 
+#ifdef HAVE_SOCKETPAIR
 /* {{{ proto bool socket_create_pair(int domain, int type, int protocol, array &fd)
    Creates a pair of indistinguishable sockets and stores them in fds. */
 PHP_FUNCTION(socket_create_pair)
@@ -1684,6 +1702,8 @@ PHP_FUNCTION(socket_create_pair)
 	php_sock[1]->bsd_socket = fds_array[1];
 	php_sock[0]->type		= domain;
 	php_sock[1]->type		= domain;
+	php_sock[0]->error		= 0;
+	php_sock[1]->error		= 0;
 
 	ZEND_REGISTER_RESOURCE(retval[0], php_sock[0], le_socket);
 	ZEND_REGISTER_RESOURCE(retval[1], php_sock[1], le_socket);
@@ -1694,6 +1714,7 @@ PHP_FUNCTION(socket_create_pair)
 	RETURN_TRUE;
 }
 /* }}} */
+#endif
 
 /* {{{ proto bool socket_shutdown(resource socket[, int how])
    Shuts down a socket for receiving, sending, or both. */

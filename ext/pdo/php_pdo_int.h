@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_int.h,v 1.19 2005/09/20 18:46:15 helly Exp $ */
+/* $Id: php_pdo_int.h,v 1.20 2005/09/24 14:19:24 edink Exp $ */
 
 #include "php_pdo_phpvers_compat.h"
 
@@ -56,7 +56,6 @@ zend_object_iterator *php_pdo_dbstmt_iter_get(zend_class_entry *ce, zval *object
 extern pdo_driver_t *pdo_find_driver(const char *name, int namelen);
 
 extern void pdo_handle_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt TSRMLS_DC);
-extern void pdo_raise_impl_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *sqlstate, const char *supp TSRMLS_DC);
 
 #define PDO_DBH_CLEAR_ERR()		strcpy(dbh->error_code, PDO_ERR_NONE)
 #define PDO_STMT_CLEAR_ERR()	strcpy(stmt->error_code, PDO_ERR_NONE)

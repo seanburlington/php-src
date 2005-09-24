@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.67 2005/08/12 23:32:30 wez Exp $ */
+/* $Id: php_pdo_driver.h,v 1.68 2005/09/24 14:19:24 edink Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -621,6 +621,9 @@ PDO_API zend_class_entry *php_pdo_get_exception(TSRMLS_D);
 
 PDO_API int pdo_parse_params(pdo_stmt_t *stmt, char *inquery, int inquery_len, 
 	char **outquery, int *outquery_len TSRMLS_DC);
+
+PDO_API void pdo_raise_impl_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt,
+	const char *sqlstate, const char *supp TSRMLS_DC);
 
 #endif /* PHP_PDO_DRIVER_H */
 /*

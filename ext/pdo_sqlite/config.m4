@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.26.2.2 2005/09/24 19:15:23 wez Exp $
+dnl $Id: config.m4,v 1.26.2.3 2005/09/24 23:23:25 sniper Exp $
 dnl config.m4 for extension pdo_sqlite
 dnl vim:et:sw=2:ts=2:
 
@@ -113,7 +113,7 @@ EOF
       AC_CHECK_HEADERS(time.h)
     
   fi
-  ifdef([PHP_ADD_EXTENDION_DEP],
+  ifdef([PHP_ADD_EXTENSION_DEP],
   [
     PHP_ADD_EXTENSION_DEP(pdo_sqlite, pdo)
   ])

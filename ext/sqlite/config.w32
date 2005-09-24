@@ -1,7 +1,7 @@
-// $Id: config.w32,v 1.8 2005/03/12 01:14:21 wez Exp $
+// $Id: config.w32,v 1.9 2005/09/24 15:15:13 edink Exp $
 // vim:ft=javascript
 
-ARG_WITH("sqlite", "SQLite support", "yes");
+ARG_WITH("sqlite", "SQLite support", "no");
 
 if (PHP_SQLITE != "no") {
 	copy_and_subst(configure_module_dirname + "\\libsqlite\\src\\sqlite.h.in",

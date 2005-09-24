@@ -1,7 +1,7 @@
-// $Id: config.w32,v 1.5 2005/03/12 01:15:37 wez Exp $
+// $Id: config.w32,v 1.6 2005/09/24 15:15:13 edink Exp $
 // vim:ft=javascript
 
-ARG_ENABLE("pdo", "Enable PHP Data Objects support", "yes");
+ARG_ENABLE("pdo", "Enable PHP Data Objects support", "no");
 
 if (PHP_PDO != "no") {
 	EXTENSION('pdo', 'pdo.c pdo_dbh.c pdo_stmt.c pdo_sql_parser.c pdo_sqlstate.c');

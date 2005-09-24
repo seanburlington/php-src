@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.25 2005/07/27 02:39:46 wez Exp $
+dnl $Id: config.m4,v 1.26 2005/09/24 23:22:43 sniper Exp $
 dnl
 
 if test "$PHP_PDO" != "no"; then
@@ -79,7 +79,7 @@ Note that the MySQL client library is not bundled anymore!])
   ])
 
   PHP_NEW_EXTENSION(pdo_mysql, pdo_mysql.c mysql_driver.c mysql_statement.c, $ext_shared,,-I$pdo_inc_path)
-  ifdef([PHP_ADD_EXTENDION_DEP],
+  ifdef([PHP_ADD_EXTENSION_DEP],
   [
   	PHP_ADD_EXTENSION_DEP(pdo_mysql, pdo)
   ])

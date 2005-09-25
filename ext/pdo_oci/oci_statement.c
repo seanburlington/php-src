@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_statement.c,v 1.4 2004/05/25 14:57:56 tony2001 Exp $ */
+/* $Id: oci_statement.c,v 1.16.2.1 2005/09/25 00:46:59 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -29,6 +29,7 @@
 #include "pdo/php_pdo_driver.h"
 #include "php_pdo_oci.h"
 #include "php_pdo_oci_int.h"
+#include "Zend/zend_extensions.h"
 
 #define STMT_CALL(name, params)	\
 	S->last_err = name params; \
@@ -45,7 +46,7 @@
 	}
 
 
-static int oci_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
+static int oci_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC) /* {{{ */
 {
 	pdo_oci_stmt *S = (pdo_oci_stmt*)stmt->driver_data;
 	HashTable *BC = stmt->bound_columns;
@@ -67,14 +68,22 @@ static int oci_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
 		S->err = NULL;
 	}
 
+	/* need to ensure these go away now */
 	if (BC) {
 		zend_hash_destroy(BC);
-		efree(stmt->bound_columns);
+		FREE_HASHTABLE(stmt->bound_columns);
+		stmt->bound_columns = NULL;
 	}
 	
 	if (BP) {
 		zend_hash_destroy(BP);
-		efree(stmt->bound_params);
+		FREE_HASHTABLE(stmt->bound_params);
+		stmt->bound_params = NULL;
+	}
+	
+	if (S->einfo.errmsg) {
+		efree(S->einfo.errmsg);
+		S->einfo.errmsg = NULL;
 	}
 	
 	if (S->cols) {
@@ -88,13 +97,16 @@ static int oci_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
 	}
 	efree(S);
 
-	return 1;
-}
+	stmt->driver_data = NULL;
 
-static int oci_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
+	return 1;
+} /* }}} */
+
+static int oci_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC) /* {{{ */
 {
 	pdo_oci_stmt *S = (pdo_oci_stmt*)stmt->driver_data;
 	ub4 rowcount;
+	b4 mode;
 
 	if (!S->stmt_type) {
 		STMT_CALL_MSG(OCIAttrGet, "OCI_ATTR_STMT_TYPE",
@@ -106,9 +118,20 @@ static int oci_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 		OCIStmtFetch(S->stmt, S->err, 0, OCI_FETCH_NEXT, OCI_DEFAULT);
 	}
 
+#ifdef OCI_STMT_SCROLLABLE_READONLY /* needed for oci8 ? */
+	if (S->exec_type == OCI_STMT_SCROLLABLE_READONLY) {
+		mode = OCI_STMT_SCROLLABLE_READONLY;
+	} else
+#endif
+	if (stmt->dbh->auto_commit && !stmt->dbh->in_txn) {
+		mode = OCI_COMMIT_ON_SUCCESS;
+	} else {
+		mode = OCI_DEFAULT;
+	}
+
 	STMT_CALL(OCIStmtExecute, (S->H->svc, S->stmt, S->err,
 				S->stmt_type == OCI_STMT_SELECT ? 0 : 1, 0, NULL, NULL,
-				(stmt->dbh->auto_commit && !stmt->dbh->in_txn) ? OCI_COMMIT_ON_SUCCESS : OCI_DEFAULT));
+				mode));
 
 	if (!stmt->executed) {
 		ub4 colcount;
@@ -128,13 +151,12 @@ static int oci_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 	stmt->row_count = (long)rowcount;
 
 	return 1;
-}
+} /* }}} */
 
-static sb4 oci_bind_input_cb(dvoid *ctx, OCIBind *bindp, ub4 iter, ub4 index, dvoid **bufpp,
-		ub4 *alenp, ub1 *piecep, dvoid **indpp)
+static sb4 oci_bind_input_cb(dvoid *ctx, OCIBind *bindp, ub4 iter, ub4 index, dvoid **bufpp, ub4 *alenp, ub1 *piecep, dvoid **indpp) /* {{{ */
 {
 	struct pdo_bound_param_data *param = (struct pdo_bound_param_data*)ctx;
-	pdo_oci_bound_param *P = (pdo_oci_bound_param*)ecalloc(1, sizeof(pdo_oci_bound_param));
+	pdo_oci_bound_param *P = (pdo_oci_bound_param*)param->driver_data;
 	TSRMLS_FETCH();
 
 	if (!param || !param->parameter) {
@@ -161,13 +183,12 @@ static sb4 oci_bind_input_cb(dvoid *ctx, OCIBind *bindp, ub4 iter, ub4 index, dv
 
 	*piecep = OCI_ONE_PIECE;
 	return OCI_CONTINUE;
-}
+} /* }}} */
 
-static sb4 oci_bind_output_cb(dvoid *ctx, OCIBind *bindp, ub4 iter, ub4 index, dvoid **bufpp, ub4 **alenpp,
-		ub1 *piecep, dvoid **indpp, ub2 **rcodepp)
+static sb4 oci_bind_output_cb(dvoid *ctx, OCIBind *bindp, ub4 iter, ub4 index, dvoid **bufpp, ub4 **alenpp, ub1 *piecep, dvoid **indpp, ub2 **rcodepp) /* {{{ */
 {
 	struct pdo_bound_param_data *param = (struct pdo_bound_param_data*)ctx;
-	pdo_oci_bound_param *P = (pdo_oci_bound_param*)ecalloc(1, sizeof(pdo_oci_bound_param));
+	pdo_oci_bound_param *P = (pdo_oci_bound_param*)param->driver_data;
 	TSRMLS_FETCH();
 
 	if (!param || !param->parameter) {
@@ -184,8 +205,9 @@ static sb4 oci_bind_output_cb(dvoid *ctx, OCIBind *bindp, ub4 iter, ub4 index, d
 
 	Z_STRLEN_P(param->parameter) = param->max_value_len;
 	Z_STRVAL_P(param->parameter) = emalloc(Z_STRLEN_P(param->parameter)+1);
+	P->used_for_output = 1;
 
-	
+	P->actual_len = Z_STRLEN_P(param->parameter);	
 	*alenpp = &P->actual_len;
 	*bufpp = Z_STRVAL_P(param->parameter);
 	*piecep = OCI_ONE_PIECE;
@@ -193,10 +215,9 @@ static sb4 oci_bind_output_cb(dvoid *ctx, OCIBind *bindp, ub4 iter, ub4 index, d
 	*indpp = &P->indicator;
 
 	return OCI_CONTINUE;
-}
+} /* }}} */
 
-static int oci_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *param,
-		enum pdo_param_event event_type TSRMLS_DC)
+static int oci_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *param, enum pdo_param_event event_type TSRMLS_DC) /* {{{ */
 {
 	pdo_oci_stmt *S = (pdo_oci_stmt*)stmt->driver_data;
 
@@ -208,22 +229,46 @@ static int oci_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *pa
 		P = (pdo_oci_bound_param*)param->driver_data;
 
 		switch (event_type) {
+			case PDO_PARAM_EVT_FREE:
+				P = param->driver_data;
+				if (P) {
+					efree(P);
+				}
+				break;
+
 			case PDO_PARAM_EVT_ALLOC:
 				P = (pdo_oci_bound_param*)ecalloc(1, sizeof(pdo_oci_bound_param));
 				param->driver_data = P;
 			
 				/* figure out what we're doing */
-				switch (param->param_type) {
-					case PDO_PARAM_LOB:
+				switch (PDO_PARAM_TYPE(param->param_type)) {
 					case PDO_PARAM_STMT:
 						return 0;
+
+					case PDO_PARAM_LOB:
+						/* fake lobs for now */
+						if (Z_TYPE_P(param->parameter) == IS_RESOURCE) {
+							php_stream *stm;
+							php_stream_from_zval_no_verify(stm, &param->parameter);
+							if (stm) {
+								SEPARATE_ZVAL_IF_NOT_REF(&param->parameter);
+								Z_TYPE_P(param->parameter) = IS_STRING;
+								Z_STRLEN_P(param->parameter) = php_stream_copy_to_mem(stm,
+										&Z_STRVAL_P(param->parameter), PHP_STREAM_COPY_ALL, 0);
+							} else {
+								pdo_raise_impl_error(stmt->dbh, stmt, "HY105", "Expected a stream resource");
+								return 0;
+							}
+						}
+						/* fall through */
 
 					case PDO_PARAM_STR:
 					default:
 						P->oci_type = SQLT_CHR;
-						convert_to_string(param->parameter);
 						value_sz = param->max_value_len + 1;
-						P->actual_len = Z_STRLEN_P(param->parameter);
+						if (param->max_value_len == 0) {
+							value_sz = 4000; /* maximum size before value is interpreted as a LONG value */
+						}
 						
 				}
 				
@@ -250,22 +295,33 @@ static int oci_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *pa
 
 			case PDO_PARAM_EVT_EXEC_PRE:
 				P->indicator = 0;
+				P->used_for_output = 0;
 				return 1;
 
 			case PDO_PARAM_EVT_EXEC_POST:
 				/* fixup stuff set in motion in oci_bind_output_cb */
-				if (P->indicator == -1) {
-					/* set up a NULL value */
-					if (Z_TYPE_P(param->parameter) == IS_STRING && Z_STRVAL_P(param->parameter) != empty_string) {
-						/* OCI likes to stick non-terminated strings in things */
-						*Z_STRVAL_P(param->parameter) = '\0';
+				if (P->used_for_output) {
+					if (P->indicator == -1) {
+						/* set up a NULL value */
+						if (Z_TYPE_P(param->parameter) == IS_STRING
+#if ZEND_EXTENSION_API_NO < 220040718
+								&& Z_STRVAL_P(param->parameter) != empty_string
+#endif
+						   ) {
+							/* OCI likes to stick non-terminated strings in things */
+							*Z_STRVAL_P(param->parameter) = '\0';
+						}
+						zval_dtor(param->parameter);
+						ZVAL_NULL(param->parameter);
+					} else if (Z_TYPE_P(param->parameter) == IS_STRING
+#if ZEND_EXTENSION_API_NO < 220040718
+							&& Z_STRVAL_P(param->parameter) != empty_string
+#endif
+							) {
+						Z_STRLEN_P(param->parameter) = P->actual_len;
+						Z_STRVAL_P(param->parameter) = erealloc(Z_STRVAL_P(param->parameter), P->actual_len+1);
+						Z_STRVAL_P(param->parameter)[P->actual_len] = '\0';
 					}
-					zval_dtor(param->parameter);
-					ZVAL_NULL(param->parameter);
-				} else if (Z_TYPE_P(param->parameter) == IS_STRING && Z_STRVAL_P(param->parameter) != empty_string) {
-					Z_STRLEN_P(param->parameter) = P->actual_len;
-					Z_STRVAL_P(param->parameter) = erealloc(Z_STRVAL_P(param->parameter), P->actual_len+1);
-					Z_STRVAL_P(param->parameter)[P->actual_len] = '\0';
 				}
 
 				return 1;
@@ -273,13 +329,28 @@ static int oci_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_data *pa
 	}
 	
 	return 1;
-}
+} /* }}} */
 
-static int oci_stmt_fetch(pdo_stmt_t *stmt TSRMLS_DC)
+static int oci_stmt_fetch(pdo_stmt_t *stmt, enum pdo_fetch_orientation ori,	long offset TSRMLS_DC) /* {{{ */
 {
+#if HAVE_OCISTMTFETCH2
+	ub4 ociori;
+#endif
 	pdo_oci_stmt *S = (pdo_oci_stmt*)stmt->driver_data;
 
+#if HAVE_OCISTMTFETCH2
+	switch (ori) {
+		case PDO_FETCH_ORI_NEXT:	ociori = OCI_FETCH_NEXT; break;
+		case PDO_FETCH_ORI_PRIOR:	ociori = OCI_FETCH_PRIOR; break;
+		case PDO_FETCH_ORI_FIRST:	ociori = OCI_FETCH_FIRST; break;
+		case PDO_FETCH_ORI_LAST:	ociori = OCI_FETCH_LAST; break;
+		case PDO_FETCH_ORI_ABS:		ociori = OCI_FETCH_ABSOLUTE; break;
+		case PDO_FETCH_ORI_REL:		ociori = OCI_FETCH_RELATIVE; break;
+	}
+	S->last_err = OCIStmtFetch2(S->stmt, S->err, 1, ociori, offset, OCI_DEFAULT);
+#else
 	S->last_err = OCIStmtFetch(S->stmt, S->err, 1, OCI_FETCH_NEXT, OCI_DEFAULT);
+#endif
 
 	if (S->last_err == OCI_NO_DATA) {
 		/* no (more) data */
@@ -298,9 +369,9 @@ static int oci_stmt_fetch(pdo_stmt_t *stmt TSRMLS_DC)
 	oci_stmt_error("OCIStmtFetch");
 
 	return 0;
-}
+} /* }}} */
 
-static int oci_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC)
+static int oci_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC) /* {{{ */
 {
 	pdo_oci_stmt *S = (pdo_oci_stmt*)stmt->driver_data;
 	OCIParam *param = NULL;
@@ -354,12 +425,12 @@ static int oci_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC)
 				/* should be big enough for most date formats and numbers */
 				S->cols[colno].datalen = 512;
 			} else {
-				S->cols[colno].datalen = col->maxlen + 1; /* 1 for NUL terminator */
+				S->cols[colno].datalen = col->maxlen;
 			}
 			if (dtype == SQLT_BIN) {
 				S->cols[colno].datalen *= 3;
 			}
-			S->cols[colno].data = emalloc(S->cols[colno].datalen);
+			S->cols[colno].data = emalloc(S->cols[colno].datalen + 1);
 			dtype = SQLT_CHR;
 
 			/* returning data as a string */
@@ -373,9 +444,9 @@ static int oci_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC)
 	}
 	
 	return 1;
-}
+} /* }}} */
 
-static int oci_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr, unsigned long *len TSRMLS_DC)
+static int oci_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr, unsigned long *len, int *caller_frees TSRMLS_DC) /* {{{ */
 {
 	pdo_oci_stmt *S = (pdo_oci_stmt*)stmt->driver_data;
 	pdo_oci_column *C = &S->cols[colno];
@@ -399,7 +470,7 @@ static int oci_stmt_get_col(pdo_stmt_t *stmt, int colno, char **ptr, unsigned lo
 		*len = C->fetched_len;
 		return 1;
 	}
-}
+} /* }}} */
 
 struct pdo_stmt_methods oci_stmt_methods = {
 	oci_stmt_dtor,

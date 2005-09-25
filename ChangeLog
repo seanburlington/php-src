@@ -1,3 +1,43 @@
+2005-09-24  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * (PHP_5_1)
+      NEWS:
+      Documentation belongs elsewhere
+
+2005-09-24  Edin Kadribasic  <edink@emini.dk>
+
+    * ext/standard/exec.h:
+      MFB: Allow php extensions to use php_escape_shell_cmd() and
+      php_escape_shell_arg(), needed for mbstring
+
+    * (PHP_5_1)
+      ext/standard/exec.h:
+      Allow php extensions to use php_escape_shell_cmd() and
+      php_escape_shell_arg(), needed for mbstring
+
+    * php.ini-dist
+      php.ini-recommended
+      ext/sqlite/config.w32:
+      MFB: Build PDO and SQLite as shared
+
+    * (PHP_5_1)
+      NEWS
+      php.ini-dist
+      php.ini-recommended
+      ext/sqlite/config.w32:
+      Build PDO and SQLite as shared
+
+2005-09-24  Pierre-Alain Joye  <pierre.dev@gmail.com>
+
+    * (PHP_5_1)
+      ext/gd/libgd/gd_gif_in.c
+      ext/gd/libgd/gd_gif_in.c:
+      - MFH #33220, infinite loop while loading invalid GIF (nlopees)
+
+    * ext/gd/libgd/gd_gif_in.c:
+      - #33220, fix infinite loop while loading invalid gif, this patch fixes
+        at least many cases (nlopess)
+
 2005-09-23  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * ZendEngine2/zend_reflection_api.c:
@@ -12527,7 +12567,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2112 2005/09/24 05:35:36 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2113 2005/09/25 05:43:30 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -15928,7 +15968,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2112 2005/09/24 05:35:36 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2113 2005/09/25 05:43:30 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -16409,7 +16449,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2112 2005/09/24 05:35:36 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2113 2005/09/25 05:43:30 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -17883,7 +17923,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2112 2005/09/24 05:35:36 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2113 2005/09/25 05:43:30 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

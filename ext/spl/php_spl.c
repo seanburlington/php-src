@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.7 2005/09/25 18:04:34 helly Exp $ */
+/* $Id: php_spl.c,v 1.52.2.8 2005/09/26 17:56:26 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -627,6 +627,7 @@ PHP_MINIT_FUNCTION(spl)
 PHP_RINIT_FUNCTION(spl) /* {{{ */
 {
 	SPL_G(autoload_extensions) = estrndup(".inc,.php", sizeof(".inc,.php")-1);
+	SPL_G(autoload_functions) = NULL;
 	return SUCCESS;
 } /* }}} */
 
@@ -639,6 +640,7 @@ PHP_RSHUTDOWN_FUNCTION(spl) /* {{{ */
 	if (SPL_G(autoload_functions)) {
 		zend_hash_destroy(SPL_G(autoload_functions));
 		FREE_HASHTABLE(SPL_G(autoload_functions));
+		SPL_G(autoload_functions) = NULL;
 	}
 	return SUCCESS;
 } /* }}} */

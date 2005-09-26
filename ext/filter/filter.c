@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.8 2005/09/26 06:57:05 derick Exp $ */
+/* $Id: filter.c,v 1.9 2005/09/26 13:45:38 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -43,7 +43,7 @@ filter_list_entry filter_list[] = {
 	{ "validate_regexp", FL_REGEXP,        php_filter_validate_regexp },
 	{ "validate_url",    FL_URL,           php_filter_validate_url    },
 	{ "validate_email",  FL_EMAIL,         php_filter_validate_email  },
-	{ "validate_ip",     FL_IP,            php_filter_validate_url    },
+	{ "validate_ip",     FL_IP,            php_filter_validate_ip     },
 
 	{ "string",          FS_STRING,        php_filter_string          },
 	{ "stripped",        FS_STRING,        php_filter_string          },
@@ -203,6 +203,12 @@ PHP_MINIT_FUNCTION(filter)
 	REGISTER_LONG_CONSTANT("FILTER_FLAG_HOST_REQUIRED", FILTER_FLAG_HOST_REQUIRED, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FILTER_FLAG_PATH_REQUIRED", FILTER_FLAG_PATH_REQUIRED, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("FILTER_FLAG_QUERY_REQUIRED", FILTER_FLAG_QUERY_REQUIRED, CONST_CS | CONST_PERSISTENT);
+
+	REGISTER_LONG_CONSTANT("FILTER_FLAG_IPV4", FILTER_FLAG_IPV4, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("FILTER_FLAG_IPV6", FILTER_FLAG_IPV6, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("FILTER_FLAG_NO_RES_RANGE", FILTER_FLAG_NO_RES_RANGE, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("FILTER_FLAG_NO_PRIV_RANGE", FILTER_FLAG_NO_PRIV_RANGE, CONST_CS | CONST_PERSISTENT);
+
 	sapi_register_input_filter(php_sapi_filter);
 	return SUCCESS;
 }
@@ -243,7 +249,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.8 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.9 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

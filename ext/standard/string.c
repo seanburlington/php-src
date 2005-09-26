@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.482 2005/09/09 19:07:18 rolland Exp $ */
+/* $Id: string.c,v 1.483 2005/09/26 23:08:10 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -5768,6 +5768,10 @@ PHP_FUNCTION(substr_compare)
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ssl|lb", &s1, &s1_len, &s2, &s2_len, &offset, &len, &cs) == FAILURE) {
 		RETURN_FALSE;
+	}
+
+	if (offset < 0) { /* negative offset, start comparison at the end of string */
+		offset = s1_len + offset;
 	}
 
 	if (len && offset >= s1_len) {

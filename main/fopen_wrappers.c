@@ -16,7 +16,7 @@
    |          Jim Winstead <jimw@php.net>                                 |
    +----------------------------------------------------------------------+
  */
-/* $Id: fopen_wrappers.c,v 1.153.2.10.2.1 2005/07/26 13:51:33 hyanantha Exp $ */
+/* $Id: fopen_wrappers.c,v 1.153.2.10.2.2 2005/09/27 15:08:43 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -110,8 +110,8 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 		/* Handler for basedirs that end with a / */
 		resolved_basedir_len = strlen(resolved_basedir);
 		if (basedir[strlen(basedir) - 1] == PHP_DIR_SEPARATOR) {
-			if (resolved_basedir[resolved_basedir_len - 1] == '/') {
-				resolved_basedir[resolved_basedir_len - 1] = PHP_DIR_SEPARATOR;
+			if (resolved_basedir[resolved_basedir_len - 1] != PHP_DIR_SEPARATOR) {
+				resolved_basedir[resolved_basedir_len] = PHP_DIR_SEPARATOR;
 				resolved_basedir[++resolved_basedir_len] = '\0';
 			}
 		}

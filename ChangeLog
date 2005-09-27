@@ -1,3 +1,40 @@
+2005-09-26  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/standard/string.c:
+      Allow substr_compare() to take a negative offset to facilitate start of the
+      comparison from the end of string.
+
+    * (PHP_5_1)
+      NEWS:
+      MFH: upgraded bundled libsqlite3 to version 3.2.7
+
+2005-09-26  Antony Dovgal  <antony@zend.com>
+
+    * ext/oci8/oci8_collection.c
+      ext/oci8/oci8_statement.c
+      ext/oci8/php_oci8_int.h:
+      the last 64bit fix
+
+2005-09-26  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_4)
+      NEWS
+      ext/ctype/ctype.c
+      ext/ctype/tests/bug34645.phpt:
+      MFH: Fixed bug #34645 (ctype corrupts memory when validating large
+      numbers).
+
+    * (PHP_5_1)
+      NEWS:
+      Bug fixing news
+
+    * (PHP_5_1)
+      ext/ctype/ctype.c
+      ext/ctype/tests/bug34645.phpt
+      ext/ctype/tests/bug34645.phpt
+      ext/ctype/tests/bug34645.phpt:
+      Fixed bug #34645 (ctype corrupts memory when validating large numbers).
+
 2005-09-25  Antony Dovgal  <antony@zend.com>
 
     * ext/oci8/php_oci8_int.h:
@@ -12607,7 +12644,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2114 2005/09/26 05:32:43 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2115 2005/09/27 05:33:02 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -16008,7 +16045,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2114 2005/09/26 05:32:43 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2115 2005/09/27 05:33:02 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -16489,7 +16526,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2114 2005/09/26 05:32:43 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2115 2005/09/27 05:33:02 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -17963,7 +18000,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2114 2005/09/26 05:32:43 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2115 2005/09/27 05:33:02 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

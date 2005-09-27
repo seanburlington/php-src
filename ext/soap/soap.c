@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.110.2.43 2005/09/12 08:26:05 dmitry Exp $ */
+/* $Id: soap.c,v 1.110.2.44 2005/09/27 15:26:25 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4004,9 +4004,21 @@ static xmlNodePtr serialize_zval(zval *val, sdlParamPtr param, char *paramName, 
 {
 	xmlNodePtr xmlParam;
 	encodePtr enc;
+	zval defval;
 
 	if (param != NULL) {
 		enc = param->encode;
+		if (val == NULL || Z_TYPE_P(val) == IS_NULL) {
+			if (param->element) {
+				if (param->element->fixed) {
+					ZVAL_STRING(&defval, param->element->fixed, 0);
+					val = &defval;
+				} else if (param->element->def && !param->element->nillable) {
+					ZVAL_STRING(&defval, param->element->def, 0);
+					val = &defval;
+				}
+			}
+		}
 	} else {
 		enc = NULL;
 	}

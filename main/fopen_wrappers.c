@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fopen_wrappers.c,v 1.170 2004/03/16 00:31:22 iliaa Exp $ */
+/* $Id: fopen_wrappers.c,v 1.175.2.1 2005/09/27 15:07:48 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -35,14 +35,6 @@
 #ifdef PHP_WIN32
 #define O_RDONLY _O_RDONLY
 #include "win32/param.h"
-#elif defined(NETWARE)
-/*#include <ws2nlm.h>*/
-/*#include <sys/socket.h>*/
-#ifdef NEW_LIBC
-#include <sys/param.h>
-#else
-#include "netware/param.h"
-#endif
 #else
 #include <sys/param.h>
 #endif
@@ -56,8 +48,6 @@
 #if HAVE_PWD_H
 #ifdef PHP_WIN32
 #include "win32/pwd.h"
-#elif defined(NETWARE)
-#include "netware/pwd.h"
 #else
 #include <pwd.h>
 #endif
@@ -75,7 +65,6 @@
 #ifdef PHP_WIN32
 #include <winsock2.h>
 #elif defined(NETWARE) && defined(USE_WINSOCK)
-/*#include <ws2nlm.h>*/
 #include <novsock2.h>
 #else
 #include <netinet/in.h>
@@ -105,24 +94,11 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 	char resolved_name[MAXPATHLEN];
 	char resolved_basedir[MAXPATHLEN];
 	char local_open_basedir[MAXPATHLEN];
-	int local_open_basedir_pos;
 	int resolved_basedir_len;
 	int resolved_name_len;
 	
 	/* Special case basedir==".": Use script-directory */
-	if ((strcmp(basedir, ".") == 0) && 
-		SG(request_info).path_translated &&
-		*SG(request_info).path_translated
-		) {
-		strlcpy(local_open_basedir, SG(request_info).path_translated, sizeof(local_open_basedir));
-		local_open_basedir_pos = strlen(local_open_basedir) - 1;
-
-		/* Strip filename */
-		while (!IS_SLASH(local_open_basedir[local_open_basedir_pos])
-				&& (local_open_basedir_pos >= 0)) {
-			local_open_basedir[local_open_basedir_pos--] = 0;
-		}
-	} else {
+	if (strcmp(basedir, ".") || !VCWD_GETCWD(local_open_basedir, MAXPATHLEN)) {
 		/* Else use the unmodified path */
 		strlcpy(local_open_basedir, basedir, sizeof(local_open_basedir));
 	}
@@ -132,8 +108,8 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 		/* Handler for basedirs that end with a / */
 		resolved_basedir_len = strlen(resolved_basedir);
 		if (basedir[strlen(basedir) - 1] == PHP_DIR_SEPARATOR) {
-			if (resolved_basedir[resolved_basedir_len - 1] == '/') {
-				resolved_basedir[resolved_basedir_len - 1] = PHP_DIR_SEPARATOR;
+			if (resolved_basedir[resolved_basedir_len - 1] != PHP_DIR_SEPARATOR) {
+				resolved_basedir[resolved_basedir_len] = PHP_DIR_SEPARATOR;
 				resolved_basedir[++resolved_basedir_len] = '\0';
 			}
 		}
@@ -147,7 +123,7 @@ PHPAPI int php_check_specific_open_basedir(const char *basedir, const char *path
 		}
 
 		/* Check the path */
-#ifdef PHP_WIN32
+#if defined(PHP_WIN32) || defined(NETWARE)
 		if (strncasecmp(resolved_basedir, resolved_name, resolved_basedir_len) == 0) {
 #else
 		if (strncmp(resolved_basedir, resolved_name, resolved_basedir_len) == 0) {

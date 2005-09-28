@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.c,v 1.49 2004/05/05 10:31:26 dmitry Exp $ */
+/* $Id: php_schema.c,v 1.58.2.1 2005/09/28 11:24:18 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -88,31 +88,21 @@ static encodePtr create_encoder(sdlPtr sdl, sdlTypePtr cur_type, const char *ns,
 
 static encodePtr get_create_encoder(sdlPtr sdl, sdlTypePtr cur_type, const char *ns, const char *type)
 {
-	encodePtr enc = NULL;
-	smart_str nscat = {0};
-
-	smart_str_appends(&nscat, ns);
-	smart_str_appendc(&nscat, ':');
-	smart_str_appends(&nscat, type);
-	smart_str_0(&nscat);
-
-	enc = get_encoder_ex(sdl, nscat.c, nscat.len);
+	encodePtr enc = get_encoder(sdl, ns, type);
 	if (enc == NULL) {
 		enc = create_encoder(sdl, cur_type, ns, type);
 	}
-
-	smart_str_free(&nscat);
 	return enc;
 }
 
-static void schema_load_file(sdlCtx *ctx, xmlAttrPtr ns, xmlChar *location, xmlAttrPtr tns, int import) {
+static void schema_load_file(sdlCtx *ctx, xmlAttrPtr ns, xmlChar *location, xmlAttrPtr tns, int import TSRMLS_DC) {
 	if (location != NULL &&
 	    !zend_hash_exists(&ctx->docs, location, strlen(location)+1)) {
 		xmlDocPtr doc;
 		xmlNodePtr schema;
 		xmlAttrPtr new_tns;
 
-		doc = soap_xmlParseFile(location);
+		doc = soap_xmlParseFile(location TSRMLS_CC);
 		if (doc == NULL) {
 			soap_error1(E_ERROR, "Parsing Schema: can't import schema from '%s'", location);
 		}
@@ -135,7 +125,6 @@ static void schema_load_file(sdlCtx *ctx, xmlAttrPtr ns, xmlChar *location, xmlA
 			new_tns = get_attribute(schema->properties, "targetNamespace");
 			if (new_tns == NULL) {
 				if (tns != NULL) {
-					xmlFreeDoc(doc);
 					xmlSetProp(schema, "targetNamespace", tns->children->content);
 				}
 			} else if (tns != NULL && strcmp(tns->children->content,new_tns->children->content) != 0) {
@@ -144,7 +133,7 @@ static void schema_load_file(sdlCtx *ctx, xmlAttrPtr ns, xmlChar *location, xmlA
 			}
 		}
 		zend_hash_add(&ctx->docs, location, strlen(location)+1, (void**)&doc, sizeof(xmlDocPtr), NULL);
-		load_schema(ctx, schema);
+		load_schema(ctx, schema TSRMLS_CC);
 	}
 }
 
@@ -168,7 +157,7 @@ static void schema_load_file(sdlCtx *ctx, xmlAttrPtr ns, xmlChar *location, xmlA
   Content: ((include | import | redefine | annotation)*, (((simpleType | complexType | group | attributeGroup) | element | attribute | notation), annotation*)*)
 </schema>
 */
-int load_schema(sdlCtx *ctx,xmlNodePtr schema)
+int load_schema(sdlCtx *ctx, xmlNodePtr schema TSRMLS_DC)
 {
 	xmlNodePtr trav;
 	xmlAttrPtr tns;
@@ -210,7 +199,7 @@ int load_schema(sdlCtx *ctx,xmlNodePtr schema)
 	    		uri = xmlBuildURI(location->children->content, base);
 			    xmlFree(base);
 				}
-				schema_load_file(ctx,NULL,uri,tns,0);
+				schema_load_file(ctx, NULL, uri, tns, 0 TSRMLS_CC);
 				xmlFree(uri);
 			}
 
@@ -230,7 +219,7 @@ int load_schema(sdlCtx *ctx,xmlNodePtr schema)
 	    		uri = xmlBuildURI(location->children->content, base);
 			    xmlFree(base);
 				}
-				schema_load_file(ctx,NULL,uri,tns,0);
+				schema_load_file(ctx, NULL, uri, tns, 0 TSRMLS_CC);
 				xmlFree(uri);
 				/* TODO: <redefine> support */
 			}
@@ -255,7 +244,7 @@ int load_schema(sdlCtx *ctx,xmlNodePtr schema)
 			    xmlFree(base);
 				}
 			}
-			schema_load_file(ctx,ns,uri,tns,1);
+			schema_load_file(ctx, ns, uri, tns, 1 TSRMLS_CC);
 			if (uri != NULL) {xmlFree(uri);}
 		} else if (node_is_equal(trav,"annotation")) {
 			/* TODO: <annotation> support */
@@ -544,10 +533,6 @@ static int schema_union(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr unionType, sdlTyp
 	while (trav != NULL) {
 		if (node_is_equal(trav,"simpleType")) {
 			sdlTypePtr newType, *tmp;
-
-			if (memberTypes != NULL) {
-				soap_error0(E_ERROR, "Parsing Schema: union has both 'memberTypes' attribute and subtypes");
-			}
 
 			newType = emalloc(sizeof(sdlType));
 			memset(newType, 0, sizeof(sdlType));
@@ -1302,9 +1287,44 @@ static int schema_sequence(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr seqType, sdlTy
 	return TRUE;
 }
 
-static int schema_any(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr extType, sdlTypePtr cur_type, sdlContentModelPtr model)
+/*
+<any 
+  id = ID 
+  maxOccurs = (nonNegativeInteger | unbounded)  : 1
+  minOccurs = nonNegativeInteger : 1
+  namespace = ((##any | ##other) | List of (anyURI | (##targetNamespace | ##local)) )  : ##any
+  processContents = (lax | skip | strict) : strict
+  {any attributes with non-schema namespace . . .}>
+  Content: (annotation?)
+</any>
+*/
+static int schema_any(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr anyType, sdlTypePtr cur_type, sdlContentModelPtr model)
 {
-	/* TODO: <any> support */
+	if (model != NULL) {
+		sdlContentModelPtr newModel;
+		xmlAttrPtr attr;
+
+		newModel = emalloc(sizeof(sdlContentModel));
+		newModel->kind = XSD_CONTENT_ANY;
+		newModel->min_occurs = 1;
+		newModel->max_occurs = 1;
+
+		attr = get_attribute(anyType->properties, "minOccurs");
+		if (attr) {
+			newModel->min_occurs = atoi(attr->children->content);
+		}
+
+		attr = get_attribute(anyType->properties, "maxOccurs");
+		if (attr) {
+			if (!strncmp(attr->children->content, "unbounded", sizeof("unbounded"))) {
+				newModel->max_occurs = -1;
+			} else {
+				newModel->max_occurs = atoi(attr->children->content);
+			}
+		}
+
+		zend_hash_next_index_insert(model->u.content, &newModel, sizeof(sdlContentModelPtr), NULL);
+	}
 	return TRUE;
 }
 
@@ -1363,7 +1383,6 @@ static int schema_complexType(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr compType, s
 {
 	xmlNodePtr trav;
 	xmlAttrPtr attrs, name, ns;
-	TSRMLS_FETCH();
 
 	attrs = compType->properties;
 	ns = get_attribute(attrs, "targetNamespace");
@@ -1631,6 +1650,39 @@ static int schema_element(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr element, sdlTyp
 		cur_type->def = estrdup(attr->children->content);
 	}
 
+	/* form */
+	attr = get_attribute(attrs, "form");
+	if (attr) {
+		if (strncmp(attr->children->content,"qualified",sizeof("qualified")) == 0) {
+		  cur_type->form = XSD_FORM_QUALIFIED;
+		} else if (strncmp(attr->children->content,"unqualified",sizeof("unqualified")) == 0) {
+		  cur_type->form = XSD_FORM_UNQUALIFIED;
+		} else {
+		  cur_type->form = XSD_FORM_DEFAULT;
+		}
+	} else {
+	  cur_type->form = XSD_FORM_DEFAULT;
+	}
+	if (cur_type->form == XSD_FORM_DEFAULT) {
+ 		xmlNodePtr parent = element->parent;
+ 		while (parent) {
+			if (node_is_equal_ex(parent, "schema", SCHEMA_NAMESPACE)) {
+				xmlAttrPtr def;
+				def = get_attribute(parent->properties, "elementFormDefault");
+				if(def == NULL || strncmp(def->children->content, "qualified", sizeof("qualified"))) {
+					cur_type->form = XSD_FORM_UNQUALIFIED;
+				} else {
+					cur_type->form = XSD_FORM_QUALIFIED;
+				}
+				break;
+			}
+			parent = parent->parent;
+  	}
+		if (parent == NULL) {
+			cur_type->form = XSD_FORM_UNQUALIFIED;
+		}	
+	}
+
 	/* type = QName */
 	type = get_attribute(attrs, "type");
 	if (type) {
@@ -1729,6 +1781,7 @@ static int schema_attribute(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr attrType, sdl
 			if (nsptr != NULL) {
 				smart_str_appends(&key, nsptr->href);
 				smart_str_appendc(&key, ':');
+				newAttr->namens = estrdup(nsptr->href);
 			}
 			smart_str_appends(&key, attr_name);
 			smart_str_0(&key);
@@ -1745,6 +1798,7 @@ static int schema_attribute(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr attrType, sdl
 			if (ns != NULL) {
 				smart_str_appends(&key, ns->children->content);
 				smart_str_appendc(&key, ':');
+				newAttr->namens = estrdup(ns->children->content);
 			}
 			smart_str_appends(&key, name->children->content);
 			smart_str_0(&key);
@@ -1855,7 +1909,25 @@ static int schema_attribute(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr attrType, sdl
 		}
 		attr = attr->next;
 	}
-
+	if (newAttr->form == XSD_FORM_DEFAULT) {
+ 		xmlNodePtr parent = attrType->parent;
+ 		while (parent) {
+			if (node_is_equal_ex(parent, "schema", SCHEMA_NAMESPACE)) {
+				xmlAttrPtr def;
+				def = get_attribute(parent->properties, "attributeFormDefault");
+				if(def == NULL || strncmp(def->children->content, "qualified", sizeof("qualified"))) {
+					newAttr->form = XSD_FORM_UNQUALIFIED;
+				} else {
+					newAttr->form = XSD_FORM_QUALIFIED;
+				}
+				break;
+			}
+			parent = parent->parent;
+  	}
+		if (parent == NULL) {
+			newAttr->form = XSD_FORM_UNQUALIFIED;
+		}	
+	}
 	trav = attrType->children;
 	if (trav != NULL && node_is_equal(trav, "annotation")) {
 		/* TODO: <annotation> support */
@@ -2014,6 +2086,9 @@ static void schema_attribute_fixup(sdlCtx *ctx, sdlAttributePtr attr)
 				if ((*tmp)->name != NULL && attr->name == NULL) {
 					attr->name = estrdup((*tmp)->name);
 				}
+				if ((*tmp)->namens != NULL && attr->namens == NULL) {
+					attr->namens = estrdup((*tmp)->namens);
+				}
 				if ((*tmp)->def != NULL && attr->def == NULL) {
 					attr->def = estrdup((*tmp)->def);
 				}
@@ -2071,6 +2146,7 @@ static void schema_attributegroup_fixup(sdlCtx *ctx, sdlAttributePtr attr, HashT
 							memcpy(newAttr, *tmp_attr, sizeof(sdlAttribute));
 							if (newAttr->def) {newAttr->def = estrdup(newAttr->def);}
 							if (newAttr->fixed) {newAttr->fixed = estrdup(newAttr->fixed);}
+							if (newAttr->namens) {newAttr->namens = estrdup(newAttr->namens);}
 							if (newAttr->name) {newAttr->name = estrdup(newAttr->name);}
 							if (newAttr->extraAttributes) {
 							  xmlNodePtr node;
@@ -2152,6 +2228,9 @@ static void schema_type_fixup(sdlCtx *ctx, sdlTypePtr type)
 				if ((*tmp)->def) {
 				  type->def = estrdup((*tmp)->def);
 				}
+				type->form = (*tmp)->form;
+			} else if (strcmp(type->ref, SCHEMA_NAMESPACE ":schema") == 0) {
+				type->encode = get_conversion(XSD_ANYXML);
 			} else {
 				soap_error0(E_ERROR, "Parsing Schema: unresolved element 'ref' attribute");
 			}
@@ -2253,6 +2332,8 @@ void delete_model(void *handle)
 		case XSD_CONTENT_GROUP_REF:
 			efree(tmp->u.group_ref);
 			break;
+		default:
+			break;
 	}
 	efree(tmp);
 }
@@ -2329,6 +2410,9 @@ void delete_attribute(void *attribute)
 	}
 	if (attr->name) {
 		efree(attr->name);
+	}
+	if (attr->namens) {
+		efree(attr->namens);
 	}
 	if (attr->ref) {
 		efree(attr->ref);

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.c,v 1.58 2005/08/03 14:07:47 sniper Exp $ */
+/* $Id: php_schema.c,v 1.59 2005/09/28 11:23:30 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -533,10 +533,6 @@ static int schema_union(sdlPtr sdl, xmlAttrPtr tns, xmlNodePtr unionType, sdlTyp
 	while (trav != NULL) {
 		if (node_is_equal(trav,"simpleType")) {
 			sdlTypePtr newType, *tmp;
-
-			if (memberTypes != NULL) {
-				soap_error0(E_ERROR, "Parsing Schema: union has both 'memberTypes' attribute and subtypes");
-			}
 
 			newType = emalloc(sizeof(sdlType));
 			memset(newType, 0, sizeof(sdlType));

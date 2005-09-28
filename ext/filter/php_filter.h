@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filter.h,v 1.2 2005/09/20 15:01:42 derick Exp $ */
+/* $Id: php_filter.h,v 1.3 2005/09/28 09:10:45 derick Exp $ */
 
 #ifndef PHP_FILTER_H
 #define PHP_FILTER_H
@@ -49,7 +49,7 @@ PHP_RSHUTDOWN_FUNCTION(filter);
 PHP_MINFO_FUNCTION(filter);
 
 PHP_FUNCTION(input_get);
-PHP_FUNCTION(input_get_array);
+PHP_FUNCTION(input_filters_list);
 PHP_FUNCTION(filter_data);
 
 ZEND_BEGIN_MODULE_GLOBALS(filter)

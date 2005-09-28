@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.9 2005/09/26 13:45:38 derick Exp $ */
+/* $Id: filter.c,v 1.10 2005/09/28 09:10:45 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -77,6 +77,7 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
  */
 function_entry filter_functions[] = {
 	PHP_FE(input_get, NULL)
+	PHP_FE(input_filters_list, NULL)
 	PHP_FE(filter_data, NULL)
 	{NULL, NULL, NULL}
 };
@@ -249,7 +250,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.9 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.10 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -503,6 +504,19 @@ PHP_FUNCTION(input_get)
 		php_zval_filter_recursive(return_value, filter, filter_flags, options, charset);
 	} else {
 		RETVAL_FALSE;
+	}
+}
+/* }}} */
+
+/* {{{ proto input_filters_list()
+ * Returns a list of all supported filters */
+PHP_FUNCTION(input_filters_list)
+{
+	int i, size = sizeof(filter_list) / sizeof(filter_list_entry);
+
+	array_init(return_value);
+	for (i = 0; i < size; ++i) {
+		add_next_index_string(return_value, filter_list[i].name, 1);
 	}
 }
 /* }}} */

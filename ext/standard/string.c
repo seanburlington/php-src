@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.420.2.12 2005/07/16 11:18:35 hyanantha Exp $ */
+/* $Id: string.c,v 1.420.2.13 2005/09/28 22:35:43 iliaa Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3809,7 +3809,6 @@ PHP_FUNCTION(parse_str)
 	zval *sarg;
 	char *res = NULL;
 	int argCount;
-	int old_rg;
 
 	argCount = ZEND_NUM_ARGS();
 	if (argCount < 1 || argCount > 2 || zend_get_parameters_ex(argCount, &arg, &arrayArg) == FAILURE) {
@@ -3822,19 +3821,18 @@ PHP_FUNCTION(parse_str)
 		res = estrndup(Z_STRVAL_P(sarg), Z_STRLEN_P(sarg));
 	}
 
-	old_rg = PG(register_globals);
 	if (argCount == 1) {
-		PG(register_globals) = 1;
-		sapi_module.treat_data(PARSE_STRING, res, NULL TSRMLS_CC);
+		zval tmp;
+		Z_ARRVAL(tmp) = EG(active_symbol_table);
+
+		sapi_module.treat_data(PARSE_STRING, res, &tmp TSRMLS_CC);
 	} else 	{
-		PG(register_globals) = 0;
 		/* Clear out the array that was passed in. */
 		zval_dtor(*arrayArg);
 		array_init(*arrayArg);
 		
 		sapi_module.treat_data(PARSE_STRING, res, *arrayArg TSRMLS_CC);
 	}
-	PG(register_globals) = old_rg;
 }
 /* }}} */
 

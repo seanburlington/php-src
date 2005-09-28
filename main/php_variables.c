@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_variables.c,v 1.104.2.2 2005/09/01 19:15:19 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.104.2.3 2005/09/28 22:39:52 iliaa Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -99,6 +99,13 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, zval *track_vars_arra
 		zval_dtor(val);
 		return;
 	}
+
+	/* GLOBALS hijack attempt, reject parameter */
+	if (symtable1 == EG(active_symbol_table) && !strcmp("GLOBALS", var)) {
+		zval_dtor(val);
+		return;
+	}
+
 	/* ensure that we don't have spaces or dots in the variable name (not binary safe) */
 	for (p=var; *p; p++) {
 		switch (*p) {

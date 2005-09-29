@@ -1,3 +1,58 @@
+2005-09-28  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_1)
+      NEWS
+      ext/standard/string.c
+      main/php_variables.c:
+      MFH: Fixed possible GLOBALS variable override when register_globals are ON.
+      MFH: Fixed possible register_globals toggle via parse_str().
+      MFH: Fixed negative offset handling in substr_compare() function.
+
+    * (PHP_4_4)
+      NEWS
+      ext/standard/string.c
+      ext/standard/string.c
+      main/php_variables.c
+      main/php_variables.c:
+      MFH: Fixed possible GLOBALS variable override when register_globals are ON.
+      MFH: Fixed possible register_globals toggle via parse_str().
+
+2005-09-28  Edin Kadribasic  <edink@emini.dk>
+
+    * ext/oci8/oci8.dsp:
+      Update php4 build file, compile against istantclient
+
+2005-09-28  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/standard/string.c
+      main/php_variables.c:
+      Fixed possible GLOBALS variable override when register_globals are ON.
+      Fixed possible register_globals toggle via parse_str().
+
+2005-09-28  Rolland Santimano  <rollandsantimano@yahoo.com>
+
+    * ext/standard/string.c:
+      - Updated substr_replace() to use:
+        - zend_get_unified_string_type()/convert_to_explicit_type() for type
+      conversion
+        - u_countChar32() for counting codepoints
+
+    * unicode-progress.txt:
+      {add,strip}slashes()
+
+2005-09-28  Dmitry Stogov  <dmitry@zend.com>
+
+    * (PHP_5_0)
+      NEWS
+      NEWS:
+      Fixed bug #34453 (parsing http://www.w3.org/2001/xml.xsd exception)
+
+2005-09-28  Rolland Santimano  <rollandsantimano@yahoo.com>
+
+    * ext/standard/php_string.h
+      ext/standard/string.c:
+      - Unicode impl of {add,strip}slashes()
+
 2005-09-27  Andrei Zmievski  <andrei@gravitonic.com>
 
     * README.UNICODE-UPGRADES:
@@ -12729,7 +12784,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2116 2005/09/28 06:31:02 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2117 2005/09/29 05:41:36 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -16130,7 +16185,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2116 2005/09/28 06:31:02 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2117 2005/09/29 05:41:36 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -16611,7 +16666,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2116 2005/09/28 06:31:02 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2117 2005/09/29 05:41:36 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -18085,7 +18140,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2116 2005/09/28 06:31:02 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2117 2005/09/29 05:41:36 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

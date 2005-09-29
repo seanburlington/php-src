@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: basic_functions.h,v 1.140 2005/08/13 02:23:29 wez Exp $ */
+/* $Id: basic_functions.h,v 1.141 2005/09/29 11:05:29 rolland Exp $ */
 
 #ifndef BASIC_FUNCTIONS_H
 #define BASIC_FUNCTIONS_H
@@ -153,9 +153,9 @@ typedef struct _php_basic_globals {
 	HashTable *user_shutdown_function_names;
 	HashTable putenv_ht;
 	zval *strtok_zval;
-	char *strtok_string;
+	void *strtok_string;
 	char *locale_string;
-	char *strtok_last;
+	void *strtok_last;
 	char strtok_table[256];
 	ulong strtok_len;
 	char str_ebuf[40];

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_statement.c,v 1.18.2.2 2005/09/24 18:55:56 wez Exp $ */
+/* $Id: sqlite_statement.c,v 1.18.2.3 2005/09/29 19:57:13 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -113,7 +113,7 @@ static int pdo_sqlite_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_d
 								Z_STRLEN_P(param->parameter) = php_stream_copy_to_mem(stm,
 									&Z_STRVAL_P(param->parameter), PHP_STREAM_COPY_ALL, 0);
 							} else {
-								pdo_raise_impl_error(stmt->dbh, stmt, "HY105", "Expected a stream resource");
+								pdo_raise_impl_error(stmt->dbh, stmt, "HY105", "Expected a stream resource" TSRMLS_CC);
 								return 0;
 							}
 						}

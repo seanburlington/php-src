@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.48.2.2 2005/09/25 02:05:03 wez Exp $ */
+/* $Id: mysql_statement.c,v 1.48.2.3 2005/09/29 19:56:35 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -323,7 +323,7 @@ static int pdo_mysql_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_da
 								Z_STRLEN_P(param->parameter) = php_stream_copy_to_mem(stm,
 									&Z_STRVAL_P(param->parameter), PHP_STREAM_COPY_ALL, 0);
 							} else {
-								pdo_raise_impl_error(stmt->dbh, stmt, "HY105", "Expected a stream resource");
+								pdo_raise_impl_error(stmt->dbh, stmt, "HY105", "Expected a stream resource" TSRMLS_CC);
 								return 0;
 							}
 						}

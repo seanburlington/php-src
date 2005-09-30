@@ -1,3 +1,34 @@
+2005-09-29  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_1)
+      ext/standard/basic_functions.c:
+      Removed unnecessary component that accidentally snuck-in
+
+    * (PHP_4_4)
+      NEWS
+      NEWS
+      ext/standard/basic_functions.c
+      ext/standard/basic_functions.c
+      ext/standard/basic_functions.c:
+      MFH:
+      Fixed possible crash and/or memory corruption in
+      import_request_variables()
+      Fixed potential GLOBALS overwrite via import_request_variables().
+
+    * ext/standard/basic_functions.c:
+      Fixed possible crash and/or memory corruption in import_request_variables()
+      Fixed potential GLOBALS overwrite via import_request_variables().
+
+2005-09-29  Rolland Santimano  <rollandsantimano@yahoo.com>
+
+    * ext/standard/basic_functions.h
+      ext/standard/string.c:
+      - Unicode impl of strtok()
+
+    * ext/standard/string.c:
+      - Updated addslashes(): add codepoints directly rather than with
+      zend_codepoint_to_uchar()
+
 2005-09-28  Ilia Alshanetsky  <ilia@prohost.org>
 
     * (PHP_5_1)
@@ -12784,7 +12815,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2117 2005/09/29 05:41:36 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2118 2005/09/30 05:38:16 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -16185,7 +16216,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2117 2005/09/29 05:41:36 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2118 2005/09/30 05:38:16 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -16666,7 +16697,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2117 2005/09/29 05:41:36 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2118 2005/09/30 05:38:16 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -18140,7 +18171,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2117 2005/09/29 05:41:36 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2118 2005/09/30 05:38:16 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

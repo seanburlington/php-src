@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.488 2005/09/29 11:05:30 rolland Exp $ */
+/* $Id: string.c,v 1.489 2005/09/30 13:19:15 rolland Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2800,11 +2800,11 @@ PHP_FUNCTION(substr_replace)
 			if (tmp_repl && Z_TYPE_PP(str) != Z_TYPE_PP(tmp_repl)) {
 				str_type = zend_get_unified_string_type(2 TSRMLS_CC, Z_TYPE_PP(str), Z_TYPE_PP(tmp_repl));
 				if (str_type == (zend_uchar)-1) {
-					convert_to_explicit_type(str, IS_BINARY);
-					convert_to_explicit_type(tmp_repl, IS_BINARY);
+					convert_to_explicit_type_ex(str, IS_BINARY);
+					convert_to_explicit_type_ex(tmp_repl, IS_BINARY);
 				} else {
-					convert_to_explicit_type(str, str_type);
-					convert_to_explicit_type(tmp_repl, str_type);
+					convert_to_explicit_type_ex(str, str_type);
+					convert_to_explicit_type_ex(tmp_repl, str_type);
 				}
 			}
 			php_adjust_limits(str, &f, &l);
@@ -2881,11 +2881,11 @@ PHP_FUNCTION(substr_replace)
 			if (tmp_repl && Z_TYPE_PP(tmp_str) != Z_TYPE_PP(tmp_repl)) {
 				str_type = zend_get_unified_string_type(2 TSRMLS_CC, Z_TYPE_PP(tmp_str), Z_TYPE_PP(tmp_repl));
 				if (str_type == (zend_uchar)-1) {
-					convert_to_explicit_type(tmp_str, IS_BINARY);
-					convert_to_explicit_type(tmp_repl, IS_BINARY);
+					convert_to_explicit_type_ex(tmp_str, IS_BINARY);
+					convert_to_explicit_type_ex(tmp_repl, IS_BINARY);
 				} else {
-					convert_to_explicit_type(tmp_str, str_type);
-					convert_to_explicit_type(tmp_repl, str_type);
+					convert_to_explicit_type_ex(tmp_str, str_type);
+					convert_to_explicit_type_ex(tmp_repl, str_type);
 				}
 			}
 			php_adjust_limits(tmp_str, &f, &l);

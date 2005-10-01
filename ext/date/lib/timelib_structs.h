@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.13 2005/08/03 14:06:50 sniper Exp $ */
+/* $Id: timelib_structs.h,v 1.14 2005/10/01 15:07:20 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
@@ -149,7 +149,7 @@ typedef struct timelib_time {
 typedef struct _timelib_tz_lookup_table {
 	char       *name;
 	int         type;
-	int         value;
+	int         gmtoffset;
 	char       *full_tz_name;
 } timelib_tz_lookup_table;
 

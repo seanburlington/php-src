@@ -17,14 +17,14 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.59 2005/08/03 14:07:13 sniper Exp $ */
+/* $Id: php_gd.h,v 1.60 2005/10/02 18:01:50 pajoye Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
 
 #define HAVE_GDIMAGECREATEFROMPNG 1
 
-#if HAVE_LIBTTF|HAVE_LIBFREETYPE
+#if HAVE_LIBFREETYPE
 #define ENABLE_GD_TTF
 #endif
 

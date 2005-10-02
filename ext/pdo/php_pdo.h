@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo.h,v 1.10 2005/10/02 20:32:17 helly Exp $ */
+/* $Id: php_pdo.h,v 1.11 2005/10/02 20:36:02 helly Exp $ */
 
 #ifndef PHP_PDO_H
 #define PHP_PDO_H
@@ -24,7 +24,7 @@
 #include "zend.h"
 
 #if PHP_MAJOR_VERSION > 5 || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1)
-#define can_handle_soft_dependency_on_SPL
+#define can_handle_soft_dependency_on_SPL 1
 #endif
 
 extern zend_module_entry pdo_module_entry;

@@ -1,3 +1,24 @@
+2005-10-01  Greg Beaver  <greg@chiaraquartet.net>
+
+    * (PHP_5_1)
+      pear/Makefile.frag:
+      set error_reporting to E_ALL in Makefile.frag
+
+2005-10-01  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ext/simplexml/config.m4:
+      - MFB spl/simplexml integration (when sxe is shared)
+
+    * (PHP_5_1)
+      ext/simplexml/config.m4:
+      - Allow xpl/simplexml integration with simplexml being built shared
+
+2005-10-01  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * (PHP_5_1)
+      NEWS:
+      fix bfn
+
 2005-09-30  Pierre-Alain Joye  <pierre.dev@gmail.com>
 
     * (PHP_5_1)
@@ -12852,7 +12873,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2119 2005/10/01 05:42:39 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2120 2005/10/02 05:37:49 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -16253,7 +16274,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2119 2005/10/01 05:42:39 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2120 2005/10/02 05:37:49 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -16734,7 +16755,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2119 2005/10/01 05:42:39 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2120 2005/10/02 05:37:49 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -18208,7 +18229,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2119 2005/10/01 05:42:39 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2120 2005/10/02 05:37:49 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

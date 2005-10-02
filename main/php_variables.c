@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_variables.c,v 1.45.2.13.2.3 2005/09/28 22:34:02 iliaa Exp $ */
+/* $Id: php_variables.c,v 1.45.2.13.2.4 2005/10/02 11:33:27 rrichards Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -74,7 +74,7 @@ PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_arra
 	} else if (PG(register_globals)) {
 		symtable1 = EG(active_symbol_table);
 		/* GLOBALS hijack attempt, reject parameter */
-		if (!strncmp("GLOBALS", var, sizeof("GLOBALS")) || !strncmp("GLOBALS", var, sizeof("GLOBALS[")-1) {
+		if (!strncmp("GLOBALS", var, sizeof("GLOBALS")) || !strncmp("GLOBALS", var, sizeof("GLOBALS[")-1)) {
 			return;
 		}
 	}

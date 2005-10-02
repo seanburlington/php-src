@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.68 2005/09/24 14:19:24 edink Exp $ */
+/* $Id: php_pdo_driver.h,v 1.69 2005/10/02 18:32:05 helly Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -475,6 +475,10 @@ struct _pdo_dbh_t {
 	HashTable *cls_methods[PDO_DBH_DRIVER_METHOD_KIND__MAX];
 
 	pdo_driver_t *driver;
+	
+	zend_class_entry *def_stmt_ce;
+	
+	zval *def_stmt_ctor_args;
 };
 
 /* describes a column */

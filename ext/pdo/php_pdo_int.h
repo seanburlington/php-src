@@ -18,13 +18,14 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_int.h,v 1.17.2.2 2005/09/24 14:18:01 edink Exp $ */
+/* $Id: php_pdo_int.h,v 1.17.2.3 2005/10/02 20:38:18 helly Exp $ */
 
 /* Stuff private to the PDO extension and not for consumption by PDO drivers
  * */
 
 extern HashTable pdo_driver_hash;
 extern zend_class_entry *pdo_exception_ce;
+PDO_API zend_class_entry *php_pdo_get_exception_base(int root TSRMLS_DC);
 int php_pdo_list_entry(void);
 
 void pdo_dbh_init(TSRMLS_D);

@@ -16,12 +16,16 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo.h,v 1.7.2.3 2005/10/01 02:48:11 wez Exp $ */
+/* $Id: php_pdo.h,v 1.7.2.4 2005/10/02 20:38:18 helly Exp $ */
 
 #ifndef PHP_PDO_H
 #define PHP_PDO_H
 
 #include "zend.h"
+
+#if PHP_MAJOR_VERSION > 5 || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 1)
+#define can_handle_soft_dependency_on_SPL 1
+#endif
 
 extern zend_module_entry pdo_module_entry;
 #define phpext_pdo_ptr &pdo_module_entry

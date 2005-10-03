@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.2 2005/08/31 17:00:46 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.151.2.3 2005/10/03 16:05:08 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1383,11 +1383,6 @@ SXE_METHOD(__construct)
 /* }}} */
 
 
-typedef struct {
-	zend_object_iterator  intern;
-	php_sxe_object        *sxe;
-} php_sxe_iterator;
-
 static void php_sxe_iterator_dtor(zend_object_iterator *iter TSRMLS_DC);
 static int php_sxe_iterator_valid(zend_object_iterator *iter TSRMLS_DC);
 static void php_sxe_iterator_current_data(zend_object_iterator *iter, zval ***data TSRMLS_DC);
@@ -1704,6 +1699,7 @@ PHP_MINIT_FUNCTION(simplexml)
 	sxe.create_object = sxe_object_new;
 	sxe_class_entry = zend_register_internal_class(&sxe TSRMLS_CC);
 	sxe_class_entry->get_iterator = php_sxe_get_iterator;
+	sxe_class_entry->iterator_funcs.funcs = &php_sxe_iterator_funcs;
 	zend_class_implements(sxe_class_entry TSRMLS_CC, 1, zend_ce_traversable);
 	sxe_object_handlers.get_method = zend_get_std_object_handlers()->get_method;
 	sxe_object_handlers.get_constructor = zend_get_std_object_handlers()->get_constructor;
@@ -1742,7 +1738,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.2 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.3 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

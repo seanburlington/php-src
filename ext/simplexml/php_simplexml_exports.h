@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml_exports.h,v 1.1 2004/01/18 23:35:12 helly Exp $ */
+/* $Id: php_simplexml_exports.h,v 1.3.2.1 2005/10/03 16:05:08 helly Exp $ */
 
 #ifndef PHP_SIMPLEXML_EXPORTS_H
 #define PHP_SIMPLEXML_EXPORTS_H
@@ -35,7 +35,7 @@
 		__n = (__s)->node->node; \
 	} else { \
 		__n = NULL; \
-		php_error(E_WARNING, "Node no longer exists"); \
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Node no longer exists"); \
 	} \
 }
 
@@ -51,6 +51,11 @@ php_sxe_fetch_object(zval *object TSRMLS_DC)
 
 ZEND_API void php_sxe_reset_iterator(php_sxe_object *sxe TSRMLS_DC);
 ZEND_API void php_sxe_move_forward_iterator(php_sxe_object *sxe TSRMLS_DC);
+
+typedef struct {
+	zend_object_iterator  intern;
+	php_sxe_object        *sxe;
+} php_sxe_iterator;
 
 #endif /* PHP_SIMPLEXML_EXPORTS_H */
 

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.4 2005/09/12 09:58:50 dmitry Exp $ */
+/* $Id: array.c,v 1.308.2.5 2005/10/03 14:04:16 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -1394,6 +1394,10 @@ PHP_FUNCTION(extract)
 				/* break omitted intentionally */
 
 			case EXTR_OVERWRITE:
+				/* GLOBALS protection */
+				if (var_exists && !strcmp(var_name, "GLOBALS")) {
+					break;
+				}
 				smart_str_appendl(&final_name, var_name, var_name_len);
 				break;
 

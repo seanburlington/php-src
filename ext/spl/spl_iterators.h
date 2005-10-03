@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.22 2005/09/24 23:48:26 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.23 2005/10/03 09:39:35 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -64,13 +64,15 @@ typedef enum {
 
 enum {
 	/* public */
-	CIT_CALL_TOSTRING   = 0x00000001,
-	CIT_CATCH_GET_CHILD = 0x00000002,
-	CIT_FULL_CACHE      = 0x00000004,
-	CIT_PUBLIC          = 0x00FFFFFF,
+	CIT_CALL_TOSTRING        = 0x00000001,
+	CIT_CATCH_GET_CHILD      = 0x00000002,
+	CIT_TOSTRING_USE_KEY     = 0x00000004,
+	CIT_TOSTRING_USE_CURRENT = 0x00000008,
+	CIT_FULL_CACHE           = 0x00000010,
+	CIT_PUBLIC               = 0x0000FFFF,
 	/* private */
-	CIT_VALID           = 0x01000000,
-	CIT_HAS_CHILDREN    = 0x02000000,
+	CIT_VALID                = 0x00010000,
+	CIT_HAS_CHILDREN         = 0x00020000
 };
 
 typedef struct _spl_dual_it_object {
@@ -96,7 +98,7 @@ typedef struct _spl_dual_it_object {
 			long             count;
 		} limit;
 		struct {
-			int              flags; /* CIT_VALID, CIT_CALL_TOSTRING, CIT_CATCH_GET_CHILD, ... */
+			int              flags; /* CIT_* */
 			zval             *zstr;
 			zval             *zchildren;
 			zval             *zcache;

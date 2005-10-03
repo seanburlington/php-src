@@ -1,3 +1,31 @@
+2005-10-02  Pierre-Alain Joye  <pierre.dev@gmail.com>
+
+    * ext/gd/config.w32:
+      - remove gdttf
+
+    * ext/gd/gd.c
+      ext/gd/gdttf.c
+      ext/gd/gdttf.h:
+      - ft1 support remove, #2, gdttf.*
+
+    * ext/gd/config.m4
+      ext/gd/gd.c
+      ext/gd/gdcache.c
+      ext/gd/php_gd.h
+      ext/gd/libgd/gdcache.c:
+      - drop freetype1 support
+
+2005-10-02  Rob Richards  <rrichards@ctindustries.net>
+
+    * (PHP_4_4)
+      main/php_variables.c:
+      fix build - missing closing parenthesis
+
+2005-10-02  Andrei Zmievski  <andrei@gravitonic.com>
+
+    * ZendEngine2/zend_operators.h:
+      -** empty log message ***
+
 2005-10-01  Greg Beaver  <greg@chiaraquartet.net>
 
     * (PHP_5_1)
@@ -12873,7 +12901,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2120 2005/10/02 05:37:49 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2121 2005/10/03 05:36:12 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -16274,7 +16302,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2120 2005/10/02 05:37:49 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2121 2005/10/03 05:36:12 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -16755,7 +16783,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2120 2005/10/02 05:37:49 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2121 2005/10/03 05:36:12 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -18229,7 +18257,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2120 2005/10/02 05:37:49 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2121 2005/10/03 05:36:12 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

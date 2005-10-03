@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.9 2005/10/03 00:55:23 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.10 2005/10/03 03:54:06 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1356,6 +1356,9 @@ static void dbh_free(pdo_dbh_t *dbh TSRMLS_DC)
 
 	if (dbh->def_stmt_ctor_args) {
 		zval_ptr_dtor(&dbh->def_stmt_ctor_args);
+	}
+	if (dbh->cls_methods) {
+		zend_hash_destroy(&dbh->cls_methods);
 	}
 
 	pefree(dbh, dbh->is_persistent);

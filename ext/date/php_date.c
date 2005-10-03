@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.8 2005/10/03 11:34:51 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.9 2005/10/03 23:37:10 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -24,6 +24,7 @@
 #include "php_globals.h"
 #include "php_ini.h"
 #include "ext/standard/info.h"
+#include "ext/standard/php_versioning.h"
 #include "php_date.h"
 #include "lib/timelib.h"
 #include <time.h>

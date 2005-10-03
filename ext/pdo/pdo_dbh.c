@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.8 2005/10/02 22:11:17 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.9 2005/10/03 00:55:23 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1226,7 +1226,7 @@ PDO_API void php_pdo_declare_stringl_constant(const char *const_name,
 }
 
 PDO_API void php_pdo_declare_long_constant(const char *const_name,
-		unsigned int name_len, long value TSRMLS_DC)
+		size_t name_len, long value TSRMLS_DC)
 {
 #if PHP_MAJOR_VERSION > 5 || PHP_MINOR_VERSION >= 1
 	zend_declare_class_constant_long(pdo_dbh_ce, (char*)const_name, name_len, value TSRMLS_CC);

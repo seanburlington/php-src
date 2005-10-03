@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.71.2.2 2005/09/18 17:15:03 helly Exp $ */
+/* $Id: spl_array.c,v 1.71.2.3 2005/10/03 09:14:30 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1185,6 +1185,10 @@ SPL_METHOD(Array, getChildren)
 
 	if (zend_hash_get_current_data_ex(aht, (void **) &entry, &intern->pos) == FAILURE) {
 		return;
+	}
+	
+	if (Z_TYPE_PP(entry) == IS_OBJECT && instanceof_function(Z_OBJCE_PP(entry), Z_OBJCE_P(getThis()) TSRMLS_CC)) {
+		RETURN_ZVAL(*entry, 0, 0);
 	}
 
 	spl_instantiate_arg_ex1(Z_OBJCE_P(getThis()), &return_value, 0, *entry TSRMLS_CC);

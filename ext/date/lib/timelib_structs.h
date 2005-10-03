@@ -16,12 +16,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib_structs.h,v 1.13.2.1 2005/10/01 15:04:07 derick Exp $ */
+/* $Id: timelib_structs.h,v 1.13.2.2 2005/10/03 11:17:24 derick Exp $ */
 
 #ifndef __TIMELIB_STRUCTS_H__
 #define __TIMELIB_STRUCTS_H__
 
-#include <timelib_config.h>
+#include "timelib_config.h"
 
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
@@ -157,6 +157,13 @@ typedef struct _timelib_tzdb_index_entry {
 	char *id;
 	unsigned int pos;
 } timelib_tzdb_index_entry;
+
+typedef struct _timelib_tzdb {
+	char                     *version;
+	int                       index_size;
+	timelib_tzdb_index_entry *index;
+	char                     *data;
+} timelib_tzdb;
 
 #define TIMELIB_ZONETYPE_OFFSET 1
 #define TIMELIB_ZONETYPE_ABBR   2

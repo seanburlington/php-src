@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_collection.c,v 1.4 2005/09/26 16:48:24 tony2001 Exp $ */
+/* $Id: oci8_collection.c,v 1.5 2005/10/03 13:02:14 tony2001 Exp $ */
 
 
 
@@ -601,7 +601,9 @@ void php_oci_collection_close(php_oci_collection *collection TSRMLS_DC)
 			php_oci_error(connection->err, connection->errcode TSRMLS_CC);
 		}
 	}
-
+	
+	zend_list_delete(collection->connection->rsrc_id);
+	
 	efree(collection);
 	return;
 } /* }}} */

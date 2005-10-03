@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_lob.c,v 1.4 2005/09/25 23:46:28 tony2001 Exp $ */
+/* $Id: oci8_lob.c,v 1.5 2005/10/03 13:02:14 tony2001 Exp $ */
 
 
 
@@ -470,6 +470,8 @@ void php_oci_lob_free (php_oci_descriptor *descriptor TSRMLS_DC)
 	}
 
 	PHP_OCI_CALL(OCIDescriptorFree, (descriptor->descriptor, descriptor->type));
+
+	zend_list_delete(descriptor->connection->rsrc_id);
 	efree(descriptor);
 } /* }}} */
 

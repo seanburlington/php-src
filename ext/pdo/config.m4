@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.15 2005/06/14 13:09:23 sniper Exp $
+dnl $Id: config.m4,v 1.16 2005/10/04 07:48:43 helly Exp $
 dnl config.m4 for extension pdo
 dnl vim:se ts=2 sw=2 et:
 
@@ -51,6 +51,7 @@ for more detail on this issue.
     esac
   fi
   PHP_NEW_EXTENSION(pdo, pdo.c pdo_dbh.c pdo_stmt.c pdo_sql_parser.c pdo_sqlstate.c, $ext_shared)
+  PHP_ADD_EXTENSION_DEP(pdo, spl, true) 
   
   ifdef([PHP_INSTALL_HEADERS],
   [

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.11 2005/10/04 13:42:52 derick Exp $ */
+/* $Id: filter.c,v 1.12 2005/10/04 14:47:30 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -251,7 +251,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.11 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.12 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -325,7 +325,7 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 
 	/* Make a copy of the variable name, as php_register_variable_ex seems to
 	 * modify it */
-	orig_var = estrdup(var);
+	orig_var = var;
 
 	/* Store the RAW variable internally */
 	/* FIXME: Should not use php_register_variable_ex as that also registers
@@ -566,6 +566,35 @@ PHP_FUNCTION(input_filters_list)
  */
 PHP_FUNCTION(filter_data)
 {
+	long        filter = FS_DEFAULT;
+	char       *charset = NULL;
+	int         charset_len;
+	zval       *var, *flags = NULL;
+	int         filter_flags = 0;
+	zval       *options = NULL;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z/l|zs", &var, &filter, &flags, &charset, &charset_len) == FAILURE) {
+		return;
+	}
+
+	if (flags) {
+		switch (Z_TYPE_P(flags)) {
+			case IS_ARRAY:
+				options = flags;
+				break;
+
+			case IS_STRING:
+			case IS_BOOL:
+			case IS_LONG:
+				convert_to_long(flags);
+				filter_flags = Z_LVAL_P(flags);
+				options = NULL;
+				break;
+		}
+	}
+
+	php_zval_filter_recursive(var, filter, filter_flags, options, charset);
+	RETURN_ZVAL(var, 1, 0);
 }
 /* }}} */
 

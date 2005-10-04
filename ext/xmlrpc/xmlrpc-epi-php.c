@@ -37,7 +37,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -51,7 +51,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xmlrpc-epi-php.c,v 1.37 2004/01/08 08:17:47 andi Exp $ */
+/* $Id: xmlrpc-epi-php.c,v 1.39.2.1 2005/10/04 11:18:02 tony2001 Exp $ */
 
 /**********************************************************************
 * BUGS:                                                               *
@@ -520,28 +520,41 @@ static XMLRPC_VALUE PHP_to_XMLRPC_worker (const char* key, zval* in_val, int dep
                   unsigned long num_index;
                   zval** pIter;
                   char* my_key;
+                  HashTable *ht = NULL;
 
+                  ht = HASH_OF(val);
+                  if (ht && ht->nApplyCount > 1) {
+                      php_error_docref(NULL TSRMLS_CC, E_ERROR, "XML-RPC doesn't support circular references");
+                      return NULL;
+                  }
+                  
                   convert_to_array(val);
-
                   xReturn = XMLRPC_CreateVector(key, determine_vector_type(Z_ARRVAL_P(val)));
 
                   zend_hash_internal_pointer_reset(Z_ARRVAL_P(val));
-                  while(1) {
+                  while(zend_hash_get_current_data(Z_ARRVAL_P(val), (void**)&pIter) == SUCCESS) {
                      int res = my_zend_hash_get_current_key(Z_ARRVAL_P(val), &my_key, &num_index);
-                     if(res == HASH_KEY_IS_LONG) {
-                        if(zend_hash_get_current_data(Z_ARRVAL_P(val), (void**)&pIter) == SUCCESS) {
-                           XMLRPC_AddValueToVector(xReturn, PHP_to_XMLRPC_worker(0, *pIter, depth++));
-                        }
+                    
+                     switch (res) {
+                         case HASH_KEY_NON_EXISTANT:
+                             break;
+                         case HASH_KEY_IS_STRING:
+                         case HASH_KEY_IS_LONG:
+                              ht = HASH_OF(*pIter);
+                             if (ht) {
+                                 ht->nApplyCount++;
+                             }
+                             if (res == HASH_KEY_IS_LONG) {
+                                 XMLRPC_AddValueToVector(xReturn, PHP_to_XMLRPC_worker(0, *pIter, depth++));
+                             }
+                             else {
+                                 XMLRPC_AddValueToVector(xReturn, PHP_to_XMLRPC_worker(my_key, *pIter, depth++));
+                             }
+                             if (ht) {
+                                 ht->nApplyCount--;
+                             }
+                             break;
                      }
-                     else if(res == HASH_KEY_NON_EXISTANT) {
-                        break;
-                     }
-                     else if(res == HASH_KEY_IS_STRING) {
-                        if(zend_hash_get_current_data(Z_ARRVAL_P(val), (void**)&pIter) == SUCCESS) {
-                           XMLRPC_AddValueToVector(xReturn, PHP_to_XMLRPC_worker(my_key, *pIter, depth++));
-                        }
-                     }
-
                      zend_hash_move_forward(Z_ARRVAL_P(val));
                   }
                }
@@ -666,6 +679,10 @@ PHP_FUNCTION(xmlrpc_encode_request)
 			}
 			XMLRPC_RequestFree(xRequest, 1);
 		}
+	}
+	
+	if (out.xmlrpc_out.xml_elem_opts.encoding != ENCODING_DEFAULT) {
+		efree(out.xmlrpc_out.xml_elem_opts.encoding);
 	}
 }
 /* }}} */

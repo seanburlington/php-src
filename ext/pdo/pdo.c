@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.57.2.9 2005/10/05 13:51:46 derick Exp $ */
+/* $Id: pdo.c,v 1.57.2.10 2005/10/05 22:17:38 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -302,7 +302,7 @@ PDO_API char *php_pdo_int64_to_str(pdo_int64_t i64 TSRMLS_DC)
 /* {{{ PHP_MINIT_FUNCTION */
 PHP_MINIT_FUNCTION(pdo)
 {
-	zend_class_entry ce, *pce;
+	zend_class_entry ce;
 	
 	spl_ce_RuntimeException = NULL;
 

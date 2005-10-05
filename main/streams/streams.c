@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.87 2005/08/22 14:48:25 dmitry Exp $ */
+/* $Id: streams.c,v 1.88 2005/10/05 17:18:06 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -855,6 +855,8 @@ PHPAPI void *_php_stream_u_read(php_stream *stream, void *buf, int32_t *pnum_byt
 	*pnum_chars = num_chars;
 	*pis_unicode = is_unicode;
 
+	stream->position += num_bytes;
+	
 	if (num_chars == 0 && grow_mode) {
 		efree(buf);
 		buf = NULL;

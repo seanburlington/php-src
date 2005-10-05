@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.88 2005/10/05 19:12:43 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.89 2005/10/05 21:57:45 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -2299,9 +2299,11 @@ PHP_MINIT_FUNCTION(spl_iterators)
 	REGISTER_SPL_ITERATOR(CachingIterator);
 	REGISTER_SPL_IMPLEMENTS(CachingIterator, ArrayAccess);
 
-	REGISTER_SPL_CLASS_CONST_LONG(CachingIterator, "CALL_TOSTRING",    CIT_CALL_TOSTRING); 
-	REGISTER_SPL_CLASS_CONST_LONG(CachingIterator, "CATCH_GET_CHILD",  CIT_CATCH_GET_CHILD); 
-	REGISTER_SPL_CLASS_CONST_LONG(CachingIterator, "FULL_CACHE",       CIT_FULL_CACHE); 
+	REGISTER_SPL_CLASS_CONST_LONG(CachingIterator, "CALL_TOSTRING",        CIT_CALL_TOSTRING); 
+	REGISTER_SPL_CLASS_CONST_LONG(CachingIterator, "CATCH_GET_CHILD",      CIT_CATCH_GET_CHILD); 
+	REGISTER_SPL_CLASS_CONST_LONG(CachingIterator, "TOSTRING_USE_KEY",     CIT_TOSTRING_USE_KEY);
+	REGISTER_SPL_CLASS_CONST_LONG(CachingIterator, "TOSTRING_USE_CURRENT", CIT_TOSTRING_USE_CURRENT);
+	REGISTER_SPL_CLASS_CONST_LONG(CachingIterator, "FULL_CACHE",           CIT_FULL_CACHE); 
 
 	REGISTER_SPL_SUB_CLASS_EX(RecursiveCachingIterator, CachingIterator, spl_dual_it_new, spl_funcs_RecursiveCachingIterator);
 	REGISTER_SPL_IMPLEMENTS(RecursiveCachingIterator, RecursiveIterator);

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.161 2005/10/03 16:04:50 helly Exp $ */
+/* $Id: simplexml.c,v 1.162 2005/10/05 19:12:42 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1040,19 +1040,14 @@ cast_object(zval *object, int type, char *contents TSRMLS_DC)
 /* {{{ sxe_object_cast()
  */
 static int
-sxe_object_cast(zval *readobj, zval *writeobj, int type, int should_free TSRMLS_DC)
+sxe_object_cast(zval *readobj, zval *writeobj, int type TSRMLS_DC)
 {
 	php_sxe_object *sxe;
 	char           *contents = NULL;
 	xmlNodePtr	    node;
-	zval free_obj;
 	int rv;
 
 	sxe = php_sxe_fetch_object(readobj TSRMLS_CC);
-
-	if (should_free) {
-		free_obj = *writeobj;
-	}
 
 	if (sxe->iter.type != SXE_ITER_NONE) {
 		node = php_sxe_get_first_node(sxe, NULL TSRMLS_CC);
@@ -1077,9 +1072,6 @@ sxe_object_cast(zval *readobj, zval *writeobj, int type, int should_free TSRMLS_
 
 	if (contents) {
 		xmlFree(contents);
-	}
-	if (should_free) {
-		zval_dtor(&free_obj);
 	}
 	return rv;
 }
@@ -1765,7 +1757,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.161 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.162 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

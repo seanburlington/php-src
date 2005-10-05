@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.14 2005/10/05 19:41:57 rrichards Exp $ */
+/* $Id: php_xmlreader.c,v 1.15 2005/10/05 19:52:58 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -944,7 +944,7 @@ Sets the string that the the XMLReader will parse. */
 PHP_METHOD(xmlreader, XML)
 {
 	zval *id;
-	long source_len = 0, encoding_len = 0;
+	int source_len = 0, encoding_len = 0;
 	long options = 0;
 	xmlreader_object *intern;
 	char *source, *uri = NULL, *encoding = NULL;

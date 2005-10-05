@@ -16,12 +16,13 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.17.2.3 2005/10/03 11:17:22 derick Exp $ */
+/* $Id: php_date.h,v 1.17.2.4 2005/10/05 08:20:44 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
 
 #include "lib/timelib.h"
+#include "Zend/zend_hash.h"
 
 extern zend_module_entry date_module_entry;
 #define phpext_date_ptr &date_module_entry
@@ -76,8 +77,9 @@ PHP_MSHUTDOWN_FUNCTION(date);
 PHP_MINFO_FUNCTION(date);
 
 ZEND_BEGIN_MODULE_GLOBALS(date)
-	char *default_timezone;
-	char *timezone;
+	char      *default_timezone;
+	char      *timezone;
+	HashTable  tzcache;
 ZEND_END_MODULE_GLOBALS(date)
 
 #ifdef ZTS

@@ -1,3 +1,44 @@
+2005-10-04  Antony Dovgal  <antony@zend.com>
+
+    * (PHP_5_0)
+      NEWS
+      NEWS
+      ext/standard/array.c
+      ext/standard/array.c:
+      MFH: fix #34723 (array_count_values() strips leading zeroes)
+
+    * ext/standard/array.c:
+      fix #34723 (array_count_values() strips leading zeroes)
+
+    * (PHP_5_0)
+      ext/oci8/oci8.c
+      ext/oci8/oci8.c:
+      fix #34731, patch by novicky at aarongroup dot cz
+
+    * (PHP_4_4)
+      NEWS
+      ext/xmlrpc/xmlrpc-epi-php.c
+      ext/xmlrpc/xmlrpc-epi-php.c:
+      MFB5.1: fix #32179 (xmlrpc_encode() segfaults with recursive references)
+
+    * (PHP_5_0)
+      NEWS
+      ext/xmlrpc/xmlrpc-epi-php.c:
+      MHB5.1: fix #32179 (xmlrpc_encode() segfaults with recursive references)
+
+    * (PHP_5_1)
+      NEWS
+      ext/xmlrpc/xmlrpc-epi-php.c:
+      fix #32179 (xmlrpc_encode() segfaults with recursive references)
+
+2005-10-04  Dmitry Stogov  <dmitry@zend.com>
+
+    * ext/standard/tests/strings/bug21453.phpt:
+      Unicode support
+
+    * ext/standard/string.c:
+      Fixed compilation error (gcc-4).
+
 2005-10-03  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * ZendEngine2/zend_execute.h:
@@ -13018,7 +13059,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2122 2005/10/04 05:38:22 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2123 2005/10/05 05:43:31 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -16419,7 +16460,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2122 2005/10/04 05:38:22 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2123 2005/10/05 05:43:31 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -16900,7 +16941,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2122 2005/10/04 05:38:22 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2123 2005/10/05 05:43:31 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -18374,7 +18415,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2122 2005/10/04 05:38:22 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2123 2005/10/05 05:43:31 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

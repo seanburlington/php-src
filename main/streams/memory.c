@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: memory.c,v 1.6 2004/01/08 08:17:59 andi Exp $ */
+/* $Id: memory.c,v 1.8.2.1 2005/10/06 21:31:25 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -237,7 +237,7 @@ PHPAPI php_stream *_php_stream_memory_open(int mode, char *buf, size_t length ST
 	if ((stream = php_stream_memory_create_rel(mode)) != NULL) {
 		ms = stream->abstract;
 		
-		if (mode == TEMP_STREAM_READONLY) {
+		if (mode == TEMP_STREAM_READONLY || mode == TEMP_STREAM_TAKE_BUFFER) {
 			/* use the buffer directly */
 			ms->data = buf;
 			ms->fsize = length;
@@ -313,7 +313,13 @@ static size_t php_stream_temp_read(php_stream *stream, char *buf, size_t count T
 	ts = stream->abstract;
 	assert(ts != NULL);
 
-	return php_stream_read(ts->innerstream, buf, count);
+	size_t got = php_stream_read(ts->innerstream, buf, count);
+	
+	if (!got) {
+		stream->eof |= ts->innerstream->eof;
+	}
+	
+	return got;
 }
 /* }}} */
 

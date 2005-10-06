@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.236 2005/10/06 09:39:32 helly Exp $ */
+/* $Id: run-tests.php,v 1.237 2005/10/06 19:51:03 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -171,6 +171,7 @@ PHP_SAPI    : " . PHP_SAPI . "
 PHP_VERSION : " . phpversion() . "
 ZEND_VERSION: " . zend_version() . "
 PHP_OS      : " . PHP_OS . " - " . php_uname() . "
+UNICODE     : " . (ini_get("unicode_semantics") ? "ON" : "OFF") . "
 INI actual  : " . realpath(get_cfg_var("cfg_file_path")) . "
 More .INIs  : " . (function_exists(\'php_ini_scanned_files\') ? str_replace("\n","", php_ini_scanned_files()) : "** not determined **"); ?>';
 	save_text($info_file, $php_info);

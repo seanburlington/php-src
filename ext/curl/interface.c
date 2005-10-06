@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.62.2.1 2005/10/05 14:35:30 iliaa Exp $ */
+/* $Id: interface.c,v 1.62.2.2 2005/10/06 20:47:41 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -65,7 +65,7 @@ static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 #define CAAZ(s, v) add_assoc_zval_ex(return_value, s, sizeof(s), (zval *) v);
 
 #define PHP_CURL_CHECK_OPEN_BASEDIR(str, len)													\
-	if (PG(open_basedir) && *PG(open_basedir) &&                                                \
+	if (((PG(open_basedir) && *PG(open_basedir)) || PG(safe_mode)) &&                                                \
 	    strncasecmp(str, "file://", sizeof("file://") - 1) == 0)								\
 	{ 																							\
 		php_url *tmp_url; 																		\

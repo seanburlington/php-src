@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_wddx_api.h,v 1.25 2005/10/05 22:35:11 rrichards Exp $ */
+/* $Id: php_wddx_api.h,v 1.26 2005/10/06 18:47:47 rrichards Exp $ */
 
 #ifndef PHP_WDDX_API_H
 #define PHP_WDDX_API_H
@@ -46,9 +46,6 @@
 #define WDDX_STRUCT_E			"</struct>"
 #define WDDX_VAR_S				"<var name='%s'>"
 #define WDDX_VAR_E				"</var>"
-
-#define WDDX_NUMBER_LEN			17
-#define WDDX_VAR_S_LEN			13
 
 #define php_wddx_add_chunk(packet, str)	smart_str_appends(packet, str)
 #define php_wddx_add_chunk_ex(packet, str, len)	smart_str_appendl(packet, str, len)

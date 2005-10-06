@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: memory.c,v 1.6 2004/01/08 08:17:59 andi Exp $ */
+/* $Id: memory.c,v 1.6.2.1 2005/10/06 21:31:15 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -313,7 +313,13 @@ static size_t php_stream_temp_read(php_stream *stream, char *buf, size_t count T
 	ts = stream->abstract;
 	assert(ts != NULL);
 
-	return php_stream_read(ts->innerstream, buf, count);
+	size_t got = php_stream_read(ts->innerstream, buf, count);
+	
+	if (!got) {
+		stream->eof |= ts->innerstream->eof;
+	}
+	
+	return got;
 }
 /* }}} */
 

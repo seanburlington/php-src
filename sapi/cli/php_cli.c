@@ -214,7 +214,10 @@ static int sapi_cli_ub_write(const char *str, uint str_length TSRMLS_DC)
 
 static void sapi_cli_flush(void *server_context)
 {
-	if (fflush(stdout)==EOF) {
+	/* Ignore EBADF here, it's caused by the fact that STDIN/STDOUT/STDERR streams
+	 * are/could be closed before fflush() is called.
+	 */
+	if (fflush(stdout)==EOF && errno!=EBADF) {
 		php_handle_aborted_connection();
 	}
 }
@@ -436,20 +439,23 @@ static void cli_register_file_handles(TSRMLS_D)
 	
 	ic.value = *zin;
 	ic.flags = CONST_CS;
-	ic.name = zend_strndup("STDIN", 6);
-	ic.name_len = 6;
+	ic.name = zend_strndup(ZEND_STRL("STDIN"));
+	ic.name_len = sizeof("STDIN");
+	ic.module_number = 0;
 	zend_register_constant(&ic TSRMLS_CC);
 
 	oc.value = *zout;
 	oc.flags = CONST_CS;
-	oc.name = zend_strndup("STDOUT", 7);
-	oc.name_len = 7;
+	oc.name = zend_strndup(ZEND_STRL("STDOUT"));
+	oc.name_len = sizeof("STDOUT");
+	oc.module_number = 0;
 	zend_register_constant(&oc TSRMLS_CC);
 
 	ec.value = *zerr;
 	ec.flags = CONST_CS;
-	ec.name = zend_strndup("STDERR", 7);
-	ec.name_len = 7;
+	ec.name = zend_strndup(ZEND_STRL("STDERR"));
+	ec.name_len = sizeof("STDERR");
+	ec.module_number = 0;
 	zend_register_constant(&ec TSRMLS_CC);
 
 	FREE_ZVAL(zin);
@@ -617,8 +623,9 @@ int main(int argc, char *argv[])
 				php_output_activate(TSRMLS_C);
 				php_cli_usage(argv[0]);
 				php_end_ob_buffers(1 TSRMLS_CC);
-				exit_status=1;
-				goto err;
+				exit_status=0;
+				zend_ini_deactivate(TSRMLS_C);
+				goto out_err;
 
 
 			case 'i': /* php info & quit */
@@ -627,7 +634,7 @@ int main(int argc, char *argv[])
 				}
 				php_print_info(0xFFFFFFFF TSRMLS_CC);
 				php_end_ob_buffers(1 TSRMLS_CC);
-				exit_status=1;
+				exit_status=0;
 				goto out;
 
 			case 'm': /* list compiled in modules */
@@ -639,8 +646,9 @@ int main(int argc, char *argv[])
 				print_extensions(TSRMLS_C);
 				php_printf("\n");
 				php_end_ob_buffers(1 TSRMLS_CC);
-				exit_status=1;
-				goto err;
+				exit_status=0;
+				zend_ini_deactivate(TSRMLS_C);
+				goto out_err;
 
 			case 'v': /* show php version & quit */
 				if (php_request_startup(TSRMLS_C)==FAILURE) {
@@ -652,7 +660,7 @@ int main(int argc, char *argv[])
 				php_printf("PHP %s (%s) (built: %s %s)\nCopyright (c) 1997-2004 The PHP Group\n%s", PHP_VERSION, sapi_module.name, __DATE__, __TIME__, get_zend_version());
 #endif
 				php_end_ob_buffers(1 TSRMLS_CC);
-				exit_status=1;
+				exit_status=0;
 				goto out;
 
 			default:

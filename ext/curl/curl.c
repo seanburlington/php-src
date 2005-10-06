@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.30.2.1 2005/10/05 14:34:36 iliaa Exp $ */
+/* $Id: curl.c,v 1.124.2.30.2.2 2005/10/06 20:44:55 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -66,7 +66,7 @@ static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 #define CAAZ(s, v) add_assoc_zval_ex(return_value, s, sizeof(s), (zval *) v);
 
 #define PHP_CURL_CHECK_OPEN_BASEDIR(str, len)													\
-	if (PG(open_basedir) && *PG(open_basedir) &&                                                \
+	if (((PG(open_basedir) && *PG(open_basedir)) || PG(safe_mode)) &&                                                \
 	    strncasecmp(str, "file://", sizeof("file://") - 1) == 0)								\
 	{ 																							\
 		php_url *tmp_url; 																		\

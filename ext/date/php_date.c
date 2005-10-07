@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.58 2005/10/05 18:38:30 derick Exp $ */
+/* $Id: php_date.c,v 1.59 2005/10/07 13:33:13 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -280,16 +280,16 @@ PHP_MINFO_FUNCTION(date)
 /* }}} */
 
 /* {{{ Timezone Cache functions */
-static timelib_tzinfo *php_date_parse_tzfile(char *tzname, timelib_tzdb *tzdb TSRMLS_DC)
+static timelib_tzinfo *php_date_parse_tzfile(char *formal_tzname, timelib_tzdb *tzdb TSRMLS_DC)
 {
 	timelib_tzinfo *tzi, **ptzi;
 
-	if (zend_hash_find(&DATEG(tzcache), tzname, strlen(tzname) + 1, (void **) &ptzi) == SUCCESS) {
+	if (zend_hash_find(&DATEG(tzcache), formal_tzname, strlen(formal_tzname) + 1, (void **) &ptzi) == SUCCESS) {
 		return *ptzi;
 	}
 
-	tzi = timelib_parse_tzfile(tzname, tzdb);
-	zend_hash_add(&DATEG(tzcache), tzname, strlen(tzname) + 1, (void *) &tzi, sizeof(timelib_tzinfo*), NULL);
+	tzi = timelib_parse_tzfile(formal_tzname, tzdb);
+	zend_hash_add(&DATEG(tzcache), formal_tzname, strlen(formal_tzname) + 1, (void *) &tzi, sizeof(timelib_tzinfo*), NULL);
 	return tzi;
 }
 /* }}} */

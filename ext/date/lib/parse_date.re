@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.31 2005/10/03 11:15:21 derick Exp $ */
+/* $Id: parse_date.re,v 1.32 2005/10/07 08:05:10 derick Exp $ */
 
 #include "timelib.h"
 
@@ -732,6 +732,7 @@ monthroman = "I" | "II" | "III" | "IV" | "V" | "VI" | "VII" | "VIII" | "IX" | "X
 monthtext = monthfull | monthabbr | monthroman;
 
 /* Time formats */
+timetiny12 = hour12 space? meridian;
 timeshort12 = hour12[:.]minutelz space? meridian;
 timelong12 = hour12[:.]minute[:.]secondlz space? meridian;
 
@@ -867,15 +868,17 @@ relativetext = (reltextnumber space? reltextunit)+;
 		return TIMELIB_RELATIVE;
 	}
 
-	timeshort12 | timelong12
+	timetiny12 | timeshort12 | timelong12
 	{
-		DEBUG_OUTPUT("timeshort12 | timelong12");
+		DEBUG_OUTPUT("timetiny12 | timeshort12 | timelong12");
 		TIMELIB_INIT;
 		TIMELIB_HAVE_TIME();
 		s->time->h = timelib_get_nr((char **) &ptr, 2);
-		s->time->i = timelib_get_nr((char **) &ptr, 2);
-		if (*ptr == ':') {
-			s->time->s = timelib_get_nr((char **) &ptr, 2);
+		if (*ptr == ':' || *ptr == '.') {
+			s->time->i = timelib_get_nr((char **) &ptr, 2);
+			if (*ptr == ':' || *ptr == '.') {
+				s->time->s = timelib_get_nr((char **) &ptr, 2);
+			}
 		}
 		s->time->h += timelib_meridian((char **) &ptr, s->time->h);
 		TIMELIB_DEINIT;

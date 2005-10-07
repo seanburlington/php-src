@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.103.2.4 2005/10/06 22:30:24 gschlossnagle Exp $ */
+/* $Id: php_encoding.c,v 1.103.2.5 2005/10/07 05:14:52 gschlossnagle Exp $ */
 
 #include <time.h>
 
@@ -1185,9 +1185,9 @@ static zval *to_zval_object(encodeTypePtr type, xmlNodePtr data)
 		if (sdlType->kind == XSD_TYPEKIND_RESTRICTION &&
 		    sdlType->encode && type != &sdlType->encode->details) {
 			encodePtr enc;
-
 			enc = sdlType->encode;
 			while (enc && enc->details.sdl_type &&
+			       enc->details.sdl_type->kind != XSD_TYPEKIND_COMPLEX &&
 			       enc->details.sdl_type->kind != XSD_TYPEKIND_SIMPLE &&
 			       enc->details.sdl_type->kind != XSD_TYPEKIND_LIST &&
 			       enc->details.sdl_type->kind != XSD_TYPEKIND_UNION) {
@@ -1210,6 +1210,7 @@ static zval *to_zval_object(encodeTypePtr type, xmlNodePtr data)
 		           sdlType->encode &&
 		           type != &sdlType->encode->details) {
 			if (sdlType->encode->details.sdl_type &&
+			    sdlType->encode->details.sdl_type->kind != XSD_TYPEKIND_COMPLEX &&
 			    sdlType->encode->details.sdl_type->kind != XSD_TYPEKIND_SIMPLE &&
 			    sdlType->encode->details.sdl_type->kind != XSD_TYPEKIND_LIST &&
 			    sdlType->encode->details.sdl_type->kind != XSD_TYPEKIND_UNION) {

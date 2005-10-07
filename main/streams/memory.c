@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: memory.c,v 1.8.2.1 2005/10/06 21:31:25 helly Exp $ */
+/* $Id: memory.c,v 1.8.2.2 2005/10/07 07:38:59 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -308,12 +308,13 @@ static size_t php_stream_temp_write(php_stream *stream, const char *buf, size_t 
 static size_t php_stream_temp_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)
 {
 	php_stream_temp_data *ts;
+	size_t got;
 
 	assert(stream != NULL);
 	ts = stream->abstract;
 	assert(ts != NULL);
 
-	size_t got = php_stream_read(ts->innerstream, buf, count);
+	got = php_stream_read(ts->innerstream, buf, count);
 	
 	if (!got) {
 		stream->eof |= ts->innerstream->eof;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.15 2005/10/05 19:52:58 rrichards Exp $ */
+/* $Id: php_xmlreader.c,v 1.16 2005/10/07 13:26:11 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -276,16 +276,22 @@ static xmlRelaxNGPtr _xmlreader_get_relaxNG(char *source, int source_len, int ty
 }
 #endif
 
+#if ZEND_EXTENSION_API_NO >= 220050617
 static zend_module_dep xmlreader_deps[] = {
 	ZEND_MOD_REQUIRED("libxml")
 	{NULL, NULL, NULL}
 };
+#endif
 
 /* {{{ xmlreader_module_entry
  */
 zend_module_entry xmlreader_module_entry = {
+#if ZEND_EXTENSION_API_NO >= 220050617
 	STANDARD_MODULE_HEADER_EX, NULL,
 	xmlreader_deps,
+#else
+	STANDARD_MODULE_HEADER,
+#endif
 	"xmlreader",
 	NULL,
 	PHP_MINIT(xmlreader),

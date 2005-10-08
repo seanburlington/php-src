@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.32 2005/10/07 08:05:10 derick Exp $ */
+/* $Id: parse_date.re,v 1.33 2005/10/08 14:30:15 derick Exp $ */
 
 #include "timelib.h"
 
@@ -822,9 +822,21 @@ relativetext = (reltextnumber space? reltextunit)+;
 		return TIMELIB_RELATIVE;
 	}
 
-	"today"
+	"noon"
 	{
-		DEBUG_OUTPUT("today");
+		DEBUG_OUTPUT("noon");
+		TIMELIB_INIT;
+		TIMELIB_UNHAVE_TIME();
+		TIMELIB_HAVE_TIME();
+		s->time->h = 12;
+
+		TIMELIB_DEINIT;
+		return TIMELIB_RELATIVE;
+	}
+
+	"midnight" | "today"
+	{
+		DEBUG_OUTPUT("midnight | today");
 		TIMELIB_INIT;
 		TIMELIB_UNHAVE_TIME();
 

@@ -1,13 +1,22 @@
 --TEST--
 mysqli fetch bigint values
+--SKIPIF--
+<?php
+	if (PHP_INT_SIZE == 8) {
+		echo 'skip test valid only for 32bit systems';
+		exit;
+	}
+	require_once('skipif.inc');
+?>
 --FILE--
 <?php
 	include "connect.inc";
 	
 	/*** test mysqli_connect 127.0.0.1 ***/
-	$link = mysqli_connect("localhost", $user, $passwd);
+	$link = mysqli_connect($host, $user, $passwd);
 
 	mysqli_select_db($link, "test");
+	mysqli_query($link, "SET sql_mode=''");
 
   	mysqli_query($link,"DROP TABLE IF EXISTS test_bind_fetch");
   	mysqli_query($link,"CREATE TABLE test_bind_fetch(c1 bigint default 5,
@@ -23,7 +32,7 @@ mysqli fetch bigint values
 	$stmt = mysqli_prepare($link, "SELECT * FROM test_bind_fetch");
 	mysqli_bind_result($stmt, $c1, $c2, $c3, $c4, $c5, $c6, $c7);
 	mysqli_execute($stmt);
-	mysqli_fetch($stmt);
+	$rc = mysqli_fetch($stmt);
 
 	$test = array($c1,$c2,$c3,$c4,$c5,$c6,$c7);
 
@@ -45,7 +54,7 @@ array(7) {
   [4]=>
   int(0)
   [5]=>
-  string(13) "-333333333333"
+  int(0)
   [6]=>
   int(100)
 }

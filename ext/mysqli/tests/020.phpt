@@ -1,13 +1,16 @@
 --TEST--
 mysqli bind_param/bind_result date
+--SKIPIF--
+<?php require_once('skipif.inc'); ?>
 --FILE--
 <?php
 	include "connect.inc";
 	
 	/*** test mysqli_connect 127.0.0.1 ***/
-	$link = mysqli_connect("localhost", $user, $passwd);
+	$link = mysqli_connect($host, $user, $passwd);
 
 	mysqli_select_db($link, "test");
+	mysqli_query($link, "SET sql_mode=''");
 		
 	mysqli_query($link,"DROP TABLE IF EXISTS test_bind_result");
   	mysqli_query($link,"CREATE TABLE test_bind_result(c1 date, c2 time, 
@@ -58,7 +61,7 @@ array(7) {
   [4]=>
   string(19) "2010-07-10 00:00:00"
   [5]=>
-  string(0) ""
+  string(19) "0000-00-00 00:00:00"
   [6]=>
   string(19) "1999-12-29 00:00:00"
 }

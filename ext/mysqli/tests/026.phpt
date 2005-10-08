@@ -1,15 +1,16 @@
 --TEST--
 mysqli bind_param/bind_result with send_long_data 
+--SKIPIF--
+<?php require_once('skipif.inc'); ?>
 --FILE--
 <?php
-	$user = "root";
-	$passwd = "";
-
+	include "connect.inc";
 	
 	/*** test mysqli_connect 127.0.0.1 ***/
-	$link = mysqli_connect("localhost", $user, $passwd);
+	$link = mysqli_connect($host, $user, $passwd);
 
 	mysqli_select_db($link, "test");
+	mysqli_query($link, "SET sql_mode=''");
 
   	mysqli_query($link,"DROP TABLE IF EXISTS test_bind_fetch");
   	mysqli_query($link,"CREATE TABLE test_bind_fetch(c1 varchar(10), c2 text)");

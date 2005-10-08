@@ -1,5 +1,7 @@
 --TEST--
 mysqli_fetch_object with classes
+--SKIPIF--
+<?php require_once('skipif.inc'); ?>
 --FILE--
 <?php
 	include "connect.inc";
@@ -11,9 +13,10 @@ mysqli_fetch_object with classes
 	}
 	
 	/*** test mysqli_connect 127.0.0.1 ***/
-	$link = mysqli_connect("localhost", $user, $passwd);
+	$link = mysqli_connect($host, $user, $passwd);
 
 	mysqli_select_db($link, "test");
+	mysqli_query($link, "SET sql_mode=''");
 
   	mysqli_query($link,"DROP TABLE IF EXISTS test_fetch");
   	mysqli_query($link,"CREATE TABLE test_fetch(c1 smallint unsigned,

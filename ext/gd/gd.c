@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.315 2005/10/06 20:37:22 iliaa Exp $ */
+/* $Id: gd.c,v 1.316 2005/10/08 19:29:04 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1851,12 +1851,12 @@ PHP_FUNCTION(imagegif)
 #endif /* HAVE_GD_GIF_CREATE */
 
 #ifdef HAVE_GD_PNG
-/* {{{ proto bool imagepng(resource im [, string filename])
+/* {{{ proto bool imagepng(resource im [, string filename [, int quality]])
    Output PNG image to browser or file */
 PHP_FUNCTION(imagepng)
 {
 #ifdef USE_GD_IOCTX
-	_php_image_output_ctx(INTERNAL_FUNCTION_PARAM_PASSTHRU, PHP_GDIMG_TYPE_PNG, "PNG", gdImagePngCtx);
+	_php_image_output_ctx(INTERNAL_FUNCTION_PARAM_PASSTHRU, PHP_GDIMG_TYPE_PNG, "PNG", gdImagePngCtxEx);
 #else
 	_php_image_output(INTERNAL_FUNCTION_PARAM_PASSTHRU, PHP_GDIMG_TYPE_PNG, "PNG", gdImagePng);
 #endif

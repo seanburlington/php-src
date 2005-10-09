@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.1 2005/09/22 20:14:34 tony2001 Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.2 2005/10/09 17:03:01 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -802,6 +802,8 @@ PHP_FUNCTION(mysqli_fetch_field_direct)
 	add_property_string(return_value, "orgtable",(field->org_table ? field->org_table : ""), 1);
 	add_property_string(return_value, "def",(field->def ? field->def : ""), 1);
 	add_property_long(return_value, "max_length", field->max_length);
+	add_property_long(return_value, "length", field->length);
+	add_property_long(return_value, "charsetnr", field->charsetnr);
 	add_property_long(return_value, "flags", field->flags);
 	add_property_long(return_value, "type", field->type);
 	add_property_long(return_value, "decimals", field->decimals);

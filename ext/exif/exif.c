@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.162 2004/03/16 20:58:01 derick Exp $ */
+/* $Id: exif.c,v 1.173.2.1 2005/10/09 14:40:01 helly Exp $ */
 
 /*  ToDos
  *
@@ -66,7 +66,7 @@
 #include "ext/standard/php_image.h"
 #include "ext/standard/info.h" 
 
-#if HAVE_MBSTRING && !defined(COMPILE_DL_MBSTRING) 
+#if defined(PHP_WIN32) || (HAVE_MBSTRING && !defined(COMPILE_DL_MBSTRING))
 #define EXIF_USE_MBSTRING 1
 #else
 #define EXIF_USE_MBSTRING 0
@@ -75,6 +75,9 @@
 #if EXIF_USE_MBSTRING
 #include "ext/mbstring/mbstring.h"
 #endif
+
+/* needed for ssize_t definition */
+#include <sys/types.h>
 
 typedef unsigned char uchar;
 
@@ -93,11 +96,12 @@ typedef unsigned char uchar;
 
 #define EFREE_IF(ptr)	if (ptr) efree(ptr)
 
+#define MAX_IFD_NESTING_LEVEL 100
+
 static
 ZEND_BEGIN_ARG_INFO(exif_thumbnail_force_ref, 1)
 	ZEND_ARG_PASS_INFO(0)
 ZEND_END_ARG_INFO();
-
 
 /* {{{ exif_functions[]
  */
@@ -111,7 +115,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.162 2004/03/16 20:58:01 derick Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.173.2.1 2005/10/09 14:40:01 helly Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -1442,6 +1446,7 @@ typedef struct {
 	/* for parsing */
 	int             read_thumbnail;
 	int             read_all;
+	int             ifd_nesting_level;
 	/* internal */
 	file_section_list 	file;
 } image_info_type;
@@ -2711,6 +2716,13 @@ static int exif_process_IFD_TAG(image_info_type *ImageInfo, char *dir_entry, cha
 	size_t byte_count, offset_val, fpos, fgot;
 	xp_field_type *tmp_xp;
 
+	/* Protect against corrupt headers */
+	if (ImageInfo->ifd_nesting_level > MAX_IFD_NESTING_LEVEL) {
+		exif_error_docref("exif_read_data#error_ifd" TSRMLS_CC, ImageInfo, E_WARNING, "corrupt EXIF header: maximum directory nesting level reached");
+		return FALSE;
+	}
+	ImageInfo->ifd_nesting_level++;
+
 	tag = php_ifd_get16u(dir_entry, ImageInfo->motorola_intel);
 	format = php_ifd_get16u(dir_entry+2, ImageInfo->motorola_intel);
 	components = php_ifd_get32u(dir_entry+4, ImageInfo->motorola_intel);
@@ -2724,6 +2736,11 @@ static int exif_process_IFD_TAG(image_info_type *ImageInfo, char *dir_entry, cha
 
 	byte_count = components * php_tiff_bytes_per_format[format];
 
+	if ((ssize_t)byte_count < 0) {
+		exif_error_docref("exif_read_data#error_ifd" EXIFERR_CC, ImageInfo, E_WARNING, "Process tag(x%04X=%s): Illegal byte_count(%ld)", tag, exif_get_tagname(tag, tagname, -12, tag_table TSRMLS_CC), byte_count);
+		return FALSE;
+	}
+
 	if (byte_count > 4) {
 		offset_val = php_ifd_get32u(dir_entry+8, ImageInfo->motorola_intel);
 		/* If its bigger than 4 bytes, the dir entry contains an offset. */
@@ -2734,7 +2751,7 @@ static int exif_process_IFD_TAG(image_info_type *ImageInfo, char *dir_entry, cha
 			// JPEG does not use absolute pointers instead its pointers are relative to the start
 			// of the TIFF header in APP1 section.
 			*/
-			if (offset_val+byte_count>ImageInfo->FileSize || (ImageInfo->FileType!=IMAGE_FILETYPE_TIFF_II && ImageInfo->FileType!=IMAGE_FILETYPE_TIFF_MM)) {
+			if (offset_val+byte_count>ImageInfo->FileSize || (ImageInfo->FileType!=IMAGE_FILETYPE_TIFF_II && ImageInfo->FileType!=IMAGE_FILETYPE_TIFF_MM && ImageInfo->FileType!=IMAGE_FILETYPE_JPEG)) {
 				if (value_ptr < dir_entry) {
 					/* we can read this if offset_val > 0 */
 					/* some files have their values in other parts of the file */
@@ -3013,6 +3030,12 @@ static int exif_process_IFD_in_JPEG(image_info_type *ImageInfo, char *dir_start,
 								  offset_base, IFDlength, displacement, section_index, 1, exif_get_tag_table(section_index) TSRMLS_CC)) {
 			return FALSE;
 		}
+	}
+	/*
+	 * Ignore IFD2 if it purportedly exists
+	 */
+	if (section_index == SECTION_THUMBNAIL) {
+		return FALSE;
 	}
 	/*
 	 * Hack to make it process IDF1 I hope
@@ -3727,7 +3750,11 @@ static int exif_read_file(image_info_type *ImageInfo, char *FileName, int read_t
 	if (php_stream_is(ImageInfo->infile, PHP_STREAM_IS_STDIO)) {
 		if (VCWD_STAT(FileName, &st) >= 0) {
 			/* Store file date/time. */
+#ifdef NETWARE
+			ImageInfo->FileDateTime = st.st_mtime.tv_sec;
+#else
 			ImageInfo->FileDateTime = st.st_mtime;
+#endif
 			ImageInfo->FileSize = st.st_size;
 			/*exif_error_docref(NULL EXIFERR_CC, ImageInfo, E_NOTICE, "Opened stream is file: %d", ImageInfo->FileSize);*/
 		}
@@ -3738,6 +3765,8 @@ static int exif_read_file(image_info_type *ImageInfo, char *FileName, int read_t
 			php_stream_seek(ImageInfo->infile, 0, SEEK_SET);
 		}
 	}
+
+	ImageInfo->ifd_nesting_level = 0;
 
 	/* Scan the JPEG headers. */
 	ret = exif_scan_FILE_header(ImageInfo TSRMLS_CC);
@@ -3776,7 +3805,7 @@ PHP_FUNCTION(exif_read_data)
 			}
 		}
 		for (i=0; i<SECTION_COUNT; i++) {
-			sprintf(tmp, ",%s,", exif_get_sectionname(i));
+			snprintf(tmp, sizeof(tmp), ",%s,", exif_get_sectionname(i));
 			if (strstr(sections_str, tmp)) {
 				sections_needed |= 1<<i;
 			}

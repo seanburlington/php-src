@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_driver.c,v 1.10 2005/08/12 23:32:31 wez Exp $ */
+/* $Id: dblib_driver.c,v 1.11 2005/10/09 18:59:27 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -61,7 +61,9 @@ static int dblib_fetch_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, zval *info TSRMLS
 	add_next_index_string(info, message, 0);
 	add_next_index_long(info, einfo->oserr);
 	add_next_index_long(info, einfo->severity);
-	add_next_index_string(info, einfo->oserrstr, 1);
+	if (einfo->oserrstr) {
+		add_next_index_string(info, einfo->oserrstr, 1);
+	}
 
 	return 1;
 }

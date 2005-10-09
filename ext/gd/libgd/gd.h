@@ -5,6 +5,12 @@
 extern "C" {
 #endif
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+#include "php_compat.h"
+
 #ifndef WIN32
 /* default fontpath for unix systems */
 #define DEFAULT_FONTPATH "/usr/X11R6/lib/X11/fonts/TrueType:/usr/X11R6/lib/X11/fonts/truetype:/usr/X11R6/lib/X11/fonts/TTF:/usr/share/fonts/TrueType:/usr/share/fonts/truetype:/usr/openwin/lib/X11/fonts/TrueType:/usr/X11R6/lib/X11/fonts/Type1:."
@@ -407,7 +413,10 @@ void gdImageColorDeallocate(gdImagePtr im, int color);
         conversion to palette is not great (for small images
         it can be negative) and the quality loss is ugly. */
 
+gdImagePtr gdImageCreatePaletteFromTrueColor (gdImagePtr im, int ditherFlag, int colorsWanted);
+
 void gdImageTrueColorToPalette(gdImagePtr im, int ditherFlag, int colorsWanted);
+
 
 /* An attempt at getting the results of gdImageTrueColorToPalette
 	to look a bit more like the original (im1 is the original
@@ -428,6 +437,8 @@ void gdImageColorTransparent(gdImagePtr im, int color);
 void gdImagePaletteCopy(gdImagePtr dst, gdImagePtr src);
 void gdImagePng(gdImagePtr im, FILE *out);
 void gdImagePngCtx(gdImagePtr im, gdIOCtx *out);
+void gdImageGif(gdImagePtr im, FILE *out);
+void gdImageGifCtx(gdImagePtr im, gdIOCtx *out);
 /* 2.0.12: Compression level: 0-9 or -1, where 0 is NO COMPRESSION at all,
  * 1 is FASTEST but produces larger files, 9 provides the best
  * compression (smallest files) but takes a long time to compress, and
@@ -529,11 +540,11 @@ void gdImageCopyResized(gdImagePtr dst, gdImagePtr src, int dstX, int dstY, int 
 	substituted automatically. */
 void gdImageCopyResampled(gdImagePtr dst, gdImagePtr src, int dstX, int dstY, int srcX, int srcY, int dstW, int dstH, int srcW, int srcH);
 
-gdImagePtr gdImageRotate90(gdImagePtr src);
-gdImagePtr gdImageRotate180(gdImagePtr src);
-gdImagePtr gdImageRotate270(gdImagePtr src);
-gdImagePtr gdImageRotate45(gdImagePtr src, double dAngle, int clrBack);
-gdImagePtr gdImageRotate (gdImagePtr src, double dAngle, int clrBack);
+gdImagePtr gdImageRotate90(gdImagePtr src, int ignoretransparent);
+gdImagePtr gdImageRotate180(gdImagePtr src, int ignoretransparent);
+gdImagePtr gdImageRotate270(gdImagePtr src, int ignoretransparent);
+gdImagePtr gdImageRotate45(gdImagePtr src, double dAngle, int clrBack, int ignoretransparent);
+gdImagePtr gdImageRotate (gdImagePtr src, double dAngle, int clrBack, int ignoretransparent);
 
 void gdImageSetBrush(gdImagePtr im, gdImagePtr brush);
 void gdImageSetTile(gdImagePtr im, gdImagePtr tile);

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.110 2005/10/07 08:21:37 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.111 2005/10/09 11:06:09 dmitry Exp $ */
 
 #include <time.h>
 
@@ -113,7 +113,7 @@ static void set_ns_and_type(xmlNodePtr node, encodeTypePtr type);
 { \
 	if (!zval || Z_TYPE_P(zval) == IS_NULL) { \
 	  if (style == SOAP_ENCODED) {\
-			xmlSetProp(xml, "xsi:nil", "1"); \
+			xmlSetProp(xml, "xsi:nil", "true"); \
 		} \
 		return xml; \
 	} \
@@ -962,7 +962,7 @@ static xmlNodePtr to_xml_null(encodeTypePtr type, zval *data, int style, xmlNode
 	ret = xmlNewNode(NULL,"BOGUS");
 	xmlAddChild(parent, ret);
 	if (style == SOAP_ENCODED) {
-		xmlSetProp(ret, "xsi:nil", "1");
+		xmlSetProp(ret, "xsi:nil", "true");
 	}
 	return ret;
 }
@@ -1334,10 +1334,10 @@ static int model_to_xml_object(xmlNodePtr node, sdlContentModelPtr model, zval *
 							property = xmlNewNode(NULL,"BOGUS");
 							xmlAddChild(node, property);
 							if (style == SOAP_ENCODED) {
-								xmlSetProp(property, "xsi:nil", "1");
+								xmlSetProp(property, "xsi:nil", "true");
 							} else {
 							  xmlNsPtr xsi = encode_add_ns(property,XSI_NAMESPACE);
-								xmlSetNsProp(property, xsi, "nil", "1");
+								xmlSetNsProp(property, xsi, "nil", "true");
 							}
 						} else {
 							property = master_to_xml(enc, *val, style, node);
@@ -1360,10 +1360,10 @@ static int model_to_xml_object(xmlNodePtr node, sdlContentModelPtr model, zval *
 						property = xmlNewNode(NULL,"BOGUS");
 						xmlAddChild(node, property);
 						if (style == SOAP_ENCODED) {
-							xmlSetProp(property, "xsi:nil", "1");
+							xmlSetProp(property, "xsi:nil", "true");
 						} else {
 						  xmlNsPtr xsi = encode_add_ns(property,XSI_NAMESPACE);
-							xmlSetNsProp(property, xsi, "nil", "1");
+							xmlSetNsProp(property, xsi, "nil", "true");
 						}
 					} else {
 						property = master_to_xml(enc, data, style, node);
@@ -1385,10 +1385,10 @@ static int model_to_xml_object(xmlNodePtr node, sdlContentModelPtr model, zval *
 				property = xmlNewNode(NULL,model->u.element->name);
 				xmlAddChild(node, property);
 				if (style == SOAP_ENCODED) {
-					xmlSetProp(property, "xsi:nil", "1");
+					xmlSetProp(property, "xsi:nil", "true");
 				} else {
 					xmlNsPtr xsi = encode_add_ns(property,XSI_NAMESPACE);
-					xmlSetNsProp(property, xsi, "nil", "1");
+					xmlSetNsProp(property, xsi, "nil", "true");
 				}
 				return 1;
 			} else if (model->min_occurs == 0) {
@@ -1518,7 +1518,7 @@ static xmlNodePtr to_xml_object(encodeTypePtr type, zval *data, int style, xmlNo
 		xmlParam = xmlNewNode(NULL,"BOGUS");
 		xmlAddChild(parent, xmlParam);
 	  if (style == SOAP_ENCODED) {
-			xmlSetProp(xmlParam, "xsi:nil", "1");
+			xmlSetProp(xmlParam, "xsi:nil", "true");
 		}
 		return xmlParam;
 	}
@@ -1597,10 +1597,10 @@ static xmlNodePtr to_xml_object(encodeTypePtr type, zval *data, int style, xmlNo
 						property = xmlNewNode(NULL,"BOGUS");
 						xmlAddChild(xmlParam, property);
 						if (style == SOAP_ENCODED) {
-							xmlSetProp(property, "xsi:nil", "1");
+							xmlSetProp(property, "xsi:nil", "true");
 						} else {
 						  xmlNsPtr xsi = encode_add_ns(property,XSI_NAMESPACE);
-							xmlSetNsProp(property, xsi, "nil", "1");
+							xmlSetNsProp(property, xsi, "nil", "true");
 						}
 					} else {
 						property = master_to_xml(array_el->encode, *val, style, xmlParam);

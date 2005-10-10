@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.54.2.1 2005/10/10 12:57:55 tony2001 Exp $ 
+  $Id: mysqli_nonapi.c,v 1.54.2.2 2005/10/10 20:06:35 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -75,7 +75,7 @@ PHP_FUNCTION(mysqli_connect)
 	}
 
 #ifdef HAVE_EMBEDDED_MYSQLI
-	if (hostname && strlen(hostname)) {
+	if (hostname_len && hostname) {
 		unsigned int external=1;
 		mysql_options(mysql->mysql, MYSQL_OPT_USE_REMOTE_CONNECTION, (char *)&external);
 	} else {

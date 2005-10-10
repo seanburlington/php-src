@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.3 2005/10/10 12:57:54 tony2001 Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.4 2005/10/10 20:06:34 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -571,7 +571,7 @@ PHP_FUNCTION(mysqli_stmt_execute)
 					case MYSQL_TYPE_VAR_STRING:
 						convert_to_string_ex(&stmt->param.vars[i]);
 						stmt->stmt->params[i].buffer = Z_STRVAL_PP(&stmt->param.vars[i]);
-						stmt->stmt->params[i].buffer_length = strlen(Z_STRVAL_PP(&stmt->param.vars[i]));
+						stmt->stmt->params[i].buffer_length = Z_STRLEN_PP(&stmt->param.vars[i]);
 						break;
 					case MYSQL_TYPE_DOUBLE:
 						convert_to_double_ex(&stmt->param.vars[i]);

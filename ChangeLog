@@ -1,3 +1,132 @@
+2005-10-09  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * ext/ftp/config.m4:
+      MFB
+
+    * (PHP_5_1)
+      ext/ftp/config.m4:
+      typofix
+
+    * (PHP_5_1)
+      NEWS:
+      BFN
+
+    * (PHP_5_1)
+      NEWS
+      ext/ftp/config.m4:
+      MFH: - Fixed bug #34796 (missing SSL linking in ext/ftp when configured as
+      shared).
+
+    * ext/ftp/config.m4:
+      Fix properly
+
+    * ext/ftp/config.m4:
+      - Fixed bug #34796 (missing SSL linking in ext/ftp when configured as
+      shared)
+
+2005-10-09  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_1)
+      NEWS:
+      MFH: Fixed bug #34777 (Crash in dblib when fetching non-existent error
+      info).
+
+2005-10-09  Andrey Hristov  <php@hristov.com>
+
+    * ext/mysqli/mysqli_api.c:
+      MFB
+
+2005-10-09  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ZendEngine2/zend_reflection_api.c:
+      - Add 'overwrites' info to method dump
+
+2005-10-09  Andrey Hristov  <php@hristov.com>
+
+    * (PHP_5_1)
+      ext/mysqli/mysqli_api.c:
+      add charsetnr and length to the object returned. this is kind of bug
+      because fetch_fields() and fetch_field() return that info and
+      fetch_field_direct() does not
+
+2005-10-09  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ext/pgsql/tests/01createdb.phpt:
+      - Apply workaround for test until someone fixes the issue (which is
+      unrelated to pg_*())
+
+    * (PHP_4_4)
+      ext/pgsql/tests/80_bug32223.phpt
+      ext/pgsql/tests/80_bug32223.phpt:
+      - MFH Make test check for PlPgSQL before using it
+
+    * ext/pgsql/tests/80_bug32223.phpt:
+      - Make test check for PlPgSQL before using it
+
+    * ext/pgsql/tests/80_bug32223.phpt
+      ext/pgsql/tests/80_bug32223.phpt
+      ext/pgsql/tests/80_bug32223.phpt:
+        1.1.4;
+      - Add new test
+
+    * (PHP_4_4)
+      NEWS
+      NEWS
+      NEWS
+      ext/exif/exif.c
+      ext/exif/exif.c
+      ext/exif/exif.c
+      ext/exif/tests/bug34704.jpg
+      ext/exif/tests/bug34704.jpg
+      ext/exif/tests/bug34704.jpg
+      ext/exif/tests/bug34704.phpt
+      ext/exif/tests/bug34704.phpt
+      ext/exif/tests/bug34704.phpt:
+      - MFH Bugfix #34704 (Infinite recursion due to corrupt JPEG)
+
+    * ext/exif/tests/bug34704.jpg
+      ext/exif/tests/bug34704.jpg
+      ext/exif/tests/bug34704.jpg
+      ext/exif/tests/bug34704.jpg
+      ext/exif/tests/bug34704.phpt
+      ext/exif/tests/bug34704.phpt
+      ext/exif/tests/bug34704.phpt
+      ext/exif/tests/bug34704.phpt:
+        1.1.4;  1.1.6;
+      Bugfix #34704 (Infinite recursion due to corrupt JPEG) (Tim Starling)
+
+    * ext/exif/exif.c:
+      Bugfix #34704 (Infinite recursion due to corrupt JPEG) (Tim Starling)
+
+2005-10-09  Dmitry Stogov  <dmitry@zend.com>
+
+    * (PHP_5_0)
+      NEWS
+      NEWS:
+      Fixed bug #34788 (SOAP Client not applying correct namespace to generated
+      values)
+
+2005-10-09  Pierre-Alain Joye  <pierre.dev@gmail.com>
+
+    * (PHP_5_1)
+      ext/gd/libgd/gd.h
+      ext/gd/libgd/gdtables.c
+      ext/gd/libgd/wbmp.h:
+      -fix build as shared or separate from main build (bfrance)
+
+2005-10-09  Dmitry Stogov  <dmitry@zend.com>
+
+    * (PHP_5_0)
+      NEWS
+      NEWS:
+      Fixed bug #34787 (SOAP Client not handling boolean types correctly)
+
+2005-10-09  Georg Richter  <georg@mysql.com>
+
+    * (PHP_5_1)
+      NEWS:
+      added Bugfix for #34785
+
 2005-10-08  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
 
     * ZendEngine2/zend_reflection_api.c:
@@ -13377,7 +13506,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2127 2005/10/09 05:41:04 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2128 2005/10/10 05:36:10 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -16778,7 +16907,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2127 2005/10/09 05:41:04 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2128 2005/10/10 05:36:10 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -17259,7 +17388,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2127 2005/10/09 05:41:04 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2128 2005/10/10 05:36:10 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -18733,7 +18862,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2127 2005/10/09 05:41:04 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2128 2005/10/10 05:36:10 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

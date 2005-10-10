@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.7 2005/09/21 22:58:39 helly Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.8 2005/10/10 14:44:16 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -830,6 +830,12 @@ static int do_fetch(pdo_stmt_t *stmt, int do_bind, zval *return_value,
 				break;
 			
 			case PDO_FETCH_INTO:
+				if (!stmt->fetch.into) {
+					pdo_raise_impl_error(stmt->dbh, stmt, "HY000", "No fetch-into object specified." TSRMLS_CC);
+					return 0;
+					break;
+				}
+
 				Z_TYPE_P(return_value) = IS_OBJECT;
 				Z_OBJ_HANDLE_P(return_value) = Z_OBJ_HANDLE_P(stmt->fetch.into);
 				Z_OBJ_HT_P(return_value) = Z_OBJ_HT_P(stmt->fetch.into);

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.9.2.1 2005/10/10 09:50:35 sniper Exp $
+dnl $Id: config.m4,v 1.9.2.2 2005/10/10 10:28:53 sniper Exp $
 dnl
 
 PHP_ARG_WITH(mssql,for MSSQL support via FreeTDS,
@@ -12,11 +12,11 @@ if test "$PHP_MSSQL" != "no"; then
     for i in /usr/local /usr; do
       if test -f $i/include/tds.h; then
         FREETDS_INSTALLATION_DIR=$i
-        FREETDS_INCLUDE_DIR=$/include
+        FREETDS_INCLUDE_DIR=$i/include
         break
       elif test -f $i/include/freetds/tds.h; then
         FREETDS_INSTALLATION_DIR=$i
-        FREETDS_INCLUDE_DIR=$/include/freetds
+        FREETDS_INCLUDE_DIR=$i/include/freetds
         break
       fi
     done
@@ -29,10 +29,10 @@ if test "$PHP_MSSQL" != "no"; then
 
     if test -f $PHP_MSSQL/include/tds.h; then
       FREETDS_INSTALLATION_DIR=$PHP_MSSQL
-      FREETDS_INCLUDE_DIR=$/include
-    elif test -f $i/include/freetds/tds.h; then
-      FREETDS_INSTALLATION_DIR=$i
-      FREETDS_INCLUDE_DIR=$/include/freetds
+      FREETDS_INCLUDE_DIR=$PHP_MSSQL/include
+    elif test -f $PHP_MSSQL/include/freetds/tds.h; then
+      FREETDS_INSTALLATION_DIR=$PHP_MSSQL
+      FREETDS_INCLUDE_DIR=$PHP_MSSQL/include/freetds
     else
       AC_MSG_ERROR(Directory $PHP_MSSQL is not a FreeTDS installation directory)
     fi

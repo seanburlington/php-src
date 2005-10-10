@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.34.2.11 2005/08/06 16:56:06 andrey Exp $ 
+  $Id: mysqli_nonapi.c,v 1.34.2.12 2005/10/10 12:59:06 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -104,7 +104,7 @@ PHP_FUNCTION(mysqli_connect)
 	mysqli_resource = (MYSQLI_RESOURCE *)ecalloc (1, sizeof(MYSQLI_RESOURCE));
 	mysqli_resource->ptr = (void *)mysql;
 
-	if (!object) {
+	if (!object || !instanceof_function(Z_OBJCE_P(object), mysqli_link_class_entry TSRMLS_CC)) {
 		MYSQLI_RETURN_RESOURCE(mysqli_resource, mysqli_link_class_entry);	
 	} else {
 		((mysqli_object *) zend_object_store_get_object(object TSRMLS_CC))->ptr = mysqli_resource;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: exif.c,v 1.118.2.37.2.2 2005/10/09 14:36:24 helly Exp $ */
+/* $Id: exif.c,v 1.118.2.37.2.3 2005/10/10 06:07:16 helly Exp $ */
 
 /*  ToDos
  *
@@ -107,7 +107,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.37.2.2 2005/10/09 14:36:24 helly Exp $"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.37.2.3 2005/10/10 06:07:16 helly Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */
@@ -3017,7 +3017,7 @@ static int exif_process_IFD_in_JPEG(image_info_type *ImageInfo, char *dir_start,
 	 * Ignore IFD2 if it purportedly exists
 	 */
 	if (section_index == SECTION_THUMBNAIL) {
-		return FALSE;
+		return TRUE;
 	}
 	/*
 	 * Hack to make it process IDF1 I hope

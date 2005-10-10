@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_lob.c,v 1.5 2005/10/03 13:02:14 tony2001 Exp $ */
+/* $Id: oci8_lob.c,v 1.6 2005/10/10 10:16:58 tony2001 Exp $ */
 
 
 
@@ -159,6 +159,10 @@ int php_oci_lob_read (php_oci_descriptor *descriptor, long read_length, long off
 
 	if (php_oci_lob_get_length(descriptor, &length TSRMLS_CC)) {
 		return 1;
+	}
+
+	if (length <= 0) {
+		return 0;
 	}
  	
 	if (offset > length) {

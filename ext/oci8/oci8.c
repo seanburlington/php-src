@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.278 2005/09/25 21:44:31 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.279 2005/10/10 10:16:55 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -619,7 +619,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.278 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.279 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -1490,7 +1490,12 @@ int php_oci_column_to_zval(php_oci_out_column *column, zval *value, int mode TSR
 				ZVAL_FALSE(value);
 				return 1;
 			} else {
-				ZVAL_STRINGL(value, lob_buffer, lob_length, 0);
+				if (lob_length > 0) {
+					ZVAL_STRINGL(value, lob_buffer, lob_length, 0);
+				}
+				else {
+					ZVAL_EMPTY_STRING(value);
+				}
 				return 0;
 			}
 		} else { 

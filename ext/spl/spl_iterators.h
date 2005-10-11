@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.25 2005/10/10 23:58:40 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.26 2005/10/11 00:18:31 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -83,6 +83,11 @@ enum {
 	/* private */
 	CIT_VALID                = 0x00010000,
 	CIT_HAS_CHILDREN         = 0x00020000
+};
+
+enum {
+	/* public */
+	REGIT_USE_KEY            = 0x00000001,
 };
 
 typedef struct _spl_dual_it_object {

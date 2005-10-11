@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.132.2.20 2004/08/25 04:42:54 pollita Exp $ */
+/* $Id: php_pcre.c,v 1.132.2.24.2.1 2005/10/11 06:48:33 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -111,57 +111,16 @@ static PHP_MSHUTDOWN_FUNCTION(pcre)
 #define PCRE_CACHE_SIZE 4096
 
 /* {{{ static pcre_clean_cache */
-static void pcre_clean_cache(TSRMLS_D)
+static int pcre_clean_cache(void *data, void *arg TSRMLS_DC)
 {
-	HashTable *ht = &PCRE_G(pcre_cache);
-	Bucket *p = NULL;
-	int clean_size = PCRE_CACHE_SIZE / 8;
+	int *num_clean = (int *)arg;
 
-	HANDLE_BLOCK_INTERRUPTIONS();
-
-	do {
-		p = ht->pListHead;
-
-		if (ht->pDestructor) {
-			ht->pDestructor(p->pData);
-		}
-		if (!p->pDataPtr) {
-			pefree(p->pData, ht->persistent);
-		}
-
-		if (p->pLast) {
-			p->pLast->pNext = p->pNext;
-		} else {
-			uint nIndex;
-
-			nIndex = p->h & ht->nTableMask;
-			ht->arBuckets[nIndex] = p->pNext;
-		}
-		if (p->pNext) {
-			p->pNext->pLast = p->pLast;
-		} else {
-			/* Nothing to do as this list doesn't have a tail */
-		}
-
-		if (p->pListLast != NULL) {
-			p->pListLast->pListNext = p->pListNext;
-		} else {
-			/* Deleting the head of the list */
-			ht->pListHead = p->pListNext;
-		}
-		if (p->pListNext != NULL) {
-			p->pListNext->pListLast = p->pListLast;
-		} else {
-			ht->pListTail = p->pListLast;
-		}
-		if (ht->pInternalPointer == p) {
-			ht->pInternalPointer = p->pListNext;
-		}
-		pefree(p, ht->persistent);
-		ht->nNumOfElements--;
-	} while (ht->nNumOfElements > PCRE_CACHE_SIZE - clean_size);
-
-	HANDLE_UNBLOCK_INTERRUPTIONS();
+	if (*num_clean > 0) {
+		(*num_clean)--;
+		return 1;
+	} else {
+		return 0;
+	}
 }
 /* }}} */
 
@@ -193,13 +152,21 @@ PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra **extra, int *preg_
 	   back the compiled pattern, otherwise go on and compile it. */
 	regex_len = strlen(regex);
 	if (zend_hash_find(&PCRE_G(pcre_cache), regex, regex_len+1, (void **)&pce) == SUCCESS) {
+		/*
+		 * We use a quick pcre_info() check to see whether cache is corrupted, and if it
+		 * is, we flush it and compile the pattern from scratch.
+		 */
+		if (pcre_info(pce->re, NULL, NULL) == PCRE_ERROR_BADMAGIC) {
+			zend_hash_clean(&PCRE_G(pcre_cache));
+		} else {
 #if HAVE_SETLOCALE
-		if (!strcmp(pce->locale, locale)) {
+			if (!strcmp(pce->locale, locale)) {
 #endif
-			*extra = pce->extra;
-			*preg_options = pce->preg_options;
-			return pce->re;
+				*extra = pce->extra;
+				*preg_options = pce->preg_options;
+				return pce->re;
 #if HAVE_SETLOCALE
+			}
 		}
 #endif
 	}
@@ -210,7 +177,7 @@ PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra **extra, int *preg_
 	   get to the end without encountering a delimiter. */
 	while (isspace((int)*(unsigned char *)p)) p++;
 	if (*p == 0) {
-		zend_error(E_WARNING, "Empty regular expression");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty regular expression");
 		return NULL;
 	}
 	
@@ -218,7 +185,7 @@ PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra **extra, int *preg_
 	   or a backslash. */
 	delimiter = *p++;
 	if (isalnum((int)*(unsigned char *)&delimiter) || delimiter == '\\') {
-		zend_error(E_WARNING, "Delimiter must not be alphanumeric or backslash");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Delimiter must not be alphanumeric or backslash");
 		return NULL;
 	}
 
@@ -239,7 +206,7 @@ PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra **extra, int *preg_
 			pp++;
 		}
 		if (*pp == 0) {
-			zend_error(E_WARNING, "No ending delimiter '%c' found", delimiter);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "No ending delimiter '%c' found", delimiter);
 			return NULL;
 		}
 	} else {
@@ -259,7 +226,7 @@ PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra **extra, int *preg_
 			pp++;
 		}
 		if (*pp == 0) {
-			zend_error(E_WARNING, "No ending matching delimiter '%c' found", end_delimiter);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "No ending matching delimiter '%c' found", end_delimiter);
 			return NULL;
 		}
 	}
@@ -299,7 +266,7 @@ PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra **extra, int *preg_
 				break;
 
 			default:
-				zend_error(E_WARNING, "Unknown modifier '%c'", pp[-1]);
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown modifier '%c'", pp[-1]);
 				efree(pattern);
 				return NULL;
 		}
@@ -318,7 +285,7 @@ PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra **extra, int *preg_
 					  tables);
 
 	if (re == NULL) {
-		zend_error(E_WARNING, "Compilation failed: %s at offset %d", error, erroffset);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Compilation failed: %s at offset %d", error, erroffset);
 		efree(pattern);
 		return NULL;
 	}
@@ -328,7 +295,7 @@ PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra **extra, int *preg_
 	if (do_study) {
 		*extra = pcre_study(re, soptions, &error);
 		if (error != NULL) {
-			zend_error(E_WARNING, "Error while studying pattern");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error while studying pattern");
 		}
 	}
 
@@ -342,7 +309,8 @@ PHPAPI pcre* pcre_get_compiled_regex(char *regex, pcre_extra **extra, int *preg_
 	 * ones).
 	 */
 	if (zend_hash_num_elements(&PCRE_G(pcre_cache)) == PCRE_CACHE_SIZE) {
-		pcre_clean_cache(TSRMLS_C);
+		int num_clean = PCRE_CACHE_SIZE / 8;
+		zend_hash_apply_with_argument(&PCRE_G(pcre_cache), pcre_clean_cache, &num_clean TSRMLS_CC);
 	}
 
 	/* Store the compiled pattern and extra info in the cache. */
@@ -434,7 +402,7 @@ static void php_pcre_match(INTERNAL_FUNCTION_PARAMETERS, int global)
 		}
 		if ((global && (subpats_order < PREG_PATTERN_ORDER || subpats_order > PREG_SET_ORDER)) ||
 			(!global && subpats_order != 0)) {
-			zend_error(E_WARNING, "Wrong value for parameter 4 in call to %s()", get_active_function_name(TSRMLS_C));
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Wrong value for parameter 4 in call to %s()", get_active_function_name(TSRMLS_C));
 			return;
 		}
 	}
@@ -526,7 +494,7 @@ static void php_pcre_match(INTERNAL_FUNCTION_PARAMETERS, int global)
 
 		/* Check for too many substrings condition. */	
 		if (count == 0) {
-			zend_error(E_NOTICE, "Matched, but too many substrings");
+			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Matched, but too many substrings");
 			count = size_offsets/3;
 		}
 
@@ -542,7 +510,7 @@ static void php_pcre_match(INTERNAL_FUNCTION_PARAMETERS, int global)
 					efree(subpat_names);
 					efree(offsets);
 					efree(re);
-					zend_error(E_WARNING, "Get subpatterns list failed");
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "Get subpatterns list failed");
 					return;
 				}
 
@@ -640,6 +608,7 @@ static void php_pcre_match(INTERNAL_FUNCTION_PARAMETERS, int global)
 			if (subpat_names[i]) {
 				zend_hash_update(Z_ARRVAL_P(subpats), subpat_names[i],
 								 strlen(subpat_names[i])+1, &match_sets[i], sizeof(zval *), NULL);
+				ZVAL_ADDREF(match_sets[i]);
 			}
 			zend_hash_next_index_insert(Z_ARRVAL_P(subpats), &match_sets[i], sizeof(zval *), NULL);
 		}
@@ -782,9 +751,9 @@ static int preg_do_eval(char *eval_str, int eval_str_len, char *subject,
 					   in instead of the backref */
 					match = subject + offsets[backref<<1];
 					match_len = offsets[(backref<<1)+1] - offsets[backref<<1];
-					if (match_len)
-						esc_match = php_addslashes(match, match_len, &esc_match_len, 0 TSRMLS_CC);
-					else {
+					if (match_len) {
+						esc_match = php_addslashes_ex(match, match_len, &esc_match_len, 0, 1 TSRMLS_CC);
+					} else {
 						esc_match = match;
 						esc_match_len = 0;
 					}
@@ -813,8 +782,8 @@ static int preg_do_eval(char *eval_str, int eval_str_len, char *subject,
 	/* Run the code */
 	if (zend_eval_string(code.c, &retval, compiled_string_description TSRMLS_CC) == FAILURE) {
 		efree(compiled_string_description);
-		zend_error(E_ERROR, "Failed evaluating code:\n%s", code.c);
-		/* zend_error() does not return in this case */
+		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Failed evaluating code:\n%s", code.c);
+		/* php_error_docref(NULL TSRMLS_CC, ) does not return in this case */
 	}
 	efree(compiled_string_description);
 	convert_to_string(&retval);
@@ -909,7 +878,7 @@ PHPAPI char *php_pcre_replace(char *regex,   int regex_len,
 		
 		/* Check for too many substrings condition. */
 		if (count == 0) {
-			zend_error(E_NOTICE, "Matched, but too many substrings");
+			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Matched, but too many substrings");
 			count = size_offsets/3;
 		}
 
@@ -1313,7 +1282,7 @@ PHP_FUNCTION(preg_split)
 
 		/* Check for too many substrings condition. */
 		if (count == 0) {
-			zend_error(E_NOTICE, "Matched, but too many substrings");
+			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Matched, but too many substrings");
 			count = size_offsets/3;
 		}
 				
@@ -1513,7 +1482,7 @@ PHP_FUNCTION(preg_grep)
 	}
 	
 	if (Z_TYPE_PP(input) != IS_ARRAY) {
-		zend_error(E_WARNING, "Second argument to preg_grep() should be an array");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Second argument to preg_grep() should be an array");
 		return;
 	}
 
@@ -1558,7 +1527,7 @@ PHP_FUNCTION(preg_grep)
 
 		/* Check for too many substrings condition. */
 		if (count == 0) {
-			zend_error(E_NOTICE, "Matched, but too many substrings");
+			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Matched, but too many substrings");
 			count = size_offsets/3;
 		}
 

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.131 2005/10/06 20:29:13 johannes Exp $ */
+/* $Id: php_cli.c,v 1.132 2005/10/11 18:58:27 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -530,7 +530,7 @@ static int cli_seek_file_begin(zend_file_handle *file_handle, char *script_file,
 	*lineno = 1;
 
 	if (!(file_handle->handle.fp = VCWD_FOPEN(script_file, "rb"))) {
-		php_printf("Could not open input file: %s.\n", script_file);
+		php_printf("Could not open input file: %s\n", script_file);
 		return FAILURE;
 	}
 	file_handle->filename = script_file;

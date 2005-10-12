@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.15 2005/10/10 16:42:32 derick Exp $ */
+/* $Id: php_date.c,v 1.43.2.16 2005/10/12 19:49:59 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -190,9 +190,7 @@ static void _php_date_tzinfo_dtor(void *tzinfo)
 {
 	timelib_tzinfo **tzi = (timelib_tzinfo **)tzinfo;
 
-	if (*tzi) {
-		timelib_tzinfo_dtor(*tzi);
-	}
+	timelib_tzinfo_dtor(*tzi);
 }
 
 /* {{{ PHP_RINIT_FUNCTION */
@@ -289,7 +287,9 @@ static timelib_tzinfo *php_date_parse_tzfile(char *formal_tzname, timelib_tzdb *
 	}
 
 	tzi = timelib_parse_tzfile(formal_tzname, tzdb);
-	zend_hash_add(&DATEG(tzcache), formal_tzname, strlen(formal_tzname) + 1, (void *) &tzi, sizeof(timelib_tzinfo*), NULL);
+	if (tzi) {
+		zend_hash_add(&DATEG(tzcache), formal_tzname, strlen(formal_tzname) + 1, (void *) &tzi, sizeof(timelib_tzinfo*), NULL);
+	}
 	return tzi;
 }
 /* }}} */

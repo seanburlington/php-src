@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.h,v 1.26 2005/10/11 00:18:31 helly Exp $ */
+/* $Id: spl_iterators.h,v 1.27 2005/10/12 22:52:09 helly Exp $ */
 
 #ifndef SPL_ITERATORS_H
 #define SPL_ITERATORS_H
@@ -125,9 +125,7 @@ typedef struct _spl_dual_it_object {
 #if HAVE_PCRE || HAVE_BUNDLED_PCRE
 		struct {
 			int              flags;
-			pcre             *re;
-			pcre_extra		 *extra;
-			int              options;
+			pcre_cache_entry *pce;
 		} regex;
 #endif
 	} u;

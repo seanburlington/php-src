@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.493 2005/10/05 12:16:02 rolland Exp $ */
+/* $Id: string.c,v 1.494 2005/10/12 11:00:47 dmitry Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -5123,6 +5123,7 @@ PHPAPI int32_t php_u_strip_tags(UChar *rbuf, int32_t len, int *stateptr, UChar *
 	buf = eustrndup(rbuf, len);
 	rp = rbuf;
 	if (allow_len != 0) {
+		allow = eustrndup(allow, allow_len);
 		php_u_strtolower(&allow, &allow_len, UG(default_locale));
 		tbuf = eumalloc(PHP_TAG_BUF_SIZE+1);
 		tp = tbuf;

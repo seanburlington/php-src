@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: xml.c,v 1.151 2004/04/07 16:24:17 rrichards Exp $ */
+/* $Id: xml.c,v 1.157.2.1 2005/10/12 03:21:05 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -74,9 +74,6 @@ ZEND_GET_MODULE(xml)
 
 /* {{{ function prototypes */
 PHP_MINIT_FUNCTION(xml);
-PHP_RINIT_FUNCTION(xml);
-PHP_MSHUTDOWN_FUNCTION(xml);
-PHP_RSHUTDOWN_FUNCTION(xml);
 PHP_MINFO_FUNCTION(xml);
 
 static void xml_parser_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC);
@@ -142,14 +139,26 @@ function_entry xml_functions[] = {
 	{NULL, NULL, NULL}
 };
 
+#ifdef LIBXML_EXPAT_COMPAT
+static zend_module_dep xml_deps[] = {
+	ZEND_MOD_REQUIRED("libxml")
+	{NULL, NULL, NULL}
+};
+#endif
+
 zend_module_entry xml_module_entry = {
+#ifdef LIBXML_EXPAT_COMPAT
+    STANDARD_MODULE_HEADER_EX, NULL,
+	xml_deps,
+#else
     STANDARD_MODULE_HEADER,
+#endif
 	"xml",                /* extension name */
 	xml_functions,        /* extension function list */
 	PHP_MINIT(xml),       /* extension-wide startup function */
-	PHP_MSHUTDOWN(xml),   /* extension-wide shutdown function */
-	PHP_RINIT(xml),       /* per-request startup function */
-	PHP_RSHUTDOWN(xml),   /* per-request shutdown function */
+	NULL,                 /* extension-wide shutdown function */
+	NULL,                 /* per-request startup function */
+	NULL,                 /* per-request shutdown function */
 	PHP_MINFO(xml),       /* information function */
     NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
@@ -176,7 +185,7 @@ static int le_xml_parser;
 #ifdef ZTS
 static void php_xml_init_globals(php_xml_globals *xml_globals_p TSRMLS_DC)
 {
-	XML(default_encoding) = "ISO-8859-1";
+	XML(default_encoding) = "UTF-8";
 }
 #endif
 
@@ -204,7 +213,7 @@ PHP_MINIT_FUNCTION(xml)
 #ifdef ZTS
 	ts_allocate_id(&xml_globals_id, sizeof(php_xml_globals), (ts_allocate_ctor) php_xml_init_globals, NULL);
 #else
-	XML(default_encoding) = "ISO-8859-1";
+	XML(default_encoding) = "UTF-8";
 #endif
 
 	REGISTER_LONG_CONSTANT("XML_ERROR_NONE", XML_ERROR_NONE, CONST_CS|CONST_PERSISTENT);
@@ -250,25 +259,6 @@ PHP_MINIT_FUNCTION(xml)
 
 	return SUCCESS;
 }
-
-
-PHP_RINIT_FUNCTION(xml)
-{
-    return SUCCESS;
-}
-
-
-PHP_MSHUTDOWN_FUNCTION(xml)
-{
-	return SUCCESS;
-}
-
-
-PHP_RSHUTDOWN_FUNCTION(xml)
-{
-	return SUCCESS;
-}
-
 
 PHP_MINFO_FUNCTION(xml)
 {
@@ -410,12 +400,12 @@ static void xml_set_handler(zval **handler, zval **data)
 /* {{{ xml_call_handler() */
 static zval *xml_call_handler(xml_parser *parser, zval *handler, zend_function *function_ptr, int argc, zval **argv)
 {
+	int i;	
 	TSRMLS_FETCH();
 
-	if (parser && handler) {
+	if (parser && handler && !EG(exception)) {
 		zval ***args;
 		zval *retval;
-		int i;	
 		int result;
 		zend_fcall_info fci;
 
@@ -459,10 +449,14 @@ static zval *xml_call_handler(xml_parser *parser, zval *handler, zend_function *
 		if (result == FAILURE) {
 			return NULL;
 		} else {
-			return retval;
+			return EG(exception) ? NULL : retval;
 		}
+	} else {
+		for (i = 0; i < argc; i++) {
+			zval_ptr_dtor(&argv[i]);
+		}
+		return NULL;
 	}
-	return NULL;
 }
 /* }}} */
 
@@ -1094,6 +1088,8 @@ static void php_xml_parser_create_impl(INTERNAL_FUNCTION_PARAMETERS, int ns_supp
 	parser->target_encoding = encoding;
 	parser->case_folding = 1;
 	parser->object = NULL;
+	parser->isparsing = 0;
+
 	XML_SetUserData(parser->parser, parser);
 
 	ZEND_REGISTER_RESOURCE(return_value, parser,le_xml_parser);
@@ -1112,12 +1108,7 @@ PHP_FUNCTION(xml_parser_create)
    Create an XML parser */
 PHP_FUNCTION(xml_parser_create_ns)
 {
-#if defined(HAVE_LIBXML) && defined(HAVE_XML) && !defined(HAVE_LIBEXPAT) && LIBXML_VERSION < 20600 
-	php_error_docref(NULL TSRMLS_CC, E_WARNING, "is broken with libxml2 %s. Please upgrade to libxml2 2.6", LIBXML_DOTTED_VERSION);
-	RETURN_FALSE;
-#else
 	php_xml_parser_create_impl(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);
-#endif
 }
 /* }}} */
 
@@ -1352,7 +1343,9 @@ PHP_FUNCTION(xml_parse)
 		isFinal = 0;
 	}
 
+	parser->isparsing = 1;
 	ret = XML_Parse(parser->parser, Z_STRVAL_PP(data), Z_STRLEN_PP(data), isFinal);
+	parser->isparsing = 0;
 	RETVAL_LONG(ret);
 }
 
@@ -1391,7 +1384,9 @@ PHP_FUNCTION(xml_parse_into_struct)
 	XML_SetElementHandler(parser->parser, _xml_startElementHandler, _xml_endElementHandler);
 	XML_SetCharacterDataHandler(parser->parser, _xml_characterDataHandler);
 
+	parser->isparsing = 1;
 	ret = XML_Parse(parser->parser, Z_STRVAL_PP(data), Z_STRLEN_PP(data), 1);
+	parser->isparsing = 0;
 
 	RETVAL_LONG(ret);
 }
@@ -1491,6 +1486,11 @@ PHP_FUNCTION(xml_parser_free)
 	}
 
 	ZEND_FETCH_RESOURCE(parser,xml_parser *, pind, -1, "XML Parser", le_xml_parser);
+
+	if (parser->isparsing == 1) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Parser cannot be freed while it is parsing.");
+		RETURN_FALSE;
+	}
 
 	if (zend_list_delete(parser->index) == FAILURE) {
 		RETURN_FALSE;

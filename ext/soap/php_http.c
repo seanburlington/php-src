@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.79 2005/10/07 11:55:53 dmitry Exp $ */
+/* $Id: php_http.c,v 1.80 2005/10/12 14:03:26 tony2001 Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -845,8 +845,6 @@ try_again:
 
 		if ((loc = get_http_header_value(http_headers,"Location: ")) != NULL) {
 			php_url *new_url  = php_url_parse(loc);
-			char *body;
-			int body_size;
 
 			if (new_url != NULL) {
 				efree(http_headers);

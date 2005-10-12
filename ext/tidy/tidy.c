@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.68 2005/10/05 19:12:44 helly Exp $ */
+/* $Id: tidy.c,v 1.69 2005/10/12 14:30:34 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -962,7 +962,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.68 2005/10/05 19:12:44 helly Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.69 2005/10/12 14:30:34 tony2001 Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -1207,8 +1207,9 @@ PHP_FUNCTION(tidy_get_opt_doc)
 		RETURN_FALSE;
 	}
 
-	if (optval = (char *) tidyOptGetDoc(obj->ptdoc->doc, opt))
+	if ( (optval = (char *) tidyOptGetDoc(obj->ptdoc->doc, opt)) ) {
 		RETURN_STRING(optval, 1);
+	}
 
 	RETURN_FALSE;
 }

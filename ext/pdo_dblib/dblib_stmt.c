@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: dblib_stmt.c,v 1.6 2005/07/20 05:27:27 wez Exp $ */
+/* $Id: dblib_stmt.c,v 1.7 2005/10/12 15:02:35 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -95,6 +95,8 @@ static int pdo_dblib_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 	}
 
 	ret = dbnextrow(H->link);
+
+	stmt->row_count = DBCOUNT(H->link);
 
     if (ret == NO_MORE_ROWS) {
        return 1;

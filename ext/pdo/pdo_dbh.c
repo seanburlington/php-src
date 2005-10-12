@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.98 2005/10/03 03:53:57 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.99 2005/10/12 12:13:50 dmitry Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -827,7 +827,7 @@ static PHP_METHOD(PDO, getAttribute)
 
 		case PDO_ATTR_STATEMENT_CLASS:
 			array_init(return_value);
-			add_next_index_string(return_value, dbh->def_stmt_ce->name, 1);
+			add_next_index_text(return_value, dbh->def_stmt_ce->name, 1);
 			if (dbh->def_stmt_ctor_args) {
 				dbh->def_stmt_ctor_args->refcount++;
 				add_next_index_zval(return_value, dbh->def_stmt_ctor_args);

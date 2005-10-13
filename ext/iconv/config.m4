@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.27.2.2 2005/01/10 21:37:59 tony2001 Exp $
+dnl $Id: config.m4,v 1.27.2.3 2005/10/13 15:24:25 tony2001 Exp $
 dnl
 
 PHP_ARG_WITH(iconv, for iconv support,
@@ -18,7 +18,14 @@ if test "$PHP_ICONV" != "no"; then
     iconv_ldflags_save="$LDFLAGS"
 
     if test -z "$ICONV_DIR"; then
-      PHP_ICONV_PREFIX="/usr"
+      for i in /usr /usr/local; do
+        if test -f "$i/include/iconv.h" -o test -f "$i/include/giconv.h"; then
+          PHP_ICONV_PREFIX="$i"
+        fi
+      done
+      if test -z "$PHP_ICONV_PREFIX"; then
+        PHP_ICONV_PREFIX="/usr"
+      fi
     else
       PHP_ICONV_PREFIX="$ICONV_DIR"
     fi

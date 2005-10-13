@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.h,v 1.2 2004/04/27 10:46:21 rrichards Exp $ */
+/* $Id: php_xmlreader.h,v 1.3.2.1 2005/10/13 21:20:11 rrichards Exp $ */
 
 #ifndef PHP_XMLREADER_H
 #define PHP_XMLREADER_H
@@ -53,6 +53,8 @@ PHP_MINIT_FUNCTION(xmlreader);
 PHP_MSHUTDOWN_FUNCTION(xmlreader);
 PHP_MINFO_FUNCTION(xmlreader);
 
+#define REGISTER_XMLREADER_CLASS_CONST_LONG(const_name, value) \
+	zend_declare_class_constant_long(xmlreader_class_entry, const_name, sizeof(const_name)-1, (long)value TSRMLS_CC);
 
 #ifdef ZTS
 #define XMLREADER_G(v) TSRMG(xmlreader_globals_id, zend_xmlreader_globals *, v)

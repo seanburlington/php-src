@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ibase_service.c,v 1.11 2005/08/03 14:07:19 sniper Exp $ */
+/* $Id: ibase_service.c,v 1.12 2005/10/13 12:58:22 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -210,7 +210,7 @@ PHP_FUNCTION(ibase_delete_user)
    Connect to the service manager */
 PHP_FUNCTION(ibase_service_attach)
 {
-	long hlen, ulen, plen, spb_len;
+	int hlen, ulen, plen, spb_len;
 	ibase_service *svm;
 	char buf[128], *host, *user, *pass, *loc;
 	isc_svc_handle handle = NULL;

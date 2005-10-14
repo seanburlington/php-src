@@ -1,4 +1,4 @@
-install-pear.phar
+install-pear-nozlib.phar
 Makefile
 .deps
 phpize

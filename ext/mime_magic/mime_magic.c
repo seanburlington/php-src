@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.37 2004/01/16 11:15:13 sniper Exp $ 
+  $Id: mime_magic.c,v 1.42.2.1 2005/10/14 15:30:39 iliaa Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -160,7 +160,6 @@
 
 #include <fcntl.h>
 #include <sys/types.h>
-#include <sys/stat.h>
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
@@ -272,9 +271,7 @@ PHP_MINIT_FUNCTION(mime_magic)
 	ZEND_INIT_MODULE_GLOBALS(mime_magic, php_mime_magic_init_globals, NULL);
 	REGISTER_INI_ENTRIES();
 
-	mime_global.magicfile = MIME_MAGIC_G(magicfile);
-
-	if(mime_global.magicfile) {
+	if(MIME_MAGIC_G(magicfile)) {
 		if(apprentice()) {
 			MIME_MAGIC_G(status) = "invalid magic file, disabled";
 		} else {
@@ -345,12 +342,13 @@ PHP_FUNCTION(mime_content_type)
 		/* fallthru if not a stream resource */
 	default:
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "can only process string or stream arguments");
+		RETURN_FALSE;
 		break;
 	}
 
 	if (conf->magic == (struct magic *)-1) {
 		if(MIME_MAGIC_G(debug))
-			php_error_docref("http://www.php.net/mime_magic" TSRMLS_CC, E_ERROR, "mime_magic could not be initialized, magic file %s is not avaliable", conf->magicfile);
+			php_error_docref("http://www.php.net/mime_magic" TSRMLS_CC, E_ERROR, "mime_magic could not be initialized, magic file %s is not available", conf->magicfile);
 		RETURN_FALSE;
 	} 
 
@@ -1073,6 +1071,8 @@ static int magic_process(zval *what TSRMLS_DC)
 		streampos = php_stream_tell(stream); /* remember stream position for restauration */
 		php_stream_seek(stream, 0, SEEK_SET);
 		break;
+	default:
+		return -1;	
 	}
 
 

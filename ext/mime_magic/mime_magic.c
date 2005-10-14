@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.42 2005/08/03 14:07:26 sniper Exp $ 
+  $Id: mime_magic.c,v 1.43 2005/10/14 15:38:56 iliaa Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -271,9 +271,7 @@ PHP_MINIT_FUNCTION(mime_magic)
 	ZEND_INIT_MODULE_GLOBALS(mime_magic, php_mime_magic_init_globals, NULL);
 	REGISTER_INI_ENTRIES();
 
-	mime_global.magicfile = MIME_MAGIC_G(magicfile);
-
-	if(mime_global.magicfile) {
+	if (MIME_MAGIC_G(magicfile)) {
 		if(apprentice()) {
 			MIME_MAGIC_G(status) = "invalid magic file, disabled";
 		} else {

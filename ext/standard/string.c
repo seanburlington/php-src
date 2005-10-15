@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.494 2005/10/12 11:00:47 dmitry Exp $ */
+/* $Id: string.c,v 1.495 2005/10/15 12:50:20 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3950,6 +3950,7 @@ PHPAPI UChar *php_u_addslashes(UChar *str, int32_t length, int32_t *new_length, 
 {
 	return php_u_addslashes_ex(str, length, new_length, should_free, 0 TSRMLS_CC);
 }
+/* }}} */
 
 /* {{{ php_u_addslashes_ex
  */

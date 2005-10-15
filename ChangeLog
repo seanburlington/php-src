@@ -1,3 +1,30 @@
+2005-10-14  Antony Dovgal  <antony@zend.com>
+
+    * ZendEngine2/tests/bug34873.phpt
+      ZendEngine2/tests/bug34873.phpt
+      ZendEngine2/tests/bug34873.phpt:
+        1.1.4;
+      add test for bug #34873
+
+2005-10-14  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * ext/mime_magic/mime_magic.c:
+      MFB51: ZTS fix
+
+    * (PHP_5_1)
+      ext/mime_magic/mime_magic.c:
+      ZTS fix
+
+    * (PHP_5_1)
+      NEWS
+      configure.in:
+      Back to dev
+
+    * (PHP_5_1)
+      NEWS
+      configure.in:
+      Prepare for 5.1RC2
+
 2005-10-13  Ilia Alshanetsky  <ilia@prohost.org>
 
     * ext/mysqli/tests/bug33491.phpt:
@@ -13917,7 +13944,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2132 2005/10/14 05:44:17 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2133 2005/10/15 05:35:32 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -17318,7 +17345,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2132 2005/10/14 05:44:17 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2133 2005/10/15 05:35:32 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -17799,7 +17826,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2132 2005/10/14 05:44:17 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2133 2005/10/15 05:35:32 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -19273,7 +19300,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2132 2005/10/14 05:44:17 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2133 2005/10/15 05:35:32 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

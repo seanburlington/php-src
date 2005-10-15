@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.87.2.24 2005/10/10 12:59:06 tony2001 Exp $ 
+  $Id: mysqli_api.c,v 1.87.2.25 2005/10/15 07:33:12 georg Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -741,10 +741,6 @@ PHP_FUNCTION(mysqli_fetch_fields)
 	}
 
 	MYSQLI_FETCH_RESOURCE(result, MYSQL_RES *, &mysql_result, "mysqli_result"); 
-
-	if (!(field = mysql_fetch_field(result))) {
-		RETURN_FALSE;
-	}
 
 	array_init(return_value);
 

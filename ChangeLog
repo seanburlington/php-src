@@ -1,3 +1,32 @@
+2005-10-15  Derick Rethans  <php@derickrethans.nl>
+
+    * (PHP_5_1)
+      NEWS:
+      - Fixed timezone guessing on Windows. (Derick, Nuno)
+
+    * NEWS
+      ZendEngine2/zend_compile.c:
+      - Changed type hints so that they take "= NULL" as default value.
+
+    * ext/standard/string.c:
+      - Fixed folding markers.
+
+2005-10-15  Georg Richter  <georg@mysql.com>
+
+    * (PHP_5_0)
+      NEWS
+      ext/mysqli/mysqli_api.c:
+       Fixed an error in mysqli_fetch_fields (returned NULL instead of an
+        array when row number > field_count). (Georg)
+
+    * (PHP_5_1)
+      NEWS
+      ext/mysqli/mysqli_api.c:
+      fixed an error in mysqli_fetch_fields (function returns NULL instead of
+      array
+      when row_number > num_fields).
+      Thanks to Marc Deslisle and phpMyAdmin team for the report.
+
 2005-10-14  Antony Dovgal  <antony@zend.com>
 
     * ZendEngine2/tests/bug34873.phpt
@@ -13944,7 +13973,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2133 2005/10/15 05:35:32 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2134 2005/10/16 05:45:28 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -17345,7 +17374,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2133 2005/10/15 05:35:32 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2134 2005/10/16 05:45:28 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -17826,7 +17855,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2133 2005/10/15 05:35:32 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2134 2005/10/16 05:45:28 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -19300,7 +19329,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2133 2005/10/15 05:35:32 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2134 2005/10/16 05:45:28 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.172 2005/09/08 21:07:26 iliaa Exp $ 
+   $Id: sqlite.c,v 1.173 2005/10/17 14:29:20 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1126,7 +1126,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.172 2005/09/08 21:07:26 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.173 2005/10/17 14:29:20 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1441,14 +1441,13 @@ next_row:
 		/* first row - lets copy the column names */
 		rres->col_names = safe_emalloc(rres->ncolumns, sizeof(char *), 0);
 		for (i = 0; i < rres->ncolumns; i++) {
-			colname = (char*)colnames[i];
+			rres->col_names[i] = estrdup((char*)colnames[i]);
 
 			if (SQLITE_G(assoc_case) == 1) {
-				php_sqlite_strtoupper(colname);
+				php_sqlite_strtoupper(rres->col_names[i]);
 			} else if (SQLITE_G(assoc_case) == 2) {
-				php_sqlite_strtolower(colname);
+				php_sqlite_strtolower(rres->col_names[i]);
 			}
-			rres->col_names[i] = estrdup(colname);
 		}
 		if (!rres->buffered) {
 			/* non buffered mode - also fetch memory for on single row */
@@ -1687,7 +1686,7 @@ PHP_FUNCTION(sqlite_fetch_column_types)
 	array_init(return_value);
 
 	for (i = 0; i < ncols; i++) {
-		char *colname = (char *)colnames[i];
+		char *colname = estrdup((char *)colnames[i]);
 
 		if (SQLITE_G(assoc_case) == 1) {
 			php_sqlite_strtoupper(colname);
@@ -1717,6 +1716,7 @@ PHP_FUNCTION(sqlite_fetch_column_types)
 				add_index_string(return_value, i, colnames[ncols + i] ? (char *)colnames[ncols + i] : "", 1);
 			}
 		}
+		efree(colname);
 	}
 
 done:

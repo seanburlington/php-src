@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.37 2005/10/13 20:17:18 rrichards Exp $ */
+/* $Id: libxml.c,v 1.38 2005/10/17 19:47:23 rrichards Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -386,7 +386,7 @@ php_libxml_output_buffer_create_filename(const char *URI,
 
     /* try with a non-escaped URI this may be a strange filename */
 	if (context == NULL) {
-		context = context = php_libxml_streams_IO_open_write_wrapper(URI);
+		context = php_libxml_streams_IO_open_write_wrapper(URI);
 	}
 
 	if (context == NULL) {

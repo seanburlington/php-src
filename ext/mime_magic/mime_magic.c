@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.43 2005/10/14 15:38:56 iliaa Exp $ 
+  $Id: mime_magic.c,v 1.44 2005/10/18 12:41:13 tony2001 Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -260,7 +260,9 @@ PHP_INI_END()
  */
 static void php_mime_magic_init_globals(zend_mime_magic_globals *mime_magic_globals)
 {
-	mime_global.magicfile = NULL;
+	memset(mime_magic_globals, 0, sizeof(zend_mime_magic_globals));
+	mime_global.magic = NULL;
+	mime_global.last = NULL;
 }
 /* }}} */
 
@@ -348,7 +350,7 @@ PHP_FUNCTION(mime_content_type)
 
 	if (conf->magic == (struct magic *)-1) {
 		if(MIME_MAGIC_G(debug))
-			php_error_docref("http://www.php.net/mime_magic" TSRMLS_CC, E_ERROR, "mime_magic could not be initialized, magic file %s is not available", conf->magicfile);
+			php_error_docref("http://www.php.net/mime_magic" TSRMLS_CC, E_ERROR, "mime_magic could not be initialized, magic file %s is not available", MIME_MAGIC_G(magicfile));
 		RETURN_FALSE;
 	} 
 
@@ -391,7 +393,11 @@ static int apprentice(void)
     magic_server_config_rec *conf = &mime_global;
     TSRMLS_FETCH();
 
-    fname = conf->magicfile; /* todo cwd? */
+    if (!MIME_MAGIC_G(magicfile)) {
+        return -1;
+    }
+	
+    fname = MIME_MAGIC_G(magicfile); /* todo cwd? */
     f = fopen(fname, "rb");
     if (f == NULL) {
 		conf->magic = (struct magic *)-1;

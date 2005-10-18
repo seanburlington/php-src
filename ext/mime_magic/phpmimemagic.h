@@ -15,7 +15,7 @@
   | Author:                                                              |
   +----------------------------------------------------------------------+
 
-  $Id: phpmimemagic.h,v 1.3 2005/08/03 14:07:26 sniper Exp $ 
+  $Id: phpmimemagic.h,v 1.4 2005/10/18 12:41:13 tony2001 Exp $ 
 */
 
 #ifndef PHPMIMEMAGIC_H
@@ -343,7 +343,6 @@ typedef struct magic_rsl_s {
 
 /* per-server info */
 typedef struct {
-    char *magicfile;		/* where magic be found */
     struct magic *magic;	/* head of magic config list */
     struct magic *last;
 } magic_server_config_rec;

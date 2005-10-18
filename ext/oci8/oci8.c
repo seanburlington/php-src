@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.279 2005/10/10 10:16:55 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.280 2005/10/18 13:39:51 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -436,7 +436,7 @@ oci_error:
 /* {{{ php_oci_cleanup_global_handles()
  Free global handles (if they were initialized before)
 */
-static void php_oci_cleanup_global_handles(TSRMLS_C)
+static void php_oci_cleanup_global_handles(TSRMLS_D)
 {
 	if (OCI_G(err)) {
 		PHP_OCI_CALL(OCIHandleFree, ((dvoid *) OCI_G(err), OCI_HTYPE_ENV));
@@ -619,7 +619,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.279 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.280 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);

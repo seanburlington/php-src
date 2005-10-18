@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.166.2.3 2005/10/18 14:50:48 tony2001 Exp $ 
+   $Id: sqlite.c,v 1.166.2.4 2005/10/18 22:51:10 iliaa Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1125,7 +1125,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.3 2005/10/18 14:50:48 tony2001 Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.4 2005/10/18 22:51:10 iliaa Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1177,7 +1177,9 @@ static struct php_sqlite_db *php_sqlite_open(char *filename, int mode, char *per
 	/* authorizer hook so we can enforce safe mode
 	 * Note: the declaration of php_sqlite_authorizer is correct for 2.8.2 of libsqlite,
 	 * and IS backwards binary compatible with earlier versions */
-	sqlite_set_authorizer(sdb, php_sqlite_authorizer, NULL);
+	if (PG(safe_mode) || (PG(open_basedir) && *PG(open_basedir))) {
+		sqlite_set_authorizer(sdb, php_sqlite_authorizer, NULL);
+	}
 	
 	db->rsrc_id = ZEND_REGISTER_RESOURCE(object ? NULL : return_value, db, persistent_id ? le_sqlite_pdb : le_sqlite_db);
 	if (object) {

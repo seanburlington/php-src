@@ -15,7 +15,7 @@
   | Author: Hartmut Holzgraefe  <hholzgra@php.net>                       |
   +----------------------------------------------------------------------+
 
-  $Id: mime_magic.c,v 1.44 2005/10/18 12:41:13 tony2001 Exp $ 
+  $Id: mime_magic.c,v 1.45 2005/10/18 13:02:11 derick Exp $ 
 
   This module contains a lot of stuff taken from Apache mod_mime_magic,
   so the license section is a little bit longer than usual:
@@ -434,9 +434,6 @@ static int apprentice(void)
 		/* parse it */
 		if (parse(line + ws_offset, lineno) != 0)
 			++errs;
-
-		if(errs && !MIME_MAGIC_G(debug)) 
-			break;
     }
 
     (void) fclose(f);

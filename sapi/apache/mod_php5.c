@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.9 2004/07/10 07:46:09 andi Exp $ */
+/* $Id: mod_php5.c,v 1.19.2.1 2005/10/18 23:15:28 iliaa Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -199,9 +199,7 @@ static int sapi_apache_header_handler(sapi_header_struct *sapi_header, sapi_head
 
 	*p = ':';  /* a well behaved header handler shouldn't change its original arguments */
 
-	efree(sapi_header->header);
-	
-	return 0;  /* don't use the default SAPI mechanism, Apache duplicates this functionality */
+	return SAPI_HEADER_ADD;
 }
 /* }}} */
 
@@ -209,12 +207,18 @@ static int sapi_apache_header_handler(sapi_header_struct *sapi_header, sapi_head
  */
 static int sapi_apache_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 {
-	if(SG(server_context) == NULL) { /* server_context is not here anymore */
+	request_rec *r = SG(server_context);
+
+	if(r == NULL) { /* server_context is not here anymore */
 		return SAPI_HEADER_SEND_FAILED;
 	}
 
-	((request_rec *) SG(server_context))->status = SG(sapi_headers).http_response_code;
-	send_http_header((request_rec *) SG(server_context));
+	r->status = SG(sapi_headers).http_response_code;
+	if(r->status==304) {
+		send_error_response(r,0);
+	} else {
+		send_http_header(r);
+	}   
 	return SAPI_HEADER_SENT_SUCCESSFULLY;
 }
 /* }}} */
@@ -235,7 +239,7 @@ static void sapi_apache_register_server_variables(zval *track_vars_array TSRMLS_
 		if (elts[i].val) {
 			val = elts[i].val;
 		} else {
-			val = empty_string;
+			val = "";
 		}
 		php_register_variable(elts[i].key, val, track_vars_array  TSRMLS_CC);
 	}
@@ -348,6 +352,10 @@ static struct stat *php_apache_get_stat(TSRMLS_D)
  */
 static char *php_apache_getenv(char *name, size_t name_len TSRMLS_DC)
 {
+	if (SG(server_context) == NULL) {
+		return NULL;
+	}
+
 	return (char *) table_get(((request_rec *) SG(server_context))->subprocess_env, name);
 }
 /* }}} */
@@ -401,6 +409,14 @@ static int sapi_apache_get_target_gid(gid_t *obj TSRMLS_DC)
 }
 /* }}} */
 
+/* {{{ php_apache_get_request_time
+ */
+static time_t php_apache_get_request_time(TSRMLS_D)
+{
+	return ((request_rec *)SG(server_context))->request_time;
+}
+/* }}} */
+
 /* {{{ sapi_module_struct apache_sapi_module
  */
 static sapi_module_struct apache_sapi_module = {
@@ -429,6 +445,7 @@ static sapi_module_struct apache_sapi_module = {
 
 	sapi_apache_register_server_variables,		/* register server variables */
 	php_apache_log_message,			/* Log message */
+	php_apache_get_request_time,	/* Get request time */
 
 	NULL,							/* php.ini path override */
 
@@ -475,28 +492,32 @@ static void init_request_info(TSRMLS_D)
 	SG(request_info).content_type = (char *) table_get(r->subprocess_env, "CONTENT_TYPE");
 	SG(request_info).content_length = (content_length ? atoi(content_length) : 0);
 	SG(sapi_headers).http_response_code = r->status;
+	SG(request_info).proto_num = r->proto_num;
 
 	if (r->headers_in) {
 		authorization = table_get(r->headers_in, "Authorization");
 	}
-	if (authorization
-		&& (!PG(safe_mode) || (PG(safe_mode) && !auth_type(r)))
-		&& !strcasecmp(getword(r->pool, &authorization, ' '), "Basic")) {
-		tmp = uudecode(r->pool, authorization);
-		SG(request_info).auth_user = NULL;
-		tmp_user = getword_nulls_nc(r->pool, &tmp, ':');
-		if (SG(request_info).auth_user) {
-			r->connection->user = pstrdup(r->connection->pool, tmp_user);
-			r->connection->ap_auth_type = "Basic";
-			SG(request_info).auth_user = estrdup(tmp_user);
+
+	SG(request_info).auth_user = NULL;
+	SG(request_info).auth_password = NULL;
+
+	if (authorization && (!PG(safe_mode) || (PG(safe_mode) && !auth_type(r)))) {
+		char *p = getword(r->pool, &authorization, ' ');
+		if (!strcasecmp(p, "Basic")) {
+			tmp = uudecode(r->pool, authorization);
+			tmp_user = getword_nulls_nc(r->pool, &tmp, ':');
+			if (tmp_user) {
+				r->connection->user = pstrdup(r->connection->pool, tmp_user);
+				r->connection->ap_auth_type = "Basic";
+				SG(request_info).auth_user = estrdup(tmp_user);
+			}
+			if (tmp) {
+				SG(request_info).auth_password = estrdup(tmp);
+			}
+		} else if (!strcasecmp(p, "Digest")) {
+			r->connection->ap_auth_type = "Digest";
+			SG(request_info).auth_digest = estrdup(authorization);
 		}
-		SG(request_info).auth_password = NULL;
-		if (tmp) {
-			SG(request_info).auth_password = estrdup(tmp);
-		}
-	} else {
-		SG(request_info).auth_user = NULL;
-		SG(request_info).auth_password = NULL;
 	}
 }
 /* }}} */
@@ -686,11 +707,11 @@ static void copy_per_dir_entry(php_per_dir_entry *per_dir_entry)
 
 /* {{{ should_overwrite_per_dir_entry
  */
-static zend_bool should_overwrite_per_dir_entry(HashTable *target_ht, php_per_dir_entry *orig_per_dir_entry, zend_hash_key *hash_key, void *pData)
+static zend_bool should_overwrite_per_dir_entry(HashTable *target_ht, php_per_dir_entry *new_per_dir_entry, zend_hash_key *hash_key, void *pData)
 {
-	php_per_dir_entry *new_per_dir_entry;
+	php_per_dir_entry *orig_per_dir_entry;
 
-	if (zend_hash_find(target_ht, hash_key->arKey, hash_key->nKeyLength, (void **) &new_per_dir_entry)==FAILURE) {
+	if (zend_hash_find(target_ht, hash_key->arKey, hash_key->nKeyLength, (void **) &orig_per_dir_entry)==FAILURE) {
 		return 1; /* does not exist in dest, copy from source */
 	}
 

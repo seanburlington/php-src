@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.19.2.1 2005/10/18 23:15:28 iliaa Exp $ */
+/* $Id: mod_php5.c,v 1.19.2.2 2005/10/18 23:51:54 tony2001 Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -500,6 +500,7 @@ static void init_request_info(TSRMLS_D)
 
 	SG(request_info).auth_user = NULL;
 	SG(request_info).auth_password = NULL;
+	SG(request_info).auth_digest = NULL;
 
 	if (authorization && (!PG(safe_mode) || (PG(safe_mode) && !auth_type(r)))) {
 		char *p = getword(r->pool, &authorization, ' ');

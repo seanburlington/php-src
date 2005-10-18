@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_fe.c,v 1.49.2.1 2005/10/08 15:08:03 georg Exp $ 
+  $Id: mysqli_fe.c,v 1.49.2.2 2005/10/18 10:02:36 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -186,6 +186,7 @@ function_entry mysqli_functions[] = {
 function_entry mysqli_link_methods[] = {
 	PHP_FALIAS(autocommit,mysqli_autocommit,NULL)
 	PHP_FALIAS(change_user,mysqli_change_user,NULL)
+	PHP_FALIAS(character_set_name, mysqli_character_set_name,NULL)
 	PHP_FALIAS(client_encoding, mysqli_character_set_name,NULL)
 	PHP_FALIAS(close,mysqli_close,NULL)
 	PHP_FALIAS(commit,mysqli_commit,NULL)

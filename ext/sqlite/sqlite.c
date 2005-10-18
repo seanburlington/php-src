@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.173 2005/10/17 14:29:20 iliaa Exp $ 
+   $Id: sqlite.c,v 1.174 2005/10/18 14:50:20 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1126,7 +1126,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.173 2005/10/17 14:29:20 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.174 2005/10/18 14:50:20 tony2001 Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1433,7 +1433,7 @@ static int php_sqlite_fetch(struct php_sqlite_result *rres TSRMLS_DC)
 {
 	const char **rowdata, **colnames;
 	int ret, i, base;
-	char *errtext = NULL, *colname;
+	char *errtext = NULL;
 
 next_row:
 	ret = sqlite_step(rres->vm, &rres->ncolumns, &rowdata, &colnames);
@@ -1869,7 +1869,7 @@ static void php_sqlite_fetch_array(struct php_sqlite_result *res, int mode, zend
 				zend_convert_to_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &u_str, &u_len, (char*)rowdata[j], strlen((char*)rowdata[j]), &status);
 				ZVAL_UNICODEL(decoded, u_str, u_len, 0);
 				if (!buffered) {
-					efree(rowdata[j]);
+					efree((char *)rowdata[j]);
 				}
 			} else {
 				ZVAL_STRING(decoded, (char*)rowdata[j], buffered);
@@ -1957,7 +1957,7 @@ static void php_sqlite_fetch_column(struct php_sqlite_result *res, zval *which, 
 		zend_convert_to_unicode(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), &u_str, &u_len, (char*)rowdata[j], strlen((char*)rowdata[j]), &status);
 		RETVAL_UNICODEL(u_str, u_len, 0);
 		if (!res->buffered) {
-			efree(rowdata[j]);
+			efree((char *)rowdata[j]);
 			rowdata[j] = NULL;
 		}		
 	} else {

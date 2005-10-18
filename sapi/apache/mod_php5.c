@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.21 2005/08/12 00:06:15 sniper Exp $ */
+/* $Id: mod_php5.c,v 1.22 2005/10/18 23:14:47 iliaa Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -497,9 +497,9 @@ static void init_request_info(TSRMLS_D)
 	SG(request_info).auth_user = NULL;
 	SG(request_info).auth_password = NULL;
 
-	if (authorization
-		&& (!PG(safe_mode) || (PG(safe_mode) && !auth_type(r)))) {
-		if (!strcasecmp(getword(r->pool, &authorization, ' '), "Basic")) {
+	if (authorization && (!PG(safe_mode) || (PG(safe_mode) && !auth_type(r)))) {
+		char *p = getword(r->pool, &authorization, ' ');
+		if (!strcasecmp(p, "Basic")) {
 			tmp = uudecode(r->pool, authorization);
 			tmp_user = getword_nulls_nc(r->pool, &tmp, ':');
 			if (tmp_user) {
@@ -510,9 +510,9 @@ static void init_request_info(TSRMLS_D)
 			if (tmp) {
 				SG(request_info).auth_password = estrdup(tmp);
 			}
-		} else if  (!strcasecmp(getword(r->pool, &authorization, ' '), "Digest")) {
-            r->connection->ap_auth_type = "Digest";
-            SG(request_info).auth_digest = estrdup(authorization);
+		} else if (!strcasecmp(p, "Digest")) {
+			r->connection->ap_auth_type = "Digest";
+			SG(request_info).auth_digest = estrdup(authorization);
 		}
 	}
 }

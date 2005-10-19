@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.50 2005/09/01 14:31:34 gschlossnagle Exp $ */
+/* $Id: mysql_statement.c,v 1.51 2005/10/19 14:11:25 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -70,6 +70,8 @@ static int pdo_mysql_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
 	efree(S);
 	return 1;
 }
+
+#define PDO_MYSQL_MAX_BUFFER 1024*1024 /* 1 megabyte */
 
 static int pdo_mysql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 {
@@ -141,6 +143,10 @@ static int pdo_mysql_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC)
 							S->bound_result[i].buffer_length =
 								S->fields[i].max_length? S->fields[i].max_length:
 								S->fields[i].length;
+							/* work-around for longtext and alike */
+							if (S->bound_result[i].buffer_length > PDO_MYSQL_MAX_BUFFER) {
+								S->bound_result[i].buffer_length = PDO_MYSQL_MAX_BUFFER;
+							}
 					}
 					S->bound_result[i].buffer = emalloc(S->bound_result[i].buffer_length);
 					S->bound_result[i].is_null = &S->out_null[i];

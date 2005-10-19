@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.2 2005/10/11 18:58:59 sniper Exp $ */
+/* $Id: php_cli.c,v 1.129.2.3 2005/10/19 21:57:45 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -721,6 +721,7 @@ int main(int argc, char *argv[])
 				php_printf("\n");
 				php_end_ob_buffers(1 TSRMLS_CC);
 				exit_status=0;
+				sapi_deactivate(TSRMLS_C);
 				zend_ini_deactivate(TSRMLS_C);
 				goto out_err;
 

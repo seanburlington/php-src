@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.155.2.22 2004/08/19 20:35:36 bfrance Exp $ */
+/* $Id: SAPI.c,v 1.155.2.24.2.1 2005/10/19 20:36:19 iliaa Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -388,6 +388,16 @@ SAPI_API void sapi_deactivate(TSRMLS_D)
 	zend_llist_destroy(&SG(sapi_headers).headers);
 	if (SG(request_info).post_data) {
 		efree(SG(request_info).post_data);
+	} else if (SG(server_context)) {
+		if(sapi_module.read_post) { 
+			/* make sure we've consumed all request input data */
+			char dummy[SAPI_POST_BLOCK_SIZE];
+			int read_bytes;
+
+			while((read_bytes = sapi_module.read_post(dummy, sizeof(dummy)-1 TSRMLS_CC)) > 0) {
+				SG(read_post_bytes) += read_bytes;
+			}
+		}
 	}
 	if (SG(request_info).raw_post_data) {
 		efree(SG(request_info).raw_post_data);
@@ -585,8 +595,6 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 					sapi_update_response_code(302 TSRMLS_CC);
 				}
 			} else if (!STRCASECMP(header_line, "WWW-Authenticate")) { /* HTTP Authentication */
-				int newlen;
-				char *result, *newheader;
 
 				sapi_update_response_code(401 TSRMLS_CC); /* authentication-required */
 
@@ -594,8 +602,8 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 #if (HAVE_PCRE || HAVE_BUNDLED_PCRE) && !defined(COMPILE_DL_PCRE)
 				{
 					zval *repl_temp;
-					char *ptr = colon_offset+1;
-					int ptr_len=0, result_len = 0;
+					char *ptr = colon_offset+1, *result, *newheader;
+					int ptr_len=0, result_len = 0, newlen = 0;
 
 					/* skip white space */
 					while (isspace(*ptr)) {
@@ -737,6 +745,12 @@ SAPI_API int sapi_send_headers(TSRMLS_D)
 	/* Success-oriented.  We set headers_sent to 1 here to avoid an infinite loop
 	 * in case of an error situation.
 	 */
+	if (SG(sapi_headers).send_default_content_type && sapi_module.send_headers) {
+		sapi_header_struct default_header;
+		sapi_get_default_content_type_header(&default_header TSRMLS_CC);
+		sapi_add_header_ex(default_header.header, default_header.header_len, 0, 0 TSRMLS_CC);
+	}
+
 	SG(headers_sent) = 1;
 
 	if (sapi_module.send_headers) {

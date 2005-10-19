@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: uniqid.c,v 1.42 2005/08/23 12:53:30 dmitry Exp $ */
+/* $Id: uniqid.c,v 1.43 2005/10/19 13:41:36 iliaa Exp $ */
 
 #include "php.h"
 
@@ -61,8 +61,8 @@ PHP_FUNCTION(uniqid)
 #if HAVE_USLEEP && !defined(PHP_WIN32)
 	if (!more_entropy) {
 #if defined(__CYGWIN__)
-		php_error_docref(NULL TSRMLS_CC, E_ERROR, "You must use 'more entropy' under CYGWIN.");
-		return;
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "You must use 'more entropy' under CYGWIN.");
+		RETURN_FALSE;
 #else
 		usleep(1);
 #endif

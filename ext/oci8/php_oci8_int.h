@@ -25,9 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.8 2005/09/26 16:48:24 tony2001 Exp $ */
-
-#undef HAVE_OCI_STMT_PREPARE2
+/* $Id: php_oci8_int.h,v 1.9 2005/10/19 09:11:22 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.29.2.1 2004/12/30 15:23:07 sniper Exp $ */
+/* $Id: tokenizer.c,v 1.29.2.2 2005/10/21 09:33:22 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -518,6 +518,8 @@ PHP_FUNCTION(token_get_all)
 	if (zend_prepare_string_for_scanning(&source_z, "" TSRMLS_CC) == FAILURE) {
 		RETURN_EMPTY_STRING();
 	}
+
+	LANG_SCNG(start) = 1;
 
 	tokenize(return_value TSRMLS_CC);
 	

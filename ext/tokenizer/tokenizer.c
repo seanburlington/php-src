@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.29 2004/03/08 08:02:02 derick Exp $ */
+/* $Id: tokenizer.c,v 1.31.2.1 2005/10/21 09:32:40 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -88,7 +88,7 @@ struct yy_buffer_state
 
 #include "zend.h"
 #include "zend_language_scanner.h"
-#include "zend_language_parser.h"
+#include <zend_language_parser.h>
 
 #define zendtext LANG_SCNG(yy_text)
 #define zendleng LANG_SCNG(yy_leng)
@@ -518,6 +518,8 @@ PHP_FUNCTION(token_get_all)
 	if (zend_prepare_string_for_scanning(&source_z, "" TSRMLS_CC) == FAILURE) {
 		RETURN_EMPTY_STRING();
 	}
+
+	LANG_SCNG(start) = 1;
 
 	tokenize(return_value TSRMLS_CC);
 	

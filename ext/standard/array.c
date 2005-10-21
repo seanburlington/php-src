@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.7 2005/10/21 15:19:39 dmitry Exp $ */
+/* $Id: array.c,v 1.308.2.8 2005/10/21 15:53:22 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -4394,11 +4394,11 @@ PHP_FUNCTION(array_key_exists)
 	    Z_OBJ_HT_PP(array)->has_dimension &&
 	    (Z_OBJ_HT_PP(array)->has_dimension != std_object_handlers.has_dimension ||
 	     instanceof_function_ex(Z_OBJCE_PP(array), zend_ce_arrayaccess, 1 TSRMLS_CC))) {
-	  if (Z_OBJ_HT_PP(array)->has_dimension(*array, *key, 0 TSRMLS_CC)) {
-	  	RETURN_TRUE;
-	  } else {
-	  	RETURN_FALSE;
-	  }
+		if (Z_OBJ_HT_PP(array)->has_dimension(*array, *key, 0 TSRMLS_CC)) {
+			RETURN_TRUE;
+		} else {
+			RETURN_FALSE;
+		}
 	}
 
 	switch (Z_TYPE_PP(key)) {

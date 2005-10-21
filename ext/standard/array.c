@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.327 2005/10/04 20:47:48 tony2001 Exp $ */
+/* $Id: array.c,v 1.328 2005/10/21 15:20:30 dmitry Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -4656,6 +4656,17 @@ PHP_FUNCTION(array_key_exists)
 	if (Z_TYPE_PP(array) != IS_ARRAY && Z_TYPE_PP(array) != IS_OBJECT) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "The second argument should be either an array or an object");
 		RETURN_FALSE;
+	}
+
+	if (Z_TYPE_PP(array) == IS_OBJECT &&
+	    Z_OBJ_HT_PP(array)->has_dimension &&
+	    (Z_OBJ_HT_PP(array)->has_dimension != std_object_handlers.has_dimension ||
+	     instanceof_function_ex(Z_OBJCE_PP(array), U_CLASS_ENTRY(zend_ce_arrayaccess), 1 TSRMLS_CC))) {
+	  if (Z_OBJ_HT_PP(array)->has_dimension(*array, *key, 0 TSRMLS_CC)) {
+	  	RETURN_TRUE;
+	  } else {
+	  	RETURN_FALSE;
+	  }
 	}
 
 	switch (Z_TYPE_PP(key)) {

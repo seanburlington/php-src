@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.502 2005/10/22 13:32:51 rolland Exp $ */
+/* $Id: string.c,v 1.503 2005/10/22 13:36:55 rolland Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1917,7 +1917,7 @@ PHP_FUNCTION(pathinfo)
 
 /* {{{ php_u_stristr
    Unicode version of case insensitve strstr */
-\PHPAPI UChar *php_u_stristr(UChar *s, UChar *t, int32_t s_len, int32_t t_len)
+PHPAPI UChar *php_u_stristr(UChar *s, UChar *t, int32_t s_len, int32_t t_len)
 {
 	int32_t i,j, last;
 	UChar32 ch1, ch2;

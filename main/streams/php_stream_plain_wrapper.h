@@ -16,12 +16,13 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_stream_plain_wrapper.h,v 1.7 2005/08/03 14:08:42 sniper Exp $ */
+/* $Id: php_stream_plain_wrapper.h,v 1.8 2005/10/22 17:26:16 wez Exp $ */
 
 /* definitions for the plain files wrapper */
 
 /* operations for a plain file; use the php_stream_fopen_XXX funcs below */
 PHPAPI extern php_stream_ops php_stream_stdio_ops;
+PHPAPI extern php_stream_wrapper php_plain_files_wrapper;
 
 BEGIN_EXTERN_C()
 

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: filestat.c,v 1.130 2004/01/08 08:17:31 andi Exp $ */
+/* $Id: filestat.c,v 1.136.2.1 2005/10/22 17:02:06 wez Exp $ */
 
 #include "php.h"
 #include "safe_mode.h"
@@ -58,8 +58,6 @@
 #if HAVE_PWD_H
 # ifdef PHP_WIN32
 #  include "win32/pwd.h"
-# elif defined(NETWARE)
-#  include "netware/pwd.h"
 # else
 #  include <pwd.h>
 # endif
@@ -107,9 +105,11 @@ PHP_RSHUTDOWN_FUNCTION(filestat)
 {
 	if (BG(CurrentStatFile)) {
 		efree (BG(CurrentStatFile));
+		BG(CurrentStatFile) = NULL;
 	}
 	if (BG(CurrentLStatFile)) {
 		efree (BG(CurrentLStatFile));
+		BG(CurrentLStatFile) = NULL;
 	}
 	return SUCCESS;
 }
@@ -311,7 +311,11 @@ PHP_FUNCTION(disk_free_space)
 	}
 #elif (defined(HAVE_SYS_STATFS_H) || defined(HAVE_SYS_MOUNT_H)) && defined(HAVE_STATFS)
 	if (statfs(Z_STRVAL_PP(path), &buf)) RETURN_FALSE;
+#ifdef NETWARE
+	bytesfree = (((double)buf.f_bsize) * ((double)buf.f_bfree));
+#else
 	bytesfree = (((double)buf.f_bsize) * ((double)buf.f_bavail));
+#endif
 #endif
 #endif /* WINDOWS */
 
@@ -321,9 +325,10 @@ PHP_FUNCTION(disk_free_space)
 
 /* {{{ proto bool chgrp(string filename, mixed group)
    Change file group */
+#ifndef NETWARE
 PHP_FUNCTION(chgrp)
 {
-#if !defined(WINDOWS) && !defined(NETWARE)  /* I guess 'chgrp' won't be available on NetWare */
+#if !defined(WINDOWS)
 	pval **filename, **group;
 	gid_t gid;
 	struct group *gr=NULL;
@@ -365,13 +370,15 @@ PHP_FUNCTION(chgrp)
 	RETURN_FALSE;
 #endif
 }
+#endif
 /* }}} */
 
 /* {{{ proto bool chown (string filename, mixed user)
    Change file owner */
+#ifndef NETWARE
 PHP_FUNCTION(chown)
 {
-#if !defined(WINDOWS) && !defined(NETWARE)  /* I guess 'chown' won't be available on NetWare */
+#if !defined(WINDOWS)
 	pval **filename, **user;
 	int ret;
 	uid_t uid;
@@ -411,6 +418,7 @@ PHP_FUNCTION(chown)
 #endif
 	RETURN_TRUE;
 }
+#endif
 /* }}} */
 
 /* {{{ proto bool chmod(string filename, int mode)
@@ -460,11 +468,7 @@ PHP_FUNCTION(touch)
 {
 	pval **filename, **filetime, **fileatime;
 	int ret;
-#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
-	struct stat_libc sb;
-#else
 	struct stat sb;
-#endif
 	FILE *file;
 	struct utimbuf newtimebuf;
 	struct utimbuf *newtime = NULL;
@@ -539,6 +543,7 @@ PHP_FUNCTION(clearstatcache)
 #define IS_LINK_OPERATION(__t) ((__t) == FS_TYPE || (__t) == FS_IS_LINK || (__t) == FS_LSTAT)
 #define IS_EXISTS_CHECK(__t) ((__t) == FS_EXISTS  || (__t) == FS_IS_W || (__t) == FS_IS_R || (__t) == FS_IS_X || (__t) == FS_IS_FILE || (__t) == FS_IS_DIR || (__t) == FS_IS_LINK)
 #define IS_ABLE_CHECK(__t) ((__t) == FS_IS_R || (__t) == FS_IS_W || (__t) == FS_IS_X)
+#define IS_ACCESS_CHECK(__t) (IS_ABLE_CHECK(type) || (__t) == FS_EXISTS)
 
 /* {{{ php_stat
  */
@@ -546,11 +551,7 @@ PHPAPI void php_stat(const char *filename, php_stat_len filename_length, int typ
 {
 	zval *stat_dev, *stat_ino, *stat_mode, *stat_nlink, *stat_uid, *stat_gid, *stat_rdev,
 	 	*stat_size, *stat_atime, *stat_mtime, *stat_ctime, *stat_blksize, *stat_blocks;
-#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
-	struct stat_libc *stat_sb;
-#else
 	struct stat *stat_sb;
-#endif
 	php_stream_statbuf ssb;
 	int flags = 0, rmask=S_IROTH, wmask=S_IWOTH, xmask=S_IXOTH; /* access rights defaults to other */
 	char *stat_sb_names[13]={"dev", "ino", "mode", "nlink", "uid", "gid", "rdev",
@@ -558,6 +559,35 @@ PHPAPI void php_stat(const char *filename, php_stat_len filename_length, int typ
 
 	if (!filename_length) {
 		RETURN_FALSE;
+	}
+
+	if (IS_ACCESS_CHECK(type)) {
+		char *local;
+
+		if (php_stream_locate_url_wrapper(filename, &local, 0 TSRMLS_CC) == &php_plain_files_wrapper) {
+			switch (type) {
+#ifdef F_OK
+				case FS_EXISTS:
+					RETURN_BOOL(VCWD_ACCESS(local, F_OK) == 0);
+					break;
+#endif
+#ifdef W_OK
+				case FS_IS_W:
+					RETURN_BOOL(VCWD_ACCESS(local, W_OK) == 0);
+					break;
+#endif
+#ifdef R_OK
+				case FS_IS_R:
+					RETURN_BOOL(VCWD_ACCESS(local, R_OK) == 0);
+					break;
+#endif
+#ifdef X_OK
+				case FS_IS_X:
+					RETURN_BOOL(VCWD_ACCESS(local, X_OK) == 0);
+					break;
+#endif
+			}
+		}
 	}
 
 	if (IS_LINK_OPERATION(type)) {
@@ -617,7 +647,7 @@ PHPAPI void php_stat(const char *filename, php_stat_len filename_length, int typ
 		php_stream_wrapper *wrapper;
 
 		wrapper = php_stream_locate_url_wrapper(filename, NULL, 0 TSRMLS_CC);
-		if (wrapper && wrapper->wops && wrapper->wops->label && strcmp(wrapper->wops->label, "plainfile") == 0) {
+		if (wrapper == &php_plain_files_wrapper) {
 			if (type == FS_IS_X) {
 				xmask = S_IXROOT;
 			} else {
@@ -633,30 +663,26 @@ PHPAPI void php_stat(const char *filename, php_stat_len filename_length, int typ
 	case FS_INODE:
 		RETURN_LONG((long)ssb.sb.st_ino);
 	case FS_SIZE:
-#if defined(NETWARE) && defined(NEW_LIBC)
-		RETURN_LONG((long)(stat_sb->st_size));
-#else
 		RETURN_LONG((long)ssb.sb.st_size);
-#endif
 	case FS_OWNER:
 		RETURN_LONG((long)ssb.sb.st_uid);
 	case FS_GROUP:
 		RETURN_LONG((long)ssb.sb.st_gid);
 	case FS_ATIME:
-#if defined(NETWARE) && defined(NEW_LIBC)
-		RETURN_LONG((long)((stat_sb->st_atime).tv_sec));
+#ifdef NETWARE
+		RETURN_LONG((long)ssb.sb.st_atime.tv_sec);
 #else
 		RETURN_LONG((long)ssb.sb.st_atime);
 #endif
 	case FS_MTIME:
-#if defined(NETWARE) && defined(NEW_LIBC)
-		RETURN_LONG((long)((stat_sb->st_mtime).tv_sec));
+#ifdef NETWARE
+		RETURN_LONG((long)ssb.sb.st_mtime.tv_sec);
 #else
 		RETURN_LONG((long)ssb.sb.st_mtime);
 #endif
 	case FS_CTIME:
-#if defined(NETWARE) && defined(NEW_LIBC)
-		RETURN_LONG((long)((stat_sb->st_ctime).tv_sec));
+#ifdef NETWARE
+		RETURN_LONG((long)ssb.sb.st_ctime.tv_sec);
 #else
 		RETURN_LONG((long)ssb.sb.st_ctime);
 #endif
@@ -707,7 +733,7 @@ PHPAPI void php_stat(const char *filename, php_stat_len filename_length, int typ
 		MAKE_LONG_ZVAL_INCREF(stat_rdev, -1); 
 #endif
 		MAKE_LONG_ZVAL_INCREF(stat_size, stat_sb->st_size);
-#if defined(NETWARE) && defined(NEW_LIBC)
+#ifdef NETWARE
 		MAKE_LONG_ZVAL_INCREF(stat_atime, (stat_sb->st_atime).tv_sec);
 		MAKE_LONG_ZVAL_INCREF(stat_mtime, (stat_sb->st_mtime).tv_sec);
 		MAKE_LONG_ZVAL_INCREF(stat_ctime, (stat_sb->st_ctime).tv_sec);

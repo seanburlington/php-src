@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.163 2005/10/06 06:27:27 dmitry Exp $ */
+/* $Id: simplexml.c,v 1.164 2005/10/23 23:41:18 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -701,7 +701,14 @@ sxe_properties_get(zval *object TSRMLS_DC)
 	node = php_sxe_get_first_node(sxe, node TSRMLS_CC);
 
 	if (node) {
-		node = node->children;
+		if (node->type == XML_ATTRIBUTE_NODE) {
+			MAKE_STD_ZVAL(value);
+			ZVAL_U_STRING(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), value, xmlNodeListGetString(node->doc, node->children, 1), 1);
+			zend_hash_next_index_insert(rv, &value, sizeof(zval *), NULL);
+			node = NULL;
+		} else {
+			node = node->children;
+		}
 
 		while (node) {
 			if (node->children != NULL || node->prev != NULL || node->next != NULL) {
@@ -1757,7 +1764,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.163 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.164 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

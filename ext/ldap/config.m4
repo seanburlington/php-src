@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.34.2.4 2005/10/24 20:24:53 tony2001 Exp $
+dnl $Id: config.m4,v 1.34.2.5 2005/10/24 22:56:33 tony2001 Exp $
 dnl
 
 AC_DEFUN([PHP_LDAP_CHECKS], [
@@ -95,7 +95,7 @@ if test "$PHP_LDAP" != "no"; then
     LDAP_PTHREAD=
   fi
 
-  if test -f $LDAP_LIBDIR/liblber.a || -f $LDAP_LIBDIR/liblber.$SHLIB_SUFFIX_NAME; then
+  if test -f $LDAP_LIBDIR/liblber.a || test -f $LDAP_LIBDIR/liblber.$SHLIB_SUFFIX_NAME; then
     PHP_ADD_LIBRARY_WITH_PATH(lber, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
     PHP_ADD_LIBRARY_WITH_PATH(ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 

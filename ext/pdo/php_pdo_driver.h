@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.66.2.3 2005/10/02 22:11:17 wez Exp $ */
+/* $Id: php_pdo_driver.h,v 1.66.2.4 2005/10/25 16:02:33 tony2001 Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -183,7 +183,7 @@ enum pdo_null_handling {
 };
 
 /* {{{ utils for reading attributes set as driver_options */
-static inline long pdo_attr_lval(zval *options, enum pdo_fetch_type option_name, long defval TSRMLS_DC)
+static inline long pdo_attr_lval(zval *options, enum pdo_attribute_type option_name, long defval TSRMLS_DC)
 {
 	zval **v;
 

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.12 2005/10/04 14:47:30 derick Exp $ */
+/* $Id: filter.c,v 1.13 2005/10/25 07:54:13 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -251,7 +251,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.12 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.13 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -342,8 +342,10 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 	Z_STRLEN(new_var) = val_len;
 	Z_STRVAL(new_var) = estrndup(*val, val_len + 1);
 	Z_TYPE(new_var) = IS_STRING;
-	if (! (IF_G(default_filter) == FS_UNSAFE_RAW)) {
-		php_zval_filter(&new_var, IF_G(default_filter), 0, NULL, NULL/*charset*/ TSRMLS_DC);
+	if (val_len) {
+		if (! (IF_G(default_filter) == FS_UNSAFE_RAW)) {
+			php_zval_filter(&new_var, IF_G(default_filter), 0, NULL, NULL/*charset*/ TSRMLS_DC);
+		}
 	}
 
 	php_register_variable_ex(orig_var, &new_var, orig_array_ptr TSRMLS_DC);

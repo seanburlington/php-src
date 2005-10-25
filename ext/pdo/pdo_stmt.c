@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.8 2005/10/10 14:44:16 iliaa Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.9 2005/10/25 03:53:25 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -556,7 +556,7 @@ static int do_fetch_common(pdo_stmt_t *stmt, enum pdo_fetch_orientation ori,
 				zval_dtor(param->parameter);
 
 				/* set new value */
-				fetch_value(stmt, param->parameter, param->paramno, &param->param_type TSRMLS_CC);
+				fetch_value(stmt, param->parameter, param->paramno, (int *)&param->param_type TSRMLS_CC);
 
 				/* TODO: some smart thing that avoids duplicating the value in the
 				 * general loop below.  For now, if you're binding output columns,

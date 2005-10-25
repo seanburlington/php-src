@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.6 2004/01/08 08:14:18 andi Exp $ */
+/* $Id: bz2.c,v 1.14.2.1 2005/10/25 15:53:06 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -39,9 +39,6 @@
 #define PHP_BZ_ERRNO   0
 #define PHP_BZ_ERRSTR  1
 #define PHP_BZ_ERRBOTH 2
-
-/* Blocksize of the decompression buffer */
-#define PHP_BZ_DECOMPRESS_SIZE 4096
 
 function_entry bz2_functions[] = {
 	PHP_FE(bzopen,       NULL)
@@ -185,7 +182,7 @@ PHP_BZ2_API php_stream *_php_stream_bz2open(php_stream_wrapper *wrapper,
 	
 	if (bz_file == NULL) {
 		/* that didn't work, so try and get something from the network/wrapper */
-		stream = php_stream_open_wrapper(path, mode, options, opened_path);
+		stream = php_stream_open_wrapper(path, mode, options | STREAM_WILL_CAST, opened_path);
 	
 		if (stream) {
 			int fd;
@@ -196,7 +193,7 @@ PHP_BZ2_API php_stream *_php_stream_bz2open(php_stream_wrapper *wrapper,
 		/* remove the file created by php_stream_open_wrapper(), it is not needed since BZ2 functions
 		 * failed.
 		 */
-		if (!bz_file && mode[0] == 'w') {
+		if (opened_path && !bz_file && mode[0] == 'w') {
 			VCWD_UNLINK(*opened_path);
 		}
 	}
@@ -243,13 +240,14 @@ static void php_bz2_error(INTERNAL_FUNCTION_PARAMETERS, int);
 PHP_MINIT_FUNCTION(bz2)
 {
 	php_register_url_stream_wrapper("compress.bzip2", &php_stream_bzip2_wrapper TSRMLS_CC);
-
+	php_stream_filter_register_factory("bzip2.*", &php_bz2_filter_factory TSRMLS_CC);
 	return SUCCESS;
 }
 
 PHP_MSHUTDOWN_FUNCTION(bz2)
 {
 	php_unregister_url_stream_wrapper("compress.bzip2" TSRMLS_CC);
+	php_stream_filter_unregister_factory("bzip2.*" TSRMLS_CC);
 
 	return SUCCESS;
 }
@@ -258,6 +256,8 @@ PHP_MINFO_FUNCTION(bz2)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "BZip2 Support", "Enabled");
+	php_info_print_table_row(2, "Stream Wrapper support", "compress.bz2://");
+	php_info_print_table_row(2, "Stream Filter support", "bzip2.decompress, bzip2.compress");
 	php_info_print_table_row(2, "BZip2 Version", (char *) BZ2_bzlibVersion());
 	php_info_print_table_end();
 }
@@ -438,56 +438,53 @@ PHP_FUNCTION(bzcompress)
    Decompresses BZip2 compressed data */
 PHP_FUNCTION(bzdecompress)
 {
-	zval    **source,                             /* Source data to decompress */
-	        **zsmall;                             /* (Optional) user specified small */
-	char     *dest;                               /* Destination buffer, initially allocated */
-	int       error,                              /* Error container */
-	          iter = 1,                           /* Iteration count for the compression loop */
-			  size,                               /* Current size to realloc the dest buffer to */
-			  dest_len = PHP_BZ_DECOMPRESS_SIZE,  /* Size of the destination length */
-			  small    = 0,                       /* The actual small */
-			  argc     = ZEND_NUM_ARGS();         /* Argument count */
-	
-	if (argc < 1 || argc > 2 || zend_get_parameters_ex(argc, &source, &zsmall) == FAILURE) {
-		WRONG_PARAM_COUNT;
+	char *source, *dest;
+	int source_len, error;
+	long small = 0;
+#if defined(PHP_WIN32)
+	unsigned __int64 size = 0;
+#else
+	unsigned long long size = 0;
+#endif
+	bz_stream bzs;
+
+	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &source, &source_len, &small)) {
+		RETURN_FALSE;
 	}
 
-	convert_to_string_ex(source);
-	
-	/* optional small argument handling */
-	if (argc > 1) {
-		convert_to_long_ex(zsmall);
-		small = Z_LVAL_PP(zsmall);
+	bzs.bzalloc = NULL;
+	bzs.bzfree = NULL;
+
+	if (BZ2_bzDecompressInit(&bzs, 0, small) != BZ_OK) {
+		RETURN_FALSE;
 	}
 
-	/* Depending on the size of the source buffer, either allocate
-	  the length of the source buffer or the a default decompression
-	  size */
-	dest = emalloc(PHP_BZ_DECOMPRESS_SIZE > Z_STRLEN_PP(source) ? PHP_BZ_DECOMPRESS_SIZE : Z_STRLEN_PP(source));
+	bzs.next_in = source;
+	bzs.avail_in = source_len;
 
-	/* (de)Compression Loop */	
-	do {
-		/* Handle the (re)allocation of the buffer */
-		size = dest_len * iter;
-		if (iter > 1) {
-			dest = erealloc(dest, size);
-		}
-		++iter;
-
-		/* Perform the decompression */
-		error = BZ2_bzBuffToBuffDecompress(dest, &size, Z_STRVAL_PP(source), Z_STRLEN_PP(source), small, 0);
-	} while (error == BZ_OUTBUFF_FULL);
+	/* in most cases bz2 offers at least 2:1 compression, so we use that as our base */
+	bzs.avail_out = source_len * 2;
+	bzs.next_out = dest = emalloc(bzs.avail_out + 1);
 	
-	if (error != BZ_OK) {
-		efree(dest);
-		RETURN_LONG(error);
-	} else {
-		/* we might have allocated a little to much, so erealloc the buffer 
-		 down to size, before returning it */
+	while ((error = BZ2_bzDecompress(&bzs)) == BZ_OK && bzs.avail_in > 0) {
+		/* compression is better then 2:1, need to allocate more memory */
+		bzs.avail_out = source_len;
+		size = (bzs.total_out_hi32 * (unsigned int) -1) + bzs.total_out_lo32;
+		dest = erealloc(dest, size + bzs.avail_out + 1);
+		bzs.next_out = dest + size;
+	}
+
+	if (error == BZ_STREAM_END || error == BZ_OK) {
+		size = (bzs.total_out_hi32 * (unsigned int) -1) + bzs.total_out_lo32;
 		dest = erealloc(dest, size + 1);
-		dest[size] = 0;
-		RETURN_STRINGL(dest, size, 0);
+		dest[size] = '\0';
+		RETVAL_STRINGL(dest, size, 0);
+	} else { /* real error */
+		efree(dest);
+		RETVAL_LONG(error);
 	}
+
+	BZ2_bzDecompressEnd(&bzs);
 }
 /* }}} */
 

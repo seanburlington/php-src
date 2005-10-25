@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dns.c,v 1.68.2.2 2005/10/23 18:35:20 tony2001 Exp $ */
+/* $Id: dns.c,v 1.68.2.3 2005/10/25 08:19:50 tony2001 Exp $ */
 
 /* {{{ includes */
 #include "php.h"
@@ -337,7 +337,7 @@ static void _php_dns_free_res(struct __res_state res) { /* {{{ */
 /* {{{ php_parserr */
 static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int store, zval **subarray)
 {
-	u_short type, dlen;
+	u_short type, class, dlen;
 	u_long ttl;
 	long n, i;
 	u_short s;
@@ -353,6 +353,7 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int 
 	cp += n;
 	
 	GETSHORT(type, cp);
+	GETSHORT(class, cp);
 	GETLONG(ttl, cp);
 	GETSHORT(dlen, cp);
 	if (type_to_fetch != T_ANY && type != type_to_fetch) {

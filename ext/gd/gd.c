@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.312.2.1 2005/10/06 20:47:40 iliaa Exp $ */
+/* $Id: gd.c,v 1.312.2.2 2005/10/25 23:00:19 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -4197,7 +4197,7 @@ PHP_FUNCTION(imageconvolution)
 	zval *SIM, *hash_matrix;
 	pval **var = NULL, **var2 = NULL;
 	gdImagePtr im_src = NULL;
-	float div, offset;
+	double div, offset;
 	int nelem, i, j, res;
 	float matrix[3][3] = {{0,0,0}, {0,0,0}, {0,0,0}};
 

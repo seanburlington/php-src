@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.14 2005/08/03 14:06:39 sniper Exp $ */
+/* $Id: bz2.c,v 1.15 2005/10/25 15:52:08 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -441,7 +441,7 @@ PHP_FUNCTION(bzdecompress)
 	char *source, *dest;
 	int source_len, error;
 	long small = 0;
-#if defined(PHP_WIN32) && _MSC_VER < 1300
+#if defined(PHP_WIN32)
 	unsigned __int64 size = 0;
 #else
 	unsigned long long size = 0;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.70 2005/10/25 19:38:49 helly Exp $ */
+/* $Id: php_spl.c,v 1.71 2005/10/26 22:46:51 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -341,8 +341,8 @@ PHP_FUNCTION(spl_autoload_call)
 {
 	zval **class_name, *retval = NULL;
 	char *func_name, *lc_name;
-	int func_name_len;
-	long dummy;
+	uint func_name_len;
+	ulong dummy;
 	HashPosition function_pos;
 	autoload_func_info *alfi;
 

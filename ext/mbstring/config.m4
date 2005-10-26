@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.51.2.3 2005/02/20 23:02:48 moriyoshi Exp $
+dnl $Id: config.m4,v 1.51.2.4 2005/10/26 13:51:58 tony2001 Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -55,7 +55,8 @@ EOF
 AC_DEFUN([PHP_MBSTRING_SETUP_MBREGEX], [
   if test "$PHP_MBREGEX" = "yes"; then
     AC_CACHE_CHECK(for variable length prototypes and stdarg.h, cv_php_mbstring_stdarg, [
-      AC_TRY_COMPILE([#include <stdarg.h>], [
+      AC_TRY_RUN([
+#include <stdarg.h>
 int foo(int x, ...) {
 	va_list va;
 	va_start(va, x);
@@ -65,7 +66,7 @@ int foo(int x, ...) {
 	return 0;
 }
 int main() { return foo(10, "", 3.14); }
-      ], [cv_php_mbstring_stdarg=yes], [cv_php_mbstring_stdarg=no])
+      ], [cv_php_mbstring_stdarg=yes], [cv_php_mbstring_stdarg=no], [cv_php_mbstring_stdarg=no])
     ])
 
     AC_CHECK_HEADERS([stdlib.h string.h strings.h unistd.h sys/time.h sys/times.h])

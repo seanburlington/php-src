@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filter.h,v 1.4 2005/10/04 13:42:52 derick Exp $ */
+/* $Id: php_filter.h,v 1.5 2005/10/26 07:48:51 derick Exp $ */
 
 #ifndef PHP_FILTER_H
 #define PHP_FILTER_H
@@ -51,6 +51,7 @@ PHP_MINFO_FUNCTION(filter);
 PHP_FUNCTION(input_get);
 PHP_FUNCTION(input_filters_list);
 PHP_FUNCTION(input_has_variable);
+PHP_FUNCTION(input_name_to_filter);
 PHP_FUNCTION(filter_data);
 
 ZEND_BEGIN_MODULE_GLOBALS(filter)

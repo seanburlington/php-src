@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.14 2005/10/26 07:48:50 derick Exp $ */
+/* $Id: filter.c,v 1.15 2005/10/26 07:56:16 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -252,7 +252,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.14 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.15 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -298,7 +298,7 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 {
 	zval  new_var, raw_var;
 	zval *array_ptr = NULL, *orig_array_ptr = NULL;
-	int   out_len;
+	int   out_len = 0;
 	char *orig_var;
 
 	assert(*val != NULL);
@@ -546,7 +546,7 @@ PHP_FUNCTION(input_get)
 
 	if (found) {
 		zval_copy_ctor(return_value);  /* Watch out for empty strings */
-		php_zval_filter_recursive(return_value, filter, filter_flags, options, charset);
+		php_zval_filter_recursive(return_value, filter, filter_flags, options, charset TSRMLS_CC);
 	} else {
 		RETVAL_FALSE;
 	}
@@ -618,7 +618,7 @@ PHP_FUNCTION(filter_data)
 		}
 	}
 
-	php_zval_filter_recursive(var, filter, filter_flags, options, charset);
+	php_zval_filter_recursive(var, filter, filter_flags, options, charset TSRMLS_CC);
 	RETURN_ZVAL(var, 1, 0);
 }
 /* }}} */

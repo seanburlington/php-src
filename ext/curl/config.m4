@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.29 2005/10/25 14:29:07 mike Exp $ 
+dnl $Id: config.m4,v 1.30 2005/10/26 11:33:17 sniper Exp $ 
 dnl
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -36,7 +36,7 @@ if test "$PHP_CURL" != "no"; then
     CURL_CONFIG=${CURL_DIR}/bin/curl-config
   else
     if ${CURL_DIR}/curl-config --libs > /dev/null 2>&1; then
-       CURL_CONFIG=${CURL_DIR}/curl-config
+      CURL_CONFIG=${CURL_DIR}/curl-config
     fi
   fi
 
@@ -51,20 +51,20 @@ if test "$PHP_CURL" != "no"; then
   
   AC_MSG_CHECKING([for SSL support in libcurl])
   CURL_SSL=`$CURL_CONFIG --features | $EGREP SSL`
-  if test "$CURL_SSL" == "SSL"; then
+  if test "$CURL_SSL" = "SSL"; then
     AC_MSG_RESULT([yes])
     AC_DEFINE([HAVE_CURL_SSL], [1], [Have cURL with  SSL support])
 
     AC_MSG_CHECKING([for SSL library used])
     CURL_SSL_FLAVOUR=
     for i in $CURL_LIBS; do
-      if test "$i" == "-lssl"; then
+      if test "$i" = "-lssl"; then
         CURL_SSL_FLAVOUR="openssl"
         AC_MSG_RESULT([openssl])
         AC_DEFINE([HAVE_CURL_OPENSSL], [1], [Have cURL with OpenSSL support])
         AC_CHECK_HEADERS([openssl/crypto.h])
         break
-      elif test "$i" == "-lgnutls"; then
+      elif test "$i" = "-lgnutls"; then
         CURL_SSL_FLAVOUR="gnutls"
         AC_MSG_RESULT([gnutls])
         AC_DEFINE([HAVE_CURL_GNUTLS], [1], [Have cURL with GnuTLS support])

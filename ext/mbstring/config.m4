@@ -1,9 +1,13 @@
 dnl
-dnl $Id: config.m4,v 1.51 2004/06/10 14:06:17 iliaa Exp $
+dnl $Id: config.m4,v 1.58.2.1 2005/10/26 13:50:39 tony2001 Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
   PHP_MBSTRING_SOURCES="$PHP_MBSTRING_SOURCES $1"
+])
+
+AC_DEFUN([PHP_MBSTRING_ADD_BASE_SOURCES], [
+  PHP_MBSTRING_BASE_SOURCES="$PHP_MBSTRING_BASE_SOURCES $1"
 ])
 
 AC_DEFUN([PHP_MBSTRING_ADD_BUILD_DIR], [
@@ -26,17 +30,20 @@ AC_DEFUN([PHP_MBSTRING_EXTENSION], [
   PHP_NEW_EXTENSION(mbstring, $PHP_MBSTRING_SOURCES, $ext_shared,, $PHP_MBSTRING_CFLAGS)
   PHP_SUBST(MBSTRING_SHARED_LIBADD)
 
-  for dir in $PHP_MBSTRING_EXTRA_INCLUDES; do
-    PHP_ADD_INCLUDE([$ext_srcdir/$dir])
-  done
-
   for dir in $PHP_MBSTRING_EXTRA_BUILD_DIRS; do
-    PHP_ADD_BUILD_DIR([$ext_builddir/$dir])
+    PHP_ADD_BUILD_DIR([$ext_builddir/$dir], 1)
   done
   
+  for dir in $PHP_MBSTRING_EXTRA_INCLUDES; do
+    PHP_ADD_INCLUDE([$ext_srcdir/$dir])
+    PHP_ADD_INCLUDE([$ext_builddir/$dir])
+  done
+
   if test "$ext_shared" = "no"; then
+    PHP_ADD_SOURCES(PHP_EXT_DIR(mbstring), $PHP_MBSTRING_BASE_SOURCES)
     out="php_config.h"
   else
+    PHP_ADD_SOURCES_X(PHP_EXT_DIR(mbstring),$PHP_MBSTRING_BASE_SOURCES,,shared_objects_mbstring,yes)
     if test -f "$ext_builddir/config.h.in"; then
       out="$abs_builddir/config.h"
     else
@@ -45,17 +52,17 @@ AC_DEFUN([PHP_MBSTRING_EXTENSION], [
   fi
   
   for cfg in $PHP_MBSTRING_EXTRA_CONFIG_HEADERS; do
-    cat > $ext_srcdir/$cfg <<EOF
+    cat > $ext_builddir/$cfg <<EOF
 #include "$out"
 EOF
   done
-
 ])
 
 AC_DEFUN([PHP_MBSTRING_SETUP_MBREGEX], [
   if test "$PHP_MBREGEX" = "yes"; then
     AC_CACHE_CHECK(for variable length prototypes and stdarg.h, cv_php_mbstring_stdarg, [
-      AC_TRY_COMPILE([#include <stdarg.h>], [
+      AC_TRY_RUN([
+#include <stdarg.h>
 int foo(int x, ...) {
 	va_list va;
 	va_start(va, x);
@@ -65,7 +72,7 @@ int foo(int x, ...) {
 	return 0;
 }
 int main() { return foo(10, "", 3.14); }
-      ], [cv_php_mbstring_stdarg=yes], [cv_php_mbstring_stdarg=no])
+      ], [cv_php_mbstring_stdarg=yes], [cv_php_mbstring_stdarg=no], [cv_php_mbstring_stdarg=no])
     ])
 
     AC_CHECK_HEADERS([stdlib.h string.h strings.h unistd.h sys/time.h sys/times.h])
@@ -84,18 +91,24 @@ int main() { return foo(10, "", 3.14); }
 
     PHP_MBSTRING_ADD_CFLAG([-DNOT_RUBY])
     PHP_MBSTRING_ADD_BUILD_DIR([oniguruma])
+    PHP_MBSTRING_ADD_BUILD_DIR([oniguruma/enc])
     PHP_MBSTRING_ADD_INCLUDE([oniguruma])
     PHP_MBSTRING_ADD_CONFIG_HEADER([oniguruma/config.h])
 
+    PHP_MBSTRING_ADD_BASE_SOURCES([php_mbregex.c])
     PHP_MBSTRING_ADD_SOURCES([
-      php_mbregex.c
       oniguruma/regcomp.c
       oniguruma/regerror.c
       oniguruma/regexec.c
       oniguruma/reggnu.c
       oniguruma/regparse.c
       oniguruma/regenc.c
-      oniguruma/regposerr.c
+      oniguruma/regext.c
+      oniguruma/regsyntax.c
+      oniguruma/regtrav.c
+      oniguruma/regversion.c
+      oniguruma/st.c
+      oniguruma/enc/unicode.c
       oniguruma/enc/ascii.c
       oniguruma/enc/utf8.c
       oniguruma/enc/euc_jp.c
@@ -120,6 +133,10 @@ int main() { return foo(10, "", 3.14); }
       oniguruma/enc/koi8.c
       oniguruma/enc/koi8_r.c
       oniguruma/enc/big5.c
+      oniguruma/enc/utf16_be.c
+      oniguruma/enc/utf16_le.c
+      oniguruma/enc/utf32_be.c
+      oniguruma/enc/utf32_le.c
     ])
   fi
 ])
@@ -164,6 +181,7 @@ AC_DEFUN([PHP_MBSTRING_SETUP_LIBMBFL], [
      libmbfl/filters/mbfilter_iso8859_13.c
      libmbfl/filters/mbfilter_iso8859_14.c
      libmbfl/filters/mbfilter_iso8859_15.c
+     libmbfl/filters/mbfilter_iso8859_16.c
      libmbfl/filters/mbfilter_iso8859_2.c
      libmbfl/filters/mbfilter_iso8859_3.c
      libmbfl/filters/mbfilter_iso8859_4.c
@@ -174,6 +192,7 @@ AC_DEFUN([PHP_MBSTRING_SETUP_LIBMBFL], [
      libmbfl/filters/mbfilter_iso8859_9.c
      libmbfl/filters/mbfilter_jis.c
      libmbfl/filters/mbfilter_koi8r.c
+     libmbfl/filters/mbfilter_armscii8.c
      libmbfl/filters/mbfilter_qprint.c
      libmbfl/filters/mbfilter_sjis.c
      libmbfl/filters/mbfilter_ucs2.c
@@ -205,6 +224,7 @@ AC_DEFUN([PHP_MBSTRING_SETUP_LIBMBFL], [
      libmbfl/nls/nls_ru.c
      libmbfl/nls/nls_uni.c
      libmbfl/nls/nls_zh.c
+     libmbfl/nls/nls_hy.c
     ])
     PHP_MBSTRING_ADD_CFLAG([-DHAVE_CONFIG_H])
   else
@@ -225,11 +245,11 @@ AC_DEFUN([PHP_MBSTRING_SETUP_LIBMBFL], [
     fi
 
     PHP_CHECK_LIBRARY(mbfl, mbfl_buffer_converter_new, [
-      PHP_ADD_LIBRARY_WITH_PATH(mbfl, $PHP_LIBMBFL/lib, MBSTRING_SHARED_LIBADD)
+      PHP_ADD_LIBRARY_WITH_PATH(mbfl, $PHP_LIBMBFL/$PHP_LIBDIR, MBSTRING_SHARED_LIBADD)
     ],[
       AC_MSG_ERROR([Problem with libmbfl. Please check config.log for more information.])
     ], [
-      -LPHP_LIBMBFL/lib
+      -LPHP_LIBMBFL/$PHP_LIBDIR
     ])
   fi
 ])
@@ -239,19 +259,19 @@ dnl Main config
 dnl
 
 PHP_ARG_ENABLE(mbstring, whether to enable multibyte string support,
-[  --enable-mbstring       Enable multibyte string support.])
+[  --enable-mbstring       Enable multibyte string support])
 
 PHP_ARG_ENABLE([mbregex], [whether to enable multibyte regex support],
-[  --disable-mbregex         MBSTRING: Disable multibyte regex support.], yes, no)
+[  --disable-mbregex         MBSTRING: Disable multibyte regex support], yes, no)
 
 PHP_ARG_WITH(libmbfl, [for external libmbfl],
 [  --with-libmbfl[=DIR]      MBSTRING: Use external libmbfl. DIR is the libmbfl install prefix.
-                            If DIR is not set, the bundled libmbfl will be used.], no, no)
+                            If DIR is not set, the bundled libmbfl will be used], no, no)
 
 if test "$PHP_MBSTRING" != "no"; then  
   AC_DEFINE([HAVE_MBSTRING],1,[whether to have multibyte string support])
 
-  PHP_MBSTRING_ADD_SOURCES([mbstring.c php_unicode.c mb_gpc.c])
+  PHP_MBSTRING_ADD_BASE_SOURCES([mbstring.c php_unicode.c mb_gpc.c])
 
   if test "$PHP_MBREGEX" != "no"; then
     PHP_MBSTRING_SETUP_MBREGEX
@@ -260,4 +280,7 @@ if test "$PHP_MBSTRING" != "no"; then
   dnl libmbfl is required
   PHP_MBSTRING_SETUP_LIBMBFL
   PHP_MBSTRING_EXTENSION
+  PHP_INSTALL_HEADERS([ext/mbstring], [libmbfl libmbfl/mbfl])
 fi
+
+# vim600: sts=2 sw=2 et

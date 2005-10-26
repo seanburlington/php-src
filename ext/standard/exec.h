@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: exec.h,v 1.15.2.1.8.1 2005/10/26 11:37:33 tony2001 Exp $ */
+/* $Id: exec.h,v 1.15.2.1.8.2 2005/10/26 20:04:57 tony2001 Exp $ */
 
 #ifndef EXEC_H
 #define EXEC_H
@@ -32,7 +32,7 @@ PHP_FUNCTION(proc_close);
 PHP_MINIT_FUNCTION(proc_open);
 
 PHPAPI char *php_escape_shell_cmd(char *);
-PHPAPI *php_escape_shell_arg(char *);
+PHPAPI char *php_escape_shell_arg(char *);
 int php_Exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC);
 
 #define PHP_EMPTY_EXEC_PARAM { php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot execute a blank command"); RETURN_FALSE; }

@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.84.2.15.2.1 2005/10/26 11:37:33 tony2001 Exp $ */
+/* $Id: exec.c,v 1.84.2.15.2.2 2005/10/26 20:03:14 tony2001 Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -462,7 +462,7 @@ PHPAPI char *php_escape_shell_cmd(char *str) {
 
 /* {{{ php_escape_shell_arg
  */
-PHPAPI *php_escape_shell_arg(char *str) {
+PHPAPI char *php_escape_shell_arg(char *str) {
 	int x, y, l;
 	char *cmd;
 

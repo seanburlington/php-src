@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.316 2005/10/08 19:29:04 pajoye Exp $ */
+/* $Id: gd.c,v 1.317 2005/10/26 21:35:56 tony2001 Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -876,6 +876,10 @@ PHP_FUNCTION(imagetruecolortopalette)
 	convert_to_boolean_ex(dither);
 	convert_to_long_ex(ncolors);
 
+	if (Z_LVAL_PP(ncolors) <= 0) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Number of colors has to be greater than zero");
+		RETURN_FALSE;
+	}
 	gdImageTrueColorToPalette(im, Z_LVAL_PP(dither), Z_LVAL_PP(ncolors));
 
 	RETURN_TRUE;

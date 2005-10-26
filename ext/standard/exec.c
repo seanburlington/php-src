@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.84.2.14 2004/05/18 13:43:33 iliaa Exp $ */
+/* $Id: exec.c,v 1.84.2.15.2.1 2005/10/26 11:37:33 tony2001 Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -398,7 +398,7 @@ PHP_FUNCTION(passthru)
 
    *NOT* safe for binary strings
 */
-char *php_escape_shell_cmd(char *str) {
+PHPAPI char *php_escape_shell_cmd(char *str) {
 	register int x, y, l;
 	char *cmd;
 	char *p = NULL;
@@ -462,7 +462,7 @@ char *php_escape_shell_cmd(char *str) {
 
 /* {{{ php_escape_shell_arg
  */
-char *php_escape_shell_arg(char *str) {
+PHPAPI *php_escape_shell_arg(char *str) {
 	int x, y, l;
 	char *cmd;
 
@@ -602,6 +602,7 @@ static void proc_open_rsrc_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	WaitForSingleObject(child, INFINITE);
 	GetExitCodeProcess(child, &wstatus);
 	FG(pclose_ret) = wstatus;
+	CloseHandle(child);
 #else
 # if HAVE_SYS_WAIT_H
 	int wstatus;

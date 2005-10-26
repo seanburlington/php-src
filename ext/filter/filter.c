@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.15 2005/10/26 07:56:16 derick Exp $ */
+/* $Id: filter.c,v 1.16 2005/10/26 13:20:52 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -252,7 +252,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.15 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.16 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -326,7 +326,7 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 
 	/* Make a copy of the variable name, as php_register_variable_ex seems to
 	 * modify it */
-	orig_var = var;
+	orig_var = estrdup(var);
 
 	/* Store the RAW variable internally */
 	/* FIXME: Should not use php_register_variable_ex as that also registers
@@ -351,6 +351,7 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 	}
 
 	php_register_variable_ex(orig_var, &new_var, orig_array_ptr TSRMLS_CC);
+	efree(orig_var);
 
 	if (new_val_len) {
 		*new_val_len = out_len;

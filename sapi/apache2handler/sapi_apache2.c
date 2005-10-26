@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.61 2005/10/12 21:31:49 tony2001 Exp $ */
+/* $Id: sapi_apache2.c,v 1.62 2005/10/26 15:08:42 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -535,7 +535,10 @@ zend_first_try {
 		if (!parent_req) {
 			parent_req = ctx->r;
 		}
-		if (parent_req && strcmp(parent_req->handler, PHP_MAGIC_TYPE) && strcmp(parent_req->handler, PHP_SOURCE_MAGIC_TYPE) && strcmp(parent_req->handler, PHP_SCRIPT)) {
+		if (parent_req && parent_req->handler && 
+				strcmp(parent_req->handler, PHP_MAGIC_TYPE) && 
+				strcmp(parent_req->handler, PHP_SOURCE_MAGIC_TYPE) && 
+				strcmp(parent_req->handler, PHP_SCRIPT)) {
 			if (php_apache_request_ctor(r, ctx TSRMLS_CC)!=SUCCESS) {
 				zend_bailout();
 			}

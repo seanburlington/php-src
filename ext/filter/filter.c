@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.16 2005/10/26 13:20:52 derick Exp $ */
+/* $Id: filter.c,v 1.17 2005/10/26 14:37:08 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -127,8 +127,21 @@ static PHP_INI_MH(UpdateDefaultFilter)
 
 /* {{{ PHP_INI
  */
+
+static PHP_INI_MH(OnUpdateFlags)
+{
+	if (!new_value) {
+		IF_G(default_filter_flags) = 0;
+	} else {
+		IF_G(default_filter_flags) = atoi(new_value);
+	}
+	return SUCCESS;
+}
+
+
 PHP_INI_BEGIN()
-    STD_PHP_INI_ENTRY("filter.default", "string", PHP_INI_ALL, UpdateDefaultFilter, default_filter, zend_filter_globals, filter_globals)
+    STD_PHP_INI_ENTRY("filter.default",       "string", PHP_INI_ALL, UpdateDefaultFilter, default_filter,       zend_filter_globals, filter_globals)
+    PHP_INI_ENTRY("filter.default_flags",     NULL,     PHP_INI_ALL, OnUpdateFlags)
 PHP_INI_END()
 /* }}} */
 
@@ -252,7 +265,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.16 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.17 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -346,7 +359,7 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 
 	if (val_len) {
 		if (! (IF_G(default_filter) == FS_UNSAFE_RAW)) {
-			php_zval_filter(&new_var, IF_G(default_filter), 0, NULL, NULL/*charset*/ TSRMLS_CC);
+			php_zval_filter(&new_var, IF_G(default_filter), IF_G(default_filter_flags), NULL, NULL/*charset*/ TSRMLS_CC);
 		}
 	}
 

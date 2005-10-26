@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filter.h,v 1.5 2005/10/26 07:48:51 derick Exp $ */
+/* $Id: php_filter.h,v 1.6 2005/10/26 14:37:08 derick Exp $ */
 
 #ifndef PHP_FILTER_H
 #define PHP_FILTER_H
@@ -62,6 +62,7 @@ ZEND_BEGIN_MODULE_GLOBALS(filter)
 	zval *server_array;
 	zval *session_array;
 	long  default_filter;
+	long  default_filter_flags;
 ZEND_END_MODULE_GLOBALS(filter)
 
 #ifdef ZTS

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql_int.h,v 1.16 2005/07/20 16:22:09 iliaa Exp $ */
+/* $Id: php_pdo_mysql_int.h,v 1.17 2005/10/27 17:33:43 tony2001 Exp $ */
 
 #ifndef PHP_PDO_MYSQL_INT_H
 #define PHP_PDO_MYSQL_INT_H
@@ -78,5 +78,9 @@ extern struct pdo_stmt_methods mysql_stmt_methods;
 
 enum {
 	PDO_MYSQL_ATTR_USE_BUFFERED_QUERY = PDO_ATTR_DRIVER_SPECIFIC,
+	PDO_MYSQL_ATTR_LOCAL_INFILE,
+	PDO_MYSQL_ATTR_INIT_COMMAND,
+	PDO_MYSQL_ATTR_READ_DEFAULT_FILE,
+	PDO_MYSQL_ATTR_READ_DEFAULT_GROUP,
 };
 #endif

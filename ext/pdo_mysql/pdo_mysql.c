@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_mysql.c,v 1.10 2005/09/20 00:46:06 iliaa Exp $ */
+/* $Id: pdo_mysql.c,v 1.11 2005/10/27 17:33:43 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -76,6 +76,10 @@ ZEND_GET_MODULE(pdo_mysql)
 PHP_MINIT_FUNCTION(pdo_mysql)
 {
 	REGISTER_PDO_CONST_LONG("MYSQL_ATTR_USE_BUFFERED_QUERY", (long)PDO_MYSQL_ATTR_USE_BUFFERED_QUERY);
+	REGISTER_PDO_CONST_LONG("MYSQL_ATTR_LOCAL_INFILE", (long)PDO_MYSQL_ATTR_LOCAL_INFILE);
+	REGISTER_PDO_CONST_LONG("MYSQL_ATTR_INIT_COMMAND", (long)PDO_MYSQL_ATTR_INIT_COMMAND);
+	REGISTER_PDO_CONST_LONG("MYSQL_ATTR_READ_DEFAULT_FILE", (long)PDO_MYSQL_ATTR_READ_DEFAULT_FILE);
+	REGISTER_PDO_CONST_LONG("MYSQL_ATTR_READ_DEFAULT_GROUP", (long)PDO_MYSQL_ATTR_READ_DEFAULT_GROUP);
 
 	return php_pdo_register_driver(&pdo_mysql_driver);
 }

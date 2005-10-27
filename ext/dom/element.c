@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: element.c,v 1.38 2005/08/28 16:22:02 rrichards Exp $ */
+/* $Id: element.c,v 1.39 2005/10/27 23:49:34 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -365,6 +365,11 @@ PHP_FUNCTION(dom_element_set_attribute_node)
 
 	if (attrp->type != XML_ATTRIBUTE_NODE) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Attribute node is required");
+		RETURN_FALSE;
+	}
+
+	if (!(attrp->doc == NULL || attrp->doc == nodep->doc)) {
+		php_dom_throw_error(WRONG_DOCUMENT_ERR, dom_get_strict_error(intern->document) TSRMLS_CC);
 		RETURN_FALSE;
 	}
 
@@ -766,6 +771,11 @@ PHP_FUNCTION(dom_element_set_attribute_node_ns)
 
 	if (attrp->type != XML_ATTRIBUTE_NODE) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Attribute node is required");
+		RETURN_FALSE;
+	}
+
+	if (!(attrp->doc == NULL || attrp->doc == nodep->doc)) {
+		php_dom_throw_error(WRONG_DOCUMENT_ERR, dom_get_strict_error(intern->document) TSRMLS_CC);
 		RETURN_FALSE;
 	}
 

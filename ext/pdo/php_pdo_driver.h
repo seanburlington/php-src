@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.70 2005/10/25 16:03:11 tony2001 Exp $ */
+/* $Id: php_pdo_driver.h,v 1.71 2005/10/27 19:38:36 tony2001 Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -192,6 +192,16 @@ static inline long pdo_attr_lval(zval *options, enum pdo_attribute_type option_n
 		return Z_LVAL_PP(v);
 	}
 	return defval;
+}
+static inline char *pdo_attr_strval(zval *options, enum pdo_attribute_type option_name, char *defval TSRMLS_DC)
+{
+	zval **v;
+
+	if (options && SUCCESS == zend_hash_index_find(Z_ARRVAL_P(options), option_name, (void**)&v)) {
+		convert_to_string_ex(v);
+		return estrndup(Z_STRVAL_PP(v), Z_STRLEN_PP(v));
+	}
+	return defval ? estrdup(defval) : NULL;
 }
 /* }}} */
 

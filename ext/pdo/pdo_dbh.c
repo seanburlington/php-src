@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.12 2005/10/23 04:10:20 wez Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.13 2005/10/27 03:51:23 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1384,7 +1384,7 @@ static void pdo_dbh_free_storage(pdo_dbh_t *dbh TSRMLS_DC)
 
 	if (!dbh->is_persistent) {
 		dbh_free(dbh TSRMLS_CC);
-	} else if (dbh->methods->persistent_shutdown) {
+	} else if (dbh->methods && dbh->methods->persistent_shutdown) {
 		dbh->methods->persistent_shutdown(dbh TSRMLS_CC);
 	}
 }

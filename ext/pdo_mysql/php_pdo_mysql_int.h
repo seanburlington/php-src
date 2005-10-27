@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -13,10 +13,11 @@
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
   | Author: George Schlossnagle <george@omniti.com>                      |
+  |         Wez Furlong <wez@php.net>                                    |
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_mysql_int.h,v 1.9 2004/05/20 16:17:37 wez Exp $ */
+/* $Id: php_pdo_mysql_int.h,v 1.16.2.1 2005/10/27 17:34:24 tony2001 Exp $ */
 
 #ifndef PHP_PDO_MYSQL_INT_H
 #define PHP_PDO_MYSQL_INT_H
@@ -35,6 +36,7 @@ typedef struct {
 	MYSQL 		*server;
 
 	unsigned attached:1;
+	unsigned buffered:1;
 	unsigned _reserved:31;
 
 	pdo_mysql_error_info einfo;
@@ -47,17 +49,24 @@ typedef struct {
 typedef struct {
 	pdo_mysql_db_handle 	*H;
 	MYSQL_RES		*result;
+	MYSQL_FIELD	    *fields;
 	MYSQL_ROW		current_data;
 	long			*current_lengths;
-	pdo_mysql_column 	*cols;
+	pdo_mysql_error_info einfo;
+#if HAVE_MYSQL_STMT_PREPARE
+	MYSQL_STMT 		*stmt;
+	
+	int num_params;
+	MYSQL_BIND      *params;
+	my_bool			*in_null;
+	unsigned long   *in_length;
+	
+	MYSQL_BIND 		*bound_result;
+	my_bool			*out_null;
+	unsigned long   *out_length;
+	unsigned max_length:1;
+#endif
 } pdo_mysql_stmt;
-
-typedef struct {
-	char		*repr;
-	long		repr_len;
-	int		mysql_type;
-	void		*thing;	/* for LOBS, REFCURSORS etc. */
-} pdo_mysql_bound_param;
 
 extern pdo_driver_t pdo_mysql_driver;
 
@@ -66,4 +75,12 @@ extern int _pdo_mysql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *file, 
 #define pdo_mysql_error_stmt(s) _pdo_mysql_error(stmt->dbh, stmt, __FILE__, __LINE__ TSRMLS_CC)
 
 extern struct pdo_stmt_methods mysql_stmt_methods;
+
+enum {
+	PDO_MYSQL_ATTR_USE_BUFFERED_QUERY = PDO_ATTR_DRIVER_SPECIFIC,
+	PDO_MYSQL_ATTR_LOCAL_INFILE,
+	PDO_MYSQL_ATTR_INIT_COMMAND,
+	PDO_MYSQL_ATTR_READ_DEFAULT_FILE,
+	PDO_MYSQL_ATTR_READ_DEFAULT_GROUP,
+};
 #endif

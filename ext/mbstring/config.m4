@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.58.2.1 2005/10/26 13:50:39 tony2001 Exp $
+dnl $Id: config.m4,v 1.58.2.2 2005/10/28 07:52:58 hyanantha Exp $
 dnl
 
 AC_DEFUN([PHP_MBSTRING_ADD_SOURCES], [
@@ -72,7 +72,19 @@ int foo(int x, ...) {
 	return 0;
 }
 int main() { return foo(10, "", 3.14); }
-      ], [cv_php_mbstring_stdarg=yes], [cv_php_mbstring_stdarg=no], [cv_php_mbstring_stdarg=no])
+      ], [cv_php_mbstring_stdarg=yes], [cv_php_mbstring_stdarg=no], 
+ [
+  dnl cross-compile needs something here
+case $host_alias in
+*netware*)
+cv_php_mbstring_stdarg=yes
+;;
+*)
+cv_php_mbstring_stdarg=no
+;;
+esac
+]
+)
     ])
 
     AC_CHECK_HEADERS([stdlib.h string.h strings.h unistd.h sys/time.h sys/times.h])

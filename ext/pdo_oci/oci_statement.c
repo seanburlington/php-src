@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_statement.c,v 1.16.2.2 2005/10/28 12:00:10 tony2001 Exp $ */
+/* $Id: oci_statement.c,v 1.16.2.3 2005/10/28 15:02:09 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -411,6 +411,19 @@ static int oci_stmt_describe(pdo_stmt_t *stmt, int colno TSRMLS_DC) /* {{{ */
 
 	/* how much room do we need to store the field */
 	switch (dtype) {
+		case SQLT_LBI:
+		case SQLT_LNG:
+			dyn = FALSE;
+			if (dtype == SQLT_LBI) {
+				dtype = SQLT_BIN;
+			} else {
+				dtype = SQLT_CHR;
+			}
+			S->cols[colno].datalen = 512; /* XXX should be INT_MAX and fetched by pieces */
+			S->cols[colno].data = emalloc(S->cols[colno].datalen + 1);
+			col->param_type = PDO_PARAM_STR;
+			break;
+																																
 		case SQLT_BIN:
 		default:
 			dyn = FALSE;

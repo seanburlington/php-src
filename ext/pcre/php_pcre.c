@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.2 2005/10/11 06:47:48 dmitry Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.3 2005/10/28 08:30:41 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -100,7 +100,9 @@ static PHP_MINIT_FUNCTION(pcre)
 /* {{{ PHP_MSHUTDOWN_FUNCTION(pcre) */
 static PHP_MSHUTDOWN_FUNCTION(pcre)
 {
-#ifndef ZTS
+#ifdef ZTS
+	ts_free_id(pcre_globals_id);	
+#else
 	php_pcre_shutdown_globals(&pcre_globals TSRMLS_CC);
 #endif
 

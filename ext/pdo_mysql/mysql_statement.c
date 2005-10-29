@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.48.2.5 2005/10/27 17:26:19 tony2001 Exp $ */
+/* $Id: mysql_statement.c,v 1.48.2.6 2005/10/29 02:16:35 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -244,7 +244,6 @@ static int pdo_mysql_stmt_next_rowset(pdo_stmt_t *stmt TSRMLS_DC)
 #if HAVE_MYSQL_STMT_PREPARE
 	if (S->stmt) {
 		mysql_stmt_free_result(S->stmt);
-		S->stmt = NULL;
 	}
 #endif
 	if (S->result) {
@@ -574,7 +573,6 @@ static int pdo_mysql_stmt_cursor_closer(pdo_stmt_t *stmt TSRMLS_DC)
 #if HAVE_MYSQL_STMT_PREPARE
 	if (S->stmt) {
 		int retval = mysql_stmt_free_result(S->stmt);
-		S->stmt = NULL;
 		return retval ? 0 : 1;
 	}
 #endif

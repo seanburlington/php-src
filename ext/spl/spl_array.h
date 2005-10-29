@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.h,v 1.14 2005/09/18 11:34:34 helly Exp $ */
+/* $Id: spl_array.h,v 1.15 2005/10/29 15:37:57 helly Exp $ */
 
 #ifndef SPL_ARRAY_H
 #define SPL_ARRAY_H
@@ -32,6 +32,7 @@ extern PHPAPI zend_class_entry *spl_ce_Countable;
 PHP_MINIT_FUNCTION(spl_array);
 
 extern void spl_array_iterator_append(zval *object, zval *append_value TSRMLS_DC);
+extern void spl_array_iterator_key(zval *object, zval *return_value TSRMLS_DC);
 
 #endif /* SPL_ARRAY_H */
 

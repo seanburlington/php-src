@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.48.2.6 2005/10/29 02:16:35 wez Exp $ */
+/* $Id: mysql_statement.c,v 1.48.2.7 2005/10/29 02:41:50 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -311,6 +311,7 @@ static int pdo_mysql_stmt_param_hook(pdo_stmt_t *stmt, struct pdo_bound_param_da
 			case PDO_PARAM_EVT_EXEC_PRE:
 				b = (MYSQL_BIND*)param->driver_data;
 
+				*b->is_null = 0;
 				if (PDO_PARAM_TYPE(param->param_type) == PDO_PARAM_NULL || 
 						Z_TYPE_P(param->parameter) == IS_NULL) {
 					*b->is_null = 1;

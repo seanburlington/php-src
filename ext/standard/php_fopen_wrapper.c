@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.46 2005/08/18 13:34:04 sniper Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.47 2005/10/29 14:29:59 helly Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -156,6 +156,14 @@ php_stream * php_stream_url_wrap_php(php_stream_wrapper *wrapper, char *path, ch
 
 	if (!strncasecmp(path, "php://", 6))
 		path += 6;
+	
+	if (!strcasecmp(path, "temp")) {
+		return php_stream_temp_create(0, PHP_STREAM_MAX_MEM);
+	}
+	
+	if (!strcasecmp(path, "memory")) {
+		return php_stream_memory_create(0);
+	}
 	
 	if (!strcasecmp(path, "output")) {
 		return php_stream_alloc(&php_stream_output_ops, NULL, 0, "wb");

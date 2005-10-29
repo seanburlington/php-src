@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.59.2.4 2005/10/27 17:34:24 tony2001 Exp $ */
+/* $Id: mysql_driver.c,v 1.59.2.5 2005/10/29 02:36:30 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -58,7 +58,16 @@ int _pdo_mysql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *file, int lin
 		einfo   = &H->einfo;
 	}
 
-	einfo->errcode = mysql_errno(H->server);
+#if HAVE_MYSQL_STMT_PREPARE
+	if (S && S->stmt) {
+		einfo->errcode = mysql_stmt_errno(S->stmt);
+	}
+	else
+#endif
+	{
+		einfo->errcode = mysql_errno(H->server);
+	}
+
 	einfo->file = file;
 	einfo->line = line;
 

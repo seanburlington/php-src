@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_sxe.c,v 1.13 2005/10/03 16:04:50 helly Exp $ */
+/* $Id: spl_sxe.c,v 1.14 2005/10/29 20:37:59 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -106,7 +106,7 @@ SPL_METHOD(SimpleXMLIterator, hasChildren)
 	php_sxe_object *child;
 	xmlNodePtr      node;
 
-	if (!sxe->iter.data) {
+	if (!sxe->iter.data || sxe->iter.type == SXE_ITER_ATTRLIST) {
 		RETURN_FALSE;
 	}
 	child = php_sxe_fetch_object(sxe->iter.data TSRMLS_CC);
@@ -128,7 +128,7 @@ SPL_METHOD(SimpleXMLIterator, getChildren)
 {
 	php_sxe_object *sxe = php_sxe_fetch_object(getThis() TSRMLS_CC);
 
-	if (!sxe->iter.data) {
+	if (!sxe->iter.data || sxe->iter.type == SXE_ITER_ATTRLIST) {
 		return; /* return NULL */
 	}
 	return_value->type = IS_OBJECT;

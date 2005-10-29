@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.71 2005/10/26 22:46:51 tony2001 Exp $ */
+/* $Id: php_spl.c,v 1.72 2005/10/29 15:10:55 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -188,6 +188,7 @@ PHP_FUNCTION(class_implements)
 	SPL_ADD_CLASS(SplObjectStorage, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SplObserver, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(SplSubject, z_list, sub, allow, ce_flags); \
+	SPL_ADD_CLASS(SplTempFileObject, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(UnderflowException, z_list, sub, allow, ce_flags); \
 	SPL_ADD_CLASS(UnexpectedValueException, z_list, sub, allow, ce_flags); \
 

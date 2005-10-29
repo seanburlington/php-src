@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.10 2005/10/29 03:01:19 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.11 2005/10/29 03:11:45 wez Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -682,7 +682,8 @@ static int make_callable_ex(pdo_stmt_t *stmt, zval *callable, zend_fcall_info * 
 			ce = *pce;
 		}
 	}
-	
+
+	zend_str_tolower_copy(fname, fname, strlen(fname));
 	fci->function_table = ce ? &ce->function_table : EG(function_table);
 	if (zend_hash_find(fci->function_table, fname, strlen(fname)+1, (void **)&function_handler) == FAILURE) {
 		pdo_raise_impl_error(stmt->dbh, stmt, "HY000", "user-supplied function does not exist" TSRMLS_CC);

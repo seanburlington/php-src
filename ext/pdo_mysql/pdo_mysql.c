@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_mysql.c,v 1.8.2.5 2005/10/27 17:34:24 tony2001 Exp $ */
+/* $Id: pdo_mysql.c,v 1.8.2.6 2005/10/29 01:58:22 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -99,7 +99,7 @@ PHP_MSHUTDOWN_FUNCTION(pdo_mysql)
 PHP_MINFO_FUNCTION(pdo_mysql)
 {
 	php_info_print_table_start();
-	php_info_print_table_header(2, "PDO Driver for MySQL 3.x Client Libraries", "enabled");
+	php_info_print_table_header(2, "PDO Driver for MySQL, client library version", mysql_get_client_info());
 	php_info_print_table_end();
 }
 /* }}} */

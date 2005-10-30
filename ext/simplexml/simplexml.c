@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.166 2005/10/29 21:16:17 helly Exp $ */
+/* $Id: simplexml.c,v 1.167 2005/10/30 00:20:35 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1569,6 +1569,7 @@ ZEND_API void php_sxe_reset_iterator(php_sxe_object *sxe TSRMLS_DC)
 {
 	xmlNodePtr node;
 	char *prefix;
+	int test;
 
 	if (sxe->iter.data) {
 		zval_ptr_dtor(&sxe->iter.data);
@@ -1590,6 +1591,7 @@ ZEND_API void php_sxe_reset_iterator(php_sxe_object *sxe TSRMLS_DC)
 	}
 
 	prefix = sxe->iter.nsprefix;
+	test = sxe->iter.type == SXE_ITER_ATTRLIST && sxe->iter.name;
 
 	while (node) {
 		SKIP_TEXT(node);
@@ -1605,11 +1607,7 @@ ZEND_API void php_sxe_reset_iterator(php_sxe_object *sxe TSRMLS_DC)
 			}
 		} else {
 			if (node->type == XML_ATTRIBUTE_NODE) {
-				if (sxe->iter.type == SXE_ITER_ATTRLIST && sxe->iter.name) {
-					if (!xmlStrcmp(node->name, sxe->iter.name) && match_ns(sxe, node, prefix)) {
-						break;
-					}
-				} else if (match_ns(sxe, node, sxe->iter.nsprefix)) {
+				if ((!test || !xmlStrcmp(node->name, sxe->iter.name)) && match_ns(sxe, node, prefix)) {
 					break;
 				}
 			}
@@ -1698,6 +1696,7 @@ ZEND_API void php_sxe_move_forward_iterator(php_sxe_object *sxe TSRMLS_DC)
 	xmlNodePtr      node = NULL;
 	php_sxe_object  *intern;
 	char *prefix;
+	int test;
 
 	if (sxe->iter.data) {
 		intern = (php_sxe_object *)zend_object_store_get_object(sxe->iter.data TSRMLS_CC);
@@ -1711,6 +1710,7 @@ ZEND_API void php_sxe_move_forward_iterator(php_sxe_object *sxe TSRMLS_DC)
 	}
 
 	prefix = sxe->iter.nsprefix;
+	test = sxe->iter.type == SXE_ITER_ATTRLIST && sxe->iter.name;
 
 	while (node) {
 		SKIP_TEXT(node);
@@ -1727,11 +1727,7 @@ ZEND_API void php_sxe_move_forward_iterator(php_sxe_object *sxe TSRMLS_DC)
 			}
 		} else {
 			if (node->type == XML_ATTRIBUTE_NODE) {
-				if (sxe->iter.type == SXE_ITER_ATTRLIST && sxe->iter.name) {
-					if (!xmlStrcmp(node->name, sxe->iter.name) && match_ns(sxe, node, prefix)) {
-						break;
-					}
-				} else if (match_ns(sxe, node, sxe->iter.nsprefix)) {
+				if ((!test || !xmlStrcmp(node->name, sxe->iter.name)) && match_ns(sxe, node, prefix)) {
 					break;
 				}
 			}
@@ -1921,7 +1917,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.166 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.167 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

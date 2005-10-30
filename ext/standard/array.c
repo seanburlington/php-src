@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.11 2005/10/30 13:44:26 iliaa Exp $ */
+/* $Id: array.c,v 1.308.2.12 2005/10/30 13:48:30 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -3999,7 +3999,6 @@ PHP_FUNCTION(array_product)
 	
 	if (!zend_hash_num_elements(Z_ARRVAL_PP(input))) {
 		RETURN_LONG(0);
-		return;
 	}
 	ZVAL_LONG(return_value, 1);
 

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.331 2005/10/28 09:57:50 dmitry Exp $ */
+/* $Id: array.c,v 1.332 2005/10/30 13:46:34 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -4244,7 +4244,10 @@ PHP_FUNCTION(array_product)
 		return;
 	}
 
-	ZVAL_LONG(return_value, 0);
+	if (!zend_hash_num_elements(Z_ARRVAL_PP(input))) {
+		RETURN_LONG(0);
+	}
+	ZVAL_LONG(return_value, 1);
 
 	for (zend_hash_internal_pointer_reset_ex(Z_ARRVAL_PP(input), &pos);
 		 zend_hash_get_current_data_ex(Z_ARRVAL_PP(input), (void **)&entry, &pos) == SUCCESS;

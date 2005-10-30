@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.169 2005/10/30 00:38:39 helly Exp $ */
+/* $Id: simplexml.c,v 1.170 2005/10/30 20:37:07 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1205,6 +1205,13 @@ static int sxe_object_cast(zval *readobj, zval *writeobj, int type TSRMLS_DC)
 
 	sxe = php_sxe_fetch_object(readobj TSRMLS_CC);
 
+	if (type == IS_BOOL) {
+		node = php_sxe_get_first_node(sxe, NULL TSRMLS_CC);
+		INIT_PZVAL(writeobj);
+		ZVAL_BOOL(writeobj, node != NULL || zend_hash_num_elements(sxe_properties_get(readobj TSRMLS_CC)) > 0);
+		return SUCCESS;
+	}
+
 	if (sxe->iter.type != SXE_ITER_NONE) {
 		node = php_sxe_get_first_node(sxe, NULL TSRMLS_CC);
 		if (node) {
@@ -1878,7 +1885,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.169 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.170 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

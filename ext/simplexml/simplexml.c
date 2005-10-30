@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.168 2005/10/30 00:35:55 helly Exp $ */
+/* $Id: simplexml.c,v 1.169 2005/10/30 00:38:39 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1568,7 +1568,7 @@ zend_object_iterator_funcs php_sxe_iterator_funcs = {
 static void php_sxe_iterator_fetch(php_sxe_object *sxe, xmlNodePtr node TSRMLS_DC)
 {
 	char *prefix = sxe->iter.nsprefix;
-	int test_elem = sxe->iter.type == SXE_ITER_ELEMENT;
+	int test_elem = sxe->iter.type == SXE_ITER_ELEMENT  && sxe->iter.name;
 	int test_attr = sxe->iter.type == SXE_ITER_ATTRLIST && sxe->iter.name;
 
 	while (node) {
@@ -1878,7 +1878,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.168 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.169 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

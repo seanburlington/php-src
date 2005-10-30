@@ -1,3 +1,56 @@
+2005-10-29  Edin Kadribasic  <edink@emini.dk>
+
+    * (PHP_4_4)
+      ext/ming/ming.dsp:
+      Fix build with newer libming
+
+    * (PHP_4_4)
+      ext/imap/imap.dsp:
+      Fix compilation with c-client 2004
+
+2005-10-29  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ext/simplexml/simplexml.c:
+      - Fix attribute handling when using xpath expressions that lead to
+      attributes
+
+    * ext/simplexml/simplexml.c
+      ext/simplexml/tests/000.phpt
+      ext/simplexml/tests/000.xml
+      ext/simplexml/tests/001.phpt
+      ext/simplexml/tests/002.phpt
+      ext/simplexml/tests/003.phpt
+      ext/simplexml/tests/004.phpt
+      ext/simplexml/tests/005.phpt
+      ext/simplexml/tests/006.phpt
+      ext/simplexml/tests/007.phpt
+      ext/simplexml/tests/008.phpt
+      ext/simplexml/tests/009.phpt
+      ext/simplexml/tests/010.phpt
+      ext/simplexml/tests/011.phpt
+      ext/simplexml/tests/012.phpt
+      ext/simplexml/tests/013.phpt
+      ext/simplexml/tests/019.phpt
+      ext/simplexml/tests/020.phpt
+      ext/simplexml/tests/021.phpt
+      ext/simplexml/tests/022.phpt
+      ext/simplexml/tests/023.phpt
+      ext/simplexml/tests/bug27010.phpt
+      ext/simplexml/tests/profile11.phpt
+      ext/simplexml/tests/simplexml_import_dom.phpt
+      ext/simplexml/tests/sxe.dtd:
+      - Change var_dump to include all that is reachable, incl. @attributes
+      - Adapt tests and add new one
+
+    * ext/standard/php_fopen_wrapper.c:
+      - It's better to use our own strtol here
+
+    * ext/standard/php_fopen_wrapper.c:
+      - Allow to specify ma memory usage for temp stream
+
+    * ext/standard/php_fopen_wrapper.c:
+      - Register temp and memory stream here
+
 2005-10-28  Sebastian Bergmann  <sb@sebastian-bergmann.de>
 
     * NEWS
@@ -15108,7 +15161,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2147 2005/10/29 05:39:52 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2148 2005/10/30 05:43:38 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -18509,7 +18562,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2147 2005/10/29 05:39:52 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2148 2005/10/30 05:43:38 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -18990,7 +19043,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2147 2005/10/29 05:39:52 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2148 2005/10/30 05:43:38 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -20464,7 +20517,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2147 2005/10/29 05:39:52 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2148 2005/10/30 05:43:38 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

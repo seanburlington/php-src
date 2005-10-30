@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: memory.c,v 1.10 2005/10/07 07:37:37 helly Exp $ */
+/* $Id: memory.c,v 1.11 2005/10/30 17:17:44 helly Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -221,7 +221,7 @@ PHPAPI php_stream *_php_stream_memory_create(int mode STREAMS_DC TSRMLS_DC)
 	self->smax = -1;
 	self->mode = mode;
 	
-	stream = php_stream_alloc(&php_stream_memory_ops, self, 0, "r+b");
+	stream = php_stream_alloc(&php_stream_memory_ops, self, 0, mode & TEMP_STREAM_READONLY ? "r+b" : "w+b");
 	stream->flags |= PHP_STREAM_FLAG_NO_BUFFER;
 	return stream;
 }
@@ -441,7 +441,7 @@ PHPAPI php_stream *_php_stream_temp_create(int mode, size_t max_memory_usage STR
 	self = ecalloc(1, sizeof(*self));
 	self->smax = max_memory_usage;
 	self->mode = mode;
-	stream = php_stream_alloc(&php_stream_temp_ops, self, 0, "r+b");
+	stream = php_stream_alloc(&php_stream_temp_ops, self, 0, mode & TEMP_STREAM_READONLY ? "r+b" : "w+b");
 	stream->flags |= PHP_STREAM_FLAG_NO_BUFFER;
 	self->innerstream = php_stream_memory_create(mode);
 
@@ -456,7 +456,7 @@ PHPAPI php_stream *_php_stream_temp_open(int mode, size_t max_memory_usage, char
 	php_stream *stream;
 	php_stream_temp_data *ms;
 
-	if ((stream = php_stream_temp_create_rel(mode & ~TEMP_STREAM_READONLY, max_memory_usage)) != NULL) {
+	if ((stream = php_stream_temp_create_rel(mode, max_memory_usage)) != NULL) {
 		if (length) {
 			assert(buf != NULL);
 			php_stream_temp_write(stream, buf, length TSRMLS_CC);

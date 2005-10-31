@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_simplexml_exports.h,v 1.3.2.1 2005/10/03 16:05:08 helly Exp $ */
+/* $Id: php_simplexml_exports.h,v 1.3.2.2 2005/10/31 21:20:44 helly Exp $ */
 
 #ifndef PHP_SIMPLEXML_EXPORTS_H
 #define PHP_SIMPLEXML_EXPORTS_H
@@ -48,9 +48,6 @@ php_sxe_fetch_object(zval *object TSRMLS_DC)
 	return (php_sxe_object *) zend_object_store_get_object(object TSRMLS_CC);
 }
 /* }}} */
-
-ZEND_API void php_sxe_reset_iterator(php_sxe_object *sxe TSRMLS_DC);
-ZEND_API void php_sxe_move_forward_iterator(php_sxe_object *sxe TSRMLS_DC);
 
 typedef struct {
 	zend_object_iterator  intern;

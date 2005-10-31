@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.4 2005/10/24 08:29:32 helly Exp $ */
+/* $Id: simplexml.c,v 1.151.2.5 2005/10/31 21:20:44 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -51,6 +51,8 @@ ZEND_API zend_class_entry *sxe_get_element_class_entry()
 
 static php_sxe_object* php_sxe_object_new(zend_class_entry *ce TSRMLS_DC);
 static zend_object_value php_sxe_register_object(php_sxe_object * TSRMLS_DC);
+static void php_sxe_reset_iterator(php_sxe_object *sxe TSRMLS_DC);
+static void php_sxe_move_forward_iterator(php_sxe_object *sxe TSRMLS_DC);
 
 /* {{{ _node_as_zval()
  */
@@ -1404,7 +1406,7 @@ zend_object_iterator_funcs php_sxe_iterator_funcs = {
 	php_sxe_iterator_rewind,
 };
 
-ZEND_API void php_sxe_reset_iterator(php_sxe_object *sxe TSRMLS_DC)
+static void php_sxe_reset_iterator(php_sxe_object *sxe TSRMLS_DC)
 {
 	xmlNodePtr node;
 	char *prefix;
@@ -1519,7 +1521,7 @@ static int php_sxe_iterator_current_key(zend_object_iterator *iter, char **str_k
 
 }
 
-ZEND_API void php_sxe_move_forward_iterator(php_sxe_object *sxe TSRMLS_DC)
+static void php_sxe_move_forward_iterator(php_sxe_object *sxe TSRMLS_DC)
 {
 	xmlNodePtr      node = NULL;
 	php_sxe_object  *intern;
@@ -1743,7 +1745,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.4 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.5 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

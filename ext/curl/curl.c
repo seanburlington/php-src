@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: curl.c,v 1.124.2.30.2.3 2005/10/17 02:42:51 iliaa Exp $ */
+/* $Id: curl.c,v 1.124.2.30.2.4 2005/10/31 23:47:21 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -76,7 +76,7 @@ static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 			RETURN_FALSE; 																		\
 		} 																						\
 																								\
-		if (tmp_url->query || php_check_open_basedir(tmp_url->path TSRMLS_CC) || 									\
+		if (tmp_url->query || tmp_url->fragment || php_check_open_basedir(tmp_url->path TSRMLS_CC) || 									\
 			(PG(safe_mode) && !php_checkuid(tmp_url->path, "rb+", CHECKUID_CHECK_MODE_PARAM))	\
 		) { 																					\
 			php_url_free(tmp_url); 																\

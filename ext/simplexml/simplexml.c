@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.174 2005/11/01 11:53:12 helly Exp $ */
+/* $Id: simplexml.c,v 1.175 2005/11/01 23:21:28 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1106,7 +1106,10 @@ SXE_METHOD(asXML)
 
 static inline void sxe_add_namespace_name(zval *return_value, xmlNsPtr ns)
 {
-	add_assoc_string(return_value, SXE_NS_PREFIX(ns), (char*)ns->href, 1);
+	char *prefix = SXE_NS_PREFIX(ns);
+	if (zend_hash_exists(Z_ARRVAL_P(return_value), prefix, strlen(prefix) + 1) == 0) {
+		add_assoc_string(return_value, prefix, (char*)ns->href, 1);
+	}
 }
 
 static void sxe_add_namespaces(php_sxe_object *sxe, xmlNodePtr node, zend_bool recursive, zval *return_value TSRMLS_DC) /* {{{ */
@@ -1167,25 +1170,27 @@ next_iter:
 }
 /* }}} */
 
-static void sxe_add_registered_namespaces(php_sxe_object *sxe, xmlDocPtr doc, xmlNodePtr node, zend_bool recursive, zval *return_value TSRMLS_DC) /* {{{ */
+static void sxe_add_registered_namespaces(php_sxe_object *sxe, xmlNodePtr node, zend_bool recursive, zval *return_value TSRMLS_DC) /* {{{ */
 {
-	xmlNsPtr *ns = xmlGetNsList(doc, node);
+	xmlNsPtr ns;
 
-	while (ns && ns[0]) {
-		sxe_add_namespace_name(return_value, ns[0]);
-		ns++;
-	}
-
-	if (recursive) {
-		node = node->children;
-		while (node) {
-			sxe_add_registered_namespaces(sxe, doc, node, recursive, return_value TSRMLS_CC);
-			node = node->next;
+	if (node->type == XML_ELEMENT_NODE) {
+		ns = node->nsDef;
+		while (ns != NULL) {
+			sxe_add_namespace_name(return_value, ns);
+			ns = ns->next;
+		}
+		if (recursive) {
+			node = node->children;
+			while (node) {
+				sxe_add_registered_namespaces(sxe, node, recursive, return_value TSRMLS_CC);
+				node = node->next;
+			}
 		}
 	}
 }
 
-/* {{{ proto string SimpleXMLElement::getDocNamespaces([bool recursve])
+/* {{{ proto string SimpleXMLElement::getDocNamespaces([bool recursive])
    Return all namespaces registered with document */
 SXE_METHOD(getDocNamespaces)
 {
@@ -1200,7 +1205,7 @@ SXE_METHOD(getDocNamespaces)
 
 	sxe = php_sxe_fetch_object(getThis() TSRMLS_CC);
 
-	sxe_add_registered_namespaces(sxe, (xmlDocPtr)sxe->document->ptr, xmlDocGetRootElement((xmlDocPtr)sxe->document->ptr), recursive, return_value TSRMLS_CC);
+	sxe_add_registered_namespaces(sxe, xmlDocGetRootElement((xmlDocPtr)sxe->document->ptr), recursive, return_value TSRMLS_CC);
 }
 /* }}} */
 
@@ -2010,7 +2015,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.174 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.175 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

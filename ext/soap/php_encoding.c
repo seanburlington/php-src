@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.71.2.29 2005/10/09 12:41:12 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.71.2.30 2005/11/01 11:11:58 dmitry Exp $ */
 
 #include <time.h>
 
@@ -2661,7 +2661,7 @@ static xmlNodePtr to_xml_any(encodeTypePtr type, zval *data, int style, xmlNodeP
 
 		zval_copy_ctor(&tmp);
 		convert_to_string(&tmp);
-		ret = xmlNewTextLen(Z_STRVAL_P(data), Z_STRLEN_P(data));
+		ret = xmlNewTextLen(Z_STRVAL(tmp), Z_STRLEN(tmp));
 		zval_dtor(&tmp);
 	}
 	ret->name = xmlStringTextNoenc;

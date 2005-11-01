@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.318 2005/10/27 11:07:39 pajoye Exp $ */
+/* $Id: gd.c,v 1.319 2005/11/01 17:04:27 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -692,7 +692,7 @@ PHP_FUNCTION(imageloadfont)
 
 	convert_to_string_ex(file);
 
-	stream = php_stream_open_wrapper(Z_STRVAL_PP(file), "rb", IGNORE_PATH | IGNORE_URL_WIN | REPORT_ERRORS, NULL);
+	stream = php_stream_open_wrapper(Z_STRVAL_PP(file), "rb", ENFORCE_SAFE_MODE | IGNORE_PATH | IGNORE_URL_WIN | REPORT_ERRORS, NULL);
 	if (stream == NULL) {
 		RETURN_FALSE;
 	}
@@ -1505,7 +1505,7 @@ static void _php_image_create_from(INTERNAL_FUNCTION_PARAMETERS, int image_type,
 
 	fn = Z_STRVAL_PP(file);
 
-	stream = php_stream_open_wrapper(fn, "rb", REPORT_ERRORS|IGNORE_PATH|IGNORE_URL_WIN, NULL);
+	stream = php_stream_open_wrapper(fn, "rb", ENFORCE_SAFE_MODE|REPORT_ERRORS|IGNORE_PATH|IGNORE_URL_WIN, NULL);
 	if (stream == NULL)	{
 		RETURN_FALSE;
 	}
@@ -1713,10 +1713,7 @@ static void _php_image_output(INTERNAL_FUNCTION_PARAMETERS, int image_type, char
 	}
 
 	if ((argc == 2) || (argc > 2 && Z_STRLEN_PP(file))) {
-		if (!fn || php_check_open_basedir(fn TSRMLS_CC) || (PG(safe_mode) && !php_checkuid(fn, "rb+", CHECKUID_CHECK_FILE_AND_DIR))) {
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid filename '%s'", fn);
-			RETURN_FALSE;
-		}
+		PHP_GD_CHECK_OPEN_BASEDIR(fn, "Invalid filename");
 
 		fp = VCWD_FOPEN(fn, "wb");
 		if (!fp) {
@@ -3809,16 +3806,10 @@ static void _php_image_convert(INTERNAL_FUNCTION_PARAMETERS, int image_type )
 	}
 
 	/* Check origin file */
-	if (!fn_org || php_check_open_basedir(fn_org TSRMLS_CC)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid origin filename '%s'", fn_org);
-		RETURN_FALSE;
-	}
+	PHP_GD_CHECK_OPEN_BASEDIR(fn_org, "Invalid origin filename");
 
 	/* Check destination file */
-	if (!fn_dest || php_check_open_basedir(fn_dest TSRMLS_CC)) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid destination filename '%s'", fn_dest);
-		RETURN_FALSE;
-	}
+	PHP_GD_CHECK_OPEN_BASEDIR(fn_dest, "Invalid destination filename");
 
 	/* Open origin file */
 	org = VCWD_FOPEN(fn_org, "rb");

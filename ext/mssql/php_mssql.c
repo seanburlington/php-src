@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.152.2.1 2005/09/05 05:04:31 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.152.2.2 2005/11/01 18:15:44 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -856,6 +856,9 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 			break;
 #ifdef SQLUNIQUE
 		case SQLUNIQUE: {
+#else
+		case 36: {			/* FreeTDS hack */
+#endif
 			char *data = charcol(offset);
 
 			/* uniqueidentifier is a 16-byte binary number */

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.h,v 1.16 2005/10/29 15:15:22 helly Exp $ */
+/* $Id: spl_directory.h,v 1.17 2005/11/01 16:54:44 helly Exp $ */
 
 #ifndef SPL_DIRECTORY_H
 #define SPL_DIRECTORY_H
@@ -46,6 +46,8 @@ typedef struct _spl_filesystem_object {
 	int                file_name_len; 
 	SPL_FS_OBJ_TYPE    type;
 	long               flags;
+	zend_class_entry   *file_class;
+	zend_class_entry   *info_class;
 	union {
 		struct {
 			php_stream         *dirp;

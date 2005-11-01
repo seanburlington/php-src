@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.173 2005/10/31 20:06:23 helly Exp $ */
+/* $Id: simplexml.c,v 1.174 2005/11/01 11:53:12 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1102,18 +1102,25 @@ SXE_METHOD(asXML)
 }
 /* }}} */
 
+#define SXE_NS_PREFIX(ns) (ns->prefix ? (char*)ns->prefix : "")
+
+static inline void sxe_add_namespace_name(zval *return_value, xmlNsPtr ns)
+{
+	add_assoc_string(return_value, SXE_NS_PREFIX(ns), (char*)ns->href, 1);
+}
+
 static void sxe_add_namespaces(php_sxe_object *sxe, xmlNodePtr node, zend_bool recursive, zval *return_value TSRMLS_DC) /* {{{ */
 {
 	xmlAttrPtr  attr;
 
 	if (node->ns) {	
-		add_assoc_string(return_value, (char*)node->ns->prefix, (char*)node->ns->href, 1);
+		sxe_add_namespace_name(return_value, node->ns);
 	}
 
 	attr = node->properties;
 	while (attr) {
 		if (attr->ns) {	
-			add_assoc_string(return_value, (char*)attr->ns->prefix, (char*)attr->ns->href, 1);
+			sxe_add_namespace_name(return_value, attr->ns);
 		}
 		attr = attr->next;
 	}
@@ -1152,7 +1159,7 @@ SXE_METHOD(getNamespaces)
 		if (node->type == XML_ELEMENT_NODE) {
 			sxe_add_namespaces(sxe, node, recursive, return_value TSRMLS_CC);
 		} else if (node->type == XML_ATTRIBUTE_NODE && node->ns) {
-			add_assoc_string(return_value, (char*)node->ns->prefix, (char*)node->ns->href, 1);
+			sxe_add_namespace_name(return_value, node->ns);
 		}
 next_iter:
 		node = node->next;
@@ -1165,7 +1172,7 @@ static void sxe_add_registered_namespaces(php_sxe_object *sxe, xmlDocPtr doc, xm
 	xmlNsPtr *ns = xmlGetNsList(doc, node);
 
 	while (ns && ns[0]) {
-		add_assoc_string(return_value, (char*)ns[0]->prefix, (char*)ns[0]->href, 1);
+		sxe_add_namespace_name(return_value, ns[0]);
 		ns++;
 	}
 
@@ -2003,7 +2010,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.173 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.174 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.73.2.4 2005/10/05 21:59:13 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.73.2.5 2005/11/01 21:18:24 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -2048,7 +2048,7 @@ PHP_FUNCTION(iterator_to_array)
 }
 /* }}} */
 
-/* {{{ int iterator_count(IteratorAggregate it) 
+/* {{{ int iterator_count(Travesable it) 
    Count the elements in an iterator */
 PHP_FUNCTION(iterator_count)
 {
@@ -2056,7 +2056,7 @@ PHP_FUNCTION(iterator_count)
 	zend_object_iterator   *iter;
 	long                    count = 0;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O", &obj, zend_ce_aggregate) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O", &obj, zend_ce_traversable) == FAILURE) {
 		RETURN_FALSE;
 	}
 	

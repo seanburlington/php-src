@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.1 2005/10/06 20:29:40 johannes Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.2 2005/11/02 14:38:13 mike Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -331,21 +331,13 @@ static int sapi_cgi_send_headers(sapi_headers_struct *sapi_headers TSRMLS_DC)
 		PHPWRITE_H(buf, len);
 	}
 
-	if (SG(sapi_headers).send_default_content_type)
-	{
-		char *hd;
-
-		hd = sapi_get_default_content_type(TSRMLS_C);
-		PHPWRITE_H("Content-type: ", sizeof("Content-type: ") - 1);
-		PHPWRITE_H(hd, strlen(hd));
-		PHPWRITE_H("\r\n", 2);
-		efree(hd);
-	}
-
 	h = zend_llist_get_first_ex(&sapi_headers->headers, &pos);
 	while (h) {
-		PHPWRITE_H(h->header, h->header_len);
-		PHPWRITE_H("\r\n", 2);
+		/* prevent CRLFCRLF */
+		if (h->header_len) {
+			PHPWRITE_H(h->header, h->header_len);
+			PHPWRITE_H("\r\n", 2);
+		}
 		h = zend_llist_get_next_ex(&sapi_headers->headers, &pos);
 	}
 	PHPWRITE_H("\r\n", 2);

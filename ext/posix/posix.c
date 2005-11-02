@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: posix.c,v 1.70 2005/08/08 21:44:58 magnus Exp $ */
+/* $Id: posix.c,v 1.71 2005/11/02 15:50:06 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -143,7 +143,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision: 1.70 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.71 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -676,7 +676,7 @@ PHP_FUNCTION(posix_mknod)
 	char *path;
 	int path_len;
 	long mode;
-	long major, minor = 0;
+	long major = 0, minor = 0;
 	int result;
 	dev_t php_dev;
 
@@ -693,9 +693,13 @@ PHP_FUNCTION(posix_mknod)
 	}
 
 	if ((mode & S_IFCHR) || (mode & S_IFBLK)) {
+		if (ZEND_NUM_ARGS() == 2) {
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "For S_IFCHR and S_IFBLK you need to pass a major device kernel identifier");
+			RETURN_FALSE;
+		}
 		if (major == 0) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING,
-				"expects argument 4 to be non-zero for POSIX_S_IFCHR and POSIX_S_IFBLK");
+				"Expects argument 3 to be non-zero for POSIX_S_IFCHR and POSIX_S_IFBLK");
 			RETURN_FALSE;
 		} else {
 #if defined(HAVE_MAKEDEV) || defined(makedev)

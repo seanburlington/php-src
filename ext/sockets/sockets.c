@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.125.2.24 2004/06/07 04:42:40 pollita Exp $ */
+/* $Id: sockets.c,v 1.125.2.29.2.1 2005/11/03 14:58:43 mike Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -57,7 +57,11 @@
 # include <sys/uio.h>
 # define IS_INVALID_SOCKET(a)	(a->bsd_socket < 0)
 # define set_errno(a) (errno = a)
-# define set_h_errno(a) (h_errno = a)
+# ifdef HAVE_SET_H_ERRNO
+#  define SET_H_ERRNO(newval) set_h_errno(newval)
+# else
+#  define SET_H_ERRNO(newval) h_errno = (newval)
+# endif
 #else /* windows */
 # include "php_sockets.h"
 # include "php_sockets_win.h"
@@ -350,6 +354,10 @@ static char *php_strerror(int error TSRMLS_DC)
 		buf = hstrerror(error);
 #else
 		{
+			if (SOCKETS_G(strerror_buf)) {
+				efree(SOCKETS_G(strerror_buf));
+			}
+
 			spprintf(&(SOCKETS_G(strerror_buf)), 0, "Host lookup error %d", error);
 			buf = SOCKETS_G(strerror_buf);
 		}
@@ -364,6 +372,11 @@ static char *php_strerror(int error TSRMLS_DC)
 
 		if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |	FORMAT_MESSAGE_IGNORE_INSERTS,
 				  NULL, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR) &tmp, 0, NULL)) {
+			
+			if (SOCKETS_G(strerror_buf)) {
+				efree(SOCKETS_G(strerror_buf));
+			}
+
 			SOCKETS_G(strerror_buf) = estrdup(tmp);
 			LocalFree(tmp);
 		
@@ -640,6 +653,8 @@ PHP_FUNCTION(socket_create_listen)
 		RETURN_FALSE;
 	}
 
+	php_sock->error = 0;
+
 	ZEND_REGISTER_RESOURCE(return_value, php_sock, le_socket);
 }
 /* }}} */
@@ -658,10 +673,10 @@ PHP_FUNCTION(socket_accept)
 	ZEND_FETCH_RESOURCE(php_sock, php_socket *, &arg1, -1, le_socket_name, le_socket);
 	
 	if (!php_accept_connect(php_sock, &new_sock, (struct sockaddr *) &sa TSRMLS_CC)) {
-		php_error(E_WARNING, "%s() unable to accept socket connection [%d]: %s",
-				  get_active_function_name(TSRMLS_C), errno, php_strerror(errno TSRMLS_CC));
 		RETURN_FALSE;
 	}
+
+	new_sock->error = 0;
 	
 	ZEND_REGISTER_RESOURCE(return_value, new_sock, le_socket);
 }
@@ -983,6 +998,8 @@ PHP_FUNCTION(socket_create)
 		efree(php_sock);
 		RETURN_FALSE;
 	}
+
+	php_sock->error = 0;
 
 	ZEND_REGISTER_RESOURCE(return_value, php_sock, le_socket);
 }
@@ -1762,7 +1779,7 @@ PHP_FUNCTION(socket_sendmsg)
 				struct msghdr hdr;
 				struct sockaddr_in *sin = (struct sockaddr_in *) &sa;
 				
-				set_h_errno(0);
+				SET_H_ERRNO(0);
 				set_errno(0);
 				
 				memset(&hdr, 0, sizeof(hdr));
@@ -1825,6 +1842,7 @@ PHP_FUNCTION(socket_get_option)
 	zval			*arg1;
 	struct linger	linger_val;
 	struct timeval		tv;
+	int				timeout = 0;
 	socklen_t		optlen;
 	php_socket		*php_sock;
 	int				other_val;
@@ -1854,12 +1872,24 @@ PHP_FUNCTION(socket_get_option)
 			break; 
 		case SO_RCVTIMEO:
 		case SO_SNDTIMEO:
+#ifndef PHP_WIN32
 			optlen = sizeof(tv);
 
 			if (getsockopt(php_sock->bsd_socket, level, optname, (char*)&tv, &optlen) != 0) {
 				PHP_SOCKET_ERROR(php_sock, "unable to retrieve socket option", errno);
 				RETURN_FALSE;
 			}
+#else
+			optlen = sizeof(int);
+			
+			if (getsockopt(php_sock->bsd_socket, level, optname, (char*)&timeout, &optlen) != 0) {
+				PHP_SOCKET_ERROR(php_sock, "unable to retrieve socket option", errno);
+				RETURN_FALSE;
+			}
+			
+			tv.tv_sec = timeout ? timeout / 1000 : 0;
+			tv.tv_usec = timeout ? (timeout * 1000) % 1000000 : 0;
+#endif
 
 			if (array_init(return_value) == FAILURE) {
 				RETURN_FALSE;
@@ -1891,7 +1921,7 @@ PHP_FUNCTION(socket_set_option)
 	struct linger	lv;
 	struct timeval tv;
 	php_socket		*php_sock;
-	int				ov, optlen, retval;
+	int				ov, optlen, retval, timeout;
 	long				level, optname;
 	void 			*opt_ptr;
 	
@@ -1951,11 +1981,16 @@ PHP_FUNCTION(socket_set_option)
 			
 			convert_to_long_ex(sec);
 			convert_to_long_ex(usec);
+#ifndef PHP_WIN32
 			tv.tv_sec = Z_LVAL_PP(sec);
 			tv.tv_usec = Z_LVAL_PP(usec);
-
 			optlen = sizeof(tv);
 			opt_ptr = &tv;
+#else
+			timeout = Z_LVAL_PP(sec) * 1000 + Z_LVAL_PP(usec) / 1000;
+			optlen = sizeof(int);
+			opt_ptr = &timeout;
+#endif
 			break;
 		default:
 			convert_to_long_ex(&arg4);
@@ -2025,6 +2060,8 @@ PHP_FUNCTION(socket_create_pair)
 	php_sock[1]->bsd_socket = fds_array[1];
 	php_sock[0]->type		= domain;
 	php_sock[1]->type		= domain;
+	php_sock[0]->error		= 0;
+	php_sock[1]->error		= 0;
 
 	ZEND_REGISTER_RESOURCE(retval[0], php_sock[0], le_socket);
 	ZEND_REGISTER_RESOURCE(retval[1], php_sock[1], le_socket);

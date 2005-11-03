@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.13 2005/11/03 21:59:13 helly Exp $ */
+/* $Id: php_spl.c,v 1.52.2.14 2005/11/03 22:06:30 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -402,7 +402,7 @@ PHP_FUNCTION(spl_autoload_register)
 			}
 		}
 	
-		if (!zend_is_callable_ex(zcallable, 0, &func_name, &func_name_len, &alfi.ce, &alfi.func_ptr, &obj_ptr TSRMLS_CC)) {
+		if (!zend_is_callable_ex(zcallable, IS_CALLABLE_CHECK_IS_STATIC, &func_name, &func_name_len, &alfi.ce, &alfi.func_ptr, &obj_ptr TSRMLS_CC)) {
 			if (Z_TYPE_P(zcallable) == IS_ARRAY) {
 				if (!obj_ptr && alfi.func_ptr && !(alfi.func_ptr->common.fn_flags & ZEND_ACC_STATIC)) {
 					if (do_throw) {

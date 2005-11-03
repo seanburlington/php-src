@@ -1,8 +1,8 @@
 dnl
-dnl $Id: config.m4,v 1.26.2.6 2003/07/01 00:02:29 sniper Exp $
+dnl $Id: config.m4,v 1.26.2.8.2.1 2005/11/03 20:41:56 sniper Exp $
 dnl
 
-AC_DEFUN(PHP_LDAP_CHECKS, [
+AC_DEFUN([PHP_LDAP_CHECKS], [
   if test -f $1/include/ldap.h; then
     LDAP_DIR=$1
     LDAP_INCDIR=$1/include
@@ -99,7 +99,9 @@ if test "$PHP_LDAP" != "no"; then
   elif test -f $LDAP_LIBDIR/libclntsh.$SHLIB_SUFFIX_NAME; then
     PHP_ADD_LIBRARY_WITH_PATH(clntsh, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
     AC_DEFINE(HAVE_ORALDAP,1,[ ])
-
+    if test -f $LDAP_LIBDIR/libclntsh.$SHLIB_SUFFIX_NAME.10.1; then
+      AC_DEFINE(HAVE_ORALDAP_10,1,[ ])
+    fi
   else
     AC_MSG_ERROR(Cannot find ldap libraries in $LDAP_LIBDIR.)
   fi
@@ -108,22 +110,32 @@ if test "$PHP_LDAP" != "no"; then
   PHP_SUBST(LDAP_SHARED_LIBADD)
   AC_DEFINE(HAVE_LDAP,1,[ ])
 
-  dnl Check for 3 arg ldap_set_rebind_proc
+  dnl Save original values
   _SAVE_CPPFLAGS=$CPPFLAGS
   _SAVE_LDFLAGS=$LDFLAGS
-  CPPFLAGS="$CPPFLAGS -I$LDAP_INCDIR"
   LDFLAGS="$LDFLAGS $LDAP_SHARED_LIBADD"
+  CPPFLAGS="$CPPFLAGS -I$LDAP_INCDIR"
 
+  dnl Check for 3 arg ldap_set_rebind_proc
   AC_CACHE_CHECK([for 3 arg ldap_set_rebind_proc], ac_cv_3arg_setrebindproc,
   [AC_TRY_COMPILE([#include <ldap.h>], [ldap_set_rebind_proc(0,0,0)],
   ac_cv_3arg_setrebindproc=yes, ac_cv_3arg_setrebindproc=no)])
   if test "$ac_cv_3arg_setrebindproc" = yes; then
     AC_DEFINE(HAVE_3ARG_SETREBINDPROC,1,[Whether 3 arg set_rebind_proc()])
   fi
-  CPPFLAGS=$_SAVE_CPPFLAGS
 
   dnl Solaris 2.8 claims to be 2004 API, but doesn't have
   dnl ldap_parse_reference() nor ldap_start_tls_s()
-  AC_CHECK_FUNCS([ldap_parse_reference ldap_start_tls_s])
+  AC_CHECK_FUNCS([ldap_parse_result ldap_parse_reference ldap_start_tls_s])
+  
+  dnl
+  dnl Sanity check
+  dnl 
+  AC_CHECK_FUNC(ldap_bind_s, [], [
+    AC_MSG_ERROR([LDAP build check failed. Please check config.log for more information.]) 
+  ])
+
+  dnl Restore original values
+  CPPFLAGS=$_SAVE_CPPFLAGS
   LDFLAGS=$_SAVE_LDFLAGS
 fi 

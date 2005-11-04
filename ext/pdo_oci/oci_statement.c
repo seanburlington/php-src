@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: oci_statement.c,v 1.16.2.7 2005/11/01 14:18:20 edink Exp $ */
+/* $Id: oci_statement.c,v 1.16.2.8 2005/11/04 18:11:40 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -138,7 +138,7 @@ static int oci_stmt_execute(pdo_stmt_t *stmt TSRMLS_DC) /* {{{ */
 	}
 
 	STMT_CALL(OCIStmtExecute, (S->H->svc, S->stmt, S->err,
-				(S->stmt_type == OCI_STMT_SELECT || S->have_blobs) ? 1 : 0, 0, NULL, NULL,
+				(S->stmt_type == OCI_STMT_SELECT && !S->have_blobs) ? 0 : 1, 0, NULL, NULL,
 				mode));
 
 	if (!stmt->executed) {

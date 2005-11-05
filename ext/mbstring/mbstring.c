@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.47.2.2 2005/11/04 16:13:44 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.142.2.47.2.3 2005/11/05 01:14:05 hirokawa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -3595,7 +3595,7 @@ PHP_FUNCTION(mb_send_mail)
 		extra_cmd = Z_STRVAL_PP(argv[4]);
 	}
 
-    if (extra_cmd) {
+	if (extra_cmd) {
 		extra_cmd = php_escape_shell_cmd(extra_cmd);
 	} 
 

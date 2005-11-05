@@ -18,7 +18,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: Installer.php,v 1.81.2.27.2.1 2005/11/02 16:57:20 cellog Exp $
+ * @version    CVS: $Id: Installer.php,v 1.81.2.27.2.2 2005/11/05 18:24:20 cellog Exp $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 0.1
  */
@@ -885,10 +885,12 @@ class PEAR_Installer extends PEAR_Downloader
         $p = &$pkg->fromAnyFile($descfile, PEAR_VALIDATE_INSTALLING);
         PEAR::staticPopErrorHandling();
         if (PEAR::isError($p)) {
-            foreach ($pkg->getValidationWarnings(true) as $err) {
-                $loglevel = $err['level'] == 'error' ? 0 : 1;
-                if (!isset($this->_options['soft'])) {
-                    $this->log($loglevel, ucfirst($err['level']) . ': ' . $err['message']);
+            if (is_array($p->getUserInfo())) {
+                foreach ($p->getUserInfo() as $err) {
+                    $loglevel = $err['level'] == 'error' ? 0 : 1;
+                    if (!isset($this->_options['soft'])) {
+                        $this->log($loglevel, ucfirst($err['level']) . ': ' . $err['message']);
+                    }
                 }
             }
             return $this->raiseError('Installation failed: invalid package file');

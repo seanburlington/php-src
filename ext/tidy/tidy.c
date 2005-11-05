@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.18.2.6 2005/10/25 19:34:53 mike Exp $ */
+/* $Id: tidy.c,v 1.18.2.7 2005/11/05 18:54:03 mike Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -309,7 +309,7 @@ static void php_tidy_quick_repair(INTERNAL_FUNCTION_PARAMETERS, zend_bool is_fil
 				TidyBuffer output = {0};
 
 				tidySaveBuffer (TG(tdoc)->doc, &output);
-				RETVAL_STRING(output.bp, 1);
+				RETVAL_STRINGL(output.bp, output.size-1, 1);
 				tidyBufFree(&output);
 			} else {
 				RETVAL_FALSE;

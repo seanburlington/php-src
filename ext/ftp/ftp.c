@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.68.2.17 2004/03/31 20:44:04 iliaa Exp $ */
+/* $Id: ftp.c,v 1.68.2.22.2.1 2005/11/05 22:03:27 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -262,7 +262,9 @@ ftp_login(ftpbuf_t *ftp, const char *user, const char *pass TSRMLS_DC)
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "ftp_login: failed to create the SSL context");
 				return 0;
 			}
-			
+
+			SSL_CTX_set_options(ctx, SSL_OP_ALL);
+
 			ftp->ssl_handle = SSL_new(ctx);
 			if (ftp->ssl_handle == NULL) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "ftp_login: failed to create the SSL handle");
@@ -705,7 +707,9 @@ ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, 
 		}
 
 		if (type == FTPTYPE_ASCII) {
+#ifndef PHP_WIN32
 			char *s;
+#endif
 			char *ptr = data->buf;
 			char *e = ptr + rcvd;
 			/* logic depends on the OS EOL
@@ -713,26 +717,15 @@ ftp_get(ftpbuf_t *ftp, php_stream *outstream, const char *path, ftptype_t type, 
 			 * Everything Else \n
 			 */
 #ifdef PHP_WIN32
-			while ((s = strpbrk(ptr, "\r\n"))) {
-				if (*s == '\n') {
-					php_stream_putc(outstream, '\r');
-				} else if (*s == '\r' && *(s + 1) == '\n') {
-					s++;
-				}
-				s++;
-				php_stream_write(outstream, ptr, (s - ptr));
-				if (*(s - 1) == '\r') {
-					php_stream_putc(outstream, '\n');
-				}
-				ptr = s;
-			}
+			php_stream_write(outstream, ptr, (e - ptr));
+			ptr = e;
 #else 
-			while ((s = memchr(ptr, '\r', (e - ptr)))) {
+			while (e > ptr && (s = memchr(ptr, '\r', (e - ptr)))) {
 				php_stream_write(outstream, ptr, (s - ptr));
 				if (*(s + 1) == '\n') {
 					s++;
+					php_stream_putc(outstream, '\n');
 				}
-				php_stream_putc(outstream, '\n');
 				ptr = s + 1;
 			}
 #endif
@@ -1411,7 +1404,9 @@ data_accepted:
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "data_accept: failed to create the SSL context");
 			return 0;
 		}
-			
+
+		SSL_CTX_set_options(ctx, SSL_OP_ALL);
+
 		data->ssl_handle = SSL_new(ctx);
 		if (data->ssl_handle == NULL) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "data_accept: failed to create the SSL handle");

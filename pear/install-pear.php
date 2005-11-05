@@ -1,6 +1,6 @@
 <?php
 
-/* $Id: install-pear.php,v 1.6.2.14.4.3 2005/11/05 17:59:02 cellog Exp $ */
+/* $Id: install-pear.php,v 1.6.2.14.4.4 2005/11/05 18:15:05 cellog Exp $ */
 
 error_reporting(E_ALL);
 $pear_dir = dirname(__FILE__);
@@ -116,7 +116,8 @@ $pkg = &new PEAR_PackageFile($config, $debug);
 foreach ($install_files as $package => $instfile) {
     $info = &$pkg->fromAnyFile($instfile, PEAR_VALIDATE_INSTALLING);
     if (PEAR::isError($info)) {
-        $ui->outputData(sprintf("[PEAR] %s: %s", $package, $info->getMessage()));
+        $ui->outputData(sprintf("[PEAR] %s: %s", $package . " ($instfile)",
+            $info->getMessage()));
         continue;
     }
     $new_ver = $info->getVersion();

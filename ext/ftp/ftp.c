@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: ftp.c,v 1.112.2.1 2005/08/18 12:37:35 sniper Exp $ */
+/* $Id: ftp.c,v 1.112.2.2 2005/11/05 22:02:15 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -280,7 +280,9 @@ ftp_login(ftpbuf_t *ftp, const char *user, const char *pass TSRMLS_DC)
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "failed to create the SSL context");
 				return 0;
 			}
-			
+
+			SSL_CTX_set_options(ctx, SSL_OP_ALL);
+
 			ftp->ssl_handle = SSL_new(ctx);
 			if (ftp->ssl_handle == NULL) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "failed to create the SSL handle");
@@ -1513,7 +1515,9 @@ data_accepted:
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "data_accept: failed to create the SSL context");
 			return 0;
 		}
-			
+
+		SSL_CTX_set_options(ctx, SSL_OP_ALL);
+
 		data->ssl_handle = SSL_new(ctx);
 		if (data->ssl_handle == NULL) {
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "data_accept: failed to create the SSL handle");

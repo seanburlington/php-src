@@ -15,7 +15,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: Dependency2.php,v 1.1.2.1 2005/11/02 16:57:21 cellog Exp $
+ * @version    CVS: $Id: Dependency2.php,v 1.1.2.2 2005/11/05 18:03:10 cellog Exp $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 1.4.0a1
  */
@@ -518,7 +518,7 @@ class PEAR_Dependency2
      */
     function getPEARVersion()
     {
-        return '@PEAR-VER@';
+        return '1.4.3';
     }
 
     function validatePearinstallerDependency($dep)

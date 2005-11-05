@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.175 2005/11/01 23:21:28 rrichards Exp $ */
+/* $Id: simplexml.c,v 1.176 2005/11/05 22:41:09 rasmus Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1189,6 +1189,7 @@ static void sxe_add_registered_namespaces(php_sxe_object *sxe, xmlNodePtr node, 
 		}
 	}
 }
+/* }}} */
 
 /* {{{ proto string SimpleXMLElement::getDocNamespaces([bool recursive])
    Return all namespaces registered with document */
@@ -1865,7 +1866,6 @@ void *simplexml_export_node(zval *object TSRMLS_DC)
 	return php_sxe_get_first_node(sxe, node TSRMLS_CC);	
 }
 
-#ifdef HAVE_DOM
 /* {{{ proto simplemxml_element simplexml_import_dom(domNode node [, string class_name])
    Get a simplexml_element object from dom to allow for processing */
 PHP_FUNCTION(simplexml_import_dom)
@@ -1918,14 +1918,11 @@ PHP_FUNCTION(simplexml_import_dom)
 	}
 }
 /* }}} */
-#endif
 
 function_entry simplexml_functions[] = {
 	PHP_FE(simplexml_load_file, NULL)
 	PHP_FE(simplexml_load_string, NULL)
-#ifdef HAVE_DOM
 	PHP_FE(simplexml_import_dom, NULL)
-#endif
 	{NULL, NULL, NULL}
 };
 
@@ -2015,7 +2012,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.175 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.176 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

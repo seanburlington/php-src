@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.152.2.2 2005/11/01 18:15:44 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.152.2.3 2005/11/06 02:59:18 sniper Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -865,7 +865,6 @@ static void php_mssql_get_column_content_with_type(mssql_link *mssql_ptr,int off
 			ZVAL_STRINGL(result, data, 16, 1);
 			}
 			break;
-#endif
 		case SQLVARBINARY:
 		case SQLBINARY:
 		case SQLIMAGE: {

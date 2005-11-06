@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.206 2005/11/02 14:27:00 mike Exp $ */
+/* $Id: SAPI.c,v 1.207 2005/11/06 22:07:12 sniper Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -769,7 +769,7 @@ SAPI_API int sapi_send_headers(TSRMLS_D)
 	/* Add output compression headers at this late stage in order to make
 	   it possible to switch it off inside the script. */
 
-	if (EG(in_execution) && zend_ini_long("zlib.output_compression", sizeof("zlib.output_compression"), 0)) {
+	if (zend_ini_long("zlib.output_compression", sizeof("zlib.output_compression"), 0)) {
 		zval nm_zlib_get_coding_type;
 		zval *uf_result = NULL;
 

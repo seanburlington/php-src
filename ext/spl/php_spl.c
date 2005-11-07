@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.14 2005/11/03 22:06:30 helly Exp $ */
+/* $Id: php_spl.c,v 1.52.2.15 2005/11/07 13:08:24 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -395,7 +395,7 @@ PHP_FUNCTION(spl_autoload_register)
 				zend_str_tolower_copy(tmp_name, Z_STRVAL_P(zcallable), Z_STRLEN_P(zcallable));
 				if (!strcmp(tmp_name, "spl_autoload_call")) {
 					if (do_throw) {
-						zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Function spl_autoload_call() cannot be registered", func_name);
+						zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Function spl_autoload_call() cannot be registered");
 					}
 					return;
 				}

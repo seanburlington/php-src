@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.7 2005/10/19 07:54:53 dmitry Exp $ */
+/* $Id: soap.c,v 1.156.2.8 2005/11/07 10:05:35 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -981,7 +981,6 @@ PHP_METHOD(SoapServer, SoapServer)
 
 	ret = zend_list_insert(service, le_service);
 	add_property_resource(this_ptr, "service", ret);
-	zend_list_addref(ret);
 
 	SOAP_SERVER_END_CODE();
 }
@@ -2217,7 +2216,6 @@ PHP_METHOD(SoapClient, SoapClient)
 		ret = zend_list_insert(sdl, le_sdl);
 
 		add_property_resource(this_ptr, "sdl", ret);
-		zend_list_addref(ret);
 
 		SOAP_GLOBAL(soap_version) = old_soap_version;
 	}

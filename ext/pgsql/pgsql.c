@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.244.2.40.2.1 2005/07/05 12:50:03 derick Exp $ */
+/* $Id: pgsql.c,v 1.244.2.40.2.2 2005/11/07 13:01:36 helly Exp $ */
 
 #include <stdlib.h>
 
@@ -310,7 +310,7 @@ static void _php_pgsql_notice_handler(void *resource_id, const char *message)
 		if (PGG(log_notices)) {
 			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s", notice->message);
 		}
-		zend_hash_index_update(&PGG(notices), *(int *)resource_id, (void **)&notice, sizeof(php_pgsql_notice *), NULL);
+		zend_hash_index_update(&PGG(notices), (int)resource_id, (void **)&notice, sizeof(php_pgsql_notice *), NULL);
 	}
 }
 /* }}} */
@@ -694,7 +694,7 @@ static void php_pgsql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	}
 	/* set notice processer */
 	if (! PGG(ignore_notices) && Z_TYPE_P(return_value) == IS_RESOURCE) {
-		PQsetNoticeProcessor(pgsql, _php_pgsql_notice_handler, (void *)&Z_RESVAL_P(return_value));
+		PQsetNoticeProcessor(pgsql, _php_pgsql_notice_handler, (void *)Z_RESVAL_P(return_value));
 	}
 	php_pgsql_set_default_link(Z_LVAL_P(return_value) TSRMLS_CC);
 	

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.5 2005/10/15 06:32:26 georg Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.6 2005/11/08 13:50:50 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -609,6 +609,7 @@ PHP_FUNCTION(mysqli_stmt_fetch)
 	unsigned int 	i;
 	ulong 			ret;
 	int				lval;
+	unsigned int    ulval;
 	double			dval;
 	my_ulonglong	llval;
 	
@@ -639,8 +640,23 @@ PHP_FUNCTION(mysqli_stmt_fetch)
 			if (!stmt->result.is_null[i]) {
 				switch (stmt->result.buf[i].type) {
 					case IS_LONG:
-						memcpy(&lval, stmt->result.buf[i].val, sizeof(lval));
-						ZVAL_LONG(stmt->result.vars[i], lval);
+						if ((sizeof(long) ==4) && (stmt->stmt->fields[i].type == MYSQL_TYPE_LONG) 
+						    && (stmt->stmt->fields[i].flags & UNSIGNED_FLAG)) 
+						{
+							/* unsigned int (11) */
+							char tmp[12];
+							memcpy (&ulval, stmt->result.buf[i].val, sizeof(lval));
+							if (ulval > INT_MAX) {
+								sprintf((char *)&tmp, "%u", ulval);
+								ZVAL_STRING(stmt->result.vars[i], tmp, 1);
+							} else {
+								memcpy(&lval, stmt->result.buf[i].val, sizeof(lval));
+								ZVAL_LONG(stmt->result.vars[i], lval);					
+							}
+						} else {
+							memcpy(&lval, stmt->result.buf[i].val, sizeof(lval));
+							ZVAL_LONG(stmt->result.vars[i], lval);
+						}
 						break;
 					case IS_DOUBLE:
 						memcpy(&dval, stmt->result.buf[i].val, sizeof(dval));

@@ -1,3 +1,52 @@
+2005-11-07  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * sapi/cli/php_cli_readline.c:
+      - heredoc handling in -a mode
+
+2005-11-07  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_1)
+      NEWS:
+      Fixed bug #35135 (PDOStatment without related PDO object may crash).
+
+2005-11-07  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * (PHP_4_4)
+      ext/pgsql/pgsql.c
+      ext/pgsql/tests/80_bug32223b.phpt:
+      - MFH Fix Bug #32223 weird behaviour of pg_last_notice
+
+    * (PHP_5_1)
+      ext/pgsql/pgsql.c
+      ext/pgsql/tests/80_bug32223b.phpt:
+      - MFH Bug #32223 weird behaviour of pg_last_notice
+
+    * ext/pgsql/tests/80_bug32223b.phpt
+      ext/pgsql/tests/80_bug32223b.phpt
+      ext/pgsql/tests/80_bug32223b.phpt:
+        1.1.4;
+      - Fix Bug #32223 weird behaviour of pg_last_notice
+
+    * ext/pgsql/pgsql.c:
+      - Fix Bug #32223 weird behaviour of pg_last_notice
+
+2005-11-07  Dmitry Stogov  <dmitry@zend.com>
+
+    * (PHP_4_4)
+      NEWS
+      NEWS
+      NEWS
+      Zend/zend.c
+      ZendEngine2/zend.c
+      ZendEngine2/zend.c
+      ZendEngine2/zend.c:
+      Fixed bug #35009 (ZTS: Persistent resource destruct crashes when extension
+      is compiled as shared)
+
+    * (PHP_5_1)
+      NEWS:
+      Fixed bug #35091 (SoapClient leaks memory)
+
 2005-11-06  Greg Beaver  <greg@chiaraquartet.net>
 
     * (PHP_5_0)
@@ -16096,7 +16145,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2157 2005/11/07 06:58:18 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2158 2005/11/08 06:43:07 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -19497,7 +19546,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2157 2005/11/07 06:58:18 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2158 2005/11/08 06:43:07 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -19978,7 +20027,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2157 2005/11/07 06:58:18 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2158 2005/11/08 06:43:07 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -21452,7 +21501,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2157 2005/11/07 06:58:18 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2158 2005/11/08 06:43:07 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

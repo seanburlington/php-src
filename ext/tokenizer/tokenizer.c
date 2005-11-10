@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.31.2.1 2005/10/21 09:32:40 dmitry Exp $ */
+/* $Id: tokenizer.c,v 1.31.2.2 2005/11/10 07:50:59 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -282,7 +282,8 @@ PHP_MINIT_FUNCTION(tokenizer)
 	REGISTER_LONG_CONSTANT("T_THROW", T_THROW, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("T_TRY", T_TRY, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("T_CLONE", T_CLONE, CONST_CS | CONST_PERSISTENT);
-	
+	REGISTER_LONG_CONSTANT("T_HALT_COMPILER", T_HALT_COMPILER, CONST_CS | CONST_PERSISTENT);
+
 	return SUCCESS;
 }
 /* }}} */
@@ -495,6 +496,7 @@ get_token_type_name(int token_type)
 		case T_THROW: return "T_THROW";
 		case T_TRY: return "T_TRY";
 		case T_CLONE: return "T_CLONE";
+		case T_HALT_COMPILER: return "T_HALT_COMPILER";
 	}
 	return "UNKNOWN";
 }

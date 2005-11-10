@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.32 2005/05/29 23:16:44 sniper Exp $
+dnl $Id: config.m4,v 1.33 2005/11/10 08:00:43 sniper Exp $
 dnl
 
 PHP_ARG_WITH(snmp,for SNMP support,
@@ -125,7 +125,7 @@ fi
 
 AC_MSG_CHECKING(whether to enable UCD SNMP hack)
 AC_ARG_ENABLE(ucd-snmp-hack,
-[  --enable-ucd-snmp-hack  SNMP: Enable UCD SNMP hack],[
+[  --enable-ucd-snmp-hack    SNMP: Enable UCD SNMP hack],[
   if test "$enableval" = "yes" ; then
     AC_DEFINE(UCD_SNMP_HACK, 1, [ ])
     AC_MSG_RESULT(yes)

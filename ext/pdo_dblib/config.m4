@@ -1,12 +1,11 @@
 dnl
-dnl $Id: config.m4,v 1.3 2005/09/24 23:22:43 sniper Exp $
+dnl $Id: config.m4,v 1.4 2005/11/10 08:02:21 sniper Exp $
 dnl
 
 if test "$PHP_PDO" != "no"; then
 PHP_ARG_WITH(pdo-dblib, for PDO_DBLIB support via FreeTDS,
-[  --with-pdo-dblib[=DIR]      Include PDO_DBLIB-DB support.  DIR is the FreeTDS home
-                          directory])
-
+[  --with-pdo-dblib[=DIR]    Include PDO_DBLIB-DB support. DIR is the FreeTDS
+                            home directory])
 
 if test "$PHP_PDO_DBLIB" != "no"; then
 

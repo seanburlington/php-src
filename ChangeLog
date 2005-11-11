@@ -1,3 +1,20 @@
+2005-11-10  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * configure.in:
+      - Added note about --enable-gcov being strictly for developers only!
+
+    * ext/curl/config.m4
+      ext/snmp/config.m4:
+      fix configure help
+
+    * (PHP_5_1)
+      NEWS
+      ext/tokenizer/tokenizer.c:
+      MFH: - Fixed bug #35179 (tokenizer extension needs T_HALT_COMPILER)
+
+    * ext/tokenizer/tokenizer.c:
+      - Fixed bug #35179 (tokenizer extension needs T_HALT_COMPILER)
+
 2005-11-09  Jani Taskinen  <jani.taskinen@sci.fi>
 
     * Makefile.gcov
@@ -16244,7 +16261,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2160 2005/11/10 06:44:26 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2161 2005/11/11 06:42:02 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -19645,7 +19662,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2160 2005/11/10 06:44:26 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2161 2005/11/11 06:42:02 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -20126,7 +20143,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2160 2005/11/10 06:44:26 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2161 2005/11/11 06:42:02 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -21600,7 +21617,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2160 2005/11/10 06:44:26 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2161 2005/11/11 06:42:02 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

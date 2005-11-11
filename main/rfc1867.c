@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: rfc1867.c,v 1.176 2005/09/27 17:50:00 andrei Exp $ */
+/* $Id: rfc1867.c,v 1.177 2005/11/11 16:50:08 helly Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group
@@ -1045,6 +1045,10 @@ static SAPI_POST_HANDLER_FUNC(rfc1867_post_handler_unicode)
 	U_STRING_DECL(filename_key, "filename", 8);
 	U_STRING_DECL(maxfilesize_key, "MAX_FILE_SIZE", 13);
 	static zend_bool did_string_init = FALSE;
+#if HAVE_MBSTRING && !defined(COMPILE_DL_MBSTRING)
+	int num_vars = 0, *len_list = NULL;
+	char **val_list = NULL;
+#endif
 
 	if (SG(request_info).content_length > SG(post_max_size)) {
 		sapi_module.sapi_error(E_WARNING, "POST Content-Length of %ld bytes exceeds the limit of %ld bytes", SG(request_info).content_length, SG(post_max_size));

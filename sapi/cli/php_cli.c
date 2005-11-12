@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.134 2005/11/06 22:41:51 sniper Exp $ */
+/* $Id: php_cli.c,v 1.135 2005/11/12 00:38:00 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -744,6 +744,8 @@ int main(int argc, char *argv[])
 					"(DEBUG)",
 #elif defined(HAVE_GCOV)
 					"(GCOV)",
+#else
+					"",
 #endif
 					get_zend_version()
 				);

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.505 2005/10/28 19:29:29 fmk Exp $ */
+/* $Id: string.c,v 1.506 2005/11/12 14:56:35 derick Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -1165,7 +1165,7 @@ PHP_FUNCTION(explode)
 }
 /* }}} */
 
-/* {{{ proto string join(array src, string glue)
+/* {{{ proto string join([string glue,] array pieces)
    An alias for implode */
 /* }}} */
 

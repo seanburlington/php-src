@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_observer.c,v 1.2.2.1 2005/09/15 03:33:04 helly Exp $ */
+/* $Id: spl_observer.c,v 1.2.2.2 2005/11/14 22:03:02 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -110,7 +110,7 @@ static zend_object_value spl_object_storage_new_ex(zend_class_entry *class_type,
 
 	zend_hash_init(&intern->storage, 0, NULL, ZVAL_PTR_DTOR, 0);
 
-	retval.handle = zend_objects_store_put(intern, NULL, (zend_objects_free_object_storage_t) spl_SplOjectStorage_free_storage, NULL TSRMLS_CC);
+	retval.handle = zend_objects_store_put(intern, (zend_objects_store_dtor_t)zend_objects_destroy_object, (zend_objects_free_object_storage_t) spl_SplOjectStorage_free_storage, NULL TSRMLS_CC);
 	retval.handlers = &spl_handler_SplObjectStorage;
 	return retval;
 }

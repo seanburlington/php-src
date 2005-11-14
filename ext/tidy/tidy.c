@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: tidy.c,v 1.66.2.2 2005/10/25 18:04:58 mike Exp $ */
+/* $Id: tidy.c,v 1.66.2.3 2005/11/14 22:03:02 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -598,7 +598,7 @@ static void tidy_object_new(zend_class_entry *class_type, zend_object_handlers *
 			break;
 	}
 
-	retval->handle = zend_objects_store_put(intern, NULL, (zend_objects_free_object_storage_t) tidy_object_free_storage, NULL TSRMLS_CC);
+	retval->handle = zend_objects_store_put(intern, (zend_objects_store_dtor_t)zend_objects_destroy_object, (zend_objects_free_object_storage_t) tidy_object_free_storage, NULL TSRMLS_CC);
 	retval->handlers = handlers;
 }
 
@@ -983,7 +983,7 @@ PHP_MINFO_FUNCTION(tidy)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Tidy support", "enabled");
 	php_info_print_table_row(2, "libTidy Release", (char *)tidyReleaseDate());
-	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.2 2005/10/25 18:04:58 mike Exp $)");
+	php_info_print_table_row(2, "Extension Version", PHP_TIDY_MODULE_VERSION " ($Id: tidy.c,v 1.66.2.3 2005/11/14 22:03:02 tony2001 Exp $)");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

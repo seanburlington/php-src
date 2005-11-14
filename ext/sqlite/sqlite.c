@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.166.2.4 2005/10/18 22:51:10 iliaa Exp $ 
+   $Id: sqlite.c,v 1.166.2.5 2005/11/14 22:02:58 tony2001 Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -830,7 +830,7 @@ static void sqlite_object_new(zend_class_entry *class_type, zend_object_handlers
 	zend_hash_init(intern->std.properties, 0, NULL, ZVAL_PTR_DTOR, 0);
 	zend_hash_copy(intern->std.properties, &class_type->default_properties, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
 
-	retval->handle = zend_objects_store_put(intern, NULL, (zend_objects_free_object_storage_t) sqlite_object_free_storage, NULL TSRMLS_CC);
+	retval->handle = zend_objects_store_put(intern, (zend_objects_store_dtor_t)zend_objects_destroy_object, (zend_objects_free_object_storage_t) sqlite_object_free_storage, NULL TSRMLS_CC);
 	retval->handlers = handlers;
 }
 
@@ -1125,7 +1125,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.4 2005/10/18 22:51:10 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.5 2005/11/14 22:02:58 tony2001 Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

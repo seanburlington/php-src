@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.22 2004/07/12 13:04:01 chregu Exp $ */
+/* $Id: php_xsl.c,v 1.32.2.1 2005/11/14 22:03:02 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,7 +31,7 @@
 /* If you declare any globals in php_xsl.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(xsl)
 */
-
+zend_class_entry *xsl_xsltprocessor_class_entry;
 static zend_object_handlers xsl_object_handlers;
 
 /* {{{ xsl_functions[]
@@ -43,10 +43,18 @@ function_entry xsl_functions[] = {
 };
 /* }}} */
 
+static zend_module_dep xsl_deps[] = {
+	ZEND_MOD_REQUIRED("libxml")
+	{NULL, NULL, NULL}
+};
+
 /* {{{ xsl_module_entry
  */
 zend_module_entry xsl_module_entry = {
-#if ZEND_MODULE_API_NO >= 20010901
+#if ZEND_MODULE_API_NO >= 20050617
+	STANDARD_MODULE_HEADER_EX, NULL,
+	xsl_deps,
+#elif ZEND_MODULE_API_NO >= 20010901
 	STANDARD_MODULE_HEADER,
 #endif
 	"xsl",
@@ -67,60 +75,6 @@ zend_module_entry xsl_module_entry = {
 ZEND_GET_MODULE(xsl)
 #endif
 
-/* {{{ xsl_objects_clone */
-void xsl_objects_clone(void *object, void **object_clone TSRMLS_DC)
-{
-	xsl_object *intern = (xsl_object *) object;
-	xsl_object *clone;
-	zval *tmp;
-	zend_class_entry *class_type;
-
-	class_type = intern->std.ce;
-
-	clone = emalloc(sizeof(xsl_object));
-	clone->std.ce = class_type;
-	clone->std.in_get = 0;
-	clone->std.in_set = 0;
-	clone->ptr = NULL;
-	clone->prop_handler = NULL;
-	clone->parameter = NULL;
-	clone->hasKeys = intern->hasKeys;
-	clone->registerPhpFunctions = 0;
-
-	ALLOC_HASHTABLE(clone->std.properties);
-	zend_hash_init(clone->std.properties, 0, NULL, ZVAL_PTR_DTOR, 0);
-	zend_hash_copy(clone->std.properties, &class_type->default_properties, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
-	ALLOC_HASHTABLE(clone->parameter);
-	zend_hash_init(clone->parameter, 0, NULL, ZVAL_PTR_DTOR, 0);
-
-	*object_clone = (void *) clone;
-}
-/* }}} */
-
-zend_object_value xsl_objects_store_clone_obj(zval *zobject TSRMLS_DC)
-{
-	zend_object_value retval;
-	void *new_object;
-	xsl_object *intern;
-	struct _store_object *obj;
-	zend_object_handle handle = Z_OBJ_HANDLE_P(zobject);
-
-	obj = &EG(objects_store).object_buckets[handle].bucket.obj;
-	
-	if (obj->clone == NULL) {
-		zend_error(E_CORE_ERROR, "Trying to clone uncloneable object of class %s", Z_OBJCE_P(zobject)->name);
-	}		
-
-	obj->clone(obj->object, &new_object TSRMLS_CC);
-
-	retval.handle = zend_objects_store_put(new_object, obj->dtor, obj->free_storage, obj->clone TSRMLS_CC);
-	intern = (xsl_object *) new_object;
-	intern->handle = retval.handle;
-	retval.handlers = Z_OBJ_HT_P(zobject);
-	
-	return retval;
-}
-
 /* {{{ xsl_objects_free_storage */
 void xsl_objects_free_storage(void *object TSRMLS_DC)
 {
@@ -132,6 +86,19 @@ void xsl_objects_free_storage(void *object TSRMLS_DC)
 	zend_hash_destroy(intern->parameter);
 	FREE_HASHTABLE(intern->parameter);
 	
+	zend_hash_destroy(intern->registered_phpfunctions);
+	FREE_HASHTABLE(intern->registered_phpfunctions);
+	
+	if (intern->node_list) {
+		zend_hash_destroy(intern->node_list);
+		FREE_HASHTABLE(intern->node_list);
+	}
+
+	if (intern->doc) {
+		php_libxml_decrement_doc_ref(intern->doc TSRMLS_CC);
+		efree(intern->doc);
+	}
+
 	if (intern->ptr) {
 		/* free wrapper */
 		if (((xsltStylesheetPtr) intern->ptr)->_private != NULL) {
@@ -160,13 +127,18 @@ zend_object_value xsl_objects_new(zend_class_entry *class_type TSRMLS_DC)
 	intern->parameter = NULL;
 	intern->hasKeys = 0;
 	intern->registerPhpFunctions = 0;
+	intern->registered_phpfunctions = NULL;
+	intern->node_list = NULL;
+	intern->doc = NULL;
 
 	ALLOC_HASHTABLE(intern->std.properties);
 	zend_hash_init(intern->std.properties, 0, NULL, ZVAL_PTR_DTOR, 0);
 	zend_hash_copy(intern->std.properties, &class_type->default_properties, (copy_ctor_func_t) zval_add_ref, (void *) &tmp, sizeof(zval *));
 	ALLOC_HASHTABLE(intern->parameter);
 	zend_hash_init(intern->parameter, 0, NULL, ZVAL_PTR_DTOR, 0);
-	retval.handle = zend_objects_store_put(intern, NULL, (zend_objects_free_object_storage_t) xsl_objects_free_storage, xsl_objects_clone TSRMLS_CC);
+	ALLOC_HASHTABLE(intern->registered_phpfunctions);
+	zend_hash_init(intern->registered_phpfunctions, 0, NULL, ZVAL_PTR_DTOR, 0);
+	retval.handle = zend_objects_store_put(intern, (zend_objects_store_dtor_t)zend_objects_destroy_object, (zend_objects_free_object_storage_t) xsl_objects_free_storage, NULL TSRMLS_CC);
 	intern->handle = retval.handle;
 	retval.handlers = &xsl_object_handlers;
 	return retval;
@@ -181,13 +153,20 @@ PHP_MINIT_FUNCTION(xsl)
 	zend_class_entry ce;
 	
 	memcpy(&xsl_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
-	xsl_object_handlers.clone_obj = xsl_objects_store_clone_obj;
+	xsl_object_handlers.clone_obj = NULL;
 
 	REGISTER_XSL_CLASS(ce, "XSLTProcessor", NULL, php_xsl_xsltprocessor_class_functions, xsl_xsltprocessor_class_entry);
 #if HAVE_XSL_EXSLT
 	exsltRegisterAll();
 #endif
  
+	xsltRegisterExtModuleFunction ((const xmlChar *) "functionString",
+				   (const xmlChar *) "http://php.net/xsl",
+				   xsl_ext_function_string_php);
+	xsltRegisterExtModuleFunction ((const xmlChar *) "function",
+				   (const xmlChar *) "http://php.net/xsl",
+				   xsl_ext_function_object_php);
+
 	REGISTER_LONG_CONSTANT("XSL_CLONE_AUTO",      0,     CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("XSL_CLONE_NEVER",    -1,     CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("XSL_CLONE_ALWAYS",    1,     CONST_CS | CONST_PERSISTENT);
@@ -274,6 +253,12 @@ PHP_MSHUTDOWN_FUNCTION(xsl)
 	/* uncomment this line if you have INI entries
 	UNREGISTER_INI_ENTRIES();
 	*/
+
+	xsltUnregisterExtModuleFunction ((const xmlChar *) "functionString",
+				   (const xmlChar *) "http://php.net/xsl");
+	xsltUnregisterExtModuleFunction ((const xmlChar *) "function",
+				   (const xmlChar *) "http://php.net/xsl");
+
 	xsltCleanupGlobals();
 
 	return SUCCESS;
@@ -285,6 +270,7 @@ PHP_MSHUTDOWN_FUNCTION(xsl)
  */
 PHP_RINIT_FUNCTION(xsl)
 {
+	xsltSetGenericErrorFunc(NULL, php_libxml_error_handler);
 	return SUCCESS;
 }
 /* }}} */
@@ -294,6 +280,7 @@ PHP_RINIT_FUNCTION(xsl)
  */
 PHP_RSHUTDOWN_FUNCTION(xsl)
 {
+	xsltSetGenericErrorFunc(NULL, NULL);
 	return SUCCESS;
 }
 /* }}} */

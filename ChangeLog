@@ -1,3 +1,13 @@
+2005-11-13  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_1)
+      NEWS:
+      PEAR news
+
+    * (PHP_5_1)
+      TODO-5.1:
+      Slated for PHP 6
+
 2005-11-12  Derick Rethans  <php@derickrethans.nl>
 
     * ext/standard/string.c:
@@ -16290,7 +16300,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2163 2005/11/13 06:45:19 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2164 2005/11/14 06:41:03 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -19691,7 +19701,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2163 2005/11/13 06:45:19 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2164 2005/11/14 06:41:03 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -20172,7 +20182,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2163 2005/11/13 06:45:19 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2164 2005/11/14 06:41:03 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -21646,7 +21656,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2163 2005/11/13 06:45:19 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2164 2005/11/14 06:41:03 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

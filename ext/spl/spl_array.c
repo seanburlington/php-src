@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_array.c,v 1.86 2005/10/29 15:37:56 helly Exp $ */
+/* $Id: spl_array.c,v 1.87 2005/11/14 21:52:25 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -146,7 +146,7 @@ static zend_object_value spl_array_object_new_ex(zend_class_entry *class_type, s
 		intern->ar_flags &= ~SPL_ARRAY_IS_REF;
 	}
 
-	retval.handle = zend_objects_store_put(intern, NULL, (zend_objects_free_object_storage_t) spl_array_object_free_storage, NULL TSRMLS_CC);
+	retval.handle = zend_objects_store_put(intern, (zend_objects_store_dtor_t)zend_objects_destroy_object, (zend_objects_free_object_storage_t) spl_array_object_free_storage, NULL TSRMLS_CC);
 	while (parent) {
 		if (parent == U_CLASS_ENTRY(spl_ce_ArrayIterator)) {
 			retval.handlers = &spl_handler_ArrayIterator;

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter_private.h,v 1.6 2005/11/15 11:55:28 sniper Exp $ */
+/* $Id: filter_private.h,v 1.7 2005/11/15 13:43:57 sniper Exp $ */
 
 #ifndef FILTER_PRIVATE_H
 #define FILTER_PRIVATE_H
@@ -75,7 +75,7 @@
 
 #define FC_CALLBACK      0x0400
 
-#endif FILTER_PRIVATE_H
+#endif /* FILTER_PRIVATE_H */
 
 /*
  * Local variables:

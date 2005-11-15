@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.18 2005/11/14 21:52:26 tony2001 Exp $ */
+/* $Id: php_xmlreader.c,v 1.19 2005/11/15 15:21:47 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -353,8 +353,7 @@ zend_object_value xmlreader_objects_new(zend_class_entry *class_type TSRMLS_DC)
 
 	intern = emalloc(sizeof(xmlreader_object));
 	intern->std.ce = class_type;
-	intern->std.in_get = 0;
-	intern->std.in_set = 0;
+	intern->std.guards = NULL;
 	intern->ptr = NULL;
 	intern->schema = NULL;
 	intern->prop_handler = &xmlreader_prop_handlers;

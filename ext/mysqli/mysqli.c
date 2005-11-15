@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli.c,v 1.76 2005/10/12 13:33:33 tony2001 Exp $ 
+  $Id: mysqli.c,v 1.77 2005/11/15 15:21:46 dmitry Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -346,8 +346,7 @@ PHP_MYSQLI_EXPORT(zend_object_value) mysqli_objects_new(zend_class_entry *class_
 	intern = emalloc(sizeof(mysqli_object));
 	memset(intern, 0, sizeof(mysqli_object));
 	intern->zo.ce = class_type;
-	intern->zo.in_get = 0;
-	intern->zo.in_set = 0;
+	intern->zo.guards = NULL;
 	intern->ptr = NULL;
 	intern->valid = 0;
 	intern->prop_handler = NULL;

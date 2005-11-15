@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_dom.c,v 1.82 2005/11/14 21:52:19 tony2001 Exp $ */
+/* $Id: php_dom.c,v 1.83 2005/11/15 15:21:44 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -941,8 +941,7 @@ static dom_object* dom_objects_set_class(zend_class_entry *class_type, zend_bool
 
 	intern = emalloc(sizeof(dom_object));
 	intern->std.ce = class_type;
-	intern->std.in_get = 0;
-	intern->std.in_set = 0;
+	intern->std.guards = NULL;
 	intern->ptr = NULL;
 	intern->prop_handler = NULL;
 	intern->document = NULL;

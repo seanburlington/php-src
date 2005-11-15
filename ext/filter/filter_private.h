@@ -16,6 +16,11 @@
   +----------------------------------------------------------------------+
 */
 
+/* $Id: filter_private.h,v 1.6 2005/11/15 11:55:28 sniper Exp $ */
+
+#ifndef FILTER_PRIVATE_H
+#define FILTER_PRIVATE_H
+
 #define FILTER_FLAG_NONE                    0x0000
 
 #define FILTER_FLAG_ALLOW_OCTAL             0x0001
@@ -70,3 +75,13 @@
 
 #define FC_CALLBACK      0x0400
 
+#endif FILTER_PRIVATE_H
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

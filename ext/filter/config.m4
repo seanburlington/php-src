@@ -1,11 +1,10 @@
-dnl $Id: config.m4,v 1.2 2005/09/06 18:46:37 derick Exp $
+dnl $Id: config.m4,v 1.3 2005/11/15 11:55:28 sniper Exp $
 dnl config.m4 for input filtering extension
 
 PHP_ARG_ENABLE(filter, whether to enable input filter support,
-[  --enable-filter           Enable input filter support])
+[  --disable-filter           Disable input filter support], yes)
 
 if test "$PHP_FILTER" != "no"; then
-  PHP_SUBST(FILTER_SHARED_LIBADD)
   PHP_NEW_EXTENSION(filter, filter.c sanitizing_filters.c logical_filters.c callback_filter.c, $ext_shared)
-  CPPFLAGS="$CPPFLAGS -Wall"
+  PHP_SUBST(FILTER_SHARED_LIBADD)
 fi

@@ -16,6 +16,8 @@
   +----------------------------------------------------------------------+
 */
 
+/* $Id: sanitizing_filters.c,v 1.5 2005/11/15 11:55:28 sniper Exp $ */
+
 #include "php_filter.h"
 #include "filter_private.h"
 #include "ext/standard/php_smart_str.h"
@@ -313,3 +315,12 @@ void php_filter_magic_quotes(PHP_INPUT_FILTER_PARAM_DECL)
 	Z_STRLEN_P(value) = len;
 }
 /* }}} */
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

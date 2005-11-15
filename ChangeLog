@@ -1,3 +1,38 @@
+2005-11-14  Frank M. Kromann  <frank@kromann.info>
+
+    * php.ini-dist
+      php.ini-recommended
+      ext/mssql/php_mssql.c:
+      MFB: Change max_procs from 25 to library default. This will make FreeTDS
+      connections work a bit better
+
+    * (PHP_5_1)
+      php.ini-dist
+      php.ini-recommended
+      ext/mssql/php_mssql.c:
+      Change max_procs from 25 to library default. This will make FreeTDS
+      connections work a bit better
+
+2005-11-14  Antony Dovgal  <antony@zend.com>
+
+    * (PHP_5_0)
+      NEWS
+      NEWS
+      ext/dom/php_dom.c
+      ext/dom/php_dom.c
+      ext/sqlite/sqlite.c
+      ext/sqlite/sqlite.c
+      ext/xsl/php_xsl.c
+      ext/xsl/php_xsl.c:
+      MFH: fix #35197 (Destructor is not called) and similar issues in other
+      extensions
+
+    * ext/dom/php_dom.c
+      ext/sqlite/sqlite.c
+      ext/xsl/php_xsl.c:
+      fix #35197 (Destructor is not called) and similar issues in other
+      extensions
+
 2005-11-13  Ilia Alshanetsky  <ilia@prohost.org>
 
     * (PHP_5_1)
@@ -16300,7 +16335,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2164 2005/11/14 06:41:03 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2165 2005/11/15 06:41:53 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -19701,7 +19736,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2164 2005/11/14 06:41:03 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2165 2005/11/15 06:41:53 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -20182,7 +20217,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2164 2005/11/14 06:41:03 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2165 2005/11/15 06:41:53 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -21656,7 +21691,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2164 2005/11/14 06:41:03 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2165 2005/11/15 06:41:53 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

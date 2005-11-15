@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.44.2.5.8.1 2005/11/03 20:20:10 sniper Exp $ */
+/* $Id: php_gd.h,v 1.44.2.5.8.2 2005/11/15 08:15:36 sniper Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -33,7 +33,7 @@
 /* open_basedir and safe_mode checks */
 #define PHP_GD_CHECK_OPEN_BASEDIR(filename, errormsg)                                   \
 	if (!filename || filename == empty_string || php_check_open_basedir(filename TSRMLS_CC) || \
-		(PG(safe_mode) && !php_checkuid(filename, "rb+", CHECKUID_CHECK_FILE_AND_DIR))  \
+		(PG(safe_mode) && !php_checkuid(filename, NULL, CHECKUID_CHECK_FILE_AND_DIR))   \
 	) {                                                                                 \
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, errormsg);                          \
 		RETURN_FALSE;                                                                   \

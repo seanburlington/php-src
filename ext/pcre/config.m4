@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.32 2003/06/28 04:30:51 sterling Exp $
+dnl $Id: config.m4,v 1.36.2.1 2005/11/16 22:14:32 sniper Exp $
 dnl
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -13,8 +13,9 @@ PHP_ARG_WITH(pcre-regex,for PCRE support,
 
 if test "$PHP_PCRE_REGEX" != "no"; then
   if test "$PHP_PCRE_REGEX" = "yes"; then
-    PHP_NEW_EXTENSION(pcre, pcrelib/maketables.c pcrelib/get.c pcrelib/study.c pcrelib/pcre.c php_pcre.c, $ext_shared,,-DSUPPORT_UTF8 -DLINK_SIZE=2 -DPOSIX_MALLOC_THRESHOLD=10 -I@ext_srcdir@/pcrelib)
+    PHP_NEW_EXTENSION(pcre, pcrelib/pcre_chartables.c pcrelib/pcre_compile.c pcrelib/pcre_config.c pcrelib/pcre_dfa_exec.c pcrelib/pcre_exec.c pcrelib/pcre_fullinfo.c pcrelib/pcre_get.c pcrelib/pcre_globals.c pcrelib/pcre_info.c pcrelib/pcre_maketables.c pcrelib/pcre_ord2utf8.c pcrelib/pcre_printint.c pcrelib/pcre_refcount.c pcrelib/pcre_study.c pcrelib/pcre_tables.c pcrelib/pcre_try_flipped.c pcrelib/pcre_ucp_findchar.c pcrelib/pcre_valid_utf8.c pcrelib/pcre_version.c pcrelib/pcre_xclass.c php_pcre.c, $ext_shared,,-DEXPORT= -DNEWLINE=10 -DSUPPORT_UTF8 -DSUPPORT_UCP -DLINK_SIZE=2 -DPOSIX_MALLOC_THRESHOLD=10 -DMATCH_LIMIT=10000000 -I@ext_srcdir@/pcrelib)
     PHP_ADD_BUILD_DIR($ext_builddir/pcrelib)
+    PHP_INSTALL_HEADERS([ext/pcre], [php_pcre.h pcrelib/])
     AC_DEFINE(HAVE_BUNDLED_PCRE, 1, [ ])
   else
     for i in $PHP_PCRE_REGEX $PHP_PCRE_REGEX/include $PHP_PCRE_REGEX/include/pcre; do
@@ -25,7 +26,7 @@ if test "$PHP_PCRE_REGEX" != "no"; then
       AC_MSG_ERROR([Could not find pcre.h in $PHP_PCRE_REGEX])
     fi
 
-    for j in $PHP_PCRE_REGEX $PHP_PCRE_REGEX/lib; do
+    for j in $PHP_PCRE_REGEX $PHP_PCRE_REGEX/$PHP_LIBDIR; do
       test -f $j/libpcre.a -o -f $j/libpcre.$SHLIB_SUFFIX_NAME && PCRE_LIBDIR=$j
     done
     
@@ -50,7 +51,7 @@ if test "$PHP_PCRE_REGEX" != "no"; then
     
     AC_DEFINE(HAVE_PCRE, 1, [ ])
     PHP_ADD_INCLUDE($PCRE_INCDIR)
-    PHP_NEW_EXTENSION(pcre, php_pcre.c, $ext_shared,,-DSUPPORT_UTF8 -DLINK_SIZE=2 -DPOSIX_MALLOC_THRESHOLD=10)
+    PHP_NEW_EXTENSION(pcre, php_pcre.c, $ext_shared,,-DEXPORT= -DNEWLINE=10 -DSUPPORT_UTF8 -DSUPPORT_UCP -DLINK_SIZE=2 -DPOSIX_MALLOC_THRESHOLD=10 -DMATCH_LIMIT=10000000)
   fi
   PHP_SUBST(PCRE_SHARED_LIBADD)
 fi

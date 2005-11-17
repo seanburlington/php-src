@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: plain_wrapper.c,v 1.39.2.7 2005/05/24 10:14:05 tony2001 Exp $ */
+/* $Id: plain_wrapper.c,v 1.39.2.8 2005/11/17 14:20:04 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -533,7 +533,7 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 			flags = fcntl(fd, F_GETFL, 0);
 			oldval = (flags & O_NONBLOCK) ? 0 : 1;
 			if (value)
-				flags ^= O_NONBLOCK;
+				flags &= ~O_NONBLOCK;
 			else
 				flags |= O_NONBLOCK;
 			

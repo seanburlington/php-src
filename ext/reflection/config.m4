@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.2 2005/11/17 22:49:03 helly Exp $
+dnl $Id: config.m4,v 1.3 2005/11/17 23:21:15 helly Exp $
 dnl config.m4 for extension bitset
 
 PHP_ARG_ENABLE(reflection, whether to enable reflection support,
@@ -8,5 +8,6 @@ if test "$PHP_REFLECTION" != "no"; then
   if test "$ext_shared" = "yes"; then
     AC_MSG_ERROR(Cannot build reflection as a shared module)
   fi
+  AC_DEFINE(HAVE_REFLECTION, 1, [Whether Reflection is enabled])
   PHP_NEW_EXTENSION(reflection, php_reflection.c)
 fi

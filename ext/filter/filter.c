@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.19 2005/11/15 11:55:28 sniper Exp $ */
+/* $Id: filter.c,v 1.20 2005/11/17 00:03:03 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -264,7 +264,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.19 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.20 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -300,6 +300,9 @@ static void php_zval_filter(zval *value, long filter, long flags, zval *options,
 		/* Find default filter */
 		filter_func = php_find_filter(FS_DEFAULT);
 	}
+
+	/* Here be strings */
+	convert_to_string(value);
 
 	filter_func.function(value, flags, options, charset TSRMLS_CC);
 }

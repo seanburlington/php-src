@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.125.2.92 2004/07/10 10:54:27 wez Exp $ */
+/* $Id: streams.c,v 1.125.2.100.2.1 2005/11/17 14:21:10 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -59,6 +59,7 @@ static php_stream_wrapper php_plain_files_wrapper;
 
 /* {{{ some macros to help track leaks */
 #if ZEND_DEBUG
+#if USE_ZEND_ALLOC
 #define emalloc_rel_orig(size)	\
 		( __php_stream_call_depth == 0 \
 		? _emalloc((size) ZEND_FILE_LINE_CC ZEND_FILE_LINE_RELAY_CC) \
@@ -68,7 +69,10 @@ static php_stream_wrapper php_plain_files_wrapper;
 		( __php_stream_call_depth == 0 \
 		? _erealloc((ptr), (size), 0 ZEND_FILE_LINE_CC ZEND_FILE_LINE_RELAY_CC) \
 		: _erealloc((ptr), (size), 0 ZEND_FILE_LINE_CC ZEND_FILE_LINE_ORIG_RELAY_CC) )
-
+#else
+#define emalloc_rel_orig(size) emalloc(size)
+#define erealloc_rel_orig(ptr, size) erealloc(ptr, size)
+#endif
 
 #define pemalloc_rel_orig(size, persistent)	((persistent) ? malloc((size)) : emalloc_rel_orig((size)))
 #define perealloc_rel_orig(ptr, size, persistent)	((persistent) ? realloc((ptr), (size)) : erealloc_rel_orig((ptr), (size)))
@@ -650,8 +654,9 @@ PHPAPI size_t _php_stream_read(php_stream *stream, char *buf, size_t size TSRMLS
 		}
 
 		/* just break anyway, to avoid greedy read */
-		if (stream->wrapper != &php_plain_files_wrapper)
+		if (stream->wrapper != &php_plain_files_wrapper) {
 			break;
+		}
 	}
 
 	if (didread > 0)
@@ -1367,6 +1372,7 @@ PHPAPI php_stream *_php_stream_fopen_tmpfile(int dummy STREAMS_DC TSRMLS_DC)
 		php_stream *stream = php_stream_fopen_from_fd_rel(fd, "r+b", NULL);
 		if (stream) {
 			php_stdio_stream_data *self = (php_stdio_stream_data*)stream->abstract;
+			stream->wrapper = &php_plain_files_wrapper;
 
 			self->temp_file_name = opened_path;
 			return stream;
@@ -1591,6 +1597,9 @@ static int php_stdiop_cast(php_stream *stream, int castas, void **ret TSRMLS_DC)
 			if (ret) {
 				if (data->file == NULL) {
 					data->file = fdopen(data->fd, stream->mode);
+					if (data->file == NULL) {
+						return FAILURE;
+					}
 				}
 				*(FILE**)ret = data->file;
 				data->fd = -1;
@@ -1658,7 +1667,7 @@ static int php_stdiop_set_option(php_stream *stream, int option, int value, void
 			flags = fcntl(fd, F_GETFL, 0);
 			oldval = (flags & O_NONBLOCK) ? 0 : 1;
 			if (value)
-				flags ^= O_NONBLOCK;
+				flags &= ~O_NONBLOCK;
 			else
 				flags |= O_NONBLOCK;
 			
@@ -2323,6 +2332,15 @@ static void stream_resource_persistent_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC
 	FG(pclose_ret) = php_stream_free(stream, PHP_STREAM_FREE_CLOSE | PHP_STREAM_FREE_RSRC_DTOR);
 }
 
+void php_shutdown_stream_hashes(TSRMLS_D)
+{
+	if (FG(stream_wrappers)) {
+		zend_hash_destroy(FG(stream_wrappers));
+		efree(FG(stream_wrappers));
+		FG(stream_wrappers) = NULL;
+	}
+}
+
 int php_init_stream_wrappers(int module_number TSRMLS_DC)
 {
 	le_stream = zend_register_list_destructors_ex(stream_resource_regular_dtor, NULL, "stream", module_number);
@@ -2345,7 +2363,18 @@ int php_shutdown_stream_wrappers(int module_number TSRMLS_DC)
 /* API for registering GLOBAL wrappers */
 PHPAPI int php_register_url_stream_wrapper(char *protocol, php_stream_wrapper *wrapper TSRMLS_DC)
 {
-	return zend_hash_add(&url_stream_wrappers_hash, protocol, strlen(protocol), wrapper, sizeof(*wrapper), NULL);
+	int i, protocol_len = strlen(protocol);
+
+	for(i = 0; i < protocol_len; i++) {
+		if (!isalnum((int)protocol[i]) &&
+			protocol[i] != '+' &&
+			protocol[i] != '-' &&
+			protocol[i] != '.') {
+			return FAILURE;
+		}
+	}
+
+	return zend_hash_add(&url_stream_wrappers_hash, protocol, protocol_len, wrapper, sizeof(*wrapper), NULL);
 }
 
 PHPAPI int php_unregister_url_stream_wrapper(char *protocol TSRMLS_DC)
@@ -2356,6 +2385,17 @@ PHPAPI int php_unregister_url_stream_wrapper(char *protocol TSRMLS_DC)
 /* API for registering VOLATILE wrappers */
 PHPAPI int php_register_url_stream_wrapper_volatile(char *protocol, php_stream_wrapper *wrapper TSRMLS_DC)
 {
+	int i, protocol_len = strlen(protocol);
+
+	for(i = 0; i < protocol_len; i++) {
+		if (!isalnum((int)protocol[i]) &&
+			protocol[i] != '+' &&
+			protocol[i] != '-' &&
+			protocol[i] != '.') {
+			return FAILURE;
+		}
+	}
+
 	if (!FG(stream_wrappers)) {
 		php_stream_wrapper tmpwrapper;
 
@@ -2364,7 +2404,7 @@ PHPAPI int php_register_url_stream_wrapper_volatile(char *protocol, php_stream_w
 		zend_hash_copy(FG(stream_wrappers), &url_stream_wrappers_hash, NULL, &tmpwrapper, sizeof(php_stream_wrapper));
 	}
 
-	return zend_hash_add(FG(stream_wrappers), protocol, strlen(protocol), wrapper, sizeof(*wrapper), NULL);
+	return zend_hash_add(FG(stream_wrappers), protocol, protocol_len, wrapper, sizeof(*wrapper), NULL);
 }
 /* }}} */
 

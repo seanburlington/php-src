@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.20 2005/11/17 00:03:03 sniper Exp $ */
+/* $Id: filter.c,v 1.21 2005/11/17 00:49:48 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -264,7 +264,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.20 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.21 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -388,7 +388,7 @@ static void php_zval_filter_recursive(zval *value, long filter, long flags, zval
 			 zend_hash_move_forward_ex(Z_ARRVAL_P(value), &pos)) {
 				php_zval_filter_recursive(*element, filter, flags, options, charset TSRMLS_CC);
 		}
-	} else if (Z_STRLEN_P(value)) {
+	} else {
 		php_zval_filter(value, filter, flags, options, charset TSRMLS_CC);
 	}
 }

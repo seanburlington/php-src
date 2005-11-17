@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.57.2.5 2005/10/26 15:08:23 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.57.2.6 2005/11/17 21:00:28 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -457,6 +457,7 @@ static int php_handler(request_rec *r)
 	if (strcmp(r->protocol, "INCLUDED")) { \
 		zend_try { zend_ini_deactivate(TSRMLS_C); } zend_end_try(); \
 	} \
+	apr_pool_cleanup_run(r->pool, (void *)&SG(server_context), php_server_context_cleanup); \
 
 	conf = ap_get_module_config(r->per_dir_config, &php5_module);
 

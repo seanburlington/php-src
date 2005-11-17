@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.1.2.40.2.6 2005/11/02 17:55:17 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.1.2.40.2.7 2005/11/17 21:01:13 iliaa Exp $ */
 
 #include <fcntl.h>
 
@@ -457,6 +457,7 @@ static int php_handler(request_rec *r)
 	if (strcmp(r->protocol, "INCLUDED")) { \
 		zend_try { zend_ini_deactivate(TSRMLS_C); } zend_end_try(); \
 	} \
+	apr_pool_cleanup_run(r->pool, (void *)&SG(server_context), php_server_context_cleanup); \
 
 	conf = ap_get_module_config(r->per_dir_config, &php4_module);
 

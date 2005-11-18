@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_globals.h,v 1.98 2005/08/03 14:08:33 sniper Exp $ */
+/* $Id: php_globals.h,v 1.99 2005/11/18 16:20:43 rasmus Exp $ */
 
 #ifndef PHP_GLOBALS_H
 #define PHP_GLOBALS_H
@@ -150,6 +150,7 @@ struct _php_core_globals {
 
 	char *disable_functions;
 	char *disable_classes;
+	zend_bool allow_url_include;
 };
 
 

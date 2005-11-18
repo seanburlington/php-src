@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.1 2005/11/18 19:51:09 pollita Exp $ */
+/* $Id: hash.c,v 1.2 2005/11/18 20:17:31 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -313,6 +313,11 @@ function_entry hash_functions[] = {
 	PHP_NAMED_FE(md5, php_if_md5,					NULL)
 	PHP_NAMED_FE(md5_file, php_if_md5_file,			NULL)
 #endif /* PHP_HASH_MD5_NOT_IN_CORE */
+
+#ifdef PHP_HASH_SHA1_NOT_IN_CORE
+	PHP_NAMED_FE(sha1, php_if_sha1,					NULL)
+	PHP_NAMED_FE(sha1_file, php_if_sha1_file,		NULL)
+#endif /* PHP_HASH_SHA1_NOT_IN_CORE */
 
 	{NULL, NULL, NULL}
 };

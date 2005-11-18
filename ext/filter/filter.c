@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.21 2005/11/17 00:49:48 sniper Exp $ */
+/* $Id: filter.c,v 1.22 2005/11/18 09:17:59 derick Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -131,7 +131,7 @@ static PHP_INI_MH(UpdateDefaultFilter)
 static PHP_INI_MH(OnUpdateFlags)
 {
 	if (!new_value) {
-		IF_G(default_filter_flags) = 0;
+		IF_G(default_filter_flags) = FILTER_FLAG_NO_ENCODE_QUOTES;
 	} else {
 		IF_G(default_filter_flags) = atoi(new_value);
 	}
@@ -264,7 +264,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.21 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.22 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

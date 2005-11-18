@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.86.2.44.2.6 2005/11/18 20:41:51 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.86.2.44.2.7 2005/11/18 20:49:16 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -2057,7 +2057,9 @@ PHP_FUNCTION(mssql_bind)
 				type=Z_LVAL_PP(yytype);
 				is_output=Z_LVAL_PP(yyis_output);
 				is_null=Z_LVAL_PP(yyis_null);
-				maxlen=Z_LVAL_PP(yymaxlen);				
+				if (is_output) {
+					maxlen=Z_LVAL_PP(yymaxlen);
+				}
 			}
 			break;	
 		

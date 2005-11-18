@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash.h,v 1.1 2005/11/18 19:51:09 pollita Exp $ */
+/* $Id: php_hash.h,v 1.2 2005/11/18 20:58:54 pollita Exp $ */
 
 #ifndef PHP_HASH_H
 #define PHP_HASH_H
@@ -27,18 +27,24 @@
 #define PHP_HASH_EXTVER		"0.1"
 #define PHP_HASH_RESNAME	"Hash Context"
 
+#define PHP_HASH_HMAC		0x0001
+
 typedef struct _php_hash_ops {
 	int (*hash_init)(void *context);
 	int (*hash_update)(void *context, const unsigned char *buf, unsigned int count);
 	int (*hash_final)(unsigned char *digest, void *context);
 
 	int digest_size;
+	int block_size;
 	int context_size;
 } php_hash_ops;
 
 typedef struct _php_hash_data {
 	php_hash_ops *ops;
 	void *context;
+
+	long options;
+	unsigned char *key;
 } php_hash_data;
 
 extern php_hash_ops php_hash_md5_ops;

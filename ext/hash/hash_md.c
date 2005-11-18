@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_md.c,v 1.1 2005/11/18 19:51:09 pollita Exp $ */
+/* $Id: hash_md.c,v 1.2 2005/11/18 20:58:54 pollita Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_md.h"
@@ -26,6 +26,7 @@ php_hash_ops php_hash_md5_ops = {
 	PHP_MD5Update,
 	PHP_MD5Final,
 	16,
+	64,
 	sizeof(PHP_MD5_CTX)
 };
 

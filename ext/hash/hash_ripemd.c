@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_ripemd.c,v 1.1 2005/11/18 19:51:09 pollita Exp $ */
+/* $Id: hash_ripemd.c,v 1.2 2005/11/18 20:58:54 pollita Exp $ */
 
 /* Heavily borrowed from md5.c & sha1.c of PHP archival fame
    Note that ripemd laughs in the face of logic and uses
@@ -30,6 +30,7 @@ php_hash_ops php_hash_ripemd128_ops = {
 	PHP_RIPEMD128Update,
 	PHP_RIPEMD128Final,
 	16,
+	64,
 	sizeof(PHP_RIPEMD128_CTX)
 };
 
@@ -38,6 +39,7 @@ php_hash_ops php_hash_ripemd160_ops = {
 	PHP_RIPEMD160Update,
 	PHP_RIPEMD160Final,
 	20,
+	64,
 	sizeof(PHP_RIPEMD160_CTX)
 };
 

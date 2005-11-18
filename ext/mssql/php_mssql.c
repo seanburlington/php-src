@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.86.2.44.2.4 2005/11/15 17:33:07 fmk Exp $ */
+/* $Id: php_mssql.c,v 1.86.2.44.2.5 2005/11/18 19:15:12 fmk Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -1874,6 +1874,11 @@ PHP_FUNCTION(mssql_next_result)
 
 	mssql_ptr = result->mssql_ptr;
 	retvalue = dbresults(mssql_ptr->link);
+
+	while (dbnumcols(mssql_ptr->link) <= 0 && retvalue == SUCCEED) {
+		retvalue = dbresults(mssql_ptr->link);
+	}
+
 	if (retvalue == FAIL) {
 		RETURN_FALSE;
 	}

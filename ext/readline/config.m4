@@ -1,12 +1,14 @@
 dnl
-dnl $Id: config.m4,v 1.25 2005/05/29 23:16:44 sniper Exp $
+dnl $Id: config.m4,v 1.26 2005/11/18 15:11:14 sniper Exp $
 dnl
 
 PHP_ARG_WITH(libedit,for libedit readline replacement, 
 [  --with-libedit[=DIR]    Include libedit readline replacement (CLI/CGI only)])
 
-PHP_ARG_WITH(readline,for readline support,
-[  --with-readline[=DIR]   Include readline support (CLI/CGI only)])
+if test "$PHP_LIBEDIT" = "no"; then
+  PHP_ARG_WITH(readline,for readline support,
+  [  --with-readline[=DIR]   Include readline support (CLI/CGI only)])
+fi
 
 if test "$PHP_READLINE" != "no"; then
   for i in $PHP_READLINE /usr/local /usr; do

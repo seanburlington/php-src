@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_sha.h,v 1.1 2005/11/18 19:51:09 pollita Exp $ */
+/* $Id: php_hash_sha.h,v 1.2 2005/11/18 21:37:19 pollita Exp $ */
 
 #ifndef PHP_HASH_SHA_H
 #define PHP_HASH_SHA_H
@@ -61,10 +61,14 @@ PHP_HASH_API void PHP_SHA256Init(PHP_SHA256_CTX *);
 PHP_HASH_API void PHP_SHA256Update(PHP_SHA256_CTX *, const unsigned char *, unsigned int);
 PHP_HASH_API void PHP_SHA256Final(unsigned char[32], PHP_SHA256_CTX *);
 
-#ifdef PHP_WIN32
-typedef unsigned __int64 php_hash_uint64;
+#if defined(SIZEOF_LONG) && SIZEOF_LONG >= 8
+typedef unsigned long php_hash_uint64;
 #else
+# ifdef PHP_WIN32
+typedef unsigned __int64 php_hash_uint64;
+# else
 typedef unsigned long long php_hash_uint64;
+# endif
 #endif
 
 /* SHA384 context */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: fileinfo.c,v 1.9 2005/09/07 11:16:57 edink Exp $ */
+/* $Id: fileinfo.c,v 1.10 2005/11/19 21:41:08 mike Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -100,10 +100,8 @@ PHP_FILEINFO_API zend_object_value finfo_objects_new(zend_class_entry *class_typ
 	zend_object_value retval;
 	struct finfo_object *intern;
 
-	intern = emalloc(sizeof(struct finfo_object));
+	intern = ecalloc(1, sizeof(struct finfo_object));
 	intern->zo.ce = class_type;
-	intern->zo.in_get = 0;
-	intern->zo.in_set = 0;
 	intern->zo.properties = NULL;
 	intern->ptr = NULL;
 

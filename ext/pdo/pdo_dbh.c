@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.99 2005/10/12 12:13:50 dmitry Exp $ */
+/* $Id: pdo_dbh.c,v 1.100 2005/11/19 16:39:47 tony2001 Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -341,6 +341,8 @@ static PHP_METHOD(PDO, dbh_constructor)
 		if (pdbh) {
 			/* let's copy the emalloc bits over from the other handle */
 			pdbh->ce = dbh->ce;
+			pdbh->def_stmt_ce = dbh->def_stmt_ce;
+			pdbh->def_stmt_ctor_args = dbh->def_stmt_ctor_args;
 			pdbh->properties = dbh->properties;
 			/* kill the non-persistent thingamy */
 			efree(dbh);

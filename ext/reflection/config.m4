@@ -1,8 +1,8 @@
-dnl $Id: config.m4,v 1.3 2005/11/17 23:21:15 helly Exp $
-dnl config.m4 for extension bitset
+dnl $Id: config.m4,v 1.4 2005/11/19 17:47:22 helly Exp $
+dnl config.m4 for extension reflection
 
 PHP_ARG_ENABLE(reflection, whether to enable reflection support,
-[  --disable-reflection      Disable reflection support])
+[  --disable-reflection      Disable reflection support], yes, no)
 
 if test "$PHP_REFLECTION" != "no"; then
   if test "$ext_shared" = "yes"; then

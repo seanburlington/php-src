@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.214.2.4 2005/02/21 15:15:08 moriyoshi Exp $ */
+/* $Id: mbstring.c,v 1.214.2.5 2005/11/19 08:25:59 hirokawa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -2267,7 +2267,7 @@ PHP_FUNCTION(mb_list_encodings)
 }
 /* }}} */
 
-/* {{{ proto string mb_encode_mimeheader(string str [, string charset [, string transfer-encoding [, string linefeed]]])
+/* {{{ proto string mb_encode_mimeheader(string str [, string charset [, string transfer-encoding [, string linefeed [, int indent]]]])
    Converts the string to MIME "encoded-word" in the format of =?charset?(B|Q)?encoded_string?= */
 PHP_FUNCTION(mb_encode_mimeheader)
 {
@@ -2279,12 +2279,13 @@ PHP_FUNCTION(mb_encode_mimeheader)
 	int trans_enc_name_len;
 	char *linefeed = "\r\n";
 	int linefeed_len;
+	int indent = 0;
 
 	mbfl_string_init(&string);
 	string.no_language = MBSTRG(current_language);
 	string.no_encoding = MBSTRG(current_internal_encoding);
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|sss", (char **)&string.val, &string.len, &charset_name, &charset_name_len, &trans_enc_name, &trans_enc_name_len, &linefeed, &linefeed_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|sss", (char **)&string.val, &string.len, &charset_name, &charset_name_len, &trans_enc_name, &trans_enc_name_len, &linefeed, &linefeed_len, &indent) == FAILURE) {
 		return;
 	}
 
@@ -2314,7 +2315,7 @@ PHP_FUNCTION(mb_encode_mimeheader)
 	}
 
 	mbfl_string_init(&result);
-	ret = mbfl_mime_header_encode(&string, &result, charset, transenc, linefeed, 0);
+	ret = mbfl_mime_header_encode(&string, &result, charset, transenc, linefeed, indent);
 	if (ret != NULL) {
 		RETVAL_STRINGL((char *)ret->val, ret->len, 0)	/* the string is already strdup()'ed */
 	} else {

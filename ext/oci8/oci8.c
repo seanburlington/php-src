@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.280 2005/10/18 13:39:51 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.281 2005/11/19 21:36:05 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -619,7 +619,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.280 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.281 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -944,6 +944,9 @@ php_oci_connection *php_oci_do_connect_ex(char *username, int username_len, char
 	smart_str_append_unsigned_ex(&hashed_details, session_mode, 0);
 	smart_str_0(&hashed_details);
 
+	/* make it lowercase */
+	php_strtolower(hashed_details.c, hashed_details.len);
+	
 	/* Initialize global handles if the weren't initialized before */
 	
 	if (OCI_G(env) == NULL) {

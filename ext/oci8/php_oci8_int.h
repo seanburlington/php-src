@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_oci8_int.h,v 1.9 2005/10/19 09:11:22 tony2001 Exp $ */
+/* $Id: php_oci8_int.h,v 1.10 2005/11/19 21:36:06 tony2001 Exp $ */
 
 #if HAVE_OCI8
 # ifndef PHP_OCI8_INT_H
@@ -52,6 +52,7 @@
 #endif
 /* }}} */
 
+#include "ext/standard/php_string.h"
 #include <oci.h>
 
 extern int le_connection;

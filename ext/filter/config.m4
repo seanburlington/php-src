@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.4 2005/11/16 23:18:16 sniper Exp $
+dnl $Id: config.m4,v 1.5 2005/11/19 10:30:52 mike Exp $
 dnl config.m4 for input filtering extension
 
 PHP_ARG_ENABLE(filter, whether to enable input filter support,
@@ -57,10 +57,10 @@ yes
 
       for i in $PCRE_SEARCH_DIR; do
         if test -f $i/include/pcre/pcre.h; then
-          PCRE_INCDIR=$i
+          PCRE_INCDIR=$i/include/pcre
           break
         elif test -f $i/include/pcre.h; then
-          PCRE_INCDIR=$i
+          PCRE_INCDIR=$i/include
           break
         elif test -f $i/pcre.h; then
           PCRE_INCDIR=$i

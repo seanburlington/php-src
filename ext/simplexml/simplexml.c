@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.151.2.6 2005/11/05 22:37:18 rasmus Exp $ */
+/* $Id: simplexml.c,v 1.151.2.7 2005/11/20 13:05:13 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1283,7 +1283,8 @@ PHP_FUNCTION(simplexml_load_file)
 	int             filename_len;
 	xmlDocPtr       docp;
 	char           *classname = "";
-	int             classname_len = 0, options=0;
+	int             classname_len = 0;
+	long            options = 0;
 	zend_class_entry *ce= sxe_class_entry;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|sl", &filename, &filename_len, &classname, &classname_len, &options) == FAILURE) {
@@ -1326,7 +1327,8 @@ PHP_FUNCTION(simplexml_load_string)
 	int             data_len;
 	xmlDocPtr       docp;
 	char           *classname = "";
-	int             classname_len = 0, options=0;
+	int             classname_len = 0;
+	long            options = 0;
 	zend_class_entry *ce= sxe_class_entry;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|sl", &data, &data_len, &classname, &classname_len, &options) == FAILURE) {
@@ -1361,7 +1363,7 @@ PHP_FUNCTION(simplexml_load_string)
 /* }}} */
 
 
-/* {{{ proto SimpleXMLElement::__construct()
+/* {{{ proto SimpleXMLElement::__construct(string data)
    SimpleXMLElement constructor */
 SXE_METHOD(__construct)
 {
@@ -1741,7 +1743,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.6 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.151.2.7 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

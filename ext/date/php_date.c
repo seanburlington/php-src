@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.21 2005/11/17 21:05:30 iliaa Exp $ */
+/* $Id: php_date.c,v 1.43.2.22 2005/11/20 20:14:23 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -363,7 +363,7 @@ php_win_std_time:
 	return "UTC";
 }
 
-static timelib_tzinfo *get_timezone_info(TSRMLS_D)
+PHPAPI timelib_tzinfo *get_timezone_info(TSRMLS_D)
 {
 	char *tz;
 	timelib_tzinfo *tzi;

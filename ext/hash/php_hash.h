@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash.h,v 1.2 2005/11/18 20:58:54 pollita Exp $ */
+/* $Id: php_hash.h,v 1.3 2005/11/20 20:14:20 pollita Exp $ */
 
 #ifndef PHP_HASH_H
 #define PHP_HASH_H
@@ -54,6 +54,26 @@ extern php_hash_ops php_hash_sha384_ops;
 extern php_hash_ops php_hash_sha512_ops;
 extern php_hash_ops php_hash_ripemd128_ops;
 extern php_hash_ops php_hash_ripemd160_ops;
+
+#define PHP_HASH_HAVAL_OPS(p,b)	extern php_hash_ops php_hash_##p##haval##b##_ops;
+
+PHP_HASH_HAVAL_OPS(3,128)
+PHP_HASH_HAVAL_OPS(3,160)
+PHP_HASH_HAVAL_OPS(3,192)
+PHP_HASH_HAVAL_OPS(3,224)
+PHP_HASH_HAVAL_OPS(3,256)
+
+PHP_HASH_HAVAL_OPS(4,128)
+PHP_HASH_HAVAL_OPS(4,160)
+PHP_HASH_HAVAL_OPS(4,192)
+PHP_HASH_HAVAL_OPS(4,224)
+PHP_HASH_HAVAL_OPS(4,256)
+
+PHP_HASH_HAVAL_OPS(5,128)
+PHP_HASH_HAVAL_OPS(5,160)
+PHP_HASH_HAVAL_OPS(5,192)
+PHP_HASH_HAVAL_OPS(5,224)
+PHP_HASH_HAVAL_OPS(5,256)
 
 extern zend_module_entry hash_module_entry;
 #define phpext_hash_ptr &hash_module_entry

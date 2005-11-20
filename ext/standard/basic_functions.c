@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.736 2005/11/16 09:43:55 dmitry Exp $ */
+/* $Id: basic_functions.c,v 1.737 2005/11/20 18:06:09 sniper Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -957,6 +957,10 @@ static void basic_globals_ctor(php_basic_globals *basic_globals_p TSRMLS_DC)
 
 	memset(&BG(url_adapt_state), 0, sizeof(BG(url_adapt_state)));
 	memset(&BG(url_adapt_state_ex), 0, sizeof(BG(url_adapt_state_ex)));
+	
+#if defined(_REENTRANT) && defined(HAVE_MBRLEN) && defined(HAVE_MBSTATE_T)
+	memset(&BG(mblen_state), 0, sizeof(BG(mblen_state)));
+#endif
 
 	BG(incomplete_class) = php_create_incomplete_class(TSRMLS_C);
 }

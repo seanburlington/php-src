@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.176 2005/11/05 22:41:09 rasmus Exp $ */
+/* $Id: simplexml.c,v 1.177 2005/11/20 13:03:15 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1576,7 +1576,8 @@ PHP_FUNCTION(simplexml_load_file)
 	int             filename_len;
 	xmlDocPtr       docp;
 	char           *classname = "";
-	int             classname_len = 0, options=0;
+	int             classname_len = 0;
+	long            options = 0;
 	zend_class_entry *ce= U_CLASS_ENTRY(sxe_class_entry);
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|sl", &filename, &filename_len, &classname, &classname_len, &options) == FAILURE) {
@@ -1619,7 +1620,8 @@ PHP_FUNCTION(simplexml_load_string)
 	int             data_len;
 	xmlDocPtr       docp;
 	char           *classname = "";
-	int             classname_len = 0, options=0;
+	int             classname_len = 0;
+	long            options = 0;
 	zend_class_entry *ce= U_CLASS_ENTRY(sxe_class_entry);
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|sl", &data, &data_len, &classname, &classname_len, &options) == FAILURE) {
@@ -1654,7 +1656,7 @@ PHP_FUNCTION(simplexml_load_string)
 /* }}} */
 
 
-/* {{{ proto SimpleXMLElement::__construct()
+/* {{{ proto SimpleXMLElement::__construct(string data [, int options [, bool data_is_url]])
    SimpleXMLElement constructor */
 SXE_METHOD(__construct)
 {
@@ -1662,15 +1664,21 @@ SXE_METHOD(__construct)
 	char           *data;
 	int             data_len;
 	xmlDocPtr       docp;
+	long            options = 0;
+	zend_bool       is_url = 0;
 
 	php_set_error_handling(EH_THROW, zend_exception_get_default(TSRMLS_C) TSRMLS_CC);
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &data, &data_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|lb", &data, &data_len, &options, &is_url) == FAILURE) {
 		php_std_error_handling();
 		return;
 	}
 
 	php_std_error_handling();
-	docp = xmlParseMemory(data, data_len);
+#if LIBXML_VERSION >= 20600
+	docp = is_url ? xmlReadFile(data, NULL, options) : xmlReadMemory(data, data_len, NULL, NULL, options);
+#else
+	docp = is_url ? xmlParseFile(data) : xmlParseMemory(data, data_len);
+#endif
 	if (!docp) {
 		((php_libxml_node_object *)sxe)->document = NULL;
 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "String could not be parsed as XML", 0 TSRMLS_CC);
@@ -2012,7 +2020,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.176 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.177 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

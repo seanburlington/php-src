@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.75 2005/11/03 22:04:35 helly Exp $ */
+/* $Id: php_spl.c,v 1.76 2005/11/20 15:21:23 johannes Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -559,7 +559,7 @@ int spl_build_class_list_string(zval **entry, char **list TSRMLS_DC) /* {{{ */
 {
 	char *res;
 	
-	spprintf(&res, 0, "%s, %s", *list, Z_STRVAL_PP(entry));
+	spprintf(&res, 0, "%s, %v", *list, Z_STRVAL_PP(entry));
 	efree(*list);
 	*list = res;
 	return ZEND_HASH_APPLY_KEEP;

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.22 2005/10/05 18:38:30 derick Exp $ */
+/* $Id: php_date.h,v 1.23 2005/11/20 20:31:48 derick Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -100,5 +100,6 @@ PHPAPI char *php_format_date(char *format, int format_len, time_t ts, int localt
 
 /* Mechanism to set new TZ database */
 PHPAPI void php_date_set_tzdb(timelib_tzdb *tzdb);
+PHPAPI timelib_tzinfo *get_timezone_info(TSRMLS_D);
 
 #endif /* PHP_DATE_H */

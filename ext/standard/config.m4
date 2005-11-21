@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.80 2005/06/19 22:15:25 derick Exp $ -*- autoconf -*-
+dnl $Id: config.m4,v 1.81 2005/11/21 23:07:35 sniper Exp $ -*- autoconf -*-
 
 divert(3)dnl
 
@@ -492,3 +492,6 @@ PHP_NEW_EXTENSION(standard, array.c base64.c basic_functions.c browscap.c crc32.
                             filters.c proc_open.c sunfuncs.c streamsfuncs.c http.c)
 
 PHP_ADD_MAKEFILE_FRAGMENT
+
+PHP_INSTALL_HEADERS([ext/standard/])
+

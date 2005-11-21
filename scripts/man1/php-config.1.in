@@ -14,7 +14,7 @@
 ./"    | Author: Jakub Vrana <vrana@php.net>                                  |
 ./"    +----------------------------------------------------------------------+
 ./" 
-./" $Id: php-config.1.in,v 1.3 2005/08/08 16:06:49 sniper Exp $
+./" $Id: php-config.1.in,v 1.4 2005/11/21 23:07:36 sniper Exp $
 ./" 
 .TH php\-config 1 "Apr 2005" "The PHP Group" "Scripting Language"
 .SH NAME
@@ -49,6 +49,10 @@ Extra libraries which PHP was compiled with
 .PD 0
 .B \-\-extension-dir
 Directory where extensions are searched by default
+.TP
+.PD 0
+.B \-\-include-dir
+Directory prefix where header files are installed by default
 .TP
 .PD 0
 .B \-\-php-binary

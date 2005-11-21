@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_ripemd.c,v 1.2 2005/11/18 20:58:54 pollita Exp $ */
+/* $Id: hash_ripemd.c,v 1.3 2005/11/21 15:09:57 mike Exp $ */
 
 /* Heavily borrowed from md5.c & sha1.c of PHP archival fame
    Note that ripemd laughs in the face of logic and uses
@@ -26,18 +26,18 @@
 #include "php_hash_ripemd.h"
 
 php_hash_ops php_hash_ripemd128_ops = {
-	PHP_RIPEMD128Init,
-	PHP_RIPEMD128Update,
-	PHP_RIPEMD128Final,
+	(php_hash_init_func_t) PHP_RIPEMD128Init,
+	(php_hash_update_func_t) PHP_RIPEMD128Update,
+	(php_hash_final_func_t) PHP_RIPEMD128Final,
 	16,
 	64,
 	sizeof(PHP_RIPEMD128_CTX)
 };
 
 php_hash_ops php_hash_ripemd160_ops = {
-	PHP_RIPEMD160Init,
-	PHP_RIPEMD160Update,
-	PHP_RIPEMD160Final,
+	(php_hash_init_func_t) PHP_RIPEMD160Init,
+	(php_hash_update_func_t) PHP_RIPEMD160Update,
+	(php_hash_final_func_t) PHP_RIPEMD160Final,
 	20,
 	64,
 	sizeof(PHP_RIPEMD160_CTX)

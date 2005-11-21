@@ -16,15 +16,15 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_md.c,v 1.2 2005/11/18 20:58:54 pollita Exp $ */
+/* $Id: hash_md.c,v 1.3 2005/11/21 15:09:57 mike Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_md.h"
 
 php_hash_ops php_hash_md5_ops = {
-	PHP_MD5Init,
-	PHP_MD5Update,
-	PHP_MD5Final,
+	(php_hash_init_func_t) PHP_MD5Init,
+	(php_hash_update_func_t) PHP_MD5Update,
+	(php_hash_final_func_t) PHP_MD5Final,
 	16,
 	64,
 	sizeof(PHP_MD5_CTX)

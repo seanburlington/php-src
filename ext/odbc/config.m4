@@ -1,11 +1,11 @@
 dnl
-dnl $Id: config.m4,v 1.55.2.8 2003/11/25 08:08:30 sniper Exp $
+dnl $Id: config.m4,v 1.55.2.12.2.1 2005/11/21 19:07:03 sniper Exp $
 dnl
 
 dnl
 dnl Figure out which library file to link with for the Solid support.
 dnl
-AC_DEFUN(AC_FIND_SOLID_LIBS,[
+AC_DEFUN([AC_FIND_SOLID_LIBS],[
   AC_MSG_CHECKING([Solid library file])  
   ac_solid_uname_r=`uname -r 2>/dev/null`
   ac_solid_uname_s=`uname -s 2>/dev/null`
@@ -71,7 +71,7 @@ fi
 dnl
 dnl Figure out which library file to link with for the Empress support.
 dnl
-AC_DEFUN(AC_FIND_EMPRESS_LIBS,[
+AC_DEFUN([AC_FIND_EMPRESS_LIBS],[
   AC_MSG_CHECKING([Empress library file])
   ODBC_LIBS=`echo $1/libempodbccl.so | cut -d' ' -f1`
   if test ! -f $ODBC_LIBS; then
@@ -80,7 +80,7 @@ AC_DEFUN(AC_FIND_EMPRESS_LIBS,[
   AC_MSG_RESULT(`echo $ODBC_LIBS | sed -e 's!.*/!!'`)
 ])
 
-AC_DEFUN(AC_FIND_EMPRESS_BCS_LIBS,[
+AC_DEFUN([AC_FIND_EMPRESS_BCS_LIBS],[
   AC_MSG_CHECKING([Empress local access library file])
   ODBCBCS_LIBS=`echo $1/libempodbcbcs.a | cut -d' ' -f1`
   if test ! -f $ODBCBCS_LIBS; then
@@ -194,6 +194,15 @@ AC_ARG_WITH(ibm-db2,
       ODBC_INCDIR=$withval/include
       ODBC_LIBDIR=$withval/lib
     fi
+	
+    if ! test -f "$ODBC_INCDIR/sqlcli1.h"; then
+      AC_MSG_ERROR([IBM DB2 header files not found])
+    fi
+
+    if ! test -f "$ODBC_LIBDIR/libdb2.so"; then
+      AC_MSG_ERROR([IBM DB2 required libraries not found])
+    fi
+	
     ODBC_INCLUDE=-I$ODBC_INCDIR
     ODBC_LFLAGS=-L$ODBC_LIBDIR
     ODBC_TYPE=db2
@@ -214,7 +223,7 @@ AC_MSG_CHECKING(for Empress support)
 AC_ARG_WITH(empress,
 [  --with-empress[=DIR]    Include Empress support.  DIR is the Empress base
                           install directory, defaults to \$EMPRESSPATH.
-                          From PHP4, this option only supports Empress Version
+                          From PHP 4, this option only supports Empress Version
                           8.60 and above],
 [
   PHP_WITH_SHARED
@@ -246,7 +255,7 @@ AC_ARG_WITH(empress-bcs,
 [  --with-empress-bcs[=DIR]
                           Include Empress Local Access support.  DIR is the 
                           Empress base install directory, defaults to 
-                          \$EMPRESSPATH.  From PHP4, this option only supports
+                          \$EMPRESSPATH.  From PHP 4, this option only supports
                           Empress Version 8.60 and above.],
 [
   PHP_WITH_SHARED
@@ -304,10 +313,35 @@ AC_ARG_WITH(birdstep,
         ODBC_INCDIR=$withval/include
         ODBC_LIBDIR=$withval/lib
     fi
+   
+    case $host_alias in
+      *aix*[)]
+        AC_DEFINE(AIX,1,[ ]);;
+      *hpux*[)]
+        AC_DEFINE(HPUX,1,[ ]);;
+      *linux*[)]
+        AC_DEFINE(LINUX,1,[ ]);;
+      *qnx*[)]
+        AC_DEFINE(NEUTRINO,1,[ ]);;
+      i?86-*-solaris*[)]
+        AC_DEFINE(ISOLARIS,1,[ ]);;
+      sparc-*-solaris*[)]
+        AC_DEFINE(SOLARIS,1,[ ]);;
+      *unixware*[)]
+        AC_DEFINE(UNIXWARE,1,[ ]);;
+    esac
+
     ODBC_INCLUDE=-I$ODBC_INCDIR
     ODBC_TYPE=birdstep
     ODBC_LFLAGS=-L$ODBC_LIBDIR
     ODBC_LIBS="-lCadm -lCdict -lCenc -lCrdm -lCrpc -lCrdbc -lCrm -lCuapi -lutil"
+    
+    if test -f "$ODBC_LIBDIR/libCrdbc32.$SHLIB_SUFFIX_NAME"; then
+      ODBC_LIBS="-lCrdbc32 -lCadm32 -lCncp32 -lCrm32 -lCsql32 -lCdict32 -lCrdm32 -lCrpc32 -lutil"
+    elif test -f "$ODBC_LIBDIR/libCrdbc.$SHLIB_SUFFIX_NAME"; then
+      ODBC_LIBS="-lCrdbc -lCadm -lCncp -lCrm -lCsql -lCdict -lCrdm -lCrpc -lutil"
+    fi
+
     AC_DEFINE(HAVE_BIRDSTEP,1,[ ])
 
     AC_MSG_RESULT(yes)
@@ -505,7 +539,9 @@ if test -n "$ODBC_TYPE"; then
   if test "$ODBC_TYPE" != "dbmaker"; then
     ext_shared=$shared
     PHP_EVAL_LIBLINE([$ODBC_LFLAGS $ODBC_LIBS], ODBC_SHARED_LIBADD)
-    AC_DEFINE(HAVE_SQLDATASOURCES,1,[ ])
+    if test "$ODBC_TYPE" != "birdstep"; then
+      AC_DEFINE(HAVE_SQLDATASOURCES,1,[ ])
+    fi
   fi
 
   AC_DEFINE(HAVE_UODBC,1,[ ])

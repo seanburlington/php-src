@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.191 2005/11/18 22:59:07 helly Exp $ */
+/* $Id: php_reflection.c,v 1.192 2005/11/21 10:57:28 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,6 +37,11 @@
 #include "zend_constants.h"
 #include "zend_ini.h"
 #include "zend_interfaces.h"
+
+/* Undefine "getParameters" macro defined in "main/php3_compat.h" */
+#ifdef getParameters
+# undef getParameters
+#endif
 
 /* Class entry pointers */
 PHPAPI zend_class_entry *reflector_ptr;
@@ -4270,7 +4275,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.191 2005/11/18 22:59:07 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.192 2005/11/21 10:57:28 dmitry Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

@@ -18,7 +18,7 @@
    |          Sara Golemon <pollita@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id: ftp_fopen_wrapper.c,v 1.86 2005/10/11 14:33:14 iliaa Exp $ */
+/* $Id: ftp_fopen_wrapper.c,v 1.87 2005/11/22 03:01:59 iliaa Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -513,13 +513,13 @@ php_stream * php_stream_url_wrap_ftp(php_stream_wrapper *wrapper, char *path, ch
 		}
 
 		/* retrieve file */
-		memcpy(tmp_line, "RETR", 4);
+		memcpy(tmp_line, "RETR", sizeof("RETR"));
 	} else if (read_write == 2) {
 		/* Write new file */
-		memcpy(tmp_line, "STOR", 4);
+		memcpy(tmp_line, "STOR", sizeof("STOR"));
 	} else {
 		/* Append */
-		memcpy(tmp_line, "APPE", 4);
+		memcpy(tmp_line, "APPE", sizeof("APPE"));
 	} 
 	php_stream_printf(stream TSRMLS_CC, "%s %s\r\n", tmp_line, (resource->path != NULL ? resource->path : "/"));
 	

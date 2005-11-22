@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_haval.c,v 1.2 2005/11/21 15:09:57 mike Exp $ */
+/* $Id: hash_haval.c,v 1.3 2005/11/22 12:24:25 mike Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_haval.h"
@@ -321,7 +321,7 @@ PHP_HASH_API void PHP_HAVALUpdate(PHP_HAVAL_CTX *context, const unsigned char *i
  */
 PHP_HASH_API void PHP_HAVAL128Final(unsigned char *digest, PHP_HAVAL_CTX * context)
 {
-	unsigned char bits[8];
+	unsigned char bits[10];
 	unsigned int index, padLen;
 
 	/* Version, Passes, and Digest Length */
@@ -375,7 +375,7 @@ PHP_HASH_API void PHP_HAVAL128Final(unsigned char *digest, PHP_HAVAL_CTX * conte
  */
 PHP_HASH_API void PHP_HAVAL160Final(unsigned char *digest, PHP_HAVAL_CTX * context)
 {
-	unsigned char bits[8];
+	unsigned char bits[10];
 	unsigned int index, padLen;
 
 	/* Version, Passes, and Digest Length */
@@ -429,7 +429,7 @@ PHP_HASH_API void PHP_HAVAL160Final(unsigned char *digest, PHP_HAVAL_CTX * conte
  */
 PHP_HASH_API void PHP_HAVAL192Final(unsigned char *digest, PHP_HAVAL_CTX * context)
 {
-	unsigned char bits[8];
+	unsigned char bits[10];
 	unsigned int index, padLen;
 
 	/* Version, Passes, and Digest Length */
@@ -469,7 +469,7 @@ PHP_HASH_API void PHP_HAVAL192Final(unsigned char *digest, PHP_HAVAL_CTX * conte
  */
 PHP_HASH_API void PHP_HAVAL224Final(unsigned char *digest, PHP_HAVAL_CTX * context)
 {
-	unsigned char bits[8];
+	unsigned char bits[10];
 	unsigned int index, padLen;
 
 	/* Version, Passes, and Digest Length */
@@ -510,7 +510,7 @@ PHP_HASH_API void PHP_HAVAL224Final(unsigned char *digest, PHP_HAVAL_CTX * conte
  */
 PHP_HASH_API void PHP_HAVAL256Final(unsigned char *digest, PHP_HAVAL_CTX * context)
 {
-	unsigned char bits[8];
+	unsigned char bits[10];
 	unsigned int index, padLen;
 
 	/* Version, Passes, and Digest Length */

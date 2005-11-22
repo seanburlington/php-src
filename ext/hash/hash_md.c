@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_md.c,v 1.4 2005/11/22 19:17:58 mike Exp $ */
+/* $Id: hash_md.c,v 1.5 2005/11/22 19:23:55 mike Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_md.h"
@@ -35,7 +35,7 @@ php_hash_ops php_hash_md5_ops = {
 PHP_HASH_API void make_digest(char *md5str, unsigned char *digest)
 {
 	php_hash_bin2hex(md5str, digest, 16);
-	md5str[16] = '\0';
+	md5str[32] = '\0';
 }
 
 /* {{{ proto string md5(string str, [ bool raw_output])

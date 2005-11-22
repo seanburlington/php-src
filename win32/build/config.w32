@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.50 2005/11/20 17:03:58 sebastian Exp $
+// $Id: config.w32,v 1.51 2005/11/22 00:29:30 fmk Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -88,8 +88,10 @@ if (VCVERS < 14) {
 	// Enable automatic precompiled headers
 	ADD_FLAG('CFLAGS', ' /YX ');
 
-	// Set some debug/release specific options
-	ADD_FLAG('CFLAGS', ' /GZ ');
+	if (PHP_DEBUG == "yes") {
+		// Set some debug/release specific options
+		ADD_FLAG('CFLAGS', ' /GZ ');
+	}
 }
 
 if (VCVERS >= 14) {
@@ -97,8 +99,10 @@ if (VCVERS >= 14) {
 	// disable annoying warnings
 	ADD_FLAG('CFLAGS', ' /wd4996 ');
 
-	// Set some debug/release specific options
-	ADD_FLAG('CFLAGS', ' /RTC1 ');
+	if (PHP_DEBUG == "yes") {
+		// Set some debug/release specific options
+		ADD_FLAG('CFLAGS', ' /RTC1 ');
+	}
 }
 
 // General link flags

@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_fopen_wrapper.c,v 1.29.2.4.8.1 2005/11/17 19:41:02 pollita Exp $ */
+/* $Id: php_fopen_wrapper.c,v 1.29.2.4.8.2 2005/11/22 22:36:14 pollita Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -73,7 +73,7 @@ static size_t php_stream_input_write(php_stream *stream, const char *buf, size_t
 
 static size_t php_stream_input_read(php_stream *stream, char *buf, size_t count TSRMLS_DC)
 {
-	off_t *position = (off_t*)stream->position;
+	off_t *position = (off_t*)stream->abstract;
 	size_t read_bytes = 0;
 
 	if(!stream->eof) {

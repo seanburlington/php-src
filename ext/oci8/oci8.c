@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.281 2005/11/19 21:36:05 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.282 2005/11/22 16:30:35 tony2001 Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -117,6 +117,7 @@ static unsigned char oci_third_arg_force_ref[] = { 3, BYREF_NONE, BYREF_NONE, BY
 /* {{{ extension function prototypes
 */
 PHP_FUNCTION(oci_bind_by_name);
+PHP_FUNCTION(oci_bind_array_by_name);
 PHP_FUNCTION(oci_define_by_name);
 PHP_FUNCTION(oci_field_is_null);
 PHP_FUNCTION(oci_field_name);
@@ -196,6 +197,7 @@ PHP_FUNCTION(oci_collection_trim);
 static zend_function_entry php_oci_functions[] = {
 	PHP_FE(oci_define_by_name,          oci_third_arg_force_ref)
 	PHP_FE(oci_bind_by_name,            oci_third_arg_force_ref)
+	PHP_FE(oci_bind_array_by_name,      oci_third_arg_force_ref)
 	PHP_FE(oci_field_is_null,           NULL)
 	PHP_FE(oci_field_name,              NULL)
 	PHP_FE(oci_field_size,              NULL)
@@ -527,6 +529,18 @@ PHP_MINIT_FUNCTION(oci)
 	REGISTER_LONG_CONSTANT("SQLT_INT",SQLT_INT, CONST_CS | CONST_PERSISTENT);	
 	REGISTER_LONG_CONSTANT("SQLT_NUM",SQLT_NUM, CONST_CS | CONST_PERSISTENT);	
 	REGISTER_LONG_CONSTANT("SQLT_RSET",SQLT_RSET, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SQLT_AFC",SQLT_AFC, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SQLT_CHR",SQLT_CHR, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SQLT_VCS",SQLT_VCS, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SQLT_AVC",SQLT_AVC, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SQLT_STR",SQLT_STR, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SQLT_LVC",SQLT_LVC, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SQLT_FLT",SQLT_FLT, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SQLT_UIN",SQLT_UIN, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SQLT_LNG",SQLT_LNG, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SQLT_ODT",SQLT_ODT, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SQLT_BDOUBLE",SQLT_BDOUBLE, CONST_CS | CONST_PERSISTENT);
+	REGISTER_LONG_CONSTANT("SQLT_BFLOAT",SQLT_BFLOAT, CONST_CS | CONST_PERSISTENT);
 
 #ifdef PHP_OCI8_HAVE_COLLECTIONS
 	REGISTER_LONG_CONSTANT("OCI_B_NTY",SQLT_NTY, CONST_CS | CONST_PERSISTENT);
@@ -619,7 +633,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.281 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.282 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -718,6 +732,20 @@ void php_oci_define_hash_dtor(void *data)
 void php_oci_bind_hash_dtor(void *data)
 {
 	php_oci_bind *bind = (php_oci_bind *) data;
+
+	if (bind->array.elements) {
+		efree(bind->array.elements);
+	}
+/*		if (bind->array.element_lengths) {
+		efree(bind->array.element_lengths);
+	}
+	if (bind->array.indicators) {
+		efree(bind->array.indicators);
+	} 
+	if (bind->array.retcodes) {
+		efree(bind->array.retcodes);
+	} 
+*/
 
 	zval_ptr_dtor(&bind->zval);
 }

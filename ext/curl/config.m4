@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.28.2.2 2005/10/26 11:33:25 sniper Exp $ 
+dnl $Id: config.m4,v 1.28.2.3 2005/11/22 22:53:34 tony2001 Exp $ 
 dnl
 
 PHP_ARG_WITH(curl, for CURL support,
@@ -50,7 +50,7 @@ if test "$PHP_CURL" != "no"; then
   fi
   
   AC_MSG_CHECKING([for SSL support in libcurl])
-  CURL_SSL=`$CURL_CONFIG --features | $EGREP SSL`
+  CURL_SSL=`$CURL_CONFIG --feature | $EGREP SSL`
   if test "$CURL_SSL" = "SSL"; then
     AC_MSG_RESULT([yes])
     AC_DEFINE([HAVE_CURL_SSL], [1], [Have cURL with  SSL support])

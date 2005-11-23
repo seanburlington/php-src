@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.255 2005/08/28 01:02:54 sniper Exp $ */
+/* $Id: info.c,v 1.256 2005/11/23 00:15:26 iliaa Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -205,9 +205,9 @@ static void php_print_gpcse_array(char *name, uint name_length TSRMLS_DC)
  */
 void php_info_print_style(TSRMLS_D)
 {
-	php_printf("<style type=\"text/css\"><!--\n");
+	php_printf("<style type=\"text/css\">\n");
 	php_info_print_css(TSRMLS_C);
-	php_printf("//--></style>\n");
+	php_printf("</style>\n");
 }
 /* }}} */
 

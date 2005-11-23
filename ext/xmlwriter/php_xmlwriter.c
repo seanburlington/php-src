@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.18 2005/11/15 15:36:29 pajoye Exp $ */
+/* $Id: php_xmlwriter.c,v 1.19 2005/11/23 11:23:39 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -92,9 +92,9 @@ PHP_XMLWRITER_API zend_object_value xmlwriter_object_new(zend_class_entry *class
 	zend_object_value retval;
 
 	intern = emalloc(sizeof(ze_xmlwriter_object));
+	memset(&intern->zo, 0, sizeof(zend_object));
 	intern->zo.ce = class_type;
-	intern->zo.guards = NULL;
-	intern->zo.properties = NULL;
+	intern->xmlwriter_ptr = NULL;
 	
 	ALLOC_HASHTABLE(intern->zo.properties);
 	zend_hash_init(intern->zo.properties, 0, NULL, ZVAL_PTR_DTOR, 0);

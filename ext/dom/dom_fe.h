@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_fe.h,v 1.14 2005/08/03 14:07:01 sniper Exp $ */
+/* $Id: dom_fe.h,v 1.15 2005/11/23 02:56:41 rrichards Exp $ */
 #ifndef DOM_FE_H
 #define DOM_FE_H
 
@@ -130,6 +130,7 @@ PHP_METHOD(domdocument, loadXML);
 PHP_FUNCTION(dom_document_savexml);
 PHP_FUNCTION(dom_document_validate);
 PHP_FUNCTION(dom_document_xinclude);
+PHP_METHOD(domdocument, registerNodeClass);
 
 #if defined(LIBXML_HTML_ENABLED)
 PHP_METHOD(domdocument, loadHTML);

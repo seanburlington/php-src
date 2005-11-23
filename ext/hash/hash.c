@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.10 2005/11/23 16:36:11 mike Exp $ */
+/* $Id: hash.c,v 1.11 2005/11/23 21:15:37 mike Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -407,6 +407,7 @@ PHP_MINIT_FUNCTION(hash)
 	php_hash_register_algo("sha512",		&php_hash_sha512_ops);
 	php_hash_register_algo("ripemd128",		&php_hash_ripemd128_ops);
 	php_hash_register_algo("ripemd160",		&php_hash_ripemd160_ops);
+	php_hash_register_algo("whirlpool",		&php_hash_whirlpool_ops);
 
 	PHP_HASH_HAVAL_REGISTER(3,128);
 	PHP_HASH_HAVAL_REGISTER(3,160);

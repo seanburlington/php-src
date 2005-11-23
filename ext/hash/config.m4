@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.3 2005/11/22 19:17:58 mike Exp $
+dnl $Id: config.m4,v 1.4 2005/11/23 21:15:37 mike Exp $
 dnl config.m4 for extension hash
 
 PHP_ARG_ENABLE(hash, whether to enable hash support,
@@ -6,8 +6,8 @@ PHP_ARG_ENABLE(hash, whether to enable hash support,
 
 if test "$PHP_HASH" != "no"; then
   AC_DEFINE(HAVE_HASH_EXT,1,[Have HASH Extension])
-  PHP_NEW_EXTENSION(hash, hash.c hash_md.c hash_sha.c hash_ripemd.c hash_haval.c, $ext_shared)
+  PHP_NEW_EXTENSION(hash, hash.c hash_md.c hash_sha.c hash_ripemd.c hash_haval.c hash_whirlpool.c, $ext_shared)
   ifdef([PHP_INSTALL_HEADERS], [
-  	PHP_INSTALL_HEADERS(ext/hash, php_hash.h php_hash_md.h php_hash_sha.h php_hash_ripemd.h php_hash_haval.h)
+  	PHP_INSTALL_HEADERS(ext/hash, php_hash.h php_hash_md.h php_hash_sha.h php_hash_ripemd.h php_hash_haval.h php_hash_whirlpool.h)
   ], [ ])
 fi

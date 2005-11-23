@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash.h,v 1.5 2005/11/22 19:17:58 mike Exp $ */
+/* $Id: php_hash.h,v 1.6 2005/11/23 21:15:38 mike Exp $ */
 
 #ifndef PHP_HASH_H
 #define PHP_HASH_H
@@ -58,6 +58,7 @@ extern php_hash_ops php_hash_sha384_ops;
 extern php_hash_ops php_hash_sha512_ops;
 extern php_hash_ops php_hash_ripemd128_ops;
 extern php_hash_ops php_hash_ripemd160_ops;
+extern php_hash_ops php_hash_whirlpool_ops;
 
 #define PHP_HASH_HAVAL_OPS(p,b)	extern php_hash_ops php_hash_##p##haval##b##_ops;
 

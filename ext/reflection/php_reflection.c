@@ -1,25 +1,26 @@
 /*
    +----------------------------------------------------------------------+
-   | Zend Engine                                                          |
+   | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2005 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
-   | This source file is subject to version 2.00 of the Zend license,     |
+   | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
    | available through the world-wide-web at the following url:           |
-   | http://www.zend.com/license/2_00.txt.                                |
-   | If you did not receive a copy of the Zend license and are unable to  |
+   | http://www.php.net/license/3_0.txt.                                  |
+   | If you did not receive a copy of the PHP license and are unable to   |
    | obtain it through the world-wide-web, please send a note to          |
-   | license@zend.com so we can mail you a copy immediately.              |
+   | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
    | Authors: Timm Friebe <thekid@thekid.de>                              |
    |          George Schlossnagle <george@omniti.com>                     |
    |          Andrei Zmievski <andrei@gravitonic.com>                     |
    |          Marcus Boerger <helly@php.net>                              |
+   |          Johannes Schlueter <johannes@php.net>                       |
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.193 2005/11/23 20:47:42 johannes Exp $ */
+/* $Id: php_reflection.c,v 1.194 2005/11/24 00:30:41 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4276,7 +4277,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.193 2005/11/23 20:47:42 johannes Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.194 2005/11/24 00:30:41 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

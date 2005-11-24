@@ -3,8 +3,8 @@ zlib.inflate (with convert.base64-decode)
 --SKIPIF--
 <?php if (!extension_loaded("zlib")) print "skip"; ?>
 --FILE--
-<?php /* $Id: zlib_filter_inflate.phpt,v 1.1 2004/07/17 00:05:30 pollita Exp $ */
-$text = 'eJwdy0EOgCAMRNGrzM6N8R4co4YBMbRNGkLi7VV2f/FfgijGRUzGA/XMDi+QlWFQuT1QaQzpO9I2iWbFQ2U0t49VDjk7d4g1/R+xDG0LHC8+diGh';
+<?php /* $Id: zlib_filter_inflate.phpt,v 1.2 2005/11/24 04:37:04 pollita Exp $ */
+$text = 'HctBDoAgDETRq8zOjfEeHKOGATG0TRpC4u1Vdn/xX4IoxkVMxgP1zA4vkJVhULk9UGkM6TvSNolmxUNlNLePVQ45O3eINf0fsQxtCxwv';
 
 $fp = fopen('php://stdout', 'w');
 stream_filter_append($fp, 'convert.base64-decode', STREAM_FILTER_WRITE);

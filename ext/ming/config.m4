@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.22.2.2 2005/08/26 15:35:39 helly Exp $
+dnl $Id: config.m4,v 1.22.2.3 2005/11/24 00:51:42 helly Exp $
 dnl
 
 PHP_ARG_WITH(ming, for MING support,
@@ -72,6 +72,13 @@ yes
     AC_DEFINE(HAVE_NEW_MING,  1, [ ]) 
     dnl FIXME: This is now unconditional..better check coming later.
     AC_DEFINE(HAVE_MING_ZLIB, 1, [ ])
+    AC_TRY_COMPILE([
+#include <ming.h>
+int main(int,void) {
+  SWFMovie_output(NULL, NULL, NULL, 0));
+  return 0;
+}
+	], [ AC_DEFINE(HAVE_MING_MOVIE_LEVEL, 1, []) ])
   ])
   CPPFLAGS=$old_CPPFLAGS
 

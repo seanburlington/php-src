@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: ming.c,v 1.79.2.1 2005/08/11 03:54:04 fmk Exp $ */
+/* $Id: ming.c,v 1.79.2.2 2005/11/24 00:51:42 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2244,7 +2244,7 @@ PHP_METHOD(swfmovie, output)
 		Ming_setSWFCompression(oldval);
 	}	
 	RETURN_LONG(out);
-#elif defined(HAVE_NEW_MING)
+#elif defined(HAVE_NEW_MING) && defined(HAVE_MING_MOVIE_LEVEL)
 	zval **zlimit = NULL;
 	int limit = -1;
 	int argc = ZEND_NUM_ARGS();
@@ -2323,7 +2323,7 @@ PHP_METHOD(swfmovie, saveToFile)
 	if (oldval >= -1 && oldval <=9)
 		Ming_setSWFCompression(oldval);
 	RETURN_LONG(out);
-#elif defined(HAVE_NEW_MING)
+#elif defined(HAVE_NEW_MING) && defined(HAVE_MING_MOVIE_LEVEL)
 	RETURN_LONG(SWFMovie_output(movie, &phpStreamOutputMethod, what, limit));
 #else
 	RETURN_LONG(SWFMovie_output(movie, &phpStreamOutputMethod, what));
@@ -2374,7 +2374,7 @@ PHP_METHOD(swfmovie, save)
 		  
 	if (Z_TYPE_PP(x) == IS_RESOURCE) {
 		ZEND_FETCH_RESOURCE(stream, php_stream *, x, -1,"File-Handle",php_file_le_stream());
-#if defined(HAVE_NEW_MING)
+#if defined(HAVE_NEW_MING) && defined(HAVE_MING_MOVIE_LEVEL)
 		RETURN_LONG(SWFMovie_output(getMovie(getThis() TSRMLS_CC), &phpStreamOutputMethod, stream, limit));
 #else
 		RETVAL_LONG(SWFMovie_output(getMovie(getThis() TSRMLS_CC), &phpStreamOutputMethod, stream));
@@ -2393,7 +2393,7 @@ PHP_METHOD(swfmovie, save)
 		RETURN_FALSE;
 	}
 	
-#if defined(HAVE_NEW_MING)
+#if defined(HAVE_NEW_MING) && defined(HAVE_MING_MOVIE_LEVEL)
 	retval = SWFMovie_output(getMovie(getThis() TSRMLS_CC), &phpStreamOutputMethod, (void *)stream, limit);
 #else
 	retval = SWFMovie_output(getMovie(getThis() TSRMLS_CC), &phpStreamOutputMethod, (void *)stream);

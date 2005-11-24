@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.16 2005/11/24 16:21:42 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.17 2005/11/24 21:46:56 wez Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1272,7 +1272,6 @@ void pdo_dbh_init(TSRMLS_D)
 	REGISTER_PDO_CLASS_CONST_LONG("FETCH_FUNC", (long)PDO_FETCH_FUNC);
 	REGISTER_PDO_CLASS_CONST_LONG("FETCH_GROUP",(long)PDO_FETCH_GROUP);
 	REGISTER_PDO_CLASS_CONST_LONG("FETCH_UNIQUE",(long)PDO_FETCH_UNIQUE);
-	REGISTER_PDO_CLASS_CONST_LONG("FETCH_CLASSTYPE",(long)PDO_FETCH_CLASSTYPE);
 #if PHP_MAJOR_VERSION > 5 || PHP_MINOR_VERSION >= 1
 	REGISTER_PDO_CLASS_CONST_LONG("FETCH_SERIALIZE",(long)PDO_FETCH_SERIALIZE);
 #endif

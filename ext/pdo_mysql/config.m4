@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.25.2.2 2005/11/05 16:20:06 wez Exp $
+dnl $Id: config.m4,v 1.25.2.3 2005/11/24 18:56:16 wez Exp $
 dnl
 
 if test "$PHP_PDO" != "no"; then
@@ -117,9 +117,9 @@ if test "$PHP_PDO_MYSQL" != "no"; then
   ])
   PDO_MYSQL_MODULE_TYPE=external
  
+  PDO_MYSQL_SHARED_LIBADD=$PDO_MYSQL_LIBS
   PHP_SUBST(PDO_MYSQL_SHARED_LIBADD)
   PHP_SUBST_OLD(PDO_MYSQL_MODULE_TYPE)
-  PHP_SUBST_OLD(PDO_MYSQL_LIBS)
 fi
 
 fi

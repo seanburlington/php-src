@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.19 2005/11/25 00:29:04 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.20 2005/11/25 03:23:17 wez Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -516,6 +516,11 @@ static inline void fetch_value(pdo_stmt_t *stmt, zval *dest, int colno, int *typ
 					php_stream_to_zval(stm, dest);
 				} else {
 					ZVAL_NULL(dest);
+				}
+			} else {
+				ZVAL_STRINGL(dest, value, value_len, !caller_frees);
+				if (caller_frees) {
+					caller_frees = 0;
 				}
 			}
 			break;

@@ -17,14 +17,14 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_tiger_tables.h,v 1.1 2005/11/24 08:59:54 mike Exp $ */
+/* $Id: php_hash_tiger_tables.h,v 1.2 2005/11/25 16:12:30 mike Exp $ */
 
 #define t1 (table)
 #define t2 (table+256)
 #define t3 (table+256*2)
 #define t4 (table+256*3)
 
-php_hash_uint64 table[4*256] = {
+static const php_hash_uint64 table[4*256] = {
 	L64(0x02AAB17CF7E90C5E)   /*    0 */,    L64(0xAC424B03E243A8EC)   /*    1 */,
 	L64(0x72CD5BE30DD5FCD3)   /*    2 */,    L64(0x6D019B93F6F97F3A)   /*    3 */,
 	L64(0xCD9978FFD21F9193)   /*    4 */,    L64(0x7573A1C9708029E2)   /*    5 */,

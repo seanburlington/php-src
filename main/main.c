@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.652 2005/11/18 16:20:43 rasmus Exp $ */
+/* $Id: main.c,v 1.653 2005/11/25 00:07:57 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -1924,7 +1924,7 @@ PHPAPI int php_handle_auth_data(const char *auth TSRMLS_DC)
 	}
 	
 	if (ret == -1 && auth && auth[0] != '\0' && strncmp(auth, "Digest ", 7) == 0) {
-		SG(request_info).auth_digest = estrdup(auth);
+		SG(request_info).auth_digest = estrdup(auth + 7);
 		ret = 0;
 	}
 

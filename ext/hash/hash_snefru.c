@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_snefru.c,v 1.1 2005/11/25 11:54:49 mike Exp $ */
+/* $Id: hash_snefru.c,v 1.2 2005/11/25 18:24:33 mike Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_snefru.h"
@@ -45,7 +45,8 @@ static inline void Snefru(php_uint32 input[16])
 {
 	static int shifts[4] = {16, 8, 16, 24};
 	int b, index, rshift, lshift;
-	php_uint32 *t0,*t1,SBE,B00,B01,B02,B03,B04,B05,B06,B07,B08,B09,B10,B11,B12,B13,B14,B15;
+	const php_uint32 *t0,*t1;
+	php_uint32 SBE,B00,B01,B02,B03,B04,B05,B06,B07,B08,B09,B10,B11,B12,B13,B14,B15;
 
 	B00 = input[0];
 	B01 = input[1];

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dblib.c,v 1.9.2.1 2005/09/11 05:27:29 wez Exp $ */
+/* $Id: pdo_dblib.c,v 1.9.2.2 2005/11/25 16:01:39 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -38,7 +38,7 @@ function_entry pdo_dblib_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-#if ZEND_EXTENSION_API_NO >= 220050617
+#if ZEND_MODULE_API_NO >= 20050922
 static zend_module_dep pdo_dblib_deps[] = {
 	ZEND_MOD_REQUIRED("pdo")
 	{NULL, NULL, NULL}
@@ -46,7 +46,7 @@ static zend_module_dep pdo_dblib_deps[] = {
 #endif
 
 zend_module_entry pdo_dblib_module_entry = {
-#if ZEND_EXTENSION_API_NO >= 220050617
+#if ZEND_MODULE_API_NO >= 20050922
 	STANDARD_MODULE_HEADER_EX, NULL,
 	pdo_dblib_deps,
 #else

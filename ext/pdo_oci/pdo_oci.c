@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_oci.c,v 1.5.2.1 2005/09/11 05:27:30 wez Exp $ */
+/* $Id: pdo_oci.c,v 1.5.2.2 2005/11/25 16:01:40 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -38,7 +38,7 @@ function_entry pdo_oci_functions[] = {
 
 /* {{{ pdo_oci_module_entry */
 
-#if ZEND_EXTENSION_API_NO >= 220050617
+#if ZEND_MODULE_API_NO >= 20050922
 static zend_module_dep pdo_oci_deps[] = {
 	ZEND_MOD_REQUIRED("pdo")
 	{NULL, NULL, NULL}
@@ -46,7 +46,7 @@ static zend_module_dep pdo_oci_deps[] = {
 #endif
 
 zend_module_entry pdo_oci_module_entry = {
-#if ZEND_EXTENSION_API_NO >= 220050617
+#if ZEND_MODULE_API_NO >= 20050922
 	STANDARD_MODULE_HEADER_EX, NULL,
 	pdo_oci_deps,
 #else

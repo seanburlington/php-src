@@ -1,25 +1,93 @@
-$Id: TODO,v 1.2 2004/05/19 18:04:47 fmk Exp $
+$Id: TODO,v 1.6.2.1 2005/11/25 07:23:55 wez Exp $
 
-In no particular order:
+Roadmap for PDO
 
-Low-level:
+Core, version 1.1:
+==================
 
-- Scanner for :named placeholders and prepare()/execute() emulation (George)
-- $dbh->quote()
-- Exceptions and unified error API
-- Scrollable cursors
-- meta data from driver, such as server version and supported features
-- field meta data from statement handles
-- $dbh->exec() for one-shot SQL
-- LOB support via Streams API
-- persistent handles
-- iterator support
-- "lazy" fetch support
+ - Separate the handle factory call into two phases:
+   - handle creation
+   - connecting
 
-Not-so-low-level:
-- hash key case folding for portabilitiy, ala sqlite.assoc_case, but not using an ini option.
-- fetchAll(), single row, single column fetches etc.
+   This would then allow PDO to call setAttribute()
+   for each driver option specified in the constructor.
+   Right now, the handling of driver attributes is a bit sloppy.
 
-Could be more...
+ - Add:
+   pdo.max_persistent
+   pdo.persistent_timeout
+   pdo.ping_interval
 
-vim:tw=78:et
+   with the same meanings as those options from oci8.
+
+ - BLOB/CLOB.
+   Investigate the various APIs to determine if we can
+   transparently map BLOBs and CLOBs as PDO_PARAM_LOB.
+   If the API needs hints from the client side, we need
+   to introduce a PDO_PARAM_CLOB to differentiate between
+   binary and character data.
+
+ - Character set selection.
+   Generalize/standardize this.
+
+ - meta data.
+   Formalize getColumnMeta().
+   Look at retrieving lists of tables and other objects in the db.
+
+ - tracing/logging/debugging
+   Add ini options:
+
+   pdo.trace_file
+   pdo.enable_tracing
+
+   And corresponding attributes, ATTR_TRACE_FILE, ATTR_TRACING_ENABLE,
+   settable at dbh and stmt levels independently.  If set at the dbh level,
+   the stmt will inherit its value.  If not set explicitly in code, the
+   defaults for the dbh will come from the INI settings.
+   
+   ATTR_TRACE_FILE will accept a string or a stream.
+
+   The INI options are useful for administrative tracing/debugging.
+   Trace mode will output very verbose info. 
+
+
+General DB API Roundup:
+=========
+  Consider how the following can be implemented in PDO:
+  
+  mysqli_change_user(); alters auth credentials on a live connection
+  mysqli_info(); info about rows affected by last query
+  mysqli_master_query(); force query to run on master
+  mysqli_ping(); ping / reconnect
+  mysqli_stat(); one line summary of server status
+
+  oci_password_change()
+
+  Also consider master/slave and/or failover server configuration.
+  
+
+Postgres:
+=========
+
+ - Real large object support.
+ - Someone with more pgsql experience can suggest more features 
+
+Oracle:
+=======
+
+ - Support for array types and collections.
+
+Userspace PDO Driver:
+=====================
+
+ - Will be hard.
+
+PDO Session module:
+===================
+
+ - Is it worth writing in C?
+   Probably not.
+
+
+vim:se et ts=2 sw=2 tw=78:
+

@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.177 2005/11/17 14:40:11 iliaa Exp $ 
+   $Id: sqlite.c,v 1.178 2005/11/25 15:40:14 sniper Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -282,7 +282,7 @@ static zend_module_dep sqlite_deps[] = {
 };
 
 zend_module_entry sqlite_module_entry = {
-#if ZEND_MODULE_API_NO >= 20050608
+#if ZEND_MODULE_API_NO >= 20050922
 	STANDARD_MODULE_HEADER_EX, NULL,
 	sqlite_deps,
 #elif ZEND_MODULE_API_NO >= 20010901
@@ -1126,7 +1126,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.177 2005/11/17 14:40:11 iliaa Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.178 2005/11/25 15:40:14 sniper Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();

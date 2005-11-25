@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_pgsql.c,v 1.9 2005/09/20 00:46:07 iliaa Exp $ */
+/* $Id: pdo_pgsql.c,v 1.10 2005/11/25 15:40:13 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -38,7 +38,7 @@ function_entry pdo_pgsql_functions[] = {
 
 /* {{{ pdo_sqlite_deps
  */
-#if ZEND_EXTENSION_API_NO >= 220050617
+#if ZEND_MODULE_API_NO >= 20050922
 static zend_module_dep pdo_pgsql_deps[] = {
 	ZEND_MOD_REQUIRED("pdo")
 	{NULL, NULL, NULL}
@@ -48,7 +48,7 @@ static zend_module_dep pdo_pgsql_deps[] = {
 
 /* {{{ pdo_pgsql_module_entry */
 zend_module_entry pdo_pgsql_module_entry = {
-#if ZEND_EXTENSION_API_NO >= 220050617
+#if ZEND_MODULE_API_NO >= 20050922
 	STANDARD_MODULE_HEADER_EX, NULL,
 	pdo_pgsql_deps,
 #else

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,14 +16,15 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_pgsql_int.h,v 1.3 2004/05/20 18:00:24 iliaa Exp $ */
+/* $Id: php_pdo_pgsql_int.h,v 1.13.2.1 2005/11/25 03:35:04 wez Exp $ */
 
 #ifndef PHP_PDO_PGSQL_INT_H
 #define PHP_PDO_PGSQL_INT_H
 
-#if HAVE_PDO_PGSQL 
-
 #include <libpq-fe.h>
+#include <php.h>
+
+#define PHP_PDO_PGSQL_CONNECTION_FAILURE_SQLSTATE "08006"
 
 typedef struct {
 	const char *file;
@@ -42,7 +43,10 @@ typedef struct {
 } pdo_pgsql_db_handle;
 
 typedef struct {
-	char		*def;
+	char         *def;
+	Oid          pgsql_type;
+	long         intval;
+	zend_bool    boolval;
 } pdo_pgsql_column;
 
 typedef struct {
@@ -50,6 +54,15 @@ typedef struct {
 	PGresult                *result;
 	int                     current_row;
 	pdo_pgsql_column        *cols;
+	char *cursor_name;
+#if HAVE_PQPREPARE
+	char *stmt_name;
+	char *query;
+	char **param_values;
+	int *param_lengths;
+	int *param_formats;
+	Oid *param_types;
+#endif
 } pdo_pgsql_stmt;
 
 typedef struct {
@@ -61,13 +74,22 @@ typedef struct {
 
 extern pdo_driver_t pdo_pgsql_driver;
 
-extern int _pdo_pgsql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, int errcode, const char *file, int line TSRMLS_DC);
-#define pdo_pgsql_error(d,e)	_pdo_pgsql_error(d, NULL, e, __FILE__, __LINE__ TSRMLS_CC)
-#define pdo_pgsql_error_stmt(s,e)	_pdo_pgsql_error(s->dbh, s, e, __FILE__, __LINE__ TSRMLS_CC)
+extern int _pdo_pgsql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, int errcode, const char *sqlstate, const char *file, int line TSRMLS_DC);
+#define pdo_pgsql_error(d,e,z)	_pdo_pgsql_error(d, NULL, e, z, __FILE__, __LINE__ TSRMLS_CC)
+#define pdo_pgsql_error_stmt(s,e,z)	_pdo_pgsql_error(s->dbh, s, e, z, __FILE__, __LINE__ TSRMLS_CC)
 
 extern struct pdo_stmt_methods pgsql_stmt_methods;
 
-#endif /* HAVE_PDO_PGSQL */
+#ifdef HAVE_PQRESULTERRORFIELD
+#define pdo_pgsql_sqlstate(r) PQresultErrorField(r, PG_DIAG_SQLSTATE)
+#else
+#define pdo_pgsql_sqlstate(r) (const char *)NULL
+#endif
+
+enum {
+	PDO_PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT = PDO_ATTR_DRIVER_SPECIFIC,
+};
+
 #endif /* PHP_PDO_PGSQL_INT_H */
 
 /*

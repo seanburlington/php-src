@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.17 2004/05/26 17:45:03 edink Exp $ */
+/* $Id: pgsql_driver.c,v 1.53.2.1 2005/11/25 03:35:04 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,11 +31,31 @@
 #include "pg_config.h" /* needed for PG_VERSION */
 #include "php_pdo_pgsql.h"
 #include "php_pdo_pgsql_int.h"
+#include "zend_exceptions.h"
 
-int _pdo_pgsql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, int errcode, const char *file, int line TSRMLS_DC) /* {{{ */
+static char * _pdo_pgsql_trim_message(const char *message, int persistent)
+{
+	register int i = strlen(message)-1;
+	char *tmp;
+
+	if (i>1 && (message[i-1] == '\r' || message[i-1] == '\n') && message[i] == '.') {
+		--i;
+	}
+	while (i>0 && (message[i] == '\r' || message[i] == '\n')) {
+		--i;
+	}
+	++i;
+	tmp = pemalloc(i + 1, persistent);
+	memcpy(tmp, message, i);
+	tmp[i] = '\0';
+	
+	return tmp;
+}
+
+int _pdo_pgsql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, int errcode, const char *sqlstate, const char *file, int line TSRMLS_DC) /* {{{ */
 {
 	pdo_pgsql_db_handle *H = (pdo_pgsql_db_handle *)dbh->driver_data;
-	enum pdo_error_type *pdo_err = stmt ? &stmt->error_code : &dbh->error_code;
+	pdo_error_type *pdo_err = stmt ? &stmt->error_code : &dbh->error_code;
 	pdo_pgsql_error_info *einfo = &H->einfo;
 	char *errmsg = PQerrorMessage(H->server);
 
@@ -44,25 +64,33 @@ int _pdo_pgsql_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, int errcode, const char *
 	einfo->line = line;
 
 	if (einfo->errmsg) {
-		efree(einfo->errmsg);
+		pefree(einfo->errmsg, dbh->is_persistent);
 		einfo->errmsg = NULL;
 	}
 
-	switch (errcode) {
-		case PGRES_EMPTY_QUERY:
-			*pdo_err = PDO_ERR_SYNTAX;
-			break;
-
-		default:
-			*pdo_err = PDO_ERR_CANT_MAP;
-			break;
+	if (sqlstate == NULL) {
+		strcpy(*pdo_err, "HY000");
+	}
+	else {
+		strcpy(*pdo_err, sqlstate);
 	}
 
 	if (errmsg) {
-		einfo->errmsg = estrdup(errmsg);
+		einfo->errmsg = _pdo_pgsql_trim_message(errmsg, dbh->is_persistent);
 	}
 
+	if (!dbh->methods) {
+		zend_throw_exception_ex(php_pdo_get_exception(), 0 TSRMLS_CC, "SQLSTATE[%s] [%d] %s",
+				*pdo_err, einfo->errcode, einfo->errmsg);
+	}
+	
 	return errcode;
+}
+/* }}} */
+
+static void _pdo_pgsql_notice(pdo_dbh_t *dbh, const char *message) /* {{{ */
+{
+/*	pdo_pgsql_db_handle *H = (pdo_pgsql_db_handle *)dbh->driver_data; */
 }
 /* }}} */
 
@@ -89,25 +117,72 @@ static int pgsql_handle_closer(pdo_dbh_t *dbh TSRMLS_DC) /* {{{ */
 			H->server = NULL;
 		}
 		if (H->einfo.errmsg) {
-			efree(H->einfo.errmsg);
+			pefree(H->einfo.errmsg, dbh->is_persistent);
 			H->einfo.errmsg = NULL;
 		}
 		pefree(H, dbh->is_persistent);
-		H = NULL;
+		dbh->driver_data = NULL;
 	}
 	return 0;
 }
 /* }}} */
 
-static int pgsql_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pdo_stmt_t *stmt, long options, zval *driver_options TSRMLS_DC)
+static int pgsql_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, pdo_stmt_t *stmt, zval *driver_options TSRMLS_DC)
 {
 	pdo_pgsql_db_handle *H = (pdo_pgsql_db_handle *)dbh->driver_data;
 	pdo_pgsql_stmt *S = ecalloc(1, sizeof(pdo_pgsql_stmt));
+	int scrollable;
+#if HAVE_PQPREPARE
+	PGresult *res;
+	int ret;
+	char *nsql = NULL;
+	int nsql_len = 0;
+	ExecStatusType status;
+#endif
 
 	S->H = H;
 	stmt->driver_data = S;
 	stmt->methods = &pgsql_stmt_methods;
+
+	scrollable = pdo_attr_lval(driver_options, PDO_ATTR_CURSOR,
+		PDO_CURSOR_FWDONLY TSRMLS_CC) == PDO_CURSOR_SCROLL;
+
+	if (scrollable) {
+		/* TODO: check how scrollable cursors related to prepared statements */
+		spprintf(&S->cursor_name, 0, "pdo_pgsql_cursor_%08x", (unsigned int) stmt);
+	}
+
+#if HAVE_PQPREPARE
+	if ((!driver_options || pdo_attr_lval(driver_options,
+			PDO_PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT, 0 TSRMLS_CC) == 0)
+			&& PQprotocolVersion(H->server) > 2) {
+		stmt->supports_placeholders = PDO_PLACEHOLDER_NAMED;
+		stmt->named_rewrite_template = "$%d";
+		ret = pdo_parse_params(stmt, (char*)sql, sql_len, &nsql, &nsql_len TSRMLS_CC);
+
+		if (ret == 1) {
+			/* query was re-written */
+			sql = nsql;
+		} else if (ret == -1) {
+			/* couldn't grok it */
+			strcpy(dbh->error_code, stmt->error_code);
+			return 0;
+		}
+
+		spprintf(&S->stmt_name, 0, "pdo_pgsql_stmt_%08x", (unsigned int)stmt);
+		/* that's all for now; we'll defer the actual prepare until the first execute call */
 	
+		if (nsql) {
+			S->query = nsql;
+		} else {
+			S->query = estrdup(sql);
+		}
+
+		return 1;
+	}
+#endif
+
+	stmt->supports_placeholders = PDO_PLACEHOLDER_NONE;
 	return 1;
 }
 
@@ -118,14 +193,14 @@ static long pgsql_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRM
 	
 	if (!(res = PQexec(H->server, sql))) {
 		/* fatal error */
-		pdo_pgsql_error(dbh, PGRES_FATAL_ERROR);
-		return 0;
+		pdo_pgsql_error(dbh, PGRES_FATAL_ERROR, NULL);
+		return -1;
 	} else {
 		ExecStatusType qs = PQresultStatus(res);
 		if (qs != PGRES_COMMAND_OK && qs != PGRES_TUPLES_OK) {
-			pdo_pgsql_error(dbh, qs);
+			pdo_pgsql_error(dbh, qs, pdo_pgsql_sqlstate(res));
 			PQclear(res);
-			return 0;
+			return -1;
 		}
 		H->pgoid = PQoidValue(res);
 		PQclear(res);
@@ -134,32 +209,75 @@ static long pgsql_handle_doer(pdo_dbh_t *dbh, const char *sql, long sql_len TSRM
 	return 1;
 }
 
-static int pgsql_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen  TSRMLS_DC)
+static int pgsql_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen, enum pdo_param_type paramtype TSRMLS_DC)
 {
 	unsigned char *escaped;
-
-	/* escapedlen returned by PQescapeBytea() accounts for trailing 0 */
-	escaped = PQescapeBytea(unquoted, unquotedlen, quotedlen);
-	*quotedlen += 1;
-	*quoted = emalloc(*quotedlen + 1);
-	memcpy((*quoted)+1, escaped, *quotedlen-2);
-	(*quoted)[0] = '\'';
-	(*quoted)[*quotedlen-1] = '\'';
-	(*quoted)[*quotedlen] = '\0';
-	free(escaped);
-
+	
+	switch (paramtype) {
+		case PDO_PARAM_LOB:
+			/* escapedlen returned by PQescapeBytea() accounts for trailing 0 */
+			escaped = PQescapeBytea(unquoted, unquotedlen, quotedlen);
+			*quotedlen += 1;
+			*quoted = emalloc(*quotedlen + 1);
+			memcpy((*quoted)+1, escaped, *quotedlen-2);
+			(*quoted)[0] = '\'';
+			(*quoted)[*quotedlen-1] = '\'';
+			(*quoted)[*quotedlen] = '\0';
+			free(escaped);
+			break;
+		default:
+			*quoted = emalloc(2*unquotedlen + 3);
+			(*quoted)[0] = '\'';
+			*quotedlen = PQescapeString(*quoted + 1, unquoted, unquotedlen);
+			(*quoted)[*quotedlen + 1] = '\'';
+			(*quoted)[*quotedlen + 2] = '\0';
+			*quotedlen += 2;
+	}
 	return 1;
 }
 
-static long pdo_pgsql_last_insert_id(pdo_dbh_t *dbh TSRMLS_DC)
+static char *pdo_pgsql_last_insert_id(pdo_dbh_t *dbh, const char *name, unsigned int *len TSRMLS_DC)
 {
 	pdo_pgsql_db_handle *H = (pdo_pgsql_db_handle *)dbh->driver_data;
-	
-	if (H->pgoid == InvalidOid) {
-		return -1;
-	}
+	char *id = NULL;
 
-	return (long) H->pgoid;
+	if (name == NULL) {
+		if (H->pgoid == InvalidOid) {
+			return NULL;
+		}
+		*len = spprintf(&id, 0, "%ld", (long) H->pgoid);
+	} else {
+		PGresult *res;
+		ExecStatusType status;
+#ifdef HAVE_PQEXECPARAMS
+		const char *q[1];
+		q[0] = name;
+		res = PQexecParams(H->server, "SELECT CURRVAL($1)", 1, NULL, q, NULL, NULL, 0);
+#else
+		char *name_escaped, *q;
+		size_t l = strlen(name);
+        
+		name_escaped = safe_emalloc(l, 2, 1);
+		PQescapeString(name_escaped, name, l);
+		spprintf(&q, 0, "SELECT CURRVAL('%s')", name_escaped);
+		res = PQexec(H->server, q);
+		efree(name_escaped); 
+		efree(q);
+#endif
+		status = PQresultStatus(res);
+
+		if (res && (status == PGRES_TUPLES_OK)) {
+			id = estrdup((char *)PQgetvalue(res, 0, 0));
+			*len = PQgetlength(res, 0, 0);
+		} else {
+			pdo_pgsql_error(dbh, status, pdo_pgsql_sqlstate(res));
+		}
+
+		if (res) {
+			PQclear(res);
+		}
+	}
+	return id;
 }
 
 static int pdo_pgsql_get_attribute(pdo_dbh_t *dbh, long attr, zval *return_value TSRMLS_DC)
@@ -287,16 +405,19 @@ static struct pdo_dbh_methods pgsql_methods = {
 	pgsql_handle_begin,
 	pgsql_handle_commit,
 	pgsql_handle_rollback,
-	NULL,
+	NULL, /* set_attr */
 	pdo_pgsql_last_insert_id,
 	pdo_pgsql_fetch_error_func,
-	pdo_pgsql_get_attribute
+	pdo_pgsql_get_attribute,
+	NULL,	/* check_liveness */
+	NULL  /* get_driver_methods */
 };
 
 static int pdo_pgsql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_DC) /* {{{ */
 {
 	pdo_pgsql_db_handle *H;
 	int ret = 0;
+	char *conn_str, *p, *e;
 
 	H = pecalloc(1, sizeof(pdo_pgsql_db_handle), dbh->is_persistent);
 	dbh->driver_data = H;
@@ -304,24 +425,50 @@ static int pdo_pgsql_handle_factory(pdo_dbh_t *dbh, zval *driver_options TSRMLS_
 	H->einfo.errcode = 0;
 	H->einfo.errmsg = NULL;
 	
-	H->server = PQconnectdb(dbh->data_source); 
+	/* PostgreSQL wants params in the connect string to be separated by spaces,
+	 * if the PDO standard semicolons are used, we convert them to spaces
+	 */
+	e = (char *) dbh->data_source + strlen(dbh->data_source);
+	p = (char *) dbh->data_source;
+	while ((p = memchr(p, ';', (e - p)))) {
+		*p = ' ';
+	}
+
+	/* support both full connection string & connection string + login and/or password */
+	if (!dbh->username || !dbh->password) {
+		conn_str = (char *) dbh->data_source;
+	} else if (dbh->username && dbh->password) {
+		spprintf(&conn_str, 0, "%s user=%s password=%s", dbh->data_source, dbh->username, dbh->password);
+	} else if (dbh->username) {
+		spprintf(&conn_str, 0, "%s user=%s", dbh->data_source, dbh->username);
+	} else {
+		spprintf(&conn_str, 0, "%s password=%s", dbh->data_source, dbh->password);
+	}
+
+	H->server = PQconnectdb(conn_str);
+	
+	if (conn_str != dbh->data_source) {
+		efree(conn_str);
+	}
 	
 	if (PQstatus(H->server) != CONNECTION_OK) {
-		pdo_pgsql_error(dbh, PGRES_FATAL_ERROR);
+		pdo_pgsql_error(dbh, PGRES_FATAL_ERROR, PHP_PDO_PGSQL_CONNECTION_FAILURE_SQLSTATE);
 		goto cleanup;
 	}
+
+	PQsetNoticeProcessor(H->server, (void(*)(void*,const char*))_pdo_pgsql_notice, (void *)&dbh);
 
 	H->attached = 1;
 	H->pgoid = -1;
 
 	dbh->methods = &pgsql_methods;
 	dbh->alloc_own_columns = 1;
-	dbh->supports_placeholders = PDO_PLACEHOLDER_NONE;
 	dbh->max_escaped_char_length = 2;
 
 	ret = 1;
 	
 cleanup:
+	dbh->methods = &pgsql_methods;
 	if (!ret) {
 		pgsql_handle_closer(dbh TSRMLS_CC);
 	}

@@ -16,25 +16,10 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_tiger.h,v 1.2 2005/11/24 14:28:33 mike Exp $ */
+/* $Id: php_hash_tiger.h,v 1.3 2005/11/26 13:15:06 mike Exp $ */
 
 #ifndef PHP_HASH_TIGER_H
 #define PHP_HASH_TIGER_H
-
-#include "ext/standard/basic_functions.h"
-
-#if defined(SIZEOF_LONG) && (SIZEOF_LONG >= 8)
-#	define L64(n)	(n##L)
-typedef unsigned long php_hash_uint64;
-#else
-#	ifdef PHP_WIN32
-#		define L64(n)	(n##i64)
-typedef unsigned __int64 php_hash_uint64;
-#	else
-#		define L64(n)	(n##LL)
-typedef unsigned long long php_hash_uint64;
-#	endif
-#endif
 
 /* TIGER context */
 typedef struct {

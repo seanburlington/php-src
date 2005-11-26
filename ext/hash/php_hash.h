@@ -16,12 +16,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash.h,v 1.11 2005/11/26 00:08:06 mike Exp $ */
+/* $Id: php_hash.h,v 1.12 2005/11/26 13:15:06 mike Exp $ */
 
 #ifndef PHP_HASH_H
 #define PHP_HASH_H
 
 #include "php.h"
+#include "php_hash_types.h"
 
 #define PHP_HASH_EXTNAME	"hash"
 #define PHP_HASH_EXTVER		"0.1"

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_snefru.h,v 1.1 2005/11/25 11:54:49 mike Exp $ */
+/* $Id: php_hash_snefru.h,v 1.2 2005/11/26 13:15:06 mike Exp $ */
 
 #ifndef PHP_HASH_SNEFRU_H
 #define PHP_HASH_SNEFRU_H
@@ -29,8 +29,8 @@
 
 /* SNEFRU context */
 typedef struct {
-	php_uint32 state[16];
-	php_uint32 count[2];
+	php_hash_uint32 state[16];
+	php_hash_uint32 count[2];
 	unsigned char length;
 	unsigned char buffer[32];
 } PHP_SNEFRU_CTX;

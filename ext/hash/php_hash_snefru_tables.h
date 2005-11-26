@@ -16,9 +16,9 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_snefru_tables.h,v 1.2 2005/11/25 16:12:30 mike Exp $ */
+/* $Id: php_hash_snefru_tables.h,v 1.3 2005/11/26 13:15:06 mike Exp $ */
 
-static const php_uint32 tables[16][256]= {
+static const php_hash_uint32 tables[16][256]= {
 
  {  /* Start of S Box 0  */
 

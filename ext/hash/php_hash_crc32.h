@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_crc32.h,v 1.2 2005/11/26 00:15:03 mike Exp $ */
+/* $Id: php_hash_crc32.h,v 1.3 2005/11/26 13:15:06 mike Exp $ */
 
 #ifndef PHP_HASH_CRC32_H
 #define PHP_HASH_CRC32_H
@@ -24,7 +24,7 @@
 #include "ext/standard/basic_functions.h"
 
 typedef struct {
-	php_uint32 state;
+	php_hash_uint32 state;
 } PHP_CRC32_CTX;
 
 PHP_HASH_API void PHP_CRC32Init(PHP_CRC32_CTX *context);

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_tiger.c,v 1.3 2005/11/24 14:28:33 mike Exp $ */
+/* $Id: hash_tiger.c,v 1.4 2005/11/26 13:15:06 mike Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_tiger.h"
@@ -32,13 +32,13 @@
 #define round(a,b,c,x,mul) \
 	c ^= x; \
 	a -= t1[(unsigned char)(c)] ^ \
-		t2[(unsigned char)(((php_uint32)(c))>>(2*8))] ^ \
+		t2[(unsigned char)(((php_hash_uint32)(c))>>(2*8))] ^ \
 		t3[(unsigned char)((c)>>(4*8))] ^ \
-		t4[(unsigned char)(((php_uint32)((c)>>(4*8)))>>(2*8))] ; \
-	b += t4[(unsigned char)(((php_uint32)(c))>>(1*8))] ^ \
-		t3[(unsigned char)(((php_uint32)(c))>>(3*8))] ^ \
-		t2[(unsigned char)(((php_uint32)((c)>>(4*8)))>>(1*8))] ^ \
-		t1[(unsigned char)(((php_uint32)((c)>>(4*8)))>>(3*8))]; \
+		t4[(unsigned char)(((php_hash_uint32)((c)>>(4*8)))>>(2*8))] ; \
+	b += t4[(unsigned char)(((php_hash_uint32)(c))>>(1*8))] ^ \
+		t3[(unsigned char)(((php_hash_uint32)(c))>>(3*8))] ^ \
+		t2[(unsigned char)(((php_hash_uint32)((c)>>(4*8)))>>(1*8))] ^ \
+		t1[(unsigned char)(((php_hash_uint32)((c)>>(4*8)))>>(3*8))]; \
 	b *= mul;
 
 #define pass(a,b,c,mul) \

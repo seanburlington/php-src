@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_md.h,v 1.1 2005/11/18 19:51:09 pollita Exp $ */
+/* $Id: php_hash_md.h,v 1.2 2005/11/26 13:15:06 mike Exp $ */
 
 #ifndef PHP_HASH_MD_H
 #define PHP_HASH_MD_H
@@ -61,8 +61,8 @@
 #include "ext/standard/basic_functions.h"
 /* MD5 context. */
 typedef struct {
-	php_uint32 state[4];				/* state (ABCD) */
-	php_uint32 count[2];				/* number of bits, modulo 2^64 (lsb first) */
+	php_hash_uint32 state[4];				/* state (ABCD) */
+	php_hash_uint32 count[2];				/* number of bits, modulo 2^64 (lsb first) */
 	unsigned char buffer[64];	/* input buffer */
 } PHP_MD5_CTX;
 

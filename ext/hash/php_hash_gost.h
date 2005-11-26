@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_gost.h,v 1.1 2005/11/25 16:12:30 mike Exp $ */
+/* $Id: php_hash_gost.h,v 1.2 2005/11/26 13:15:06 mike Exp $ */
 
 #ifndef PHP_HASH_GOST_H
 #define PHP_HASH_GOST_H
@@ -25,8 +25,8 @@
 
 /* GOST context */
 typedef struct {
-	php_uint32 state[16];
-	php_uint32 count[2];
+	php_hash_uint32 state[16];
+	php_hash_uint32 count[2];
 	unsigned char length;
 	unsigned char buffer[32];
 } PHP_GOST_CTX;

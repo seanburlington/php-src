@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_salsa.h,v 1.3 2005/11/25 11:54:49 mike Exp $ */
+/* $Id: php_hash_salsa.h,v 1.4 2005/11/26 13:15:06 mike Exp $ */
 
 #ifndef PHP_HASH_SALSA_H
 #define PHP_HASH_SALSA_H
@@ -25,11 +25,11 @@
 
 /* SALSA context */
 typedef struct {
-	php_uint32 state[16];
+	php_hash_uint32 state[16];
 	unsigned char init:1;
 	unsigned char length:7;
 	unsigned char buffer[64];
-	void (*Transform)(php_uint32 state[16], php_uint32 data[16]);
+	void (*Transform)(php_hash_uint32 state[16], php_hash_uint32 data[16]);
 } PHP_SALSA_CTX;
 
 #define PHP_SALSAInit PHP_SALSA20Init

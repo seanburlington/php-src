@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.20 2005/11/25 03:23:17 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.21 2005/11/26 21:20:52 wez Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -306,10 +306,6 @@ static int really_register_bound_param(struct pdo_bound_param_data *param, pdo_s
 		}
 	}
 
-	if (is_param && !rewrite_name_to_position(stmt, param TSRMLS_CC)) {
-		return 0;
-	}
-
 	if (param->name) {
 		if (is_param && param->name[0] != ':') {
 			char *temp = emalloc(++param->namelen + 1);
@@ -319,6 +315,14 @@ static int really_register_bound_param(struct pdo_bound_param_data *param, pdo_s
 		} else {
 			param->name = estrndup(param->name, param->namelen);
 		}
+	}
+
+	if (is_param && !rewrite_name_to_position(stmt, param TSRMLS_CC)) {
+		if (param->name) {
+			efree(param->name);
+			param->name = NULL;
+		}
+		return 0;
 	}
 	
 	/* tell the driver we just created a parameter */

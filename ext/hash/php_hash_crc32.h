@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_crc32.h,v 1.1 2005/11/26 00:08:06 mike Exp $ */
+/* $Id: php_hash_crc32.h,v 1.2 2005/11/26 00:15:03 mike Exp $ */
 
 #ifndef PHP_HASH_CRC32_H
 #define PHP_HASH_CRC32_H
@@ -27,10 +27,10 @@ typedef struct {
 	php_uint32 state;
 } PHP_CRC32_CTX;
 
-PHP_HASH_API PHP_CRC32Init(PHP_CRC32_CTX *context);
-PHP_HASH_API PHP_CRC32Update(PHP_CRC32_CTX *context, const unsigned char *input, size_t len);
-PHP_HASH_API PHP_CRC32BUpdate(PHP_CRC32_CTX *context, const unsigned char *input, size_t len);
-PHP_HASH_API PHP_CRC32Final(unsigned char digest[4], PHP_CRC32_CTX *context);
+PHP_HASH_API void PHP_CRC32Init(PHP_CRC32_CTX *context);
+PHP_HASH_API void PHP_CRC32Update(PHP_CRC32_CTX *context, const unsigned char *input, size_t len);
+PHP_HASH_API void PHP_CRC32BUpdate(PHP_CRC32_CTX *context, const unsigned char *input, size_t len);
+PHP_HASH_API void PHP_CRC32Final(unsigned char digest[4], PHP_CRC32_CTX *context);
 
 #endif
 

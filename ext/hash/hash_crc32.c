@@ -17,18 +17,18 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_crc32.c,v 1.1 2005/11/26 00:08:06 mike Exp $ */
+/* $Id: hash_crc32.c,v 1.2 2005/11/26 00:15:03 mike Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_crc32.h"
 #include "php_hash_crc32_tables.h"
 
-PHP_HASH_API PHP_CRC32Init(PHP_CRC32_CTX *context)
+PHP_HASH_API void PHP_CRC32Init(PHP_CRC32_CTX *context)
 {
 	context->state = ~0;
 }
 
-PHP_HASH_API PHP_CRC32Update(PHP_CRC32_CTX *context, const unsigned char *input, size_t len)
+PHP_HASH_API void PHP_CRC32Update(PHP_CRC32_CTX *context, const unsigned char *input, size_t len)
 {
 	size_t i;
 	
@@ -37,7 +37,7 @@ PHP_HASH_API PHP_CRC32Update(PHP_CRC32_CTX *context, const unsigned char *input,
 	}
 }
 
-PHP_HASH_API PHP_CRC32BUpdate(PHP_CRC32_CTX *context, const unsigned char *input, size_t len)
+PHP_HASH_API void PHP_CRC32BUpdate(PHP_CRC32_CTX *context, const unsigned char *input, size_t len)
 {
 	size_t i;
 	
@@ -46,7 +46,7 @@ PHP_HASH_API PHP_CRC32BUpdate(PHP_CRC32_CTX *context, const unsigned char *input
 	}
 }
 
-PHP_HASH_API PHP_CRC32Final(unsigned char digest[4], PHP_CRC32_CTX *context)
+PHP_HASH_API void PHP_CRC32Final(unsigned char digest[4], PHP_CRC32_CTX *context)
 {
 	context->state=~context->state;
 	digest[3] = (unsigned char) ((context->state >> 24) & 0xff);

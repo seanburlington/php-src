@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash_sha.c,v 1.9 2005/11/26 13:15:06 mike Exp $ */
+/* $Id: hash_sha.c,v 1.10 2005/11/26 14:17:09 mike Exp $ */
 
 #include "php_hash.h"
 #include "php_hash_sha.h"
@@ -553,14 +553,14 @@ PHP_HASH_API void PHP_SHA256Final(unsigned char digest[32], PHP_SHA256_CTX * con
 	unsigned int index, padLen;
 
 	/* Save number of bits */
-	bits[7] = context->count[0] & 0xFF;
-	bits[6] = (context->count[0] >> 8) & 0xFF;
-	bits[5] = (context->count[0] >> 16) & 0xFF;
-	bits[4] = (context->count[0] >> 24) & 0xFF;
-	bits[3] = context->count[1] & 0xFF;
-	bits[2] = (context->count[1] >> 8) & 0xFF;
-	bits[1] = (context->count[1] >> 16) & 0xFF;
-	bits[0] = (context->count[1] >> 24) & 0xFF;
+	bits[7] = (unsigned char) (context->count[0] & 0xFF);
+	bits[6] = (unsigned char) ((context->count[0] >> 8) & 0xFF);
+	bits[5] = (unsigned char) ((context->count[0] >> 16) & 0xFF);
+	bits[4] = (unsigned char) ((context->count[0] >> 24) & 0xFF);
+	bits[3] = (unsigned char) (context->count[1] & 0xFF);
+	bits[2] = (unsigned char) ((context->count[1] >> 8) & 0xFF);
+	bits[1] = (unsigned char) ((context->count[1] >> 16) & 0xFF);
+	bits[0] = (unsigned char) ((context->count[1] >> 24) & 0xFF);
 	
 	/* Pad out to 56 mod 64.
 	 */

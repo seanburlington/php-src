@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.15 2005/09/24 23:22:43 sniper Exp $
+dnl $Id: config.m4,v 1.16 2005/11/27 18:35:35 tony2001 Exp $
 
 if test "$PHP_PDO" != "no"; then
 
@@ -35,7 +35,7 @@ PHP_ARG_WITH(pdo-oci, Oracle OCI support for PDO,
 
 if test "$PHP_PDO_OCI" != "no"; then
   AC_MSG_CHECKING([Oracle Install-Dir])
-  if test "$PHP_PDO_OCI" = "yes" -o -z "$PHP_PDO_OCI"; then
+  if test "$PHP_PDO_OCI" = "yes" || test -z "$PHP_PDO_OCI"; then
     PDO_OCI_DIR=$ORACLE_HOME
   else
     PDO_OCI_DIR=$PHP_PDO_OCI

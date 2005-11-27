@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_handlers.c,v 1.22 2004/05/04 15:03:48 wez Exp $ */
+/* $Id: com_handlers.c,v 1.30.2.1 2005/11/27 12:19:04 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -49,7 +49,7 @@ static zval *com_property_read(zval *object, zval *member, int type TSRMLS_DC)
 		convert_to_string_ex(&member);
 
 		res = php_com_do_invoke(obj, Z_STRVAL_P(member), Z_STRLEN_P(member),
-				DISPATCH_PROPERTYGET, &v, 0, NULL TSRMLS_CC);
+				DISPATCH_METHOD|DISPATCH_PROPERTYGET, &v, 0, NULL TSRMLS_CC);
 
 		if (res == SUCCESS) {
 			php_com_zval_from_variant(return_value, &v, obj->code_page TSRMLS_CC);
@@ -84,30 +84,6 @@ static void com_property_write(zval *object, zval *member, zval *value TSRMLS_DC
 	}
 }
 
-static HRESULT com_get_default_binding(php_com_dotnet_object *obj TSRMLS_DC)
-{
-	VARDESC *vardesc;
-	int i;
-
-	if (!obj->typeinfo) {
-		return FAILURE;
-	}
-
-	for (i = 0; !obj->have_default_bind; i++) {
-		if (FAILED(ITypeInfo_GetVarDesc(obj->typeinfo, i, &vardesc))) {
-			return FAILURE;
-		}
-
-		if (vardesc->wVarFlags & VARFLAG_FDEFAULTBIND) {
-			obj->default_bind = (DISPID)vardesc->memid;
-			obj->have_default_bind = 1;
-		}
-
-		ITypeInfo_ReleaseVarDesc(obj->typeinfo, vardesc);
-	}
-	return obj->have_default_bind ? SUCCESS : FAILURE;
-}
-
 static zval *com_read_dimension(zval *object, zval *offset, int type TSRMLS_DC)
 {
 	zval *return_value;
@@ -122,14 +98,9 @@ static zval *com_read_dimension(zval *object, zval *offset, int type TSRMLS_DC)
 	obj = CDNO_FETCH(object);
 
 	if (V_VT(&obj->v) == VT_DISPATCH) {
-		if (!obj->have_default_bind && !com_get_default_binding(obj TSRMLS_CC)) {
-			php_com_throw_exception(E_INVALIDARG, "this COM object has no default property" TSRMLS_CC);
-			return return_value;
-		}
-
 		VariantInit(&v);
 
-		if (SUCCESS == php_com_do_invoke_by_id(obj, obj->default_bind,
+		if (SUCCESS == php_com_do_invoke_by_id(obj, DISPID_VALUE,
 				DISPATCH_METHOD|DISPATCH_PROPERTYGET, &v, 1, &offset TSRMLS_CC)) {
 			php_com_zval_from_variant(return_value, &v, obj->code_page TSRMLS_CC);
 			VariantClear(&v);
@@ -163,17 +134,12 @@ static void com_write_dimension(zval *object, zval *offset, zval *value TSRMLS_D
 	obj = CDNO_FETCH(object);
 
 	if (V_VT(&obj->v) == VT_DISPATCH) {
-		if (!obj->have_default_bind && !com_get_default_binding(obj TSRMLS_CC)) {
-			php_com_throw_exception(E_INVALIDARG, "this COM object has no default property" TSRMLS_CC);
-			return;
-		}
-
 		args[0] = offset;
 		args[1] = value;
 
 		VariantInit(&v);
 
-		if (SUCCESS == php_com_do_invoke_by_id(obj, obj->default_bind,
+		if (SUCCESS == php_com_do_invoke_by_id(obj, DISPID_VALUE,
 				DISPATCH_METHOD|DISPATCH_PROPERTYPUT, &v, 2, args TSRMLS_CC)) {
 			VariantClear(&v);
 		}
@@ -286,15 +252,28 @@ static void function_dtor(void *pDest)
 	}
 }
 
-static union _zend_function *com_method_get(zval *object, char *name, int len TSRMLS_DC)
+static PHP_FUNCTION(com_method_handler)
+{
+	Z_OBJ_HANDLER_P(getThis(), call_method)(
+			((zend_internal_function*)EG(function_state_ptr)->function)->function_name,
+			INTERNAL_FUNCTION_PARAM_PASSTHRU);
+}
+
+static union _zend_function *com_method_get(zval **object_ptr, char *name, int len TSRMLS_DC)
 {
 	zend_internal_function f, *fptr = NULL;
 	php_com_dotnet_object *obj;
 	union _zend_function *func;
+	DISPID dummy;
+	zval *object = *object_ptr;
 
 	obj = CDNO_FETCH(object);
 
 	if (V_VT(&obj->v) != VT_DISPATCH) {
+		return NULL;
+	}
+
+	if (FAILED(php_com_get_id_of_name(obj, name, len, &dummy TSRMLS_CC))) {
 		return NULL;
 	}
 
@@ -306,7 +285,10 @@ static union _zend_function *com_method_get(zval *object, char *name, int len TS
 		f.scope = obj->ce;
 		f.fn_flags = 0;
 		f.function_name = estrndup(name, len);
+		f.handler = PHP_FN(com_method_handler);
 
+		fptr = &f;
+	
 		if (obj->typeinfo) {
 			/* look for byref params */
 			ITypeComp *comp;
@@ -346,6 +328,9 @@ static union _zend_function *com_method_get(zval *object, char *name, int len TS
 						case DESCKIND_TYPECOMP:
 							ITypeComp_Release(bindptr.lptcomp);
 							break;
+
+						case DESCKIND_NONE:
+							break;
 					}
 					if (TI) {
 						ITypeInfo_Release(TI);
@@ -356,21 +341,27 @@ static union _zend_function *com_method_get(zval *object, char *name, int len TS
 			}
 		}
 
-		/* save this method in the cache */
-		if (!obj->method_cache) {
-			ALLOC_HASHTABLE(obj->method_cache);
-			zend_hash_init(obj->method_cache, 2, NULL, function_dtor, 0);
-		}
+		if (fptr) {
+			/* save this method in the cache */
+			if (!obj->method_cache) {
+				ALLOC_HASHTABLE(obj->method_cache);
+				zend_hash_init(obj->method_cache, 2, NULL, function_dtor, 0);
+			}
 
-		zend_hash_update(obj->method_cache, name, len, &f, sizeof(f), (void**)&fptr);
+			zend_hash_update(obj->method_cache, name, len, &f, sizeof(f), (void**)&fptr);
+		}
 	}
 
-	/* duplicate this into a new chunk of emalloc'd memory,
-	 * since the engine will efree it */
-	func = emalloc(sizeof(*fptr));
-	memcpy(func, fptr, sizeof(*fptr));
+	if (fptr) {
+		/* duplicate this into a new chunk of emalloc'd memory,
+		 * since the engine will efree it */
+		func = emalloc(sizeof(*fptr));
+		memcpy(func, fptr, sizeof(*fptr));
 
-	return func;
+		return func;
+	}
+
+	return NULL;
 }
 
 static int com_call_method(char *method, INTERNAL_FUNCTION_PARAMETERS)
@@ -500,23 +491,19 @@ static int com_object_cast(zval *readobj, zval *writeobj, int type, int should_f
 	php_com_dotnet_object *obj;
 	VARIANT v;
 	VARTYPE vt = VT_EMPTY;
-
+	zval free_obj;
+	HRESULT res = S_OK;
+	
 	if (should_free) {
-		zval_dtor(writeobj);
+		free_obj = *writeobj;
 	}
 
-	ZVAL_NULL(writeobj);
-
 	obj = CDNO_FETCH(readobj);
+	ZVAL_NULL(writeobj);
 	VariantInit(&v);
 
 	if (V_VT(&obj->v) == VT_DISPATCH) {
-
-		if (!obj->have_default_bind && !com_get_default_binding(obj TSRMLS_CC)) {
-			return FAILURE;
-		}
-
-		if (FAILURE == php_com_do_invoke_by_id(obj, obj->default_bind,
+		if (FAILURE == php_com_do_invoke_by_id(obj, DISPID_VALUE,
 				DISPATCH_METHOD|DISPATCH_PROPERTYGET, &v, 0, NULL TSRMLS_CC)) {
 			return FAILURE;
 		}
@@ -537,15 +524,29 @@ static int com_object_cast(zval *readobj, zval *writeobj, int type, int should_f
 		case IS_STRING:
 			vt = VT_BSTR;
 			break;
+		default:
+			;
 	}
 
-	if (vt != VT_EMPTY) {
-		VariantChangeType(&v, &v, 0, vt);
+	if (vt != VT_EMPTY && vt != V_VT(&v)) {
+		res = VariantChangeType(&v, &v, 0, vt);
 	}
 
-	php_com_zval_from_variant(writeobj, &v, obj->code_page TSRMLS_CC);
+	if (SUCCEEDED(res)) {
+		php_com_zval_from_variant(writeobj, &v, obj->code_page TSRMLS_CC);
+	}
+
 	VariantClear(&v);
-	return SUCCESS;
+
+	if (should_free) {
+		zval_dtor(&free_obj);
+	}
+
+	if (SUCCEEDED(res)) {
+		return SUCCESS;
+	}
+
+	return FAILURE;
 }
 
 static int com_object_count(zval *object, long *count TSRMLS_DC)
@@ -676,6 +677,7 @@ zend_object_value php_com_object_new(zend_class_entry *ce TSRMLS_DC)
 	VariantInit(&obj->v);
 	obj->code_page = CP_ACP;
 	obj->ce = ce;
+	obj->zo.ce = ce;
 
 	retval.handle = zend_objects_store_put(obj, NULL, php_com_object_free_storage, php_com_object_clone TSRMLS_CC);
 	retval.handlers = &php_com_object_handlers;

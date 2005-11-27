@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.31.2.2 2005/11/10 07:50:59 sniper Exp $ */
+/* $Id: tokenizer.c,v 1.31.2.3 2005/11/27 06:41:31 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -344,6 +344,8 @@ static void tokenize(zval *return_value TSRMLS_DC)
 	while ((token_type = lex_scan(&token TSRMLS_CC))) {
 		destroy = 1;
 		switch (token_type) {
+			case EOF:
+				zendleng--; /* don't count EOF */
 			case T_OPEN_TAG:
 			case T_OPEN_TAG_WITH_ECHO:
 			case T_WHITESPACE:

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.21 2005/11/26 21:20:52 wez Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.22 2005/11/27 21:01:02 tony2001 Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1353,13 +1353,15 @@ static PHP_METHOD(PDOStatement, fetchAll)
 		switch(ZEND_NUM_ARGS()) {
 		case 0:
 		case 1:
+			pdo_raise_impl_error(stmt->dbh, stmt, "HY000", "no fetch function specified" TSRMLS_CC);
+			error = 1;
 			break;
 		case 3:
 		case 2:
 			stmt->fetch.func.function = arg2;
+			do_fetch_func_prepare(stmt TSRMLS_CC);
 			break;
 		}
-		do_fetch_func_prepare(stmt TSRMLS_CC);
 		break;
 	
 	case PDO_FETCH_COLUMN:

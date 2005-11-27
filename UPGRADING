@@ -1,4 +1,4 @@
-$Id: UPGRADING,v 1.1.2.2 2005/11/23 15:01:54 sniper Exp $
+$Id: UPGRADING,v 1.1.2.3 2005/11/27 15:39:09 iliaa Exp $
 
 UPGRADE NOTES - PHP 5.1
 
@@ -403,10 +403,6 @@ rather than in the C format
 PDO_CLASS_CONSTANT
 
 in order to minimise pollution of the global namespace in PHP.
-
-Note that the new Date class exists at this point purely to allow the core date
-extension to adhere to the above convention, although extended functionality
-is planned for the the class in the future.
 
 10. Date/time support
 ====================

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.90 2005/11/18 10:59:51 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.91 2005/11/28 10:09:07 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -1289,6 +1289,40 @@ static void sdl_deserialize_encoder(encodePtr enc, sdlTypePtr *types, char **in)
 	enc->details.sdl_type = types[i];
 	enc->to_xml = sdl_guess_convert_xml;
 	enc->to_zval = sdl_guess_convert_zval;
+
+	if (enc->details.sdl_type == NULL) {
+		int ns_len = strlen(enc->details.ns);
+		int type_len = strlen(enc->details.type_str);
+
+		if (((ns_len == sizeof(SOAP_1_1_ENC_NAMESPACE)-1 &&
+		      memcmp(enc->details.ns, SOAP_1_1_ENC_NAMESPACE, sizeof(SOAP_1_1_ENC_NAMESPACE)-1) == 0) ||
+		     (ns_len == sizeof(SOAP_1_2_ENC_NAMESPACE)-1 &&
+		      memcmp(enc->details.ns, SOAP_1_2_ENC_NAMESPACE, sizeof(SOAP_1_2_ENC_NAMESPACE)-1) == 0))) {
+			char *enc_nscat;
+			int enc_ns_len;
+			int enc_len;
+			encodePtr real_enc;
+
+			enc_ns_len = sizeof(XSD_NAMESPACE)-1;
+			enc_len = enc_ns_len + type_len + 1;
+			enc_nscat = emalloc(enc_len + 1);
+			memcpy(enc_nscat, XSD_NAMESPACE, sizeof(XSD_NAMESPACE)-1);
+			enc_nscat[enc_ns_len] = ':';
+			memcpy(enc_nscat+enc_ns_len+1, enc->details.type_str, type_len);
+			enc_nscat[enc_len] = '\0';
+
+			real_enc = get_encoder_ex(NULL, enc_nscat, enc_len);
+			efree(enc_nscat);
+			if (real_enc) {
+				enc->to_zval = real_enc->to_zval;
+				enc->to_xml = real_enc->to_xml;
+				enc->to_zval_before = real_enc->to_zval_before;
+				enc->to_xml_before = real_enc->to_xml_before;
+				enc->to_zval_after = real_enc->to_zval_after;
+				enc->to_xml_after = real_enc->to_xml_after;
+			}
+		}
+	}	
 }
 
 static void sdl_deserialize_soap_body(sdlSoapBindingFunctionBodyPtr body, encodePtr *encoders, sdlTypePtr *types, char **in)

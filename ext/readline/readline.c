@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.43 2005/08/22 12:22:11 dmitry Exp $ */
+/* $Id: readline.c,v 1.44 2005/11/28 16:49:35 sniper Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -28,6 +28,10 @@
 #include "php_readline.h"
 
 #if HAVE_LIBREADLINE || HAVE_LIBEDIT
+
+#ifndef HAVE_RL_COMPLETION_MATCHES
+#define rl_completion_matches completion_matches
+#endif
 
 #include <readline/readline.h>
 #ifndef HAVE_LIBEDIT
@@ -421,7 +425,7 @@ static char **_readline_completion_cb(const char *text, int start, int end)
 	if (call_user_function(CG(function_table), NULL, _readline_completion, &_readline_array, 3, params TSRMLS_CC) == SUCCESS) {
 		if (Z_TYPE(_readline_array) == IS_ARRAY) {
 			if (zend_hash_num_elements(Z_ARRVAL(_readline_array))) {
-				matches = completion_matches(text,_readline_command_generator);
+				matches = rl_completion_matches(text,_readline_command_generator);
 			} else {
 				matches = malloc(sizeof(char *) * 2);
 				matches[0] = strdup("");

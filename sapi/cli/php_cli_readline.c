@@ -17,11 +17,15 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli_readline.c,v 1.6 2005/11/17 08:36:12 sniper Exp $ */
+/* $Id: php_cli_readline.c,v 1.7 2005/11/28 16:49:35 sniper Exp $ */
 
 #include "php.h"
 
 #if (HAVE_LIBREADLINE || HAVE_LIBEDIT) && !defined(COMPILE_DL_READLINE)
+
+#ifndef HAVE_RL_COMPLETION_MATCHES
+#define rl_completion_matches completion_matches
+#endif
 
 #include "php_globals.h"
 #include "php_variables.h"

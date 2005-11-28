@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.99 2005/08/18 13:33:58 sniper Exp $ */
+/* $Id: openssl.c,v 1.100 2005/11/28 10:28:16 alan_k Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -584,6 +584,7 @@ PHP_MINIT_FUNCTION(openssl)
 	le_x509 = zend_register_list_destructors_ex(php_x509_free, NULL, "OpenSSL X.509", module_number);
 	le_csr = zend_register_list_destructors_ex(php_csr_free, NULL, "OpenSSL X.509 CSR", module_number);
 
+	SSL_library_init();
 	OpenSSL_add_all_ciphers();
 	OpenSSL_add_all_digests();
 	OpenSSL_add_all_algorithms();

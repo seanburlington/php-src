@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.35 2005/11/17 13:15:00 derick Exp $ */
+/* $Id: parse_date.re,v 1.36 2005/11/28 23:26:39 iliaa Exp $ */
 
 #include "timelib.h"
 
@@ -801,7 +801,7 @@ dateshortwithtimelongtz = datenoyear iso8601normtz;
 reltextnumber = 'first'|'next'|'second'|'third'|'fourth'|'fifth'|'sixth'|'seventh'|'eight'|'ninth'|'tenth'|'eleventh'|'twelfth'|'last'|'previous'|'this';
 reltextunit = (('sec'|'second'|'min'|'minute'|'hour'|'day'|'week'|'fortnight'|'forthnight'|'month'|'year') 's'?) | dayfull;
 
-relnumber = ([+-]?[0-9]+);
+relnumber = ([+-]?[ ]*[0-9]+);
 relative = (relnumber space? reltextunit)+;
 relativetext = (reltextnumber space? reltextunit)+;
 

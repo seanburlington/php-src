@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.25.2.2 2005/11/28 16:51:16 sniper Exp $
+dnl $Id: config.m4,v 1.25.2.3 2005/11/28 23:04:01 sniper Exp $
 dnl
 
 PHP_ARG_WITH(libedit,for libedit readline replacement, 
@@ -10,7 +10,7 @@ if test "$PHP_LIBEDIT" = "no"; then
   [  --with-readline[=DIR]   Include readline support (CLI/CGI only)])
 fi
 
-if test "$PHP_READLINE" != "no"; then
+if test "$PHP_READLINE" && test "$PHP_READLINE" != "no"; then
   for i in $PHP_READLINE /usr/local /usr; do
     test -f $i/include/readline/readline.h && READLINE_DIR=$i && break
   done

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.40.2.13 2005/10/17 19:35:39 rasmus Exp $ */
+/* $Id: sapi_apache2.c,v 1.40.2.14 2005/11/29 11:04:11 dmitry Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -450,6 +450,8 @@ static int php_handler(request_rec *r)
 	if (strcmp(r->protocol, "INCLUDED")) { \
 		zend_try { zend_ini_deactivate(TSRMLS_C); } zend_end_try(); \
 	} \
+
+	arp_pool_clenup_run(r->pool, (void*) &SG(server_context), php_server_context_cleanup);
 
 	conf = ap_get_module_config(r->per_dir_config, &php5_module);
 

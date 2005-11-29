@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.7 2005/11/20 18:07:27 sniper Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.8 2005/11/29 20:19:48 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -176,8 +176,6 @@ function_entry basic_functions[] = {
 #if HAVE_STRPTIME
 	PHP_FE(strptime,														NULL)
 #endif
-
-	PHP_FE(idate,															NULL)
 
 	PHP_FE(flush,															NULL)
 	PHP_FE(wordwrap,														NULL)

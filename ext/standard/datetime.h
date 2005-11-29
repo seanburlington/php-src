@@ -17,21 +17,15 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: datetime.h,v 1.24 2005/08/13 12:33:00 wez Exp $ */
+/* $Id: datetime.h,v 1.25 2005/11/29 20:27:20 iliaa Exp $ */
 
 #ifndef DATETIME_H
 #define DATETIME_H
 
-PHP_FUNCTION(time);
-PHP_FUNCTION(idate);
-PHP_FUNCTION(localtime);
-PHP_FUNCTION(getdate);
-PHP_FUNCTION(checkdate);
 #if HAVE_STRPTIME
 PHP_FUNCTION(strptime);
 #endif 
 
-PHPAPI int php_idate(char format, time_t timestamp, int gm);
 PHPAPI char *php_std_date(time_t t TSRMLS_DC);
 
 #endif /* DATETIME_H */

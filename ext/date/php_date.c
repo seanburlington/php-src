@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.43.2.27 2005/11/29 20:43:53 iliaa Exp $ */
+/* $Id: php_date.c,v 1.43.2.28 2005/11/29 23:10:14 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -33,6 +33,7 @@
 function_entry date_functions[] = {
 	PHP_FE(strtotime, NULL)
 	PHP_FE(date, NULL)
+	PHP_FE(idate, NULL)
 	PHP_FE(gmdate, NULL)
 	PHP_FE(mktime, NULL)
 	PHP_FE(gmmktime, NULL)
@@ -686,9 +687,6 @@ PHPAPI int php_idate(char format, time_t ts, int localtime)
 		case 'Z': retval = (int) (!localtime ? offset->offset : 0); break;
 
 		case 'U': retval = (int) t->sse; break;
-		default:
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unrecognized date format token.");
-			break;
 	}
 
 	if (!localtime) {
@@ -723,6 +721,7 @@ PHP_FUNCTION(idate)
 	char   *format;
 	int     format_len;
 	time_t  ts;
+	int ret; 
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &format, &format_len, &ts) == FAILURE) {
 		RETURN_FALSE;
@@ -737,7 +736,12 @@ PHP_FUNCTION(idate)
 		ts = time(NULL);
 	}
 
-	RETURN_LONG(php_idate(format[0], ts, 0));
+	ret = php_idate(format[0], ts, 0);
+	if (ret == -1) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unrecognized date format token.");
+		RETURN_FALSE;
+	}
+	RETURN_LONG(ret);
 }
 /* }}} */
 

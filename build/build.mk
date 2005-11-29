@@ -1,7 +1,7 @@
 #  +----------------------------------------------------------------------+
 #  | PHP Version 5                                                        |
 #  +----------------------------------------------------------------------+
-#  | Copyright (c) 1997-2004 The PHP Group                                |
+#  | Copyright (c) 1997-2005 The PHP Group                                |
 #  +----------------------------------------------------------------------+
 #  | This source file is subject to version 3.0 of the PHP license,       |
 #  | that is bundled with this package in the file LICENSE, and is        |
@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build.mk,v 1.25 2004/03/14 17:44:36 sas Exp $ 
+# $Id: build.mk,v 1.26.2.1 2005/11/29 22:39:19 sniper Exp $ 
 #
 #
 # Makefile to generate build tools
@@ -30,7 +30,7 @@ ALWAYS = generated_lists
 
 
 all: $(STAMP) $(ALWAYS)
-	@$(MAKE) AMFLAGS=$(AMFLAGS) -s -f build/build2.mk
+	@$(MAKE) -s -f build/build2.mk
 
 generated_lists:
 	@echo makefile_am_files = $(ZENDDIR)/Makefile.am \
@@ -55,7 +55,7 @@ snapshot:
 		test -d $$i || (test -d ../$$i && cp -rp ../$$i $$i); \
 	done; \
 	find . -type l -exec rm {} \; ; \
-	$(MAKE) AMFLAGS=--copy -f build/build.mk; \
+	$(MAKE) -f build/build.mk; \
 	cd ..; \
 	tar cf $$distname.tar $$distname; \
 	rm -rf $$distname $$distname.tar.*; \

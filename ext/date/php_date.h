@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_date.h,v 1.24 2005/11/29 20:27:21 iliaa Exp $ */
+/* $Id: php_date.h,v 1.25 2005/11/29 23:10:48 iliaa Exp $ */
 
 #ifndef PHP_DATE_H
 #define PHP_DATE_H
@@ -28,6 +28,7 @@ extern zend_module_entry date_module_entry;
 #define phpext_date_ptr &date_module_entry
 
 PHP_FUNCTION(date);
+PHP_FUNCTION(idate);
 PHP_FUNCTION(gmdate);
 PHP_FUNCTION(strtotime);
 

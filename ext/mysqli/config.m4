@@ -1,19 +1,20 @@
 dnl
-dnl $Id: config.m4,v 1.17 2004/07/07 08:02:27 georg Exp $
+dnl $Id: config.m4,v 1.22.2.1 2005/11/29 17:32:40 sniper Exp $
 dnl config.m4 for extension mysqli
 
 PHP_ARG_WITH(mysqli, for MySQLi support,
 [  --with-mysqli[=FILE]    Include MySQLi support. FILE is the optional pathname 
-                        to mysql_config.])
+                          to mysql_config])
 
 PHP_ARG_ENABLE(embedded_mysqli, whether to enable embedded MySQLi support,
-[  --enable-embedded-mysqli  MYSQLi: Enable embedded support.], no, no)
+[  --enable-embedded-mysqli  MYSQLi: Enable embedded support], no, no)
 
 if test "$PHP_MYSQLI" != "no"; then
 
-  if test "$PHP_MYSQL" = "yes"; then
-    AC_MSG_ERROR([--with-mysql (using bundled libs) can not be used together with --with-mysqli.])
-  fi
+dnl there are no mysql libs currently bundled with PHP.. --Jani
+dnl  if test "$PHP_MYSQL" = "yes"; then
+dnl    AC_MSG_ERROR([--with-mysql (using bundled libs) can not be used together with --with-mysqli.])
+dnl  fi
 
   if test "$PHP_MYSQLI" = "yes"; then
     MYSQL_CONFIG=`$php_shtool path mysql_config`
@@ -29,8 +30,8 @@ if test "$PHP_MYSQLI" != "no"; then
   fi
   
   if test -x "$MYSQL_CONFIG" && $MYSQL_CONFIG $MYSQL_LIB_CFG > /dev/null 2>&1; then
-    MYSQLI_INCLINE=`$MYSQL_CONFIG --cflags | sed -e "s/'//g"`
-    MYSQLI_LIBLINE=`$MYSQL_CONFIG $MYSQL_LIB_CFG | sed -e "s/'//g"`
+    MYSQLI_INCLINE=`$MYSQL_CONFIG --cflags | $SED -e "s/'//g"`
+    MYSQLI_LIBLINE=`$MYSQL_CONFIG $MYSQL_LIB_CFG | $SED -e "s/'//g"`
   else
     AC_MSG_RESULT([mysql_config not found])
     AC_MSG_ERROR([Please reinstall the mysql distribution])
@@ -46,14 +47,14 @@ if test "$PHP_MYSQLI" != "no"; then
     AC_DEFINE(HAVE_MYSQLILIB,1,[ ])
     PHP_CHECK_LIBRARY(mysqlclient, mysql_stmt_field_count,
     [ ],[
-		AC_MSG_ERROR([MySQLI doesn't support versions < 4.1.3 anymore. Please update your libraries.])
-	],[])
+		AC_MSG_ERROR([MySQLI doesn't support versions < 4.1.3 (for MySQL 4.1.x) and < 5.0.1 for (MySQL 5.0.x) anymore. Please update your libraries.])
+	],[$MYSQLI_LIBLINE])
   ],[
     AC_MSG_ERROR([wrong mysql library version or lib not found. Check config.log for more information.])
   ],[
     $MYSQLI_LIBLINE
   ])
 
-  PHP_NEW_EXTENSION(mysqli, mysqli.c mysqli_api.c mysqli_prop.c mysqli_nonapi.c mysqli_fe.c mysqli_report.c mysqli_repl.c, $ext_shared)
+  PHP_NEW_EXTENSION(mysqli, mysqli.c mysqli_api.c mysqli_prop.c mysqli_nonapi.c mysqli_fe.c mysqli_report.c mysqli_repl.c mysqli_driver.c mysqli_warning.c mysqli_exception.c mysqli_embedded.c, $ext_shared)
   PHP_SUBST(MYSQLI_SHARED_LIBADD)
 fi

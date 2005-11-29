@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build.mk,v 1.26 2005/08/03 14:06:37 sniper Exp $ 
+# $Id: build.mk,v 1.27 2005/11/29 22:26:07 sniper Exp $ 
 #
 #
 # Makefile to generate build tools
@@ -30,7 +30,7 @@ ALWAYS = generated_lists
 
 
 all: $(STAMP) $(ALWAYS)
-	@$(MAKE) AMFLAGS=$(AMFLAGS) -s -f build/build2.mk
+	@$(MAKE) -s -f build/build2.mk
 
 generated_lists:
 	@echo makefile_am_files = $(ZENDDIR)/Makefile.am \
@@ -55,7 +55,7 @@ snapshot:
 		test -d $$i || (test -d ../$$i && cp -rp ../$$i $$i); \
 	done; \
 	find . -type l -exec rm {} \; ; \
-	$(MAKE) AMFLAGS=--copy -f build/build.mk; \
+	$(MAKE) -f build/build.mk; \
 	cd ..; \
 	tar cf $$distname.tar $$distname; \
 	rm -rf $$distname $$distname.tar.*; \

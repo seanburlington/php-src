@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id: build2.mk,v 1.37 2005/08/03 14:06:38 sniper Exp $ 
+# $Id: build2.mk,v 1.38 2005/11/29 22:26:07 sniper Exp $ 
 #
 
 include generated_lists
@@ -22,9 +22,6 @@ include generated_lists
 TOUCH_FILES = mkinstalldirs install-sh missing
 
 LT_TARGETS = ltmain.sh config.guess config.sub
-
-makefile_in_files = $(makefile_am_files:.am=.in)
-makefile_files    = $(makefile_am_files:e.am=e)
 
 config_h_in = main/php_config.h.in
 

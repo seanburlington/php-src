@@ -1,12 +1,12 @@
 dnl
-dnl $Id: config.m4,v 1.16 2004/01/17 13:00:15 sniper Exp $
+dnl $Id: config.m4,v 1.17.2.1 2005/11/29 18:26:02 tony2001 Exp $
 dnl
 
 RESULT=no
 AC_MSG_CHECKING(for Roxen/Pike support)
 AC_ARG_WITH(roxen, 
 [  --with-roxen=DIR        Build PHP as a Pike module. DIR is the base Roxen
-                          directory, normally /usr/local/roxen/server.],
+                          directory, normally /usr/local/roxen/server],
 [
 	if test ! -d $withval ; then
 		AC_MSG_ERROR(You did not specify a directory)
@@ -21,7 +21,7 @@ AC_ARG_WITH(roxen,
     if $PIKE -e 'float v; catch(v = __VERSION__ + (__BUILD__/10000.0)); if(v < 0.7079) exit(1); exit(0);'; then
 		PIKE_MODULE_DIR=`$PIKE --show-paths 2>&1| grep '^Module' | sed -e 's/.*: //'`
 	    PIKE_INCLUDE_DIR=`echo $PIKE_MODULE_DIR | sed -e 's,lib/pike/modules,include/pike,' -e 's,lib/modules,include/pike,'`
-		if test -z "$PIKE_INCLUDE_DIR" -o -z "$PIKE_MODULE_DIR"; then
+		if test -z "$PIKE_INCLUDE_DIR" || test -z "$PIKE_MODULE_DIR"; then
 			AC_MSG_ERROR(Failed to figure out Pike module and include directories)
 		fi
 	else
@@ -44,7 +44,7 @@ if test "$RESULT" != "no" ; then
  RESULT=no
  AC_MSG_CHECKING(if Roxen should use ZTS)
  AC_ARG_ENABLE(roxen-zts, 
- [  --enable-roxen-zts      Build the Roxen module using Zend Thread Safety.],
+ [  --enable-roxen-zts      Build the Roxen module using Zend Thread Safety],
  [
  	PHP_BUILD_THREAD_SAFE
 	AC_DEFINE(ROXEN_USE_ZTS,1,[Whether to use Roxen in ZTS mode])

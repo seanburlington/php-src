@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config0.m4,v 1.37 2005/11/16 22:14:24 sniper Exp $
+dnl $Id: config0.m4,v 1.38 2005/11/29 18:38:48 tony2001 Exp $
 dnl
 
 dnl By default we'll compile and link against the bundled PCRE library
@@ -27,7 +27,7 @@ if test "$PHP_PCRE_REGEX" != "no"; then
     fi
 
     for j in $PHP_PCRE_REGEX $PHP_PCRE_REGEX/$PHP_LIBDIR; do
-      test -f $j/libpcre.a -o -f $j/libpcre.$SHLIB_SUFFIX_NAME && PCRE_LIBDIR=$j
+      test -f $j/libpcre.a || test -f $j/libpcre.$SHLIB_SUFFIX_NAME && PCRE_LIBDIR=$j
     done
     
     if test -z "$PCRE_LIBDIR" ; then

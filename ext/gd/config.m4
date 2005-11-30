@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.156 2005/11/30 15:59:07 pajoye Exp $
+dnl $Id: config.m4,v 1.157 2005/11/30 17:33:27 pajoye Exp $
 dnl
 
 dnl
@@ -208,7 +208,7 @@ AC_DEFUN([PHP_GD_CHECK_VERSION],[
     AC_MSG_ERROR("No GD 2.x found")
   fi
 
-  if test 1 -le $GD_VERSION_MINOR; then
+  if test 0 -le $GD_VERSION_MINOR; then
     AC_MSG_ERROR("No GD 2.x found")
   fi
 

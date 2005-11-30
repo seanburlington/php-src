@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.52 2005/10/27 17:25:31 tony2001 Exp $ */
+/* $Id: mysql_statement.c,v 1.53 2005/11/30 11:32:33 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,7 +42,7 @@ static int pdo_mysql_stmt_dtor(pdo_stmt_t *stmt TSRMLS_DC)
 		S->result = NULL;
 	}
 	if (S->einfo.errmsg) {
-		efree(S->einfo.errmsg);
+		pefree(S->einfo.errmsg, stmt->dbh->is_persistent);
 		S->einfo.errmsg = NULL;
 	}
 #if HAVE_MYSQL_STMT_PREPARE

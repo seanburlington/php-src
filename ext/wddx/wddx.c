@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.96.2.6.2.1 2005/08/10 22:39:12 iliaa Exp $ */
+/* $Id: wddx.c,v 1.96.2.6.2.2 2005/11/30 18:12:44 iliaa Exp $ */
 
 #include "php.h"
 #include "php_wddx.h"
@@ -985,11 +985,15 @@ static void php_wddx_pop_element(void *user_data, const XML_Char *name)
 				
 						switch (is_numeric_string(ent1->varname, strlen(ent1->varname), &l, &d, 0)) {
 							case IS_DOUBLE:
+								if (d > INT_MAX) {
+									goto bigint;
+								}
 								l = (long) d;
 							case IS_LONG:
 								zend_hash_index_update(target_hash, l, &ent1->data, sizeof(zval *), NULL);
 								break;
 							default:
+bigint:
 								zend_hash_update(target_hash,ent1->varname, strlen(ent1->varname)+1, &ent1->data, sizeof(zval *), NULL);
 						}
 					}

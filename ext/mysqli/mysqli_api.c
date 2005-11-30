@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.6 2005/11/08 13:50:50 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.7 2005/11/30 11:35:03 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -354,7 +354,9 @@ PHP_FUNCTION(mysqli_stmt_bind_result)
 	if (rc) {
 		efree(bind);
 		efree(args);
-		php_clear_stmt_bind(stmt);
+                /* dont close the statement or subsequent usage (for example ->execute()) will lead to crash */
+                efree(stmt->result.buf);
+                efree(stmt->result.is_null);
 		RETURN_FALSE;
 	}
 

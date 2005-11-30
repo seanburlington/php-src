@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.178 2005/11/29 02:46:19 helly Exp $ */
+/* $Id: simplexml.c,v 1.179 2005/11/30 08:14:48 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -865,7 +865,7 @@ static HashTable * sxe_properties_get(zval *object TSRMLS_DC)
 	if (node && sxe->iter.type != SXE_ITER_ATTRLIST) {
 		if (node->type == XML_ATTRIBUTE_NODE) {
 			MAKE_STD_ZVAL(value);
-			ZVAL_STRING(value, sxe_xmlNodeListGetString(node->doc, node->children, 1), 0);
+			ZVAL_U_STRING(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), value, sxe_xmlNodeListGetString(node->doc, node->children, 1), 0);
 			zend_hash_next_index_insert(rv, &value, sizeof(zval *), NULL);
 			node = NULL;
 		} else {
@@ -878,7 +878,7 @@ static HashTable * sxe_properties_get(zval *object TSRMLS_DC)
 			} else {
 				if (node->type == XML_TEXT_NODE) {
 					MAKE_STD_ZVAL(value);
-					ZVAL_STRING(value, sxe_xmlNodeListGetString(node->doc, node, 1), 0);
+					ZVAL_U_STRING(ZEND_U_CONVERTER(UG(runtime_encoding_conv)), value, sxe_xmlNodeListGetString(node->doc, node, 1), 0);
 					zend_hash_next_index_insert(rv, &value, sizeof(zval *), NULL);
 					goto next_iter;
 				}
@@ -2029,7 +2029,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.178 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.179 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

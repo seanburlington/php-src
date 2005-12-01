@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.3 2005/12/01 13:47:22 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.4 2005/12/01 19:25:48 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1213,7 +1213,7 @@ php_oci_bind *php_oci_bind_array_helper_string(zval* var, long max_table_length,
 			convert_to_string_ex(entry);
 			element_length = (maxlength > Z_STRLEN_PP(entry)) ? Z_STRLEN_PP(entry) : maxlength;
 			
-			memcpy(bind->array.elements + i*maxlength, Z_STRVAL_PP(entry), element_length);
+			memcpy((text *)bind->array.elements + i*maxlength, Z_STRVAL_PP(entry), element_length);
 			((text *)bind->array.elements)[i*maxlength + element_length] = '\0';
 			
 			zend_hash_move_forward(hash);

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.242 2005/12/01 01:26:20 helly Exp $ */
+/* $Id: run-tests.php,v 1.243 2005/12/01 08:49:57 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -521,7 +521,10 @@ if ($just_save_results || !getenv('NO_INTERACTION')) {
 		 * Make an archive of all the failed tests
 		 * Send an email
 		 */
-		
+		if ($just_save_results)
+		{
+			$user_input = 's';
+		}
 		/* Ask the user to provide an email address, so that QA team can contact the user */
 		if (!strncasecmp($user_input, 'y', 1) || strlen(trim($user_input)) == 0) {
 			echo "\nPlease enter your email address.\n(Your address will be mangled so that it will not go out on any\nmailinglist in plain text): ";

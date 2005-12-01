@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.53.2.5 2005/11/30 23:27:15 iliaa Exp $ */
+/* $Id: pgsql_driver.c,v 1.53.2.6 2005/12/01 16:33:01 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -248,7 +248,7 @@ static int pgsql_handle_preparer(pdo_dbh_t *dbh, const char *sql, long sql_len, 
 		/* that's all for now; we'll defer the actual prepare until the first execute call */
 	
 		if (nsql) {
-			S->query = estrdup(nsql);
+			S->query = nsql;
 		} else {
 			S->query = estrdup(sql);
 		}

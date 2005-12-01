@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sanitizing_filters.c,v 1.5 2005/11/15 11:55:28 sniper Exp $ */
+/* $Id: sanitizing_filters.c,v 1.6 2005/12/01 16:24:19 sniper Exp $ */
 
 #include "php_filter.h"
 #include "filter_private.h"
@@ -178,7 +178,12 @@ void php_filter_string(PHP_INPUT_FILTER_PARAM_DECL)
 	/* strip tags, implicitly also removes \0 chars */
 	new_len = php_strip_tags(Z_STRVAL_P(value), Z_STRLEN_P(value), NULL, NULL, 0);
 	Z_STRLEN_P(value) = new_len;
-	
+
+	if (new_len == 0) {
+		Z_TYPE_P(value) = IS_NULL;
+		return;
+	}
+
 	if (! (flags & FILTER_FLAG_NO_ENCODE_QUOTES)) {
 		/* encode ' and " to numerical entity */
 		php_filter_encode_html(value, "'\"", 0);

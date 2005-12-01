@@ -1,16 +1,20 @@
 dnl
-dnl $Id: config.m4,v 1.1 2004/04/19 18:55:02 rrichards Exp $
+dnl $Id: config.m4,v 1.3.2.1 2005/12/01 08:54:22 sniper Exp $
 dnl
 
-PHP_ARG_WITH(xmlreader, for XMLReader support,
-[  --with-xmlreader        Include XMLReader support.])
+PHP_ARG_ENABLE(xmlreader, whether to enable XMLReader support,
+[  --disable-xmlreader     Disable XMLReader support], yes)
 
 if test -z "$PHP_LIBXML_DIR"; then
   PHP_ARG_WITH(libxml-dir, libxml2 install dir,
   [  --with-libxml-dir=DIR     XMLReader: libxml2 install prefix], no, no)
 fi
 
-if test "$PHP_XMLREADER" != "no" && test "$PHP_LIBXML" != "no"; then
+if test "$PHP_XMLREADER" != "no"; then
+
+  if test "$PHP_LIBXML" = "no"; then
+    AC_MSG_ERROR([XMLReader extension requires LIBXML extension, add --enable-libxml])
+  fi
 
   PHP_SETUP_LIBXML(XMLREADER_SHARED_LIBADD, [
     AC_DEFINE(HAVE_XMLREADER,1,[ ])

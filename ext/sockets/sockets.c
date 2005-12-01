@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.171.2.2 2005/11/03 15:00:51 mike Exp $ */
+/* $Id: sockets.c,v 1.171.2.3 2005/12/01 14:02:54 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1482,7 +1482,7 @@ PHP_FUNCTION(socket_sendto)
 				RETURN_FALSE;
 			}
 			
-			retval = sendto(php_sock->bsd_socket, buf, (len > buf_len) ? buf_len : len, flags, (struct sockaddr *) &sin, sizeof(sin));
+			retval = sendto(php_sock->bsd_socket, buf, (len > buf_len) ? buf_len : len, flags, (struct sockaddr *) &sin6, sizeof(sin6));
 			break;
 #endif
 		default:

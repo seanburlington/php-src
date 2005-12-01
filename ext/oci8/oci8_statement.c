@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.2 2005/12/01 13:39:43 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.3 2005/12/01 13:47:22 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -697,7 +697,9 @@ int php_oci_bind_post_exec(void *data TSRMLS_DC)
 							php_oci_error(connection->err, connection->errcode TSRMLS_CC);
 							ZVAL_NULL(*entry);
 						}
-						ZVAL_STRINGL(*entry, buff, buff_len, 1);
+						else {
+							ZVAL_STRINGL(*entry, buff, buff_len, 1);
+						}
 						zend_hash_move_forward(hash);
 					}
 					else {
@@ -706,7 +708,9 @@ int php_oci_bind_post_exec(void *data TSRMLS_DC)
 							php_oci_error(connection->err, connection->errcode TSRMLS_CC);
 							add_next_index_null(bind->zval);
 						}
-						add_next_index_stringl(bind->zval, buff, buff_len, 1);
+						else {
+							add_next_index_stringl(bind->zval, buff, buff_len, 1);
+						}
 					}
 				}
 				break;

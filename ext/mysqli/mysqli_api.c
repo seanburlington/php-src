@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.9 2005/11/30 16:20:22 andrey Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.10 2005/12/01 14:12:55 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -682,8 +682,8 @@ PHP_FUNCTION(mysqli_stmt_fetch)
 #if SIZEOF_LONG==8  
 							if (uns && llval > 9223372036854775807L) {
 #elif SIZEOF_LONG==4
-							if ((uns && llval > 2147483647LL) || 
-							    (!uns && (( 2147483647LL < (long long) llval) || (-2147483648LL > (long long) llval))))
+							if ((uns && llval > L64(2147483647)) || 
+							    (!uns && (( L64(2147483647) < (my_longlong) llval) || (L64(-2147483648) > (my_longlong) llval))))
 							{
 #endif
 								char tmp[22];

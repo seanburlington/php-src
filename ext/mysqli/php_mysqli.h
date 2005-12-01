@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: php_mysqli.h,v 1.54.2.2 2005/10/18 13:51:50 tony2001 Exp $ 
+  $Id: php_mysqli.h,v 1.54.2.3 2005/12/01 14:12:56 andrey Exp $ 
 */
 
 /* A little hack to prevent build break, when mysql is used together with
@@ -445,6 +445,15 @@ MYSQLI_PROPERTY(my_prop_link_host);
 
 #define my_estrdup(x) (x) ? estrdup(x) : NULL
 #define my_efree(x) if (x) efree(x)
+
+#ifdef PHP_WIN32
+#define L64(x) x##i64
+typedef __int64 my_longlong;
+#else
+#define L64(x) x##LL
+typedef long long my_longlong;
+#endif
+
 
 ZEND_EXTERN_MODULE_GLOBALS(mysqli)
 

@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.243 2005/12/01 08:49:57 helly Exp $ */
+/* $Id: run-tests.php,v 1.244 2005/12/01 09:59:59 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -297,7 +297,7 @@ if (isset($argc) && $argc > 1) {
 					$just_save_results = true;
 					break;
 				case 'q':
-					putenv('NO_INTERACTION', 1);
+					putenv('NO_INTERACTION=1');
 					break;
 				default:
 					echo "Illegal switch specified!\n";

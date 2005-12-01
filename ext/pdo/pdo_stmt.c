@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.118.2.24 2005/12/01 19:59:58 tony2001 Exp $ */
+/* $Id: pdo_stmt.c,v 1.118.2.25 2005/12/01 20:39:12 tony2001 Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1117,13 +1117,13 @@ static int pdo_stmt_verify_mode(pdo_stmt_t *stmt, int mode, int fetch_all TSRMLS
 {
 	int flags = mode & PDO_FETCH_FLAGS;
 
+	mode = mode & ~PDO_FETCH_FLAGS;
+
 	if (mode < 0 || mode > PDO_FETCH__MAX) {
 		pdo_raise_impl_error(stmt->dbh, stmt, "HY000", "invalid fetch mode" TSRMLS_CC);
 		return 0;
 	}
 	
-	mode = mode & ~PDO_FETCH_FLAGS;
-
 	if (mode == PDO_FETCH_USE_DEFAULT) {
 		flags = stmt->default_fetch_type & PDO_FETCH_FLAGS;
 		mode = stmt->default_fetch_type & ~PDO_FETCH_FLAGS;

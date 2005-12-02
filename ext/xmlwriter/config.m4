@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.4.2.2 2005/12/02 02:05:24 iliaa Exp $
+dnl $Id: config.m4,v 1.4.2.3 2005/12/02 02:18:54 iliaa Exp $
 dnl
 
 AC_DEFUN([PHP_XMLWRITER_CHECK_VERSION],[
@@ -19,8 +19,8 @@ AC_DEFUN([PHP_XMLWRITER_CHECK_VERSION],[
   CPPFLAGS=$old_CPPFLAGS
 ])
 
-PHP_ARG_WITH(xmlwriter, for XMLWriter support,
-[  --with-xmlwriter        Include XMLWriter support.])
+PHP_ARG_ENABLE(xmlwriter, whether to enable XMLWriter support,
+[  --disable-xmlwriter        Disable XMLWriter support.], yes)
 
 if test "$PHP_XMLWRITER" != "no"; then
 

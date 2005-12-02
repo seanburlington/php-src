@@ -16,11 +16,12 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_date.re,v 1.26.2.12 2005/12/01 16:24:52 iliaa Exp $ */
+/* $Id: parse_date.re,v 1.26.2.13 2005/12/02 13:15:58 sniper Exp $ */
 
 #include "timelib.h"
 
 #include <stdio.h>
+#include <ctype.h>
 
 #ifdef HAVE_STDLIB_H
 #include <stdlib.h>

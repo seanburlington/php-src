@@ -1,7 +1,7 @@
-// $Id: config.w32,v 1.3.2.2 2005/12/02 02:05:24 iliaa Exp $
+// $Id: config.w32,v 1.3.2.3 2005/12/02 10:55:33 mike Exp $
 // vim:ft=javascript
 
-ARG_WITH("xmlwriter", "XMLWriter support", "no");
+ARG_ENABLE("xmlwriter", "XMLWriter support", "yes");
 
 if (PHP_XMLWRITER == "yes" && PHP_LIBXML == "yes") {
 	if (CHECK_HEADER_ADD_INCLUDE('libxml/xmlwriter.h', 'CFLAGS_XMLWRITER', PHP_XMLWRITER)) {

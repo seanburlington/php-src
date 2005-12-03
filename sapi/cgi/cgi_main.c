@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.267.2.2 2005/11/02 14:38:13 mike Exp $ */
+/* $Id: cgi_main.c,v 1.267.2.3 2005/12/03 01:28:16 sniper Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1663,7 +1663,7 @@ fastcgi_request_done:
 	/*tsrm_shutdown();*/
 #endif
 
-#if PHP_WIN32 && ZEND_DEBUG && 0
+#if defined(PHP_WIN32) && ZEND_DEBUG && 0
 	_CrtDumpMemoryLeaks();
 #endif
 

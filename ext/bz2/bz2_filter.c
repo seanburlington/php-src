@@ -16,7 +16,11 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bz2_filter.c,v 1.4 2005/08/11 23:35:53 andrei Exp $ */
+/* $Id: bz2_filter.c,v 1.5 2005/12/03 13:22:20 sniper Exp $ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include "php.h"
 #include "php_bz2.h"

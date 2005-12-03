@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.h,v 1.10.2.2 2005/12/02 02:05:25 iliaa Exp $ */
+/* $Id: php_xmlwriter.h,v 1.10.2.3 2005/12/03 23:20:07 tony2001 Exp $ */
 
 #ifndef PHP_XMLWRITER_H
 #define PHP_XMLWRITER_H
@@ -54,9 +54,6 @@ typedef struct _ze_xmlwriter_object {
 	zend_object zo;
 	xmlwriter_object *xmlwriter_ptr;
 } ze_xmlwriter_object;
-
-static void xmlwriter_free_resource_ptr(xmlwriter_object *intern TSRMLS_DC);
-static void xmlwriter_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 
 zend_class_entry *xmlwriter_class_entry_ce;
 

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.20 2005/12/01 16:41:52 rrichards Exp $ */
+/* $Id: php_xmlwriter.c,v 1.21 2005/12/03 23:19:47 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -30,6 +30,9 @@
 #include "php_xmlwriter.h"
 
 zend_class_entry *xmlwriter_class_entry;
+
+static void xmlwriter_free_resource_ptr(xmlwriter_object *intern TSRMLS_DC);
+static void xmlwriter_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 
 /* {{{ xmlwriter_object_free_storage */
 static void xmlwriter_free_resource_ptr(xmlwriter_object *intern TSRMLS_DC) 

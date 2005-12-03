@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_snefru.h,v 1.2 2005/11/26 13:15:06 mike Exp $ */
+/* $Id: php_hash_snefru.h,v 1.3 2005/12/03 23:49:52 tony2001 Exp $ */
 
 #ifndef PHP_HASH_SNEFRU_H
 #define PHP_HASH_SNEFRU_H
@@ -36,7 +36,7 @@ typedef struct {
 } PHP_SNEFRU_CTX;
 
 PHP_HASH_API void PHP_SNEFRUInit(PHP_SNEFRU_CTX *);
-PHP_HASH_API void PHP_SNEFRUUpdate(PHP_SNEFRU_CTX *, const unsigned char *, uint);
+PHP_HASH_API void PHP_SNEFRUUpdate(PHP_SNEFRU_CTX *, const unsigned char *, size_t);
 PHP_HASH_API void PHP_SNEFRUFinal(unsigned char[32], PHP_SNEFRU_CTX *);
 
 #endif

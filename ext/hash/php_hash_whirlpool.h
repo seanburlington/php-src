@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_whirlpool.h,v 1.2.2.2 2005/12/02 01:59:45 iliaa Exp $ */
+/* $Id: php_hash_whirlpool.h,v 1.2.2.3 2005/12/03 23:50:33 tony2001 Exp $ */
 
 #ifndef PHP_HASH_WHIRLPOOL_H
 #define PHP_HASH_WHIRLPOOL_H
@@ -33,7 +33,7 @@ typedef struct {
 } PHP_WHIRLPOOL_CTX;
 
 PHP_HASH_API void PHP_WHIRLPOOLInit(PHP_WHIRLPOOL_CTX *);
-PHP_HASH_API void PHP_WHIRLPOOLUpdate(PHP_WHIRLPOOL_CTX *, const unsigned char *, uint);
+PHP_HASH_API void PHP_WHIRLPOOLUpdate(PHP_WHIRLPOOL_CTX *, const unsigned char *, size_t);
 PHP_HASH_API void PHP_WHIRLPOOLFinal(unsigned char[64], PHP_WHIRLPOOL_CTX *);
 
 #endif

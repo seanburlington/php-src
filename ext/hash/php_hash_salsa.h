@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_salsa.h,v 1.4.2.2 2005/12/02 01:59:45 iliaa Exp $ */
+/* $Id: php_hash_salsa.h,v 1.4.2.3 2005/12/03 23:50:33 tony2001 Exp $ */
 
 #ifndef PHP_HASH_SALSA_H
 #define PHP_HASH_SALSA_H
@@ -36,7 +36,7 @@ typedef struct {
 PHP_HASH_API void PHP_SALSA10Init(PHP_SALSA_CTX *);
 PHP_HASH_API void PHP_SALSA20Init(PHP_SALSA_CTX *);
 
-PHP_HASH_API void PHP_SALSAUpdate(PHP_SALSA_CTX *, const unsigned char *, uint);
+PHP_HASH_API void PHP_SALSAUpdate(PHP_SALSA_CTX *, const unsigned char *, size_t);
 PHP_HASH_API void PHP_SALSAFinal(unsigned char[64], PHP_SALSA_CTX *);
 
 #endif

@@ -1,3 +1,21 @@
+2005-12-02  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * php.ini-dist
+      php.ini-recommended
+      ext/session/session.c:
+      - Changed "session.use_only_cookies" to be on by default.
+
+2005-12-02  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * ZendEngine2/tests/bug30346.phpt:
+      - Be picky about names
+
+2005-12-02  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_1)
+      NEWS:
+      Enable hash & xmlwriter by default
+
 2005-12-01  Michael Wallner  <mike@iworks.at>
 
     * ext/pcre/php_pcre.def
@@ -18153,7 +18171,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2182 2005/12/02 06:45:52 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2183 2005/12/03 06:44:24 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -21554,7 +21572,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2182 2005/12/02 06:45:52 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2183 2005/12/03 06:44:24 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -22035,7 +22053,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2182 2005/12/02 06:45:52 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2183 2005/12/03 06:44:24 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -23509,7 +23527,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2182 2005/12/02 06:45:52 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2183 2005/12/03 06:44:24 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

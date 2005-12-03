@@ -1,9 +1,9 @@
 dnl
-dnl $Id: config.m4,v 1.4.2.4 2005/12/02 08:59:35 sniper Exp $
+dnl $Id: config.m4,v 1.4.2.5 2005/12/03 01:07:00 sniper Exp $
 dnl
 
 PHP_ARG_ENABLE(xmlwriter, whether to enable XMLWriter support,
-[  --disable-xmlwriter        Disable XMLWriter support.], yes)
+[  --disable-xmlwriter     Disable XMLWriter support], yes)
 
 if test -z "$PHP_LIBXML_DIR"; then
   PHP_ARG_WITH(libxml-dir, libxml2 install dir,

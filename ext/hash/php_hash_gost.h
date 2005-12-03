@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash_gost.h,v 1.2 2005/11/26 13:15:06 mike Exp $ */
+/* $Id: php_hash_gost.h,v 1.3 2005/12/03 23:31:49 tony2001 Exp $ */
 
 #ifndef PHP_HASH_GOST_H
 #define PHP_HASH_GOST_H
@@ -32,7 +32,7 @@ typedef struct {
 } PHP_GOST_CTX;
 
 PHP_HASH_API void PHP_GOSTInit(PHP_GOST_CTX *);
-PHP_HASH_API void PHP_GOSTUpdate(PHP_GOST_CTX *, const unsigned char *, uint);
+PHP_HASH_API void PHP_GOSTUpdate(PHP_GOST_CTX *, const unsigned char *, size_t);
 PHP_HASH_API void PHP_GOSTFinal(unsigned char[64], PHP_GOST_CTX *);
 
 #endif

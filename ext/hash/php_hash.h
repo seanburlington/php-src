@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash.h,v 1.13.2.2 2005/12/02 01:59:45 iliaa Exp $ */
+/* $Id: php_hash.h,v 1.13.2.3 2005/12/03 01:17:48 pollita Exp $ */
 
 #ifndef PHP_HASH_H
 #define PHP_HASH_H
@@ -52,6 +52,7 @@ typedef struct _php_hash_data {
 	unsigned char *key;
 } php_hash_data;
 
+extern php_hash_ops php_hash_md4_ops;
 extern php_hash_ops php_hash_md5_ops;
 extern php_hash_ops php_hash_sha1_ops;
 extern php_hash_ops php_hash_sha256_ops;

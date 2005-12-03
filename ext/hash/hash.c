@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.18.2.2 2005/12/02 01:59:44 iliaa Exp $ */
+/* $Id: hash.c,v 1.18.2.3 2005/12/03 01:17:48 pollita Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -516,6 +516,7 @@ PHP_MINIT_FUNCTION(hash)
 
 	zend_hash_init(&php_hash_hashtable, 35, NULL, NULL, 1);
 
+	php_hash_register_algo("md4",			&php_hash_md4_ops);
 	php_hash_register_algo("md5",			&php_hash_md5_ops);
 	php_hash_register_algo("sha1",			&php_hash_sha1_ops);
 	php_hash_register_algo("sha256",		&php_hash_sha256_ops);

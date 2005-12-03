@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.h,v 1.32.2.1 2005/09/15 19:11:15 derick Exp $ */
+/* $Id: snprintf.h,v 1.32.2.2 2005/12/03 01:23:25 sniper Exp $ */
 
 /*
 
@@ -111,7 +111,7 @@ extern char * ap_php_ecvt(double arg, int ndigits, int *decpt, int *sign, char *
 extern char * ap_php_fcvt(double arg, int ndigits, int *decpt, int *sign, char *buf);
 extern char * ap_php_gcvt(double number, int ndigit, char *buf, boolean_e altform);
 
-#if PHP_WIN32
+#ifdef PHP_WIN32
 # define WIDE_INT		__int64
 #elif SIZEOF_LONG_LONG_INT
 # define WIDE_INT		long long int

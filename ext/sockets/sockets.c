@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.125.2.29.2.1 2005/11/03 14:58:43 mike Exp $ */
+/* $Id: sockets.c,v 1.125.2.29.2.2 2005/12/04 17:32:27 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -839,7 +839,19 @@ PHP_FUNCTION(socket_read)
 	}
 
 	if (retval == -1) {
-		PHP_SOCKET_ERROR(php_sock, "unable to read from socket", errno);
+		/* if the socket is in non-blocking mode and there's no data to read,
+		don't output any error, as this is a normal situation, and not an error */
+		if (errno == EAGAIN
+#ifdef EWOULDBLOCK
+		|| errno == EWOULDBLOCK
+#endif
+		) {
+			php_sock->error = errno;
+			SOCKETS_G(last_error) = errno;
+		} else {
+			PHP_SOCKET_ERROR(php_sock, "unable to read from socket", errno);
+		}
+
 		efree(tmpbuf);
 		RETURN_FALSE;
 	}

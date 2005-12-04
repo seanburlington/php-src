@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_pgsql.c,v 1.7.2.7 2005/11/29 02:11:37 wez Exp $ */
+/* $Id: pdo_pgsql.c,v 1.7.2.8 2005/12/04 22:34:26 wez Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -61,7 +61,7 @@ zend_module_entry pdo_pgsql_module_entry = {
 	PHP_RINIT(pdo_pgsql),
 	PHP_RSHUTDOWN(pdo_pgsql),
 	PHP_MINFO(pdo_pgsql),
-	"1.0.1",
+	"1.0.2",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_http.h,v 1.3 2004/01/08 17:32:51 sniper Exp $ */
+/* $Id: php_http.h,v 1.5.2.1 2005/12/04 17:44:27 iliaa Exp $ */
 
 #ifndef PHP_HTTP_H
 #define PHP_HTTP_H
@@ -28,8 +28,8 @@ PHPAPI int php_url_encode_hash_ex(HashTable *ht, smart_str *formstr,
 				const char *num_prefix, int num_prefix_len,
 				const char *key_prefix, int key_prefix_len,
 				const char *key_suffix, int key_suffix_len, 
-				zval *type TSRMLS_DC);
-#define php_url_encode_hash(ht, formstr)	php_url_encode_hash_ex((ht), (formstr), NULL, 0, NULL, 0, NULL, 0 TSRMLS_CC)
+				zval *type, char *arg_sep TSRMLS_DC);
+#define php_url_encode_hash(ht, formstr)	php_url_encode_hash_ex((ht), (formstr), NULL, 0, NULL, 0, NULL, 0, NULL TSRMLS_CC)
 
 PHP_FUNCTION(http_build_query);
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.25.2.5 2005/11/29 17:31:13 sniper Exp $
+dnl $Id: config.m4,v 1.25.2.6 2005/12/04 18:33:26 wez Exp $
 dnl
 
 if test "$PHP_PDO" != "no"; then
@@ -50,6 +50,9 @@ if test "$PHP_PDO_MYSQL" != "no"; then
 
   if test -n "$PDO_MYSQL_CONFIG" && test -x "$PDO_MYSQL_CONFIG" ; then
     AC_MSG_RESULT($PDO_MYSQL_CONFIG)
+    if test "x$SED" = "x"; then
+      AC_PATH_PROG(SED, sed)
+    fi
     PDO_MYSQL_INCLUDE=`$PDO_MYSQL_CONFIG --cflags | $SED -e "s/'//g"`
     PDO_MYSQL_LIBS=`$PDO_MYSQL_CONFIG --libs | $SED -e "s/'//g"`
     PDO_MYSQL_SOCKET=`$PDO_MYSQL_CONFIG --socket` 

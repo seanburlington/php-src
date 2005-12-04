@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sunfuncs.c,v 1.6 2004/02/25 20:16:26 abies Exp $ */
+/* $Id: sunfuncs.c,v 1.11.2.1 2005/12/04 17:41:02 iliaa Exp $ */
 
 /*
 	The sun position algorithm taken from the 'US Naval Observatory's
@@ -27,8 +27,8 @@
 
 #include "php.h"
 #include "php_sunfuncs.h"
-#include "datetime.h"
 #include "php_ini.h"
+#include "ext/date/php_date.h"
 
 #include <assert.h>
 #include <math.h>
@@ -192,7 +192,11 @@ static void php_do_date_sunrise_sunset(INTERNAL_FUNCTION_PARAMETERS, int calc_su
 			}
 		case 5:
 			gmt_offset = php_idate('Z', time, 0) / 3600;
+		case 6:
+			break;
 		default:
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid format");
+			RETURN_FALSE;
 			break;
 	}
 	
@@ -200,7 +204,7 @@ static void php_do_date_sunrise_sunset(INTERNAL_FUNCTION_PARAMETERS, int calc_su
 
 	switch (retformat) {
 		case SUNFUNCS_RET_TIMESTAMP:
-			RETURN_LONG((int) (time - (time % (24 * 3600))) + (int) (60 * ret));
+			RETURN_LONG((int) (time - (time % (24 * 3600))) + (int) (3600 * ret));
 			break;
 		case SUNFUNCS_RET_STRING:
 			N = (int) ret;
@@ -210,15 +214,12 @@ static void php_do_date_sunrise_sunset(INTERNAL_FUNCTION_PARAMETERS, int calc_su
 		case SUNFUNCS_RET_DOUBLE:
 			RETURN_DOUBLE(ret);
 			break;
-		default:
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "invalid format");
-			RETURN_FALSE;
 	}
 }
 /* }}} */
 
 /* {{{ proto mixed date_sunrise(mixed time [, int format [, float latitude [, float longitude [, float zenith [, float gmt_offset]]]]])
-   Returns time of sunrise for a given day & location */
+   Returns time of sunrise for a given day and location */
 PHP_FUNCTION(date_sunrise)
 {
 	php_do_date_sunrise_sunset(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
@@ -226,7 +227,7 @@ PHP_FUNCTION(date_sunrise)
 /* }}} */
 
 /* {{{ proto mixed date_sunset(mixed time [, int format [, float latitude [, float longitude [, float zenith [, float gmt_offset]]]]])
-   Returns time of sunset for a given day & location */
+   Returns time of sunset for a given day and location */
 PHP_FUNCTION(date_sunset)
 {
 	php_do_date_sunrise_sunset(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1);

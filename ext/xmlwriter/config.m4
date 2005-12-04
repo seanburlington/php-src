@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.6 2005/12/03 01:06:36 sniper Exp $
+dnl $Id: config.m4,v 1.7 2005/12/04 00:20:52 tony2001 Exp $
 dnl
 
 PHP_ARG_ENABLE(xmlwriter, whether to enable XMLWriter support,
@@ -13,10 +13,10 @@ fi
 if test "$PHP_XMLWRITER" != "no"; then
 
   if test "$PHP_LIBXML" = "no"; then
-    AC_MSG_ERROR([XMLReader extension requires LIBXML extension, add --enable-libxml])
+    AC_MSG_ERROR([XMLWriter extension requires LIBXML extension, add --enable-libxml])
   fi
 
-  PHP_SETUP_LIBXML(XMLREADER_SHARED_LIBADD, [
+  PHP_SETUP_LIBXML(XMLWRITER_SHARED_LIBADD, [
     AC_DEFINE(HAVE_XMLWRITER,1,[ ])
     PHP_NEW_EXTENSION(xmlwriter, php_xmlwriter.c, $ext_shared)
     PHP_SUBST(XMLWRITER_SHARED_LIBADD)

@@ -1,0 +1,9 @@
+// $Id: config.w32,v 1.1 2005/12/04 20:35:37 cellog Exp $
+// vim:ft=javascript
+
+ARG_ENABLE("phar", "enable phar support", "no");
+
+if (PHP_PHAR != "no") {
+	EXTENSION("phar", "phar.c");
+}
+

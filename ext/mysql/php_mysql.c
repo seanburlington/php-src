@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.174.2.27 2004/06/04 15:27:05 iliaa Exp $ */
+/* $Id: php_mysql.c,v 1.174.2.29.2.1 2005/12/05 13:20:18 tony2001 Exp $ */
 
 /* TODO:
  *
@@ -51,6 +51,9 @@
 # endif
 # include <netdb.h>
 # include <netinet/in.h>
+# if HAVE_ARPA_INET_H
+#  include <arpa/inet.h>
+# endif
 #endif
 
 #include <mysql.h>
@@ -2085,6 +2088,9 @@ static char *php_mysql_get_field_name(int field_type)
 		case FIELD_TYPE_FLOAT:
 		case FIELD_TYPE_DOUBLE:
 		case FIELD_TYPE_DECIMAL:
+#ifdef FIELD_TYPE_NEWDECIMAL
+		case FIELD_TYPE_NEWDECIMAL:
+#endif
 			return "real";
 			break;
 		case FIELD_TYPE_TIMESTAMP:
@@ -2096,11 +2102,25 @@ static char *php_mysql_get_field_name(int field_type)
 			break;
 #endif
 		case FIELD_TYPE_DATE:
+#ifdef FIELD_TYPE_NEWDATE
+		case FIELD_TYPE_NEWDATE:
+#endif
 			return "date";
 			break;
 		case FIELD_TYPE_TIME:
 			return "time";
 			break;
+		case FIELD_TYPE_SET:
+			return "set";
+			break;
+		case FIELD_TYPE_ENUM:
+			return "enum";
+			break;
+#ifdef FIELD_TYPE_GEOMETRY
+		case FIELD_TYPE_GEOMETRY:
+			return "geometry";
+			break;
+#endif
 		case FIELD_TYPE_DATETIME:
 			return "datetime";
 			break;
@@ -2213,7 +2233,7 @@ static void php_mysql_field_info(INTERNAL_FUNCTION_PARAMETERS, int entry_type)
 {
 	zval **result, **field;
 	MYSQL_RES *mysql_result;
-	MYSQL_FIELD *mysql_field;
+	MYSQL_FIELD *mysql_field = {0};
 	char buf[512];
 	int  len;
 

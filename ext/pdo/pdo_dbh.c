@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.21 2005/12/05 22:39:03 sniper Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.22 2005/12/05 22:41:10 sniper Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -283,7 +283,7 @@ static PHP_METHOD(PDO, dbh_constructor)
 		zval **v;
 		int plen;
 		char *hashkey = NULL;
-		zend_list_entry *le;
+		zend_rsrc_list_entry *le;
 		pdo_dbh_t *pdbh = NULL;
 
 		if (SUCCESS == zend_hash_index_find(Z_ARRVAL_P(options), PDO_ATTR_PERSISTENT, (void**)&v)) {
@@ -377,7 +377,7 @@ static PHP_METHOD(PDO, dbh_constructor)
 		/* all set */
 
 		if (is_persistent) {
-			zend_list_entry le;
+			zend_rsrc_list_entry le;
 
 			/* register in the persistent list etc. */
 			/* we should also need to replace the object store entry,

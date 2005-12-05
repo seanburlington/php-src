@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.90 2005/11/18 16:20:43 rasmus Exp $ */
+/* $Id: streams.c,v 1.91 2005/12/05 23:31:09 sniper Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -65,7 +65,7 @@ PHPAPI HashTable *php_stream_get_url_stream_wrappers_hash_global(void)
 	return &url_stream_wrappers_hash;
 }
 
-static int _php_stream_release_context(list_entry *le, void *pContext TSRMLS_DC)
+static int _php_stream_release_context(zend_rsrc_list_entry *le, void *pContext TSRMLS_DC)
 {
 	if (le->ptr == pContext) {
 		return --le->refcount == 0;
@@ -267,7 +267,7 @@ fprintf(stderr, "stream_alloc: %s:%p persistent=%s\n", ops->label, ret, persiste
 }
 /* }}} */
 
-static int _php_stream_free_persistent(list_entry *le, void *pStream TSRMLS_DC)
+static int _php_stream_free_persistent(zend_rsrc_list_entry *le, void *pStream TSRMLS_DC)
 {
 	return le->ptr == pStream;
 }

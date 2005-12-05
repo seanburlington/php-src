@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.507 2005/11/29 16:14:47 iliaa Exp $ */
+/* $Id: string.c,v 1.508 2005/12/05 22:53:31 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -5159,7 +5159,7 @@ PHP_FUNCTION(strip_tags)
    Set locale information */
 PHP_FUNCTION(setlocale)
 {
-	pval ***args = (pval ***) safe_emalloc(sizeof(pval **), ZEND_NUM_ARGS(), 0);
+	zval ***args = (zval ***) safe_emalloc(sizeof(zval **), ZEND_NUM_ARGS(), 0);
 	zval **pcategory, **plocale;
 	int i, cat, n_args=ZEND_NUM_ARGS();
 	char *loc, *retval;

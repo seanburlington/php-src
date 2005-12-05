@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: browscap.c,v 1.85 2005/08/03 14:07:57 sniper Exp $ */
+/* $Id: browscap.c,v 1.86 2005/12/05 22:53:17 sniper Exp $ */
 
 #include "php.h"
 #include "php_regex.h"
@@ -33,17 +33,17 @@ static zval *current_section;
 
 /* OBJECTS_FIXME: This whole extension needs going through. The use of objects looks pretty broken here */
 
-static void browscap_entry_dtor(zval **pvalue)
+static void browscap_entry_dtor(zval **zvalue)
 {
-	if (Z_TYPE_PP(pvalue) == IS_ARRAY) {
-		zend_hash_destroy(Z_ARRVAL_PP(pvalue));
-		free(Z_ARRVAL_PP(pvalue));
-	} else if (Z_TYPE_PP(pvalue) == IS_STRING) {
-		if (Z_STRVAL_PP(pvalue)) {
-			free(Z_STRVAL_PP(pvalue));
+	if (Z_TYPE_PP(zvalue) == IS_ARRAY) {
+		zend_hash_destroy(Z_ARRVAL_PP(zvalue));
+		free(Z_ARRVAL_PP(zvalue));
+	} else if (Z_TYPE_PP(zvalue) == IS_STRING) {
+		if (Z_STRVAL_PP(zvalue)) {
+			free(Z_STRVAL_PP(zvalue));
 		}
 	}
-	free(*pvalue);
+	free(*zvalue);
 }
 
 /* {{{ convert_browscap_pattern

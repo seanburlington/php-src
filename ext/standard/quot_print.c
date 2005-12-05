@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: quot_print.c,v 1.29 2005/08/03 14:08:11 sniper Exp $ */
+/* $Id: quot_print.c,v 1.30 2005/12/05 22:53:30 sniper Exp $ */
 
 #include <stdlib.h>
 
@@ -151,7 +151,7 @@ PHPAPI unsigned char *php_quot_print_decode(const unsigned char *str, size_t len
    Convert a quoted-printable string to an 8 bit string */
 PHP_FUNCTION(quoted_printable_decode)
 {
-	pval **arg1;
+	zval **arg1;
 	char *str_in, *str_out;
 	int i = 0, j = 0, k;
 

@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id: reg.c,v 1.82 2005/08/03 14:08:12 sniper Exp $ */
+/* $Id: reg.c,v 1.83 2005/12/05 22:53:30 sniper Exp $ */
 
 #include <stdio.h>
 #include <ctype.h>
@@ -184,7 +184,7 @@ static void php_reg_eprint(int err, regex_t *re) {
  */
 static void php_ereg(INTERNAL_FUNCTION_PARAMETERS, int icase)
 {
-	pval **regex,			/* Regular expression */
+	zval **regex,			/* Regular expression */
 		**findin,		/* String to apply expression to */
 		**array = NULL;		/* Optional register array */
 	regex_t re;
@@ -442,7 +442,7 @@ PHPAPI char *php_reg_replace(const char *pattern, const char *replace, const cha
  */
 static void php_ereg_replace(INTERNAL_FUNCTION_PARAMETERS, int icase)
 {
-	pval **arg_pattern,
+	zval **arg_pattern,
 		**arg_replace,
 		**arg_string;
 	char *pattern;

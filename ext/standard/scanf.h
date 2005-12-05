@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.h,v 1.14 2005/08/03 14:08:12 sniper Exp $ */
+/* $Id: scanf.h,v 1.15 2005/12/05 22:53:30 sniper Exp $ */
 
 #ifndef  SCANF_H
 #define  SCANF_H
@@ -42,8 +42,6 @@
  * e.g. fscanf
  */
 PHPAPI int ValidateFormat(char *format, int numVars, int *totalVars);
-PHPAPI int php_sscanf_internal(char *string,char *format,int argCount,zval ***args,
-				int varStart, pval **return_value TSRMLS_DC);
-
+PHPAPI int php_sscanf_internal(char *string, char *format, int argCount, zval ***args, int varStart, zval **return_value TSRMLS_DC);
 
 #endif /* SCANF_H */

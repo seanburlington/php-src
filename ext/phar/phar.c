@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.2 2005/12/04 22:50:53 cellog Exp $ */
+/* $Id: phar.c,v 1.3 2005/12/05 01:07:01 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -113,7 +113,7 @@ PHP_METHOD(PHP_Archive, mapPhar)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zsb|z", &unused1, &alias, &alias_len, &compressed, &unused2) == FAILURE) {
 		return;
 	}
-#ifndef HAVE_ZLIB
+#ifndef HAVE_PHAR_ZLIB
 	if (compressed) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Error: zlib extension is required for compressed .phar files");
 	}
@@ -459,7 +459,7 @@ PHP_PHAR_API php_stream * php_stream_phar_url_wrapper(php_stream_wrapper *wrappe
 	php_url *resource = NULL;
 	FILE *fp;
 	struct stat st;
-#ifdef HAVE_ZLIB
+#ifdef HAVE_PHAR_ZLIB
 	/* borrowed from zlib.c gzinflate() function */
 	int status;
 	unsigned long length;
@@ -501,7 +501,7 @@ PHP_PHAR_API php_stream * php_stream_phar_url_wrapper(php_stream_wrapper *wrappe
 	/* seek to start of internal file and read it */
 	fseek(fp, idata->data->internal_file_start + idata->internal_file->offset_within_phar, SEEK_SET);
 	if (idata->data->is_compressed) {
-#ifdef HAVE_ZLIB
+#ifdef HAVE_PHAR_ZLIB
 		buffer = (char *) emalloc(idata->internal_file->compressed_filesize);
 		if (idata->internal_file->compressed_filesize !=
 				fread(buffer, 1, idata->internal_file->compressed_filesize, fp)) {

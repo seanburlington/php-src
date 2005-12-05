@@ -16,12 +16,12 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_phar.h,v 1.2 2005/12/04 22:50:53 cellog Exp $ */
+/* $Id: php_phar.h,v 1.3 2005/12/05 01:07:01 cellog Exp $ */
 
 #ifndef PHP_PHAR_H
 #define PHP_PHAR_H
 
-#ifdef HAVE_ZLIB
+#ifdef HAVE_PHAR_ZLIB
 #include <zlib.h>
 #endif
 

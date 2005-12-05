@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.73.2.6 2005/11/14 22:03:01 tony2001 Exp $ */
+/* $Id: spl_iterators.c,v 1.73.2.7 2005/12/05 19:54:47 stas Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -317,7 +317,7 @@ static void spl_recursive_it_rewind_ex(spl_recursive_it_object *object, zval *zt
 			zend_call_method_with_0_params(&zthis, object->ce, &object->endChildren, "endchildren", NULL);
 		}
 	}
-	erealloc(object->iterators, sizeof(spl_sub_iterator));
+	object->iterators = erealloc(object->iterators, sizeof(spl_sub_iterator));
 	object->iterators[0].state = RS_START;
 	sub_iter = object->iterators[0].iterator;
 	if (sub_iter->funcs->rewind) {

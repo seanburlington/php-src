@@ -17,7 +17,7 @@
    |          Marcus Boerger <helly@php.net>                              |
    +----------------------------------------------------------------------+
 
-   $Id: sqlite.c,v 1.166.2.8 2005/12/05 20:40:54 bfrance Exp $
+   $Id: sqlite.c,v 1.166.2.9 2005/12/05 23:38:03 sniper Exp $
 */
 
 #ifdef HAVE_CONFIG_H
@@ -793,7 +793,7 @@ typedef struct _sqlite_object {
 	} u;
 } sqlite_object;
 
-static int sqlite_free_persistent(list_entry *le, void *ptr TSRMLS_DC)
+static int sqlite_free_persistent(zend_rsrc_list_entry *le, void *ptr TSRMLS_DC)
 {
 	return le->ptr == ptr ? ZEND_HASH_APPLY_REMOVE : ZEND_HASH_APPLY_KEEP;
 }
@@ -1127,7 +1127,7 @@ PHP_MINFO_FUNCTION(sqlite)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "SQLite support", "enabled");
-	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.8 2005/12/05 20:40:54 bfrance Exp $");
+	php_info_print_table_row(2, "PECL Module version", PHP_SQLITE_MODULE_VERSION " $Id: sqlite.c,v 1.166.2.9 2005/12/05 23:38:03 sniper Exp $");
 	php_info_print_table_row(2, "SQLite Library", sqlite_libversion());
 	php_info_print_table_row(2, "SQLite Encoding", sqlite_libencoding());
 	php_info_print_table_end();
@@ -1194,7 +1194,7 @@ static struct php_sqlite_db *php_sqlite_open(char *filename, int mode, char *per
 	}
 
 	if (persistent_id) {
-		list_entry le;
+		zend_rsrc_list_entry le;
 
 		Z_TYPE(le) = le_sqlite_pdb;
 		le.ptr = db;
@@ -1218,7 +1218,7 @@ PHP_FUNCTION(sqlite_popen)
 	int filename_len, hashkeylen;
 	zval *errmsg = NULL;
 	struct php_sqlite_db *db = NULL;
-	list_entry *le;
+	zend_rsrc_list_entry *le;
 
 	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|lz/",
 				&filename, &filename_len, &mode, &errmsg)) {

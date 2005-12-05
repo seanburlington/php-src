@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.62 2004/07/10 07:46:08 andi Exp $ */
+/* $Id: php_sybase_db.c,v 1.66.2.1 2005/12/05 23:38:04 sniper Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -100,6 +100,8 @@ function_entry sybase_functions[] = {
 	PHP_FE(sybase_affected_rows,		NULL)
 	PHP_FE(sybase_min_error_severity,	NULL)
 	PHP_FE(sybase_min_message_severity,	NULL)
+
+#if !defined(PHP_WIN32) && !defined(HAVE_MSSQL)
 	PHP_FALIAS(mssql_connect,		sybase_connect,			NULL)
 	PHP_FALIAS(mssql_pconnect,		sybase_pconnect,		NULL)
 	PHP_FALIAS(mssql_close,			sybase_close,			NULL)
@@ -119,6 +121,7 @@ function_entry sybase_functions[] = {
 	PHP_FALIAS(mssql_affected_rows,		sybase_affected_rows,			NULL)
 	PHP_FALIAS(mssql_min_error_severity,	sybase_min_error_severity,		NULL)
 	PHP_FALIAS(mssql_min_message_severity,	sybase_min_message_severity,	NULL)
+#endif
 	{NULL, NULL, NULL}
 };
 
@@ -165,7 +168,7 @@ static int php_sybase_message_handler(DBPROCESS *dbproc,DBINT msgno,int msgstate
 }
 
 
-static int _clean_invalid_results(list_entry *le TSRMLS_DC)
+static int _clean_invalid_results(zend_rsrc_list_entry *le TSRMLS_DC)
 {
 	if (Z_TYPE_P(le) == php_sybase_module.le_result) {
 		sybase_link *sybase_ptr = ((sybase_result *) le->ptr)->sybase_ptr;
@@ -282,7 +285,7 @@ PHP_RINIT_FUNCTION(sybase)
 	php_sybase_module.default_link=-1;
 	php_sybase_module.num_links = php_sybase_module.num_persistent;
 	php_sybase_module.appname = estrndup("PHP " PHP_VERSION, sizeof("PHP " PHP_VERSION));
-	php_sybase_module.server_message = empty_string;
+	php_sybase_module.server_message = STR_EMPTY_ALLOC();
 	php_sybase_module.min_error_severity = php_sybase_module.cfg_min_error_severity;
 	php_sybase_module.min_message_severity = php_sybase_module.cfg_min_message_severity;
 	return SUCCESS;
@@ -434,11 +437,11 @@ static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 		persistent=0;
 	}
 	if (persistent) {
-		list_entry *le;
+		zend_rsrc_list_entry *le;
 
 		/* try to find if we already have this link in our persistent list */
 		if (zend_hash_find(&EG(persistent_list), hashed_details, hashed_details_length+1, (void **) &le)==FAILURE) {  /* we don't */
-			list_entry new_le;
+			zend_rsrc_list_entry new_le;
 
 			if (php_sybase_module.max_links!=-1 && php_sybase_module.num_links>=php_sybase_module.max_links) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING,"Sybase:  Too many open links (%d)",php_sybase_module.num_links);
@@ -463,7 +466,7 @@ static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 			memcpy(sybase_ptr,&sybase,sizeof(sybase_link));
 			Z_TYPE(new_le) = php_sybase_module.le_plink;
 			new_le.ptr = sybase_ptr;
-			if (zend_hash_update(&EG(persistent_list), hashed_details, hashed_details_length+1, (void *) &new_le, sizeof(list_entry),NULL)==FAILURE) {
+			if (zend_hash_update(&EG(persistent_list), hashed_details, hashed_details_length+1, (void *) &new_le, sizeof(zend_rsrc_list_entry),NULL)==FAILURE) {
 				free(sybase_ptr);
 				goto err_link;
 			}
@@ -492,7 +495,7 @@ static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 		Z_LVAL_P(return_value) = zend_list_insert(sybase_ptr,php_sybase_module.le_plink);
 		Z_TYPE_P(return_value) = IS_LONG;
 	} else { /* non persistent */
-		list_entry *index_ptr,new_index_ptr;
+		zend_rsrc_list_entry *index_ptr,new_index_ptr;
 		
 		/* first we check the hash for the hashed_details key.  if it exists,
 		 * it should point us to the right offset where the actual sybase link sits.
@@ -541,7 +544,7 @@ static void php_sybase_do_connect(INTERNAL_FUNCTION_PARAMETERS,int persistent)
 		/* add it to the hash */
 		new_index_ptr.ptr = (void *) Z_LVAL_P(return_value);
 		Z_TYPE(new_index_ptr) = le_index_ptr;
-		if (zend_hash_update(&EG(regular_list),hashed_details,hashed_details_length+1,(void *) &new_index_ptr, sizeof(list_entry),NULL)==FAILURE) {
+		if (zend_hash_update(&EG(regular_list),hashed_details,hashed_details_length+1,(void *) &new_index_ptr, sizeof(zend_rsrc_list_entry),NULL)==FAILURE) {
 			goto err_link;
 		}
 		php_sybase_module.num_links++;
@@ -886,7 +889,7 @@ PHP_FUNCTION(sybase_query)
 		result->fields[i].max_length = dbcollen(sybase_ptr->link,i+1);
 		result->fields[i].column_source = estrdup(dbcolsource(sybase_ptr->link,i+1));
 		if (!result->fields[i].column_source) {
-			result->fields[i].column_source = empty_string;
+			result->fields[i].column_source = STR_EMPTY_ALLOC();
 		}
 		Z_TYPE(result->fields[i]) = column_types[i];
 		/* set numeric flag */
@@ -1108,9 +1111,11 @@ PHP_FUNCTION(sybase_fetch_object)
 {
 	php_sybase_fetch_hash(INTERNAL_FUNCTION_PARAM_PASSTHRU);
 	if (Z_TYPE_P(return_value)==IS_ARRAY) {
-		Z_TYPE_P(return_value)=IS_OBJECT;
-		Z_OBJPROP_P(return_value) = Z_ARRVAL_P(return_value);
-		Z_OBJCE_P(return_value) = ZEND_STANDARD_CLASS_DEF_PTR;
+		object_and_properties_init(
+			return_value,
+			ZEND_STANDARD_CLASS_DEF_PTR,
+			Z_ARRVAL_P(return_value)
+		);
 	}
 }
 /* }}} */

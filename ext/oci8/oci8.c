@@ -26,7 +26,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8.c,v 1.269.2.4 2005/12/01 13:39:42 tony2001 Exp $ */
+/* $Id: oci8.c,v 1.269.2.5 2005/12/05 23:38:01 sniper Exp $ */
 /* TODO
  *
  * file://localhost/www/docs/oci10/ociaahan.htm#423823 - implement lob_empty() with OCI_ATTR_LOBEMPTY
@@ -87,7 +87,7 @@ static void php_oci_statement_list_dtor (zend_rsrc_list_entry * TSRMLS_DC);
 static void php_oci_descriptor_list_dtor (zend_rsrc_list_entry * TSRMLS_DC);
 static void php_oci_collection_list_dtor (zend_rsrc_list_entry * TSRMLS_DC);
 
-static int php_oci_persistent_helper(list_entry *le TSRMLS_DC);
+static int php_oci_persistent_helper(zend_rsrc_list_entry *le TSRMLS_DC);
 static int php_oci_connection_ping(php_oci_connection * TSRMLS_DC);
 static int php_oci_connection_status(php_oci_connection * TSRMLS_DC);
 static int php_oci_connection_close(php_oci_connection * TSRMLS_DC);
@@ -635,7 +635,7 @@ PHP_MINFO_FUNCTION(oci)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "OCI8 Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.4 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.269.2.5 $");
 
 	sprintf(buf, "%ld", OCI_G(num_persistent));
 	php_info_print_table_row(2, "Active Persistent Connections", buf);
@@ -925,8 +925,8 @@ void php_oci_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent, int exclus
  * The real connect function. Allocates all the resources needed, establishes the connection and returns the result handle (or NULL) */
 php_oci_connection *php_oci_do_connect_ex(char *username, int username_len, char *password, int password_len, char *new_password, int new_password_len, char *dbname, int dbname_len, char *charset, long session_mode, int persistent, int exclusive TSRMLS_DC) 
 {
-	list_entry *le;
-	list_entry new_le;
+	zend_rsrc_list_entry *le;
+	zend_rsrc_list_entry new_le;
 	php_oci_connection *connection = NULL;
 	smart_str hashed_details = {0};
 	time_t timestamp;
@@ -1300,14 +1300,14 @@ open:
 		new_le.type = le_pconnection;
 		connection->used_this_request = 1;
 		connection->rsrc_id = zend_list_insert(connection, le_pconnection);
-		zend_hash_update(&EG(persistent_list), connection->hash_key, strlen(connection->hash_key)+1, (void *)&new_le, sizeof(list_entry), NULL);
+		zend_hash_update(&EG(persistent_list), connection->hash_key, strlen(connection->hash_key)+1, (void *)&new_le, sizeof(zend_rsrc_list_entry), NULL);
 		OCI_G(num_persistent)++;
 	}
 	else if (!exclusive) {
 		connection->rsrc_id = zend_list_insert(connection, le_connection);
 		new_le.ptr = (void *)connection->rsrc_id;
 		new_le.type = le_index_ptr;
-		zend_hash_update(&EG(regular_list), connection->hash_key, strlen(connection->hash_key)+1, (void *)&new_le, sizeof(list_entry), NULL);
+		zend_hash_update(&EG(regular_list), connection->hash_key, strlen(connection->hash_key)+1, (void *)&new_le, sizeof(zend_rsrc_list_entry), NULL);
 		OCI_G(num_links)++;
 	}
 	else {
@@ -1672,7 +1672,7 @@ void php_oci_fetch_row (INTERNAL_FUNCTION_PARAMETERS, int mode, int expected_arg
 
 /* {{{ php_oci_persistent_helper() 
  Helper function to close/rollback persistent connections at the end of request */
-static int php_oci_persistent_helper(list_entry *le TSRMLS_DC)
+static int php_oci_persistent_helper(zend_rsrc_list_entry *le TSRMLS_DC)
 {
 	time_t timestamp;
 	php_oci_connection *connection;

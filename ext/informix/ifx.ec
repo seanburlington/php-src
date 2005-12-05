@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: ifx.ec,v 1.107 2004/06/01 00:49:59 abies Exp $ */
+/* $Id: ifx.ec,v 1.109.2.1 2005/12/05 23:37:57 sniper Exp $ */
 
 /* -------------------------------------------------------------------
  * if you want a function reference : "grep '^\*\*' ifx.ec" will give
@@ -497,7 +497,7 @@ EXEC SQL END DECLARE SECTION;
 		int host_len = 0, user_len = 0, passwd_len = 0;
 		host = user = passwd = NULL;
 
-		/* set default values if any are avaliable */
+		/* set default values if any are available */
 		if (IFXG(default_host)) {
 			host = IFXG(default_host);
 			host_len = strlen(host);
@@ -527,11 +527,11 @@ EXEC SQL END DECLARE SECTION;
 	}
 
 	if (persistent) {
-		list_entry *le;
+		zend_rsrc_list_entry *le;
 
 		/* try to find if we already have this link in our persistent list */
 		if (zend_hash_find(&EG(persistent_list), hashed_details, hashed_details_length + 1, (void **) &le) == FAILURE) {  /* we don't */
-			list_entry new_le;
+			zend_rsrc_list_entry new_le;
 
 			if (IFXG(max_links) != -1 && IFXG(num_links) >= IFXG(max_links)) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Too many open links (%d)", IFXG(num_links));
@@ -564,7 +564,7 @@ EXEC SQL END DECLARE SECTION;
 			/* hash it up */
 			new_le.type = le_plink;
 			new_le.ptr = ifx;
-			if (zend_hash_update(&EG(persistent_list), hashed_details, hashed_details_length + 1, (void *) &new_le, sizeof(list_entry), NULL) == FAILURE) {
+			if (zend_hash_update(&EG(persistent_list), hashed_details, hashed_details_length + 1, (void *) &new_le, sizeof(zend_rsrc_list_entry), NULL) == FAILURE) {
 				free(ifx);
 				efree(hashed_details);
 				RETURN_FALSE;
@@ -596,7 +596,7 @@ EXEC SQL END DECLARE SECTION;
 		}
 		ZEND_REGISTER_RESOURCE(return_value, ifx, le_plink);
 	} else { /* non persistent */
-		list_entry *index_ptr,new_index_ptr;
+		zend_rsrc_list_entry *index_ptr,new_index_ptr;
 
 		/* first we check the hash for the hashed_details key.  if it exists,
 		 * it should point us to the right offset where the actual ifx link sits.
@@ -670,7 +670,7 @@ EXEC SQL END DECLARE SECTION;
 		/* add it to the hash */
 		new_index_ptr.ptr = (void *) return_value->value.lval;
 		new_index_ptr.type = le_index_ptr;
-		if (zend_hash_update(&EG(regular_list), hashed_details, hashed_details_length + 1, (void *) &new_index_ptr, sizeof(list_entry), NULL) == FAILURE) {
+		if (zend_hash_update(&EG(regular_list), hashed_details, hashed_details_length + 1, (void *) &new_index_ptr, sizeof(zend_rsrc_list_entry), NULL) == FAILURE) {
 			efree(hashed_details);
 			RETURN_FALSE;
 		}

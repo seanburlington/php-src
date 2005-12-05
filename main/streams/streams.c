@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.61 2004/07/13 16:34:56 wez Exp $ */
+/* $Id: streams.c,v 1.82.2.1 2005/12/05 23:38:04 sniper Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -38,6 +38,7 @@
 static HashTable url_stream_wrappers_hash;
 static int le_stream = FAILURE; /* true global */
 static int le_pstream = FAILURE; /* true global */
+static int le_stream_filter = FAILURE; /* true global */
 
 PHPAPI int php_file_le_stream(void)
 {
@@ -49,12 +50,22 @@ PHPAPI int php_file_le_pstream(void)
 	return le_pstream;
 }
 
+PHPAPI int php_file_le_stream_filter(void)
+{
+	return le_stream_filter;
+}
+
 PHPAPI HashTable *_php_stream_get_url_stream_wrappers_hash(TSRMLS_D)
 {
 	return (FG(stream_wrappers) ? FG(stream_wrappers) : &url_stream_wrappers_hash);
 }
 
-static int _php_stream_release_context(list_entry *le, void *pContext TSRMLS_DC)
+PHPAPI HashTable *php_stream_get_url_stream_wrappers_hash_global(void)
+{
+	return &url_stream_wrappers_hash;
+}
+
+static int _php_stream_release_context(zend_rsrc_list_entry *le, void *pContext TSRMLS_DC)
 {
 	if (le->ptr == pContext) {
 		return --le->refcount == 0;
@@ -256,7 +267,7 @@ fprintf(stderr, "stream_alloc: %s:%p persistent=%s\n", ops->label, ret, persiste
 }
 /* }}} */
 
-static int _php_stream_free_persistent(list_entry *le, void *pStream TSRMLS_DC)
+static int _php_stream_free_persistent(zend_rsrc_list_entry *le, void *pStream TSRMLS_DC)
 {
 	return le->ptr == pStream;
 }
@@ -592,8 +603,9 @@ PHPAPI size_t _php_stream_read(php_stream *stream, char *buf, size_t size TSRMLS
 		}
 
 		/* just break anyway, to avoid greedy read */
-		if (stream->wrapper != &php_plain_files_wrapper)
+		if (stream->wrapper != &php_plain_files_wrapper) {
 			break;
+		}
 	}
 
 	if (didread > 0) {
@@ -832,22 +844,24 @@ PHPAPI char *php_stream_get_record(php_stream *stream, size_t maxlen, size_t *re
 {
 	char *e, *buf;
 	size_t toread;
+	int skip = 0;
 
 	php_stream_fill_read_buffer(stream, maxlen TSRMLS_CC);
 
-	if (delim_len == 0) {
+	if (delim_len == 0 || !delim) {
 		toread = maxlen;
 	} else {
 		if (delim_len == 1) {
-			e = memchr(stream->readbuf, *delim, stream->readbuflen);
+			e = memchr(stream->readbuf + stream->readpos, *delim, stream->writepos - stream->readpos);
 		} else {
-			e = php_memnstr(stream->readbuf, delim, delim_len, (stream->readbuf + stream->readbuflen));
+			e = php_memnstr(stream->readbuf + stream->readpos, delim, delim_len, (stream->readbuf + stream->writepos));
 		}
 
 		if (!e) {
 			toread = maxlen;
 		} else {
-			toread = e - (char *) stream->readbuf;
+			toread = e - (char *) stream->readbuf - stream->readpos;
+			skip = 1;
 		}
 	}
 
@@ -857,8 +871,13 @@ PHPAPI char *php_stream_get_record(php_stream *stream, size_t maxlen, size_t *re
 
 	buf = emalloc(toread + 1);
 	*returned_len = php_stream_read(stream, buf, toread);
-	                
+
 	if (*returned_len >= 0) {
+		if (skip) {
+			stream->readpos += delim_len;
+			stream->position += delim_len;
+		}
+		buf[*returned_len] = '\0';
 		return buf;
 	} else {
 		efree(buf);
@@ -874,7 +893,7 @@ static size_t _php_stream_write_buffer(php_stream *stream, const char *buf, size
  	/* if we have a seekable stream we need to ensure that data is written at the
  	 * current stream->position. This means invalidating the read buffer and then
 	 * performing a low-level seek */
-	if (stream->ops->seek && (stream->flags & PHP_STREAM_FLAG_NO_SEEK) == 0) {
+	if (stream->ops->seek && (stream->flags & PHP_STREAM_FLAG_NO_SEEK) == 0 && stream->readpos != stream->writepos) {
 		stream->readpos = stream->writepos = 0;
 
 		stream->ops->seek(stream, stream->position, SEEK_SET, &stream->position TSRMLS_CC);
@@ -1150,7 +1169,7 @@ PHPAPI size_t _php_stream_passthru(php_stream * stream STREAMS_DC TSRMLS_DC)
 		char *p;
 		size_t mapped;
 
-		p = php_stream_mmap_range(stream, php_stream_tell(stream), 0, PHP_STREAM_MAP_MODE_SHARED_READONLY, &mapped);
+		p = php_stream_mmap_range(stream, php_stream_tell(stream), PHP_STREAM_COPY_ALL, PHP_STREAM_MAP_MODE_SHARED_READONLY, &mapped);
 
 		if (p) {
 			PHPWRITE(p, mapped);
@@ -1209,6 +1228,17 @@ PHPAPI size_t _php_stream_copy_to_mem(php_stream *src, char **buf, size_t maxlen
 
 			return mapped;
 		}
+	}
+
+	if (maxlen > 0) {
+		ptr = *buf = pemalloc_rel_orig(maxlen + 1, persistent);
+		while ((len < maxlen) & !php_stream_eof(src)) {
+			ret = php_stream_read(src, ptr, maxlen - len);
+			len += ret;
+			ptr += ret;
+		}
+		*ptr = '\0';
+		return len;
 	}
 
 	/* avoid many reallocs by allocating a good sized chunk to begin with, if
@@ -1349,10 +1379,28 @@ static void stream_resource_persistent_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC
 	FG(pclose_ret) = php_stream_free(stream, PHP_STREAM_FREE_CLOSE | PHP_STREAM_FREE_RSRC_DTOR);
 }
 
+void php_shutdown_stream_hashes(TSRMLS_D)
+{
+	if (FG(stream_wrappers)) {
+		zend_hash_destroy(FG(stream_wrappers));
+		efree(FG(stream_wrappers));
+		FG(stream_wrappers) = NULL;
+	}
+
+	if (FG(stream_filters)) {
+		zend_hash_destroy(FG(stream_filters));
+		efree(FG(stream_filters));
+		FG(stream_filters) = NULL;
+	}
+}
+
 int php_init_stream_wrappers(int module_number TSRMLS_DC)
 {
 	le_stream = zend_register_list_destructors_ex(stream_resource_regular_dtor, NULL, "stream", module_number);
 	le_pstream = zend_register_list_destructors_ex(NULL, stream_resource_persistent_dtor, "persistent stream", module_number);
+
+	/* Filters are cleaned up by the streams they're attached to */
+	le_stream_filter = zend_register_list_destructors_ex(NULL, NULL, "stream filter", module_number);
 
 	return (
 			zend_hash_init(&url_stream_wrappers_hash, 0, NULL, NULL, 1) == SUCCESS
@@ -1381,10 +1429,35 @@ int php_shutdown_stream_wrappers(int module_number TSRMLS_DC)
 	return SUCCESS;
 }
 
+/* Validate protocol scheme names during registration
+ * Must conform to /^[a-zA-Z0-9+.-]+$/
+ */
+static inline int php_stream_wrapper_scheme_validate(char *protocol, int protocol_len)
+{
+	int i;
+
+	for(i = 0; i < protocol_len; i++) {
+		if (!isalnum((int)protocol[i]) &&
+			protocol[i] != '+' &&
+			protocol[i] != '-' &&
+			protocol[i] != '.') {
+			return FAILURE;
+		}
+	}
+
+	return SUCCESS;
+}
+
 /* API for registering GLOBAL wrappers */
 PHPAPI int php_register_url_stream_wrapper(char *protocol, php_stream_wrapper *wrapper TSRMLS_DC)
 {
-	return zend_hash_add(&url_stream_wrappers_hash, protocol, strlen(protocol), wrapper, sizeof(*wrapper), NULL);
+	int protocol_len = strlen(protocol);
+
+	if (php_stream_wrapper_scheme_validate(protocol, protocol_len) == FAILURE) {
+		return FAILURE;
+	}
+
+	return zend_hash_add(&url_stream_wrappers_hash, protocol, protocol_len, wrapper, sizeof(*wrapper), NULL);
 }
 
 PHPAPI int php_unregister_url_stream_wrapper(char *protocol TSRMLS_DC)
@@ -1395,17 +1468,35 @@ PHPAPI int php_unregister_url_stream_wrapper(char *protocol TSRMLS_DC)
 /* API for registering VOLATILE wrappers */
 PHPAPI int php_register_url_stream_wrapper_volatile(char *protocol, php_stream_wrapper *wrapper TSRMLS_DC)
 {
+	int protocol_len = strlen(protocol);
+
+	if (php_stream_wrapper_scheme_validate(protocol, protocol_len) == FAILURE) {
+		return FAILURE;
+	}
+
 	if (!FG(stream_wrappers)) {
 		php_stream_wrapper tmpwrapper;
 
-		FG(stream_wrappers) = emalloc(sizeof(HashTable));
+		ALLOC_HASHTABLE(FG(stream_wrappers));
 		zend_hash_init(FG(stream_wrappers), 0, NULL, NULL, 1);
 		zend_hash_copy(FG(stream_wrappers), &url_stream_wrappers_hash, NULL, &tmpwrapper, sizeof(php_stream_wrapper));
 	}
 
-	return zend_hash_add(FG(stream_wrappers), protocol, strlen(protocol), wrapper, sizeof(*wrapper), NULL);
+	return zend_hash_add(FG(stream_wrappers), protocol, protocol_len, wrapper, sizeof(*wrapper), NULL);
 }
 
+PHPAPI int php_unregister_url_stream_wrapper_volatile(char *protocol TSRMLS_DC)
+{
+	if (!FG(stream_wrappers)) {
+		php_stream_wrapper tmpwrapper;
+
+		ALLOC_HASHTABLE(FG(stream_wrappers));
+		zend_hash_init(FG(stream_wrappers), 0, NULL, NULL, 1);
+		zend_hash_copy(FG(stream_wrappers), &url_stream_wrappers_hash, NULL, &tmpwrapper, sizeof(php_stream_wrapper));
+	}
+
+	return zend_hash_del(FG(stream_wrappers), protocol, strlen(protocol));
+}
 /* }}} */
 
 /* {{{ php_stream_locate_url_wrapper */
@@ -1454,24 +1545,63 @@ PHPAPI php_stream_wrapper *php_stream_locate_url_wrapper(const char *path, char 
 	}
 	/* TODO: curl based streams probably support file:// properly */
 	if (!protocol || !strncasecmp(protocol, "file", n))	{
-		if (protocol && path[n+1] == '/' && path[n+2] == '/' && path[n+3] != '/')	{
+		if (protocol) {
+			int localhost = 0;
+
+			if (!strncasecmp(path, "file://localhost/", 17)) {
+				localhost = 1;
+			}
+
+#ifdef PHP_WIN32
+			if (localhost == 0 && path[n+3] != '\0' && path[n+3] != '/' && path[n+4] != ':')	{
+#else
+			if (localhost == 0 && path[n+3] != '/')	{
+#endif
+				if (options & REPORT_ERRORS) {
+					php_error_docref(NULL TSRMLS_CC, E_WARNING, "remote host file access not supported, %s", path);
+				}
+				return NULL;
+			}
+
+			if (path_for_open) {
+				/* skip past protocol and :/, but handle windows correctly */
+				*path_for_open = (char*)path + n + 1;
+				if (localhost == 1) {
+					(*path_for_open) += 11;
+				}
+				while (*(++*path_for_open)=='/');
+#ifdef PHP_WIN32
+				if (*(*path_for_open + 1) != ':')
+#endif
+					(*path_for_open)--;
+			}
+		}
+
+		if (options & STREAM_LOCATE_WRAPPERS_ONLY) {
+			return NULL;
+		}
+		
+		if (FG(stream_wrappers)) {
+			/* The file:// wrapper may have been disabled/overridden */
+
+			if (wrapper) {
+				/* It was found so go ahead and provide it */
+				return wrapper;
+			}
+			
+			/* Check again, the original check might have not known the protocol name */
+			if (zend_hash_find(wrapper_hash, "file", sizeof("file")-1, (void**)&wrapper) == SUCCESS) {
+				return wrapper;
+			}
+
 			if (options & REPORT_ERRORS) {
-				php_error_docref(NULL TSRMLS_CC, E_WARNING, "remote host file access not supported, %s", path);
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Plainfiles wrapper disabled");
 			}
 			return NULL;
 		}
-		if (protocol && path_for_open) {
-			/* skip past protocol and :/, but handle windows correctly */
-			*path_for_open = (char*)path + n + 1;
-			while (*(++*path_for_open)=='/');
-#ifdef PHP_WIN32
-			if (*(*path_for_open + 1) != ':')
-#endif
-				(*path_for_open)--;
-		}
-		
-		/* fall back on regular file access */
-		return (options & STREAM_LOCATE_WRAPPERS_ONLY) ? NULL : &php_plain_files_wrapper;
+
+		/* fall back on regular file access */		
+		return &php_plain_files_wrapper;
 	}
 
 	if (wrapper && wrapper->is_url && !PG(allow_url_fopen)) {
@@ -1867,28 +1997,28 @@ PHPAPI int php_stream_context_del_link(php_stream_context *context,
 
 /* {{{ php_stream_dirent_alphasort
  */
-PHPAPI int php_stream_dirent_alphasort(const php_stream_dirent **a, const php_stream_dirent **b)
+PHPAPI int php_stream_dirent_alphasort(const char **a, const char **b)
 {
-	return strcoll((*a)->d_name,(*b)->d_name);
+	return strcoll(*a, *b);
 }
 /* }}} */
 
 /* {{{ php_stream_dirent_alphasortr
  */
-PHPAPI int php_stream_dirent_alphasortr(const php_stream_dirent **a, const php_stream_dirent **b)
+PHPAPI int php_stream_dirent_alphasortr(const char **a, const char **b)
 {
-	return strcoll((*b)->d_name,(*a)->d_name);
+	return strcoll(*b, *a);
 }
 /* }}} */
 
 /* {{{ php_stream_scandir
  */
-PHPAPI int _php_stream_scandir(char *dirname, php_stream_dirent **namelist[], int flags, php_stream_context *context,
-			  int (*compare) (const php_stream_dirent **a, const php_stream_dirent **b) TSRMLS_DC)
+PHPAPI int _php_stream_scandir(char *dirname, char **namelist[], int flags, php_stream_context *context,
+			  int (*compare) (const char **a, const char **b) TSRMLS_DC)
 {
 	php_stream *stream;
 	php_stream_dirent sdp;
-	php_stream_dirent **vector = NULL;
+	char **vector = NULL;
 	int vector_size = 0;
 	int nfiles = 0;
 
@@ -1908,11 +2038,10 @@ PHPAPI int _php_stream_scandir(char *dirname, php_stream_dirent **namelist[], in
 			} else {
 				vector_size *= 2;
 			}
-			vector = (php_stream_dirent **) erealloc(vector, vector_size * sizeof(php_stream_dirent *));
+			vector = (char **) erealloc(vector, vector_size * sizeof(char *));
 		}
 
-		vector[nfiles] = emalloc(sizeof(php_stream_dirent));
-		memcpy(vector[nfiles], &sdp, sizeof(sdp));
+		vector[nfiles] = estrdup(sdp.d_name);
 
 		nfiles++;
 	}
@@ -1921,7 +2050,7 @@ PHPAPI int _php_stream_scandir(char *dirname, php_stream_dirent **namelist[], in
 	*namelist = vector;
 
 	if (compare) {
-		qsort(*namelist, nfiles, sizeof(php_stream_dirent *), (int(*)(const void *, const void *))compare);
+		qsort(*namelist, nfiles, sizeof(char *), (int(*)(const void *, const void *))compare);
 	}
 	return nfiles;
 }

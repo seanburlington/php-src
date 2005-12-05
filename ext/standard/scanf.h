@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.h,v 1.13 2004/01/08 17:32:52 sniper Exp $ */
+/* $Id: scanf.h,v 1.14.2.1 2005/12/05 22:54:01 sniper Exp $ */
 
 #ifndef  SCANF_H
 #define  SCANF_H
@@ -43,7 +43,7 @@
  */
 PHPAPI int ValidateFormat(char *format, int numVars, int *totalVars);
 PHPAPI int php_sscanf_internal(char *string,char *format,int argCount,zval ***args,
-				int varStart, pval **return_value TSRMLS_DC);
+				int varStart, zval **return_value TSRMLS_DC);
 
 
 #endif /* SCANF_H */

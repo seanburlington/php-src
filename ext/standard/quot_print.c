@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: quot_print.c,v 1.28 2004/01/08 08:17:33 andi Exp $ */
+/* $Id: quot_print.c,v 1.29.2.1 2005/12/05 22:54:01 sniper Exp $ */
 
 #include <stdlib.h>
 
@@ -151,7 +151,7 @@ PHPAPI unsigned char *php_quot_print_decode(const unsigned char *str, size_t len
    Convert a quoted-printable string to an 8 bit string */
 PHP_FUNCTION(quoted_printable_decode)
 {
-	pval **arg1;
+	zval **arg1;
 	char *str_in, *str_out;
 	int i = 0, j = 0, k;
 

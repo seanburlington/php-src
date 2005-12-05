@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: assert.c,v 1.60.2.1 2005/08/18 13:34:41 sniper Exp $ */
+/* $Id: assert.c,v 1.60.2.2 2005/12/05 22:53:56 sniper Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -217,7 +217,7 @@ PHP_FUNCTION(assert)
 
 PHP_FUNCTION(assert_options)
 {
-	pval **what, **value;
+	zval **what, **value;
 	int oldint;
 	int ac = ZEND_NUM_ARGS();
 	

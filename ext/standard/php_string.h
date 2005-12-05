@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_string.h,v 1.84 2004/01/08 17:32:51 sniper Exp $ */
+/* $Id: php_string.h,v 1.87.2.1 2005/12/05 22:54:01 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.43 1999-06-16 [ssb] */
 
@@ -112,13 +112,14 @@ PHP_MINIT_FUNCTION(nl_langinfo);
 PHPAPI int strnatcmp_ex(char const *a, size_t a_len, char const *b, size_t b_len, int fold_case);
 
 #ifdef HAVE_LOCALECONV
-struct lconv *localeconv_r(struct lconv *out);
+PHPAPI struct lconv *localeconv_r(struct lconv *out);
 #endif
 
 PHPAPI char *php_strtoupper(char *s, size_t len);
 PHPAPI char *php_strtolower(char *s, size_t len);
 PHPAPI char *php_strtr(char *str, int len, char *str_from, char *str_to, int trlen);
 PHPAPI char *php_addslashes(char *str, int length, int *new_length, int freeit TSRMLS_DC);
+PHPAPI char *php_addslashes_ex(char *str, int length, int *new_length, int freeit, int ignore_sybase TSRMLS_DC);
 PHPAPI char *php_addcslashes(char *str, int length, int *new_length, int freeit, char *what, int wlength TSRMLS_DC);
 PHPAPI void php_stripslashes(char *str, int *len TSRMLS_DC);
 PHPAPI void php_stripcslashes(char *str, int *len);
@@ -131,8 +132,8 @@ PHPAPI char *php_str_to_str(char *haystack, int length, char *needle,
 		int needle_len, char *str, int str_len, int *_new_length);
 PHPAPI char *php_trim(char *c, int len, char *what, int what_len, zval *return_value, int mode TSRMLS_DC);
 PHPAPI size_t php_strip_tags(char *rbuf, int len, int *state, char *allow, int allow_len);
-PHPAPI int php_char_to_str_ex(char *str, uint len, char from, char *to, int to_len, pval *result, int case_sensitivity, int *replace_count);
-PHPAPI int php_char_to_str(char *str, uint len, char from, char *to, int to_len, pval *result);
+PHPAPI int php_char_to_str_ex(char *str, uint len, char from, char *to, int to_len, zval *result, int case_sensitivity, int *replace_count);
+PHPAPI int php_char_to_str(char *str, uint len, char from, char *to, int to_len, zval *result);
 PHPAPI void php_implode(zval *delim, zval *arr, zval *return_value);
 PHPAPI void php_explode(zval *delim, zval *str, zval *return_value, int limit);
 

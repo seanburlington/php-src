@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: file.c,v 1.409.2.1 2005/10/21 12:13:37 dmitry Exp $ */
+/* $Id: file.c,v 1.409.2.2 2005/12/05 22:53:57 sniper Exp $ */
 
 /* Synced with php 3.0 revision 1.218 1999-06-16 [ssb] */
 
@@ -770,7 +770,7 @@ parse_eol:
    Create a unique filename in a directory */
 PHP_FUNCTION(tempnam)
 {
-	pval **arg1, **arg2;
+	zval **arg1, **arg2;
 	char *d;
 	char *opened_path;
 	char p[64];
@@ -1447,7 +1447,7 @@ PHP_FUNCTION(readfile)
    Return or change the umask */
 PHP_FUNCTION(umask)
 {
-	pval **arg1;
+	zval **arg1;
 	int oldumask;
 	int arg_count = ZEND_NUM_ARGS();
 

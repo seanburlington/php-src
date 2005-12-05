@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dir.c,v 1.141 2004/06/16 23:57:25 abies Exp $ */
+/* $Id: dir.c,v 1.147.2.1 2005/12/05 22:53:57 sniper Exp $ */
 
 /* {{{ includes/startup/misc */
 
@@ -155,6 +155,9 @@ PHP_MINIT_FUNCTION(dir)
 #ifdef GLOB_NOESCAPE
 	REGISTER_LONG_CONSTANT("GLOB_NOESCAPE", GLOB_NOESCAPE, CONST_CS | CONST_PERSISTENT);
 #endif
+#ifdef GLOB_ERR
+	REGISTER_LONG_CONSTANT("GLOB_ERR", GLOB_ERR, CONST_CS | CONST_PERSISTENT);
+#endif
 
 #ifndef GLOB_ONLYDIR
 #define GLOB_ONLYDIR (1<<30)
@@ -228,7 +231,7 @@ PHP_FUNCTION(getdir)
    Close directory connection identified by the dir_handle */
 PHP_FUNCTION(closedir)
 {
-	pval **id, **tmp, *myself;
+	zval **id, **tmp, *myself;
 	php_stream *dirp;
 
 	FETCH_DIRP();
@@ -326,7 +329,7 @@ PHP_FUNCTION(getcwd)
    Rewind dir_handle back to the start */
 PHP_FUNCTION(rewinddir)
 {
-	pval **id, **tmp, *myself;
+	zval **id, **tmp, *myself;
 	php_stream *dirp;
 	
 	FETCH_DIRP();
@@ -339,7 +342,7 @@ PHP_FUNCTION(rewinddir)
    Read directory entry from dir_handle */
 PHP_NAMED_FUNCTION(php_if_readdir)
 {
-	pval **id, **tmp, *myself;
+	zval **id, **tmp, *myself;
 	php_stream *dirp;
 	php_stream_dirent entry;
 
@@ -395,16 +398,16 @@ PHP_FUNCTION(glob)
 	if (0 != (ret = glob(pattern, flags & GLOB_FLAGMASK, NULL, &globbuf))) {
 #ifdef GLOB_NOMATCH
 		if (GLOB_NOMATCH == ret) {
-			/* Linux handles no matches as an error condition, but FreeBSD
-			 * doesn't. This ensure that if no match is found, an empty array
-			 * is always returned so it can be used without worrying in e.g.
-			 * foreach() */
-#ifndef __linux__
-			RETURN_FALSE;
-#else
+			/* Some glob implementation simply return no data if no matches
+			   were found, others return the GLOB_NOMATCH error code.
+			   We don't want to treat GLOB_NOMATCH as an error condition
+			   so that PHP glob() behaves the same on both types of 
+			   implementations and so that 'foreach (glob() as ...'
+			   can be used for simple glob() calls without further error
+			   checking.
+			*/
 			array_init(return_value);
 			return;
-#endif
 		}
 #endif
 		RETURN_FALSE;
@@ -428,7 +431,7 @@ PHP_FUNCTION(glob)
 
 	array_init(return_value);
 	for (n = 0; n < globbuf.gl_pathc; n++) {
-		/* we need to this everytime since GLOB_ONLYDIR does not guarantee that
+		/* we need to do this everytime since GLOB_ONLYDIR does not guarantee that
 		 * all directories will be filtered. GNU libc documentation states the
 		 * following: 
 		 * If the information about the type of the file is easily available 
@@ -462,7 +465,7 @@ PHP_FUNCTION(scandir)
 	char *dirn;
 	int dirn_len;
 	long flags = 0;
-	php_stream_dirent **namelist;
+	char **namelist;
 	int n, i;
 	zval *zcontext = NULL;
 	php_stream_context *context = NULL;
@@ -488,7 +491,7 @@ PHP_FUNCTION(scandir)
 	array_init(return_value);
 
 	for (i = 0; i < n; i++) {
-		add_next_index_string(return_value, namelist[i]->d_name, 0);
+		add_next_index_string(return_value, namelist[i], 0);
 	}
 
 	if (n) {

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: info.c,v 1.249.2.5 2005/11/23 00:15:08 iliaa Exp $ */
+/* $Id: info.c,v 1.249.2.6 2005/12/05 22:54:00 sniper Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -701,7 +701,7 @@ PHPAPI void php_print_info(int flag TSRMLS_DC)
 	}
 
 	if (flag & PHP_INFO_VARIABLES) {
-		pval **data;
+		zval **data;
 
 		SECTION("PHP Variables");
 

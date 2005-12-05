@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: scanf.c,v 1.29 2004/02/18 19:48:12 iliaa Exp $ */
+/* $Id: scanf.c,v 1.31.2.1 2005/12/05 22:54:01 sniper Exp $ */
 
 /*
    scanf.c --
@@ -78,6 +78,7 @@
 #endif
 #include "zend_execute.h"
 #include "zend_operators.h"
+#include "zend_strtod.h"
 #include "php_globals.h"
 #include "basic_functions.h"
 #include "scanf.h"
@@ -125,7 +126,7 @@ typedef struct CharSet {
 static char *BuildCharSet(CharSet *cset, char *format);
 static int	CharInSet(CharSet *cset, int ch);
 static void	ReleaseCharSet(CharSet *cset);
-static inline void scan_set_error_return(int numVars, pval **return_value);
+static inline void scan_set_error_return(int numVars, zval **return_value);
 
 
 /* {{{ BuildCharSet
@@ -593,7 +594,7 @@ error:
 
 PHPAPI int php_sscanf_internal(	char *string, char *format,
 				int argCount, zval ***args,
-				int varStart, pval **return_value TSRMLS_DC)
+				int varStart, zval **return_value TSRMLS_DC)
 {
 	int  numVars, nconversions, totalVars = -1;
 	int  i, value, result;
@@ -1204,7 +1205,7 @@ PHPAPI int php_sscanf_internal(	char *string, char *format,
 				if (!(flags & SCAN_SUPPRESS)) {
 					double dvalue;
 					*end = '\0';
-					dvalue = strtod(buf, NULL);
+					dvalue = zend_strtod(buf, NULL);
 					if (numVars) {
 						current = args[objIndex++];
 						convert_to_double( *current );
@@ -1237,13 +1238,13 @@ done:
 /* }}} */
 
 /* the compiler choked when i tried to make this a macro    */
-static inline void scan_set_error_return(int numVars, pval **return_value)
+static inline void scan_set_error_return(int numVars, zval **return_value)
 {
 	if (numVars) {
 		Z_TYPE_PP(return_value) = IS_LONG;
 		Z_LVAL_PP(return_value) = SCAN_ERROR_EOF;  /* EOF marker */
 	} else {	
-	  /* pval_destructor( *return_value ); */ 
+	  /* zval_dtor( *return_value ); */ 
 	  /* convert_to_null calls destructor */
    		convert_to_null( *return_value );
 	}	

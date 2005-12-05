@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    |         Ilia Alshanetsky <iliaa@php.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: exec.c,v 1.111 2004/07/12 18:49:47 iliaa Exp $ */
+/* $Id: exec.c,v 1.113.2.1 2005/12/05 22:53:57 sniper Exp $ */
 
 #include <stdio.h>
 #include "php.h"
@@ -57,7 +57,7 @@
  * If type==3, output will be printed binary, no lines will be saved or returned (passthru)
  *
  */
-int php_exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
+int php_exec(int type, char *cmd, zval *array, zval *return_value TSRMLS_DC)
 {
 	FILE *fp;
 	char *buf, *tmp=NULL;
@@ -66,7 +66,7 @@ int php_exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 	php_stream *stream;
 	size_t buflen, bufl = 0;
 #if PHP_SIGCHILD
-	void (*sig_handler)();
+	void (*sig_handler)() = NULL;
 #endif
 
 	if (PG(safe_mode)) {
@@ -177,7 +177,9 @@ int php_exec(int type, char *cmd, pval *array, pval *return_value TSRMLS_DC)
 
 done:
 #if PHP_SIGCHILD
-	signal (SIGCHLD, sig_handler);
+	if (sig_handler) {
+		signal(SIGCHLD, sig_handler);
+	}
 #endif
 	if (d) {
 		efree(d);
@@ -370,7 +372,7 @@ char *php_escape_shell_arg(char *str) {
    Escape shell metacharacters */
 PHP_FUNCTION(escapeshellcmd)
 {
-	pval **arg1;
+	zval **arg1;
 	char *cmd = NULL;
 
 	if (zend_get_parameters_ex(1, &arg1) == FAILURE) {
@@ -390,7 +392,7 @@ PHP_FUNCTION(escapeshellcmd)
    Quote and escape an argument for use in a shell command */
 PHP_FUNCTION(escapeshellarg)
 {
-	pval **arg1;
+	zval **arg1;
 	char *cmd = NULL;
 
 	if (zend_get_parameters_ex(1, &arg1) == FAILURE) {
@@ -412,7 +414,7 @@ PHP_FUNCTION(shell_exec)
 {
 	FILE *in;
 	size_t total_readbytes;
-	pval **cmd;
+	zval **cmd;
 	char *ret;
 	php_stream *stream;
 

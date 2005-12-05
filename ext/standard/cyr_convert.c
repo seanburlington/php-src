@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: cyr_convert.c,v 1.26 2004/01/08 08:17:30 andi Exp $ */
+/* $Id: cyr_convert.c,v 1.27.2.1 2005/12/05 22:53:57 sniper Exp $ */
 
 #include <stdlib.h>
 
@@ -271,7 +271,7 @@ static char * php_convert_cyr_string(unsigned char *str, int length, char from, 
    Convert from one Cyrillic character set to another */
 PHP_FUNCTION(convert_cyr_string)
 {
-    pval **str_arg, **fr_cs, **to_cs;
+    zval **str_arg, **fr_cs, **to_cs;
 	unsigned char *str;
 
     if (ZEND_NUM_ARGS() != 3 || zend_get_parameters_ex(3,&str_arg,&fr_cs, &to_cs)==FAILURE)

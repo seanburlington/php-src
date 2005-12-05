@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,13 +17,10 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: image.c,v 1.98 2004/01/08 08:17:32 andi Exp $ */
+/* $Id: image.c,v 1.114.2.1 2005/12/05 22:53:58 sniper Exp $ */
 
 #include "php.h"
 #include <stdio.h>
-#if defined(NETWARE) && !defined(NEW_LIBC)
-#include <sys/socket.h>
-#endif
 #if HAVE_FCNTL_H
 #include <fcntl.h>
 #endif
@@ -401,7 +398,7 @@ static unsigned int php_next_marker(php_stream * stream, int last_marker, int co
 				last_marker = M_PSEUDO; /* stop skipping non 0xff for M_COM */
 			}
 		}
-		if (++a > 10)
+		if (++a > 25)
 		{
 			/* who knows the maxim amount of 0xff? though 7 */
 			/* but found other implementations              */
@@ -471,7 +468,7 @@ static int php_read_APP(php_stream * stream, unsigned int marker, zval *info TSR
 
 /* {{{ php_handle_jpeg
    main loop to parse JPEG structure */
-static struct gfxinfo *php_handle_jpeg (php_stream * stream, pval *info TSRMLS_DC) 
+static struct gfxinfo *php_handle_jpeg (php_stream * stream, zval *info TSRMLS_DC) 
 {
 	struct gfxinfo *result = NULL;
 	unsigned int marker = M_PSEUDO;
@@ -604,7 +601,7 @@ static struct gfxinfo *php_handle_jpc(php_stream * stream TSRMLS_DC)
 {
 	struct gfxinfo *result = NULL;
 	unsigned short dummy_short;
-	int dummy_int, highest_bit_depth, bit_depth;
+	int highest_bit_depth, bit_depth;
 	unsigned char first_marker_id;
 	unsigned int i;
 
@@ -628,17 +625,28 @@ static struct gfxinfo *php_handle_jpc(php_stream * stream TSRMLS_DC)
 
 	dummy_short = php_read2(stream TSRMLS_CC); /* Lsiz */
 	dummy_short = php_read2(stream TSRMLS_CC); /* Rsiz */
-	result->height = php_read4(stream TSRMLS_CC); /* Xsiz */
-	result->width = php_read4(stream TSRMLS_CC); /* Ysiz */
+	result->width = php_read4(stream TSRMLS_CC); /* Xsiz */
+	result->height = php_read4(stream TSRMLS_CC); /* Ysiz */
 
-	dummy_int = php_read4(stream TSRMLS_CC); /* XOsiz */
-	dummy_int = php_read4(stream TSRMLS_CC); /* YOsiz */
-	dummy_int = php_read4(stream TSRMLS_CC); /* XTsiz */
-	dummy_int = php_read4(stream TSRMLS_CC); /* YTsiz */
-	dummy_int = php_read4(stream TSRMLS_CC); /* XTOsiz */
-	dummy_int = php_read4(stream TSRMLS_CC); /* YTOsiz */
+#if MBO_0
+	php_read4(stream TSRMLS_CC); /* XOsiz */
+	php_read4(stream TSRMLS_CC); /* YOsiz */
+	php_read4(stream TSRMLS_CC); /* XTsiz */
+	php_read4(stream TSRMLS_CC); /* YTsiz */
+	php_read4(stream TSRMLS_CC); /* XTOsiz */
+	php_read4(stream TSRMLS_CC); /* YTOsiz */
+#else
+	if (php_stream_seek(stream, 24, SEEK_CUR)) {
+		efree(result);
+		return NULL;
+	}
+#endif
 
 	result->channels = php_read2(stream TSRMLS_CC); /* Csiz */
+	if (result->channels < 0 || result->channels > 256) {
+		efree(result);
+		return NULL;
+	}
 
 	/* Collect bit depth info */
 	highest_bit_depth = bit_depth = 0;
@@ -700,8 +708,15 @@ static struct gfxinfo *php_handle_jp2(php_stream *stream TSRMLS_DC)
 			break;
 		}
 
+		/* Stop if this was the last box */
+		if ((int)box_length <= 0) {
+			break;
+		}
+
 		/* Skip over LBox (Which includes both TBox and LBox itself */
-		php_stream_seek(stream, box_length - 8, SEEK_CUR); 
+		if (php_stream_seek(stream, box_length - 8, SEEK_CUR)) {
+			break;
+		}
 	}
 
 	if (result == NULL) {
@@ -781,7 +796,7 @@ static unsigned php_ifd_get32u(void *Long, int motorola_intel)
 
 /* {{{ php_handle_tiff
    main loop to parse TIFF structure */
-static struct gfxinfo *php_handle_tiff (php_stream * stream, pval *info, int motorola_intel TSRMLS_DC)
+static struct gfxinfo *php_handle_tiff (php_stream * stream, zval *info, int motorola_intel TSRMLS_DC)
 {
 	struct gfxinfo *result = NULL;
 	int i, num_entries;
@@ -864,43 +879,49 @@ static struct gfxinfo *php_handle_tiff (php_stream * stream, pval *info, int mot
  */
 static struct gfxinfo *php_handle_iff(php_stream * stream TSRMLS_DC)
 {
-	struct gfxinfo *result = NULL;
+	struct gfxinfo * result;
 	unsigned char a[10];
 	int chunkId;
 	int size;
+	short width, height, bits;
 
-	if (php_stream_read(stream, a, 8) != 8)
+	if (php_stream_read(stream, a, 8) != 8) {
 		return NULL;
-	if (strncmp(a+4, "ILBM", 4) && strncmp(a+4, "PBM ", 4))
+	}
+	if (strncmp(a+4, "ILBM", 4) && strncmp(a+4, "PBM ", 4)) {
 		return NULL;
-
-	result = (struct gfxinfo *) ecalloc(1, sizeof(struct gfxinfo));
+	}
 
 	/* loop chunks to find BMHD chunk */
 	do {
 		if (php_stream_read(stream, a, 8) != 8) {
-			efree(result);
 			return NULL;
 		}
 		chunkId = php_ifd_get32s(a+0, 1);
 		size    = php_ifd_get32s(a+4, 1);
+		if (size < 0) {
+			return NULL;
+		}
 		if ((size & 1) == 1) {
 			size++;
 		}
 		if (chunkId == 0x424d4844) { /* BMHD chunk */
-			if (php_stream_read(stream, a, 9) != 9) {
-				efree(result);
+			if (size < 9 || php_stream_read(stream, a, 9) != 9) {
 				return NULL;
 			}
-			result->width    = php_ifd_get16s(a+0, 1);
-			result->height   = php_ifd_get16s(a+2, 1);
-			result->bits     = a[8] & 0xff;
-			result->channels = 0;
-			if (result->width > 0 && result->height > 0 && result->bits > 0 && result->bits < 33)
+			width  = php_ifd_get16s(a+0, 1);
+			height = php_ifd_get16s(a+2, 1);
+			bits   = a[8] & 0xff;
+			if (width > 0 && height > 0 && bits > 0 && bits < 33) {
+				result = (struct gfxinfo *) ecalloc(1, sizeof(struct gfxinfo));
+				result->width    = width;
+				result->height   = height;
+				result->bits     = bits;
+				result->channels = 0;
 				return result;
+			}
 		} else {
 			if (php_stream_seek(stream, size, SEEK_CUR)) {
-				efree(result);
 				return NULL;
 			}
 		}
@@ -955,6 +976,11 @@ static int php_get_wbmp(php_stream *stream, struct gfxinfo **result, int check T
 		}
 		height = (height << 7) | (i & 0x7f);
 	} while (i & 0x80);
+
+	/* maximum valid sizes for wbmp (although 127x127 may be a more accurate one) */
+	if (!height || !width || height > 2048 || width > 2048) {
+		return 0;
+	}
 	
 	if (!check) {
 		(*result)->width = width;
@@ -1283,11 +1309,14 @@ PHP_FUNCTION(getimagesize)
 		case IMAGE_FILETYPE_SWF:
 			result = php_handle_swf(stream TSRMLS_CC);
 			break;
-#if HAVE_ZLIB && !defined(COMPILE_DL_ZLIB)
 		case IMAGE_FILETYPE_SWC:
+#if HAVE_ZLIB && !defined(COMPILE_DL_ZLIB)
 			result = php_handle_swc(stream TSRMLS_CC);
-			break;
+#else
+			php_error_docref(NULL TSRMLS_CC, E_NOTICE, "The image is a compressed SWF file, but you do not have a static version of the zlib extension enabled.");
+
 #endif
+			break;
 		case IMAGE_FILETYPE_PSD:
 			result = php_handle_psd(stream TSRMLS_CC);
 			break;

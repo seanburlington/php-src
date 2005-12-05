@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: sunfuncs.c,v 1.11 2005/08/03 14:08:14 sniper Exp $ */
+/* $Id: sunfuncs.c,v 1.12 2005/12/05 04:23:17 iliaa Exp $ */
 
 /*
 	The sun position algorithm taken from the 'US Naval Observatory's
@@ -27,8 +27,8 @@
 
 #include "php.h"
 #include "php_sunfuncs.h"
-#include "datetime.h"
 #include "php_ini.h"
+#include "ext/date/php_date.h"
 
 #include <assert.h>
 #include <math.h>

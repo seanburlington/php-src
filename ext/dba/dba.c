@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.109 2004/01/08 08:14:39 andi Exp $ */
+/* $Id: dba.c,v 1.111.2.1 2005/12/05 22:43:14 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -43,6 +43,7 @@
 #include "php_ndbm.h"
 #include "php_dbm.h"
 #include "php_cdb.h"
+#include "php_db1.h"
 #include "php_db2.h"
 #include "php_db3.h"
 #include "php_db4.h"
@@ -239,6 +240,9 @@ static dba_handler handler[] = {
 #if DBA_CDB_BUILTIN
     DBA_NAMED_HND(cdb_make, cdb, DBA_STREAM_OPEN|DBA_LOCK_ALL) /* No lock in lib */
 #endif
+#if DBA_DB1
+	DBA_HND(db1, DBA_LOCK_ALL) /* No lock in lib */
+#endif
 #if DBA_DB2
 	DBA_HND(db2, DBA_LOCK_ALL) /* No lock in lib */
 #endif
@@ -268,6 +272,8 @@ static dba_handler handler[] = {
 #define DBA_DEFAULT "db3"
 #elif DBA_DB2
 #define DBA_DEFAULT "db2"
+#elif DBA_DB1
+#define DBA_DEFAULT "db1"
 #elif DBA_GDBM
 #define DBA_DEFAULT "gdbm"
 #elif DBA_NBBM
@@ -359,7 +365,7 @@ static void dba_close_rsrc(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 /* }}} */
 
 /* {{{ dba_close_pe_rsrc_deleter */
-int dba_close_pe_rsrc_deleter(list_entry *le, void *pDba TSRMLS_DC)
+int dba_close_pe_rsrc_deleter(zend_rsrc_list_entry *le, void *pDba TSRMLS_DC)
 {
 	return le->ptr == pDba;
 }
@@ -496,7 +502,7 @@ static void php_dba_update(INTERNAL_FUNCTION_PARAMETERS, int mode)
  */
 dba_info *php_dba_find(const char* path TSRMLS_DC)
 {
-	list_entry *le;
+	zend_rsrc_list_entry *le;
 	dba_info *info;
 	int numitems, i;
 
@@ -553,7 +559,7 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	}
 
 	if (persistent) {
-		list_entry *le;
+		zend_rsrc_list_entry *le;
 		
 		/* calculate hash */
 		key = safe_emalloc(keylen, 1, 1);
@@ -839,11 +845,11 @@ static void php_dba_open(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	info->argv = NULL;
 
 	if (persistent) {
-		list_entry new_le;
+		zend_rsrc_list_entry new_le;
 
 		Z_TYPE(new_le) = le_pdb;
 		new_le.ptr = info;
-		if (zend_hash_update(&EG(persistent_list), key, keylen+1, &new_le, sizeof(list_entry), NULL) == FAILURE) {
+		if (zend_hash_update(&EG(persistent_list), key, keylen+1, &new_le, sizeof(zend_rsrc_list_entry), NULL) == FAILURE) {
 			dba_close(info TSRMLS_CC);
 			php_error_docref2(NULL TSRMLS_CC, Z_STRVAL_PP(args[0]), Z_STRVAL_PP(args[1]), E_WARNING, "Could not register persistent resource");
 			FREENOW;

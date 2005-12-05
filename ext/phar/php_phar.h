@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_phar.h,v 1.3 2005/12/05 01:07:01 cellog Exp $ */
+/* $Id: php_phar.h,v 1.4 2005/12/05 08:31:04 cellog Exp $ */
 
 #ifndef PHP_PHAR_H
 #define PHP_PHAR_H
@@ -63,15 +63,6 @@ typedef struct _phar_file_data {
 	size_t		internal_file_start;
 	zend_bool	is_compressed;
 } phar_file_data;
-
-typedef struct _phar_dir_entry {
-	char		*entry;
-	struct _phar_dir_entry	*next;
-} phar_dir_entry;
-
-typedef struct _phar_dir_data {
-	phar_dir_entry *current;
-} phar_dir_data;
 
 ZEND_BEGIN_MODULE_GLOBALS(phar)
 	HashTable	phar_data;

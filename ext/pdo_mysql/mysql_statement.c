@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_statement.c,v 1.48.2.8 2005/11/30 11:33:07 tony2001 Exp $ */
+/* $Id: mysql_statement.c,v 1.48.2.9 2005/12/05 13:22:14 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -503,11 +503,22 @@ static char *type_to_name_native(int type)
         PDO_MYSQL_NATIVE_TYPE_NAME(FLOAT)
         PDO_MYSQL_NATIVE_TYPE_NAME(DOUBLE)
         PDO_MYSQL_NATIVE_TYPE_NAME(DECIMAL)
+#ifdef FIELD_TYPE_NEWDECIMAL
+        PDO_MYSQL_NATIVE_TYPE_NAME(NEWDECIMAL)
+#endif
+#ifdef FIELD_TYPE_GEOMETRY
+        PDO_MYSQL_NATIVE_TYPE_NAME(GEOMETRY)
+#endif
         PDO_MYSQL_NATIVE_TYPE_NAME(TIMESTAMP)
 #ifdef MYSQL_HAS_YEAR
         PDO_MYSQL_NATIVE_TYPE_NAME(YEAR)
 #endif
+        PDO_MYSQL_NATIVE_TYPE_NAME(SET)
+        PDO_MYSQL_NATIVE_TYPE_NAME(ENUM)
         PDO_MYSQL_NATIVE_TYPE_NAME(DATE)
+#ifdef FIELD_TYPE_NEWDATE
+        PDO_MYSQL_NATIVE_TYPE_NAME(NEWDATE)
+#endif
         PDO_MYSQL_NATIVE_TYPE_NAME(TIME)
         PDO_MYSQL_NATIVE_TYPE_NAME(DATETIME)
         PDO_MYSQL_NATIVE_TYPE_NAME(TINY_BLOB)

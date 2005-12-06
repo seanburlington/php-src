@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: callback_filter.c,v 1.6 2005/12/06 15:17:38 tony2001 Exp $ */
+/* $Id: callback_filter.c,v 1.7 2005/12/06 15:20:53 tony2001 Exp $ */
 
 #include "php_filter.h"
 
@@ -47,8 +47,7 @@ void php_filter_callback(PHP_INPUT_FILTER_PARAM_DECL)
 		zval_dtor(value);
 		*value = *retval_ptr;
 		zval_copy_ctor(value);
-	}
-	else {
+	} else {
 		zval_dtor(value);
 		Z_TYPE_P(value) = IS_NULL;
 	}

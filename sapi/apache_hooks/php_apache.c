@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.17 2004/05/30 17:53:12 zeev Exp $ */
+/* $Id: php_apache.c,v 1.19.2.1 2005/12/06 01:14:01 sniper Exp $ */
 
 #include "php_apache_http.h"
 
@@ -25,7 +25,7 @@
 #include "zend.h"
 #include "ap_compat.h"
 #else
-#include "build-defs.h"
+#include <build-defs.h>
 #endif
 
 #ifdef ZTS
@@ -105,7 +105,7 @@ static void php_apache_request_free(zend_rsrc_list_entry *rsrc TSRMLS_DC)
 	zval_ptr_dtor(&z);
 }
 
-static request_rec *get_apache_request(pval *z TSRMLS_DC)
+static request_rec *get_apache_request(zval *z TSRMLS_DC)
 {
 	request_rec *r;
 	zval **addr;
@@ -1711,7 +1711,7 @@ PHP_MINFO_FUNCTION(apache)
  */
 PHP_FUNCTION(virtual)
 {
-	pval **filename;
+	zval **filename;
 	request_rec *rr = NULL;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &filename) == FAILURE) {
@@ -1818,7 +1818,7 @@ PHP_FUNCTION(apache_setenv)
    Perform a partial request of the given URI to obtain information about it */
 PHP_FUNCTION(apache_lookup_uri)
 {
-	pval **filename;
+	zval **filename;
 	request_rec *rr=NULL;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &filename) == FAILURE) {
@@ -1892,7 +1892,7 @@ This function is most likely a bad idea.  Just playing with it for now.
 
 PHP_FUNCTION(apache_exec_uri)
 {
-	pval **filename;
+	zval **filename;
 	request_rec *rr=NULL;
 	TSRMLS_FETCH();
 

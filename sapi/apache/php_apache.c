@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    |          David Sklar <sklar@student.net>                             |
    +----------------------------------------------------------------------+
  */
-/* $Id: php_apache.c,v 1.86 2004/01/08 08:18:03 andi Exp $ */
+/* $Id: php_apache.c,v 1.89.2.1 2005/12/06 01:14:01 sniper Exp $ */
 
 #include "php_apache_http.h"
 
@@ -47,6 +47,7 @@ PHP_FUNCTION(apache_child_terminate);
 PHP_FUNCTION(apache_setenv);
 PHP_FUNCTION(apache_get_version);
 PHP_FUNCTION(apache_get_modules);
+PHP_FUNCTION(apache_reset_timeout);
 
 PHP_MINFO_FUNCTION(apache);
 
@@ -134,7 +135,7 @@ PHP_FUNCTION(apache_child_terminate)
    Get and set Apache request notes */
 PHP_FUNCTION(apache_note)
 {
-	pval **arg_name, **arg_val;
+	zval **arg_name, **arg_val;
 	char *note_val;
 	int arg_count = ZEND_NUM_ARGS();
 
@@ -303,7 +304,7 @@ PHP_MINFO_FUNCTION(apache)
  */
 PHP_FUNCTION(virtual)
 {
-	pval **filename;
+	zval **filename;
 	request_rec *rr = NULL;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &filename) == FAILURE) {
@@ -410,7 +411,7 @@ PHP_FUNCTION(apache_setenv)
    Perform a partial request of the given URI to obtain information about it */
 PHP_FUNCTION(apache_lookup_uri)
 {
-	pval **filename;
+	zval **filename;
 	request_rec *rr=NULL;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_get_parameters_ex(1, &filename) == FAILURE) {
@@ -484,7 +485,7 @@ This function is most likely a bad idea.  Just playing with it for now.
 
 PHP_FUNCTION(apache_exec_uri)
 {
-	pval **filename;
+	zval **filename;
 	request_rec *rr=NULL;
 	TSRMLS_FETCH();
 
@@ -533,6 +534,20 @@ PHP_FUNCTION(apache_get_modules)
 			add_next_index_string(return_value, s, 1);
 		}	
 	}
+}
+/* }}} */
+
+/* {{{ proto bool apache_reset_timeout(void)
+   Reset the Apache write timer */
+PHP_FUNCTION(apache_reset_timeout)
+{
+	if (PG(safe_mode)) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot reset the Apache timeout in safe mode");
+		RETURN_FALSE;
+	}
+
+	ap_reset_timeout((request_rec *)SG(server_context));
+	RETURN_TRUE;
 }
 /* }}} */
 

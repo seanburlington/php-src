@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: main.c,v 1.655 2005/12/06 03:13:53 iliaa Exp $ */
+/* $Id: main.c,v 1.656 2005/12/06 23:32:27 iliaa Exp $ */
 
 /* {{{ includes
  */
@@ -862,9 +862,8 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 
 		if (!module_initialized || PG(log_errors)) {
 			char *log_buffer;
-
 #ifdef PHP_WIN32
-			if (type==E_CORE_ERROR || type==E_CORE_WARNING) {
+			if ((type == E_CORE_ERROR || type == E_CORE_WARNING) && PG(display_startup_errors)) {
 				MessageBox(NULL, buffer, error_type_str, MB_OK|ZEND_SERVICE_MB_STYLE);
 			}
 #endif

@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.26 2005/11/23 15:51:45 sniper Exp $ */
+/* $Id: filter.c,v 1.27 2005/12/06 02:10:00 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -76,7 +76,7 @@ static unsigned int php_sapi_filter(int arg, char *var, char **val, unsigned int
 
 /* {{{ filter_functions[]
  */
-function_entry filter_functions[] = {
+zend_function_entry filter_functions[] = {
 	PHP_FE(input_get, NULL)
 	PHP_FE(input_filters_list, NULL)
 	PHP_FE(input_has_variable, NULL)
@@ -264,7 +264,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.26 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.27 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

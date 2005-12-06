@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.245 2005/12/06 01:51:17 helly Exp $ */
+/* $Id: run-tests.php,v 1.246 2005/12/06 09:34:44 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -332,7 +332,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$id: $\n";
+					echo "$Id: run-tests.php,v 1.246 2005/12/06 09:34:44 helly Exp $\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1275,7 +1275,7 @@ COMMAND $cmd
 	}
 	show_result($restype, $tested, $file, $info);
 
-	$PHP_FAILED_TESTS[$restype][] = array (
+	$PHP_FAILED_TESTS[$restype.'ED'][] = array (
 						'name' => $file,
 						'test_name' => (is_array($IN_REDIRECT) ? $IN_REDIRECT['via'] : '') . $tested,
 						'output' => $output_filename,

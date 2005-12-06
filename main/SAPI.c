@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.207 2005/11/06 22:07:12 sniper Exp $ */
+/* $Id: SAPI.c,v 1.208 2005/12/06 03:39:26 iliaa Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -588,6 +588,19 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 	while(isspace(header_line[header_line_len-1])) 
 		  header_line[--header_line_len]='\0';
 	
+	/* new line safety check */
+	{
+		char *s = header_line, *e = header_line + header_line_len, *p;
+		while (s < e && (p = memchr(s, '\n', (e - s)))) {
+			if (*(p + 1) == ' ' || *(p + 1) == '\t') {
+				s = p + 1;
+				continue;
+			}
+			efree(header_line);
+			sapi_module.sapi_error(E_WARNING, "Header may not contain more then a single header, new line detected.");
+			return FAILURE;
+		}
+	}
 
 	sapi_header.header = header_line;
 	sapi_header.header_len = header_line_len;

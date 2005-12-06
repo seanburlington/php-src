@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.27 2005/12/06 02:10:00 sniper Exp $ */
+/* $Id: filter.c,v 1.28 2005/12/06 15:16:33 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -264,7 +264,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.27 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.28 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();
@@ -635,22 +635,38 @@ PHP_FUNCTION(filter_data)
 		return;
 	}
 
-	if (flags) {
-		switch (Z_TYPE_P(flags)) {
-			case IS_ARRAY:
-				options = flags;
-				break;
+	if (filter != FC_CALLBACK) {
+		if (flags) {
+			switch (Z_TYPE_P(flags)) {
+				case IS_ARRAY:
+					options = flags;
+					break;
 
-			case IS_STRING:
-			case IS_BOOL:
-			case IS_LONG:
-				convert_to_long(flags);
-				filter_flags = Z_LVAL_P(flags);
-				options = NULL;
-				break;
+				case IS_STRING:
+				case IS_BOOL:
+				case IS_LONG:
+					convert_to_long(flags);
+					filter_flags = Z_LVAL_P(flags);
+					options = NULL;
+					break;
+			}
 		}
 	}
+	else {
+		if (flags) {
+			switch (Z_TYPE_P(flags)) {
+				case IS_ARRAY:
+				case IS_STRING:
+					options = flags;
+					break;
 
+				default:
+					convert_to_string(flags);
+					options = flags;
+					break;
+			}
+		}
+	}
 	php_zval_filter_recursive(var, filter, filter_flags, options, charset TSRMLS_CC);
 	RETURN_ZVAL(var, 1, 0);
 }

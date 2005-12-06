@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.246 2005/12/06 09:34:44 helly Exp $ */
+/* $Id: run-tests.php,v 1.247 2005/12/06 23:24:38 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -332,7 +332,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Id: run-tests.php,v 1.246 2005/12/06 09:34:44 helly Exp $\n";
+					echo "$Id: run-tests.php,v 1.247 2005/12/06 23:24:38 helly Exp $\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1486,7 +1486,7 @@ function compute_summary()
 
 function get_summary($show_ext_summary, $show_html)
 {
-	global $exts_skipped, $exts_tested, $n_total, $sum_results, $percent_results, $end_time, $start_time, $failed_test_summary, $PHP_FAILED_TESTS;
+	global $exts_skipped, $exts_tested, $n_total, $sum_results, $percent_results, $end_time, $start_time, $failed_test_summary, $PHP_FAILED_TESTS, $leak_check;
 
 	$x_total = $n_total - $sum_results['SKIPPED'] - $sum_results['BORKED'];
 	if ($x_total) {
@@ -1519,8 +1519,12 @@ Tests borked    : " . sprintf("%4d (%5.1f%%)",$sum_results['BORKED'],$percent_re
 	$summary .= "
 Tests skipped   : " . sprintf("%4d (%5.1f%%)",$sum_results['SKIPPED'],$percent_results['SKIPPED']) . " --------
 Tests warned    : " . sprintf("%4d (%5.1f%%)",$sum_results['WARNED'], $percent_results['WARNED']) . " " . sprintf("(%5.1f%%)",$x_warned) . "
-Tests failed    : " . sprintf("%4d (%5.1f%%)",$sum_results['FAILED'], $percent_results['FAILED']) . " " . sprintf("(%5.1f%%)",$x_failed) . "
-Tests leaked    : " . sprintf("%4d (%5.1f%%)",$sum_results['LEAKED'], $percent_results['LEAKED']) . " " . sprintf("(%5.1f%%)",$x_leaked) . "
+Tests failed    : " . sprintf("%4d (%5.1f%%)",$sum_results['FAILED'], $percent_results['FAILED']) . " " . sprintf("(%5.1f%%)",$x_failed);
+	if ($leak_check) {
+		$summary .= "
+Tests leaked    : " . sprintf("%4d (%5.1f%%)",$sum_results['LEAKED'], $percent_results['LEAKED']) . " " . sprintf("(%5.1f%%)",$x_leaked);
+	}
+	$summary .= "
 Tests passed    : " . sprintf("%4d (%5.1f%%)",$sum_results['PASSED'], $percent_results['PASSED']) . " " . sprintf("(%5.1f%%)",$x_passed) . "
 ---------------------------------------------------------------------
 Time taken      : " . sprintf("%4d seconds", $end_time - $start_time) . "

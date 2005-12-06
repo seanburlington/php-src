@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.76 2005/11/20 15:21:23 johannes Exp $ */
+/* $Id: php_spl.c,v 1.77 2005/12/06 02:00:06 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -45,7 +45,7 @@ ZEND_DECLARE_MODULE_GLOBALS(spl)
 
 /* {{{ spl_functions_none
  */
-function_entry spl_functions_none[] = {
+zend_function_entry spl_functions_none[] = {
 	{NULL, NULL, NULL}
 };
 /* }}} */
@@ -599,7 +599,7 @@ PHP_MINFO_FUNCTION(spl)
 
 /* {{{ spl_functions
  */
-function_entry spl_functions[] = {
+zend_function_entry spl_functions[] = {
 	PHP_FE(spl_classes,             NULL)
 	PHP_FE(spl_autoload,            NULL)
 	PHP_FE(spl_autoload_extensions, NULL)

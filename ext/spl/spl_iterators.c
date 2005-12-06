@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.98 2005/12/05 20:08:19 stas Exp $ */
+/* $Id: spl_iterators.c,v 1.99 2005/12/06 02:00:07 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -56,7 +56,7 @@ PHPAPI zend_class_entry *spl_ce_AppendIterator;
 PHPAPI zend_class_entry *spl_ce_RegExIterator;
 PHPAPI zend_class_entry *spl_ce_RecursiveRegExIterator;
 
-function_entry spl_funcs_RecursiveIterator[] = {
+zend_function_entry spl_funcs_RecursiveIterator[] = {
 	SPL_ABSTRACT_ME(RecursiveIterator, hasChildren,  NULL)
 	SPL_ABSTRACT_ME(RecursiveIterator, getChildren,  NULL)
 	{NULL, NULL, NULL}

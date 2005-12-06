@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.66.2.1 2005/12/05 23:38:04 sniper Exp $ */
+/* $Id: php_sybase_db.c,v 1.66.2.2 2005/12/06 00:54:15 sniper Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1354,7 +1354,7 @@ PHP_FUNCTION(sybase_result)
 	}
 
 	*return_value = *result->data[Z_LVAL_PP(row)][field_offset];
-	pval_copy_constructor(return_value);
+	zval_copy_ctor(return_value);
 }
 /* }}} */
 

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xml.h,v 1.28 2005/08/03 14:08:21 sniper Exp $ */
+/* $Id: php_xml.h,v 1.29 2005/12/06 01:02:38 sniper Exp $ */
 
 #ifndef PHP_XML_H
 #define PHP_XML_H
@@ -86,7 +86,7 @@ typedef struct {
 	int level;
 	int toffset;
 	int curtag;
-	pval **ctag;
+	zval **ctag;
 	char **ltags;
 	int lastwasopen;
 	int skipwhite;

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.224.2.6 2005/12/06 01:26:44 sniper Exp $ */
+/* $Id: mbstring.c,v 1.224.2.7 2005/12/06 02:21:01 sniper Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -180,7 +180,7 @@ static const struct mb_overload_def mb_ovld[] = {
 }; 
 /* }}} */
 
-/* {{{ function_entry mbstring_functions[] */
+/* {{{ zend_function_entry mbstring_functions[] */
 zend_function_entry mbstring_functions[] = {
 	PHP_FE(mb_convert_case,			NULL)
 	PHP_FE(mb_strtoupper,			NULL)

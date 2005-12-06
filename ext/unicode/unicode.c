@@ -15,7 +15,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: unicode.c,v 1.5 2005/09/14 14:56:01 derick Exp $ */ 
+/* $Id: unicode.c,v 1.6 2005/12/06 02:24:51 sniper Exp $ */ 
 
 #include "php_unicode.h"
 #if HAVE_UNICODE
@@ -101,7 +101,7 @@ static PHP_FUNCTION(unicode_encode)
 	ucnv_close(conv);	
 }
 /* {{{ unicode_functions[] */
-function_entry unicode_functions[] = {
+zend_function_entry unicode_functions[] = {
 	PHP_FE(i18n_loc_get_default, NULL)
 	PHP_FE(i18n_loc_set_default, NULL)
 	PHP_FE(unicode_decode, NULL)

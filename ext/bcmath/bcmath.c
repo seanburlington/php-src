@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.62 2005/08/03 14:06:38 sniper Exp $ */
+/* $Id: bcmath.c,v 1.63 2005/12/06 02:24:25 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -33,7 +33,7 @@
 
 ZEND_DECLARE_MODULE_GLOBALS(bcmath);
 
-function_entry bcmath_functions[] = {
+zend_function_entry bcmath_functions[] = {
 	PHP_FE(bcadd,									NULL)
 	PHP_FE(bcsub,									NULL)
 	PHP_FE(bcmul,									NULL)

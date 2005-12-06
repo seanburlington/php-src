@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_pdo_driver.h,v 1.71 2005/10/27 19:38:36 tony2001 Exp $ */
+/* $Id: php_pdo_driver.h,v 1.72 2005/12/06 02:24:42 sniper Exp $ */
 
 #ifndef PHP_PDO_DRIVER_H
 #define PHP_PDO_DRIVER_H
@@ -284,7 +284,7 @@ enum {
 	PDO_DBH_DRIVER_METHOD_KIND__MAX
 };
 
-typedef function_entry *(*pdo_dbh_get_driver_methods_func)(pdo_dbh_t *dbh, int kind TSRMLS_DC);
+typedef zend_function_entry *(*pdo_dbh_get_driver_methods_func)(pdo_dbh_t *dbh, int kind TSRMLS_DC);
 
 struct pdo_dbh_methods {
 	pdo_dbh_close_func		closer;

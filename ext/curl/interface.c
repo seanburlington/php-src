@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: interface.c,v 1.70 2005/11/27 20:10:15 sniper Exp $ */
+/* $Id: interface.c,v 1.71 2005/12/06 02:24:26 sniper Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -130,7 +130,7 @@ static void _php_curl_close(zend_rsrc_list_entry *rsrc TSRMLS_DC);
 
 /* {{{ curl_functions[]
  */
-function_entry curl_functions[] = {
+zend_function_entry curl_functions[] = {
 	PHP_FE(curl_init,                NULL)
 	PHP_FE(curl_copy_handle,         NULL)
 	PHP_FE(curl_version,             NULL)

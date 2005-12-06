@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvshm.c,v 1.70 2005/08/03 14:08:18 sniper Exp $ */
+/* $Id: sysvshm.c,v 1.71 2005/12/06 02:24:51 sniper Exp $ */
 
 /* This has been built and tested on Linux 2.2.14 
  *
@@ -40,7 +40,7 @@
 
 /* {{{ sysvshm_functions[]
  */
-function_entry sysvshm_functions[] = {
+zend_function_entry sysvshm_functions[] = {
 	PHP_FE(shm_attach, NULL)
 	PHP_FE(shm_remove, NULL)
 	PHP_FE(shm_detach, NULL)

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: pgsql.c,v 1.336 2005/12/05 23:31:07 sniper Exp $ */
+/* $Id: pgsql.c,v 1.337 2005/12/06 02:24:43 sniper Exp $ */
 
 #include <stdlib.h>
 
@@ -77,7 +77,7 @@
 
 /* {{{ pgsql_functions[]
  */
-function_entry pgsql_functions[] = {
+zend_function_entry pgsql_functions[] = {
 	/* connection functions */
 	PHP_FE(pg_connect,		NULL)
 	PHP_FE(pg_pconnect,		NULL)

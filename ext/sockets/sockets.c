@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sockets.c,v 1.175 2005/12/04 17:31:40 iliaa Exp $ */
+/* $Id: sockets.c,v 1.176 2005/12/06 02:24:47 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -112,7 +112,7 @@ static
 
 /* {{{ sockets_functions[]
  */
-function_entry sockets_functions[] = {
+zend_function_entry sockets_functions[] = {
 	PHP_FE(socket_select,			first_through_third_args_force_ref)
 	PHP_FE(socket_create,			NULL)
 	PHP_FE(socket_create_listen,	NULL)

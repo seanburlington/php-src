@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.103 2005/08/03 14:07:11 sniper Exp $ */
+/* $Id: php_ftp.c,v 1.104 2005/12/06 02:24:29 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -51,7 +51,7 @@ static
         ZEND_ARG_PASS_INFO(1)
     ZEND_END_ARG_INFO()
 
-function_entry php_ftp_functions[] = {
+zend_function_entry php_ftp_functions[] = {
 	PHP_FE(ftp_connect,			NULL)
 #if HAVE_OPENSSL_EXT
 	PHP_FE(ftp_ssl_connect,		NULL)
@@ -316,7 +316,7 @@ PHP_FUNCTION(ftp_chdir)
    Requests execution of a program on the FTP server */
 PHP_FUNCTION(ftp_exec)
 {
-	pval		*z_ftp;
+	zval		*z_ftp;
 	ftpbuf_t	*ftp;
 	char		*cmd;
 	int			cmd_len;

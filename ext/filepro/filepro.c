@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filepro.c,v 1.57 2005/08/03 14:07:10 sniper Exp $ */
+/* $Id: filepro.c,v 1.58 2005/12/06 02:24:29 sniper Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com
@@ -162,7 +162,7 @@ PHP_MSHUTDOWN_FUNCTION(filepro)
 }
 /* }}} */
 
-function_entry filepro_functions[] = {
+zend_function_entry filepro_functions[] = {
 	PHP_FE(filepro,									NULL)
 	PHP_FE(filepro_rowcount,						NULL)
 	PHP_FE(filepro_fieldname,						NULL)

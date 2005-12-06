@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: tokenizer.c,v 1.34 2005/11/10 07:49:40 sniper Exp $ */
+/* $Id: tokenizer.c,v 1.35 2005/12/06 02:24:51 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -103,7 +103,7 @@ ZEND_DECLARE_MODULE_GLOBALS(tokenizer)
  *
  * Every user visible function must have an entry in tokenizer_functions[].
  */
-function_entry tokenizer_functions[] = {
+zend_function_entry tokenizer_functions[] = {
 	PHP_FE(token_get_all,	NULL)
 	PHP_FE(token_name,	NULL)
 	{NULL, NULL, NULL}	/* Must be the last line in tokenizer_functions[] */

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_sqlite2.c,v 1.7 2005/08/12 14:08:27 sebastian Exp $ */
+/* $Id: pdo_sqlite2.c,v 1.8 2005/12/06 02:24:48 sniper Exp $ */
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -477,12 +477,12 @@ static PHP_FUNCTION(sqlite2_create_function)
 	/* TODO: implement this stuff */
 }
 
-static function_entry dbh_methods[] = {
+static zend_function_entry dbh_methods[] = {
 	PHP_FE(sqlite2_create_function, NULL)
 	{NULL, NULL, NULL}
 };
 
-static function_entry *get_driver_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
+static zend_function_entry *get_driver_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
 {
 	switch (kind) {
 		case PDO_DBH_DRIVER_METHOD_KIND_DBH:

@@ -18,7 +18,7 @@
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id: calendar.c,v 1.46 2005/08/03 14:06:40 sniper Exp $ */
+/* $Id: calendar.c,v 1.47 2005/12/06 02:24:26 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -35,7 +35,7 @@
 
 #include <stdio.h>
 
-function_entry calendar_functions[] = {
+zend_function_entry calendar_functions[] = {
 	PHP_FE(jdtogregorian, NULL)
 	PHP_FE(gregoriantojd, NULL)
 	PHP_FE(jdtojulian, NULL)

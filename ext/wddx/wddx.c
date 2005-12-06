@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: wddx.c,v 1.126 2005/11/30 18:13:17 iliaa Exp $ */
+/* $Id: wddx.c,v 1.127 2005/12/06 02:24:52 sniper Exp $ */
 
 #include "php.h"
 
@@ -99,7 +99,7 @@ static void php_wddx_process_data(void *user_data, const XML_Char *s, int len);
 
 /* {{{ wddx_functions[]
  */
-function_entry wddx_functions[] = {
+zend_function_entry wddx_functions[] = {
 	PHP_FE(wddx_serialize_value, NULL)
 	PHP_FE(wddx_serialize_vars, NULL)
 	PHP_FE(wddx_packet_start, NULL)

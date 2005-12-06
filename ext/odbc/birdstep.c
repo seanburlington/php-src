@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: birdstep.c,v 1.13 2005/08/03 14:07:34 sniper Exp $ */
+/* $Id: birdstep.c,v 1.14 2005/12/06 02:24:40 sniper Exp $ */
 
 /*
  * TODO:
@@ -48,7 +48,7 @@
 #include "php_birdstep.h"
 #include "ext/standard/info.h"
 
-function_entry birdstep_functions[] = {
+zend_function_entry birdstep_functions[] = {
 	PHP_FE(birdstep_connect,        NULL)
 	PHP_FE(birdstep_close,          NULL)
 	PHP_FE(birdstep_exec,           NULL)

@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo.c,v 1.68 2005/11/25 15:40:10 sniper Exp $ */
+/* $Id: pdo.c,v 1.69 2005/12/06 02:24:41 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -108,7 +108,7 @@ PHP_FUNCTION(pdo_drivers)
 /* }}} */
 
 /* {{{ pdo_functions[] */
-function_entry pdo_functions[] = {
+zend_function_entry pdo_functions[] = {
 	PHP_FE(pdo_drivers,             NULL)
 	{NULL, NULL, NULL}
 };

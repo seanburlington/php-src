@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky <ilia@prohost.org>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id: shmop.c,v 1.31 2005/08/03 14:07:45 sniper Exp $ */
+/* $Id: shmop.c,v 1.32 2005/12/06 02:24:46 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -47,7 +47,7 @@ int shm_type;
 
 /* {{{ shmop_functions[] 
  */
-function_entry shmop_functions[] = {
+zend_function_entry shmop_functions[] = {
 	PHP_FE(shmop_open, NULL)
 	PHP_FE(shmop_read, NULL)
 	PHP_FE(shmop_close, NULL)

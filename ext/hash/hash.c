@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: hash.c,v 1.19 2005/12/03 00:51:29 pollita Exp $ */
+/* $Id: hash.c,v 1.20 2005/12/06 02:24:31 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -596,7 +596,7 @@ PHP_MINFO_FUNCTION(hash)
 
 /* {{{ hash_functions[]
  */
-function_entry hash_functions[] = {
+zend_function_entry hash_functions[] = {
 	PHP_FE(hash,									NULL)
 	PHP_FE(hash_file,								NULL)
 

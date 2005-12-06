@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_extension.c,v 1.18 2005/08/12 14:08:22 sebastian Exp $ */
+/* $Id: com_extension.c,v 1.19 2005/12/06 02:24:26 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,7 +37,7 @@ zend_class_entry
    	*php_com_exception_class_entry,
 	*php_com_saproxy_class_entry;
 
-function_entry com_dotnet_functions[] = {
+zend_function_entry com_dotnet_functions[] = {
 	PHP_FE(variant_set, NULL)
 	PHP_FE(variant_add, NULL)
 	PHP_FE(variant_cat, NULL)

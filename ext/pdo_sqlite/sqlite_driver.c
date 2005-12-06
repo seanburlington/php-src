@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.24 2005/09/20 19:52:05 iliaa Exp $ */
+/* $Id: sqlite_driver.c,v 1.25 2005/12/06 02:24:43 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -619,13 +619,13 @@ static PHP_METHOD(SQLite, sqliteCreateAggregate)
 	RETURN_FALSE;
 }
 /* }}} */
-static function_entry dbh_methods[] = {
+static zend_function_entry dbh_methods[] = {
 	PHP_ME(SQLite, sqliteCreateFunction, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(SQLite, sqliteCreateAggregate, NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}
 };
 
-static function_entry *get_driver_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
+static zend_function_entry *get_driver_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
 {
 	switch (kind) {
 		case PDO_DBH_DRIVER_METHOD_KIND_DBH:

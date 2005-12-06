@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: libxml.c,v 1.40 2005/11/23 02:54:10 rrichards Exp $ */
+/* $Id: libxml.c,v 1.41 2005/12/06 02:24:38 sniper Exp $ */
 
 #define IS_EXT_MODULE
 
@@ -87,7 +87,7 @@ PHP_MINFO_FUNCTION(libxml);
 /* }}} */
 
 /* {{{ extension definition structures */
-function_entry libxml_functions[] = {
+zend_function_entry libxml_functions[] = {
 	PHP_FE(libxml_set_streams_context, NULL)
 	PHP_FE(libxml_use_internal_errors, NULL)
 	PHP_FE(libxml_get_last_error, NULL)

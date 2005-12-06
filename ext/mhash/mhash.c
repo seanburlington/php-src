@@ -16,7 +16,7 @@
    |          Nikos Mavroyanopoulos <nmav@hellug.gr> (HMAC, KEYGEN)       |
    +----------------------------------------------------------------------+
  */
-/* $Id: mhash.c,v 1.48 2005/08/03 14:07:25 sniper Exp $ */
+/* $Id: mhash.c,v 1.49 2005/12/06 02:24:39 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -33,7 +33,7 @@
 #include "php_globals.h"
 #include "ext/standard/info.h"
 
-function_entry mhash_functions[] = {
+zend_function_entry mhash_functions[] = {
 	PHP_FE(mhash_get_block_size, NULL)
 	PHP_FE(mhash_get_hash_name, NULL)
 	PHP_FE(mhash_keygen_s2k, NULL)

@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_mysql.c,v 1.12 2005/11/25 15:40:13 sniper Exp $ */
+/* $Id: pdo_mysql.c,v 1.13 2005/12/06 02:24:42 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,7 +31,7 @@
 #include "php_pdo_mysql_int.h"
 
 /* {{{ pdo_mysql_functions[] */
-function_entry pdo_mysql_functions[] = {
+zend_function_entry pdo_mysql_functions[] = {
 	{NULL, NULL, NULL}
 };
 /* }}} */

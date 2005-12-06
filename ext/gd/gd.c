@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.322 2005/12/06 01:21:25 sniper Exp $ */
+/* $Id: gd.c,v 1.323 2005/12/06 02:24:30 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -159,7 +159,7 @@ static void _php_image_bw_convert(gdImagePtr im_org, gdIOCtx *out, int threshold
 
 /* {{{ gd_functions[]
  */
-function_entry gd_functions[] = {
+zend_function_entry gd_functions[] = {
 	PHP_FE(gd_info,                                 NULL)
 	PHP_FE(imagearc,								NULL)
 	PHP_FE(imageellipse,							NULL)

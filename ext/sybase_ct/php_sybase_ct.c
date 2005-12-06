@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.106 2005/12/05 23:31:09 sniper Exp $ */
+/* $Id: php_sybase_ct.c,v 1.107 2005/12/06 02:24:50 sniper Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -37,7 +37,7 @@ static int le_link, le_plink, le_result;
 
 #if HAVE_SYBASE_CT
 
-function_entry sybase_functions[] = {
+zend_function_entry sybase_functions[] = {
 	PHP_FE(sybase_connect, NULL)
 	PHP_FE(sybase_pconnect, NULL)
 	PHP_FE(sybase_close, NULL)

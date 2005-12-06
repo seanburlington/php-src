@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.226 2005/12/05 23:31:01 sniper Exp $ */
+/* $Id: interbase.c,v 1.227 2005/12/06 02:24:34 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,7 +36,7 @@
 #include "php_interbase.h"
 #include "php_ibase_includes.h"
 #include "SAPI.h"
-
+5B
 #include <time.h>
 
 #define ROLLBACK		0
@@ -44,7 +44,7 @@
 #define RETAIN			2
 
 /* {{{ extension definition structures */
-function_entry ibase_functions[] = {
+zend_function_entry ibase_functions[] = {
 	PHP_FE(ibase_connect, NULL)
 	PHP_FE(ibase_pconnect, NULL)
 	PHP_FE(ibase_close, NULL)

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: php_sybase_db.c,v 1.69 2005/12/06 01:19:32 sniper Exp $ */
+/* $Id: php_sybase_db.c,v 1.70 2005/12/06 02:24:50 sniper Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -80,7 +80,7 @@ typedef struct {
 } sybase_result;
 
 
-function_entry sybase_functions[] = {
+zend_function_entry sybase_functions[] = {
 	PHP_FE(sybase_connect,			NULL)
 	PHP_FE(sybase_pconnect,			NULL)
 	PHP_FE(sybase_close,			NULL)

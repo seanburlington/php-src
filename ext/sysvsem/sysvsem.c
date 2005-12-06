@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.51 2005/08/03 14:08:18 sniper Exp $ */
+/* $Id: sysvsem.c,v 1.52 2005/12/06 02:24:50 sniper Exp $ */
 
 /* Latest update build anc tested on Linux 2.2.14
  *
@@ -58,7 +58,7 @@ union semun {
 
 /* {{{ sysvsem_functions[]
  */
-function_entry sysvsem_functions[] = {
+zend_function_entry sysvsem_functions[] = {
 	PHP_FE(sem_get,			NULL)
 	PHP_FE(sem_acquire,		NULL)
 	PHP_FE(sem_release,		NULL)

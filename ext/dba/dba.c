@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba.c,v 1.113 2005/12/05 22:43:01 sniper Exp $ */
+/* $Id: dba.c,v 1.114 2005/12/06 02:24:27 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -53,7 +53,7 @@
 
 /* {{{ dba_functions[]
  */
-function_entry dba_functions[] = {
+zend_function_entry dba_functions[] = {
 	PHP_FE(dba_open, NULL)
 	PHP_FE(dba_popen, NULL)
 	PHP_FE(dba_close, NULL)

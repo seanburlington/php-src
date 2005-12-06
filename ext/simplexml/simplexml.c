@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: simplexml.c,v 1.179 2005/11/30 08:14:48 helly Exp $ */
+/* $Id: simplexml.c,v 1.180 2005/12/06 02:24:46 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1936,7 +1936,7 @@ PHP_FUNCTION(simplexml_import_dom)
 }
 /* }}} */
 
-function_entry simplexml_functions[] = {
+zend_function_entry simplexml_functions[] = {
 	PHP_FE(simplexml_load_file, NULL)
 	PHP_FE(simplexml_load_string, NULL)
 	PHP_FE(simplexml_import_dom, NULL)
@@ -2029,7 +2029,7 @@ PHP_MINFO_FUNCTION(simplexml)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Simplexml support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.179 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.180 $");
 	php_info_print_table_row(2, "Schema support",
 #ifdef LIBXML_SCHEMAS_ENABLED
 		"enabled");

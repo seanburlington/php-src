@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: session.c,v 1.423 2005/12/02 18:42:41 sniper Exp $ */
+/* $Id: session.c,v 1.424 2005/12/06 02:24:45 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -56,7 +56,7 @@
 
 /* {{{ session_functions[]
  */
-function_entry session_functions[] = {
+zend_function_entry session_functions[] = {
 	PHP_FE(session_name,              NULL)
 	PHP_FE(session_module_name,       NULL)
 	PHP_FE(session_save_path,         NULL)

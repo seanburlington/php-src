@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.53.2.7 2005/12/06 02:25:28 sniper Exp $ */
+/* $Id: pgsql_driver.c,v 1.53.2.8 2005/12/06 21:44:15 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -132,7 +132,7 @@ static int pgsql_lob_close(php_stream *stream, int close_handle TSRMLS_DC)
 		lo_close(self->conn, self->lfd);
 	}
 	efree(self);
-	php_pdo_dbh_delref(dbh TSRMLS_DC);
+	php_pdo_dbh_delref(dbh TSRMLS_CC);
 	return 0;
 }
 

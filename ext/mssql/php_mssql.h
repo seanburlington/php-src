@@ -17,7 +17,7 @@
  */
 
 
-/* $Id: php_mssql.h,v 1.42 2005/08/08 21:32:18 fmk Exp $ */
+/* $Id: php_mssql.h,v 1.43 2005/12/06 01:25:13 sniper Exp $ */
 
 #ifndef PHP_MSSQL_H
 #define PHP_MSSQL_H
@@ -162,7 +162,7 @@ ZEND_BEGIN_MODULE_GLOBALS(mssql)
 	long cfg_min_error_severity, cfg_min_message_severity;
 	long connect_timeout, timeout;
 	zend_bool compatability_mode;
-	void (*get_column_content)(mssql_link *mssql_ptr,int offset,pval *result,int column_type  TSRMLS_DC);
+	void (*get_column_content)(mssql_link *mssql_ptr,int offset,zval *result,int column_type  TSRMLS_DC);
 	long textsize, textlimit, batchsize;
 	zend_bool datetimeconvert;
 	HashTable *resource_list, *resource_plist;
@@ -180,7 +180,7 @@ typedef struct mssql_field {
 } mssql_field;
 
 typedef struct mssql_result {
-	pval **data;
+	zval **data;
 	mssql_field *fields;
 	mssql_link *mssql_ptr;
 	mssql_statement * statement;

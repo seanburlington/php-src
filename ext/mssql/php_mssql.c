@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_mssql.c,v 1.160 2005/12/05 23:31:04 sniper Exp $ */
+/* $Id: php_mssql.c,v 1.161 2005/12/06 01:25:13 sniper Exp $ */
 
 #ifdef COMPILE_DL_MSSQL
 #define HAVE_MSSQL 1
@@ -47,7 +47,7 @@ static void php_mssql_get_column_content_without_type(mssql_link *mssql_ptr,int 
 
 static void _mssql_bind_hash_dtor(void *data);
 
-function_entry mssql_functions[] = {
+zend_function_entry mssql_functions[] = {
 	PHP_FE(mssql_connect,				NULL)
 	PHP_FE(mssql_pconnect,				NULL)
 	PHP_FE(mssql_close,					NULL)

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.321 2005/12/04 23:24:12 sniper Exp $ */
+/* $Id: gd.c,v 1.322 2005/12/06 01:21:25 sniper Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -2569,7 +2569,7 @@ PHP_FUNCTION(imageinterlace)
 static void php_imagepolygon(INTERNAL_FUNCTION_PARAMETERS, int filled)
 {
 	zval **IM, **POINTS, **NPOINTS, **COL;
-	pval **var = NULL;
+	zval **var = NULL;
 	gdImagePtr im;
 	gdPointPtr points;
 	int npoints, col, nelem, i;
@@ -4159,7 +4159,7 @@ PHP_FUNCTION(imagefilter)
 PHP_FUNCTION(imageconvolution)
 {
 	zval *SIM, *hash_matrix;
-	pval **var = NULL, **var2 = NULL;
+	zval **var = NULL, **var2 = NULL;
 	gdImagePtr im_src = NULL;
 	double div, offset;
 	int nelem, i, j, res;

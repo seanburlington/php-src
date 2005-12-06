@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_hash.h,v 1.13.2.4 2005/12/03 23:50:33 tony2001 Exp $ */
+/* $Id: php_hash.h,v 1.13.2.5 2005/12/06 17:54:24 pollita Exp $ */
 
 #ifndef PHP_HASH_H
 #define PHP_HASH_H
@@ -25,7 +25,7 @@
 #include "php_hash_types.h"
 
 #define PHP_HASH_EXTNAME	"hash"
-#define PHP_HASH_EXTVER		"0.1"
+#define PHP_HASH_EXTVER		"1.0"
 #define PHP_HASH_RESNAME	"Hash Context"
 
 #define PHP_HASH_HMAC		0x0001

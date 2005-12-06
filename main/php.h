@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.223 2005/08/11 23:36:04 andrei Exp $ */
+/* $Id: php.h,v 1.224 2005/12/06 00:44:21 sniper Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -170,11 +170,13 @@ typedef unsigned int socklen_t;
 # endif
 #endif
 
-
 #include "zend_hash.h"
-#include "php3_compat.h"
 #include "zend_alloc.h"
 #include "zend_stack.h"
+
+/* PHP3 Legacy */
+typedef zval pval;
+#define function_entry          zend_function_entry
 
 #if STDC_HEADERS
 # include <string.h>

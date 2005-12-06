@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_variables.h,v 1.21 2004/01/08 17:33:04 sniper Exp $ */
+/* $Id: php_variables.h,v 1.22.2.1 2005/12/06 01:05:56 sniper Exp $ */
 
 #ifndef PHP_VARIABLES_H
 #define PHP_VARIABLES_H
@@ -34,10 +34,10 @@ BEGIN_EXTERN_C()
 void php_treat_data(int arg, char *str, zval* destArray TSRMLS_DC);
 void php_startup_auto_globals(TSRMLS_D);
 extern PHPAPI void (*php_import_environment_variables)(zval *array_ptr TSRMLS_DC);
-PHPAPI void php_register_variable(char *var, char *val, pval *track_vars_array TSRMLS_DC);
+PHPAPI void php_register_variable(char *var, char *val, zval *track_vars_array TSRMLS_DC);
 /* binary-safe version */
-PHPAPI void php_register_variable_safe(char *var, char *val, int val_len, pval *track_vars_array TSRMLS_DC);
-PHPAPI void php_register_variable_ex(char *var, zval *val, pval *track_vars_array TSRMLS_DC);
+PHPAPI void php_register_variable_safe(char *var, char *val, int val_len, zval *track_vars_array TSRMLS_DC);
+PHPAPI void php_register_variable_ex(char *var, zval *val, zval *track_vars_array TSRMLS_DC);
 
 int php_hash_environment(TSRMLS_D);
 END_EXTERN_C()

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.16 2004/01/08 08:17:37 andi Exp $ */
+/* $Id: sysvmsg.c,v 1.20.2.1 2005/12/06 02:25:33 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -66,7 +66,7 @@ static
  *
  * Every user visible function must have an entry in sysvmsg_functions[].
  */
-function_entry sysvmsg_functions[] = {
+zend_function_entry sysvmsg_functions[] = {
 	PHP_FE(msg_get_queue,				NULL)
 	PHP_FE(msg_send,					sixth_arg_force_ref)
 	PHP_FE(msg_receive,					msg_receive_args_force_ref)
@@ -142,7 +142,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.16 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.20.2.1 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -330,10 +330,11 @@ PHP_FUNCTION(msg_receive)
 		/* got it! */
 		ZVAL_LONG(out_msgtype, messagebuffer->mtype);
 
+		RETVAL_TRUE;
 		if (do_unserialize)	{
 			php_unserialize_data_t var_hash;
 			zval *tmp = NULL;
-			const char *p = (const char *) messagebuffer->mtext;
+			const unsigned char *p = (const unsigned char *) messagebuffer->mtext;
 
 			MAKE_STD_ZVAL(tmp);
 			PHP_VAR_UNSERIALIZE_INIT(var_hash);
@@ -347,7 +348,6 @@ PHP_FUNCTION(msg_receive)
 		} else {
 			ZVAL_STRINGL(out_message, messagebuffer->mtext, result, 1);
 		}
-		RETVAL_TRUE;
 	} else if (zerrcode) {
 		ZVAL_LONG(zerrcode, errno);
 	}
@@ -391,10 +391,33 @@ PHP_FUNCTION(msg_send)
 		message_len = msg_var.len;
 		smart_str_free(&msg_var);
 	} else {
-		convert_to_string_ex(&message);
-		messagebuffer = emalloc(sizeof(struct php_msgbuf) + Z_STRLEN_P(message));
-		memcpy(messagebuffer->mtext, Z_STRVAL_P(message), Z_STRLEN_P(message) + 1);
-		message_len = Z_STRLEN_P(message);
+		char *p;
+		switch (Z_TYPE_P(message)) {
+			case IS_STRING:
+				p = Z_STRVAL_P(message);
+				message_len = Z_STRLEN_P(message);
+				break;
+
+			case IS_LONG:
+			case IS_BOOL:
+				message_len = spprintf(&p, 0, "%ld", Z_LVAL_P(message));
+				break;
+
+			case IS_DOUBLE:
+				message_len = spprintf(&p, 0, "%f", Z_DVAL_P(message));
+				break;
+
+			default:
+				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Message parameter must be either a string or a number.");
+				RETURN_FALSE;
+		}
+
+		messagebuffer = emalloc(sizeof(struct php_msgbuf) + message_len);
+		memcpy(messagebuffer->mtext, p, message_len + 1);
+
+		if (Z_TYPE_P(message) != IS_STRING) {
+			efree(p);
+		}
 	}
 	
 	/* set the message type */

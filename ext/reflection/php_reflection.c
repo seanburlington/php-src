@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.13 2005/12/01 11:48:17 dmitry Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.14 2005/12/06 02:25:29 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -4146,7 +4146,7 @@ static zend_function_entry reflection_extension_functions[] = {
 };
 /* }}} */
 
-function_entry reflection_ext_functions[] = { /* {{{ */
+zend_function_entry reflection_ext_functions[] = { /* {{{ */
 	{NULL, NULL, NULL}
 }; /* }}} */
 
@@ -4254,7 +4254,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.13 2005/12/01 11:48:17 dmitry Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.14 2005/12/06 02:25:29 sniper Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

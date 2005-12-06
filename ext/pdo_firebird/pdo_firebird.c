@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_firebird.c,v 1.4.2.1 2005/09/11 05:27:30 wez Exp $ */
+/* $Id: pdo_firebird.c,v 1.4.2.2 2005/12/06 02:25:27 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -30,7 +30,7 @@
 #include "php_pdo_firebird.h"
 #include "php_pdo_firebird_int.h"
 
-function_entry pdo_firebird_functions[] = { /* {{{ */
+zend_function_entry pdo_firebird_functions[] = { /* {{{ */
 	{NULL, NULL, NULL}
 };
 /* }}} */

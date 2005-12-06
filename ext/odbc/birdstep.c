@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: birdstep.c,v 1.11 2004/01/08 08:16:37 andi Exp $ */
+/* $Id: birdstep.c,v 1.13.2.1 2005/12/06 02:25:26 sniper Exp $ */
 
 /*
  * TODO:
@@ -39,7 +39,7 @@
 #  define PHPAPI __declspec(dllimport) 
 # endif
 #else
-# include "php_config.h"
+# include <php_config.h>
 # define PHPAPI
 # define THREAD_LS
 #endif
@@ -48,7 +48,7 @@
 #include "php_birdstep.h"
 #include "ext/standard/info.h"
 
-function_entry birdstep_functions[] = {
+zend_function_entry birdstep_functions[] = {
 	PHP_FE(birdstep_connect,        NULL)
 	PHP_FE(birdstep_close,          NULL)
 	PHP_FE(birdstep_exec,           NULL)

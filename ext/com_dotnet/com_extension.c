@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: com_extension.c,v 1.14 2004/05/09 15:21:29 wez Exp $ */
+/* $Id: com_extension.c,v 1.17.2.1 2005/12/06 02:25:18 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -37,7 +37,7 @@ zend_class_entry
    	*php_com_exception_class_entry,
 	*php_com_saproxy_class_entry;
 
-function_entry com_dotnet_functions[] = {
+zend_function_entry com_dotnet_functions[] = {
 	PHP_FE(variant_set, NULL)
 	PHP_FE(variant_add, NULL)
 	PHP_FE(variant_cat, NULL)
@@ -194,12 +194,12 @@ PHP_MINIT_FUNCTION(com_dotnet)
 	INIT_CLASS_ENTRY(ce, "com_exception", NULL);
 	php_com_exception_class_entry = zend_register_internal_class_ex(&ce, zend_exception_get_default(), NULL TSRMLS_CC);
 	php_com_exception_class_entry->ce_flags |= ZEND_ACC_FINAL;
-	php_com_exception_class_entry->constructor->common.fn_flags |= ZEND_ACC_PROTECTED;
+/*	php_com_exception_class_entry->constructor->common.fn_flags |= ZEND_ACC_PROTECTED; */
 
 	INIT_CLASS_ENTRY(ce, "com_safearray_proxy", NULL);
 	php_com_saproxy_class_entry = zend_register_internal_class(&ce TSRMLS_CC);
 	php_com_saproxy_class_entry->ce_flags |= ZEND_ACC_FINAL;
-//	php_com_saproxy_class_entry->constructor->common.fn_flags |= ZEND_ACC_PROTECTED;
+/*	php_com_saproxy_class_entry->constructor->common.fn_flags |= ZEND_ACC_PROTECTED; */
 	php_com_saproxy_class_entry->get_iterator = php_com_saproxy_iter_get;
 	
 	INIT_CLASS_ENTRY(ce, "variant", NULL);

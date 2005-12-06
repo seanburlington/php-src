@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.124.2.2 2005/10/20 16:51:03 tony2001 Exp $ */
+/* $Id: iconv.c,v 1.124.2.3 2005/12/06 02:25:23 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -64,7 +64,7 @@
 
 /* {{{ iconv_functions[]
  */
-function_entry iconv_functions[] = {
+zend_function_entry iconv_functions[] = {
 	PHP_NAMED_FE(iconv,php_if_iconv,				NULL)
 	PHP_FE(ob_iconv_handler,						NULL)
 	PHP_FE(iconv_get_encoding,						NULL)

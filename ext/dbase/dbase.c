@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dbase.c,v 1.72 2004/01/08 08:15:07 andi Exp $ */
+/* $Id: dbase.c,v 1.74.2.1 2005/12/06 02:25:20 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -128,6 +128,11 @@ PHP_FUNCTION(dbase_open)
 	}
 	convert_to_string_ex(dbf_name);
 	convert_to_long_ex(options);
+
+	if (Z_LVAL_PP(options) == 1) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot open %s in write-only mode", Z_STRVAL_PP(dbf_name));
+		RETURN_FALSE;
+	}
 
 	if (PG(safe_mode) && (!php_checkuid(Z_STRVAL_PP(dbf_name), NULL, CHECKUID_CHECK_FILE_AND_DIR))) {
 		RETURN_FALSE;
@@ -725,7 +730,7 @@ PHP_FUNCTION(dbase_create)
 
 /* {{{ dbase_functions[]
  */
-function_entry dbase_functions[] = {
+zend_function_entry dbase_functions[] = {
 	PHP_FE(dbase_open,								NULL)
 	PHP_FE(dbase_create,							NULL)
 	PHP_FE(dbase_close,								NULL)

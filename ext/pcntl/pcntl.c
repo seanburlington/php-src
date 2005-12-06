@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: pcntl.c,v 1.44 2004/06/30 01:12:04 iliaa Exp $ */
+/* $Id: pcntl.c,v 1.48.2.1 2005/12/06 02:25:26 sniper Exp $ */
 
 #define PCNTL_DEBUG 0
 
@@ -43,7 +43,7 @@
 
 ZEND_DECLARE_MODULE_GLOBALS(pcntl)
 
-function_entry pcntl_functions[] = {
+zend_function_entry pcntl_functions[] = {
 	PHP_FE(pcntl_fork,			NULL)
 	PHP_FE(pcntl_waitpid,		second_arg_force_ref)
 	PHP_FE(pcntl_wait,		first_arg_force_ref)
@@ -56,8 +56,12 @@ function_entry pcntl_functions[] = {
 	PHP_FE(pcntl_wstopsig,		NULL)
 	PHP_FE(pcntl_exec,			NULL)
 	PHP_FE(pcntl_alarm,			NULL)
+#ifdef HAVE_GETPRIORITY
 	PHP_FE(pcntl_getpriority,	NULL)
+#endif
+#ifdef HAVE_SETPRIORITY
 	PHP_FE(pcntl_setpriority,	NULL)
+#endif
 	{NULL, NULL, NULL}	
 };
 
@@ -144,8 +148,10 @@ void php_register_signal_constants(INIT_FUNC_ARGS)
 #ifdef SIGPWR
 	REGISTER_LONG_CONSTANT("SIGPWR",   (long) SIGPWR, CONST_CS | CONST_PERSISTENT);
 #endif
+#ifdef SIGSYS
 	REGISTER_LONG_CONSTANT("SIGSYS",   (long) SIGSYS, CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("SIGBABY",  (long) SIGSYS, CONST_CS | CONST_PERSISTENT);
+#endif
 
 #if HAVE_GETPRIORITY || HAVE_SETPRIORITY
 	REGISTER_LONG_CONSTANT("PRIO_PGRP", PRIO_PGRP, CONST_CS | CONST_PERSISTENT);
@@ -156,17 +162,13 @@ void php_register_signal_constants(INIT_FUNC_ARGS)
 
 static void php_pcntl_init_globals(zend_pcntl_globals *pcntl_globals)
 { 
-	/* Just in case ... */
-	memset(&pcntl_globals->php_signal_queue,0,sizeof(pcntl_globals->php_signal_queue));
-   
-	zend_llist_init(&pcntl_globals->php_signal_queue, sizeof (long),  NULL, 1);
-	pcntl_globals->signal_queue_ready = 0;
-	pcntl_globals->processing_signal_queue = 0;
+	memset(pcntl_globals, 0, sizeof(*pcntl_globals));
 }
 
 PHP_RINIT_FUNCTION(pcntl)
 {
-	zend_hash_init(&PCNTL_G(php_signal_table), 16, NULL, ZVAL_PTR_DTOR, 1);
+	zend_hash_init(&PCNTL_G(php_signal_table), 16, NULL, ZVAL_PTR_DTOR, 0);
+	PCNTL_G(head) = PCNTL_G(tail) = PCNTL_G(spares) = NULL;
 	return SUCCESS;
 }
 
@@ -181,13 +183,26 @@ PHP_MINIT_FUNCTION(pcntl)
 
 PHP_MSHUTDOWN_FUNCTION(pcntl)
 {
-	zend_llist_destroy(&PCNTL_G(php_signal_queue));
 	return SUCCESS;
 }
 
 PHP_RSHUTDOWN_FUNCTION(pcntl)
 {
+	struct php_pcntl_pending_signal *sig;
+
+	/* FIXME: if a signal is delivered after this point, things will go pear shaped;
+	 * need to remove signal handlers */
 	zend_hash_destroy(&PCNTL_G(php_signal_table));
+	while (PCNTL_G(head)) {
+		sig = PCNTL_G(head);
+		PCNTL_G(head) = sig->next;
+		efree(sig);
+	}
+	while (PCNTL_G(spares)) {
+		sig = PCNTL_G(spares);
+		PCNTL_G(spares) = sig->next;
+		efree(sig);
+	}
 	return SUCCESS;
 }
 
@@ -514,6 +529,19 @@ PHP_FUNCTION(pcntl_signal)
 		return;
 	}
 
+	if (!PCNTL_G(spares)) {
+		/* since calling malloc() from within a signal handler is not portable,
+		 * pre-allocate a few records for recording signals */
+		int i;
+		for (i = 0; i < 32; i++) {
+			struct php_pcntl_pending_signal *psig;
+
+			psig = emalloc(sizeof(*psig));
+			psig->next = PCNTL_G(spares);
+			PCNTL_G(spares) = psig;
+		}
+	}
+
 	/* Special long value case for SIG_DFL and SIG_IGN */
 	if (Z_TYPE_P(handle)==IS_LONG) {
 		if (Z_LVAL_P(handle)!= (long) SIG_DFL && Z_LVAL_P(handle) != (long) SIG_IGN) {
@@ -625,57 +653,63 @@ PHP_FUNCTION(pcntl_setpriority)
 /* Our custom signal handler that calls the appropriate php_function */
 static void pcntl_signal_handler(int signo)
 {
-	long signal_num = signo;
+	struct php_pcntl_pending_signal *psig;
 	TSRMLS_FETCH();
 	
-	IF_DEBUG(DEBUG_OUT("Caught signo %d\n", signo));
-	if (! PCNTL_G(processing_signal_queue)) {
-		zend_llist_add_element(&PCNTL_G(php_signal_queue), &signal_num);
-		PCNTL_G(signal_queue_ready) = 1;
-		IF_DEBUG(DEBUG_OUT("Added queue entry\n"));
+	psig = PCNTL_G(spares);
+	if (!psig) {
+		/* oops, too many signals for us to track, so we'll forget about this one */
+		return;
 	}
-	return;
+	PCNTL_G(spares) = psig->next;
+
+	psig->signo = signo;
+	psig->next = NULL;
+
+	/* the head check is important, as the tick handler cannot atomically clear both
+	 * the head and tail */
+	if (PCNTL_G(head) && PCNTL_G(tail)) {
+		PCNTL_G(tail)->next = psig;
+	} else {
+		PCNTL_G(head) = psig;
+	}
+	PCNTL_G(tail) = psig;
 }
 
 void pcntl_tick_handler()
 {
-	zend_llist_element *element;
 	zval *param, **handle, *retval;
+	struct php_pcntl_pending_signal *queue, *next;
 	TSRMLS_FETCH();
 
 	/* Bail if the queue is empty or if we are already playing the queue*/
-	if (! PCNTL_G(signal_queue_ready) || PCNTL_G(processing_signal_queue))
+	if (! PCNTL_G(head) || PCNTL_G(processing_signal_queue))
 		return;
 
-	/* Mark our queue empty */
-	PCNTL_G(signal_queue_ready) = 0;
-	
-	/* If for some reason our signal queue is empty then return */
-	if (zend_llist_count(&PCNTL_G(php_signal_queue)) <= 0) {
-		return;
-	}
-	
 	/* Prevent reentrant handler calls */
 	PCNTL_G(processing_signal_queue) = 1;
 
+	queue = PCNTL_G(head);
+	PCNTL_G(head) = NULL; /* simple stores are atomic */
+	
 	/* Allocate */
 	MAKE_STD_ZVAL(param);
 	MAKE_STD_ZVAL(retval);
 
-	/* Traverse through our signal queue and call the appropriate php functions */
-	for (element = (&PCNTL_G(php_signal_queue))->head; element; element = element->next) {
-		long *signal_num = (long *)&element->data;
-		if (zend_hash_index_find(&PCNTL_G(php_signal_table), *signal_num, (void **) &handle)==FAILURE) {
-			continue;
+	while (queue) {
+		if (zend_hash_index_find(&PCNTL_G(php_signal_table), queue->signo, (void **) &handle)==SUCCESS) {
+			ZVAL_LONG(param, queue->signo);
+
+			/* Call php signal handler - Note that we do not report errors, and we ignore the return value */
+			/* FIXME: this is probably broken when multiple signals are handled in this while loop (retval) */
+			call_user_function(EG(function_table), NULL, *handle, retval, 1, &param TSRMLS_CC);
 		}
 
-		ZVAL_LONG(param, *signal_num);
-		
-		/* Call php signal handler - Note that we do not report errors, and we ignore the return value */
-		call_user_function(EG(function_table), NULL, *handle, retval, 1, &param TSRMLS_CC);
+		next = queue->next;
+		queue->next = PCNTL_G(spares);
+		PCNTL_G(spares) = queue;
+		queue = next;
 	}
-	/* Clear */
-	zend_llist_clean(&PCNTL_G(php_signal_queue));
 
 	/* Re-enable queue */
 	PCNTL_G(processing_signal_queue) = 0;
@@ -684,6 +718,8 @@ void pcntl_tick_handler()
 	efree(param);
 	efree(retval);
 }
+
+
 
 /*
  * Local variables:

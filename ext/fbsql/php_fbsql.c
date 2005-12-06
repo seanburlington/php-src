@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_fbsql.c,v 1.114.2.1 2005/12/05 23:37:53 sniper Exp $ */
+/* $Id: php_fbsql.c,v 1.114.2.2 2005/12/06 02:25:21 sniper Exp $ */
 
 /* TODO:
  *
@@ -183,7 +183,7 @@ char *DigestPassword(char *user, char *password)
 
 /* {{{ fbsql_functions[]
  */
-function_entry fbsql_functions[] = {
+zend_function_entry fbsql_functions[] = {
 	PHP_FE(fbsql_connect,			NULL)
 	PHP_FE(fbsql_pconnect,			NULL)
 	PHP_FE(fbsql_close,				NULL)

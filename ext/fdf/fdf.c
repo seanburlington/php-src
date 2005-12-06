@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: fdf.c,v 1.86 2004/05/16 14:38:19 iliaa Exp $ */
+/* $Id: fdf.c,v 1.89.2.1 2005/12/06 02:25:21 sniper Exp $ */
 
 /* FdfTk lib 2.0 is a Complete C/C++ FDF Toolkit available from
    http://beta1.adobe.com/ada/acrosdk/forms.html. */
@@ -49,7 +49,7 @@ SAPI_POST_HANDLER_FUNC(fdf_post_handler);
 
 /* {{{ fdf_functions[]
  */
-function_entry fdf_functions[] = {
+zend_function_entry fdf_functions[] = {
 	PHP_FE(fdf_add_template,						NULL)
 	PHP_FE(fdf_close,								NULL)
 	PHP_FE(fdf_create,								NULL)
@@ -145,7 +145,7 @@ PHP_MINIT_FUNCTION(fdf)
 	le_fdf = zend_register_list_destructors_ex(phpi_FDFClose, NULL, "fdf", module_number);
 
  	/* add handler for Acrobat FDF form post requests */
-	sapi_register_post_entry(&php_fdf_post_entry);
+	sapi_register_post_entry(&php_fdf_post_entry TSRMLS_CC);
 
 
 	/* Constants used by fdf_set_opt() */ 
@@ -215,7 +215,7 @@ PHP_MINFO_FUNCTION(fdf)
 PHP_MSHUTDOWN_FUNCTION(fdf)
 {
 	/* remove handler for Acrobat FDF form post requests */
-	sapi_unregister_post_entry(&php_fdf_post_entry); 
+	sapi_unregister_post_entry(&php_fdf_post_entry TSRMLS_CC); 
 
 #ifdef PHP_WIN32
 	return SUCCESS;
@@ -871,7 +871,10 @@ PHP_FUNCTION(fdf_save_string)
 				struct stat stat;
 				char *buf;
 
-				fstat(fileno(fp), &stat);
+				if (fstat(fileno(fp), &stat) == -1) {
+					RETVAL_FALSE;
+					goto err;
+				}
 				buf = emalloc(stat.st_size +1);
 				fread(buf, stat.st_size, 1, fp);
 				buf[stat.st_size] = '\0';
@@ -889,7 +892,7 @@ PHP_FUNCTION(fdf_save_string)
 	if(err != FDFErcOK) {
 		FDF_FAILURE(err);
 	}
-
+err:
 	if(temp_filename) {
 		unlink(temp_filename);
 		efree(temp_filename);

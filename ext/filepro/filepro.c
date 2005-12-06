@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: filepro.c,v 1.55 2004/01/08 08:15:26 andi Exp $ */
+/* $Id: filepro.c,v 1.57.2.1 2005/12/06 02:25:21 sniper Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com
@@ -96,11 +96,43 @@ PHP_MINIT_FUNCTION(filepro)
 	fp_globals = (fp_global_struct *) LocalAlloc(LPTR, sizeof(fp_global_struct)); 
 	TlsSetValue(FPTls, (void *) fp_globals);
 #endif
+
+	return SUCCESS;
+}
+/* }}} */
+
+/* {{{ PHP_RINIT_FUNCTION
+ */
+PHP_RINIT_FUNCTION(filepro)
+{
 	FP_GLOBAL(fp_database)=NULL;
 	FP_GLOBAL(fp_fcount)=-1;
 	FP_GLOBAL(fp_keysize)=-1;
 	FP_GLOBAL(fp_fieldlist)=NULL;
+ 
+	return SUCCESS;
+}
+/* }}} */
 
+/* {{{ PHP_RSHUTDOWN_FUNCTION
+ */
+PHP_RSHUTDOWN_FUNCTION(filepro)
+{
+	FP_FIELD *tmp, *next;
+
+	if (FP_GLOBAL(fp_database)) {
+		efree(FP_GLOBAL(fp_database));
+	}
+	
+	if (FP_GLOBAL(fp_fieldlist)) {
+		for (tmp = FP_GLOBAL(fp_fieldlist); tmp;) {
+			efree(tmp->name);
+			efree(tmp->format);
+			next = tmp->next;
+			efree(tmp);
+			tmp=next;
+		}	
+	}
 	return SUCCESS;
 }
 /* }}} */
@@ -130,7 +162,7 @@ PHP_MSHUTDOWN_FUNCTION(filepro)
 }
 /* }}} */
 
-function_entry filepro_functions[] = {
+zend_function_entry filepro_functions[] = {
 	PHP_FE(filepro,									NULL)
 	PHP_FE(filepro_rowcount,						NULL)
 	PHP_FE(filepro_fieldname,						NULL)
@@ -143,7 +175,15 @@ function_entry filepro_functions[] = {
 
 zend_module_entry filepro_module_entry = {
 	STANDARD_MODULE_HEADER,
-	"filepro", filepro_functions, PHP_MINIT(filepro), PHP_MSHUTDOWN(filepro), NULL, NULL, NULL, NO_VERSION_YET, STANDARD_MODULE_PROPERTIES
+	"filepro", 
+	filepro_functions, 
+	PHP_MINIT(filepro), 
+	PHP_MSHUTDOWN(filepro), 
+	PHP_RINIT(filepro), 
+	PHP_RSHUTDOWN(filepro), 
+	NULL, 
+	NO_VERSION_YET, 
+	STANDARD_MODULE_PROPERTIES
 };
 
 
@@ -214,6 +254,8 @@ PHP_FUNCTION(filepro)
 	tmp = FP_GLOBAL(fp_fieldlist);
 	while (tmp != NULL) {
 		next = tmp->next;
+		efree(tmp->name);
+		efree(tmp->format);
 		efree(tmp);
 		tmp = next;
 	} 

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: bcmath.c,v 1.60 2004/05/12 10:15:45 helly Exp $ */
+/* $Id: bcmath.c,v 1.62.2.1 2005/12/06 02:25:18 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -33,7 +33,7 @@
 
 ZEND_DECLARE_MODULE_GLOBALS(bcmath);
 
-function_entry bcmath_functions[] = {
+zend_function_entry bcmath_functions[] = {
 	PHP_FE(bcadd,									NULL)
 	PHP_FE(bcsub,									NULL)
 	PHP_FE(bcmul,									NULL)
@@ -53,8 +53,8 @@ zend_module_entry bcmath_module_entry = {
 	bcmath_functions,
 	PHP_MINIT(bcmath),
 	PHP_MSHUTDOWN(bcmath),
-	NULL,
-	NULL,
+	PHP_RINIT(bcmath),
+	PHP_RSHUTDOWN(bcmath),
 	PHP_MINFO(bcmath),
 	NO_VERSION_YET,
 	STANDARD_MODULE_PROPERTIES
@@ -86,8 +86,6 @@ PHP_MINIT_FUNCTION(bcmath)
 
 	REGISTER_INI_ENTRIES();
 
-	bc_init_numbers(TSRMLS_C);
-
 	return SUCCESS;
 }
 /* }}} */
@@ -96,15 +94,33 @@ PHP_MINIT_FUNCTION(bcmath)
  */
 PHP_MSHUTDOWN_FUNCTION(bcmath)
 {
-	_bc_free_num_ex(&BCG(_zero_), 1);
-	_bc_free_num_ex(&BCG(_one_), 1);
-	_bc_free_num_ex(&BCG(_two_), 1);
-
 	UNREGISTER_INI_ENTRIES();
 
 	return SUCCESS;
 }
 /* }}} */
+
+/* {{{ PHP_RINIT_FUNCTION
+ */
+PHP_RINIT_FUNCTION(bcmath)
+{
+	bc_init_numbers(TSRMLS_C);
+
+	return SUCCESS;
+}
+/* }}} */
+
+/* {{{ PHP_RSHUTDOWN_FUNCTION
+ */
+PHP_RSHUTDOWN_FUNCTION(bcmath)
+{
+	_bc_free_num_ex(&BCG(_zero_), 1);
+	_bc_free_num_ex(&BCG(_one_), 1);
+	_bc_free_num_ex(&BCG(_two_), 1);
+
+	return SUCCESS;
+}
+/* }}} */	
          
 /* {{{ PHP_MINFO_FUNCTION
  */

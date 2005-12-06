@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: dom_iterators.c,v 1.8 2004/03/08 21:15:39 helly Exp $ */
+/* $Id: dom_iterators.c,v 1.9.2.1 2005/12/06 02:25:20 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -189,7 +189,7 @@ static void php_dom_iterator_move_forward(zend_object_iterator *iter TSRMLS_DC)
 	dom_nnodemap_object *objmap;
 	int ret, previndex=1;
 	HashTable *nodeht;
-	pval **entry;
+	zval **entry;
 
 	php_dom_iterator *iterator = (php_dom_iterator *)iter;
 
@@ -258,7 +258,7 @@ zend_object_iterator *php_dom_get_iterator(zend_class_entry *ce, zval *object TS
 	zval *curattr = NULL;
 	int ret, curindex = 0;
 	HashTable *nodeht;
-	pval **entry;
+	zval **entry;
 
 	php_dom_iterator *iterator = emalloc(sizeof(php_dom_iterator));
 

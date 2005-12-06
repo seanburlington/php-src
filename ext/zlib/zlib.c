@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: zlib.c,v 1.183.2.4 2005/10/25 15:35:39 mike Exp $ */
+/* $Id: zlib.c,v 1.183.2.5 2005/12/06 02:25:36 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -86,7 +86,7 @@ static int gz_magic[2] = {0x1f, 0x8b};	/* gzip magic header */
 
 /* {{{ php_zlib_functions[]
  */
-function_entry php_zlib_functions[] = {
+zend_function_entry php_zlib_functions[] = {
 	PHP_FE(readgzfile,						NULL)
 	PHP_FALIAS(gzrewind,	rewind,			NULL)
 	PHP_FALIAS(gzclose,		fclose,			NULL)

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: readline.c,v 1.42.2.1 2005/11/28 16:51:16 sniper Exp $ */
+/* $Id: readline.c,v 1.42.2.2 2005/12/06 02:25:29 sniper Exp $ */
 
 /* {{{ includes & prototypes */
 
@@ -253,7 +253,7 @@ PHP_FUNCTION(readline_info)
    Adds a line to the history */
 PHP_FUNCTION(readline_add_history)
 {
-	pval **arg;
+	zval **arg;
 	int ac = ZEND_NUM_ARGS();
 
 	if (ac != 1 || zend_get_parameters_ex(ac, &arg) == FAILURE) {
@@ -312,7 +312,7 @@ PHP_FUNCTION(readline_list_history)
    Reads the history */
 PHP_FUNCTION(readline_read_history)
 {
-	pval **arg;
+	zval **arg;
 	char *filename = NULL;
 	int ac = ZEND_NUM_ARGS();
 
@@ -339,7 +339,7 @@ PHP_FUNCTION(readline_read_history)
    Writes the history */
 PHP_FUNCTION(readline_write_history)
 {
-	pval **arg;
+	zval **arg;
 	char *filename = NULL;
 	int ac = ZEND_NUM_ARGS();
 

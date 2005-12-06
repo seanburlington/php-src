@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: openssl.c,v 1.98.2.2 2005/11/28 11:37:43 sniper Exp $ */
+/* $Id: openssl.c,v 1.98.2.3 2005/12/06 02:25:26 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -79,7 +79,7 @@ enum php_openssl_cipher_type {
 
 /* {{{ openssl_functions[]
  */
-function_entry openssl_functions[] = {
+zend_function_entry openssl_functions[] = {
 /* public/private key functions */
 	PHP_FE(openssl_pkey_free,			NULL)
 	PHP_FE(openssl_pkey_new,			NULL)

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_ftp.c,v 1.100 2004/02/25 20:16:21 abies Exp $ */
+/* $Id: php_ftp.c,v 1.103.2.1 2005/12/06 02:25:21 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -25,14 +25,8 @@
 
 #include "php.h"
 
-#ifdef NETWARE
-#ifdef USE_WINSOCK
+#if defined(NETWARE) && defined(USE_WINSOCK)
 #include <novsock2.h>
-#else
-#ifndef NEW_LIBC
-#include <sys/socket.h>
-#endif
-#endif
 #endif
 
 #if HAVE_OPENSSL_EXT
@@ -57,7 +51,7 @@ static
         ZEND_ARG_PASS_INFO(1)
     ZEND_END_ARG_INFO()
 
-function_entry php_ftp_functions[] = {
+zend_function_entry php_ftp_functions[] = {
 	PHP_FE(ftp_connect,			NULL)
 #if HAVE_OPENSSL_EXT
 	PHP_FE(ftp_ssl_connect,		NULL)
@@ -322,7 +316,7 @@ PHP_FUNCTION(ftp_chdir)
    Requests execution of a program on the FTP server */
 PHP_FUNCTION(ftp_exec)
 {
-	pval		*z_ftp;
+	zval		*z_ftp;
 	ftpbuf_t	*ftp;
 	char		*cmd;
 	int			cmd_len;
@@ -685,6 +679,10 @@ PHP_FUNCTION(ftp_get)
 		resumepos = 0;
 	}
 
+#ifdef PHP_WIN32
+	mode = FTPTYPE_IMAGE;
+#endif
+
 	if (ftp->autoseek && resumepos) {
 		outstream = php_stream_open_wrapper(local, mode == FTPTYPE_ASCII ? "rt+" : "rb+", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
 		if (outstream == NULL) {
@@ -743,7 +741,9 @@ PHP_FUNCTION(ftp_nb_get)
 	if (!ftp->autoseek && resumepos == PHP_FTP_AUTORESUME) {
 		resumepos = 0;
 	}
-
+#ifdef PHP_WIN32
+	mode = FTPTYPE_IMAGE;
+#endif
 	if (ftp->autoseek && resumepos) {
 		outstream = php_stream_open_wrapper(local, mode == FTPTYPE_ASCII ? "rt+" : "rb+", ENFORCE_SAFE_MODE | REPORT_ERRORS, NULL);
 		if (outstream == NULL) {

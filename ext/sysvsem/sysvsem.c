@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: sysvsem.c,v 1.49 2004/01/08 08:17:38 andi Exp $ */
+/* $Id: sysvsem.c,v 1.51.2.1 2005/12/06 02:25:33 sniper Exp $ */
 
 /* Latest update build anc tested on Linux 2.2.14
  *
@@ -58,7 +58,7 @@ union semun {
 
 /* {{{ sysvsem_functions[]
  */
-function_entry sysvsem_functions[] = {
+zend_function_entry sysvsem_functions[] = {
 	PHP_FE(sem_get,			NULL)
 	PHP_FE(sem_acquire,		NULL)
 	PHP_FE(sem_release,		NULL)
@@ -304,7 +304,7 @@ static void php_sysvsem_semop(INTERNAL_FUNCTION_PARAMETERS, int acquire)
 			break;
 	}
 
-	ZEND_FETCH_RESOURCE(sem_ptr, sysvsem_sem *, arg_id, -1, "SysV semphore", php_sysvsem_module.le_sem);
+	ZEND_FETCH_RESOURCE(sem_ptr, sysvsem_sem *, arg_id, -1, "SysV semaphore", php_sysvsem_module.le_sem);
 
 	if (!acquire && sem_ptr->count == 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "SysV semaphore %ld (key 0x%x) is not currently acquired", Z_LVAL_PP(arg_id), sem_ptr->key);
@@ -364,7 +364,7 @@ PHP_FUNCTION(sem_remove)
 			WRONG_PARAM_COUNT;
 	}
 
-	ZEND_FETCH_RESOURCE(sem_ptr, sysvsem_sem *, arg_id, -1, "SysV semphore", php_sysvsem_module.le_sem);
+	ZEND_FETCH_RESOURCE(sem_ptr, sysvsem_sem *, arg_id, -1, "SysV semaphore", php_sysvsem_module.le_sem);
 
 #if HAVE_SEMUN
 	un.buf = &buf;
@@ -372,7 +372,7 @@ PHP_FUNCTION(sem_remove)
 #else
 	if (semctl(sem_ptr->semid, 0, IPC_STAT, NULL) < 0) {
 #endif
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "SysV semphore %ld does not (any longer) exist", Z_LVAL_PP(arg_id));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "SysV semaphore %ld does not (any longer) exist", Z_LVAL_PP(arg_id));
 		RETURN_FALSE;
 	}
 

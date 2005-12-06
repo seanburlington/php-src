@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: nodelist.c,v 1.14 2004/05/31 12:50:28 rrichards Exp $ */
+/* $Id: nodelist.c,v 1.17.2.1 2005/12/06 02:25:20 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -40,7 +40,7 @@ zend_function_entry php_dom_nodelist_class_functions[] = {
 	{NULL, NULL, NULL}
 };
 
-/* {{{ proto length	int	
+/* {{{ length	int	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#ID-203510337
 Since: 
@@ -100,7 +100,8 @@ Since:
 PHP_FUNCTION(dom_nodelist_item)
 {
 	zval *id, *rv = NULL;
-	int index, ret;
+	long index;
+	int ret;
 	dom_object *intern;
 	xmlNodePtr itemnode = NULL;
 
@@ -108,7 +109,7 @@ PHP_FUNCTION(dom_nodelist_item)
 	xmlNodePtr nodep, curnode;
 	int count = 0;
 	HashTable *nodeht;
-	pval **entry;
+	zval **entry;
 
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS() TSRMLS_CC, getThis(), "Ol", &id, dom_nodelist_class_entry, &index) == FAILURE) {
 		return;

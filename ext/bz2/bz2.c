@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
  
-/* $Id: bz2.c,v 1.14.2.1 2005/10/25 15:53:06 iliaa Exp $ */
+/* $Id: bz2.c,v 1.14.2.2 2005/12/06 02:25:18 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -40,7 +40,7 @@
 #define PHP_BZ_ERRSTR  1
 #define PHP_BZ_ERRBOTH 2
 
-function_entry bz2_functions[] = {
+zend_function_entry bz2_functions[] = {
 	PHP_FE(bzopen,       NULL)
 	PHP_FE(bzread,       NULL)
 	PHP_FALIAS(bzwrite,   fwrite,		NULL)

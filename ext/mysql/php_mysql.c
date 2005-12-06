@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
  
-/* $Id: php_mysql.c,v 1.213.2.4 2005/12/05 23:37:59 sniper Exp $ */
+/* $Id: php_mysql.c,v 1.213.2.5 2005/12/06 02:25:25 sniper Exp $ */
 
 /* TODO:
  *
@@ -123,7 +123,7 @@ typedef struct _php_mysql_conn {
 
 /* {{{ mysql_functions[]
  */
-function_entry mysql_functions[] = {
+zend_function_entry mysql_functions[] = {
 	PHP_FE(mysql_connect,								NULL)
 	PHP_FE(mysql_pconnect,								NULL)
 	PHP_FE(mysql_close,									NULL)

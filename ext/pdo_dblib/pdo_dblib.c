@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dblib.c,v 1.9.2.4 2005/12/04 22:34:25 wez Exp $ */
+/* $Id: pdo_dblib.c,v 1.9.2.5 2005/12/06 02:25:27 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -34,7 +34,7 @@
 
 ZEND_DECLARE_MODULE_GLOBALS(dblib)
 
-function_entry pdo_dblib_functions[] = {
+zend_function_entry pdo_dblib_functions[] = {
 	{NULL, NULL, NULL}
 };
 

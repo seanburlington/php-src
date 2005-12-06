@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_pcre.c,v 1.168.2.3 2005/10/28 08:30:41 dmitry Exp $ */
+/* $Id: php_pcre.c,v 1.168.2.4 2005/12/06 02:25:26 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1610,7 +1610,7 @@ PHP_FUNCTION(preg_grep)
 
 /* {{{ module definition structures */
 
-function_entry pcre_functions[] = {
+zend_function_entry pcre_functions[] = {
 	PHP_FE(preg_match,				third_arg_force_ref)
 	PHP_FE(preg_match_all,			third_arg_force_ref)
 	PHP_FE(preg_replace,			NULL)

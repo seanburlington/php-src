@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.22 2005/12/05 22:41:10 sniper Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.23 2005/12/06 02:25:27 sniper Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1083,7 +1083,7 @@ static PHP_METHOD(PDO, getAvailableDrivers)
 }
 /* }}} */
 
-function_entry pdo_dbh_functions[] = {
+zend_function_entry pdo_dbh_functions[] = {
 	ZEND_MALIAS(PDO, __construct, dbh_constructor,	NULL, 			ZEND_ACC_PUBLIC)
 	PHP_ME(PDO, prepare, 		NULL, 					ZEND_ACC_PUBLIC)
 	PHP_ME(PDO, beginTransaction,NULL,					ZEND_ACC_PUBLIC)
@@ -1106,7 +1106,7 @@ function_entry pdo_dbh_functions[] = {
 /* {{{ overloaded object handlers for PDO class */
 int pdo_hash_methods(pdo_dbh_t *dbh, int kind TSRMLS_DC)
 {
-	function_entry *funcs;
+	zend_function_entry *funcs;
 	zend_function func;
 	zend_internal_function *ifunc = (zend_internal_function*)&func;
 	int namelen;

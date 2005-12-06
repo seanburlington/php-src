@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_pgsql.c,v 1.7.2.8 2005/12/04 22:34:26 wez Exp $ */
+/* $Id: pdo_pgsql.c,v 1.7.2.9 2005/12/06 02:25:28 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,7 +31,7 @@
 #include "php_pdo_pgsql_int.h"
 
 /* {{{ pdo_pgsql_functions[] */
-function_entry pdo_pgsql_functions[] = {
+zend_function_entry pdo_pgsql_functions[] = {
 	{NULL, NULL, NULL}
 };
 /* }}} */

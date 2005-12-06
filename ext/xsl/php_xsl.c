@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xsl.c,v 1.32.2.2 2005/11/15 14:28:38 dmitry Exp $ */
+/* $Id: php_xsl.c,v 1.32.2.3 2005/12/06 02:25:36 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -38,7 +38,7 @@ static zend_object_handlers xsl_object_handlers;
  *
  * Every user visible function must have an entry in xsl_functions[].
  */
-function_entry xsl_functions[] = {
+zend_function_entry xsl_functions[] = {
 	{NULL, NULL, NULL}  /* Must be the last line in xsl_functions[] */
 };
 /* }}} */

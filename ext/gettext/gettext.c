@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gettext.c,v 1.44 2004/01/08 08:15:44 andi Exp $ */
+/* $Id: gettext.c,v 1.46.2.1 2005/12/06 02:25:22 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -27,13 +27,12 @@
 #if HAVE_LIBINTL
 
 #include <stdio.h>
-#include <libintl.h>
 #include "ext/standard/info.h"
 #include "php_gettext.h"
 
 /* {{{ php_gettext_functions[]
  */
-function_entry php_gettext_functions[] = {
+zend_function_entry php_gettext_functions[] = {
 	PHP_NAMED_FE(textdomain,		zif_textdomain,		NULL)
 	PHP_NAMED_FE(gettext,			zif_gettext,		NULL)
 	/* Alias for gettext() */
@@ -56,6 +55,8 @@ function_entry php_gettext_functions[] = {
     {NULL, NULL, NULL}
 };
 /* }}} */
+
+#include <libintl.h>
 
 zend_module_entry php_gettext_module_entry = {
 	STANDARD_MODULE_HEADER,

@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.156.2.8 2005/11/07 10:05:35 dmitry Exp $ */
+/* $Id: soap.c,v 1.156.2.9 2005/12/06 02:25:31 sniper Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2840,7 +2840,7 @@ PHP_METHOD(SoapClient, __setLocation)
 #ifndef ZEND_ENGINE_2
 static void soap_call_function_handler(INTERNAL_FUNCTION_PARAMETERS, zend_property_reference *property_reference)
 {
-	pval *object = property_reference->object;
+	zval *object = property_reference->object;
 	zend_overloaded_element *function_name = (zend_overloaded_element *)property_reference->elements_list->tail->data;
 	char *function = Z_STRVAL(function_name->element);
 	zend_function *builtin_function;

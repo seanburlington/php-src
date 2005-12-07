@@ -13,7 +13,7 @@
  *
  */
 
-/* $Id: php_json.h,v 1.1 2005/12/06 06:23:21 omar Exp $ */
+/* $Id: php_json.h,v 1.2 2005/12/07 09:12:38 rasmus Exp $ */
 
 #ifndef PHP_JSON_H
 #define PHP_JSON_H
@@ -33,10 +33,6 @@ extern zend_module_entry json_module_entry;
 #include "TSRM.h"
 #endif
 
-PHP_MINIT_FUNCTION(json);
-PHP_MSHUTDOWN_FUNCTION(json);
-PHP_RINIT_FUNCTION(json);
-PHP_RSHUTDOWN_FUNCTION(json);
 PHP_MINFO_FUNCTION(json);
 
 PHP_FUNCTION(json_encode);

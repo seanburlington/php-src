@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.5 2005/12/07 02:01:58 iliaa Exp $ */
+/* $Id: run-tests.php,v 1.226.2.6 2005/12/07 10:08:42 sniper Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -318,7 +318,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Id: run-tests.php,v 1.226.2.5 2005/12/07 02:01:58 iliaa Exp $\n";
+					echo "$Id: run-tests.php,v 1.226.2.6 2005/12/07 10:08:42 sniper Exp $\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1219,17 +1219,17 @@ COMMAND $cmd
 	if (!$passed) {
 		// write .exp
 		if (strpos($log_format,'E') !== FALSE) {
-			file_put_contents($exp_filename, $wanted) or error("Cannot create test log - $exp_filename");
+			file_put_contents($exp_filename, $wanted) or error("Cannot create expected test output - $exp_filename");
 		}
 	
 		// write .out
 		if (strpos($log_format,'O') !== FALSE) {
-			file_put_contents($output_filename, $output) or error("Cannot create test log - $output_filename");
+			file_put_contents($output_filename, $output) or error("Cannot create test output - $output_filename");
 		}
 	
 		// write .diff
 		if (strpos($log_format,'D') !== FALSE) {
-			file_put_contents($diff_filename, generate_diff($wanted,$wanted_re,$output)) or error("Cannot create test log - $diff_filename");	
+			file_put_contents($diff_filename, generate_diff($wanted,$wanted_re,$output)) or error("Cannot create test diff - $diff_filename");
 		}
 	
 		// write .log

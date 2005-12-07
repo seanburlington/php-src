@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.250 2005/12/07 10:08:07 sniper Exp $ */
+/* $Id: run-tests.php,v 1.251 2005/12/07 11:11:01 sniper Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -332,7 +332,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Id: run-tests.php,v 1.250 2005/12/07 10:08:07 sniper Exp $\n";
+					echo "$Id: run-tests.php,v 1.251 2005/12/07 11:11:01 sniper Exp $\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -708,11 +708,13 @@ function mail_qa_team($data, $compression, $status = FALSE)
 //  Write the given text to a temporary file, and return the filename.
 //
 
-function save_text($filename,$text)
+function save_text($filename, $text)
 {
 	global $DETAILED;
 
-	@file_put_contents($filename, $text) or error("Cannot open file '" . $filename . "' (save_text)");
+	if (@file_put_contents($filename, $text) === FALSE) {
+		error("Cannot open file '" . $filename . "' (save_text)");
+	}
 	if (1 < $DETAILED) echo "
 FILE $filename {{{
 $text
@@ -724,7 +726,7 @@ $text
 //  Write an error in a format recognizable to Emacs or MSVC.
 //
 
-function error_report($testname,$logname,$tested) 
+function error_report($testname, $logname, $tested) 
 {
 	$testname = realpath($testname);
 	$logname  = realpath($logname);

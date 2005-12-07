@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.h,v 1.108 2004/01/08 17:33:04 sniper Exp $ */
+/* $Id: SAPI.h,v 1.108.2.1 2005/12/07 19:43:14 fmk Exp $ */
 
 #ifndef SAPI_H
 #define SAPI_H
@@ -24,6 +24,9 @@
 #include "zend.h"
 #include "zend_llist.h"
 #include "zend_operators.h"
+#ifdef PHP_WIN32
+#include "win95nt.h"
+#endif
 #include <sys/stat.h>
 
 #define SAPI_OPTION_NO_CHDIR 1

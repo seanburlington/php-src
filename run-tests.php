@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.248 2005/12/07 00:01:51 helly Exp $ */
+/* $Id: run-tests.php,v 1.249 2005/12/07 09:06:30 dmitry Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -332,7 +332,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Id: run-tests.php,v 1.248 2005/12/07 00:01:51 helly Exp $\n";
+					echo "$Id: run-tests.php,v 1.249 2005/12/07 09:06:30 dmitry Exp $\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -939,13 +939,13 @@ TEST $file
 
 	$pu = $unicode_semantics ? 'u.' : '';
 
-	$diff_filename     = $tmp . DIRECTORY_SEPARATOR . basename($file).$pu.'diff';
-	$log_filename      = $tmp . DIRECTORY_SEPARATOR . basename($file).$pu.'log';
-	$exp_filename      = $tmp . DIRECTORY_SEPARATOR . basename($file).$pu.'exp';
-	$output_filename   = $tmp . DIRECTORY_SEPARATOR . basename($file).$pu.'out';
-	$memcheck_filename = $tmp . DIRECTORY_SEPARATOR . basename($file).$pu.'mem';
-	$tmp_file          = $tmp . DIRECTORY_SEPARATOR . basename($file).$pu.'php';
-	$tmp_skipif        = $tmp . DIRECTORY_SEPARATOR . basename($file).$pu.'skip';
+	$diff_filename     = $tmp . DIRECTORY_SEPARATOR . basename($file,"phpt").$pu.'diff';
+	$log_filename      = $tmp . DIRECTORY_SEPARATOR . basename($file,"phpt").$pu.'log';
+	$exp_filename      = $tmp . DIRECTORY_SEPARATOR . basename($file,"phpt").$pu.'exp';
+	$output_filename   = $tmp . DIRECTORY_SEPARATOR . basename($file,"phpt").$pu.'out';
+	$memcheck_filename = $tmp . DIRECTORY_SEPARATOR . basename($file,"phpt").$pu.'mem';
+	$tmp_file          = $tmp . DIRECTORY_SEPARATOR . basename($file,"phpt").'php';
+	$tmp_skipif        = $tmp . DIRECTORY_SEPARATOR . basename($file,"phpt").$pu.'skip';
 	$tmp_post          = $tmp . DIRECTORY_SEPARATOR . uniqid('/phpt.');
 	$tmp_relative_file = str_replace(dirname(__FILE__).DIRECTORY_SEPARATOR, '', $tmp_file) . 't';
 

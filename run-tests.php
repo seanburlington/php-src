@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.249 2005/12/07 09:06:30 dmitry Exp $ */
+/* $Id: run-tests.php,v 1.250 2005/12/07 10:08:07 sniper Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -332,7 +332,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Id: run-tests.php,v 1.249 2005/12/07 09:06:30 dmitry Exp $\n";
+					echo "$Id: run-tests.php,v 1.250 2005/12/07 10:08:07 sniper Exp $\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1286,21 +1286,21 @@ COMMAND $cmd
 	if (!$passed) {
 		// write .exp
 		if (strpos($log_format,'E') !== FALSE) {
-			$log = fopen($exp_filename,'wt') or error("Cannot create test log - $exp_filename");
+			$log = fopen($exp_filename,'wt') or error("Cannot create expected test output - $exp_filename");
 			fwrite($log,$wanted);
 			fclose($log);
 		}
 
 		// write .out
 		if (strpos($log_format,'O') !== FALSE) {
-			$log = fopen($output_filename,'wt') or error("Cannot create test log - $output_filename");
+			$log = fopen($output_filename,'wt') or error("Cannot create test output - $output_filename");
 			fwrite($log,$output);
 			fclose($log);
 		}
 
 		// write .diff
 		if (strpos($log_format,'D') !== FALSE) {
-			$log = fopen($diff_filename,'wt') or error("Cannot create test log - $diff_filename");
+			$log = fopen($diff_filename,'wt') or error("Cannot create test diff - $diff_filename");
 			fwrite($log, generate_diff($wanted,$wanted_re,$output));
 			fclose($log);
 		}

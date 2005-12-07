@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.22 2005/12/07 03:20:13 pajoye Exp $ */
+/* $Id: php_xmlwriter.c,v 1.23 2005/12/07 04:59:41 rrichards Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -823,7 +823,7 @@ PHP_FUNCTION(xmlwriter_write_element_ns)
 	zval *this = getThis();
 	
 	if (this) {
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rssss", 
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ssss", 
 			&prefix, &prefix_len, &name, &name_len, &uri, &uri_len, &content, &content_len) == FAILURE) {
 			return;
 		}

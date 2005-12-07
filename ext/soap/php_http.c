@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.77.2.3 2005/10/12 14:04:02 tony2001 Exp $ */
+/* $Id: php_http.c,v 1.77.2.4 2005/12/07 13:56:18 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -179,7 +179,9 @@ static php_stream* http_connect(zval* this_ptr, php_url *phpurl, int use_ssl, in
 				php_stream_close(stream);
 				stream = NULL;
 			}
-			efree(http_headers);
+			if (http_headers) {
+				efree(http_headers);
+			}
 		}
 		/* enable SSL transport layer */
 		if (stream) {

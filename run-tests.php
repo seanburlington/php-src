@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.7 2005/12/07 11:12:52 sniper Exp $ */
+/* $Id: run-tests.php,v 1.226.2.8 2005/12/07 11:28:58 sniper Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -318,7 +318,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Id: run-tests.php,v 1.226.2.7 2005/12/07 11:12:52 sniper Exp $\n";
+					echo "$Id: run-tests.php,v 1.226.2.8 2005/12/07 11:28:58 sniper Exp $\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -814,6 +814,7 @@ TEST $file
 		'TEST'   => '',
 		'SKIPIF' => '',
 		'GET'    => '',
+		'POST'   => '',
 		'ARGS'   => '',
 	);
 
@@ -883,16 +884,19 @@ TEST $file
 		return 'BORKED';
 	}
 
+	$shortname = str_replace($cwd.'/', '', $file);
+	$tested = trim($section_text['TEST'])." [$shortname]";
+
  	/* For GET/POST tests, check if cgi sapi is available and if it is, use it. */
  	if ((!empty($section_text['GET']) || !empty($section_text['POST']))) {
  		if (file_exists("./sapi/cgi/php")) {
  			$old_php = $php;
  			$php = realpath("./sapi/cgi/php") . ' -C ';
+ 		} else {
+			show_result("SKIP", $tested, $file, "reason: CGI not available");
+ 			return 'SKIPPED';
  		}
  	}
-
-	$shortname = str_replace($cwd.'/', '', $file);
-	$tested = trim($section_text['TEST'])." [$shortname]";
 
 	show_test($test_idx, $shortname);
 

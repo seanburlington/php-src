@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: dba_db4.c,v 1.14 2004/05/10 01:42:43 helly Exp $ */
+/* $Id: dba_db4.c,v 1.15.2.1 2005/12/08 19:35:03 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -77,12 +77,13 @@ DBA_OPEN_FUNC(db4)
 		info->mode == DBA_WRITER ? 0         : 
 		info->mode == DBA_TRUNC ? DB_CREATE | DB_TRUNCATE : -1;
 
-	if (info->flags & DBA_PERSISTENT) {
-		gmode |= DB_THREAD;
-	}
-
 	if (gmode == -1) {
 		return FAILURE; /* not possible */
+	}
+
+	gmode |= DB_INIT_LOCK;
+	if (info->flags & DBA_PERSISTENT) {
+		gmode |= DB_THREAD;
 	}
 
 	if (info->argc > 0) {

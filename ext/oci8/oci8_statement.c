@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.6 2005/12/08 21:22:52 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.7 2005/12/08 22:07:30 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1121,7 +1121,7 @@ int php_oci_bind_array_by_name(php_oci_statement *statement, char *name, int nam
 			bind = php_oci_bind_array_helper_date(var, max_table_length, statement->connection TSRMLS_CC);
 			break;
 		default:
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Not supported bind type (%ld)", type);
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unknown or unsupported datatype given: %ld", type);
 			return 1;
 			break;
 	}

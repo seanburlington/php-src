@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.10 2005/12/08 06:46:01 cellog Exp $ */
+/* $Id: phar.c,v 1.11 2005/12/08 07:08:45 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -167,8 +167,8 @@ PHP_METHOD(PHP_Archive, mapPhar)
 		MAPPHAR_ALLOC_FAIL(msg)
 
 	// check for ?>\n and increment accordingly
-	if (0 == php_stream_seek(fp, halt_offset, SEEK_SET)) {
-		MAPPHAR_FAIL("cannot seek to __HALT_COMPILER() location in phar \"%s\"")
+	if (-1 == php_stream_seek(fp, halt_offset, SEEK_SET)) {
+		MAPPHAR_FAIL("cannot seek to __HALT_COMPILER(); location in phar \"%s\"")
 	}
 
 	if (FALSE == (buffer = (char *) emalloc(4))) {
@@ -194,7 +194,9 @@ PHP_METHOD(PHP_Archive, mapPhar)
 		}
 	}
 	// make sure we are at the right location to read the manifest
-	php_stream_seek(fp, halt_offset, SEEK_SET);
+	if (-1 == php_stream_seek(fp, halt_offset, SEEK_SET)) {
+		MAPPHAR_FAIL("cannot seek to __HALT_COMPILER(); location in phar \"%s\"")
+	}
 
 	// read in manifest
 

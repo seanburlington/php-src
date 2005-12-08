@@ -25,7 +25,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: oci8_statement.c,v 1.7.2.5 2005/12/06 18:53:35 tony2001 Exp $ */
+/* $Id: oci8_statement.c,v 1.7.2.6 2005/12/08 21:22:52 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -1193,7 +1193,7 @@ php_oci_bind *php_oci_bind_array_helper_string(zval* var, long max_table_length,
 		while (zend_hash_get_current_data(hash, (void **) &entry) != FAILURE) {
 			convert_to_string_ex(entry);
 			if (Z_STRLEN_PP(entry) > maxlength) {
-				maxlength = Z_STRLEN_PP(entry);
+				maxlength = Z_STRLEN_PP(entry) + 1;
 			}
 			zend_hash_move_forward(hash);
 		}

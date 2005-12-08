@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: basic_functions.c,v 1.725.2.12 2005/12/07 17:36:17 iliaa Exp $ */
+/* $Id: basic_functions.c,v 1.725.2.13 2005/12/08 03:25:22 iliaa Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -1664,6 +1664,9 @@ PHP_FUNCTION(getopt)
 
 	/* Disable getopt()'s error messages. */
 	opterr = 0;
+
+	/* Force reinitialization of getopt() (via optind reset) on every call. */
+	optind = 0;
 
 	/* Invoke getopt(3) on the argument array. */
 #ifdef HARTMUT_0

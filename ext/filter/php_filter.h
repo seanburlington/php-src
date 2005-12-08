@@ -17,12 +17,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_filter.h,v 1.6 2005/10/26 14:37:08 derick Exp $ */
+/* $Id: php_filter.h,v 1.7 2005/12/08 19:43:53 fmk Exp $ */
 
 #ifndef PHP_FILTER_H
 #define PHP_FILTER_H
 
 #include "SAPI.h"
+#include "zend_API.h"
 #include "php.h"
 #include "php_ini.h"
 #include "ext/standard/info.h"

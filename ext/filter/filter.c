@@ -17,14 +17,13 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: filter.c,v 1.29 2005/12/06 15:20:53 tony2001 Exp $ */
+/* $Id: filter.c,v 1.30 2005/12/08 19:43:53 fmk Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "php_filter.h"
-#include "Zend/zend_API.h"
 
 ZEND_DECLARE_MODULE_GLOBALS(filter)
 
@@ -264,7 +263,7 @@ PHP_MINFO_FUNCTION(filter)
 {
 	php_info_print_table_start();
 	php_info_print_table_row( 2, "Input Validation and Filtering", "enabled" );
-	php_info_print_table_row( 2, "Revision", "$Revision: 1.29 $");
+	php_info_print_table_row( 2, "Revision", "$Revision: 1.30 $");
 	php_info_print_table_end();
 
 	DISPLAY_INI_ENTRIES();

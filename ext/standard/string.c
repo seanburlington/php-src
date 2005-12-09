@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.509 2005/12/09 13:41:06 dmitry Exp $ */
+/* $Id: string.c,v 1.510 2005/12/09 22:26:39 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -2069,8 +2069,7 @@ PHP_FUNCTION(stristr)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zz|b", &haystack, &needle, &part) == FAILURE) {
 		return;
 	}
-	SEPARATE_ZVAL(&haystack);
-	SEPARATE_ZVAL(&needle);
+
 	if (Z_TYPE_P(haystack) != IS_UNICODE && Z_TYPE_P(haystack) != IS_BINARY && Z_TYPE_P(haystack) != IS_STRING) {
 		convert_to_text(haystack);
 	}

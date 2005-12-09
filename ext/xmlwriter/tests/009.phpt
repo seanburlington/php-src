@@ -7,7 +7,7 @@ if (!function_exists("xmlwriter_start_comment")) die("skip: libxml2 2.6.7+ requi
 ?>
 --FILE--
 <?php 
-/* $Id: 009.phpt,v 1.1.2.2 2005/12/09 04:57:20 rrichards Exp $ */
+/* $Id: 009.phpt,v 1.1.2.3 2005/12/09 20:52:15 rrichards Exp $ */
 
 $xw = xmlwriter_open_memory();
 xmlwriter_set_indent($xw, TRUE);
@@ -22,9 +22,9 @@ xmlwriter_write_pi($xw, 'php', 'echo "hello world"; ');
 xmlwriter_end_element($xw);
 xmlwriter_start_element($xw, 'cdata');
 xmlwriter_start_cdata($xw);
-xmlwriter_end_element($xw);
 xmlwriter_text($xw, '<>&"');
 xmlwriter_end_cdata($xw);
+xmlwriter_end_element($xw);
 xmlwriter_end_element($xw);
 xmlwriter_end_element($xw);
 xmlwriter_end_document($xw);

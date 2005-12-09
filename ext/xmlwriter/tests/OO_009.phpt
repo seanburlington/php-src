@@ -7,7 +7,7 @@ if (!function_exists("$xw->start_comment")) die("skip: libxml2 2.6.7+ required")
 ?>
 --FILE--
 <?php 
-/* $Id: OO_009.phpt,v 1.1.2.2 2005/12/09 04:57:20 rrichards Exp $ */
+/* $Id: OO_009.phpt,v 1.1.2.3 2005/12/09 20:52:15 rrichards Exp $ */
 
 $xw = new XMLWriter();
 $xw->openMemory();
@@ -23,9 +23,9 @@ $xw->writePi('php', 'echo "hello world"; ');
 $xw->endElement();
 $xw->startElement('cdata');
 $xw->startCdata();
-$xw->endElement();
 $xw->text('<>&"');
 $xw->endCdata();
+$xw->endElement();
 $xw->endElement();
 $xw->endElement();
 $xw->endDocument();

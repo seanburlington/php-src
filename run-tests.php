@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.255 2005/12/09 09:49:58 helly Exp $ */
+/* $Id: run-tests.php,v 1.256 2005/12/09 17:59:50 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -322,6 +322,17 @@ if (isset($argc) && $argc > 1) {
 				case '--temp-urlbase':
 					$temp_urlbase = $argv[++$i];
 					break;
+				case 'U':
+					$unicode_and_native = true;
+					// break;
+				case 'u':
+					$unicode_testing = true;
+					$ini_overwrites[] = 'unicode_semantics=1';
+					$ini_overwrites[] = 'unicode.runtime_encoding=iso-8859-1';
+					$ini_overwrites[] = 'unicode.script_encoding=utf-8';
+					$ini_overwrites[] = 'unicode.output_encoding=utf-8';
+					$ini_overwrites[] = 'unicode.from_error_mode=U_INVALID_SUBSTITUTE';
+					break;
 				case 'v':
 				case '--verbose':
 					$DETAILED = true;
@@ -339,7 +350,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Id: run-tests.php,v 1.255 2005/12/09 09:49:58 helly Exp $\n";
+					echo "$Id: run-tests.php,v 1.256 2005/12/09 17:59:50 helly Exp $\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";

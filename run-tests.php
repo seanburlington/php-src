@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.253 2005/12/08 22:48:42 helly Exp $ */
+/* $Id: run-tests.php,v 1.254 2005/12/09 00:30:05 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -339,7 +339,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Id: run-tests.php,v 1.253 2005/12/08 22:48:42 helly Exp $\n";
+					echo "$Id: run-tests.php,v 1.254 2005/12/09 00:30:05 helly Exp $\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1645,7 +1645,7 @@ function show_end($end_time)
 		fwrite($html_file, "</table>\n");
 		fwrite($html_file, "<h2>Time End: " . date('Y-m-d H:i:s', $end_time) . "</h2>\n");
 	}
-	echo "=====================================================================\nTIME END " . date('Y-m-d H:i:s', $end_time);
+	echo "=====================================================================\nTIME END " . date('Y-m-d H:i:s', $end_time) . "\n";
 }
 
 function show_summary()

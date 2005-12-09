@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd_ctx.c,v 1.22.2.2 2005/11/01 17:05:09 sniper Exp $ */
+/* $Id: gd_ctx.c,v 1.22.2.3 2005/12/09 18:07:57 pajoye Exp $ */
 
 #include "php_gd.h"
 
@@ -115,6 +115,7 @@ static void _php_image_output_ctx(INTERNAL_FUNCTION_PARAMETERS, int image_type, 
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid threshold value '%d'. It must be between 0 and 255", q);
 			}
 		case PHP_GDIMG_TYPE_JPG:
+		case PHP_GDIMG_TYPE_PNG:
 			(*func_p)(im, ctx, q);
 			break;
 		case PHP_GDIMG_TYPE_XBM:

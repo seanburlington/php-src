@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.14 2005/12/08 07:59:17 cellog Exp $ */
+/* $Id: phar.c,v 1.15 2005/12/09 19:55:25 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -237,6 +237,11 @@ PHP_METHOD(PHP_Archive, mapPhar)
 	}
 	/* extract the number of entries */
 	PHAR_GET_VAL(manifest_count)
+	/* we have 4 32-bit items and each must contain a file name at least 1 byte in length */
+	if (manifest_count > (manifest_len / (4 * 5 + 1))) {
+		/* prevent serious memory issues */
+		MAPPHAR_FAIL("too many manifest entries for size of manifest in phar \"%s\"")
+	}
 	/* set up our manifest */
 	ALLOC_HASHTABLE(manifest);
 	zend_hash_init(manifest, sizeof(phar_manifest_entry),

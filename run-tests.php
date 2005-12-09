@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.9 2005/12/08 22:51:01 helly Exp $ */
+/* $Id: run-tests.php,v 1.226.2.10 2005/12/09 00:22:21 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -333,7 +333,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Id: run-tests.php,v 1.226.2.9 2005/12/08 22:51:01 helly Exp $\n";
+					echo "$Id: run-tests.php,v 1.226.2.10 2005/12/09 00:22:21 helly Exp $\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -784,7 +784,7 @@ function system_with_timeout($commandline)
 			return $data;
 		} else if ($n > 0) {
 			$line = fread($pipes[1], 8192);
-			if ($line === false) {
+			if (strlen($line) == 0) {
 				/* EOF */
 				break;
 			}

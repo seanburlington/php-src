@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.45.2.5 2005/12/08 19:55:13 tony2001 Exp $ */
+/* $Id: spl_directory.c,v 1.45.2.6 2005/12/09 13:28:10 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1912,7 +1912,7 @@ static zend_function_entry spl_SplFileObject_functions[] = {
 	SPL_ME(SplFileObject, hasChildren,    NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(SplFileObject, getChildren,    NULL, ZEND_ACC_PUBLIC)
 	SPL_ME(SplFileObject, seek,           arginfo_file_object_seek,          ZEND_ACC_PUBLIC)
-	// mappings
+	/* mappings */
 	SPL_MA(SplFileObject, getCurrentLine, SplFileObject, fgets,      NULL, ZEND_ACC_PUBLIC)
 	SPL_MA(SplFileObject, __toString,     SplFileObject, current,    NULL, ZEND_ACC_PUBLIC)
 	{NULL, NULL, NULL}

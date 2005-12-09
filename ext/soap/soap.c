@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: soap.c,v 1.110.2.46 2005/10/05 07:02:10 dmitry Exp $ */
+/* $Id: soap.c,v 1.110.2.47 2005/12/09 15:29:28 dmitry Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1797,8 +1797,8 @@ fail:
 /* }}} */
 
 
-/* {{{ proto SoapServer::fault
-   SoapServer::fault */
+/* {{{ proto SoapServer::fault ( staring code, string string [, string actor [, mixed details [, string name]]] )
+   Issue SoapFault indicating an error */
 PHP_METHOD(SoapServer, fault)
 {
 	char *code, *string, *actor=NULL, *name=NULL;

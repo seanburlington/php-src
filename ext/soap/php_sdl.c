@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_sdl.c,v 1.70.2.15 2005/11/28 10:07:56 dmitry Exp $ */
+/* $Id: php_sdl.c,v 1.70.2.16 2005/12/09 15:29:28 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/libxml/php_libxml.h"
@@ -410,10 +410,10 @@ static sdlSoapBindingFunctionHeaderPtr wsdl_soap_binding_header(sdlCtx* ctx, xml
 				if (!h->ns && h->element->namens) {
 					h->ns = estrdup(h->element->namens);
 				}
-			}
-			if (h->element->name) {
-				efree(h->name);
-				h->name = estrdup(h->element->name);
+				if (h->element->name) {
+					efree(h->name);
+					h->name = estrdup(h->element->name);
+				}
 			}
 		}
 	}

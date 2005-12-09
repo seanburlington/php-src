@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: cgi_main.c,v 1.256.2.7 2005/10/06 20:36:44 johannes Exp $ */
+/* $Id: cgi_main.c,v 1.256.2.8 2005/12/09 17:02:13 dmitry Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1257,6 +1257,8 @@ consult the installation file that came with this distribution, or visit \n\
 				running--;
 			}
 		}
+	} else {
+		parent = 0;
 	}
 
 #endif /* WIN32 */

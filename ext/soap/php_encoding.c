@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_encoding.c,v 1.115 2005/11/08 08:36:47 dmitry Exp $ */
+/* $Id: php_encoding.c,v 1.116 2005/12/09 15:28:56 dmitry Exp $ */
 
 #include <time.h>
 
@@ -268,7 +268,7 @@ xmlNodePtr master_to_xml(encodePtr encode, zval *data, int style, xmlNodePtr par
 				if (zend_hash_find(ht, "enc_ns", sizeof("enc_ns"), (void **)&zns) == SUCCESS) {
 				  enc = get_encoder(SOAP_GLOBAL(sdl), Z_STRVAL_PP(zns), Z_STRVAL_PP(zstype));
 				} else {
-				  enc = get_encoder(SOAP_GLOBAL(sdl), NULL, Z_STRVAL_PP(zstype));
+				  enc = get_encoder_ex(SOAP_GLOBAL(sdl), Z_STRVAL_PP(zstype), Z_STRLEN_PP(zstype));
 				}
 			}
 		}

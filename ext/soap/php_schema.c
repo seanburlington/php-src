@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_schema.c,v 1.60 2005/11/08 08:36:48 dmitry Exp $ */
+/* $Id: php_schema.c,v 1.61 2005/12/09 15:28:57 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "libxml/uri.h"
@@ -232,7 +232,11 @@ int load_schema(sdlCtx *ctx, xmlNodePtr schema TSRMLS_DC)
 			location = get_attribute(trav->properties, "schemaLocation");
 
 			if (ns != NULL && tns != NULL && strcmp(ns->children->content,tns->children->content) == 0) {
-				soap_error1(E_ERROR, "Parsing Schema: can't import schema from '%s', namespace must not match the enclosing schema 'targetNamespace'", location->children->content);
+				if (location) {
+					soap_error1(E_ERROR, "Parsing Schema: can't import schema from '%s', namespace must not match the enclosing schema 'targetNamespace'", location->children->content);
+				} else {
+					soap_error0(E_ERROR, "Parsing Schema: can't import schema. Namespace must not match the enclosing schema 'targetNamespace'");
+				}
 			}
 			if (location) {
 				xmlChar *base = xmlNodeGetBase(trav->doc, trav);

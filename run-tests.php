@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.254 2005/12/09 00:30:05 helly Exp $ */
+/* $Id: run-tests.php,v 1.255 2005/12/09 09:49:58 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -339,7 +339,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Id: run-tests.php,v 1.254 2005/12/09 00:30:05 helly Exp $\n";
+					echo "$Id: run-tests.php,v 1.255 2005/12/09 09:49:58 helly Exp $\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -987,7 +987,9 @@ TEST $file
 		if (!is_dir(dirname($copy_file))) {
 			@mkdir(dirname($copy_file), 0777, true) or error("Cannot create output directory - " . dirname($copy_file));
 		}
-		save_text($copy_file, $section_text['FILE']);
+		if (isset($section_text['FILE'])) {
+			save_text($copy_file, $section_text['FILE']);
+		}
 		$temp_filenames = array(
 			'file' => $copy_file,
 			'diff' => $diff_filename, 
@@ -1697,7 +1699,7 @@ function show_result($result, $tested, $tested_file, $extra = '', $temp_filename
 
 	if ($html_output)
 	{
-		if (isset($temp_filenames['file'])) {
+		if (isset($temp_filenames['file']) && @file_exists($temp_filenames['file'])) {
 			$url = str_replace($temp_target, $temp_urlbase, $temp_filenames['file']);
 			$tested = "<a href='$url'>$tested</a>";
 		}

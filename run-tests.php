@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.257 2005/12/10 16:58:35 helly Exp $ */
+/* $Id: run-tests.php,v 1.258 2005/12/10 17:37:29 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -350,7 +350,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Id: run-tests.php,v 1.257 2005/12/10 16:58:35 helly Exp $\n";
+					echo "$Id: run-tests.php,v 1.258 2005/12/10 17:37:29 helly Exp $\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1148,6 +1148,10 @@ TEST $file
 	//$ini_overwrites[] = 'setting=value';
 	settings2array($ini_overwrites, $ini_settings);
 
+	if ($unicode_and_native) {
+		$ini_settings["unicode_semantics"] = $unicode_semantics ? '1' : '0';
+	}
+
 	// Any special ini settings 
 	// these may overwrite the test defaults...
 	if (array_key_exists('INI', $section_text)) {
@@ -1161,7 +1165,7 @@ TEST $file
 			$unicode_test = TESTED_UNICODE;
 		}
 	} else {
-		$unicode_test = TESTED_UNICODE;
+		$unicode_test = $unicode_and_native ? $unicode_semantics : TESTED_UNICODE;
 	}
 
 	if ($unicode_test) {

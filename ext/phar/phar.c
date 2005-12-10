@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.18 2005/12/09 23:59:59 cellog Exp $ */
+/* $Id: phar.c,v 1.19 2005/12/10 23:19:30 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -657,6 +657,7 @@ PHP_PHAR_API php_stream * php_stream_phar_url_wrapper(php_stream_wrapper *wrappe
 			efree(savebuf);
 			efree(idata->file);
 			efree(idata);
+			efree(internal_file);
 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "phar error: %s", zError(status));
 			return NULL;
 		}

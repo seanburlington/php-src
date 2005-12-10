@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.256 2005/12/09 17:59:50 helly Exp $ */
+/* $Id: run-tests.php,v 1.257 2005/12/10 16:58:35 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -350,7 +350,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Id: run-tests.php,v 1.256 2005/12/09 17:59:50 helly Exp $\n";
+					echo "$Id: run-tests.php,v 1.257 2005/12/10 16:58:35 helly Exp $\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -860,7 +860,7 @@ function run_all_tests($test_files, $redir_tested = NULL)
 //
 function run_test($php, $file, $unicode_semantics)
 {
-	global $log_format, $info_params, $ini_overwrites, $cwd, $PHP_FAILED_TESTS, $pass_options, $DETAILED, $IN_REDIRECT, $test_cnt, $test_idx, $leak_check, $temp_source, $temp_target;
+	global $log_format, $info_params, $ini_overwrites, $cwd, $PHP_FAILED_TESTS, $pass_options, $DETAILED, $IN_REDIRECT, $test_cnt, $test_idx, $leak_check, $temp_source, $temp_target, $unicode_and_native;
 
 	$temp_filenames = null;
 	$org_file = $file;

@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.14 2005/12/06 02:25:29 sniper Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.15 2005/12/11 12:37:39 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2924,7 +2924,7 @@ ZEND_METHOD(reflection_class, getProperty)
 	int name_len, classname_len;
 
 	METHOD_NOTSTATIC(reflection_class_ptr);
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "t", &name, &name_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &name, &name_len) == FAILURE) {
 		return;
 	}
 
@@ -4254,7 +4254,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.14 2005/12/06 02:25:29 sniper Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.15 2005/12/11 12:37:39 helly Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

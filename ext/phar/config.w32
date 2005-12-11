@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.2 2005/12/05 01:07:01 cellog Exp $
+// $Id: config.w32,v 1.3 2005/12/11 21:23:34 edink Exp $
 // vim:ft=javascript
 
 ARG_ENABLE("phar", "enable phar support", "no");
@@ -6,6 +6,9 @@ ARG_ENABLE("phar", "enable phar support", "no");
 if (PHP_PHAR != "no") {
 	if (PHP_ZLIB != "no") {
 		EXTENSION("phar", "phar.c");
+		if (!PHP_ZLIB_SHARED) {
+			AC_DEFINE("HAVE_PHAR_ZLIB", 1, "ZLIB support in phar");
+		}
 	} else {
 		EXTENSION("phar", "phar.c", null, "/D ZLIB_EXPORTS");
 		AC_DEFINE("HAVE_PHAR_ZLIB", 1, "ZLIB support in phar");

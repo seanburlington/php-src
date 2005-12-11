@@ -14,7 +14,7 @@
 ./"    | Author: Marcus Boerger <helly@php.net>                               |
 ./"    +----------------------------------------------------------------------+
 ./" 
-./" $Id: php.1.in,v 1.12 2005/08/03 11:12:18 sniper Exp $
+./" $Id: php.1.in,v 1.13 2005/12/11 02:16:24 helly Exp $
 ./" 
 .TH PHP 1 "Feb 2003" "The PHP Group" "Scripting Language"
 .SH NAME
@@ -283,6 +283,36 @@ Arguments passed to script. Use
 when first argument starts with 
 .B '\-'
 or script is read from stdin
+.TP
+.PD 0
+.B \-\-rfunction
+.IR name
+.TP
+.PD 1
+.B \-\-rf
+.IR name
+Shows information about function
+.B name
+.TP
+.PD 0
+.B \-\-rclass
+.IR name
+.TP
+.PD 1
+.B \-\-rc
+.IR name
+Shows information about class
+.B name
+.TP
+.PD 0
+.B \-\-rextension
+.IR name
+.TP
+.PD 1
+.B \-\-re
+.IR name
+Shows information about extension
+.B name
 .SH FILES
 .TP 15
 .B php\-cli.ini

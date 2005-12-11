@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_cli.c,v 1.129.2.8 2005/12/11 02:17:34 helly Exp $ */
+/* $Id: php_cli.c,v 1.129.2.9 2005/12/11 02:41:04 helly Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -1179,7 +1179,11 @@ int main(int argc, char *argv[])
 
 					switch (behavior) {
 						case PHP_MODE_REFLECTION_FUNCTION:
-							pce = reflection_function_ptr;
+							if (strstr(reflection_what, "::")) {
+								pce = reflection_method_ptr;
+							} else {
+								pce = reflection_function_ptr;
+							}
 							break;
 						case PHP_MODE_REFLECTION_CLASS:
 							pce = reflection_class_ptr;

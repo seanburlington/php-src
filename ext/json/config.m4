@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.1 2005/12/06 06:23:21 omar Exp $
+dnl $Id: config.m4,v 1.2 2005/12/11 05:13:35 omar Exp $
 dnl
 
 AC_DEFUN([PHP_JSON_ADD_SOURCES], [
@@ -66,7 +66,6 @@ AC_DEFUN([PHP_JSON_SETUP_JSON_C], [
 
   PHP_JSON_ADD_BUILD_DIR([json_c])
   PHP_JSON_ADD_INCLUDE([json_c])
-  PHP_JSON_ADD_CONFIG_HEADER([json_c/config.h])
 
   PHP_JSON_ADD_SOURCES([
     json_c/ConvertUTF.c

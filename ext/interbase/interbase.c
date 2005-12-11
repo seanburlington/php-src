@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: interbase.c,v 1.227 2005/12/06 02:24:34 sniper Exp $ */
+/* $Id: interbase.c,v 1.228 2005/12/11 12:46:51 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -36,7 +36,7 @@
 #include "php_interbase.h"
 #include "php_ibase_includes.h"
 #include "SAPI.h"
-5B
+
 #include <time.h>
 
 #define ROLLBACK		0

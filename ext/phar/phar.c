@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: phar.c,v 1.23 2005/12/11 21:23:34 edink Exp $ */
+/* $Id: phar.c,v 1.24 2005/12/11 21:44:43 cellog Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -661,7 +661,7 @@ PHP_PHAR_API php_stream * php_stream_phar_url_wrapper(php_stream_wrapper *wrappe
 			efree(idata->file);
 			efree(idata);
 			efree(internal_file);
-			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar compression error");
+			php_stream_wrapper_log_error(wrapper, options TSRMLS_CC, "phar error: decompression failed");
 			return NULL;
 		}
 #define PHAR_ZLIB_ERROR efree(savebuf);\

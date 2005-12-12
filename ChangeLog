@@ -1,3 +1,61 @@
+2005-12-11  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * ext/ldap/ldap.c:
+      - Added missing fold tags
+
+2005-12-11  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_5_1)
+      NEWS:
+      Fixed bug #35624 (strtotime() does not handle 3 character weekdays).
+      Improved fix for bug #35414.
+
+2005-12-11  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * (PHP_4_4)
+      ext/interbase/tests/skipif.inc:
+      - Show skip reasonwq
+
+2005-12-11  Jani Taskinen  <jani.taskinen@sci.fi>
+
+    * (PHP_5_1)
+      NEWS:
+      fix news
+
+2005-12-11  Edin Kadribasic  <edink@emini.dk>
+
+    * (PHP_5_1)
+      NEWS:
+      Bundle update news
+
+2005-12-11  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * (PHP_5_1)
+      ext/interbase/interbase.c:
+      - MFH Revert accidential 'drop in' from 1.227
+
+    * ext/interbase/interbase.c:
+      - Revert accidential 'drop in' from 1.227
+
+2005-12-11  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * TODO-5.1
+      TODO-5.1:
+      test commit
+
+2005-12-11  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * sapi/cli/php_cli.c:
+      - Add method support to --rfunction
+
+    * sapi/cli/php.1.in
+      sapi/cli/php_cli.c:
+      - Add docu
+
+    * (PHP_4_4)
+      ext/standard/Makefile.frag:
+      - Fix re2c usage
+
 2005-12-09  Antony Dovgal  <antony@zend.com>
 
     * ext/standard/string.c:
@@ -18920,7 +18978,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2190 2005/12/10 06:51:32 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2191 2005/12/12 06:31:40 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -22321,7 +22379,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2190 2005/12/10 06:51:32 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2191 2005/12/12 06:31:40 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -22802,7 +22860,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2190 2005/12/10 06:51:32 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2191 2005/12/12 06:31:40 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -24276,7 +24334,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2190 2005/12/10 06:51:32 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2191 2005/12/12 06:31:40 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.h,v 1.15 2005/12/01 16:26:38 iliaa Exp $ */
+/* $Id: timelib.h,v 1.16 2005/12/12 19:44:27 sniper Exp $ */
 
 #ifndef __TIMELIB_H__
 #define __TIMELIB_H__
@@ -36,6 +36,10 @@
 
 #if defined(_MSC_VER) && !defined(strcasecmp)
 #define strcasecmp stricmp
+#endif
+
+#if defined(_MSC_VER) && !defined(strncasecmp)
+#define strncasecmp strnicmp
 #endif
 
 /* From dow.c */

@@ -3,11 +3,10 @@ XMLWriter: libxml2 XML Writer DTD Element & Attlist
 --SKIPIF--
 <?php 
 if (!extension_loaded("xmlwriter")) die("skip"); 
-if (!function_exists("xmlwriter_start_comment")) die("skip: libxml2 2.6.7+ required");
 ?>
 --FILE--
 <?php 
-/* $Id: 008.phpt,v 1.1.2.2 2005/12/09 04:57:20 rrichards Exp $ */
+/* $Id: 008.phpt,v 1.1.2.3 2005/12/12 21:21:11 tony2001 Exp $ */
 
 $xw = xmlwriter_open_memory();
 xmlwriter_set_indent($xw, TRUE);

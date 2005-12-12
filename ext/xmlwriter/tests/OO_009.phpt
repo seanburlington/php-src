@@ -3,11 +3,10 @@ XMLWriter: PI, Comment, CDATA
 --SKIPIF--
 <?php 
 if (!extension_loaded("xmlwriter")) die("skip"); 
-if (!function_exists("$xw->start_comment")) die("skip: libxml2 2.6.7+ required");
 ?>
 --FILE--
 <?php 
-/* $Id: OO_009.phpt,v 1.2 2005/12/09 20:51:23 rrichards Exp $ */
+/* $Id: OO_009.phpt,v 1.3 2005/12/12 21:21:36 tony2001 Exp $ */
 
 $xw = new XMLWriter();
 $xw->openMemory();

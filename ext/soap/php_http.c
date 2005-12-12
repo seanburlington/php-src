@@ -17,7 +17,7 @@
   |          Dmitry Stogov <dmitry@zend.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: php_http.c,v 1.55.2.23 2005/12/07 13:56:07 dmitry Exp $ */
+/* $Id: php_http.c,v 1.55.2.24 2005/12/12 09:25:40 dmitry Exp $ */
 
 #include "php_soap.h"
 #include "ext/standard/base64.h"
@@ -32,7 +32,7 @@ static int get_http_headers(php_stream *socketd,char **response, int *out_size T
 
 static int stream_alive(php_stream *stream  TSRMLS_DC)
 {
-	int socket;
+	long socket;
 	char buf;
 
 	/* maybe better to use:

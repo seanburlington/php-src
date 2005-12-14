@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: string.c,v 1.333.2.52.2.1 2005/09/28 22:34:04 iliaa Exp $ */
+/* $Id: string.c,v 1.333.2.52.2.2 2005/12/14 00:55:44 tony2001 Exp $ */
 
 /* Synced with php 3.0 revision 1.193 1999-06-16 [ssb] */
 
@@ -3541,7 +3541,7 @@ PHP_FUNCTION(str_repeat)
 	/* Initialize the result string */	
 	result_len = Z_STRLEN_PP(input_str) * Z_LVAL_PP(mult);
 	if (result_len < 1) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "You may not create strings longer then 2147483647 bytes");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "You may not create strings longer than 2147483647 bytes");
 		RETURN_FALSE;
 	}
 	result = (char *)emalloc(result_len + 1);

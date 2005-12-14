@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2004 The PHP Group                                |
+  | Copyright (c) 1997-2005 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: win95nt.h,v 1.19 2004/01/08 17:33:04 sniper Exp $ */
+/* $Id: win95nt.h,v 1.20.2.1 2005/12/14 02:01:13 wez Exp $ */
 
 /* Defines and types for Windows 95/NT */
 #define HAVE_DECLARED_TIMEZONE
@@ -46,7 +46,9 @@ typedef char * caddr_t;
 #define rmdir(a)	_rmdir(a)
 #define getpid		_getpid
 #define php_sleep(t)	Sleep(t*1000)
-#define getcwd(a, b)		_getcwd(a, b)
+#ifndef getcwd
+# define getcwd(a, b)		_getcwd(a, b)
+#endif
 #define off_t		_off_t
 typedef unsigned int uint;
 typedef unsigned long ulong;

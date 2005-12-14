@@ -1,5 +1,5 @@
 // vim:ft=javascript
-// $Id: config.w32,v 1.40.2.5 2005/12/01 11:11:46 rrichards Exp $
+// $Id: config.w32,v 1.40.2.6 2005/12/14 02:01:13 wez Exp $
 // "Master" config file; think of it as a configure.in
 // equivalent.
 
@@ -97,8 +97,9 @@ if (VCVERS < 14) {
 
 if (VCVERS >= 14) {
 	// fun stuff: MS deprecated ANSI stdio and similar functions
-	// disable annoying warnings
-	ADD_FLAG('CFLAGS', ' /wd4996 ');
+	// disable annoying warnings.  In addition, time_t defaults
+	// to 64-bit.  Ask for 32-bit.
+	ADD_FLAG('CFLAGS', ' /wd4996 /D_USE_32BIT_TIME_T=1 ');
 
 	if (PHP_DEBUG == "yes") {
 		// Set some debug/release specific options

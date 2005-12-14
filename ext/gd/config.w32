@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.11 2005/10/02 18:31:37 pajoye Exp $
+// $Id: config.w32,v 1.12 2005/12/14 19:12:57 pajoye Exp $
 // vim:ft=javascript
 
 ARG_WITH("gd", "Bundled GD support", "yes,shared");
@@ -34,7 +34,6 @@ if (PHP_GD != "no") {
 		ADD_FLAG("CFLAGS_GD", " \
 /D HAVE_GD_DYNAMIC_CTX_EX=1 \
 /D HAVE_GD_BUNDLED=1  \
-/D HAVE_GD_GD2  \
 /D HAVE_GD_GIF_READ=1  \
 /D HAVE_GD_GIF_CREATE=1  \
 /D HAVE_GDIMAGECOLORRESOLVE=1  \

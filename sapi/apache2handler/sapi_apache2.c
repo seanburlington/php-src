@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: sapi_apache2.c,v 1.64 2005/11/18 19:01:50 iliaa Exp $ */
+/* $Id: sapi_apache2.c,v 1.65 2005/12/14 03:36:58 iliaa Exp $ */
 
 #define ZEND_INCLUDE_FULL_WINDOWS_HEADERS
 
@@ -471,7 +471,7 @@ static int php_handler(request_rec *r)
 
 	/* apply_config() needs r in some cases, so allocate server_context early */
 	ctx = SG(server_context);
-	if (ctx == NULL) {
+	if (ctx == NULL || (ctx && ctx->request_processed && !strcmp(r->protocol, "INCLUDED"))) {
 normal:
 		ctx = SG(server_context) = apr_pcalloc(r->pool, sizeof(*ctx));
 		/* register a cleanup so we clear out the SG(server_context)

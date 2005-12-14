@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.158 2005/12/01 00:36:26 sniper Exp $
+dnl $Id: config.m4,v 1.159 2005/12/14 19:10:52 pajoye Exp $
 dnl
 
 dnl
@@ -327,7 +327,6 @@ if test "$PHP_GD" != "no"; then
 
 dnl These defines are always available
 dnl FIXME: Cleanup the sources so that these are not needed!
-  AC_DEFINE(HAVE_GD_GD2,              1, [ ])
   AC_DEFINE(HAVE_GD_WBMP,             1, [ ])
   AC_DEFINE(HAVE_LIBGD13,             1, [ ])
   AC_DEFINE(HAVE_LIBGD15,             1, [ ])

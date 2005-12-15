@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id: pack.c,v 1.57 2005/08/03 14:08:09 sniper Exp $ */
+/* $Id: pack.c,v 1.58 2005/12/15 22:14:25 tony2001 Exp $ */
 
 #include "php.h"
 
@@ -184,6 +184,7 @@ PHP_FUNCTION(pack)
 				}
 
 				if (arg < 0) {
+					convert_to_string_ex(argv[currentarg]);
 					arg = Z_STRLEN_PP(argv[currentarg]);
 				}
 

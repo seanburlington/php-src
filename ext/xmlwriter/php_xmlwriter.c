@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.25 2005/12/09 20:51:19 rrichards Exp $ */
+/* $Id: php_xmlwriter.c,v 1.26 2005/12/15 13:57:14 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1630,7 +1630,7 @@ PHP_FUNCTION(xmlwriter_open_uri)
 	
 #ifdef ZEND_ENGINE_2
 	if (this) {
-		// We do not use XMLWRITER_FROM_OBJECT, xmlwriter init function here
+		/* We do not use XMLWRITER_FROM_OBJECT, xmlwriter init function here */
 		ze_obj = (ze_xmlwriter_object*) zend_object_store_get_object(this TSRMLS_CC); 
 	}
 #endif
@@ -1699,7 +1699,7 @@ PHP_FUNCTION(xmlwriter_open_memory)
 
 #ifdef ZEND_ENGINE_2
 	if (this) {
-		// We do not use XMLWRITER_FROM_OBJECT, xmlwriter init function here
+		/* We do not use XMLWRITER_FROM_OBJECT, xmlwriter init function here */
 		ze_obj = (ze_xmlwriter_object*) zend_object_store_get_object(this TSRMLS_CC); 
 	}
 #endif

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: iconv.c,v 1.124.2.3 2005/12/06 02:25:23 sniper Exp $ */
+/* $Id: iconv.c,v 1.124.2.4 2005/12/15 22:49:22 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1366,7 +1366,7 @@ static php_iconv_err_t _php_iconv_mime_decode(smart_str *pretval, const char *st
 
 					if (cd == (iconv_t)(-1)) {
 						if ((mode & PHP_ICONV_MIME_DECODE_CONTINUE_ON_ERROR)) {
-							err = _php_iconv_appendl(pretval, encoded_word, (size_t)((p1 + 1) - encoded_word), cd); 
+							err = _php_iconv_appendl(pretval, encoded_word, (size_t)((p1 + 1) - encoded_word), cd_pl); 
 							if (err != PHP_ICONV_ERR_SUCCESS) {
 								goto out;
 							}

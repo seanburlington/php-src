@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.142.2.47.2.5 2005/11/21 23:21:19 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.142.2.47.2.6 2005/12/15 03:37:22 iliaa Exp $ */
 
 /*
  * PHP4 Multibyte String module "mbstring"
@@ -2483,6 +2483,13 @@ PHP_FUNCTION(mb_strcut)
 		if (len < 0) {
 			len = 0;
 		}
+	}
+
+	if (from > Z_STRLEN_PP(arg1)) {
+		RETURN_FALSE;
+	}
+	if (((unsigned) from + (unsigned) len) > Z_STRLEN_PP(arg1)) {
+		len = Z_STRLEN_PP(arg1) - from;
 	}
 
 	ret = mbfl_strcut(&string, &result, from, len);

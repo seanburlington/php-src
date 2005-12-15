@@ -1,3 +1,72 @@
+2005-12-14  Pierre-Alain Joye  <pierre.dev@gmail.com>
+
+    * ext/gd/config.m4
+      ext/gd/config.w32
+      ext/gd/gd.c
+      ext/gd/gd.dsp
+      ext/gd/tests/createfromwbmp.phpt
+      ext/gd/tests/imagewbmp.phpt
+      ext/gd/tests/src.wbmp:
+      - add wbmp read/write tests
+      - remove HAVE_GD_WBMP, always available
+
+    * ext/gd/tests/createfromgd2.phpt:
+      - correct title
+
+    * ext/gd/config.w32
+      ext/gd/gd.dsp:
+      - remove HAVE_GD_GD2 on windows as well
+
+    * ext/gd/config.m4
+      ext/gd/gd.c:
+      - remove HAVE_GD_GD2, always valid now (2.0.33 or bundled)
+
+    * ext/gd/tests/createfromgd2.phpt
+      ext/gd/tests/src.gd2:
+      - tests for imagecreatefromgd2 and gd2part
+
+2005-12-14  Mark L. Woodward  <mlwmohawk@mohawksoft.com>
+
+    * (PHP_5_0)
+      ext/msession/README:
+      Updated README
+
+2005-12-14  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_4)
+      NEWS
+      sapi/apache2handler/sapi_apache2.c:
+      MFH: Fixed bug #35571 (Fixed crash in Apache 2 SAPI when more then one php
+      script is loaded via SSI include).
+
+    * sapi/apache2handler/sapi_apache2.c:
+      MFB51: Fixed bug #35571 (Fixed crash in Apache 2 SAPI when more then one
+      php
+      script is loaded via SSI include). (Ilia)
+
+    * (PHP_5_1)
+      NEWS
+      sapi/apache2handler/sapi_apache2.c:
+      Fixed bug #35571 (Fixed crash in Apache 2 SAPI when more then one php
+      script is loaded via SSI include).
+
+2005-12-14  Wez Furlong  <wez.php@thebrainroom.net>
+
+    * (PHP_5_1)
+      main/win95nt.h:
+      Fixes for building with vs.net 2005.
+
+2005-12-14  Antony Dovgal  <antony@zend.com>
+
+    * ext/standard/string.c:
+      fix spelling and #35665
+
+2005-12-14  Marcus Boerger  <marcus.boerger@post.rwth-aachen.de>
+
+    * (PHP_5_1)
+      main/streams/memory.c:
+      - Fix temp/memory stream modes
+
 2005-12-13  Antony Dovgal  <antony@zend.com>
 
     * (PHP_5_1)
@@ -19084,7 +19153,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2193 2005/12/14 06:31:41 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2194 2005/12/15 06:31:44 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -22485,7 +22554,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2193 2005/12/14 06:31:41 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2194 2005/12/15 06:31:44 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -22966,7 +23035,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2193 2005/12/14 06:31:41 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2194 2005/12/15 06:31:44 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -24440,7 +24509,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2193 2005/12/14 06:31:41 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2194 2005/12/15 06:31:44 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

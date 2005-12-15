@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_stmt.c,v 1.135 2005/12/06 02:24:41 sniper Exp $ */
+/* $Id: pdo_stmt.c,v 1.136 2005/12/15 22:35:18 iliaa Exp $ */
 
 /* The PDO Statement Handle Class */
 
@@ -1742,13 +1742,8 @@ fail_out:
 			break;
 		
 		default:
-			if ((mode & ~PDO_FETCH_FLAGS) < PDO_FETCH__MAX && (mode & ~PDO_FETCH_FLAGS) >= 0) {
-			 	pdo_raise_impl_error(stmt->dbh, stmt, "22003", "unhandled mode; this is a PDO bug, please report it" TSRMLS_CC);
-			} else {
-			   	pdo_raise_impl_error(stmt->dbh, stmt, "22003", "mode is out of range" TSRMLS_CC);
-			}
-			efree(args);
-			return FAILURE;
+			pdo_raise_impl_error(stmt->dbh, stmt, "22003", "Invalid fetch mode specified" TSRMLS_CC);
+			goto fail_out;
 	}
 
 	stmt->default_fetch_type = mode;

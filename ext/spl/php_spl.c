@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.52.2.19 2005/12/16 22:29:02 helly Exp $ */
+/* $Id: php_spl.c,v 1.52.2.20 2005/12/16 22:38:17 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -426,7 +426,7 @@ PHP_FUNCTION(spl_autoload_register)
 				return;
 			} else {
 				if (do_throw) {
-					zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Illegal value passed", func_name);
+					zend_throw_exception_ex(spl_ce_LogicException, 0 TSRMLS_CC, "Illegal value passed");
 				}
 				efree(func_name);
 				return;

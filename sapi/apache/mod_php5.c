@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id: mod_php5.c,v 1.19.2.2 2005/10/18 23:51:54 tony2001 Exp $ */
+/* $Id: mod_php5.c,v 1.19.2.3 2005/12/16 22:45:12 andrei Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"
@@ -605,7 +605,7 @@ static int send_php(request_rec *r, int display_source_mode, char *filename)
 
 		/* Apache 1.2 has a more complex mechanism for reading POST data */
 #if MODULE_MAGIC_NUMBER > 19961007
-		if ((retval = setup_client_block(r, REQUEST_CHUNKED_ERROR))) {
+		if ((retval = setup_client_block(r, REQUEST_CHUNKED_DECHUNK))) {
 			zend_try {
 				zend_ini_deactivate(TSRMLS_C);
 			} zend_end_try();

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.230 2005/12/06 02:07:17 sniper Exp $ */
+/* $Id: mbstring.c,v 1.231 2005/12/16 14:50:31 tony2001 Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -1844,6 +1844,13 @@ PHP_FUNCTION(mb_strcut)
 		}
 	}
 
+	if (from > Z_STRLEN_PP(arg1)) {
+		RETURN_FALSE;
+	}
+	if (((unsigned) from + (unsigned) len) > Z_STRLEN_PP(arg1)) {
+		len = Z_STRLEN_PP(arg1) - from;
+	}
+	
 	ret = mbfl_strcut(&string, &result, from, len);
 	if (ret != NULL) {
 		RETVAL_STRINGL(ret->val, ret->len, 0);		/* the string is already strdup()'ed */

@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.326 2005/12/16 17:02:30 pajoye Exp $ */
+/* $Id: gd.c,v 1.327 2005/12/16 19:02:07 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -1386,6 +1386,11 @@ PHP_FUNCTION(imagecreatefromstring)
 	}
 
 	convert_to_string_ex(data);
+	if (Z_STRLEN_PP(data) < 8) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Empty string or invalid image");
+		RETURN_FALSE;
+	}
+
 	memcpy(sig, Z_STRVAL_PP(data), 8);
 
 	imtype = _php_image_type(sig);
@@ -1427,7 +1432,7 @@ PHP_FUNCTION(imagecreatefromstring)
 			break;
 
 		default:
-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Data is not in a recognized format.");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Data is not in a recognized format");
 			RETURN_FALSE;
 	}
 

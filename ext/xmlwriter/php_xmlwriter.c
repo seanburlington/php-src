@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlwriter.c,v 1.26 2005/12/15 13:57:14 pajoye Exp $ */
+/* $Id: php_xmlwriter.c,v 1.27 2005/12/17 20:05:21 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -366,7 +366,7 @@ PHP_FUNCTION(xmlwriter_set_indent)
 	zval *this = getThis();
 	
 	if (this) {
-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "b", &pind, &indent) == FAILURE) {
+		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "b", &indent) == FAILURE) {
 			return;
 		}
 		XMLWRITER_FROM_OBJECT(intern, this);

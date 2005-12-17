@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.259 2005/12/10 18:26:08 sniper Exp $ */
+/* $Id: run-tests.php,v 1.260 2005/12/17 16:33:53 iliaa Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -350,7 +350,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Revision: 1.259 $\n";
+					echo "$Revision: 1.260 $\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -1295,6 +1295,7 @@ COMMAND $cmd
 			// Stick to basics
 			$wanted_re = str_replace("%e", '\\' . DIRECTORY_SEPARATOR, $wanted_re);
 			$wanted_re = str_replace("%s", ".+?", $wanted_re); //not greedy
+			$wanted_re = str_replace("%w", "\s*", $wanted_re);
 			$wanted_re = str_replace("%i", "[+\-]?[0-9]+", $wanted_re);
 			$wanted_re = str_replace("%d", "[0-9]+", $wanted_re);
 			$wanted_re = str_replace("%x", "[0-9a-fA-F]+", $wanted_re);

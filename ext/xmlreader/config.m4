@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.3.2.1 2005/12/01 08:54:22 sniper Exp $
+dnl $Id: config.m4,v 1.3.2.2 2005/12/17 15:40:37 helly Exp $
 dnl
 
 PHP_ARG_ENABLE(xmlreader, whether to enable XMLReader support,
@@ -19,6 +19,7 @@ if test "$PHP_XMLREADER" != "no"; then
   PHP_SETUP_LIBXML(XMLREADER_SHARED_LIBADD, [
     AC_DEFINE(HAVE_XMLREADER,1,[ ])
     PHP_NEW_EXTENSION(xmlreader, php_xmlreader.c, $ext_shared)
+    PHP_ADD_EXTENSION_DEP(xmlreader, dom, true)
     PHP_SUBST(XMLREADER_SHARED_LIBADD)
   ], [
     AC_MSG_ERROR([xml2-config not found. Please check your libxml2 installation.])

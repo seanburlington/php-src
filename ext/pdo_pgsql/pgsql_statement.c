@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_statement.c,v 1.31.2.8 2005/12/17 17:59:05 iliaa Exp $ */
+/* $Id: pgsql_statement.c,v 1.31.2.9 2005/12/17 18:26:15 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -31,6 +31,9 @@
 #include "pdo/php_pdo_driver.h"
 #include "php_pdo_pgsql.h"
 #include "php_pdo_pgsql_int.h"
+#if HAVE_NETINET_IN_H
+#include <netinet/in.h>
+#endif
 
 /* from postgresql/src/include/catalog/pg_type.h */
 #define BOOLOID     16

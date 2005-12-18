@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_reflection.c,v 1.164.2.15 2005/12/11 12:37:39 helly Exp $ */
+/* $Id: php_reflection.c,v 1.164.2.16 2005/12/18 21:17:07 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -2781,7 +2781,7 @@ ZEND_METHOD(reflection_class, getConstructor)
 /* }}} */
 
 /* {{{ proto public bool ReflectionClass::hasMethod(string name)
-   Returns wether a method exists or not */
+   Returns whether a method exists or not */
 ZEND_METHOD(reflection_class, hasMethod)
 {
 	reflection_object *intern;
@@ -2880,7 +2880,7 @@ ZEND_METHOD(reflection_class, getMethods)
 /* }}} */
 
 /* {{{ proto public bool ReflectionClass::hasProperty(string name)
-   Returns wether a property exists or not */
+   Returns whether a property exists or not */
 ZEND_METHOD(reflection_class, hasProperty)
 {
 	reflection_object *intern;
@@ -3014,7 +3014,7 @@ ZEND_METHOD(reflection_class, getProperties)
 /* }}} */
 
 /* {{{ proto public bool ReflectionClass::hasConstant(string name)
-   Returns wether a constant exists or not */
+   Returns whether a constant exists or not */
 ZEND_METHOD(reflection_class, hasConstant)
 {
 	reflection_object *intern;
@@ -4254,7 +4254,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.15 2005/12/11 12:37:39 helly Exp $");
+	php_info_print_table_row(2, "Version", "$Id: php_reflection.c,v 1.164.2.16 2005/12/18 21:17:07 tony2001 Exp $");
 
 	php_info_print_table_end();
 } /* }}} */

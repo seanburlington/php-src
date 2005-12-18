@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.29 2004/06/13 10:12:47 rrichards Exp $ */
+/* $Id: node.c,v 1.37.2.1 2005/12/18 21:17:07 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -72,7 +72,7 @@ static void dom_reconcile_ns(xmlDocPtr doc, xmlNodePtr nodep) {
 	}
 }
 
-/* {{{ proto nodeName	string	
+/* {{{ nodeName	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-F68D095
 Since: 
@@ -164,7 +164,7 @@ int dom_node_node_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto nodeValue	string	
+/* {{{ nodeValue	string	
 readonly=no 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-F68D080
 Since: 
@@ -260,7 +260,7 @@ int dom_node_node_value_write(dom_object *obj, zval *newval TSRMLS_DC)
 
 
 
-/* {{{ proto nodeType	int
+/* {{{ nodeType	int
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-111237558
 Since:
@@ -292,7 +292,7 @@ int dom_node_node_type_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto parentNode	DomNode	
+/* {{{ parentNode	DomNode	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-1060184317
 Since: 
@@ -317,7 +317,7 @@ int dom_node_parent_node_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(nodeparent, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -327,7 +327,7 @@ int dom_node_parent_node_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto childNodes	DomNodeList	
+/* {{{ childNodes	DomNodeList	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-1451460987
 Since: 
@@ -351,7 +351,7 @@ int dom_node_child_nodes_read(dom_object *obj, zval **retval TSRMLS_DC)
 	} else {
 		php_dom_create_interator(*retval, DOM_NODELIST TSRMLS_CC);
 		intern = (dom_object *)zend_objects_get_address(*retval TSRMLS_CC);
-		dom_namednode_iter(obj, XML_ELEMENT_NODE, intern, NULL, NULL, NULL);
+		dom_namednode_iter(obj, XML_ELEMENT_NODE, intern, NULL, NULL, NULL TSRMLS_CC);
 	}
 
 	return SUCCESS;
@@ -361,7 +361,7 @@ int dom_node_child_nodes_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto firstChild DomNode	
+/* {{{ firstChild DomNode	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-169727388
 Since: 
@@ -389,7 +389,7 @@ int dom_node_first_child_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(first, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -399,7 +399,7 @@ int dom_node_first_child_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto lastChild	DomNode	
+/* {{{ lastChild	DomNode	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-61AD09FB
 Since: 
@@ -427,7 +427,7 @@ int dom_node_last_child_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(last, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -437,7 +437,7 @@ int dom_node_last_child_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto previousSibling	DomNode	
+/* {{{ previousSibling	DomNode	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-640FB3C8
 Since: 
@@ -462,7 +462,7 @@ int dom_node_previous_sibling_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(prevsib, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -472,7 +472,7 @@ int dom_node_previous_sibling_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto nextSibling	DomNode
+/* {{{ nextSibling	DomNode
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-6AC54C2F
 Since:
@@ -497,7 +497,7 @@ int dom_node_next_sibling_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object(nextsib, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -507,7 +507,7 @@ int dom_node_next_sibling_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto attributes	DomNamedNodeMap	
+/* {{{ attributes	DomNamedNodeMap	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-84CF096
 Since: 
@@ -529,7 +529,7 @@ int dom_node_attributes_read(dom_object *obj, zval **retval TSRMLS_DC)
 	if (nodep->type == XML_ELEMENT_NODE) {
 		php_dom_create_interator(*retval, DOM_NAMEDNODEMAP TSRMLS_CC);
 		intern = (dom_object *)zend_objects_get_address(*retval TSRMLS_CC);
-		dom_namednode_iter(obj, XML_ATTRIBUTE_NODE, intern, NULL, NULL, NULL);
+		dom_namednode_iter(obj, XML_ATTRIBUTE_NODE, intern, NULL, NULL, NULL TSRMLS_CC);
 	} else {
 		ZVAL_NULL(*retval);
 	}
@@ -541,7 +541,7 @@ int dom_node_attributes_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto ownerDocument	DomDocument	
+/* {{{ ownerDocument	DomDocument	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-node-ownerDoc
 Since: 
@@ -573,7 +573,7 @@ int dom_node_owner_document_read(dom_object *obj, zval **retval TSRMLS_DC)
 	ALLOC_ZVAL(*retval);
 
 	if (NULL == (*retval = php_dom_create_object((xmlNodePtr) docp, &ret, NULL, *retval, obj TSRMLS_CC))) {
-		php_error(E_WARNING, "Cannot create required DOM object");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Cannot create required DOM object");
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -583,7 +583,7 @@ int dom_node_owner_document_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto namespaceUri	string	
+/* {{{ namespaceUri	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-NodeNSname
 Since: DOM Level 2
@@ -628,7 +628,7 @@ int dom_node_namespace_uri_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto prefix	string	
+/* {{{ prefix	string	
 readonly=no 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-NodeNSPrefix
 Since: DOM Level 2
@@ -752,7 +752,7 @@ int dom_node_prefix_write(dom_object *obj, zval *newval TSRMLS_DC)
 
 
 
-/* {{{ proto localName	string	
+/* {{{ localName	string	
 readonly=yes 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-NodeNSLocalN
 Since: DOM Level 2
@@ -783,7 +783,7 @@ int dom_node_local_name_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto baseURI	string
+/* {{{ baseURI	string
 readonly=yes
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#Node3-baseURI
 Since: DOM Level 3
@@ -817,7 +817,7 @@ int dom_node_base_uri_read(dom_object *obj, zval **retval TSRMLS_DC)
 
 
 
-/* {{{ proto textContent	string	
+/* {{{ textContent	string	
 readonly=no 
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#Node3-textContent
 Since: DOM Level 3
@@ -856,7 +856,51 @@ int dom_node_text_content_write(dom_object *obj, zval *newval TSRMLS_DC)
 /* }}} */
 
 
+static xmlNodePtr _php_dom_insert_fragment(xmlNodePtr nodep, xmlNodePtr prevsib,
+					xmlNodePtr nextsib, xmlNodePtr fragment, 
+					dom_object *intern, dom_object *childobj TSRMLS_DC)
+{
+	xmlNodePtr newchild, node;
 
+	newchild = fragment->children;
+
+	if (newchild) {
+		if (prevsib == NULL) {
+			nodep->children = newchild;
+		} else {
+			prevsib->next = newchild;
+		}
+		newchild->prev = prevsib;
+		if (nextsib == NULL) {
+			nodep->last = fragment->last;
+		} else {
+			fragment->last->next = nextsib;
+			nextsib->prev = fragment->last;
+		}
+
+		node = newchild;
+		while (node != NULL) {
+			node->parent = nodep;
+			if (node->doc != nodep->doc) {
+				xmlSetTreeDoc(node, nodep->doc);
+				if (node->_private != NULL) {
+					childobj = node->_private;
+					childobj->document = intern->document;
+					php_libxml_increment_doc_ref((php_libxml_node_object *)childobj, NULL TSRMLS_CC);
+				}
+			}
+			if (node == fragment->last) {
+				break;
+			}
+			node = node->next;
+		}
+
+		fragment->children = NULL;
+		fragment->last = NULL;
+	}
+
+	return newchild;
+}
 
 /* {{{ proto domnode dom_node_insert_before(DomNode newChild, DomNode refChild);
 URL: http://www.w3.org/TR/2003/WD-DOM-Level-3-Core-20030226/DOM3-Core.html#core-ID-952280727
@@ -948,7 +992,7 @@ PHP_FUNCTION(dom_node_insert_before)
 				lastattr = xmlHasProp(refp->parent, child->name);
 			else
 				lastattr = xmlHasNsProp(refp->parent, child->name, child->ns->href);
-			if (lastattr != NULL) {
+			if (lastattr != NULL && lastattr->type != XML_ATTRIBUTE_DECL) {
 				if (lastattr != (xmlAttrPtr) child) {
 					xmlUnlinkNode((xmlNodePtr) lastattr);
 					php_libxml_node_free_resource((xmlNodePtr) lastattr TSRMLS_CC);
@@ -958,32 +1002,7 @@ PHP_FUNCTION(dom_node_insert_before)
 				}
 			}
 		} else if (child->type == XML_DOCUMENT_FRAG_NODE) {
-			xmlNodePtr fragment;
-
-			fragment = child;
-			new_child = child->children;
-			child = new_child;
-			while (child->next != NULL) {
-				child->parent = parentp;
-				if (child->doc != parentp->doc) {
-					xmlSetTreeDoc(child, parentp->doc);
-				}
-				child = child->next;
-			}
-			child->parent = parentp;
-			if (child->doc != parentp->doc) {
-				xmlSetTreeDoc(child, parentp->doc);
-			}
-
-			if (refp->prev != NULL) {
-				refp->prev->next = new_child;
-			} else {
-				parentp->children = new_child;
-			}
-			new_child->prev = refp->prev;
-			refp->prev = child;
-			child->next = refp;
-			fragment->children = NULL;
+			new_child = _php_dom_insert_fragment(parentp, refp->prev, refp, child, intern, childobj TSRMLS_CC);
 		}
 
 		if (new_child == NULL) {
@@ -1015,7 +1034,7 @@ PHP_FUNCTION(dom_node_insert_before)
 				lastattr = xmlHasProp(parentp, child->name);
 			else
 				lastattr = xmlHasNsProp(parentp, child->name, child->ns->href);
-			if (lastattr != NULL) {
+			if (lastattr != NULL && lastattr->type != XML_ATTRIBUTE_DECL) {
 				if (lastattr != (xmlAttrPtr) child) {
 					xmlUnlinkNode((xmlNodePtr) lastattr);
 					php_libxml_node_free_resource((xmlNodePtr) lastattr TSRMLS_CC);
@@ -1025,32 +1044,7 @@ PHP_FUNCTION(dom_node_insert_before)
 				}
 			}
 		} else if (child->type == XML_DOCUMENT_FRAG_NODE) {
-			xmlNodePtr fragment;
-
-			fragment = child;
-
-			new_child = child->children;
-			if (parentp->children == NULL) {
-				parentp->children = new_child;
-			} else {
-				child = parentp->last;
-				child->next = new_child;
-				new_child->prev = child;
-			}
-			child = new_child;
-			while (child->next != NULL) {
-				child->parent = parentp;
-				if (child->doc != parentp->doc) {
-					xmlSetTreeDoc(child, parentp->doc);
-				}
-				child = child->next;
-			}
-			child->parent = parentp;
-			if (child->doc != parentp->doc) {
-				xmlSetTreeDoc(child, parentp->doc);
-			}
-			parentp->last = child;
-			fragment->children = NULL;
+			new_child = _php_dom_insert_fragment(parentp, parentp->last, NULL, child, intern, childobj TSRMLS_CC);
 		}
 		if (new_child == NULL) {
 			new_child = xmlAddChild(parentp, child);
@@ -1119,7 +1113,7 @@ PHP_FUNCTION(dom_node_replace_child)
 		RETURN_FALSE;
 	}
 
-	/* check for the old child and wether the new child is already a child */
+	/* check for the old child and whether the new child is already a child */
 	while (children) {
 		if (children == oldchild) {
 			foundoldchild = 1;
@@ -1129,9 +1123,21 @@ PHP_FUNCTION(dom_node_replace_child)
 	}
 
 	if (foundoldchild) {
+		xmlNodePtr node;
 		zval *rv = NULL;
-		if (oldchild != newchild) {
-			xmlNodePtr node;
+
+		if (newchild->type == XML_DOCUMENT_FRAG_NODE) {
+			xmlNodePtr prevsib, nextsib;
+			prevsib = oldchild->prev;
+			nextsib = oldchild->next;
+
+			xmlUnlinkNode(oldchild);
+
+			newchild = _php_dom_insert_fragment(nodep, prevsib, nextsib, newchild, intern, newchildobj TSRMLS_CC);
+			if (newchild) {
+				dom_reconcile_ns(nodep->doc, newchild);
+			}
+		} else if (oldchild != newchild) {
 			if (newchild->doc == NULL && nodep->doc != NULL) {
 				xmlSetTreeDoc(newchild, nodep->doc);
 				newchildobj->document = intern->document;
@@ -1146,7 +1152,6 @@ PHP_FUNCTION(dom_node_replace_child)
 		php_dom_throw_error(NOT_FOUND_ERR, dom_get_strict_error(intern->document) TSRMLS_CC);
 		RETURN_FALSE;
 	}
-
 }
 /* }}} end dom_node_replace_child */
 
@@ -1281,44 +1286,20 @@ PHP_FUNCTION(dom_node_append_child)
 			lastattr = xmlHasProp(nodep, child->name);
 		else
 			lastattr = xmlHasNsProp(nodep, child->name, child->ns->href);
-		if (lastattr != NULL) {
+		if (lastattr != NULL && lastattr->type != XML_ATTRIBUTE_DECL) {
 			if (lastattr != (xmlAttrPtr) child) {
 				xmlUnlinkNode((xmlNodePtr) lastattr);
 				php_libxml_node_free_resource((xmlNodePtr) lastattr TSRMLS_CC);
 			}
 		}
 	} else if (child->type == XML_DOCUMENT_FRAG_NODE) {
-		xmlNodePtr fragment;
-
-		fragment = child;
-		new_child = child->children;
-		if (nodep->children == NULL) {
-			nodep->children = new_child;
-		} else {
-			child = nodep->last;
-			child->next = new_child;
-			new_child->prev = child;
-		}
-		child = new_child;
-		while (child->next != NULL) {
-			child->parent = nodep;
-			if (child->doc != nodep->doc) {
-				xmlSetTreeDoc(child, nodep->doc);
-			}
-			child = child->next;
-		}
-		child->parent = nodep;
-		if (child->doc != nodep->doc) {
-			xmlSetTreeDoc(child, nodep->doc);
-		}
-		nodep->last = child;
-		fragment->children = NULL;
+		new_child = _php_dom_insert_fragment(nodep, nodep->last, NULL, child, intern, childobj TSRMLS_CC);
 	}
 
 	if (new_child == NULL) {
 		new_child = xmlAddChild(nodep, child);
 		if (new_child == NULL) {
-			php_error(E_WARNING, "Couldn't append node");
+			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Couldn't append node");
 			RETURN_FALSE;
 		}
 	}

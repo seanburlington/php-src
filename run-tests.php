@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.15 2005/12/18 12:08:18 helly Exp $ */
+/* $Id: run-tests.php,v 1.226.2.16 2005/12/18 14:50:33 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -333,7 +333,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Revision: 1.226.2.15 $\n";
+					echo "$Revision: 1.226.2.16 $\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -412,7 +412,7 @@ HELP;
 		usort($test_files, "test_sort");
 		$start_time = time();
 		if (!$html_output) {
-		echo "Running selected tests.\n";
+			echo "Running selected tests.\n";
 		} else {
 			show_start($start_time);
 		}
@@ -518,7 +518,7 @@ function test_name($name)
 function test_sort($a, $b)
 {
 	global $cwd;
-
+	
 	$a = test_name($a);
 	$b = test_name($b);
 
@@ -663,7 +663,7 @@ if ($just_save_results || !getenv('NO_INTERACTION')) {
 			file_put_contents($output_file, $failed_tests_data);
 
 			if (!$just_save_results) {
-			    echo "\nThe test script was unable to automatically send the report to PHP's QA Team\n";
+				echo "\nThe test script was unable to automatically send the report to PHP's QA Team\n";
 			}
 
 			echo "Please send ".$output_file." to ".PHP_QA_EMAIL." manually, thank you.\n";
@@ -867,18 +867,29 @@ TEST $file
 		$borked = true;
 	}
 	$section = 'TEST';
+	$secfile = false;
+	$secdone = false;
 	while (!feof($fp)) {
 		$line = fgets($fp);
 
 		// Match the beginning of a section.
-		if (preg_match('/^--([A-Z]+)--/',$line,$r)) {
+		if (preg_match('/^--([A-Z]+)--/', $line, $r)) {
 			$section = $r[1];
 			$section_text[$section] = '';
+			$secfile = $section == 'FILE' || $section == 'FILEEOF';
+			$secdone = false;
 			continue;
 		}
 		
 		// Add to the section text.
-		$section_text[$section] .= $line;
+		if (!$secdone) {
+			$section_text[$section] .= $line;
+		}
+
+		// End of actual test?
+		if ($secfile && preg_match('/^===DONE===/', $line, $r)) {
+			$secdone = true;
+		}
 	}
 
 	// the redirect section allows a set of tests to be reused outside of

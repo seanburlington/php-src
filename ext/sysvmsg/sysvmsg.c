@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sysvmsg.c,v 1.22 2005/12/18 12:48:22 tony2001 Exp $ */
+/* $Id: sysvmsg.c,v 1.23 2005/12/18 12:50:01 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -142,7 +142,7 @@ PHP_MINFO_FUNCTION(sysvmsg)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "sysvmsg support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Revision: 1.22 $");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.23 $");
 	php_info_print_table_end();
 }
 /* }}} */
@@ -342,7 +342,7 @@ PHP_FUNCTION(msg_receive)
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "message corrupted");
 				RETVAL_FALSE;
 			} else {
-				REPLACE_ZVAL_VALUE(&out_message, tmp, 1);
+				REPLACE_ZVAL_VALUE(&out_message, tmp, 0);
 			}
 			FREE_ZVAL(tmp);
 			PHP_VAR_UNSERIALIZE_DESTROY(var_hash);

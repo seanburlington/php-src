@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_spl.c,v 1.79 2005/12/18 15:41:22 zeev Exp $ */
+/* $Id: php_spl.c,v 1.80 2005/12/18 15:47:03 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 	#include "config.h"
@@ -302,7 +302,7 @@ PHP_FUNCTION(spl_autoload)
 	}
 } /* }}} */
 
-/* {{{ proto void string spl_autoload_extensions([string file_extensions])
+/* {{{ proto string spl_autoload_extensions([string file_extensions])
  Register and return default file extensions for spl_autoload */
 PHP_FUNCTION(spl_autoload_extensions)
 {

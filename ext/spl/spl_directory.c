@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_directory.c,v 1.61 2005/12/14 09:55:04 helly Exp $ */
+/* $Id: spl_directory.c,v 1.62 2005/12/18 14:05:23 zeev Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -1563,8 +1563,8 @@ SPL_METHOD(SplFileObject, getMaxLineLen)
 	RETURN_LONG((long)intern->u.file.max_line_len);
 } /* }}} */
 
-/* {{{ proto bool SplFileObject>>hasChildren()
-   Rturn false */
+/* {{{ proto bool SplFileObject::hasChildren()
+   Return false */
 SPL_METHOD(SplFileObject, hasChildren)
 {
 	RETURN_FALSE;

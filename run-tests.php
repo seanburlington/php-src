@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.16 2005/12/18 14:50:33 helly Exp $ */
+/* $Id: run-tests.php,v 1.226.2.17 2005/12/18 15:47:07 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -333,7 +333,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo "$Revision: 1.226.2.16 $\n";
+					echo '$Revision: 1.226.2.17 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";

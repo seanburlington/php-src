@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: node.c,v 1.38 2005/08/12 11:29:29 dmitry Exp $ */
+/* $Id: node.c,v 1.39 2005/12/18 21:17:42 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -1113,7 +1113,7 @@ PHP_FUNCTION(dom_node_replace_child)
 		RETURN_FALSE;
 	}
 
-	/* check for the old child and wether the new child is already a child */
+	/* check for the old child and whether the new child is already a child */
 	while (children) {
 		if (children == oldchild) {
 			foundoldchild = 1;

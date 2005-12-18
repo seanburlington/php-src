@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.21 2005/12/18 16:00:02 zeev Exp $ */
+/* $Id: php_xmlreader.c,v 1.22 2005/12/18 21:17:42 tony2001 Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -578,7 +578,7 @@ PHP_METHOD(xmlreader, getAttributeNs)
 /* }}} */
 
 /* {{{ proto boolean XMLReader::getParserProperty(int property)
-Indicates wether given property (one of the parser option constants) is set or not on parser */
+Indicates whether given property (one of the parser option constants) is set or not on parser */
 PHP_METHOD(xmlreader, getParserProperty)
 {
 	zval *id;

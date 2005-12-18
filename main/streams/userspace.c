@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: userspace.c,v 1.26 2004/06/21 18:58:55 pollita Exp $ */
+/* $Id: userspace.c,v 1.31.2.1 2005/12/18 15:38:08 zeev Exp $ */
 
 #include "php.h"
 #include "php_globals.h"
@@ -437,6 +437,62 @@ PHP_FUNCTION(stream_wrapper_register)
 }
 /* }}} */
 
+/* {{{ proto bool stream_wrapper_unregister(string protocol)
+	Unregister a wrapper for the life of the current request. */
+PHP_FUNCTION(stream_wrapper_unregister)
+{
+	char *protocol;
+	int protocol_len;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &protocol, &protocol_len) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	if (php_unregister_url_stream_wrapper_volatile(protocol TSRMLS_CC) == FAILURE) {
+		/* We failed */
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to unregister protocol %s://", protocol);
+		RETURN_FALSE;
+	}
+
+	RETURN_TRUE;
+}
+/* }}} */
+
+/* {{{ proto bool stream_wrapper_restore(string protocol)
+	Restore the original protocol handler, overriding if necessary */
+PHP_FUNCTION(stream_wrapper_restore)
+{
+	char *protocol;
+	int protocol_len;
+	php_stream_wrapper *wrapper = NULL;
+	HashTable *global_wrapper_hash;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &protocol, &protocol_len) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	global_wrapper_hash = php_stream_get_url_stream_wrappers_hash_global();
+	if (php_stream_get_url_stream_wrappers_hash() == global_wrapper_hash) {
+		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "%s:// was never changed, nothing to restore", protocol);
+		RETURN_TRUE;
+	}
+
+	if ((zend_hash_find(global_wrapper_hash, protocol, protocol_len, (void**)&wrapper) == FAILURE) || !wrapper) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "%s:// never existed, nothing to restore", protocol);
+		RETURN_FALSE;
+	}
+
+	/* A failure here could be okay given that the protocol might have been merely unregistered */
+	php_unregister_url_stream_wrapper_volatile(protocol TSRMLS_CC);
+
+	if (php_register_url_stream_wrapper_volatile(protocol, wrapper TSRMLS_CC) == FAILURE) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to restore original %s:// wrapper", protocol);
+		RETURN_FALSE;
+	}	
+
+	RETURN_TRUE;
+}
+/* }}} */
 
 static size_t php_userstreamop_write(php_stream *stream, const char *buf, size_t count TSRMLS_DC)
 {
@@ -445,15 +501,15 @@ static size_t php_userstreamop_write(php_stream *stream, const char *buf, size_t
 	int call_result;
 	php_userstream_data_t *us = (php_userstream_data_t *)stream->abstract;
 	zval **args[1];
-	zval zbuff, *zbufptr;
+	zval *zbufptr;
 	size_t didwrite = 0;
 
 	assert(us != NULL);
 
 	ZVAL_STRINGL(&func_name, USERSTREAM_WRITE, sizeof(USERSTREAM_WRITE)-1, 0);
 
-	ZVAL_STRINGL(&zbuff, (char*)buf, count, 0);
-	zbufptr = &zbuff;
+	MAKE_STD_ZVAL(zbufptr);
+	ZVAL_STRINGL(zbufptr, (char*)buf, count, 1);;
 	args[0] = &zbufptr;
 
 	call_result = call_user_function_ex(NULL,
@@ -462,6 +518,7 @@ static size_t php_userstreamop_write(php_stream *stream, const char *buf, size_t
 			&retval,
 			1, args,
 			0, NULL TSRMLS_CC);
+	zval_ptr_dtor(&zbufptr);
 
 	didwrite = 0;
 	if (call_result == SUCCESS && retval != NULL) {
@@ -710,7 +767,7 @@ static int statbuf_from_array(zval *array, php_stream_statbuf *ssb TSRMLS_DC)
 	STAT_PROP_ENTRY(rdev);
 #endif
 	STAT_PROP_ENTRY(size);
-#if defined(NETWARE) && defined(CLIB_STAT_PATCH)
+#ifdef NETWARE
 	STAT_PROP_ENTRY_EX(atime, atime.tv_sec);
 	STAT_PROP_ENTRY_EX(mtime, mtime.tv_sec);
 	STAT_PROP_ENTRY_EX(ctime, ctime.tv_sec);
@@ -778,7 +835,7 @@ static int php_userstreamop_set_option(php_stream *stream, int option, int value
 		ZVAL_STRINGL(&func_name, USERSTREAM_EOF, sizeof(USERSTREAM_EOF)-1, 0);
 		call_result = call_user_function_ex(NULL, &us->object, &func_name, &retval, 0, NULL, 0, NULL TSRMLS_CC);
 		if (call_result == SUCCESS && retval != NULL && Z_TYPE_P(retval) == IS_BOOL) {
-			ret = Z_LVAL_P(retval) ? PHP_STREAM_OPTION_RETURN_OK : PHP_STREAM_OPTION_RETURN_ERR;
+			ret = zval_is_true(retval) ? PHP_STREAM_OPTION_RETURN_ERR : PHP_STREAM_OPTION_RETURN_OK;
 		} else {
 			ret = PHP_STREAM_OPTION_RETURN_ERR;
 			php_error_docref(NULL TSRMLS_CC, E_WARNING,

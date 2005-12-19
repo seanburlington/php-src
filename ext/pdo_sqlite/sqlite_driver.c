@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: sqlite_driver.c,v 1.25 2005/12/06 02:24:43 sniper Exp $ */
+/* $Id: sqlite_driver.c,v 1.26 2005/12/19 16:34:00 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,7 +42,10 @@ int _pdo_sqlite_error(pdo_dbh_t *dbh, pdo_stmt_t *stmt, const char *file, int li
 	einfo->line = line;
 
 	if (einfo->errcode != SQLITE_OK) {
-		einfo->errmsg = (char*)sqlite3_errmsg(H->db);
+		if (einfo->errmsg) {
+			efree(einfo->errmsg);
+		}
+		einfo->errmsg = estrdup((char*)sqlite3_errmsg(H->db));
 	} else { /* no error */
 		strcpy(*pdo_err, PDO_ERR_NONE);
 		return 0;
@@ -133,10 +136,16 @@ static int sqlite_handle_closer(pdo_dbh_t *dbh TSRMLS_DC) /* {{{ */
 	pdo_sqlite_db_handle *H = (pdo_sqlite_db_handle *)dbh->driver_data;
 	
 	if (H) {
+		pdo_sqlite_error_info *einfo = &H->einfo;
+
 		pdo_sqlite_cleanup_callbacks(H TSRMLS_CC);
 		if (H->db) {
 			sqlite3_close(H->db);
 			H->db = NULL;
+		}
+		if (einfo->errmsg) {
+			efree(einfo->errmsg);
+			einfo->errmsg = NULL;
 		}
 		pefree(H, dbh->is_persistent);
 		dbh->driver_data = NULL;

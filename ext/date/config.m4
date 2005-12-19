@@ -1,11 +1,11 @@
-dnl $Id: config.m4,v 1.11 2005/10/03 20:20:20 sniper Exp $
+dnl $Id: config.m4,v 1.12 2005/12/19 12:57:48 derick Exp $
 dnl config.m4 for date extension
 
 sinclude(ext/date/lib/timelib.m4)
 sinclude(lib/timelib.m4)
 
 PHP_DATE_CFLAGS="-I@ext_builddir@/lib"
-timelib_sources="lib/dow.c lib/parse_date.c lib/parse_tz.c 
+timelib_sources="lib/astro.c lib/dow.c lib/parse_date.c lib/parse_tz.c 
                  lib/timelib.c lib/tm2unixtime.c lib/unixtime2tm.c"
 
 PHP_NEW_EXTENSION(date, php_date.c $timelib_sources, no,, $PHP_DATE_CFLAGS)

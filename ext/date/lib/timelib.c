@@ -16,10 +16,11 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.c,v 1.8 2005/10/19 21:11:14 derick Exp $ */
+/* $Id: timelib.c,v 1.9 2005/12/19 12:57:49 derick Exp $ */
 
 #include "timelib.h"
 #include <ctype.h>
+#include <math.h>
 
 #define TIMELIB_TIME_FREE(m) 	\
 	if (m) {		\
@@ -137,6 +138,13 @@ signed long timelib_date_to_int(timelib_time *d, int *error)
 		*error = 0;
 	}
 	return (signed long) d->sse;
+}
+
+void timelib_decimal_hour_to_hms(double h, int *hour, int *min, int *sec)
+{
+	*hour = floor(h);
+	*min =  floor((h - *hour) * 60);
+	*sec =  (h - *hour - ((float) *min / 60)) * 3600;
 }
 
 void timelib_dump_date(timelib_time *d, int options)

@@ -7,10 +7,6 @@ PHP_ARG_WITH(openssl-dir,OpenSSL dir for MCVE,
 [  --with-openssl-dir[=DIR]  MCVE: openssl install prefix.], no, no)
 
 if test "$PHP_MCVE" != "no"; then
-  dnl properly set EGREP for AC_EGREP_CPP later on
-  AC_CHECK_PROG(EGREP, egrep, grep -E)
-  AC_SUBST(EGREP)
-
   if test "$PHP_OPENSSL_DIR" != "no"; then
     PHP_OPENSSL=$PHP_OPENSSL_DIR
     PHP_SETUP_OPENSSL(MCVE_SHARED_LIBADD, [], [
@@ -51,6 +47,20 @@ yes
   ],[
     AC_MSG_ERROR([libmcve 3.2.2 or greater required.])
   ])
+
+  AC_MSG_CHECKING([for correct libmonetra 4.2 or higher])
+  AC_EGREP_CPP(yes,[
+#include "$MCVE_DIR/include/mcve.h"
+#ifdef MCVE_SetSSL_CAfile
+yes
+#endif
+  ],[
+    AC_MSG_RESULT([yes])
+  ],[
+    AC_DEFINE([LIBMONETRA_BELOW_4_2], 1, [Whether or not we're using libmonetra 4.2 or higher ])
+    AC_MSG_RESULT([no])
+  ])
+
   CPPFLAGS=$saved_CPPFLAGS
 
   PHP_ADD_INCLUDE($MCVE_DIR/include)

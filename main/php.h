@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.203 2004/01/12 00:19:40 helly Exp $ */
+/* $Id: php.h,v 1.221.2.1 2005/12/20 14:24:24 iliaa Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -26,7 +26,7 @@
 #include <dmalloc.h>
 #endif
 
-#define PHP_API_VERSION 20031224
+#define PHP_API_VERSION 20041225
 #define PHP_HAVE_STREAMS
 #define YYDEBUG 0
 
@@ -37,10 +37,8 @@
 
 #include "zend_API.h"
 
-#if PHP_BROKEN_SPRINTF
 #undef sprintf
 #define sprintf php_sprintf
-#endif
 
 /* PHP's DEBUG value must match Zend's ZEND_DEBUG value */
 #undef PHP_DEBUG
@@ -70,10 +68,6 @@
 #ifdef NETWARE
 /* For php_get_uname() function */
 #define PHP_UNAME  "NetWare"
-/*
- * This is obtained using uname(2) on Unix and assigned in the case of Windows;
- * we'll do it this way at least for now.
- */
 #define PHP_OS      PHP_UNAME
 #endif
 
@@ -103,7 +97,7 @@
 #endif
 
 #if HAVE_BUILD_DEFS_H
-#include "build-defs.h"
+#include <build-defs.h>
 #endif
 
 /*
@@ -207,13 +201,6 @@ char *strerror(int);
 # ifdef PHP_WIN32
 #include "win32/pwd.h"
 #include "win32/param.h"
-#elif defined(NETWARE)
-#ifdef NEW_LIBC
-#include <sys/param.h>
-#else
-#include "NetWare/param.h"
-#endif
-#include "NetWare/pwd.h"
 # else
 #include <pwd.h>
 #include <sys/param.h>
@@ -232,13 +219,21 @@ char *strerror(int);
 #define LONG_MIN (- LONG_MAX - 1)
 #endif
 
+#ifndef INT_MAX
+#define INT_MAX 2147483647
+#endif
+
+#ifndef INT_MIN
+#define INT_MIN (- INT_MAX - 1)
+#endif
+
 #define PHP_GCC_VERSION ZEND_GCC_VERSION
 #define PHP_ATTRIBUTE_MALLOC ZEND_ATTRIBUTE_MALLOC
 #define PHP_ATTRIBUTE_FORMAT ZEND_ATTRIBUTE_FORMAT
 
-#if !defined(HAVE_SNPRINTF) || !defined(HAVE_VSNPRINTF) || PHP_BROKEN_SPRINTF || PHP_BROKEN_SNPRINTF || PHP_BROKEN_VSNPRINTF
+BEGIN_EXTERN_C()
 #include "snprintf.h"
-#endif
+END_EXTERN_C()
 #include "spprintf.h"
 
 #define EXEC_INPUT_BUF 4096
@@ -251,6 +246,8 @@ char *strerror(int);
 #ifndef MAXPATHLEN
 # ifdef PATH_MAX
 #  define MAXPATHLEN PATH_MAX
+# elif defined(MAX_PATH)
+#  define MAXPATHLEN MAX_PATH
 # else
 #  define MAXPATHLEN 256    /* Should be safe for any weird systems that do not define it */
 # endif
@@ -258,20 +255,10 @@ char *strerror(int);
 
 
 /* global variables */
-extern pval *data;
 #if !defined(PHP_WIN32)
-#ifdef NETWARE
-#ifdef NEW_LIBC
+#define PHP_SLEEP_NON_VOID
 #define php_sleep sleep
-#else	/* NEW_LIBC */
-#define php_sleep   delay   /* sleep() and usleep() are not available */
-#define usleep      delay
-#endif	/* NEW_LIBC */
 extern char **environ;
-#else	/* NETWARE */
-extern char **environ;
-#define php_sleep sleep
-#endif	/*  NETWARE */
 #endif	/* !defined(PHP_WIN32) */
 
 #ifdef PHP_PWRITE_64
@@ -334,7 +321,7 @@ END_EXTERN_C()
 
 /* functions */
 BEGIN_EXTERN_C()
-int php_startup_internal_extensions(void);
+int php_register_internal_extensions(TSRMLS_D);
 
 int php_mergesort(void *base, size_t nmemb, register size_t size, int (*cmp)(const void *, const void * TSRMLS_DC) TSRMLS_DC);
 
@@ -355,6 +342,8 @@ END_EXTERN_C()
 #define PHP_FE			ZEND_FE
 #define PHP_FALIAS		ZEND_FALIAS
 #define PHP_ME          ZEND_ME
+#define PHP_MALIAS      ZEND_MALIAS
+#define PHP_ABSTRACT_ME ZEND_ABSTRACT_ME
 #define PHP_ME_MAPPING  ZEND_ME_MAPPING
 
 #define PHP_MODULE_STARTUP_N	ZEND_MODULE_STARTUP_N

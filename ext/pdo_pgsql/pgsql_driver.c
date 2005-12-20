@@ -12,11 +12,13 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author: Edin Kadribasic <edink@emini.dk>                             |
+  | Authors: Edin Kadribasic <edink@emini.dk>                            |
+  |          Ilia Alshanestsky <ilia@prohost.org>                        |
+  |          Wez Furlong <wez@php.net>                                   |
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pgsql_driver.c,v 1.54 2005/08/12 23:32:31 wez Exp $ */
+/* $Id: pgsql_driver.c,v 1.55 2005/12/20 21:12:13 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -28,6 +30,11 @@
 #include "pdo/php_pdo.h"
 #include "pdo/php_pdo_driver.h"
 
+#undef PACKAGE_BUGREPORT
+#undef PACKAGE_NAME
+#undef PACKAGE_STRING
+#undef PACKAGE_TARNAME
+#undef PACKAGE_VERSION
 #include "pg_config.h" /* needed for PG_VERSION */
 #include "php_pdo_pgsql.h"
 #include "php_pdo_pgsql_int.h"

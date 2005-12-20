@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.17 2005/12/18 15:47:07 helly Exp $ */
+/* $Id: run-tests.php,v 1.226.2.18 2005/12/20 16:17:30 tony2001 Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -333,7 +333,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.17 $'."\n";
+					echo '$Revision: 1.226.2.18 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -1503,7 +1503,7 @@ function get_summary($show_ext_summary, $show_html)
 		$x_leaked = (100.0 * $sum_results['LEAKED']) / $x_total;
 		$x_passed = (100.0 * $sum_results['PASSED']) / $x_total;
 	} else {
-		$x_warned = $x_failed = $x_passed = 0;
+		$x_warned = $x_failed = $x_passed = $x_leaked = 0;
 	}
 
 	$summary = "";

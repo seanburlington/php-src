@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: timelib.h,v 1.10.2.7 2005/12/19 13:00:37 derick Exp $ */
+/* $Id: timelib.h,v 1.10.2.8 2005/12/20 19:54:10 derick Exp $ */
 
 #ifndef __TIMELIB_H__
 #define __TIMELIB_H__
@@ -67,6 +67,7 @@ void timelib_update_from_sse(timelib_time *tm);
 void timelib_set_timezone(timelib_time *t, timelib_tzinfo *tz);
 
 /* From parse_tz.c */
+int timelib_timezone_id_is_valid(char *timezone, timelib_tzdb *tzdb);
 timelib_tzinfo *timelib_parse_tzfile(char *timezone, timelib_tzdb *tzdb);
 int timelib_timestamp_is_in_dst(timelib_sll ts, timelib_tzinfo *tz);
 timelib_time_offset *timelib_get_time_zone_info(timelib_sll ts, timelib_tzinfo *tz);

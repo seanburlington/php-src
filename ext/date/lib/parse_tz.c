@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: parse_tz.c,v 1.22 2005/10/03 11:15:20 derick Exp $ */
+/* $Id: parse_tz.c,v 1.23 2005/12/20 19:50:05 derick Exp $ */
 
 #include "timelib.h"
 
@@ -236,6 +236,12 @@ timelib_tzdb_index_entry *timelib_timezone_builtin_identifiers_list(int *count)
 {
 	*count = sizeof(timezonedb_idx_builtin) / sizeof(*timezonedb_idx_builtin);
 	return timezonedb_idx_builtin;
+}
+
+int timelib_timezone_id_is_valid(char *timezone, timelib_tzdb *tzdb)
+{
+	char *tzf;
+	return (seek_to_tz_position((char**) &tzf, timezone, tzdb));
 }
 
 timelib_tzinfo *timelib_parse_tzfile(char *timezone, timelib_tzdb *tzdb)

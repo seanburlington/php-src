@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php.h,v 1.224 2005/12/06 00:44:21 sniper Exp $ */
+/* $Id: php.h,v 1.225 2005/12/20 14:27:04 iliaa Exp $ */
 
 #ifndef PHP_H
 #define PHP_H
@@ -248,6 +248,8 @@ END_EXTERN_C()
 #ifndef MAXPATHLEN
 # ifdef PATH_MAX
 #  define MAXPATHLEN PATH_MAX
+# elif defined(MAX_PATH)
+#  define MAXPATHLEN MAX_PATH
 # else
 #  define MAXPATHLEN 256    /* Should be safe for any weird systems that do not define it */
 # endif

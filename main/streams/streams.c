@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: streams.c,v 1.91 2005/12/05 23:31:09 sniper Exp $ */
+/* $Id: streams.c,v 1.92 2005/12/20 09:48:24 tony2001 Exp $ */
 
 #define _GNU_SOURCE
 #include "php.h"
@@ -2485,6 +2485,10 @@ PHPAPI php_stream *_php_stream_open_wrapper_ex(char *path, char *mode, int optio
 
 	if (stream == NULL && (options & REPORT_ERRORS)) {
 		php_stream_display_wrapper_errors(wrapper, path, "failed to open stream" TSRMLS_CC);
+		if (opened_path && *opened_path) {
+			efree(*opened_path);
+			*opened_path = NULL;
+		}
 	}
 	php_stream_tidy_wrapper_error_log(wrapper TSRMLS_CC);
 #if ZEND_DEBUG

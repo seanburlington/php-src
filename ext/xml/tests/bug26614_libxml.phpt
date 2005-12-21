@@ -3,7 +3,7 @@ Bug #26614 (CDATA sections skipped on line count)
 --SKIPIF--
 <?php 
 require_once("skipif.inc");
-if (defined("LIBXML_VERSION")) die('skip expat test'); 
+if (!defined("LIBXML_VERSION")) die('skip libxml2 test'); 
 ?>
 --FILE--
 <?php
@@ -81,13 +81,13 @@ foreach ($xmls as $desc => $xml) {
 	xml_parser_free($xml_parser);
 }
 ?>
---EXPECT--
+--EXPECTF--
 CDATA
-<DATA> at line 2, col 0 (byte 45)
-</DATA> at line 9, col 0 (byte 90)
+<DATA> at line 2, col %d (byte 9)
+</DATA> at line 9, col %d (byte 56)
 Comment
-<DATA> at line 2, col 0 (byte 45)
-</DATA> at line 9, col 0 (byte 90)
+<DATA> at line 2, col %d (byte 9)
+</DATA> at line 9, col %d (byte 56)
 Text
-<DATA> at line 2, col 0 (byte 45)
-</DATA> at line 9, col 0 (byte 90)
+<DATA> at line 2, col %d (byte 9)
+</DATA> at line 9, col %d (byte 56)

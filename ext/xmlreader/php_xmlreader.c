@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: php_xmlreader.c,v 1.13.2.6 2005/12/21 01:12:24 pajoye Exp $ */
+/* $Id: php_xmlreader.c,v 1.13.2.7 2005/12/21 02:59:50 pajoye Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -466,7 +466,7 @@ static void php_xmlreader_set_relaxng_schema(INTERNAL_FUNCTION_PARAMETERS, int t
 	}
 
 	if (source != NULL && !source_len) {
-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Schema data source is requried");
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Schema data source is required");
 		RETURN_FALSE;
 	}
 

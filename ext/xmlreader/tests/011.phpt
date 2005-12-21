@@ -1,10 +1,13 @@
 --TEST--
 XMLReader: libxml2 XML Reader, string data 
 --SKIPIF--
-<?php if (!extension_loaded("xmlreader")) print "skip"; ?>
+<?php if (!extension_loaded("xmlreader")) print "skip";
+$reader = new XMLReader();
+if (!method_exists($reader, 'readInnerXml')) print "skip";
+?>
 --FILE--
 <?php 
-/* $Id: 011.phpt,v 1.1 2005/12/21 13:25:02 pajoye Exp $ */
+/* $Id: 011.phpt,v 1.2 2005/12/21 13:34:44 pajoye Exp $ */
 
 $xmlstring = '<?xml version="1.0" encoding="UTF-8"?>
 <books><book>test</book></books>';

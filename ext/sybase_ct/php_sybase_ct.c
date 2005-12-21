@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_sybase_ct.c,v 1.107 2005/12/06 02:24:50 sniper Exp $ */
+/* $Id: php_sybase_ct.c,v 1.108 2005/12/21 10:19:49 tony2001 Exp $ */
 
 
 #ifdef HAVE_CONFIG_H
@@ -467,8 +467,8 @@ PHP_RSHUTDOWN_FUNCTION(sybase)
 static int php_sybase_do_connect_internal(sybase_link *sybase, char *host, char *user, char *passwd, char *charset, char *appname)
 {
 	CS_LOCALE *tmp_locale;
-	TSRMLS_FETCH();
 	long packetsize;
+	TSRMLS_FETCH();
 
 	/* set a CS_CONNECTION record */
 	if (ct_con_alloc(SybCtG(context), &sybase->connection)!=CS_SUCCEED) {

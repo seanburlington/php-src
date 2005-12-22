@@ -1,4 +1,4 @@
-dnl $Id: config.m4,v 1.81 2005/11/21 23:07:35 sniper Exp $ -*- autoconf -*-
+dnl $Id: config.m4,v 1.82 2005/12/22 11:02:51 tony2001 Exp $ -*- autoconf -*-
 
 divert(3)dnl
 
@@ -304,7 +304,7 @@ dnl AC_CHECK_FUNCS(getopt_long getopt_long_only)
 
 AC_CHECK_FUNCS(glob strfmon nice)
 
-if test "$PHP_SAPI" = "cgi" -o "$PHP_SAPI" = "cli" -o "$PHP_SAPI" = "embed"; then
+if test "$PHP_SAPI" = "cgi" || test "$PHP_SAPI" = "cli" || test "$PHP_SAPI" = "embed"; then
   AC_DEFINE(ENABLE_CHROOT_FUNC, 1, [Whether to enable chroot() function])
 fi
 

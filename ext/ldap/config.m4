@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.42 2005/11/03 20:41:05 sniper Exp $
+dnl $Id: config.m4,v 1.43 2005/12/22 11:02:51 tony2001 Exp $
 dnl
 
 AC_DEFUN([PHP_LDAP_CHECKS], [
@@ -99,7 +99,7 @@ if test "$PHP_LDAP" != "no"; then
     PHP_ADD_LIBRARY_WITH_PATH(lber, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
     PHP_ADD_LIBRARY_WITH_PATH(ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 
-  elif test -f $LDAP_LIBDIR/libldap.$SHLIB_SUFFIX_NAME.3 -o -f $LDAP_LIBDIR/libldap.3.dylib; then
+  elif test -f $LDAP_LIBDIR/libldap.$SHLIB_SUFFIX_NAME.3 || test -f $LDAP_LIBDIR/libldap.3.dylib; then
     PHP_ADD_LIBRARY_WITH_PATH(ldap, $LDAP_LIBDIR, LDAP_SHARED_LIBADD)
 
   elif test -f $LDAP_LIBDIR/libssldap50.$SHLIB_SUFFIX_NAME; then

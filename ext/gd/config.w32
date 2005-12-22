@@ -1,4 +1,4 @@
-// $Id: config.w32,v 1.15 2005/12/16 19:21:55 pajoye Exp $
+// $Id: config.w32,v 1.16 2005/12/22 23:25:05 pajoye Exp $
 // vim:ft=javascript
 
 ARG_WITH("gd", "Bundled GD support", "yes,shared");
@@ -36,7 +36,6 @@ if (PHP_GD != "no") {
 /D HAVE_GD_BUNDLED=1  \
 /D HAVE_GD_GIF_READ=1  \
 /D HAVE_GD_GIF_CREATE=1  \
-/D HAVE_GDIMAGECOLORRESOLVE=1  \
 /D HAVE_GD_IMAGESETBRUSH=1  \
 /D HAVE_GD_IMAGESETTILE=1 \
 /D HAVE_GD_JPG  \

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.73.2.14 2005/12/22 00:35:37 helly Exp $ */
+/* $Id: spl_iterators.c,v 1.73.2.15 2005/12/22 00:37:07 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -208,15 +208,15 @@ next_step:
 					zval_ptr_dtor(&retval);
 					if (has_children) {
 						if (object->max_depth == -1 || object->max_depth > object->level) {
-						switch (object->mode) {
-						case RIT_LEAVES_ONLY:
-						case RIT_CHILD_FIRST:
-							object->iterators[object->level].state = RS_CHILD;
-							goto next_step;
-						case RIT_SELF_FIRST:
-							object->iterators[object->level].state = RS_SELF;
-							goto next_step;
-						}
+							switch (object->mode) {
+							case RIT_LEAVES_ONLY:
+							case RIT_CHILD_FIRST:
+								object->iterators[object->level].state = RS_CHILD;
+								goto next_step;
+							case RIT_SELF_FIRST:
+								object->iterators[object->level].state = RS_SELF;
+								goto next_step;
+							}
 						} else {
 							/* do not recurse into */
 							if (object->mode == RIT_LEAVES_ONLY) {

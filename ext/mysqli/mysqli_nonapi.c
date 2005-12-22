@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.56 2005/10/10 20:16:35 tony2001 Exp $ 
+  $Id: mysqli_nonapi.c,v 1.57 2005/12/22 14:56:29 zeev Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -335,7 +335,7 @@ PHP_FUNCTION(mysqli_set_charset)
 #endif
 
 #ifdef HAVE_MYSQLI_GET_CHARSET 
-/* {{{ object mysqli_get_charset(object link) 
+/* {{{ proto object mysqli_get_charset(object link) 
    returns a character set object */
 PHP_FUNCTION(mysqli_get_charset)
 {

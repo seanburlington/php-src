@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.162 2005/12/16 19:21:55 pajoye Exp $
+dnl $Id: config.m4,v 1.163 2005/12/22 23:22:26 pajoye Exp $
 dnl
 
 dnl
@@ -333,7 +333,6 @@ dnl FIXME: Cleanup the sources so that these are not needed!
   AC_DEFINE(HAVE_GD_IMAGEELLIPSE,     1, [ ])
   AC_DEFINE(HAVE_GD_IMAGESETBRUSH,    1, [ ])
   AC_DEFINE(HAVE_COLORCLOSESTHWB,     1, [ ])
-  AC_DEFINE(HAVE_GDIMAGECOLORRESOLVE, 1, [ ])
   AC_DEFINE(HAVE_GD_DYNAMIC_CTX_EX,   1, [ ])
 
 dnl T1LIB support is gdlib independent

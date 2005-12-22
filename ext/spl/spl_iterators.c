@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: spl_iterators.c,v 1.102 2005/12/20 12:41:38 tony2001 Exp $ */
+/* $Id: spl_iterators.c,v 1.103 2005/12/22 00:24:49 helly Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -2201,7 +2201,10 @@ int spl_append_it_next_iterator(spl_dual_it_object *intern TSRMLS_DC) /* {{{*/
 		intern->inner.zobject = NULL;
 		intern->inner.ce = NULL;
 		intern->inner.object = NULL;
-		intern->inner.iterator = NULL;
+		if (intern->inner.iterator) {
+			intern->inner.iterator->funcs->dtor(intern->inner.iterator TSRMLS_CC);
+			intern->inner.iterator = NULL;
+		}
 	}
 	if (intern->u.append.iterator->funcs->valid(intern->u.append.iterator TSRMLS_CC) == SUCCESS) {
 		zval **it;

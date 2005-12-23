@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_nonapi.c,v 1.54.2.3 2005/12/22 14:55:55 zeev Exp $ 
+  $Id: mysqli_nonapi.c,v 1.54.2.4 2005/12/23 18:23:43 sesser Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -91,7 +91,7 @@ PHP_FUNCTION(mysqli_connect)
 		/* Save error messages */
 
 		php_mysqli_throw_sql_exception( mysql->mysql->net.sqlstate, mysql->mysql->net.last_errno TSRMLS_CC,
-										mysql->mysql->net.last_error);
+										"%s", mysql->mysql->net.last_error);
 
 		php_mysqli_set_error(mysql_errno(mysql->mysql), (char *) mysql_error(mysql->mysql) TSRMLS_CC);
 
@@ -249,7 +249,7 @@ PHP_FUNCTION(mysqli_query)
 
 	if (!result) {
 		php_mysqli_throw_sql_exception(mysql->mysql->net.sqlstate, mysql->mysql->net.last_errno TSRMLS_CC,
-										mysql->mysql->net.last_error); 
+										"%s", mysql->mysql->net.last_error); 
 		RETURN_FALSE;
 	}
 

@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.118.2.12 2005/12/23 18:23:43 sesser Exp $ 
+  $Id: mysqli_api.c,v 1.118.2.13 2005/12/23 22:22:41 andrey Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -285,7 +285,7 @@ PHP_FUNCTION(mysqli_stmt_bind_result)
 				bind[ofs].buffer = 0;
 				bind[ofs].is_null = &stmt->result.is_null[ofs];
 				bind[ofs].buffer_length = 0;
-			break;
+				break;
 
 			case MYSQL_TYPE_SHORT:
 			case MYSQL_TYPE_TINY:
@@ -649,7 +649,8 @@ PHP_FUNCTION(mysqli_stmt_fetch)
 	if (!ret) {
 #endif
 		for (i = 0; i < stmt->result.var_cnt; i++) {
-			if (stmt->result.vars[i]->type == IS_STRING && stmt->result.vars[i]->value.str.len) {
+			/* Even if the string is of length zero there is one byte alloced so efree() in all cases */
+			if (Z_TYPE_P(stmt->result.vars[i]) == IS_STRING) {
 		        efree(stmt->result.vars[i]->value.str.val);
 			}
 			if (!stmt->result.is_null[i]) {
@@ -711,7 +712,7 @@ PHP_FUNCTION(mysqli_stmt_fetch)
 						break;	
 				}
 			} else {
-				stmt->result.vars[i]->type = IS_NULL;
+				ZVAL_NULL(stmt->result.vars[i]);
 			}
 		}
 	} else {

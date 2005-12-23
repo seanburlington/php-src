@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_report.c,v 1.11 2005/08/03 14:07:31 sniper Exp $ 
+  $Id: mysqli_report.c,v 1.12 2005/12/23 18:43:03 sesser Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -46,7 +46,7 @@ PHP_FUNCTION(mysqli_report)
 
 /* {{{ void php_mysqli_report_error(char *sqlstate, int errorno, char *error) */ 
 void php_mysqli_report_error(char *sqlstate, int errorno, char *error TSRMLS_DC) {
-	php_mysqli_throw_sql_exception(sqlstate, errorno TSRMLS_CC, error);
+	php_mysqli_throw_sql_exception(sqlstate, errorno TSRMLS_CC, "%s", error);
 }
 /* }}} */
 

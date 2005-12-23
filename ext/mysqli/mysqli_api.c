@@ -15,7 +15,7 @@
   | Author: Georg Richter <georg@php.net>                                |
   +----------------------------------------------------------------------+
 
-  $Id: mysqli_api.c,v 1.123 2005/10/10 20:16:35 tony2001 Exp $ 
+  $Id: mysqli_api.c,v 1.124 2005/12/23 18:43:03 sesser Exp $ 
 */
 
 #ifdef HAVE_CONFIG_H
@@ -1370,7 +1370,7 @@ PHP_FUNCTION(mysqli_real_connect)
 		
 		php_mysqli_set_error(mysql_errno(mysql->mysql), (char *) mysql_error(mysql->mysql) TSRMLS_CC);
 		php_mysqli_throw_sql_exception( mysql->mysql->net.sqlstate, mysql->mysql->net.last_errno TSRMLS_CC,
-										mysql->mysql->net.last_error);
+										"%s", mysql->mysql->net.last_error);
 
 		RETURN_FALSE;
 	}

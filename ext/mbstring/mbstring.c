@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mbstring.c,v 1.214.2.7 2005/11/25 22:18:45 hirokawa Exp $ */
+/* $Id: mbstring.c,v 1.214.2.8 2005/12/23 11:15:32 hirokawa Exp $ */
 
 /*
  * PHP 4 Multibyte String module "mbstring"
@@ -1734,6 +1734,11 @@ PHP_FUNCTION(mb_substr)
 		if (len < 0) {
 			len = 0;
 		}
+	}
+
+	if (((MBSTRG(func_overload) & MB_OVERLOAD_STRING) == MB_OVERLOAD_STRING)
+		&& (from >= mbfl_strlen(&string))) {
+		RETURN_FALSE;
 	}
 
 	ret = mbfl_substr(&string, &result, from, len);

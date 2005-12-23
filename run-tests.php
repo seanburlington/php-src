@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.265 2005/12/21 22:23:47 helly Exp $ */
+/* $Id: run-tests.php,v 1.266 2005/12/23 19:40:01 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -382,7 +382,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.265 $'."\n";
+					echo '$Revision: 1.266 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch specified!\n";
@@ -990,8 +990,11 @@ TEST $file
 	}
 	fclose($fp);
 
+	$shortname = str_replace($cwd.'/', '', $file);
+	$tested_file = $shortname;
+
 	if ($borked) {
-		show_result("BORK", $bork_info);
+		show_result("BORK", $bork_info, $tested_file);
 		$PHP_FAILED_TESTS['BORKED'][] = array (
 								'name' => $file,
 								'test_name' => '',
@@ -1002,9 +1005,7 @@ TEST $file
 		return 'BORKED';
 	}
 
-	$shortname = str_replace($cwd.'/', '', $file);
 	$tested = trim($section_text['TEST']);
-	$tested_file = $shortname;
 
  	/* For GET/POST tests, check if cgi sapi is available and if it is, use it. */
  	if ((!empty($section_text['GET']) || !empty($section_text['POST']))) {

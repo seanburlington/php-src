@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: pdo_dbh.c,v 1.82.2.24 2005/12/07 01:29:14 iliaa Exp $ */
+/* $Id: pdo_dbh.c,v 1.82.2.25 2005/12/24 17:41:04 iliaa Exp $ */
 
 /* The PDO Database Handle Class */
 
@@ -1343,6 +1343,11 @@ static void dbh_free(pdo_dbh_t *dbh TSRMLS_DC)
 	
 	if (--dbh->refcount)
 		return;
+
+	if (dbh->query_stmt) {
+		zval_dtor(&dbh->query_stmt_zval);
+		dbh->query_stmt = NULL;
+	}
 
 	if (dbh->methods) {
 		dbh->methods->closer(dbh TSRMLS_CC);

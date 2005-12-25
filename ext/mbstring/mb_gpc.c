@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: mb_gpc.c,v 1.17 2005/08/03 14:07:24 sniper Exp $ */
+/* $Id: mb_gpc.c,v 1.18 2005/12/25 15:21:54 hirokawa Exp $ */
 
 /* {{{ includes */
 #ifdef HAVE_CONFIG_H
@@ -266,7 +266,7 @@ enum mbfl_no_encoding _php_mb_encoding_handler_ex(const php_mb_encoding_handler_
 	} else {
 		/* auto detect */
 		from_encoding = mbfl_no_encoding_invalid;
-		identd = mbfl_encoding_detector_new((enum mbfl_no_encoding *)info->from_encodings, info->num_from_encodings);
+		identd = mbfl_encoding_detector_new((enum mbfl_no_encoding *)info->from_encodings, info->num_from_encodings, MBSTRG(strict_detection));
 		if (identd) {
 			n = 0;
 			while (n < num) {

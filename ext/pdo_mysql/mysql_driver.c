@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysql_driver.c,v 1.67 2005/11/25 12:54:18 tony2001 Exp $ */
+/* $Id: mysql_driver.c,v 1.68 2005/12/25 20:30:56 iliaa Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -257,7 +257,7 @@ static int mysql_handle_quoter(pdo_dbh_t *dbh, const char *unquoted, int unquote
 	pdo_mysql_db_handle *H = (pdo_mysql_db_handle *)dbh->driver_data;
 	*quoted = safe_emalloc(2, unquotedlen, 3);
 	*quotedlen = mysql_real_escape_string(H->server, *quoted + 1, unquoted, unquotedlen);
-	(*quoted)[0] =(*quoted)[++*quotedlen] = '"';
+	(*quoted)[0] =(*quoted)[++*quotedlen] = '\'';
 	(*quoted)[++*quotedlen] = '\0';
 	return 1;
 }

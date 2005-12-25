@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.329 2005/12/22 23:22:26 pajoye Exp $ */
+/* $Id: gd.c,v 1.330 2005/12/25 19:21:57 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -820,6 +820,10 @@ PHP_FUNCTION(imagecolormatch)
 			break;
 		case -3:
 			php_error_docref(NULL TSRMLS_CC, E_ERROR, "Image1 and Image2 must be the same size" );
+			RETURN_FALSE;
+			break;
+		case -4:
+			php_error_docref(NULL TSRMLS_CC, E_ERROR, "Image2 must have at least one color" );
 			RETURN_FALSE;
 			break;
 	}

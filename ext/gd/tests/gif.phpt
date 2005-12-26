@@ -2,11 +2,11 @@
 gif in/out
 --SKIPIF--
 <?php 
-// $Id: gif.phpt,v 1.1 2005/12/26 19:11:51 pajoye Exp $
+// $Id: gif.phpt,v 1.2 2005/12/26 21:41:37 pajoye Exp $
 	if (!extension_loaded('gd')) {
 		die("skip gd extension not available.");
 	}
-	if (!function_exists("imagegif") || !function_exists("imagecreatefromgif")) {
+	if (!function_exists("imagegif") || !function_exists("imagecreatefromgif") || !function_exists('imagecreatefromjpeg')) {
 		die("skip gif support unavailable");
 	}
 ?>

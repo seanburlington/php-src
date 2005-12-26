@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.333 2005/12/26 20:44:19 pajoye Exp $ */
+/* $Id: gd.c,v 1.334 2005/12/26 21:46:56 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -88,9 +88,7 @@ static void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int, int);
 int gdImageColorClosestHWB(gdImagePtr im, int r, int g, int b);
 #endif
 
-#ifndef HAVE_GD_DYNAMIC_CTX_EX
 #define gdNewDynamicCtxEx(len, data, val) gdNewDynamicCtx(len, data)
-#endif
 
 /* Section Filters Declarations */
 /* IMPORTANT NOTE FOR NEW FILTER

@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config.m4,v 1.164 2005/12/26 20:44:19 pajoye Exp $
+dnl $Id: config.m4,v 1.165 2005/12/26 21:46:56 pajoye Exp $
 dnl
 
 dnl
@@ -332,7 +332,6 @@ dnl FIXME: Cleanup the sources so that these are not needed!
   AC_DEFINE(HAVE_GD_IMAGEELLIPSE,     1, [ ])
   AC_DEFINE(HAVE_GD_IMAGESETBRUSH,    1, [ ])
   AC_DEFINE(HAVE_COLORCLOSESTHWB,     1, [ ])
-  AC_DEFINE(HAVE_GD_DYNAMIC_CTX_EX,   1, [ ])
 
 dnl T1LIB support is gdlib independent
   PHP_GD_T1LIB

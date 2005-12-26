@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: snprintf.c,v 1.17.4.12.2.1 2005/12/26 14:01:45 helly Exp $ */
+/* $Id: snprintf.c,v 1.17.4.12.2.2 2005/12/26 14:47:08 helly Exp $ */
 
 /* ====================================================================
  * Copyright (c) 1995-1998 The Apache Group.  All rights reserved.
@@ -158,7 +158,7 @@ char * ap_php_conv_10(register wide_int num, register bool_int is_unsigned,
 /* If you change this value then also change bug24640.phpt.
  * Also NDIG must be reasonable smaller than NUM_BUF_SIZE.
  */
-#define	NDIG	80
+#define	NDIG	320
 
 
 /*

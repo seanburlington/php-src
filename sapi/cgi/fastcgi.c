@@ -16,9 +16,8 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.1 2005/12/26 07:25:45 zeev Exp $ */
+/* $Id: fastcgi.c,v 1.2 2005/12/26 07:56:37 sebastian Exp $ */
 
-#include "php_config.h"
 #include "fastcgi.h"
 
 #include <string.h>
@@ -73,6 +72,7 @@
 
 #else
 
+# include "php_config.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <unistd.h>

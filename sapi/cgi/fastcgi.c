@@ -16,9 +16,10 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fastcgi.c,v 1.2 2005/12/26 07:56:37 sebastian Exp $ */
+/* $Id: fastcgi.c,v 1.3 2005/12/26 10:54:12 dmitry Exp $ */
 
 #include "fastcgi.h"
+#include "php.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -26,23 +27,10 @@
 #include <stdarg.h>
 #include <errno.h>
 
-#ifndef MAXPATHLEN
-#  ifdef PATH_MAX
-#    define MAXPATHLEN PATH_MAX
-#  else
-#    define MAXPATHLEN 512
-#  endif
-#endif
-
 #ifdef _WIN32
 
 #include <windows.h>
 
-# define inline        __inline
-# define vsnprintf     _vsnprintf
-
-	typedef int socklen_t;
-	typedef int ssize_t;
 	typedef unsigned int size_t;
 
 	struct sockaddr_un {
@@ -72,7 +60,6 @@
 
 #else
 
-# include "php_config.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <unistd.h>

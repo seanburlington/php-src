@@ -1,3 +1,81 @@
+2005-12-25  Antony Dovgal  <antony@zend.com>
+
+    * ext/zlib/tests/compress_zlib_wrapper.phpt
+      ext/zlib/tests/compress_zlib_wrapper.phpt:
+      add missing skipif tag
+
+2005-12-25  Pierre-Alain Joye  <pierre.dev@gmail.com>
+
+    * ext/gd/tests/colorclosest.phpt:
+      - add colorclosestalpha tests
+
+    * ext/gd/tests/colormatch.phpt
+      ext/gd/tests/colorresolve.phpt:
+      - add colorresolvealpha to colorresolve tests
+      - update colormatch
+
+    * (PHP_5_1)
+      NEWS:
+      - imagecolormatch fix and changes
+
+    * (PHP_5_1)
+      ext/gd/gd.c:
+      - MFH: raise warnings instead of errors in colormatch
+
+    * ext/gd/gd.c:
+      - raise warning instread of errors in colormatch
+
+    * (PHP_5_1)
+      ext/gd/gd.c
+      ext/gd/libgd/gd_topal.c
+      ext/gd/tests/colormatch.phpt:
+      - MFH: fix segfault/leak in imagecolormatch
+      - MFH: test for imagecolormatch
+
+    * ext/gd/tests/colormatch.phpt
+      ext/gd/tests/colormatch.phpt:
+      
+      - fix leak/segfaults in imagecolormatch
+      - add tests for imagecolorexact and imagecolormatch
+        The later is only about the segv
+
+    * ext/gd/gd.c
+      ext/gd/libgd/gd_topal.c
+      ext/gd/tests/colorexact.phpt:
+      - fix leak/segfaults in imagecolormatch
+      - add tests for imagecolorexact and imagecolormatch
+        The later is only about the segv
+
+2005-12-25  Rui Hirokawa  <rui_hirokawa@ybb.ne.jp>
+
+    * (PHP_5_1)
+      ext/mbstring/mb_gpc.c
+      ext/mbstring/mbstring.c
+      ext/mbstring/mbstring.h:
+      MFH: fixed #35711, added mbstring.strict_detection to detect the encoding
+      striktly.
+
+    * ext/mbstring/mb_gpc.c
+      ext/mbstring/mbstring.c
+      ext/mbstring/mbstring.h:
+      fixed #35711, added mbstring.strict_detection to detect the encoding
+      striktly.
+
+2005-12-25  Zeev Suraski  <zeev@zend.com>
+
+    * sapi/cgi/cgi_main.c
+      sapi/cgi/config.w32
+      sapi/cgi/config9.m4:
+      Reimplement FastCGI interface
+      
+      Due to licensing restrictions that actually don't allow anybody to use
+      the libfcgi code without prior approval from Open Market, which is
+      impossible to obtain - we decided to reimplement this interface from
+      scratch.  The result is actually slightly faster, and more importantly,
+      clear of any copyright issues.
+      
+      Implementation by Dmitry
+
 2005-12-24  Pierre-Alain Joye  <pierre.dev@gmail.com>
 
     * ext/gd/tests/colorclosest.phpt
@@ -20119,7 +20197,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2204 2005/12/25 06:31:45 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2205 2005/12/26 06:31:53 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -23520,7 +23598,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2204 2005/12/25 06:31:45 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2205 2005/12/26 06:31:53 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -24001,7 +24079,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2204 2005/12/25 06:31:45 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2205 2005/12/26 06:31:53 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -25475,7 +25553,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2204 2005/12/25 06:31:45 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2205 2005/12/26 06:31:53 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: array.c,v 1.308.2.14 2005/12/27 22:32:01 tony2001 Exp $ */
+/* $Id: array.c,v 1.308.2.15 2005/12/27 23:26:55 tony2001 Exp $ */
 
 #include "php.h"
 #include "php_ini.h"
@@ -4347,7 +4347,7 @@ PHP_FUNCTION(array_map)
 			fci.params = &params[1];
 			fci.no_separation = 0;
 
-			if (!zend_call_function(&fci, &fci_cache TSRMLS_CC) == SUCCESS || !result) {
+			if (zend_call_function(&fci, &fci_cache TSRMLS_CC) != SUCCESS || !result) {
 				php_error_docref(NULL TSRMLS_CC, E_WARNING, "An error occurred while invoking the map callback");
 				efree(array_len);
 				efree(args);

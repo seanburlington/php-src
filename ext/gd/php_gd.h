@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: php_gd.h,v 1.62 2005/11/02 21:26:08 sniper Exp $ */
+/* $Id: php_gd.h,v 1.63 2005/12/27 00:16:05 pajoye Exp $ */
 
 #ifndef PHP_GD_H
 #define PHP_GD_H
@@ -67,7 +67,7 @@ extern zend_module_entry gd_module_entry;
 PHP_MINFO_FUNCTION(gd);
 PHP_MINIT_FUNCTION(gd);
 PHP_MSHUTDOWN_FUNCTION(gd);
-#if HAVE_LIBGD20 && HAVE_GD_STRINGFT
+#if HAVE_GD_STRINGFT
 PHP_RSHUTDOWN_FUNCTION(gd);
 #endif
 
@@ -97,7 +97,6 @@ PHP_FUNCTION(imagecreate);
 PHP_FUNCTION(imageftbbox);
 PHP_FUNCTION(imagefttext);
 
-#ifdef HAVE_LIBGD20
 PHP_FUNCTION(imagecreatetruecolor);
 PHP_FUNCTION(imagetruecolortopalette);
 PHP_FUNCTION(imagesetthickness);
@@ -110,7 +109,6 @@ PHP_FUNCTION(imagecolorresolvealpha);
 PHP_FUNCTION(imagecolorclosestalpha);
 PHP_FUNCTION(imagecolorexactalpha);
 PHP_FUNCTION(imagecopyresampled);
-#endif
 
 #ifdef HAVE_GD_BUNDLED
 PHP_FUNCTION(imagerotate);

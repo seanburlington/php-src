@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: gd.c,v 1.336 2005/12/27 00:16:05 pajoye Exp $ */
+/* $Id: gd.c,v 1.337 2005/12/29 22:00:09 iliaa Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center,
    Cold Spring Harbor Labs. */
@@ -3165,7 +3165,7 @@ PHP_FUNCTION(imagepsextendfont)
 	T1_DeleteAllSizes(*f_ind);
 
 	if (Z_DVAL_PP(ext) <= 0) {
-		php_error_docref(NULL TSRMLS_CC, E_ERROR, "Second parameter %f out of range (must be > 0)", Z_DVAL_PP(ext));
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Second parameter %f out of range (must be > 0)", Z_DVAL_PP(ext));
 		RETURN_FALSE;
 	}
 

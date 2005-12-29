@@ -1,5 +1,5 @@
 dnl
-dnl $Id: config9.m4,v 1.19 2005/12/25 12:45:01 zeev Exp $
+dnl $Id: config9.m4,v 1.20 2005/12/29 14:12:34 tony2001 Exp $
 dnl
 
 AC_ARG_ENABLE(cgi,
@@ -85,7 +85,7 @@ if test "$PHP_SAPI" = "default"; then
     PHP_TEST_WRITE_STDOUT
 
     INSTALL_IT="@echo \"Installing PHP CGI into: \$(INSTALL_ROOT)\$(bindir)/\"; \$(INSTALL) -m 0755 \$(SAPI_CGI_PATH) \$(INSTALL_ROOT)\$(bindir)/\$(program_prefix)php\$(program_suffix)\$(EXEEXT)"
-    PHP_SELECT_SAPI(cgi, program, fastcgi.c cgi_main.c getopt.c, '', '$(SAPI_CGI_PATH)')
+    PHP_SELECT_SAPI(cgi, program, fastcgi.c cgi_main.c getopt.c, , '$(SAPI_CGI_PATH)')
 
     case $host_alias in
       *aix*)

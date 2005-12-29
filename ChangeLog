@@ -1,3 +1,29 @@
+2005-12-28  Ilia Alshanetsky  <ilia@prohost.org>
+
+    * (PHP_4_4)
+      NEWS
+      ext/standard/pack.c
+      ext/standard/tests/strings/bug35817.phpt:
+      MFH: Fixed bug #35817 (unpack() does not decode odd number of hexadecimal
+      values)
+
+    * ext/standard/pack.c
+      ext/standard/tests/strings/bug35817.phpt
+      ext/standard/tests/strings/bug35817.phpt:
+      MFB51: Fixed bug #35817 (unpack() does not decode odd number of hexadecimal
+       values)
+
+    * ext/standard/tests/strings/bug35817.phpt
+      ext/standard/tests/strings/bug35817.phpt:
+      
+      file bug35817.phpt was initially added on branch PHP_5_1.
+
+    * (PHP_5_1)
+      NEWS
+      ext/standard/pack.c:
+      Fixed bug #35817 (unpack() does not decode odd number of hexadecimal
+      values)
+
 2005-12-27  Antony Dovgal  <antony@zend.com>
 
     * ext/standard/array.c
@@ -20384,7 +20410,7 @@
 
     * (PHP_4_3)
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2207 2005/12/28 06:31:47 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2208 2005/12/29 06:31:43 changelog Exp $ tag
 
     * (PHP_5_0)
       ext/standard/url_scanner_ex.c:
@@ -23785,7 +23811,7 @@
       ext/session/mod_mm.h
       ext/session/mod_user.h
       ext/session/php_session.h:
-      - Missing $Id: ChangeLog,v 1.2207 2005/12/28 06:31:47 changelog Exp $ tags
+      - Missing $Id: ChangeLog,v 1.2208 2005/12/29 06:31:43 changelog Exp $ tags
 
     * (PHP_4_3)
       ext/session/session.c:
@@ -24266,7 +24292,7 @@
 
     * (PHP_4_3)
       Zend/zend_ini_scanner.l:
-      Missing $Id: ChangeLog,v 1.2207 2005/12/28 06:31:47 changelog Exp $ tag + ws fix
+      Missing $Id: ChangeLog,v 1.2208 2005/12/29 06:31:43 changelog Exp $ tag + ws fix
 
     * ZendEngine2/zend_ini_scanner.l
       ZendEngine2/zend_ini_scanner.l:
@@ -25740,7 +25766,7 @@
       ext/standard/url_scanner_ex.c
       ext/standard/url_scanner_ex.h
       ext/standard/url_scanner_ex.re:
-      Missing $Id: ChangeLog,v 1.2207 2005/12/28 06:31:47 changelog Exp $ tag
+      Missing $Id: ChangeLog,v 1.2208 2005/12/29 06:31:43 changelog Exp $ tag
 
     * ext/standard/credits_ext.h
       ext/standard/credits_sapi.h:

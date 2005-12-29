@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: php_date.c,v 1.79 2005/12/20 19:59:47 derick Exp $ */
+/* $Id: php_date.c,v 1.80 2005/12/29 10:56:17 derick Exp $ */
 
 #include "php.h"
 #include "php_streams.h"
@@ -674,7 +674,7 @@ static void php_date(INTERNAL_FUNCTION_PARAMETERS, int localtime)
 {
 	char   *format;
 	int     format_len;
-	time_t  ts;
+	long    ts;
 	char   *string;
 
 	if (ZEND_NUM_ARGS() == 1) {
@@ -839,7 +839,7 @@ PHP_FUNCTION(idate)
 {
 	char   *format;
 	int     format_len;
-	time_t  ts;
+	long    ts;
 	int ret; 
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &format, &format_len, &ts) == FAILURE) {

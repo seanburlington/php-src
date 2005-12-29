@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | PHP Version 5                                                        |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1997-2004 The PHP Group                                |
+   | Copyright (c) 1997-2005 The PHP Group                                |
    +----------------------------------------------------------------------+
    | This source file is subject to version 3.0 of the PHP license,       |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -15,7 +15,7 @@
    | Author: Edin Kadribasic <edink@php.net>                              |
    +----------------------------------------------------------------------+
 */
-/* $Id: php_embed.h,v 1.5 2004/01/08 17:33:24 sniper Exp $ */
+/* $Id: php_embed.h,v 1.6.2.1 2005/12/29 06:02:17 pollita Exp $ */
 
 #ifndef _PHP_EMBED_H_
 #define _PHP_EMBED_H_
@@ -32,17 +32,23 @@
 #define PTSRMLS_DC       , PTSRMLS_D
 #define PTSRMLS_C        &tsrm_ls
 #define PTSRMLS_CC       , PTSRMLS_C
-#else
-#define PTSRMLS_D
-#define PTSRMLS_DC
-#define PTSRMLS_C
-#define PTSRMLS_CC
-#endif
 
 #define PHP_EMBED_START_BLOCK(x,y) { \
     void ***tsrm_ls; \
     php_embed_init(x, y PTSRMLS_CC); \
     zend_first_try {
+
+#else
+#define PTSRMLS_D
+#define PTSRMLS_DC
+#define PTSRMLS_C
+#define PTSRMLS_CC
+
+#define PHP_EMBED_START_BLOCK(x,y) { \
+    php_embed_init(x, y); \
+    zend_first_try {
+
+#endif
 
 #define PHP_EMBED_END_BLOCK() \
   } zend_catch { \

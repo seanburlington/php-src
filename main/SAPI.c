@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: SAPI.c,v 1.208 2005/12/06 03:39:26 iliaa Exp $ */
+/* $Id: SAPI.c,v 1.209 2005/12/30 05:39:38 sniper Exp $ */
 
 #include <ctype.h>
 #include <sys/stat.h>
@@ -597,7 +597,7 @@ SAPI_API int sapi_header_op(sapi_header_op_enum op, void *arg TSRMLS_DC)
 				continue;
 			}
 			efree(header_line);
-			sapi_module.sapi_error(E_WARNING, "Header may not contain more then a single header, new line detected.");
+			sapi_module.sapi_error(E_WARNING, "Header may not contain more than a single header, new line detected.");
 			return FAILURE;
 		}
 	}

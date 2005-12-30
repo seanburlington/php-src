@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: run-tests.php,v 1.226.2.21 2005/12/30 13:31:48 helly Exp $ */
+/* $Id: run-tests.php,v 1.226.2.22 2005/12/30 13:39:54 helly Exp $ */
 
 /* Sanity check to ensure that pcre extension needed by this script is available.
  * In the event it is not, print a nice error message indicating that this script will
@@ -237,6 +237,7 @@ $html_file = null;
 $temp_source = null;
 $temp_target = null;
 $temp_urlbase = null;
+$conf_passed = null;
 
 $cfgtypes = array('show', 'keep');
 $cfgfiles = array('skip', 'php');
@@ -293,6 +294,9 @@ if (isset($argc) && $argc > 1) {
 					break;
 				case 'a':
 					$failed_tests_file = fopen($argv[++$i], 'a+t');
+					break;
+				case 'c':
+					$conf_passed = $argv[++$i];
 					break;
 				case 'd':
 					$ini_overwrites[] = $argv[++$i];
@@ -367,7 +371,7 @@ if (isset($argc) && $argc > 1) {
 					$html_output = is_resource($html_file);
 					break;
 				case '--version':
-					echo '$Revision: 1.226.2.21 $'."\n";
+					echo '$Revision: 1.226.2.22 $'."\n";
 					exit(1);
 				default:
 					echo "Illegal switch '$switch' specified!\n";
@@ -393,6 +397,8 @@ Options:
     -w <file>   Write a list of all failed tests to <file>.
 
     -a <file>   Same as -w but append rather then truncating <file>.
+
+    -c <file>   Look for php.ini in directory <file> or use <file> as ini.
 
     -n          Pass -n option to the php binary (Do not use a php.ini).
 
@@ -441,6 +447,10 @@ HELP;
 				die("bogus test name " . $argv[$i] . "\n");
 			}
 		}
+	}
+	if (strlen($conf_passed))
+	{
+		$pass_options .= " -c '$conf_passed'";
 	}
 	$test_files = array_unique($test_files);
 	$test_files = array_merge($test_files, $redir_tests);
